@@ -26,14 +26,7 @@ function Image(url, encoding)
 		//ArrayBuffer
 		if(url instanceof window.ArrayBuffer)
 		{
-			if(encoding === "tga")
-			{
-				this.loadTGAData(url);
-			}
-			else
-			{
-				this.loadArrayBufferData(url, encoding);
-			}
+			this.loadArrayBufferData(url, encoding);
 		}
 		//Base64
 		else if(Base64Utils.isBase64(url))
@@ -46,16 +39,8 @@ function Image(url, encoding)
 		else
 		{
 			this.encoding = FileSystem.getFileExtension(url);
-			
-			if(this.encoding === "tga")
-			{
-				this.loadTGAData(FileSystem.readFileArrayBuffer(url));
-			}
-			else
-			{
-				this.format = "url";
-				this.data = url;
-			}
+			this.format = "url";
+			this.data = url;
 		}
 	}
 	else
@@ -84,7 +69,8 @@ Image.fileIsImage = function(file)
 		}
 
 		file = file.name.toLocaleLowerCase();
-		return file.endsWith("tga");
+
+		return file.endsWith("tga") || file.endsWith("dds");
 	}
 
 	return false;
@@ -134,28 +120,6 @@ Image.prototype.loadArrayBufferData = function(data, encoding)
 };
 
 /**
- * Load .tga file from ArrayBuffer data.
- *
- * After loading data is converted to JPEG format and stored in base64 encoding.
- * 
- * @method loadTGAData
- * @param {ArrayBuffer} data Data to be loaded.
- */
-Image.prototype.loadTGAData = function(data)
-{
-	if(THREE.TGALoader === undefined)
-	{
-		console.warn("nunuStudio: TGALoader required to load TGA file data.");
-		return;
-	}
-
-	var canvas = new THREE.TGALoader().parse(data);
-	this.encoding = "jpeg";
-	this.format = "base64";
-	this.data = canvas.toDataURL("image/jpeg", 1.0);
-};
-
-/**
  * Check if this image has alpha channel.
  *
  * This checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.
@@ -166,20 +130,8 @@ Image.prototype.loadTGAData = function(data)
 Image.prototype.hasTransparency = function()
 {
 	return this.encoding === "png" || this.encoding === "gif";
-};
-
-/**
- * Compresses image data to JPEG or PNG and stores in base64 encoding.
- *
- * If the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.
- *
- * Can be used to compress data and save space.
- * 
- * @method encodeData
- */
-Image.prototype.encodeData = function()
-{
-	var image = document.createElement("img");
+	
+	/*var image = document.createElement("img");
 	image.src = this.data;
 
 	var canvas = document.createElement("canvas");
@@ -188,32 +140,41 @@ Image.prototype.encodeData = function()
 
 	var context = canvas.getContext("2d");
 	context.drawImage(image, 0, 0, image.width, image.height);
-
-	//Check if the image has some transparency
-	var transparent = false;
+	
 	var data = context.getImageData(0, 0, image.width, image.height).data;
 	for(var i = 3; i < data.length; i += 4)
 	{
 		if(data[i] !== 255)
 		{
-			transparent = true;
-			break;
+			return true;
 		}
 	}
 
-	//Encode data
-	if(transparent)
+	return false;*/
+};
+
+/**
+ * Compresses image data to JPEG.
+ *
+ * Can be used to compress data and save some space.
+ * 
+ * @method compressJPEG
+ * @param {Number} quality JPEG compression quality level by default 0.7 is used (1.0  means max quality).
+ */
+Image.prototype.compressJPEG = function(quality)
+{
+	var self = this;
+	var blob = canvas.toBlob("image/jpeg", quality !== undefined ? quality : 0.7);
+
+	var reader = new FileReader();
+	reader.onload = function()
 	{
-		this.encoding = "png";
-		this.format = "base64";
-		this.data = canvas.toDataURL("image/png");
-	}
-	else
-	{
-		this.encoding = "jpeg";
-		this.format = "base64";
-		this.data = canvas.toDataURL("image/jpeg", 1.0);
-	}
+		self.encoding = "jpeg";
+		self.format = "arraybuffer";
+		self.data = reader.result;
+	};
+
+	reader.readAsArrayBuffer(blob);
 };
 
 /**

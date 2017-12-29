@@ -28,7 +28,10 @@ function TabElement(parent, closeable, container, index, title, icon)
 TabElement.prototype = Object.create(Element.prototype);
 
 //Update tab metadata
-TabElement.prototype.updateMetadata = function(){};
+TabElement.prototype.updateMetadata = Element.EMPTY;
+
+//Called after the selected object have changed
+TabElement.prototype.updateSelectedObject = Element.EMPTY;
 
 //Activate tab
 TabElement.prototype.activate = function()
@@ -68,7 +71,7 @@ TabElement.prototype.deactivate = function()
 TabElement.prototype.attach = function(obj){};
 
 //Update tab settings
-TabElement.prototype.updateSettings = function(){};
+TabElement.prototype.updateSettings = Element.EMPTY;
 
 //Check if an object is attached to the tab
 TabElement.prototype.isAttached = function(obj)
