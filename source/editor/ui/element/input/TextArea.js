@@ -20,25 +20,25 @@ TextArea.prototype = Object.create(Element.prototype);
 TextArea.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;
-}
+};
 
 //Set onchange onChange
 TextArea.prototype.setOnChange = function(onChange)
 {
 	this.element.onchange = onChange;
-}
+};
 
 //Set text
 TextArea.prototype.setText = function(text)
 {
 	this.element.value = text;
-}
+};
 
 //Get text
 TextArea.prototype.getText = function()
 {
 	return this.element.value;
-}
+};
 
 //Update Interface
 TextArea.prototype.updateInterface = function()
@@ -55,4 +55,4 @@ TextArea.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-}
+};

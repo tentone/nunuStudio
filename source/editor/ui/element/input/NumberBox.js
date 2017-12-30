@@ -20,38 +20,38 @@ NumberBox.prototype = Object.create(Element.prototype);
 NumberBox.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;
-}
+};
 
 //Set numberbox range
 NumberBox.prototype.setRange = function(min, max)
 {
 	this.element.min = String(min);
 	this.element.max = String(max);
-}
+};
 
 //Set step
 NumberBox.prototype.setStep = function(value)
 {
 	this.element.step = String(value);
-}
+};
 
 //Set onchange onChange
 NumberBox.prototype.setOnChange = function(onChange)
 {
 	this.element.onchange = onChange;
-}
+};
 
 //Set value
 NumberBox.prototype.setValue = function(value)
 {
 	this.element.value = value;
-}
+};
 
 //Get text
 NumberBox.prototype.getValue = function()
 {
-	return parseFloat(this.element.value);
-}
+	return Number.parseFloat(this.element.value);
+};
 
 //Update Interface
 NumberBox.prototype.updateInterface = function()
@@ -68,4 +68,4 @@ NumberBox.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-}
+};

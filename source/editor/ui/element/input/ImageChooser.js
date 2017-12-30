@@ -2,12 +2,7 @@
 
 function ImageChooser(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
+	Element.call(this, parent);
 
 	//Background
 	this.alpha = document.createElement("img");
@@ -90,40 +85,28 @@ function ImageChooser(parent)
 	this.onChange = null;
 
 	//Attributes
-	this.size = new THREE.Vector2(100, 100);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
+	this.size.set(100, 100);
 }
+
+ImageChooser.prototype = Object.create(Element.prototype);
 
 //Set onChange callback
 ImageChooser.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
-}
-
-//Remove element
-ImageChooser.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-}
+};
 
 //Set image URL
 ImageChooser.prototype.setValue = function(url)
 {
 	this.img.src = url;
-}
+};
 
 //Get image URL
 ImageChooser.prototype.getValue = function()
 {
 	return this.img.src;
-}
+};
 
 //Update Interface
 ImageChooser.prototype.updateInterface = function()
@@ -131,8 +114,6 @@ ImageChooser.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-	
 		//Keep aspect ratio
 		if(this.keepAspectRatio)
 		{
@@ -146,7 +127,7 @@ ImageChooser.prototype.updateInterface = function()
 			}
 		}
 
-		//Element
+		this.element.style.visibility = "visible";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
@@ -156,4 +137,4 @@ ImageChooser.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-}
+};
