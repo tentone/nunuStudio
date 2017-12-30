@@ -22,7 +22,15 @@ function Graph(parent, name, color)
 	this.element.appendChild(canvas);
 
 	//Default graph
-	this.graph.push({canvas: canvas, name: (name !== undefined) ? name : "default", color: (color !== undefined) ? color : "#FFFFFF", values: [], buttons: [], onchange: null});
+	this.graph.push(
+	{
+		canvas: canvas,
+		name: (name !== undefined) ? name : "default",
+		color: (color !== undefined) ? color : "#FFFFFF",
+		values: [],
+		buttons: [],
+		onchange: null
+	});
 	
 	//Scale
 	this.scale = [];
