@@ -61,7 +61,7 @@ TextureBox.prototype.setOnChange = function(onChange)
 //Set texture value
 TextureBox.prototype.setValue = function(texture)
 {
-	if(texture instanceof THREE.Texture && !(texture instanceof CubeTexture))
+	if(texture instanceof THREE.Texture && !texture.isCubeTexture)
 	{
 		this.texture = texture;
 

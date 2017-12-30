@@ -205,7 +205,7 @@ function SceneEditor(parent, closeable, container, index)
 							Editor.updateObjectViews();
 						}
 					}
-					else if(draggedObject instanceof CubeTexture)
+					else if(draggedObject.isCubeTexture)
 					{
 						if(object.material instanceof THREE.Material)
 						{

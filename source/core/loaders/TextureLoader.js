@@ -185,11 +185,11 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	//Compressed texture
 	else if(category === "Compressed")
 	{
-		if(json.isCubemap)
+		if(json.isCubeTexture)
 		{
 			texture = new CompressedTexture();
 			texture.image = [];
-			texture.isCubemap = true;
+			texture.isCubeTexture = true;
 
 			for(var j = 0; j < json.image.length; j++)
 			{

@@ -1396,7 +1396,7 @@ Editor.loadCompressedTexture = function(data)
 	{
 		var faces = data.mipmaps.length / data.mipmapCount;
 
-		texture.isCubemap = true;
+		texture.isCubeTexture = true;
 		texture.image = [];
 
 		for(var f = 0; f < faces; f++)
@@ -1411,6 +1411,10 @@ Editor.loadCompressedTexture = function(data)
 				texture.image[f].height = data.height;
 			}
 		}
+
+		texture.magFilter = THREE.LinearFilter;
+		texture.minFilter = THREE.LinearFilter;
+		texture.mapping = THREE.CubeReflectionMapping;
 	}
 	else
 	{

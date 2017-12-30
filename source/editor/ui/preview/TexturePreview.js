@@ -6,6 +6,7 @@ TexturePreview.generate = function(texture)
 {
 	var preview = null;
 
+	//Video texture
 	if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
 	{
 		preview = document.createElement("video");
@@ -60,6 +61,13 @@ TexturePreview.generate = function(texture)
 	{
 		preview = document.createElement("img");
 		preview.src = texture.image.toDataURL();
+	}
+	//Compressed
+	else if(texture instanceof CompressedTexture)
+	{
+		//TODO <ADD CODE HERE>
+		preview = document.createElement("img");
+		preview.src = Editor.filePath + "icon.png";
 	}
 	//Image
 	else if(texture instanceof THREE.Texture)
