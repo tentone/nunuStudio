@@ -17,17 +17,38 @@ function AnimationTab(parent, closeable, container, index)
 	this.bar.style.backgroundColor = Editor.theme.barColor;
 	this.bar.style.overflow = "visible";
 	this.bar.style.position = "absolute";
-	this.bar.style.width = "100%";
-	this.bar.style.height = "30px";
+	this.bar.style.height = "20px";
 	this.element.appendChild(this.bar);
 
 	//Timeline
 	this.timeline = document.createElement("div");
 	this.timeline.style.overflow = "auto";
 	this.timeline.style.position = "absolute";
-	this.timeline.style.top = "30px";
-	this.timeline.style.width = "100%";
+	this.timeline.style.top = "20px";
 	this.element.appendChild(this.timeline);
+
+	/*
+	var info = document.createElement("div");
+	info.style.position = "absolute";
+	info.style.width = "50px";
+	info.style.backgroundColor = "#FF0000";
+	this.timeline.appendChild(info);
+
+	var tab = document.createElement("div");
+	tab.style.position = "absolute";
+	tab.style.left = "50px";
+	tab.style.width = "3px";
+	tab.style.backgroundColor = "#00FF00";
+	tab.style.cursor = "e-resize";
+	this.timeline.appendChild(tab);
+
+	var tracks = document.createElement("div");
+	tracks.style.position = "absolute";
+	tracks.style.left = "53px";
+	tracks.style.width = "300px";
+	tracks.style.backgroundColor = "#0000FF";
+	this.timeline.appendChild(tracks);
+	*/
 
 	//Seekbar
 	this.seek = document.createElement("div");
@@ -64,7 +85,6 @@ function AnimationTab(parent, closeable, container, index)
 			self.mixer.setTime(self.seekInitialTime + (event.clientX - self.mouse.x) / self.zoom);
 		}
 	});
-
 	this.manager.add(window, "mouseup", function(event)
 	{
 		self.seeking = false;
@@ -74,7 +94,7 @@ function AnimationTab(parent, closeable, container, index)
 	//Animation
 	this.animationButton = new Button(this.bar);
 	this.animationButton.position.set(0, 0);
-	this.animationButton.size.set(100, 30);
+	this.animationButton.size.set(100, 20);
 	this.animationButton.setText("Create")
 	this.animationButton.updateInterface();
 	this.animationButton.setCallback(function()
@@ -122,7 +142,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.play = new Button(this.bar);
 	this.play.position.set(100, 0);
-	this.play.size.set(100, 30);
+	this.play.size.set(100, 20);
 	this.play.setText("Play")
 	this.play.updateInterface();
 	this.play.setCallback(function()
@@ -158,7 +178,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.stop = new Button(this.bar);
 	this.stop.position.set(200, 0);
-	this.stop.size.set(100, 30);
+	this.stop.size.set(100, 20);
 	this.stop.setText("Stop");
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
@@ -218,36 +238,12 @@ AnimationTab.prototype.updateTimeline = function()
 		this.animation.style.display = "table-cell";
 		this.timeline.appendChild(this.animation);
 
-		/*var info = document.createElement("div");
-		info.style.position = "absolute";
-		info.style.width = "50px";
-		info.style.height = "100%";
-		info.style.backgroundColor = "#FF0000";
-		this.animation.appendChild(info);
-
-		var tab = document.createElement("div");
-		tab.style.position = "absolute";
-		tab.style.left = "50px";
-		tab.style.width = "3px";
-		tab.style.height = "100%";
-		tab.style.backgroundColor = "#00FF00";
-		tab.style.cursor = "e-resize";
-		this.animation.appendChild(tab);
-
-		var tracks = document.createElement("div");
-		tracks.style.position = "absolute";
-		tracks.style.left = "53px";
-		tracks.style.width = "300px";
-		tracks.style.height = "100%";
-		tracks.style.backgroundColor = "#0000FF";
-		this.animation.appendChild(tracks);*/
-
 		var object = Editor.selectedObjects[0];
 		var animations = object.animations;			
-		var trackCount = 0, duration = 0;
 
 		for(var i = 0; i < animations.length; i++)
 		{
+			var trackCount = 0, duration = 0;
 			var tracks = animations[i].tracks;
 
 			var animation = document.createElement("div");
@@ -293,44 +289,42 @@ AnimationTab.prototype.updateTimeline = function()
 			{
 				duration = animations[i].duration;
 			}
+
+			var width = this.zoom * duration;
+			var height = this.timelineHeight * trackCount;
+
+			var timescale = document.createElement("canvas");
+			timescale.style.position = "absolute";
+			timescale.style.top = this.timelineHeight + "px";
+			timescale.style.left = "0px";
+			timescale.style.width = width + "px";
+			timescale.style.height = height + "px";
+			timescale.width = width;
+			timescale.height = height;
+			animation.appendChild(timescale);
+
+			var context = timescale.getContext("2d");
+			context.fillStyle = "#444444";
+
+			//Horizontal lines
+			for(var i = 0; i <= height; i += this.timelineHeight)
+			{
+				context.fillRect(0, i, width, 1);
+			}
+
+			//Vertical lines
+			for(var i = 0; i <= width; i += this.zoom)
+			{
+				context.fillRect(i - 1, 0, 3, height);
+			}
+
+			for(var i = 0, step = this.zoom / 5; i <= width; i += step)
+			{
+				context.fillRect(i, 0, 1, height);
+			}
 		}
-
-		var timescale = document.createElement("canvas");
-		timescale.style.position = "absolute";
-		timescale.style.top = "0px";
-		timescale.style.left = "0px";
-		this.animation.insertAdjacentElement("afterbegin", timescale);
-
-		//Update timescale
-		var width = this.zoom * duration;
-		var height = this.timelineHeight * trackCount;
-
+		
 		this.seek.style.height = height + "px";
-
-		timescale.width = width;
-		timescale.height = height;
-		timescale.style.width = width + "px";
-		timescale.style.height = height + "px";
-
-		var context = timescale.getContext("2d");
-		context.fillStyle = "#444444";
-
-		//Horizontal lines
-		//for(var i = 0; i <= height; i += this.timelineHeight)
-		//{
-		//	context.fillRect(0, i, width, 1);
-		//}
-
-		//Vertical lines
-		for(var i = 0; i <= width; i += this.zoom)
-		{
-			context.fillRect(i - 1, 0, 3, height);
-		}
-
-		//for(var i = 0, step = this.zoom / 5; i <= width; i += step)
-		//{
-		//	context.fillRect(i, 0, 1, height);
-		//}
 	}
 };
 
@@ -344,7 +338,10 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		this.timeline.style.height = (this.size.y - 30) + "px";
+		this.bar.style.width = this.size.x + "px";
+
+		this.timeline.style.width = this.size.x + "px";
+		this.timeline.style.height = (this.size.y - 20) + "px";
 
 		this.updateTimeline();
 	}
