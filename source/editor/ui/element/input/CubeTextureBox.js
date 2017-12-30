@@ -41,7 +41,8 @@ function CubeTextureBox(parent)
 	{
 		var uuid = event.dataTransfer.getData("uuid");
 		var texture = DragBuffer.popDragElement(uuid);
-		if(texture instanceof CubeTexture)
+
+		if(texture.isCubeTexture)
 		{
 			self.setTexture(texture);
 		}
@@ -90,7 +91,7 @@ CubeTextureBox.prototype.setOnChange = function(onChange)
 //Set texture value
 CubeTextureBox.prototype.setValue = function(texture)
 {
-	if(texture instanceof CubeTexture)
+	if(texture !== null && texture.isCubeTexture)
 	{
 		this.texture = texture;
 
@@ -141,6 +142,11 @@ CubeTextureBox.prototype.updatePreview = function()
 	if(this.texture instanceof CubeTexture)
 	{
 		this.img.src = this.texture.images[0].data;
+	}
+	else if(this.texture instanceof CompressedTexture)
+	{
+		//TODO <ADD CODE HERE>
+		this.img.src = Editor.filePath + "icon.png";
 	}
 };
 

@@ -34,23 +34,13 @@ function CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS,
 	THREE.Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
 	this.category = "Compressed";
+
 	this.image = {width: width, height: height};
 	this.mipmaps = mipmaps;
-	this.isCubemap = false;
+	this.isCubeTexture = false;
 
-	Object.defineProperties(this,
-	{
-		flipY:
-		{
-			get: function(){return false},
-			set: function(value){}
-		},
-		generateMipmaps:
-		{
-			get: function(){return false},
-			set: function(value){}
-		}
-	});
+	this.flipY = false;
+	this.generateMipmaps = false;
 }
 
 CompressedTexture.prototype = Object.create(Texture.prototype);
@@ -61,9 +51,9 @@ CompressedTexture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
 
-	data.isCubemap = this.isCubemap;
+	data.isCubeTexture = this.isCubeTexture;
 
-	if(this.isCubemap)
+	if(this.isCubeTexture)
 	{
 		data.image = [];
 
