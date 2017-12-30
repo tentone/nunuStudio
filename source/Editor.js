@@ -1396,11 +1396,12 @@ Editor.loadCompressedTexture = function(data)
 	{
 		var faces = data.mipmaps.length / data.mipmapCount;
 
+		texture.isCubemap = true;
 		texture.image = [];
 
 		for(var f = 0; f < faces; f++)
 		{
-			texture.image[f] = { mipmaps: [] };
+			texture.image[f] = {mipmaps: []};
 
 			for(var i = 0; i < data.mipmapCount; i ++)
 			{

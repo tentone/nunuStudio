@@ -185,15 +185,37 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	//Compressed texture
 	else if(category === "Compressed")
 	{
-		for(var i = 0; i < json.mipmaps.length; i++)
+		if(json.isCubemap)
 		{
-			if(json.mipmaps[i].data.toArrayBuffer !== undefined)
+			texture = new CompressedTexture();
+			texture.image = [];
+			texture.isCubemap = true;
+
+			for(var j = 0; j < json.image.length; j++)
 			{
-				json.mipmaps[i].data = new Uint8Array(json.mipmaps[i].data.toArrayBuffer());
+				for(var i = 0; i < json.image[j].mipmaps.length; i++)
+				{
+					if(json.image[j].mipmaps[i].data.toArrayBuffer !== undefined)
+					{
+						json.image[j].mipmaps[i].data = new Uint8Array(json.image[j].mipmaps[i].data.toArrayBuffer());
+					}
+				}
+
+				texture.image.push(json.image[j]);
 			}
 		}
+		else
+		{
+			for(var i = 0; i < json.mipmaps.length; i++)
+			{
+				if(json.mipmaps[i].data.toArrayBuffer !== undefined)
+				{
+					json.mipmaps[i].data = new Uint8Array(json.mipmaps[i].data.toArrayBuffer());
+				}
+			}
 
-		texture = new CompressedTexture(json.mipmaps, json.width, json.height);
+			texture = new CompressedTexture(json.mipmaps, json.width, json.height);
+		}
 	}
 	//Cube texture
 	else if(category === "Cube")

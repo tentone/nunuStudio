@@ -6,6 +6,13 @@
  *
  * The advantage of using these texture is the fact that the texture does not get uncompressed in the GPU memory saving not only project space but also saving video memory during runtime.
  *
+ * The problem with compressed textures is that its hardware dependent (they dont work everywhere)
+ *  - DXT: supported on desktop and some Android smartphones
+ *  - PVR: supported on iOS and some Android smartphones
+ *  - ETC1: supported by most Android smartphones
+ *
+ * The usage of these format can free a lot of video memory and is a must for mobile devices.
+ * 
  * @class CompressedTexture
  * @constructor
  * @extends {Texture}
@@ -54,18 +61,49 @@ CompressedTexture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
 
-	data.width = this.image.width;
-	data.height = this.image.height;
+	data.isCubemap = this.isCubemap;
 
-	data.mipmaps = [];
-	for(var i = 0; i < this.mipmaps.length; i++)
+	if(this.isCubemap)
 	{
-		data.mipmaps.push(
+		data.image = [];
+
+		for(var j = 0; j < this.image.length; j++)
+		{	
+			var image = 
+			{
+				mipmaps: [],
+				format: this.image[j].format,
+				width: this.image[j].width,
+				height: this.image[j].height
+			};
+
+			for(var i = 0; i < this.image[j].mipmaps.length; i++)
+			{
+				image.mipmaps.push(
+				{
+					width: this.image[j].mipmaps[i].width,
+					height: this.image[j].mipmaps[i].height,
+					data: this.image[j].mipmaps[i].data
+				});
+			}
+			
+			data.image.push(image);
+		}
+	}
+	else
+	{
+		data.mipmaps = [];
+		data.width = this.image.width;
+		data.height = this.image.height;
+		for(var i = 0; i < this.mipmaps.length; i++)
 		{
-			width: this.mipmaps[i].width,
-			height: this.mipmaps[i].height,
-			data: this.mipmaps[i].data
-		});
+			data.mipmaps.push(
+			{
+				width: this.mipmaps[i].width,
+				height: this.mipmaps[i].height,
+				data: this.mipmaps[i].data
+			});
+		}
 	}
 
 	return data;
