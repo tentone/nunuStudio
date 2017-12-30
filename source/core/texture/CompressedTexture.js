@@ -29,6 +29,7 @@ function CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS,
 	this.category = "Compressed";
 	this.image = {width: width, height: height};
 	this.mipmaps = mipmaps;
+	this.isCubemap = false;
 
 	Object.defineProperties(this,
 	{
@@ -52,8 +53,6 @@ CompressedTexture.prototype.isCompressedTexture = true;
 CompressedTexture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
-
-	console.log(this);
 
 	data.width = this.image.width;
 	data.height = this.image.height;
