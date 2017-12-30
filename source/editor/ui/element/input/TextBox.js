@@ -20,25 +20,25 @@ TextBox.prototype = Object.create(Element.prototype);
 TextBox.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;
-}
+};
 
 //Set onchange onChange
 TextBox.prototype.setOnChange = function(onChange)
 {
 	this.element.onchange = onChange;
-}
+};
 
 //Set text
 TextBox.prototype.setText = function(text)
 {
 	this.element.value = text;
-}
+};
 
 //Get text
 TextBox.prototype.getText = function()
 {
 	return this.element.value;
-}
+};
 
 //Update Interface
 TextBox.prototype.updateInterface = function()
@@ -55,4 +55,4 @@ TextBox.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-}
+};

@@ -9,15 +9,13 @@ function Slider(parent)
 
 	//Slider
 	this.element.style.boxSizing = "border-box";
-	//this.element.style.appearance = "none";
-	//this.element.style.MozAppearance = "none";
-	//this.element.style.webkitAppearance = "none";
 	this.element.type = "range";
 	this.element.min = "0";
 	this.element.max = "100";
 	this.element.onchange = function()
 	{
 		self.text.innerHTML = self.element.value;
+
 		if(self.onchange !== null)
 		{
 			self.onchange();
@@ -76,7 +74,7 @@ Slider.prototype.setValue = function(value)
 //Get Slider value
 Slider.prototype.getValue = function()
 {
-	return this.element.value;
+	return Number.parseFloat(this.element.value);
 }
 
 //Remove element

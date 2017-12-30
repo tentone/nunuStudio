@@ -52,6 +52,7 @@ function AnimationTab(parent, closeable, container, index)
 			self.seeking = true;
 			self.seekInitialTime = self.mixer._actions[0].time;
 			self.mouse.set(event.clientX, event.clientY);
+			self.manager.create();
 		}
 	};
 
@@ -63,12 +64,13 @@ function AnimationTab(parent, closeable, container, index)
 			self.mixer.setTime(self.seekInitialTime + (event.clientX - self.mouse.x) / self.zoom);
 		}
 	});
+
 	this.manager.add(window, "mouseup", function(event)
 	{
 		self.seeking = false;
+		self.manager.destroy();
 	});
-	this.manager.create();
-
+	
 	//Animation
 	this.animationButton = new Button(this.bar);
 	this.animationButton.position.set(0, 0);
@@ -301,16 +303,7 @@ AnimationTab.prototype.updateTimeline = function()
 
 		//Update timescale
 		var width = this.zoom * duration;
-		if(width < this.size.x)
-		{
-			width = this.size.x;
-		}
-
 		var height = this.timelineHeight * trackCount;
-		if(height < this.size.y)
-		{
-			height = this.size.y;
-		}
 
 		this.seek.style.height = height + "px";
 
@@ -323,10 +316,10 @@ AnimationTab.prototype.updateTimeline = function()
 		context.fillStyle = "#444444";
 
 		//Horizontal lines
-		for(var i = 0; i <= height; i += this.timelineHeight)
-		{
-			context.fillRect(0, i, width, 1);
-		}
+		//for(var i = 0; i <= height; i += this.timelineHeight)
+		//{
+		//	context.fillRect(0, i, width, 1);
+		//}
 
 		//Vertical lines
 		for(var i = 0; i <= width; i += this.zoom)
@@ -334,18 +327,11 @@ AnimationTab.prototype.updateTimeline = function()
 			context.fillRect(i - 1, 0, 3, height);
 		}
 
-		for(var i = 0, step = this.zoom / 5; i <= width; i += step)
-		{
-			context.fillRect(i, 0, 1, height);
-		}
+		//for(var i = 0, step = this.zoom / 5; i <= width; i += step)
+		//{
+		//	context.fillRect(i, 0, 1, height);
+		//}
 	}
-};
-
-AnimationTab.prototype.destroy = function()
-{
-	TabElement.prototype.destroy.call(this);
-
-	this.manager.destroy();
 };
 
 AnimationTab.prototype.updateInterface = function()
