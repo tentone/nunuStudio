@@ -1391,11 +1391,12 @@ Editor.loadProgram = function(file, binary)
 Editor.loadCompressedTexture = function(data)
 {
 	var texture = new CompressedTexture();
-	texture.image = [];
-
+	
 	if(data.isCubemap)
 	{
 		var faces = data.mipmaps.length / data.mipmapCount;
+
+		texture.image = [];
 
 		for(var f = 0; f < faces; f++)
 		{
