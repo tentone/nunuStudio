@@ -7,6 +7,7 @@ function AnimationTab(parent, closeable, container, index)
 	var self = this;
 
 	this.mixer = null;
+	this.object = null;
 	this.clock = new THREE.Clock();
 	
 	this.zoom = 120.0; //Pixels/sec
@@ -28,40 +29,40 @@ function AnimationTab(parent, closeable, container, index)
 	this.animationButton.updateInterface();
 	this.animationButton.setCallback(function()
 	{
-		if(Editor.selectedObjects.length > 0)
+		if(self.object !== null)
 		{
-			var object = Editor.selectedObjects[0];
-
-			if(object.animations !== undefined)
+			if(self.object.animations !== undefined)
 			{
 				alert("This object is already animated");
 				return;
 			}
-			else
-			{
-				object.animations = [];
-	
-				var clip = new THREE.AnimationClip("Animation", 5, []);
 
-				//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
-				
-				var position = new VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
-				position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
-				clip.tracks.push(position);
+			self.object.animations = [];
 
-				var scale = new VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
-				scale.setInterpolation(THREE.InterpolateLinear);
-				clip.tracks.push(scale);
+			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
+			
+			var clip = new THREE.AnimationClip("Animation", 5, []);
+			
+			var position = new VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
+			position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
+			clip.tracks.push(position);
 
-				var quaternion = new QuaternionKeyframeTrack(".quaternion", [0, 1.5, 3], [0,0,0,1, 0,0.706825181105366,0,0.7073882691671998, 0,0,0,1]);
-				quaternion.setInterpolation(THREE.InterpolateLinear);
-				clip.tracks.push(quaternion);
-				
-				object.animations.push(clip);
-			}
+			var scale = new VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
+			scale.setInterpolation(THREE.InterpolateLinear);
+			clip.tracks.push(scale);
+
+			var quaternion = new QuaternionKeyframeTrack(".quaternion", [0, 1.5, 3], [0,0,0,1, 0,0.706825181105366,0,0.7073882691671998, 0,0,0,1]);
+			quaternion.setInterpolation(THREE.InterpolateLinear);
+			clip.tracks.push(quaternion);
+			
+			var visible = new BooleanKeyframeTrack(".visible", [0, 1.5, 2.0, 4.0], [true, false, true, true]);
+			clip.tracks.push(visible);
+
+			self.object.animations.push(clip);
+
+			self.attach(self.object);
+			self.updateTimeline();
 		}
-
-		self.updateInterface();
 	});
 
 	this.play = new Button(this.bar);
@@ -71,21 +72,10 @@ function AnimationTab(parent, closeable, container, index)
 	this.play.updateInterface();
 	this.play.setCallback(function()
 	{
-		var object = Editor.selectedObjects[0];
-		
-		if(self.mixer !== null)
+		if(self.mixer == null)
 		{
-			if(self.mixer._root !== object)
-			{
-				self.mixer.dispose();
-				self.mixer = new AnimationMixer(object);
-				self.mixer.createActions(object.animations);	
-			}
-		}
-		else
-		{
-			self.mixer = new AnimationMixer(object);
-			self.mixer.createActions(object.animations);
+			alert("No animation found!");
+			return;
 		}
 
 		if(self.mixer.playing)
@@ -107,18 +97,14 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
 	{
+		if(self.mixer == null || !self.mixer.playing)
+		{
+			alert("No animation playing!");
+			return;
+		}
+
 		self.play.setText("Play");
 		self.mixer.stop();
-	});
-
-	this.keyframe = new Button(this.bar);
-	this.keyframe.position.set(300, 0);
-	this.keyframe.size.set(100, 20);
-	this.keyframe.setText("Keyframe");
-	this.keyframe.updateInterface();
-	this.keyframe.setCallback(function()
-	{
-		//TODO <ADD CODE HERE>
 	});
 
 	this.zoomSlider = new Slider(this.bar);
@@ -131,7 +117,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomSlider.setOnChange(function()
 	{
 		self.zoom = self.zoomSlider.getValue();
-		self.updateInterface();
+		self.updateTimeline();
 	});
 
 	//Timeline
@@ -177,18 +163,18 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek.style.cursor = "e-resize";
 	this.tracks.appendChild(this.seek);
 
-	this.seekInitialTime = 0;
-	this.mouse = new THREE.Vector2();
-
 	this.seek.onmousedown = function(event)
 	{
-		if(self.mixer !== null)
+		if(self.mixer !== undefined)
 		{
 			self.seekInitialTime = self.mixer._actions[0].time;
 			self.mouse.set(event.clientX, event.clientY);
 			self.manager.create();
 		}
 	};
+
+	this.seekInitialTime = 0;
+	this.mouse = new THREE.Vector2();
 
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
@@ -205,10 +191,29 @@ function AnimationTab(parent, closeable, container, index)
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
-AnimationTab.prototype.activate = function()
+AnimationTab.prototype.attach = function(object)
 {
-	TabElement.prototype.activate.call(this);
+	this.object = object;
 
+	if(this.mixer !== null)
+	{
+		if(this.mixer._root !== object)
+		{
+			this.mixer.dispose();
+			this.mixer = null;
+		}
+		else
+		{
+			return;
+		}
+	}
+
+	if(object.animations !== undefined)
+	{
+		this.mixer = new AnimationMixer(object);
+		this.mixer.createActions(object.animations);
+	}
+	
 	this.updateTimeline();
 };
 
@@ -231,16 +236,32 @@ AnimationTab.prototype.update = function()
 
 AnimationTab.prototype.updateTimeline = function()
 {
-	if(Editor.selectedObjects.length < 1 || Editor.selectedObjects[0].animations === undefined)
+	while(this.tracks.firstChild)
+	{
+		this.tracks.removeChild(this.tracks.firstChild);
+	}
+	while(this.info.firstChild)
+	{
+		this.info.removeChild(this.info.firstChild);
+	}
+
+	if(this.object === null || this.object.animations === undefined)
 	{
 		return;
 	}
 
-	var object = Editor.selectedObjects[0];
-	var animations = object.animations;			
+	this.tracks.appendChild(this.seek);
+
+	var animations = this.object.animations;			
 
 	var duration = 0;
 	var y = 0;
+
+	var timescale = document.createElement("canvas");
+	timescale.style.position = "absolute";
+	timescale.style.top = "0px";
+	timescale.style.left = "0px";
+	this.tracks.appendChild(timescale);
 
 	//Animations
 	for(var i = 0; i < animations.length; i++)
@@ -248,17 +269,17 @@ AnimationTab.prototype.updateTimeline = function()
 		var tracks = animations[i].tracks;
 
 		var name = document.createElement("div");
-		name.style.height = "20px";
+		name.style.height = this.timelineHeight + "px";
 		name.innerHTML = animations[i].name;
 		this.info.appendChild(name);
 
 		var block = document.createElement("div");
-		block.style.height = "20px";
-		block.style.backgroundColor = Editor.theme.barColor;
-		block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s";
+		block.style.height = this.timelineHeight + "px";
+		//block.style.backgroundColor = Editor.theme.barColor;
+		//block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s";
 		this.tracks.appendChild(block);
 
-		y += 20;
+		y += this.timelineHeight;
 
 		//Tracks
 		for(var j = 0; j < tracks.length; j++)
@@ -289,21 +310,6 @@ AnimationTab.prototype.updateTimeline = function()
 				key.style.width = "5px";
 				track.appendChild(key);
 			}
-
-			/*
-			//Keyframes bar
-			for(var k = 0; k < times.length - 1; k++)
-			{
-				var key = document.createElement("div");
-				key.style.position = "absolute";
-				key.style.cursor = "pointer";
-				key.style.backgroundColor =  MathUtils.randomColor();//color;
-				key.style.height = this.timelineHeight + "px";
-				key.style.left = (this.zoom * times[k]) + "px";
-				key.style.width = (this.zoom * (times[k + 1] - times[k])) + "px";
-				track.appendChild(key);
-			}
-			*/
 		}
 
 		if(animations[i].duration > duration)
@@ -316,16 +322,10 @@ AnimationTab.prototype.updateTimeline = function()
 	var width = this.zoom * duration;
 	var height = y;
 
-	var timescale = document.createElement("canvas");
-	timescale.style.position = "absolute";
-	timescale.style.zIndex = "-1000";
-	timescale.style.top = "0px";
-	timescale.style.left = "0px";
 	timescale.style.width = width + "px";
 	timescale.style.height = height + "px";
 	timescale.width = width;
 	timescale.height = height;
-	this.tracks.appendChild(timescale);
 
 	var context = timescale.getContext("2d");
 	context.fillStyle = "#444444";
@@ -337,12 +337,7 @@ AnimationTab.prototype.updateTimeline = function()
 	}
 
 	//Vertical lines
-	/*for(var i = 0; i <= width; i += this.zoom)
-	{
-		context.fillRect(i - 1, 0, 3, height);
-	}*/
-
-	for(var i = 0, step = this.zoom / 5; i <= width; i += step)
+	for(var i = 0, step = this.zoom / 10; i <= width; i += step)
 	{
 		context.fillRect(i, 0, 1, height);
 	}
@@ -370,8 +365,6 @@ AnimationTab.prototype.updateInterface = function()
 		
 		this.tracks.style.height = this.timeline.style.height;
 		this.tracks.style.width = (this.size.x - 153) + "px";;
-
-		this.updateTimeline();
 	}
 	else
 	{

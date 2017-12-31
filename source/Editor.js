@@ -694,6 +694,8 @@ Editor.selectObject = function(object)
 		Editor.selectObjectPanel();
 		Editor.selectObjectHelper();
 		Editor.selectTool();
+
+		Interface.animation.attach(object);
 	}
 	else
 	{
