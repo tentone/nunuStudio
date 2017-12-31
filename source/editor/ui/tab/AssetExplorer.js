@@ -374,9 +374,57 @@ function AssetExplorer(parent, closeable, container, index)
 
 AssetExplorer.prototype = Object.create(TabElement.prototype);
 
-AssetExplorer.prototype.updateSelectedObject = function()
+AssetExplorer.prototype.refresh = function()
 {
+	//Clean asset explorer
+	this.clear();
+	
+	//Materials
+	var materials = ObjectUtils.getMaterials(Editor.program, Editor.program.materials);
+	for(var i in materials)
+	{
+		var file = new MaterialAsset(this.assets);
+		file.setMaterial(materials[i]);
+		this.add(file);
+	}
 
+	//Textures
+	var textures = ObjectUtils.getTextures(Editor.program, Editor.program.textures);
+	for(var i in textures)
+	{
+		var file = new TextureAsset(this.assets);
+		file.setTexture(textures[i]);
+		this.add(file);
+	}
+
+	//Fonts
+	var fonts = ObjectUtils.getFonts(Editor.program, Editor.program.fonts);
+	for(var i in fonts)
+	{
+		var file = new FontAsset(this.assets);
+		file.setFont(fonts[i]);
+		this.add(file);
+	}
+
+	//Audio
+	var audio = ObjectUtils.getAudio(Editor.program, Editor.program.audio);
+	for(var i in audio)
+	{
+		var file = new AudioAsset(this.assets);
+		file.setAudio(audio[i]);
+		this.add(file);
+	}
+
+	//Resources
+	var resources = Editor.program.resources;
+	for(var i in resources)
+	{
+		var file = new FileAsset(this.assets);
+		file.setFile(resources[i]);
+		this.add(file);
+	}
+
+	this.updateInterface();
 };
 
 //Remove all files

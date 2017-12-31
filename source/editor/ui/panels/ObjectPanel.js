@@ -28,9 +28,6 @@ function ObjectPanel(parent, obj)
 	});
 	this.form.add(this.receiveShadow);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes
@@ -41,9 +38,6 @@ ObjectPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 
-	if(this.obj !== null)
-	{
-		this.castShadow.setValue(this.obj.castShadow);
-		this.receiveShadow.setValue(this.obj.receiveShadow);
-	}
+	this.castShadow.setValue(this.obj.castShadow);
+	this.receiveShadow.setValue(this.obj.receiveShadow);
 };

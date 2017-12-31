@@ -110,7 +110,7 @@ function MaterialAsset(parent)
 			{
 				Editor.history.add(new ChangeAction(self.material, "name", prompt("Rename material", self.material.name)));
 				self.updateMetadata();
-				Editor.updateTabsData();
+				Editor.updateObjectViews();
 			}
 		});
 		
@@ -182,7 +182,7 @@ function MaterialAsset(parent)
 					
 					//Add
 					Editor.program.addMaterial(material);
-					Editor.updateAssetExplorer();
+					Interface.assetExplorer.refresh();
 				}
 				catch(e)
 				{

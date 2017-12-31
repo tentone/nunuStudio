@@ -199,11 +199,6 @@ function AnimationTab(parent, closeable, container, index)
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
-AnimationTab.prototype.updateSelectedObject = function()
-{
-	this.updateTimeline();
-};
-
 AnimationTab.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
@@ -351,7 +346,7 @@ AnimationTab.prototype.updateInterface = function()
 		this.bar.style.width = this.size.x + "px";
 
 		this.timeline.style.width = this.size.x + "px";
-		this.timeline.style.height = (this.size.y - 40) + "px";
+		this.timeline.style.height = (this.size.y - 20) + "px";
 
 		this.seek.style.height = this.timeline.style.height;
 		

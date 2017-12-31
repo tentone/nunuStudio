@@ -561,7 +561,7 @@ SceneEditor.prototype.update = function()
 
 					if(this.isEditingObject)
 					{
-						Editor.updateObjectPanel();
+						Interface.panel.updatePanel();
 					}
 				}
 				else
