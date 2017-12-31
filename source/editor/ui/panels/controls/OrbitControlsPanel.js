@@ -15,10 +15,7 @@ function OrbitControlsPanel(parent, obj)
 	this.distance.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.distance.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "distance", self.distance.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "distance", self.distance.getValue()));
 	});
 	this.form.add(this.distance);
 	this.form.nextRow();
@@ -30,10 +27,7 @@ function OrbitControlsPanel(parent, obj)
 	this.maxDistance.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxDistance.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "maxDistance", self.maxDistance.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "maxDistance", self.maxDistance.getValue()));
 	});
 	this.form.add(this.maxDistance);
 	this.form.nextRow();
@@ -45,10 +39,7 @@ function OrbitControlsPanel(parent, obj)
 	this.minDistance.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.minDistance.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "minDistance", self.minDistance.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "minDistance", self.minDistance.getValue()));
 	});
 	this.form.add(this.minDistance);
 	this.form.nextRow();
@@ -59,10 +50,7 @@ function OrbitControlsPanel(parent, obj)
 	this.needsButtonPressed.size.set(15, 15);
 	this.needsButtonPressed.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "needsButtonPressed", self.needsButtonPressed.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "needsButtonPressed", self.needsButtonPressed.getValue()));
 	});
 	this.form.add(this.needsButtonPressed);
 	this.form.nextRow();
@@ -73,10 +61,7 @@ function OrbitControlsPanel(parent, obj)
 	this.movementEnabled.size.set(15, 15);
 	this.movementEnabled.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "movementEnabled", self.movementEnabled.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "movementEnabled", self.movementEnabled.getValue()));
 	});
 	this.form.add(this.movementEnabled);
 	this.form.nextRow();
@@ -89,10 +74,7 @@ function OrbitControlsPanel(parent, obj)
 	this.sensitivity.setRange(0, 0.05);
 	this.sensitivity.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "sensitivity", self.sensitivity.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "sensitivity", self.sensitivity.getValue()));
 	});
 	this.form.add(this.sensitivity);
 	this.form.nextRow();
@@ -105,10 +87,7 @@ function OrbitControlsPanel(parent, obj)
 	this.limitUp.setRange(-Math.PI, Math.PI);
 	this.limitUp.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "limitUp", self.limitUp.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "limitUp", self.limitUp.getValue()));
 	});
 	this.form.add(this.limitUp);
 	this.form.nextRow();
@@ -121,10 +100,7 @@ function OrbitControlsPanel(parent, obj)
 	this.limitDown.setRange(-Math.PI, Math.PI);
 	this.limitDown.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "limitDown", self.limitDown.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "limitDown", self.limitDown.getValue()));
 	});
 	this.form.add(this.limitDown);
 	this.form.nextRow();
@@ -135,10 +111,7 @@ function OrbitControlsPanel(parent, obj)
 	this.zoomEnabled.size.set(15, 15);
 	this.zoomEnabled.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "zoomEnabled", self.zoomEnabled.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "zoomEnabled", self.zoomEnabled.getValue()));
 	});
 	this.form.add(this.zoomEnabled);
 	this.form.nextRow();
@@ -151,10 +124,7 @@ function OrbitControlsPanel(parent, obj)
 	this.zoomSensitivity.setRange(0, 0.05);
 	this.zoomSensitivity.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "zoomSensitivity", self.zoomSensitivity.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "zoomSensitivity", self.zoomSensitivity.getValue()));
 	});
 	this.form.add(this.zoomSensitivity);
 	this.form.nextRow();
@@ -167,17 +137,14 @@ OrbitControlsPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 	
-	if(this.obj !== null)
-	{
-		this.distance.setValue(this.obj.distance);
-		this.maxDistance.setValue(this.obj.maxDistance);
-		this.minDistance.setValue(this.obj.minDistance);
-		this.needsButtonPressed.setValue(this.obj.needsButtonPressed);
-		this.movementEnabled.setValue(this.obj.movementEnabled);
-		this.sensitivity.setValue(this.obj.sensitivity);
-		this.limitUp.setValue(this.obj.limitUp);
-		this.limitDown.setValue(this.obj.limitDown);
-		this.zoomEnabled.setValue(this.obj.zoomEnabled);
-		this.zoomSensitivity.setValue(this.obj.zoomSensitivity);
-	}
+	this.distance.setValue(this.obj.distance);
+	this.maxDistance.setValue(this.obj.maxDistance);
+	this.minDistance.setValue(this.obj.minDistance);
+	this.needsButtonPressed.setValue(this.obj.needsButtonPressed);
+	this.movementEnabled.setValue(this.obj.movementEnabled);
+	this.sensitivity.setValue(this.obj.sensitivity);
+	this.limitUp.setValue(this.obj.limitUp);
+	this.limitDown.setValue(this.obj.limitDown);
+	this.zoomEnabled.setValue(this.obj.zoomEnabled);
+	this.zoomSensitivity.setValue(this.obj.zoomSensitivity);
 };

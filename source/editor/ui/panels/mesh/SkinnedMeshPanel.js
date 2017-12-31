@@ -33,7 +33,6 @@ function SkinnedMeshPanel(parent, obj)
 
 	//Geometry
 	this.geometry = GeometryForm.create(this.form, this.obj);
-
 }
 
 //Super prototypes

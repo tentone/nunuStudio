@@ -165,7 +165,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.seek.onmousedown = function(event)
 	{
-		if(self.mixer !== undefined)
+		if(self.mixer !== null)
 		{
 			self.seekInitialTime = self.mixer._actions[0].time;
 			self.mouse.set(event.clientX, event.clientY);
@@ -231,6 +231,11 @@ AnimationTab.prototype.update = function()
 		}
 
 		this.mixer.update(this.clock.getDelta());
+
+		if(this.mixer.playing)
+		{
+			//Interface.panel.updatePanel();
+		}
 	}
 };
 
