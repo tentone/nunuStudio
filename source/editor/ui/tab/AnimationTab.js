@@ -140,7 +140,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.tab.style.left = "150px";
 	this.tab.style.width = "3px";
 	this.tab.style.backgroundColor = Editor.theme.barColor;
-	this.tab.style.cursor = "e-resize";
+	//this.tab.style.cursor = "e-resize";
 	this.timeline.appendChild(this.tab);
 
 	//Tracks
@@ -158,10 +158,9 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek.style.zIndex = "100";
 	this.seek.style.top = "0px";
 	this.seek.style.left = "0px";
-	this.seek.style.width = "3px";
+	this.seek.style.width = "4px";
 	this.seek.style.overflow = "hidden";
 	this.seek.style.cursor = "e-resize";
-	this.tracks.appendChild(this.seek);
 
 	this.seek.onmousedown = function(event)
 	{
@@ -191,6 +190,17 @@ function AnimationTab(parent, closeable, container, index)
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
+AnimationTab.prototype.deactivate = function()
+{
+	TabElement.prototype.deactivate.call(this);
+
+	if(this.mixer !== null && this.mixer.playing)
+	{
+		this.play.setText("Play");
+		this.mixer.stop();
+	}
+};
+
 AnimationTab.prototype.attach = function(object)
 {
 	this.object = object;
@@ -199,6 +209,8 @@ AnimationTab.prototype.attach = function(object)
 	{
 		if(this.mixer._root !== object)
 		{
+			this.play.setText("Play");
+			this.mixer.stop();
 			this.mixer.dispose();
 			this.mixer = null;
 		}
@@ -223,18 +235,18 @@ AnimationTab.prototype.update = function()
 	{
 		if(this.mixer._actions.length === 1)
 		{
-			this.seek.style.left = (this.mixer._actions[0].time * this.zoom - 1) + "px";
+			this.seek.style.left = (this.mixer._actions[0].time * this.zoom) + "px";
 		}
 		else
 		{
-			this.seek.style.left = (this.mixer.time * this.zoom - 1) + "px";
+			this.seek.style.left = (this.mixer.time * this.zoom) + "px";
 		}
 
 		this.mixer.update(this.clock.getDelta());
 
 		if(this.mixer.playing)
 		{
-			//Interface.panel.updatePanel();
+			Interface.panel.updatePanel();
 		}
 	}
 };
@@ -268,6 +280,26 @@ AnimationTab.prototype.updateTimeline = function()
 	timescale.style.left = "0px";
 	this.tracks.appendChild(timescale);
 
+	//Context menu
+	var onContextMenu = function(event)
+	{
+		var context = new ContextMenu();
+		context.size.set(150, 20);
+		context.position.set(event.clientX, event.clientY);
+		
+		context.addOption("Delete", function()
+		{
+
+		});
+
+		context.addOption("Copy", function()
+		{
+
+		});
+
+		context.updateInterface();
+	};
+
 	//Animations
 	for(var i = 0; i < animations.length; i++)
 	{
@@ -275,12 +307,15 @@ AnimationTab.prototype.updateTimeline = function()
 
 		var name = document.createElement("div");
 		name.style.height = this.timelineHeight + "px";
+		name.style.textOverflow = "ellipsis";
+		name.style.whiteSpace = "nowrap";
+		name.style.overflow = "hidden";
 		name.innerHTML = animations[i].name;
 		this.info.appendChild(name);
 
 		var block = document.createElement("div");
 		block.style.height = this.timelineHeight + "px";
-		//block.style.backgroundColor = Editor.theme.barColor;
+		
 		//block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s";
 		this.tracks.appendChild(block);
 
@@ -293,6 +328,10 @@ AnimationTab.prototype.updateTimeline = function()
 
 			var name = document.createElement("div");
 			name.style.height = this.timelineHeight + "px";
+			name.style.backgroundColor = Editor.theme.barColor;
+			name.style.textOverflow = "ellipsis";
+			name.style.whiteSpace = "nowrap";
+			name.style.overflow = "hidden";
 			name.innerHTML = tracks[j].name;
 			this.info.appendChild(name);
 
@@ -307,6 +346,7 @@ AnimationTab.prototype.updateTimeline = function()
 			for(var k = 0; k < times.length; k++)
 			{
 				var key = document.createElement("div");
+				key.oncontextmenu = onContextMenu;
 				key.style.position = "absolute";
 				key.style.cursor = "pointer";
 				key.style.backgroundColor =  color;
