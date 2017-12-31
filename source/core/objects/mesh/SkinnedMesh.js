@@ -81,6 +81,7 @@ SkinnedMesh.prototype.initialize = function()
 	if(this.initialAnimation >= 0)
 	{
 		this.playAnimation(this.initialAnimation);
+
 	}
 
 	for(var i = 0; i < this.children.length; i++)
@@ -105,6 +106,7 @@ SkinnedMesh.prototype.playAnimation = function(index, loop)
 		var action = this.mixer.clipAction(this.animations[index]);
 		action.setLoop(loop !== undefined ? loop : THREE.LoopRepeat);
 		action.play();
+		this.mixer.play();
 	}
 	catch(e)
 	{
@@ -130,8 +132,8 @@ SkinnedMesh.prototype.onBeforeRender = function(renderer, scene, camera, geometr
 SkinnedMesh.prototype.stopAnimation = function()
 {
 	this.mixer.stop();
+	this.mixer.stopAllAction();
 };
-
 
 /**
  * Dispose mesh along with its material and geometry.

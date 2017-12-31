@@ -9,9 +9,6 @@ function MeshPanel(parent, obj)
 
 	//Geometry
 	this.geometry = GeometryForm.create(this.form, this.obj);
-
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes

@@ -331,8 +331,6 @@ function SkyPanel(parent, obj)
 	this.form.add(this.shadowBottom);
 	this.form.nextRow();
 
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes

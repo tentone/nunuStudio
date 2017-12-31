@@ -5,7 +5,6 @@ function Panel(parent, obj)
 	Element.call(this, parent);
 
 	this.element.style.overflow = "auto";
-	this.element.style.cursor = "default";
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
 	this.element.style.width = "100%";
@@ -211,24 +210,21 @@ Panel.prototype.updateInterface = function()
 //Update panel information
 Panel.prototype.updatePanel = function()
 {
-	if(this.obj !== null)
+	this.name.setText(this.obj.name);
+		
+	if(this.uuid !== undefined)
 	{
-		this.name.setText(this.obj.name);
-		
-		if(this.uuid !== undefined)
-		{
-			this.uuid.setText(this.obj.uuid);
-		}
-		
-		if(this.type !== undefined)
-		{
-			this.type.setText(this.obj.type);
-		}
-
-		this.position.setValue(this.obj.position);
-		this.scale.setValue(this.obj.scale);
-		this.rotation.setValue(this.obj.rotation);
-		this.visible.setValue(this.obj.visible);
-		this.static.setValue(!this.obj.matrixAutoUpdate);
+		this.uuid.setText(this.obj.uuid);
 	}
+	
+	if(this.type !== undefined)
+	{
+		this.type.setText(this.obj.type);
+	}
+
+	this.position.setValue(this.obj.position);
+	this.scale.setValue(this.obj.scale);
+	this.rotation.setValue(this.obj.rotation);
+	this.visible.setValue(this.obj.visible);
+	this.static.setValue(!this.obj.matrixAutoUpdate);
 };

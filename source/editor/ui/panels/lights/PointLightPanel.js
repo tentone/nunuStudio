@@ -13,10 +13,7 @@ function PointLightPanel(parent, obj)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -70,11 +67,8 @@ function PointLightPanel(parent, obj)
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "width", self.shadowWidth.getValue()));
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "width", self.shadowWidth.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowWidth);
 	this.form.addText("x", true);
@@ -82,11 +76,8 @@ function PointLightPanel(parent, obj)
 	this.shadowHeight.size.set(60, 18);
 	this.shadowHeight.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "height", self.shadowHeight.getValue()));
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "height", self.shadowHeight.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowHeight);
 	this.form.nextRow();
@@ -104,11 +95,8 @@ function PointLightPanel(parent, obj)
 	this.shadowNear.setStep(0.1);
 	this.shadowNear.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "near", self.shadowNear.getValue()));
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "near", self.shadowNear.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowNear);
 	this.form.nextRow();
@@ -120,17 +108,12 @@ function PointLightPanel(parent, obj)
 	this.shadowFar.setStep(0.1);
 	this.shadowFar.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "far", self.shadowFar.getValue()));
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "far", self.shadowFar.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowFar);
 	this.form.nextRow();
 
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes
@@ -141,16 +124,13 @@ PointLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 	
-	if(this.obj !== null)
-	{
-		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-		this.distance.setValue(this.obj.distance);
-		this.intensity.setValue(this.obj.intensity);
+	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
+	this.distance.setValue(this.obj.distance);
+	this.intensity.setValue(this.obj.intensity);
 
-		this.castShadow.setValue(this.obj.castShadow);
-		this.shadowWidth.setValue(this.obj.shadow.mapSize.width);
-		this.shadowHeight.setValue(this.obj.shadow.mapSize.height);
-		this.shadowNear.setValue(this.obj.shadow.camera.near);
-		this.shadowFar.setValue(this.obj.shadow.camera.far);
-	}
+	this.castShadow.setValue(this.obj.castShadow);
+	this.shadowWidth.setValue(this.obj.shadow.mapSize.width);
+	this.shadowHeight.setValue(this.obj.shadow.mapSize.height);
+	this.shadowNear.setValue(this.obj.shadow.camera.near);
+	this.shadowFar.setValue(this.obj.shadow.camera.far);
 };

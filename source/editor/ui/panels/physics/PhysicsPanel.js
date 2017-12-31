@@ -146,8 +146,6 @@ function PhysicsPanel(parent, obj)
 	this.form.add(this.collisionFilterGroup);
 	this.form.nextRow();
 
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes

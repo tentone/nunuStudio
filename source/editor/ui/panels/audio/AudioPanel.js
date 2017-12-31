@@ -22,10 +22,7 @@ function AudioPanel(parent, obj)
 	this.volume.setStep(0.01);
 	this.volume.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "volume", self.volume.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "volume", self.volume.getValue()));
 	});
 	this.form.add(this.volume);
 	this.form.nextRow();
@@ -38,10 +35,7 @@ function AudioPanel(parent, obj)
 	this.playbackRate.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.playbackRate.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "playbackRate", self.playbackRate.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "playbackRate", self.playbackRate.getValue()));
 	});
 	this.form.add(this.playbackRate);
 	this.form.nextRow();
@@ -52,10 +46,7 @@ function AudioPanel(parent, obj)
 	this.autoplay.size.set(15, 15);
 	this.autoplay.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "autoplay", self.autoplay.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "autoplay", self.autoplay.getValue()));
 	});
 	this.form.add(this.autoplay);
 	this.form.nextRow();
@@ -66,16 +57,10 @@ function AudioPanel(parent, obj)
 	this.loop.size.set(15, 15);
 	this.loop.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "loop", self.loop.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "loop", self.loop.getValue()));
 	});
 	this.form.add(this.loop);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes
@@ -97,13 +82,10 @@ AudioPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 
-	if(this.obj !== null)
-	{
-		this.player.setAudioBuffer(this.obj.audio.data);
-		this.volume.setValue(this.obj.volume);
-		this.static.setValue(!this.obj.matrixAutoUpdate);
-		this.autoplay.setValue(this.obj.autoplay);
-		this.loop.setValue(this.obj.loop);
-		this.playbackRate.setValue(this.obj.playbackRate);
-	}
+	this.player.setAudioBuffer(this.obj.audio.data);
+	this.volume.setValue(this.obj.volume);
+	this.static.setValue(!this.obj.matrixAutoUpdate);
+	this.autoplay.setValue(this.obj.autoplay);
+	this.loop.setValue(this.obj.loop);
+	this.playbackRate.setValue(this.obj.playbackRate);
 };

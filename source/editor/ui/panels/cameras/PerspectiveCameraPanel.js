@@ -18,11 +18,8 @@ function PerspectiveCameraPanel(parent, obj)
 	this.fov.setRange(30, 160);
 	this.fov.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "fov", self.fov.getValue()));
-			self.obj.updateProjectionMatrix();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "fov", self.fov.getValue()));
+		self.obj.updateProjectionMatrix();
 	});
 	this.form.add(this.fov);
 	this.form.nextRow();
@@ -60,10 +57,7 @@ function PerspectiveCameraPanel(parent, obj)
 	this.near.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.near.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "near", self.near.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "near", self.near.getValue()));
 	});
 	this.form.add(this.near);
 	this.form.nextRow();
@@ -75,10 +69,7 @@ function PerspectiveCameraPanel(parent, obj)
 	this.far.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.far.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "far", self.far.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "far", self.far.getValue()));
 	});
 	this.form.add(this.far);
 	this.form.nextRow();
@@ -94,11 +85,13 @@ function PerspectiveCameraPanel(parent, obj)
 	this.offset.setStep(0.05);
 	this.offset.size.set(160, 20);
 	this.offset.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.offset.copy(self.offset.getValue());
-		}
+	{	
+		var value = self.offset.getValue();
+		Editor.history.add(new ActionBundle(
+		[
+			new ChangeAction(self.obj.offset, "x", value.x),
+			new ChangeAction(self.obj.offset, "y", value.y)
+		]));
 	});
 	this.form.add(this.offset);
 	this.form.nextRow();
@@ -111,10 +104,12 @@ function PerspectiveCameraPanel(parent, obj)
 	this.viewport.size.set(160, 20);
 	this.viewport.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.viewport.copy(self.viewport.getValue());
-		}
+		var value = self.viewport.getValue();
+		Editor.history.add(new ActionBundle(
+		[
+			new ChangeAction(self.obj.viewport, "x", value.x),
+			new ChangeAction(self.obj.viewport, "y", value.y)
+		]));
 	});
 	this.form.add(this.viewport);
 	this.form.nextRow();
@@ -127,11 +122,8 @@ function PerspectiveCameraPanel(parent, obj)
 	this.order.setStep(1);
 	this.order.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "order", self.order.getValue()));
-			self.scene.updateCameraOrder();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "order", self.order.getValue()));
+		self.scene.updateCameraOrder();
 	});
 	this.form.add(this.order);
 	this.form.nextRow();
@@ -142,10 +134,7 @@ function PerspectiveCameraPanel(parent, obj)
 	this.clearColor.size.set(15, 15);
 	this.clearColor.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "clearColor", self.clearColor.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "clearColor", self.clearColor.getValue()));
 	});
 	this.form.add(this.clearColor);
 	this.form.nextRow();
@@ -156,16 +145,10 @@ function PerspectiveCameraPanel(parent, obj)
 	this.clearDepth.size.set(15, 15);
 	this.clearDepth.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "clearDepth", self.clearDepth.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "clearDepth", self.clearDepth.getValue()));
 	});
 	this.form.add(this.clearDepth);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes
@@ -183,16 +166,13 @@ PerspectiveCameraPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 
-	if(this.obj !== null)
-	{
-		this.fov.setValue(this.obj.fov);
-		this.use.setValue(this.scene.cameras.indexOf(this.obj) !== -1);
-		this.near.setValue(this.obj.near);
-		this.far.setValue(this.obj.far);
-		this.offset.setValue(this.obj.offset);
-		this.viewport.setValue(this.obj.viewport);
-		this.order.setValue(this.obj.order);
-		this.clearColor.setValue(this.obj.clearColor);
-		this.clearDepth.setValue(this.obj.clearDepth);
-	}
+	this.fov.setValue(this.obj.fov);
+	this.use.setValue(this.scene.cameras.indexOf(this.obj) !== -1);
+	this.near.setValue(this.obj.near);
+	this.far.setValue(this.obj.far);
+	this.offset.setValue(this.obj.offset);
+	this.viewport.setValue(this.obj.viewport);
+	this.order.setValue(this.obj.order);
+	this.clearColor.setValue(this.obj.clearColor);
+	this.clearDepth.setValue(this.obj.clearDepth);
 };

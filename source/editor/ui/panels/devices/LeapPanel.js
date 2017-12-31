@@ -15,10 +15,7 @@ function LeapPanel(parent, obj)
 	this.mode.addValue("HMD", Script.LOOP);
 	this.mode.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "mode", self.mode.getSelectedIndex()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "mode", self.mode.getSelectedIndex()));
 	});
 	this.form.add(this.mode);
 	this.form.nextRow();
@@ -29,10 +26,7 @@ function LeapPanel(parent, obj)
 	this.debugModel.size.set(15, 15);
 	this.debugModel.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
 	});
 	this.form.add(this.debugModel);
 	this.form.nextRow();
@@ -43,10 +37,7 @@ function LeapPanel(parent, obj)
 	this.gesturesEnabled.size.set(15, 15);
 	this.gesturesEnabled.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "gesturesEnabled", self.gesturesEnabled.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "gesturesEnabled", self.gesturesEnabled.getValue()));
 	});
 	this.form.add(this.gesturesEnabled);
 	this.form.nextRow();
@@ -57,15 +48,9 @@ function LeapPanel(parent, obj)
 	this.posesEnabled.size.set(15, 15);
 	this.posesEnabled.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "posesEnabled", self.posesEnabled.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "posesEnabled", self.posesEnabled.getValue()));
 	});
 	this.form.add(this.posesEnabled);
-
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes
@@ -75,12 +60,9 @@ LeapPanel.prototype = Object.create(Panel.prototype);
 LeapPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
-	
-	if(this.obj !== null)
-	{
-		this.mode.setSelectedIndex(this.obj.mode);
-		this.debugModel.setValue(this.obj.debugModel);
-		this.gesturesEnabled.setValue(this.obj.gesturesEnabled);
-		this.posesEnabled.setValue(this.obj.posesEnabled);
-	}
+
+	this.mode.setSelectedIndex(this.obj.mode);
+	this.debugModel.setValue(this.obj.debugModel);
+	this.gesturesEnabled.setValue(this.obj.gesturesEnabled);
+	this.posesEnabled.setValue(this.obj.posesEnabled);
 };

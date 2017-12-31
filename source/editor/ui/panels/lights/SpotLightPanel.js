@@ -28,11 +28,8 @@ function SpotLightPanel(parent, obj)
 	this.penumbra.updateInterface();
 	this.penumbra.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "penumbra", self.penumbra.getValue()));
-			self.penumbraText.setText(self.obj.penumbra);
-		}
+		Editor.history.add(new ChangeAction(self.obj, "penumbra", self.penumbra.getValue()));
+		self.penumbraText.setText(self.obj.penumbra);
 	});
 	this.form.add(this.penumbra);
 	this.form.nextRow();
@@ -45,11 +42,8 @@ function SpotLightPanel(parent, obj)
 	this.angle.setStep(0.01);
 	this.angle.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "angle", self.angle.getValue()));
-			self.angleText.setText(self.obj.angle);
-		}
+		Editor.history.add(new ChangeAction(self.obj, "angle", self.angle.getValue()));
+		self.angleText.setText(self.obj.angle);
 	});
 	this.form.add(this.angle);
 	this.form.nextRow();
@@ -66,10 +60,7 @@ function SpotLightPanel(parent, obj)
 	this.castShadow.updateInterface();
 	this.castShadow.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();
@@ -80,11 +71,8 @@ function SpotLightPanel(parent, obj)
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "width", self.shadowWidth.getValue()));
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "width", self.shadowWidth.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowWidth);
 	this.form.addText("x", true);
@@ -92,11 +80,8 @@ function SpotLightPanel(parent, obj)
 	this.shadowHeight.size.set(60, 18);
 	this.shadowHeight.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "height", self.shadowHeight.getValue()));
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "height", self.shadowHeight.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowHeight);
 	this.form.nextRow();
@@ -114,11 +99,8 @@ function SpotLightPanel(parent, obj)
 	this.shadowNear.setStep(0.1);
 	this.shadowNear.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "near", self.shadowNear.getValue()));
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "near", self.shadowNear.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowNear);
 	this.form.nextRow();
@@ -130,17 +112,11 @@ function SpotLightPanel(parent, obj)
 	this.shadowFar.setStep(0.1);
 	this.shadowFar.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "far", self.shadowFar.getValue()));
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "far", self.shadowFar.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowFar);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes
@@ -151,16 +127,13 @@ SpotLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 
-	if(this.obj !== null)
-	{
-		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-		this.angle.setValue(this.obj.angle);
-		this.penumbra.setValue(this.obj.penumbra);
-		
-		this.castShadow.setValue(this.obj.castShadow);
-		this.shadowWidth.setValue(this.obj.shadow.mapSize.width);
-		this.shadowHeight.setValue(this.obj.shadow.mapSize.height);
-		this.shadowNear.setValue(this.obj.shadow.camera.near);
-		this.shadowFar.setValue(this.obj.shadow.camera.far);
-	}
+	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
+	this.angle.setValue(this.obj.angle);
+	this.penumbra.setValue(this.obj.penumbra);
+	
+	this.castShadow.setValue(this.obj.castShadow);
+	this.shadowWidth.setValue(this.obj.shadow.mapSize.width);
+	this.shadowHeight.setValue(this.obj.shadow.mapSize.height);
+	this.shadowNear.setValue(this.obj.shadow.camera.near);
+	this.shadowFar.setValue(this.obj.shadow.camera.far);
 };
