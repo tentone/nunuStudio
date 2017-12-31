@@ -15,10 +15,8 @@ function ScriptPanel(parent, obj)
 	});
 	this.mode.addValue("Evaluate", Script.EVALUATE);
 	this.mode.addValue("Append", Script.APPEND);
-
 	this.form.add(this.mode);
 	this.form.nextRow();
-	this.form.updateInterface();
 }
 
 ScriptPanel.prototype = Object.create(Panel.prototype);
@@ -28,8 +26,5 @@ ScriptPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 	
-	if(this.obj !== null)
-	{
-		this.mode.setValue(this.obj.mode);
-	}
+	this.mode.setValue(this.obj.mode);
 };

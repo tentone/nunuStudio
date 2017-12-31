@@ -173,8 +173,6 @@ function ProgramPanel(parent, obj)
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
 
-	//Update form
-	this.form.updateInterface();
 }
 
 ProgramPanel.prototype = Object.create(Panel.prototype);

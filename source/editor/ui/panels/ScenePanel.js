@@ -212,53 +212,50 @@ ScenePanel.prototype = Object.create(Panel.prototype);
 //Update panel content from attached object
 ScenePanel.prototype.updatePanel = function()
 {
-	if(this.obj !== null)
+	this.default.setValue(this.obj.uuid === this.obj.parent.defaultScene);
+	
+	if(this.obj.fog instanceof THREE.Fog)
 	{
-		this.default.setValue(this.obj.uuid === this.obj.parent.defaultScene);
-		
-		if(this.obj.fog instanceof THREE.Fog)
-		{
-			this.fog.setValue(THREE.Fog.LINEAR);
-			this.fogLinearColor.setValueHex(this.obj.fog.color.getHex());
-			this.fogNear.setValue(this.obj.fog.near);
-			this.fogFar.setValue(this.obj.fog.far);
-			this.updateForms();
-		}
-		else if(this.obj.fog instanceof THREE.FogExp2)
-		{
-			this.fog.setValue(THREE.Fog.EXPONENTIAL);
-			this.fogExponentialColor.setValueHex(this.obj.fog.color.getHex());
-			this.fogDensity.setValue(this.obj.fog.density);
-			this.updateForms();
-		}
-		else
-		{
-			this.fog.setValue(THREE.Fog.NONE);
-			this.updateForms();
-		}
-
-		if(this.obj.background !== null)
-		{
-			if(this.obj.background instanceof THREE.Color)
-			{
-				this.background.setValue(this.obj.background.r, this.obj.background.g, this.obj.background.b);
-			}
-			else if(this.obj.background instanceof THREE.Texture)
-			{
-				this.backgroundTexture.setValue(this.obj.background);
-			}
-		}
-		else
-		{
-			this.background.setValue(0, 0, 0);
-			this.backgroundTexture.setValue(null);
-		}
-
-		this.usePhysics.setValue(this.obj.usePhysics);
-		this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
-		this.tolerance.setValue(this.obj.world.solver.tolerance);
-		this.iterations.setValue(this.obj.world.solver.iterations);
+		this.fog.setValue(THREE.Fog.LINEAR);
+		this.fogLinearColor.setValueHex(this.obj.fog.color.getHex());
+		this.fogNear.setValue(this.obj.fog.near);
+		this.fogFar.setValue(this.obj.fog.far);
+		this.updateForms();
 	}
+	else if(this.obj.fog instanceof THREE.FogExp2)
+	{
+		this.fog.setValue(THREE.Fog.EXPONENTIAL);
+		this.fogExponentialColor.setValueHex(this.obj.fog.color.getHex());
+		this.fogDensity.setValue(this.obj.fog.density);
+		this.updateForms();
+	}
+	else
+	{
+		this.fog.setValue(THREE.Fog.NONE);
+		this.updateForms();
+	}
+
+	if(this.obj.background !== null)
+	{
+		if(this.obj.background instanceof THREE.Color)
+		{
+			this.background.setValue(this.obj.background.r, this.obj.background.g, this.obj.background.b);
+		}
+		else if(this.obj.background instanceof THREE.Texture)
+		{
+			this.backgroundTexture.setValue(this.obj.background);
+		}
+	}
+	else
+	{
+		this.background.setValue(0, 0, 0);
+		this.backgroundTexture.setValue(null);
+	}
+
+	this.usePhysics.setValue(this.obj.usePhysics);
+	this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
+	this.tolerance.setValue(this.obj.world.solver.tolerance);
+	this.iterations.setValue(this.obj.world.solver.iterations);
 };
 
 //Update wich forms should be visible in the panel
@@ -266,12 +263,11 @@ ScenePanel.prototype.updateForms = function()
 {
 	Panel.prototype.updatePanel.call(this);
 	
-	if(this.obj !== null)
-	{
-		this.fogLinearForm.visible = (this.obj.fog instanceof THREE.Fog) ? true : false;
-		this.fogLinearForm.updateInterface();
-		this.fogExponentialForm.visible = (this.obj.fog instanceof THREE.FogExp2) ? true : false;
-		this.fogExponentialForm.updateInterface();
-		this.form.updateInterface();
-	}
+	this.fogLinearForm.visible = (this.obj.fog instanceof THREE.Fog) ? true : false;
+	this.fogLinearForm.updateInterface();
+
+	this.fogExponentialForm.visible = (this.obj.fog instanceof THREE.FogExp2) ? true : false;
+	this.fogExponentialForm.updateInterface();
+
+	this.form.updateInterface();
 };

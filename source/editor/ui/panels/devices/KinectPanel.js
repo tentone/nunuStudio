@@ -13,15 +13,10 @@ function KinectPanel(parent, obj)
 	this.debugModel.size.set(15, 15);
 	this.debugModel.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
 	});
 	this.form.add(this.debugModel);
 
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes
@@ -32,8 +27,5 @@ KinectPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 	
-	if(this.obj !== null)
-	{
-		this.debugModel.setValue(this.obj.debugModel);
-	}
+	this.debugModel.setValue(this.obj.debugModel);
 };

@@ -1144,6 +1144,8 @@ Editor.selectObjectPanel = function()
 			Interface.panel = new ObjectPanel(Interface.explorerResizable.divB, object);
 		}
 
+		Interface.panel.form.updateInterface();
+		
 		Interface.panel.updatePanel();
 		Interface.panel.updateInterface();
 	}

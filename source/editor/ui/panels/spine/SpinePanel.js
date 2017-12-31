@@ -13,10 +13,7 @@ function SpinePanel(parent, obj)
 	this.animation.size.set(100, 18);
 	this.animation.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.setAnimation(0, self.animation.getValue());
-		}
+		self.obj.setAnimation(0, self.animation.getValue());
 	});
 	this.form.add(this.animation);
 	this.form.nextRow();
@@ -27,10 +24,7 @@ function SpinePanel(parent, obj)
 	this.skin.size.set(100, 18);
 	this.skin.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.setSkin(self.skin.getValue());
-		}
+		self.obj.setSkin(self.skin.getValue());
 	});
 	this.form.add(this.skin);
 	this.form.nextRow();
@@ -41,10 +35,7 @@ function SpinePanel(parent, obj)
 	this.castShadow.size.set(15, 15);
 	this.castShadow.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();
@@ -55,16 +46,10 @@ function SpinePanel(parent, obj)
 	this.receiveShadow.size.set(15, 15);
 	this.receiveShadow.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
 	});
 	this.form.add(this.receiveShadow);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 SpinePanel.prototype = Object.create(Panel.prototype);
@@ -73,27 +58,24 @@ SpinePanel.prototype = Object.create(Panel.prototype);
 SpinePanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
-	
-	if(this.obj !== null)
-	{	
-		this.animation.clearValues();
-		this.skin.clearValues();
 		
-		var animations = this.obj.getAnimations();
-		for(var i = 0; i < animations.length; i++)
-		{
-			this.animation.addValue(animations[i].name, animations[i].name);
-		}
-
-		var skins = this.obj.getSkins();
-		for(var i = 0; i < skins.length; i++)
-		{
-			this.skin.addValue(skins[i].name, skins[i].name);
-		}
-
-		this.animation.setValue(this.obj.animation);
-		this.skin.setValue(this.obj.skin);
-		this.castShadow.setValue(this.obj.castShadow);
-		this.receiveShadow.setValue(this.obj.receiveShadow);
+	this.animation.clearValues();
+	this.skin.clearValues();
+	
+	var animations = this.obj.getAnimations();
+	for(var i = 0; i < animations.length; i++)
+	{
+		this.animation.addValue(animations[i].name, animations[i].name);
 	}
+
+	var skins = this.obj.getSkins();
+	for(var i = 0; i < skins.length; i++)
+	{
+		this.skin.addValue(skins[i].name, skins[i].name);
+	}
+
+	this.animation.setValue(this.obj.animation);
+	this.skin.setValue(this.obj.skin);
+	this.castShadow.setValue(this.obj.castShadow);
+	this.receiveShadow.setValue(this.obj.receiveShadow);
 };

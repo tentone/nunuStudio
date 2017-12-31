@@ -22,7 +22,7 @@ function AnimationMixer(root)
 
 AnimationMixer.prototype = Object.create(THREE.AnimationMixer.prototype);
 
-AnimationMixer.prototype.createActions = function(animations)
+AnimationMixer.prototype.createActions = function(animations, loop)
 {
 	for(var i = 0; i < animations.length; i++)
 	{

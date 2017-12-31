@@ -101,8 +101,6 @@ function Text3DPanel(parent, obj)
 	this.form.add(this.bevelSize);
 	this.form.nextRow();
 
-	//Update form
-	this.form.updateInterface();
 }
 
 //Super prototypes

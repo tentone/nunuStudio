@@ -37,8 +37,6 @@ function CubeCameraPanel(parent, obj)
 		this.resolution.addValue(size.toString(), size);
 	}
 
-	//Update form
-	this.form.updateInterface();
 }
 
 CubeCameraPanel.prototype = Object.create(Panel.prototype);

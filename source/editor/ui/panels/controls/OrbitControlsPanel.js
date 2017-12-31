@@ -159,8 +159,6 @@ function OrbitControlsPanel(parent, obj)
 	this.form.add(this.zoomSensitivity);
 	this.form.nextRow();
 
-	//Update form
-	this.form.updateInterface();
 }
 
 OrbitControlsPanel.prototype = Object.create(Panel.prototype);

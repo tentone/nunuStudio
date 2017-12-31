@@ -13,16 +13,10 @@ function AmbientLightPanel(parent, obj)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 AmbientLightPanel.prototype = Object.create(Panel.prototype);
@@ -32,8 +26,5 @@ AmbientLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 	
-	if(this.obj !== null)
-	{
-		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-	}
+	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 };
