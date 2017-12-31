@@ -30,6 +30,8 @@ TreeView.prototype.attachObject = function(program)
 
 TreeView.prototype.updateView = function()
 {
+	//var time = performance.now();
+	
 	//Remove old elements
 	var children = this.children;
 	for(var i = 0; i < children.length; i++)
@@ -41,7 +43,11 @@ TreeView.prototype.updateView = function()
 
 	//Add element and update interface
 	TreeView.addSceneElement(this, this.program);
+
 	this.updateChildPosition();
+
+	//var delta = performance.now() - time;
+	//console.log("Treeview update time: " + delta);
 };
 
 //Update which object is currently selected

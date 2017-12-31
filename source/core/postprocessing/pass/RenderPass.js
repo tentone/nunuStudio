@@ -13,7 +13,7 @@ function RenderPass()
 
 	this.type = "Render";
 	this.needsSwap = false;
-	this.clear = true;
+	this.clear = false;
 }
 
 RenderPass.prototype = Object.create(Pass.prototype);
@@ -29,5 +29,3 @@ RenderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 		renderer.render(scene, camera, readBuffer, this.clear);
 	}
 };
-
-
