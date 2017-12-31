@@ -30,9 +30,6 @@ TabElement.prototype = Object.create(Element.prototype);
 //Update tab metadata
 TabElement.prototype.updateMetadata = Element.EMPTY;
 
-//Called after the selected object have changed
-TabElement.prototype.updateSelectedObject = Element.EMPTY;
-
 //Activate tab
 TabElement.prototype.activate = function()
 {

@@ -331,7 +331,7 @@ function TreeElement(container)
 					});
 
 					Editor.history.add(new ObjectAddedAction(obj, self.obj.parent));
-					Editor.updateTreeView();
+					Interface.treeView.updateView();
 				});
 
 				//Copy object

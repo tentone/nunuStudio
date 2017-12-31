@@ -962,86 +962,21 @@ Editor.undo = function()
 //Update all object views
 Editor.updateObjectViews = function()
 {
-	Editor.updateTreeView();
-	Editor.updateObjectPanel();
-	Editor.updateTabsData();
-	Editor.updateAssetExplorer();
-};
-
-//Update tab names to match objects actual info
-Editor.updateTabsData = function()
-{
-	Interface.tab.updateMetadata();
-};
-
-//Update tree view to match actual scene
-Editor.updateTreeView = function()
-{
+	//Update tree view to match actual scene
 	Interface.treeView.attachObject(Editor.program);
 	Interface.treeView.updateView();
-};
-
-//Update assets explorer content
-Editor.updateAssetExplorer = function()
-{
-	//Clean asset explorer
-	Interface.assetExplorer.clear();
-	
-	//Materials
-	var materials = ObjectUtils.getMaterials(Editor.program, Editor.program.materials);
-	for(var i in materials)
-	{
-		var file = new MaterialAsset(Interface.assetExplorer.assets);
-		file.setMaterial(materials[i]);
-		Interface.assetExplorer.add(file);
-	}
-
-	//Textures
-	var textures = ObjectUtils.getTextures(Editor.program, Editor.program.textures);
-	for(var i in textures)
-	{
-		var file = new TextureAsset(Interface.assetExplorer.assets);
-		file.setTexture(textures[i]);
-		Interface.assetExplorer.add(file);
-	}
-
-	//Fonts
-	var fonts = ObjectUtils.getFonts(Editor.program, Editor.program.fonts);
-	for(var i in fonts)
-	{
-		var file = new FontAsset(Interface.assetExplorer.assets);
-		file.setFont(fonts[i]);
-		Interface.assetExplorer.add(file);
-	}
-
-	//Audio
-	var audio = ObjectUtils.getAudio(Editor.program, Editor.program.audio);
-	for(var i in audio)
-	{
-		var file = new AudioAsset(Interface.assetExplorer.assets);
-		file.setAudio(audio[i]);
-		Interface.assetExplorer.add(file);
-	}
-
-	//Resources
-	var resources = Editor.program.resources;
-	for(var i in resources)
-	{
-		var file = new FileAsset(Interface.assetExplorer.assets);
-		file.setFile(resources[i]);
-		Interface.assetExplorer.add(file);
-	}
-
-	Interface.assetExplorer.updateInterface();
-};
-
-//Updates object panel values
-Editor.updateObjectPanel = function()
-{
+		
+	//Update panel
 	if(Interface.panel !== null)
 	{
 		Interface.panel.updatePanel();
 	}
+
+	//Update tab names
+	Interface.tab.updateMetadata();
+	
+	//Update asset explorer
+	Interface.assetExplorer.refresh();
 };
 
 //Create default resouces to be used when creating new objects
@@ -1082,7 +1017,7 @@ Editor.selectTool = function(tool)
 	}
 };
 
-//Select objecct helper
+//Select object helper
 Editor.selectObjectHelper = function(tool)
 {
 	var tab = Interface.tab.getActual();

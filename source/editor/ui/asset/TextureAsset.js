@@ -198,7 +198,7 @@ function TextureAsset(parent)
 					
 					//Add
 					Editor.program.addTexture(texture);
-					Editor.updateAssetExplorer();
+					Interface.assetExplorer.refresh();
 				}
 				catch(e)
 				{

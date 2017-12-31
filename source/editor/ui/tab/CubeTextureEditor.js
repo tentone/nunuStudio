@@ -194,7 +194,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.image.getValue());
 			self.texture.images[0] = image;
 			self.texture.updateImages();
-			Editor.updateAssetExplorer();
+			Interface.assetExplorer.refresh();
 		}
 	});
 	this.image.updateInterface();
@@ -213,7 +213,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.top.getValue());
 			self.texture.images[CubeTexture.TOP] = image;
 			self.texture.updateImages();
-			Editor.updateAssetExplorer();
+			Interface.assetExplorer.refresh();
 		}
 	});
 	this.cube.push(this.top);
@@ -229,7 +229,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.left.getValue());
 			self.texture.images[CubeTexture.LEFT] = image;
 			self.texture.updateImages();
-			Editor.updateAssetExplorer();
+			Interface.assetExplorer.refresh();
 		}
 	});
 	this.cube.push(this.left);
@@ -245,7 +245,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.front.getValue());
 			self.texture.images[CubeTexture.FRONT] = image;
 			self.texture.updateImages();
-			Editor.updateAssetExplorer();
+			Interface.assetExplorer.refresh();
 		}
 	});
 	this.cube.push(this.front);
@@ -261,7 +261,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.right.getValue());
 			self.texture.images[CubeTexture.RIGHT] = image;
 			self.texture.updateImages();
-			Editor.updateAssetExplorer();
+			Interface.assetExplorer.refresh();
 		}
 	});
 	this.cube.push(this.right);
@@ -277,7 +277,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.back.getValue());
 			self.texture.images[CubeTexture.BACK] = image;
 			self.texture.updateImages();
-			Editor.updateAssetExplorer();
+			Interface.assetExplorer.refresh();
 		}
 	});
 	this.cube.push(this.back);
@@ -293,7 +293,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.bottom.getValue());
 			self.texture.images[CubeTexture.BOTTOM] = image;
 			self.texture.updateImages();
-			Editor.updateAssetExplorer();
+			Interface.assetExplorer.refresh();
 		}
 	});
 	this.cube.push(this.bottom);

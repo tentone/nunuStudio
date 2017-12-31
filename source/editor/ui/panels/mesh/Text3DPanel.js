@@ -2,38 +2,10 @@
 
 function Text3DPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
-	
-	//Cast shadow
-	this.castShadow = new CheckBox(this.form.element);
-	this.form.addText("Cast Shadow");
-	this.castShadow.size.set(15, 15);
-	this.castShadow.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
-		}
-	});
-	this.form.add(this.castShadow);
-	this.form.nextRow();
-
-	//Receive shadow
-	this.receiveShadow = new CheckBox(this.form.element);
-	this.form.addText("React Shadow");
-	this.receiveShadow.size.set(15, 15);
-	this.receiveShadow.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
-		}
-	});
-	this.form.add(this.receiveShadow);
-	this.form.nextRow();
 
 	//Text
 	this.form.addText("Text");
@@ -41,10 +13,8 @@ function Text3DPanel(parent, obj)
 	this.text.size.set(190, 60);
 	this.text.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.setText(self.text.getText());
-		}
+		Editor.history.add(new ChangeAction(self.obj, "text", self.text.getText()));
+		self.obj.setText();
 	});
 	this.form.add(this.text);
 	this.form.nextRow();
@@ -57,11 +27,8 @@ function Text3DPanel(parent, obj)
 	this.size.setStep(0.1);
 	this.size.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "size", self.size.getValue()));
-			self.obj.setText();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "size", self.size.getValue()));
+		self.obj.setText();
 	});
 	this.form.add(this.size);
 	this.form.nextRow();
@@ -74,11 +41,8 @@ function Text3DPanel(parent, obj)
 	this.height.setStep(0.1);
 	this.height.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "height", self.height.getValue()));
-			self.obj.setText();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "height", self.height.getValue()));
+		self.obj.setText();
 	});
 	this.form.add(this.height);
 	this.form.nextRow();
@@ -91,11 +55,8 @@ function Text3DPanel(parent, obj)
 	this.curveSegments.setStep(1.0);
 	this.curveSegments.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "curveSegments", self.curveSegments.getValue()));
-			self.obj.setText();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "curveSegments", self.curveSegments.getValue()));
+		self.obj.setText();
 	});
 	this.form.add(this.curveSegments);
 	this.form.nextRow();
@@ -106,11 +67,8 @@ function Text3DPanel(parent, obj)
 	this.bevel.size.set(15, 15);
 	this.bevel.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "bevel", self.bevel.getValue()));
-			self.obj.setText();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "bevel", self.bevel.getValue()));
+		self.obj.setText();
 	});
 	this.form.add(this.bevel);
 	this.form.nextRow();
@@ -123,11 +81,8 @@ function Text3DPanel(parent, obj)
 	this.bevelThickness.setStep(0.1);
 	this.bevelThickness.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "bevelThickness", self.bevelThickness.getValue()));
-			self.obj.setText();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "bevelThickness", self.bevelThickness.getValue()));
+		self.obj.setText();
 	});
 	this.form.add(this.bevelThickness);
 	this.form.nextRow();
@@ -140,11 +95,8 @@ function Text3DPanel(parent, obj)
 	this.bevelSize.setStep(0.1);
 	this.bevelSize.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "bevelSize", self.bevelSize.getValue()));
-			self.obj.setText();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "bevelSize", self.bevelSize.getValue()));
+		self.obj.setText();
 	});
 	this.form.add(this.bevelSize);
 	this.form.nextRow();
@@ -154,23 +106,20 @@ function Text3DPanel(parent, obj)
 }
 
 //Super prototypes
-Text3DPanel.prototype = Object.create(Panel.prototype);
+Text3DPanel.prototype = Object.create(ObjectPanel.prototype);
 
 //Update panel content from attached object
 Text3DPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
-	if(this.obj !== null)
-	{
-		this.castShadow.setValue(this.obj.castShadow);
-		this.receiveShadow.setValue(this.obj.receiveShadow);
-		this.text.setText(this.obj.text);
-		this.size.setValue(this.obj.size);
-		this.height.setValue(this.obj.height);
-		this.curveSegments.setValue(this.obj.curveSegments);
-		this.bevel.setValue(this.obj.bevel);
-		this.bevelThickness.setValue(this.obj.bevelThickness);
-		this.bevelSize.setValue(this.obj.bevelSize);
-	}
+	this.castShadow.setValue(this.obj.castShadow);
+	this.receiveShadow.setValue(this.obj.receiveShadow);
+	this.text.setText(this.obj.text);
+	this.size.setValue(this.obj.size);
+	this.height.setValue(this.obj.height);
+	this.curveSegments.setValue(this.obj.curveSegments);
+	this.bevel.setValue(this.obj.bevel);
+	this.bevelThickness.setValue(this.obj.bevelThickness);
+	this.bevelSize.setValue(this.obj.bevelSize);
 };
