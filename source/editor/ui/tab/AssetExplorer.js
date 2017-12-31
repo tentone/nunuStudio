@@ -374,6 +374,11 @@ function AssetExplorer(parent, closeable, container, index)
 
 AssetExplorer.prototype = Object.create(TabElement.prototype);
 
+AssetExplorer.prototype.updateSelectedObject = function()
+{
+
+};
+
 //Remove all files
 AssetExplorer.prototype.clear = function()
 {
