@@ -111,9 +111,19 @@ function AnimationTab(parent, closeable, container, index)
 		self.mixer.stop();
 	});
 
+	this.keyframe = new Button(this.bar);
+	this.keyframe.position.set(300, 0);
+	this.keyframe.size.set(100, 20);
+	this.keyframe.setText("Keyframe");
+	this.keyframe.updateInterface();
+	this.keyframe.setCallback(function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
 	this.zoomSlider = new Slider(this.bar);
 	this.zoomSlider.size.set(150, 10);
-	this.zoomSlider.position.set(300, 0);
+	this.zoomSlider.position.set(400, 0);
 	this.zoomSlider.setStep(10);
 	this.zoomSlider.setRange(50, 1000);
 	this.zoomSlider.updateInterface();
@@ -135,7 +145,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.info = document.createElement("div");
 	this.info.style.position = "absolute";
 	this.info.style.width = "150px";
-	this.info.style.backgroundColor = Editor.theme.panelColor;
+	this.info.style.backgroundColor = Editor.theme.barColor;
 	this.timeline.appendChild(this.info);
 
 	//Resize tab
@@ -160,14 +170,13 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek.style.position = "absolute";
 	this.seek.style.backgroundColor = "#FFFFFF";
 	this.seek.style.zIndex = "100";
-	this.seek.style.width = "3px";
-	this.seek.style.overflow = "hidden";
 	this.seek.style.top = "0px";
 	this.seek.style.left = "0px";
+	this.seek.style.width = "3px";
+	this.seek.style.overflow = "hidden";
 	this.seek.style.cursor = "e-resize";
 	this.tracks.appendChild(this.seek);
 
-	this.seeking = false;
 	this.seekInitialTime = 0;
 	this.mouse = new THREE.Vector2();
 
@@ -175,7 +184,6 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(self.mixer !== null)
 		{
-			self.seeking = true;
 			self.seekInitialTime = self.mixer._actions[0].time;
 			self.mouse.set(event.clientX, event.clientY);
 			self.manager.create();
@@ -185,14 +193,12 @@ function AnimationTab(parent, closeable, container, index)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		if(self.seeking)
-		{
-			self.mixer.setTime(self.seekInitialTime + (event.clientX - self.mouse.x) / self.zoom);
-		}
+		var time = self.seekInitialTime + (event.clientX - self.mouse.x) / self.zoom;
+		self.mixer.setTime(time > 0 ? time : 0);
 	});
+
 	this.manager.add(window, "mouseup", function(event)
 	{
-		self.seeking = false;
 		self.manager.destroy();
 	});
 }
@@ -233,7 +239,7 @@ AnimationTab.prototype.updateTimeline = function()
 	var object = Editor.selectedObjects[0];
 	var animations = object.animations;			
 
-	var trackCount = 0, duration = 0;
+	var duration = 0;
 	var y = 0;
 
 	//Animations
@@ -242,19 +248,17 @@ AnimationTab.prototype.updateTimeline = function()
 		var tracks = animations[i].tracks;
 
 		var name = document.createElement("div");
-		name.style.height = this.timelineHeight + "px";
-		name.style.backgroundColor = "#222222";
+		name.style.height = "20px";
 		name.innerHTML = animations[i].name;
 		this.info.appendChild(name);
 
-		console.log(animations[i]);
-
 		var block = document.createElement("div");
-		block.style.height = this.timelineHeight + "px";
-		block.innerHTML = animations[i].name;
+		block.style.height = "20px";
+		block.style.backgroundColor = Editor.theme.barColor;
+		block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s";
 		this.tracks.appendChild(block);
 
-		y += this.timelineHeight;
+		y += 20;
 
 		//Tracks
 		for(var j = 0; j < tracks.length; j++)
@@ -263,8 +267,6 @@ AnimationTab.prototype.updateTimeline = function()
 
 			var name = document.createElement("div");
 			name.style.height = this.timelineHeight + "px";
-
-			name.style.backgroundColor = "#222222";
 			name.innerHTML = tracks[j].name;
 			this.info.appendChild(name);
 
@@ -276,20 +278,32 @@ AnimationTab.prototype.updateTimeline = function()
 
 			var color = MathUtils.randomColor();
 
-			//Keyframes
+			for(var k = 0; k < times.length; k++)
+			{
+				var key = document.createElement("div");
+				key.style.position = "absolute";
+				key.style.cursor = "pointer";
+				key.style.backgroundColor =  color;
+				key.style.height = this.timelineHeight + "px";
+				key.style.left = (this.zoom * times[k] - 2) + "px";
+				key.style.width = "5px";
+				track.appendChild(key);
+			}
+
+			/*
+			//Keyframes bar
 			for(var k = 0; k < times.length - 1; k++)
 			{
 				var key = document.createElement("div");
 				key.style.position = "absolute";
 				key.style.cursor = "pointer";
-				key.style.backgroundColor = color;
-				key.style.width = "3px";
+				key.style.backgroundColor =  MathUtils.randomColor();//color;
 				key.style.height = this.timelineHeight + "px";
-				key.style.left = (this.zoom * times[k] - 1) + "px";
+				key.style.left = (this.zoom * times[k]) + "px";
+				key.style.width = (this.zoom * (times[k + 1] - times[k])) + "px";
 				track.appendChild(key);
 			}
-
-			trackCount++;
+			*/
 		}
 
 		if(animations[i].duration > duration)
@@ -298,19 +312,20 @@ AnimationTab.prototype.updateTimeline = function()
 		}
 	}
 
-	//Dray timeline canvas
-	/*var width = this.zoom * duration;
-	var height = this.timelineHeight * trackCount;
+	//Draw timeline canvas
+	var width = this.zoom * duration;
+	var height = y;
 
 	var timescale = document.createElement("canvas");
 	timescale.style.position = "absolute";
-	timescale.style.top = this.timelineHeight + "px";
+	timescale.style.zIndex = "-1000";
+	timescale.style.top = "0px";
 	timescale.style.left = "0px";
 	timescale.style.width = width + "px";
 	timescale.style.height = height + "px";
 	timescale.width = width;
 	timescale.height = height;
-	animation.appendChild(timescale);
+	this.tracks.appendChild(timescale);
 
 	var context = timescale.getContext("2d");
 	context.fillStyle = "#444444";
@@ -322,15 +337,15 @@ AnimationTab.prototype.updateTimeline = function()
 	}
 
 	//Vertical lines
-	for(var i = 0; i <= width; i += this.zoom)
+	/*for(var i = 0; i <= width; i += this.zoom)
 	{
 		context.fillRect(i - 1, 0, 3, height);
-	}
+	}*/
 
 	for(var i = 0, step = this.zoom / 5; i <= width; i += step)
 	{
 		context.fillRect(i, 0, 1, height);
-	}*/
+	}
 };
 
 AnimationTab.prototype.updateInterface = function()
