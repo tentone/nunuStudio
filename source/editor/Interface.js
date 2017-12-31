@@ -36,6 +36,10 @@ Interface.initialize = function()
 	Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
 	Interface.animation.button.setAltText("Animation");
 	
+	//Profiling
+	Interface.profiling = Interface.bottomTab.addTab(ProfilingTab, false);
+	Interface.profiling.button.setAltText("Profiling");
+
 	//Explorer
 	Interface.explorer = new DivisionResizable();
 	Interface.explorer.size.x = 300;
