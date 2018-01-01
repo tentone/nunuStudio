@@ -231,7 +231,7 @@ AnimationTab.prototype.attach = function(object)
 	this.updateTimeline();
 };
 
-AnimationTab.prototype.updateMixer = function()
+AnimationTab.prototype.updateAnimationMixer = function()
 {
 	if(this.mixer !== null)
 	{
@@ -329,7 +329,73 @@ AnimationTab.prototype.updateTimeline = function()
 			name.style.whiteSpace = "nowrap";
 			name.style.overflow = "hidden";
 			name.innerHTML = tracks[j].name;
+			name.track = tracks[j];
 			this.info.appendChild(name);
+
+			name.oncontextmenu = function(event)
+			{
+				var track = this.track;
+
+				var context = new ContextMenu();
+				context.size.set(150, 20);
+				context.position.set(event.clientX, event.clientY);
+				
+				context.addOption("Delete", function()
+				{
+					if(!Editor.confirm("Delete track?"))
+					{
+						return;
+					}
+
+					//TODO <DELETE TRACK CODE>
+					
+					self.updateTimeline();
+					self.updateAnimationMixer();
+				});
+
+				context.addOption("Optimize", function()
+				{
+					track.optimize();
+
+					self.updateTimeline();
+					self.updateAnimationMixer();
+				});
+
+				context.addOption("Shift", function()
+				{
+					var time = Number.parseFloat(prompt("Time to shift track"));
+
+					if(isNaN(time))
+					{
+						alert("Invalid time value");
+						return;
+					}
+
+					track.shift(time);
+
+					self.updateTimeline();
+					self.updateAnimationMixer();
+				});
+				
+				context.addOption("Trim", function()
+				{
+					var start = Number.parseFloat(prompt("Start time"));
+					var end = Number.parseFloat(prompt("End time"));
+
+					if(isNaN(start) || isNaN(end))
+					{
+						alert("Invalid time value");
+						return;
+					}
+
+					track.trim(start, time);
+
+					self.updateTimeline();
+					self.updateAnimationMixer();
+				});
+
+				context.updateInterface();
+			};
 
 			var track = document.createElement("div");
 			track.style.height = this.timelineHeight + "px";
@@ -352,6 +418,7 @@ AnimationTab.prototype.updateTimeline = function()
 				key.track = tracks[j];
 				track.appendChild(key);
 
+				//Keyframe context menu
 				key.oncontextmenu = function(event)
 				{
 					var index = this.index;
@@ -363,6 +430,11 @@ AnimationTab.prototype.updateTimeline = function()
 					
 					context.addOption("Delete", function()
 					{
+						if(!Editor.confirm("Delete keyframe?"))
+						{
+							return;
+						}
+
 						var times = [];
 						for(var i = 0; i < track.times.length; i++)
 						{
@@ -373,7 +445,7 @@ AnimationTab.prototype.updateTimeline = function()
 						}
 
 						var values = [];
-						var valueSize = track.values.length / track.times.length;
+						var valueSize = track.getValueSize();
 						var min = index * valueSize;
 						var max = min + valueSize - 1;
 
@@ -389,13 +461,49 @@ AnimationTab.prototype.updateTimeline = function()
 						track.values = new Float32Array(values);
 
 						self.updateTimeline();
-						self.updateMixer();
+						self.updateAnimationMixer();
 					});
 
 					context.addOption("Move", function()
 					{
-						//Insert new time
+						var time = Number.parseFloat(prompt("Keyframe time"));
 
+						if(isNaN(time))
+						{
+							alert("Invalid time value!");
+							return;
+						}
+
+						track.times[index] = time;
+
+						//Sort keyframe track values
+						for(var i = 0; i < track.times.length; i++)
+						{
+							for(var j = i + 1; j < track.times.length; j++)
+							{
+								if(track.times[j] < track.times[i])
+								{
+									var temp = track.times[j];
+									track.times[j] = track.times[i];
+									track.times[i] = temp;
+
+									var valueSize = track.getValueSize();
+
+									var jj = j * valueSize;
+									var ii = i * valueSize;
+
+									for(var k = 0; k < valueSize; k++)
+									{
+										var temp = track.values[jj + k];
+										track.values[jj + k] = track.values[ii + k];
+										track.values[ii + k] = temp;
+									}
+								}
+							}
+						}
+
+						self.updateTimeline();
+						self.updateAnimationMixer();
 					});
 
 					context.updateInterface();
