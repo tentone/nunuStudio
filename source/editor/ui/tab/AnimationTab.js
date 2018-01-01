@@ -180,6 +180,8 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		var time = self.seekInitialTime + (event.clientX - self.mouse.x) / self.zoom;
 		self.mixer.setTime(time > 0 ? time : 0);
+		
+		Interface.panel.updatePanel();
 	});
 
 	this.manager.add(window, "mouseup", function(event)
@@ -281,18 +283,13 @@ AnimationTab.prototype.updateTimeline = function()
 	this.tracks.appendChild(timescale);
 
 	//Context menu
-	var onContextMenu = function(event)
+	var keyContextMenu = function(event)
 	{
 		var context = new ContextMenu();
 		context.size.set(150, 20);
 		context.position.set(event.clientX, event.clientY);
 		
 		context.addOption("Delete", function()
-		{
-
-		});
-
-		context.addOption("Copy", function()
 		{
 
 		});
@@ -346,7 +343,7 @@ AnimationTab.prototype.updateTimeline = function()
 			for(var k = 0; k < times.length; k++)
 			{
 				var key = document.createElement("div");
-				key.oncontextmenu = onContextMenu;
+				key.oncontextmenu = keyContextMenu;
 				key.style.position = "absolute";
 				key.style.cursor = "pointer";
 				key.style.backgroundColor =  color;
