@@ -231,6 +231,19 @@ AnimationTab.prototype.attach = function(object)
 	this.updateTimeline();
 };
 
+AnimationTab.prototype.updateMixer = function()
+{
+	if(this.mixer !== null)
+	{
+		this.play.setText("Play");
+		this.mixer.stop();
+		this.mixer.dispose();
+	}
+
+	this.mixer = new AnimationMixer(this.object);
+	this.mixer.createActions(this.object.animations);
+};
+
 AnimationTab.prototype.update = function()
 {
 	if(this.mixer !== null)
@@ -271,8 +284,9 @@ AnimationTab.prototype.updateTimeline = function()
 
 	this.tracks.appendChild(this.seek);
 
-	var animations = this.object.animations;			
+	var self = this;
 
+	var animations = this.object.animations;
 	var duration = 0;
 	var y = 0;
 
@@ -281,21 +295,6 @@ AnimationTab.prototype.updateTimeline = function()
 	timescale.style.top = "0px";
 	timescale.style.left = "0px";
 	this.tracks.appendChild(timescale);
-
-	//Context menu
-	var keyContextMenu = function(event)
-	{
-		var context = new ContextMenu();
-		context.size.set(150, 20);
-		context.position.set(event.clientX, event.clientY);
-		
-		context.addOption("Delete", function()
-		{
-
-		});
-
-		context.updateInterface();
-	};
 
 	//Animations
 	for(var i = 0; i < animations.length; i++)
@@ -343,14 +342,64 @@ AnimationTab.prototype.updateTimeline = function()
 			for(var k = 0; k < times.length; k++)
 			{
 				var key = document.createElement("div");
-				key.oncontextmenu = keyContextMenu;
 				key.style.position = "absolute";
 				key.style.cursor = "pointer";
 				key.style.backgroundColor =  color;
 				key.style.height = this.timelineHeight + "px";
 				key.style.left = (this.zoom * times[k] - 2) + "px";
 				key.style.width = "5px";
+				key.index = k;
+				key.track = tracks[j];
 				track.appendChild(key);
+
+				key.oncontextmenu = function(event)
+				{
+					var index = this.index;
+					var track = this.track;
+
+					var context = new ContextMenu();
+					context.size.set(150, 20);
+					context.position.set(event.clientX, event.clientY);
+					
+					context.addOption("Delete", function()
+					{
+						var times = [];
+						for(var i = 0; i < track.times.length; i++)
+						{
+							if(i !== index)
+							{
+								times.push(track.times[i]);
+							}
+						}
+
+						var values = [];
+						var valueSize = track.values.length / track.times.length;
+						var min = index * valueSize;
+						var max = min + valueSize - 1;
+
+						for(var i = 0; i < track.values.length; i++)
+						{
+							if(i < min || i > max)
+							{
+								values.push(track.values[i]);
+							}
+						}
+
+						track.times = new Float32Array(times);
+						track.values = new Float32Array(values);
+
+						self.updateTimeline();
+						self.updateMixer();
+					});
+
+					context.addOption("Move", function()
+					{
+						//Insert new time
+
+					});
+
+					context.updateInterface();
+				};
 			}
 		}
 
