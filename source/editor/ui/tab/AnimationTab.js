@@ -266,6 +266,33 @@ AnimationTab.prototype.update = function()
 	}
 };
 
+AnimationTab.sortTrack = function(track)
+{
+	for(var i = 0; i < track.times.length; i++)
+	{
+		for(var j = i + 1; j < track.times.length; j++)
+		{
+			if(track.times[j] < track.times[i])
+			{
+				var temp = track.times[j];
+				track.times[j] = track.times[i];
+				track.times[i] = temp;
+
+				var valueSize = track.getValueSize();
+				var jj = j * valueSize;
+				var ii = i * valueSize;
+
+				for(var k = 0; k < valueSize; k++)
+				{
+					var temp = track.values[jj + k];
+					track.values[jj + k] = track.values[ii + k];
+					track.values[ii + k] = temp;
+				}
+			}
+		}
+	}
+};
+
 AnimationTab.prototype.updateTimeline = function()
 {
 	while(this.tracks.firstChild)
@@ -329,17 +356,55 @@ AnimationTab.prototype.updateTimeline = function()
 			name.style.whiteSpace = "nowrap";
 			name.style.overflow = "hidden";
 			name.innerHTML = tracks[j].name;
+			name.animation = animations[i];
 			name.track = tracks[j];
+			name.object = this.object;
+
 			this.info.appendChild(name);
 
 			name.oncontextmenu = function(event)
 			{
 				var track = this.track;
+				var object = this.object;
+				var animation = this.animation;
 
 				var context = new ContextMenu();
 				context.size.set(150, 20);
 				context.position.set(event.clientX, event.clientY);
 				
+				context.addOption("Add Keyframe", function()
+				{
+					var names = track.name.split(".");
+					
+					var value = object[names[1]];
+					if(value.toArray !== undefined)
+					{
+						value = value.toArray();
+					}
+
+					var times = [];
+					for(var i = 0; i < track.times.length; i++)
+					{
+						times.push(track.times[i]);
+					}
+					times.push(self.mixer.time);
+
+					var values = [];
+					for(var i = 0; i < track.values.length; i++)
+					{
+						values.push(track.values[i]);
+					}
+					values = values.concat(value);
+
+					track.times = new Float32Array(times);
+					track.values = new Float32Array(values);
+
+					AnimationTab.sortTrack(track);
+
+					self.updateTimeline();
+					self.updateAnimationMixer();
+				});
+
 				context.addOption("Delete", function()
 				{
 					if(!Editor.confirm("Delete track?"))
@@ -476,31 +541,7 @@ AnimationTab.prototype.updateTimeline = function()
 
 						track.times[index] = time;
 
-						//Sort keyframe track values
-						for(var i = 0; i < track.times.length; i++)
-						{
-							for(var j = i + 1; j < track.times.length; j++)
-							{
-								if(track.times[j] < track.times[i])
-								{
-									var temp = track.times[j];
-									track.times[j] = track.times[i];
-									track.times[i] = temp;
-
-									var valueSize = track.getValueSize();
-
-									var jj = j * valueSize;
-									var ii = i * valueSize;
-
-									for(var k = 0; k < valueSize; k++)
-									{
-										var temp = track.values[jj + k];
-										track.values[jj + k] = track.values[ii + k];
-										track.values[ii + k] = temp;
-									}
-								}
-							}
-						}
+						AnimationTab.sortTrack(track);
 
 						self.updateTimeline();
 						self.updateAnimationMixer();
