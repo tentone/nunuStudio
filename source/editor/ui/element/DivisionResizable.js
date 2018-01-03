@@ -19,79 +19,69 @@ function DivisionResizable(parent)
 
 	//Resize control
 	this.resizeSizeMax = Number.MAX_VALUE;
+	this.resizableSide = DivisionResizable.LEFT;
 	this.resizeSizeMin = 0;
 	this.resizeTabSize = 5;
-	this.resizableSide = DivisionResizable.LEFT;
 
 	//Self pointer
 	var self = this;
-	var resizing = false;
-
-	//On mouse down start resizing
 	this.resizeTab.onmousedown = function(event)
 	{
-		resizing = true;
-		requestAnimationFrame(resizeDivision);
+		self.manager.create();
 	};
 
-	var resizeDivision = function()
+	//Tab resize event manager
+	this.manager = new EventManager();
+	this.manager.add(window, "mousemove", function(event)
 	{
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
+		if(self.resizableSide === DivisionResizable.LEFT)
+		{	
+			self.size.x -= event.movementX;
+		}
+		else if(self.resizableSide === DivisionResizable.RIGHT)
 		{
-			if(self.resizableSide === DivisionResizable.LEFT)
-			{	
-				self.size.x -= Editor.mouse.delta.x;
-			}
-			else if(self.resizableSide === DivisionResizable.RIGHT)
-			{
-				self.size.x += Editor.mouse.delta.x;
-			}
-			else if(self.resizableSide === DivisionResizable.TOP)
-			{
-				self.size.y -= Editor.mouse.delta.y;
-			}
-			else if(self.resizableSide === DivisionResizable.BOTTOM)
-			{
-				self.size.y += Editor.mouse.delta.y;
-			}
+			self.size.x += event.movementX;
+		}
+		else if(self.resizableSide === DivisionResizable.TOP)
+		{
+			self.size.y -= event.movementY;
+		}
+		else if(self.resizableSide === DivisionResizable.BOTTOM)
+		{
+			self.size.y += event.movementY;
+		}
 
-			//Limit Size
-			if(self.resizableSide === DivisionResizable.BOTTOM || self.resizableSide === DivisionResizable.TOP)
+		//Limit Size
+		if(self.resizableSide === DivisionResizable.BOTTOM || self.resizableSide === DivisionResizable.TOP)
+		{
+			if(self.size.y < (self.resizeTabSize + self.resizeSizeMin))
 			{
-				if(self.size.y < (self.resizeTabSize + self.resizeSizeMin))
-				{
-					self.size.y = self.resizeTabSize + self.resizeSizeMin;
-				}
-				else if(self.size.y > self.resizeSizeMax)
-				{
-					self.size.y = self.resizeSizeMax;
-				}
+				self.size.y = self.resizeTabSize + self.resizeSizeMin;
 			}
-			else
+			else if(self.size.y > self.resizeSizeMax)
 			{
-				if(self.size.x < (self.resizeTabSize + self.resizeSizeMin))
-				{
-					self.size.x = (self.resizeTabSize + self.resizeSizeMin);
-				}
-				else if(self.size.x > self.resizeSizeMax)
-				{
-					self.size.x = self.resizeSizeMax;
-				}	
+				self.size.y = self.resizeSizeMax;
 			}
-
-			//onResize callback
-			self.onResize();
 		}
 		else
 		{
-			resizing = false;
+			if(self.size.x < (self.resizeTabSize + self.resizeSizeMin))
+			{
+				self.size.x = (self.resizeTabSize + self.resizeSizeMin);
+			}
+			else if(self.size.x > self.resizeSizeMax)
+			{
+				self.size.x = self.resizeSizeMax;
+			}	
 		}
 
-		if(resizing)
-		{
-			requestAnimationFrame(resizeDivision);
-		}
-	};
+		self.onResize();
+	});
+
+	this.manager.add(window, "mouseup", function(event)
+	{
+		self.manager.destroy();
+	});
 
 	//onResize callback
 	this.onResize = function()

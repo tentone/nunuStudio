@@ -130,24 +130,43 @@ function AnimationTab(parent, closeable, container, index)
 	//Track information
 	this.info = document.createElement("div");
 	this.info.style.position = "absolute";
-	this.info.style.width = "150px";
 	this.info.style.backgroundColor = Editor.theme.barColor;
 	this.timeline.appendChild(this.info);
+
+	//Temporary variables for mouse movement
+	var mouse = new THREE.Vector2();
+	var initial = 0;
 
 	//Resize tab
 	this.tab = document.createElement("div");
 	this.tab.style.position = "absolute";
-	this.tab.style.left = "150px";
-	this.tab.style.width = "3px";
+	this.tab.style.width = "5px";
 	this.tab.style.backgroundColor = Editor.theme.barColor;
-	//this.tab.style.cursor = "e-resize";
+	this.tab.style.cursor = "e-resize";
+	this.tab.position = 150;
 	this.timeline.appendChild(this.tab);
+	this.tab.onmousedown = function(event)
+	{
+		mouse.set(event.clientX, event.clientY);
+		initial = this.position;
+		self.tabManager.create();
+	};
+
+	this.tabManager = new EventManager();
+	this.tabManager.add(window, "mousemove", function(event)
+	{
+		self.tab.position = initial + (event.clientX - mouse.x);
+		self.updateInterface();
+	});
+
+	this.tabManager.add(window, "mouseup", function(event)
+	{
+		self.tabManager.destroy();
+	});
 
 	//Tracks
 	this.tracks = document.createElement("div");
 	this.tracks.style.position = "absolute";
-	this.tracks.style.left = "153px";
-	this.tracks.style.width = "300px";
 	this.tracks.style.backgroundColor = Editor.theme.panelColor;
 	this.timeline.appendChild(this.tracks);
 
@@ -161,24 +180,20 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek.style.width = "4px";
 	this.seek.style.overflow = "hidden";
 	this.seek.style.cursor = "e-resize";
-
 	this.seek.onmousedown = function(event)
 	{
 		if(self.mixer !== null)
 		{
-			self.seekInitialTime = self.mixer._actions[0].time;
-			self.mouse.set(event.clientX, event.clientY);
+			initial = self.mixer._actions[0].time;
+			mouse.set(event.clientX, event.clientY);
 			self.manager.create();
 		}
 	};
 
-	this.seekInitialTime = 0;
-	this.mouse = new THREE.Vector2();
-
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		var time = self.seekInitialTime + (event.clientX - self.mouse.x) / self.zoom;
+		var time = initial + (event.clientX - mouse.x) / self.zoom;
 		self.mixer.setTime(time > 0 ? time : 0);
 		
 		Interface.panel.updatePanel();
@@ -352,11 +367,19 @@ AnimationTab.prototype.updateTimeline = function()
 			});
 			context.updateInterface();
 		};
+		name.onmouseenter = function()
+		{
+			this.style.backgroundColor = Editor.theme.buttonOverColor;
+		};
+		name.onmouseleave = function()
+		{
+			this.style.backgroundColor = Editor.theme.buttonColor;
+		};
 		this.info.appendChild(name);
 
 		var block = document.createElement("div");
 		block.style.height = this.timelineHeight + "px";
-		block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s";
+		block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s | Enabled:true";
 		
 		this.tracks.appendChild(block);
 
@@ -377,9 +400,14 @@ AnimationTab.prototype.updateTimeline = function()
 			name.animation = animations[i];
 			name.track = tracks[j];
 			name.object = this.object;
-
-			this.info.appendChild(name);
-
+			name.onmouseenter = function()
+			{
+				this.style.backgroundColor = Editor.theme.buttonOverColor;
+			};
+			name.onmouseleave = function()
+			{
+				this.style.backgroundColor = Editor.theme.buttonColor;
+			};
 			name.oncontextmenu = function(event)
 			{
 				var track = this.track;
@@ -479,6 +507,7 @@ AnimationTab.prototype.updateTimeline = function()
 
 				context.updateInterface();
 			};
+			this.info.appendChild(name);
 
 			var track = document.createElement("div");
 			track.style.height = this.timelineHeight + "px";
@@ -619,10 +648,14 @@ AnimationTab.prototype.updateInterface = function()
 		this.seek.style.height = this.timeline.style.height;
 		
 		this.info.style.height = this.timeline.style.height;
+		this.info.style.width = this.tab.position + "px";
+
 		this.tab.style.height = this.timeline.style.height;
+		this.tab.style.left = this.info.style.width;
 		
+		this.tracks.style.left = (this.tab.position + 5) + "px";
 		this.tracks.style.height = this.timeline.style.height;
-		this.tracks.style.width = (this.size.x - 153) + "px";;
+		this.tracks.style.width = (this.size.x - this.tab.position - 5) + "px";
 	}
 	else
 	{
