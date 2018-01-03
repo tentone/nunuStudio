@@ -334,12 +334,30 @@ AnimationTab.prototype.updateTimeline = function()
 		name.style.whiteSpace = "nowrap";
 		name.style.overflow = "hidden";
 		name.innerHTML = animations[i].name;
+		name.animation = animations[i];
+		name.oncontextmenu = function(event)
+		{
+			var animation = this.animation;
+			var context = new ContextMenu();
+			context.size.set(150, 20);
+			context.position.set(event.clientX, event.clientY);
+			context.addOption("Rename", function()
+			{
+				var name = prompt("Rename animation", animation.name);
+				if(name !== null && name !== "")
+				{
+					Editor.history.add(new ChangeAction(animation, "name", name));
+					self.updateTimeline();
+				}
+			});
+			context.updateInterface();
+		};
 		this.info.appendChild(name);
 
 		var block = document.createElement("div");
 		block.style.height = this.timelineHeight + "px";
+		block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s";
 		
-		//block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s";
 		this.tracks.appendChild(block);
 
 		y += this.timelineHeight;
