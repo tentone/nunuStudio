@@ -24,10 +24,15 @@ AnimationMixer.prototype = Object.create(THREE.AnimationMixer.prototype);
 
 AnimationMixer.prototype.createActions = function(animations, loop)
 {
+	if(loop === undefined)
+	{
+		loop = THREE.LoopRepeat; //LoopOnce || LoopRepeat || LoopPingPong
+	}
+
 	for(var i = 0; i < animations.length; i++)
 	{
 		var action = this.clipAction(animations[i]);
-		//action.setLoop(THREE.LoopRepeat); //LoopOnce || LoopRepeat || LoopPingPong
+		action.setLoop(loop);
 		action.play();
 	}
 };
