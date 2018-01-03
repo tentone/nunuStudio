@@ -40,50 +40,43 @@ function DualDivisionResizable(parent)
 
 	//Self pointer
 	var self = this;
-	var resizing = false;
 
 	//Tab mouse down
 	this.resizeTab.onmousedown = function(event)
 	{
-		resizing = true;
-		requestAnimationFrame(resizeDivision);
+		self.manager.create();
 	};
-	
-	var resizeDivision = function()
+
+	//Tab resize event manager
+	this.manager = new EventManager();
+	this.manager.add(window, "mousemove", function(event)
 	{
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
-		{
-			if(self.orientation == DualDivisionResizable.HORIZONTAL)
-			{	
-				self.tabPosition += Editor.mouse.delta.x/self.size.x;
-			}
-			else if(self.orientation == DualDivisionResizable.VERTICAL)
-			{
-				self.tabPosition += Editor.mouse.delta.y/self.size.y;
-			}
-
-			//Limit tab position
-			if(self.tabPosition > self.tabPositionMax)
-			{
-				self.tabPosition = self.tabPositionMax;
-			}
-			else if(self.tabPosition < self.tabPositionMin)
-			{
-				self.tabPosition = self.tabPositionMin;
-			}
-
-			self.onResize();
+		if(self.orientation === DualDivisionResizable.HORIZONTAL)
+		{	
+			self.tabPosition += event.movementX / self.size.x;
 		}
-		else
+		else if(self.orientation === DualDivisionResizable.VERTICAL)
 		{
-			resizing = false;
+			self.tabPosition += event.movementY / self.size.y;
 		}
 
-		if(resizing)
+		//Limit tab position
+		if(self.tabPosition > self.tabPositionMax)
 		{
-			requestAnimationFrame(resizeDivision);
+			self.tabPosition = self.tabPositionMax;
 		}
-	};
+		else if(self.tabPosition < self.tabPositionMin)
+		{
+			self.tabPosition = self.tabPositionMin;
+		}
+
+		self.onResize();
+	});
+
+	this.manager.add(window, "mouseup", function(event)
+	{
+		self.manager.destroy();
+	});
 
 	//onResize callback
 	this.onResize = function()
@@ -102,15 +95,6 @@ DualDivisionResizable.prototype = Object.create(Element.prototype);
 DualDivisionResizable.prototype.setOnResize = function(callback)
 {
 	this.onResize = callback;
-};
-
-//Remove element
-DualDivisionResizable.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 };
 
 //Update interface
