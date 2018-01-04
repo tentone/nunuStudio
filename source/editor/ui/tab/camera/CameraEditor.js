@@ -246,7 +246,6 @@ CameraEditor.prototype.update = function()
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 		this.camera.resize(this.canvas.size.x, this.canvas.size.y);
-
 		this.camera.render(this.renderer, ObjectUtils.getScene(this.camera));
 	}
 };
@@ -301,8 +300,6 @@ CameraEditor.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-
 		//Form
 		this.form.updateInterface();
 
@@ -318,6 +315,7 @@ CameraEditor.prototype.updateInterface = function()
 		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 
 		//Element
+		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
