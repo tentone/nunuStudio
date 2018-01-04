@@ -25,37 +25,33 @@ function AnimationTab(parent, closeable, container, index)
 	this.animationButton = new Button(this.bar);
 	this.animationButton.position.set(0, 0);
 	this.animationButton.size.set(100, 20);
-	this.animationButton.setText("Create")
+	this.animationButton.setText("Create New")
 	this.animationButton.updateInterface();
 	this.animationButton.setCallback(function()
 	{
 		if(self.object !== null)
 		{
-			if(self.object.animations !== undefined)
+			if(self.object.animations === undefined)
 			{
-				alert("This object is already animated");
-				return;
+				self.object.animations = [];
 			}
 
-			self.object.animations = [];
-
+			var clip = new THREE.AnimationClip("Sample", 10, []);
 			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
 			
-			var clip = new THREE.AnimationClip("Animation", 5, []);
-			
-			var position = new VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
+			var position = new THREE.VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
 			position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
 			clip.tracks.push(position);
 
-			var scale = new VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
+			var scale = new THREE.VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
 			scale.setInterpolation(THREE.InterpolateLinear);
 			clip.tracks.push(scale);
 
-			var quaternion = new QuaternionKeyframeTrack(".quaternion", [0, 1.5, 3], [0,0,0,1, 0,0.706825181105366,0,0.7073882691671998, 0,0,0,1]);
+			var quaternion = new THREE.QuaternionKeyframeTrack(".quaternion", [0, 1.5, 3], [0,0,0,1, 0,0.706825181105366,0,0.7073882691671998, 0,0,0,1]);
 			quaternion.setInterpolation(THREE.InterpolateLinear);
 			clip.tracks.push(quaternion);
 			
-			var visible = new BooleanKeyframeTrack(".visible", [0, 1.5, 2.0, 4.0], [true, false, true, true]);
+			var visible = new THREE.BooleanKeyframeTrack(".visible", [0, 1.5, 2.0, 4.0], [true, false, true, true]);
 			clip.tracks.push(visible);
 
 			self.object.animations.push(clip);
@@ -350,9 +346,12 @@ AnimationTab.prototype.updateTimeline = function()
 		name.style.overflow = "hidden";
 		name.innerHTML = animations[i].name;
 		name.animation = animations[i];
+		name.object = this.object;
 		name.oncontextmenu = function(event)
 		{
 			var animation = this.animation;
+			var object = this.object;
+
 			var context = new ContextMenu();
 			context.size.set(150, 20);
 			context.position.set(event.clientX, event.clientY);
@@ -364,6 +363,26 @@ AnimationTab.prototype.updateTimeline = function()
 					Editor.history.add(new ChangeAction(animation, "name", name));
 					self.updateTimeline();
 				}
+			});
+			context.addOption("Delete", function()
+			{
+				if(!Editor.confirm("Delete animation?"))
+				{
+					return;
+				}
+
+				var index = object.animations.indexOf(animation);
+				if(index !== -1)
+				{
+					object.animations.splice(index, 1);
+				}
+				else
+				{
+					alert("Unable to delete animation");
+				}
+
+				self.updateTimeline();
+				self.updateAnimationMixer();
 			});
 			context.updateInterface();
 		};
@@ -458,8 +477,16 @@ AnimationTab.prototype.updateTimeline = function()
 						return;
 					}
 
-					//TODO <DELETE TRACK CODE>
-					
+					var index = animation.tracks.indexOf(track);
+					if(index !== -1)
+					{
+						animation.tracks.splice(index, 1);
+					}
+					else
+					{
+						alert("Unable to delete track");
+					}
+
 					self.updateTimeline();
 					self.updateAnimationMixer();
 				});
@@ -547,9 +574,9 @@ AnimationTab.prototype.updateTimeline = function()
 							return;
 						}
 
-						if(track.times.length < 2)
+						if(track.times.length === 1)
 						{
-							alert("The track needs to have at least one keyframe!");
+							alert("Track needs to have at least one keyframe!");
 							return;
 						}
 
@@ -668,4 +695,3 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.display = "none";
 	}
 };
-
