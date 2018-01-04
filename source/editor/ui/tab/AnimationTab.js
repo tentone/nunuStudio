@@ -547,6 +547,12 @@ AnimationTab.prototype.updateTimeline = function()
 							return;
 						}
 
+						if(track.times.length < 2)
+						{
+							alert("The track needs to have at least one keyframe!");
+							return;
+						}
+
 						var times = [];
 						for(var i = 0; i < track.times.length; i++)
 						{
