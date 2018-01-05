@@ -3,7 +3,6 @@
 function AnimationClip()
 {
 	THREE.AnimationClip.call(this, root);
-
 }
 
 AnimationClip.prototype = Object.create(THREE.AnimationClip.prototype);
