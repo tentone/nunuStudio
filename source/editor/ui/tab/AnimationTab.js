@@ -36,7 +36,27 @@ function AnimationTab(parent, closeable, container, index)
 				self.object.animations = [];
 			}
 
+			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
+
 			var clip = new THREE.AnimationClip("Sample", 10, []);
+			
+			var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
+			position.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
+			clip.tracks.push(position);
+
+			var scale = new THREE.VectorKeyframeTrack(".scale", [0], self.object.scale.toArray());
+			scale.setInterpolation(THREE.InterpolateLinear);
+			clip.tracks.push(scale);
+
+			var quaternion = new THREE.QuaternionKeyframeTrack(".quaternion", [0], self.object.quaternion.toArray());
+			quaternion.setInterpolation(THREE.InterpolateLinear);
+			clip.tracks.push(quaternion);
+			
+			var visible = new THREE.BooleanKeyframeTrack(".visible", [0], [self.object.visible]);
+			clip.tracks.push(visible);
+
+
+			/*var clip = new THREE.AnimationClip("Sample", 10, []);
 			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
 			
 			var position = new THREE.VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
@@ -52,7 +72,7 @@ function AnimationTab(parent, closeable, container, index)
 			clip.tracks.push(quaternion);
 			
 			var visible = new THREE.BooleanKeyframeTrack(".visible", [0, 1.5, 2.0, 4.0], [true, false, true, true]);
-			clip.tracks.push(visible);
+			clip.tracks.push(visible);*/
 
 			self.object.animations.push(clip);
 
