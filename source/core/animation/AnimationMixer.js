@@ -26,7 +26,7 @@ AnimationMixer.prototype.createActions = function(animations, loop)
 {
 	if(loop === undefined)
 	{
-		loop = THREE.LoopRepeat; //LoopOnce || LoopRepeat || LoopPingPong
+		loop = THREE.LoopRepeat;
 	}
 
 	for(var i = 0; i < animations.length; i++)
