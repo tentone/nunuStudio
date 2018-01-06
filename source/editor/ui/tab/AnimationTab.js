@@ -230,6 +230,7 @@ AnimationTab.prototype.attach = function(object)
 		}
 		else
 		{
+			this.mixer.createActions(object.animations);
 			return;
 		}
 	}
@@ -239,6 +240,7 @@ AnimationTab.prototype.attach = function(object)
 		this.mixer = new AnimationMixer(object);
 		this.mixer.createActions(object.animations);
 	}
+	
 	
 	this.updateTimeline();
 };
@@ -260,7 +262,7 @@ AnimationTab.prototype.update = function()
 {
 	if(this.mixer !== null)
 	{
-		if(this.mixer._actions.length === 1)
+		if(this.mixer._actions.length > 0)
 		{
 			this.seek.style.left = (this.mixer._actions[0].time * this.zoom) + "px";
 		}
@@ -581,6 +583,12 @@ AnimationTab.prototype.updateTimeline = function()
 				key.index = k;
 				key.track = tracks[j];
 				track.appendChild(key);
+
+				key.ondblclick = function(event)
+				{
+					var time = this.track.times[this.index];
+					self.mixer.setTime(time);
+				};
 
 				//Keyframe context menu
 				key.oncontextmenu = function(event)
