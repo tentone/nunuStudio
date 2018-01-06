@@ -9,6 +9,9 @@ function ProfilingTab(parent, closeable, container, index)
 	this.dual.divA.style.overflow = "auto";
 	this.dual.tabPosition = 0.2;
 
+	//Canvas
+	this.canvas = new Canvas(this.dual.divB);
+	
 	//Form
 	this.form = new Form(this.dual.divA);
 
@@ -35,7 +38,6 @@ function ProfilingTab(parent, closeable, container, index)
 	this.vertices = this.form.addText("123");
 	this.form.nextRow();
 
-	this.canvas = new Canvas(this.dual.divB);
 
 	this.form.updateInterface();
 }
@@ -70,6 +72,9 @@ ProfilingTab.prototype.updateInterface = function()
 
 		this.dual.size.copy(this.size);
 		this.dual.updateInterface();
+
+		this.canvas.size.set(Number.parseInt(this.dual.divB.style.width), Number.parseInt(this.dual.divB.style.height));
+		this.canvas.updateInterface();
 	}
 	else
 	{
