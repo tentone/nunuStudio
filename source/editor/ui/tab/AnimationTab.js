@@ -55,25 +55,6 @@ function AnimationTab(parent, closeable, container, index)
 			var visible = new THREE.BooleanKeyframeTrack(".visible", [0], [self.object.visible]);
 			clip.tracks.push(visible);
 
-
-			/*var clip = new THREE.AnimationClip("Sample", 10, []);
-			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
-			
-			var position = new THREE.VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
-			position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
-			clip.tracks.push(position);
-
-			var scale = new THREE.VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
-			scale.setInterpolation(THREE.InterpolateLinear);
-			clip.tracks.push(scale);
-
-			var quaternion = new THREE.QuaternionKeyframeTrack(".quaternion", [0, 1.5, 3], [0,0,0,1, 0,0.706825181105366,0,0.7073882691671998, 0,0,0,1]);
-			quaternion.setInterpolation(THREE.InterpolateLinear);
-			clip.tracks.push(quaternion);
-			
-			var visible = new THREE.BooleanKeyframeTrack(".visible", [0, 1.5, 2.0, 4.0], [true, false, true, true]);
-			clip.tracks.push(visible);*/
-
 			self.object.animations.push(clip);
 
 			self.attach(self.object);
@@ -461,30 +442,54 @@ AnimationTab.prototype.updateTimeline = function()
 				{
 					var names = track.name.split(".");
 					
+					//TODO <CHECK HOW TO PROPERLY GET ATTRIBUTE FROM NAME>
 					var value = object[names[1]];
-					if(value.toArray !== undefined)
-					{
-						value = value.toArray();
-					}
 
-					var times = [];
+					value = (value.toArray !== undefined) ? value.toArray() : [value];
+
+					//Check if there is already a keyframe with saame time
 					for(var i = 0; i < track.times.length; i++)
 					{
-						times.push(track.times[i]);
+						if(track.times[i] === self.mixer.time)
+						{
+							break;
+						}
 					}
-					times.push(self.mixer.time);
 
-					var values = [];
-					for(var i = 0; i < track.values.length; i++)
+					//If there is already a keyframe with time update values
+					if(i < track.times.length)
 					{
-						values.push(track.values[i]);
+						var valueSize = track.getValueSize();
+						var index = i * valueSize;
+
+						for(var i = 0; i < valueSize; i++)
+						{
+							track.values[index] = value[i];
+							index++;
+						}
 					}
-					values = values.concat(value);
+					//Add new keyframe to track
+					else
+					{
+						var times = [];
+						for(var i = 0; i < track.times.length; i++)
+						{
+							times.push(track.times[i]);
+						}
+						times.push(self.mixer.time);
 
-					track.times = new Float32Array(times);
-					track.values = new Float32Array(values);
+						var values = [];
+						for(var i = 0; i < track.values.length; i++)
+						{
+							values.push(track.values[i]);
+						}
+						values = values.concat(value);
 
-					AnimationTab.sortTrack(track);
+						track.times = new Float32Array(times);
+						track.values = new Float32Array(values);
+
+						AnimationTab.sortTrack(track);
+					}
 
 					self.updateTimeline();
 					self.updateAnimationMixer();
