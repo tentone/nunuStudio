@@ -321,15 +321,11 @@ AnimationTab.prototype.updateTimeline = function()
 	{
 		var tracks = animations[i].tracks;
 
-		var name = document.createElement("div");
-		name.style.height = this.timelineHeight + "px";
-		name.style.textOverflow = "ellipsis";
-		name.style.whiteSpace = "nowrap";
-		name.style.overflow = "hidden";
-		name.innerHTML = animations[i].name;
-		name.animation = animations[i];
-		name.object = this.object;
-		name.oncontextmenu = function(event)
+		var button = document.createElement("div");
+		button.style.height = this.timelineHeight + "px";
+		button.animation = animations[i];
+		button.object = this.object;
+		button.oncontextmenu = function(event)
 		{
 			var animation = this.animation;
 			var object = this.object;
@@ -339,10 +335,10 @@ AnimationTab.prototype.updateTimeline = function()
 			context.position.set(event.clientX, event.clientY);
 			context.addOption("Rename", function()
 			{
-				var name = prompt("Rename animation", animation.name);
-				if(name !== null && name !== "")
+				var value = prompt("Rename animation", animation.name);
+				if(value !== null && value !== "")
 				{
-					Editor.history.add(new ChangeAction(animation, "name", name));
+					Editor.history.add(new ChangeAction(animation, "name", value));
 					self.updateTimeline();
 				}
 			});
@@ -374,15 +370,25 @@ AnimationTab.prototype.updateTimeline = function()
 			});
 			context.updateInterface();
 		};
-		name.onmouseenter = function()
+		button.onmouseenter = function()
 		{
 			this.style.backgroundColor = Editor.theme.buttonOverColor;
 		};
-		name.onmouseleave = function()
+		button.onmouseleave = function()
 		{
 			this.style.backgroundColor = Editor.theme.buttonColor;
 		};
-		this.info.appendChild(name);
+		this.info.appendChild(button);
+
+		var name = document.createElement("div");
+		name.style.position = "relative";
+		name.style.textOverflow = "ellipsis";
+		name.style.whiteSpace = "nowrap";
+		name.style.overflow = "hidden";
+		name.style.top = "4px";
+		name.style.pointerEvents = "none";
+		name.innerHTML = animations[i].name;
+		button.appendChild(name);
 
 		var block = document.createElement("div");
 		block.style.height = this.timelineHeight + "px";
@@ -396,25 +402,22 @@ AnimationTab.prototype.updateTimeline = function()
 		{
 			var times = tracks[j].times;
 
-			var name = document.createElement("div");
-			name.style.height = this.timelineHeight + "px";
-			name.style.backgroundColor = Editor.theme.barColor;
-			name.style.textOverflow = "ellipsis";
-			name.style.whiteSpace = "nowrap";
-			name.style.overflow = "hidden";
-			name.innerHTML = tracks[j].name;
-			name.animation = animations[i];
-			name.track = tracks[j];
-			name.object = this.object;
-			name.onmouseenter = function()
+			var button = document.createElement("div");
+			button.style.height = this.timelineHeight + "px";
+			button.style.backgroundColor = Editor.theme.barColor;
+			button.style.overflow = "hidden";
+			button.animation = animations[i];
+			button.track = tracks[j];
+			button.object = this.object;
+			button.onmouseenter = function()
 			{
 				this.style.backgroundColor = Editor.theme.buttonOverColor;
 			};
-			name.onmouseleave = function()
+			button.onmouseleave = function()
 			{
 				this.style.backgroundColor = Editor.theme.buttonColor;
 			};
-			name.oncontextmenu = function(event)
+			button.oncontextmenu = function(event)
 			{
 				var track = this.track;
 				var object = this.object;
@@ -427,8 +430,6 @@ AnimationTab.prototype.updateTimeline = function()
 				context.addOption("Add Keyframe", function()
 				{
 					var names = track.name.split(".");
-					
-					//TODO <CHECK HOW TO PROPERLY GET ATTRIBUTE FROM NAME>
 					var value = object[names[1]];
 
 					value = (value.toArray !== undefined) ? value.toArray() : [value];
@@ -545,7 +546,27 @@ AnimationTab.prototype.updateTimeline = function()
 
 				context.updateInterface();
 			};
-			this.info.appendChild(name);
+			this.info.appendChild(button);
+
+			var name = document.createElement("div");
+			name.style.position = "relative";
+			name.style.textOverflow = "ellipsis";
+			name.style.whiteSpace = "nowrap";
+			name.style.overflow = "hidden";
+			name.style.top = "4px";
+			name.style.pointerEvents = "none";
+			name.innerHTML = tracks[j].name;
+			button.appendChild(name);
+
+			/*var keyframe = document.createElement("img");
+			keyframe.style.display = "block";
+			keyframe.style.position = "relative";
+			keyframe.style.right = "5px";
+			keyframe.style.top = "2px";
+			keyframe.style.width = "15px";
+			keyframe.style.height = "15px";
+			keyframe.src = Editor.filePath + "icons/misc/animation.png";
+			button.appendChild(keyframe);*/
 
 			var track = document.createElement("div");
 			track.style.height = this.timelineHeight + "px";
@@ -563,7 +584,7 @@ AnimationTab.prototype.updateTimeline = function()
 				key.style.backgroundColor =  color;
 				key.style.height = this.timelineHeight + "px";
 				key.style.left = (this.zoom * times[k]) + "px";
-				key.style.width = "6px";
+				key.style.width = "5px";
 				key.index = k;
 				key.track = tracks[j];
 				track.appendChild(key);
