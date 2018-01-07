@@ -37,8 +37,8 @@ Interface.initialize = function()
 	Interface.animation.button.setAltText("Animation");
 	
 	//Profiling
-	Interface.profiling = Interface.bottomTab.addTab(ProfilingTab, false);
-	Interface.profiling.button.setAltText("Profiling");
+	//Interface.profiling = Interface.bottomTab.addTab(ProfilingTab, false);
+	//Interface.profiling.button.setAltText("Profiling");
 
 	//Explorer
 	Interface.explorer = new DivisionResizable();
