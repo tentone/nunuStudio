@@ -687,14 +687,18 @@ AnimationTab.prototype.updateTimeline = function()
 		var width = this.zoom * duration + 1;
 		var height = this.timelineHeight * tracks.length + 1;
 
+		//Block
+		block.style.width = width + "px";
+		
 		//Timeline grid
 		timegrid.style.width = width + "px";
 		timegrid.style.height = height + "px";
 		timegrid.width = width;
 		timegrid.height = height;
 
+
 		var context = timegrid.getContext("2d");
-		context.fillStyle = "#444444";
+		context.fillStyle = Editor.theme.barColor;
 
 		//Horizontal lines
 		for(var l = 0; l <= height; l += this.timelineHeight)
