@@ -50,6 +50,7 @@ include("lib/PSON.min.js");
 include("core/Global.js");
 include("core/FileSystem.js");
 
+include("core/three/animation/KeyframeTrack.js");
 include("core/three/core/Object3D.js");
 include("core/three/core/BufferGeometry.js");
 include("core/three/cameras/Camera.js");
@@ -60,6 +61,9 @@ include("core/three/math/Vector3.js");
 include("core/three/textures/Texture.js");
 include("core/three/lights/LightShadow.js");
 include("core/three/scenes/Fog.js");
+
+include("core/animation/AnimationMixer.js");
+include("core/animation/AnimationClip.js");
 
 include("core/input/Key.js");
 include("core/input/Keyboard.js");
@@ -100,6 +104,7 @@ include("core/texture/CanvasTexture.js");
 include("core/texture/VideoTexture.js");
 include("core/texture/WebcamTexture.js");
 include("core/texture/CubeTexture.js");
+include("core/texture/CompressedTexture.js");
 include("core/texture/SpriteSheetTexture.js");
 
 include("core/loaders/FontLoader.js");
@@ -146,7 +151,10 @@ include("core/utils/binary/Base64Utils.js");
 include("core/utils/binary/ArraybufferUtils.js");
 include("core/utils/binary/BufferUtils.js");
 
+include("core/utils/Timer.js");
+include("core/utils/AnimationTimer.js");
 include("core/utils/EventManager.js");
+
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");

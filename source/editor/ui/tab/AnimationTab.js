@@ -38,7 +38,7 @@ function AnimationTab(parent, closeable, container, index)
 
 			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
 
-			var clip = new THREE.AnimationClip("Sample", 10, []);
+			var clip = new THREE.AnimationClip("Animation" + self.object.animations.length, 5, []);
 			
 			var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
 			position.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
@@ -108,7 +108,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomSlider.size.set(150, 10);
 	this.zoomSlider.position.set(400, 0);
 	this.zoomSlider.setStep(10);
-	this.zoomSlider.setRange(50, 1000);
+	this.zoomSlider.setRange(20, 1000);
 	this.zoomSlider.updateInterface();
 	this.zoomSlider.setValue(this.zoom);
 	this.zoomSlider.setOnChange(function()
@@ -280,33 +280,6 @@ AnimationTab.prototype.update = function()
 	}
 };
 
-AnimationTab.sortTrack = function(track)
-{
-	for(var i = 0; i < track.times.length; i++)
-	{
-		for(var j = i + 1; j < track.times.length; j++)
-		{
-			if(track.times[j] < track.times[i])
-			{
-				var temp = track.times[j];
-				track.times[j] = track.times[i];
-				track.times[i] = temp;
-
-				var valueSize = track.getValueSize();
-				var jj = j * valueSize;
-				var ii = i * valueSize;
-
-				for(var k = 0; k < valueSize; k++)
-				{
-					var temp = track.values[jj + k];
-					track.values[jj + k] = track.values[ii + k];
-					track.values[ii + k] = temp;
-				}
-			}
-		}
-	}
-};
-
 AnimationTab.prototype.updateTimeline = function()
 {
 	while(this.tracks.firstChild)
@@ -337,6 +310,12 @@ AnimationTab.prototype.updateTimeline = function()
 	timescale.style.left = "0px";
 	this.tracks.appendChild(timescale);
 
+	var timegrid = document.createElement("canvas");
+	timegrid.style.position = "absolute";
+	timegrid.style.top = "0px";
+	timegrid.style.left = "0px";
+	this.tracks.appendChild(timegrid);
+
 	//Animations
 	for(var i = 0; i < animations.length; i++)
 	{
@@ -347,7 +326,7 @@ AnimationTab.prototype.updateTimeline = function()
 		name.style.textOverflow = "ellipsis";
 		name.style.whiteSpace = "nowrap";
 		name.style.overflow = "hidden";
-		//name.innerHTML = animations[i].name;
+		name.innerHTML = animations[i].name;
 		name.animation = animations[i];
 		name.object = this.object;
 		name.oncontextmenu = function(event)
@@ -366,6 +345,12 @@ AnimationTab.prototype.updateTimeline = function()
 					Editor.history.add(new ChangeAction(animation, "name", name));
 					self.updateTimeline();
 				}
+			});
+			context.addOption("Add track", function()
+			{
+				var attribute = prompt("Attribute");
+
+				//TODO <ADD CODE HERE>
 			});
 			context.addOption("Delete", function()
 			{
@@ -401,8 +386,7 @@ AnimationTab.prototype.updateTimeline = function()
 
 		var block = document.createElement("div");
 		block.style.height = this.timelineHeight + "px";
-		block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s | Enabled:true";
-		
+		block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s | Enabled:true";		
 		this.tracks.appendChild(block);
 
 		y += this.timelineHeight;
@@ -490,7 +474,7 @@ AnimationTab.prototype.updateTimeline = function()
 						track.times = new Float32Array(times);
 						track.values = new Float32Array(values);
 
-						AnimationTab.sortTrack(track);
+						track.sort();
 					}
 
 					self.updateTimeline();
@@ -578,8 +562,8 @@ AnimationTab.prototype.updateTimeline = function()
 				key.style.cursor = "pointer";
 				key.style.backgroundColor =  color;
 				key.style.height = this.timelineHeight + "px";
-				key.style.left = (this.zoom * times[k] - 2) + "px";
-				key.style.width = "5px";
+				key.style.left = (this.zoom * times[k]) + "px";
+				key.style.width = "6px";
 				key.index = k;
 				key.track = tracks[j];
 				track.appendChild(key);
@@ -653,8 +637,7 @@ AnimationTab.prototype.updateTimeline = function()
 						}
 
 						track.times[index] = time;
-
-						AnimationTab.sortTrack(track);
+						track.sort();
 
 						self.updateTimeline();
 						self.updateAnimationMixer();
@@ -671,16 +654,22 @@ AnimationTab.prototype.updateTimeline = function()
 		}
 	}
 
-	//Draw timeline canvas
 	var width = this.zoom * duration;
 	var height = y;
 
-	timescale.style.width = width + "px";
-	timescale.style.height = height + "px";
-	timescale.width = width;
-	timescale.height = height;
+	//Timescale
+	//timescale.style.width = width + "px";
+	//timescale.style.height = height + "px";
+	//timescale.width = width;
+	//timescale.height = height;
 
-	var context = timescale.getContext("2d");
+	//Timeline grig
+	timegrid.style.width = width + "px";
+	timegrid.style.height = height + "px";
+	timegrid.width = width;
+	timegrid.height = height;
+
+	var context = timegrid.getContext("2d");
 	context.fillStyle = "#444444";
 
 	//Horizontal lines
