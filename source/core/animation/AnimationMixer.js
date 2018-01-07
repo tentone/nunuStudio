@@ -22,17 +22,12 @@ function AnimationMixer(root)
 
 AnimationMixer.prototype = Object.create(THREE.AnimationMixer.prototype);
 
-AnimationMixer.prototype.createActions = function(animations, loop)
+AnimationMixer.prototype.createActions = function(animations)
 {
-	if(loop === undefined)
-	{
-		loop = THREE.LoopRepeat;
-	}
-
 	for(var i = 0; i < animations.length; i++)
 	{
 		var action = this.clipAction(animations[i]);
-		action.setLoop(loop);
+		action.setLoop(THREE.LoopRepeat);
 		action.play();
 	}
 };
