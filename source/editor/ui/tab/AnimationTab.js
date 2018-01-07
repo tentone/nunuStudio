@@ -25,20 +25,23 @@ function AnimationTab(parent, closeable, container, index)
 	this.animationButton = new Button(this.bar);
 	this.animationButton.position.set(0, 0);
 	this.animationButton.size.set(100, 20);
-	this.animationButton.setText("Create New")
+	this.animationButton.setText("Add")
 	this.animationButton.updateInterface();
 	this.animationButton.setCallback(function()
 	{
 		if(self.object !== null)
 		{
+			console.log(self.object.animations);
+
 			if(self.object.animations === undefined)
 			{
 				self.object.animations = [];
+				console.log("Create animation array");
 			}
 
 			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
 
-			var clip = new THREE.AnimationClip("Animation" + self.object.animations.length, 5, []);
+			var clip = new THREE.AnimationClip("Animation" + self.object.animations.length, 50, []);
 			
 			var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
 			position.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
@@ -56,6 +59,7 @@ function AnimationTab(parent, closeable, container, index)
 			clip.tracks.push(visible);
 
 			self.object.animations.push(clip);
+
 
 			self.attach(self.object);
 			self.updateTimeline();
@@ -142,6 +146,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.tab.style.cursor = "e-resize";
 	this.tab.position = 150;
 	this.timeline.appendChild(this.tab);
+
 	this.tab.onmousedown = function(event)
 	{
 		mouse.set(event.clientX, event.clientY);
@@ -310,12 +315,6 @@ AnimationTab.prototype.updateTimeline = function()
 	timescale.style.left = "0px";
 	this.tracks.appendChild(timescale);
 
-	var timegrid = document.createElement("canvas");
-	timegrid.style.position = "absolute";
-	timegrid.style.top = "0px";
-	timegrid.style.left = "0px";
-	this.tracks.appendChild(timegrid);
-
 	//Animations
 	for(var i = 0; i < animations.length; i++)
 	{
@@ -345,8 +344,9 @@ AnimationTab.prototype.updateTimeline = function()
 			context.addOption("Add track", function()
 			{
 				var attribute = prompt("Attribute");
+				var value = self.object[attribute];
 
-				//TODO <ADD CODE HERE>
+				console.log(value);
 			});
 			context.addOption("Delete", function()
 			{
@@ -370,14 +370,17 @@ AnimationTab.prototype.updateTimeline = function()
 			});
 			context.updateInterface();
 		};
+
 		button.onmouseenter = function()
 		{
 			this.style.backgroundColor = Editor.theme.buttonOverColor;
 		};
+
 		button.onmouseleave = function()
 		{
 			this.style.backgroundColor = Editor.theme.buttonColor;
 		};
+
 		this.info.appendChild(button);
 
 		var name = document.createElement("div");
@@ -385,17 +388,24 @@ AnimationTab.prototype.updateTimeline = function()
 		name.style.textOverflow = "ellipsis";
 		name.style.whiteSpace = "nowrap";
 		name.style.overflow = "hidden";
-		name.style.top = "4px";
+		name.style.top = "25%";
 		name.style.pointerEvents = "none";
 		name.innerHTML = animations[i].name;
 		button.appendChild(name);
 
 		var block = document.createElement("div");
 		block.style.height = this.timelineHeight + "px";
-		block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s | Enabled:true";		
+		block.style.backgroundColor = Editor.theme.barColor;
+		//block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s | Enabled:true";	
 		this.tracks.appendChild(block);
 
 		y += this.timelineHeight;
+
+		var timegrid = document.createElement("canvas");
+		timegrid.style.position = "absolute";
+		timegrid.style.top = y + "px";
+		timegrid.style.left = "0px";
+		this.tracks.appendChild(timegrid);
 
 		//Tracks
 		for(var j = 0; j < tracks.length; j++)
@@ -409,14 +419,17 @@ AnimationTab.prototype.updateTimeline = function()
 			button.animation = animations[i];
 			button.track = tracks[j];
 			button.object = this.object;
+
 			button.onmouseenter = function()
 			{
 				this.style.backgroundColor = Editor.theme.buttonOverColor;
 			};
+
 			button.onmouseleave = function()
 			{
 				this.style.backgroundColor = Editor.theme.buttonColor;
 			};
+
 			button.oncontextmenu = function(event)
 			{
 				var track = this.track;
@@ -553,7 +566,7 @@ AnimationTab.prototype.updateTimeline = function()
 			name.style.textOverflow = "ellipsis";
 			name.style.whiteSpace = "nowrap";
 			name.style.overflow = "hidden";
-			name.style.top = "4px";
+			name.style.top = "25%";
 			name.style.pointerEvents = "none";
 			name.innerHTML = tracks[j].name;
 			button.appendChild(name);
@@ -576,6 +589,7 @@ AnimationTab.prototype.updateTimeline = function()
 
 			var color = MathUtils.randomColor();
 
+			//Keyframes
 			for(var k = 0; k < times.length; k++)
 			{
 				var key = document.createElement("div");
@@ -669,41 +683,40 @@ AnimationTab.prototype.updateTimeline = function()
 			}
 		}
 
-		if(animations[i].duration > duration)
+		var duration = animations[i].duration;
+		var width = this.zoom * duration + 1;
+		var height = this.timelineHeight * tracks.length + 1;
+
+		//Timeline grid
+		timegrid.style.width = width + "px";
+		timegrid.style.height = height + "px";
+		timegrid.width = width;
+		timegrid.height = height;
+
+		var context = timegrid.getContext("2d");
+		context.fillStyle = "#444444";
+
+		//Horizontal lines
+		for(var l = 0; l <= height; l += this.timelineHeight)
 		{
-			duration = animations[i].duration;
+			context.fillRect(0, l, width, 1);
+		}
+
+		//Vertical lines
+		for(var l = 0, step = this.zoom / 10; l <= width; l += step)
+		{
+			context.fillRect(l, 0, 1, height);
 		}
 	}
 
-	var width = this.zoom * duration;
-	var height = y;
+	this.seek.style.height = y + "px";
+	this.tab.style.height = y + "px";
 
 	//Timescale
 	//timescale.style.width = width + "px";
 	//timescale.style.height = height + "px";
 	//timescale.width = width;
 	//timescale.height = height;
-
-	//Timeline grig
-	timegrid.style.width = width + "px";
-	timegrid.style.height = height + "px";
-	timegrid.width = width;
-	timegrid.height = height;
-
-	var context = timegrid.getContext("2d");
-	context.fillStyle = "#444444";
-
-	//Horizontal lines
-	for(var i = 0; i <= height; i += this.timelineHeight)
-	{
-		context.fillRect(0, i, width, 1);
-	}
-
-	//Vertical lines
-	for(var i = 0, step = this.zoom / 10; i <= width; i += step)
-	{
-		context.fillRect(i, 0, 1, height);
-	}
 };
 
 AnimationTab.prototype.updateInterface = function()
@@ -720,13 +733,10 @@ AnimationTab.prototype.updateInterface = function()
 
 		this.timeline.style.width = this.size.x + "px";
 		this.timeline.style.height = (this.size.y - 20) + "px";
-
-		this.seek.style.height = this.timeline.style.height;
 		
 		this.info.style.height = this.timeline.style.height;
 		this.info.style.width = this.tab.position + "px";
 
-		this.tab.style.height = this.timeline.style.height;
 		this.tab.style.left = this.info.style.width;
 		
 		this.tracks.style.left = (this.tab.position + 5) + "px";

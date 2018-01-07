@@ -38,7 +38,6 @@ function ProfilingTab(parent, closeable, container, index)
 	this.vertices = this.form.addText("123");
 	this.form.nextRow();
 
-
 	this.form.updateInterface();
 }
 
