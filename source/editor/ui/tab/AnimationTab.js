@@ -395,9 +395,31 @@ AnimationTab.prototype.updateTimeline = function()
 
 		var block = document.createElement("div");
 		block.style.height = this.timelineHeight + "px";
+		block.style.zIndex = "200";
 		block.style.backgroundColor = Editor.theme.barColor;
-		//block.innerHTML = " UUID: " + animations[i].uuid + " | Duration: " + animations[i].duration + " s | Enabled:true";	
 		this.tracks.appendChild(block);
+
+		var text = new Text(block);
+		text.position.set(5, y + 5);
+		text.size.set(50, 20);
+		text.setText("Enabled");
+		text.updateInterface();
+
+		var enabled = new CheckBox(block);
+		enabled.position.set(55, y + 5);
+		enabled.size.set(15, 15);
+		enabled.updateInterface();
+
+		var text = new Text(block);
+		text.position.set(70, y + 5);
+		text.size.set(100, 20);
+		text.setText("Duration");
+		text.updateInterface();
+
+		var duration = new NumberBox(block);
+		duration.position.set(150, y + 5);
+		duration.size.set(50, 18);
+		duration.updateInterface();
 
 		y += this.timelineHeight;
 
