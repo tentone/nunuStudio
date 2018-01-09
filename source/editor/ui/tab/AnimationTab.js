@@ -594,10 +594,9 @@ AnimationTab.prototype.updateTimeline = function()
 			button.appendChild(name);
 
 			/*var keyframe = document.createElement("img");
-			keyframe.style.display = "block";
-			keyframe.style.position = "relative";
-			keyframe.style.right = "5px";
-			keyframe.style.top = "2px";
+			keyframe.style.position = "absolute";
+			keyframe.style.right = "2px";
+			keyframe.style.top = "0px";
 			keyframe.style.width = "15px";
 			keyframe.style.height = "15px";
 			keyframe.src = Editor.filePath + "icons/misc/animation.png";
@@ -653,7 +652,7 @@ AnimationTab.prototype.updateTimeline = function()
 							alert("Track needs to have at least one keyframe!");
 							return;
 						}
-
+						
 						var times = [];
 						for(var i = 0; i < track.times.length; i++)
 						{
