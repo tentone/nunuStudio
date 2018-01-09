@@ -67,12 +67,17 @@ Element.prototype.setAltText = function(altText)
 		text.updateInterface();
 	};
 
-	//Mouse out event (to avoid overlap with mouse leave event)
+	//Mouse out event
 	this.element.onmouseout = function()
 	{
 		text.visible = false;
 		text.updateInterface();
 	}
+};
+
+Element.prototype.setCursor = function(cursor)
+{
+	this.element.style.cursor = "e-resize";
 };
 
 //Remove element

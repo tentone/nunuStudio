@@ -2,19 +2,22 @@
 
 function AnimationClip(name, duration, tracks)
 {
-	THREE.AnimationClip.call(this, name, duration, tracks);
+	THREE._AnimationClip.call(this, name, duration, tracks);
 
-	this.active = true;
+	this.enabled = true;
 	this.loop = THREE.LoopRepeat; //LoopOnce || LoopRepeat || LoopPingPong
 }
 
-AnimationClip.prototype = Object.create(THREE.AnimationClip.prototype);
+THREE._AnimationClip = THREE.AnimationClip;
+THREE.AnimationClip = AnimationClip;
+
+AnimationClip.prototype = Object.create(THREE._AnimationClip.prototype);
 
 AnimationClip.prototype.toJSON = function(clip)
 {
-	var data = THREE.AnimationClip.prototype.toJSON.call(this, clip);
+	var data = THREE._AnimationClip.prototype.toJSON.call(this, clip);
 
-	data.active = this.active;
+	data.enabled = this.enabled;
 	data.loop = this.loop;
 
 	return data;

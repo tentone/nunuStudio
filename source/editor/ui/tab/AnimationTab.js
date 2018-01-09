@@ -41,7 +41,7 @@ function AnimationTab(parent, closeable, container, index)
 
 			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
 
-			var clip = new THREE.AnimationClip("Animation" + self.object.animations.length, 50, []);
+			var clip = new AnimationClip("Animation" + self.object.animations.length, 10, []);
 			
 			var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
 			position.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
@@ -321,6 +321,9 @@ AnimationTab.prototype.updateTimeline = function()
 		var tracks = animations[i].tracks;
 
 		var button = document.createElement("div");
+		button.style.position = "absolute";
+		button.style.top = y + "px";
+		button.style.width = "100%";
 		button.style.height = this.timelineHeight + "px";
 		button.animation = animations[i];
 		button.object = this.object;
@@ -384,7 +387,7 @@ AnimationTab.prototype.updateTimeline = function()
 		this.info.appendChild(button);
 
 		var name = document.createElement("div");
-		name.style.position = "relative";
+		name.style.position = "absolute";
 		name.style.textOverflow = "ellipsis";
 		name.style.whiteSpace = "nowrap";
 		name.style.overflow = "hidden";
@@ -409,6 +412,13 @@ AnimationTab.prototype.updateTimeline = function()
 		enabled.position.set(55, y + 5);
 		enabled.size.set(15, 15);
 		enabled.updateInterface();
+		enabled.element.element = enabled;
+		enabled.element.animation = animations[i];
+		enabled.setValue(animations[i].enabled);
+		enabled.setOnChange(function()
+		{
+			this.animation.enabled = this.element.getValue();
+		});
 
 		var text = new Text(block);
 		text.position.set(70, y + 5);
@@ -418,9 +428,37 @@ AnimationTab.prototype.updateTimeline = function()
 
 		var duration = new NumberBox(block);
 		duration.position.set(150, y + 5);
-		duration.size.set(50, 18);
+		duration.size.set(60, 18);
 		duration.updateInterface();
+		duration.element.element = duration;
+		duration.element.animation = animations[i];
+		duration.setValue(animations[i].duration);
+		duration.setOnChange(function()
+		{
+			this.animation.duration = this.element.getValue();
+		});
 
+		var text = new Text(block);
+		text.position.set(190, y + 5);
+		text.size.set(100, 20);
+		text.setText("Loop");
+		text.updateInterface();
+
+		var loop = new DropdownList(block);
+		loop.position.set(260, y + 5);
+		loop.size.set(90, 18);
+		loop.addValue("Once", THREE.LoopOnce);
+		loop.addValue("Repeat", THREE.LoopRepeat);
+		loop.addValue("PingPong", THREE.LoopPingPong);
+		loop.updateInterface();
+		loop.element.element = loop;
+		loop.element.animation = animations[i];
+		loop.setValue(animations[i].loop);
+		loop.setOnChange(function()
+		{
+			this.animation.loop = this.element.getValue();
+		});
+		
 		y += this.timelineHeight;
 
 		var timegrid = document.createElement("canvas");
@@ -435,6 +473,9 @@ AnimationTab.prototype.updateTimeline = function()
 			var times = tracks[j].times;
 
 			var button = document.createElement("div");
+			button.style.position = "absolute";
+			button.style.top = y + "px";
+			button.style.width = "100%";
 			button.style.height = this.timelineHeight + "px";
 			button.style.backgroundColor = Editor.theme.barColor;
 			button.style.overflow = "hidden";
@@ -584,23 +625,29 @@ AnimationTab.prototype.updateTimeline = function()
 			this.info.appendChild(button);
 
 			var name = document.createElement("div");
-			name.style.position = "relative";
+			name.style.position = "absolute";
 			name.style.textOverflow = "ellipsis";
 			name.style.whiteSpace = "nowrap";
 			name.style.overflow = "hidden";
 			name.style.top = "25%";
+			name.style.width = "100%";
 			name.style.pointerEvents = "none";
 			name.innerHTML = tracks[j].name;
 			button.appendChild(name);
 
-			/*var keyframe = document.createElement("img");
+			var keyframe = document.createElement("img");
 			keyframe.style.position = "absolute";
-			keyframe.style.right = "2px";
-			keyframe.style.top = "0px";
+			keyframe.style.right = "4px";
+			keyframe.style.top = "7px";
 			keyframe.style.width = "15px";
 			keyframe.style.height = "15px";
-			keyframe.src = Editor.filePath + "icons/misc/animation.png";
-			button.appendChild(keyframe);*/
+			keyframe.style.cursor = "pointer";
+			keyframe.src = Editor.filePath + "icons/misc/add.png";
+			keyframe.onclick = function()
+			{
+				alert("TODO");
+			};
+			button.appendChild(keyframe);
 
 			var track = document.createElement("div");
 			track.style.height = this.timelineHeight + "px";

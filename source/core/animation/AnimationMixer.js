@@ -27,7 +27,7 @@ AnimationMixer.prototype.createActions = function(animations)
 	for(var i = 0; i < animations.length; i++)
 	{
 		var action = this.clipAction(animations[i]);
-		action.setLoop(THREE.LoopRepeat);
+		action.setLoop(animations[i].loop);
 		action.play();
 	}
 };
