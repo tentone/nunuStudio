@@ -481,7 +481,6 @@ AnimationTab.prototype.updateTimeline = function()
 			button.style.overflow = "hidden";
 			button.animation = animations[i];
 			button.track = tracks[j];
-			button.object = this.object;
 
 			button.onmouseenter = function()
 			{
@@ -496,7 +495,6 @@ AnimationTab.prototype.updateTimeline = function()
 			button.oncontextmenu = function(event)
 			{
 				var track = this.track;
-				var object = this.object;
 				var animation = this.animation;
 
 				var context = new ContextMenu();
@@ -505,57 +503,7 @@ AnimationTab.prototype.updateTimeline = function()
 				
 				context.addOption("Add Keyframe", function()
 				{
-					var names = track.name.split(".");
-					var value = object[names[1]];
-
-					value = (value.toArray !== undefined) ? value.toArray() : [value];
-
-					//Check if there is already a keyframe with saame time
-					for(var i = 0; i < track.times.length; i++)
-					{
-						if(track.times[i] === self.mixer.time)
-						{
-							break;
-						}
-					}
-
-					//If there is already a keyframe with time update values
-					if(i < track.times.length)
-					{
-						var valueSize = track.getValueSize();
-						var index = i * valueSize;
-
-						for(var i = 0; i < valueSize; i++)
-						{
-							track.values[index] = value[i];
-							index++;
-						}
-					}
-					//Add new keyframe to track
-					else
-					{
-						var times = [];
-						for(var i = 0; i < track.times.length; i++)
-						{
-							times.push(track.times[i]);
-						}
-						times.push(self.mixer.time);
-
-						var values = [];
-						for(var i = 0; i < track.values.length; i++)
-						{
-							values.push(track.values[i]);
-						}
-						values = values.concat(value);
-
-						track.times = new Float32Array(times);
-						track.values = new Float32Array(values);
-
-						track.sort();
-					}
-
-					self.updateTimeline();
-					self.updateAnimationMixer();
+					self.addKeyFrame(track, self.object);
 				});
 
 				context.addOption("Delete", function()
@@ -643,9 +591,10 @@ AnimationTab.prototype.updateTimeline = function()
 			keyframe.style.height = "15px";
 			keyframe.style.cursor = "pointer";
 			keyframe.src = Editor.filePath + "icons/misc/add.png";
+			keyframe.track = tracks[j];
 			keyframe.onclick = function()
 			{
-				alert("TODO");
+				self.addKeyFrame(this.track, self.object);
 			};
 			button.appendChild(keyframe);
 
@@ -789,6 +738,61 @@ AnimationTab.prototype.updateTimeline = function()
 	//timescale.style.height = height + "px";
 	//timescale.width = width;
 	//timescale.height = height;
+};
+
+AnimationTab.prototype.addKeyFrame = function(track, object)
+{
+	var names = track.name.split(".");
+	var value = object[names[1]];
+
+	value = (value.toArray !== undefined) ? value.toArray() : [value];
+
+	//Check if there is already a keyframe with same time
+	for(var i = 0; i < track.times.length; i++)
+	{
+		if(track.times[i] === this.mixer.time)
+		{
+			break;
+		}
+	}
+
+	//If there is already a keyframe with time update values
+	if(i < track.times.length)
+	{
+		var valueSize = track.getValueSize();
+		var index = i * valueSize;
+
+		for(var i = 0; i < valueSize; i++)
+		{
+			track.values[index] = value[i];
+			index++;
+		}
+	}
+	//Add new keyframe to track
+	else
+	{
+		var times = [];
+		for(var i = 0; i < track.times.length; i++)
+		{
+			times.push(track.times[i]);
+		}
+		times.push(this.mixer.time);
+
+		var values = [];
+		for(var i = 0; i < track.values.length; i++)
+		{
+			values.push(track.values[i]);
+		}
+		values = values.concat(value);
+
+		track.times = new Float32Array(times);
+		track.values = new Float32Array(values);
+
+		track.sort();
+	}
+
+	this.updateTimeline();
+	this.updateAnimationMixer();
 };
 
 AnimationTab.prototype.updateInterface = function()
