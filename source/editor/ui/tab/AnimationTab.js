@@ -587,8 +587,8 @@ AnimationTab.prototype.updateTimeline = function()
 			keyframe.style.position = "absolute";
 			keyframe.style.right = "4px";
 			keyframe.style.top = "7px";
-			keyframe.style.width = "15px";
-			keyframe.style.height = "15px";
+			keyframe.style.width = "12px";
+			keyframe.style.height = "12px";
 			keyframe.style.cursor = "pointer";
 			keyframe.src = Editor.filePath + "icons/misc/add.png";
 			keyframe.track = tracks[j];
@@ -597,6 +597,18 @@ AnimationTab.prototype.updateTimeline = function()
 				self.addKeyFrame(this.track, self.object);
 			};
 			button.appendChild(keyframe);
+
+			var interpolation = new DropdownList(button);
+			interpolation.size.set(60, 18);
+			interpolation.updateInterface();
+			interpolation.addValue("Linear", THREE.InterpolateLinear);
+			interpolation.addValue("Smooth", THREE.Smooth);
+			interpolation.addValue("Discrete", THREE.InterpolateDiscrete);
+			interpolation.setValue(THREE.Smooth);
+			interpolation.setOnChange(function()
+			{
+				//this.animation.loop = this.element.getValue();
+			});
 
 			var track = document.createElement("div");
 			track.style.height = this.timelineHeight + "px";
