@@ -397,8 +397,8 @@ AnimationTab.prototype.updateTimeline = function()
 		button.appendChild(name);
 
 		var block = document.createElement("div");
+		block.style.width = "100%";
 		block.style.height = this.timelineHeight + "px";
-		block.style.zIndex = "200";
 		block.style.backgroundColor = Editor.theme.barColor;
 		this.tracks.appendChild(block);
 
@@ -599,8 +599,10 @@ AnimationTab.prototype.updateTimeline = function()
 			button.appendChild(keyframe);
 
 			var interpolation = new DropdownList(button);
-			interpolation.size.set(60, 18);
-			interpolation.updateInterface();
+			interpolation.size.set(30, 18);
+			interpolation.position.set(22, 5);
+			interpolation.updatePosition(Element.TOP_RIGHT);
+			interpolation.updateSize();
 			interpolation.addValue("Linear", THREE.InterpolateLinear);
 			interpolation.addValue("Smooth", THREE.Smooth);
 			interpolation.addValue("Discrete", THREE.InterpolateDiscrete);
@@ -725,7 +727,6 @@ AnimationTab.prototype.updateTimeline = function()
 		timegrid.width = width;
 		timegrid.height = height;
 
-
 		var context = timegrid.getContext("2d");
 		context.fillStyle = Editor.theme.barColor;
 
@@ -742,8 +743,7 @@ AnimationTab.prototype.updateTimeline = function()
 		}
 	}
 
-	this.seek.style.height = y + "px";
-	this.tab.style.height = y + "px";
+	this.updateInterface();
 
 	//Timescale
 	//timescale.style.width = width + "px";
@@ -817,19 +817,25 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		this.bar.style.width = this.size.x + "px";
-
 		this.timeline.style.width = this.size.x + "px";
 		this.timeline.style.height = (this.size.y - 20) + "px";
 		
-		this.info.style.height = this.timeline.style.height;
+		this.bar.style.width = this.size.x + "px";
+
+		//Resizable division
+		this.info.style.height = this.timeline.scrollHeight + "px";
 		this.info.style.width = this.tab.position + "px";
 
+		this.tab.style.height = this.timeline.scrollHeight + "px";
 		this.tab.style.left = this.info.style.width;
 		
 		this.tracks.style.left = (this.tab.position + 5) + "px";
-		this.tracks.style.height = this.timeline.style.height;
 		this.tracks.style.width = (this.size.x - this.tab.position - 5) + "px";
+
+		//console.log(tracks);
+
+		//Seekbar
+		this.seek.style.height = this.timeline.scrollHeight + "px";
 	}
 	else
 	{
