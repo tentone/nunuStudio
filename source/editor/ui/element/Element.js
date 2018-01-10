@@ -19,6 +19,18 @@ Element.prototype.constructor = Element;
 //Empty function that can be used a dummy instead of creating empty functions
 Element.EMPTY = function(){};
 
+//Origin on top left.
+Element.TOP_LEFT = 0;
+
+//Origin on top right.
+Element.TOP_RIGHT = 1;
+
+//Origin on bottom left.
+Element.BOTTOM_LEFT = 2;
+
+//Origin on bottom right.
+Element.BOTTOM_RIGHT = 3;
+
 //Add drag and drog event prevention
 Element.prototype.preventDragEvents = function()
 {
@@ -74,6 +86,38 @@ Element.prototype.setAltText = function(altText)
 		text.updateInterface();
 	}
 };
+
+Element.prototype.updatePosition = function(mode)
+{
+	if(mode === Element.TOP_LEFT || mode === Element.TOP_RIGHT)
+	{
+		this.element.style.top = this.position.y + "px";
+		this.element.style.bottom = undefined;
+	}
+	else
+	{
+		this.element.style.bottom = this.position.y + "px";
+		this.element.style.top = undefined;
+	}
+
+	if(mode === Element.TOP_LEFT || mode === Element.BOTTOM_LEFT)
+	{
+		this.element.style.left = this.position.x + "px";
+		this.element.style.right = undefined;
+	}
+	else
+	{
+		this.element.style.right = this.position.x + "px";
+		this.element.style.left = undefined;
+	}
+};
+
+Element.prototype.updateSize = function()
+{
+	this.element.style.width = this.size.x + "px";
+	this.element.style.height = this.size.y + "px";
+};
+
 
 Element.prototype.setCursor = function(cursor)
 {
