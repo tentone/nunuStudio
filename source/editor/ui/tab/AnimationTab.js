@@ -31,16 +31,12 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(self.object !== null)
 		{
-			console.log(self.object.animations);
-
 			if(self.object.animations === undefined)
 			{
 				self.object.animations = [];
-				console.log("Create animation array");
 			}
 
 			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
-
 			var clip = new AnimationClip("Animation" + self.object.animations.length, 10, []);
 			
 			var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
@@ -59,10 +55,7 @@ function AnimationTab(parent, closeable, container, index)
 			clip.tracks.push(visible);
 
 			self.object.animations.push(clip);
-
-
 			self.attach(self.object);
-			self.updateTimeline();
 		}
 	});
 
@@ -98,7 +91,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
 	{
-		if(self.mixer == null || !self.mixer.playing)
+		if(self.mixer == null)
 		{
 			alert("No animation playing!");
 			return;
@@ -118,7 +111,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomSlider.setOnChange(function()
 	{
 		self.zoom = self.zoomSlider.getValue();
-		self.updateTimeline();
+		self.createTimeline();
 	});
 
 	//Timeline
@@ -220,47 +213,49 @@ AnimationTab.prototype.deactivate = function()
 	}
 };
 
+//Attach object to animation editor
 AnimationTab.prototype.attach = function(object)
 {
 	this.object = object;
+	this.createAnimationMixer();
 
-	if(this.mixer !== null)
+	//Create timeline and animation mixer
+	if(this.object.animations !== undefined)
 	{
-		if(this.mixer._root !== object)
-		{
-			this.play.setText("Play");
-			this.mixer.stop();
-			this.mixer.dispose();
-			this.mixer = null;
-		}
-		else
-		{
-			this.mixer.createActions(object.animations);
-			return;
-		}
+		this.createTimeline();
 	}
-
-	if(object.animations !== undefined)
+	else
 	{
-		this.mixer = new AnimationMixer(object);
-		this.mixer.createActions(object.animations);
+		this.clearTimeline();
 	}
-	
-	
-	this.updateTimeline();
 };
 
-AnimationTab.prototype.updateAnimationMixer = function()
+//Create a new animation mixer
+AnimationTab.prototype.createAnimationMixer = function(keepTime)
 {
+	var time = 0;
+
+	//Remove old mixer
 	if(this.mixer !== null)
 	{
+		if(keepTime)
+		{
+			time = this.mixer.time;
+		}
+
 		this.play.setText("Play");
 		this.mixer.stop();
 		this.mixer.dispose();
+		this.mixer = null;
 	}
 
-	this.mixer = new AnimationMixer(this.object);
-	this.mixer.createActions(this.object.animations);
+	//Check if the object has animations
+	if(this.object.animations !== undefined)
+	{
+		this.mixer = new AnimationMixer(this.object);
+		this.mixer.createActions(this.object.animations);
+		this.mixer.setTime(time);
+	}
 };
 
 AnimationTab.prototype.update = function()
@@ -278,6 +273,7 @@ AnimationTab.prototype.update = function()
 
 		this.mixer.update(this.clock.getDelta());
 
+		//Update object panel when playing
 		if(this.mixer.playing)
 		{
 			Interface.panel.updatePanel();
@@ -285,7 +281,8 @@ AnimationTab.prototype.update = function()
 	}
 };
 
-AnimationTab.prototype.updateTimeline = function()
+//Clear timeline division
+AnimationTab.prototype.clearTimeline = function()
 {
 	while(this.tracks.firstChild)
 	{
@@ -295,6 +292,12 @@ AnimationTab.prototype.updateTimeline = function()
 	{
 		this.info.removeChild(this.info.firstChild);
 	}
+};
+
+//Create new timeline elements
+AnimationTab.prototype.createTimeline = function()
+{
+	this.clearTimeline();
 
 	if(this.object === null || this.object.animations === undefined)
 	{
@@ -341,7 +344,7 @@ AnimationTab.prototype.updateTimeline = function()
 				if(value !== null && value !== "")
 				{
 					Editor.history.add(new ChangeAction(animation, "name", value));
-					self.updateTimeline();
+					self.createTimeline();
 				}
 			});
 			context.addOption("Add track", function()
@@ -368,8 +371,8 @@ AnimationTab.prototype.updateTimeline = function()
 					alert("Unable to delete animation");
 				}
 
-				self.updateTimeline();
-				self.updateAnimationMixer();
+				self.createTimeline();
+				self.createAnimationMixer();
 			});
 			context.updateInterface();
 		};
@@ -523,16 +526,16 @@ AnimationTab.prototype.updateTimeline = function()
 						alert("Unable to delete track");
 					}
 
-					self.updateTimeline();
-					self.updateAnimationMixer();
+					self.createTimeline();
+					self.createAnimationMixer();
 				});
 
 				context.addOption("Optimize", function()
 				{
 					track.optimize();
 
-					self.updateTimeline();
-					self.updateAnimationMixer();
+					self.createTimeline();
+					self.createAnimationMixer();
 				});
 
 				context.addOption("Shift", function()
@@ -547,8 +550,8 @@ AnimationTab.prototype.updateTimeline = function()
 
 					track.shift(time);
 
-					self.updateTimeline();
-					self.updateAnimationMixer();
+					self.createTimeline();
+					self.createAnimationMixer();
 				});
 				
 				context.addOption("Trim", function()
@@ -564,8 +567,8 @@ AnimationTab.prototype.updateTimeline = function()
 
 					track.trim(start, time);
 
-					self.updateTimeline();
-					self.updateAnimationMixer();
+					self.createTimeline();
+					self.createAnimationMixer();
 				});
 
 				context.updateInterface();
@@ -612,6 +615,7 @@ AnimationTab.prototype.updateTimeline = function()
 			interpolation.setOnChange(function()
 			{
 				this.track.setInterpolation(this.element.getValue());
+				self.createAnimationMixer();
 			});
 
 			var track = document.createElement("div");
@@ -690,8 +694,8 @@ AnimationTab.prototype.updateTimeline = function()
 						track.times = new Float32Array(times);
 						track.values = new Float32Array(values);
 
-						self.updateTimeline();
-						self.updateAnimationMixer();
+						self.createTimeline();
+						self.createAnimationMixer();
 					});
 
 					context.addOption("Move", function()
@@ -707,8 +711,8 @@ AnimationTab.prototype.updateTimeline = function()
 						track.times[index] = time;
 						track.sort();
 
-						self.updateTimeline();
-						self.updateAnimationMixer();
+						self.createTimeline();
+						self.createAnimationMixer();
 					});
 
 					context.updateInterface();
@@ -805,8 +809,8 @@ AnimationTab.prototype.addKeyFrame = function(track, object)
 		track.sort();
 	}
 
-	this.updateTimeline();
-	this.updateAnimationMixer();
+	this.createTimeline();
+	this.createAnimationMixer(true);
 };
 
 AnimationTab.prototype.updateInterface = function()
@@ -833,8 +837,6 @@ AnimationTab.prototype.updateInterface = function()
 		
 		this.tracks.style.left = (this.tab.position + 5) + "px";
 		this.tracks.style.width = (this.size.x - this.tab.position - 5) + "px";
-
-		//console.log(tracks);
 
 		//Seekbar
 		this.seek.style.height = this.timeline.scrollHeight + "px";
