@@ -607,9 +607,11 @@ AnimationTab.prototype.updateTimeline = function()
 			interpolation.addValue("Smooth", THREE.Smooth);
 			interpolation.addValue("Discrete", THREE.InterpolateDiscrete);
 			interpolation.setValue(THREE.Smooth);
+			interpolation.element.element = interpolation;
+			interpolation.element.track = tracks[j];
 			interpolation.setOnChange(function()
 			{
-				//this.animation.loop = this.element.getValue();
+				this.track.setInterpolation(this.element.getValue());
 			});
 
 			var track = document.createElement("div");
