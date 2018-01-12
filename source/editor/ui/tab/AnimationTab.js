@@ -421,6 +421,7 @@ AnimationTab.prototype.createTimeline = function()
 		enabled.setOnChange(function()
 		{
 			this.animation.enabled = this.element.getValue();
+			self.createAnimationMixer();
 		});
 
 		var text = new Text(block);
@@ -439,6 +440,7 @@ AnimationTab.prototype.createTimeline = function()
 		duration.setOnChange(function()
 		{
 			this.animation.duration = this.element.getValue();
+			self.createTimeline();
 		});
 
 		var text = new Text(block);
@@ -460,6 +462,7 @@ AnimationTab.prototype.createTimeline = function()
 		loop.setOnChange(function()
 		{
 			this.animation.loop = this.element.getValue();
+			self.createAnimationMixer();
 		});
 		
 		y += this.timelineHeight;
