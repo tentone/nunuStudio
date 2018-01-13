@@ -574,10 +574,7 @@ Program.prototype.dispose = function()
 	}
 
 	//Children objects
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].dispose();
-	}
+	THREE.Object3D.prototype.dispose.call(this);
 
 	//VR Effect
 	if(this.effect !== null)

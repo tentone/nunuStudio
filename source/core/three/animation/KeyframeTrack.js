@@ -6,7 +6,7 @@ THREE.KeyframeTrack.prototype.sort = function()
 	{
 		for(var j = i + 1; j < this.times.length; j++)
 		{
-			if(this.times[j] < this.times[i])
+			if(this.times[i] > this.times[j])
 			{
 				var temp = this.times[j];
 				this.times[j] = this.times[i];
@@ -16,11 +16,11 @@ THREE.KeyframeTrack.prototype.sort = function()
 				var k = j * valueSize;
 				var l = i * valueSize;
 
-				for(var k = 0; k < valueSize; k++)
+				for(var m = 0; m < valueSize; m++)
 				{
-					var temp = this.values[k + k];
-					this.values[k + k] = this.values[l + k];
-					this.values[l + k] = temp;
+					var temp = this.values[k + m];
+					this.values[k + m] = this.values[l + m];
+					this.values[l + m] = temp;
 				}
 			}
 		}

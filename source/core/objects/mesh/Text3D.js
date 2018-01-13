@@ -170,10 +170,7 @@ Text3D.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].dispose();
-	}
+	THREE.Object3D.prototype.dispose.call(this);
 };
 
 /**

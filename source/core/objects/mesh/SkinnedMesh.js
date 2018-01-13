@@ -59,11 +59,7 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 	this.castShadow = true;
 
 	this.animations = [];
-	this.animationSpeed = 1.0;
-	this.initialAnimation = -1;
-
 	this.mixer = new AnimationMixer(this);
-	this.clock = new THREE.Clock();
 }
 
 THREE._SkinnedMesh = THREE.SkinnedMesh;
@@ -71,23 +67,6 @@ THREE.SkinnedMesh = SkinnedMesh;
 
 SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
 
-/**
- * Initialize the skinned mesh object, play initial animation.
- * 
- * @method initialize
- */
-SkinnedMesh.prototype.initialize = function()
-{
-	if(this.initialAnimation >= 0)
-	{
-		this.playAnimation(this.initialAnimation);
-	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-};
 
 /**
  * Play animation attached to this skinned mesh.
@@ -111,16 +90,6 @@ SkinnedMesh.prototype.playAnimation = function(index, loop)
 	{
 		console.warn("nunuStudio: Error playing animation (" + e + ")");
 	}
-};
-
-/**
- * Update skinned mesh animation if there is some attached.
- * 
- * @method onBeforeRender
- */
-SkinnedMesh.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
-{
-	this.mixer.update(this.clock.getDelta() * this.animationSpeed);
 };
 
 /**
@@ -152,13 +121,7 @@ SkinnedMesh.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	this.mixer.dispose();
-
-	//Children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].dispose();
-	}
+	THREE.Object3D.prototype.dispose.call(this);
 };
 
 /**
