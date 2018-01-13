@@ -4,10 +4,13 @@ function AudioPlayer(parent)
 {
 	Element.call(this, parent);
 
+	this.element.style.overflow = "visible";
+
+	//Self pointer
+	var self = this;
+
 	//WebAudio context
 	this.context = THREE.AudioContext.getContext();
-
-	this.element.style.overflow = "visible";
 
 	//Timer
 	this.timer = document.createElement("div");
@@ -29,6 +32,10 @@ function AudioPlayer(parent)
 	this.button.style.border = "none";
 	this.button.style.outline = "none";
 	this.element.appendChild(this.button);
+	this.button.onclick = function()
+	{
+		self.toggle();
+	};
 
 	//Icon
 	this.icon = document.createElement("img");
@@ -79,87 +86,62 @@ function AudioPlayer(parent)
 	this.seekProgress = 0;
 	this.dragging = false;
 
-	//Self pointer
-	var self = this;
-
-	this.button.onclick = function()
-	{
-		self.toggle();
-	};
-
 	this.scrubber.onmousedown = function(event)
 	{
-		self.dragging = true;
 		self.seekStart = event.pageX;
 		self.seekTime = self.time;
-	};
-
-	this.track.onmousemove = function(event)
-	{
-		if(self.dragging && self.buffer !== null)
-		{
-			var progress = event.layerX / this.offsetWidth;
-			self.time = progress * self.buffer.duration;
-
-			if(self.playing)
-			{
-				self.play(self.time);
-			}
-
-			progress *= 100;
-			self.progress.style.width = progress + "%";
-			self.scrubber.style.left = progress + "%";
-		}
-	};
-
-	this.track.onclick = function(event)
-	{
-		if(self.dragging && self.buffer !== null)
-		{
-			var progress = event.layerX / this.offsetWidth;
-
-			console.log(progress);
-		}
+		self.dragging = true;
+		self.manager.create();
 	};
 
 	//Event manager
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		if(self.dragging && self.buffer !== null)
+		self.seekProgress = (event.pageX - self.seekStart) / (self.size.x - self.size.y);
+		self.seekProgress += self.seekTime / self.buffer.duration;
+
+		if(self.seekProgress < 0)
 		{
-			self.seekProgress = (event.pageX - self.seekStart) / (self.size.x - self.size.y * 1.1);
-			self.seekProgress += self.seekTime / self.buffer.duration;
-
-			if(self.seekProgress < 0)
-			{
-				self.seekProgress = 0;
-			}
-			else if(self.seekProgress > 1)
-			{
-				self.seekProgress = 1;
-			}
-
-			self.progress.style.width = (self.seekProgress * 100) + "%";
-			self.scrubber.style.left = self.progress.style.width;
+			self.seekProgress = 0;
 		}
+		else if(self.seekProgress > 1)
+		{
+			self.seekProgress = 1;
+		}
+
+		self.progress.style.width = (self.seekProgress * 100) + "%";
+		self.scrubber.style.left = self.progress.style.width;
 	});
 
 	this.manager.add(window, "mouseup", function(event)
-	{
-		if(self.dragging)
-		{
-			self.time = self.seekProgress * self.buffer.duration;
-			self.dragging = false;
+	{	
+		self.dragging = false;
+		self.time = self.seekProgress * self.buffer.duration;
 
-			if(self.playing)
-			{
-				self.play(self.time);
-			}
+		if(self.playing)
+		{
+			self.play(self.time);
 		}
+
+		self.manager.destroy();
 	});
-	
-	this.manager.create();
+
+	this.track.onmousedown = function(event)
+	{
+		var progress = event.layerX / this.offsetWidth;
+
+		self.seekProgress = progress;
+		self.time = progress * self.buffer.duration;
+
+		self.progress.style.width = (self.seekProgress * 100) + "%";
+		self.scrubber.style.left = self.progress.style.width;
+
+		if(self.playing)
+		{
+			self.play(self.time);
+		}
+	};
 
 	//Update elements
 	function draw()
@@ -317,23 +299,16 @@ AudioPlayer.prototype.toggle = function()
 //Remove element
 AudioPlayer.prototype.destroy = function()
 {
-	try
+	//Stop audio playback
+	this.disconnect();
+	this.stop();
+
+	//Remove element
+	if(this.parent !== null && this.parent.contains(this.element))
 	{
-		//Remove event listeners
-		this.manager.destroy();
-
-		//Stop audio playback
-		this.disconnect();
-		this.stop();
-
-		//Remove element
-		if(this.parent.contains(this.element))
-		{
-			this.parent.removeChild(this.element);
-		}
+		this.parent.removeChild(this.element);
 		this.parent = null;
 	}
-	catch(e){}
 };
 
 //Update division Size
@@ -343,29 +318,27 @@ AudioPlayer.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
+
+		//Button
+		this.button.style.width = this.element.style.height;
+		this.button.style.height = this.element.style.height;
+
+		//Track
+		this.track.style.top = (this.size.y * 0.4) + "px";
+		this.track.style.left = (this.size.y * 1.05) + "px";
+		this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
+		this.track.style.height = (this.size.y * 0.3) + "px";
+
+		//Scrubber
+		this.scrubber.style.height = (this.size.y * 0.8) + "px";
+		this.scrubber.style.top = (-this.size.y * 0.3) + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
-
-	//Button
-	this.button.style.width = this.element.style.height;
-	this.button.style.height = this.element.style.height;
-
-	//Track
-	this.track.style.top = (this.size.y * 0.4) + "px";
-	this.track.style.left = (this.size.y * 1.05) + "px";
-	this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
-	this.track.style.height = (this.size.y * 0.3) + "px";
-
-	//Scrubber
-	this.scrubber.style.height = (this.size.y * 0.8) + "px";
-	this.scrubber.style.top = (-this.size.y * 0.3) + "px";
 };
