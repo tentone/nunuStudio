@@ -311,8 +311,9 @@ include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
 include("editor/ui/tab/CubeTextureEditor.js");
 include("editor/ui/tab/TextEditor.js");
-include("editor/ui/tab/AnimationTab.js");
 include("editor/ui/tab/ProfilingTab.js");
+
+include("editor/ui/tab/animation/AnimationTab.js");
 
 include("editor/ui/tab/camera/CameraEditor.js");
 include("editor/ui/tab/camera/postprocessing/PassNode.js");
