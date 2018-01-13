@@ -86,14 +86,6 @@ function AudioPlayer(parent)
 	this.seekProgress = 0;
 	this.dragging = false;
 
-	this.scrubber.onmousedown = function(event)
-	{
-		self.seekStart = event.pageX;
-		self.seekTime = self.time;
-		self.dragging = true;
-		self.manager.create();
-	};
-
 	//Event manager
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
@@ -126,6 +118,16 @@ function AudioPlayer(parent)
 
 		self.manager.destroy();
 	});
+
+	this.scrubber.onmousedown = function(event)
+	{
+		self.seekStart = event.pageX;
+		self.seekTime = self.time;
+		self.dragging = true;
+		self.manager.create();
+
+		event.stopPropagation();
+	};
 
 	this.track.onmousedown = function(event)
 	{
@@ -328,14 +330,14 @@ AudioPlayer.prototype.updateInterface = function()
 		this.button.style.height = this.element.style.height;
 
 		//Track
-		this.track.style.top = (this.size.y * 0.4) + "px";
+		this.track.style.top = (this.size.y * 0.25) + "px";
 		this.track.style.left = (this.size.y * 1.05) + "px";
 		this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
-		this.track.style.height = (this.size.y * 0.3) + "px";
+		this.track.style.height = (this.size.y * 0.5) + "px";
 
 		//Scrubber
 		this.scrubber.style.height = (this.size.y * 0.8) + "px";
-		this.scrubber.style.top = (-this.size.y * 0.3) + "px";
+		this.scrubber.style.top = (-this.size.y * 0.15) + "px";
 	}
 	else
 	{
