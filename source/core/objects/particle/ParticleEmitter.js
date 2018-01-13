@@ -128,10 +128,7 @@ ParticleEmitter.prototype.dispose = function()
 {
 	this.group.texture.dispose();
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].dispose();
-	}
+	THREE.Object3D.prototype.dispose.call(this);
 };
 
 /**

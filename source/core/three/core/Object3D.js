@@ -125,7 +125,9 @@ THREE.Object3D.prototype.folded = false;
 THREE.Object3D.prototype.hidden = false;
 
 /**
- * Initialize the object.
+ * Initializes the object.
+ *
+ * This method is calling one time on initialization.
  * 
  * @method initialize
  */
@@ -138,12 +140,20 @@ THREE.Object3D.prototype.initialize = function()
 };
 
 /**
- * Update the object state, called every time before rendering into the screen.
+ * Update the object state.
+ * 
+ * Called every time before rendering into the screen.
  * 
  * @method update
+ * @param {Number} delta Time since last update call.
  */
 THREE.Object3D.prototype.update = function(delta)
 {
+	if(this.mixer !== undefined)
+	{
+		this.mixer.update(delta);
+	}
+
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update(delta);
@@ -154,8 +164,8 @@ THREE.Object3D.prototype.update = function(delta)
  * Resize this object, called everytime the window is resized.
  * 
  * @method resize
- * @param {Number} x Width.
- * @param {Number} y Height.
+ * @param {Number} x Screen width.
+ * @param {Number} y Screen height.
  */
 THREE.Object3D.prototype.resize = function(x, y)
 {
@@ -166,12 +176,19 @@ THREE.Object3D.prototype.resize = function(x, y)
 };
 
 /**
- * Disposes the object (to avoid memory leaks).
+ * Disposes the object from memory.
+ * 
+ * Should be called when the object is no longer required to avoid memory leaks.
  * 
  * @method dispose
  */
 THREE.Object3D.prototype.dispose = function()
 {
+	if(this.mixer !== undefined)
+	{
+		this.mixer.dispose();
+	}
+
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].dispose();

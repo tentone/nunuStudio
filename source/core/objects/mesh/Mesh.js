@@ -65,8 +65,5 @@ Mesh.prototype.dispose = function()
 	}
 
 	//Children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].dispose();
-	}
+	THREE.Object3D.prototype.dispose.call(this);
 };
