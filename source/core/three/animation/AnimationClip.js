@@ -6,8 +6,6 @@ THREE.AnimationClip.prototype.timeScale = 1;
 THREE.AnimationClip.prototype.weight = 1;
 
 THREE.AnimationClip._toJSON = THREE.AnimationClip.toJSON;
-THREE.AnimationClip._parse = THREE.AnimationClip.parse;
-
 THREE.AnimationClip.toJSON = function(clip)
 {
 	var data = THREE.AnimationClip._toJSON.call(this, clip);
@@ -20,6 +18,7 @@ THREE.AnimationClip.toJSON = function(clip)
 	return data;
 };
 
+THREE.AnimationClip._parse = THREE.AnimationClip.parse;
 THREE.AnimationClip.parse = function(json)
 {
 	var clip = THREE.AnimationClip._parse.call(this, json);

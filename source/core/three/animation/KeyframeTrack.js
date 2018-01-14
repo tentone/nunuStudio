@@ -33,3 +33,23 @@ THREE.KeyframeTrack.prototype.sort = function()
 		}
 	}
 };
+
+THREE.KeyframeTrack._toJSON = THREE.KeyframeTrack.toJSON;
+THREE.KeyframeTrack.toJSON = function(track)
+{
+	var data = THREE.KeyframeTrack._toJSON.call(this, track);
+
+	data.color = track.color;
+
+	return data;
+};
+
+THREE.KeyframeTrack._parse = THREE.KeyframeTrack.parse;
+THREE.KeyframeTrack.parse = function(json)
+{
+	var track = THREE.KeyframeTrack._parse.call(this, json);
+
+	track.color = json.color;
+
+	return track;
+};
