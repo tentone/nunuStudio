@@ -11,7 +11,6 @@ function AnimationTab(parent, closeable, container, index)
 	this.clock = new THREE.Clock();
 	
 	this.zoom = 120.0; //Pixels/sec
-	this.timelineHeight = 30; //Pixels
 
 	//Bar
 	this.bar = document.createElement("div");
@@ -325,89 +324,16 @@ AnimationTab.prototype.createTimeline = function()
 	//Animations
 	for(var i = 0; i < animations.length; i++)
 	{
-		var tracks = animations[i].tracks;
-
-		var button = document.createElement("div");
-		button.style.position = "absolute";
-		button.style.top = y + "px";
-		button.style.width = "100%";
-		button.style.height = this.timelineHeight + "px";
-		button.animation = animations[i];
-		button.object = this.object;
-		button.oncontextmenu = function(event)
-		{
-			var animation = this.animation;
-			var object = this.object;
-
-			var context = new ContextMenu();
-			context.size.set(150, 20);
-			context.position.set(event.clientX, event.clientY);
-			context.addOption("Rename", function()
-			{
-				var value = prompt("Rename animation", animation.name);
-				if(value !== null && value !== "")
-				{
-					Editor.history.add(new ChangeAction(animation, "name", value));
-					self.createTimeline();
-				}
-			});
-			context.addOption("Add track", function()
-			{
-				var attribute = prompt("Attribute");
-				var value = self.object[attribute];
-
-				console.log(value);
-			});
-			context.addOption("Delete", function()
-			{
-				if(!Editor.confirm("Delete animation?"))
-				{
-					return;
-				}
-
-				var index = object.animations.indexOf(animation);
-				if(index !== -1)
-				{
-					object.animations.splice(index, 1);
-				}
-				else
-				{
-					alert("Unable to delete animation");
-				}
-
-				self.createTimeline();
-				self.createAnimationMixer();
-			});
-			context.updateInterface();
-		};
-
-		button.onmouseenter = function()
-		{
-			this.style.backgroundColor = Editor.theme.buttonOverColor;
-		};
-
-		button.onmouseleave = function()
-		{
-			this.style.backgroundColor = Editor.theme.buttonColor;
-		};
-
-		this.info.appendChild(button);
-
-		var name = document.createElement("div");
-		name.style.position = "absolute";
-		name.style.textOverflow = "ellipsis";
-		name.style.whiteSpace = "nowrap";
-		name.style.overflow = "hidden";
-		name.style.top = "25%";
-		name.style.pointerEvents = "none";
-		name.innerHTML = animations[i].name;
-		button.appendChild(name);
+		var button = new AnimationButton(this.info, this, animations[i]);
+		button.position.set(0, y);
+		button.size.set(0, 30);
+		button.updateInterface();
 
 		var block = document.createElement("div");
 		block.style.position = "absolute";
 		block.style.top = y + "px";
 		block.style.left = "0px";
-		block.style.height = this.timelineHeight + "px";
+		block.style.height = "30px";
 		block.style.backgroundColor = Editor.theme.barColor;
 		this.tracks.appendChild(block);
 
@@ -427,7 +353,7 @@ AnimationTab.prototype.createTimeline = function()
 		enabled.setOnChange(function()
 		{
 			this.animation.enabled = this.element.getValue();
-			self.createAnimationMixer();
+			self.createAnimationMixer(true);
 		});
 
 		var text = new Text(block);
@@ -446,7 +372,9 @@ AnimationTab.prototype.createTimeline = function()
 		duration.setOnChange(function()
 		{
 			this.animation.duration = this.element.getValue();
+
 			self.createTimeline();
+			self.createAnimationMixer();
 		});
 
 		var text = new Text(block);
@@ -468,7 +396,7 @@ AnimationTab.prototype.createTimeline = function()
 		loop.setOnChange(function()
 		{
 			this.animation.loop = this.element.getValue();
-			self.createAnimationMixer();
+			self.createAnimationMixer(true);
 		});
 
 		var text = new Text(block);
@@ -487,11 +415,12 @@ AnimationTab.prototype.createTimeline = function()
 		timeScale.setOnChange(function()
 		{
 			this.animation.timeScale = this.element.getValue();
-			self.createTimeline();
+			self.createAnimationMixer(true);
 		});
 
-		y += this.timelineHeight;
+		y += 30;
 
+		//Timegrid
 		var timegrid = document.createElement("canvas");
 		timegrid.style.position = "absolute";
 		timegrid.style.top = y + "px";
@@ -499,165 +428,28 @@ AnimationTab.prototype.createTimeline = function()
 		this.tracks.appendChild(timegrid);
 
 		//Tracks
+		var tracks = animations[i].tracks;
 		for(var j = 0; j < tracks.length; j++)
 		{
 			var times = tracks[j].times;
 
-			var button = document.createElement("div");
-			button.style.position = "absolute";
-			button.style.top = y + "px";
-			button.style.width = "100%";
-			button.style.height = this.timelineHeight + "px";
-			button.style.backgroundColor = Editor.theme.barColor;
-			button.style.overflow = "hidden";
-			button.animation = animations[i];
-			button.track = tracks[j];
-
-			button.onmouseenter = function()
-			{
-				this.style.backgroundColor = Editor.theme.buttonOverColor;
-			};
-
-			button.onmouseleave = function()
-			{
-				this.style.backgroundColor = Editor.theme.buttonColor;
-			};
-
-			button.oncontextmenu = function(event)
-			{
-				var track = this.track;
-				var animation = this.animation;
-
-				var context = new ContextMenu();
-				context.size.set(150, 20);
-				context.position.set(event.clientX, event.clientY);
-				
-				context.addOption("Add Keyframe", function()
-				{
-					self.addKeyFrame(track, self.object);
-				});
-
-				context.addOption("Delete", function()
-				{
-					if(!Editor.confirm("Delete track?"))
-					{
-						return;
-					}
-
-					var index = animation.tracks.indexOf(track);
-					if(index !== -1)
-					{
-						animation.tracks.splice(index, 1);
-					}
-					else
-					{
-						alert("Unable to delete track");
-					}
-
-					self.createTimeline();
-					self.createAnimationMixer();
-				});
-
-				context.addOption("Optimize", function()
-				{
-					track.optimize();
-
-					self.createTimeline();
-					self.createAnimationMixer();
-				});
-
-				context.addOption("Shift", function()
-				{
-					var time = Number.parseFloat(prompt("Time to shift track"));
-
-					if(isNaN(time))
-					{
-						alert("Invalid time value");
-						return;
-					}
-
-					track.shift(time);
-
-					self.createTimeline();
-					self.createAnimationMixer();
-				});
-				
-				context.addOption("Trim", function()
-				{
-					var start = Number.parseFloat(prompt("Start time"));
-					var end = Number.parseFloat(prompt("End time"));
-
-					if(isNaN(start) || isNaN(end))
-					{
-						alert("Invalid time value");
-						return;
-					}
-
-					track.trim(start, time);
-
-					self.createTimeline();
-					self.createAnimationMixer();
-				});
-
-				context.updateInterface();
-			};
-			this.info.appendChild(button);
-
-			var name = document.createElement("div");
-			name.style.position = "absolute";
-			name.style.textOverflow = "ellipsis";
-			name.style.whiteSpace = "nowrap";
-			name.style.overflow = "hidden";
-			name.style.top = "25%";
-			name.style.width = "100%";
-			name.style.pointerEvents = "none";
-			name.innerHTML = tracks[j].name;
-			button.appendChild(name);
-
-			var keyframe = document.createElement("img");
-			keyframe.style.position = "absolute";
-			keyframe.style.right = "4px";
-			keyframe.style.top = "7px";
-			keyframe.style.width = "12px";
-			keyframe.style.height = "12px";
-			keyframe.style.cursor = "pointer";
-			keyframe.src = Editor.filePath + "icons/misc/add.png";
-			keyframe.track = tracks[j];
-			keyframe.onclick = function()
-			{
-				self.addKeyFrame(this.track, self.object);
-			};
-			button.appendChild(keyframe);
-
-			var interpolation = new DropdownList(button);
-			interpolation.size.set(30, 18);
-			interpolation.position.set(22, 5);
-			interpolation.updatePosition(Element.TOP_RIGHT);
-			interpolation.updateSize();
-			interpolation.addValue("Linear", THREE.InterpolateLinear);
-			interpolation.addValue("Smooth", THREE.Smooth);
-			interpolation.addValue("Discrete", THREE.InterpolateDiscrete);
-			interpolation.setValue(THREE.Smooth);
-			interpolation.element.element = interpolation;
-			interpolation.element.track = tracks[j];
-			interpolation.setOnChange(function()
-			{
-				this.track.setInterpolation(this.element.getValue());
-				self.createAnimationMixer();
-			});
+			var button = new AnimationTrackButton(this.info, this, animations[i], tracks[j]);
+			button.position.set(0, y);
+			button.size.set(0, 30);
+			button.updateInterface();
 
 			var track = new AnimationTrack(this.tracks, this, tracks[j]);
 			track.position.set(0, y);
-			track.size.set(this.zoom * animations[i].duration, this.timelineHeight);
+			track.size.set(this.zoom * animations[i].duration, 30);
 			track.updateInterface();
 			track.createKeyframes();
-			
-			y += this.timelineHeight;
+
+			y += 30;
 		}
 
 		var duration = animations[i].duration;
 		var width = this.zoom * duration + 1;
-		var height = this.timelineHeight * tracks.length + 1;
+		var height = 30 * tracks.length + 1;
 
 		//Block
 		block.style.width = width + "px";
@@ -672,7 +464,7 @@ AnimationTab.prototype.createTimeline = function()
 		context.fillStyle = Editor.theme.barColor;
 
 		//Horizontal lines
-		for(var l = 0; l <= height; l += this.timelineHeight)
+		for(var l = 0; l <= height; l += 30)
 		{
 			context.fillRect(0, l, width, 1);
 		}

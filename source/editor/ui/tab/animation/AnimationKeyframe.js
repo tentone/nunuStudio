@@ -1,12 +1,13 @@
 "use strict";
 
-function AnimationKeyframe(parent, editor, track, index)
+function AnimationKeyframe(parent, editor, trackEditor, track, index)
 {
 	Element.call(this, parent);
 
 	this.element.style.cursor = "pointer";
 	this.element.style.backgroundColor = track.color;
 
+	this.trackEditor = trackEditor;
 	this.editor = editor;
 	this.track = track;
 	this.index = index;
@@ -64,7 +65,7 @@ function AnimationKeyframe(parent, editor, track, index)
 			self.track.times = new Float32Array(times);
 			self.track.values = new Float32Array(values);
 
-			self.editor.createTimeline();
+			self.trackEditor.updateKeyframes();
 			self.editor.createAnimationMixer();
 		});
 
@@ -81,7 +82,7 @@ function AnimationKeyframe(parent, editor, track, index)
 			self.track.times[self.index] = time;
 			self.track.sort();
 
-			self.editor.createTimeline();
+			self.trackEditor.updateKeyframes();
 			self.editor.createAnimationMixer();
 		});
 
