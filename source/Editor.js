@@ -313,6 +313,7 @@ include("editor/ui/tab/TextEditor.js");
 include("editor/ui/tab/ProfilingTab.js");
 
 include("editor/ui/tab/animation/AnimationTab.js");
+include("editor/ui/tab/animation/AnimationButton.js");
 include("editor/ui/tab/animation/AnimationKeyframe.js");
 include("editor/ui/tab/animation/AnimationTrack.js");
 include("editor/ui/tab/animation/AnimationTrackButton.js");
