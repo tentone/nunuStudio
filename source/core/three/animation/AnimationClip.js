@@ -12,10 +12,10 @@ THREE.AnimationClip.toJSON = function(clip)
 {
 	var data = THREE.AnimationClip._toJSON.call(this, clip);
 
-	data.enabled = this.enabled;
-	data.loop = this.loop;
-	data.timeScale = this.timeScale;
-	data.weight = this.weight;
+	data.enabled = clip.enabled;
+	data.loop = clip.loop;
+	data.timeScale = clip.timeScale;
+	data.weight = clip.weight;
 
 	return data;
 };

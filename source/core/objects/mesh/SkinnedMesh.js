@@ -40,15 +40,7 @@
  *
  * @property bones
  * @type {Array}
- */
-/**
- * Array with the animations available in this mesh.
- *
- * The AnimationClip object has name, tracks, duration and uuid.
- *
- * @property animations
- * @type {Array}
- */
+*/
 function SkinnedMesh(geometry, material, useVertexTexture)
 {
 	THREE._SkinnedMesh.call(this, geometry, material, useVertexTexture);
@@ -57,8 +49,6 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 
 	this.receiveShadow = true;
 	this.castShadow = true;
-
-	this.animations = [];
 }
 
 THREE._SkinnedMesh = THREE.SkinnedMesh;
