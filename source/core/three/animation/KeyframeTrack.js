@@ -49,7 +49,10 @@ THREE.KeyframeTrack.parse = function(json)
 {
 	var track = THREE.KeyframeTrack._parse.call(this, json);
 
-	track.color = json.color;
+	if(json.color !== undefined)
+	{
+		track.color = json.color;
+	}
 
 	return track;
 };
