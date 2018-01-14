@@ -2,6 +2,8 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "AmbientLight",
+        "AnimationMixer",
+        "AnimationTimer",
         "ArraybufferUtils",
         "Audio",
         "AudioEmitter",
@@ -12,6 +14,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ByteArrayUtils",
         "CanvasTexture",
         "ColorifyPass",
+        "CompressedTexture",
         "Container",
         "CopyPass",
         "CubeCamera",
@@ -68,6 +71,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ResourceManager",
         "RoundedBoxBufferGeometry",
         "SSAOPass",
+        "SVGUtils",
         "Scene",
         "Script",
         "ShaderPass",
@@ -85,6 +89,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "TextFile",
         "Texture",
         "TextureLoader",
+        "Timer",
         "Tree",
         "TreeUtils",
         "UnrealBloomPass",

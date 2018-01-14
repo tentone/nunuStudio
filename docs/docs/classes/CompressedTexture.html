@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio UnrealBloomPass</title>  
+	<title>nunuStudio CompressedTexture</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -188,40 +188,74 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>UnrealBloomPass Class</h1>
+						<h1>CompressedTexture Class</h1>
 						<div class="box meta">
 						
+								<div class="extends">
+									Extends <a href="../classes/Texture.html" class="crosslink">Texture</a>
+								</div>
 						
 						
-									Module: <a href="../modules/Postprocessing.html">Postprocessing</a>
+									Module: <a href="../modules/Textures.html">Textures</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Unreal engine like bloom effect pass.</p>
-						<p>More information available here</p>
+							<p>CompressTexture class is used to store textures using GPU compatible compressed data.</p>
+						<p>The advantage of using these texture is the fact that the texture does not get uncompressed in the GPU memory saving not only project space but also saving video memory during runtime.</p>
+						<p>The problem with compressed textures is that its hardware dependent (they dont work everywhere)</p>
 						<ul>
-						<li><a href="https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/">https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/</a></li>
+						<li>DXT: supported on desktop and some Android smartphones</li>
+						<li>PVR: supported on iOS and some Android smartphones</li>
+						<li>ETC1: supported by most Android smartphones</li>
 						</ul>
+						<p>The usage of these format can free a lot of video memory and is a must for mobile devices.</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_UnrealBloomPass" class="method item">
-									<h3 class="name"><code>UnrealBloomPass</code></h3>
+								<div id="method_CompressedTexture" class="method item">
+									<h3 class="name"><code>CompressedTexture</code></h3>
 								
 										<div class="args">
 											<span class="paren">(</span><ul class="args-list inline commas">
 												<li class="arg">
-														<code>strength</code>
+														<code>mipmaps</code>
 												</li>
 												<li class="arg">
-														<code>radius</code>
+														<code>width</code>
 												</li>
 												<li class="arg">
-														<code>threshold</code>
+														<code>height</code>
+												</li>
+												<li class="arg">
+														<code>format</code>
+												</li>
+												<li class="arg">
+														<code>type</code>
+												</li>
+												<li class="arg">
+														<code>mapping</code>
+												</li>
+												<li class="arg">
+														<code>wrapS</code>
+												</li>
+												<li class="arg">
+														<code>wrapT</code>
+												</li>
+												<li class="arg">
+														<code>magFilter</code>
+												</li>
+												<li class="arg">
+														<code>minFilter</code>
+												</li>
+												<li class="arg">
+														<code>anisotropy</code>
+												</li>
+												<li class="arg">
+														<code>encoding</code>
 												</li>
 											</ul><span class="paren">)</span>
 										</div>
@@ -250,35 +284,123 @@
 								
 											<ul class="params-list">
 												<li class="param">
-														<code class="param-name">strength</code>
-														<span class="type">Number</span>
+														<code class="param-name">mipmaps</code>
+														<span class="type">Array</span>
 								
 								
 													<div class="param-description">
-														<p>Bloom effect strength.</p>
+														<p>Mipmaps levels</p>
 								
 													</div>
 								
 												</li>
 												<li class="param">
-														<code class="param-name">radius</code>
+														<code class="param-name">width</code>
 														<span class="type">Number</span>
 								
 								
 													<div class="param-description">
-														<p>Bloom effect radius.</p>
-								
+														 
 													</div>
 								
 												</li>
 												<li class="param">
-														<code class="param-name">threshold</code>
+														<code class="param-name">height</code>
 														<span class="type">Number</span>
 								
 								
 													<div class="param-description">
-														<p>White point threshold.</p>
+														 
+													</div>
 								
+												</li>
+												<li class="param">
+														<code class="param-name">format</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">type</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">mapping</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">wrapS</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">wrapT</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">magFilter</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">minFilter</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">anisotropy</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">encoding</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
 													</div>
 								
 												</li>
@@ -293,235 +415,18 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
 								<div id="index" class="api-class-tabpanel index">
 									<h2 class="off-left">Item Index</h2>
 						
-										<div class="index-section methods">
-											<h3>Methods</h3>
 						
-											<ul class="index-list methods">
-													<li class="index-item method">
-														<a href="#method_toJSON">toJSON</a>
-						
-													</li>
-											</ul>
-										</div>
-						
-										<div class="index-section properties">
-											<h3>Properties</h3>
-						
-											<ul class="index-list properties">
-													<li class="index-item property">
-														<a href="#property_bloomFactors">bloomFactors</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_bloomTintColors">bloomTintColors</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_radius">radius</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_smooth">smooth</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_strength">strength</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_threshold">threshold</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 						
 								</div>
 						
-									<div id="methods" class="api-class-tabpanel">
-										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_toJSON" class="method item">
-												<h3 class="name"><code>toJSON</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Serialize this effect composer to JSON.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
-						
-									<div id="properties" class="api-class-tabpanel">
-										<h2 class="off-left">Properties</h2>
-						
-											<div id="property_bloomFactors" class="property item">
-												<h3 class="name"><code>bloomFactors</code></h3>
-												<span class="type">Array</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_bloomTintColors" class="property item">
-												<h3 class="name"><code>bloomTintColors</code></h3>
-												<span class="type">Array</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_radius" class="property item">
-												<h3 class="name"><code>radius</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Bloom effect radius.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_smooth" class="property item">
-												<h3 class="name"><code>smooth</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Smooth factor.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_strength" class="property item">
-												<h3 class="name"><code>strength</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Scales the color of the whole bloom effect.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_threshold" class="property item">
-												<h3 class="name"><code>threshold</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.</p>
-											<p>To have all scene colors contributing to the bloom, a volume of -1 needs to be used.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
 						
 						
 							</div>

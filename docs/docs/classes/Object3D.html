@@ -33,6 +33,8 @@
 						<div id="api-tabview-panel">
 							<ul id="api-classes" class="apis classes">
 								<li><a href="../classes/AmbientLight.html">AmbientLight</a></li>
+								<li><a href="../classes/AnimationMixer.html">AnimationMixer</a></li>
+								<li><a href="../classes/AnimationTimer.html">AnimationTimer</a></li>
 								<li><a href="../classes/ArraybufferUtils.html">ArraybufferUtils</a></li>
 								<li><a href="../classes/Audio.html">Audio</a></li>
 								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
@@ -43,6 +45,7 @@
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
+								<li><a href="../classes/CompressedTexture.html">CompressedTexture</a></li>
 								<li><a href="../classes/Container.html">Container</a></li>
 								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
 								<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
@@ -111,11 +114,13 @@
 								<li><a href="../classes/Sprite.html">Sprite</a></li>
 								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
+								<li><a href="../classes/SVGUtils.html">SVGUtils</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
 								<li><a href="../classes/Texture.html">Texture</a></li>
 								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
+								<li><a href="../classes/Timer.html">Timer</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
 								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
 								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
@@ -324,6 +329,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_playAnimation">playAnimation</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_remove">remove</a>
 						
 													</li>
@@ -352,6 +361,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_stopAnimation">stopAnimation</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
@@ -370,6 +383,10 @@
 											<h3>Properties</h3>
 						
 											<ul class="index-list properties">
+													<li class="index-item property">
+														<a href="#property_animations">animations</a>
+						
+													</li>
 													<li class="index-item property">
 														<a href="#property_castShadow">castShadow</a>
 						
@@ -849,7 +866,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Disposes the object (to avoid memory leaks).</p>
+													<p>Disposes the object from memory.</p>
+											<p>Should be called when the object is no longer required to avoid memory leaks.</p>
 											
 												</div>
 											
@@ -1259,7 +1277,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Initialize the object.</p>
+													<p>Initializes the object.</p>
+											<p>This method is calling one time on initialization.</p>
 											
 												</div>
 											
@@ -1408,6 +1427,35 @@
 											
 											
 											</div>
+											<div id="method_playAnimation" class="method item">
+												<h3 class="name"><code>playAnimation</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Play animations attached to this object.</p>
+											<p>Animations rely on other objects, if some of these are missing the animation will have problems playing.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="method_remove" class="method item">
 												<h3 class="name"><code>remove</code></h3>
 											
@@ -1531,7 +1579,7 @@
 											
 											
 																<div class="param-description">
-																	<p>Width.</p>
+																	<p>Screen width.</p>
 											
 																</div>
 											
@@ -1542,7 +1590,7 @@
 											
 											
 																<div class="param-description">
-																	<p>Height.</p>
+																	<p>Screen height.</p>
 											
 																</div>
 											
@@ -1770,6 +1818,34 @@
 											
 											
 											</div>
+											<div id="method_stopAnimation" class="method item">
+												<h3 class="name"><code>stopAnimation</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Stop all animations playback.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="method_toJSON" class="method item">
 												<h3 class="name"><code>toJSON</code></h3>
 											
@@ -1861,7 +1937,13 @@
 											<div id="method_update" class="method item">
 												<h3 class="name"><code>update</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>delta</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 											
 											
@@ -1879,10 +1961,28 @@
 												</div>
 											
 												<div class="description">
-													<p>Update the object state, called every time before rendering into the screen.</p>
+													<p>Update the object state.</p>
+											<p>Called every time before rendering into the screen.</p>
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">delta</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Time since last update call.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 											
 											</div>
@@ -1942,6 +2042,30 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
+											<div id="property_animations" class="property item">
+												<h3 class="name"><code>animations</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Array with the animations available in this object.</p>
+											<p>Each position contains an AnimationClip that has name, tracks, duration and uuid.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_castShadow" class="property item">
 												<h3 class="name"><code>castShadow</code></h3>
 												<span class="type">Boolean</span>
