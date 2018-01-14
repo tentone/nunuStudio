@@ -6,6 +6,8 @@ function AnimationTrack(parent, editor, track)
 
 	this.editor = editor;
 	this.track = track;
+
+	this.createKeyframes();
 }
 
 AnimationTrack.prototype = Object.create(Element.prototype);
@@ -33,6 +35,6 @@ AnimationTrack.prototype.clearKeyframes = function()
 {
 	while(this.element.firstChild)
 	{
-		this.element.removeChild(this.info.firstChild);
+		this.element.removeChild(this.element.firstChild);
 	}
 };

@@ -433,16 +433,15 @@ AnimationTab.prototype.createTimeline = function()
 		{
 			var times = tracks[j].times;
 
-			var button = new AnimationTrackButton(this.info, this, animations[i], tracks[j]);
-			button.position.set(0, y);
-			button.size.set(0, 30);
-			button.updateInterface();
-
 			var track = new AnimationTrack(this.tracks, this, tracks[j]);
 			track.position.set(0, y);
 			track.size.set(this.zoom * animations[i].duration, 30);
 			track.updateInterface();
-			track.createKeyframes();
+			
+			var button = new AnimationTrackButton(this.info, this, animations[i], tracks[j], track);
+			button.position.set(0, y);
+			button.size.set(0, 30);
+			button.updateInterface();
 
 			y += 30;
 		}
@@ -535,9 +534,6 @@ AnimationTab.prototype.addKeyFrame = function(track, object)
 
 		track.sort();
 	}
-
-	this.createTimeline();
-	this.createAnimationMixer(true);
 };
 
 AnimationTab.prototype.updateInterface = function()
