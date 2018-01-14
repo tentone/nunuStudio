@@ -313,6 +313,9 @@ include("editor/ui/tab/TextEditor.js");
 include("editor/ui/tab/ProfilingTab.js");
 
 include("editor/ui/tab/animation/AnimationTab.js");
+include("editor/ui/tab/animation/AnimationKeyframe.js");
+include("editor/ui/tab/animation/AnimationTrack.js");
+include("editor/ui/tab/animation/AnimationTrackButton.js");
 
 include("editor/ui/tab/camera/CameraEditor.js");
 include("editor/ui/tab/camera/postprocessing/PassNode.js");
