@@ -946,25 +946,6 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				geometry.bones = tmpBones;
 			}
 
-			if(data.animations !== undefined)
-			{
-				for(var i = 0; i < data.animations.length; i++)
-				{
-					var clip = THREE.AnimationClip.parse(data.animations[i]);
-					object.animations.push(clip);
-				}
-			}
-
-			if(data.animationSpeed !== undefined)
-			{
-				object.animationSpeed = data.animationSpeed;
-			}
-
-			if(data.initialAnimation !== undefined)
-			{
-				object.initialAnimation = data.initialAnimation;
-			}
-
 			break;
 
 		case "Mesh":
@@ -1019,18 +1000,20 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	}
 
 	object.uuid = data.uuid;
+	object.name = data.name;
 
-	if(data.name !== undefined)
+	object.hidden = data.hidden === true;
+	object.folded = data.folded === true;
+
+	//Animations
+	if(data.animations !== undefined)
 	{
-		object.name = data.name;
-	}
-	if(data.hidden !== undefined)
-	{
-		object.hidden = data.hidden;
-	}
-	if(data.folded !== undefined)
-	{
-		object.folded = data.folded;
+		object.animations = [];
+		
+		for(var i = 0; i < data.animations.length; i++)
+		{
+			object.animations.push(THREE.AnimationClip.parse(data.animations[i]));
+		}
 	}
 
 	//Get or generate tranformation matrix if necessary
@@ -1060,14 +1043,8 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	}
 
 	//Shadow casting
-	if(data.castShadow !== undefined)
-	{
-		object.castShadow = data.castShadow;
-	}
-	if(data.receiveShadow !== undefined)
-	{
-		object.receiveShadow = data.receiveShadow;
-	}
+	object.castShadow = data.castShadow === true;
+	object.receiveShadow = data.receiveShadow === true;
 
 	//Shadowmap data
 	if(data.shadow !== undefined)
@@ -1076,10 +1053,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	}
 
 	//Visibility
-	if(data.visible !== undefined)
-	{
-		object.visible = data.visible;
-	}
+	object.visible = data.visible === true;
 
 	//Aditional user data
 	if(data.userData !== undefined)

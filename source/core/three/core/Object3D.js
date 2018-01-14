@@ -108,7 +108,14 @@
  * @property userData
  * @type {Object}
 */
-
+/**
+ * Array with the animations available in this object.
+ *
+ * Each position contains an AnimationClip that has name, tracks, duration and uuid.
+ *
+ * @property animations
+ * @type {Array}
+ */
 /**
  * Folded attribute is used only for editing, if true the object shows as folded in the object explorer.
  * @property folded
@@ -164,6 +171,7 @@ THREE.Object3D.prototype.initialize = function()
 	{	
 		this.mixer = new AnimationMixer(this);
 		this.mixer.createActions(this.animations);
+		this.mixer.play();
 	}
 
 	for(var i = 0; i < this.children.length; i++)
@@ -435,6 +443,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	if(this.animations !== undefined)
 	{
 		object.animations = [];
+
 		for(var i = 0; i < this.animations.length; i++)
 		{
 			object.animations.push(THREE.AnimationClip.toJSON(this.animations[i]));
