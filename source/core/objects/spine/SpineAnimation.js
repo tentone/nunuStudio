@@ -125,23 +125,7 @@ SpineAnimation.prototype.initialize = function()
 {
 	this.play();
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-};
-
-/**
- * Update the object state, called every time before rendering into the screen.
- *
- * @method update
- */
-SpineAnimation.prototype.update = function(delta)
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update(delta)
-	}
+	THREE.Object3D.prototype.initialize.call(this);
 };
 
 /**

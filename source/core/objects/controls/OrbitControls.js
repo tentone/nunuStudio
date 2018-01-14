@@ -111,10 +111,7 @@ OrbitControls.prototype.initialize = function()
 	this.center.copy(this.position);
 	this.updateControls();
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
+	THREE.Object3D.prototype.initialize.call(this);
 };
 
 OrbitControls.prototype.update = function(delta)
@@ -167,10 +164,7 @@ OrbitControls.prototype.update = function(delta)
 		this.updateControls();
 	}
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update(delta);
-	}
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**

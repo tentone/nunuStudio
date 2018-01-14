@@ -28,8 +28,13 @@ AnimationMixer.prototype.createActions = function(animations)
 	{
 		var action = this.clipAction(animations[i]);
 		action.setLoop(animations[i].loop);
+		action.weight = animations[i].weight;
+		action.timeScale = animations[i].timeScale;
+		action.enabled = animations[i].enabled;
 		action.play();
 	}
+
+	return this._actions;
 };
 
 AnimationMixer.prototype.setTime = function(time)
@@ -41,7 +46,7 @@ AnimationMixer.prototype.setTime = function(time)
 		this._actions[i].time = time;
 	}
 
-	THREE.AnimationMixer.prototype.update.call(this, 0);
+	this.update(0, true);
 };
 
 AnimationMixer.prototype.play = function()
@@ -66,11 +71,26 @@ AnimationMixer.prototype.dispose = function()
 	this.uncacheRoot(this._root);
 };
 
-AnimationMixer.prototype.update = function(delta)
+AnimationMixer.prototype.update = function(delta, forceUpdate)
 {
-	if(this.playing)
+	if(this.playing || forceUpdate)
 	{
-		THREE.AnimationMixer.prototype.update.call(this, delta);	
-	}
-};
+		this.time += delta;
 
+		var direction = Math.sign(delta);
+
+		//Run active actions
+		for(var i = 0; i < this._actions.length; i++)
+		{
+			this._actions[i]._update(this.time, delta, direction, this._accuIndex);
+		}
+
+		//Update scene graph
+		for(var i = 0; i < this._bindings.length; i++)
+		{
+			this._bindings[i].apply(this._accuIndex);
+		}
+	}
+
+	return this;
+};

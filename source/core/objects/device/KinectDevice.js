@@ -201,10 +201,7 @@ KinectDevice.prototype.update = function(delta)
 	}
 
 	//Update children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update(delta);
-	}
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**

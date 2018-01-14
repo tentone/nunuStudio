@@ -1,5 +1,12 @@
 "use strict";
 
+THREE.KeyframeTrack.prototype.color = "#FF0000";
+
+THREE.KeyframeTrack.prototype.setColor = function(color)
+{
+	this.color = color;
+};
+
 THREE.KeyframeTrack.prototype.sort = function()
 {
 	for(var i = 0; i < this.times.length; i++)

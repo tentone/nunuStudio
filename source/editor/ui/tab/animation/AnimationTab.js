@@ -16,7 +16,6 @@ function AnimationTab(parent, closeable, container, index)
 	//Bar
 	this.bar = document.createElement("div");
 	this.bar.style.position = "absolute";
-	this.bar.style.overflow = "visible";
 	this.bar.style.height = "20px";
 	this.bar.style.backgroundColor = Editor.theme.barColor;
 	this.element.appendChild(this.bar);
@@ -40,18 +39,23 @@ function AnimationTab(parent, closeable, container, index)
 			var clip = new AnimationClip("Animation" + self.object.animations.length, 10, []);
 			
 			var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
-			position.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
+			position.setInterpolation(THREE.InterpolateLinear);
+			position.setColor("#FF0000");
 			clip.tracks.push(position);
 
 			var scale = new THREE.VectorKeyframeTrack(".scale", [0], self.object.scale.toArray());
 			scale.setInterpolation(THREE.InterpolateLinear);
+			scale.setColor("#00FF00");
 			clip.tracks.push(scale);
 
 			var quaternion = new THREE.QuaternionKeyframeTrack(".quaternion", [0], self.object.quaternion.toArray());
 			quaternion.setInterpolation(THREE.InterpolateLinear);
+			quaternion.setColor("#0000FF");
 			clip.tracks.push(quaternion);
 			
 			var visible = new THREE.BooleanKeyframeTrack(".visible", [0], [self.object.visible]);
+			visible.setInterpolation(THREE.InterpolateDiscrete);
+			visible.setColor("#FFFF00");
 			clip.tracks.push(visible);
 
 			self.object.animations.push(clip);
@@ -137,7 +141,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.tab.style.width = "5px";
 	this.tab.style.backgroundColor = Editor.theme.barColor;
 	this.tab.style.cursor = "e-resize";
-	this.tab.position = 150;
+	this.tab.position = 250;
 	this.timeline.appendChild(this.tab);
 
 	this.tab.onmousedown = function(event)
@@ -464,7 +468,26 @@ AnimationTab.prototype.createTimeline = function()
 			this.animation.loop = this.element.getValue();
 			self.createAnimationMixer();
 		});
-		
+
+		var text = new Text(block);
+		text.position.set(335, y + 5);
+		text.size.set(100, 20);
+		text.setText("Speed");
+		text.updateInterface();
+
+		var timeScale = new NumberBox(block);
+		timeScale.position.set(410, y + 5);
+		timeScale.size.set(60, 18);
+		timeScale.updateInterface();
+		timeScale.element.element = timeScale;
+		timeScale.element.animation = animations[i];
+		timeScale.setValue(animations[i].timeScale);
+		timeScale.setOnChange(function()
+		{
+			this.animation.timeScale = this.element.getValue();
+			self.createTimeline();
+		});
+
 		y += this.timelineHeight;
 
 		var timegrid = document.createElement("canvas");
@@ -627,15 +650,13 @@ AnimationTab.prototype.createTimeline = function()
 
 			y += this.timelineHeight;
 
-			var color = MathUtils.randomColor();
-
 			//Keyframes
 			for(var k = 0; k < times.length; k++)
 			{
 				var key = document.createElement("div");
 				key.style.position = "absolute";
 				key.style.cursor = "pointer";
-				key.style.backgroundColor =  color;
+				key.style.backgroundColor =  tracks[j].color;
 				key.style.height = this.timelineHeight + "px";
 				key.style.left = (this.zoom * times[k]) + "px";
 				key.style.width = "5px";

@@ -185,10 +185,7 @@ Script.prototype.initialize = function()
 	this.compileCode(this.code);	
 
 	//Initialize children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
+	THREE.Object3D.prototype.initialize.call(this);
 	
 	//Initialize script
 	if(this.script.initialize !== undefined)
@@ -220,10 +217,7 @@ Script.prototype.update = function(delta)
 		this.script.update.call(this, delta);
 	}
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update(delta);
-	}
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**

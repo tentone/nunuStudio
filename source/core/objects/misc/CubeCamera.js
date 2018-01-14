@@ -121,10 +121,7 @@ CubeCamera.prototype.initialize = function()
 		}
 	}
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
+	THREE.Object3D.prototype.initialize.call(this);
 };
 
 
@@ -142,10 +139,7 @@ CubeCamera.prototype.update = function(delta)
 		this.updateCubeMap(this.renderer, this.scene);
 	}
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update(delta);
-	}
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 

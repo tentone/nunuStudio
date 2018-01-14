@@ -97,10 +97,7 @@ FirstPersonControls.prototype.initialize = function()
 
 	this.updateControls();
 	
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
+	THREE.Object3D.prototype.initialize.call(this);
 };
 
 FirstPersonControls.prototype.update = function(delta)
@@ -162,10 +159,7 @@ FirstPersonControls.prototype.update = function(delta)
 		}
 	}
 	
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update(delta);
-	}
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**

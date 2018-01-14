@@ -109,7 +109,6 @@
  * @type {Object}
 */
 
-
 /**
  * Folded attribute is used only for editing, if true the object shows as folded in the object explorer.
  * @property folded
@@ -125,6 +124,34 @@ THREE.Object3D.prototype.folded = false;
 THREE.Object3D.prototype.hidden = false;
 
 /**
+ * Play animations attached to this object.
+ *
+ * Animations rely on other objects, if some of these are missing the animation will have problems playing.
+ *
+ * @method playAnimation
+ */
+THREE.Object3D.prototype.playAnimation = function()
+{
+	if(this.mixer !== undefined)
+	{
+		this.mixer.play();
+	}
+};
+
+/**
+ * Stop all animations playback.
+ * 
+ * @method stopAnimation
+ */
+THREE.Object3D.prototype.stopAnimation = function()
+{
+	if(this.mixer !== undefined)
+	{
+		this.mixer.stop();
+	}
+};
+
+/**
  * Initializes the object.
  *
  * This method is calling one time on initialization.
@@ -133,6 +160,12 @@ THREE.Object3D.prototype.hidden = false;
  */
 THREE.Object3D.prototype.initialize = function()
 {
+	if(this.animations !== undefined)
+	{	
+		this.mixer = new AnimationMixer(this);
+		this.mixer.createActions(this.animations);
+	}
+
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -374,13 +407,13 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		object.userData = this.userData;
 	}
 
-	//Serialize geometry
+	//Geometry
 	if(this.geometry !== undefined)
 	{
 		object.geometry = serialize(meta.geometries, this.geometry);
 	}
 
-	//Serialize material
+	//Material
 	if(this.material !== undefined)
 	{
 		if(this.material instanceof THREE.Material)
@@ -395,6 +428,16 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 				uuids.push(serialize(meta.materials, this.material[i]));
 			}
 			object.material = uuids;
+		}
+	}
+
+	//Animations
+	if(this.animations !== undefined)
+	{
+		object.animations = [];
+		for(var i = 0; i < this.animations.length; i++)
+		{
+			object.animations.push(THREE.AnimationClip.toJSON(this.animations[i]));
 		}
 	}
 

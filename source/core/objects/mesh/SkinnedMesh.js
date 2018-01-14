@@ -53,55 +53,18 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 {
 	THREE._SkinnedMesh.call(this, geometry, material, useVertexTexture);
 
-	this.name = "skinned mesh";
+	this.name = "skinned";
 
 	this.receiveShadow = true;
 	this.castShadow = true;
 
 	this.animations = [];
-	this.mixer = new AnimationMixer(this);
 }
 
 THREE._SkinnedMesh = THREE.SkinnedMesh;
 THREE.SkinnedMesh = SkinnedMesh;
 
 SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
-
-
-/**
- * Play animation attached to this skinned mesh.
- *
- * Animations rely on other objects, if some of these are missing the animation will have problems playing.
- *
- * @method setAnimtion
- * @param {Number} index Index of the animation to play.
- * @param {Number} loop Loop mode to use (LoopOnce, LoopRepeat, LoopPingPong)
- */
-SkinnedMesh.prototype.playAnimation = function(index, loop)
-{
-	try
-	{
-		var action = this.mixer.clipAction(this.animations[index]);
-		action.setLoop(loop !== undefined ? loop : THREE.LoopRepeat);
-		action.play();
-		this.mixer.play();
-	}
-	catch(e)
-	{
-		console.warn("nunuStudio: Error playing animation (" + e + ")");
-	}
-};
-
-/**
- * Stop all animations playback.
- * 
- * @method stopAnimation
- */
-SkinnedMesh.prototype.stopAnimation = function()
-{
-	this.mixer.stop();
-	this.mixer.stopAllAction();
-};
 
 /**
  * Dispose mesh along with its material and geometry.
@@ -166,16 +129,6 @@ SkinnedMesh.prototype.toJSON = function(meta)
 	{
 		data.object.bindMatrix = this.bindMatrix.toArray();
 	}
-
-	//Animations
-	data.object.animations = [];
-	data.object.initialAnimation = this.initialAnimation;
-	data.object.animationSpeed = this.animationSpeed;
-
-	for(var i = 0; i < this.animations.length; i++)
-	{
-		data.object.animations.push(THREE.AnimationClip.toJSON(this.animations[i]));
-	}
-
+	
 	return data;
 };
