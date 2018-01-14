@@ -1,6 +1,15 @@
 {
     "project": {},
     "files": {
+        "..\\..\\source\\core\\animation\\AnimationMixer.js": {
+            "name": "..\\..\\source\\core\\animation\\AnimationMixer.js",
+            "modules": {},
+            "classes": {
+                "AnimationMixer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\controls\\VRControls.js": {
             "name": "..\\..\\source\\core\\controls\\VRControls.js",
             "modules": {
@@ -670,6 +679,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\texture\\CompressedTexture.js": {
+            "name": "..\\..\\source\\core\\texture\\CompressedTexture.js",
+            "modules": {},
+            "classes": {
+                "CompressedTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\texture\\CubeTexture.js": {
             "name": "..\\..\\source\\core\\texture\\CubeTexture.js",
             "modules": {},
@@ -820,6 +838,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\utils\\AnimationTimer.js": {
+            "name": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+            "modules": {},
+            "classes": {
+                "AnimationTimer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\utils\\EventManager.js": {
             "name": "..\\..\\source\\core\\utils\\EventManager.js",
             "modules": {},
@@ -860,6 +887,24 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\utils\\SVGUtils.js": {
+            "name": "..\\..\\source\\core\\utils\\SVGUtils.js",
+            "modules": {},
+            "classes": {
+                "SVGUtils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\utils\\Timer.js": {
+            "name": "..\\..\\source\\core\\utils\\Timer.js",
+            "modules": {},
+            "classes": {
+                "Timer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\FileSystem.js": {
             "name": "..\\..\\source\\core\\FileSystem.js",
             "modules": {
@@ -893,6 +938,21 @@
         }
     },
     "modules": {
+        "Animation": {
+            "name": "Animation",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Skeleton": 1,
+                "AnimationMixer": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "line": 3,
+            "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh."
+        },
         "VirtualReality": {
             "name": "VirtualReality",
             "submodules": {},
@@ -988,20 +1048,6 @@
             "file": "..\\..\\source\\core\\loaders\\VideoLoader.js",
             "line": 3,
             "description": "Audio loader can be used to load external audio resources."
-        },
-        "Animation": {
-            "name": "Animation",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "Skeleton": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 3,
-            "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh."
         },
         "Audio": {
             "name": "Audio",
@@ -1180,6 +1226,7 @@
             "classes": {
                 "CanvasTexture": 1,
                 "SpineTexture": 1,
+                "CompressedTexture": 1,
                 "CubeTexture": 1,
                 "SpriteSheetTexture": 1,
                 "Texture": 1,
@@ -1314,12 +1361,13 @@
                 "BufferUtils": 1,
                 "ByteArrayUtils": 1,
                 "Tree": 1,
-                "TreeUtils": 1
+                "TreeUtils": 1,
+                "AnimationTimer": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
             "line": 3,
             "description": "ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format"
         },
@@ -1332,12 +1380,14 @@
             "classes": {
                 "ObjectUtils": 1,
                 "EventManager": 1,
-                "MathUtils": 1
+                "MathUtils": 1,
+                "SVGUtils": 1,
+                "Timer": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
+            "file": "..\\..\\source\\core\\utils\\Timer.js",
             "line": 3,
             "description": "ObjectUtils is a collection of methods to apply operations to Object3D objects"
         },
@@ -1373,6 +1423,28 @@
         }
     },
     "classes": {
+        "AnimationMixer": {
+            "name": "AnimationMixer",
+            "shortname": "AnimationMixer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Animation",
+            "file": "..\\..\\source\\core\\animation\\AnimationMixer.js",
+            "line": 3,
+            "description": "The AnimationMixer is a player for animations on a particular object in the scene.\n\nWhen multiple objects in the scene are animated independently, one AnimationMixer may be used for each object.\n\nThe object stores animations in its animations attribute, wich is an array an of animation clips.",
+            "is_constructor": 1,
+            "extends": "{AnimationMixer}",
+            "params": [
+                {
+                    "name": "root",
+                    "description": "Animation root object",
+                    "type": "Object3D"
+                }
+            ]
+        },
         "VRControls": {
             "name": "VRControls",
             "shortname": "VRControls",
@@ -1382,6 +1454,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "VirtualReality",
+            "namespace": "",
             "file": "..\\..\\source\\core\\controls\\VRControls.js",
             "line": 3,
             "description": "VRControl is used to get input from an HDM device and apply it to an Object.",
@@ -3041,6 +3114,84 @@
                 }
             ]
         },
+        "CompressedTexture": {
+            "name": "CompressedTexture",
+            "shortname": "CompressedTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\texture\\CompressedTexture.js",
+            "line": 4,
+            "description": "CompressTexture class is used to store textures using GPU compatible compressed data.\n\nThe advantage of using these texture is the fact that the texture does not get uncompressed in the GPU memory saving not only project space but also saving video memory during runtime.\n\nThe problem with compressed textures is that its hardware dependent (they dont work everywhere)\n - DXT: supported on desktop and some Android smartphones\n - PVR: supported on iOS and some Android smartphones\n - ETC1: supported by most Android smartphones\n\nThe usage of these format can free a lot of video memory and is a must for mobile devices.",
+            "is_constructor": 1,
+            "extends": "{Texture}",
+            "params": [
+                {
+                    "name": "mipmaps",
+                    "description": "Mipmaps levels",
+                    "type": "Array"
+                },
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "format",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "mapping",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapS",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapT",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "magFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "minFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "anisotropy",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "encoding",
+                    "description": "",
+                    "type": "Number"
+                }
+            ]
+        },
         "CubeTexture": {
             "name": "CubeTexture",
             "shortname": "CubeTexture",
@@ -3482,6 +3633,21 @@
             "description": "TreeUtils used to compare Tree.\n\nCan also be used to compare Object structure.",
             "static": 1
         },
+        "AnimationTimer": {
+            "name": "AnimationTimer",
+            "shortname": "AnimationTimer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "BinaryUtils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+            "line": 3,
+            "description": "Animation timer is a special type of timer that uses the requestAnimationFrame method.\n\nThis timer calls the method with the same rate as the screen refesh rate.\n\nLoop time can be changed dinamically.",
+            "is_constructor": 1
+        },
         "EventManager": {
             "name": "EventManager",
             "shortname": "EventManager",
@@ -3543,6 +3709,35 @@
             "description": "ObjectUtils is a collection of methods to apply operations to Object3D objects",
             "static": 1
         },
+        "SVGUtils": {
+            "name": "SVGUtils",
+            "shortname": "SVGUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Utils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\SVGUtils.js",
+            "line": 3,
+            "description": "SVG Utils contains methods to manipulate SVG data."
+        },
+        "Timer": {
+            "name": "Timer",
+            "shortname": "Timer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Utils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\Timer.js",
+            "line": 3,
+            "description": "Time is user to call functions in loop at a defined rate.\n\nLoop time can be changed dinamically.",
+            "is_constructor": 1
+        },
         "FileSystem": {
             "name": "FileSystem",
             "shortname": "FileSystem",
@@ -3568,7 +3763,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 154,
+            "line": 161,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -6334,7 +6529,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 123,
+            "line": 120,
             "description": "Set audio buffer to be used by this emitter.",
             "itemtype": "method",
             "name": "setBuffer",
@@ -6354,7 +6549,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 143,
+            "line": 140,
             "description": "Play audio.",
             "itemtype": "method",
             "name": "play",
@@ -6367,7 +6562,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 175,
+            "line": 172,
             "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
@@ -6380,7 +6575,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 190,
+            "line": 187,
             "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
@@ -6393,7 +6588,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 205,
+            "line": 202,
             "description": "Change audio resource.\n\nIf changed after initialization the audio buffer will be disconnected and reintialized.",
             "itemtype": "method",
             "name": "setAudio",
@@ -6409,7 +6604,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 234,
+            "line": 231,
             "description": "Get audio emitter volume.",
             "params": [
                 {
@@ -6425,7 +6620,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 245,
+            "line": 242,
             "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -6445,7 +6640,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 260,
+            "line": 257,
             "description": "Set loop mode. If loop set to True the audio repeats after ending.",
             "itemtype": "method",
             "name": "setLoop",
@@ -6465,7 +6660,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 279,
+            "line": 276,
             "description": "Get loop mode.",
             "itemtype": "method",
             "name": "getLoop",
@@ -6478,7 +6673,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 290,
+            "line": 287,
             "description": "Set playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -6498,7 +6693,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 309,
+            "line": 306,
             "description": "Get the playback speed.",
             "itemtype": "method",
             "name": "getPlaybackRate",
@@ -6511,7 +6706,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 320,
+            "line": 317,
             "description": "Get Array with all the filters applied to this audio emitter.",
             "itemtype": "method",
             "name": "getFilters",
@@ -6524,7 +6719,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 331,
+            "line": 328,
             "description": "Set the entire filters array.",
             "itemtype": "method",
             "name": "setFilters",
@@ -6544,7 +6739,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 359,
+            "line": 356,
             "description": "Get a filter to the filters array.",
             "itemtype": "method",
             "name": "getFilter",
@@ -6563,7 +6758,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 371,
+            "line": 368,
             "description": "Set a filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -6579,7 +6774,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 382,
+            "line": 379,
             "description": "Change the source audio node.",
             "itemtype": "method",
             "name": "setNodeSource",
@@ -6599,7 +6794,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 400,
+            "line": 397,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -6612,7 +6807,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 411,
+            "line": 408,
             "description": "Dispose audio object, stops the playback and disconnects audio node.",
             "itemtype": "method",
             "name": "dispose",
@@ -6621,7 +6816,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 432,
+            "line": 426,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -6659,7 +6854,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 102,
+            "line": 99,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -6672,7 +6867,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 113,
+            "line": 110,
             "description": "Get reference distance.",
             "itemtype": "method",
             "name": "getRefDistance",
@@ -6685,7 +6880,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 124,
+            "line": 121,
             "description": "Set reference distance.",
             "itemtype": "method",
             "name": "setRefDistance",
@@ -6701,7 +6896,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 135,
+            "line": 132,
             "description": "Get rolloff factor.",
             "itemtype": "method",
             "name": "getRolloffFactor",
@@ -6714,7 +6909,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 146,
+            "line": 143,
             "description": "Set rolloff factor.",
             "itemtype": "method",
             "name": "setRolloffFactor",
@@ -6730,7 +6925,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 158,
+            "line": 155,
             "description": "Get distance model in use by this audio emitter.",
             "itemtype": "method",
             "name": "getDistanceModel",
@@ -6743,7 +6938,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 169,
+            "line": 166,
             "description": "Set distance model to be used.\n\nDistance model defined how the emitter controls its volume from its position in the world, relative to the camera.\n\nBy default the mode used is \"inverse\", can be also set to:\n - \"linear\": A linear distance model calculating the gain induced by the distance according to\n   - 1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)\n - \"inverse\": An inverse distance model calculating the gain induced by the distance according to:\n   - refDistance / (refDistance + rolloffFactor * (distance - refDistance))\n - \"exponential\": An exponential distance model calculating the gain induced by the distance according to:\n   - pow(distance / refDistance, -rolloffFactor).",
             "itemtype": "method",
             "name": "setDistanceModel",
@@ -6759,7 +6954,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 190,
+            "line": 187,
             "description": "Get maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "getMaxDistance",
@@ -6771,7 +6966,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 201,
+            "line": 198,
             "description": "Set maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "setMaxDistance",
@@ -6787,7 +6982,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 212,
+            "line": 209,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7224,7 +7419,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 171,
+            "line": 165,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
@@ -7233,7 +7428,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 189,
+            "line": 183,
             "description": "Used to get camera direction for this controller.\n\nController direction can be used to simplify controlling physics objects, create objects in the camera direction, etc.",
             "itemtype": "method",
             "name": "getDirection",
@@ -7332,7 +7527,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 176,
+            "line": 170,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
@@ -7452,7 +7647,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 210,
+            "line": 207,
             "description": "Check if there is kinect connected.",
             "itemtype": "method",
             "name": "isConnected",
@@ -7465,7 +7660,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 221,
+            "line": 218,
             "description": "Set kinect camera mode.",
             "itemtype": "method",
             "name": "setCameraMode",
@@ -7481,7 +7676,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 239,
+            "line": 236,
             "description": "Create JSON for object.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7704,7 +7899,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 212,
+            "line": 209,
             "description": "Update leap status.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -7713,7 +7908,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 244,
+            "line": 238,
             "description": "Check if a gesture is occuring, is true while the gesture is occuring.",
             "itemtype": "method",
             "name": "checkGesture",
@@ -7733,7 +7928,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 260,
+            "line": 254,
             "description": "Check if hand is in pose.",
             "itemtype": "method",
             "name": "checkPose",
@@ -7753,7 +7948,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 276,
+            "line": 270,
             "description": "Set hand tracking mode.\n\nCan be set to HDM or Desktop mode.",
             "itemtype": "method",
             "name": "setMode",
@@ -7769,7 +7964,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 289,
+            "line": 283,
             "description": "Update leap object pose flags from collected data.\n\nCalled automatically by the update methos.",
             "itemtype": "method",
             "name": "updatePoses",
@@ -7778,7 +7973,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 365,
+            "line": 359,
             "description": "Update leap object gesture flags from collected data.\n\nCalled automatically by the update method.",
             "itemtype": "method",
             "name": "updateGestures",
@@ -7787,7 +7982,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 438,
+            "line": 432,
             "description": "Update internal hand debug model.\n\nAutomatically called by the update method if debugModel is set to true.",
             "itemtype": "method",
             "name": "updateDebugModel",
@@ -7796,7 +7991,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 518,
+            "line": 512,
             "description": "Get hand speed (temporaly normalized).",
             "itemtype": "method",
             "name": "getMovement",
@@ -7809,7 +8004,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 535,
+            "line": 529,
             "description": "Create JSON for object.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7988,7 +8183,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 187,
+            "line": 184,
             "description": "Update sky state.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -7997,7 +8192,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 216,
+            "line": 210,
             "description": "Check if object is empty (don't have any childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -8010,7 +8205,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 227,
+            "line": 221,
             "description": "Update sky color and sun position.\n\nIf autoUpdate set to true is automatically called by the update method.",
             "itemtype": "method",
             "name": "updateSky",
@@ -8019,7 +8214,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 366,
+            "line": 360,
             "description": "Create JSON for object.",
             "params": [
                 {
@@ -8159,65 +8354,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 44,
-            "description": "Array with the animations available in this mesh.\n\nThe AnimationClip object has name, tracks, duration and uuid.",
-            "itemtype": "property",
-            "name": "animations",
-            "type": "{Array}",
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 75,
-            "description": "Initialize the skinned mesh object, play initial animation.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 93,
-            "description": "Play animation attached to this skinned mesh.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
-            "itemtype": "method",
-            "name": "setAnimtion",
-            "params": [
-                {
-                    "name": "index",
-                    "description": "Index of the animation to play.",
-                    "type": "Number"
-                },
-                {
-                    "name": "loop",
-                    "description": "Loop mode to use (LoopOnce, LoopRepeat, LoopPingPong)",
-                    "type": "Number"
-                }
-            ],
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 117,
-            "description": "Stop all animations playback.",
-            "itemtype": "method",
-            "name": "stopAnimation",
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 131,
-            "description": "Update skinned mesh animation if there is some attached.",
-            "itemtype": "method",
-            "name": "onBeforeRender",
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 144,
+            "line": 59,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
@@ -8226,7 +8363,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 171,
+            "line": 80,
             "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -8247,7 +8384,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 181,
+            "line": 90,
             "description": "Serialize skinned mesh to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8406,7 +8543,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 179,
+            "line": 176,
             "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8495,7 +8632,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 131,
+            "line": 128,
             "description": "Update CubeCamera object.\n\nIf autoUpdate is set to true the CubeCamera updates the CubeTexture automatically.",
             "itemtype": "method",
             "name": "update",
@@ -8504,7 +8641,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 152,
+            "line": 146,
             "description": "Set the CubeCamera resolution.",
             "itemtype": "method",
             "name": "setResolution",
@@ -8520,7 +8657,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 164,
+            "line": 158,
             "description": "Render new cube faces. \n\nShould be called every time a change in the scene is made.",
             "itemtype": "method",
             "name": "updateCubeMap",
@@ -8541,7 +8678,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 188,
+            "line": 182,
             "description": "Disposes the CubeCamera.",
             "itemtype": "method",
             "name": "dispose",
@@ -8550,7 +8687,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 201,
+            "line": 192,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8718,7 +8855,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 137,
+            "line": 134,
             "description": "Particle emitter cannot be detected by raycaster.\n\nThe raycast method allways returns null.",
             "itemtype": "method",
             "name": "raycast",
@@ -8730,7 +8867,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 150,
+            "line": 147,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8779,7 +8916,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 101,
+            "line": 98,
             "description": "Update object position and rotation based on cannon.js body.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -8788,7 +8925,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 123,
+            "line": 117,
             "description": "Add shape to physics object body.",
             "params": [
                 {
@@ -8804,7 +8941,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 137,
+            "line": 131,
             "description": "Create JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8963,7 +9100,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 200,
+            "line": 197,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -8972,7 +9109,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 229,
+            "line": 223,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -8981,7 +9118,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 249,
+            "line": 240,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -8990,7 +9127,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 269,
+            "line": 260,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -9006,7 +9143,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 285,
+            "line": 276,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "compileCode",
@@ -9022,7 +9159,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 366,
+            "line": 357,
             "description": "Create JSON for script.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9072,25 +9209,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 119,
-            "description": "Initialize the object.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "SpineAnimation",
-            "module": "Animations"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 134,
-            "description": "Update the object state, called every time before rendering into the screen.",
-            "itemtype": "method",
-            "name": "update",
-            "class": "SpineAnimation",
-            "module": "Animations"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 147,
+            "line": 123,
             "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -9099,7 +9218,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 160,
+            "line": 136,
             "description": "Play animation.",
             "itemtype": "method",
             "name": "play",
@@ -9108,7 +9227,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 179,
+            "line": 155,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -9121,7 +9240,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 190,
+            "line": 166,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -9147,7 +9266,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 216,
+            "line": 192,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -9160,7 +9279,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 227,
+            "line": 203,
             "description": "Set skin to be used by this animation",
             "itemtype": "method",
             "name": "setSkin",
@@ -9176,7 +9295,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 247,
+            "line": 223,
             "description": "Serialize spine animation as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9376,7 +9495,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
             "line": 101,
-            "description": "Canvas being used to draw content.",
+            "description": "Canvas being used to draw content.\n\nThis canvas is where the WebGL rendering context was created.",
             "itemtype": "property",
             "name": "canvas",
             "type": "{DOM}",
@@ -9386,8 +9505,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 107,
-            "description": "DOM Division element that can be used to add html content to the app.",
+            "line": 109,
+            "description": "DOM Division element that can be used to add html content to the app.\n\nAll content added to this division should be manually removed before the app exits.",
             "itemtype": "property",
             "name": "division",
             "type": "{DOM}",
@@ -9397,7 +9516,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 181,
+            "line": 184,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -9406,7 +9525,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 231,
+            "line": 236,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -9427,7 +9546,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 244,
+            "line": 249,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -9448,7 +9567,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 265,
+            "line": 270,
             "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
@@ -9457,7 +9576,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 275,
+            "line": 280,
             "description": "Render current scene to canvas.\n\nWhen rendering in VR mode all effects and camera parameters are ignored.\n\nRenderer should be initialized and passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -9473,7 +9592,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 304,
+            "line": 309,
             "description": "Resize the current scene elements.",
             "itemtype": "method",
             "name": "resize",
@@ -9494,7 +9613,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 336,
+            "line": 341,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -9503,7 +9622,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 355,
+            "line": 360,
             "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "displayVR",
@@ -9512,7 +9631,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 383,
+            "line": 388,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -9521,7 +9640,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 397,
+            "line": 402,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -9537,7 +9656,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 427,
+            "line": 432,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -9553,7 +9672,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 449,
+            "line": 454,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -9569,7 +9688,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 477,
+            "line": 482,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -9582,7 +9701,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 490,
+            "line": 495,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -9598,7 +9717,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 503,
+            "line": 508,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -9614,7 +9733,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 542,
+            "line": 547,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -9623,7 +9742,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 584,
+            "line": 586,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -9639,7 +9758,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 611,
+            "line": 613,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -9655,7 +9774,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 636,
+            "line": 638,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9739,7 +9858,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 106,
+            "line": 103,
             "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -9748,7 +9867,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 134,
+            "line": 131,
             "description": "Render scene using all active cameras.",
             "itemtype": "method",
             "name": "render",
@@ -9764,7 +9883,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 170,
+            "line": 167,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -9784,7 +9903,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 202,
+            "line": 199,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -9800,7 +9919,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 214,
+            "line": 211,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -9809,7 +9928,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 229,
+            "line": 226,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -9825,7 +9944,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 244,
+            "line": 241,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -9841,7 +9960,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 268,
+            "line": 265,
             "description": "Serialize scene object as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10272,7 +10391,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 133,
+            "line": 132,
             "description": "Insert new pass into the composer in a specific position.",
             "itemtype": "method",
             "name": "insertPass",
@@ -10293,7 +10412,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 145,
+            "line": 144,
             "description": "Render a scene using this effect composer and a renderer.",
             "itemtype": "method",
             "name": "render",
@@ -10319,7 +10438,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 195,
+            "line": 194,
             "description": "Set rendering size for the composer.\n\nAlso updates the size for all passes attached to the composer.",
             "itemtype": "method",
             "name": "setSize",
@@ -10340,7 +10459,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 218,
+            "line": 217,
             "description": "Reset this effect composer.",
             "itemtype": "method",
             "name": "reset",
@@ -10349,7 +10468,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 242,
+            "line": 241,
             "description": "Dispose this effect composer.",
             "itemtype": "method",
             "name": "dispose",
@@ -10358,7 +10477,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 258,
+            "line": 257,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10367,7 +10486,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 278,
+            "line": 277,
             "description": "Create a new effect composer loaded from json data.",
             "static": 1,
             "itemtype": "method",
@@ -10688,7 +10807,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 69,
+            "line": 54,
             "description": "Check if a file name refers to a supported binary image file.",
             "itemtype": "method",
             "name": "fileIsImage",
@@ -10709,7 +10828,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 93,
+            "line": 79,
             "description": "Create a new image with 1x1 resolution with solid color.\n\nCan be called externally on data load error to load dummy data.",
             "itemtype": "method",
             "name": "createSolidColor",
@@ -10725,7 +10844,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 116,
+            "line": 102,
             "description": "Load arraybuffer data to this image.\n\nCreates a blob with data to be stored on data atribute and used by external objects.",
             "itemtype": "method",
             "name": "loadArrayBufferData",
@@ -10746,23 +10865,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 136,
-            "description": "Load .tga file from ArrayBuffer data.\n\nAfter loading data is converted to JPEG format and stored in base64 encoding.",
-            "itemtype": "method",
-            "name": "loadTGAData",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Data to be loaded.",
-                    "type": "ArrayBuffer"
-                }
-            ],
-            "class": "Image",
-            "module": "Resources"
-        },
-        {
-            "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 158,
+            "line": 122,
             "description": "Check if this image has alpha channel.\n\nThis checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.",
             "itemtype": "method",
             "name": "hasTransparency",
@@ -10775,16 +10878,23 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 171,
-            "description": "Compresses image data to JPEG or PNG and stores in base64 encoding.\n\nIf the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.\n\nCan be used to compress data and save space.",
+            "line": 156,
+            "description": "Compresses image data to JPEG.\n\nCan be used to compress data and save some space.",
             "itemtype": "method",
-            "name": "encodeData",
+            "name": "compressJPEG",
+            "params": [
+                {
+                    "name": "quality",
+                    "description": "JPEG compression quality level by default 0.7 is used (1.0  means max quality).",
+                    "type": "Number"
+                }
+            ],
             "class": "Image",
             "module": "Resources"
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 219,
+            "line": 180,
             "description": "Serialize Image resource to json.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12121,7 +12231,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 104,
+            "line": 103,
             "description": "Set video time in seconds.",
             "params": [
                 {
@@ -12137,7 +12247,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 115,
+            "line": 114,
             "description": "Set loop mode.",
             "params": [
                 {
@@ -12153,7 +12263,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 127,
+            "line": 126,
             "description": "Set video volume.",
             "params": [
                 {
@@ -12169,7 +12279,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 139,
+            "line": 138,
             "description": "Set autoplay value.\n\nIf the image is already playing it will not stop playing.",
             "itemtype": "method",
             "name": "setAutoPlay",
@@ -12185,7 +12295,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 153,
+            "line": 152,
             "description": "Set video playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -12201,7 +12311,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 165,
+            "line": 164,
             "description": "Pause video playback.",
             "itemtype": "method",
             "name": "pause",
@@ -12210,7 +12320,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 178,
+            "line": 177,
             "description": "Start playing video.",
             "itemtype": "method",
             "name": "play",
@@ -12219,7 +12329,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 191,
+            "line": 190,
             "description": "Dispose video texture.\n\nStops the video and cleans the DOM video element inside the VideoTexture.",
             "itemtype": "method",
             "name": "dispose",
@@ -12228,7 +12338,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 209,
+            "line": 208,
             "description": "Create Video texture json description.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12487,7 +12597,17 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 113,
+            "line": 111,
+            "description": "Array with the animations available in this object.\n\nEach position contains an AnimationClip that has name, tracks, duration and uuid.",
+            "itemtype": "property",
+            "name": "animations",
+            "type": "{Array}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 119,
             "description": "Folded attribute is used only for editing, if true the object shows as folded in the object explorer.",
             "itemtype": "property",
             "name": "folded",
@@ -12497,7 +12617,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 120,
+            "line": 126,
             "description": "Hidden objects do not show in the editor.",
             "itemtype": "property",
             "name": "hidden",
@@ -12507,8 +12627,26 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 127,
-            "description": "Initialize the object.",
+            "line": 133,
+            "description": "Play animations attached to this object.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
+            "itemtype": "method",
+            "name": "playAnimation",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 148,
+            "description": "Stop all animations playback.",
+            "itemtype": "method",
+            "name": "stopAnimation",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 161,
+            "description": "Initializes the object.\n\nThis method is calling one time on initialization.",
             "itemtype": "method",
             "name": "initialize",
             "class": "Object3D",
@@ -12516,28 +12654,14 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 140,
-            "description": "Update the object state, called every time before rendering into the screen.",
+            "line": 183,
+            "description": "Update the object state.\n\nCalled every time before rendering into the screen.",
             "itemtype": "method",
             "name": "update",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 153,
-            "description": "Resize this object, called everytime the window is resized.",
-            "itemtype": "method",
-            "name": "resize",
             "params": [
                 {
-                    "name": "x",
-                    "description": "Width.",
-                    "type": "Number"
-                },
-                {
-                    "name": "y",
-                    "description": "Height.",
+                    "name": "delta",
+                    "description": "Time since last update call.",
                     "type": "Number"
                 }
             ],
@@ -12546,8 +12670,29 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 168,
-            "description": "Disposes the object (to avoid memory leaks).",
+            "line": 204,
+            "description": "Resize this object, called everytime the window is resized.",
+            "itemtype": "method",
+            "name": "resize",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Screen width.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "Screen height.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 219,
+            "description": "Disposes the object from memory.\n\nShould be called when the object is no longer required to avoid memory leaks.",
             "itemtype": "method",
             "name": "dispose",
             "class": "Object3D",
@@ -12555,7 +12700,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 181,
+            "line": 239,
             "description": "Add object as children of this object above the indicated children",
             "itemtype": "method",
             "name": "addAbove",
@@ -12576,7 +12721,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 218,
+            "line": 276,
             "description": "Add object as children of this object bellow the indicated children",
             "itemtype": "method",
             "name": "addBellow",
@@ -12597,7 +12742,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 255,
+            "line": 313,
             "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
@@ -12606,7 +12751,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 268,
+            "line": 326,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -12619,7 +12764,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 279,
+            "line": 337,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
@@ -12628,7 +12773,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 303,
+            "line": 361,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12658,7 +12803,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 448,
+            "line": 517,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -12674,7 +12819,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 454,
+            "line": 523,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -12690,7 +12835,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 460,
+            "line": 529,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -12706,7 +12851,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 466,
+            "line": 535,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -12722,7 +12867,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 472,
+            "line": 541,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -12738,7 +12883,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 478,
+            "line": 547,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -12754,7 +12899,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 484,
+            "line": 553,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -12770,7 +12915,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 490,
+            "line": 559,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -12791,7 +12936,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 497,
+            "line": 566,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -12807,7 +12952,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 503,
+            "line": 572,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -12828,7 +12973,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 510,
+            "line": 579,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -12847,7 +12992,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 516,
+            "line": 585,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -12863,7 +13008,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 522,
+            "line": 591,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -12879,7 +13024,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 528,
+            "line": 597,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -12895,7 +13040,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 534,
+            "line": 603,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -12911,7 +13056,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 540,
+            "line": 609,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -12932,7 +13077,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 547,
+            "line": 616,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -12948,7 +13093,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 553,
+            "line": 622,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -12964,7 +13109,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 559,
+            "line": 628,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -13477,6 +13622,24 @@
             "itemtype": "method",
             "name": "test",
             "class": "TreeUtils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+            "line": 20,
+            "description": "Start timer, is the timer is already running dosen't do anything.",
+            "itemtype": "method",
+            "name": "start",
+            "class": "AnimationTimer",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+            "line": 48,
+            "description": "Stop animation timer.",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "AnimationTimer",
             "module": "BinaryUtils"
         },
         {
@@ -14110,6 +14273,45 @@
             "module": "Utils"
         },
         {
+            "file": "..\\..\\source\\core\\utils\\SVGUtils.js",
+            "line": 11,
+            "description": "Used to create a Path from a input SVG file.",
+            "itemtype": "method",
+            "name": "createPath",
+            "static": 1,
+            "params": [
+                {
+                    "name": "data",
+                    "description": "SVG data.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Path generated from SVG data.",
+                "type": "Path"
+            },
+            "class": "SVGUtils",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\Timer.js",
+            "line": 19,
+            "description": "Start timer, is the timer is already running dosen't do anything.",
+            "itemtype": "method",
+            "name": "start",
+            "class": "Timer",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\Timer.js",
+            "line": 47,
+            "description": "Stop timer.",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "Timer",
+            "module": "Utils"
+        },
+        {
             "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 20,
             "description": "Read file content as text.",
@@ -14517,7 +14719,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 165,
+            "line": 172,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -14527,7 +14729,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 171,
+            "line": 178,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -14537,7 +14739,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 177,
+            "line": 184,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -14548,7 +14750,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 184,
+            "line": 191,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -14558,7 +14760,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 190,
+            "line": 197,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -14569,7 +14771,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 200,
+            "line": 207,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -14578,7 +14780,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 238,
+            "line": 245,
             "description": "Load a nunustudio application and attach it to the canvas indicated.\n\nThis method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.",
             "static": 1,
             "itemtype": "method",
@@ -14600,7 +14802,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 274,
+            "line": 281,
             "description": "Start running nunu program.\n\nCreates renderer, mouse and keyboard objects, and starts running the loaded application.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -14609,7 +14811,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 350,
+            "line": 357,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -14635,7 +14837,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 371,
+            "line": 378,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -14651,7 +14853,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 396,
+            "line": 403,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -14677,7 +14879,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 439,
+            "line": 446,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -14686,7 +14888,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 455,
+            "line": 462,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -14695,7 +14897,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 506,
+            "line": 513,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -14704,7 +14906,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 540,
+            "line": 547,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -14713,7 +14915,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 550,
+            "line": 557,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -14729,7 +14931,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 564,
+            "line": 571,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -14738,7 +14940,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 588,
+            "line": 595,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -14754,7 +14956,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 604,
+            "line": 611,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -14770,7 +14972,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 617,
+            "line": 624,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -14786,7 +14988,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 630,
+            "line": 637,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -14799,7 +15001,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 641,
+            "line": 648,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -14808,7 +15010,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 665,
+            "line": 672,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",
