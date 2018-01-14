@@ -1,6 +1,6 @@
 "use strict";
 
-function AnimationTrackButton(parent, editor, animation, track)
+function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 {
 	Element.call(this, parent);
 
@@ -10,6 +10,7 @@ function AnimationTrackButton(parent, editor, animation, track)
 	this.editor = editor;
 	this.animation = animation;
 	this.track = track;
+	this.trackTimeline = trackTimeline;
 
 	var self = this;
 
@@ -35,6 +36,8 @@ function AnimationTrackButton(parent, editor, animation, track)
 		context.addOption("Add Keyframe", function()
 		{
 			self.editor.addKeyFrame(track, self.editor.object);
+			self.editor.createAnimationMixer(true);
+			self.trackTimeline.updateKeyframes();
 		});
 
 		context.addOption("Delete", function()
@@ -62,7 +65,9 @@ function AnimationTrackButton(parent, editor, animation, track)
 		{
 			track.optimize();
 
-			self.editor.createTimeline();
+			alert("Track optimized");
+
+			self.trackTimeline.updateKeyframes();
 			self.editor.createAnimationMixer();
 		});
 
@@ -78,7 +83,7 @@ function AnimationTrackButton(parent, editor, animation, track)
 
 			track.shift(time);
 
-			self.editor.createTimeline();
+			self.trackTimeline.updateKeyframes();
 			self.editor.createAnimationMixer();
 		});
 		
@@ -95,7 +100,7 @@ function AnimationTrackButton(parent, editor, animation, track)
 
 			track.trim(start, time);
 
-			self.editor.createTimeline();
+			self.trackTimeline.updateKeyframes();
 			self.editor.createAnimationMixer();
 		});
 
@@ -123,6 +128,8 @@ function AnimationTrackButton(parent, editor, animation, track)
 	keyframe.onclick = function()
 	{
 		self.editor.addKeyFrame(self.track, self.editor.object);
+		self.editor.createAnimationMixer(true);
+		self.trackTimeline.updateKeyframes();
 	};
 	this.element.appendChild(keyframe);
 

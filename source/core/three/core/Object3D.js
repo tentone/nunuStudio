@@ -440,7 +440,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	}
 
 	//Animations
-	if(this.animations !== undefined)
+	if(this.animations !== undefined && this.animations.length > 0)
 	{
 		object.animations = [];
 
