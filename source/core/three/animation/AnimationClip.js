@@ -23,10 +23,13 @@ THREE.AnimationClip.parse = function(json)
 {
 	var clip = THREE.AnimationClip._parse.call(this, json);
 
-	clip.enabled = json.enabled;
-	clip.loop = json.loop;
-	clip.timeScale = json.timeScale;
-	clip.weight = json.weight;
+	if(json.enabled !== undefined)
+	{
+		clip.enabled = json.enabled;
+		clip.loop = json.loop;
+		clip.timeScale = json.timeScale;
+		clip.weight = json.weight;
+	}
 
 	return clip;
 };

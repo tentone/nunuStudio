@@ -42,7 +42,6 @@ include("lib/three/curves/NURBSUtils.js");
 
 include("lib/three/loaders/TTFLoader.js");
 
-include("lib/aruco.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/stats.min.js");
