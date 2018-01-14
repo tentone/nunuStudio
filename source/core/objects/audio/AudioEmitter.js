@@ -114,10 +114,7 @@ AudioEmitter.prototype.initialize = function()
 	this.setVolume(this.volume);
 	this.setPlaybackRate(this.playbackRate);
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
+	THREE.Object3D.prototype.initialize.call(this);
 };
 
 /**

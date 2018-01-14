@@ -58,6 +58,7 @@ include("core/Global.js");
 include("core/FileSystem.js");
 
 include("core/three/animation/KeyframeTrack.js");
+include("core/three/animation/AnimationClip.js");
 include("core/three/core/Object3D.js");
 include("core/three/core/BufferGeometry.js");
 include("core/three/cameras/Camera.js");
@@ -70,7 +71,6 @@ include("core/three/lights/LightShadow.js");
 include("core/three/scenes/Fog.js");
 
 include("core/animation/AnimationMixer.js");
-include("core/animation/AnimationClip.js");
 
 include("core/input/Key.js");
 include("core/input/Keyboard.js");

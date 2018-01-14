@@ -93,10 +93,7 @@ PositionalAudio.prototype.update = function(delta)
 		this.panner.setOrientation(0, 0, 0);
 	}
 
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update(delta);
-	}
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**
