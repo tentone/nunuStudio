@@ -404,19 +404,21 @@ AnimationTab.prototype.createTimeline = function()
 		button.appendChild(name);
 
 		var block = document.createElement("div");
-		block.style.width = "100%";
+		block.style.position = "absolute";
+		block.style.top = y + "px";
+		block.style.left = "0px";
 		block.style.height = this.timelineHeight + "px";
 		block.style.backgroundColor = Editor.theme.barColor;
 		this.tracks.appendChild(block);
 
 		var text = new Text(block);
-		text.position.set(5, y + 5);
+		text.position.set(5, 5);
 		text.size.set(50, 20);
 		text.setText("Enabled");
 		text.updateInterface();
 
 		var enabled = new CheckBox(block);
-		enabled.position.set(55, y + 5);
+		enabled.position.set(55, 5);
 		enabled.size.set(15, 15);
 		enabled.updateInterface();
 		enabled.element.element = enabled;
@@ -429,13 +431,13 @@ AnimationTab.prototype.createTimeline = function()
 		});
 
 		var text = new Text(block);
-		text.position.set(70, y + 5);
+		text.position.set(70, 5);
 		text.size.set(100, 20);
 		text.setText("Duration");
 		text.updateInterface();
 
 		var duration = new NumberBox(block);
-		duration.position.set(150, y + 5);
+		duration.position.set(150, 5);
 		duration.size.set(60, 18);
 		duration.updateInterface();
 		duration.element.element = duration;
@@ -448,13 +450,13 @@ AnimationTab.prototype.createTimeline = function()
 		});
 
 		var text = new Text(block);
-		text.position.set(190, y + 5);
+		text.position.set(190, 5);
 		text.size.set(100, 20);
 		text.setText("Loop");
 		text.updateInterface();
 
 		var loop = new DropdownList(block);
-		loop.position.set(260, y + 5);
+		loop.position.set(260, 5);
 		loop.size.set(90, 18);
 		loop.addValue("Once", THREE.LoopOnce);
 		loop.addValue("Repeat", THREE.LoopRepeat);
@@ -470,13 +472,13 @@ AnimationTab.prototype.createTimeline = function()
 		});
 
 		var text = new Text(block);
-		text.position.set(335, y + 5);
+		text.position.set(335, 5);
 		text.size.set(100, 20);
 		text.setText("Speed");
 		text.updateInterface();
 
 		var timeScale = new NumberBox(block);
-		timeScale.position.set(410, y + 5);
+		timeScale.position.set(410, 5);
 		timeScale.size.set(60, 18);
 		timeScale.updateInterface();
 		timeScale.element.element = timeScale;
@@ -644,104 +646,13 @@ AnimationTab.prototype.createTimeline = function()
 				self.createAnimationMixer();
 			});
 
-			var track = document.createElement("div");
-			track.style.height = this.timelineHeight + "px";
-			this.tracks.appendChild(track);
-
+			var track = new AnimationTrack(this.tracks, this, tracks[j]);
+			track.position.set(0, y);
+			track.size.set(this.zoom * animations[i].duration, this.timelineHeight);
+			track.updateInterface();
+			track.createKeyframes();
+			
 			y += this.timelineHeight;
-
-			//Keyframes
-			for(var k = 0; k < times.length; k++)
-			{
-				var key = document.createElement("div");
-				key.style.position = "absolute";
-				key.style.cursor = "pointer";
-				key.style.backgroundColor =  tracks[j].color;
-				key.style.height = this.timelineHeight + "px";
-				key.style.left = (this.zoom * times[k]) + "px";
-				key.style.width = "5px";
-				key.index = k;
-				key.track = tracks[j];
-				track.appendChild(key);
-
-				key.ondblclick = function(event)
-				{
-					var time = this.track.times[this.index];
-					self.mixer.setTime(time);
-				};
-
-				//Keyframe context menu
-				key.oncontextmenu = function(event)
-				{
-					var index = this.index;
-					var track = this.track;
-
-					var context = new ContextMenu();
-					context.size.set(150, 20);
-					context.position.set(event.clientX, event.clientY);
-					
-					context.addOption("Delete", function()
-					{
-						if(!Editor.confirm("Delete keyframe?"))
-						{
-							return;
-						}
-
-						if(track.times.length === 1)
-						{
-							alert("Track needs to have at least one keyframe!");
-							return;
-						}
-						
-						var times = [];
-						for(var i = 0; i < track.times.length; i++)
-						{
-							if(i !== index)
-							{
-								times.push(track.times[i]);
-							}
-						}
-
-						var values = [];
-						var valueSize = track.getValueSize();
-						var min = index * valueSize;
-						var max = min + valueSize - 1;
-
-						for(var i = 0; i < track.values.length; i++)
-						{
-							if(i < min || i > max)
-							{
-								values.push(track.values[i]);
-							}
-						}
-
-						track.times = new Float32Array(times);
-						track.values = new Float32Array(values);
-
-						self.createTimeline();
-						self.createAnimationMixer();
-					});
-
-					context.addOption("Move", function()
-					{
-						var time = Number.parseFloat(prompt("Keyframe time"));
-
-						if(isNaN(time))
-						{
-							alert("Invalid time value!");
-							return;
-						}
-
-						track.times[index] = time;
-						track.sort();
-
-						self.createTimeline();
-						self.createAnimationMixer();
-					});
-
-					context.updateInterface();
-				};
-			}
 		}
 
 		var duration = animations[i].duration;

@@ -112,6 +112,11 @@ Element.prototype.updatePosition = function(mode)
 	}
 };
 
+Element.prototype.setBackgroundColor = function(color)
+{
+	this.element.style.backgroundColor = color;
+};
+
 Element.prototype.updateSize = function()
 {
 	this.element.style.width = this.size.x + "px";
