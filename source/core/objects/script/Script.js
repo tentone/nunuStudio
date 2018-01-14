@@ -66,7 +66,7 @@ function Script(code, mode)
 	this.code = (code !== undefined) ? code : Script.DEFAULT;
 	this.mode = (mode !== undefined) ? mode : Script.APPEND;
 
-	this.script = null;
+	this.script = {};
 	this.program = null;
 	this.scene = null;
 }
@@ -229,7 +229,7 @@ Script.prototype.update = function(delta)
  */
 Script.prototype.dispose = function()
 {
-	if(this.script !== null && this.script.dispose !== undefined)
+	if(this.script.dispose !== undefined)
 	{
 		this.script.dispose.call(this);
 	}

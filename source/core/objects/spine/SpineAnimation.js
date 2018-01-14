@@ -92,7 +92,9 @@ function SpineAnimation(json, atlas, path, textures)
 	//Attributes
 	this.name = "spine";
 	this.type = "SpineAnimation";
+	
 	this.frustumCulled = false;
+
 	this.receiveShadow = true;
 	this.castShadow = true;
 	this.scale.set(0.01, 0.01, 0.01);
@@ -116,17 +118,7 @@ function SpineAnimation(json, atlas, path, textures)
 
 SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
 
-/**
- * Initialize the object.
- * 
- * @method initialize
- */
-SpineAnimation.prototype.initialize = function()
-{
-	this.play();
-
-	THREE.Object3D.prototype.initialize.call(this);
-};
+SpineAnimation.prototype.update = THREE.Object3D.prototype.update;
 
 /**
  * Update mesh geometry from animation state before rendering.
