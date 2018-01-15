@@ -7,9 +7,9 @@ function AnimationOptions(parent, editor, animation)
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
 	this.editor = editor;
-	self.animation = animation;
+	this.animation = animation;
 
-	var self.editor = this;
+	var self = this;
 
 	var text = new Text(this.element);
 	text.position.set(5, 5);
@@ -78,6 +78,8 @@ function AnimationOptions(parent, editor, animation)
 		self.animation.timeScale = self.timeScale.getValue();
 		self.editor.createAnimationMixer(true);
 	});
+
+	this.updateAnimation();
 }
 
 AnimationOptions.prototype = Object.create(Element.prototype);

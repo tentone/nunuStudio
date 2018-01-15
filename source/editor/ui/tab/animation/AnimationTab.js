@@ -11,6 +11,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.clock = new THREE.Clock();
 	
 	this.zoom = 120.0; //Pixels/sec
+	this.timebarHeight = 0;
 
 	//Bar
 	this.bar = document.createElement("div");
@@ -131,8 +132,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.timeline.appendChild(this.info);
 
 	//Temporary variables for mouse movement
-	var mouse = new THREE.Vector2();
-	var initial = 0;
+	var mouse = 0, initial = 0;
 
 	//Resize tab
 	this.tab = document.createElement("div");
@@ -145,7 +145,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.tab.onmousedown = function(event)
 	{
-		mouse.set(event.clientX, event.clientY);
+		mouse = event.clientX;
 		initial = this.position;
 		self.tabManager.create();
 	};
@@ -153,7 +153,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.tabManager = new EventManager();
 	this.tabManager.add(window, "mousemove", function(event)
 	{
-		self.tab.position = initial + (event.clientX - mouse.x);
+		self.tab.position = initial + (event.clientX - mouse);
 		self.updateInterface();
 	});
 
@@ -183,7 +183,7 @@ function AnimationTab(parent, closeable, container, index)
 		if(self.mixer !== null)
 		{
 			initial = self.mixer._actions[0].time;
-			mouse.set(event.clientX, event.clientY);
+			mouse = event.clientX;
 			self.manager.create();
 		}
 	};
@@ -191,7 +191,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		var time = initial + (event.clientX - mouse.x) / self.zoom;
+		var time = initial + (event.clientX - mouse) / self.zoom;
 		self.mixer.setTime(time > 0 ? time : 0);
 		
 		Interface.panel.updatePanel();
@@ -313,67 +313,39 @@ AnimationTab.prototype.createTimeline = function()
 
 	var animations = this.object.animations;
 	var duration = 0;
-	var y = 0;
 
-	var timescale = document.createElement("canvas");
-	timescale.style.position = "absolute";
-	timescale.style.top = "0px";
-	timescale.style.left = "0px";
-	this.tracks.appendChild(timescale);
+	this.timebarHeight = 0;
 
 	//Animations
 	for(var i = 0; i < animations.length; i++)
 	{
 		var button = new AnimationButton(this.info, this, animations[i]);
-		button.position.set(0, y);
+		button.position.set(0, this.timebarHeight);
 		button.size.set(0, 30);
 		button.updateInterface();
 
-		var block = new AnimationOptions(this.track, this, animations[i]);
-		button.position.set(0, y);
-		button.size.set(0, 30);
-		button.updateInterface();
-	
-		y += 30;
-
-		//Timegrid
-		var timegrid = document.createElement("canvas");
-		timegrid.style.position = "absolute";
-		timegrid.style.top = y + "px";
-		timegrid.style.left = "0px";
-		this.tracks.appendChild(timegrid);
-
-		//Tracks
 		var tracks = animations[i].tracks;
-		for(var j = 0; j < tracks.length; j++)
-		{
-			var times = tracks[j].times;
-
-			var track = new AnimationTrack(this.tracks, this, tracks[j]);
-			track.position.set(0, y);
-			track.size.set(this.zoom * animations[i].duration, 30);
-			track.updateInterface();
-			
-			var button = new AnimationTrackButton(this.info, this, animations[i], tracks[j], track);
-			button.position.set(0, y);
-			button.size.set(0, 30);
-			button.updateInterface();
-
-			y += 30;
-		}
-
 		var duration = animations[i].duration;
 		var width = this.zoom * duration + 1;
 		var height = 30 * tracks.length + 1;
 
-		//Block
-		block.style.width = width + "px";
-		
-		//Timeline grid
+		var block = new AnimationOptions(this.tracks, this, animations[i]);
+		block.position.set(0, this.timebarHeight);
+		block.size.set(width, 30);
+		block.updateInterface();
+
+		this.timebarHeight += 30;
+
+		//Timegrid
+		var timegrid = document.createElement("canvas");
+		timegrid.style.position = "absolute";
+		timegrid.style.top = this.timebarHeight + "px";
+		timegrid.style.left = "0px";
 		timegrid.style.width = width + "px";
 		timegrid.style.height = height + "px";
 		timegrid.width = width;
 		timegrid.height = height;
+		this.tracks.appendChild(timegrid);
 
 		var context = timegrid.getContext("2d");
 		context.fillStyle = Editor.theme.barColor;
@@ -389,15 +361,25 @@ AnimationTab.prototype.createTimeline = function()
 		{
 			context.fillRect(l, 0, 1, height);
 		}
+
+		//Tracks
+		for(var j = 0; j < tracks.length; j++)
+		{
+			var track = new AnimationTrack(this.tracks, this, tracks[j]);
+			track.position.set(0, this.timebarHeight);
+			track.size.set(this.zoom * animations[i].duration, 30);
+			track.updateInterface();
+			
+			var button = new AnimationTrackButton(this.info, this, animations[i], tracks[j], track);
+			button.position.set(0, this.timebarHeight);
+			button.size.set(0, 30);
+			button.updateInterface();
+
+			this.timebarHeight += 30;
+		}
 	}
 
 	this.updateInterface();
-
-	//Timescale
-	//timescale.style.width = width + "px";
-	//timescale.style.height = height + "px";
-	//timescale.width = width;
-	//timescale.height = height;
 };
 
 AnimationTab.prototype.addKeyFrame = function(track, object)
