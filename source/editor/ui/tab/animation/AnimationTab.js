@@ -329,95 +329,11 @@ AnimationTab.prototype.createTimeline = function()
 		button.size.set(0, 30);
 		button.updateInterface();
 
-		var block = document.createElement("div");
-		block.style.position = "absolute";
-		block.style.top = y + "px";
-		block.style.left = "0px";
-		block.style.height = "30px";
-		block.style.backgroundColor = Editor.theme.barColor;
-		this.tracks.appendChild(block);
-
-		var text = new Text(block);
-		text.position.set(5, 5);
-		text.size.set(50, 20);
-		text.setText("Enabled");
-		text.updateInterface();
-
-		var enabled = new CheckBox(block);
-		enabled.position.set(55, 5);
-		enabled.size.set(15, 15);
-		enabled.updateInterface();
-		enabled.element.element = enabled;
-		enabled.element.animation = animations[i];
-		enabled.setValue(animations[i].enabled);
-		enabled.setOnChange(function()
-		{
-			this.animation.enabled = this.element.getValue();
-			self.createAnimationMixer(true);
-		});
-
-		var text = new Text(block);
-		text.position.set(70, 5);
-		text.size.set(100, 20);
-		text.setText("Duration");
-		text.updateInterface();
-
-		var duration = new NumberBox(block);
-		duration.position.set(150, 5);
-		duration.size.set(60, 18);
-		duration.updateInterface();
-		duration.element.element = duration;
-		duration.element.animation = animations[i];
-		duration.setValue(animations[i].duration);
-		duration.setOnChange(function()
-		{
-			this.animation.duration = this.element.getValue();
-
-			self.createTimeline();
-			self.createAnimationMixer();
-		});
-
-		var text = new Text(block);
-		text.position.set(190, 5);
-		text.size.set(100, 20);
-		text.setText("Loop");
-		text.updateInterface();
-
-		var loop = new DropdownList(block);
-		loop.position.set(260, 5);
-		loop.size.set(90, 18);
-		loop.addValue("Once", THREE.LoopOnce);
-		loop.addValue("Repeat", THREE.LoopRepeat);
-		loop.addValue("PingPong", THREE.LoopPingPong);
-		loop.updateInterface();
-		loop.element.element = loop;
-		loop.element.animation = animations[i];
-		loop.setValue(animations[i].loop);
-		loop.setOnChange(function()
-		{
-			this.animation.loop = this.element.getValue();
-			self.createAnimationMixer(true);
-		});
-
-		var text = new Text(block);
-		text.position.set(335, 5);
-		text.size.set(100, 20);
-		text.setText("Speed");
-		text.updateInterface();
-
-		var timeScale = new NumberBox(block);
-		timeScale.position.set(410, 5);
-		timeScale.size.set(60, 18);
-		timeScale.updateInterface();
-		timeScale.element.element = timeScale;
-		timeScale.element.animation = animations[i];
-		timeScale.setValue(animations[i].timeScale);
-		timeScale.setOnChange(function()
-		{
-			this.animation.timeScale = this.element.getValue();
-			self.createAnimationMixer(true);
-		});
-
+		var block = new AnimationOptions(this.track, this, animations[i]);
+		button.position.set(0, y);
+		button.size.set(0, 30);
+		button.updateInterface();
+	
 		y += 30;
 
 		//Timegrid
