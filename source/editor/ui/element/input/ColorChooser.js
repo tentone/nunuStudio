@@ -56,6 +56,17 @@ ColorChooser.prototype.setValueHex = function(hex)
 	this.color.fromRGB(hex >> 16 & 255, hex >> 8 & 255, hex & 255);
 };
 
+//Set valur from CSS string
+ColorChooser.prototype.setValueString = function(color)
+{
+	this.color.fromString(color);
+};
+
+ColorChooser.prototype.getValueString = function(color)
+{
+	return this.color.toHEXString();
+};
+
 //Get color value
 ColorChooser.prototype.getValue = function()
 {

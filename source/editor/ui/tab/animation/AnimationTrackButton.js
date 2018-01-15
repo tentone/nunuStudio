@@ -147,6 +147,17 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 		self.editor.createAnimationMixer();
 	});
 
+	this.color = new ColorChooser(this.element);
+	this.color.size.set(20, 18);
+	this.color.position.set(57, 5);
+	this.color.updatePosition(Element.TOP_RIGHT);
+	this.color.updateSize();
+	this.color.setOnChange(function()
+	{
+		self.track.color = self.color.getValueString();
+		self.trackTimeline.updateKeyframes();
+	});
+
 	this.updateTrack();
 }
 
@@ -155,6 +166,7 @@ AnimationTrackButton.prototype = Object.create(Element.prototype);
 AnimationTrackButton.prototype.updateTrack = function()
 {
 	this.name.innerHTML = this.track.name;
+	this.color.setValueString(this.track.color);
 	this.interpolation.setValue(this.track.getInterpolation());
 };
 
