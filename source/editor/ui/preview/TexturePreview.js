@@ -4,6 +4,20 @@ function TexturePreview(){}
 
 TexturePreview.generate = function(texture)
 {
+	var preview = document.createElement("img");
+	TextureRenderer.render(texture, function(url)
+	{
+		preview.src = url;
+	});
+
+	return preview;
+};
+
+/*
+function TexturePreview(){}
+
+TexturePreview.generate = function(texture)
+{
 	var preview = null;
 
 	//Video texture
@@ -78,3 +92,4 @@ TexturePreview.generate = function(texture)
 
 	return preview;
 };
+*/
