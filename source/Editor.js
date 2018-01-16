@@ -355,8 +355,10 @@ include("editor/ui/tab/texture/SpriteSheetTextureEditor.js");
 
 include("editor/ui/preview/TexturePreview.js");
 include("editor/ui/preview/MaterialPreview.js");
+
 include("editor/ui/preview/renderer/FontRenderer.js");
 include("editor/ui/preview/renderer/MaterialRenderer.js");
+include("editor/ui/preview/renderer/TextureRenderer.js");
 
 include("editor/ui/asset/Asset.js");
 include("editor/ui/asset/MaterialAsset.js");
