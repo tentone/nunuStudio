@@ -28,15 +28,48 @@ function AnimationButton(parent, editor, animation)
 				self.updateAnimation();
 			}
 		});
-		/*context.addOption("Add track", function()
+		context.addOption("Add track", function()
 		{
 			var attribute = prompt("Attribute");
-			var value = object[attribute];
+			
+			var attributes = attribute.split(".");
+			var value = object;
 
+			for(var i = 0; i < attributes.length; i++)
+			{
+				if(attributes !== "")
+				{
+					var newValue = value[attributes[i]];
+					
+					if(newValue !== undefined)
+					{
+						value = newValue;
+					}
+				}
+			}
+
+			if(value === object)
+			{
+				alert("Attribute not found");
+			}
+			
 			console.log(value);
 
+			if(value instanceof THREE.Vector3)
+			{
+				console.log("Vector3");
+			}
+			else if(value instanceof THREE.Color)
+			{
+				console.log("Color");
+			}
+			else if(value instanceof THREE.Quaternion)
+			{
+				console.log("Quaternion");
+			}
+
 			//TODO <ADD CODE HERE>
-		});*/
+		});
 		context.addOption("Delete", function()
 		{
 			if(!Editor.confirm("Delete animation?"))
