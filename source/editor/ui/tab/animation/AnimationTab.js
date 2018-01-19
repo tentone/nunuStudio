@@ -105,17 +105,26 @@ function AnimationTab(parent, closeable, container, index)
 	});
 
 	this.zoomSlider = new Slider(this.bar);
-	this.zoomSlider.size.set(150, 10);
-	this.zoomSlider.position.set(400, 0);
+	this.zoomSlider.size.set(100, 10);
+	this.zoomSlider.position.set(5, 2);
 	this.zoomSlider.setStep(10);
 	this.zoomSlider.setRange(20, 1000);
-	this.zoomSlider.updateInterface();
+	this.zoomSlider.updatePosition(Element.TOP_RIGHT);
+	this.zoomSlider.updateSize();
 	this.zoomSlider.setValue(this.zoom);
 	this.zoomSlider.setOnChange(function()
 	{
 		self.zoom = self.zoomSlider.getValue();
 		self.createTimeline();
 	});
+
+	this.zoomText = new Text(this.bar);
+	this.zoomText.setText("Zoom");
+	this.zoomText.size.set(50, 20);
+	this.zoomText.position.set(110, 0);
+	this.zoomText.updatePosition(Element.TOP_RIGHT);
+	this.zoomText.updateSize();
+
 
 	//Timeline
 	this.timeline = document.createElement("div");
