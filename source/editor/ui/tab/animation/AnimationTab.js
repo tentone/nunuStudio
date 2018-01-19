@@ -35,7 +35,6 @@ function AnimationTab(parent, closeable, container, index)
 				self.object.animations = [];
 			}
 
-			//VectorKeyframeTrack | BooleanKeyframeTrack | ColorKeyframeTrack | NumberKeyframeTrack | QuaternionKeyframeTrack | StringKeyframeTrack
 			var clip = new AnimationClip("Animation" + self.object.animations.length, 10, []);
 			
 			var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
@@ -384,8 +383,21 @@ AnimationTab.prototype.createTimeline = function()
 
 AnimationTab.prototype.addKeyFrame = function(track, object)
 {
-	var names = track.name.split(".");
-	var value = object[names[1]];
+	var attributes = track.name.split(".");
+	var value = object;
+
+	for(var i = 0; i < attributes.length; i++)
+	{
+		if(attributes !== "")
+		{
+			var newValue = value[attributes[i]];
+			
+			if(newValue !== undefined)
+			{
+				value = newValue;
+			}
+		}
+	}
 
 	value = (value.toArray !== undefined) ? value.toArray() : [value];
 
