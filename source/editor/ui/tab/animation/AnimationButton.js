@@ -31,7 +31,11 @@ function AnimationButton(parent, editor, animation)
 		context.addOption("Add track", function()
 		{
 			var attribute = prompt("Attribute");
-			
+			if(!attribute.startsWith("."))
+			{
+				attribute = "." + attribute;
+			}
+
 			var attributes = attribute.split(".");
 			var value = object;
 
@@ -52,23 +56,54 @@ function AnimationButton(parent, editor, animation)
 			{
 				alert("Attribute not found");
 			}
-			
-			console.log(value);
 
 			if(value instanceof THREE.Vector3)
 			{
-				console.log("Vector3");
+				var track = new THREE.VectorKeyframeTrack(attribute, [0], value.toArray());
+				track.setInterpolation(THREE.InterpolateLinear);
+				track.setColor(MathUtils.randomColor());
+				animation.tracks.push(track);
 			}
 			else if(value instanceof THREE.Color)
 			{
-				console.log("Color");
+				var track = new THREE.ColorKeyframeTrack(attribute, [0], value.toArray());
+				track.setInterpolation(THREE.InterpolateLinear);
+				track.setColor(MathUtils.randomColor());
+				animation.tracks.push(track);
 			}
 			else if(value instanceof THREE.Quaternion)
 			{
-				console.log("Quaternion");
+				var track = new THREE.QuaternionKeyframeTrack(attribute, [0], value.toArray());
+				track.setInterpolation(THREE.InterpolateLinear);
+				track.setColor(MathUtils.randomColor());
+				animation.tracks.push(track);
 			}
-
-			//TODO <ADD CODE HERE>
+			else if(typeof value === "string")
+			{
+				var track = new THREE.StringKeyframeTrack(attribute, [0], [value]);
+				track.setInterpolation(THREE.InterpolateDiscrete);
+				track.setColor(MathUtils.randomColor());
+				animation.tracks.push(track);
+			}
+			else if(typeof value === "boolean")
+			{
+				var track = new THREE.BooleanKeyframeTrack(attribute, [0], [value]);
+				track.setInterpolation(THREE.InterpolateDiscrete);
+				track.setColor(MathUtils.randomColor());
+				animation.tracks.push(track);
+			}
+			else if(typeof value === "number")
+			{
+				var track = new THREE.NumberKeyframeTrack(attribute, [0], [value]);
+				track.setInterpolation(THREE.InterpolateLinear);
+				track.setColor(MathUtils.randomColor());
+				animation.tracks.push(track);
+			}
+			else
+			{
+				console.warn("nunuStudio: Attribute it no animable", value);
+				alert("Attribute is not animable");
+			}
 		});
 		context.addOption("Delete", function()
 		{
