@@ -61,49 +61,43 @@ function AnimationButton(parent, editor, animation)
 			{
 				var track = new THREE.VectorKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(THREE.InterpolateLinear);
-				track.setColor(MathUtils.randomColor());
-				animation.tracks.push(track);
 			}
 			else if(value instanceof THREE.Color)
 			{
 				var track = new THREE.ColorKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(THREE.InterpolateLinear);
-				track.setColor(MathUtils.randomColor());
-				animation.tracks.push(track);
 			}
 			else if(value instanceof THREE.Quaternion)
 			{
 				var track = new THREE.QuaternionKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(THREE.InterpolateLinear);
-				track.setColor(MathUtils.randomColor());
-				animation.tracks.push(track);
 			}
 			else if(typeof value === "string")
 			{
 				var track = new THREE.StringKeyframeTrack(attribute, [0], [value]);
 				track.setInterpolation(THREE.InterpolateDiscrete);
-				track.setColor(MathUtils.randomColor());
-				animation.tracks.push(track);
 			}
 			else if(typeof value === "boolean")
 			{
 				var track = new THREE.BooleanKeyframeTrack(attribute, [0], [value]);
 				track.setInterpolation(THREE.InterpolateDiscrete);
-				track.setColor(MathUtils.randomColor());
-				animation.tracks.push(track);
 			}
 			else if(typeof value === "number")
 			{
 				var track = new THREE.NumberKeyframeTrack(attribute, [0], [value]);
 				track.setInterpolation(THREE.InterpolateLinear);
-				track.setColor(MathUtils.randomColor());
-				animation.tracks.push(track);
 			}
 			else
 			{
 				console.warn("nunuStudio: Attribute it no animable", value);
 				alert("Attribute is not animable");
+				return;
 			}
+
+			track.setColor(MathUtils.randomColor());
+			animation.tracks.push(track);
+			self.editor.createTimeline();
+			self.editor.createAnimationMixer();
 		});
 		context.addOption("Delete", function()
 		{
