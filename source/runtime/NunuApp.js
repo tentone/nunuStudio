@@ -37,7 +37,6 @@ include("lib/three/loaders/TTFLoader.js");
 
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
-include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");

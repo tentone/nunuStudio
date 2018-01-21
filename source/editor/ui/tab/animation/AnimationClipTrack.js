@@ -6,8 +6,7 @@ function AnimationClipTrack(parent, editor, animation)
 	this.animation = animation;
 
 	var tracks = animation.tracks;
-	var duration = animation.duration;
-	var width = this.editor.zoom * duration + 1;
+	var width = this.editor.zoom * animation.duration + 1;
 	var height = 30 * tracks.length + 1;
 	var self = this;
 
@@ -63,12 +62,9 @@ function AnimationClipTrack(parent, editor, animation)
 	this.seek.style.cursor = "e-resize";
 	this.seek.onmousedown = function(event)
 	{
-		if(self.editor.mixer !== null)
-		{
-			initial = self.editor.mixer._actions[0].time;
-			mouse = event.clientX;
-			self.manager.create();
-		}
+		initial = self.editor.mixer._actions[0].time;
+		mouse = event.clientX;
+		self.manager.create();
 	};
 	parent.appendChild(this.seek);
 
