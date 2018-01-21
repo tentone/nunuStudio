@@ -12,6 +12,7 @@ function AnimationTab(parent, closeable, container, index)
 	
 	this.zoom = 120.0; //Pixels/sec
 	this.timebarHeight = 0;
+	this.animations = [];
 
 	//Bar
 	this.bar = document.createElement("div");
@@ -175,40 +176,6 @@ function AnimationTab(parent, closeable, container, index)
 	this.tracks.style.position = "absolute";
 	this.tracks.style.backgroundColor = Editor.theme.panelColor;
 	this.timeline.appendChild(this.tracks);
-
-	//Seekbar
-	this.seek = document.createElement("div");
-	this.seek.style.position = "absolute";
-	this.seek.style.backgroundColor = "#FFFFFF";
-	this.seek.style.zIndex = "100";
-	this.seek.style.top = "0px";
-	this.seek.style.left = "0px";
-	this.seek.style.width = "4px";
-	this.seek.style.overflow = "hidden";
-	this.seek.style.cursor = "e-resize";
-	this.seek.onmousedown = function(event)
-	{
-		if(self.mixer !== null)
-		{
-			initial = self.mixer._actions[0].time;
-			mouse = event.clientX;
-			self.manager.create();
-		}
-	};
-
-	this.manager = new EventManager();
-	this.manager.add(window, "mousemove", function(event)
-	{
-		var time = initial + (event.clientX - mouse) / self.zoom;
-		self.mixer.setTime(time > 0 ? time : 0);
-		
-		Interface.panel.updatePanel();
-	});
-
-	this.manager.add(window, "mouseup", function(event)
-	{
-		self.manager.destroy();
-	});
 }
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
@@ -273,13 +240,9 @@ AnimationTab.prototype.update = function()
 {
 	if(this.mixer !== null)
 	{
-		if(this.mixer._actions.length > 0)
+		for(var i = 0; i < this.mixer._actions.length; i++)
 		{
-			this.seek.style.left = (this.mixer._actions[0].time * this.zoom) + "px";
-		}
-		else
-		{
-			this.seek.style.left = (this.mixer.time * this.zoom) + "px";
+			this.animations[i].seek.style.left = (this.mixer._actions[i].time * this.zoom) + "px";
 		}
 
 		this.mixer.update(this.clock.getDelta());
@@ -315,76 +278,17 @@ AnimationTab.prototype.createTimeline = function()
 		return;
 	}
 
-	this.tracks.appendChild(this.seek);
-
 	var self = this;
-
 	var animations = this.object.animations;
 	var duration = 0;
 
 	this.timebarHeight = 0;
+	this.animations = [];
 
 	//Animations
 	for(var i = 0; i < animations.length; i++)
 	{
-		var button = new AnimationButton(this.info, this, animations[i]);
-		button.position.set(0, this.timebarHeight);
-		button.size.set(0, 30);
-		button.updateInterface();
-
-		var tracks = animations[i].tracks;
-		var duration = animations[i].duration;
-		var width = this.zoom * duration + 1;
-		var height = 30 * tracks.length + 1;
-
-		var block = new AnimationOptions(this.tracks, this, animations[i]);
-		block.position.set(0, this.timebarHeight);
-		block.size.set(width, 30);
-		block.updateInterface();
-
-		this.timebarHeight += 30;
-
-		//Timegrid
-		var timegrid = document.createElement("canvas");
-		timegrid.style.position = "absolute";
-		timegrid.style.top = this.timebarHeight + "px";
-		timegrid.style.left = "0px";
-		timegrid.style.width = width + "px";
-		timegrid.style.height = height + "px";
-		timegrid.width = width;
-		timegrid.height = height;
-		this.tracks.appendChild(timegrid);
-
-		var context = timegrid.getContext("2d");
-		context.fillStyle = Editor.theme.barColor;
-
-		//Horizontal lines
-		for(var l = 0; l <= height; l += 30)
-		{
-			context.fillRect(0, l, width, 1);
-		}
-
-		//Vertical lines
-		for(var l = 0, step = this.zoom / 10; l <= width; l += step)
-		{
-			context.fillRect(l, 0, 1, height);
-		}
-
-		//Tracks
-		for(var j = 0; j < tracks.length; j++)
-		{
-			var track = new AnimationTrack(this.tracks, this, tracks[j]);
-			track.position.set(0, this.timebarHeight);
-			track.size.set(this.zoom * animations[i].duration, 30);
-			track.updateInterface();
-			
-			var button = new AnimationTrackButton(this.info, this, animations[i], tracks[j], track);
-			button.position.set(0, this.timebarHeight);
-			button.size.set(0, 30);
-			button.updateInterface();
-
-			this.timebarHeight += 30;
-		}
+		this.animations.push(new AnimationClipTrack(this.tracks, this, animations[i]));
 	}
 
 	this.updateInterface();
@@ -479,9 +383,6 @@ AnimationTab.prototype.updateInterface = function()
 		
 		this.tracks.style.left = (this.tab.position + 5) + "px";
 		this.tracks.style.width = (this.size.x - this.tab.position - 5) + "px";
-
-		//Seekbar
-		this.seek.style.height = this.timeline.scrollHeight + "px";
 	}
 	else
 	{
