@@ -288,7 +288,7 @@ AnimationTab.prototype.createTimeline = function()
 	//Animations
 	for(var i = 0; i < animations.length; i++)
 	{
-		this.animations.push(new AnimationClipTrack(this.tracks, this, animations[i]));
+		this.animations.push(new AnimationClipTrack(this, animations[i]));
 	}
 
 	this.updateInterface();
