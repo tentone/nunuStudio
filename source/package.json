@@ -1,7 +1,7 @@
 {
 	"name": "nunuStudio",
 	"main": "editor.html",
-	"chromium-args" : "--disable-raf-throttling --enable-gpu-async-worker-context",
+	"chromium-args" : "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context --enable-native-gpu-memory-buffers --disable-gpu-vsync --enable-tile-compression",
 	"window":
 	{
 		"icon": "editor/files/icon.png",
