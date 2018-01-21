@@ -1,6 +1,6 @@
 "use strict";
 
-function AnimationClipTrack(parent, editor, animation)
+function AnimationClipTrack(editor, animation)
 {
 	this.editor = editor;
 	this.animation = animation;
@@ -10,18 +10,19 @@ function AnimationClipTrack(parent, editor, animation)
 	var height = 30 * tracks.length + 1;
 	var self = this;
 
-	var button = new AnimationButton(this.editor.info, this, animation);
+	var button = new AnimationButton(this.editor.info, this.editor, animation);
 	button.position.set(0, this.editor.timebarHeight);
 	button.size.set(0, 30);
 	button.updateInterface();
 
-	var block = new AnimationOptions(parent, this, animation);
+	var block = new AnimationOptions(this.editor.tracks, this.editor, animation);
 	block.position.set(0, this.editor.timebarHeight);
 	block.size.set(width, 30);
 	block.updateInterface();
 
 	this.editor.timebarHeight += 30;
 
+	//Canvas
 	this.timegrid = document.createElement("canvas");
 	this.timegrid.style.position = "absolute";
 	this.timegrid.style.top = this.editor.timebarHeight + "px";
@@ -30,18 +31,14 @@ function AnimationClipTrack(parent, editor, animation)
 	this.timegrid.style.height = height + "px";
 	this.timegrid.width = width;
 	this.timegrid.height = height;
-	parent.appendChild(this.timegrid);
+	this.editor.tracks.appendChild(this.timegrid);
 
 	var context = this.timegrid.getContext("2d");
 	context.fillStyle = Editor.theme.barColor;
-
-	//Horizontal lines
 	for(var l = 0; l <= height; l += 30)
 	{
 		context.fillRect(0, l, width, 1);
 	}
-
-	//Vertical lines
 	for(var l = 0, step = this.editor.zoom / 10; l <= width; l += step)
 	{
 		context.fillRect(l, 0, 1, height);
@@ -66,7 +63,7 @@ function AnimationClipTrack(parent, editor, animation)
 		mouse = event.clientX;
 		self.manager.create();
 	};
-	parent.appendChild(this.seek);
+	this.editor.tracks.appendChild(this.seek);
 
 	//Seekbar manager
 	this.manager = new EventManager();
@@ -84,12 +81,12 @@ function AnimationClipTrack(parent, editor, animation)
 	//Tracks
 	for(var j = 0; j < tracks.length; j++)
 	{
-		var track = new AnimationTrack(parent, this, tracks[j]);
+		var track = new AnimationTrack(this.editor.tracks, this.editor, tracks[j]);
 		track.position.set(0, this.editor.timebarHeight);
 		track.size.set(this.editor.zoom * animation.duration, 30);
 		track.updateInterface();
 		
-		var button = new AnimationTrackButton(this.editor.info, this, animation, tracks[j], track);
+		var button = new AnimationTrackButton(this.editor.info, this.editor, animation, tracks[j], track);
 		button.position.set(0, this.editor.timebarHeight);
 		button.size.set(0, 30);
 		button.updateInterface();
