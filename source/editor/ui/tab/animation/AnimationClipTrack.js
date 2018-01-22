@@ -61,6 +61,7 @@ function AnimationClipTrack(editor, animation)
 	{
 		initial = self.editor.mixer._actions[0].time;
 		mouse = event.clientX;
+
 		self.manager.create();
 	};
 	this.editor.tracks.appendChild(this.seek);
@@ -69,8 +70,9 @@ function AnimationClipTrack(editor, animation)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		var time = initial + (event.clientX - mouse) / self.zoom;
+		var time = initial + (event.clientX - mouse) / self.editor.zoom;
 		self.editor.mixer.setTime(time > 0 ? time : 0);
+
 		Interface.panel.updatePanel();
 	});
 	this.manager.add(window, "mouseup", function(event)

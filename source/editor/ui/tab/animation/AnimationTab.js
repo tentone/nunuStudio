@@ -107,7 +107,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.zoomSlider = new Slider(this.bar);
 	this.zoomSlider.size.set(100, 10);
-	this.zoomSlider.position.set(5, 2);
+	this.zoomSlider.position.set(30, 2);
 	this.zoomSlider.setStep(10);
 	this.zoomSlider.setRange(20, 1000);
 	this.zoomSlider.updatePosition(Element.TOP_RIGHT);
@@ -119,13 +119,14 @@ function AnimationTab(parent, closeable, container, index)
 		self.createTimeline();
 	});
 
+	this.zoomSlider.text.style.right = "5px";
+
 	this.zoomText = new Text(this.bar);
 	this.zoomText.setText("Zoom");
-	this.zoomText.size.set(50, 20);
+	this.zoomText.size.set(90, 20);
 	this.zoomText.position.set(110, 0);
 	this.zoomText.updatePosition(Element.TOP_RIGHT);
 	this.zoomText.updateSize();
-
 
 	//Timeline
 	this.timeline = document.createElement("div");
@@ -266,6 +267,9 @@ AnimationTab.prototype.clearTimeline = function()
 	{
 		this.info.removeChild(this.info.firstChild);
 	}
+
+	this.timebarHeight = 0;
+	this.animations = [];
 };
 
 //Create new timeline elements
@@ -278,14 +282,8 @@ AnimationTab.prototype.createTimeline = function()
 		return;
 	}
 
-	var self = this;
 	var animations = this.object.animations;
-	var duration = 0;
 
-	this.timebarHeight = 0;
-	this.animations = [];
-
-	//Animations
 	for(var i = 0; i < animations.length; i++)
 	{
 		this.animations.push(new AnimationClipTrack(this, animations[i]));
