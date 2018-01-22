@@ -128,7 +128,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Texture)
+	/*else if(object instanceof THREE.Texture)
 	{
 		var preview = TexturePreview.generate(object);
 		preview.height = 60;
@@ -150,7 +150,7 @@ ConsoleTab.createMessage = function(object)
 		uuid.insertCell(1).innerHTML = object.uuid;
 
 		log.appendChild(table);
-	}
+	}*/
 	else if(object instanceof THREE.Material)
 	{
 		var preview = MaterialPreview.generate(object);
