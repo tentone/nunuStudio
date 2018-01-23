@@ -4,6 +4,8 @@ function Asset(parent)
 {
 	Element.call(this, parent);
 
+	this.asset = null;
+
 	this.element.style.cursor = "pointer";
 
 	//Icon

@@ -4,7 +4,6 @@ function MaterialAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.material = null;
 	this.setIcon(Editor.filePath + "icons/misc/material.png");
 	
 	//Self pointer
@@ -37,51 +36,51 @@ function MaterialAsset(parent)
 	//Double click
 	this.element.ondblclick = function()
 	{
-		if(self.material instanceof THREE.Material)
+		if(self.asset instanceof THREE.Material)
 		{
-			var tab = Interface.tab.getTab(MaterialEditor, self.material);
+			var tab = Interface.tab.getTab(MaterialEditor, self.asset);
 
 			if(tab === null)
 			{
 				self.restoreMaterial();
 
-				if(self.material instanceof THREE.MeshPhongMaterial)
+				if(self.asset instanceof THREE.MeshPhongMaterial)
 				{
 					tab = Interface.tab.addTab(MeshPhongMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.MeshLambertMaterial)
+				else if(self.asset instanceof THREE.MeshLambertMaterial)
 				{
 					tab = Interface.tab.addTab(MeshLambertMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.MeshBasicMaterial)
+				else if(self.asset instanceof THREE.MeshBasicMaterial)
 				{
 					tab = Interface.tab.addTab(MeshBasicMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.MeshPhysicalMaterial)
+				else if(self.asset instanceof THREE.MeshPhysicalMaterial)
 				{
 					tab = Interface.tab.addTab(MeshPhysicalMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.MeshStandardMaterial)
+				else if(self.asset instanceof THREE.MeshStandardMaterial)
 				{
 					tab = Interface.tab.addTab(MeshStandardMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.SpriteMaterial)
+				else if(self.asset instanceof THREE.SpriteMaterial)
 				{
 					tab = Interface.tab.addTab(SpriteMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.ShaderMaterial)
+				else if(self.asset instanceof THREE.ShaderMaterial)
 				{
 					tab = Interface.tab.addTab(ShaderMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.LineDashedMaterial)
+				else if(self.asset instanceof THREE.LineDashedMaterial)
 				{
 					tab = Interface.tab.addTab(LineDashedMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.LineBasicMaterial)
+				else if(self.asset instanceof THREE.LineBasicMaterial)
 				{
 					tab = Interface.tab.addTab(LineBasicMaterialEditor, true);
 				}
-				else if(self.material instanceof THREE.PointsMaterial)
+				else if(self.asset instanceof THREE.PointsMaterial)
 				{
 					tab = Interface.tab.addTab(PointsMaterialEditor, true);
 				}
@@ -90,7 +89,7 @@ function MaterialAsset(parent)
 					tab = Interface.tab.addTab(MeshMaterialEditor, true);
 				}
 
-				tab.attach(self.material, self);
+				tab.attach(self.asset, self);
 			}
 
 			tab.select();
@@ -106,9 +105,9 @@ function MaterialAsset(parent)
 		
 		context.addOption("Rename", function()
 		{
-			if(self.material !== null)
+			if(self.asset !== null)
 			{
-				Editor.history.add(new ChangeAction(self.material, "name", prompt("Rename material", self.material.name)));
+				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename material", self.asset.name)));
 				self.updateMetadata();
 				Editor.updateObjectViews();
 			}
@@ -119,7 +118,7 @@ function MaterialAsset(parent)
 			Editor.clearSelection();
 			Editor.program.traverse(function(child)
 			{
-				if(child.material === self.material)
+				if(child.material === self.asset)
 				{
 					Editor.addToSelection(child);
 				}
@@ -130,20 +129,20 @@ function MaterialAsset(parent)
 
 		context.addOption("Delete", function()
 		{
-			if(self.material !== null && confirm("Delete material?"))
+			if(self.asset !== null && confirm("Delete material?"))
 			{
-				Editor.program.removeMaterial(self.material, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
+				Editor.program.removeMaterial(self.asset, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
 				Editor.updateObjectViews();
 			}
 		});
 
 		context.addOption("Copy", function()
 		{
-			if(self.material !== null)
+			if(self.asset !== null)
 			{
 				try
 				{
-					Editor.clipboard.set(JSON.stringify(self.material.toJSON()), "text");
+					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 				}
 				catch(e){}
 			}
@@ -151,12 +150,12 @@ function MaterialAsset(parent)
 
 		context.addOption("Cut", function()
 		{
-			if(self.material !== null)
+			if(self.asset !== null)
 			{
 				try
 				{
-					Editor.clipboard.set(JSON.stringify(self.material.toJSON()), "text");
-					Editor.program.removeMaterial(self.material, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
+					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+					Editor.program.removeMaterial(self.asset, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
 					Editor.updateObjectViews();
 				}
 				catch(e){}
@@ -165,12 +164,12 @@ function MaterialAsset(parent)
 
 		context.addOption("Duplicate", function()
 		{
-			if(self.material !== null)
+			if(self.asset !== null)
 			{
 				try
 				{
 					//Serialize
-					var json = self.material.toJSON();
+					var json = self.asset.toJSON();
 
 					//Loader
 					var loader = new MaterialLoader();
@@ -201,10 +200,10 @@ function MaterialAsset(parent)
 		self.restoreMaterial();
 
 		//Insert material into drag buffer
-		if(self.material !== null)
+		if(self.asset !== null)
 		{
-			event.dataTransfer.setData("uuid", self.material.uuid);
-			DragBuffer.pushDragElement(self.material);
+			event.dataTransfer.setData("uuid", self.asset.uuid);
+			DragBuffer.pushDragElement(self.asset);
 		}
 	};
 
@@ -233,7 +232,7 @@ MaterialAsset.prototype.setMaterial = function(material)
 {
 	if(material instanceof THREE.Material)
 	{
-		this.material = material;
+		this.asset = material;
 		this.updateMetadata();
 	}
 };
@@ -241,10 +240,10 @@ MaterialAsset.prototype.setMaterial = function(material)
 //Highlight material
 MaterialAsset.prototype.highlightMaterial = function()
 {
-	if(this.material instanceof THREE.Material && this.material.color !== undefined)
+	if(this.asset instanceof THREE.Material && this.asset.color !== undefined)
 	{
-		this.materialColor.copy(this.material.color);
-		this.material.color.setRGB(1, 1, 0);
+		this.materialColor.copy(this.asset.color);
+		this.asset.color.setRGB(1, 1, 0);
 		this.materialHighlighted = true;
 	}
 };
@@ -254,9 +253,9 @@ MaterialAsset.prototype.restoreMaterial = function()
 {
 	if(this.materialHighlighted)
 	{
-		if(this.material instanceof THREE.Material && this.material.color !== undefined)
+		if(this.asset instanceof THREE.Material && this.asset.color !== undefined)
 		{
-			this.material.color.copy(this.materialColor);
+			this.asset.color.copy(this.materialColor);
 			this.materialHighlighted = false;
 		}
 	}
@@ -265,16 +264,16 @@ MaterialAsset.prototype.restoreMaterial = function()
 //Update material preview
 MaterialAsset.prototype.updateMetadata = function()
 {
-	if(this.material !== null)
+	if(this.asset !== null)
 	{
 		var image = this.image;
 		
-		MaterialRenderer.render(this.material, function(url)
+		MaterialRenderer.render(this.asset, function(url)
 		{
 			image.src = url;
 		});
 		
-		this.setText(this.material.name);
+		this.setText(this.asset.name);
 	}
 };
 

@@ -4,7 +4,6 @@ function FileAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.file = null;
 	this.setIcon(Editor.filePath + "icons/misc/file.png");
 	
 	//Self pointer
@@ -25,18 +24,18 @@ function FileAsset(parent)
 
 		context.addOption("Rename", function()
 		{
-			if(self.file !== null)
+			if(self.asset !== null)
 			{
-				Editor.history.add(new ChangeAction(self.file, "name", prompt("Rename file", self.file.name)));
+				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename file", self.asset.name)));
 				Editor.updateObjectViews();
 			}
 		});
 		
 		context.addOption("Delete", function()
 		{
-			if(self.file !== null && confirm("Delete file?"))
+			if(self.asset !== null && confirm("Delete file?"))
 			{
-				Editor.program.removeResource(self.file);
+				Editor.program.removeResource(self.asset);
 				Editor.updateObjectViews();
 			}
 		});
@@ -48,12 +47,12 @@ function FileAsset(parent)
 	//Open text editor
 	this.element.ondblclick = function()
 	{
-		var tab = Interface.tab.getTab(TextEditor, self.file);
+		var tab = Interface.tab.getTab(TextEditor, self.asset);
 
 		if(tab === null)
 		{
 			tab = Interface.tab.addTab(TextEditor, true);
-			tab.attach(self.file, self);
+			tab.attach(self.asset, self);
 		}
 		
 		tab.select();
@@ -65,16 +64,16 @@ FileAsset.prototype = Object.create(Asset.prototype);
 //Set object to file
 FileAsset.prototype.setFile = function(file)
 {
-	this.file = file;
+	this.asset = file;
 	this.updateMetadata();
 };
 
 //Update material preview
 FileAsset.prototype.updateMetadata = function()
 {
-	this.setText(this.file.name);
+	this.setText(this.asset.name);
 
-	if(this.file.encoding === "js" || this.file.encoding === "glsl")
+	if(this.asset.encoding === "js" || this.asset.encoding === "glsl")
 	{
 		this.image.src = Editor.filePath + "icons/script/script.png";
 	}

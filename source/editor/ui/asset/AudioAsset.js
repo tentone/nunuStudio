@@ -4,7 +4,6 @@ function AudioAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.audio = null;
 	this.setIcon(Editor.filePath + "icons/misc/audio.png");
 	
 	//Self pointer
@@ -28,29 +27,29 @@ function AudioAsset(parent)
 
 		menu.addOption("Audio Emitter", function()
 		{
-			if(self.audio !== null)
+			if(self.asset !== null)
 			{
-				var emitter = new AudioEmitter(self.audio);
-				emitter.name = self.audio.name;
+				var emitter = new AudioEmitter(self.asset);
+				emitter.name = self.asset.name;
 				Editor.addToScene(emitter);
 			}
 		});
 
 		menu.addOption("Positional", function()
 		{
-			if(self.audio !== null)
+			if(self.asset !== null)
 			{
-				var emitter = new PositionalAudio(self.audio);
-				emitter.name = self.audio.name;
+				var emitter = new PositionalAudio(self.asset);
+				emitter.name = self.asset.name;
 				Editor.addToScene(emitter);
 			}
 		});
 
 		context.addOption("Rename", function()
 		{
-			if(self.audio !== null)
+			if(self.asset !== null)
 			{
-				Editor.history.add(new ChangeAction(self.audio, "name", prompt("Rename audio", self.audio.name)));
+				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename audio", self.asset.name)));
 				Editor.updateObjectViews();
 			}
 		});
@@ -64,35 +63,35 @@ function AudioAsset(parent)
 					if(files.length > 0)
 					{
 						var file = files[0].path;
-						FileSystem.writeFileArrayBuffer(file, self.audio.data);
+						FileSystem.writeFileArrayBuffer(file, self.asset.data);
 					}
-				}, "." + self.audio.encoding, true);
+				}, "." + self.asset.encoding, true);
 			}
 			else
 			{
 				FileSystem.chooseFileName(function(file)
 				{
-					FileSystem.writeFileArrayBuffer(file, self.audio.data);
-				}, "." + self.audio.encoding);
+					FileSystem.writeFileArrayBuffer(file, self.asset.data);
+				}, "." + self.asset.encoding);
 			}
 		});
 		
 		context.addOption("Delete", function()
 		{
-			if(self.audio !== null && confirm("Delete audio?"))
+			if(self.asset !== null && confirm("Delete audio?"))
 			{
-				Editor.program.removeAudio(self.audio, Editor.defaultAudio);
+				Editor.program.removeAudio(self.asset, Editor.defaultAudio);
 				Editor.updateObjectViews();
 			}
 		});
 
 		context.addOption("Copy", function()
 		{
-			if(self.audio !== null)
+			if(self.asset !== null)
 			{
 				try
 				{
-					Editor.clipboard.set(JSON.stringify(self.audio.toJSON()), "text");
+					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 				}
 				catch(e){}
 			}
@@ -105,10 +104,10 @@ function AudioAsset(parent)
 	this.element.ondragstart = function(event)
 	{
 		//Insert into drag buffer
-		if(self.audio !== null)
+		if(self.asset !== null)
 		{
-			event.dataTransfer.setData("uuid", self.audio.uuid);
-			DragBuffer.pushDragElement(self.audio);
+			event.dataTransfer.setData("uuid", self.asset.uuid);
+			DragBuffer.pushDragElement(self.asset);
 		}
 	};
 
@@ -127,7 +126,7 @@ AudioAsset.prototype.setAudio = function(audio)
 {
 	if(audio instanceof Audio)
 	{
-		this.audio = audio;
+		this.asset = audio;
 		this.updateMetadata();
 	}
 };
@@ -135,9 +134,9 @@ AudioAsset.prototype.setAudio = function(audio)
 //Update material preview
 AudioAsset.prototype.updateMetadata = function()
 {
-	if(this.audio !== null)
+	if(this.asset !== null)
 	{
-		this.setText(this.audio.name);
+		this.setText(this.asset.name);
 	}
 };
 
