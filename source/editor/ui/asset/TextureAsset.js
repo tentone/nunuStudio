@@ -4,7 +4,6 @@ function TextureAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.texture = null;
 	this.setIcon(Editor.filePath + "icons/misc/image.png");
 
 	//Self pointer
@@ -14,29 +13,29 @@ function TextureAsset(parent)
 	{
 		var Constructor = TextureEditor;
 
-		if(self.texture instanceof VideoTexture)
+		if(self.asset instanceof VideoTexture)
 		{
 			Constructor = VideoTextureEditor;
 		}
-		else if(self.texture instanceof CanvasTexture)
+		else if(self.asset instanceof CanvasTexture)
 		{
 			Constructor = CanvasTextureEditor;
 		}
-		else if(self.texture instanceof CubeTexture)
+		else if(self.asset instanceof CubeTexture)
 		{
 			Constructor = CubeTextureEditor;
 		}
-		else if(self.texture instanceof SpriteSheetTexture)
+		else if(self.asset instanceof SpriteSheetTexture)
 		{
 			Constructor = SpriteSheetTextureEditor;
 		}
 
-		var tab = Interface.tab.getTab(Constructor, self.texture);
+		var tab = Interface.tab.getTab(Constructor, self.asset);
 		
 		if(tab === null)
 		{
 			tab = Interface.tab.addTab(Constructor, true);
-			tab.attach(self.texture);
+			tab.attach(self.asset);
 		}
 
 		tab.select();
@@ -51,40 +50,40 @@ function TextureAsset(parent)
 		
 		context.addOption("Rename", function()
 		{
-			if(self.texture !== null)
+			if(self.asset !== null)
 			{
-				Editor.history.add(new ChangeAction(self.texture, "name", prompt("Rename texture", self.texture.name)));
+				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename texture", self.asset.name)));
 				Editor.updateObjectViews();
 			}
 		});
 		
 		context.addOption("Delete", function()
 		{
-			if(self.texture !== null && confirm("Delete texture?"))
+			if(self.asset !== null && confirm("Delete texture?"))
 			{
-				self.texture.dispose();
-				Editor.program.removeTexture(self.texture, Editor.defaultTexture);
+				self.asset.dispose();
+				Editor.program.removeTexture(self.asset, Editor.defaultTexture);
 				Editor.updateObjectViews();
 			}
 		});
 
 		context.addOption("Copy", function()
 		{
-			if(self.texture !== null)
+			if(self.asset !== null)
 			{
 				try
 				{
-					Editor.clipboard.set(JSON.stringify(self.texture.toJSON()), "text");
+					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 				}
 				catch(e){}
 			}
 		});
 
-		if(self.texture instanceof Texture)
+		if(self.asset instanceof Texture)
 		{
 			context.addOption("Export Image", function()
 			{
-				var image = self.texture.img;
+				var image = self.asset.img;
 				image.encodeData();
 
 				if(Nunu.runningOnDesktop())
@@ -109,27 +108,27 @@ function TextureAsset(parent)
 
 			context.addOption("Fit aspect ratio", function()
 			{
-				var image = self.texture.image;
+				var image = self.asset.image;
 				var aspect = image.width / image.height;
 
 				if(aspect > 1)
 				{
-					self.texture.repeat.y = aspect;
-					self.texture.offset.y = -(1 - 1/aspect);
+					self.asset.repeat.y = aspect;
+					self.asset.offset.y = -(1 - 1/aspect);
 				}
 				else
 				{
-					self.texture.repeat.x = 1/aspect;
-					self.texture.offset.x = -(1 - aspect)
+					self.asset.repeat.x = 1/aspect;
+					self.asset.offset.x = -(1 - aspect)
 				}
 
 			});
 		}
-		else if(self.texture instanceof VideoTexture)
+		else if(self.asset instanceof VideoTexture)
 		{
 			context.addOption("Export Video", function()
 			{
-				var video = self.texture.video;
+				var video = self.asset.video;
 				
 				if(Nunu.runningOnDesktop())
 				{
@@ -154,14 +153,14 @@ function TextureAsset(parent)
 
 		context.addOption("Cut", function()
 		{
-			if(self.texture !== null)
+			if(self.asset !== null)
 			{
 				try
 				{
-					Editor.clipboard.set(JSON.stringify(self.texture.toJSON()), "text");
+					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 
-					self.texture.dispose();
-					Editor.program.removeTexture(self.texture, Editor.defaultTexture);
+					self.asset.dispose();
+					Editor.program.removeTexture(self.asset, Editor.defaultTexture);
 					Editor.updateObjectViews();
 				}
 				catch(e){}
@@ -170,7 +169,7 @@ function TextureAsset(parent)
 
 		context.addOption("Duplicate", function()
 		{
-			if(self.texture !== null)
+			if(self.asset !== null)
 			{
 				try
 				{
@@ -183,7 +182,7 @@ function TextureAsset(parent)
 					};
 
 					//Serialize
-					var json = self.texture.toJSON(resources);
+					var json = self.asset.toJSON(resources);
 					var images = ObjectLoader.prototype.parseImages.call(this, resources.images);
 					var videos = ObjectLoader.prototype.parseVideos.call(this, resources.videos);
 
@@ -213,10 +212,10 @@ function TextureAsset(parent)
 	this.element.ondragstart = function(event)
 	{
 		//Insert into drag buffer
-		if(self.texture !== null)
+		if(self.asset !== null)
 		{
-			event.dataTransfer.setData("uuid", self.texture.uuid);
-			DragBuffer.pushDragElement(self.texture);
+			event.dataTransfer.setData("uuid", self.asset.uuid);
+			DragBuffer.pushDragElement(self.asset);
 		}
 	};
 
@@ -234,7 +233,7 @@ TextureAsset.prototype = Object.create(Asset.prototype);
 //Set object to file
 TextureAsset.prototype.setTexture = function(texture)
 {
-	this.texture = texture;
+	this.asset = texture;
 	this.preview = TexturePreview.generate(texture);
 
 	if(this.preview !== null)
@@ -254,8 +253,8 @@ TextureAsset.prototype.setTexture = function(texture)
 //Update material preview
 TextureAsset.prototype.updateMetadata = function()
 {
-	if(this.texture !== null)
+	if(this.asset !== null)
 	{
-		this.setText(this.texture.name);
+		this.setText(this.asset.name);
 	}
 };
