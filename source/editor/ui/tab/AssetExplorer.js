@@ -386,7 +386,7 @@ AssetExplorer.prototype.refresh = function()
 	for(var i in materials)
 	{
 		var file = new MaterialAsset(this.assets);
-		file.setMaterial(materials[i]);
+		file.setAsset(materials[i]);
 		this.add(file);
 	}
 
@@ -395,7 +395,7 @@ AssetExplorer.prototype.refresh = function()
 	for(var i in textures)
 	{
 		var file = new TextureAsset(this.assets);
-		file.setTexture(textures[i]);
+		file.setAsset(textures[i]);
 		this.add(file);
 	}
 
@@ -404,16 +404,25 @@ AssetExplorer.prototype.refresh = function()
 	for(var i in fonts)
 	{
 		var file = new FontAsset(this.assets);
-		file.setFont(fonts[i]);
+		file.setAsset(fonts[i]);
 		this.add(file);
 	}
+
+	var images = Editor.program.images;
+	for(var i in images)
+	{
+		var file = new ImageAsset(this.assets);
+		file.setAsset(images[i]);
+		this.add(file);
+	}
+
 
 	//Audio
 	var audio = Editor.program.audio;
 	for(var i in audio)
 	{
 		var file = new AudioAsset(this.assets);
-		file.setAudio(audio[i]);
+		file.setAsset(audio[i]);
 		this.add(file);
 	}
 
@@ -422,7 +431,7 @@ AssetExplorer.prototype.refresh = function()
 	for(var i in resources)
 	{
 		var file = new FileAsset(this.assets);
-		file.setFile(resources[i]);
+		file.setAsset(resources[i]);
 		this.add(file);
 	}
 

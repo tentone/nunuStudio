@@ -228,7 +228,7 @@ MaterialAsset.prototype.destroy = function()
 };
 
 //Set object to file
-MaterialAsset.prototype.setMaterial = function(material)
+MaterialAsset.prototype.setAsset = function(material)
 {
 	if(material instanceof THREE.Material)
 	{

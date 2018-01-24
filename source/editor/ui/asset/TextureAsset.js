@@ -4,7 +4,7 @@ function TextureAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.setIcon(Editor.filePath + "icons/misc/image.png");
+	this.setIcon(Editor.filePath + "icons/misc/grid.png");
 
 	//Self pointer
 	var self = this;
@@ -231,7 +231,7 @@ function TextureAsset(parent)
 TextureAsset.prototype = Object.create(Asset.prototype);
 
 //Set object to file
-TextureAsset.prototype.setTexture = function(texture)
+TextureAsset.prototype.setAsset = function(texture)
 {
 	this.asset = texture;
 	this.preview = TexturePreview.generate(texture);

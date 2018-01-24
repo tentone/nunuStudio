@@ -107,10 +107,10 @@ function ImageAsset(parent)
 ImageAsset.prototype = Object.create(Asset.prototype);
 
 //Set object to file
-ImageAsset.prototype.setTexture = function(image)
+ImageAsset.prototype.setAsset = function(image)
 {
 	this.asset = image;
-	this.preview = image.data;
+	this.preview.src = image.data;
 
 	this.updateMetadata();
 };

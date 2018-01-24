@@ -187,6 +187,23 @@ ResourceManager.updateResources = function(program)
 	{
 		if(texture !== null && texture !== undefined && program.textures[texture.uuid] === undefined)
 		{
+			//Image
+			if(texture.img instanceof Image)
+			{
+				if(program.images[texture.img.uuid] === undefined)
+				{
+					program.images[texture.img.uuid] = texture.img;
+				}
+			}
+			//Video
+			if(texture.video instanceof Video)
+			{
+				if(program.videos[texture.video.uuid] === undefined)
+				{
+					program.videos[texture.video.uuid] = texture.video;
+				}
+			}
+
 			program.textures[texture.uuid] = texture;
 		}
 	}
