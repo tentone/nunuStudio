@@ -378,9 +378,11 @@ AssetExplorer.prototype.refresh = function()
 {
 	//Clean asset explorer
 	this.clear();
-	
+
+	ResourceManager.updateResources(Editor.program);
+
 	//Materials
-	var materials = ObjectUtils.getMaterials(Editor.program, Editor.program.materials);
+	var materials = Editor.program.materials;
 	for(var i in materials)
 	{
 		var file = new MaterialAsset(this.assets);
@@ -389,7 +391,7 @@ AssetExplorer.prototype.refresh = function()
 	}
 
 	//Textures
-	var textures = ObjectUtils.getTextures(Editor.program, Editor.program.textures);
+	var textures = Editor.program.textures;
 	for(var i in textures)
 	{
 		var file = new TextureAsset(this.assets);
@@ -398,7 +400,7 @@ AssetExplorer.prototype.refresh = function()
 	}
 
 	//Fonts
-	var fonts = ObjectUtils.getFonts(Editor.program, Editor.program.fonts);
+	var fonts = Editor.program.fonts;
 	for(var i in fonts)
 	{
 		var file = new FontAsset(this.assets);
@@ -407,7 +409,7 @@ AssetExplorer.prototype.refresh = function()
 	}
 
 	//Audio
-	var audio = ObjectUtils.getAudio(Editor.program, Editor.program.audio);
+	var audio = Editor.program.audio;
 	for(var i in audio)
 	{
 		var file = new AudioAsset(this.assets);

@@ -367,6 +367,7 @@ include("editor/ui/asset/TextureAsset.js");
 include("editor/ui/asset/FontAsset.js");
 include("editor/ui/asset/AudioAsset.js");
 include("editor/ui/asset/FileAsset.js");
+include("editor/ui/asset/ImageAsset.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");

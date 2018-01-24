@@ -78,6 +78,121 @@ function ResourceManager()
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
+ * Update the resource list of a program.
+ *
+ * Searches the program and all its children for resources.
+ *
+ * @method updateResources
+ * @static
+ * @param {Program} program Program to update.
+ */
+ResourceManager.updateResources = function(program)
+{
+	program.traverse(function(child)
+	{	
+		if(child.hidden)
+		{
+			return;
+		}
+
+		//Fonts
+		if(child.font instanceof Font)
+		{
+			if(program.fonts[child.font.uuid] === undefined)
+			{
+				program.fonts[child.font.uuid] = child.font;
+			}
+		}
+
+		//Audio
+		if(child.audio instanceof Audio)
+		{
+			if(program.audio[child.audio.uuid] === undefined)
+			{
+				program.audio[child.audio.uuid] = child.audio;
+			}
+		}
+
+		//Material/textures
+		if(child.material !== undefined && !(child instanceof ParticleEmitter || child instanceof Sky || child instanceof SpineAnimation))
+		{
+			if(child.material instanceof THREE.Material)
+			{
+				addMaterial(child.material);
+			}
+			else if(child.material instanceof Array)
+			{
+				for(var j = 0; j < child.material.length; j++)
+				{
+					addMaterial(child.material[j]);
+				}
+			}
+			else if(child.materials instanceof Array)
+			{
+				for(var j = 0; j < child.materials.length; j++)
+				{
+					addMaterial(child.materials[j]);
+				}
+			}
+			else if(child.material instanceof THREE.MultiMaterial)
+			{
+				var materials = child.material.materials;
+				for(var j = 0; j < materials.length; j++)
+				{
+					addMaterial(materials[j]);
+				}
+			}
+		}
+
+		//Textures
+		if(child.texture !== undefined)
+		{
+			addTexture(child.texture);
+		}
+		if(child instanceof LensFlare)
+		{
+			for(var i = 0; i < child.lensFlares.length; i++)
+			{
+				addTexture(child.lensFlares[i].texture);
+			}
+		}
+
+	});
+
+	function addMaterial(material)
+	{
+		addTexturesFromMaterial(material);
+
+		if(program.materials[material.uuid] === undefined)
+		{
+			program.materials[material.uuid] = material;
+		}
+	}
+
+	function addTexturesFromMaterial(material)
+	{
+		addTexture(material.map);
+		addTexture(material.bumpMap);
+		addTexture(material.normalMap);
+		addTexture(material.displacementMap);
+		addTexture(material.specularMap);
+		addTexture(material.emissiveMap);
+		addTexture(material.alphaMap);
+		addTexture(material.roughnessMap);
+		addTexture(material.metalnessMap);
+		addTexture(material.envMap);
+	}
+
+	function addTexture(texture)
+	{
+		if(texture !== null && texture !== undefined && program.textures[texture.uuid] === undefined)
+		{
+			program.textures[texture.uuid] = texture;
+		}
+	}
+};
+
+/**
  * Get resource by name.
  * 
  * @method getResourceByName
