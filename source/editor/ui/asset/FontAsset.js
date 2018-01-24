@@ -91,7 +91,7 @@ function FontAsset(parent)
 FontAsset.prototype = Object.create(Asset.prototype);
 
 //Set object to file
-FontAsset.prototype.setFont = function(font)
+FontAsset.prototype.setAsset = function(font)
 {
 	if(font instanceof Font)
 	{
