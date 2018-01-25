@@ -416,6 +416,13 @@ AssetExplorer.prototype.refresh = function()
 		this.add(file);
 	}
 
+	var videos = Editor.program.videos;
+	for(var i in videos)
+	{
+		var file = new VideoAsset(this.assets);
+		file.setAsset(videos[i]);
+		this.add(file);
+	}
 
 	//Audio
 	var audio = Editor.program.audio;

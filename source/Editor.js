@@ -319,6 +319,7 @@ include("editor/ui/tab/asset/asset/FontAsset.js");
 include("editor/ui/tab/asset/asset/AudioAsset.js");
 include("editor/ui/tab/asset/asset/FileAsset.js");
 include("editor/ui/tab/asset/asset/ImageAsset.js");
+include("editor/ui/tab/asset/asset/VideoAsset.js");
 
 include("editor/ui/tab/animation/AnimationTab.js");
 include("editor/ui/tab/animation/AnimationClipTrack.js");

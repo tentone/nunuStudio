@@ -14,7 +14,7 @@ function VideoAsset(parent)
 	this.preview.style.height = "65%";
 	this.element.appendChild(this.preview);
 
-	this.setIcon(Editor.filePath + "icons/misc/image.png");
+	this.setIcon(Editor.filePath + "icons/misc/video.png");
 
 	//Self pointer
 	var self = this;
@@ -108,10 +108,10 @@ function VideoAsset(parent)
 VideoAsset.prototype = Object.create(Asset.prototype);
 
 //Set object to file
-VideoAsset.prototype.setAsset = function(image)
+VideoAsset.prototype.setAsset = function(video)
 {
-	this.asset = image;
-	this.preview.src = image.data;
+	this.asset = video;
+	this.preview.src = video.data;
 
 	this.updateMetadata();
 };
