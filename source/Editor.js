@@ -302,7 +302,6 @@ include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 
 include("editor/ui/tab/ConsoleTab.js");
-include("editor/ui/tab/AssetExplorer.js");
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -311,6 +310,15 @@ include("editor/ui/tab/AboutTab.js");
 include("editor/ui/tab/CubeTextureEditor.js");
 include("editor/ui/tab/TextEditor.js");
 include("editor/ui/tab/ProfilingTab.js");
+
+include("editor/ui/tab/asset/AssetExplorer.js");
+include("editor/ui/tab/asset/asset/Asset.js");
+include("editor/ui/tab/asset/asset/MaterialAsset.js");
+include("editor/ui/tab/asset/asset/TextureAsset.js");
+include("editor/ui/tab/asset/asset/FontAsset.js");
+include("editor/ui/tab/asset/asset/AudioAsset.js");
+include("editor/ui/tab/asset/asset/FileAsset.js");
+include("editor/ui/tab/asset/asset/ImageAsset.js");
 
 include("editor/ui/tab/animation/AnimationTab.js");
 include("editor/ui/tab/animation/AnimationClipTrack.js");
@@ -360,14 +368,6 @@ include("editor/ui/preview/MaterialPreview.js");
 include("editor/ui/preview/renderer/FontRenderer.js");
 include("editor/ui/preview/renderer/MaterialRenderer.js");
 include("editor/ui/preview/renderer/TextureRenderer.js");
-
-include("editor/ui/asset/Asset.js");
-include("editor/ui/asset/MaterialAsset.js");
-include("editor/ui/asset/TextureAsset.js");
-include("editor/ui/asset/FontAsset.js");
-include("editor/ui/asset/AudioAsset.js");
-include("editor/ui/asset/FileAsset.js");
-include("editor/ui/asset/ImageAsset.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
