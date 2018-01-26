@@ -131,15 +131,6 @@ AudioAsset.prototype.setAsset = function(audio)
 	}
 };
 
-//Update material preview
-AudioAsset.prototype.updateMetadata = function()
-{
-	if(this.asset !== null)
-	{
-		this.setText(this.asset.name);
-	}
-};
-
 //Update interface
 AudioAsset.prototype.updateInterface = function()
 {

@@ -114,12 +114,3 @@ ImageAsset.prototype.setAsset = function(image)
 
 	this.updateMetadata();
 };
-
-//Update material preview
-ImageAsset.prototype.updateMetadata = function()
-{
-	if(this.asset !== null)
-	{
-		this.setText(this.asset.name);
-	}
-};
