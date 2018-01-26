@@ -64,6 +64,32 @@ function Resource(name, type)
 }
 
 /**
+ * Export resource data to file.
+ *
+ * @method export
+ * @param {String} fname File name or file path.
+ */
+Resource.prototype.export = function(fname)
+{
+	if(this.format === "base64")
+	{
+		FileSystem.writeFileBase64(fname, this.data);
+	}
+	else if(this.format === "arraybuffer")
+	{
+		FileSystem.writeFileArrayBuffer(fname, this.arraybuffer !== undefined ? this.arraybuffer : this.data);
+	}
+	else if(this.format === "string")
+	{
+		FileSystem.writeFile(fname, this.data);
+	}
+	else if(this.format === "url")
+	{
+		FileSystem.writeFileArrayBuffer(fname, FileSystem.readFileArrayBuffer(this.data));
+	}
+};
+
+/**
  * Serialize resource to json.
  *
  * Only serializes name, uuid and type.

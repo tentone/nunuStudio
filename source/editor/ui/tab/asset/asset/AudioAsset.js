@@ -54,7 +54,7 @@ function AudioAsset(parent)
 			}
 		});
 
-		context.addOption("Export Audio", function()
+		context.addOption("Export", function()
 		{
 			if(Nunu.runningOnDesktop())
 			{
@@ -62,8 +62,7 @@ function AudioAsset(parent)
 				{
 					if(files.length > 0)
 					{
-						var file = files[0].path;
-						FileSystem.writeFileArrayBuffer(file, self.asset.data);
+						self.asset.export(files[0].path);
 					}
 				}, "." + self.asset.encoding, true);
 			}
@@ -71,7 +70,7 @@ function AudioAsset(parent)
 			{
 				FileSystem.chooseFileName(function(file)
 				{
-					FileSystem.writeFileArrayBuffer(file, self.asset.data);
+					self.asset.export(file);
 				}, "." + self.asset.encoding);
 			}
 		});

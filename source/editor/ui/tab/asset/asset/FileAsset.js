@@ -40,6 +40,27 @@ function FileAsset(parent)
 			}
 		});
 
+		context.addOption("Export", function()
+		{
+			if(Nunu.runningOnDesktop())
+			{
+				FileSystem.chooseFile(function(files)
+				{
+					if(files.length > 0)
+					{
+						self.asset.export(files[0].path);
+					}
+				}, "." + self.asset.encoding, true);
+			}
+			else
+			{
+				FileSystem.chooseFileName(function(file)
+				{
+					self.asset.export(file);
+				}, "." + self.asset.encoding);
+			}
+		});
+
 		context.updateInterface();
 	};
 
