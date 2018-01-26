@@ -4,7 +4,7 @@ function VideoAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.preview = document.createElement("img");
+	this.preview = document.createElement("video");
 	this.preview.volume = 0;
 	this.preview.draggable = true;
 	this.preview.style.position = "absolute";

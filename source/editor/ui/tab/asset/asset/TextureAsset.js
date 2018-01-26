@@ -249,12 +249,3 @@ TextureAsset.prototype.setAsset = function(texture)
 
 	this.updateMetadata();
 };
-
-//Update material preview
-TextureAsset.prototype.updateMetadata = function()
-{
-	if(this.asset !== null)
-	{
-		this.setText(this.asset.name);
-	}
-};

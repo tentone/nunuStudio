@@ -76,6 +76,15 @@ Asset.prototype.setText = function(text)
 	this.text.innerHTML = text;
 };
 
+//Update metadata
+Asset.prototype.updateMetadata = function()
+{
+	if(this.asset !== null)
+	{
+		this.setText(this.asset.name);
+	}
+};
+
 //Update Interface
 Asset.prototype.updateInterface = function()
 {
