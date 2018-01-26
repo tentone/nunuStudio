@@ -58,26 +58,22 @@ function ImageAsset(parent)
 
 		context.addOption("Export", function()
 		{
-			var image = self.asset;
-			image.encodeData();
-
 			if(Nunu.runningOnDesktop())
 			{
 				FileSystem.chooseFile(function(files)
 				{
 					if(files.length > 0)
 					{
-						var file = files[0].path;
-						FileSystem.writeFileBase64(file, image.data);
+						self.asset.export(files[0].path);
 					}
-				}, "." + image.encoding, true);
+				}, "." + self.asset.encoding, true);
 			}
 			else
 			{
 				FileSystem.chooseFileName(function(file)
 				{
-					FileSystem.writeFileBase64(file, image.data);
-				}, "." + image.encoding);
+					self.asset.export(file);
+				}, "." + self.asset.encoding);
 			}
 		});
 
