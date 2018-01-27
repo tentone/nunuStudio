@@ -83,6 +83,10 @@ Resource.prototype.export = function(fname)
 	{
 		FileSystem.writeFile(fname, this.data);
 	}
+	else if(this.format === "json")
+	{
+		FileSystem.writeFile(fname, JSON.stringify(this.data));
+	}
 	else if(this.format === "url")
 	{
 		FileSystem.writeFileArrayBuffer(fname, FileSystem.readFileArrayBuffer(this.data));
