@@ -4,7 +4,7 @@ function TextureAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.setIcon(Editor.filePath + "icons/misc/grid.png");
+	this.setIcon(Editor.filePath + "icons/misc/texture.png");
 
 	//Self pointer
 	var self = this;

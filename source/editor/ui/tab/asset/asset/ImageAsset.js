@@ -38,8 +38,7 @@ function ImageAsset(parent)
 		{
 			if(self.asset !== null && confirm("Delete?"))
 			{
-				self.asset.dispose();
-				Editor.program.removeTexture(self.asset, Editor.defaultTexture);
+				Editor.program.removeImage(self.asset);
 				Editor.updateObjectViews();
 			}
 		});
