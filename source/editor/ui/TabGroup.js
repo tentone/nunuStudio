@@ -253,8 +253,6 @@ TabGroup.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-
 		var tabSize = this.size.clone();
 		var buttonSize = this.buttonSize.clone();
 		var offset = this.buttonSize.clone();
@@ -345,6 +343,7 @@ TabGroup.prototype.updateInterface = function()
 		}
 
 		//Element
+		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

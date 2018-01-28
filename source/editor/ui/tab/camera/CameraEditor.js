@@ -202,6 +202,7 @@ CameraEditor.prototype.activate = function()
 	TabElement.prototype.activate.call(this);
 	
 	this.name.setText(this.camera.name);
+
 	this.updatePostNodes();
 };
 
