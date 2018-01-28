@@ -85,6 +85,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Sprite",
         "SpriteSheetTexture",
         "TechnicolorPass",
+        "Template",
         "Text3D",
         "TextFile",
         "Texture",
