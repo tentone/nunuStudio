@@ -106,11 +106,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.mapping.addValue("Refraction Mapping", THREE.CubeRefractionMapping);
 	this.mapping.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			self.texture.mapping = self.mapping.getValue();
-			self.updateMaterial();
-		}
+		self.texture.mapping = self.mapping.getValue();
+		self.updateMaterial();
 	});
 	this.form.add(this.mapping);
 	this.form.nextRow();
@@ -121,11 +118,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.textureSize.size.set(120, 18);
 	this.textureSize.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			self.texture.size = self.textureSize.getValue();
-			self.texture.updateImages();
-		}
+		self.texture.size = self.textureSize.getValue();
+		self.texture.updateImages();
 	});
 	this.form.add(this.textureSize);
 	this.form.nextRow();
@@ -143,13 +137,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.mode.size.set(120, 18);
 	this.mode.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			self.texture.mode = self.mode.getValue();
-			self.texture.updateImages();
-			self.updateMode();
-			Editor.updateObjectViews();
-		}
+		self.texture.mode = self.mode.getValue();
+		self.texture.updateImages();
+		self.updateMode();
+		Editor.updateObjectViews();
 	});
 	this.mode.addValue("Cube", CubeTexture.CUBE);
 	this.mode.addValue("Cross", CubeTexture.CROSS);
@@ -163,11 +154,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.flipY.size.set(15, 15);
 	this.flipY.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			self.texture.flipY = self.flipY.getValue();
-			self.updateMaterial();
-		}
+		self.texture.flipY = self.flipY.getValue();
+		self.updateMaterial();
 	});
 	this.form.add(this.flipY);
 	this.form.nextRow();
@@ -189,13 +177,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.image.size.set(400, 200);
 	this.image.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var image = new Image(self.image.getValue());
-			self.texture.images[0] = image;
-			self.texture.updateImages();
-			Interface.assetExplorer.refresh();
-		}
+		var image = self.image.getValue();
+		self.texture.images[0] = image;
+		self.texture.updateImages();
+		Interface.assetExplorer.refresh();
 	});
 	this.image.updateInterface();
 
@@ -208,13 +193,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.top.size.set(100, 100);
 	this.top.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var image = new Image(self.top.getValue());
-			self.texture.images[CubeTexture.TOP] = image;
-			self.texture.updateImages();
-			Interface.assetExplorer.refresh();
-		}
+		var image = self.top.getValue();
+		self.texture.images[CubeTexture.TOP] = image;
+		self.texture.updateImages();
+		Interface.assetExplorer.refresh();
 	});
 	this.cube.push(this.top);
 
@@ -224,13 +206,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.left.position.set(0, 100);
 	this.left.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var image = new Image(self.left.getValue());
-			self.texture.images[CubeTexture.LEFT] = image;
-			self.texture.updateImages();
-			Interface.assetExplorer.refresh();
-		}
+		var image = self.left.getValue();
+		self.texture.images[CubeTexture.LEFT] = image;
+		self.texture.updateImages();
+		Interface.assetExplorer.refresh();
 	});
 	this.cube.push(this.left);
 
@@ -240,13 +219,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.front.position.set(100, 100);
 	this.front.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var image = new Image(self.front.getValue());
-			self.texture.images[CubeTexture.FRONT] = image;
-			self.texture.updateImages();
-			Interface.assetExplorer.refresh();
-		}
+		var image = self.front.getValue();
+		self.texture.images[CubeTexture.FRONT] = image;
+		self.texture.updateImages();
+		Interface.assetExplorer.refresh();
 	});
 	this.cube.push(this.front);
 
@@ -256,13 +232,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.right.position.set(200, 100);
 	this.right.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var image = new Image(self.right.getValue());
-			self.texture.images[CubeTexture.RIGHT] = image;
-			self.texture.updateImages();
-			Interface.assetExplorer.refresh();
-		}
+		var image = self.right.getValue();
+		self.texture.images[CubeTexture.RIGHT] = image;
+		self.texture.updateImages();
+		Interface.assetExplorer.refresh();
 	});
 	this.cube.push(this.right);
 
@@ -272,13 +245,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.back.position.set(300, 100);
 	this.back.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var image = new Image(self.back.getValue());
-			self.texture.images[CubeTexture.BACK] = image;
-			self.texture.updateImages();
-			Interface.assetExplorer.refresh();
-		}
+		var image = self.back.getValue();
+		self.texture.images[CubeTexture.BACK] = image;
+		self.texture.updateImages();
+		Interface.assetExplorer.refresh();
 	});
 	this.cube.push(this.back);
 
@@ -288,13 +258,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.bottom.size.set(100, 100);
 	this.bottom.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var image = new Image(self.bottom.getValue());
-			self.texture.images[CubeTexture.BOTTOM] = image;
-			self.texture.updateImages();
-			Interface.assetExplorer.refresh();
-		}
+		var image = self.bottom.getValue();
+		self.texture.images[CubeTexture.BOTTOM] = image;
+		self.texture.updateImages();
+		Interface.assetExplorer.refresh();
 	});
 	this.cube.push(this.bottom);
 }
@@ -412,16 +379,16 @@ CubeTextureEditor.prototype.attach = function(texture)
 
 	if(texture.mode === CubeTexture.CROSS || texture.mode === CubeTexture.EQUIRECTANGULAR)
 	{
-		this.image.setValue(texture.images[0].data);
+		this.image.setValue(texture.images[0]);
 	}
 	else
 	{
-		this.top.setValue(texture.images[CubeTexture.TOP].data);
-		this.bottom.setValue(texture.images[CubeTexture.BOTTOM].data);
-		this.left.setValue(texture.images[CubeTexture.LEFT].data);
-		this.right.setValue(texture.images[CubeTexture.RIGHT].data);
-		this.front.setValue(texture.images[CubeTexture.FRONT].data);
-		this.back.setValue(texture.images[CubeTexture.BACK].data);
+		this.top.setValue(texture.images[CubeTexture.TOP]);
+		this.bottom.setValue(texture.images[CubeTexture.BOTTOM]);
+		this.left.setValue(texture.images[CubeTexture.LEFT]);
+		this.right.setValue(texture.images[CubeTexture.RIGHT]);
+		this.front.setValue(texture.images[CubeTexture.FRONT]);
+		this.back.setValue(texture.images[CubeTexture.BACK]);
 	}
 
 	this.updateMode();
