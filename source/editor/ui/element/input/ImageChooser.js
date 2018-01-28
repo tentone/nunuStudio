@@ -28,7 +28,9 @@ function ImageChooser(parent)
 	this.img.style.height = "100%";
 	this.element.appendChild(this.img);
 
-	//Self pointer
+	//Value
+	this.value = null;
+
 	var self = this;
 
 	//On drop get file dropped
@@ -38,13 +40,22 @@ function ImageChooser(parent)
 
 		if(event.dataTransfer.files.length > 0)
 		{
-			//Get first file from event
 			var file = event.dataTransfer.files[0];
 
-			//Check if its a image
 			if(Image.fileIsImage(file))
 			{
 				readImageFile(file);
+			}
+		}
+		else
+		{
+			var uuid = event.dataTransfer.getData("uuid");
+			var value = DragBuffer.popDragElement(uuid);
+
+			if(value instanceof Image)
+			{
+				self.setValue(value);
+				self.onChange(value);
 			}
 		}
 	};
@@ -75,8 +86,8 @@ function ImageChooser(parent)
 		var reader = new FileReader();
 		reader.onload = function()
 		{
-			self.setValue(reader.result);
-			self.onChange(reader.result);
+			self.setValue(new Image(reader.result));
+			self.onChange(self.value);
 		};
 		reader.readAsDataURL(file);
 	};
@@ -97,21 +108,21 @@ ImageChooser.prototype.setOnChange = function(onChange)
 };
 
 //Set image URL
-ImageChooser.prototype.setValue = function(url)
+ImageChooser.prototype.setValue = function(image)
 {
-	this.img.src = url;
+	this.value = image;
+	this.img.src = image.data;
 };
 
 //Get image URL
 ImageChooser.prototype.getValue = function()
 {
-	return this.img.src;
+	return this.value;
 };
 
 //Update Interface
 ImageChooser.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		//Keep aspect ratio
