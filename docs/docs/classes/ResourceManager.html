@@ -116,6 +116,7 @@
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/SVGUtils.html">SVGUtils</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
+								<li><a href="../classes/Template.html">Template</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
 								<li><a href="../classes/Texture.html">Texture</a></li>
@@ -191,6 +192,9 @@
 						<h1>ResourceManager Class</h1>
 						<div class="box meta">
 						
+								<div class="extends">
+									Extends <a href="../classes/Object3D.html" class="crosslink">Object3D</a>
+								</div>
 						
 						
 									Module: <a href="../modules/Resources.html">Resources</a>
@@ -260,7 +264,7 @@
 										<div class="index-section methods">
 											<h3>Methods</h3>
 						
-											<ul class="index-list methods">
+											<ul class="index-list methods extends">
 													<li class="index-item method">
 														<a href="#method_addAudio">addAudio</a>
 						
@@ -318,6 +322,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_removeImage">removeImage</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_removeMaterial">removeMaterial</a>
 						
 													</li>
@@ -329,13 +337,22 @@
 														<a href="#method_removeTexture">removeTexture</a>
 						
 													</li>
+													<li class="index-item method">
+														<a href="#method_removeVideo">removeVideo</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_updateResources">updateResources</a>
+						
+															<span class="flag static">static</span>
+													</li>
 											</ul>
 										</div>
 						
 										<div class="index-section properties">
 											<h3>Properties</h3>
 						
-											<ul class="index-list properties">
+											<ul class="index-list properties extends">
 													<li class="index-item property">
 														<a href="#property_audio">audio</a>
 						
@@ -1190,6 +1207,56 @@
 											
 											
 											</div>
+											<div id="method_removeImage" class="method item">
+												<h3 class="name"><code>removeImage</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>image</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Remove image.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">image</code>
+																	<span class="type"><a href="../classes/Image.html" class="crosslink">Image</a></span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_removeMaterial" class="method item">
 												<h3 class="name"><code>removeMaterial</code></h3>
 											
@@ -1392,6 +1459,109 @@
 											
 														</div>
 													</div>
+											
+											</div>
+											<div id="method_removeVideo" class="method item">
+												<h3 class="name"><code>removeVideo</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>video</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Remove video.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">video</code>
+																	<span class="type"><a href="../classes/Video.html" class="crosslink">Video</a></span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_updateResources" class="method item">
+												<h3 class="name"><code>updateResources</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>program</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Update the resource list of a program.</p>
+											<p>Searches the program and all its children for resources.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">program</code>
+																	<span class="type"><a href="../classes/Program.html" class="crosslink">Program</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Program to update.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
 											
 											</div>
 									</div>

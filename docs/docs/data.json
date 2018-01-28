@@ -650,6 +650,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\resources\\Template.js": {
+            "name": "..\\..\\source\\core\\resources\\Template.js",
+            "modules": {},
+            "classes": {
+                "Template": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\resources\\TextFile.js": {
             "name": "..\\..\\source\\core\\resources\\TextFile.js",
             "modules": {},
@@ -1310,6 +1319,7 @@
                 "Model": 1,
                 "Resource": 1,
                 "ResourceManager": 1,
+                "Template": 1,
                 "TextFile": 1,
                 "Video": 1
             },
@@ -2995,6 +3005,23 @@
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
             "line": 3,
             "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\n\nThe manager is used to manage the following types of resources:\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
+            "is_constructor": 1,
+            "extends": "{Object3D}"
+        },
+        "Template": {
+            "name": "Template",
+            "shortname": "Template",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\resources\\Template.js",
+            "line": 3,
+            "description": "Template resource stores object template that can be used to create multiple objects of the same type.",
+            "extends": "{Resource}",
             "is_constructor": 1
         },
         "TextFile": {
@@ -11006,6 +11033,22 @@
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
             "line": 66,
+            "description": "Export resource data to file.",
+            "itemtype": "method",
+            "name": "export",
+            "params": [
+                {
+                    "name": "fname",
+                    "description": "File name or file path.",
+                    "type": "String"
+                }
+            ],
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\Resource.js",
+            "line": 96,
             "description": "Serialize resource to json.\n\nOnly serializes name, uuid and type.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11025,7 +11068,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 22,
+            "line": 23,
             "description": "Images.",
             "itemtype": "property",
             "name": "images",
@@ -11035,7 +11078,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 28,
+            "line": 29,
             "description": "Videos.",
             "itemtype": "property",
             "name": "videos",
@@ -11045,7 +11088,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 34,
+            "line": 35,
             "description": "Audio.",
             "itemtype": "property",
             "name": "audio",
@@ -11055,7 +11098,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 40,
+            "line": 41,
             "description": "Fonts.",
             "itemtype": "property",
             "name": "fonts",
@@ -11065,7 +11108,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 46,
+            "line": 47,
             "description": "Materials.",
             "itemtype": "property",
             "name": "materials",
@@ -11075,7 +11118,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 52,
+            "line": 53,
             "description": "Textures.",
             "itemtype": "property",
             "name": "textures",
@@ -11085,7 +11128,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 58,
+            "line": 59,
             "description": "Geometries.",
             "itemtype": "property",
             "name": "geometries",
@@ -11095,7 +11138,24 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 80,
+            "line": 81,
+            "description": "Update the resource list of a program.\n\nSearches the program and all its children for resources.",
+            "itemtype": "method",
+            "name": "updateResources",
+            "static": 1,
+            "params": [
+                {
+                    "name": "program",
+                    "description": "Program to update.",
+                    "type": "Program"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 245,
             "description": "Get resource by name.",
             "itemtype": "method",
             "name": "getResourceByName",
@@ -11115,7 +11175,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 101,
+            "line": 266,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -11135,7 +11195,23 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 122,
+            "line": 287,
+            "description": "Remove image.",
+            "params": [
+                {
+                    "name": "image",
+                    "description": "",
+                    "type": "Image"
+                }
+            ],
+            "itemtype": "method",
+            "name": "removeImage",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 302,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -11155,7 +11231,23 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 143,
+            "line": 323,
+            "description": "Remove video.",
+            "params": [
+                {
+                    "name": "video",
+                    "description": "",
+                    "type": "Video"
+                }
+            ],
+            "itemtype": "method",
+            "name": "removeVideo",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 337,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -11175,7 +11267,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 164,
+            "line": 358,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -11191,7 +11283,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 178,
+            "line": 372,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -11217,7 +11309,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 219,
+            "line": 413,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -11237,7 +11329,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 240,
+            "line": 434,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -11253,7 +11345,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 251,
+            "line": 445,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -11278,7 +11370,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 338,
+            "line": 532,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -11298,7 +11390,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 359,
+            "line": 553,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -11314,7 +11406,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 373,
+            "line": 567,
             "description": "Add resource to resources manager.",
             "itemtype": "method",
             "name": "addResource",
@@ -11330,7 +11422,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 387,
+            "line": 581,
             "description": "Remove resource from font list.",
             "itemtype": "method",
             "name": "removeResource",
@@ -11346,7 +11438,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 398,
+            "line": 592,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -11367,7 +11459,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 426,
+            "line": 620,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -11387,7 +11479,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 447,
+            "line": 641,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -11403,7 +11495,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 461,
+            "line": 655,
             "description": "Remove audio.",
             "params": [
                 {
@@ -14046,107 +14138,6 @@
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
             "line": 12,
-            "description": "Get all fonts in a object and childs",
-            "itemtype": "method",
-            "name": "getFonts",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "fonts",
-                    "description": "",
-                    "type": "Array"
-                }
-            ],
-            "return": {
-                "description": "font array",
-                "type": "Array"
-            },
-            "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 41,
-            "description": "Get all audio files in object and childs",
-            "itemtype": "method",
-            "name": "getAudio",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "audio",
-                    "description": "",
-                    "type": "Array"
-                }
-            ],
-            "return": {
-                "description": "audio",
-                "type": "Array"
-            },
-            "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 70,
-            "description": "Get all materials in object and childs",
-            "itemtype": "method",
-            "name": "getMaterials",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "materials",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "materials",
-                    "description": "",
-                    "type": "Array"
-                }
-            ],
-            "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 133,
-            "description": "Get all textures in object and childs",
-            "itemtype": "method",
-            "name": "getTextures",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "textures",
-                    "description": "Textures array",
-                    "type": "Array"
-                }
-            ],
-            "return": {
-                "description": "textures",
-                "type": "Array"
-            },
-            "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 225,
             "description": "Get scene that contains this object.",
             "itemtype": "method",
             "name": "getScene",
@@ -14166,7 +14157,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 249,
+            "line": 36,
             "description": "Get object tree root.\n\nFor a object placed inside a running scene the root is always the program.",
             "itemtype": "method",
             "name": "getRoot",
@@ -14186,7 +14177,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 270,
+            "line": 57,
             "description": "Set object and all its children matrixAutoUpdate value",
             "itemtype": "method",
             "name": "setMatrixAutoUpdate",
@@ -14207,7 +14198,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 287,
+            "line": 74,
             "description": "Set object and all children to receive shadows",
             "itemtype": "method",
             "name": "setShadowReceiving",
@@ -14228,7 +14219,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 304,
+            "line": 91,
             "description": "Set object and all children to cast shadows",
             "itemtype": "method",
             "name": "setShadowCasting",
@@ -14249,7 +14240,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 321,
+            "line": 108,
             "description": "Check if object is child of another object",
             "itemtype": "method",
             "name": "isChildOf",
