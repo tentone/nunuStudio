@@ -50,41 +50,53 @@ Element.prototype.preventDragEvents = function()
 //Set alt text, that is displayed when the mouse is over the element
 Element.prototype.setAltText = function(altText)
 {
-	var text = new Text();
-	text.element.style.backgroundColor = Editor.theme.barColor;
-	text.element.style.zIndex = "10000";
-	text.element.style.border = "3px solid";
-	text.element.style.borderRadius = "5px";
-	text.element.style.borderColor = Editor.theme.barColor;
-	text.setText(altText);
-	text.visible = false;
-	text.fitContent = true;
-	text.updateInterface();
+	var element = document.createElement("div");
+	element.style.position = "absolute";
+	element.style.display = "none";
+	element.style.alignItems = "center";
+	element.style.zIndex = "10000";
+	element.style.border = "3px solid";
+	element.style.borderRadius = "5px";
+	element.style.color = Editor.theme.textColor;
+	element.style.backgroundColor = Editor.theme.barColor;
+	element.style.borderColor = Editor.theme.barColor;
+	document.body.appendChild(element);
 
+	//Span
+	var span = document.createElement("span");
+	span.style.whiteSpace = "pre";
+	span.innerHTML = altText;
+	element.appendChild(span);
+
+	//Destroy
 	var destroy = this.destroy;
 	this.destroy = function()
 	{
 		destroy();
-		text.destroy();
-	};
 
-	this.element.style.pointerEvents = "auto";
+		if(document.body.contains(element))
+		{
+			document.body.removeChild(element);
+		}
+	};
+	
+	this.element.style.pointerEvents = "auto"; 
 
 	//Mouse mouse move event
 	this.element.onmousemove = function(event)
 	{
-		text.size.set(0, 20);
-		text.position.set(event.clientX - text.size.x/2, event.clientY - 30);
-		text.visible = true;
-		text.updateInterface();
+		element.style.display = "flex";
+		element.style.width = span.clientWidth + "px";
+		element.style.height = span.clientHeight + "px";
+		element.style.left = event.clientX + "px";
+		element.style.top = (event.clientY - 30) + "px";
 	};
 
 	//Mouse out event
 	this.element.onmouseout = function()
 	{
-		text.visible = false;
-		text.updateInterface();
-	}
+		element.style.display = "none";
+	};
 };
 
 Element.prototype.updatePosition = function(mode)

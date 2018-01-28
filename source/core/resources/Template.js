@@ -18,3 +18,22 @@ function Template(obj)
 }
 
 Template.prototype = Object.create(Resource.prototype);
+
+Template.prototype.createObject = function()
+{
+	var loader = new ObjectLoader();
+	var object = loader.parse(this.data);
+	object.uuid = THREE.Math.generateUUID();
+	return object;
+};
+
+Template.prototype.toJSON = function(meta)
+{
+	var data = Resource.prototype.toJSON.call(this, meta);
+	
+	data.encoding = this.encoding;
+	data.format = this.format;
+	data.data = JSON.stringify(this.data);
+
+	return data;
+};

@@ -17,6 +17,7 @@
  * @class ResourceManager
  * @constructor
  * @module Resources
+ * @extends {Object3D}
  */
 
 /**
@@ -196,15 +197,21 @@ ResourceManager.updateResources = function(program)
 		}
 	}
 
+	function addImage(image)
+	{
+		if(program.images[image.uuid] === undefined)
+		{
+			program.images[image.uuid] = image;
+		}
+	}
+
+
 	function addResourcesTexture(texture)
 	{
 		//Image
 		if(texture.img instanceof Image)
 		{
-			if(program.images[texture.img.uuid] === undefined)
-			{
-				program.images[texture.img.uuid] = texture.img;
-			}
+			addImage(texture.img);
 		}
 		//Video
 		if(texture.video instanceof Video)
@@ -212,6 +219,14 @@ ResourceManager.updateResources = function(program)
 			if(program.videos[texture.video.uuid] === undefined)
 			{
 				program.videos[texture.video.uuid] = texture.video;
+			}
+		}
+		//Images array
+		if(texture.images !== undefined)
+		{
+			for(var i = 0; i < texture.images.length; i++)
+			{
+				addImage(texture.images[i]);
 			}
 		}
 	}
@@ -270,6 +285,21 @@ ResourceManager.prototype.getImageByName = function(name)
 };
 
 /**
+ * Remove image.
+ * 
+ * @param {Image} image
+ * @method removeImage
+ */
+ResourceManager.prototype.removeImage = function(image)
+{
+	if(image instanceof Image)
+	{
+		delete this.images[image.uuid];
+	}
+};
+
+
+/**
  * Get video by name.
  * 
  * @method getVideoByName
@@ -288,6 +318,20 @@ ResourceManager.prototype.getVideoByName = function(name)
 
 	console.warn("nunuStudio: Resource " + name + " not found");
 	return null;
+};
+
+/**
+ * Remove video.
+ * 
+ * @param {Video} video
+ * @method removeVideo
+ */
+ResourceManager.prototype.removeVideo = function(video)
+{
+	if(video instanceof Video)
+	{
+		delete this.videos[video.uuid];
+	}
 };
 
 /**

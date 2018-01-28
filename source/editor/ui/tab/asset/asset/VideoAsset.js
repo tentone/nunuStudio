@@ -39,8 +39,7 @@ function VideoAsset(parent)
 		{
 			if(self.asset !== null && confirm("Delete?"))
 			{
-				self.asset.dispose();
-				Editor.program.removeTexture(self.asset, Editor.defaultTexture);
+				Editor.program.removeVideo(self.asset);
 				Editor.updateObjectViews();
 			}
 		});
