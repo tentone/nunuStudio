@@ -46,7 +46,6 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 	THREE._SkinnedMesh.call(this, geometry, material, useVertexTexture);
 
 	this.name = "skinned";
-
 	this.receiveShadow = true;
 	this.castShadow = true;
 }

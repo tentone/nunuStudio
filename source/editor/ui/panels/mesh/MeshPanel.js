@@ -4,10 +4,6 @@ function MeshPanel(parent, obj)
 {
 	ObjectPanel.call(this, parent, obj);
 
-	//Self pointer
-	var self = this;
-
-	//Geometry
 	this.geometry = GeometryForm.create(this.form, this.obj);
 }
 
