@@ -44,10 +44,18 @@ TextureRenderer.prototype.setSize = function(x, y)
 //Render texture to internal canvas and create dataURL that is passed to onRender callback
 TextureRenderer.prototype.render = function(texture, onRender)
 {
-	this.material.map = texture;
-	this.material.needsUpdate = true;
-
-	this.renderer.render(this.scene, this.camera);
-
-	onRender(this.canvas.toDataURL());
+	if(texture.isCubeTexture)
+	{
+		var cube = new CubemapFlatPreview(texture, 64/4, 0, 64/8);
+		cube.setSize(64, 64);
+		cube.render(this.renderer);
+		onRender(this.canvas.toDataURL());
+	}
+	else
+	{
+		this.material.map = texture;
+		this.material.needsUpdate = true;
+		this.renderer.render(this.scene, this.camera);
+		onRender(this.canvas.toDataURL());
+	}
 };
