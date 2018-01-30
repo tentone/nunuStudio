@@ -40,6 +40,8 @@ include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
 
+include("lib/three/objects/LensFlare.js");
+
 include("lib/three/loaders/TTFLoader.js");
 
 include("lib/cannon.min.js");
