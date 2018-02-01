@@ -16,7 +16,7 @@ function GeometryRenderer()
 	this.scene = new THREE.Scene();
 
 	//Text
-	this.mesh = new THREE.Mesh(null, new THREE.MeshBasicMaterial({color: 0xFFFFFF}));
+	this.mesh = new THREE.Mesh(new THREE.Geometry(), new THREE.MeshBasicMaterial({color: 0xFFFFFF}));
 	this.scene.add(this.mesh);
 }
 
