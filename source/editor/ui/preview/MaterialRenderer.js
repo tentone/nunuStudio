@@ -34,6 +34,17 @@ function MaterialRenderer()
 	this.scene.add(point);
 }
 
+MaterialRenderer.generateElement = function(material)
+{
+	var preview = document.createElement("img");
+	MaterialRenderer.render(material, function(url)
+	{
+		preview.src = url;
+	});
+
+	return preview;
+};
+
 MaterialRenderer.render = function(material, onRender)
 {
 	if(MaterialRenderer.instance === undefined)

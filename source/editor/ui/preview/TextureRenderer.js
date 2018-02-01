@@ -25,6 +25,17 @@ function TextureRenderer()
 	this.scene.add(this.plane);
 }
 
+TextureRenderer.generateElement = function(texture)
+{
+	var preview = document.createElement("img");
+	TextureRenderer.render(texture, function(url)
+	{
+		preview.src = url;
+	});
+
+	return preview;
+};
+
 TextureRenderer.render = function(texture, onRender)
 {
 	if(TextureRenderer.instance === undefined)
@@ -46,7 +57,7 @@ TextureRenderer.prototype.render = function(texture, onRender)
 {
 	if(texture.isCubeTexture)
 	{
-		var cube = new CubemapFlatPreview(texture, 64/4, 0, 64/8);
+		var cube = new CubemapFlatRenderer(texture, 64/4, 0, 64/8);
 		cube.setSize(64, 64);
 		cube.render(this.renderer);
 		onRender(this.canvas.toDataURL());

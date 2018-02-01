@@ -365,13 +365,10 @@ include("editor/ui/tab/texture/VideoTextureEditor.js");
 include("editor/ui/tab/texture/CanvasTextureEditor.js");
 include("editor/ui/tab/texture/SpriteSheetTextureEditor.js");
 
-include("editor/ui/preview/TexturePreview.js");
-include("editor/ui/preview/MaterialPreview.js");
-include("editor/ui/preview/CubemapFlatPreview.js");
-
-include("editor/ui/preview/renderer/FontRenderer.js");
-include("editor/ui/preview/renderer/MaterialRenderer.js");
-include("editor/ui/preview/renderer/TextureRenderer.js");
+include("editor/ui/preview/CubemapFlatRenderer.js");
+include("editor/ui/preview/FontRenderer.js");
+include("editor/ui/preview/MaterialRenderer.js");
+include("editor/ui/preview/TextureRenderer.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");

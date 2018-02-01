@@ -1,6 +1,6 @@
 "use strict";
 
-function FontAsset(parent)
+function GeometryAsset(parent)
 {
 	Asset.call(this, parent);
 
@@ -24,7 +24,7 @@ function FontAsset(parent)
 		
 		context.addOption("Rename", function()
 		{
-			Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename font", self.asset.name)));
+			Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename", self.asset.name)));
 			Editor.updateObjectViews();
 		});
 		
@@ -33,18 +33,6 @@ function FontAsset(parent)
 			Editor.program.removeFont(self.asset, Editor.defaultFont);
 			Editor.updateObjectViews();
 		});
-
-		if(self.asset.format === "arraybuffer")
-		{
-			context.addOption("Reverse", function()
-			{
-				if(confirm("Reverse font glyphs?"))
-				{
-					self.asset.reverseGlyphs();
-					self.updateMetadata();
-				}
-			});
-		}
 
 		context.addOption("Copy", function()
 		{
@@ -72,42 +60,39 @@ function FontAsset(parent)
 	//Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
-		//Try to remove font from drag buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
 	};
 }
 
-FontAsset.prototype = Object.create(Asset.prototype);
+GeometryAsset.prototype = Object.create(Asset.prototype);
 
 //Set object to file
-FontAsset.prototype.setAsset = function(font)
+GeometryAsset.prototype.setAsset = function(geometry)
 {
-	if(font instanceof Font)
-	{
-		this.asset = font;
-		this.updateMetadata();
-	}
+	this.asset = geometry;
+	this.updateMetadata();
 };
 
 //Update material preview
-FontAsset.prototype.updateMetadata = function()
+GeometryAsset.prototype.updateMetadata = function()
 {
 	if(this.asset !== null)
 	{
+		this.setText(this.asset.name);
+
 		var image = this.image;
-		
-		FontRenderer.render(this.asset, function(url)
+
+		/*FontRenderer.render(this.asset, function(url)
 		{
 			image.src = url;
-		});
+		});*/
 
-		this.setText(this.asset.name);
 	}
 };
 
 //Update interface
-FontAsset.prototype.updateInterface = function()
+GeometryAsset.prototype.updateInterface = function()
 {
 	Asset.prototype.updateInterface.call(this);
 
