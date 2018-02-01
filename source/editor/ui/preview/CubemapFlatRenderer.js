@@ -1,6 +1,6 @@
 "use strict";
 
-function CubemapFlatPreview(envMap, faceSizePx, paddingLeftPx, paddingRightPx)
+function CubemapFlatRenderer(envMap, faceSizePx, paddingLeftPx, paddingRightPx)
 {
 	var faces = [], faceOffsets = [];
 	var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);

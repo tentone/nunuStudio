@@ -162,7 +162,7 @@ TextureAsset.prototype = Object.create(Asset.prototype);
 TextureAsset.prototype.setAsset = function(texture)
 {
 	this.asset = texture;
-	this.preview = TexturePreview.generate(texture);
+	this.preview = TextureRenderer.generateElement(texture);
 
 	if(this.preview !== null)
 	{

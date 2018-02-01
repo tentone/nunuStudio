@@ -130,7 +130,7 @@ ConsoleTab.createMessage = function(object)
 	}
 	/*else if(object instanceof THREE.Texture)
 	{
-		var preview = TexturePreview.generate(object);
+		var preview = TextureRenderer.generateElement(object);
 		preview.height = 60;
 		log.appendChild(preview);
 
@@ -153,7 +153,7 @@ ConsoleTab.createMessage = function(object)
 	}*/
 	else if(object instanceof THREE.Material)
 	{
-		var preview = MaterialPreview.generate(object);
+		var preview = MaterialRenderer.generateElement(object);
 		preview.height = 60;
 		log.appendChild(preview);
 
