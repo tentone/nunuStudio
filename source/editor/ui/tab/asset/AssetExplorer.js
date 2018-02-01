@@ -390,6 +390,15 @@ AssetExplorer.prototype.refresh = function()
 		this.add(file);
 	}
 
+	//Materials
+	var geometries = Editor.program.geometries;
+	for(var i in geometries)
+	{
+		var file = new GeometryAsset(this.assets);
+		file.setAsset(geometries[i]);
+		this.add(file);
+	}
+
 	//Textures
 	var textures = Editor.program.textures;
 	for(var i in textures)

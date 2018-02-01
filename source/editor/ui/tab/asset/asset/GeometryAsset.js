@@ -4,7 +4,7 @@ function GeometryAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.setIcon(Editor.filePath + "icons/misc/font.png");
+	this.setIcon(Editor.filePath + "icons/misc/scene.png");
 	
 	//Self pointer
 	var self = this;
