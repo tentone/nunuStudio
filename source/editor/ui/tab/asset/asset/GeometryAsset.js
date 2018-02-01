@@ -83,11 +83,10 @@ GeometryAsset.prototype.updateMetadata = function()
 
 		var image = this.image;
 
-		/*FontRenderer.render(this.asset, function(url)
+		GeometryRenderer.render(this.asset, function(url)
 		{
 			image.src = url;
-		});*/
-
+		});
 	}
 };
 

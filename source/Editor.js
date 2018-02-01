@@ -315,6 +315,7 @@ include("editor/ui/tab/ProfilingTab.js");
 
 include("editor/ui/tab/asset/AssetExplorer.js");
 include("editor/ui/tab/asset/asset/Asset.js");
+include("editor/ui/tab/asset/asset/GeometryAsset.js");
 include("editor/ui/tab/asset/asset/MaterialAsset.js");
 include("editor/ui/tab/asset/asset/TextureAsset.js");
 include("editor/ui/tab/asset/asset/FontAsset.js");
@@ -369,6 +370,7 @@ include("editor/ui/preview/CubemapFlatRenderer.js");
 include("editor/ui/preview/FontRenderer.js");
 include("editor/ui/preview/MaterialRenderer.js");
 include("editor/ui/preview/TextureRenderer.js");
+include("editor/ui/preview/GeometryRenderer.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
