@@ -14,9 +14,12 @@ function GeometryRenderer()
 
 	//Scene
 	this.scene = new THREE.Scene();
+	var directional = new THREE.DirectionalLight(0x777777, 1.0);
+	directional.position.set(3000, 10000, 400);
+	this.scene.add(directional);
+	this.scene.add(new THREE.AmbientLight(0x888888));
 
-	//Text
-	this.mesh = new THREE.Mesh(new THREE.Geometry(), new THREE.MeshBasicMaterial({color: 0xFFFFFF}));
+	this.mesh = new THREE.Mesh(new THREE.Geometry(), new THREE.MeshPhongMaterial({color: 0xFFFFFF}));
 	this.scene.add(this.mesh);
 }
 
@@ -39,14 +42,21 @@ GeometryRenderer.prototype.setSize = function(x, y)
 //Render material to internal canvas and copy image to html image element
 GeometryRenderer.prototype.render = function(geometry, onRender)
 {
-	this.mesh.geometry = geometry;
-	this.mesh.geometry.computeBoundingBox();
+	geometry.computeBoundingBox();
 	
-	var box = this.mesh.geometry.boundingBox;
-	this.mesh.position.x = -(box.max.x - box.min.x) / 2;
-	this.mesh.position.y = -(box.max.y - box.min.y) / 2;
+	var box = geometry.boundingBox;
+	var center = new THREE.Vector3();
+	center.addVectors(box.min, box.max);
+	center.multiplyScalar(-0.5);
 
-	this.camera.size = box.max.x - box.min.x;
+	this.mesh.geometry = geometry;
+	this.mesh.position.copy(center);
+
+	var x = box.max.x - box.min.x;
+	var y = box.max.y - box.min.y;
+
+	this.camera.size = x > y ? x : y;
+	this.camera.position.z = 50;
 	this.camera.updateProjectionMatrix();
 	this.renderer.render(this.scene, this.camera);
 
