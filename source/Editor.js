@@ -705,10 +705,9 @@ Editor.selectObject = function(object)
 		Editor.selectedObjects[0] = object;
 
 		Editor.selectObjectPanel();
-		Editor.selectObjectHelper();
-		Editor.selectTool();
 
-		Interface.animation.attach(object);
+		Editor.updateTabs();
+		Editor.selectTool();
 	}
 	else
 	{
@@ -725,7 +724,7 @@ Editor.addToSelection = function(object)
 		Editor.selectedObjects.push(object);
 
 		Editor.selectObjectPanel();
-		Editor.selectObjectHelper();
+		Editor.updateTabs();
 		Editor.selectTool();
 	}
 	else
@@ -745,7 +744,7 @@ Editor.removeFromSelection = function(object)
 			Editor.selectedObjects.splice(i, 1);
 
 			Editor.selectObjectPanel();
-			Editor.selectObjectHelper();
+			Editor.updateTabs();
 			Editor.selectTool();
 
 			return;
@@ -987,11 +986,7 @@ Editor.updateObjectViews = function()
 		Interface.panel.updatePanel();
 	}
 
-	//Update tab names
-	Interface.tab.updateMetadata();
-	
-	//Update asset explorer
-	Interface.assetExplorer.refresh();
+	Editor.updateTabs();
 };
 
 //Create default resouces to be used when creating new objects
@@ -1032,13 +1027,25 @@ Editor.selectTool = function(tool)
 	}
 };
 
-//Select object helper
-Editor.selectObjectHelper = function(tool)
+//Update tabs after changing selection
+Editor.updateTabs = function()
 {
+	Interface.tab.updateMetadata();
 	var tab = Interface.tab.getActual();
 	if(tab instanceof SceneEditor)
 	{
 		tab.selectObjectHelper();
+	}
+
+	Interface.bottomTab.updateMetadata();
+	var tab = Interface.bottomTab.getActual();
+	if(tab instanceof AssetExplorer)
+	{
+		tab.refresh();
+	}
+	else if(tab instanceof AnimationTab)
+	{	
+		tab.attachObject();
 	}
 };
 
@@ -1182,7 +1189,7 @@ Editor.resetEditingFlags = function()
 	}
 	
 	Editor.selectTool(Editor.SELECT);
-	Editor.selectObjectHelper();
+	Editor.updateTabs();
 };
 
 //Craete new Program

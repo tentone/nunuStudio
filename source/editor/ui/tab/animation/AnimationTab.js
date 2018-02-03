@@ -181,6 +181,13 @@ function AnimationTab(parent, closeable, container, index)
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
+AnimationTab.prototype.activate = function()
+{
+	TabElement.prototype.activate.call(this);
+
+	this.attachObject();
+};
+
 AnimationTab.prototype.deactivate = function()
 {
 	TabElement.prototype.deactivate.call(this);
@@ -193,20 +200,11 @@ AnimationTab.prototype.deactivate = function()
 };
 
 //Attach object to animation editor
-AnimationTab.prototype.attach = function(object)
+AnimationTab.prototype.attachObject = function()
 {
-	this.object = object;
+	this.object = Editor.selectedObjects.length > 0 ? Editor.selectedObjects[0] : null;
 	this.createAnimationMixer();
-
-	//Create timeline and animation mixer
-	if(this.object.animations !== undefined)
-	{
-		this.createTimeline();
-	}
-	else
-	{
-		this.clearTimeline();
-	}
+	this.createTimeline();
 };
 
 //Create a new animation mixer
@@ -229,7 +227,7 @@ AnimationTab.prototype.createAnimationMixer = function(keepTime)
 	}
 
 	//Check if the object has animations
-	if(this.object.animations !== undefined)
+	if(this.object !== null && this.object.animations !== undefined)
 	{
 		this.mixer = new AnimationMixer(this.object);
 		this.mixer.createActions(this.object.animations);
@@ -277,16 +275,13 @@ AnimationTab.prototype.createTimeline = function()
 {
 	this.clearTimeline();
 
-	if(this.object === null || this.object.animations === undefined)
+	if(this.object !== null && this.object.animations !== undefined)
 	{
-		return;
-	}
-
-	var animations = this.object.animations;
-
-	for(var i = 0; i < animations.length; i++)
-	{
-		this.animations.push(new AnimationClipTrack(this, animations[i]));
+		var animations = this.object.animations;
+		for(var i = 0; i < animations.length; i++)
+		{
+			this.animations.push(new AnimationClipTrack(this, animations[i]));
+		}
 	}
 
 	this.updateInterface();
