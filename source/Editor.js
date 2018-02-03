@@ -1765,25 +1765,6 @@ Editor.loadModel = function(file, onLoad)
 			};
 			reader.readAsText(file);
 		}
-		//SVG
-		else if(extension === "svg")
-		{
-			var reader = new FileReader();
-			reader.onload = function()
-			{
-				try
-				{
-					console.log(reader.result);
-					//TODO <ADD CODE HERE>
-				}
-				catch(e)
-				{
-					Editor.alert("Error loading file");
-					console.error("nunuStudio: Error loading file", e);
-				}
-			}
-			reader.readAsText(file);
-		}
 		//Blender
 		else if(extension === "blend")
 		{	
@@ -1912,11 +1893,12 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.PLYLoader();
-					var geometry = loader.parse(reader.result);
 					var modelName = FileSystem.getNameWithoutExtension(name);
-					var material = new MeshPhongMaterial();
-					material.name = modelName;
-					var mesh = new Mesh(geometry, material);
+
+					var geometry = loader.parse(reader.result);
+					geometry.name = modelName;
+
+					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
 					Editor.addToScene(mesh);
 				}
@@ -1937,11 +1919,11 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.VTKLoader();
-					var geometry = loader.parse(reader.result);
 					var modelName = FileSystem.getNameWithoutExtension(name);
-					var material = new MeshPhongMaterial();
-					material.name = modelName;
-					var mesh = new Mesh(geometry, material);
+					var geometry = loader.parse(reader.result);
+					geometry.name = modelName;
+
+					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
 					Editor.addToScene(mesh);
 				}
@@ -1962,11 +1944,12 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.PRWMLoader();
-					var geometry = loader.parse(reader.result);
 					var modelName = FileSystem.getNameWithoutExtension(name);
-					var material = new MeshPhongMaterial();
-					material.name = modelName;
-					var mesh = new Mesh(geometry, material);
+
+					var geometry = loader.parse(reader.result);
+					geometry.name = modelName;
+
+					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
 					Editor.addToScene(mesh);
 				}
@@ -2152,7 +2135,10 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.STLLoader();
+
+					var modelName = FileSystem.getNameWithoutExtension(name);
 					var geometry = loader.parse(reader.result);
+					geometry.name = modelName;
 
 					Editor.addToScene(new Mesh(geometry, Editor.defaultMaterial));
 				}
