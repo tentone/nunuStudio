@@ -386,6 +386,11 @@ AssetExplorer.prototype.activate = function()
 
 AssetExplorer.prototype.updateSelection = function()
 {
+	if(!this.active)
+	{
+		return;
+	}
+	
 	//Clean asset explorer
 	this.clear();
 
