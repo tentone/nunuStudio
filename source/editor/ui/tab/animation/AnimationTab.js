@@ -185,7 +185,7 @@ AnimationTab.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	this.attachObject();
+	this.updateSelection();
 };
 
 AnimationTab.prototype.deactivate = function()
@@ -200,9 +200,10 @@ AnimationTab.prototype.deactivate = function()
 };
 
 //Attach object to animation editor
-AnimationTab.prototype.attachObject = function()
+AnimationTab.prototype.updateSelection = function()
 {
 	this.object = Editor.selectedObjects.length > 0 ? Editor.selectedObjects[0] : null;
+	
 	this.createAnimationMixer();
 	this.createTimeline();
 };
@@ -254,9 +255,10 @@ AnimationTab.prototype.update = function()
 	}
 };
 
-//Clear timeline division
-AnimationTab.prototype.clearTimeline = function()
-{
+//Create new timeline elements
+AnimationTab.prototype.createTimeline = function()
+{	
+	//Clear timeline elements
 	while(this.tracks.firstChild)
 	{
 		this.tracks.removeChild(this.tracks.firstChild);
@@ -268,13 +270,8 @@ AnimationTab.prototype.clearTimeline = function()
 
 	this.timebarHeight = 0;
 	this.animations = [];
-};
 
-//Create new timeline elements
-AnimationTab.prototype.createTimeline = function()
-{
-	this.clearTimeline();
-
+	//Create new timeline
 	if(this.object !== null && this.object.animations !== undefined)
 	{
 		var animations = this.object.animations;
@@ -366,6 +363,8 @@ AnimationTab.prototype.updateInterface = function()
 		this.timeline.style.height = (this.size.y - 20) + "px";
 		
 		this.bar.style.width = this.size.x + "px";
+
+		console.log(this.timeline.scrollHeight);
 
 		//Resizable division
 		this.info.style.height = this.timeline.scrollHeight + "px";

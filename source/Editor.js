@@ -1041,11 +1041,11 @@ Editor.updateTabs = function()
 	var tab = Interface.bottomTab.getActual();
 	if(tab instanceof AssetExplorer)
 	{
-		tab.refresh();
+		tab.updateSelection();
 	}
 	else if(tab instanceof AnimationTab)
 	{	
-		tab.attachObject();
+		tab.updateSelection();
 	}
 };
 
