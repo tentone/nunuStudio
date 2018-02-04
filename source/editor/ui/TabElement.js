@@ -30,7 +30,7 @@ TabElement.prototype = Object.create(Element.prototype);
 //Update tab metadata
 TabElement.prototype.updateMetadata = Element.EMPTY;
 
-//Activate tab
+//Activate tab (called when the tab is activated)
 TabElement.prototype.activate = function()
 {
 	this.active = true;
@@ -58,19 +58,19 @@ TabElement.prototype.activate = function()
 	}
 };
 
-//Deactivate tab
+//Deactivate tab (called after the tab is deactivated or closed)
 TabElement.prototype.deactivate = function()
 {
 	this.active = false;
 };
 
-//Attach object to tab
+//Attach object or resource to tab (used to attach objects to tree elements)
 TabElement.prototype.attach = function(obj){};
 
-//Update tab settings
+//Update tab settings (called after settings of the editor are changed)
 TabElement.prototype.updateSettings = Element.EMPTY;
 
-//Check if an object is attached to the tab
+//Check if an object or resource is attached to the tab (used to validated tabs after object removed)
 TabElement.prototype.isAttached = function(obj)
 {
 	return false;

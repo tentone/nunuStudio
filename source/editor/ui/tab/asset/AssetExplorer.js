@@ -374,6 +374,16 @@ function AssetExplorer(parent, closeable, container, index)
 
 AssetExplorer.prototype = Object.create(TabElement.prototype);
 
+AssetExplorer.prototype.activate = function()
+{
+	TabElement.prototype.activate.call(this);
+
+	if(Editor.program !== null)
+	{
+		this.refresh();
+	}
+};
+
 AssetExplorer.prototype.refresh = function()
 {
 	//Clean asset explorer
