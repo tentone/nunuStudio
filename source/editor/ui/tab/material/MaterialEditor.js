@@ -328,7 +328,7 @@ MaterialEditor.prototype.update = function()
 		//If needs update file metadata
 		if(this.material.needsUpdate)
 		{
-			Interface.assetExplorer.refresh();
+			Interface.assetExplorer.updateSelection();
 			
 			if(this.material.envMap != null)
 			{

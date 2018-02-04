@@ -181,7 +181,7 @@ function MaterialAsset(parent)
 					
 					//Add
 					Editor.program.addMaterial(material);
-					Interface.assetExplorer.refresh();
+					Interface.assetExplorer.updateSelection();
 				}
 				catch(e)
 				{

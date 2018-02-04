@@ -25,7 +25,6 @@ function TabButton(parent, tab)
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
 	this.text.style.color = Editor.theme.textColor;
-	this.text.style.top = "25%";
 	this.text.innerHTML = tab.title;
 	this.element.appendChild(this.text);
 
@@ -247,6 +246,7 @@ TabButton.prototype.updateInterface = function()
 
 		//Text
 		this.text.style.left = this.size.y + "px";
+		this.text.style.top = ((this.size.y - 12) / 2) + "px";
 		this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
 		this.text.style.height = this.size.y + "px";
 
