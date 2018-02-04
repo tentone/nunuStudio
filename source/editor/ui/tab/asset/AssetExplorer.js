@@ -380,11 +380,11 @@ AssetExplorer.prototype.activate = function()
 
 	if(Editor.program !== null)
 	{
-		this.refresh();
+		this.updateSelection();
 	}
 };
 
-AssetExplorer.prototype.refresh = function()
+AssetExplorer.prototype.updateSelection = function()
 {
 	//Clean asset explorer
 	this.clear();
