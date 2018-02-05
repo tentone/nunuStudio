@@ -127,8 +127,8 @@ function UnrealBloomPass(strength, radius, threshold)
 	this.compositeMaterial.uniforms["blurTexture3"].value = this.renderTargetsVertical[2].texture;
 	this.compositeMaterial.uniforms["blurTexture4"].value = this.renderTargetsVertical[3].texture;
 	this.compositeMaterial.uniforms["blurTexture5"].value = this.renderTargetsVertical[4].texture;
-	this.compositeMaterial.uniforms["bloomStrength"].value = (strength !== undefined) ? strength : 1;
-	this.compositeMaterial.uniforms["bloomRadius"].value = (radius !== undefined) ? radius : 0.1;
+	this.compositeMaterial.uniforms["bloomStrength"].value = (strength !== undefined) ? strength : 0.8;
+	this.compositeMaterial.uniforms["bloomRadius"].value = (radius !== undefined) ? radius : 0.3;
 	this.compositeMaterial.uniforms["bloomFactors"].value = [1.0, 0.8, 0.6, 0.4, 0.2];
 	this.compositeMaterial.uniforms["bloomTintColors"].value = [new THREE.Vector3(1, 1, 1), new THREE.Vector3(1, 1, 1), new THREE.Vector3(1, 1, 1), new THREE.Vector3(1, 1, 1), new THREE.Vector3(1, 1, 1)];
 	this.compositeMaterial.needsUpdate = true;

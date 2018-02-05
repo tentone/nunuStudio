@@ -42,9 +42,13 @@ function DotScreenPass(center, angle, scale)
 
 	this.uniforms = THREE.UniformsUtils.clone(THREE.DotScreenShader.uniforms);
 
-	if (center !== undefined) this.uniforms["center"].value.copy(center);
-	if (angle !== undefined) this.uniforms["angle"].value = angle;
-	if (scale !== undefined) this.uniforms["scale"].value = scale;
+	if(center !== undefined)
+	{
+		this.uniforms["center"].value.copy(center);
+	}
+	
+	this.uniforms["angle"].value = angle !== undefined ? angle : 0.5;
+	this.uniforms["scale"].value = scale !== undefined ? scale : 0.8;
 
 	this.material = new THREE.ShaderMaterial({
 		uniforms: this.uniforms,

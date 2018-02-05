@@ -54,140 +54,42 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.addText("Add Post Processing");
 	this.form.nextRow();
 
-	var addRenderPass = function(pass)
+	var addRenderPassButton = function(name, PassConstructor)
 	{
-		var composer = self.camera.composer;
-		pass.renderToScreen = true;
-		for(var i = 0; i < composer.passes.length; i++)
+		var button = new Button(self.form.element);
+		button.size.set(120, 18);
+		button.setText(name);
+		button.setCallback(function()
 		{
-			composer.passes[i].renderToScreen = false;
-		}
-		
-		self.camera.composer.addPass(pass);
-		self.updatePostNodes();
+			var pass = new PassConstructor();
+
+			var composer = self.camera.composer;
+			pass.renderToScreen = true;
+			for(var i = 0; i < composer.passes.length; i++)
+			{
+				composer.passes[i].renderToScreen = false;
+			}
+			
+			self.camera.composer.addPass(pass);
+			self.updatePostNodes();
+		});
+		self.form.add(button);
+		self.form.nextRow();
 	};
 
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Render");
-	button.setCallback(function()
-	{
-		addRenderPass(new RenderPass());
-	});
-	this.form.add(button);
-	this.form.nextRow();
 
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("FXAA");
-	button.setCallback(function()
-	{
-		addRenderPass(new FXAAPass());
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Colorify");
-	button.setCallback(function()
-	{
-		addRenderPass(new ColorifyPass());
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Unreal Bloom");
-	button.setCallback(function()
-	{
-		addRenderPass(new UnrealBloomPass(0.8, 0.3, 0.8));
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Hue & Saturation");
-	button.setCallback(function()
-	{
-		addRenderPass(new HueSaturationPass());
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("SSAO");
-	button.setCallback(function()
-	{
-		var pass = new SSAOPass();
-		pass.onlyAO = false;
-		addRenderPass(pass);
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Bokeh");
-	button.setCallback(function()
-	{
-		addRenderPass(new BokehPass());
-	});
-	this.form.add(button);
-	this.form.nextRow();
-	
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Technicolor");
-	button.setCallback(function()
-	{
-		addRenderPass(new TechnicolorPass());
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Film");
-	button.setCallback(function()
-	{
-		addRenderPass(new FilmPass(0.35, 0.5, 512, false));
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Dot Screen");
-	button.setCallback(function()
-	{
-		addRenderPass(new DotScreenPass(new THREE.Vector2(0, 0), 0.5, 0.8));
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Sobel");
-	button.setCallback(function()
-	{
-		addRenderPass(new SobelPass());
-	});
-	this.form.add(button);
-	this.form.nextRow();
-
-	var button = new Button(this.form.element);
-	button.size.set(120, 18);
-	button.setText("Copy");
-	button.setCallback(function()
-	{
-		addRenderPass(new CopyPass());
-	});
-	this.form.add(button);
-	this.form.nextRow();
+	addRenderPassButton("Render", RenderPass);
+	addRenderPassButton("FXAA", FXAAPass);
+	addRenderPassButton("Colorify", ColorifyPass);
+	addRenderPassButton("Unreal Bloom", UnrealBloomPass);
+	addRenderPassButton("Hue & Saturation", HueSaturationPass);
+	addRenderPassButton("SSAO", SSAOPass);
+	addRenderPassButton("Bokeh", BokehPass);
+	addRenderPassButton("Technicolor", TechnicolorPass);
+	addRenderPassButton("Film", FilmPass);
+	addRenderPassButton("Dot Screen", DotScreenPass);
+	addRenderPassButton("Sobel", SobelPass);
+	addRenderPassButton("Copy", CopyPass);
 
 	this.postNodes = new Form(this.form.element);
 	this.form.add(this.postNodes);
@@ -243,8 +145,6 @@ CameraEditor.prototype.update = function()
 {
 	if(this.camera !== null)
 	{
-		console.log(this.camera.aspect, this.canvas.size.x, this.canvas.size.y);
-
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 		this.camera.resize(this.canvas.size.x, this.canvas.size.y);

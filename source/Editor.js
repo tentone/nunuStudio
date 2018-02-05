@@ -249,8 +249,6 @@ include("lib/three/exporters/STLBinaryExporter.js");
 include("lib/three/exporters/GLTFExporter.js");
 
 include("lib/zlib/zlib.min.js");
-include("lib/zlib/gzip.min.js");
-include("lib/zlib/gunzip.min.js");
 
 include("lib/stats.min.js");
 include("lib/jsblend.js");

@@ -42,6 +42,7 @@ function ParticleEmitter(group, emitter)
 
 	this.type = "ParticleEmiter";
 	this.name = "particle";
+
 	this.frustumCulled = false;
 
 	var group = this.group;
@@ -73,16 +74,16 @@ ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
  */
 ParticleEmitter.defaultEmitter =
 {		
-	particleCount: 2000,
+	particleCount: 200,
 	velocity:
 	{
-		value: new THREE.Vector3(0, 25, 0),
-		spread: new THREE.Vector3(10, 10, 10)
+		value: new THREE.Vector3(0, 0, 0),
+		spread: new THREE.Vector3(3, 3, 3)
 	},
 	acceleration:
 	{
-		value: new THREE.Vector3(0, -10, 0),
-		spread: new THREE.Vector3(10, 0, 10)
+		value: new THREE.Vector3(0, 0, 0),
+		spread: new THREE.Vector3(0, 0, 0)
 	}
 };
 
@@ -98,7 +99,7 @@ ParticleEmitter.defaultGroup =
 	{
 		value: null
 	},
-	maxParticleCount: 2000,
+	maxParticleCount: 200,
 	blending: THREE.AdditiveBlending,
 	fog: false,
 	depthWrite: false,
