@@ -44,16 +44,17 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 	this.type = "Film";
 
 	this.uniforms = THREE.UniformsUtils.clone(THREE.FilmShader.uniforms);
-	this.material = new THREE.ShaderMaterial({
+	this.material = new THREE.ShaderMaterial(
+	{
 		uniforms: this.uniforms,
 		vertexShader: THREE.FilmShader.vertexShader,
 		fragmentShader: THREE.FilmShader.fragmentShader
 	});
 
-	if (grayscale !== undefined) this.uniforms.grayscale.value = grayscale;
-	if (noiseIntensity !== undefined) this.uniforms.nIntensity.value = noiseIntensity;
-	if (scanlinesIntensity !== undefined) this.uniforms.sIntensity.value = scanlinesIntensity;
-	if (scanlinesCount !== undefined) this.uniforms.sCount.value = scanlinesCount;
+	this.uniforms.grayscale.value = (grayscale !== undefined) ? grayscale : false;
+	this.uniforms.nIntensity.value = (noiseIntensity !== undefined) ? noiseIntensity : 0.35;
+	this.uniforms.sIntensity.value = (scanlinesIntensity !== undefined) ? scanlinesIntensity : 0.5;
+	this.uniforms.sCount.value = (scanlinesCount !== undefined) ? scanlinesCount : 512;
 
 	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 	this.scene  = new THREE.Scene();
