@@ -200,9 +200,8 @@ CameraEditor.prototype = Object.create(TabElement.prototype);
 CameraEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
-	
-	this.name.setText(this.camera.name);
 
+	this.name.setText(this.camera.name);
 	this.updatePostNodes();
 };
 
@@ -244,6 +243,8 @@ CameraEditor.prototype.update = function()
 {
 	if(this.camera !== null)
 	{
+		console.log(this.camera.aspect, this.canvas.size.x, this.canvas.size.y);
+
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 		this.camera.resize(this.canvas.size.x, this.canvas.size.y);
@@ -309,7 +310,7 @@ CameraEditor.prototype.updateInterface = function()
 		this.main.updateInterface();
 
 		//Canvas
-		this.canvas.size.set(this.main.divA.offsetWidth, this.main.divA.offsetHeight);
+		this.canvas.size.set(this.size.x * this.main.tabPosition, this.size.y);
 		this.canvas.updateInterface();
 
 		//Renderer
