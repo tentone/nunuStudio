@@ -77,10 +77,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.texture.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.particle.group, "texture", self.texture.getValue()));
-		setTimeout(function()
-		{
-			self.updateRuntimeParticle();
-		}, 100);
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.texture);
 	this.form.nextRow();
@@ -562,11 +559,11 @@ ParticleEditor.prototype.updateRuntimeParticle = function()
 		}
 
 		this.particleRuntime = new ObjectLoader().parse(this.particle.toJSON());
+		this.particleRuntime.children = [];
 		this.particleRuntime.visible = true;
 		this.particleRuntime.scale.set(1, 1, 1);
 		this.particleRuntime.position.set(0, 0, 0);
 		this.particleRuntime.rotation.set(0, 0, 0);
-		this.particleRuntime.initialize();
 		this.scene.add(this.particleRuntime);
 	}
 };
@@ -650,21 +647,16 @@ ParticleEditor.prototype.update = function()
 	this.renderer.render(this.scene, this.camera);
 };
 
-//Update division Size
+//Update division
 ParticleEditor.prototype.updateInterface = function()
 {
-	//Set visibility
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-
 		//Main container
-		this.main.visible = this.visible;
 		this.main.size.copy(this.size);
 		this.main.updateInterface();
 
 		//Canvas
-		this.canvas.visible = this.visible;
 		this.canvas.size.set(this.main.divA.offsetWidth, this.main.divA.offsetHeight);
 		this.canvas.updateInterface();
 
@@ -676,15 +668,14 @@ ParticleEditor.prototype.updateInterface = function()
 		//Children
 		for(var i = 0; i < this.children.length; i++)
 		{
-			this.children[i].visible = this.visible;
 			this.children[i].updateInterface();
 		}
 
 		//Form
-		this.form.visible = this.visible;
 		this.form.updateInterface();
 
 		//Element
+		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
