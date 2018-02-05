@@ -413,7 +413,6 @@ include("editor/tools/TransformGizmoRotate.js");
 include("editor/tools/TransformGizmoScale.js");
 include("editor/tools/TransformGizmoTranslate.js");
 
-include("editor/helpers/ParticleEmitterHelper.js");
 include("editor/helpers/ObjectIconHelper.js");
 include("editor/helpers/PhysicsObjectHelper.js");
 include("editor/helpers/WireframeHelper.js");

@@ -42,7 +42,6 @@ function ParticleEmitter(group, emitter)
 
 	this.type = "ParticleEmiter";
 	this.name = "particle";
-
 	this.frustumCulled = false;
 
 	var group = this.group;
@@ -108,6 +107,14 @@ ParticleEmitter.defaultGroup =
 	hasPerspective: true
 };
 
+ParticleEmitter.prototype.reload = function()
+{
+	this.group._resetBufferRanges();
+	this.group._updateDefines();
+	this.group._applyAttributesToGeometry();
+	this.group._updateDefines(this.emitter);
+};
+
 /**
  * Particle emitter state is automatically updated before rendering.
  * 
@@ -127,23 +134,10 @@ ParticleEmitter.prototype.onBeforeRender = function()
  */
 ParticleEmitter.prototype.dispose = function()
 {
-	this.group.texture.dispose();
+	this.group.dispose();
 
 	THREE.Object3D.prototype.dispose.call(this);
 };
-
-/**
- * Particle emitter cannot be detected by raycaster.
- *
- * The raycast method allways returns null.
- * 
- * @method raycast
- * @return Null.
- */
-/*ParticleEmitter.prototype.raycast = function()
-{
-	return null;
-};*/
 
 /**
  * Serialize object to JSON.
@@ -169,87 +163,102 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	this.geometry = geometry;
 
 	//Group 
-	data.object.group = {};
-	data.object.group.texture = {};
-	data.object.group.texture.value = texture.uuid;
-	data.object.group.texture.frames = this.group.textureFrames.toArray();
-	data.object.group.texture.frameCount = this.group.textureFrameCount
-	data.object.group.texture.loop = this.group.textureLoop;
-	data.object.group.fixedTimeStep = this.group.fixedTimeStep;
-	data.object.group.hasPerspective = this.group.hasPerspective;
-	data.object.group.colorize = this.group.colorize;
-	data.object.group.maxParticleCount = this.group.maxParticleCount;
-	data.object.group.transparent = this.group.transparent;
-	data.object.group.blending = this.group.blending;
-	data.object.group.alphaTest = this.group.alphaTest;
-	data.object.group.depthWrite = this.group.depthWrite;
-	data.object.group.depthTest = this.group.depthTest;
-	data.object.group.fog = this.group.fog;
-	data.object.group.scale = this.group.scale;
-
+	data.object.group = this.group.toJSON(meta);
+	
 	//Emitter
-	data.object.emitter = {};
-	data.object.emitter.uuid = this.emitter.uuid;
-	data.object.emitter.type = this.emitter.type;
-	data.object.emitter.direction = this.emitter.direction;
-	data.object.emitter.particleCount = this.emitter.particleCount;
-	data.object.emitter.duration = this.emitter.duration;
-	data.object.emitter.isStatic = this.emitter.isStatic;
+	data.object.emitter = this.emitter.toJSON(meta);
+
+	return data;
+};
+
+SPE.Group.prototype.toJSON = function(meta)
+{
+	var data = {};
+	data.texture = {};
+	data.texture.value = this.texture.uuid;
+	data.texture.frames = this.textureFrames.toArray();
+	data.texture.frameCount = this.textureFrameCount
+	data.texture.loop = this.textureLoop;
+	data.fixedTimeStep = this.fixedTimeStep;
+	data.hasPerspective = this.hasPerspective;
+	data.colorize = this.colorize;
+	data.maxParticleCount = this.maxParticleCount;
+	data.transparent = this.transparent;
+	data.blending = this.blending;
+	data.alphaTest = this.alphaTest;
+	data.depthWrite = this.depthWrite;
+	data.depthTest = this.depthTest;
+	data.fog = this.fog;
+	data.scale = this.scale;
+
+	return data;
+};
+
+SPE.Emitter.prototype.toJSON = function(meta)
+{
+	var data = {};
+
+	data.uuid = this.uuid;
+	data.type = this.type;
+	data.direction = this.direction;
+	data.particleCount = this.particleCount;
+	data.duration = this.duration;
+	data.isStatic = this.isStatic;
 
 	//Max age
-	data.object.emitter.maxAge = {};
-	data.object.emitter.maxAge.value = this.emitter.maxAge.value;
-	data.object.emitter.maxAge.spread = this.emitter.maxAge.spread;
+	data.maxAge = {};
+	data.maxAge.value = this.maxAge.value;
+	data.maxAge.spread = this.maxAge.spread;
 
 	//Position
-	data.object.emitter.position = {};
-	data.object.emitter.position.value = this.emitter.position.value.toArray();
-	data.object.emitter.position.spread = this.emitter.position.spread.toArray();
-	//data.object.emitter.position.radius = this.emitter.position.radius;
-	//data.object.emitter.position.radiusScale = this.emitter.position.radiusScale.toArray();
+	data.position = {};
+	data.position.value = this.position.value.toArray();
+	data.position.spread = this.position.spread.toArray();
+	data.position.radius = this.position.radius;
+	data.position.radiusScale = this.position.radiusScale.toArray();
 
 	//Velocity
-	data.object.emitter.velocity = {};
-	data.object.emitter.velocity.value = this.emitter.velocity.value.toArray();
-	data.object.emitter.velocity.spread = this.emitter.velocity.spread.toArray();
+	data.velocity = {};
+	data.velocity.value = this.velocity.value.toArray();
+	data.velocity.spread = this.velocity.spread.toArray();
 
 	//Acceleration
-	data.object.emitter.acceleration = {};
-	data.object.emitter.acceleration.value = this.emitter.acceleration.value.toArray();
-	data.object.emitter.acceleration.spread = this.emitter.acceleration.spread.toArray();
+	data.acceleration = {};
+	data.acceleration.value = this.acceleration.value.toArray();
+	data.acceleration.spread = this.acceleration.spread.toArray();
 
 	//Wiggle
-	data.object.emitter.wiggle = {};
-	data.object.emitter.wiggle.value = this.emitter.wiggle.value;
-	data.object.emitter.wiggle.spread = this.emitter.wiggle.spread;
+	data.wiggle = {};
+	data.wiggle.value = this.wiggle.value;
+	data.wiggle.spread = this.wiggle.spread;
 
 	//Opacity
-	data.object.emitter.opacity = {};
-	data.object.emitter.opacity.value = this.emitter.opacity.value;
-	data.object.emitter.opacity.spread = this.emitter.opacity.spread;
+	data.opacity = {};
+	data.opacity.value = this.opacity.value;
+	data.opacity.spread = this.opacity.spread;
 
 	//Size
-	data.object.emitter.size = {};
-	data.object.emitter.size.value = this.emitter.size.value;
-	data.object.emitter.size.spread = this.emitter.size.spread;
+	data.size = {};
+	data.size.value = this.size.value;
+	data.size.spread = this.size.spread;
 
 	//Angle
-	data.object.emitter.angle = {};
-	data.object.emitter.angle.value = this.emitter.angle.value;
-	data.object.emitter.angle.spread = this.emitter.angle.spread;
+	data.angle = {};
+	data.angle.value = this.angle.value;
+	data.angle.spread = this.angle.spread;
 
 	//Color
-	data.object.emitter.color = {};
-	data.object.emitter.color.value = [];
-	for(var i = 0; i < this.emitter.color.value.length; i++)
+	data.color = {};
+	data.color.value = [];
+	for(var i = 0; i < this.color.value.length; i++)
 	{
-		data.object.emitter.color.value.push(this.emitter.color.value[i].getHex());
+		data.color.value.push(this.color.value[i].getHex());
 	}
 
-	data.object.emitter.color.spread = [];
-	for(var i = 0; i < this.emitter.color.spread.length; i++)
+	data.color.spread = [];
+	for(var i = 0; i < this.color.spread.length; i++)
 	{
-		data.object.emitter.color.spread.push(this.emitter.color.spread[i].toArray());
+		data.color.spread.push(this.color.spread[i].toArray());
 	}
 
 	return data;
