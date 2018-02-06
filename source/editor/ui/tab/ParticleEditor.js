@@ -553,10 +553,10 @@ ParticleEditor.prototype.updateRuntimeParticle = function()
 {
 	if(this.particle !== null)
 	{
-		if(this.particleRuntime !== null)
+		/*if(this.particleRuntime !== null)
 		{
 			this.scene.remove(this.particleRuntime);
-		}
+		}*/
 
 		this.particleRuntime = new ObjectLoader().parse(this.particle.toJSON());
 		this.particleRuntime.children = [];
@@ -564,7 +564,7 @@ ParticleEditor.prototype.updateRuntimeParticle = function()
 		this.particleRuntime.scale.set(1, 1, 1);
 		this.particleRuntime.position.set(0, 0, 0);
 		this.particleRuntime.rotation.set(0, 0, 0);
-		this.scene.add(this.particleRuntime);
+		//this.scene.add(this.particleRuntime);
 	}
 };
 
@@ -644,7 +644,15 @@ ParticleEditor.prototype.update = function()
 	}
 
 	//Render editor scene
+	this.renderer.autoClearColor = true;
+	this.renderer.autoClearDepth = true;
+	this.renderer.autoClearStencil = true;
 	this.renderer.render(this.scene, this.camera);
+
+	this.renderer.autoClearColor = false;
+	this.renderer.autoClearDepth = false;
+	this.renderer.autoClearStencil = false;
+	this.renderer.render(this.particleRuntime, this.camera);
 };
 
 //Update division
@@ -657,7 +665,7 @@ ParticleEditor.prototype.updateInterface = function()
 		this.main.updateInterface();
 
 		//Canvas
-		this.canvas.size.set(this.main.divA.offsetWidth, this.main.divA.offsetHeight);
+		this.canvas.size.set(this.size.x * this.main.tabPosition, this.size.y);
 		this.canvas.updateInterface();
 
 		//Renderer and canvas
