@@ -904,15 +904,23 @@ SceneEditor.prototype.render = function()
 	if(this.state === SceneEditor.EDITING)
 	{
 		//Clear
-		renderer.clear();
+		renderer.autoClear = true;
+		renderer.autoClearColor = true;
+		renderer.autoClearDepth = true;
+		renderer.autoClearStencil = true;
 
 		//Render scene
 		renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
 		renderer.render(this.scene, this.camera);
 
+		//Auto clear false
+		renderer.autoClear = false;
+		renderer.autoClearColor = false;
+		renderer.autoClearDepth = false;
+		renderer.autoClearStencil = false;
+
 		//Render tools
 		renderer.render(this.helperScene, this.camera);
-		renderer.clearDepth();
 		renderer.render(this.toolScene, this.camera);
 
 		//Camera preview
@@ -1180,7 +1188,6 @@ SceneEditor.prototype.initializeRenderer = function()
 	this.renderer.toneMapping = toneMapping;
 	this.renderer.toneMappingExposure = toneMappingExposure;
 	this.renderer.toneMappingWhitePoint = toneMappingWhitePoint;
-	this.renderer.autoClear = false;
 };
 
 //Update raycaster position from editor mouse position

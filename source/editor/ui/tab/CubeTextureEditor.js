@@ -411,21 +411,13 @@ CubeTextureEditor.prototype.updateInterface = function()
 {
 	//Visibility
 	if(this.visible)
-	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	
+	{	
 		//Dual division
-		this.division.visible = this.visible;
 		this.division.size.copy(this.size);
 		this.division.updateInterface();
 
 		//Canvas
-		this.canvas.visible = this.visible;
-		this.canvas.size.set(this.division.divA.offsetWidth, this.division.divA.offsetHeight);
+		this.canvas.size.set(this.size.x * this.division.tabPosition, this.size.y);
 		this.canvas.updateInterface();
 		
 		//Renderer
@@ -433,9 +425,15 @@ CubeTextureEditor.prototype.updateInterface = function()
 		this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 
-		//Update form
-		this.form.visible = this.visible;
+		//Form
 		this.form.updateInterface();
+
+		//Element
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
