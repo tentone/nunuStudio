@@ -41,7 +41,6 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Particle
 	this.particle = null;
-	this.particleRuntime = null;
 
 	//Camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
@@ -77,7 +76,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.texture.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.particle.group, "texture", self.texture.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.texture);
 	this.form.nextRow();
@@ -90,7 +89,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxParticleCount.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.group, "maxParticleCount", self.maxParticleCount.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.maxParticleCount);
 	this.form.nextRow();
@@ -107,7 +106,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.blending.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.group, "blending", self.blending.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.blending);
 	this.form.nextRow();
@@ -121,7 +120,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.direction.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter, "direction", self.direction.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.direction);
 	this.form.nextRow();
@@ -134,7 +133,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.particleCount.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter, "particleCount", self.particleCount.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.particleCount);
 	this.form.nextRow();
@@ -153,7 +152,7 @@ function ParticleEditor(parent, closeable, container, index)
 		}
 
 		Editor.history.add(new ChangeAction(self.particle.emitter, "duration", duration));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.duration);
 	this.form.nextRow();
@@ -168,7 +167,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.type.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter, "type", self.type.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.type);
 	this.form.nextRow();
@@ -181,7 +180,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxAgeValue.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.maxAge, "value", self.maxAgeValue.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.maxAgeValue);
 	this.form.addText("+/-", true);
@@ -191,7 +190,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxAgeSpread.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.maxAge, "spread", self.maxAgeSpread.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.maxAgeSpread);
 	this.form.nextRow();
@@ -205,7 +204,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.positionValue.setOnChange(function()
 	{
 		self.particle.emitter.position.value.copy(self.positionValue.getValue());
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.positionValue);
 	this.form.nextRow();
@@ -215,7 +214,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.positionSpread.setOnChange(function()
 	{
 		self.particle.emitter.position.spread.copy(self.positionSpread.getValue());
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.positionSpread);
 	this.form.nextRow();
@@ -229,7 +228,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.velocityValue.setOnChange(function()
 	{
 		self.particle.emitter.velocity.value.copy(self.velocityValue.getValue());
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.velocityValue);
 	this.form.nextRow();
@@ -239,7 +238,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.velocitySpread.setOnChange(function()
 	{
 		self.particle.emitter.velocity.spread.copy(self.velocitySpread.getValue());
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.velocitySpread);
 	this.form.nextRow();
@@ -253,7 +252,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.accelerationValue.setOnChange(function()
 	{
 		self.particle.emitter.acceleration.value.copy(self.accelerationValue.getValue());
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.accelerationValue);
 	this.form.nextRow();
@@ -263,7 +262,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.accelerationSpread.setOnChange(function()
 	{
 		self.particle.emitter.acceleration.spread.copy(self.accelerationSpread.getValue());
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.accelerationSpread);
 	this.form.nextRow();
@@ -276,7 +275,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.wiggleValue.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.wiggle, "value", self.wiggleValue.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.wiggleValue);
 	this.form.addText("+/-", true);
@@ -286,7 +285,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.wiggleSpread.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.wiggle, "spread", self.wiggleSpread.getValue()));
-		self.updateRuntimeParticle();
+		self.particle.reload();
 	});
 	this.form.add(this.wiggleSpread);
 	this.form.nextRow();
@@ -299,13 +298,11 @@ function ParticleEditor(parent, closeable, container, index)
 	this.opacity.setOnChange(function(value)
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.opacity, "value", value));
-		self.particleRuntime.emitter.opacity.value = value;
 	});
 	this.opacity.addGraph("spread", "#AAAAAA");
 	this.opacity.setOnChange(function(value)
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.opacity, "spread", value));
-		self.particleRuntime.emitter.opacity.spread = value;
 	}, "spread");
 	this.form.add(this.opacity);
 	this.form.nextRow();
@@ -318,13 +315,11 @@ function ParticleEditor(parent, closeable, container, index)
 	this.scale.setOnChange(function(value)
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.size, "value", value));
-		self.particleRuntime.emitter.size.value = value;
 	});
 	this.scale.addGraph("spread", "#AAAAAA");
 	this.scale.setOnChange(function(value)
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.size, "spread", value));
-		self.particleRuntime.emitter.size.spread = value;
 	}, "spread");
 	this.form.add(this.scale);
 	this.form.nextRow();
@@ -358,13 +353,11 @@ function ParticleEditor(parent, closeable, container, index)
 	this.angle.setOnChange(function(value)
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.angle, "value", value));
-		self.particleRuntime.emitter.angle.value = value;
 	});
 	this.angle.addGraph("spread", "#AAAAAA");
 	this.angle.setOnChange(function(value)
 	{
 		Editor.history.add(new ChangeAction(self.particle.emitter.angle, "spread", value));
-		self.particleRuntime.emitter.angle.spread = value;
 	}, "spread");
 	this.form.add(this.angle);
 	this.form.nextRow();
@@ -408,7 +401,7 @@ function ParticleEditor(parent, closeable, container, index)
 			self.particle.emitter.color.value[index].r = color.r;
 			self.particle.emitter.color.value[index].g = color.g;
 			self.particle.emitter.color.value[index].b = color.b;
-			self.updateRuntimeParticle();
+			self.particle.reload();
 		};
 	}
 
@@ -420,7 +413,7 @@ function ParticleEditor(parent, closeable, container, index)
 			self.particle.emitter.color.spread[index].x = color.r;
 			self.particle.emitter.color.spread[index].y = color.g;
 			self.particle.emitter.color.spread[index].z = color.b;
-			self.updateRuntimeParticle();
+			self.particle.reload();
 		};
 	}
 	
@@ -539,33 +532,13 @@ ParticleEditor.prototype.attach = function(particle)
 	}
 
 	//Create runtime particle to preview particle
-	this.updateRuntimeParticle();
+	this.particle.reload();
 };
 
 //Check if particle is attached to tab
 ParticleEditor.prototype.isAttached = function(particle)
 {
 	return this.particle === particle;
-};
-
-//Updates runtime particle to match attached particle
-ParticleEditor.prototype.updateRuntimeParticle = function()
-{
-	if(this.particle !== null)
-	{
-		/*if(this.particleRuntime !== null)
-		{
-			this.scene.remove(this.particleRuntime);
-		}*/
-
-		this.particleRuntime = new ObjectLoader().parse(this.particle.toJSON());
-		this.particleRuntime.children = [];
-		this.particleRuntime.visible = true;
-		this.particleRuntime.scale.set(1, 1, 1);
-		this.particleRuntime.position.set(0, 0, 0);
-		this.particleRuntime.rotation.set(0, 0, 0);
-		//this.scene.add(this.particleRuntime);
-	}
 };
 
 //Update camera position and rotation from variables
@@ -636,23 +609,21 @@ ParticleEditor.prototype.update = function()
 
 		this.updateCamera();
 	}
-
-	//Update particle and render
-	if(this.particleRuntime !== null)
+	
+	if(this.renderer !== null)
 	{
-		this.particleRuntime.update();
+		//Render grid and axis
+		this.renderer.autoClearColor = true;
+		this.renderer.autoClearDepth = true;
+		this.renderer.autoClearStencil = true;
+		this.renderer.render(this.scene, this.camera);
+
+		//Render particle
+		this.renderer.autoClearColor = false;
+		this.renderer.autoClearDepth = false;
+		this.renderer.autoClearStencil = false;
+		this.renderer.render(this.particle, this.camera);
 	}
-
-	//Render editor scene
-	this.renderer.autoClearColor = true;
-	this.renderer.autoClearDepth = true;
-	this.renderer.autoClearStencil = true;
-	this.renderer.render(this.scene, this.camera);
-
-	this.renderer.autoClearColor = false;
-	this.renderer.autoClearDepth = false;
-	this.renderer.autoClearStencil = false;
-	this.renderer.render(this.particleRuntime, this.camera);
 };
 
 //Update division

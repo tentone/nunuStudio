@@ -900,15 +900,13 @@ SceneEditor.prototype.render = function()
 	}
 
 	var renderer = this.renderer;
+	renderer.autoClear = true;
+	renderer.autoClearColor = true;
+	renderer.autoClearDepth = true;
+	renderer.autoClearStencil = true;
 
 	if(this.state === SceneEditor.EDITING)
 	{
-		//Clear
-		renderer.autoClear = true;
-		renderer.autoClearColor = true;
-		renderer.autoClearDepth = true;
-		renderer.autoClearStencil = true;
-
 		//Render scene
 		renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
 		renderer.render(this.scene, this.camera);
