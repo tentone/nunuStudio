@@ -912,97 +912,16 @@ SceneEditor.prototype.render = function()
 		renderer.render(this.scene, this.camera);
 
 		//Auto clear false
-		renderer.autoClear = false;
 		renderer.autoClearColor = false;
-		renderer.autoClearDepth = false;
 		renderer.autoClearStencil = false;
+		renderer.autoClearDepth = false;
 
 		//Render tools
 		renderer.render(this.helperScene, this.camera);
 		renderer.render(this.toolScene, this.camera);
 
-		//Camera preview
-		if(Settings.editor.cameraPreviewEnabled)
-		{
-			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
-			var height = Settings.editor.cameraPreviewPercentage * this.canvas.height;
-			var scene = this.scene;
-			
-			var position = Settings.editor.cameraPreviewPosition;
-			var x = (position === Settings.BOTTOM_RIGHT || position === Settings.TOP_RIGHT) ? this.canvas.width - width - 10 : 10;
-			var y = (position === Settings.BOTTOM_RIGHT || position === Settings.BOTTOM_LEFT) ? this.canvas.height - height - 10 : 10;
-
-			renderer.setScissorTest(true);
-			renderer.setViewport(x, y, width, height);
-			renderer.setScissor(x, y, width, height);
-
-			//Preview selected camera
-			if(Editor.selectedObjects[0] instanceof PerspectiveCamera || Editor.selectedObjects[0] instanceof OrthographicCamera)
-			{
-				var camera = Editor.selectedObjects[0];
-				camera.aspect = width / height;
-				camera.updateProjectionMatrix();
-				camera.resize(width, height);
-
-				renderer.clear();
-
-				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				
-				camera.render(renderer, scene);
-			}
-			//Cube camera
-			else if(Editor.selectedObjects[0] instanceof CubeCamera)
-			{
-				var cameras = Editor.selectedObjects[0].cameras;
-
-				function renderCamera(index, x, y, w, h)
-				{
-					renderer.setViewport(x, y, w, h);
-					renderer.setScissor(x, y, w, h);
-					cameras[index].updateMatrixWorld();
-					cameras[index].render(renderer, scene);
-				}
-
-				var size = height/3;
-				
-				x += width - size * 4;
-				
-				renderCamera(CubeTexture.LEFT, x, y + size, size, size);
-				renderCamera(CubeTexture.FRONT, x + size, y + size, size, size);
-				renderCamera(CubeTexture.RIGHT, x + size * 2, y + size, size, size);
-				renderCamera(CubeTexture.BACK, x + size * 3, y + size, size, size);
-				renderCamera(CubeTexture.TOP, x + size, y + size * 2, size, size);
-				renderCamera(CubeTexture.BOTTOM, x + size, y, size, size);
-			}
-			//Preview all cameras in use
-			else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
-			{
-				renderer.clear();
-
-				for(var i = 0; i < scene.cameras.length; i++)
-				{
-					var camera = scene.cameras[i];
-					camera.aspect = width / height;
-					camera.updateProjectionMatrix();
-					camera.resize(width, height);
-
-					if(camera.clearColor)
-					{
-						renderer.clearColor();
-					}
-					if(camera.clearDepth)
-					{
-						renderer.clearDepth();
-					}
-
-					renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-					renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-					
-					camera.render(renderer, scene);
-				}
-			}
-		}
+		//Clear depth
+		renderer.autoClearDepth = true;
 
 		//Draw camera cube
 		if(Settings.editor.cameraRotationCube)
@@ -1097,6 +1016,84 @@ SceneEditor.prototype.render = function()
 
 			this.orientation.updateRotation(this.camera);
 			this.orientation.render(renderer);
+		}
+
+		//Camera preview
+		if(Settings.editor.cameraPreviewEnabled)
+		{
+			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
+			var height = Settings.editor.cameraPreviewPercentage * this.canvas.height;
+			var scene = this.scene;
+			
+			var position = Settings.editor.cameraPreviewPosition;
+			var x = (position === Settings.BOTTOM_RIGHT || position === Settings.TOP_RIGHT) ? this.canvas.width - width - 10 : 10;
+			var y = (position === Settings.BOTTOM_RIGHT || position === Settings.BOTTOM_LEFT) ? this.canvas.height - height - 10 : 10;
+
+			renderer.setScissorTest(true);
+			renderer.setViewport(x, y, width, height);
+			renderer.setScissor(x, y, width, height);
+
+			//Preview selected camera
+			if(Editor.selectedObjects[0] instanceof PerspectiveCamera || Editor.selectedObjects[0] instanceof OrthographicCamera)
+			{
+				var camera = Editor.selectedObjects[0];
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+				camera.resize(width, height);
+
+				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+				renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+				
+				camera.render(renderer, scene);
+			}
+			//Cube camera
+			else if(Editor.selectedObjects[0] instanceof CubeCamera)
+			{
+				var cameras = Editor.selectedObjects[0].cameras;
+
+				function renderCamera(index, x, y, w, h)
+				{
+					renderer.setViewport(x, y, w, h);
+					renderer.setScissor(x, y, w, h);
+					cameras[index].updateMatrixWorld();
+					cameras[index].render(renderer, scene);
+				}
+
+				var size = height/3;
+				
+				x += width - size * 4;
+				
+				renderCamera(CubeTexture.LEFT, x, y + size, size, size);
+				renderCamera(CubeTexture.FRONT, x + size, y + size, size, size);
+				renderCamera(CubeTexture.RIGHT, x + size * 2, y + size, size, size);
+				renderCamera(CubeTexture.BACK, x + size * 3, y + size, size, size);
+				renderCamera(CubeTexture.TOP, x + size, y + size * 2, size, size);
+				renderCamera(CubeTexture.BOTTOM, x + size, y, size, size);
+			}
+			//Preview all cameras in use
+			else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
+			{
+				//Clear before starting rendering
+				renderer.clear();
+
+				//Render all cameras
+				for(var i = 0; i < scene.cameras.length; i++)
+				{
+					var camera = scene.cameras[i];
+					camera.aspect = width / height;
+					camera.updateProjectionMatrix();
+					camera.resize(width, height);
+
+					renderer.autoClearColor = camera.clearColor;
+					renderer.autoClearDepth = camera.clearDepth;
+					renderer.autoClearStencil = camera.clearStencil;
+
+					renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					
+					camera.render(renderer, scene);
+				}
+			}
 		}
 
 		//Clear scissor configuration
@@ -1579,23 +1576,10 @@ SceneEditor.prototype.disposeRunningProgram = function()
 //Update scene editor interface
 SceneEditor.prototype.updateInterface = function()
 {
-	//Set visibilty
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-
-		if(Settings.general.showStats)
-		{
-			this.stats.dom.style.visibility = "visible";
-		}
-		else
-		{
-			this.stats.dom.style.visibility = "hidden";
-		}
+		//Stats
+		this.stats.dom.style.visibility = Settings.general.showStats ? "visible" : "hidden";
 
 		//Fullscreen button
 		this.fullscreenButton.position.x = this.position.x + this.size.x - this.fullscreenButton.size.x - 5;
@@ -1623,6 +1607,13 @@ SceneEditor.prototype.updateInterface = function()
 
 		//Renderer
 		this.resizeCamera();
+
+		//Element
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
