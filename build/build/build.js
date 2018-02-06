@@ -118,7 +118,7 @@ function formatNumber(number)
 function addTimestamp(keyword, code)
 {
 	var date = new Date();
-	var timestamp = (1900 + date.getYear()) + formatNumber(date.getMonth()) + formatNumber(date.getDay()) + formatNumber(date.getHours()) + formatNumber(date.getMinutes());
+	var timestamp = date.getFullYear() + formatNumber(date.getMonth() + 1) + formatNumber(date.getDate()) + formatNumber(date.getHours()) + formatNumber(date.getMinutes());
 
 	return code.replace(keyword, timestamp);
 }
