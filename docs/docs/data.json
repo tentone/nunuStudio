@@ -7115,7 +7115,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 106,
+            "line": 107,
             "description": "Used to set camera to resize horizontally",
             "itemtype": "attribute",
             "name": "RESIZE_HORIZONTAL",
@@ -7125,7 +7125,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 113,
+            "line": 114,
             "description": "Used to set camera to resize vertically.",
             "itemtype": "attribute",
             "name": "RESIZE_VERTICAL",
@@ -7135,7 +7135,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 121,
+            "line": 122,
             "description": "Render a scene using this camera and the internal EffectComposer.",
             "itemtype": "method",
             "name": "render",
@@ -7156,7 +7156,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 133,
+            "line": 134,
             "description": "Resize this camera, should be called every time after resizing the screen.",
             "itemtype": "method",
             "name": "resize",
@@ -7177,7 +7177,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 150,
+            "line": 151,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -7186,7 +7186,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 166,
+            "line": 167,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -7195,7 +7195,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 194,
+            "line": 195,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7301,7 +7301,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 100,
+            "line": 101,
             "description": "Render a scene using this camera and the internal EffectComposer.",
             "itemtype": "method",
             "name": "render",
@@ -7322,7 +7322,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 112,
+            "line": 113,
             "description": "Resize this camera, should be called every time after resizing the screen.",
             "itemtype": "method",
             "name": "resize",
@@ -7343,7 +7343,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 129,
+            "line": 130,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -7352,7 +7352,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 145,
+            "line": 146,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -7361,7 +7361,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 167,
+            "line": 168,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8865,6 +8865,15 @@
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 110,
+            "description": "Reload internal material and geometry.\n\nMay be required after changing material related parameters.",
+            "itemtype": "method",
+            "name": "reload",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 133,
             "description": "Particle emitter state is automatically updated before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -8873,7 +8882,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 120,
+            "line": 143,
             "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
@@ -8882,19 +8891,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 134,
-            "description": "Particle emitter cannot be detected by raycaster.\n\nThe raycast method allways returns null.",
-            "itemtype": "method",
-            "name": "raycast",
-            "return": {
-                "description": "Null."
-            },
-            "class": "ParticleEmitter",
-            "module": "Particles"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 147,
+            "line": 157,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9910,7 +9907,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 167,
+            "line": 162,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -9930,7 +9927,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 199,
+            "line": 194,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -9946,7 +9943,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 211,
+            "line": 206,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -9955,7 +9952,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 226,
+            "line": 221,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -9971,7 +9968,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 241,
+            "line": 236,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -9987,7 +9984,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 265,
+            "line": 260,
             "description": "Serialize scene object as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
