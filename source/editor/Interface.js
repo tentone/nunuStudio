@@ -332,6 +332,7 @@ Interface.initialize = function()
 	{
 		var particle = new ParticleEmitter()
 		particle.texture = Editor.defaultTextureParticle;
+		particle.reload();
 		Editor.addToScene(particle);
 	}, "Particle Emitter");
 
