@@ -842,6 +842,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.clearDepth = data.clearDepth;
 			}
+			if(data.clearStencil !== undefined)
+			{
+				object.clearStencil = data.clearStencil;
+			}
 			if(data.order !== undefined)
 			{
 				object.order = data.order;
@@ -870,6 +874,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			if(data.clearDepth !== undefined)
 			{
 				object.clearDepth = data.clearDepth;
+			}
+			if(data.clearStencil !== undefined)
+			{
+				object.clearStencil = data.clearStencil;
 			}
 			if(data.order !== undefined)
 			{
