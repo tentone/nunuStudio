@@ -178,6 +178,7 @@ PerspectiveCamera.prototype.toJSON = function(meta)
 
 	data.object.clearColor = this.clearColor;
 	data.object.clearDepth = this.clearDepth;
+	data.object.clearStencil = this.clearStencil;
 	data.object.viewport = this.viewport.toArray();
 	data.object.offset = this.offset.toArray();
 	data.object.order = this.order;
