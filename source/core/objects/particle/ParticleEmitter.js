@@ -107,30 +107,27 @@ ParticleEmitter.defaultGroup =
 	hasPerspective: true
 };
 
+/**
+ * Reload internal material and geometry.
+ *
+ * May be required after changing material related parameters.
+ * 
+ * @method reload
+ */
 ParticleEmitter.prototype.reload = function()
 {
+	this.dispose();
+
 	var children = this.children;
 	this.children = [];
 	
 	var particle = new ObjectLoader().parse(this.toJSON());
 
-	this.group.dispose();
+	this.children = children;
 	this.group = particle.group;
 	this.emitter = particle.emitter;
-	this.children = children;
 	this.geometry = this.group.geometry;
 	this.material = this.group.material;
-
-	/*this.group.removeEmitter(this.emitter);
-	this.group.addEmitter(this.emitter);
-
-	this.group._resetBufferRanges();
-	this.group._updateDefines();
-	this.group._applyAttributesToGeometry();
-	this.group._updateDefines(this.emitter);
-
-	this.material = this.group.material;
-	this.geometry = this.group.geometry;*/
 };
 
 /**
