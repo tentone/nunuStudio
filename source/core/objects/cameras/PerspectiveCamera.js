@@ -85,6 +85,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.viewport = new THREE.Vector2(1.0, 1.0);
 	this.clearColor = false;
 	this.clearDepth = false;
+	this.clearStencil = false;
 	this.order = 0;
 
 	//Render pass

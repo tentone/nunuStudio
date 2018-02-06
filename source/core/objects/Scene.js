@@ -140,7 +140,8 @@ Scene.prototype.render = function(renderer)
 	var y = renderer.domElement.height;
 
 	renderer.setScissorTest(true);
-
+	renderer.clear();
+	
 	for(var i = 0; i < this.cameras.length; i++)
 	{	
 		var camera = this.cameras[i];
@@ -148,15 +149,9 @@ Scene.prototype.render = function(renderer)
 		renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
 		renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
 
-		if(camera.clearColor)
-		{
-			renderer.clearColor();
-		}
-
-		if(camera.clearDepth)
-		{
-			renderer.clearDepth();
-		}
+		renderer.autoClearColor = camera.clearColor;
+		renderer.autoClearDepth = camera.clearDepth;
+		renderer.autoClearStencil = camera.clearStencil;
 
 		camera.render(renderer, this);
 	}
