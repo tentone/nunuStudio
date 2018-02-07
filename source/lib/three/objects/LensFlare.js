@@ -5,12 +5,9 @@
 
 THREE.LensFlare = function () {
 
-	THREE.Mesh.call( this );
+	THREE.Mesh.call( this, THREE.LensFlare.Geometry, THREE.LensFlare.Material );
 
 	this.type = 'LensFlare';
-
-	this.renderOrder = Infinity; // see #12883
-	this.material.transparent = true;
 	this.frustumCulled = false;
 
 	//
@@ -374,5 +371,11 @@ THREE.LensFlare.Geometry = ( function () {
 	geometry.addAttribute( 'uv', new THREE.InterleavedBufferAttribute( interleavedBuffer, 2, 3, false ) );
 
 	return geometry;
+
+} )();
+
+THREE.LensFlare.Material = ( function () {
+
+	return new THREE.MeshBasicMaterial( { opacity: 0, transparent: true } );
 
 } )();
