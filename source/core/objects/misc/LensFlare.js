@@ -187,11 +187,9 @@ LensFlare.prototype = Object.create(THREE.Mesh.prototype);
  * @param {Texture} texture Texture to be used forthe new layer.
  * @param {Number} size Size in pixels (-1 = use texture.width)
  * @param {Number} distance Distance (0-1) from light source (0=at light source)
- * @param {Number} blending Blending mode to be used.
  * @param {Color} color Texture color
- * @param {Number} opacity Texture opacity
  */
-LensFlare.prototype.addFlare = function(texture, size, distance, color,)
+LensFlare.prototype.addFlare = function(texture, size, distance, color)
 {
 	if(size === undefined)
 	{
