@@ -363,16 +363,16 @@ Interface.initialize = function()
 	//Lens flare
 	addEffects.addOption(Editor.filePath + "icons/misc/flare.png", function()
 	{
-		var lensFlare = new LensFlare(Editor.defaultTextureLensFlare[0], 700, 0.0, THREE.AdditiveBlending, new THREE.Color(0xFFFFFF));
+		var lensFlare = new LensFlare();
 
-		lensFlare.addFlare(Editor.defaultTextureLensFlare[2], 512, 0.0, THREE.AdditiveBlending);
-		lensFlare.addFlare(Editor.defaultTextureLensFlare[2], 512, 0.0, THREE.AdditiveBlending);
-		lensFlare.addFlare(Editor.defaultTextureLensFlare[2], 512, 0.0, THREE.AdditiveBlending);
-
-		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 60, 0.6, THREE.AdditiveBlending);
-		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 70, 0.7, THREE.AdditiveBlending);
-		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 120, 0.9, THREE.AdditiveBlending);
-		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 70, 1.0, THREE.AdditiveBlending);
+		lensFlare.addFlare(Editor.defaultTextureLensFlare[0], 700, 0.0);
+		lensFlare.addFlare(Editor.defaultTextureLensFlare[2], 512, 0.0);
+		lensFlare.addFlare(Editor.defaultTextureLensFlare[2], 512, 0.0);
+		lensFlare.addFlare(Editor.defaultTextureLensFlare[2], 512, 0.0);
+		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 60, 0.6);
+		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 70, 0.7);
+		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 120, 0.9);
+		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 70, 1.0);
 
 		Editor.addToScene(lensFlare);
 	}, "Lens flare");

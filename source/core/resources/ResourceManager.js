@@ -115,7 +115,7 @@ ResourceManager.updateResources = function(program)
 		}
 
 		//Material/textures
-		if(child.material !== undefined && !(child instanceof ParticleEmitter || child instanceof Sky || child instanceof SpineAnimation))
+		if(child.material !== undefined && !(child instanceof LensFlare || child instanceof ParticleEmitter || child instanceof Sky || child instanceof SpineAnimation))
 		{
 			if(child.material instanceof THREE.Material)
 			{
@@ -164,9 +164,9 @@ ResourceManager.updateResources = function(program)
 		}
 		if(child instanceof LensFlare)
 		{
-			for(var i = 0; i < child.lensFlares.length; i++)
+			for(var i = 0; i < child.elements.length; i++)
 			{
-				addTexture(child.lensFlares[i].texture);
+				addTexture(child.elements[i].texture);
 			}
 		}
 
