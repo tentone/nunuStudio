@@ -178,7 +178,7 @@ function LensFlare()
 	};
 }
 
-LensFlare.prototype = Object.create(THREE.Lensflare.prototype);
+LensFlare.prototype = Object.create(THREE.Mesh.prototype);
 
 /**
  * Add texture to the lensFlare object.
