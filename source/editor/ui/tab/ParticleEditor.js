@@ -31,13 +31,9 @@ function ParticleEditor(parent, closeable, container, index)
 	
 	//Particle preview
 	this.scene = new THREE.Scene();
-	this.scene.add(new AmbientLight(0xffffff));
-	var grid = new THREE.GridHelper(50, 50, 0x888888);
-	grid.material.depthWrite = false;
-	this.scene.add(grid);
-	var axis = new THREE.AxesHelper(50);
-	axis.material.depthWrite = false;
-	this.scene.add(axis);
+	this.scene.matrixAutoUpdate = false;
+	this.scene.add(new THREE.GridHelper(50, 50, 0x888888));
+	this.scene.add(new THREE.AxesHelper(50));
 
 	//Particle
 	this.particle = null;
@@ -47,6 +43,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.cameraRotation = new THREE.Vector2(0, 0.5);
 	this.cameraDistance = 5;
 	this.updateCamera();
+	this.scene.add(this.camera);
 
 	//Form
 	this.form = new Form(this.main.divB);
@@ -612,6 +609,8 @@ ParticleEditor.prototype.update = function()
 	
 	if(this.renderer !== null)
 	{
+		this.particle.matrixWorld.getInverse(this.scene.matrixWorld, false);
+
 		//Render grid and axis
 		this.renderer.autoClearColor = true;
 		this.renderer.autoClearDepth = true;
