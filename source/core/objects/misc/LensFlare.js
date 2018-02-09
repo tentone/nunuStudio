@@ -17,145 +17,203 @@
  * @author alteredq / http://alteredqualia.com/
  * @author tentone
  */
-function LensFlare(texture, size, distance, blending, color)
+function LensFlare()
 {
-	THREE.Object3D.call( this );
+	THREE.Mesh.call(this, THREE.Lensflare.Geometry, new THREE.MeshBasicMaterial({opacity: 0, transparent: true}));
 
-	this.type = "LensFlare";
 	this.name = "lensflare";
+	this.type = "LensFlare";
+	this.frustumCulled = false;
+	this.elements = [];
 
-	this.lensFlares = [];
+	var positionScreen = new THREE.Vector3();
 
-	this.positionScreen = new Vector3();
-	this.customUpdateCallback = undefined;
+	// textures
+	var tempMap = new THREE.DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, THREE.RGBFormat);
+	tempMap.minFilter = THREE.NearestFilter;
+	tempMap.magFilter = THREE.NearestFilter;
+	tempMap.wrapS = THREE.ClampToEdgeWrapping;
+	tempMap.wrapT = THREE.ClampToEdgeWrapping;
+	tempMap.needsUpdate = true;
 
-	if(texture !== undefined)
+	var occlusionMap = new THREE.DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, THREE.RGBFormat);
+	occlusionMap.minFilter = THREE.NearestFilter;
+	occlusionMap.magFilter = THREE.NearestFilter;
+	occlusionMap.wrapS = THREE.ClampToEdgeWrapping;
+	occlusionMap.wrapT = THREE.ClampToEdgeWrapping;
+	occlusionMap.needsUpdate = true;
+
+	// material
+	var geometry = THREE.Lensflare.Geometry;
+	var shader = THREE.Lensflare.Shader;
+	var material1a = new THREE.RawShaderMaterial(
 	{
-		this.addFlare(texture, size, distance, blending, color);
-	}
+		uniforms:
+		{
+			"scale": {value: null},
+			"screenPosition": {value: null}
+		},
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader1,
+		depthTest: true,
+		depthWrite: false,
+		transparent: false
+	});
+
+	var material1b = new THREE.RawShaderMaterial({
+		uniforms: {
+			"map": {value: tempMap},
+			"scale": {value: null},
+			"screenPosition": {value: null}
+		},
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader2,
+		depthTest: false,
+		depthWrite: false,
+		transparent: false
+	});
+
+	// the following object is used forocclusionMap generation
+	var mesh1 = new THREE.Mesh(geometry, material1a);
+	var shader = THREE.LensflareElement.Shader;
+	var material2 = new THREE.RawShaderMaterial(
+	{
+		uniforms: {
+			"map": {value: null},
+			"occlusionMap": {value: occlusionMap},
+			"color": {value: new THREE.Color(0xffffff)},
+			"scale": {value: new THREE.Vector2()},
+			"screenPosition": {value: new THREE.Vector3()}
+		},
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader,
+		blending: THREE.AdditiveBlending,
+		transparent: true,
+		depthWrite: false
+	});
+
+	var mesh2 = new THREE.Mesh(geometry, material2);
+	var scale = new THREE.Vector2();
+	var screenPositionPixels = new THREE.Vector2();
+	var validArea = new THREE.Box2();
+	var viewport = new THREE.Vector4();
+
+	this.onBeforeRender = function (renderer, scene, camera)
+	{
+		viewport.copy(renderer.getCurrentViewport());
+
+		var invAspect = viewport.w / viewport.z;
+		var halfViewportWidth = viewport.z / 2.0;
+		var halfViewportHeight = viewport.w / 2.0;
+
+		var size = 16 / viewport.w;
+		scale.set(size * invAspect, size);
+
+		validArea.min.set(viewport.x, viewport.y);
+		validArea.max.set(viewport.x + (viewport.z - 16), viewport.y + (viewport.w - 16));
+
+		// calculate position in screen space
+		positionScreen.setFromMatrixPosition(this.matrixWorld);
+		positionScreen.applyMatrix4(camera.matrixWorldInverse);
+		positionScreen.applyMatrix4(camera.projectionMatrix);
+
+		// horizontal and vertical coordinate of the lower left corner of the pixels to copy
+		screenPositionPixels.x = viewport.x + (positionScreen.x * halfViewportWidth) + halfViewportWidth - 8;
+		screenPositionPixels.y = viewport.y + (positionScreen.y * halfViewportHeight) + halfViewportHeight - 8;
+
+		// screen cull
+		if(validArea.containsPoint(screenPositionPixels))
+		{
+			// save current RGB to temp texture
+			renderer.copyFramebufferToTexture(screenPositionPixels, tempMap);
+
+			// render pink quad
+			var uniforms = material1a.uniforms;
+			uniforms.scale.value = scale;
+			uniforms.screenPosition.value = positionScreen;
+
+			renderer.renderBufferDirect(camera, null, geometry, material1a, mesh1, null);
+
+			// copy result to occlusionMap
+			renderer.copyFramebufferToTexture(screenPositionPixels, occlusionMap);
+
+			// restore graphics
+			var uniforms = material1b.uniforms;
+			uniforms.scale.value = scale;
+			uniforms.screenPosition.value = positionScreen;
+
+			renderer.renderBufferDirect(camera, null, geometry, material1b, mesh1, null);
+
+			var vecX = - positionScreen.x * 2;
+			var vecY = - positionScreen.y * 2;
+
+			for(var i = 0, l = this.elements.length; i < l; i ++)
+			{
+				var element = this.elements[i];
+				var uniforms = material2.uniforms;
+
+				uniforms.color.value.copy(element.color);
+				uniforms.map.value = element.texture;
+				uniforms.screenPosition.value.x = positionScreen.x + vecX * element.distance;
+				uniforms.screenPosition.value.y = positionScreen.y + vecY * element.distance;
+
+				var size = element.size / viewport.w;
+				var invAspect = viewport.w / viewport.z;
+
+				uniforms.scale.value.set(size * invAspect, size);
+
+				material2.uniformsNeedUpdate = true;
+
+				renderer.renderBufferDirect(camera, null, geometry, material2, mesh2, null);
+			}
+		}
+	};
+
+	this.dispose = function()
+	{
+		material1.dispose();
+		material2.dispose();
+		tempMap.dispose();
+		occlusionMap.dispose();
+	};
 }
 
-LensFlare.prototype = Object.create(THREE.Object3D.prototype);
-
-THREE._LensFlare = THREE.LensFlare;
-THREE.LensFlare = LensFlare;
-
-/**
- * LensFlare Flare constructor.
- *
- * A flare is composed by a texture, size, distance, blending mode, color and opacity level.
- *
- * @class LensFlare.Flare
- * @param {Texture} texture Texture to be used for the new layer.
- * @param {Number} size Size in pixels (-1 = use texture.width)
- * @param {Number} distance Distance (0-1) from light source (0=at light source)
- * @param {Number} blending Blending mode to be used.
- * @param {Color} color Texture color
- * @param {Number} opacity Texture opacity
- */
-LensFlare.Flare = function(texture, size, distance, blending, color, opacity)
-{
-	this.texture = texture;
-	this.size = size;
-	this.distance = distance;
-	this.opacity = opacity;
-	this.color = color;
-	this.blending = blending;
-
-	//Screen position (-1 => 1) z = 0 is in front z = 1 is back
-	this.x = 0;
-	this.y = 0;
-	this.z = 0;
-	this.scale = 1;
-	this.rotation = 0;
-}
-
-LensFlare.Flare.prototype.toJSON = function(meta)
-{
-	var data = {};
-	var texture = this.texture.toJSON(meta);
-
-	data.texture = texture.uuid;
-	data.size = this.size;
-	data.distance = this.distance;
-	data.opacity = this.opacity;
-	data.color = this.color;
-	data.blending = this.blending;
-
-	return data;
-};
-
-
-LensFlare.prototype.isLensFlare = true;
-
-/**
- * Copy lensflare object data to this.
- *
- * @method copy
- * @param {Object3D} source Source object.
- * @return {LensFlare} Self for chaining.
- */
-LensFlare.prototype.copy = function (source)
-{
-	THREE.Object3D.prototype.copy.call(this, source);
-
-	this.positionScreen.copy(source.positionScreen);
-	this.customUpdateCallback = source.customUpdateCallback;
-
-	for(var i = 0, l = source.lensFlares.length; i < l; i++)
-	{
-		this.lensFlares.push(source.lensFlares[i]);
-	}
-
-	return this;
-};
+LensFlare.prototype = Object.create(THREE.Lensflare.prototype);
 
 /**
  * Add texture to the lensFlare object.
  *
  * @method add
- * @param {Texture} texture Texture to be used for the new layer.
+ * @param {Texture} texture Texture to be used forthe new layer.
  * @param {Number} size Size in pixels (-1 = use texture.width)
  * @param {Number} distance Distance (0-1) from light source (0=at light source)
  * @param {Number} blending Blending mode to be used.
  * @param {Color} color Texture color
  * @param {Number} opacity Texture opacity
  */
-LensFlare.prototype.addFlare = function(texture, size, distance, blending, color, opacity)
+LensFlare.prototype.addFlare = function(texture, size, distance, color,)
 {
-	if(size === undefined){size = -1;}
-	if(distance === undefined){distance = 0;}
-	if(opacity === undefined){opacity = 1;}
-	if(color === undefined){color = new Color(0xffffff)}
-	if(blending === undefined){blending = NormalBlending;}
+	if(size === undefined)
+	{
+		size = -1;
+	}
+	if(distance === undefined)
+	{
+		distance = 0;
+	}
+	if(color === undefined)
+	{
+		color = new Color(0xffffff)
+	}
 
 	distance = Math.min(distance, Math.max(0, distance));
-
-	this.lensFlares.push(new LensFlare.Flare(texture, size, distance, blending, color, opacity));
+	
+	this.addElement(new THREE.LensflareElement(texture, size, distance, color));
 };
 
-/**
- * Update lens flares update positions on all flares based on the screen position
- * Set myLensFlare.customUpdateCallback to alter the flares in your project specific way.
- *
- * @method updateLensFlares
- */
-LensFlare.prototype.updateLensFlares = function()
+LensFlare.prototype.addElement = function(element)
 {
-	var fl = this.lensFlares.length;
-	var vecX = - this.positionScreen.x * 2;
-	var vecY = - this.positionScreen.y * 2;
-
-	for(var f = 0; f < fl; f ++)
-	{
-		var flare = this.lensFlares[f];
-
-		flare.x = this.positionScreen.x + vecX * flare.distance;
-		flare.y = this.positionScreen.y + vecY * flare.distance;
-
-		flare.wantedRotation = flare.x * Math.PI * 0.25;
-		flare.rotation += (flare.wantedRotation - flare.rotation) * 0.25;
-	}
+	this.elements.push(element);
 };
 
 /**
@@ -168,27 +226,22 @@ LensFlare.prototype.updateLensFlares = function()
 LensFlare.prototype.toJSON = function(meta)
 {
 	var self = this;
-	var lensFlares = [];
+	var elements = [];
 
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
-		for(var i = 0; i < self.lensFlares.length; i++)
+		for(var i = 0; i < self.elements.length; i++)
 		{
 			var flare = {};
-			var texture = self.lensFlares[i].texture.toJSON(meta);
-
-			flare.texture = texture.uuid;
-			flare.size = self.lensFlares[i].size;
-			flare.distance = self.lensFlares[i].distance;
-			flare.opacity = self.lensFlares[i].opacity;
-			flare.color = self.lensFlares[i].color.getHex();
-			flare.blending = self.lensFlares[i].blending;
-
-			lensFlares.push(flare);
+			flare.texture = self.elements[i].texture.toJSON(meta).uuid;
+			flare.size = self.elements[i].size;
+			flare.distance = self.elements[i].distance;
+			flare.color = self.elements[i].color.getHex();
+			elements.push(flare);
 		}
 	});
 
-	data.object.lensFlares = lensFlares;
+	data.object.elements = elements;
 
 	return data;
 };
