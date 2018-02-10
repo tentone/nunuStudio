@@ -15,10 +15,10 @@ function AnimationClipTrack(editor, animation)
 	button.size.set(0, 30);
 	button.updateInterface();
 
-	var block = new AnimationOptions(this.editor.tracks, this.editor, animation);
-	block.position.set(0, this.editor.timebarHeight);
-	block.size.set(width, 30);
-	block.updateInterface();
+	this.options = new AnimationOptions(this.editor.tracks, this.editor, animation);
+	this.options.position.set(0, this.editor.timebarHeight);
+	this.options.size.set(width, 30);
+	this.options.updateInterface();
 
 	this.editor.timebarHeight += 30;
 
