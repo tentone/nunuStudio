@@ -131,15 +131,25 @@ function AnimationTab(parent, closeable, container, index)
 	//Timeline
 	this.timeline = document.createElement("div");
 	this.timeline.style.position = "absolute";
-	this.timeline.style.overflow = "auto";
+	this.timeline.style.overflowY = "auto";
+	this.timeline.style.overflowX = "hidden";
 	this.timeline.style.top = "20px";
 	this.element.appendChild(this.timeline);
 
-	//Track information
+	//Iformation
 	this.info = document.createElement("div");
 	this.info.style.position = "absolute";
+	this.info.style.overflow = "auto";
 	this.info.style.backgroundColor = Editor.theme.barColor;
 	this.timeline.appendChild(this.info);
+
+	//Tracks
+	this.tracks = document.createElement("div");
+	this.tracks.style.position = "absolute";
+	this.tracks.style.overflowX = "auto";
+	this.tracks.style.overflowY = "visible";
+	this.tracks.style.backgroundColor = Editor.theme.panelColor;
+	this.timeline.appendChild(this.tracks);
 
 	//Temporary variables for mouse movement
 	var mouse = 0, initial = 0;
@@ -171,20 +181,14 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		self.tabManager.destroy();
 	});
-
-	//Tracks
-	this.tracks = document.createElement("div");
-	this.tracks.style.position = "absolute";
-	this.tracks.style.backgroundColor = Editor.theme.panelColor;
-	this.timeline.appendChild(this.tracks);
 }
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
-AnimationTab.prototype.attach = function()
+AnimationTab.prototype.attach = function(object)
 {
-	TabElement.prototype.attach.call(this);
-
+	this.object = object;
+	this.createAnimationMixer();
 	this.createTimeline();
 };
 
@@ -209,10 +213,7 @@ AnimationTab.prototype.deactivate = function()
 //Attach object to animation editor
 AnimationTab.prototype.updateSelection = function()
 {
-	this.object = Editor.selectedObjects.length > 0 ? Editor.selectedObjects[0] : null;
-	
-	this.createAnimationMixer();
-	this.createTimeline();
+	this.attach(Editor.selectedObjects.length > 0 ? Editor.selectedObjects[0] : null);
 };
 
 //Create a new animation mixer
@@ -366,20 +367,25 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
+		//Options bar
+		this.bar.style.width = this.size.x + "px";
+
+		//Timeline
 		this.timeline.style.width = this.size.x + "px";
 		this.timeline.style.height = (this.size.y - 20) + "px";
 		
-		this.bar.style.width = this.size.x + "px";
-
-		//Resizable division
+		//Information
 		this.info.style.height = this.timeline.scrollHeight + "px";
 		this.info.style.width = this.tab.position + "px";
 
+		//Tab
 		this.tab.style.height = this.timeline.scrollHeight + "px";
 		this.tab.style.left = this.info.style.width;
 		
+		//Tracks
 		this.tracks.style.left = (this.tab.position + 5) + "px";
 		this.tracks.style.width = (this.size.x - this.tab.position - 5) + "px";
+		this.tracks.style.height = "100px";
 	}
 	else
 	{
