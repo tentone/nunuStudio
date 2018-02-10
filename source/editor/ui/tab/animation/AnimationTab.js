@@ -139,7 +139,6 @@ function AnimationTab(parent, closeable, container, index)
 	//Iformation
 	this.info = document.createElement("div");
 	this.info.style.position = "absolute";
-	this.info.style.overflow = "auto";
 	this.info.style.backgroundColor = Editor.theme.barColor;
 	this.timeline.appendChild(this.info);
 
@@ -147,7 +146,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.tracks = document.createElement("div");
 	this.tracks.style.position = "absolute";
 	this.tracks.style.overflowX = "auto";
-	this.tracks.style.overflowY = "visible";
+	this.tracks.style.overflowY = "hidden";
 	this.tracks.style.backgroundColor = Editor.theme.panelColor;
 	this.timeline.appendChild(this.tracks);
 
@@ -383,9 +382,10 @@ AnimationTab.prototype.updateInterface = function()
 		this.tab.style.left = this.info.style.width;
 		
 		//Tracks
+		this.tracks.style.top = "0px";
 		this.tracks.style.left = (this.tab.position + 5) + "px";
 		this.tracks.style.width = (this.size.x - this.tab.position - 5) + "px";
-		this.tracks.style.height = "100px";
+		this.tracks.style.height = (this.timeline.scrollHeight) + "px";
 	}
 	else
 	{
