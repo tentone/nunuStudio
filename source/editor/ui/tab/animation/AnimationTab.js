@@ -181,6 +181,13 @@ function AnimationTab(parent, closeable, container, index)
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
+AnimationTab.prototype.attach = function()
+{
+	TabElement.prototype.attach.call(this);
+
+	this.createTimeline();
+};
+
 AnimationTab.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
@@ -363,12 +370,6 @@ AnimationTab.prototype.updateInterface = function()
 		this.timeline.style.height = (this.size.y - 20) + "px";
 		
 		this.bar.style.width = this.size.x + "px";
-
-		/*for(var i = 0; i < this.animations.length; i++)
-		{
-			this.animations[i].options.size.set(this.timeline.scrollWidth, 30);
-			this.animations[i].options.updateInterface();
-		}*/
 
 		//Resizable division
 		this.info.style.height = this.timeline.scrollHeight + "px";
