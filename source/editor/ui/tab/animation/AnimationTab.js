@@ -364,7 +364,11 @@ AnimationTab.prototype.updateInterface = function()
 		
 		this.bar.style.width = this.size.x + "px";
 
-		console.log(this.timeline.scrollHeight);
+		/*for(var i = 0; i < this.animations.length; i++)
+		{
+			this.animations[i].options.size.set(this.timeline.scrollWidth, 30);
+			this.animations[i].options.updateInterface();
+		}*/
 
 		//Resizable division
 		this.info.style.height = this.timeline.scrollHeight + "px";
