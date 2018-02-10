@@ -131,8 +131,7 @@ function AnimationTab(parent, closeable, container, index)
 	//Timeline
 	this.timeline = document.createElement("div");
 	this.timeline.style.position = "absolute";
-	this.timeline.style.overflowY = "auto";
-	this.timeline.style.overflowX = "hidden";
+	this.timeline.style.overflow = "auto";
 	this.timeline.style.top = "20px";
 	this.element.appendChild(this.timeline);
 
@@ -145,8 +144,6 @@ function AnimationTab(parent, closeable, container, index)
 	//Tracks
 	this.tracks = document.createElement("div");
 	this.tracks.style.position = "absolute";
-	this.tracks.style.overflowX = "auto";
-	this.tracks.style.overflowY = "hidden";
 	this.tracks.style.backgroundColor = Editor.theme.panelColor;
 	this.timeline.appendChild(this.tracks);
 

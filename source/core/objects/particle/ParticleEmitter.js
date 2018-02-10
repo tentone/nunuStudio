@@ -44,18 +44,19 @@ function ParticleEmitter(group, emitter)
 	this.name = "particle";
 	this.frustumCulled = false;
 
-	var group = this.group;
+	var self = this;
 	Object.defineProperties(this,
 	{
 		texture:
 		{
 			get: function()
 			{
-				return group.texture;
+				return self.group.texture;
 			},
 			set: function(texture)
 			{
-				group.texture = texture;
+				self.group.texture = texture;
+				self.group.uniforms.texture.value = texture;
 			}
 		}
 	});
@@ -135,8 +136,10 @@ ParticleEmitter.prototype.reload = function()
  * 
  * @method onBeforeRender
  */
-ParticleEmitter.prototype.onBeforeRender = function()
+ParticleEmitter.prototype.onBeforeRender = function(renderer, scene, camera, renderTarget)
 {
+	this.group.uniforms.scale.value = renderer.getSize().height;
+
 	this.group.tick(this.clock.getDelta());
 };
 
