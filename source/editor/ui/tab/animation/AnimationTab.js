@@ -72,7 +72,7 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(self.mixer == null)
 		{
-			alert("No animation found!");
+			Editor.alert("No animation found!");
 			return;
 		}
 
@@ -97,7 +97,7 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(self.mixer == null)
 		{
-			alert("No animation playing!");
+			Editor.alert("No animation playing!");
 			return;
 		}
 

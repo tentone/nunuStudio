@@ -73,12 +73,16 @@ function TextureChooser(parent)
 			//Image
 			else if(value instanceof Image)
 			{
-
+				self.setTexture(new Texture(value));
 			}
 			//Video
 			else if(value instanceof Video)
 			{
-
+				self.setTexture(new VideoTexture(value));
+			}
+			else
+			{
+				Editor.alert("Only textures, videos and images accepted");
 			}
 		}
 

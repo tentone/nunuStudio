@@ -872,7 +872,7 @@ SceneEditor.prototype.update = function()
 		catch(e)
 		{
 			this.setState(SceneEditor.EDITING);
-			alert("Error testing program\nState update caused an error");
+			Editor.alert("Error testing program\nState update caused an error");
 			console.error("nunuStudio: Error updating program state", e);
 		}
 		
@@ -1109,7 +1109,7 @@ SceneEditor.prototype.render = function()
 		catch(e)
 		{
 			this.setState(SceneEditor.EDITING);
-			alert("Error testing program\nRender caused an error");
+			Editor.alert("Error testing program\nRender caused an error");
 			console.error("nunuStudio: Error rendering program", e);
 		}
 	}
@@ -1398,7 +1398,7 @@ SceneEditor.prototype.setState = function(state)
 		catch(e)
 		{
 			this.setState(SceneEditor.EDITING);
-			alert("Error testing program\nInitialization caused an error");
+			Editor.alert("Error testing program\nInitialization caused an error");
 			console.error("nunuStudio: Error initializing program", e);
 		}
 		//Update interface

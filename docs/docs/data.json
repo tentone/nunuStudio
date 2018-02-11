@@ -8686,7 +8686,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
-            "line": 183,
+            "line": 188,
             "description": "Add texture to the lensFlare object.",
             "itemtype": "method",
             "name": "add",
@@ -8717,7 +8717,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
-            "line": 217,
+            "line": 222,
             "description": "Serialize lensflare data to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8795,7 +8795,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 143,
+            "line": 145,
             "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
@@ -8804,7 +8804,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 157,
+            "line": 159,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",

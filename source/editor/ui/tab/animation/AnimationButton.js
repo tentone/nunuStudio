@@ -54,7 +54,7 @@ function AnimationButton(parent, editor, animation)
 
 			if(value === object)
 			{
-				alert("Attribute not found");
+				Editor.alert("Attribute not found");
 			}
 
 			if(value instanceof THREE.Vector3)
@@ -90,7 +90,7 @@ function AnimationButton(parent, editor, animation)
 			else
 			{
 				console.warn("nunuStudio: Attribute it no animable", value);
-				alert("Attribute is not animable");
+				Editor.alert("Attribute is not animable");
 				return;
 			}
 
@@ -113,7 +113,7 @@ function AnimationButton(parent, editor, animation)
 			}
 			else
 			{
-				alert("Unable to delete animation");
+				Editor.alert("Unable to delete animation");
 			}
 
 			self.editor.createTimeline();

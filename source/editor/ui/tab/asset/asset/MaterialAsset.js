@@ -185,7 +185,7 @@ function MaterialAsset(parent)
 				}
 				catch(e)
 				{
-					alert("Material duplication failed\n" + e.stack);
+					Editor.alert("Material duplication failed\n" + e.stack);
 				}
 			}
 		});

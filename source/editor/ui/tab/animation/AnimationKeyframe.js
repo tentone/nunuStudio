@@ -36,7 +36,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 
 			if(self.track.times.length === 1)
 			{
-				alert("Track needs to have at least one keyframe!");
+				Editor.alert("Track needs to have at least one keyframe!");
 				return;
 			}
 			
@@ -75,7 +75,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 
 			if(isNaN(time))
 			{
-				alert("Invalid time value!");
+				Editor.alert("Invalid time value!");
 				return;
 			}
 

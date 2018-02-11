@@ -56,7 +56,6 @@ function ParticleEmitter(group, emitter)
 			set: function(texture)
 			{
 				self.group.texture = texture;
-				self.group.uniforms.texture.value = texture;
 			}
 		}
 	});

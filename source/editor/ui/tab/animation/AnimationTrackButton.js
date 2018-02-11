@@ -54,7 +54,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 			}
 			else
 			{
-				alert("Unable to delete track");
+				Editor.alert("Unable to delete track");
 			}
 
 			self.editor.createTimeline();
@@ -65,7 +65,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 		{
 			track.optimize();
 
-			alert("Track optimized");
+			Editor.alert("Track optimized");
 
 			self.trackTimeline.updateKeyframes();
 			self.editor.createAnimationMixer();
@@ -77,7 +77,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 
 			if(isNaN(time))
 			{
-				alert("Invalid time value");
+				Editor.alert("Invalid time value");
 				return;
 			}
 
@@ -94,7 +94,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 
 			if(isNaN(start) || isNaN(end))
 			{
-				alert("Invalid time value");
+				Editor.alert("Invalid time value");
 				return;
 			}
 
