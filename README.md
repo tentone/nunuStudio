@@ -168,6 +168,14 @@
 	- Editor infinite grid
 	- Improved history system in the editor
 	- Support for mesh modifiers
+	- Support for GPU compressed textures
+	- Improved texture preview
+	- Image and Video can be managed as resources
+	- Animation timeline editor
+	- Support for external libs in scripts
+	- Support for text and code resources
+	- Fixed particle scalling issues
+	- File export API
 	
 
 ### Tech
