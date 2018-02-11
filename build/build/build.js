@@ -85,11 +85,6 @@ require("child_process").execSync(command, function(error, stdout, stderr)
 	console.log("");
 });
 
-//console.log("----------------------------------------------------------------------");
-//console.log("                       Packaging nunuStudio");
-//console.log("----------------------------------------------------------------------");
-//console.log(" Not implemented");
-
 console.log("----------------------------------------------------------------------");
 console.log("                  Done! Press any key to exit");
 console.log("----------------------------------------------------------------------");

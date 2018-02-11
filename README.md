@@ -205,42 +205,17 @@ nunuStudio is built on top of a number of open source projects
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
-- To embed applications made inside nunuStudio in web pages the following code can be used
-- nunuStudio can export full page web apps with a fullscreen and vr buttons by default but the following code can be used to embed nunu applications inside other webpages
+- To embed applications made inside nunuStudio in HTML pages the following code can be used
 
-```javascript
- var app = new NunuApp();
- app.setCanvas(canvas);
- app.load("app.nsp");
- app.run();
-
- //Resize app
- function resize()
- {
- 	app.resize();
- }
-
- //On exit callback (optional)
- app.onExit(function()
- {
- 	//TODO <Exit callback>
- });
- 
- //Toggle fullscreen (optional)
- function toggleFullscreen()
- {
- 	app.toggleFullscreen();
- 	
- }
- 
- //Toggle VR mode (optional, if available)
- function toggleVR()
- {
- 	if(app.vrAvailable())
- 	{
- 		app.toggleVR();
- 	}
- }
+```html
+<html>
+	<head>
+		<script src="nunu.min.js"></script>
+	</head>
+	<body onload="NunuApp.loadApp('pong.nsp', 'canvas')">
+		<canvas width="800" height="480" id="canvas"></canvas>
+	</body>
+</html>
 ```
 
 ### License
