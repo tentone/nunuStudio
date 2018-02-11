@@ -299,7 +299,6 @@ EffectComposer.fromJSON = function(json)
 		else if(data.type === "UnrealBloom")
 		{
 			pass = new UnrealBloomPass();
-
 			pass.strength = data.strength;
 			pass.radius = data.radius;
 			pass.threshold = data.threshold;
@@ -310,10 +309,13 @@ EffectComposer.fromJSON = function(json)
 				pass.bloomTintColors[i].fromArray(data.bloomTintColors[i]);
 			}
 		}
+		else if(data.type === "Bloom")
+		{
+			pass = new BloomPass(data.strength, data.kernelSize, data.sigma, data.resolution);
+		}
 		else if(data.type === "SSAO")
 		{
 			pass = new SSAOPass();
-
 			pass.onlyAO = data.onlyAO;
 			pass.radius = data.radius;
 			pass.aoClamp = data.aoClamp;
@@ -334,7 +336,6 @@ EffectComposer.fromJSON = function(json)
 		else if(data.type === "Film")
 		{
 			pass = new FilmPass();
-
 			pass.grayscale = data.grayscale;
 			pass.noiseIntensity = data.noiseIntensity;
 			pass.scanlinesIntensity = data.scanlinesIntensity;
@@ -343,7 +344,6 @@ EffectComposer.fromJSON = function(json)
 		else if(data.type === "DotScreen")
 		{
 			pass = new DotScreenPass();
-
 			pass.center.fromArray(data.center);
 			pass.angle = data.angle;
 			pass.scale = data.scale;

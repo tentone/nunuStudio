@@ -82,6 +82,7 @@ function CameraEditor(parent, closeable, container, index)
 	addRenderPassButton("FXAA", FXAAPass);
 	addRenderPassButton("Colorify", ColorifyPass);
 	addRenderPassButton("Unreal Bloom", UnrealBloomPass);
+	addRenderPassButton("Bloom", BloomPass);
 	addRenderPassButton("Hue & Saturation", HueSaturationPass);
 	addRenderPassButton("SSAO", SSAOPass);
 	addRenderPassButton("Bokeh", BokehPass);
