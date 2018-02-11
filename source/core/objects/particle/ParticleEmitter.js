@@ -53,9 +53,9 @@ function ParticleEmitter(group, emitter)
 			{
 				return self.group.texture;
 			},
-			set: function(texture)
+			set: function(value)
 			{
-				self.group.texture = texture;
+				self.group.texture = value;
 			}
 		}
 	});
@@ -138,8 +138,8 @@ ParticleEmitter.prototype.reload = function()
 ParticleEmitter.prototype.onBeforeRender = function(renderer, scene, camera, renderTarget)
 {
 	this.group.uniforms.scale.value = renderer.getSize().height;
-
 	this.group.tick(this.clock.getDelta());
+	//this.emitter.position.value = this.position;
 };
 
 /**
