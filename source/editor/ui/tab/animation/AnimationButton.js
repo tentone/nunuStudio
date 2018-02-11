@@ -5,7 +5,8 @@ function AnimationButton(parent, editor, animation)
 	Element.call(this, parent);
 
 	this.element.style.position = "absolute";
-
+	this.element.style.backgroundColor = Editor.theme.barColor;
+	
 	this.editor = editor;
 	this.animation = animation;
 

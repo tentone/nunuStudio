@@ -138,12 +138,14 @@ function AnimationTab(parent, closeable, container, index)
 	//Iformation
 	this.info = document.createElement("div");
 	this.info.style.position = "absolute";
+	this.info.style.top = "0px";
 	this.info.style.backgroundColor = Editor.theme.barColor;
 	this.timeline.appendChild(this.info);
 
 	//Tracks
 	this.tracks = document.createElement("div");
 	this.tracks.style.position = "absolute";
+	this.tracks.style.top = "0px";
 	this.tracks.style.backgroundColor = Editor.theme.panelColor;
 	this.timeline.appendChild(this.tracks);
 
@@ -153,6 +155,7 @@ function AnimationTab(parent, closeable, container, index)
 	//Resize tab
 	this.tab = document.createElement("div");
 	this.tab.style.position = "absolute";
+	this.tab.style.top = "0px";
 	this.tab.style.width = "5px";
 	this.tab.style.backgroundColor = Editor.theme.barColor;
 	this.tab.style.cursor = "e-resize";
@@ -370,19 +373,17 @@ AnimationTab.prototype.updateInterface = function()
 		this.timeline.style.width = this.size.x + "px";
 		this.timeline.style.height = (this.size.y - 20) + "px";
 		
-		//Information
-		this.info.style.height = this.timeline.scrollHeight + "px";
-		this.info.style.width = this.tab.position + "px";
-
 		//Tab
 		this.tab.style.height = this.timeline.scrollHeight + "px";
 		this.tab.style.left = this.info.style.width;
 		
+		//Information
+		this.info.style.width = this.tab.position + "px";
+		this.info.style.height = this.tab.style.height;
+		
 		//Tracks
-		this.tracks.style.top = "0px";
+		this.tracks.style.height = this.tab.style.height;
 		this.tracks.style.left = (this.tab.position + 5) + "px";
-		this.tracks.style.width = (this.size.x - this.tab.position - 5) + "px";
-		this.tracks.style.height = (this.timeline.scrollHeight) + "px";
 	}
 	else
 	{

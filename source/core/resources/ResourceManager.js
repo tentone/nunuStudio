@@ -148,12 +148,9 @@ ResourceManager.updateResources = function(program)
 		//Geometries
 		if(child instanceof THREE.Mesh || child instanceof THREE.SkinnedMesh)
 		{
-			if(child.geometry.parameters === undefined)
+			if(program.geometries[child.geometry.uuid] === undefined)
 			{
-				if(program.geometries[child.geometry.uuid] === undefined)
-				{
-					program.geometries[child.geometry.uuid] = child.geometry;
-				}
+				program.geometries[child.geometry.uuid] = child.geometry;
 			}
 		}
 
