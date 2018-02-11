@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Template</title>  
+	<title>nunuStudio BloomPass</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -189,30 +189,42 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Template Class</h1>
+						<h1>BloomPass Class</h1>
 						<div class="box meta">
 						
-								<div class="extends">
-									Extends <a href="../classes/Resource.html" class="crosslink">Resource</a>
-								</div>
 						
 						
-									Module: <a href="../modules/Resources.html">Resources</a>
+									Module: <a href="../modules/Postprocessing.html">Postprocessing</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Template resource stores object template that can be used to create multiple objects of the same type.</p>
+							<p>Simple bloom effect pass.</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_Template" class="method item">
-									<h3 class="name"><code>Template</code></h3>
+								<div id="method_BloomPass" class="method item">
+									<h3 class="name"><code>BloomPass</code></h3>
 								
-										<span class="paren">()</span>
+										<div class="args">
+											<span class="paren">(</span><ul class="args-list inline commas">
+												<li class="arg">
+														<code>strength</code>
+												</li>
+												<li class="arg">
+														<code>kernelSize</code>
+												</li>
+												<li class="arg">
+														<code>sigma</code>
+												</li>
+												<li class="arg">
+														<code>resolution</code>
+												</li>
+											</ul><span class="paren">)</span>
+										</div>
 								
 								
 								
@@ -233,6 +245,56 @@
 										
 									</div>
 								
+										<div class="params">
+											<h4>Parameters:</h4>
+								
+											<ul class="params-list">
+												<li class="param">
+														<code class="param-name">strength</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														<p>Bloom effect strength.</p>
+								
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">kernelSize</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														<p>Bloom kernel size.</p>
+								
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">sigma</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														<p>Sigma.</p>
+								
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">resolution</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														<p>Bloom buffer resolution.</p>
+								
+													</div>
+								
+												</li>
+											</ul>
+										</div>
 								
 								
 								</div>

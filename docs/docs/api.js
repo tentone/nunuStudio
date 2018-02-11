@@ -9,6 +9,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "AudioEmitter",
         "AudioLoader",
         "Base64Utils",
+        "BloomPass",
         "BokehPass",
         "BufferUtils",
         "ByteArrayUtils",
@@ -223,7 +224,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Postprocessing",
             "name": "Postprocessing",
-            "description": "Generate a texture that represents the luminosity of the current scene, adapted over time\nto simulate the optic nerve responding to the amount of light it is receiving.\nBased on a GDC2007 presentation by Wolfgang Engel titled \"Post-Processing Pipeline\"\n\nFull-screen tone-mapping shader based on http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf\n\nclass AdaptiveToneMappingPass"
+            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf"
         },
         {
             "displayName": "Resources",

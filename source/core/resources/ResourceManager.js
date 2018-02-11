@@ -146,13 +146,13 @@ ResourceManager.updateResources = function(program)
 		}
 
 		//Geometries
-		if(child instanceof THREE.Mesh || child instanceof THREE.SkinnedMesh)
+		/*if(child instanceof THREE.Mesh || child instanceof THREE.SkinnedMesh)
 		{
 			if(program.geometries[child.geometry.uuid] === undefined)
 			{
 				program.geometries[child.geometry.uuid] = child.geometry;
 			}
-		}
+		}*/
 
 		//Textures
 		if(child.texture !== undefined)

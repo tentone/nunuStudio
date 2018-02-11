@@ -2,7 +2,7 @@
 
 include("Nunu.js");
 
-include("lib/three/three.js");
+include("lib/three/three.min.js");
 
 include("lib/three/effects/VREffect.js");
 
@@ -75,9 +75,10 @@ include("core/postprocessing/Pass.js");
 include("core/postprocessing/ShaderPass.js");
 include("core/postprocessing/EffectComposer.js");
 
+include("core/postprocessing/pass/antialiasing/FXAAPass.js");
 include("core/postprocessing/pass/RenderPass.js");
 include("core/postprocessing/pass/UnrealBloomPass.js");
-include("core/postprocessing/pass/FXAAPass.js");
+include("core/postprocessing/pass/BloomPass.js");
 include("core/postprocessing/pass/SSAOPass.js");
 include("core/postprocessing/pass/BokehPass.js");
 include("core/postprocessing/pass/CopyPass.js");

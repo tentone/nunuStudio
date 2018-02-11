@@ -40,6 +40,7 @@
 								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
 								<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
+								<li><a href="../classes/BloomPass.html">BloomPass</a></li>
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
@@ -197,11 +198,11 @@
 						
 						
 						<div class="box intro">
-							<p>Generate a texture that represents the luminosity of the current scene, adapted over time
-						to simulate the optic nerve responding to the amount of light it is receiving.
-						Based on a GDC2007 presentation by Wolfgang Engel titled &quot;Post-Processing Pipeline&quot;</p>
-						<p>Full-screen tone-mapping shader based on <a href="http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf">http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf</a></p>
-						<p>class AdaptiveToneMappingPass</p>
+							<p>Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.</p>
+						<p>More information about FXAA available here:</p>
+						<ul>
+						<li><a href="https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf">https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf</a></li>
+						</ul>
 						
 						</div>
 						
@@ -211,6 +212,11 @@
 									<p>This namespace provides the following classes:</p>
 						
 									<ul class="module-classes">
+										<li class="module-class">
+											<a href="../classes/BloomPass.html">
+												BloomPass
+											</a>
+										</li>
 										<li class="module-class">
 											<a href="../classes/BokehPass.html">
 												BokehPass

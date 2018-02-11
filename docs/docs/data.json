@@ -449,12 +449,30 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js": {
-            "name": "..\\..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js",
+        "..\\..\\source\\core\\postprocessing\\pass\\antialiasing\\FXAAPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\antialiasing\\FXAAPass.js",
             "modules": {
                 "Postprocessing": 1
             },
+            "classes": {
+                "FXAAPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js",
+            "modules": {},
             "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\BloomPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\BloomPass.js",
+            "modules": {},
+            "classes": {
+                "BloomPass": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -490,15 +508,6 @@
             "modules": {},
             "classes": {
                 "DotScreenPass": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\postprocessing\\pass\\FXAAPass.js": {
-            "name": "..\\..\\source\\core\\postprocessing\\pass\\FXAAPass.js",
-            "modules": {},
-            "classes": {
-                "FXAAPass": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1281,11 +1290,12 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "FXAAPass": 1,
+                "BloomPass": 1,
                 "BokehPass": 1,
                 "ColorifyPass": 1,
                 "CopyPass": 1,
                 "DotScreenPass": 1,
-                "FXAAPass": 1,
                 "FilmPass": 1,
                 "HueSaturationPass": 1,
                 "RenderPass": 1,
@@ -1302,7 +1312,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\postprocessing\\ShaderPass.js",
             "line": 3,
-            "description": "Generate a texture that represents the luminosity of the current scene, adapted over time\nto simulate the optic nerve responding to the amount of light it is receiving.\nBased on a GDC2007 presentation by Wolfgang Engel titled \"Post-Processing Pipeline\"\n\nFull-screen tone-mapping shader based on http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf\n\nclass AdaptiveToneMappingPass",
+            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
             "is_constructor": 1,
             "author": "miibond"
         },
@@ -2541,6 +2551,59 @@
             "is_constructor": 1,
             "extends": "{Scene}"
         },
+        "FXAAPass": {
+            "name": "FXAAPass",
+            "shortname": "FXAAPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\antialiasing\\FXAAPass.js",
+            "line": 3,
+            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
+            "is_constructor": 1
+        },
+        "BloomPass": {
+            "name": "BloomPass",
+            "shortname": "BloomPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\BloomPass.js",
+            "line": 3,
+            "description": "Simple bloom effect pass.",
+            "author": "alteredq / http://alteredqualia.com/",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "strength",
+                    "description": "Bloom effect strength.",
+                    "type": "Number"
+                },
+                {
+                    "name": "kernelSize",
+                    "description": "Bloom kernel size.",
+                    "type": "Number"
+                },
+                {
+                    "name": "sigma",
+                    "description": "Sigma.",
+                    "type": "Number"
+                },
+                {
+                    "name": "resolution",
+                    "description": "Bloom buffer resolution.",
+                    "type": "Number"
+                }
+            ]
+        },
         "BokehPass": {
             "name": "BokehPass",
             "shortname": "BokehPass",
@@ -2635,21 +2698,6 @@
                     "type": "Number"
                 }
             ]
-        },
-        "FXAAPass": {
-            "name": "FXAAPass",
-            "shortname": "FXAAPass",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Postprocessing",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\postprocessing\\pass\\FXAAPass.js",
-            "line": 3,
-            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
-            "is_constructor": 1
         },
         "FilmPass": {
             "name": "FilmPass",
@@ -3742,7 +3790,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 162,
+            "line": 163,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -11065,7 +11113,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 257,
+            "line": 254,
             "description": "Get resource by name.",
             "itemtype": "method",
             "name": "getResourceByName",
@@ -11085,7 +11133,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 278,
+            "line": 275,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -11105,7 +11153,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 299,
+            "line": 296,
             "description": "Remove image.",
             "params": [
                 {
@@ -11121,7 +11169,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 314,
+            "line": 311,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -11141,7 +11189,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 335,
+            "line": 332,
             "description": "Remove video.",
             "params": [
                 {
@@ -11157,7 +11205,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 349,
+            "line": 346,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -11177,7 +11225,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 370,
+            "line": 367,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -11193,7 +11241,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 384,
+            "line": 381,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -11219,7 +11267,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 425,
+            "line": 422,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -11239,7 +11287,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 446,
+            "line": 443,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -11255,7 +11303,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 457,
+            "line": 454,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -11280,7 +11328,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 544,
+            "line": 541,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -11300,7 +11348,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 565,
+            "line": 562,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -11316,7 +11364,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 579,
+            "line": 576,
             "description": "Add resource to resources manager.",
             "itemtype": "method",
             "name": "addResource",
@@ -11332,7 +11380,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 593,
+            "line": 590,
             "description": "Remove resource from font list.",
             "itemtype": "method",
             "name": "removeResource",
@@ -11348,7 +11396,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 604,
+            "line": 601,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -11369,7 +11417,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 632,
+            "line": 629,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -11389,7 +11437,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 653,
+            "line": 650,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -11405,7 +11453,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 667,
+            "line": 664,
             "description": "Remove audio.",
             "params": [
                 {
@@ -14620,7 +14668,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 173,
+            "line": 174,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -14630,7 +14678,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 179,
+            "line": 180,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -14640,7 +14688,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 185,
+            "line": 186,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -14651,7 +14699,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 192,
+            "line": 193,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -14661,7 +14709,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 198,
+            "line": 199,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -14672,7 +14720,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 208,
+            "line": 209,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -14681,7 +14729,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 246,
+            "line": 247,
             "description": "Load a nunustudio application and attach it to the canvas indicated.\n\nThis method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.",
             "static": 1,
             "itemtype": "method",
@@ -14703,7 +14751,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 282,
+            "line": 283,
             "description": "Start running nunu program.\n\nCreates renderer, mouse and keyboard objects, and starts running the loaded application.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -14712,7 +14760,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 358,
+            "line": 359,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -14738,7 +14786,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 379,
+            "line": 380,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -14754,7 +14802,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 404,
+            "line": 405,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -14780,7 +14828,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 447,
+            "line": 448,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -14789,7 +14837,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 463,
+            "line": 464,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -14798,7 +14846,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 514,
+            "line": 515,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -14807,7 +14855,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 548,
+            "line": 549,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -14816,7 +14864,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 558,
+            "line": 559,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -14832,7 +14880,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 572,
+            "line": 573,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -14841,7 +14889,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 596,
+            "line": 597,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -14857,7 +14905,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 612,
+            "line": 613,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -14873,7 +14921,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 625,
+            "line": 626,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -14889,7 +14937,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 638,
+            "line": 639,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -14902,7 +14950,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 649,
+            "line": 650,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -14911,7 +14959,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 673,
+            "line": 674,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",
