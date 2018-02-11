@@ -57,6 +57,10 @@ function ImageChooser(parent)
 				self.setValue(value);
 				self.onChange(value);
 			}
+			else
+			{
+				Editor.alert("Only images accepted");
+			}
 		}
 	};
 

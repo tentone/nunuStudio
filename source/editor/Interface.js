@@ -1031,7 +1031,7 @@ Interface.initialize = function()
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addToScene(mesh);
 
-		alert("Reduced from " + vertices + " to " + Math.ceil(vertices * level) + " vertex.");
+		Editor.alert("Reduced from " + vertices + " to " + Math.ceil(vertices * level) + " vertex.");
 
 	}, Editor.filePath + "icons/models/figures.png");
 

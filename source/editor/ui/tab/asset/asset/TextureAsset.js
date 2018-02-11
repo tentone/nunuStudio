@@ -129,7 +129,7 @@ function TextureAsset(parent)
 				}
 				catch(e)
 				{
-					alert("Texture duplication failed\n" + e.stack);
+					Editor.alert("Texture duplication failed\n" + e.stack);
 				}
 			}
 		});
