@@ -149,6 +149,17 @@ function PerspectiveCameraPanel(parent, obj)
 	});
 	this.form.add(this.clearDepth);
 	this.form.nextRow();
+
+	//Clear stencil
+	this.clearStencil = new CheckBox(this.form.element);
+	this.form.addText("Clear stencil");
+	this.clearStencil.size.set(15, 15);
+	this.clearStencil.setOnChange(function()
+	{
+		Editor.history.add(new ChangeAction(self.obj, "clearStencil", self.clearStencil.getValue()));
+	});
+	this.form.add(this.clearStencil);
+	this.form.nextRow();
 }
 
 //Super prototypes
@@ -175,4 +186,5 @@ PerspectiveCameraPanel.prototype.updatePanel = function()
 	this.order.setValue(this.obj.order);
 	this.clearColor.setValue(this.obj.clearColor);
 	this.clearDepth.setValue(this.obj.clearDepth);
+	this.clearStencil.setValue(this.obj.clearStencil);
 };
