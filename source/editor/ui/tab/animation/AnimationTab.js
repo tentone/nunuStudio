@@ -18,6 +18,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.bar = document.createElement("div");
 	this.bar.style.position = "absolute";
 	this.bar.style.height = "20px";
+	this.bar.style.width = "100%";
 	this.bar.style.backgroundColor = Editor.theme.barColor;
 	this.element.appendChild(this.bar);
 
@@ -366,9 +367,6 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		//Options bar
-		this.bar.style.width = this.size.x + "px";
-
 		//Timeline
 		this.timeline.style.width = this.size.x + "px";
 		this.timeline.style.height = (this.size.y - 20) + "px";
@@ -382,8 +380,8 @@ AnimationTab.prototype.updateInterface = function()
 		this.info.style.height = this.tab.style.height;
 		
 		//Tracks
-		this.tracks.style.height = this.tab.style.height;
 		this.tracks.style.left = (this.tab.position + 5) + "px";
+		this.tracks.style.height = this.tab.style.height;
 	}
 	else
 	{

@@ -71,6 +71,16 @@ function AnimationClipTrack(editor, animation)
 	this.manager.add(window, "mousemove", function(event)
 	{
 		var time = initial + (event.clientX - mouse) / self.editor.zoom;
+
+		if(time < 0)
+		{
+			time = 0;
+		}
+		else if(time > self.animation.duration)
+		{
+			time = self.animation.duration;
+		}
+
 		self.editor.mixer.setTime(time > 0 ? time : 0);
 
 		Interface.panel.updatePanel();

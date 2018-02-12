@@ -51,13 +51,13 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	this.form.addText("Add Post Processing");
+	this.form.addText("Post-Processing");
 	this.form.nextRow();
 
 	var addRenderPassButton = function(name, PassConstructor)
 	{
 		var button = new Button(self.form.element);
-		button.size.set(120, 18);
+		button.size.set(100, 18);
 		button.setText(name);
 		button.setCallback(function()
 		{
@@ -74,23 +74,27 @@ function CameraEditor(parent, closeable, container, index)
 			self.updatePostNodes();
 		});
 		self.form.add(button);
-		self.form.nextRow();
 	};
 
 
 	addRenderPassButton("Render", RenderPass);
 	addRenderPassButton("FXAA", FXAAPass);
 	addRenderPassButton("Colorify", ColorifyPass);
+	self.form.nextRow();
 	addRenderPassButton("Unreal Bloom", UnrealBloomPass);
 	addRenderPassButton("Bloom", BloomPass);
 	addRenderPassButton("Hue & Saturation", HueSaturationPass);
+	self.form.nextRow();
 	addRenderPassButton("SSAO", SSAOPass);
 	addRenderPassButton("Bokeh", BokehPass);
 	addRenderPassButton("Technicolor", TechnicolorPass);
+	self.form.nextRow();
 	addRenderPassButton("Film", FilmPass);
 	addRenderPassButton("Dot Screen", DotScreenPass);
 	addRenderPassButton("Sobel", SobelPass);
+	self.form.nextRow();
 	addRenderPassButton("Copy", CopyPass);
+	self.form.nextRow();
 
 	this.postNodes = new Form(this.form.element);
 	this.form.add(this.postNodes);
