@@ -266,11 +266,11 @@ include("editor/theme/Theme.js");
 include("editor/theme/ThemeDark.js");
 
 include("editor/ui/element/Element.js");
+include("editor/ui/element/Division.js");
 include("editor/ui/element/Message.js");
 include("editor/ui/element/Bar.js");
 include("editor/ui/element/Button.js");
 include("editor/ui/element/Text.js");
-include("editor/ui/element/Division.js");
 include("editor/ui/element/DivisionResizable.js");
 include("editor/ui/element/ButtonImage.js");
 include("editor/ui/element/ButtonDrawer.js");
@@ -279,6 +279,8 @@ include("editor/ui/element/DualDivisionResizable.js");
 include("editor/ui/element/ButtonImageToggle.js");
 include("editor/ui/element/Form.js");
 include("editor/ui/element/AudioPlayer.js");
+include("editor/ui/element/DropdownMenu.js");
+include("editor/ui/element/ContextMenu.js");
 
 include("editor/ui/element/input/Graph.js");
 include("editor/ui/element/input/CheckBox.js");
@@ -294,13 +296,12 @@ include("editor/ui/element/input/TextureChooser.js");
 include("editor/ui/element/input/TextureBox.js");
 include("editor/ui/element/input/CubeTextureBox.js");
 
-include("editor/ui/DropdownMenu.js");
-include("editor/ui/ContextMenu.js");
 include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
 include("editor/ui/TabButton.js");
-include("editor/ui/TreeView.js");
-include("editor/ui/TreeElement.js");
+
+include("editor/ui/treeview/TreeView.js");
+include("editor/ui/treeview/TreeElement.js");
 
 include("editor/ui/tab/ConsoleTab.js");
 include("editor/ui/tab/CodeEditor.js");

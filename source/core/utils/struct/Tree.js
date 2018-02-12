@@ -12,8 +12,8 @@
 function Tree(value)
 {
 	this.value = (value !== undefined) ? value : null;
+	
 	this.uuid = THREE.Math.generateUUID();
-
 	this.parent = null;
 	this.children = [];
 }
