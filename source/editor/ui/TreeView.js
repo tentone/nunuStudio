@@ -45,7 +45,6 @@ TreeView.prototype.updateView = function()
 	TreeView.addSceneElement(this, this.program);
 
 	this.updateChildPosition();
-	this.updateInterface();
 	
 	//var delta = performance.now() - time;
 	//console.log("Treeview update time: " + delta);
@@ -218,6 +217,8 @@ TreeView.updateChildPosition = function(parent, position, level, folded)
 			children[i].visible = true;
 			children[i].position.set(0, position);
 			children[i].level = level;
+			children[i].updateInterface();
+ 
 			folded = false;
 			position += 20;
 		}
