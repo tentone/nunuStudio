@@ -1444,7 +1444,7 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.tool.setTranslationSnap(Settings.editor.gridSpacing);
 		this.tool.setRotationSnap(Settings.editor.snapAngle);
 
-		this.tool.attach(Editor.selectedObjects[0]);
+		this.tool.attach(Editor.selectedObjects);
 		this.toolContainer.add(this.tool);
 	}
 	else

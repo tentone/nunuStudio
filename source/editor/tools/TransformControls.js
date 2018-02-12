@@ -1,4 +1,4 @@
-//Adapted from original transform controls for threejs by arodic (github.com/arodic)
+//Adapted from original transform controls by arodic (github.com/arodic)
 
 "use strict";
 
@@ -6,7 +6,7 @@ function TransformControls(camera, canvas, mouse)
 {
 	THREE.Object3D.call(this);
 	
-	this.object = null;
+	this.objects = null;
 	this.visible = false;
 	this.space = "world";
 	this.size = 1;
@@ -48,14 +48,7 @@ function TransformControls(camera, canvas, mouse)
 
 	var lookAtMatrix = new THREE.Matrix4();
 	var eye = new THREE.Vector3();
-
-	var parentRotationMatrix  = new THREE.Matrix4();
-	var parentScale = new THREE.Vector3();
-
-	var worldPosition = new THREE.Vector3();
-	var worldRotation = new THREE.Euler();
-	var worldRotationMatrix = new THREE.Matrix4();
-
+	
 	var camPosition = new THREE.Vector3();
 	var camRotation = new THREE.Euler();
 
@@ -72,21 +65,41 @@ function TransformControls(camera, canvas, mouse)
 	var quaternionZ = new THREE.Quaternion();
 	var quaternionE = new THREE.Quaternion();
 
-	var oldPosition = new THREE.Vector3();
-	var oldScale = new THREE.Vector3();
-	var oldQuaternion = new THREE.Quaternion();
-	var oldRotationMatrix = new THREE.Matrix4();
+	//Per object attributes
+	var parentRotationMatrix = [];
+	var parentScale = [];
+	var worldRotationMatrix = [];
+	var worldPosition = [];
+	var worldRotation = [];
+	var oldPosition = [];
+	var oldScale = [];
+	var oldQuaternion = [];
+	var oldRotationMatrix = [];
 
-	this.attach = function(object)
+	this.attach = function(objects)
 	{
-		self.object = object;
+		//Add more temporary attibutes if necessary
+		while(oldPosition.length < objects.length)
+		{
+			parentRotationMatrix.push(new THREE.Matrix4());
+			parentScale.push(new THREE.Vector3());
+			worldRotationMatrix.push(new THREE.Matrix4());
+			worldPosition.push(new THREE.Vector3());
+			worldRotation.push(new THREE.Euler());
+			oldPosition.push(new THREE.Vector3());
+			oldScale.push(new THREE.Vector3());
+			oldQuaternion.push(new THREE.Quaternion());
+			oldRotationMatrix.push(new THREE.Matrix4());
+		}
+
+		self.objects = objects;
 		self.visible = true;
 		self.updateScale();
 	};
 
 	this.detach = function()
 	{
-		self.object = null;
+		self.objects = null;
 		self.visible = false;
 		self.axis = null;
 	};
@@ -111,33 +124,6 @@ function TransformControls(camera, canvas, mouse)
 		}
 
 		self.updateScale();
-	};
-
-	this.setSize = function(size)
-	{
-		this.size = size;
-		this.updateScale();
-	};
-
-	this.setSpace = function(space)
-	{
-		this.space = space;
-		this.updateScale();
-	};
-
-	this.setSnap = function(snap)
-	{
-		this.snap = snap;
-	};
-
-	this.setTranslationSnap = function(translationSnap)
-	{
-		this.translationSnap = translationSnap;
-	};
-
-	this.setRotationSnap = function(rotationSnap)
-	{
-		this.rotationSnap = rotationSnap;
 	};
 
 	this.update = function()
@@ -165,24 +151,22 @@ function TransformControls(camera, canvas, mouse)
 
 	this.updateScale = function()
 	{
-		if(this.object === null)
+		if(this.objects === null)
 		{
 			return;
 		}
 
-		//this.object.updateMatrixWorld();
-		worldPosition.setFromMatrixPosition(this.object.matrixWorld);
-		worldRotation.setFromRotationMatrix(tempMatrix.extractRotation(this.object.matrixWorld));
+		worldPosition[0].setFromMatrixPosition(this.objects[0].matrixWorld);
+		worldRotation[0].setFromRotationMatrix(tempMatrix.extractRotation(this.objects[0].matrixWorld));
 
-		//camera.updateMatrixWorld();
 		camPosition.setFromMatrixPosition(camera.matrixWorld);
 		camRotation.setFromRotationMatrix(tempMatrix.extractRotation(camera.matrixWorld));
 
-		this.position.copy(worldPosition);
+		this.position.copy(worldPosition[0]);
 
 		if(camera instanceof THREE.PerspectiveCamera)
 		{
-			scale = worldPosition.distanceTo(camPosition) / 6 * this.size;
+			scale = worldPosition[0].distanceTo(camPosition) / 6 * this.size;
 			this.scale.set(scale, scale, scale);
 		}
 		else
@@ -191,11 +175,11 @@ function TransformControls(camera, canvas, mouse)
 			this.scale.set(scale, scale, scale);
 		}
 		
-		eye.copy(camPosition).sub(worldPosition).normalize();
+		eye.copy(camPosition).sub(worldPosition[0]).normalize();
 
 		if(this.space === "local" || mode === "scale")
 		{
-			gizmo[mode].update(worldRotation, eye);
+			gizmo[mode].update(worldRotation[0], eye);
 		}
 		else if(this.space === "world")
 		{
@@ -207,7 +191,7 @@ function TransformControls(camera, canvas, mouse)
 
 	function onPointerHover()
 	{
-		if(self.object === null || dragging === true) 
+		if(self.objects[0] === null || dragging === true) 
 		{
 			return;
 		}
@@ -229,7 +213,7 @@ function TransformControls(camera, canvas, mouse)
 
 	function onPointerDown()
 	{
-		if(self.object === null || dragging === true) 
+		if(self.objects[0] === null || dragging === true) 
 		{
 			return;
 		}
@@ -242,21 +226,23 @@ function TransformControls(camera, canvas, mouse)
 			self.axis = intersect.object.name;
 			self.updateScale();
 
-			eye.copy(camPosition).sub(worldPosition).normalize();
+			eye.copy(camPosition).sub(worldPosition[0]).normalize();
 			gizmo[mode].setActivePlane(self.axis, eye);
 			var planeIntersect = intersectObjects([gizmo[mode].activePlane]);
 
 			if(planeIntersect)
 			{
-				oldPosition.copy(self.object.position);
-				oldScale.copy(self.object.scale);
-				oldQuaternion.copy(self.object.quaternion);
+				for(var i = 0; i < self.objects.length; i++)
+				{
+					oldPosition[i].copy(self.objects[i].position);
+					oldScale[i].copy(self.objects[i].scale);
+					oldQuaternion[i].copy(self.objects[i].quaternion);
+					oldRotationMatrix[i].extractRotation(self.objects[i].matrix);
+				}
 
-				oldRotationMatrix.extractRotation(self.object.matrix);
-				worldRotationMatrix.extractRotation(self.object.matrixWorld);
-
-				parentRotationMatrix.extractRotation(self.object.parent.matrixWorld);
-				parentScale.setFromMatrixScale(tempMatrix.getInverse(self.object.parent.matrixWorld));
+				worldRotationMatrix[0].extractRotation(self.objects[0].matrixWorld);
+				parentRotationMatrix[0].extractRotation(self.objects[0].parent.matrixWorld);
+				parentScale[0].setFromMatrixScale(tempMatrix.getInverse(self.objects[0].parent.matrixWorld));
 
 				offset.copy(planeIntersect.point);
 			}
@@ -267,7 +253,7 @@ function TransformControls(camera, canvas, mouse)
 
 	function onPointerMove()
 	{
-		if(self.object === null || self.axis === null || dragging === false)
+		if(self.objects === null || self.axis === null || dragging === false)
 		{
 			return;
 		}
@@ -284,7 +270,7 @@ function TransformControls(camera, canvas, mouse)
 		if(mode === "translate")
 		{
 			point.sub(offset);
-			point.multiply(parentScale);
+			point.multiply(parentScale[0]);
 
 			if(self.axis.search("X") === -1)
 			{
@@ -301,112 +287,130 @@ function TransformControls(camera, canvas, mouse)
 					
 			if(self.space === "world" || self.axis.search("XYZ") !== -1)
 			{
-				point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
+				point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix[0]));
 
-				self.object.position.copy(oldPosition);
-				self.object.position.add(point);
+				for(var i = 0; i < self.objects.length; i++)
+				{
+					self.objects[i].position.copy(oldPosition[i]);
+					self.objects[i].position.add(point);
+				}
 			}
 			else if(self.space === "local")
 			{
 				if(self.axis.length > 1)
 				{
-					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
-					point.applyMatrix4(oldRotationMatrix);
+					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
+					point.applyMatrix4(oldRotationMatrix[0]);
 				}
 				else
 				{
-					point.applyMatrix4(oldRotationMatrix);
+					point.applyMatrix4(oldRotationMatrix[0]);
 				}
 
-				self.object.position.copy(oldPosition);
-				self.object.position.add(point);
+				for(var i = 0; i < self.objects.length; i++)
+				{
+					self.objects[i].position.copy(oldPosition[i]);
+					self.objects[i].position.add(point);
+				}
 			}
 
 			if(self.snap)
 			{
-				if(self.space === "local")
+				for(var i = 0; i < self.objects.length; i++)
 				{
-					self.object.position.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
-				}
+					if(self.space === "local")
+					{
+						self.objects[i].position.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
+					}
 
-				if(self.axis.search("X") !== -1)
-				{
-					self.object.position.x = Math.round(self.object.position.x / self.translationSnap) * self.translationSnap;
-				}
-				if(self.axis.search("Y") !== -1)
-				{
-					self.object.position.y = Math.round(self.object.position.y / self.translationSnap) * self.translationSnap;
-				}
-				if(self.axis.search("Z") !== -1)
-				{
-					self.object.position.z = Math.round(self.object.position.z / self.translationSnap) * self.translationSnap;
-				}
+					if(self.axis.search("X") !== -1)
+					{
+						self.objects[i].position.x = Math.round(self.objects[i].position.x / self.translationSnap) * self.translationSnap;
+					}
+					if(self.axis.search("Y") !== -1)
+					{
+						self.objects[i].position.y = Math.round(self.objects[i].position.y / self.translationSnap) * self.translationSnap;
+					}
+					if(self.axis.search("Z") !== -1)
+					{
+						self.objects[i].position.z = Math.round(self.objects[i].position.z / self.translationSnap) * self.translationSnap;
+					}
 
-				if(self.space === "local" )
-				{
-					self.object.position.applyMatrix4(worldRotationMatrix);
+					if(self.space === "local" )
+					{
+						self.objects[i].position.applyMatrix4(worldRotationMatrix[0]);
+					}
 				}
 			}
 		}
 		else if(mode === "scale")
 		{
 			point.sub(offset);
-			point.multiply(parentScale);
+			point.multiply(parentScale[0]);
 
 			if(self.axis === "XYZ")
 			{
-				scale = 1 + ((point.y) / Math.max(oldScale.x, oldScale.y, oldScale.z));
+				scale = 1 + ((point.y) / Math.max(oldScale[0].x, oldScale[0].y, oldScale[0].z));
 
-				self.object.scale.copy(oldScale);
-				self.object.scale.multiplyScalar(scale);
+				for(var i = 0; i < self.objects.length; i++)
+				{
+					self.objects[i].scale.copy(oldScale[i]);
+					self.objects[i].scale.multiplyScalar(scale);
+				}
 			}
 			else
 			{
-				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
+				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
 
-				if(self.axis === "X")
+				for(var i = 0; i < self.objects.length; i++)
 				{
-					self.object.scale.x = oldScale.x * (1 + point.x / oldScale.x);
-				}
-				else if(self.axis === "Y")
-				{
-					self.object.scale.y = oldScale.y * (1 + point.y / oldScale.y);
-				}
-				else if(self.axis === "Z")
-				{
-					self.object.scale.z = oldScale.z * (1 + point.z / oldScale.z);
+					if(self.axis === "X")
+					{
+						self.objects[i].scale.x = oldScale[i].x * (1 + point.x / oldScale[i].x);
+					}
+					else if(self.axis === "Y")
+					{
+						self.objects[i].scale.y = oldScale[i].y * (1 + point.y / oldScale[i].y);
+					}
+					else if(self.axis === "Z")
+					{
+						self.objects[i].scale.z = oldScale[i].z * (1 + point.z / oldScale[i].z);
+					}
 				}
 			}
 
 			//Update physics objects
-			if(self.object instanceof PhysicsObject)
+			for(var i = 0; i < self.objects.length; i++)
 			{
-				var shapes = self.object.body.shapes;
-				var scale = self.object.scale;
-
-				for(var i = 0; i < shapes.length; i++)
+				if(self.objects[i] instanceof PhysicsObject)
 				{
-					var shape = shapes[i];
-					
-					if(shape.type === CANNON.Shape.types.BOX)
+					var shapes = self.objects[i].body.shapes;
+					var scale = self.objects[i].scale;
+
+					for(var i = 0; i < shapes.length; i++)
 					{
-						shape.halfExtents.x = scale.x / 2.0;
-						shape.halfExtents.y = scale.y / 2.0;
-						shape.halfExtents.z = scale.z / 2.0;
-					}
-					else if(shape.type === CANNON.Shape.types.SPHERE)
-					{
-						shape.radius = scale.x;
+						var shape = shapes[i];
+						
+						if(shape.type === CANNON.Shape.types.BOX)
+						{
+							shape.halfExtents.x = scale.x / 2.0;
+							shape.halfExtents.y = scale.y / 2.0;
+							shape.halfExtents.z = scale.z / 2.0;
+						}
+						else if(shape.type === CANNON.Shape.types.SPHERE)
+						{
+							shape.radius = scale.x;
+						}
 					}
 				}
 			}
 		}
 		else if(mode === "rotate")
 		{
-			point.sub(worldPosition);
-			point.multiply(parentScale);
-			tempVector.copy(offset).sub(worldPosition);
-			tempVector.multiply(parentScale);
+			point.sub(worldPosition[0]);
+			point.multiply(parentScale[0]);
+			tempVector.copy(offset).sub(worldPosition[0]);
+			tempVector.multiply(parentScale[0]);
 
 			if(self.axis === "E")
 			{
@@ -416,39 +420,39 @@ function TransformControls(camera, canvas, mouse)
 				rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
 
-				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix));
+				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[0]));
 
 				quaternionE.setFromAxisAngle(eye, rotation.z - offsetRotation.z);
-				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix);
+				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[0]);
 
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionE);
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
 
-				self.object.quaternion.copy(tempQuaternion);
+				self.objects[0].quaternion.copy(tempQuaternion);
 			}
 			else if(self.axis === "XYZE")
 			{
 				quaternionE.setFromEuler(point.clone().cross(tempVector).normalize()); // rotation axis
 
-				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix));
+				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[0]));
 				quaternionX.setFromAxisAngle(quaternionE, - point.clone().angleTo(tempVector));
-				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix);
+				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[0]);
 
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionX);
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
 
-				self.object.quaternion.copy(tempQuaternion);
+				self.objects[0].quaternion.copy(tempQuaternion);
 			}
 			else if(self.space === "local")
 			{
-				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
+				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
 
-				tempVector.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
+				tempVector.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
 
 				rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
 
-				quaternionXYZ.setFromRotationMatrix(oldRotationMatrix);
+				quaternionXYZ.setFromRotationMatrix(oldRotationMatrix[0]);
 
 				if(self.snap)
 				{
@@ -476,13 +480,13 @@ function TransformControls(camera, canvas, mouse)
 					quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionZ);
 				}
 
-				self.object.quaternion.copy(quaternionXYZ);
+				self.objects[0].quaternion.copy(quaternionXYZ);
 			}
 			else if(self.space === "world")
 			{
 				rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
-				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix));
+				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[0]));
 
 				if(self.snap)
 				{
@@ -497,7 +501,7 @@ function TransformControls(camera, canvas, mouse)
 					quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
 				}
 
-				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix);
+				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[0]);
 
 				if(self.axis === "X")
 				{
@@ -514,7 +518,7 @@ function TransformControls(camera, canvas, mouse)
 
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
 
-				self.object.quaternion.copy(tempQuaternion);
+				self.objects[0].quaternion.copy(tempQuaternion);
 			}
 		}
 
@@ -523,36 +527,51 @@ function TransformControls(camera, canvas, mouse)
 
 	function onPointerUp()
 	{
-		if(mode === "translate")
+		if(editing)
 		{
-			var object = self.object.position;
-			Editor.history.add(new ActionBundle(
-			[
-				new ChangeAction(object, "x", object.x, oldPosition.x),
-				new ChangeAction(object, "y", object.y, oldPosition.y),
-				new ChangeAction(object, "z", object.z, oldPosition.z)
-			]));
-		}
-		else if(mode === "scale")
-		{
-			var object = self.object.scale;
-			Editor.history.add(new ActionBundle(
-			[
-				new ChangeAction(object, "x", object.x, oldScale.x),
-				new ChangeAction(object, "y", object.y, oldScale.y),
-				new ChangeAction(object, "z", object.z, oldScale.z)
-			]));
-		}
-		else if(mode === "rotate")
-		{
-			var object = self.object.quaternion;
-			Editor.history.add(new ActionBundle(
-			[
-				new ChangeAction(object, "x", object.x, oldQuaternion.x),
-				new ChangeAction(object, "y", object.y, oldQuaternion.y),
-				new ChangeAction(object, "z", object.z, oldQuaternion.z),
-				new ChangeAction(object, "w", object.w, oldQuaternion.w)
-			]));
+			if(mode === "translate")
+			{
+				var actions = [];
+
+				for(var i = 0; i < self.objects.length; i++)
+				{
+					var object = self.objects[i].position;
+					actions.push(new ChangeAction(object, "x", object.x, oldPosition[i].x));
+					actions.push(new ChangeAction(object, "y", object.y, oldPosition[i].y));
+					actions.push(new ChangeAction(object, "z", object.z, oldPosition[i].z));
+				}
+
+				Editor.history.add(new ActionBundle(actions));
+			}
+			else if(mode === "scale")
+			{
+				var actions = [];
+
+				for(var i = 0; i < self.objects.length; i++)
+				{
+					var object = self.objects[i].scale;
+					actions.push(new ChangeAction(object, "x", object.x, oldScale[i].x));
+					actions.push(new ChangeAction(object, "y", object.y, oldScale[i].y));
+					actions.push(new ChangeAction(object, "z", object.z, oldScale[i].z));
+				}
+				
+				Editor.history.add(new ActionBundle(actions));
+			}
+			else if(mode === "rotate")
+			{
+				var actions = [];
+
+				for(var i = 0; i < self.objects.length; i++)
+				{
+					var object = self.objects[i].quaternion;
+					actions.push(new ChangeAction(object, "x", object.x, oldQuaternion[i].x));
+					actions.push(new ChangeAction(object, "y", object.y, oldQuaternion[i].y));
+					actions.push(new ChangeAction(object, "z", object.z, oldQuaternion[i].z));
+					actions.push(new ChangeAction(object, "w", object.w, oldQuaternion[i].w));
+				}
+				
+				Editor.history.add(new ActionBundle(actions));
+			}
 		}
 
 		editing = false;
@@ -575,3 +594,30 @@ function TransformControls(camera, canvas, mouse)
 }
 
 TransformControls.prototype = Object.create(THREE.Object3D.prototype);
+
+TransformControls.prototype.setSize = function(size)
+{
+	this.size = size;
+	this.updateScale();
+};
+
+TransformControls.prototype.setSpace = function(space)
+{
+	this.space = space;
+	this.updateScale();
+};
+
+TransformControls.prototype.setSnap = function(snap)
+{
+	this.snap = snap;
+};
+
+TransformControls.prototype.setTranslationSnap = function(translationSnap)
+{
+	this.translationSnap = translationSnap;
+};
+
+TransformControls.prototype.setRotationSnap = function(rotationSnap)
+{
+	this.rotationSnap = rotationSnap;
+};
