@@ -45,7 +45,8 @@ TreeView.prototype.updateView = function()
 	TreeView.addSceneElement(this, this.program);
 
 	this.updateChildPosition();
-
+	this.updateInterface();
+	
 	//var delta = performance.now() - time;
 	//console.log("Treeview update time: " + delta);
 };
@@ -62,9 +63,7 @@ TreeView.prototype.addObject = function(obj)
 	var element = new TreeElement(this);
 	element.setObject(obj);
 	element.up = this;
-
 	this.children.push(element);
-
 	return element;
 };
 
@@ -113,9 +112,8 @@ TreeView.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
 
-		//Update children
 		for(var i = 0; i < this.children.length; i++)
 		{
 			this.children[i].updateInterface();
@@ -123,7 +121,7 @@ TreeView.prototype.updateInterface = function()
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
 };
 
@@ -220,7 +218,6 @@ TreeView.updateChildPosition = function(parent, position, level, folded)
 			children[i].visible = true;
 			children[i].position.set(0, position);
 			children[i].level = level;
-			children[i].updateInterface();
 			folded = false;
 			position += 20;
 		}

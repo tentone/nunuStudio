@@ -2,9 +2,9 @@
 
 function TreeElement(container)
 {
-	this.container = container;
-
 	Element.call(this, container.element);
+	
+	this.container = container;
 
 	this.element.draggable = true;
 	this.element.style.width = "100%";
