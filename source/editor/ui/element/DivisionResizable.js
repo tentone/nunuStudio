@@ -12,10 +12,18 @@ function DivisionResizable(parent)
 
 	//Create division resize tab
 	this.resizeTab = document.createElement("div");
-	this.resizeTab.draggable = false;
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
+	this.resizeTab.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+	this.resizeTab.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+	this.parent.appendChild(this.resizeTab);
 
 	//Resize control
 	this.resizeSizeMax = Number.MAX_VALUE;
@@ -88,8 +96,6 @@ function DivisionResizable(parent)
 	{
 		Interface.updateInterface();
 	};
-
-	this.parent.appendChild(this.resizeTab);
 }
 
 //Resizable side

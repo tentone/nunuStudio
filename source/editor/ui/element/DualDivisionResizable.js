@@ -25,7 +25,6 @@ function DualDivisionResizable(parent)
 
 	//Resize tab
 	this.resizeTab = document.createElement("div");
-	this.resizeTab.draggable = false;
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
