@@ -66,11 +66,11 @@ function SceneEditor(parent, closeable, container, index)
 	this.helperScene.add(this.axisHelper);
 
 	//Object helper container
-	this.objectHelper = new THREE.Scene();
+	this.objectHelper = new THREE.Object3D();
 	this.helperScene.add(this.objectHelper);
 
 	//Tool container
-	this.toolContainer = new THREE.Scene();
+	this.toolContainer = new THREE.Object3D();
 	this.toolScene.add(this.toolContainer);
 
 	//Navigation
@@ -1507,6 +1507,11 @@ SceneEditor.prototype.selectObjectHelper = function()
 		{
 			this.objectHelper.add(new PhysicsObjectHelper(object));
 		}
+		//LensFlare
+		else if(object instanceof LensFlare)
+		{
+			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
+		}
 		//Skinned Mesh
 		else if(object instanceof THREE.SkinnedMesh)
 		{
@@ -1524,11 +1529,7 @@ SceneEditor.prototype.selectObjectHelper = function()
 		{
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
-		//Container
-		else if(object instanceof Container)
-		{
-			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
-		}
+		//Spine animation
 		else if(object instanceof SpineAnimation)
 		{
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFFFF));

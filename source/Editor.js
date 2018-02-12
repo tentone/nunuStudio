@@ -835,6 +835,9 @@ Editor.deleteObject = function(obj)
 			var selected = [obj];
 		}
 
+		//List of delete actions
+		var actions = [];
+
 		//Delect selection
 		for(var i = 0; i < selected.length; i++)
 		{
@@ -850,8 +853,14 @@ Editor.deleteObject = function(obj)
 					Editor.removeFromSelection(selected[i]);
 				}
 
-				Editor.history.add(new ObjectRemovedAction(selected[i]));
+				actions.push(new ObjectRemovedAction(selected[i]));
 			}
+		}
+
+		//Check if any action was added
+		if(actions.length > 0)
+		{
+			Editor.history.add(new ActionBundle(actions));
 		}
 
 		Editor.updateObjectViews();

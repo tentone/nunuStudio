@@ -394,7 +394,7 @@ AssetExplorer.prototype.updateSelection = function()
 	//Clean asset explorer
 	this.clear();
 
-	ResourceManager.updateResources(Editor.program);
+	ResourceManager.retrieveResources(Editor.program);
 
 	//Materials
 	var materials = Editor.program.materials;

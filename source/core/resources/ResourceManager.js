@@ -73,21 +73,22 @@ function ResourceManager()
 	this.materials = [];
 	this.textures = [];
 	this.geometries = [];
+	this.templates = [];
 	this.resources = [];
 }
 
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
- * Update the resource list of a program.
+ * Retrieve a list with all the resource in a program.
  *
  * Searches the program and all its children for resources.
  *
- * @method updateResources
+ * @method retrieveResources
  * @static
  * @param {Program} program Program to update.
  */
-ResourceManager.updateResources = function(program)
+ResourceManager.retrieveResources = function(program)
 {
 	program.traverse(function(child)
 	{
