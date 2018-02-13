@@ -1,7 +1,6 @@
-//Adapted from original transform controls by arodic (github.com/arodic)
-
 "use strict";
 
+//Adapted from original transform controls by arodic (github.com/arodic)
 function TransformControls(camera, canvas, mouse)
 {
 	THREE.Object3D.call(this);
@@ -194,7 +193,7 @@ function TransformControls(camera, canvas, mouse)
 
 	function onPointerHover()
 	{
-		if(self.objects[0] === null || dragging === true) 
+		if(self.objects === null || dragging === true) 
 		{
 			return;
 		}
@@ -216,7 +215,7 @@ function TransformControls(camera, canvas, mouse)
 
 	function onPointerDown()
 	{
-		if(self.objects[0] === null || dragging === true) 
+		if(self.objects === null || dragging === true) 
 		{
 			return;
 		}
@@ -269,12 +268,12 @@ function TransformControls(camera, canvas, mouse)
 			return;
 		}
 
-		point.copy(planeIntersect.point);
-
+		
 		if(mode === "translate")
 		{
 			for(var i = 0; i < self.objects.length; i++)
 			{
+				point.copy(planeIntersect.point);
 				point.sub(offset);
 				point.multiply(parentScale[i]);
 
@@ -352,6 +351,7 @@ function TransformControls(camera, canvas, mouse)
 		{
 			for(var i = 0; i < self.objects.length; i++)
 			{
+				point.copy(planeIntersect.point);
 				point.sub(offset);
 				point.multiply(parentScale[i]);
 
@@ -408,6 +408,7 @@ function TransformControls(camera, canvas, mouse)
 		{
 			for(var i = 0; i < self.objects.length; i++)
 			{
+				point.copy(planeIntersect.point);
 				point.sub(worldPosition[i]);
 				point.multiply(parentScale[i]);
 				tempVector.copy(offset).sub(worldPosition[i]);
@@ -528,7 +529,8 @@ function TransformControls(camera, canvas, mouse)
 	}
 
 	function onPointerUp()
-	{
+	{	
+		//Add changes made to the editor history
 		if(editing)
 		{
 			if(mode === "translate")
