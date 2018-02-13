@@ -408,12 +408,12 @@ include("editor/ui/panels/mesh/geometry/TetrahedronGeometryForm.js");
 include("editor/ui/panels/mesh/geometry/CircleGeometryForm.js");
 
 include("editor/tools/TransformControls.js");
-include("editor/tools/GizmoMaterial.js");
-include("editor/tools/GizmoLineMaterial.js");
-include("editor/tools/TransformGizmo.js");
-include("editor/tools/TransformGizmoRotate.js");
-include("editor/tools/TransformGizmoScale.js");
-include("editor/tools/TransformGizmoTranslate.js");
+include("editor/tools/material/GizmoMaterial.js");
+include("editor/tools/material/GizmoLineMaterial.js");
+include("editor/tools/gizmo/TransformGizmo.js");
+include("editor/tools/gizmo/TransformGizmoRotate.js");
+include("editor/tools/gizmo/TransformGizmoScale.js");
+include("editor/tools/gizmo/TransformGizmoTranslate.js");
 
 include("editor/helpers/ObjectIconHelper.js");
 include("editor/helpers/PhysicsObjectHelper.js");

@@ -156,8 +156,11 @@ function TransformControls(camera, canvas, mouse)
 			return;
 		}
 
-		worldPosition[0].setFromMatrixPosition(this.objects[0].matrixWorld);
-		worldRotation[0].setFromRotationMatrix(tempMatrix.extractRotation(this.objects[0].matrixWorld));
+		for(var i = 0; i < self.objects.length; i++)
+		{
+			worldPosition[i].setFromMatrixPosition(this.objects[i].matrixWorld);
+			worldRotation[i].setFromRotationMatrix(tempMatrix.extractRotation(this.objects[i].matrixWorld));
+		}
 
 		camPosition.setFromMatrixPosition(camera.matrixWorld);
 		camRotation.setFromRotationMatrix(tempMatrix.extractRotation(camera.matrixWorld));
@@ -238,11 +241,12 @@ function TransformControls(camera, canvas, mouse)
 					oldScale[i].copy(self.objects[i].scale);
 					oldQuaternion[i].copy(self.objects[i].quaternion);
 					oldRotationMatrix[i].extractRotation(self.objects[i].matrix);
+
+					worldRotationMatrix[i].extractRotation(self.objects[i].matrixWorld);
+					parentRotationMatrix[i].extractRotation(self.objects[i].parent.matrixWorld);
+					parentScale[i].setFromMatrixScale(tempMatrix.getInverse(self.objects[i].parent.matrixWorld));
 				}
 
-				worldRotationMatrix[0].extractRotation(self.objects[0].matrixWorld);
-				parentRotationMatrix[0].extractRotation(self.objects[0].parent.matrixWorld);
-				parentScale[0].setFromMatrixScale(tempMatrix.getInverse(self.objects[0].parent.matrixWorld));
 
 				offset.copy(planeIntersect.point);
 			}
@@ -269,58 +273,59 @@ function TransformControls(camera, canvas, mouse)
 
 		if(mode === "translate")
 		{
-			point.sub(offset);
-			point.multiply(parentScale[0]);
+			for(var i = 0; i < self.objects.length; i++)
+			{
+				point.sub(offset);
+				point.multiply(parentScale[i]);
 
-			if(self.axis.search("X") === -1)
-			{
-				point.x = 0;
-			}
-			if(self.axis.search("Y") === -1) 
-			{
-				point.y = 0;
-			}
-			if(self.axis.search("Z") === -1)
-			{
-				point.z = 0;
-			}
-					
-			if(self.space === "world" || self.axis.search("XYZ") !== -1)
-			{
-				point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix[0]));
+				if(self.axis.search("X") === -1)
+				{
+					point.x = 0;
+				}
+				if(self.axis.search("Y") === -1) 
+				{
+					point.y = 0;
+				}
+				if(self.axis.search("Z") === -1)
+				{
+					point.z = 0;
+				}
+						
+				if(self.space === "world" || self.axis.search("XYZ") !== -1)
+				{
+					point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix[i]));
 
-				for(var i = 0; i < self.objects.length; i++)
-				{
-					self.objects[i].position.copy(oldPosition[i]);
-					self.objects[i].position.add(point);
+					for(var i = 0; i < self.objects.length; i++)
+					{
+						self.objects[i].position.copy(oldPosition[i]);
+						self.objects[i].position.add(point);
+					}
 				}
-			}
-			else if(self.space === "local")
-			{
-				if(self.axis.length > 1)
+				else if(self.space === "local")
 				{
-					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
-					point.applyMatrix4(oldRotationMatrix[0]);
-				}
-				else
-				{
-					point.applyMatrix4(oldRotationMatrix[0]);
+					if(self.axis.length > 1)
+					{
+						point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[i]));
+						point.applyMatrix4(oldRotationMatrix[i]);
+					}
+					else
+					{
+						point.applyMatrix4(oldRotationMatrix[i]);
+					}
+
+					for(var i = 0; i < self.objects.length; i++)
+					{
+						self.objects[i].position.copy(oldPosition[i]);
+						self.objects[i].position.add(point);
+					}
 				}
 
-				for(var i = 0; i < self.objects.length; i++)
+				if(self.snap)
 				{
-					self.objects[i].position.copy(oldPosition[i]);
-					self.objects[i].position.add(point);
-				}
-			}
 
-			if(self.snap)
-			{
-				for(var i = 0; i < self.objects.length; i++)
-				{
 					if(self.space === "local")
 					{
-						self.objects[i].position.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
+						self.objects[i].position.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[i]));
 					}
 
 					if(self.axis.search("X") !== -1)
@@ -338,32 +343,29 @@ function TransformControls(camera, canvas, mouse)
 
 					if(self.space === "local" )
 					{
-						self.objects[i].position.applyMatrix4(worldRotationMatrix[0]);
+						self.objects[i].position.applyMatrix4(worldRotationMatrix[i]);
 					}
 				}
 			}
 		}
 		else if(mode === "scale")
 		{
-			point.sub(offset);
-			point.multiply(parentScale[0]);
-
-			if(self.axis === "XYZ")
+			for(var i = 0; i < self.objects.length; i++)
 			{
-				scale = 1 + ((point.y) / Math.max(oldScale[0].x, oldScale[0].y, oldScale[0].z));
+				point.sub(offset);
+				point.multiply(parentScale[i]);
 
-				for(var i = 0; i < self.objects.length; i++)
+				if(self.axis === "XYZ")
 				{
+					scale = 1 + ((point.y) / Math.max(oldScale[i].x, oldScale[i].y, oldScale[i].z));
+
 					self.objects[i].scale.copy(oldScale[i]);
 					self.objects[i].scale.multiplyScalar(scale);
 				}
-			}
-			else
-			{
-				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
-
-				for(var i = 0; i < self.objects.length; i++)
+				else
 				{
+					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[i]));
+
 					if(self.axis === "X")
 					{
 						self.objects[i].scale.x = oldScale[i].x * (1 + point.x / oldScale[i].x);
@@ -377,11 +379,8 @@ function TransformControls(camera, canvas, mouse)
 						self.objects[i].scale.z = oldScale[i].z * (1 + point.z / oldScale[i].z);
 					}
 				}
-			}
 
-			//Update physics objects
-			for(var i = 0; i < self.objects.length; i++)
-			{
+				//Update physics objects
 				if(self.objects[i] instanceof PhysicsObject)
 				{
 					var shapes = self.objects[i].body.shapes;
@@ -407,118 +406,121 @@ function TransformControls(camera, canvas, mouse)
 		}
 		else if(mode === "rotate")
 		{
-			point.sub(worldPosition[0]);
-			point.multiply(parentScale[0]);
-			tempVector.copy(offset).sub(worldPosition[0]);
-			tempVector.multiply(parentScale[0]);
-
-			if(self.axis === "E")
+			for(var i = 0; i < self.objects.length; i++)
 			{
-				point.applyMatrix4(tempMatrix.getInverse(lookAtMatrix));
-				tempVector.applyMatrix4(tempMatrix.getInverse(lookAtMatrix));
+				point.sub(worldPosition[i]);
+				point.multiply(parentScale[i]);
+				tempVector.copy(offset).sub(worldPosition[i]);
+				tempVector.multiply(parentScale[i]);
 
-				rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
-				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
-
-				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[0]));
-
-				quaternionE.setFromAxisAngle(eye, rotation.z - offsetRotation.z);
-				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[0]);
-
-				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionE);
-				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
-
-				self.objects[0].quaternion.copy(tempQuaternion);
-			}
-			else if(self.axis === "XYZE")
-			{
-				quaternionE.setFromEuler(point.clone().cross(tempVector).normalize()); // rotation axis
-
-				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[0]));
-				quaternionX.setFromAxisAngle(quaternionE, - point.clone().angleTo(tempVector));
-				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[0]);
-
-				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionX);
-				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
-
-				self.objects[0].quaternion.copy(tempQuaternion);
-			}
-			else if(self.space === "local")
-			{
-				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
-
-				tempVector.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[0]));
-
-				rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
-				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
-
-				quaternionXYZ.setFromRotationMatrix(oldRotationMatrix[0]);
-
-				if(self.snap)
+				if(self.axis === "E")
 				{
-					quaternionX.setFromAxisAngle(unitX, Math.round((rotation.x - offsetRotation.x) / self.rotationSnap) * self.rotationSnap);
-					quaternionY.setFromAxisAngle(unitY, Math.round((rotation.y - offsetRotation.y) / self.rotationSnap) * self.rotationSnap);
-					quaternionZ.setFromAxisAngle(unitZ, Math.round((rotation.z - offsetRotation.z) / self.rotationSnap) * self.rotationSnap);
+					point.applyMatrix4(tempMatrix.getInverse(lookAtMatrix));
+					tempVector.applyMatrix4(tempMatrix.getInverse(lookAtMatrix));
+
+					rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
+					offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
+
+					tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[i]));
+
+					quaternionE.setFromAxisAngle(eye, rotation.z - offsetRotation.z);
+					quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[i]);
+
+					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionE);
+					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
+
+					self.objects[i].quaternion.copy(tempQuaternion);
 				}
-				else
+				else if(self.axis === "XYZE")
 				{
-					quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
-					quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
-					quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
-				}
+					quaternionE.setFromEuler(point.clone().cross(tempVector).normalize()); // rotation axis
 
-				if(self.axis === "X")
-				{
-					quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionX);
-				}
-				else if(self.axis === "Y")
-				{
-					quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionY);
-				}
-				else if(self.axis === "Z")
-				{
-					quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionZ);
-				}
+					tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[i]));
+					quaternionX.setFromAxisAngle(quaternionE, - point.clone().angleTo(tempVector));
+					quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[i]);
 
-				self.objects[0].quaternion.copy(quaternionXYZ);
-			}
-			else if(self.space === "world")
-			{
-				rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
-				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
-				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[0]));
-
-				if(self.snap)
-				{
-					quaternionX.setFromAxisAngle(unitX, Math.round((rotation.x - offsetRotation.x) / self.rotationSnap) * self.rotationSnap);
-					quaternionY.setFromAxisAngle(unitY, Math.round((rotation.y - offsetRotation.y) / self.rotationSnap) * self.rotationSnap);
-					quaternionZ.setFromAxisAngle(unitZ, Math.round((rotation.z - offsetRotation.z) / self.rotationSnap) * self.rotationSnap);
-				}
-				else
-				{
-					quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
-					quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
-					quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
-				}
-
-				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[0]);
-
-				if(self.axis === "X")
-				{
 					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionX);
-				}
-				else if(self.axis === "Y")
-				{
-					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionY);
-				}
-				else if(self.axis === "Z")
-				{
-					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionZ);
-				}
+					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
 
-				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
+					self.objects[i].quaternion.copy(tempQuaternion);
+				}
+				else if(self.space === "local")
+				{
+					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[i]));
 
-				self.objects[0].quaternion.copy(tempQuaternion);
+					tempVector.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix[i]));
+
+					rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
+					offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
+
+					quaternionXYZ.setFromRotationMatrix(oldRotationMatrix[i]);
+
+					if(self.snap)
+					{
+						quaternionX.setFromAxisAngle(unitX, Math.round((rotation.x - offsetRotation.x) / self.rotationSnap) * self.rotationSnap);
+						quaternionY.setFromAxisAngle(unitY, Math.round((rotation.y - offsetRotation.y) / self.rotationSnap) * self.rotationSnap);
+						quaternionZ.setFromAxisAngle(unitZ, Math.round((rotation.z - offsetRotation.z) / self.rotationSnap) * self.rotationSnap);
+					}
+					else
+					{
+						quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
+						quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
+						quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
+					}
+
+					if(self.axis === "X")
+					{
+						quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionX);
+					}
+					else if(self.axis === "Y")
+					{
+						quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionY);
+					}
+					else if(self.axis === "Z")
+					{
+						quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionZ);
+					}
+
+					self.objects[i].quaternion.copy(quaternionXYZ);
+				}
+				else if(self.space === "world")
+				{
+					rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
+					offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
+					tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix[i]));
+
+					if(self.snap)
+					{
+						quaternionX.setFromAxisAngle(unitX, Math.round((rotation.x - offsetRotation.x) / self.rotationSnap) * self.rotationSnap);
+						quaternionY.setFromAxisAngle(unitY, Math.round((rotation.y - offsetRotation.y) / self.rotationSnap) * self.rotationSnap);
+						quaternionZ.setFromAxisAngle(unitZ, Math.round((rotation.z - offsetRotation.z) / self.rotationSnap) * self.rotationSnap);
+					}
+					else
+					{
+						quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
+						quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
+						quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
+					}
+
+					quaternionXYZ.setFromRotationMatrix(worldRotationMatrix[i]);
+
+					if(self.axis === "X")
+					{
+						tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionX);
+					}
+					else if(self.axis === "Y")
+					{
+						tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionY);
+					}
+					else if(self.axis === "Z")
+					{
+						tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionZ);
+					}
+
+					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
+
+					self.objects[i].quaternion.copy(tempQuaternion);
+				}
 			}
 		}
 
