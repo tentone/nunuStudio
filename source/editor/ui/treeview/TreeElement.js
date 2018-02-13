@@ -2,10 +2,18 @@
 
 function TreeElement(container)
 {
-	Element.call(this, container.element);
-	
+	Element.call(this, container.parent);
+
 	this.container = container;
 
+	//Content
+	this.folded = false;
+	this.obj = null;
+	this.level = 0;
+	this.up = null; //Parent
+	this.children = [];
+
+	//Element
 	this.element.draggable = true;
 	this.element.style.width = "100%";
 	this.element.style.left = "0px";
@@ -62,13 +70,6 @@ function TreeElement(container)
 	this.label.style.whiteSpace = "nowrap";
 	this.label.style.top = "4px";
 	this.element.appendChild(this.label);
-
-	//Content
-	this.folded = false;
-	this.obj = null;
-	this.level = 0;
-	this.up = null; //Parent
-	this.children = [];
 
 	//Mouse enter
 	this.element.onmouseenter = function()
@@ -598,15 +599,7 @@ TreeElement.prototype.updateSceneData = function()
 TreeElement.prototype.setVisibility = function(visible)
 {
 	this.visible = visible;
-
-	if(this.visible)
-	{
-		this.element.style.display = "block";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.element.style.display = this.visible ? "block" : "none";
 };
 
 //Update interface
@@ -615,6 +608,7 @@ TreeElement.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
 	
 		var offset = this.level * 20;
 
@@ -631,7 +625,6 @@ TreeElement.prototype.updateInterface = function()
 
 		this.icon.style.left = (25 + offset) + "px";
 		this.label.style.left = (45 + offset) + "px";
-		this.element.style.top = this.position.y + "px";
 
 		//Update childs
 		for(var i = 0; i < this.children.length; i++)
