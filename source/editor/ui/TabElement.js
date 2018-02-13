@@ -27,7 +27,7 @@ function TabElement(parent, closeable, container, index, title, icon)
 
 TabElement.prototype = Object.create(Element.prototype);
 
-//Update tab metadata
+//Update tab metadata (called after applying changes to object)
 TabElement.prototype.updateMetadata = Element.EMPTY;
 
 //Activate tab (called when the tab is activated)
@@ -64,7 +64,7 @@ TabElement.prototype.deactivate = function()
 	this.active = false;
 };
 
-//Attach object or resource to tab (used to attach objects to tree elements)
+//Attach object or resource to tab (used to attach objects to tab elements)
 TabElement.prototype.attach = function(obj){};
 
 //Update tab settings (called after settings of the editor are changed)

@@ -4,18 +4,16 @@ function TreeView(parent, closeable, container, index)
 {	
 	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.filePath + "icons/misc/about.png");
 
+	this.element.style.display = "block";
 	this.element.style.overflow = "auto";
-	this.element.style.cursor = "default";
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
 	this.element.style.width = "100%";
 	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
-	
-	//Object
+
 	this.program = null;
 
-	//Childs
 	this.up = null;
 	this.children = [];
 }
@@ -23,14 +21,14 @@ function TreeView(parent, closeable, container, index)
 TreeView.prototype = Object.create(TabElement.prototype);
 
 //Set data from object
-TreeView.prototype.attachObject = function(program)
+TreeView.prototype.attach = function(program)
 {	
 	this.program = program;
 };
 
 TreeView.prototype.updateView = function()
 {
-	//var time = performance.now();
+	var time = performance.now();
 	
 	//Remove old elements
 	var children = this.children;
@@ -46,8 +44,8 @@ TreeView.prototype.updateView = function()
 
 	this.updateChildPosition();
 	
-	//var delta = performance.now() - time;
-	//console.log("Treeview update time: " + delta);
+	var delta = performance.now() - time;
+	console.log("Treeview update time: " + delta);
 };
 
 //Update which object is currently selected

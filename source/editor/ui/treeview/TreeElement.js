@@ -2,7 +2,7 @@
 
 function TreeElement(container)
 {
-	Element.call(this, container.parent);
+	Element.call(this, container.element);
 
 	this.container = container;
 
@@ -15,9 +15,9 @@ function TreeElement(container)
 
 	//Element
 	this.element.draggable = true;
-	this.element.style.width = "100%";
 	this.element.style.left = "0px";
 	this.element.style.height = "20px";
+	this.element.style.width = "100%";
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
 
@@ -32,24 +32,6 @@ function TreeElement(container)
 	this.arrow.style.left = "5px";
 	this.arrow.style.top = "3px";
 	this.element.appendChild(this.arrow);
-
-	var self = this;
-
-	this.arrow.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-
-	this.arrow.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
-
-	this.arrow.onclick = function()
-	{
-		self.folded = !self.folded;
-		self.updateFoldedState();
-	};
 
 	//Icon
 	this.icon = document.createElement("img");
@@ -70,6 +52,24 @@ function TreeElement(container)
 	this.label.style.whiteSpace = "nowrap";
 	this.label.style.top = "4px";
 	this.element.appendChild(this.label);
+
+	var self = this;
+
+	this.arrow.onmouseenter = function()
+	{
+		this.style.opacity = 1.0;
+	};
+
+	this.arrow.onmouseleave = function()
+	{
+		this.style.opacity = 0.5;
+	};
+
+	this.arrow.onclick = function()
+	{
+		self.folded = !self.folded;
+		self.updateFoldedState();
+	};
 
 	//Mouse enter
 	this.element.onmouseenter = function()
@@ -437,7 +437,7 @@ function TreeElement(container)
 		}
 	};
 
-	var openCameraTab = function()
+	function openCameraTab()
 	{
 		var tab = Interface.tab.getTab(CameraEditor, self.obj);
 		if(tab === null)
@@ -449,7 +449,7 @@ function TreeElement(container)
 	};
 
 	//Open new script tab
-	var openScriptTab = function()
+	function openScriptTab()
 	{
 		var tab = Interface.tab.getTab(ScriptEditor, self.obj);
 		if(tab === null)
@@ -461,7 +461,7 @@ function TreeElement(container)
 	};
 
 	//Open scene tab
-	var openSceneTab = function()
+	function openSceneTab()
 	{
 		var tab = Interface.tab.getTab(SceneEditor, self.obj);
 
@@ -476,7 +476,7 @@ function TreeElement(container)
 		tab.select();
 	};
 
-	var openParticleTab = function()
+	function openParticleTab()
 	{
 		var tab = Interface.tab.getTab(ParticleEditor, self.obj);
 		if(tab === null)

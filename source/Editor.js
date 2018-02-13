@@ -985,7 +985,7 @@ Editor.undo = function()
 Editor.updateObjectViews = function()
 {
 	//Update tree view to match actual scene
-	Interface.treeView.attachObject(Editor.program);
+	Interface.treeView.attach(Editor.program);
 	Interface.treeView.updateView();
 		
 	//Update panel
