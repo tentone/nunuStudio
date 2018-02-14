@@ -83,25 +83,27 @@ TreeView.prototype.updateView = function()
 			{
 				//Remove element
 				var from = diffs[i].from;
-				var length = from.length;
-				var tree = this.root;
+				var fromLength = from.length;
+				var fromTree = this.root;
 
-				for(var j = 0; j < length - 1; j++)
+				for(var j = 0; j < fromLength - 1; j++)
 				{
-					tree = tree.children[from[j]];
+					fromTree = fromTree.children[from[j]];
 				}
-				var element = tree.removeElementIndex(from[length - 1]);
 
 				//Insert in new position
 				var to = diffs[i].to;
-				length = to.length;
-				tree = this.root;
+				var toLength = to.length;
+				var toTree = this.root;
 
-				for(var j = 0; j < length - 1; j++)
+				for(var j = 0; j < toLength - 1; j++)
 				{
-					tree = tree.children[to[j]];
+					toTree = toTree.children[to[j]];
 				}
-				tree.insertElementIndex(element, to[length - 1]);
+
+				//Remove and re-insert
+				var element = fromTree.removeElementIndex(from[fromLength - 1]);
+				toTree.insertElementIndex(element, to[toLength - 1]);
 			}
 		}
 	}
@@ -109,9 +111,6 @@ TreeView.prototype.updateView = function()
 	{
 		this.createProgramTree();
 	}
-
-	//var delta = performance.now() - time;
-	//console.log("Update tree structure " + delta);
 
 	this.updateChildPosition();
 	
