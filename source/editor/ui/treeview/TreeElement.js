@@ -2,24 +2,34 @@
 
 function TreeElement(container)
 {
-	Element.call(this, container.element);
-
+	//Container
 	this.container = container;
 
-	//Content
-	this.folded = false;
+	//Attributes
+	this.size = new THREE.Vector2(0,0);
+	this.position = new THREE.Vector2(0,0);
+	this.visible = true;
+
+	//Object attached
 	this.obj = null;
-	this.level = 0;
-	this.up = null; //Parent
+	this.uuid = null;
+	this.folded = false;
+
+	//Children and parent elements
+	this.parent = null;
 	this.children = [];
+	this.level = 0;
 
 	//Element
+	this.element = document.createElement("div");
+	this.element.style.position = "absolute";
 	this.element.draggable = true;
 	this.element.style.left = "0px";
 	this.element.style.height = "20px";
 	this.element.style.width = "100%";
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
+	this.container.element.appendChild(this.element);
 
 	//Arrow
 	this.arrow = document.createElement("img");
@@ -392,7 +402,7 @@ function TreeElement(container)
 				Editor.history.add(new ObjectMovedAction(obj, self.obj));
 			}
 
-			self.updateSceneData();
+			self.container.updateView();
 		}
 	};
 
@@ -421,79 +431,54 @@ function TreeElement(container)
 	{
 		if(self.obj instanceof Script)
 		{
-			openScriptTab();
+			openTab(ScriptEditor, self.obj);
 		}
 		else if(self.obj instanceof Scene)
 		{
-			openSceneTab();
+			openTab(SceneEditor, self.obj);
 		}
 		else if(self.obj instanceof ParticleEmitter)
 		{
-			openParticleTab();
+			openTab(ParticleEditor, self.obj);
 		}
 		else if(self.obj instanceof THREE.Camera)
 		{
-			openCameraTab();
+			openTab(CameraEditor, self.obj);
 		}
 	};
 
-	function openCameraTab()
+	function openTab(Constructor, object)
 	{
-		var tab = Interface.tab.getTab(CameraEditor, self.obj);
+		var tab = Interface.tab.getTab(Constructor, object);
 		if(tab === null)
 		{
-			tab = Interface.tab.addTab(CameraEditor, true);
+			tab = Interface.tab.addTab(Constructor, true);
 			tab.attach(self.obj);
 		}
 		tab.select();
-	};
+	}
 
-	//Open new script tab
-	function openScriptTab()
-	{
-		var tab = Interface.tab.getTab(ScriptEditor, self.obj);
-		if(tab === null)
-		{
-			tab = Interface.tab.addTab(ScriptEditor, true);
-			tab.attach(self.obj);
-		}
-		tab.select();
-	};
-
-	//Open scene tab
 	function openSceneTab()
 	{
-		var tab = Interface.tab.getTab(SceneEditor, self.obj);
-
-		console.log(tab);
-
-		if(tab === null)
-		{
-			tab = Interface.tab.addTab(SceneEditor, true);
-			tab.attach(self.obj);
-		}
-
-		tab.select();
-	};
-
+		openTab(SceneEditor, self.obj);
+	}
+	function openScriptTab()
+	{
+		openTab(ScriptEditor, self.obj);
+	}
 	function openParticleTab()
 	{
-		var tab = Interface.tab.getTab(ParticleEditor, self.obj);
-		if(tab === null)
-		{
-			tab = Interface.tab.addTab(ParticleEditor, true);
-			tab.attach(self.obj);
-		}
-		tab.select();
-	};
+		openTab(ParticleEditor, self.obj);
+	}
 }
 
 TreeElement.prototype = Object.create(Element.prototype);
 
 //Set object attached to element
-TreeElement.prototype.setObject = function(obj)
+TreeElement.prototype.attach = function(obj)
 {
 	this.obj = obj;
+	this.uuid = obj.uuid;
 	this.folded = obj.folded;
 
 	this.setIcon(ObjectIcons.get(obj.type));
@@ -526,28 +511,8 @@ TreeElement.prototype.setLabel = function(label)
 TreeElement.prototype.addObject = function(obj)
 {
 	var element = new TreeElement(this.container);
-	element.setObject(obj);
-	element.up = this;
-	
-	this.children.push(element);
-	return element;
-};
-
-//Add tree element
-TreeElement.prototype.add = function(label, icon)
-{
-	var element = new TreeElement(this.container);
-	if(label !== undefined)
-	{
-		element.setLabel(label);
-	}
-	if(icon !== undefined)
-	{
-		element.setIcon(icon);
-	}
-	
-	element.up = this;
-
+	element.attach(obj);
+	element.parent = this;
 	this.children.push(element);
 	return element;
 };
@@ -555,9 +520,9 @@ TreeElement.prototype.add = function(label, icon)
 //Remove element
 TreeElement.prototype.destroy = function()
 {
-	if(this.parent.contains(this.element))
+	if(this.container.element.contains(this.element))
 	{
-		this.parent.removeChild(this.element);
+		this.container.element.removeChild(this.element);
 	}
 	
 	for(var i = 0; i < this.children.length; i++)
@@ -584,15 +549,6 @@ TreeElement.prototype.updateFoldedState = function()
 	}
 
 	this.container.updateChildPosition();
-};
-
-//Update parent tree element from scene data
-TreeElement.prototype.updateSceneData = function()
-{
-	if(this.container.scene !== null)
-	{
-		this.container.updateView();
-	}
 };
 
 //Set element visibility
