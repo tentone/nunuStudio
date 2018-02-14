@@ -110,11 +110,8 @@ function TreeElement(container)
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
-		if(!(self.obj instanceof Scene))
-		{
-			event.dataTransfer.setData("uuid", self.obj.uuid);
-			DragBuffer.pushDragElement(self.obj);
-		}
+		event.dataTransfer.setData("uuid", self.obj.uuid);
+		DragBuffer.pushDragElement(self.obj);
 	};
 
 	//Drag end
@@ -481,30 +478,18 @@ TreeElement.prototype.attach = function(obj)
 	this.uuid = obj.uuid;
 	this.folded = obj.folded;
 
-	this.setIcon(ObjectIcons.get(obj.type));
-	this.setLabel(obj.name);
+	this.icon.src = ObjectIcons.get(obj.type);
+	this.label.innerHTML = obj.name;
 	
 	if(Editor.isObjectSelected(obj))
 	{
 		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	}
 
-	if(obj.folded)
+	if(this.folded)
 	{
 		this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
 	}
-};
-
-//Set icon
-TreeElement.prototype.setIcon = function(icon)
-{
-	this.icon.src = icon;
-};
-
-//Set label
-TreeElement.prototype.setLabel = function(label)
-{
-	this.label.innerHTML = label;
 };
 
 //Add tree element from object
@@ -516,6 +501,33 @@ TreeElement.prototype.addObject = function(obj)
 	this.children.push(element);
 	return element;
 };
+
+//Add tree element from object
+TreeElement.prototype.insertObject = function(obj, index)
+{
+	var element = new TreeElement(this.container);
+	element.attach(obj);
+	element.parent = this;
+	this.children.splice(index, 0, element);
+	return element;
+};
+
+//Remove element
+TreeElement.prototype.removeElementIndex = function(index)
+{	
+	var element = this.children[index];
+	this.children.splice(index, 1);
+	return element;
+};
+
+//Add tree element from object
+TreeElement.prototype.insertElementIndex = function(element, index)
+{
+	element.parent = this;
+	this.children.splice(index, 0, element);
+	return element;
+};
+
 
 //Remove element
 TreeElement.prototype.destroy = function()
@@ -534,10 +546,7 @@ TreeElement.prototype.destroy = function()
 //Update folded state for this tree element
 TreeElement.prototype.updateFoldedState = function()
 {
-	if(this.obj !== undefined)
-	{
-		this.obj.folded = this.folded;
-	}
+	this.obj.folded = this.folded;
 
 	if(this.folded)
 	{

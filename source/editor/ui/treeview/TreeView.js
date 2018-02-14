@@ -21,7 +21,19 @@ TreeView.prototype = Object.create(TabElement.prototype);
 //Set data from object
 TreeView.prototype.attach = function(program)
 {	
+	if(this.program === program)
+	{
+		return;
+	}
+
 	this.program = program;
+
+	//Destroy old root object
+	if(this.root !== null)
+	{
+		this.root.destroy();
+		this.root = null;
+	}
 };
 
 TreeView.prototype.updateView = function()
@@ -30,11 +42,77 @@ TreeView.prototype.updateView = function()
 	
 	if(this.root !== null)
 	{
-		this.root.destroy();
-		this.root = null;
+		var diffs = TreeUtils.compare(this.root, this.program);
+
+		for(var i = 0; i < diffs.length; i++)
+		{
+			//Added
+			if(diffs[i].status === TreeUtils.DIFF_ADDED)
+			{
+				var to = diffs[i].to;
+				var length = to.length;
+				var tree = this.root;
+				var object = this.program;
+
+				for(var j = 0; j < length - 1; j++)
+				{
+					tree = tree.children[to[j]];
+					object = object.children[to[j]];
+				}
+
+				object = object.children[to[length - 1]];
+
+				tree.insertObject(object, to[length - 1]);
+			}
+			//Removed
+			else if(diffs[i].status === TreeUtils.DIFF_REMOVED)
+			{
+				var from = diffs[i].from;
+				var length = from.length;
+				var tree = this.root;
+
+				for(var j = 0; j < length - 1; j++)
+				{
+					tree = tree.children[from[j]];
+				}
+
+				tree.removeElementIndex(from[length - 1]).destroy();
+			}
+			//Moved
+			else if(diffs[i].status === TreeUtils.DIFF_MOVED)
+			{
+				//Remove element
+				var from = diffs[i].from;
+				var length = from.length;
+				var tree = this.root;
+
+				for(var j = 0; j < length - 1; j++)
+				{
+					tree = tree.children[from[j]];
+				}
+				var element = tree.removeElementIndex(from[length - 1]);
+
+				//Insert in new position
+				var to = diffs[i].to;
+				length = to.length;
+				tree = this.root;
+
+				for(var j = 0; j < length - 1; j++)
+				{
+					tree = tree.children[to[j]];
+				}
+				tree.insertElementIndex(element, to[length - 1]);
+			}
+		}
+	}
+	else
+	{
+		this.createProgramTree();
 	}
 
-	this.createProgramTree();
+	//var delta = performance.now() - time;
+	//console.log("Update tree structure " + delta);
+
 	this.updateChildPosition();
 	
 	var delta = performance.now() - time;
@@ -56,15 +134,6 @@ TreeView.prototype.createProgramTree = function()
 TreeView.prototype.updateSelectedObject = function()
 {
 	TreeView.updateSelectedObject(this.root);
-};
-
-//Remove element
-TreeView.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 };
 
 //Update tree view children positions
@@ -96,13 +165,11 @@ TreeView.prototype.updateInterface = function()
 //Fill tree roo with objects
 TreeView.fillTree = function(root, object)
 {
-	if(!object.hidden)
+	var element = root.addObject(object);
+
+	for(var i = 0; i < object.children.length; i++)
 	{
-		var element = root.addObject(object);
-		for(var i = 0; i < object.children.length; i++)
-		{
-			TreeView.fillTree(element, object.children[i]);
-		}
+		TreeView.fillTree(element, object.children[i]);
 	}
 };
 

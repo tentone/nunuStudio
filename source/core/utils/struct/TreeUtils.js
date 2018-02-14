@@ -145,10 +145,9 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 				else if(diffs[j].status === TreeUtils.DIFF_REMOVED && diffs[i].status === TreeUtils.DIFF_ADDED)
 				{
 					diffs[i].status = TreeUtils.DIFF_MOVED;
-					diffs[i].from = diffs[j].to;
+					diffs[i].from = diffs[j].from;
 					diffs.splice(j, 1);
 				}
-
 			}
 		}
 	}
