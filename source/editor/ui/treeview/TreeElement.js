@@ -469,6 +469,9 @@ function TreeElement(container)
 	}
 }
 
+TreeElement.ARROW_DOWN = Editor.filePath + "icons/misc/arrow_down.png";
+TreeElement.ARROW_RIGHT = Editor.filePath + "icons/misc/arrow_right.png";
+
 TreeElement.prototype = Object.create(Element.prototype);
 
 //Set object attached to element
@@ -478,7 +481,7 @@ TreeElement.prototype.attach = function(obj)
 	this.uuid = obj.uuid;
 	this.folded = obj.folded;
 
-	this.icon.src = ObjectIcons.get(obj.type);
+	this.icon.src = this.obj.hidden ? ObjectIcons.locked : ObjectIcons.get(obj.type);
 	this.label.innerHTML = obj.name;
 	
 	if(Editor.isObjectSelected(obj))
@@ -488,7 +491,7 @@ TreeElement.prototype.attach = function(obj)
 
 	if(this.folded)
 	{
-		this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
+		this.arrow.src = TreeElement.ARROW_RIGHT;
 	}
 };
 
@@ -528,7 +531,6 @@ TreeElement.prototype.insertElementIndex = function(element, index)
 	return element;
 };
 
-
 //Remove element
 TreeElement.prototype.destroy = function()
 {
@@ -547,16 +549,7 @@ TreeElement.prototype.destroy = function()
 TreeElement.prototype.updateFoldedState = function()
 {
 	this.obj.folded = this.folded;
-
-	if(this.folded)
-	{
-		this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
-	}
-	else
-	{
-		this.arrow.src = Editor.filePath + "icons/misc/arrow_down.png";
-	}
-
+	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
 	this.container.updateChildPosition();
 };
 

@@ -4,6 +4,7 @@ function ObjectIcons(){}
 
 ObjectIcons.path = "editor/files/icons/";
 ObjectIcons.default = ObjectIcons.path + "misc/question.png";
+ObjectIcons.locked = ObjectIcons.path + "misc/padlock.png";
 ObjectIcons.icons = [];
 
 //Devices

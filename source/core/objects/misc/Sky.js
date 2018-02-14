@@ -161,7 +161,8 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.sunDistance = (sunDistance !== undefined) ? sunDistance : 100;
 	this.dayTime = (dayTime !== undefined) ? dayTime : 120;
 	this.time = (time !== undefined) ? time : 75;
-
+	this.folded = true;
+	
 	this.updateSky();
 }
 
@@ -205,17 +206,6 @@ Sky.prototype.update = function(delta)
 
 	//Update children
 	THREE.Object3D.prototype.update.call(this, delta);
-};
-
-/**
- * Check if object is empty (don't have any childrens).
- * 
- * @method isEmpty
- * @return {boolean} True is object is empty
- */
-Sky.prototype.isEmpty = function()
-{
-	return this.children.length <= 3;
 };
 
 /**
