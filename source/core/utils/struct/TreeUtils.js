@@ -77,7 +77,7 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 		if(a.children[i].uuid !== b.children[j].uuid)
 		{
 			//Element missing (moved of deleted)
-			if(a.children[i + 1].uuid === b.children[j].uuid)
+			if((i + 1) < a.children.length && a.children[i + 1].uuid === b.children[j].uuid)
 			{
 				var from = pathA.slice(0);
 				from.push(i);
@@ -86,7 +86,7 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 				i++;
 			}
 			//Added element
-			else if(a.children[i].uuid === b.children[j + 1].uuid)
+			else if((j + 1) < b.children.length && a.children[i].uuid === b.children[j + 1].uuid)
 			{
 				var to = pathB.slice(0);
 				to.push(j);
