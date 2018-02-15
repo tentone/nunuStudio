@@ -54,6 +54,7 @@ function Panel(parent, obj)
 		this.form.nextRow();
 	}
 	
+	//Type
 	if(Settings.general.showType)
 	{
 		this.form.addText("Type");

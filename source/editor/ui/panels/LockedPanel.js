@@ -43,6 +43,14 @@ function LockedPanel(parent, obj)
 	this.type = this.form.addText("");
 	this.form.nextRow();
 
+	//UUID
+	if(Settings.general.showUUID)
+	{
+		this.form.addText("UUID");
+		this.uuid = this.form.addText("");
+		this.form.nextRow();
+	}
+
 	//Attach object
 	this.attach(obj);
 }
@@ -66,4 +74,9 @@ LockedPanel.prototype.updatePanel = function()
 {
 	this.name.setText(this.obj.name);
 	this.type.setText(this.obj.type);
+
+	if(this.uuid !== undefined)
+	{
+		this.uuid.setText(this.obj.uuid);
+	}
 };
