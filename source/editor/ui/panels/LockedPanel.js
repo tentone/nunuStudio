@@ -1,6 +1,6 @@
 "use strict";
 
-function Panel(parent, obj)
+function LockedPanel(parent, obj)
 {
 	Element.call(this, parent);
 
@@ -58,14 +58,7 @@ LockedPanel.prototype.attach = function(obj)
 //Update panel ui
 LockedPanel.prototype.updateInterface = function()
 {
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
 };
 
 //Update panel information

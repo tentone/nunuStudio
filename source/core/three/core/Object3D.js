@@ -128,7 +128,7 @@ THREE.Object3D.prototype.folded = false;
  * @property hidden
  * @type {boolean}
 */
-THREE.Object3D.prototype.hidden = false;
+THREE.Object3D.prototype.locked = false;
 
 /**
  * Play animations attached to this object.
@@ -401,7 +401,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	object.name = this.name;
 
 	object.folded = this.folded;
-	object.hidden = this.hidden;
+	object.locked = this.locked;
 
 	object.castShadow = this.castShadow;
 	object.receiveShadow = this.receiveShadow;
@@ -463,7 +463,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 		for(var i = 0; i < this.children.length; i ++)
 		{
-			if(!this.children[i].hidden)
+			if(!this.children[i].locked)
 			{
 				object.children.push(this.children[i].toJSON(meta).object);
 			}

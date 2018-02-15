@@ -482,7 +482,7 @@ TreeElement.prototype.attach = function(obj)
 	this.folded = obj.folded;
 
 	this.label.innerHTML = obj.name;
-	this.icon.src = this.obj.hidden ? ObjectIcons.locked : ObjectIcons.get(obj.type);
+	this.icon.src = this.obj.locked ? ObjectIcons.locked : ObjectIcons.get(obj.type);
 	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
 	
 	if(Editor.isObjectSelected(obj))

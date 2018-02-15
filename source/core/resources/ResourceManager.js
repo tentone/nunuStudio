@@ -92,7 +92,7 @@ ResourceManager.retrieveResources = function(program)
 {
 	program.traverse(function(child)
 	{
-		if(child.hidden)
+		if(child.locked)
 		{
 			return;
 		}

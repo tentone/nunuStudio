@@ -99,14 +99,14 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.hemisphere = new THREE.HemisphereLight(0, 0, 0.5);
 	this.hemisphere.color.setHSL(0.6, 1, 0.6);
 	this.hemisphere.groundColor.setHSL(0.1, 1, 0.75);
-	this.hemisphere.hidden = true;
+	this.hemisphere.locked = true;
 	this.hemisphere.matrixAutoUpdate = false;
 	this.add(this.hemisphere);
 
 	//Sun light
 	this.sun = new DirectionalLight(this.sunColor, this.intensity);
 	this.sun.castShadow = true;
-	this.sun.hidden = true;
+	this.sun.locked = true;
 	this.add(this.sun);
 
 	//Vertex Shader
@@ -146,7 +146,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
 
 	this.sky = new THREE.Mesh(geometry, material);
-	this.sky.hidden = true;
+	this.sky.locked = true;
 	this.sky.matrixAutoUpdate = false;
 	this.add(this.sky);
 

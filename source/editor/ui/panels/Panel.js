@@ -197,14 +197,7 @@ Panel.prototype.attach = function(obj)
 //Update panel ui
 Panel.prototype.updateInterface = function()
 {
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
 };
 
 //Update panel information

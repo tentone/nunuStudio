@@ -1015,7 +1015,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	object.uuid = data.uuid;
 	object.name = data.name;
 
-	object.hidden = data.hidden === true;
+	object.locked = data.locked === true || data.hidden === true;
 	object.folded = data.folded === true;
 
 	//Animations
