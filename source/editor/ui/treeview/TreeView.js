@@ -42,7 +42,18 @@ TreeView.prototype.updateView = function()
 	
 	if(this.root !== null)
 	{
-		var diffs = TreeUtils.compare(this.root, this.program);
+		try
+		{
+			var diffs = TreeUtils.compare(this.root, this.program);
+		}
+		catch(e)
+		{
+			console.error("nunuStudio: Error comparing trees, creating new treeview", e);
+			diffs = [];
+			this.createProgramTree();
+		}
+
+		console.log(diffs);
 
 		for(var i = 0; i < diffs.length; i++)
 		{
@@ -120,6 +131,11 @@ TreeView.prototype.updateView = function()
 
 TreeView.prototype.createProgramTree = function()
 {
+	if(this.root === null)
+	{
+		this.root.destroy();
+	}
+
 	this.root = new TreeElement(this);
 	this.root.attach(this.program);
 

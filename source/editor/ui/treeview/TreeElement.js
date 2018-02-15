@@ -563,7 +563,9 @@ TreeElement.prototype.updateInterface = function()
 	{
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
-	
+		
+		this.label.innerHTML = this.obj.name;
+
 		var offset = this.level * 20;
 
 		//Arrow

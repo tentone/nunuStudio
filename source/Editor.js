@@ -375,6 +375,7 @@ include("editor/ui/preview/TextureRenderer.js");
 include("editor/ui/preview/GeometryRenderer.js");
 
 include("editor/ui/panels/Panel.js");
+include("editor/ui/panels/LockedPanel.js");
 include("editor/ui/panels/ObjectPanel.js");
 include("editor/ui/panels/ScenePanel.js");
 include("editor/ui/panels/ScriptPanel.js");
@@ -1073,7 +1074,11 @@ Editor.selectObjectPanel = function()
 	{
 		var object = Editor.selectedObjects[0];
 
-		if(object instanceof SpineAnimation)
+		if(object.locked)
+		{
+			Interface.panel = new LockedPanel(Interface.explorerResizable.divB, object);
+		}
+		else if(object instanceof SpineAnimation)
 		{
 			Interface.panel = new SpinePanel(Interface.explorerResizable.divB, object);
 		}
