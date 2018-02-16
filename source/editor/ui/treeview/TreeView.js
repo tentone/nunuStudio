@@ -64,7 +64,23 @@ TreeView.prototype.updateView = function()
 
 				object = object.children[to[length - 1]];
 
+				//Create object and children
 				tree.insertObject(object, to[length - 1]);
+				for(var k = 0; k < object.children.length; k++)
+				{
+					insertObject(element, object.children[k]);
+				}
+
+				//Auxiliar method to insert object recursivelly
+				function insertObject(parent, object)
+				{
+					var element = parent.addObject(object);
+
+					for(var k = 0; k < object.children.length; k++)
+					{
+						insertObject(element, object.children[k]);
+					}
+				}
 			}
 			//Removed
 			else if(diffs[i].status === TreeUtils.DIFF_REMOVED)
