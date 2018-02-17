@@ -65,7 +65,7 @@ TreeView.prototype.updateView = function()
 				object = object.children[to[length - 1]];
 
 				//Create object and children
-				tree.insertObject(object, to[length - 1]);
+				var element = tree.insertObject(object, to[length - 1]);
 				for(var k = 0; k < object.children.length; k++)
 				{
 					insertObject(element, object.children[k]);

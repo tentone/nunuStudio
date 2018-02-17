@@ -130,7 +130,7 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 	}
 
 	//Check if some elements have removed and added status at same time
-	for(var i = 0; i < diffs.length; i++)
+	/*for(var i = 0; i < diffs.length; i++)
 	{
 		for(var j = 0; j < diffs.length; j++)
 		{
@@ -150,7 +150,7 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 				}
 			}
 		}
-	}
+	}*/
 
 	return diffs;
 };
