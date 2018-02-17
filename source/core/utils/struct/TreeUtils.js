@@ -72,11 +72,12 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 	}
 
 	var i = 0, j = 0;
+	
 	while(i < a.children.length && j < b.children.length)
 	{
 		if(a.children[i].uuid !== b.children[j].uuid)
 		{
-			//Element missing (moved of deleted)
+			//Element missing (deleted or moved)
 			if((i + 1) < a.children.length && a.children[i + 1].uuid === b.children[j].uuid)
 			{
 				var from = pathA.slice(0);
@@ -130,7 +131,7 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 	}
 
 	//Check if some elements have removed and added status at same time
-	/*for(var i = 0; i < diffs.length; i++)
+	for(var i = 0; i < diffs.length; i++)
 	{
 		for(var j = 0; j < diffs.length; j++)
 		{
@@ -150,7 +151,7 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 				}
 			}
 		}
-	}*/
+	}
 
 	return diffs;
 };
