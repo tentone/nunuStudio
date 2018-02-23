@@ -83,9 +83,43 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 		//Different element
 		if(oldChildren[i].uuid !== newChildren[j].uuid)
 		{
-			//Check if the elements exists instead of checking only the next element
-			//TODO
+			/*
+			//Check if elements were removed
+			for(var k = i + 1; k < oldChildren.length; k++)
+			{
+				//Found matching element
+				if(oldChildren[k].uuid === newChildren[j].uuid)
+				{
+					for(var l = i; l < k; l++)
+					{
+						var from = pathOldTree.slice(0);
+						from.push(l);
+						diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: oldChildren[l].uuid, from: from, to: null});
+					}
 
+					i = k;
+					break;
+				}
+			}
+			
+			//Check if elements were added
+			for(var k = j + 1; k < newChildren.length; k++)
+			{
+				//Found matching element
+				if(newChildren[k].uuid === oldChildren[j].uuid)
+				{
+					for(var l = j; l < k; l++)
+					{
+						var from = pathOldTree.slice(0);
+						from.push(l);
+						diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: newChildren[l].uuid, from: from, to: null});
+					}
+
+					j = k;
+					break;
+				}
+			}
+			*/
 
 			//Element removed
 			if((i + 1) < oldLength && oldChildren[i + 1].uuid === newChildren[j].uuid)
@@ -96,7 +130,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 				diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: oldChildren[i].uuid, from: from, to: null});
 				i++;
 			}
-			//Added element
+			//Element added
 			else if((j + 1) < newLength && oldChildren[i].uuid === newChildren[j + 1].uuid)
 			{
 				var to = pathNewTree.slice(0);
@@ -105,9 +139,11 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 				diffs.push({status: TreeUtils.DIFF_ADDED, uuid: newChildren[j].uuid, from: null, to: to});
 				j++;
 			}
+			
 		}
-		//If element is the same check compare its children
-		else
+
+		//If element is the same compare its children
+		if(oldChildren[i].uuid === newChildren[j].uuid)
 		{
 			var from = pathOldTree.slice(0);
 			from.push(i);
@@ -143,7 +179,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 	}
 
 	//Check if some elements have removed and added status at same time
-	/*for(var i = 0; i < diffs.length; i++)
+	for(var i = 0; i < diffs.length; i++)
 	{
 		for(var j = 0; j < diffs.length; j++)
 		{
@@ -163,7 +199,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 				}
 			}
 		}
-	}*/
+	}
 
 	return diffs;
 };

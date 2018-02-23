@@ -38,13 +38,9 @@ TreeView.prototype.attach = function(program)
 
 TreeView.prototype.updateView = function()
 {
-	var time = performance.now();
-	
 	if(this.root !== null)
 	{
 		var diffs = TreeUtils.compare(this.root, this.program, diffs);
-
-		console.log(diffs);
 
 		for(var i = 0; i < diffs.length; i++)
 		{
@@ -131,9 +127,6 @@ TreeView.prototype.updateView = function()
 	}
 
 	this.updateChildPosition();
-	
-	var delta = performance.now() - time;
-	console.log("Treeview update time: " + delta);
 };
 
 TreeView.prototype.createProgramTree = function()
