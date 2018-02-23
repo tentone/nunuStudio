@@ -37,7 +37,7 @@ TreeUtils.DIFF_MOVED = 2;
 /**
  * Compare two trees and return list of changes.
  *
- * A is compared to B, A is the oldest version of tree and B the newest.
+ * oldTree is compared to newTree. The list of changes indicate wath needs to be changed in oldTree to become wqual to the newTree.
  *
  * Elements inside Trees are compared using their UUID.
  *
@@ -45,14 +45,14 @@ TreeUtils.DIFF_MOVED = 2;
  *
  * @static
  * @method compare
- * @param {Tree} a Old version of Tree.
- * @param {Tree} b New version of Tree.
- * @param {Array} diffs Recursive parameter not required.
- * @param {Array} pathA Recursive parameter not required.
- * @param {Array} pathB Recursive parameter not required.
- * @return {Array} Array with diffs between A and B.
+ * @param {Tree} oldTree Old version of Tree.
+ * @param {Tree} newTree New version of Tree.
+ * @param {Array} diffs Recursive parameter (optional).
+ * @param {Array} pathOldTree Recursive parameter (optional).
+ * @param {Array} pathNewTree Recursive parameter (optional).
+ * @return {Array} Array with diffs between oldTree and newTree.
  */
-TreeUtils.compare = function(a, b, diffs, pathA, pathB)
+TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 {
 	//Differences array
 	if(diffs === undefined)
@@ -61,77 +61,89 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 	}
 
 	//Path to this tree point in positions
-	if(pathA === undefined)
+	if(pathOldTree === undefined)
 	{
-		pathA = [];
+		pathOldTree = [];
+	}
+	if(pathNewTree === undefined)
+	{
+		pathNewTree = [];
 	}
 
-	if(pathB === undefined)
-	{
-		pathB = [];
-	}
+	var oldChildren = oldTree.children;
+	var oldLength = oldChildren.length;
+
+	var newChildren = newTree.children;
+	var newLength = newChildren.length;
 
 	var i = 0, j = 0;
 	
-	while(i < a.children.length && j < b.children.length)
+	while(i < oldLength && j < newLength)
 	{
-		if(a.children[i].uuid !== b.children[j].uuid)
+		//Different element
+		if(oldChildren[i].uuid !== newChildren[j].uuid)
 		{
-			//Element missing (deleted or moved)
-			if((i + 1) < a.children.length && a.children[i + 1].uuid === b.children[j].uuid)
-			{
-				var from = pathA.slice(0);
-				from.push(i);
+			//Check if the elements exists instead of checking only the next element
+			//TODO
 
-				diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: a.children[i].uuid, from: from, to: null});
+
+			//Element removed
+			if((i + 1) < oldLength && oldChildren[i + 1].uuid === newChildren[j].uuid)
+			{
+				var from = pathOldTree.slice(0);
+				from.push(i);
+				
+				diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: oldChildren[i].uuid, from: from, to: null});
 				i++;
 			}
 			//Added element
-			else if((j + 1) < b.children.length && a.children[i].uuid === b.children[j + 1].uuid)
+			else if((j + 1) < newLength && oldChildren[i].uuid === newChildren[j + 1].uuid)
 			{
-				var to = pathB.slice(0);
+				var to = pathNewTree.slice(0);
 				to.push(j);
 
-				diffs.push({status: TreeUtils.DIFF_ADDED, uuid: b.children[j].uuid, from: null, to: to});
+				diffs.push({status: TreeUtils.DIFF_ADDED, uuid: newChildren[j].uuid, from: null, to: to});
 				j++;
 			}
 		}
+		//If element is the same check compare its children
 		else
 		{
-			var from = pathA.slice(0);
+			var from = pathOldTree.slice(0);
 			from.push(i);
-			var to = pathB.slice(0);
+			
+			var to = pathNewTree.slice(0);
 			to.push(j);
 
-			TreeUtils.compare(a.children[i], b.children[j], diffs, from, to);
+			TreeUtils.compare(oldChildren[i], newChildren[j], diffs, from, to);
 		}
 
 		i++;
 		j++;
 	}
 
-	//Remaining elements missing in a
-	while(i < a.children.length)
+	//Remaining elements missing in A
+	while(i < oldLength)
 	{
-		var from = pathA.slice(0);
+		var from = pathOldTree.slice(0);
 		from.push(i);
 
-		diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: a.children[i].uuid, from: from, to: null});
+		diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: oldChildren[i].uuid, from: from, to: null});
 		i++;
 	}
 
-	//Extra elements added in b
-	while(j < b.children.length)
+	//Extra elements added in B
+	while(j < newLength)
 	{
-		var to = pathB.slice(0);
+		var to = pathNewTree.slice(0);
 		to.push(j);
 
-		diffs.push({status: TreeUtils.DIFF_ADDED, uuid: b.children[j].uuid, from: null, to: to});
+		diffs.push({status: TreeUtils.DIFF_ADDED, uuid: newChildren[j].uuid, from: null, to: to});
 		j++;
 	}
 
 	//Check if some elements have removed and added status at same time
-	for(var i = 0; i < diffs.length; i++)
+	/*for(var i = 0; i < diffs.length; i++)
 	{
 		for(var j = 0; j < diffs.length; j++)
 		{
@@ -151,10 +163,41 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 				}
 			}
 		}
-	}
+	}*/
 
 	return diffs;
 };
+
+/**
+ * Print tree into console, recursively.
+ *
+ * Trees are represented by a UUID a parent and a children array.
+ *
+ * @method print
+ * @param {Tree} tree Tree object to be printed.
+ * @param {Number} level Recursive parameter, not required.
+ */
+TreeUtils.print = function(tree, level)
+{
+	if(level === undefined)
+	{
+		level = 1;
+	}
+
+	var space = "";
+	for(var i = level - 1; i > 0; i--)
+	{
+		space += "----";
+	}
+	space += "--->";
+
+	for(var i = 0; i < tree.children.length; i++)
+	{
+		console.log(space + tree.children[i].uuid);
+		TreeUtils.print(tree.children[i], level + 1);
+	}
+};
+
 
 /**
  * Unit test for tree comparison.
@@ -171,11 +214,11 @@ TreeUtils.test = function()
 	var treeA = new Tree("root");
 	treeA.add(new Tree("a"));
 	var b = new Tree("b");
-	b.add(new Tree("ba"));
-	b.add(new Tree("bb"));
-	b.add(new Tree("bc"));
+	newTree.add(new Tree("ba"));
+	newTree.add(new Tree("bb"));
+	newTree.add(new Tree("bc"));
 	var bd = new Tree("bd");
-	b.add(bd);
+	newTree.add(bd);
 	treeA.add(b);
 	treeA.add(new Tree("c"));
 	var d = new Tree("d");
