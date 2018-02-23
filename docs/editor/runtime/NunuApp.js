@@ -129,7 +129,6 @@ include("core/objects/lights/AmbientLight.js");
 include("core/objects/lights/DirectionalLight.js");
 include("core/objects/lights/HemisphereLight.js");
 include("core/objects/lights/RectAreaLight.js");
-include("core/objects/lights/Sky.js");
 include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
 include("core/objects/audio/AudioEmitter.js");
@@ -139,6 +138,7 @@ include("core/objects/physics/PhysicsObject.js");
 include("core/objects/spine/SpineAnimation.js");
 include("core/objects/spine/SpineTexture.js");
 include("core/objects/particle/ParticleEmitter.js");
+include("core/objects/misc/Sky.js");
 include("core/objects/misc/Container.js");
 include("core/objects/misc/CubeCamera.js");
 include("core/objects/misc/LensFlare.js");
@@ -151,6 +151,8 @@ include("core/objects/Scene.js");
 include("core/utils/binary/Base64Utils.js");
 include("core/utils/binary/ArraybufferUtils.js");
 include("core/utils/binary/BufferUtils.js");
+
+include("core/utils/struct/TreeUtils.js");
 
 include("core/utils/Timer.js");
 include("core/utils/AnimationTimer.js");

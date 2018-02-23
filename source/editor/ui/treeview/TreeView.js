@@ -38,9 +38,11 @@ TreeView.prototype.attach = function(program)
 
 TreeView.prototype.updateView = function()
 {
-	if(this.root !== null)
+	/*if(this.root !== null)
 	{
 		var diffs = TreeUtils.compare(this.root, this.program, diffs);
+
+		console.log(diffs);
 
 		for(var i = 0; i < diffs.length; i++)
 		{
@@ -124,8 +126,9 @@ TreeView.prototype.updateView = function()
 	else
 	{
 		this.createProgramTree();
-	}
+	}*/
 
+	this.createProgramTree();
 	this.updateChildPosition();
 };
 

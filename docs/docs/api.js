@@ -189,7 +189,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Lights",
             "name": "Lights",
-            "description": "Ambient lights are used to create base ilumanition for the scene.\n\nThey are not influenced by position, scale or rotation.\n\nBased on THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight"
+            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\n\nThis object is composed by 3 internal objects\n\t- Hemisphere light\n\t- Directional Light\n\t- Mesh"
         },
         {
             "displayName": "Loaders",

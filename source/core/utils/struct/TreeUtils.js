@@ -106,7 +106,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 			for(var k = j + 1; k < newChildren.length; k++)
 			{
 				//Found matching element
-				if(newChildren[k].uuid === oldChildren[j].uuid)
+				if(newChildren[k].uuid === oldChildren[i].uuid)
 				{
 					for(var l = j; l < k; l++)
 					{
@@ -120,7 +120,6 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 				}
 			}
 			*/
-
 			//Element removed
 			if((i + 1) < oldLength && oldChildren[i + 1].uuid === newChildren[j].uuid)
 			{
@@ -139,7 +138,6 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 				diffs.push({status: TreeUtils.DIFF_ADDED, uuid: newChildren[j].uuid, from: null, to: to});
 				j++;
 			}
-			
 		}
 
 		//If element is the same compare its children
@@ -179,7 +177,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 	}
 
 	//Check if some elements have removed and added status at same time
-	for(var i = 0; i < diffs.length; i++)
+	/*for(var i = 0; i < diffs.length; i++)
 	{
 		for(var j = 0; j < diffs.length; j++)
 		{
@@ -199,7 +197,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 				}
 			}
 		}
-	}
+	}*/
 
 	return diffs;
 };

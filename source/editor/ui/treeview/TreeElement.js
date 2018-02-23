@@ -110,8 +110,11 @@ function TreeElement(container)
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
-		event.dataTransfer.setData("uuid", self.obj.uuid);
-		DragBuffer.pushDragElement(self.obj);
+		if(!self.obj.locked)
+		{
+			event.dataTransfer.setData("uuid", self.obj.uuid);
+			DragBuffer.pushDragElement(self.obj);
+		}
 	};
 
 	//Drag end
@@ -120,9 +123,12 @@ function TreeElement(container)
 		clearBorder();
 		event.preventDefault();
 
-		//Try to remove event from buffer
-		var uuid = event.dataTransfer.getData("uuid");
-		var obj = DragBuffer.popDragElement(uuid);
+		if(!self.obj.locked)
+		{
+			//Try to remove event from buffer
+			var uuid = event.dataTransfer.getData("uuid");
+			var obj = DragBuffer.popDragElement(uuid);
+		}
 	};
 
 	//Drag over
@@ -130,32 +136,35 @@ function TreeElement(container)
 	{
 		event.preventDefault();
 
-		//Above
-		if(event.layerY < 5)
+		if(!self.obj.locked)
 		{
-			if(state !== 1)
+			//Above
+			if(event.layerY < 5)
 			{
-				state = 1;
-				clearBorder();
-				this.style.borderTop = "thin solid #999999";
+				if(state !== 1)
+				{
+					state = 1;
+					clearBorder();
+					this.style.borderTop = "thin solid #999999";
+				}
 			}
-		}
-		//Bellow
-		else if(event.layerY > 15)
-		{
-			if(state !== 2)
+			//Bellow
+			else if(event.layerY > 15)
 			{
-				state = 2;
-				clearBorder();
-				this.style.borderBottom = "thin solid #999999";
+				if(state !== 2)
+				{
+					state = 2;
+					clearBorder();
+					this.style.borderBottom = "thin solid #999999";
+				}
 			}
-		}
-		//Inside
-		else if(state !== 3)
-		{
-			state = 3;
-			clearBorder();
-			this.style.border = "thin solid #999999";
+			//Inside
+			else if(state !== 3)
+			{
+				state = 3;
+				clearBorder();
+				this.style.border = "thin solid #999999";
+			}
 		}
 	};
 
@@ -171,7 +180,7 @@ function TreeElement(container)
 	//Context menu
 	this.element.oncontextmenu = function(event)
 	{
-		if(self.obj !== null)
+		if(!self.obj.locked)
 		{
 			//Scene and program flags
 			var program = self.obj instanceof Program;
@@ -375,31 +384,34 @@ function TreeElement(container)
 		event.preventDefault();
 		clearBorder();
 
-		//Collect element from buffer
-		var uuid = event.dataTransfer.getData("uuid");
-		var obj = DragBuffer.popDragElement(uuid);
-
-		if(obj instanceof THREE.Object3D && obj !== self.obj && !ObjectUtils.isChildOf(obj ,self.obj))
+		if(!self.obj.locked)
 		{
-			//Above
-			if(event.layerY < 5)
-			{
-				var index = self.obj.parent.children.indexOf(self.obj);
-				Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-			}
-			//Bellow
-			else if(event.layerY > 15)
-			{
-				var index = self.obj.parent.children.indexOf(self.obj) + 1;
-				Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-			}
-			//Inside
-			else
-			{	
-				Editor.history.add(new ObjectMovedAction(obj, self.obj));
-			}
+			//Collect element from buffer
+			var uuid = event.dataTransfer.getData("uuid");
+			var obj = DragBuffer.popDragElement(uuid);
 
-			self.container.updateView();
+			if(obj instanceof THREE.Object3D && obj !== self.obj && !ObjectUtils.isChildOf(obj ,self.obj))
+			{
+				//Above
+				if(event.layerY < 5)
+				{
+					var index = self.obj.parent.children.indexOf(self.obj);
+					Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+				}
+				//Bellow
+				else if(event.layerY > 15)
+				{
+					var index = self.obj.parent.children.indexOf(self.obj) + 1;
+					Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+				}
+				//Inside
+				else
+				{	
+					Editor.history.add(new ObjectMovedAction(obj, self.obj));
+				}
+
+				self.container.updateView();
+			}
 		}
 	};
 
@@ -426,21 +438,24 @@ function TreeElement(container)
 	//Double click
 	this.element.ondblclick = function()
 	{
-		if(self.obj instanceof Script)
+		if(!self.obj.locked)
 		{
-			openTab(ScriptEditor, self.obj);
-		}
-		else if(self.obj instanceof Scene)
-		{
-			openTab(SceneEditor, self.obj);
-		}
-		else if(self.obj instanceof ParticleEmitter)
-		{
-			openTab(ParticleEditor, self.obj);
-		}
-		else if(self.obj instanceof THREE.Camera)
-		{
-			openTab(CameraEditor, self.obj);
+			if(self.obj instanceof Script)
+			{
+				openTab(ScriptEditor, self.obj);
+			}
+			else if(self.obj instanceof Scene)
+			{
+				openTab(SceneEditor, self.obj);
+			}
+			else if(self.obj instanceof ParticleEmitter)
+			{
+				openTab(ParticleEditor, self.obj);
+			}
+			else if(self.obj instanceof THREE.Camera)
+			{
+				openTab(CameraEditor, self.obj);
+			}
 		}
 	};
 
@@ -480,6 +495,8 @@ TreeElement.prototype.attach = function(obj)
 	this.obj = obj;
 	this.uuid = obj.uuid;
 	this.folded = obj.folded;
+
+	this.element.draggable = !obj.locked;
 
 	this.label.innerHTML = obj.name;
 	this.icon.src = this.obj.locked ? ObjectIcons.locked : ObjectIcons.get(obj.type);

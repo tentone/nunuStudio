@@ -805,11 +805,14 @@ Editor.renameObject = function(obj)
 		}
 	}
 
-	var name = prompt("Rename object", obj.name);
-	if(name !== null && name !== "")
+	if(!obj.locked)
 	{
-		Editor.history.add(new ChangeAction(obj, "name", name));
-		Editor.updateObjectViews();
+		var name = prompt("Rename object", obj.name);
+		if(name !== null && name !== "")
+		{
+			Editor.history.add(new ChangeAction(obj, "name", name));
+			Editor.updateObjectViews();
+		}
 	}
 };
 
@@ -822,7 +825,6 @@ Editor.deleteObject = function(obj)
 	{ 
 		if(obj === undefined)
 		{
-
 			if(Editor.hasObjectSelected())
 			{
 				var selected = Editor.selectedObjects;
@@ -849,7 +851,7 @@ Editor.deleteObject = function(obj)
 			{
 				continue;
 			}
-			else if(selected[i] instanceof THREE.Object3D)
+			else if(selected[i] instanceof THREE.Object3D && !selected[i].locked)
 			{
 				if(Editor.isObjectSelected(selected[i]))
 				{
@@ -873,20 +875,27 @@ Editor.deleteObject = function(obj)
 //Copy selected object
 Editor.copyObject = function(obj)
 {
-	if(obj !== undefined)
+	//If no object passed copy selected object
+	if(obj === undefined)
 	{
-		if(Editor.clipboard !== undefined)
+		if(Editor.hasObjectSelected())
 		{
-			Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
+			obj = Editor.selectedObjects[0];
+		}
+		else
+		{
+			return;
 		}
 	}
-	//If no object passed copy selected object
-	else if(Editor.hasObjectSelected() && !(Editor.selectedObjects[0] instanceof Program || Editor.selectedObjects[0] instanceof Scene))
+
+	if(obj instanceof Program || obj instanceof Scene)
 	{
-		if(Editor.clipboard !== undefined)
-		{
-			Editor.clipboard.set(JSON.stringify(Editor.selectedObjects[0].toJSON()), "text");
-		}
+		return;
+	}
+
+	if(!obj.locked)
+	{
+		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
 	}
 };
 
@@ -911,17 +920,17 @@ Editor.cutObject = function(obj)
 		return;
 	}
 
-	if(Editor.clipboard !== undefined)
+	if(!obj.locked)
 	{
 		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
-	}
-	
-	Editor.history.add(new ObjectRemovedAction(obj));
+		
+		Editor.history.add(new ObjectRemovedAction(obj));
 
-	Editor.updateObjectViews();
-	if(Editor.isObjectSelected(obj))
-	{
-		Editor.resetEditingFlags();
+		Editor.updateObjectViews();
+		if(Editor.isObjectSelected(obj))
+		{
+			Editor.resetEditingFlags();
+		}
 	}
 };
 
@@ -941,7 +950,7 @@ Editor.pasteObject = function(target)
 		});
 
 		//Add object to target
-		if(target !== undefined)
+		if(target !== undefined && !target.locked)
 		{
 			Editor.history.add(new ObjectAddedAction(obj, target));
 		}

@@ -246,9 +246,7 @@
         },
         "..\\..\\source\\core\\objects\\lights\\AmbientLight.js": {
             "name": "..\\..\\source\\core\\objects\\lights\\AmbientLight.js",
-            "modules": {
-                "Lights": 1
-            },
+            "modules": {},
             "classes": {
                 "AmbientLight": 1
             },
@@ -287,15 +285,6 @@
             "modules": {},
             "classes": {
                 "RectAreaLight": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\objects\\lights\\Sky.js": {
-            "name": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "modules": {},
-            "classes": {
-                "Sky": 1
             },
             "fors": {},
             "namespaces": {}
@@ -363,6 +352,17 @@
             "modules": {},
             "classes": {
                 "LensFlare": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\objects\\misc\\Sky.js": {
+            "name": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "modules": {
+                "Lights": 1
+            },
+            "classes": {
+                "Sky": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1131,20 +1131,20 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "Sky": 1,
                 "AmbientLight": 1,
                 "DirectionalLight": 1,
                 "HemisphereLight": 1,
                 "PointLight": 1,
                 "RectAreaLight": 1,
-                "Sky": 1,
                 "SpotLight": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
             "line": 3,
-            "description": "Ambient lights are used to create base ilumanition for the scene.\n\nThey are not influenced by position, scale or rotation.\n\nBased on THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight"
+            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\n\nThis object is composed by 3 internal objects\n\t- Hemisphere light\n\t- Directional Light\n\t- Mesh"
         },
         "Meshes": {
             "name": "Meshes",
@@ -2125,44 +2125,6 @@
             "extends": "{RectAreaLight}",
             "is_constructor": 1
         },
-        "Sky": {
-            "name": "Sky",
-            "shortname": "Sky",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Lights",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 3,
-            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\n\nThis object is composed by 3 internal objects\n\t- Hemisphere light\n\t- Directional Light\n\t- Mesh",
-            "params": [
-                {
-                    "name": "autoUpdate",
-                    "description": "If true sky auto updated its state",
-                    "type": "Boolean"
-                },
-                {
-                    "name": "dayTime",
-                    "description": "Day duration in seconds",
-                    "type": "Number"
-                },
-                {
-                    "name": "sunDistance",
-                    "description": "Distance of the sun",
-                    "type": "Number"
-                },
-                {
-                    "name": "time",
-                    "description": "Starting time",
-                    "type": "Number"
-                }
-            ],
-            "extends": "{Object3D}",
-            "is_constructor": 1
-        },
         "SpotLight": {
             "name": "SpotLight",
             "shortname": "SpotLight",
@@ -2374,6 +2336,44 @@
             "extends": "{Object3D}",
             "is_constructor": 1,
             "author": "tentone"
+        },
+        "Sky": {
+            "name": "Sky",
+            "shortname": "Sky",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 3,
+            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\n\nThis object is composed by 3 internal objects\n\t- Hemisphere light\n\t- Directional Light\n\t- Mesh",
+            "params": [
+                {
+                    "name": "autoUpdate",
+                    "description": "If true sky auto updated its state",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "dayTime",
+                    "description": "Day duration in seconds",
+                    "type": "Number"
+                },
+                {
+                    "name": "sunDistance",
+                    "description": "Distance of the sun",
+                    "type": "Number"
+                },
+                {
+                    "name": "time",
+                    "description": "Starting time",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{Object3D}",
+            "is_constructor": 1
         },
         "ParticleEmitter": {
             "name": "ParticleEmitter",
@@ -3790,7 +3790,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 163,
+            "line": 165,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -8077,189 +8077,6 @@
             "module": "Lights"
         },
         {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 21,
-            "description": "Clock used to control day time",
-            "itemtype": "property",
-            "name": "clock",
-            "type": "{Clock}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 26,
-            "description": "Array with top sky colors",
-            "itemtype": "property",
-            "name": "colorTop",
-            "type": "{Array}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 31,
-            "description": "Array with bottom sky colors",
-            "itemtype": "property",
-            "name": "colorBottom",
-            "type": "{Array}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 36,
-            "description": "Sun color in hex RGB",
-            "itemtype": "property",
-            "name": "sunColor",
-            "type": "{Number}",
-            "default": "0xFFFFAA",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 42,
-            "description": "Moon color in hex RGB",
-            "itemtype": "property",
-            "name": "moonColor",
-            "type": "{Number}",
-            "default": "0x5555BB",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 48,
-            "description": "Hemisphere light used to match ambient ligth with sky color",
-            "itemtype": "property",
-            "name": "hemisphere",
-            "type": "{HemisphereLight}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 53,
-            "description": "Directional light to simulate sun light and cast shadows",
-            "itemtype": "property",
-            "name": "sun",
-            "type": "{DirectionalLight}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 58,
-            "description": "Sky mesh with material shader to calculate dinamically sky color",
-            "itemtype": "property",
-            "name": "sky",
-            "type": "{Mesh}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 63,
-            "description": "If set to true the sky auto updates its time",
-            "itemtype": "property",
-            "name": "autoUpdate",
-            "default": "true",
-            "type": "{boolean}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 69,
-            "description": "Sun distance",
-            "itemtype": "property",
-            "name": "sunDistance",
-            "type": "{Number}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 74,
-            "description": "Day time in seconds",
-            "itemtype": "property",
-            "name": "dayTime",
-            "type": "{Number}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 79,
-            "description": "Current day time in seconds",
-            "itemtype": "property",
-            "name": "time",
-            "type": "{Number}",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 170,
-            "description": "Initialize sky object.\n\nCalled automatically by the runtime.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 184,
-            "description": "Update sky state.\n\nCalled automatically by the runtime.",
-            "itemtype": "method",
-            "name": "update",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 210,
-            "description": "Check if object is empty (don't have any childrens).",
-            "itemtype": "method",
-            "name": "isEmpty",
-            "return": {
-                "description": "True is object is empty",
-                "type": "Boolean"
-            },
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 221,
-            "description": "Update sky color and sun position.\n\nIf autoUpdate set to true is automatically called by the update method.",
-            "itemtype": "method",
-            "name": "updateSky",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 360,
-            "description": "Create JSON for object.",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "itemtype": "method",
-            "name": "toJSON",
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
             "line": 40,
             "description": "SpotLight looks to the target object coordinates.\n\nThe target object should always be at the scene root.",
@@ -8782,6 +8599,176 @@
             },
             "class": "LensFlare",
             "module": "Misc"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 21,
+            "description": "Clock used to control day time",
+            "itemtype": "property",
+            "name": "clock",
+            "type": "{Clock}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 26,
+            "description": "Array with top sky colors",
+            "itemtype": "property",
+            "name": "colorTop",
+            "type": "{Array}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 31,
+            "description": "Array with bottom sky colors",
+            "itemtype": "property",
+            "name": "colorBottom",
+            "type": "{Array}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 36,
+            "description": "Sun color in hex RGB",
+            "itemtype": "property",
+            "name": "sunColor",
+            "type": "{Number}",
+            "default": "0xFFFFAA",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 42,
+            "description": "Moon color in hex RGB",
+            "itemtype": "property",
+            "name": "moonColor",
+            "type": "{Number}",
+            "default": "0x5555BB",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 48,
+            "description": "Hemisphere light used to match ambient ligth with sky color",
+            "itemtype": "property",
+            "name": "hemisphere",
+            "type": "{HemisphereLight}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 53,
+            "description": "Directional light to simulate sun light and cast shadows",
+            "itemtype": "property",
+            "name": "sun",
+            "type": "{DirectionalLight}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 58,
+            "description": "Sky mesh with material shader to calculate dinamically sky color",
+            "itemtype": "property",
+            "name": "sky",
+            "type": "{Mesh}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 63,
+            "description": "If set to true the sky auto updates its time",
+            "itemtype": "property",
+            "name": "autoUpdate",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 69,
+            "description": "Sun distance",
+            "itemtype": "property",
+            "name": "sunDistance",
+            "type": "{Number}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 74,
+            "description": "Day time in seconds",
+            "itemtype": "property",
+            "name": "dayTime",
+            "type": "{Number}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 79,
+            "description": "Current day time in seconds",
+            "itemtype": "property",
+            "name": "time",
+            "type": "{Number}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 171,
+            "description": "Initialize sky object.\n\nCalled automatically by the runtime.",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 185,
+            "description": "Update sky state.\n\nCalled automatically by the runtime.",
+            "itemtype": "method",
+            "name": "update",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 211,
+            "description": "Update sky color and sun position.\n\nIf autoUpdate set to true is automatically called by the update method.",
+            "itemtype": "method",
+            "name": "updateSky",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\Sky.js",
+            "line": 350,
+            "description": "Create JSON for object.",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "toJSON",
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Sky",
+            "module": "Lights"
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
@@ -11096,10 +11083,10 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 81,
-            "description": "Update the resource list of a program.\n\nSearches the program and all its children for resources.",
+            "line": 82,
+            "description": "Retrieve a list with all the resource in a program.\n\nSearches the program and all its children for resources.",
             "itemtype": "method",
-            "name": "updateResources",
+            "name": "retrieveResources",
             "static": 1,
             "params": [
                 {
@@ -11113,7 +11100,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 254,
+            "line": 255,
             "description": "Get resource by name.",
             "itemtype": "method",
             "name": "getResourceByName",
@@ -11133,7 +11120,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 275,
+            "line": 276,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -11153,7 +11140,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 296,
+            "line": 297,
             "description": "Remove image.",
             "params": [
                 {
@@ -11169,7 +11156,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 311,
+            "line": 312,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -11189,7 +11176,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 332,
+            "line": 333,
             "description": "Remove video.",
             "params": [
                 {
@@ -11205,7 +11192,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 346,
+            "line": 347,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -11225,7 +11212,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 367,
+            "line": 368,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -11241,7 +11228,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 381,
+            "line": 382,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -11267,7 +11254,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 422,
+            "line": 423,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -11287,7 +11274,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 443,
+            "line": 444,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -11303,7 +11290,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 454,
+            "line": 455,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -11328,7 +11315,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 541,
+            "line": 542,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -11348,7 +11335,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 562,
+            "line": 563,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -11364,7 +11351,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 576,
+            "line": 577,
             "description": "Add resource to resources manager.",
             "itemtype": "method",
             "name": "addResource",
@@ -11380,7 +11367,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 590,
+            "line": 591,
             "description": "Remove resource from font list.",
             "itemtype": "method",
             "name": "removeResource",
@@ -11396,7 +11383,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 601,
+            "line": 602,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -11417,7 +11404,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 629,
+            "line": 630,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -11437,7 +11424,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 650,
+            "line": 651,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -11453,7 +11440,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 664,
+            "line": 665,
             "description": "Remove audio.",
             "params": [
                 {
@@ -13627,39 +13614,39 @@
         {
             "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
             "line": 37,
-            "description": "Compare two trees and return list of changes.\n\nA is compared to B, A is the oldest version of tree and B the newest.\n\nElements inside Trees are compared using their UUID.\n\nThe array returned from this method contains objects in the format {status:<Operation>, uuid: <UUID>, from: <Tree>, to: <Tree>}",
+            "description": "Compare two trees and return list of changes.\n\noldTree is compared to newTree. The list of changes indicate wath needs to be changed in oldTree to become wqual to the newTree.\n\nElements inside Trees are compared using their UUID.\n\nThe array returned from this method contains objects in the format {status:<Operation>, uuid: <UUID>, from: <Tree>, to: <Tree>}",
             "static": 1,
             "itemtype": "method",
             "name": "compare",
             "params": [
                 {
-                    "name": "a",
+                    "name": "oldTree",
                     "description": "Old version of Tree.",
                     "type": "Tree"
                 },
                 {
-                    "name": "b",
+                    "name": "newTree",
                     "description": "New version of Tree.",
                     "type": "Tree"
                 },
                 {
                     "name": "diffs",
-                    "description": "Recursive parameter not required.",
+                    "description": "Recursive parameter (optional).",
                     "type": "Array"
                 },
                 {
-                    "name": "pathA",
-                    "description": "Recursive parameter not required.",
+                    "name": "pathOldTree",
+                    "description": "Recursive parameter (optional).",
                     "type": "Array"
                 },
                 {
-                    "name": "pathB",
-                    "description": "Recursive parameter not required.",
+                    "name": "pathNewTree",
+                    "description": "Recursive parameter (optional).",
                     "type": "Array"
                 }
             ],
             "return": {
-                "description": "Array with diffs between A and B.",
+                "description": "Array with diffs between oldTree and newTree.",
                 "type": "Array"
             },
             "class": "TreeUtils",
@@ -13667,7 +13654,28 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 159,
+            "line": 205,
+            "description": "Print tree into console, recursively.\n\nTrees are represented by a UUID a parent and a children array.",
+            "itemtype": "method",
+            "name": "print",
+            "params": [
+                {
+                    "name": "tree",
+                    "description": "Tree object to be printed.",
+                    "type": "Tree"
+                },
+                {
+                    "name": "level",
+                    "description": "Recursive parameter, not required.",
+                    "type": "Number"
+                }
+            ],
+            "class": "TreeUtils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "line": 236,
             "description": "Unit test for tree comparison.\n\nPrints information into the console.",
             "itemtype": "method",
             "name": "test",
@@ -14668,7 +14676,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 174,
+            "line": 176,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -14678,7 +14686,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 180,
+            "line": 182,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -14688,7 +14696,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 186,
+            "line": 188,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -14699,7 +14707,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 193,
+            "line": 195,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -14709,7 +14717,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 199,
+            "line": 201,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -14720,7 +14728,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 209,
+            "line": 211,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -14729,7 +14737,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 247,
+            "line": 249,
             "description": "Load a nunustudio application and attach it to the canvas indicated.\n\nThis method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.",
             "static": 1,
             "itemtype": "method",
@@ -14751,7 +14759,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 283,
+            "line": 285,
             "description": "Start running nunu program.\n\nCreates renderer, mouse and keyboard objects, and starts running the loaded application.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -14760,7 +14768,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 359,
+            "line": 361,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -14786,7 +14794,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 380,
+            "line": 382,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -14802,7 +14810,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 405,
+            "line": 407,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -14828,7 +14836,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 448,
+            "line": 450,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -14837,7 +14845,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 464,
+            "line": 466,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -14846,7 +14854,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 515,
+            "line": 517,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -14855,7 +14863,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 549,
+            "line": 551,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -14864,7 +14872,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 559,
+            "line": 561,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -14880,7 +14888,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 573,
+            "line": 575,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -14889,7 +14897,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 597,
+            "line": 599,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -14905,7 +14913,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 613,
+            "line": 615,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -14921,7 +14929,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 626,
+            "line": 628,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -14937,7 +14945,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 639,
+            "line": 641,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -14950,7 +14958,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 650,
+            "line": 652,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -14959,7 +14967,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 674,
+            "line": 676,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",
