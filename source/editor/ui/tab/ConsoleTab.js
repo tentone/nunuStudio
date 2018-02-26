@@ -86,9 +86,146 @@ function ConsoleTab(parent, closeable, container, index)
 			}
 		}
 	};
+
+	this.useConsole();
 }
 
 ConsoleTab.prototype = Object.create(TabElement.prototype);
+
+//Use this console as the predefined console
+ConsoleTab.prototype.useConsole = function()
+{
+	var self = this;
+
+	var log = window.console.log;
+	window.console.log = function()
+	{
+		self.log(arguments);
+		log.apply(null, arguments);
+	};
+
+	var warn = window.console.warn;
+	window.console.warn = function()
+	{
+		self.warn(arguments);
+		warn.apply(null, arguments);
+	};
+
+	var error = window.console.error;
+	window.console.error = function()
+	{
+		self.error(arguments);
+		error.apply(null, arguments);
+	};
+
+	var clear = window.console.clear;
+	window.console.clear = function()
+	{
+		self.clear(arguments);
+		clear.apply(null, arguments);
+	};
+};
+
+//Normal log messsage
+ConsoleTab.prototype.log = function(args)
+{
+	if(this.filter(args))
+	{
+		return;
+	}
+
+	for(var i = 0; i < args.length; i++)
+	{
+		this.console.appendChild(ConsoleTab.createMessage(args[i]));
+	}
+
+	this.console.appendChild(ConsoleTab.createBar());
+	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+};
+
+//Warning message
+ConsoleTab.prototype.warn = function(args)
+{
+	if(this.filter(args))
+	{
+		return;
+	}
+
+	for(var i = 0; i < args.length; i++)
+	{
+		var log = ConsoleTab.createMessage(args[i]);
+		log.style.color = "#FFFF00";
+		this.console.appendChild(log);
+	}
+
+	this.console.appendChild(ConsoleTab.createBar());
+	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+};
+
+//Error message
+ConsoleTab.prototype.error = function(args)
+{
+	if(this.filter(args))
+	{
+		return;
+	}
+
+	for(var i = 0; i < args.length; i++)
+	{
+		var log = ConsoleTab.createMessage(args[i]);
+		log.style.color = "#FF0000";
+		this.console.appendChild(log);
+	}
+
+	this.console.appendChild(ConsoleTab.createBar());
+	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+};
+
+//Clear commands
+ConsoleTab.prototype.clear = function(args)
+{
+	this.history = [];
+
+	while(this.console.hasChildNodes())
+	{
+    	this.console.removeChild(this.console.lastChild);
+	}
+
+	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+};
+
+//Apply filters to messages
+ConsoleTab.prototype.filter = function(args)
+{
+	if(this.filterThreeJS)
+	{
+		if(args.length > 0 && (args[0] + "").startsWith("THREE"))
+		{
+			return true;
+		}
+	}
+
+	return false;
+};
+
+//Update interface
+ConsoleTab.prototype.updateInterface = function()
+{
+	if(this.visible)
+	{
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
+
+		this.console.style.height = (this.size.y - 45) + "px";
+	}
+	else
+	{
+		this.element.style.display = "none";
+	}
+};
 
 //Create a new log division element and fill with information from the object
 ConsoleTab.createMessage = function(object)
@@ -278,105 +415,3 @@ ConsoleTab.createBar = function()
 	bar.style.backgroundColor = Editor.theme.barColor;
 	return bar;
 };
-
-//Normal log messsage
-ConsoleTab.prototype.log = function(args)
-{
-	if(this.filter(args))
-	{
-		return;
-	}
-
-	for(var i = 0; i < args.length; i++)
-	{
-		this.console.appendChild(ConsoleTab.createMessage(args[i]));
-	}
-
-	this.console.appendChild(ConsoleTab.createBar());
-	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
-};
-
-//Warning message
-ConsoleTab.prototype.warn = function(args)
-{
-	if(this.filter(args))
-	{
-		return;
-	}
-
-	for(var i = 0; i < args.length; i++)
-	{
-		var log = ConsoleTab.createMessage(args[i]);
-		log.style.color = "#FFFF00";
-		this.console.appendChild(log);
-	}
-
-	this.console.appendChild(ConsoleTab.createBar());
-	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
-};
-
-//Error message
-ConsoleTab.prototype.error = function(args)
-{
-	if(this.filter(args))
-	{
-		return;
-	}
-
-	for(var i = 0; i < args.length; i++)
-	{
-		var log = ConsoleTab.createMessage(args[i]);
-		log.style.color = "#FF0000";
-		this.console.appendChild(log);
-	}
-
-	this.console.appendChild(ConsoleTab.createBar());
-	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
-};
-
-//Clear commands
-ConsoleTab.prototype.clear = function(args)
-{
-	this.history = [];
-
-	while(this.console.hasChildNodes())
-	{
-    	this.console.removeChild(this.console.lastChild);
-	}
-
-	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
-};
-
-//Apply filters to messages
-ConsoleTab.prototype.filter = function(args)
-{
-	if(this.filterThreeJS)
-	{
-		if(args.length > 0 && (args[0] + "").startsWith("THREE"))
-		{
-			return true;
-		}
-	}
-
-	return false;
-};
-
-//Update interface
-ConsoleTab.prototype.updateInterface = function()
-{
-	if(this.visible)
-	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-
-		this.console.style.height = (this.size.y - 45) + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
-};
-

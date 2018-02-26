@@ -8,7 +8,7 @@ Interface.initialize = function()
 	Interface.tab = new TabGroup();
 
 	//Message
-	Interface.message = new Message();
+	//Interface.message = new Message();
 	
 	//Bottom resizable division
 	Interface.bottomDiv = new DivisionResizable();
@@ -25,7 +25,6 @@ Interface.initialize = function()
 
 	//Asset
 	Interface.assetExplorer = Interface.bottomTab.addTab(AssetExplorer, false);
-	Interface.assetExplorer.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
 	Interface.assetExplorer.button.setAltText("Asset explorer");
 
 	//Console
@@ -35,10 +34,6 @@ Interface.initialize = function()
 	//Animations
 	Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
 	Interface.animation.button.setAltText("Animation");
-	
-	//Profiling
-	//Interface.profiling = Interface.bottomTab.addTab(ProfilingTab, false);
-	//Interface.profiling.button.setAltText("Profiling");
 
 	//Explorer
 	Interface.explorer = new DivisionResizable();
@@ -520,53 +515,6 @@ Interface.initialize = function()
 	{
 		Interface.saveProgram();
 	}, Editor.filePath + "icons/misc/save.png");
-
-	//Save project
-	/*Interface.file.addOption("Save Compressed", function()
-	{
-		if(Nunu.runningOnDesktop())
-		{
-			FileSystem.chooseFile(function(files)
-			{
-				try
-				{
-					var fname = files[0].path;
-
-					var a = performance.now();
-
-					var pson = new dcodeIO.PSON.StaticPair();
-					var data = pson.toArrayBuffer(Editor.program.toJSON());
-					
-					var b = performance.now();
-
-					var view = new Uint8Array(data);
-					var deflate = new Zlib.Deflate(view);
-					var compressed = deflate.compress();
-				
-					var c = performance.now();
-					
-					console.log("PSON:" + (b - a));
-					console.log("ZLib:" + (c - b));
-					console.log("Total:" + (c - a));
-
-					console.log(data);
-					console.log(view);
-					console.log(compressed);
-
-					//FileSystem.writeFileArrayBuffer(fname, data);
-		
-					//Editor.setOpenFile(fname);
-					Editor.alert("Project saved");
-				}
-				catch(e)
-				{
-					Editor.alert("Error saving file\n(" + e + ")");
-					console.error("nunuStudio: Error saving file", e);
-				}
-			}, ".nsc", true);
-		}
-
-	}, Editor.filePath + "icons/misc/save.png");*/
 
 	//Load Project
 	Interface.file.addOption("Load", function()

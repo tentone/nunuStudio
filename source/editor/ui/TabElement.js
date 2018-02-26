@@ -19,6 +19,7 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.button = null;
 
 	//Container
+	this.uuid = THREE.Math.generateUUID();
 	this.active = false;
 	this.updating = false;
 	this.index = index;
@@ -33,9 +34,7 @@ TabElement.prototype.updateMetadata = Element.EMPTY;
 //Activate tab (called when the tab is activated)
 TabElement.prototype.activate = function()
 {
-	this.active = true;
-
-	if(this.update !== undefined && !this.updating)
+	if(this.update !== undefined)
 	{
 		var self = this;
 
@@ -47,15 +46,12 @@ TabElement.prototype.activate = function()
 			{
 				requestAnimationFrame(update);
 			}
-			else
-			{
-				self.updating = false;
-			}
 		};
 
-		update();
-		this.updating = true;
+		requestAnimationFrame(update);
 	}
+
+	this.active = true;
 };
 
 //Deactivate tab (called after the tab is deactivated or closed)
@@ -118,6 +114,7 @@ TabElement.prototype.setName = function(text)
 	this.title = text;
 	this.button.setName(text);
 };
+
 
 //Update Interface
 TabElement.prototype.updateInterface = function()

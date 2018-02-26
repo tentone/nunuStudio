@@ -69,10 +69,10 @@ Element.prototype.setAltText = function(altText)
 	element.appendChild(span);
 
 	//Destroy
-	var destroy = this.destroy;
+	var destroyFunction = this.destroy;
 	this.destroy = function()
-	{
-		destroy();
+	{	
+		destroyFunction.call(this);
 
 		if(document.body.contains(element))
 		{
@@ -135,10 +135,22 @@ Element.prototype.updateSize = function()
 	this.element.style.height = this.size.y + "px";
 };
 
-
 Element.prototype.setCursor = function(cursor)
 {
-	this.element.style.cursor = "e-resize";
+	this.element.style.cursor = cursor;
+};
+
+//Attach element to new parent
+Element.prototype.attachTo = function(parent)
+{
+	if(this.parent.contains(this.element))
+	{
+		this.parent.removeChild(this.element);
+	}
+
+	this.parent = parent;
+	this.parent.appendChild(this.element);
+	this.updateInterface();
 };
 
 //Remove element

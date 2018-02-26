@@ -378,6 +378,8 @@ AssetExplorer.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
+	this.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
+	
 	if(Editor.program !== null)
 	{
 		this.updateSelection();

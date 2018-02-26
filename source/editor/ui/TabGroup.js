@@ -36,7 +36,7 @@ function TabGroup(parent)
 
 	//Options
 	this.mode = TabGroup.TOP;
-	this.buttonSize = new THREE.Vector2(150, 25);
+	this.buttonSize = new THREE.Vector2(150, 23);
 	this.selected = null;
 	this.options = [];
 }
@@ -168,8 +168,39 @@ TabGroup.prototype.getTab = function(type, obj)
 	return null;
 };
 
+//Attach tab to group
+TabGroup.prototype.attachTab = function(tab, insertIndex)
+{
+	tab.container.removeTab(tab.index, true);
+
+	tab.container = this;
+	tab.button.attachTo(this.buttons);
+	tab.attachTo(this.tab);
+	
+	if(insertIndex !== undefined)
+	{
+		tab.index = insertIndex;
+		this.options.splice(insertIndex, 0, tab);
+	}
+	else
+	{
+		tab.index = this.options.length;
+		this.options.push(tab);
+	}
+
+	if(this.selected === null)
+	{
+		this.selectTab(tab);
+	}
+
+	this.updateOptionIndex();
+	this.updateInterface();
+
+	return tab;
+};
+
 //Remove tab from group
-TabGroup.prototype.removeTab = function(index)
+TabGroup.prototype.removeTab = function(index, dontDestroy)
 {	
 	//If index is an object get the actual index
 	if(index instanceof TabElement)
@@ -180,8 +211,13 @@ TabGroup.prototype.removeTab = function(index)
 	//Check if the index is in range
 	if(index > -1 && index < this.options.length)
 	{
+		var tab = this.options[index];
+
 		//Remove option from list
-		this.options[index].destroy();
+		if(dontDestroy !== true)
+		{
+			tab.destroy();
+		}
 		this.options.splice(index, 1);
 
 		//Update tabs index
@@ -190,20 +226,17 @@ TabGroup.prototype.removeTab = function(index)
 		//Select option
 		if(this.options.length > 0)
 		{
-			if(index !== 0)
-			{
-				this.selectTab(index - 1);
-			}
-			else
-			{
-				this.selectTab(0);
-			}
+			this.selectTab(index !== 0 ? index - 1 : 0);
 		}
 		else
 		{
 			this.selectTab(null);
 		}
+
+		return tab;
 	}
+
+	return null;
 };
 
 //Remove all tabs
@@ -238,19 +271,9 @@ TabGroup.prototype.updateOptionIndex = function()
 	}
 };
 
-//Remove element
-TabGroup.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-};
-
 //Update interface
 TabGroup.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		var tabSize = this.size.clone();
@@ -282,7 +305,7 @@ TabGroup.prototype.updateInterface = function()
 		for(var i = 0; i < this.options.length; i++)
 		{
 			var tab = this.options[i];
-			tab.visible = (this.selected === tab);
+			tab.visible = this.selected === tab;
 			tab.size.copy(tabSize);
 			tab.updateInterface();
 
@@ -294,7 +317,7 @@ TabGroup.prototype.updateInterface = function()
 		}
 
 		if(this.mode === TabGroup.TOP)
-		{
+		{	
 			this.buttons.style.top = "0px";
 			this.buttons.style.left = "0px";
 			this.buttons.style.width = this.size.x + "px";

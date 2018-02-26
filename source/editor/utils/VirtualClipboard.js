@@ -1,19 +1,19 @@
 "use strict";
 
 //Alternative to node clipboard to enable simple copy paste inside the editor web version
-function Clipboard()
+function VirtualClipboard()
 {
 	this.values = [];
 }
 
 //Set data to clipboard
-Clipboard.prototype.set = function(data, id)
+VirtualClipboard.prototype.set = function(data, id)
 {
 	this.values[id] = data;
 };
 
 //Get data from clipboard
-Clipboard.prototype.get = function(id)
+VirtualClipboard.prototype.get = function(id)
 {
 	return this.values[id];
 };

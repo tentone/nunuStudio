@@ -7,7 +7,11 @@ function TabButton(parent, tab)
 	this.element.draggable = true;
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
+	//this.element.style.borderRadius = "5px 5px 0px 0px";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
+
+	//Tab
+	this.tab = tab;
 
 	//Icon
 	this.icon = document.createElement("img");
@@ -52,9 +56,6 @@ function TabButton(parent, tab)
 		self.tab.close();
 	};
 
-	//Tab
-	this.tab = tab;
-
 	//Self pointer
 	var self = this;
 
@@ -64,6 +65,9 @@ function TabButton(parent, tab)
 	//Drag control
 	this.element.ondragstart = function(event)
 	{
+		/*event.dataTransfer.setData("uuid", self.tab.uuid);
+		DragBuffer.pushDragElement(self.tab);*/
+
 		event.dataTransfer.setData("tab", self.tab.index);
 		dragState = 0;
 	};
@@ -75,6 +79,12 @@ function TabButton(parent, tab)
 		this.style.borderLeft = "";
 		this.style.borderRight = "";
 
+		//Move tab between containers
+		/*var uuid = event.dataTransfer.getData("uuid");
+		var tab = DragBuffer.popDragElement(uuid);
+
+		self.tab.container.attachTab(tab);*/
+		
 		var index = event.dataTransfer.getData("tab");
 		if(index !== "")
 		{
@@ -85,27 +95,12 @@ function TabButton(parent, tab)
 				//Before
 				if(dragState === 1)
 				{
-					if(index < self.tab.index)
-					{
-						self.tab.container.moveButton(index, self.tab.index - 1);
-					}
-					else
-					{
-						self.tab.container.moveButton(index, self.tab.index);
-					}
+					self.tab.container.moveButton(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
 				}
 				//After
 				else if(dragState === 2)
 				{
-					if(index < self.tab.index)
-					{
-						self.tab.container.moveButton(index, self.tab.index);
-					}
-					else
-					{
-						self.tab.container.moveButton(index, self.tab.index + 1);
-					}
-					self.tab.container.moveButton(index, self.tab.index);
+					self.tab.container.moveButton(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
 				}
 			}
 		}
@@ -141,7 +136,20 @@ function TabButton(parent, tab)
 				this.style.borderRight = "";
 			}
 		}
-	}
+	};
+
+	//Drag end
+	this.element.ondragend = function(event)
+	{
+		event.preventDefault();
+
+		//var uuid = event.dataTransfer.getData("uuid");
+		//DragBuffer.popDragElement(uuid);
+
+		dragState = 0;
+		this.style.borderLeft = "";
+		this.style.borderRight = "";
+	};
 
 	//Drag leave
 	this.element.ondragleave = function(event)
@@ -151,17 +159,7 @@ function TabButton(parent, tab)
 		dragState = 0;
 		this.style.borderLeft = "";
 		this.style.borderRight = "";
-	}
-
-	//Drag end
-	this.element.ondragend = function(event)
-	{
-		event.preventDefault();
-
-		dragState = 0;
-		this.style.borderLeft = "";
-		this.style.borderRight = "";
-	}
+	};
 
 	//Mouse click
 	this.element.onclick = function(event)
@@ -202,42 +200,20 @@ TabButton.prototype.setIcon = function(icon)
 {
 	this.tab.icon = icon;
 	this.icon.src = icon;
-}
+};
 
 //Set button name
 TabButton.prototype.setName = function(text)
 {
 	this.tab.title = text;
 	this.text.innerHTML = text;
-}
-
-//Destroy
-TabButton.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-}
+};
 
 //Update Interface
 TabButton.prototype.updateInterface = function()
 {
-	//Visiblity
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-
-		//Button
-		if(this.tab.isSelected())
-		{
-			this.element.style.backgroundColor = Editor.theme.buttonOverColor;
-		}
-		else
-		{
-			this.element.style.backgroundColor = Editor.theme.buttonColor;
-		}
-
 		//Icon
 		this.icon.style.top = (this.size.y * 0.2) + "px";
 		this.icon.style.left = (this.size.y * 0.2) + "px"
@@ -258,6 +234,8 @@ TabButton.prototype.updateInterface = function()
 		this.close.style.right = (this.size.y * 0.3) + "px";
 
 		//Element
+		this.element.style.display = "block";
+		this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
@@ -267,4 +245,4 @@ TabButton.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

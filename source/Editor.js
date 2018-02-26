@@ -308,12 +308,13 @@ include("editor/ui/treeview/TreeElement.js");
 include("editor/ui/tab/ConsoleTab.js");
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/ScriptEditor.js");
-include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
 include("editor/ui/tab/CubeTextureEditor.js");
 include("editor/ui/tab/TextEditor.js");
-include("editor/ui/tab/ProfilingTab.js");
+
+include("editor/ui/tab/scene/SceneEditor.js");
+include("editor/ui/tab/scene/CameraOrientation.js");
 
 include("editor/ui/tab/asset/AssetExplorer.js");
 include("editor/ui/tab/asset/asset/Asset.js");
@@ -427,9 +428,11 @@ include("editor/helpers/GridHelper.js");
 include("editor/helpers/RectAreaLightHelper.js");
 include("editor/helpers/SkeletonHelper.js");
 
+include("editor/utils/DOMUtils.js");
 include("editor/utils/ObjectIcons.js");
 include("editor/utils/CodemirrorThemes.js");
-include("editor/utils/DOMUtils.js");
+include("editor/utils/VirtualClipboard.js");
+include("editor/utils/DragBuffer.js");
 
 include("editor/history/History.js");
 include("editor/history/action/Action.js");
@@ -439,10 +442,6 @@ include("editor/history/action/object/ObjectAddedAction.js");
 include("editor/history/action/object/ObjectRemovedAction.js");
 include("editor/history/action/object/ObjectMovedAction.js");
 
-include("editor/CameraOrientation.js");
-include("editor/Console.js");
-include("editor/Clipboard.js");
-include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
@@ -462,7 +461,7 @@ Editor.initialize = function()
 	}
 	catch(e)
 	{
-		Editor.clipboard = new Clipboard();
+		Editor.clipboard = new VirtualClipboard();
 		Editor.args = [];
 
 		var parameters = location.search.substring(1).split("&");

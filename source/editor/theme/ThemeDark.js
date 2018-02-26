@@ -2,11 +2,10 @@
 
 function ThemeDark()
 {
-	//Metadata
 	this.name = "dark";
-	this.info = "default nunuStudio theme";
+	this.author = "tentone";
+	this.info = "";
 	this.version = "v1.0";
-	this.author = "Tentone";
 
 	//Font
 	this.font = "Arial";
