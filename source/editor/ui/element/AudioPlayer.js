@@ -90,7 +90,7 @@ function AudioPlayer(parent)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		self.seekProgress = (event.pageX - self.seekStart) / (self.size.x - self.size.y);
+		self.seekProgress = (event.pageX - self.seekStart) / (self.track.offsetWidth);
 		self.seekProgress += self.seekTime / self.buffer.duration;
 
 		if(self.seekProgress < 0)
@@ -143,6 +143,8 @@ function AudioPlayer(parent)
 		{
 			self.play(self.time);
 		}
+
+		self.scrubber.onmousedown(event);
 	};
 
 	//Update elements
