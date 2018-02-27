@@ -2,16 +2,32 @@
 
 function CheckBox(parent)
 {
-	Element.call(this, parent, "input");
+	Element.call(this, parent, "div");
+
+	var self = this;
 
 	this.element.style.display = "block";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.cursor = "pointer";
-	this.element.type = "checkbox";
+	this.element.style.backgroundColor = Editor.theme.boxColor;
+	this.element.style.borderRadius = "4px";
+	this.element.onclick = function()
+	{
+		self.setValue(!self.value);
+	};
 
-	//this.element.style.appearance = "none";
-	//this.element.style.MozAppearance = "none";
-	//this.element.style.webkitAppearance = "none";
+	this.check = document.createElement("img");
+	this.check.style.pointerEvents = "none";
+	this.check.style.position = "absolute";
+	this.check.style.top = "15%";
+	this.check.style.left = "15%";
+	this.check.style.width = "70%";
+	this.check.style.height = "70%";
+	this.check.src = Editor.filePath + "icons/misc/check.png";
+	this.element.appendChild(this.check);
+
+	this.value = false;
+	this.onChange = null;
 };
 
 CheckBox.prototype = Object.create(Element.prototype);
@@ -25,19 +41,25 @@ CheckBox.prototype.setDisabled = function(value)
 //Set checkbox value
 CheckBox.prototype.setValue = function(value)
 {
-	this.element.checked = value;
+	this.value = value;
+	this.check.style.visibility = this.value ? "visible" : "hidden";
+
+	if(this.onChange !== null)
+	{
+		this.onChange();
+	}
 };
 
 //Get checkbox value
 CheckBox.prototype.getValue = function()
 {
-	return this.element.checked;
+	return this.value;
 };
 
 //Set onchange onChange
 CheckBox.prototype.setOnChange = function(onChange)
 {
-	this.element.onchange = onChange;
+	this.onChange = onChange;
 };
 
 //Update Interface
