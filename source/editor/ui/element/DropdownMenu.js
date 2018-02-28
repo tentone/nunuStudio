@@ -140,7 +140,7 @@ DropdownMenu.prototype.removeOption = function(index)
 //Add new option to dropdown menu
 DropdownMenu.prototype.addOption = function(name, callback, icon)
 {
-	var button = new Button(this.panel);
+	var button = new ButtonMenu(this.panel);
 	button.element.style.zIndex = "200";
 	button.text.setText(name);
 	button.text.setAlignment(Text.LEFT);

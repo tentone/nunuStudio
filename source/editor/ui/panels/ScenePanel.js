@@ -54,7 +54,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	this.form.addText("");
-	this.backgroundTransparent = new Button(this.form.element);
+	this.backgroundTransparent = new ButtonMenu(this.form.element);
 	this.backgroundTransparent.setText("Set transparent");
 	this.backgroundTransparent.size.set(100, 18);
 	this.backgroundTransparent.setCallback(function()

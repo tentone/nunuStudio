@@ -13,13 +13,32 @@ function Slider(parent)
 	//Text
 	this.text = document.createElement("div");
 	this.text.style.position = "absolute";
-	this.text.style.display = "flex";
+	this.text.style.display = "none";
 	this.text.style.justifyContent = "center";
 	this.text.style.alignItems = "center";
-	this.text.style.width = "40px";
-	this.text.style.height = "100%";
-	this.text.style.right = "0px";
-	//this.element.appendChild(this.text);
+	this.text.style.zIndex = "10000";
+	this.text.style.border = "3px solid";
+	this.text.style.borderRadius = "5px";
+	this.text.style.color = Editor.theme.textColor;
+	this.text.style.backgroundColor = Editor.theme.barColor;
+	this.text.style.borderColor = Editor.theme.barColor;
+	document.body.appendChild(this.text);
+
+	//Mouse mouse move event
+	this.element.onmousemove = function(event)
+	{
+		self.text.style.display = "flex";
+		self.text.style.width = "fit-content";
+		self.text.style.height = "fit-content";
+		self.text.style.left = event.clientX + "px";
+		self.text.style.top = (event.clientY - 30) + "px";
+	};
+
+	//Mouse out event
+	this.element.onmouseout = function()
+	{
+		self.text.style.display = "none";
+	};
 
 	//Track
 	this.track = document.createElement("div");
@@ -52,6 +71,7 @@ function Slider(parent)
 
 	//Value
 	this.value = 0.0;
+	this.onChange = null;
 
 	//Range
 	this.min = 1.0;
@@ -99,10 +119,14 @@ Slider.prototype = Object.create(Element.prototype);
 //Remove element
 Slider.prototype.destroy = function()
 {
-	if(this.parent !== null && this.parent.contains(this.element))
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
-		this.parent = null;
+	}
+
+	if(document.body.contains(this.text))
+	{
+		document.body.removeChild(this.text);
 	}
 };
 
@@ -145,7 +169,7 @@ Slider.prototype.setRange = function(min, max)
 //Set onchange onChange
 Slider.prototype.setOnChange = function(onChange)
 {
-	this.onchange = onChange;
+	this.onChange = onChange;
 };
 
 //Get Slider value
@@ -171,6 +195,11 @@ Slider.prototype.setValue = function(value)
 	var progress = (this.value / (this.max - this.min)) * 100;
 	this.progress.style.width = progress + "%";
 	this.scrubber.style.left = progress + "%";
+
+	if(this.onChange !== null)
+	{
+		this.onChange(this.value);
+	}
 };
 
 //Get Slider value

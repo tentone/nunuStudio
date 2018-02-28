@@ -46,7 +46,7 @@ CheckBox.prototype.setValue = function(value)
 
 	if(this.onChange !== null)
 	{
-		this.onChange();
+		this.onChange(this.value);
 	}
 };
 

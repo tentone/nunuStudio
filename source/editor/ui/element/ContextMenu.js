@@ -39,7 +39,7 @@ ContextMenu.prototype.removeOption = function(index)
 //Add new option to context menu
 ContextMenu.prototype.addOption = function(name, callback)
 {
-	var button = new Button(this.element);
+	var button = new ButtonMenu(this.element);
 	button.element.style.zIndex = "10000";
 	button.text.setText(name);
 	button.text.setAlignment(Text.LEFT);

@@ -44,7 +44,7 @@ function PassNode(parent, name)
 	this.nextRow();
 
 	//Up
-	this.up = new Button(this.element);
+	this.up = new ButtonMenu(this.element);
 	this.up.size.set(50, 18);
 	this.up.setText("Up");
 	this.up.setCallback(function()
@@ -54,7 +54,7 @@ function PassNode(parent, name)
 	});
 
 	//Down
-	this.down = new Button(this.element);
+	this.down = new ButtonMenu(this.element);
 	this.down.size.set(50, 18);
 	this.down.setText("Down");
 	this.down.setCallback(function()
@@ -64,7 +64,7 @@ function PassNode(parent, name)
 	});
 
 	//Delete
-	this.delete = new Button(this.element);
+	this.delete = new ButtonMenu(this.element);
 	this.delete.size.set(70, 18);
 	this.delete.setText("Delete");
 	this.delete.setCallback(function()

@@ -1,24 +1,23 @@
 "use strict";
 
-function Button(parent)
+function ButtonMenu(parent)
 {
-	Element.call(this, parent);
+	Button.call(this, parent);
 
 	this.element.style.cursor = "pointer";
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
-	this.element.style.color = Editor.theme.textColor;
 	
-	//Span
-	this.span = document.createElement("span");
-	this.span.style.whiteSpace = "pre";
-	this.element.appendChild(this.span);
+	//Text
+	this.text = new Text(this.element);
+
+	//Icon
+	this.icon = null;
 
 	this.preventDragEvents();
 
-	//Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
 		this.style.backgroundColor = Editor.theme.buttonOverColor;
@@ -30,25 +29,47 @@ function Button(parent)
 	};
 }
 
-Button.prototype = Object.create(Element.prototype);
+ButtonMenu.prototype = Object.create(Element.prototype);
+
+//Set button icon image URL
+ButtonMenu.prototype.setIcon = function(icon)
+{
+	if(this.icon === null)
+	{
+		this.icon = document.createElement("img");
+		this.icon.style.position = "absolute";
+		this.icon.style.display = "block";
+		this.icon.style.left = "5px";
+		this.icon.style.top = "3px";
+		this.icon.style.width = "12px";
+		this.icon.style.height = "12px";
+		this.element.appendChild(this.icon);
+	}
+	
+	this.icon.src = icon;
+};
 
 //Set Button text
-Button.prototype.setText = function(text)
+ButtonMenu.prototype.setText = function(text)
 {
-	this.span.innerHTML = text;
+	this.text.setText(text);
 };
 
 //Set button callback function
-Button.prototype.setCallback = function(callback)
+ButtonMenu.prototype.setCallback = function(callback)
 {
 	this.element.onclick = callback;
 };
 
 //Update Button Size
-Button.prototype.updateInterface = function()
+ButtonMenu.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
+		this.text.size.set(this.size.x, this.size.y);
+		this.text.visible = this.visible;
+		this.text.updateInterface();
+ 
 		this.element.style.visibility = "visible";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";

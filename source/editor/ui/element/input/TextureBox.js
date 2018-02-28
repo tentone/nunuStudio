@@ -4,6 +4,8 @@ function TextureBox(parent)
 {
 	TextureChooser.call(this, parent);
 
+	this.element.style.overflow = "visible";
+	
 	//Form
 	this.form = new Form(this.element);
 	this.form.defaultTextWidth = 60;

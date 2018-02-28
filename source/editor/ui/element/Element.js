@@ -6,7 +6,8 @@ function Element(parent, type)
 
 	this.element = document.createElement((type !== undefined) ? type : "div");
 	this.element.style.position = "absolute";
-
+	this.element.style.overflow = "hidden";
+	
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -47,7 +48,7 @@ Element.prototype.preventDragEvents = function()
 	};
 };
 
-//Set alt text, that is displayed when the mouse is over the element
+//Set alt text, that is displayed when the mouse is over the element. Returns the element created that is attached to the document body.
 Element.prototype.setAltText = function(altText)
 {
 	var element = document.createElement("div");
@@ -60,13 +61,10 @@ Element.prototype.setAltText = function(altText)
 	element.style.color = Editor.theme.textColor;
 	element.style.backgroundColor = Editor.theme.barColor;
 	element.style.borderColor = Editor.theme.barColor;
+	element.style.width = "fit-content";
+	element.style.height = "fit-content";
+	element.innerHTML = altText;
 	document.body.appendChild(element);
-
-	//Span
-	var span = document.createElement("span");
-	span.style.whiteSpace = "pre";
-	span.innerHTML = altText;
-	element.appendChild(span);
 
 	//Destroy
 	var destroyFunction = this.destroy;
@@ -86,8 +84,6 @@ Element.prototype.setAltText = function(altText)
 	this.element.onmousemove = function(event)
 	{
 		element.style.display = "flex";
-		element.style.width = span.clientWidth + "px";
-		element.style.height = span.clientHeight + "px";
 		element.style.left = event.clientX + "px";
 		element.style.top = (event.clientY - 30) + "px";
 	};
@@ -97,6 +93,8 @@ Element.prototype.setAltText = function(altText)
 	{
 		element.style.display = "none";
 	};
+
+	return element;
 };
 
 Element.prototype.updatePosition = function(mode)
