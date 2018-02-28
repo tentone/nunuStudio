@@ -383,7 +383,6 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.angle);
 	this.form.nextRow();
 
-
 	//Color
 	this.form.addText("Color");
 	this.form.nextRow();

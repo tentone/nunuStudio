@@ -1,7 +1,5 @@
 "use strict";
 
-"use strict";
-
 function Slider(parent)
 {
 	Element.call(this, parent);
@@ -186,15 +184,33 @@ Slider.prototype.setValue = function(value)
 
 	if(this.step !== null)
 	{
-		value -= (value % this.step);
+		var remainder = value % this.step;
+		value -= remainder;
+		if(remainder > this.step / 2)
+		{
+			value += this.step;
+		}
+
+		//Check for precision problems
+		var stepVal = String(this.step).split(".");
+		if(stepVal.length > 1)
+		{
+			var precision = stepVal[1].length;
+			var values = String(value).split(".");
+			if(values.length > 1)
+			{
+				value = Number.parseFloat(values[0] + "." + values[1].substr(0, precision));
+			}
+		}
 	}
 
 	this.value = value;
-	this.text.innerHTML = value;
 
+	//Update elements
 	var progress = (this.value / (this.max - this.min)) * 100;
 	this.progress.style.width = progress + "%";
 	this.scrubber.style.left = progress + "%";
+	this.text.innerHTML = value;
 
 	if(this.onChange !== null)
 	{
