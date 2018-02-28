@@ -287,9 +287,8 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.wiggleSpread);
 	this.form.nextRow();
 	
-	//Opacity
+	//Opacity graph
 	this.form.addText("Opacity");
-	this.form.nextRow();
 	this.opacity = new Graph(this.form.element);
 	this.opacity.size.set(200, 120)
 	this.opacity.setOnChange(function(value)
@@ -304,22 +303,8 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.opacity);
 	this.form.nextRow();
 
-	//Size
+	//Scale
 	this.form.addText("Scale");
-	this.form.nextRow();
-	this.scale = new Graph(this.form.element);
-	this.scale.size.set(200, 120)
-	this.scale.setOnChange(function(value)
-	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.size, "value", value));
-	});
-	this.scale.addGraph("spread", "#AAAAAA");
-	this.scale.setOnChange(function(value)
-	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.size, "spread", value));
-	}, "spread");
-	this.form.add(this.scale);
-	this.form.nextRow();
 	this.form.addText("Min", true);
 	this.scaleMin = new NumberBox(this.form.element);
 	this.scaleMin.size.set(50, 18);
@@ -342,9 +327,48 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.scaleMax);
 	this.form.nextRow();
 
-	//Angle
-	this.form.addText("Rotation");
+	//Scale graph
+	this.form.addText("");
+	this.scale = new Graph(this.form.element);
+	this.scale.size.set(200, 120)
+	this.scale.setOnChange(function(value)
+	{
+		Editor.history.add(new ChangeAction(self.particle.emitter.size, "value", value));
+	});
+	this.scale.addGraph("spread", "#AAAAAA");
+	this.scale.setOnChange(function(value)
+	{
+		Editor.history.add(new ChangeAction(self.particle.emitter.size, "spread", value));
+	}, "spread");
+	this.form.add(this.scale);
 	this.form.nextRow();
+
+	//Rotation
+	this.form.addText("Rotation");
+	this.form.addText("Min", true);
+	this.angleMin = new NumberBox(this.form.element);
+	this.angleMin.size.set(50, 18);
+	this.angleMin.setOnChange(function()
+	{
+		var min = self.angleMin.getValue();
+		var max = self.angleMax.getValue();
+		self.angle.setRange(min, max);
+	});
+	this.form.add(this.angleMin);
+	this.form.addText("Max", true);
+	this.angleMax = new NumberBox(this.form.element);
+	this.angleMax.size.set(50, 18);
+	this.angleMax.setOnChange(function()
+	{
+		var min = self.angleMin.getValue();
+		var max = self.angleMax.getValue();
+		self.angle.setRange(min, max);
+	});
+	this.form.add(this.angleMax);
+	this.form.nextRow();
+
+	//Rotation graph
+	this.form.addText("");
 	this.angle = new Graph(this.form.element);
 	this.angle.size.set(200, 120)
 	this.angle.setOnChange(function(value)
@@ -359,30 +383,6 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.angle);
 	this.form.nextRow();
 
-	//Min angle
-	this.form.addText("Min", true);
-	this.angleMin = new NumberBox(this.form.element);
-	this.angleMin.size.set(50, 18);
-	this.angleMin.setOnChange(function()
-	{
-		var min = self.angleMin.getValue();
-		var max = self.angleMax.getValue();
-		self.angle.setRange(min, max);
-	});
-	this.form.add(this.angleMin);
-	
-	//Max angle
-	this.form.addText("Max", true);
-	this.angleMax = new NumberBox(this.form.element);
-	this.angleMax.size.set(50, 18);
-	this.angleMax.setOnChange(function()
-	{
-		var min = self.angleMin.getValue();
-		var max = self.angleMax.getValue();
-		self.angle.setRange(min, max);
-	});
-	this.form.add(this.angleMax);
-	this.form.nextRow();
 
 	//Color
 	this.form.addText("Color");

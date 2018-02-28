@@ -8,11 +8,11 @@ body
 	user-select: none; 
 
 	/*Webkit scrollbar*/
-	/*-webkit-scrollbar;*/
+	-webkit-scrollbar;
 }
 
 /*Only used by webkit browsers*/
-/*::-webkit-scrollbar
+::-webkit-scrollbar
 {
 	height: 8px;
 	width: 8px;
@@ -27,4 +27,4 @@ body
 ::-webkit-scrollbar-corner
 {
 	background: #333333;
-}*/
+}

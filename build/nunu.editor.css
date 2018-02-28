@@ -519,11 +519,26 @@ body
 	user-select: none; 
 
 	
-	
+	-webkit-scrollbar;
 }
 
 
-
+::-webkit-scrollbar
+{
+	height: 8px;
+	width: 8px;
+	background: #333333;
+}
+::-webkit-scrollbar-thumb
+{
+	background: #555555;
+	-webkit-border-radius: 1ex;
+	-webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+::-webkit-scrollbar-corner
+{
+	background: #333333;
+}
 
 .cm-s-3024-day.CodeMirror { background: #f7f7f7; color: #3a3432; }
 .cm-s-3024-day div.CodeMirror-selected { background: #d6d5d4; }

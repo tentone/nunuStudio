@@ -5,6 +5,7 @@ function Graph(parent, name, color)
 	Element.call(this, parent);
 
 	this.element.style.cursor = "default";
+	this.element.style.overflow = "visible";
 
 	//Grid
 	this.grid = document.createElement("canvas");
@@ -327,12 +328,9 @@ Graph.prototype.update = function()
 
 //Update Graph Size
 Graph.prototype.updateInterface = function()
-{	
-	//Set visibility
+{
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-	
 		//Grid
 		this.grid.width = this.size.x;
 		this.grid.height = this.size.y;
@@ -359,6 +357,7 @@ Graph.prototype.updateInterface = function()
 		}
 
 		//Element
+		this.element.style.visibility = "visible";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
