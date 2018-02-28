@@ -301,9 +301,6 @@ include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
 include("editor/ui/TabButton.js");
 
-include("editor/ui/treeview/TreeView.js");
-include("editor/ui/treeview/TreeElement.js");
-
 include("editor/ui/tab/ConsoleTab.js");
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/ScriptEditor.js");
@@ -311,6 +308,9 @@ include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
 include("editor/ui/tab/CubeTextureEditor.js");
 include("editor/ui/tab/TextEditor.js");
+
+include("editor/ui/tab/treeview/TreeView.js");
+include("editor/ui/tab/treeview/TreeElement.js");
 
 include("editor/ui/tab/scene/SceneEditor.js");
 include("editor/ui/tab/scene/CameraOrientation.js");

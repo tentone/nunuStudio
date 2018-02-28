@@ -50,15 +50,15 @@ Interface.initialize = function()
 	Interface.explorerResizable.setOnResize(function()
 	{
 		Interface.explorerResizable.updateInterface();
-		Interface.treeView.updateInterface();
+		Interface.treeTab.updateInterface();
 		if(Interface.panel !== null)
 		{
 			Interface.panel.updateInterface();
 		}
 	});
 
-	//Project explorer
-	Interface.treeView = new TreeView(Interface.explorerResizable.divA);
+	Interface.treeTab = new TabGroup(Interface.explorerResizable.divA);
+	Interface.treeView = Interface.treeTab.addTab(TreeView, false)
 
 	//Object panel
 	Interface.panel = new Panel(Interface.explorerResizable.divB);
@@ -1164,7 +1164,8 @@ Interface.updateInterface = function()
 	Interface.explorerResizable.size.set(Interface.explorer.size.x - Interface.explorer.resizeTabSize, Interface.explorer.size.y);
 	Interface.explorerResizable.updateInterface();
 
-	Interface.treeView.updateInterface();
+	Interface.treeTab.size.copy(Interface.explorerResizable.size);
+	Interface.treeTab.updateInterface();
 
 	if(Interface.panel !== null)
 	{
