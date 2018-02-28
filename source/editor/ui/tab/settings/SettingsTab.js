@@ -35,7 +35,6 @@ SettingsTab.prototype.updateInterface = function()
 		this.tab.size.copy(this.size);
 		this.tab.updateInterface();
 
-
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
