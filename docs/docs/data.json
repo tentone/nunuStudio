@@ -9827,7 +9827,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 206,
+            "line": 209,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -9836,7 +9836,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 221,
+            "line": 224,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -9852,7 +9852,23 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 236,
+            "line": 239,
+            "description": "Check is camera is active.",
+            "params": [
+                {
+                    "name": "camera",
+                    "description": "Camera to be removed",
+                    "type": "Camera"
+                }
+            ],
+            "itemtype": "method",
+            "name": "isCameraActive",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Scene.js",
+            "line": 251,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -9868,7 +9884,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 260,
+            "line": 275,
             "description": "Serialize scene object as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
