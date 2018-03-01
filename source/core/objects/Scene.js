@@ -199,8 +199,11 @@ Scene.prototype.getCamera = function(uuid, obj)
  */
 Scene.prototype.addCamera = function(camera)
 {
-	this.cameras.push(camera);
-	this.updateCameraOrder();
+	if(this.cameras.indexOf(camera) === -1)
+	{
+		this.cameras.push(camera);
+		this.updateCameraOrder();
+	}
 };
 
 /**
@@ -232,6 +235,18 @@ Scene.prototype.removeCamera = function(camera)
 		this.cameras.splice(index, 1);
 	}
 };
+
+/**
+ * Check is camera is active.
+ * 
+ * @param {Camera} camera Camera to be removed
+ * @method isCameraActive
+ */
+Scene.prototype.isCameraActive = function(camera)
+{
+	return this.cameras.indexOf(camera) > -1;
+};
+
 
 /**
  * Set scene fog mode.

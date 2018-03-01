@@ -30,16 +30,13 @@ function PerspectiveCameraPanel(parent, obj)
 	this.use.size.set(15, 15);
 	this.use.setOnChange(function()
 	{
-		if(self.obj !== null && self.scene !== null)
+		if(self.use.getValue())
 		{
-			if(self.use.getValue())
-			{
-				self.scene.addCamera(self.obj);
-			}
-			else
-			{
-				self.scene.removeCamera(self.obj);
-			}
+			self.scene.addCamera(self.obj);
+		}
+		else
+		{
+			self.scene.removeCamera(self.obj);
 		}
 	});
 	this.form.add(this.use);
@@ -178,7 +175,7 @@ PerspectiveCameraPanel.prototype.updatePanel = function()
 	Panel.prototype.updatePanel.call(this);
 
 	this.fov.setValue(this.obj.fov);
-	this.use.setValue(this.scene.cameras.indexOf(this.obj) !== -1);
+	this.use.setValue(this.scene.isCameraActive(this.obj));
 	this.near.setValue(this.obj.near);
 	this.far.setValue(this.obj.far);
 	this.offset.setValue(this.obj.offset);

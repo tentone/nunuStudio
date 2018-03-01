@@ -415,7 +415,7 @@ function ParticleEditor(parent, closeable, container, index)
 	
 	for(var i = 0; i < 4; i++)
 	{
-		this.form.addText((25*i + 25) + "%", true);
+		this.form.addText((25*i + 25) + "%");
 		
 		var value = new ColorChooser(self.form.element);
 		value.size.set(80, 18);
@@ -431,7 +431,11 @@ function ParticleEditor(parent, closeable, container, index)
 
 		this.colorSpread[i] = spread;
 		this.form.add(spread);
-		this.form.nextRow();
+
+		if(i + 1 < 4)
+		{
+			this.form.nextRow();
+		}
 	}
 }
 
