@@ -107,8 +107,8 @@ function AnimationTab(parent, closeable, container, index)
 	});
 
 	this.zoomSlider = new Slider(this.bar);
-	this.zoomSlider.size.set(100, 10);
-	this.zoomSlider.position.set(30, 2);
+	this.zoomSlider.size.set(100, 15);
+	this.zoomSlider.position.set(30, 0);
 	this.zoomSlider.setStep(10);
 	this.zoomSlider.setRange(20, 1000);
 	this.zoomSlider.updatePosition(Element.TOP_RIGHT);
@@ -124,7 +124,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.zoomText = new Text(this.bar);
 	this.zoomText.setText("Zoom");
-	this.zoomText.size.set(90, 20);
+	this.zoomText.size.set(90, 15);
 	this.zoomText.position.set(110, 0);
 	this.zoomText.updatePosition(Element.TOP_RIGHT);
 	this.zoomText.updateSize();

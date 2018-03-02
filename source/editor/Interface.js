@@ -1167,6 +1167,9 @@ Interface.updateInterface = function()
 	Interface.treeTab.size.copy(Interface.explorerResizable.size);
 	Interface.treeTab.updateInterface();
 
+	//Interface.panelTab.size.copy(Interface.explorerResizable.size);
+	//Interface.panelTab.updateInterface();
+		
 	if(Interface.panel !== null)
 	{
 		Interface.panel.updateInterface();
