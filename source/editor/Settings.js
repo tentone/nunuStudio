@@ -33,7 +33,7 @@ Settings.loadDefault = function()
 		showUUID : false,
 		showType : true,
 		immediateMode : false,
-		historySize : 10
+		historySize : 20
 	};
 
 	//Editor

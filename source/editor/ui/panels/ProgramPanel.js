@@ -96,7 +96,12 @@ function ProgramPanel(parent, obj)
 	this.antialiasing.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "antialiasing", self.antialiasing.getValue()));
-		self.reloadContext();
+		
+		var tab = Interface.tab.getActual();
+		if(tab instanceof SceneEditor)
+		{
+			tab.reloadContext();
+		}
 	});
 	this.form.add(this.antialiasing);
 	this.form.nextRow();
@@ -183,15 +188,6 @@ ProgramPanel.prototype.updateRenderer = function()
 	if(tab instanceof SceneEditor)
 	{
 		tab.initializeRenderer();
-	}
-};
-
-ProgramPanel.prototype.reloadContext = function()
-{
-	var tab = Interface.tab.getActual();
-	if(tab instanceof SceneEditor)
-	{
-		tab.reloadContext();
 	}
 };
 

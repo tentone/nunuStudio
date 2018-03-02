@@ -116,7 +116,24 @@ function SceneEditor(parent, closeable, container, index)
 			{
 				var file = event.dataTransfer.files[0];
 				var name = FileSystem.getFileName(file.name);
-				
+
+				//Auxiliar method to attach textures to objects
+				function attachTexture(texture, object)
+				{
+					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
+					{
+						object.material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+						object.material.name = texture.name;
+						Editor.updateObjectViews();
+					}
+					else if(object instanceof THREE.Sprite)
+					{
+						object.material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
+						object.material.name = texture.name;
+						Editor.updateObjectViews();
+					}
+				}
+
 				//Check if mouse instersects and object
 				if(intersections.length > 0)
 				{
@@ -127,19 +144,7 @@ function SceneEditor(parent, closeable, container, index)
 					{
 						Editor.loadTexture(file, function(texture)
 						{
-							if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
-							{
-								var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-								material.name = texture.name;
-								object.material = material;
-							}
-							else if(object instanceof THREE.Sprite)
-							{
-								var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-								material.name = texture.name;
-								object.material = material;
-							}
-							Editor.updateObjectViews();
+							attachTexture(texture ,object);
 						});
 					}
 					//Video
@@ -147,19 +152,7 @@ function SceneEditor(parent, closeable, container, index)
 					{
 						Editor.loadVideoTexture(file, function(texture)
 						{
-							if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
-							{
-								var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-								material.name = texture.name;
-								object.material = material;
-							}
-							else if(object instanceof THREE.Sprite)
-							{
-								var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-								material.name = texture.name;
-								object.material = material;
-							}
-							Editor.updateObjectViews();
+							attachTexture(texture ,object);
 						});
 					}
 					//Font
@@ -189,6 +182,7 @@ function SceneEditor(parent, closeable, container, index)
 				{
 					var object = intersections[0].object;
 
+					//Sprite Material
 					if(draggedObject instanceof THREE.SpriteMaterial)
 					{
 						if(object instanceof THREE.Sprite)
@@ -197,6 +191,7 @@ function SceneEditor(parent, closeable, container, index)
 							Editor.updateObjectViews();
 						}
 					}
+					//Mesh Material
 					else if(draggedObject instanceof THREE.Material)
 					{
 						if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
@@ -205,29 +200,32 @@ function SceneEditor(parent, closeable, container, index)
 							Editor.updateObjectViews();
 						}
 					}
+					//Cubemap
 					else if(draggedObject.isCubeTexture)
 					{
 						if(object.material instanceof THREE.Material)
 						{
 							object.material.envMap = draggedObject;
+							self.reloadContext();
 							Editor.updateObjectViews();
 						}
 					}
+					//Texture
 					else if(draggedObject instanceof THREE.Texture)
 					{
-						if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
-						{
-							object.material = new THREE.MeshStandardMaterial({map:draggedObject, color:0xffffff, roughness: 0.6, metalness: 0.2});
-							object.material.name = draggedObject.name;
-							Editor.updateObjectViews();
-						}
-						else if(object instanceof THREE.Sprite)
-						{
-							object.material = new THREE.SpriteMaterial({map:draggedObject, color:0xffffff});
-							object.material.name = draggedObject.name;
-							Editor.updateObjectViews();
-						}
+						attachTexture(draggedObject, object);
 					}
+					//Image
+					else if(draggedObject instanceof Image)
+					{
+						attachTexture(new Texture(draggedObject), object);
+					}
+					//Video
+					else if(draggedObject instanceof Video)
+					{
+						attachTexture(new VideoTexture(draggedObject), object);
+					}
+					//Font
 					else if(draggedObject instanceof Font)
 					{
 						if(object.font !== undefined)
@@ -238,6 +236,7 @@ function SceneEditor(parent, closeable, container, index)
 					}
 				}
 
+				//Create audio emitter
 				if(draggedObject instanceof Audio)
 				{
 					var audio = new AudioEmitter(draggedObject);
