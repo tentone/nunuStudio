@@ -168,7 +168,7 @@ TabGroup.prototype.getTab = function(type, obj)
 	return null;
 };
 
-//Attach tab to group
+//Attach tab to this group and remove it from the original group
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {
 	tab.container.removeTab(tab.index, true);

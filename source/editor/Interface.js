@@ -51,13 +51,14 @@ Interface.initialize = function()
 	{
 		Interface.explorerResizable.updateInterface();
 		Interface.treeTab.updateInterface();
+
 		if(Interface.panel !== null)
 		{
 			Interface.panel.updateInterface();
 		}
 	});
 
-	Interface.treeTab = new TabGroup(Interface.explorerResizable.divA);
+	Interface.treeTab = new TabGroup(Interface.explorerResizable.divA);	
 	Interface.treeView = Interface.treeTab.addTab(TreeView, false)
 
 	//Object panel

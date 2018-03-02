@@ -49,7 +49,6 @@ include("lib/leap.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");
-
 include("lib/bytebuffer.min.js");
 include("lib/long.min.js");
 include("lib/PSON.min.js");

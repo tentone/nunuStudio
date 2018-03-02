@@ -7,8 +7,8 @@ function TabButton(parent, tab)
 	this.element.draggable = true;
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
-	//this.element.style.borderRadius = "5px 5px 0px 0px";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
+	//this.element.style.borderRadius = "5px 5px 0px 0px";
 
 	//Tab
 	this.tab = tab;
