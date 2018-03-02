@@ -111,28 +111,29 @@ function SceneEditor(parent, closeable, container, index)
 			//Check intersected objects
 			var intersections = self.raycaster.intersectObjects(self.scene.children, true);
 
+			//Auxiliar method to attach textures to objects
+			function attachTexture(texture, object)
+			{
+				if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
+				{
+					object.material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+					object.material.name = texture.name;
+					Editor.updateObjectViews();
+				}
+				else if(object instanceof THREE.Sprite)
+				{
+					object.material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
+					object.material.name = texture.name;
+					Editor.updateObjectViews();
+				}
+			}
+
 			//Dragged file
 			if(event.dataTransfer.files.length > 0)
 			{
 				var file = event.dataTransfer.files[0];
 				var name = FileSystem.getFileName(file.name);
 
-				//Auxiliar method to attach textures to objects
-				function attachTexture(texture, object)
-				{
-					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
-					{
-						object.material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-						object.material.name = texture.name;
-						Editor.updateObjectViews();
-					}
-					else if(object instanceof THREE.Sprite)
-					{
-						object.material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
-						object.material.name = texture.name;
-						Editor.updateObjectViews();
-					}
-				}
 
 				//Check if mouse instersects and object
 				if(intersections.length > 0)
@@ -1138,7 +1139,11 @@ SceneEditor.prototype.reloadContext = function()
 	if(this.renderer !== null)
 	{
 		this.renderer.dispose();
-		this.renderer.forceContextLoss();
+		try
+		{
+			this.renderer.forceContextLoss();
+		}
+		catch(e){}
 		this.renderer = null;
 
 		this.initializeRenderer();
