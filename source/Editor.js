@@ -373,6 +373,9 @@ include("editor/ui/preview/MaterialRenderer.js");
 include("editor/ui/preview/TextureRenderer.js");
 include("editor/ui/preview/GeometryRenderer.js");
 
+include("editor/ui/sidebar/ToolBar.js");
+include("editor/ui/sidebar/AddObjectSideBar.js");
+
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/LockedPanel.js");
 include("editor/ui/panels/ObjectPanel.js");
