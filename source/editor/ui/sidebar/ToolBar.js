@@ -2,61 +2,90 @@
 
 function ToolBar(element)
 {
-	//Tools text
-	Interface.toolText = new Text(element);
-	Interface.toolText.setText("Tools");
-	Interface.toolText.size.set(40, 20);
-	Interface.toolText.position.set(0, 20);
-	Interface.toolText.updateInterface();
+	this.element = element;
+
+	//Text
+	this.text = new Text(element);
+	this.text.setText("Tools");
+	this.text.size.set(40, 20);
+	this.text.position.set(0, 20);
+	this.text.updateInterface();
+
+	var self = this;
 
 	//Select
-	Interface.toolSelect = new ButtonImageToggle(element);
-	Interface.toolSelect.selected = true;
-	Interface.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
-	Interface.toolSelect.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
-	Interface.toolSelect.position.set(0, 40);
-	Interface.toolSelect.setAltText("Select (CTRL+1)");
-	Interface.toolSelect.updateInterface();
-	Interface.toolSelect.setCallback(function()
+	this.toolSelect = new ButtonImageToggle(element);
+	this.toolSelect.selected = true;
+	this.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
+	this.toolSelect.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	this.toolSelect.position.set(0, 40);
+	this.toolSelect.setAltText("Select (CTRL+1)");
+	this.toolSelect.updateInterface();
+	this.toolSelect.setCallback(function()
 	{
-		Interface.selectTool(Editor.SELECT);
+		self.selectTool(Editor.SELECT);
 	});
 
 	//Move
-	Interface.toolMove = new ButtonImageToggle(element);
-	Interface.toolMove.setImage(Editor.filePath + "icons/tools/move.png");
-	Interface.toolMove.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
-	Interface.toolMove.position.set(0, 80);
-	Interface.toolMove.setAltText("Move (CTRL+2)");
-	Interface.toolMove.updateInterface();
-	Interface.toolMove.setCallback(function()
+	this.toolMove = new ButtonImageToggle(element);
+	this.toolMove.setImage(Editor.filePath + "icons/tools/move.png");
+	this.toolMove.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	this.toolMove.position.set(0, 80);
+	this.toolMove.setAltText("Move (CTRL+2)");
+	this.toolMove.updateInterface();
+	this.toolMove.setCallback(function()
 	{
-		Interface.selectTool(Editor.MOVE);
+		self.selectTool(Editor.MOVE);
 	});
 
 	//Resize
-	Interface.toolScale = new ButtonImageToggle(element);
-	Interface.toolScale.setImage(Editor.filePath + "icons/tools/resize.png");
-	Interface.toolScale.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
-	Interface.toolScale.position.set(0, 120);
-	Interface.toolScale.setAltText("Scale (CTRL+3)");
-	Interface.toolScale.updateInterface();
-	Interface.toolScale.setCallback(function()
+	this.toolScale = new ButtonImageToggle(element);
+	this.toolScale.setImage(Editor.filePath + "icons/tools/resize.png");
+	this.toolScale.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	this.toolScale.position.set(0, 120);
+	this.toolScale.setAltText("Scale (CTRL+3)");
+	this.toolScale.updateInterface();
+	this.toolScale.setCallback(function()
 	{
-		Interface.selectTool(Editor.SCALE);
+		self.selectTool(Editor.SCALE);
 	});
 
 	//Rotate
-	Interface.toolRotate = new ButtonImageToggle(element);
-	Interface.toolRotate.setImage(Editor.filePath + "icons/tools/rotate.png");
-	Interface.toolRotate.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
-	Interface.toolRotate.position.set(0, 160);
-	Interface.toolRotate.setAltText("Rotate (CTRL+4)");
-	Interface.toolRotate.updateInterface();
-	Interface.toolRotate.setCallback(function()
+	this.toolRotate = new ButtonImageToggle(element);
+	this.toolRotate.setImage(Editor.filePath + "icons/tools/rotate.png");
+	this.toolRotate.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	this.toolRotate.position.set(0, 160);
+	this.toolRotate.setAltText("Rotate (CTRL+4)");
+	this.toolRotate.updateInterface();
+	this.toolRotate.setCallback(function()
 	{
-		Interface.selectTool(Editor.ROTATE);
+		self.selectTool(Editor.ROTATE);
 	});
 }
 
+ToolBar.prototype.destroy = function()
+{	this.text.destroy();
+	this.toolSelect.destroy();
+	this.toolMove.destroy();
+	this.toolScale.destroy();
+	this.toolRotate.destroy();
 
+};
+
+//Select object manipulation tool
+ToolBar.prototype.selectTool = function(tool)
+{
+	this.toolSelect.selected = tool === Editor.SELECT;
+	this.toolSelect.updateInterface();
+
+	this.toolMove.selected = tool === Editor.MOVE;
+	this.toolMove.updateInterface();
+
+	this.toolScale.selected = tool === Editor.SCALE;
+	this.toolScale.updateInterface();
+	
+	this.toolRotate.selected = tool === Editor.ROTATE;
+	this.toolRotate.updateInterface();
+
+	Editor.selectTool(tool);
+};

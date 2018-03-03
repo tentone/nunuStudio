@@ -850,36 +850,3 @@ Interface.newProgram = function()
 		Editor.createNewProgram();
 	}
 };
-
-//Select object manipulation tool
-Interface.selectTool = function(tool)
-{
-	Interface.toolSelect.selected = false;
-	Interface.toolMove.selected = false;
-	Interface.toolScale.selected = false;
-	Interface.toolRotate.selected = false;
-
-	if(tool === Editor.SELECT)
-	{
-		Interface.toolSelect.selected = true;
-	}
-	else if(tool === Editor.MOVE)
-	{
-		Interface.toolMove.selected = true;
-	}
-	else if(tool === Editor.ROTATE)
-	{
-		Interface.toolRotate.selected = true;
-	}
-	else if(tool === Editor.SCALE)
-	{
-		Interface.toolScale.selected = true;
-	}
-
-	Editor.selectTool(tool);
-
-	Interface.toolRotate.updateInterface();
-	Interface.toolMove.updateInterface();
-	Interface.toolScale.updateInterface();
-	Interface.toolSelect.updateInterface();
-};

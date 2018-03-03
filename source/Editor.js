@@ -638,19 +638,19 @@ Editor.update = function()
 	{
 		if(Editor.keyboard.keyJustPressed(Keyboard.NUM1))
 		{
-			Interface.selectTool(Editor.SELECT);
+			Interface.toolBar.selectTool(Editor.SELECT);
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM2))
 		{
-			Interface.selectTool(Editor.MOVE);
+			Interface.toolBar.selectTool(Editor.MOVE);
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM3))
 		{
-			Interface.selectTool(Editor.SCALE);
+			Interface.toolBar.selectTool(Editor.SCALE);
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM4))
 		{
-			Interface.selectTool(Editor.ROTATE);
+			Interface.toolBar.selectTool(Editor.ROTATE);
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.S))
 		{
