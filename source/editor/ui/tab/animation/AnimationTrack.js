@@ -4,6 +4,8 @@ function AnimationTrack(parent, editor, track)
 {
 	Element.call(this, parent);
 
+	this.element.style.overflow = "visible";
+	
 	this.editor = editor;
 	this.track = track;
 

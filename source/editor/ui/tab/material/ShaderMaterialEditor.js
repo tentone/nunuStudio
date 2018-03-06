@@ -8,7 +8,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Main container
-	this.main = new DualDivisionResizable(this.element);
+	this.main = new DualDivision(this.element);
 	this.main.setOnResize(function()
 	{
 		self.updateInterface();
@@ -18,12 +18,12 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.main.tabPositionMax = 0.95;
 
 	//Preview division
-	this.preview = new DualDivisionResizable(this.main.divA);
+	this.preview = new DualDivision(this.main.divA);
 	this.preview.setOnResize(function()
 	{
 		self.updateInterface();
 	});
-	this.preview.orientation = DualDivisionResizable.VERTICAL;
+	this.preview.orientation = DualDivision.VERTICAL;
 	this.preview.tabPosition = 0.8;
 	this.preview.tabPositionMin = 0.05;
 	this.preview.tabPositionMax = 0.95;

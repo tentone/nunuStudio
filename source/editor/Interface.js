@@ -44,8 +44,8 @@ Interface.initialize = function()
 		Interface.updateInterface();
 	});
 
-	Interface.explorerResizable = new DualDivisionResizable(Interface.explorer.element);
-	Interface.explorerResizable.orientation = DualDivisionResizable.VERTICAL;
+	Interface.explorerResizable = new DualDivision(Interface.explorer.element);
+	Interface.explorerResizable.orientation = DualDivision.VERTICAL;
 	Interface.explorerResizable.tabPosition = 0.6;
 	Interface.explorerResizable.setOnResize(function()
 	{

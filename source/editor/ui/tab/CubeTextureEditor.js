@@ -9,7 +9,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.texture = null;
 
 	//Dual division
-	this.division = new DualDivisionResizable(this.element);
+	this.division = new DualDivision(this.element);
 	this.division.setOnResize(function()
 	{
 		self.updateInterface();

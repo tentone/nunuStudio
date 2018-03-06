@@ -7,7 +7,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.camera = null;
 	
 	//Main container
-	this.main = new DualDivisionResizable(this.element);
+	this.main = new DualDivision(this.element);
 	this.main.tabPosition = 0.6;
 	this.main.tabPositionMin = 0.05;
 	this.main.tabPositionMax = 0.95;

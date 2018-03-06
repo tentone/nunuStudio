@@ -4,6 +4,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 {
 	Element.call(this, parent);
 
+	this.element.style.overflow = "visible";
 	this.element.style.cursor = "pointer";
 	this.element.style.backgroundColor = track.color;
 

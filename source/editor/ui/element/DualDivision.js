@@ -1,6 +1,6 @@
 "use strict";
 
-function DualDivisionResizable(parent)
+function DualDivision(parent)
 {
 	Element.call(this, parent);
 
@@ -35,7 +35,7 @@ function DualDivisionResizable(parent)
 	this.tabPositionMax = 1;
 	this.tabPositionMin = 0;
 	this.tabSize = 5;
-	this.orientation = DualDivisionResizable.HORIZONTAL;
+	this.orientation = DualDivision.HORIZONTAL;
 
 	//Self pointer
 	var self = this;
@@ -50,11 +50,11 @@ function DualDivisionResizable(parent)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		if(self.orientation === DualDivisionResizable.HORIZONTAL)
+		if(self.orientation === DualDivision.HORIZONTAL)
 		{	
 			self.tabPosition += event.movementX / self.size.x;
 		}
-		else if(self.orientation === DualDivisionResizable.VERTICAL)
+		else if(self.orientation === DualDivision.VERTICAL)
 		{
 			self.tabPosition += event.movementY / self.size.y;
 		}
@@ -85,19 +85,19 @@ function DualDivisionResizable(parent)
 }
 
 //Resizable side
-DualDivisionResizable.HORIZONTAL = 0;
-DualDivisionResizable.VERTICAL = 1;
+DualDivision.HORIZONTAL = 0;
+DualDivision.VERTICAL = 1;
 
-DualDivisionResizable.prototype = Object.create(Element.prototype);
+DualDivision.prototype = Object.create(Element.prototype);
 
 //Set container
-DualDivisionResizable.prototype.setOnResize = function(callback)
+DualDivision.prototype.setOnResize = function(callback)
 {
 	this.onResize = callback;
 };
 
 //Update interface
-DualDivisionResizable.prototype.updateInterface = function()
+DualDivision.prototype.updateInterface = function()
 {
 	//Visibility
 	if(this.visible)
@@ -108,7 +108,7 @@ DualDivisionResizable.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		if(this.orientation == DualDivisionResizable.HORIZONTAL)
+		if(this.orientation == DualDivision.HORIZONTAL)
 		{	
 			var tabPositionAbs = this.tabPosition * this.size.x;
 
@@ -127,7 +127,7 @@ DualDivisionResizable.prototype.updateInterface = function()
 			this.resizeTab.style.width = this.tabSize + "px";
 			this.resizeTab.style.height = this.size.y + "px";
 		}
-		else if(this.orientation == DualDivisionResizable.VERTICAL)
+		else if(this.orientation == DualDivision.VERTICAL)
 		{
 			var tabPositionAbs = this.tabPosition * this.size.y;
 

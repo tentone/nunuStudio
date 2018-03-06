@@ -4,7 +4,7 @@ function ProfilingTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Profiling", Editor.filePath + "icons/misc/speedometer.png");
 
-	this.dual = new DualDivisionResizable(this.element);
+	this.dual = new DualDivision(this.element);
 	this.dual.divA.style.backgroundColor = Editor.theme.barColor;
 	this.dual.divA.style.overflow = "auto";
 	this.dual.tabPosition = 0.2;
