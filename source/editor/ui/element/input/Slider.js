@@ -105,6 +105,7 @@ function Slider(parent)
 	this.track.onmousedown = function(event)
 	{
 		var percentage = (event.layerX / self.size.x);
+
 		self.setValue(percentage * (self.max - self.min) + self.min);
 		self.progress.style.width = (percentage * 100) + "%";
 		self.scrubber.style.left = self.progress.style.width;
@@ -207,7 +208,7 @@ Slider.prototype.setValue = function(value)
 	this.value = value;
 
 	//Update elements
-	var progress = (this.value / (this.max - this.min)) * 100;
+	var progress = ((this.value - this.min) / (this.max - this.min)) * 100;
 	this.progress.style.width = progress + "%";
 	this.scrubber.style.left = progress + "%";
 	this.text.innerHTML = value;
