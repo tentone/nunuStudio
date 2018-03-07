@@ -87,6 +87,11 @@ function Slider(parent)
 		var delta = (event.pageX - self.mouseStart) / (self.size.x);
 		var value = self.valueStart + delta * (self.max - self.min);
 		self.setValue(value);
+
+		if(self.onChange !== null)
+		{
+			self.onChange(self.value);
+		}
 	});
 
 	this.manager.add(window, "mouseup", function(event)
@@ -110,6 +115,11 @@ function Slider(parent)
 		self.progress.style.width = (percentage * 100) + "%";
 		self.scrubber.style.left = self.progress.style.width;
 		self.scrubber.onmousedown(event);
+
+		if(self.onChange !== null)
+		{
+			self.onChange(self.value);
+		}
 	};
 }
 
@@ -212,11 +222,6 @@ Slider.prototype.setValue = function(value)
 	this.progress.style.width = progress + "%";
 	this.scrubber.style.left = progress + "%";
 	this.text.innerHTML = value;
-
-	if(this.onChange !== null)
-	{
-		this.onChange(this.value);
-	}
 };
 
 //Get Slider value

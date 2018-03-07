@@ -217,20 +217,18 @@ TextureChooser.prototype.updatePreview = function()
 //Update Interface
 TextureChooser.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-	
-		//Preview
-		this.preview.style.width = this.size.x + "px";
-		this.preview.style.height = this.size.y + "px";
-
 		//Element
+		this.element.style.visibility = "visible";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
+	
+		//Preview
+		this.preview.style.width = this.size.x + "px";
+		this.preview.style.height = this.size.y + "px";
 	}
 	else
 	{

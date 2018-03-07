@@ -14,6 +14,11 @@ function CheckBox(parent)
 	this.element.onclick = function()
 	{
 		self.setValue(!self.value);
+		
+		if(self.onChange !== null)
+		{
+			self.onChange(self.value);
+		}
 	};
 
 	this.check = document.createElement("img");
@@ -43,11 +48,6 @@ CheckBox.prototype.setValue = function(value)
 {
 	this.value = value;
 	this.check.style.visibility = this.value ? "visible" : "hidden";
-
-	if(this.onChange !== null)
-	{
-		this.onChange(this.value);
-	}
 };
 
 //Get checkbox value
