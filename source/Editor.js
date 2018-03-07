@@ -296,6 +296,8 @@ include("editor/ui/element/input/TextureChooser.js");
 include("editor/ui/element/input/TextureBox.js");
 include("editor/ui/element/input/CubeTextureBox.js");
 
+include("editor/ui/MainMenu.js");
+
 include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
 include("editor/ui/TabButton.js");
