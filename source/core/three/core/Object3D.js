@@ -409,7 +409,10 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 	object.matrixAutoUpdate = this.matrixAutoUpdate;
 	object.matrix = this.matrix.toArray();
-	
+
+	object.frustumCulled = this.frustumCulled;
+	object.renderOrder = this.renderOrder;
+
 	if(JSON.stringify(this.userData) !== "{}")
 	{
 		object.userData = this.userData;

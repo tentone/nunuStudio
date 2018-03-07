@@ -188,7 +188,7 @@ function TabButton(parent, tab)
 	{
 		if(tab.isSelected())
 		{
-			this.style.backgroundColor = Editor.theme.buttonLightColor;
+			this.style.backgroundColor = Editor.theme.buttonOverColor;
 		}
 		else
 		{
@@ -239,7 +239,7 @@ TabButton.prototype.updateInterface = function()
 
 		//Element
 		this.element.style.display = "block";
-		this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonLightColor : Editor.theme.buttonColor;
+		this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

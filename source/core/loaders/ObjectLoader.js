@@ -417,7 +417,6 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
  */
 ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts, resources)
 {
-	var matrix = new THREE.Matrix4();
 	var object;
 
 	function getTexture(uuid)
@@ -892,6 +891,14 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.composer = EffectComposer.fromJSON(data.composer);
 			}
+			if(data.zoom !== undefined)
+			{
+				object.zoom = data.zoom;
+			}
+			if(data.view !== undefined)
+			{
+				object.view = Object.assign( {}, data.view );
+			}
 			break;
 
 		case "Script":
@@ -1018,6 +1025,16 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	object.locked = data.locked === true || data.hidden === true;
 	object.folded = data.folded === true;
 
+	if(data.frustumCulled !== undefined)
+	{
+		object.frustumCulled = data.frustumCulled;
+	}
+	
+	if(data.renderOrder !== undefined)
+	{
+		object.renderOrder = data.renderOrder;
+	}
+	
 	//Animations
 	if(data.animations !== undefined)
 	{
@@ -1032,27 +1049,26 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	//Get or generate tranformation matrix if necessary
 	if(data.matrix !== undefined)
 	{
-		matrix.fromArray(data.matrix);
-		matrix.decompose(object.position, object.quaternion, object.scale);
+		object.matrix.fromArray(data.matrix);
+		object.matrix.decompose(object.position, object.quaternion, object.scale);
 	}
-	else
+
+	//If available use position rotation and quarternion stored in file
+	if(data.position !== undefined)
 	{
-		if(data.position !== undefined)
-		{
-			object.position.fromArray(data.position);
-		}
-		if(data.rotation !== undefined)
-		{
-			object.rotation.fromArray(data.rotation);
-		}
-		if(data.quaternion !== undefined)
-		{
-			object.quaternion.fromArray(data.quaternion);
-		}
-		if(data.scale !== undefined)
-		{
-			object.scale.fromArray(data.scale);
-		}
+		object.position.fromArray(data.position);
+	}
+	if(data.rotation !== undefined)
+	{
+		object.rotation.fromArray(data.rotation);
+	}
+	if(data.quaternion !== undefined)
+	{
+		object.quaternion.fromArray(data.quaternion);
+	}
+	if(data.scale !== undefined)
+	{
+		object.scale.fromArray(data.scale);
 	}
 
 	//Shadow casting
