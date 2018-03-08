@@ -50,6 +50,8 @@ Interface.initialize = function()
 	Interface.explorerResizable.setOnResize(function()
 	{
 		Interface.explorerResizable.updateInterface();
+		
+		Interface.treeTab.size.copy(Interface.explorerResizable.divASize);
 		Interface.treeTab.updateInterface();
 
 		if(Interface.panel !== null)
@@ -84,10 +86,6 @@ Interface.updateInterface = function()
 	//Window size
 	var size = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
-	//Menu Top Bar
-	Interface.topBar.size.x = size.x;
-	Interface.topBar.updateInterface();
-
 	//Tool Bar
 	Interface.sideBar.position.set(0, Interface.topBar.size.y);
 	Interface.sideBar.size.y = size.y - Interface.topBar.size.y;
@@ -101,18 +99,8 @@ Interface.updateInterface = function()
 
 	Interface.explorerResizable.size.set(Interface.explorer.size.x - Interface.explorer.resizeTabSize, Interface.explorer.size.y);
 	Interface.explorerResizable.updateInterface();
+	Interface.explorerResizable.onResize();
 
-	Interface.treeTab.size.copy(Interface.explorerResizable.size);
-	Interface.treeTab.updateInterface();
-
-	//Interface.panelTab.size.copy(Interface.explorerResizable.size);
-	//Interface.panelTab.updateInterface();
-		
-	if(Interface.panel !== null)
-	{
-		Interface.panel.updateInterface();
-	}
-	
 	//Bottom division
 	Interface.bottomDiv.size.x = size.x - Interface.explorer.size.x - Interface.sideBar.size.x;
 	Interface.bottomDiv.position.set(Interface.sideBar.size.x, size.y - Interface.bottomDiv.size.y);

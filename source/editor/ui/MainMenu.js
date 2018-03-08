@@ -6,30 +6,26 @@ function MainMenu(parent)
 
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.barColor;
+	this.element.style.top = "0px";
+	this.element.style.left = "0px";
+	this.element.style.width = "100%";
+	this.element.style.height = "25px";
 
 	this.size.set(0, 25);
 
 	this.preventDragEvents();
 
 	//Editor Logo
-	var logo = document.createElement("div");
+	var logo = document.createElement("img");
+	logo.style.display = "block";
 	logo.style.position = "absolute";
 	logo.style.pointerEvents = "none";
 	logo.style.width = "108px";
 	logo.style.height = "18px";
 	logo.style.top = "3px";
 	logo.style.right = "3px";
+	logo.src = Editor.filePath + "logo.png";
 	this.element.appendChild(logo);
-
-	var logoImage = document.createElement("img");
-	logoImage.src = Editor.filePath + "logo.png";
-	logoImage.style.pointerEvents = "none";
-	logoImage.style.position = "absolute";
-	logoImage.style.top = "0px";
-	logoImage.style.left = "0px";
-	logoImage.style.width = "108px";
-	logoImage.style.height = "18px";
-	logo.appendChild(logoImage);
 
 	//File
 	var fileMenu = new DropdownMenu(this.element);
@@ -686,3 +682,8 @@ function MainMenu(parent)
 }
 
 MainMenu.prototype = Object.create(Element.prototype);
+
+MainMenu.prototype.updateInterface = function()
+{
+	this.element.style.display = this.visible ? "block" : "none";
+};

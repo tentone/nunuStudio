@@ -4,8 +4,8 @@ function TreeView(parent, closeable, container, index)
 {	
 	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.filePath + "icons/misc/menu.png");
 
-	this.element.style.display = "block";
 	this.element.style.overflow = "auto";
+	this.element.style.display = "block";
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
 	this.element.style.width = "100%";
