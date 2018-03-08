@@ -266,7 +266,6 @@ include("editor/theme/ThemeDark.js");
 
 include("editor/ui/element/Element.js");
 include("editor/ui/element/Division.js");
-include("editor/ui/element/Message.js");
 include("editor/ui/element/Bar.js");
 include("editor/ui/element/Button.js");
 include("editor/ui/element/ButtonMenu.js");
