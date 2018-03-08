@@ -23,6 +23,7 @@ function CheckBox(parent)
 
 	this.check = document.createElement("img");
 	this.check.style.pointerEvents = "none";
+	this.check.style.visibility = "hidden";
 	this.check.style.position = "absolute";
 	this.check.style.top = "15%";
 	this.check.style.left = "15%";
@@ -32,6 +33,7 @@ function CheckBox(parent)
 	this.element.appendChild(this.check);
 
 	this.value = false;
+
 	this.onChange = null;
 };
 

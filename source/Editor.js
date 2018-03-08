@@ -248,8 +248,7 @@ include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");
 include("lib/three/exporters/GLTFExporter.js");
 
-include("lib/zlib/zlib.min.js");
-
+include("lib/zlib.min.js");
 include("lib/stats.min.js");
 include("lib/jsblend.js");
 include("lib/jscookie.min.js");
