@@ -12792,7 +12792,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 517,
+            "line": 520,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -12808,7 +12808,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 523,
+            "line": 526,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -12824,7 +12824,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 529,
+            "line": 532,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -12840,7 +12840,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 535,
+            "line": 538,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -12856,7 +12856,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 541,
+            "line": 544,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -12872,7 +12872,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 547,
+            "line": 550,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -12888,7 +12888,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 553,
+            "line": 556,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -12904,7 +12904,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 559,
+            "line": 562,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -12925,7 +12925,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 566,
+            "line": 569,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -12941,7 +12941,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 572,
+            "line": 575,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -12962,7 +12962,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 579,
+            "line": 582,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -12981,7 +12981,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 585,
+            "line": 588,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -12997,7 +12997,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 591,
+            "line": 594,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -13013,7 +13013,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 597,
+            "line": 600,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -13029,7 +13029,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 603,
+            "line": 606,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -13045,7 +13045,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 609,
+            "line": 612,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -13066,7 +13066,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 616,
+            "line": 619,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -13082,7 +13082,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 622,
+            "line": 625,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -13098,7 +13098,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 628,
+            "line": 631,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
