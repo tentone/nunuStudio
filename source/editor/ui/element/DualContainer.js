@@ -58,19 +58,6 @@ function DualContainer(parent)
 			self.tabPosition = self.tabPositionMin;
 		}
 
-		if(self.orientation === DualContainer.HORIZONTAL)
-		{
-			var tabPositionAbs = self.tabPosition * self.size.x;
-			self.divA.size.set(tabPositionAbs, self.size.y);
-			self.divB.size.set(self.size.x - tabPositionAbs - self.tabSize, self.size.y);
-		}
-		else if(self.orientation === DualContainer.VERTICAL)
-		{
-			var tabPositionAbs = self.tabPosition * self.size.y;
-			self.divA.size.set(self.size.x, tabPositionAbs);
-			self.divB.size.set(self.size.x, self.size.y - tabPositionAbs - self.tabSize);
-		}
-
 		self.updateInterface();
 	});
 
@@ -84,6 +71,28 @@ DualContainer.HORIZONTAL = 0;
 DualContainer.VERTICAL = 1;
 
 DualContainer.prototype = Object.create(Element.prototype);
+
+DualContainer.prototype.attachA = function(element)
+{
+	this.divA = element;
+
+	if(element.parent !== this.element)
+	{
+		element.parent = this.element;
+		this.element.appendChild(element.element);
+	}
+};
+
+DualContainer.prototype.attachB = function(element)
+{
+	this.divB = element;
+
+	if(element.parent !== this.element)
+	{
+		element.parent = this.element;
+		this.element.appendChild(element.element);
+	}
+};
 
 //Update interface
 DualContainer.prototype.updateInterface = function()
@@ -99,12 +108,11 @@ DualContainer.prototype.updateInterface = function()
 		if(this.orientation === DualContainer.HORIZONTAL)
 		{
 			var tabPositionAbs = this.tabPosition * this.size.x;
-			this.divA.size.set(tabPositionAbs, this.size.y);
-			this.divB.size.set(this.size.x - tabPositionAbs - this.tabSize, this.size.y);
-			
 
-			this.divB.style.top = "0px";
-			this.divB.style.left = (this.divA.size.x + this.tabSize) + "px";
+			this.divA.size.set(tabPositionAbs, this.size.y);
+
+			this.divB.size.set(this.size.x - tabPositionAbs - this.tabSize, this.size.y);
+			this.divB.position.set(this.divA.size.x + this.tabSize, 0);
 
 			this.resizeTab.style.cursor = "e-resize";
 			this.resizeTab.style.top = "0px";
@@ -115,11 +123,11 @@ DualContainer.prototype.updateInterface = function()
 		else if(this.orientation === DualContainer.VERTICAL)
 		{
 			var tabPositionAbs = this.tabPosition * this.size.y;
+			
 			this.divA.size.set(this.size.x, tabPositionAbs);
+			
 			this.divB.size.set(this.size.x, this.size.y - tabPositionAbs - this.tabSize);
-
-			this.divB.style.top = (this.divA.size.y + this.tabSize) + "px";
-			this.divB.style.left = "0px";
+			this.divB.position.set(0, this.divA.size.y + this.tabSize);
 			
 			this.resizeTab.style.cursor = "n-resize";
 			this.resizeTab.style.top = this.divA.size.y + "px";
@@ -128,10 +136,8 @@ DualContainer.prototype.updateInterface = function()
 			this.resizeTab.style.height = this.tabSize + "px";
 		}
 
-		this.divA.style.width = this.divA.size.x + "px";
-		this.divA.style.height = this.divA.size.y + "px";
-		this.divB.style.width = this.divB.size.x + "px";
-		this.divB.style.height = this.divB.size.y + "px";
+		this.divA.updateInterface();
+		this.divB.updateInterface();
 	}
 	else
 	{

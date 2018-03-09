@@ -18,7 +18,6 @@ function TreeView(parent, closeable, container, index)
 
 TreeView.prototype = Object.create(TabElement.prototype);
 
-//Set data from object
 TreeView.prototype.attach = function(program)
 {	
 	if(this.program === program)
