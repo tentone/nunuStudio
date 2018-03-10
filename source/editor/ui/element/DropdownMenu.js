@@ -185,10 +185,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 //Update expanded state
 DropdownMenu.prototype.setExpanded = function(expanded)
 {
-	if(expanded !== undefined)
-	{
-		this.expanded = expanded;
-	}
+	this.expanded = expanded;
 
 	if(this.expanded)
 	{

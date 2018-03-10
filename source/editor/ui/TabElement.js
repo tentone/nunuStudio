@@ -4,7 +4,6 @@ function TabElement(parent, closeable, container, index, title, icon)
 {
 	Element.call(this, parent);
 
-	this.element.style.cursor = "default";
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 

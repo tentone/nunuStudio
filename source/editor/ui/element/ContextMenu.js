@@ -75,18 +75,17 @@ ContextMenu.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-
 		//Options
 		for(var i = 0; i < this.options.length; i++)
 		{
-			this.options[i].size.set(this.size.x, this.size.y);
-			this.options[i].position.set(0, (this.size.y*i));
+			this.options[i].size.copy(this.size);
+			this.options[i].position.set(0, this.size.y * i);
 			this.options[i].visible = this.visible;
 			this.options[i].updateInterface();
 		}
 	
 		//Element
+		this.element.style.visibility = "visible";
 		this.element.style.top = (this.position.y - this.offset.y) + "px";
 		this.element.style.left = (this.position.x - this.offset.x) + "px";
 		this.element.style.width = this.size.x + "px";

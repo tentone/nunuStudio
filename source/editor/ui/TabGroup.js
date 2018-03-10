@@ -25,7 +25,7 @@ function TabGroup(parent)
 	this.empty = document.createElement("div");
 	this.empty.style.position = "absolute";
 	this.empty.style.textAlign = "center";
-	this.empty.style.display = "flex";
+	this.empty.style.display = "none";
 	this.empty.style.width = "100%";
 	this.empty.style.height = "100%";
 	this.empty.style.flexDirection = "column";
@@ -36,7 +36,7 @@ function TabGroup(parent)
 
 	//Options
 	this.mode = TabGroup.TOP;
-	this.buttonSize = new THREE.Vector2(150, 23);
+	this.buttonSize = new THREE.Vector2(150, 22);
 	this.selected = null;
 	this.options = [];
 }
@@ -108,6 +108,8 @@ TabGroup.prototype.selectTab = function(tab)
 	{
 		this.selected = null;
 	}
+
+	this.empty.style.display = this.selected === null ? "flex" : "none";
 };
 
 //Select next tab

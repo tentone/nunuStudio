@@ -5,10 +5,12 @@ function Interface(){}
 Interface.initialize = function()
 {
 	Interface.container = new DualContainer(document.body);
+	Interface.container.tabPosition = 0.75;
 
 	//Left
 	Interface.leftContainer = new DualContainer(Interface.container.element);
 	Interface.leftContainer.orientation = DualContainer.VERTICAL;
+	Interface.leftContainer.tabPosition = 0.7;
 	Interface.container.attachA(Interface.leftContainer);
 
 	//Top Tab
@@ -33,6 +35,7 @@ Interface.initialize = function()
 
 	//Right
 	Interface.rightContainer = new DualContainer(Interface.container.element);
+	Interface.rightContainer.orientation = DualContainer.VERTICAL;
 	Interface.container.attachB(Interface.rightContainer);
 
 	//Tree tab
