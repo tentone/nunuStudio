@@ -30,10 +30,8 @@ function HemisphereLightPanel(parent, obj)
 	this.form.nextRow();
 }
 
-//Super prototypes
 HemisphereLightPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 HemisphereLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

@@ -63,10 +63,8 @@ function AudioPanel(parent, obj)
 	this.form.nextRow();
 }
 
-//Super prototypes
 AudioPanel.prototype = Object.create(Panel.prototype);
 
-//Destroy audio panel
 AudioPanel.prototype.destroy = function()
 {
 	try
@@ -77,7 +75,6 @@ AudioPanel.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update panel content from attached object
 AudioPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

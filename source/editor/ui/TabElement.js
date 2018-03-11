@@ -23,6 +23,19 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.updating = false;
 	this.index = index;
 	this.container = container;
+
+	var self = this;
+	
+	//Focused
+	this.focused = false;
+	this.element.onmouseenter = function()
+	{
+		self.focused = true;
+	};
+	this.element.onmouseleave = function()
+	{
+		self.focused = false;
+	};
 }
 
 TabElement.prototype = Object.create(Element.prototype);
@@ -40,6 +53,20 @@ TabElement.prototype.updateMetadata = function(){};
  * Called for every tab.
  */
 TabElement.prototype.updateSettings = function(){};
+
+/**
+ * Update tab values of the gui for the object attached.
+ * Called when properties of objects are changed.
+ * Called only for active tabs.
+ */
+TabElement.prototype.updateValues = function(){};
+
+/**
+ * Update tab object view.
+ * Called when objects are added, removed, etc.
+ * Called only for active tabs.
+ */
+TabElement.prototype.updateView = function(){};
 
 /*
  * Update tab after object selection changed.
@@ -87,7 +114,6 @@ TabElement.prototype.deactivate = function()
  * Attach object or resource to tab.
  */
 TabElement.prototype.attach = function(obj){};
-
 
 /*
  * Check if an object or resource is attached to the tab.

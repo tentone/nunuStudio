@@ -116,10 +116,8 @@ function PointLightPanel(parent, obj)
 
 }
 
-//Super prototypes
 PointLightPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 PointLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

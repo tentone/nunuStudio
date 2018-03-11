@@ -143,10 +143,8 @@ function DirectionalLightPanel(parent, obj)
 
 }
 
-//Super prototypes
 DirectionalLightPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 DirectionalLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

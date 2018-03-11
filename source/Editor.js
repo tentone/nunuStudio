@@ -563,7 +563,7 @@ Editor.initialize = function()
 				{
 					Editor.loadProgram(file, file.name.endsWith(".nsp"));
 					Editor.resetEditingFlags();
-					Editor.updateObjectViews();
+					Editor.updateViewsGUI();
 				}
 				break;
 			}
@@ -625,7 +625,7 @@ Editor.initialize = function()
 	}
 
 	//Update views and start update loop
-	Editor.updateObjectViews();
+	Editor.updateViewsGUI();
 	Editor.update();
 };
 
@@ -709,13 +709,11 @@ Editor.selectObject = function(object)
 
 		Editor.selectedObjects[0] = object;
 
-		Editor.selectObjectPanel();
-		Editor.updateTabs();
+		Editor.updateSelectionGUI();
 		Editor.selectTool();
 	}
 	else
 	{
-		Editor.clearSelection();
 		Editor.resetEditingFlags();
 	}
 };
@@ -727,13 +725,11 @@ Editor.addToSelection = function(object)
 	{
 		Editor.selectedObjects.push(object);
 
-		Editor.selectObjectPanel();
-		Editor.updateTabs();
+		Editor.updateSelectionGUI();
 		Editor.selectTool();
 	}
 	else
 	{
-		Editor.clearSelection();
 		Editor.resetEditingFlags();
 	}
 };
@@ -747,8 +743,7 @@ Editor.removeFromSelection = function(object)
 		{
 			Editor.selectedObjects.splice(i, 1);
 
-			Editor.selectObjectPanel();
-			Editor.updateTabs();
+			Editor.updateSelectionGUI();
 			Editor.selectTool();
 
 			return;
@@ -788,7 +783,7 @@ Editor.addToScene = function(obj)
 	if(Editor.program.scene !== null)
 	{
 		Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}
 };
 
@@ -813,7 +808,7 @@ Editor.renameObject = function(obj)
 		if(name !== null && name !== "")
 		{
 			Editor.history.add(new ChangeAction(obj, "name", name));
-			Editor.updateObjectViews();
+			Editor.updateViewsGUI();
 		}
 	}
 };
@@ -870,7 +865,7 @@ Editor.deleteObject = function(obj)
 			Editor.history.add(new ActionBundle(actions));
 		}
 
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}
 };
 
@@ -928,7 +923,7 @@ Editor.cutObject = function(obj)
 		
 		Editor.history.add(new ObjectRemovedAction(obj));
 
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 		if(Editor.isObjectSelected(obj))
 		{
 			Editor.resetEditingFlags();
@@ -961,7 +956,7 @@ Editor.pasteObject = function(target)
 			Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
 		}
 		
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}
 	catch(e)
 	{
@@ -974,7 +969,7 @@ Editor.redo = function()
 {
 	if(Editor.history.redo())
 	{
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}
 	else
 	{
@@ -987,28 +982,12 @@ Editor.undo = function()
 {
 	if(Editor.history.undo())
 	{
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}
 	else
 	{
 		Editor.alert("Not possible to undo any further");
 	}
-};
-
-//Update all object views
-Editor.updateObjectViews = function()
-{
-	//Update tree view to match actual scene
-	Interface.treeView.attach(Editor.program);
-	Interface.treeView.updateView();
-		
-	//Update panel
-	if(Interface.panel !== null)
-	{
-		Interface.panel.updatePanel();
-	}
-
-	Editor.updateTabs();
 };
 
 //Create default resouces to be used when creating new objects
@@ -1049,21 +1028,51 @@ Editor.selectTool = function(tool)
 	}
 };
 
+Editor.updateSettings = function()
+{
+	var tab = Interface.bottomTab.getActual();
+	if(tab !== null)
+	{
+		tab.updateSettings();
+	}
+};
+
+//Update all object views
+Editor.updateViewsGUI = function()
+{
+	//Update tree view to match actual scene
+	Interface.treeView.attach(Editor.program);
+	Interface.treeView.updateView();
+
+	var tab = Interface.bottomTab.getActual();
+	if(tab !== null)
+	{
+		tab.updateView();
+	}
+};
+
+
+//Update values of objects attached to the GUI
+Editor.updateValuesGUI = function()
+{
+	Interface.panelContainer.updateValues();
+};
+
 //Update tabs after changing selection
-Editor.updateTabs = function()
+Editor.updateSelectionGUI = function()
 {
 	//Center tab ground
 	Interface.tab.updateMetadata();
 	var tab = Interface.tab.getActual();
-	if(tab instanceof SceneEditor)
+	if(tab !== null)
 	{
-		tab.selectObjectHelper();
+		tab.updateSelection();
 	}
 
 	//Bottom tab group
 	Interface.bottomTab.updateMetadata();
 	var tab = Interface.bottomTab.getActual();
-	if(tab instanceof AssetExplorer || tab instanceof AnimationTab)
+	if(tab !== null)
 	{
 		tab.updateSelection();
 	}
@@ -1075,153 +1084,18 @@ Editor.updateTabs = function()
 	{
 		tab.updateSelection();
 	}*/
-};
 
-//Update UI panel to match selected object
-Editor.selectObjectPanel = function()
-{
 	Interface.treeView.updateSelectedObject();
 
-	if(Interface.panel !== null)
-	{
-		Interface.panel.destroy();
-	}
-
-	if(Editor.hasObjectSelected())
-	{
-		var object = Editor.selectedObjects[0];
-
-		if(object.locked)
-		{
-			Interface.panel = new LockedPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof SpineAnimation)
-		{
-			Interface.panel = new SpinePanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof THREE.SkinnedMesh)
-		{
-			Interface.panel = new MeshPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof THREE.Mesh)
-		{
-			if(object instanceof Text3D)
-			{
-				Interface.panel = new Text3DPanel(Interface.panelContainer.element, object);
-			}
-			else
-			{
-				Interface.panel = new MeshPanel(Interface.panelContainer.element, object);
-			}
-		}
-		else if(object instanceof THREE.Light)
-		{
-			if(object instanceof THREE.PointLight)
-			{
-				Interface.panel = new PointLightPanel(Interface.panelContainer.element, object);
-			}
-			else if(object instanceof THREE.RectAreaLight)
-			{
-				Interface.panel = new RectAreaLightPanel(Interface.panelContainer.element, object);
-			}
-			else if(object instanceof THREE.SpotLight)
-			{
-				Interface.panel = new SpotLightPanel(Interface.panelContainer.element, object);
-			}
-			else if(object instanceof THREE.DirectionalLight)
-			{
-				Interface.panel = new DirectionalLightPanel(Interface.panelContainer.element, object);
-			}
-			else if(object instanceof THREE.HemisphereLight)
-			{
-				Interface.panel = new HemisphereLightPanel(Interface.panelContainer.element, object);
-			}
-			else
-			{
-				Interface.panel = new AmbientLightPanel(Interface.panelContainer.element, object);
-			}
-		}
-		else if(object instanceof Sky)
-		{
-			Interface.panel = new SkyPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof LeapMotion)
-		{
-			Interface.panel = new LeapPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof KinectDevice)
-		{
-			Interface.panel = new KinectPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof PerspectiveCamera)
-		{
-			Interface.panel = new PerspectiveCameraPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof OrthographicCamera)
-		{
-			Interface.panel = new OrthographicCameraPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof CubeCamera)
-		{
-			Interface.panel = new CubeCameraPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof THREE.Audio)
-		{
-			Interface.panel = new AudioPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof Scene)
-		{
-			Interface.panel = new ScenePanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof Script)
-		{
-			Interface.panel = new ScriptPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof Program)
-		{
-			Interface.panel = new ProgramPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof PhysicsObject)
-		{
-			Interface.panel = new PhysicsPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof OrbitControls)
-		{
-			Interface.panel = new OrbitControlsPanel(Interface.panelContainer.element, object);
-		}
-		else if(object instanceof FirstPersonControls)
-		{
-			Interface.panel = new FirstPersonControlsPanel(Interface.panelContainer.element, object);
-		}
-		else
-		{
-			Interface.panel = new ObjectPanel(Interface.panelContainer.element, object);
-		}
-
-		Interface.panel.form.updateInterface();
-
-		Interface.panel.updatePanel();
-		Interface.panel.updateInterface();
-	}
-	else
-	{
-		Interface.panel = null;
-	}
+	Interface.panelContainer.updateSelection();
 };
 
 //Reset editing flags
 Editor.resetEditingFlags = function()
 {
 	Editor.clearSelection();
-	
-	if(Interface.panel !== null)
-	{
-		Interface.panel.destroy();
-		Interface.panel = null;
-	}
-	
 	Editor.selectTool(Editor.SELECT);
-	Editor.updateTabs();
+	Editor.updateSelectionGUI();
 };
 
 //Craete new Program
@@ -1245,7 +1119,7 @@ Editor.createNewProgram = function()
 	//Reset editor
 	Editor.setOpenFile(null);
 	Editor.resetEditingFlags();
-	Editor.updateObjectViews();
+	Editor.updateViewsGUI();
 
 	//Clear tabs
 	Interface.tab.clear();
@@ -1333,7 +1207,7 @@ Editor.loadProgram = function(file, binary)
 			//Set open file
 			Editor.setOpenFile(file);
 			Editor.resetEditingFlags();
-			Editor.updateObjectViews();
+			Editor.updateViewsGUI();
 
 			//Add new scene tab to interface
 			if(Editor.program.scene !== null)
@@ -1464,7 +1338,7 @@ Editor.loadTexture = function(file, onLoad)
 		texture.name = name;
 	
 		Editor.program.addTexture(texture);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 
 		if(onLoad !== undefined)
 		{
@@ -1487,7 +1361,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		texture.name = name;
 
 		Editor.program.addTexture(texture);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 
 		if(onLoad !== undefined)
 		{
@@ -1515,7 +1389,7 @@ Editor.loadAudio = function(file, onLoad)
 		}
 
 		Editor.program.addAudio(audio);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	};
 
 	reader.readAsArrayBuffer(file);
@@ -1547,7 +1421,7 @@ Editor.loadFont = function(file, onLoad)
 		}
 
 		Editor.program.addFont(font);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	};
 
 
@@ -1573,7 +1447,7 @@ Editor.loadText = function(file)
 		resource.name = name;
 
 		Editor.program.addResource(resource);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	};
 
 	reader.readAsText(file);

@@ -387,7 +387,6 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.cameraPreviewPosition);
 	this.form.nextRow();
 
-
 	//Blank Space
 	this.form.addText("");
 	this.form.nextRow();
@@ -405,7 +404,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.filePreviewSize.setOnChange(function()
 	{
 		Settings.general.filePreviewSize = self.filePreviewSize.getValue();
-		Interface.assetExplorer.updateSettings();
+		Editor.updateSettings();
 	});
 	this.form.add(this.filePreviewSize);
 	

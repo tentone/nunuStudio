@@ -148,10 +148,8 @@ function PhysicsPanel(parent, obj)
 
 }
 
-//Super prototypes
 PhysicsPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 PhysicsPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

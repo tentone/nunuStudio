@@ -159,17 +159,15 @@ function PerspectiveCameraPanel(parent, obj)
 	this.form.nextRow();
 }
 
-//Super prototypes
 PerspectiveCameraPanel.prototype = Object.create(Panel.prototype);
 
-//Attach camera
 PerspectiveCameraPanel.prototype.attach = function(obj)
 {
 	Panel.prototype.attach.call(this, obj);
+
 	this.scene = ObjectUtils.getScene(obj);
 }
 
-//Update panel content from attached object
 PerspectiveCameraPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

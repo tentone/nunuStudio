@@ -200,7 +200,7 @@ function MainMenu(parent)
 						Editor.program.add(program.children[i]);
 					}
 
-					Editor.updateObjectViews();
+					Editor.updateViewsGUI();
 				};
 
 				if(binary)
@@ -616,7 +616,7 @@ function MainMenu(parent)
 	projectMenu.addOption("Create Scene", function()
 	{
 		Editor.program.addDefaultScene();
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/add.png");
 
 	projectMenu.addOption("Execute script", function()

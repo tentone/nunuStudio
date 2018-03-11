@@ -83,7 +83,7 @@ function AnimationClipTrack(editor, animation)
 
 		self.editor.mixer.setTime(time > 0 ? time : 0);
 
-		Interface.panel.updatePanel();
+		Editor.updateValuesGUI();
 	});
 	this.manager.add(window, "mouseup", function(event)
 	{

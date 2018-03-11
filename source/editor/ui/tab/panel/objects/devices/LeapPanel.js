@@ -53,10 +53,8 @@ function LeapPanel(parent, obj)
 	this.form.add(this.posesEnabled);
 }
 
-//Super prototypes
 LeapPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 LeapPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

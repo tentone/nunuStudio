@@ -19,11 +19,13 @@ Interface.initialize = function()
 
 	//Bottom tab
 	Interface.bottomTab = new TabGroup(Interface.leftContainer.element);
+	Interface.bottomTab.mode = TabGroup.LEFT;
+	Interface.bottomTab.buttonSize.set(25, 25);
 	Interface.leftContainer.attachB(Interface.bottomTab);
 
 	//Asset
-	Interface.assetExplorer = Interface.bottomTab.addTab(AssetExplorer, false);
-	Interface.assetExplorer.button.setAltText("Asset explorer");
+	var assetExplorer = Interface.bottomTab.addTab(AssetExplorer, false);
+	assetExplorer.button.setAltText("Asset explorer");
 
 	//Console
 	var console = Interface.bottomTab.addTab(ConsoleTab, false);
@@ -38,20 +40,15 @@ Interface.initialize = function()
 	Interface.rightContainer.orientation = DualContainer.VERTICAL;
 	Interface.container.attachB(Interface.rightContainer);
 
-	//Tree tab
+	//Tree view tab
 	Interface.treeTab = new TabGroup(Interface.rightContainer.element);
 	Interface.rightContainer.attachA(Interface.treeTab);
-
-	//Tree view
 	Interface.treeView = Interface.treeTab.addTab(TreeView, false)
 
-	//Object panel
+	//Object panel tab
 	Interface.panelTab = new TabGroup(Interface.rightContainer.element);
 	Interface.rightContainer.attachB(Interface.panelTab);
-
 	Interface.panelContainer = Interface.panelTab.addTab(PanelContainer, false);
-	
-	Interface.panel = null;
 
 	//Top Bar
 	Interface.topBar = new MainMenu();

@@ -174,17 +174,15 @@ function OrthographicCameraPanel(parent, obj)
 	this.form.nextRow();
 }
 
-//Super Prototypes
 OrthographicCameraPanel.prototype = Object.create(Panel.prototype);
 
-//Attach camera
 OrthographicCameraPanel.prototype.attach = function(obj)
 {
 	Panel.prototype.attach.call(this, obj);
+
 	this.scene = ObjectUtils.getScene(obj);
 }
 
-//Update panel content from attached object
 OrthographicCameraPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

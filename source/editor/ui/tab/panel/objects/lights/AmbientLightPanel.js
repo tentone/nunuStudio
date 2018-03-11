@@ -21,7 +21,6 @@ function AmbientLightPanel(parent, obj)
 
 AmbientLightPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 AmbientLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

@@ -131,7 +131,7 @@ function AssetExplorer(parent, closeable, container, index)
 						animation.name = FileSystem.getFileName(file);
 
 						Editor.addToScene(animation);
-						Editor.updateObjectViews();
+						Editor.updateViewsGUI();
 					}
 					catch(e)
 					{
@@ -181,7 +181,7 @@ function AssetExplorer(parent, closeable, container, index)
 					texture.name = name;
 
 					Editor.program.addTexture(texture);
-					Editor.updateObjectViews();
+					Editor.updateViewsGUI();
 				};
 
 				reader.readAsArrayBuffer(file);
@@ -196,7 +196,7 @@ function AssetExplorer(parent, closeable, container, index)
 		texture.name = "cube";
 		Editor.program.addTexture(texture);
 
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/cube.png");
 
 	//Canvas texture
@@ -206,7 +206,7 @@ function AssetExplorer(parent, closeable, container, index)
 		texture.name = "canvas";
 		Editor.program.addTexture(texture);
 
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/canvas.png");
 
 	//Video texture
@@ -228,7 +228,7 @@ function AssetExplorer(parent, closeable, container, index)
 		texture.name = "webcam";
 		Editor.program.addTexture(texture);
 
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/hw/webcam.png");
 
 	texture.updateInterface();
@@ -244,7 +244,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshStandardMaterial();
 		material.name = "standard";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Physical material", function()
@@ -252,7 +252,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshPhysicalMaterial();
 		material.name = "physical";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Phong material", function()
@@ -260,7 +260,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshPhongMaterial();
 		material.name = "phong";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 	
 	material.addOption("Basic material", function()
@@ -268,7 +268,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshBasicMaterial();
 		material.name = "basic";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Toon material", function()
@@ -276,7 +276,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshToonMaterial();
 		material.name = "toon";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Lambert material", function()
@@ -284,7 +284,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshLambertMaterial();
 		material.name = "lambert";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Sprite material", function()
@@ -292,7 +292,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.SpriteMaterial({color: 0xffffff});
 		material.name = "sprite";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/image.png");
 
 	material.addOption("Points material", function()
@@ -300,7 +300,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.PointsMaterial();
 		material.name = "points";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/models/points.png");
 
 	material.addOption("Line material", function()
@@ -308,7 +308,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.LineBasicMaterial();
 		material.name = "line";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/nodes.png");
 
 	material.addOption("Line Dashed material", function()
@@ -316,7 +316,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.LineDashedMaterial();
 		material.name = "line";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/nodes.png");
 
 	material.addOption("Shader material", function()
@@ -324,7 +324,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.ShaderMaterial();
 		material.name = "shader";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/script/script.png");
 
 	var others = material.addMenu("Others");
@@ -334,7 +334,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshNormalMaterial();
 		material.name = "normal";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 	
 	others.addOption("Depth material", function()
@@ -342,7 +342,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshDepthMaterial();
 		material.name = "depth";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	others.addOption("Distance material", function()
@@ -350,7 +350,7 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.MeshDistanceMaterial();
 		material.name = "distance";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	others.addOption("Shadow material", function()
@@ -358,13 +358,13 @@ function AssetExplorer(parent, closeable, container, index)
 		var material = new THREE.ShadowMaterial();
 		material.name = "shadow";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.updateInterface();
 
 	//Files in explorer
-	this.filesSize = new THREE.Vector2(70, 70);
+	this.filesSize = new THREE.Vector2(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
 	this.filesSpacing = 0;
 	this.files = [];
 
@@ -387,10 +387,16 @@ AssetExplorer.prototype.activate = function()
 AssetExplorer.prototype.updateSettings = function()
 {
 	this.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
+
+	for(var i = 0; i < this.files.length; i++)
+	{
+		this.files[i].size.copy(this.filesSize);
+	}
+
 	this.updateInterface();
 };
 
-AssetExplorer.prototype.updateSelection = function()
+AssetExplorer.prototype.updateView = function()
 {
 	if(!this.active)
 	{

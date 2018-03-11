@@ -19,10 +19,8 @@ function KinectPanel(parent, obj)
 
 }
 
-//Super prototypes
 KinectPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 KinectPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

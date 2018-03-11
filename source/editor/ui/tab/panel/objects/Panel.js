@@ -16,19 +16,6 @@ function Panel(parent, obj)
 	//Self pointer
 	var self = this;
 
-	//Mouse inside panel
-	this.focused = false;
-
-	this.element.onmouseenter = function()
-	{
-		self.focused = true;
-	};
-
-	this.element.onmouseleave = function()
-	{
-		self.focused = false;
-	};
-
 	//Default form
 	this.form = new Form(this.element);
 	this.form.position.set(5, 5);
@@ -41,7 +28,7 @@ function Panel(parent, obj)
 	this.name.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "name", self.name.getText()));
-		Editor.updateObjectViews();
+		Editor.updateViewsGUI();
 	});
 	this.form.add(this.name);
 	this.form.nextRow();
@@ -185,14 +172,7 @@ Panel.prototype = Object.create(Element.prototype);
 //Attach object to panel
 Panel.prototype.attach = function(obj)
 {
-	if(obj instanceof THREE.Object3D)
-	{
-		this.obj = obj;
-	}
-	else
-	{
-		this.obj = null;
-	}
+	this.obj = obj;
 };
 
 //Update panel ui

@@ -103,10 +103,8 @@ function Text3DPanel(parent, obj)
 
 }
 
-//Super prototypes
 Text3DPanel.prototype = Object.create(ObjectPanel.prototype);
 
-//Update panel content from attached object
 Text3DPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);

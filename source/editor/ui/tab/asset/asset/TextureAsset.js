@@ -53,7 +53,7 @@ function TextureAsset(parent)
 			if(self.asset !== null)
 			{
 				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename texture", self.asset.name)));
-				Editor.updateObjectViews();
+				Editor.updateViewsGUI();
 			}
 		});
 		
@@ -63,7 +63,7 @@ function TextureAsset(parent)
 			{
 				self.asset.dispose();
 				Editor.program.removeTexture(self.asset, Editor.defaultTexture);
-				Editor.updateObjectViews();
+				Editor.updateViewsGUI();
 			}
 		});
 
@@ -89,7 +89,7 @@ function TextureAsset(parent)
 
 					self.asset.dispose();
 					Editor.program.removeTexture(self.asset, Editor.defaultTexture);
-					Editor.updateObjectViews();
+					Editor.updateViewsGUI();
 				}
 				catch(e){}
 			}
@@ -125,7 +125,7 @@ function TextureAsset(parent)
 					
 					//Add
 					Editor.program.addTexture(texture);
-					Interface.assetExplorer.updateSelection();
+					Editor.updateViewsGUI();
 				}
 				catch(e)
 				{

@@ -162,7 +162,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 		if(self.material !== null)
 		{
 			Editor.history.add(new ChangeAction(self.material, "name", self.name.getText()));
-			Editor.updateObjectViews();
+			Editor.updateViewsGUI();
 		}
 	});
 	this.form.add(this.name);

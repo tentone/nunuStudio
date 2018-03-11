@@ -119,10 +119,8 @@ function SpotLightPanel(parent, obj)
 	this.form.nextRow();
 }
 
-//Super prototypes
 SpotLightPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 SpotLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

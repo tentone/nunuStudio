@@ -30,7 +30,7 @@ function ImageAsset(parent)
 			if(self.asset !== null)
 			{
 				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename", self.asset.name)));
-				Editor.updateObjectViews();
+				Editor.updateViewsGUI();
 			}
 		});
 		
@@ -39,7 +39,7 @@ function ImageAsset(parent)
 			if(self.asset !== null && confirm("Delete?"))
 			{
 				Editor.program.removeImage(self.asset);
-				Editor.updateObjectViews();
+				Editor.updateViewsGUI();
 			}
 		});
 

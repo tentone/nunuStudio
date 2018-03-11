@@ -333,10 +333,8 @@ function SkyPanel(parent, obj)
 
 }
 
-//Super prototypes
 SkyPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel with object data
 SkyPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

@@ -109,7 +109,7 @@ function MaterialAsset(parent)
 			{
 				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename material", self.asset.name)));
 				self.updateMetadata();
-				Editor.updateObjectViews();
+				Editor.updateViewsGUI();
 			}
 		});
 		
@@ -124,7 +124,7 @@ function MaterialAsset(parent)
 				}
 			});
 
-			Editor.updateObjectViews();
+			Editor.updateSelectionGUI();
 		})
 
 		context.addOption("Delete", function()
@@ -132,7 +132,7 @@ function MaterialAsset(parent)
 			if(self.asset !== null && confirm("Delete material?"))
 			{
 				Editor.program.removeMaterial(self.asset, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
-				Editor.updateObjectViews();
+				Editor.updateViewsGUI();
 			}
 		});
 
@@ -156,7 +156,7 @@ function MaterialAsset(parent)
 				{
 					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 					Editor.program.removeMaterial(self.asset, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
-					Editor.updateObjectViews();
+					Editor.updateViewsGUI();
 				}
 				catch(e){}
 			}
@@ -181,7 +181,7 @@ function MaterialAsset(parent)
 					
 					//Add
 					Editor.program.addMaterial(material);
-					Interface.assetExplorer.updateSelection();
+					Editor.updateSelectionGUI();
 				}
 				catch(e)
 				{

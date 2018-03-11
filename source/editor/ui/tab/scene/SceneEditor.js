@@ -118,13 +118,13 @@ function SceneEditor(parent, closeable, container, index)
 				{
 					object.material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
 					object.material.name = texture.name;
-					Editor.updateObjectViews();
+					Editor.updateViewsGUI();
 				}
 				else if(object instanceof THREE.Sprite)
 				{
 					object.material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
 					object.material.name = texture.name;
-					Editor.updateObjectViews();
+					Editor.updateViewsGUI();
 				}
 			}
 
@@ -189,7 +189,7 @@ function SceneEditor(parent, closeable, container, index)
 						if(object instanceof THREE.Sprite)
 						{
 							object.material = draggedObject;
-							Editor.updateObjectViews();
+							Editor.updateViewsGUI();
 						}
 					}
 					//Mesh Material
@@ -198,7 +198,7 @@ function SceneEditor(parent, closeable, container, index)
 						if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 						{
 							object.material = draggedObject;
-							Editor.updateObjectViews();
+							Editor.updateViewsGUI();
 						}
 					}
 					//Cubemap
@@ -208,7 +208,7 @@ function SceneEditor(parent, closeable, container, index)
 						{
 							object.material.envMap = draggedObject;
 							self.reloadContext();
-							Editor.updateObjectViews();
+							Editor.updateViewsGUI();
 						}
 					}
 					//Texture
@@ -232,7 +232,7 @@ function SceneEditor(parent, closeable, container, index)
 						if(object.font !== undefined)
 						{
 							object.setFont(draggedObject);
-							Editor.updateObjectViews();
+							Editor.updateViewsGUI();
 						}
 					}
 				}
@@ -508,7 +508,7 @@ SceneEditor.prototype.update = function()
 		}
 		else if(this.keyboard.keyPressed(Keyboard.CTRL))
 		{
-			if(Interface.panel !== null && !Interface.panel.focused)
+			if(this.focused)
 			{
 				if(this.keyboard.keyJustPressed(Keyboard.C))
 				{
@@ -561,7 +561,7 @@ SceneEditor.prototype.update = function()
 
 					if(this.isEditingObject)
 					{
-						Interface.panel.updatePanel();
+						Editor.updateViewsGUI();
 					}
 				}
 				else
@@ -1458,7 +1458,7 @@ SceneEditor.prototype.selectTool = function(tool)
 };
 
 //Select helper to debug selected object data
-SceneEditor.prototype.selectObjectHelper = function()
+SceneEditor.prototype.updateSelection = function()
 {
 	this.objectHelper.removeAll();
 

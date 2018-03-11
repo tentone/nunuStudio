@@ -56,10 +56,8 @@ function RectAreaLightPanel(parent, obj)
 	this.form.nextRow();
 }
 
-//Super prototypes
 RectAreaLightPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 RectAreaLightPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

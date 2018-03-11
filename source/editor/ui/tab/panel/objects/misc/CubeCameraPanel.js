@@ -36,7 +36,6 @@ function CubeCameraPanel(parent, obj)
 		var size = Math.pow(2, i);
 		this.resolution.addValue(size.toString(), size);
 	}
-
 }
 
 CubeCameraPanel.prototype = Object.create(Panel.prototype);
