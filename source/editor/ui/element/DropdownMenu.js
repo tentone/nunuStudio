@@ -187,6 +187,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 {
 	this.expanded = expanded;
 
+
 	if(this.expanded)
 	{
 		this.panel.style.display = "block";
