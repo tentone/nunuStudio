@@ -27,10 +27,31 @@ function TabElement(parent, closeable, container, index, title, icon)
 
 TabElement.prototype = Object.create(Element.prototype);
 
-//Update tab metadata (called after applying changes to object)
-TabElement.prototype.updateMetadata = Element.EMPTY;
+/*
+ * Update tab metadata (name, icon, ...)
+ * Called after applying changes to object.
+ * Called for every tab.
+ */
+TabElement.prototype.updateMetadata = function(){};
 
-//Activate tab (called when the tab is activated)
+/*
+ * Update tab settings.
+ * Called after settings of the editor are changed.
+ * Called for every tab.
+ */
+TabElement.prototype.updateSettings = function(){};
+
+/*
+ * Update tab after object selection changed.
+ * Called after a new object was selected.
+ * Called only for active tabs.
+ */
+TabElement.prototype.updateSelection = function(){};
+
+/*
+ * Activate tab.
+ * Called when a tab becomes active.
+ */
 TabElement.prototype.activate = function()
 {
 	if(this.update !== undefined)
@@ -53,19 +74,25 @@ TabElement.prototype.activate = function()
 	this.active = true;
 };
 
-//Deactivate tab (called after the tab is deactivated or closed)
+/*
+ * Deactivate tab.
+ * Called when a tab is deactivated or closed.
+ */
 TabElement.prototype.deactivate = function()
 {
 	this.active = false;
 };
 
-//Attach object or resource to tab (used to attach objects to tab elements)
+/*
+ * Attach object or resource to tab.
+ */
 TabElement.prototype.attach = function(obj){};
 
-//Update tab settings (called after settings of the editor are changed)
-TabElement.prototype.updateSettings = Element.EMPTY;
 
-//Check if an object or resource is attached to the tab (used to validated tabs after object removed)
+/*
+ * Check if an object or resource is attached to the tab.
+ * Called to check if a tab needs to be closed after changes to objects.
+ */
 TabElement.prototype.isAttached = function(obj)
 {
 	return false;
@@ -113,7 +140,6 @@ TabElement.prototype.setName = function(text)
 	this.title = text;
 	this.button.setName(text);
 };
-
 
 //Update Interface
 TabElement.prototype.updateInterface = function()

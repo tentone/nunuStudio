@@ -23,15 +23,15 @@ Interface.initialize = function()
 
 	//Asset
 	Interface.assetExplorer = Interface.bottomTab.addTab(AssetExplorer, false);
-	//Interface.assetExplorer.button.setAltText("Asset explorer");
+	Interface.assetExplorer.button.setAltText("Asset explorer");
 
 	//Console
 	var console = Interface.bottomTab.addTab(ConsoleTab, false);
-	//console.button.setAltText("Console");
+	console.button.setAltText("Console");
 
 	//Animations
 	var animation = Interface.bottomTab.addTab(AnimationTab, false);
-	//animation.button.setAltText("Animation");
+	animation.button.setAltText("Animation");
 
 	//Right
 	Interface.rightContainer = new DualContainer(Interface.container.element);

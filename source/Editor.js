@@ -710,7 +710,6 @@ Editor.selectObject = function(object)
 		Editor.selectedObjects[0] = object;
 
 		Editor.selectObjectPanel();
-
 		Editor.updateTabs();
 		Editor.selectTool();
 	}
@@ -1053,6 +1052,7 @@ Editor.selectTool = function(tool)
 //Update tabs after changing selection
 Editor.updateTabs = function()
 {
+	//Center tab ground
 	Interface.tab.updateMetadata();
 	var tab = Interface.tab.getActual();
 	if(tab instanceof SceneEditor)
@@ -1060,16 +1060,21 @@ Editor.updateTabs = function()
 		tab.selectObjectHelper();
 	}
 
+	//Bottom tab group
 	Interface.bottomTab.updateMetadata();
 	var tab = Interface.bottomTab.getActual();
-	if(tab instanceof AssetExplorer)
+	if(tab instanceof AssetExplorer || tab instanceof AnimationTab)
 	{
 		tab.updateSelection();
 	}
-	else if(tab instanceof AnimationTab)
-	{	
+
+	//Right side tab group
+	/*Interface.bottomTab.updateMetadata();
+	var tab = Interface.bottomTab.getActual();
+	if(tab instanceof AssetExplorer || tab instanceof AnimationTab)
+	{
 		tab.updateSelection();
-	}
+	}*/
 };
 
 //Update UI panel to match selected object

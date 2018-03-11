@@ -17,9 +17,6 @@ function Element(parent, type)
 
 Element.prototype.constructor = Element;
 
-//Empty function that can be used a dummy instead of creating empty functions
-Element.EMPTY = function(){};
-
 //Origin on top left.
 Element.TOP_LEFT = 0;
 
@@ -35,17 +32,13 @@ Element.BOTTOM_RIGHT = 3;
 //Add drag and drog event prevention
 Element.prototype.preventDragEvents = function()
 {
-	//Drop event
-	this.element.ondrop = function(event)
+	function preventDefault(event)
 	{
 		event.preventDefault();
-	};
+	}
 
-	//Dragged over event
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	this.element.ondrop = preventDefault;
+	this.element.ondragover = preventDefault;
 };
 
 //Set alt text, that is displayed when the mouse is over the element. Returns the element created that is attached to the document body.

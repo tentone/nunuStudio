@@ -404,10 +404,8 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.filePreviewSize.setStep(1);
 	this.filePreviewSize.setOnChange(function()
 	{
-		var value = self.filePreviewSize.getValue();
-		Settings.general.filePreviewSize = value;
-		Interface.assetExplorer.filesSize.set(value, value);
-		Interface.assetExplorer.updateSelection();
+		Settings.general.filePreviewSize = self.filePreviewSize.getValue();
+		Interface.assetExplorer.updateSettings();
 	});
 	this.form.add(this.filePreviewSize);
 	

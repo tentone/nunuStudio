@@ -378,12 +378,16 @@ AssetExplorer.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	this.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
-	
 	if(Editor.program !== null)
 	{
 		this.updateSelection();
 	}
+};
+
+AssetExplorer.prototype.updateSettings = function()
+{
+	this.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
+	this.updateInterface();
 };
 
 AssetExplorer.prototype.updateSelection = function()
@@ -493,7 +497,6 @@ AssetExplorer.prototype.add = function(file)
 //Update division
 AssetExplorer.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.display = "block";
@@ -504,7 +507,6 @@ AssetExplorer.prototype.updateInterface = function()
 
 		//Asset position
 		var filesRow = Math.floor(this.files.length / (this.files.length * (this.filesSize.x + this.filesSpacing) / this.size.x));
-		
 		for(var i = 0; i < this.files.length; i++)
 		{
 			var row = Math.floor(i / filesRow);
