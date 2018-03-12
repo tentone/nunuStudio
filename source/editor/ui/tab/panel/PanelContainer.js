@@ -19,32 +19,13 @@ PanelContainer.prototype.isAttached = function(object)
 
 PanelContainer.prototype.updateSelection = function()
 {	
-	this.attach();
-};
-
-PanelContainer.prototype.updateView = function()
-{	
-	if(this.panel !== null)
-	{
-		this.panel.updatePanel();
-	}
-};
-
-PanelContainer.prototype.attach = function(object)
-{
-	if(object === undefined)
-	{
-		if(Editor.hasObjectSelected())
-		{
-			object = Editor.selectedObjects[0];
-		}
-	}
-
 	if(this.panel !== null)
 	{
 		this.panel.destroy();
 		this.panel = null;
 	}
+
+	var object = Editor.hasObjectSelected() ? Editor.selectedObjects[0] : null;
 
 	if(object instanceof THREE.Object3D)
 	{
@@ -158,5 +139,13 @@ PanelContainer.prototype.attach = function(object)
 		this.panel.form.updateInterface();
 		this.panel.updatePanel();
 		this.panel.updateInterface();
+	}
+};
+
+PanelContainer.prototype.updateValues = function()
+{	
+	if(this.panel !== null)
+	{
+		this.panel.updatePanel();
 	}
 };

@@ -4,10 +4,14 @@ function SceneEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Scene", Editor.filePath + "icons/misc/scene.png");
 
+	//this.element.style.backgroundRepeat = "repeat";
+	//this.element.style.backgroundImage = "url(\'" + Editor.filePath + "alpha.png\')";
+
 	//Canvas
 	this.canvas = document.createElement("canvas");
 	this.canvas.style.position = "absolute";
 	this.element.appendChild(this.canvas);
+
 
 	//Renderer
 	this.renderer = null;
@@ -561,7 +565,7 @@ SceneEditor.prototype.update = function()
 
 					if(this.isEditingObject)
 					{
-						Editor.updateViewsGUI();
+						Editor.updateValuesGUI();
 					}
 				}
 				else
