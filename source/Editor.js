@@ -1035,8 +1035,6 @@ Editor.updateSettings = function()
 	{
 		tab.updateSettings();
 	}
-
-	console.log("Update Settings");
 };
 
 //Update all object views
@@ -1051,8 +1049,6 @@ Editor.updateViewsGUI = function()
 	{
 		tab.updateView();
 	}
-
-	console.log("Update View");
 };
 
 
@@ -1060,15 +1056,11 @@ Editor.updateViewsGUI = function()
 Editor.updateValuesGUI = function()
 {
 	Interface.panelContainer.updateValues();
-
-	console.log("Update Values");
 };
 
 //Update tabs after changing selection
 Editor.updateSelectionGUI = function()
 {
-	console.log("Update Selection");
-
 	//Center tab ground
 	Interface.tab.updateMetadata();
 	var tab = Interface.tab.getActual();

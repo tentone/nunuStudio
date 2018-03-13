@@ -4,6 +4,7 @@ function ContextMenu(parent)
 {
 	Element.call(this, parent);
 
+	this.element.style.overflow = "visible";
 	this.element.style.zIndex = "300";
 
 	this.offset = new THREE.Vector2(20, 10);
@@ -63,7 +64,7 @@ ContextMenu.prototype.addMenu = function(name)
 	menu.setLocation(DropdownMenu.LEFT);
 	menu.showArrow();
 	menu.text.setAlignment(Text.LEFT);
-	menu.text.position.set(25, 0);
+	menu.text.position.x = 25;
 
 	this.options.push(menu);
 
@@ -78,9 +79,9 @@ ContextMenu.prototype.updateInterface = function()
 		//Options
 		for(var i = 0; i < this.options.length; i++)
 		{
+			this.options[i].visible = this.visible;
 			this.options[i].size.copy(this.size);
 			this.options[i].position.set(0, this.size.y * i);
-			this.options[i].visible = this.visible;
 			this.options[i].updateInterface();
 		}
 	

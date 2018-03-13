@@ -1184,7 +1184,7 @@ SceneEditor.prototype.initializeRenderer = function()
 	}
 
 	//Create renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas,  alpha: true, antialias: antialiasing});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, alpha: true, antialias: antialiasing});
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
 	this.renderer.shadowMap.enabled = shadows;
 	this.renderer.shadowMap.type = shadowsType;
