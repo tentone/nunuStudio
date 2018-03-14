@@ -54,14 +54,14 @@ TabElement.prototype.updateMetadata = function(){};
  */
 TabElement.prototype.updateSettings = function(){};
 
-/**
+/*
  * Update tab values of the gui for the object attached.
  * Called when properties of objects are changed.
  * Called only for active tabs.
  */
 TabElement.prototype.updateValues = function(){};
 
-/**
+/*
  * Update tab object view.
  * Called when objects are added, removed, etc.
  * Called only for active tabs.
