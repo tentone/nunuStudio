@@ -12998,22 +12998,6 @@
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
             "line": 594,
-            "description": "Returns the euler angles representing the rotation of the object in world space.",
-            "itemtype": "method",
-            "name": "getWorldRotation",
-            "params": [
-                {
-                    "name": "optionalTarget",
-                    "description": "If specified, the result will be copied into this Euler, otherwise a new Euler will be created.",
-                    "type": "Euler"
-                }
-            ],
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 600,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -13029,7 +13013,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 606,
+            "line": 600,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -13045,7 +13029,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 612,
+            "line": 606,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -13066,7 +13050,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 619,
+            "line": 613,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -13082,7 +13066,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 625,
+            "line": 619,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -13098,7 +13082,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 631,
+            "line": 625,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",

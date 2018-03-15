@@ -592,12 +592,6 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
  */
 
 /**
- * Returns the euler angles representing the rotation of the object in world space.
- * @method getWorldRotation
- * @param {Euler} optionalTarget If specified, the result will be copied into this Euler, otherwise a new Euler will be created. 
- */
-
-/**
  * Returns a vector of the scaling factors applied to the object for each axis in world space.
  * @method getWorldScale
  * @param {Vector3} optionalTarget If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created. 
