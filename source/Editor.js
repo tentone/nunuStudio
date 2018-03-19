@@ -2039,6 +2039,26 @@ Editor.loadModel = function(file, onLoad)
 			};
 			reader.readAsArrayBuffer(file);
 		}
+		//SVG
+		else if(extension === "svg")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new THREE.SVGLoader();
+					
+					//TODO <LOAD SVG DATA>
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsText(file);
+		}
 		//STL
 		else if(extension === "stl")
 		{
