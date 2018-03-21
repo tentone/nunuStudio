@@ -75,6 +75,8 @@ function FirstPersonControls()
 	this.vector = new THREE.Vector2(0, 0);
 	this.mouse = null;
 	this.keyboard = null;
+
+	this.tempVector = new THREE.Vector3();
 }
 
 FirstPersonControls.UP = new THREE.Vector3(0, 1, 0);
@@ -123,7 +125,7 @@ FirstPersonControls.prototype.update = function(delta)
 	{
 		if(this.keyboard.keyPressed(this.moveKeys[0]))
 		{
-			var direction = this.getWorldDirection();
+			var direction = this.getWorldDirection(this.tempVector);
 			if(this.moveOnPlane)
 			{
 				direction.y = 0;
@@ -134,7 +136,7 @@ FirstPersonControls.prototype.update = function(delta)
 		}
 		if(this.keyboard.keyPressed(this.moveKeys[1]))
 		{
-			var direction = this.getWorldDirection();
+			var direction = this.getWorldDirection(this.tempVector);
 			if(this.moveOnPlane)
 			{
 				direction.y = 0;
@@ -190,7 +192,7 @@ FirstPersonControls.prototype.updateControls = function()
  */
 FirstPersonControls.prototype.getDirection = function()
 {
-	var direction = this.getWorldDirection();
+	var direction = this.getWorldDirection(this.tempVector);
 	direction.normalize();
 	return direction;
 };

@@ -66,6 +66,7 @@ include("core/three/loaders/BufferGeometryLoader.js");
 include("core/three/textures/Texture.js");
 include("core/three/lights/LightShadow.js");
 include("core/three/scenes/Fog.js");
+include("core/three/objects/Points.js");
 
 include("core/animation/AnimationMixer.js");
 

@@ -87,6 +87,8 @@ function OrbitControls()
 	this.vector = new THREE.Vector2(0, 0);
 	this.mouse = null;
 	this.keyboard = null;
+
+	this.tempVector = new THREE.Vector3();
 }
 
 OrbitControls.UP = new THREE.Vector3(0, 1, 0);
@@ -142,7 +144,7 @@ OrbitControls.prototype.update = function(delta)
 
 	if(this.movementEnabled && this.mouse.buttonPressed(Mouse.RIGHT))
 	{
-		var direction = this.getWorldDirection();
+		var direction = this.getWorldDirection(this.tempVector);
 		direction.y = 0;
 		direction.normalize();
 

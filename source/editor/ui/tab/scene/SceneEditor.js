@@ -716,7 +716,7 @@ SceneEditor.prototype.update = function()
 						}
 
 						//Move camera
-						var direction = this.camera.getWorldDirection();
+						var direction = this.camera.getWorldDirection(this.tempVector3);
 						direction.multiplyScalar(speed);
 						this.camera.position.sub(direction);
 					}
@@ -726,13 +726,13 @@ SceneEditor.prototype.update = function()
 					{
 						if(Editor.keyboard.keyPressed(Keyboard.W))
 						{
-							var direction = this.camera.getWorldDirection();
+							var direction = this.camera.getWorldDirection(this.tempVector3);
 							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
 							this.camera.position.add(direction);
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.S))
 						{
-							var direction = this.camera.getWorldDirection();
+							var direction = this.camera.getWorldDirection(this.tempVector3);
 							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
 							this.camera.position.sub(direction);
 						}
@@ -802,7 +802,7 @@ SceneEditor.prototype.update = function()
 					{
 						if(Editor.keyboard.keyPressed(Keyboard.W))
 						{
-							var direction = this.camera.getWorldDirection();
+							var direction = this.camera.getWorldDirection(this.tempVector3);
 							direction.y = 0;
 							direction.normalize();
 
@@ -811,7 +811,7 @@ SceneEditor.prototype.update = function()
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.S))
 						{
-							var direction = this.camera.getWorldDirection();
+							var direction = this.camera.getWorldDirection(this.tempVector3);
 							direction.y = 0;
 							direction.normalize();
 
@@ -820,7 +820,7 @@ SceneEditor.prototype.update = function()
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.D))
 						{
-							var direction = this.camera.getWorldDirection();
+							var direction = this.camera.getWorldDirection(this.tempVector3);
 							direction.y = 0;
 							direction.normalize();
 							direction.applyAxisAngle(SceneEditor.UP, 1.57);
@@ -830,7 +830,7 @@ SceneEditor.prototype.update = function()
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.A))
 						{
-							var direction = this.camera.getWorldDirection();
+							var direction = this.camera.getWorldDirection(this.tempVector3);
 							direction.y = 0;
 							direction.normalize();
 							direction.applyAxisAngle(SceneEditor.UP, 1.57);
@@ -843,7 +843,7 @@ SceneEditor.prototype.update = function()
 					//Move target point
 					if(this.mouse.buttonPressed(Mouse.RIGHT))
 					{
-						var direction = this.camera.getWorldDirection();
+						var direction = this.camera.getWorldDirection(this.tempVector3);
 						direction.y = 0;
 						direction.normalize();
 
