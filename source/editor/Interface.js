@@ -20,6 +20,7 @@ Interface.initialize = function()
 	//Bottom tab
 	Interface.bottomTab = new TabGroup(Interface.leftContainer.element);
 	Interface.bottomTab.mode = TabGroup.LEFT;
+	Interface.bottomTab.element.style.backgroundColor = Editor.theme.barColor;
 	Interface.bottomTab.buttonSize.set(25, 25);
 	Interface.leftContainer.attachB(Interface.bottomTab);
 
