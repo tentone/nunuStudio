@@ -484,8 +484,8 @@ function TreeElement(container)
 	}
 }
 
-TreeElement.ARROW_DOWN = Editor.filePath + "icons/misc/arrow_down.png";
-TreeElement.ARROW_RIGHT = Editor.filePath + "icons/misc/arrow_right.png";
+TreeElement.ARROW_DOWN = "editor/files/icons/misc/arrow_down.png";
+TreeElement.ARROW_RIGHT = "editor/files/icons/misc/arrow_right.png";
 
 TreeElement.prototype = Object.create(Element.prototype);
 
