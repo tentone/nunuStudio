@@ -21,7 +21,6 @@ function ScriptPanel(parent, obj)
 
 ScriptPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel content from attached object
 ScriptPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);

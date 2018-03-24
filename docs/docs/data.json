@@ -7382,7 +7382,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 165,
+            "line": 167,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
@@ -7391,7 +7391,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 183,
+            "line": 185,
             "description": "Used to get camera direction for this controller.\n\nController direction can be used to simplify controlling physics objects, create objects in the camera direction, etc.",
             "itemtype": "method",
             "name": "getDirection",
@@ -7490,7 +7490,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 170,
+            "line": 172,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
