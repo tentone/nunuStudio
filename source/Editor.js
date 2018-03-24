@@ -228,6 +228,7 @@ include("lib/three/loaders/PCDLoader.js");
 include("lib/three/loaders/PLYLoader.js");
 include("lib/three/loaders/PRWMLoader.js");
 include("lib/three/loaders/STLLoader.js");
+include("lib/three/loaders/SVGLoader.js");
 include("lib/three/loaders/TDSLoader.js");
 include("lib/three/loaders/UTF8Loader.js");
 include("lib/three/loaders/VRMLLoader.js");
@@ -2049,8 +2050,28 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.SVGLoader();
-					
-					//TODO <LOAD SVG DATA>
+					var paths = loader.parse(reader.result);
+
+					var group = new Container();
+					var position = 0;
+
+					for(var i = 0; i < paths.length; i ++)
+					{
+						var material = new THREE.MeshBasicMaterial({color: Math.random() * 0xffffff});
+						var shapes = paths[i].toShapes(true);
+
+						for(var j = 0; j < shapes.length; j++)
+						{
+							var shape = shapes[j];
+							var geometry = new THREE.ShapeBufferGeometry(shape);
+							var mesh = new THREE.Mesh(geometry, material);
+							mesh.position.z = position;
+							position += 0.1;
+							group.add(mesh);
+						}
+					}
+
+					Editor.addToScene(group);
 				}
 				catch(e)
 				{
