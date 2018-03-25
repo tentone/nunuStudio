@@ -178,6 +178,7 @@
 	- File export API
 - V0.9.4 Beta
 	- Multi object edit (position, rotation and scale)
+	- Support for SVG file loading
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
