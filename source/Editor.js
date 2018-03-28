@@ -1455,7 +1455,7 @@ Editor.loadText = function(file)
 	reader.readAsText(file);
 };
 
-//Load geometry from file object
+//Load geometry from files
 Editor.loadModel = function(file, onLoad)
 {
 	var name = file.name;
@@ -1479,78 +1479,60 @@ Editor.loadModel = function(file, onLoad)
 		//Wavefront OBJ
 		else if(extension === "obj")
 		{
-			try
+			var materials = null;
+
+			//Look for MTL file
+			if(Nunu.runningOnDesktop())
 			{
-				var materials = null;
-
-				//Look for MTL file
-				if(Nunu.runningOnDesktop())
+				try
 				{
-					try
-					{
-						var mtl = FileSystem.getNameWithoutExtension(file.path) + ".mtl";
+					var mtl = FileSystem.getNameWithoutExtension(file.path) + ".mtl";
 
-						if(FileSystem.fileExists(mtl))
-						{
-							var mtlLoader = new THREE.MTLLoader()
-							mtlLoader.setPath(path);
-							materials = mtlLoader.parse(FileSystem.readFile(mtl));
-						}
-					}
-					catch(f)
+					if(FileSystem.fileExists(mtl))
 					{
-						console.error("nunuStudio: Error loading mtl file", f);
+						console.log("MTL Found");
+						var mtlLoader = new THREE.MTLLoader()
+						mtlLoader.setPath(path);
+						materials = mtlLoader.parse(FileSystem.readFile(mtl));
 					}
 				}
-
-				var reader = new FileReader();
-				reader.onload = function()
+				catch(f)
 				{
-					//Try loading with OBJLoader2
-					try
-					{
-						var loader = new THREE.OBJLoader2();
-						if(materials !== null)
-						{
-							loader.setMaterials(materials);
-						}
-						var obj = loader.parse(reader.result);
-						Editor.addToScene(obj);
-					}
-					catch(e)
-					{
-						console.warn("nunuStudio: Failed to load with ObjLoader2 trying with ObjLoader", e);
-
-						//Try loading with OBJLoader1
-						try
-						{
-							var loader = new THREE.OBJLoader();
-							if(materials !== null)
-							{
-								loader.setMaterials(materials);
-							}
-							var obj = loader.parse(reader.result);
-							Editor.addToScene(obj);
-						}
-						catch(f)
-						{
-							Editor.alert("Error loading file");
-							console.error("nunuStudio: Error loading file", f);
-						}
-					}
-				};
-
-				reader.readAsText(file);
+					Editor.alert("Error loading file: " + f);
+					console.error("nunuStudio: Error loading file", f);
+				}
 			}
-			catch(e)
+
+			var reader = new FileReader();
+			reader.onload = function()
 			{
-				Editor.alert("Error loading file");
-				console.error("nunuStudio: Error loading file", e);
-			}
+				try
+				{
+					var loader = new THREE.OBJLoader();
+					//var loader = new THREE.OBJLoader2();
+					//loader.setLogging(false, false);
 
+					if(materials !== null)
+					{
+						loader.setMaterials(materials);
+					}
+
+					var obj = loader.parse(reader.result);
+					obj.name = FileSystem.getFileName(name);
+
+					Editor.addToScene(obj);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file: " + e);
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+
+			reader.readAsText(file);
 		}
-		//3MF
-		else if(extension === "3mf")
+		//3MF TODO <FIX JSZIP SUPPORT>
+		/*else if(extension === "3mf")
 		{
 			var reader = new FileReader();
 			reader.onload = function()
@@ -1563,12 +1545,12 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
-		}
+		}*/
 		//AWD
 		else if(extension === "awd")
 		{
@@ -1584,7 +1566,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1604,7 +1586,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1624,7 +1606,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1645,7 +1627,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1674,7 +1656,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1698,7 +1680,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1719,7 +1701,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1754,7 +1736,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1793,7 +1775,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1819,7 +1801,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1844,7 +1826,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1870,7 +1852,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1895,7 +1877,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1927,7 +1909,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2013,7 +1995,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2035,7 +2017,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2075,7 +2057,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2099,7 +2081,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2148,7 +2130,7 @@ Editor.loadModel = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file");
+					Editor.alert("Error loading file: " + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2162,8 +2144,8 @@ Editor.loadModel = function(file, onLoad)
 	}
 	catch(e)
 	{
-		Editor.alert("Error importing file (" + e + ")");
-		console.error("nunuStudio: Error importing file", e);
+		Editor.alert("Error loading file: " + e);
+		console.error("nunuStudio: Error loading file", e);
 	}
 };
 

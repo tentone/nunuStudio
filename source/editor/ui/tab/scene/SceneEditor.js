@@ -135,48 +135,52 @@ function SceneEditor(parent, closeable, container, index)
 			//Dragged file
 			if(event.dataTransfer.files.length > 0)
 			{
-				var file = event.dataTransfer.files[0];
-				var name = FileSystem.getFileName(file.name);
+				var files = event.dataTransfer.files;
 
-
-				//Check if mouse instersects and object
-				if(intersections.length > 0)
+				for(var i = 0; i < files.length; i++)
 				{
-					var object = intersections[0].object;
+					var file = files[i];
 
-					//Image
-					if(Image.fileIsImage(file))
+					//Check if mouse instersects and object
+					if(intersections.length > 0)
 					{
-						Editor.loadTexture(file, function(texture)
+						var name = FileSystem.getFileName(file.name);
+						var object = intersections[0].object;
+
+						//Image
+						if(Image.fileIsImage(file))
 						{
-							attachTexture(texture ,object);
-						});
-					}
-					//Video
-					else if(Video.fileIsVideo(file))
-					{
-						Editor.loadVideoTexture(file, function(texture)
-						{
-							attachTexture(texture ,object);
-						});
-					}
-					//Font
-					else if(Font.fileIsFont(file))
-					{
-						if(object.font !== undefined)
-						{
-							Editor.loadFont(file, function(font)
+							Editor.loadTexture(file, function(texture)
 							{
-								object.setFont(font);
+								attachTexture(texture ,object);
 							});
 						}
+						//Video
+						else if(Video.fileIsVideo(file))
+						{
+							Editor.loadVideoTexture(file, function(texture)
+							{
+								attachTexture(texture ,object);
+							});
+						}
+						//Font
+						else if(Font.fileIsFont(file))
+						{
+							if(object.font !== undefined)
+							{
+								Editor.loadFont(file, function(font)
+								{
+									object.setFont(font);
+								});
+							}
+						}
 					}
-				}
-
-				//Model
-				if(Model.fileIsModel(file))
-				{
-					Editor.loadModel(file);
+					
+					//Model
+					if(Model.fileIsModel(file))
+					{
+						Editor.loadModel(file);
+					}
 				}
 			}
 			//Dragged resource
@@ -876,7 +880,7 @@ SceneEditor.prototype.update = function()
 		catch(e)
 		{
 			this.setState(SceneEditor.EDITING);
-			Editor.alert("Error testing program\nState update caused an error");
+			Editor.alert("Error testing program\nState update caused an error\n(" + e + ")");
 			console.error("nunuStudio: Error updating program state", e);
 		}
 		
@@ -1113,7 +1117,7 @@ SceneEditor.prototype.render = function()
 		catch(e)
 		{
 			this.setState(SceneEditor.EDITING);
-			Editor.alert("Error testing program\nRender caused an error");
+			Editor.alert("Error testing program\nRender caused an error\n(" + e + ")");
 			console.error("nunuStudio: Error rendering program", e);
 		}
 	}
@@ -1406,7 +1410,7 @@ SceneEditor.prototype.setState = function(state)
 		catch(e)
 		{
 			this.setState(SceneEditor.EDITING);
-			Editor.alert("Error testing program\nInitialization caused an error");
+			Editor.alert("Error testing program\nInitialization caused an error\n(" + e + ")");
 			console.error("nunuStudio: Error initializing program", e);
 		}
 		//Update interface

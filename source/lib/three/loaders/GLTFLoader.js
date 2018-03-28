@@ -1871,14 +1871,14 @@ THREE.GLTFLoader = ( function () {
 			materialType = kmuExtension.getMaterialType( materialDef );
 			pending.push( kmuExtension.extendParams( materialParams, materialDef, parser ) );
 
-		} else if ( materialDef.pbrMetallicRoughness !== undefined ) {
+		} else {
 
 			// Specification:
 			// https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#metallic-roughness-material
 
 			materialType = THREE.MeshStandardMaterial;
 
-			var metallicRoughness = materialDef.pbrMetallicRoughness;
+			var metallicRoughness = materialDef.pbrMetallicRoughness || {};
 
 			materialParams.color = new THREE.Color( 1.0, 1.0, 1.0 );
 			materialParams.opacity = 1.0;
@@ -1908,10 +1908,6 @@ THREE.GLTFLoader = ( function () {
 				pending.push( parser.assignTexture( materialParams, 'roughnessMap', textureIndex ) );
 
 			}
-
-		} else {
-
-			materialType = THREE.MeshPhongMaterial;
 
 		}
 
@@ -2056,7 +2052,6 @@ THREE.GLTFLoader = ( function () {
 
 		return this.getDependencies( 'accessor' ).then( function ( accessors ) {
 
-			var geometries = [];
 			var pending = [];
 
 			for ( var i = 0, il = primitives.length; i < il; i ++ ) {
@@ -2066,16 +2061,10 @@ THREE.GLTFLoader = ( function () {
 				// See if we've already created this geometry
 				var cached = getCachedGeometry( cache, primitive );
 
-				var geometry;
-
 				if ( cached ) {
 
 					// Use the cached geometry if it exists
-					pending.push( cached.then( function ( geometry ) {
-
-						geometries.push( geometry );
-
-					} ) );
+					pending.push( cached );
 
 				} else if ( primitive.extensions && primitive.extensions[ EXTENSIONS.KHR_DRACO_MESH_COMPRESSION ] ) {
 
@@ -2086,42 +2075,38 @@ THREE.GLTFLoader = ( function () {
 
 							addPrimitiveAttributes( geometry, primitive, accessors );
 
-							geometries.push( geometry );
-
 							return geometry;
 
 						} );
 
-					cache.push( { primitive: primitive, promise: geometryPromise  } );
+					cache.push( { primitive: primitive, promise: geometryPromise } );
 
 					pending.push( geometryPromise );
 
-				} else  {
+				} else {
 
 					// Otherwise create a new geometry
-					geometry = new THREE.BufferGeometry();
+					var geometry = new THREE.BufferGeometry();
 
 					addPrimitiveAttributes( geometry, primitive, accessors );
+
+					var geometryPromise = Promise.resolve( geometry );
 
 					// Cache this geometry
 					cache.push( {
 
 						primitive: primitive,
-						promise: Promise.resolve( geometry )
+						promise: geometryPromise
 
 					} );
 
-					geometries.push( geometry );
+					pending.push( geometryPromise );
 
 				}
 
 			}
 
-			return Promise.all( pending ).then( function () {
-
-				return geometries;
-
-			} );
+			return Promise.all( pending );
 
 		} );
 
@@ -2356,10 +2341,7 @@ THREE.GLTFLoader = ( function () {
 
 		if ( cameraDef.type === 'perspective' ) {
 
-			var aspectRatio = params.aspectRatio || 1;
-			var xfov = params.yfov * aspectRatio;
-
-			camera = new THREE.PerspectiveCamera( THREE.Math.radToDeg( xfov ), aspectRatio, params.znear || 1, params.zfar || 2e6 );
+			camera = new THREE.PerspectiveCamera( THREE.Math.radToDeg( params.yfov ), params.aspectRatio || 1, params.znear || 1, params.zfar || 2e6 );
 
 		} else if ( cameraDef.type === 'orthographic' ) {
 
