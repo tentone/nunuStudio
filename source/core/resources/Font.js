@@ -166,7 +166,9 @@ Font.prototype.toJSON = function(meta)
 };
 
 /**
- * Generate font shapes used to create 3D geometries.
+ * Generate shapes from font data.
+ * 
+ * The shapes generated can be extruded to create 3D geometry.
  *
  * @method generateShapes
  * @param {String} text

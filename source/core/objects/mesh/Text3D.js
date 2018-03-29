@@ -60,29 +60,24 @@
 */
 function Text3D(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments)
 {
-	THREE.Mesh.call(this, undefined, material);
+	Mesh.call(this, undefined, material);
 	
 	this.name = "text";
 	this.type = "Text3D";
 
-	this.font = font;
-	this.text = (text !== undefined) ? text : "text";
+	this.font = font !== undefined ? font : null;
 	
-	this.size = (size !== undefined) ? size : 1;
-	this.height = (height !== undefined) ? height : 0.5;
-	this.curveSegments = (curveSegments !== undefined) ? curveSegments : 15;
+	this.size = size !== undefined ? size : 1;
+	this.height = height !== undefined ? height : 0.5;
+	this.curveSegments = curveSegments !== undefined ? curveSegments : 15;
+	this.bevel = bevel !== undefined ? bevel : false;
+	this.bevelThickness = bevelThickness !== undefined ? bevelThickness : 0.1;
+	this.bevelSize = bevelSize !== undefined ? bevelSize : 0.05;
 
-	this.bevel = (bevel !== undefined) ? bevel : false;
-	this.bevelThickness = (bevelThickness !== undefined) ? bevelThickness : 0.1;
-	this.bevelSize = (bevelSize !== undefined) ? bevelSize : 0.05;
-
-	this.setText(this.text);
-
-	this.receiveShadow = true;
-	this.castShadow = true;
+	this.setText(text !== undefined ? text : "text");
 }
 
-Text3D.prototype = Object.create(THREE.Mesh.prototype);
+Text3D.prototype = Object.create(Mesh.prototype);
 
 /**
  * Set font used by this text 3D instance.
@@ -92,9 +87,11 @@ Text3D.prototype = Object.create(THREE.Mesh.prototype);
  */
 Text3D.prototype.setFont = function(font)
 {
-	this.font = font;
-	
-	this.setText();
+	if(this.font !== font)
+	{
+		this.font = font;
+		this.updateGeometry();
+	}
 };
 
 /**
@@ -105,17 +102,11 @@ Text3D.prototype.setFont = function(font)
  */
 Text3D.prototype.setText = function(text)
 {
-	if(text !== undefined)
+	if(this.text !== text)
 	{
 		this.text = text;
+		this.updateGeometry();
 	}
-
-	if(this.geometry !== undefined)
-	{
-		this.geometry.dispose();
-	}
-	
-	this.updateText();
 };
 
 /**
@@ -123,13 +114,18 @@ Text3D.prototype.setText = function(text)
  * 
  * Should be called after chaging any attribute.
  * 
- * @method updateText
+ * @method updateGeometry
  */
-Text3D.prototype.updateText = function()
+Text3D.prototype.updateGeometry = function()
 {
 	if(this.font !== null)
 	{
-		this.geometry = new THREE.TextGeometry(this.text,
+		if(this.geometry !== undefined)
+		{
+			this.geometry.dispose();
+		}
+
+		this.geometry = new THREE.TextBufferGeometry(this.text,
 		{
 			size: this.size,
 			curveSegments: this.curveSegments,
@@ -151,26 +147,6 @@ Text3D.prototype.updateText = function()
 Text3D.prototype.clone = function()
 {
 	return new Text3D(this.text, this.material, this.font, this.height, this.bevel, this.bevelThickness, this.bevelSize, this.size, this.curveSegments);
-};
-
-/**
- * Dispose mesh along with its material and geometry.
- * 
- * @method dispose
- */
-Text3D.prototype.dispose = function()
-{
-	if(this.material.dispose !== undefined)
-	{
-		this.material.dispose();
-	}
-	
-	if(this.geometry !== undefined)
-	{
-		this.geometry.dispose();
-	}
-
-	THREE.Object3D.prototype.dispose.call(this);
 };
 
 /**
@@ -198,7 +174,6 @@ Text3D.prototype.toJSON = function(meta)
 
 	data.object.size = this.size;
 	data.object.curveSegments = this.curveSegments;
-
 	data.object.height = this.height;
 	data.object.bevel = this.bevel;
 	data.object.bevelThickness = this.bevelThickness;

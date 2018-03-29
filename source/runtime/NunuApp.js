@@ -42,7 +42,6 @@ include("lib/leap.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");
-
 include("lib/bytebuffer.min.js");
 include("lib/long.min.js");
 include("lib/PSON.min.js");
@@ -60,6 +59,7 @@ include("core/three/loaders/BufferGeometryLoader.js");
 include("core/three/textures/Texture.js");
 include("core/three/lights/LightShadow.js");
 include("core/three/scenes/Fog.js");
+include("core/three/objects/Points.js");
 
 include("core/animation/AnimationMixer.js");
 

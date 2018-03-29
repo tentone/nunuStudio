@@ -1531,9 +1531,10 @@ Editor.loadModel = function(file, onLoad)
 
 			reader.readAsText(file);
 		}
-		//3MF TODO <FIX JSZIP SUPPORT>
+		//3MF
 		/*else if(extension === "3mf")
 		{
+			//TODO <Fix JSZip 2 Support or move to JSZip 3>
 			var reader = new FileReader();
 			reader.onload = function()
 			{
