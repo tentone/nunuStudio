@@ -27,8 +27,5 @@ ObjectIconHelper.prototype = Object.create(THREE.Sprite.prototype);
 
 ObjectIconHelper.prototype.update = function()
 {
-	if(this.object !== null)
-	{
-		this.object.getWorldPosition(this.position);
-	}
+	this.object.getWorldPosition(this.position);
 };

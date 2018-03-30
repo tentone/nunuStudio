@@ -20,9 +20,6 @@ WireframeHelper.prototype = Object.create(THREE.Mesh.prototype);
 
 WireframeHelper.prototype.update = function()
 {
-	if(this.object !== null)
-	{
-		this.matrix = this.object.matrixWorld;
-		this.geometry = this.object.geometry;
-	}
+	this.matrix = this.object.matrixWorld;
+	this.geometry = this.object.geometry;
 };

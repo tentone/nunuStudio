@@ -21,9 +21,6 @@ SkinnedWireframeHelper.prototype = Object.create(THREE.SkinnedMesh.prototype);
 
 SkinnedWireframeHelper.prototype.update = function()
 {
-	if(this.object !== null)
-	{
-		this.matrix = this.object.matrixWorld;
-		this.geometry = this.object.geometry;
-	}
+	this.matrix = this.object.matrixWorld;
+	this.geometry = this.object.geometry;
 };
