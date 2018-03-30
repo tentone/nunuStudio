@@ -29,3 +29,17 @@ DragBuffer.popDragElement = function(uuid)
 	}
 	return null;
 };
+
+//Get element from drag buffer without removing it.
+DragBuffer.getDragElement = function(uuid)
+{
+	for(var i = 0; i < DragBuffer.buffer.length; i++)
+	{
+		if(DragBuffer.buffer[i].uuid === uuid)
+		{
+			return DragBuffer.buffer[i];
+		}
+	}
+	
+	return null;
+};

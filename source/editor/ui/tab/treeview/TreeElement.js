@@ -131,49 +131,11 @@ function TreeElement(container)
 		}
 	};
 
-	//Drag over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-
-		if(!self.obj.locked)
-		{
-			//Above
-			if(event.layerY < 5)
-			{
-				if(state !== 1)
-				{
-					state = 1;
-					clearBorder();
-					this.style.borderTop = "thin solid #999999";
-				}
-			}
-			//Bellow
-			else if(event.layerY > 15)
-			{
-				if(state !== 2)
-				{
-					state = 2;
-					clearBorder();
-					this.style.borderBottom = "thin solid #999999";
-				}
-			}
-			//Inside
-			else if(state !== 3)
-			{
-				state = 3;
-				clearBorder();
-				this.style.border = "thin solid #999999";
-			}
-		}
-	};
-
 	//Drag leave
 	this.element.ondragleave = function()
 	{
 		event.preventDefault();
 		clearBorder();
-
 		state = 0;
 	};
 
@@ -183,8 +145,8 @@ function TreeElement(container)
 		if(!self.obj.locked)
 		{
 			//Scene and program flags
-			var program = self.obj instanceof Program;
-			var scene = self.obj instanceof Scene;
+			var isProgram = self.obj instanceof Program;
+			var isScene = self.obj instanceof Scene;
 
 			//Context menu
 			var context = new ContextMenu();
@@ -192,11 +154,11 @@ function TreeElement(container)
 			context.position.set(event.clientX, event.clientY);
 			
 			//Open editor
-			if(self.obj instanceof Scene)
+			if(isScene)
 			{
 				context.addOption("Scene editor", openSceneTab);
 			}
-			else if(self.obj instanceof Program)
+			else if(isProgram)
 			{
 				context.addOption("Create scene", function()
 				{
@@ -225,7 +187,7 @@ function TreeElement(container)
 			});
 
 			//Delete
-			if(!program)
+			if(!isProgram)
 			{
 				context.addOption("Delete", function()
 				{
@@ -299,7 +261,7 @@ function TreeElement(container)
 				});
 			}
 
-			if(!scene && !program)
+			if(!isScene && !isProgram)
 			{
 				var autoUpdate = context.addMenu("Static");
 
@@ -365,7 +327,7 @@ function TreeElement(container)
 				});
 			}
 			
-			if(!program)
+			if(!isProgram)
 			{
 				//Paste object form clipboard
 				context.addOption("Paste", function()
@@ -375,6 +337,43 @@ function TreeElement(container)
 			}
 
 			context.updateInterface();
+		}
+	};
+
+	//Drag over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+
+		if(!self.obj.locked)
+		{
+			//Above
+			if(event.layerY < 5)
+			{
+				if(state !== 1)
+				{
+					state = 1;
+					clearBorder();
+					this.style.borderTop = "thin solid #999999";
+				}
+			}
+			//Bellow
+			else if(event.layerY > 15)
+			{
+				if(state !== 2)
+				{
+					state = 2;
+					clearBorder();
+					this.style.borderBottom = "thin solid #999999";
+				}
+			}
+			//Inside
+			else if(state !== 3)
+			{
+				state = 3;
+				clearBorder();
+				this.style.border = "thin solid #999999";
+			}
 		}
 	};
 
@@ -390,32 +389,54 @@ function TreeElement(container)
 			var uuid = event.dataTransfer.getData("uuid");
 			var obj = DragBuffer.popDragElement(uuid);
 
-			if(obj instanceof THREE.Object3D && obj !== self.obj && !ObjectUtils.isChildOf(obj ,self.obj))
+			if(obj instanceof THREE.Object3D && obj !== self.obj)
 			{
-				//Above
-				if(event.layerY < 5)
+				if(ObjectUtils.isChildOf(obj ,self.obj))
 				{
-					var index = self.obj.parent.children.indexOf(self.obj);
-					Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+					Editor.alert("Cannot add object into is child.");
 				}
-				//Bellow
-				else if(event.layerY > 15)
-				{
-					var index = self.obj.parent.children.indexOf(self.obj) + 1;
-					Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-				}
-				//Inside
 				else
-				{	
-					Editor.history.add(new ObjectMovedAction(obj, self.obj));
-				}
+				{
+					var selfIsScene = self.obj instanceof Scene;
+					var selfIsProgram = self.obj instanceof Program;
+					var dragIsScene = obj instanceof Scene;
+					var dragIsProgram = obj instanceof Program;
 
-				self.container.updateView();
+					//Above
+					if(event.layerY < 5)
+					{
+						if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
+						{
+							var index = self.obj.parent.children.indexOf(self.obj);
+							Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+							self.container.updateView();
+						}
+					}
+					//Bellow
+					else if(event.layerY > 15)
+					{
+						if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
+						{
+							var index = self.obj.parent.children.indexOf(self.obj) + 1;
+							Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+							self.container.updateView();
+						}
+					}
+					//Inside
+					else
+					{	
+						if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
+						{
+							Editor.history.add(new ObjectMovedAction(obj, self.obj));	
+							self.container.updateView();
+						}
+					}
+				}
 			}
 		}
 	};
 
-	//Click
+	//Click on object
 	this.element.onclick = function(event)
 	{
 		if(event.ctrlKey)
