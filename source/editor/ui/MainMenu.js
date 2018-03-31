@@ -254,15 +254,11 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					var renderer = new THREE.WebGLRenderer();
-					var exporter = new THREE.GLTFExporter(renderer);
-					exporter.parse([Editor.program.scene], function(result)
+					var exporter = new THREE.GLTFExporter();
+					exporter.parse(Editor.program.scene, function(result)
 					{
 						var data = JSON.stringify(result, null, 2);
 						FileSystem.writeFile(files[0].path, data);
-
-						renderer.dispose();
-						renderer.forceContextLoss();
 					});
 				}
 			}, ".gltf", true);
@@ -271,19 +267,45 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				var renderer = new THREE.WebGLRenderer();
-				var exporter = new THREE.GLTFExporter(renderer);
-				exporter.parse([Editor.program.scene], function(result)
+				var exporter = new THREE.GLTFExporter();
+				exporter.parse(Editor.program.scene, function(result)
 				{
 					var data = JSON.stringify(result, null, 2);
 					FileSystem.writeFile(fname, data);
-
-					renderer.dispose();
-					renderer.forceContextLoss();
 				})
 			}, ".gltf");
 		}
-	}, Editor.filePath + "icons/misc/scene.png");
+	}, Editor.filePath + "icons/gltf.png");
+
+	//Export GLB
+	exportMenu.addOption("GLB", function()
+	{
+		if(Nunu.runningOnDesktop())
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				if(files.length > 0)
+				{
+					var exporter = new THREE.GLTFExporter();
+					exporter.parse(Editor.program.scene, function(result)
+					{
+						FileSystem.writeFileArrayBuffer(files[0].path, result);
+					}, {binary: true, forceIndices: true, forcePowerOfTwoTextures: true});
+				}
+			}, ".glb", true);
+		}
+		else
+		{
+			FileSystem.chooseFileName(function(fname)
+			{
+				var exporter = new THREE.GLTFExporter();
+				exporter.parse(Editor.program.scene, function(result)
+				{
+					FileSystem.writeFileArrayBuffer(fname, result);
+				}, {binary: true, forceIndices: true, forcePowerOfTwoTextures: true});
+			}, ".glb");
+		}
+	}, Editor.filePath + "icons/gltf.png");
 
 	//Export STL
 	exportMenu.addOption("STL", function()
