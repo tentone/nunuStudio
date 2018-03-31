@@ -8260,7 +8260,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 87,
+            "line": 82,
             "description": "Set font used by this text 3D instance.",
             "params": [
                 {
@@ -8276,7 +8276,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 100,
+            "line": 97,
             "description": "Change text.",
             "params": [
                 {
@@ -8292,16 +8292,16 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 121,
+            "line": 112,
             "description": "Update text geometry.\n\nShould be called after chaging any attribute.",
             "itemtype": "method",
-            "name": "updateText",
+            "name": "updateGeometry",
             "class": "Text3D",
             "module": "Meshes"
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 145,
+            "line": 141,
             "description": "Clone this Text3D instance.",
             "itemtype": "method",
             "name": "clone",
@@ -8314,16 +8314,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 156,
-            "description": "Dispose mesh along with its material and geometry.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 176,
+            "line": 152,
             "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10702,7 +10693,7 @@
         {
             "file": "..\\..\\source\\core\\resources\\Font.js",
             "line": 168,
-            "description": "Generate font shapes used to create 3D geometries.",
+            "description": "Generate shapes from font data.\n\nThe shapes generated can be extruded to create 3D geometry.",
             "itemtype": "method",
             "name": "generateShapes",
             "params": [
