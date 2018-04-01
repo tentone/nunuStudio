@@ -137,8 +137,9 @@ ParticleEmitter.prototype.reload = function()
  */
 ParticleEmitter.prototype.onBeforeRender = function(renderer, scene, camera, renderTarget)
 {
-	this.group.uniforms.scale.value = renderer.getSize().height;
+	this.group.uniforms.scale.value = renderer.getCurrentViewport().w;
 	this.group.tick(this.clock.getDelta());
+
 	//this.emitter.position.value = this.position;
 };
 
