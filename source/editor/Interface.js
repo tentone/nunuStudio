@@ -1,88 +1,86 @@
 "use strict";
 
-function Interface(){}
-
-Interface.initialize = function()
+function Interface()
 {
-	Interface.container = new DualContainer(document.body);
-	Interface.container.tabPosition = 0.75;
+	//Main container
+	this.container = new DualContainer(document.body);
+	this.container.tabPosition = 0.75;
 
 	//Left
-	Interface.leftContainer = new DualContainer(Interface.container.element);
-	Interface.leftContainer.orientation = DualContainer.VERTICAL;
-	Interface.leftContainer.tabPosition = 0.7;
-	Interface.container.attachA(Interface.leftContainer);
+	this.leftContainer = new DualContainer(this.container.element);
+	this.leftContainer.orientation = DualContainer.VERTICAL;
+	this.leftContainer.tabPosition = 0.7;
+	this.container.attachA(this.leftContainer);
 
 	//Top Tab
-	Interface.tab = new TabGroup(Interface.leftContainer.element);
-	Interface.leftContainer.attachA(Interface.tab);
+	this.tab = new TabGroup(this.leftContainer.element);
+	this.leftContainer.attachA(this.tab);
 
 	//Bottom tab
-	Interface.bottomTab = new TabGroup(Interface.leftContainer.element);
-	Interface.bottomTab.mode = TabGroup.LEFT;
-	Interface.bottomTab.element.style.backgroundColor = Editor.theme.barColor;
-	Interface.bottomTab.buttonSize.set(25, 25);
-	Interface.leftContainer.attachB(Interface.bottomTab);
+	this.bottomTab = new TabGroup(this.leftContainer.element);
+	this.bottomTab.mode = TabGroup.LEFT;
+	this.bottomTab.element.style.backgroundColor = Editor.theme.barColor;
+	this.bottomTab.buttonSize.set(25, 25);
+	this.leftContainer.attachB(this.bottomTab);
 
 	//Asset
-	var assetExplorer = Interface.bottomTab.addTab(AssetExplorer, false);
+	var assetExplorer = this.bottomTab.addTab(AssetExplorer, false);
 	assetExplorer.button.setAltText("Asset explorer");
 
 	//Console
-	var console = Interface.bottomTab.addTab(ConsoleTab, false);
+	var console = this.bottomTab.addTab(ConsoleTab, false);
 	console.button.setAltText("Console");
 
 	//Animations
-	var animation = Interface.bottomTab.addTab(AnimationTab, false);
+	var animation = this.bottomTab.addTab(AnimationTab, false);
 	animation.button.setAltText("Animation");
 
 	//Right
-	Interface.rightContainer = new DualContainer(Interface.container.element);
-	Interface.rightContainer.orientation = DualContainer.VERTICAL;
-	Interface.container.attachB(Interface.rightContainer);
+	this.rightContainer = new DualContainer(this.container.element);
+	this.rightContainer.orientation = DualContainer.VERTICAL;
+	this.container.attachB(this.rightContainer);
 
 	//Tree view tab
-	Interface.treeTab = new TabGroup(Interface.rightContainer.element);
-	Interface.rightContainer.attachA(Interface.treeTab);
-	Interface.treeView = Interface.treeTab.addTab(TreeView, false)
+	this.treeTab = new TabGroup(this.rightContainer.element);
+	this.rightContainer.attachA(this.treeTab);
+	this.treeView = this.treeTab.addTab(TreeView, false)
 
 	//Object panel tab
-	Interface.panelTab = new TabGroup(Interface.rightContainer.element);
-	Interface.rightContainer.attachB(Interface.panelTab);
-	Interface.panelContainer = Interface.panelTab.addTab(PanelContainer, false);
+	this.panelTab = new TabGroup(this.rightContainer.element);
+	this.rightContainer.attachB(this.panelTab);
+	this.panelContainer = this.panelTab.addTab(PanelContainer, false);
 
 	//Top Bar
-	Interface.topBar = new MainMenu();
+	this.menuBar = new MainMenu();
 
 	//Side bar
-	Interface.sideBar = new Bar();
-	Interface.sideBar.position.set(0, Interface.topBar.size.y);
-	Interface.sideBar.size.x = 40;
+	this.sideBar = new Bar();
+	this.sideBar.position.set(0, this.menuBar.size.y);
+	this.sideBar.size.x = 40;
 	
 	//Tool Bar
-	Interface.toolBar = new ToolBar(Interface.sideBar.element);
-	new AddObjectSideBar(Interface.sideBar.element);
+	this.toolBar = new ToolBar(this.sideBar.element);
+	new AddObjectSideBar(this.sideBar.element);
+}
 
-};
-
-//Update interface
-Interface.updateInterface = function()
+//Update this
+Interface.prototype.updateInterface = function()
 {
 	//Window size
 	var size = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
 	//Side bar
-	Interface.sideBar.size.y = size.y - Interface.topBar.size.y;
-	Interface.sideBar.updateInterface();
+	this.sideBar.size.y = size.y - this.menuBar.size.y;
+	this.sideBar.updateInterface();
 
 	//Container
-	Interface.container.position.set(Interface.sideBar.size.x, Interface.topBar.size.y);
-	Interface.container.size.set(size.x - Interface.sideBar.size.x, size.y - Interface.topBar.size.y);
-	Interface.container.updateInterface();
+	this.container.position.set(this.sideBar.size.x, this.menuBar.size.y);
+	this.container.size.set(size.x - this.sideBar.size.x, size.y - this.menuBar.size.y);
+	this.container.updateInterface();
 };
 
 //Open to save program window
-Interface.saveProgram = function()
+Interface.prototype.saveProgram = function()
 {
 	if(Nunu.runningOnDesktop())
 	{
@@ -101,7 +99,7 @@ Interface.saveProgram = function()
 };
 
 //Open to load program window
-Interface.loadProgram = function()
+Interface.prototype.loadProgram = function()
 {
 	if(Editor.confirm("All unsaved changes to the project will be lost! Load file?"))
 	{
@@ -117,8 +115,8 @@ Interface.loadProgram = function()
 	}
 };
 
-//Interface elemento to create new program
-Interface.newProgram = function()
+//Create new program
+Interface.prototype.newProgram = function()
 {
 	if(Editor.confirm("All unsaved changes to the project will be lost! Create new File?"))
 	{

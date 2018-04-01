@@ -68,11 +68,11 @@ function FileAsset(parent)
 	//Open text editor
 	this.element.ondblclick = function()
 	{
-		var tab = Interface.tab.getTab(TextEditor, self.asset);
+		var tab = Editor.gui.tab.getTab(TextEditor, self.asset);
 
 		if(tab === null)
 		{
-			tab = Interface.tab.addTab(TextEditor, true);
+			tab = Editor.gui.tab.addTab(TextEditor, true);
 			tab.attach(self.asset, self);
 		}
 		

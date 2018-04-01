@@ -36,7 +36,7 @@ function MainMenu(parent)
 	//New project
 	fileMenu.addOption("New", function()
 	{
-		Interface.newProgram();
+		Editor.gui.newProgram();
 	}, Editor.filePath + "icons/misc/new.png");
 
 	//Save project
@@ -48,29 +48,29 @@ function MainMenu(parent)
 		}
 		else
 		{
-			Interface.saveProgram();
+			Editor.gui.saveProgram();
 		}
 	}, Editor.filePath + "icons/misc/save.png");
 
 	//Save project
 	fileMenu.addOption("Save As", function()
 	{
-		Interface.saveProgram();
+		Editor.gui.saveProgram();
 	}, Editor.filePath + "icons/misc/save.png");
 
 	//Load Project
 	fileMenu.addOption("Load", function()
 	{
-		Interface.loadProgram();
+		Editor.gui.loadProgram();
 	}, Editor.filePath + "icons/misc/load.png");
 
 	//Settings
 	fileMenu.addOption("Settings", function()
 	{
-		var tab = Interface.tab.getTab(SettingsTab);
+		var tab = Editor.gui.tab.getTab(SettingsTab);
 		if(tab === null)
 		{
-			tab = Interface.tab.addTab(SettingsTab, true);
+			tab = Editor.gui.tab.addTab(SettingsTab, true);
 		}
 		tab.select();
 	}, Editor.filePath + "icons/misc/settings.png");
@@ -671,24 +671,24 @@ function MainMenu(parent)
 	about.updateInterface();
 	about.setCallback(function()
 	{
-		var tab = Interface.tab.getTab(AboutTab);
+		var tab = Editor.gui.tab.getTab(AboutTab);
 		if(tab === null)
 		{
-			tab = Interface.tab.addTab(AboutTab, true);
+			tab = Editor.gui.tab.addTab(AboutTab, true);
 		}
 
 		tab.select();
 	});
 
 	//Run
-	Interface.run = new ButtonMenu(this.element);
-	Interface.run.setText("Run");
-	Interface.run.size.set(100, this.size.y);
-	Interface.run.position.set(420, 0);
-	Interface.run.updateInterface();
-	Interface.run.setCallback(function()
+	this.run = new ButtonMenu(this.element);
+	this.run.setText("Run");
+	this.run.size.set(100, this.size.y);
+	this.run.position.set(420, 0);
+	this.run.updateInterface();
+	this.run.setCallback(function()
 	{
-		var tab = Interface.tab.getActual();
+		var tab = Editor.gui.tab.getActual();
 		if(tab instanceof SceneEditor)
 		{
 			if(tab.state === SceneEditor.EDITING)

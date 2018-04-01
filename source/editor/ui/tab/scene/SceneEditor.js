@@ -407,7 +407,7 @@ SceneEditor.prototype.setFullscreen = function(fullscreen)
 	else
 	{
 		Editor.setFullscreen(false);
-		Interface.updateInterface();
+		Editor.gui.updateInterface();
 	}
 };
 
@@ -425,7 +425,7 @@ SceneEditor.prototype.activate = function()
 	this.updateSettings();
 	this.setState(SceneEditor.EDITING);
 	
-	Interface.toolBar.selectTool(Editor.SELECT);
+	Editor.gui.toolBar.selectTool(Editor.SELECT);
 	Editor.resize();
 };
 
@@ -435,8 +435,8 @@ SceneEditor.prototype.deactivate = function()
 	TabElement.prototype.deactivate.call(this);
 
 	//Hide run button
-	Interface.run.visible = false;
-	Interface.run.updateInterface();
+	Editor.gui.menuBar.run.visible = false;
+	Editor.gui.menuBar.run.updateInterface();
 };
 
 //Update settings
@@ -1323,9 +1323,9 @@ SceneEditor.prototype.setState = function(state)
 	if(state === SceneEditor.EDITING)
 	{
 		//Set run button text
-		Interface.run.setText("Run");
-		Interface.run.visible = true;
-		Interface.run.updateInterface();
+		Editor.gui.menuBar.run.setText("Run");
+		Editor.gui.menuBar.run.visible = true;
+		Editor.gui.menuBar.run.updateInterface();
 
 		//Dispose running program
 		this.disposeRunningProgram();
@@ -1403,9 +1403,9 @@ SceneEditor.prototype.setState = function(state)
 			this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
 
 			//Run button text
-			Interface.run.setText("Stop");
-			Interface.run.visible = true;
-			Interface.run.updateInterface();
+			Editor.gui.menuBar.run.setText("Stop");
+			Editor.gui.menuBar.run.visible = true;
+			Editor.gui.menuBar.run.updateInterface();
 		}
 		catch(e)
 		{

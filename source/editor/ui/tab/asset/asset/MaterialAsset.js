@@ -38,7 +38,7 @@ function MaterialAsset(parent)
 	{
 		if(self.asset instanceof THREE.Material)
 		{
-			var tab = Interface.tab.getTab(MaterialEditor, self.asset);
+			var tab = Editor.gui.tab.getTab(MaterialEditor, self.asset);
 
 			if(tab === null)
 			{
@@ -46,47 +46,47 @@ function MaterialAsset(parent)
 
 				if(self.asset instanceof THREE.MeshPhongMaterial)
 				{
-					tab = Interface.tab.addTab(MeshPhongMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(MeshPhongMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.MeshLambertMaterial)
 				{
-					tab = Interface.tab.addTab(MeshLambertMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(MeshLambertMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.MeshBasicMaterial)
 				{
-					tab = Interface.tab.addTab(MeshBasicMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(MeshBasicMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.MeshPhysicalMaterial)
 				{
-					tab = Interface.tab.addTab(MeshPhysicalMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(MeshPhysicalMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.MeshStandardMaterial)
 				{
-					tab = Interface.tab.addTab(MeshStandardMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(MeshStandardMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.SpriteMaterial)
 				{
-					tab = Interface.tab.addTab(SpriteMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(SpriteMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.ShaderMaterial)
 				{
-					tab = Interface.tab.addTab(ShaderMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(ShaderMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.LineDashedMaterial)
 				{
-					tab = Interface.tab.addTab(LineDashedMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(LineDashedMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.LineBasicMaterial)
 				{
-					tab = Interface.tab.addTab(LineBasicMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(LineBasicMaterialEditor, true);
 				}
 				else if(self.asset instanceof THREE.PointsMaterial)
 				{
-					tab = Interface.tab.addTab(PointsMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(PointsMaterialEditor, true);
 				}
 				else
 				{
-					tab = Interface.tab.addTab(MeshMaterialEditor, true);
+					tab = Editor.gui.tab.addTab(MeshMaterialEditor, true);
 				}
 
 				tab.attach(self.asset, self);

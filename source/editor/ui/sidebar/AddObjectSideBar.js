@@ -2,6 +2,8 @@
 
 function AddObjectSideBar(element)
 {
+	var size = 40;
+	
 	//Add Text
 	var add = new Text(element);
 	add.setText("Add");
@@ -12,9 +14,9 @@ function AddObjectSideBar(element)
 	//Add Models
 	var addModel = new ButtonDrawer(element);
 	addModel.setImage(Editor.filePath + "icons/models/models.png");
-	addModel.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addModel.size.set(size, size);
 	addModel.position.set(0, 230);
-	addModel.optionsSize.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addModel.optionsSize.set(size, size);
 	addModel.updateInterface();
 
 	//Cube
@@ -103,9 +105,9 @@ function AddObjectSideBar(element)
 	//Add lights
 	var addLight = new ButtonDrawer(element);
 	addLight.setImage(Editor.filePath + "icons/lights/point.png");
-	addLight.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addLight.size.set(size, size);
 	addLight.position.set(0, 270);
-	addLight.optionsSize.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addLight.optionsSize.set(size, size);
 	addLight.updateInterface();
 
 	//Point Light
@@ -154,9 +156,9 @@ function AddObjectSideBar(element)
 	var addCamera = new ButtonDrawer(element);
 	addCamera.setImage(Editor.filePath + "icons/camera/camera.png");
 	addCamera.optionsPerLine = 2;
-	addCamera.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addCamera.size.set(size, size);
 	addCamera.position.set(0, 310);
-	addCamera.optionsSize.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addCamera.optionsSize.set(size, size);
 	addCamera.updateInterface();
 
 	//Perspective camera
@@ -175,9 +177,9 @@ function AddObjectSideBar(element)
 	var addScript = new ButtonDrawer(element);
 	addScript.setImage(Editor.filePath + "icons/script/script.png");
 	addScript.optionsPerLine = 1;
-	addScript.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addScript.size.set(size, size);
 	addScript.position.set(0, 350);
-	addScript.optionsSize.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addScript.optionsSize.set(size, size);
 	addScript.updateInterface();
 
 	//Javascript script
@@ -190,9 +192,9 @@ function AddObjectSideBar(element)
 	var addEffects = new ButtonDrawer(element);
 	addEffects.setImage(Editor.filePath + "icons/misc/particles.png");
 	addEffects.optionsPerLine = 3;
-	addEffects.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addEffects.size.set(size, size);
 	addEffects.position.set(0, 390);
-	addEffects.optionsSize.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addEffects.optionsSize.set(size, size);
 	addEffects.updateInterface();
 
 	//Sprite
@@ -255,9 +257,9 @@ function AddObjectSideBar(element)
 	var addPhysics = new ButtonDrawer(element);
 	addPhysics.setImage(Editor.filePath + "icons/misc/physics.png");
 	addPhysics.optionsPerLine = 3;
-	addPhysics.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addPhysics.size.set(size, size);
 	addPhysics.position.set(0, 430);
-	addPhysics.optionsSize.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addPhysics.optionsSize.set(size, size);
 	addPhysics.updateInterface();
 
 	//Physics box
@@ -311,9 +313,9 @@ function AddObjectSideBar(element)
 	var addControls = new ButtonDrawer(element);
 	addControls.setImage(Editor.filePath + "icons/misc/controller.png");
 	addControls.optionsPerLine = 3;
-	addControls.size.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addControls.size.set(size, size);
 	addControls.position.set(0, 470);
-	addControls.optionsSize.set(Interface.sideBar.size.x, Interface.sideBar.size.x);
+	addControls.optionsSize.set(size, size);
 	addControls.updateInterface();
 
 	//Orbit controls

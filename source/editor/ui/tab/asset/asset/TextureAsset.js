@@ -30,11 +30,11 @@ function TextureAsset(parent)
 			Constructor = SpriteSheetTextureEditor;
 		}
 
-		var tab = Interface.tab.getTab(Constructor, self.asset);
+		var tab = Editor.gui.tab.getTab(Constructor, self.asset);
 		
 		if(tab === null)
 		{
-			tab = Interface.tab.addTab(Constructor, true);
+			tab = Editor.gui.tab.addTab(Constructor, true);
 			tab.attach(self.asset);
 		}
 

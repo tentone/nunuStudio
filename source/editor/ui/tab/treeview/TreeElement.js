@@ -310,7 +310,7 @@ function TreeElement(container)
 					});
 
 					Editor.history.add(new ObjectAddedAction(obj, self.obj.parent));
-					Interface.treeView.updateView();
+					Editor.gui.treeView.updateView();
 				});
 
 				//Copy object
@@ -482,10 +482,10 @@ function TreeElement(container)
 
 	function openTab(Constructor, object)
 	{
-		var tab = Interface.tab.getTab(Constructor, object);
+		var tab = Editor.gui.tab.getTab(Constructor, object);
 		if(tab === null)
 		{
-			tab = Interface.tab.addTab(Constructor, true);
+			tab = Editor.gui.tab.addTab(Constructor, true);
 			tab.attach(self.obj);
 		}
 		tab.select();

@@ -458,30 +458,6 @@ Editor.ROTATE = 3;
 //Initialize
 Editor.initialize = function()
 {
-	try
-	{	
-		Editor.gui = require("nw.gui");	
-		Editor.clipboard = Editor.gui.Clipboard.get();
-		Editor.args = Editor.gui.App.argv;
-	}
-	catch(e)
-	{
-		Editor.clipboard = new VirtualClipboard();
-		Editor.args = [];
-
-		var parameters = location.search.substring(1).split("&");
-		for(var i = 0; i < parameters.length; i++)
-		{
-			var entry = parameters[i].split("=")[1];
-			if(entry !== undefined)
-			{
-				entry = unescape(entry);
-				entry = entry.replace(new RegExp("\"", "g"), "");
-				Editor.args.push(entry);
-			}
-		}
-	}
-
 	//Check WebGL Support
 	if(!Nunu.webglAvailable())
 	{
@@ -509,8 +485,12 @@ Editor.initialize = function()
 
 	if(Nunu.runningOnDesktop())
 	{
+		var gui = require("nw.gui");
+		Editor.clipboard = gui.Clipboard.get();
+		Editor.args = gui.App.argv;
+
 		//Handle window close event
-		Editor.gui.Window.get().on("close", function()
+		gui.Window.get().on("close", function()
 		{
 			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
 			{
@@ -526,6 +506,23 @@ Editor.initialize = function()
 	}
 	else
 	{
+		//Clipboard
+		Editor.clipboard = new VirtualClipboard();
+		
+		//Arguments
+		Editor.args = [];
+		var parameters = location.search.substring(1).split("&");
+		for(var i = 0; i < parameters.length; i++)
+		{
+			var entry = parameters[i].split("=")[1];
+			if(entry !== undefined)
+			{
+				entry = unescape(entry);
+				entry = entry.replace(new RegExp("\"", "g"), "");
+				Editor.args.push(entry);
+			}
+		}
+
 		//Prevent some key combinations
 		var allowedKeys = [67, 86, 65, 88];
 		document.onkeydown = function(event)
@@ -602,7 +599,7 @@ Editor.initialize = function()
 	Editor.createDefaultResouces();
 
 	//Initialize User Interface
-	Interface.initialize();
+	Editor.gui = new Interface();
 	
 	//Check is some .isp file passed as argument
 	for(var i = 0; i < Editor.args.length; i++)
@@ -642,25 +639,25 @@ Editor.update = function()
 	{
 		if(Editor.keyboard.keyJustPressed(Keyboard.NUM1))
 		{
-			Interface.toolBar.selectTool(Editor.SELECT);
+			Editor.gui.toolBar.selectTool(Editor.SELECT);
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM2))
 		{
-			Interface.toolBar.selectTool(Editor.MOVE);
+			Editor.gui.toolBar.selectTool(Editor.MOVE);
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM3))
 		{
-			Interface.toolBar.selectTool(Editor.SCALE);
+			Editor.gui.toolBar.selectTool(Editor.SCALE);
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM4))
 		{
-			Interface.toolBar.selectTool(Editor.ROTATE);
+			Editor.gui.toolBar.selectTool(Editor.ROTATE);
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.S))
 		{
 			if(Editor.openFile === null)
 			{
-				Interface.saveProgram();
+				Editor.gui.saveProgram();
 			}
 			else
 			{
@@ -669,19 +666,19 @@ Editor.update = function()
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.L))
 		{
-			Interface.loadProgram();
+			Editor.gui.loadProgram();
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.W) || Editor.keyboard.keyJustPressed(Keyboard.F4))
 		{
-			Interface.tab.closeActual();
+			Editor.gui.tab.closeActual();
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.TAB) || Editor.keyboard.keyJustPressed(Keyboard.PAGE_DOWN))
 		{
-			Interface.tab.selectNextTab();
+			Editor.gui.tab.selectNextTab();
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.PAGE_UP))
 		{
-			Interface.tab.selectPreviousTab();
+			Editor.gui.tab.selectPreviousTab();
 		}
 	}
 	else if(Editor.keyboard.keyJustPressed(Keyboard.F2))
@@ -697,7 +694,7 @@ Editor.resize = function()
 {
 	if(!Editor.fullscreen)
 	{
-		Interface.updateInterface();
+		Editor.gui.updateInterface();
 	}
 };
 
@@ -1022,7 +1019,7 @@ Editor.createDefaultResouces = function()
 //Select tool to manipulate objects
 Editor.selectTool = function(tool)
 {
-	var tab = Interface.tab.getActual();
+	var tab = Editor.gui.tab.getActual();
 	if(tab instanceof SceneEditor)
 	{
 		tab.selectTool(tool);
@@ -1031,7 +1028,7 @@ Editor.selectTool = function(tool)
 
 Editor.updateSettings = function()
 {
-	var tab = Interface.bottomTab.getActual();
+	var tab = Editor.gui.bottomTab.getActual();
 	if(tab !== null)
 	{
 		tab.updateSettings();
@@ -1042,10 +1039,10 @@ Editor.updateSettings = function()
 Editor.updateViewsGUI = function()
 {
 	//Update tree view to match actual scene
-	Interface.treeView.attach(Editor.program);
-	Interface.treeView.updateView();
+	Editor.gui.treeView.attach(Editor.program);
+	Editor.gui.treeView.updateView();
 
-	var tab = Interface.bottomTab.getActual();
+	var tab = Editor.gui.bottomTab.getActual();
 	if(tab !== null)
 	{
 		tab.updateView();
@@ -1056,39 +1053,39 @@ Editor.updateViewsGUI = function()
 //Update values of objects attached to the GUI
 Editor.updateValuesGUI = function()
 {
-	Interface.panelContainer.updateValues();
+	Editor.gui.panelContainer.updateValues();
 };
 
 //Update tabs after changing selection
 Editor.updateSelectionGUI = function()
 {
 	//Center tab ground
-	Interface.tab.updateMetadata();
-	var tab = Interface.tab.getActual();
+	Editor.gui.tab.updateMetadata();
+	var tab = Editor.gui.tab.getActual();
 	if(tab !== null)
 	{
 		tab.updateSelection();
 	}
 
 	//Bottom tab group
-	Interface.bottomTab.updateMetadata();
-	var tab = Interface.bottomTab.getActual();
+	Editor.gui.bottomTab.updateMetadata();
+	var tab = Editor.gui.bottomTab.getActual();
 	if(tab !== null)
 	{
 		tab.updateSelection();
 	}
 
 	//Right side tab group
-	/*Interface.bottomTab.updateMetadata();
-	var tab = Interface.bottomTab.getActual();
+	/*Editor.gui.bottomTab.updateMetadata();
+	var tab = Editor.gui.bottomTab.getActual();
 	if(tab instanceof AssetExplorer || tab instanceof AnimationTab)
 	{
 		tab.updateSelection();
 	}*/
 
-	Interface.treeView.updateSelectedObject();
+	Editor.gui.treeView.updateSelectedObject();
 
-	Interface.panelContainer.updateSelection();
+	Editor.gui.panelContainer.updateSelection();
 };
 
 //Reset editing flags
@@ -1123,10 +1120,10 @@ Editor.createNewProgram = function()
 	Editor.updateViewsGUI();
 
 	//Clear tabs
-	Interface.tab.clear();
+	Editor.gui.tab.clear();
 
 	//Scene tab
-	var scene = Interface.tab.addTab(SceneEditor, true);
+	var scene = Editor.gui.tab.addTab(SceneEditor, true);
 	scene.attach(Editor.program.scene);
 };
 
@@ -1203,7 +1200,7 @@ Editor.loadProgram = function(file, binary)
 			Editor.history = new History(Settings.general.historySize);
 
 			//Remove old tabs
-			Interface.tab.clear();
+			Editor.gui.tab.clear();
 
 			//Set open file
 			Editor.setOpenFile(file);
@@ -1213,7 +1210,7 @@ Editor.loadProgram = function(file, binary)
 			//Add new scene tab to interface
 			if(Editor.program.scene !== null)
 			{
-				var scene = Interface.tab.addTab(SceneEditor, true);
+				var scene = Editor.gui.tab.addTab(SceneEditor, true);
 				scene.attach(Editor.program.scene);
 			}
 
@@ -2348,8 +2345,10 @@ Editor.exit = function()
 	if(Nunu.runningOnDesktop())
 	{
 		Settings.store();
-		Editor.gui.App.closeAllWindows();
-		Editor.gui.App.quit();
+		
+		var gui = require("nw.gui");
+		gui.App.closeAllWindows();
+		gui.App.quit();
 	}
 };
 

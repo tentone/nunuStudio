@@ -94,7 +94,7 @@ function DivisionResizable(parent)
 	//onResize callback
 	this.onResize = function()
 	{
-		Interface.updateInterface();
+		Editor.gui.updateInterface();
 	};
 }
 
