@@ -433,6 +433,22 @@ function TreeElement(container)
 					}
 				}
 			}
+			else if(obj instanceof THREE.Material)
+			{
+				var actions = [];
+				self.obj.traverse(function(children)
+				{
+					if(children.material !== undefined)
+					{
+						actions.push(new ChangeAction(children, "material", obj));
+					}
+				});
+
+				if(actions.length > 0)
+				{
+					Editor.history.add(new ActionBundle(actions));
+				}
+			}
 		}
 	};
 
