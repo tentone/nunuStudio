@@ -1547,6 +1547,12 @@ SceneEditor.prototype.updateSelection = function()
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFFFF));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
+		//Container
+		else if(object instanceof Container)
+		{
+			this.objectHelper.add(new THREE.BoxHelper(object, 0xFFFF00));
+			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
+		}
 		//Object 3D
 		else
 		{
