@@ -287,6 +287,7 @@ include("editor/ui/element/input/CheckBox.js");
 include("editor/ui/element/input/TextBox.js");
 include("editor/ui/element/input/TextArea.js");
 include("editor/ui/element/input/ColorChooser.js");
+include("editor/ui/element/input/ColorGradientChooser.js");
 include("editor/ui/element/input/Slider.js");
 include("editor/ui/element/input/DropdownList.js");
 include("editor/ui/element/input/NumberBox.js");
