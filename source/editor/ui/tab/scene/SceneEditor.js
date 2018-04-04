@@ -944,37 +944,35 @@ SceneEditor.prototype.render = function()
 			if(this.mouse.position.x > x && this.mouse.position.y > 0 && this.mouse.position.x < this.canvas.width && this.mouse.position.y < size)
 			{
 				this.tempVector2.set((this.mouse.position.x - x) / size * 2 - 1, -(this.mouse.position.y / size * 2 - 1));
-				var intersects = this.orientation.raycast(this.tempVector2);
+				var code = this.orientation.raycast(this.tempVector2);
 				
-				if(this.mouse.buttonDoubleClicked())
+				if(this.mouse.buttonDoubleClicked() || this.mouse.buttonJustPressed(Mouse.MIDDLE))
 				{
-					if(intersects.length > 0)
+					if(code !== null)
 					{
-						var object = intersects[0].object;
-
 						if(Settings.editor.navigation === Settings.ORBIT || this.camera instanceof OrthographicCamera)
 						{
-							if(object.code === CameraOrientation.Z_POS)
+							if(code === CameraOrientation.Z_POS)
 							{
 								this.cameraRotation.set(Math.PI / 2, 0);
 							}
-							else if(object.code === CameraOrientation.Z_NEG)
+							else if(code === CameraOrientation.Z_NEG)
 							{
 								this.cameraRotation.set(-Math.PI / 2, 0);
 							}
-							else if(object.code === CameraOrientation.X_POS)
+							else if(code === CameraOrientation.X_POS)
 							{
 								this.cameraRotation.set(0, 0);
 							}
-							else if(object.code === CameraOrientation.X_NEG)
+							else if(code === CameraOrientation.X_NEG)
 							{
 								this.cameraRotation.set(Math.PI, 0);
 							}
-							else if(object.code === CameraOrientation.Y_POS)
+							else if(code === CameraOrientation.Y_POS)
 							{
 								this.cameraRotation.set(Math.PI, 1.57);
 							}
-							else if(object.code === CameraOrientation.Y_NEG)
+							else if(code === CameraOrientation.Y_NEG)
 							{
 								this.cameraRotation.set(Math.PI, -1.57);
 							}
@@ -983,27 +981,27 @@ SceneEditor.prototype.render = function()
 						}
 						else
 						{
-							if(object.code === CameraOrientation.Z_POS)
+							if(code === CameraOrientation.Z_POS)
 							{
 								this.cameraRotation.set(Math.PI, 0);
 							}
-							else if(object.code === CameraOrientation.Z_NEG)
+							else if(code === CameraOrientation.Z_NEG)
 							{
 								this.cameraRotation.set(0, 0);
 							}
-							else if(object.code === CameraOrientation.X_POS)
+							else if(code === CameraOrientation.X_POS)
 							{
 								this.cameraRotation.set(-Math.PI / 2, 0);
 							}
-							else if(object.code === CameraOrientation.X_NEG)
+							else if(code === CameraOrientation.X_NEG)
 							{
 								this.cameraRotation.set(Math.PI / 2, 0);
 							}
-							else if(object.code === CameraOrientation.Y_POS)
+							else if(code === CameraOrientation.Y_POS)
 							{
 								this.cameraRotation.set(Math.PI, -1.57);
 							}
-							else if(object.code === CameraOrientation.Y_NEG)
+							else if(code === CameraOrientation.Y_NEG)
 							{
 								this.cameraRotation.set(Math.PI, 1.57);
 							}

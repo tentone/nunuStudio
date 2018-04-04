@@ -92,14 +92,14 @@ CameraOrientation.prototype.raycast = function(mouse)
 	this.raycaster.setFromCamera(mouse, this.camera);
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
-	
 	if(intersects.length > 0)
 	{
 		this.selected = intersects[0].object;
 		this.selected.material.color.set(0xFFFF00);
+		return this.selected.code;
 	}
 	
-	return intersects;
+	return null;
 };
 
 //Update cube position from camera
