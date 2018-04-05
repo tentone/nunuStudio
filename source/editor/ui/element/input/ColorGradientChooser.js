@@ -11,6 +11,9 @@ function ColorGradientChooser(parent)
 	this.element.style.overflow = "visible";
 	this.element.style.pointerEvents = "none";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.element.style.borderStyle = "none";
+	this.element.style.borderRadius = "4px";
+	this.element.style.zIndex = 1000;
 
 	this.canvas = document.createElement("canvas");
 	this.canvas.style.position = "absolute";
@@ -18,6 +21,7 @@ function ColorGradientChooser(parent)
 	this.canvas.style.left = "0px";
 	this.canvas.style.width = "100%";
 	this.canvas.style.height = "100%";
+	this.element.appendChild(this.canvas);
 }
 
 ColorGradientChooser.prototype = Object.create(Element.prototype);
@@ -27,12 +31,17 @@ ColorGradientChooser.prototype.updateValues = function()
 	this.canvas.width = this.size.x;
 	this.canvas.height = this.size.y;
 
-	//TODO <ADD CODE HERE>
+	var context = this.canvas.getContext("2d");
+	var gradient = context.createLinearGradient(0, 0, this.canvas.width, 0);
 
-	for(var i = 0; i < this.values.length; i++)
+	var width = 1 / (this.values.length - 1);
+	for(var i = 0, x = 0; i < this.values.length; i++, x += width)
 	{
-		//TODO <ADD CODE HERE>
+		gradient.addColorStop(x, MathUtils.randomColor());
 	}
+
+	context.fillStyle = gradient;
+	context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 };
 
 ColorGradientChooser.prototype.setOnChange = function(onChange)

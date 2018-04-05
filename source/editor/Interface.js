@@ -2,6 +2,12 @@
 
 function Interface()
 {
+	var test = new ColorGradientChooser(document.body);
+	test.position.set(0, 0);
+	test.size.set(150, 20);
+	test.updateInterface();
+	test.setValue([new THREE.Color(0xFF0000), new THREE.Color(0x00FF00), new THREE.Color(0x0000FF)]);
+	
 	//Main container
 	this.container = new DualContainer(document.body);
 	this.container.tabPosition = 0.75;
