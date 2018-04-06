@@ -21,9 +21,22 @@ function ObjectIconHelper(object, icon)
 	}));
 
 	this.object = object;
+
+	this.tempA = new THREE.Vector3();
+	this.tempB = new THREE.Vector3();
 }
 
 ObjectIconHelper.prototype = Object.create(THREE.Sprite.prototype);
+
+ObjectIconHelper.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+{
+	this.getWorldPosition(this.tempA);
+	camera.getWorldPosition(this.tempB);
+
+	var scale = this.tempA.distanceTo(this.tempB) / 10;
+
+	this.scale.set(scale, scale, scale);
+};
 
 ObjectIconHelper.prototype.update = function()
 {
