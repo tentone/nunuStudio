@@ -40,7 +40,7 @@ ColorGradientChooser.prototype.updateButtons = function()
 
 		if(self.onChange !== null)
 		{
-			self.onChange();
+			self.onChange(self.values[this.index], this.index);
 		}
 	}
 
@@ -56,7 +56,7 @@ ColorGradientChooser.prototype.updateButtons = function()
 		button.style.display = "block";
 		button.style.position = "absolute";
 		button.style.top = "0px";
-		button.style.width = "20px";
+		button.style.width = "15px";
 		button.style.height = "100%";
 		button.style.cursor = "pointer";
 		button.style.borderStyle = "none";
@@ -93,13 +93,14 @@ ColorGradientChooser.prototype.updateValues = function()
 	var colorStep = 1 / (this.values.length - 1);
 	var colorPercentage = 0;
 
-	var buttonSpacing = (this.size.x - 20) / (this.buttons.length - 1);
+	var buttonSpacing = (this.size.x - 15) / (this.buttons.length - 1);
 	var buttonPosition = 0;
 
 	for(var i = 0; i < this.values.length; i++)
 	{
 		gradient.addColorStop(colorPercentage, this.values[i].getStyle());
 
+		this.buttons[i].color.fromRGB(this.values[i].r * 255, this.values[i].g * 255, this.values[i].b * 255);
 		this.buttons[i].style.left = buttonPosition + "px";
 
 		colorPercentage += colorStep;
@@ -110,6 +111,7 @@ ColorGradientChooser.prototype.updateValues = function()
 	context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 };
 
+//Se onChange callback that receives (value, index) as arguments
 ColorGradientChooser.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
@@ -117,7 +119,14 @@ ColorGradientChooser.prototype.setOnChange = function(onChange)
 
 ColorGradientChooser.prototype.setValue = function(values)
 {
-	this.values = values;
+	this.values = [];
+
+	for(var i = 0; i < values.length; i++)
+	{
+		var color = new THREE.Color();
+		color.copy(values[i]);
+		this.values.push(color);
+	}
 
 	this.updateButtons();
 	this.updateValues();
