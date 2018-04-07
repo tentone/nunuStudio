@@ -8,12 +8,14 @@ function ColorGradientChooser(parent)
 
 	this.values = [];
 
-	this.element.style.overflow = "visible";
-	this.element.style.pointerEvents = "none";
+	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 	this.element.style.borderStyle = "none";
+	this.element.style.boxSizing = "border-box";
 	this.element.style.borderRadius = "4px";
-	this.element.style.zIndex = 1000;
+
+	//TODO <REMOVE THIS>
+	this.element.style.zIndex = "2000";
 
 	this.canvas = document.createElement("canvas");
 	this.canvas.style.position = "absolute";
@@ -22,12 +24,22 @@ function ColorGradientChooser(parent)
 	this.canvas.style.width = "100%";
 	this.canvas.style.height = "100%";
 	this.element.appendChild(this.canvas);
+
+	this.buttons = document.createElement("div");
+	this.buttons.style.position = "absolute";
+	this.buttons.style.top = "0px";
+	this.buttons.style.left = "0px";
+	this.buttons.style.width = "100%";
+	this.buttons.style.height = "100%";
+	this.element.appendChild(this.buttons);
 }
 
 ColorGradientChooser.prototype = Object.create(Element.prototype);
 
 ColorGradientChooser.prototype.updateValues = function()
 {
+	var self = this;
+
 	this.canvas.width = this.size.x;
 	this.canvas.height = this.size.y;
 
@@ -37,7 +49,31 @@ ColorGradientChooser.prototype.updateValues = function()
 	var width = 1 / (this.values.length - 1);
 	for(var i = 0, x = 0; i < this.values.length; i++, x += width)
 	{
-		gradient.addColorStop(x, MathUtils.randomColor());
+		gradient.addColorStop(x, this.values[i].getStyle());
+
+		var button = document.createElement("div");
+		button.style.position = "absolute";
+		button.style.top = "0px";
+		button.style.left = (x * 100) + "%";
+		button.style.width = "20px";
+		button.style.height = "100%";
+		button.style.cursor = "pointer";
+		button.onchange = function()
+		{
+			if(self.onChange !== null)
+			{
+				self.onChange();
+			}
+		};
+		this.buttons.appendChild(button);
+
+		var color = new jscolor(button);
+		color.backgroundColor = Editor.theme.boxColor;
+		color.insetColor = Editor.theme.boxColor;
+		color.shadow = false;
+		color.borderWidth = 0;
+		color.borderRadius = 0;
+		color.zIndex = 2000;
 	}
 
 	context.fillStyle = gradient;

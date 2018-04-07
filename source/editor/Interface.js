@@ -3,10 +3,10 @@
 function Interface()
 {
 	var test = new ColorGradientChooser(document.body);
-	test.position.set(0, 0);
-	test.size.set(150, 20);
+	test.position.set(300, 300);
+	test.size.set(200, 30);
 	test.updateInterface();
-	test.setValue([new THREE.Color(0xFF0000), new THREE.Color(0x00FF00), new THREE.Color(0x0000FF)]);
+	test.setValue([new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)]);
 	
 	//Main container
 	this.container = new DualContainer(document.body);
