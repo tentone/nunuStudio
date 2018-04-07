@@ -13,20 +13,39 @@ function SkyPanel(parent, obj)
 
 	//Top color
 	this.form.addText("Top color");
-	this.colorTop = [];
-	for(var i = 0; i < 4; i++)
+	this.colorTop = new ColorGradientChooser(document.body);
+	this.colorTop.size.set(160, 20);
+	this.colorTop.setOnChange(function()
+	{
+		var values = self.colorTop.getValue();
+
+		for(var i = 0; i < values.length; i++)
+		{
+			self.obj.colorTop[i].copy(values[i]);
+		}
+
+		self.obj.updateSky();
+
+		//Editor.history.add(new ChangeAction(self.obj.colorTop, this.index, new THREE.Color(self.colorTop[this.index].getValueHex())));
+
+		//CREATE HISTORY ACTION WITH CALLBACK ON APPLY / REVERT
+	});
+	this.form.add(this.colorTop);
+	this.form.nextRow();
+	//this.test.setValue([new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)]);
+	/*for(var i = 0; i < 4; i++)
 	{
 		this.colorTop.push(new ColorChooser(this.form.element));
 		this.colorTop[i].element.index = i;
 		this.colorTop[i].size.set(42, 18);
 		this.colorTop[i].setOnChange(function()
 		{
-			Editor.history.add(new ChangeAction(self.obj.colorTop, this.index, new THREE.Color(self.colorTop[this.index].getValueHex())));
+			
 			self.obj.updateSky();
 		});
 		this.form.add(this.colorTop[i]);
 	}
-	this.form.nextRow();
+	this.form.nextRow();*/
 
 	//Bottom color
 	this.form.addText("Bottom color");
@@ -341,10 +360,12 @@ SkyPanel.prototype.updatePanel = function()
 	
 	if(this.obj !== null)
 	{
+		this.colorTop.setValue(this.obj.colorTop);
+
 		for(var i = 0; i < 4; i++)
 		{
 			this.colorBottom[i].setValue(this.obj.colorBottom[i].r, this.obj.colorBottom[i].g, this.obj.colorBottom[i].b);
-			this.colorTop[i].setValue(this.obj.colorTop[i].r, this.obj.colorTop[i].g, this.obj.colorTop[i].b);
+			//this.colorTop[i].setValue(this.obj.colorTop[i].r, this.obj.colorTop[i].g, this.obj.colorTop[i].b);
 		}
 		
 		this.sunColor.setValueHex(this.obj.sunColor);

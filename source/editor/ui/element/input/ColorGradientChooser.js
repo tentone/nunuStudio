@@ -14,8 +14,6 @@ function ColorGradientChooser(parent)
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.borderRadius = "4px";
-
-	//TODO <REMOVE THIS>
 	this.element.style.zIndex = "2000";
 
 	this.canvas = document.createElement("canvas");
@@ -29,35 +27,41 @@ function ColorGradientChooser(parent)
 
 ColorGradientChooser.prototype = Object.create(Element.prototype);
 
-ColorGradientChooser.prototype.updateValues = function()
+ColorGradientChooser.prototype.updateButtons = function()
 {
-	while(this.buttons.length > 0)
-	{
-		this.element.removeChild(this.buttons.shift().button);
-	}
-
 	var self = this;
 
-	this.canvas.width = this.size.x;
-	this.canvas.height = this.size.y;
-
-	var context = this.canvas.getContext("2d");
-	var gradient = context.createLinearGradient(0, 0, this.canvas.width, 0);
-
-	var width = 1 / (this.values.length - 1);
-
-	for(var i = 0, x = 0; i < this.values.length; i++, x += width)
+	function buttonOnChange()
 	{
-		gradient.addColorStop(x, this.values[i].getStyle());
+		var rgb = this.color.rgb;
 
-		var button = document.createElement("div");
+		self.values[this.index].setRGB(rgb[0]/255, rgb[1]/255, rgb[2]/255);
+		self.updateValues();
+
+		if(self.onChange !== null)
+		{
+			self.onChange();
+		}
+	}
+
+	while(this.buttons.length > this.values.length)
+	{
+		this.element.removeChild(this.buttons.shift());
+	}
+
+	while(this.buttons.length < this.values.length)
+	{
+		var button = document.createElement("input");
+		button.type = "text";
+		button.style.display = "block";
 		button.style.position = "absolute";
 		button.style.top = "0px";
-		button.style.left = (x * 100) + "%";
 		button.style.width = "20px";
 		button.style.height = "100%";
 		button.style.cursor = "pointer";
-		button.index = i;
+		button.style.borderStyle = "none";
+		button.style.boxSizing = "border-box";
+		button.style.borderRadius = "2px";
 		this.element.appendChild(button);
 
 		var color = new jscolor(button);
@@ -67,22 +71,39 @@ ColorGradientChooser.prototype.updateValues = function()
 		color.borderWidth = 0;
 		color.borderRadius = 0;
 		color.zIndex = 2000;
-		this.buttons.push({button:button, color:color});
 
-		button.onchange = function()
-		{
-			console.log("Change");
+		button.onchange = buttonOnChange;
+		button.color = color;
+		button.index = -1;
 
-			var rgb = self.buttons[this.index].color.rgb;
+		this.buttons.push(button);
+	}
 
-			self.values[this.index].setRGB(rgb[0]/255, rgb[1]/255, rgb[2]/255);
-			self.updateValues();
+	for(var i = 0; i < this.buttons.length; i++)
+	{
+		this.buttons[i].index = i;
+	}
+};
 
-			if(self.onChange !== null)
-			{
-				self.onChange();
-			}
-		};
+ColorGradientChooser.prototype.updateValues = function()
+{
+	var context = this.canvas.getContext("2d");
+	var gradient = context.createLinearGradient(0, 0, this.canvas.width, 0);
+
+	var colorStep = 1 / (this.values.length - 1);
+	var colorPercentage = 0;
+
+	var buttonSpacing = (this.size.x - 20) / (this.buttons.length - 1);
+	var buttonPosition = 0;
+
+	for(var i = 0; i < this.values.length; i++)
+	{
+		gradient.addColorStop(colorPercentage, this.values[i].getStyle());
+
+		this.buttons[i].style.left = buttonPosition + "px";
+
+		colorPercentage += colorStep;
+		buttonPosition += buttonSpacing;
 	}
 
 	context.fillStyle = gradient;
@@ -97,6 +118,8 @@ ColorGradientChooser.prototype.setOnChange = function(onChange)
 ColorGradientChooser.prototype.setValue = function(values)
 {
 	this.values = values;
+
+	this.updateButtons();
 	this.updateValues();
 };
 
@@ -107,8 +130,19 @@ ColorGradientChooser.prototype.getValue = function()
 
 ColorGradientChooser.prototype.updateInterface = function()
 {
-	Element.prototype.updateInterface.call(this);
+	if(this.visible)
+	{
+		this.canvas.width = this.size.x;
+		this.canvas.height = this.size.y;
 
-	this.canvas.width = this.size.x;
-	this.canvas.height = this.size.y;
+		this.element.style.visibility = "visible";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+	}
 };
