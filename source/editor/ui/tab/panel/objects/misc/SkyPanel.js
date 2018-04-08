@@ -18,7 +18,7 @@ function SkyPanel(parent, obj)
 
 	//Top color
 	this.form.addText("Top color");
-	this.colorTop = new ColorGradientChooser(document.body);
+	this.colorTop = new ColorGradientChooser(this.form.element);
 	this.colorTop.size.set(190, 20);
 	this.colorTop.setOnChange(function(color, index)
 	{
@@ -29,7 +29,7 @@ function SkyPanel(parent, obj)
 
 	//Bottom color
 	this.form.addText("Bottom color");
-	this.colorBottom = new ColorGradientChooser(document.body);
+	this.colorBottom = new ColorGradientChooser(this.form.element);
 	this.colorBottom.size.set(190, 20);
 	this.colorBottom.setOnChange(function(color, index)
 	{
@@ -287,28 +287,25 @@ SkyPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
 	
-	if(this.obj !== null)
-	{
-		this.colorTop.setValue(this.obj.colorTop);
-		this.colorBottom.setValue(this.obj.colorBottom);
-		
-		this.sunColor.setValueHex(this.obj.sunColor);
-		this.moonColor.setValueHex(this.obj.moonColor);
-		this.intensity.setValue(this.obj.intensity);
+	this.colorTop.setValue(this.obj.colorTop);
+	this.colorBottom.setValue(this.obj.colorBottom);
+	
+	this.sunColor.setValueHex(this.obj.sunColor);
+	this.moonColor.setValueHex(this.obj.moonColor);
+	this.intensity.setValue(this.obj.intensity);
 
-		this.autoUpdate.setValue(this.obj.autoUpdate);
-		this.dayTime.setValue(this.obj.dayTime);
-		this.time.setValue(this.obj.time);
-		this.sunDistance.setValue(this.obj.sunDistance);
+	this.autoUpdate.setValue(this.obj.autoUpdate);
+	this.dayTime.setValue(this.obj.dayTime);
+	this.time.setValue(this.obj.time);
+	this.sunDistance.setValue(this.obj.sunDistance);
 
-		this.castShadow.setValue(this.obj.sun.castShadow);
-		this.shadowWidth.setValue(this.obj.sun.shadow.mapSize.width);
-		this.shadowHeight.setValue(this.obj.sun.shadow.mapSize.height);
-		this.shadowNear.setValue(this.obj.sun.shadow.camera.near);
-		this.shadowFar.setValue(this.obj.sun.shadow.camera.far);
-		this.shadowLeft.setValue(this.obj.sun.shadow.camera.left);
-		this.shadowRight.setValue(this.obj.sun.shadow.camera.right);
-		this.shadowTop.setValue(this.obj.sun.shadow.camera.top);
-		this.shadowBottom.setValue(this.obj.sun.shadow.camera.bottom);
-	}
+	this.castShadow.setValue(this.obj.sun.castShadow);
+	this.shadowWidth.setValue(this.obj.sun.shadow.mapSize.width);
+	this.shadowHeight.setValue(this.obj.sun.shadow.mapSize.height);
+	this.shadowNear.setValue(this.obj.sun.shadow.camera.near);
+	this.shadowFar.setValue(this.obj.sun.shadow.camera.far);
+	this.shadowLeft.setValue(this.obj.sun.shadow.camera.left);
+	this.shadowRight.setValue(this.obj.sun.shadow.camera.right);
+	this.shadowTop.setValue(this.obj.sun.shadow.camera.top);
+	this.shadowBottom.setValue(this.obj.sun.shadow.camera.bottom);
 };

@@ -386,6 +386,33 @@ function ParticleEditor(parent, closeable, container, index)
 	//Color
 	this.form.addText("Color");
 	this.form.nextRow();
+
+	/*
+	this.form.addText("Base");
+	this.colorValue = new ColorGradientChooser(this.form.element);
+	this.colorValue.size.set(190, 20);
+	this.colorValue.setOnChange(function(color, index)
+	{
+		Editor.history.add(new CallbackAction(new ChangeAction(self.particle.emitter.color.value, index, color.clone()), function()
+		{
+			self.particle.reload();
+		}));
+	});
+	this.form.add(this.colorValue);
+	this.form.nextRow();
+
+	this.form.addText("Spread");
+	this.form.nextRow();
+	this.colorSpread = new ColorGradientChooser(this.form.element);
+	this.colorSpread.size.set(190, 20);
+	this.colorSpread.setOnChange(function(color, index)
+	{
+		//TODO <ADD CODE HERE>
+	});
+	this.form.add(this.colorSpread);
+	this.form.nextRow();
+	*/
+	
 	this.colorValue = [];
 	this.colorSpread = [];
 
@@ -523,6 +550,9 @@ ParticleEditor.prototype.attach = function(particle)
 	this.angleMin.setValue(this.angle.min);
 	this.angleMax.setValue(this.angle.max);
 
+	//this.colorValue.setValue(particle.emitter.color.value);
+	//this.colorSpread.setValue(particle.emitter.color.spread);
+	
 	for(var i = 0; i < 4; i++)
 	{
 		var value = particle.emitter.color.value[i];
@@ -652,10 +682,8 @@ ParticleEditor.prototype.updateInterface = function()
 			this.children[i].updateInterface();
 		}
 
-		//Form
 		this.form.updateInterface();
 
-		//Element
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
