@@ -13,10 +13,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
 	});
 	this.form.add(this.skinning);
 	this.form.nextRow();
@@ -27,10 +24,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.morphTargets.size.set(15, 15);
 	this.morphTargets.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
 	});
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
@@ -41,10 +35,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.wireframe.size.set(15, 15);
 	this.wireframe.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 	});
 	this.form.add(this.wireframe);
 	this.form.nextRow();
@@ -55,11 +46,8 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -82,11 +70,8 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.alphaMap = new TextureBox(this.form.element);
 	this.alphaMap.setOnChange(function(file)
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.alphaMap);
 	this.form.nextRow();

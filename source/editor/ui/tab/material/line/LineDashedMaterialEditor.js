@@ -14,11 +14,8 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	this.dashSize.setStep(1);
 	this.dashSize.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "dashSize", self.dashSize.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "dashSize", self.dashSize.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.dashSize);
 	this.form.nextRow();
@@ -31,11 +28,8 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	this.gapSize.setStep(1);
 	this.gapSize.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "gapSize", self.gapSize.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "gapSize", self.gapSize.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.gapSize);
 	this.form.nextRow();
@@ -48,11 +42,8 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	this.dashScale.setStep(1);
 	this.dashScale.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "scale", self.dashScale.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "scale", self.dashScale.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.dashScale);
 	this.form.nextRow();

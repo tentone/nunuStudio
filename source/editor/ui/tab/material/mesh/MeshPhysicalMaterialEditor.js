@@ -14,11 +14,8 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.clearCoat.setStep(0.01);
 	this.clearCoat.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "clearCoat", self.clearCoat.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "clearCoat", self.clearCoat.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.clearCoat);
 	this.form.nextRow();
@@ -31,11 +28,8 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.clearCoatRoughness.setStep(0.01);
 	this.clearCoatRoughness.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "clearCoatRoughness", self.clearCoatRoughness.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "clearCoatRoughness", self.clearCoatRoughness.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.clearCoatRoughness);
 	this.form.nextRow();
@@ -48,11 +42,8 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.reflectivity.setStep(0.01);
 	this.reflectivity.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "reflectivity", self.reflectivity.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "reflectivity", self.reflectivity.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.reflectivity);
 	this.form.nextRow();

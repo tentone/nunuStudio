@@ -34,11 +34,8 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -50,11 +47,8 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "rotation", self.rotation.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "rotation", self.rotation.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.rotation);
 	this.form.nextRow();

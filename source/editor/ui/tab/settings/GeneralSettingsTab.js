@@ -75,7 +75,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.showUUID.setOnChange(function()
 	{
 		Settings.general.showUUID = self.showUUID.getValue();
-		Editor.selectObjectPanel();
+		Editor.gui.panelContainer.updateSelection();
 	});
 	this.form.add(this.showUUID);
 	this.form.nextRow();
@@ -87,7 +87,8 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.showType.setOnChange(function()
 	{
 		Settings.general.showType = self.showType.getValue();
-		Editor.selectObjectPanel();
+		Editor.gui.panelContainer.updateSelection();
+		
 	});
 	this.form.add(this.showType);
 	this.form.nextRow();

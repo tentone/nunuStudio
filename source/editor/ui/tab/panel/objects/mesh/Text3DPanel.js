@@ -7,14 +7,18 @@ function Text3DPanel(parent, obj)
 	//Self pointer
 	var self = this;
 
+	function updateGeometry()
+	{
+		self.obj.updateGeometry();
+	}
+
 	//Text
 	this.form.addText("Text");
 	this.text = new TextArea(this.form.element);
 	this.text.size.set(190, 60);
 	this.text.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "text", self.text.getText()));
-		self.obj.updateGeometry();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "text", self.text.getText()), updateGeometry));
 	});
 	this.form.add(this.text);
 	this.form.nextRow();
@@ -27,8 +31,7 @@ function Text3DPanel(parent, obj)
 	this.size.setStep(0.1);
 	this.size.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "size", self.size.getValue()));
-		self.obj.updateGeometry();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "size", self.size.getValue()), updateGeometry));
 	});
 	this.form.add(this.size);
 	this.form.nextRow();
@@ -41,8 +44,7 @@ function Text3DPanel(parent, obj)
 	this.height.setStep(0.1);
 	this.height.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "height", self.height.getValue()));
-		self.obj.updateGeometry();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "height", self.height.getValue()), updateGeometry));
 	});
 	this.form.add(this.height);
 	this.form.nextRow();
@@ -55,8 +57,7 @@ function Text3DPanel(parent, obj)
 	this.curveSegments.setStep(1.0);
 	this.curveSegments.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "curveSegments", self.curveSegments.getValue()));
-		self.obj.updateGeometry();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "curveSegments", self.curveSegments.getValue()), updateGeometry));
 	});
 	this.form.add(this.curveSegments);
 	this.form.nextRow();
@@ -67,8 +68,7 @@ function Text3DPanel(parent, obj)
 	this.bevel.size.set(15, 15);
 	this.bevel.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "bevel", self.bevel.getValue()));
-		self.obj.updateGeometry();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "bevel", self.bevel.getValue()), updateGeometry));
 	});
 	this.form.add(this.bevel);
 	this.form.nextRow();
@@ -81,8 +81,7 @@ function Text3DPanel(parent, obj)
 	this.bevelThickness.setStep(0.1);
 	this.bevelThickness.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "bevelThickness", self.bevelThickness.getValue()));
-		self.obj.updateGeometry();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "bevelThickness", self.bevelThickness.getValue()), updateGeometry));
 	});
 	this.form.add(this.bevelThickness);
 	this.form.nextRow();
@@ -95,8 +94,7 @@ function Text3DPanel(parent, obj)
 	this.bevelSize.setStep(0.1);
 	this.bevelSize.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "bevelSize", self.bevelSize.getValue()));
-		self.obj.updateGeometry();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "bevelSize", self.bevelSize.getValue()), updateGeometry));
 	});
 	this.form.add(this.bevelSize);
 	this.form.nextRow();

@@ -32,11 +32,8 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -48,11 +45,8 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.pointSize.setStep(0.05);
 	this.pointSize.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "size", self.pointSize.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "size", self.pointSize.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.pointSize);
 	this.form.nextRow();
@@ -63,11 +57,8 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.sizeAttenuation.size.set(15, 15);
 	this.sizeAttenuation.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "sizeAttenuation", self.sizeAttenuation.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "sizeAttenuation", self.sizeAttenuation.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.sizeAttenuation);
 	this.form.nextRow();

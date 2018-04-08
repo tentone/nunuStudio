@@ -36,6 +36,9 @@ function PhysicsPanel(parent, obj)
 		}
 	});
 
+	this.form.addText("Physics");
+	this.form.nextRow();
+
 	//Body Type
 	this.form.addText("Type");
 	this.bodyType = new DropdownList(this.form.element);
@@ -88,41 +91,6 @@ function PhysicsPanel(parent, obj)
 	this.form.add(this.angularDamping);
 	this.form.nextRow();
 
-	//Allow sleep
-	this.allowSleep = new CheckBox(this.form.element);
-	this.form.addText("Allow Sleep");
-	this.allowSleep.size.set(15, 15);
-	this.allowSleep.setOnChange(function()
-	{
-		Editor.history.add(new ChangeAction(self.obj.body, "allowSleep", self.allowSleep.getValue()));
-	});
-	this.form.add(this.allowSleep);
-	this.form.nextRow();
-
-	//Sleep speed limit
-	this.form.addText("Sleep Speed");
-	this.sleepSpeedLimit = new NumberBox(this.form.element);
-	this.sleepSpeedLimit.size.set(50, 18);
-	this.sleepSpeedLimit.setStep(0.01);
-	this.sleepSpeedLimit.setOnChange(function()
-	{
-		Editor.history.add(new ChangeAction(self.obj.body, "sleepSpeedLimit", self.sleepSpeedLimit.getValue()));
-	});
-	this.form.add(this.sleepSpeedLimit);
-	this.form.nextRow();
-
-	//Sleep time limit
-	this.form.addText("Sleep Time");
-	this.sleepTimeLimit = new NumberBox(this.form.element);
-	this.sleepTimeLimit.size.set(50, 18);
-	this.sleepTimeLimit.setStep(0.01);
-	this.sleepTimeLimit.setOnChange(function()
-	{
-		Editor.history.add(new ChangeAction(self.obj.body, "sleepTimeLimit", self.sleepTimeLimit.getValue()));
-	});
-	this.form.add(this.sleepTimeLimit);
-	this.form.nextRow();
-
 	//Fixed rotation
 	this.fixedRotation = new CheckBox(this.form.element);
 	this.form.addText("Lock Rotation");
@@ -146,6 +114,40 @@ function PhysicsPanel(parent, obj)
 	this.form.add(this.collisionFilterGroup);
 	this.form.nextRow();
 
+	//Allow sleep
+	this.allowSleep = new CheckBox(this.form.element);
+	this.form.addText("Allow Sleep");
+	this.allowSleep.size.set(15, 15);
+	this.allowSleep.setOnChange(function()
+	{
+		Editor.history.add(new ChangeAction(self.obj.body, "allowSleep", self.allowSleep.getValue()));
+	});
+	this.form.add(this.allowSleep);
+	this.form.nextRow();
+
+	//Sleep speed limit
+	this.form.addText("Sleep speed limit");
+	this.sleepSpeedLimit = new NumberBox(this.form.element);
+	this.sleepSpeedLimit.size.set(50, 18);
+	this.sleepSpeedLimit.setStep(0.01);
+	this.sleepSpeedLimit.setOnChange(function()
+	{
+		Editor.history.add(new ChangeAction(self.obj.body, "sleepSpeedLimit", self.sleepSpeedLimit.getValue()));
+	});
+	this.form.add(this.sleepSpeedLimit);
+	this.form.nextRow();
+
+	//Sleep time limit
+	this.form.addText("Sleep time limit");
+	this.sleepTimeLimit = new NumberBox(this.form.element);
+	this.sleepTimeLimit.size.set(50, 18);
+	this.sleepTimeLimit.setStep(0.01);
+	this.sleepTimeLimit.setOnChange(function()
+	{
+		Editor.history.add(new ChangeAction(self.obj.body, "sleepTimeLimit", self.sleepTimeLimit.getValue()));
+	});
+	this.form.add(this.sleepTimeLimit);
+	this.form.nextRow();
 }
 
 PhysicsPanel.prototype = Object.create(Panel.prototype);
