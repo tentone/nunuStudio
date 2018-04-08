@@ -14,7 +14,7 @@ function Text3DPanel(parent, obj)
 	this.text.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "text", self.text.getText()));
-		self.obj.setText();
+		self.obj.updateGeometry();
 	});
 	this.form.add(this.text);
 	this.form.nextRow();
@@ -28,7 +28,7 @@ function Text3DPanel(parent, obj)
 	this.size.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "size", self.size.getValue()));
-		self.obj.setText();
+		self.obj.updateGeometry();
 	});
 	this.form.add(this.size);
 	this.form.nextRow();
@@ -42,7 +42,7 @@ function Text3DPanel(parent, obj)
 	this.height.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "height", self.height.getValue()));
-		self.obj.setText();
+		self.obj.updateGeometry();
 	});
 	this.form.add(this.height);
 	this.form.nextRow();
@@ -56,7 +56,7 @@ function Text3DPanel(parent, obj)
 	this.curveSegments.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "curveSegments", self.curveSegments.getValue()));
-		self.obj.setText();
+		self.obj.updateGeometry();
 	});
 	this.form.add(this.curveSegments);
 	this.form.nextRow();
@@ -68,7 +68,7 @@ function Text3DPanel(parent, obj)
 	this.bevel.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "bevel", self.bevel.getValue()));
-		self.obj.setText();
+		self.obj.updateGeometry();
 	});
 	this.form.add(this.bevel);
 	this.form.nextRow();
@@ -82,7 +82,7 @@ function Text3DPanel(parent, obj)
 	this.bevelThickness.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "bevelThickness", self.bevelThickness.getValue()));
-		self.obj.setText();
+		self.obj.updateGeometry();
 	});
 	this.form.add(this.bevelThickness);
 	this.form.nextRow();
@@ -96,11 +96,10 @@ function Text3DPanel(parent, obj)
 	this.bevelSize.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "bevelSize", self.bevelSize.getValue()));
-		self.obj.setText();
+		self.obj.updateGeometry();
 	});
 	this.form.add(this.bevelSize);
 	this.form.nextRow();
-
 }
 
 Text3DPanel.prototype = Object.create(ObjectPanel.prototype);

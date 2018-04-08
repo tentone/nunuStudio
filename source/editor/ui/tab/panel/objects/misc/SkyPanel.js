@@ -11,14 +11,18 @@ function SkyPanel(parent, obj)
 	this.form.addText("Sky color");
 	this.form.nextRow();
 
+	function updateSky()
+	{
+		self.obj.updateSky();
+	}
+
 	//Top color
 	this.form.addText("Top color");
 	this.colorTop = new ColorGradientChooser(document.body);
 	this.colorTop.size.set(190, 20);
 	this.colorTop.setOnChange(function(color, index)
 	{
-		Editor.history.add(new ChangeAction(self.obj.colorTop, index, color.clone()));
-		self.obj.updateSky();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj.colorTop, index, color.clone()), updateSky));
 	});
 	this.form.add(this.colorTop);
 	this.form.nextRow();
@@ -29,8 +33,7 @@ function SkyPanel(parent, obj)
 	this.colorBottom.size.set(190, 20);
 	this.colorBottom.setOnChange(function(color, index)
 	{
-		Editor.history.add(new ChangeAction(self.obj.colorBottom, index, color.clone()));
-		self.obj.updateSky();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj.colorBottom, index, color.clone()), updateSky));
 	});
 	this.form.add(this.colorBottom);
 	this.form.nextRow();
@@ -41,8 +44,7 @@ function SkyPanel(parent, obj)
 	this.sunColor.size.set(80, 18);
 	this.sunColor.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "sunColor", self.sunColor.getValueHex()));
-		self.obj.updateSky();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "sunColor", self.sunColor.getValueHex()), updateSky));
 	});
 	this.form.add(this.sunColor);
 	this.form.nextRow();
@@ -53,8 +55,7 @@ function SkyPanel(parent, obj)
 	this.moonColor.size.set(80, 18);
 	this.moonColor.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "moonColor", self.moonColor.getValueHex()));
-		self.obj.updateSky();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "moonColor", self.moonColor.getValueHex()), updateSky));
 	});
 	this.form.add(this.moonColor);
 	this.form.nextRow();
@@ -151,8 +152,7 @@ function SkyPanel(parent, obj)
 	this.sunDistance.setStep(10);
 	this.sunDistance.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "sunDistance", self.sunDistance.getValue()));
-		self.obj.updateSky();
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "sunDistance", self.sunDistance.getValue()), updateSky));
 	});
 	this.form.add(this.sunDistance);
 	this.form.nextRow();
@@ -180,11 +180,8 @@ function SkyPanel(parent, obj)
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.sun.shadow.mapSize.width = self.shadowWidth.getValue();
-			self.obj.sun.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.sun.shadow.mapSize, "width", self.shadowWidth.getValue()));
+		self.obj.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowWidth);
 	this.form.addText("x", true);
@@ -192,14 +189,12 @@ function SkyPanel(parent, obj)
 	this.shadowHeight.size.set(60, 18);
 	this.shadowHeight.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.sun.shadow.mapSize.height = self.shadowHeight.getValue();
-			self.obj.sun.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.sun.shadow.mapSize, "height", self.shadowHeight.getValue()));
+		self.obj.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowHeight);
 	this.form.nextRow();
+
 	for(var i = 5; i < 13; i++)
 	{
 		var size = Math.pow(2, i);
@@ -214,11 +209,8 @@ function SkyPanel(parent, obj)
 	this.shadowNear.setStep(0.1);
 	this.shadowNear.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.sun.shadow.camera.near = self.shadowNear.getValue();
-			self.obj.sun.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.sun.shadow.camera, "near", self.shadowNear.getValue()));
+		self.obj.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowNear);
 	this.form.nextRow();
@@ -230,11 +222,8 @@ function SkyPanel(parent, obj)
 	this.shadowFar.setStep(0.1);
 	this.shadowFar.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.sun.shadow.camera.far = self.shadowFar.getValue();
-			self.obj.sun.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.sun.shadow.camera, "far", self.shadowFar.getValue()));
+		self.obj.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowFar);
 	this.form.nextRow();
@@ -246,11 +235,8 @@ function SkyPanel(parent, obj)
 	this.shadowLeft.setStep(0.1);
 	this.shadowLeft.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.sun.shadow.camera.left = self.shadowLeft.getValue();
-			self.obj.sun.updateShadowMap();
-		}
+		self.obj.sun.shadow.camera.left = self.shadowLeft.getValue();
+		self.obj.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowLeft);
 	this.form.nextRow();
@@ -262,11 +248,8 @@ function SkyPanel(parent, obj)
 	this.shadowRight.setStep(0.1);
 	this.shadowRight.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.sun.shadow.camera.right = self.shadowRight.getValue();
-			self.obj.sun.updateShadowMap();
-		}
+		self.obj.sun.shadow.camera.right = self.shadowRight.getValue();
+		self.obj.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowRight);
 	this.form.nextRow();
@@ -278,11 +261,8 @@ function SkyPanel(parent, obj)
 	this.shadowTop.setStep(0.1);
 	this.shadowTop.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.sun.shadow.camera.top = self.shadowTop.getValue();
-			self.obj.sun.updateShadowMap();
-		}
+		self.obj.sun.shadow.camera.top = self.shadowTop.getValue();
+		self.obj.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowTop);
 	this.form.nextRow();
@@ -294,15 +274,11 @@ function SkyPanel(parent, obj)
 	this.shadowBottom.setStep(0.1);
 	this.shadowBottom.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.sun.shadow.camera.bottom = self.shadowBottom.getValue();
-			self.obj.sun.updateShadowMap();
-		}
+		self.obj.sun.shadow.camera.bottom = self.shadowBottom.getValue();
+		self.obj.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowBottom);
 	this.form.nextRow();
-
 }
 
 SkyPanel.prototype = Object.create(Panel.prototype);

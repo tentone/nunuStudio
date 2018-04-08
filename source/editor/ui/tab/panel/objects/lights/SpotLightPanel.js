@@ -29,7 +29,6 @@ function SpotLightPanel(parent, obj)
 	this.penumbra.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "penumbra", self.penumbra.getValue()));
-		self.penumbraText.setText(self.obj.penumbra);
 	});
 	this.form.add(this.penumbra);
 	this.form.nextRow();
@@ -43,7 +42,6 @@ function SpotLightPanel(parent, obj)
 	this.angle.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "angle", self.angle.getValue()));
-		self.angleText.setText(self.obj.angle);
 	});
 	this.form.add(this.angle);
 	this.form.nextRow();
