@@ -19,7 +19,6 @@ function SkyPanel(parent, obj)
 	{
 		Editor.history.add(new ChangeAction(self.obj.colorTop, index, color.clone()));
 		self.obj.updateSky();
-		//CREATE HISTORY ACTION WITH CALLBACK ON APPLY / REVERT
 	});
 	this.form.add(this.colorTop);
 	this.form.nextRow();
@@ -68,10 +67,7 @@ function SkyPanel(parent, obj)
 	this.intensity.setRange(0, 1);
 	this.intensity.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "intensity", self.intensity.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "intensity", self.intensity.getValue()));
 	});
 	this.form.add(this.intensity);
 	this.form.nextRow();
@@ -86,10 +82,7 @@ function SkyPanel(parent, obj)
 	this.autoUpdate.size.set(15, 15);
 	this.autoUpdate.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "autoUpdate", self.autoUpdate.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "autoUpdate", self.autoUpdate.getValue()));
 	});
 	this.form.add(this.autoUpdate);
 	this.form.nextRow();
@@ -101,27 +94,24 @@ function SkyPanel(parent, obj)
 	this.dayTime.setStep(0.1);
 	this.dayTime.setOnChange(function()
 	{
-		if(self.obj !== null)
+		//Check and set day time
+		var dayTime = self.dayTime.getValue();
+		if(dayTime < 0)
 		{
-			//Check and set day time
-			var dayTime = self.dayTime.getValue();
-			if(dayTime < 0)
-			{
-				dayTime = 0;
-				self.dayTime.setValue(dayTime);
-			}
-			Editor.history.add(new ChangeAction(self.obj, "dayTime", dayTime));
-
-			//Check actual time
-			if(self.obj.time > dayTime)
-			{
-				Editor.history.add(new ChangeAction(self.obj, "time", dayTime));
-				self.time.setValue(dayTime);
-			}
-
-			self.time.setRange(0, dayTime);
-			self.obj.updateSky();
+			dayTime = 0;
+			self.dayTime.setValue(dayTime);
 		}
+		Editor.history.add(new ChangeAction(self.obj, "dayTime", dayTime));
+
+		//Check actual time
+		if(self.obj.time > dayTime)
+		{
+			Editor.history.add(new ChangeAction(self.obj, "time", dayTime));
+			self.time.setValue(dayTime);
+		}
+
+		self.time.setRange(0, dayTime);
+		self.obj.updateSky();
 	});
 	this.form.add(this.dayTime);
 	this.form.addText("s", true);
@@ -134,24 +124,21 @@ function SkyPanel(parent, obj)
 	this.time.setStep(0.1);
 	this.time.setOnChange(function()
 	{
-		if(self.obj !== null)
+		var time = self.time.getValue();
+
+		if(time < 0)
 		{
-			var time = self.time.getValue();
-
-			if(time < 0)
-			{
-				time = 0;
-				self.time.setValue(time);
-			}
-			else if(time > self.obj.dayTime)
-			{
-				time = self.obj.dayTime;
-				self.time.setValue(time);
-			}
-
-			Editor.history.add(new ChangeAction(self.obj, "time", time));
-			self.obj.updateSky();
+			time = 0;
+			self.time.setValue(time);
 		}
+		else if(time > self.obj.dayTime)
+		{
+			time = self.obj.dayTime;
+			self.time.setValue(time);
+		}
+
+		Editor.history.add(new ChangeAction(self.obj, "time", time));
+		self.obj.updateSky();
 	});
 	this.form.add(this.time);
 	this.form.addText("s", true);
@@ -164,11 +151,8 @@ function SkyPanel(parent, obj)
 	this.sunDistance.setStep(10);
 	this.sunDistance.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "sunDistance", self.sunDistance.getValue()));
-			self.obj.updateSky();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "sunDistance", self.sunDistance.getValue()));
+		self.obj.updateSky();
 	});
 	this.form.add(this.sunDistance);
 	this.form.nextRow();
@@ -185,10 +169,7 @@ function SkyPanel(parent, obj)
 	this.castShadow.updateInterface();
 	this.castShadow.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj.sun, "castShadow", self.castShadow.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj.sun, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();

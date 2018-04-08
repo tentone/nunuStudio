@@ -444,6 +444,7 @@ include("editor/history/History.js");
 include("editor/history/action/Action.js");
 include("editor/history/action/ChangeAction.js");
 include("editor/history/action/ActionBundle.js");
+include("editor/history/action/CallbackAction.js");
 include("editor/history/action/object/ObjectAddedAction.js");
 include("editor/history/action/object/ObjectRemovedAction.js");
 include("editor/history/action/object/ObjectMovedAction.js");
