@@ -387,7 +387,6 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.addText("Color");
 	this.form.nextRow();
 
-	/*
 	this.form.addText("Base");
 	this.colorValue = new ColorGradientChooser(this.form.element);
 	this.colorValue.size.set(190, 20);
@@ -401,6 +400,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.colorValue);
 	this.form.nextRow();
 
+	/*
 	this.form.addText("Spread");
 	this.form.nextRow();
 	this.colorSpread = new ColorGradientChooser(this.form.element);
@@ -413,7 +413,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	*/
 	
-	this.colorValue = [];
+	/*this.colorValue = [];
 	this.colorSpread = [];
 
 	function addColorValue(index)
@@ -463,7 +463,7 @@ function ParticleEditor(parent, closeable, container, index)
 		{
 			this.form.nextRow();
 		}
-	}
+	}*/
 }
 
 ParticleEditor.prototype = Object.create(TabElement.prototype);
@@ -550,9 +550,10 @@ ParticleEditor.prototype.attach = function(particle)
 	this.angleMin.setValue(this.angle.min);
 	this.angleMax.setValue(this.angle.max);
 
-	//this.colorValue.setValue(particle.emitter.color.value);
+	this.colorValue.setValue(particle.emitter.color.value);
 	//this.colorSpread.setValue(particle.emitter.color.spread);
-	
+		
+	/*
 	for(var i = 0; i < 4; i++)
 	{
 		var value = particle.emitter.color.value[i];
@@ -560,6 +561,7 @@ ParticleEditor.prototype.attach = function(particle)
 		var spread = particle.emitter.color.spread[i];
 		this.colorSpread[i].setValue(spread.x, spread.y, spread.z);
 	}
+	*/
 
 	//Create runtime particle to preview particle
 	this.particle.reload();

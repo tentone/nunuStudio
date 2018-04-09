@@ -42,6 +42,7 @@ THREE.SVGLoader.prototype = {
 					break;
 
 				case 'path':
+					parseStyle( node, style );
 					paths.push( parsePathNode( node, style ) );
 					break;
 
@@ -148,7 +149,7 @@ THREE.SVGLoader.prototype = {
 							numbers[ 2 ],
 							numbers[ 3 ],
 							numbers[ 4 ],
-							numbers[ 5 ],
+							numbers[ 5 ]
 						);
 						control.x = numbers[ 2 ];
 						control.y = numbers[ 3 ];
@@ -248,7 +249,7 @@ THREE.SVGLoader.prototype = {
 							point.x + numbers[ 2 ],
 							point.y + numbers[ 3 ],
 							point.x + numbers[ 4 ],
-							point.y + numbers[ 5 ],
+							point.y + numbers[ 5 ]
 						);
 						point.x += numbers[ 4 ];
 						point.y += numbers[ 5 ];
@@ -458,7 +459,7 @@ THREE.SVGLoader.prototype = {
 
 		function parseStyle( node, style ) {
 
-			style.fill = node.style.fill;
+			if ( node.style.fill !== '' ) style.fill = node.style.fill;
 
 		}
 
@@ -470,7 +471,7 @@ THREE.SVGLoader.prototype = {
 
 			}
 
-			if ( style.fill !== '' ) {
+			if ( style.fill !== '' && style.fill !== 'none' ) {
 
 				return style.fill;
 
