@@ -399,71 +399,19 @@ function ParticleEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.colorValue);
 	this.form.nextRow();
-
-	/*
+	
 	this.form.addText("Spread");
-	this.form.nextRow();
 	this.colorSpread = new ColorGradientChooser(this.form.element);
 	this.colorSpread.size.set(190, 20);
 	this.colorSpread.setOnChange(function(color, index)
 	{
-		//TODO <ADD CODE HERE>
+		Editor.history.add(new CallbackAction(new ChangeAction(self.particle.emitter.color.spread, index, new THREE.Vector3(color.r, color.g, color.b)), function()
+		{
+			self.particle.reload();
+		}));
 	});
 	this.form.add(this.colorSpread);
 	this.form.nextRow();
-	*/
-	
-	/*this.colorValue = [];
-	this.colorSpread = [];
-
-	function addColorValue(index)
-	{
-		return function()
-		{
-			var color = self.colorValue[index].getValue();
-			self.particle.emitter.color.value[index].r = color.r;
-			self.particle.emitter.color.value[index].g = color.g;
-			self.particle.emitter.color.value[index].b = color.b;
-			self.particle.reload();
-		};
-	}
-
-	function addColorSpread(index)
-	{
-		return function()
-		{
-			var color = self.colorSpread[index].getValue();
-			self.particle.emitter.color.spread[index].x = color.r;
-			self.particle.emitter.color.spread[index].y = color.g;
-			self.particle.emitter.color.spread[index].z = color.b;
-			self.particle.reload();
-		};
-	}
-	
-	for(var i = 0; i < 4; i++)
-	{
-		this.form.addText((25*i + 25) + "%");
-		
-		var value = new ColorChooser(self.form.element);
-		value.size.set(80, 18);
-		value.setOnChange(addColorValue(i));
-
-		this.colorValue[i] = value;
-		this.form.add(value);
-		this.form.addText("+/-", true);
-
-		var spread = new ColorChooser(self.form.element);
-		spread.size.set(80, 18);
-		spread.setOnChange(addColorSpread(i));
-
-		this.colorSpread[i] = spread;
-		this.form.add(spread);
-
-		if(i + 1 < 4)
-		{
-			this.form.nextRow();
-		}
-	}*/
 }
 
 ParticleEditor.prototype = Object.create(TabElement.prototype);
@@ -551,17 +499,14 @@ ParticleEditor.prototype.attach = function(particle)
 	this.angleMax.setValue(this.angle.max);
 
 	this.colorValue.setValue(particle.emitter.color.value);
-	//this.colorSpread.setValue(particle.emitter.color.spread);
-		
-	/*
+
+	var colorSpread = [];
 	for(var i = 0; i < 4; i++)
 	{
-		var value = particle.emitter.color.value[i];
-		this.colorValue[i].setValue(value.r, value.g, value.b);
-		var spread = particle.emitter.color.spread[i];
-		this.colorSpread[i].setValue(spread.x, spread.y, spread.z);
+		var color = particle.emitter.color.spread[i];
+		colorSpread.push(new THREE.Color(color.x, color.y, color.z));
 	}
-	*/
+	this.colorSpread.setValue(colorSpread);
 
 	//Create runtime particle to preview particle
 	this.particle.reload();

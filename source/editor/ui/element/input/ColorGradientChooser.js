@@ -87,6 +87,9 @@ ColorGradientChooser.prototype.updateButtons = function()
 
 ColorGradientChooser.prototype.updateValues = function()
 {
+	this.canvas.width = this.size.x;
+	this.canvas.height = this.size.y;
+		
 	var context = this.canvas.getContext("2d");
 	var gradient = context.createLinearGradient(0, 0, this.canvas.width, 0);
 
@@ -141,9 +144,6 @@ ColorGradientChooser.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.canvas.width = this.size.x;
-		this.canvas.height = this.size.y;
-
 		this.element.style.visibility = "visible";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";

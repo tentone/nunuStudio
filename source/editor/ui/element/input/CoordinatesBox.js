@@ -91,7 +91,7 @@ function CoordinatesBox(parent)
 	this.mode = CoordinatesBox.VECTOR3;
 
 	//Attributes
-	this.size.set(180, 18);
+	this.size.set(190, 18);
 }
 
 //Positionbox mode
