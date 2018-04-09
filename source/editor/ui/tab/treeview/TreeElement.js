@@ -179,6 +179,12 @@ function TreeElement(container)
 					context.addOption("Particle editor", openParticleTab);
 				}
 			}
+	
+			//Recalculate Origin
+			context.addOption("Recalculate Origin", function()
+			{
+				ObjectUtils.recalculateGeometryOrigin(self.obj);
+			});
 
 			//Rename
 			context.addOption("Rename", function()

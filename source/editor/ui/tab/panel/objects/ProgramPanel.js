@@ -195,21 +195,18 @@ ProgramPanel.prototype.updateRenderer = function()
 ProgramPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
+	
+	this.author.setText(this.obj.author);
+	this.version.setText(this.obj.version);
+	this.lockPointer.setValue(this.obj.lockPointer);
+	this.handlePixelRatio.setValue(this.obj.handlePixelRatio);
+	this.vr.setValue(this.obj.vr);
+	this.vrScale.setValue(this.obj.vrScale);
 
-	if(this.obj !== null)
-	{
-		this.author.setText(this.obj.author);
-		this.version.setText(this.obj.version);
-		this.lockPointer.setValue(this.obj.lockPointer);
-		this.handlePixelRatio.setValue(this.obj.handlePixelRatio);
-		this.vr.setValue(this.obj.vr);
-		this.vrScale.setValue(this.obj.vrScale);
-
-		this.shadows.setValue(this.obj.shadows);
-		this.shadowsType.setValue(this.obj.shadowsType);
-		this.antialiasing.setValue(this.obj.antialiasing);
-		this.toneMapping.setValue(this.obj.toneMapping);
-		this.toneMappingExposure.setValue(this.obj.toneMappingExposure);
-		this.toneMappingWhitePoint.setValue(this.obj.toneMappingWhitePoint);					
-	}
+	this.shadows.setValue(this.obj.shadows);
+	this.shadowsType.setValue(this.obj.shadowsType);
+	this.antialiasing.setValue(this.obj.antialiasing);
+	this.toneMapping.setValue(this.obj.toneMapping);
+	this.toneMappingExposure.setValue(this.obj.toneMappingExposure);
+	this.toneMappingWhitePoint.setValue(this.obj.toneMappingWhitePoint);
 };

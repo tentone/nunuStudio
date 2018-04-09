@@ -125,3 +125,69 @@ ObjectUtils.isChildOf = function(parent, child)
 	
 	return false;
 };
+
+/**
+ * Calculates a bouding box for an object considering all its children.
+ *
+ * @method calculateBoudingBox
+ * @param {Object3D} object
+ * @return {Box3} Bouding box calculated.
+ */
+ObjectUtils.calculateBoundingBox = function(object)
+{
+	var box = null;
+
+	object.traverse(function(children)
+	{
+		if(children.geometry !== undefined)
+		{
+			children.geometry.computeBoundingBox();
+			var boundingBox = children.geometry.boundingBox;
+
+			if(box === null)
+			{
+				box = boundingBox.clone();
+			}
+			//Ajust box size
+			else
+			{
+				if(boundingBox.min.x < box.min.x) {box.min.x = boundingBox.min.x;}
+				if(boundingBox.max.x > box.max.x) {box.max.x = boundingBox.max.x;}
+				if(boundingBox.min.y < box.min.y) {box.min.y = boundingBox.min.y;}
+				if(boundingBox.max.y > box.max.y) {box.max.y = boundingBox.max.y;}
+				if(boundingBox.min.z < box.min.z) {box.min.z = boundingBox.min.z;}
+				if(boundingBox.max.z > box.max.z) {box.max.z = boundingBox.max.z;}
+			}
+		}
+	});
+
+	return box;
+};
+
+/**
+ * Recalculate all children origins, to be centered with their geometry.
+ *
+ * @method recalculateGeometryOrigin
+ * @param {Object3D} object Object to recalculate origin of.
+ */
+ObjectUtils.recalculateGeometryOrigin = function(object)
+{
+	object.traverse(function(children)
+	{
+		if(children.geometry !== undefined)
+		{
+			children.geometry.computeBoundingBox();
+
+			var box = children.geometry.boundingBox.clone();
+			box.applyMatrix4(children.matrixWorld);
+
+			var center = box.getCenter(new THREE.Vector3());
+
+			children.position.copy(center);
+
+			var matrix = new THREE.Matrix4();
+			matrix.makeTranslation(-center.x, -center.y, -center.z);
+			children.geometry.applyMatrix(matrix);
+		}
+	});
+};
