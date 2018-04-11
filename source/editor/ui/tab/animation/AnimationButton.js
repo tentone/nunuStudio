@@ -149,7 +149,7 @@ AnimationButton.prototype = Object.create(Element.prototype);
 
 AnimationButton.prototype.updateAnimation = function()
 {
-	this.name.innerHTML = this.animation.name;
+	this.name.appendChild(document.createTextNode(this.animation.name));
 };
 
 AnimationButton.prototype.updateInterface = function()

@@ -33,7 +33,7 @@ DropdownList.prototype.setOnChange = function(onChange)
 DropdownList.prototype.addValue = function(text, value)
 {
 	var option = document.createElement("option");
-	option.innerHTML = text;
+	option.appendChild(document.createTextNode(text));
 	this.values.push(value);
 	this.element.appendChild(option);
 }

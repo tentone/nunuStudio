@@ -41,7 +41,11 @@ function Graph(parent, name, color)
 		scale.style.position = "absolute";
 		scale.style.pointerEvents = "none";
 		scale.style.color = Editor.theme.textColor;
-		scale.innerHTML = 1.0 - (0.5 * i);
+
+		var text = document.createTextNode(1.0 - (0.5 * i));
+		scale.text = text;
+		scale.appendChild(text);
+
 		this.scale.push(scale);
 		this.element.appendChild(scale);
 	}	
@@ -109,7 +113,7 @@ Graph.prototype.setRange = function(min, max)
 	var step = (this.max - this.min) / (this.scale.length - 1);
 	for(var i = 0; i < this.scale.length; i++)
 	{
-		this.scale[this.scale.length - 1 - i].innerHTML = this.min + (step * i);
+		this.scale[this.scale.length - 1 - i].text.data = this.min + (step * i);
 	}
 
 	//Update grid to fit new scale
