@@ -245,23 +245,23 @@ ConsoleTab.createMessage = function(object)
 		table.style.display = "inline-block";
 
 		var type = table.insertRow(0);
-		type.insertCell(0).innerHTML = "Image";
+		type.insertCell(0).appendChild(document.createTextNode("Image"));
 
 		var name = table.insertRow(1);
-		name.insertCell(0).innerHTML = "Name";
-		name.insertCell(1).innerHTML = object.name;
+		name.insertCell(0).appendChild(document.createTextNode("Name"));
+		name.insertCell(1).appendChild(document.createTextNode(object.name));
 
 		var uuid = table.insertRow(2);
-		uuid.insertCell(0).innerHTML = "UUID";
-		uuid.insertCell(1).innerHTML = object.uuid;
+		uuid.insertCell(0).appendChild(document.createTextNode("UUID"));
+		uuid.insertCell(1).appendChild(document.createTextNode(object.uuid));
 
 		var format = table.insertRow(3);
-		format.insertCell(0).innerHTML = "Format";
-		format.insertCell(1).innerHTML = object.format;
+		format.insertCell(0).appendChild(document.createTextNode("Format"));
+		format.insertCell(1).appendChild(document.createTextNode(object.format));
 
 		var encoding = table.insertRow(4);
-		encoding.insertCell(0).innerHTML = "Encoding";
-		encoding.insertCell(1).innerHTML = object.encoding;
+		encoding.insertCell(0).appendChild(document.createTextNode("Encoding"));
+		encoding.insertCell(1).appendChild(document.createTextNode(object.encoding));
 
 		log.appendChild(table);
 	}
@@ -275,16 +275,16 @@ ConsoleTab.createMessage = function(object)
 		table.style.display = "inline-block";
 
 		var type = table.insertRow(0);
-		type.insertCell(0).innerHTML = "Type";
-		type.insertCell(1).innerHTML = object.type;
+		type.insertCell(0).appendChild(document.createTextNode("Type";
+		type.insertCell(1).appendChild(document.createTextNode(object.type;
 
 		var name = table.insertRow(1);
-		name.insertCell(0).innerHTML = "Name";
-		name.insertCell(1).innerHTML = object.name;
+		name.insertCell(0).appendChild(document.createTextNode("Name";
+		name.insertCell(1).appendChild(document.createTextNode(object.name;
 
 		var uuid = table.insertRow(2);
-		uuid.insertCell(0).innerHTML = "UUID";
-		uuid.insertCell(1).innerHTML = object.uuid;
+		uuid.insertCell(0).appendChild(document.createTextNode("UUID";
+		uuid.insertCell(1).appendChild(document.createTextNode(object.uuid;
 
 		log.appendChild(table);
 	}*/
@@ -298,16 +298,16 @@ ConsoleTab.createMessage = function(object)
 		table.style.display = "inline-block";
 
 		var type = table.insertRow(0);
-		type.insertCell(0).innerHTML = "Type";
-		type.insertCell(1).innerHTML = object.type;
+		type.insertCell(0).appendChild(document.createTextNode("Type"));
+		type.insertCell(1).appendChild(document.createTextNode(object.type));
 
 		var name = table.insertRow(1);
-		name.insertCell(0).innerHTML = "Name";
-		name.insertCell(1).innerHTML = object.name;
+		name.insertCell(0).appendChild(document.createTextNode("Name"));
+		name.insertCell(1).appendChild(document.createTextNode(object.name));
 
 		var uuid = table.insertRow(2);
-		uuid.insertCell(0).innerHTML = "UUID";
-		uuid.insertCell(1).innerHTML = object.uuid;
+		uuid.insertCell(0).appendChild(document.createTextNode("UUID"));
+		uuid.insertCell(1).appendChild(document.createTextNode(object.uuid));
 
 		log.appendChild(table);
 	}
@@ -317,12 +317,12 @@ ConsoleTab.createMessage = function(object)
 		table.style.display = "inline-block";
 
 		var coord = table.insertRow(0);
-		coord.insertCell(0).innerHTML = "X";
-		coord.insertCell(1).innerHTML = "Y";
+		coord.insertCell(0).appendChild(document.createTextNode("X"));
+		coord.insertCell(1).appendChild(document.createTextNode("Y"));
 
 		var value = table.insertRow(1);
-		value.insertCell(0).innerHTML = object.x;
-		value.insertCell(1).innerHTML = object.y;
+		value.insertCell(0).appendChild(document.createTextNode(object.x));
+		value.insertCell(1).appendChild(document.createTextNode(object.y));
 
 		log.appendChild(table);
 	}
@@ -332,14 +332,14 @@ ConsoleTab.createMessage = function(object)
 		table.style.display = "inline-block";
 
 		var coord = table.insertRow(0);
-		coord.insertCell(0).innerHTML = "X";
-		coord.insertCell(1).innerHTML = "Y";
-		coord.insertCell(2).innerHTML = "Z";
+		coord.insertCell(0).appendChild(document.createTextNode("X"));
+		coord.insertCell(1).appendChild(document.createTextNode("Y"));
+		coord.insertCell(2).appendChild(document.createTextNode("Z"));
 
 		var value = table.insertRow(1);
-		value.insertCell(0).innerHTML = object.x;
-		value.insertCell(1).innerHTML = object.y;
-		value.insertCell(2).innerHTML = object.z;
+		value.insertCell(0).appendChild(document.createTextNode(object.x));
+		value.insertCell(1).appendChild(document.createTextNode(object.y));
+		value.insertCell(2).appendChild(document.createTextNode(object.z));
 
 		log.appendChild(table);
 	}
@@ -349,16 +349,16 @@ ConsoleTab.createMessage = function(object)
 		table.style.display = "inline-block";
 
 		var coord = table.insertRow(0);
-		coord.insertCell(0).innerHTML = "X";
-		coord.insertCell(1).innerHTML = "Y";
-		coord.insertCell(2).innerHTML = "Z";
-		coord.insertCell(3).innerHTML = "W";
+		coord.insertCell(0).appendChild(document.createTextNode("X"));
+		coord.insertCell(1).appendChild(document.createTextNode("Y"));
+		coord.insertCell(2).appendChild(document.createTextNode("Z"));
+		coord.insertCell(3).appendChild(document.createTextNode("W"));
 
 		var value = table.insertRow(1);
-		value.insertCell(0).innerHTML = object.x;
-		value.insertCell(1).innerHTML = object.y;
-		value.insertCell(2).innerHTML = object.z;
-		value.insertCell(3).innerHTML = object.w;
+		value.insertCell(0).appendChild(document.createTextNode(object.x));
+		value.insertCell(1).appendChild(document.createTextNode(object.y));
+		value.insertCell(2).appendChild(document.createTextNode(object.z));
+		value.insertCell(3).appendChild(document.createTextNode(object.w));
 
 		log.appendChild(table);
 	}
@@ -370,10 +370,10 @@ ConsoleTab.createMessage = function(object)
 		for(var i = 0, j = 0; i < 16; i += 4, j++)
 		{
 			var row = table.insertRow(j);
-			row.insertCell(0).innerHTML = object.elements[i];
-			row.insertCell(1).innerHTML = object.elements[i + 1];
-			row.insertCell(2).innerHTML = object.elements[i + 2];
-			row.insertCell(3).innerHTML = object.elements[i + 3];
+			row.insertCell(0).appendChild(document.createTextNode(object.elements[i]));
+			row.insertCell(1).appendChild(document.createTextNode(object.elements[i + 1]));
+			row.insertCell(2).appendChild(document.createTextNode(object.elements[i + 2]));
+			row.insertCell(3).appendChild(document.createTextNode(object.elements[i + 3]));
 		}
 
 		log.appendChild(table);
@@ -386,20 +386,20 @@ ConsoleTab.createMessage = function(object)
 		for(var i = 0, j = 0; i < 9; i += 3, j++)
 		{
 			var row = table.insertRow(j);
-			row.insertCell(0).innerHTML = object.elements[i];
-			row.insertCell(1).innerHTML = object.elements[i + 1];
-			row.insertCell(2).innerHTML = object.elements[i + 2];
+			row.insertCell(0).appendChild(document.createTextNode(object.elements[i]));
+			row.insertCell(1).appendChild(document.createTextNode(object.elements[i + 1]));
+			row.insertCell(2).appendChild(document.createTextNode(object.elements[i + 2]));
 		}
 
 		log.appendChild(table);
 	}
 	else if(object === null)
 	{
-		log.innerHTML = "null";
+		log.appendChild(document.createTextNode("null"));
 	}
 	else
 	{
-		log.innerHTML = object;
+		log.appendChild(document.createTextNode(object));
 	}
 
 	return log;
