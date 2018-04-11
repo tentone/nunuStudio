@@ -44,6 +44,8 @@ function ParticleEmitter(group, emitter)
 	this.name = "particle";
 	this.frustumCulled = false;
 
+	this.dynamicEmitter = false;
+
 	var self = this;
 	Object.defineProperties(this,
 	{
@@ -131,6 +133,28 @@ ParticleEmitter.prototype.reload = function()
 };
 
 /**
+ * Update particle object matrix.
+ *
+ * Ignores the particle position if the moveEmitter attribute is set true.
+ * 
+ * @method updateMatrix
+ */
+ParticleEmitter.prototype.updateMatrix = function()
+{
+	if(this.dynamicEmitter)
+	{
+		this.matrix.makeRotationFromQuaternion(this.quaternion);
+		this.matrix.scale(this.scale);
+	}
+	else
+	{
+		this.matrix.compose(this.position, this.quaternion, this.scale);
+	}
+
+	this.matrixWorldNeedsUpdate = true;
+};
+
+/**
  * Particle emitter state is automatically updated before rendering.
  * 
  * @method onBeforeRender
@@ -140,7 +164,10 @@ ParticleEmitter.prototype.onBeforeRender = function(renderer, scene, camera, ren
 	this.group.uniforms.scale.value = renderer.getCurrentViewport().w;
 	this.group.tick(this.clock.getDelta());
 
-	//this.emitter.position.value = this.position;
+	if(this.dynamicEmitter)
+	{
+		this.emitter.position.value = this.position;	
+	}
 };
 
 /**
