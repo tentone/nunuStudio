@@ -165,7 +165,7 @@ AnimationTrackButton.prototype = Object.create(Element.prototype);
 
 AnimationTrackButton.prototype.updateTrack = function()
 {
-	this.name.innerHTML = this.track.name;
+	this.name.appendChild(document.createTextNode(this.track.name));
 	this.color.setValueString(this.track.color);
 	this.interpolation.setValue(this.track.getInterpolation());
 };

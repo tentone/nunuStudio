@@ -21,8 +21,11 @@ function AudioPlayer(parent)
 	this.timer.style.width = "40px";
 	this.timer.style.height = "100%";
 	this.timer.style.right = "0px";
-	this.timer.innerHTML = "00:00";
 	this.element.appendChild(this.timer);
+
+	//Text
+	this.timerText = document.createTextNode("00:00");
+	this.timer.appendChild(this.timerText);
 
 	//Button
 	this.button = document.createElement("button");
@@ -166,7 +169,7 @@ function AudioPlayer(parent)
 				minutes = "0" + minutes;
 			}
 			
-			self.timer.innerHTML = minutes + ":" + seconds;
+			self.timerText.data = minutes + ":" + seconds;
 
 			if(self.buffer !== null)
 			{

@@ -19,8 +19,12 @@ function Slider(parent)
 	this.text.style.borderRadius = "5px";
 	this.text.style.color = Editor.theme.textColor;
 	this.text.style.backgroundColor = Editor.theme.barColor;
-	this.text.style.borderColor = Editor.theme.barColor;
+	this.text.style.borderColor = Editor.theme.barColor;	
 	document.body.appendChild(this.text);
+
+	//Text value
+	this.textValue = document.createTextNode("");
+	this.text.appendChild(this.textValue);
 
 	//Mouse mouse move event
 	this.element.onmousemove = function(event)
@@ -221,7 +225,7 @@ Slider.prototype.setValue = function(value)
 	var progress = ((this.value - this.min) / (this.max - this.min)) * 100;
 	this.progress.style.width = progress + "%";
 	this.scrubber.style.left = progress + "%";
-	this.text.innerHTML = value;
+	this.textValue.data = value;
 };
 
 //Get Slider value

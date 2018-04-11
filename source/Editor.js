@@ -1074,7 +1074,12 @@ Editor.updateSelectionGUI = function()
 	var tab = Editor.gui.bottomTab.getActual();
 	if(tab !== null)
 	{
+		//var time = performance.now();
+		
 		tab.updateSelection();
+
+		//var delta = performance.now() - time;
+		//console.log("Bottom tab update: " + delta + "ms");
 	}
 
 	//Right side tab group
@@ -1085,7 +1090,7 @@ Editor.updateSelectionGUI = function()
 		tab.updateSelection();
 	}*/
 
-	Editor.gui.treeView.updateSelectedObject();
+	Editor.gui.treeView.updateSelection();
 
 	Editor.gui.panelContainer.updateSelection();
 };

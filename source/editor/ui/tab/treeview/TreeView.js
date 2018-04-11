@@ -148,11 +148,11 @@ TreeView.prototype.createProgramTree = function()
 };
 
 //Update which object is currently selected
-TreeView.prototype.updateSelectedObject = function()
+TreeView.prototype.updateSelection = function()
 {
 	if(this.root !== null)
 	{
-		TreeView.updateSelectedObject(this.root);
+		TreeView.updateSelection(this.root);
 	}
 };
 
@@ -194,14 +194,14 @@ TreeView.fillTree = function(root, object)
 };
 
 //Update treeview to highlight the selected object
-TreeView.updateSelectedObject = function(tree)
+TreeView.updateSelection = function(tree)
 {
 	tree.element.style.backgroundColor = Editor.isObjectSelected(tree.obj) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
 
 	var children = tree.children;
 	for(var i = 0; i < children.length; i++)
 	{
-		TreeView.updateSelectedObject(children[i]);
+		TreeView.updateSelection(children[i]);
 	}
 };
 

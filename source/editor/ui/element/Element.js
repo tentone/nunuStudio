@@ -56,8 +56,11 @@ Element.prototype.setAltText = function(altText)
 	element.style.borderColor = Editor.theme.barColor;
 	element.style.width = "fit-content";
 	element.style.height = "fit-content";
-	element.innerHTML = altText;
 	document.body.appendChild(element);
+
+	//Text
+	var text = document.createTextNode(altText);
+	element.appendChild(text);
 
 	//Destroy
 	var destroyFunction = this.destroy;

@@ -10,7 +10,7 @@ function CoordinatesBox(parent)
 	this.xText.style.width = "15px";
 	this.xText.style.textAlign = "center";
 	this.xText.style.verticalAlign = "middle";
-	this.xText.innerHTML = "X";
+	this.xText.appendChild(document.createTextNode("X"));
 	this.element.appendChild(this.xText);
 
 	//X
@@ -32,7 +32,7 @@ function CoordinatesBox(parent)
 	this.yText.style.width = "15px";
 	this.yText.style.textAlign = "center";
 	this.yText.style.verticalAlign = "middle";
-	this.yText.innerHTML = "Y";
+	this.yText.appendChild(document.createTextNode("Y"));
 	this.element.appendChild(this.yText);
 
 	//Y
@@ -53,7 +53,7 @@ function CoordinatesBox(parent)
 	this.zText.style.width = "15px";
 	this.zText.style.textAlign = "center";
 	this.zText.style.verticalAlign = "middle";
-	this.zText.innerHTML = "Z";
+	this.zText.appendChild(document.createTextNode("Z"));
 	this.element.appendChild(this.zText);
 
 	//Z
@@ -74,7 +74,7 @@ function CoordinatesBox(parent)
 	this.wText.style.width = "15px";
 	this.wText.style.textAlign = "center";
 	this.wText.style.verticalAlign = "middle";
-	this.wText.innerHTML = "W";
+	this.wText.appendChild(document.createTextNode("W"));
 	this.element.appendChild(this.wText);
 
 	//W

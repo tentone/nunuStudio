@@ -29,8 +29,11 @@ function TabButton(parent, tab)
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
 	this.text.style.color = Editor.theme.textColor;
-	this.text.innerHTML = tab.title;
 	this.element.appendChild(this.text);
+
+	//Title
+	this.title = document.createTextNode(tab.title);
+	this.text.appendChild(this.title);
 
 	//Close button
 	this.close = document.createElement("img");
@@ -210,7 +213,7 @@ TabButton.prototype.setIcon = function(icon)
 TabButton.prototype.setName = function(text)
 {
 	this.tab.title = text;
-	this.text.innerHTML = text;
+	this.title.data = text;
 };
 
 //Update Interface

@@ -36,6 +36,10 @@ function Asset(parent)
 	this.text.style.bottom = "0px";
 	this.element.appendChild(this.text);
 
+	//Text
+	this.name = document.createTextNode("");
+	this.text.appendChild(this.name);
+
 	//Icon scale
 	this.scale = new THREE.Vector2(0.65, 0.65);
 
@@ -73,7 +77,7 @@ Asset.prototype.setIcon = function(icon)
 //Set file label
 Asset.prototype.setText = function(text)
 {
-	this.text.innerHTML = text;
+	this.name.data = text;
 };
 
 //Update metadata

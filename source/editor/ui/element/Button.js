@@ -16,6 +16,10 @@ function Button(parent)
 	this.span.style.whiteSpace = "pre";
 	this.element.appendChild(this.span);
 
+	//Text
+	this.text = document.createTextNode("");
+	this.span.appendChild(this.text);
+
 	this.preventDragEvents();
 
 	//Mouse over and mouse out events
@@ -35,7 +39,7 @@ Button.prototype = Object.create(Element.prototype);
 //Set Button text
 Button.prototype.setText = function(text)
 {
-	this.span.innerHTML = text;
+	this.text.data = text;
 };
 
 //Set button callback function

@@ -12,8 +12,11 @@ function Text(parent)
 	//Span
 	this.span = document.createElement("span");
 	this.span.style.whiteSpace = "pre";
-	this.span.innerHTML = "text";
 	this.element.appendChild(this.span);
+
+	//Text
+	this.text = document.createTextNode("text");
+	this.span.appendChild(this.text);
 
 	this.setAlignment(Text.CENTER);
 
@@ -35,7 +38,7 @@ Text.prototype = Object.create(Element.prototype);
 //Set Text
 Text.prototype.setText = function(text)
 {
-	this.span.innerHTML = text;
+	this.text.data = text;
 };
 
 //Set Text Size

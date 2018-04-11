@@ -31,7 +31,7 @@ function TabGroup(parent)
 	this.empty.style.flexDirection = "column";
 	this.empty.style.justifyContent = "center";
 	this.empty.style.pointerEvents = "none";
-	this.empty.innerHTML = "Open new tab to edit content or create new project";
+	this.empty.appendChild(document.createTextNode("Open new tab to edit content or create new project"));
 	this.tab.appendChild(this.empty);
 
 	//Options

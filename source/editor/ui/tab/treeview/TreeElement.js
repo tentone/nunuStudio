@@ -53,15 +53,18 @@ function TreeElement(container)
 	this.icon.style.top = "3px";
 	this.element.appendChild(this.icon);
 
-	//Text
+	//Label
 	this.label = document.createElement("span");
-	this.icon.draggable = false;
 	this.label.style.overflow = "hidden";
 	this.label.style.position = "absolute";
 	this.label.style.pointerEvents = "none";
 	this.label.style.whiteSpace = "nowrap";
 	this.label.style.top = "4px";
 	this.element.appendChild(this.label);
+
+	//Label text
+	this.labelText = document.createTextNode("");
+	this.label.appendChild(this.labelText);
 
 	var self = this;
 
@@ -541,7 +544,7 @@ TreeElement.prototype.attach = function(obj)
 
 	this.element.draggable = !obj.locked;
 
-	this.label.innerHTML = obj.name;
+	this.labelText.data = obj.name;
 	this.icon.src = this.obj.locked ? ObjectIcons.locked : ObjectIcons.get(obj.type);
 	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
 	
@@ -624,7 +627,7 @@ TreeElement.prototype.updateInterface = function()
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		
-		this.label.innerHTML = this.obj.name;
+		this.labelText.data = this.obj.name;
 
 		var offset = this.level * 20;
 
