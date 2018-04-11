@@ -8757,7 +8757,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 145,
+            "line": 146,
             "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
@@ -8766,7 +8766,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 159,
+            "line": 160,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14062,6 +14062,42 @@
                 "description": "True if parent is parent of child",
                 "type": "Boolean"
             },
+            "class": "ObjectUtils",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
+            "line": 129,
+            "description": "Calculates a bouding box for an object considering all its children.",
+            "itemtype": "method",
+            "name": "calculateBoudingBox",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "Bouding box calculated.",
+                "type": "Box3"
+            },
+            "class": "ObjectUtils",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
+            "line": 167,
+            "description": "Recalculate all children origins, to be centered with their geometry.",
+            "itemtype": "method",
+            "name": "recalculateGeometryOrigin",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to recalculate origin of.",
+                    "type": "Object3D"
+                }
+            ],
             "class": "ObjectUtils",
             "module": "Utils"
         },
