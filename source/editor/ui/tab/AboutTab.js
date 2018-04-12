@@ -25,26 +25,33 @@ function AboutTab(parent, closeable, container, index)
 	this.name.element.style.width = "100%";
 	this.name.setTextSize(25);
 	this.name.setAlignment(Text.CENTER);
-	this.name.setText(Nunu.NAME + " " + Nunu.VERSION + "<br/>Build " + Nunu.TIMESTAMP);
+	this.name.setText(Nunu.NAME + " " + Nunu.VERSION + "Build " + Nunu.TIMESTAMP);
 
 	//Libraries
-	var libs = "three.js R" + THREE.REVISION;
-	libs += "<br/>CodeMirror V" + CodeMirror.version;
-	libs += "<br/>CannonJS V" + CANNON.version;
-	libs += "<br/>TernJS V" + tern.version;
-
+	var libs = [];
+	libs.push("three.js R" + THREE.REVISION);
+	libs.push("CodeMirror V" + CodeMirror.version);
+	libs.push("CannonJS V" + CANNON.version);
+	libs.push("TernJS V" + tern.version);
 	if(Nunu.runningOnDesktop())
 	{
-		libs += "<br/>NWJS V" + process.versions['node-webkit'];
+		libs.push("NWJS V" + process.versions['node-webkit']);
 	}
 
-	this.libs = new Text(this.element);
-	this.libs.element.style.top = "50%";
-	this.libs.element.style.left = "0%";
-	this.libs.element.style.width = "100%";
-	this.libs.setAlignment(Text.CENTER);
-	this.libs.setTextSize(20);
-	this.libs.setText(libs);
+	var top = 50;
+
+	for(var i = 0; i < libs.length; i++)
+	{
+		var text = new Text(this.element);
+		text.element.style.top = top + "%";
+		text.element.style.left = "0%";
+		text.element.style.width = "100%";
+		text.setAlignment(Text.CENTER);
+		text.setTextSize(20);
+		text.setText(libs[i]);
+
+		top += 6;
+	}
 }
 
 AboutTab.prototype = Object.create(TabElement.prototype);
