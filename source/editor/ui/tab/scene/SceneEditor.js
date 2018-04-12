@@ -12,7 +12,6 @@ function SceneEditor(parent, closeable, container, index)
 	this.canvas.style.position = "absolute";
 	this.element.appendChild(this.canvas);
 
-
 	//Renderer
 	this.renderer = null;
 
@@ -27,10 +26,6 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Scene
 	this.scene = null;
-
-	//Tools
-	this.toolMode = Editor.SELECT;
-	this.tool = null;
 
 	//Input
 	this.keyboard = new Keyboard();
@@ -49,9 +44,13 @@ function SceneEditor(parent, closeable, container, index)
 	this.stats.dom.style.zIndex = "0";
 	this.element.appendChild(this.stats.dom);
 
-	//Tool scene
+	//Helper scene
 	this.helperScene = new THREE.Scene();
+	//this.helperScene.matrixAutoUpdate = false;
+
+	//Tool scene
 	this.toolScene = new THREE.Scene();
+	//this.toolScene.matrixAutoUpdate = false;
 
 	//Camera orientation scene
 	this.orientation = new CameraOrientation();
@@ -73,9 +72,10 @@ function SceneEditor(parent, closeable, container, index)
 	this.objectHelper = new THREE.Object3D();
 	this.helperScene.add(this.objectHelper);
 
-	//Tool container
-	this.toolContainer = new THREE.Object3D();
-	this.toolScene.add(this.toolContainer);
+	//Tool
+	this.toolMode = Editor.SELECT;
+	this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
+	this.toolScene.add(this.tool);
 
 	//Navigation
 	this.cameraRotation = new THREE.Vector2(0, 0);
@@ -460,14 +460,14 @@ SceneEditor.prototype.updateSettings = function()
 	}
 };
 
-//Destroy
 SceneEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
 	this.mouse.dispose();
 	this.keyboard.dispose();
-	
+	this.tool.dispose();
+
 	this.disposeRunningProgram();
 
 	if(this.renderer !== null)
@@ -478,7 +478,6 @@ SceneEditor.prototype.destroy = function()
 	}
 }
 
-//Set scene
 SceneEditor.prototype.attach = function(scene)
 {
 	this.scene = scene;
@@ -1271,7 +1270,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	}
 
 	this.cameraMode = mode;
-	this.selectTool(this.toolMode);
+	this.tool.setCamera(this.camera);
 };
 
 //Update orthographic camera rotation
@@ -1422,42 +1421,28 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.toolMode = tool;
 	}
 
-	this.toolContainer.removeAll();
-
-	if(this.tool !== null)
+	if(this.toolMode === Editor.MOVE)
 	{
-		this.tool.dispose();
+		this.tool.setMode("translate");
 	}
-
-	if(Editor.hasObjectSelected() && this.toolMode !== Editor.SELECT)
+	else if(this.toolMode === Editor.SCALE)
 	{
-		if(this.toolMode === Editor.MOVE)
-		{
-			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
-			this.tool.setMode("translate");
-		}
-		else if(this.toolMode === Editor.SCALE)
-		{
-			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
-			this.tool.setMode("scale");
-		}
-		else if(this.toolMode === Editor.ROTATE)
-		{
-			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
-			this.tool.setMode("rotate");
-		}
-		
-		this.tool.setSpace(Settings.editor.transformationSpace);
-		this.tool.setSnap(Settings.editor.snap);
-		this.tool.setTranslationSnap(Settings.editor.gridSpacing);
-		this.tool.setRotationSnap(Settings.editor.snapAngle);
-
-		this.tool.attach(Editor.selectedObjects);
-		this.toolContainer.add(this.tool);
+		this.tool.setMode("scale");
 	}
-	else
+	else if(this.toolMode === Editor.ROTATE)
 	{
-		this.tool = null;
+		this.tool.setMode("rotate");
+	}
+	
+	this.tool.setSpace(Settings.editor.transformationSpace);
+	this.tool.setSnap(Settings.editor.snap);
+	this.tool.setTranslationSnap(Settings.editor.gridSpacing);
+	this.tool.setRotationSnap(Settings.editor.snapAngle);
+	this.tool.attach(Editor.selectedObjects);
+
+	if(this.toolMode === Editor.SELECT)
+	{
+		this.tool.visible = false;
 	}
 };
 
