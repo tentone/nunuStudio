@@ -71,7 +71,7 @@ function TransformControls(camera, canvas, mouse)
 	this.quaternionZ = new THREE.Quaternion();
 	this.quaternionE = new THREE.Quaternion();
 
-	//Per object attributes
+	//Object attributes (per object)
 	this.parentRotationMatrix = [];
 	this.parentScale = [];
 	this.worldRotationMatrix = [];
@@ -114,8 +114,10 @@ TransformControls.prototype.setRotationSnap = function(rotationSnap)
 
 TransformControls.prototype.attach = function(objects)
 {
+	this.objects = objects;
+
 	//Add more temporary attibutes if necessary
-	while(this.oldPosition.length < objects.length)
+	while(this.oldPosition.length < this.objects.length)
 	{
 		this.parentRotationMatrix.push(new THREE.Matrix4());
 		this.parentScale.push(new THREE.Vector3());
@@ -127,8 +129,6 @@ TransformControls.prototype.attach = function(objects)
 		this.oldQuaternion.push(new THREE.Quaternion());
 		this.oldRotationMatrix.push(new THREE.Matrix4());
 	}
-
-	this.objects = objects;
 
 	if(this.objects.length > 0)
 	{
@@ -201,7 +201,7 @@ TransformControls.prototype.update = function()
 
 TransformControls.prototype.updateScale = function()
 {
-	if(this.objects === null || this.objects.length === 0)
+	if(this.objects.length === 0)
 	{
 		return;
 	}
@@ -244,7 +244,7 @@ TransformControls.prototype.updateScale = function()
 
 TransformControls.prototype.onPointerHover = function()
 {
-	if(this.objects === null || this.dragging === true) 
+	if(this.objects.length === 0 || this.dragging === true) 
 	{
 		return;
 	}
@@ -266,7 +266,7 @@ TransformControls.prototype.onPointerHover = function()
 
 TransformControls.prototype.onPointerDown = function()
 {
-	if(this.objects === null || this.objects.length === 0 || this.dragging === true) 
+	if(this.objects.length === 0 || this.dragging === true) 
 	{
 		return;
 	}
@@ -306,7 +306,7 @@ TransformControls.prototype.onPointerDown = function()
 
 TransformControls.prototype.onPointerMove = function()
 {
-	if(this.objects === null || this.axis === null || this.dragging === false)
+	if(this.objects.length === 0 || this.axis === null || this.dragging === false)
 	{
 		return;
 	}

@@ -2354,7 +2354,10 @@ Editor.exit = function()
 		Settings.store();
 		
 		var gui = require("nw.gui");
+		var win = gui.Window.get();
+
 		gui.App.closeAllWindows();
+		win.close(true);
 		gui.App.quit();
 	}
 };
