@@ -1439,7 +1439,7 @@ SceneEditor.prototype.selectTool = function(tool)
 	this.tool.setTranslationSnap(Settings.editor.gridSpacing);
 	this.tool.setRotationSnap(Settings.editor.snapAngle);
 	this.tool.attach(Editor.selectedObjects);
-
+	
 	if(this.toolMode === Editor.SELECT)
 	{
 		this.tool.visible = false;
@@ -1449,6 +1449,8 @@ SceneEditor.prototype.selectTool = function(tool)
 //Select helper to debug selected object data
 SceneEditor.prototype.updateSelection = function()
 {
+	this.tool.attach(Editor.selectedObjects);
+
 	this.objectHelper.removeAll();
 
 	for(var i = 0; i < Editor.selectedObjects.length; i++)
