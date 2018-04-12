@@ -85,6 +85,11 @@ function TransformControls(camera, canvas, mouse)
 
 TransformControls.prototype = Object.create(THREE.Object3D.prototype);
 
+TransformControls.prototype.setCanvas = function(canvas)
+{
+	this.canvas = canvas;
+};
+
 TransformControls.prototype.setSize = function(size)
 {
 	this.size = size;
