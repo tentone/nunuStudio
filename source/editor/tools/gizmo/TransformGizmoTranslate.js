@@ -2,8 +2,6 @@
 
 function TransformGizmoTranslate()
 {
-	TransformGizmo.call(this);
-
 	var arrowGeometry = new THREE.Geometry();
 	var mesh = new THREE.Mesh(new THREE.CylinderGeometry(0, 0.05, 0.2, 12, 1, false));
 	mesh.position.y = 0.5;
@@ -42,55 +40,55 @@ function TransformGizmoTranslate()
 		XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), TransformGizmo.pickerMaterial), [0.2, 0, 0.2], [- Math.PI / 2, 0, 0]]]
 	};
 
-	this.setActivePlane = function(axis, eye)
-	{
-		var tempMatrix = new THREE.Matrix4();
-		eye.applyMatrix4(tempMatrix.getInverse(tempMatrix.extractRotation(this.planes["XY"].matrixWorld)));
-
-		if(axis === "X")
-		{
-			this.activePlane = this.planes["XY"];
-			if(Math.abs(eye.y) > Math.abs(eye.z))
-			{
-				this.activePlane = this.planes["XZ"];
-			}
-		}
-		else if(axis === "Y")
-		{
-			this.activePlane = this.planes["XY"];
-			if(Math.abs(eye.x) > Math.abs(eye.z))
-			{
-				this.activePlane = this.planes["YZ"];
-			}
-		}
-		else if(axis === "Z")
-		{
-			this.activePlane = this.planes["XZ"];
-			if(Math.abs(eye.x) > Math.abs(eye.y))
-			{
-				this.activePlane = this.planes["YZ"];
-			}
-		}
-
-		if(axis === "XYZ")
-		{
-			this.activePlane = this.planes["XYZE"];
-		}
-		else if(axis === "XY")
-		{
-			this.activePlane = this.planes["XY"];
-		}
-		else if(axis === "YZ")
-		{
-			this.activePlane = this.planes["YZ"];
-		}
-		else if(axis === "XZ")
-		{
-			this.activePlane = this.planes["XZ"];
-		}
-	};
-
-	this.init();
+	TransformGizmo.call(this);
 }
 
 TransformGizmoTranslate.prototype = Object.create(TransformGizmo.prototype);
+
+TransformGizmoTranslate.prototype.setActivePlane = function(axis, eye)
+{
+	var tempMatrix = new THREE.Matrix4();
+	eye.applyMatrix4(tempMatrix.getInverse(tempMatrix.extractRotation(this.planes["XY"].matrixWorld)));
+
+	if(axis === "X")
+	{
+		this.activePlane = this.planes["XY"];
+		if(Math.abs(eye.y) > Math.abs(eye.z))
+		{
+			this.activePlane = this.planes["XZ"];
+		}
+	}
+	else if(axis === "Y")
+	{
+		this.activePlane = this.planes["XY"];
+		if(Math.abs(eye.x) > Math.abs(eye.z))
+		{
+			this.activePlane = this.planes["YZ"];
+		}
+	}
+	else if(axis === "Z")
+	{
+		this.activePlane = this.planes["XZ"];
+		if(Math.abs(eye.x) > Math.abs(eye.y))
+		{
+			this.activePlane = this.planes["YZ"];
+		}
+	}
+
+	if(axis === "XYZ")
+	{
+		this.activePlane = this.planes["XYZE"];
+	}
+	else if(axis === "XY")
+	{
+		this.activePlane = this.planes["XY"];
+	}
+	else if(axis === "YZ")
+	{
+		this.activePlane = this.planes["YZ"];
+	}
+	else if(axis === "XZ")
+	{
+		this.activePlane = this.planes["XZ"];
+	}
+};

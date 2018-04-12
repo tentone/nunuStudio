@@ -2,106 +2,85 @@
 
 function TransformGizmo()
 {
-	this.init = function()
+	THREE.Object3D.call(this);
+
+	this.handles = new THREE.Object3D();
+	this.pickers = new THREE.Object3D();
+	this.planes = new THREE.Object3D();
+
+	this.add(this.handles);
+	this.add(this.pickers);
+	this.add(this.planes);
+
+	//Planes
+	var planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 2, 2);
+	var planeMaterial = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide });
+	var planes =
 	{
-		THREE.Object3D.call(this);
+		"XY": new THREE.Mesh(planeGeometry, planeMaterial),
+		"YZ": new THREE.Mesh(planeGeometry, planeMaterial),
+		"XZ": new THREE.Mesh(planeGeometry, planeMaterial),
+		"XYZE": new THREE.Mesh(planeGeometry, planeMaterial)
+	};
 
-		this.handles = new THREE.Object3D();
-		this.pickers = new THREE.Object3D();
-		this.planes = new THREE.Object3D();
+	this.activePlane = planes["XYZE"];
 
-		this.add(this.handles);
-		this.add(this.pickers);
-		this.add(this.planes);
+	planes["YZ"].rotation.set(0, Math.PI / 2, 0);
+	planes["XZ"].rotation.set(- Math.PI / 2, 0, 0);
 
-		//Planes
-		var planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 2, 2);
-		var planeMaterial = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide });
-		var planes =
+	for(var i in planes)
+	{
+		planes[i].name = i;
+		this.planes.add(planes[i]);
+		this.planes[i] = planes[i];
+	}
+
+	//Handlers and pickers
+	function setupGizmos(gizmoMap, parent)
+	{
+		for(var name in gizmoMap)
 		{
-			"XY": new THREE.Mesh(planeGeometry, planeMaterial),
-			"YZ": new THREE.Mesh(planeGeometry, planeMaterial),
-			"XZ": new THREE.Mesh(planeGeometry, planeMaterial),
-			"XYZE": new THREE.Mesh(planeGeometry, planeMaterial)
-		};
+			for(i = gizmoMap[name].length; i --;)
+			{
+				var object = gizmoMap[name][i][0];
+				var position = gizmoMap[name][i][1];
+				var rotation = gizmoMap[name][i][2];
 
-		this.activePlane = planes["XYZE"];
+				object.name = name;
 
-		planes["YZ"].rotation.set(0, Math.PI / 2, 0);
-		planes["XZ"].rotation.set(- Math.PI / 2, 0, 0);
+				if(position)
+				{
+					object.position.set(position[0], position[1], position[2]);
+				}
+				if(rotation)
+				{
+					object.rotation.set(rotation[0], rotation[1], rotation[2]);
+				}
 
-		for(var i in planes)
-		{
-			planes[i].name = i;
-			this.planes.add(planes[i]);
-			this.planes[i] = planes[i];
+				parent.add(object);
+			}
 		}
+	}
 
-		//Handlers and pickers
-		var setupGizmos = function(gizmoMap, parent)
-		{
-			for(var name in gizmoMap)
-			{
-				for(i = gizmoMap[name].length; i --;)
-				{
-					var object = gizmoMap[name][i][0];
-					var position = gizmoMap[name][i][1];
-					var rotation = gizmoMap[name][i][2];
+	setupGizmos(this.handleGizmos, this.handles);
+	setupGizmos(this.pickerGizmos, this.pickers);
 
-					object.name = name;
-
-					if(position)
-					{
-						object.position.set(position[0], position[1], position[2]);
-					}
-					if(rotation)
-					{
-						object.rotation.set(rotation[0], rotation[1], rotation[2]);
-					}
-
-					parent.add(object);
-				}
-			}
-		};
-
-		setupGizmos(this.handleGizmos, this.handles);
-		setupGizmos(this.pickerGizmos, this.pickers);
-
-		//Reset transformations
-		this.traverse(function (child)
-		{
-			if(child instanceof THREE.Mesh)
-			{
-				child.updateMatrix();
-
-				var tempGeometry = child.geometry.clone();
-				tempGeometry.applyMatrix(child.matrix);
-				child.geometry = tempGeometry;
-
-				child.position.set(0, 0, 0);
-				child.rotation.set(0, 0, 0);
-				child.scale.set(1, 1, 1);
-			}
-		});
-	};
-
-	this.highlight = function(axis)
+	//Reset transformations
+	this.traverse(function (child)
 	{
-		this.traverse(function(child)
+		if(child instanceof THREE.Mesh)
 		{
-			if(child.material && child.material.highlight)
-			{
-				if(child.name === axis)
-				{
-					child.material.highlight(true);
-				}
-				else
-				{
-					child.material.highlight(false);
-				}
-			}
-		});
-	};
+			child.updateMatrix();
+
+			var tempGeometry = child.geometry.clone();
+			tempGeometry.applyMatrix(child.matrix);
+			child.geometry = tempGeometry;
+
+			child.position.set(0, 0, 0);
+			child.rotation.set(0, 0, 0);
+			child.scale.set(1, 1, 1);
+		}
+	});
 }
 
 TransformGizmo.prototype = Object.create(THREE.Object3D.prototype);
@@ -126,3 +105,21 @@ TransformGizmo.prototype.update = function(rotation, eye)
 		}
 	});
 }
+
+TransformGizmo.prototype.highlight = function(axis)
+{
+	this.traverse(function(child)
+	{
+		if(child.material && child.material.highlight)
+		{
+			if(child.name === axis)
+			{
+				child.material.highlight(true);
+			}
+			else
+			{
+				child.material.highlight(false);
+			}
+		}
+	});
+};

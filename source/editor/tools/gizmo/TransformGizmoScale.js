@@ -2,8 +2,6 @@
 
 function TransformGizmoScale()
 {
-	TransformGizmo.call(this);
-
 	var arrowGeometry = new THREE.Geometry();
 	var mesh = new THREE.Mesh(new THREE.BoxGeometry(0.125, 0.125, 0.125));
 	mesh.position.y = 0.5;
@@ -36,33 +34,33 @@ function TransformGizmoScale()
 		XYZ: [[new THREE.Mesh(new THREE.BoxBufferGeometry(0.4, 0.4, 0.4), TransformGizmo.pickerMaterial)]]
 	};
 
-	this.setActivePlane = function(axis, eye)
-	{
-		var tempMatrix = new THREE.Matrix4();
-		eye.applyMatrix4(tempMatrix.getInverse(tempMatrix.extractRotation(this.planes["XY"].matrixWorld)));
-
-		if(axis === "X")
-		{
-			this.activePlane = this.planes["XY"];
-			if(Math.abs(eye.y) > Math.abs(eye.z)) this.activePlane = this.planes["XZ"];
-		}
-		else if(axis === "Y")
-		{
-			this.activePlane = this.planes["XY"];
-			if(Math.abs(eye.x) > Math.abs(eye.z)) this.activePlane = this.planes["YZ"];
-		}
-		else if(axis === "Z")
-		{
-			this.activePlane = this.planes["XZ"];
-			if(Math.abs(eye.x) > Math.abs(eye.y)) this.activePlane = this.planes["YZ"];
-		}
-		else if(axis === "XYZ") 
-		{
-			this.activePlane = this.planes["XYZE"];
-		}
-	};
-
-	this.init();
+	TransformGizmo.call(this);
 }
 
 TransformGizmoScale.prototype = Object.create(TransformGizmo.prototype);
+
+TransformGizmoScale.prototype.setActivePlane = function(axis, eye)
+{
+	var tempMatrix = new THREE.Matrix4();
+	eye.applyMatrix4(tempMatrix.getInverse(tempMatrix.extractRotation(this.planes["XY"].matrixWorld)));
+
+	if(axis === "X")
+	{
+		this.activePlane = this.planes["XY"];
+		if(Math.abs(eye.y) > Math.abs(eye.z)) this.activePlane = this.planes["XZ"];
+	}
+	else if(axis === "Y")
+	{
+		this.activePlane = this.planes["XY"];
+		if(Math.abs(eye.x) > Math.abs(eye.z)) this.activePlane = this.planes["YZ"];
+	}
+	else if(axis === "Z")
+	{
+		this.activePlane = this.planes["XZ"];
+		if(Math.abs(eye.x) > Math.abs(eye.y)) this.activePlane = this.planes["YZ"];
+	}
+	else if(axis === "XYZ") 
+	{
+		this.activePlane = this.planes["XYZE"];
+	}
+};

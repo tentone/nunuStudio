@@ -2,8 +2,6 @@
 
 function TransformGizmoRotate()
 {
-	TransformGizmo.call(this);
-
 	var CircleGeometry = function(radius, facing, arc)
 	{
 		var geometry = new THREE.BufferGeometry();
@@ -47,26 +45,6 @@ function TransformGizmoRotate()
 		Z: [[new THREE.Mesh(new THREE.TorusBufferGeometry(1, 0.12, 4, 12, Math.PI), TransformGizmo.pickerMaterial), [0, 0, 0], [0, 0, - Math.PI / 2]]],
 		E: [[new THREE.Mesh(new THREE.TorusBufferGeometry(1.25, 0.12, 2, 24), TransformGizmo.pickerMaterial)]],
 		XYZE: [[new THREE.Mesh(new THREE.Geometry())]]
-	};
-
-	this.setActivePlane = function(axis)
-	{
-		if(axis === "E")
-		{
-			this.activePlane = this.planes["XYZE"];
-		}
-		else if(axis === "X")
-		{
-			this.activePlane = this.planes["YZ"];
-		}
-		else if(axis === "Y")
-		{
-			this.activePlane = this.planes["XZ"];
-		}
-		else if(axis === "Z")
-		{
-			this.activePlane = this.planes["XY"];
-		}
 	};
 
 	this.update = function(rotation, eye2)
@@ -120,7 +98,28 @@ function TransformGizmoRotate()
 			}
 		});
 	};
-	this.init();
+
+	TransformGizmo.call(this);
 }
 
 TransformGizmoRotate.prototype = Object.create(TransformGizmo.prototype);
+
+TransformGizmoRotate.prototype.setActivePlane = function(axis)
+{
+	if(axis === "E")
+	{
+		this.activePlane = this.planes["XYZE"];
+	}
+	else if(axis === "X")
+	{
+		this.activePlane = this.planes["YZ"];
+	}
+	else if(axis === "Y")
+	{
+		this.activePlane = this.planes["XZ"];
+	}
+	else if(axis === "Z")
+	{
+		this.activePlane = this.planes["XY"];
+	}
+};
