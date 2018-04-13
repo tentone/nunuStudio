@@ -626,7 +626,62 @@ Editor.initialize = function()
 
 	//Event manager
 	Editor.manager = new EventManager();
-	//Editor.manager.create();
+	Editor.manager.add(document.body, "keydown", function(event)
+	{
+		var key = event.keyCode;
+
+		if(event.ctrlKey)
+		{
+			if(key === Keyboard.NUM1)
+			{
+				Editor.gui.toolBar.selectTool(Editor.SELECT);
+			}
+			else if(key === Keyboard.NUM2)
+			{
+				Editor.gui.toolBar.selectTool(Editor.MOVE);
+			}
+			else if(key === Keyboard.NUM3)
+			{
+				Editor.gui.toolBar.selectTool(Editor.SCALE);
+			}
+			else if(key === Keyboard.NUM4)
+			{
+				Editor.gui.toolBar.selectTool(Editor.ROTATE);
+			}
+			else if(key === Keyboard.S)
+			{
+				if(Editor.openFile === null)
+				{
+					Editor.gui.saveProgram();
+				}
+				else
+				{
+					Editor.saveProgram(undefined, true);
+				}
+			}
+			else if(key === Keyboard.L)
+			{
+				Editor.gui.loadProgram();
+			}
+			else if(key === Keyboard.W || key === Keyboard.F4)
+			{
+				Editor.gui.tab.closeActual();
+			}
+			else if(key === Keyboard.TAB || key === Keyboard.PAGE_DOWN)
+			{
+				Editor.gui.tab.selectNextTab();
+			}
+			else if(key === Keyboard.PAGE_UP)
+			{
+				Editor.gui.tab.selectPreviousTab();
+			}
+		}
+		else if(key === Keyboard.F2)
+		{
+			Editor.renameObject();
+		}
+	});
+	Editor.manager.create();
 
 	//Update views and start update loop
 	Editor.updateViewsGUI();
@@ -636,62 +691,8 @@ Editor.initialize = function()
 //Update Editor
 Editor.update = function()
 {
-	//Update input
 	Editor.mouse.update();
 	Editor.keyboard.update();
-
-	//Keyboard shortcuts
-	if(Editor.keyboard.keyPressed(Keyboard.CTRL))
-	{
-		if(Editor.keyboard.keyJustPressed(Keyboard.NUM1))
-		{
-			Editor.gui.toolBar.selectTool(Editor.SELECT);
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM2))
-		{
-			Editor.gui.toolBar.selectTool(Editor.MOVE);
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM3))
-		{
-			Editor.gui.toolBar.selectTool(Editor.SCALE);
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM4))
-		{
-			Editor.gui.toolBar.selectTool(Editor.ROTATE);
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.S))
-		{
-			if(Editor.openFile === null)
-			{
-				Editor.gui.saveProgram();
-			}
-			else
-			{
-				Editor.saveProgram(undefined, true);
-			}
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.L))
-		{
-			Editor.gui.loadProgram();
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.W) || Editor.keyboard.keyJustPressed(Keyboard.F4))
-		{
-			Editor.gui.tab.closeActual();
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.TAB) || Editor.keyboard.keyJustPressed(Keyboard.PAGE_DOWN))
-		{
-			Editor.gui.tab.selectNextTab();
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.PAGE_UP))
-		{
-			Editor.gui.tab.selectPreviousTab();
-		}
-	}
-	else if(Editor.keyboard.keyJustPressed(Keyboard.F2))
-	{
-		Editor.renameObject();
-	}
-
 	requestAnimationFrame(Editor.update);
 };
 
