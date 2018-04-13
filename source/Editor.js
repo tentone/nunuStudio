@@ -392,6 +392,7 @@ include("editor/ui/tab/panel/objects/lights/DirectionalLightPanel.js");
 include("editor/ui/tab/panel/objects/lights/SpotLightPanel.js");
 include("editor/ui/tab/panel/objects/misc/CubeCameraPanel.js");
 include("editor/ui/tab/panel/objects/misc/LensFlarePanel.js");
+include("editor/ui/tab/panel/objects/misc/ParticleEmitterPanel.js");
 include("editor/ui/tab/panel/objects/misc/SkyPanel.js");
 include("editor/ui/tab/panel/objects/spine/SpinePanel.js");
 include("editor/ui/tab/panel/objects/mesh/MeshPanel.js");

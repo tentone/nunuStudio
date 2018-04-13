@@ -41,16 +41,13 @@ PanelContainer.prototype.updateSelection = function()
 		{
 			this.panel = new MeshPanel(this.element, object);
 		}
+		else if(object instanceof Text3D)
+		{
+			this.panel = new Text3DPanel(this.element, object);
+		}
 		else if(object instanceof THREE.Mesh)
 		{
-			if(object instanceof Text3D)
-			{
-				this.panel = new Text3DPanel(this.element, object);
-			}
-			else
-			{
-				this.panel = new MeshPanel(this.element, object);
-			}
+			this.panel = new MeshPanel(this.element, object);
 		}
 		else if(object instanceof THREE.Light)
 		{
@@ -78,6 +75,10 @@ PanelContainer.prototype.updateSelection = function()
 			{
 				this.panel = new AmbientLightPanel(this.element, object);
 			}
+		}
+		else if(object instanceof ParticleEmitter)
+		{
+			this.panel = new ParticleEmitterPanel(this.element, object);
 		}
 		else if(object instanceof Sky)
 		{
