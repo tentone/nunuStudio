@@ -625,7 +625,7 @@ Editor.initialize = function()
 	}
 
 	//Event manager
-	Editor.manager = new EventManger();
+	Editor.manager = new EventManager();
 	//Editor.manager.create();
 
 	//Update views and start update loop
