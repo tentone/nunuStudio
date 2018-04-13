@@ -130,7 +130,7 @@ function AssetExplorer(parent, closeable, container, index)
 						var animation = new SpineAnimation(json, atlas, path);
 						animation.name = FileSystem.getFileName(file);
 
-						Editor.addToScene(animation);
+						Editor.addObject(animation);
 						Editor.updateViewsGUI();
 					}
 					catch(e)

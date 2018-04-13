@@ -235,7 +235,7 @@ function TreeElement(container)
 					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.BOX));
 					physics.name = self.obj.name;
 					
-					Editor.addToScene(physics);
+					Editor.addObject(physics);
 					Editor.updateViewsGUI();
 				});
 
@@ -245,7 +245,7 @@ function TreeElement(container)
 					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.SPHERE));
 					physics.name = self.obj.name;
 					
-					Editor.addToScene(physics);
+					Editor.addObject(physics);
 					Editor.updateViewsGUI();
 				});
 
@@ -255,7 +255,7 @@ function TreeElement(container)
 					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.HULL));
 					physics.name = self.obj.name;
 					
-					Editor.addToScene(physics);
+					Editor.addObject(physics);
 					Editor.updateViewsGUI();
 				});
 
@@ -265,7 +265,7 @@ function TreeElement(container)
 					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.CYLINDER));
 					physics.name = self.obj.name;
 					
-					Editor.addToScene(physics);
+					Editor.addObject(physics);
 					Editor.updateViewsGUI();
 				});
 			}
@@ -392,70 +392,89 @@ function TreeElement(container)
 		event.preventDefault();
 		clearBorder();
 
-		if(!self.obj.locked)
+		if(self.obj.locked)
 		{
-			//Collect element from buffer
-			var uuid = event.dataTransfer.getData("uuid");
-			var obj = DragBuffer.popDragElement(uuid);
+			return;
+		}
 
-			if(obj instanceof THREE.Object3D && obj !== self.obj)
+
+		//Collect element from buffer
+		var uuid = event.dataTransfer.getData("uuid");
+		var obj = DragBuffer.popDragElement(uuid);
+
+		//Object 3D
+		if(obj instanceof THREE.Object3D && obj !== self.obj)
+		{
+			if(ObjectUtils.isChildOf(obj ,self.obj))
 			{
-				if(ObjectUtils.isChildOf(obj ,self.obj))
-				{
-					Editor.alert("Cannot add object into is child.");
-				}
-				else
-				{
-					var selfIsScene = self.obj instanceof Scene;
-					var selfIsProgram = self.obj instanceof Program;
-					var dragIsScene = obj instanceof Scene;
-					var dragIsProgram = obj instanceof Program;
+				Editor.alert("Cannot add object into is child.");
+			}
+			else
+			{
+				var selfIsScene = self.obj instanceof Scene;
+				var selfIsProgram = self.obj instanceof Program;
+				var dragIsScene = obj instanceof Scene;
+				var dragIsProgram = obj instanceof Program;
 
-					//Above
-					if(event.layerY < 5)
+				//Above
+				if(event.layerY < 5)
+				{
+					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
 					{
-						if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
-						{
-							var index = self.obj.parent.children.indexOf(self.obj);
-							Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-							self.container.updateView();
-						}
+						var index = self.obj.parent.children.indexOf(self.obj);
+						Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+						self.container.updateView();
 					}
-					//Bellow
-					else if(event.layerY > 15)
+				}
+				//Bellow
+				else if(event.layerY > 15)
+				{
+					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
 					{
-						if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
-						{
-							var index = self.obj.parent.children.indexOf(self.obj) + 1;
-							Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-							self.container.updateView();
-						}
+						var index = self.obj.parent.children.indexOf(self.obj) + 1;
+						Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+						self.container.updateView();
 					}
-					//Inside
-					else
-					{	
-						if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
-						{
-							Editor.history.add(new ObjectMovedAction(obj, self.obj));	
-							self.container.updateView();
-						}
+				}
+				//Inside
+				else
+				{	
+					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
+					{
+						Editor.history.add(new ObjectMovedAction(obj, self.obj));	
+						self.container.updateView();
 					}
 				}
 			}
-			else if(obj instanceof THREE.Material)
+		}
+		//Material
+		else if(obj instanceof THREE.Material)
+		{
+			var actions = [];
+			self.obj.traverse(function(children)
 			{
-				var actions = [];
-				self.obj.traverse(function(children)
+				if(children.material !== undefined)
 				{
-					if(children.material !== undefined)
-					{
-						actions.push(new ChangeAction(children, "material", obj));
-					}
-				});
+					actions.push(new ChangeAction(children, "material", obj));
+				}
+			});
 
-				if(actions.length > 0)
+			if(actions.length > 0)
+			{
+				Editor.history.add(new ActionBundle(actions));
+			}
+		}
+		//Dragged file
+		else if(event.dataTransfer.files.length > 0)
+		{
+			var files = event.dataTransfer.files;
+			for(var i = 0; i < files.length; i++)
+			{
+				var file = files[i];
+
+				if(Model.fileIsModel(file))
 				{
-					Editor.history.add(new ActionBundle(actions));
+					Editor.loadModel(file, self.obj);
 				}
 			}
 		}

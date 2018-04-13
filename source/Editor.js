@@ -624,6 +624,10 @@ Editor.initialize = function()
 		Editor.createNewProgram();
 	}
 
+	//Event manager
+	Editor.manager = new EventManger();
+	//Editor.manager.create();
+
 	//Update views and start update loop
 	Editor.updateViewsGUI();
 	Editor.update();
@@ -703,35 +707,17 @@ Editor.resize = function()
 //Select a single object
 Editor.selectObject = function(object)
 {
-	if(object instanceof THREE.Object3D)
-	{
-		Editor.clearSelection();
-
-		Editor.selectedObjects[0] = object;
-
-		Editor.updateSelectionGUI();
-		Editor.selectTool();
-	}
-	else
-	{
-		Editor.resetEditingFlags();
-	}
+	Editor.selectedObjects = [object];
+	Editor.updateSelectionGUI();
+	Editor.selectTool();
 };
 
 //Add object to selection
 Editor.addToSelection = function(object)
 {
-	if(object instanceof THREE.Object3D)
-	{
-		Editor.selectedObjects.push(object);
-
-		Editor.updateSelectionGUI();
-		Editor.selectTool();
-	}
-	else
-	{
-		Editor.resetEditingFlags();
-	}
+	Editor.selectedObjects.push(object);
+	Editor.updateSelectionGUI();
+	Editor.selectTool();
 };
 
 //Remove object from selection
@@ -778,13 +764,15 @@ Editor.clearSelection = function()
 };
 
 //Add object to actual scene
-Editor.addToScene = function(obj)
+Editor.addObject = function(obj, parent)
 {
-	if(Editor.program.scene !== null)
+	if(parent === undefined)
 	{
-		Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
-		Editor.updateViewsGUI();
+		parent = Editor.program.scene;
 	}
+
+	Editor.history.add(new ObjectAddedAction(obj, parent));
+	Editor.updateViewsGUI();
 };
 
 //Rename object, if none passed as argument selected object is used
@@ -1459,7 +1447,7 @@ Editor.loadText = function(file)
 };
 
 //Load geometry from files
-Editor.loadModel = function(file, onLoad)
+Editor.loadModel = function(file, parent)
 {
 	var name = file.name;
 	var extension = FileSystem.getFileExtension(name);
@@ -1474,7 +1462,8 @@ Editor.loadModel = function(file, onLoad)
 			reader.onload = function()
 			{
 				var loader = new THREE.GCodeLoader();
-				Editor.addToScene(loader.parse(reader.result));
+				var obj = loader.parse(reader.result);
+				Editor.addObject(obj, parent);
 			};
 
 			reader.readAsText(file);
@@ -1493,7 +1482,7 @@ Editor.loadModel = function(file, onLoad)
 
 					if(FileSystem.fileExists(mtl))
 					{
-						console.log("MTL Found");
+						console.log("nunuStudio: MTL Found");
 						var mtlLoader = new THREE.MTLLoader()
 						mtlLoader.setPath(path);
 						materials = mtlLoader.parse(FileSystem.readFile(mtl));
@@ -1512,8 +1501,6 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.OBJLoader();
-					//var loader = new THREE.OBJLoader2();
-					//loader.setLogging(false, false);
 
 					if(materials !== null)
 					{
@@ -1523,7 +1510,7 @@ Editor.loadModel = function(file, onLoad)
 					var obj = loader.parse(reader.result);
 					obj.name = FileSystem.getFileName(name);
 
-					Editor.addToScene(obj);
+					Editor.addObject(obj, parent);
 				}
 				catch(e)
 				{
@@ -1545,7 +1532,7 @@ Editor.loadModel = function(file, onLoad)
 				{
 					var loader = new THREE.ThreeMFLoader();
 					var obj = loader.parse(reader.result);
-					Editor.addToScene(obj);
+					Editor.addObject(obj, parent);
 				}
 				catch(e)
 				{
@@ -1566,7 +1553,7 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.AWDLoader();
 					loader._baseDir = path;
 					var awd = loader.parse(reader.result);
-					Editor.addToScene(awd);
+					Editor.addObject(awd, parent);
 				}
 				catch(e)
 				{
@@ -1586,7 +1573,7 @@ Editor.loadModel = function(file, onLoad)
 				{
 					var loader = new THREE.AMFLoader();
 					var amf = loader.parse(reader.result);
-					Editor.addToScene(amf);
+					Editor.addObject(amf, parent);
 				}
 				catch(e)
 				{
@@ -1606,7 +1593,7 @@ Editor.loadModel = function(file, onLoad)
 				{
 					var loader = new THREE.AssimpLoader();
 					var assimp = loader.parse(reader.result, path);
-					Editor.addToScene(assimp.object);
+					Editor.addObject(assimp.object, parent);
 				}
 				catch(e)
 				{
@@ -1627,7 +1614,7 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.AssimpJSONLoader();
 					var json = JSON.parse(reader.result);
 					var assimp = loader.parse(json, path);
-					Editor.addToScene(assimp);
+					Editor.addObject(assimp, parent);
 				}
 				catch(e)
 				{
@@ -1656,7 +1643,7 @@ Editor.loadModel = function(file, onLoad)
 							object.material = new THREE.MeshPhongMaterial();
 						}
 					});
-					Editor.addToScene(babylon);
+					Editor.addObject(babylon, parent);
 				}
 				catch(e)
 				{
@@ -1679,7 +1666,7 @@ Editor.loadModel = function(file, onLoad)
 						var container = new Container();
 						container.name = FileSystem.getNameWithoutExtension(name);
 						blend.three.loadScene(container);
-						Editor.addToScene(container);
+						Editor.addObject(container, parent);
 					});
 				}
 				catch(e)
@@ -1701,7 +1688,7 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.TDSLoader();
 					loader.setPath(path);
 					var group = loader.parse(reader.result);
-					Editor.addToScene(group);
+					Editor.addObject(group, parent);
 				}
 				catch(e)
 				{
@@ -1736,7 +1723,7 @@ Editor.loadModel = function(file, onLoad)
 						});
 					}
 					
-					Editor.addToScene(scene);
+					Editor.addObject(scene, parent);
 				}
 				catch(e)
 				{
@@ -1774,7 +1761,7 @@ Editor.loadModel = function(file, onLoad)
 							});
 						}
 
-						Editor.addToScene(scene);
+						Editor.addObject(scene, parent);
 					});
 				}
 				catch(e)
@@ -1801,7 +1788,7 @@ Editor.loadModel = function(file, onLoad)
 
 					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
-					Editor.addToScene(mesh);
+					Editor.addObject(mesh, parent);
 				}
 				catch(e)
 				{
@@ -1826,7 +1813,7 @@ Editor.loadModel = function(file, onLoad)
 
 					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
-					Editor.addToScene(mesh);
+					Editor.addObject(mesh, parent);
 				}
 				catch(e)
 				{
@@ -1852,7 +1839,7 @@ Editor.loadModel = function(file, onLoad)
 
 					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
-					Editor.addToScene(mesh);
+					Editor.addObject(mesh, parent);
 				}
 				catch(e)
 				{
@@ -1876,7 +1863,7 @@ Editor.loadModel = function(file, onLoad)
 
 					for(var i = 0; i < scene.children.length; i++)
 					{
-						Editor.addToScene(scene.children[i]);
+						Editor.addObject(scene.children[i], parent);
 					}
 				}
 				catch(e)
@@ -1909,7 +1896,7 @@ Editor.loadModel = function(file, onLoad)
 						});
 					}
 				
-					Editor.addToScene(object);
+					Editor.addObject(object, parent);
 				}
 				catch(e)
 				{
@@ -1993,7 +1980,7 @@ Editor.loadModel = function(file, onLoad)
 								}
 							}
 
-							Editor.addToScene(model);
+							Editor.addObject(model, parent);
 						}
 					});
 				}
@@ -2017,7 +2004,7 @@ Editor.loadModel = function(file, onLoad)
 					var pcd = loader.parse(reader.result, file.name);
 					pcd.material.name = "points";
 
-					Editor.addToScene(pcd);
+					Editor.addObject(pcd, parent);
 				}
 				catch(e)
 				{
@@ -2057,7 +2044,7 @@ Editor.loadModel = function(file, onLoad)
 						}
 					}
 
-					Editor.addToScene(group);
+					Editor.addObject(group, parent);
 				}
 				catch(e)
 				{
@@ -2081,7 +2068,7 @@ Editor.loadModel = function(file, onLoad)
 					var geometry = loader.parse(reader.result);
 					geometry.name = modelName;
 
-					Editor.addToScene(new Mesh(geometry, Editor.defaultMaterial));
+					Editor.addObject(new Mesh(geometry, Editor.defaultMaterial), parent);
 				}
 				catch(e)
 				{
@@ -2091,7 +2078,7 @@ Editor.loadModel = function(file, onLoad)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//THREE JSON Model
+		//threejs JSON
 		else if(extension === "json")
 		{
 			var reader = new FileReader();
@@ -2130,7 +2117,7 @@ Editor.loadModel = function(file, onLoad)
 						mesh = new Mesh(geometry, material);
 					}
 
-					Editor.addToScene(mesh);
+					Editor.addObject(mesh, parent);
 				}
 				catch(e)
 				{

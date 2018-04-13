@@ -25,7 +25,7 @@ function AddObjectSideBar(element)
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cube";
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "Cube");
 
 	//Cylinder
@@ -34,7 +34,7 @@ function AddObjectSideBar(element)
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cylinder";
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "Cylinder");
 
 	//Sphere
@@ -43,7 +43,7 @@ function AddObjectSideBar(element)
 		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "sphere";
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "Sphere");
 
 	//Torus
@@ -52,7 +52,7 @@ function AddObjectSideBar(element)
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "torus";
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "Torus");
 
 	//Cone
@@ -61,14 +61,14 @@ function AddObjectSideBar(element)
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cone";
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "Cone");
 
 	//Text
 	addModel.addOption(Editor.filePath + "icons/models/text.png", function()
 	{
 		var model = new Text3D("text", Editor.defaultMaterial, Editor.defaultFont);
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "3D Text");
 
 	//Tetrahedron
@@ -77,7 +77,7 @@ function AddObjectSideBar(element)
 		var geometry = new THREE.TetrahedronGeometry(1, 0);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "tetrahedron";
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "Tetrahedron");
 
 	//Plane
@@ -88,7 +88,7 @@ function AddObjectSideBar(element)
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "plane";
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "Plane");
 
 	//Circle
@@ -99,7 +99,7 @@ function AddObjectSideBar(element)
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "circle";
-		Editor.addToScene(model);
+		Editor.addObject(model);
 	}, "Cicle");
 
 	//Add lights
@@ -113,43 +113,43 @@ function AddObjectSideBar(element)
 	//Point Light
 	addLight.addOption(Editor.filePath + "icons/lights/point.png", function()
 	{
-		Editor.addToScene(new PointLight(0x444444));
+		Editor.addObject(new PointLight(0x444444));
 	}, "Point Light");
 
 	//Ambient Light
 	addLight.addOption(Editor.filePath + "icons/lights/ambient.png", function()
 	{
-		Editor.addToScene(new AmbientLight(0x444444));
+		Editor.addObject(new AmbientLight(0x444444));
 	}, "Ambient Light");
 
 	//Spot Light
 	addLight.addOption(Editor.filePath + "icons/lights/spot.png", function()
 	{
-		Editor.addToScene(new SpotLight(0x444444));
+		Editor.addObject(new SpotLight(0x444444));
 	}, "Spot Light");
 
 	//Directional Light
 	addLight.addOption(Editor.filePath + "icons/lights/directional.png", function()
 	{
-		Editor.addToScene(new DirectionalLight(0x444444));
+		Editor.addObject(new DirectionalLight(0x444444));
 	}, "Directional Light");
 
 	//Hemisphere Light
 	addLight.addOption(Editor.filePath + "icons/lights/hemisphere.png", function()
 	{
-		Editor.addToScene(new HemisphereLight(0x444444));
+		Editor.addObject(new HemisphereLight(0x444444));
 	}, "Hemisphere Light");
 
 	//RectArea Light
 	addLight.addOption(Editor.filePath + "icons/lights/rectarea.png", function()
 	{
-		Editor.addToScene(new RectAreaLight(0x444444, 100, 1, 1));
+		Editor.addObject(new RectAreaLight(0x444444, 100, 1, 1));
 	}, "RectArea Light");
 
 	//Sky
 	addLight.addOption(Editor.filePath + "icons/lights/sky.png", function()
 	{
-		Editor.addToScene(new Sky());
+		Editor.addObject(new Sky());
 	}, "Sky");
 
 	//Add camera
@@ -164,13 +164,13 @@ function AddObjectSideBar(element)
 	//Perspective camera
 	addCamera.addOption(Editor.filePath + "icons/camera/prespective.png", function()
 	{
-		Editor.addToScene(new PerspectiveCamera(60, 1));
+		Editor.addObject(new PerspectiveCamera(60, 1));
 	}, "Perspective Camera");
 
 	//Orthographic camera
 	addCamera.addOption(Editor.filePath + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToScene(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL));
+		Editor.addObject(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL));
 	}, "Orthographic Camera");
 
 	//Add script
@@ -185,7 +185,7 @@ function AddObjectSideBar(element)
 	//Javascript script
 	addScript.addOption(Editor.filePath + "icons/script/script.png", function()
 	{
-		Editor.addToScene(new Script());
+		Editor.addObject(new Script());
 	}, "JS Script");
 
 	//Effects
@@ -200,7 +200,7 @@ function AddObjectSideBar(element)
 	//Sprite
 	addEffects.addOption(Editor.filePath + "icons/misc/sprite.png", function()
 	{
-		Editor.addToScene(new Sprite(Editor.defaultSpriteMaterial));
+		Editor.addObject(new Sprite(Editor.defaultSpriteMaterial));
 	}, "Sprite");
 
 	//Particle emitter
@@ -209,31 +209,31 @@ function AddObjectSideBar(element)
 		var particle = new ParticleEmitter()
 		particle.texture = Editor.defaultTextureParticle;
 		particle.reload();
-		Editor.addToScene(particle);
+		Editor.addObject(particle);
 	}, "Particle Emitter");
 
 	//Container
 	addEffects.addOption(Editor.filePath + "icons/misc/container.png", function()
 	{
-		Editor.addToScene(new Container());
+		Editor.addObject(new Container());
 	}, "Container");
 
 	//Cube Camera
 	addEffects.addOption(Editor.filePath + "icons/misc/probe.png", function()
 	{
-		Editor.addToScene(new CubeCamera());
+		Editor.addObject(new CubeCamera());
 	}, "Cube Camera")
 
 	//Audio
 	addEffects.addOption(Editor.filePath + "icons/misc/audio.png", function()
 	{
-		Editor.addToScene(new AudioEmitter(Editor.defaultAudio));
+		Editor.addObject(new AudioEmitter(Editor.defaultAudio));
 	}, "Audio");
 
 	//Positional Audio
 	addEffects.addOption(Editor.filePath + "icons/misc/audio_positional.png", function()
 	{
-		Editor.addToScene(new PositionalAudio(Editor.defaultAudio));
+		Editor.addObject(new PositionalAudio(Editor.defaultAudio));
 	}, "Positional Audio");
 
 	//Lens flare
@@ -250,7 +250,7 @@ function AddObjectSideBar(element)
 		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 120, 0.9);
 		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 70, 1.0);
 
-		Editor.addToScene(lensFlare);
+		Editor.addObject(lensFlare);
 	}, "Lens flare");
 
 	//Physics
@@ -268,7 +268,7 @@ function AddObjectSideBar(element)
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
 		obj.name = "box";
-		Editor.addToScene(obj);
+		Editor.addObject(obj);
 	}, "Box");
 
 	//Physics sphere
@@ -277,7 +277,7 @@ function AddObjectSideBar(element)
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Sphere(1.0));
 		obj.name = "sphere";
-		Editor.addToScene(obj);
+		Editor.addObject(obj);
 	}, "Sphere");
 
 	//Physics Cylinder
@@ -286,7 +286,7 @@ function AddObjectSideBar(element)
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Cylinder(1.0, 1.0, 2.0, 8));
 		obj.name = "cylinder";
-		Editor.addToScene(obj);
+		Editor.addObject(obj);
 	}, "Cylinder");
 
 	//Physics Plane
@@ -297,7 +297,7 @@ function AddObjectSideBar(element)
 		obj.body.addShape(new CANNON.Plane());
 		obj.body.type = CANNON.Body.KINEMATIC;
 		obj.name = "ground";
-		Editor.addToScene(obj);
+		Editor.addObject(obj);
 	}, "Ground");
 
 	//Physics Particle
@@ -306,7 +306,7 @@ function AddObjectSideBar(element)
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Particle());
 		obj.name = "particle";
-		Editor.addToScene(obj);
+		Editor.addObject(obj);
 	}, "Particle");
 
 	//Add device
@@ -321,24 +321,24 @@ function AddObjectSideBar(element)
 	//Orbit controls
 	addControls.addOption(Editor.filePath + "icons/misc/orbit.png", function()
 	{
-		Editor.addToScene(new OrbitControls());
+		Editor.addObject(new OrbitControls());
 	}, "Orbit Controls");
 
 	//FPS controls
 	addControls.addOption(Editor.filePath + "icons/misc/crosshair.png", function()
 	{
-		Editor.addToScene(new FirstPersonControls());
+		Editor.addObject(new FirstPersonControls());
 	}, "First Person Controls");
 
 	//Leap Hand
 	addControls.addOption(Editor.filePath + "icons/hw/leap.png", function()
 	{
-		Editor.addToScene(new LeapMotion());
+		Editor.addObject(new LeapMotion());
 	}, "Leap Motion");
 
 	//Kinect Skeleton
 	addControls.addOption(Editor.filePath + "icons/hw/kinect.png", function()
 	{
-		Editor.addToScene(new KinectDevice());
+		Editor.addObject(new KinectDevice());
 	}, "Microsoft Kinect");
 }

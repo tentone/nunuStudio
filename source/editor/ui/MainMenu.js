@@ -451,7 +451,7 @@ function MainMenu(parent)
 		var mesh = a.intersect(b).toMesh();
 		mesh.material = Editor.defaultMaterial;
 
-		Editor.addToScene(mesh);
+		Editor.addObject(mesh);
 	}, Editor.filePath + "icons/misc/intersect.png");
 
 	csg.addOption("Subtract", function()
@@ -477,7 +477,7 @@ function MainMenu(parent)
 		var mesh = a.subtract(b).toMesh();
 		mesh.material = Editor.defaultMaterial;
 
-		Editor.addToScene(mesh);
+		Editor.addObject(mesh);
 	}, Editor.filePath + "icons/misc/subtract.png");
 
 	csg.addOption("Union", function()
@@ -503,7 +503,7 @@ function MainMenu(parent)
 		var mesh = a.union(b).toMesh();
 		mesh.material = Editor.defaultMaterial;
 
-		Editor.addToScene(mesh);
+		Editor.addObject(mesh);
 	}, Editor.filePath + "icons/misc/union.png");
 
 	var modifiers = editMenu.addMenu("Modifiers", Editor.filePath + "icons/models/figures.png");
@@ -540,7 +540,7 @@ function MainMenu(parent)
 
 		var geometry = simplifier.modify(original, Math.ceil(vertices * level));
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
-		Editor.addToScene(mesh);
+		Editor.addObject(mesh);
 
 		Editor.alert("Reduced from " + vertices + " to " + Math.ceil(vertices * level) + " vertex.");
 
@@ -557,7 +557,7 @@ function MainMenu(parent)
 		var modifier = new THREE.BufferSubdivisionModifier();
 		var geometry = modifier.modify(Editor.selectedObjects[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
-		Editor.addToScene(mesh);
+		Editor.addObject(mesh);
 	}, Editor.filePath + "icons/models/figures.png");
 
 	//Compute mesh normals
@@ -623,7 +623,7 @@ function MainMenu(parent)
 
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		mesh.name = "merged";
-		Editor.addToScene(mesh);
+		Editor.addObject(mesh);
 
 	}, Editor.filePath + "icons/misc/union.png");
 

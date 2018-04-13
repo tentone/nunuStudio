@@ -31,7 +31,7 @@ function AudioAsset(parent)
 			{
 				var emitter = new AudioEmitter(self.asset);
 				emitter.name = self.asset.name;
-				Editor.addToScene(emitter);
+				Editor.addObject(emitter);
 			}
 		});
 
@@ -41,7 +41,7 @@ function AudioAsset(parent)
 			{
 				var emitter = new PositionalAudio(self.asset);
 				emitter.name = self.asset.name;
-				Editor.addToScene(emitter);
+				Editor.addObject(emitter);
 			}
 		});
 
