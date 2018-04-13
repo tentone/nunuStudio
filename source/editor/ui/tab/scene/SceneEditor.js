@@ -4,9 +4,6 @@ function SceneEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Scene", Editor.filePath + "icons/misc/scene.png");
 
-	//this.element.style.backgroundRepeat = "repeat";
-	//this.element.style.backgroundImage = "url(\'" + Editor.filePath + "alpha.png\')";
-
 	//Canvas
 	this.canvas = document.createElement("canvas");
 	this.canvas.style.position = "absolute";
@@ -46,11 +43,11 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Helper scene
 	this.helperScene = new THREE.Scene();
-	//this.helperScene.matrixAutoUpdate = false;
+	this.helperScene.matrixAutoUpdate = false;
 
 	//Tool scene
 	this.toolScene = new THREE.Scene();
-	//this.toolScene.matrixAutoUpdate = false;
+	this.toolScene.matrixAutoUpdate = false;
 
 	//Camera orientation scene
 	this.orientation = new CameraOrientation();
