@@ -22,6 +22,12 @@ function AnimationMixer(root)
 
 AnimationMixer.prototype = Object.create(THREE.AnimationMixer.prototype);
 
+/**
+ * Create actions from array of animations.
+ * 
+ * @method createActions
+ * @param {Array} actions Array of animations.
+ */
 AnimationMixer.prototype.createActions = function(animations)
 {
 	for(var i = 0; i < animations.length; i++)
@@ -37,6 +43,12 @@ AnimationMixer.prototype.createActions = function(animations)
 	return this._actions;
 };
 
+/**
+ * Set animation mixer time.
+ * 
+ * @method setTime
+ * @param {Number} time Time in seconds.
+ */
 AnimationMixer.prototype.setTime = function(time)
 {
 	this.time = time;
@@ -49,17 +61,32 @@ AnimationMixer.prototype.setTime = function(time)
 	this.update(0, true);
 };
 
+/**
+ * Play animation.
+ * 
+ * @method play
+ */
 AnimationMixer.prototype.play = function()
 {
 	this.playing = true;
 };
 
+/**
+ * Stop animation playback.
+ * 
+ * @method stop
+ */
 AnimationMixer.prototype.stop = function()
 {
 	this.setTime(0);
 	this.playing = false;
 };
 
+/**
+ * Pause animation playback.
+ * 
+ * @method pause
+ */
 AnimationMixer.prototype.pause = function()
 {
 	this.playing = false;
@@ -71,6 +98,13 @@ AnimationMixer.prototype.dispose = function()
 	this.uncacheRoot(this._root);
 };
 
+/**
+ * Update animation state.
+ * 
+ * @method update
+ * @param {Number} delta Time since last call.
+ * @param {Boolean} forceUpdate If set true the mixer is updated even if it isnt playing.
+ */
 AnimationMixer.prototype.update = function(delta, forceUpdate)
 {
 	if(this.playing || forceUpdate)

@@ -8,8 +8,7 @@
 	},
 	"scripts":
 	{
-		"build:dev": "node ./build/build.js",
-		"build:prod": "node ./build/build.js"
+		"build": "node ./build/build.js"
 	},
 	"repository":
 	{
