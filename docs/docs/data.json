@@ -3755,6 +3755,86 @@
     "elements": {},
     "classitems": [
         {
+            "file": "..\\..\\source\\core\\animation\\AnimationMixer.js",
+            "line": 25,
+            "description": "Create actions from array of animations.",
+            "itemtype": "method",
+            "name": "createActions",
+            "params": [
+                {
+                    "name": "actions",
+                    "description": "Array of animations.",
+                    "type": "Array"
+                }
+            ],
+            "class": "AnimationMixer",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\animation\\AnimationMixer.js",
+            "line": 46,
+            "description": "Set animation mixer time.",
+            "itemtype": "method",
+            "name": "setTime",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Time in seconds.",
+                    "type": "Number"
+                }
+            ],
+            "class": "AnimationMixer",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\animation\\AnimationMixer.js",
+            "line": 64,
+            "description": "Play animation.",
+            "itemtype": "method",
+            "name": "play",
+            "class": "AnimationMixer",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\animation\\AnimationMixer.js",
+            "line": 74,
+            "description": "Stop animation playback.",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "AnimationMixer",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\animation\\AnimationMixer.js",
+            "line": 85,
+            "description": "Pause animation playback.",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "AnimationMixer",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\animation\\AnimationMixer.js",
+            "line": 101,
+            "description": "Update animation state.",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "delta",
+                    "description": "Time since last call.",
+                    "type": "Number"
+                },
+                {
+                    "name": "forceUpdate",
+                    "description": "If set true the mixer is updated even if it isnt playing.",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "AnimationMixer",
+            "module": "Animation"
+        },
+        {
             "file": "..\\..\\source\\core\\controls\\VRControls.js",
             "line": 12,
             "description": "VR display.",
@@ -8719,7 +8799,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 68,
+            "line": 70,
             "description": "Default particle emitter configuration.",
             "itemtype": "attribute",
             "name": "defaultEmitter",
@@ -8729,7 +8809,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 89,
+            "line": 91,
             "description": "Default particle emitter group configuration.",
             "itemtype": "attribute",
             "name": "defaultGroup",
@@ -8739,7 +8819,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 110,
+            "line": 112,
             "description": "Reload internal material and geometry.\n\nMay be required after changing material related parameters.",
             "itemtype": "method",
             "name": "reload",
@@ -8748,7 +8828,16 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 133,
+            "line": 135,
+            "description": "Update particle object matrix.\n\nIgnores the particle position if the moveEmitter attribute is set true.",
+            "itemtype": "method",
+            "name": "updateMatrix",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 157,
             "description": "Particle emitter state is automatically updated before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -8757,7 +8846,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 146,
+            "line": 173,
             "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
@@ -8766,7 +8855,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 160,
+            "line": 187,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
