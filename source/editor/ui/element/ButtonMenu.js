@@ -67,10 +67,9 @@ ButtonMenu.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.text.size.set(this.size.x, this.size.y);
-		this.text.visible = this.visible;
 		this.text.updateInterface();
  
-		this.element.style.visibility = "visible";
+		this.element.style.display = "flex";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
@@ -78,6 +77,6 @@ ButtonMenu.prototype.updateInterface = function()
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
 };

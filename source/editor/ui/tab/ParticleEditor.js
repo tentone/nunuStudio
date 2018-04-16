@@ -610,7 +610,7 @@ ParticleEditor.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		//Main container
+		//Main
 		this.main.size.copy(this.size);
 		this.main.updateInterface();
 

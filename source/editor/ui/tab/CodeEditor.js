@@ -116,7 +116,6 @@ CodeEditor.prototype.setFontSize = function(size)
 	this.code.display.wrapper.style.fontSize = size + "px";
 };
 
-//Activate code editor
 CodeEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
