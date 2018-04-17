@@ -16,7 +16,7 @@ function DualDivision(parent)
 	this.divA.style.backgroundColor = Editor.theme.panelColor;
 	this.element.appendChild(this.divA);
 
-	this.divASize = new Vector2(0, 0);
+	this.divASize = new THREE.Vector2(0, 0);
 
 	//Division B
 	this.divB = document.createElement("div");
@@ -25,7 +25,7 @@ function DualDivision(parent)
 	this.divB.style.backgroundColor = Editor.theme.panelColor;
 	this.element.appendChild(this.divB);
 
-	this.divBSize = new Vector2(0, 0);
+	this.divBSize = new THREE.Vector2(0, 0);
 
 	//Resize tab
 	this.resizeTab = document.createElement("div");

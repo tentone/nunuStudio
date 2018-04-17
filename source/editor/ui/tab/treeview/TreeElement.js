@@ -249,20 +249,20 @@ function TreeElement(container)
 					Editor.updateViewsGUI();
 				});
 
-				physics.addOption("ConvexHull", function()
+				physics.addOption("Cylinder", function()
 				{
 					var physics = new PhysicsObject();
-					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.HULL));
+					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.CYLINDER));
 					physics.name = self.obj.name;
 					
 					Editor.addObject(physics);
 					Editor.updateViewsGUI();
 				});
-
-				physics.addOption("Cylinder", function()
+	
+				physics.addOption("ConvexHull", function()
 				{
 					var physics = new PhysicsObject();
-					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.CYLINDER));
+					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.HULL));
 					physics.name = self.obj.name;
 					
 					Editor.addObject(physics);
@@ -287,7 +287,6 @@ function TreeElement(container)
 					ObjectUtils.setMatrixAutoUpdate(self.obj, true);
 					Editor.updateViewsGUI();
 				});
-
 
 				var shadow = context.addMenu("Shadows");
 
@@ -396,7 +395,6 @@ function TreeElement(container)
 		{
 			return;
 		}
-
 
 		//Collect element from buffer
 		var uuid = event.dataTransfer.getData("uuid");

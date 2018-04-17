@@ -261,7 +261,7 @@ include("lib/ThreeCSG.js");
 
 include("editor/style.css");
 
-include("editor/theme/Theme.js");
+include("editor/theme/ThemeManager.js");
 include("editor/theme/ThemeDark.js");
 
 include("editor/ui/element/Element.js");
@@ -315,7 +315,7 @@ include("editor/ui/tab/treeview/TreeView.js");
 include("editor/ui/tab/treeview/TreeElement.js");
 
 include("editor/ui/tab/scene/SceneEditor.js");
-include("editor/ui/tab/scene/CameraOrientation.js");
+include("editor/ui/tab/scene/tools/OrientationCube.js");
 
 include("editor/ui/tab/asset/AssetExplorer.js");
 include("editor/ui/tab/asset/asset/Asset.js");
@@ -584,7 +584,7 @@ Editor.initialize = function()
 	Editor.mouse = new Mouse();
 
 	//Load theme
-	Editor.theme = Theme.get(Settings.general.theme);
+	Editor.theme = ThemeManager.get(Settings.general.theme);
 
 	//Open file
 	Editor.openFile = null;

@@ -35,4 +35,4 @@ function ThemeDark()
 	document.body.style.color = this.textColor;
 }
 
-Theme.register(ThemeDark, "dark");
+ThemeManager.register(ThemeDark, "dark");

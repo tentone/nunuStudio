@@ -50,7 +50,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.toolScene.matrixAutoUpdate = false;
 
 	//Camera orientation scene
-	this.orientation = new CameraOrientation();
+	this.orientation = new OrientationCube();
 
 	//Grid
 	this.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
@@ -442,7 +442,12 @@ SceneEditor.prototype.updateSettings = function()
 	this.gridHelper.setSpacing(Settings.editor.gridSpacing);
 	this.gridHelper.update();
 
+	//Axis
 	this.axisHelper.visible = Settings.editor.axisEnabled;
+
+	//Orientation cube
+	var size = Settings.editor.cameraRotationCubeSize;
+	this.orientation.size.set(size, size);
 
 	//Tool
 	if(this.tool !== null && Editor.toolMode !== Editor.SCALE)
@@ -927,92 +932,80 @@ SceneEditor.prototype.render = function()
 		//Draw camera cube
 		if(Settings.editor.cameraRotationCube)
 		{
-			var size = Settings.editor.cameraRotationCubeSize;
-			var x = this.canvas.width - size;
-
-			renderer.setScissorTest(true);
-			renderer.setViewport(x, 0, size, size);
-			renderer.setScissor(x, 0, size, size);
-
-			if(this.mouse.position.x > x && this.mouse.position.y > 0 && this.mouse.position.x < this.canvas.width && this.mouse.position.y < size)
+			var code = this.orientation.raycast(this.mouse, this.canvas);
+			
+			if(code !== null && (this.mouse.buttonDoubleClicked() || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
 			{
-				this.tempVector2.set((this.mouse.position.x - x) / size * 2 - 1, -(this.mouse.position.y / size * 2 - 1));
-				
-				var code = this.orientation.raycast(this.tempVector2);
-				
-				if(code !== null && (this.mouse.buttonDoubleClicked() || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
+				if(Settings.editor.navigation === Settings.ORBIT || this.camera instanceof OrthographicCamera)
 				{
-					if(Settings.editor.navigation === Settings.ORBIT || this.camera instanceof OrthographicCamera)
+					if(code === OrientationCube.Z_POS)
 					{
-						if(code === CameraOrientation.Z_POS)
-						{
-							this.cameraRotation.set(Math.PI / 2, 0);
-						}
-						else if(code === CameraOrientation.Z_NEG)
-						{
-							this.cameraRotation.set(-Math.PI / 2, 0);
-						}
-						else if(code === CameraOrientation.X_POS)
-						{
-							this.cameraRotation.set(0, 0);
-						}
-						else if(code === CameraOrientation.X_NEG)
-						{
-							this.cameraRotation.set(Math.PI, 0);
-						}
-						else if(code === CameraOrientation.Y_POS)
-						{
-							this.cameraRotation.set(Math.PI, 1.57);
-						}
-						else if(code === CameraOrientation.Y_NEG)
-						{
-							this.cameraRotation.set(Math.PI, -1.57);
-						}
-
-						this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
+						this.cameraRotation.set(Math.PI / 2, 0);
 					}
-					else
+					else if(code === OrientationCube.Z_NEG)
 					{
-						if(code === CameraOrientation.Z_POS)
-						{
-							this.cameraRotation.set(Math.PI, 0);
-						}
-						else if(code === CameraOrientation.Z_NEG)
-						{
-							this.cameraRotation.set(0, 0);
-						}
-						else if(code === CameraOrientation.X_POS)
-						{
-							this.cameraRotation.set(-Math.PI / 2, 0);
-						}
-						else if(code === CameraOrientation.X_NEG)
-						{
-							this.cameraRotation.set(Math.PI / 2, 0);
-						}
-						else if(code === CameraOrientation.Y_POS)
-						{
-							this.cameraRotation.set(Math.PI, -1.57);
-						}
-						else if(code === CameraOrientation.Y_NEG)
-						{
-							this.cameraRotation.set(Math.PI, 1.57);
-						}
-
-						this.setCameraRotation(this.cameraRotation, this.camera);
+						this.cameraRotation.set(-Math.PI / 2, 0);
 					}
+					else if(code === OrientationCube.X_POS)
+					{
+						this.cameraRotation.set(0, 0);
+					}
+					else if(code === OrientationCube.X_NEG)
+					{
+						this.cameraRotation.set(Math.PI, 0);
+					}
+					else if(code === OrientationCube.Y_POS)
+					{
+						this.cameraRotation.set(Math.PI, 1.57);
+					}
+					else if(code === OrientationCube.Y_NEG)
+					{
+						this.cameraRotation.set(Math.PI, -1.57);
+					}
+
+					this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
 				}
-
-				if(this.mouse.buttonPressed(Mouse.LEFT))
+				else
 				{
-					if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+					if(code === OrientationCube.Z_POS)
 					{
-						this.updateOrthographicCameraRotation();
+						this.cameraRotation.set(Math.PI, 0);
 					}
+					else if(code === OrientationCube.Z_NEG)
+					{
+						this.cameraRotation.set(0, 0);
+					}
+					else if(code === OrientationCube.X_POS)
+					{
+						this.cameraRotation.set(-Math.PI / 2, 0);
+					}
+					else if(code === OrientationCube.X_NEG)
+					{
+						this.cameraRotation.set(Math.PI / 2, 0);
+					}
+					else if(code === OrientationCube.Y_POS)
+					{
+						this.cameraRotation.set(Math.PI, -1.57);
+					}
+					else if(code === OrientationCube.Y_NEG)
+					{
+						this.cameraRotation.set(Math.PI, 1.57);
+					}
+
+					this.setCameraRotation(this.cameraRotation, this.camera);
+				}
+			}
+
+			if(this.mouse.buttonPressed(Mouse.LEFT))
+			{
+				if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+				{
+					this.updateOrthographicCameraRotation();
 				}
 			}
 
 			this.orientation.updateRotation(this.camera);
-			this.orientation.render(renderer);
+			this.orientation.render(renderer, this.canvas);
 		}
 
 		//Camera preview

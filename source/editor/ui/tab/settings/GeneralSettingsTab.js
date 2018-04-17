@@ -32,9 +32,10 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Fill theme dropdown
-	for(var i = 0; i < Theme.list.length; i++)
+	var list = ThemeManager.getList();
+	for(var i = 0; i < list.length; i++)
 	{
-		var theme = Theme.list[i];
+		var theme = list[i];
 		this.theme.addValue(theme, theme);
 	}
 
