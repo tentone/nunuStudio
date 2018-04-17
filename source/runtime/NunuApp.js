@@ -681,29 +681,10 @@ NunuApp.prototype.toggleFullscreen = function(element)
 {
 	var fullscreen = Nunu.isFullscreen();
 
-	//Enter fullscreen
-	if(!fullscreen)
+	if(element === undefined)
 	{
-		if(element === undefined)
-		{
-			element = this.canvas;
-		}
-		
-		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
-		
-		if(element.requestFullscreen)
-		{
-			element.requestFullscreen();
-		}
+		element = this.canvas;
 	}
-	//Exit fullscreen
-	else
-	{
-		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
-		
-		if(document.exitFullscreen)
-		{
-			document.exitFullscreen();
-		}
-	}
+
+	Nunu.setFullscreen(element, !fullscreen)
 };

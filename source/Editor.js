@@ -2252,36 +2252,6 @@ Editor.exportMacOSProject = function(dir)
 	Editor.exportNWJSProject(dir);
 };
 
-//Set fullscreen mode
-Editor.setFullscreen = function(fullscreen, element)
-{
-	Editor.fullscreen = fullscreen;
-
-	if(fullscreen)
-	{
-		if(element === undefined)
-		{
-			element = document.body;
-		}
-		
-		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
-		
-		if(element.requestFullscreen)
-		{
-			element.requestFullscreen();
-		}
-	}
-	else
-	{
-		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
-		
-		if(document.exitFullscreen)
-		{
-			document.exitFullscreen();
-		}
-	}
-};
-
 //Confirmation box
 Editor.confirm = function(message)
 {

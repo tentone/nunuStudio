@@ -393,14 +393,14 @@ SceneEditor.prototype.setFullscreen = function(fullscreen)
 {
 	if(fullscreen)
 	{
-		Editor.setFullscreen(true, this.element);
+		Nunu.setFullscreen(true, this.element);
 		this.position.set(0, 0);	
 		this.size.set(window.screen.width, window.screen.height);
 		this.updateInterface();
 	}
 	else
 	{
-		Editor.setFullscreen(false);
+		Nunu.setFullscreen(false);
 		Editor.gui.updateInterface();
 	}
 };

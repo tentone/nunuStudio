@@ -133,3 +133,40 @@ Nunu.isFullscreen = function()
 {
 	return document.webkitIsFullScreen || document.mozFullScreen || document.webkitIsFullScreen || document.webkitIsFullScreen || document.fullscreen || false;
 };
+
+
+/**
+ * Set an element into fullscreen mode or exit out of fullscreen mode.
+ *
+ * Use isFullscreen to check if the application is running in fullscreen mode already.
+ * 
+ * @method setFullscreen
+ * @param {boolean} enable If true the application will enter fullscreen mode, if false it will exit.
+ * @param {DOM} element DOM element to put into fullscreen.
+ */
+Nunu.setFullscreen = function(enabled, element)
+{
+	if(enabled === true)
+	{
+		if(element === undefined)
+		{
+			element = document.body;
+		}
+		
+		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
+		
+		if(element.requestFullscreen)
+		{
+			element.requestFullscreen();
+		}
+	}
+	else
+	{
+		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+		
+		if(document.exitFullscreen)
+		{
+			document.exitFullscreen();
+		}
+	}
+};
