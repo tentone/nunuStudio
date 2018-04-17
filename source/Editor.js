@@ -41,6 +41,8 @@ include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
 
 include("lib/three/objects/Lensflare.js");
+include("lib/three/objects/Reflector.js");
+include("lib/three/objects/Refractor.js");
 
 include("lib/three/loaders/TTFLoader.js");
 

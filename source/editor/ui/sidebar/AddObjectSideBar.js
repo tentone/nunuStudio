@@ -74,7 +74,7 @@ function AddObjectSideBar(element)
 	//Tetrahedron
 	addModel.addOption(Editor.filePath + "icons/models/pyramid.png", function()
 	{
-		var geometry = new THREE.TetrahedronGeometry(1, 0);
+		var geometry = new THREE.TetrahedronBufferGeometry(1, 0);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "tetrahedron";
 		Editor.addObject(model);
@@ -252,6 +252,21 @@ function AddObjectSideBar(element)
 
 		Editor.addObject(lensFlare);
 	}, "Lens flare");
+
+	//Reflector
+	addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
+	{
+		var object = new THREE.Reflector(new THREE.BoxBufferGeometry());
+
+		Editor.addObject(object);
+	}, "Reflector");
+
+	//Refractor
+	addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
+	{
+		var object = new THREE.Refractor(new THREE.SphereBufferGeometry(1, 32, 32));
+		Editor.addObject(object);
+	}, "Refractor");
 
 	//Physics
 	var addPhysics = new ButtonDrawer(element);

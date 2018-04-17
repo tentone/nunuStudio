@@ -77,12 +77,13 @@
 */
 function PerspectiveCamera(fov, aspect, near, far)
 {
+	this.offset = new THREE.Vector2(0.0, 0.0);
+	this.viewport = new THREE.Vector2(1.0, 1.0);
+	
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
 
-	this.offset = new THREE.Vector2(0.0, 0.0);
-	this.viewport = new THREE.Vector2(1.0, 1.0);
 	this.clearColor = true;
 	this.clearDepth = true;
 	this.clearStencil = true;
@@ -154,7 +155,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 {
 	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov ) / this.zoom;
 	var height = 2 * top;
-	var width = this.aspect * height * ((this.viewport !== undefined) ? (this.viewport.x / this.viewport.y) : 1.0);
+	var width = this.aspect * height * this.viewport.x / this.viewport.y;
 	var left = -0.5 * width;
 
 	if(this.filmOffset !== 0)
