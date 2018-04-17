@@ -237,10 +237,10 @@ include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/XLoader.js");
 
-include("lib/three/loaders/texture/DDSLoader.js");
-include("lib/three/loaders/texture/PVRLoader.js");
-include("lib/three/loaders/texture/TGALoader.js");
-include("lib/three/loaders/texture/KTXLoader.js");
+include("lib/three/loaders/DDSLoader.js");
+include("lib/three/loaders/PVRLoader.js");
+include("lib/three/loaders/TGALoader.js");
+include("lib/three/loaders/KTXLoader.js");
 
 include("lib/three/modifiers/SimplifyModifier.js");
 include("lib/three/modifiers/SubdivisionModifier.js");

@@ -629,13 +629,6 @@ TreeElement.prototype.updateFoldedState = function()
 	this.container.updateChildPosition();
 };
 
-//Set element visibility
-TreeElement.prototype.setVisibility = function(visible)
-{
-	this.visible = visible;
-	this.element.style.display = this.visible ? "block" : "none";
-};
-
 //Update interface
 TreeElement.prototype.updateInterface = function()
 {

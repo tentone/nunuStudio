@@ -118,16 +118,17 @@ Element.prototype.updatePosition = function(mode)
 	}
 };
 
-Element.prototype.setBackgroundColor = function(color)
-{
-	this.element.style.backgroundColor = color;
-};
-
 Element.prototype.updateSize = function()
 {
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
 };
+
+Element.prototype.setBackgroundColor = function(color)
+{
+	this.element.style.backgroundColor = color;
+};
+
 
 Element.prototype.setCursor = function(cursor)
 {
@@ -147,7 +148,6 @@ Element.prototype.attachTo = function(parent)
 	this.updateInterface();
 };
 
-//Remove element
 Element.prototype.destroy = function()
 {
 	if(this.parent.contains(this.element))
@@ -156,7 +156,12 @@ Element.prototype.destroy = function()
 	}
 };
 
-//Update interface
+Element.prototype.setVisibility = function(visible)
+{
+	this.visible = visible;
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
+};
+
 Element.prototype.updateInterface = function()
 {
 	if(this.visible)

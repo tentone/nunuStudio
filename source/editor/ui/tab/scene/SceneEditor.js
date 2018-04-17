@@ -263,22 +263,24 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Fullscreen button
 	this.fullscreenButton = new ButtonImage(this.element);
+	this.fullscreenButton.position.set(5, 5);
 	this.fullscreenButton.size.set(30, 30);
 	this.fullscreenButton.setImage(Editor.filePath + "icons/misc/fullscreen.png");
 	this.fullscreenButton.setAltText("Toggle fullscreen");
 	this.fullscreenButton.setImageScale(0.8, 0.8);
+	this.fullscreenButton.updateSize();
+	this.fullscreenButton.setBackgroundColor("#333333");
 	this.fullscreenButton.visible = false;
-	this.fullscreenButton.element.style.backgroundColor = "#333333";
 	this.fullscreenButton.element.style.borderRadius = "5px";
 	this.fullscreenButton.element.style.opacity = 0.5;
 
 	this.fullscreenButton.element.onmouseenter = function()
 	{
-		self.fullscreenButton.element.style.opacity = 1.0;
+		this.style.opacity = 1.0;
 	};
 	this.fullscreenButton.element.onmouseleave = function()
 	{
-		self.fullscreenButton.element.style.opacity = 0.5;
+		this.style.opacity = 0.5;
 	};
 
 	var fullscreen = true;
@@ -291,41 +293,45 @@ function SceneEditor(parent, closeable, container, index)
 	//VR button
 	this.vrButton = new ButtonImage(this.element);
 	this.vrButton.size.set(30, 30);
+	this.vrButton.position.set(40, 5);
 	this.vrButton.setImage(Editor.filePath + "icons/misc/vr.png");
 	this.vrButton.setAltText("Toggle VR mode");
 	this.vrButton.setImageScale(0.8, 0.8);
+	this.vrButton.updateSize();
+	this.vrButton.setBackgroundColor("#333333");
 	this.vrButton.visible = false;
-	this.vrButton.element.style.backgroundColor = "#333333";
 	this.vrButton.element.style.borderRadius = "5px";
 	this.vrButton.element.style.opacity = 0.5;
 
 	this.vrButton.element.onmouseenter = function()
 	{
-		self.vrButton.element.style.opacity = 1.0;
+		this.style.opacity = 1.0;
 	};
 	this.vrButton.element.onmouseleave = function()
 	{
-		self.vrButton.element.style.opacity = 0.5;
+		this.style.opacity = 0.5;
 	};
 
 	//Camera mode button
 	this.cameraButton = new ButtonImage(this.element);
+	this.cameraButton.position.set(5, 5);
 	this.cameraButton.size.set(30, 30);
 	this.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");
 	this.cameraButton.setAltText("Change camera mode");
 	this.cameraButton.setImageScale(0.8, 0.8);
-	this.cameraButton.element.style.backgroundColor = "#333333";
+	this.cameraButton.updateSize();
+	this.cameraButton.setBackgroundColor("#333333");
 	this.cameraButton.element.style.borderRadius = "5px";
 	this.cameraButton.element.style.opacity = 0.5;
 
 	this.cameraButton.element.onmouseenter = function()
 	{
-		self.cameraButton.element.style.opacity = 1.0;
+		this.style.opacity = 1.0;
 	};
 
 	this.cameraButton.element.onmouseleave = function()
 	{
-		self.cameraButton.element.style.opacity = 0.5;
+		this.style.opacity = 0.5;
 	};
 
 	this.cameraButton.setCallback(function()
@@ -341,6 +347,10 @@ function SceneEditor(parent, closeable, container, index)
 			self.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");
 		}
 	});
+	
+	this.fullscreenButton.updatePosition(Element.BOTTOM_RIGHT);
+	this.vrButton.updatePosition(Element.BOTTOM_RIGHT);
+	this.cameraButton.updatePosition(Element.BOTTOM_RIGHT);
 }
 
 //State
@@ -1569,24 +1579,6 @@ SceneEditor.prototype.updateInterface = function()
 	{
 		//Stats
 		this.stats.dom.style.visibility = Settings.general.showStats ? "visible" : "hidden";
-
-		//Fullscreen button
-		this.fullscreenButton.position.x = this.position.x + this.size.x - this.fullscreenButton.size.x - 5;
-		this.fullscreenButton.position.y = this.position.y + this.size.y - this.fullscreenButton.size.y - 5;
-		this.fullscreenButton.visible = this.showButtonsFullscreen;
-		this.fullscreenButton.updateInterface();
-
-		//VR button
-		this.vrButton.position.x = this.fullscreenButton.position.x - this.vrButton.size.x - 10;
-		this.vrButton.position.y = this.fullscreenButton.position.y;
-		this.vrButton.visible = this.showButtonsVr;
-		this.vrButton.updateInterface();
-
-		//Camera mode button
-		this.cameraButton.position.x = this.position.x + this.size.x - this.cameraButton.size.x - 5;
-		this.cameraButton.position.y = 5;
-		this.cameraButton.visible = this.showButtonsCameraMode;
-		this.cameraButton.updateInterface();
 
 		//Canvas
 		this.canvas.width = this.size.x;

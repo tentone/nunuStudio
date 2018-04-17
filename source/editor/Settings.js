@@ -60,7 +60,7 @@ Settings.loadDefault = function()
 		mouseMoveSpeed : 0.001,
 		mouseWheelSensitivity : 0.0005,
 		cameraRotationCube : true,
-		cameraRotationCubeSize: 100
+		cameraRotationCubeSize: 120
 	};
 
 	//Render
