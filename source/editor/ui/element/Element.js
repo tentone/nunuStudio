@@ -11,22 +11,15 @@ function Element(parent, type)
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	
+
 	this.parent.appendChild(this.element);
 }
 
 Element.prototype.constructor = Element;
 
-//Origin on top left.
 Element.TOP_LEFT = 0;
-
-//Origin on top right.
 Element.TOP_RIGHT = 1;
-
-//Origin on bottom left.
 Element.BOTTOM_LEFT = 2;
-
-//Origin on bottom right.
 Element.BOTTOM_RIGHT = 3;
 
 //Add drag and drog event prevention
@@ -124,11 +117,16 @@ Element.prototype.updateSize = function()
 	this.element.style.height = this.size.y + "px";
 };
 
+Element.prototype.setVisibility = function(visible)
+{
+	this.visible = visible;
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
+};
+
 Element.prototype.setBackgroundColor = function(color)
 {
 	this.element.style.backgroundColor = color;
 };
-
 
 Element.prototype.setCursor = function(cursor)
 {
@@ -154,12 +152,6 @@ Element.prototype.destroy = function()
 	{
 		this.parent.removeChild(this.element);
 	}
-};
-
-Element.prototype.setVisibility = function(visible)
-{
-	this.visible = visible;
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
 };
 
 Element.prototype.updateInterface = function()

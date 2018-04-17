@@ -2034,7 +2034,7 @@ Editor.loadModel = function(file, parent)
 
 					for(var i = 0; i < paths.length; i ++)
 					{
-						var material = new THREE.MeshBasicMaterial({color: Math.random() * 0xffffff});
+						var material = new THREE.MeshBasicMaterial({color: paths[i].color});
 						var shapes = paths[i].toShapes(true);
 
 						for(var j = 0; j < shapes.length; j++)

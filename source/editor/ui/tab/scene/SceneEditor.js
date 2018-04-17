@@ -256,11 +256,6 @@ function SceneEditor(parent, closeable, container, index)
 		event.preventDefault();
 	};
 
-	//Buttons visibility
-	this.showButtonsVr = false;
-	this.showButtonsFullscreen = false;
-	this.showButtonsCameraMode = true;
-
 	//Fullscreen button
 	this.fullscreenButton = new ButtonImage(this.element);
 	this.fullscreenButton.position.set(5, 5);
@@ -270,6 +265,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.fullscreenButton.setImageScale(0.8, 0.8);
 	this.fullscreenButton.updateSize();
 	this.fullscreenButton.setBackgroundColor("#333333");
+	this.fullscreenButton.updatePosition(Element.BOTTOM_RIGHT);
 	this.fullscreenButton.visible = false;
 	this.fullscreenButton.element.style.borderRadius = "5px";
 	this.fullscreenButton.element.style.opacity = 0.5;
@@ -299,6 +295,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.vrButton.setImageScale(0.8, 0.8);
 	this.vrButton.updateSize();
 	this.vrButton.setBackgroundColor("#333333");
+	this.vrButton.updatePosition(Element.BOTTOM_RIGHT);
 	this.vrButton.visible = false;
 	this.vrButton.element.style.borderRadius = "5px";
 	this.vrButton.element.style.opacity = 0.5;
@@ -321,6 +318,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton.setImageScale(0.8, 0.8);
 	this.cameraButton.updateSize();
 	this.cameraButton.setBackgroundColor("#333333");
+	this.cameraButton.updatePosition(Element.BOTTOM_RIGHT);
 	this.cameraButton.element.style.borderRadius = "5px";
 	this.cameraButton.element.style.opacity = 0.5;
 
@@ -347,10 +345,6 @@ function SceneEditor(parent, closeable, container, index)
 			self.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");
 		}
 	});
-	
-	this.fullscreenButton.updatePosition(Element.BOTTOM_RIGHT);
-	this.vrButton.updatePosition(Element.BOTTOM_RIGHT);
-	this.cameraButton.updatePosition(Element.BOTTOM_RIGHT);
 }
 
 //State
@@ -1323,9 +1317,9 @@ SceneEditor.prototype.setState = function(state)
 		this.disposeRunningProgram();
 
 		//Set buttons
-		this.showButtonsFullscreen = false;
-		this.showButtonsVr = false;
-		this.showButtonsCameraMode = true;
+		this.fullscreenButton.setVisibility(false);
+		this.vrButton.setVisibility(false);
+		this.cameraButton.setVisibility(true);
 
 		//Update interface
 		this.updateInterface();
@@ -1355,8 +1349,8 @@ SceneEditor.prototype.setState = function(state)
 			this.programRunning.resize(this.canvas.width, this.canvas.height);
 
 			//Show full screen and VR buttons
-			this.showButtonsFullscreen = true;
-			this.showButtonsCameraMode = false;
+			this.fullscreenButton.setVisibility(true);
+			this.cameraButton.setVisibility(false);
 
 			//If program uses VR set button
 			if(this.programRunning.vr)
@@ -1364,7 +1358,7 @@ SceneEditor.prototype.setState = function(state)
 				if(Nunu.webvrAvailable())
 				{
 					//Show VR button
-					this.showButtonsVr = true;
+					this.vrButton.setVisibility(true);
 
 					//Create VR switch callback
 					var vr = true;
@@ -1547,6 +1541,7 @@ SceneEditor.prototype.resizeCamera = function()
 	if(this.canvas !== null && this.renderer !== null)
 	{
 		this.renderer.setSize(this.canvas.width, this.canvas.height);
+
 		this.camera.aspect = this.canvas.width / this.canvas.height;
 		this.camera.updateProjectionMatrix();
 
@@ -1586,15 +1581,15 @@ SceneEditor.prototype.updateInterface = function()
 		this.canvas.style.width = this.size.x + "px";
 		this.canvas.style.height = this.size.y + "px";
 
-		//Renderer
-		this.resizeCamera();
-
 		//Element
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
+
+		//Renderer
+		this.resizeCamera();
 	}
 	else
 	{
