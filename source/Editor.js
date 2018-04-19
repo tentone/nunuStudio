@@ -1737,6 +1737,28 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsText(file);
 		}
+		//Draco
+		else if(extension === "drc")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					//var loader = new THREE.DracoLoader();
+
+					//TODO <ADD CODE HERE>
+					
+					//Editor.addObject(scene, parent);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file: " + e);
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsArrayBuffer(file);
+		}
 		//GLTF
 		else if(extension === "gltf" || extension === "glb")
 		{
