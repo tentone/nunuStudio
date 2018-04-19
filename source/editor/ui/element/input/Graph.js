@@ -55,34 +55,6 @@ function Graph(parent, name, color)
 	//Graph range
 	this.min = 0.0;
 	this.max = 1.0;
-	this.buttonIndex = 0;
-
-	this.manager = new EventManager();
-
-	this.manager.add(window, "mousemove", function(event)
-	{
-		var i = self.buttonIndex;
-		var graph = self.graph[i];
-		var delta = event.movementY;
-
-		graph.values[i] -= (delta * ((self.max - self.min) / self.size.y));
-
-		if(graph.values[i] > self.max)
-		{
-			graph.values[i] = self.max;
-		}
-		else if(graph.values[i] < self.min)
-		{
-			graph.values[i] = self.min;
-		}
-
-		self.updateGraph(graph);
-	});
-
-	this.manager.add(window, "mouseup", function(event)
-	{	
-		self.manager.destroy();
-	});
 }
 
 Graph.prototype = Object.create(Element.prototype);
@@ -175,11 +147,42 @@ Graph.prototype.setValue = function(values, name)
 		button.style.width = "10px";
 		button.style.height = "10px";
 		button.index = graph.buttons.length;
+		button.graph = graph;
 
 		button.onmousedown = function(event)
 		{
-			self.buttonIndex = this.index;
-			self.manager.create();
+			var index = this.index;
+			var graph = this.graph;
+			var manager = new EventManager();
+
+			manager.add(window, "mousemove", function(event)
+			{
+				var delta = event.movementY;
+
+				graph.values[index] -= (delta * ((self.max - self.min) / self.size.y));
+
+				if(graph.values[index] > self.max)
+				{
+					graph.values[index] = self.max;
+				}
+				else if(graph.values[index] < self.min)
+				{
+					graph.values[index] = self.min;
+				}
+
+				if(graph.onchange !== null)
+				{
+					graph.onchange(graph.values);
+				}
+				self.updateGraph(graph);
+			});
+
+			manager.add(window, "mouseup", function(event)
+			{	
+				manager.destroy();
+			});
+			manager.create();
+
 			event.stopPropagation();
 		};
 
@@ -319,48 +322,6 @@ Graph.prototype.updateGrid = function()
 		context.stroke();
 	}
 };
-
-//Update graph buttons state
-/*Graph.prototype.update = function()
-{
-	for(var j = 0; j < this.graph.length; j++)
-	{
-		var graph = this.graph[j];
-
-		for(var i = 0; i < graph.buttons.length; i++)
-		{
-			//Check if some button is pressed
-			if(graph.buttons[i].pressed)
-			{
-				//Check if button still pressed
-				if(Editor.mouse.buttonPressed(Mouse.LEFT))
-				{
-					graph.values[i] -= (Editor.mouse.delta.y * ((this.max - this.min) / this.size.y));
-
-					if(graph.values[i] > this.max)
-					{
-						graph.values[i] = this.max;
-					}
-					else if(graph.values[i] < this.min)
-					{
-						graph.values[i] = this.min;
-					}
-
-					this.updateGraph(graph);
-					if(graph.onchange !== null)
-					{
-						graph.onchange(graph.values);
-					}
-				}
-				//Reset button pressed flag
-				else
-				{
-					graph.buttons[i].pressed = false;
-				}
-			}
-		}
-	}
-};*/
 
 //Update Graph Size
 Graph.prototype.updateInterface = function()
