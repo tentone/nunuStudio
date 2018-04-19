@@ -184,7 +184,7 @@ function TreeElement(container)
 			}
 	
 			//Recalculate Origin
-			context.addOption("Recalculate Origin", function()
+			context.addOption("Recenter geometries", function()
 			{
 				ObjectUtils.recalculateGeometryOrigin(self.obj);
 			});

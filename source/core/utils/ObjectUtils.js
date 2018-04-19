@@ -179,11 +179,9 @@ ObjectUtils.recalculateGeometryOrigin = function(object)
 			children.geometry.computeBoundingBox();
 
 			var box = children.geometry.boundingBox.clone();
-			box.applyMatrix4(children.matrixWorld);
 
 			var center = box.getCenter(new THREE.Vector3());
-
-			children.position.copy(center);
+			children.position.add(center);
 
 			var matrix = new THREE.Matrix4();
 			matrix.makeTranslation(-center.x, -center.y, -center.z);
