@@ -4,6 +4,8 @@ function Graph(parent, name, color)
 {
 	Element.call(this, parent);
 
+	var self = this;
+
 	this.element.style.cursor = "default";
 	this.element.style.overflow = "visible";
 
@@ -53,6 +55,34 @@ function Graph(parent, name, color)
 	//Graph range
 	this.min = 0.0;
 	this.max = 1.0;
+	this.buttonIndex = 0;
+
+	this.manager = new EventManager();
+
+	this.manager.add(window, "mousemove", function(event)
+	{
+		var i = self.buttonIndex;
+		var graph = self.graph[i];
+		var delta = event.movementY;
+
+		graph.values[i] -= (delta * ((self.max - self.min) / self.size.y));
+
+		if(graph.values[i] > self.max)
+		{
+			graph.values[i] = self.max;
+		}
+		else if(graph.values[i] < self.min)
+		{
+			graph.values[i] = self.min;
+		}
+
+		self.updateGraph(graph);
+	});
+
+	this.manager.add(window, "mouseup", function(event)
+	{	
+		self.manager.destroy();
+	});
 }
 
 Graph.prototype = Object.create(Element.prototype);
@@ -125,7 +155,8 @@ Graph.prototype.setRange = function(min, max)
 
 //Set values to a graph
 Graph.prototype.setValue = function(values, name)
-{
+{	
+	var self = this;
 	var graph = this.getGraph(name);
 
 	//Set values
@@ -143,12 +174,13 @@ Graph.prototype.setValue = function(values, name)
 		button.style.marginLeft = "25px";
 		button.style.width = "10px";
 		button.style.height = "10px";
-		button.pressed = false;
 		button.index = graph.buttons.length;
-		
-		button.onmousedown = function()
+
+		button.onmousedown = function(event)
 		{
-			this.pressed = true;
+			self.buttonIndex = this.index;
+			self.manager.create();
+			event.stopPropagation();
 		};
 
 		this.element.appendChild(button);
@@ -289,7 +321,7 @@ Graph.prototype.updateGrid = function()
 };
 
 //Update graph buttons state
-Graph.prototype.update = function()
+/*Graph.prototype.update = function()
 {
 	for(var j = 0; j < this.graph.length; j++)
 	{
@@ -328,7 +360,7 @@ Graph.prototype.update = function()
 			}
 		}
 	}
-};
+};*/
 
 //Update Graph Size
 Graph.prototype.updateInterface = function()

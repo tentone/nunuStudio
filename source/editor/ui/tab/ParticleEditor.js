@@ -552,11 +552,6 @@ ParticleEditor.prototype.destroy = function()
 //Update material editor
 ParticleEditor.prototype.update = function()
 {
-	//Graphs
-	this.opacity.update();
-	this.scale.update();
-	this.angle.update();
-	
 	//Get mouse input
 	if(Editor.mouse.insideCanvas())
 	{

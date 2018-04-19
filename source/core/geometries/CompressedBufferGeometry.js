@@ -8,3 +8,8 @@ function CompressedBufferGeometry()
 }
 
 CompressedBufferGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
+
+CompressedBufferGeometry.prototype.toJSON = function(meta)
+{
+
+};
