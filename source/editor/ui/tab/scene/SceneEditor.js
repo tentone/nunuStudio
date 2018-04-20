@@ -14,6 +14,7 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Raycaster
 	this.raycaster = new THREE.Raycaster(); 
+	this.normalized = new THREE.Vector2();
 
 	//State
 	this.state = null;
@@ -28,10 +29,6 @@ function SceneEditor(parent, closeable, container, index)
 	this.keyboard = new Keyboard();
 	this.mouse = new Mouse();
 	this.mouse.setCanvas(this.canvas);
-
-	//Temporary variables
-	this.tempVector2 = new THREE.Vector2();
-	this.tempVector3 = new THREE.Vector3();
 
 	//Performance meter
 	this.stats = new Stats();
@@ -74,14 +71,9 @@ function SceneEditor(parent, closeable, container, index)
 	this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 	this.toolScene.add(this.tool);
 
-	//Navigation
-	this.cameraRotation = new THREE.Vector2(0, 0);
-	this.cameraLookAt = new THREE.Vector3(0, 0, 0);
-	this.cameraDistance = 10;
-
 	//Camera
 	this.camera = null;
-	this.cameraMode = SceneEditor.CAMERA_PERSPECTIVE;
+	this.controls = new EditorOrbitControls(); //TODO <ADD CODE HERE>
 	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
 
 	//Editing object flag
@@ -612,264 +604,22 @@ SceneEditor.prototype.update = function()
 				}
 			}
 
-			//Orthographic camera (2D mode)
-			if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+			if(!this.isEditingObject)
 			{
-				//Move camera on y / x
-				if(this.mouse.buttonPressed(Mouse.RIGHT))
-				{
-					var ratio = this.camera.size / this.canvas.width * 2;
-					var x = this.mouse.delta.x * ratio;
-
-					this.camera.position.x -= this.mouse.delta.x * ratio;
-					this.camera.position.y += this.mouse.delta.y * ratio;
-				}
-
-				//Rotate camera
-				if(this.mouse.buttonPressed(Mouse.MIDDLE))
-				{
-					this.updateOrthographicCameraRotation();
-				}
-
-				//Camera zoom
-				if(this.mouse.wheel !== 0)
-				{
-					this.camera.size += this.mouse.wheel * this.camera.size / 1000;
-					this.camera.updateProjectionMatrix();
-				}
+				//Update controls
+				this.controls.update(this.mouse, this.keyboard);
 
 				//Update grid helper position
-				this.gridHelper.position.x = this.camera.position.x - (this.camera.position.x % Settings.editor.gridSpacing);
-				this.gridHelper.position.y = this.camera.position.y - (this.camera.position.y % Settings.editor.gridSpacing);
-			}
-			//Perspective camera
-			else
-			{
-				if(Settings.editor.navigation === Settings.FREE)
+				if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
 				{
-					//Look camera
-					if(this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject)
-					{
-						if(Settings.editor.invertNavigation)
-						{
-							this.cameraRotation.y += Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
-						}
-						else
-						{
-							this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
-						}
-
-						this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
-						
-
-						//Limit Vertical Rotation to 90 degrees
-						if(this.cameraRotation.y < -1.57)
-						{
-							this.cameraRotation.y = -1.57;
-						}
-						else if(this.cameraRotation.y > 1.57)
-						{
-							this.cameraRotation.y = 1.57;
-						}
-
-						this.setCameraRotation(this.cameraRotation, this.camera);
-					}
-
-					//Move Camera on X and Z
-					if(this.mouse.buttonPressed(Mouse.RIGHT))
-					{
-						//Move speed
-						var speed = this.camera.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseMoveSpeed;
-						
-						if(speed < 0.01)
-						{
-							speed = 0.01;
-						}
-
-						//Move Camera Front and Back
-						var angleCos = Math.cos(this.cameraRotation.x);
-						var angleSin = Math.sin(this.cameraRotation.x);
-						this.camera.position.z += this.mouse.delta.y * speed * angleCos;
-						this.camera.position.x += this.mouse.delta.y * speed * angleSin;
-
-						//Move Camera Lateral
-						var angleCos = Math.cos(this.cameraRotation.x + MathUtils.pid2);
-						var angleSin = Math.sin(this.cameraRotation.x + MathUtils.pid2);
-						this.camera.position.z += this.mouse.delta.x * speed * angleCos;
-						this.camera.position.x += this.mouse.delta.x * speed * angleSin;
-					}
-					
-					//Move Camera on Y
-					if(this.mouse.buttonPressed(Mouse.MIDDLE))
-					{
-						this.camera.position.y += this.mouse.delta.y * Settings.editor.mouseMoveSpeed * 100;
-					}
-
-					//Move in camera direction using mouse scroll
-					if(this.mouse.wheel !== 0)
-					{
-						//Move speed
-						var speed = this.mouse.wheel * this.camera.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseWheelSensitivity;
-
-						//Limit zoom speed
-						if(speed < 0 && speed > -0.02)
-						{
-							speed = -0.02;
-						}
-						else if(speed > 0 && speed < 0.02)
-						{
-							speed = 0.02;
-						}
-
-						//Move camera
-						var direction = this.camera.getWorldDirection(this.tempVector3);
-						direction.multiplyScalar(speed);
-						this.camera.position.sub(direction);
-					}
-
-					//WASD movement
-					if(Settings.editor.keyboardNavigation)
-					{
-						if(Editor.keyboard.keyPressed(Keyboard.W))
-						{
-							var direction = this.camera.getWorldDirection(this.tempVector3);
-							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-							this.camera.position.add(direction);
-						}
-						if(Editor.keyboard.keyPressed(Keyboard.S))
-						{
-							var direction = this.camera.getWorldDirection(this.tempVector3);
-							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-							this.camera.position.sub(direction);
-						}
-						if(Editor.keyboard.keyPressed(Keyboard.A))
-						{
-							this.tempVector3.set(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57));
-							this.tempVector3.normalize();
-							this.tempVector3.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-							this.camera.position.sub(this.tempVector3);
-						}
-						if(Editor.keyboard.keyPressed(Keyboard.D))
-						{
-							this.tempVector3.set(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57));
-							this.tempVector3.normalize();
-							this.tempVector3.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-							this.camera.position.sub(this.tempVector3);
-						}
-					}
+					this.gridHelper.position.x = this.camera.position.x - (this.camera.position.x % Settings.editor.gridSpacing);
+					this.gridHelper.position.y = this.camera.position.y - (this.camera.position.y % Settings.editor.gridSpacing);
 				}
-				else if(Settings.editor.navigation === Settings.ORBIT)
+				else
 				{
-					//Look around
-					if(this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject)
-					{
-						if(Settings.editor.invertNavigation)
-						{
-							this.cameraRotation.y += Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
-						}
-						else
-						{
-							this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
-						}
-
-						this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
-
-						if(this.cameraRotation.y < -1.57)
-						{
-							this.cameraRotation.y = -1.57;
-						}
-						else if(this.cameraRotation.y > 1.57)
-						{
-							this.cameraRotation.y = 1.57;
-						}
-					}
-
-					//Zoom
-					if(this.mouse.wheel !== 0)
-					{
-						this.cameraDistance += this.camera.position.distanceTo(this.cameraLookAt) * Settings.editor.mouseWheelSensitivity * this.mouse.wheel;
-						if(this.cameraDistance < 0)
-						{
-							this.cameraDistance = 0;
-						}
-					}
-
-					if(this.mouse.buttonPressed(Mouse.MIDDLE))
-					{
-						this.cameraDistance += this.mouse.delta.y * 0.1;
-						if(this.cameraDistance < 0)
-						{
-							this.cameraDistance = 0;
-						}
-					}
-
-					//WASD movement
-					if(Settings.editor.keyboardNavigation)
-					{
-						if(Editor.keyboard.keyPressed(Keyboard.W))
-						{
-							var direction = this.camera.getWorldDirection(this.tempVector3);
-							direction.y = 0;
-							direction.normalize();
-
-							this.cameraLookAt.x += direction.x * Settings.editor.keyboardNavigationSpeed;
-							this.cameraLookAt.z += direction.z * Settings.editor.keyboardNavigationSpeed;
-						}
-						if(Editor.keyboard.keyPressed(Keyboard.S))
-						{
-							var direction = this.camera.getWorldDirection(this.tempVector3);
-							direction.y = 0;
-							direction.normalize();
-
-							this.cameraLookAt.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
-							this.cameraLookAt.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
-						}
-						if(Editor.keyboard.keyPressed(Keyboard.D))
-						{
-							var direction = this.camera.getWorldDirection(this.tempVector3);
-							direction.y = 0;
-							direction.normalize();
-							direction.applyAxisAngle(SceneEditor.UP, 1.57);
-
-							this.cameraLookAt.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
-							this.cameraLookAt.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
-						}
-						if(Editor.keyboard.keyPressed(Keyboard.A))
-						{
-							var direction = this.camera.getWorldDirection(this.tempVector3);
-							direction.y = 0;
-							direction.normalize();
-							direction.applyAxisAngle(SceneEditor.UP, 1.57);
-
-							this.cameraLookAt.x += direction.x * Settings.editor.keyboardNavigationSpeed;
-							this.cameraLookAt.z += direction.z * Settings.editor.keyboardNavigationSpeed;
-						}
-					}
-
-					//Move target point
-					if(this.mouse.buttonPressed(Mouse.RIGHT))
-					{
-						var direction = this.camera.getWorldDirection(this.tempVector3);
-						direction.y = 0;
-						direction.normalize();
-
-						var speed = Settings.editor.mouseMoveSpeed * 10;
-
-						this.cameraLookAt.x += direction.x * this.mouse.delta.y * speed;
-						this.cameraLookAt.z += direction.z * this.mouse.delta.y * speed;
-
-						direction.applyAxisAngle(SceneEditor.UP, 1.57);
-
-						this.cameraLookAt.x += direction.x * this.mouse.delta.x * speed;
-						this.cameraLookAt.z += direction.z * this.mouse.delta.x * speed;
-					}
-
-					this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
+					this.gridHelper.position.x = this.camera.position.x - (this.camera.position.x % Settings.editor.gridSpacing);
+					this.gridHelper.position.z = this.camera.position.z - (this.camera.position.z % Settings.editor.gridSpacing);
 				}
-
-				//Update grid helper position
-				this.gridHelper.position.x = this.camera.position.x - (this.camera.position.x % Settings.editor.gridSpacing);
-				this.gridHelper.position.z = this.camera.position.z - (this.camera.position.z % Settings.editor.gridSpacing);
 			}
 		}
 	}
@@ -940,72 +690,7 @@ SceneEditor.prototype.render = function()
 			
 			if(code !== null && (this.mouse.buttonDoubleClicked() || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
 			{
-				if(Settings.editor.navigation === Settings.ORBIT || this.camera instanceof OrthographicCamera)
-				{
-					if(code === OrientationCube.Z_POS)
-					{
-						this.cameraRotation.set(Math.PI / 2, 0);
-					}
-					else if(code === OrientationCube.Z_NEG)
-					{
-						this.cameraRotation.set(-Math.PI / 2, 0);
-					}
-					else if(code === OrientationCube.X_POS)
-					{
-						this.cameraRotation.set(0, 0);
-					}
-					else if(code === OrientationCube.X_NEG)
-					{
-						this.cameraRotation.set(Math.PI, 0);
-					}
-					else if(code === OrientationCube.Y_POS)
-					{
-						this.cameraRotation.set(Math.PI, 1.57);
-					}
-					else if(code === OrientationCube.Y_NEG)
-					{
-						this.cameraRotation.set(Math.PI, -1.57);
-					}
-
-					this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
-				}
-				else
-				{
-					if(code === OrientationCube.Z_POS)
-					{
-						this.cameraRotation.set(Math.PI, 0);
-					}
-					else if(code === OrientationCube.Z_NEG)
-					{
-						this.cameraRotation.set(0, 0);
-					}
-					else if(code === OrientationCube.X_POS)
-					{
-						this.cameraRotation.set(-Math.PI / 2, 0);
-					}
-					else if(code === OrientationCube.X_NEG)
-					{
-						this.cameraRotation.set(Math.PI / 2, 0);
-					}
-					else if(code === OrientationCube.Y_POS)
-					{
-						this.cameraRotation.set(Math.PI, -1.57);
-					}
-					else if(code === OrientationCube.Y_NEG)
-					{
-						this.cameraRotation.set(Math.PI, 1.57);
-					}
-
-					this.setCameraRotation(this.cameraRotation, this.camera);
-				}
-			}
-
-			if(this.mouse.buttonPressed(Mouse.LEFT))
-			{
-				if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
-				{
-					this.updateOrthographicCameraRotation();
-				}
+				//TODO <ADD CODE HERE>  UPDATE CONTROLS ORIENTATION
 			}
 
 			this.orientation.updateRotation(this.camera);
@@ -1147,25 +832,7 @@ SceneEditor.prototype.reloadContext = function()
 //Initialize renderer
 SceneEditor.prototype.initializeRenderer = function()
 {
-	//Rendering quality settings
-	if(Settings.render.followProject)
-	{
-		var antialiasing = Editor.program.antialiasing;
-		var shadows = Editor.program.shadows;
-		var shadowsType = Editor.program.shadowsType;
-		var toneMapping = Editor.program.toneMapping;
-		var toneMappingExposure = Editor.program.toneMappingExposure;
-		var toneMappingWhitePoint = Editor.program.toneMappingWhitePoint;
-	}
-	else
-	{
-		var antialiasing = Settings.render.antialiasing;
-		var shadows = Settings.render.shadows;
-		var shadowsType = Settings.render.shadowsType;
-		var toneMapping = Settings.render.toneMapping;
-		var toneMappingExposure = Settings.render.toneMappingExposure;
-		var toneMappingWhitePoint = Settings.render.toneMappingWhitePoint;
-	}
+	var settings = Settings.render.followProject ? Editor.program : Settings.render;
 
 	//Dispose old renderer
 	if(this.renderer !== null)
@@ -1174,20 +841,20 @@ SceneEditor.prototype.initializeRenderer = function()
 	}
 
 	//Create renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, alpha: true, antialias: antialiasing});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, alpha: true, antialias: settings.antialiasing});
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
-	this.renderer.shadowMap.enabled = shadows;
-	this.renderer.shadowMap.type = shadowsType;
-	this.renderer.toneMapping = toneMapping;
-	this.renderer.toneMappingExposure = toneMappingExposure;
-	this.renderer.toneMappingWhitePoint = toneMappingWhitePoint;
+	this.renderer.shadowMap.enabled = settings.shadows;
+	this.renderer.shadowMap.type = settings.shadowsType;
+	this.renderer.toneMapping = settings.toneMapping;
+	this.renderer.toneMappingExposure = settings.toneMappingExposure;
+	this.renderer.toneMappingWhitePoint = settings.toneMappingWhitePoint;
 };
 
 //Update raycaster position from editor mouse position
 SceneEditor.prototype.updateRaycasterFromMouse = function()
 {
-	this.tempVector2.set((this.mouse.position.x / this.canvas.width) * 2 - 1, -(this.mouse.position.y / this.canvas.height) * 2 + 1);
-	this.raycaster.setFromCamera(this.tempVector2, this.camera);
+	this.normalized.set((this.mouse.position.x / this.canvas.width) * 2 - 1, -(this.mouse.position.y / this.canvas.height) * 2 + 1);
+	this.raycaster.setFromCamera(this.normalized, this.camera);
 };
 
 //Select objects with mouse
@@ -1219,8 +886,8 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 //Update editor raycaster with new x and y positions (normalized -1 to 1)
 SceneEditor.prototype.updateRaycaster = function(x, y)
 {
-	this.tempVector2.set(x, y);
-	this.raycaster.setFromCamera(this.tempVector2, this.camera);
+	this.normalized.set(x, y);
+	this.raycaster.setFromCamera(this.normalized, this.camera);
 };
 
 //Set camera mode (ortho or perspective)
@@ -1237,11 +904,8 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	{
 		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL, 0.001, 100000);
 		
-		this.cameraRotation.set(Math.PI / 2, 0);
-		this.cameraLookAt.set(0, 0, 0);
-		this.cameraDistance = 100;
-
-		this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
+		this.controls.attach(this.camera);
+		this.controls.reset();
 
 		this.gridHelper.rotation.set(Math.PI / 2, 0, 0);
 		this.gridHelper.position.set(0, 0, 0);
@@ -1251,10 +915,8 @@ SceneEditor.prototype.setCameraMode = function(mode)
 		this.camera = new PerspectiveCamera(60, aspect);
 		this.camera.position.set(0, 3, 5);
 
-		this.cameraRotation.set(Math.PI, 0);
-		this.cameraLookAt.set(0, 0, 0);
-		this.cameraDistance = 10;
-		this.setCameraRotation(this.cameraRotation, this.camera);
+		this.controls.attach(this.camera);
+		this.controls.reset();
 
 		this.gridHelper.rotation.set(0, 0, 0);
 		this.gridHelper.position.set(0, 0, 0);
@@ -1264,6 +926,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	this.tool.setCamera(this.camera);
 };
 
+/*
 //Update orthographic camera rotation
 SceneEditor.prototype.updateOrthographicCameraRotation = function()
 {
@@ -1300,6 +963,7 @@ SceneEditor.prototype.setCameraRotationOrbit = function(cameraRotation, cameraLo
 	camera.position.add(cameraLookAt);
 	camera.lookAt(cameraLookAt);
 };
+*/
 
 //Set scene editor state
 SceneEditor.prototype.setState = function(state)
