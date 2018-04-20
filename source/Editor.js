@@ -318,6 +318,7 @@ include("editor/ui/tab/treeview/TreeView.js");
 include("editor/ui/tab/treeview/TreeElement.js");
 
 include("editor/ui/tab/scene/SceneEditor.js");
+include("editor/ui/tab/scene/controls/EditorFreeControls.js");
 include("editor/ui/tab/scene/controls/EditorOrbitControls.js");
 include("editor/ui/tab/scene/tools/OrientationCube.js");
 

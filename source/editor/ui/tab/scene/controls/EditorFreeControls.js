@@ -16,6 +16,16 @@ function EditorFreeControls()
 
 EditorFreeControls.prototype = Object.create(THREE.Object3D.prototype);
 
+EditorFreeControls.prototype.attach = function(camera)
+{
+	while(this.children.length > 0)
+	{
+		this.remove(this.children[0]);
+	}
+
+	this.add(camera);
+};
+
 EditorFreeControls.prototype.reset = function()
 {
 	this.cameraRotation.set(Math.PI, 0);

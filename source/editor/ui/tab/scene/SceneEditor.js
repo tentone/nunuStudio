@@ -612,13 +612,13 @@ SceneEditor.prototype.update = function()
 				//Update grid helper position
 				if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
 				{
-					this.gridHelper.position.x = this.camera.position.x - (this.camera.position.x % Settings.editor.gridSpacing);
-					this.gridHelper.position.y = this.camera.position.y - (this.camera.position.y % Settings.editor.gridSpacing);
+					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
+					this.gridHelper.position.y = this.controls.position.y - (this.controls.position.y % Settings.editor.gridSpacing);
 				}
 				else
 				{
-					this.gridHelper.position.x = this.camera.position.x - (this.camera.position.x % Settings.editor.gridSpacing);
-					this.gridHelper.position.z = this.camera.position.z - (this.camera.position.z % Settings.editor.gridSpacing);
+					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
+					this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Settings.editor.gridSpacing);
 				}
 			}
 		}
@@ -635,7 +635,6 @@ SceneEditor.prototype.update = function()
 			Editor.alert("Error testing program\nState update caused an error\n(" + e + ")");
 			console.error("nunuStudio: Error updating program state", e);
 		}
-		
 
 		if(this.keyboard.keyJustPressed(Keyboard.F5))
 		{
@@ -690,10 +689,10 @@ SceneEditor.prototype.render = function()
 			
 			if(code !== null && (this.mouse.buttonDoubleClicked() || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
 			{
-				//TODO <ADD CODE HERE>  UPDATE CONTROLS ORIENTATION
+				this.controls.setOrientation(code);
 			}
 
-			this.orientation.updateRotation(this.camera);
+			this.orientation.updateRotation(this.controls);
 			this.orientation.render(renderer, this.canvas);
 		}
 

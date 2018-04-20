@@ -16,6 +16,16 @@ function EditorOrthographicControls()
 
 EditorOrthographicControls.prototype = Object.create(THREE.Object3D.prototype);
 
+EditorOrthographicControls.prototype.attach = function(camera)
+{
+	while(this.children.length > 0)
+	{
+		this.remove(this.children[0]);
+	}
+
+	this.add(camera);
+};
+
 EditorOrthographicControls.prototype.reset = function()
 {
 	this.cameraRotation.set(Math.PI / 2, 0);
