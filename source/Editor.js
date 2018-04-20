@@ -220,6 +220,7 @@ include("lib/three/loaders/AssimpLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/BabylonLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
+include("lib/three/loaders/DRACOLoader.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GCodeLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
