@@ -208,4 +208,10 @@ EditorOrbitControls.prototype.updateControls = function()
 	this.quaternion.setFromRotationMatrix(this.tempMatrix);
 
 	this.updateMatrixWorld(true);
+
+	if(this.camera instanceof OrthographicCamera)
+	{
+		this.camera.size = this.distance;
+		this.camera.updateProjectionMatrix();
+	}
 };
