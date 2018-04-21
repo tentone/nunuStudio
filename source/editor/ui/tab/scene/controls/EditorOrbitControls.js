@@ -1,17 +1,14 @@
 "use strict";
 
-/**
- * Orbit controls object can be controlled using the mouse.
- * 
- * It can be rotated using the mouse left button, moved with the mouse right button or mouse wheel.
- */
 function EditorOrbitControls()
 {
 	THREE.Object3D.call(this);
 
-	this.distance = 5;
+	this.distance = 10;
 	this.center = new THREE.Vector3(0, 0, 0);
-	this.vector = new THREE.Vector2(0, 0);
+	this.vector = new THREE.Vector2(-0.4, 0.40);
+
+	this.camera = null;
 
 	this.sensitivity = 0.002;
 	this.zoomSensitivity = 0.001;
@@ -22,7 +19,7 @@ function EditorOrbitControls()
 	this.limitUp = 1.57;
 	this.limitDown = -1.57;
 
-	this.tempVector = new THREE.Vector3();
+	this.tempVector = new THREE.Vector3(0, 0, 0);
 	this.tempMatrix = new THREE.Matrix4();
 
 	this.updateControls();
@@ -38,15 +35,16 @@ EditorOrbitControls.prototype.attach = function(camera)
 	{
 		this.remove(this.children[0]);
 	}
-
 	this.add(camera);
+
+	this.camera = camera;
 };
 
 EditorOrbitControls.prototype.reset = function()
 {
-	this.distance = 5;
+	this.distance = 10;
 	this.center.set(0, 0, 0);
-	this.vector.set(0, 0);
+	this.vector.set(-0.4, 0.40);
 	this.updateControls();
 };
 
@@ -56,7 +54,7 @@ EditorOrbitControls.prototype.focusObject = function(object)
 	box.applyMatrix4(object.matrixWorld);
 	box.getCenter(this.center);
 
-	var size = box.getSize(new THREE.Vector3());
+	var size = box.getSize(this.tempVector);
 	this.distance = size.length() * 2.0;
 	this.updateControls();
 };
@@ -102,12 +100,6 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		needsUpdate = true;
 	}
 
-	if(mouse.wheel !== 0)
-	{
-		this.distance += mouse.wheel * this.zoomSensitivity * this.position.distanceTo(this.center);
-		needsUpdate = true;
-	}
-
 	if(mouse.buttonPressed(Mouse.MIDDLE))
 	{
 		this.center.y += mouse.delta.y * this.sensitivity * this.distance;
@@ -133,51 +125,55 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		needsUpdate = true;
 	}
 
-	/*
+	if(mouse.wheel !== 0)
+	{
+		this.distance += mouse.wheel * this.zoomSensitivity * this.position.distanceTo(this.center);
+		needsUpdate = true;
+	}
+	
 	//WASD movement
 	if(Settings.editor.keyboardNavigation)
 	{
-		if(Editor.keyboard.keyPressed(Keyboard.W))
-		{
-			var direction = this.camera.getWorldDirection(this.tempVector3);
-			direction.y = 0;
-			direction.normalize();
-
-			this.cameraLookAt.x += direction.x * Settings.editor.keyboardNavigationSpeed;
-			this.cameraLookAt.z += direction.z * Settings.editor.keyboardNavigationSpeed;
-		}
 		if(Editor.keyboard.keyPressed(Keyboard.S))
 		{
-			var direction = this.camera.getWorldDirection(this.tempVector3);
+			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;
 			direction.normalize();
 
-			this.cameraLookAt.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
-			this.cameraLookAt.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
+			this.center.x += direction.x * Settings.editor.keyboardNavigationSpeed;
+			this.center.z += direction.z * Settings.editor.keyboardNavigationSpeed;
 		}
-		if(Editor.keyboard.keyPressed(Keyboard.D))
+		if(Editor.keyboard.keyPressed(Keyboard.W))
 		{
-			var direction = this.camera.getWorldDirection(this.tempVector3);
+			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;
 			direction.normalize();
-			direction.applyAxisAngle(SceneEditor.UP, 1.57);
 
-			this.cameraLookAt.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
-			this.cameraLookAt.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
+			this.center.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
+			this.center.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
 		}
 		if(Editor.keyboard.keyPressed(Keyboard.A))
 		{
-			var direction = this.camera.getWorldDirection(this.tempVector3);
+			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;
 			direction.normalize();
 			direction.applyAxisAngle(SceneEditor.UP, 1.57);
 
-			this.cameraLookAt.x += direction.x * Settings.editor.keyboardNavigationSpeed;
-			this.cameraLookAt.z += direction.z * Settings.editor.keyboardNavigationSpeed;
+			this.center.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
+			this.center.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
+		}
+		if(Editor.keyboard.keyPressed(Keyboard.D))
+		{
+			var direction = this.getWorldDirection(this.tempVector);
+			direction.y = 0;
+			direction.normalize();
+			direction.applyAxisAngle(SceneEditor.UP, 1.57);
+
+			this.center.x += direction.x * Settings.editor.keyboardNavigationSpeed;
+			this.center.z += direction.z * Settings.editor.keyboardNavigationSpeed;
 		}
 	}
-	*/
-
+	
 	if(needsUpdate === true)
 	{
 		this.updateControls();
@@ -209,5 +205,7 @@ EditorOrbitControls.prototype.updateControls = function()
 	this.position.add(this.center);
 
 	this.tempMatrix.lookAt(this.position, this.center, EditorOrbitControls.UP);
-	this.quaternion.setFromRotationMatrix(this.tempMatrix);	
+	this.quaternion.setFromRotationMatrix(this.tempMatrix);
+
+	this.updateMatrixWorld(true);
 };

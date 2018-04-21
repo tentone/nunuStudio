@@ -76,9 +76,6 @@ function SceneEditor(parent, closeable, container, index)
 	this.controls = new EditorOrbitControls(); //TODO <ADD CODE HERE>
 	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
 
-	//Editing object flag
-	this.isEditingObject = false;
-
 	//Self pointer
 	var self = this;
 
@@ -496,7 +493,7 @@ SceneEditor.prototype.update = function()
 		this.stats.begin();
 	}
 
-	this.isEditingObject = false;
+	var isEditingObject = false;
 
 	if(this.state === SceneEditor.EDITING)
 	{
@@ -536,65 +533,32 @@ SceneEditor.prototype.update = function()
 			}
 		}
 
-		//Select objects
-		if(this.toolMode === Editor.SELECT)
-		{
-			if(this.mouse.buttonJustPressed(Mouse.LEFT) && this.mouse.insideCanvas())
-			{
-				this.selectObjectWithMouse();
-			}
-
-			this.isEditingObject = false;
-		}
-		else
-		{
-			//If mouse double clicked select object
-			if(this.mouse.buttonDoubleClicked() && this.mouse.insideCanvas())
-			{
-				this.selectObjectWithMouse();
-			}
-
-			//If no object selected update tool
-			if(Editor.hasObjectSelected())
-			{
-				if(this.tool !== null)
-				{
-					this.isEditingObject = this.tool.update();
-
-					if(this.isEditingObject)
-					{
-						Editor.updateValuesGUI();
-					}
-				}
-				else
-				{
-					this.isEditingObject = false;
-				}
-			}
-		}
-		
-		//Update object transformation matrix
-		if(Editor.hasObjectSelected())
-		{	
-			for(var i = 0; i < Editor.selectedObjects.length; i++)
-			{
-				if(!Editor.selectedObjects[i].matrixAutoUpdate)
-				{
-					Editor.selectedObjects[i].updateMatrix();
-				}
-			}
-		}
-
-		//Update object helper
-		this.objectHelper.update();
-
 		//Check if mouse is inside canvas
 		if(this.mouse.insideCanvas())
 		{
+			//Update selection
+			if(this.toolMode === Editor.SELECT)
+			{
+				if(this.mouse.buttonJustPressed(Mouse.LEFT))
+				{
+					this.selectObjectWithMouse();
+				}
+
+				isEditingObject = false;
+			}
+			else
+			{
+				//If mouse double clicked select object
+				if(this.mouse.buttonDoubleClicked())
+				{
+					this.selectObjectWithMouse();
+				}
+			}
+
 			//Lock mouse when camera is moving
 			if(Settings.editor.lockMouse && Nunu.runningOnDesktop())
 			{
-				if(!this.isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
+				if(!isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
 				{
 					this.mouse.setLock(true);
 				}
@@ -604,10 +568,11 @@ SceneEditor.prototype.update = function()
 				}
 			}
 
-			if(!this.isEditingObject)
+			//Update controls
+			this.controls.update(this.mouse, this.keyboard);
+
+			if(!isEditingObject)
 			{
-				//Update controls
-				this.controls.update(this.mouse, this.keyboard);
 
 				//Update grid helper position
 				if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
@@ -621,6 +586,37 @@ SceneEditor.prototype.update = function()
 					this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Settings.editor.gridSpacing);
 				}
 			}
+		}
+
+		//If has objects selected
+		if(Editor.hasObjectSelected())
+		{
+			//Update tool
+			if(this.tool !== null)
+			{
+				isEditingObject = this.tool.update();
+
+				if(isEditingObject)
+				{
+					Editor.updateValuesGUI();
+				}
+			}
+			else
+			{
+				isEditingObject = false;
+			}
+
+			//Update object transformation matrix
+			for(var i = 0; i < Editor.selectedObjects.length; i++)
+			{
+				if(!Editor.selectedObjects[i].matrixAutoUpdate)
+				{
+					Editor.selectedObjects[i].updateMatrix();
+				}
+			}
+			
+			//Update object helper
+			this.objectHelper.update();
 		}
 	}
 	else if(this.state === SceneEditor.TESTING)
@@ -912,8 +908,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	else if(mode === SceneEditor.CAMERA_PERSPECTIVE)
 	{
 		this.camera = new PerspectiveCamera(60, aspect);
-		this.camera.position.set(0, 3, 5);
-
+		
 		this.controls.attach(this.camera);
 		this.controls.reset();
 
@@ -924,45 +919,6 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	this.cameraMode = mode;
 	this.tool.setCamera(this.camera);
 };
-
-/*
-//Update orthographic camera rotation
-SceneEditor.prototype.updateOrthographicCameraRotation = function()
-{
-	this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
-	this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
-
-	//Limit Vertical Rotation to 90 degrees
-	if(this.cameraRotation.y < -1.57)
-	{
-		this.cameraRotation.y = -1.57;
-	}
-	else if(this.cameraRotation.y > 1.57)
-	{
-		this.cameraRotation.y = 1.57;
-	}
-
-	this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
-}
-
-//Set camera rotation (camera movement as an fps camera)
-SceneEditor.prototype.setCameraRotation = function(cameraRotation, camera)
-{
-	var cos = Math.cos(cameraRotation.y);
-	this.tempVector3.set(Math.sin(cameraRotation.x)*cos, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cos);
-	this.tempVector3.add(camera.position);
-	camera.lookAt(this.tempVector3);
-};
-
-//Set camera rotation and position in orbit mode
-SceneEditor.prototype.setCameraRotationOrbit = function(cameraRotation, cameraLookAt, cameraDistance, camera)
-{
-	var cos = Math.cos(cameraRotation.y);
-	camera.position.set(cameraDistance * Math.cos(cameraRotation.x) * cos, cameraDistance * Math.sin(cameraRotation.y), cameraDistance * Math.sin(cameraRotation.x) * cos);
-	camera.position.add(cameraLookAt);
-	camera.lookAt(cameraLookAt);
-};
-*/
 
 //Set scene editor state
 SceneEditor.prototype.setState = function(state)
