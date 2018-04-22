@@ -4,14 +4,12 @@ function EditorFreeControls()
 {
 	THREE.Object3D.call(this);
 
-	//Camera controls
-	this.cameraRotation = new THREE.Vector2(0, 0);
-	this.cameraLookAt = new THREE.Vector3(0, 0, 0);
-	this.cameraDistance = 10;
+	this.orientation = new THREE.Vector2(0, 0);
+	this.distance = 10;
 
-	//Temporary variables
-	this.tempVector2 = new THREE.Vector2();
-	this.tempVector3 = new THREE.Vector3();
+	this.camera = null;
+
+	this.temp = new THREE.Vector3();
 }
 
 EditorFreeControls.prototype = Object.create(THREE.Object3D.prototype);
@@ -22,15 +20,15 @@ EditorFreeControls.prototype.attach = function(camera)
 	{
 		this.remove(this.children[0]);
 	}
-
 	this.add(camera);
+
+	this.camera = camera;
 };
 
 EditorFreeControls.prototype.reset = function()
 {
-	this.cameraRotation.set(Math.PI, 0);
-	this.cameraLookAt.set(0, 0, 0);
-	this.cameraDistance = 10;
+	this.orientation.set(0, 0);
+	this.distance = 10;
 };
 
 EditorFreeControls.prototype.focusObject = function(object)
@@ -42,67 +40,69 @@ EditorFreeControls.prototype.setOrientation = function(code)
 {
 	if(code === OrientationCube.Z_POS)
 	{
-		this.cameraRotation.set(Math.PI, 0);
+		this.orientation.set(Math.PI, 0);
 	}
 	else if(code === OrientationCube.Z_NEG)
 	{
-		this.cameraRotation.set(0, 0);
+		this.orientation.set(0, 0);
 	}
 	else if(code === OrientationCube.X_POS)
 	{
-		this.cameraRotation.set(-Math.PI / 2, 0);
+		this.orientation.set(-Math.PI / 2, 0);
 	}
 	else if(code === OrientationCube.X_NEG)
 	{
-		this.cameraRotation.set(Math.PI / 2, 0);
+		this.orientation.set(Math.PI / 2, 0);
 	}
 	else if(code === OrientationCube.Y_POS)
 	{
-		this.cameraRotation.set(Math.PI, -1.57);
+		this.orientation.set(Math.PI, -1.57);
 	}
 	else if(code === OrientationCube.Y_NEG)
 	{
-		this.cameraRotation.set(Math.PI, 1.57);
+		this.orientation.set(Math.PI, 1.57);
 	}
 
-	this.setCameraRotation(this.cameraRotation, this.camera);
+	this.updateControls();
 };
 
 EditorFreeControls.prototype.update = function(mouse, keyboard)
 {
+	var needsUpdate = false;
+
 	//Look camera
-	if(this.mouse.buttonPressed(Mouse.LEFT))
+	if(mouse.buttonPressed(Mouse.LEFT))
 	{
 		if(Settings.editor.invertNavigation)
 		{
-			this.cameraRotation.y += Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
+			this.orientation.y += Settings.editor.mouseLookSensitivity * mouse.delta.y;
 		}
 		else
 		{
-			this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
+			this.orientation.y -= Settings.editor.mouseLookSensitivity * mouse.delta.y;
 		}
 
-		this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
+		this.orientation.x -= Settings.editor.mouseLookSensitivity * mouse.delta.x;
 		
 
 		//Limit Vertical Rotation to 90 degrees
-		if(this.cameraRotation.y < -1.57)
+		if(this.orientation.y < -1.57)
 		{
-			this.cameraRotation.y = -1.57;
+			this.orientation.y = -1.57;
 		}
-		else if(this.cameraRotation.y > 1.57)
+		else if(this.orientation.y > 1.57)
 		{
-			this.cameraRotation.y = 1.57;
+			this.orientation.y = 1.57;
 		}
 
-		this.setCameraRotation(this.cameraRotation, this.camera);
+		needsUpdate = true;
 	}
 
 	//Move Camera on X and Z
-	if(this.mouse.buttonPressed(Mouse.RIGHT))
+	if(mouse.buttonPressed(Mouse.RIGHT))
 	{
 		//Move speed
-		var speed = this.camera.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseMoveSpeed;
+		var speed = this.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseMoveSpeed;
 		
 		if(speed < 0.01)
 		{
@@ -110,29 +110,33 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		}
 
 		//Move Camera Front and Back
-		var angleCos = Math.cos(this.cameraRotation.x);
-		var angleSin = Math.sin(this.cameraRotation.x);
-		this.camera.position.z += this.mouse.delta.y * speed * angleCos;
-		this.camera.position.x += this.mouse.delta.y * speed * angleSin;
+		var angleCos = Math.cos(this.orientation.x);
+		var angleSin = Math.sin(this.orientation.x);
+		this.position.z += mouse.delta.y * speed * angleCos;
+		this.position.x += mouse.delta.y * speed * angleSin;
 
 		//Move Camera Lateral
-		var angleCos = Math.cos(this.cameraRotation.x + MathUtils.pid2);
-		var angleSin = Math.sin(this.cameraRotation.x + MathUtils.pid2);
-		this.camera.position.z += this.mouse.delta.x * speed * angleCos;
-		this.camera.position.x += this.mouse.delta.x * speed * angleSin;
+		var angleCos = Math.cos(this.orientation.x + MathUtils.pid2);
+		var angleSin = Math.sin(this.orientation.x + MathUtils.pid2);
+		this.position.z += mouse.delta.x * speed * angleCos;
+		this.position.x += mouse.delta.x * speed * angleSin;
+
+		needsUpdate = true;
 	}
 	
 	//Move Camera on Y
-	if(this.mouse.buttonPressed(Mouse.MIDDLE))
+	if(mouse.buttonPressed(Mouse.MIDDLE))
 	{
-		this.camera.position.y += this.mouse.delta.y * Settings.editor.mouseMoveSpeed * 100;
+		this.position.y += mouse.delta.y * Settings.editor.mouseMoveSpeed * 100;
+
+		needsUpdate = true;
 	}
 
 	//Move in camera direction using mouse scroll
-	if(this.mouse.wheel !== 0)
+	if(mouse.wheel !== 0)
 	{
 		//Move speed
-		var speed = this.mouse.wheel * this.camera.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseWheelSensitivity;
+		var speed = mouse.wheel * this.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseWheelSensitivity;
 
 		//Limit zoom speed
 		if(speed < 0 && speed > -0.02)
@@ -145,44 +149,61 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		}
 
 		//Move camera
-		var direction = this.camera.getWorldDirection(this.tempVector3);
+		var direction = this.getWorldDirection(this.temp);
 		direction.multiplyScalar(speed);
-		this.camera.position.sub(direction);
+		this.position.sub(direction);
+
+		needsUpdate = true;
 	}
 
 	//WASD movement
 	if(Settings.editor.keyboardNavigation)
 	{
-		if(Editor.keyboard.keyPressed(Keyboard.W))
+		if(keyboard.keyPressed(Keyboard.W))
 		{
-			var direction = this.camera.getWorldDirection(this.tempVector3);
+			var direction = this.getWorldDirection(this.temp);
 			direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-			this.camera.position.add(direction);
+			this.position.add(direction);
+			needsUpdate = true;
 		}
-		if(Editor.keyboard.keyPressed(Keyboard.S))
+		if(keyboard.keyPressed(Keyboard.S))
 		{
-			var direction = this.camera.getWorldDirection(this.tempVector3);
+			var direction = this.getWorldDirection(this.temp);
 			direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-			this.camera.position.sub(direction);
+			this.position.sub(direction);
+			needsUpdate = true;
 		}
-		if(Editor.keyboard.keyPressed(Keyboard.A))
+		if(keyboard.keyPressed(Keyboard.A))
 		{
-			this.tempVector3.set(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57));
-			this.tempVector3.normalize();
-			this.tempVector3.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-			this.camera.position.sub(this.tempVector3);
+			this.temp.set(Math.sin(this.orientation.x - 1.57), 0, Math.cos(this.orientation.x - 1.57));
+			this.temp.normalize();
+			this.temp.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
+			this.position.sub(this.temp);
+			needsUpdate = true;
 		}
-		if(Editor.keyboard.keyPressed(Keyboard.D))
+		if(keyboard.keyPressed(Keyboard.D))
 		{
-			this.tempVector3.set(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57));
-			this.tempVector3.normalize();
-			this.tempVector3.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-			this.camera.position.sub(this.tempVector3);
+			this.temp.set(Math.sin(this.orientation.x + 1.57), 0, Math.cos(this.orientation.x + 1.57));
+			this.temp.normalize();
+			this.temp.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
+			this.position.sub(this.temp);
+			needsUpdate = true;
 		}
+	}
+
+	if(needsUpdate)
+	{
+		this.updateControls();
 	}
 };
 
 EditorFreeControls.prototype.updateControls = function()
 {
+	var cos = Math.cos(this.orientation.y);
+	this.temp.set(Math.sin(this.orientation.x)*cos, Math.sin(this.orientation.y), Math.cos(this.orientation.x)*cos);
+	this.temp.add(this.position);
 
+	this.lookAt(this.temp);
+
+	this.updateMatrixWorld(true);
 };

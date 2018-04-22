@@ -73,7 +73,7 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Camera
 	this.camera = null;
-	this.controls = new EditorOrbitControls(); //TODO <ADD CODE HERE>
+	this.controls = new EditorFreeControls(); //new EditorOrbitControls(); //TODO <ADD CODE HERE>
 	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
 
 	//Self pointer
@@ -552,8 +552,17 @@ SceneEditor.prototype.update = function()
 				if(this.mouse.buttonDoubleClicked())
 				{
 					this.selectObjectWithMouse();
+
+					//TODO <REMOVE THIS JUST FOR TEST>
+					if(Editor.selectedObjects.length > 0)
+					{
+						this.controls.focusObject(Editor.selectedObjects[0]);						
+					}
 				}
 			}
+
+			//Create a dropdown menu
+			//TODO <DROPDOWNMENU>
 
 			//Lock mouse when camera is moving
 			if(Settings.editor.lockMouse && Nunu.runningOnDesktop())
@@ -568,11 +577,10 @@ SceneEditor.prototype.update = function()
 				}
 			}
 
-			//Update controls
-			this.controls.update(this.mouse, this.keyboard);
-
 			if(!isEditingObject)
 			{
+				//Update controls
+				this.controls.update(this.mouse, this.keyboard);
 
 				//Update grid helper position
 				if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
