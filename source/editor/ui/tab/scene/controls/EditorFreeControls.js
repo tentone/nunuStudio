@@ -31,26 +31,33 @@ EditorFreeControls.prototype.reset = function()
 {
 	this.orientation.set(0.5, 0.5);
 	this.position.set(5, 4.8, 7.4);
+	this.updateControls();
 };
 
 EditorFreeControls.prototype.focusObject = function(object)
 {
-	/*
 	var box = ObjectUtils.calculateBoundingBox(object);
 	box.applyMatrix4(object.matrixWorld);
 	box.getCenter(this.center);
-	var size = box.getSize(this.tempVector).length() * 2.0;
+	var size = box.getSize(this.tempVector).length();
+
+	var distance = size;
+	if(this.camera instanceof THREE.PerspectiveCamera)
+	{
+		distance = (size / 2) / Math.tan(THREE.Math.DEG2RAD * 0.5 * this.camera.fov);
+	}
 
 	var direction = object.position.clone();
 	direction.sub(this.position);
 	direction.normalize();
-	direction.multiplyScalar(size);
+	direction.multiplyScalar(distance);
 	
 	this.position.copy(object.position);
 	this.position.add(direction);
-	*/
+
+	//TODO <ADD CODE HERE>
 	
-	console.log("Focus object");
+	this.updateControls();
 };
 
 EditorFreeControls.prototype.setOrientation = function(code)

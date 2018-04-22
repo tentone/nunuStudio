@@ -73,7 +73,7 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Camera
 	this.camera = null;
-	this.controls = new EditorFreeControls(); //new EditorOrbitControls(); //TODO <ADD CODE HERE>
+	this.controls = null;
 	this.setCameraMode(SceneEditor.PERSPECTIVE);
 
 	//Self pointer
@@ -344,9 +344,6 @@ SceneEditor.TESTING = 11;
 SceneEditor.ORTHOGRAPHIC = 20;
 SceneEditor.PERSPECTIVE = 21;
 
-//Constants
-SceneEditor.UP = new THREE.Vector3(0, 1, 0);
-SceneEditor.ZERO = new THREE.Vector3(0, 0, 0);
 SceneEditor.prototype = Object.create(TabElement.prototype);
 
 //Update container object data
@@ -585,10 +582,10 @@ SceneEditor.prototype.update = function()
 				//Update controls
 				this.controls.update(this.mouse, this.keyboard);
 
+				//Update grid helper position
 				this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
 				this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Settings.editor.gridSpacing);
 				
-				//Update grid helper position
 				/*if(this.cameraMode === SceneEditor.ORTHOGRAPHIC)
 				{
 					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
@@ -887,27 +884,23 @@ SceneEditor.prototype.updateRaycaster = function(x, y)
 //Set camera mode (ortho or perspective)
 SceneEditor.prototype.setCameraMode = function(mode)
 {
-	if(mode === undefined)
+	if(cameraMode === undefined)
 	{
-		mode = (this.cameraMode === SceneEditor.PERSPECTIVE) ? SceneEditor.ORTHOGRAPHIC : SceneEditor.PERSPECTIVE;
+		cameraMode = (this.cameraMode === SceneEditor.PERSPECTIVE) ? SceneEditor.ORTHOGRAPHIC : SceneEditor.PERSPECTIVE;
 	}
 	
+	this.cameraMode = cameraMode;
+
 	var aspect = (this.canvas !== null) ? this.canvas.width / this.canvas.height : 1.0;
 
-	if(mode === SceneEditor.ORTHOGRAPHIC)
+	if(this.cameraMode === SceneEditor.ORTHOGRAPHIC)
 	{
-		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL, 0.001, 100000);
-		//this.gridHelper.rotation.set(Math.PI / 2, 0, 0);
-		//this.gridHelper.position.set(0, 0, 0);
+		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL);
 	}
-	else if(mode === SceneEditor.PERSPECTIVE)
+	else if(this.cameraMode === SceneEditor.PERSPECTIVE)
 	{
 		this.camera = new PerspectiveCamera(60, aspect);
-		//this.gridHelper.rotation.set(0, 0, 0);
-		//this.gridHelper.position.set(0, 0, 0);
 	}
-
-	this.cameraMode = mode;
 
 	this.tool.setCamera(this.camera);
 	this.controls.attach(this.camera);

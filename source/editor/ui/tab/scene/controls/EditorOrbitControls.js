@@ -6,12 +6,9 @@ function EditorOrbitControls()
 
 	this.distance = 10;
 	this.center = new THREE.Vector3(0, 0, 0);
-	this.vector = new THREE.Vector2(-0.4, 0.40);
+	this.orientation = new THREE.Vector2(-0.4, 0.40);
 
 	this.camera = null;
-
-	this.sensitivity = 0.002;
-	this.zoomSensitivity = 0.001;
 
 	this.maxDistance = Number.MAX_SAFE_INTEGER;
 	this.minDistance = 1e-10;
@@ -44,7 +41,7 @@ EditorOrbitControls.prototype.reset = function()
 {
 	this.distance = 10;
 	this.center.set(0, 0, 0);
-	this.vector.set(-0.4, 0.40);
+	this.orientation.set(-0.4, 0.40);
 	this.updateControls();
 };
 
@@ -54,8 +51,17 @@ EditorOrbitControls.prototype.focusObject = function(object)
 	box.applyMatrix4(object.matrixWorld);
 	box.getCenter(this.center);
 
-	var size = box.getSize(this.tempVector);
-	this.distance = size.length() * 2.0;
+	var size = box.getSize(this.tempVector).length();
+
+	if(this.camera instanceof THREE.PerspectiveCamera)
+	{
+		this.distance = (size / 2) / Math.tan(THREE.Math.DEG2RAD * 0.5 * this.camera.fov);
+	}
+	else
+	{
+		this.distance = size;
+	}
+
 	this.updateControls();
 };
 
@@ -63,27 +69,27 @@ EditorOrbitControls.prototype.setOrientation = function(code)
 {
 	if(code === OrientationCube.Z_POS)
 	{
-		this.vector.set(Math.PI / 2, 0);
+		this.orientation.set(Math.PI / 2, 0);
 	}
 	else if(code === OrientationCube.Z_NEG)
 	{
-		this.vector.set(-Math.PI / 2, 0);
+		this.orientation.set(-Math.PI / 2, 0);
 	}
 	else if(code === OrientationCube.X_POS)
 	{
-		this.vector.set(0, 0);
+		this.orientation.set(0, 0);
 	}
 	else if(code === OrientationCube.X_NEG)
 	{
-		this.vector.set(Math.PI, 0);
+		this.orientation.set(Math.PI, 0);
 	}
 	else if(code === OrientationCube.Y_POS)
 	{
-		this.vector.set(Math.PI, 1.57);
+		this.orientation.set(Math.PI, 1.57);
 	}
 	else if(code === OrientationCube.Y_NEG)
 	{
-		this.vector.set(Math.PI, -1.57);
+		this.orientation.set(Math.PI, -1.57);
 	}
 
 	this.updateControls();
@@ -95,15 +101,15 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 	if(mouse.buttonPressed(Mouse.LEFT))
 	{
-		this.vector.y += this.sensitivity * (Settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
-		this.vector.x -= this.sensitivity * mouse.delta.x;
+		this.orientation.y += Settings.editor.mouseLookSensitivity * (Settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
+		this.orientation.x -= Settings.editor.mouseLookSensitivity * mouse.delta.x;
 
 		needsUpdate = true;
 	}
 
 	if(mouse.buttonPressed(Mouse.MIDDLE))
 	{
-		this.center.y += mouse.delta.y * this.sensitivity * this.distance;
+		this.center.y += mouse.delta.y * Settings.editor.mouseLookSensitivity * this.distance;
 		needsUpdate = true;
 	}
 
@@ -113,13 +119,13 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		direction.y = 0;
 		direction.normalize();
 
-		var y = mouse.delta.y * this.sensitivity * this.distance;
+		var y = mouse.delta.y * Settings.editor.mouseLookSensitivity * this.distance;
 		this.center.x -= direction.x * y;
 		this.center.z -= direction.z * y;
 
 		direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
 
-		var x = mouse.delta.x * this.sensitivity * this.distance;
+		var x = mouse.delta.x * Settings.editor.mouseLookSensitivity * this.distance;
 		this.center.x -= direction.x * x;
 		this.center.z -= direction.z * x;
 
@@ -128,7 +134,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 	if(mouse.wheel !== 0)
 	{
-		this.distance += mouse.wheel * this.zoomSensitivity * this.position.distanceTo(this.center);
+		this.distance += mouse.wheel * this.position.distanceTo(this.center) * Settings.editor.mouseWheelSensitivity;
 		needsUpdate = true;
 	}
 	
@@ -183,13 +189,13 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 EditorOrbitControls.prototype.updateControls = function()
 {
-	if(this.vector.y < this.limitDown)
+	if(this.orientation.y < this.limitDown)
 	{
-		this.vector.y = this.limitDown;
+		this.orientation.y = this.limitDown;
 	}
-	else if(this.vector.y > this.limitUp)
+	else if(this.orientation.y > this.limitUp)
 	{
-		this.vector.y = this.limitUp;
+		this.orientation.y = this.limitUp;
 	}
 
 	if(this.distance < this.minDistance)
@@ -201,8 +207,8 @@ EditorOrbitControls.prototype.updateControls = function()
 		this.distance = this.maxDistance;
 	}
 
-	var cos = this.distance * Math.cos(this.vector.y);
-	this.position.set(Math.cos(this.vector.x) * cos, this.distance * Math.sin(this.vector.y), Math.sin(this.vector.x) * cos);
+	var cos = this.distance * Math.cos(this.orientation.y);
+	this.position.set(Math.cos(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y), Math.sin(this.orientation.x) * cos);
 	this.position.add(this.center);
 
 	this.tempMatrix.lookAt(this.position, this.center, EditorOrbitControls.UP);

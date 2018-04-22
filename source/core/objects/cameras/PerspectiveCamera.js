@@ -153,7 +153,7 @@ PerspectiveCamera.prototype.destroy = function()
  */
 PerspectiveCamera.prototype.updateProjectionMatrix = function()
 {
-	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov ) / this.zoom;
+	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov) / this.zoom;
 	var height = 2 * top;
 	var width = this.aspect * height * this.viewport.x / this.viewport.y;
 	var left = -0.5 * width;
