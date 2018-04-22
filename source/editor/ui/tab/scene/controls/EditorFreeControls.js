@@ -90,17 +90,8 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	//Look camera
 	if(mouse.buttonPressed(Mouse.LEFT))
 	{
-		if(Settings.editor.invertNavigation)
-		{
-			this.orientation.y -= Settings.editor.mouseLookSensitivity * mouse.delta.y;
-		}
-		else
-		{
-			this.orientation.y += Settings.editor.mouseLookSensitivity * mouse.delta.y;
-		}
-
+		this.orientation.y -= Settings.editor.mouseLookSensitivity * (Settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
 		this.orientation.x -= Settings.editor.mouseLookSensitivity * mouse.delta.x;
-		
 
 		//Limit Vertical Rotation to 90 degrees
 		if(this.orientation.y < -1.57)

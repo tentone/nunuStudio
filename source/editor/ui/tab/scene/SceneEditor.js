@@ -74,7 +74,7 @@ function SceneEditor(parent, closeable, container, index)
 	//Camera
 	this.camera = null;
 	this.controls = new EditorFreeControls(); //new EditorOrbitControls(); //TODO <ADD CODE HERE>
-	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
+	this.setCameraMode(SceneEditor.PERSPECTIVE);
 
 	//Self pointer
 	var self = this;
@@ -325,11 +325,11 @@ function SceneEditor(parent, closeable, container, index)
 	{
 		self.setCameraMode();
 
-		if(self.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+		if(self.cameraMode === SceneEditor.ORTHOGRAPHIC)
 		{
 			self.cameraButton.setImage(Editor.filePath + "icons/misc/2d.png");
 		}
-		else if(self.cameraMode === SceneEditor.CAMERA_PERSPECTIVE)
+		else if(self.cameraMode === SceneEditor.PERSPECTIVE)
 		{
 			self.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");
 		}
@@ -341,8 +341,8 @@ SceneEditor.EDITING = 9;
 SceneEditor.TESTING = 11;
 
 //Camera mode
-SceneEditor.CAMERA_ORTHOGRAPHIC = 20;
-SceneEditor.CAMERA_PERSPECTIVE = 21;
+SceneEditor.ORTHOGRAPHIC = 20;
+SceneEditor.PERSPECTIVE = 21;
 
 //Constants
 SceneEditor.UP = new THREE.Vector3(0, 1, 0);
@@ -438,18 +438,20 @@ SceneEditor.prototype.updateSettings = function()
 	//Axis
 	this.axisHelper.visible = Settings.editor.axisEnabled;
 
-	//Orientation cube
+	//Orientation
 	var size = Settings.editor.cameraRotationCubeSize;
 	this.orientation.size.set(size, size);
 
+	//Controls
+	var ControlsConstructor = Settings.editor.navigation === Settings.FREE ? EditorFreeControls : EditorOrbitControls;
+	this.controls = new ControlsConstructor();
+	this.controls.attach(this.camera);
+
 	//Tool
-	if(this.tool !== null && Editor.toolMode !== Editor.SCALE)
-	{
-		this.tool.setSpace(Settings.editor.transformationSpace);
-		this.tool.setSnap(Settings.editor.snap);
-		this.tool.setTranslationSnap(Settings.editor.gridSpacing);
-		this.tool.setRotationSnap(Settings.editor.snapAngle);
-	}
+	this.tool.setSpace(Settings.editor.transformationSpace);
+	this.tool.setSnap(Settings.editor.snap);
+	this.tool.setTranslationSnap(Settings.editor.gridSpacing);
+	this.tool.setRotationSnap(Settings.editor.snapAngle);
 };
 
 SceneEditor.prototype.destroy = function()
@@ -543,8 +545,6 @@ SceneEditor.prototype.update = function()
 				{
 					this.selectObjectWithMouse();
 				}
-
-				isEditingObject = false;
 			}
 			else
 			{
@@ -556,13 +556,12 @@ SceneEditor.prototype.update = function()
 					//TODO <REMOVE THIS JUST FOR TEST>
 					if(Editor.selectedObjects.length > 0)
 					{
-						this.controls.focusObject(Editor.selectedObjects[0]);						
+						this.controls.focusObject(Editor.selectedObjects[0]);
 					}
 				}
-			}
 
-			//Create a dropdown menu
-			//TODO <DROPDOWNMENU>
+				isEditingObject = this.tool.update();
+			}
 
 			//Lock mouse when camera is moving
 			if(Settings.editor.lockMouse && Nunu.runningOnDesktop())
@@ -577,13 +576,20 @@ SceneEditor.prototype.update = function()
 				}
 			}
 
-			if(!isEditingObject)
+			if(isEditingObject)
+			{
+				Editor.updateValuesGUI();
+			}
+			else
 			{
 				//Update controls
 				this.controls.update(this.mouse, this.keyboard);
 
+				this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
+				this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Settings.editor.gridSpacing);
+				
 				//Update grid helper position
-				if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+				/*if(this.cameraMode === SceneEditor.ORTHOGRAPHIC)
 				{
 					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
 					this.gridHelper.position.y = this.controls.position.y - (this.controls.position.y % Settings.editor.gridSpacing);
@@ -592,28 +598,13 @@ SceneEditor.prototype.update = function()
 				{
 					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
 					this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Settings.editor.gridSpacing);
-				}
+				}*/
 			}
 		}
 
 		//If has objects selected
 		if(Editor.hasObjectSelected())
 		{
-			//Update tool
-			if(this.tool !== null)
-			{
-				isEditingObject = this.tool.update();
-
-				if(isEditingObject)
-				{
-					Editor.updateValuesGUI();
-				}
-			}
-			else
-			{
-				isEditingObject = false;
-			}
-
 			//Update object transformation matrix
 			for(var i = 0; i < Editor.selectedObjects.length; i++)
 			{
@@ -898,34 +889,29 @@ SceneEditor.prototype.setCameraMode = function(mode)
 {
 	if(mode === undefined)
 	{
-		mode = (this.cameraMode === SceneEditor.CAMERA_PERSPECTIVE) ? SceneEditor.CAMERA_ORTHOGRAPHIC : SceneEditor.CAMERA_PERSPECTIVE;
+		mode = (this.cameraMode === SceneEditor.PERSPECTIVE) ? SceneEditor.ORTHOGRAPHIC : SceneEditor.PERSPECTIVE;
 	}
 	
 	var aspect = (this.canvas !== null) ? this.canvas.width / this.canvas.height : 1.0;
 
-	if(mode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+	if(mode === SceneEditor.ORTHOGRAPHIC)
 	{
 		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL, 0.001, 100000);
-		
-		this.controls.attach(this.camera);
-		this.controls.reset();
-
-		this.gridHelper.rotation.set(Math.PI / 2, 0, 0);
-		this.gridHelper.position.set(0, 0, 0);
+		//this.gridHelper.rotation.set(Math.PI / 2, 0, 0);
+		//this.gridHelper.position.set(0, 0, 0);
 	}
-	else if(mode === SceneEditor.CAMERA_PERSPECTIVE)
+	else if(mode === SceneEditor.PERSPECTIVE)
 	{
 		this.camera = new PerspectiveCamera(60, aspect);
-		
-		this.controls.attach(this.camera);
-		this.controls.reset();
-
-		this.gridHelper.rotation.set(0, 0, 0);
-		this.gridHelper.position.set(0, 0, 0);
+		//this.gridHelper.rotation.set(0, 0, 0);
+		//this.gridHelper.position.set(0, 0, 0);
 	}
 
 	this.cameraMode = mode;
+
 	this.tool.setCamera(this.camera);
+	this.controls.attach(this.camera);
+	this.controls.reset();
 };
 
 //Set scene editor state

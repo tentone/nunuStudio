@@ -95,8 +95,9 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 	if(mouse.buttonPressed(Mouse.LEFT))
 	{
-		this.vector.y -= this.sensitivity * mouse.delta.y;
+		this.vector.y += this.sensitivity * (Settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
 		this.vector.x -= this.sensitivity * mouse.delta.x;
+
 		needsUpdate = true;
 	}
 
