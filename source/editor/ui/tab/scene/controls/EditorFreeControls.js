@@ -16,6 +16,8 @@ function EditorFreeControls()
 
 EditorFreeControls.prototype = Object.create(THREE.Object3D.prototype);
 
+EditorFreeControls.ZERO = new THREE.Vector3(0, 0, 0);
+
 EditorFreeControls.prototype.attach = function(camera)
 {
 	while(this.children.length > 0)
@@ -25,6 +27,7 @@ EditorFreeControls.prototype.attach = function(camera)
 	this.add(camera);
 
 	this.camera = camera;
+	this.updateControls();
 };
 
 EditorFreeControls.prototype.reset = function()
@@ -117,7 +120,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	if(mouse.buttonPressed(Mouse.RIGHT))
 	{
 		//Move speed
-		var speed = this.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseMoveSpeed;
+		var speed = this.position.distanceTo(EditorFreeControls.ZERO) * Settings.editor.mouseMoveSpeed;
 		
 		if(speed < 0.01)
 		{
@@ -151,7 +154,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	if(mouse.wheel !== 0)
 	{
 		//Move speed
-		var speed = mouse.wheel * this.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseWheelSensitivity;
+		var speed = mouse.wheel * this.position.distanceTo(EditorFreeControls.ZERO) * Settings.editor.mouseWheelSensitivity;
 
 		//Limit zoom speed
 		if(speed < 0 && speed > -0.02)

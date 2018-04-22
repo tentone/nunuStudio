@@ -22,7 +22,6 @@ EditorPlanarControls.prototype.attach = function(camera)
 	this.add(camera);
 	
 	this.camera = camera;
-
 	this.updateControls();
 };
 
@@ -31,7 +30,6 @@ EditorPlanarControls.prototype.reset = function()
 	this.orientation.set(0, 0);
 	this.center.set(0, 0, 0);
 	this.distance = 10;
-	
 	this.updateControls();
 };
 

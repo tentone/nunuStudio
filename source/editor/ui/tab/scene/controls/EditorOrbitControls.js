@@ -6,7 +6,7 @@ function EditorOrbitControls()
 
 	this.distance = 10;
 	this.center = new THREE.Vector3(0, 0, 0);
-	this.orientation = new THREE.Vector2(-0.4, 0.40);
+	this.orientation = new THREE.Vector2(-0.4, 0.4);
 
 	this.camera = null;
 
@@ -35,13 +35,14 @@ EditorOrbitControls.prototype.attach = function(camera)
 	this.add(camera);
 
 	this.camera = camera;
+	this.updateControls();
 };
 
 EditorOrbitControls.prototype.reset = function()
 {
 	this.distance = 10;
 	this.center.set(0, 0, 0);
-	this.orientation.set(-0.4, 0.40);
+	this.orientation.set(-0.4, 0.4);
 	this.updateControls();
 };
 
@@ -164,7 +165,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;
 			direction.normalize();
-			direction.applyAxisAngle(SceneEditor.UP, 1.57);
+			direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
 
 			this.center.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
 			this.center.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
@@ -174,7 +175,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;
 			direction.normalize();
-			direction.applyAxisAngle(SceneEditor.UP, 1.57);
+			direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
 
 			this.center.x += direction.x * Settings.editor.keyboardNavigationSpeed;
 			this.center.z += direction.z * Settings.editor.keyboardNavigationSpeed;

@@ -11,3 +11,5 @@ EditorControls.prototype.focusObject = function(object){};
 EditorControls.prototype.setOrientation = function(orientation){};
 
 EditorControls.prototype.update = function(mouse, keyboard){};
+
+EditorControls.prototype.updateControls = function(){};

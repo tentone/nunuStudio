@@ -884,12 +884,12 @@ SceneEditor.prototype.updateRaycaster = function(x, y)
 //Set camera mode (ortho or perspective)
 SceneEditor.prototype.setCameraMode = function(mode)
 {
-	if(cameraMode === undefined)
+	if(mode === undefined)
 	{
-		cameraMode = (this.cameraMode === SceneEditor.PERSPECTIVE) ? SceneEditor.ORTHOGRAPHIC : SceneEditor.PERSPECTIVE;
+		mode = (this.cameraMode === SceneEditor.PERSPECTIVE) ? SceneEditor.ORTHOGRAPHIC : SceneEditor.PERSPECTIVE;
 	}
 	
-	this.cameraMode = cameraMode;
+	this.cameraMode = mode;
 
 	var aspect = (this.canvas !== null) ? this.canvas.width / this.canvas.height : 1.0;
 
@@ -903,8 +903,12 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	}
 
 	this.tool.setCamera(this.camera);
-	this.controls.attach(this.camera);
-	this.controls.reset();
+
+	if(this.controls !== null)
+	{
+		this.controls.attach(this.camera);
+		this.controls.reset();
+	}
 };
 
 //Set scene editor state
