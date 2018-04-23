@@ -27,9 +27,6 @@ function ButtonDrawer(parent)
 	this.icon.style.height = "70%";
 	this.element.appendChild(this.icon);
 
-	//Image scale
-	this.imageScale = new THREE.Vector2(0.7, 0.7);
-
 	//Attributes
 	this.panelSize = new THREE.Vector2(0, 0);
 	this.panelPosition = new THREE.Vector2(0, 0);
@@ -76,7 +73,6 @@ function ButtonDrawer(parent)
 
 	this.updatePanelSize();
 
-	//Add elements to document
 	this.parent.appendChild(this.panel);
 }
 
@@ -149,8 +145,6 @@ ButtonDrawer.prototype.setImage = function(image)
 //Set image scale
 ButtonDrawer.prototype.setImageScale = function(x, y)
 {
-	this.imageScale.set(x, y);
-	
 	this.icon.style.top = ((1 - y) / 2 * 100) + "%";
 	this.icon.style.left = ((1 - x) / 2 * 100) + "%";
 	this.icon.style.width = (x * 100) + "%";
@@ -179,20 +173,14 @@ ButtonDrawer.prototype.updateOptions = function()
 //Update Interface
 ButtonDrawer.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-
 		if(this.expanded)
 		{
-			this.panel.style.display = "block";
-
-			//Panel position
 			this.panelPosition.x = this.position.x + this.size.x;
 			this.panelPosition.y = this.position.y;
 
-			//Panel size
+			this.panel.style.display = "block";
 			this.panel.style.top = this.panelPosition.y + "px";
 			this.panel.style.left = this.panelPosition.x + "px";
 			this.panel.style.width = this.panelSize.x + "px";
@@ -202,16 +190,16 @@ ButtonDrawer.prototype.updateInterface = function()
 		{
 			this.panel.style.display = "none";
 		}
+	
+		this.element.style.visibility = "visible";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 		this.panel.style.display = "none";
 	}
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

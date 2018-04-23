@@ -39,7 +39,7 @@ EditorFreeControls.prototype.reset = function()
 
 EditorFreeControls.prototype.focusObject = function(object)
 {
-	var box = ObjectUtils.calculateBoundingBox(object);
+	/*var box = ObjectUtils.calculateBoundingBox(object);
 	box.applyMatrix4(object.matrixWorld);
 	box.getCenter(this.center);
 	var size = box.getSize(this.tempVector).length();
@@ -56,7 +56,7 @@ EditorFreeControls.prototype.focusObject = function(object)
 	direction.multiplyScalar(distance);
 	
 	this.position.copy(object.position);
-	this.position.add(direction);
+	this.position.add(direction);*/
 
 	//TODO <ADD CODE HERE>
 	

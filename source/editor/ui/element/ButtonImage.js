@@ -15,9 +15,6 @@ function ButtonImage(parent)
 	this.icon.style.width = "70%";
 	this.icon.style.height = "70%";
 	this.element.appendChild(this.icon);
-	
-	//Image scale
-	this.imageScale = new THREE.Vector2(0.7, 0.7);
 
 	//Mouse over event
 	this.element.onmouseenter = function()
@@ -49,12 +46,10 @@ ButtonImage.prototype.setImage = function(image)
 //Set image scale
 ButtonImage.prototype.setImageScale = function(x, y)
 {
-	this.imageScale.set(x, y);
-	
-	this.icon.style.top = (1 - y) / 2;
-	this.icon.style.left = (1 - x) / 2;
-	this.icon.style.width = x;
-	this.icon.style.height = y;
+	this.icon.style.top = ((1 - y) / 2 * 100) + "%";
+	this.icon.style.left = ((1 - x) / 2 * 100) + "%";
+	this.icon.style.width = (x * 100) + "%";
+	this.icon.style.height = (y * 100) + "%";
 };
 
 //Update Interface
