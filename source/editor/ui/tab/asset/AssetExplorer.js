@@ -418,13 +418,13 @@ AssetExplorer.prototype.updateView = function()
 	}
 
 	//Geometries
-	/*var geometries = Editor.program.geometries;
+	var geometries = Editor.program.geometries;
 	for(var i in geometries)
 	{
 		var file = new GeometryAsset(this.assets);
 		file.setAsset(geometries[i]);
 		this.add(file);
-	}*/
+	}
 
 	//Textures
 	var textures = Editor.program.textures;

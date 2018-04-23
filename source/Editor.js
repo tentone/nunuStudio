@@ -681,10 +681,22 @@ Editor.initialize = function()
 			{
 				Editor.gui.tab.selectPreviousTab();
 			}
+			else if(key === Keyboard.Z)
+			{
+				Editor.undo();
+			}
+			else if(key === Keyboard.Y)
+			{
+				Editor.redo();
+			}
 		}
 		else if(key === Keyboard.F2)
 		{
 			Editor.renameObject();
+		}
+		else if(key === Keyboard.F5)
+		{
+			//TODO <ADD CODE HERE>
 		}
 	});
 	Editor.manager.create();

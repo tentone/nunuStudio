@@ -334,6 +334,49 @@ function SceneEditor(parent, closeable, container, index)
 			self.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");
 		}
 	});
+
+	this.manager = new EventManager();
+	this.manager.add(document.body, "keydown", function(event)
+	{
+		var key = event.keyCode;
+
+		if(self.state === SceneEditor.EDITING)
+		{
+			if(event.ctrlKey)
+			{
+				if(self.focused)
+				{
+					if(key === Keyboard.C)
+					{
+						Editor.copyObject();
+					}
+					else if(key === Keyboard.V)
+					{
+						Editor.pasteObject();
+					}
+					else if(key === Keyboard.X)
+					{
+						Editor.cutObject();
+					}
+				}
+			}
+			else if(key === Keyboard.F5)
+			{
+				self.setState(SceneEditor.TESTING);
+			}
+			else if(key === Keyboard.DEL)
+			{
+				Editor.deleteObject();
+			}
+		}
+		else if(self.state === SceneEditor.TESTING)
+		{
+			if(key === Keyboard.F5)
+			{
+				self.setState(SceneEditor.EDITING);
+			}
+		}
+	});
 }
 
 //State
@@ -408,8 +451,11 @@ SceneEditor.prototype.activate = function()
 	this.initializeRenderer();
 	this.updateSettings();
 	this.setState(SceneEditor.EDITING);
-	
+
+	this.manager.create();
+
 	Editor.gui.toolBar.selectTool(Editor.SELECT);
+
 	Editor.resize();
 };
 
@@ -418,9 +464,10 @@ SceneEditor.prototype.deactivate = function()
 {
 	TabElement.prototype.deactivate.call(this);
 
-	//Hide run button
 	Editor.gui.menuBar.run.visible = false;
 	Editor.gui.menuBar.run.updateInterface();
+
+	this.manager.destroy();
 };
 
 //Update settings
@@ -496,42 +543,6 @@ SceneEditor.prototype.update = function()
 
 	if(this.state === SceneEditor.EDITING)
 	{
-		if(this.keyboard.keyJustPressed(Keyboard.F5))
-		{
-			this.setState(SceneEditor.TESTING);
-		}
-		else if(this.keyboard.keyJustPressed(Keyboard.DEL))
-		{
-			Editor.deleteObject();
-		}
-		else if(this.keyboard.keyPressed(Keyboard.CTRL))
-		{
-			if(this.focused)
-			{
-				if(this.keyboard.keyJustPressed(Keyboard.C))
-				{
-					Editor.copyObject();
-				}
-				else if(this.keyboard.keyJustPressed(Keyboard.V))
-				{
-					Editor.pasteObject();
-				}
-				else if(this.keyboard.keyJustPressed(Keyboard.X))
-				{
-					Editor.cutObject();
-				}
-			}
-			
-			if(this.keyboard.keyJustPressed(Keyboard.Z))
-			{
-				Editor.undo();
-			}
-			else if(this.keyboard.keyJustPressed(Keyboard.Y))
-			{
-				Editor.redo();
-			}
-		}
-
 		//Check if mouse is inside canvas
 		if(this.mouse.insideCanvas())
 		{
@@ -626,11 +637,6 @@ SceneEditor.prototype.update = function()
 			this.setState(SceneEditor.EDITING);
 			Editor.alert("Error testing program\nState update caused an error\n(" + e + ")");
 			console.error("nunuStudio: Error updating program state", e);
-		}
-
-		if(this.keyboard.keyJustPressed(Keyboard.F5))
-		{
-			this.setState(SceneEditor.EDITING);
 		}
 	}
 
