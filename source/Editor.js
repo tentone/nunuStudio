@@ -1760,11 +1760,18 @@ Editor.loadModel = function(file, parent)
 			{
 				try
 				{
-					//var loader = new THREE.DracoLoader();
+					THREE.DRACOLoader.setDecoderPath(Editor.filePath + "wasm/draco/");
+					THREE.DRACOLoader.setDecoderConfig({type: "wasm"});
+					var loader = new THREE.DRACOLoader();
+					loader.decodeDracoFile(reader.result, function(geometry)
+					{
+						geometry.computeVertexNormals();
 
-					//TODO <ADD CODE HERE>
-					
-					//Editor.addObject(scene, parent);
+						var mesh = new THREE.Mesh(geometry, Editor.defaultMaterial);
+						Editor.addObject(mesh, parent);
+
+						THREE.DRACOLoader.releaseDecoderModule();
+					});
 				}
 				catch(e)
 				{
