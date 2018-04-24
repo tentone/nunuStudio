@@ -7317,7 +7317,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 101,
+            "line": 102,
             "description": "Render a scene using this camera and the internal EffectComposer.",
             "itemtype": "method",
             "name": "render",
@@ -7338,7 +7338,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 113,
+            "line": 114,
             "description": "Resize this camera, should be called every time after resizing the screen.",
             "itemtype": "method",
             "name": "resize",
@@ -7359,7 +7359,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 130,
+            "line": 131,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -7368,7 +7368,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 146,
+            "line": 147,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -7377,7 +7377,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 168,
+            "line": 169,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10919,7 +10919,7 @@
         {
             "file": "..\\..\\source\\core\\resources\\Model.js",
             "line": 20,
-            "description": "List of file types support for 3D models.",
+            "description": "List of file types supported for 3D models.",
             "itemtype": "property",
             "name": "extensions List of extensions.",
             "type": "{Array}",
@@ -11132,7 +11132,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 255,
+            "line": 258,
             "description": "Get resource by name.",
             "itemtype": "method",
             "name": "getResourceByName",
@@ -11152,7 +11152,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 276,
+            "line": 279,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -11172,7 +11172,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 297,
+            "line": 300,
             "description": "Remove image.",
             "params": [
                 {
@@ -11188,7 +11188,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 312,
+            "line": 315,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -11208,7 +11208,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 333,
+            "line": 336,
             "description": "Remove video.",
             "params": [
                 {
@@ -11224,7 +11224,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 347,
+            "line": 350,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -11244,7 +11244,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 368,
+            "line": 371,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -11260,7 +11260,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 382,
+            "line": 385,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -11286,7 +11286,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 423,
+            "line": 426,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -11306,7 +11306,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 444,
+            "line": 447,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -11322,7 +11322,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 455,
+            "line": 458,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -11347,7 +11347,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 542,
+            "line": 545,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -11367,7 +11367,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 563,
+            "line": 566,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -11383,7 +11383,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 577,
+            "line": 580,
             "description": "Add resource to resources manager.",
             "itemtype": "method",
             "name": "addResource",
@@ -11399,7 +11399,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 591,
+            "line": 594,
             "description": "Remove resource from font list.",
             "itemtype": "method",
             "name": "removeResource",
@@ -11415,7 +11415,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 602,
+            "line": 605,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -11436,7 +11436,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 630,
+            "line": 633,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -11456,7 +11456,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 651,
+            "line": 654,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -11472,7 +11472,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 665,
+            "line": 668,
             "description": "Remove audio.",
             "params": [
                 {
@@ -15051,6 +15051,27 @@
                 "description": "True if there is some element in fullscreen mode.",
                 "type": "Boolean"
             },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\..\\source\\Nunu.js",
+            "line": 138,
+            "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUse isFullscreen to check if the application is running in fullscreen mode already.",
+            "itemtype": "method",
+            "name": "setFullscreen",
+            "params": [
+                {
+                    "name": "enable",
+                    "description": "If true the application will enter fullscreen mode, if false it will exit.",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "element",
+                    "description": "DOM element to put into fullscreen.",
+                    "type": "DOM"
+                }
+            ],
             "class": "Nunu",
             "module": "Runtime"
         }
