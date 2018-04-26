@@ -80,6 +80,15 @@ function AddObjectSideBar(element)
 		Editor.addObject(model);
 	}, "Tetrahedron");
 
+	//Dodecahedron
+	addModel.addOption(Editor.filePath + "icons/models/dodecahedron.png", function()
+	{
+		var geometry = new THREE.DodecahedronBufferGeometry(1, 0);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "dodecahedron";
+		Editor.addObject(model);
+	}, "Dodecahedron");
+
 	//Plane
 	addModel.addOption(Editor.filePath + "icons/models/plane.png", function()
 	{
