@@ -94,8 +94,6 @@ function AddObjectSideBar(element)
 	{
 		var geometry = new THREE.PlaneBufferGeometry(1, 1);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
-		model.receiveShadow = true;
-		model.castShadow = true;
 		model.name = "plane";
 		Editor.addObject(model);
 	}, "Plane");
@@ -105,11 +103,45 @@ function AddObjectSideBar(element)
 	{
 		var geometry = new THREE.CircleBufferGeometry(1, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
-		model.receiveShadow = true;
-		model.castShadow = true;
 		model.name = "circle";
 		Editor.addObject(model);
 	}, "Cicle");
+
+	//Parametric
+	/*
+	addModel.addOption(Editor.filePath + "icons/models/spline.png", function()
+	{
+		var klein = function (v, u, optionalTarget)
+		{
+			var result = optionalTarget || new THREE.Vector3();
+
+			u *= Math.PI;
+			v *= 2 * Math.PI;
+
+			u = u * 2;
+			var x, y, z;
+			if (u < Math.PI)
+			{
+				x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(u) * Math.cos(v);
+				z = - 8 * Math.sin(u) - 2 * (1 - Math.cos(u) / 2) * Math.sin(u) * Math.cos(v);
+			}
+			else
+			{
+				x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(v + Math.PI);
+				z = - 8 * Math.sin(u);
+			}
+
+			y = - 2 * (1 - Math.cos(u) / 2) * Math.sin(v);
+
+			return result.set(x, y, z);
+		};
+
+		var geometry = new THREE.ParametricGeometry(klein, 25, 25);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "parametric";
+		Editor.addObject(model);
+	}, "Parametric");
+	*/
 
 	//Add lights
 	var addLight = new ButtonDrawer(element);
