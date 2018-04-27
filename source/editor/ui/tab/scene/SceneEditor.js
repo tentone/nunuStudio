@@ -553,6 +553,11 @@ SceneEditor.prototype.update = function()
 				{
 					this.selectObjectWithMouse();
 				}
+				
+				if(this.mouse.buttonDoubleClicked() && Editor.selectedObjects.length > 0)
+				{
+					this.controls.focusObject(Editor.selectedObjects[0]);
+				}
 			}
 			else
 			{
@@ -560,12 +565,6 @@ SceneEditor.prototype.update = function()
 				if(this.mouse.buttonDoubleClicked())
 				{
 					this.selectObjectWithMouse();
-
-					//TODO <REMOVE THIS JUST FOR TEST>
-					if(Editor.selectedObjects.length > 0)
-					{
-						this.controls.focusObject(Editor.selectedObjects[0]);
-					}
 				}
 
 				isEditingObject = this.tool.update();
