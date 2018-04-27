@@ -227,46 +227,44 @@ function TreeElement(container)
 				}
 				
 				//Add physics object
+				function createPhysics(object, mode)
+				{
+					var physics = new PhysicsObject();
+					physics.addShape(Mesh2shape.createShape(object, mode));
+
+					physics.name = object.name;
+					physics.position.copy(object.position);
+					physics.quaternion.copy(object.quaternion);
+
+					object.position.set(0, 0, 0);
+					object.quaternion.set(0, 0, 0, 1);
+					object.parent.add(physics);
+
+					physics.add(object);
+
+					Editor.updateViewsGUI();
+				}
+
 				var physics = context.addMenu("Add physics");
 
 				physics.addOption("Box", function()
 				{
-					var physics = new PhysicsObject();
-					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.BOX));
-					physics.name = self.obj.name;
-					
-					Editor.addObject(physics);
-					Editor.updateViewsGUI();
+					createPhysics(self.obj, Mesh2shape.Type.BOX);
 				});
 
 				physics.addOption("Sphere", function()
 				{
-					var physics = new PhysicsObject();
-					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.SPHERE));
-					physics.name = self.obj.name;
-					
-					Editor.addObject(physics);
-					Editor.updateViewsGUI();
+					createPhysics(self.obj, Mesh2shape.Type.SPHERE);
 				});
 
 				physics.addOption("Cylinder", function()
 				{
-					var physics = new PhysicsObject();
-					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.CYLINDER));
-					physics.name = self.obj.name;
-					
-					Editor.addObject(physics);
-					Editor.updateViewsGUI();
+					createPhysics(self.obj, Mesh2shape.Type.CYLINDER);
 				});
 	
 				physics.addOption("ConvexHull", function()
 				{
-					var physics = new PhysicsObject();
-					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.HULL));
-					physics.name = self.obj.name;
-					
-					Editor.addObject(physics);
-					Editor.updateViewsGUI();
+					createPhysics(self.obj, Mesh2shape.Type.HULL);
 				});
 			}
 
