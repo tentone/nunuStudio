@@ -6,7 +6,9 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"build": "cd build/build && node build.js"
+		"all": "cd build/build && node update.js && node build.js",
+		"build": "cd build/build && node build.js",
+		"update": "cd build/build && node update.js"
 	},
 	"repository": {
 		"type": "git",
