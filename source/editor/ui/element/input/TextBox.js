@@ -12,6 +12,38 @@ function TextBox(parent)
 	this.element.style.boxSizing = "border-box";
 	this.element.style.textIndent = "4px";
 	this.element.style.borderRadius = "4px";
+
+	var self = this;
+	
+	this.element.oncontextmenu = function(event)
+	{
+		var context = new ContextMenu();
+		context.size.set(130, 20);
+		context.position.set(event.clientX, event.clientY);
+		context.addOption("Copy", function()
+		{
+			var value = self.element.value;
+			Editor.clipboard.set(value.slice(self.element.selectionStart, self.element.selectionEnd), "text");
+		});
+		context.addOption("Cut", function()
+		{
+			var value = self.element.value;
+			Editor.clipboard.set(value.slice(self.element.selectionStart, self.element.selectionEnd), "text");
+			self.element.value = value.slice(0, self.element.selectionStart) + value.slice(self.element.selectionEnd, value.length);
+		});
+		context.addOption("Paste", function()
+		{
+			var value = self.element.value;
+			var paste = Editor.clipboard.get("text");
+			self.element.value = value.slice(0, self.element.selectionStart) + paste + value.slice(self.element.selectionEnd, value.length);
+		});
+		context.addOption("Select all", function()
+		{
+			console.log(self.element);
+			self.element.select();
+		});
+		context.updateInterface();
+	};
 }
 
 TextBox.prototype = Object.create(Element.prototype);
