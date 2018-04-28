@@ -7,7 +7,6 @@
  * 
  * yuidocjs used for documentation generation.
  *
- * @class build
  * @author tentone
  */
 var sourcePath = "../../source/";
@@ -192,52 +191,56 @@ function readFile(fname)
 {
 	var fs = require("fs");
 
-	if(fs !== undefined)
-	{
-		return fs.readFileSync(fname, "utf8");
-	}
+	return fs.readFileSync(fname, "utf8");
 }
 
 function writeFile(fname, text)
 {
 	var fs = require("fs");
+	var path = require("path");
 
-	if(fs !== undefined)
+	function checkDirectory(pathName)
 	{
-		fs.writeFileSync(fname, text, "utf8");
+		var dirname = path.dirname(pathName);
+		if(fs.existsSync(dirname))
+		{
+			return true;
+		}
+		checkDirectory(dirname);
+		fs.mkdirSync(dirname);
 	}
+
+	checkDirectory(fname);
+	fs.writeFileSync(fname, text, "utf8");
 }
 
 function copyFolder(src, dst)
 {
 	var fs = require("fs");
 
-	if(fs !== undefined)
-	{
-		makeDirectory(dst);
-		var files = fs.readdirSync(src);
+	makeDirectory(dst);
+	var files = fs.readdirSync(src);
 
-		for(var i = 0; i < files.length; i++)
+	for(var i = 0; i < files.length; i++)
+	{
+		var source = src + "/" + files[i];
+		var destiny = dst + "/" + files[i];
+		var current = fs.statSync(source);
+		
+		//Directory
+		if(current.isDirectory())
 		{
-			var source = src + "/" + files[i];
-			var destiny = dst + "/" + files[i];
-			var current = fs.statSync(source);
-			
-			//Directory
-			if(current.isDirectory())
-			{
-				copyFolder(source, destiny);
-			}
-			//Symbolic link
-			else if(current.isSymbolicLink())
-			{
-				fs.symlinkSync(fs.readlinkSync(source), destiny);
-			}
-			//File
-			else
-			{
-				copyFile(source, destiny);
-			}
+			copyFolder(source, destiny);
+		}
+		//Symbolic link
+		else if(current.isSymbolicLink())
+		{
+			fs.symlinkSync(fs.readlinkSync(source), destiny);
+		}
+		//File
+		else
+		{
+			copyFile(source, destiny);
 		}
 	}
 }
@@ -246,55 +249,42 @@ function copyFile(src, dst)
 {
 	var fs = require("fs");
 
-	if(fs !== undefined)
-	{
-		fs.createReadStream(src).pipe(fs.createWriteStream(dst));
-	}
+	fs.createReadStream(src).pipe(fs.createWriteStream(dst));
 }
 
 function makeDirectory(dir)
 {
 	var fs = require("fs");
 
-	if(fs !== undefined)
-	{
-		fs.mkdirSync(dir);
-	}
+	fs.mkdirSync(dir);
 }
 
 function deleteFolder(path)
 {
 	var fs = require("fs");
 
-	if(fs !== undefined)
+	if(fs.existsSync(path))
 	{
-		if(fs.existsSync(path))
+		fs.readdirSync(path).forEach(function(file, index)
 		{
-			fs.readdirSync(path).forEach(function(file,index)
+			var curPath = path + "/" + file;
+
+			if(fs.lstatSync(curPath).isDirectory())
 			{
-				var curPath = path + "/" + file;
+				deleteFolder(curPath);
+			}
+			else
+			{
+				fs.unlinkSync(curPath);
+			}
+		});
 
-				if(fs.lstatSync(curPath).isDirectory())
-				{
-					deleteFolder(curPath);
-				}
-				else
-				{
-					fs.unlinkSync(curPath);
-				}
-			});
-
-			fs.rmdirSync(path);
-		}
+		fs.rmdirSync(path);
 	}
 }
 
 function deleteFile(fname)
 {
 	var fs = require("fs");
-
-	if(fs !== undefined)
-	{
-		fs.unlinkSync(fname);
-	}
+	fs.unlinkSync(fname);
 }

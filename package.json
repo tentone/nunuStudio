@@ -26,5 +26,7 @@
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
 	"homepage": "https://www.nunustudio.org",
-	"devDependencies": {}
+	"devDependencies": {
+		"yuidocjs": ""
+	}
 }

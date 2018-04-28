@@ -46,7 +46,7 @@
 	- The web version cannot export desktop projects
 
 ### Building
-- nunuStudio uses a custom solution for module management
+- nunuStudio uses a custom solution for code management
 - To build nunuStudio Java and NodeJS are required
 	- Javascript is optimized and minified using Google closure
 	- Documentation generation requires YuiDocs to be installed (npm -g install yuidocjs)
