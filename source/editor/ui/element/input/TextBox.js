@@ -35,7 +35,10 @@ function TextBox(parent)
 		{
 			var value = self.element.value;
 			var paste = Editor.clipboard.get("text");
-			self.element.value = value.slice(0, self.element.selectionStart) + paste + value.slice(self.element.selectionEnd, value.length);
+			if(paste !== undefined)
+			{
+				self.element.value = value.slice(0, self.element.selectionStart) + paste + value.slice(self.element.selectionEnd, value.length);
+			}
 		});
 		context.addOption("Select all", function()
 		{

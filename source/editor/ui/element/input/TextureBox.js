@@ -128,11 +128,8 @@ TextureBox.prototype.loadTexture = function(file)
 //Update Interface
 TextureBox.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-	
 		//Preview
 		this.preview.style.width = this.size.y + "px";
 		this.preview.style.height = this.size.y + "px";
@@ -144,6 +141,7 @@ TextureBox.prototype.updateInterface = function()
 		this.form.updateInterface();
 
 		//Element
+		this.element.style.visibility = "visible";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
