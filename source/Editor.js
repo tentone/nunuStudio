@@ -2299,9 +2299,25 @@ Editor.exportMacOSProject = function(dir)
 	Editor.exportNWJSProject(dir);
 };
 
-Editor.confirm = window.confirm;
-Editor.alert = window.alert;
-Editor.prompt = window.prompt;
+Editor.confirm = function(message)
+{
+	return window.confirm(message);	
+};
+
+Editor.alert = function(message)
+{
+	if(Nunu.runningOnDesktop())
+	{
+		console.log("Desktop");
+	}
+	
+	window.alert(message);
+};
+
+Editor.prompt = function(message, defaultValue)
+{
+	return window.prompt(message, defaultValue);	
+};
 
 //Update nunuStudio editor version using build from github repo
 Editor.updateNunu = function(silent)
