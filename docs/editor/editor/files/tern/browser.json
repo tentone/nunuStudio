@@ -3409,10 +3409,10 @@
 		"!url": "https://developer.mozilla.org/en/docs/DOM/window.confirm",
 		"!doc": "Displays a modal dialog with a message and two buttons, OK and Cancel."
 	},
-	"prompt": {
+	"Editor.prompt": {
 		"!type": "fn(message: string, value: string) -> string",
-		"!url": "https://developer.mozilla.org/en/docs/DOM/window.prompt",
-		"!doc": "Displays a dialog with a message prompting the user to input some text."
+		"!url": "https://developer.mozilla.org/en/docs/DOM/window.Editor.prompt",
+		"!doc": "Displays a dialog with a message Editor.prompting the user to input some text."
 	},
 	"scrollBy": {
 		"!type": "fn(x: number, y: number)",
