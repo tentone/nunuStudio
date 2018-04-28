@@ -518,7 +518,7 @@ function MainMenu(parent)
 
 		var simplifier = new THREE.SimplifyModifier();
 
-		var level = parseFloat(prompt("Simplification level in %")) / 100;
+		var level = parseFloat(Editor.prompt("Simplification level in %")) / 100;
 
 		if(isNaN(level) || level > 100 || level < 0)
 		{

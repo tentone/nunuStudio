@@ -26,7 +26,7 @@ function FileAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename file", self.asset.name)));
+				Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename file", self.asset.name)));
 				Editor.updateViewsGUI();
 			}
 		});

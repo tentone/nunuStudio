@@ -72,8 +72,6 @@ function BoxGeometryForm(form, obj)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-
-	this.updateValues();
 }
 
 BoxGeometryForm.prototype.updateGeometry = function()
@@ -82,11 +80,11 @@ BoxGeometryForm.prototype.updateGeometry = function()
 
 	if(this.buffer.getValue())
 	{
-		this.obj.geometry = new BoxBufferGeometry(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue());
+		this.obj.geometry = new THREE.BoxBufferGeometry(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue());
 	}
 	else
 	{
-		this.obj.geometry = new BoxGeometry(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue());
+		this.obj.geometry = new THREE.BoxGeometry(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue());
 	}
 };
 

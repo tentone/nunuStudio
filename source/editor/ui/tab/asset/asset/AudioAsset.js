@@ -49,7 +49,7 @@ function AudioAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename audio", self.asset.name)));
+				Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename audio", self.asset.name)));
 				Editor.updateViewsGUI();
 			}
 		});

@@ -72,7 +72,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 
 		context.addOption("Move", function()
 		{
-			var time = Number.parseFloat(prompt("Keyframe time"));
+			var time = Number.parseFloat(Editor.prompt("Keyframe time"));
 
 			if(isNaN(time))
 			{

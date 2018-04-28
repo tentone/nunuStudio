@@ -67,8 +67,6 @@ function CylinderGeometryForm(form, obj)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-
-	this.updateValues();
 }
 
 CylinderGeometryForm.prototype.updateGeometry = function()
@@ -77,11 +75,11 @@ CylinderGeometryForm.prototype.updateGeometry = function()
 
 	if(this.buffer.getValue())
 	{
-		this.obj.geometry = new CylinderBufferGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
+		this.obj.geometry = new THREE.CylinderBufferGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
 	}
 	else
 	{
-		this.obj.geometry = new CylinderGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
+		this.obj.geometry = new THREE.CylinderGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
 	}
 };
 

@@ -22,7 +22,7 @@ function AnimationButton(parent, editor, animation)
 		context.position.set(event.clientX, event.clientY);
 		context.addOption("Rename", function()
 		{
-			var value = prompt("Rename animation", animation.name);
+			var value = Editor.prompt("Rename animation", animation.name);
 			if(value !== null && value !== "")
 			{
 				Editor.history.add(new ChangeAction(animation, "name", value));
@@ -31,7 +31,7 @@ function AnimationButton(parent, editor, animation)
 		});
 		context.addOption("Add track", function()
 		{
-			var attribute = prompt("Attribute");
+			var attribute = Editor.prompt("Attribute");
 			if(!attribute.startsWith("."))
 			{
 				attribute = "." + attribute;

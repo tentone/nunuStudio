@@ -29,7 +29,7 @@ function ImageAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				Editor.history.add(new ChangeAction(self.asset, "name", prompt("Rename", self.asset.name)));
+				Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename", self.asset.name)));
 				Editor.updateViewsGUI();
 			}
 		});

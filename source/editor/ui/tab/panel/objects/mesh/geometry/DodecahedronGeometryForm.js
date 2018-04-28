@@ -1,6 +1,6 @@
 "use strict";
 
-function TetrahedronGeometryForm(form, obj)
+function DodecahedronGeometryForm(form, obj)
 {
 	this.form = form;
 	this.obj = obj;
@@ -14,7 +14,7 @@ function TetrahedronGeometryForm(form, obj)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Tetrahedron Geometry");
+	this.form.addText("Dodecahedron Geometry");
 	this.form.nextRow();
 
 	//Radius
@@ -46,21 +46,21 @@ function TetrahedronGeometryForm(form, obj)
 	this.form.nextRow();
 }
 
-TetrahedronGeometryForm.prototype.updateGeometry = function()
+DodecahedronGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
 
 	if(this.buffer.getValue())
 	{
-		this.obj.geometry = new THREE.TetrahedronBufferGeometry(this.radius.getValue(), this.detail.getValue());
+		this.obj.geometry = new THREE.DodecahedronBufferGeometry(this.radius.getValue(), this.detail.getValue());
 	}
 	else
 	{
-		this.obj.geometry = new THREE.TetrahedronGeometry(this.radius.getValue(), this.detail.getValue());
+		this.obj.geometry = new THREE.DodecahedronGeometry(this.radius.getValue(), this.detail.getValue());
 	}
 };
 
-TetrahedronGeometryForm.prototype.updateValues = function()
+DodecahedronGeometryForm.prototype.updateValues = function()
 {
 	this.radius.setValue(this.obj.geometry.parameters.radius || 2);
 	this.detail.setValue(this.obj.geometry.parameters.detail || 0);

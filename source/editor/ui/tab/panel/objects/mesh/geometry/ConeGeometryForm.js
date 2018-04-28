@@ -60,8 +60,6 @@ function ConeGeometryForm(form, obj)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-
-	this.updateValues();
 }
 
 ConeGeometryForm.prototype.updateGeometry = function()
@@ -70,11 +68,11 @@ ConeGeometryForm.prototype.updateGeometry = function()
 
 	if(this.buffer.getValue())
 	{
-		this.obj.geometry = new ConeBufferGeometry(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
+		this.obj.geometry = new THREE.ConeBufferGeometry(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
 	}
 	else
 	{
-		this.obj.geometry = new ConeGeometry(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
+		this.obj.geometry = new THREE.ConeGeometry(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
 	}
 };
 

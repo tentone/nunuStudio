@@ -73,7 +73,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 
 		context.addOption("Shift", function()
 		{
-			var time = Number.parseFloat(prompt("Time to shift track"));
+			var time = Number.parseFloat(Editor.prompt("Time to shift track"));
 
 			if(isNaN(time))
 			{
@@ -89,8 +89,8 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 		
 		context.addOption("Trim", function()
 		{
-			var start = Number.parseFloat(prompt("Start time"));
-			var end = Number.parseFloat(prompt("End time"));
+			var start = Number.parseFloat(Editor.prompt("Start time"));
+			var end = Number.parseFloat(Editor.prompt("End time"));
 
 			if(isNaN(start) || isNaN(end))
 			{

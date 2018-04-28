@@ -413,6 +413,7 @@ include("editor/ui/tab/panel/objects/mesh/geometry/PlaneGeometryForm.js");
 include("editor/ui/tab/panel/objects/mesh/geometry/ConeGeometryForm.js");
 include("editor/ui/tab/panel/objects/mesh/geometry/CylinderGeometryForm.js");
 include("editor/ui/tab/panel/objects/mesh/geometry/TetrahedronGeometryForm.js");
+include("editor/ui/tab/panel/objects/mesh/geometry/DodecahedronGeometryForm.js");
 include("editor/ui/tab/panel/objects/mesh/geometry/CircleGeometryForm.js");
 
 include("editor/ui/preview/CubemapFlatRenderer.js");
@@ -2298,17 +2299,9 @@ Editor.exportMacOSProject = function(dir)
 	Editor.exportNWJSProject(dir);
 };
 
-//Confirmation box
-Editor.confirm = function(message)
-{
-	return confirm(message);
-};
-
-//Show alert box editor
-Editor.alert = function(message)
-{
-	alert(message);
-};
+Editor.confirm = window.confirm;
+Editor.alert = window.alert;
+Editor.prompt = window.prompt;
 
 //Update nunuStudio editor version using build from github repo
 Editor.updateNunu = function(silent)

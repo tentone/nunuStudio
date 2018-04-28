@@ -58,8 +58,6 @@ function PlaneGeometryForm(form, obj)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-
-	this.updateValues();
 }
 
 PlaneGeometryForm.prototype.updateGeometry = function()
@@ -68,11 +66,11 @@ PlaneGeometryForm.prototype.updateGeometry = function()
 
 	if(this.buffer.getValue())
 	{
-		this.obj.geometry = new PlaneBufferGeometry(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
+		this.obj.geometry = new THREE.PlaneBufferGeometry(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
 	}
 	else
 	{
-		this.obj.geometry = new PlaneGeometry(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
+		this.obj.geometry = new THREE.PlaneGeometry(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
 	}
 };
 

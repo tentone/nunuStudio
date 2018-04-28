@@ -50,8 +50,6 @@ function SphereGeometryForm(form, obj)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-
-	this.updateValues();
 }
 
 SphereGeometryForm.prototype.updateGeometry = function()
@@ -60,11 +58,11 @@ SphereGeometryForm.prototype.updateGeometry = function()
 
 	if(this.buffer.getValue())
 	{
-		this.obj.geometry = new SphereBufferGeometry(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
+		this.obj.geometry = new THREE.SphereBufferGeometry(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
 	}
 	else
 	{
-		this.obj.geometry = new SphereGeometry(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
+		this.obj.geometry = new THREE.SphereGeometry(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
 	}
 };
 

@@ -69,8 +69,6 @@ function TorusGeometryForm(form, obj)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-
-	this.updateValues();
 }
 
 TorusGeometryForm.prototype.updateGeometry = function()
@@ -79,11 +77,11 @@ TorusGeometryForm.prototype.updateGeometry = function()
 
 	if(this.buffer.getValue())
 	{
-		this.obj.geometry = new TorusBufferGeometry(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue());
+		this.obj.geometry = new THREE.TorusBufferGeometry(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue());
 	}
 	else
 	{
-		this.obj.geometry = new TorusGeometry(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue());
+		this.obj.geometry = new THREE.TorusGeometry(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue());
 	}
 };
 

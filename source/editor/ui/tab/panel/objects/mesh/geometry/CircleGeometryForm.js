@@ -62,8 +62,6 @@ function CircleGeometryForm(form, obj)
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
-
-	this.updateValues();
 }
 
 CircleGeometryForm.prototype.updateGeometry = function()
@@ -72,11 +70,11 @@ CircleGeometryForm.prototype.updateGeometry = function()
 
 	if(this.buffer.getValue())
 	{
-		this.obj.geometry = new CircleBufferGeometry(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
+		this.obj.geometry = new THREE.CircleBufferGeometry(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
 	}
 	else
 	{
-		this.obj.geometry = new CircleGeometry(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
+		this.obj.geometry = new THREE.CircleGeometry(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
 	}
 };
 
