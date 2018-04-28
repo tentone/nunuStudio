@@ -4,12 +4,25 @@ function EditorPlanarControls()
 {
 	THREE.Object3D.call(this);
 
+	this.zoom = 10;
+	this.center = new THREE.Vector3(0, 0, 0);
+	this.orientation = new THREE.Vector2(-0.4, 0.4);
+
 	this.camera = null;
 
-	this.orientation = new THREE.Vector2(0, 0);
-	this.center = new THREE.Vector3(0, 0, 0);
-	this.distance = 10;
+	this.maxZoom = Number.MAX_SAFE_INTEGER;
+	this.minZoom = 1e-10;
+	
+	this.limitUp = 1.57;
+	this.limitDown = -1.57;
+
+	this.tempVector = new THREE.Vector3(0, 0, 0);
+	this.tempMatrix = new THREE.Matrix4();
+
+	this.updateControls();
 }
+
+EditorPlanarControls.UP = new THREE.Vector3(0, 1, 0);
 
 EditorPlanarControls.prototype = Object.create(THREE.Object3D.prototype);
 
@@ -20,21 +33,36 @@ EditorPlanarControls.prototype.attach = function(camera)
 		this.remove(this.children[0]);
 	}
 	this.add(camera);
-	
+
 	this.camera = camera;
 	this.updateControls();
 };
 
 EditorPlanarControls.prototype.reset = function()
 {
-	this.orientation.set(0, 0);
+	this.zoom = 10;
 	this.center.set(0, 0, 0);
-	this.distance = 10;
+	this.orientation.set(-0.4, 0.4);
 	this.updateControls();
 };
 
 EditorPlanarControls.prototype.focusObject = function(object)
 {
+	var box = ObjectUtils.calculateBoundingBox(object);
+	box.applyMatrix4(object.matrixWorld);
+	box.getCenter(this.center);
+
+	var size = box.getSize(this.tempVector).length();
+
+	if(this.camera instanceof THREE.PerspectiveCamera)
+	{
+		this.zoom = (size / 2) / Math.tan(THREE.Math.DEG2RAD * 0.5 * this.camera.fov);
+	}
+	else
+	{
+		this.zoom = size;
+	}
+
 	this.updateControls();
 };
 
@@ -65,57 +93,133 @@ EditorPlanarControls.prototype.setOrientation = function(code)
 		this.orientation.set(Math.PI, -1.57);
 	}
 
-	this.setCameraRotationOrbit(this.orientation, this.center, this.distance, this.camera);
+	this.updateControls();
 };
 
 EditorPlanarControls.prototype.update = function(mouse, keyboard)
 {
-	//Move camera on y / x
-	if(this.mouse.buttonPressed(Mouse.RIGHT))
-	{
-		var ratio = this.camera.size / this.canvas.width * 2;
-		var x = this.mouse.delta.x * ratio;
+	var needsUpdate = false;
 
-		this.camera.position.x -= this.mouse.delta.x * ratio;
-		this.camera.position.y += this.mouse.delta.y * ratio;
+	if(mouse.buttonPressed(Mouse.LEFT))
+	{
+		this.orientation.y += Settings.editor.mouseLookSensitivity * (Settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
+		this.orientation.x -= Settings.editor.mouseLookSensitivity * mouse.delta.x;
+
+		needsUpdate = true;
 	}
 
-	//Rotate camera
-	if(this.mouse.buttonPressed(Mouse.MIDDLE))
+	if(mouse.buttonPressed(Mouse.MIDDLE))
 	{
-		this.updateOrthographicCameraRotation();
+		this.center.y += mouse.delta.y * Settings.editor.mouseLookSensitivity * this.zoom;
+		needsUpdate = true;
 	}
 
-	//Camera zoom
-	if(this.mouse.wheel !== 0)
+	if(mouse.buttonPressed(Mouse.RIGHT))
 	{
-		this.camera.size += this.mouse.wheel * this.camera.size / 1000;
-		this.camera.updateProjectionMatrix();
+		var direction = this.getWorldDirection(this.tempVector);
+		direction.y = 0;
+		direction.normalize();
+
+		var y = mouse.delta.y * Settings.editor.mouseLookSensitivity * this.zoom;
+		this.center.x -= direction.x * y;
+		this.center.z -= direction.z * y;
+
+		direction.applyAxisAngle(EditorPlanarControls.UP, 1.57);
+
+		var x = mouse.delta.x * Settings.editor.mouseLookSensitivity * this.zoom;
+		this.center.x -= direction.x * x;
+		this.center.z -= direction.z * x;
+
+		needsUpdate = true;
+	}
+
+	if(mouse.wheel !== 0)
+	{
+		this.zoom += mouse.wheel * this.position.distanceTo(this.center) * Settings.editor.mouseWheelSensitivity;
+		needsUpdate = true;
+	}
+	
+	//WASD movement
+	if(Settings.editor.keyboardNavigation)
+	{
+		if(Editor.keyboard.keyPressed(Keyboard.S))
+		{
+			var direction = this.getWorldDirection(this.tempVector);
+			direction.y = 0;
+			direction.normalize();
+
+			this.center.x += direction.x * Settings.editor.keyboardNavigationSpeed;
+			this.center.z += direction.z * Settings.editor.keyboardNavigationSpeed;
+		}
+		if(Editor.keyboard.keyPressed(Keyboard.W))
+		{
+			var direction = this.getWorldDirection(this.tempVector);
+			direction.y = 0;
+			direction.normalize();
+
+			this.center.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
+			this.center.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
+		}
+		if(Editor.keyboard.keyPressed(Keyboard.A))
+		{
+			var direction = this.getWorldDirection(this.tempVector);
+			direction.y = 0;
+			direction.normalize();
+			direction.applyAxisAngle(EditorPlanarControls.UP, 1.57);
+
+			this.center.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
+			this.center.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
+		}
+		if(Editor.keyboard.keyPressed(Keyboard.D))
+		{
+			var direction = this.getWorldDirection(this.tempVector);
+			direction.y = 0;
+			direction.normalize();
+			direction.applyAxisAngle(EditorPlanarControls.UP, 1.57);
+
+			this.center.x += direction.x * Settings.editor.keyboardNavigationSpeed;
+			this.center.z += direction.z * Settings.editor.keyboardNavigationSpeed;
+		}
+	}
+	
+	if(needsUpdate === true)
+	{
+		this.updateControls();
 	}
 };
 
 EditorPlanarControls.prototype.updateControls = function()
 {
-	this.orientation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
-	this.orientation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
-
-	//Limit Vertical Rotation to 90 degrees
-	if(this.orientation.y < -1.57)
+	if(this.orientation.y < this.limitDown)
 	{
-		this.orientation.y = -1.57;
+		this.orientation.y = this.limitDown;
 	}
-	else if(this.orientation.y > 1.57)
+	else if(this.orientation.y > this.limitUp)
 	{
-		this.orientation.y = 1.57;
+		this.orientation.y = this.limitUp;
 	}
 
-	setCameraRotationOrbit(this.orientation, this.center, this.distance, this.camera);
-
-	var setCameraRotationOrbit = function(orientation, center, distance, camera)
+	if(this.zoom < this.minZoom)
 	{
-		var cos = Math.cos(orientation.y);
-		camera.position.set(distance * Math.cos(orientation.x) * cos, distance * Math.sin(orientation.y), distance * Math.sin(orientation.x) * cos);
-		camera.position.add(center);
-		camera.lookAt(center);
-	};
+		this.zoom = this.minZoom;
+	}
+	else if(this.zoom > this.maxZoom)
+	{
+		this.zoom = this.maxZoom;
+	}
+
+	var cos = this.zoom * Math.cos(this.orientation.y);
+	this.position.set(Math.cos(this.orientation.x) * cos, this.zoom * Math.sin(this.orientation.y), Math.sin(this.orientation.x) * cos);
+	this.position.add(this.center);
+
+	this.tempMatrix.lookAt(this.position, this.center, EditorPlanarControls.UP);
+	this.quaternion.setFromRotationMatrix(this.tempMatrix);
+
+	this.updateMatrixWorld(true);
+
+	if(this.camera instanceof OrthographicCamera)
+	{
+		this.camera.size = this.zoom;
+		this.camera.updateProjectionMatrix();
+	}
 };

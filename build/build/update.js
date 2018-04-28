@@ -11,13 +11,30 @@ console.log("-------------------------------------------------------------------
 var threejsURL = "https://rawgit.com/mrdoob/three.js/dev";
 var threejsPath = "../../source/lib/three";
 
-var files = listFiles(threejsPath, true, "");
-for(var i = 0; i < files.length; i++)
-{
-	download(threejsURL + "/examples/js" + files[i], threejsPath + files[i]);
-}
-download(threejsURL + "/build/three.min.js", threejsPath + "/three.min.js");
+downloadFolder(threejsPath, threejsURL + "/examples/js", true);
+download(threejsPath + "/three.min.js", threejsURL + "/build/three.min.js");
 
+console.log("----------------------------------------------------------------------");
+console.log("                               Codemirror");
+console.log("----------------------------------------------------------------------");
+
+var codemirrorURL = "https://rawgit.com/codemirror/CodeMirror/master";
+var codemirrorPath = "../../source/lib/codemirror";
+
+downloadFolder(codemirrorPath + "/keymap", codemirrorURL + "/keymap", false);
+downloadFolder(codemirrorPath + "/addon", codemirrorURL + "/addon", false);
+downloadFolder(codemirrorPath + "/theme", codemirrorURL + "/theme", false);
+download(codemirrorPath + "/mode/javascript.js", codemirrorURL + "/mode/javascript/javascript.js");
+download(codemirrorPath + "/codemirror.css", codemirrorURL + "/lib/codemirror.css");
+
+function downloadFolder(basePath, baseURL, ignoreRootFiles)
+{
+	var files = listFiles(basePath + "/", ignoreRootFiles, "");
+	for(var i = 0; i < files.length; i++)
+	{
+		download(basePath + files[i], baseURL + files[i]);
+	}
+} 
 
 function listFiles(path, ignoreRootFiles, virtualPath)
 {
@@ -52,7 +69,7 @@ function makeDirectory(dir)
 	}
 }
 
-function download(url, fname)
+function download(fname, url)
 {
 	var http = require("https");
 	var data = "";
@@ -67,12 +84,13 @@ function download(url, fname)
 		response.on("end", function()
 		{
 			writeFile(fname, data);
-			console.log("Updated:" +  fname);
+			console.log("Updated:" +  fname + "<<" + url);
 		});
 	}).on("error", function(error)
 	{
 		console.log("Error:" + fname + "(" +  error + ")");
 	});
+	request.end();
 }
 
 function writeFile(fname, text)
@@ -94,70 +112,3 @@ function writeFile(fname, text)
 	checkDirectory(fname);
 	fs.writeFileSync(fname, text, "utf8");
 }
-
-/*
-function readFile(fname)
-{
-	var fs = require("fs");
-
-	if(fs !== undefined)
-	{
-		return fs.readFileSync(fname, "utf8");
-	}
-}
-
-
-function copyFolder(src, dst)
-{
-	var fs = require("fs");
-
-	if(fs !== undefined)
-	{
-		makeDirectory(dst);
-		var files = fs.readdirSync(src);
-
-		for(var i = 0; i < files.length; i++)
-		{
-			var source = src + "/" + files[i];
-			var destiny = dst + "/" + files[i];
-			var current = fs.statSync(source);
-			
-			//Directory
-			if(current.isDirectory())
-			{
-				copyFolder(source, destiny);
-			}
-			//Symbolic link
-			else if(current.isSymbolicLink())
-			{
-				fs.symlinkSync(fs.readlinkSync(source), destiny);
-			}
-			//File
-			else
-			{
-				copyFile(source, destiny);
-			}
-		}
-	}
-}
-
-function copyFile(src, dst)
-{
-	var fs = require("fs");
-
-	if(fs !== undefined)
-	{
-		fs.createReadStream(src).pipe(fs.createWriteStream(dst));
-	}
-}
-
-function deleteFile(fname)
-{
-	var fs = require("fs");
-
-	if(fs !== undefined)
-	{
-		fs.unlinkSync(fname);
-	}
-}
-*/

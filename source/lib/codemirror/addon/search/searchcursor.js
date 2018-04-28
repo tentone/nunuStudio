@@ -19,8 +19,11 @@
       + (regexp.multiline ? "m" : "")
   }
 
-  function ensureGlobal(regexp) {
-    return regexp.global ? regexp : new RegExp(regexp.source, regexpFlags(regexp) + "g")
+  function ensureFlags(regexp, flags) {
+    var current = regexpFlags(regexp), target = current
+    for (var i = 0; i < flags.length; i++) if (target.indexOf(flags.charAt(i)) == -1)
+      target += flags.charAt(i)
+    return current == target ? regexp : new RegExp(regexp.source, target)
   }
 
   function maybeMultiline(regexp) {
@@ -28,7 +31,7 @@
   }
 
   function searchRegexpForward(doc, regexp, start) {
-    regexp = ensureGlobal(regexp)
+    regexp = ensureFlags(regexp, "g")
     for (var line = start.line, ch = start.ch, last = doc.lastLine(); line <= last; line++, ch = 0) {
       regexp.lastIndex = ch
       var string = doc.getLine(line), match = regexp.exec(string)
@@ -42,7 +45,7 @@
   function searchRegexpForwardMultiline(doc, regexp, start) {
     if (!maybeMultiline(regexp)) return searchRegexpForward(doc, regexp, start)
 
-    regexp = ensureGlobal(regexp)
+    regexp = ensureFlags(regexp, "gm")
     var string, chunk = 1
     for (var line = start.line, last = doc.lastLine(); line <= last;) {
       // This grows the search buffer in exponentially-sized chunks
@@ -51,6 +54,7 @@
       // searching for something that has tons of matches), but at the
       // same time, the amount of retries is limited.
       for (var i = 0; i < chunk; i++) {
+        if (line > last) break
         var curLine = doc.getLine(line++)
         string = string == null ? curLine : string + "\n" + curLine
       }
@@ -81,7 +85,7 @@
   }
 
   function searchRegexpBackward(doc, regexp, start) {
-    regexp = ensureGlobal(regexp)
+    regexp = ensureFlags(regexp, "g")
     for (var line = start.line, ch = start.ch, first = doc.firstLine(); line >= first; line--, ch = -1) {
       var string = doc.getLine(line)
       if (ch > -1) string = string.slice(0, ch)
@@ -94,7 +98,7 @@
   }
 
   function searchRegexpBackwardMultiline(doc, regexp, start) {
-    regexp = ensureGlobal(regexp)
+    regexp = ensureFlags(regexp, "gm")
     var string, chunk = 1
     for (var line = start.line, first = doc.firstLine(); line >= first;) {
       for (var i = 0; i < chunk; i++) {
@@ -115,18 +119,26 @@
     }
   }
 
-  function doFold(str) { return str.toLowerCase() }
-  function noFold(str) { return str }
+  var doFold, noFold
+  if (String.prototype.normalize) {
+    doFold = function(str) { return str.normalize("NFD").toLowerCase() }
+    noFold = function(str) { return str.normalize("NFD") }
+  } else {
+    doFold = function(str) { return str.toLowerCase() }
+    noFold = function(str) { return str }
+  }
 
   // Maps a position in a case-folded line back to a position in the original line
   // (compensating for codepoints increasing in number during folding)
-  function adjustPos(orig, folded, pos) {
+  function adjustPos(orig, folded, pos, foldFunc) {
     if (orig.length == folded.length) return pos
-    for (var pos1 = Math.min(pos, orig.length);;) {
-      var len1 = orig.slice(0, pos1).toLowerCase().length
-      if (len1 < pos) ++pos1
-      else if (len1 > pos) --pos1
-      else return pos1
+    for (var min = 0, max = pos + Math.max(0, orig.length - folded.length);;) {
+      if (min == max) return min
+      var mid = (min + max) >> 1
+      var len = foldFunc(orig.slice(0, mid)).length
+      if (len == pos) return mid
+      else if (len > pos) max = mid
+      else min = mid + 1
     }
   }
 
@@ -142,18 +154,18 @@
       if (lines.length == 1) {
         var found = string.indexOf(lines[0])
         if (found == -1) continue search
-        var start = adjustPos(orig, string, found) + ch
-        return {from: Pos(line, adjustPos(orig, string, found) + ch),
-                to: Pos(line, adjustPos(orig, string, found + lines[0].length) + ch)}
+        var start = adjustPos(orig, string, found, fold) + ch
+        return {from: Pos(line, adjustPos(orig, string, found, fold) + ch),
+                to: Pos(line, adjustPos(orig, string, found + lines[0].length, fold) + ch)}
       } else {
         var cutFrom = string.length - lines[0].length
         if (string.slice(cutFrom) != lines[0]) continue search
         for (var i = 1; i < lines.length - 1; i++)
           if (fold(doc.getLine(line + i)) != lines[i]) continue search
         var end = doc.getLine(line + lines.length - 1), endString = fold(end), lastLine = lines[lines.length - 1]
-        if (end.slice(0, lastLine.length) != lastLine) continue search
-        return {from: Pos(line, adjustPos(orig, string, cutFrom) + ch),
-                to: Pos(line + lines.length - 1, adjustPos(end, endString, lastLine.length))}
+        if (endString.slice(0, lastLine.length) != lastLine) continue search
+        return {from: Pos(line, adjustPos(orig, string, cutFrom, fold) + ch),
+                to: Pos(line + lines.length - 1, adjustPos(end, endString, lastLine.length, fold))}
       }
     }
   }
@@ -170,8 +182,8 @@
       if (lines.length == 1) {
         var found = string.lastIndexOf(lines[0])
         if (found == -1) continue search
-        return {from: Pos(line, adjustPos(orig, string, found)),
-                to: Pos(line, adjustPos(orig, string, found + lines[0].length))}
+        return {from: Pos(line, adjustPos(orig, string, found, fold)),
+                to: Pos(line, adjustPos(orig, string, found + lines[0].length, fold))}
       } else {
         var lastLine = lines[lines.length - 1]
         if (string.slice(0, lastLine.length) != lastLine) continue search
@@ -179,8 +191,8 @@
           if (fold(doc.getLine(start + i)) != lines[i]) continue search
         var top = doc.getLine(line + 1 - lines.length), topString = fold(top)
         if (topString.slice(topString.length - lines[0].length) != lines[0]) continue search
-        return {from: Pos(line + 1 - lines.length, adjustPos(top, topString, top.length - lines[0].length)),
-                to: Pos(line, adjustPos(orig, string, lastLine.length))}
+        return {from: Pos(line + 1 - lines.length, adjustPos(top, topString, top.length - lines[0].length, fold)),
+                to: Pos(line, adjustPos(orig, string, lastLine.length, fold))}
       }
     }
   }
@@ -205,7 +217,7 @@
         return (reverse ? searchStringBackward : searchStringForward)(doc, query, pos, caseFold)
       }
     } else {
-      query = ensureGlobal(query)
+      query = ensureFlags(query, "gm")
       if (!options || options.multiline !== false)
         this.matches = function(reverse, pos) {
           return (reverse ? searchRegexpBackwardMultiline : searchRegexpForwardMultiline)(doc, query, pos)
