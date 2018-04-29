@@ -75,14 +75,9 @@ TorusGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.TorusBufferGeometry(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.TorusGeometry(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue());
-	}
+	var GeometryConstructor = this.buffer.getValue() ? THREE.TorusBufferGeometry : THREE.TorusGeometry;
+
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue())));
 };
 
 TorusGeometryForm.prototype.updateValues = function()

@@ -49,15 +49,10 @@ function DodecahedronGeometryForm(form, obj)
 DodecahedronGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
+	
+	var GeometryConstructor = this.buffer.getValue() ? THREE.DodecahedronBufferGeometry : THREE.DodecahedronGeometry;
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.DodecahedronBufferGeometry(this.radius.getValue(), this.detail.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.DodecahedronGeometry(this.radius.getValue(), this.detail.getValue());
-	}
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.detail.getValue())));
 };
 
 DodecahedronGeometryForm.prototype.updateValues = function()

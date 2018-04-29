@@ -64,14 +64,9 @@ PlaneGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.PlaneBufferGeometry(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.PlaneGeometry(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
-	}
+	var GeometryConstructor = this.buffer.getValue() ? THREE.PlaneBufferGeometry : THREE.PlaneGeometry;
+
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue())));
 };
 
 PlaneGeometryForm.prototype.updateValues = function()

@@ -56,14 +56,9 @@ SphereGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.SphereBufferGeometry(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.SphereGeometry(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
-	}
+	var GeometryConstructor = this.buffer.getValue() ? THREE.SphereBufferGeometry : THREE.SphereGeometry;
+
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue())));
 };
 
 SphereGeometryForm.prototype.updateValues = function()

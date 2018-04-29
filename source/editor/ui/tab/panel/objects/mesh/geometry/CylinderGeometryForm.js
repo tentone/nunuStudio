@@ -72,15 +72,10 @@ function CylinderGeometryForm(form, obj)
 CylinderGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
+	
+	var GeometryConstructor = this.buffer.getValue() ? THREE.CylinderBufferGeometry : THREE.CylinderGeometry;
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.CylinderBufferGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.CylinderGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
-	}
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
 };
 
 CylinderGeometryForm.prototype.updateValues = function()

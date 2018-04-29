@@ -78,14 +78,9 @@ BoxGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.BoxBufferGeometry(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.BoxGeometry(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue());
-	}
+	var GeometryConstructor = this.buffer.getValue() ? THREE.BoxBufferGeometry : THREE.BoxGeometry;
+
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue())));
 };
 
 BoxGeometryForm.prototype.updateValues = function()

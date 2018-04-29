@@ -50,14 +50,9 @@ TetrahedronGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.TetrahedronBufferGeometry(this.radius.getValue(), this.detail.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.TetrahedronGeometry(this.radius.getValue(), this.detail.getValue());
-	}
+	var GeometryConstructor = this.buffer.getValue() ? THREE.TetrahedronBufferGeometry : THREE.TetrahedronGeometry;
+
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.detail.getValue())));
 };
 
 TetrahedronGeometryForm.prototype.updateValues = function()

@@ -67,15 +67,10 @@ function CircleGeometryForm(form, obj)
 CircleGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
+	
+	var GeometryConstructor = this.buffer.getValue() ? THREE.CircleBufferGeometry : THREE.CircleGeometry;
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.CircleBufferGeometry(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.CircleGeometry(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
-	}
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
 };
 
 CircleGeometryForm.prototype.updateValues = function()

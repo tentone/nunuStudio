@@ -66,14 +66,9 @@ ConeGeometryForm.prototype.updateGeometry = function()
 {
 	this.obj.geometry.dispose();
 
-	if(this.buffer.getValue())
-	{
-		this.obj.geometry = new THREE.ConeBufferGeometry(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
-	}
-	else
-	{
-		this.obj.geometry = new THREE.ConeGeometry(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
-	}
+	var GeometryConstructor = this.buffer.getValue() ? THREE.ConeBufferGeometry : THREE.ConeGeometry;
+
+	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
 };
 
 ConeGeometryForm.prototype.updateValues = function()
