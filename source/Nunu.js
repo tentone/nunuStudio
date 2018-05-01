@@ -111,6 +111,17 @@ Nunu.webglAvailable = function()
 };
 
 /**
+ * Check if nunu if running in development mode.
+ *
+ * @method developmentMode
+ * @return {boolean} True if running as development mode.
+ */
+Nunu.developmentMode = function()
+{
+	return Nunu.TIMESTAMP === "DEVELOPMENT_VERSION";
+};
+
+/**
  * Check if nunu is running inside NWJS.
  *
  * @method runningOnDesktop
@@ -133,7 +144,6 @@ Nunu.isFullscreen = function()
 {
 	return document.webkitIsFullScreen || document.mozFullScreen || document.webkitIsFullScreen || document.webkitIsFullScreen || document.fullscreen || false;
 };
-
 
 /**
  * Set an element into fullscreen mode or exit out of fullscreen mode.

@@ -686,10 +686,20 @@ Editor.initialize = function()
 			}
 			else if(key === Keyboard.Z)
 			{
+				if(Editor.gui.tab.getActual() instanceof CodeEditor)
+				{
+					return;
+				}
+
 				Editor.undo();
 			}
 			else if(key === Keyboard.Y)
 			{
+				if(Editor.gui.tab.getActual() instanceof CodeEditor)
+				{
+					return;
+				}
+				
 				Editor.redo();
 			}
 		}
@@ -2308,11 +2318,6 @@ Editor.confirm = function(message)
 
 Editor.alert = function(message)
 {
-	if(Nunu.runningOnDesktop())
-	{
-		console.log("Desktop");
-	}
-	
 	window.alert(message);
 };
 
