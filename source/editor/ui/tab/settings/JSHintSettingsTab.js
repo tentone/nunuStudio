@@ -2,7 +2,7 @@
 
 function JSHintSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "JSHint", Editor.filePath + "icons/misc/js.png");
+	TabElement.call(this, parent, closeable, container, index, "Javascript", Editor.filePath + "icons/misc/js.png");
 
 	this.element.style.overflow = "auto";
 
@@ -15,8 +15,8 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
 	
-	//Renderer settings
-	this.form.addText("JSHint");
+	//Javascript
+	this.form.addText("Javascript");
 	this.form.nextRow();
 
 	//Bitwise

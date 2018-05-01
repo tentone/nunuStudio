@@ -352,6 +352,7 @@ include("editor/ui/tab/camera/postprocessing/ColorifyPassNode.js");
 include("editor/ui/tab/camera/postprocessing/HueSaturationPassNode.js");
 
 include("editor/ui/tab/settings/SettingsTab.js");
+include("editor/ui/tab/settings/EditorSettingsTab.js");
 include("editor/ui/tab/settings/CodeSettingsTab.js");
 include("editor/ui/tab/settings/GeneralSettingsTab.js");
 include("editor/ui/tab/settings/RenderSettingsTab.js");
