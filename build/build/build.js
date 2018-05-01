@@ -21,6 +21,10 @@ var editorWebPath = "../../docs/editor/";
 var docsPath = "../../docs/docs";
 var docsThemePath = "../../docs/theme";
 
+//ECMASCRIPT5 | ECMASCRIPT6 | ECMASCRIPT_2017
+var inputMode = "ECMASCRIPT6";
+var outputMode = "ECMASCRIPT5";
+
 console.log("----------------------------------------------------------------------");
 console.log("                              nunuStudio");
 console.log("                    github.com/tentone/nunuStudio");
@@ -34,9 +38,9 @@ writeFile(buildPath + "nunu.editor.js.temp", out.js);
 var css = compressCSS(out.css);
 writeFile(buildPath + "nunu.editor.css", css);
 console.log(" Optimizing with closure");
-closure("SIMPLE", "PRETTY_PRINT", "ECMASCRIPT6", "ECMASCRIPT5", buildPath + "nunu.editor.js.temp", buildPath + "nunu.editor.js");
+closure("SIMPLE", "PRETTY_PRINT", inputMode, outputMode, buildPath + "nunu.editor.js.temp", buildPath + "nunu.editor.js");
 console.log(" Minifyng with closure");
-closure("WHITESPACE_ONLY", "SINGLE_QUOTES", "ECMASCRIPT5", "ECMASCRIPT5", buildPath + "nunu.editor.js", buildPath + "nunu.editor.min.js");
+closure("WHITESPACE_ONLY", "SINGLE_QUOTES", outputMode, outputMode, buildPath + "nunu.editor.js", buildPath + "nunu.editor.min.js");
 console.log(" Removing temporary files");
 deleteFile("../nunu.editor.js");
 deleteFile("../nunu.editor.js.temp");
@@ -48,9 +52,9 @@ var out = join(sourcePath, sourcePath + runtimeMain);
 out.js = addTimestamp("DEVELOPMENT_VERSION", out.js);
 writeFile(buildPath + "nunu.js.temp", out.js);
 console.log(" Optimizing with closure");
-closure("SIMPLE", "PRETTY_PRINT", "ECMASCRIPT6", "ECMASCRIPT5", buildPath + "nunu.js.temp", buildPath + "nunu.js");
+closure("SIMPLE", "PRETTY_PRINT", inputMode, outputMode, buildPath + "nunu.js.temp", buildPath + "nunu.js");
 console.log(" Minifyng with closure");
-closure("WHITESPACE_ONLY", "SINGLE_QUOTES", "ECMASCRIPT5", "ECMASCRIPT5", buildPath + "nunu.js", buildPath + "nunu.min.js");
+closure("WHITESPACE_ONLY", "SINGLE_QUOTES", outputMode, outputMode, buildPath + "nunu.js", buildPath + "nunu.min.js");
 console.log(" Removing temporary files");
 deleteFile(buildPath + "nunu.js");
 deleteFile(buildPath + "nunu.js.temp");

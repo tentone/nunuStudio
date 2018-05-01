@@ -5,6 +5,7 @@
   font-family: monospace;
   height: 300px;
   color: black;
+  direction: ltr;
 }
 
 .CodeMirror-lines {
@@ -48,6 +49,12 @@
 }
 .cm-fat-cursor div.CodeMirror-cursors {
   z-index: 1;
+}
+.cm-fat-cursor-mark {
+  background-color: rgba(20, 255, 20, 0.5);
+  -webkit-animation: blink 1.06s steps(1) infinite;
+  -moz-animation: blink 1.06s steps(1) infinite;
+  animation: blink 1.06s steps(1) infinite;
 }
 .cm-animate-fat-cursor {
   width: auto;
@@ -119,8 +126,8 @@
 .cm-invalidchar {color: #f00;}
 .CodeMirror-composing { border-bottom: 2px solid; }
 
-div.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}
-div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
+div.CodeMirror span.CodeMirror-matchingbracket {color: #0b0;}
+div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
 .CodeMirror-matchingtag { background: rgba(255, 150, 0, .3); }
 .CodeMirror-activeline-background {background: #e8f2ff;}
 
@@ -232,7 +239,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 .CodeMirror-linewidget {
   position: relative;
   z-index: 2;
-  overflow: auto;
+  padding: 0.1px; 
 }
 .CodeMirror-widget {}
 .CodeMirror-rtl pre { direction: rtl; }
@@ -277,8 +284,8 @@ div.CodeMirror-dragcursors {
 .CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: #d7d4f0; }
 .CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection { background: #d7d4f0; }
 .cm-searching {
-  background: #ffa;
-  background: rgba(255, 255, 0, .4);
+  background-color: #ffa;
+  background-color: rgba(255, 255, 0, .4);
 }
 
 .cm-force-border { padding-right: .1px; }
@@ -470,11 +477,9 @@ li.CodeMirror-hint-active {
   content: "B";
   background: #999;
 }
-
 .CodeMirror-Tern-completion-guess {
   color: #999;
 }
-
 .CodeMirror-Tern-tooltip {
   border: 1px solid silver;
   border-radius: 3px;
@@ -484,26 +489,22 @@ li.CodeMirror-hint-active {
   font-family: monospace;
   background-color: white;
   white-space: pre-wrap;
-
   max-width: 40em;
   position: absolute;
   z-index: 10;
   -webkit-box-shadow: 2px 3px 5px rgba(0,0,0,.2);
   -moz-box-shadow: 2px 3px 5px rgba(0,0,0,.2);
   box-shadow: 2px 3px 5px rgba(0,0,0,.2);
-
   transition: opacity 1s;
   -moz-transition: opacity 1s;
   -webkit-transition: opacity 1s;
   -o-transition: opacity 1s;
   -ms-transition: opacity 1s;
 }
-
 .CodeMirror-Tern-hint-doc {
   max-width: 25em;
   margin-top: -3px;
 }
-
 .CodeMirror-Tern-fname { color: black; }
 .CodeMirror-Tern-farg { color: #70a; }
 .CodeMirror-Tern-farg-current { text-decoration: underline; }
