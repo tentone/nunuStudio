@@ -34,7 +34,7 @@ function Panel(parent, obj)
 	this.form.nextRow();
 
 	//UUID
-	if(Settings.general.showUUID)
+	if(Editor.settings.general.showUUID)
 	{
 		this.form.addText("UUID");
 		this.uuid = this.form.addText("");
@@ -42,7 +42,7 @@ function Panel(parent, obj)
 	}
 	
 	//Type
-	if(Settings.general.showType)
+	if(Editor.settings.general.showType)
 	{
 		this.form.addText("Type");
 		this.type = this.form.addText("");

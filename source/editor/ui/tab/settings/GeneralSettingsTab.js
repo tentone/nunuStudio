@@ -26,7 +26,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.theme.setOnChange(function()
 	{
 		var value = self.theme.getValue();
-		Settings.general.theme = value;
+		Editor.settings.general.theme = value;
 	});
 	this.form.add(this.theme);
 	this.form.nextRow();
@@ -47,9 +47,9 @@ function GeneralSettingsTab(parent, closeable, container, index)
 		this.autoUpdate.size.set(15, 15);
 		this.autoUpdate.setOnChange(function()
 		{
-			Settings.general.autoUpdate = self.autoUpdate.getValue();
+			Editor.settings.general.autoUpdate = self.autoUpdate.getValue();
 
-			if(Settings.general.autoUpdate)
+			if(Editor.settings.general.autoUpdate)
 			{
 				Editor.updateNunu();
 			}
@@ -64,7 +64,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.showStats.size.set(15, 15);
 	this.showStats.setOnChange(function()
 	{
-		Settings.general.showStats = self.showStats.getValue();
+		Editor.settings.general.showStats = self.showStats.getValue();
 	});
 	this.form.add(this.showStats);
 	this.form.nextRow();
@@ -75,7 +75,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.showUUID.size.set(15, 15);
 	this.showUUID.setOnChange(function()
 	{
-		Settings.general.showUUID = self.showUUID.getValue();
+		Editor.settings.general.showUUID = self.showUUID.getValue();
 		Editor.gui.panelContainer.updateSelection();
 	});
 	this.form.add(this.showUUID);
@@ -87,7 +87,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.showType.size.set(15, 15);
 	this.showType.setOnChange(function()
 	{
-		Settings.general.showType = self.showType.getValue();
+		Editor.settings.general.showType = self.showType.getValue();
 		Editor.gui.panelContainer.updateSelection();
 		
 	});
@@ -100,7 +100,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.immediateMode.size.set(15, 15);
 	this.immediateMode.setOnChange(function()
 	{
-		Settings.general.immediateMode = self.immediateMode.getValue();
+		Editor.settings.general.immediateMode = self.immediateMode.getValue();
 	});
 	this.form.add(this.immediateMode);
 	this.form.nextRow();
@@ -113,8 +113,8 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.historySize.setStep(1.0);
 	this.historySize.setOnChange(function()
 	{
-		Settings.general.historySize = self.historySize.getValue();
-		Editor.history.limit = Settings.general.historySize;
+		Editor.settings.general.historySize = self.historySize.getValue();
+		Editor.history.limit = Editor.settings.general.historySize;
 	});
 	this.form.add(this.historySize);
 	this.form.nextRow();
@@ -133,7 +133,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.gridEnabled.size.set(15, 15);
 	this.gridEnabled.setOnChange(function()
 	{
-		Settings.editor.gridEnabled = self.gridEnabled.getValue();
+		Editor.settings.editor.gridEnabled = self.gridEnabled.getValue();
 	});
 	this.form.add(this.gridEnabled);
 	this.form.nextRow();
@@ -146,7 +146,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.gridSize.setStep(0.1);
 	this.gridSize.setOnChange(function()
 	{
-		Settings.editor.gridSize = self.gridSize.getValue();
+		Editor.settings.editor.gridSize = self.gridSize.getValue();
 	});
 	this.form.add(this.gridSize);
 	this.form.nextRow();
@@ -159,7 +159,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.gridSpacing.setStep(1.0);
 	this.gridSpacing.setOnChange(function()
 	{
-		Settings.editor.gridSpacing = self.gridSpacing.getValue();
+		Editor.settings.editor.gridSpacing = self.gridSpacing.getValue();
 	});
 	this.form.add(this.gridSpacing);
 	this.form.nextRow();
@@ -170,7 +170,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.axisEnabled.size.set(15, 15);
 	this.axisEnabled.setOnChange(function()
 	{
-		Settings.editor.axisEnabled = self.axisEnabled.getValue();
+		Editor.settings.editor.axisEnabled = self.axisEnabled.getValue();
 	});
 	this.form.add(this.axisEnabled);
 	this.form.nextRow();
@@ -181,7 +181,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.cameraRotationCube.size.set(15, 15);
 	this.cameraRotationCube.setOnChange(function()
 	{
-		Settings.editor.cameraRotationCube = self.cameraRotationCube.getValue();
+		Editor.settings.editor.cameraRotationCube = self.cameraRotationCube.getValue();
 	});
 	this.form.add(this.cameraRotationCube);
 	this.form.nextRow();
@@ -194,7 +194,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.cameraRotationCubeSize.setStep(1.0);
 	this.cameraRotationCubeSize.setOnChange(function()
 	{
-		Settings.editor.cameraRotationCubeSize = self.cameraRotationCubeSize.getValue();
+		Editor.settings.editor.cameraRotationCubeSize = self.cameraRotationCubeSize.getValue();
 	});
 	this.form.add(this.cameraRotationCubeSize);
 	this.form.nextRow();
@@ -205,7 +205,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.snap.size.set(15, 15);
 	this.snap.setOnChange(function()
 	{
-		Settings.editor.snap = self.snap.getValue();
+		Editor.settings.editor.snap = self.snap.getValue();
 	});
 	this.form.add(this.snap);
 	this.form.nextRow();
@@ -218,7 +218,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.snapAngle.setStep(0.01);
 	this.snapAngle.setOnChange(function()
 	{
-		Settings.editor.snapAngle = self.snapAngle.getValue();
+		Editor.settings.editor.snapAngle = self.snapAngle.getValue();
 	});
 	this.form.add(this.snapAngle);
 	this.form.nextRow();
@@ -231,7 +231,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.transformationSpace.addValue("World", "world");
 	this.transformationSpace.setOnChange(function()
 	{
-		Settings.editor.transformationSpace = self.transformationSpace.getValue();
+		Editor.settings.editor.transformationSpace = self.transformationSpace.getValue();
 	});
 	this.form.add(this.transformationSpace);
 	this.form.nextRow();
@@ -252,7 +252,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.navigation.addValue("Orbit", Settings.ORBIT);
 	this.navigation.setOnChange(function()
 	{
-		Settings.editor.navigation = self.navigation.getValue();
+		Editor.settings.editor.navigation = self.navigation.getValue();
 	});
 	this.form.add(this.navigation);
 	this.form.nextRow();
@@ -263,7 +263,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.invertNavigation.size.set(15, 15);
 	this.invertNavigation.setOnChange(function()
 	{
-		Settings.editor.invertNavigation = self.invertNavigation.getValue();
+		Editor.settings.editor.invertNavigation = self.invertNavigation.getValue();
 	});
 	this.form.add(this.invertNavigation);
 	this.form.nextRow();
@@ -276,7 +276,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.mouseLookSensitivity.setStep(0.0001);
 	this.mouseLookSensitivity.setOnChange(function()
 	{
-		Settings.editor.mouseLookSensitivity = self.mouseLookSensitivity.getValue();
+		Editor.settings.editor.mouseLookSensitivity = self.mouseLookSensitivity.getValue();
 	});
 	this.form.add(this.mouseLookSensitivity);
 	this.form.nextRow();
@@ -289,7 +289,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.mouseMoveSpeed.setStep(0.0001);
 	this.mouseMoveSpeed.setOnChange(function()
 	{
-		Settings.editor.mouseMoveSpeed = self.mouseMoveSpeed.getValue();
+		Editor.settings.editor.mouseMoveSpeed = self.mouseMoveSpeed.getValue();
 	});
 	this.form.add(this.mouseMoveSpeed);
 	this.form.nextRow();
@@ -302,7 +302,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.mouseWheelSensitivity.setStep(0.0001);
 	this.mouseWheelSensitivity.setOnChange(function()
 	{
-		Settings.editor.mouseWheelSensitivity = self.mouseWheelSensitivity.getValue();
+		Editor.settings.editor.mouseWheelSensitivity = self.mouseWheelSensitivity.getValue();
 	});
 	this.form.add(this.mouseWheelSensitivity);
 	this.form.nextRow();
@@ -313,7 +313,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.lockMouse.size.set(15, 15);
 	this.lockMouse.setOnChange(function()
 	{
-		Settings.editor.lockMouse = self.lockMouse.getValue();
+		Editor.settings.editor.lockMouse = self.lockMouse.getValue();
 	});
 	this.form.add(this.lockMouse);
 	this.form.nextRow();
@@ -324,7 +324,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.keyboardNavigation.size.set(15, 15);
 	this.keyboardNavigation.setOnChange(function()
 	{
-		Settings.editor.keyboardNavigation = self.keyboardNavigation.getValue();
+		Editor.settings.editor.keyboardNavigation = self.keyboardNavigation.getValue();
 	});
 	this.form.add(this.keyboardNavigation);
 	this.form.nextRow();
@@ -337,7 +337,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.keyboardNavigationSpeed.setStep(0.1);
 	this.keyboardNavigationSpeed.setOnChange(function()
 	{
-		Settings.editor.keyboardNavigationSpeed = self.keyboardNavigationSpeed.getValue();
+		Editor.settings.editor.keyboardNavigationSpeed = self.keyboardNavigationSpeed.getValue();
 	});
 	this.form.add(this.keyboardNavigationSpeed);
 	this.form.nextRow();
@@ -356,7 +356,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.cameraPreviewEnabled.size.set(15, 15);
 	this.cameraPreviewEnabled.setOnChange(function()
 	{
-		Settings.editor.cameraPreviewEnabled = self.cameraPreviewEnabled.getValue();
+		Editor.settings.editor.cameraPreviewEnabled = self.cameraPreviewEnabled.getValue();
 	});
 	this.form.add(this.cameraPreviewEnabled);
 	this.form.nextRow();
@@ -369,7 +369,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.cameraPreviewPercentage.setStep(0.05);
 	this.cameraPreviewPercentage.setOnChange(function()
 	{
-		Settings.editor.cameraPreviewPercentage = self.cameraPreviewPercentage.getValue();
+		Editor.settings.editor.cameraPreviewPercentage = self.cameraPreviewPercentage.getValue();
 	});
 	this.form.add(this.cameraPreviewPercentage);
 	this.form.nextRow();
@@ -384,7 +384,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.cameraPreviewPosition.addValue("Top Left", Settings.TOP_LEFT);
 	this.cameraPreviewPosition.setOnChange(function()
 	{
-		Settings.editor.cameraPreviewPosition = self.cameraPreviewPosition.getValue();
+		Editor.settings.editor.cameraPreviewPosition = self.cameraPreviewPosition.getValue();
 	});
 	this.form.add(this.cameraPreviewPosition);
 	this.form.nextRow();
@@ -405,7 +405,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.filePreviewSize.setStep(1);
 	this.filePreviewSize.setOnChange(function()
 	{
-		Settings.general.filePreviewSize = self.filePreviewSize.getValue();
+		Editor.settings.general.filePreviewSize = self.filePreviewSize.getValue();
 		Editor.updateSettings();
 	});
 	this.form.add(this.filePreviewSize);
@@ -420,43 +420,43 @@ GeneralSettingsTab.prototype = Object.create(TabElement.prototype);
 GeneralSettingsTab.prototype.activate = function()
 {
 	//General
-	this.theme.setValue(Settings.general.theme);
+	this.theme.setValue(Editor.settings.general.theme);
 	if(this.autoUpdate !== undefined)
 	{
-		this.autoUpdate.setValue(Settings.general.autoUpdate);
+		this.autoUpdate.setValue(Editor.settings.general.autoUpdate);
 	}
-	this.filePreviewSize.setValue(Settings.general.filePreviewSize);
-	this.showStats.setValue(Settings.general.showStats);
-	this.showUUID.setValue(Settings.general.showUUID);
-	this.showType.setValue(Settings.general.showType);
-	this.immediateMode.setValue(Settings.general.immediateMode);
-	this.historySize.setValue(Settings.general.historySize);
+	this.filePreviewSize.setValue(Editor.settings.general.filePreviewSize);
+	this.showStats.setValue(Editor.settings.general.showStats);
+	this.showUUID.setValue(Editor.settings.general.showUUID);
+	this.showType.setValue(Editor.settings.general.showType);
+	this.immediateMode.setValue(Editor.settings.general.immediateMode);
+	this.historySize.setValue(Editor.settings.general.historySize);
 	
 	//Editor
-	this.snap.setValue(Settings.editor.snap);
-	this.snapAngle.setValue(Settings.editor.snapAngle);
-	this.gridEnabled.setValue(Settings.editor.gridEnabled);
-	this.gridSize.setValue(Settings.editor.gridSize);
-	this.gridSpacing.setValue(Settings.editor.gridSpacing);
-	this.axisEnabled.setValue(Settings.editor.axisEnabled);
-	this.cameraRotationCube.setValue(Settings.editor.cameraRotationCube);
-	this.cameraRotationCubeSize.setValue(Settings.editor.cameraRotationCubeSize);
+	this.snap.setValue(Editor.settings.editor.snap);
+	this.snapAngle.setValue(Editor.settings.editor.snapAngle);
+	this.gridEnabled.setValue(Editor.settings.editor.gridEnabled);
+	this.gridSize.setValue(Editor.settings.editor.gridSize);
+	this.gridSpacing.setValue(Editor.settings.editor.gridSpacing);
+	this.axisEnabled.setValue(Editor.settings.editor.axisEnabled);
+	this.cameraRotationCube.setValue(Editor.settings.editor.cameraRotationCube);
+	this.cameraRotationCubeSize.setValue(Editor.settings.editor.cameraRotationCubeSize);
 
 	//Navigation
-	this.lockMouse.setValue(Settings.editor.lockMouse);
-	this.navigation.setValue(Settings.editor.navigation);
-	this.invertNavigation.setValue(Settings.editor.invertNavigation);
-	this.keyboardNavigation.setValue(Settings.editor.keyboardNavigation);
-	this.keyboardNavigationSpeed.setValue(Settings.editor.keyboardNavigationSpeed);
-	this.mouseLookSensitivity.setValue(Settings.editor.mouseLookSensitivity);
-	this.mouseMoveSpeed.setValue(Settings.editor.mouseMoveSpeed);
-	this.mouseWheelSensitivity.setValue(Settings.editor.mouseWheelSensitivity);
+	this.lockMouse.setValue(Editor.settings.editor.lockMouse);
+	this.navigation.setValue(Editor.settings.editor.navigation);
+	this.invertNavigation.setValue(Editor.settings.editor.invertNavigation);
+	this.keyboardNavigation.setValue(Editor.settings.editor.keyboardNavigation);
+	this.keyboardNavigationSpeed.setValue(Editor.settings.editor.keyboardNavigationSpeed);
+	this.mouseLookSensitivity.setValue(Editor.settings.editor.mouseLookSensitivity);
+	this.mouseMoveSpeed.setValue(Editor.settings.editor.mouseMoveSpeed);
+	this.mouseWheelSensitivity.setValue(Editor.settings.editor.mouseWheelSensitivity);
 
 	//Camera preview
-	this.cameraPreviewEnabled.setValue(Settings.editor.cameraPreviewEnabled);
-	this.cameraPreviewPercentage.setValue(Settings.editor.cameraPreviewPercentage);
-	this.cameraPreviewPosition.setValue(Settings.editor.cameraPreviewPosition);
+	this.cameraPreviewEnabled.setValue(Editor.settings.editor.cameraPreviewEnabled);
+	this.cameraPreviewPercentage.setValue(Editor.settings.editor.cameraPreviewPercentage);
+	this.cameraPreviewPosition.setValue(Editor.settings.editor.cameraPreviewPosition);
 
 	//Transformations
-	this.transformationSpace.setValue(Settings.editor.transformationSpace);
+	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
 };

@@ -88,20 +88,20 @@ CodeEditor.prototype = Object.create(TabElement.prototype);
 //Update script editor settings
 CodeEditor.prototype.updateSettings = function()
 {
-	this.setFontSize(Settings.code.fontSize);
+	this.setFontSize(Editor.settings.code.fontSize);
 
-	this.code.setOption("lint", {options: Settings.jslint});
-	this.code.setOption("theme", Settings.code.theme);
-	this.code.setOption("lineNumbers", Settings.code.lineNumbers);
-	this.code.setOption("lineWrapping", Settings.code.lineWrapping);
-	this.code.setOption("keyMap", Settings.code.keymap);
-	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
-	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
-	this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar);
-	this.code.setOption("dragDrop", Settings.code.dragFiles);
-	this.code.setOption("indentWithTabs", Settings.code.indentWithTabs);
-	this.code.setOption("tabSize", Settings.code.tabSize);
-	this.code.setOption("indentUnit", Settings.code.indentUnit);
+	this.code.setOption("lint", {options: Editor.settings.jslint});
+	this.code.setOption("theme", Editor.settings.code.theme);
+	this.code.setOption("lineNumbers", Editor.settings.code.lineNumbers);
+	this.code.setOption("lineWrapping", Editor.settings.code.lineWrapping);
+	this.code.setOption("keyMap", Editor.settings.code.keymap);
+	this.code.setOption("autoCloseBrackets", Editor.settings.code.autoCloseBrackets);
+	this.code.setOption("styleActiveLine", Editor.settings.code.highlightActiveLine);
+	this.code.setOption("showMatchesOnScrollbar", Editor.settings.code.showMatchesOnScrollbar);
+	this.code.setOption("dragDrop", Editor.settings.code.dragFiles);
+	this.code.setOption("indentWithTabs", Editor.settings.code.indentWithTabs);
+	this.code.setOption("tabSize", Editor.settings.code.tabSize);
+	this.code.setOption("indentUnit", Editor.settings.code.indentUnit);
 };
 
 //Set code editor font size
@@ -112,7 +112,7 @@ CodeEditor.prototype.setFontSize = function(size)
 		size = 5;
 	}
 
-	Settings.code.fontSize = size;
+	Editor.settings.code.fontSize = size;
 	this.code.display.wrapper.style.fontSize = size + "px";
 };
 
@@ -152,7 +152,7 @@ CodeEditor.prototype.update = function()
 {
 	if(Editor.keyboard.keyPressed(Keyboard.CTRL) && Editor.mouse.wheel !== 0)
 	{
-		this.setFontSize(Settings.code.fontSize - Editor.mouse.wheel/100);
+		this.setFontSize(Editor.settings.code.fontSize - Editor.mouse.wheel/100);
 	}
 };
 

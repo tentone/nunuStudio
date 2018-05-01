@@ -100,8 +100,8 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	//Look camera
 	if(mouse.buttonPressed(Mouse.LEFT))
 	{
-		this.orientation.y -= Settings.editor.mouseLookSensitivity * (Settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
-		this.orientation.x -= Settings.editor.mouseLookSensitivity * mouse.delta.x;
+		this.orientation.y -= Editor.settings.editor.mouseLookSensitivity * (Editor.settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
+		this.orientation.x -= Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
 
 		//Limit Vertical Rotation to 90 degrees
 		if(this.orientation.y < -1.57)
@@ -120,7 +120,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	if(mouse.buttonPressed(Mouse.RIGHT))
 	{
 		//Move speed
-		var speed = this.position.distanceTo(EditorFreeControls.ZERO) * Settings.editor.mouseMoveSpeed;
+		var speed = this.position.distanceTo(EditorFreeControls.ZERO) * Editor.settings.editor.mouseMoveSpeed;
 		
 		if(speed < 0.01)
 		{
@@ -145,7 +145,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	//Move Camera on Y
 	if(mouse.buttonPressed(Mouse.MIDDLE))
 	{
-		this.position.y += mouse.delta.y * Settings.editor.mouseMoveSpeed * 100;
+		this.position.y += mouse.delta.y * Editor.settings.editor.mouseMoveSpeed * 100;
 
 		needsUpdate = true;
 	}
@@ -154,7 +154,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	if(mouse.wheel !== 0)
 	{
 		//Move speed
-		var speed = mouse.wheel * this.position.distanceTo(EditorFreeControls.ZERO) * Settings.editor.mouseWheelSensitivity;
+		var speed = mouse.wheel * this.position.distanceTo(EditorFreeControls.ZERO) * Editor.settings.editor.mouseWheelSensitivity;
 
 		//Limit zoom speed
 		if(speed < 0 && speed > -0.02)
@@ -175,19 +175,19 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	}
 
 	//WASD movement
-	if(Settings.editor.keyboardNavigation)
+	if(Editor.settings.editor.keyboardNavigation)
 	{
 		if(keyboard.keyPressed(Keyboard.S))
 		{
 			var direction = this.getWorldDirection(this.temp);
-			direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
+			direction.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.add(direction);
 			needsUpdate = true;
 		}
 		if(keyboard.keyPressed(Keyboard.W))
 		{
 			var direction = this.getWorldDirection(this.temp);
-			direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
+			direction.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.sub(direction);
 			needsUpdate = true;
 		}
@@ -195,7 +195,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		{
 			this.temp.set(Math.sin(this.orientation.x - 1.57), 0, Math.cos(this.orientation.x - 1.57));
 			this.temp.normalize();
-			this.temp.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
+			this.temp.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.sub(this.temp);
 			needsUpdate = true;
 		}
@@ -203,7 +203,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		{
 			this.temp.set(Math.sin(this.orientation.x + 1.57), 0, Math.cos(this.orientation.x + 1.57));
 			this.temp.normalize();
-			this.temp.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
+			this.temp.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.sub(this.temp);
 			needsUpdate = true;
 		}

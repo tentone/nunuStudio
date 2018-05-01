@@ -16,7 +16,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.canvas = new Canvas(this.main.divA);
 
 	//Renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.render.antialiasing});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Editor.settings.render.antialiasing});
 
 	//Change main div aspect
 	this.main.divB.style.overflow = "auto";

@@ -1,6 +1,9 @@
 "use strict";
 
-function Settings(){}
+function Settings()
+{
+	this.loadDefault();
+}
 
 //Angles
 Settings.RADIANS = 0;
@@ -21,10 +24,10 @@ Settings.STABLE = 30;
 Settings.BETA = 31;
 
 //Load default settings
-Settings.loadDefault = function()
+Settings.prototype.loadDefault = function()
 {
 	//General
-	Settings.general =
+	this.general =
 	{		
 		autoUpdate : false,
 		theme : "dark",
@@ -37,7 +40,7 @@ Settings.loadDefault = function()
 	};
 
 	//Editor
-	Settings.editor =
+	this.editor =
 	{
 		angleFormat : Settings.RADIANS,
 		snap : false,
@@ -52,7 +55,7 @@ Settings.loadDefault = function()
 		cameraPreviewPosition : Settings.BOTTOM_RIGHT,
 		lockMouse : true,
 		transformationSpace : "world",
-		navigation : Settings.FREE,
+		navigation : Settings.ORBIT,
 		invertNavigation : false,
 		keyboardNavigation : false,
 		keyboardNavigationSpeed : 0.5,
@@ -64,7 +67,7 @@ Settings.loadDefault = function()
 	};
 
 	//Render
-	Settings.render =
+	this.render =
 	{
 		followProject : true,
 		toneMapping : THREE.LinearToneMapping,
@@ -76,7 +79,7 @@ Settings.loadDefault = function()
 	};
 
 	//Code
-	Settings.code =
+	this.code =
 	{
 		theme : "monokai",
 		keymap : "sublime",
@@ -93,7 +96,7 @@ Settings.loadDefault = function()
 	};
 
 	//JSLint
-	Settings.jslint =
+	this.jslint =
 	{
 		//Error
 		maxerr : 50, // {int} Maximum error before stopping
@@ -168,18 +171,16 @@ Settings.loadDefault = function()
 	}
 };
 
-Settings.loadDefault();
-
 //Store settings
-Settings.store = function()
+Settings.prototype.store = function()
 {
 	var data = JSON.stringify(
 	{
-		general: Settings.general,
-		editor: Settings.editor,
-		render: Settings.render,
-		code: Settings.code,
-		jslint: Settings.jslint
+		general: this.general,
+		editor: this.editor,
+		render: this.render,
+		code: this.code,
+		jslint: this.jslint
 	}, null, "\t");
 
 	//Make json file human readable
@@ -198,7 +199,7 @@ Settings.store = function()
 };
 
 //Load settings
-Settings.load = function()
+Settings.prototype.load = function()
 {
 	try
 	{
@@ -213,14 +214,14 @@ Settings.load = function()
 
 		for(var i in data)
 		{
-			if(Settings[i] === undefined)
+			if(this[i] === undefined)
 			{
-				Settings[i] = {};
+				this[i] = {};
 			}
 
 			for(var j in data[i])
 			{
-				Settings[i][j] = data[i][j];
+				this[i][j] = data[i][j];
 			}
 		}
 	}

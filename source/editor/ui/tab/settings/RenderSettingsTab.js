@@ -25,7 +25,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.followProject.size.set(15, 15);
 	this.followProject.setOnChange(function()
 	{
-		Settings.render.followProject = self.followProject.getValue();
+		Editor.settings.render.followProject = self.followProject.getValue();
 	});
 	this.form.add(this.followProject);
 	this.form.nextRow();
@@ -44,7 +44,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.antialiasing.size.set(15, 15);
 	this.antialiasing.setOnChange(function()
 	{
-		Settings.render.antialiasing = self.antialiasing.getValue();
+		Editor.settings.render.antialiasing = self.antialiasing.getValue();
 	});
 	this.form.add(this.antialiasing);
 	this.form.nextRow();
@@ -55,7 +55,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.shadows.size.set(15, 15);
 	this.shadows.setOnChange(function()
 	{	
-		Settings.render.shadows = self.shadows.getValue();
+		Editor.settings.render.shadows = self.shadows.getValue();
 	});
 	this.form.add(this.shadows);
 	this.form.nextRow();
@@ -69,7 +69,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
-		Settings.render.shadowsType = self.shadowsType.getValue();
+		Editor.settings.render.shadowsType = self.shadowsType.getValue();
 	});
 	this.form.add(this.shadowsType);
 	this.form.nextRow();
@@ -85,7 +85,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
-		Settings.render.toneMapping = self.toneMapping.getValue();
+		Editor.settings.render.toneMapping = self.toneMapping.getValue();
 	});
 	this.form.add(this.toneMapping);
 	this.form.nextRow();
@@ -98,7 +98,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.toneMappingExposure.setStep(0.1);
 	this.toneMappingExposure.setOnChange(function()
 	{
-		Settings.render.toneMappingExposure = self.toneMappingExposure.getValue();
+		Editor.settings.render.toneMappingExposure = self.toneMappingExposure.getValue();
 	});
 	this.form.add(this.toneMappingExposure);
 	this.form.nextRow();
@@ -111,7 +111,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.toneMappingWhitePoint.setStep(0.1);
 	this.toneMappingWhitePoint.setOnChange(function()
 	{
-		Settings.render.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
+		Editor.settings.render.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
 	});
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
@@ -125,11 +125,11 @@ RenderSettingsTab.prototype = Object.create(TabElement.prototype);
 //Activate
 RenderSettingsTab.prototype.activate = function()
 {
-	this.followProject.setValue(Settings.render.followProject);
-	this.antialiasing.setValue(Settings.render.antialiasing);
-	this.shadows.setValue(Settings.render.shadows);
-	this.shadowsType.setValue(Settings.render.shadowsType);
-	this.toneMapping.setValue(Settings.render.toneMapping);
-	this.toneMappingExposure.setValue(Settings.render.toneMappingExposure);
-	this.toneMappingWhitePoint.setValue(Settings.render.toneMappingWhitePoint);
+	this.followProject.setValue(Editor.settings.render.followProject);
+	this.antialiasing.setValue(Editor.settings.render.antialiasing);
+	this.shadows.setValue(Editor.settings.render.shadows);
+	this.shadowsType.setValue(Editor.settings.render.shadowsType);
+	this.toneMapping.setValue(Editor.settings.render.toneMapping);
+	this.toneMappingExposure.setValue(Editor.settings.render.toneMappingExposure);
+	this.toneMappingWhitePoint.setValue(Editor.settings.render.toneMappingWhitePoint);
 };

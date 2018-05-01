@@ -25,7 +25,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.bitwise.size.set(15, 15);
 	this.bitwise.setOnChange(function()
 	{
-		Settings.jslint.bitwise = self.bitwise.getValue();
+		Editor.settings.jslint.bitwise = self.bitwise.getValue();
 	});
 	this.form.add(this.bitwise);
 	this.form.nextRow();
@@ -36,7 +36,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.curly.size.set(15, 15);
 	this.curly.setOnChange(function()
 	{
-		Settings.jslint.curly = self.curly.getValue();
+		Editor.settings.jslint.curly = self.curly.getValue();
 	});
 	this.form.add(this.curly);
 	this.form.nextRow();
@@ -47,7 +47,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.eqeqeq.size.set(15, 15);
 	this.eqeqeq.setOnChange(function()
 	{
-		Settings.jslint.eqeqeq = self.eqeqeq.getValue();
+		Editor.settings.jslint.eqeqeq = self.eqeqeq.getValue();
 	});
 	this.form.add(this.eqeqeq);
 	this.form.nextRow();
@@ -58,7 +58,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.forin.size.set(15, 15);
 	this.forin.setOnChange(function()
 	{
-		Settings.jslint.forin = self.forin.getValue();
+		Editor.settings.jslint.forin = self.forin.getValue();
 	});
 	this.form.add(this.forin);
 	this.form.nextRow();
@@ -69,7 +69,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.freeze.size.set(15, 15);
 	this.freeze.setOnChange(function()
 	{
-		Settings.jslint.freeze = self.freeze.getValue();
+		Editor.settings.jslint.freeze = self.freeze.getValue();
 	});
 	this.form.add(this.freeze);
 	this.form.nextRow();
@@ -80,7 +80,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.latedef.size.set(15, 15);
 	this.latedef.setOnChange(function()
 	{
-		Settings.jslint.latedef = self.latedef.getValue();
+		Editor.settings.jslint.latedef = self.latedef.getValue();
 	});
 	this.form.add(this.latedef);
 	this.form.nextRow();
@@ -91,7 +91,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.noarg.size.set(15, 15);
 	this.noarg.setOnChange(function()
 	{
-		Settings.jslint.noarg = self.noarg.getValue();
+		Editor.settings.jslint.noarg = self.noarg.getValue();
 	});
 	this.form.add(this.noarg);
 	this.form.nextRow();
@@ -102,7 +102,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.nonbsp.size.set(15, 15);
 	this.nonbsp.setOnChange(function()
 	{
-		Settings.jslint.nonbsp = self.nonbsp.getValue();
+		Editor.settings.jslint.nonbsp = self.nonbsp.getValue();
 	});
 	this.form.add(this.nonbsp);
 	this.form.nextRow();
@@ -113,7 +113,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.nonew.size.set(15, 15);
 	this.nonew.setOnChange(function()
 	{
-		Settings.jslint.nonew = self.nonew.getValue();
+		Editor.settings.jslint.nonew = self.nonew.getValue();
 	});
 	this.form.add(this.nonew);
 	this.form.nextRow();
@@ -124,7 +124,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.plusplus.size.set(15, 15);
 	this.plusplus.setOnChange(function()
 	{
-		Settings.jslint.plusplus = self.plusplus.getValue();
+		Editor.settings.jslint.plusplus = self.plusplus.getValue();
 	});
 	this.form.add(this.plusplus);
 	this.form.nextRow();
@@ -135,7 +135,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.undef.size.set(15, 15);
 	this.undef.setOnChange(function()
 	{
-		Settings.jslint.undef = self.undef.getValue();
+		Editor.settings.jslint.undef = self.undef.getValue();
 	});
 	this.form.add(this.undef);
 	this.form.nextRow();
@@ -153,7 +153,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.asi.size.set(15, 15);
 	this.asi.setOnChange(function()
 	{
-		Settings.jslint.asi = self.asi.getValue();
+		Editor.settings.jslint.asi = self.asi.getValue();
 	});
 	this.form.add(this.asi);
 	this.form.nextRow();
@@ -163,7 +163,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.boss.size.set(15, 15);
 	this.boss.setOnChange(function()
 	{
-		Settings.jslint.boss = self.boss.getValue();
+		Editor.settings.jslint.boss = self.boss.getValue();
 	});
 	this.form.add(this.boss);
 	this.form.nextRow();
@@ -173,7 +173,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.debug.size.set(15, 15);
 	this.debug.setOnChange(function()
 	{
-		Settings.jslint.debug = self.debug.getValue();
+		Editor.settings.jslint.debug = self.debug.getValue();
 	});
 	this.form.add(this.debug);
 	this.form.nextRow();
@@ -183,7 +183,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.eqnull.size.set(15, 15);
 	this.eqnull.setOnChange(function()
 	{
-		Settings.jslint.eqnull = self.eqnull.getValue();
+		Editor.settings.jslint.eqnull = self.eqnull.getValue();
 	});
 	this.form.add(this.eqnull);
 	this.form.nextRow();
@@ -195,7 +195,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.esversion.addValue(6, 6);
 	this.esversion.setOnChange(function()
 	{
-		Settings.jslint.esversion = self.esversion.getValue();
+		Editor.settings.jslint.esversion = self.esversion.getValue();
 	});
 	this.form.add(this.esversion);
 	this.form.nextRow();
@@ -205,7 +205,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.moz.size.set(15, 15);
 	this.moz.setOnChange(function()
 	{
-		Settings.jslint.moz = self.moz.getValue();
+		Editor.settings.jslint.moz = self.moz.getValue();
 	});
 	this.form.add(this.moz);
 	this.form.nextRow();
@@ -215,7 +215,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.evil.size.set(15, 15);
 	this.evil.setOnChange(function()
 	{
-		Settings.jslint.evil = self.evil.getValue();
+		Editor.settings.jslint.evil = self.evil.getValue();
 	});
 	this.form.add(this.evil);
 	this.form.nextRow();
@@ -229,23 +229,23 @@ JSHintSettingsTab.prototype = Object.create(TabElement.prototype);
 //Activate
 JSHintSettingsTab.prototype.activate = function()
 {
-	this.bitwise.setValue(Settings.jslint.bitwise);
-	this.curly.setValue(Settings.jslint.curly);
-	this.eqeqeq.setValue(Settings.jslint.eqeqeq);
-	this.forin.setValue(Settings.jslint.forin);
-	this.freeze.setValue(Settings.jslint.freeze);
-	this.latedef.setValue(Settings.jslint.latedef);
-	this.noarg.setValue(Settings.jslint.noarg);
-	this.nonbsp.setValue(Settings.jslint.nonbsp);
-	this.nonew.setValue(Settings.jslint.nonew);
-	this.plusplus.setValue(Settings.jslint.plusplus);
-	this.undef.setValue(Settings.jslint.undef);
+	this.bitwise.setValue(Editor.settings.jslint.bitwise);
+	this.curly.setValue(Editor.settings.jslint.curly);
+	this.eqeqeq.setValue(Editor.settings.jslint.eqeqeq);
+	this.forin.setValue(Editor.settings.jslint.forin);
+	this.freeze.setValue(Editor.settings.jslint.freeze);
+	this.latedef.setValue(Editor.settings.jslint.latedef);
+	this.noarg.setValue(Editor.settings.jslint.noarg);
+	this.nonbsp.setValue(Editor.settings.jslint.nonbsp);
+	this.nonew.setValue(Editor.settings.jslint.nonew);
+	this.plusplus.setValue(Editor.settings.jslint.plusplus);
+	this.undef.setValue(Editor.settings.jslint.undef);
 
-	this.asi.setValue(Settings.jslint.asi);
-	this.boss.setValue(Settings.jslint.boss);
-	this.debug.setValue(Settings.jslint.debug);
-	this.eqnull.setValue(Settings.jslint.eqnull);
-	this.esversion.setValue(Settings.jslint.esversion);
-	this.moz.setValue(Settings.jslint.moz);
-	this.evil.setValue(Settings.jslint.evil);
+	this.asi.setValue(Editor.settings.jslint.asi);
+	this.boss.setValue(Editor.settings.jslint.boss);
+	this.debug.setValue(Editor.settings.jslint.debug);
+	this.eqnull.setValue(Editor.settings.jslint.eqnull);
+	this.esversion.setValue(Editor.settings.jslint.esversion);
+	this.moz.setValue(Editor.settings.jslint.moz);
+	this.evil.setValue(Editor.settings.jslint.evil);
 };

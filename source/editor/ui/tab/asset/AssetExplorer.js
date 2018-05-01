@@ -364,7 +364,7 @@ function AssetExplorer(parent, closeable, container, index)
 	material.updateInterface();
 
 	//Files in explorer
-	this.filesSize = new THREE.Vector2(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
+	this.filesSize = new THREE.Vector2(Editor.settings.general.filePreviewSize, Editor.settings.general.filePreviewSize);
 	this.filesSpacing = 0;
 	this.files = [];
 
@@ -386,7 +386,7 @@ AssetExplorer.prototype.activate = function()
 
 AssetExplorer.prototype.updateSettings = function()
 {
-	this.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
+	this.filesSize.set(Editor.settings.general.filePreviewSize, Editor.settings.general.filePreviewSize);
 
 	for(var i = 0; i < this.files.length; i++)
 	{

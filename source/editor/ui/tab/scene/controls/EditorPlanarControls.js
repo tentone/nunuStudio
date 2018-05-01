@@ -102,15 +102,15 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 
 	if(mouse.buttonPressed(Mouse.LEFT))
 	{
-		this.orientation.y += Settings.editor.mouseLookSensitivity * (Settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
-		this.orientation.x -= Settings.editor.mouseLookSensitivity * mouse.delta.x;
+		this.orientation.y += Editor.settings.editor.mouseLookSensitivity * (Editor.settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
+		this.orientation.x -= Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
 
 		needsUpdate = true;
 	}
 
 	if(mouse.buttonPressed(Mouse.MIDDLE))
 	{
-		this.center.y += mouse.delta.y * Settings.editor.mouseLookSensitivity * this.zoom;
+		this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.zoom;
 		needsUpdate = true;
 	}
 
@@ -120,13 +120,13 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 		direction.y = 0;
 		direction.normalize();
 
-		var y = mouse.delta.y * Settings.editor.mouseLookSensitivity * this.zoom;
+		var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.zoom;
 		this.center.x -= direction.x * y;
 		this.center.z -= direction.z * y;
 
 		direction.applyAxisAngle(EditorPlanarControls.UP, 1.57);
 
-		var x = mouse.delta.x * Settings.editor.mouseLookSensitivity * this.zoom;
+		var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.zoom;
 		this.center.x -= direction.x * x;
 		this.center.z -= direction.z * x;
 
@@ -135,12 +135,12 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 
 	if(mouse.wheel !== 0)
 	{
-		this.zoom += mouse.wheel * this.position.distanceTo(this.center) * Settings.editor.mouseWheelSensitivity;
+		this.zoom += mouse.wheel * this.position.distanceTo(this.center) * Editor.settings.editor.mouseWheelSensitivity;
 		needsUpdate = true;
 	}
 	
 	//WASD movement
-	if(Settings.editor.keyboardNavigation)
+	if(Editor.settings.editor.keyboardNavigation)
 	{
 		if(Editor.keyboard.keyPressed(Keyboard.S))
 		{
@@ -148,8 +148,8 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 			direction.y = 0;
 			direction.normalize();
 
-			this.center.x += direction.x * Settings.editor.keyboardNavigationSpeed;
-			this.center.z += direction.z * Settings.editor.keyboardNavigationSpeed;
+			this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
+			this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 		}
 		if(Editor.keyboard.keyPressed(Keyboard.W))
 		{
@@ -157,8 +157,8 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 			direction.y = 0;
 			direction.normalize();
 
-			this.center.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
-			this.center.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
+			this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
+			this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 		}
 		if(Editor.keyboard.keyPressed(Keyboard.A))
 		{
@@ -167,8 +167,8 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 			direction.normalize();
 			direction.applyAxisAngle(EditorPlanarControls.UP, 1.57);
 
-			this.center.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
-			this.center.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
+			this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
+			this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 		}
 		if(Editor.keyboard.keyPressed(Keyboard.D))
 		{
@@ -177,8 +177,8 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 			direction.normalize();
 			direction.applyAxisAngle(EditorPlanarControls.UP, 1.57);
 
-			this.center.x += direction.x * Settings.editor.keyboardNavigationSpeed;
-			this.center.z += direction.z * Settings.editor.keyboardNavigationSpeed;
+			this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
+			this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 		}
 	}
 	

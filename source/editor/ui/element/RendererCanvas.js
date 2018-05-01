@@ -13,7 +13,7 @@ RendererCanvas.prototype = Object.create(Canvas.prototype);
 
 RendererCanvas.prototype.createRenderer = function()
 {
-	if(Settings.render.followProject)
+	if(Editor.settings.render.followProject)
 	{
 		var antialiasing = Editor.program.antialiasing;
 		var shadows = Editor.program.shadows;
@@ -24,12 +24,12 @@ RendererCanvas.prototype.createRenderer = function()
 	}
 	else
 	{
-		var antialiasing = Settings.render.antialiasing;
-		var shadows = Settings.render.shadows;
-		var shadowsType = Settings.render.shadowsType;
-		var toneMapping = Settings.render.toneMapping;
-		var toneMappingExposure = Settings.render.toneMappingExposure;
-		var toneMappingWhitePoint = Settings.render.toneMappingWhitePoint;
+		var antialiasing = Editor.settings.render.antialiasing;
+		var shadows = Editor.settings.render.shadows;
+		var shadowsType = Editor.settings.render.shadowsType;
+		var toneMapping = Editor.settings.render.toneMapping;
+		var toneMappingExposure = Editor.settings.render.toneMappingExposure;
+		var toneMappingWhitePoint = Editor.settings.render.toneMappingWhitePoint;
 	}
 
 	//Dispose old renderer

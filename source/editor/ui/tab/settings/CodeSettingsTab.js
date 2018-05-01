@@ -25,7 +25,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.codeTheme.size.set(120, 20);
 	this.codeTheme.setOnChange(function()
 	{
-		Settings.code.theme = self.codeTheme.getValue();
+		Editor.settings.code.theme = self.codeTheme.getValue();
 	});
 	this.form.add(this.codeTheme);
 	this.form.nextRow();
@@ -46,7 +46,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.codeKeymap.addValue("emacs", "emacs");
 	this.codeKeymap.setOnChange(function()
 	{
-		Settings.code.keymap = self.codeKeymap.getValue();
+		Editor.settings.code.keymap = self.codeKeymap.getValue();
 	});
 	this.form.add(this.codeKeymap);
 	this.form.nextRow();
@@ -59,7 +59,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.codeFontSize.setStep(1);
 	this.codeFontSize.setOnChange(function()
 	{
-		Settings.code.fontSize = self.codeFontSize.getValue();
+		Editor.settings.code.fontSize = self.codeFontSize.getValue();
 	});
 	this.form.add(this.codeFontSize);
 	this.form.nextRow();
@@ -70,7 +70,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.codeLineNumbers.size.set(15, 15);
 	this.codeLineNumbers.setOnChange(function()
 	{
-		Settings.code.lineNumbers = self.codeLineNumbers.getValue();
+		Editor.settings.code.lineNumbers = self.codeLineNumbers.getValue();
 	});
 	this.form.add(this.codeLineNumbers);
 	this.form.nextRow();
@@ -81,7 +81,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.codeLineWrapping.size.set(15, 15);
 	this.codeLineWrapping.setOnChange(function()
 	{
-		Settings.code.lineWrapping = self.codeLineWrapping.getValue();
+		Editor.settings.code.lineWrapping = self.codeLineWrapping.getValue();
 	});
 	this.form.add(this.codeLineWrapping);
 	this.form.nextRow();
@@ -92,7 +92,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.codeAutoCloseBrackets.size.set(15, 15);
 	this.codeAutoCloseBrackets.setOnChange(function()
 	{
-		Settings.code.autoCloseBrackets = self.codeAutoCloseBrackets.getValue();
+		Editor.settings.code.autoCloseBrackets = self.codeAutoCloseBrackets.getValue();
 	});
 	this.form.add(this.codeAutoCloseBrackets);
 	this.form.nextRow();
@@ -103,7 +103,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.codeHighlightActiveLine.size.set(15, 15);
 	this.codeHighlightActiveLine.setOnChange(function()
 	{
-		Settings.code.highlightActiveLine = self.codeHighlightActiveLine.getValue();
+		Editor.settings.code.highlightActiveLine = self.codeHighlightActiveLine.getValue();
 	});
 	this.form.add(this.codeHighlightActiveLine);
 	this.form.nextRow();
@@ -114,7 +114,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.showMatchesOnScrollbar.size.set(15, 15);
 	this.showMatchesOnScrollbar.setOnChange(function()
 	{
-		Settings.code.showMatchesOnScrollbar = self.showMatchesOnScrollbar.getValue();
+		Editor.settings.code.showMatchesOnScrollbar = self.showMatchesOnScrollbar.getValue();
 	});
 	this.form.add(this.showMatchesOnScrollbar);
 	this.form.nextRow();
@@ -125,7 +125,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.dragFiles.size.set(15, 15);
 	this.dragFiles.setOnChange(function()
 	{
-		Settings.code.dragFiles = self.dragFiles.getValue();
+		Editor.settings.code.dragFiles = self.dragFiles.getValue();
 	});
 	this.form.add(this.dragFiles);
 	this.form.nextRow();
@@ -136,7 +136,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.indentWithTabs.size.set(15, 15);
 	this.indentWithTabs.setOnChange(function()
 	{
-		Settings.code.indentWithTabs = self.indentWithTabs.getValue();
+		Editor.settings.code.indentWithTabs = self.indentWithTabs.getValue();
 	});
 	this.form.add(this.indentWithTabs);
 	this.form.nextRow();
@@ -149,7 +149,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.tabSize.setStep(1);
 	this.tabSize.setOnChange(function()
 	{
-		Settings.code.tabSize = self.tabSize.getValue();
+		Editor.settings.code.tabSize = self.tabSize.getValue();
 	});
 	this.form.add(this.tabSize);
 	this.form.nextRow();
@@ -162,7 +162,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.indentUnit.setStep(1);
 	this.indentUnit.setOnChange(function()
 	{
-		Settings.code.indentUnit = self.indentUnit.getValue();
+		Editor.settings.code.indentUnit = self.indentUnit.getValue();
 	});
 	this.form.add(this.indentUnit);
 	this.form.nextRow();
@@ -176,16 +176,16 @@ CodeSettingsTab.prototype = Object.create(TabElement.prototype);
 //Activate
 CodeSettingsTab.prototype.activate = function()
 {
-	this.codeTheme.setValue(Settings.code.theme);
-	this.codeFontSize.setValue(Settings.code.fontSize);
-	this.codeKeymap.setValue(Settings.code.keymap);
-	this.codeLineNumbers.setValue(Settings.code.lineNumbers);
-	this.codeLineWrapping.setValue(Settings.code.lineWrapping);
-	this.codeAutoCloseBrackets.setValue(Settings.code.autoCloseBrackets);
-	this.codeHighlightActiveLine.setValue(Settings.code.highlightActiveLine);
-	this.showMatchesOnScrollbar.setValue(Settings.code.showMatchesOnScrollbar);
-	this.dragFiles.setValue(Settings.code.dragFiles);
-	this.indentWithTabs.setValue(Settings.code.indentWithTabs);
-	this.tabSize.setValue(Settings.code.tabSize);
-	this.indentUnit.setValue(Settings.code.indentUnit);
+	this.codeTheme.setValue(Editor.settings.code.theme);
+	this.codeFontSize.setValue(Editor.settings.code.fontSize);
+	this.codeKeymap.setValue(Editor.settings.code.keymap);
+	this.codeLineNumbers.setValue(Editor.settings.code.lineNumbers);
+	this.codeLineWrapping.setValue(Editor.settings.code.lineWrapping);
+	this.codeAutoCloseBrackets.setValue(Editor.settings.code.autoCloseBrackets);
+	this.codeHighlightActiveLine.setValue(Editor.settings.code.highlightActiveLine);
+	this.showMatchesOnScrollbar.setValue(Editor.settings.code.showMatchesOnScrollbar);
+	this.dragFiles.setValue(Editor.settings.code.dragFiles);
+	this.indentWithTabs.setValue(Editor.settings.code.indentWithTabs);
+	this.tabSize.setValue(Editor.settings.code.tabSize);
+	this.indentUnit.setValue(Editor.settings.code.indentUnit);
 }; 

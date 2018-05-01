@@ -25,7 +25,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.children = [];
 
 	//Renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.render.antialiasing});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Editor.settings.render.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 	this.renderer.shadowMap.enabled = false;
 	

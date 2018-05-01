@@ -44,7 +44,7 @@ function LockedPanel(parent, obj)
 	this.form.nextRow();
 
 	//UUID
-	if(Settings.general.showUUID)
+	if(Editor.settings.general.showUUID)
 	{
 		this.form.addText("UUID");
 		this.uuid = this.form.addText("");

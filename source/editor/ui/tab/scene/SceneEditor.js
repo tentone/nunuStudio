@@ -50,16 +50,16 @@ function SceneEditor(parent, closeable, container, index)
 	this.orientation = new OrientationCube();
 
 	//Grid
-	this.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
-	this.gridHelper.visible = Settings.editor.gridEnabled;
+	this.gridHelper = new GridHelper(Editor.settings.editor.gridSize, Editor.settings.editor.gridSpacing, 0x888888);
+	this.gridHelper.visible = Editor.settings.editor.gridEnabled;
 	this.helperScene.add(this.gridHelper);
 
 	//Axis
-	this.axisHelper = new THREE.AxesHelper(Settings.editor.gridSize);
+	this.axisHelper = new THREE.AxesHelper(Editor.settings.editor.gridSize);
 	this.axisHelper.material.depthWrite = false;
 	this.axisHelper.material.transparent = true;
 	this.axisHelper.material.opacity = 1;
-	this.axisHelper.visible = Settings.editor.axisEnabled;
+	this.axisHelper.visible = Editor.settings.editor.axisEnabled;
 	this.helperScene.add(this.axisHelper);
 
 	//Object helper container
@@ -474,28 +474,28 @@ SceneEditor.prototype.deactivate = function()
 SceneEditor.prototype.updateSettings = function()
 {
 	//Grid
-	this.gridHelper.visible = Settings.editor.gridEnabled;
-	this.gridHelper.setSize(Settings.editor.gridSize);
-	this.gridHelper.setSpacing(Settings.editor.gridSpacing);
+	this.gridHelper.visible = Editor.settings.editor.gridEnabled;
+	this.gridHelper.setSize(Editor.settings.editor.gridSize);
+	this.gridHelper.setSpacing(Editor.settings.editor.gridSpacing);
 	this.gridHelper.update();
 
 	//Axis
-	this.axisHelper.visible = Settings.editor.axisEnabled;
+	this.axisHelper.visible = Editor.settings.editor.axisEnabled;
 
 	//Orientation
-	var size = Settings.editor.cameraRotationCubeSize;
+	var size = Editor.settings.editor.cameraRotationCubeSize;
 	this.orientation.size.set(size, size);
 
 	//Controls
-	var ControlsConstructor = Settings.editor.navigation === Settings.FREE ? EditorFreeControls : EditorOrbitControls;
+	var ControlsConstructor = Editor.settings.editor.navigation === Settings.FREE ? EditorFreeControls : EditorOrbitControls;
 	this.controls = new ControlsConstructor();
 	this.controls.attach(this.camera);
 
 	//Tool
-	this.tool.setSpace(Settings.editor.transformationSpace);
-	this.tool.setSnap(Settings.editor.snap);
-	this.tool.setTranslationSnap(Settings.editor.gridSpacing);
-	this.tool.setRotationSnap(Settings.editor.snapAngle);
+	this.tool.setSpace(Editor.settings.editor.transformationSpace);
+	this.tool.setSnap(Editor.settings.editor.snap);
+	this.tool.setTranslationSnap(Editor.settings.editor.gridSpacing);
+	this.tool.setRotationSnap(Editor.settings.editor.snapAngle);
 };
 
 SceneEditor.prototype.destroy = function()
@@ -571,7 +571,7 @@ SceneEditor.prototype.update = function()
 			}
 
 			//Lock mouse when camera is moving
-			if(Settings.editor.lockMouse && Nunu.runningOnDesktop())
+			if(Editor.settings.editor.lockMouse && Nunu.runningOnDesktop())
 			{
 				if(!isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
 				{
@@ -593,18 +593,18 @@ SceneEditor.prototype.update = function()
 				this.controls.update(this.mouse, this.keyboard);
 
 				//Update grid helper position
-				this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
-				this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Settings.editor.gridSpacing);
+				this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
+				this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Editor.settings.editor.gridSpacing);
 				
 				/*if(this.cameraMode === SceneEditor.ORTHOGRAPHIC)
 				{
-					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
-					this.gridHelper.position.y = this.controls.position.y - (this.controls.position.y % Settings.editor.gridSpacing);
+					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
+					this.gridHelper.position.y = this.controls.position.y - (this.controls.position.y % Editor.settings.editor.gridSpacing);
 				}
 				else
 				{
-					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Settings.editor.gridSpacing);
-					this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Settings.editor.gridSpacing);
+					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
+					this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Editor.settings.editor.gridSpacing);
 				}*/
 			}
 		}
@@ -680,7 +680,7 @@ SceneEditor.prototype.render = function()
 		renderer.autoClearDepth = true;
 
 		//Draw camera cube
-		if(Settings.editor.cameraRotationCube)
+		if(Editor.settings.editor.cameraRotationCube)
 		{
 			var code = this.orientation.raycast(this.mouse, this.canvas);
 			
@@ -694,13 +694,13 @@ SceneEditor.prototype.render = function()
 		}
 
 		//Camera preview
-		if(Settings.editor.cameraPreviewEnabled)
+		if(Editor.settings.editor.cameraPreviewEnabled)
 		{
-			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
-			var height = Settings.editor.cameraPreviewPercentage * this.canvas.height;
+			var width = Editor.settings.editor.cameraPreviewPercentage * this.canvas.width;
+			var height = Editor.settings.editor.cameraPreviewPercentage * this.canvas.height;
 			var scene = this.scene;
 			
-			var position = Settings.editor.cameraPreviewPosition;
+			var position = Editor.settings.editor.cameraPreviewPosition;
 			var x = (position === Settings.BOTTOM_RIGHT || position === Settings.TOP_RIGHT) ? this.canvas.width - width - 10 : 10;
 			var y = (position === Settings.BOTTOM_RIGHT || position === Settings.BOTTOM_LEFT) ? this.canvas.height - height - 10 : 10;
 
@@ -828,7 +828,7 @@ SceneEditor.prototype.reloadContext = function()
 //Initialize renderer
 SceneEditor.prototype.initializeRenderer = function()
 {
-	var settings = Settings.render.followProject ? Editor.program : Settings.render;
+	var settings = Editor.settings.render.followProject ? Editor.program : Editor.settings.render;
 
 	//Dispose old renderer
 	if(this.renderer !== null)
@@ -944,7 +944,7 @@ SceneEditor.prototype.setState = function(state)
 		try
 		{
 			//Run the program directly all changed made with code are kept
-			if(Settings.general.immediateMode)
+			if(Editor.settings.general.immediateMode)
 			{
 				this.programRunning = Editor.program;
 			}
@@ -1040,10 +1040,10 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.tool.setMode("rotate");
 	}
 	
-	this.tool.setSpace(Settings.editor.transformationSpace);
-	this.tool.setSnap(Settings.editor.snap);
-	this.tool.setTranslationSnap(Settings.editor.gridSpacing);
-	this.tool.setRotationSnap(Settings.editor.snapAngle);
+	this.tool.setSpace(Editor.settings.editor.transformationSpace);
+	this.tool.setSnap(Editor.settings.editor.snap);
+	this.tool.setTranslationSnap(Editor.settings.editor.gridSpacing);
+	this.tool.setRotationSnap(Editor.settings.editor.snapAngle);
 	this.tool.attach(Editor.selectedObjects);
 	
 	if(this.toolMode === Editor.SELECT)
@@ -1188,7 +1188,7 @@ SceneEditor.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		//Stats
-		this.stats.dom.style.visibility = Settings.general.showStats ? "visible" : "hidden";
+		this.stats.dom.style.visibility = Editor.settings.general.showStats ? "visible" : "hidden";
 
 		//Canvas
 		this.canvas.width = this.size.x;

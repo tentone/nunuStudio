@@ -456,8 +456,8 @@ include("editor/history/action/object/ObjectAddedAction.js");
 include("editor/history/action/object/ObjectRemovedAction.js");
 include("editor/history/action/object/ObjectMovedAction.js");
 
-include("editor/Interface.js");
 include("editor/Settings.js");
+include("editor/Interface.js");
 
 Editor.SELECT = 0;
 Editor.MOVE = 1;
@@ -474,8 +474,9 @@ Editor.initialize = function()
 		Editor.exit();
 	}
 	
-	//Load settings
-	Settings.load();
+	//Settings
+	Editor.settings = new Settings();
+	Editor.settings.load();
 
 	//Register tern plugins
 	Editor.ternDefinitions = [];
@@ -508,7 +509,7 @@ Editor.initialize = function()
 		});
 
 		//Try to update the editor
-		if(Settings.general.autoUpdate)
+		if(Editor.settings.general.autoUpdate)
 		{
 			Editor.updateNunu();
 		}
@@ -546,7 +547,7 @@ Editor.initialize = function()
 		//Store settings when exiting the page
 		window.onbeforeunload = function(event)
 		{
-			Settings.store();
+			Editor.settings.store();
 
 			var message = "All unsaved changes to the project will be lost! Do you really wanna exit?";
 
@@ -590,7 +591,7 @@ Editor.initialize = function()
 	Editor.mouse = new Mouse();
 
 	//Load theme
-	Editor.theme = ThemeManager.get(Settings.general.theme);
+	Editor.theme = ThemeManager.get(Editor.settings.general.theme);
 
 	//Open file
 	Editor.openFile = null;
@@ -1127,7 +1128,7 @@ Editor.createNewProgram = function()
 	Editor.program.addDefaultScene(Editor.defaultMaterial);
 
 	//History
-	Editor.history = new History(Settings.general.historySize);
+	Editor.history = new History(Editor.settings.general.historySize);
 
 	//Reset editor
 	Editor.setOpenFile(null);
@@ -1212,7 +1213,7 @@ Editor.loadProgram = function(file, binary)
 			}
 
 			//Reset history
-			Editor.history = new History(Settings.general.historySize);
+			Editor.history = new History(Editor.settings.general.historySize);
 
 			//Remove old tabs
 			Editor.gui.tab.clear();
@@ -2365,7 +2366,7 @@ Editor.exit = function()
 {
 	if(Nunu.runningOnDesktop())
 	{
-		Settings.store();
+		Editor.settings.store();
 		
 		var gui = require("nw.gui");
 		var win = gui.Window.get();
