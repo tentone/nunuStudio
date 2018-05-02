@@ -475,16 +475,12 @@ AssetExplorer.prototype.updateView = function()
 	{
 		var resource = resources[i];
 
-		if(resource.type === "TextFile")
-		{
+		//if(resource.type === "TextFile")
+		//{
 			var file = new FileAsset(this.assets);
 			file.setAsset(resource);
 			this.add(file);		
-		}
-		else
-		{
-			
-		}
+		//}
 	}
 
 	this.updateInterface();
