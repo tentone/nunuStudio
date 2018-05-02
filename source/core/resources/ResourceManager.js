@@ -277,6 +277,31 @@ ResourceManager.prototype.getResourceByName = function(name)
 };
 
 /**
+ * Add resource to resources manager.
+ * 
+ * @method addResource
+ * @param {Resource} Resource to add.
+ */
+ResourceManager.prototype.addResource = function(resource)
+{
+	if(resource instanceof Resource)
+	{
+ 		this.resources[resource.uuid] = resource;
+ 	}
+}
+
+/**
+ * Remove resource from font list.
+ * 
+ * @method removeResource
+ * @param {Resource} resource
+ */
+ResourceManager.prototype.removeResource = function(resource)
+{
+	delete this.resources[resource.uuid];
+};
+
+/**
  * Get image by name.
  * 
  * @method getImageByName
@@ -576,31 +601,6 @@ ResourceManager.prototype.addFont = function(font)
  		this.fonts[font.uuid] = font;
  	}
 }
-
-/**
- * Add resource to resources manager.
- * 
- * @method addResource
- * @param {Resource} Resource to add.
- */
-ResourceManager.prototype.addResource = function(resource)
-{
-	if(resource instanceof Resource)
-	{
- 		this.resources[resource.uuid] = resource;
- 	}
-}
-
-/**
- * Remove resource from font list.
- * 
- * @method removeResource
- * @param {Resource} resource
- */
-ResourceManager.prototype.removeResource = function(resource)
-{
-	delete this.resources[resource.uuid];
-};
 
 /**
  * Remove font from font list.

@@ -396,7 +396,7 @@ AssetExplorer.prototype.updateSettings = function()
 	this.updateInterface();
 };
 
-AssetExplorer.prototype.updateObjects = function()
+AssetExplorer.prototype.updateView = function()
 {
 	if(!this.active)
 	{
@@ -418,13 +418,13 @@ AssetExplorer.prototype.updateObjects = function()
 	}
 
 	//Geometries
-	/*var geometries = Editor.program.geometries;
+	var geometries = Editor.program.geometries;
 	for(var i in geometries)
 	{
 		var file = new GeometryAsset(this.assets);
 		file.setAsset(geometries[i]);
 		this.add(file);
-	}*/
+	}
 
 	//Textures
 	var textures = Editor.program.textures;
@@ -473,9 +473,18 @@ AssetExplorer.prototype.updateObjects = function()
 	var resources = Editor.program.resources;
 	for(var i in resources)
 	{
-		var file = new FileAsset(this.assets);
-		file.setAsset(resources[i]);
-		this.add(file);
+		var resource = resources[i];
+
+		if(resource.type === "TextFile")
+		{
+			var file = new FileAsset(this.assets);
+			file.setAsset(resource);
+			this.add(file);		
+		}
+		else
+		{
+			
+		}
 	}
 
 	this.updateInterface();

@@ -35,7 +35,7 @@ TreeView.prototype.attach = function(program)
 	}
 };
 
-TreeView.prototype.updateObjects = function()
+TreeView.prototype.updateView = function()
 {
 	/*if(this.root !== null)
 	{
