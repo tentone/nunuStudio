@@ -571,8 +571,7 @@ Editor.initialize = function()
 				if(confirm("All unsaved changes to the project will be lost! Load file?"))
 				{
 					Editor.loadProgram(file, file.name.endsWith(".nsp"));
-					Editor.resetEditingFlags();
-					Editor.updateViewsGUI();
+					Editor.resetEditor();
 				}
 				break;
 			}
@@ -748,6 +747,7 @@ Editor.selectObject = function(object)
 Editor.addToSelection = function(object)
 {
 	Editor.selectedObjects.push(object);
+
 	Editor.updateSelectionGUI();
 	Editor.selectTool();
 };
@@ -845,7 +845,7 @@ Editor.deleteObject = function(obj)
 			if(Editor.hasObjectSelected())
 			{
 				var selected = Editor.selectedObjects;
-				Editor.resetEditingFlags();
+				Editor.resetEditor();
 			}
 			else
 			{
@@ -940,13 +940,15 @@ Editor.cutObject = function(obj)
 	if(!obj.locked)
 	{
 		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
-		
 		Editor.history.add(new ObjectRemovedAction(obj));
 
-		Editor.updateViewsGUI();
 		if(Editor.isObjectSelected(obj))
 		{
-			Editor.resetEditingFlags();
+			Editor.resetEditor();
+		}
+		else
+		{
+			Editor.updateViewsGUI();
 		}
 	}
 };
@@ -1111,16 +1113,16 @@ Editor.updateSelectionGUI = function()
 	}*/
 
 	Editor.gui.treeView.updateSelection();
-
 	Editor.gui.panelContainer.updateSelection();
 };
 
 //Reset editing flags
-Editor.resetEditingFlags = function()
+Editor.resetEditor = function()
 {
 	Editor.clearSelection();
 	Editor.selectTool(Editor.SELECT);
 	Editor.updateSelectionGUI();
+	Editor.updateViewsGUI();
 };
 
 //Craete new Program
@@ -1143,9 +1145,8 @@ Editor.createNewProgram = function()
 
 	//Reset editor
 	Editor.setOpenFile(null);
-	Editor.resetEditingFlags();
-	Editor.updateViewsGUI();
-
+	Editor.resetEditor();
+	
 	//Clear tabs
 	Editor.gui.tab.clear();
 
@@ -1231,8 +1232,7 @@ Editor.loadProgram = function(file, binary)
 
 			//Set open file
 			Editor.setOpenFile(file);
-			Editor.resetEditingFlags();
-			Editor.updateViewsGUI();
+			Editor.resetEditor();
 
 			//Add new scene tab to interface
 			if(Editor.program.scene !== null)
