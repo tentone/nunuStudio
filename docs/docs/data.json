@@ -15031,6 +15031,19 @@
         {
             "file": "..\\..\\source\\Nunu.js",
             "line": 113,
+            "description": "Check if nunu if running in development mode.",
+            "itemtype": "method",
+            "name": "developmentMode",
+            "return": {
+                "description": "True if running as development mode.",
+                "type": "Boolean"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\..\\source\\Nunu.js",
+            "line": 124,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
@@ -15043,7 +15056,7 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 124,
+            "line": 135,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -15056,7 +15069,7 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 138,
+            "line": 148,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUse isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",
