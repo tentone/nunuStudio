@@ -1096,12 +1096,7 @@ Editor.updateSelectionGUI = function()
 	var tab = Editor.gui.bottomTab.getActual();
 	if(tab !== null)
 	{
-		//var time = performance.now();
-		
 		tab.updateSelection();
-
-		//var delta = performance.now() - time;
-		//console.log("Bottom tab update: " + delta + "ms");
 	}
 
 	//Right side tab group

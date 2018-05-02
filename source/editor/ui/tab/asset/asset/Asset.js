@@ -43,16 +43,38 @@ function Asset(parent)
 	//Icon scale
 	this.scale = new THREE.Vector2(0.65, 0.65);
 
-	//Mouse enter
+	var self = this;
+
 	this.element.onmouseenter = function()
 	{
 		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
-	//Mouse leave
 	this.element.onmouseleave = function()
 	{
-		this.style.backgroundColor = "";
+		if(!Editor.isObjectSelected(self.asset))
+		{
+			this.style.backgroundColor = "";
+		}
+	};
+
+	this.element.onclick = function(event)
+	{
+		if(event.ctrlKey)
+		{
+			if(Editor.isObjectSelected(self.asset))
+			{
+				Editor.removeFromSelection(self.asset);
+			}
+			else
+			{
+				Editor.addToSelection(self.asset);
+			}
+		}
+		else
+		{
+			Editor.selectObject(self.asset);
+		}
 	};
 }
 
