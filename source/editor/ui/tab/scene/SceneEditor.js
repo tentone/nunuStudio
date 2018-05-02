@@ -104,14 +104,16 @@ function SceneEditor(parent, closeable, container, index)
 		{
 			if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 			{
-				object.material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-				object.material.name = texture.name;
+				var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+				material.name = texture.name;
+				Editor.history.add(new ChangeAction(object, "material", material));
 				Editor.updateViewsGUI();
 			}
 			else if(object instanceof THREE.Sprite)
 			{
-				object.material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
-				object.material.name = texture.name;
+				var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
+				material.name = texture.name;
+				Editor.history.add(new ChangeAction(object, "material", material));
 				Editor.updateViewsGUI();
 			}
 		}
@@ -180,7 +182,7 @@ function SceneEditor(parent, closeable, container, index)
 				{
 					if(object instanceof THREE.Sprite)
 					{
-						object.material = draggedObject;
+						Editor.history.add(new ChangeAction(object, "material", draggedObject));
 						Editor.updateViewsGUI();
 					}
 				}
@@ -189,7 +191,7 @@ function SceneEditor(parent, closeable, container, index)
 				{
 					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 					{
-						object.material = draggedObject;
+						Editor.history.add(new ChangeAction(object, "material", draggedObject));
 						Editor.updateViewsGUI();
 					}
 				}
@@ -198,7 +200,7 @@ function SceneEditor(parent, closeable, container, index)
 				{
 					if(object.material instanceof THREE.Material)
 					{
-						object.material.envMap = draggedObject;
+						Editor.history.add(new ChangeAction(object.material, "envMap", draggedObject));
 						self.reloadContext();
 						Editor.updateViewsGUI();
 					}
@@ -224,6 +226,15 @@ function SceneEditor(parent, closeable, container, index)
 					if(object.font !== undefined)
 					{
 						object.setFont(draggedObject);
+						Editor.updateViewsGUI();
+					}
+				}
+				//Geometry
+				else if(draggedObject instanceof THREE.Geometry || draggedObject instanceof THREE.BufferGeometry)
+				{
+					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
+					{
+						Editor.history.add(new ChangeAction(object, "geometry", draggedObject));
 						Editor.updateViewsGUI();
 					}
 				}
