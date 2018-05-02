@@ -396,7 +396,7 @@ AssetExplorer.prototype.updateSettings = function()
 	this.updateInterface();
 };
 
-AssetExplorer.prototype.updateView = function()
+AssetExplorer.prototype.updateObjects = function()
 {
 	if(!this.active)
 	{

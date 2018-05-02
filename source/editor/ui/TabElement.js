@@ -59,14 +59,14 @@ TabElement.prototype.updateSettings = function(){};
  * Called when properties of objects are changed.
  * Called only for active tabs.
  */
-TabElement.prototype.updateValues = function(){};
+TabElement.prototype.updateValues = function(historyChange){};
 
 /*
  * Update tab object view.
  * Called when objects are added, removed, etc.
  * Called only for active tabs.
  */
-TabElement.prototype.updateView = function(){};
+TabElement.prototype.updateObjects = function(historyChange){};
 
 /*
  * Update tab after object selection changed.

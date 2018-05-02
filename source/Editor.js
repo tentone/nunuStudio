@@ -1062,12 +1062,12 @@ Editor.updateViewsGUI = function()
 {
 	//Update tree view to match actual scene
 	Editor.gui.treeView.attach(Editor.program);
-	Editor.gui.treeView.updateView();
+	Editor.gui.treeView.updateObjects();
 
 	var tab = Editor.gui.bottomTab.getActual();
 	if(tab !== null)
 	{
-		tab.updateView();
+		tab.updateObjects();
 	}
 };
 
