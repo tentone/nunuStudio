@@ -19,7 +19,7 @@
  */
 function LensFlare()
 {
-	THREE.Mesh.call(this, THREE.Lensflare.Geometry, new THREE.MeshBasicMaterial({opacity: 0, transparent: true}));
+	THREE.Lensflare.call(this);
 
 	this.name = "lensflare";
 	this.type = "LensFlare";
@@ -50,28 +50,56 @@ function LensFlare()
 	// material
 	var geometry = THREE.Lensflare.Geometry;
 	var shader = THREE.Lensflare.Shader;
-	var material1a = new THREE.RawShaderMaterial(
-	{
-		uniforms:
-		{
+	var material1a = new THREE.RawShaderMaterial({
+		uniforms: {
 			"scale": {value: null},
 			"screenPosition": {value: null}
 		},
-		vertexShader: shader.vertexShader,
-		fragmentShader: shader.fragmentShader1,
+		vertexShader: [
+			"precision highp float;",
+			"uniform vec3 screenPosition;",
+			"uniform vec2 scale;",
+			"attribute vec3 position;",
+			"void main() {",
+			"	gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);",
+			"}"
+		].join("\n"),
+		fragmentShader: [
+			"precision highp float;",
+			"void main() {",
+			"	gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);",
+			"}"
+		].join("\n"),
 		depthTest: true,
 		depthWrite: false,
 		transparent: false
 	});
-
 	var material1b = new THREE.RawShaderMaterial({
 		uniforms: {
 			"map": {value: tempMap},
 			"scale": {value: null},
 			"screenPosition": {value: null}
 		},
-		vertexShader: shader.vertexShader,
-		fragmentShader: shader.fragmentShader2,
+		vertexShader: [
+			"precision highp float;",
+			"uniform vec3 screenPosition;",
+			"uniform vec2 scale;",
+			"attribute vec3 position;",
+			"attribute vec2 uv;",
+			"varying vec2 vUV;",
+			"void main() {",
+			"	vUV = uv;",
+			"	gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);",
+			"}"
+		].join("\n"),
+		fragmentShader: [
+			"precision highp float;",
+			"uniform sampler2D map;",
+			"varying vec2 vUV;",
+			"void main() {",
+			"	gl_FragColor = texture2D(map, vUV);",
+			"}"
+		].join("\n"),
 		depthTest: false,
 		depthWrite: false,
 		transparent: false
