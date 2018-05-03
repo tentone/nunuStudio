@@ -12,6 +12,7 @@ Settings.DEGREES = 1;
 //Navigation
 Settings.FREE = 10;
 Settings.ORBIT = 11;
+Settings.PLANAR = 12;
 
 //Position
 Settings.TOP_LEFT = 20;
@@ -19,7 +20,7 @@ Settings.TOP_RIGHT = 21;
 Settings.BOTTOM_LEFT = 22;
 Settings.BOTTOM_RIGHT = 23;
 
-//Autoupdate channel
+//Update channel
 Settings.STABLE = 30;
 Settings.BETA = 31;
 

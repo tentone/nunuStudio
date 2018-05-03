@@ -498,8 +498,18 @@ SceneEditor.prototype.updateSettings = function()
 	this.orientation.size.set(size, size);
 
 	//Controls
-	var ControlsConstructor = Editor.settings.editor.navigation === Settings.FREE ? EditorFreeControls : EditorOrbitControls;
-	this.controls = new ControlsConstructor();
+	if(Editor.settings.editor.navigation === Settings.FREE)
+	{
+		this.controls = new EditorFreeControls();
+	}
+	else if(Editor.settings.editor.navigation === Settings.ORBIT)
+	{
+		this.controls = new EditorOrbitControls();
+	}
+	else if(Editor.settings.editor.navigation === Settings.PLANAR)
+	{
+		this.controls = new EditorPlanarControls();
+	}
 	this.controls.attach(this.camera);
 
 	//Tool

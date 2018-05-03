@@ -4,13 +4,13 @@ function EditorFreeControls()
 {
 	THREE.Object3D.call(this);
 
-	this.orientation = new THREE.Vector2(0.5, 0.5);
-	this.position.set(5, 4.8, 7.4);
+	this.orientation = new THREE.Vector2();
 
 	this.camera = null;
 
 	this.temp = new THREE.Vector3();
 
+	this.reset();
 	this.updateControls();
 }
 
@@ -121,7 +121,6 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	{
 		//Move speed
 		var speed = this.position.distanceTo(EditorFreeControls.ZERO) * Editor.settings.editor.mouseMoveSpeed;
-		
 		if(speed < 0.01)
 		{
 			speed = 0.01;

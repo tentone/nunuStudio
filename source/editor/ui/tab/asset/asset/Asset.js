@@ -107,10 +107,7 @@ Asset.prototype.setText = function(text)
 //Update metadata
 Asset.prototype.updateMetadata = function()
 {
-	if(this.asset !== null)
-	{
-		this.setText(this.asset.name);
-	}
+	this.setText(this.asset.name);
 };
 
 //Update Interface

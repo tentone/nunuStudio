@@ -5,8 +5,8 @@ function EditorOrbitControls()
 	THREE.Object3D.call(this);
 
 	this.distance = 10;
-	this.center = new THREE.Vector3(0, 0, 0);
-	this.orientation = new THREE.Vector2(-0.4, 0.4);
+	this.center = new THREE.Vector3();
+	this.orientation = new THREE.Vector2();
 
 	this.camera = null;
 
@@ -19,6 +19,7 @@ function EditorOrbitControls()
 	this.tempVector = new THREE.Vector3(0, 0, 0);
 	this.tempMatrix = new THREE.Matrix4();
 
+	this.reset();
 	this.updateControls();
 }
 
@@ -150,6 +151,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 			this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
 			this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
+			needsUpdate = true;
 		}
 		if(Editor.keyboard.keyPressed(Keyboard.W))
 		{
@@ -159,6 +161,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 			this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
 			this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
+			needsUpdate = true;
 		}
 		if(Editor.keyboard.keyPressed(Keyboard.A))
 		{
@@ -169,6 +172,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 			this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
 			this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
+			needsUpdate = true;
 		}
 		if(Editor.keyboard.keyPressed(Keyboard.D))
 		{
@@ -179,6 +183,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 			this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
 			this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
+			needsUpdate = true;
 		}
 	}
 	

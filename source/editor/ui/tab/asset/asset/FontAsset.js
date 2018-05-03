@@ -93,17 +93,14 @@ FontAsset.prototype.setAsset = function(font)
 //Update material preview
 FontAsset.prototype.updateMetadata = function()
 {
-	if(this.asset !== null)
+	var image = this.image;
+	
+	FontRenderer.render(this.asset, function(url)
 	{
-		var image = this.image;
-		
-		FontRenderer.render(this.asset, function(url)
-		{
-			image.src = url;
-		});
+		image.src = url;
+	});
 
-		this.setText(this.asset.name);
-	}
+	this.setText(this.asset.name);
 };
 
 //Update interface

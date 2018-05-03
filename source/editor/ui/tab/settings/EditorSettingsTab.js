@@ -15,50 +15,6 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
 
-	//General text
-	this.form.addText("Inspector panel");
-	this.form.nextRow();
-
-	//Show UUID
-	this.form.addText("Show object UUID").setAltText("Show object UUID in the object panel.");
-	this.showUUID = new CheckBox(this.form.element);
-	this.showUUID.size.set(15, 15);
-	this.showUUID.setOnChange(function()
-	{
-		Editor.settings.general.showUUID = self.showUUID.getValue();
-		Editor.gui.panelContainer.updateSelection();
-	});
-	this.form.add(this.showUUID);
-	this.form.nextRow();
-
-	//Show type
-	this.form.addText("Show object type");
-	this.showType = new CheckBox(this.form.element);
-	this.showType.size.set(15, 15);
-	this.showType.setOnChange(function()
-	{
-		Editor.settings.general.showType = self.showType.getValue();
-		Editor.gui.panelContainer.updateSelection();
-		
-	});
-	this.form.add(this.showType);
-	this.form.nextRow();
-
-	//Immediate mode
-	this.form.addText("Use immediate mode").setAltText("If checked objects changed during runtime test will keep their state when the testing mode stops.");
-	this.immediateMode = new CheckBox(this.form.element);
-	this.immediateMode.size.set(15, 15);
-	this.immediateMode.setOnChange(function()
-	{
-		Editor.settings.general.immediateMode = self.immediateMode.getValue();
-	});
-	this.form.add(this.immediateMode);
-	this.form.nextRow();
-
-	//Blank Space
-	this.form.addText("");
-	this.form.nextRow();
-
 	//Scene editor
 	this.form.addText("Editor");
 	this.form.nextRow();
@@ -187,6 +143,50 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.addText("");
 	this.form.nextRow();
 
+	//General text
+	this.form.addText("Inspector panel");
+	this.form.nextRow();
+
+	//Show UUID
+	this.form.addText("Show object UUID").setAltText("Show object UUID in the object panel.");
+	this.showUUID = new CheckBox(this.form.element);
+	this.showUUID.size.set(15, 15);
+	this.showUUID.setOnChange(function()
+	{
+		Editor.settings.general.showUUID = self.showUUID.getValue();
+		Editor.gui.panelContainer.updateSelection();
+	});
+	this.form.add(this.showUUID);
+	this.form.nextRow();
+
+	//Show type
+	this.form.addText("Show object type");
+	this.showType = new CheckBox(this.form.element);
+	this.showType.size.set(15, 15);
+	this.showType.setOnChange(function()
+	{
+		Editor.settings.general.showType = self.showType.getValue();
+		Editor.gui.panelContainer.updateSelection();
+		
+	});
+	this.form.add(this.showType);
+	this.form.nextRow();
+
+	//Immediate mode
+	this.form.addText("Use immediate mode").setAltText("If checked objects changed during runtime test will keep their state when the testing mode stops.");
+	this.immediateMode = new CheckBox(this.form.element);
+	this.immediateMode.size.set(15, 15);
+	this.immediateMode.setOnChange(function()
+	{
+		Editor.settings.general.immediateMode = self.immediateMode.getValue();
+	});
+	this.form.add(this.immediateMode);
+	this.form.nextRow();
+
+	//Blank Space
+	this.form.addText("");
+	this.form.nextRow();
+
 	//Scene editor
 	this.form.addText("Navigation");
 	this.form.nextRow();
@@ -197,6 +197,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.navigation.size.set(150, 20);
 	this.navigation.addValue("Free", Settings.FREE);
 	this.navigation.addValue("Orbit", Settings.ORBIT);
+	this.navigation.addValue("Planar", Settings.PLANAR);
 	this.navigation.setOnChange(function()
 	{
 		Editor.settings.editor.navigation = self.navigation.getValue();
