@@ -396,6 +396,14 @@ AssetExplorer.prototype.updateSettings = function()
 	this.updateInterface();
 };
 
+AssetExplorer.prototype.updateSelection = function()
+{
+	for(var i = 0; i < this.files.length; i++)
+	{
+		this.files[i].updateSelection();
+	}
+};
+
 AssetExplorer.prototype.updateView = function()
 {
 	if(!this.active)
@@ -403,7 +411,6 @@ AssetExplorer.prototype.updateView = function()
 		return;
 	}
 	
-	//Clean asset explorer
 	this.clear();
 
 	ResourceManager.retrieveResources(Editor.program);
@@ -510,13 +517,6 @@ AssetExplorer.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-
-		//Asset position
 		var filesRow = Math.floor(this.files.length / (this.files.length * (this.filesSize.x + this.filesSpacing) / this.size.x));
 		for(var i = 0; i < this.files.length; i++)
 		{
@@ -528,8 +528,13 @@ AssetExplorer.prototype.updateInterface = function()
 			this.files[i].updateInterface();
 		}
 
-		//Asset
 		this.assets.style.height = (this.size.y - 20) + "px";
+
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{

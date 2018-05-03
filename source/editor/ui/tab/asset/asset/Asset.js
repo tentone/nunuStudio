@@ -80,6 +80,12 @@ function Asset(parent)
 
 Asset.prototype = Object.create(Element.prototype);
 
+//Update background based on selection state
+Asset.prototype.updateSelection = function()
+{
+	this.element.style.backgroundColor = Editor.isObjectSelected(this.asset) ? Editor.theme.buttonOverColor : "";
+};
+
 //Set parent
 Asset.prototype.setParent = function(parent)
 {

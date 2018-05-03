@@ -1048,7 +1048,6 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.toolMode = tool;
 	}
 
-
 	if(this.toolMode === Editor.MOVE)
 	{
 		this.tool.setMode("translate");
@@ -1071,13 +1070,24 @@ SceneEditor.prototype.selectTool = function(tool)
 //Select helper to debug selected object data
 SceneEditor.prototype.updateSelection = function()
 {
-	this.tool.attach(Editor.selectedObjects);
+	//Filter Object3D objects
+	var selectedObjects = [];
+	for(var i = 0; i < Editor.selectedObjects.length; i++)
+	{
+		if(Editor.selectedObjects[i] instanceof THREE.Object3D)
+		{
+			selectedObjects.push(Editor.selectedObjects[i]);
+		}
+	}
+
+	//Transform tool
+	this.tool.attach(selectedObjects);
 
 	this.objectHelper.removeAll();
 
-	for(var i = 0; i < Editor.selectedObjects.length; i++)
+	for(var i = 0; i < selectedObjects.length; i++)
 	{
-		var object = Editor.selectedObjects[i];
+		var object = selectedObjects[i];
 
 		//Camera
 		if(object instanceof THREE.Camera)

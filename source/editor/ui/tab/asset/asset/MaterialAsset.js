@@ -29,7 +29,10 @@ function MaterialAsset(parent)
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		this.style.backgroundColor = "";
+		if(!Editor.isObjectSelected(self.asset))
+		{
+			this.style.backgroundColor = "";
+		}
 		self.restoreMaterial();
 	};
 
