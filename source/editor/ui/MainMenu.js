@@ -97,6 +97,44 @@ function MainMenu(parent)
 			}, "", Editor.program.name);
 		}, Editor.filePath + "icons/platform/web.png");
 
+		//Android
+		if(Nunu.developmentMode())
+		{
+			publish.addOption("Android", function()
+			{
+				//FileSystem.chooseFile(function(files)
+				//{
+					try
+					{
+						var system = require("child_process");
+
+						var name = Editor.program.name !== "" ? Editor.program.name : "program";
+						var author = Editor.program.author !== "" ? Editor.program.author : "nunustudio";
+						var packageName = "com." + author + "." + name;
+
+						var callback = function(error, stdout, stderr)
+						{
+							console.log(stdout, stderr);
+						}
+
+						system.execSync("cordova create temp " + packageName + " " + name, callback);
+						system.execSync("cd temp && cordova platform add android", callback);
+						FileSystem.deleteFolder("./temp/www");
+						Editor.exportWebProject("./temp/www");
+						system.execSync("cd temp && cordova build android", callback);
+						//system.execSync("cordova build android --release -- --keystore="..\android.keystore" --storePassword=android --alias=mykey");
+						//FileSystem.deleteFolder("temp");
+
+						Editor.alert("Exported android project");
+					}
+					catch(e)
+					{
+						Editor.alert("Error exporting project (" + e + ")");
+					}
+				//}, ".apk", Editor.program.name);
+			}, Editor.filePath + "icons/platform/android.png");
+		}
+
 		//Publish windows
 		if(FileSystem.fileExists(Editor.NWJSPath + "win"))
 		{

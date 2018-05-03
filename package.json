@@ -29,6 +29,7 @@
 	},
 	"homepage": "https://www.nunustudio.org",
 	"devDependencies": {
-		"yuidocjs": ""
+		"yuidocjs": "",
+		"cordova": ""
 	}
 }

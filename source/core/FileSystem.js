@@ -481,6 +481,39 @@ FileSystem.getFilesDirectory = function(dir)
 };
 
 /**
+ * Delete folders and all subfolders.
+ * 
+ * Only works when running inside NWJS.
+ *
+ * @method deleteFolder
+ * @param {String} path
+ */
+FileSystem.deleteFolder = function(path)
+{
+	if(FileSystem.fs !== undefined)
+	{
+		if(FileSystem.fs.existsSync(path))
+		{
+			FileSystem.fs.readdirSync(path).forEach(function(file, index)
+			{
+				var curPath = path + "/" + file;
+
+				if(FileSystem.fs.lstatSync(curPath).isDirectory())
+				{
+					FileSystem.deleteFolder(curPath);
+				}
+				else
+				{
+					FileSystem.fs.unlinkSync(curPath);
+				}
+			});
+
+			FileSystem.fs.rmdirSync(path);
+		}
+	}
+};
+
+/**
  * Copy folder and all its files (includes symbolic links).
  * 
  * Only works when running inside NWJS.
