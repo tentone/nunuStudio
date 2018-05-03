@@ -331,6 +331,7 @@ include("editor/ui/tab/scene/controls/EditorPlanarControls.js");
 include("editor/ui/tab/scene/utils/OrientationCube.js");
 
 include("editor/ui/tab/asset/AssetExplorer.js");
+include("editor/ui/tab/asset/AssetExplorerMenu.js");
 include("editor/ui/tab/asset/asset/Asset.js");
 include("editor/ui/tab/asset/asset/GeometryAsset.js");
 include("editor/ui/tab/asset/asset/MaterialAsset.js");
