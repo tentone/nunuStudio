@@ -19,12 +19,14 @@
  */
 function LensFlare()
 {
-	THREE.Lensflare.call(this);
+	THREE.Mesh.call(this, THREE.Lensflare.Geometry, new THREE.MeshBasicMaterial({opacity: 0, transparent: true}));
 
 	this.name = "lensflare";
 	this.type = "LensFlare";
-	
+
+	this.renderOrder = Infinity;
 	this.frustumCulled = false;
+
 	this.receiveShadow = false;
 	this.castShadow = false;
 	
@@ -50,7 +52,8 @@ function LensFlare()
 	// material
 	var geometry = THREE.Lensflare.Geometry;
 	var shader = THREE.Lensflare.Shader;
-	var material1a = new THREE.RawShaderMaterial({
+	var material1a = new THREE.RawShaderMaterial(
+	{
 		uniforms: {
 			"scale": {value: null},
 			"screenPosition": {value: null}
@@ -74,13 +77,17 @@ function LensFlare()
 		depthWrite: false,
 		transparent: false
 	});
-	var material1b = new THREE.RawShaderMaterial({
-		uniforms: {
+
+	var material1b = new THREE.RawShaderMaterial(
+	{
+		uniforms:
+		{
 			"map": {value: tempMap},
 			"scale": {value: null},
 			"screenPosition": {value: null}
 		},
-		vertexShader: [
+		vertexShader:
+		[
 			"precision highp float;",
 			"uniform vec3 screenPosition;",
 			"uniform vec2 scale;",
@@ -92,7 +99,8 @@ function LensFlare()
 			"	gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);",
 			"}"
 		].join("\n"),
-		fragmentShader: [
+		fragmentShader:
+		[
 			"precision highp float;",
 			"uniform sampler2D map;",
 			"varying vec2 vUV;",
@@ -110,7 +118,8 @@ function LensFlare()
 	var shader = THREE.LensflareElement.Shader;
 	var material2 = new THREE.RawShaderMaterial(
 	{
-		uniforms: {
+		uniforms:
+		{
 			"map": {value: null},
 			"occlusionMap": {value: occlusionMap},
 			"color": {value: new THREE.Color(0xffffff)},
@@ -130,7 +139,7 @@ function LensFlare()
 	var validArea = new THREE.Box2();
 	var viewport = new THREE.Vector4();
 
-	this.onBeforeRender = function (renderer, scene, camera)
+	this.onBeforeRender = function(renderer, scene, camera)
 	{
 		viewport.copy(renderer.getCurrentViewport());
 
@@ -146,6 +155,7 @@ function LensFlare()
 
 		// calculate position in screen space
 		positionScreen.setFromMatrixPosition(this.matrixWorld);
+
 		positionScreen.applyMatrix4(camera.matrixWorldInverse);
 		positionScreen.applyMatrix4(camera.projectionMatrix);
 
@@ -176,12 +186,14 @@ function LensFlare()
 
 			renderer.renderBufferDirect(camera, null, geometry, material1b, mesh1, null);
 
+			// render elements
 			var vecX = - positionScreen.x * 2;
 			var vecY = - positionScreen.y * 2;
 
-			for(var i = 0, l = this.elements.length; i < l; i ++)
+			for(var i = 0, l = this.elements.length; i < l; i++)
 			{
 				var element = this.elements[i];
+
 				var uniforms = material2.uniforms;
 
 				uniforms.color.value.copy(element.color);
@@ -208,6 +220,11 @@ function LensFlare()
 		material2.dispose();
 		tempMap.dispose();
 		occlusionMap.dispose();
+
+		for(var i = 0, l = elements.length; i < l; i ++)
+		{
+			elements[i].texture.dispose();
+		}
 	};
 }
 
