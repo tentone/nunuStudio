@@ -1048,6 +1048,7 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.toolMode = tool;
 	}
 
+
 	if(this.toolMode === Editor.MOVE)
 	{
 		this.tool.setMode("translate");
@@ -1060,12 +1061,6 @@ SceneEditor.prototype.selectTool = function(tool)
 	{
 		this.tool.setMode("rotate");
 	}
-	
-	this.tool.setSpace(Editor.settings.editor.transformationSpace);
-	this.tool.setSnap(Editor.settings.editor.snap);
-	this.tool.setTranslationSnap(Editor.settings.editor.gridSpacing);
-	this.tool.setRotationSnap(Editor.settings.editor.snapAngle);
-	this.tool.attach(Editor.selectedObjects);
 	
 	if(this.toolMode === Editor.SELECT)
 	{

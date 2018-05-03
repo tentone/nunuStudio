@@ -160,10 +160,7 @@ TransformControls.prototype.getMode = function()
 
 TransformControls.prototype.setMode = function(mode)
 {
-	if(mode !== undefined)
-	{
-		this.mode = mode;
-	}
+	this.mode = mode;
 
 	//If scale mode force local space
 	if(this.mode === "scale")
@@ -171,11 +168,22 @@ TransformControls.prototype.setMode = function(mode)
 		this.space = "local";
 	}
 
-	//Set gizmo visibility
+	//Gizmo visibility
+	var found = false;
 	for(var type in this.gizmo)
 	{
-		this.gizmo[type].visible = (type === this.mode);
+		if(type === this.mode)
+		{
+			this.gizmo[type].visible = true;
+			found = true;
+		}
+		else
+		{
+			this.gizmo[type].visible = false;
+		}
 	}
+
+	this.visible = (found === true && this.objects.length > 0);
 
 	this.updateScale();
 };

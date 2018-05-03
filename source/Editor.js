@@ -318,10 +318,17 @@ include("editor/ui/tab/treeview/TreeView.js");
 include("editor/ui/tab/treeview/TreeElement.js");
 
 include("editor/ui/tab/scene/SceneEditor.js");
+include("editor/ui/tab/scene/transform/TransformControls.js");
+include("editor/ui/tab/scene/transform/material/GizmoMaterial.js");
+include("editor/ui/tab/scene/transform/material/GizmoLineMaterial.js");
+include("editor/ui/tab/scene/transform/gizmo/TransformGizmo.js");
+include("editor/ui/tab/scene/transform/gizmo/TransformGizmoRotate.js");
+include("editor/ui/tab/scene/transform/gizmo/TransformGizmoScale.js");
+include("editor/ui/tab/scene/transform/gizmo/TransformGizmoTranslate.js");
 include("editor/ui/tab/scene/controls/EditorFreeControls.js");
 include("editor/ui/tab/scene/controls/EditorOrbitControls.js");
 include("editor/ui/tab/scene/controls/EditorPlanarControls.js");
-include("editor/ui/tab/scene/tools/OrientationCube.js");
+include("editor/ui/tab/scene/utils/OrientationCube.js");
 
 include("editor/ui/tab/asset/AssetExplorer.js");
 include("editor/ui/tab/asset/asset/Asset.js");
@@ -426,14 +433,6 @@ include("editor/ui/preview/GeometryRenderer.js");
 
 include("editor/ui/sidebar/ToolBar.js");
 include("editor/ui/sidebar/AddObjectSideBar.js");
-
-include("editor/tools/TransformControls.js");
-include("editor/tools/material/GizmoMaterial.js");
-include("editor/tools/material/GizmoLineMaterial.js");
-include("editor/tools/gizmo/TransformGizmo.js");
-include("editor/tools/gizmo/TransformGizmoRotate.js");
-include("editor/tools/gizmo/TransformGizmoScale.js");
-include("editor/tools/gizmo/TransformGizmoTranslate.js");
 
 include("editor/helpers/ObjectIconHelper.js");
 include("editor/helpers/PhysicsObjectHelper.js");
@@ -803,6 +802,9 @@ Editor.addObject = function(obj, parent)
 	{
 		parent = Editor.program.scene;
 	}
+
+
+	//TODO <Check for resources here and create a history action to add resources and objects>
 
 	Editor.history.add(new ObjectAddedAction(obj, parent));
 	Editor.updateViewsGUI();

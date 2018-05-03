@@ -58,7 +58,6 @@ function Asset(parent)
 		}
 	};
 
-	/*
 	this.element.onclick = function(event)
 	{
 		if(event.ctrlKey)
@@ -77,7 +76,6 @@ function Asset(parent)
 			Editor.selectObject(self.asset);
 		}
 	};
-	*/
 }
 
 Asset.prototype = Object.create(Element.prototype);
