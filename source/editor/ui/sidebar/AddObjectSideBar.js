@@ -294,20 +294,23 @@ function AddObjectSideBar(element)
 		Editor.addObject(lensFlare);
 	}, "Lens flare");
 
-	//Reflector
-	addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
+	if(Nunu.developmentMode())
 	{
-		var object = new THREE.Reflector(new THREE.BoxBufferGeometry());
+		//Reflector
+		addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
+		{
+			var object = new THREE.Reflector(new THREE.BoxBufferGeometry());
 
-		Editor.addObject(object);
-	}, "Reflector");
+			Editor.addObject(object);
+		}, "Reflector");
 
-	//Refractor
-	addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
-	{
-		var object = new THREE.Refractor(new THREE.SphereBufferGeometry(1, 32, 32));
-		Editor.addObject(object);
-	}, "Refractor");
+		//Refractor
+		addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
+		{
+			var object = new THREE.Refractor(new THREE.SphereBufferGeometry(1, 32, 32));
+			Editor.addObject(object);
+		}, "Refractor");
+	}
 
 	//Physics
 	var addPhysics = new ButtonDrawer(element);
