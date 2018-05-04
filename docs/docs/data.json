@@ -8558,7 +8558,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
-            "line": 188,
+            "line": 233,
             "description": "Add texture to the lensFlare object.",
             "itemtype": "method",
             "name": "add",
@@ -8589,7 +8589,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
-            "line": 222,
+            "line": 267,
             "description": "Serialize lensflare data to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14497,6 +14497,22 @@
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 483,
+            "description": "Delete folders and all subfolders.\n\nOnly works when running inside NWJS.",
+            "itemtype": "method",
+            "name": "deleteFolder",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\core\\FileSystem.js",
+            "line": 516,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -14517,7 +14533,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 527,
+            "line": 560,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -14537,7 +14553,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 548,
+            "line": 581,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -14557,7 +14573,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 570,
+            "line": 603,
             "description": "Get file name with extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.d.",
             "itemtype": "method",
             "name": "getFileNameWithExtension",
@@ -14577,7 +14593,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 592,
+            "line": 625,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -14597,7 +14613,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 611,
+            "line": 644,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -14617,7 +14633,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 633,
+            "line": 666,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
