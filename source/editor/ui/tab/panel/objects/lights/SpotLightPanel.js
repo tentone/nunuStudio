@@ -2,7 +2,7 @@
 
 function SpotLightPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -117,11 +117,11 @@ function SpotLightPanel(parent, obj)
 	this.form.nextRow();
 }
 
-SpotLightPanel.prototype = Object.create(Panel.prototype);
+SpotLightPanel.prototype = Object.create(ObjectPanel.prototype);
 
 SpotLightPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 
 	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 	this.angle.setValue(this.obj.angle);

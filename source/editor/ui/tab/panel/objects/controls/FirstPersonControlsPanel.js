@@ -2,7 +2,7 @@
 
 function FirstPersonControlsPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -67,11 +67,11 @@ function FirstPersonControlsPanel(parent, obj)
 	this.form.nextRow();
 }
 
-FirstPersonControlsPanel.prototype = Object.create(Panel.prototype);
+FirstPersonControlsPanel.prototype = Object.create(ObjectPanel.prototype);
 
 FirstPersonControlsPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.needsButtonPressed.setValue(this.obj.needsButtonPressed);
 	this.movementEnabled.setValue(this.obj.movementEnabled);

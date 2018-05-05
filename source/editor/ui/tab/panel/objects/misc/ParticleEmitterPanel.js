@@ -2,7 +2,7 @@
 
 function ParticleEmitterPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	var self = this;
 
@@ -18,11 +18,11 @@ function ParticleEmitterPanel(parent, obj)
 	this.form.nextRow();
 }
 
-ParticleEmitterPanel.prototype = Object.create(Panel.prototype);
+ParticleEmitterPanel.prototype = Object.create(ObjectPanel.prototype);
 
 ParticleEmitterPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 
 	this.dynamicEmitter.setValue(this.obj.dynamicEmitter);
 };

@@ -2,7 +2,7 @@
 
 function AudioPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -63,7 +63,7 @@ function AudioPanel(parent, obj)
 	this.form.nextRow();
 }
 
-AudioPanel.prototype = Object.create(Panel.prototype);
+AudioPanel.prototype = Object.create(ObjectPanel.prototype);
 
 AudioPanel.prototype.destroy = function()
 {
@@ -77,7 +77,7 @@ AudioPanel.prototype.destroy = function()
 
 AudioPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 
 	this.player.setAudioBuffer(this.obj.audio.data);
 	this.volume.setValue(this.obj.volume);

@@ -2,7 +2,7 @@
 
 function ScenePanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -207,7 +207,7 @@ function ScenePanel(parent, obj)
 }
 
 //Super prototypes
-ScenePanel.prototype = Object.create(Panel.prototype);
+ScenePanel.prototype = Object.create(ObjectPanel.prototype);
 
 //Update panel content from attached object
 ScenePanel.prototype.updatePanel = function()
@@ -261,7 +261,7 @@ ScenePanel.prototype.updatePanel = function()
 //Update wich forms should be visible in the panel
 ScenePanel.prototype.updateForms = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.fogLinearForm.visible = (this.obj.fog instanceof THREE.Fog) ? true : false;
 	this.fogLinearForm.updateInterface();

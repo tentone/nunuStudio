@@ -2,7 +2,7 @@
 
 function SpinePanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -52,12 +52,12 @@ function SpinePanel(parent, obj)
 	this.form.nextRow();
 }
 
-SpinePanel.prototype = Object.create(Panel.prototype);
+SpinePanel.prototype = Object.create(ObjectPanel.prototype);
 
 //Update panel content from attached object
 SpinePanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 		
 	this.animation.clearValues();
 	this.skin.clearValues();

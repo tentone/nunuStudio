@@ -6,7 +6,7 @@ function PerspectiveCameraPanel(parent, obj)
 	this.scene = null;
 
 	//Panel
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -159,18 +159,18 @@ function PerspectiveCameraPanel(parent, obj)
 	this.form.nextRow();
 }
 
-PerspectiveCameraPanel.prototype = Object.create(Panel.prototype);
+PerspectiveCameraPanel.prototype = Object.create(ObjectPanel.prototype);
 
 PerspectiveCameraPanel.prototype.attach = function(obj)
 {
-	Panel.prototype.attach.call(this, obj);
+	ObjectPanel.prototype.attach.call(this, obj);
 
 	this.scene = ObjectUtils.getScene(obj);
 }
 
 PerspectiveCameraPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 
 	this.fov.setValue(this.obj.fov);
 	this.use.setValue(this.scene.isCameraActive(this.obj));

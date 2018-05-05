@@ -6,7 +6,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.scene = null;
 
 	//Panel
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -174,18 +174,18 @@ function OrthographicCameraPanel(parent, obj)
 	this.form.nextRow();
 }
 
-OrthographicCameraPanel.prototype = Object.create(Panel.prototype);
+OrthographicCameraPanel.prototype = Object.create(ObjectPanel.prototype);
 
 OrthographicCameraPanel.prototype.attach = function(obj)
 {
-	Panel.prototype.attach.call(this, obj);
+	ObjectPanel.prototype.attach.call(this, obj);
 
 	this.scene = ObjectUtils.getScene(obj);
 }
 
 OrthographicCameraPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.size.setValue(this.obj.size);
 	this.mode.setSelectedIndex(this.obj.mode);

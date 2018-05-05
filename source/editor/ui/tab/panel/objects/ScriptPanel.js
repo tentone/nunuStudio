@@ -2,7 +2,7 @@
 
 function ScriptPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	var self = this;
 
@@ -19,11 +19,11 @@ function ScriptPanel(parent, obj)
 	this.form.nextRow();
 }
 
-ScriptPanel.prototype = Object.create(Panel.prototype);
+ScriptPanel.prototype = Object.create(ObjectPanel.prototype);
 
 ScriptPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.mode.setValue(this.obj.mode);
 };

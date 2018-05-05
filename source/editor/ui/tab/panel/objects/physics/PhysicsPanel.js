@@ -2,7 +2,7 @@
 
 function PhysicsPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -150,11 +150,11 @@ function PhysicsPanel(parent, obj)
 	this.form.nextRow();
 }
 
-PhysicsPanel.prototype = Object.create(Panel.prototype);
+PhysicsPanel.prototype = Object.create(ObjectPanel.prototype);
 
 PhysicsPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 
 	this.bodyType.setValue(this.obj.body.type);
 	this.mass.setValue(this.obj.body.mass);

@@ -2,7 +2,7 @@
 
 function KinectPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -19,11 +19,11 @@ function KinectPanel(parent, obj)
 
 }
 
-KinectPanel.prototype = Object.create(Panel.prototype);
+KinectPanel.prototype = Object.create(ObjectPanel.prototype);
 
 KinectPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.debugModel.setValue(this.obj.debugModel);
 };

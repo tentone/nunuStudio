@@ -2,7 +2,7 @@
 
 function Text3DPanel(parent, obj)
 {
-	ObjectPanel.call(this, parent, obj);
+	DrawablePanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -100,11 +100,11 @@ function Text3DPanel(parent, obj)
 	this.form.nextRow();
 }
 
-Text3DPanel.prototype = Object.create(ObjectPanel.prototype);
+Text3DPanel.prototype = Object.create(DrawablePanel.prototype);
 
 Text3DPanel.prototype.updatePanel = function()
 {
-	ObjectPanel.prototype.updatePanel.call(this);
+	DrawablePanel.prototype.updatePanel.call(this);
 	
 	this.castShadow.setValue(this.obj.castShadow);
 	this.receiveShadow.setValue(this.obj.receiveShadow);

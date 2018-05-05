@@ -2,7 +2,7 @@
 
 function ProgramPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -180,7 +180,7 @@ function ProgramPanel(parent, obj)
 
 }
 
-ProgramPanel.prototype = Object.create(Panel.prototype);
+ProgramPanel.prototype = Object.create(ObjectPanel.prototype);
 
 ProgramPanel.prototype.updateRenderer = function()
 {
@@ -194,7 +194,7 @@ ProgramPanel.prototype.updateRenderer = function()
 //Update panel content from attached object
 ProgramPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.author.setText(this.obj.author);
 	this.version.setText(this.obj.version);

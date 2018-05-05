@@ -2,7 +2,7 @@
 
 function DirectionalLightPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -143,11 +143,11 @@ function DirectionalLightPanel(parent, obj)
 
 }
 
-DirectionalLightPanel.prototype = Object.create(Panel.prototype);
+DirectionalLightPanel.prototype = Object.create(ObjectPanel.prototype);
 
 DirectionalLightPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 	this.castShadow.setValue(this.obj.castShadow);

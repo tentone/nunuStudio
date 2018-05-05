@@ -2,7 +2,7 @@
 
 function LeapPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -53,11 +53,11 @@ function LeapPanel(parent, obj)
 	this.form.add(this.posesEnabled);
 }
 
-LeapPanel.prototype = Object.create(Panel.prototype);
+LeapPanel.prototype = Object.create(ObjectPanel.prototype);
 
 LeapPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 
 	this.mode.setSelectedIndex(this.obj.mode);
 	this.debugModel.setValue(this.obj.debugModel);

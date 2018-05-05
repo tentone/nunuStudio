@@ -2,7 +2,7 @@
 
 function PointLightPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -116,11 +116,11 @@ function PointLightPanel(parent, obj)
 
 }
 
-PointLightPanel.prototype = Object.create(Panel.prototype);
+PointLightPanel.prototype = Object.create(ObjectPanel.prototype);
 
 PointLightPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 	this.distance.setValue(this.obj.distance);

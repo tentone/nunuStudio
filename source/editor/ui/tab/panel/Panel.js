@@ -14,7 +14,6 @@ function Panel(parent, obj)
 
 	this.preventDragEvents();
 
-	//Default form
 	this.form = new Form(this.element);
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);

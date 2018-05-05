@@ -2,7 +2,7 @@
 
 function SkyPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -281,11 +281,11 @@ function SkyPanel(parent, obj)
 	this.form.nextRow();
 }
 
-SkyPanel.prototype = Object.create(Panel.prototype);
+SkyPanel.prototype = Object.create(ObjectPanel.prototype);
 
 SkyPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.colorTop.setValue(this.obj.colorTop);
 	this.colorBottom.setValue(this.obj.colorBottom);

@@ -2,7 +2,7 @@
 
 function RectAreaLightPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -56,11 +56,11 @@ function RectAreaLightPanel(parent, obj)
 	this.form.nextRow();
 }
 
-RectAreaLightPanel.prototype = Object.create(Panel.prototype);
+RectAreaLightPanel.prototype = Object.create(ObjectPanel.prototype);
 
 RectAreaLightPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 	this.intensity.setValue(this.obj.intensity);

@@ -386,12 +386,13 @@ include("editor/ui/tab/texture/CanvasTextureEditor.js");
 include("editor/ui/tab/texture/SpriteSheetTextureEditor.js");
 
 include("editor/ui/tab/panel/PanelContainer.js");
+include("editor/ui/tab/panel/Panel.js");
 
 include("editor/ui/tab/panel/resources/ResourcePanel.js");
 
-include("editor/ui/tab/panel/objects/Panel.js");
-include("editor/ui/tab/panel/objects/LockedPanel.js");
 include("editor/ui/tab/panel/objects/ObjectPanel.js");
+include("editor/ui/tab/panel/objects/LockedPanel.js");
+include("editor/ui/tab/panel/objects/DrawablePanel.js");
 include("editor/ui/tab/panel/objects/ScenePanel.js");
 include("editor/ui/tab/panel/objects/ScriptPanel.js");
 include("editor/ui/tab/panel/objects/ProgramPanel.js");

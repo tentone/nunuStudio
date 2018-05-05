@@ -2,7 +2,7 @@
 
 function HemisphereLightPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -30,11 +30,11 @@ function HemisphereLightPanel(parent, obj)
 	this.form.nextRow();
 }
 
-HemisphereLightPanel.prototype = Object.create(Panel.prototype);
+HemisphereLightPanel.prototype = Object.create(ObjectPanel.prototype);
 
 HemisphereLightPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 
 	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 	this.groundColor.setValue(this.obj.groundColor.r, this.obj.groundColor.g, this.obj.groundColor.b);

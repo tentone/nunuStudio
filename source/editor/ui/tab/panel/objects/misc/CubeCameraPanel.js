@@ -2,7 +2,7 @@
 
 function CubeCameraPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -38,11 +38,11 @@ function CubeCameraPanel(parent, obj)
 	}
 }
 
-CubeCameraPanel.prototype = Object.create(Panel.prototype);
+CubeCameraPanel.prototype = Object.create(ObjectPanel.prototype);
 
 CubeCameraPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.autoUpdate.setValue(this.obj.autoUpdate);
 	this.resolution.setValue(this.obj.resolution);

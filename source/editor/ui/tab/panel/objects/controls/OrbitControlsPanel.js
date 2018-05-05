@@ -2,7 +2,7 @@
 
 function OrbitControlsPanel(parent, obj)
 {
-	Panel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -131,11 +131,11 @@ function OrbitControlsPanel(parent, obj)
 
 }
 
-OrbitControlsPanel.prototype = Object.create(Panel.prototype);
+OrbitControlsPanel.prototype = Object.create(ObjectPanel.prototype);
 
 OrbitControlsPanel.prototype.updatePanel = function()
 {
-	Panel.prototype.updatePanel.call(this);
+	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.distance.setValue(this.obj.distance);
 	this.maxDistance.setValue(this.obj.maxDistance);

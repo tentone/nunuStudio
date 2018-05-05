@@ -2,7 +2,7 @@
 
 function PanelContainer(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Object inspector", Editor.filePath + "icons/misc/magnifier.png");
+	TabElement.call(this, parent, closeable, container, index, "Inspector", Editor.filePath + "icons/misc/magnifier.png");
 
 	this.element.style.overflow = "auto";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
@@ -136,14 +136,24 @@ PanelContainer.prototype.updateSelection = function()
 		{
 			this.panel = new ObjectPanel(this.element, object);
 		}
-
-		this.panel.updatePanel();
-		this.panel.updateInterface();
 	}
 	else if(object instanceof Resource)
 	{
 		this.panel = new ResourcePanel(this.element, object);
+	}
+	else if(object instanceof THREE.Material)
+	{
+		//TODO <ADD CODE HERE>
+		this.panel = new LockedPanel(this.element, object);
+	}
+	else if(object instanceof THREE.Texture)
+	{
+		//TODO <ADD CODE HERE>
+		this.panel = new LockedPanel(this.element, object);
+	}
 
+	if(this.panel !== null)
+	{
 		this.panel.updatePanel();
 		this.panel.updateInterface();
 	}
