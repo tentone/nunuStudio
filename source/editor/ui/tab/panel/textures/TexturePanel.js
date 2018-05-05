@@ -36,7 +36,6 @@ function TexturePanel(parent, obj)
 	this.wrapS.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "wrapS", self.wrapS.getValue()));
-		self.updatePreview();
 	});
 	this.form.add(this.wrapS);
 	this.form.nextRow();
@@ -51,7 +50,6 @@ function TexturePanel(parent, obj)
 	this.wrapT.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "wrapT", self.wrapT.getValue()));
-		self.updatePreview();
 	});
 	this.form.add(this.wrapT);
 	this.form.nextRow();
@@ -66,7 +64,6 @@ function TexturePanel(parent, obj)
 	{
 		var value = self.repeat.getValue();
 		self.obj.repeat.set(value.x, value.y);
-		self.updatePreview();
 	});
 	this.form.add(this.repeat);
 	this.form.nextRow();
@@ -81,7 +78,6 @@ function TexturePanel(parent, obj)
 	{
 		var value = self.offset.getValue();
 		self.obj.offset.set(value.x, value.y);
-		self.updatePreview();
 	});
 	this.form.add(this.offset);
 	this.form.nextRow();
@@ -96,7 +92,6 @@ function TexturePanel(parent, obj)
 	{
 		var value = self.center.getValue();
 		self.obj.center.set(value.x, value.y);
-		self.updatePreview();
 	});
 	this.form.add(this.center);
 	this.form.nextRow();
@@ -109,7 +104,6 @@ function TexturePanel(parent, obj)
 	this.rotation.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "rotation", self.rotation.getValue()));
-		self.updatePreview();
 	});
 	this.form.add(this.rotation);
 	this.form.nextRow();
@@ -127,7 +121,6 @@ function TexturePanel(parent, obj)
 	this.minFilter.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "minFilter", self.minFilter.getValue()));
-		self.updatePreview();
 	});
 	this.form.add(this.minFilter);
 	this.form.nextRow();
@@ -141,7 +134,6 @@ function TexturePanel(parent, obj)
 	this.magFilter.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "magFilter", self.magFilter.getValue()));
-		self.updatePreview();
 	});
 	this.form.add(this.magFilter);
 	this.form.nextRow();
@@ -153,7 +145,6 @@ function TexturePanel(parent, obj)
 	this.premultiplyAlpha.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
-		self.updatePreview();
 	});
 	this.form.add(this.premultiplyAlpha);
 	this.form.nextRow();
@@ -165,7 +156,6 @@ function TexturePanel(parent, obj)
 	this.flipY.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "flipY", self.flipY.getValue()));
-		self.updatePreview();
 	});
 	this.form.add(this.flipY);
 	this.form.nextRow();
