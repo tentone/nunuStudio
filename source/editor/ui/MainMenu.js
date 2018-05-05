@@ -100,31 +100,53 @@ function MainMenu(parent)
 		//Android
 		if(Nunu.developmentMode())
 		{
-			publish.addOption("Android", function()
+			var android = publish.addMenu("Android", Editor.filePath + "icons/platform/android.png");
+
+			var callback = function(error, stdout, stderr)
 			{
-				//FileSystem.chooseFile(function(files)
-				//{
+				console.log(stdout, stderr);
+			}
+
+			android.addOption("Run on device", function()
+			{
+				var system = require("child_process");
+				var name = Editor.program.name !== "" ? Editor.program.name : "program";
+				var author = Editor.program.author !== "" ? Editor.program.author : "nunustudio";
+				var packageName = "com." + author + "." + name;
+
+				FileSystem.deleteFolder("temp");
+				system.execSync("cordova create temp " + packageName + " " + name, callback);
+				system.execSync("cd temp && cordova platform add android", callback);
+				FileSystem.deleteFolder("./temp/www");
+				Editor.exportWebProject("./temp/www");
+				system.execSync("cd temp && cordova build android", callback);
+				system.execSync("cd temp && cordova run", callback);
+				FileSystem.deleteFolder("temp");
+
+				//system.execSync("cordova build android --release -- --keystore="..\android.keystore" --storePassword=android --alias=mykey");
+				
+				Editor.alert("Program sent to device!");
+			});
+
+			android.addOption("Unsigned APK", function()
+			{
+				FileSystem.chooseFile(function(files)
+				{
 					try
 					{
 						var system = require("child_process");
-
 						var name = Editor.program.name !== "" ? Editor.program.name : "program";
 						var author = Editor.program.author !== "" ? Editor.program.author : "nunustudio";
 						var packageName = "com." + author + "." + name;
 
-						var callback = function(error, stdout, stderr)
-						{
-							console.log(stdout, stderr);
-						}
-
+						FileSystem.deleteFolder("temp");
 						system.execSync("cordova create temp " + packageName + " " + name, callback);
 						system.execSync("cd temp && cordova platform add android", callback);
 						FileSystem.deleteFolder("./temp/www");
 						Editor.exportWebProject("./temp/www");
 						system.execSync("cd temp && cordova build android", callback);
-						//system.execSync("cd temp && cordova run", callback);
-						//system.execSync("cordova build android --release -- --keystore="..\android.keystore" --storePassword=android --alias=mykey");
-						//FileSystem.deleteFolder("temp");
+						FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", files[0].path);
+						FileSystem.deleteFolder("temp");
 
 						Editor.alert("Exported android project");
 					}
@@ -132,8 +154,8 @@ function MainMenu(parent)
 					{
 						Editor.alert("Error exporting project (" + e + ")");
 					}
-				//}, ".apk", Editor.program.name);
-			}, Editor.filePath + "icons/platform/android.png");
+				}, ".apk", Editor.program.name);
+			});
 		}
 
 		//Publish windows
