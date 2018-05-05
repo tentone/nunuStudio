@@ -12,12 +12,9 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	this.width.size.set(120, 18);
 	this.width.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "width", self.width.getValue()));
-			self.texture.updateSize();
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "width", self.width.getValue()));
+		self.texture.updateSize();
+		self.updatePreview();
 	});
 	this.form.add(this.width);
 	this.form.nextRow();
@@ -28,12 +25,9 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	this.height.size.set(120, 18);
 	this.height.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "height", self.height.getValue()));
-			self.texture.updateSize();
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "height", self.height.getValue()));
+		self.texture.updateSize();
+		self.updatePreview();
 	});
 	this.form.add(this.height);
 	this.form.nextRow();

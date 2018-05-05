@@ -122,6 +122,7 @@ function MainMenu(parent)
 						FileSystem.deleteFolder("./temp/www");
 						Editor.exportWebProject("./temp/www");
 						system.execSync("cd temp && cordova build android", callback);
+						//system.execSync("cd temp && cordova run", callback);
 						//system.execSync("cordova build android --release -- --keystore="..\android.keystore" --storePassword=android --alias=mykey");
 						//FileSystem.deleteFolder("temp");
 

@@ -388,6 +388,10 @@ include("editor/ui/tab/texture/SpriteSheetTextureEditor.js");
 include("editor/ui/tab/panel/PanelContainer.js");
 include("editor/ui/tab/panel/Panel.js");
 
+include("editor/ui/tab/panel/textures/TexturePanel.js");
+
+include("editor/ui/tab/panel/materials/MaterialPanel.js");
+
 include("editor/ui/tab/panel/resources/ResourcePanel.js");
 
 include("editor/ui/tab/panel/objects/ObjectPanel.js");

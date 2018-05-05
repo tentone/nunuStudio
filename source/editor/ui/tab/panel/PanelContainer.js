@@ -143,13 +143,11 @@ PanelContainer.prototype.updateSelection = function()
 	}
 	else if(object instanceof THREE.Material)
 	{
-		//TODO <ADD CODE HERE>
-		this.panel = new LockedPanel(this.element, object);
+		this.panel = new MaterialPanel(this.element, object);
 	}
 	else if(object instanceof THREE.Texture)
 	{
-		//TODO <ADD CODE HERE>
-		this.panel = new LockedPanel(this.element, object);
+		this.panel = new TexturePanel(this.element, object);
 	}
 
 	if(this.panel !== null)

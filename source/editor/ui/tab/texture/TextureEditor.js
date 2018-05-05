@@ -85,11 +85,8 @@ function TextureEditor(parent, closeable, container, index)
 	this.wrapS.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
 	this.wrapS.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "wrapS", self.wrapS.getValue()));
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "wrapS", self.wrapS.getValue()));
+		self.updatePreview();
 	});
 	this.form.add(this.wrapS);
 	this.form.nextRow();
@@ -103,11 +100,8 @@ function TextureEditor(parent, closeable, container, index)
 	this.wrapT.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
 	this.wrapT.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "wrapT", self.wrapT.getValue()));
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "wrapT", self.wrapT.getValue()));
+		self.updatePreview();
 	});
 	this.form.add(this.wrapT);
 	this.form.nextRow();
@@ -120,12 +114,9 @@ function TextureEditor(parent, closeable, container, index)
 	this.repeat.setStep(0.01);
 	this.repeat.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var value = self.repeat.getValue();
-			self.texture.repeat.set(value.x, value.y);
-			self.updatePreview();
-		}
+		var value = self.repeat.getValue();
+		self.texture.repeat.set(value.x, value.y);
+		self.updatePreview();
 	});
 	this.form.add(this.repeat);
 	this.form.nextRow();
@@ -138,12 +129,9 @@ function TextureEditor(parent, closeable, container, index)
 	this.offset.setStep(0.01);
 	this.offset.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var value = self.offset.getValue();
-			self.texture.offset.set(value.x, value.y);
-			self.updatePreview();
-		}
+		var value = self.offset.getValue();
+		self.texture.offset.set(value.x, value.y);
+		self.updatePreview();
 	});
 	this.form.add(this.offset);
 	this.form.nextRow();
@@ -156,12 +144,9 @@ function TextureEditor(parent, closeable, container, index)
 	this.center.setStep(0.01);
 	this.center.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			var value = self.center.getValue();
-			self.texture.center.set(value.x, value.y);
-			self.updatePreview();
-		}
+		var value = self.center.getValue();
+		self.texture.center.set(value.x, value.y);
+		self.updatePreview();
 	});
 	this.form.add(this.center);
 	this.form.nextRow();
@@ -173,11 +158,8 @@ function TextureEditor(parent, closeable, container, index)
 	this.rotation.setStep(0.1);
 	this.rotation.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "rotation", self.rotation.getValue()));
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "rotation", self.rotation.getValue()));
+		self.updatePreview();
 	});
 	this.form.add(this.rotation);
 	this.form.nextRow();
@@ -194,11 +176,8 @@ function TextureEditor(parent, closeable, container, index)
 	this.minFilter.addValue("MIP Linear Linear", THREE.LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "minFilter", self.minFilter.getValue()));
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "minFilter", self.minFilter.getValue()));
+		self.updatePreview();
 	});
 	this.form.add(this.minFilter);
 	this.form.nextRow();
@@ -211,11 +190,8 @@ function TextureEditor(parent, closeable, container, index)
 	this.magFilter.addValue("Linear", THREE.LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "magFilter", self.magFilter.getValue()));
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "magFilter", self.magFilter.getValue()));
+		self.updatePreview();
 	});
 	this.form.add(this.magFilter);
 	this.form.nextRow();
@@ -226,11 +202,8 @@ function TextureEditor(parent, closeable, container, index)
 	this.premultiplyAlpha.size.set(15, 15);
 	this.premultiplyAlpha.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
+		self.updatePreview();
 	});
 	this.form.add(this.premultiplyAlpha);
 	this.form.nextRow();
@@ -241,11 +214,8 @@ function TextureEditor(parent, closeable, container, index)
 	this.flipY.size.set(15, 15);
 	this.flipY.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "flipY", self.flipY.getValue()));
-			self.updatePreview();
-		}
+		Editor.history.add(new ChangeAction(self.texture, "flipY", self.flipY.getValue()));
+		self.updatePreview();
 	});
 	this.form.add(this.flipY);
 	this.form.nextRow();

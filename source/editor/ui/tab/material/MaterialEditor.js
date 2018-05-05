@@ -83,11 +83,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "name", self.name.getText()));
-			Editor.updateViewsGUI();
-		}
+		Editor.history.add(new ChangeAction(self.material, "name", self.name.getText()));
+		Editor.updateViewsGUI();
 	});
 	this.form.add(this.name);
 	this.form.nextRow();
@@ -102,11 +99,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.side.addValue("Double", THREE.DoubleSide);
 	this.side.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "side", self.side.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "side", self.side.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.side);
 	this.form.nextRow();
@@ -117,11 +111,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.depthTest.size.set(15, 15);
 	this.depthTest.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "depthTest", self.depthTest.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "depthTest", self.depthTest.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.depthTest);
 	this.form.nextRow();
@@ -132,11 +123,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.depthWrite.size.set(15, 15);
 	this.depthWrite.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.depthWrite);
 	this.form.nextRow();
@@ -155,11 +143,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.depthFunc.addValue("Not equal", THREE.NotEqualDepth);
 	this.depthFunc.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "depthFunc", self.depthFunc.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "depthFunc", self.depthFunc.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.depthFunc);
 	this.form.nextRow();
@@ -170,11 +155,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.transparent.size.set(15, 15);
 	this.transparent.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "transparent", self.transparent.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "transparent", self.transparent.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.transparent);
 	this.form.nextRow();
@@ -187,11 +169,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.opacity.setStep(0.01);
 	this.opacity.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "opacity", self.opacity.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "opacity", self.opacity.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.opacity);
 	this.form.nextRow();
@@ -204,11 +183,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.alphaTest.setStep(0.01);
 	this.alphaTest.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "alphaTest", self.alphaTest.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "alphaTest", self.alphaTest.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.alphaTest);
 	this.form.nextRow();
@@ -225,11 +201,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.blending.addValue("Multiply", THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			Editor.history.add(new ChangeAction(self.material, "blending", self.blending.getValue()));
-			self.material.needsUpdate = true;
-		}
+		Editor.history.add(new ChangeAction(self.material, "blending", self.blending.getValue()));
+		self.material.needsUpdate = true;
 	});
 	this.form.add(this.blending);
 	this.form.nextRow();

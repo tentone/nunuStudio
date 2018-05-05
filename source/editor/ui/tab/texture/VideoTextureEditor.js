@@ -14,10 +14,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	this.volume.setStep(0.01);
 	this.volume.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			self.texture.setVolume(self.volume.getValue());
-		}
+		self.texture.setVolume(self.volume.getValue());
 	});
 	this.form.add(this.volume);
 	this.form.nextRow();
@@ -30,10 +27,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	this.playbackRate.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.playbackRate.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			self.texture.setPlaybackRate(self.playbackRate.getValue());
-		}
+		self.texture.setPlaybackRate(self.playbackRate.getValue());
 	});
 	this.form.add(this.playbackRate);
 	this.form.nextRow();
@@ -44,10 +38,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	this.autoplay.size.set(15, 15);
 	this.autoplay.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			Editor.history.add(new ChangeAction(self.texture, "autoplay", self.autoplay.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.texture, "autoplay", self.autoplay.getValue()));
 	});
 	this.form.add(this.autoplay);
 	this.form.nextRow();
@@ -58,10 +49,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	this.loop.size.set(15, 15);
 	this.loop.setOnChange(function()
 	{
-		if(self.texture !== null)
-		{
-			self.texture.setLoop(self.loop.getValue());
-		}
+		self.texture.setLoop(self.loop.getValue());
 	});
 	this.form.add(this.loop);
 	this.form.nextRow();
