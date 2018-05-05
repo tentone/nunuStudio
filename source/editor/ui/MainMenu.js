@@ -116,12 +116,11 @@ function MainMenu(parent)
 
 				FileSystem.deleteFolder("temp");
 				system.execSync("cordova create temp " + packageName + " " + name, callback);
-				system.execSync("cd temp && cordova platform add android", callback);
 				FileSystem.deleteFolder("./temp/www");
 				Editor.exportWebProject("./temp/www");
+				system.execSync("cd temp && cordova platform add android", callback);
 				system.execSync("cd temp && cordova build android", callback);
 				system.execSync("cd temp && cordova run", callback);
-				FileSystem.deleteFolder("temp");
 
 				//system.execSync("cordova build android --release -- --keystore="..\android.keystore" --storePassword=android --alias=mykey");
 				
@@ -141,12 +140,11 @@ function MainMenu(parent)
 
 						FileSystem.deleteFolder("temp");
 						system.execSync("cordova create temp " + packageName + " " + name, callback);
-						system.execSync("cd temp && cordova platform add android", callback);
 						FileSystem.deleteFolder("./temp/www");
 						Editor.exportWebProject("./temp/www");
+						system.execSync("cd temp && cordova platform add android", callback);
 						system.execSync("cd temp && cordova build android", callback);
 						FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", files[0].path);
-						FileSystem.deleteFolder("temp");
 
 						Editor.alert("Exported android project");
 					}
