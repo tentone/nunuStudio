@@ -137,7 +137,13 @@ PanelContainer.prototype.updateSelection = function()
 			this.panel = new ObjectPanel(this.element, object);
 		}
 
-		this.panel.form.updateInterface();
+		this.panel.updatePanel();
+		this.panel.updateInterface();
+	}
+	else if(object instanceof Resource)
+	{
+		this.panel = new ResourcePanel(this.element, object);
+
 		this.panel.updatePanel();
 		this.panel.updateInterface();
 	}

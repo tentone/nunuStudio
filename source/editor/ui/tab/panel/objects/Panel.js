@@ -9,7 +9,6 @@ function Panel(parent, obj)
 	this.element.style.left = "0px";
 	this.element.style.width = "100%";
 	this.element.style.height = "100%";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	this.preventDragEvents();
 
@@ -178,7 +177,15 @@ Panel.prototype.attach = function(obj)
 //Update panel ui
 Panel.prototype.updateInterface = function()
 {
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
+	if(this.visible)
+	{
+		this.element.style.visibility = "visible";
+		this.form.updateInterface();
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+	}
 };
 
 //Update panel information

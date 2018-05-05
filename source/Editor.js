@@ -387,6 +387,8 @@ include("editor/ui/tab/texture/SpriteSheetTextureEditor.js");
 
 include("editor/ui/tab/panel/PanelContainer.js");
 
+include("editor/ui/tab/panel/resources/ResourcePanel.js");
+
 include("editor/ui/tab/panel/objects/Panel.js");
 include("editor/ui/tab/panel/objects/LockedPanel.js");
 include("editor/ui/tab/panel/objects/ObjectPanel.js");
