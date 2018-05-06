@@ -212,8 +212,14 @@ function MainMenu(parent)
 						//FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
 					}
 
+					//Clean files created
+					if(FileSystem.fileExists("./temp"))
+					{
+						FileSystem.deleteFolder("./temp");
+					}
+
 					Editor.alert("Exported android project");
-				}, 50);
+				}, 100);
 			}
 
 			android.addOption("Run on device", function()

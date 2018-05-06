@@ -698,7 +698,6 @@ Editor.initialize = function()
 				{
 					return;
 				}
-
 				Editor.undo();
 			}
 			else if(key === Keyboard.Y)
@@ -707,7 +706,6 @@ Editor.initialize = function()
 				{
 					return;
 				}
-				
 				Editor.redo();
 			}
 		}
