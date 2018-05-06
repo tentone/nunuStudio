@@ -106,7 +106,7 @@ PanelContainer.prototype.updateSelection = function()
 		}
 		else if(object instanceof THREE.Audio)
 		{
-			this.panel = new AudioPanel(this.element, object);
+			this.panel = new AudioEmitterPanel(this.element, object);
 		}
 		else if(object instanceof Scene)
 		{
@@ -139,7 +139,14 @@ PanelContainer.prototype.updateSelection = function()
 	}
 	else if(object instanceof Resource)
 	{
-		this.panel = new ResourcePanel(this.element, object);
+		if(object instanceof Audio)
+		{
+			this.panel = new AudioPanel(this.element, object);
+		}
+		else
+		{
+			this.panel = new ResourcePanel(this.element, object);
+		}
 	}
 	else if(object instanceof THREE.Material)
 	{

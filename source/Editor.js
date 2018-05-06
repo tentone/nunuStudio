@@ -393,6 +393,7 @@ include("editor/ui/tab/panel/textures/TexturePanel.js");
 include("editor/ui/tab/panel/materials/MaterialPanel.js");
 
 include("editor/ui/tab/panel/resources/ResourcePanel.js");
+include("editor/ui/tab/panel/resources/AudioPanel.js");
 
 include("editor/ui/tab/panel/objects/ObjectPanel.js");
 include("editor/ui/tab/panel/objects/LockedPanel.js");
@@ -400,7 +401,7 @@ include("editor/ui/tab/panel/objects/DrawablePanel.js");
 include("editor/ui/tab/panel/objects/ScenePanel.js");
 include("editor/ui/tab/panel/objects/ScriptPanel.js");
 include("editor/ui/tab/panel/objects/ProgramPanel.js");
-include("editor/ui/tab/panel/objects/audio/AudioPanel.js");
+include("editor/ui/tab/panel/objects/audio/AudioEmitterPanel.js");
 include("editor/ui/tab/panel/objects/physics/PhysicsPanel.js");
 include("editor/ui/tab/panel/objects/devices/LeapPanel.js");
 include("editor/ui/tab/panel/objects/devices/KinectPanel.js");

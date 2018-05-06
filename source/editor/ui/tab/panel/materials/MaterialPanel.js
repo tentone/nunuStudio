@@ -155,7 +155,6 @@ function MaterialPanel(parent, obj)
 
 MaterialPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel information
 MaterialPanel.prototype.updatePanel = function()
 {
 	this.name.setText(this.obj.name);

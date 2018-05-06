@@ -102,29 +102,117 @@ function MainMenu(parent)
 		{
 			var android = publish.addMenu("Android", Editor.filePath + "icons/platform/android.png");
 
-			var callback = function(error, stdout, stderr)
-			{
-				console.log(stdout, stderr);
-			}
+			var RUN = 100;
+			var EXPORT_UNSIGNED = 101;
+			var EXPORT_SIGNED = 102;
 
-			android.addOption("Run on device", function()
+			var buildAndroid = function(mode, outputPath)
 			{
 				var system = require("child_process");
 				var name = Editor.program.name !== "" ? Editor.program.name : "program";
 				var author = Editor.program.author !== "" ? Editor.program.author : "nunustudio";
 				var packageName = "com." + author + "." + name;
 
-				FileSystem.deleteFolder("temp");
-				system.execSync("cordova create temp " + packageName + " " + name, callback);
-				FileSystem.deleteFolder("./temp/www");
-				Editor.exportWebProject("./temp/www");
-				system.execSync("cd temp && cordova platform add android", callback);
-				system.execSync("cd temp && cordova build android", callback);
-				system.execSync("cd temp && cordova run", callback);
+				//Delete old project data
+				if(FileSystem.fileExists("./temp"))
+				{
+					FileSystem.deleteFolder("./temp");
+				}
 
-				//system.execSync("cordova build android --release -- --keystore="..\android.keystore" --storePassword=android --alias=mykey");
-				
-				Editor.alert("Program sent to device!");
+				//Create cordova project
+				var output = system.execSync("cordova create temp " + packageName + " " + name).toString();
+				if(output.indexOf("Creating") === -1)
+				{
+					console.error("nunuStudio: Failed to create cordova project.");
+				}
+
+				/*
+				//Check requirements
+				var output = system.execSync("cordova requirements", {cwd:"./temp"}).toString();
+				if(output.indexOf("Java JDK: installed") === -1)
+				{
+					console.error("nunuStudio: Missing java JDK (get it at http://www.oracle.com/technetwork/java/javase/downloads/index.html)");
+				}
+				if(output.indexOf("Android SDK: installed true") === -1)
+				{
+					console.error("nunuStudio: Missing Android SDK (get it at https://developer.android.com/studio/)");
+				}
+
+				//Supported Android SDK versions
+				var versions = output.split("android-");
+				versions.shift();
+				for(var i = 0; i < versions.length; i++)
+				{
+					versions[i] = Number.parseInt(versions[i])
+				}
+				*/
+
+				//Export web code
+				if(FileSystem.fileExists("./temp/www"))
+				{
+					FileSystem.deleteFolder("./temp/www");
+				}
+				Editor.exportWebProject("./temp/www");
+
+				//Android platform
+				var output = system.execSync("cordova platform add android", {cwd:"./temp"}).toString();
+				if(output.indexOf("Android project created") === -1)
+				{
+					console.error("nunuStudio: Failed to create cordova android project.");
+				}
+
+				//Send code to device
+				if(mode === RUN)
+				{
+					//Build code
+					var output = system.execSync("cordova build android", {cwd:"./temp"}).toString();
+					if(output.indexOf("BUILD SUCCESSFUL") === -1)
+					{
+						console.error("nunuStudio: Failed to build android project.");
+					}
+
+					//Launch on device
+					var output = system.execSync("cordova run android", {cwd:"./temp"}).toString();
+					if(output.indexOf("LAUNCH SUCCESS") === -1)
+					{
+						console.error("nunuStudio: Failed to launch android application on device.");
+					}
+				}
+				//Export test version
+				else if(mode === EXPORT_UNSIGNED)
+				{
+					var output = system.execSync("cordova build android", {cwd:"./temp"}).toString();
+					if(output.indexOf("BUILD SUCCESSFUL") === -1)
+					{
+						console.error("nunuStudio: Failed to build android project.");
+					}
+
+					FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
+				}
+				//Export signed version
+				else if(mode === EXPORT_SIGNED)
+				{
+					var output = system.execSync("cordova build android --release -- --keystore=\"..\\android.keystore\" --storePassword=android --alias=mykey", {cwd:"./temp"}).toString();
+					if(output.indexOf("BUILD SUCCESSFUL") === -1)
+					{
+						console.error("nunuStudio: Failed to build android project.");
+					}
+
+					//FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
+				}
+			};
+
+			android.addOption("Run on device", function()
+			{
+				try
+				{
+					buildAndroid(RUN);
+					Editor.alert("Program sent to device!");
+				}
+				catch(e)
+				{
+					Editor.alert("Error exporting project (" + e + ")");
+				}
 			});
 
 			android.addOption("Unsigned APK", function()
@@ -133,19 +221,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						var system = require("child_process");
-						var name = Editor.program.name !== "" ? Editor.program.name : "program";
-						var author = Editor.program.author !== "" ? Editor.program.author : "nunustudio";
-						var packageName = "com." + author + "." + name;
-
-						FileSystem.deleteFolder("temp");
-						system.execSync("cordova create temp " + packageName + " " + name, callback);
-						FileSystem.deleteFolder("./temp/www");
-						Editor.exportWebProject("./temp/www");
-						system.execSync("cd temp && cordova platform add android", callback);
-						system.execSync("cd temp && cordova build android", callback);
-						FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", files[0].path);
-
+						buildAndroid(EXPORT_UNSIGNED, files[0].path);
 						Editor.alert("Exported android project");
 					}
 					catch(e)

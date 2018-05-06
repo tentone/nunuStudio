@@ -37,7 +37,6 @@ function ResourcePanel(parent, obj)
 
 ResourcePanel.prototype = Object.create(Panel.prototype);
 
-//Update panel information
 ResourcePanel.prototype.updatePanel = function()
 {
 	this.name.setText(this.obj.name);

@@ -163,7 +163,6 @@ function TexturePanel(parent, obj)
 
 TexturePanel.prototype = Object.create(Panel.prototype);
 
-//Update panel information
 TexturePanel.prototype.updatePanel = function()
 {
 	this.name.setText(this.obj.name);

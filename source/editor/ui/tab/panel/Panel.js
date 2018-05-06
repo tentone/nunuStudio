@@ -10,8 +10,7 @@ function Panel(parent, obj)
 	this.element.style.width = "100%";
 	this.element.style.height = "100%";
 
-	this.obj = obj;
-
+	this.attach(obj);
 	this.preventDragEvents();
 
 	this.form = new Form(this.element);

@@ -1,6 +1,6 @@
 "use strict";
 
-function AudioPanel(parent, obj)
+function AudioEmitterPanel(parent, obj)
 {
 	ObjectPanel.call(this, parent, obj);
 
@@ -63,9 +63,9 @@ function AudioPanel(parent, obj)
 	this.form.nextRow();
 }
 
-AudioPanel.prototype = Object.create(ObjectPanel.prototype);
+AudioEmitterPanel.prototype = Object.create(ObjectPanel.prototype);
 
-AudioPanel.prototype.destroy = function()
+AudioEmitterPanel.prototype.destroy = function()
 {
 	try
 	{
@@ -75,7 +75,7 @@ AudioPanel.prototype.destroy = function()
 	catch(e){}
 };
 
-AudioPanel.prototype.updatePanel = function()
+AudioEmitterPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 
