@@ -2247,7 +2247,6 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile(Editor.runtimePath + "logo.png", dir + "/logo.png");
 	FileSystem.copyFile(Editor.runtimePath + "index.html", dir + "/index.html");
 	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : "../build/nunu.min.js", dir + "/nunu.min.js");
-	
 	Editor.saveProgram(dir + "/app.nsp", true, true, true);
 };
 
