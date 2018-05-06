@@ -119,6 +119,8 @@ function MainMenu(parent)
 					FileSystem.deleteFolder("./temp");
 				}
 
+				setTimeout(function()
+				{
 				//Create cordova project
 				var output = system.execSync("cordova create temp " + packageName + " " + name).toString();
 				if(output.indexOf("Creating") === -1)
@@ -146,7 +148,8 @@ function MainMenu(parent)
 					versions[i] = Number.parseInt(versions[i])
 				}
 				*/
-
+				setTimeout(function()
+				{
 				//Export web code
 				if(FileSystem.fileExists("./temp/www"))
 				{
@@ -154,6 +157,8 @@ function MainMenu(parent)
 				}
 				Editor.exportWebProject("./temp/www");
 
+				setTimeout(function()
+				{
 				//Android platform
 				var output = system.execSync("cordova platform add android", {cwd:"./temp"}).toString();
 				if(output.indexOf("Android project created") === -1)
@@ -161,6 +166,8 @@ function MainMenu(parent)
 					console.error("nunuStudio: Failed to create cordova android project.");
 				}
 
+				setTimeout(function()
+				{
 				//Send code to device
 				if(mode === RUN)
 				{
@@ -200,6 +207,10 @@ function MainMenu(parent)
 
 					//FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
 				}
+				}, 500);
+				}, 500);
+				}, 500);
+				}, 500);
 			};
 
 			android.addOption("Run on device", function()
