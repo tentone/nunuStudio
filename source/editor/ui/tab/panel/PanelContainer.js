@@ -143,6 +143,10 @@ PanelContainer.prototype.updateSelection = function()
 		{
 			this.panel = new AudioPanel(this.element, object);
 		}
+		else if(object instanceof Image)
+		{
+			this.panel = new ImagePanel(this.element, object);
+		}
 		else
 		{
 			this.panel = new ResourcePanel(this.element, object);
