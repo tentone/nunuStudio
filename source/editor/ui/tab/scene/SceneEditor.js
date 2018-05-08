@@ -677,28 +677,20 @@ SceneEditor.prototype.render = function()
 	}
 
 	var renderer = this.renderer;
-	renderer.autoClear = true;
-	renderer.autoClearColor = true;
-	renderer.autoClearDepth = true;
-	renderer.autoClearStencil = true;
+	renderer.autoClear = false;
 
 	if(this.state === SceneEditor.EDITING)
 	{
 		//Render scene
 		renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
+		renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
+		renderer.setClearColor(this.scene.background);
+		renderer.clear(true, true, true);
 		renderer.render(this.scene, this.camera);
-
-		//Auto clear false
-		renderer.autoClearColor = false;
-		renderer.autoClearStencil = false;
-		renderer.autoClearDepth = false;
 
 		//Render tools
 		renderer.render(this.helperScene, this.camera);
 		renderer.render(this.toolScene, this.camera);
-
-		//Clear depth
-		renderer.autoClearDepth = true;
 
 		//Draw camera cube
 		if(Editor.settings.editor.cameraRotationCube)
@@ -710,6 +702,7 @@ SceneEditor.prototype.render = function()
 				this.controls.setOrientation(code);
 			}
 
+			renderer.clear(false, true, false);
 			this.orientation.updateRotation(this.controls);
 			this.orientation.render(renderer, this.canvas);
 		}
@@ -739,7 +732,7 @@ SceneEditor.prototype.render = function()
 
 				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 				renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				
+				renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
 				camera.render(renderer, scene);
 			}
 			//Cube camera
@@ -751,6 +744,7 @@ SceneEditor.prototype.render = function()
 				{
 					renderer.setViewport(x, y, w, h);
 					renderer.setScissor(x, y, w, h);
+					renderer.clear(true, true, true);
 					cameras[index].updateMatrixWorld();
 					cameras[index].render(renderer, scene);
 				}
@@ -780,13 +774,9 @@ SceneEditor.prototype.render = function()
 					camera.updateProjectionMatrix();
 					camera.resize(width, height);
 
-					renderer.autoClearColor = camera.clearColor;
-					renderer.autoClearDepth = camera.clearDepth;
-					renderer.autoClearStencil = camera.clearStencil;
-
 					renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 					renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-					
+					renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
 					camera.render(renderer, scene);
 				}
 			}
