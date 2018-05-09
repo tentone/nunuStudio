@@ -166,7 +166,7 @@ function TreeElement(container)
 				context.addOption("Create scene", function()
 				{
 					Editor.program.addDefaultScene();
-					Editor.updateViewsGUI();
+					Editor.updateObjectsViews();
 				});			
 			}
 			else if(self.obj instanceof THREE.Object3D)
@@ -242,7 +242,7 @@ function TreeElement(container)
 
 					physics.add(object);
 
-					Editor.updateViewsGUI();
+					Editor.updateObjectsViews();
 				}
 
 				var physics = context.addMenu("Add physics");
@@ -276,14 +276,14 @@ function TreeElement(container)
 				autoUpdate.addOption("Static", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
-					Editor.updateViewsGUI();
+					Editor.updateObjectsViews();
 				});
 
 				//Set object and children to dynamic mode
 				autoUpdate.addOption("Dynamic", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, true);
-					Editor.updateViewsGUI();
+					Editor.updateObjectsViews();
 				});
 
 				var shadow = context.addMenu("Shadows");
@@ -294,7 +294,7 @@ function TreeElement(container)
 					ObjectUtils.setShadowCasting(self.obj, true);
 					ObjectUtils.setShadowReceiving(self.obj, true);
 
-					Editor.updateViewsGUI();
+					Editor.updateObjectsViews();
 				});
 
 				//Set object and children shadow casting mode
@@ -303,7 +303,7 @@ function TreeElement(container)
 					ObjectUtils.setShadowCasting(self.obj, false);
 					ObjectUtils.setShadowReceiving(self.obj, false);
 
-					Editor.updateViewsGUI();
+					Editor.updateObjectsViews();
 				});
 
 				//Duplicate object
@@ -316,7 +316,7 @@ function TreeElement(container)
 					});
 
 					Editor.history.add(new ObjectAddedAction(obj, self.obj.parent));
-					Editor.gui.treeView.updateView();
+					Editor.gui.treeView.updateObjectsView();
 				});
 
 				//Copy object
@@ -419,7 +419,7 @@ function TreeElement(container)
 					{
 						var index = self.obj.parent.children.indexOf(self.obj);
 						Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-						self.container.updateView();
+						self.container.updateObjectsView();
 					}
 				}
 				//Bellow
@@ -429,7 +429,7 @@ function TreeElement(container)
 					{
 						var index = self.obj.parent.children.indexOf(self.obj) + 1;
 						Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-						self.container.updateView();
+						self.container.updateObjectsView();
 					}
 				}
 				//Inside
@@ -438,7 +438,7 @@ function TreeElement(container)
 					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
 					{
 						Editor.history.add(new ObjectMovedAction(obj, self.obj));	
-						self.container.updateView();
+						self.container.updateObjectsView();
 					}
 				}
 			}

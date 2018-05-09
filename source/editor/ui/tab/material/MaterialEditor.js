@@ -84,7 +84,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.name.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "name", self.name.getText()));
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	});
 	this.form.add(this.name);
 	this.form.nextRow();
@@ -301,7 +301,7 @@ MaterialEditor.prototype.update = function()
 		//If needs update file metadata
 		if(this.material.needsUpdate)
 		{
-			Editor.updateViewsGUI();
+			Editor.updateObjectsViews();
 			
 			if(this.material.envMap != null)
 			{

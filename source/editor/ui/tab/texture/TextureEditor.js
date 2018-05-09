@@ -70,7 +70,7 @@ function TextureEditor(parent, closeable, container, index)
 		{
 			Editor.history.add(new ChangeAction(self.texture, "name", self.name.getText()));
 			self.updatePreview();
-			Editor.updateViewsGUI();
+			Editor.updateObjectsViews();
 		}
 	});
 	this.form.add(this.name);

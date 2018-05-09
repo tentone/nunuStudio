@@ -25,13 +25,13 @@ function GeometryAsset(parent)
 		context.addOption("Rename", function()
 		{
 			Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename", self.asset.name)));
-			Editor.updateViewsGUI();
+			Editor.updateObjectsViews();
 		});
 		
 		context.addOption("Delete", function()
 		{
 			Editor.program.removeFont(self.asset, Editor.defaultFont);
-			Editor.updateViewsGUI();
+			Editor.updateObjectsViews();
 		});
 
 		context.addOption("Copy", function()

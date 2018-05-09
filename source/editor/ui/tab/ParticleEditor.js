@@ -60,7 +60,7 @@ function ParticleEditor(parent, closeable, container, index)
 		if(self.particle !== null)
 		{
 			Editor.history.add(new ChangeAction(self.particle, "name", self.name.getText()));
-			Editor.updateViewsGUI();
+			Editor.updateObjectsViews();
 		}
 	});
 	this.form.add(this.name);

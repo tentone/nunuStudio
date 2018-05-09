@@ -91,7 +91,7 @@ AssetExplorer.prototype.updateSelection = function()
 	}
 };
 
-AssetExplorer.prototype.updateView = function()
+AssetExplorer.prototype.updateObjectsView = function()
 {
 	if(!this.active)
 	{

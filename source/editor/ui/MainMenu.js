@@ -353,7 +353,7 @@ function MainMenu(parent)
 						Editor.program.add(program.children[i]);
 					}
 
-					Editor.updateViewsGUI();
+					Editor.updateObjectsViews();
 				};
 
 				if(binary)
@@ -791,7 +791,7 @@ function MainMenu(parent)
 	projectMenu.addOption("Create Scene", function()
 	{
 		Editor.program.addDefaultScene();
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/add.png");
 
 	projectMenu.addOption("Execute script", function()

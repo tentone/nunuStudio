@@ -107,14 +107,14 @@ function SceneEditor(parent, closeable, container, index)
 				var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
 				material.name = texture.name;
 				Editor.history.add(new ChangeAction(object, "material", material));
-				Editor.updateViewsGUI();
+				Editor.updateObjectsViews();
 			}
 			else if(object instanceof THREE.Sprite)
 			{
 				var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
 				material.name = texture.name;
 				Editor.history.add(new ChangeAction(object, "material", material));
-				Editor.updateViewsGUI();
+				Editor.updateObjectsViews();
 			}
 		}
 
@@ -183,7 +183,7 @@ function SceneEditor(parent, closeable, container, index)
 					if(object instanceof THREE.Sprite)
 					{
 						Editor.history.add(new ChangeAction(object, "material", draggedObject));
-						Editor.updateViewsGUI();
+						Editor.updateObjectsViews();
 					}
 				}
 				//Mesh Material
@@ -192,7 +192,7 @@ function SceneEditor(parent, closeable, container, index)
 					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 					{
 						Editor.history.add(new ChangeAction(object, "material", draggedObject));
-						Editor.updateViewsGUI();
+						Editor.updateObjectsViews();
 					}
 				}
 				//Cubemap
@@ -202,7 +202,7 @@ function SceneEditor(parent, closeable, container, index)
 					{
 						Editor.history.add(new ChangeAction(object.material, "envMap", draggedObject));
 						self.reloadContext();
-						Editor.updateViewsGUI();
+						Editor.updateObjectsViews();
 					}
 				}
 				//Texture
@@ -226,7 +226,7 @@ function SceneEditor(parent, closeable, container, index)
 					if(object.font !== undefined)
 					{
 						object.setFont(draggedObject);
-						Editor.updateViewsGUI();
+						Editor.updateObjectsViews();
 					}
 				}
 				//Geometry
@@ -235,7 +235,7 @@ function SceneEditor(parent, closeable, container, index)
 					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 					{
 						Editor.history.add(new ChangeAction(object, "geometry", draggedObject));
-						Editor.updateViewsGUI();
+						Editor.updateObjectsViews();
 					}
 				}
 			}

@@ -85,7 +85,7 @@ function AssetExplorerMenu(parent)
 						animation.name = FileSystem.getFileName(file);
 
 						Editor.addObject(animation);
-						Editor.updateViewsGUI();
+						Editor.updateObjectsViews();
 					}
 					catch(e)
 					{
@@ -135,7 +135,7 @@ function AssetExplorerMenu(parent)
 					texture.name = name;
 
 					Editor.program.addTexture(texture);
-					Editor.updateViewsGUI();
+					Editor.updateObjectsViews();
 				};
 
 				reader.readAsArrayBuffer(file);
@@ -150,7 +150,7 @@ function AssetExplorerMenu(parent)
 		texture.name = "cube";
 		Editor.program.addTexture(texture);
 
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/cube.png");
 
 	//Canvas texture
@@ -160,7 +160,7 @@ function AssetExplorerMenu(parent)
 		texture.name = "canvas";
 		Editor.program.addTexture(texture);
 
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/canvas.png");
 
 	//Video texture
@@ -182,7 +182,7 @@ function AssetExplorerMenu(parent)
 		texture.name = "webcam";
 		Editor.program.addTexture(texture);
 
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/hw/webcam.png");
 
 	texture.updateInterface();
@@ -198,7 +198,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshStandardMaterial();
 		material.name = "standard";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Physical material", function()
@@ -206,7 +206,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshPhysicalMaterial();
 		material.name = "physical";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Phong material", function()
@@ -214,7 +214,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshPhongMaterial();
 		material.name = "phong";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 	
 	material.addOption("Basic material", function()
@@ -222,7 +222,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshBasicMaterial();
 		material.name = "basic";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Toon material", function()
@@ -230,7 +230,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshToonMaterial();
 		material.name = "toon";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Lambert material", function()
@@ -238,7 +238,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshLambertMaterial();
 		material.name = "lambert";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Sprite material", function()
@@ -246,7 +246,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.SpriteMaterial({color: 0xffffff});
 		material.name = "sprite";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/image.png");
 
 	material.addOption("Points material", function()
@@ -254,7 +254,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.PointsMaterial();
 		material.name = "points";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/models/points.png");
 
 	material.addOption("Line material", function()
@@ -262,7 +262,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.LineBasicMaterial();
 		material.name = "line";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/nodes.png");
 
 	material.addOption("Line Dashed material", function()
@@ -270,7 +270,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.LineDashedMaterial();
 		material.name = "line";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/nodes.png");
 
 	material.addOption("Shader material", function()
@@ -278,7 +278,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.ShaderMaterial();
 		material.name = "shader";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/script/script.png");
 
 	var others = material.addMenu("Others");
@@ -288,7 +288,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshNormalMaterial();
 		material.name = "normal";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 	
 	others.addOption("Depth material", function()
@@ -296,7 +296,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshDepthMaterial();
 		material.name = "depth";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	others.addOption("Distance material", function()
@@ -304,7 +304,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshDistanceMaterial();
 		material.name = "distance";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	others.addOption("Shadow material", function()
@@ -312,7 +312,7 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.ShadowMaterial();
 		material.name = "shadow";
 		Editor.program.addMaterial(material);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.updateInterface();

@@ -13,7 +13,7 @@ function ResourcePanel(parent, obj)
 	this.name.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "name", self.name.getText()));
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	});
 	this.form.add(this.name);
 	this.form.nextRow();

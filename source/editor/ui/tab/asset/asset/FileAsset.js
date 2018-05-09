@@ -27,7 +27,7 @@ function FileAsset(parent)
 			if(self.asset !== null)
 			{
 				Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename file", self.asset.name)));
-				Editor.updateViewsGUI();
+				Editor.updateObjectsViews();
 			}
 		});
 		
@@ -36,7 +36,7 @@ function FileAsset(parent)
 			if(self.asset !== null && confirm("Delete file?"))
 			{
 				Editor.program.removeResource(self.asset);
-				Editor.updateViewsGUI();
+				Editor.updateObjectsViews();
 			}
 		});
 

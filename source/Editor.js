@@ -722,7 +722,7 @@ Editor.initialize = function()
 	Editor.manager.create();
 
 	//Update views and start update loop
-	Editor.updateViewsGUI();
+	Editor.updateObjectsViews();
 	Editor.update();
 };
 
@@ -815,7 +815,7 @@ Editor.addObject = function(obj, parent)
 	//TODO <Check for resources here and create a history action to add resources and objects>
 
 	Editor.history.add(new ObjectAddedAction(obj, parent));
-	Editor.updateViewsGUI();
+	Editor.updateObjectsViews();
 };
 
 //Rename object, if none passed as argument selected object is used
@@ -839,7 +839,7 @@ Editor.renameObject = function(obj)
 		if(name !== null && name !== "")
 		{
 			Editor.history.add(new ChangeAction(obj, "name", name));
-			Editor.updateViewsGUI();
+			Editor.updateObjectsViews();
 		}
 	}
 };
@@ -896,7 +896,7 @@ Editor.deleteObject = function(obj)
 			Editor.history.add(new ActionBundle(actions));
 		}
 
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}
 };
 
@@ -959,7 +959,7 @@ Editor.cutObject = function(obj)
 		}
 		else
 		{
-			Editor.updateViewsGUI();
+			Editor.updateObjectsViews();
 		}
 	}
 };
@@ -989,7 +989,7 @@ Editor.pasteObject = function(target)
 			Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
 		}
 		
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}
 	catch(e)
 	{
@@ -1002,7 +1002,7 @@ Editor.redo = function()
 {
 	if(Editor.history.redo())
 	{
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}
 	else
 	{
@@ -1015,7 +1015,7 @@ Editor.undo = function()
 {
 	if(Editor.history.undo())
 	{
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	}
 	else
 	{
@@ -1071,16 +1071,24 @@ Editor.updateSettings = function()
 };
 
 //Update all object views
-Editor.updateViewsGUI = function()
+Editor.updateObjectsViews = function()
 {
 	//Update tree view to match actual scene
-	Editor.gui.treeView.attach(Editor.program);
-	Editor.gui.treeView.updateView();
+	Editor.gui.treeView.updateObjectsView();
 
+	//Update tabs
 	var tab = Editor.gui.bottomTab.getActual();
 	if(tab !== null)
 	{
-		tab.updateView();
+		tab.updateObjectsView();
+		tab.updateMetadata();
+	}
+
+	var tab = Editor.gui.tab.getActual();
+	if(tab !== null)
+	{
+		tab.updateObjectsView();
+		tab.updateMetadata();
 	}
 };
 
@@ -1128,7 +1136,7 @@ Editor.resetEditor = function()
 	Editor.clearSelection();
 	Editor.selectTool(Editor.SELECT);
 	Editor.updateSelectionGUI();
-	Editor.updateViewsGUI();
+	Editor.updateObjectsViews();
 };
 
 //Craete new Program
@@ -1137,28 +1145,11 @@ Editor.createNewProgram = function()
 	//Reset resources
 	Editor.createDefaultResouces();
 
-	if(Editor.program !== null)
-	{
-		Editor.program.dispose();
-	}
-
 	//Create program
-	Editor.program = new Program();
-	Editor.program.addDefaultScene(Editor.defaultMaterial);
+	var program = new Program();
+	program.addDefaultScene(Editor.defaultMaterial);
 
-	//History
-	Editor.history = new History(Editor.settings.general.historySize);
-
-	//Reset editor
-	Editor.setOpenFile(null);
-	Editor.resetEditor();
-	
-	//Clear tabs
-	Editor.gui.tab.clear();
-
-	//Scene tab
-	var scene = Editor.gui.tab.addTab(SceneEditor, true);
-	scene.attach(Editor.program.scene);
+	Editor.setProgram(program);
 };
 
 //Save program to file
@@ -1204,6 +1195,41 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 	}
 };
 
+//Set a program to be edited, create new history object and clear editor windows
+Editor.setProgram = function(program)
+{
+	if(Editor.program !== program)
+	{
+		if(Editor.program !== null)
+		{
+			Editor.program.dispose();
+		}
+
+		Editor.program = program;
+
+		//Tree view
+		Editor.gui.treeView.attach(Editor.program);
+		
+		//History
+		Editor.history = new History(Editor.settings.general.historySize);
+		
+		//Clear tabs
+		Editor.gui.tab.clear();
+
+		//Reset editor
+		Editor.setOpenFile(null);
+		Editor.resetEditor();
+
+		//Add new scene tab to interface
+		if(Editor.program.scene !== null)
+		{
+			var scene = Editor.gui.tab.addTab(SceneEditor, true);
+			scene.attach(Editor.program.scene);
+		}
+	}
+
+};
+
 //Load program from file
 Editor.loadProgram = function(file, binary)
 {
@@ -1211,40 +1237,19 @@ Editor.loadProgram = function(file, binary)
 	{
 		try
 		{
-			//Dispose old program
-			if(Editor.program !== null)
-			{
-				Editor.program.dispose();
-			}
-
 			var loader = new ObjectLoader();
 
 			if(binary === true)
 			{
 				var pson = new dcodeIO.PSON.StaticPair();
 				var data = pson.decode(reader.result);
-				Editor.program = loader.parse(data);
+				var program = loader.parse(data);
+				Editor.setProgram(program);
 			}
 			else
 			{
-				Editor.program = loader.parse(JSON.parse(reader.result));
-			}
-
-			//Reset history
-			Editor.history = new History(Editor.settings.general.historySize);
-
-			//Remove old tabs
-			Editor.gui.tab.clear();
-
-			//Set open file
-			Editor.setOpenFile(file);
-			Editor.resetEditor();
-
-			//Add new scene tab to interface
-			if(Editor.program.scene !== null)
-			{
-				var scene = Editor.gui.tab.addTab(SceneEditor, true);
-				scene.attach(Editor.program.scene);
+				var program = loader.parse(JSON.parse(reader.result));
+				Editor.setProgram(program);
 			}
 
 			Editor.alert("Project loaded");
@@ -1369,7 +1374,7 @@ Editor.loadTexture = function(file, onLoad)
 		texture.name = name;
 	
 		Editor.program.addTexture(texture);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 
 		if(onLoad !== undefined)
 		{
@@ -1392,7 +1397,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		texture.name = name;
 
 		Editor.program.addTexture(texture);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 
 		if(onLoad !== undefined)
 		{
@@ -1420,7 +1425,7 @@ Editor.loadAudio = function(file, onLoad)
 		}
 
 		Editor.program.addAudio(audio);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	};
 
 	reader.readAsArrayBuffer(file);
@@ -1452,7 +1457,7 @@ Editor.loadFont = function(file, onLoad)
 		}
 
 		Editor.program.addFont(font);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	};
 
 
@@ -1478,7 +1483,7 @@ Editor.loadText = function(file)
 		resource.name = name;
 
 		Editor.program.addResource(resource);
-		Editor.updateViewsGUI();
+		Editor.updateObjectsViews();
 	};
 
 	reader.readAsText(file);
