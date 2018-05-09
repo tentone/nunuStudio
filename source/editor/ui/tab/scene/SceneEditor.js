@@ -107,14 +107,14 @@ function SceneEditor(parent, closeable, container, index)
 				var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
 				material.name = texture.name;
 				Editor.history.add(new ChangeAction(object, "material", material));
-				Editor.updateObjectsViews();
+				Editor.updateObjectsViewsGUI();
 			}
 			else if(object instanceof THREE.Sprite)
 			{
 				var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
 				material.name = texture.name;
 				Editor.history.add(new ChangeAction(object, "material", material));
-				Editor.updateObjectsViews();
+				Editor.updateObjectsViewsGUI();
 			}
 		}
 
@@ -183,7 +183,7 @@ function SceneEditor(parent, closeable, container, index)
 					if(object instanceof THREE.Sprite)
 					{
 						Editor.history.add(new ChangeAction(object, "material", draggedObject));
-						Editor.updateObjectsViews();
+						Editor.updateObjectsViewsGUI();
 					}
 				}
 				//Mesh Material
@@ -192,7 +192,7 @@ function SceneEditor(parent, closeable, container, index)
 					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 					{
 						Editor.history.add(new ChangeAction(object, "material", draggedObject));
-						Editor.updateObjectsViews();
+						Editor.updateObjectsViewsGUI();
 					}
 				}
 				//Cubemap
@@ -202,7 +202,7 @@ function SceneEditor(parent, closeable, container, index)
 					{
 						Editor.history.add(new ChangeAction(object.material, "envMap", draggedObject));
 						self.reloadContext();
-						Editor.updateObjectsViews();
+						Editor.updateObjectsViewsGUI();
 					}
 				}
 				//Texture
@@ -226,7 +226,7 @@ function SceneEditor(parent, closeable, container, index)
 					if(object.font !== undefined)
 					{
 						object.setFont(draggedObject);
-						Editor.updateObjectsViews();
+						Editor.updateObjectsViewsGUI();
 					}
 				}
 				//Geometry
@@ -235,7 +235,7 @@ function SceneEditor(parent, closeable, container, index)
 					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 					{
 						Editor.history.add(new ChangeAction(object, "geometry", draggedObject));
-						Editor.updateObjectsViews();
+						Editor.updateObjectsViewsGUI();
 					}
 				}
 			}

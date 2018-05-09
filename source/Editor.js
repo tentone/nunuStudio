@@ -722,7 +722,7 @@ Editor.initialize = function()
 	Editor.manager.create();
 
 	//Update views and start update loop
-	Editor.updateObjectsViews();
+	Editor.updateObjectsViewsGUI();
 	Editor.update();
 };
 
@@ -815,7 +815,7 @@ Editor.addObject = function(obj, parent)
 	//TODO <Check for resources here and create a history action to add resources and objects>
 
 	Editor.history.add(new ObjectAddedAction(obj, parent));
-	Editor.updateObjectsViews();
+	Editor.updateObjectsViewsGUI();
 };
 
 //Rename object, if none passed as argument selected object is used
@@ -839,7 +839,7 @@ Editor.renameObject = function(obj)
 		if(name !== null && name !== "")
 		{
 			Editor.history.add(new ChangeAction(obj, "name", name));
-			Editor.updateObjectsViews();
+			Editor.updateObjectsViewsGUI();
 		}
 	}
 };
@@ -896,7 +896,7 @@ Editor.deleteObject = function(obj)
 			Editor.history.add(new ActionBundle(actions));
 		}
 
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	}
 };
 
@@ -959,7 +959,7 @@ Editor.cutObject = function(obj)
 		}
 		else
 		{
-			Editor.updateObjectsViews();
+			Editor.updateObjectsViewsGUI();
 		}
 	}
 };
@@ -989,7 +989,7 @@ Editor.pasteObject = function(target)
 			Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
 		}
 		
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	}
 	catch(e)
 	{
@@ -1002,7 +1002,7 @@ Editor.redo = function()
 {
 	if(Editor.history.redo())
 	{
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	}
 	else
 	{
@@ -1015,7 +1015,7 @@ Editor.undo = function()
 {
 	if(Editor.history.undo())
 	{
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	}
 	else
 	{
@@ -1071,7 +1071,7 @@ Editor.updateSettings = function()
 };
 
 //Update all object views
-Editor.updateObjectsViews = function()
+Editor.updateObjectsViewsGUI = function()
 {
 	//Update tree view to match actual scene
 	Editor.gui.treeView.updateObjectsView();
@@ -1081,15 +1081,16 @@ Editor.updateObjectsViews = function()
 	if(tab !== null)
 	{
 		tab.updateObjectsView();
-		tab.updateMetadata();
 	}
 
 	var tab = Editor.gui.tab.getActual();
 	if(tab !== null)
 	{
 		tab.updateObjectsView();
-		tab.updateMetadata();
 	}
+
+	Editor.gui.tab.updateMetadata();
+	Editor.gui.bottomTab.updateMetadata();
 };
 
 
@@ -1136,7 +1137,7 @@ Editor.resetEditor = function()
 	Editor.clearSelection();
 	Editor.selectTool(Editor.SELECT);
 	Editor.updateSelectionGUI();
-	Editor.updateObjectsViews();
+	Editor.updateObjectsViewsGUI();
 };
 
 //Craete new Program
@@ -1374,7 +1375,7 @@ Editor.loadTexture = function(file, onLoad)
 		texture.name = name;
 	
 		Editor.program.addTexture(texture);
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 
 		if(onLoad !== undefined)
 		{
@@ -1397,7 +1398,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		texture.name = name;
 
 		Editor.program.addTexture(texture);
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 
 		if(onLoad !== undefined)
 		{
@@ -1425,7 +1426,7 @@ Editor.loadAudio = function(file, onLoad)
 		}
 
 		Editor.program.addAudio(audio);
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	};
 
 	reader.readAsArrayBuffer(file);
@@ -1457,7 +1458,7 @@ Editor.loadFont = function(file, onLoad)
 		}
 
 		Editor.program.addFont(font);
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	};
 
 
@@ -1483,7 +1484,7 @@ Editor.loadText = function(file)
 		resource.name = name;
 
 		Editor.program.addResource(resource);
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	};
 
 	reader.readAsText(file);

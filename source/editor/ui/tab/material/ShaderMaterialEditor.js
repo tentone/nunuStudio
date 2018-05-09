@@ -160,7 +160,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.name.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "name", self.name.getText()));
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
 	this.form.nextRow();

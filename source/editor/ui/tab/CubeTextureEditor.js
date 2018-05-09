@@ -54,7 +54,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		{
 			self.texture.name = self.name.getText();
 			self.updateMaterial();
-			Editor.updateObjectsViews();
+			Editor.updateObjectsViewsGUI();
 		}
 	});
 	this.form.add(this.name);
@@ -140,7 +140,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		self.texture.mode = self.mode.getValue();
 		self.texture.updateImages();
 		self.updateMode();
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.mode.addValue("Cube", CubeTexture.CUBE);
 	this.mode.addValue("Cross", CubeTexture.CROSS);
@@ -180,7 +180,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		var image = self.image.getValue();
 		self.texture.images[0] = image;
 		self.texture.updateImages();
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.image.updateInterface();
 
@@ -196,7 +196,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		var image = self.top.getValue();
 		self.texture.images[CubeTexture.TOP] = image;
 		self.texture.updateImages();
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.cube.push(this.top);
 
@@ -209,7 +209,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		var image = self.left.getValue();
 		self.texture.images[CubeTexture.LEFT] = image;
 		self.texture.updateImages();
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.cube.push(this.left);
 
@@ -222,7 +222,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		var image = self.front.getValue();
 		self.texture.images[CubeTexture.FRONT] = image;
 		self.texture.updateImages();
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.cube.push(this.front);
 
@@ -235,7 +235,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		var image = self.right.getValue();
 		self.texture.images[CubeTexture.RIGHT] = image;
 		self.texture.updateImages();
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.cube.push(this.right);
 
@@ -248,7 +248,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		var image = self.back.getValue();
 		self.texture.images[CubeTexture.BACK] = image;
 		self.texture.updateImages();
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.cube.push(this.back);
 
@@ -261,7 +261,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		var image = self.bottom.getValue();
 		self.texture.images[CubeTexture.BOTTOM] = image;
 		self.texture.updateImages();
-		Editor.updateObjectsViews();
+		Editor.updateObjectsViewsGUI();
 	});
 	this.cube.push(this.bottom);
 }

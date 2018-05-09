@@ -50,7 +50,7 @@ function AudioAsset(parent)
 			if(self.asset !== null)
 			{
 				Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename audio", self.asset.name)));
-				Editor.updateObjectsViews();
+				Editor.updateObjectsViewsGUI();
 			}
 		});
 
@@ -80,7 +80,7 @@ function AudioAsset(parent)
 			if(self.asset !== null && confirm("Delete audio?"))
 			{
 				Editor.program.removeAudio(self.asset, Editor.defaultAudio);
-				Editor.updateObjectsViews();
+				Editor.updateObjectsViewsGUI();
 			}
 		});
 

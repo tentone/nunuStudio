@@ -113,13 +113,13 @@ TabElement.prototype.deactivate = function()
 /*
  * Attach object or resource to tab.
  */
-TabElement.prototype.attach = function(obj){};
+TabElement.prototype.attach = function(object){};
 
 /*
  * Check if an object or resource is attached to the tab.
  * Called to check if a tab needs to be closed after changes to objects.
  */
-TabElement.prototype.isAttached = function(obj)
+TabElement.prototype.isAttached = function(object)
 {
 	return false;
 };

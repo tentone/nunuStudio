@@ -12,20 +12,57 @@ function PanelContainer(parent, closeable, container, index)
 
 PanelContainer.prototype = Object.create(TabElement.prototype);
 
-PanelContainer.prototype.isAttached = function(object)
+PanelContainer.prototype.destroyPanel = function()
 {
-	return false;
-};
-
-PanelContainer.prototype.updateSelection = function()
-{	
 	if(this.panel !== null)
 	{
 		this.panel.destroy();
 		this.panel = null;
 	}
+};
 
+PanelContainer.prototype.attach = function(object)
+{
+	if(this.panel !== null)
+	{
+		this.panel.attach(object);
+		this.panel.updatePanel();
+	}
+};
+
+PanelContainer.prototype.isAttached = function(object)
+{
+	if(this.panel !== null)
+	{
+		return this.panel.obj === object;
+	}
+
+	return false;
+};
+
+PanelContainer.prototype.updateObjectsView = function()
+{
+	if(this.panel !== null)
+	{	
+		var object = this.panel.obj;
+
+		if(object instanceof THREE.Object3D && object.parent === null)
+		{
+			this.destroyPanel();
+		}
+	}
+};
+
+PanelContainer.prototype.updateSelection = function()
+{	
 	var object = Editor.hasObjectSelected() ? Editor.selectedObjects[0] : null;
+	
+	if(this.panel !== null && this.panel.obj === object)
+	{
+		return;
+	}
+
+	this.destroyPanel();
 
 	if(object instanceof THREE.Object3D)
 	{

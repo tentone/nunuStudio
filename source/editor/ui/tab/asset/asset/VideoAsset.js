@@ -31,7 +31,7 @@ function VideoAsset(parent)
 			if(self.asset !== null)
 			{
 				Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename", self.asset.name)));
-				Editor.updateObjectsViews();
+				Editor.updateObjectsViewsGUI();
 			}
 		});
 		
@@ -40,7 +40,7 @@ function VideoAsset(parent)
 			if(self.asset !== null && confirm("Delete?"))
 			{
 				Editor.program.removeVideo(self.asset);
-				Editor.updateObjectsViews();
+				Editor.updateObjectsViewsGUI();
 			}
 		});
 

@@ -166,7 +166,7 @@ function TreeElement(container)
 				context.addOption("Create scene", function()
 				{
 					Editor.program.addDefaultScene();
-					Editor.updateObjectsViews();
+					Editor.updateObjectsViewsGUI();
 				});			
 			}
 			else if(self.obj instanceof THREE.Object3D)
@@ -242,7 +242,7 @@ function TreeElement(container)
 
 					physics.add(object);
 
-					Editor.updateObjectsViews();
+					Editor.updateObjectsViewsGUI();
 				}
 
 				var physics = context.addMenu("Add physics");
@@ -276,14 +276,14 @@ function TreeElement(container)
 				autoUpdate.addOption("Static", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
-					Editor.updateObjectsViews();
+					Editor.updateObjectsViewsGUI();
 				});
 
 				//Set object and children to dynamic mode
 				autoUpdate.addOption("Dynamic", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, true);
-					Editor.updateObjectsViews();
+					Editor.updateObjectsViewsGUI();
 				});
 
 				var shadow = context.addMenu("Shadows");
@@ -294,7 +294,7 @@ function TreeElement(container)
 					ObjectUtils.setShadowCasting(self.obj, true);
 					ObjectUtils.setShadowReceiving(self.obj, true);
 
-					Editor.updateObjectsViews();
+					Editor.updateObjectsViewsGUI();
 				});
 
 				//Set object and children shadow casting mode
@@ -303,7 +303,7 @@ function TreeElement(container)
 					ObjectUtils.setShadowCasting(self.obj, false);
 					ObjectUtils.setShadowReceiving(self.obj, false);
 
-					Editor.updateObjectsViews();
+					Editor.updateObjectsViewsGUI();
 				});
 
 				//Duplicate object

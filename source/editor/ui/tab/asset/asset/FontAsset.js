@@ -25,13 +25,13 @@ function FontAsset(parent)
 		context.addOption("Rename", function()
 		{
 			Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename font", self.asset.name)));
-			Editor.updateObjectsViews();
+			Editor.updateObjectsViewsGUI();
 		});
 		
 		context.addOption("Delete", function()
 		{
 			Editor.program.removeFont(self.asset, Editor.defaultFont);
-			Editor.updateObjectsViews();
+			Editor.updateObjectsViewsGUI();
 		});
 
 		if(self.asset.format === "arraybuffer")
