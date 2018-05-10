@@ -284,6 +284,7 @@ include("editor/ui/element/Form.js");
 include("editor/ui/element/AudioPlayer.js");
 include("editor/ui/element/DropdownMenu.js");
 include("editor/ui/element/ContextMenu.js");
+include("editor/ui/element/LoadingScreen.js");
 
 include("editor/ui/element/input/Graph.js");
 include("editor/ui/element/input/CheckBox.js");
