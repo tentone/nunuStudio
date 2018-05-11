@@ -7,12 +7,11 @@ function Element(parent, type)
 	this.element = document.createElement((type !== undefined) ? type : "div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
+	this.parent.appendChild(this.element);
 	
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-
-	this.parent.appendChild(this.element);
 }
 
 Element.prototype.constructor = Element;
