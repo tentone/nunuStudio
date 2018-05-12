@@ -397,6 +397,7 @@ include("editor/ui/tab/panel/materials/MaterialPanel.js");
 include("editor/ui/tab/panel/resources/ResourcePanel.js");
 include("editor/ui/tab/panel/resources/AudioPanel.js");
 include("editor/ui/tab/panel/resources/ImagePanel.js");
+include("editor/ui/tab/panel/resources/VideoPanel.js");
 
 include("editor/ui/tab/panel/objects/ObjectPanel.js");
 include("editor/ui/tab/panel/objects/LockedPanel.js");

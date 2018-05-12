@@ -184,6 +184,10 @@ PanelContainer.prototype.updateSelection = function()
 		{
 			this.panel = new ImagePanel(this.element, object);
 		}
+		else if(object instanceof Video)
+		{
+			this.panel = new VideoPanel(this.element, object);
+		}
 		else
 		{
 			this.panel = new ResourcePanel(this.element, object);

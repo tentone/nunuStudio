@@ -28,7 +28,7 @@ function MaterialRenderer()
 	var ambient = new THREE.AmbientLight(0x999999);
 	this.scene.add(ambient);
 
-	//Pontual light
+	//Point light
 	var point = new THREE.PointLight(0x999999);
 	point.position.set(-0.5, 1, 1.5);
 	this.scene.add(point);
