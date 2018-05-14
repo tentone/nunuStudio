@@ -29,6 +29,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "FilmPass",
         "FirstPersonControls",
         "Fog",
+        "Folder",
         "Font",
         "FontLoader",
         "Gamepad",

@@ -613,6 +613,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\resources\\Folder.js": {
+            "name": "..\\..\\source\\core\\resources\\Folder.js",
+            "modules": {},
+            "classes": {
+                "Folder": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\resources\\Font.js": {
             "name": "..\\..\\source\\core\\resources\\Font.js",
             "modules": {},
@@ -1302,6 +1311,7 @@
             "elements": {},
             "classes": {
                 "Audio": 1,
+                "Folder": 1,
                 "Font": 1,
                 "Image": 1,
                 "Model": 1,
@@ -2874,6 +2884,22 @@
                     "type": "String"
                 }
             ]
+        },
+        "Folder": {
+            "name": "Folder",
+            "shortname": "Folder",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\resources\\Folder.js",
+            "line": 3,
+            "description": "Folder resource stores another resources inside.",
+            "extends": "{Resource}",
+            "is_constructor": 1
         },
         "Font": {
             "name": "Font",
