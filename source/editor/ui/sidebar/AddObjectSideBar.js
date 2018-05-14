@@ -299,7 +299,7 @@ function AddObjectSideBar(element)
 		//Reflector
 		addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
 		{
-			var object = new THREE.Reflector(new THREE.BoxBufferGeometry());
+			var object = new THREE.Reflector(new THREE.PlaneBufferGeometry());
 
 			Editor.addObject(object);
 		}, "Reflector");
@@ -307,7 +307,7 @@ function AddObjectSideBar(element)
 		//Refractor
 		addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
 		{
-			var object = new THREE.Refractor(new THREE.SphereBufferGeometry(1, 32, 32));
+			var object = new THREE.Refractor(new THREE.PlaneBufferGeometry());
 			Editor.addObject(object);
 		}, "Refractor");
 	}

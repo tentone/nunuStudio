@@ -197,8 +197,15 @@ ObjectLoader.prototype.parseAnimations = function(array)
 	var animations = [];
 
 	for(var i = 0; i < array.length; i++)
-	{
-		animations.push(THREE.AnimationClip.parse(array[i]));
+	{	
+		var clip = THREE.AnimationClip.parse(array[i]);
+
+		if(array[i].uuid !== undefined)
+		{
+			clip.uuid = array[i].uuid;
+		}
+		
+		animations.push();
 	}
 
 	return animations;

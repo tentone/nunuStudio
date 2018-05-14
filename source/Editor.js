@@ -310,14 +310,14 @@ include("editor/ui/TabButton.js");
 
 include("editor/ui/tab/ConsoleTab.js");
 include("editor/ui/tab/CodeEditor.js");
-include("editor/ui/tab/ScriptEditor.js");
-include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
-include("editor/ui/tab/CubeTextureEditor.js");
 include("editor/ui/tab/TextEditor.js");
 
 include("editor/ui/tab/treeview/TreeView.js");
 include("editor/ui/tab/treeview/TreeElement.js");
+
+include("editor/ui/tab/objects/ScriptEditor.js");
+include("editor/ui/tab/objects/ParticleEditor.js");
 
 include("editor/ui/tab/scene/SceneEditor.js");
 include("editor/ui/tab/scene/transform/TransformControls.js");
@@ -382,6 +382,7 @@ include("editor/ui/tab/material/mesh/MeshBasicMaterialEditor.js");
 include("editor/ui/tab/material/mesh/MeshStandardMaterialEditor.js");
 include("editor/ui/tab/material/mesh/MeshPhysicalMaterialEditor.js");
 
+include("editor/ui/tab/texture/CubeTextureEditor.js");
 include("editor/ui/tab/texture/TextureEditor.js");
 include("editor/ui/tab/texture/VideoTextureEditor.js");
 include("editor/ui/tab/texture/CanvasTextureEditor.js");
