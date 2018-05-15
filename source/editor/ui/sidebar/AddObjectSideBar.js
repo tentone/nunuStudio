@@ -305,7 +305,7 @@ function AddObjectSideBar(element)
 		}, "Reflector");
 
 		//Refractor
-		addEffects.addOption(Editor.filePath + "icons/misc/mirror.png", function()
+		addEffects.addOption(Editor.filePath + "icons/misc/waves.png", function()
 		{
 			var object = new THREE.Refractor(new THREE.PlaneBufferGeometry());
 			Editor.addObject(object);
