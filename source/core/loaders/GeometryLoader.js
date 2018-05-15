@@ -112,6 +112,17 @@ GeometryLoader.prototype.parse = function(data)
 		case "LatheBufferGeometry":
 			geometry = new THREE[data.type](data.points, data.segments, data.phiStart, data.phiLength);
 			break;
+			
+		case "ShapeGeometry": 
+		case "ShapeBufferGeometry": 
+			var geometryShapes = [];
+			for(var j = 0, jl = data.shapes.length; j < jl; j++)
+			{
+				var shape = shapes[data.shapes[j]];
+				geometryShapes.push(shape);
+			}
+			geometry = new THREE[data.type](geometryShapes, data.curveSegments);
+			break; 
 
 		case "BufferGeometry":
 			geometry = this.bufferGeometryLoader.parse(data);
