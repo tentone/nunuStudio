@@ -179,6 +179,14 @@
 - V0.9.4 Beta
 	- Multi object edit (position, rotation and scale)
 	- Support for SVG file loading
+	- Improved camera controls
+	- New UI elements (Slider, Checkbox)
+	- Dodecahedron geometry
+	- Resources are now selectable
+	- Resource preview on inspector
+	- New general settings tab
+	- Experimental android export support
+
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
