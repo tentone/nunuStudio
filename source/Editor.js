@@ -815,7 +815,6 @@ Editor.addObject = function(obj, parent)
 		parent = Editor.program.scene;
 	}
 
-
 	//TODO <Check for resources here and create a history action to add resources and objects>
 
 	Editor.history.add(new ObjectAddedAction(obj, parent));
@@ -1067,34 +1066,19 @@ Editor.selectTool = function(tool)
 
 Editor.updateSettings = function()
 {
-	var tab = Editor.gui.bottomTab.getActual();
-	if(tab !== null)
-	{
-		tab.updateSettings();
-	}
+	Editor.gui.bottomTab.updateSettings();
 };
 
 //Update all object views
 Editor.updateObjectsViewsGUI = function()
 {
-	//Update tree view to match actual scene
 	Editor.gui.treeView.updateObjectsView();
 
-	//Update tabs
-	var tab = Editor.gui.bottomTab.getActual();
-	if(tab !== null)
-	{
-		tab.updateObjectsView();
-	}
-
-	var tab = Editor.gui.tab.getActual();
-	if(tab !== null)
-	{
-		tab.updateObjectsView();
-	}
-
-	Editor.gui.tab.updateMetadata();
+	Editor.gui.bottomTab.updateObjectsView();
 	Editor.gui.bottomTab.updateMetadata();
+
+	Editor.gui.tab.updateObjectsView();
+	Editor.gui.tab.updateMetadata();
 };
 
 
@@ -1117,11 +1101,7 @@ Editor.updateSelectionGUI = function()
 
 	//Bottom tab group
 	Editor.gui.bottomTab.updateMetadata();
-	var tab = Editor.gui.bottomTab.getActual();
-	if(tab !== null)
-	{
-		tab.updateSelection();
-	}
+	Editor.gui.bottomTab.updateSelection();
 
 	//Right side tab group
 	/*Editor.gui.bottomTab.updateMetadata();

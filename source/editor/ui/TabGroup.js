@@ -58,6 +58,33 @@ TabGroup.prototype.updateMetadata = function()
 	}
 };
 
+//Update all tab object views
+TabGroup.prototype.updateObjectsView = function()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].updateObjectsView();
+	}
+};
+
+//Update all tab object views
+TabGroup.prototype.updateSelection = function()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].updateSelection();
+	}
+};
+
+//Update all tab object views
+TabGroup.prototype.updateSettings = function()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].updateSettings();
+	}
+};
+
 //Get actual tab
 TabGroup.prototype.getActual = function()
 {

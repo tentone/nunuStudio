@@ -93,11 +93,6 @@ AssetExplorer.prototype.updateSelection = function()
 
 AssetExplorer.prototype.updateObjectsView = function()
 {
-	if(!this.active)
-	{
-		return;
-	}
-	
 	this.clear();
 
 	ResourceManager.retrieveResources(Editor.program);
