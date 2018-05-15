@@ -6034,7 +6034,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 207,
+            "line": 214,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -6054,7 +6054,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 230,
+            "line": 237,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -6074,7 +6074,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 253,
+            "line": 260,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -6094,7 +6094,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 276,
+            "line": 283,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -6114,7 +6114,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 299,
+            "line": 306,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -6144,7 +6144,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 326,
+            "line": 333,
             "description": "Parse skeletons from json.",
             "itemtype": "method",
             "name": "parseSkeletons",
@@ -6165,7 +6165,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 373,
+            "line": 380,
             "description": "Auxiliar method to bind skeletons to loaded objects.",
             "itemtype": "method",
             "name": "bindSkeletons",
@@ -6186,7 +6186,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 406,
+            "line": 413,
             "description": "Parse objects from json.",
             "itemtype": "method",
             "name": "parseObjects",
