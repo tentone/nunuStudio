@@ -4,7 +4,6 @@ function DivisionResizable(parent)
 {
 	Element.call(this, parent);
 
-	this.element.style.cursor = "default";
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
@@ -115,10 +114,7 @@ DivisionResizable.prototype.setOnResize = function(callback)
 //Remove element
 DivisionResizable.prototype.destroy = function()
 {
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
+	Element.prototype.destroy.call(this);
 
 	if(this.parent.contains(this.resizeTab))
 	{
