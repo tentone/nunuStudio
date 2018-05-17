@@ -156,10 +156,9 @@ DivisionResizable.prototype.updateInterface = function()
 		}
 
 		//Update element
-		if(this.resizableSide == DivisionResizable.LEFT)
+		if(this.resizableSide === DivisionResizable.LEFT)
 		{	
 			this.resizeTab.style.cursor = "e-resize";
-
 			this.resizeTab.style.top = this.position.y + "px";
 			this.resizeTab.style.left = this.position.x + "px";
 			this.resizeTab.style.width = this.resizeTabSize + "px";
@@ -170,10 +169,9 @@ DivisionResizable.prototype.updateInterface = function()
 			this.element.style.width = (this.size.x - this.resizeTabSize) + "px";
 			this.element.style.height = this.size.y + "px";
 		}
-		else if(this.resizableSide == DivisionResizable.RIGHT)
+		else if(this.resizableSide === DivisionResizable.RIGHT)
 		{	
 			this.resizeTab.style.cursor = "e-resize";
-
 			this.resizeTab.style.top = this.position.y + "px";
 			this.resizeTab.style.left = (this.position.x + (this.size.x - this.resizeTabSize))+ "px";
 			this.resizeTab.style.width = this.resizeTabSize + "px";
@@ -184,10 +182,9 @@ DivisionResizable.prototype.updateInterface = function()
 			this.element.style.width = (this.size.x - this.resizeTabSize) + "px";
 			this.element.style.height = this.size.y + "px";
 		}
-		else if(this.resizableSide == DivisionResizable.TOP)
+		else if(this.resizableSide === DivisionResizable.TOP)
 		{
 			this.resizeTab.style.cursor = "n-resize";
-
 			this.resizeTab.style.top = this.position.y + "px";
 			this.resizeTab.style.left = this.position.x + "px";
 			this.resizeTab.style.width = this.size.x + "px";
@@ -198,10 +195,9 @@ DivisionResizable.prototype.updateInterface = function()
 			this.element.style.width = this.size.x + "px";
 			this.element.style.height = (this.size.y - this.resizeTabSize) + "px";
 		}
-		else if(this.resizableSide == DivisionResizable.BOTTOM)
+		else if(this.resizableSide === DivisionResizable.BOTTOM)
 		{
 			this.resizeTab.style.cursor = "n-resize";
-
 			this.resizeTab.style.top = (this.position.y + (this.size.y - this.resizeTabSize)) + "px";
 			this.resizeTab.style.left = this.position.x + "px";
 			this.resizeTab.style.width = this.size.x + "px";
