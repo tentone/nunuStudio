@@ -6,7 +6,7 @@ function SkinnedWireframeHelper(object, hex)
 	{
 		color: (hex !== undefined) ? hex : 0xFFFFFF,
 		wireframe: true,
-		skinning: false
+		skinning: true
 	}));
 
 	this.object = object;
