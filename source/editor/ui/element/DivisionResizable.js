@@ -10,29 +10,29 @@ function DivisionResizable(parent)
 	this.preventDragEvents();
 
 	//Create division resize tab
-	this.resizeTab = document.createElement("div");
-	this.resizeTab.style.position = "absolute";
-	this.resizeTab.style.cursor = "e-resize";
-	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
-	this.resizeTab.ondrop = function(event)
+	this.tab = document.createElement("div");
+	this.tab.style.position = "absolute";
+	this.tab.style.cursor = "e-resize";
+	this.tab.style.backgroundColor = Editor.theme.tabColor;
+	this.tab.ondrop = function(event)
 	{
 		event.preventDefault();
 	};
-	this.resizeTab.ondragover = function(event)
+	this.tab.ondragover = function(event)
 	{
 		event.preventDefault();
 	};
-	this.parent.appendChild(this.resizeTab);
+	this.parent.appendChild(this.tab);
 
 	//Resize control
-	this.resizeSizeMax = Number.MAX_VALUE;
-	this.resizableSide = DivisionResizable.LEFT;
-	this.resizeSizeMin = 0;
-	this.resizeTabSize = 5;
+	this.maxSize = Number.MAX_VALUE;
+	this.direction = DivisionResizable.LEFT;
+	this.minSize = 0;
+	this.tabSize = 5;
 
 	//Self pointer
 	var self = this;
-	this.resizeTab.onmousedown = function(event)
+	this.tab.onmousedown = function(event)
 	{
 		self.manager.create();
 	};
@@ -41,44 +41,44 @@ function DivisionResizable(parent)
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
-		if(self.resizableSide === DivisionResizable.LEFT)
+		if(self.direction === DivisionResizable.LEFT)
 		{	
 			self.size.x -= event.movementX;
 		}
-		else if(self.resizableSide === DivisionResizable.RIGHT)
+		else if(self.direction === DivisionResizable.RIGHT)
 		{
 			self.size.x += event.movementX;
 		}
-		else if(self.resizableSide === DivisionResizable.TOP)
+		else if(self.direction === DivisionResizable.TOP)
 		{
 			self.size.y -= event.movementY;
 		}
-		else if(self.resizableSide === DivisionResizable.BOTTOM)
+		else if(self.direction === DivisionResizable.BOTTOM)
 		{
 			self.size.y += event.movementY;
 		}
 
 		//Limit Size
-		if(self.resizableSide === DivisionResizable.BOTTOM || self.resizableSide === DivisionResizable.TOP)
+		if(self.direction === DivisionResizable.BOTTOM || self.direction === DivisionResizable.TOP)
 		{
-			if(self.size.y < (self.resizeTabSize + self.resizeSizeMin))
+			if(self.size.y < (self.tabSize + self.minSize))
 			{
-				self.size.y = self.resizeTabSize + self.resizeSizeMin;
+				self.size.y = self.tabSize + self.minSize;
 			}
-			else if(self.size.y > self.resizeSizeMax)
+			else if(self.size.y > self.maxSize)
 			{
-				self.size.y = self.resizeSizeMax;
+				self.size.y = self.maxSize;
 			}
 		}
 		else
 		{
-			if(self.size.x < (self.resizeTabSize + self.resizeSizeMin))
+			if(self.size.x < (self.tabSize + self.minSize))
 			{
-				self.size.x = (self.resizeTabSize + self.resizeSizeMin);
+				self.size.x = (self.tabSize + self.minSize);
 			}
-			else if(self.size.x > self.resizeSizeMax)
+			else if(self.size.x > self.maxSize)
 			{
-				self.size.x = self.resizeSizeMax;
+				self.size.x = self.maxSize;
 			}	
 		}
 
@@ -116,102 +116,101 @@ DivisionResizable.prototype.destroy = function()
 {
 	Element.prototype.destroy.call(this);
 
-	if(this.parent.contains(this.resizeTab))
+	if(this.parent.contains(this.tab))
 	{
-		this.parent.removeChild(this.resizeTab);
+		this.parent.removeChild(this.tab);
 	}
 };
 
 //Update DivisionResizable Size
 DivisionResizable.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.display = "block";
-		this.resizeTab.style.display = "block";
+		this.tab.style.display = "block";
 
 		//Limit Size
-		if(this.resizableSide === DivisionResizable.BOTTOM || this.resizableSide === DivisionResizable.TOP)
+		if(this.direction === DivisionResizable.BOTTOM || this.direction === DivisionResizable.TOP)
 		{
-			if(this.size.y < (this.resizeTabSize + this.resizeSizeMin))
+			if(this.size.y < (this.tabSize + this.minSize))
 			{
-				this.size.y = this.resizeTabSize + this.resizeSizeMin;
+				this.size.y = this.tabSize + this.minSize;
 			}
-			else if(this.size.y > this.resizeSizeMax)
+			else if(this.size.y > this.maxSize)
 			{
-				this.size.y = this.resizeSizeMax;
+				this.size.y = this.maxSize;
 			}
 		}
 		else
 		{
-			if(this.size.x < (this.resizeTabSize + this.resizeSizeMin))
+			if(this.size.x < (this.tabSize + this.minSize))
 			{
-				this.size.x = (this.resizeTabSize + this.resizeSizeMin);
+				this.size.x = (this.tabSize + this.minSize);
 			}
-			else if(this.size.x > this.resizeSizeMax)
+			else if(this.size.x > this.maxSize)
 			{
-				this.size.x = this.resizeSizeMax;
+				this.size.x = this.maxSize;
 			}	
 		}
 
 		//Update element
-		if(this.resizableSide === DivisionResizable.LEFT)
+		if(this.direction === DivisionResizable.LEFT)
 		{	
-			this.resizeTab.style.cursor = "e-resize";
-			this.resizeTab.style.top = this.position.y + "px";
-			this.resizeTab.style.left = this.position.x + "px";
-			this.resizeTab.style.width = this.resizeTabSize + "px";
-			this.resizeTab.style.height = this.size.y + "px";
+			this.tab.style.cursor = "e-resize";
+			this.tab.style.top = this.position.y + "px";
+			this.tab.style.left = this.position.x + "px";
+			this.tab.style.width = this.tabSize + "px";
+			this.tab.style.height = this.size.y + "px";
 
 			this.element.style.top = this.position.y + "px";
-			this.element.style.left = (this.position.x + this.resizeTabSize) + "px";
-			this.element.style.width = (this.size.x - this.resizeTabSize) + "px";
+			this.element.style.left = (this.position.x + this.tabSize) + "px";
+			this.element.style.width = (this.size.x - this.tabSize) + "px";
 			this.element.style.height = this.size.y + "px";
 		}
-		else if(this.resizableSide === DivisionResizable.RIGHT)
+		else if(this.direction === DivisionResizable.RIGHT)
 		{	
-			this.resizeTab.style.cursor = "e-resize";
-			this.resizeTab.style.top = this.position.y + "px";
-			this.resizeTab.style.left = (this.position.x + (this.size.x - this.resizeTabSize))+ "px";
-			this.resizeTab.style.width = this.resizeTabSize + "px";
-			this.resizeTab.style.height = this.size.y + "px";
+			this.tab.style.cursor = "e-resize";
+			this.tab.style.top = this.position.y + "px";
+			this.tab.style.left = (this.position.x + (this.size.x - this.tabSize))+ "px";
+			this.tab.style.width = this.tabSize + "px";
+			this.tab.style.height = this.size.y + "px";
 
 			this.element.style.top = this.position.y + "px";
 			this.element.style.left = this.position.x + "px";
-			this.element.style.width = (this.size.x - this.resizeTabSize) + "px";
+			this.element.style.width = (this.size.x - this.tabSize) + "px";
 			this.element.style.height = this.size.y + "px";
 		}
-		else if(this.resizableSide === DivisionResizable.TOP)
+		else if(this.direction === DivisionResizable.TOP)
 		{
-			this.resizeTab.style.cursor = "n-resize";
-			this.resizeTab.style.top = this.position.y + "px";
-			this.resizeTab.style.left = this.position.x + "px";
-			this.resizeTab.style.width = this.size.x + "px";
-			this.resizeTab.style.height = this.resizeTabSize + "px";
+			this.tab.style.cursor = "n-resize";
+			this.tab.style.top = this.position.y + "px";
+			this.tab.style.left = this.position.x + "px";
+			this.tab.style.width = this.size.x + "px";
+			this.tab.style.height = this.tabSize + "px";
 
-			this.element.style.top = (this.position.y + this.resizeTabSize) + "px";
+			this.element.style.top = (this.position.y + this.tabSize) + "px";
 			this.element.style.left = this.position.x + "px";
 			this.element.style.width = this.size.x + "px";
-			this.element.style.height = (this.size.y - this.resizeTabSize) + "px";
+			this.element.style.height = (this.size.y - this.tabSize) + "px";
 		}
-		else if(this.resizableSide === DivisionResizable.BOTTOM)
+		else if(this.direction === DivisionResizable.BOTTOM)
 		{
-			this.resizeTab.style.cursor = "n-resize";
-			this.resizeTab.style.top = (this.position.y + (this.size.y - this.resizeTabSize)) + "px";
-			this.resizeTab.style.left = this.position.x + "px";
-			this.resizeTab.style.width = this.size.x + "px";
-			this.resizeTab.style.height = this.resizeTabSize + "px";
+			this.tab.style.cursor = "n-resize";
+			this.tab.style.top = (this.position.y + (this.size.y - this.tabSize)) + "px";
+			this.tab.style.left = this.position.x + "px";
+			this.tab.style.width = this.size.x + "px";
+			this.tab.style.height = this.tabSize + "px";
 
 			this.element.style.top = this.position.y + "px";
 			this.element.style.left = this.position.x + "px";
 			this.element.style.width = this.size.x + "px";
-			this.element.style.height = (this.size.y - this.resizeTabSize) + "px";
+			this.element.style.height = (this.size.y - this.tabSize) + "px";
 		}
 	}
 	else
 	{
 		this.element.style.display = "none";
-		this.resizeTab.style.display = "none";
+		this.tab.style.display = "none";
 	}
 };
