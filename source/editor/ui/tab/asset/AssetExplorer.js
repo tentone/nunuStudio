@@ -10,6 +10,7 @@ function AssetExplorer(parent, closeable, container, index)
 	//Assets
 	this.assets = document.createElement("div");
 	this.assets.style.position = "absolute";
+	this.assets.style.display = "block";
 	this.assets.style.overflow = "auto";
 	this.assets.style.top = "20px";
 	this.assets.style.width = "100%";
@@ -51,8 +52,6 @@ function AssetExplorer(parent, closeable, container, index)
 	this.bar = new AssetExplorerMenu(this.element);
 
 	//Files in explorer
-	this.filesSize = new THREE.Vector2(Editor.settings.general.filePreviewSize, Editor.settings.general.filePreviewSize);
-	this.filesSpacing = 0;
 	this.files = [];
 
 	//Add element to document
@@ -73,14 +72,10 @@ AssetExplorer.prototype.activate = function()
 
 AssetExplorer.prototype.updateSettings = function()
 {
-	this.filesSize.set(Editor.settings.general.filePreviewSize, Editor.settings.general.filePreviewSize);
-
 	for(var i = 0; i < this.files.length; i++)
 	{
-		this.files[i].size.copy(this.filesSize);
+		this.files[i].setSize(Editor.settings.general.filePreviewSize);
 	}
-
-	this.updateInterface();
 };
 
 AssetExplorer.prototype.updateSelection = function()
@@ -107,13 +102,13 @@ AssetExplorer.prototype.updateObjectsView = function()
 	}
 
 	//Geometries
-	var geometries = Editor.program.geometries;
+	/*var geometries = Editor.program.geometries;
 	for(var i in geometries)
 	{
 		var file = new GeometryAsset(this.assets);
 		file.setAsset(geometries[i]);
 		this.add(file);
-	}
+	}*/
 
 	//Textures
 	var textures = Editor.program.textures;
@@ -164,12 +159,9 @@ AssetExplorer.prototype.updateObjectsView = function()
 	{
 		var resource = resources[i];
 
-		//if(resource.type === "TextFile")
-		//{
-			var file = new FileAsset(this.assets);
-			file.setAsset(resource);
-			this.add(file);		
-		//}
+		var file = new FileAsset(this.assets);
+		file.setAsset(resource);
+		this.add(file);
 	}
 
 	this.updateInterface();
@@ -188,9 +180,7 @@ AssetExplorer.prototype.clear = function()
 AssetExplorer.prototype.add = function(file)
 {
 	file.setParent(this.assets);
-	file.size.copy(this.filesSize);
-	file.updateInterface();
-
+	file.setSize(Editor.settings.general.filePreviewSize);
 	this.files.push(file);
 };
 
@@ -199,17 +189,6 @@ AssetExplorer.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		var filesRow = Math.floor(this.files.length / (this.files.length * (this.filesSize.x + this.filesSpacing) / this.size.x));
-		for(var i = 0; i < this.files.length; i++)
-		{
-			var row = Math.floor(i / filesRow);
-			var col = i % filesRow;
-
-			this.files[i].position.x = (col * this.filesSize.x) + ((col + 1) * this.filesSpacing);
-			this.files[i].position.y = (row * this.filesSize.y) + ((row + 1) * this.filesSpacing);
-			this.files[i].updateInterface();
-		}
-
 		this.assets.style.height = (this.size.y - 20) + "px";
 
 		this.element.style.display = "block";

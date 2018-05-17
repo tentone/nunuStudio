@@ -510,7 +510,11 @@ SceneEditor.prototype.updateSettings = function()
 	{
 		this.controls = new EditorPlanarControls();
 	}
-	this.controls.attach(this.camera);
+
+	if(this.controls !== null)
+	{
+		this.controls.attach(this.camera);
+	}
 
 	//Tool
 	this.tool.setSpace(Editor.settings.editor.transformationSpace);

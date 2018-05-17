@@ -6,11 +6,20 @@ function Asset(parent)
 
 	this.asset = null;
 
+	this.scale = new THREE.Vector2(0.7, 0.7);
+
+	//Element
+	this.element.style.display = "block";
+	this.element.style.float = "left";
+	this.element.style.position = "relative";
 	this.element.style.cursor = "pointer";
+	this.element.style.width = "70px";
+	this.element.style.height = "70px";
 
 	//Icon
 	this.icon = document.createElement("img");
 	this.icon.draggable = false;
+	this.icon.style.display = "block";
 	this.icon.style.position = "absolute";
 	this.icon.style.bottom = "20px";
 	this.icon.style.right = "5px";
@@ -24,7 +33,6 @@ function Asset(parent)
 	//Text
 	this.text = document.createElement("div");
 	this.text.style.position = "absolute";
-	this.text.style.visibility = "inherit";
 	this.text.style.overflow = "hidden";
 	this.text.style.textAlign = "center";
 	this.text.style.pointerEvents = "none";
@@ -39,9 +47,6 @@ function Asset(parent)
 	//Text
 	this.name = document.createTextNode("");
 	this.text.appendChild(this.name);
-
-	//Icon scale
-	this.scale = new THREE.Vector2(0.65, 0.65);
 
 	var self = this;
 
@@ -96,6 +101,12 @@ Asset.prototype.setParent = function(parent)
 	}
 };
 
+Asset.prototype.setSize = function(size)
+{
+	this.element.style.width = size + "px";
+	this.element.style.height = size + "px";
+};
+
 //Set file icon
 Asset.prototype.setIcon = function(icon)
 {
@@ -115,18 +126,4 @@ Asset.prototype.updateMetadata = function()
 };
 
 //Update Interface
-Asset.prototype.updateInterface = function()
-{
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
-};
+Asset.prototype.updateInterface = function(){};

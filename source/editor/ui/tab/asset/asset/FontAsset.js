@@ -12,7 +12,10 @@ function FontAsset(parent)
 	//Image
 	this.image = document.createElement("img");
 	this.image.style.position = "absolute";
-	this.image.style.top = "5px";
+	this.image.style.top = "5%";
+	this.image.style.left = "17%";
+	this.image.style.width = "66%";
+	this.image.style.height = "66%";
 	this.element.appendChild(this.image);
 
 	//Context menu event
@@ -101,14 +104,4 @@ FontAsset.prototype.updateMetadata = function()
 	});
 
 	this.setText(this.asset.name);
-};
-
-//Update interface
-FontAsset.prototype.updateInterface = function()
-{
-	Asset.prototype.updateInterface.call(this);
-
-	this.image.width = this.size.x * this.scale.x;
-	this.image.height = this.size.y * this.scale.y;
-	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
 };

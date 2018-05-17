@@ -10,8 +10,8 @@ function VideoAsset(parent)
 	this.preview.style.position = "absolute";
 	this.preview.style.top = "5%";
 	this.preview.style.left = "17%";
-	this.preview.style.width = "65%";
-	this.preview.style.height = "65%";
+	this.preview.style.width = "66%";
+	this.preview.style.height = "66%";
 	this.element.appendChild(this.preview);
 
 	this.setIcon(Editor.filePath + "icons/misc/video.png");
