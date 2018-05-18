@@ -217,7 +217,7 @@ Scene.prototype.updateCameraOrder = function()
 {
 	this.cameras.sort(function(a, b)
 	{
-		return a.order < b.order;
+		return a.order > b.order;
 	});
 };
 

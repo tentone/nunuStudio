@@ -127,7 +127,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.form.nextRow();
 
 	//Order
-	this.form.addText("Draw Order");
+	this.form.addText("Render Order").setAltText("Camera with lower order renders first.");
 	this.order = new NumberBox(this.form.element);
 	this.order.size.set(80, 18);
 	this.order.setRange(0, Number.MAX_SAFE_INTEGER);
