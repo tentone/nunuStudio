@@ -21,17 +21,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js": {
-            "name": "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js",
-            "modules": {
-                "Geometry": 1
-            },
-            "classes": {
-                "RoundedBoxBufferGeometry": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\input\\Gamepad.js": {
             "name": "..\\..\\source\\core\\input\\Gamepad.js",
             "modules": {
@@ -613,15 +602,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\resources\\Folder.js": {
-            "name": "..\\..\\source\\core\\resources\\Folder.js",
-            "modules": {},
-            "classes": {
-                "Folder": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\resources\\Font.js": {
             "name": "..\\..\\source\\core\\resources\\Font.js",
             "modules": {},
@@ -663,15 +643,6 @@
             "modules": {},
             "classes": {
                 "ResourceManager": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\resources\\Template.js": {
-            "name": "..\\..\\source\\core\\resources\\Template.js",
-            "modules": {},
-            "classes": {
-                "Template": 1
             },
             "fors": {},
             "namespaces": {}
@@ -893,15 +864,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\utils\\SVGUtils.js": {
-            "name": "..\\..\\source\\core\\utils\\SVGUtils.js",
-            "modules": {},
-            "classes": {
-                "SVGUtils": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\utils\\Timer.js": {
             "name": "..\\..\\source\\core\\utils\\Timer.js",
             "modules": {},
@@ -972,49 +934,6 @@
             "file": "..\\..\\source\\core\\controls\\VRControls.js",
             "line": 3,
             "description": "VRControl is used to get input from an HDM device and apply it to an Object."
-        },
-        "Geometry": {
-            "name": "Geometry",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "RoundedBoxBufferGeometry": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js",
-            "line": 3,
-            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normals.\n\nThere is no UV coordinates.",
-            "author": "pailhead",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "width",
-                    "description": "Box width.",
-                    "type": "Number"
-                },
-                {
-                    "name": "height",
-                    "description": "Box height.",
-                    "type": "Number"
-                },
-                {
-                    "name": "depth",
-                    "description": "Box depth.",
-                    "type": "Number"
-                },
-                {
-                    "name": "radius",
-                    "description": "Corner round radius.",
-                    "type": "Number"
-                },
-                {
-                    "name": "radiusSegments",
-                    "description": "Corner radius segments.",
-                    "type": "Number"
-                }
-            ]
         },
         "Input": {
             "name": "Input",
@@ -1311,13 +1230,11 @@
             "elements": {},
             "classes": {
                 "Audio": 1,
-                "Folder": 1,
                 "Font": 1,
                 "Image": 1,
                 "Model": 1,
                 "Resource": 1,
                 "ResourceManager": 1,
-                "Template": 1,
                 "TextFile": 1,
                 "Video": 1
             },
@@ -1374,7 +1291,6 @@
                 "ObjectUtils": 1,
                 "EventManager": 1,
                 "MathUtils": 1,
-                "SVGUtils": 1,
                 "Timer": 1
             },
             "fors": {},
@@ -1453,22 +1369,6 @@
             "description": "VRControl is used to get input from an HDM device and apply it to an Object.",
             "is_constructor": 1,
             "author": "dmarcos (https://github.com/dmarcos)"
-        },
-        "RoundedBoxBufferGeometry": {
-            "name": "RoundedBoxBufferGeometry",
-            "shortname": "RoundedBoxBufferGeometry",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Geometry",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js",
-            "line": 3,
-            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normals.\n\nThere is no UV coordinates.",
-            "author": "pailhead",
-            "is_constructor": 1
         },
         "Gamepad": {
             "name": "Gamepad",
@@ -2885,22 +2785,6 @@
                 }
             ]
         },
-        "Folder": {
-            "name": "Folder",
-            "shortname": "Folder",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Resources",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\resources\\Folder.js",
-            "line": 3,
-            "description": "Folder resource stores another resources inside.",
-            "extends": "{Resource}",
-            "is_constructor": 1
-        },
         "Font": {
             "name": "Font",
             "shortname": "Font",
@@ -2998,22 +2882,6 @@
             "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\n\nThe manager is used to manage the following types of resources:\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
             "is_constructor": 1,
             "extends": "{Object3D}"
-        },
-        "Template": {
-            "name": "Template",
-            "shortname": "Template",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Resources",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\resources\\Template.js",
-            "line": 3,
-            "description": "Template resource stores object template that can be used to create multiple objects of the same type.",
-            "extends": "{Resource}",
-            "is_constructor": 1
         },
         "TextFile": {
             "name": "TextFile",
@@ -3697,20 +3565,6 @@
             "line": 3,
             "description": "ObjectUtils is a collection of methods to apply operations to Object3D objects",
             "static": 1
-        },
-        "SVGUtils": {
-            "name": "SVGUtils",
-            "shortname": "SVGUtils",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Utils",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\utils\\SVGUtils.js",
-            "line": 3,
-            "description": "SVG Utils contains methods to manipulate SVG data."
         },
         "Timer": {
             "name": "Timer",
@@ -14214,27 +14068,6 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\SVGUtils.js",
-            "line": 11,
-            "description": "Used to create a Path from a input SVG file.",
-            "itemtype": "method",
-            "name": "createPath",
-            "static": 1,
-            "params": [
-                {
-                    "name": "data",
-                    "description": "SVG data.",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "Path generated from SVG data.",
-                "type": "Path"
-            },
-            "class": "SVGUtils",
             "module": "Utils"
         },
         {

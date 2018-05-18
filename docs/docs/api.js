@@ -29,7 +29,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "FilmPass",
         "FirstPersonControls",
         "Fog",
-        "Folder",
         "Font",
         "FontLoader",
         "Gamepad",
@@ -69,9 +68,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "RenderPass",
         "Resource",
         "ResourceManager",
-        "RoundedBoxBufferGeometry",
         "SSAOPass",
-        "SVGUtils",
         "Scene",
         "Script",
         "ShaderPass",
@@ -85,7 +82,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Sprite",
         "SpriteSheetTexture",
         "TechnicolorPass",
-        "Template",
         "Text3D",
         "TextFile",
         "Texture",
@@ -110,7 +106,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Core",
         "Devices",
         "Files",
-        "Geometry",
         "Input",
         "Lights",
         "Loaders",
@@ -173,11 +168,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Files",
             "name": "Files",
             "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere."
-        },
-        {
-            "displayName": "Geometry",
-            "name": "Geometry",
-            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normals.\n\nThere is no UV coordinates."
         },
         {
             "displayName": "Input",
