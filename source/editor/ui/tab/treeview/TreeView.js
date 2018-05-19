@@ -6,18 +6,14 @@ function TreeView(parent, closeable, container, index)
 
 	this.element.style.overflow = "auto";
 	this.element.style.display = "block";
-	this.element.style.top = "0px";
-	this.element.style.left = "0px";
-	this.element.style.width = "100%";
-	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Container
-	this.container = document.createElement("div");
-	this.container.style.overflow = "hidden";
-	this.container.style.position = "static";
-	this.container.style.display = "block";
-	this.element.appendChild(this.container);
+	this.children = document.createElement("div");
+	this.children.style.overflow = "hidden";
+	this.children.style.position = "static";
+	this.children.style.display = "block";
+	this.element.appendChild(this.children);
 
 	this.level = -1;
 	this.program = null;
@@ -166,12 +162,6 @@ TreeView.prototype.updateSelection = function()
 	{
 		TreeView.updateSelection(this.root);
 	}
-};
-
-//Update division Size
-TreeView.prototype.updateInterface = function()
-{
-	this.element.style.display = this.visible ? "block" : "none";
 };
 
 //Fill tree root with objects

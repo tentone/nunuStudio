@@ -4,7 +4,6 @@ function TreeElement(parent)
 {
 	//Children
 	this.parent = parent;
-	this.children = [];
 
 	//Data
 	this.visible = true;
@@ -19,50 +18,53 @@ function TreeElement(parent)
 	this.element.style.position = "static";
 	this.element.style.display = "block";
 	this.element.style.overflow = "hidden";
-	this.parent.container.appendChild(this.element);
+	this.parent.children.appendChild(this.element);
 
 	//Node
 	this.node = document.createElement("div")
 	this.node.style.position = "static";
-	this.node.style.display = "list-item";
+	this.node.style.display = "block";
 	this.node.style.overflow = "hidden";
 	this.node.style.height = "20px";
 	this.node.draggable = true;
 	this.element.appendChild(this.node);
 
 	//Children
-	this.container = document.createElement("div");
-	this.container.style.overflow = "hidden";
-	this.container.style.position = "static";
-	this.container.style.display = "block";
-	this.element.appendChild(this.container);
+	this.children = document.createElement("div");
+	this.children.style.overflow = "hidden";
+	this.children.style.position = "static";
+	this.children.style.display = "block";
+	this.element.appendChild(this.children);
 
 	//Arrow
 	this.arrow = document.createElement("img");
 	this.arrow.style.position = "absolute";
-	this.arrow.style.height = "20px";
-	this.arrow.style.width = "20px";
-	this.arrow.style.opacity = 0.5;
+	this.arrow.style.display = "block";
+	this.arrow.style.height = "16px";
+	this.arrow.style.width = "16px";
+	this.arrow.style.opacity = "0.5";
 	this.arrow.style.left = spacing + "px";
+	this.arrow.style.paddingTop = "2px";
 	this.arrow.style.cursor = "pointer";
 	this.node.appendChild(this.arrow);
 
 	//Icon
 	this.icon = document.createElement("img");
 	this.icon.style.position = "absolute";
-	this.icon.style.height = "20px";
-	this.icon.style.width = "20px";
+	this.icon.style.display = "block";
+	this.icon.style.height = "16px";
+	this.icon.style.width = "16px";
+	this.icon.style.paddingTop = "2px";
 	this.icon.style.left = (spacing + 20) + "px";
 	this.node.appendChild(this.icon);
 
 	//Span
 	this.span = document.createElement("span");
 	this.span.style.position = "absolute";
+	this.span.style.display = "block";
 	this.span.style.left = (spacing + 40) + "px";
-	this.span.style.height = "20px";
-	this.span.style.paddingLeft = "4px";
-	this.span.style.whiteSpace = "nowrap";
-	this.span.style.color = "#FFFFFF";
+	this.span.style.paddingTop = "2px";
+	this.span.style.height = "16px";
 	this.node.appendChild(this.span);
 
 	//Text
@@ -73,12 +75,12 @@ function TreeElement(parent)
 
 	this.arrow.onmouseenter = function()
 	{
-		this.style.opacity = 1.0;
+		this.style.opacity = "1.0";
 	};
 
 	this.arrow.onmouseleave = function()
 	{
-		this.style.opacity = 0.5;
+		this.style.opacity = "0.5";
 	};
 
 	this.arrow.onclick = function()
@@ -579,15 +581,15 @@ TreeElement.prototype.attach = function(object)
 	
 	if(object.folded)
 	{
-		this.container.style.display = "none";
+		this.children.style.display = "none";
 		this.arrow.src = TreeElement.ARROW_RIGHT;
 	}
 	else
 	{
-		this.container.style.display = "block";
+		this.children.style.display = "block";
 		this.arrow.src = TreeElement.ARROW_DOWN;
 	}
-	
+
 	if(Editor.isObjectSelected(object))
 	{
 		this.node.style.backgroundColor = Editor.theme.buttonOverColor;
@@ -598,7 +600,7 @@ TreeElement.prototype.attach = function(object)
 TreeElement.prototype.collapse = function()
 {
 	this.object.folded = true;
-	this.container.style.display = "none";
+	this.children.style.display = "none";
 	this.arrow.src = TreeElement.ARROW_RIGHT;
 };
 
@@ -606,7 +608,7 @@ TreeElement.prototype.collapse = function()
 TreeElement.prototype.expand = function()
 {
 	this.object.folded = false;
-	this.container.style.display = "block";
+	this.children.style.display = "block";
 	this.arrow.src = TreeElement.ARROW_DOWN;
 };
 
@@ -652,9 +654,9 @@ TreeElement.prototype.insertElementIndex = function(element, index)
 //Remove element
 TreeElement.prototype.destroy = function()
 {
-	if(this.parent.container.contains(this.element))
+	if(this.parent.children.contains(this.element))
 	{
-		this.parent.container.removeChild(this.element);
+		this.parent.children.removeChild(this.element);
 	}
 };
 
