@@ -19,7 +19,7 @@ function TreeView(parent, closeable, container, index)
 	this.container.style.display = "block";
 	this.element.appendChild(this.container);
 
-	this.level = 0;
+	this.level = -1;
 
 	this.program = null;
 	this.root = null;
@@ -139,7 +139,7 @@ TreeView.prototype.updateObjectsView = function()
 	var a = performance.now();
 
 	this.createProgramTree();
-	this.updateChildPosition();
+	//this.updateChildPosition();
 
 	var b = performance.now();
 	console.log(b - a);
@@ -190,7 +190,7 @@ TreeView.fillTree = function(root, object)
 //Update treeview to highlight the selected object
 TreeView.updateSelection = function(tree)
 {
-	tree.element.style.backgroundColor = Editor.isObjectSelected(tree.obj) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
+	tree.element.style.backgroundColor = Editor.isObjectSelected(tree.object) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
 
 	var children = tree.children;
 	for(var i = 0; i < children.length; i++)

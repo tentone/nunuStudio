@@ -1,67 +1,82 @@
 "use strict";
 
-function TreeElement(parentNode)
+function TreeElement(parent)
 {
-	//Container
-	this.parentNode = parentNode;
+	//Children
+	this.parent = parent;
+	this.children = [];
 
-	//Attributes
+	//Data
 	this.visible = true;
-
-	//Object attached
 	this.uuid = null;
 	this.folded = false;
 	this.level = this.parent.level + 1;
 	this.object = null;
-
-	//Children and parent elements
-	this.parent = null;
-	this.children = [];
 
 	var self = this;
 	var spacing = this.level * 20;
 
 	//Element
 	this.element = document.createElement("div");
+	this.element.style.position = "static";
+	this.element.style.display = "block";
+	this.element.style.overflow = "hidden";
+	this.parent.container.appendChild(this.element);
+
+	//Node
+	this.node = document.createElement("div");
 	this.node.style.position = "static";
-	this.node.style.display = "block";
+	this.node.style.display = "list-item";
 	this.node.style.overflow = "hidden";
-	this.parentNode.container.appendChild(this.element);
+	this.node.style.height = "20px";
+	this.node.draggable = true;
+	this.element.appendChild(this.node);
+
+	//Children
+	this.container = document.createElement("div");
+	this.container.style.overflow = "hidden";
+	this.container.style.position = "static";
+	this.container.style.display = "block";
+	this.element.appendChild(this.container);
+
+	//Spacing
+	this.spacing = document.createElement("div");
+	this.spacing.style.position = "absolute";
+	this.spacing.style.height = "20px";
+	this.spacing.style.width = spacing + "px";
+	this.node.appendChild(this.spacing);
 
 	//Arrow
 	this.arrow = document.createElement("img");
-	this.arrow.draggable = false;
 	this.arrow.style.position = "absolute";
+	this.arrow.style.height = "20px";
+	this.arrow.style.width = "20px";
 	this.arrow.style.opacity = 0.5;
-	this.arrow.style.width = "15px";
-	this.arrow.style.height = "15px";
-	this.arrow.style.left = "5px";
-	this.arrow.style.top = "3px";
+	this.arrow.style.left = spacing + "px";
+	this.arrow.style.cursor = "pointer";
 	this.node.appendChild(this.arrow);
 
 	//Icon
 	this.icon = document.createElement("img");
-	this.icon.draggable = false;
 	this.icon.style.position = "absolute";
-	this.icon.style.pointerEvents = "none";
-	this.icon.style.width = "15px";
-	this.icon.style.height = "15px";
-	this.icon.style.left = "25px";
-	this.icon.style.top = "3px";
+	this.icon.style.height = "20px";
+	this.icon.style.width = "20px";
+	this.icon.style.left = (spacing + 20) + "px";
 	this.node.appendChild(this.icon);
 
-	//Label
-	this.label = document.createElement("span");
-	this.label.style.overflow = "hidden";
-	this.label.style.position = "absolute";
-	this.label.style.pointerEvents = "none";
-	this.label.style.whiteSpace = "nowrap";
-	this.label.style.top = "4px";
-	this.node.appendChild(this.label);
+	//Span
+	this.span = document.createElement("span");
+	this.span.style.position = "absolute";
+	this.span.style.left = (spacing + 40) + "px";
+	this.span.style.height = "20px";
+	this.span.style.paddingLeft = "4px";
+	this.span.style.whiteSpace = "nowrap";
+	this.span.style.color = "#FFFFFF";
+	this.node.appendChild(this.span);
 
-	//Label text
-	this.labelText = document.createTextNode("");
-	this.label.appendChild(this.labelText);
+	//Text
+	this.text = document.createTextNode("node");
+	this.span.appendChild(this.text);
 
 	var self = this;
 
@@ -77,8 +92,14 @@ function TreeElement(parentNode)
 
 	this.arrow.onclick = function()
 	{
-		self.folded = !self.folded;
-		self.updateFoldedState();
+		if(self.folded)
+		{
+			self.expand();
+		}
+		else
+		{
+			self.collapse();
+		}
 	};
 
 	//Mouse enter
@@ -90,10 +111,10 @@ function TreeElement(parentNode)
 	//Mouse leave
 	this.node.onmouseleave = function()
 	{
-		if(!Editor.isObjectSelected(self.object))
-		{
+		//if(!Editor.isObjectSelected(self.object))
+		//{
 			this.style.backgroundColor = Editor.theme.buttonLightColor;
-		}
+		//}
 	};
 
 	//Drag state
@@ -416,7 +437,7 @@ function TreeElement(parentNode)
 					{
 						var index = self.object.parent.children.indexOf(self.object);
 						Editor.history.add(new ObjectMovedAction(obj, self.object.parent, index));
-						self.parentNode.updateObjectsView();
+						self.parent.updateObjectsView();
 					}
 				}
 				//Bellow
@@ -426,7 +447,7 @@ function TreeElement(parentNode)
 					{
 						var index = self.object.parent.children.indexOf(self.object) + 1;
 						Editor.history.add(new ObjectMovedAction(obj, self.object.parent, index));
-						self.parentNode.updateObjectsView();
+						self.parent.updateObjectsView();
 					}
 				}
 				//Inside
@@ -435,7 +456,7 @@ function TreeElement(parentNode)
 					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
 					{
 						Editor.history.add(new ObjectMovedAction(obj, self.object));	
-						self.parentNode.updateObjectsView();
+						self.parent.updateObjectsView();
 					}
 				}
 			}
@@ -548,38 +569,54 @@ TreeElement.ARROW_RIGHT = "editor/files/icons/misc/arrow_right.png";
 TreeElement.prototype = Object.create(Element.prototype);
 
 //Set object attached to element
-TreeElement.prototype.attach = function(obj)
+TreeElement.prototype.attach = function(object)
 {
-	this.object = obj;
-	this.uuid = obj.uuid;
-	this.folded = obj.folded;
+	this.object = object;
+	this.uuid = object.uuid;
+	this.folded = object.folded;
 
-	this.node.draggable = !obj.locked;
-
-	this.labelText.data = obj.name;
-	this.icon.src = this.object.locked ? ObjectIcons.locked : ObjectIcons.get(obj.type);
+	this.node.draggable = !object.locked;
+	this.text.data = object.name;
+	this.icon.src = this.object.locked ? ObjectIcons.locked : ObjectIcons.get(object.type);
 	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
 	
-	if(Editor.isObjectSelected(obj))
+	if(Editor.isObjectSelected(object))
 	{
 		this.node.style.backgroundColor = Editor.theme.buttonOverColor;
 	}
 };
 
-//Add tree element from object
-TreeElement.prototype.addObject = function(obj)
+//Collapse the tree node.
+TreeElement.prototype.collapse = function()
 {
-	var element = new TreeElement(this.parentNode);
-	element.attach(obj);
-	element.parent = this;
-	this.children.push(element);
-	return element;
+	this.folded = true;
+	this.container.style.display = "none";
+	this.arrow.src = TreeElement.ARROW_RIGHT;
+};
+
+//Expand the tree node.
+TreeElement.prototype.expand = function()
+{
+	this.folded = false;
+	this.container.style.display = "block";
+	this.arrow.src = TreeElement.ARROW_DOWN;
 };
 
 //Add tree element from object
+TreeElement.prototype.addObject = function(object)
+{
+	var element = new TreeElement(this);
+	element.attach(object);
+	element.updateInterface();
+	return element;
+};
+
+/*
+//Add tree element from object
 TreeElement.prototype.insertObject = function(obj, index)
 {
-	var element = new TreeElement(this.parentNode);
+	//TODO <CHECK THIS CODE>
+	var element = new TreeElement(this.parent);
 	element.attach(obj);
 	element.parent = this;
 	this.children.splice(index, 0, element);
@@ -589,6 +626,7 @@ TreeElement.prototype.insertObject = function(obj, index)
 //Remove element
 TreeElement.prototype.removeElementIndex = function(index)
 {	
+	//TODO <CHECK THIS CODE>
 	var element = this.children[index];
 	this.children.splice(index, 1);
 	return element;
@@ -597,32 +635,26 @@ TreeElement.prototype.removeElementIndex = function(index)
 //Add tree element from object
 TreeElement.prototype.insertElementIndex = function(element, index)
 {
+	//TODO <CHECK THIS CODE>
 	element.parent = this;
 	this.children.splice(index, 0, element);
 	return element;
 };
+*/
 
 //Remove element
 TreeElement.prototype.destroy = function()
 {
-	if(this.parentNode.container.contains(this.element))
+	if(this.parent.container.contains(this.element))
 	{
-		this.parentNode.container.removeChild(this.element);
+		this.parent.container.removeChild(this.element);
 	}
-};
-
-//Update folded state for this tree element
-TreeElement.prototype.updateFoldedState = function()
-{
-	this.object.folded = this.folded;
-	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
-	this.parentNode.updateChildPosition();
 };
 
 TreeElement.prototype.setVisibility = function(visible)
 {
 	this.visible = visible;
-	this.node.style.display = visible ? "block" : "none";
+	this.element.style.display = visible ? "list-item" : "none";
 };
 
 //Update interface
@@ -630,11 +662,22 @@ TreeElement.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.node.style.display = "block";
-		this.arrow.style.display = this.object.isEmpty() ? "none" : "block";
+		this.element.style.display = "list-item";
+		this.arrow.style.visibility = this.object.isEmpty() ? "hidden" : "visible";
+
+		if(this.folded)
+		{
+			this.container.style.display = "none";
+			this.arrow.src = TreeElement.ARROW_RIGHT;
+		}
+		else
+		{
+			this.container.style.display = "block";
+			this.arrow.src = TreeElement.ARROW_DOWN;
+		}
 	}
 	else
 	{
-		this.node.style.display = "none";
+		this.element.style.display = "none";
 	}
 };
