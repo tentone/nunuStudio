@@ -31,25 +31,10 @@ function TreeElement(container)
 	this.element.style.boxSizing = "border-box";
 	this.container.element.appendChild(this.element);
 
-	//Children
-	this.container = document.createElement("div");
-	this.container.style.overflow = "hidden";
-	this.container.style.position = "static";
-	this.container.style.display = "block";
-	this.element.appendChild(this.container);
-
-	//Spacing
-	this.spacing = document.createElement("div");
-	this.spacing.style.position = "absolute";
-	this.spacing.style.height = "20px";
-	this.spacing.style.width = spacing + "px";
-	this.node.appendChild(this.spacing);
-
 	//Arrow
 	this.arrow = document.createElement("img");
+	this.arrow.draggable = false;
 	this.arrow.style.position = "absolute";
-	this.arrow.style.height = "20px";
-	this.arrow.style.width = "20px";
 	this.arrow.style.opacity = 0.5;
 	this.arrow.style.width = "15px";
 	this.arrow.style.height = "15px";
@@ -59,6 +44,7 @@ function TreeElement(container)
 
 	//Icon
 	this.icon = document.createElement("img");
+	this.icon.draggable = false;
 	this.icon.style.position = "absolute";
 	this.icon.style.pointerEvents = "none";
 	this.icon.style.width = "15px";
@@ -76,9 +62,9 @@ function TreeElement(container)
 	this.label.style.top = "4px";
 	this.element.appendChild(this.label);
 
-	//Text
-	this.text = document.createTextNode("node");
-	this.span.appendChild(this.text);
+	//Label text
+	this.labelText = document.createTextNode("");
+	this.label.appendChild(this.labelText);
 
 	var self = this;
 
@@ -94,14 +80,8 @@ function TreeElement(container)
 
 	this.arrow.onclick = function()
 	{
-		if(self.folded)
-		{
-			self.expand();
-		}
-		else
-		{
-			self.collapse();
-		}
+		self.folded = !self.folded;
+		self.updateFoldedState();
 	};
 
 	//Mouse enter
@@ -116,7 +96,7 @@ function TreeElement(container)
 		if(!Editor.isObjectSelected(self.obj))
 		{
 			this.style.backgroundColor = Editor.theme.buttonLightColor;
-		//}
+		}
 	};
 
 	//Drag state
@@ -571,7 +551,7 @@ TreeElement.ARROW_RIGHT = "editor/files/icons/misc/arrow_right.png";
 TreeElement.prototype = Object.create(Element.prototype);
 
 //Set object attached to element
-TreeElement.prototype.attach = function(object)
+TreeElement.prototype.attach = function(obj)
 {
 	this.obj = obj;
 	this.uuid = obj.uuid;
@@ -583,30 +563,14 @@ TreeElement.prototype.attach = function(object)
 	this.icon.src = this.obj.locked ? ObjectIcons.locked : ObjectIcons.get(obj.type);
 	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
 	
-	if(Editor.isObjectSelected(object))
+	if(Editor.isObjectSelected(obj))
 	{
 		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	}
 };
 
-//Collapse the tree node.
-TreeElement.prototype.collapse = function()
-{
-	this.folded = true;
-	this.container.style.display = "none";
-	this.arrow.src = TreeElement.ARROW_RIGHT;
-};
-
-//Expand the tree node.
-TreeElement.prototype.expand = function()
-{
-	this.folded = false;
-	this.container.style.display = "block";
-	this.arrow.src = TreeElement.ARROW_DOWN;
-};
-
 //Add tree element from object
-TreeElement.prototype.addObject = function(object)
+TreeElement.prototype.addObject = function(obj)
 {
 	var element = new TreeElement(this.container);
 	element.attach(obj);
@@ -615,7 +579,6 @@ TreeElement.prototype.addObject = function(object)
 	return element;
 };
 
-/*
 //Add tree element from object
 TreeElement.prototype.insertObject = function(obj, index)
 {
@@ -629,7 +592,6 @@ TreeElement.prototype.insertObject = function(obj, index)
 //Remove element
 TreeElement.prototype.removeElementIndex = function(index)
 {	
-	//TODO <CHECK THIS CODE>
 	var element = this.children[index];
 	this.children.splice(index, 1);
 	return element;
@@ -638,12 +600,10 @@ TreeElement.prototype.removeElementIndex = function(index)
 //Add tree element from object
 TreeElement.prototype.insertElementIndex = function(element, index)
 {
-	//TODO <CHECK THIS CODE>
 	element.parent = this;
 	this.children.splice(index, 0, element);
 	return element;
 };
-*/
 
 //Remove element
 TreeElement.prototype.destroy = function()

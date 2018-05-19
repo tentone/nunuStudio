@@ -196,7 +196,7 @@ TreeView.fillTree = function(root, object)
 //Update treeview to highlight the selected object
 TreeView.updateSelection = function(tree)
 {
-	tree.element.style.backgroundColor = Editor.isObjectSelected(tree.object) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
+	tree.element.style.backgroundColor = Editor.isObjectSelected(tree.obj) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
 
 	var children = tree.children;
 	for(var i = 0; i < children.length; i++)
