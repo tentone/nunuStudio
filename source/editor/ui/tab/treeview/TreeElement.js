@@ -63,8 +63,8 @@ function TreeElement(parent)
 	this.span.style.position = "absolute";
 	this.span.style.display = "block";
 	this.span.style.left = (spacing + 40) + "px";
-	this.span.style.paddingTop = "2px";
-	this.span.style.height = "16px";
+	this.span.style.paddingTop = "3px";
+	this.span.style.height = "14px";
 	this.node.appendChild(this.span);
 
 	//Text
