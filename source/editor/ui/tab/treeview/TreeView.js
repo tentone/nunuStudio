@@ -20,7 +20,6 @@ function TreeView(parent, closeable, container, index)
 	this.element.appendChild(this.container);
 
 	this.level = -1;
-
 	this.program = null;
 	this.root = null;
 }
@@ -139,7 +138,6 @@ TreeView.prototype.updateObjectsView = function()
 	var a = performance.now();
 
 	this.createProgramTree();
-	//this.updateChildPosition();
 
 	var b = performance.now();
 	console.log(b - a);
@@ -197,20 +195,4 @@ TreeView.updateSelection = function(tree)
 	{
 		TreeView.updateSelection(children[i]);
 	}
-};
-
-//Check if parent if folded (recursive)
-TreeView.checkParentFolded = function(element)
-{
-	if(element.parent === null)
-	{
-		return false;
-	}
-
-	if(element.folded)
-	{
-		return true;
-	}
-
-	return TreeView.checkParentFolded(element.parent);
 };

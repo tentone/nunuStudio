@@ -8,8 +8,6 @@ function TreeElement(parent)
 
 	//Data
 	this.visible = true;
-	this.uuid = null;
-	this.folded = false;
 	this.level = this.parent.level + 1;
 	this.object = null;
 
@@ -24,7 +22,7 @@ function TreeElement(parent)
 	this.parent.container.appendChild(this.element);
 
 	//Node
-	this.node = document.createElement("div");
+	this.node = document.createElement("div")
 	this.node.style.position = "static";
 	this.node.style.display = "list-item";
 	this.node.style.overflow = "hidden";
@@ -38,13 +36,6 @@ function TreeElement(parent)
 	this.container.style.position = "static";
 	this.container.style.display = "block";
 	this.element.appendChild(this.container);
-
-	//Spacing
-	this.spacing = document.createElement("div");
-	this.spacing.style.position = "absolute";
-	this.spacing.style.height = "20px";
-	this.spacing.style.width = spacing + "px";
-	this.node.appendChild(this.spacing);
 
 	//Arrow
 	this.arrow = document.createElement("img");
@@ -92,7 +83,7 @@ function TreeElement(parent)
 
 	this.arrow.onclick = function()
 	{
-		if(self.folded)
+		if(self.object.folded)
 		{
 			self.expand();
 		}
@@ -572,13 +563,30 @@ TreeElement.prototype = Object.create(Element.prototype);
 TreeElement.prototype.attach = function(object)
 {
 	this.object = object;
-	this.uuid = object.uuid;
-	this.folded = object.folded;
 
-	this.node.draggable = !object.locked;
+	if(object.locked)
+	{
+		this.node.draggable = false;
+		this.icon.src = ObjectIcons.locked;
+	}
+	else
+	{
+		this.icon.src = ObjectIcons.get(object.type);
+	}
+	
+	this.arrow.style.visibility = this.object.isEmpty() ? "hidden" : "visible";
 	this.text.data = object.name;
-	this.icon.src = this.object.locked ? ObjectIcons.locked : ObjectIcons.get(object.type);
-	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
+	
+	if(object.folded)
+	{
+		this.container.style.display = "none";
+		this.arrow.src = TreeElement.ARROW_RIGHT;
+	}
+	else
+	{
+		this.container.style.display = "block";
+		this.arrow.src = TreeElement.ARROW_DOWN;
+	}
 	
 	if(Editor.isObjectSelected(object))
 	{
@@ -589,7 +597,7 @@ TreeElement.prototype.attach = function(object)
 //Collapse the tree node.
 TreeElement.prototype.collapse = function()
 {
-	this.folded = true;
+	this.object.folded = true;
 	this.container.style.display = "none";
 	this.arrow.src = TreeElement.ARROW_RIGHT;
 };
@@ -597,7 +605,7 @@ TreeElement.prototype.collapse = function()
 //Expand the tree node.
 TreeElement.prototype.expand = function()
 {
-	this.folded = false;
+	this.object.folded = false;
 	this.container.style.display = "block";
 	this.arrow.src = TreeElement.ARROW_DOWN;
 };
@@ -607,7 +615,6 @@ TreeElement.prototype.addObject = function(object)
 {
 	var element = new TreeElement(this);
 	element.attach(object);
-	element.updateInterface();
 	return element;
 };
 
@@ -651,33 +658,5 @@ TreeElement.prototype.destroy = function()
 	}
 };
 
-TreeElement.prototype.setVisibility = function(visible)
-{
-	this.visible = visible;
-	this.element.style.display = visible ? "list-item" : "none";
-};
-
 //Update interface
-TreeElement.prototype.updateInterface = function()
-{
-	if(this.visible)
-	{
-		this.element.style.display = "list-item";
-		this.arrow.style.visibility = this.object.isEmpty() ? "hidden" : "visible";
-
-		if(this.folded)
-		{
-			this.container.style.display = "none";
-			this.arrow.src = TreeElement.ARROW_RIGHT;
-		}
-		else
-		{
-			this.container.style.display = "block";
-			this.arrow.src = TreeElement.ARROW_DOWN;
-		}
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
-};
+TreeElement.prototype.updateInterface = function(){};
