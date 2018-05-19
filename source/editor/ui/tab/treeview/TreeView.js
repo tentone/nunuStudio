@@ -12,15 +12,6 @@ function TreeView(parent, closeable, container, index)
 	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	//Container
-	this.container = document.createElement("div");
-	this.container.style.overflow = "hidden";
-	this.container.style.position = "static";
-	this.container.style.display = "block";
-	this.element.appendChild(this.container);
-
-	this.level = -1;
-
 	this.program = null;
 	this.root = null;
 }
@@ -136,13 +127,8 @@ TreeView.prototype.updateObjectsView = function()
 		this.createProgramTree();
 	}*/
 
-	var a = performance.now();
-
 	this.createProgramTree();
-	//this.updateChildPosition();
-
-	var b = performance.now();
-	console.log(b - a);
+	this.updateChildPosition();
 };
 
 TreeView.prototype.createProgramTree = function()
@@ -170,13 +156,33 @@ TreeView.prototype.updateSelection = function()
 	}
 };
 
+//Update tree view children positions
+TreeView.prototype.updateChildPosition = function()
+{
+	this.root.updateInterface();
+
+	this.size.y = TreeView.updateChildPosition(this.root, 20, 1, this.root.folded);
+};
+
 //Update division Size
 TreeView.prototype.updateInterface = function()
 {
-	this.element.style.display = this.visible ? "block" : "none";
+	if(this.visible)
+	{
+		this.element.style.display = "block";
+
+		if(this.root !== null)
+		{
+			this.root.updateInterface();
+		}
+	}
+	else
+	{
+		this.element.style.display = "none";
+	}
 };
 
-//Fill tree root with objects
+//Fill tree roo with objects
 TreeView.fillTree = function(root, object)
 {
 	var element = root.addObject(object);
@@ -213,4 +219,39 @@ TreeView.checkParentFolded = function(element)
 	}
 
 	return TreeView.checkParentFolded(element.parent);
+};
+
+//Update childs position (recursive)
+TreeView.updateChildPosition = function(parent, position, level, folded)
+{
+	var children = parent.children;
+	var length = parent.children.length;
+
+	for(var i = 0; i < length; i++)
+	{
+		var element = children[i];
+
+		if(folded || TreeView.checkParentFolded(parent))
+		{
+			element.setVisibility(false);
+			folded = true;
+		}
+		else
+		{
+			element.visible = true;
+			element.position.set(0, position);
+			element.level = level;
+			element.updateInterface();
+ 
+			folded = false;
+			position += 20;
+		}
+
+		if(element.children.length > 0)
+		{
+			position = TreeView.updateChildPosition(children[i], position, level + 1, folded);
+		}
+	}
+
+	return position;
 };

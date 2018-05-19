@@ -1,36 +1,35 @@
 "use strict";
 
-function TreeElement(parent)
+function TreeElement(container)
 {
-	//Children
-	this.parent = parent;
-	this.children = [];
+	//Container
+	this.container = container;
 
-	//Data
+	//Attributes
+	this.size = new THREE.Vector2(0,0);
+	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
+
+	//Object attached
+	this.obj = null;
 	this.uuid = null;
 	this.folded = false;
-	this.level = this.parent.level + 1;
-	this.object = null;
 
-	var self = this;
-	var spacing = this.level * 20;
+	//Children and parent elements
+	this.parent = null;
+	this.children = [];
+	this.level = 0;
 
 	//Element
 	this.element = document.createElement("div");
-	this.element.style.position = "static";
-	this.element.style.display = "block";
-	this.element.style.overflow = "hidden";
-	this.parent.container.appendChild(this.element);
-
-	//Node
-	this.node = document.createElement("div");
-	this.node.style.position = "static";
-	this.node.style.display = "list-item";
-	this.node.style.overflow = "hidden";
-	this.node.style.height = "20px";
-	this.node.draggable = true;
-	this.element.appendChild(this.node);
+	this.element.style.position = "absolute";
+	this.element.draggable = true;
+	this.element.style.left = "0px";
+	this.element.style.height = "20px";
+	this.element.style.width = "100%";
+	this.element.style.cursor = "pointer";
+	this.element.style.boxSizing = "border-box";
+	this.container.element.appendChild(this.element);
 
 	//Children
 	this.container = document.createElement("div");
@@ -52,27 +51,30 @@ function TreeElement(parent)
 	this.arrow.style.height = "20px";
 	this.arrow.style.width = "20px";
 	this.arrow.style.opacity = 0.5;
-	this.arrow.style.left = spacing + "px";
-	this.arrow.style.cursor = "pointer";
-	this.node.appendChild(this.arrow);
+	this.arrow.style.width = "15px";
+	this.arrow.style.height = "15px";
+	this.arrow.style.left = "5px";
+	this.arrow.style.top = "3px";
+	this.element.appendChild(this.arrow);
 
 	//Icon
 	this.icon = document.createElement("img");
 	this.icon.style.position = "absolute";
-	this.icon.style.height = "20px";
-	this.icon.style.width = "20px";
-	this.icon.style.left = (spacing + 20) + "px";
-	this.node.appendChild(this.icon);
+	this.icon.style.pointerEvents = "none";
+	this.icon.style.width = "15px";
+	this.icon.style.height = "15px";
+	this.icon.style.left = "25px";
+	this.icon.style.top = "3px";
+	this.element.appendChild(this.icon);
 
-	//Span
-	this.span = document.createElement("span");
-	this.span.style.position = "absolute";
-	this.span.style.left = (spacing + 40) + "px";
-	this.span.style.height = "20px";
-	this.span.style.paddingLeft = "4px";
-	this.span.style.whiteSpace = "nowrap";
-	this.span.style.color = "#FFFFFF";
-	this.node.appendChild(this.span);
+	//Label
+	this.label = document.createElement("span");
+	this.label.style.overflow = "hidden";
+	this.label.style.position = "absolute";
+	this.label.style.pointerEvents = "none";
+	this.label.style.whiteSpace = "nowrap";
+	this.label.style.top = "4px";
+	this.element.appendChild(this.label);
 
 	//Text
 	this.text = document.createTextNode("node");
@@ -103,16 +105,16 @@ function TreeElement(parent)
 	};
 
 	//Mouse enter
-	this.node.onmouseenter = function()
+	this.element.onmouseenter = function()
 	{
 		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
 	//Mouse leave
-	this.node.onmouseleave = function()
+	this.element.onmouseleave = function()
 	{
-		//if(!Editor.isObjectSelected(self.object))
-		//{
+		if(!Editor.isObjectSelected(self.obj))
+		{
 			this.style.backgroundColor = Editor.theme.buttonLightColor;
 		//}
 	};
@@ -129,22 +131,22 @@ function TreeElement(parent)
 	};
 
 	//Drag start
-	this.node.ondragstart = function(event)
+	this.element.ondragstart = function(event)
 	{
-		if(!self.object.locked)
+		if(!self.obj.locked)
 		{
-			event.dataTransfer.setData("uuid", self.object.uuid);
-			DragBuffer.pushDragElement(self.object);
+			event.dataTransfer.setData("uuid", self.obj.uuid);
+			DragBuffer.pushDragElement(self.obj);
 		}
 	};
 
 	//Drag end
-	this.node.ondragend = function(event)
+	this.element.ondragend = function(event)
 	{
 		clearBorder();
 		event.preventDefault();
 
-		if(!self.object.locked)
+		if(!self.obj.locked)
 		{
 			//Try to remove event from buffer
 			var uuid = event.dataTransfer.getData("uuid");
@@ -153,7 +155,7 @@ function TreeElement(parent)
 	};
 
 	//Drag leave
-	this.node.ondragleave = function()
+	this.element.ondragleave = function()
 	{
 		event.preventDefault();
 		clearBorder();
@@ -161,13 +163,13 @@ function TreeElement(parent)
 	};
 
 	//Context menu
-	this.node.oncontextmenu = function(event)
+	this.element.oncontextmenu = function(event)
 	{
-		if(!self.object.locked)
+		if(!self.obj.locked)
 		{
 			//Scene and program flags
-			var isProgram = self.object instanceof Program;
-			var isScene = self.object instanceof Scene;
+			var isProgram = self.obj instanceof Program;
+			var isScene = self.obj instanceof Scene;
 
 			//Context menu
 			var context = new ContextMenu();
@@ -187,15 +189,15 @@ function TreeElement(parent)
 					Editor.updateObjectsViewsGUI();
 				});			
 			}
-			else if(self.object instanceof THREE.Object3D)
+			else if(self.obj instanceof THREE.Object3D)
 			{
 				context.addOption("Object editor", openSceneTab);
 
-				if(self.object instanceof Script)
+				if(self.obj instanceof Script)
 				{
 					context.addOption("Script editor", openScriptTab);
 				}
-				else if(self.object instanceof ParticleEmitter)
+				else if(self.obj instanceof ParticleEmitter)
 				{
 					context.addOption("Particle editor", openParticleTab);
 				}
@@ -204,13 +206,13 @@ function TreeElement(parent)
 			//Recalculate Origin
 			context.addOption("Recenter geometries", function()
 			{
-				ObjectUtils.recalculateGeometryOrigin(self.object);
+				ObjectUtils.recalculateGeometryOrigin(self.obj);
 			});
 
 			//Rename
 			context.addOption("Rename", function()
 			{
-				Editor.renameObject(self.object);
+				Editor.renameObject(self.obj);
 			});
 
 			//Delete
@@ -218,29 +220,29 @@ function TreeElement(parent)
 			{
 				context.addOption("Delete", function()
 				{
-					Editor.deleteObject(self.object);
+					Editor.deleteObject(self.obj);
 				});
 			}
 
 			//Mesh specific stuff
-			if(self.object instanceof THREE.Mesh || self.object instanceof THREE.SkinnedMesh)
+			if(self.obj instanceof THREE.Mesh || self.obj instanceof THREE.SkinnedMesh)
 			{
 				//If mesh has a geometry attached
-				if(self.object.geometry !== undefined)
+				if(self.obj.geometry !== undefined)
 				{
 					//Generate normals for the attached geometry
 					context.addOption("Compute normals", function()
 					{
-						self.object.geometry.computeVertexNormals();
+						self.obj.geometry.computeVertexNormals();
 					});
 
 					//Apply transformation to geometry
 					context.addOption("Apply transformation", function()
 					{
-						self.object.geometry.applyMatrix(self.object.matrixWorld);
-						self.object.position.set(0, 0, 0);
-						self.object.scale.set(1, 1, 1);
-						self.object.rotation.set(0, 0, 0);
+						self.obj.geometry.applyMatrix(self.obj.matrixWorld);
+						self.obj.position.set(0, 0, 0);
+						self.obj.scale.set(1, 1, 1);
+						self.obj.rotation.set(0, 0, 0);
 					});
 				}
 				
@@ -267,22 +269,22 @@ function TreeElement(parent)
 
 				physics.addOption("Box", function()
 				{
-					createPhysics(self.object, Mesh2shape.Type.BOX);
+					createPhysics(self.obj, Mesh2shape.Type.BOX);
 				});
 
 				physics.addOption("Sphere", function()
 				{
-					createPhysics(self.object, Mesh2shape.Type.SPHERE);
+					createPhysics(self.obj, Mesh2shape.Type.SPHERE);
 				});
 
 				physics.addOption("Cylinder", function()
 				{
-					createPhysics(self.object, Mesh2shape.Type.CYLINDER);
+					createPhysics(self.obj, Mesh2shape.Type.CYLINDER);
 				});
 	
 				physics.addOption("ConvexHull", function()
 				{
-					createPhysics(self.object, Mesh2shape.Type.HULL);
+					createPhysics(self.obj, Mesh2shape.Type.HULL);
 				});
 			}
 
@@ -293,14 +295,14 @@ function TreeElement(parent)
 				//Set object and children to static mode
 				autoUpdate.addOption("Static", function()
 				{
-					ObjectUtils.setMatrixAutoUpdate(self.object, false);
+					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
 					Editor.updateObjectsViewsGUI();
 				});
 
 				//Set object and children to dynamic mode
 				autoUpdate.addOption("Dynamic", function()
 				{
-					ObjectUtils.setMatrixAutoUpdate(self.object, true);
+					ObjectUtils.setMatrixAutoUpdate(self.obj, true);
 					Editor.updateObjectsViewsGUI();
 				});
 
@@ -309,8 +311,8 @@ function TreeElement(parent)
 				//Set object and children shadow casting mode
 				shadow.addOption("Enable", function()
 				{
-					ObjectUtils.setShadowCasting(self.object, true);
-					ObjectUtils.setShadowReceiving(self.object, true);
+					ObjectUtils.setShadowCasting(self.obj, true);
+					ObjectUtils.setShadowReceiving(self.obj, true);
 
 					Editor.updateObjectsViewsGUI();
 				});
@@ -318,8 +320,8 @@ function TreeElement(parent)
 				//Set object and children shadow casting mode
 				shadow.addOption("Disable", function()
 				{
-					ObjectUtils.setShadowCasting(self.object, false);
-					ObjectUtils.setShadowReceiving(self.object, false);
+					ObjectUtils.setShadowCasting(self.obj, false);
+					ObjectUtils.setShadowReceiving(self.obj, false);
 
 					Editor.updateObjectsViewsGUI();
 				});
@@ -327,27 +329,27 @@ function TreeElement(parent)
 				//Duplicate object
 				context.addOption("Duplicate", function()
 				{
-					var obj = new ObjectLoader().parse(self.object.toJSON());
+					var obj = new ObjectLoader().parse(self.obj.toJSON());
 					obj.traverse(function(child)
 					{
 						child.uuid = THREE.Math.generateUUID();
 					});
 
-					Editor.history.add(new ObjectAddedAction(obj, self.object.parent));
+					Editor.history.add(new ObjectAddedAction(obj, self.obj.parent));
 					Editor.gui.treeView.updateObjectsView();
 				});
 
 				//Copy object
 				context.addOption("Copy", function()
 				{
-					Editor.copyObject(self.object);
+					Editor.copyObject(self.obj);
 				});
 
 				//Cut object
 				context.addOption("Cut", function()
 				{
-					Editor.cutObject(self.object);
-					Editor.history.add(new ObjectRemovedAction(self.object));
+					Editor.cutObject(self.obj);
+					Editor.history.add(new ObjectRemovedAction(self.obj));
 				});
 			}
 			
@@ -356,7 +358,7 @@ function TreeElement(parent)
 				//Paste object form clipboard
 				context.addOption("Paste", function()
 				{
-					Editor.pasteObject(self.object);
+					Editor.pasteObject(self.obj);
 				});
 			}
 
@@ -365,11 +367,11 @@ function TreeElement(parent)
 	};
 
 	//Drag over
-	this.node.ondragover = function(event)
+	this.element.ondragover = function(event)
 	{
 		event.preventDefault();
 
-		if(!self.object.locked)
+		if(!self.obj.locked)
 		{
 			//Above
 			if(event.layerY < 5)
@@ -402,12 +404,12 @@ function TreeElement(parent)
 	};
 
 	//Drop event (fired on the drop target)
-	this.node.ondrop = function(event)
+	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
 		clearBorder();
 
-		if(self.object.locked)
+		if(self.obj.locked)
 		{
 			return;
 		}
@@ -417,16 +419,16 @@ function TreeElement(parent)
 		var obj = DragBuffer.popDragElement(uuid);
 
 		//Object 3D
-		if(obj instanceof THREE.Object3D && obj !== self.object)
+		if(obj instanceof THREE.Object3D && obj !== self.obj)
 		{
-			if(ObjectUtils.isChildOf(obj ,self.object))
+			if(ObjectUtils.isChildOf(obj ,self.obj))
 			{
 				Editor.alert("Cannot add object into is child.");
 			}
 			else
 			{
-				var selfIsScene = self.object instanceof Scene;
-				var selfIsProgram = self.object instanceof Program;
+				var selfIsScene = self.obj instanceof Scene;
+				var selfIsProgram = self.obj instanceof Program;
 				var dragIsScene = obj instanceof Scene;
 				var dragIsProgram = obj instanceof Program;
 
@@ -435,9 +437,9 @@ function TreeElement(parent)
 				{
 					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
 					{
-						var index = self.object.parent.children.indexOf(self.object);
-						Editor.history.add(new ObjectMovedAction(obj, self.object.parent, index));
-						self.parent.updateObjectsView();
+						var index = self.obj.parent.children.indexOf(self.obj);
+						Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+						self.container.updateObjectsView();
 					}
 				}
 				//Bellow
@@ -445,9 +447,9 @@ function TreeElement(parent)
 				{
 					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
 					{
-						var index = self.object.parent.children.indexOf(self.object) + 1;
-						Editor.history.add(new ObjectMovedAction(obj, self.object.parent, index));
-						self.parent.updateObjectsView();
+						var index = self.obj.parent.children.indexOf(self.obj) + 1;
+						Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
+						self.container.updateObjectsView();
 					}
 				}
 				//Inside
@@ -455,8 +457,8 @@ function TreeElement(parent)
 				{	
 					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
 					{
-						Editor.history.add(new ObjectMovedAction(obj, self.object));	
-						self.parent.updateObjectsView();
+						Editor.history.add(new ObjectMovedAction(obj, self.obj));	
+						self.container.updateObjectsView();
 					}
 				}
 			}
@@ -465,7 +467,7 @@ function TreeElement(parent)
 		else if(obj instanceof THREE.Material)
 		{
 			var actions = [];
-			self.object.traverse(function(children)
+			self.obj.traverse(function(children)
 			{
 				if(children.material !== undefined)
 				{
@@ -488,52 +490,52 @@ function TreeElement(parent)
 
 				if(Model.fileIsModel(file))
 				{
-					Editor.loadModel(file, self.object);
+					Editor.loadModel(file, self.obj);
 				}
 			}
 		}
 	};
 
 	//Click on object
-	this.node.onclick = function(event)
+	this.element.onclick = function(event)
 	{
 		if(event.ctrlKey)
 		{
-			if(Editor.isObjectSelected(self.object))
+			if(Editor.isObjectSelected(self.obj))
 			{
-				Editor.removeFromSelection(self.object);
+				Editor.removeFromSelection(self.obj);
 			}
 			else
 			{
-				Editor.addToSelection(self.object);
+				Editor.addToSelection(self.obj);
 			}
 		}
 		else
 		{
-			Editor.selectObject(self.object);
+			Editor.selectObject(self.obj);
 		}
 	};
 
 	//Double click
-	this.node.ondblclick = function()
+	this.element.ondblclick = function()
 	{
-		if(!self.object.locked)
+		if(!self.obj.locked)
 		{
-			if(self.object instanceof Script)
+			if(self.obj instanceof Script)
 			{
-				openTab(ScriptEditor, self.object);
+				openTab(ScriptEditor, self.obj);
 			}
-			else if(self.object instanceof Scene)
+			else if(self.obj instanceof Scene)
 			{
-				openTab(SceneEditor, self.object);
+				openTab(SceneEditor, self.obj);
 			}
-			else if(self.object instanceof ParticleEmitter)
+			else if(self.obj instanceof ParticleEmitter)
 			{
-				openTab(ParticleEditor, self.object);
+				openTab(ParticleEditor, self.obj);
 			}
-			else if(self.object instanceof THREE.Camera)
+			else if(self.obj instanceof THREE.Camera)
 			{
-				openTab(CameraEditor, self.object);
+				openTab(CameraEditor, self.obj);
 			}
 		}
 	};
@@ -544,22 +546,22 @@ function TreeElement(parent)
 		if(tab === null)
 		{
 			tab = Editor.gui.tab.addTab(Constructor, true);
-			tab.attach(self.object);
+			tab.attach(self.obj);
 		}
 		tab.select();
 	}
 
 	function openSceneTab()
 	{
-		openTab(SceneEditor, self.object);
+		openTab(SceneEditor, self.obj);
 	}
 	function openScriptTab()
 	{
-		openTab(ScriptEditor, self.object);
+		openTab(ScriptEditor, self.obj);
 	}
 	function openParticleTab()
 	{
-		openTab(ParticleEditor, self.object);
+		openTab(ParticleEditor, self.obj);
 	}
 }
 
@@ -571,18 +573,19 @@ TreeElement.prototype = Object.create(Element.prototype);
 //Set object attached to element
 TreeElement.prototype.attach = function(object)
 {
-	this.object = object;
-	this.uuid = object.uuid;
-	this.folded = object.folded;
+	this.obj = obj;
+	this.uuid = obj.uuid;
+	this.folded = obj.folded;
 
-	this.node.draggable = !object.locked;
-	this.text.data = object.name;
-	this.icon.src = this.object.locked ? ObjectIcons.locked : ObjectIcons.get(object.type);
+	this.element.draggable = !obj.locked;
+
+	this.labelText.data = obj.name;
+	this.icon.src = this.obj.locked ? ObjectIcons.locked : ObjectIcons.get(obj.type);
 	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
 	
 	if(Editor.isObjectSelected(object))
 	{
-		this.node.style.backgroundColor = Editor.theme.buttonOverColor;
+		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	}
 };
 
@@ -605,9 +608,10 @@ TreeElement.prototype.expand = function()
 //Add tree element from object
 TreeElement.prototype.addObject = function(object)
 {
-	var element = new TreeElement(this);
-	element.attach(object);
-	element.updateInterface();
+	var element = new TreeElement(this.container);
+	element.attach(obj);
+	element.parent = this;
+	this.children.push(element);
 	return element;
 };
 
@@ -615,8 +619,7 @@ TreeElement.prototype.addObject = function(object)
 //Add tree element from object
 TreeElement.prototype.insertObject = function(obj, index)
 {
-	//TODO <CHECK THIS CODE>
-	var element = new TreeElement(this.parent);
+	var element = new TreeElement(this.container);
 	element.attach(obj);
 	element.parent = this;
 	this.children.splice(index, 0, element);
@@ -645,16 +648,29 @@ TreeElement.prototype.insertElementIndex = function(element, index)
 //Remove element
 TreeElement.prototype.destroy = function()
 {
-	if(this.parent.container.contains(this.element))
+	if(this.container.element.contains(this.element))
 	{
-		this.parent.container.removeChild(this.element);
+		this.container.element.removeChild(this.element);
 	}
+	
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].destroy();
+	}
+};
+
+//Update folded state for this tree element
+TreeElement.prototype.updateFoldedState = function()
+{
+	this.obj.folded = this.folded;
+	this.arrow.src = this.folded ? TreeElement.ARROW_RIGHT : TreeElement.ARROW_DOWN;
+	this.container.updateChildPosition();
 };
 
 TreeElement.prototype.setVisibility = function(visible)
 {
 	this.visible = visible;
-	this.element.style.display = visible ? "list-item" : "none";
+	this.element.style.display = visible ? "block" : "none";
 };
 
 //Update interface
@@ -662,18 +678,31 @@ TreeElement.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.display = "list-item";
-		this.arrow.style.visibility = this.object.isEmpty() ? "hidden" : "visible";
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		
+		this.labelText.data = this.obj.name;
 
-		if(this.folded)
+		var offset = this.level * 20;
+
+		//Arrow
+		if(this.obj.isEmpty())
 		{
-			this.container.style.display = "none";
-			this.arrow.src = TreeElement.ARROW_RIGHT;
+			this.arrow.style.display = "none";
 		}
 		else
 		{
-			this.container.style.display = "block";
-			this.arrow.src = TreeElement.ARROW_DOWN;
+			this.arrow.style.display = "block";
+			this.arrow.style.left = (5 + offset) + "px";
+		}
+
+		this.icon.style.left = (25 + offset) + "px";
+		this.label.style.left = (45 + offset) + "px";
+
+		//Update childs
+		for(var i = 0; i < this.children.length; i++)
+		{
+			this.children[i].updateInterface();
 		}
 	}
 	else
