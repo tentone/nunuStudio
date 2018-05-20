@@ -59,7 +59,7 @@ TabGroup.prototype.updateMetadata = function()
 };
 
 //Update all tab object views
-TabGroup.prototype.updateObjectsView = function()
+TabGroup.prototype.updateObjectsView = function(changes)
 {
 	for(var i = 0; i < this.options.length; i++)
 	{

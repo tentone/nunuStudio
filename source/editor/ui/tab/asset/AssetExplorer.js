@@ -86,7 +86,7 @@ AssetExplorer.prototype.updateSelection = function()
 	}
 };
 
-AssetExplorer.prototype.updateObjectsView = function()
+AssetExplorer.prototype.updateObjectsView = function(changes)
 {
 	this.clear();
 
