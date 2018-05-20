@@ -581,7 +581,10 @@ SceneEditor.prototype.update = function()
 				
 				if(this.mouse.buttonDoubleClicked() && Editor.selectedObjects.length > 0)
 				{
-					this.controls.focusObject(Editor.selectedObjects[0]);
+					if(Editor.selectedObjects[0] instanceof THREE.Object3D)
+					{
+						this.controls.focusObject(Editor.selectedObjects[0]);
+					}
 				}
 			}
 			else
