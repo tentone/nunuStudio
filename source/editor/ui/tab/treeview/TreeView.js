@@ -8,8 +8,6 @@ function TreeView(parent, closeable, container, index)
 	this.element.style.display = "block";
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
-	this.element.style.width = "100%";
-	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	this.program = null;
@@ -170,7 +168,9 @@ TreeView.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.display = "block";
-
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
+		
 		if(this.root !== null)
 		{
 			this.root.updateInterface();
