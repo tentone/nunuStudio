@@ -55,6 +55,7 @@ function TreeElement(parent)
 	this.icon.style.height = "16px";
 	this.icon.style.width = "16px";
 	this.icon.style.paddingTop = "2px";
+	this.icon.style.pointerEvents = "none";
 	this.icon.style.left = (spacing + 20) + "px";
 	this.node.appendChild(this.icon);
 
@@ -62,6 +63,7 @@ function TreeElement(parent)
 	this.span = document.createElement("span");
 	this.span.style.position = "absolute";
 	this.span.style.display = "block";
+	this.span.style.pointerEvents = "none";
 	this.span.style.left = (spacing + 40) + "px";
 	this.span.style.paddingTop = "3px";
 	this.span.style.height = "14px";
