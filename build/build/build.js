@@ -13,7 +13,7 @@ var sourcePath = "../../source/";
 var buildPath = "../";
 
 var runtimeMain = "runtime/NunuApp.js";
-var editorMain = "Editor.js";
+var editorMain = "editor/Editor.js";
 
 var examplesPath = "../../docs/examples/";
 var editorWebPath = "../../docs/editor/";

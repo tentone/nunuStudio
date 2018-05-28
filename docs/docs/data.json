@@ -884,20 +884,11 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\runtime\\NunuApp.js": {
-            "name": "..\\..\\source\\runtime\\NunuApp.js",
+        "..\\..\\source\\core\\Nunu.js": {
+            "name": "..\\..\\source\\core\\Nunu.js",
             "modules": {
                 "Runtime": 1
             },
-            "classes": {
-                "NunuApp": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\Nunu.js": {
-            "name": "..\\..\\source\\Nunu.js",
-            "modules": {},
             "classes": {
                 "Nunu": 1
             },
@@ -1320,15 +1311,14 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "NunuApp": 1,
                 "Nunu": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 3,
-            "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages."
+            "description": "nunuStudio\nMIT license (http://opensource.org/licenses/MIT)\n  \nClass used to store nunuStudio development version and timestamp.\n\nContains methods to check browser feature support."
         }
     },
     "classes": {
@@ -3595,28 +3585,6 @@
             "line": 3,
             "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere."
         },
-        "NunuApp": {
-            "name": "NunuApp",
-            "shortname": "NunuApp",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Runtime",
-            "namespace": "",
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 165,
-            "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "canvas",
-                    "description": "Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.",
-                    "type": "DOM"
-                }
-            ]
-        },
         "Nunu": {
             "name": "Nunu",
             "shortname": "Nunu",
@@ -3627,7 +3595,7 @@
             "extension_for": [],
             "module": "Runtime",
             "namespace": "",
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 3,
             "description": "nunuStudio\nMIT license (http://opensource.org/licenses/MIT)\n  \nClass used to store nunuStudio development version and timestamp.\n\nContains methods to check browser feature support."
         }
@@ -13479,15 +13447,6 @@
             "module": "BinaryUtils"
         },
         {
-            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 236,
-            "description": "Unit test for tree comparison.\n\nPrints information into the console.",
-            "itemtype": "method",
-            "name": "test",
-            "class": "TreeUtils",
-            "module": "BinaryUtils"
-        },
-        {
             "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
             "line": 20,
             "description": "Start timer, is the timer is already running dosen't do anything.",
@@ -14511,314 +14470,7 @@
             "module": "Files"
         },
         {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 176,
-            "description": "Nunu Program",
-            "itemtype": "property",
-            "name": "program",
-            "type": "{Program}",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 182,
-            "description": "Graphics renderer in use by this NunuApp instance",
-            "itemtype": "property",
-            "name": "renderer",
-            "type": "{Renderer}",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 188,
-            "description": "VR flag, to set VR mode the toggleVR method should be used",
-            "itemtype": "property",
-            "name": "vr",
-            "type": "{boolean}",
-            "default": "false",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 195,
-            "description": "Canvas used to render graphics.",
-            "itemtype": "property",
-            "name": "canvas",
-            "type": "{DOM}",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 201,
-            "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
-            "itemtype": "property",
-            "name": "canvasFitWindow",
-            "type": "{boolean}",
-            "default": "false if a canvas is provided, else true",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 211,
-            "description": "Lock and hide mouse pointer to the canvas.",
-            "itemtype": "method",
-            "name": "lockMouse",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 249,
-            "description": "Load a nunustudio application and attach it to the canvas indicated.\n\nThis method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.",
-            "static": 1,
-            "itemtype": "method",
-            "name": "loadApp",
-            "params": [
-                {
-                    "name": "url",
-                    "description": "URL for the nsp or isp nunuStudio file.",
-                    "type": "URL"
-                },
-                {
-                    "name": "canvas",
-                    "description": "Canvas object or canvas id.",
-                    "type": "String"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 285,
-            "description": "Start running nunu program.\n\nCreates renderer, mouse and keyboard objects, and starts running the loaded application.\n\nA nunu program must be loaded before calling this method.",
-            "itemtype": "method",
-            "name": "run",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 361,
-            "description": "Load program asynchronously and run it after its loaded.",
-            "itemtype": "method",
-            "name": "loadRunProgram",
-            "params": [
-                {
-                    "name": "fname",
-                    "description": "Name of the file to load",
-                    "type": "String"
-                },
-                {
-                    "name": "onLoad",
-                    "description": "onLoad callback",
-                    "type": "Function"
-                },
-                {
-                    "name": "onProgress",
-                    "description": "onProgress callback",
-                    "type": "Function"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 382,
-            "description": "Load program from file.",
-            "itemtype": "method",
-            "name": "loadProgram",
-            "params": [
-                {
-                    "name": "fname",
-                    "description": "Name of the file to load",
-                    "type": "String"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 407,
-            "description": "Load program from file, asynchronously.",
-            "itemtype": "method",
-            "name": "loadProgramAsync",
-            "params": [
-                {
-                    "name": "fname",
-                    "description": "Name of the file to load",
-                    "type": "String"
-                },
-                {
-                    "name": "onLoad",
-                    "description": "onLoad callback. Receives as argument the loaded application.",
-                    "type": "Function"
-                },
-                {
-                    "name": "onProgress",
-                    "description": "onProgress callback",
-                    "type": "Function"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 450,
-            "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
-            "itemtype": "method",
-            "name": "update",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 466,
-            "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
-            "itemtype": "method",
-            "name": "exit",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 517,
-            "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
-            "itemtype": "method",
-            "name": "resume",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 551,
-            "description": "Pause the running application.",
-            "itemtype": "method",
-            "name": "pause",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 561,
-            "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
-            "itemtype": "method",
-            "name": "setCanvas",
-            "params": [
-                {
-                    "name": "canvas",
-                    "description": "Canvas",
-                    "type": "DOM"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 575,
-            "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
-            "itemtype": "method",
-            "name": "resize",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 599,
-            "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Data to send",
-                    "type": "Object"
-                }
-            ],
-            "itemtype": "method",
-            "name": "sendData",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 615,
-            "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
-            "itemtype": "method",
-            "name": "setOnDataReceived",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "Function executed whenether the nunu app running sends data to the host",
-                    "type": "Function"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 628,
-            "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
-            "itemtype": "method",
-            "name": "setOnExit",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "onExit callback",
-                    "type": "Function"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 641,
-            "description": "Check if virtual reality mode is available.",
-            "itemtype": "method",
-            "name": "vrAvailable",
-            "return": {
-                "description": "True if VR mode available",
-                "type": "Boolean"
-            },
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 652,
-            "description": "Toggle VR mode, only works if VR mode is available.",
-            "itemtype": "method",
-            "name": "toggleVR",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 676,
-            "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
-            "itemtype": "method",
-            "name": "toggleFullscreen",
-            "params": [
-                {
-                    "name": "element",
-                    "description": "DOM element to go fullscren by default the rendering canvas is used",
-                    "type": "DOM"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 16,
             "description": "nunuStudio",
             "itemtype": "attribute",
@@ -14829,7 +14481,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 25,
             "description": "Stores the nunu runtime version.",
             "itemtype": "attribute",
@@ -14839,7 +14491,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 33,
             "description": "Stores the nunu runtime dev timestamp.",
             "itemtype": "attribute",
@@ -14849,7 +14501,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 41,
             "description": "Check if host supports WebVR and if there is a VR display available.",
             "itemtype": "method",
@@ -14862,7 +14514,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 52,
             "description": "Used to get the first VR display available, the display is returned as argument of the getDisplay function.",
             "itemtype": "method",
@@ -14878,7 +14530,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 79,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
@@ -14891,7 +14543,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 90,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
@@ -14904,7 +14556,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 113,
             "description": "Check if nunu if running in development mode.",
             "itemtype": "method",
@@ -14917,7 +14569,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 124,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
@@ -14930,7 +14582,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 135,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
@@ -14943,7 +14595,7 @@
             "module": "Runtime"
         },
         {
-            "file": "..\\..\\source\\Nunu.js",
+            "file": "..\\..\\source\\core\\Nunu.js",
             "line": 148,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUse isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
