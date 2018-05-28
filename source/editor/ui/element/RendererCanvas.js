@@ -2,14 +2,14 @@
 
 function RendererCanvas(parent)
 {
-	Canvas.call(this, parent, "canvas");
+	Element.call(this, parent, "canvas");
 
 	this.renderer = null;
 
 	this.createRenderer();
 }
 
-RendererCanvas.prototype = Object.create(Canvas.prototype);
+RendererCanvas.prototype = Object.create(Element.prototype);
 
 RendererCanvas.prototype.createRenderer = function()
 {
@@ -50,7 +50,7 @@ RendererCanvas.prototype.createRenderer = function()
 
 RendererCanvas.prototype.updateInterface = function()
 {
-	Canvas.updateInterface.call(this);
+	Element.updateInterface.call(this);
 	
 	this.renderer.setSize(this.size.x, this.size.y);
 };

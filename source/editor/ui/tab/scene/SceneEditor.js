@@ -5,9 +5,8 @@ function SceneEditor(parent, closeable, container, index)
 	TabElement.call(this, parent, closeable, container, index, "Scene", Editor.filePath + "icons/misc/scene.png");
 
 	//Canvas
-	this.canvas = document.createElement("canvas");
-	this.canvas.style.position = "absolute";
-	this.element.appendChild(this.canvas);
+	this.canvas = null;
+	this.resetCanvas();
 
 	//Renderer
 	this.renderer = null;
@@ -808,27 +807,29 @@ SceneEditor.prototype.render = function()
 	}
 };
 
-//Create new fresh webgl context, delete old canvas and create a new one
-SceneEditor.prototype.reloadContext = function()
+SceneEditor.prototype.resetCanvas = function()
 {
 	if(this.element.contains(this.canvas))
 	{
 		this.element.removeChild(this.canvas);
 	}
-
+	
 	this.canvas = document.createElement("canvas");
-	this.canvas.style.position = "absolute";
+	this.canvas.style.top = "0px";
+	this.canvas.style.left = "0px";
+	this.canvas.style.width = "100%";
+	this.canvas.style.height = "100%";
+	this.element.appendChild(this.canvas);
+};
+
+//Create new fresh webgl context, delete old canvas and create a new one
+SceneEditor.prototype.reloadContext = function()
+{
+	this.resetCanvas();
+
 	this.element.appendChild(this.canvas);
 	this.mouse.setCanvas(this.canvas);
 	
-	if(this.visible)
-	{
-		this.canvas.width = this.size.x;
-		this.canvas.height = this.size.y;
-		this.canvas.style.width = this.size.x + "px";
-		this.canvas.style.height = this.size.y + "px";
-	}
-
 	if(this.renderer !== null)
 	{
 		this.renderer.dispose();
@@ -1173,6 +1174,21 @@ SceneEditor.prototype.updateSelection = function()
 	}
 };
 
+//Dispose running program if there is one
+SceneEditor.prototype.disposeRunningProgram = function()
+{
+	//Dispose running program if there is one
+	if(this.programRunning !== null)
+	{
+		this.setFullscreen(false);
+		this.programRunning.dispose();
+		this.programRunning = null;
+	}
+
+	//Unlock mouse
+	this.mouse.setLock(false);
+};
+
 //Resize scene editor camera
 SceneEditor.prototype.resizeCamera = function()
 {
@@ -1190,21 +1206,6 @@ SceneEditor.prototype.resizeCamera = function()
 	}
 };
 
-//Dispose running program if there is one
-SceneEditor.prototype.disposeRunningProgram = function()
-{
-	//Dispose running program if there is one
-	if(this.programRunning !== null)
-	{
-		this.setFullscreen(false);
-		this.programRunning.dispose();
-		this.programRunning = null;
-	}
-
-	//Unlock mouse
-	this.mouse.setLock(false);
-};
-
 //Update scene editor interface
 SceneEditor.prototype.updateInterface = function()
 {
@@ -1216,8 +1217,6 @@ SceneEditor.prototype.updateInterface = function()
 		//Canvas
 		this.canvas.width = this.size.x;
 		this.canvas.height = this.size.y;
-		this.canvas.style.width = this.size.x + "px";
-		this.canvas.style.height = this.size.y + "px";
 
 		//Element
 		this.element.style.display = "block";
