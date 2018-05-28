@@ -177,7 +177,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 	}
 
 	//Check if some elements have removed and added status at same time
-	/*for(var i = 0; i < diffs.length; i++)
+	for(var i = 0; i < diffs.length; i++)
 	{
 		for(var j = 0; j < diffs.length; j++)
 		{
@@ -197,7 +197,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
 				}
 			}
 		}
-	}*/
+	}
 
 	return diffs;
 };
@@ -230,63 +230,4 @@ TreeUtils.print = function(tree, level)
 		console.log(space + tree.children[i].uuid);
 		TreeUtils.print(tree.children[i], level + 1);
 	}
-};
-
-
-/**
- * Unit test for tree comparison.
- *
- * Prints information into the console.
- * 
- * @method test
- */
-TreeUtils.test = function()
-{
-	console.log("Tree Comparison");
-
-	console.log("Tree A");
-	var treeA = new Tree("root");
-	treeA.add(new Tree("a"));
-	var b = new Tree("b");
-	newTree.add(new Tree("ba"));
-	newTree.add(new Tree("bb"));
-	newTree.add(new Tree("bc"));
-	var bd = new Tree("bd");
-	newTree.add(bd);
-	treeA.add(b);
-	treeA.add(new Tree("c"));
-	var d = new Tree("d");
-	treeA.add(d);
-	treeA.add(new Tree("e"));
-	treeA.add(new Tree("f"));
-	treeA.print();
-
-	console.log("\nTree B");
-	var treeB = treeA.clone();
-	treeB.remove(b);
-	treeB.print();
-
-	console.log("\nTree C");
-	var treeC = treeA.clone();
-	treeC.remove(b);
-	treeC.remove(d);
-	treeC.add(d);
-	treeC.print();
-
-	console.log("\nTree D");
-	var treeD = treeA.clone();
-	treeD.children[1].remove(bd);
-	treeD.print();
-
-	console.log("\nCompare A to B");
-	console.log(TreeUtils.compare(treeA, treeB));
-
-	console.log("\nCompare A to C");
-	console.log(TreeUtils.compare(treeA, treeC));
-
-	console.log("\nCompare A to D");
-	console.log(TreeUtils.compare(treeA, treeD));
-
-	console.log("\nCompare B to A");
-	console.log(TreeUtils.compare(treeB, treeA));
 };

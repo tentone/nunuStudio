@@ -7,8 +7,6 @@ Editor.runtimePath = "runtime/";
 Editor.NWJSPath = "../nwjs/";
 
 //Runtime
-include("Nunu.js");
-
 include("lib/three/three.min.js");
 
 include("lib/three/effects/VREffect.js");
@@ -55,6 +53,7 @@ include("lib/bytebuffer.min.js");
 include("lib/long.min.js");
 include("lib/PSON.min.js");
 
+include("core/Nunu.js");
 include("core/Global.js");
 include("core/FileSystem.js");
 
