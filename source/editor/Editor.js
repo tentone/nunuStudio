@@ -330,6 +330,13 @@ include("editor/ui/tab/scene/controls/EditorFreeControls.js");
 include("editor/ui/tab/scene/controls/EditorOrbitControls.js");
 include("editor/ui/tab/scene/controls/EditorPlanarControls.js");
 include("editor/ui/tab/scene/utils/OrientationCube.js");
+include("editor/ui/tab/scene/helpers/ObjectIconHelper.js");
+include("editor/ui/tab/scene/helpers/PhysicsObjectHelper.js");
+include("editor/ui/tab/scene/helpers/WireframeHelper.js");
+include("editor/ui/tab/scene/helpers/SkinnedWireframeHelper.js");
+include("editor/ui/tab/scene/helpers/GridHelper.js");
+include("editor/ui/tab/scene/helpers/RectAreaLightHelper.js");
+include("editor/ui/tab/scene/helpers/SkeletonHelper.js");
 
 include("editor/ui/tab/asset/AssetExplorer.js");
 include("editor/ui/tab/asset/AssetExplorerMenu.js");
@@ -446,14 +453,6 @@ include("editor/ui/preview/GeometryRenderer.js");
 
 include("editor/ui/sidebar/ToolBar.js");
 include("editor/ui/sidebar/AddObjectSideBar.js");
-
-include("editor/helpers/ObjectIconHelper.js");
-include("editor/helpers/PhysicsObjectHelper.js");
-include("editor/helpers/WireframeHelper.js");
-include("editor/helpers/SkinnedWireframeHelper.js");
-include("editor/helpers/GridHelper.js");
-include("editor/helpers/RectAreaLightHelper.js");
-include("editor/helpers/SkeletonHelper.js");
 
 include("editor/utils/DOMUtils.js");
 include("editor/utils/ObjectIcons.js");
