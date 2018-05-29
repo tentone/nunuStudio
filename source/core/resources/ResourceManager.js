@@ -19,62 +19,79 @@
  * @module Resources
  * @extends {Object3D}
  */
-
-/**
- * Images.
- * 
- * @property images
- * @type {Array}
- */
-/**
- * Videos.
- * 
- * @property videos
- * @type {Array}
- */
-/**
- * Audio.
- * 
- * @property audio
- * @type {Array}
- */
-/**
- * Fonts.
- * 
- * @property fonts
- * @type {Array}
- */
-/**
- * Materials.
- * 
- * @property materials
- * @type {Array}
- */
-/**
- * Textures.
- * 
- * @property textures
- * @type {Array}
- */
-/**
- * Geometries.
- * 
- * @property geometries
- * @type {Array}
- */
 function ResourceManager()
 {
 	THREE.Object3D.call(this);
-	
+	/**
+	 * Images.
+	 * 
+	 * @property images
+	 * @type {Array}
+	 */
 	this.images = [];
+
+	/**
+	 * Videos.
+	 * 
+	 * @property videos
+	 * @type {Array}
+	 */
 	this.videos = [];
+
+	/**
+	 * Audio.
+	 * 
+	 * @property audio
+	 * @type {Array}
+	 */
 	this.audio = [];
+
+	/**
+	 * Fonts.
+	 * 
+	 * @property fonts
+	 * @type {Array}
+	 */
 	this.fonts = [];
+
+	/**
+	 * Materials.
+	 * 
+	 * @property materials
+	 * @type {Array}
+	 */
 	this.materials = [];
+
+	/**
+	 * Textures.
+	 * 
+	 * @property textures
+	 * @type {Array}
+	 */
 	this.textures = [];
+
+	/**
+	 * Geometries.
+	 * 
+	 * @property geometries
+	 * @type {Array}
+	 */
 	this.geometries = [];
-	this.templates = [];
+
+	/**
+	 * Resources.
+	 * 
+	 * @property resources
+	 * @type {Array}
+	 */
 	this.resources = [];
+
+	/**
+	 * Shapes.
+	 * 
+	 * @property shapes
+	 * @type {Array}
+	 */
 	this.shapes = [];
 }
 

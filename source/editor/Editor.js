@@ -2254,7 +2254,6 @@ Editor.exportWebProjectZip = function(fname)
 	var data = pson.toArrayBuffer(Editor.program.toJSON());
 
 	zip.file("app.nsp", Base64Utils.fromArraybuffer(data), {base64: true});
-
 	zip.file("logo.png", FileSystem.readFileBase64(Editor.runtimePath + "logo.png"), {base64: true});
 	zip.file("fullscreen.png", FileSystem.readFileBase64(Editor.runtimePath + "fullscreen.png"), {base64: true});
 	zip.file("vr.png", FileSystem.readFileBase64(Editor.runtimePath + "vr.png"), {base64: true});
