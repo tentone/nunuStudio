@@ -1,17 +1,84 @@
 "use strict";
 
+/**
+ * A canvas element that also contains a thee.js webgl renderer object.
+ *
+ * The renderer is automatically updated to match the canvas size, it also handles the device pixel ratio.
+ * 
+ * @class RenderingCanvas
+ * @extends {Element}
+ */
 function RendererCanvas(parent)
 {
 	Element.call(this, parent, "canvas");
 
-	this.renderer = null;
+	/**
+	 * Canvas DOM element.
+	 * 
+	 * @attribute canvas
+	 * @type {DOM}
+	 */
+	this.resetCanvas();
 
+	/**
+	 * three.js WebGl renderer.
+	 *
+	 * @attribute renderer
+	 * @type {THREE.WebGlRenderer}
+	 */
 	this.createRenderer();
+
+	/**
+	 * On resize callback, called every time the container is updated.
+	 *
+	 * @attribute onResize
+	 */
+	this.onResize = null;
 }
 
 RendererCanvas.prototype = Object.create(Element.prototype);
 
-RendererCanvas.prototype.createRenderer = function()
+/**
+ * Set on resize callback, can be usefull to update cameras and other screen space dependent objects.
+ * 
+ * The callback receives the width and height of the rendering canvas.
+ * 
+ * @method setOnResize
+ * @param {Function} callback
+ */
+RenderingCanvas.prototype.setOnResize = function(callback)
+{
+	this.onResize = callback;
+};
+
+/**
+ * Reset the canvas DOM element.
+ * 
+ * Removes the current canvas and creates a new one.
+ * 
+ * @method resetCanvas
+ */
+RenderingCanvas.prototype.resetCanvas = function()
+{
+	if(this.element.contains(this.canvas))
+	{
+		this.element.removeChild(this.canvas);
+	}
+
+	this.canvas = document.createElement("canvas");
+	this.canvas.style.top = "0px";
+	this.canvas.style.left = "0px";
+	this.canvas.style.width = "100%";
+	this.canvas.style.height = "100%";
+	this.element.appendChild(this.canvas);
+};
+
+/**
+ * Create WebGl renderer.
+ * 
+ * @method createRenderer
+ */
+RenderingCanvas.prototype.createRenderer = function()
 {
 	if(Editor.settings.render.followProject)
 	{
@@ -32,25 +99,80 @@ RendererCanvas.prototype.createRenderer = function()
 		var toneMappingWhitePoint = Editor.settings.render.toneMappingWhitePoint;
 	}
 
-	//Dispose old renderer
-	if(this.renderer !== null)
+	this.renderer = new THREE.WebGLRenderer(
 	{
-		this.renderer.dispose();
-	}
-
-	//Create renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.element, alpha: true, antialias: antialiasing});
+		canvas: this.canvas,
+		context: null,
+		precision: "highp",
+		alpha: true,
+		premultipliedAlpha: true,
+		antialias: antialiasing,
+		preserveDrawingBuffer: false,
+		powerPreference: "high-performance",
+		logarithmicDepthBuffer: false
+	});
 	this.renderer.setSize(this.element.width, this.element.height);
 	this.renderer.shadowMap.enabled = shadows;
 	this.renderer.shadowMap.type = shadowsType;
 	this.renderer.toneMapping = toneMapping;
 	this.renderer.toneMappingExposure = toneMappingExposure;
 	this.renderer.toneMappingWhitePoint = toneMappingWhitePoint;
+	this.renderer.autoClear = false;
+	this.renderer.sortObjects = true;
 };
 
-RendererCanvas.prototype.updateInterface = function()
+/**
+ * Create a new context for this renderer, this may be usefull to change some configurations in the renderer.
+ * 
+ * @method createNewContext
+ */
+RenderingCanvas.prototype.createNewContext = function()
 {
-	Element.updateInterface.call(this);
-	
-	this.renderer.setSize(this.size.x, this.size.y);
+	this.forceContextLoss();
+	this.resetCanvas();
+	this.createRenderer();
+};
+
+/**
+ * Force the current renderer to loose context.
+ * 
+ * This is achieved by using the WEBGL_lose_context extension and may not be supported by all browsers.
+ * 
+ * @method forceContextLoss
+ */
+RenderingCanvas.prototype.forceContextLoss = function()
+{
+	try
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+	}
+	catch(e){}
+}
+
+RenderingCanvas.prototype.destroy = function()
+{
+	Element.prototype.destroy.call(this);
+
+	this.forceContextLoss();
+};
+
+RenderingCanvas.prototype.updateInterface = function()
+{
+	Element.prototype.updateInterface.call(this);
+
+	if(this.visible)
+	{
+		var width = this.size.x * window.devicePixelRatio;
+		var height = this.size.y * window.devicePixelRatio;
+		
+		this.canvas.width = width;
+		this.canvas.height = height;
+		this.renderer.setSize(this.size.x, this.size.y, false);
+
+		if(this.onResize !== null)
+		{
+			this.onResize(width, height);
+		}
+	}
 };

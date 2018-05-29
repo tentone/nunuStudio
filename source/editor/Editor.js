@@ -275,16 +275,18 @@ include("editor/ui/element/ButtonImage.js");
 include("editor/ui/element/ButtonDrawer.js");
 include("editor/ui/element/ButtonImageToggle.js");
 include("editor/ui/element/Text.js");
-include("editor/ui/element/DivisionResizable.js");
 include("editor/ui/element/Canvas.js");
-include("editor/ui/element/DualDivision.js");
-include("editor/ui/element/DualContainer.js");
 include("editor/ui/element/Form.js");
 include("editor/ui/element/AudioPlayer.js");
 include("editor/ui/element/VideoPlayer.js");
 include("editor/ui/element/DropdownMenu.js");
 include("editor/ui/element/ContextMenu.js");
-include("editor/ui/element/LoadingScreen.js");
+
+include("editor/ui/element/modals/LoadingScreen.js");
+
+include("editor/ui/element/containers/DivisionResizable.js");
+include("editor/ui/element/containers/DualDivision.js");
+include("editor/ui/element/containers/DualContainer.js");
 
 include("editor/ui/element/input/Graph.js");
 include("editor/ui/element/input/CheckBox.js");
