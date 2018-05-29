@@ -51,7 +51,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Model",
         "Mouse",
         "Nunu",
-        "NunuApp",
         "Object3D",
         "ObjectLoader",
         "ObjectUtils",
@@ -217,7 +216,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Runtime",
             "name": "Runtime",
-            "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages."
+            "description": "nunuStudio\nMIT license (http://opensource.org/licenses/MIT)\n  \nClass used to store nunuStudio development version and timestamp.\n\nContains methods to check browser feature support."
         },
         {
             "displayName": "Script",

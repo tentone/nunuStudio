@@ -1,7 +1,5 @@
 "use strict";
 
-include("Nunu.js");
-
 include("lib/three/three.min.js");
 
 include("lib/three/effects/VREffect.js");
@@ -48,6 +46,7 @@ include("lib/bytebuffer.min.js");
 include("lib/long.min.js");
 include("lib/PSON.min.js");
 
+include("core/Nunu.js");
 include("core/Global.js");
 include("core/FileSystem.js");
 
@@ -275,8 +274,8 @@ NunuApp.loadApp = function(url, canvas)
 		}
 		else
 		{
-			app.canvas.width = nunuApps[i].canvas.parentElement.offsetWidth * 0.8;
-			app.canvas.height = nunuApps[i].canvas.parentElement.offsetWidth * 0.4;
+			app.canvas.width = nunuApps[i].canvas.parentElement.offsetWidth;
+			app.canvas.height = nunuApps[i].canvas.parentElement.offsetWidth;
 		}
 		app.resize();
 	});

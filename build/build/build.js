@@ -13,11 +13,12 @@ var sourcePath = "../../source/";
 var buildPath = "../";
 
 var runtimeMain = "runtime/NunuApp.js";
-var editorMain = "Editor.js";
+var editorMain = "editor/Editor.js";
 
 var examplesPath = "../../docs/examples/";
 var editorWebPath = "../../docs/editor/";
 
+var docsSource = "../../source/core/";
 var docsPath = "../../docs/docs";
 var docsThemePath = "../../docs/theme";
 
@@ -81,7 +82,7 @@ console.log("-------------------------------------------------------------------
 console.log(" Removing old files");
 deleteFolder("../../docs/docs");
 console.log(" Generating Docs");
-var command = "yuidoc -o " + docsPath + " -N -C -t " + docsThemePath + " -x lib " + sourcePath;
+var command = "yuidoc -o " + docsPath + " -N -C -t " + docsThemePath + " -x lib " + docsSource;
 require("child_process").execSync(command, function(error, stdout, stderr)
 {
 	console.log(stdout);
