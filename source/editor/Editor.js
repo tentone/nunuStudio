@@ -1159,7 +1159,7 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		{
 			fname = fname.replace(".nsp", ".isp");
 
-			var json = JSON.stringify(Editor.program.toJSON());
+			var json = JSON.stringify(Editor.program.toJSON(), null, "\t");
 			FileSystem.writeFile(fname, json);
 		}
 

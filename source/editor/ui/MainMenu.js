@@ -58,6 +58,18 @@ function MainMenu(parent)
 		Editor.gui.saveProgram();
 	}, Editor.filePath + "icons/misc/save.png");
 
+	//Save readable legacy format
+	if(Nunu.developmentMode() && Nunu.runningOnDesktop())
+	{
+		fileMenu.addOption("Save ISP", function()
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				Editor.saveProgram(files[0].path, false, true);
+			}, ".isp", true);
+		}, Editor.filePath + "icons/misc/save.png");
+	}
+
 	//Load Project
 	fileMenu.addOption("Load", function()
 	{
