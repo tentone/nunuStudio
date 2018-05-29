@@ -2,6 +2,8 @@
 
 function ObjectAddedAction(object, parent)
 {
+	Action.call(this);
+	
 	this.object = object;
 	this.parent = parent;
 }

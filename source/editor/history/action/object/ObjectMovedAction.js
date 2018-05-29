@@ -2,6 +2,8 @@
 
 function ObjectMovedAction(object, newParent, newIndex)
 {
+	Action.call(this);
+	
 	this.object = object;
 
 	this.oldParent = object.parent;

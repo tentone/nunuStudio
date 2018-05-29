@@ -2,6 +2,8 @@
 
 function ObjectRemovedAction(object, parent)
 {
+	Action.call(this);
+	
 	this.object = object;
 	this.parent = (parent !== undefined) ? parent : object.parent;
 }
