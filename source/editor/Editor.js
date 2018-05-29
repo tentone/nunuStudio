@@ -1202,7 +1202,6 @@ Editor.setProgram = function(program)
 		Editor.gui.tab.clear();
 
 		//Reset editor
-		Editor.setOpenFile(null);
 		Editor.resetEditor();
 
 		//Add new scene tab to interface
@@ -1224,18 +1223,21 @@ Editor.loadProgram = function(file, binary)
 		{
 			var loader = new ObjectLoader();
 
+			var program;
+
 			if(binary === true)
 			{
 				var pson = new dcodeIO.PSON.StaticPair();
 				var data = pson.decode(reader.result);
-				var program = loader.parse(data);
-				Editor.setProgram(program);
+				program = loader.parse(data);
 			}
 			else
 			{
-				var program = loader.parse(JSON.parse(reader.result));
-				Editor.setProgram(program);
+				program = loader.parse(JSON.parse(reader.result));
 			}
+
+			Editor.setOpenFile(file);
+			Editor.setProgram(program);
 
 			Editor.alert("Project loaded");
 		}
@@ -2200,6 +2202,8 @@ Editor.loadModel = function(file, parent)
 //Set currently open file (also updates the editor title), if running in browser never shows openfile
 Editor.setOpenFile = function(file)
 {
+	console.log(file);
+
 	if(file !== undefined && file !== null)
 	{	
 		if(file instanceof window.File)

@@ -409,10 +409,14 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	object.visible = this.visible;
 
 	object.matrixAutoUpdate = this.matrixAutoUpdate;
-	object.matrix = this.matrix.toArray();
+	//object.matrix = this.matrix.toArray();
 
 	object.frustumCulled = this.frustumCulled;
 	object.renderOrder = this.renderOrder;
+
+	object.position = this.position.toArray();
+	object.quaternion = this.quaternion.toArray();
+	object.scale = this.scale.toArray();
 
 	if(JSON.stringify(this.userData) !== "{}")
 	{

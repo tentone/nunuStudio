@@ -28,8 +28,11 @@ function Interface()
 	assetExplorer.button.setAltText("Asset explorer");
 
 	//Console
-	var console = this.bottomTab.addTab(ConsoleTab, false);
-	console.button.setAltText("Console");
+	if(!Nunu.developmentMode())
+	{
+		var console = this.bottomTab.addTab(ConsoleTab, false);
+		console.button.setAltText("Console");
+	}
 
 	//Animations
 	var animation = this.bottomTab.addTab(AnimationTab, false);
