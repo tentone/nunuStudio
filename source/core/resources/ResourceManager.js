@@ -75,6 +75,7 @@ function ResourceManager()
 	this.geometries = [];
 	this.templates = [];
 	this.resources = [];
+	this.shapes = [];
 }
 
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);

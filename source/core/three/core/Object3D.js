@@ -384,6 +384,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 			materials: {},
 			textures: {},
 			skeletons: {},
+			shapes: {},
 			resources: {}
 		};
 
@@ -422,6 +423,25 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	if(this.geometry !== undefined)
 	{
 		object.geometry = serialize(meta.geometries, this.geometry);
+
+		//Serialize shapes
+		var parameters = this.geometry.parameters;
+		if(parameters !== undefined && parameters.shapes !== undefined)
+		{
+			var shapes = parameters.shapes;
+			if(Array.isArray(shapes))
+			{
+				for(var i = 0, l = shapes.length; i < l; i ++)
+				{
+					var shape = shapes[i];
+					serialize(meta.shapes, shape);
+				}
+			}
+			else
+			{
+				serialize(meta.shapes, shapes);
+			}
+		}
 	}
 
 	//Material
@@ -453,7 +473,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		}
 	}
 
-	//resouceAccess callback
+	//Resource access callback
 	if(resourceAccess !== undefined)
 	{
 		resourceAccess(meta, object);
@@ -485,6 +505,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		output.fonts = extractFromCache(meta.fonts);
 		output.skeletons = extractFromCache(meta.skeletons);
 		output.resources = extractFromCache(meta.resources);
+		output.shapes = extractFromCache(meta.shapes);
 	}
 
 	output.object = object;
