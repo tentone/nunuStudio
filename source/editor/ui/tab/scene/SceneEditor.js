@@ -827,7 +827,6 @@ SceneEditor.prototype.reloadContext = function()
 {
 	this.resetCanvas();
 
-	this.element.appendChild(this.canvas);
 	this.mouse.setCanvas(this.canvas);
 	
 	if(this.renderer !== null)
