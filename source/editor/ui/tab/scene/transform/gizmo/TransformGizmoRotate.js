@@ -53,8 +53,8 @@ function TransformGizmoRotate()
 
 		var group =
 		{
-			handles: this["handles"],
-			pickers: this["pickers"],
+			handles: this.handles,
+			pickers: this.pickers
 		};
 
 		var tempMatrix = new THREE.Matrix4();

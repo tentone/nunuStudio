@@ -26,7 +26,7 @@ function TransformGizmo()
 	this.activePlane = planes["XYZE"];
 
 	planes["YZ"].rotation.set(0, Math.PI / 2, 0);
-	planes["XZ"].rotation.set(- Math.PI / 2, 0, 0);
+	planes["XZ"].rotation.set(-Math.PI / 2, 0, 0);
 
 	for(var i in planes)
 	{
@@ -40,7 +40,7 @@ function TransformGizmo()
 	{
 		for(var name in gizmoMap)
 		{
-			for(i = gizmoMap[name].length; i --;)
+			for(i = gizmoMap[name].length; i--;)
 			{
 				var object = gizmoMap[name][i][0];
 				var position = gizmoMap[name][i][1];
@@ -52,6 +52,7 @@ function TransformGizmo()
 				{
 					object.position.set(position[0], position[1], position[2]);
 				}
+				
 				if(rotation)
 				{
 					object.rotation.set(rotation[0], rotation[1], rotation[2]);
@@ -66,7 +67,7 @@ function TransformGizmo()
 	setupGizmos(this.pickerGizmos, this.pickers);
 
 	//Reset transformations
-	this.traverse(function (child)
+	this.traverse(function(child)
 	{
 		if(child instanceof THREE.Mesh)
 		{
@@ -112,14 +113,7 @@ TransformGizmo.prototype.highlight = function(axis)
 	{
 		if(child.material && child.material.highlight)
 		{
-			if(child.name === axis)
-			{
-				child.material.highlight(true);
-			}
-			else
-			{
-				child.material.highlight(false);
-			}
+			child.material.highlight(child.name === axis);
 		}
 	});
 };
