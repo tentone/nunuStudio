@@ -248,7 +248,6 @@ include("lib/three/modifiers/BufferSubdivisionModifier.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
-include("lib/three/exporters/STLBinaryExporter.js");
 include("lib/three/exporters/GLTFExporter.js");
 
 include("lib/zlib.min.js");

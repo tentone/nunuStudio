@@ -507,8 +507,8 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					var exporter = new THREE.STLBinaryExporter();
-					var data = exporter.parse(Editor.program);
+					var exporter = new THREE.STLExporter();
+					var data = exporter.parse(Editor.program, {binary: true});
 					FileSystem.writeFileArrayBuffer(files[0].path, data.buffer);
 				}
 			}, ".stl", true);
@@ -517,8 +517,8 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				var exporter = new THREE.STLBinaryExporter();
-				var data = exporter.parse(Editor.program);
+				var exporter = new THREE.STLExporter();
+				var data = exporter.parse(Editor.program, {binary: true});
 				FileSystem.writeFileArrayBuffer(fname, data.buffer);
 			}, ".stl");
 		}
