@@ -107,7 +107,15 @@ Script.APPEND = 100;
  */
 Script.EVALUATE = 101;
 
-Script.GLOBAL = 102;
+/**
+ * Include file into the document.body.
+ *
+ * This imports the JS file as any other file included into a <script> tag.
+ *
+ * @attribute INCLUDE
+ * @type {Number}
+ */
+Script.INCLUDE = 102;
 
 /**
  * Auxiliar function to include javascript source file from resource into the script.
@@ -332,14 +340,23 @@ Script.prototype.compileCode = function(code)
 				}\
 			}";
 		}
-		//Global
-		else if(this.mode === Script.GLOBAL)
+		//Include
+		else if(this.mode === Script.INCLUDE)
 		{
 			var libs = Script.getIncludes(code);	
 			code = Script.removeIncludes(code);
 
-			var blob = new Blob([this.program.getResourceByName(libs[i]).data], {type:"text/plain"});
-			console.log(blob);
+			for(var i = 0; i < libs.length; i++)
+			{
+				var blob = new Blob([this.program.getResourceByName(libs[i]).data], {type:"text/plain"});
+				var url = URL.createObjectURL(blob);
+
+				var js = document.createElement("script");
+				js.type = "text/javascript";
+				js.async = false;
+				js.src = url;
+				document.body.appendChild(js);
+			}
 		}
 
 		//Evaluate code and create constructor

@@ -15,7 +15,7 @@ function ScriptPanel(parent, obj)
 	});
 	this.mode.addValue("Evaluate", Script.EVALUATE);
 	this.mode.addValue("Append", Script.APPEND);
-	this.mode.addValue("Global", Script.GLOBAL);
+	this.mode.addValue("Include", Script.INCLUDE);
 	this.form.add(this.mode);
 	this.form.nextRow();
 }

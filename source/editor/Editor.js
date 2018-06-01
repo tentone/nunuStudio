@@ -2201,8 +2201,6 @@ Editor.loadModel = function(file, parent)
 //Set currently open file (also updates the editor title), if running in browser never shows openfile
 Editor.setOpenFile = function(file)
 {
-	console.log(file);
-
 	if(file !== undefined && file !== null)
 	{	
 		if(file instanceof window.File)
