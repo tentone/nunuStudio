@@ -107,6 +107,8 @@ Script.APPEND = 100;
  */
 Script.EVALUATE = 101;
 
+Script.GLOBAL = 102;
+
 /**
  * Auxiliar function to include javascript source file from resource into the script.
  *
@@ -329,6 +331,15 @@ Script.prototype.compileCode = function(code)
 					console.warn(\"nunuStudio: Javascript file \" + name + \" not found in resources\");\
 				}\
 			}";
+		}
+		//Global
+		else if(this.mode === Script.GLOBAL)
+		{
+			var libs = Script.getIncludes(code);	
+			code = Script.removeIncludes(code);
+
+			var blob = new Blob([this.program.getResourceByName(libs[i]).data], {type:"text/plain"});
+			console.log(blob);
 		}
 
 		//Evaluate code and create constructor
