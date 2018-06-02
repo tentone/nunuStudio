@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Object added action.
+ */
 function ObjectAddedAction(object, parent)
 {
 	Action.call(this);
@@ -22,5 +25,5 @@ ObjectAddedAction.prototype.revert = function()
 
 ObjectAddedAction.prototype.updateGUI = function()
 {
-	Editor.updateObjectsViewsGUI();
+	Editor.gui.treeView.updateObjectsView();
 };

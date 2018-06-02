@@ -466,9 +466,10 @@ include("editor/history/action/Action.js");
 include("editor/history/action/ChangeAction.js");
 include("editor/history/action/ActionBundle.js");
 include("editor/history/action/CallbackAction.js");
-include("editor/history/action/object/ObjectAddedAction.js");
-include("editor/history/action/object/ObjectRemovedAction.js");
-include("editor/history/action/object/ObjectMovedAction.js");
+include("editor/history/action/objects/ObjectAddedAction.js");
+include("editor/history/action/objects/ObjectRemovedAction.js");
+include("editor/history/action/objects/ObjectMovedAction.js");
+include("editor/history/action/objects/ObjectChangedAction.js");
 
 include("editor/Settings.js");
 
@@ -724,8 +725,7 @@ Editor.initialize = function()
 	});
 	Editor.manager.create();
 
-	//Update views and start update loop
-	Editor.updateObjectsViewsGUI();
+	//Start update loop
 	Editor.update();
 };
 
@@ -758,7 +758,6 @@ Editor.selectObject = function(object)
 Editor.addToSelection = function(object)
 {
 	Editor.selectedObjects.push(object);
-
 	Editor.updateSelectionGUI();
 	Editor.selectTool();
 };
@@ -839,8 +838,8 @@ Editor.renameObject = function(obj)
 		var name = prompt("Rename object", obj.name);
 		if(name !== null && name !== "")
 		{
-			Editor.history.add(new ChangeAction(obj, "name", name));
-			Editor.updateObjectsViewsGUI();
+			Editor.history.add(new ObjectChangedAction(obj, "name", name));
+			
 		}
 	}
 };

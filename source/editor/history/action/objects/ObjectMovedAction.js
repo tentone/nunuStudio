@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Object moved in the object tree action.
+ */
 function ObjectMovedAction(object, newParent, newIndex)
 {
 	Action.call(this);

@@ -16,7 +16,6 @@ function KinectPanel(parent, obj)
 		Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
 	});
 	this.form.add(this.debugModel);
-
 }
 
 KinectPanel.prototype = Object.create(ObjectPanel.prototype);

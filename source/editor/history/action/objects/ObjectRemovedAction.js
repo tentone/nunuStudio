@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Object removed action.
+ */
 function ObjectRemovedAction(object, parent)
 {
 	Action.call(this);
@@ -39,6 +42,6 @@ ObjectRemovedAction.prototype.updateGUI = function()
 	}
 	else
 	{
-		Editor.updateObjectsViewsGUI();
+		Editor.gui.treeView.updateObjectsView();
 	}
 };
