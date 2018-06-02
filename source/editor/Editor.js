@@ -619,9 +619,6 @@ Editor.initialize = function()
 	//History
 	Editor.history = null;
 
-	//Default resources
-	Editor.createDefaultResouces();
-
 	//Initialize User Interface
 	Editor.gui = new Interface();
 	
@@ -1111,14 +1108,13 @@ Editor.resetEditor = function()
 //Craete new Program
 Editor.createNewProgram = function()
 {
-	//Reset resources
 	Editor.createDefaultResouces();
 
-	//Create program
 	var program = new Program();
 	program.addDefaultScene(Editor.defaultMaterial);
 
 	Editor.setProgram(program);
+	Editor.setOpenFile(null);
 };
 
 //Save program to file
