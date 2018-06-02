@@ -211,19 +211,11 @@ ConsoleTab.prototype.filter = function(args)
 //Update interface
 ConsoleTab.prototype.updateInterface = function()
 {
+	TabElement.prototype.updateInterface.call(this);
+
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-
 		this.console.style.height = (this.size.y - 45) + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
 	}
 };
 

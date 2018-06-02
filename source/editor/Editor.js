@@ -302,8 +302,6 @@ include("editor/ui/element/input/TextureChooser.js");
 include("editor/ui/element/input/TextureBox.js");
 include("editor/ui/element/input/CubeTextureBox.js");
 
-include("editor/ui/MainMenu.js");
-
 include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
 include("editor/ui/TabButton.js");
@@ -452,8 +450,10 @@ include("editor/ui/preview/MaterialRenderer.js");
 include("editor/ui/preview/TextureRenderer.js");
 include("editor/ui/preview/GeometryRenderer.js");
 
-include("editor/ui/sidebar/ToolBar.js");
-include("editor/ui/sidebar/AddObjectSideBar.js");
+include("editor/ui/main/Interface.js");
+include("editor/ui/main/MainMenu.js");
+include("editor/ui/main/sidebar/ToolBar.js");
+include("editor/ui/main/sidebar/AddObjectSideBar.js");
 
 include("editor/utils/DOMUtils.js");
 include("editor/utils/ObjectIcons.js");
@@ -471,7 +471,7 @@ include("editor/history/action/object/ObjectRemovedAction.js");
 include("editor/history/action/object/ObjectMovedAction.js");
 
 include("editor/Settings.js");
-include("editor/Interface.js");
+
 
 Editor.SELECT = 0;
 Editor.MOVE = 1;
