@@ -14,14 +14,8 @@ function DivisionResizable(parent)
 	this.tab.style.position = "absolute";
 	this.tab.style.cursor = "e-resize";
 	this.tab.style.backgroundColor = Editor.theme.tabColor;
-	this.tab.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-	this.tab.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	this.tab.ondrop = Element.preventDefault;
+	this.tab.ondragover = Element.preventDefault;
 	this.parent.appendChild(this.tab);
 
 	//Resize control

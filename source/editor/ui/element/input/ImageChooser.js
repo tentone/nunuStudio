@@ -65,10 +65,7 @@ function ImageChooser(parent)
 	};
 
 	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	this.element.ondragover = Element.preventDefault;
 
 	//Onclick select image file
 	this.element.onclick = function()

@@ -21,16 +21,16 @@ Element.TOP_RIGHT = 1;
 Element.BOTTOM_LEFT = 2;
 Element.BOTTOM_RIGHT = 3;
 
+Element.preventDefault = function(event)
+{
+	event.preventDefault();
+};
+
 //Add drag and drog event prevention
 Element.prototype.preventDragEvents = function()
 {
-	function preventDefault(event)
-	{
-		event.preventDefault();
-	}
-
-	this.element.ondrop = preventDefault;
-	this.element.ondragover = preventDefault;
+	this.element.ondrop = Element.preventDefault;
+	this.element.ondragover = Element.preventDefault;
 };
 
 //Set alt text, that is displayed when the mouse is over the element. Returns the element created that is attached to the document body.

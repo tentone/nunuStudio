@@ -249,11 +249,6 @@ function SceneEditor(parent, closeable, container, index)
 		}
 	};
 
-	//Prevent deafault when object dragged over
-	this.canvas.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
 
 	//Fullscreen button
 	this.fullscreenButton = new ButtonImage(this.element);
@@ -820,6 +815,9 @@ SceneEditor.prototype.resetCanvas = function()
 	this.canvas.style.width = "100%";
 	this.canvas.style.height = "100%";
 	this.element.appendChild(this.canvas);
+
+	//Prevent deafault when object dragged over
+	this.canvas.ondragover = Element.preventDefault;
 };
 
 //Create new fresh webgl context, delete old canvas and create a new one
