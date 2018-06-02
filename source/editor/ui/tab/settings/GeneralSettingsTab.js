@@ -87,6 +87,25 @@ function GeneralSettingsTab(parent, closeable, container, index)
 		this.form.nextRow();	
 	}
 	
+	//Blank Space
+	this.form.addText("");
+	this.form.nextRow();
+
+	//Scene editor
+	this.form.addText("Testing");
+	this.form.nextRow();
+
+	//Immediate mode
+	this.form.addText("Use immediate mode").setAltText("If checked objects changed during runtime test will keep their state when the testing mode stops.");
+	this.immediateMode = new CheckBox(this.form.element);
+	this.immediateMode.size.set(15, 15);
+	this.immediateMode.setOnChange(function()
+	{
+		Editor.settings.general.immediateMode = self.immediateMode.getValue();
+	});
+	this.form.add(this.immediateMode);
+	this.form.nextRow();
+
 	//Update form
 	this.form.updateInterface();
 }
@@ -101,4 +120,6 @@ GeneralSettingsTab.prototype.activate = function()
 		this.autoUpdate.setValue(Editor.settings.general.autoUpdate);
 	}
 	this.historySize.setValue(Editor.settings.general.historySize);
+
+	this.immediateMode.setValue(Editor.settings.general.immediateMode);
 };

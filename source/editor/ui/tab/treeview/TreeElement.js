@@ -316,7 +316,6 @@ function TreeElement(container)
 					});
 
 					Editor.history.add(new ObjectAddedAction(obj, self.obj.parent));
-					Editor.gui.treeView.updateObjectsView();
 				});
 
 				//Copy object
@@ -419,7 +418,6 @@ function TreeElement(container)
 					{
 						var index = self.obj.parent.children.indexOf(self.obj);
 						Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-						self.container.updateObjectsView();
 					}
 				}
 				//Bellow
@@ -429,7 +427,6 @@ function TreeElement(container)
 					{
 						var index = self.obj.parent.children.indexOf(self.obj) + 1;
 						Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
-						self.container.updateObjectsView();
 					}
 				}
 				//Inside
@@ -438,7 +435,6 @@ function TreeElement(container)
 					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
 					{
 						Editor.history.add(new ObjectMovedAction(obj, self.obj));	
-						self.container.updateObjectsView();
 					}
 				}
 			}

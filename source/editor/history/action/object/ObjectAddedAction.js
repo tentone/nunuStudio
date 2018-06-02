@@ -11,9 +11,16 @@ function ObjectAddedAction(object, parent)
 ObjectAddedAction.prototype.apply = function()
 {
 	this.parent.add(this.object);
+	this.updateGUI();
 };
 
 ObjectAddedAction.prototype.revert = function()
 {
 	this.parent.remove(this.object);
+	this.updateGUI();
+};
+
+ObjectAddedAction.prototype.updateGUI = function()
+{
+	Editor.updateObjectsViewsGUI();
 };

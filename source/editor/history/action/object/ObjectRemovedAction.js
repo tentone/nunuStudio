@@ -20,9 +20,25 @@ ObjectRemovedAction.prototype.apply = function()
 	}
 	
 	this.parent.remove(this.object);
+
+	this.updateGUI();
 };
 
 ObjectRemovedAction.prototype.revert = function()
 {
 	this.parent.add(this.object);
+
+	this.updateGUI();
+};
+
+ObjectRemovedAction.prototype.updateGUI = function()
+{
+	if(Editor.isObjectSelected(this.object))
+	{
+		Editor.resetEditor();
+	}
+	else
+	{
+		Editor.updateObjectsViewsGUI();
+	}
 };

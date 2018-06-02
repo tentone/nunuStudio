@@ -28,6 +28,8 @@ ObjectMovedAction.prototype.apply = function()
 		children.splice(this.newIndex, 0, this.object);
 		this.object.parent = this.newParent;
 	}
+
+	this.updateGUI();
 };
 
 ObjectMovedAction.prototype.revert = function()
@@ -37,4 +39,13 @@ ObjectMovedAction.prototype.revert = function()
 	var children = this.oldParent.children;
 	children.splice(this.oldIndex, 0, this.object);
 	this.object.parent = this.oldParent;
+
+	this.updateGUI();
 };
+
+ObjectMovedAction.prototype.updateGUI = function()
+{
+	Editor.gui.treeView.updateObjectsView();
+};
+
+

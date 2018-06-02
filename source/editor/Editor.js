@@ -817,7 +817,6 @@ Editor.addObject = function(obj, parent)
 	//TODO <Check for resources here and create a history action to add resources and objects>
 
 	Editor.history.add(new ObjectAddedAction(obj, parent));
-	Editor.updateObjectsViewsGUI();
 };
 
 //Rename object, if none passed as argument selected object is used
@@ -897,8 +896,6 @@ Editor.deleteObject = function(obj)
 		{
 			Editor.history.add(new ActionBundle(actions));
 		}
-
-		Editor.updateObjectsViewsGUI();
 	}
 };
 
@@ -954,15 +951,6 @@ Editor.cutObject = function(obj)
 	{
 		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
 		Editor.history.add(new ObjectRemovedAction(obj));
-
-		if(Editor.isObjectSelected(obj))
-		{
-			Editor.resetEditor();
-		}
-		else
-		{
-			Editor.updateObjectsViewsGUI();
-		}
 	}
 };
 
@@ -990,8 +978,6 @@ Editor.pasteObject = function(target)
 		{
 			Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
 		}
-		
-		Editor.updateObjectsViewsGUI();
 	}
 	catch(e)
 	{
