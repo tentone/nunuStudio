@@ -55,7 +55,7 @@ PanelContainer.prototype.updateObjectsView = function(changes)
 
 PanelContainer.prototype.updateSelection = function()
 {	
-	var object = Editor.hasObjectSelected() ? Editor.selectedObjects[0] : null;
+	var object = Editor.hasObjectSelected() ? Editor.selection[0] : null;
 	
 	if(this.panel !== null && this.panel.obj === object)
 	{

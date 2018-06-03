@@ -213,7 +213,7 @@ AnimationTab.prototype.deactivate = function()
 //Attach object to animation editor
 AnimationTab.prototype.updateSelection = function()
 {
-	this.attach(Editor.selectedObjects.length > 0 ? Editor.selectedObjects[0] : null);
+	this.attach(Editor.selection.length > 0 ? Editor.selection[0] : null);
 };
 
 //Create a new animation mixer

@@ -394,11 +394,11 @@ SceneEditor.prototype.update = function()
 					this.selectObjectWithMouse();
 				}
 				
-				if(this.mouse.buttonDoubleClicked() && Editor.selectedObjects.length > 0)
+				if(this.mouse.buttonDoubleClicked() && Editor.selection.length > 0)
 				{
-					if(Editor.selectedObjects[0] instanceof THREE.Object3D)
+					if(Editor.selection[0] instanceof THREE.Object3D)
 					{
-						this.controls.focusObject(Editor.selectedObjects[0]);
+						this.controls.focusObject(Editor.selection[0]);
 					}
 				}
 			}
@@ -456,11 +456,11 @@ SceneEditor.prototype.update = function()
 		if(Editor.hasObjectSelected())
 		{
 			//Update object transformation matrix
-			for(var i = 0; i < Editor.selectedObjects.length; i++)
+			for(var i = 0; i < Editor.selection.length; i++)
 			{
-				if(Editor.selectedObjects[i].matrixAutoUpdate === false)
+				if(Editor.selection[i].matrixAutoUpdate === false)
 				{
-					Editor.selectedObjects[i].updateMatrix();
+					Editor.selection[i].updateMatrix();
 				}
 			}
 			
@@ -545,9 +545,9 @@ SceneEditor.prototype.render = function()
 			renderer.setScissor(x, y, width, height);
 
 			//Preview selected camera
-			if(Editor.selectedObjects[0] instanceof PerspectiveCamera || Editor.selectedObjects[0] instanceof OrthographicCamera)
+			if(Editor.selection[0] instanceof PerspectiveCamera || Editor.selection[0] instanceof OrthographicCamera)
 			{
-				var camera = Editor.selectedObjects[0];
+				var camera = Editor.selection[0];
 				camera.aspect = width / height;
 				camera.updateProjectionMatrix();
 				camera.resize(width, height);
@@ -558,9 +558,9 @@ SceneEditor.prototype.render = function()
 				camera.render(renderer, scene);
 			}
 			//Cube camera
-			else if(Editor.selectedObjects[0] instanceof CubeCamera)
+			else if(Editor.selection[0] instanceof CubeCamera)
 			{
-				var cameras = Editor.selectedObjects[0].cameras;
+				var cameras = Editor.selection[0].cameras;
 
 				function renderCamera(index, x, y, w, h)
 				{
@@ -1064,11 +1064,11 @@ SceneEditor.prototype.updateSelection = function()
 {
 	//Filter Object3D objects
 	var selectedObjects = [];
-	for(var i = 0; i < Editor.selectedObjects.length; i++)
+	for(var i = 0; i < Editor.selection.length; i++)
 	{
-		if(Editor.selectedObjects[i] instanceof THREE.Object3D)
+		if(Editor.selection[i] instanceof THREE.Object3D)
 		{
-			selectedObjects.push(Editor.selectedObjects[i]);
+			selectedObjects.push(Editor.selection[i]);
 		}
 	}
 

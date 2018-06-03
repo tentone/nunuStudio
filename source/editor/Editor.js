@@ -613,7 +613,7 @@ Editor.initialize = function()
 	Editor.openFile = null;
 
 	//Selected object
-	Editor.selectedObjects = [];
+	Editor.selection = [];
 
 	//Program
 	Editor.program = null;
@@ -749,7 +749,7 @@ Editor.update = function()
 //Select a single object
 Editor.selectObject = function(object)
 {
-	Editor.selectedObjects = [object];
+	Editor.selection = [object];
 	Editor.updateSelectionGUI();
 	Editor.selectTool();
 };
@@ -757,7 +757,7 @@ Editor.selectObject = function(object)
 //Add object to selection
 Editor.addToSelection = function(object)
 {
-	Editor.selectedObjects.push(object);
+	Editor.selection.push(object);
 	Editor.updateSelectionGUI();
 	Editor.selectTool();
 };
@@ -765,11 +765,11 @@ Editor.addToSelection = function(object)
 //Remove object from selection
 Editor.removeFromSelection = function(object)
 {
-	for(var i = 0; i < Editor.selectedObjects.length; i++)
+	for(var i = 0; i < Editor.selection.length; i++)
 	{
-		if(Editor.selectedObjects[i].uuid === object.uuid)
+		if(Editor.selection[i].uuid === object.uuid)
 		{
-			Editor.selectedObjects.splice(i, 1);
+			Editor.selection.splice(i, 1);
 
 			Editor.updateSelectionGUI();
 			Editor.selectTool();
@@ -782,9 +782,9 @@ Editor.removeFromSelection = function(object)
 //Check if object is selected
 Editor.isObjectSelected = function(object)
 {
-	for(var i = 0; i < Editor.selectedObjects.length; i++)
+	for(var i = 0; i < Editor.selection.length; i++)
 	{
-		if(Editor.selectedObjects[i].uuid === object.uuid)
+		if(Editor.selection[i].uuid === object.uuid)
 		{
 			return true;
 		}
@@ -796,13 +796,13 @@ Editor.isObjectSelected = function(object)
 //Check if there is some object selected
 Editor.hasObjectSelected = function()
 {
-	return Editor.selectedObjects.length > 0;
+	return Editor.selection.length > 0;
 };
 
 //Clear object selection
 Editor.clearSelection = function()
 {
-	Editor.selectedObjects = [];
+	Editor.selection = [];
 };
 
 //Add object to actual scene
@@ -825,7 +825,7 @@ Editor.renameObject = function(obj)
 	{
 		if(Editor.hasObjectSelected())
 		{
-			obj = Editor.selectedObjects[0];
+			obj = Editor.selection[0];
 		}
 		else
 		{
@@ -854,7 +854,7 @@ Editor.deleteObject = function(obj)
 		{
 			if(Editor.hasObjectSelected())
 			{
-				var selected = Editor.selectedObjects;
+				var selected = Editor.selection;
 				Editor.resetEditor();
 			}
 			else
@@ -905,7 +905,7 @@ Editor.copyObject = function(obj)
 	{
 		if(Editor.hasObjectSelected())
 		{
-			obj = Editor.selectedObjects[0];
+			obj = Editor.selection[0];
 		}
 		else
 		{
@@ -931,7 +931,7 @@ Editor.cutObject = function(obj)
 	{
 		if(Editor.hasObjectSelected())
 		{
-			obj = Editor.selectedObjects[0];
+			obj = Editor.selection[0];
 		}
 		else
 		{

@@ -597,7 +597,7 @@ function MainMenu(parent)
 	//Verify is CSG operation is possible
 	function verifyCSG()
 	{
-		if(Editor.selectedObjects.length < 2)
+		if(Editor.selection.length < 2)
 		{
 			Editor.alert("Operation needs two objects");
 			return false;
@@ -605,7 +605,7 @@ function MainMenu(parent)
 
 		for(var i = 0; i < 2; i++)
 		{
-			if(Editor.selectedObjects[i].geometry === undefined)
+			if(Editor.selection[i].geometry === undefined)
 			{
 				Editor.alert("Operation needs two objects with geometries");
 				return false;
@@ -633,10 +633,10 @@ function MainMenu(parent)
 	{
 		if(verifyCSG())
 		{
-			var a = createBSP(Editor.selectedObjects[0]);
-			var b = createBSP(Editor.selectedObjects[1]);
+			var a = createBSP(Editor.selection[0]);
+			var b = createBSP(Editor.selection[1]);
 
-			createCSGAction(a.intersect(b).toMesh(), Editor.selectedObjects[0], Editor.selectedObjects[1]);
+			createCSGAction(a.intersect(b).toMesh(), Editor.selection[0], Editor.selection[1]);
 		}
 	}, Editor.filePath + "icons/misc/intersect.png");
 
@@ -644,10 +644,10 @@ function MainMenu(parent)
 	{
 		if(verifyCSG())
 		{
-			var a = createBSP(Editor.selectedObjects[0]);
-			var b = createBSP(Editor.selectedObjects[1]);
+			var a = createBSP(Editor.selection[0]);
+			var b = createBSP(Editor.selection[1]);
 
-			createCSGAction(a.subtract(b).toMesh(), Editor.selectedObjects[0], Editor.selectedObjects[1]);
+			createCSGAction(a.subtract(b).toMesh(), Editor.selection[0], Editor.selection[1]);
 		}
 	}, Editor.filePath + "icons/misc/subtract.png");
 
@@ -655,10 +655,10 @@ function MainMenu(parent)
 	{
 		if(verifyCSG())
 		{
-			var a = createBSP(Editor.selectedObjects[0]);
-			var b = createBSP(Editor.selectedObjects[1]);
+			var a = createBSP(Editor.selection[0]);
+			var b = createBSP(Editor.selection[1]);
 
-			createCSGAction(a.union(b).toMesh(), Editor.selectedObjects[0], Editor.selectedObjects[1]);
+			createCSGAction(a.union(b).toMesh(), Editor.selection[0], Editor.selection[1]);
 		}
 	}, Editor.filePath + "icons/misc/union.png");
 
@@ -666,7 +666,7 @@ function MainMenu(parent)
 
 	modifiers.addOption("Simplify", function()
 	{
-		if(Editor.selectedObjects.length < 1 || Editor.selectedObjects[0].geometry === undefined)
+		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{
 			Editor.alert("Operation needs a object with geometry");
 			return;
@@ -682,7 +682,7 @@ function MainMenu(parent)
 			return;
 		}
 
-		var original = Editor.selectedObjects[0].geometry;
+		var original = Editor.selection[0].geometry;
 
 		if(original instanceof THREE.BufferGeometry)
 		{
@@ -703,14 +703,14 @@ function MainMenu(parent)
 
 	modifiers.addOption("Subdivide", function()
 	{
-		if(Editor.selectedObjects.length < 1 || Editor.selectedObjects[0].geometry === undefined)
+		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{
 			Editor.alert("Operation needs a object with geometry");
 			return;
 		}
 
 		var modifier = new THREE.BufferSubdivisionModifier();
-		var geometry = modifier.modify(Editor.selectedObjects[0].geometry);
+		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);
 	}, Editor.filePath + "icons/models/figures.png");
@@ -718,26 +718,26 @@ function MainMenu(parent)
 	//Compute mesh normals
 	editMenu.addOption("Compute normals", function()
 	{
-		if(Editor.selectedObjects.length < 1)
+		if(Editor.selection.length < 1)
 		{
 			Editor.alert("Operation needs a mesh object.");
 			return;
 		}
 
-		Editor.selectedObjects[0].geometry.computeVertexNormals();
+		Editor.selection[0].geometry.computeVertexNormals();
 
 	}, Editor.filePath + "icons/misc/probe.png");
 
 	//Apply tranformation
 	editMenu.addOption("Apply transformation", function()
 	{
-		if(Editor.selectedObjects.length < 1)
+		if(Editor.selection.length < 1)
 		{
 			Editor.alert("Operation needs a mesh object.");
 			return;
 		}
 
-		var obj = Editor.selectedObjects[0];
+		var obj = Editor.selection[0];
 		obj.geometry.applyMatrix(obj.matrixWorld);
 		obj.position.set(0, 0, 0);
 		obj.scale.set(1, 1, 1);
@@ -748,7 +748,7 @@ function MainMenu(parent)
 	//Merge geometries
 	editMenu.addOption("Merge geometries", function()
 	{
-		if(Editor.selectedObjects.length < 2)
+		if(Editor.selection.length < 2)
 		{
 			Editor.alert("Operation needs 2 mesh object.");
 			return;
@@ -756,9 +756,9 @@ function MainMenu(parent)
 
 		var geometry = new THREE.Geometry();
 
-		for(var i = 0; i < Editor.selectedObjects.length; i++)
+		for(var i = 0; i < Editor.selection.length; i++)
 		{	
-			var obj = Editor.selectedObjects[i];
+			var obj = Editor.selection[i];
 			if(obj.geometry !== undefined)
 			{
 				//Convert to geometry and merge
