@@ -10,38 +10,41 @@
  * @constructor
  */
 
-/**
- * If set to true, the pass is processed by the composer.
- *
- * @property enabled
- * @type {Boolean}
- */
-/**
- * If set to true, the pass indicates to swap read and write buffer after rendering.
- *
- * @property needsSwap
- * @type {Boolean}
- */
-/**
- * If set to true, the pass clears its buffer before rendering.
- *
- * @property clear
- * @type {Boolean}
- */
-/**
- * If set to true, the result of the pass is rendered to screen.
- *
- * @property enabled
- * @type {Boolean}
- */
 function Pass()
 {
 	this.uuid = THREE.Math.generateUUID();
 	this.type = "Pass";
 
+	/**
+	 * If set to true, the pass is processed by the composer.
+	 *
+	 * @property enabled
+	 * @type {Boolean}
+	 */
 	this.enabled = true;
+
+	/**
+	 * If set to true, the pass indicates to swap read and write buffer after rendering.
+	 *
+	 * @property needsSwap
+	 * @type {Boolean}
+	 */
 	this.needsSwap = true;
+
+	/**
+	 * If set to true, the pass clears its buffer before rendering.
+	 *
+	 * @property clear
+	 * @type {Boolean}
+	 */
 	this.clear = false;
+
+	/**
+	 * If set to true, the result of the pass is rendered to screen.
+	 *
+	 * @property renderToScreen
+	 * @type {Boolean}
+	 */
 	this.renderToScreen = false;
 }
 
