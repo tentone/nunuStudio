@@ -575,6 +575,8 @@ Editor.initialize = function()
 	//Open ISP file if dragged to the window
 	document.body.ondrop = function(event)
 	{
+		event.preventDefault();
+		
 		for(var i = 0; i < event.dataTransfer.files.length; i++)
 		{
 			var file = event.dataTransfer.files[i];
@@ -712,6 +714,15 @@ Editor.initialize = function()
 				Editor.redo();
 			}
 		}
+		else if(key === Keyboard.DEL)
+		{
+			if(Editor.gui.tab.getActual() instanceof CodeEditor)
+			{
+				return;
+			}
+
+			Editor.deleteObject();
+		}
 		else if(key === Keyboard.F2)
 		{
 			Editor.renameObject();
@@ -828,7 +839,6 @@ Editor.renameObject = function(obj)
 		if(name !== null && name !== "")
 		{
 			Editor.history.add(new ObjectChangedAction(obj, "name", name));
-			
 		}
 	}
 };

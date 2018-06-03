@@ -196,10 +196,6 @@ function SceneEditor(parent, closeable, container, index)
 			{
 				self.setState(SceneEditor.TESTING);
 			}
-			else if(key === Keyboard.DEL)
-			{
-				Editor.deleteObject();
-			}
 		}
 		else if(self.state === SceneEditor.TESTING)
 		{

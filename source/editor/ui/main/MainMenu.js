@@ -575,7 +575,8 @@ function MainMenu(parent)
 
 	var csg = editMenu.addMenu("CSG", Editor.filePath + "icons/models/figures.png");
 
-	var createBSP = function(object)
+	//Create BSP for CSG operation
+	function createBSP(object)
 	{
 		var geometry = object.geometry;
 
@@ -591,14 +592,15 @@ function MainMenu(parent)
 		geometry.applyMatrix(object.matrixWorld);
 
 		return new ThreeBSP(geometry);
-	};
+	}
 
-	csg.addOption("Intersect", function()
+	//Verify is CSG operation is possible
+	function verifyCSG()
 	{
 		if(Editor.selectedObjects.length < 2)
 		{
 			Editor.alert("Operation needs two objects");
-			return;
+			return false;
 		}
 
 		for(var i = 0; i < 2; i++)
@@ -606,69 +608,64 @@ function MainMenu(parent)
 			if(Editor.selectedObjects[i].geometry === undefined)
 			{
 				Editor.alert("Operation needs two objects with geometries");
-				return;
+				return false;
 			}
 		}
 
-		var a = createBSP(Editor.selectedObjects[0]);
-		var b = createBSP(Editor.selectedObjects[1]);
-		
-		var mesh = a.intersect(b).toMesh();
-		mesh.material = Editor.defaultMaterial;
+		return true;
+	}
 
-		Editor.addObject(mesh);
+	//Create CSG action
+	function createCSGAction(mesh, a, b)
+	{
+		var actions = [];
+		actions.push(new ObjectRemovedAction(a));
+		actions.push(new ObjectRemovedAction(b));
+		actions.push(new ObjectAddedAction(mesh, a.getScene()));
+
+		Editor.history.add(new ActionBundle(actions));
+	}
+
+	csg.addOption("Intersect", function()
+	{
+		if(verifyCSG())
+		{
+			var a = createBSP(Editor.selectedObjects[0]);
+			var b = createBSP(Editor.selectedObjects[1]);
+			
+			var mesh = a.intersect(b).toMesh();
+			mesh.material = Editor.defaultMaterial;
+
+			createCSGAction(mesh, Editor.selectedObjects[0], Editor.selectedObjects[1]);
+		}
 	}, Editor.filePath + "icons/misc/intersect.png");
 
 	csg.addOption("Subtract", function()
 	{
-		if(Editor.selectedObjects.length < 2)
+		if(verifyCSG())
 		{
-			Editor.alert("Operation needs two objects");
-			return;
+			var a = createBSP(Editor.selectedObjects[0]);
+			var b = createBSP(Editor.selectedObjects[1]);
+
+			var mesh = a.subtract(b).toMesh();
+			mesh.material = Editor.defaultMaterial;
+
+			createCSGAction(mesh, Editor.selectedObjects[0], Editor.selectedObjects[1]);
 		}
-
-		for(var i = 0; i < 2; i++)
-		{
-			if(Editor.selectedObjects[i].geometry === undefined)
-			{
-				Editor.alert("Operation needs two objects with geometries");
-				return;
-			}
-		}
-		
-		var a = createBSP(Editor.selectedObjects[0]);
-		var b = createBSP(Editor.selectedObjects[1]);
-
-		var mesh = a.subtract(b).toMesh();
-		mesh.material = Editor.defaultMaterial;
-
-		Editor.addObject(mesh);
 	}, Editor.filePath + "icons/misc/subtract.png");
 
 	csg.addOption("Union", function()
 	{
-		if(Editor.selectedObjects.length < 2)
+		if(verifyCSG())
 		{
-			Editor.alert("Operation needs two objects");
-			return;
+			var a = createBSP(Editor.selectedObjects[0]);
+			var b = createBSP(Editor.selectedObjects[1]);
+
+			var mesh = a.union(b).toMesh();
+			mesh.material = Editor.defaultMaterial;
+
+			createCSGAction(mesh, Editor.selectedObjects[0], Editor.selectedObjects[1]);
 		}
-
-		for(var i = 0; i < 2; i++)
-		{
-			if(Editor.selectedObjects[i].geometry === undefined)
-			{
-				Editor.alert("Operation needs two objects with geometries.");
-				return;
-			}
-		}
-		
-		var a = createBSP(Editor.selectedObjects[0]);
-		var b = createBSP(Editor.selectedObjects[1]);
-
-		var mesh = a.union(b).toMesh();
-		mesh.material = Editor.defaultMaterial;
-
-		Editor.addObject(mesh);
 	}, Editor.filePath + "icons/misc/union.png");
 
 	var modifiers = editMenu.addMenu("Modifiers", Editor.filePath + "icons/models/figures.png");
@@ -701,7 +698,6 @@ function MainMenu(parent)
 		{
 			var vertices = original.vertices.length;
 		}
-
 
 		var geometry = simplifier.modify(original, Math.ceil(vertices * level));
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);

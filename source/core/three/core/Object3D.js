@@ -195,15 +195,38 @@ THREE.Object3D.prototype.addBellow = function(object, children)
 };
 
 /**
+ * Get scene that contains this object.
+ *
+ * @method getScene
+ * @return {Object3D} scene
+ */
+THREE.Object3D.prototype.getScene = function()
+{
+	var node = this;
+
+	while(node.parent !== null)
+	{
+		node = node.parent;
+
+		if(node instanceof Scene)
+		{
+			return node;
+		}
+	}
+
+	return null;
+};
+
+/**
  * Remove all children from the object.
  * 
  * @method removeAll
  */
 THREE.Object3D.prototype.removeAll = function()
 {
-	for(var i = this.children.length - 1; i > -1; i--)
+	while(this.children.length > 0)
 	{
-		this.remove(this.children[i]);
+		this.remove(this.children[0]);
 	}
 };
 

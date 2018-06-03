@@ -10,30 +10,6 @@
 function ObjectUtils(){}
 
 /**
- * Get scene that contains this object.
- *
- * @method getScene
- * @param {Object3D} obj
- * @return {Object3D} scene
- */
-ObjectUtils.getScene = function(obj)
-{
-	var node = obj;
-
-	while(node.parent !== null)
-	{
-		node = node.parent;
-
-		if(node instanceof Scene)
-		{
-			return node;
-		}
-	}
-
-	return null;
-};
-
-/**
  * Get object tree root.
  *
  * For a object placed inside a running scene the root is always the program.
