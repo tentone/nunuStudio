@@ -56,7 +56,7 @@ function MainMenu(parent)
 	fileMenu.addOption("Save As", function()
 	{
 		Editor.gui.saveProgram();
-	}, Editor.filePath + "icons/misc/save.png");
+	}, Editor.filePath + "icons/misc/save.png").setAltText("CTRL+S");
 
 	//Save readable legacy format
 	if(Nunu.developmentMode() && Nunu.runningOnDesktop())
@@ -74,7 +74,7 @@ function MainMenu(parent)
 	fileMenu.addOption("Load", function()
 	{
 		Editor.gui.loadProgram();
-	}, Editor.filePath + "icons/misc/load.png");
+	}, Editor.filePath + "icons/misc/load.png").setAltText("CTRL+L");
 
 	//Settings
 	fileMenu.addOption("Settings", function()

@@ -625,8 +625,6 @@ SceneEditor.prototype.render = function()
 
 SceneEditor.prototype.resetCanvas = function()
 {
-	console.log("Reset canvas");
-
 	if(this.element.contains(this.canvas))
 	{
 		this.element.removeChild(this.canvas);
