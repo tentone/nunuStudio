@@ -793,6 +793,15 @@ Editor.isObjectSelected = function(object)
 	return false;
 };
 
+//Resize to fit window
+Editor.resize = function()
+{
+	if(!Editor.fullscreen)
+	{
+		Editor.gui.updateInterface();
+	}
+};
+
 //Check if there is some object selected
 Editor.hasObjectSelected = function()
 {
