@@ -230,7 +230,7 @@ function TreeElement(container)
 				function createPhysics(object, mode)
 				{
 					var physics = new PhysicsObject();
-					physics.addShape(Mesh2shape.createShape(object, mode));
+					physics.addShape(PhysicsGenerator.createShape(object, mode));
 
 					physics.name = object.name;
 					physics.position.copy(object.position);
@@ -249,22 +249,22 @@ function TreeElement(container)
 
 				physics.addOption("Box", function()
 				{
-					createPhysics(self.obj, Mesh2shape.Type.BOX);
+					createPhysics(self.obj, PhysicsGenerator.Type.BOX);
 				});
 
 				physics.addOption("Sphere", function()
 				{
-					createPhysics(self.obj, Mesh2shape.Type.SPHERE);
+					createPhysics(self.obj, PhysicsGenerator.Type.SPHERE);
 				});
 
 				physics.addOption("Cylinder", function()
 				{
-					createPhysics(self.obj, Mesh2shape.Type.CYLINDER);
+					createPhysics(self.obj, PhysicsGenerator.Type.CYLINDER);
 				});
 	
 				physics.addOption("ConvexHull", function()
 				{
-					createPhysics(self.obj, Mesh2shape.Type.HULL);
+					createPhysics(self.obj, PhysicsGenerator.Type.HULL);
 				});
 			}
 

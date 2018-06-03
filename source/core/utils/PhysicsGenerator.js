@@ -1,17 +1,18 @@
 "use strict";
 
 /**
- * Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.
+ * Physics generator is used to create Cannon.js shapes from three.js geometries.
+ * 
+ * Can be used with any object that contains a geometry.
  * 
  * It is based on the original Mesh2Shape converted by @donmccurdy.
  * 
- * @author Don McCurdy (https://github.com/donmccurdy)
  * @author tentone
- * @class Mesh2shape
+ * @class PhysicsGenerator
  * @static
  * @module Physics
  */
-function Mesh2shape(){}
+function PhysicsGenerator(){}
 
 /**
  * Type is used to indentify the type of cannonjs:
@@ -23,7 +24,7 @@ function Mesh2shape(){}
  * @attribute Type
  * @type {Object}
  */
-Mesh2shape.Type =
+PhysicsGenerator.Type =
 {
 	BOX: "Box",
 	CYLINDER: "Cylinder",
@@ -36,34 +37,34 @@ Mesh2shape.Type =
  *
  * @method createShape
  * @param {Object3D} object
- * @param {String} type Mesh2shape.Type
+ * @param {String} type PhysicsGenerator.Type
  * @return {CANNON.Shape} shape
  */
-Mesh2shape.createShape = function(object, type)
+PhysicsGenerator.createShape = function(object, type)
 {
 	if(type !== undefined)
 	{
-		if(type === Mesh2shape.Type.BOX)
+		if(type === PhysicsGenerator.Type.BOX)
 		{
-			return Mesh2shape.createBoundingBoxShape(object);
+			return PhysicsGenerator.createBoundingBoxShape(object);
 		}
-		else if(type === Mesh2shape.Type.CYLINDER)
+		else if(type === PhysicsGenerator.Type.CYLINDER)
 		{
-			return Mesh2shape.createBoundingCylinderShape(object);
+			return PhysicsGenerator.createBoundingCylinderShape(object);
 		}
-		else if(type === Mesh2shape.Type.SPHERE)
+		else if(type === PhysicsGenerator.Type.SPHERE)
 		{
-			return Mesh2shape.createBoundingSphereShape(object);
+			return PhysicsGenerator.createBoundingSphereShape(object);
 		}
-		else if(type === Mesh2shape.Type.HULL)
+		else if(type === PhysicsGenerator.Type.HULL)
 		{
-			return Mesh2shape.createConvexPolyhedron(object);
+			return PhysicsGenerator.createConvexPolyhedron(object);
 		}
 		
 		return null;
 	}
 
-	var geometry = Mesh2shape.getGeometry(object);
+	var geometry = PhysicsGenerator.getGeometry(object);
 	if(!geometry)
 	{
 		return null;
@@ -73,29 +74,23 @@ Mesh2shape.createShape = function(object, type)
 	{
 		case "BoxGeometry":
 		case "BoxBufferGeometry":
-			return Mesh2shape.createBoxShape(geometry);
-
+			return PhysicsGenerator.createBoxShape(geometry);
 		case "CylinderGeometry":
 		case "CylinderBufferGeometry":
-			return Mesh2shape.createCylinderShape(geometry);
-
+			return PhysicsGenerator.createCylinderShape(geometry);
 		case "PlaneGeometry":
 		case "PlaneBufferGeometry":
-			return Mesh2shape.createPlaneShape(geometry);
-
+			return PhysicsGenerator.createPlaneShape(geometry);
 		case "SphereGeometry":
 		case "SphereBufferGeometry":
-			return Mesh2shape.createSphereShape(geometry);
-
+			return PhysicsGenerator.createSphereShape(geometry);
 		case "TubeGeometry":
-			return Mesh2shape.createTubeShape(geometry);
-
+			return PhysicsGenerator.createTubeShape(geometry);
 		case "Geometry":
 		case "BufferGeometry":
-			return Mesh2shape.createConvexPolyhedron(object);
-
+			return PhysicsGenerator.createConvexPolyhedron(object);
 		default:
-			return Mesh2shape.createBoxShape(geometry);
+			return PhysicsGenerator.createBoxShape(geometry);
 	}
 };
 
@@ -106,9 +101,9 @@ Mesh2shape.createShape = function(object, type)
  * @param {Geometry} geometry
  * @return {CANNON.Box} shape
  */
-Mesh2shape.createBoxShape = function(geometry)
+PhysicsGenerator.createBoxShape = function(geometry)
 {
-	var vertices = Mesh2shape.getVertices(geometry);
+	var vertices = PhysicsGenerator.getVertices(geometry);
 
 	if(!vertices.length)
 	{
@@ -129,7 +124,7 @@ Mesh2shape.createBoxShape = function(geometry)
  * @param {Geometry} geometry
  * @return {CANNON.Box} shape
  */
-Mesh2shape.createBoundingBoxShape = function(object)
+PhysicsGenerator.createBoundingBoxShape = function(object)
 {
 	var box = new Box3();
 	box.setFromObject(object);
@@ -146,12 +141,6 @@ Mesh2shape.createBoundingBoxShape = function(object)
 	var worldPosition = new THREE.Vector3();
 	worldPosition.setFromMatrixPosition(object.matrixWorld);
 
-	/*var localPosition = helper.position.sub(worldPosition);
-	if(localPosition.lengthSq())
-	{
-		shape.offset = localPosition;
-	}*/
-
 	return shape;
 };
 
@@ -162,10 +151,10 @@ Mesh2shape.createBoundingBoxShape = function(object)
  * @param {ConvexPolyhedron} geometry
  * @return {CANNON.Shape} shape
  */
-Mesh2shape.createConvexPolyhedron = function(object)
+PhysicsGenerator.createConvexPolyhedron = function(object)
 {
 	var i, vertices, faces, hull;
-	var geometry = Mesh2shape.getGeometry(object);
+	var geometry = PhysicsGenerator.getGeometry(object);
 
 	if(geometry instanceof THREE.BufferGeometry)
 	{
@@ -204,7 +193,7 @@ Mesh2shape.createConvexPolyhedron = function(object)
  * @param {Geometry} geometry
  * @return {CANNON.Cylinder} shape
  */
-Mesh2shape.createCylinderShape = function(geometry)
+PhysicsGenerator.createCylinderShape = function(geometry)
 {
 	var params = geometry.parameters;
 
@@ -222,13 +211,13 @@ Mesh2shape.createCylinderShape = function(geometry)
  * @param {Object3D} object
  * @return {CANNON.Cylinder} shape
  */
-Mesh2shape.createBoundingCylinderShape = function(object)
+PhysicsGenerator.createBoundingCylinderShape = function(object)
 {
 	var axes = ["x", "y", "z"];
 	var minorAxes = axes.splice(axes.indexOf("y"), 1) && axes;
 
 	//Compute cylinder dimensions
-	var geometry = Mesh2shape.getGeometry(object);
+	var geometry = PhysicsGenerator.getGeometry(object);
 	geometry.computeBoundingBox();
 	geometry.computeBoundingSphere();
 	
@@ -250,7 +239,7 @@ Mesh2shape.createBoundingCylinderShape = function(object)
  * @param {Geometry} geometry
  * @return {CANNON.Box} shape
  */
-Mesh2shape.createPlaneShape = function(geometry)
+PhysicsGenerator.createPlaneShape = function(geometry)
 {
 	geometry.computeBoundingBox();
 	var box = geometry.boundingBox;
@@ -265,7 +254,7 @@ Mesh2shape.createPlaneShape = function(geometry)
  * @param {Geometry} geometry
  * @return {CANNON.Sphere} shape
  */
-Mesh2shape.createSphereShape = function(geometry)
+PhysicsGenerator.createSphereShape = function(geometry)
 {
 	return new CANNON.Sphere(geometry.parameters.radius);
 };
@@ -277,9 +266,9 @@ Mesh2shape.createSphereShape = function(geometry)
  * @param {Geometry} geometry
  * @return {CANNON.Sphere} shape
  */
-Mesh2shape.createBoundingSphereShape = function(object)
+PhysicsGenerator.createBoundingSphereShape = function(object)
 {
-	var geometry = Mesh2shape.getGeometry(object);
+	var geometry = PhysicsGenerator.getGeometry(object);
 	geometry.computeBoundingSphere();
 
 	return new CANNON.Sphere(geometry.boundingSphere.radius);
@@ -292,7 +281,7 @@ Mesh2shape.createBoundingSphereShape = function(object)
  * @param {Geometry} geometry
  * @return {CANNON.Trimesh} shape
  */
-Mesh2shape.createTubeShape = function(geometry)
+PhysicsGenerator.createTubeShape = function(geometry)
 {
 	var tmp = new THREE.BufferGeometry();
 	tmp.fromGeometry(geometry);
@@ -306,9 +295,9 @@ Mesh2shape.createTubeShape = function(geometry)
  * @param {Geometry} geometry
  * @return {CANNON.Trimesh} shape
  */
-Mesh2shape.createTrimeshShape = function(geometry)
+PhysicsGenerator.createTrimeshShape = function(geometry)
 {
-	var indices, vertices = Mesh2shape.getVertices(geometry);
+	var indices, vertices = PhysicsGenerator.getVertices(geometry);
 
 	if(!vertices.length)
 	{
@@ -328,9 +317,9 @@ Mesh2shape.createTrimeshShape = function(geometry)
  * @param {Object3D} object
  * @return {Geometry} Geometry that contains all merger geometry
  */
-Mesh2shape.getGeometry = function(object)
+PhysicsGenerator.getGeometry = function(object)
 {
-	var meshes = Mesh2shape.getMeshes(object);
+	var meshes = PhysicsGenerator.getMeshes(object);
 
 	if(meshes.length === 0)
 	{
@@ -388,7 +377,7 @@ Mesh2shape.getGeometry = function(object)
  * @param {Geometry} geometry
  * @return {Array} array
  */
-Mesh2shape.getVertices = function(geometry)
+PhysicsGenerator.getVertices = function(geometry)
 {
 	if(!geometry.attributes)
 	{
@@ -406,7 +395,7 @@ Mesh2shape.getVertices = function(geometry)
  * @param {Object3D} object
  * @return {Array} meshes found inside the Object3D
  */
-Mesh2shape.getMeshes = function(object)
+PhysicsGenerator.getMeshes = function(object)
 {
 	var meshes = [];
 

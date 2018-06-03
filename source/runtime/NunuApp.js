@@ -159,7 +159,7 @@ include("core/utils/EventManager.js");
 
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
-include("core/utils/Mesh2shape.js");
+include("core/utils/PhysicsGenerator.js");
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.
