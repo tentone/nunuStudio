@@ -618,6 +618,9 @@ function MainMenu(parent)
 	//Create CSG action
 	function createCSGAction(mesh, a, b)
 	{
+		mesh.material = Editor.defaultMaterial;
+		mesh.name = a.name;
+
 		var actions = [];
 		actions.push(new ObjectRemovedAction(a));
 		actions.push(new ObjectRemovedAction(b));
@@ -632,11 +635,8 @@ function MainMenu(parent)
 		{
 			var a = createBSP(Editor.selectedObjects[0]);
 			var b = createBSP(Editor.selectedObjects[1]);
-			
-			var mesh = a.intersect(b).toMesh();
-			mesh.material = Editor.defaultMaterial;
 
-			createCSGAction(mesh, Editor.selectedObjects[0], Editor.selectedObjects[1]);
+			createCSGAction(a.intersect(b).toMesh(), Editor.selectedObjects[0], Editor.selectedObjects[1]);
 		}
 	}, Editor.filePath + "icons/misc/intersect.png");
 
@@ -647,10 +647,7 @@ function MainMenu(parent)
 			var a = createBSP(Editor.selectedObjects[0]);
 			var b = createBSP(Editor.selectedObjects[1]);
 
-			var mesh = a.subtract(b).toMesh();
-			mesh.material = Editor.defaultMaterial;
-
-			createCSGAction(mesh, Editor.selectedObjects[0], Editor.selectedObjects[1]);
+			createCSGAction(a.subtract(b).toMesh(), Editor.selectedObjects[0], Editor.selectedObjects[1]);
 		}
 	}, Editor.filePath + "icons/misc/subtract.png");
 
@@ -661,10 +658,7 @@ function MainMenu(parent)
 			var a = createBSP(Editor.selectedObjects[0]);
 			var b = createBSP(Editor.selectedObjects[1]);
 
-			var mesh = a.union(b).toMesh();
-			mesh.material = Editor.defaultMaterial;
-
-			createCSGAction(mesh, Editor.selectedObjects[0], Editor.selectedObjects[1]);
+			createCSGAction(a.union(b).toMesh(), Editor.selectedObjects[0], Editor.selectedObjects[1]);
 		}
 	}, Editor.filePath + "icons/misc/union.png");
 
