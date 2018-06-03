@@ -621,7 +621,8 @@ Editor.initialize = function()
 
 	//Initialize User Interface
 	Editor.gui = new Interface();
-	
+	Editor.gui.updateInterface();
+
 	//Check is some .isp file passed as argument
 	for(var i = 0; i < Editor.args.length; i++)
 	{
@@ -732,15 +733,6 @@ Editor.update = function()
 	Editor.mouse.update();
 	Editor.keyboard.update();
 	requestAnimationFrame(Editor.update);
-};
-
-//Resize to fit window
-Editor.resize = function()
-{
-	if(!Editor.fullscreen)
-	{
-		Editor.gui.updateInterface();
-	}
 };
 
 //Select a single object

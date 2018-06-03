@@ -1,122 +1,6 @@
 "use strict";
 
 /**
- * This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.
- * 
- * This page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.
- * 
- * All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
- * 
- * @class Object3D
- * @module THREE
- * @constructor
- */
-
-/**
- * Array with object's children.
- * @property children
- * @type {Array}
-*/
-/**
- * When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.
- * @property frustumCulled
- * @default true
- * @type {boolean}
-*/
-/**
- * The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.
- * @property layers
- * @type {Layers}
-*/
-/**
- * The local transform matrix
- * @property matrix
- * @type {Matrix4}
-*/
-/**
- * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.
- * @property matrixAutoUpdate
- * @default true
- * @type {boolean}
-*/
-/**
- * The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.
- * @property matrixWorld
- * @type {Matrix4}
-*/
-/**
- * Name of the object (doesn't need to be unique).
- * @property name
- * @type {String}
-*/
-/**
- * The object's local position.
- * @property position
- * @type {Vector3}
-*/
-/**
- * Object's local rotation as a Quaternion.
- * @property quaternion
- * @type {Quaternion}
-*/
-/**
- * Object's local rotation (see Euler angles), in radians.
- * @property rotation
- * @type {Euler}
-*/
-/**
- * The object's local scale.
- * @property scale
- * @type {Vector3}
-*/
-/**
- * This is used by the lookAt method, for example, to determine the orientation of the result.
- * @property up
- * @type {Vector3}
-*/
-/**
- * UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.
- * @property uuid
- * @type {String}
- */
-/**
- * Object gets rendered if true.
- * @property visible
- * @type {boolean}
- * @default true
- */
-/**
- * This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.
- * @property renderOrder
- * @default 0
- * @type {Number}
-*/
-/**
- * Whether the object gets rendered into shadow map.
- * @property castShadow
- * @default false
- * @type {boolean}
-*/
-/**
- * Whether the material receives shadows.
- * @property receiveShadow
- * @default false
- * @type {boolean}
-*/
-/**
- * Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.
- * @property userData
- * @type {Object}
-*/
-/**
- * Array with the animations available in this object.
- *
- * Each position contains an AnimationClip that has name, tracks, duration and uuid.
- *
- * @property animations
- * @type {Array}
- */
-/**
  * Folded attribute is used only for editing, if true the object shows as folded in the object explorer.
  * @property folded
  * @type {boolean}
@@ -409,8 +293,6 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	object.visible = this.visible;
 
 	object.matrixAutoUpdate = this.matrixAutoUpdate;
-	//object.matrix = this.matrix.toArray();
-
 	object.frustumCulled = this.frustumCulled;
 	object.renderOrder = this.renderOrder;
 
@@ -541,6 +423,123 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		return values;
 	}
 };
+
+/**
+ * This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.
+ * 
+ * This page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.
+ * 
+ * All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
+ * 
+ * @class Object3D
+ * @module THREE
+ * @constructor
+ */
+
+/**
+ * Array with object's children.
+ * @property children
+ * @type {Array}
+*/
+/**
+ * When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.
+ * @property frustumCulled
+ * @default true
+ * @type {boolean}
+*/
+/**
+ * The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.
+ * @property layers
+ * @type {Layers}
+*/
+/**
+ * The local transform matrix
+ * @property matrix
+ * @type {Matrix4}
+*/
+/**
+ * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.
+ * @property matrixAutoUpdate
+ * @default true
+ * @type {boolean}
+*/
+/**
+ * The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.
+ * @property matrixWorld
+ * @type {Matrix4}
+*/
+/**
+ * Name of the object (doesn't need to be unique).
+ * @property name
+ * @type {String}
+*/
+/**
+ * The object's local position.
+ * @property position
+ * @type {Vector3}
+*/
+/**
+ * Object's local rotation as a Quaternion.
+ * @property quaternion
+ * @type {Quaternion}
+*/
+/**
+ * Object's local rotation (see Euler angles), in radians.
+ * @property rotation
+ * @type {Euler}
+*/
+/**
+ * The object's local scale.
+ * @property scale
+ * @type {Vector3}
+*/
+/**
+ * This is used by the lookAt method, for example, to determine the orientation of the result.
+ * @property up
+ * @type {Vector3}
+*/
+/**
+ * UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.
+ * @property uuid
+ * @type {String}
+ */
+/**
+ * Object gets rendered if true.
+ * @property visible
+ * @type {boolean}
+ * @default true
+ */
+/**
+ * This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.
+ * @property renderOrder
+ * @default 0
+ * @type {Number}
+*/
+/**
+ * Whether the object gets rendered into shadow map.
+ * @property castShadow
+ * @default false
+ * @type {boolean}
+*/
+/**
+ * Whether the material receives shadows.
+ * @property receiveShadow
+ * @default false
+ * @type {boolean}
+*/
+/**
+ * Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.
+ * @property userData
+ * @type {Object}
+*/
+/**
+ * Array with the animations available in this object.
+ *
+ * Each position contains an AnimationClip that has name, tracks, duration and uuid.
+ *
+ * @property animations
+ * @type {Array}
+ */
 
 /**
  * Remove children from this object

@@ -4,6 +4,8 @@ function SceneEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Scene", Editor.filePath + "icons/misc/scene.png");
 
+	var self = this;
+
 	//Canvas
 	this.canvas = null;
 	this.resetCanvas();
@@ -74,181 +76,6 @@ function SceneEditor(parent, closeable, container, index)
 	this.camera = null;
 	this.controls = null;
 	this.setCameraMode(SceneEditor.PERSPECTIVE);
-
-	//Self pointer
-	var self = this;
-
-	//Drop event
-	this.canvas.ondrop = function(event)
-	{
-		event.preventDefault();
-
-		//Canvas element
-		var canvas = self.element;
-		var rect = canvas.getBoundingClientRect();
-
-		//Update raycaster direction
-		var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-		self.updateRaycaster(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
-
-		//Get object from drag buffer
-		var uuid = event.dataTransfer.getData("uuid");
-		var draggedObject = DragBuffer.popDragElement(uuid);
-
-		//Check intersected objects
-		var intersections = self.raycaster.intersectObjects(self.scene.children, true);
-
-		//Auxiliar method to attach textures to objects
-		function attachTexture(texture, object)
-		{
-			if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
-			{
-				var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-				material.name = texture.name;
-				Editor.history.add(new ChangeAction(object, "material", material));
-				Editor.updateObjectsViewsGUI();
-			}
-			else if(object instanceof THREE.Sprite)
-			{
-				var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
-				material.name = texture.name;
-				Editor.history.add(new ChangeAction(object, "material", material));
-				Editor.updateObjectsViewsGUI();
-			}
-		}
-
-		//Dragged file
-		if(event.dataTransfer.files.length > 0)
-		{
-			var files = event.dataTransfer.files;
-
-			for(var i = 0; i < files.length; i++)
-			{
-				var file = files[i];
-
-				//Check if mouse instersects and object
-				if(intersections.length > 0)
-				{
-					var name = FileSystem.getFileName(file.name);
-					var object = intersections[0].object;
-
-					//Image
-					if(Image.fileIsImage(file))
-					{
-						Editor.loadTexture(file, function(texture)
-						{
-							attachTexture(texture ,object);
-						});
-					}
-					//Video
-					else if(Video.fileIsVideo(file))
-					{
-						Editor.loadVideoTexture(file, function(texture)
-						{
-							attachTexture(texture ,object);
-						});
-					}
-					//Font
-					else if(Font.fileIsFont(file))
-					{
-						if(object.font !== undefined)
-						{
-							Editor.loadFont(file, function(font)
-							{
-								object.setFont(font);
-							});
-						}
-					}
-				}
-				
-				//Model
-				if(Model.fileIsModel(file))
-				{
-					Editor.loadModel(file);
-				}
-			}
-		}
-		//Dragged resource
-		else if(draggedObject !== null)
-		{
-			//Object intersected
-			if(intersections.length > 0)
-			{
-				var object = intersections[0].object;
-
-				//Sprite Material
-				if(draggedObject instanceof THREE.SpriteMaterial)
-				{
-					if(object instanceof THREE.Sprite)
-					{
-						Editor.history.add(new ChangeAction(object, "material", draggedObject));
-						Editor.updateObjectsViewsGUI();
-					}
-				}
-				//Mesh Material
-				else if(draggedObject instanceof THREE.Material)
-				{
-					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
-					{
-						Editor.history.add(new ChangeAction(object, "material", draggedObject));
-						Editor.updateObjectsViewsGUI();
-					}
-				}
-				//Cubemap
-				else if(draggedObject.isCubeTexture)
-				{
-					if(object.material instanceof THREE.Material)
-					{
-						Editor.history.add(new ChangeAction(object.material, "envMap", draggedObject));
-						self.reloadContext();
-						Editor.updateObjectsViewsGUI();
-					}
-				}
-				//Texture
-				else if(draggedObject instanceof THREE.Texture)
-				{
-					attachTexture(draggedObject, object);
-				}
-				//Image
-				else if(draggedObject instanceof Image)
-				{
-					attachTexture(new Texture(draggedObject), object);
-				}
-				//Video
-				else if(draggedObject instanceof Video)
-				{
-					attachTexture(new VideoTexture(draggedObject), object);
-				}
-				//Font
-				else if(draggedObject instanceof Font)
-				{
-					if(object.font !== undefined)
-					{
-						object.setFont(draggedObject);
-						Editor.updateObjectsViewsGUI();
-					}
-				}
-				//Geometry
-				else if(draggedObject instanceof THREE.Geometry || draggedObject instanceof THREE.BufferGeometry)
-				{
-					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
-					{
-						Editor.history.add(new ChangeAction(object, "geometry", draggedObject));
-						Editor.updateObjectsViewsGUI();
-					}
-				}
-			}
-
-			//Create audio emitter
-			if(draggedObject instanceof Audio)
-			{
-				var audio = new AudioEmitter(draggedObject);
-				audio.name = draggedObject.name;
-				Editor.addObject(audio);
-			}
-		}
-	};
-
 
 	//Fullscreen button
 	this.fullscreenButton = new ButtonImage(this.element);
@@ -460,8 +287,6 @@ SceneEditor.prototype.activate = function()
 	this.manager.create();
 
 	Editor.gui.toolBar.selectTool(Editor.SELECT);
-
-	Editor.resize();
 };
 
 //Deactivate
@@ -804,12 +629,15 @@ SceneEditor.prototype.render = function()
 
 SceneEditor.prototype.resetCanvas = function()
 {
+	console.log("Reset canvas");
+
 	if(this.element.contains(this.canvas))
 	{
 		this.element.removeChild(this.canvas);
 	}
 	
 	this.canvas = document.createElement("canvas");
+	this.canvas.style.position = "absolute";
 	this.canvas.style.top = "0px";
 	this.canvas.style.left = "0px";
 	this.canvas.style.width = "100%";
@@ -818,6 +646,179 @@ SceneEditor.prototype.resetCanvas = function()
 
 	//Prevent deafault when object dragged over
 	this.canvas.ondragover = Element.preventDefault;
+
+	var self = this;
+
+	//Canvas ondrop
+	this.canvas.ondrop = function(event)
+	{
+		event.preventDefault();
+
+		//Canvas element
+		var canvas = self.element;
+		var rect = canvas.getBoundingClientRect();
+
+		//Update raycaster direction
+		var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
+		self.updateRaycaster(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
+
+		//Get object from drag buffer
+		var uuid = event.dataTransfer.getData("uuid");
+		var draggedObject = DragBuffer.popDragElement(uuid);
+
+		//Check intersected objects
+		var intersections = self.raycaster.intersectObjects(self.scene.children, true);
+
+		//Auxiliar method to attach textures to objects
+		function attachTexture(texture, object)
+		{
+			if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
+			{
+				var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+				material.name = texture.name;
+				Editor.history.add(new ChangeAction(object, "material", material));
+				Editor.updateObjectsViewsGUI();
+			}
+			else if(object instanceof THREE.Sprite)
+			{
+				var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
+				material.name = texture.name;
+				Editor.history.add(new ChangeAction(object, "material", material));
+				Editor.updateObjectsViewsGUI();
+			}
+		}
+
+		//Dragged file
+		if(event.dataTransfer.files.length > 0)
+		{
+			var files = event.dataTransfer.files;
+
+			for(var i = 0; i < files.length; i++)
+			{
+				var file = files[i];
+
+				//Check if mouse instersects and object
+				if(intersections.length > 0)
+				{
+					var name = FileSystem.getFileName(file.name);
+					var object = intersections[0].object;
+
+					//Image
+					if(Image.fileIsImage(file))
+					{
+						Editor.loadTexture(file, function(texture)
+						{
+							attachTexture(texture ,object);
+						});
+					}
+					//Video
+					else if(Video.fileIsVideo(file))
+					{
+						Editor.loadVideoTexture(file, function(texture)
+						{
+							attachTexture(texture ,object);
+						});
+					}
+					//Font
+					else if(Font.fileIsFont(file))
+					{
+						if(object.font !== undefined)
+						{
+							Editor.loadFont(file, function(font)
+							{
+								object.setFont(font);
+							});
+						}
+					}
+				}
+				
+				//Model
+				if(Model.fileIsModel(file))
+				{
+					Editor.loadModel(file);
+				}
+			}
+		}
+		//Dragged resource
+		else if(draggedObject !== null)
+		{
+			//Object intersected
+			if(intersections.length > 0)
+			{
+				var object = intersections[0].object;
+
+				//Sprite Material
+				if(draggedObject instanceof THREE.SpriteMaterial)
+				{
+					if(object instanceof THREE.Sprite)
+					{
+						Editor.history.add(new ChangeAction(object, "material", draggedObject));
+						Editor.updateObjectsViewsGUI();
+					}
+				}
+				//Mesh Material
+				else if(draggedObject instanceof THREE.Material)
+				{
+					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
+					{
+						Editor.history.add(new ChangeAction(object, "material", draggedObject));
+						Editor.updateObjectsViewsGUI();
+					}
+				}
+				//Cubemap
+				else if(draggedObject.isCubeTexture)
+				{
+					if(object.material instanceof THREE.Material)
+					{
+						Editor.history.add(new ChangeAction(object.material, "envMap", draggedObject));
+						self.reloadContext();
+						Editor.updateObjectsViewsGUI();
+					}
+				}
+				//Texture
+				else if(draggedObject instanceof THREE.Texture)
+				{
+					attachTexture(draggedObject, object);
+				}
+				//Image
+				else if(draggedObject instanceof Image)
+				{
+					attachTexture(new Texture(draggedObject), object);
+				}
+				//Video
+				else if(draggedObject instanceof Video)
+				{
+					attachTexture(new VideoTexture(draggedObject), object);
+				}
+				//Font
+				else if(draggedObject instanceof Font)
+				{
+					if(object.font !== undefined)
+					{
+						object.setFont(draggedObject);
+						Editor.updateObjectsViewsGUI();
+					}
+				}
+				//Geometry
+				else if(draggedObject instanceof THREE.Geometry || draggedObject instanceof THREE.BufferGeometry)
+				{
+					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
+					{
+						Editor.history.add(new ChangeAction(object, "geometry", draggedObject));
+						Editor.updateObjectsViewsGUI();
+					}
+				}
+			}
+
+			//Create audio emitter
+			if(draggedObject instanceof Audio)
+			{
+				var audio = new AudioEmitter(draggedObject);
+				audio.name = draggedObject.name;
+				Editor.addObject(audio);
+			}
+		}
+	};
 };
 
 //Create new fresh webgl context, delete old canvas and create a new one
