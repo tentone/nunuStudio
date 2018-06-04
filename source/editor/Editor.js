@@ -268,11 +268,6 @@ include("editor/theme/ThemeDark.js");
 include("editor/gui/element/Element.js");
 include("editor/gui/element/Division.js");
 include("editor/gui/element/Bar.js");
-include("editor/gui/element/Button.js");
-include("editor/gui/element/ButtonMenu.js");
-include("editor/gui/element/ButtonImage.js");
-include("editor/gui/element/ButtonDrawer.js");
-include("editor/gui/element/ButtonImageToggle.js");
 include("editor/gui/element/Text.js");
 include("editor/gui/element/Canvas.js");
 include("editor/gui/element/Form.js");
@@ -280,6 +275,12 @@ include("editor/gui/element/AudioPlayer.js");
 include("editor/gui/element/VideoPlayer.js");
 include("editor/gui/element/DropdownMenu.js");
 include("editor/gui/element/ContextMenu.js");
+
+include("editor/gui/element/buttons/Button.js");
+include("editor/gui/element/buttons/ButtonMenu.js");
+include("editor/gui/element/buttons/ButtonImage.js");
+include("editor/gui/element/buttons/ButtonDrawer.js");
+include("editor/gui/element/buttons/ButtonImageToggle.js");
 
 include("editor/gui/element/modals/LoadingScreen.js");
 
@@ -302,9 +303,9 @@ include("editor/gui/element/input/TextureChooser.js");
 include("editor/gui/element/input/TextureBox.js");
 include("editor/gui/element/input/CubeTextureBox.js");
 
-include("editor/gui/TabGroup.js");
-include("editor/gui/TabElement.js");
-include("editor/gui/TabButton.js");
+include("editor/gui/element/tabs/TabGroup.js");
+include("editor/gui/element/tabs/TabElement.js");
+include("editor/gui/element/tabs/TabButton.js");
 
 include("editor/gui/tab/ConsoleTab.js");
 include("editor/gui/tab/CodeEditor.js");
