@@ -3,6 +3,8 @@
 /*
  * TranformControls is used to manipulate object in 3D space.
  *
+ * Can be used to manipulate multiple Object3D instances simultaneously.
+ *
  * Adapted from original code by arodic (github.com/arodic).
  */
 function TransformControls(camera, canvas, mouse)
@@ -224,20 +226,26 @@ TransformControls.prototype.updateScale = function()
 		return;
 	}
 
+	this.position.set(0, 0, 0);
+
 	for(var i = 0; i < this.objects.length; i++)
 	{
 		this.worldPosition[i].setFromMatrixPosition(this.objects[i].matrixWorld);
 		this.worldRotation[i].setFromRotationMatrix(this.tempMatrix.extractRotation(this.objects[i].matrixWorld));
+		this.position.add(this.worldPosition[i]);
+	}
+
+	if(this.worldPosition.length > 0)
+	{
+		this.position.divideScalar(this.worldPosition.length);
 	}
 
 	this.camPosition.setFromMatrixPosition(this.camera.matrixWorld);
 	this.camRotation.setFromRotationMatrix(this.tempMatrix.extractRotation(this.camera.matrixWorld));
 
-	this.position.copy(this.worldPosition[0]);
-
 	if(this.camera instanceof THREE.PerspectiveCamera)
 	{
-		this.toolScale = this.worldPosition[0].distanceTo(this.camPosition) / 6 * this.size;
+		this.toolScale = this.position.distanceTo(this.camPosition) / 6 * this.size;
 		this.scale.set(this.toolScale, this.toolScale, this.toolScale);
 	}
 	else
@@ -246,11 +254,11 @@ TransformControls.prototype.updateScale = function()
 		this.scale.set(this.toolScale, this.toolScale, this.toolScale);
 	}
 	
-	this.eye.copy(this.camPosition).sub(this.worldPosition[0]).normalize();
+	this.eye.copy(this.camPosition).sub(this.position).normalize();
 
 	if(this.space === "local" || this.mode === "scale")
 	{
-		this.gizmo[this.mode].update(this.worldRotation[0], this.eye);
+		this.gizmo[this.mode].update(this.position, this.eye);
 	}
 	else if(this.space === "world")
 	{
@@ -297,7 +305,7 @@ TransformControls.prototype.onPointerDown = function()
 		this.axis = intersect.object.name;
 		this.updateScale();
 
-		this.eye.copy(this.camPosition).sub(this.worldPosition[0]).normalize();
+		this.eye.copy(this.camPosition).sub(this.position).normalize();
 		this.gizmo[this.mode].setActivePlane(this.axis, this.eye);
 
 		var planeIntersect = this.intersectObjects([this.gizmo[this.mode].activePlane]);

@@ -438,17 +438,6 @@ SceneEditor.prototype.update = function()
 				//Update grid helper position
 				this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
 				this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Editor.settings.editor.gridSpacing);
-				
-				/*if(this.cameraMode === SceneEditor.ORTHOGRAPHIC)
-				{
-					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
-					this.gridHelper.position.y = this.controls.position.y - (this.controls.position.y % Editor.settings.editor.gridSpacing);
-				}
-				else
-				{
-					this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
-					this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Editor.settings.editor.gridSpacing);
-				}*/
 			}
 		}
 
