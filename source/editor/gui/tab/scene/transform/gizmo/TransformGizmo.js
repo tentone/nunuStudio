@@ -75,8 +75,8 @@ function TransformGizmo()
 
 			var tempGeometry = child.geometry.clone();
 			tempGeometry.applyMatrix(child.matrix);
-			child.geometry = tempGeometry;
 
+			child.geometry = tempGeometry;
 			child.position.set(0, 0, 0);
 			child.rotation.set(0, 0, 0);
 			child.scale.set(1, 1, 1);

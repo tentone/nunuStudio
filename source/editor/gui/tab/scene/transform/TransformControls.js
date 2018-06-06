@@ -258,7 +258,7 @@ TransformControls.prototype.updateScale = function()
 
 	if(this.space === "local" || this.mode === "scale")
 	{
-		this.gizmo[this.mode].update(this.position, this.eye);
+		this.gizmo[this.mode].update(this.worldRotation[0], this.eye);
 	}
 	else if(this.space === "world")
 	{
