@@ -165,7 +165,7 @@ PerspectiveCameraPanel.prototype.attach = function(obj)
 {
 	ObjectPanel.prototype.attach.call(this, obj);
 
-	this.scene = ObjectUtils.getScene(obj);
+	this.scene =  obj.getScene();
 }
 
 PerspectiveCameraPanel.prototype.updatePanel = function()

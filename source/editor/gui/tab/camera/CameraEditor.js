@@ -153,7 +153,7 @@ CameraEditor.prototype.update = function()
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 		this.camera.resize(this.canvas.size.x, this.canvas.size.y);
-		this.camera.render(this.renderer, ObjectUtils.getScene(this.camera));
+		this.camera.render(this.renderer, this.camera.getScene());
 	}
 };
 

@@ -15,7 +15,7 @@ ObjectRemovedAction.prototype.apply = function()
 {
 	if(this.object instanceof THREE.Camera)
 	{
-		var scene = ObjectUtils.getScene(this.object);
+		var scene = this.object.getScene();
 		if(scene !== null)
 		{
 			scene.removeCamera(this.object);

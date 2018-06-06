@@ -155,7 +155,7 @@ OrthographicCamera.prototype.resize = function(x, y)
  */
 OrthographicCamera.prototype.destroy = function()
 {
-	var scene = ObjectUtils.getScene(this);
+	var scene = this.getScene();
 	if(scene !== null)
 	{
 		scene.removeCamera(this);
