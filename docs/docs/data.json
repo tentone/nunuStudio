@@ -826,7 +826,9 @@
         },
         "..\\..\\source\\core\\utils\\EventManager.js": {
             "name": "..\\..\\source\\core\\utils\\EventManager.js",
-            "modules": {},
+            "modules": {
+                "Utils": 1
+            },
             "classes": {
                 "EventManager": 1
             },
@@ -842,24 +844,22 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\utils\\Mesh2shape.js": {
-            "name": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "modules": {
-                "Physics": 1
-            },
+        "..\\..\\source\\core\\utils\\ObjectUtils.js": {
+            "name": "..\\..\\source\\core\\utils\\ObjectUtils.js",
+            "modules": {},
             "classes": {
-                "Mesh2shape": 1
+                "ObjectUtils": 1
             },
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\utils\\ObjectUtils.js": {
-            "name": "..\\..\\source\\core\\utils\\ObjectUtils.js",
+        "..\\..\\source\\core\\utils\\PhysicsGenerator.js": {
+            "name": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
             "modules": {
-                "Utils": 1
+                "Physics": 1
             },
             "classes": {
-                "ObjectUtils": 1
+                "PhysicsGenerator": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1093,18 +1093,21 @@
         },
         "Physics": {
             "name": "Physics",
-            "submodules": {},
+            "submodules": {
+                "undefined": 1
+            },
             "elements": {},
             "classes": {
-                "Mesh2shape": 1,
-                "PhysicsObject": 1
+                "PhysicsGenerator": 1,
+                "PhysicsObject": 1,
+                "Timer": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
+            "file": "..\\..\\source\\core\\utils\\Timer.js",
             "line": 3,
-            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
+            "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
         "Script": {
             "name": "Script",
@@ -1274,22 +1277,19 @@
         },
         "Utils": {
             "name": "Utils",
-            "submodules": {
-                "undefined": 1
-            },
+            "submodules": {},
             "elements": {},
             "classes": {
-                "ObjectUtils": 1,
                 "EventManager": 1,
                 "MathUtils": 1,
-                "Timer": 1
+                "ObjectUtils": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\Timer.js",
+            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
             "line": 3,
-            "description": "ObjectUtils is a collection of methods to apply operations to Object3D objects"
+            "description": "EventManager is used to manager DOM events creationg and destruction in a single function call.\n\nIt is used by objects to make it easier to add and remove events from global DOM objects."
         },
         "Files": {
             "name": "Files",
@@ -3359,7 +3359,7 @@
             "module": "THREE",
             "namespace": "",
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 3,
+            "line": 450,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.",
             "is_constructor": 1
         },
@@ -3525,22 +3525,6 @@
             "description": "MathUtils contains auxiliar values and function to help with mathematical operations.",
             "static": 1
         },
-        "Mesh2shape": {
-            "name": "Mesh2shape",
-            "shortname": "Mesh2shape",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Physics",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 3,
-            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
-            "author": "tentone",
-            "static": 1
-        },
         "ObjectUtils": {
             "name": "ObjectUtils",
             "shortname": "ObjectUtils",
@@ -3556,6 +3540,22 @@
             "description": "ObjectUtils is a collection of methods to apply operations to Object3D objects",
             "static": 1
         },
+        "PhysicsGenerator": {
+            "name": "PhysicsGenerator",
+            "shortname": "PhysicsGenerator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Physics",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 3,
+            "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
+            "author": "tentone",
+            "static": 1
+        },
         "Timer": {
             "name": "Timer",
             "shortname": "Timer",
@@ -3564,7 +3564,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Utils",
+            "module": "Physics",
             "namespace": "",
             "file": "..\\..\\source\\core\\utils\\Timer.js",
             "line": 3,
@@ -8878,6 +8878,16 @@
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 110,
+            "description": "Include file into the document.body.\n\nThis imports the JS file as any other file included into a <script> tag.",
+            "itemtype": "attribute",
+            "name": "INCLUDE",
+            "type": "{Number}",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 120,
             "description": "Auxiliar function to include javascript source file from resource into the script.\n\nThe imported source is evaluated and loaded in the context of the script.\n\nGlobal declarations need to be cleaned using the dipose method.",
             "itemtype": "method",
             "name": "include",
@@ -8893,7 +8903,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 121,
+            "line": 131,
             "description": "Get includes from the code.\n\nUsed to extract includes from code when loading libraries in APPEND mode.",
             "static": 1,
             "itemtype": "method",
@@ -8910,7 +8920,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 147,
+            "line": 157,
             "description": "Remove includes from code.\n\nUsed to remove include statements when initializing code in APPEND mode.",
             "static": 1,
             "itemtype": "method",
@@ -8927,7 +8937,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 161,
+            "line": 171,
             "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
             "itemtype": "method",
             "name": "initialize",
@@ -8936,7 +8946,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 197,
+            "line": 207,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -8945,7 +8955,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 223,
+            "line": 233,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -8954,7 +8964,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 240,
+            "line": 250,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -8963,7 +8973,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 260,
+            "line": 270,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -8979,7 +8989,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 276,
+            "line": 286,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "compileCode",
@@ -8995,7 +9005,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 357,
+            "line": 385,
             "description": "Create JSON for script.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9170,39 +9180,27 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 16,
-            "description": "NunuRuntime instance used to communication between nunu app and the host webpage",
+            "line": 23,
+            "description": "NunuRuntime instance used to communication between nunu app and the host webpage.\nInside the editor communication with the app is simulated on the debug console.",
             "itemtype": "property",
             "name": "app",
-            "default": "null",
+            "type": "{NunuApp}",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 21,
-            "description": "Enable virtual reality flag",
+            "line": 31,
+            "description": "Program name.",
             "itemtype": "property",
-            "name": "vr",
-            "default": "false",
-            "type": "{boolean}",
+            "name": "name",
+            "type": "{String}",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 27,
-            "description": "Virtual reality movement scale",
-            "itemtype": "property",
-            "name": "vrScale",
-            "type": "{Number}",
-            "default": "1.0",
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 33,
+            "line": 38,
             "description": "Program description",
             "itemtype": "property",
             "name": "description",
@@ -9212,7 +9210,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 38,
+            "line": 45,
             "description": "Program author",
             "itemtype": "property",
             "name": "author",
@@ -9222,7 +9220,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 43,
+            "line": 52,
             "description": "Program version",
             "itemtype": "property",
             "name": "version",
@@ -9233,51 +9231,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 49,
-            "description": "Antialiasing flag",
-            "itemtype": "property",
-            "name": "antialiasing",
-            "type": "{boolean}",
-            "default": "false",
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 55,
-            "description": "If true the program is rendered with shadows",
-            "itemtype": "property",
-            "name": "shadows",
-            "type": "{boolean}",
-            "default": "true",
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 61,
-            "description": "Shadow type",
-            "itemtype": "property",
-            "name": "shadowsType",
-            "type": "{Number}",
-            "default": "PCFSoftShadowMap",
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 67,
-            "description": "Tonemapping mode",
-            "itemtype": "property",
-            "name": "toneMapping",
-            "type": "{Number}",
-            "default": "NoToneMapping",
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 73,
+            "line": 60,
             "description": "Flag to control pointer locking",
             "itemtype": "property",
             "name": "lockPointer",
@@ -9288,7 +9242,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 79,
+            "line": 68,
             "description": "Flag to indicate if the runtime should handle device pixel ratio",
             "itemtype": "property",
             "name": "handlePixelRatio",
@@ -9299,7 +9253,73 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 85,
+            "line": 76,
+            "description": "Enable virtual reality flag",
+            "itemtype": "property",
+            "name": "vr",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 84,
+            "description": "Virtual reality movement scale",
+            "itemtype": "property",
+            "name": "vrScale",
+            "type": "{Number}",
+            "default": "1.0",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 92,
+            "description": "Antialiasing flag",
+            "itemtype": "property",
+            "name": "antialiasing",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 100,
+            "description": "If true the program is rendered with shadows",
+            "itemtype": "property",
+            "name": "shadows",
+            "type": "{boolean}",
+            "default": "true",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 108,
+            "description": "Shadow type",
+            "itemtype": "property",
+            "name": "shadowsType",
+            "type": "{Number}",
+            "default": "PCFSoftShadowMap",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 116,
+            "description": "Tonemapping mode",
+            "itemtype": "property",
+            "name": "toneMapping",
+            "type": "{Number}",
+            "default": "NoToneMapping",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 131,
             "description": "Keyboard input object",
             "itemtype": "property",
             "name": "keyboard",
@@ -9309,7 +9329,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 90,
+            "line": 138,
             "description": "Mouse input object",
             "itemtype": "property",
             "name": "mouse",
@@ -9319,40 +9339,47 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 95,
-            "description": "Threejs WebGLRenderer being used",
+            "line": 145,
+            "description": "Renderer being used during runtime.",
             "itemtype": "property",
             "name": "renderer",
             "type": "{WebGLRenderer}",
-            "default": "null",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 101,
+            "line": 152,
+            "description": "Scene currently in use.",
+            "itemtype": "property",
+            "name": "scene",
+            "type": "{Scene}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 159,
             "description": "Canvas being used to draw content.\n\nThis canvas is where the WebGL rendering context was created.",
             "itemtype": "property",
             "name": "canvas",
             "type": "{DOM}",
-            "default": "null",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 109,
+            "line": 168,
             "description": "DOM Division element that can be used to add html content to the app.\n\nAll content added to this division should be manually removed before the app exits.",
             "itemtype": "property",
             "name": "division",
             "type": "{DOM}",
-            "default": "null",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 184,
+            "line": 197,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -9361,7 +9388,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 236,
+            "line": 249,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -9382,7 +9409,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 249,
+            "line": 262,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -9403,7 +9430,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 270,
+            "line": 283,
             "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
@@ -9412,7 +9439,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 280,
+            "line": 293,
             "description": "Render current scene to canvas.\n\nWhen rendering in VR mode all effects and camera parameters are ignored.\n\nRenderer should be initialized and passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -9428,7 +9455,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 309,
+            "line": 322,
             "description": "Resize the current scene elements.",
             "itemtype": "method",
             "name": "resize",
@@ -9449,7 +9476,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 341,
+            "line": 354,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -9458,7 +9485,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 360,
+            "line": 373,
             "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "displayVR",
@@ -9467,7 +9494,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 388,
+            "line": 401,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -9476,7 +9503,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 402,
+            "line": 415,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -9492,7 +9519,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 432,
+            "line": 445,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -9508,7 +9535,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 454,
+            "line": 467,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -9524,7 +9551,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 482,
+            "line": 495,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -9537,7 +9564,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 495,
+            "line": 508,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -9553,7 +9580,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 508,
+            "line": 521,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -9569,7 +9596,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 547,
+            "line": 560,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -9578,7 +9605,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 586,
+            "line": 599,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -9594,7 +9621,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 613,
+            "line": 626,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -9610,7 +9637,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 638,
+            "line": 651,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10359,7 +10386,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 13,
+            "line": 18,
             "description": "If set to true, the pass is processed by the composer.",
             "itemtype": "property",
             "name": "enabled",
@@ -10369,7 +10396,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 19,
+            "line": 26,
             "description": "If set to true, the pass indicates to swap read and write buffer after rendering.",
             "itemtype": "property",
             "name": "needsSwap",
@@ -10379,7 +10406,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 25,
+            "line": 34,
             "description": "If set to true, the pass clears its buffer before rendering.",
             "itemtype": "property",
             "name": "clear",
@@ -10389,17 +10416,17 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 31,
+            "line": 42,
             "description": "If set to true, the result of the pass is rendered to screen.",
             "itemtype": "property",
-            "name": "enabled",
+            "name": "renderToScreen",
             "type": "{Boolean}",
             "class": "Pass",
             "module": "Postprocessing"
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 48,
+            "line": 51,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -10420,7 +10447,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 57,
+            "line": 60,
             "description": "Render the scene using this render pass.",
             "itemtype": "method",
             "name": "render",
@@ -10461,7 +10488,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 70,
+            "line": 73,
             "description": "Dispose this render pass.",
             "itemtype": "method",
             "name": "dispose",
@@ -10470,7 +10497,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 77,
+            "line": 80,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10893,7 +10920,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 23,
+            "line": 25,
             "description": "Images.",
             "itemtype": "property",
             "name": "images",
@@ -10903,7 +10930,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 29,
+            "line": 33,
             "description": "Videos.",
             "itemtype": "property",
             "name": "videos",
@@ -10913,7 +10940,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 35,
+            "line": 41,
             "description": "Audio.",
             "itemtype": "property",
             "name": "audio",
@@ -10923,7 +10950,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 41,
+            "line": 49,
             "description": "Fonts.",
             "itemtype": "property",
             "name": "fonts",
@@ -10933,7 +10960,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 47,
+            "line": 57,
             "description": "Materials.",
             "itemtype": "property",
             "name": "materials",
@@ -10943,7 +10970,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 53,
+            "line": 65,
             "description": "Textures.",
             "itemtype": "property",
             "name": "textures",
@@ -10953,7 +10980,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 59,
+            "line": 73,
             "description": "Geometries.",
             "itemtype": "property",
             "name": "geometries",
@@ -10963,7 +10990,27 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 82,
+            "line": 81,
+            "description": "Resources.",
+            "itemtype": "property",
+            "name": "resources",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 89,
+            "description": "Shapes.",
+            "itemtype": "property",
+            "name": "shapes",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 100,
             "description": "Retrieve a list with all the resource in a program.\n\nSearches the program and all its children for resources.",
             "itemtype": "method",
             "name": "retrieveResources",
@@ -10980,7 +11027,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 258,
+            "line": 276,
             "description": "Get resource by name.",
             "itemtype": "method",
             "name": "getResourceByName",
@@ -11000,7 +11047,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 279,
+            "line": 297,
             "description": "Add resource to resources manager.",
             "itemtype": "method",
             "name": "addResource",
@@ -11016,7 +11063,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 293,
+            "line": 311,
             "description": "Remove resource from font list.",
             "itemtype": "method",
             "name": "removeResource",
@@ -11032,7 +11079,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 304,
+            "line": 322,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -11052,7 +11099,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 325,
+            "line": 343,
             "description": "Remove image.",
             "params": [
                 {
@@ -11068,7 +11115,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 340,
+            "line": 358,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -11088,7 +11135,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 361,
+            "line": 379,
             "description": "Remove video.",
             "params": [
                 {
@@ -11104,7 +11151,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 375,
+            "line": 393,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -11124,7 +11171,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 396,
+            "line": 414,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -11140,7 +11187,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 410,
+            "line": 428,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -11166,7 +11213,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 451,
+            "line": 469,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -11186,7 +11233,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 472,
+            "line": 490,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -11202,7 +11249,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 483,
+            "line": 501,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -11227,7 +11274,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 570,
+            "line": 588,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -11247,7 +11294,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 591,
+            "line": 609,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -11263,7 +11310,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 605,
+            "line": 623,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -11284,7 +11331,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 633,
+            "line": 651,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -11304,7 +11351,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 654,
+            "line": 672,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -11320,7 +11367,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 668,
+            "line": 686,
             "description": "Remove audio.",
             "params": [
                 {
@@ -12328,250 +12375,54 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 15,
-            "description": "Array with object's children.",
-            "itemtype": "property",
-            "name": "children",
-            "type": "{Array}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 20,
-            "description": "When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.",
-            "itemtype": "property",
-            "name": "frustumCulled",
-            "default": "true",
-            "type": "{boolean}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 26,
-            "description": "The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.",
-            "itemtype": "property",
-            "name": "layers",
-            "type": "{Layers}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 31,
-            "description": "The local transform matrix",
-            "itemtype": "property",
-            "name": "matrix",
-            "type": "{Matrix4}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 36,
-            "description": "When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.",
-            "itemtype": "property",
-            "name": "matrixAutoUpdate",
-            "default": "true",
-            "type": "{boolean}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 42,
-            "description": "The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.",
-            "itemtype": "property",
-            "name": "matrixWorld",
-            "type": "{Matrix4}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 47,
-            "description": "Name of the object (doesn't need to be unique).",
-            "itemtype": "property",
-            "name": "name",
-            "type": "{String}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 52,
-            "description": "The object's local position.",
-            "itemtype": "property",
-            "name": "position",
-            "type": "{Vector3}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 57,
-            "description": "Object's local rotation as a Quaternion.",
-            "itemtype": "property",
-            "name": "quaternion",
-            "type": "{Quaternion}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 62,
-            "description": "Object's local rotation (see Euler angles), in radians.",
-            "itemtype": "property",
-            "name": "rotation",
-            "type": "{Euler}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 67,
-            "description": "The object's local scale.",
-            "itemtype": "property",
-            "name": "scale",
-            "type": "{Vector3}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 72,
-            "description": "This is used by the lookAt method, for example, to determine the orientation of the result.",
-            "itemtype": "property",
-            "name": "up",
-            "type": "{Vector3}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 77,
-            "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
-            "itemtype": "property",
-            "name": "uuid",
-            "type": "{String}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 82,
-            "description": "Object gets rendered if true.",
-            "itemtype": "property",
-            "name": "visible",
-            "type": "{boolean}",
-            "default": "true",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 88,
-            "description": "This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.",
-            "itemtype": "property",
-            "name": "renderOrder",
-            "default": "0",
-            "type": "{Number}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 94,
-            "description": "Whether the object gets rendered into shadow map.",
-            "itemtype": "property",
-            "name": "castShadow",
-            "default": "false",
-            "type": "{boolean}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 100,
-            "description": "Whether the material receives shadows.",
-            "itemtype": "property",
-            "name": "receiveShadow",
-            "default": "false",
-            "type": "{boolean}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 106,
-            "description": "Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.",
-            "itemtype": "property",
-            "name": "userData",
-            "type": "{Object}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 111,
-            "description": "Array with the animations available in this object.\n\nEach position contains an AnimationClip that has name, tracks, duration and uuid.",
-            "itemtype": "property",
-            "name": "animations",
-            "type": "{Array}",
-            "class": "Object3D",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 119,
+            "line": 3,
             "description": "Folded attribute is used only for editing, if true the object shows as folded in the object explorer.",
             "itemtype": "property",
             "name": "folded",
             "type": "{boolean}",
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 126,
+            "line": 10,
             "description": "Hidden objects do not show in the editor.",
             "itemtype": "property",
             "name": "hidden",
             "type": "{boolean}",
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 133,
+            "line": 17,
             "description": "Play animations attached to this object.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
             "itemtype": "method",
             "name": "playAnimation",
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 148,
+            "line": 32,
             "description": "Stop all animations playback.",
             "itemtype": "method",
             "name": "stopAnimation",
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 161,
+            "line": 45,
             "description": "Initializes the object.\n\nThis method is calling one time on initialization.",
             "itemtype": "method",
             "name": "initialize",
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 183,
+            "line": 67,
             "description": "Update the object state.\n\nCalled every time before rendering into the screen.",
             "itemtype": "method",
             "name": "update",
@@ -12583,11 +12434,11 @@
                 }
             ],
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 204,
+            "line": 88,
             "description": "Resize this object, called everytime the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -12604,20 +12455,20 @@
                 }
             ],
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 219,
+            "line": 103,
             "description": "Disposes the object from memory.\n\nShould be called when the object is no longer required to avoid memory leaks.",
             "itemtype": "method",
             "name": "dispose",
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 239,
+            "line": 123,
             "description": "Add object as children of this object above the indicated children",
             "itemtype": "method",
             "name": "addAbove",
@@ -12634,11 +12485,11 @@
                 }
             ],
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 276,
+            "line": 160,
             "description": "Add object as children of this object bellow the indicated children",
             "itemtype": "method",
             "name": "addBellow",
@@ -12655,20 +12506,33 @@
                 }
             ],
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 313,
+            "line": 197,
+            "description": "Get scene that contains this object.",
+            "itemtype": "method",
+            "name": "getScene",
+            "return": {
+                "description": "scene",
+                "type": "Object3D"
+            },
+            "class": "Object3D",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 220,
             "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 326,
+            "line": 233,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -12677,20 +12541,20 @@
                 "type": "Boolean"
             },
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 337,
+            "line": 244,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
             "class": "Object3D",
-            "module": "THREE"
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 361,
+            "line": 268,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12716,11 +12580,207 @@
                 "type": "Object"
             },
             "class": "Object3D",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 462,
+            "description": "Array with object's children.",
+            "itemtype": "property",
+            "name": "children",
+            "type": "{Array}",
+            "class": "Object3D",
             "module": "THREE"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 520,
+            "line": 467,
+            "description": "When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.",
+            "itemtype": "property",
+            "name": "frustumCulled",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 473,
+            "description": "The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.",
+            "itemtype": "property",
+            "name": "layers",
+            "type": "{Layers}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 478,
+            "description": "The local transform matrix",
+            "itemtype": "property",
+            "name": "matrix",
+            "type": "{Matrix4}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 483,
+            "description": "When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.",
+            "itemtype": "property",
+            "name": "matrixAutoUpdate",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 489,
+            "description": "The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.",
+            "itemtype": "property",
+            "name": "matrixWorld",
+            "type": "{Matrix4}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 494,
+            "description": "Name of the object (doesn't need to be unique).",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 499,
+            "description": "The object's local position.",
+            "itemtype": "property",
+            "name": "position",
+            "type": "{Vector3}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 504,
+            "description": "Object's local rotation as a Quaternion.",
+            "itemtype": "property",
+            "name": "quaternion",
+            "type": "{Quaternion}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 509,
+            "description": "Object's local rotation (see Euler angles), in radians.",
+            "itemtype": "property",
+            "name": "rotation",
+            "type": "{Euler}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 514,
+            "description": "The object's local scale.",
+            "itemtype": "property",
+            "name": "scale",
+            "type": "{Vector3}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 519,
+            "description": "This is used by the lookAt method, for example, to determine the orientation of the result.",
+            "itemtype": "property",
+            "name": "up",
+            "type": "{Vector3}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 524,
+            "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
+            "itemtype": "property",
+            "name": "uuid",
+            "type": "{String}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 529,
+            "description": "Object gets rendered if true.",
+            "itemtype": "property",
+            "name": "visible",
+            "type": "{boolean}",
+            "default": "true",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 535,
+            "description": "This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.",
+            "itemtype": "property",
+            "name": "renderOrder",
+            "default": "0",
+            "type": "{Number}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 541,
+            "description": "Whether the object gets rendered into shadow map.",
+            "itemtype": "property",
+            "name": "castShadow",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 547,
+            "description": "Whether the material receives shadows.",
+            "itemtype": "property",
+            "name": "receiveShadow",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 553,
+            "description": "Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.",
+            "itemtype": "property",
+            "name": "userData",
+            "type": "{Object}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 558,
+            "description": "Array with the animations available in this object.\n\nEach position contains an AnimationClip that has name, tracks, duration and uuid.",
+            "itemtype": "property",
+            "name": "animations",
+            "type": "{Array}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 567,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -12736,7 +12796,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 526,
+            "line": 573,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -12752,7 +12812,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 532,
+            "line": 579,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -12768,7 +12828,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 538,
+            "line": 585,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -12784,7 +12844,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 544,
+            "line": 591,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -12800,7 +12860,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 550,
+            "line": 597,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -12816,7 +12876,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 556,
+            "line": 603,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -12832,7 +12892,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 562,
+            "line": 609,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -12853,7 +12913,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 569,
+            "line": 616,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -12869,7 +12929,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 575,
+            "line": 622,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -12890,7 +12950,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 582,
+            "line": 629,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -12909,7 +12969,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 588,
+            "line": 635,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -12925,7 +12985,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 594,
+            "line": 641,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -12941,7 +13001,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 600,
+            "line": 647,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -12957,7 +13017,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 606,
+            "line": 653,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -12978,7 +13038,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 613,
+            "line": 660,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -12994,7 +13054,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 619,
+            "line": 666,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -13010,7 +13070,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 625,
+            "line": 672,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -13571,323 +13631,8 @@
             "module": "Utils"
         },
         {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 16,
-            "description": "Type is used to indentify the type of cannonjs:\n - BOX\n - CYLINDER\n - SPHERE\n - HULL",
-            "itemtype": "attribute",
-            "name": "Type",
-            "type": "{Object}",
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 34,
-            "description": "Given a Object3D instance, creates a corresponding CANNON shape.",
-            "itemtype": "method",
-            "name": "createShape",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "type",
-                    "description": "Mesh2shape.Type",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Shape"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 102,
-            "description": "Create box shape from geometry.",
-            "itemtype": "method",
-            "name": "createBoxShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Box"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 125,
-            "description": "Bounding box needs to be computed with the entire mesh, not just geometry.",
-            "itemtype": "method",
-            "name": "createBoundingBoxShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Box"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 158,
-            "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron.",
-            "itemtype": "method",
-            "name": "createConvexPolyhedron",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "ConvexPolyhedron"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Shape"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 200,
-            "description": "Create cylinder shape from geometry.",
-            "itemtype": "method",
-            "name": "createCylinderShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Cylinder"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 218,
-            "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
-            "itemtype": "method",
-            "name": "createBoundingCylinderShape",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object3D"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Cylinder"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 246,
-            "description": "Plane shape from geometry.",
-            "itemtype": "method",
-            "name": "createPlaneShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Box"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 261,
-            "description": "Sphere shape from geometry.",
-            "itemtype": "method",
-            "name": "createSphereShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Sphere"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 273,
-            "description": "Sphere shape from bouding sphere.",
-            "itemtype": "method",
-            "name": "createBoundingSphereShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Sphere"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 288,
-            "description": "Sphere shape from bouding sphere.",
-            "itemtype": "method",
-            "name": "createTubeShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Trimesh"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 302,
-            "description": "Trimesh shape from geometry.",
-            "itemtype": "method",
-            "name": "createTrimeshShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Trimesh"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 322,
-            "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
-            "itemtype": "method",
-            "name": "getGeometry",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object3D"
-                }
-            ],
-            "return": {
-                "description": "Geometry that contains all merger geometry",
-                "type": "Geometry"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 384,
-            "description": "Get geometry vertices.",
-            "itemtype": "method",
-            "name": "getVertices",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "array",
-                "type": "Array"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 400,
-            "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
-            "itemtype": "method",
-            "name": "getMeshes",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object3D"
-                }
-            ],
-            "return": {
-                "description": "meshes found inside the Object3D",
-                "type": "Array"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
             "line": 12,
-            "description": "Get scene that contains this object.",
-            "itemtype": "method",
-            "name": "getScene",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object3D"
-                }
-            ],
-            "return": {
-                "description": "scene",
-                "type": "Object3D"
-            },
-            "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 36,
             "description": "Get object tree root.\n\nFor a object placed inside a running scene the root is always the program.",
             "itemtype": "method",
             "name": "getRoot",
@@ -13907,7 +13652,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 57,
+            "line": 33,
             "description": "Set object and all its children matrixAutoUpdate value",
             "itemtype": "method",
             "name": "setMatrixAutoUpdate",
@@ -13928,7 +13673,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 74,
+            "line": 50,
             "description": "Set object and all children to receive shadows",
             "itemtype": "method",
             "name": "setShadowReceiving",
@@ -13949,7 +13694,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 91,
+            "line": 67,
             "description": "Set object and all children to cast shadows",
             "itemtype": "method",
             "name": "setShadowCasting",
@@ -13970,7 +13715,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 108,
+            "line": 84,
             "description": "Check if object is child of another object",
             "itemtype": "method",
             "name": "isChildOf",
@@ -13995,7 +13740,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 129,
+            "line": 105,
             "description": "Calculates a bouding box for an object considering all its children.",
             "itemtype": "method",
             "name": "calculateBoudingBox",
@@ -14015,7 +13760,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 167,
+            "line": 143,
             "description": "Recalculate all children origins, to be centered with their geometry.",
             "itemtype": "method",
             "name": "recalculateGeometryOrigin",
@@ -14030,13 +13775,308 @@
             "module": "Utils"
         },
         {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 17,
+            "description": "Type is used to indentify the type of cannonjs:\n - BOX\n - CYLINDER\n - SPHERE\n - HULL",
+            "itemtype": "attribute",
+            "name": "Type",
+            "type": "{Object}",
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 35,
+            "description": "Given a Object3D instance, creates a corresponding CANNON shape.",
+            "itemtype": "method",
+            "name": "createShape",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                },
+                {
+                    "name": "type",
+                    "description": "PhysicsGenerator.Type",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Shape"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 97,
+            "description": "Create box shape from geometry.",
+            "itemtype": "method",
+            "name": "createBoxShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Box"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 120,
+            "description": "Bounding box needs to be computed with the entire mesh, not just geometry.",
+            "itemtype": "method",
+            "name": "createBoundingBoxShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Box"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 147,
+            "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron.",
+            "itemtype": "method",
+            "name": "createConvexPolyhedron",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "ConvexPolyhedron"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Shape"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 189,
+            "description": "Create cylinder shape from geometry.",
+            "itemtype": "method",
+            "name": "createCylinderShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Cylinder"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 207,
+            "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
+            "itemtype": "method",
+            "name": "createBoundingCylinderShape",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Cylinder"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 235,
+            "description": "Plane shape from geometry.",
+            "itemtype": "method",
+            "name": "createPlaneShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Box"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 250,
+            "description": "Sphere shape from geometry.",
+            "itemtype": "method",
+            "name": "createSphereShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Sphere"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 262,
+            "description": "Sphere shape from bouding sphere.",
+            "itemtype": "method",
+            "name": "createBoundingSphereShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Sphere"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 277,
+            "description": "Sphere shape from bouding sphere.",
+            "itemtype": "method",
+            "name": "createTubeShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Trimesh"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 291,
+            "description": "Trimesh shape from geometry.",
+            "itemtype": "method",
+            "name": "createTrimeshShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Trimesh"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 311,
+            "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
+            "itemtype": "method",
+            "name": "getGeometry",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "Geometry that contains all merger geometry",
+                "type": "Geometry"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 373,
+            "description": "Get geometry vertices.",
+            "itemtype": "method",
+            "name": "getVertices",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "array",
+                "type": "Array"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
+            "line": 389,
+            "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
+            "itemtype": "method",
+            "name": "getMeshes",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "meshes found inside the Object3D",
+                "type": "Array"
+            },
+            "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
             "file": "..\\..\\source\\core\\utils\\Timer.js",
             "line": 19,
             "description": "Start timer, is the timer is already running dosen't do anything.",
             "itemtype": "method",
             "name": "start",
             "class": "Timer",
-            "module": "Utils"
+            "module": "Physics"
         },
         {
             "file": "..\\..\\source\\core\\utils\\Timer.js",
@@ -14045,7 +14085,7 @@
             "itemtype": "method",
             "name": "stop",
             "class": "Timer",
-            "module": "Utils"
+            "module": "Physics"
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",

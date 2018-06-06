@@ -12,139 +12,115 @@
  * @extends {ResourceManager}
  * @extends {ResourceManager}
  */
-
-/**
- * NunuRuntime instance used to communication between nunu app and the host webpage
- * @property app
- * @default null
- */
-/**
- * Enable virtual reality flag
- * @property vr
- * @default false
- * @type {boolean}
- */
-/**
- * Virtual reality movement scale
- * @property vrScale
- * @type {Number}
- * @default 1.0
- */
-/**
- * Program description
- * @property description
- * @type {String}
- */
-/**
- * Program author
- * @property author
- * @type {String}
- */
-/**
- * Program version
- * @property version
- * @type {String}
- * @default "0"
- */
-/**
- * Antialiasing flag
- * @property antialiasing
- * @type {boolean}
- * @default false
- */
-/**
- * If true the program is rendered with shadows
- * @property shadows
- * @type {boolean}
- * @default true
- */
-/**
- * Shadow type
- * @property shadowsType
- * @type {Number}
- * @default PCFSoftShadowMap
- */
-/**
- * Tonemapping mode
- * @property toneMapping
- * @type {Number}
- * @default NoToneMapping
- */
-/**
- * Flag to control pointer locking
- * @property lockPointer
- * @type {boolean}
- * @default false
- */
-/**
- * Flag to indicate if the runtime should handle device pixel ratio
- * @property handlePixelRatio
- * @type {boolean}
- * @default false
- */
-/**
- * Keyboard input object
- * @property keyboard
- * @type {Keyboard}
- */
-/**
- * Mouse input object
- * @property mouse
- * @type {Mouse}
- */
-/**
- * Threejs WebGLRenderer being used
- * @property renderer
- * @type {WebGLRenderer}
- * @default null
- */
-/**
- * Canvas being used to draw content.
- *
- * This canvas is where the WebGL rendering context was created.
- * @property canvas
- * @type {DOM}
- * @default null
- */
-/**
- * DOM Division element that can be used to add html content to the app.
- *
- * All content added to this division should be manually removed before the app exits.
- * @property division
- * @type {DOM}
- * @default null
- */
 function Program(name)
 {
 	ResourceManager.call(this);
 
 	this.type = "Program";
 
-	//Disable matrix auto update
 	this.matrixAutoUpdate = false;
 
-	//Pointer to nunu app
+	/**
+	 * NunuRuntime instance used to communication between nunu app and the host webpage.
+	 * Inside the editor communication with the app is simulated on the debug console.
+	 * @property app
+	 * @type {NunuApp}
+	 */
 	this.app = null;
 
-	//Program Info
+	/**
+	 * Program name.
+	 * @property name
+	 * @type {String}
+	 */
 	this.name = (name !== undefined) ? name : "program";
+
+	/**
+	 * Program description
+	 * @property description
+	 * @type {String}
+	 */
 	this.description = "";
+
+	/**
+	 * Program author
+	 * @property author
+	 * @type {String}
+	 */
 	this.author = "";
+
+	/**
+	 * Program version
+	 * @property version
+	 * @type {String}
+	 * @default "0"
+	 */
 	this.version = "0";
 
-	//Hardware flags
+	/**
+	 * Flag to control pointer locking
+	 * @property lockPointer
+	 * @type {boolean}
+	 * @default false
+	 */
 	this.lockPointer = false;
+
+	/**
+	 * Flag to indicate if the runtime should handle device pixel ratio
+	 * @property handlePixelRatio
+	 * @type {boolean}
+	 * @default false
+	 */
 	this.handlePixelRatio = false;
 
-	//VR flags
+	/**
+	 * Enable virtual reality flag
+	 * @property vr
+	 * @default false
+	 * @type {boolean}
+	 */
 	this.vr = false;
+
+	/**
+	 * Virtual reality movement scale
+	 * @property vrScale
+	 * @type {Number}
+	 * @default 1.0
+	 */
 	this.vrScale = 1;
 
-	//Render quality
+	/**
+	 * Antialiasing flag
+	 * @property antialiasing
+	 * @type {boolean}
+	 * @default false
+	 */
 	this.antialiasing = true;
+
+	/**
+	 * If true the program is rendered with shadows
+	 * @property shadows
+	 * @type {boolean}
+	 * @default true
+	 */
 	this.shadows = true;
+
+	/**
+	 * Shadow type
+	 * @property shadowsType
+	 * @type {Number}
+	 * @default PCFSoftShadowMap
+	 */
 	this.shadowsType = THREE.PCFSoftShadowMap;
+
+	/**
+	 * Tonemapping mode
+	 * @property toneMapping
+	 * @type {Number}
+	 * @default NoToneMapping
+	 */
 	this.toneMapping = THREE.NoToneMapping;
+
 	this.toneMappingExposure = 1.0;
 	this.toneMappingWhitePoint = 1.0;
 
@@ -152,13 +128,50 @@ function Program(name)
 	this.defaultScene = null;
 	this.defaultCamera = null;
 
-	//Runtime variables
+	/**
+	 * Keyboard input object
+	 * @property keyboard
+	 * @type {Keyboard}
+	 */
 	this.keyboard = null;
+
+	/**
+	 * Mouse input object
+	 * @property mouse
+	 * @type {Mouse}
+	 */
 	this.mouse = null;
+
+	/**
+	 * Renderer being used during runtime.
+	 * @property renderer
+	 * @type {WebGLRenderer}
+	 */
 	this.renderer = null;
+
+	/**
+	 * Scene currently in use.
+	 * @property scene
+	 * @type {Scene}
+	 */
 	this.scene = null;
 
+	/**
+	 * Canvas being used to draw content.
+	 *
+	 * This canvas is where the WebGL rendering context was created.
+	 * @property canvas
+	 * @type {DOM}
+	 */
 	this.canvas = null;
+
+	/**
+	 * DOM Division element that can be used to add html content to the app.
+	 *
+	 * All content added to this division should be manually removed before the app exits.
+	 * @property division
+	 * @type {DOM}
+	 */
 	this.division = null;
 
 	//VR runtime objects
@@ -166,7 +179,7 @@ function Program(name)
 	this.display = null;
 	this.effect = null;
 	this.controls = null;
-
+	
 	this.manager = new EventManager();
 	
 	//VR display present change event

@@ -47,7 +47,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "MaterialLoader",
         "MathUtils",
         "Mesh",
-        "Mesh2shape",
         "Model",
         "Mouse",
         "Nunu",
@@ -59,6 +58,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ParticleEmitter",
         "Pass",
         "PerspectiveCamera",
+        "PhysicsGenerator",
         "PhysicsObject",
         "PointLight",
         "PositionalAudio",
@@ -201,7 +201,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Physics",
             "name": "Physics",
-            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
+            "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
         {
             "displayName": "Postprocessing",
@@ -241,7 +241,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Utils",
             "name": "Utils",
-            "description": "ObjectUtils is a collection of methods to apply operations to Object3D objects"
+            "description": "EventManager is used to manager DOM events creationg and destruction in a single function call.\n\nIt is used by objects to make it easier to add and remove events from global DOM objects."
         },
         {
             "displayName": "VirtualReality",

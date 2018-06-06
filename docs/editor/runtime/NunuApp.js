@@ -159,7 +159,7 @@ include("core/utils/EventManager.js");
 
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
-include("core/utils/Mesh2shape.js");
+include("core/utils/PhysicsGenerator.js");
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.
@@ -171,77 +171,64 @@ include("core/utils/Mesh2shape.js");
  * @constructor
  * @param {DOM} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
  */
-
-/**
- * Nunu Program
- * @property program
- * @type {Program}
- */
-
-/**
- * Graphics renderer in use by this NunuApp instance
- * @property renderer
- * @type {Renderer}
- */
-
-/**
- * VR flag, to set VR mode the toggleVR method should be used
- * @property vr
- * @type {boolean}
- * @default false
- */
-
-/**
- * Canvas used to render graphics.
- * @property canvas
- * @type {DOM}
- */
-
-/**
- * Flag used to controll if the canvas element is resized automatically by the nunu app instance.
- * 
- * If true the canvas is resized whenether the resize method is called.
- * 
- * @property canvasFitWindow
- * @type {boolean}
- * @default false if a canvas is provided, else true
- */
-
-/**
- * Lock and hide mouse pointer to the canvas.
- *
- * @method lockMouse
- */
 function NunuApp(canvas)
 {
-	//Program and renderer
+	/**
+	 * Nunu Program
+	 * @property program
+	 * @type {Program}
+	 */
 	this.program = null;
+
+	/**
+	 * Graphics renderer in use by this NunuApp instance
+	 * @property renderer
+	 * @type {Renderer}
+	 */
 	this.renderer = null;
 
-	//Runtime control
+	/**
+	 * Runtime control, if true the app is running.
+	 * 
+	 * @property running
+	 * @type {Boolean}
+	 */
 	this.running = false;
 
-	//Event manager
+	/**
+	 * Flag used to controll if the canvas element is resized automatically by the nunu app instance.
+	 * 
+	 * If true the canvas is resized whenether the resize method is called.
+	 * 
+	 * @property canvasFitWindow
+	 * @type {boolean}
+	 * @default false if a canvas is provided, else true
+	 */
+	this.canvasFitWindow = false;
+
+	/**
+	 * Canvas used to render graphics.
+	 * @property canvas
+	 * @type {DOM}
+	 */
+	this.canvas = canvas;
+
+	/**
+	 * Event manager used to create and manage events for this app.
+	 * 
+	 * @property events
+	 * @type {EventManager}
+	 */
 	this.events = new EventManager();
 
-	//Canvas
 	if(canvas === undefined)
 	{
 		this.canvas = document.createElement("canvas");
 		this.canvas.style.position = "absolute";
 		this.canvas.style.left = "0px";
 		this.canvas.style.top = "0px";
-		this.canvas.style.width = window.innerWidth + "px";
-		this.canvas.style.height = window.innerHeight + "px";
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
-		document.body.appendChild(this.canvas);
 		this.canvasFitWindow = true;
-	}
-	else
-	{
-		this.canvas = canvas;
-		this.canvasFitWindow = false;
+		document.body.appendChild(this.canvas);
 	}
 }
 
@@ -305,13 +292,7 @@ NunuApp.prototype.run = function()
 	this.renderer.toneMapping = this.program.toneMapping;
 	this.renderer.toneMappingExposure = this.program.toneMappingExposure;
 	this.renderer.toneMappingWhitePoint = this.program.toneMappingWhitePoint;
-	this.renderer.setSize(this.canvas.width, this.canvas.height);
-	
-	if(this.program.handlePixelRatio)
-	{
-		this.renderer.setPixelRatio(window.devicePixelRatio);
-	}
-	
+
 	//Mouse and Keyboard input
 	this.keyboard = new Keyboard();
 	this.mouse = new Mouse();
@@ -321,7 +302,7 @@ NunuApp.prototype.run = function()
 	this.program.app = this;
 
 	//Create default camera
-	this.program.defaultCamera = new PerspectiveCamera(60, this.canvas.width/this.canvas.height, 0.1, 1000000);
+	this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1000000);
 	this.program.defaultCamera.position.set(0, 5, -5);
 
 	//Set renderer
@@ -330,7 +311,6 @@ NunuApp.prototype.run = function()
 	
 	//Initialize program
 	this.program.initialize();
-	this.program.resize(this.canvas.width, this.canvas.height);
 
 	//Lock mouse pointer
 	if(this.program.lockPointer)
@@ -352,8 +332,9 @@ NunuApp.prototype.run = function()
 	{
 		self.exit();
 	});
-
 	this.events.create();
+
+	this.resize();
 	this.resume();
 };
 
@@ -580,18 +561,35 @@ NunuApp.prototype.setCanvas = function(canvas)
  */
 NunuApp.prototype.resize = function()
 {
-	if(this.canvas !== null && this.canvasFitWindow)
+	if(this.canvas !== null && this.program !== null && this.renderer !== null)
 	{
-		this.canvas.style.width = window.innerWidth + "px";
-		this.canvas.style.height = window.innerHeight + "px";
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
-	}
-	
-	if(this.program !== null && this.renderer !== null)
-	{
-		this.renderer.setSize(this.canvas.width, this.canvas.height);
-		this.program.resize(this.canvas.width, this.canvas.height);
+		var width = 1;
+		var height = 1;
+
+		//Automatically fit window
+		if(this.canvasFitWindow)
+		{
+			this.canvas.style.width = window.innerWidth + "px";
+			this.canvas.style.height = window.innerHeight + "px";	
+			width = window.innerWidth;
+			height = window.innerHeight;
+		}
+		else
+		{
+			width = this.canvas.offsetWidth;
+			height = this.canvas.offsetHeight;
+		}
+
+		//Device pixel ratio
+		if(this.program.handlePixelRatio)
+		{
+			width *= window.devicePixelRatio;
+			height *= window.devicePixelRatio;
+		}
+
+		//Update size
+		this.renderer.setSize(width, height, false);
+		this.program.resize(width, height);
 	}
 };
 

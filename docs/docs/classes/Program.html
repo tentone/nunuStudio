@@ -78,7 +78,6 @@
 								<li><a href="../classes/MaterialLoader.html">MaterialLoader</a></li>
 								<li><a href="../classes/MathUtils.html">MathUtils</a></li>
 								<li><a href="../classes/Mesh.html">Mesh</a></li>
-								<li><a href="../classes/Mesh2shape.html">Mesh2shape</a></li>
 								<li><a href="../classes/Model.html">Model</a></li>
 								<li><a href="../classes/Mouse.html">Mouse</a></li>
 								<li><a href="../classes/Nunu.html">Nunu</a></li>
@@ -90,6 +89,7 @@
 								<li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
 								<li><a href="../classes/Pass.html">Pass</a></li>
 								<li><a href="../classes/PerspectiveCamera.html">PerspectiveCamera</a></li>
+								<li><a href="../classes/PhysicsGenerator.html">PhysicsGenerator</a></li>
 								<li><a href="../classes/PhysicsObject.html">PhysicsObject</a></li>
 								<li><a href="../classes/PointLight.html">PointLight</a></li>
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
@@ -394,7 +394,15 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_name">name</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_renderer">renderer</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_scene">scene</a>
 						
 													</li>
 													<li class="index-item property">
@@ -1352,7 +1360,7 @@
 											</div>
 											<div id="property_app" class="property item">
 												<h3 class="name"><code>app</code></h3>
-												<span class="type">Unknown</span>
+												<span class="type">NunuApp</span>
 											
 											
 											
@@ -1366,11 +1374,11 @@
 												</div>
 											
 												<div class="description">
-													<p>NunuRuntime instance used to communication between nunu app and the host webpage</p>
+													<p>NunuRuntime instance used to communication between nunu app and the host webpage.
+											Inside the editor communication with the app is simulated on the debug console.</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> null</p>
 											
 											
 											</div>
@@ -1418,7 +1426,6 @@
 											
 												</div>
 											
-													<p><strong>Default:</strong> null</p>
 											
 											
 											</div>
@@ -1466,7 +1473,6 @@
 											
 												</div>
 											
-													<p><strong>Default:</strong> null</p>
 											
 											
 											</div>
@@ -1564,6 +1570,29 @@
 											
 											
 											</div>
+											<div id="property_name" class="property item">
+												<h3 class="name"><code>name</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Program name.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_renderer" class="property item">
 												<h3 class="name"><code>renderer</code></h3>
 												<span class="type">WebGLRenderer</span>
@@ -1580,11 +1609,33 @@
 												</div>
 											
 												<div class="description">
-													<p>Threejs WebGLRenderer being used</p>
+													<p>Renderer being used during runtime.</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> null</p>
+											
+											
+											</div>
+											<div id="property_scene" class="property item">
+												<h3 class="name"><code>scene</code></h3>
+												<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Scene currently in use.</p>
+											
+												</div>
+											
 											
 											
 											</div>
