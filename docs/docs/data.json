@@ -5479,7 +5479,23 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\GeometryLoader.js",
-            "line": 19,
+            "line": 21,
+            "description": "Set list of shapes to be used by this loader.",
+            "itemtype": "method",
+            "name": "setShapes",
+            "params": [
+                {
+                    "name": "shapes",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "GeometryLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\GeometryLoader.js",
+            "line": 34,
             "description": "Load geometry json file from URL.",
             "itemtype": "method",
             "name": "load",
@@ -5510,7 +5526,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\GeometryLoader.js",
-            "line": 37,
+            "line": 52,
             "description": "Parse geometry json.",
             "itemtype": "method",
             "name": "parse",
@@ -5744,7 +5760,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 91,
+            "line": 92,
             "description": "Define base path for external texture loading.",
             "itemtype": "method",
             "name": "setTexturePath",
@@ -5760,7 +5776,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 102,
+            "line": 103,
             "description": "Set cross origin.",
             "itemtype": "method",
             "name": "setCrossOrigin",
@@ -5776,7 +5792,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 113,
+            "line": 114,
             "description": "Parse resources on JSON.",
             "itemtype": "method",
             "name": "parseResources",
@@ -5816,7 +5832,27 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 164,
+            "line": 165,
+            "description": "Parse geometries on JSON.",
+            "itemtype": "method",
+            "name": "parseGeometries",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "geometries",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 189,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -5836,7 +5872,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 188,
+            "line": 213,
             "description": "Parse animations on json.",
             "itemtype": "method",
             "name": "parseAnimations",
@@ -5856,7 +5892,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 214,
+            "line": 239,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -5876,7 +5912,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 237,
+            "line": 262,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -5896,7 +5932,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 260,
+            "line": 285,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -5916,7 +5952,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 283,
+            "line": 308,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -5936,7 +5972,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 306,
+            "line": 331,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -5966,7 +6002,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 333,
+            "line": 358,
             "description": "Parse skeletons from json.",
             "itemtype": "method",
             "name": "parseSkeletons",
@@ -5987,7 +6023,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 380,
+            "line": 405,
             "description": "Auxiliar method to bind skeletons to loaded objects.",
             "itemtype": "method",
             "name": "bindSkeletons",
@@ -6008,7 +6044,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 413,
+            "line": 438,
             "description": "Parse objects from json.",
             "itemtype": "method",
             "name": "parseObjects",
