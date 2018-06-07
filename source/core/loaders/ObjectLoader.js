@@ -57,7 +57,8 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 ObjectLoader.prototype.parse = function(json, onLoad)
 {
 	var resources = this.parseResources(json.resources);
-	var geometries = this.parseGeometries(json.geometries);
+	var shapes = this.parseShape(json.shapes);
+	var geometries = this.parseGeometries(json.geometries, shapes);
 	var images = this.parseImages(json.images);
 	var videos = this.parseVideos(json.videos);
 	var audio = this.parseAudio(json.audio);
@@ -137,6 +138,29 @@ ObjectLoader.prototype.parseResources = function(json)
 	return resources;
 };
 
+/**
+ * Parse geometries on JSON.
+ *
+ * @method parseGeometries
+ * @param {Object} json
+ * @return {Array} geometries
+ */
+ObjectLoader.prototype.parseShape = function(json)
+{
+	var shapes = {};
+
+	if(json !== undefined)
+	{
+		for(var i = 0, l = json.length; i < l; i ++)
+		{
+			var shape = new Shape().fromJSON(json[i]);
+
+			shapes[shape.uuid] = shape;
+		}
+	}
+
+	return shapes;
+};
 
 /**
  * Parse geometries on JSON.
@@ -145,11 +169,12 @@ ObjectLoader.prototype.parseResources = function(json)
  * @param {Object} json
  * @return {Array} geometries
  */
-ObjectLoader.prototype.parseGeometries = function(array)
+ObjectLoader.prototype.parseGeometries = function(array, shapes)
 {
 	var loader = new GeometryLoader();
-	var geometries = [];
+	loader.setShapes(shapes);
 
+	var geometries = [];
 	if(array !== undefined)
 	{
 		for(var i = 0; i < array.length; i++)

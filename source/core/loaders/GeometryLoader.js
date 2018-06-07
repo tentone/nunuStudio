@@ -14,7 +14,22 @@ function GeometryLoader(manager)
 
 	this.geometryLoader = new THREE.JSONLoader();
 	this.bufferGeometryLoader = new THREE.BufferGeometryLoader();
+
+	this.shapes = {};
 }
+
+/**
+ * Set list of shapes to be used by this loader.
+ *
+ * @method setShapes
+ * @param {Array} shapes
+ */
+GeometryLoader.prototype.setShapes = function(shapes)
+{
+	this.shapes = shapes;
+	return this;
+};
+
 
 /**
  * Load geometry json file from URL.
@@ -118,7 +133,7 @@ GeometryLoader.prototype.parse = function(data)
 			var geometryShapes = [];
 			for(var j = 0, jl = data.shapes.length; j < jl; j++)
 			{
-				var shape = shapes[data.shapes[j]];
+				var shape = this.shapes[data.shapes[j]];
 				geometryShapes.push(shape);
 			}
 			geometry = new THREE[data.type](geometryShapes, data.curveSegments);
