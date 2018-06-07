@@ -69,16 +69,11 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 
 	if(mouse.wheel !== 0)
 	{
-		var direction = this.getWorldDirection(this.tempVector);
-		direction.y = 0;
-		direction.normalize();
-
-		var y = mouse.wheel * Editor.settings.editor.mouseWheelSensitivity * this.distance;
-		this.center.x += direction.x * y;
-		this.center.z += direction.z * y;
+		this.distance += mouse.wheel * Editor.settings.editor.mouseWheelSensitivity * this.distance;
 		needsUpdate = true;
 	}
 	
+	/*
 	//WASD movement
 	if(Editor.settings.editor.keyboardNavigation)
 	{
@@ -125,7 +120,8 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 			needsUpdate = true;
 		}
 	}
-	
+	*/
+
 	if(needsUpdate === true)
 	{
 		this.updateControls();

@@ -129,7 +129,27 @@ function SceneEditor(parent, closeable, container, index)
 	};
 
 	//Transformation mode
-	//TODO <ADD CODE HERE>
+	this.transformationSpace = new DropdownList(this.element);
+	this.transformationSpace.size.set(60, 30);
+	this.transformationSpace.position.set(145, 5);
+	this.transformationSpace.updatePosition(Element.BOTTOM_RIGHT);
+	this.transformationSpace.updateSize();
+	this.transformationSpace.addValue("Local", "local");
+	this.transformationSpace.addValue("World", "world");
+	this.transformationSpace.element.style.opacity = 0.5;
+	this.transformationSpace.setOnChange(function()
+	{
+		Editor.settings.editor.transformationSpace = self.transformationSpace.getValue();
+		self.tool.setSpace(Editor.settings.editor.transformationSpace);
+	});
+	this.transformationSpace.element.onmouseenter = function()
+	{
+		this.style.opacity = 1.0;
+	};
+	this.transformationSpace.element.onmouseleave = function()
+	{
+		this.style.opacity = 0.5;
+	};
 
 	//Navigation modes
 	this.navigation = new DropdownList(this.element);
@@ -369,6 +389,7 @@ SceneEditor.prototype.updateSettings = function()
 	this.updateCameraControls(Editor.settings.editor.navigation);
 
 	//Tool
+	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
 	this.tool.setSpace(Editor.settings.editor.transformationSpace);
 	this.tool.setSnap(Editor.settings.editor.snap);
 	this.tool.setTranslationSnap(Editor.settings.editor.gridSpacing);
@@ -972,6 +993,8 @@ SceneEditor.prototype.setState = function(state)
 		this.fullscreenButton.setVisibility(false);
 		this.vrButton.setVisibility(false);
 		this.cameraButton.setVisibility(true);
+		this.transformationSpace.setVisibility(true);
+		this.navigation.setVisibility(true);
 
 		//Update interface
 		this.updateInterface();
@@ -1003,6 +1026,8 @@ SceneEditor.prototype.setState = function(state)
 			//Show full screen and VR buttons
 			this.fullscreenButton.setVisibility(true);
 			this.cameraButton.setVisibility(false);
+			this.transformationSpace.setVisibility(false);
+			this.navigation.setVisibility(false);
 
 			//If program uses VR set button
 			if(this.programRunning.vr)
