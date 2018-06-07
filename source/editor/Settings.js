@@ -10,9 +10,9 @@ Settings.RADIANS = 0;
 Settings.DEGREES = 1;
 
 //Navigation
-Settings.FREE = 10;
+Settings.FIRST_PERSON = 10;
 Settings.ORBIT = 11;
-Settings.PLANAR = 12;
+Settings.PLANAR_LEFT = 12;
 
 //Position
 Settings.TOP_LEFT = 20;

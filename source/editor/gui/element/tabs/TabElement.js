@@ -4,9 +4,10 @@ function TabElement(parent, closeable, container, index, title, icon)
 {
 	Element.call(this, parent);
 
+	var self = this;
+
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
-
 	this.preventDragEvents();
 
 	//Meta
@@ -24,8 +25,6 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.index = index;
 	this.container = container;
 
-	var self = this;
-	
 	//Focused
 	this.focused = false;
 	this.element.onmouseenter = function()

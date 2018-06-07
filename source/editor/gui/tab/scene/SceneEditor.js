@@ -90,7 +90,6 @@ function SceneEditor(parent, closeable, container, index)
 	this.fullscreenButton.visible = false;
 	this.fullscreenButton.element.style.borderRadius = "5px";
 	this.fullscreenButton.element.style.opacity = 0.5;
-
 	this.fullscreenButton.element.onmouseenter = function()
 	{
 		this.style.opacity = 1.0;
@@ -120,12 +119,39 @@ function SceneEditor(parent, closeable, container, index)
 	this.vrButton.visible = false;
 	this.vrButton.element.style.borderRadius = "5px";
 	this.vrButton.element.style.opacity = 0.5;
-
 	this.vrButton.element.onmouseenter = function()
 	{
 		this.style.opacity = 1.0;
 	};
 	this.vrButton.element.onmouseleave = function()
+	{
+		this.style.opacity = 0.5;
+	};
+
+	//Transformation mode
+	//TODO <ADD CODE HERE>
+
+	//Navigation modes
+	this.navigation = new DropdownList(this.element);
+	this.navigation.setAltText("Camera navigation mode");
+	this.navigation.size.set(100, 30);
+	this.navigation.position.set(40, 5);
+	this.navigation.updatePosition(Element.BOTTOM_RIGHT);
+	this.navigation.updateSize();
+	this.navigation.addValue("First-Person", Settings.FIRST_PERSON);
+	this.navigation.addValue("Orbit", Settings.ORBIT);
+	this.navigation.addValue("Left", Settings.PLANAR_LEFT);
+	this.navigation.element.style.opacity = 0.5;
+	this.navigation.setOnChange(function()
+	{
+		Editor.settings.editor.navigation = self.navigation.getValue();
+		self.updateCameraControls(Editor.settings.editor.navigation);
+	});
+	this.navigation.element.onmouseenter = function()
+	{
+		this.style.opacity = 1.0;
+	};
+	this.navigation.element.onmouseleave = function()
 	{
 		this.style.opacity = 0.5;
 	};
@@ -142,17 +168,14 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton.updatePosition(Element.BOTTOM_RIGHT);
 	this.cameraButton.element.style.borderRadius = "5px";
 	this.cameraButton.element.style.opacity = 0.5;
-
 	this.cameraButton.element.onmouseenter = function()
 	{
 		this.style.opacity = 1.0;
 	};
-
 	this.cameraButton.element.onmouseleave = function()
 	{
 		this.style.opacity = 0.5;
 	};
-
 	this.cameraButton.setCallback(function()
 	{
 		self.setCameraMode();
@@ -167,6 +190,7 @@ function SceneEditor(parent, closeable, container, index)
 		}
 	});
 
+	//Event manager
 	this.manager = new EventManager();
 	this.manager.add(document.body, "keydown", function(event)
 	{
@@ -296,6 +320,29 @@ SceneEditor.prototype.deactivate = function()
 	this.manager.destroy();
 };
 
+//Update camera controller object
+SceneEditor.prototype.updateCameraControls = function(mode)
+{
+	//Controls
+	if(mode === Settings.FIRST_PERSON)
+	{
+		this.controls = new EditorFreeControls();
+	}
+	else if(mode === Settings.ORBIT)
+	{
+		this.controls = new EditorOrbitControls();
+	}
+	else if(mode === Settings.PLANAR_LEFT)
+	{
+		this.controls = new EditorPlanarControls();
+	}
+
+	if(this.controls !== null)
+	{
+		this.controls.attach(this.camera);
+	}
+}
+
 //Update settings
 SceneEditor.prototype.updateSettings = function()
 {
@@ -313,23 +360,7 @@ SceneEditor.prototype.updateSettings = function()
 	this.orientation.size.set(size, size);
 
 	//Controls
-	if(Editor.settings.editor.navigation === Settings.FREE)
-	{
-		this.controls = new EditorFreeControls();
-	}
-	else if(Editor.settings.editor.navigation === Settings.ORBIT)
-	{
-		this.controls = new EditorOrbitControls();
-	}
-	else if(Editor.settings.editor.navigation === Settings.PLANAR)
-	{
-		this.controls = new EditorPlanarControls();
-	}
-
-	if(this.controls !== null)
-	{
-		this.controls.attach(this.camera);
-	}
+	this.updateCameraControls(Editor.settings.editor.navigation);
 
 	//Tool
 	this.tool.setSpace(Editor.settings.editor.transformationSpace);

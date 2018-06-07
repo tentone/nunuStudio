@@ -4,6 +4,8 @@ function TabButton(parent, tab)
 {
 	Element.call(this, parent);
 
+	var self = this;
+
 	this.element.draggable = true;
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
@@ -58,8 +60,6 @@ function TabButton(parent, tab)
 		self.tab.close();
 	};
 
-	//Self pointer
-	var self = this;
 
 	//Drag state
 	var dragState = 0;
