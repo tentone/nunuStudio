@@ -230,7 +230,7 @@ function MainMenu(parent)
 						FileSystem.deleteFolder("./temp");
 					}
 
-					Editor.alert("Exported android project");
+					Editor.alert("Android project exported!");
 				}, 100);
 			}
 
