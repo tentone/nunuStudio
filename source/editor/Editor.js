@@ -566,9 +566,7 @@ Editor.initialize = function()
 			Editor.settings.store();
 
 			var message = "All unsaved changes to the project will be lost! Do you really wanna exit?";
-
 			event.returnValue = message;
-
 			return message;	
 		};
 	}
@@ -599,9 +597,6 @@ Editor.initialize = function()
 			}
 		}
 	}
-	
-	//Fullscreen
-	Editor.fullscreen = false;
 
 	//Input
 	Editor.keyboard = new Keyboard();
@@ -797,7 +792,7 @@ Editor.isObjectSelected = function(object)
 //Resize to fit window
 Editor.resize = function()
 {
-	if(!Editor.fullscreen)
+	if(!Nunu.isFullscreen())
 	{
 		Editor.gui.updateInterface();
 	}
