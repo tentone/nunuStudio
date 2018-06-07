@@ -13,6 +13,11 @@ Settings.DEGREES = 1;
 Settings.FIRST_PERSON = 10;
 Settings.ORBIT = 11;
 Settings.PLANAR_LEFT = 12;
+Settings.PLANAR_RIGHT = 13;
+Settings.PLANAR_FRONT = 14;
+Settings.PLANAR_BACK = 15;
+Settings.PLANAR_TOP = 16;
+Settings.PLANAR_BOTTOM = 17;
 
 //Position
 Settings.TOP_LEFT = 20;

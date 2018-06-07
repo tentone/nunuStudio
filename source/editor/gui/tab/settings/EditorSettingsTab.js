@@ -184,9 +184,14 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.addText("Navigation Mode");
 	this.navigation = new DropdownList(this.form.element);
 	this.navigation.size.set(150, 20);
-	this.navigation.addValue("First-person", Settings.FIRST_PERSON);
+	this.navigation.addValue("First-Person", Settings.FIRST_PERSON);
 	this.navigation.addValue("Orbit", Settings.ORBIT);
 	this.navigation.addValue("Left", Settings.PLANAR_LEFT);
+	this.navigation.addValue("Right", Settings.PLANAR_RIGHT);
+	this.navigation.addValue("Front", Settings.PLANAR_FRONT);
+	this.navigation.addValue("Back", Settings.PLANAR_BACK);
+	this.navigation.addValue("Top", Settings.PLANAR_TOP);
+	this.navigation.addValue("Bottom", Settings.PLANAR_BOTTOM);
 	this.navigation.setOnChange(function()
 	{
 		Editor.settings.editor.navigation = self.navigation.getValue();

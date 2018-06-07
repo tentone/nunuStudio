@@ -1,8 +1,10 @@
 "use strict";
 
-function EditorPlanarControls()
+function EditorPlanarControls(mode)
 {
 	EditorOrbitControls.call(this);
+
+	this.mode = mode !== undefined ? mode : Settings.PLANAR_LEFT;
 }
 
 EditorPlanarControls.prototype = Object.create(EditorOrbitControls.prototype);
@@ -49,14 +51,6 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 {
 	var needsUpdate = false;
 
-	/*
-	if(mouse.buttonPressed(Mouse.MIDDLE))
-	{
-		this.orientation.x -= Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
-		needsUpdate = true;
-	}
-	*/
-	
 	if(mouse.buttonPressed(Mouse.RIGHT))
 	{
 		this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;

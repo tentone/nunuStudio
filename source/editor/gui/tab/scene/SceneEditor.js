@@ -141,6 +141,11 @@ function SceneEditor(parent, closeable, container, index)
 	this.navigation.addValue("First-Person", Settings.FIRST_PERSON);
 	this.navigation.addValue("Orbit", Settings.ORBIT);
 	this.navigation.addValue("Left", Settings.PLANAR_LEFT);
+	this.navigation.addValue("Right", Settings.PLANAR_RIGHT);
+	this.navigation.addValue("Front", Settings.PLANAR_FRONT);
+	this.navigation.addValue("Back", Settings.PLANAR_BACK);
+	this.navigation.addValue("Top", Settings.PLANAR_TOP);
+	this.navigation.addValue("Bottom", Settings.PLANAR_BOTTOM);
 	this.navigation.element.style.opacity = 0.5;
 	this.navigation.setOnChange(function()
 	{
@@ -360,6 +365,7 @@ SceneEditor.prototype.updateSettings = function()
 	this.orientation.size.set(size, size);
 
 	//Controls
+	this.navigation.setValue(Editor.settings.editor.navigation);
 	this.updateCameraControls(Editor.settings.editor.navigation);
 
 	//Tool
