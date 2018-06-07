@@ -80,6 +80,8 @@ function TabButton(parent, tab)
 		event.preventDefault();
 		this.style.borderLeft = "";
 		this.style.borderRight = "";
+		this.style.borderBottom = "";
+		this.style.borderTop = "";
 
 		//Move tab between containers
 		/*var uuid = event.dataTransfer.getData("uuid");
@@ -111,31 +113,64 @@ function TabButton(parent, tab)
 	//Drag over
 	this.element.ondragover = function(event)
 	{
-		if(event.layerX > self.size.x * 0.8 || event.target !== this)
+		if(self.tab.container.mode === TabGroup.TOP || self.tab.container.mode === TabGroup.BOTTOM)
 		{
-			if(dragState !== 2)
+			if(event.layerX > self.size.x * 0.8 || event.target !== this)
 			{
-				dragState = 2;
-				this.style.borderLeft = "";
-				this.style.borderRight = "thick solid #999999";
+				if(dragState !== 2)
+				{
+					dragState = 2;
+					this.style.borderLeft = "";
+					this.style.borderRight = "thick solid #999999";
+				}
 			}
-		}
-		else if(event.layerX < self.size.x * 0.2)
-		{
-			if(dragState !== 1)
+			else if(event.layerX < self.size.x * 0.2)
 			{
-				dragState = 1;
-				this.style.borderRight = "";
-				this.style.borderLeft = "thick solid #999999";
+				if(dragState !== 1)
+				{
+					dragState = 1;
+					this.style.borderRight = "";
+					this.style.borderLeft = "thick solid #999999";
+				}
+			}
+			else
+			{
+				if(dragState !== 0)
+				{
+					dragState = 0;
+					this.style.borderLeft = "";
+					this.style.borderRight = "";
+				}
 			}
 		}
 		else
 		{
-			if(dragState !== 0)
+			if(event.layerY > self.size.y * 0.7 || event.target !== this)
 			{
-				dragState = 0;
-				this.style.borderLeft = "";
-				this.style.borderRight = "";
+				if(dragState !== 2)
+				{
+					dragState = 2;
+					this.style.borderTop = "";
+					this.style.borderBottom = "solid #999999";
+				}
+			}
+			else if(event.layerY < self.size.y * 0.3)
+			{
+				if(dragState !== 1)
+				{
+					dragState = 1;
+					this.style.borderBottom = "";
+					this.style.borderTop = "solid #999999";
+				}
+			}
+			else
+			{
+				if(dragState !== 0)
+				{
+					dragState = 0;
+					this.style.borderBottom = "";
+					this.style.borderTop = "";
+				}
 			}
 		}
 	};
@@ -151,6 +186,8 @@ function TabButton(parent, tab)
 		dragState = 0;
 		this.style.borderLeft = "";
 		this.style.borderRight = "";
+		this.style.borderBottom = "";
+		this.style.borderTop = "";
 	};
 
 	//Drag leave
@@ -161,6 +198,8 @@ function TabButton(parent, tab)
 		dragState = 0;
 		this.style.borderLeft = "";
 		this.style.borderRight = "";
+		this.style.borderBottom = "";
+		this.style.borderTop = "";
 	};
 
 	//Mouse click
