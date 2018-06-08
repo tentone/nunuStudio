@@ -357,15 +357,12 @@ SceneEditor.prototype.updateCameraControls = function(mode)
 	{
 		this.controls = new EditorOrbitControls();
 	}
-	else if(mode === Settings.PLANAR_LEFT)
+	else
 	{
-		this.controls = new EditorPlanarControls();
+		this.controls = new EditorPlanarControls(mode);
 	}
 
-	if(this.controls !== null)
-	{
-		this.controls.attach(this.camera);
-	}
+	this.controls.attach(this.camera);
 }
 
 //Update settings

@@ -1,49 +1,53 @@
 "use strict";
 
+//The planar controls are used to control 2D movement
 function EditorPlanarControls(mode)
 {
 	EditorOrbitControls.call(this);
 
-	this.mode = mode !== undefined ? mode : Settings.PLANAR_LEFT;
+	this.setMode(mode !== undefined ? mode : Settings.PLANAR_LEFT);
 }
 
 EditorPlanarControls.prototype = Object.create(EditorOrbitControls.prototype);
+
+EditorPlanarControls.prototype.setOrientation = function(code){};
+
+EditorPlanarControls.prototype.setMode = function(mode)
+{
+	this.mode = mode;
+
+	if(mode === Settings.PLANAR_FRONT)
+	{
+		this.orientation.set(Math.PI / 2, 0);
+	}
+	else if(mode === Settings.PLANAR_BACK)
+	{
+		this.orientation.set(-Math.PI / 2, 0);
+	}
+	else if(mode === Settings.PLANAR_LEFT)
+	{
+		this.orientation.set(0, 0);
+	}
+	else if(mode === Settings.PLANAR_RIGHT)
+	{
+		this.orientation.set(Math.PI, 0);
+	}
+	else if(mode === Settings.PLANAR_TOP)
+	{
+		this.orientation.set(Math.PI, 1.57);
+	}
+	else// if(mode === Settings.PLANAR_BOTTOM)
+	{
+		this.orientation.set(Math.PI, -1.57);
+	}
+
+	this.updateControls();
+};
 
 EditorPlanarControls.prototype.reset = function()
 {
 	this.distance = 10;
 	this.center.set(0, 0, 0);
-	this.orientation.set(0.0, 0.0);
-	this.updateControls();
-};
-
-EditorPlanarControls.prototype.setOrientation = function(code)
-{
-	if(code === OrientationCube.Z_POS)
-	{
-		this.orientation.set(Math.PI / 2, 0);
-	}
-	else if(code === OrientationCube.Z_NEG)
-	{
-		this.orientation.set(-Math.PI / 2, 0);
-	}
-	else if(code === OrientationCube.X_POS)
-	{
-		this.orientation.set(0, 0);
-	}
-	else if(code === OrientationCube.X_NEG)
-	{
-		this.orientation.set(Math.PI, 0);
-	}
-	else if(code === OrientationCube.Y_POS)
-	{
-		this.orientation.set(Math.PI, 1.57);
-	}
-	else if(code === OrientationCube.Y_NEG)
-	{
-		this.orientation.set(Math.PI, -1.57);
-	}
-
 	this.updateControls();
 };
 
