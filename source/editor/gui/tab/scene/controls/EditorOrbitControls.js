@@ -118,6 +118,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 	if(mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
+		var up = direction.y > 0;
 		direction.y = 0;
 		direction.normalize();
 

@@ -57,11 +57,22 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 
 	if(mouse.buttonPressed(Mouse.RIGHT))
 	{
-		this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
-
 		var direction = this.getWorldDirection(this.tempVector);
+		var up = direction.y > 0;
 		direction.y = 0;
 		direction.normalize();
+
+		if(this.mode === Settings.PLANAR_TOP || this.mode === Settings.PLANAR_BOTTOM)
+		{
+			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
+			this.center.x -= direction.x * y;
+			this.center.z -= direction.z * y;
+		}
+		else
+		{
+			this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
+		}
+
 		direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
 
 		var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
