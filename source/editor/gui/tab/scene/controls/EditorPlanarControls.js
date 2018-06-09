@@ -65,8 +65,8 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 		if(this.mode === Settings.PLANAR_TOP || this.mode === Settings.PLANAR_BOTTOM)
 		{
 			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
-			this.center.x -= direction.x * y;
-			this.center.z -= direction.z * y;
+			this.center.x += up ? (-direction.x * y) : (direction.x * y);
+			this.center.z += up ? (-direction.z * y) : (direction.z * y);
 		}
 		else
 		{

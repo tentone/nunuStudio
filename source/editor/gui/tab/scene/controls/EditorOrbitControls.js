@@ -126,9 +126,9 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		direction.normalize();
 
 		var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
-		this.center.x -= direction.x * y;
-		this.center.z -= direction.z * y;
-
+		this.center.x += up ? (-direction.x * y) : (direction.x * y);
+		this.center.z += up ? (-direction.z * y) : (direction.z * y);
+		
 		direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
 
 		var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
