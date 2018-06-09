@@ -50,21 +50,24 @@ EditorOrbitControls.prototype.reset = function()
 EditorOrbitControls.prototype.focusObject = function(object)
 {
 	var box = ObjectUtils.calculateBoundingBox(object);
-	box.applyMatrix4(object.matrixWorld);
-	box.getCenter(this.center);
-
-	var size = box.getSize(this.tempVector).length();
-
-	if(this.camera instanceof THREE.PerspectiveCamera)
+	if(box !== null)
 	{
-		this.distance = (size / 2) / Math.tan(THREE.Math.DEG2RAD * 0.5 * this.camera.fov);
-	}
-	else
-	{
-		this.distance = size;
-	}
+		box.applyMatrix4(object.matrixWorld);
+		box.getCenter(this.center);
 
-	this.updateControls();
+		var size = box.getSize(this.tempVector).length();
+
+		if(this.camera instanceof THREE.PerspectiveCamera)
+		{
+			this.distance = (size / 2) / Math.tan(THREE.Math.DEG2RAD * 0.5 * this.camera.fov);
+		}
+		else
+		{
+			this.distance = size;
+		}
+
+		this.updateControls();
+	}
 };
 
 EditorOrbitControls.prototype.setOrientation = function(code)

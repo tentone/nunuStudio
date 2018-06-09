@@ -36,7 +36,7 @@ EditorPlanarControls.prototype.setMode = function(mode)
 	{
 		this.orientation.set(Math.PI, 1.57);
 	}
-	else// if(mode === Settings.PLANAR_BOTTOM)
+	else if(mode === Settings.PLANAR_BOTTOM)
 	{
 		this.orientation.set(Math.PI, -1.57);
 	}
