@@ -13,6 +13,7 @@ function TabContainer(parent)
 	this.buttons = document.createElement("div");
 	this.buttons.style.overflow = "hidden";
 	this.buttons.style.position = "absolute";
+	this.buttons.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.appendChild(this.buttons);
 
 	//Tab
@@ -21,31 +22,12 @@ function TabContainer(parent)
 	this.tab.style.overflow = "visible";
 	this.element.appendChild(this.tab);
 
-	//Empty message
-	this.empty = document.createElement("div");
-	this.empty.style.position = "absolute";
-	this.empty.style.textAlign = "center";
-	this.empty.style.display = "none";
-	this.empty.style.width = "100%";
-	this.empty.style.height = "100%";
-	this.empty.style.flexDirection = "column";
-	this.empty.style.justifyContent = "center";
-	this.empty.style.pointerEvents = "none";
-	this.empty.appendChild(document.createTextNode("Open new tab to edit content or create new project"));
-	this.tab.appendChild(this.empty);
-
 	//Options
-	this.mode = TabContainer.TOP;
-	this.buttonSize = new THREE.Vector2(150, 22);
+	this.mode = TabGroup.TOP;
+	this.buttonSize = new THREE.Vector2(140, 20);
 	this.selected = null;
 	this.options = [];
 }
-
-//Tab buttons position
-TabContainer.TOP = 0;
-TabContainer.BOTTOM = 1;
-TabContainer.LEFT = 2;
-TabContainer.RIGHT = 3;
 
 TabContainer.prototype = Object.create(Element.prototype);
 
@@ -135,8 +117,6 @@ TabContainer.prototype.selectTab = function(tab)
 	{
 		this.selected = null;
 	}
-
-	this.empty.style.display = this.selected === null ? "flex" : "none";
 };
 
 //Select next tab
@@ -309,7 +289,7 @@ TabContainer.prototype.updateInterface = function()
 		var buttonSize = this.buttonSize.clone();
 		var offset = this.buttonSize.clone();
 
-		if(this.mode === TabContainer.TOP || this.mode === TabContainer.BOTTOM)
+		if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
 		{
 			if(buttonSize.x * this.options.length > this.size.x)
 			{
@@ -319,7 +299,7 @@ TabContainer.prototype.updateInterface = function()
 			tabSize.y -= this.buttonSize.y;
 			offset.y = 0;
 		}
-		else if(this.mode === TabContainer.LEFT || this.mode === TabContainer.RIGHT)
+		else if(this.mode === TabGroup.LEFT || this.mode === TabGroup.RIGHT)
 		{
 			if(buttonSize.y * this.options.length > this.size.y)
 			{
@@ -345,7 +325,7 @@ TabContainer.prototype.updateInterface = function()
 			button.updateInterface();
 		}
 
-		if(this.mode === TabContainer.TOP)
+		if(this.mode === TabGroup.TOP)
 		{	
 			this.buttons.style.top = "0px";
 			this.buttons.style.left = "0px";
@@ -357,7 +337,7 @@ TabContainer.prototype.updateInterface = function()
 			this.tab.style.width = this.size.x + "px";
 			this.tab.style.height = (this.size.y - this.buttonSize.y) + "px";
 		}
-		else if(this.mode === TabContainer.LEFT)
+		else if(this.mode === TabGroup.LEFT)
 		{
 			this.buttons.style.top = "0px";
 			this.buttons.style.left = "0px";
@@ -369,7 +349,7 @@ TabContainer.prototype.updateInterface = function()
 			this.tab.style.width = (this.size.x - this.buttonSize.x) + "px";
 			this.tab.style.height = this.size.y + "px";
 		}
-		else if(this.mode === TabContainer.RIGHT)
+		else if(this.mode === TabGroup.RIGHT)
 		{
 			this.buttons.style.top = "0px";
 			this.buttons.style.left = (this.size.x - this.buttonSize.x) + "px";
@@ -381,7 +361,7 @@ TabContainer.prototype.updateInterface = function()
 			this.tab.style.width = (this.size.x - this.buttonSize.x) + "px";
 			this.tab.style.height = this.size.y + "px";
 		}
-		else if(this.mode === TabContainer.BOTTOM)
+		else if(this.mode === TabGroup.BOTTOM)
 		{
 			this.buttons.style.top = (this.size.y - this.buttonSize.y) + "px";
 			this.buttons.style.left = "0px";
