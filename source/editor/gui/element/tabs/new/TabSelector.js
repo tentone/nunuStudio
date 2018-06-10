@@ -1,65 +1,10 @@
 "use strict";
 
-function TabButton(parent, tab)
+function TabSelector(parent, tab)
 {
-	Element.call(this, parent);
+	TabButton.call(this, parent, tab);
 
 	var self = this;
-
-	this.element.draggable = true;
-	this.element.style.cursor = "pointer";
-	this.element.style.boxSizing = "border-box";
-	this.element.style.backgroundColor = Editor.theme.buttonColor;
-
-	//Tab
-	this.tab = tab;
-
-	//Icon
-	this.icon = document.createElement("img");
-	this.icon.style.pointerEvents = "none";
-	this.icon.style.position = "absolute";
-	this.icon.src = tab.icon;
-	this.element.appendChild(this.icon);
-
-	//Text
-	this.text = document.createElement("div");
-	this.text.style.position = "absolute";
-	this.text.style.overflow = "hidden";
-	this.text.style.textAlign = "center";
-	this.text.style.pointerEvents = "none";
-	this.text.style.textOverflow = "ellipsis";
-	this.text.style.whiteSpace = "nowrap";
-	this.text.style.color = Editor.theme.textColor;
-	this.element.appendChild(this.text);
-
-	//Title
-	this.title = document.createTextNode(tab.title);
-	this.text.appendChild(this.title);
-
-	//Close button
-	this.close = document.createElement("img");
-	this.close.draggable = false;
-	this.close.style.position = "absolute";
-	this.close.style.opacity = 0.5;
-	this.close.style.display = (tab.closeable) ? "block" : "none";
-	this.close.src = Editor.filePath + "icons/misc/close.png";
-	this.element.appendChild(this.close);
-
-	this.close.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-
-	this.close.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
-
-	this.close.onclick = function()
-	{
-		self.tab.close();
-	};
-
 
 	//Drag state
 	var dragState = 0;
@@ -67,6 +12,9 @@ function TabButton(parent, tab)
 	//Drag control
 	this.element.ondragstart = function(event)
 	{
+		event.dataTransfer.setData("uuid", self.tab.uuid);
+		DragBuffer.pushDragElement(self.tab);
+
 		event.dataTransfer.setData("tab", self.tab.index);
 		dragState = 0;
 	};
@@ -80,25 +28,11 @@ function TabButton(parent, tab)
 		this.style.borderBottom = "";
 		this.style.borderTop = "";
 
-		var index = event.dataTransfer.getData("tab");
-		if(index !== "")
-		{
-			index = parseInt(index);
+		//Move tab between containers
+		var uuid = event.dataTransfer.getData("uuid");
+		var tab = DragBuffer.popDragElement(uuid);
 
-			if(index !== self.tab.index)
-			{	
-				//Before
-				if(dragState === 1)
-				{
-					self.tab.container.moveButton(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
-				}
-				//After
-				else if(dragState === 2)
-				{
-					self.tab.container.moveButton(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
-				}
-			}
-		}
+		self.tab.container.attachTab(tab);
 	};
 
 	//Drag over
@@ -170,7 +104,10 @@ function TabButton(parent, tab)
 	this.element.ondragend = function(event)
 	{
 		event.preventDefault();
-		
+
+		var uuid = event.dataTransfer.getData("uuid");
+		DragBuffer.popDragElement(uuid);
+
 		dragState = 0;
 		this.style.borderLeft = "";
 		this.style.borderRight = "";
@@ -226,24 +163,10 @@ function TabButton(parent, tab)
 	};
 }
 
-TabButton.prototype = Object.create(Element.prototype);
-
-//Set button icon
-TabButton.prototype.setIcon = function(icon)
-{
-	this.tab.icon = icon;
-	this.icon.src = icon;
-};
-
-//Set button name
-TabButton.prototype.setName = function(text)
-{
-	this.tab.title = text;
-	this.title.data = text;
-};
+TabSelector.prototype = Object.create(TabButton.prototype);
 
 //Update Interface
-TabButton.prototype.updateInterface = function()
+TabSelector.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

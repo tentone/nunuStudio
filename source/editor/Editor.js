@@ -307,6 +307,9 @@ include("editor/gui/element/tabs/TabGroup.js");
 include("editor/gui/element/tabs/TabElement.js");
 include("editor/gui/element/tabs/TabButton.js");
 
+include("editor/gui/element/tabs/new/TabContainer.js");
+include("editor/gui/element/tabs/new/TabSelector.js");
+
 include("editor/gui/tab/ConsoleTab.js");
 include("editor/gui/tab/CodeEditor.js");
 include("editor/gui/tab/AboutTab.js");

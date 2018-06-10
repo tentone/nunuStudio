@@ -13,14 +13,11 @@ function Interface()
 	this.container.attachA(this.leftContainer);
 
 	//Top Tab
-	this.tab = new TabGroup(this.leftContainer.element);
+	this.tab = new TabContainer(this.leftContainer.element);
 	this.leftContainer.attachA(this.tab);
 
 	//Bottom tab
-	this.bottomTab = new TabGroup(this.leftContainer.element);
-	this.bottomTab.mode = TabGroup.LEFT;
-	this.bottomTab.element.style.backgroundColor = Editor.theme.barColor;
-	this.bottomTab.buttonSize.set(25, 25);
+	this.bottomTab = new TabContainer(this.leftContainer.element);
 	this.leftContainer.attachB(this.bottomTab);
 
 	//Asset
@@ -44,12 +41,12 @@ function Interface()
 	this.container.attachB(this.rightContainer);
 
 	//Tree view tab
-	this.treeTab = new TabGroup(this.rightContainer.element);
+	this.treeTab = new TabContainer(this.rightContainer.element);
 	this.rightContainer.attachA(this.treeTab);
 	this.treeView = this.treeTab.addTab(TreeView, false)
 
 	//Object panel tab
-	this.panelTab = new TabGroup(this.rightContainer.element);
+	this.panelTab = new TabContainer(this.rightContainer.element);
 	this.rightContainer.attachB(this.panelTab);
 	this.panelContainer = this.panelTab.addTab(PanelContainer, false);
 
