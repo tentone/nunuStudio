@@ -14,19 +14,18 @@
  * @param {Number} type
  * @param {Number} anisotropy
  */
-
-/**
- * Image is used to store a DOM video element
- * 
- * @property image
- * @type {DOM}
- */
 function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 {	
 	var video = document.createElement("video");
 	video.autoplay = true;
 	video.loop = true;
 
+	/**
+	 * Image is used to store a DOM video element
+	 * 
+	 * @property image
+	 * @type {DOM}
+	 */
 	THREE.Texture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
 	//Disable mipmaps generation
@@ -38,7 +37,12 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	this.category = "Webcam";	
 	this.mode = WebcamTexture.USER;
 
-	//Media stream
+	/**
+	 * Webcam video, media stream
+	 *
+	 * @property stream
+	 * @type {MediaStream}
+	 */
 	this.stream = null;
 
 	//Connect to camera
@@ -61,7 +65,22 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	requestAnimationFrame(update);
 };
 
+/**
+ * Prefer the front facing camera.
+ * 
+ * @static
+ * @attribute USER
+ * @type {Number}
+ */
 WebcamTexture.USER = 21;
+
+/**
+ * Prefer the back camera.
+ * 
+ * @static
+ * @attribute ENVIRONMENT
+ * @type {Number}
+ */
 WebcamTexture.ENVIRONMENT = 22;
 
 WebcamTexture.prototype = Object.create(THREE.Texture.prototype);

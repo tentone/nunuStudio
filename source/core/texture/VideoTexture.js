@@ -16,38 +16,13 @@
  * @param {Number} type
  * @param {Number} anisotropy
  */
-
-/**
- * Image is used to store a DOM video element.
- * @property image
- * @type {DOM}
- */
-/**
- * Video audio volume, its a values between 1.0 and 0.0
- * @property volume
- * @default 1.0
- * @type {Number}
-*/
-/**
- * If true the video starts playing automatically.
- * @property autoplay
- * @default true
- * @type {boolean}
-*/
-/**
- * Start time in seconds.
- * @property playbackRate
- * @default 1.0
- * @type {Number}
-*/
-/**
- * If true the video plays in loop.
- * @property loop
- * @default true
- * @type {boolean}
-*/
 function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 {
+	/**
+	 * Image is used to store a DOM video element.
+	 * @property image
+	 * @type {DOM}
+	 */
 	if(typeof video === "string")
 	{
 		this.video = new Video(video);
@@ -68,10 +43,36 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.name = "video";
 	this.category = "Video";
 
-	//Controls
+	/**
+	 * If true the video starts playing automatically.
+	 * @property autoplay
+	 * @default true
+	 * @type {boolean}
+	 */
 	this.autoplay = true;
+
+	/**
+	 * If true the video plays in loop.
+	 * @property loop
+	 * @default true
+	 * @type {boolean}
+	 */
 	this.loop = true;
+
+	/**
+	 * Start time in seconds.
+	 * @property playbackRate
+	 * @default 1.0
+	 * @type {Number}
+	 */
 	this.playbackRate = 1.0;
+
+	/**
+	 * Video audio volume, its a values between 1.0 and 0.0
+	 * @property volume
+	 * @default 1.0
+	 * @type {Number}
+	 */
 	this.volume = 1.0;
 
 	//Video

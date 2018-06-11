@@ -19,56 +19,6 @@
  * @param {Number} type
  * @param {Number} anisotropy
  */
-
-/**
- * If true the animation plays in loop.
- * @property loop
- * @default true
- * @type {boolean}
-*/
-/**
- * Animation speed in seconds.
- * @property animationSpeed
- * @default 0.1
- * @type {Number}
-*/
-/**
- * Spritesheet number of frames horizontally.
- *
- * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
- * @property framesHorizontal
- * @default 1.0
- * @type {Number}
-*/
-/**
- * Spritesheet number of frames vertically.
- *
- * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
- * @property framesVertical
- * @default 1.0
- * @type {Number}
-*/
-/**
- * Total number of frames present in the texture.
- * 
- * Sometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.
- * @property totalFrames
- * @default 1
- * @type {Number}
-*/
-/**
- * The offset frame can be ajusted to control in which frame the animation starts.
- * 
- * @property beginFrame
- * @default 0
- * @type {Number}
- */
-/**
- * The offset frame can be ajusted to control in which frame the animation ends.
- * 
- * @property endFrame
- * @type {Number}
- */
 function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames, mapping, type, anisotropy)
 {
 	if(typeof image === "string")
@@ -80,17 +30,28 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		this.img = image;
 	}
 
-	//Super constructor
 	THREE.Texture.call(this, document.createElement("img"), mapping, THREE.RepeatWrapping, THREE.RepeatWrapping, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
-	//Name
 	this.name = "animation";
 	this.category = "SpriteSheet";
 	this.disposed = false;
 	this.format = this.img.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
-	
+
+	/**
+	 * If true the animation plays in loop.
+	 * @property loop
+	 * @default true
+	 * @type {boolean}
+	*/
 	this.loop = true;
+
+	/**
+	 * Animation speed in seconds.
+	 * @property animationSpeed
+	 * @default 0.1
+	 * @type {Number}
+	*/
 	this.animationSpeed = 0.1;
 
 	this._totalFrames = totalFrames;
@@ -102,6 +63,14 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	var self = this;
 	Object.defineProperties(this,
 	{
+		/**
+		 * Spritesheet number of frames horizontally.
+		 *
+		 * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
+		 * @property framesHorizontal
+		 * @default 1.0
+		 * @type {Number}
+		*/
 		framesHorizontal:
 		{
 			get: function()
@@ -115,6 +84,15 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 				self.totalFrames = self._framesHorizontal * self._framesVertical;
 			}
 		},
+
+		/**
+		 * Spritesheet number of frames vertically.
+		 *
+		 * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
+		 * @property framesVertical
+		 * @default 1.0
+		 * @type {Number}
+		*/
 		framesVertical:
 		{
 			get: function()
@@ -128,6 +106,13 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 				self.totalFrames = self._framesHorizontal * self._framesVertical;
 			}
 		},
+
+		/**
+		 * The offset frame can be ajusted to control in which frame the animation ends.
+		 * 
+		 * @property endFrame
+		 * @type {Number}
+		 */
 		endFrame:
 		{
 			get: function()
@@ -143,6 +128,14 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 				self._endFrame = value;
 			}
 		},
+
+		/**
+		 * The offset frame can be ajusted to control in which frame the animation starts.
+		 * 
+		 * @property beginFrame
+		 * @default 0
+		 * @type {Number}
+		 */
 		beginFrame:
 		{
 			get: function()
@@ -159,6 +152,15 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 				self._beginFrame = value;
 			}
 		},
+
+		/**
+		 * Total number of frames present in the texture.
+		 * 
+		 * Sometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.
+		 * @property totalFrames
+		 * @default 1
+		 * @type {Number}
+		*/
 		totalFrames:
 		{
 			get: function()

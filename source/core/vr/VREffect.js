@@ -36,7 +36,10 @@ function VREffect(renderer, onError)
 		}
 		else
 		{
-			if(onError) onError("HMD not available");
+			if(onError)
+			{
+				onError("nunuStudio: HMD not available");
+			}
 		}
 	}
 
@@ -44,13 +47,13 @@ function VREffect(renderer, onError)
 	{
 		navigator.getVRDisplays().then(gotVRDisplays).catch(function()
 		{
-			console.warn("VREffect: Unable to get VR Displays");
+			console.warn("nunuStudio: Unable to get VR Displays");
 		});
 	}
 
-	//
 	this.isPresenting = false;
-	var scope = this;
+
+	var self = this;
 	var rendererSize = renderer.getSize();
 	var rendererUpdateStyle = false;
 	var rendererPixelRatio = renderer.getPixelRatio();
@@ -65,20 +68,16 @@ function VREffect(renderer, onError)
 		vrDisplay = value;
 	};
 
-	this.getVRDisplays = function()
-	{
-		console.warn("VREffect: getVRDisplays() is being deprecated.");
-		return vrDisplays;
-	};
-
 	this.setSize = function(width, height, updateStyle)
 	{
 		rendererSize = {
 			width: width,
 			height: height
 		};
+		
 		rendererUpdateStyle = updateStyle;
-		if(scope.isPresenting)
+
+		if(self.isPresenting)
 		{
 			var eyeParamsL = vrDisplay.getEyeParameters("left");
 			renderer.setPixelRatio(1);
@@ -98,13 +97,15 @@ function VREffect(renderer, onError)
 
 	function onVRDisplayPresentChange()
 	{
-		var wasPresenting = scope.isPresenting;
-		scope.isPresenting = vrDisplay !== undefined && vrDisplay.isPresenting;
-		if(scope.isPresenting)
+		var wasPresenting = self.isPresenting;
+		self.isPresenting = vrDisplay !== undefined && vrDisplay.isPresenting;
+
+		if(self.isPresenting)
 		{
 			var eyeParamsL = vrDisplay.getEyeParameters("left");
 			var eyeWidth = eyeParamsL.renderWidth;
 			var eyeHeight = eyeParamsL.renderHeight;
+
 			if(!wasPresenting)
 			{
 				rendererPixelRatio = renderer.getPixelRatio();
@@ -130,7 +131,7 @@ function VREffect(renderer, onError)
 				reject(new Error("No VR hardware found."));
 				return;
 			}
-			if(scope.isPresenting === boolean)
+			if(self.isPresenting === boolean)
 			{
 				resolve();
 				return;
@@ -185,7 +186,7 @@ function VREffect(renderer, onError)
 
 	this.submitFrame = function()
 	{
-		if(vrDisplay !== undefined && scope.isPresenting)
+		if(vrDisplay !== undefined && self.isPresenting)
 		{
 			vrDisplay.submitFrame();
 		}
@@ -201,7 +202,7 @@ function VREffect(renderer, onError)
 
 	this.render = function(scene, camera, renderTarget, forceClear)
 	{
-		if(vrDisplay && scope.isPresenting)
+		if(vrDisplay && self.isPresenting)
 		{
 			var autoUpdate = scene.autoUpdate;
 			if(autoUpdate)
@@ -334,9 +335,9 @@ function VREffect(renderer, onError)
 				scene.autoUpdate = true;
 			}
 
-			if(scope.autoSubmitFrame)
+			if(self.autoSubmitFrame)
 			{
-				scope.submitFrame();
+				self.submitFrame();
 			}
 
 			return;
@@ -374,11 +375,9 @@ function VREffect(renderer, onError)
 			headMatrix.setPosition(posePosition);
 		}
 
-		//The view matrix transforms vertices from sitting space to eye space. As such, the view matrix can be thought of as a product of two matrices:
-		//headToEyeMatrix * sittingToHeadMatrix
+		//The view matrix transforms vertices from sitting space to eye space. As such, the view matrix can be thought of as a product of two matrices: headToEyeMatrix * sittingToHeadMatrix
 		//The headMatrix that we"ve calculated above is the model matrix of the head in sitting space, which is the inverse of sittingToHeadMatrix.
-		//So when we multiply the view matrix with headMatrix, we"re left with headToEyeMatrix:
-		//viewMatrix * headMatrix = headToEyeMatrix * sittingToHeadMatrix * headMatrix = headToEyeMatrix
+		//So when we multiply the view matrix with headMatrix, we"re left with headToEyeMatrix: viewMatrix * headMatrix = headToEyeMatrix * sittingToHeadMatrix * headMatrix = headToEyeMatrix
 		eyeMatrixL.fromArray(frameData.leftViewMatrix);
 		eyeMatrixL.multiply(headMatrix);
 		eyeMatrixR.fromArray(frameData.rightViewMatrix);
@@ -408,16 +407,20 @@ function VREffect(renderer, onError)
 		zNear = zNear === undefined ? 0.01 : zNear;
 		zFar = zFar === undefined ? 10000.0 : zFar;
 		var handednessScale = rightHanded ? -1.0 : 1.0;
+
 		//start with an identity matrix
 		var mobj = new THREE.Matrix4();
 		var m = mobj.elements;
+
 		//and with scale/offset info for normalized device coords
 		var scaleAndOffset = fovToNDCScaleOffset(fov);
+
 		//X result, map clip edges to [-w,+w]
 		m[0 * 4 + 0] = scaleAndOffset.scale[0];
 		m[0 * 4 + 1] = 0.0;
 		m[0 * 4 + 2] = scaleAndOffset.offset[0] * handednessScale;
 		m[0 * 4 + 3] = 0.0;
+
 		//Y result, map clip edges to [-w,+w]
 		//Y offset is negated because this proj matrix transforms from world coords with Y=up,
 		//but the NDC scaling has Y=down (thanks D3D?)
@@ -425,11 +428,13 @@ function VREffect(renderer, onError)
 		m[1 * 4 + 1] = scaleAndOffset.scale[1];
 		m[1 * 4 + 2] = -scaleAndOffset.offset[1] * handednessScale;
 		m[1 * 4 + 3] = 0.0;
+
 		//Z result (up to the app)
 		m[2 * 4 + 0] = 0.0;
 		m[2 * 4 + 1] = 0.0;
 		m[2 * 4 + 2] = zFar / (zNear - zFar) * -handednessScale;
 		m[2 * 4 + 3] = (zFar * zNear) / (zNear - zFar);
+		
 		//W result (= Z in)
 		m[3 * 4 + 0] = 0.0;
 		m[3 * 4 + 1] = 0.0;

@@ -21,42 +21,42 @@
  * @param {Number} anisotropy
  * @param {Number} encoding
  */
-
-/**
- * Image is used to store a DOM canvas element.
- * 
- * @property image
- * @type {DOM}
- */
-/**
- * Canvas context 2D, can be used to draw content do the canvas texture.
- * 
- * @property context
- * @type {Context2D}
- */
-/**
- * Canvas height.
- * 
- * @property height
- * @type {Number}
- */
-/**
- * Canvas width.
- * 
- * @property width
- * @type {Number}
- */
 function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
+	/**
+	 * Image is used to store a DOM canvas element.
+	 * 
+	 * @property image
+	 * @type {DOM}
+	 */
 	THREE.Texture.call(this, document.createElement("canvas"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
 	this.name = "canvas";
 	this.category = "Canvas";
 	this.format = THREE.RGBAFormat;
 
+	/**
+	 * Canvas width.
+	 * 
+	 * @property width
+	 * @type {Number}
+	 */
 	this.width = (width !== undefined) ? width : 512;
+
+	/**
+	 * Canvas height.
+	 * 
+	 * @property height
+	 * @type {Number}
+	 */
 	this.height = (height !== undefined) ? height : 512;
 
+	/**
+	 * Canvas context 2D, can be used to draw content do the canvas texture.
+	 * 
+	 * @property context
+	 * @type {Context2D}
+	 */
 	this.context = this.image.getContext("2d");
 	this.updateSize();
 }

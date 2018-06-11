@@ -22,21 +22,7 @@
  * @param {Number} encoding
  */
 
-/**
- * Size of each one of the texture that compose the CubeTexture.
- *
- * @property size
- * @type {Number}
- * @default 512
- */
 
-/**
- * Cube texture mode, the mode specifies how the cube texture is created.
- *
- * Source format may vary from a mode to another.
- * @property mode
- * @type {Number}
- */
 function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
 	if(mapping === undefined)
@@ -54,8 +40,24 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 
 	this.images = (images !== undefined) ? images : [];
 
+	/**
+	 * Size of each one of the texture that compose the CubeTexture.
+	 *
+	 * @property size
+	 * @type {Number}
+	 * @default 512
+	 */
 	this.size = 512;
+	
 	this.flipY = false;
+	
+	/**
+	 * Cube texture mode, the mode specifies how the cube texture is created.
+	 *
+	 * Source format may vary from a mode to another.
+	 * @property mode
+	 * @type {Number}
+	 */
 	this.mode = (this.images.length === 6) ? CubeTexture.CUBE : CubeTexture.CROSS;
 
 	if(this.images.length > 0)
