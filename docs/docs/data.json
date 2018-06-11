@@ -10,17 +10,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\controls\\VRControls.js": {
-            "name": "..\\..\\source\\core\\controls\\VRControls.js",
-            "modules": {
-                "VirtualReality": 1
-            },
-            "classes": {
-                "VRControls": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\input\\Gamepad.js": {
             "name": "..\\..\\source\\core\\input\\Gamepad.js",
             "modules": {
@@ -873,6 +862,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\vr\\VRControls.js": {
+            "name": "..\\..\\source\\core\\vr\\VRControls.js",
+            "modules": {
+                "VirtualReality": 1
+            },
+            "classes": {
+                "VRControls": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\FileSystem.js": {
             "name": "..\\..\\source\\core\\FileSystem.js",
             "modules": {
@@ -911,20 +911,6 @@
             "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
             "line": 3,
             "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh."
-        },
-        "VirtualReality": {
-            "name": "VirtualReality",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "VRControls": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 3,
-            "description": "VRControl is used to get input from an HDM device and apply it to an Object."
         },
         "Input": {
             "name": "Input",
@@ -1093,9 +1079,7 @@
         },
         "Physics": {
             "name": "Physics",
-            "submodules": {
-                "undefined": 1
-            },
+            "submodules": {},
             "elements": {},
             "classes": {
                 "PhysicsGenerator": 1,
@@ -1291,6 +1275,20 @@
             "line": 3,
             "description": "EventManager is used to manager DOM events creationg and destruction in a single function call.\n\nIt is used by objects to make it easier to add and remove events from global DOM objects."
         },
+        "VirtualReality": {
+            "name": "VirtualReality",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "VRControls": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 3,
+            "description": "VRControl is used to get input from an HDM device and apply it to an Object."
+        },
         "Files": {
             "name": "Files",
             "submodules": {},
@@ -1343,22 +1341,6 @@
                     "type": "Object3D"
                 }
             ]
-        },
-        "VRControls": {
-            "name": "VRControls",
-            "shortname": "VRControls",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "VirtualReality",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 3,
-            "description": "VRControl is used to get input from an HDM device and apply it to an Object.",
-            "is_constructor": 1,
-            "author": "dmarcos (https://github.com/dmarcos)"
         },
         "Gamepad": {
             "name": "Gamepad",
@@ -3571,6 +3553,22 @@
             "description": "Time is user to call functions in loop at a defined rate.\n\nLoop time can be changed dinamically.",
             "is_constructor": 1
         },
+        "VRControls": {
+            "name": "VRControls",
+            "shortname": "VRControls",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "VirtualReality",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 3,
+            "description": "VRControl is used to get input from an HDM device and apply it to an Object.",
+            "is_constructor": 1,
+            "author": "dmarcos (https://github.com/dmarcos)"
+        },
         "FileSystem": {
             "name": "FileSystem",
             "shortname": "FileSystem",
@@ -3681,80 +3679,6 @@
             ],
             "class": "AnimationMixer",
             "module": "Animation"
-        },
-        {
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 12,
-            "description": "VR display.",
-            "itemtype": "property",
-            "name": "display",
-            "type": "{Object}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 17,
-            "description": "Scale from real units to world units.",
-            "itemtype": "property",
-            "name": "scale",
-            "type": "{Number}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 22,
-            "description": "Standing property, is set true the user height will be added to the position of the HMD.",
-            "itemtype": "property",
-            "name": "standing",
-            "type": "{boolean}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 27,
-            "description": "User height, used to calibrate when the user is standing.",
-            "itemtype": "property",
-            "name": "userHeight",
-            "type": "{Number}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 68,
-            "description": "Update VRControls object state.",
-            "itemtype": "method",
-            "name": "update",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "Object to be updated",
-                    "type": "Object3D"
-                }
-            ],
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 123,
-            "description": "Dispose object.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\..\\source\\core\\controls\\VRControls.js",
-            "line": 133,
-            "description": "Reset the HDM pose.",
-            "itemtype": "method",
-            "name": "resetPose",
-            "class": "VRControls",
-            "module": "VirtualReality"
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
@@ -14122,6 +14046,90 @@
             "name": "stop",
             "class": "Timer",
             "module": "Physics"
+        },
+        {
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 14,
+            "description": "VR display.",
+            "itemtype": "property",
+            "name": "display",
+            "type": "{Object}",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 21,
+            "description": "Scale from real units to world units.",
+            "itemtype": "property",
+            "name": "scale",
+            "type": "{Number}",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 28,
+            "description": "Standing property, is set true the user height will be added to the position of the HMD.",
+            "itemtype": "property",
+            "name": "standing",
+            "type": "{boolean}",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 35,
+            "description": "User height, used to calibrate when the user is standing.",
+            "itemtype": "property",
+            "name": "userHeight",
+            "type": "{Number}",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 42,
+            "description": "VR Frame data.",
+            "itemtype": "property",
+            "name": "frameData",
+            "type": "{VRFrameData}",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 76,
+            "description": "Update VRControls object state.",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to be updated",
+                    "type": "Object3D"
+                }
+            ],
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 131,
+            "description": "Dispose object.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\..\\source\\core\\vr\\VRControls.js",
+            "line": 141,
+            "description": "Reset the HDM pose.",
+            "itemtype": "method",
+            "name": "resetPose",
+            "class": "VRControls",
+            "module": "VirtualReality"
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
