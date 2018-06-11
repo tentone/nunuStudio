@@ -11451,7 +11451,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 25,
+            "line": 26,
             "description": "Image is used to store a DOM canvas element.",
             "itemtype": "property",
             "name": "image",
@@ -11461,17 +11461,17 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 31,
-            "description": "Canvas context 2D, can be used to draw content do the canvas texture.",
+            "line": 38,
+            "description": "Canvas width.",
             "itemtype": "property",
-            "name": "context",
-            "type": "{Context2D}",
+            "name": "width",
+            "type": "{Number}",
             "class": "CanvasTexture",
             "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 37,
+            "line": 46,
             "description": "Canvas height.",
             "itemtype": "property",
             "name": "height",
@@ -11481,11 +11481,11 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 43,
-            "description": "Canvas width.",
+            "line": 54,
+            "description": "Canvas context 2D, can be used to draw content do the canvas texture.",
             "itemtype": "property",
-            "name": "width",
-            "type": "{Number}",
+            "name": "context",
+            "type": "{Context2D}",
             "class": "CanvasTexture",
             "module": "Textures"
         },
@@ -11532,7 +11532,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 25,
+            "line": 43,
             "description": "Size of each one of the texture that compose the CubeTexture.",
             "itemtype": "property",
             "name": "size",
@@ -11543,7 +11543,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 33,
+            "line": 54,
             "description": "Cube texture mode, the mode specifies how the cube texture is created.\n\nSource format may vary from a mode to another.",
             "itemtype": "property",
             "name": "mode",
@@ -11553,7 +11553,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 74,
+            "line": 76,
             "description": "Cubemap right image index",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -11563,7 +11563,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 82,
+            "line": 84,
             "description": "Cubemap left image index",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -11573,7 +11573,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 90,
+            "line": 92,
             "description": "Cubemap top image index",
             "itemtype": "attribute",
             "name": "TOP",
@@ -11583,7 +11583,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 98,
+            "line": 100,
             "description": "Cubemap bottom image index",
             "itemtype": "attribute",
             "name": "BOTTOM",
@@ -11593,7 +11593,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 106,
+            "line": 108,
             "description": "Cubemap front image index",
             "itemtype": "attribute",
             "name": "FRONT",
@@ -11603,7 +11603,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 114,
+            "line": 116,
             "description": "Cubemap back image index",
             "itemtype": "attribute",
             "name": "BACK",
@@ -11613,7 +11613,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 122,
+            "line": 124,
             "description": "CubeMap mode, 6 images used as source for the texture.",
             "itemtype": "attribute",
             "name": "CUBE",
@@ -11623,7 +11623,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 130,
+            "line": 132,
             "description": "CubeMap mode, single image used as source.",
             "itemtype": "attribute",
             "name": "CROSS",
@@ -11633,7 +11633,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 138,
+            "line": 140,
             "description": "Equirectangular projection mode, 1 single image used as source.\n\nSource image should have a 2:1 aspect ratio.",
             "itemtype": "attribute",
             "name": "EQUIRECTANGULAR",
@@ -11643,7 +11643,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 149,
+            "line": 151,
             "description": "Set resolution of each face of the cubemap.\n\nThe size has to be a power of 2.",
             "itemtype": "method",
             "name": "setSize",
@@ -11659,7 +11659,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 168,
+            "line": 170,
             "description": "Set new images for this cube texture.",
             "itemtype": "method",
             "name": "setImages",
@@ -11680,7 +11680,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 181,
+            "line": 183,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -11689,7 +11689,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 270,
+            "line": 272,
             "description": "Resample an image pixel from ImageData to ImageData, using bilinear interpolation.",
             "itemtype": "method",
             "name": "resampleBilinear",
@@ -11725,7 +11725,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 308,
+            "line": 310,
             "description": "Render a cube face from equirectangular projection.",
             "itemtype": "method",
             "name": "renderEquirectFace",
@@ -11760,7 +11760,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 378,
+            "line": 380,
             "description": "Serialize cube texture to JSON.\n\nAll images of the cube texture are stored individually.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11780,7 +11780,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 23,
+            "line": 41,
             "description": "If true the animation plays in loop.",
             "itemtype": "property",
             "name": "loop",
@@ -11791,7 +11791,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 29,
+            "line": 49,
             "description": "Animation speed in seconds.",
             "itemtype": "property",
             "name": "animationSpeed",
@@ -11802,7 +11802,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 35,
+            "line": 66,
             "description": "Spritesheet number of frames horizontally.\n\nWhen this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.",
             "itemtype": "property",
             "name": "framesHorizontal",
@@ -11813,7 +11813,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 43,
+            "line": 88,
             "description": "Spritesheet number of frames vertically.\n\nWhen this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.",
             "itemtype": "property",
             "name": "framesVertical",
@@ -11824,18 +11824,17 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 51,
-            "description": "Total number of frames present in the texture.\n\nSometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.",
+            "line": 110,
+            "description": "The offset frame can be ajusted to control in which frame the animation ends.",
             "itemtype": "property",
-            "name": "totalFrames",
-            "default": "1",
+            "name": "endFrame",
             "type": "{Number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 59,
+            "line": 132,
             "description": "The offset frame can be ajusted to control in which frame the animation starts.",
             "itemtype": "property",
             "name": "beginFrame",
@@ -11846,17 +11845,18 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 66,
-            "description": "The offset frame can be ajusted to control in which frame the animation ends.",
+            "line": 156,
+            "description": "Total number of frames present in the texture.\n\nSometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.",
             "itemtype": "property",
-            "name": "endFrame",
+            "name": "totalFrames",
+            "default": "1",
             "type": "{Number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 210,
+            "line": 212,
             "description": "Set animation playback speed.",
             "itemtype": "method",
             "name": "setAnimationSpeed",
@@ -11872,7 +11872,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 221,
+            "line": 223,
             "description": "Set the sprite sheet grid dimension.\n\nAutomatically sets the totalFrame value to framesHorizontal * framesVertical.",
             "itemtype": "method",
             "name": "setFrameGrid",
@@ -11893,7 +11893,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 238,
+            "line": 240,
             "description": "Set frames to be used for this animation.\n\nFrame starts counting from 0.",
             "itemtype": "method",
             "name": "setAnimationFrames",
@@ -11914,7 +11914,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 253,
+            "line": 255,
             "description": "Dispose spritesheet texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -11923,7 +11923,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 265,
+            "line": 267,
             "description": "Create texture json description.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12101,7 +12101,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 20,
+            "line": 21,
             "description": "Image is used to store a DOM video element.",
             "itemtype": "property",
             "name": "image",
@@ -12111,18 +12111,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 25,
-            "description": "Video audio volume, its a values between 1.0 and 0.0",
-            "itemtype": "property",
-            "name": "volume",
-            "default": "1.0",
-            "type": "{Number}",
-            "class": "VideoTexture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 31,
+            "line": 46,
             "description": "If true the video starts playing automatically.",
             "itemtype": "property",
             "name": "autoplay",
@@ -12133,18 +12122,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 37,
-            "description": "Start time in seconds.",
-            "itemtype": "property",
-            "name": "playbackRate",
-            "default": "1.0",
-            "type": "{Number}",
-            "class": "VideoTexture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 43,
+            "line": 54,
             "description": "If true the video plays in loop.",
             "itemtype": "property",
             "name": "loop",
@@ -12155,7 +12133,29 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 103,
+            "line": 62,
+            "description": "Start time in seconds.",
+            "itemtype": "property",
+            "name": "playbackRate",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
+            "line": 70,
+            "description": "Video audio volume, its a values between 1.0 and 0.0",
+            "itemtype": "property",
+            "name": "volume",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
+            "line": 104,
             "description": "Set video time in seconds.",
             "params": [
                 {
@@ -12171,7 +12171,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 114,
+            "line": 115,
             "description": "Set loop mode.",
             "params": [
                 {
@@ -12187,7 +12187,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 126,
+            "line": 127,
             "description": "Set video volume.",
             "params": [
                 {
@@ -12203,7 +12203,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 138,
+            "line": 139,
             "description": "Set autoplay value.\n\nIf the image is already playing it will not stop playing.",
             "itemtype": "method",
             "name": "setAutoPlay",
@@ -12219,7 +12219,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 152,
+            "line": 153,
             "description": "Set video playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -12235,7 +12235,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 164,
+            "line": 165,
             "description": "Pause video playback.",
             "itemtype": "method",
             "name": "pause",
@@ -12244,7 +12244,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 177,
+            "line": 178,
             "description": "Start playing video.",
             "itemtype": "method",
             "name": "play",
@@ -12253,7 +12253,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 190,
+            "line": 191,
             "description": "Dispose video texture.\n\nStops the video and cleans the DOM video element inside the VideoTexture.",
             "itemtype": "method",
             "name": "dispose",
@@ -12262,7 +12262,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 208,
+            "line": 209,
             "description": "Create Video texture json description.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12282,7 +12282,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 18,
+            "line": 23,
             "description": "Image is used to store a DOM video element",
             "itemtype": "property",
             "name": "image",
@@ -12292,7 +12292,39 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 69,
+            "line": 40,
+            "description": "Webcam video, media stream",
+            "itemtype": "property",
+            "name": "stream",
+            "type": "{MediaStream}",
+            "class": "WebcamTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 68,
+            "description": "Prefer the front facing camera.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "USER",
+            "type": "{Number}",
+            "class": "WebcamTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 77,
+            "description": "Prefer the back camera.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "ENVIRONMENT",
+            "type": "{Number}",
+            "class": "WebcamTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 88,
             "description": "Connect to camera.",
             "itemtype": "method",
             "name": "connect",
@@ -12301,7 +12333,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 112,
+            "line": 131,
             "description": "Disconnect from camera.",
             "itemtype": "method",
             "name": "disconnect",
@@ -12310,7 +12342,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 129,
+            "line": 148,
             "description": "Dispose webcam texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -12319,7 +12351,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 147,
+            "line": 166,
             "description": "Serialize webcam texture to JSON.",
             "itemtype": "method",
             "name": "toJSON",

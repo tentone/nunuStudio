@@ -22,7 +22,7 @@ function VREffect(renderer, onError)
 	var eyeMatrixR = new THREE.Matrix4();
 	var frameData = null;
 
-	if("VRFrameData" in window)
+	if(window.VRFrameData !== undefined)
 	{
 		frameData = new window.VRFrameData();
 	}
@@ -253,9 +253,18 @@ function VREffect(renderer, onError)
 				renderer.setScissorTest(true);
 			}
 
-			if(renderer.autoClear || forceClear) renderer.clear();
 
-			if(camera.parent === null) camera.updateMatrixWorld();
+			renderer.setClearColor(scene.background);
+			
+			if(renderer.autoClear || forceClear)
+			{
+				renderer.clear(true, true, true);
+			}
+
+			if(camera.parent === null)
+			{
+				camera.updateMatrixWorld();
+			}
 			
 			camera.matrixWorld.decompose(cameraL.position, cameraL.quaternion, cameraL.scale);
 			cameraR.position.copy(cameraL.position);

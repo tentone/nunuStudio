@@ -309,7 +309,7 @@ Program.prototype.render = function(renderer)
 		{
 			var camera = this.scene.cameras[i];
 			this.controls.update(camera);
-			this.effect.render(this.scene, camera);
+			this.effect.render(this.scene, camera, undefined, true);
 		}
 	}
 	//Render normally
