@@ -241,7 +241,7 @@ Program.prototype.initialize = function()
 		{
 			self.display = display;
 			self.controls = new VRControls();
-			self.effect = new THREE.VREffect(self.renderer);
+			self.effect = new VREffect(self.renderer);
 		});
 	}
 };

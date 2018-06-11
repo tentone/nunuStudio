@@ -9,8 +9,6 @@ Editor.NWJSPath = "../nwjs/";
 //Runtime
 include("lib/three/three.min.js");
 
-include("lib/three/effects/VREffect.js");
-
 include("lib/three/shaders/CopyShader.js");
 include("lib/three/shaders/BokehShader.js");
 include("lib/three/shaders/SAOShader.js");
@@ -95,7 +93,8 @@ include("core/postprocessing/pass/ColorifyPass.js");
 include("core/postprocessing/pass/TechnicolorPass.js");
 include("core/postprocessing/pass/HueSaturationPass.js");
 
-include("core/controls/VRControls.js");
+include("core/vr/VRControls.js");
+include("core/vr/VREffect.js");
 
 include("core/resources/Resource.js");
 include("core/resources/Font.js");
