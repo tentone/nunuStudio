@@ -216,6 +216,7 @@ function VREffect(renderer, onError)
 			var layers = vrDisplay.getLayers();
 			var leftBounds;
 			var rightBounds;
+
 			if(layers.length)
 			{
 				var layer = layers[0];
@@ -242,6 +243,13 @@ function VREffect(renderer, onError)
 				height: Math.round(size.height * rightBounds[3])
 			};
 
+			renderer.setClearColor(scene.background);
+
+			if(renderer.autoClear || forceClear)
+			{
+				renderer.clear(true, true, true);
+			}
+			
 			if(renderTarget)
 			{
 				renderer.setRenderTarget(renderTarget);
@@ -254,12 +262,6 @@ function VREffect(renderer, onError)
 			}
 
 
-			renderer.setClearColor(scene.background);
-			
-			if(renderer.autoClear || forceClear)
-			{
-				renderer.clear(true, true, true);
-			}
 
 			if(camera.parent === null)
 			{
