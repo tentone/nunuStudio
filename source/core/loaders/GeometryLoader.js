@@ -103,6 +103,7 @@ GeometryLoader.prototype.parse = function(data)
 		case "TetrahedronBufferGeometry":
 			geometry = new THREE[data.type](data.radius, data.detail);
 			break;
+
 		case "PolyhedronGeometry":
 		case "PolyhedronBufferGeometry":
 			geometry = new THREE[data.type](data.radius, data.indices, data.radius, data.detail);
