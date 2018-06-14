@@ -11,14 +11,7 @@ CompressedGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
 
 CompressedGeometry.prototype.toJSON = function()
 {
-	var data = {
-		metadata:
-		{
-			version: 4.5,
-			type: "CompressedGeometry",
-			generator: "CompressedGeometry.toJSON"
-		}
-	};
+	var data = {};
 
 	data.uuid = this.uuid;
 	data.type = this.type;
