@@ -680,6 +680,8 @@ SceneEditor.prototype.resetCanvas = function()
 	this.canvas.style.left = "0px";
 	this.canvas.style.width = "100%";
 	this.canvas.style.height = "100%";
+	this.canvas.width = this.size.x;
+	this.canvas.height = this.size.y;
 	this.element.appendChild(this.canvas);
 
 	//Prevent deafault when object dragged over
