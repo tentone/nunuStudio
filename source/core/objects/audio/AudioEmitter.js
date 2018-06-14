@@ -11,54 +11,6 @@
  * @module Audio
  * @constructor
  */
-/**
- * Audio volume.
- * @property volume
- * @default 1.0
- * @type {Number}
-*/
-/**
- * If true the playback starts automatically.
- * @property autoplay
- * @default true
- * @type {boolean}
-*/
-/**
- * Start time in seconds.
- * @property playbackRate
- * @default 1.0
- * @type {Number}
-*/
-/**
- * Start time in seconds.
- * @property startTime
- * @default 0.0
- * @type {Number}
-*/
-/**
- * If true the audio plays in loop.
- * @property loop
- * @default true
- * @type {boolean}
-*/
-/**
- * AudioListener used by this emmiter.
- *
- * Every AudioEmitter has a different WebAudio AudioListener.
- * 
- * @property listener
- * @type {AudioListener}
-*/
-/**
- * Audio source type, can have the following values:
- *  - empty
- *  - buffer
- *  - audioNode
- *
- * @property sourceType
- * @type {String}
- * @default {"empty"}
- */
 function AudioEmitter(audio)
 {
 	THREE.Object3D.call(this);
@@ -66,6 +18,14 @@ function AudioEmitter(audio)
 	this.name = "audio";
 	this.type = "Audio";
 
+	/**
+	 * AudioListener used by this emmiter.
+	 *
+	 * Every AudioEmitter has a different WebAudio AudioListener.
+	 * 
+	 * @property listener
+	 * @type {AudioListener}
+	 */
 	this.listener = new THREE.AudioListener();
 	this.context = this.listener.context;
 	this.matrixAutoUpdate = false;
@@ -74,14 +34,60 @@ function AudioEmitter(audio)
 	this.gain.connect(this.listener.getInput());
 
 	this.buffer = null;
+	
 	this.filters = [];
+
+	/**
+	 * Audio source type, can have the following values:
+	 *  - empty
+	 *  - buffer
+	 *  - audioNode
+	 *
+	 * @property sourceType
+	 * @type {String}
+	 * @default {"empty"}
+	 */
 	this.sourceType = "empty";
 	this.audio = (audio !== undefined) ? audio : null;
 
+	/**
+	 * If true the playback starts automatically.
+	 * @property autoplay
+	 * @default true
+	 * @type {boolean}
+	 */
 	this.autoplay = true;
+
+	/**
+	 * Audio volume.
+	 * @property volume
+	 * @default 1.0
+	 * @type {Number}
+	 */
 	this.volume = 1.0;
+
+	/**
+	 * Start time in seconds.
+	 * @property playbackRate
+	 * @default 1.0
+	 * @type {Number}
+	 */
 	this.playbackRate = 1.0;
+
+	/**
+	 * Start time in seconds.
+	 * @property startTime
+	 * @default 0.0
+	 * @type {Number}
+	 */
 	this.startTime = 0;
+
+	/**
+	 * If true the audio plays in loop.
+	 * @property loop
+	 * @default true
+	 * @type {boolean}
+	 */
 	this.loop = true;
 
 	this.disposed = false;

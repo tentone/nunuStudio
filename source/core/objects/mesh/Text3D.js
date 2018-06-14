@@ -26,50 +26,56 @@ function Text3D(text, material, font, height, bevel, bevelThickness, bevelSize, 
 	this.type = "Text3D";
 
 	/**
-	 * Font used to draw text
+	 * Font used to draw text.
 	 * @property font
 	 * @type {Font}
 	 */
 	this.font = font !== undefined ? font : null;
 	
 	/**
-	 * Size of the text (depth)
+	 * Size of the text (depth).
 	 * @property size
 	 * @type {Number}
 	 */
 	this.size = size !== undefined ? size : 1;
 
 	/**
-	 * Height of the text
+	 * Height of the text.
 	 * @property height
 	 * @type {Number}
 	 */
 	this.height = height !== undefined ? height : 0.5;
+
+	/**
+	 * Number of segments that compose a curve in the font.
+	 * @property curveSegments
+	 * @type {Number}
+	 */
 	this.curveSegments = curveSegments !== undefined ? curveSegments : 15;
 
 	/**
-	 * Bevel
+	 * If true a bevel is added to the text.
 	 * @property bevel
 	 * @type {boolean}
 	 */
 	this.bevel = bevel !== undefined ? bevel : false;
 
 	/**
-	 * Bevel thickness
+	 * Bevel thickness.
 	 * @property bevelThickness
 	 * @type {Number}
 	 */
 	this.bevelThickness = bevelThickness !== undefined ? bevelThickness : 0.1;
 
 	/**
-	 * Bevel size
+	 * Bevel size.
 	 * @property bevelSize
 	 * @type {Number}
 	 */
 	this.bevelSize = bevelSize !== undefined ? bevelSize : 0.05;
 
 	/**
-	 * Text
+	 * Text.
 	 * @property text
 	 * @type {String}
 	 */

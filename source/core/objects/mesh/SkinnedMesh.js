@@ -14,7 +14,6 @@
  * @constructor
  * @extends {SkinnedMesh}
  */
-
 /**
  * Geometry defined the object structure.
  *

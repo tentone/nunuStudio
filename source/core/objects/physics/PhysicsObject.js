@@ -11,55 +11,53 @@
  * 
  * @class PhysicsObject
  * @constructor
- * @extends {Object3D}
+ * @extends {Group}
  * @module Physics
- */
-
-/**
- * Physics body contains the following attributes.
- *  - position Vec3
- *  - velocity Vec3
- *  - torque Vec3
- *  - angularVelocity Vec3
- *  - quaternion Quaternion
- *  - mass Number
- *  - material Material
- *  - type Number
- *  - linearDamping Number
- *  - angularDamping Number
- *  - allowSleep Boolean
- *  - sleepSpeedLimit Number
- *  - sleepTimeLimit Number
- *  - collisionFilterGroup Number
- *  - collisionFilterMask Number
- *  - fixedRotation Boolean
- *  - shape Array
- *  
- * @attribute body
- * @type {CANNON.Body}
- */
-
-/**
- * Physics world.
- * 
- * @attribute world
- * @type {CANNON.World}
  */
 function PhysicsObject()
 {
-	THREE.Object3D.call(this);
+	THREE.Group.call(this);
 
 	this.name = "physics";
 	this.type = "Physics";
 
+	/**
+	 * Physics body contains the following attributes.
+	 *  - position Vec3
+	 *  - velocity Vec3
+	 *  - torque Vec3
+	 *  - angularVelocity Vec3
+	 *  - quaternion Quaternion
+	 *  - mass Number
+	 *  - material Material
+	 *  - type Number
+	 *  - linearDamping Number
+	 *  - angularDamping Number
+	 *  - allowSleep Boolean
+	 *  - sleepSpeedLimit Number
+	 *  - sleepTimeLimit Number
+	 *  - collisionFilterGroup Number
+	 *  - collisionFilterMask Number
+	 *  - fixedRotation Boolean
+	 *  - shape Array
+	 *  
+	 * @attribute body
+	 * @type {CANNON.Body}
+	 */
 	this.body = new CANNON.Body();
 	this.body.type = CANNON.Body.DYNAMIC;
 	this.body.mass = 1.0;
 
+	/**
+	 * Physics world.
+	 * 
+	 * @attribute world
+	 * @type {CANNON.World}
+	 */
 	this.world = null;
 }
 
-PhysicsObject.prototype = Object.create(THREE.Object3D.prototype);
+PhysicsObject.prototype = Object.create(THREE.Group.prototype);
 
 /**
  * Intialize physics object and add it to the scene physics world.

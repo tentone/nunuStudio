@@ -34,44 +34,59 @@
  * @param {String} code Javascript code to be used by this script
  * @module Script
  */
-
-/**
- * Javascript code attached to the script
- * @property code
- * @type {String}
- */
-/**
- * Compiled function used during runtime
- * @attribute script
- * @type {Function}
- */
-/**
- * Pointer to the parent program
- * Used access program resources easier
- * @property program
- * @type {Program}
- */
-/**
- * Pointer to the parent scene
- * @property scene
- * @type {Scene}
- */
 function Script(code, mode)
 {
-	THREE.Object3D.call(this);
+	THREE.Group.call(this);
 	
 	this.type = "Script";
 	this.name = "script";
 
+	/**
+	 * Javascript code attached to the script.
+	 *
+	 * @property code
+	 * @type {String}
+	 */
 	this.code = (code !== undefined) ? code : Script.DEFAULT;
+
+	/**
+	 * Mode indicates how to include external javascripts files into the script.
+	 *
+	 * Can be Script.APPEND, Script.EVALUATE or Script.INCLUDE.
+	 *
+	 * @property mode
+	 * @type {Number}
+	 */
 	this.mode = (mode !== undefined) ? mode : Script.APPEND;
 
+	/**
+	 * Compiled function used during runtime.
+	 *
+	 * @attribute script
+	 * @type {Function}
+	 */
 	this.script = {};
+
+	/**
+	 * Pointer to the parent program.
+	 *
+	 * Used access program resources easier.
+	 *
+	 * @property program
+	 * @type {Program}
+	 */
 	this.program = null;
+
+	/**
+	 * Pointer to the parent scene.
+	 *
+	 * @property scene
+	 * @type {Scene}
+	 */
 	this.scene = null;
 }
 
-Script.prototype = Object.create(THREE.Object3D.prototype);
+Script.prototype = Object.create(THREE.Group.prototype);
 
 /**
  * Default script code used when creating a new Script.

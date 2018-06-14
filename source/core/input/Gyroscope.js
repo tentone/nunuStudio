@@ -7,31 +7,34 @@
  * @module Input
  * @constructor
  */
-/**
- * Alpha rotation.
- * @property alpha
- * @type {Number}
- */
-/**
- * Beta rotation.
- * @property beta
- * @type {Number}
- */
-/**
- * Gamma rotation.
- * @property gamma
- * @type {Number}
- */
-/**
- * Device orientation.
- * @property orientation
- * @type {Number}
- */
 function Gyroscope()
 {
+	/**
+	 * Alpha rotation.
+	 * @property alpha
+	 * @type {Number}
+	 */
 	this.alpha = 0;
+	
+	/**
+	 * Beta rotation.
+	 * @property beta
+	 * @type {Number}
+	 */
 	this.beta = 0;
+
+	/**
+	 * Gamma rotation.
+	 * @property gamma
+	 * @type {Number}
+	 */
 	this.gamma = 0;
+
+	/**
+	 * Device orientation.
+	 * @property orientation
+	 * @type {Number}
+	 */
 	this.orientation = 0;
 
 	this.events = new EventManager();

@@ -7,29 +7,30 @@
  * @module Input
  * @constructor
 */
-
-/**
- * Indicates if this key is currently pressed.
- * @property pressed
- * @default false
- * @type {boolean}
-*/
-/**
- * Indicates if this key was just pressed.
- * @property justPressed
- * @default false
- * @type {boolean}
-*/
-/**
- * Indicates if this key was just released.
- * @property justReleased
- * @default false
- * @type {boolean}
-*/
 function Key()
 {
+	/**
+	 * Indicates if this key is currently pressed.
+	 * @property pressed
+	 * @default false
+	 * @type {boolean}
+	 */
 	this.pressed = false;
+
+	/**
+	 * Indicates if this key was just pressed.
+	 * @property justPressed
+	 * @default false
+	 * @type {boolean}
+	 */
 	this.justPressed = false;
+	
+	/**
+	 * Indicates if this key was just released.
+	 * @property justReleased
+	 * @default false
+	 * @type {boolean}
+	 */
 	this.justReleased = false;
 }
 
@@ -39,19 +40,20 @@ function Key()
  * @type {Number}
  */
 Key.DOWN = -1;
+
 /**
  * Up
  * @attribute UP
  * @type {Number}
  */
 Key.UP = 1;
+
 /**
  * Reset
  * @attribute RESET
  * @type {Number}
  */
 Key.RESET = 0;
-
 
 Key.prototype.constructor = Key;
 

@@ -9,14 +9,13 @@
  * @module Input
  * @constructor
  */
-
-/**
- * Array with keyboard keys status.
- * @type {array}
- * @property keys
- */
 function Keyboard()
 {
+	/**
+	 * Array with keyboard keys status.
+	 * @type {array}
+	 * @property keys
+	 */
 	this.keys = new Array(256);
 	this.actions = [];
 

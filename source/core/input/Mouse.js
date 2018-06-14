@@ -9,32 +9,6 @@
  * @module Input
  * @constructor
  */
-
-/**
- * Array with mouse buttons status
- * @type {array}
- * @property keys
- */
-/**
- * Mouse position inside of the window (coordinates in window space)
- * @type {Vector2}
- * @property position
- */
-/**
- * Mouse movement (coordinates in window space)
- * @type {Vector2}
- * @property delta
- */
-/**
- * Mouse scroll wheel movement
- * @type {Number}
- * @property wheel
- */
-/**
- * Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates
- * @type {DOM}
- * @property canvas
- */
 function Mouse()
 {
 	//Raw data
@@ -46,14 +20,52 @@ function Mouse()
 	this._wheelUpdated = false;
 	this._doubleClicked = false;
 
-	//Position, delta, and scroll speed
+	/**
+	 * Array with mouse buttons status.
+	 *
+	 * @type {array}
+	 * @property keys
+	 */
 	this.keys = new Array(3);
+
+	/**
+	 * Mouse position inside of the window (coordinates in window space).
+	 *
+	 * @type {Vector2}
+	 * @property position
+	 */
 	this.position = new THREE.Vector2(0,0);
+
+	/**
+	 * Mouse movement (coordinates in window space).
+	 *
+	 * @type {Vector2}
+	 * @property delta
+	 */
 	this.delta = new THREE.Vector2(0,0);
+
+	/**
+	 * Mouse scroll wheel movement.
+	 *
+	 * @type {Number}
+	 * @property wheel
+	 */
 	this.wheel = 0;
+	
+	/**
+	 * Indicates if some button of the mouse was just double clicked.
+	 *
+	 * @type {Boolean}
+	 * @property doubleClicked
+	 */
 	this.doubleClicked = false;
 
-	//Canvas (use to calculate coordinates relative to it)
+	/**
+	 * Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates.
+	 *
+	 * @type {DOM}
+	 * @property canvas
+	 */
 	this.canvas = null;
 	
 	//Events

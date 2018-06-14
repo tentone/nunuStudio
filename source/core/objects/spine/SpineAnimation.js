@@ -16,22 +16,6 @@
  * @param {Array} textures
  * @module Animations
  */
-
-/**
- * Array of SpineTextures used by the animation.
- * @property textures
- * @type {Array}
- */
-/**
- * Animation data.
- * @property json
- * @type {Object}
- */
-/**
- * Texture atlas information.
- * @property atlas
- * @type {Object}
- */
 function SpineAnimation(json, atlas, path, textures)
 {
 	if(textures === undefined)
@@ -99,9 +83,28 @@ function SpineAnimation(json, atlas, path, textures)
 	this.castShadow = true;
 	this.scale.set(0.01, 0.01, 0.01);
 
-	//Animation
+	/**
+	 * Spine animation data.
+	 *
+	 * @property json
+	 * @type {Object}
+	 */
 	this.json = json;
+	
+	/**
+	 * Texture atlas information.
+	 *
+	 * @property atlas
+	 * @type {Object}
+	 */
 	this.atlas = atlas;
+	
+	/**
+	 * Array of SpineTextures used by the animation.
+	 *
+	 * @property textures
+	 * @type {Array}
+	 */
 	this.textures = textures;
 
 	//Default animation and skin

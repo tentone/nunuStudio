@@ -11,27 +11,26 @@
  * @module Resources
  * @param {String} url URL to font file
  */
-
-/**
- * Font data, can be an ArrayBuffer or JSON.
- *
- * @property font
- * @type {Object}
- * @default null
- */
-
-/**
- * If true the font glyphs are reversed.
- *
- * @property reversed
- * @type {boolean}
- * @default false
- */
 function Font(url)
 {
 	Resource.call(this, "font", "Font");
 
+	/**
+	 * If true the font glyphs are reversed.
+	 *
+	 * @property reversed
+	 * @type {boolean}
+	 * @default false
+	 */
 	this.reversed = false;
+
+	/**
+	 * Font data, can be an ArrayBuffer or JSON.
+	 *
+	 * @property font
+	 * @type {Object}
+	 * @default null
+	 */
 	this.font = null;
 
 	if(url !== undefined)

@@ -12,18 +12,19 @@
  * @constructor
  * @extends {Mesh}
  */
+
 /**
  * Geometry defines the object structure.
  * 
  * @property geometry
  * @type {Geometry}
-*/
+ */
 /**
  * Material is used to define how the geometry surface is shaded.
  * 
  * @property material
  * @type {Material}
-*/
+ */
 /**
  * Determines how the mesh triangles are constructed from the vertices.
  * 
@@ -31,7 +32,7 @@
  * 
  * @property drawMode
  * @default TrianglesDrawMode
-*/
+ */
 function Mesh(geometry, material)
 {
 	THREE._Mesh.call(this, geometry, material);

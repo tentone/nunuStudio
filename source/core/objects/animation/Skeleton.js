@@ -9,44 +9,40 @@
  * @param {Array} bones Bone array.
  * @param {Array} boneInverses An array of Matrix4.
  */
-
-/**
- * The array of bones. Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.
- * 
- * @property bones
- * @type {Array}
- */
-/**
- * An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.
- * 
- * @property boneInverses
- * @type {Array}
- */
-
-/**
- * The array buffer holding the bone data when using a vertex texture.
- * 
- * @property boneMatrices
- * @type {ArrayBuffer}
- */
-
-/**
- * The DataTexture holding the bone data when using a vertex texture.
- * 
- * @property boneTexture
- * @type {DataTexture}
- */
 function Skeleton(bones, boneInverses)
 {
 	this.uuid = THREE.Math.generateUUID();
 
-	//Copy the bone array
-	bones = bones || [];
+	if(bones === undefined)
+	{
+		bones = [];
+	}
 
+	/**
+	 * The array of bones. Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.
+	 * 
+	 * @property bones
+	 * @type {Array}
+	 */
 	this.bones = bones.slice(0);
+	
+	/**
+	 * The array buffer holding the bone data when using a vertex texture.
+	 * 
+	 * @property boneMatrices
+	 * @type {ArrayBuffer}
+	 */
 	this.boneMatrices = new Float32Array(this.bones.length * 16);
 
-	//Use the supplied bone inverses or calculate the inverses
+
+	/**
+	 * An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.
+	 * 
+	 * Use the supplied bone inverses or calculate the inverses.
+	 *
+	 * @property boneInverses
+	 * @type {Array}
+	 */
 	if(boneInverses === undefined)
 	{
 		this.calculateInverses();
@@ -69,6 +65,13 @@ function Skeleton(bones, boneInverses)
 			}
 		}
 	}
+
+	/**
+	 * The DataTexture holding the bone data when using a vertex texture.
+	 * 
+	 * @property boneTexture
+	 * @type {DataTexture}
+	 */
 }
 
 THREE._Skeleton = THREE.Skeleton;

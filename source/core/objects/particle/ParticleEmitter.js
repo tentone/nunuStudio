@@ -12,29 +12,28 @@
  * @extends {Points}
  * @module Particles
  */
-
-/**
- * SPE Group instance.
- * 
- * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html
- * 
- * @property group
- * @type {SPE.Group}
- */
-
-/**
- * SPE Emitter instance.
- * 
- * Emitter has attributes that can be used to controll the particle system
- * 
- * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html
- * 
- * @property emitter
- * @type {SPE.Emitter}
- */
 function ParticleEmitter(group, emitter)
 {
+	/**
+	 * SPE Group instance.
+	 * 
+	 * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html
+	 * 
+	 * @property group
+	 * @type {SPE.Group}
+	 */
 	this.group = new SPE.Group(group !== undefined ? group : ParticleEmitter.defaultGroup);
+
+	/**
+	 * SPE Emitter instance.
+	 * 
+	 * Emitter has attributes that can be used to controll the particle system
+	 * 
+	 * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html
+	 * 
+	 * @property emitter
+	 * @type {SPE.Emitter}
+	 */
 	this.emitter = new SPE.Emitter(emitter !== undefined ? emitter : ParticleEmitter.defaultEmitter);
 	this.group.addEmitter(this.emitter);
 

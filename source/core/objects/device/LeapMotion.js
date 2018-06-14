@@ -10,42 +10,6 @@
  * @module Devices
  * @extends {Object3D}
  */
-
-/**
- * Debug model flag.
- * 
- * @property debugModel
- * @default true
- * @type {boolean}
- */
-/**
- * Flag to enable gesture detection.
- * 
- * @property gesturesEnabled
- * @default true
- * @type {boolean}
- */
-/**
- * Flag to enable hand pose detection.
- * 
- * @property posesEnabled
- * @default true
- * @type {boolean}
- */
-/**
- * Hand tracking mode.
- * 
- * @property mode
- * @default DESK
- * @type {Number}
- */
-/**
- * Flag to set arm tracking.
- * 
- * @property useArm
- * @default false
- * @type {boolean}
- */
 function LeapMotion()
 {
 	THREE.Object3D.call(this);
@@ -53,11 +17,49 @@ function LeapMotion()
 	this.type = "LeapDevice";
 	this.name = "leap";
 
-	//Leap configuration
+	/**
+	 * Debug model flag.
+	 * 
+	 * @property debugModel
+	 * @default true
+	 * @type {boolean}
+	 */
 	this.debugModel = true;
+
+	/**
+	 * Flag to enable gesture detection.
+	 * 
+	 * @property gesturesEnabled
+	 * @default true
+	 * @type {boolean}
+	 */
 	this.gesturesEnabled = true;
+
+	/**
+	 * Flag to enable hand pose detection.
+	 * 
+	 * @property posesEnabled
+	 * @default true
+	 * @type {boolean}
+	 */
 	this.posesEnabled = true;
+
+	/**
+	 * Hand tracking mode.
+	 * 
+	 * @property mode
+	 * @default DESK
+	 * @type {Number}
+	 */
 	this.mode = LeapMotion.DESK;
+
+	/**
+	 * Flag to set arm tracking.
+	 * 
+	 * @property useArm
+	 * @default false
+	 * @type {boolean}
+	 */
 	this.useArm = false;
 
 	//Hand and Arm meshes

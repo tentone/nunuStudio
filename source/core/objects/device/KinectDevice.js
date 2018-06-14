@@ -14,45 +14,6 @@
  * @constructor
  * @module Devices
  */
-
-/**
- * Websocket object used to connect to the data server.
- * 
- * @property socket
- * @default 127.0.0.1:8181
- * @type {Object}
- */
-/**
- * Connected flag.
- * 
- * @property connected
- * @type {boolean}
- */
-/**
- * Debug model flag.
- * 
- * @property debugModel
- * @default true
- * @type {boolean}
- */
-/**
- * Time until data is considered too obsolete to be usable.
- * 
- * @property dataTimeout
- * @type {Number}
- */
-/**
- * Image data sent by the kinnect camera.
- * 
- * @property camera
- * @type {Blob}
- */
-/**
- * Skeleton data sent by the kinnect.
- * 
- * @property data
- * @type {Object}
- */
 function KinectDevice()
 {
 	THREE.Object3D.call(this);
@@ -60,17 +21,56 @@ function KinectDevice()
 	this.type = "Kinect";
 	this.name = "kinect";
 
-	//Initialize a new web socket
+	/**
+	 * Websocket object used to connect to the data server.
+	 * 
+	 * @property socket
+	 * @default 127.0.0.1:8181
+	 * @type {Object}
+	 */
 	this.socket = new WebSocket("ws://127.0.0.1:8181");
+
+	/**
+	 * Connected flag.
+	 * 
+	 * @property connected
+	 * @type {boolean}
+	 */
 	this.connected = false;
 
-	//Configuration
+	/**
+	 * Debug model flag.
+	 * 
+	 * @property debugModel
+	 * @default true
+	 * @type {boolean}
+	 */
 	this.debugModel = true;
+
+	/**
+	 * Time until data is considered too obsolete to be usable.
+	 * 
+	 * @property dataTimeout
+	 * @type {Number}
+	 */
 	this.dataTimeout = 0;
 
-	//Received Data
+	/**
+	 * Image data sent by the kinnect camera.
+	 * 
+	 * @property camera
+	 * @type {Blob}
+	 */
 	this.camera = null;
+
+	/**
+	 * Skeleton data sent by the kinnect.
+	 * 
+	 * @property data
+	 * @type {Object}
+	 */
 	this.data = null;
+	
 	this.dataReceived = false;
 
 	//Self pointer
