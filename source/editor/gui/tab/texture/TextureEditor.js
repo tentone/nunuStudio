@@ -19,12 +19,13 @@ function TextureEditor(parent, closeable, container, index)
 	this.division.tabPositionMax = 0.7;
 
 	//Canvas
-	this.canvas = new Canvas(this.division.divA);
-
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Editor.settings.render.antialiasing});
-	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.renderer.shadowMap.enabled = false;
+	this.canvas = new RendererCanvas(this.division.divA);
+	this.canvas.setOnResize(function(x, y)
+	{
+		self.camera.aspect = x / y;
+		self.camera.mode = (self.camera.aspect > 1) ? OrthographicCamera.RESIZE_HORIZONTAL : OrthographicCamera.RESIZE_VERTICAL;
+		self.camera.updateProjectionMatrix();
+	});
 
 	//Camera
 	this.camera = new OrthographicCamera(1.2, 1, OrthographicCamera.RESIZE_VERTICAL);
@@ -249,12 +250,7 @@ TextureEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-		this.renderer.forceContextLoss();
-		this.renderer = null;
-	}
+	this.canvas.destroy();
 };
 
 //Update test material
@@ -303,35 +299,25 @@ TextureEditor.prototype.attach = function(texture)
 //Update
 TextureEditor.prototype.update = function()
 {
-	this.renderer.render(this.scene, this.camera);
+	this.canvas.renderer.render(this.scene, this.camera);
 }
 
 //Update
 TextureEditor.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.display = "block";
 
 		//Dual division
-		this.division.visible = this.visible;
 		this.division.size.copy(this.size);
 		this.division.updateInterface();
 
 		//Canvas
-		this.canvas.visible = this.visible;
 		this.canvas.size.set(this.division.divA.offsetWidth, this.division.divA.offsetHeight);
 		this.canvas.updateInterface();
-		
-		//Renderer
-		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-		this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
-		this.camera.mode = (this.camera.aspect > 1) ? OrthographicCamera.RESIZE_HORIZONTAL : OrthographicCamera.RESIZE_VERTICAL;
-		this.camera.updateProjectionMatrix();
 
 		//Form
-		this.form.visible = this.visible;
 		this.form.updateInterface();
 
 		//Element
@@ -344,6 +330,4 @@ TextureEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-	
-
 }

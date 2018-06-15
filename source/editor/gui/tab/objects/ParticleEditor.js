@@ -19,15 +19,15 @@ function ParticleEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Canvas
-	this.canvas = new Canvas(this.main.divA);
+	this.canvas = new RendererCanvas(this.main.divA);
+	this.canvas.setOnResize(function(x, y)
+	{
+		self.camera.aspect = x / y;
+		self.camera.updateProjectionMatrix();
+	});
 
 	//Element atributes
 	this.children = [];
-
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Editor.settings.render.antialiasing});
-	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.renderer.shadowMap.enabled = false;
 	
 	//Particle preview
 	this.scene = new THREE.Scene();
@@ -541,12 +541,7 @@ ParticleEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 	
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-		this.renderer.forceContextLoss();
-		this.renderer = null;
-	}
+	this.canvas.destroy();
 };
 
 //Update material editor
@@ -582,22 +577,12 @@ ParticleEditor.prototype.update = function()
 		this.updateCamera();
 	}
 	
-	if(this.renderer !== null)
-	{
-		this.particle.matrixWorld.getInverse(this.scene.matrixWorld, false);
+	this.particle.matrixWorld.getInverse(this.scene.matrixWorld, false);
 
-		//Render grid and axis
-		this.renderer.autoClearColor = true;
-		this.renderer.autoClearDepth = true;
-		this.renderer.autoClearStencil = true;
-		this.renderer.render(this.scene, this.camera);
-
-		//Render particle
-		this.renderer.autoClearColor = false;
-		this.renderer.autoClearDepth = false;
-		this.renderer.autoClearStencil = false;
-		this.renderer.render(this.particle, this.camera);
-	}
+	//Render grid and axis
+	this.canvas.renderer.clear(true, true, true);
+	this.canvas.renderer.render(this.scene, this.camera);
+	this.canvas.renderer.render(this.particle, this.camera);
 };
 
 //Update division
@@ -612,11 +597,6 @@ ParticleEditor.prototype.updateInterface = function()
 		//Canvas
 		this.canvas.size.set(this.size.x * this.main.tabPosition, this.size.y);
 		this.canvas.updateInterface();
-
-		//Renderer and canvas
-		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-		this.camera.aspect = this.canvas.size.x/this.canvas.size.y
-		this.camera.updateProjectionMatrix();
 
 		//Children
 		for(var i = 0; i < this.children.length; i++)

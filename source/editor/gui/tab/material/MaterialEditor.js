@@ -36,7 +36,12 @@ function MaterialEditor(parent, closeable, container, index)
 	this.preview.divB.style.overflow = "auto";
 
 	//Canvas
-	this.canvas = new Canvas(this.preview.divA);
+	this.canvas = new RendererCanvas(this.preview.divA);
+	this.canvas.setOnResize(function(x, y)
+	{
+		self.camera.aspect = x / y;
+		self.camera.updateProjectionMatrix();
+	});
 
 	//Children
 	this.children = [];
@@ -44,12 +49,6 @@ function MaterialEditor(parent, closeable, container, index)
 	//Material and corresponding asset
 	this.material = null;
 	this.asset = null;
-
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Editor.settings.render.antialiasing});
-	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.renderer.shadowMap.enabled = Editor.settings.render.shadows;
-	this.renderer.shadowMap.type = Editor.settings.render.shadowsType;
 
 	//Preview scene
 	this.scene = new THREE.Scene();
@@ -264,12 +263,7 @@ MaterialEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-		this.renderer.forceContextLoss();
-		this.renderer = null;
-	}
+	this.canvas.destroy();
 };
 
 //Update object data
@@ -316,10 +310,7 @@ MaterialEditor.prototype.update = function()
 		}
 
 		//Render scene
-		if(this.renderer !== null)
-		{
-			this.renderer.render(this.scene, this.camera);
-		}
+		this.canvas.renderer.render(this.scene, this.camera);
 	}
 
 	//Move material view
@@ -348,31 +339,21 @@ MaterialEditor.prototype.updateInterface = function()
 		this.element.style.display = "block";
 
 		//Main
-		this.main.visible = this.visible;
 		this.main.size.copy(this.size);
 		this.main.updateInterface();
 
 		//Preview
-		this.preview.visible = this.visible;
 		this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
 		this.preview.updateInterface();
 
 		//Canvas
-		this.canvas.visible = this.visible;
 		this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
 		this.canvas.updateInterface();
 
-		//Renderer and canvas
-		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-		this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
-		this.camera.updateProjectionMatrix();
-
 		//Preview form
-		this.previewForm.visible = this.visible;
 		this.previewForm.updateInterface();
 
 		//Form
-		this.form.visible = this.visible;
 		this.form.updateInterface();
 
 		//Element

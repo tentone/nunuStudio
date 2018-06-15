@@ -5,12 +5,12 @@
  *
  * The renderer is automatically updated to match the canvas size, it also handles the device pixel ratio.
  * 
- * @class RenderingCanvas
+ * @class RendererCanvas
  * @extends {Element}
  */
 function RendererCanvas(parent)
 {
-	Element.call(this, parent, "canvas");
+	Element.call(this, parent, "div");
 
 	/**
 	 * Canvas DOM element.
@@ -46,7 +46,7 @@ RendererCanvas.prototype = Object.create(Element.prototype);
  * @method setOnResize
  * @param {Function} callback
  */
-RenderingCanvas.prototype.setOnResize = function(callback)
+RendererCanvas.prototype.setOnResize = function(callback)
 {
 	this.onResize = callback;
 };
@@ -58,7 +58,7 @@ RenderingCanvas.prototype.setOnResize = function(callback)
  * 
  * @method resetCanvas
  */
-RenderingCanvas.prototype.resetCanvas = function()
+RendererCanvas.prototype.resetCanvas = function()
 {
 	if(this.element.contains(this.canvas))
 	{
@@ -78,7 +78,7 @@ RenderingCanvas.prototype.resetCanvas = function()
  * 
  * @method createRenderer
  */
-RenderingCanvas.prototype.createRenderer = function()
+RendererCanvas.prototype.createRenderer = function()
 {
 	if(Editor.settings.render.followProject)
 	{
@@ -126,7 +126,7 @@ RenderingCanvas.prototype.createRenderer = function()
  * 
  * @method createNewContext
  */
-RenderingCanvas.prototype.createNewContext = function()
+RendererCanvas.prototype.createNewContext = function()
 {
 	this.forceContextLoss();
 	this.resetCanvas();
@@ -140,7 +140,7 @@ RenderingCanvas.prototype.createNewContext = function()
  * 
  * @method forceContextLoss
  */
-RenderingCanvas.prototype.forceContextLoss = function()
+RendererCanvas.prototype.forceContextLoss = function()
 {
 	try
 	{
@@ -150,14 +150,14 @@ RenderingCanvas.prototype.forceContextLoss = function()
 	catch(e){}
 }
 
-RenderingCanvas.prototype.destroy = function()
+RendererCanvas.prototype.destroy = function()
 {
 	Element.prototype.destroy.call(this);
 
 	this.forceContextLoss();
 };
 
-RenderingCanvas.prototype.updateInterface = function()
+RendererCanvas.prototype.updateInterface = function()
 {
 	Element.prototype.updateInterface.call(this);
 

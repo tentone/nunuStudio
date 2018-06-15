@@ -13,10 +13,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.main.tabPositionMax = 0.95;
 
 	//Canvas
-	this.canvas = new Canvas(this.main.divA);
-
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Editor.settings.render.antialiasing});
+	this.canvas = new RendererCanvas(this.main.divA);
 
 	//Change main div aspect
 	this.main.divB.style.overflow = "auto";
@@ -137,12 +134,7 @@ CameraEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-		this.renderer.forceContextLoss();
-		this.renderer = null;
-	}
+	this.canvas.destroy();
 };
 
 //Update tab state
@@ -153,7 +145,7 @@ CameraEditor.prototype.update = function()
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 		this.camera.resize(this.canvas.size.x, this.canvas.size.y);
-		this.camera.render(this.renderer, this.camera.getScene());
+		this.camera.render(this.canvas.renderer, this.camera.getScene());
 	}
 };
 
@@ -217,9 +209,6 @@ CameraEditor.prototype.updateInterface = function()
 		//Canvas
 		this.canvas.size.set(this.size.x * this.main.tabPosition, this.size.y);
 		this.canvas.updateInterface();
-
-		//Renderer
-		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 
 		//Element
 		this.element.style.display = "block";

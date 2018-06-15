@@ -35,20 +35,19 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
 	this.preview.divB.style.overflow = "auto";
 
-	//Preview Canvas
-	this.canvas = new Canvas(this.preview.divA);
-	
+	//Canvas
+	this.canvas = new RendererCanvas(this.preview.divA);
+	this.canvas.setOnResize(function(x, y)
+	{
+		self.camera.aspect = x / y;
+		self.camera.updateProjectionMatrix();
+	});
+
 	//Material UI File element
 	this.asset = null;
 
 	//Attached material
 	this.material = null;
-
-	//Material renderer and scene
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Editor.settings.render.antialiasing});
-	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.renderer.shadowMap.enabled = Editor.settings.render.shadows;
-	this.renderer.shadowMap.type = Editor.settings.render.shadowsType;
 
 	//Material camera
 	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x/this.canvas.size.y);
@@ -277,18 +276,6 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 ShaderMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-ShaderMaterialEditor.prototype.destroy = function()
-{
-	TabElement.prototype.destroy.call(this);
-
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-		this.renderer.forceContextLoss();
-		this.renderer = null;
-	}
-};
-
 ShaderMaterialEditor.prototype.attach = function(material, asset)
 {
 	//Attach Material
@@ -327,35 +314,25 @@ ShaderMaterialEditor.prototype.updateInterface = function()
 		this.element.style.height = this.size.y + "px";
 
 		//Main
-		this.main.visible = this.visible;
 		this.main.size.copy(this.size);
 		this.main.updateInterface();
 
 		//Preview
-		this.preview.visible = this.visible;
 		this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
 		this.preview.updateInterface();
 
 		//Canvas
-		this.canvas.visible = this.visible;
 		this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
 		this.canvas.updateInterface();
-
-		//Renderer and canvas
-		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
-		this.camera.updateProjectionMatrix();
 
 		//Tab size
 		this.tab.size.set(this.size.x - this.canvas.size.x - 5, this.size.y);
 		this.tab.updateInterface();
 
 		//Preview form
-		this.previewForm.visible = this.visible;
 		this.previewForm.updateInterface();
 
 		//Form
-		this.form.visible = this.visible;
 		this.form.updateInterface();
 
 		//Fragment editor

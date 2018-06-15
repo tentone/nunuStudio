@@ -270,6 +270,7 @@ include("editor/gui/element/Division.js");
 include("editor/gui/element/Bar.js");
 include("editor/gui/element/Text.js");
 include("editor/gui/element/Canvas.js");
+include("editor/gui/element/RendererCanvas.js");
 include("editor/gui/element/Form.js");
 include("editor/gui/element/AudioPlayer.js");
 include("editor/gui/element/VideoPlayer.js");

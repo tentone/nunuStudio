@@ -20,12 +20,12 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.division.divB.style.overflow = "auto";
 	
 	//Canvas
-	this.canvas = new Canvas(this.division.divA);
-
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Editor.settings.render.antialiasing});
-	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.renderer.shadowMap.enabled = false;
+	this.canvas = new RendererCanvas(this.division.divA);
+	this.canvas.setOnResize(function(x, y)
+	{
+		self.camera.aspect = x / y;
+		self.camera.updateProjectionMatrix();
+	});
 
 	//Camera
 	this.camera = new PerspectiveCamera(100, this.canvas.width/this.canvas.height);
@@ -333,12 +333,7 @@ CubeTextureEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-		this.renderer.forceContextLoss();
-		this.renderer = null;
-	}
+	this.canvas.destroy();
 };
 
 //Update object data
@@ -403,7 +398,7 @@ CubeTextureEditor.prototype.update = function()
 		this.camera.rotation.y += delta;
 	}
 
-	this.renderer.render(this.scene, this.camera);
+	this.canvas.renderer.render(this.scene, this.camera);
 };
 
 //Update
@@ -419,11 +414,6 @@ CubeTextureEditor.prototype.updateInterface = function()
 		//Canvas
 		this.canvas.size.set(this.size.x * this.division.tabPosition, this.size.y);
 		this.canvas.updateInterface();
-		
-		//Renderer
-		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-		this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
-		this.camera.updateProjectionMatrix();
 
 		//Form
 		this.form.updateInterface();
