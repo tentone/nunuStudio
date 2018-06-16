@@ -570,7 +570,14 @@ function MainMenu(parent)
 
 	editMenu.addOption("Delete", function()
 	{
-		Editor.deleteObject();
+		if(Editor.hasObjectSelected())
+		{
+			var del = Editor.confirm("Delete objects?");
+			if(del)
+			{
+				Editor.deleteObject();
+			}
+		}
 	}, Editor.filePath + "icons/misc/delete.png");
 
 	var csg = editMenu.addMenu("CSG", Editor.filePath + "icons/models/figures.png");

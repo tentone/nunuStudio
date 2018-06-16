@@ -721,7 +721,14 @@ Editor.initialize = function()
 				return;
 			}
 
-			Editor.deleteObject();
+			if(Editor.hasObjectSelected())
+			{
+				var del = Editor.confirm("Delete objects?");
+				if(del)
+				{
+					Editor.deleteObject();
+				}
+			}
 		}
 		else if(key === Keyboard.F2)
 		{
@@ -815,7 +822,7 @@ Editor.clearSelection = function()
 };
 
 //Add object to actual scene
-Editor.addObject = function(obj, parent)
+Editor.addObject = function(object, parent)
 {
 	if(parent === undefined)
 	{
@@ -824,17 +831,17 @@ Editor.addObject = function(obj, parent)
 
 	//TODO <Check for resources here and create a history action to add resources and objects>
 
-	Editor.history.add(new ObjectAddedAction(obj, parent));
+	Editor.history.add(new ObjectAddedAction(object, parent));
 };
 
 //Rename object, if none passed as argument selected object is used
-Editor.renameObject = function(obj)
+Editor.renameObject = function(object)
 {
-	if(obj === undefined)
+	if(object === undefined)
 	{
 		if(Editor.hasObjectSelected())
 		{
-			obj = Editor.selection[0];
+			object = Editor.selection[0];
 		}
 		else
 		{
@@ -842,79 +849,56 @@ Editor.renameObject = function(obj)
 		}
 	}
 
-	if(!obj.locked)
+	if(!object.locked)
 	{
-		var name = prompt("Rename object", obj.name);
+		var name = prompt("Rename object", object.name);
 		if(name !== null && name !== "")
 		{
-			Editor.history.add(new ObjectChangedAction(obj, "name", name));
+			Editor.history.add(new ObjectChangedAction(object, "name", name));
 		}
 	}
 };
 
 //Delete selected Object
-Editor.deleteObject = function(obj)
+Editor.deleteObject = function(object)
 {
-	var del = Editor.confirm("Delete object?");
+	var selected = (object === undefined) ? Editor.selection : [object];
 
-	if(del)
-	{ 
-		if(obj === undefined)
+	console.log(selected);
+
+	//List of delete actions
+	var actions = [];
+
+	//Delect selection
+	for(var i = 0; i < selected.length; i++)
+	{
+		//Avoid deleting program
+		if(selected[i] instanceof Program)
 		{
-			if(Editor.hasObjectSelected())
-			{
-				var selected = Editor.selection;
-				Editor.resetEditor();
-			}
-			else
-			{
-				return;
-			}
+			continue;
 		}
-		else
+		else if(selected[i] instanceof THREE.Object3D && !selected[i].locked)
 		{
-			var selected = [obj];
+			actions.push(new ObjectRemovedAction(selected[i]));
 		}
+	}
 
-		//List of delete actions
-		var actions = [];
-
-		//Delect selection
-		for(var i = 0; i < selected.length; i++)
-		{
-			//Avoid deleting program
-			if(selected[i] instanceof Program)
-			{
-				continue;
-			}
-			else if(selected[i] instanceof THREE.Object3D && !selected[i].locked)
-			{
-				if(Editor.isObjectSelected(selected[i]))
-				{
-					Editor.removeFromSelection(selected[i]);
-				}
-
-				actions.push(new ObjectRemovedAction(selected[i]));
-			}
-		}
-
-		//Check if any action was added
-		if(actions.length > 0)
-		{
-			Editor.history.add(new ActionBundle(actions));
-		}
+	//Check if any action was added
+	if(actions.length > 0)
+	{
+		Editor.history.add(new ActionBundle(actions));
 	}
 };
 
 //Copy selected object
-Editor.copyObject = function(obj)
+Editor.copyObject = function(object)
 {
 	//If no object passed copy selected object
-	if(obj === undefined)
+	if(object === undefined)
 	{
 		if(Editor.hasObjectSelected())
 		{
-			obj = Editor.selection[0];
+			object = Editor.selection[0];
 		}
 		else
 		{
@@ -922,25 +906,25 @@ Editor.copyObject = function(obj)
 		}
 	}
 
-	if(obj instanceof Program || obj instanceof Scene)
+	if(object instanceof Program || object instanceof Scene)
 	{
 		return;
 	}
 
-	if(!obj.locked)
+	if(!object.locked)
 	{
-		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
+		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
 	}
 };
 
 //Cut selected object
-Editor.cutObject = function(obj)
+Editor.cutObject = function(object)
 {
-	if(obj === undefined)
+	if(object === undefined)
 	{
 		if(Editor.hasObjectSelected())
 		{
-			obj = Editor.selection[0];
+			object = Editor.selection[0];
 		}
 		else
 		{
@@ -949,15 +933,15 @@ Editor.cutObject = function(obj)
 	}
 
 	//Avoid cutting program or scene objects
-	if(obj instanceof Program || obj instanceof Scene)
+	if(object instanceof Program || object instanceof Scene)
 	{
 		return;
 	}
 
-	if(!obj.locked)
+	if(!object.locked)
 	{
-		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
-		Editor.history.add(new ObjectRemovedAction(obj));
+		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
+		Editor.history.add(new ObjectRemovedAction(object));
 	}
 };
 

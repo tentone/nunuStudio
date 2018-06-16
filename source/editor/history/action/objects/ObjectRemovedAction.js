@@ -38,10 +38,8 @@ ObjectRemovedAction.prototype.updateGUI = function()
 {
 	if(Editor.isObjectSelected(this.object))
 	{
-		Editor.resetEditor();
+		Editor.removeFromSelection(this.object);
 	}
-	else
-	{
-		Editor.gui.treeView.updateObjectsView();
-	}
+
+	Editor.gui.treeView.updateObjectsView();
 };
