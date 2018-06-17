@@ -235,9 +235,9 @@ TransformControls.prototype.updateScale = function()
 		this.position.add(this.worldPosition[i]);
 	}
 
-	if(this.worldPosition.length > 0)
+	if(this.objects.length > 0)
 	{
-		this.position.divideScalar(this.worldPosition.length);
+		this.position.divideScalar(this.objects.length);
 	}
 
 	this.camPosition.setFromMatrixPosition(this.camera.matrixWorld);
