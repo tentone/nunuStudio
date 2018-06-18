@@ -298,7 +298,7 @@ include("editor/gui/element/input/ColorGradientChooser.js");
 include("editor/gui/element/input/Slider.js");
 include("editor/gui/element/input/DropdownList.js");
 include("editor/gui/element/input/NumberBox.js");
-include("editor/gui/element/input/CoordinatesBox.js");
+include("editor/gui/element/input/VectorBox.js");
 include("editor/gui/element/input/ImageChooser.js");
 include("editor/gui/element/input/TextureChooser.js");
 include("editor/gui/element/input/TextureBox.js");

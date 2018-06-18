@@ -37,7 +37,7 @@ function ObjectPanel(parent, obj)
 
 	//Position
 	this.form.addText("Position");
-	this.position = new CoordinatesBox(this.form.element);
+	this.position = new VectorBox(this.form.element);
 	this.position.size.set(190, 18);
 	this.position.setStep(0.01);
 	this.position.setOnChange(function()
@@ -65,7 +65,7 @@ function ObjectPanel(parent, obj)
 	this.form.add(this.scaleRatioLock);
 	
 	//Scale
-	this.scale = new CoordinatesBox(this.form.element);
+	this.scale = new VectorBox(this.form.element);
 	this.scale.size.set(190, 18);
 	this.scale.setStep(0.01);
 	this.scale.setOnChange(function()
@@ -109,7 +109,7 @@ function ObjectPanel(parent, obj)
 
 	//Rotation
 	this.form.addText("Rotation");
-	this.rotation = new CoordinatesBox(this.form.element);
+	this.rotation = new VectorBox(this.form.element);
 	this.rotation.size.set(190, 18);
 	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()

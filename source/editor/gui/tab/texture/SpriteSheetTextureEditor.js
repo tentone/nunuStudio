@@ -8,8 +8,8 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 
 	//Sheet format
 	this.form.addText("Sheet format");
-	this.frames = new CoordinatesBox(this.form.element);
-	this.frames.setMode(CoordinatesBox.VECTOR2);
+	this.frames = new VectorBox(this.form.element);
+	this.frames.setMode(VectorBox.VECTOR2);
 	this.frames.size.set(120, 18);
 	this.frames.setValue(1, 1, 0);
 	this.frames.setStep(1.0);

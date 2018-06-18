@@ -147,8 +147,8 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Normal map scale
 	this.form.addText("Normal scale");
-	this.normalScale = new CoordinatesBox(this.form.element);
-	this.normalScale.setMode(CoordinatesBox.VECTOR2);
+	this.normalScale = new VectorBox(this.form.element);
+	this.normalScale.setMode(VectorBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
 	this.normalScale.setOnChange(function()
 	{

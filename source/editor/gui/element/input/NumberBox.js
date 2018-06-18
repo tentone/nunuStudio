@@ -12,6 +12,10 @@ function NumberBox(parent)
 	this.element.style.boxSizing = "border-box";
 	this.element.style.textIndent = "4px";
 	this.element.style.borderRadius = "4px";
+
+	this.element.style.MozAppearance = "textfield";
+	this.element.style.webkitAppearance = "caret";
+	this.element.style.appearance = "textfield";
 }
 
 NumberBox.prototype = Object.create(Element.prototype);

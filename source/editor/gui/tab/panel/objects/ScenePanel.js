@@ -172,7 +172,7 @@ function ScenePanel(parent, obj)
 
 	//Gravity
 	this.form.addText("Gravity");
-	this.gravity = new CoordinatesBox(this.form.element);
+	this.gravity = new VectorBox(this.form.element);
 	this.gravity.setOnChange(function()
 	{
 		var gravity = self.gravity.getValue();

@@ -40,8 +40,8 @@ function TextureBox(parent)
 
 	//Repeat
 	this.form.addText("Repeat");
-	this.repeat = new CoordinatesBox(this.element);
-	this.repeat.setMode(CoordinatesBox.VECTOR2);
+	this.repeat = new VectorBox(this.element);
+	this.repeat.setMode(VectorBox.VECTOR2);
 	this.repeat.size.set(120, 18);
 	this.repeat.setValue(1, 1, 0);
 	this.form.add(this.repeat);

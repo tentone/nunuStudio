@@ -11,6 +11,10 @@ function DropdownList(parent)
 	this.element.style.borderRadius = "4px";
 	this.element.style.outline = "none";
 	
+	this.element.style.MozAppearance = "textfield";
+	this.element.style.webkitAppearance = "caret";
+	this.element.style.appearance = "textfield";
+	
 	//Attributes
 	this.values = [];
 }
