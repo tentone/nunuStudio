@@ -23,10 +23,10 @@ function TabSelector(parent, tab)
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
-		this.style.borderLeft = "";
-		this.style.borderRight = "";
-		this.style.borderBottom = "";
-		this.style.borderTop = "";
+		this.style.borderLeft = null;
+		this.style.borderRight = null;
+		this.style.borderBottom = null;
+		this.style.borderTop = null;
 
 		//Move tab between containers
 		var uuid = event.dataTransfer.getData("uuid");
@@ -45,7 +45,7 @@ function TabSelector(parent, tab)
 				if(dragState !== 2)
 				{
 					dragState = 2;
-					this.style.borderLeft = "";
+					this.style.borderLeft = null;
 					this.style.borderRight = "thick solid #999999";
 				}
 			}
@@ -54,7 +54,7 @@ function TabSelector(parent, tab)
 				if(dragState !== 1)
 				{
 					dragState = 1;
-					this.style.borderRight = "";
+					this.style.borderRight = null;
 					this.style.borderLeft = "thick solid #999999";
 				}
 			}
@@ -63,8 +63,8 @@ function TabSelector(parent, tab)
 				if(dragState !== 0)
 				{
 					dragState = 0;
-					this.style.borderLeft = "";
-					this.style.borderRight = "";
+					this.style.borderLeft = null;
+					this.style.borderRight = null;
 				}
 			}
 		}
@@ -75,7 +75,7 @@ function TabSelector(parent, tab)
 				if(dragState !== 2)
 				{
 					dragState = 2;
-					this.style.borderTop = "";
+					this.style.borderTop = null;
 					this.style.borderBottom = "solid #999999";
 				}
 			}
@@ -84,7 +84,7 @@ function TabSelector(parent, tab)
 				if(dragState !== 1)
 				{
 					dragState = 1;
-					this.style.borderBottom = "";
+					this.style.borderBottom = null;
 					this.style.borderTop = "solid #999999";
 				}
 			}
@@ -93,8 +93,8 @@ function TabSelector(parent, tab)
 				if(dragState !== 0)
 				{
 					dragState = 0;
-					this.style.borderBottom = "";
-					this.style.borderTop = "";
+					this.style.borderBottom = null;
+					this.style.borderTop = null;
 				}
 			}
 		}
@@ -109,10 +109,10 @@ function TabSelector(parent, tab)
 		DragBuffer.popDragElement(uuid);
 
 		dragState = 0;
-		this.style.borderLeft = "";
-		this.style.borderRight = "";
-		this.style.borderBottom = "";
-		this.style.borderTop = "";
+		this.style.borderLeft = null;
+		this.style.borderRight = null;
+		this.style.borderBottom = null;
+		this.style.borderTop = null;
 	};
 
 	//Drag leave
@@ -121,10 +121,10 @@ function TabSelector(parent, tab)
 		event.preventDefault();
 		
 		dragState = 0;
-		this.style.borderLeft = "";
-		this.style.borderRight = "";
-		this.style.borderBottom = "";
-		this.style.borderTop = "";
+		this.style.borderLeft = null;
+		this.style.borderRight = null;
+		this.style.borderBottom = null;
+		this.style.borderTop = null;
 	};
 
 	//Mouse click

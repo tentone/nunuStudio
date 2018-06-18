@@ -25,7 +25,7 @@ function ButtonImage(parent)
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		this.style.backgroundColor = "";
+		this.style.backgroundColor = null;
 	};
 }
 

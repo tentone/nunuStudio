@@ -105,9 +105,9 @@ function TreeElement(container)
 	//Clear element border
 	function clearBorder()
 	{
-		self.element.style.border = "";
-		self.element.style.borderTop = "";
-		self.element.style.borderBottom = "";
+		self.element.style.border = null;
+		self.element.style.borderTop = null;
+		self.element.style.borderBottom = null;
 	};
 
 	//Drag start

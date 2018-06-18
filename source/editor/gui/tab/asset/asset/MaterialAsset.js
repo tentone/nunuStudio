@@ -34,7 +34,7 @@ function MaterialAsset(parent)
 	{
 		if(!Editor.isObjectSelected(self.asset))
 		{
-			this.style.backgroundColor = "";
+			this.style.backgroundColor = null;
 		}
 		self.restoreMaterial();
 	};
