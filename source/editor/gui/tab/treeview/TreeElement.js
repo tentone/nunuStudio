@@ -102,14 +102,6 @@ function TreeElement(container)
 	//Drag state
 	var state = 0;
 
-	//Clear element border
-	function clearBorder()
-	{
-		self.element.style.border = null;
-		self.element.style.borderTop = null;
-		self.element.style.borderBottom = null;
-	};
-
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
@@ -123,7 +115,7 @@ function TreeElement(container)
 	//Drag end
 	this.element.ondragend = function(event)
 	{
-		clearBorder();
+		self.clearBorder();
 		event.preventDefault();
 
 		if(!self.obj.locked)
@@ -138,7 +130,7 @@ function TreeElement(container)
 	this.element.ondragleave = function()
 	{
 		event.preventDefault();
-		clearBorder();
+		self.clearBorder();
 		state = 0;
 	};
 
@@ -358,7 +350,7 @@ function TreeElement(container)
 				if(state !== 1)
 				{
 					state = 1;
-					clearBorder();
+					self.clearBorder();
 					this.style.borderTop = "thin solid #999999";
 				}
 			}
@@ -368,7 +360,7 @@ function TreeElement(container)
 				if(state !== 2)
 				{
 					state = 2;
-					clearBorder();
+					self.clearBorder();
 					this.style.borderBottom = "thin solid #999999";
 				}
 			}
@@ -376,7 +368,7 @@ function TreeElement(container)
 			else if(state !== 3)
 			{
 				state = 3;
-				clearBorder();
+				self.clearBorder();
 				this.style.border = "thin solid #999999";
 			}
 		}
@@ -386,7 +378,7 @@ function TreeElement(container)
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
-		clearBorder();
+		self.clearBorder();
 
 		if(self.obj.locked)
 		{
@@ -545,6 +537,14 @@ TreeElement.ARROW_DOWN = "editor/files/icons/misc/arrow_down.png";
 TreeElement.ARROW_RIGHT = "editor/files/icons/misc/arrow_right.png";
 
 TreeElement.prototype = Object.create(Element.prototype);
+
+//Clear element border
+TreeElement.prototype.clearBorder = function()
+{
+	this.element.style.border = null;
+	this.element.style.borderTop = null;
+	this.element.style.borderBottom = null;
+};
 
 //Set object attached to element
 TreeElement.prototype.attach = function(obj)
