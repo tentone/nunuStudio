@@ -5,13 +5,15 @@ function ColorChooser(parent)
 	Element.call(this, parent, "input");
 
 	this.element.type = "text";
-	this.element.style.backgroundColor = Editor.theme.boxColor;
-	this.element.style.color = Editor.theme.textColor;
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.textIndent = "4px";
 	this.element.style.borderRadius = "4px";
-	
+	this.element.style.boxShadow = "none";
+	this.element.style.MozAppearance = "textfield";
+	this.element.style.webkitAppearance = "caret";
+	this.element.style.appearance = "textfield";
+
 	//Color chooser
 	this.color = new jscolor(this.element);
 	this.color.backgroundColor = Editor.theme.boxColor;
@@ -23,16 +25,6 @@ function ColorChooser(parent)
 
 	//Attributes
 	this.onChange = null;
-
-	//Click event
-	var self = this;
-	this.element.onchange = function()
-	{
-		if(self.onChange !== null)
-		{
-			self.onChange();
-		}
-	};
 }
 
 ColorChooser.prototype = Object.create(Element.prototype);

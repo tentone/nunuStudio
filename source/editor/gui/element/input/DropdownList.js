@@ -2,19 +2,36 @@
 
 function DropdownList(parent)
 {
-	Element.call(this, parent, "select");
+	Element.call(this, parent, "div");
 
-	this.element.style.backgroundColor = Editor.theme.boxColor;
-	this.element.style.color = Editor.theme.textColor;
-	this.element.style.borderStyle = "none";
-	this.element.style.boxSizing = "border-box";
-	this.element.style.borderRadius = "4px";
-	this.element.style.outline = "none";
-	
-	this.element.style.MozAppearance = "textfield";
-	this.element.style.webkitAppearance = "caret";
-	this.element.style.appearance = "textfield";
-	
+	//Select
+	this.select = document.createElement("select");
+	this.select.style.backgroundColor = Editor.theme.boxColor;
+	this.select.style.color = Editor.theme.textColor;
+	this.select.style.left = "0px";
+	this.select.style.top = "0px";
+	this.select.style.borderStyle = "none";
+	this.select.style.boxSizing = "border-box";
+	this.select.style.borderRadius = "4px";
+	this.select.style.outline = "none";
+	this.select.style.cursor = "pointer";
+	this.select.style.MozAppearance = "textfield";
+	this.select.style.webkitAppearance = "caret";
+	this.select.style.appearance = "textfield";
+	this.element.appendChild(this.select);
+
+	//Arrow
+	this.arrow = document.createElement("img");
+	this.arrow.style.display = "block";
+	this.arrow.style.position = "absolute";
+	this.arrow.style.pointerEvents = "none";
+	this.arrow.style.right = "6px";
+	this.arrow.style.top = "5px";
+	this.arrow.style.width = "10px";
+	this.arrow.style.height = "10px";
+	this.arrow.src = Editor.filePath + "icons/misc/arrow_down.png";
+	this.element.appendChild(this.arrow);
+
 	//Attributes
 	this.values = [];
 }
@@ -24,13 +41,13 @@ DropdownList.prototype = Object.create(Element.prototype);
 //Set if element if disabled
 DropdownList.prototype.setDisabled = function(value)
 {
-	this.element.disabled = value;
+	this.select.disabled = value;
 }
 
 //Set onchange onChange
 DropdownList.prototype.setOnChange = function(onChange)
 {
-	this.element.onchange = onChange;
+	this.select.onchange = onChange;
 }
 
 //Add element
@@ -39,16 +56,16 @@ DropdownList.prototype.addValue = function(text, value)
 	var option = document.createElement("option");
 	option.appendChild(document.createTextNode(text));
 	this.values.push(value);
-	this.element.appendChild(option);
+	this.select.appendChild(option);
 }
 
 //Remove all element from dropdown
 DropdownList.prototype.clearValues = function()
 {
 	this.values = [];
-	for(var i = 0; i < this.element.children.length; i++)
+	for(var i = 0; i < this.select.children.length; i++)
 	{
-		this.element.removeChild(this.element.children[i]);
+		this.select.removeChild(this.select.children[i]);
 	}
 };
 
@@ -56,9 +73,9 @@ DropdownList.prototype.clearValues = function()
 //Get DropdownList value
 DropdownList.prototype.getValue = function()
 {
-	if(this.element.selectedIndex > -1)
+	if(this.select.selectedIndex > -1)
 	{
-		return this.values[this.element.selectedIndex];
+		return this.values[this.select.selectedIndex];
 	}
 	return null;
 }
@@ -105,6 +122,9 @@ DropdownList.prototype.updateInterface = function()
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
+
+		this.select.style.width = this.size.x + "px";
+		this.select.style.height = this.size.y + "px";
 	}
 	else
 	{

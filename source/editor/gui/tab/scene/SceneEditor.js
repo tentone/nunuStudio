@@ -85,9 +85,9 @@ function SceneEditor(parent, closeable, container, index)
 	this.fullscreenButton.setAltText("Toggle fullscreen");
 	this.fullscreenButton.setImageScale(0.8, 0.8);
 	this.fullscreenButton.updateSize();
-	this.fullscreenButton.setBackgroundColor("#333333");
 	this.fullscreenButton.updatePosition(Element.BOTTOM_RIGHT);
 	this.fullscreenButton.visible = false;
+	this.fullscreenButton.element.style.backgroundColor = "#333333";
 	this.fullscreenButton.element.style.borderRadius = "5px";
 	this.fullscreenButton.element.style.opacity = 0.5;
 	this.fullscreenButton.element.onmouseenter = function()
@@ -114,9 +114,9 @@ function SceneEditor(parent, closeable, container, index)
 	this.vrButton.setAltText("Toggle VR mode");
 	this.vrButton.setImageScale(0.8, 0.8);
 	this.vrButton.updateSize();
-	this.vrButton.setBackgroundColor("#333333");
 	this.vrButton.updatePosition(Element.BOTTOM_RIGHT);
 	this.vrButton.visible = false;
+	this.vrButton.element.style.backgroundColor = "#333333";
 	this.vrButton.element.style.borderRadius = "5px";
 	this.vrButton.element.style.opacity = 0.5;
 	this.vrButton.element.onmouseenter = function()
@@ -189,8 +189,8 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton.setAltText("Change camera mode");
 	this.cameraButton.setImageScale(0.8, 0.8);
 	this.cameraButton.updateSize();
-	this.cameraButton.setBackgroundColor("#333333");
 	this.cameraButton.updatePosition(Element.BOTTOM_RIGHT);
+	this.cameraButton.element.style.backgroundColor = "#333333";
 	this.cameraButton.element.style.borderRadius = "5px";
 	this.cameraButton.element.style.opacity = 0.5;
 	this.cameraButton.element.onmouseenter = function()
