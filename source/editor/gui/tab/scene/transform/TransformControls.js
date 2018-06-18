@@ -5,7 +5,11 @@
  *
  * Can be used to manipulate multiple Object3D instances simultaneously.
  *
- * Adapted from original code by arodic (github.com/arodic).
+ * @class TransformControls
+ * @author arodic (github.com/arodic)
+ * @param {THREE.Camera} camera
+ * @param {Canvas} canvas
+ * @param {Mouse} mouse
  */
 function TransformControls(camera, canvas, mouse)
 {
