@@ -1,8 +1,6 @@
 "use strict";
 
-/**
- * Object added action.
- */
+//Object added to another object action.
 function ObjectAddedAction(object, parent)
 {
 	Action.call(this);

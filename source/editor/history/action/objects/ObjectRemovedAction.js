@@ -1,8 +1,6 @@
 "use strict";
 
-/**
- * Object removed action.
- */
+//Object removed.
 function ObjectRemovedAction(object, parent)
 {
 	Action.call(this);
