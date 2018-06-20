@@ -110,7 +110,7 @@ function TextureEditor(parent, closeable, container, index)
 	//Repeat
 	this.form.addText("Repeat");
 	this.repeat = new VectorBox(this.form.element);
-	this.repeat.setMode(VectorBox.VECTOR2);
+	this.repeat.setType(VectorBox.VECTOR2);
 	this.repeat.size.set(120, 18);
 	this.repeat.setStep(0.01);
 	this.repeat.setOnChange(function()
@@ -125,7 +125,7 @@ function TextureEditor(parent, closeable, container, index)
 	//Offset
 	this.form.addText("Offset");
 	this.offset = new VectorBox(this.form.element);
-	this.offset.setMode(VectorBox.VECTOR2);
+	this.offset.setType(VectorBox.VECTOR2);
 	this.offset.size.set(120, 18);
 	this.offset.setStep(0.01);
 	this.offset.setOnChange(function()
@@ -140,7 +140,7 @@ function TextureEditor(parent, closeable, container, index)
 	//Center
 	this.form.addText("Center");
 	this.center = new VectorBox(this.form.element);
-	this.center.setMode(VectorBox.VECTOR2);
+	this.center.setType(VectorBox.VECTOR2);
 	this.center.size.set(120, 18);
 	this.center.setStep(0.01);
 	this.center.setOnChange(function()

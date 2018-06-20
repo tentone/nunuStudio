@@ -28,7 +28,7 @@ function DotScreenPassNode(parent)
 
 	this.addText("Center");
 	this.center = new VectorBox(this.element);
-	this.center.setMode(VectorBox.VECTOR2);
+	this.center.setType(VectorBox.VECTOR2);
 	this.center.size.set(120, 18);
 	this.center.setStep(0.01);
 	this.center.setOnChange(function()

@@ -81,7 +81,7 @@ function VectorBox(parent)
 
 	//Order
 	this.order = "XYZ";
-	this.mode = VectorBox.VECTOR3;
+	this.type = VectorBox.VECTOR3;
 
 	//Attributes
 	this.size.set(190, 18);
@@ -95,11 +95,11 @@ VectorBox.QUATERNION = 4;
 VectorBox.prototype = Object.create(Element.prototype);
 
 //Set position box mode
-VectorBox.prototype.setMode = function(mode)
+VectorBox.prototype.setType = function(type)
 {
-	if(this.mode !== mode)
+	if(this.type !== type)
 	{
-		this.mode = mode;
+		this.type = type;
 		this.updateInterface();
 	}
 };
@@ -142,14 +142,14 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 	{
 		this.x.value = x.x;
 		this.y.value = x.y;
-		this.setMode(VectorBox.VECTOR2);
+		this.setType(VectorBox.VECTOR2);
 	}
 	else if(x instanceof THREE.Vector3)
 	{
 		this.x.value = x.x;
 		this.y.value = x.y;
 		this.z.value = x.z;
-		this.setMode(VectorBox.VECTOR3);
+		this.setType(VectorBox.VECTOR3);
 	}
 	else if(x instanceof THREE.Euler)
 	{
@@ -157,7 +157,7 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 		this.y.value = x.y;
 		this.z.value = x.z;
 		this.order = x.order;
-		this.setMode(VectorBox.VECTOR3);
+		this.setType(VectorBox.VECTOR3);
 	}
 	else if(x instanceof THREE.Quaternion)
 	{
@@ -165,7 +165,7 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 		this.y.value = x.y;
 		this.z.value = x.z;
 		this.w.value = x.w;
-		this.setMode(VectorBox.QUATERNION);
+		this.setType(VectorBox.QUATERNION);
 	}
 	else
 	{
@@ -192,7 +192,7 @@ VectorBox.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "visible";
 
-		var sizeX = Math.round((this.size.x - this.mode * 15) / this.mode);
+		var sizeX = Math.round((this.size.x - this.type * 15) / this.type);
 		var sizeY = this.size.y + "px";
 
 		this.xText.style.height = sizeY;
@@ -205,7 +205,7 @@ VectorBox.prototype.updateInterface = function()
 		this.y.style.left = (30 + sizeX) + "px";
 		this.y.style.width = sizeX + "px";
 
-		if(this.mode >= VectorBox.VECTOR3)
+		if(this.type >= VectorBox.VECTOR3)
 		{
 			this.zText.style.left = (30 + (2 * sizeX)) + "px";
 			this.zText.style.height = sizeY;
@@ -213,7 +213,7 @@ VectorBox.prototype.updateInterface = function()
 			this.z.style.left = (45 + (2 * sizeX)) + "px";
 			this.z.style.width = sizeX + "px";
 
-			if(this.mode === VectorBox.QUATERNION)
+			if(this.type === VectorBox.QUATERNION)
 			{
 				this.wText.style.left = (45 + (3 * sizeX)) + "px";
 				this.wText.style.height = sizeY;

@@ -93,7 +93,7 @@ function OrthographicCameraPanel(parent, obj)
 	//Offset
 	this.form.addText("Position");
 	this.offset = new VectorBox(this.form.element);
-	this.offset.setMode(VectorBox.VECTOR2);
+	this.offset.setType(VectorBox.VECTOR2);
 	this.offset.setStep(0.05);
 	this.offset.size.set(160, 20);
 	this.offset.setOnChange(function()
@@ -111,7 +111,7 @@ function OrthographicCameraPanel(parent, obj)
 	//Size
 	this.form.addText("Size");
 	this.viewport = new VectorBox(this.form.element);
-	this.viewport.setMode(VectorBox.VECTOR2);
+	this.viewport.setType(VectorBox.VECTOR2);
 	this.viewport.setStep(0.05);
 	this.viewport.size.set(160, 20);
 	this.viewport.setOnChange(function()

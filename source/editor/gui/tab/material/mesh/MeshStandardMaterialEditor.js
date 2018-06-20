@@ -177,7 +177,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Normal map scale
 	this.form.addText("Normal Scale");
 	this.normalScale = new VectorBox(this.form.element);
-	this.normalScale.setMode(VectorBox.VECTOR2);
+	this.normalScale.setType(VectorBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
 	this.normalScale.setOnChange(function()
 	{
