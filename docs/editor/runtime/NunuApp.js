@@ -35,14 +35,15 @@ include("lib/three/objects/Refractor.js");
 
 include("lib/three/loaders/TTFLoader.js");
 
+include("lib/pson/bytebuffer.min.js");
+include("lib/pson/long.min.js");
+include("lib/pson/PSON.min.js");
+
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");
-include("lib/bytebuffer.min.js");
-include("lib/long.min.js");
-include("lib/PSON.min.js");
 
 include("core/Nunu.js");
 include("core/Global.js");
