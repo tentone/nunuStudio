@@ -88,7 +88,7 @@ DropdownList.prototype.setValue = function(value)
 	{
 		if(this.values[i] === value)
 		{
-			this.element.selectedIndex = i;
+			this.select.selectedIndex = i;
 			break;
 		}
 	}
@@ -96,38 +96,31 @@ DropdownList.prototype.setValue = function(value)
 	//If value not found set selectedIndex to -1
 	if(i === this.values.length)
 	{
-		this.element.selectedIndex = -1;
+		this.select.selectedIndex = -1;
 	}
 }
 
 //Get dropdownlist selected index
 DropdownList.prototype.getSelectedIndex = function()
 {
-	return this.element.selectedIndex;
+	return this.select.selectedIndex;
 }
 
 //Set dropdownlist selected index
 DropdownList.prototype.setSelectedIndex = function(index)
 {
-	this.element.selectedIndex = index;
+	this.select.selectedIndex = index;
 }
 
-//Update Interface
-DropdownList.prototype.updateInterface = function()
+DropdownList.prototype.updateVisibility = function()
 {
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
+};
 
-		this.select.style.width = this.size.x + "px";
-		this.select.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
-}
+DropdownList.prototype.updateSize = function()
+{
+	Element.prototype.updateSize.call(this);
+
+	this.select.style.width = this.size.x + "px";
+	this.select.style.height = this.size.y + "px";
+};
