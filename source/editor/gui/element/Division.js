@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * DOM division element.
+ * 
+ * @class Division
+ * @extends {Element}
+ * @param {DOM} parent Parent element.
+ */
 function Division(parent)
 {
 	Element.call(this, parent);
