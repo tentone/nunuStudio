@@ -709,6 +709,21 @@ SceneEditor.prototype.resetCanvas = function()
 		//Check intersected objects
 		var intersections = self.raycaster.intersectObjects(self.scene.children, true);
 
+		//Auxiliar method to copy details from a object to a destination
+		function copyDetails(destination, object)
+		{
+			destination.name = object.name;
+			destination.visible = object.visible;
+			destination.castShadow = object.castShadow;
+			destination.receiveShadow = object.receiveShadow;
+			destination.frustumCulled = object.frustumCulled;
+			destination.renderOrder = object.renderOrder;
+			destination.matrixAutoUpdate = object.matrixAutoUpdate;
+			destination.position.copy(object.position);
+			destination.scale.copy(object.scale);
+			destination.quaternion.copy(object.quaternion);
+		}
+
 		//Auxiliar method to attach textures to objects
 		function attachTexture(texture, object)
 		{
@@ -787,22 +802,71 @@ SceneEditor.prototype.resetCanvas = function()
 			{
 				var object = intersections[0].object;
 
-				//Sprite Material
-				if(draggedObject instanceof THREE.SpriteMaterial)
+				//Material
+				if(draggedObject instanceof THREE.Material)
 				{
-					if(object instanceof THREE.Sprite)
+					//Sprite material
+					if(draggedObject instanceof THREE.SpriteMaterial)
 					{
-						Editor.history.add(new ChangeAction(object, "material", draggedObject));
-						Editor.updateObjectsViewsGUI();
+						if(object instanceof THREE.Sprite)
+						{
+							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.updateObjectsViewsGUI();
+						}
 					}
-				}
-				//Mesh Material
-				else if(draggedObject instanceof THREE.Material)
-				{
-					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
+					//Points material
+					else if(draggedObject instanceof THREE.PointsMaterial)
 					{
-						Editor.history.add(new ChangeAction(object, "material", draggedObject));
-						Editor.updateObjectsViewsGUI();
+						if(object instanceof THREE.Points)
+						{
+							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.updateObjectsViewsGUI();
+						}
+						else if(object.geometry !== undefined)
+						{
+							var newObject = new THREE.Points(object.geometry, draggedObject);
+							copyDetails(newObject, object);
+							Editor.history.add(new ObjectSwapAction(object, newObject, true));
+						}
+					}
+					//Line material
+					else if(draggedObject instanceof THREE.LineBasicMaterial)
+					{
+						if(object instanceof THREE.Line)
+						{
+							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.updateObjectsViewsGUI();
+						}
+						else if(object.geometry !== undefined)
+						{
+							var newObject = new THREE.Line(object.geometry, draggedObject);
+							copyDetails(newObject, object);
+							Editor.history.add(new ObjectSwapAction(object, newObject, true));
+						}
+					}
+					//Shader material
+					else if(draggedObject instanceof THREE.ShaderMaterial)
+					{
+						if(object.material !== undefined)
+						{
+							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.updateObjectsViewsGUI();
+						}
+					}
+					//Mesh material
+					else
+					{
+						if(object instanceof THREE.Mesh)
+						{
+							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.updateObjectsViewsGUI();
+						}
+						else if(object.geometry !== undefined)
+						{
+							var newObject = new THREE.Mesh(object.geometry, draggedObject);
+							copyDetails(newObject, object);
+							Editor.history.add(new ObjectSwapAction(object, newObject, true));
+						}
 					}
 				}
 				//Cubemap
@@ -842,7 +906,7 @@ SceneEditor.prototype.resetCanvas = function()
 				//Geometry
 				else if(draggedObject instanceof THREE.Geometry || draggedObject instanceof THREE.BufferGeometry)
 				{
-					if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
+					if(object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line)
 					{
 						Editor.history.add(new ChangeAction(object, "geometry", draggedObject));
 						Editor.updateObjectsViewsGUI();

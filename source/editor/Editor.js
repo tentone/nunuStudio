@@ -475,6 +475,7 @@ include("editor/history/action/objects/ObjectAddedAction.js");
 include("editor/history/action/objects/ObjectRemovedAction.js");
 include("editor/history/action/objects/ObjectMovedAction.js");
 include("editor/history/action/objects/ObjectChangedAction.js");
+include("editor/history/action/objects/ObjectSwapAction.js");
 
 include("editor/Settings.js");
 
