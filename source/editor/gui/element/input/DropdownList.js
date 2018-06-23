@@ -26,7 +26,6 @@ function DropdownList(parent)
 	this.arrow.style.position = "absolute";
 	this.arrow.style.pointerEvents = "none";
 	this.arrow.style.right = "6px";
-	this.arrow.style.top = "5px";
 	this.arrow.style.width = "10px";
 	this.arrow.style.height = "10px";
 	this.arrow.src = Editor.filePath + "icons/misc/arrow_down.png";
@@ -123,4 +122,6 @@ DropdownList.prototype.updateSize = function()
 
 	this.select.style.width = this.size.x + "px";
 	this.select.style.height = this.size.y + "px";
+
+	this.arrow.style.top = ((this.size.y - 10) / 2) + "px";
 };

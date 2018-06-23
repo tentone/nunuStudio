@@ -157,22 +157,19 @@ RendererCanvas.prototype.destroy = function()
 	this.forceContextLoss();
 };
 
-RendererCanvas.prototype.updateInterface = function()
+RendererCanvas.prototype.updateSize = function()
 {
-	Element.prototype.updateInterface.call(this);
+	Element.prototype.updateSize.call(this);
 
-	if(this.visible)
+	var width = this.size.x * window.devicePixelRatio;
+	var height = this.size.y * window.devicePixelRatio;
+	
+	this.canvas.width = width;
+	this.canvas.height = height;
+	this.renderer.setSize(this.size.x, this.size.y, false);
+
+	if(this.onResize !== null)
 	{
-		var width = this.size.x * window.devicePixelRatio;
-		var height = this.size.y * window.devicePixelRatio;
-		
-		this.canvas.width = width;
-		this.canvas.height = height;
-		this.renderer.setSize(this.size.x, this.size.y, false);
-
-		if(this.onResize !== null)
-		{
-			this.onResize(width, height);
-		}
+		this.onResize(width, height);
 	}
 };

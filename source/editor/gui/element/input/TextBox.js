@@ -75,19 +75,7 @@ TextBox.prototype.getText = function()
 	return this.element.value;
 };
 
-//Update Interface
-TextBox.prototype.updateInterface = function()
+TextBox.prototype.updateVisibility = function()
 {
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
 };

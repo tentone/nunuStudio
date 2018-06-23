@@ -143,23 +143,6 @@ Slider.prototype.destroy = function()
 	}
 };
 
-//Update division Size
-Slider.prototype.updateInterface = function()
-{
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
-};
-
 //Set if element if disabled
 Slider.prototype.setDisabled = function(value)
 {
@@ -232,4 +215,9 @@ Slider.prototype.setValue = function(value)
 Slider.prototype.getValue = function()
 {
 	return this.value;
+};
+
+Slider.prototype.updateVisibility = function()
+{
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
 };

@@ -9,8 +9,6 @@ function VideoPlayer(parent)
 	this.video.playbackRate = 1.0;
 	this.video.loop = true;
 	this.video.volume = 0.0;
-	this.video.style.width = "100%";
-	this.video.style.height = "100%";
 	this.element.appendChild(this.video);
 }
 
@@ -44,4 +42,12 @@ VideoPlayer.prototype.setAutoPlay = function(value)
 VideoPlayer.prototype.setPlaybackRate = function(playbackRate)
 {
 	this.video.playbackRate = playbackRate;
+};
+
+VideoPlayer.prototype.updateSize = function()
+{
+	Element.prototype.updateSize.call(this);
+
+	this.video.style.width = this.size.x + "px";
+	this.video.style.height = this.size.y + "px";
 };

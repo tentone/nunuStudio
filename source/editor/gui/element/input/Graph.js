@@ -6,7 +6,6 @@ function Graph(parent, name, color)
 
 	var self = this;
 
-	this.element.style.cursor = "default";
 	this.element.style.overflow = "visible";
 
 	//Grid
@@ -324,44 +323,32 @@ Graph.prototype.updateGrid = function()
 };
 
 //Update Graph Size
-Graph.prototype.updateInterface = function()
+Graph.prototype.updateSize = function()
 {
-	if(this.visible)
+	Element.prototype.updateSize.call(this);
+
+	//Grid
+	this.grid.width = this.size.x;
+	this.grid.height = this.size.y;
+	this.grid.style.width = this.size.x + "px";
+	this.grid.style.height = this.size.y + "px";
+	this.updateGrid();
+
+	//Graph
+	for(var i = 0; i < this.graph.length; i++)
 	{
-		//Grid
-		this.grid.width = this.size.x;
-		this.grid.height = this.size.y;
-		this.grid.style.width = this.size.x + "px";
-		this.grid.style.height = this.size.y + "px";
-		this.updateGrid();
-
-		//Graph
-		for(var i = 0; i < this.graph.length; i++)
-		{
-			var graph = this.graph[i];
-			graph.canvas.width = this.size.x;
-			graph.canvas.height = this.size.y;
-			graph.canvas.style.width = this.size.x + "px";
-			graph.canvas.style.height = this.size.y + "px";
-			this.updateGraph(graph);
-		}
-
-		//Scale
-		var step = (this.size.y - 14) / (this.scale.length - 1);
-		for(var i = 0; i < this.scale.length; i++)
-		{
-			this.scale[i].style.top = (i * step) + "px";
-		}
-
-		//Element
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+		var graph = this.graph[i];
+		graph.canvas.width = this.size.x;
+		graph.canvas.height = this.size.y;
+		graph.canvas.style.width = this.size.x + "px";
+		graph.canvas.style.height = this.size.y + "px";
+		this.updateGraph(graph);
 	}
-	else
+
+	//Scale
+	var step = (this.size.y - 14) / (this.scale.length - 1);
+	for(var i = 0; i < this.scale.length; i++)
 	{
-		this.element.style.visibility = "hidden";
+		this.scale[i].style.top = (i * step) + "px";
 	}
 };

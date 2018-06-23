@@ -86,25 +86,18 @@ Text.prototype.setAlignment = function(align)
 	}
 };
 
-//Update Interface
-Text.prototype.updateInterface = function()
+Text.prototype.updateVisibility = function()
 {
-	if(this.visible)
-	{
-		if(this.fitContent)
-		{
-			this.size.x = this.span.clientWidth;
-			this.size.y = this.span.clientHeight;
-		}
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
+}
 
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
+Text.prototype.updateSize = function()
+{
+	if(this.fitContent)
 	{
-		this.element.style.visibility = "hidden";
+		this.size.x = this.span.clientWidth;
+		this.size.y = this.span.clientHeight;
 	}
+	
+	Element.prototype.updateSize.call(this);
 };

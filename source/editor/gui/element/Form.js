@@ -93,7 +93,8 @@ Form.prototype.removeAll = function()
 //Update interface
 Form.prototype.updateInterface = function()
 {
-	//Visiblity
+	Element.prototype.updateInterface.call(this);
+
 	if(this.visible)
 	{
 		//Position tracker and size
@@ -143,16 +144,5 @@ Form.prototype.updateInterface = function()
 
 		//Set size y
 		size.y = y;
-
-		//Element
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.height = this.size.y + "px";
-		this.element.style.width = this.size.x + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
 	}
 };

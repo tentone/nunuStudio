@@ -126,29 +126,13 @@ TextureBox.prototype.loadTexture = function(file)
 };
 
 //Update Interface
-TextureBox.prototype.updateInterface = function()
+TextureBox.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		//Preview
-		this.preview.style.width = this.size.y + "px";
-		this.preview.style.height = this.size.y + "px";
+	TextureChooser.prototype.updateSize.call(this);
 
-		//Form
-		this.form.position.set(this.size.y + 5, 0);
-		this.form.size.set(this.size.x - this.form.position.x, this.size.y)
-		this.form.visible = this.visible;
-		this.form.updateInterface();
-
-		//Element
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	//Form
+	this.form.position.set(this.size.y + 5, 0);
+	this.form.size.set(this.size.x - this.form.position.x, this.size.y)
+	this.form.visible = this.visible;
+	this.form.updateInterface();
 };

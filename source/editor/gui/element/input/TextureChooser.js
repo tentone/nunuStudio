@@ -214,24 +214,15 @@ TextureChooser.prototype.updatePreview = function()
 	}
 };
 
-//Update Interface
-TextureChooser.prototype.updateInterface = function()
+TextureChooser.prototype.updateVisibility = function()
 {
-	if(this.visible)
-	{
-		//Element
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	
-		//Preview
-		this.preview.style.width = this.size.x + "px";
-		this.preview.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
+};
+
+TextureChooser.prototype.updateSize = function()
+{
+	this.preview.style.width = this.size.y + "px";
+	this.preview.style.height = this.size.y + "px";
+
+	Element.prototype.updateSize.call(this);
 };

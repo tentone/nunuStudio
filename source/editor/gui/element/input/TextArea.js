@@ -74,19 +74,7 @@ TextArea.prototype.getText = function()
 	return this.element.value;
 };
 
-//Update Interface
-TextArea.prototype.updateInterface = function()
+TextArea.prototype.updateVisibility = function()
 {
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = (this.size.y - 5) + "px";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
 };

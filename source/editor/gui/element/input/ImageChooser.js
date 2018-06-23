@@ -121,32 +121,25 @@ ImageChooser.prototype.getValue = function()
 	return this.value;
 };
 
-//Update Interface
-ImageChooser.prototype.updateInterface = function()
+ImageChooser.prototype.updateVisibility = function()
 {
-	if(this.visible)
-	{
-		//Keep aspect ratio
-		if(this.keepAspectRatio)
-		{
-			if(this.size.x < this.size.y)
-			{
-				this.size.y = this.size.x * this.img.naturalHeight / this.img.naturalWidth;
-			}
-			else
-			{
-				this.size.x = this.size.y * this.img.naturalWidth / this.img.naturalHeight;
-			}
-		}
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
+};
 
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
+ImageChooser.prototype.updateSize = function()
+{
+	//Keep aspect ratio
+	if(this.keepAspectRatio)
 	{
-		this.element.style.visibility = "hidden";
+		if(this.size.x < this.size.y)
+		{
+			this.size.y = this.size.x * this.img.naturalHeight / this.img.naturalWidth;
+		}
+		else
+		{
+			this.size.x = this.size.y * this.img.naturalWidth / this.img.naturalHeight;
+		}
 	}
+
+	Element.prototype.updateSize.call(this);
 };
