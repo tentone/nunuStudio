@@ -11,12 +11,6 @@ body
 	-webkit-scrollbar;
 }
 
-/*Root class to declare properties*/
-:root
-{
-	--color: #333333;
-}
-
 /*Only used by webkit browsers*/
 ::-webkit-scrollbar
 {
