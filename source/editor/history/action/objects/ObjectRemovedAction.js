@@ -6,7 +6,9 @@ function ObjectRemovedAction(object, parent)
 	Action.call(this);
 	
 	this.object = object;
+
 	this.parent = (parent !== undefined) ? parent : object.parent;
+	this.index = -1;
 }
 
 ObjectRemovedAction.prototype.apply = function()
@@ -20,6 +22,7 @@ ObjectRemovedAction.prototype.apply = function()
 		}
 	}
 	
+	this.index = this.parent.children.indexOf(this.object);
 	this.parent.remove(this.object);
 
 	this.updateGUI();
@@ -27,7 +30,15 @@ ObjectRemovedAction.prototype.apply = function()
 
 ObjectRemovedAction.prototype.revert = function()
 {
-	this.parent.add(this.object);
+	if(this.index === -1)
+	{
+		this.parent.add(this.object);
+	}
+	else
+	{
+		this.parent.children.splice(this.index, 0, this.object);
+		this.object.parent = this.parent;
+	}
 
 	this.updateGUI();
 };
