@@ -318,34 +318,21 @@ AudioPlayer.prototype.destroy = function()
 	}
 };
 
-//Update division Size
-AudioPlayer.prototype.updateInterface = function()
+AudioPlayer.prototype.updateSize = function()
 {
-	//Visibility
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+	Element.prototype.updateSize.call(this);
 
-		//Button
-		this.button.style.width = this.element.style.height;
-		this.button.style.height = this.element.style.height;
+	//Button
+	this.button.style.width = this.element.style.height;
+	this.button.style.height = this.element.style.height;
 
-		//Track
-		this.track.style.top = (this.size.y * 0.25) + "px";
-		this.track.style.left = (this.size.y * 1.05) + "px";
-		this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
-		this.track.style.height = (this.size.y * 0.5) + "px";
+	//Track
+	this.track.style.top = (this.size.y * 0.25) + "px";
+	this.track.style.left = (this.size.y * 1.05) + "px";
+	this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
+	this.track.style.height = (this.size.y * 0.5) + "px";
 
-		//Scrubber
-		this.scrubber.style.height = (this.size.y * 0.8) + "px";
-		this.scrubber.style.top = (-this.size.y * 0.15) + "px";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	//Scrubber
+	this.scrubber.style.height = (this.size.y * 0.8) + "px";
+	this.scrubber.style.top = (-this.size.y * 0.15) + "px";
 };
