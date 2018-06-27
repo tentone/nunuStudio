@@ -91,58 +91,51 @@ Form.prototype.removeAll = function()
 };
 
 //Update interface
-Form.prototype.updateInterface = function()
+Form.prototype.updateSize = function()
 {
-	Element.prototype.updateInterface.call(this);
+	Element.prototype.updateSize.call(this);
 
-	if(this.visible)
+	//Position tracker and size
+	var x = 0, y = 0;
+	var size = this.size.set(0, 0);
+
+	//Updated attached elements
+	for(var i = 0; i < this.rows.length; i++)
 	{
-		//Position tracker and size
-		var x = 0, y = 0;
-		var size = this.size.set(0, 0);
-
-		//Updated attached elements
-		for(var i = 0; i < this.rows.length; i++)
+		var maxSizeY = 0;
+		for(var j = 0; j < this.rows[i].length; j++)
 		{
-			var maxSizeY = 0;
-			for(var j = 0; j < this.rows[i].length; j++)
+			var element = this.rows[i][j];
+			
+			if(element.visible)
 			{
-				var element = this.rows[i][j];
-				
-				if(element.visible)
+				//Update element
+				element.position.set(x, y);
+				element.updateInterface();
+
+				//Update position tracker
+				if(element.size.y > maxSizeY)
 				{
-					//Update element
-					element.position.set(x, y);
-					element.visible = this.visible;
-					element.updateInterface();
-					
-					//Restore visibility
-					element.visible = true;
-
-					//Update position tracker
-					if(element.size.y > maxSizeY)
-					{
-						maxSizeY = element.size.y;
-					}
-					x += element.size.x + this.spacing.x;
+					maxSizeY = element.size.y;
 				}
-			}
-
-			//Update form size x
-			if(size.x < x)
-			{
-				size.x = x;
-			}
-
-			//Update position tracker
-			if(x !== 0)
-			{
-				x = 0;
-				y += maxSizeY + this.spacing.y;
+				x += element.size.x + this.spacing.x;
 			}
 		}
 
-		//Set size y
-		size.y = y;
+		//Update form size x
+		if(size.x < x)
+		{
+			size.x = x;
+		}
+
+		//Update position tracker
+		if(x !== 0)
+		{
+			x = 0;
+			y += maxSizeY + this.spacing.y;
+		}
 	}
+
+	//Set size y
+	size.y = y;
 };
