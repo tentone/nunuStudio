@@ -140,6 +140,7 @@ Text3D.prototype.updateGeometry = function()
 			bevelSize: this.bevelSize,
 			bevelThickness: this.bevelThickness
 		});
+		this.geometry.computeVertexNormals();
 	}
 };
 
