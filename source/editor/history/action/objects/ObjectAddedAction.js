@@ -20,8 +20,8 @@ ObjectAddedAction.prototype.apply = function()
 	}
 	else
 	{
-		this.index = this.parent.children.indexOf(this.object);
 		this.parent.add(this.object);
+		this.index = this.parent.children.indexOf(this.object);
 	}
 
 	this.updateGUI();
