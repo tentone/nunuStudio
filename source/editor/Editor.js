@@ -474,7 +474,6 @@ include("editor/history/action/CallbackAction.js");
 include("editor/history/action/objects/ObjectAddedAction.js");
 include("editor/history/action/objects/ObjectRemovedAction.js");
 include("editor/history/action/objects/ObjectMovedAction.js");
-include("editor/history/action/objects/ObjectChangedAction.js");
 include("editor/history/action/objects/ObjectSwapAction.js");
 
 include("editor/Settings.js");
@@ -855,7 +854,7 @@ Editor.renameObject = function(object)
 		var name = prompt("Rename object", object.name);
 		if(name !== null && name !== "")
 		{
-			Editor.history.add(new ObjectChangedAction(object, "name", name));
+			Editor.history.add(new ChangeAction(object, "name", name));
 		}
 	}
 };
