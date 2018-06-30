@@ -46,6 +46,7 @@ ObjectMovedAction.prototype.revert = function()
 
 ObjectMovedAction.prototype.updateGUI = function()
 {
+	//Editor.gui.treeView.moveObject(this.object, this.newParent, this.index);
 	Editor.gui.treeView.updateObjectsView();
 };
 

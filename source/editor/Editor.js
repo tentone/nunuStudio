@@ -1049,12 +1049,12 @@ Editor.updateSettings = function()
 //Update all object views
 Editor.updateObjectsViewsGUI = function()
 {
-	Editor.gui.treeView.updateObjectsView();
-
+	//Editor.gui.treeView.updateObjectsView();
+	//
+	//
 	Editor.gui.bottomTab.updateObjectsView();
-	Editor.gui.bottomTab.updateMetadata();
-
 	Editor.gui.tab.updateObjectsView();
+	Editor.gui.bottomTab.updateMetadata();
 	Editor.gui.tab.updateMetadata();
 };
 
@@ -1099,6 +1099,8 @@ Editor.resetEditor = function()
 	Editor.selectTool(Editor.SELECT);
 	Editor.updateSelectionGUI();
 	Editor.updateObjectsViewsGUI();
+
+	Editor.gui.treeView.updateObjectsView();
 };
 
 //Craete new Program
@@ -1422,7 +1424,6 @@ Editor.loadFont = function(file, onLoad)
 		Editor.program.addFont(font);
 		Editor.updateObjectsViewsGUI();
 	};
-
 
 	if(extension === "json")
 	{
