@@ -35,7 +35,7 @@ ObjectMovedAction.prototype.apply = function()
 
 ObjectMovedAction.prototype.revert = function()
 {
-	this.newParent.remove( this.object );
+	this.newParent.remove(this.object);
 
 	var children = this.oldParent.children;
 	children.splice(this.oldIndex, 0, this.object);
@@ -46,8 +46,8 @@ ObjectMovedAction.prototype.revert = function()
 
 ObjectMovedAction.prototype.updateGUI = function()
 {
-	//Editor.gui.treeView.moveObject(this.object, this.newParent, this.index);
-	Editor.gui.treeView.updateObjectsView();
+	Editor.gui.treeView.moveObject(this.object, this.oldParent, this.newParent, this.index);
+	//Editor.gui.treeView.updateObjectsView();
 };
 
 

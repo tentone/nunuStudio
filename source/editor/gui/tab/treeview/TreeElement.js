@@ -593,6 +593,27 @@ TreeElement.prototype.removeElementIndex = function(index)
 	return element;
 };
 
+//Remove element from uuid
+TreeElement.prototype.removeElementUUID = function(uuid)
+{	
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].uuid === uuid)
+		{
+			break;
+		}
+	}
+
+	if(i < this.children.length)
+	{
+		var element = this.children[i];
+		this.children.splice(i, 1);
+		return element;
+	}
+
+	return null;
+};
+
 //Add tree element from object
 TreeElement.prototype.insertElementIndex = function(element, index)
 {

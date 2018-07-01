@@ -40,17 +40,81 @@ TreeView.prototype.updateObjectNames = function()
 
 TreeView.prototype.addObject = function(object, parent, index)
 {
-	//TODO
+	/*
+	var to = diffs[i].to;
+	var length = to.length;
+	var tree = this.root;
+	var object = this.program;
+
+	for(var j = 0; j < length - 1; j++)
+	{
+		tree = tree.children[to[j]];
+		object = object.children[to[j]];
+	}
+
+	object = object.children[to[length - 1]];
+
+	//Create object and children
+	var element = tree.insertObject(object, to[length - 1]);
+	for(var k = 0; k < object.children.length; k++)
+	{
+		insertObject(element, object.children[k]);
+	}
+
+	//Auxiliar method to insert object recursivelly
+	function insertObject(parent, object)
+	{
+		var element = parent.addObject(object);
+
+		for(var k = 0; k < object.children.length; k++)
+		{
+			insertObject(element, object.children[k]);
+		}
+	}
+	*/
+};
+
+TreeView.prototype.traverse = function(callback)
+{
+	function traverse(node, callback)
+	{
+		callback(node);
+		for(var i = 0; i < node.children.length; i++)
+		{
+			traverse(node.children[i], callback);
+		}
+	}
+
+	traverse(this.root, callback); 
 };
 
 TreeView.prototype.removeObject = function(object, parent)
 {
-	//TODO
+	var parentNode = null;
+
+	this.traverse(function(node)
+	{
+		if(node.uuid === parent.uuid)
+		{
+			parentNode = node;
+		}
+	});
+
+	var node = parentNode.removeElementUUID(object.uuid);
+
+	if(node !== null)
+	{
+		node.destroy();	
+	}
+	else
+	{
+		console.warn("nunuStudio: Failed to remove node from treeview.", object, parent, node, parentNode);
+	}
 };
 
-TreeView.prototype.moveObject = function(object, newParent, index)
+TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
 {
-	this.removeObject(object, object.parent);
+	this.removeObject(object, oldParent);
 	this.addObject(object, newParent, index);
 };
 
@@ -173,7 +237,7 @@ TreeView.prototype.createProgramTree = function()
 
 	for(var i = 0; i < this.program.children.length; i++)
 	{
-		TreeView.fillTree(this.root, this.program.children[i]);
+		fillTree(this.root, this.program.children[i]);
 	}
 };
 
