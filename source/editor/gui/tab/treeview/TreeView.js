@@ -32,48 +32,7 @@ TreeView.prototype.attach = function(program)
 	}
 };
 
-TreeView.prototype.updateObjectNames = function()
-{
-
-	//TODO
-};
-
-TreeView.prototype.addObject = function(object, parent, index)
-{
-	/*
-	var to = diffs[i].to;
-	var length = to.length;
-	var tree = this.root;
-	var object = this.program;
-
-	for(var j = 0; j < length - 1; j++)
-	{
-		tree = tree.children[to[j]];
-		object = object.children[to[j]];
-	}
-
-	object = object.children[to[length - 1]];
-
-	//Create object and children
-	var element = tree.insertObject(object, to[length - 1]);
-	for(var k = 0; k < object.children.length; k++)
-	{
-		insertObject(element, object.children[k]);
-	}
-
-	//Auxiliar method to insert object recursivelly
-	function insertObject(parent, object)
-	{
-		var element = parent.addObject(object);
-
-		for(var k = 0; k < object.children.length; k++)
-		{
-			insertObject(element, object.children[k]);
-		}
-	}
-	*/
-};
-
+//Traverse the tree view nodes
 TreeView.prototype.traverse = function(callback)
 {
 	function traverse(node, callback)
@@ -88,10 +47,48 @@ TreeView.prototype.traverse = function(callback)
 	traverse(this.root, callback); 
 };
 
+
+TreeView.prototype.updateObjectNames = function()
+{
+
+	//TODO
+};
+
+TreeView.prototype.addObject = function(object, parent, index)
+{
+	var parentNode = null;
+	this.traverse(function(node)
+	{
+		if(node.uuid === parent.uuid)
+		{
+			parentNode = node;
+		}
+	});
+
+	//Create object and children
+	var element = parentNode.insertObject(object, index);
+	for(var k = 0; k < object.children.length; k++)
+	{
+		insertObject(element, object.children[k]);
+	}
+
+	this.updateChildPosition();
+
+	//Auxiliar method to insert object recursivelly
+	function insertObject(parent, object)
+	{
+		var element = parent.addObject(object);
+
+		for(var k = 0; k < object.children.length; k++)
+		{
+			insertObject(element, object.children[k]);
+		}
+	}
+};
+
 TreeView.prototype.removeObject = function(object, parent)
 {
 	var parentNode = null;
-
 	this.traverse(function(node)
 	{
 		if(node.uuid === parent.uuid)
@@ -110,12 +107,15 @@ TreeView.prototype.removeObject = function(object, parent)
 	{
 		console.warn("nunuStudio: Failed to remove node from treeview.", object, parent, node, parentNode);
 	}
+
+	this.updateChildPosition();
 };
 
 TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
 {
 	this.removeObject(object, oldParent);
 	this.addObject(object, newParent, index);
+	this.updateChildPosition();
 };
 
 TreeView.prototype.updateObjectsView = function(changes)
