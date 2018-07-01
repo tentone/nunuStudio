@@ -15,6 +15,7 @@ function TreeView(parent, closeable, container, index)
 
 TreeView.prototype = Object.create(TabElement.prototype);
 
+//Attach a program to the tree view
 TreeView.prototype.attach = function(program)
 {	
 	if(this.program === program)
@@ -30,6 +31,10 @@ TreeView.prototype.attach = function(program)
 		this.root.destroy();
 		this.root = null;
 	}
+
+	//Create program tree
+	this.createProgramTree();
+	this.updateChildPosition();
 };
 
 //Traverse the tree view nodes
@@ -45,13 +50,6 @@ TreeView.prototype.traverse = function(callback)
 	}
 
 	traverse(this.root, callback); 
-};
-
-
-TreeView.prototype.updateObjectNames = function()
-{
-
-	//TODO
 };
 
 TreeView.prototype.addObject = function(object, parent, index)
@@ -118,100 +116,12 @@ TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
 	this.updateChildPosition();
 };
 
-TreeView.prototype.updateObjectsView = function(changes)
+TreeView.prototype.updateValues = function(changes)
 {
-	/*if(this.root !== null)
+	this.traverse(function(node)
 	{
-		var diffs = TreeUtils.compare(this.root, this.program, diffs);
-
-		console.log(diffs);
-
-		for(var i = 0; i < diffs.length; i++)
-		{
-			//Added
-			if(diffs[i].status === TreeUtils.DIFF_ADDED)
-			{
-				var to = diffs[i].to;
-				var length = to.length;
-				var tree = this.root;
-				var object = this.program;
-
-				for(var j = 0; j < length - 1; j++)
-				{
-					tree = tree.children[to[j]];
-					object = object.children[to[j]];
-				}
-
-				object = object.children[to[length - 1]];
-
-				//Create object and children
-				var element = tree.insertObject(object, to[length - 1]);
-				for(var k = 0; k < object.children.length; k++)
-				{
-					insertObject(element, object.children[k]);
-				}
-
-				//Auxiliar method to insert object recursivelly
-				function insertObject(parent, object)
-				{
-					var element = parent.addObject(object);
-
-					for(var k = 0; k < object.children.length; k++)
-					{
-						insertObject(element, object.children[k]);
-					}
-				}
-			}
-			//Removed
-			else if(diffs[i].status === TreeUtils.DIFF_REMOVED)
-			{
-				var from = diffs[i].from;
-				var length = from.length;
-				var tree = this.root;
-
-				for(var j = 0; j < length - 1; j++)
-				{
-					tree = tree.children[from[j]];
-				}
-
-				tree.removeElementIndex(from[length - 1]).destroy();
-			}
-			//Moved
-			else if(diffs[i].status === TreeUtils.DIFF_MOVED)
-			{
-				//Remove element
-				var from = diffs[i].from;
-				var fromLength = from.length;
-				var fromTree = this.root;
-
-				for(var j = 0; j < fromLength - 1; j++)
-				{
-					fromTree = fromTree.children[from[j]];
-				}
-
-				//Insert in new position
-				var to = diffs[i].to;
-				var toLength = to.length;
-				var toTree = this.root;
-
-				for(var j = 0; j < toLength - 1; j++)
-				{
-					toTree = toTree.children[to[j]];
-				}
-
-				//Remove and re-insert
-				var element = fromTree.removeElementIndex(from[fromLength - 1]);
-				toTree.insertElementIndex(element, to[toLength - 1]);
-			}
-		}
-	}
-	else
-	{
-		this.createProgramTree();
-	}*/
-
-	this.createProgramTree();
-	this.updateChildPosition();
+		//TODO
+	});
 };
 
 TreeView.prototype.createProgramTree = function()
@@ -247,7 +157,7 @@ TreeView.prototype.updateSelection = function()
 	//Update treeview to highlight the selected object recursive
 	function updateSelection(tree)
 	{
-		tree.element.style.backgroundColor = Editor.isObjectSelected(tree.obj) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
+		tree.element.style.backgroundColor = Editor.isObjectSelected(tree.object) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
 
 		var children = tree.children;
 		for(var i = 0; i < children.length; i++)
