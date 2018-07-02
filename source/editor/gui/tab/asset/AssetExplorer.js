@@ -51,6 +51,14 @@ function AssetExplorer(parent, closeable, container, index)
 	//Bar
 	this.bar = new AssetExplorerMenu(this.element);
 
+	//Search
+	this.search = new TextBox(this.bar.element);
+	this.search.setMode(Element.TOP_RIGHT);
+	this.search.size.set(140, 15);
+	this.search.position.set(2, 2);
+	this.search.updateInterface();
+	//TODO
+
 	//Files in explorer
 	this.files = [];
 
