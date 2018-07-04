@@ -716,7 +716,7 @@ function MainMenu(parent)
 			return;
 		}
 
-		var modifier = new THREE.BufferSubdivisionModifier();
+		var modifier = new THREE.SubdivisionModifier();
 		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);

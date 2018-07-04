@@ -244,7 +244,6 @@ include("lib/three/loaders/KTXLoader.js");
 
 include("lib/three/modifiers/SimplifyModifier.js");
 include("lib/three/modifiers/SubdivisionModifier.js");
-include("lib/three/modifiers/BufferSubdivisionModifier.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
