@@ -111,14 +111,28 @@ RendererCanvas.prototype.createRenderer = function()
 		powerPreference: "high-performance",
 		logarithmicDepthBuffer: false
 	});
-	this.renderer.setSize(this.element.width, this.element.height);
+
 	this.renderer.shadowMap.enabled = shadows;
 	this.renderer.shadowMap.type = shadowsType;
+	this.renderer.shadowMap.autoUpdate = true;
+	this.renderer.shadowMap.needsUpdate = false;
+
 	this.renderer.toneMapping = toneMapping;
 	this.renderer.toneMappingExposure = toneMappingExposure;
 	this.renderer.toneMappingWhitePoint = toneMappingWhitePoint;
+
 	this.renderer.autoClear = false;
+	this.renderer.autoClearColor = false;
+	this.renderer.autoClearDepth = false;
+	this.renderer.autoClearStencil = false;
+
 	this.renderer.sortObjects = true;
+
+	this.renderer.gammaFactor = 2;
+	this.renderer.gammaInput = false;
+	this.renderer.gammaOutput = false;
+
+	this.renderer.setSize(this.element.width, this.element.height);
 };
 
 /**
