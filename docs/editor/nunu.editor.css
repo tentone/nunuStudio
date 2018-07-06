@@ -524,12 +524,6 @@ body
 }
 
 
-:root
-{
-	--color: #333333;
-}
-
-
 ::-webkit-scrollbar
 {
 	height: 8px;

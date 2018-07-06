@@ -8199,7 +8199,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 146,
+            "line": 147,
             "description": "Clone this Text3D instance.",
             "itemtype": "method",
             "name": "clone",
@@ -8212,7 +8212,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 157,
+            "line": 158,
             "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
