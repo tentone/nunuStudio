@@ -91,16 +91,7 @@ Asset.prototype.updateSelection = function()
 	this.element.style.backgroundColor = Editor.isObjectSelected(this.asset) ? Editor.theme.buttonOverColor : "";
 };
 
-//Set parent
-Asset.prototype.setParent = function(parent)
-{
-	if(parent !== this.parent)
-	{
-		this.parent = parent;
-		this.parent.appendChild(this.element);
-	}
-};
-
+//Set size
 Asset.prototype.setSize = function(size)
 {
 	this.element.style.width = size + "px";

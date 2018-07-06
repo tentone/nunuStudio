@@ -4,6 +4,8 @@ function AssetExplorer(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Assets", Editor.filePath + "icons/misc/new.png");
 
+	var self = this;
+
 	this.element.ondragover = undefined;
 	this.element.style.overflow = "visible";
 
@@ -54,10 +56,25 @@ function AssetExplorer(parent, closeable, container, index)
 	//Search
 	this.search = new TextBox(this.bar.element);
 	this.search.setMode(Element.TOP_RIGHT);
-	this.search.size.set(140, 15);
-	this.search.position.set(2, 2);
+	this.search.size.set(140, 17);
+	this.search.position.set(2, 0);
+	this.search.element.placeholder = "Search";
 	this.search.updateInterface();
-	//TODO
+	this.search.setOnChange(function()
+	{
+		self.filterByName(this.value);
+	});
+
+	//Search icon
+	this.icon = document.createElement("img");
+	this.icon.style.position = "absolute";
+	this.icon.style.display = "block";
+	this.icon.style.top = "14px";
+	this.icon.style.width = "14px";
+	this.icon.style.top = "2px";
+	this.icon.style.right = "150px";
+	this.icon.src = Editor.filePath + "icons/misc/search.png";
+	this.element.appendChild(this.icon);
 
 	//Files in explorer
 	this.files = [];
@@ -67,6 +84,25 @@ function AssetExplorer(parent, closeable, container, index)
 }
 
 AssetExplorer.prototype = Object.create(TabElement.prototype);
+
+/**
+ * Filter assets by their name.
+ *
+ * Only assets that contain the name will be shown.
+ *
+ * @method filterByName
+ * @param {String} name String with portion of the name to be found and filtered.
+ */
+AssetExplorer.prototype.filterByName = function(search)
+{
+	search = search.toLowerCase();
+
+	for(var i = 0; i < this.files.length; i++)
+	{
+		var text = this.files[i].name.data.toLowerCase();
+		this.files[i].setVisibility(text.search(search) !== -1);
+	}
+};
 
 AssetExplorer.prototype.activate = function()
 {
@@ -187,26 +223,14 @@ AssetExplorer.prototype.clear = function()
 //Add file to explorer
 AssetExplorer.prototype.add = function(file)
 {
-	file.setParent(this.assets);
 	file.setSize(Editor.settings.general.filePreviewSize);
 	this.files.push(file);
 };
 
 //Update division
-AssetExplorer.prototype.updateInterface = function()
+AssetExplorer.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		this.assets.style.height = (this.size.y - 20) + "px";
+	Element.prototype.updateSize.call(this);
 
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.assets.style.height = (this.size.y - 20) + "px";
 };
