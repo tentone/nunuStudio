@@ -51,5 +51,4 @@ ObjectRemovedAction.prototype.updateGUI = function()
 	}
 
 	Editor.gui.treeView.removeObject(this.object, this.parent);
-	//Editor.updateObjectsViewsGUI();
 };

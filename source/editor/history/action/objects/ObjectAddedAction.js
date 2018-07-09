@@ -37,5 +37,4 @@ ObjectAddedAction.prototype.revert = function()
 ObjectAddedAction.prototype.updateGUI = function()
 {
 	Editor.gui.treeView.addObject(this.object, this.parent, this.index);
-	//Editor.updateObjectsViewsGUI();
 };

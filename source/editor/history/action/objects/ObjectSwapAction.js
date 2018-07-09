@@ -55,5 +55,7 @@ ObjectSwapAction.prototype.revert = function()
 
 ObjectSwapAction.prototype.updateGUI = function()
 {
+	//TODO <ADD AND REMOVE ACTIONS>
+	
 	Editor.updateObjectsViewsGUI();
 };
