@@ -9,8 +9,10 @@
  */
 function Action()
 {
-	this.id = 0;
+	this.id = Action._id++;
 }
+
+Action._id = 1;
 
 /** 
  * Apply the action.

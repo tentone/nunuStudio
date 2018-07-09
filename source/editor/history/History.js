@@ -9,7 +9,6 @@
 function History(limit)
 {
 	this.actions = [];
-	this.counter = 0;
 
 	this.position = -1;
 	this.limit = limit !== undefined ? limit : 50;
@@ -55,9 +54,7 @@ History.prototype.add = function(action, editor)
 	this.position++;
 
 	//Apply action
-	action.apply(editor);
-	action.id = this.counter;
-	this.counter++;
+	action.apply(editor, true);
 
 	//Limit actions size
 	while(this.actions.length > this.limit)
@@ -78,7 +75,7 @@ History.prototype.undo = function(editor)
 	if(this.actions.length > 0 && this.position >= 0)
 	{
 		var action = this.actions[this.position];
-		action.revert(editor);
+		action.revert(editor, true);
 
 		this.position--;
 		
@@ -101,7 +98,7 @@ History.prototype.redo = function(editor)
 		this.position++;
 
 		var action = this.actions[this.position];
-		action.apply(editor);
+		action.apply(editor, true);
 
 		return action;
 	}
