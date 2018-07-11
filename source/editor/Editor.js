@@ -232,7 +232,6 @@ include("lib/three/loaders/PRWMLoader.js");
 include("lib/three/loaders/STLLoader.js");
 include("lib/three/loaders/SVGLoader.js");
 include("lib/three/loaders/TDSLoader.js");
-include("lib/three/loaders/UTF8Loader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/XLoader.js");
