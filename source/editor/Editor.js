@@ -271,18 +271,17 @@ include("editor/gui/element/Text.js");
 include("editor/gui/element/Canvas.js");
 include("editor/gui/element/RendererCanvas.js");
 include("editor/gui/element/Form.js");
-include("editor/gui/element/AudioPlayer.js");
-include("editor/gui/element/VideoPlayer.js");
 include("editor/gui/element/DropdownMenu.js");
 include("editor/gui/element/ContextMenu.js");
+
+include("editor/gui/element/media/AudioPlayer.js");
+include("editor/gui/element/media/VideoPlayer.js");
 
 include("editor/gui/element/buttons/Button.js");
 include("editor/gui/element/buttons/ButtonMenu.js");
 include("editor/gui/element/buttons/ButtonImage.js");
 include("editor/gui/element/buttons/ButtonDrawer.js");
 include("editor/gui/element/buttons/ButtonImageToggle.js");
-
-include("editor/gui/element/modals/LoadingScreen.js");
 
 include("editor/gui/element/containers/DivisionResizable.js");
 include("editor/gui/element/containers/DualDivision.js");
@@ -476,7 +475,6 @@ include("editor/history/action/objects/ObjectMovedAction.js");
 include("editor/history/action/objects/ObjectSwapAction.js");
 
 include("editor/Settings.js");
-
 
 Editor.SELECT = 0;
 Editor.MOVE = 1;
