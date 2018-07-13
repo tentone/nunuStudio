@@ -301,108 +301,96 @@ TabGroup.prototype.updateOptionIndex = function()
 };
 
 //Update interface
-TabGroup.prototype.updateInterface = function()
+TabGroup.prototype.updateSize = function()
 {
-	if(this.visible)
+	Element.prototype.updateSize.call(this);
+
+	var tabSize = this.size.clone();
+	var buttonSize = this.buttonSize.clone();
+	var offset = this.buttonSize.clone();
+
+	if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
 	{
-		var tabSize = this.size.clone();
-		var buttonSize = this.buttonSize.clone();
-		var offset = this.buttonSize.clone();
-
-		if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
+		if(buttonSize.x * this.options.length > this.size.x)
 		{
-			if(buttonSize.x * this.options.length > this.size.x)
-			{
-				buttonSize.x = this.size.x / this.options.length;
-				offset.x = buttonSize.x;
-			}
-			tabSize.y -= this.buttonSize.y;
-			offset.y = 0;
+			buttonSize.x = this.size.x / this.options.length;
+			offset.x = buttonSize.x;
 		}
-		else if(this.mode === TabGroup.LEFT || this.mode === TabGroup.RIGHT)
-		{
-			if(buttonSize.y * this.options.length > this.size.y)
-			{
-				buttonSize.y = this.size.y / this.options.length;
-				offset.y = buttonSize.y;
-			}
-			tabSize.x -= this.buttonSize.x;
-			offset.x = 0;
-		}
-
-		//Update tabs
-		for(var i = 0; i < this.options.length; i++)
-		{
-			var tab = this.options[i];
-			tab.visible = this.selected === tab;
-			tab.size.copy(tabSize);
-			tab.updateInterface();
-
-			var button = tab.button;
-			button.size.copy(buttonSize);
-			button.position.copy(offset);
-			button.position.multiplyScalar(i);
-			button.updateInterface();
-		}
-
-		if(this.mode === TabGroup.TOP)
-		{	
-			this.buttons.style.top = "0px";
-			this.buttons.style.left = "0px";
-			this.buttons.style.width = this.size.x + "px";
-			this.buttons.style.height = this.buttonSize.y + "px";
-
-			this.tab.style.left = "0px";
-			this.tab.style.top = this.buttonSize.y + "px";
-			this.tab.style.width = this.size.x + "px";
-			this.tab.style.height = (this.size.y - this.buttonSize.y) + "px";
-		}
-		else if(this.mode === TabGroup.LEFT)
-		{
-			this.buttons.style.top = "0px";
-			this.buttons.style.left = "0px";
-			this.buttons.style.width = this.buttonSize.x + "px";
-			this.buttons.style.height = this.size.y + "px";
-
-			this.tab.style.left = this.buttonSize.x + "px";
-			this.tab.style.top = "0px";
-			this.tab.style.width = (this.size.x - this.buttonSize.x) + "px";
-			this.tab.style.height = this.size.y + "px";
-		}
-		else if(this.mode === TabGroup.RIGHT)
-		{
-			this.buttons.style.top = "0px";
-			this.buttons.style.left = (this.size.x - this.buttonSize.x) + "px";
-			this.buttons.style.width = this.buttonSize.x + "px";
-			this.buttons.style.height = this.size.y + "px";
-
-			this.tab.style.left = "0px";
-			this.tab.style.top = "0px";
-			this.tab.style.width = (this.size.x - this.buttonSize.x) + "px";
-			this.tab.style.height = this.size.y + "px";
-		}
-		else if(this.mode === TabGroup.BOTTOM)
-		{
-			this.buttons.style.top = (this.size.y - this.buttonSize.y) + "px";
-			this.buttons.style.left = "0px";
-			this.buttons.style.width = this.size.x + "px";
-			this.buttons.style.height = this.buttonSize.y + "px";
-
-			this.tab.style.left = "0px";
-			this.tab.style.top = "0px";
-			this.tab.style.width = this.size.x + "px";
-			this.tab.style.height = (this.size.y - this.buttonSize.y) + "px";
-		}
-
-		//Element
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+		tabSize.y -= this.buttonSize.y;
+		offset.y = 0;
 	}
-	else
+	else if(this.mode === TabGroup.LEFT || this.mode === TabGroup.RIGHT)
 	{
-		this.element.style.display = "none";
+		if(buttonSize.y * this.options.length > this.size.y)
+		{
+			buttonSize.y = this.size.y / this.options.length;
+			offset.y = buttonSize.y;
+		}
+		tabSize.x -= this.buttonSize.x;
+		offset.x = 0;
+	}
+
+	//Update tabs
+	for(var i = 0; i < this.options.length; i++)
+	{
+		var tab = this.options[i];
+		tab.visible = this.selected === tab;
+		tab.size.copy(tabSize);
+		tab.updateInterface();
+
+		var button = tab.button;
+		button.size.copy(buttonSize);
+		button.position.copy(offset);
+		button.position.multiplyScalar(i);
+		button.updateInterface();
+	}
+
+	if(this.mode === TabGroup.TOP)
+	{	
+		this.buttons.style.top = "0px";
+		this.buttons.style.left = "0px";
+		this.buttons.style.width = this.size.x + "px";
+		this.buttons.style.height = this.buttonSize.y + "px";
+
+		this.tab.style.left = "0px";
+		this.tab.style.top = this.buttonSize.y + "px";
+		this.tab.style.width = this.size.x + "px";
+		this.tab.style.height = (this.size.y - this.buttonSize.y) + "px";
+	}
+	else if(this.mode === TabGroup.LEFT)
+	{
+		this.buttons.style.top = "0px";
+		this.buttons.style.left = "0px";
+		this.buttons.style.width = this.buttonSize.x + "px";
+		this.buttons.style.height = this.size.y + "px";
+
+		this.tab.style.left = this.buttonSize.x + "px";
+		this.tab.style.top = "0px";
+		this.tab.style.width = (this.size.x - this.buttonSize.x) + "px";
+		this.tab.style.height = this.size.y + "px";
+	}
+	else if(this.mode === TabGroup.RIGHT)
+	{
+		this.buttons.style.top = "0px";
+		this.buttons.style.left = (this.size.x - this.buttonSize.x) + "px";
+		this.buttons.style.width = this.buttonSize.x + "px";
+		this.buttons.style.height = this.size.y + "px";
+
+		this.tab.style.left = "0px";
+		this.tab.style.top = "0px";
+		this.tab.style.width = (this.size.x - this.buttonSize.x) + "px";
+		this.tab.style.height = this.size.y + "px";
+	}
+	else if(this.mode === TabGroup.BOTTOM)
+	{
+		this.buttons.style.top = (this.size.y - this.buttonSize.y) + "px";
+		this.buttons.style.left = "0px";
+		this.buttons.style.width = this.size.x + "px";
+		this.buttons.style.height = this.buttonSize.y + "px";
+
+		this.tab.style.left = "0px";
+		this.tab.style.top = "0px";
+		this.tab.style.width = this.size.x + "px";
+		this.tab.style.height = (this.size.y - this.buttonSize.y) + "px";
 	}
 };

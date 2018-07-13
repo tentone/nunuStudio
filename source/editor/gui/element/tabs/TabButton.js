@@ -242,40 +242,34 @@ TabButton.prototype.setName = function(text)
 	this.title.data = text;
 };
 
-//Update Interface
-TabButton.prototype.updateInterface = function()
+TabButton.prototype.updateSelection = function()
 {
-	if(this.visible)
-	{
-		//Icon
-		this.icon.style.top = (this.size.y * 0.2) + "px";
-		this.icon.style.left = (this.size.y * 0.2) + "px"
-		this.icon.style.width = (this.size.y * 0.6) + "px";
-		this.icon.style.height = (this.size.y * 0.6) + "px";
+	this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
+};
 
-		//Text
-		this.text.style.left = this.size.y + "px";
-		this.text.style.top = ((this.size.y - 12) / 2) + "px";
-		this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
-		this.text.style.height = this.size.y + "px";
+//Update Interface
+TabButton.prototype.updateSize = function()
+{
+	Element.prototype.updateSize.call(this);
+	
+	//Icon
+	this.icon.style.top = (this.size.y * 0.2) + "px";
+	this.icon.style.left = (this.size.y * 0.2) + "px"
+	this.icon.style.width = (this.size.y * 0.6) + "px";
+	this.icon.style.height = (this.size.y * 0.6) + "px";
 
-		//Close
-		this.close.style.display = (this.tab.closeable) ? "block" : "none";
-		this.close.style.width = (this.size.y * 0.4) + "px";
-		this.close.style.height = (this.size.y * 0.4) + "px";
-		this.close.style.top = (this.size.y * 0.3) + "px";
-		this.close.style.right = (this.size.y * 0.3) + "px";
+	//Text
+	this.text.style.left = this.size.y + "px";
+	this.text.style.top = ((this.size.y - 12) / 2) + "px";
+	this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
+	this.text.style.height = this.size.y + "px";
 
-		//Element
-		this.element.style.display = "block";
-		this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	//Close
+	this.close.style.display = (this.tab.closeable) ? "block" : "none";
+	this.close.style.width = (this.size.y * 0.4) + "px";
+	this.close.style.height = (this.size.y * 0.4) + "px";
+	this.close.style.top = (this.size.y * 0.3) + "px";
+	this.close.style.right = (this.size.y * 0.3) + "px";
+
+	this.updateSelection();
 };
