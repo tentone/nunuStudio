@@ -58,7 +58,7 @@ function AnimationButton(parent, editor, animation)
 				Editor.alert("Attribute not found");
 			}
 
-			if(value instanceof THREE.Vector3)
+			if(value.isVector3)
 			{
 				var track = new THREE.VectorKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(THREE.InterpolateLinear);
@@ -68,7 +68,7 @@ function AnimationButton(parent, editor, animation)
 				var track = new THREE.ColorKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(THREE.InterpolateLinear);
 			}
-			else if(value instanceof THREE.Quaternion)
+			else if(value.isQuaternion)
 			{
 				var track = new THREE.QuaternionKeyframeTrack(attribute, [0], value.toArray());
 				track.setInterpolation(THREE.InterpolateLinear);

@@ -303,7 +303,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Vector2)
+	else if(object.isVector2)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
@@ -318,7 +318,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Vector3)
+	else if(object.isVector3)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
@@ -335,7 +335,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Vector4 || object instanceof THREE.Quaternion)
+	else if(object.isVector4 || object.isQuaternion)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";

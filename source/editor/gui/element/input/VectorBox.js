@@ -138,20 +138,20 @@ VectorBox.prototype.getValue = function()
 //Set value of position box
 VectorBox.prototype.setValue = function(x, y, z, w)
 {
-	if(x instanceof THREE.Vector2)
+	if(x.isVector2)
 	{
 		this.x.value = x.x;
 		this.y.value = x.y;
 		this.setType(VectorBox.VECTOR2);
 	}
-	else if(x instanceof THREE.Vector3)
+	else if(x.isVector3)
 	{
 		this.x.value = x.x;
 		this.y.value = x.y;
 		this.z.value = x.z;
 		this.setType(VectorBox.VECTOR3);
 	}
-	else if(x instanceof THREE.Euler)
+	else if(x.isEuler)
 	{
 		this.x.value = x.x;
 		this.y.value = x.y;
@@ -159,7 +159,7 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 		this.order = x.order;
 		this.setType(VectorBox.VECTOR3);
 	}
-	else if(x instanceof THREE.Quaternion)
+	else if(x.isQuaternion)
 	{
 		this.x.value = x.x;
 		this.y.value = x.y;
