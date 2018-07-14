@@ -66,15 +66,15 @@ function AssetExplorer(parent, closeable, container, index)
 	});
 
 	//Search icon
-	this.icon = document.createElement("img");
-	this.icon.style.position = "absolute";
-	this.icon.style.display = "block";
-	this.icon.style.top = "14px";
-	this.icon.style.width = "14px";
-	this.icon.style.top = "2px";
-	this.icon.style.right = "150px";
-	this.icon.src = Editor.filePath + "icons/misc/search.png";
-	this.element.appendChild(this.icon);
+	this.searchIcon = document.createElement("img");
+	this.searchIcon.style.position = "absolute";
+	this.searchIcon.style.display = "block";
+	this.searchIcon.style.top = "14px";
+	this.searchIcon.style.width = "14px";
+	this.searchIcon.style.top = "2px";
+	this.searchIcon.style.right = "150px";
+	this.searchIcon.src = Editor.filePath + "icons/misc/search.png";
+	this.element.appendChild(this.searchIcon);
 
 	//Files in explorer
 	this.files = [];
