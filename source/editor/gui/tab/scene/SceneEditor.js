@@ -6,6 +6,10 @@ function SceneEditor(parent, closeable, container, index)
 
 	var self = this;
 
+	//Input
+	this.keyboard = new Keyboard();
+	this.mouse = new Mouse();
+
 	//Canvas
 	this.canvas = null;
 	this.resetCanvas();
@@ -25,11 +29,6 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Scene
 	this.scene = null;
-
-	//Input
-	this.keyboard = new Keyboard();
-	this.mouse = new Mouse();
-	this.mouse.setCanvas(this.canvas);
 
 	//Performance meter
 	this.stats = new Stats();
@@ -266,6 +265,11 @@ SceneEditor.PERSPECTIVE = 21;
 
 SceneEditor.prototype = Object.create(TabElement.prototype);
 
+SceneEditor.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
+SceneEditor.prototype.resizeCanvas = RendererCanvas.prototype.resizeCanvas;
+SceneEditor.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
+SceneEditor.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
+
 //Update container object data
 SceneEditor.prototype.updateMetadata = function()
 {
@@ -325,7 +329,7 @@ SceneEditor.prototype.activate = function()
 		Editor.program.scene = this.scene;
 	}
 
-	this.initializeRenderer();
+	this.createRenderer();
 	this.updateSettings();
 	this.setState(SceneEditor.EDITING);
 
@@ -669,20 +673,9 @@ SceneEditor.prototype.render = function()
 
 SceneEditor.prototype.resetCanvas = function()
 {
-	if(this.element.contains(this.canvas))
-	{
-		this.element.removeChild(this.canvas);
-	}
-	
-	this.canvas = document.createElement("canvas");
-	this.canvas.style.position = "absolute";
-	this.canvas.style.top = "0px";
-	this.canvas.style.left = "0px";
-	this.canvas.style.width = "100%";
-	this.canvas.style.height = "100%";
-	this.canvas.width = this.size.x;
-	this.canvas.height = this.size.y;
-	this.element.appendChild(this.canvas);
+	RendererCanvas.prototype.resetCanvas.call(this);
+
+	this.mouse.setCanvas(this.canvas);
 
 	//Prevent deafault when object dragged over
 	this.canvas.ondragover = Element.preventDefault;
@@ -923,48 +916,6 @@ SceneEditor.prototype.resetCanvas = function()
 			}
 		}
 	};
-};
-
-//Create new fresh webgl context, delete old canvas and create a new one
-SceneEditor.prototype.reloadContext = function()
-{
-	this.resetCanvas();
-
-	this.mouse.setCanvas(this.canvas);
-	
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-		try
-		{
-			this.renderer.forceContextLoss();
-		}
-		catch(e){}
-		this.renderer = null;
-
-		this.initializeRenderer();
-	}
-};
-
-//Initialize renderer
-SceneEditor.prototype.initializeRenderer = function()
-{
-	var settings = Editor.settings.render.followProject ? Editor.program : Editor.settings.render;
-
-	//Dispose old renderer
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-	}
-
-	//Create renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, alpha: true, antialias: settings.antialiasing});
-	this.renderer.setSize(this.canvas.width, this.canvas.height);
-	this.renderer.shadowMap.enabled = settings.shadows;
-	this.renderer.shadowMap.type = settings.shadowsType;
-	this.renderer.toneMapping = settings.toneMapping;
-	this.renderer.toneMappingExposure = settings.toneMappingExposure;
-	this.renderer.toneMappingWhitePoint = settings.toneMappingWhitePoint;
 };
 
 //Update raycaster position from editor mouse position

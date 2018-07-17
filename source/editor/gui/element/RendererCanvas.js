@@ -13,6 +13,13 @@ function RendererCanvas(parent)
 	Element.call(this, parent, "div");
 
 	/**
+	 * On resize callback, called every time the container is updated.
+	 *
+	 * @attribute onResize
+	 */
+	this.onResize = null;
+
+	/**
 	 * Canvas DOM element.
 	 * 
 	 * @attribute canvas
@@ -27,13 +34,6 @@ function RendererCanvas(parent)
 	 * @type {THREE.WebGlRenderer}
 	 */
 	this.createRenderer();
-
-	/**
-	 * On resize callback, called every time the container is updated.
-	 *
-	 * @attribute onResize
-	 */
-	this.onResize = null;
 }
 
 RendererCanvas.prototype = Object.create(Element.prototype);
@@ -66,11 +66,13 @@ RendererCanvas.prototype.resetCanvas = function()
 	}
 
 	this.canvas = document.createElement("canvas");
+	this.canvas.style.position = "absolute";
+	this.canvas.style.display = "block";
 	this.canvas.style.top = "0px";
 	this.canvas.style.left = "0px";
-	this.canvas.style.width = "100%";
-	this.canvas.style.height = "100%";
 	this.element.appendChild(this.canvas);
+
+	this.resizeCanvas();
 };
 
 /**
@@ -80,46 +82,32 @@ RendererCanvas.prototype.resetCanvas = function()
  */
 RendererCanvas.prototype.createRenderer = function()
 {
-	if(Editor.settings.render.followProject)
-	{
-		var antialiasing = Editor.program.antialiasing;
-		var shadows = Editor.program.shadows;
-		var shadowsType = Editor.program.shadowsType;
-		var toneMapping = Editor.program.toneMapping;
-		var toneMappingExposure = Editor.program.toneMappingExposure;
-		var toneMappingWhitePoint = Editor.program.toneMappingWhitePoint;
-	}
-	else
-	{
-		var antialiasing = Editor.settings.render.antialiasing;
-		var shadows = Editor.settings.render.shadows;
-		var shadowsType = Editor.settings.render.shadowsType;
-		var toneMapping = Editor.settings.render.toneMapping;
-		var toneMappingExposure = Editor.settings.render.toneMappingExposure;
-		var toneMappingWhitePoint = Editor.settings.render.toneMappingWhitePoint;
-	}
-
+	var settings = Editor.settings.render.followProject ? Editor.program : Editor.settings.render;
+	
+	//var context = this.canvas.getContext("webgl2");
+	var context = null;
+	
 	this.renderer = new THREE.WebGLRenderer(
 	{
 		canvas: this.canvas,
-		context: null,
+		context: context,
 		precision: "highp",
 		alpha: true,
 		premultipliedAlpha: true,
-		antialias: antialiasing,
+		antialias: settings.antialiasing,
 		preserveDrawingBuffer: false,
 		powerPreference: "high-performance",
 		logarithmicDepthBuffer: false
 	});
 
-	this.renderer.shadowMap.enabled = shadows;
-	this.renderer.shadowMap.type = shadowsType;
+	this.renderer.shadowMap.enabled = settings.shadows;
+	this.renderer.shadowMap.type = settings.shadowsType;
 	this.renderer.shadowMap.autoUpdate = true;
 	this.renderer.shadowMap.needsUpdate = false;
 
-	this.renderer.toneMapping = toneMapping;
-	this.renderer.toneMappingExposure = toneMappingExposure;
-	this.renderer.toneMappingWhitePoint = toneMappingWhitePoint;
+	this.renderer.toneMapping = settings.toneMapping;
+	this.renderer.toneMappingExposure = settings.toneMappingExposure;
+	this.renderer.toneMappingWhitePoint = settings.toneMappingWhitePoint;
 
 	this.renderer.autoClear = false;
 	this.renderer.autoClearColor = false;
@@ -136,11 +124,15 @@ RendererCanvas.prototype.createRenderer = function()
 };
 
 /**
- * Create a new context for this renderer, this may be usefull to change some configurations in the renderer.
+ * Create a new fresh context for this renderer.
+ *
+ * Deletes the canvas and creates a new one.
+ *
+ * This may be usefull to change some configurations in the renderer.
  * 
- * @method createNewContext
+ * @method reloadContext
  */
-RendererCanvas.prototype.createNewContext = function()
+RendererCanvas.prototype.reloadContext = function()
 {
 	this.forceContextLoss();
 	this.resetCanvas();
@@ -158,11 +150,35 @@ RendererCanvas.prototype.forceContextLoss = function()
 {
 	try
 	{
-		this.renderer.dispose();
-		this.renderer.forceContextLoss();
+		if(this.renderer !== null)
+		{
+			this.renderer.dispose();
+			this.renderer.forceContextLoss();
+			this.renderer = null;
+		}
 	}
-	catch(e){}
+	catch(e)
+	{
+		this.renderer = null;
+		console.log("nunuStudio: Failed to destroy WebGL context.");
+	}
 }
+
+/**
+ * Resize the canvas to match the parent size and conside the device pixel ratio.
+ *
+ * @method resizeCanvas
+ */
+RendererCanvas.prototype.resizeCanvas = function()
+{
+	var width = this.size.x * window.devicePixelRatio;
+	var height = this.size.y * window.devicePixelRatio;
+
+	this.canvas.width = width;
+	this.canvas.height = height;
+	this.canvas.style.width = this.size.x + "px";
+	this.canvas.style.height = this.size.y + "px";
+};
 
 RendererCanvas.prototype.destroy = function()
 {
@@ -175,15 +191,12 @@ RendererCanvas.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
-	var width = this.size.x * window.devicePixelRatio;
-	var height = this.size.y * window.devicePixelRatio;
-	
-	this.canvas.width = width;
-	this.canvas.height = height;
-	this.renderer.setSize(this.size.x, this.size.y, false);
+	this.resizeCanvas();
 
 	if(this.onResize !== null)
 	{
 		this.onResize(width, height);
 	}
+
+	this.renderer.setSize(this.size.x, this.size.y, false);
 };
