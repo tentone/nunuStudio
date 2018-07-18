@@ -25,7 +25,7 @@ ObjectRemovedAction.prototype.apply = function()
 	this.index = this.parent.children.indexOf(this.object);
 	this.parent.remove(this.object);
 
-	this.updateGUI();
+	ObjectRemovedAction.updateGUI(this.object, this.parent);
 };
 
 ObjectRemovedAction.prototype.revert = function()
@@ -40,15 +40,15 @@ ObjectRemovedAction.prototype.revert = function()
 		this.object.parent = this.parent;
 	}
 
-	this.updateGUI();
+	ObjectAddedAction.updateGUI(this.object, this.parent, this.index);
 };
 
-ObjectRemovedAction.prototype.updateGUI = function()
+ObjectRemovedAction.updateGUI = function(object, parent)
 {
-	if(Editor.isObjectSelected(this.object))
+	if(Editor.isObjectSelected(object))
 	{
-		Editor.removeFromSelection(this.object);
+		Editor.removeFromSelection(object);
 	}
 
-	Editor.gui.treeView.removeObject(this.object, this.parent);
+	Editor.gui.treeView.removeObject(object, parent);
 };

@@ -24,17 +24,17 @@ ObjectAddedAction.prototype.apply = function()
 		this.index = this.parent.children.indexOf(this.object);
 	}
 
-	this.updateGUI();
+	ObjectAddedAction.updateGUI(this.object, this.parent, this.index);
 };
 
 ObjectAddedAction.prototype.revert = function()
 {
 	this.parent.remove(this.object);
 
-	this.updateGUI();
+	ObjectRemovedAction.updateGUI(this.object, this.parent);
 };
 
-ObjectAddedAction.prototype.updateGUI = function()
+ObjectAddedAction.updateGUI = function(object, parent, index)
 {
-	Editor.gui.treeView.addObject(this.object, this.parent, this.index);
+	Editor.gui.treeView.addObject(object, parent, index);
 };

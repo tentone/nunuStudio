@@ -30,7 +30,7 @@ ObjectMovedAction.prototype.apply = function()
 		this.object.parent = this.newParent;
 	}
 
-	this.updateGUI();
+	ObjectMovedAction.updateGUI(this.object, this.oldParent, this.newParent, this.newIndex);
 };
 
 ObjectMovedAction.prototype.revert = function()
@@ -41,12 +41,12 @@ ObjectMovedAction.prototype.revert = function()
 	children.splice(this.oldIndex, 0, this.object);
 	this.object.parent = this.oldParent;
 
-	this.updateGUI();
+	ObjectMovedAction.updateGUI(this.object, this.newParent, this.oldParent, this.oldIndex);
 };
 
-ObjectMovedAction.prototype.updateGUI = function()
+ObjectMovedAction.updateGUI = function(object, oldParent, newParent, newIndex)
 {
-	Editor.gui.treeView.moveObject(this.object, this.oldParent, this.newParent, this.newIndex);
+	Editor.gui.treeView.moveObject(object, oldParent, newParent, newIndex);
 };
 
 

@@ -859,9 +859,7 @@ Editor.renameObject = function(object)
 Editor.deleteObject = function(object)
 {
 	var selected = (object === undefined) ? Editor.selection : [object];
-
-	console.log(selected);
-
+	
 	//List of delete actions
 	var actions = [];
 
