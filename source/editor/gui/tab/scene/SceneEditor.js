@@ -266,7 +266,6 @@ SceneEditor.PERSPECTIVE = 21;
 SceneEditor.prototype = Object.create(TabElement.prototype);
 
 SceneEditor.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
-SceneEditor.prototype.resizeCanvas = RendererCanvas.prototype.resizeCanvas;
 SceneEditor.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
 SceneEditor.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
 
@@ -395,6 +394,9 @@ SceneEditor.prototype.updateSettings = function()
 	this.tool.setSnap(Editor.settings.editor.snap);
 	this.tool.setTranslationSnap(Editor.settings.editor.gridSpacing);
 	this.tool.setRotationSnap(Editor.settings.editor.snapAngle);
+
+	//Stats
+	this.stats.dom.style.display = Editor.settings.general.showStats ? "block" : "none";
 };
 
 SceneEditor.prototype.destroy = function()
@@ -1249,47 +1251,35 @@ SceneEditor.prototype.disposeRunningProgram = function()
 	this.mouse.setLock(false);
 };
 
-//Resize scene editor camera
-SceneEditor.prototype.resizeCamera = function()
+//Resize scene editor canvas and camera
+SceneEditor.prototype.resizeCanvas = function()
 {
-	if(this.canvas !== null && this.renderer !== null)
-	{
-		this.renderer.setSize(this.canvas.width, this.canvas.height);
+	var width = this.size.x * window.devicePixelRatio;
+	var height = this.size.y * window.devicePixelRatio;
 
-		this.camera.aspect = this.canvas.width / this.canvas.height;
+	this.canvas.width = width;
+	this.canvas.height = height;
+	this.canvas.style.width = this.size.x + "px";
+	this.canvas.style.height = this.size.y + "px";
+
+	if(this.renderer !== undefined)
+	{
+		this.renderer.setSize(this.size.x, this.size.y, false);
+
+		this.camera.aspect = width / height;
 		this.camera.updateProjectionMatrix();
 
 		if(this.state === SceneEditor.TESTING)
 		{
-			this.programRunning.resize(this.canvas.width, this.canvas.height);
+			this.programRunning.resize(width, height);
 		}
 	}
 };
 
 //Update scene editor interface
-SceneEditor.prototype.updateInterface = function()
+SceneEditor.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		//Stats
-		this.stats.dom.style.visibility = Editor.settings.general.showStats ? "visible" : "hidden";
+	TabElement.prototype.updateSize.call(this);
 
-		//Canvas
-		this.canvas.width = this.size.x;
-		this.canvas.height = this.size.y;
-
-		//Element
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-
-		//Renderer
-		this.resizeCamera();
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.resizeCanvas();
 };

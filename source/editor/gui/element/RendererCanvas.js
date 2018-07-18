@@ -178,6 +178,11 @@ RendererCanvas.prototype.resizeCanvas = function()
 	this.canvas.height = height;
 	this.canvas.style.width = this.size.x + "px";
 	this.canvas.style.height = this.size.y + "px";
+
+	if(this.onResize !== null)
+	{
+		this.onResize(width, height);
+	}
 };
 
 RendererCanvas.prototype.destroy = function()
@@ -192,11 +197,6 @@ RendererCanvas.prototype.updateSize = function()
 	Element.prototype.updateSize.call(this);
 
 	this.resizeCanvas();
-
-	if(this.onResize !== null)
-	{
-		this.onResize(width, height);
-	}
-
+	
 	this.renderer.setSize(this.size.x, this.size.y, false);
 };
