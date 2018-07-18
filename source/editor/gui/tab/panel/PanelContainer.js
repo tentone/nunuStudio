@@ -46,7 +46,7 @@ PanelContainer.prototype.updateObjectsView = function(changes)
 	{	
 		var object = this.panel.obj;
 
-		if(object instanceof THREE.Object3D && object.parent === null)
+		if(object.isObject3D === true && object.parent === null)
 		{
 			this.destroyPanel();
 		}

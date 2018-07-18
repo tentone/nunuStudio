@@ -161,7 +161,7 @@ function TreeElement(container)
 					Editor.updateObjectsViewsGUI();
 				});			
 			}
-			else if(self.object instanceof THREE.Object3D)
+			else if(self.object.isObject3D === true)
 			{
 				context.addOption("Object editor", openSceneTab);
 
@@ -390,7 +390,7 @@ function TreeElement(container)
 		var object = DragBuffer.popDragElement(uuid);
 
 		//Object 3D
-		if(object instanceof THREE.Object3D && object !== self.object)
+		if(object.isObject3D === true && object !== self.object)
 		{
 			if(ObjectUtils.isChildOf(object, self.object))
 			{

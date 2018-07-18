@@ -873,7 +873,7 @@ Editor.deleteObject = function(object)
 		{
 			continue;
 		}
-		else if(selected[i] instanceof THREE.Object3D && !selected[i].locked)
+		else if(selected[i].isObject3D === true && !selected[i].locked)
 		{
 			actions.push(new ObjectRemovedAction(selected[i]));
 		}

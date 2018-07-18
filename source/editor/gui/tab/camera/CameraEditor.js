@@ -127,6 +127,7 @@ CameraEditor.prototype.updatePostNodes = function()
 	}
 	
 	this.postNodes.updateInterface();
+	this.form.updateInterface();
 };
 
 //Destroy

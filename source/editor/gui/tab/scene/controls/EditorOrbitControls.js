@@ -68,6 +68,12 @@ EditorOrbitControls.prototype.focusObject = function(object)
 
 		this.updateControls();
 	}
+	else
+	{
+		object.getWorldPosition(this.center);
+		this.distance = this.center.y + 1.0;
+		this.updateControls();
+	}
 };
 
 EditorOrbitControls.prototype.setOrientation = function(code)

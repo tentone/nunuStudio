@@ -453,11 +453,14 @@ SceneEditor.prototype.update = function()
 					this.selectObjectWithMouse();
 				}
 				
-				if(this.mouse.buttonDoubleClicked() && Editor.selection.length > 0)
+				if(Editor.selection.length > 0)
 				{
-					if(Editor.selection[0] instanceof THREE.Object3D)
+					if(this.mouse.buttonDoubleClicked() || this.keyboard.keyJustPressed(Keyboard.F))
 					{
-						this.controls.focusObject(Editor.selection[0]);
+						if(Editor.selection[0].isObject3D === true)
+						{
+							this.controls.focusObject(Editor.selection[0]);
+						}
 					}
 				}
 			}
@@ -1129,7 +1132,7 @@ SceneEditor.prototype.updateSelection = function()
 	var selectedObjects = [];
 	for(var i = 0; i < Editor.selection.length; i++)
 	{
-		if(Editor.selection[i] instanceof THREE.Object3D)
+		if(Editor.selection[i].isObject3D === true)
 		{
 			selectedObjects.push(Editor.selection[i]);
 		}
