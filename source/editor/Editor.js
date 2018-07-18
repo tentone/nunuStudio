@@ -468,10 +468,10 @@ include("editor/history/action/Action.js");
 include("editor/history/action/ChangeAction.js");
 include("editor/history/action/ActionBundle.js");
 include("editor/history/action/CallbackAction.js");
-include("editor/history/action/objects/ObjectAddedAction.js");
-include("editor/history/action/objects/ObjectRemovedAction.js");
-include("editor/history/action/objects/ObjectMovedAction.js");
-include("editor/history/action/objects/ObjectSwapAction.js");
+include("editor/history/action/objects/AddedAction.js");
+include("editor/history/action/objects/RemovedAction.js");
+include("editor/history/action/objects/MovedAction.js");
+include("editor/history/action/objects/SwapAction.js");
 
 include("editor/Settings.js");
 
@@ -827,7 +827,7 @@ Editor.addObject = function(object, parent)
 
 	//TODO <Check for resources here and create a history action to add resources and objects>
 
-	Editor.history.add(new ObjectAddedAction(object, parent));
+	Editor.history.add(new AddedAction(object, parent));
 };
 
 //Rename object, if none passed as argument selected object is used
@@ -873,7 +873,7 @@ Editor.deleteObject = function(object)
 		}
 		else if(selected[i].isObject3D === true && !selected[i].locked)
 		{
-			actions.push(new ObjectRemovedAction(selected[i]));
+			actions.push(new RemovedAction(selected[i]));
 		}
 	}
 
@@ -935,7 +935,7 @@ Editor.cutObject = function(object)
 	if(!object.locked)
 	{
 		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
-		Editor.history.add(new ObjectRemovedAction(object));
+		Editor.history.add(new RemovedAction(object));
 	}
 };
 
@@ -957,11 +957,11 @@ Editor.pasteObject = function(target)
 		//Add object to target
 		if(target !== undefined && !target.locked)
 		{
-			Editor.history.add(new ObjectAddedAction(obj, target));
+			Editor.history.add(new AddedAction(obj, target));
 		}
 		else
 		{
-			Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
+			Editor.history.add(new AddedAction(obj, Editor.program.scene));
 		}
 	}
 	catch(e)

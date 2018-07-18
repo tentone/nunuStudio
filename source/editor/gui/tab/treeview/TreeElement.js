@@ -307,7 +307,7 @@ function TreeElement(container)
 						child.uuid = THREE.Math.generateUUID();
 					});
 
-					Editor.history.add(new ObjectAddedAction(object, self.object.parent));
+					Editor.history.add(new AddedAction(object, self.object.parent));
 				});
 
 				//Copy object
@@ -320,7 +320,7 @@ function TreeElement(container)
 				context.addOption("Cut", function()
 				{
 					Editor.cutObject(self.object);
-					Editor.history.add(new ObjectRemovedAction(self.object));
+					Editor.history.add(new RemovedAction(self.object));
 				});
 			}
 			
@@ -409,7 +409,7 @@ function TreeElement(container)
 					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
 					{
 						var index = self.object.parent.children.indexOf(self.object);
-						Editor.history.add(new ObjectMovedAction(object, self.object.parent, index));
+						Editor.history.add(new MovedAction(object, self.object.parent, index));
 					}
 				}
 				//Bellow
@@ -418,7 +418,7 @@ function TreeElement(container)
 					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
 					{
 						var index = self.object.parent.children.indexOf(self.object) + 1;
-						Editor.history.add(new ObjectMovedAction(object, self.object.parent, index));
+						Editor.history.add(new MovedAction(object, self.object.parent, index));
 					}
 				}
 				//Inside
@@ -426,7 +426,7 @@ function TreeElement(container)
 				{	
 					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
 					{
-						Editor.history.add(new ObjectMovedAction(object, self.object));	
+						Editor.history.add(new MovedAction(object, self.object));	
 					}
 				}
 			}

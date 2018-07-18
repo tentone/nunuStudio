@@ -1,7 +1,7 @@
 "use strict";
 
 //Object added to another object action.
-function ObjectAddedAction(object, parent, index)
+function AddedAction(object, parent, index)
 {
 	Action.call(this);
 	
@@ -11,7 +11,7 @@ function ObjectAddedAction(object, parent, index)
 	this.parent = parent;
 }
 
-ObjectAddedAction.prototype.apply = function()
+AddedAction.prototype.apply = function()
 {
 	if(this.index !== -1)
 	{
@@ -24,17 +24,17 @@ ObjectAddedAction.prototype.apply = function()
 		this.index = this.parent.children.indexOf(this.object);
 	}
 
-	ObjectAddedAction.updateGUI(this.object, this.parent, this.index);
+	AddedAction.updateGUI(this.object, this.parent, this.index);
 };
 
-ObjectAddedAction.prototype.revert = function()
+AddedAction.prototype.revert = function()
 {
 	this.parent.remove(this.object);
 
-	ObjectRemovedAction.updateGUI(this.object, this.parent);
+	RemovedAction.updateGUI(this.object, this.parent);
 };
 
-ObjectAddedAction.updateGUI = function(object, parent, index)
+AddedAction.updateGUI = function(object, parent, index)
 {
 	Editor.gui.treeView.addObject(object, parent, index);
 };

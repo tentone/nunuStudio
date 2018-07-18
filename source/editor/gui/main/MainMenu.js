@@ -629,9 +629,9 @@ function MainMenu(parent)
 		mesh.name = a.name;
 
 		var actions = [];
-		actions.push(new ObjectRemovedAction(a));
-		actions.push(new ObjectRemovedAction(b));
-		actions.push(new ObjectAddedAction(mesh, a.getScene()));
+		actions.push(new RemovedAction(a));
+		actions.push(new RemovedAction(b));
+		actions.push(new AddedAction(mesh, a.getScene()));
 
 		Editor.history.add(new ActionBundle(actions));
 	}

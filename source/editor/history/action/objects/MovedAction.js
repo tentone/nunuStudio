@@ -1,7 +1,7 @@
 "use strict";
 
 //Object moved in the object tree.
-function ObjectMovedAction(object, newParent, newIndex)
+function MovedAction(object, newParent, newIndex)
 {
 	Action.call(this);
 	
@@ -14,7 +14,7 @@ function ObjectMovedAction(object, newParent, newIndex)
 	this.newIndex = newIndex;
 }
 
-ObjectMovedAction.prototype.apply = function()
+MovedAction.prototype.apply = function()
 {
 	this.oldParent.remove(this.object);
 	
@@ -30,10 +30,10 @@ ObjectMovedAction.prototype.apply = function()
 		this.object.parent = this.newParent;
 	}
 
-	ObjectMovedAction.updateGUI(this.object, this.oldParent, this.newParent, this.newIndex);
+	MovedAction.updateGUI(this.object, this.oldParent, this.newParent, this.newIndex);
 };
 
-ObjectMovedAction.prototype.revert = function()
+MovedAction.prototype.revert = function()
 {
 	this.newParent.remove(this.object);
 
@@ -41,10 +41,10 @@ ObjectMovedAction.prototype.revert = function()
 	children.splice(this.oldIndex, 0, this.object);
 	this.object.parent = this.oldParent;
 
-	ObjectMovedAction.updateGUI(this.object, this.newParent, this.oldParent, this.oldIndex);
+	MovedAction.updateGUI(this.object, this.newParent, this.oldParent, this.oldIndex);
 };
 
-ObjectMovedAction.updateGUI = function(object, oldParent, newParent, newIndex)
+MovedAction.updateGUI = function(object, oldParent, newParent, newIndex)
 {
 	Editor.gui.treeView.moveObject(object, oldParent, newParent, newIndex);
 };

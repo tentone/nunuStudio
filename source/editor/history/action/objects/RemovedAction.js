@@ -1,7 +1,7 @@
 "use strict";
 
 //Object removed.
-function ObjectRemovedAction(object, parent)
+function RemovedAction(object, parent)
 {
 	Action.call(this);
 	
@@ -11,7 +11,7 @@ function ObjectRemovedAction(object, parent)
 	this.index = -1;
 }
 
-ObjectRemovedAction.prototype.apply = function()
+RemovedAction.prototype.apply = function()
 {
 	if(this.object instanceof THREE.Camera)
 	{
@@ -25,10 +25,10 @@ ObjectRemovedAction.prototype.apply = function()
 	this.index = this.parent.children.indexOf(this.object);
 	this.parent.remove(this.object);
 
-	ObjectRemovedAction.updateGUI(this.object, this.parent);
+	RemovedAction.updateGUI(this.object, this.parent);
 };
 
-ObjectRemovedAction.prototype.revert = function()
+RemovedAction.prototype.revert = function()
 {
 	if(this.index === -1)
 	{
@@ -40,10 +40,10 @@ ObjectRemovedAction.prototype.revert = function()
 		this.object.parent = this.parent;
 	}
 
-	ObjectAddedAction.updateGUI(this.object, this.parent, this.index);
+	AddedAction.updateGUI(this.object, this.parent, this.index);
 };
 
-ObjectRemovedAction.updateGUI = function(object, parent)
+RemovedAction.updateGUI = function(object, parent)
 {
 	if(Editor.isObjectSelected(object))
 	{

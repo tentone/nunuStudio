@@ -822,7 +822,7 @@ SceneEditor.prototype.resetCanvas = function()
 						{
 							var newObject = new THREE.Points(object.geometry, draggedObject);
 							copyDetails(newObject, object);
-							Editor.history.add(new ObjectSwapAction(object, newObject, true));
+							Editor.history.add(new SwapAction(object, newObject, true));
 						}
 					}
 					//Line material
@@ -837,7 +837,7 @@ SceneEditor.prototype.resetCanvas = function()
 						{
 							var newObject = new THREE.Line(object.geometry, draggedObject);
 							copyDetails(newObject, object);
-							Editor.history.add(new ObjectSwapAction(object, newObject, true));
+							Editor.history.add(new SwapAction(object, newObject, true));
 						}
 					}
 					//Shader material
@@ -861,7 +861,7 @@ SceneEditor.prototype.resetCanvas = function()
 						{
 							var newObject = new THREE.Mesh(object.geometry, draggedObject);
 							copyDetails(newObject, object);
-							Editor.history.add(new ObjectSwapAction(object, newObject, true));
+							Editor.history.add(new SwapAction(object, newObject, true));
 						}
 					}
 				}

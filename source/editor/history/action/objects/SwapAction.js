@@ -1,7 +1,7 @@
 "use strict";
 
 //Swap a object for another one
-function ObjectSwapAction(originalObject, newObject, moveChildren)
+function SwapAction(originalObject, newObject, moveChildren)
 {
 	Action.call(this);
 	
@@ -15,7 +15,7 @@ function ObjectSwapAction(originalObject, newObject, moveChildren)
 	this.moveChildren = moveChildren !== undefined ? moveChildren : true;
 }
 
-ObjectSwapAction.prototype.apply = function()
+SwapAction.prototype.apply = function()
 {	
 	//Check the index
 	this.index = this.parent.children.indexOf(this.originalObject);
@@ -38,11 +38,11 @@ ObjectSwapAction.prototype.apply = function()
 		}
 	}
 
-	ObjectRemovedAction.updateGUI(this.originalObject, this.parent);
-	ObjectAddedAction.updateGUI(this.newObject, this.parent, this.index);
+	RemovedAction.updateGUI(this.originalObject, this.parent);
+	AddedAction.updateGUI(this.newObject, this.parent, this.index);
 };
 
-ObjectSwapAction.prototype.revert = function()
+SwapAction.prototype.revert = function()
 {
 	this.parent.remove(this.newObject);
 
@@ -61,6 +61,6 @@ ObjectSwapAction.prototype.revert = function()
 		}
 	}
 
-	ObjectRemovedAction.updateGUI(this.newObject, this.parent);
-	ObjectAddedAction.updateGUI(this.originalObject, this.parent, this.index);
+	RemovedAction.updateGUI(this.newObject, this.parent);
+	AddedAction.updateGUI(this.originalObject, this.parent, this.index);
 };
