@@ -329,7 +329,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	}
 
 	//Geometry
-	if(this.isMesh || this.isLine || this.isPoints)
+	if(this.geometry !== undefined)
 	{
 		object.geometry = serialize(meta.geometries, this.geometry);
 

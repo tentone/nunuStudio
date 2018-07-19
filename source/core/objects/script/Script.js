@@ -206,17 +206,19 @@ Script.prototype.initialize = function()
 		}
 	}
 
-	//Compile script
-	this.compileCode(this.code);	
-
 	//Initialize children
 	THREE.Object3D.prototype.initialize.call(this);
-	
-	//Initialize script
-	if(this.script.initialize !== undefined)
+
+	var self = this;
+
+	//Compile script
+	this.compileCode(this.code, function()
 	{
-		this.script.initialize.call(this);
-	}
+		if(self.script.initialize !== undefined)
+		{
+			self.script.initialize.call(self);
+		}
+	});
 };
 
 /**
@@ -305,8 +307,9 @@ Script.prototype.appData = function(data)
  * 
  * @method compileCode
  * @param {String} code
+ * @param {Function} onReady Funtion called when the code is ready.
  */
-Script.prototype.compileCode = function(code)
+Script.prototype.compileCode = function(code, onReady)
 {
 	if(code !== undefined)
 	{
@@ -361,6 +364,8 @@ Script.prototype.compileCode = function(code)
 			var libs = Script.getIncludes(code);	
 			code = Script.removeIncludes(code);
 
+			var fileCounter = 0;
+
 			for(var i = 0; i < libs.length; i++)
 			{
 				var blob = new Blob([this.program.getResourceByName(libs[i]).data], {type:"text/plain"});
@@ -370,6 +375,16 @@ Script.prototype.compileCode = function(code)
 				js.type = "text/javascript";
 				js.async = false;
 				js.src = url;
+				js.onload = function()
+				{
+					fileCounter++;
+
+					if(fileCounter === libs.length)
+					{
+						onReady();
+					}
+				};
+				js.onerror = js.onload;
 				document.body.appendChild(js);
 			}
 		}
@@ -387,6 +402,11 @@ Script.prototype.compileCode = function(code)
 			console.warn("nunuStudio: Error initializing script code", e);
 			throw "Error initializing script code";
 			this.script = {};
+		}
+
+		if(this.mode !== Script.INCLUDE)
+		{
+			onReady();
 		}
 	}
 	catch(e)
