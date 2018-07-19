@@ -39,27 +39,22 @@ EditorFreeControls.prototype.reset = function()
 
 EditorFreeControls.prototype.focusObject = function(object)
 {
-	/*var box = ObjectUtils.calculateBoundingBox(object);
+	var box = ObjectUtils.calculateBoundingBox(object);
 	box.applyMatrix4(object.matrixWorld);
-	box.getCenter(this.center);
-	var size = box.getSize(this.tempVector).length();
+	var size = box.getSize(new THREE.Vector3()).length();
 
-	var distance = size;
-	if(this.camera instanceof THREE.PerspectiveCamera)
-	{
-		distance = (size / 2) / Math.tan(THREE.Math.DEG2RAD * 0.5 * this.camera.fov);
-	}
+	//var center = box.getCenter(new THREE.Vector3());
+
+	var distance = this.getWorldPosition(new THREE.Vector3()).distanceTo(object.getWorldPosition(new THREE.Vector3()));
 
 	var direction = object.position.clone();
 	direction.sub(this.position);
 	direction.normalize();
-	direction.multiplyScalar(distance);
+	direction.multiplyScalar(distance - size);
 	
-	this.position.copy(object.position);
-	this.position.add(direction);*/
+	this.position.add(direction);
+	//this.lookAt(center);
 
-	//TODO <ADD CODE HERE>
-	
 	this.updateControls();
 };
 

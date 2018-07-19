@@ -377,9 +377,9 @@ include("editor/gui/tab/settings/RenderSettingsTab.js");
 include("editor/gui/tab/settings/JSHintSettingsTab.js");
 
 include("editor/gui/tab/material/MaterialEditor.js");
-include("editor/gui/tab/material/PointsMaterialEditor.js");
 include("editor/gui/tab/material/ShaderMaterialEditor.js");
-include("editor/gui/tab/material/SpriteMaterialEditor.js");
+include("editor/gui/tab/material/points/PointsMaterialEditor.js");
+include("editor/gui/tab/material/sprite/SpriteMaterialEditor.js");
 include("editor/gui/tab/material/line/LineBasicMaterialEditor.js");
 include("editor/gui/tab/material/line/LineDashedMaterialEditor.js");
 include("editor/gui/tab/material/mesh/MeshMaterialEditor.js");
