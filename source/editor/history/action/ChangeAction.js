@@ -23,9 +23,36 @@ function ChangeAction(object, attribute, newValue, oldValue)
 ChangeAction.prototype.apply = function()
 {
 	this.object[this.attribute] = this.newValue;
+
+	ChangeAction.updateGUI(this.object, this.attribute, this.newValue);
 };
 
 ChangeAction.prototype.revert = function()
 {
 	this.object[this.attribute] = this.oldValue;
+
+	ChangeAction.updateGUI(this.object, this.attribute, this.oldValue);
+};
+
+ChangeAction.updateGUI = function(object, attribute, newValue)
+{
+	if(object instanceof THREE.Object3D)
+	{
+		Editor.gui.treeView.updateInterface();
+		//TODO <3D OBJECT GUI>
+	}
+	else if(object instanceof THREE.Material)
+	{
+		object.needsUpdate = true;
+		//TODO <MATERIAL GUI>
+	}
+	else if(object instanceof THREE.Texture)
+	{
+		object.needsUpdate = true;
+		//TODO <TEXTURE GUI>
+	}
+	else if(object instanceof Resource)
+	{
+		//TODO <RESOURCES TAB AND PREVIEW>
+	}
 };

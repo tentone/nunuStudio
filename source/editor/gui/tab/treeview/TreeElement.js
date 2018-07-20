@@ -644,12 +644,6 @@ TreeElement.prototype.updateFoldedState = function()
 	this.container.updateChildPosition();
 };
 
-TreeElement.prototype.setVisibility = function(visible)
-{
-	this.visible = visible;
-	this.element.style.display = visible ? "block" : "none";
-};
-
 //Update interface
 TreeElement.prototype.updateInterface = function()
 {

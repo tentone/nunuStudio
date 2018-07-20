@@ -2,7 +2,7 @@
 
 function EditorOrbitControls()
 {
-	THREE.Object3D.call(this);
+	EditorControls.call(this);
 
 	this.distance = 10;
 	this.center = new THREE.Vector3();
@@ -25,19 +25,7 @@ function EditorOrbitControls()
 
 EditorOrbitControls.UP = new THREE.Vector3(0, 1, 0);
 
-EditorOrbitControls.prototype = Object.create(THREE.Object3D.prototype);
-
-EditorOrbitControls.prototype.attach = function(camera)
-{
-	while(this.children.length > 0)
-	{
-		this.remove(this.children[0]);
-	}
-	this.add(camera);
-
-	this.camera = camera;
-	this.updateControls();
-};
+EditorOrbitControls.prototype = Object.create(EditorControls.prototype);
 
 EditorOrbitControls.prototype.reset = function()
 {

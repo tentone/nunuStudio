@@ -2,7 +2,7 @@
 
 function EditorFreeControls()
 {
-	THREE.Object3D.call(this);
+	EditorControls.call(this);
 
 	this.orientation = new THREE.Vector2();
 
@@ -14,21 +14,9 @@ function EditorFreeControls()
 	this.updateControls();
 }
 
-EditorFreeControls.prototype = Object.create(THREE.Object3D.prototype);
+EditorFreeControls.prototype = Object.create(EditorControls.prototype);
 
 EditorFreeControls.ZERO = new THREE.Vector3(0, 0, 0);
-
-EditorFreeControls.prototype.attach = function(camera)
-{
-	while(this.children.length > 0)
-	{
-		this.remove(this.children[0]);
-	}
-	this.add(camera);
-
-	this.camera = camera;
-	this.updateControls();
-};
 
 EditorFreeControls.prototype.reset = function()
 {

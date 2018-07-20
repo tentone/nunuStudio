@@ -116,14 +116,6 @@ TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
 	this.updateChildPosition();
 };
 
-TreeView.prototype.updateValues = function(changes)
-{
-	this.traverse(function(node)
-	{
-		//TODO
-	});
-};
-
 TreeView.prototype.createProgramTree = function()
 {
 	//Fill tree roo with objects (recursive)
@@ -175,6 +167,22 @@ TreeView.prototype.updateSelection = function()
 //Update tree view children positions
 TreeView.prototype.updateChildPosition = function()
 {
+	//Check if parent if folded (recursive)
+	function checkParentFolded(element)
+	{
+		if(element.parent === null)
+		{
+			return false;
+		}
+
+		if(element.folded === true)
+		{
+			return true;
+		}
+
+		return checkParentFolded(element.parent);
+	}
+
 	//Update childs position (recursive)
 	function updateChildPosition(parent, position, level, folded)
 	{
@@ -185,7 +193,7 @@ TreeView.prototype.updateChildPosition = function()
 		{
 			var element = children[i];
 
-			if(folded || TreeView.checkParentFolded(parent))
+			if(folded || checkParentFolded(parent))
 			{
 				element.setVisibility(false);
 				folded = true;
@@ -224,20 +232,4 @@ TreeView.prototype.updateSize = function()
 	{
 		this.root.updateInterface();
 	}
-};
-
-//Check if parent if folded (recursive)
-TreeView.checkParentFolded = function(element)
-{
-	if(element.parent === null)
-	{
-		return false;
-	}
-
-	if(element.folded)
-	{
-		return true;
-	}
-
-	return TreeView.checkParentFolded(element.parent);
 };

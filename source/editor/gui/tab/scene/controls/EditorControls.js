@@ -1,6 +1,11 @@
 "use strict";
 
-function EditorControls(){}
+function EditorControls()
+{
+	THREE.Group.call(this);
+}
+
+EditorControls.prototype = Object.create(THREE.Group.prototype);
 
 /**
  * Attach a camera to this controls object.
@@ -8,7 +13,17 @@ function EditorControls(){}
  * @method attach
  * @param {Camera} camera
  */
-EditorControls.prototype.attach = function(camera){};
+EditorControls.prototype.attach = function(camera)
+{
+	while(this.children.length > 0)
+	{
+		this.remove(this.children[0]);
+	}
+	this.add(camera);
+
+	this.camera = camera;
+	this.updateControls();
+};
 
 /**
  * Reset the controls to its original position.

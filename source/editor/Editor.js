@@ -327,6 +327,7 @@ include("editor/gui/tab/scene/transform/gizmo/TransformGizmo.js");
 include("editor/gui/tab/scene/transform/gizmo/TransformGizmoRotate.js");
 include("editor/gui/tab/scene/transform/gizmo/TransformGizmoScale.js");
 include("editor/gui/tab/scene/transform/gizmo/TransformGizmoTranslate.js");
+include("editor/gui/tab/scene/controls/EditorControls.js");
 include("editor/gui/tab/scene/controls/EditorFreeControls.js");
 include("editor/gui/tab/scene/controls/EditorOrbitControls.js");
 include("editor/gui/tab/scene/controls/EditorPlanarControls.js");
