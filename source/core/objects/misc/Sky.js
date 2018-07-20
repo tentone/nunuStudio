@@ -25,21 +25,24 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.type = "Sky";
 	
 	/**
-	 * Array with top sky colors
+	 * Array with top sky colors.
+	 *
 	 * @property colorTop
 	 * @type {Array}
 	 */
 	this.colorTop = [new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)];
 
 	/**
-	 * Array with bottom sky colors
+	 * Array with bottom sky colors.
+	 *
 	 * @property colorBottom
 	 * @type {Array}
 	 */
 	this.colorBottom = [new THREE.Color(0xebece6), new THREE.Color(0xffffff), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
 
 	/**
-	 * Sun color in hex RGB
+	 * Sun color in hex RGB.
+	 *
 	 * @property sunColor
 	 * @type {Number}
 	 * @default 0xFFFFAA
@@ -47,28 +50,36 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.sunColor = 0xFFFFAA;
 
 	/**
-	 * Moon color in hex RGB
+	 * Sun color intensity.
+	 *
+	 * @property intensity
+	 * @type {Number}
+	 */
+	this.intensity = 0.3;
+
+	/**
+	 * Moon color in hex RGB.
+	 *
 	 * @property moonColor
 	 * @type {Number}
 	 * @default 0x5555BB
 	 */
 	this.moonColor = 0x5555BB;
-	this.intensity = 0.3;
 
 	/**
-	 * Hemisphere light used to match ambient ligth with sky color
+	 * Hemisphere light used to match ambient ligth with sky color.
+	 *
 	 * @property hemisphere
 	 * @type {HemisphereLight}
 	 */
-	this.hemisphere = new THREE.HemisphereLight(0, 0, 0.5);
-	this.hemisphere.color.setHSL(0.6, 1, 0.6);
-	this.hemisphere.groundColor.setHSL(0.1, 1, 0.75);
+	this.hemisphere = new THREE.HemisphereLight(0x3284ff, 0xffcc7f, 0.5);
 	this.hemisphere.locked = true;
 	this.hemisphere.matrixAutoUpdate = false;
 	this.add(this.hemisphere);
 
 	/**
-	 * Directional light to simulate sun light and cast shadows
+	 * Directional light to simulate sun light and cast shadows.
+	 *
 	 * @property sun
 	 * @type {DirectionalLight}
 	 */
@@ -114,7 +125,8 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
 
 	/**
-	 * Sky mesh with material shader to calculate dinamically sky color
+	 * Sky mesh with material shader to calculate dinamically sky color.
+	 *
 	 * @property sky
 	 * @type {Mesh}
 	 */
@@ -130,7 +142,8 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	};
 
 	/**
-	 * If set to true the sky auto updates its time
+	 * If set to true the sky auto updates its time.
+	 *
 	 * @property autoUpdate
 	 * @default true
 	 * @type {boolean}
@@ -138,21 +151,24 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.autoUpdate = autoUpdate !== undefined ? autoUpdate : true;
 
 	/**
-	 * Sun distance
+	 * Sun distance.
+	 *
 	 * @property sunDistance
 	 * @type {Number}
 	 */
 	this.sunDistance = sunDistance !== undefined ? sunDistance : 100;
 
 	/**
-	 * Day time in seconds
+	 * Day time in seconds.
+	 *
 	 * @property dayTime
 	 * @type {Number}
 	 */
 	this.dayTime = dayTime !== undefined ? dayTime : 120;
 
 	/**
-	 * Current day time in seconds
+	 * Current day time in seconds.
+	 *
 	 * @property time
 	 * @type {Number}
 	 */

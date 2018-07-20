@@ -10,6 +10,8 @@ function Panel(parent, obj)
 	this.element.style.width = "100%";
 	this.element.style.height = "100%";
 
+	this.obj = null;
+
 	this.attach(obj);
 	this.preventDragEvents();
 
@@ -27,17 +29,9 @@ Panel.prototype.attach = function(obj)
 };
 
 //Update panel ui
-Panel.prototype.updateInterface = function()
+Panel.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.form.updateInterface();
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	this.form.updateInterface();
 };
 
 //Update panel information

@@ -218,8 +218,11 @@ TreeView.prototype.updateChildPosition = function()
 		return position;
 	}
 
-	this.root.updateInterface();
-	this.size.y = updateChildPosition(this.root, 20, 1, this.root.folded);
+	if(this.root !== null)
+	{
+		this.size.y = updateChildPosition(this.root, 20, 1, this.root.folded);
+		this.updateSize();
+	}
 };
 
 //Update division Size

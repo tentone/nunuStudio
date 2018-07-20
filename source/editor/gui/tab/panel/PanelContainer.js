@@ -82,7 +82,7 @@ PanelContainer.prototype.updateSelection = function()
 		{
 			this.panel = new Text3DPanel(this.element, object);
 		}
-		else if(object instanceof THREE.Mesh)
+		else if(object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line)
 		{
 			this.panel = new MeshPanel(this.element, object);
 		}

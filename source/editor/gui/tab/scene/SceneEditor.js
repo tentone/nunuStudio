@@ -1216,6 +1216,11 @@ SceneEditor.prototype.updateSelection = function()
 		{
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
+		//Points
+		else if(object instanceof THREE.Points)
+		{
+			this.objectHelper.add(new PointsHelper(object, 0xFFFF00));
+		}
 		//Spine animation
 		else if(object instanceof SpineAnimation)
 		{
