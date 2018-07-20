@@ -38,6 +38,7 @@ EditorOrbitControls.prototype.reset = function()
 EditorOrbitControls.prototype.focusObject = function(object)
 {
 	var box = ObjectUtils.calculateBoundingBox(object);
+	
 	if(box !== null)
 	{
 		box.applyMatrix4(object.matrixWorld);
