@@ -1044,12 +1044,10 @@ Editor.updateSettings = function()
 //Update all object views
 Editor.updateObjectsViewsGUI = function()
 {
-	//Editor.gui.treeView.updateObjectsView();
-	//
-	//
 	Editor.gui.bottomTab.updateObjectsView();
-	Editor.gui.tab.updateObjectsView();
 	Editor.gui.bottomTab.updateMetadata();
+
+	Editor.gui.tab.updateObjectsView();
 	Editor.gui.tab.updateMetadata();
 };
 
@@ -1105,7 +1103,7 @@ Editor.createNewProgram = function()
 
 	var program = new Program();
 	program.addDefaultScene(Editor.defaultMaterial);
-
+	
 	Editor.setProgram(program);
 	Editor.setOpenFile(null);
 };
@@ -1167,7 +1165,8 @@ Editor.setProgram = function(program)
 
 		//Tree view
 		Editor.gui.treeView.attach(Editor.program);
-		
+		Editor.gui.assetExplorer.attach(Editor.program);
+
 		//History
 		Editor.history = new History(Editor.settings.general.historySize);
 		

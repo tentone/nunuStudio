@@ -8,6 +8,7 @@ function AssetExplorer(parent, closeable, container, index)
 
 	this.element.ondragover = undefined;
 	this.element.style.overflow = "visible";
+	this.parent.appendChild(this.element);
 
 	//Assets
 	this.assets = document.createElement("div");
@@ -79,8 +80,8 @@ function AssetExplorer(parent, closeable, container, index)
 	//Files in explorer
 	this.files = [];
 
-	//Add element to document
-	this.parent.appendChild(this.element);
+	//Resource manager attached to the explorer
+	this.manager = null;
 }
 
 AssetExplorer.prototype = Object.create(TabElement.prototype);
@@ -108,7 +109,7 @@ AssetExplorer.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	if(Editor.program !== null)
+	if(this.manager !== null)
 	{
 		this.updateSelection();
 	}
@@ -130,14 +131,22 @@ AssetExplorer.prototype.updateSelection = function()
 	}
 };
 
-AssetExplorer.prototype.updateObjectsView = function(changes)
+AssetExplorer.prototype.attach = function(manager)
+{
+	if(this.manager !== manager)
+	{	
+		this.manager = manager;
+		this.clear();
+		this.updateObjectsView();
+	}
+};
+
+AssetExplorer.prototype.updateObjectsView = function()
 {
 	this.clear();
 
-	ResourceManager.retrieveResources(Editor.program);
-
 	//Materials
-	var materials = Editor.program.materials;
+	var materials = this.manager.materials;
 	for(var i in materials)
 	{
 		var file = new MaterialAsset(this.assets);
@@ -146,7 +155,7 @@ AssetExplorer.prototype.updateObjectsView = function(changes)
 	}
 
 	//Geometries
-	/*var geometries = Editor.program.geometries;
+	/*var geometries = this.manager.geometries;
 	for(var i in geometries)
 	{
 		var file = new GeometryAsset(this.assets);
@@ -155,7 +164,7 @@ AssetExplorer.prototype.updateObjectsView = function(changes)
 	}*/
 
 	//Textures
-	var textures = Editor.program.textures;
+	var textures = this.manager.textures;
 	for(var i in textures)
 	{
 		var file = new TextureAsset(this.assets);
@@ -164,7 +173,7 @@ AssetExplorer.prototype.updateObjectsView = function(changes)
 	}
 
 	//Fonts
-	var fonts = Editor.program.fonts;
+	var fonts = this.manager.fonts;
 	for(var i in fonts)
 	{
 		var file = new FontAsset(this.assets);
@@ -172,7 +181,7 @@ AssetExplorer.prototype.updateObjectsView = function(changes)
 		this.add(file);
 	}
 
-	var images = Editor.program.images;
+	var images = this.manager.images;
 	for(var i in images)
 	{
 		var file = new ImageAsset(this.assets);
@@ -180,7 +189,7 @@ AssetExplorer.prototype.updateObjectsView = function(changes)
 		this.add(file);
 	}
 
-	var videos = Editor.program.videos;
+	var videos = this.manager.videos;
 	for(var i in videos)
 	{
 		var file = new VideoAsset(this.assets);
@@ -189,7 +198,7 @@ AssetExplorer.prototype.updateObjectsView = function(changes)
 	}
 
 	//Audio
-	var audio = Editor.program.audio;
+	var audio = this.manager.audio;
 	for(var i in audio)
 	{
 		var file = new AudioAsset(this.assets);
@@ -198,7 +207,7 @@ AssetExplorer.prototype.updateObjectsView = function(changes)
 	}
 
 	//Resources
-	var resources = Editor.program.resources;
+	var resources = this.manager.resources;
 	for(var i in resources)
 	{
 		var resource = resources[i];
@@ -207,8 +216,6 @@ AssetExplorer.prototype.updateObjectsView = function(changes)
 		file.setAsset(resource);
 		this.add(file);
 	}
-
-	this.updateInterface();
 };
 
 //Remove all files
@@ -227,7 +234,6 @@ AssetExplorer.prototype.add = function(file)
 	this.files.push(file);
 };
 
-//Update division
 AssetExplorer.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);

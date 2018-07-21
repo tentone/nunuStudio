@@ -21,8 +21,8 @@ function Interface()
 	this.leftContainer.attachB(this.bottomTab);
 
 	//Asset
-	var assetExplorer = this.bottomTab.addTab(AssetExplorer, false);
-	assetExplorer.button.setAltText("Asset explorer");
+	this.assetExplorer = this.bottomTab.addTab(AssetExplorer, false);
+	this.assetExplorer.button.setAltText("Asset explorer");
 
 	//Console
 	if(!Nunu.developmentMode())

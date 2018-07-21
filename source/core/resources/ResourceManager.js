@@ -98,17 +98,23 @@ function ResourceManager()
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
- * Retrieve a list with all the resource in a program.
+ * Retrieve a list with all the resource in a object.
  *
- * Searches the program and all its children for resources.
+ * Searches the object and all its children for resource and adds them to resource manager.
  *
- * @method retrieveResources
  * @static
- * @param {Program} program Program to update.
+ * @method retrieveResources
+ * @param {THREE.Object3D} object Object to search for resources.
+ * @param {ResourceManager} manager Resource manager.
  */
-ResourceManager.retrieveResources = function(program)
+ResourceManager.retrieveResources = function(object, manager)
 {
-	program.traverse(function(child)
+	if(manager === undefined)
+	{
+		manager = object;
+	}
+
+	object.traverse(function(child)
 	{
 		if(child.locked)
 		{
@@ -118,18 +124,18 @@ ResourceManager.retrieveResources = function(program)
 		//Fonts
 		if(child.font instanceof Font)
 		{
-			if(program.fonts[child.font.uuid] === undefined)
+			if(manager.fonts[child.font.uuid] === undefined)
 			{
-				program.fonts[child.font.uuid] = child.font;
+				manager.fonts[child.font.uuid] = child.font;
 			}
 		}
 
 		//Audio
 		if(child.audio instanceof Audio)
 		{
-			if(program.audio[child.audio.uuid] === undefined)
+			if(manager.audio[child.audio.uuid] === undefined)
 			{
-				program.audio[child.audio.uuid] = child.audio;
+				manager.audio[child.audio.uuid] = child.audio;
 			}
 		}
 
@@ -195,9 +201,9 @@ ResourceManager.retrieveResources = function(program)
 	{
 		addTexturesFromMaterial(material);
 
-		if(program.materials[material.uuid] === undefined)
+		if(manager.materials[material.uuid] === undefined)
 		{
-			program.materials[material.uuid] = material;
+			manager.materials[material.uuid] = material;
 		}
 	}
 
@@ -221,18 +227,18 @@ ResourceManager.retrieveResources = function(program)
 		{
 			addResourcesTexture(texture);
 
-			if(program.textures[texture.uuid] === undefined)
+			if(manager.textures[texture.uuid] === undefined)
 			{
-				program.textures[texture.uuid] = texture;	
+				manager.textures[texture.uuid] = texture;	
 			}
 		}
 	}
 
 	function addImage(image)
 	{
-		if(program.images[image.uuid] === undefined)
+		if(manager.images[image.uuid] === undefined)
 		{
-			program.images[image.uuid] = image;
+			manager.images[image.uuid] = image;
 		}
 	}
 
@@ -247,9 +253,9 @@ ResourceManager.retrieveResources = function(program)
 		//Video
 		if(texture.video instanceof Video)
 		{
-			if(program.videos[texture.video.uuid] === undefined)
+			if(manager.videos[texture.video.uuid] === undefined)
 			{
-				program.videos[texture.video.uuid] = texture.video;
+				manager.videos[texture.video.uuid] = texture.video;
 			}
 		}
 		//Images array
@@ -262,14 +268,14 @@ ResourceManager.retrieveResources = function(program)
 		}
 	}
 
-	for(var i in program.materials)
+	for(var i in manager.materials)
 	{
-		addTexturesFromMaterial(program.materials[i]);
+		addTexturesFromMaterial(manager.materials[i]);
 	}
 
-	for(var i in program.textures)
+	for(var i in manager.textures)
 	{
-		addResourcesTexture(program.textures[i]);
+		addResourcesTexture(manager.textures[i]);
 	}
 };
 
