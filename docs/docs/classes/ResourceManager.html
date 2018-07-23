@@ -1517,7 +1517,10 @@
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>program</code>
+																	<code>object</code>
+															</li>
+															<li class="arg">
+																	<code>manager</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -1539,8 +1542,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Retrieve a list with all the resource in a program.</p>
-											<p>Searches the program and all its children for resources.</p>
+													<p>Retrieve a list with all the resource in a object.</p>
+											<p>Searches the object and all its children for resource and adds them to resource manager.</p>
 											
 												</div>
 											
@@ -1549,12 +1552,23 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">program</code>
-																	<span class="type"><a href="../classes/Program.html" class="crosslink">Program</a></span>
+																	<code class="param-name">object</code>
+																	<span class="type">THREE.Object3D</span>
 											
 											
 																<div class="param-description">
-																	<p>Program to update.</p>
+																	<p>Object to search for resources.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">manager</code>
+																	<span class="type"><a href="../classes/ResourceManager.html" class="crosslink">ResourceManager</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Resource manager.</p>
 											
 																</div>
 											
