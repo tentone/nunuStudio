@@ -218,6 +218,7 @@ ParticleEmitter.prototype.toJSON = function(meta)
 SPE.Group.prototype.toJSON = function(meta)
 {
 	var data = {};
+
 	data.texture = {};
 	data.texture.value = this.texture.uuid;
 	data.texture.frames = this.textureFrames.toArray();
@@ -278,17 +279,17 @@ SPE.Emitter.prototype.toJSON = function(meta)
 
 	//Opacity
 	data.opacity = {};
-	data.opacity.value = this.opacity.value;
+	data.opacity.value = this.opacity.value.slice(0);
 	data.opacity.spread = this.opacity.spread;
 
 	//Size
 	data.size = {};
-	data.size.value = this.size.value;
+	data.size.value = this.size.value.slice(0);
 	data.size.spread = this.size.spread;
 
 	//Angle
 	data.angle = {};
-	data.angle.value = this.angle.value;
+	data.angle.value = this.angle.value.slice(0);
 	data.angle.spread = this.angle.spread;
 
 	//Color
