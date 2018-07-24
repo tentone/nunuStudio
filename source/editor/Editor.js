@@ -337,6 +337,7 @@ include("editor/gui/tab/scene/helpers/PhysicsObjectHelper.js");
 include("editor/gui/tab/scene/helpers/WireframeHelper.js");
 include("editor/gui/tab/scene/helpers/SkinnedWireframeHelper.js");
 include("editor/gui/tab/scene/helpers/PointsHelper.js");
+include("editor/gui/tab/scene/helpers/LineHelper.js");
 include("editor/gui/tab/scene/helpers/GridHelper.js");
 include("editor/gui/tab/scene/helpers/RectAreaLightHelper.js");
 include("editor/gui/tab/scene/helpers/SkeletonHelper.js");

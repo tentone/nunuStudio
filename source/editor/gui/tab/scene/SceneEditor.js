@@ -1216,6 +1216,11 @@ SceneEditor.prototype.updateSelection = function()
 		{
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
+		//Line
+		else if(object instanceof THREE.Line)
+		{
+			this.objectHelper.add(new LineHelper(object, 0xFFFF00));
+		}
 		//Points
 		else if(object instanceof THREE.Points)
 		{

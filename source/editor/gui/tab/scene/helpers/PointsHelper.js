@@ -24,6 +24,5 @@ PointsHelper.prototype = Object.create(THREE.Points.prototype);
 
 PointsHelper.prototype.update = function()
 {
-	this.matrixWorld = this.object.matrixWorld;
-	this.matrix = this.object.matrix;
+	this.matrix = this.object.matrixWorld;
 };
