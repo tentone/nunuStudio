@@ -37,8 +37,7 @@ function SkeletonHelper(object)
 
 	this.root = object;
 	this.bones = bones;
-
-	this.matrix = object.matrixWorld;
+	
 	this.matrixAutoUpdate = false;
 
 	this.update();

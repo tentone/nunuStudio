@@ -23,7 +23,5 @@ LineHelper.prototype = Object.create(THREE.Line.prototype);
 
 LineHelper.prototype.update = function()
 {
-	//TODO <CHECK POSITION>
-	
-	this.matrix = this.object.matrixWorld;
+	this.matrix.copy(this.object.matrixWorld);
 };

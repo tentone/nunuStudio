@@ -10,8 +10,6 @@ function SkinnedWireframeHelper(object, hex)
 	}));
 
 	this.object = object;
-
-	this.matrix = object.matrixWorld;
 	this.matrixAutoUpdate = false;
 
 	this.update();
@@ -21,6 +19,6 @@ SkinnedWireframeHelper.prototype = Object.create(THREE.SkinnedMesh.prototype);
 
 SkinnedWireframeHelper.prototype.update = function()
 {
-	this.matrix = this.object.matrixWorld;
 	this.geometry = this.object.geometry;
+	this.matrix.copy(this.object.matrixWorld);
 };
