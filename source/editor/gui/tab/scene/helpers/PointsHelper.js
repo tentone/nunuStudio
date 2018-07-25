@@ -16,7 +16,6 @@ function PointsHelper(object, hex)
 
 	this.object = object;
 	this.matrixAutoUpdate = false;
-	
 	this.update();
 }
 
@@ -24,5 +23,5 @@ PointsHelper.prototype = Object.create(THREE.Points.prototype);
 
 PointsHelper.prototype.update = function()
 {
-	this.matrixWorld.copy(this.object.matrixWorld);
+	this.matrix.copy(this.object.matrixWorld);
 };

@@ -64,7 +64,7 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Object helper container
 	this.objectHelper = new THREE.Group();
-	this.objectHelper.matrixAutoUpdate = false;
+	this.objectHelper.matrixAutoUpdate = true;
 	this.helperScene.add(this.objectHelper);
 
 	//Tool

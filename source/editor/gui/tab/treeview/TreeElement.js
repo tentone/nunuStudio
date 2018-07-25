@@ -223,18 +223,17 @@ function TreeElement(container)
 				{
 					var physics = new PhysicsObject();
 					physics.addShape(PhysicsGenerator.createShape(object, mode));
-
 					physics.name = object.name;
 					physics.position.copy(object.position);
 					physics.quaternion.copy(object.quaternion);
 
 					object.position.set(0, 0, 0);
 					object.quaternion.set(0, 0, 0, 1);
-					object.parent.add(physics);
 
-					physics.add(object);
-
-					Editor.updateObjectsViewsGUI();
+					var actions = [];
+					actions.push(new AddedAction(physics, object.parent));
+					actions.push(new MovedAction(object, physics));
+					Editor.history.add(new ActionBundle(actions));
 				}
 
 				var physics = context.addMenu("Add physics");

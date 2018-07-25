@@ -828,8 +828,6 @@ Editor.addObject = function(object, parent)
 		parent = Editor.program.scene;
 	}
 
-	//TODO <Check for resources here and create a history action to add resources and objects>
-
 	Editor.history.add(new AddedAction(object, parent));
 };
 
