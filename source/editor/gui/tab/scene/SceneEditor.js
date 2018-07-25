@@ -63,7 +63,8 @@ function SceneEditor(parent, closeable, container, index)
 	this.helperScene.add(this.axisHelper);
 
 	//Object helper container
-	this.objectHelper = new THREE.Object3D();
+	this.objectHelper = new THREE.Group();
+	this.objectHelper.matrixAutoUpdate = false;
 	this.helperScene.add(this.objectHelper);
 
 	//Tool

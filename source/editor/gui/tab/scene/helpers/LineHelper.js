@@ -15,7 +15,6 @@ function LineHelper(object, hex)
 
 	this.object = object;
 	this.matrixAutoUpdate = false;
-	
 	this.update();
 }
 
@@ -23,5 +22,5 @@ LineHelper.prototype = Object.create(THREE.Line.prototype);
 
 LineHelper.prototype.update = function()
 {
-	this.matrix.copy(this.object.matrixWorld);
+	this.matrixWorld.copy(this.object.matrixWorld);
 };
