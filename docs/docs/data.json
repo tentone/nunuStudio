@@ -14753,6 +14753,15 @@
         {
             "file": "..\\..\\source\\core\\Nunu.js",
             "line": 148,
+            "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
+            "itemtype": "method",
+            "name": "openWebpage",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\..\\source\\core\\Nunu.js",
+            "line": 170,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUse isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",
