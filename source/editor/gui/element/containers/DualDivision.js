@@ -99,7 +99,6 @@ DualDivision.prototype.setOnResize = function(callback)
 	this.onResize = callback;
 };
 
-//Update interface
 DualDivision.prototype.updateInterface = function()
 {
 	if(this.visible)

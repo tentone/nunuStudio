@@ -641,7 +641,6 @@ TreeElement.prototype.updateFoldedState = function()
 	this.container.updateChildPosition();
 };
 
-//Update interface
 TreeElement.prototype.updateInterface = function()
 {
 	if(this.visible)

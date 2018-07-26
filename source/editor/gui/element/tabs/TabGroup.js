@@ -300,7 +300,6 @@ TabGroup.prototype.updateOptionIndex = function()
 	}
 };
 
-//Update interface
 TabGroup.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);

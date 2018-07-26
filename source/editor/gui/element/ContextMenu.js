@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Context menu element.
+ * 
+ * @class ContextMenu
+ * @extends {Component}
+ * @param {Component} parent Parent element.
+ */
 function ContextMenu(parent)
 {
 	Element.call(this, parent);
@@ -21,13 +28,23 @@ function ContextMenu(parent)
 
 ContextMenu.prototype = Object.create(Element.prototype);
 
-//Set Text
+/**
+ * Set the text of this context menu.
+ * 
+ * @method setText
+ * @param {String} text
+ */
 ContextMenu.prototype.setText = function(text)
 {
 	this.text.setText(text);
 };
 
-//Remove option from context menu
+/**
+ * Remove option from context menu.
+ *
+ * @method removeOption
+ * @param {Number} index
+ */
 ContextMenu.prototype.removeOption = function(index)
 {
 	if(index >= 0 && index < this.options.length)
@@ -37,7 +54,13 @@ ContextMenu.prototype.removeOption = function(index)
 	}
 };
 
-//Add new option to context menu
+/**
+ * Add new option to context menu
+ *
+ * @method addOption
+ * @param {String} name of the option
+ * @param {Function} callback Callback function
+ */
 ContextMenu.prototype.addOption = function(name, callback)
 {
 	var button = new ButtonMenu(this.element);
@@ -56,7 +79,13 @@ ContextMenu.prototype.addOption = function(name, callback)
 	this.options.push(button);
 };
 
-//Add new menu to context
+/**
+ * Add new menu to context menu
+ *
+ * @method addOption
+ * @param {String} name of the option.
+ * @return {DropdownMenu} The new menu created.
+ */
 ContextMenu.prototype.addMenu = function(name)
 {
 	var menu = new DropdownMenu(this.element);
@@ -71,7 +100,6 @@ ContextMenu.prototype.addMenu = function(name)
 	return menu;
 };
 
-//Update interface
 ContextMenu.prototype.updateInterface = function()
 {
 	if(this.visible)

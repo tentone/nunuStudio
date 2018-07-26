@@ -94,7 +94,6 @@ DualContainer.prototype.attachB = function(element)
 	}
 };
 
-//Update interface
 DualContainer.prototype.updateInterface = function()
 {
 	if(this.visible)

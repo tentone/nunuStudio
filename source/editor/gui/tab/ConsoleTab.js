@@ -208,7 +208,6 @@ ConsoleTab.prototype.filter = function(args)
 	return false;
 };
 
-//Update interface
 ConsoleTab.prototype.updateInterface = function()
 {
 	TabElement.prototype.updateInterface.call(this);

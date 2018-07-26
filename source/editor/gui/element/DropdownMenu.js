@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Dropdown menu element, used to create dropdowns in menu bars and in context menus.
+ * 
+ * @class DropdownMenu
+ * @extends {Element}
+ * @param {Element} parent Parent element.
+ */
 function DropdownMenu(parent)
 {
 	Element.call(this, parent);
@@ -76,7 +83,6 @@ function DropdownMenu(parent)
 	};
 }
 
-//Dropdown position
 DropdownMenu.DOWN = 0;
 DropdownMenu.UP = 1;
 DropdownMenu.LEFT = 2;
@@ -84,32 +90,49 @@ DropdownMenu.RIGHT = 3;
 
 DropdownMenu.prototype = Object.create(Element.prototype);
 
-//Set location to where options should open
+/**
+ * Set location to where options should open.
+ *
+ * @method setLocation
+ */
 DropdownMenu.prototype.setLocation = function(location)
 {
 	this.optionsLocation = location;
 };
 
-//Enable arrow
+/**
+ * Show arrow.
+ *
+ * @method showArrow
+ */
 DropdownMenu.prototype.showArrow = function()
 {
 	this.arrow.style.display = "block";
 };
 
-//Set icon
+/**
+ * Set icon.
+ *
+ * @method setIcon
+ * @param {String} icon Image URL.
+ */
 DropdownMenu.prototype.setIcon = function(icon)
 {
 	this.icon.style.display = "block";
 	this.icon.src = icon;
 };
 
-//Set Text
+/**
+ * Set text.
+ *
+ * @method setText
+ * @param {String} text Text.
+ */
 DropdownMenu.prototype.setText = function(text)
 {
 	this.text.setText(text);
 };
 
-//Destroy element
 DropdownMenu.prototype.destroy = function()
 {
 	if(this.parent.contains(this.element))
@@ -123,7 +146,12 @@ DropdownMenu.prototype.destroy = function()
 	}
 };
 
-//Remove option from dropdown menu
+/**
+ * Remove option from menu.
+ *
+ * @method removeOption
+ * @param {Number} index
+ */
 DropdownMenu.prototype.removeOption = function(index)
 {
 	if(index >= 0 && index < this.options.length)
@@ -133,7 +161,14 @@ DropdownMenu.prototype.removeOption = function(index)
 	}
 };
 
-//Add new option to dropdown menu
+/**
+ * Add new option to menu
+ *
+ * @method addOption
+ * @param {String} name of the option
+ * @param {Function} callback Callback function
+ * @param {String} icon Icon URL.
+ */
 DropdownMenu.prototype.addOption = function(name, callback, icon)
 {
 	var button = new ButtonMenu(this.panel);
@@ -159,7 +194,13 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 	return button;
 };
 
-//Add new Option to dropdown menu
+/**
+ * Add new menu to menu.
+ *
+ * @method addOption
+ * @param {String} name of the option.
+ * @return {DropdownMenu} The new menu created.
+ */
 DropdownMenu.prototype.addMenu = function(name, icon)
 {
 	var menu = new DropdownMenu(this.panel);
@@ -179,7 +220,12 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	return menu;
 };
 
-//Update expanded state
+/** 
+ * Update expanded state, position all options in this dropdown.
+ * 
+ * @method setExpanded
+ * @param {Boolean} expanded If true the menu will be expanded.
+ */
 DropdownMenu.prototype.setExpanded = function(expanded)
 {
 	this.expanded = expanded;
@@ -257,7 +303,11 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 	}
 };
 
-//Update options
+/**
+ * Update options.
+ * 
+ * @method updateOptions
+ */
 DropdownMenu.prototype.updateOptions = function()
 {
 	//Options
@@ -273,7 +323,6 @@ DropdownMenu.prototype.updateOptions = function()
 	this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
 };
 
-//Update interface
 DropdownMenu.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);

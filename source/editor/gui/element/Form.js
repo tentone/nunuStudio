@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Form element automatically organizes element into a grid like form.
+ * 
+ * @class Form
+ * @extends {Element}
+ * @param {Element} parent Parent element.
+ */
 function Form(parent)
 {
 	Element.call(this, parent);
@@ -90,7 +97,6 @@ Form.prototype.removeAll = function()
 	this.rows.push([]);
 };
 
-//Update interface
 Form.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);

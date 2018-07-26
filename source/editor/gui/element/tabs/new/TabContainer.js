@@ -280,5 +280,4 @@ TabContainer.prototype.updateOptionIndex = function()
 	}
 };
 
-//Update interface
 TabContainer.prototype.updateSize = TabGroup.prototype.updateSize;
