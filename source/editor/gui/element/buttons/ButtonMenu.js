@@ -61,7 +61,6 @@ ButtonMenu.prototype.setCallback = function(callback)
 	this.element.onclick = callback;
 };
 
-//Update Button Size
 ButtonMenu.prototype.updateInterface = function()
 {
 	if(this.visible)

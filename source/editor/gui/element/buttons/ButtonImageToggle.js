@@ -78,25 +78,12 @@ ButtonImageToggle.prototype.setImageScale = function(x, y)
 	this.icon.style.height = y;
 };
 
-//Update Interface
 ButtonImageToggle.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
-		
-		//Selected
-		if(this.selected)
-		{
-			this.element.style.backgroundColor = Editor.theme.buttonOverColor;
-		}
-		else
-		{
-			this.element.style.backgroundColor = Editor.theme.buttonColor;
-		}
-
-		//Element
+		this.element.style.backgroundColor = this.selected ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

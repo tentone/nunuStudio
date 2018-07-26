@@ -170,7 +170,6 @@ ButtonDrawer.prototype.updateOptions = function()
 	}
 };
 
-//Update Interface
 ButtonDrawer.prototype.updateInterface = function()
 {
 	if(this.visible)

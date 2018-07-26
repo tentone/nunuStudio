@@ -52,7 +52,6 @@ ButtonImage.prototype.setImageScale = function(x, y)
 	this.icon.style.height = (y * 100) + "%";
 };
 
-//Update Interface
 ButtonImage.prototype.updateInterface = function()
 {
 	if(this.visible)

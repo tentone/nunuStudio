@@ -15,6 +15,13 @@ function ContextMenu(parent)
 	this.element.style.zIndex = "300";
 
 	this.offset = new THREE.Vector2(20, 10);
+	
+	/**
+	 * Options in this menu.
+	 * 
+	 * @attribute options
+	 * @type {Array}
+	 */
 	this.options = [];
 
 	var self = this;
