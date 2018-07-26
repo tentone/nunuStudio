@@ -305,7 +305,6 @@ function TreeElement(container)
 					{
 						child.uuid = THREE.Math.generateUUID();
 					});
-
 					Editor.history.add(new AddedAction(object, self.object.parent));
 				});
 
