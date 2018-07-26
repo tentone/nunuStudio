@@ -146,6 +146,28 @@ Nunu.isFullscreen = function()
 };
 
 /**
+ * Open a webpage on a new window.
+ *
+ * On desktop and mobile it will open the default browser.
+ *
+ * On the web it will open as a popup. 
+ *
+ * @method openWebpage
+ */
+Nunu.openWebpage = function(url)
+{
+	if(Nunu.runningOnDesktop())
+	{
+		require("nw.gui").Shell.openExternal(url);
+	}
+	else
+	{
+		window.open(url);
+	}
+};
+
+
+/**
  * Set an element into fullscreen mode or exit out of fullscreen mode.
  *
  * Use isFullscreen to check if the application is running in fullscreen mode already.
