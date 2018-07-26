@@ -318,7 +318,6 @@ function TreeElement(container)
 				context.addOption("Cut", function()
 				{
 					Editor.cutObject(self.object);
-					Editor.history.add(new RemovedAction(self.object));
 				});
 			}
 			
