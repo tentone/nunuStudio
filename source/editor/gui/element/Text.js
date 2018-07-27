@@ -31,7 +31,7 @@ function Text(parent)
 	 */
 	this.fitContent = false;
 
-	this.allowWordBreak(true);
+	this.allowWordBreak(false);
 	this.setVerticalAlignment(Text.CENTER);
 	this.setAlignment(Text.CENTER);
 }
@@ -57,12 +57,12 @@ Text.prototype.allowWordBreak = function(value)
 {
 	if(value === true)
 	{
-		this.span.style.whiteSpace = "pre";
+		this.span.style.whiteSpace = "normal";
 		this.span.style.wordBreak = "break-word";
 	}
 	else
 	{
-		this.span.style.whiteSpace = "normal";
+		this.span.style.whiteSpace = "pre";
 		this.span.style.wordBreak = "normal";
 	}
 };
