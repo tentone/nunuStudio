@@ -41,3 +41,40 @@ Button.prototype.setColor = function(baseColor, overColor)
 		this.style.backgroundColor = baseColor;
 	};
 };
+
+/**
+ * Set button styles, the style can be descriped in a object.
+ *
+ * Here is an exaple of a style object:
+ * {
+ * backgroundColor: "#FF0000",
+ * color: "#FFFFFF"
+ * }
+ *
+ * @method setColor
+ * @param {Object} baseStyle Object with the style to be applied as base.
+ * @param {Object} overStyle Object with the style to be applied when mouse is over.
+ */
+Button.prototype.setStyles = function(baseStyle, overStyle)
+{
+	for(var i in baseStyle)
+	{
+		this.element.style[i] = baseStyle[i];
+	}
+
+	this.element.onmouseenter = function()
+	{
+		for(var i in overStyle)
+		{
+			this.style[i] = overStyle[i];
+		}
+	};
+
+	this.element.onmouseleave = function()
+	{
+		for(var i in baseStyle)
+		{
+			this.style[i] = baseStyle[i];
+		}
+	};
+};
