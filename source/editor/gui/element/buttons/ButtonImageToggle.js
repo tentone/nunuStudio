@@ -57,9 +57,9 @@ ButtonImageToggle.prototype.setSelected = function(selected)
 /**
  * Set button callback function.
  *
- * @method setCallback
+ * @method setOnClick
  */
-ButtonImageToggle.prototype.setCallback = function(callback)
+ButtonImageToggle.prototype.setOnClick = function(callback)
 {
 	var self = this;
 	this.element.onclick = function()

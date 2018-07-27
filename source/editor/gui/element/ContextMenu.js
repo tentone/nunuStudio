@@ -77,7 +77,7 @@ ContextMenu.prototype.addOption = function(name, callback)
 	button.text.position.x = 25;
 
 	var self = this;
-	button.setCallback(function()
+	button.setOnClick(function()
 	{
 		callback();
 		self.destroy();

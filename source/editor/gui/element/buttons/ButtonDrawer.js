@@ -94,7 +94,7 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
 
 	//Button callback
 	var self = this;
-	button.setCallback(function()
+	button.setOnClick(function()
 	{
 		callback();
 		self.expanded = false;

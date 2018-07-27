@@ -831,7 +831,7 @@ function MainMenu(parent)
 	about.size.set(100, this.size.y);
 	about.position.set(320, 0);
 	about.updateInterface();
-	about.setCallback(function()
+	about.setOnClick(function()
 	{
 		var tab = Editor.gui.tab.getTab(AboutTab);
 		if(tab === null)
@@ -848,7 +848,7 @@ function MainMenu(parent)
 	this.run.size.set(100, this.size.y);
 	this.run.position.set(420, 0);
 	this.run.updateInterface();
-	this.run.setCallback(function()
+	this.run.setOnClick(function()
 	{
 		var tab = Editor.gui.tab.getActual();
 		if(tab instanceof SceneEditor)

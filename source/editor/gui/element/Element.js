@@ -103,7 +103,6 @@ Element.BOTTOM_LEFT = 2;
  */
 Element.BOTTOM_RIGHT = 3;
 
-
 Element.preventDefault = function(event)
 {
 	event.preventDefault();
@@ -205,6 +204,17 @@ Element.prototype.setAltText = function(altText)
 };
 
 /**
+ * Set method to be called on component click.
+ * 
+ * @method setOnClick
+ * @param {Function} callback Function called when the component is clicked.
+ */
+Element.prototype.setOnClick = function(callback)
+{
+	this.element.onclick = callback;
+};
+
+/**
  * Attach this component to a new parent component.
  * 
  * Destroys the object and reataches the base DOM element to the new parent element.
@@ -265,7 +275,6 @@ Element.prototype.setVisibility = function(visible)
 	this.updateVisibility();
 };
 
-
 /**
  * Update the visibility of this element.
  *
@@ -275,7 +284,6 @@ Element.prototype.updateVisibility = function()
 {
 	this.element.style.display = this.visible ? "block" : "none";
 };
-
 
 /**
  * Update the position of this element.

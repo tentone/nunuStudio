@@ -100,7 +100,7 @@ function SceneEditor(parent, closeable, container, index)
 	};
 
 	var fullscreen = true;
-	this.fullscreenButton.setCallback(function()
+	this.fullscreenButton.setOnClick(function()
 	{
 		self.setFullscreen(fullscreen);
 		fullscreen = !fullscreen;
@@ -201,7 +201,7 @@ function SceneEditor(parent, closeable, container, index)
 	{
 		this.style.opacity = 0.5;
 	};
-	this.cameraButton.setCallback(function()
+	this.cameraButton.setOnClick(function()
 	{
 		self.setCameraMode();
 
@@ -1059,7 +1059,7 @@ SceneEditor.prototype.setState = function(state)
 
 					//Create VR switch callback
 					var vr = true;
-					this.vrButton.setCallback(function()
+					this.vrButton.setOnClick(function()
 					{
 						if(vr)
 						{

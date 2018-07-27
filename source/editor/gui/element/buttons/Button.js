@@ -41,14 +41,3 @@ Button.prototype.setColor = function(baseColor, overColor)
 		this.style.backgroundColor = baseColor;
 	};
 };
-
-/**
- * Set button callback function.
- *
- * @method setCallback
- * @param {Function} callback Callback function.
- */
-Button.prototype.setCallback = function(callback)
-{
-	this.element.onclick = callback;
-};

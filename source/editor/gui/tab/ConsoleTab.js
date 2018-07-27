@@ -22,7 +22,7 @@ function ConsoleTab(parent, closeable, container, index)
 	menu.setText("Clear");
 	menu.size.set(100, 20);
 	menu.position.set(0, 0);
-	menu.setCallback(function()
+	menu.setOnClick(function()
 	{
 		console.clear();
 	});

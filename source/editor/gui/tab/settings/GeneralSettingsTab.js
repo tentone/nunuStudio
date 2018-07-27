@@ -57,7 +57,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.resetDefault = new ButtonText(this.form.element);
 	this.resetDefault.setText("Reset settings");
 	this.resetDefault.size.set(120, 18);
-	this.resetDefault.setCallback(function()
+	this.resetDefault.setOnClick(function()
 	{
 		if(Editor.confirm("Reset back to default settings?"))
 		{

@@ -28,7 +28,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.animationButton.size.set(100, 20);
 	this.animationButton.setText("Add")
 	this.animationButton.updateInterface();
-	this.animationButton.setCallback(function()
+	this.animationButton.setOnClick(function()
 	{
 		if(self.object !== null)
 		{
@@ -69,7 +69,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.play.size.set(100, 20);
 	this.play.setText("Play")
 	this.play.updateInterface();
-	this.play.setCallback(function()
+	this.play.setOnClick(function()
 	{
 		if(self.mixer == null)
 		{
@@ -94,7 +94,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop.size.set(100, 20);
 	this.stop.setText("Stop");
 	this.stop.updateInterface();
-	this.stop.setCallback(function()
+	this.stop.setOnClick(function()
 	{
 		if(self.mixer == null)
 		{

@@ -47,7 +47,7 @@ function PassNode(parent, name)
 	this.up = new ButtonMenu(this.element);
 	this.up.size.set(50, 18);
 	this.up.setText("Up");
-	this.up.setCallback(function()
+	this.up.setOnClick(function()
 	{
 		self.composer.moveBack(self.pass);
 		self.editor.updatePostNodes();
@@ -57,7 +57,7 @@ function PassNode(parent, name)
 	this.down = new ButtonMenu(this.element);
 	this.down.size.set(50, 18);
 	this.down.setText("Down");
-	this.down.setCallback(function()
+	this.down.setOnClick(function()
 	{
 		self.composer.moveForward(self.pass);
 		self.editor.updatePostNodes();
@@ -67,7 +67,7 @@ function PassNode(parent, name)
 	this.delete = new ButtonMenu(this.element);
 	this.delete.size.set(70, 18);
 	this.delete.setText("Delete");
-	this.delete.setCallback(function()
+	this.delete.setOnClick(function()
 	{
 		self.composer.removePass(self.pass);
 		self.editor.updatePostNodes();

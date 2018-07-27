@@ -22,7 +22,7 @@ function ToolBar(element)
 	this.toolSelect.position.set(0, 40);
 	this.toolSelect.setAltText("Select (CTRL+1)");
 	this.toolSelect.updateInterface();
-	this.toolSelect.setCallback(function()
+	this.toolSelect.setOnClick(function()
 	{
 		self.selectTool(Editor.SELECT);
 	});
@@ -34,7 +34,7 @@ function ToolBar(element)
 	this.toolMove.position.set(0, 80);
 	this.toolMove.setAltText("Move (CTRL+2)");
 	this.toolMove.updateInterface();
-	this.toolMove.setCallback(function()
+	this.toolMove.setOnClick(function()
 	{
 		self.selectTool(Editor.MOVE);
 	});
@@ -46,7 +46,7 @@ function ToolBar(element)
 	this.toolScale.position.set(0, 120);
 	this.toolScale.setAltText("Scale (CTRL+3)");
 	this.toolScale.updateInterface();
-	this.toolScale.setCallback(function()
+	this.toolScale.setOnClick(function()
 	{
 		self.selectTool(Editor.SCALE);
 	});
@@ -58,7 +58,7 @@ function ToolBar(element)
 	this.toolRotate.position.set(0, 160);
 	this.toolRotate.setAltText("Rotate (CTRL+4)");
 	this.toolRotate.updateInterface();
-	this.toolRotate.setCallback(function()
+	this.toolRotate.setOnClick(function()
 	{
 		self.selectTool(Editor.ROTATE);
 	});

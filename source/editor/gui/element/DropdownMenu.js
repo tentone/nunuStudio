@@ -165,7 +165,7 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 	button.position.set(25, 0);
 
 	var self = this;
-	button.setCallback(function()
+	button.setOnClick(function()
 	{
 		callback();
 		self.setExpanded(false);
