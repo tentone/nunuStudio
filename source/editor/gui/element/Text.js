@@ -106,7 +106,16 @@ Text.prototype.setTextColor = function(color)
  */
 Text.prototype.setOverflow = function(overflow)
 {
-	this.span.style.textOverflow = overflow === Text.ELLIPSIS ? "ellipsis" : "clip";
+	if(overflow === Text.ELLIPSIS)
+	{
+		this.span.style.whiteSpace = "nowrap";
+		this.span.style.textOverflow = "ellipsis";
+	}
+	else
+	{
+		this.span.style.whiteSpace = "pre";
+		this.span.style.textOverflow = "clip";
+	}
 };
 
 /**
@@ -160,6 +169,17 @@ Text.prototype.setVerticalAlignment = function(align)
 	{
 		this.element.style.alignItems = "flex-end";
 	}
+};
+
+/**
+ * Get size of the text inside of this component in px.
+ * 
+ * @method measure
+ * @return {THREE.Vector2} A vector with the size of the text. 
+ */
+Text.prototype.measure = function()
+{
+ 	return new THREE.Vector2(this.span.offsetWidth, this.span.offsetHeight);
 };
 
 /**

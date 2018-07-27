@@ -32,14 +32,7 @@ function ButtonText(parent)
 }
 
 ButtonText.prototype = Object.create(Button.prototype);
-
-ButtonText.prototype.allowWordBreak = Text.prototype.allowWordBreak;
-ButtonText.prototype.setTextBorder = Text.prototype.setTextBorder;
-ButtonText.prototype.setTextSize = Text.prototype.setTextSize;
-ButtonText.prototype.setTextColor = Text.prototype.setTextColor;
-ButtonText.prototype.setOverflow = Text.prototype.setOverflow;
-ButtonText.prototype.setAlignment = Text.prototype.setAlignment;
-ButtonText.prototype.setVerticalAlignment = Text.prototype.setVerticalAlignment;
+Object.assign(ButtonText.prototype, Text.prototype);
 
 /**
  * Set ButtonText text.
