@@ -277,6 +277,7 @@ include("editor/gui/element/media/AudioPlayer.js");
 include("editor/gui/element/media/VideoPlayer.js");
 
 include("editor/gui/element/buttons/Button.js");
+include("editor/gui/element/buttons/ButtonText.js");
 include("editor/gui/element/buttons/ButtonMenu.js");
 include("editor/gui/element/buttons/ButtonImage.js");
 include("editor/gui/element/buttons/ButtonDrawer.js");

@@ -54,7 +54,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Reset").setAltText("Reset editor back to default settings.");
-	this.resetDefault = new Button(this.form.element);
+	this.resetDefault = new ButtonText(this.form.element);
 	this.resetDefault.setText("Reset settings");
 	this.resetDefault.size.set(120, 18);
 	this.resetDefault.setCallback(function()

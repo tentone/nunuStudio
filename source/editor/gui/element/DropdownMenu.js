@@ -13,7 +13,6 @@ function DropdownMenu(parent)
 
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.style.cursor = "pointer";
-
 	this.preventDragEvents();
 
 	//Text
@@ -133,19 +132,6 @@ DropdownMenu.prototype.setText = function(text)
 	this.text.setText(text);
 };
 
-DropdownMenu.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-
-	if(this.parent.contains(this.panel))
-	{
-		this.parent.removeChild(this.panel);
-	}
-};
-
 /**
  * Remove option from menu.
  *
@@ -168,14 +154,15 @@ DropdownMenu.prototype.removeOption = function(index)
  * @param {String} name of the option
  * @param {Function} callback Callback function
  * @param {String} icon Icon URL.
+ * @return {ButtonMenu} Button created for the new option.
  */
 DropdownMenu.prototype.addOption = function(name, callback, icon)
 {
 	var button = new ButtonMenu(this.panel);
 	button.element.style.zIndex = "200";
-	button.text.setText(name);
-	button.text.setAlignment(Text.LEFT);
-	button.text.position.set(25, 0);
+	button.setText(name);
+	button.setAlignment(Text.LEFT);
+	button.position.set(25, 0);
 
 	var self = this;
 	button.setCallback(function()
@@ -198,7 +185,8 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
  * Add new menu to menu.
  *
  * @method addOption
- * @param {String} name of the option.
+ * @param {String} name Name of the option.
+ * @param {String} icon Optional icon, image URL.
  * @return {DropdownMenu} The new menu created.
  */
 DropdownMenu.prototype.addMenu = function(name, icon)
@@ -207,6 +195,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	menu.setText(name);
 	menu.setLocation(DropdownMenu.LEFT);
 	menu.showArrow();
+
 	menu.text.setAlignment(Text.LEFT);
 	menu.text.position.set(25, 0);
 	
@@ -304,7 +293,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 };
 
 /**
- * Update options.
+ * Update all options in the menu.
  * 
  * @method updateOptions
  */
@@ -323,6 +312,16 @@ DropdownMenu.prototype.updateOptions = function()
 	this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
 };
 
+DropdownMenu.prototype.destroy = function()
+{
+	Element.prototype.destroy.call(this);
+
+	if(this.parent.contains(this.panel))
+	{
+		this.parent.removeChild(this.panel);
+	}
+};
+
 DropdownMenu.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
@@ -331,6 +330,5 @@ DropdownMenu.prototype.updateSize = function()
 
 	//Text
 	this.text.size.set(this.size.x, this.size.y);
-	this.text.visible = this.visible;
 	this.text.updateInterface();
 };

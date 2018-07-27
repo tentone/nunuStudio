@@ -3,7 +3,6 @@
 function ToolBar(element)
 {
 	this.element = element;
-
 	this.size = new THREE.Vector2(40, 0);
 
 	//Text
@@ -17,7 +16,7 @@ function ToolBar(element)
 
 	//Select
 	this.toolSelect = new ButtonImageToggle(this.element);
-	this.toolSelect.selected = true;
+	this.toolSelect.setSelected(true);
 	this.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
 	this.toolSelect.size.set(this.size.x, this.size.x);
 	this.toolSelect.position.set(0, 40);
@@ -77,17 +76,9 @@ ToolBar.prototype.destroy = function()
 //Select object manipulation tool
 ToolBar.prototype.selectTool = function(tool)
 {
-	this.toolSelect.selected = tool === Editor.SELECT;
-	this.toolSelect.updateInterface();
-
-	this.toolMove.selected = tool === Editor.MOVE;
-	this.toolMove.updateInterface();
-
-	this.toolScale.selected = tool === Editor.SCALE;
-	this.toolScale.updateInterface();
-	
-	this.toolRotate.selected = tool === Editor.ROTATE;
-	this.toolRotate.updateInterface();
-
+	this.toolSelect.setSelected(tool === Editor.SELECT);
+	this.toolMove.setSelected(tool === Editor.MOVE);
+	this.toolScale.setSelected(tool === Editor.SCALE);
+	this.toolRotate.setSelected(tool === Editor.ROTATE);
 	Editor.selectTool(tool);
 };

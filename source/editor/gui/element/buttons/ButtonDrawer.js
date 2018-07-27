@@ -2,13 +2,10 @@
 
 function ButtonDrawer(parent)
 {
-	Element.call(this, parent);
+	ButtonImage.call(this, parent);
 
 	this.element.style.zIndex = "200";
-	this.element.style.cursor = "pointer";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
-	
-	this.preventDragEvents();
 
 	//Panel
 	this.panel = document.createElement("div");
@@ -16,16 +13,6 @@ function ButtonDrawer(parent)
 	this.panel.style.cursor = "default";
 	this.panel.style.backgroundColor = Editor.theme.barColor;
 	this.panel.style.zIndex = "250";
-	
-	//Image
-	this.icon = document.createElement("img");
-	this.icon.style.position = "absolute";
-	this.icon.style.pointerEvents = "none";
-	this.icon.style.top = "15%";
-	this.icon.style.left = "15%";
-	this.icon.style.width = "70%";
-	this.icon.style.height = "70%";
-	this.element.appendChild(this.icon);
 
 	//Attributes
 	this.panelSize = new THREE.Vector2(0, 0);
@@ -47,7 +34,6 @@ function ButtonDrawer(parent)
 	{
 		self.expanded = true;
 		self.updateInterface();
-		self.element.style.cursor = "pointer";
 		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
@@ -55,7 +41,6 @@ function ButtonDrawer(parent)
 	{
 		self.expanded = false;
 		self.updateInterface();
-		self.element.style.cursor = "default";
 		self.element.style.backgroundColor = Editor.theme.buttonColor;
 	};
 
@@ -76,9 +61,8 @@ function ButtonDrawer(parent)
 	this.parent.appendChild(this.panel);
 }
 
-ButtonDrawer.prototype = Object.create(Element.prototype);
+ButtonDrawer.prototype = Object.create(ButtonImage.prototype);
 
-//Remove element
 ButtonDrawer.prototype.destroy = function()
 {
 	if(this.parent.contains(this.element))
@@ -92,7 +76,11 @@ ButtonDrawer.prototype.destroy = function()
 	}
 };
 
-//Add new Option to dropdown menu
+/**
+ * Add new option to the menu.
+ * 
+ * @method addOption
+ */
 ButtonDrawer.prototype.addOption = function(image, callback, altText)
 {
 	var button = new ButtonImage(this.panel);
@@ -124,7 +112,11 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
 	button.updateInterface();
 };
 
-//Remove option from dropdown menu
+/**
+ * Remove option from the menu.
+ *
+ * @method removeOption
+ */
 ButtonDrawer.prototype.removeOption = function(index)
 {
 	if(index >= 0 && index < this.options.length)
@@ -136,22 +128,11 @@ ButtonDrawer.prototype.removeOption = function(index)
 	}
 };
 
-//Set image
-ButtonDrawer.prototype.setImage = function(image)
-{
-	this.icon.src = image;
-};
-
-//Set image scale
-ButtonDrawer.prototype.setImageScale = function(x, y)
-{
-	this.icon.style.top = ((1 - y) / 2 * 100) + "%";
-	this.icon.style.left = ((1 - x) / 2 * 100) + "%";
-	this.icon.style.width = (x * 100) + "%";
-	this.icon.style.height = (y * 100) + "%";
-};
-
-//Updates drawer panel size
+/**
+ * Updates drawer panel size.
+ * 
+ * @method updatePanelSize
+ */
 ButtonDrawer.prototype.updatePanelSize = function()
 {
 	this.panelSize.x = (this.optionsSize.x * this.optionsPerLine);
@@ -178,7 +159,7 @@ ButtonDrawer.prototype.updateInterface = function()
 		{
 			this.panelPosition.x = this.position.x + this.size.x;
 			this.panelPosition.y = this.position.y;
-
+			
 			this.panel.style.display = "block";
 			this.panel.style.top = this.panelPosition.y + "px";
 			this.panel.style.left = this.panelPosition.x + "px";
