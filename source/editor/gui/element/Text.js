@@ -17,18 +17,23 @@ function Text(parent)
 
 	//Span
 	this.span = document.createElement("span");
-	this.span.style.whiteSpace = "pre";
 	this.element.appendChild(this.span);
 
 	//Text
 	this.text = document.createTextNode("");
 	this.span.appendChild(this.text);
 
+	/**
+	 * If set to true the text container will automatically fit the text size.
+	 *
+	 * @attribute fitContent
+	 * @type {Boolean}
+	 */
+	this.fitContent = false;
+
+	this.allowWordBreak(true);
 	this.setVerticalAlignment(Text.CENTER);
 	this.setAlignment(Text.CENTER);
-
-	//Attributes
-	this.fitContent = false;
 }
 
 Text.CENTER = 0;
@@ -48,9 +53,18 @@ Text.prototype = Object.create(Element.prototype);
  * @method allowWordBreak
  * @param {Boolean} line If true words can be breaked.
  */
-Text.prototype.allowWordBreak = function(line)
+Text.prototype.allowWordBreak = function(value)
 {
-	this.span.style.wordWrap = (line === true) ? "break-word" : "normal";
+	if(value === true)
+	{
+		this.span.style.whiteSpace = "pre";
+		this.span.style.wordBreak = "break-word";
+	}
+	else
+	{
+		this.span.style.whiteSpace = "normal";
+		this.span.style.wordBreak = "normal";
+	}
 };
 
 /**
