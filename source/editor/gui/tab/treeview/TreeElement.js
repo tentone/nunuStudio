@@ -387,11 +387,17 @@ function TreeElement(container)
 		var object = DragBuffer.popDragElement(uuid);
 
 		//Object 3D
-		if(object.isObject3D === true && object !== self.object)
+		if(object instanceof THREE.Object3D)
 		{
-			if(ObjectUtils.isChildOf(object, self.object))
+			if(object === self.object)
+			{
+				Editor.alert("Cannot add object into itself.");
+				return;
+			}
+			else if(ObjectUtils.isChildOf(object, self.object))
 			{
 				Editor.alert("Cannot add object into is child.");
+				return;
 			}
 			else
 			{
@@ -399,6 +405,8 @@ function TreeElement(container)
 				var selfIsProgram = self.object instanceof Program;
 				var dragIsScene = object instanceof Scene;
 				var dragIsProgram = object instanceof Program;
+
+				//TODO <MULTI OBJECT DRAG>
 
 				//Above
 				if(event.layerY < 5)

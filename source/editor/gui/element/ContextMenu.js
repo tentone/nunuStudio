@@ -74,7 +74,7 @@ ContextMenu.prototype.addOption = function(name, callback)
 	button.element.style.zIndex = "10000";
 	button.setText(name);
 	button.setAlignment(Text.LEFT);
-	button.text.position.x = 25;
+	button.position.x = 25;
 
 	var self = this;
 	button.setOnClick(function()
