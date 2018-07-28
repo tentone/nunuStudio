@@ -1072,15 +1072,6 @@ Editor.updateSelectionGUI = function()
 	//Bottom tab group
 	Editor.gui.bottomTab.updateMetadata();
 	Editor.gui.bottomTab.updateSelection();
-
-	//Right side tab group
-	/*Editor.gui.bottomTab.updateMetadata();
-	var tab = Editor.gui.bottomTab.getActual();
-	if(tab instanceof AssetExplorer || tab instanceof AnimationTab)
-	{
-		tab.updateSelection();
-	}*/
-
 	Editor.gui.treeView.updateSelection();
 	Editor.gui.panelContainer.updateSelection();
 };
@@ -1191,8 +1182,8 @@ Editor.loadProgram = function(file, binary)
 {
 	function onload()
 	{
-		//try
-		//{
+		try
+		{
 			var loader = new ObjectLoader();
 
 			var program;
@@ -1212,12 +1203,12 @@ Editor.loadProgram = function(file, binary)
 			Editor.setProgram(program);
 
 			Editor.alert("Project loaded");
-		/*}
+		}
 		catch(e)
 		{
 			Editor.alert("Error loading file\n(" + e + ")");
 			console.error("nunuStudio: Error loading file", e);
-		}*/
+		}
 	};
 
 	if(file instanceof File)
