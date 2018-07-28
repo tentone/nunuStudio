@@ -1189,10 +1189,10 @@ Editor.setProgram = function(program)
 //Load program from file
 Editor.loadProgram = function(file, binary)
 {
-	var onload = function()
+	function onload()
 	{
-		try
-		{
+		//try
+		//{
 			var loader = new ObjectLoader();
 
 			var program;
@@ -1212,12 +1212,12 @@ Editor.loadProgram = function(file, binary)
 			Editor.setProgram(program);
 
 			Editor.alert("Project loaded");
-		}
+		/*}
 		catch(e)
 		{
 			Editor.alert("Error loading file\n(" + e + ")");
 			console.error("nunuStudio: Error loading file", e);
-		}
+		}*/
 	};
 
 	if(file instanceof File)
@@ -1253,7 +1253,7 @@ Editor.loadCompressedTexture = function(data)
 {
 	var texture = new CompressedTexture();
 	
-	if(data.isCubemap)
+	if(data.isCubemap === true)
 	{
 		var faces = data.mipmaps.length / data.mipmapCount;
 

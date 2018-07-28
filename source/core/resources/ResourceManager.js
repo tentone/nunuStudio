@@ -175,9 +175,9 @@ ResourceManager.retrieveResources = function(object, manager)
 		{
 			if(child.geometry.type === "BufferGeometry" || child.geometry.type === "Geometry")
 			{
-				if(program.geometries[child.geometry.uuid] === undefined)
+				if(manager.geometries[child.geometry.uuid] === undefined)
 				{
-					program.geometries[child.geometry.uuid] = child.geometry;
+					manager.geometries[child.geometry.uuid] = child.geometry;
 				}			
 			}
 		}
