@@ -22,5 +22,6 @@ LineHelper.prototype = Object.create(THREE.Line.prototype);
 
 LineHelper.prototype.update = function()
 {
+	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
 };

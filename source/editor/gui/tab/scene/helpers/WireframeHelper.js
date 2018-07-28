@@ -17,5 +17,6 @@ WireframeHelper.prototype = Object.create(THREE.Mesh.prototype);
 
 WireframeHelper.prototype.update = function()
 {
+	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
 };

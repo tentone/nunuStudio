@@ -18,5 +18,6 @@ SkinnedWireframeHelper.prototype = Object.create(THREE.SkinnedMesh.prototype);
 
 SkinnedWireframeHelper.prototype.update = function()
 {
+	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
 };
