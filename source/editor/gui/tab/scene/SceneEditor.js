@@ -10,12 +10,12 @@ function SceneEditor(parent, closeable, container, index)
 	this.keyboard = new Keyboard();
 	this.mouse = new Mouse();
 
+	//Renderer
+	this.renderer = null;
+
 	//Canvas
 	this.canvas = null;
 	this.resetCanvas();
-
-	//Renderer
-	this.renderer = null;
 
 	//Raycaster
 	this.raycaster = new THREE.Raycaster(); 
@@ -869,7 +869,7 @@ SceneEditor.prototype.resetCanvas = function()
 					}
 				}
 				//Cubemap
-				else if(draggedObject.isCubeTexture)
+				else if(draggedObject.isCubeTexture === true)
 				{
 					if(object.material instanceof THREE.Material)
 					{
@@ -1112,6 +1112,7 @@ SceneEditor.prototype.selectTool = function(tool)
 	if(this.toolMode === Editor.MOVE)
 	{
 		this.tool.setMode("translate");
+		this.tool.setSpace(Editor.settings.editor.transformationSpace);
 	}
 	else if(this.toolMode === Editor.SCALE)
 	{
@@ -1120,6 +1121,7 @@ SceneEditor.prototype.selectTool = function(tool)
 	else if(this.toolMode === Editor.ROTATE)
 	{
 		this.tool.setMode("rotate");
+		this.tool.setSpace(Editor.settings.editor.transformationSpace);
 	}
 	
 	if(this.toolMode === Editor.SELECT)
@@ -1273,7 +1275,7 @@ SceneEditor.prototype.resizeCanvas = function()
 	this.canvas.style.width = this.size.x + "px";
 	this.canvas.style.height = this.size.y + "px";
 
-	if(this.renderer !== undefined)
+	if(this.renderer !== null)
 	{
 		this.renderer.setSize(this.size.x, this.size.y, false);
 

@@ -25,6 +25,7 @@ function RendererCanvas(parent)
 	 * @attribute canvas
 	 * @type {DOM}
 	 */
+	this.canvas = null;
 	this.resetCanvas();
 
 	/**
@@ -33,6 +34,7 @@ function RendererCanvas(parent)
 	 * @attribute renderer
 	 * @type {THREE.WebGlRenderer}
 	 */
+	this.renderer = null;
 	this.createRenderer();
 }
 
@@ -119,8 +121,6 @@ RendererCanvas.prototype.createRenderer = function()
 	this.renderer.gammaFactor = 2;
 	this.renderer.gammaInput = false;
 	this.renderer.gammaOutput = false;
-
-	this.renderer.setSize(this.element.width, this.element.height);
 };
 
 /**
@@ -137,6 +137,7 @@ RendererCanvas.prototype.reloadContext = function()
 	this.forceContextLoss();
 	this.resetCanvas();
 	this.createRenderer();
+	this.updateSize();
 };
 
 /**
