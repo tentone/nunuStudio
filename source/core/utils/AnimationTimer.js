@@ -8,13 +8,13 @@
  * Loop time can be changed dinamically.
  *
  * @class AnimationTimer
- * @constructor
  */
 function AnimationTimer(callback)
 {
 	this.callback = callback;
 
 	this.running = false;
+	this.id = -1;
 }
 
 /**
@@ -38,11 +38,11 @@ AnimationTimer.prototype.start = function()
 
 		if(self.running)
 		{
-			requestAnimationFrame(loop);
+			self.id = requestAnimationFrame(loop);
 		}
 	}
-	loop();
 
+	loop();
 };
 
 /**
@@ -53,4 +53,5 @@ AnimationTimer.prototype.start = function()
 AnimationTimer.prototype.stop = function()
 {
 	this.running = false;
+	cancelAnimationFrame(this.id);
 };

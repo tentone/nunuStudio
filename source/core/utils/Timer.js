@@ -14,10 +14,13 @@ function Timer(callback, time)
 	this.time = time;
 
 	this.running = false;
+	this.id = -1;
 }
 
 /**
  * Start timer, is the timer is already running dosen't do anything.
+ *
+ * The callback is called right after starting the timer.
  * 
  * @method start
  */
@@ -37,11 +40,11 @@ Timer.prototype.start = function()
 
 		if(self.running)
 		{
-			setTimeout(loop, self.time);
+			self.id = setTimeout(loop, self.time);
 		}
 	}
-	loop();
 
+	loop();
 };
 
 /**
@@ -52,4 +55,5 @@ Timer.prototype.start = function()
 Timer.prototype.stop = function()
 {
 	this.running = false;
+	clearTimeout(self.id);
 };
