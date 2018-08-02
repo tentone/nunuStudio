@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Check box input element.
+ * 
+ * @class CheckBox
+ * @extends {Element}
+ * @param {Element} parent Parent element.
+ */
 function CheckBox(parent)
 {
 	Element.call(this, parent, "div");
@@ -39,29 +46,48 @@ function CheckBox(parent)
 
 CheckBox.prototype = Object.create(Element.prototype);
 
-//Set if element if disabled
+/**
+ * Set if element is disabled.
+ *
+ * @method setDisabled
+ */
 CheckBox.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;
 };
 
-//Set checkbox value
+/**
+ * Set checkbox value.
+ * 
+ * @method setValue
+ * @param {Boolean} value
+ */
 CheckBox.prototype.setValue = function(value)
 {
 	this.value = value;
 	this.check.style.visibility = this.value ? "visible" : "hidden";
 };
 
-//Get checkbox value
+/**
+ * Get checkbox value.
+ * 
+ * @method getValue
+ * @return {Boolean} Value from the element.
+ */
 CheckBox.prototype.getValue = function()
 {
 	return this.value;
 };
 
-//Set onchange onChange
-CheckBox.prototype.setOnChange = function(onChange)
+/**
+ * Set onchange callback.
+ * 
+ * @method setOnChange
+ * @param {Function} callback
+ */
+CheckBox.prototype.setOnChange = function(callback)
 {
-	this.onChange = onChange;
+	this.onChange = callback;
 };
 
 CheckBox.prototype.updateVisibility = function()
