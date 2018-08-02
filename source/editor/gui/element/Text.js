@@ -49,6 +49,29 @@ Text.ELLIPSIS = 11;
 Text.prototype = Object.create(Element.prototype);
 
 /**
+ * Set font to use for the text.
+ * 
+ * @method setFont
+ * @param {String} fontFamily Font family.
+ * @param {Number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
+ * @param {String} fontStyle Font style, specifies the font style for a text.
+ */
+Text.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
+{
+	this.span.style.fontFamily = fontFamily;
+
+	if(fontWeight !== undefined)
+	{
+		this.span.style.fontWeight = fontWeight;
+	}
+
+	if(fontStyle !== undefined)
+	{
+		this.span.style.fontStyle = fontStyle;
+	}
+};
+
+/**
  * Enable of disable word breaking.
  *
  * @method allowWordBreak
