@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Button used in dropdown menus and in bars.
+ * Button used in dropdown menus, context menus, etc.
  * 
  * The button has text and its possible to add a icon.
  *

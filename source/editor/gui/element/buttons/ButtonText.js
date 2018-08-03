@@ -1,46 +1,39 @@
 "use strict";
 
-"use strict";
-
 /**
- * Base button class.
+ * Button with text, inherits all methods available on the Text class.
  * 
+ * Used in menu bars, panels, etc.
+ *
  * @class ButtonText
- * @extends {Button}
+ * @extends {Button, Text}
  * @param {DOM} parent Parent element.
  */
 function ButtonText(parent)
 {
 	Button.call(this, parent);
 
-	this.element.style.display = "flex";
-	this.element.style.justifyContent = "center";
-	this.element.style.alignItems = "center";
 	this.element.style.color = Editor.theme.textColor;
+	this.element.style.display = "flex";
 	
 	//Span
 	this.span = document.createElement("span");
-	this.span.style.whiteSpace = "pre";
+	this.span.style.overflow = "hidden";
 	this.element.appendChild(this.span);
 
 	//Text
 	this.text = document.createTextNode("");
 	this.span.appendChild(this.text);
 
-	this.preventDragEvents();
 	this.setColor(Editor.theme.buttonColor, Editor.theme.buttonOverColor);
+
+	this.allowWordBreak(false);
+	this.setVerticalAlignment(Text.CENTER);
+	this.setAlignment(Text.CENTER);
 }
 
 ButtonText.prototype = Object.create(Button.prototype);
 Object.assign(ButtonText.prototype, Text.prototype);
-
-/**
- * Set ButtonText text.
- *
- * @method setText
- * @param {String} text Text.
- */
-ButtonText.prototype.setText = Text.prototype.setText;
 
 ButtonText.prototype.updateVisibility = function()
 {

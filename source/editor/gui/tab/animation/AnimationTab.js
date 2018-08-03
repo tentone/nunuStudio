@@ -23,7 +23,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.element.appendChild(this.bar);
 
 	//Animation
-	this.animationButton = new ButtonMenu(this.bar);
+	this.animationButton = new ButtonText(this.bar);
 	this.animationButton.position.set(0, 0);
 	this.animationButton.size.set(100, 20);
 	this.animationButton.setText("Add")
@@ -64,7 +64,7 @@ function AnimationTab(parent, closeable, container, index)
 		}
 	});
 
-	this.play = new ButtonMenu(this.bar);
+	this.play = new ButtonText(this.bar);
 	this.play.position.set(100, 0);
 	this.play.size.set(100, 20);
 	this.play.setText("Play")
@@ -89,7 +89,7 @@ function AnimationTab(parent, closeable, container, index)
 		}
 	});
 
-	this.stop = new ButtonMenu(this.bar);
+	this.stop = new ButtonText(this.bar);
 	this.stop.position.set(200, 0);
 	this.stop.size.set(100, 20);
 	this.stop.setText("Stop");

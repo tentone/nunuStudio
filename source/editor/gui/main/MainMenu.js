@@ -826,7 +826,7 @@ function MainMenu(parent)
 	projectMenu.updateInterface();
 
 	//About
-	var about = new ButtonMenu(this.element);
+	var about = new ButtonText(this.element);
 	about.setText("About");
 	about.size.set(100, this.size.y);
 	about.position.set(320, 0);
@@ -843,7 +843,7 @@ function MainMenu(parent)
 	});
 
 	//Run
-	this.run = new ButtonMenu(this.element);
+	this.run = new ButtonText(this.element);
 	this.run.setText("Run");
 	this.run.size.set(100, this.size.y);
 	this.run.position.set(420, 0);

@@ -18,7 +18,7 @@ function ConsoleTab(parent, closeable, container, index)
 	this.bar.style.backgroundColor = Editor.theme.barColor;
 	this.element.appendChild(this.bar);
 
-	var menu = new ButtonMenu(this.bar);
+	var menu = new ButtonText(this.bar);
 	menu.setText("Clear");
 	menu.size.set(100, 20);
 	menu.position.set(0, 0);

@@ -53,7 +53,7 @@ function CameraEditor(parent, closeable, container, index)
 
 	var addRenderPassButton = function(name, PassConstructor)
 	{
-		var button = new ButtonMenu(self.form.element);
+		var button = new ButtonText(self.form.element);
 		button.size.set(100, 18);
 		button.setText(name);
 		button.setOnClick(function()
