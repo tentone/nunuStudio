@@ -3474,8 +3474,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
             "line": 3,
-            "description": "Animation timer is a special type of timer that uses the requestAnimationFrame method.\n\nThis timer calls the method with the same rate as the screen refesh rate.\n\nLoop time can be changed dinamically.",
-            "is_constructor": 1
+            "description": "Animation timer is a special type of timer that uses the requestAnimationFrame method.\n\nThis timer calls the method with the same rate as the screen refesh rate.\n\nLoop time can be changed dinamically."
         },
         "EventManager": {
             "name": "EventManager",
@@ -14103,8 +14102,8 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Timer.js",
-            "line": 19,
-            "description": "Start timer, is the timer is already running dosen't do anything.",
+            "line": 20,
+            "description": "Start timer, is the timer is already running dosen't do anything.\n\nThe callback is called right after starting the timer.",
             "itemtype": "method",
             "name": "start",
             "class": "Timer",
@@ -14112,7 +14111,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Timer.js",
-            "line": 47,
+            "line": 50,
             "description": "Stop timer.",
             "itemtype": "method",
             "name": "stop",

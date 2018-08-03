@@ -31,7 +31,7 @@ function MainMenu(parent)
 	var fileMenu = new DropdownMenu(this.element);
 	fileMenu.setText("File");
 	fileMenu.size.set(120, this.size.y);
-	fileMenu.position.set(0,0);
+	fileMenu.position.set(0, 0);
 
 	//New project
 	fileMenu.addOption("New", function()
