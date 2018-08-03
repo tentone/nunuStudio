@@ -216,9 +216,12 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 			this.panel.style.left = this.position.x + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
+
+			console.log(out.x, out.y);
 			if(out.y !== 0)
 			{
-				this.panel.style.top = undefined;
+				console.log("y");
+				this.panel.style.top = null;
 				this.panel.style.bottom = (this.position.y + this.size.y) + "px";
 			}
 			if(out.x !== 0)
@@ -234,7 +237,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 			var out = DOMUtils.checkBorder(this.panel);
 			if(out.y !== 0)
 			{
-				this.panel.style.bottom = undefined;
+				this.panel.style.bottom = null;
 				this.panel.style.top = (this.position.y + this.size.y) + "px";
 			}
 			if(out.x !== 0)
