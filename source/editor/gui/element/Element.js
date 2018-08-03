@@ -265,6 +265,28 @@ Element.prototype.setMode = function(mode)
 };
 
 /**
+ * Set the multiple styles to the DOM element.
+ *
+ * Style are described in a object that uses the same attribute names as the normal DOM access.
+ *
+ * Here is an exaple of a style object:
+ * {
+ * backgroundColor: "#FF0000",
+ * color: "#FFFFFF"
+ * }
+ *
+ * @method setStyleList
+ * @param {Object} styleList Object describing the style to be applied to the object.
+ */
+Element.prototype.setStyleList = function(styleList)
+{
+	for(var i in styleList)
+	{
+		this.element.style[i] = styleList[i];
+	}
+};
+
+/**
  * Update visibility of this element.
  *
  * @method setVisibility

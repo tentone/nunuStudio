@@ -22,9 +22,16 @@ Canvas.prototype.setResolution = function(width, height)
 	this.element.height = height;
 };
 
-Canvas.prototype.getContext2D = function()
+/**
+ * Get a context from this canvas.
+ * 
+ * @method getContext
+ * @param {String} type Type of context to get "2d", "webgl", etc
+ * @return {Object} Context obtained from the canvas.
+ */
+Canvas.prototype.getContext = function(type)
 {
-	return this.element.getContext("2d");
+	return this.element.getContext(type);
 };
 
 Canvas.prototype.updateSize = function()
