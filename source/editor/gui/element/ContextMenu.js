@@ -99,8 +99,8 @@ ContextMenu.prototype.addMenu = function(name)
 	menu.setText(name);
 	menu.setLocation(DropdownMenu.LEFT);
 	menu.showArrow();
-	menu.text.setAlignment(Text.LEFT);
-	menu.text.position.x = 25;
+	menu.setAlignment(Text.LEFT);
+	menu.setMargin(25);
 
 	this.options.push(menu);
 

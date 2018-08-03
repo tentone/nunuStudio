@@ -4,19 +4,18 @@
  * Dropdown menu element, used to create dropdowns in menu bars and in context menus.
  * 
  * @class DropdownMenu
- * @extends {Element}
+ * @extends {Text}
  * @param {Element} parent Parent element.
  */
 function DropdownMenu(parent)
 {
-	Element.call(this, parent);
+	Text.call(this, parent);
 
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.style.cursor = "pointer";
-	this.preventDragEvents();
+	this.element.style.pointerEvents = "auto";
 
-	//Text
-	this.text = new Text(this.element);
+	this.preventDragEvents();
 
 	//Panel
 	this.panel = document.createElement("div");
@@ -87,7 +86,7 @@ DropdownMenu.UP = 1;
 DropdownMenu.LEFT = 2;
 DropdownMenu.RIGHT = 3;
 
-DropdownMenu.prototype = Object.create(Element.prototype);
+DropdownMenu.prototype = Object.create(Text.prototype);
 
 /**
  * Set location to where options should open.
@@ -119,17 +118,6 @@ DropdownMenu.prototype.setIcon = function(icon)
 {
 	this.icon.style.display = "block";
 	this.icon.src = icon;
-};
-
-/**
- * Set text.
- *
- * @method setText
- * @param {String} text Text.
- */
-DropdownMenu.prototype.setText = function(text)
-{
-	this.text.setText(text);
 };
 
 /**
@@ -195,9 +183,8 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	menu.setText(name);
 	menu.setLocation(DropdownMenu.LEFT);
 	menu.showArrow();
-
-	menu.text.setAlignment(Text.LEFT);
-	menu.text.position.set(25, 0);
+	menu.setAlignment(Text.LEFT);
+	menu.setMargin(25);
 	
 	if(icon !== undefined)
 	{
@@ -314,7 +301,7 @@ DropdownMenu.prototype.updateOptions = function()
 
 DropdownMenu.prototype.destroy = function()
 {
-	Element.prototype.destroy.call(this);
+	Text.prototype.destroy.call(this);
 
 	if(this.parent.contains(this.panel))
 	{
@@ -324,11 +311,7 @@ DropdownMenu.prototype.destroy = function()
 
 DropdownMenu.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Text.prototype.updateSize.call(this);
 
 	this.updateOptions();
-
-	//Text
-	this.text.size.set(this.size.x, this.size.y);
-	this.text.updateInterface();
 };
