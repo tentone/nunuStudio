@@ -22,18 +22,12 @@ function Interface()
 
 	//Asset
 	this.assetExplorer = this.bottomTab.addTab(AssetExplorer, false);
-	//this.assetExplorer.button.setAltText("Asset explorer");
 
 	//Console
-	if(!Nunu.developmentMode())
-	{
-		var console = this.bottomTab.addTab(ConsoleTab, false);
-		//console.button.setAltText("Console");
-	}
+	this.console = this.bottomTab.addTab(ConsoleTab, false);
 
 	//Animations
-	var animation = this.bottomTab.addTab(AnimationTab, false);
-	//animation.button.setAltText("Animation");
+	this.animation = this.bottomTab.addTab(AnimationTab, false);
 
 	//Right
 	this.rightContainer = new DualContainer(this.container.element);

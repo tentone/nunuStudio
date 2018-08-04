@@ -869,5 +869,5 @@ MainMenu.prototype = Object.create(Element.prototype);
 
 MainMenu.prototype.updateInterface = function()
 {
-	this.element.style.display = this.visible ? "block" : "none";
+	this.updateVisibility();
 };

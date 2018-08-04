@@ -2,6 +2,8 @@
 
 function ToolBar(element)
 {
+	var self = this;
+
 	this.element = element;
 	this.size = new THREE.Vector2(40, 0);
 
@@ -11,9 +13,7 @@ function ToolBar(element)
 	this.text.size.set(40, 20);
 	this.text.position.set(0, 20);
 	this.text.updateInterface();
-
-	var self = this;
-
+	
 	//Select
 	this.toolSelect = new ButtonImageToggle(this.element);
 	this.toolSelect.setSelected(true);
