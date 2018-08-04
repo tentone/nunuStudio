@@ -46,10 +46,10 @@ function DropdownMenu(parent)
 	this.element.appendChild(this.arrow);
 
 	//Options
-	this.optionsLocation = DropdownMenu.DOWN;
+	this.direction = DropdownMenu.DOWN;
+	this.expanded = false;
 	this.optionsSize = new THREE.Vector2(150, 20);
 	this.options = [];
-	this.expanded = false;
 
 	//Self pointer
 	var self = this;
@@ -95,7 +95,7 @@ DropdownMenu.prototype = Object.create(Text.prototype);
  */
 DropdownMenu.prototype.setLocation = function(location)
 {
-	this.optionsLocation = location;
+	this.direction = location;
 };
 
 /**
@@ -210,17 +210,15 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 	{
 		this.panel.style.display = "block";
 
-		if(this.optionsLocation === DropdownMenu.DOWN)
+		if(this.direction === DropdownMenu.DOWN)
 		{
 			this.panel.style.top = (this.position.y + this.size.y) + "px";
 			this.panel.style.left = this.position.x + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
 
-			console.log(out.x, out.y);
 			if(out.y !== 0)
 			{
-				console.log("y");
 				this.panel.style.top = null;
 				this.panel.style.bottom = (this.position.y + this.size.y) + "px";
 			}
@@ -229,7 +227,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 				this.panel.style.left = (this.position.x - out.x) + "px"; 
 			}
 		}
-		else if(this.optionsLocation === DropdownMenu.UP)
+		else if(this.direction === DropdownMenu.UP)
 		{
 			this.panel.style.bottom = (this.position.y + this.size.y) + "px";
 			this.panel.style.left = this.position.x + "px";
@@ -245,7 +243,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 				this.panel.style.left = (this.position.x - out.x) + "px"; 
 			}
 		}
-		else if(this.optionsLocation === DropdownMenu.LEFT)
+		else if(this.direction === DropdownMenu.LEFT)
 		{
 			this.panel.style.top = this.position.y + "px";
 			this.panel.style.left = (this.position.x + this.size.x) + "px";
@@ -260,7 +258,7 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 				this.panel.style.top = (this.position.y - out.y) + "px";
 			}
 		}
-		else if(this.optionsLocation === DropdownMenu.RIGHT)
+		else if(this.direction === DropdownMenu.RIGHT)
 		{
 			this.panel.style.top = this.position.y + "px";
 			this.panel.style.left = (this.position.x - this.size.x) + "px";

@@ -273,6 +273,7 @@ include("editor/gui/element/Form.js");
 include("editor/gui/element/DropdownMenu.js");
 include("editor/gui/element/ContextMenu.js");
 
+include("editor/gui/element/media/Media.js");
 include("editor/gui/element/media/AudioPlayer.js");
 include("editor/gui/element/media/VideoPlayer.js");
 
