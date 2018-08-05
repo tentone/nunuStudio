@@ -2,10 +2,64 @@
 
 function TabSelector(parent, tab)
 {
-	TabButton.call(this, parent, tab);
+	Element.call(this, parent);
 
 	var self = this;
 
+	this.element.draggable = true;
+	this.element.style.cursor = "pointer";
+	this.element.style.boxSizing = "border-box";
+	this.element.style.backgroundColor = Editor.theme.buttonColor;
+
+	//Tab
+	this.tab = tab;
+
+	//Icon
+	this.icon = document.createElement("img");
+	this.icon.style.pointerEvents = "none";
+	this.icon.style.position = "absolute";
+	this.icon.src = tab.icon;
+	this.element.appendChild(this.icon);
+
+	//Text
+	this.text = document.createElement("div");
+	this.text.style.position = "absolute";
+	this.text.style.overflow = "hidden";
+	this.text.style.textAlign = "center";
+	this.text.style.pointerEvents = "none";
+	this.text.style.textOverflow = "ellipsis";
+	this.text.style.whiteSpace = "nowrap";
+	this.text.style.color = Editor.theme.textColor;
+	this.element.appendChild(this.text);
+
+	//Title
+	this.title = document.createTextNode(tab.title);
+	this.text.appendChild(this.title);
+
+	//Close button
+	this.close = document.createElement("img");
+	this.close.draggable = false;
+	this.close.style.position = "absolute";
+	this.close.style.opacity = 0.5;
+	this.close.style.display = (tab.closeable) ? "block" : "none";
+	this.close.src = Editor.filePath + "icons/misc/close.png";
+	this.element.appendChild(this.close);
+
+	this.close.onmouseenter = function()
+	{
+		this.style.opacity = 1.0;
+	};
+
+	this.close.onmouseleave = function()
+	{
+		this.style.opacity = 0.5;
+	};
+
+	this.close.onclick = function()
+	{
+		self.tab.close();
+	};
+	
 	//Drag state
 	var dragState = 0;
 
@@ -163,4 +217,50 @@ function TabSelector(parent, tab)
 	};
 }
 
-TabSelector.prototype = Object.create(TabButton.prototype);
+TabSelector.prototype = Object.create(Element.prototype);
+
+//Set button icon
+TabSelector.prototype.setIcon = function(icon)
+{
+	this.tab.icon = icon;
+	this.icon.src = icon;
+};
+
+//Set button name
+TabSelector.prototype.setName = function(text)
+{
+	this.tab.title = text;
+	this.title.data = text;
+};
+
+TabSelector.prototype.updateSelection = function()
+{
+	this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
+};
+
+//Update Interface
+TabSelector.prototype.updateSize = function()
+{
+	Element.prototype.updateSize.call(this);
+	
+	//Icon
+	this.icon.style.top = (this.size.y * 0.2) + "px";
+	this.icon.style.left = (this.size.y * 0.2) + "px"
+	this.icon.style.width = (this.size.y * 0.6) + "px";
+	this.icon.style.height = (this.size.y * 0.6) + "px";
+
+	//Text
+	this.text.style.left = this.size.y + "px";
+	this.text.style.top = ((this.size.y - 12) / 2) + "px";
+	this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
+	this.text.style.height = this.size.y + "px";
+
+	//Close
+	this.close.style.display = (this.tab.closeable) ? "block" : "none";
+	this.close.style.width = (this.size.y * 0.4) + "px";
+	this.close.style.height = (this.size.y * 0.4) + "px";
+	this.close.style.top = (this.size.y * 0.3) + "px";
+	this.close.style.right = (this.size.y * 0.3) + "px";
+
+	this.updateSelection();
+};
