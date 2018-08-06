@@ -128,7 +128,6 @@ ContextMenu.prototype.updateSize = function()
 	this.updateOptions();
 };
 
-
 ContextMenu.prototype.updatePosition = function()
 {
 	this.element.style.top = (this.position.y - this.offset.y) + "px";
