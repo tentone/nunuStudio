@@ -270,8 +270,9 @@ include("editor/gui/element/Text.js");
 include("editor/gui/element/Canvas.js");
 include("editor/gui/element/RendererCanvas.js");
 include("editor/gui/element/Form.js");
-include("editor/gui/element/DropdownMenu.js");
-include("editor/gui/element/ContextMenu.js");
+
+include("editor/gui/element/dropdown/ContextMenu.js");
+include("editor/gui/element/dropdown/DropdownMenu.js");
 
 include("editor/gui/element/media/Media.js");
 include("editor/gui/element/media/AudioPlayer.js");
