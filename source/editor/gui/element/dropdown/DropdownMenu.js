@@ -91,9 +91,9 @@ DropdownMenu.prototype = Object.create(Text.prototype);
 /**
  * Set location to where options should open.
  *
- * @method setLocation
+ * @method setDirection
  */
-DropdownMenu.prototype.setLocation = function(location)
+DropdownMenu.prototype.setDirection = function(location)
 {
 	this.direction = location;
 };
@@ -181,7 +181,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 {
 	var menu = new DropdownMenu(this.panel);
 	menu.setText(name);
-	menu.setLocation(DropdownMenu.LEFT);
+	menu.setDirection(DropdownMenu.LEFT);
 	menu.showArrow();
 	menu.setAlignment(Text.LEFT);
 	menu.setMargin(25);

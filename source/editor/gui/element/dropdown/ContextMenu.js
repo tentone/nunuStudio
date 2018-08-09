@@ -95,7 +95,7 @@ ContextMenu.prototype.addMenu = function(name)
 {
 	var menu = new DropdownMenu(this.element);
 	menu.setText(name);
-	menu.setLocation(DropdownMenu.LEFT);
+	menu.setDirection(DropdownMenu.LEFT);
 	menu.showArrow();
 	menu.setAlignment(Text.LEFT);
 	menu.setMargin(25);
