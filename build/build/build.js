@@ -165,8 +165,8 @@ function join(path, main)
 			}
 		}
 	}
-	js += code;
-	js = js.replace(/"use strict";/gi, "").replace(/include\(".+?"\);/gi, "").replace(/^\s*\n/gm, "") ;
+	
+	js = code.replace(/"use strict";/gi, "").replace(/include\(".+?"\);/gi, "").replace(/^\s*\n/gm, "") + js;
 	
 	return {js: js, css: css};
 }
