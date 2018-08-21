@@ -1,6 +1,6 @@
 "use strict";
 
-function TabSelector(parent, tab)
+function TabButtonNew(parent, tab)
 {
 	Element.call(this, parent);
 
@@ -217,29 +217,29 @@ function TabSelector(parent, tab)
 	};
 }
 
-TabSelector.prototype = Object.create(Element.prototype);
+TabButtonNew.prototype = Object.create(Element.prototype);
 
 //Set button icon
-TabSelector.prototype.setIcon = function(icon)
+TabButtonNew.prototype.setIcon = function(icon)
 {
 	this.tab.icon = icon;
 	this.icon.src = icon;
 };
 
 //Set button name
-TabSelector.prototype.setName = function(text)
+TabButtonNew.prototype.setName = function(text)
 {
 	this.tab.title = text;
 	this.title.data = text;
 };
 
-TabSelector.prototype.updateSelection = function()
+TabButtonNew.prototype.updateSelection = function()
 {
 	this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
 };
 
 //Update Interface
-TabSelector.prototype.updateSize = function()
+TabButtonNew.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 	

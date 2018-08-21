@@ -1,6 +1,6 @@
 "use strict";
 
-function TabContainer(parent)
+function TabGroupNew(parent)
 {
 	Element.call(this, parent);
 
@@ -23,16 +23,21 @@ function TabContainer(parent)
 	this.element.appendChild(this.tab);
 
 	//Options
-	this.mode = TabGroup.TOP;
+	this.mode = TabGroupNew.TOP;
 	this.buttonSize = new THREE.Vector2(140, 20);
 	this.selected = null;
 	this.options = [];
 }
 
-TabContainer.prototype = Object.create(Element.prototype);
+TabGroupNew.TOP = 0;
+TabGroupNew.BOTTOM = 1;
+TabGroupNew.LEFT = 2;
+TabGroupNew.RIGHT = 3;
+
+TabGroupNew.prototype = Object.create(Element.prototype);
 
 //Update all tabs object data
-TabContainer.prototype.updateMetadata = function()
+TabGroupNew.prototype.updateMetadata = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -41,7 +46,7 @@ TabContainer.prototype.updateMetadata = function()
 };
 
 //Update all tab object views
-TabContainer.prototype.updateObjectsView = function(changes)
+TabGroupNew.prototype.updateObjectsView = function(changes)
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -50,7 +55,7 @@ TabContainer.prototype.updateObjectsView = function(changes)
 };
 
 //Update all tab object views
-TabContainer.prototype.updateSelection = function()
+TabGroupNew.prototype.updateSelection = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -59,7 +64,7 @@ TabContainer.prototype.updateSelection = function()
 };
 
 //Update all tab object views
-TabContainer.prototype.updateSettings = function()
+TabGroupNew.prototype.updateSettings = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -68,7 +73,7 @@ TabContainer.prototype.updateSettings = function()
 };
 
 //Get actual tab
-TabContainer.prototype.getActual = function()
+TabGroupNew.prototype.getActual = function()
 {
 	if(this.selected !== null)
 	{
@@ -79,7 +84,7 @@ TabContainer.prototype.getActual = function()
 };
 
 //Close actual tab if its closeable
-TabContainer.prototype.closeActual = function()
+TabGroupNew.prototype.closeActual = function()
 {
 	if(this.selected !== null)
 	{
@@ -92,7 +97,7 @@ TabContainer.prototype.closeActual = function()
 };
 
 //Select tab
-TabContainer.prototype.selectTab = function(tab)
+TabGroupNew.prototype.selectTab = function(tab)
 {
 	if(this.selected !== null)
 	{
@@ -120,7 +125,7 @@ TabContainer.prototype.selectTab = function(tab)
 };
 
 //Select next tab
-TabContainer.prototype.selectNextTab = function()
+TabGroupNew.prototype.selectNextTab = function()
 {
 	if(this.options.length > 0)
 	{
@@ -129,7 +134,7 @@ TabContainer.prototype.selectNextTab = function()
 };
 
 //Select previous tab
-TabContainer.prototype.selectPreviousTab = function()
+TabGroupNew.prototype.selectPreviousTab = function()
 {
 	if(this.options.length > 0)
 	{
@@ -145,10 +150,10 @@ TabContainer.prototype.selectPreviousTab = function()
 };
 
 //Add new option to tab grounp
-TabContainer.prototype.addTab = function(TabConstructor, closeable)
+TabGroupNew.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
-	var button = new TabSelector(this.buttons, tab);
+	var button = new TabButtonNew(this.buttons, tab);
 	tab.button = button;
 
 	this.options.push(tab);
@@ -161,7 +166,7 @@ TabContainer.prototype.addTab = function(TabConstructor, closeable)
 };
 
 //Get tab from tab type and attached object is there is any
-TabContainer.prototype.getTab = function(type, obj)
+TabGroupNew.prototype.getTab = function(type, obj)
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -178,7 +183,7 @@ TabContainer.prototype.getTab = function(type, obj)
 };
 
 //Attach tab to this group and remove it from the original group
-TabContainer.prototype.attachTab = function(tab, insertIndex)
+TabGroupNew.prototype.attachTab = function(tab, insertIndex)
 {
 	tab.container.removeTab(tab.index, true);
 
@@ -209,7 +214,7 @@ TabContainer.prototype.attachTab = function(tab, insertIndex)
 };
 
 //Remove tab from group
-TabContainer.prototype.removeTab = function(index, dontDestroy)
+TabGroupNew.prototype.removeTab = function(index, dontDestroy)
 {	
 	//If index is an object get the actual index
 	if(index instanceof TabElement)
@@ -249,7 +254,7 @@ TabContainer.prototype.removeTab = function(index, dontDestroy)
 };
 
 //Remove all tabs
-TabContainer.prototype.clear = function()
+TabGroupNew.prototype.clear = function()
 {
 	while(this.options.length > 0)
 	{
@@ -260,7 +265,7 @@ TabContainer.prototype.clear = function()
 };
 
 //Move tab from position to another
-TabContainer.prototype.moveButton = function(origin, destination)
+TabGroupNew.prototype.moveButton = function(origin, destination)
 {
 	var button = this.options[origin];
 
@@ -272,7 +277,7 @@ TabContainer.prototype.moveButton = function(origin, destination)
 };
 
 //Update tabs index
-TabContainer.prototype.updateOptionIndex = function()
+TabGroupNew.prototype.updateOptionIndex = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -280,4 +285,4 @@ TabContainer.prototype.updateOptionIndex = function()
 	}
 };
 
-TabContainer.prototype.updateSize = TabGroup.prototype.updateSize;
+TabGroupNew.prototype.updateSize = TabGroup.prototype.updateSize;

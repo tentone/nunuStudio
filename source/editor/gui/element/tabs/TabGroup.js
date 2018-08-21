@@ -41,7 +41,6 @@ function TabGroup(parent)
 	this.options = [];
 }
 
-//Tab buttons position
 TabGroup.TOP = 0;
 TabGroup.BOTTOM = 1;
 TabGroup.LEFT = 2;
