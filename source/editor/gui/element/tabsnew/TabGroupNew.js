@@ -256,12 +256,19 @@ TabGroupNew.prototype.removeTab = function(index, dontDestroy)
 //Remove all tabs
 TabGroupNew.prototype.clear = function()
 {
-	while(this.options.length > 0)
+	var i = 0;
+	while(i < this.options.length)
 	{
-		this.options.pop().destroy();
+		if(this.options[i].closeable)
+		{
+			this.options[i].destroy();
+			this.options.splice(i, 1);
+		}
+		else
+		{
+			i++;
+		}
 	}
-
-	this.selectTab(null);
 };
 
 //Move tab from position to another

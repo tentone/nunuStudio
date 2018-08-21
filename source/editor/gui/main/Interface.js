@@ -2,47 +2,23 @@
 
 function Interface()
 {
-	//Main container
-	this.container = new DualContainer(document.body);
-	this.container.tabPosition = 0.75;
-
-	//Left
-	this.leftContainer = new DualContainer(this.container.element);
-	this.leftContainer.orientation = DualContainer.VERTICAL;
-	this.leftContainer.tabPosition = 0.7;
-	this.container.attachA(this.leftContainer);
-
 	//Top Tab
-	this.tab = new TabGroupNew(this.leftContainer.element);
-	this.leftContainer.attachA(this.tab);
-
-	//Bottom tab
-	this.bottomTab = new TabGroupNew(this.leftContainer.element);
-	this.leftContainer.attachB(this.bottomTab);
+	this.tab = new TabGroupNew();
 
 	//Asset
-	this.assetExplorer = this.bottomTab.addTab(AssetExplorer, false);
+	this.assetExplorer = this.tab.addTab(AssetExplorer, false);
 
 	//Console
-	this.console = this.bottomTab.addTab(ConsoleTab, false);
+	this.console = this.tab.addTab(ConsoleTab, false);
 
 	//Animations
-	this.animation = this.bottomTab.addTab(AnimationTab, false);
+	this.animation = this.tab.addTab(AnimationTab, false);
 
-	//Right
-	this.rightContainer = new DualContainer(this.container.element);
-	this.rightContainer.orientation = DualContainer.VERTICAL;
-	this.container.attachB(this.rightContainer);
-
-	//Tree view tab
-	this.treeTab = new TabGroupNew(this.rightContainer.element);
-	this.rightContainer.attachA(this.treeTab);
-	this.treeView = this.treeTab.addTab(TreeView, false)
-
-	//Object panel tab
-	this.panelTab = new TabGroupNew(this.rightContainer.element);
-	this.rightContainer.attachB(this.panelTab);
-	this.panelContainer = this.panelTab.addTab(PanelContainer, false);
+	//Tree view
+	this.treeView = this.tab.addTab(TreeView, false)
+	
+	//Inspector
+	this.panelContainer = this.tab.addTab(PanelContainer, false);
 
 	//Top Bar
 	this.menuBar = new MainMenu();
@@ -68,9 +44,9 @@ Interface.prototype.updateInterface = function()
 	this.sideBar.updateInterface();
 
 	//Container
-	this.container.position.set(this.sideBar.size.x, this.menuBar.size.y);
-	this.container.size.set(size.x - this.sideBar.size.x, size.y - this.menuBar.size.y);
-	this.container.updateInterface();
+	this.tab.position.set(this.sideBar.size.x, this.menuBar.size.y);
+	this.tab.size.set(size.x - this.sideBar.size.x, size.y - this.menuBar.size.y);
+	this.tab.updateInterface();
 };
 
 //Open to save program window

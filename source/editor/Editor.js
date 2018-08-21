@@ -1040,14 +1040,14 @@ Editor.selectTool = function(tool)
 
 Editor.updateSettings = function()
 {
-	Editor.gui.bottomTab.updateSettings();
+	Editor.gui.tab.updateSettings();
 };
 
 //Update all object views
 Editor.updateObjectsViewsGUI = function()
 {
-	Editor.gui.bottomTab.updateObjectsView();
-	Editor.gui.bottomTab.updateMetadata();
+	Editor.gui.tab.updateObjectsView();
+	Editor.gui.tab.updateMetadata();
 
 	Editor.gui.tab.updateObjectsView();
 	Editor.gui.tab.updateMetadata();
@@ -1072,8 +1072,8 @@ Editor.updateSelectionGUI = function()
 	}
 
 	//Bottom tab group
-	Editor.gui.bottomTab.updateMetadata();
-	Editor.gui.bottomTab.updateSelection();
+	Editor.gui.tab.updateMetadata();
+	Editor.gui.tab.updateSelection();
 	Editor.gui.treeView.updateSelection();
 	Editor.gui.panelContainer.updateSelection();
 };
