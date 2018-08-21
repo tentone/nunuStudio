@@ -26,7 +26,20 @@ function TabGroupNew(parent)
 	this.mode = TabGroupNew.TOP;
 	this.buttonSize = new THREE.Vector2(140, 20);
 	this.selected = null;
+	
+	/**
+	 * Tab elements attache to this group.
+	 * 
+	 * @type {Array}
+	 */
 	this.options = [];
+
+	/**
+	 * Children tab groups.
+	 * 
+	 * @type {Array}
+	 */
+	this.children = [];
 }
 
 TabGroupNew.TOP = 0;
@@ -35,6 +48,27 @@ TabGroupNew.LEFT = 2;
 TabGroupNew.RIGHT = 3;
 
 TabGroupNew.prototype = Object.create(Element.prototype);
+
+/** 
+ * Tab split test using a dualcontainer element.
+ */
+TabGroupNew.prototype.split = function(direction)
+{
+	var container = new DualContainer(this.parent);
+	container.attachA(this);
+
+	var group = new TabGroupNew(container.element);
+	container.attachB(group);
+
+	Editor.gui.tab = container;
+	Editor.gui.updateInterface();
+};
+
+//TODO
+TabGroupNew.prototype.simplify = function()
+{
+	//TODO <ADD CODE HERE>
+};
 
 //Update all tabs object data
 TabGroupNew.prototype.updateMetadata = function()
@@ -153,8 +187,7 @@ TabGroupNew.prototype.selectPreviousTab = function()
 TabGroupNew.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
-	var button = new TabButtonNew(this.buttons, tab);
-	tab.button = button;
+	tab.button = new TabButtonNew(this.buttons, tab);
 
 	this.options.push(tab);
 	if(this.selected === null)

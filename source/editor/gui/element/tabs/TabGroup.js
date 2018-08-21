@@ -167,8 +167,7 @@ TabGroup.prototype.selectPreviousTab = function()
 TabGroup.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
-	var button = new TabButton(this.buttons, tab);
-	tab.button = button;
+	tab.button = new TabButton(this.buttons, tab);
 
 	this.options.push(tab);
 	if(this.selected === null)
