@@ -33,13 +33,6 @@ function TabGroupNew(parent)
 	 * @type {Array}
 	 */
 	this.options = [];
-
-	/**
-	 * Children tab groups.
-	 * 
-	 * @type {Array}
-	 */
-	this.children = [];
 }
 
 TabGroupNew.TOP = 0;

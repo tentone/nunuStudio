@@ -285,7 +285,6 @@ include("editor/gui/element/buttons/ButtonImage.js");
 include("editor/gui/element/buttons/ButtonDrawer.js");
 include("editor/gui/element/buttons/ButtonImageToggle.js");
 
-include("editor/gui/element/containers/DivisionResizable.js");
 include("editor/gui/element/containers/DualDivision.js");
 include("editor/gui/element/containers/DualContainer.js");
 
