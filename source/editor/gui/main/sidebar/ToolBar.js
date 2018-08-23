@@ -4,18 +4,19 @@ function ToolBar(element)
 {
 	var self = this;
 
+	this.isElement = true;
 	this.element = element;
 	this.size = new THREE.Vector2(40, 0);
 
 	//Text
-	this.text = new Text(this.element);
+	this.text = new Text(this);
 	this.text.setText("Tools");
 	this.text.size.set(40, 20);
 	this.text.position.set(0, 20);
 	this.text.updateInterface();
 	
 	//Select
-	this.toolSelect = new ButtonImageToggle(this.element);
+	this.toolSelect = new ButtonImageToggle(this);
 	this.toolSelect.setSelected(true);
 	this.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
 	this.toolSelect.size.set(this.size.x, this.size.x);
@@ -28,7 +29,7 @@ function ToolBar(element)
 	});
 
 	//Move
-	this.toolMove = new ButtonImageToggle(this.element);
+	this.toolMove = new ButtonImageToggle(this);
 	this.toolMove.setImage(Editor.filePath + "icons/tools/move.png");
 	this.toolMove.size.set(this.size.x, this.size.x);
 	this.toolMove.position.set(0, 80);
@@ -40,7 +41,7 @@ function ToolBar(element)
 	});
 
 	//Resize
-	this.toolScale = new ButtonImageToggle(this.element);
+	this.toolScale = new ButtonImageToggle(this);
 	this.toolScale.setImage(Editor.filePath + "icons/tools/resize.png");
 	this.toolScale.size.set(this.size.x, this.size.x);
 	this.toolScale.position.set(0, 120);
@@ -52,7 +53,7 @@ function ToolBar(element)
 	});
 
 	//Rotate
-	this.toolRotate = new ButtonImageToggle(this.element);
+	this.toolRotate = new ButtonImageToggle(this);
 	this.toolRotate.setImage(Editor.filePath + "icons/tools/rotate.png");
 	this.toolRotate.size.set(this.size.x, this.size.x);
 	this.toolRotate.position.set(0, 160);

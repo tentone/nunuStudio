@@ -2,7 +2,7 @@
 
 function VectorBox(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	//X Text
 	this.xText = document.createElement("div");

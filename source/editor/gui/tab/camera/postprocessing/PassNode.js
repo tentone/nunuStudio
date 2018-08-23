@@ -23,7 +23,7 @@ function PassNode(parent, name)
 
 	//Enabled
 	this.addText("Enabled");
-	this.enabled = new CheckBox(this.element);
+	this.enabled = new CheckBox(this);
 	this.enabled.size.set(15, 15);
 	this.enabled.setOnChange(function()
 	{
@@ -34,7 +34,7 @@ function PassNode(parent, name)
 
 	//Render to screen
 	this.addText("Output");
-	this.renderToScreen = new CheckBox(this.element);
+	this.renderToScreen = new CheckBox(this);
 	this.renderToScreen.size.set(15, 15);
 	this.renderToScreen.setOnChange(function()
 	{
@@ -44,7 +44,7 @@ function PassNode(parent, name)
 	this.nextRow();
 
 	//Up
-	this.up = new ButtonText(this.element);
+	this.up = new ButtonText(this);
 	this.up.size.set(50, 18);
 	this.up.setText("Up");
 	this.up.setOnClick(function()
@@ -54,7 +54,7 @@ function PassNode(parent, name)
 	});
 
 	//Down
-	this.down = new ButtonText(this.element);
+	this.down = new ButtonText(this);
 	this.down.size.set(50, 18);
 	this.down.setText("Down");
 	this.down.setOnClick(function()
@@ -64,7 +64,7 @@ function PassNode(parent, name)
 	});
 
 	//Delete
-	this.delete = new ButtonText(this.element);
+	this.delete = new ButtonText(this);
 	this.delete.size.set(70, 18);
 	this.delete.setText("Delete");
 	this.delete.setOnClick(function()

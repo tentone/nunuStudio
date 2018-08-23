@@ -2,7 +2,7 @@
 
 function CubeTextureBox(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	//Texture preview division
 	this.preview = document.createElement("div");
@@ -51,7 +51,7 @@ function CubeTextureBox(parent)
 	};
 
 	//Form
-	this.form = new Form(this.element);
+	this.form = new Form(this);
 	this.form.defaultTextWidth = 60;
 	this.form.spacing.set(10, 5);
 
@@ -64,7 +64,7 @@ function CubeTextureBox(parent)
 
 	//WrapS
 	this.form.addText("Mapping");
-	this.mapping = new DropdownList(this.element);
+	this.mapping = new DropdownList(this);
 	this.mapping.size.set(120, 18);
 	this.mapping.addValue("Reflection Mapping", THREE.CubeReflectionMapping);
 	this.mapping.addValue("Refraction Mapping", THREE.CubeRefractionMapping);

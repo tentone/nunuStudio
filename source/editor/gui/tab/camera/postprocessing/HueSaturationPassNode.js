@@ -7,7 +7,7 @@ function HueSaturationPassNode(parent)
 	var self = this;
 
 	this.addText("Hue");
-	this.hue = new Slider(this.element);
+	this.hue = new Slider(this);
 	this.hue.size.set(80, 18);
 	this.hue.setStep(0.05);
 	this.hue.setRange(-1, 1);
@@ -19,7 +19,7 @@ function HueSaturationPassNode(parent)
 	this.nextRow();
 
 	this.addText("Saturation");
-	this.saturation = new Slider(this.element);
+	this.saturation = new Slider(this);
 	this.saturation.size.set(80, 18);
 	this.saturation.setStep(0.05);
 	this.saturation.setRange(-1, 1);

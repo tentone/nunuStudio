@@ -2,7 +2,7 @@
 
 function AnimationKeyframe(parent, editor, trackEditor, track, index)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.cursor = "pointer";

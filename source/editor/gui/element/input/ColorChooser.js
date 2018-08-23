@@ -15,7 +15,7 @@ function ColorChooser(parent)
 	this.element.style.appearance = "textfield";
 
 	//Color chooser
-	this.color = new jscolor(this.element);
+	this.color = new jscolor(this);
 	this.color.backgroundColor = Editor.theme.boxColor;
 	this.color.insetColor = Editor.theme.boxColor;
 	this.color.shadow = false;

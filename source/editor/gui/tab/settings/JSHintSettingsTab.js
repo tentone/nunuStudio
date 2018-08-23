@@ -10,7 +10,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	var self = this;
 
 	//Form
-	this.form = new Form(this.element);
+	this.form = new Form(this);
 	this.form.defaultTextWidth = 125;
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);

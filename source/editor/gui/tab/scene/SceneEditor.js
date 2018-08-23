@@ -78,7 +78,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.setCameraMode(SceneEditor.PERSPECTIVE);
 
 	//Fullscreen button
-	this.fullscreenButton = new ButtonImage(this.element);
+	this.fullscreenButton = new ButtonImage(this);
 	this.fullscreenButton.position.set(5, 5);
 	this.fullscreenButton.size.set(30, 30);
 	this.fullscreenButton.setImage(Editor.filePath + "icons/misc/fullscreen.png");
@@ -107,7 +107,7 @@ function SceneEditor(parent, closeable, container, index)
 	});
 
 	//VR button
-	this.vrButton = new ButtonImage(this.element);
+	this.vrButton = new ButtonImage(this);
 	this.vrButton.size.set(30, 30);
 	this.vrButton.position.set(40, 5);
 	this.vrButton.setImage(Editor.filePath + "icons/misc/vr.png");
@@ -129,7 +129,7 @@ function SceneEditor(parent, closeable, container, index)
 	};
 
 	//Transformation mode
-	this.transformationSpace = new DropdownList(this.element);
+	this.transformationSpace = new DropdownList(this);
 	this.transformationSpace.size.set(60, 30);
 	this.transformationSpace.position.set(145, 5);
 	this.transformationSpace.updatePosition(Element.BOTTOM_RIGHT);
@@ -152,7 +152,7 @@ function SceneEditor(parent, closeable, container, index)
 	};
 
 	//Navigation modes
-	this.navigation = new DropdownList(this.element);
+	this.navigation = new DropdownList(this);
 	this.navigation.setAltText("Camera navigation mode");
 	this.navigation.size.set(100, 30);
 	this.navigation.position.set(40, 5);
@@ -182,7 +182,7 @@ function SceneEditor(parent, closeable, container, index)
 	};
 
 	//Camera mode button
-	this.cameraButton = new ButtonImage(this.element);
+	this.cameraButton = new ButtonImage(this);
 	this.cameraButton.position.set(5, 5);
 	this.cameraButton.size.set(30, 30);
 	this.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");

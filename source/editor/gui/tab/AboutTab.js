@@ -19,7 +19,7 @@ function AboutTab(parent, closeable, container, index)
 	this.element.appendChild(this.logo);
 
 	//Version
-	this.name = new Text(this.element);
+	this.name = new Text(this);
 	this.name.element.style.top = "30%";
 	this.name.element.style.left = "0%";
 	this.name.element.style.width = "100%";
@@ -42,7 +42,7 @@ function AboutTab(parent, closeable, container, index)
 
 	for(var i = 0; i < libs.length; i++)
 	{
-		var text = new Text(this.element);
+		var text = new Text(this);
 		text.element.style.top = top + "%";
 		text.element.style.left = "0%";
 		text.element.style.width = "100%";

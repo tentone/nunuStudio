@@ -5,6 +5,7 @@
  * 
  * It does not extend the Component class, but has the same base attributes. 
  *
+ * @static
  * @class Body
  */
 var Body = 
@@ -17,3 +18,15 @@ var Body =
 	position: new THREE.Vector2(0, 0),
 	_size: new THREE.Vector2(0, 0)
 }
+
+Object.defineProperties(Body,
+{
+	size:
+	{
+		get: function()
+		{
+			Body._size.set(window.innerWidth, window.innerHeight);
+			return Body._size;
+		}
+	}
+});

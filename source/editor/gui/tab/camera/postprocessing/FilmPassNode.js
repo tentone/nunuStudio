@@ -7,7 +7,7 @@ function FilmPassNode(parent)
 	var self = this;
 
 	this.addText("Grayscale");
-	this.grayscale = new CheckBox(this.element);
+	this.grayscale = new CheckBox(this);
 	this.grayscale.size.set(15, 15);
 	this.grayscale.setOnChange(function()
 	{
@@ -17,7 +17,7 @@ function FilmPassNode(parent)
 	this.nextRow();
 
 	this.addText("Noise");
-	this.noiseIntensity = new NumberBox(this.element);
+	this.noiseIntensity = new NumberBox(this);
 	this.noiseIntensity.size.set(60, 18);
 	this.noiseIntensity.setOnChange(function()
 	{
@@ -27,7 +27,7 @@ function FilmPassNode(parent)
 	this.nextRow();
 
 	this.addText("Intensity");
-	this.scanlinesIntensity = new NumberBox(this.element);
+	this.scanlinesIntensity = new NumberBox(this);
 	this.scanlinesIntensity.size.set(60, 18);
 	this.scanlinesIntensity.setOnChange(function()
 	{
@@ -37,7 +37,7 @@ function FilmPassNode(parent)
 	this.nextRow();
 
 	this.addText("Scanlines");
-	this.scanlinesCount = new NumberBox(this.element);
+	this.scanlinesCount = new NumberBox(this);
 	this.scanlinesCount.size.set(60, 18);
 	this.scanlinesCount.setOnChange(function()
 	{

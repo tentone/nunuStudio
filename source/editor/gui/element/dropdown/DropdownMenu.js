@@ -18,11 +18,10 @@ function DropdownMenu(parent)
 	this.preventDragEvents();
 
 	//Panel
-	this.panel = document.createElement("div");
-	this.panel.style.position = "absolute";
-	this.panel.style.display = "none";
-	this.panel.style.zIndex = "300";
-	this.parent.appendChild(this.panel);
+	this.panel = new Element(parent, "div");
+	this.panel.element.style.overflow = "visible";
+	this.panel.element.style.display = "none";
+	this.panel.element.style.zIndex = "300";
 
 	//Icon
 	this.icon = document.createElement("img");
@@ -69,13 +68,13 @@ function DropdownMenu(parent)
 	};
 	
 	//Mouve over
-	this.panel.onmouseenter = function()
+	this.panel.element.onmouseenter = function()
 	{
 		self.setExpanded(true);
 	};
 
 	//Mouse leave
-	this.panel.onmouseleave = function()
+	this.panel.element.onmouseleave = function()
 	{
 		self.setExpanded(false);
 	};
@@ -208,75 +207,75 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 
 	if(this.expanded)
 	{
-		this.panel.style.display = "block";
+		this.panel.element.style.display = "block";
 
 		if(this.direction === DropdownMenu.DOWN)
 		{
-			this.panel.style.top = (this.position.y + this.size.y) + "px";
-			this.panel.style.left = this.position.x + "px";
+			this.panel.element.style.top = (this.position.y + this.size.y) + "px";
+			this.panel.element.style.left = this.position.x + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
 
 			if(out.y !== 0)
 			{
-				this.panel.style.top = null;
-				this.panel.style.bottom = (this.position.y + this.size.y) + "px";
+				this.panel.element.style.top = null;
+				this.panel.element.style.bottom = (this.position.y + this.size.y) + "px";
 			}
 			if(out.x !== 0)
 			{
-				this.panel.style.left = (this.position.x - out.x) + "px"; 
+				this.panel.element.style.left = (this.position.x - out.x) + "px"; 
 			}
 		}
 		else if(this.direction === DropdownMenu.UP)
 		{
-			this.panel.style.bottom = (this.position.y + this.size.y) + "px";
-			this.panel.style.left = this.position.x + "px";
+			this.panel.element.style.bottom = (this.position.y + this.size.y) + "px";
+			this.panel.element.style.left = this.position.x + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
 			if(out.y !== 0)
 			{
-				this.panel.style.bottom = null;
-				this.panel.style.top = (this.position.y + this.size.y) + "px";
+				this.panel.element.style.bottom = null;
+				this.panel.element.style.top = (this.position.y + this.size.y) + "px";
 			}
 			if(out.x !== 0)
 			{
-				this.panel.style.left = (this.position.x - out.x) + "px"; 
+				this.panel.element.style.left = (this.position.x - out.x) + "px"; 
 			}
 		}
 		else if(this.direction === DropdownMenu.LEFT)
 		{
-			this.panel.style.top = this.position.y + "px";
-			this.panel.style.left = (this.position.x + this.size.x) + "px";
+			this.panel.element.style.top = this.position.y + "px";
+			this.panel.element.style.left = (this.position.x + this.size.x) + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
 			if(out.x !== 0)
 			{
-				this.panel.style.left = (this.position.x - this.size.x) + "px"; 
+				this.panel.element.style.left = (this.position.x - this.size.x) + "px"; 
 			}
 			if(out.y !== 0)
 			{
-				this.panel.style.top = (this.position.y - out.y) + "px";
+				this.panel.element.style.top = (this.position.y - out.y) + "px";
 			}
 		}
 		else if(this.direction === DropdownMenu.RIGHT)
 		{
-			this.panel.style.top = this.position.y + "px";
-			this.panel.style.left = (this.position.x - this.size.x) + "px";
+			this.panel.element.style.top = this.position.y + "px";
+			this.panel.element.style.left = (this.position.x - this.size.x) + "px";
 
 			var out = DOMUtils.checkBorder(this.panel);
 			if(out.x !== 0)
 			{
-				this.panel.style.left = (this.position.x + this.size.x) + "px";
+				this.panel.element.style.left = (this.position.x + this.size.x) + "px";
 			}
 			if(out.y !== 0)
 			{
-				this.panel.style.top = (this.position.y - out.y) + "px";
+				this.panel.element.style.top = (this.position.y - out.y) + "px";
 			}
 		}
 	}
 	else
 	{
-		this.panel.style.display = "none";
+		this.panel.element.style.display = "none";
 	}
 };
 
@@ -296,8 +295,8 @@ DropdownMenu.prototype.updateOptions = function()
 	}
 
 	//Panel
-	this.panel.style.width = this.size.x + "px";
-	this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
+	this.panel.element.style.width = this.size.x + "px";
+	this.panel.element.style.height = (this.optionsSize.y * this.options.length) + "px";
 };
 
 DropdownMenu.prototype.destroy = function()

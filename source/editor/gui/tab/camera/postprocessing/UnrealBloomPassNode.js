@@ -7,7 +7,7 @@ function UnrealBloomPassNode(parent)
 	var self = this;
 
 	this.addText("Strength");
-	this.strength = new NumberBox(this.element);
+	this.strength = new NumberBox(this);
 	this.strength.size.set(60, 18);
 	this.strength.setOnChange(function()
 	{
@@ -17,7 +17,7 @@ function UnrealBloomPassNode(parent)
 	this.nextRow();
 
 	this.addText("Radius");
-	this.radius = new NumberBox(this.element);
+	this.radius = new NumberBox(this);
 	this.radius.size.set(60, 18);
 	this.radius.setOnChange(function()
 	{
@@ -27,7 +27,7 @@ function UnrealBloomPassNode(parent)
 	this.nextRow();
 
 	this.addText("Threshold");
-	this.threshold = new NumberBox(this.element);
+	this.threshold = new NumberBox(this);
 	this.threshold.size.set(60, 18);
 	this.threshold.setOnChange(function()
 	{
@@ -37,7 +37,7 @@ function UnrealBloomPassNode(parent)
 	this.nextRow();
 
 	this.addText("Smooth");
-	this.smooth = new NumberBox(this.element);
+	this.smooth = new NumberBox(this);
 	this.smooth.size.set(60, 18);
 	this.smooth.setOnChange(function()
 	{

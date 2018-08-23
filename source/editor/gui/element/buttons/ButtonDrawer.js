@@ -8,11 +8,10 @@ function ButtonDrawer(parent)
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 
 	//Panel
-	this.panel = document.createElement("div");
-	this.panel.style.position = "absolute";
-	this.panel.style.cursor = "default";
-	this.panel.style.backgroundColor = Editor.theme.barColor;
-	this.panel.style.zIndex = "250";
+	this.panel = new Element(parent, "div");
+	this.panel.element.style.overflow = "visible";
+	this.panel.element.style.backgroundColor = Editor.theme.barColor;
+	this.panel.element.style.zIndex = "250";
 
 	//Attributes
 	this.panelSize = new THREE.Vector2(0, 0);
@@ -44,31 +43,26 @@ function ButtonDrawer(parent)
 		self.element.style.backgroundColor = Editor.theme.buttonColor;
 	};
 
-	this.panel.onmouseenter = function()
+	this.panel.element.onmouseenter = function()
 	{
 		self.expanded = true;
 		self.updateInterface();
 	};
 
-	this.panel.onmouseleave = function()
+	this.panel.element.onmouseleave = function()
 	{
 		self.expanded = false;
 		self.updateInterface();
 	};
 
 	this.updatePanelSize();
-
-	this.parent.appendChild(this.panel);
 }
 
 ButtonDrawer.prototype = Object.create(ButtonImage.prototype);
 
 ButtonDrawer.prototype.destroy = function()
 {
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
+	ButtonImage.prototype.destroy.call(this);
 
 	if(this.parent.contains(this.panel))
 	{
@@ -160,15 +154,15 @@ ButtonDrawer.prototype.updateInterface = function()
 			this.panelPosition.x = this.position.x + this.size.x;
 			this.panelPosition.y = this.position.y;
 			
-			this.panel.style.display = "block";
-			this.panel.style.top = this.panelPosition.y + "px";
-			this.panel.style.left = this.panelPosition.x + "px";
-			this.panel.style.width = this.panelSize.x + "px";
-			this.panel.style.height = this.panelSize.y + "px";
+			this.panel.element.style.display = "block";
+			this.panel.element.style.top = this.panelPosition.y + "px";
+			this.panel.element.style.left = this.panelPosition.x + "px";
+			this.panel.element.style.width = this.panelSize.x + "px";
+			this.panel.element.style.height = this.panelSize.y + "px";
 		}
 		else
 		{
-			this.panel.style.display = "none";
+			this.panel.element.style.display = "none";
 		}
 	
 		this.element.style.visibility = "visible";
@@ -180,6 +174,6 @@ ButtonDrawer.prototype.updateInterface = function()
 	else
 	{
 		this.element.style.visibility = "hidden";
-		this.panel.style.display = "none";
+		this.panel.element.style.display = "none";
 	}
 };

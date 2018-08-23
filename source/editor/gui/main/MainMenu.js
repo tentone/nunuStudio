@@ -2,7 +2,7 @@
 
 function MainMenu(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.barColor;
@@ -28,7 +28,7 @@ function MainMenu(parent)
 	this.element.appendChild(logo);
 
 	//File
-	var fileMenu = new DropdownMenu(this.element);
+	var fileMenu = new DropdownMenu(this);
 	fileMenu.setText("File");
 	fileMenu.size.set(120, this.size.y);
 	fileMenu.position.set(0, 0);
@@ -539,7 +539,7 @@ function MainMenu(parent)
 	fileMenu.updateInterface();
 
 	//Editor
-	var editMenu = new DropdownMenu(this.element); editMenu.setText("Edit");
+	var editMenu = new DropdownMenu(this); editMenu.setText("Edit");
 	editMenu.size.set(100, this.size.y);
 	editMenu.position.set(120,0);
 
@@ -792,7 +792,7 @@ function MainMenu(parent)
 	editMenu.updateInterface();
 
 	//Project
-	var projectMenu = new DropdownMenu(this.element);
+	var projectMenu = new DropdownMenu(this);
 	projectMenu.setText("Project");
 	projectMenu.size.set(100, this.size.y);
 	projectMenu.position.set(220,0);
@@ -826,7 +826,7 @@ function MainMenu(parent)
 	projectMenu.updateInterface();
 
 	//About
-	var about = new ButtonText(this.element);
+	var about = new ButtonText(this);
 	about.setText("About");
 	about.size.set(100, this.size.y);
 	about.position.set(320, 0);
@@ -843,7 +843,7 @@ function MainMenu(parent)
 	});
 
 	//Run
-	this.run = new ButtonText(this.element);
+	this.run = new ButtonText(this);
 	this.run.setText("Run");
 	this.run.size.set(100, this.size.y);
 	this.run.position.set(420, 0);

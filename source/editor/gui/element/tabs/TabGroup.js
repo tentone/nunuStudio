@@ -2,7 +2,7 @@
 
 function TabGroup(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;

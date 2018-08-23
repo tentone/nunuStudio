@@ -7,18 +7,18 @@ function CameraEditor(parent, closeable, container, index)
 	this.camera = null;
 	
 	//Main container
-	this.main = new DualDivision(this.element);
+	this.main = new DualDivision(this);
 	this.main.tabPosition = 0.6;
 	this.main.tabPositionMin = 0.05;
 	this.main.tabPositionMax = 0.95;
-
-	//Canvas
-	this.canvas = new RendererCanvas(this.main.divA);
 
 	//Change main div aspect
 	this.main.divB.style.overflow = "auto";
 	this.main.divB.style.cursor = "default";
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
+
+	//Canvas
+	this.canvas = new RendererCanvas(this.main.divA);
 
 	//Self pointer
 	var self = this;

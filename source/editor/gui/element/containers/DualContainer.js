@@ -2,7 +2,7 @@
 
 function DualContainer(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;

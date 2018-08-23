@@ -2,7 +2,7 @@
 
 function ImageChooser(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	//Background
 	this.alpha = document.createElement("img");

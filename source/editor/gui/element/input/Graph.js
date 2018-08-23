@@ -2,7 +2,7 @@
 
 function Graph(parent, name, color)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	var self = this;
 

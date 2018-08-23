@@ -2,7 +2,7 @@
 
 function Asset(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.asset = null;
 

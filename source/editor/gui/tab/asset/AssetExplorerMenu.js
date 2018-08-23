@@ -2,7 +2,7 @@
 
 function AssetExplorerMenu(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 	this.element.style.overflow = "visible";
@@ -11,7 +11,7 @@ function AssetExplorerMenu(parent)
 	this.element.style.height = "20px";
 
 	//Import
-	var menu = new DropdownMenu(this.element);
+	var menu = new DropdownMenu(this);
 	menu.setText("Import");
 	menu.size.set(100, 20);
 	menu.position.set(0, 0);
@@ -99,7 +99,7 @@ function AssetExplorerMenu(parent)
 	menu.updateInterface();
 
 	//Textures
-	var texture = new DropdownMenu(this.element);
+	var texture = new DropdownMenu(this);
 	texture.setText("Texture");
 	texture.size.set(100, 20);
 	texture.position.set(100, 0);
@@ -188,7 +188,7 @@ function AssetExplorerMenu(parent)
 	texture.updateInterface();
 
 	//Create material
-	var material = new DropdownMenu(this.element);
+	var material = new DropdownMenu(this);
 	material.setText("Material");
 	material.size.set(100, 20);
 	material.position.set(200, 0);

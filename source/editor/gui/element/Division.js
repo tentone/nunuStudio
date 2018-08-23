@@ -9,7 +9,7 @@
  */
 function Division(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.pointerEvents = "none";

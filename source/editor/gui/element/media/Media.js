@@ -11,7 +11,7 @@
  */
 function Media(parent, type)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	//Media
 	this.media = document.createElement(type);

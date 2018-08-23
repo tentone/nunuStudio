@@ -2,7 +2,7 @@
 
 function Panel(parent, obj)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "auto";
 	this.element.style.top = "0px";
@@ -15,7 +15,7 @@ function Panel(parent, obj)
 	this.attach(obj);
 	this.preventDragEvents();
 
-	this.form = new Form(this.element);
+	this.form = new Form(this);
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
 }

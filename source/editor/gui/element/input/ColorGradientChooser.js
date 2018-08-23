@@ -2,7 +2,7 @@
 
 function ColorGradientChooser(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.onChange = null;
 

@@ -7,7 +7,7 @@ function BokehPassNode(parent)
 	var self = this;
 
 	this.addText("Aperture");
-	this.aperture = new NumberBox(this.element);
+	this.aperture = new NumberBox(this);
 	this.aperture.size.set(60, 18);
 	this.aperture.setOnChange(function()
 	{
@@ -17,7 +17,7 @@ function BokehPassNode(parent)
 	this.nextRow();
 
 	this.addText("Focus");
-	this.focus = new NumberBox(this.element);
+	this.focus = new NumberBox(this);
 	this.focus.size.set(60, 18);
 	this.focus.setOnChange(function()
 	{
@@ -27,7 +27,7 @@ function BokehPassNode(parent)
 	this.nextRow();
 
 	this.addText("Max Blur");
-	this.maxblur = new NumberBox(this.element);
+	this.maxblur = new NumberBox(this);
 	this.maxblur.size.set(60, 18);
 	this.maxblur.setOnChange(function()
 	{

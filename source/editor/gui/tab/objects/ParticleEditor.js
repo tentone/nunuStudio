@@ -5,7 +5,7 @@ function ParticleEditor(parent, closeable, container, index)
 	TabElement.call(this, parent, closeable, container, index, "Particle", Editor.filePath + "icons/misc/particles.png");
 
 	//Main container
-	this.main = new DualDivision(this.element);
+	this.main = new DualDivision(this);
 	this.main.tabPosition = 0.6;
 	this.main.tabPositionMin = 0.05;
 	this.main.tabPositionMax = 0.95;

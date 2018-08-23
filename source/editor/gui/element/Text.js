@@ -9,7 +9,7 @@
  */
 function Text(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.pointerEvents = "none";
 	this.element.style.color = Editor.theme.textColor;

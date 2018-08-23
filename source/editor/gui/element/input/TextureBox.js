@@ -7,7 +7,7 @@ function TextureBox(parent)
 	this.element.style.overflow = "visible";
 	
 	//Form
-	this.form = new Form(this.element);
+	this.form = new Form(this);
 	this.form.defaultTextWidth = 60;
 	this.form.spacing.set(10, 5);
 
@@ -20,7 +20,7 @@ function TextureBox(parent)
 
 	//WrapS
 	this.form.addText("Wrap Hor");
-	this.wrapS = new DropdownList(this.element);
+	this.wrapS = new DropdownList(this);
 	this.wrapS.size.set(120, 18);
 	this.wrapS.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
 	this.wrapS.addValue("Repeat", THREE.RepeatWrapping);
@@ -30,7 +30,7 @@ function TextureBox(parent)
 
 	//WrapT
 	this.form.addText("Wrap Vert");
-	this.wrapT = new DropdownList(this.element);
+	this.wrapT = new DropdownList(this);
 	this.wrapT.size.set(120, 18);
 	this.wrapT.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
 	this.wrapT.addValue("Repeat", THREE.RepeatWrapping);
@@ -40,7 +40,7 @@ function TextureBox(parent)
 
 	//Repeat
 	this.form.addText("Repeat");
-	this.repeat = new VectorBox(this.element);
+	this.repeat = new VectorBox(this);
 	this.repeat.setType(VectorBox.VECTOR2);
 	this.repeat.size.set(120, 18);
 	this.repeat.setValue(1, 1, 0);

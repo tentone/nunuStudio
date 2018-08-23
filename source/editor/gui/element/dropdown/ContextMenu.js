@@ -9,7 +9,7 @@
  */
 function ContextMenu(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	var self = this;
 
@@ -68,7 +68,7 @@ ContextMenu.prototype.removeOption = function(index)
  */
 ContextMenu.prototype.addOption = function(name, callback)
 {
-	var button = new ButtonMenu(this.element);
+	var button = new ButtonMenu(this);
 	button.element.style.zIndex = "10000";
 	button.setText(name);
 	button.setAlignment(Text.LEFT);
@@ -93,7 +93,7 @@ ContextMenu.prototype.addOption = function(name, callback)
  */
 ContextMenu.prototype.addMenu = function(name)
 {
-	var menu = new DropdownMenu(this.element);
+	var menu = new DropdownMenu(this);
 	menu.setText(name);
 	menu.setDirection(DropdownMenu.LEFT);
 	menu.showArrow();

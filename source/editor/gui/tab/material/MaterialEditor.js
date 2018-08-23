@@ -8,7 +8,7 @@ function MaterialEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Main container
-	this.main = new DualDivision(this.element);
+	this.main = new DualDivision(this);
 	this.main.setOnResize(function()
 	{
 		self.updateInterface();

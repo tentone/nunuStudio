@@ -9,7 +9,7 @@
  */
 function Form(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	
@@ -42,7 +42,7 @@ Form.prototype.add = function(elem)
 //Create text element
 Form.prototype.addText = function(text, fit)
 {
-	var element = new Text(this.element);
+	var element = new Text(this);
 	element.setAlignment(Text.LEFT);
 	element.setText(text);
 	element.fitContent = (fit === true);
@@ -55,7 +55,7 @@ Form.prototype.addText = function(text, fit)
 //Create division
 Form.prototype.addDivision = function(x, y)
 {
-	var division = new Division(this.element);
+	var division = new Division(this);
 	division.size.set(x, y);
 	this.add(division);
 

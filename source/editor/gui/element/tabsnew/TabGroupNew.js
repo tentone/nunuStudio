@@ -2,7 +2,7 @@
 
 function TabGroupNew(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
@@ -50,7 +50,7 @@ TabGroupNew.prototype.split = function(direction)
 	var container = new DualContainer(this.parent);
 	container.attachA(this);
 
-	var group = new TabGroupNew(container.element);
+	var group = new TabGroupNew(container);
 	container.attachB(group);
 
 	Editor.gui.tab = container;

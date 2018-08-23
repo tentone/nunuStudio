@@ -9,7 +9,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.Texture = null;
 
 	//Dual division
-	this.division = new DualDivision(this.element);
+	this.division = new DualDivision(this);
 	this.division.setOnResize(function()
 	{
 		self.updateInterface();

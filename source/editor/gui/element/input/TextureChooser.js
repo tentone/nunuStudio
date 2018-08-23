@@ -2,7 +2,7 @@
 
 function TextureChooser(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	//Preview
 	this.preview = document.createElement("div");

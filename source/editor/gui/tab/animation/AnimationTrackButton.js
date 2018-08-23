@@ -2,7 +2,7 @@
 
 function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 	this.element.style.overflow = "hidden";
@@ -133,7 +133,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	};
 	this.element.appendChild(keyframe);
 
-	this.interpolation = new DropdownList(this.element);
+	this.interpolation = new DropdownList(this);
 	this.interpolation.size.set(30, 18);
 	this.interpolation.position.set(22, 5);
 	this.interpolation.updatePosition(Element.TOP_RIGHT);
@@ -147,7 +147,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 		self.editor.createAnimationMixer();
 	});
 
-	this.color = new ColorChooser(this.element);
+	this.color = new ColorChooser(this);
 	this.color.size.set(20, 18);
 	this.color.position.set(57, 5);
 	this.color.updatePosition(Element.TOP_RIGHT);

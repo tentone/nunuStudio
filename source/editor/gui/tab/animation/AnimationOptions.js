@@ -2,7 +2,7 @@
 
 function AnimationOptions(parent, editor, animation)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
@@ -11,13 +11,13 @@ function AnimationOptions(parent, editor, animation)
 
 	var self = this;
 
-	var text = new Text(this.element);
+	var text = new Text(this);
 	text.position.set(5, 5);
 	text.size.set(50, 20);
 	text.setText("Enabled");
 	text.updateInterface();
 
-	this.enabled = new CheckBox(this.element);
+	this.enabled = new CheckBox(this);
 	this.enabled.position.set(55, 5);
 	this.enabled.size.set(15, 15);
 	this.enabled.updateInterface();
@@ -27,13 +27,13 @@ function AnimationOptions(parent, editor, animation)
 		self.editor.createAnimationMixer(true);
 	});
 
-	var text = new Text(this.element);
+	var text = new Text(this);
 	text.position.set(70, 5);
 	text.size.set(100, 20);
 	text.setText("Duration");
 	text.updateInterface();
 
-	this.duration = new NumberBox(this.element);
+	this.duration = new NumberBox(this);
 	this.duration.position.set(150, 5);
 	this.duration.size.set(60, 18);
 	this.duration.updateInterface();
@@ -44,13 +44,13 @@ function AnimationOptions(parent, editor, animation)
 		self.editor.createAnimationMixer();
 	});
 
-	var text = new Text(this.element);
+	var text = new Text(this);
 	text.position.set(190, 5);
 	text.size.set(100, 20);
 	text.setText("Loop");
 	text.updateInterface();
 
-	this.loop = new DropdownList(this.element);
+	this.loop = new DropdownList(this);
 	this.loop.position.set(260, 5);
 	this.loop.size.set(90, 18);
 	this.loop.addValue("Once", THREE.LoopOnce);
@@ -63,13 +63,13 @@ function AnimationOptions(parent, editor, animation)
 		self.editor.createAnimationMixer(true);
 	});
 
-	var text = new Text(this.element);
+	var text = new Text(this);
 	text.position.set(335, 5);
 	text.size.set(100, 20);
 	text.setText("Speed");
 	text.updateInterface();
 
-	this.timeScale = new NumberBox(this.element);
+	this.timeScale = new NumberBox(this);
 	this.timeScale.position.set(410, 5);
 	this.timeScale.size.set(60, 18);
 	this.timeScale.updateInterface();

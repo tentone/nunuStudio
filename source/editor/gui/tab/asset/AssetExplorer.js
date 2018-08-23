@@ -7,8 +7,6 @@ function AssetExplorer(parent, closeable, container, index)
 	var self = this;
 
 	this.element.ondragover = undefined;
-	this.element.style.overflow = "visible";
-	this.parent.appendChild(this.element);
 
 	//Assets
 	this.assets = document.createElement("div");
@@ -52,7 +50,7 @@ function AssetExplorer(parent, closeable, container, index)
 	};
 
 	//Bar
-	this.bar = new AssetExplorerMenu(this.element);
+	this.bar = new AssetExplorerMenu(this);
 
 	//Search
 	this.search = new TextBox(this.bar.element);

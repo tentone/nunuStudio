@@ -7,7 +7,7 @@
  */
 function TabContainer()
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 	
 	//TODO <ADD CODE HERE>
 }

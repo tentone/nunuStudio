@@ -7,7 +7,7 @@ function SSAOPassNode(parent)
 	var self = this;
 
 	this.addText("Only AO");
-	this.onlyAO = new CheckBox(this.element);
+	this.onlyAO = new CheckBox(this);
 	this.onlyAO.size.set(15, 15);
 	this.onlyAO.setOnChange(function()
 	{
@@ -17,7 +17,7 @@ function SSAOPassNode(parent)
 	this.nextRow();
 
 	this.addText("Radius");
-	this.radius = new NumberBox(this.element);
+	this.radius = new NumberBox(this);
 	this.radius.size.set(60, 18);
 	this.radius.setOnChange(function()
 	{
@@ -27,7 +27,7 @@ function SSAOPassNode(parent)
 	this.nextRow();
 
 	this.addText("Clamp");
-	this.aoClamp = new NumberBox(this.element);
+	this.aoClamp = new NumberBox(this);
 	this.aoClamp.size.set(60, 18);
 	this.aoClamp.setOnChange(function()
 	{
@@ -37,7 +37,7 @@ function SSAOPassNode(parent)
 	this.nextRow();
 
 	this.addText("Lum. Influence");
-	this.lumInfluence = new NumberBox(this.element);
+	this.lumInfluence = new NumberBox(this);
 	this.lumInfluence.size.set(60, 18);
 	this.lumInfluence.setOnChange(function()
 	{

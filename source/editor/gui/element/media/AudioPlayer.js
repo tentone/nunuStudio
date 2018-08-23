@@ -2,7 +2,7 @@
 
 function AudioPlayer(parent)
 {
-	Element.call(this, parent);
+	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 

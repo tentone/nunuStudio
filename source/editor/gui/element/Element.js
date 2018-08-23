@@ -31,7 +31,7 @@ function Element(parent, type)
 	 * @attribute parent
 	 * @type {Element}
 	 */
-	this.parent = null;//parent !== undefined ? parent : document.body;
+	this.parent = null;
 	this.attachTo(parent !== undefined ? parent : document.body);
 	
 	/** 
@@ -247,6 +247,7 @@ Element.prototype.attachTo = function(parent)
 	}
 	else
 	{
+		//console.warn("nunuStudio: Parent is a DOM element.", parent);
 		parent.appendChild(this.element);
 	}
 };
