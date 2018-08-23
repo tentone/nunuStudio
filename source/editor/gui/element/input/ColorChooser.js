@@ -15,7 +15,7 @@ function ColorChooser(parent)
 	this.element.style.appearance = "textfield";
 
 	//Color chooser
-	this.color = new jscolor(this);
+	this.color = new jscolor(this.element);
 	this.color.backgroundColor = Editor.theme.boxColor;
 	this.color.insetColor = Editor.theme.boxColor;
 	this.color.shadow = false;
@@ -38,7 +38,7 @@ ColorChooser.prototype.setOnChange = function(onChange)
 //Set color
 ColorChooser.prototype.setValue = function(r, g, b)
 {
-	this.color.fromRGB(r*255, g*255, b*255);
+	this.color.fromRGB(r * 255, g * 255, b * 255);
 };
 
 //Set color value hex
@@ -62,7 +62,7 @@ ColorChooser.prototype.getValueString = function(color)
 //Get color value
 ColorChooser.prototype.getValue = function()
 {
-	return {r: this.color.rgb[0]/255, g: this.color.rgb[1]/255, b: this.color.rgb[2]/255};
+	return {r: this.color.rgb[0] / 255, g: this.color.rgb[1] / 255, b: this.color.rgb[2] / 255};
 };
 
 //Get color value hex
