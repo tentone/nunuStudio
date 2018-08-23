@@ -152,7 +152,7 @@ CodeEditor.prototype.update = function()
 {
 	if(Editor.keyboard.keyPressed(Keyboard.CTRL) && Editor.mouse.wheel !== 0)
 	{
-		this.setFontSize(Editor.settings.code.fontSize - Editor.mouse.wheel/100);
+		this.setFontSize(Editor.settings.code.fontSize - Editor.mouse.wheel / 100);
 	}
 };
 

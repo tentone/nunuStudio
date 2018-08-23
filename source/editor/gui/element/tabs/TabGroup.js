@@ -306,6 +306,7 @@ TabGroup.prototype.updateSize = function()
 	var buttonSize = this.buttonSize.clone();
 	var offset = this.buttonSize.clone();
 
+	//Calculate size of the buttons
 	if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
 	{
 		if(buttonSize.x * this.options.length > this.size.x)
@@ -327,7 +328,7 @@ TabGroup.prototype.updateSize = function()
 		offset.x = 0;
 	}
 
-	//Update tabs
+	//Update tab and buttons
 	for(var i = 0; i < this.options.length; i++)
 	{
 		var tab = this.options[i];
@@ -342,6 +343,7 @@ TabGroup.prototype.updateSize = function()
 		button.updateInterface();
 	}
 
+	//Buttons and tab division
 	if(this.mode === TabGroup.TOP)
 	{	
 		this.buttons.style.top = "0px";

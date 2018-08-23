@@ -307,8 +307,6 @@ TextureEditor.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-
 		//Dual division
 		this.division.size.copy(this.size);
 		this.division.updateInterface();
@@ -321,6 +319,7 @@ TextureEditor.prototype.updateInterface = function()
 		this.form.updateInterface();
 
 		//Element
+		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

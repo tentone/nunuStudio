@@ -22,6 +22,19 @@ function TabGroupNew(parent)
 	this.tab.style.overflow = "visible";
 	this.element.appendChild(this.tab);
 
+	//Empty message
+	this.empty = document.createElement("div");
+	this.empty.style.position = "absolute";
+	this.empty.style.textAlign = "center";
+	this.empty.style.display = "none";
+	this.empty.style.width = "100%";
+	this.empty.style.height = "100%";
+	this.empty.style.flexDirection = "column";
+	this.empty.style.justifyContent = "center";
+	this.empty.style.pointerEvents = "none";
+	this.empty.appendChild(document.createTextNode("Open new tab to edit content or create new project"));
+	this.tab.appendChild(this.empty);
+
 	//Options
 	this.mode = TabGroupNew.TOP;
 	this.buttonSize = new THREE.Vector2(140, 20);
@@ -212,7 +225,6 @@ TabGroupNew.prototype.getTab = function(type, obj)
 TabGroupNew.prototype.attachTab = function(tab, insertIndex)
 {
 	tab.container.removeTab(tab.index, true);
-
 	tab.container = this;
 	tab.button.attachTo(this.buttons);
 	tab.attachTo(this.tab);
