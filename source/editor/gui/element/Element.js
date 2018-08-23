@@ -12,14 +12,6 @@
 function Element(parent, type)
 {
 	/** 
-	 * The parent DOM element that contains this Element.
-	 *
-	 * @attribute parent
-	 * @type {DOM}
-	 */
-	this.parent = (parent !== undefined) ? parent : document.body;
-
-	/** 
 	 * Base DOM element for this component.
 	 *
 	 * Different components may use diferent base element types.
@@ -27,10 +19,20 @@ function Element(parent, type)
 	 * @attribute element
 	 * @type {DOM}
 	 */
-	this.element = document.createElement((type !== undefined) ? type : "div");
+	this.element = document.createElement(type !== undefined ? type : "div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
-	this.parent.appendChild(this.element);
+
+	/** 
+	 * The parent element that contains this Element.
+	 *
+	 * Can be a DOM element or another Element.
+	 * 
+	 * @attribute parent
+	 * @type {Element}
+	 */
+	this.parent = null;//parent !== undefined ? parent : document.body;
+	this.attachTo(parent !== undefined ? parent : document.body);
 	
 	/** 
 	 * True if the element is visible.
@@ -67,6 +69,8 @@ function Element(parent, type)
 
 Element.prototype.constructor = Element;
 
+Element.prototype.isElement = true;
+
 /**
  * Top-left positioning.
  *
@@ -102,6 +106,7 @@ Element.BOTTOM_LEFT = 2;
  * @type {Number}
  */
 Element.BOTTOM_RIGHT = 3;
+
 
 Element.preventDefault = function(event)
 {
@@ -224,14 +229,26 @@ Element.prototype.setOnClick = function(callback)
  */
 Element.prototype.attachTo = function(parent)
 {
-	if(this.parent.contains(this.element))
+	if(this.parent === parent || parent === undefined)
 	{
-		this.parent.removeChild(this.element);
+		return;
+	}
+
+	if(this.parent !== null)
+	{
+		this.destroy();
 	}
 
 	this.parent = parent;
-	this.parent.appendChild(this.element);
-	this.updateInterface();
+
+	if(parent.isElement === true)
+	{
+		parent.element.appendChild(this.element);
+	}
+	else
+	{
+		parent.appendChild(this.element);
+	}
 };
 
 /**

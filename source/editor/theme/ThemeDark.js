@@ -31,8 +31,8 @@ function ThemeDark()
 
 	//Body
 	document.body.style.fontFamily = this.font;
-	document.body.style.fontSize = "12px";
 	document.body.style.color = this.textColor;
+	document.body.style.fontSize = "12px";
 }
 
 ThemeManager.register(ThemeDark, "dark");

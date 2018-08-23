@@ -1,6 +1,6 @@
 "use strict";
 
-function DragBuffer(){}
+var DragBuffer = {};
 
 //Object drag buffer (stores objects being dragged)
 DragBuffer.buffer = [];
