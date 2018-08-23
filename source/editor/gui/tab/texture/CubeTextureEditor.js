@@ -46,7 +46,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	//Name
 	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
+	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -62,7 +62,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	//Minification filter
 	this.form.addText("Min. filter");
-	this.minFilter = new DropdownList(this.form.element);
+	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
 	this.minFilter.addValue("Nearest", THREE.NearestFilter);
 	this.minFilter.addValue("Linear", THREE.LinearFilter);
@@ -83,7 +83,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	//Magnification filter
 	this.form.addText("Mag. filter");
-	this.magFilter = new DropdownList(this.form.element);
+	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
 	this.magFilter.addValue("Nearest", THREE.NearestFilter);
 	this.magFilter.addValue("Linear", THREE.LinearFilter);
@@ -100,7 +100,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	//Mapping
 	this.form.addText("Mapping");
-	this.mapping = new DropdownList(this.form.element);
+	this.mapping = new DropdownList(this.form);
 	this.mapping.size.set(150, 18);
 	this.mapping.addValue("Reflection Mapping", THREE.CubeReflectionMapping);
 	this.mapping.addValue("Refraction Mapping", THREE.CubeRefractionMapping);
@@ -114,7 +114,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	//Size
 	this.form.addText("Size");
-	this.textureSize = new DropdownList(this.form.element);
+	this.textureSize = new DropdownList(this.form);
 	this.textureSize.size.set(120, 18);
 	this.textureSize.setOnChange(function()
 	{
@@ -133,7 +133,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	//Mode
 	this.form.addText("Mode");
-	this.mode = new DropdownList(this.form.element);
+	this.mode = new DropdownList(this.form);
 	this.mode.size.set(120, 18);
 	this.mode.setOnChange(function()
 	{
@@ -150,7 +150,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	//Flip Y
 	this.form.addText("Flip Y");
-	this.flipY = new CheckBox(this.form.element);
+	this.flipY = new CheckBox(this.form);
 	this.flipY.size.set(15, 15);
 	this.flipY.setOnChange(function()
 	{
@@ -165,7 +165,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Cube images
-	this.images = new Division(this.form.element);
+	this.images = new Division(this.form);
 	this.images.element.style.pointerEvents = "auto";
 	this.images.size.set(400, 300);
 	this.form.add(this.images);

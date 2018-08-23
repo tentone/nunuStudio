@@ -303,10 +303,7 @@ DropdownMenu.prototype.destroy = function()
 {
 	Text.prototype.destroy.call(this);
 
-	if(this.parent.contains(this.panel))
-	{
-		this.parent.removeChild(this.panel);
-	}
+	this.parent.destroy();
 };
 
 DropdownMenu.prototype.updateSize = function()

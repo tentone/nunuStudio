@@ -28,7 +28,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 
 	//Color
 	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
@@ -40,7 +40,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 
 	//Line width
 	this.form.addText("Width");
-	this.linewidth = new NumberBox(this.form.element);
+	this.linewidth = new NumberBox(this.form);
 	this.linewidth.size.set(60, 18);
 	this.linewidth.setStep(1);
 	this.linewidth.setRange(0, Number.MAX_SAFE_INTEGER);

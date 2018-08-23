@@ -9,7 +9,7 @@ function AmbientLightPanel(parent, obj)
 
 	//Color
 	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{

@@ -78,7 +78,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Name
 	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
+	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -90,7 +90,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Side
 	this.form.addText("Side");
-	this.side = new DropdownList(this.form.element);
+	this.side = new DropdownList(this.form);
 	this.side.position.set(100, 85);
 	this.side.size.set(100, 18);
 	this.side.addValue("Front", THREE.FrontSide);
@@ -106,7 +106,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Test depth
 	this.form.addText("Depth Test");
-	this.depthTest = new CheckBox(this.form.element);
+	this.depthTest = new CheckBox(this.form);
 	this.depthTest.size.set(15, 15);
 	this.depthTest.setOnChange(function()
 	{
@@ -118,7 +118,7 @@ function MaterialEditor(parent, closeable, container, index)
 	
 	//Write depth
 	this.form.addText("Depth Write");
-	this.depthWrite = new CheckBox(this.form.element);
+	this.depthWrite = new CheckBox(this.form);
 	this.depthWrite.size.set(15, 15);
 	this.depthWrite.setOnChange(function()
 	{
@@ -130,7 +130,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Depth mode
 	this.form.addText("Depth Mode");
-	this.depthFunc = new DropdownList(this.form.element);
+	this.depthFunc = new DropdownList(this.form);
 	this.depthFunc.position.set(100, 85);
 	this.depthFunc.size.set(100, 18);
 	this.depthFunc.addValue("Never", THREE.NeverDepth);
@@ -150,7 +150,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Transparent
 	this.form.addText("Transparent");
-	this.transparent = new CheckBox(this.form.element);
+	this.transparent = new CheckBox(this.form);
 	this.transparent.size.set(15, 15);
 	this.transparent.setOnChange(function()
 	{
@@ -162,7 +162,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Opacity level
 	this.form.addText("Opacity");
-	this.opacity = new Slider(this.form.element);
+	this.opacity = new Slider(this.form);
 	this.opacity.size.set(160, 18);
 	this.opacity.setRange(0, 1);
 	this.opacity.setStep(0.01);
@@ -176,7 +176,7 @@ function MaterialEditor(parent, closeable, container, index)
 	
 	//Alpha test
 	this.form.addText("Alpha test");
-	this.alphaTest = new Slider(this.form.element);
+	this.alphaTest = new Slider(this.form);
 	this.alphaTest.size.set(160, 18);
 	this.alphaTest.setRange(0, 1);
 	this.alphaTest.setStep(0.01);
@@ -190,7 +190,7 @@ function MaterialEditor(parent, closeable, container, index)
 	
 	//Blending mode
 	this.form.addText("Blending Mode");
-	this.blending = new DropdownList(this.form.element);
+	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);
 	this.blending.size.set(100, 18);
 	this.blending.addValue("None", THREE.NoBlending);

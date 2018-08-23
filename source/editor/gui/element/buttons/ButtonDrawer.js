@@ -64,10 +64,7 @@ ButtonDrawer.prototype.destroy = function()
 {
 	ButtonImage.prototype.destroy.call(this);
 
-	if(this.parent.contains(this.panel))
-	{
-		this.parent.removeChild(this.panel);
-	}
+	this.parent.destroy();
 };
 
 /**

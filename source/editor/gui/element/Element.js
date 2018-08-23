@@ -247,7 +247,7 @@ Element.prototype.attachTo = function(parent)
 	}
 	else
 	{
-		console.warn("nunuStudio: Parent is a DOM element.", parent);
+		console.warn("nunuStudio: Parent is a DOM element." , this);
 		parent.appendChild(this.element);
 	}
 };
@@ -261,9 +261,24 @@ Element.prototype.attachTo = function(parent)
  */
 Element.prototype.destroy = function()
 {
-	if(this.parent.contains(this.element))
+	if(this.parent !== null)
 	{
-		this.parent.removeChild(this.element);
+		if(this.parent.isElement)
+		{
+			if(this.parent.element.contains(this.element))
+			{
+				this.parent.element.removeChild(this.element);
+				this.parent = null;
+			}
+		}
+		else
+		{
+			if(this.parent.contains(this.element))
+			{
+				this.parent.removeChild(this.element);
+				this.parent = null;
+			}
+		}
 	}
 };
 

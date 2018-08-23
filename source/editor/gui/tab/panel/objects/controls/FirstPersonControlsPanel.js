@@ -9,7 +9,7 @@ function FirstPersonControlsPanel(parent, obj)
 
 	//Needs button pressed
 	this.form.addText("Require button");
-	this.needsButtonPressed = new CheckBox(this.form.element);
+	this.needsButtonPressed = new CheckBox(this.form);
 	this.needsButtonPressed.size.set(15, 15);
 	this.needsButtonPressed.setOnChange(function()
 	{
@@ -20,7 +20,7 @@ function FirstPersonControlsPanel(parent, obj)
 	
 	//Sensitivity
 	this.form.addText("Sensitivity");
-	this.sensitivity = new Slider(this.form.element);
+	this.sensitivity = new Slider(this.form);
 	this.sensitivity.size.set(140, 18);
 	this.sensitivity.setStep(0.0001);
 	this.sensitivity.setRange(0, 0.05);
@@ -33,7 +33,7 @@ function FirstPersonControlsPanel(parent, obj)
 
 	//Movement
 	this.form.addText("Movement");
-	this.movementEnabled = new CheckBox(this.form.element);
+	this.movementEnabled = new CheckBox(this.form);
 	this.movementEnabled.size.set(15, 15);
 	this.movementEnabled.setOnChange(function()
 	{
@@ -44,7 +44,7 @@ function FirstPersonControlsPanel(parent, obj)
 
 	//Move speed
 	this.form.addText("Move speed");
-	this.moveSpeed = new Slider(this.form.element);
+	this.moveSpeed = new Slider(this.form);
 	this.moveSpeed.size.set(140, 18);
 	this.moveSpeed.setStep(0.01);
 	this.moveSpeed.setRange(0, 0.5);
@@ -57,7 +57,7 @@ function FirstPersonControlsPanel(parent, obj)
 
 	//Move on plane
 	this.form.addText("Move plane");
-	this.moveOnPlane = new CheckBox(this.form.element);
+	this.moveOnPlane = new CheckBox(this.form);
 	this.moveOnPlane.size.set(15, 15);
 	this.moveOnPlane.setOnChange(function()
 	{

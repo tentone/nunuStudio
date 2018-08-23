@@ -8,7 +8,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 
 	//Clear coat
 	this.form.addText("Clear coat");
-	this.clearCoat = new Slider(this.form.element);
+	this.clearCoat = new Slider(this.form);
 	this.clearCoat.size.set(160, 18);
 	this.clearCoat.setRange(0, 1);
 	this.clearCoat.setStep(0.01);
@@ -22,7 +22,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 
 	//Clear coat roughness
 	this.form.addText("Coat roughness");
-	this.clearCoatRoughness = new Slider(this.form.element);
+	this.clearCoatRoughness = new Slider(this.form);
 	this.clearCoatRoughness.size.set(160, 18);
 	this.clearCoatRoughness.setRange(0, 1);
 	this.clearCoatRoughness.setStep(0.01);
@@ -36,7 +36,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 
 	//Reflectivity
 	this.form.addText("Reflectivity");
-	this.reflectivity = new Slider(this.form.element);
+	this.reflectivity = new Slider(this.form);
 	this.reflectivity.size.set(160, 18);
 	this.reflectivity.setRange(0, 1);
 	this.reflectivity.setStep(0.01);

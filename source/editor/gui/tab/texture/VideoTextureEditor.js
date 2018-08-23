@@ -8,7 +8,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	
 	//Volume
 	this.form.addText("Volume");
-	this.volume = new Slider(this.form.element);
+	this.volume = new Slider(this.form);
 	this.volume.size.set(80, 18);
 	this.volume.setRange(0, 1);
 	this.volume.setStep(0.01);
@@ -21,7 +21,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 
 	//Playback Rate
 	this.form.addText("Playback Rate");
-	this.playbackRate = new NumberBox(this.form.element);
+	this.playbackRate = new NumberBox(this.form);
 	this.playbackRate.size.set(60, 18);
 	this.playbackRate.setStep(0.1);
 	this.playbackRate.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -33,7 +33,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Autoplay
-	this.autoplay = new CheckBox(this.form.element);
+	this.autoplay = new CheckBox(this.form);
 	this.form.addText("Autoplay");
 	this.autoplay.size.set(15, 15);
 	this.autoplay.setOnChange(function()
@@ -44,7 +44,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Loop
-	this.loop = new CheckBox(this.form.element);
+	this.loop = new CheckBox(this.form);
 	this.form.addText("Loop");
 	this.loop.size.set(15, 15);
 	this.loop.setOnChange(function()

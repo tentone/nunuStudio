@@ -63,7 +63,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Name
 	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
+	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -79,7 +79,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//WrapS
 	this.form.addText("Wrap Hor.");
-	this.wrapS = new DropdownList(this.form.element);
+	this.wrapS = new DropdownList(this.form);
 	this.wrapS.size.set(120, 18);
 	this.wrapS.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
 	this.wrapS.addValue("Repeat", THREE.RepeatWrapping);
@@ -94,7 +94,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//WrapT
 	this.form.addText("Wrap Vert.");
-	this.wrapT = new DropdownList(this.form.element);
+	this.wrapT = new DropdownList(this.form);
 	this.wrapT.size.set(120, 18);
 	this.wrapT.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
 	this.wrapT.addValue("Repeat", THREE.RepeatWrapping);
@@ -109,7 +109,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Repeat
 	this.form.addText("Repeat");
-	this.repeat = new VectorBox(this.form.element);
+	this.repeat = new VectorBox(this.form);
 	this.repeat.setType(VectorBox.VECTOR2);
 	this.repeat.size.set(120, 18);
 	this.repeat.setStep(0.01);
@@ -124,7 +124,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Offset
 	this.form.addText("Offset");
-	this.offset = new VectorBox(this.form.element);
+	this.offset = new VectorBox(this.form);
 	this.offset.setType(VectorBox.VECTOR2);
 	this.offset.size.set(120, 18);
 	this.offset.setStep(0.01);
@@ -139,7 +139,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Center
 	this.form.addText("Center");
-	this.center = new VectorBox(this.form.element);
+	this.center = new VectorBox(this.form);
 	this.center.setType(VectorBox.VECTOR2);
 	this.center.size.set(120, 18);
 	this.center.setStep(0.01);
@@ -154,7 +154,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Rotation
 	this.form.addText("Rotation");
-	this.rotation = new NumberBox(this.form.element);
+	this.rotation = new NumberBox(this.form);
 	this.rotation.size.set(60, 18);
 	this.rotation.setStep(0.1);
 	this.rotation.setOnChange(function()
@@ -167,7 +167,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Minification filter
 	this.form.addText("Min. filter");
-	this.minFilter = new DropdownList(this.form.element);
+	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
 	this.minFilter.addValue("Nearest", THREE.NearestFilter);
 	this.minFilter.addValue("Linear", THREE.LinearFilter);
@@ -185,7 +185,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Magnification filter
 	this.form.addText("Mag. filter");
-	this.magFilter = new DropdownList(this.form.element);
+	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
 	this.magFilter.addValue("Nearest", THREE.NearestFilter);
 	this.magFilter.addValue("Linear", THREE.LinearFilter);
@@ -199,7 +199,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Premultiply Alpha
 	this.form.addText("Premul. Alpha");
-	this.premultiplyAlpha = new CheckBox(this.form.element);
+	this.premultiplyAlpha = new CheckBox(this.form);
 	this.premultiplyAlpha.size.set(15, 15);
 	this.premultiplyAlpha.setOnChange(function()
 	{
@@ -211,7 +211,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	//Flip Y
 	this.form.addText("Flip Y");
-	this.flipY = new CheckBox(this.form.element);
+	this.flipY = new CheckBox(this.form);
 	this.flipY.size.set(15, 15);
 	this.flipY.setOnChange(function()
 	{

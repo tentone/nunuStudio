@@ -14,7 +14,7 @@ function Text3DPanel(parent, obj)
 
 	//Text
 	this.form.addText("Text");
-	this.text = new TextArea(this.form.element);
+	this.text = new TextArea(this.form);
 	this.text.size.set(190, 60);
 	this.text.setOnChange(function()
 	{
@@ -25,7 +25,7 @@ function Text3DPanel(parent, obj)
 
 	//Size
 	this.form.addText("Size");
-	this.size = new NumberBox(this.form.element);
+	this.size = new NumberBox(this.form);
 	this.size.size.set(60, 18);
 	this.size.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.size.setStep(0.1);
@@ -38,7 +38,7 @@ function Text3DPanel(parent, obj)
 
 	//Height
 	this.form.addText("Thickness");
-	this.height = new NumberBox(this.form.element);
+	this.height = new NumberBox(this.form);
 	this.height.size.set(60, 18);
 	this.height.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.height.setStep(0.1);
@@ -51,7 +51,7 @@ function Text3DPanel(parent, obj)
 
 	//Curve segments
 	this.form.addText("Curve Detail");
-	this.curveSegments = new NumberBox(this.form.element);
+	this.curveSegments = new NumberBox(this.form);
 	this.curveSegments.size.set(60, 18);
 	this.curveSegments.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.curveSegments.setStep(1.0);
@@ -63,7 +63,7 @@ function Text3DPanel(parent, obj)
 	this.form.nextRow();
 
 	//Bevel
-	this.bevel = new CheckBox(this.form.element);
+	this.bevel = new CheckBox(this.form);
 	this.form.addText("Bevel");
 	this.bevel.size.set(15, 15);
 	this.bevel.setOnChange(function()
@@ -75,7 +75,7 @@ function Text3DPanel(parent, obj)
 
 	//Bevel thickness
 	this.form.addText("Bevel Thickness");
-	this.bevelThickness = new NumberBox(this.form.element);
+	this.bevelThickness = new NumberBox(this.form);
 	this.bevelThickness.size.set(60, 18);
 	this.bevelThickness.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.bevelThickness.setStep(0.1);
@@ -88,7 +88,7 @@ function Text3DPanel(parent, obj)
 
 	//Bevel size
 	this.form.addText("Bevel Size");
-	this.bevelSize = new NumberBox(this.form.element);
+	this.bevelSize = new NumberBox(this.form);
 	this.bevelSize.size.set(60, 18);
 	this.bevelSize.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.bevelSize.setStep(0.1);

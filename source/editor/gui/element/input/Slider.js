@@ -132,11 +132,8 @@ Slider.prototype = Object.create(Element.prototype);
 //Remove element
 Slider.prototype.destroy = function()
 {
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-
+	Element.prototype.destroy.call(this);
+	
 	if(document.body.contains(this.text))
 	{
 		document.body.removeChild(this.text);

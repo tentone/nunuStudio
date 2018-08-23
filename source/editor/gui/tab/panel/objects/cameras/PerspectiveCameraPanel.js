@@ -13,7 +13,7 @@ function PerspectiveCameraPanel(parent, obj)
 
 	//Fov
 	this.form.addText("FOV");
-	this.fov = new Slider(this.form.element);
+	this.fov = new Slider(this.form);
 	this.fov.size.set(160, 18);
 	this.fov.setRange(30, 160);
 	this.fov.setOnChange(function()
@@ -25,7 +25,7 @@ function PerspectiveCameraPanel(parent, obj)
 	this.form.nextRow();
 
 	//Camera used
-	this.use = new CheckBox(this.form.element);
+	this.use = new CheckBox(this.form);
 	this.form.addText("Use camera");
 	this.use.size.set(15, 15);
 	this.use.setOnChange(function()
@@ -48,7 +48,7 @@ function PerspectiveCameraPanel(parent, obj)
 
 	//Near
 	this.form.addText("Near");
-	this.near = new NumberBox(this.form.element);
+	this.near = new NumberBox(this.form);
 	this.near.size.set(60, 18);
 	this.near.setStep(0.1);
 	this.near.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -61,7 +61,7 @@ function PerspectiveCameraPanel(parent, obj)
 	
 	//Far
 	this.form.addText("Far");
-	this.far = new NumberBox(this.form.element);
+	this.far = new NumberBox(this.form);
 	this.far.size.set(80, 18);
 	this.far.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.far.setOnChange(function()
@@ -77,7 +77,7 @@ function PerspectiveCameraPanel(parent, obj)
 
 	//Offset
 	this.form.addText("Position");
-	this.offset = new VectorBox(this.form.element);
+	this.offset = new VectorBox(this.form);
 	this.offset.setType(VectorBox.VECTOR2);
 	this.offset.setStep(0.05);
 	this.offset.size.set(160, 20);
@@ -95,7 +95,7 @@ function PerspectiveCameraPanel(parent, obj)
 
 	//Size
 	this.form.addText("Size");
-	this.viewport = new VectorBox(this.form.element);
+	this.viewport = new VectorBox(this.form);
 	this.viewport.setType(VectorBox.VECTOR2);
 	this.viewport.setStep(0.05);
 	this.viewport.size.set(160, 20);
@@ -113,7 +113,7 @@ function PerspectiveCameraPanel(parent, obj)
 	
 	//Order
 	this.form.addText("Render Order").setAltText("Camera with lower order renders first.");
-	this.order = new NumberBox(this.form.element);
+	this.order = new NumberBox(this.form);
 	this.order.size.set(80, 18);
 	this.order.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.order.setStep(1);
@@ -126,7 +126,7 @@ function PerspectiveCameraPanel(parent, obj)
 	this.form.nextRow();
 
 	//Clear color
-	this.clearColor = new CheckBox(this.form.element);
+	this.clearColor = new CheckBox(this.form);
 	this.form.addText("Clear color");
 	this.clearColor.size.set(15, 15);
 	this.clearColor.setOnChange(function()
@@ -137,7 +137,7 @@ function PerspectiveCameraPanel(parent, obj)
 	this.form.nextRow();
 
 	//Clear depth
-	this.clearDepth = new CheckBox(this.form.element);
+	this.clearDepth = new CheckBox(this.form);
 	this.form.addText("Clear depth");
 	this.clearDepth.size.set(15, 15);
 	this.clearDepth.setOnChange(function()
@@ -148,7 +148,7 @@ function PerspectiveCameraPanel(parent, obj)
 	this.form.nextRow();
 
 	//Clear stencil
-	this.clearStencil = new CheckBox(this.form.element);
+	this.clearStencil = new CheckBox(this.form);
 	this.form.addText("Clear stencil");
 	this.clearStencil.size.set(15, 15);
 	this.clearStencil.setOnChange(function()

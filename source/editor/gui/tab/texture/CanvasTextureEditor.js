@@ -8,7 +8,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 
 	//Width
 	this.form.addText("Width");
-	this.width = new DropdownList(this.form.element);
+	this.width = new DropdownList(this.form);
 	this.width.size.set(120, 18);
 	this.width.setOnChange(function()
 	{
@@ -21,7 +21,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 
 	//Height
 	this.form.addText("Height");
-	this.height = new DropdownList(this.form.element);
+	this.height = new DropdownList(this.form);
 	this.height.size.set(120, 18);
 	this.height.setOnChange(function()
 	{

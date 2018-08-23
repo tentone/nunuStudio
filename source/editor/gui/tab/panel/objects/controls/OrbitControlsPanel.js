@@ -9,7 +9,7 @@ function OrbitControlsPanel(parent, obj)
 
 	//Distance
 	this.form.addText("Distance");
-	this.distance = new NumberBox(this.form.element);
+	this.distance = new NumberBox(this.form);
 	this.distance.size.set(60, 18);
 	this.distance.setStep(0.1);
 	this.distance.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -21,7 +21,7 @@ function OrbitControlsPanel(parent, obj)
 	this.form.nextRow();
 
 	this.form.addText("Max Distance");
-	this.maxDistance = new NumberBox(this.form.element);
+	this.maxDistance = new NumberBox(this.form);
 	this.maxDistance.size.set(60, 18);
 	this.maxDistance.setStep(0.1);
 	this.maxDistance.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -33,7 +33,7 @@ function OrbitControlsPanel(parent, obj)
 	this.form.nextRow();
 
 	this.form.addText("Min Distance");
-	this.minDistance = new NumberBox(this.form.element);
+	this.minDistance = new NumberBox(this.form);
 	this.minDistance.size.set(60, 18);
 	this.minDistance.setStep(0.1);
 	this.minDistance.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -46,7 +46,7 @@ function OrbitControlsPanel(parent, obj)
 
 	//Needs button pressed
 	this.form.addText("Require button");
-	this.needsButtonPressed = new CheckBox(this.form.element);
+	this.needsButtonPressed = new CheckBox(this.form);
 	this.needsButtonPressed.size.set(15, 15);
 	this.needsButtonPressed.setOnChange(function()
 	{
@@ -57,7 +57,7 @@ function OrbitControlsPanel(parent, obj)
 
 	//Movement
 	this.form.addText("Movement");
-	this.movementEnabled = new CheckBox(this.form.element);
+	this.movementEnabled = new CheckBox(this.form);
 	this.movementEnabled.size.set(15, 15);
 	this.movementEnabled.setOnChange(function()
 	{
@@ -68,7 +68,7 @@ function OrbitControlsPanel(parent, obj)
 
 	//Sensitivity
 	this.form.addText("Sensitivity");
-	this.sensitivity = new Slider(this.form.element);
+	this.sensitivity = new Slider(this.form);
 	this.sensitivity.size.set(140, 18);
 	this.sensitivity.setStep(0.0001);
 	this.sensitivity.setRange(0, 0.05);
@@ -81,7 +81,7 @@ function OrbitControlsPanel(parent, obj)
 
 	//Limit up
 	this.form.addText("Limit up");
-	this.limitUp = new NumberBox(this.form.element);
+	this.limitUp = new NumberBox(this.form);
 	this.limitUp.size.set(60, 18);
 	this.limitUp.setStep(0.001);
 	this.limitUp.setRange(-Math.PI, Math.PI);
@@ -94,7 +94,7 @@ function OrbitControlsPanel(parent, obj)
 
 	//Limit down
 	this.form.addText("Limit down");
-	this.limitDown = new NumberBox(this.form.element);
+	this.limitDown = new NumberBox(this.form);
 	this.limitDown.size.set(60, 18);
 	this.limitDown.setStep(0.001);
 	this.limitDown.setRange(-Math.PI, Math.PI);
@@ -107,7 +107,7 @@ function OrbitControlsPanel(parent, obj)
 
 	//Zoom
 	this.form.addText("Zoom");
-	this.zoomEnabled = new CheckBox(this.form.element);
+	this.zoomEnabled = new CheckBox(this.form);
 	this.zoomEnabled.size.set(15, 15);
 	this.zoomEnabled.setOnChange(function()
 	{
@@ -118,7 +118,7 @@ function OrbitControlsPanel(parent, obj)
 
 	//Zoom sensitivity
 	this.form.addText("Zoom speed");
-	this.zoomSensitivity = new Slider(this.form.element);
+	this.zoomSensitivity = new Slider(this.form);
 	this.zoomSensitivity.size.set(140, 18);
 	this.zoomSensitivity.setStep(0.0001);
 	this.zoomSensitivity.setRange(0, 0.05);

@@ -53,7 +53,7 @@ function ParticleEditor(parent, closeable, container, index)
 	
 	//Name
 	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
+	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -68,7 +68,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Texture map
 	this.form.addText("Texture");
-	this.texture = new TextureChooser(this.form.element);
+	this.texture = new TextureChooser(this.form);
 	this.texture.size.set(100, 100);
 	this.texture.setOnChange(function(file)
 	{
@@ -80,7 +80,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Max particle count
 	this.form.addText("Particle count");
-	this.maxParticleCount = new NumberBox(this.form.element);
+	this.maxParticleCount = new NumberBox(this.form);
 	this.maxParticleCount.setStep(1.0);
 	this.maxParticleCount.size.set(100, 18);
 	this.maxParticleCount.setOnChange(function()
@@ -93,7 +93,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Blending mode
 	this.form.addText("Blending Mode");
-	this.blending = new DropdownList(this.form.element);
+	this.blending = new DropdownList(this.form);
 	this.blending.size.set(100, 18);
 	this.blending.addValue("None", THREE.NoBlending);
 	this.blending.addValue("Normal", THREE.NormalBlending);
@@ -110,7 +110,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Direction (Time scale)
 	this.form.addText("Direction");
-	this.direction = new DropdownList(this.form.element);
+	this.direction = new DropdownList(this.form);
 	this.direction.size.set(100, 18);
 	this.direction.addValue("Forward", 1);
 	this.direction.addValue("Backward", -1);
@@ -124,7 +124,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Particle Count
 	this.form.addText("Particle rate");
-	this.particleCount = new NumberBox(this.form.element);
+	this.particleCount = new NumberBox(this.form);
 	this.particleCount.size.set(50, 18);
 	this.particleCount.setStep(1);
 	this.particleCount.setOnChange(function()
@@ -137,7 +137,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Particle Duration
 	this.form.addText("Duration");
-	this.duration = new NumberBox(this.form.element);
+	this.duration = new NumberBox(this.form);
 	this.duration.size.set(50, 18);
 	this.duration.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.duration.setOnChange(function()
@@ -156,7 +156,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Emmitter type
 	this.form.addText("Emitter Type");
-	this.type = new DropdownList(this.form.element);
+	this.type = new DropdownList(this.form);
 	this.type.size.set(100, 18);
 	this.type.addValue("Box", SPE.distributions.BOX);
 	this.type.addValue("Sphere", SPE.distributions.SPHERE);
@@ -171,7 +171,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Max age
 	this.form.addText("Max Age");
-	this.maxAgeValue = new NumberBox(this.form.element);
+	this.maxAgeValue = new NumberBox(this.form);
 	this.maxAgeValue.size.set(60, 18);
 	this.maxAgeValue.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAgeValue.setOnChange(function()
@@ -181,7 +181,7 @@ function ParticleEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.maxAgeValue);
 	this.form.addText("+/-", true);
-	this.maxAgeSpread = new NumberBox(this.form.element);
+	this.maxAgeSpread = new NumberBox(this.form);
 	this.maxAgeSpread.size.set(60, 18);
 	this.maxAgeSpread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAgeSpread.setOnChange(function()
@@ -197,7 +197,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Initial");
-	this.positionValue = new VectorBox(this.form.element);
+	this.positionValue = new VectorBox(this.form);
 	this.positionValue.setOnChange(function()
 	{
 		self.particle.emitter.position.value.copy(self.positionValue.getValue());
@@ -207,7 +207,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Variation");
-	this.positionSpread = new VectorBox(this.form.element);
+	this.positionSpread = new VectorBox(this.form);
 	this.positionSpread.setOnChange(function()
 	{
 		self.particle.emitter.position.spread.copy(self.positionSpread.getValue());
@@ -221,7 +221,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Initial");
-	this.velocityValue = new VectorBox(this.form.element);
+	this.velocityValue = new VectorBox(this.form);
 	this.velocityValue.setOnChange(function()
 	{
 		self.particle.emitter.velocity.value.copy(self.velocityValue.getValue());
@@ -231,7 +231,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Variation");
-	this.velocitySpread = new VectorBox(this.form.element);
+	this.velocitySpread = new VectorBox(this.form);
 	this.velocitySpread.setOnChange(function()
 	{
 		self.particle.emitter.velocity.spread.copy(self.velocitySpread.getValue());
@@ -245,7 +245,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Initial");
-	this.accelerationValue = new VectorBox(this.form.element);
+	this.accelerationValue = new VectorBox(this.form);
 	this.accelerationValue.setOnChange(function()
 	{
 		self.particle.emitter.acceleration.value.copy(self.accelerationValue.getValue());
@@ -255,7 +255,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Variation");
-	this.accelerationSpread = new VectorBox(this.form.element);
+	this.accelerationSpread = new VectorBox(this.form);
 	this.accelerationSpread.setOnChange(function()
 	{
 		self.particle.emitter.acceleration.spread.copy(self.accelerationSpread.getValue());
@@ -266,7 +266,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Wiggle
 	this.form.addText("Wiggle");
-	this.wiggleValue = new NumberBox(this.form.element);
+	this.wiggleValue = new NumberBox(this.form);
 	this.wiggleValue.size.set(60, 18);
 	this.wiggleValue.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.wiggleValue.setOnChange(function()
@@ -276,7 +276,7 @@ function ParticleEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.wiggleValue);
 	this.form.addText("+/-", true);
-	this.wiggleSpread = new NumberBox(this.form.element);
+	this.wiggleSpread = new NumberBox(this.form);
 	this.wiggleSpread.size.set(60, 18);
 	this.wiggleSpread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.wiggleSpread.setOnChange(function()
@@ -289,7 +289,7 @@ function ParticleEditor(parent, closeable, container, index)
 	
 	//Opacity graph
 	this.form.addText("Opacity");
-	this.opacity = new Graph(this.form.element);
+	this.opacity = new Graph(this.form);
 	this.opacity.size.set(200, 120)
 	this.opacity.setOnChange(function(value)
 	{
@@ -306,7 +306,7 @@ function ParticleEditor(parent, closeable, container, index)
 	//Scale
 	this.form.addText("Scale");
 	this.form.addText("Min", true);
-	this.scaleMin = new NumberBox(this.form.element);
+	this.scaleMin = new NumberBox(this.form);
 	this.scaleMin.size.set(50, 18);
 	this.scaleMin.setOnChange(function()
 	{
@@ -316,7 +316,7 @@ function ParticleEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.scaleMin);
 	this.form.addText("Max", true);
-	this.scaleMax = new NumberBox(this.form.element);
+	this.scaleMax = new NumberBox(this.form);
 	this.scaleMax.size.set(50, 18);
 	this.scaleMax.setOnChange(function()
 	{
@@ -329,7 +329,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Scale graph
 	this.form.addText("");
-	this.scale = new Graph(this.form.element);
+	this.scale = new Graph(this.form);
 	this.scale.size.set(200, 120)
 	this.scale.setOnChange(function(value)
 	{
@@ -346,7 +346,7 @@ function ParticleEditor(parent, closeable, container, index)
 	//Rotation
 	this.form.addText("Rotation");
 	this.form.addText("Min", true);
-	this.angleMin = new NumberBox(this.form.element);
+	this.angleMin = new NumberBox(this.form);
 	this.angleMin.size.set(50, 18);
 	this.angleMin.setOnChange(function()
 	{
@@ -356,7 +356,7 @@ function ParticleEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.angleMin);
 	this.form.addText("Max", true);
-	this.angleMax = new NumberBox(this.form.element);
+	this.angleMax = new NumberBox(this.form);
 	this.angleMax.size.set(50, 18);
 	this.angleMax.setOnChange(function()
 	{
@@ -369,7 +369,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Rotation graph
 	this.form.addText("");
-	this.angle = new Graph(this.form.element);
+	this.angle = new Graph(this.form);
 	this.angle.size.set(200, 120)
 	this.angle.setOnChange(function(value)
 	{
@@ -388,7 +388,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Base");
-	this.colorValue = new ColorGradientChooser(this.form.element);
+	this.colorValue = new ColorGradientChooser(this.form);
 	this.colorValue.size.set(190, 20);
 	this.colorValue.setOnChange(function(color, index)
 	{
@@ -401,7 +401,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	
 	this.form.addText("Spread");
-	this.colorSpread = new ColorGradientChooser(this.form.element);
+	this.colorSpread = new ColorGradientChooser(this.form);
 	this.colorSpread.size.set(190, 20);
 	this.colorSpread.setOnChange(function(color, index)
 	{

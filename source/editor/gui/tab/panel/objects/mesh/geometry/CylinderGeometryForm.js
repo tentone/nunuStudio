@@ -20,14 +20,14 @@ function CylinderGeometryForm(form, obj)
 	//Radius
 	this.form.addText("Radius");
 	this.form.addText("T", true);
-	this.radiusTop = new NumberBox(this.form.element);
+	this.radiusTop = new NumberBox(this.form);
 	this.radiusTop.size.set(40, 18);
 	this.radiusTop.setStep(0.1);
 	this.radiusTop.setOnChange(updateGeometry);
 	this.form.add(this.radiusTop);
 
 	this.form.addText("B", true);
-	this.radiusBottom = new NumberBox(this.form.element);
+	this.radiusBottom = new NumberBox(this.form);
 	this.radiusBottom.size.set(40, 18);
 	this.radiusBottom.setStep(0.1);
 	this.radiusBottom.setOnChange(updateGeometry);
@@ -36,7 +36,7 @@ function CylinderGeometryForm(form, obj)
 
 	//Height
 	this.form.addText("Height");
-	this.height = new NumberBox(this.form.element);
+	this.height = new NumberBox(this.form);
 	this.height.size.set(40, 18);
 	this.height.setStep(0.1);
 	this.height.setOnChange(updateGeometry);
@@ -46,14 +46,14 @@ function CylinderGeometryForm(form, obj)
 	//Segments
 	this.form.addText("Segments");
 	this.form.addText("R", true);
-	this.radialSegments = new NumberBox(this.form.element);
+	this.radialSegments = new NumberBox(this.form);
 	this.radialSegments.size.set(40, 18);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
 	this.form.add(this.radialSegments);
 
 	this.form.addText("H", true);
-	this.heightSegments = new NumberBox(this.form.element);
+	this.heightSegments = new NumberBox(this.form);
 	this.heightSegments.size.set(40, 18);
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);
@@ -61,7 +61,7 @@ function CylinderGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Buffer
-	this.buffer = new CheckBox(this.form.element);
+	this.buffer = new CheckBox(this.form);
 	this.form.addText("Buffered");
 	this.buffer.size.set(15, 15);
 	this.buffer.setOnChange(updateGeometry);

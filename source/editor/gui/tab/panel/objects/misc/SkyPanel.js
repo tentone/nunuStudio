@@ -18,7 +18,7 @@ function SkyPanel(parent, obj)
 
 	//Top color
 	this.form.addText("Top color");
-	this.colorTop = new ColorGradientChooser(this.form.element);
+	this.colorTop = new ColorGradientChooser(this.form);
 	this.colorTop.size.set(190, 20);
 	this.colorTop.setOnChange(function(color, index)
 	{
@@ -29,7 +29,7 @@ function SkyPanel(parent, obj)
 
 	//Bottom color
 	this.form.addText("Bottom color");
-	this.colorBottom = new ColorGradientChooser(this.form.element);
+	this.colorBottom = new ColorGradientChooser(this.form);
 	this.colorBottom.size.set(190, 20);
 	this.colorBottom.setOnChange(function(color, index)
 	{
@@ -40,7 +40,7 @@ function SkyPanel(parent, obj)
 
 	//Sun color
 	this.form.addText("Sun Color");
-	this.sunColor = new ColorChooser(this.form.element);
+	this.sunColor = new ColorChooser(this.form);
 	this.sunColor.size.set(80, 18);
 	this.sunColor.setOnChange(function()
 	{
@@ -51,7 +51,7 @@ function SkyPanel(parent, obj)
 
 	//Moon color
 	this.form.addText("Moon Color");
-	this.moonColor = new ColorChooser(this.form.element);
+	this.moonColor = new ColorChooser(this.form);
 	this.moonColor.size.set(80, 18);
 	this.moonColor.setOnChange(function()
 	{
@@ -62,7 +62,7 @@ function SkyPanel(parent, obj)
 
 	//Intensity
 	this.form.addText("Intensity");
-	this.intensity = new Slider(this.form.element);
+	this.intensity = new Slider(this.form);
 	this.intensity.size.set(160, 18);
 	this.intensity.setStep(0.01);
 	this.intensity.setRange(0, 1);
@@ -79,7 +79,7 @@ function SkyPanel(parent, obj)
 
 	//Auto update
 	this.form.addText("Auto update");
-	this.autoUpdate = new CheckBox(this.form.element);
+	this.autoUpdate = new CheckBox(this.form);
 	this.autoUpdate.size.set(15, 15);
 	this.autoUpdate.setOnChange(function()
 	{
@@ -90,7 +90,7 @@ function SkyPanel(parent, obj)
 
 	//Day time
 	this.form.addText("Day duration");
-	this.dayTime = new NumberBox(this.form.element);
+	this.dayTime = new NumberBox(this.form);
 	this.dayTime.size.set(60, 18);
 	this.dayTime.setStep(0.1);
 	this.dayTime.setOnChange(function()
@@ -120,7 +120,7 @@ function SkyPanel(parent, obj)
 
 	//Actual time 
 	this.form.addText("Time");
-	this.time = new NumberBox(this.form.element);
+	this.time = new NumberBox(this.form);
 	this.time.size.set(60, 18);
 	this.time.setStep(0.1);
 	this.time.setOnChange(function()
@@ -147,7 +147,7 @@ function SkyPanel(parent, obj)
 
 	//Sun distance
 	this.form.addText("Sun distance");
-	this.sunDistance = new NumberBox(this.form.element);
+	this.sunDistance = new NumberBox(this.form);
 	this.sunDistance.size.set(60, 18);
 	this.sunDistance.setStep(10);
 	this.sunDistance.setOnChange(function()
@@ -162,7 +162,7 @@ function SkyPanel(parent, obj)
 	this.form.nextRow();
 
 	//Cast shadow
-	this.castShadow = new CheckBox(this.form.element);
+	this.castShadow = new CheckBox(this.form);
 	this.form.addText("Cast Shadows");
 	this.castShadow.size.set(15, 15);
 	this.castShadow.position.set(5, 85);
@@ -176,7 +176,7 @@ function SkyPanel(parent, obj)
 
 	//Shadow resolution
 	this.form.addText("Resolution");
-	this.shadowWidth = new DropdownList(this.form.element);
+	this.shadowWidth = new DropdownList(this.form);
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()
 	{
@@ -185,7 +185,7 @@ function SkyPanel(parent, obj)
 	});
 	this.form.add(this.shadowWidth);
 	this.form.addText("x", true);
-	this.shadowHeight = new DropdownList(this.form.element);
+	this.shadowHeight = new DropdownList(this.form);
 	this.shadowHeight.size.set(60, 18);
 	this.shadowHeight.setOnChange(function()
 	{
@@ -204,7 +204,7 @@ function SkyPanel(parent, obj)
 
 	//Shadowmap camera near
 	this.form.addText("Near");
-	this.shadowNear = new NumberBox(this.form.element);
+	this.shadowNear = new NumberBox(this.form);
 	this.shadowNear.size.set(60, 18);
 	this.shadowNear.setStep(0.1);
 	this.shadowNear.setOnChange(function()
@@ -217,7 +217,7 @@ function SkyPanel(parent, obj)
 	
 	//Shadowmap camera far
 	this.form.addText("Far");
-	this.shadowFar = new NumberBox(this.form.element);
+	this.shadowFar = new NumberBox(this.form);
 	this.shadowFar.size.set(60, 18);
 	this.shadowFar.setStep(0.1);
 	this.shadowFar.setOnChange(function()
@@ -230,7 +230,7 @@ function SkyPanel(parent, obj)
 
 	//Shadowmap camera left
 	this.form.addText("Left");
-	this.shadowLeft = new NumberBox(this.form.element);
+	this.shadowLeft = new NumberBox(this.form);
 	this.shadowLeft.size.set(60, 18);
 	this.shadowLeft.setStep(0.1);
 	this.shadowLeft.setOnChange(function()
@@ -243,7 +243,7 @@ function SkyPanel(parent, obj)
 
 	//Shadowmap camera right
 	this.form.addText("Right");
-	this.shadowRight = new NumberBox(this.form.element);
+	this.shadowRight = new NumberBox(this.form);
 	this.shadowRight.size.set(60, 18);
 	this.shadowRight.setStep(0.1);
 	this.shadowRight.setOnChange(function()
@@ -256,7 +256,7 @@ function SkyPanel(parent, obj)
 
 	//Shadowmap camera top
 	this.form.addText("Top");
-	this.shadowTop = new NumberBox(this.form.element);
+	this.shadowTop = new NumberBox(this.form);
 	this.shadowTop.size.set(60, 18);
 	this.shadowTop.setStep(0.1);
 	this.shadowTop.setOnChange(function()
@@ -269,7 +269,7 @@ function SkyPanel(parent, obj)
 
 	//Shadowmap camera bottom
 	this.form.addText("Bottom");
-	this.shadowBottom = new NumberBox(this.form.element);
+	this.shadowBottom = new NumberBox(this.form);
 	this.shadowBottom.size.set(60, 18);
 	this.shadowBottom.setStep(0.1);
 	this.shadowBottom.setOnChange(function()

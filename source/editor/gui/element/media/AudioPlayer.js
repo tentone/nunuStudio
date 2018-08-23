@@ -310,12 +310,7 @@ AudioPlayer.prototype.destroy = function()
 	this.disconnect();
 	this.stop();
 
-	//Remove element
-	if(this.parent !== null && this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-		this.parent = null;
-	}
+	Element.prototype.destroy.call(this);
 };
 
 AudioPlayer.prototype.updateSize = function()

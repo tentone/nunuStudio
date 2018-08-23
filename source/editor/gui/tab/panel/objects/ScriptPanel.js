@@ -7,7 +7,7 @@ function ScriptPanel(parent, obj)
 	var self = this;
 
 	this.form.addText("Library Mode");
-	this.mode = new DropdownList(this.form.element);
+	this.mode = new DropdownList(this.form);
 	this.mode.size.set(100, 18);
 	this.mode.setOnChange(function()
 	{

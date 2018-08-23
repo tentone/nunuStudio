@@ -35,7 +35,7 @@ function CameraEditor(parent, closeable, container, index)
 
 	//Name
 	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
+	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -53,7 +53,7 @@ function CameraEditor(parent, closeable, container, index)
 
 	var addRenderPassButton = function(name, PassConstructor)
 	{
-		var button = new ButtonText(self.form.element);
+		var button = new ButtonText(self.form);
 		button.size.set(100, 18);
 		button.setText(name);
 		button.setOnClick(function()
@@ -93,7 +93,7 @@ function CameraEditor(parent, closeable, container, index)
 	addRenderPassButton("Copy", CopyPass);
 	self.form.nextRow();
 
-	this.postNodes = new Form(this.form.element);
+	this.postNodes = new Form(this.form);
 	this.form.add(this.postNodes);
 	this.form.nextRow();
 }

@@ -144,10 +144,7 @@ TabElement.prototype.isSelected = function()
 //Destroy
 TabElement.prototype.destroy = function()
 {
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
+	Element.prototype.destroy.call(this);
 	
 	this.button.destroy();
 };

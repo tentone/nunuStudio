@@ -9,7 +9,7 @@ function RectAreaLightPanel(parent, obj)
 
 	//Color
 	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
@@ -20,7 +20,7 @@ function RectAreaLightPanel(parent, obj)
 
 	//Intensity
 	this.form.addText("Intensity");
-	this.intensity = new Slider(this.form.element);
+	this.intensity = new Slider(this.form);
 	this.intensity.size.set(160, 18);
 	this.intensity.setStep(0.1);
 	this.intensity.setRange(0, 500);
@@ -33,7 +33,7 @@ function RectAreaLightPanel(parent, obj)
 
 	//Rect width
 	this.form.addText("Width");
-	this.width = new NumberBox(this.form.element);
+	this.width = new NumberBox(this.form);
 	this.width.size.set(60, 18);
 	this.width.setStep(0.1);
 	this.width.setOnChange(function()
@@ -45,7 +45,7 @@ function RectAreaLightPanel(parent, obj)
 	
 	//Rect height
 	this.form.addText("Height");
-	this.height = new NumberBox(this.form.element);
+	this.height = new NumberBox(this.form);
 	this.height.size.set(60, 18);
 	this.height.setStep(0.1);
 	this.height.setOnChange(function()

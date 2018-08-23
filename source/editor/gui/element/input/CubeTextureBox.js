@@ -57,7 +57,7 @@ function CubeTextureBox(parent)
 
 	//Use texture
 	this.form.addText("Use texture");
-	this.useTexture = new CheckBox(this.form.element);
+	this.useTexture = new CheckBox(this.form);
 	this.useTexture.size.set(30, 15);
 	this.form.add(this.useTexture);
 	this.form.nextRow();

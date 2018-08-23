@@ -8,7 +8,7 @@ function ScenePanel(parent, obj)
 	var self = this;
 
 	//Select scene as default
-	this.default = new CheckBox(this.form.element);
+	this.default = new CheckBox(this.form);
 	this.form.addText("Default scene");
 	this.default.size.set(15, 15);
 	this.default.setOnChange(function()
@@ -32,7 +32,7 @@ function ScenePanel(parent, obj)
 
 	//Background color
 	this.form.addText("Background");
-	this.background = new ColorChooser(this.form.element);
+	this.background = new ColorChooser(this.form);
 	this.background.size.set(100, 18);
 	this.background.setValue(0, 0, 0);
 	this.background.setOnChange(function()
@@ -44,7 +44,7 @@ function ScenePanel(parent, obj)
 
 	//Background texture
 	this.form.addText("");
-	this.backgroundTexture = new TextureChooser(this.form.element);
+	this.backgroundTexture = new TextureChooser(this.form);
 	this.backgroundTexture.acceptAll = true;
 	this.backgroundTexture.setOnChange(function(file)
 	{
@@ -54,7 +54,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	this.form.addText("");
-	this.backgroundTransparent = new ButtonText(this.form.element);
+	this.backgroundTransparent = new ButtonText(this.form);
 	this.backgroundTransparent.setText("Set transparent");
 	this.backgroundTransparent.size.set(100, 18);
 	this.backgroundTransparent.setOnClick(function()
@@ -66,7 +66,7 @@ function ScenePanel(parent, obj)
 
 	//Fog
 	this.form.addText("Fog");
-	this.fog = new DropdownList(this.form.element);
+	this.fog = new DropdownList(this.form);
 	this.fog.size.set(100, 20);
 	this.fog.addValue("None", THREE.Fog.NONE);
 	this.fog.addValue("Linear", THREE.Fog.LINEAR);
@@ -80,7 +80,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	//Linear fog properties
-	this.fogLinearForm = new Form(this.form.element);
+	this.fogLinearForm = new Form(this.form);
 	this.fogLinearForm.spacing.set(5, 5);
 
 	//Linear fog color
@@ -123,7 +123,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	//Exponential fog properties
-	this.fogExponentialForm = new Form(this.form.element);
+	this.fogExponentialForm = new Form(this.form);
 	this.fogExponentialForm.spacing.set(5, 5);
 
 	//Exponential fog color
@@ -161,7 +161,7 @@ function ScenePanel(parent, obj)
 
 	//Use physics
 	this.form.addText("Use physics");
-	this.usePhysics = new CheckBox(this.form.element);
+	this.usePhysics = new CheckBox(this.form);
 	this.usePhysics.size.set(15, 15);
 	this.usePhysics.setOnChange(function()
 	{
@@ -172,7 +172,7 @@ function ScenePanel(parent, obj)
 
 	//Gravity
 	this.form.addText("Gravity");
-	this.gravity = new VectorBox(this.form.element);
+	this.gravity = new VectorBox(this.form);
 	this.gravity.setOnChange(function()
 	{
 		var gravity = self.gravity.getValue();
@@ -182,7 +182,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	this.form.addText("Tolerance");
-	this.tolerance = new NumberBox(this.form.element);
+	this.tolerance = new NumberBox(this.form);
 	this.tolerance.size.set(50, 18);
 	this.tolerance.setRange(0, 1000);
 	this.tolerance.setStep(0.01);
@@ -194,7 +194,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	this.form.addText("Iterations");
-	this.iterations = new NumberBox(this.form.element);
+	this.iterations = new NumberBox(this.form);
 	this.iterations.size.set(50, 18);
 	this.iterations.setRange(0, 1000);
 	this.iterations.setStep(1);

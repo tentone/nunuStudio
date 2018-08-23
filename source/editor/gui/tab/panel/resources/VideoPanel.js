@@ -7,7 +7,7 @@ function VideoPanel(parent, obj)
 	var self = this;
 
 	this.form.addText("Video");
-	this.video = new VideoPlayer(this.form.element);
+	this.video = new VideoPlayer(this.form);
 	this.video.size.set(120, 120);
 	this.form.add(this.video);
 	this.form.nextRow();

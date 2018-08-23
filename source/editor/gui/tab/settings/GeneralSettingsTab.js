@@ -21,7 +21,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	
 	//Theme
 	this.form.addText("Theme");
-	this.theme = new DropdownList(this.form.element);
+	this.theme = new DropdownList(this.form);
 	this.theme.size.set(150, 20);
 	this.theme.setOnChange(function()
 	{
@@ -41,7 +41,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//History size
 	this.form.addText("History size").setAltText("How many changes are stored in the history.");
-	this.historySize = new NumberBox(this.form.element);
+	this.historySize = new NumberBox(this.form);
 	this.historySize.size.set(60, 18);
 	this.historySize.setRange(1.0, Number.MAX_SAFE_INTEGER);
 	this.historySize.setStep(1.0);
@@ -54,7 +54,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Reset").setAltText("Reset editor back to default settings.");
-	this.resetDefault = new ButtonText(this.form.element);
+	this.resetDefault = new ButtonText(this.form);
 	this.resetDefault.setText("Reset settings");
 	this.resetDefault.size.set(120, 18);
 	this.resetDefault.setOnClick(function()
@@ -72,7 +72,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	if(Nunu.runningOnDesktop())
 	{
 		this.form.addText("Auto update").setAltText("If checked the editor will auto-update to the latest version.");
-		this.autoUpdate = new CheckBox(this.form.element);
+		this.autoUpdate = new CheckBox(this.form);
 		this.autoUpdate.size.set(15, 15);
 		this.autoUpdate.setOnChange(function()
 		{
@@ -97,7 +97,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Immediate mode
 	this.form.addText("Use immediate mode").setAltText("If checked objects changed during runtime test will keep their state when the testing mode stops.");
-	this.immediateMode = new CheckBox(this.form.element);
+	this.immediateMode = new CheckBox(this.form);
 	this.immediateMode.size.set(15, 15);
 	this.immediateMode.setOnChange(function()
 	{

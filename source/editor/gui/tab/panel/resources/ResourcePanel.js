@@ -8,7 +8,7 @@ function ResourcePanel(parent, obj)
 
 	//Name
 	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
+	this.name = new TextBox(this.form);
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{

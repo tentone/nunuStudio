@@ -7,7 +7,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Skinning
-	this.skinning = new CheckBox(this.form.element);
+	this.skinning = new CheckBox(this.form);
 	this.form.addText("Skinning");
 	this.skinning.size.set(15, 15);
 	this.skinning.updateInterface();
@@ -19,7 +19,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Morph targets
-	this.morphTargets = new CheckBox(this.form.element);
+	this.morphTargets = new CheckBox(this.form);
 	this.form.addText("Morph targets");
 	this.morphTargets.size.set(15, 15);
 	this.morphTargets.setOnChange(function()
@@ -30,7 +30,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Wireframe
-	this.wireframe = new CheckBox(this.form.element);
+	this.wireframe = new CheckBox(this.form);
 	this.form.addText("Wireframe");
 	this.wireframe.size.set(15, 15);
 	this.wireframe.setOnChange(function()
@@ -42,7 +42,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Shading mode
 	this.form.addText("Shading");
-	this.flatShading = new DropdownList(this.form.element);
+	this.flatShading = new DropdownList(this.form);
 	this.flatShading.position.set(100, 85);
 	this.flatShading.size.set(100, 18);
 	this.flatShading.addValue("Smooth", false);
@@ -57,7 +57,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Color
 	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
@@ -69,7 +69,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Roughness
 	this.form.addText("Roughness");
-	this.roughness = new Slider(this.form.element);
+	this.roughness = new Slider(this.form);
 	this.roughness.size.set(160, 18);
 	this.roughness.setRange(0, 1);
 	this.roughness.setStep(0.01);
@@ -83,7 +83,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Shininess
 	this.form.addText("Metalness");
-	this.metalness = new Slider(this.form.element);
+	this.metalness = new Slider(this.form);
 	this.metalness.size.set(160, 18);
 	this.metalness.setRange(0, 1);
 	this.metalness.setStep(0.01);
@@ -98,7 +98,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new TextureBox(this.form.element);
+	this.map = new TextureBox(this.form);
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{
@@ -111,7 +111,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Roughness map
 	this.form.addText("Roughness map");
 	this.form.nextRow();
-	this.roughnessMap = new TextureBox(this.form.element);
+	this.roughnessMap = new TextureBox(this.form);
 	this.roughnessMap.size.set(100, 100);
 	this.roughnessMap.setOnChange(function(file)
 	{
@@ -124,7 +124,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Metalness map
 	this.form.addText("Metalness map");
 	this.form.nextRow();
-	this.metalnessMap = new TextureBox(this.form.element);
+	this.metalnessMap = new TextureBox(this.form);
 	this.metalnessMap.size.set(100, 100);
 	this.metalnessMap.setOnChange(function(file)
 	{
@@ -137,7 +137,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Bump map
 	this.form.addText("Bump map");
 	this.form.nextRow();
-	this.bumpMap = new TextureBox(this.form.element);
+	this.bumpMap = new TextureBox(this.form);
 	this.bumpMap.size.set(100, 100);
 	this.bumpMap.setOnChange(function(file)
 	{
@@ -149,7 +149,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Bump map scale
 	this.form.addText("Bump Scale");
-	this.bumpScale = new Slider(this.form.element);
+	this.bumpScale = new Slider(this.form);
 	this.bumpScale.size.set(160, 18);
 	this.bumpScale.setRange(0, 1);
 	this.bumpScale.setStep(0.01);
@@ -164,7 +164,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Normal map
 	this.form.addText("Normal map");
 	this.form.nextRow();
-	this.normalMap = new TextureBox(this.form.element);
+	this.normalMap = new TextureBox(this.form);
 	this.normalMap.size.set(100, 100);
 	this.normalMap.setOnChange(function(file)
 	{
@@ -176,7 +176,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Normal map scale
 	this.form.addText("Normal Scale");
-	this.normalScale = new VectorBox(this.form.element);
+	this.normalScale = new VectorBox(this.form);
 	this.normalScale.setType(VectorBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
 	this.normalScale.setOnChange(function()
@@ -190,7 +190,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Displacement map
 	this.form.addText("Displacement map");
 	this.form.nextRow();
-	this.displacementMap = new TextureBox(this.form.element);
+	this.displacementMap = new TextureBox(this.form);
 	this.displacementMap.size.set(100, 100);
 	this.displacementMap.setOnChange(function(file)
 	{
@@ -203,7 +203,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Displacement map scale
 	this.form.addText("Scale");
-	this.displacementScale = new NumberBox(this.form.element);
+	this.displacementScale = new NumberBox(this.form);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);
 	this.displacementScale.setOnChange(function()
@@ -216,7 +216,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Displacement map bias
 	this.form.addText("Bias");
-	this.displacementBias = new NumberBox(this.form.element);
+	this.displacementBias = new NumberBox(this.form);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);
 	this.displacementBias.setOnChange(function()
@@ -230,7 +230,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Emissive map
 	this.form.addText("Emissive map");
 	this.form.nextRow();
-	this.emissiveMap = new TextureBox(this.form.element);
+	this.emissiveMap = new TextureBox(this.form);
 	this.emissiveMap.size.set(100, 100);
 	this.emissiveMap.setOnChange(function(file)
 	{
@@ -242,7 +242,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Emissive color
 	this.form.addText("Color");
-	this.emissive = new ColorChooser(this.form.element);
+	this.emissive = new ColorChooser(this.form);
 	this.emissive.size.set(100, 18);
 	this.emissive.setOnChange(function()
 	{
@@ -254,7 +254,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Emissive intensity
 	this.form.addText("Intensity");
-	this.emissiveIntensity = new NumberBox(this.form.element);
+	this.emissiveIntensity = new NumberBox(this.form);
 	this.emissiveIntensity.size.set(60, 18);
 	this.emissiveIntensity.setStep(0.1);
 	this.emissiveIntensity.setOnChange(function()
@@ -268,7 +268,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.form.nextRow();
-	this.alphaMap = new TextureBox(this.form.element);
+	this.alphaMap = new TextureBox(this.form);
 	this.alphaMap.size.set(100, 100);
 	this.alphaMap.setOnChange(function(file)
 	{
@@ -281,7 +281,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Environment map
 	this.form.addText("Environment map");
 	this.form.nextRow();
-	this.envMap = new CubeTextureBox(this.form.element);
+	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(100, 100);
 	this.envMap.setOnChange(function(file)
 	{
@@ -293,7 +293,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Reflectivity
 	this.form.addText("Intensity");
-	this.envMapIntensity = new NumberBox(this.form.element);
+	this.envMapIntensity = new NumberBox(this.form);
 	this.envMapIntensity.size.set(60, 18);
 	this.envMapIntensity.setStep(0.05);
 	this.envMapIntensity.setOnChange(function()
@@ -306,7 +306,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Reflectivity
 	this.form.addText("Refraction");
-	this.refractionRatio = new NumberBox(this.form.element);
+	this.refractionRatio = new NumberBox(this.form);
 	this.refractionRatio.size.set(60, 18);
 	this.refractionRatio.setStep(0.05);
 	this.refractionRatio.setOnChange(function()
@@ -320,7 +320,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Ambient Occlusion map
 	this.form.addText("Ambient Occlusion");
 	this.form.nextRow();
-	this.aoMap = new TextureBox(this.form.element);
+	this.aoMap = new TextureBox(this.form);
 	this.aoMap.size.set(100, 100);
 	this.aoMap.setOnChange(function(file)
 	{
@@ -332,7 +332,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Ambient Occlusion
 	this.form.addText("Intensity");
-	this.aoMapIntensity = new NumberBox(this.form.element);
+	this.aoMapIntensity = new NumberBox(this.form);
 	this.aoMapIntensity.size.set(60, 18);
 	this.aoMapIntensity.setStep(0.05);
 	this.aoMapIntensity.setOnChange(function()

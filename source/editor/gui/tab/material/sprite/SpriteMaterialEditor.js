@@ -30,7 +30,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 	//Color
 	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
@@ -42,7 +42,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 	//Rotation
 	this.form.addText("Rotation");
-	this.rotation = new NumberBox(this.form.element);
+	this.rotation = new NumberBox(this.form);
 	this.rotation.size.set(60, 18);
 	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()
@@ -56,7 +56,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new TextureBox(this.form.element);
+	this.map = new TextureBox(this.form);
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{

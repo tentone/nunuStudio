@@ -53,7 +53,7 @@ function AssetExplorer(parent, closeable, container, index)
 	this.bar = new AssetExplorerMenu(this);
 
 	//Search
-	this.search = new TextBox(this.bar.element);
+	this.search = new TextBox(this.bar);
 	this.search.setMode(Element.TOP_RIGHT);
 	this.search.size.set(140, 17);
 	this.search.position.set(2, 0);

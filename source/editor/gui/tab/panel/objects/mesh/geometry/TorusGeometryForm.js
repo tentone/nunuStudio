@@ -19,7 +19,7 @@ function TorusGeometryForm(form, obj)
 
 	//Radius
 	this.form.addText("Radius");
-	this.radius = new NumberBox(this.form.element);
+	this.radius = new NumberBox(this.form);
 	this.radius.size.set(40, 18);
 	this.radius.setStep(0.1);
 	this.radius.setOnChange(updateGeometry);
@@ -28,7 +28,7 @@ function TorusGeometryForm(form, obj)
 	
 	//Tube
 	this.form.addText("Tube");
-	this.tube = new NumberBox(this.form.element);
+	this.tube = new NumberBox(this.form);
 	this.tube.size.set(40, 18);
 	this.tube.setStep(0.1);
 	this.tube.setOnChange(updateGeometry);
@@ -38,14 +38,14 @@ function TorusGeometryForm(form, obj)
 	//Segments
 	this.form.addText("Segments");
 	this.form.addText("R", true);
-	this.radialSegments = new NumberBox(this.form.element);
+	this.radialSegments = new NumberBox(this.form);
 	this.radialSegments.size.set(40, 18);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
 	this.form.add(this.radialSegments);
 
 	this.form.addText("T", true);
-	this.tubularSegments = new NumberBox(this.form.element);
+	this.tubularSegments = new NumberBox(this.form);
 	this.tubularSegments.size.set(40, 18);
 	this.tubularSegments.setStep(1);
 	this.tubularSegments.setOnChange(updateGeometry);
@@ -54,7 +54,7 @@ function TorusGeometryForm(form, obj)
 	
 	//Arc
 	this.form.addText("Arc");
-	this.arc = new NumberBox(this.form.element);
+	this.arc = new NumberBox(this.form);
 	this.arc.size.set(40, 18);
 	this.arc.setStep(0.1);
 	this.arc.setRange(0, Math.PI * 2);
@@ -63,7 +63,7 @@ function TorusGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Buffer
-	this.buffer = new CheckBox(this.form.element);
+	this.buffer = new CheckBox(this.form);
 	this.form.addText("Buffered");
 	this.buffer.size.set(15, 15);
 	this.buffer.setOnChange(updateGeometry);

@@ -8,7 +8,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	
 	//Skinning
 	this.form.addText("Skinning");
-	this.skinning = new CheckBox(this.form.element);
+	this.skinning = new CheckBox(this.form);
 	this.skinning.size.set(15, 15);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
@@ -20,7 +20,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Morph targets
 	this.form.addText("Morph targets");
-	this.morphTargets = new CheckBox(this.form.element);
+	this.morphTargets = new CheckBox(this.form);
 	this.morphTargets.size.set(15, 15);
 	this.morphTargets.setOnChange(function()
 	{
@@ -31,7 +31,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Wireframe
 	this.form.addText("Wireframe");
-	this.wireframe = new CheckBox(this.form.element);
+	this.wireframe = new CheckBox(this.form);
 	this.wireframe.size.set(15, 15);
 	this.wireframe.setOnChange(function()
 	{
@@ -42,7 +42,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Shading mode
 	this.form.addText("Shading");
-	this.flatShading = new DropdownList(this.form.element);
+	this.flatShading = new DropdownList(this.form);
 	this.flatShading.position.set(100, 85);
 	this.flatShading.size.set(100, 18);
 	this.flatShading.addValue("Smooth", false);
@@ -57,7 +57,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Color
 	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
@@ -70,7 +70,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new TextureBox(this.form.element);
+	this.map = new TextureBox(this.form);
 	this.map.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
@@ -82,7 +82,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	//Specular map
 	this.form.addText("Specular map");
 	this.form.nextRow();
-	this.specularMap = new TextureBox(this.form.element);
+	this.specularMap = new TextureBox(this.form);
 	this.specularMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
@@ -94,7 +94,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.form.nextRow();
-	this.alphaMap = new TextureBox(this.form.element);
+	this.alphaMap = new TextureBox(this.form);
 	this.alphaMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
@@ -106,7 +106,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	//Emissive map
 	this.form.addText("Emissive map");
 	this.form.nextRow();
-	this.emissiveMap = new TextureBox(this.form.element);
+	this.emissiveMap = new TextureBox(this.form);
 	this.emissiveMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
@@ -117,7 +117,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Emissive color
 	this.form.addText("Color");
-	this.emissive = new ColorChooser(this.form.element);
+	this.emissive = new ColorChooser(this.form);
 	this.emissive.size.set(100, 18);
 	this.emissive.setOnChange(function()
 	{
@@ -129,7 +129,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Emissive intensity
 	this.form.addText("Intensity");
-	this.emissiveIntensity = new NumberBox(this.form.element);
+	this.emissiveIntensity = new NumberBox(this.form);
 	this.emissiveIntensity.size.set(60, 18);
 	this.emissiveIntensity.setStep(0.1);
 	this.emissiveIntensity.setOnChange(function()
@@ -143,7 +143,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	//Environment map
 	this.form.addText("Environment map");
 	this.form.nextRow();
-	this.envMap = new CubeTextureBox(this.form.element);
+	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(100, 100);
 	this.envMap.setOnChange(function(file)
 	{
@@ -155,7 +155,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Combine environment map
 	this.form.addText("Mode");
-	this.combine = new DropdownList(this.form.element);
+	this.combine = new DropdownList(this.form);
 	this.combine.position.set(100, 85);
 	this.combine.size.set(120, 18);
 	this.combine.addValue("Multiply", THREE.MultiplyOperation);
@@ -171,7 +171,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Reflectivity
 	this.form.addText("Reflectivity");
-	this.reflectivity = new NumberBox(this.form.element);
+	this.reflectivity = new NumberBox(this.form);
 	this.reflectivity.size.set(60, 18);
 	this.reflectivity.setStep(0.05);
 	this.reflectivity.setOnChange(function()
@@ -184,7 +184,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	//Refraction
 	this.form.addText("Refraction Ratio");
-	this.refractionRatio = new NumberBox(this.form.element);
+	this.refractionRatio = new NumberBox(this.form);
 	this.refractionRatio.size.set(60, 18);
 	this.refractionRatio.setStep(0.05);
 	this.refractionRatio.setOnChange(function()

@@ -21,7 +21,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Code Theme
 	this.form.addText("Editor theme");
-	this.codeTheme = new DropdownList(this.form.element);
+	this.codeTheme = new DropdownList(this.form);
 	this.codeTheme.size.set(120, 20);
 	this.codeTheme.setOnChange(function()
 	{
@@ -38,7 +38,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Code keymap
 	this.form.addText("Key bindings");
-	this.codeKeymap = new DropdownList(this.form.element);
+	this.codeKeymap = new DropdownList(this.form);
 	this.codeKeymap.size.set(120, 20);
 	this.codeKeymap.addValue("codemirror", "default");
 	this.codeKeymap.addValue("sublime", "sublime");
@@ -53,7 +53,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Code font size
 	this.form.addText("Font size");
-	this.codeFontSize = new NumberBox(this.form.element);
+	this.codeFontSize = new NumberBox(this.form);
 	this.codeFontSize.size.set(60, 18);
 	this.codeFontSize.setRange(5, 99999);
 	this.codeFontSize.setStep(1);
@@ -66,7 +66,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Show line numbers
 	this.form.addText("Show line number");
-	this.codeLineNumbers = new CheckBox(this.form.element);
+	this.codeLineNumbers = new CheckBox(this.form);
 	this.codeLineNumbers.size.set(15, 15);
 	this.codeLineNumbers.setOnChange(function()
 	{
@@ -77,7 +77,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Line wrapping
 	this.form.addText("Line wrap");
-	this.codeLineWrapping = new CheckBox(this.form.element);
+	this.codeLineWrapping = new CheckBox(this.form);
 	this.codeLineWrapping.size.set(15, 15);
 	this.codeLineWrapping.setOnChange(function()
 	{
@@ -88,7 +88,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Auto close brackets
 	this.form.addText("Auto close brackets");
-	this.codeAutoCloseBrackets = new CheckBox(this.form.element);
+	this.codeAutoCloseBrackets = new CheckBox(this.form);
 	this.codeAutoCloseBrackets.size.set(15, 15);
 	this.codeAutoCloseBrackets.setOnChange(function()
 	{
@@ -99,7 +99,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Highlight active line
 	this.form.addText("Highlight line");
-	this.codeHighlightActiveLine = new CheckBox(this.form.element);
+	this.codeHighlightActiveLine = new CheckBox(this.form);
 	this.codeHighlightActiveLine.size.set(15, 15);
 	this.codeHighlightActiveLine.setOnChange(function()
 	{
@@ -110,7 +110,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Show search match on scrollback
 	this.form.addText("Show match scrollbar");
-	this.showMatchesOnScrollbar = new CheckBox(this.form.element);
+	this.showMatchesOnScrollbar = new CheckBox(this.form);
 	this.showMatchesOnScrollbar.size.set(15, 15);
 	this.showMatchesOnScrollbar.setOnChange(function()
 	{
@@ -121,7 +121,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	
 	//File drag
 	this.form.addText("Drag files");
-	this.dragFiles = new CheckBox(this.form.element);
+	this.dragFiles = new CheckBox(this.form);
 	this.dragFiles.size.set(15, 15);
 	this.dragFiles.setOnChange(function()
 	{
@@ -132,7 +132,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Indent with tabs
 	this.form.addText("Indent with tabs");
-	this.indentWithTabs = new CheckBox(this.form.element);
+	this.indentWithTabs = new CheckBox(this.form);
 	this.indentWithTabs.size.set(15, 15);
 	this.indentWithTabs.setOnChange(function()
 	{
@@ -143,7 +143,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Tab size
 	this.form.addText("Tab size");
-	this.tabSize = new NumberBox(this.form.element);
+	this.tabSize = new NumberBox(this.form);
 	this.tabSize.size.set(60, 18);
 	this.tabSize.setRange(1, 100);
 	this.tabSize.setStep(1);
@@ -156,7 +156,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	//Indent units
 	this.form.addText("Indent Unit");
-	this.indentUnit = new NumberBox(this.form.element);
+	this.indentUnit = new NumberBox(this.form);
 	this.indentUnit.size.set(60, 18);
 	this.indentUnit.setRange(1, 100);
 	this.indentUnit.setStep(1);

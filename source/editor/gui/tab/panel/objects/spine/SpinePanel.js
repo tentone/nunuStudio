@@ -9,7 +9,7 @@ function SpinePanel(parent, obj)
 
 	//Animation
 	this.form.addText("Animation");
-	this.animation = new DropdownList(this.form.element);
+	this.animation = new DropdownList(this.form);
 	this.animation.size.set(100, 18);
 	this.animation.setOnChange(function()
 	{
@@ -20,7 +20,7 @@ function SpinePanel(parent, obj)
 
 	//Skin
 	this.form.addText("Skin");
-	this.skin = new DropdownList(this.form.element);
+	this.skin = new DropdownList(this.form);
 	this.skin.size.set(100, 18);
 	this.skin.setOnChange(function()
 	{
@@ -30,7 +30,7 @@ function SpinePanel(parent, obj)
 	this.form.nextRow();
 
 	//Cast shadow
-	this.castShadow = new CheckBox(this.form.element);
+	this.castShadow = new CheckBox(this.form);
 	this.form.addText("Cast Shadow");
 	this.castShadow.size.set(15, 15);
 	this.castShadow.setOnChange(function()
@@ -41,7 +41,7 @@ function SpinePanel(parent, obj)
 	this.form.nextRow();
 
 	//Receive shadow
-	this.receiveShadow = new CheckBox(this.form.element);
+	this.receiveShadow = new CheckBox(this.form);
 	this.form.addText("React Shadow");
 	this.receiveShadow.size.set(15, 15);
 	this.receiveShadow.setOnChange(function()

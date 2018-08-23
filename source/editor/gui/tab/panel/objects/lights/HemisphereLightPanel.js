@@ -9,7 +9,7 @@ function HemisphereLightPanel(parent, obj)
 
 	//Sky color
 	this.form.addText("Sky color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
@@ -20,7 +20,7 @@ function HemisphereLightPanel(parent, obj)
 
 	//Ground color
 	this.form.addText("Ground color");
-	this.groundColor = new ColorChooser(this.form.element);
+	this.groundColor = new ColorChooser(this.form);
 	this.groundColor.size.set(80, 18);
 	this.groundColor.setOnChange(function()
 	{

@@ -13,7 +13,7 @@ function ProgramPanel(parent, obj)
 
 	//Author
 	this.form.addText("Author");
-	this.author = new TextBox(this.form.element);
+	this.author = new TextBox(this.form);
 	this.author.position.set(50, 35);
 	this.author.size.set(190, 18);
 	this.author.updateInterface();
@@ -26,7 +26,7 @@ function ProgramPanel(parent, obj)
 	
 	//Version
 	this.form.addText("Version");
-	this.version = new TextBox(this.form.element);
+	this.version = new TextBox(this.form);
 	this.version.size.set(100, 18);
 	this.version.setOnChange(function()
 	{
@@ -36,7 +36,7 @@ function ProgramPanel(parent, obj)
 	this.form.nextRow();
 
 	//Mouse lock
-	this.lockPointer = new CheckBox(this.form.element);
+	this.lockPointer = new CheckBox(this.form);
 	this.form.addText("Lock pointer");
 	this.lockPointer.size.set(15, 15);
 	this.lockPointer.setOnChange(function()
@@ -47,7 +47,7 @@ function ProgramPanel(parent, obj)
 	this.form.nextRow();
 	
 	//Handle pixel ratio
-	this.handlePixelRatio = new CheckBox(this.form.element);
+	this.handlePixelRatio = new CheckBox(this.form);
 	this.form.addText("Pixel Ratio");
 	this.handlePixelRatio.size.set(15, 15);
 	this.handlePixelRatio.setOnChange(function()
@@ -62,7 +62,7 @@ function ProgramPanel(parent, obj)
 	this.form.nextRow();
 
 	//VR Enabled
-	this.vr = new CheckBox(this.form.element);
+	this.vr = new CheckBox(this.form);
 	this.form.addText("VR Enabled");
 	this.vr.size.set(15, 15);
 	this.vr.setOnChange(function()
@@ -74,7 +74,7 @@ function ProgramPanel(parent, obj)
 
 	//VR Movement Scale
 	this.form.addText("Room Scale");
-	this.vrScale = new NumberBox(this.form.element);
+	this.vrScale = new NumberBox(this.form);
 	this.vrScale.size.set(50, 18);
 	this.vrScale.setRange(0, 1000);
 	this.vrScale.setStep(0.05);
@@ -90,7 +90,7 @@ function ProgramPanel(parent, obj)
 	this.form.nextRow();
 
 	//Antialiasing
-	this.antialiasing = new CheckBox(this.form.element);
+	this.antialiasing = new CheckBox(this.form);
 	this.form.addText("Antialiasing");
 	this.antialiasing.size.set(15, 15);
 	this.antialiasing.setOnChange(function()
@@ -107,7 +107,7 @@ function ProgramPanel(parent, obj)
 	this.form.nextRow();
 
 	//Shadows
-	this.shadows = new CheckBox(this.form.element);
+	this.shadows = new CheckBox(this.form);
 	this.form.addText("Shadows");
 	this.shadows.size.set(15, 15);
 	this.shadows.setOnChange(function()
@@ -120,7 +120,7 @@ function ProgramPanel(parent, obj)
 
 	//Shadow type
 	this.form.addText("Shadows type");
-	this.shadowsType = new DropdownList(this.form.element);
+	this.shadowsType = new DropdownList(this.form);
 	this.shadowsType.size.set(120, 20);
 	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
 	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
@@ -135,7 +135,7 @@ function ProgramPanel(parent, obj)
 
 	//Tonemapping
 	this.form.addText("Tonemapping");
-	this.toneMapping = new DropdownList(this.form.element);
+	this.toneMapping = new DropdownList(this.form);
 	this.toneMapping.size.set(120, 20);
 	this.toneMapping.addValue("None", THREE.NoToneMapping);
 	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
@@ -152,7 +152,7 @@ function ProgramPanel(parent, obj)
 
 	//Tonemapping exposure
 	this.form.addText("Exposure");
-	this.toneMappingExposure = new NumberBox(this.form.element);
+	this.toneMappingExposure = new NumberBox(this.form);
 	this.toneMappingExposure.size.set(40, 18);
 	this.toneMappingExposure.setRange(0.0, Number.MAX_SAFE_INTEGER);
 	this.toneMappingExposure.setStep(0.1);
@@ -166,7 +166,7 @@ function ProgramPanel(parent, obj)
 
 	//Tonemapping whitepoint
 	this.form.addText("Whitepoint");
-	this.toneMappingWhitePoint = new NumberBox(this.form.element);
+	this.toneMappingWhitePoint = new NumberBox(this.form);
 	this.toneMappingWhitePoint.size.set(40, 18);
 	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
 	this.toneMappingWhitePoint.setStep(0.1);

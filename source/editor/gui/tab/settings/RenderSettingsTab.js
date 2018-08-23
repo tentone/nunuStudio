@@ -21,7 +21,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 
 	//Use project settings
 	this.form.addText("Follow project").setAltText("If checked the project rendering settings will be used, its better to preview the final result.");
-	this.followProject = new CheckBox(this.form.element);
+	this.followProject = new CheckBox(this.form);
 	this.followProject.size.set(15, 15);
 	this.followProject.setOnChange(function()
 	{
@@ -40,7 +40,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 
 	//Antialiasing
 	this.form.addText("Antialiasing").setAltText("Antialiasing can be used to smooth jaged edges.");
-	this.antialiasing = new CheckBox(this.form.element);
+	this.antialiasing = new CheckBox(this.form);
 	this.antialiasing.size.set(15, 15);
 	this.antialiasing.setOnChange(function()
 	{
@@ -51,7 +51,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 
 	//Shadows
 	this.form.addText("Shadows");
-	this.shadows = new CheckBox(this.form.element);
+	this.shadows = new CheckBox(this.form);
 	this.shadows.size.set(15, 15);
 	this.shadows.setOnChange(function()
 	{	
@@ -62,7 +62,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 
 	//Shadows settings
 	this.form.addText("Shadows type");
-	this.shadowsType = new DropdownList(this.form.element);
+	this.shadowsType = new DropdownList(this.form);
 	this.shadowsType.size.set(150, 20);
 	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
 	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
@@ -76,7 +76,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 
 	//Tonemapping
 	this.form.addText("Tonemapping");
-	this.toneMapping = new DropdownList(this.form.element);
+	this.toneMapping = new DropdownList(this.form);
 	this.toneMapping.size.set(150, 20);
 	this.toneMapping.addValue("None", THREE.NoToneMapping);
 	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
@@ -92,7 +92,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 
 	//Tonemapping exposure
 	this.form.addText("Exposure");
-	this.toneMappingExposure = new NumberBox(this.form.element);
+	this.toneMappingExposure = new NumberBox(this.form);
 	this.toneMappingExposure.size.set(60, 18);
 	this.toneMappingExposure.setRange(0.0, Number.MAX_SAFE_INTEGER);
 	this.toneMappingExposure.setStep(0.1);
@@ -105,7 +105,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 
 	//Tonemapping whitepoint
 	this.form.addText("Whitepoint");
-	this.toneMappingWhitePoint = new NumberBox(this.form.element);
+	this.toneMappingWhitePoint = new NumberBox(this.form);
 	this.toneMappingWhitePoint.size.set(60, 18);
 	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
 	this.toneMappingWhitePoint.setStep(0.1);

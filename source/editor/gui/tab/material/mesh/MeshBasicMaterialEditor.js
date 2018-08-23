@@ -7,7 +7,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Skinning
-	this.skinning = new CheckBox(this.form.element);
+	this.skinning = new CheckBox(this.form);
 	this.form.addText("Skinning");
 	this.skinning.size.set(15, 15);
 	this.skinning.updateInterface();
@@ -19,7 +19,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Morph targets
-	this.morphTargets = new CheckBox(this.form.element);
+	this.morphTargets = new CheckBox(this.form);
 	this.form.addText("Morph targets");
 	this.morphTargets.size.set(15, 15);
 	this.morphTargets.setOnChange(function()
@@ -30,7 +30,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Wireframe
-	this.wireframe = new CheckBox(this.form.element);
+	this.wireframe = new CheckBox(this.form);
 	this.form.addText("Wireframe");
 	this.wireframe.size.set(15, 15);
 	this.wireframe.setOnChange(function()
@@ -42,7 +42,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 
 	//Color
 	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
@@ -55,7 +55,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new TextureBox(this.form.element);
+	this.map = new TextureBox(this.form);
 	this.map.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
@@ -67,7 +67,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.form.nextRow();
-	this.alphaMap = new TextureBox(this.form.element);
+	this.alphaMap = new TextureBox(this.form);
 	this.alphaMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));

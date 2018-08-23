@@ -9,14 +9,14 @@ function AudioEmitterPanel(parent, obj)
 
 	//Audio player
 	this.form.addText("Audio");
-	this.player = new AudioPlayer(this.form.element);
+	this.player = new AudioPlayer(this.form);
 	this.player.size.set(190, 20);
 	this.form.add(this.player);
 	this.form.nextRow();
 
 	//Volume
 	this.form.addText("Volume");
-	this.volume = new Slider(this.form.element);
+	this.volume = new Slider(this.form);
 	this.volume.size.set(80, 18);
 	this.volume.setRange(0, 1);
 	this.volume.setStep(0.01);
@@ -29,7 +29,7 @@ function AudioEmitterPanel(parent, obj)
 
 	//Playback Rate
 	this.form.addText("Playback Rate");
-	this.playbackRate = new NumberBox(this.form.element);
+	this.playbackRate = new NumberBox(this.form);
 	this.playbackRate.size.set(60, 18);
 	this.playbackRate.setStep(0.1);
 	this.playbackRate.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -41,7 +41,7 @@ function AudioEmitterPanel(parent, obj)
 	this.form.nextRow();
 
 	//Autoplay
-	this.autoplay = new CheckBox(this.form.element);
+	this.autoplay = new CheckBox(this.form);
 	this.form.addText("Autoplay");
 	this.autoplay.size.set(15, 15);
 	this.autoplay.setOnChange(function()
@@ -52,7 +52,7 @@ function AudioEmitterPanel(parent, obj)
 	this.form.nextRow();
 
 	//Loop
-	this.loop = new CheckBox(this.form.element);
+	this.loop = new CheckBox(this.form);
 	this.form.addText("Loop");
 	this.loop.size.set(15, 15);
 	this.loop.setOnChange(function()

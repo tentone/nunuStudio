@@ -9,7 +9,7 @@ function ObjectPanel(parent, obj)
 
 	//Name
 	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
+	this.name = new TextBox(this.form);
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
@@ -37,7 +37,7 @@ function ObjectPanel(parent, obj)
 
 	//Position
 	this.form.addText("Position");
-	this.position = new VectorBox(this.form.element);
+	this.position = new VectorBox(this.form);
 	this.position.size.set(190, 18);
 	this.position.setStep(0.01);
 	this.position.setOnChange(function()
@@ -59,13 +59,13 @@ function ObjectPanel(parent, obj)
 	text.size.x -= 20;
 
 	//Scale lock
-	this.scaleRatioLock = new CheckBox(this.form.element);
+	this.scaleRatioLock = new CheckBox(this.form);
 	this.scaleRatioLock.setAltText("Lock scale ratio");
 	this.scaleRatioLock.size.set(15, 15);
 	this.form.add(this.scaleRatioLock);
 	
 	//Scale
-	this.scale = new VectorBox(this.form.element);
+	this.scale = new VectorBox(this.form);
 	this.scale.size.set(190, 18);
 	this.scale.setStep(0.01);
 	this.scale.setOnChange(function()
@@ -109,7 +109,7 @@ function ObjectPanel(parent, obj)
 
 	//Rotation
 	this.form.addText("Rotation");
-	this.rotation = new VectorBox(this.form.element);
+	this.rotation = new VectorBox(this.form);
 	this.rotation.size.set(190, 18);
 	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()
@@ -129,7 +129,7 @@ function ObjectPanel(parent, obj)
 
 	//Visible
 	this.form.addText("Visible");
-	this.visible = new CheckBox(this.form.element);
+	this.visible = new CheckBox(this.form);
 	this.visible.size.set(15, 15);
 	this.visible.setOnChange(function()
 	{
@@ -140,7 +140,7 @@ function ObjectPanel(parent, obj)
 
 	//Static
 	this.form.addText("Static Object");
-	this.static = new CheckBox(this.form.element);
+	this.static = new CheckBox(this.form);
 	this.static.size.set(15, 15);
 	this.static.setOnChange(function()
 	{

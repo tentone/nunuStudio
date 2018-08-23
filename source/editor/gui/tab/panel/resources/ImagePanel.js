@@ -7,7 +7,7 @@ function ImagePanel(parent, obj)
 	var self = this;
 
 	this.form.addText("Image");
-	this.image = new ImageChooser(this.form.element);
+	this.image = new ImageChooser(this.form);
 	this.image.size.set(120, 120);
 	this.form.add(this.image);
 	this.form.nextRow();

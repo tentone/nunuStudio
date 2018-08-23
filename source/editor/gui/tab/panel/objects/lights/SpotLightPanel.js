@@ -9,7 +9,7 @@ function SpotLightPanel(parent, obj)
 
 	//Color
 	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
+	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
@@ -20,7 +20,7 @@ function SpotLightPanel(parent, obj)
 
 	//Penumbra
 	this.form.addText("Penumbra");
-	this.penumbra = new Slider(this.form.element);
+	this.penumbra = new Slider(this.form);
 	this.penumbra.size.set(160, 18);
 	this.penumbra.position.set(65, 110);
 	this.penumbra.setRange(0, 1);
@@ -35,7 +35,7 @@ function SpotLightPanel(parent, obj)
 
 	//Angle
 	this.form.addText("Angle");
-	this.angle = new Slider(this.form.element);
+	this.angle = new Slider(this.form);
 	this.angle.size.set(160, 18);
 	this.angle.setRange(0, 1.57);
 	this.angle.setStep(0.01);
@@ -51,7 +51,7 @@ function SpotLightPanel(parent, obj)
 	this.form.nextRow();
 
 	//Cast shadow
-	this.castShadow = new CheckBox(this.form.element);
+	this.castShadow = new CheckBox(this.form);
 	this.form.addText("Cast Shadows");
 	this.castShadow.size.set(15, 15);
 	this.castShadow.position.set(5, 85);
@@ -65,7 +65,7 @@ function SpotLightPanel(parent, obj)
 
 	//Shadow resolution
 	this.form.addText("Resolution");
-	this.shadowWidth = new DropdownList(this.form.element);
+	this.shadowWidth = new DropdownList(this.form);
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()
 	{
@@ -74,7 +74,7 @@ function SpotLightPanel(parent, obj)
 	});
 	this.form.add(this.shadowWidth);
 	this.form.addText("x", true);
-	this.shadowHeight = new DropdownList(this.form.element);
+	this.shadowHeight = new DropdownList(this.form);
 	this.shadowHeight.size.set(60, 18);
 	this.shadowHeight.setOnChange(function()
 	{
@@ -92,7 +92,7 @@ function SpotLightPanel(parent, obj)
 
 	//Shadowmap camera near
 	this.form.addText("Near");
-	this.shadowNear = new NumberBox(this.form.element);
+	this.shadowNear = new NumberBox(this.form);
 	this.shadowNear.size.set(60, 18);
 	this.shadowNear.setStep(0.1);
 	this.shadowNear.setOnChange(function()
@@ -105,7 +105,7 @@ function SpotLightPanel(parent, obj)
 	
 	//Shadowmap camera far
 	this.form.addText("Far");
-	this.shadowFar = new NumberBox(this.form.element);
+	this.shadowFar = new NumberBox(this.form);
 	this.shadowFar.size.set(60, 18);
 	this.shadowFar.setStep(0.1);
 	this.shadowFar.setOnChange(function()

@@ -8,7 +8,7 @@ function AudioPanel(parent, obj)
 
 	//Audio player
 	this.form.addText("Audio");
-	this.player = new AudioPlayer(this.form.element);
+	this.player = new AudioPlayer(this.form);
 	this.player.size.set(190, 20);
 	this.form.add(this.player);
 	this.form.nextRow();

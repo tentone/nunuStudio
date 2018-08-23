@@ -8,7 +8,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	
 	//Dash size
 	this.form.addText("Dash size");
-	this.dashSize = new NumberBox(this.form.element);
+	this.dashSize = new NumberBox(this.form);
 	this.dashSize.size.set(60, 18);
 	this.dashSize.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.dashSize.setStep(1);
@@ -22,7 +22,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 
 	//Gap size
 	this.form.addText("Gap size");
-	this.gapSize = new NumberBox(this.form.element);
+	this.gapSize = new NumberBox(this.form);
 	this.gapSize.size.set(60, 18);
 	this.gapSize.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.gapSize.setStep(1);
@@ -36,7 +36,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 
 	//Dash scale
 	this.form.addText("Dash scale");
-	this.dashScale = new NumberBox(this.form.element);
+	this.dashScale = new NumberBox(this.form);
 	this.dashScale.size.set(60, 18);
 	this.dashScale.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.dashScale.setStep(1);

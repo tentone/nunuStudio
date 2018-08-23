@@ -19,7 +19,7 @@ function DodecahedronGeometryForm(form, obj)
 
 	//Radius
 	this.form.addText("Radius");
-	this.radius = new NumberBox(this.form.element);
+	this.radius = new NumberBox(this.form);
 	this.radius.size.set(40, 18);
 	this.radius.setStep(0.1);
 	this.radius.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -29,7 +29,7 @@ function DodecahedronGeometryForm(form, obj)
 
 	//Detail
 	this.form.addText("Detail");
-	this.detail = new Slider(this.form.element);
+	this.detail = new Slider(this.form);
 	this.detail.size.set(90, 18);
 	this.detail.setRange(0, 8);
 	this.detail.setStep(1);
@@ -38,7 +38,7 @@ function DodecahedronGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Buffer
-	this.buffer = new CheckBox(this.form.element);
+	this.buffer = new CheckBox(this.form);
 	this.form.addText("Buffered");
 	this.buffer.size.set(15, 15);
 	this.buffer.setOnChange(updateGeometry);
