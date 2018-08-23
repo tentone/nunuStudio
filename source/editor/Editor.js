@@ -264,6 +264,7 @@ include("editor/theme/ThemeManager.js");
 include("editor/theme/ThemeDark.js");
 
 include("editor/gui/element/Element.js");
+include("editor/gui/element/DocumentBody.js");
 include("editor/gui/element/Division.js");
 include("editor/gui/element/Bar.js");
 include("editor/gui/element/Text.js");

@@ -32,7 +32,7 @@ function Element(parent, type)
 	 * @type {Element}
 	 */
 	this.parent = null;
-	this.attachTo(parent !== undefined ? parent : document.body);
+	this.attachTo(parent !== undefined ? parent : DocumentBody);
 	
 	/** 
 	 * True if the element is visible.
@@ -247,7 +247,7 @@ Element.prototype.attachTo = function(parent)
 	}
 	else
 	{
-		//console.warn("nunuStudio: Parent is a DOM element.", parent);
+		console.warn("nunuStudio: Parent is a DOM element.", parent);
 		parent.appendChild(this.element);
 	}
 };

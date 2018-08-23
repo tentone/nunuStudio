@@ -1,18 +1,18 @@
 "use strict";
 
-function AddObjectSideBar(element)
+function AddObjectSideBar(parent)
 {
 	var size = 40;
 	
 	//Add Text
-	var add = new Text(element);
+	var add = new Text(parent);
 	add.setText("Add");
 	add.size.set(40, 20);
 	add.position.set(0, 210);
 	add.updateInterface();
 
 	//Add Models
-	var addModel = new ButtonDrawer(element);
+	var addModel = new ButtonDrawer(parent);
 	addModel.setImage(Editor.filePath + "icons/models/models.png");
 	addModel.size.set(size, size);
 	addModel.position.set(0, 230);
@@ -144,7 +144,7 @@ function AddObjectSideBar(element)
 	*/
 
 	//Add lights
-	var addLight = new ButtonDrawer(element);
+	var addLight = new ButtonDrawer(parent);
 	addLight.setImage(Editor.filePath + "icons/lights/point.png");
 	addLight.size.set(size, size);
 	addLight.position.set(0, 270);
@@ -194,7 +194,7 @@ function AddObjectSideBar(element)
 	}, "Sky");
 
 	//Add camera
-	var addCamera = new ButtonDrawer(element);
+	var addCamera = new ButtonDrawer(parent);
 	addCamera.setImage(Editor.filePath + "icons/camera/camera.png");
 	addCamera.optionsPerLine = 2;
 	addCamera.size.set(size, size);
@@ -215,7 +215,7 @@ function AddObjectSideBar(element)
 	}, "Orthographic Camera");
 
 	//Add script
-	var addScript = new ButtonDrawer(element);
+	var addScript = new ButtonDrawer(parent);
 	addScript.setImage(Editor.filePath + "icons/script/script.png");
 	addScript.optionsPerLine = 1;
 	addScript.size.set(size, size);
@@ -230,7 +230,7 @@ function AddObjectSideBar(element)
 	}, "JS Script");
 
 	//Effects
-	var addEffects = new ButtonDrawer(element);
+	var addEffects = new ButtonDrawer(parent);
 	addEffects.setImage(Editor.filePath + "icons/misc/particles.png");
 	addEffects.optionsPerLine = 3;
 	addEffects.size.set(size, size);
@@ -313,7 +313,7 @@ function AddObjectSideBar(element)
 	}
 
 	//Physics
-	var addPhysics = new ButtonDrawer(element);
+	var addPhysics = new ButtonDrawer(parent);
 	addPhysics.setImage(Editor.filePath + "icons/misc/physics.png");
 	addPhysics.optionsPerLine = 3;
 	addPhysics.size.set(size, size);
@@ -369,7 +369,7 @@ function AddObjectSideBar(element)
 	}, "Particle");
 
 	//Add device
-	var addControls = new ButtonDrawer(element);
+	var addControls = new ButtonDrawer(parent);
 	addControls.setImage(Editor.filePath + "icons/misc/controller.png");
 	addControls.optionsPerLine = 3;
 	addControls.size.set(size, size);

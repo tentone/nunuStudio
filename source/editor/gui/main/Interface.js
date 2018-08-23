@@ -29,8 +29,9 @@ function Interface()
 	this.sideBar.size.x = 40;
 	
 	//Tool Bar
-	this.toolBar = new ToolBar(this.sideBar.element);
-	new AddObjectSideBar(this.sideBar.element);
+	this.toolBar = new ToolBar(this.sideBar);
+	
+	new AddObjectSideBar(this.sideBar);
 }
 
 //Update this
