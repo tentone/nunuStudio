@@ -4,10 +4,9 @@ function SettingsTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Settings", Editor.filePath + "icons/misc/settings.png");
 
-	this.tab = new TabGroup(this);
+	this.tab = new TabGroup(this, TabGroup.LEFT);
 	this.tab.element.style.backgroundColor = Editor.theme.barColor;
 	this.tab.buttonSize.set(200, 25);
-	this.tab.placement = TabGroup.LEFT;
 
 	this.tab.addTab(GeneralSettingsTab, false).activate();
 	this.tab.addTab(EditorSettingsTab, false);

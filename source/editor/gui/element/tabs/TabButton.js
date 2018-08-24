@@ -242,6 +242,7 @@ TabButton.prototype.setName = function(text)
 	this.title.data = text;
 };
 
+//Update selected state of the button
 TabButton.prototype.updateSelection = function()
 {
 	this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;

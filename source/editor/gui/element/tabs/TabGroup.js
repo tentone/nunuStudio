@@ -1,6 +1,15 @@
 "use strict";
 
-function TabGroup(parent)
+/**
+ * A tab group contains and manages tab elements.
+ *
+ * The group is also responsible for creating and managing the lifecycle of its tab elements.
+ * 
+ * @class TabGroup
+ * @extends {Element}
+ * @param {Element} parent Parent element.
+ */
+function TabGroup(parent, placement)
 {
 	Element.call(this, parent, "div");
 
@@ -28,18 +37,32 @@ function TabGroup(parent)
 	this.empty.appendChild(document.createTextNode("Open new tab to edit content or create new project"));
 	this.element.appendChild(this.empty);
 
+	/**
+	 * Currently selected tab.
+	 *
+	 * @property selected
+	 * @type {TabElement}
+	 */
 	this.selected = null;
 	
+	/**
+	 * Base size of the buttons in this group.
+	 * 
+	 * Size may be ajusted to fit the available space.
+	 *
+	 * @property buttonSize
+	 * @type {THREE.Vector2}
+	 */
+	this.buttonSize = new THREE.Vector2(150, 22);
+
 	/**
 	 * Tab buttons placement.
 	 *
 	 * @property placement
 	 * @type {Number}
 	 */
-	this.placement = TabGroup.TOP;
-
-	this.buttonSize = new THREE.Vector2(150, 22);
-	
+	this.placement = placement !== undefined ? placement : TabGroup.TOP
+	this.setPlacement(this.placement);
 
 	/**
 	 * Tab elements attache to this group.
@@ -324,6 +347,46 @@ TabGroup.prototype.updateOptionIndex = function()
 	}
 };
 
+//Set the tab group buttons placement
+TabGroup.prototype.setPlacement = function(placement)
+{
+	this.placement = placement;
+
+	//Buttons and tab division
+	if(this.placement === TabGroup.TOP)
+	{	
+		this.buttons.position.set(0, 0);
+		this.buttons.updatePosition();
+
+		this.tab.position.set(0, this.buttonSize.y);
+		this.tab.updatePosition();
+	}
+	else if(this.placement === TabGroup.LEFT)
+	{
+		this.buttons.position.set(0, 0);
+		this.buttons.updatePosition();
+
+		this.tab.position.set(this.buttonSize.x, 0);
+		this.tab.updatePosition();
+	}
+	else if(this.placement === TabGroup.RIGHT)
+	{
+		this.buttons.position.set(this.size.x - this.buttonSize.x, 0);
+		this.buttons.updatePosition();
+
+		this.tab.position.set(0, 0);
+		this.tab.updatePosition();
+	}
+	else if(this.placement === TabGroup.BOTTOM)
+	{
+		this.buttons.position.set(0, this.size.y - this.buttonSize.y);
+		this.buttons.updatePosition();
+
+		this.tab.position.set(0, 0);
+		this.tab.updatePosition();
+	}
+};
+
 TabGroup.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
@@ -342,6 +405,9 @@ TabGroup.prototype.updateSize = function()
 		}
 		tabSize.y -= this.buttonSize.y;
 		offset.y = 0;
+
+		this.buttons.size.set(this.size.x, this.buttonSize.y);
+		this.buttons.updateSize();
 	}
 	else if(this.placement === TabGroup.LEFT || this.placement === TabGroup.RIGHT)
 	{
@@ -352,57 +418,14 @@ TabGroup.prototype.updateSize = function()
 		}
 		tabSize.x -= this.buttonSize.x;
 		offset.x = 0;
-	}
 
-	//Buttons and tab division
-	if(this.placement === TabGroup.TOP)
-	{	
-		this.buttons.position.set(0, 0);
-		this.buttons.updatePosition();
-		this.buttons.size.set(this.size.x, this.buttonSize.y);
-		this.buttons.updateSize();
-
-		this.tab.position.set(0, this.buttonSize.y);
-		this.tab.updatePosition();
-		this.tab.size.set(this.size.x, this.size.y - this.buttonSize.y);
-		this.tab.updateSize();
-	}
-	else if(this.placement === TabGroup.LEFT)
-	{
-		this.buttons.position.set(0, 0);
-		this.buttons.updatePosition();
 		this.buttons.size.set(this.buttonSize.x, this.size.y);
 		this.buttons.updateSize();
-
-		this.tab.position.set(this.buttonSize.x, 0);
-		this.tab.updatePosition();
-		this.tab.size.set(this.size.x - this.buttonSize.x, this.size.y);
-		this.tab.updateSize();
 	}
-	else if(this.placement === TabGroup.RIGHT)
-	{
-		this.buttons.position.set(this.size.x - this.buttonSize.x, 0);
-		this.buttons.updatePosition();
-		this.buttons.size.set(this.buttonSize.x, this.size.y);
-		this.buttons.updateSize();
 
-		this.tab.position.set(0, 0);
-		this.tab.updatePosition();
-		this.tab.size.set(this.size.x - this.buttonSize.x, this.size.y);
-		this.tab.updateSize();
-	}
-	else if(this.placement === TabGroup.BOTTOM)
-	{
-		this.buttons.position.set(0, this.size.y - this.buttonSize.y);
-		this.buttons.updatePosition();
-		this.buttons.size.set(this.size.x, this.buttonSize.y);
-		this.buttons.updateSize();
-
-		this.tab.position.set(0, 0);
-		this.tab.updatePosition();
-		this.tab.size.set(this.size.x, this.size.y - this.buttonSize.y);
-		this.tab.updateSize();
-	}
+	//Tab size
+	this.tab.size.copy(tabSize);
+	this.tab.updateSize();
 
 	//Update tab and buttons
 	for(var i = 0; i < this.options.length; i++)
