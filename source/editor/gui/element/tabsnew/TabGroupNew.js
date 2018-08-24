@@ -1,8 +1,8 @@
 "use strict";
 
-function TabGroupNew(parent)
+function TabGroupNew(parent, placement)
 {
-	TabGroup.call(this, parent, "div");
+	TabGroup.call(this, parent, placement);
 }
 
 TabGroupNew.prototype = Object.create(TabGroup.prototype);
@@ -15,46 +15,12 @@ TabGroupNew.prototype.split = function(direction)
 	var container = new DualContainer(this.parent);
 	container.attachA(this);
 
-	var group = new TabGroupNew(container);
+	var group = new TabGroupNew(container, this.placement);
 	container.attachB(group);
 
 	Editor.gui.tab = container;
 	Editor.gui.updateInterface();
 };
-
-//TODO
-TabGroupNew.prototype.simplify = function()
-{
-	//TODO <ADD CODE HERE>
-};
-
-//Update all tabs object data
-TabGroupNew.prototype.updateMetadata = function()
-{
-	for(var i = 0; i < this.options.length; i++)
-	{
-		this.options[i].updateMetadata();
-	}
-};
-
-//Update all tab object views
-TabGroupNew.prototype.updateObjectsView = function(changes)
-{
-	for(var i = 0; i < this.options.length; i++)
-	{
-		this.options[i].updateObjectsView();
-	}
-};
-
-//Update all tab object views
-TabGroupNew.prototype.updateSelection = function()
-{
-	for(var i = 0; i < this.options.length; i++)
-	{
-		this.options[i].updateSelection();
-	}
-};
-
 
 //Add new option to tab grounp
 TabGroupNew.prototype.addTab = function(TabConstructor, closeable)

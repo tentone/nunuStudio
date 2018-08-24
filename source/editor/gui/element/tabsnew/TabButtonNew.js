@@ -256,11 +256,18 @@ TabButtonNew.prototype.updateSize = function()
 	this.text.style.height = this.size.y + "px";
 
 	//Close
-	this.close.style.display = (this.tab.closeable) ? "block" : "none";
-	this.close.style.width = (this.size.y * 0.4) + "px";
-	this.close.style.height = (this.size.y * 0.4) + "px";
-	this.close.style.top = (this.size.y * 0.3) + "px";
-	this.close.style.right = (this.size.y * 0.3) + "px";
+	if(this.tab.closeable === true)
+	{
+		this.close.style.width = (this.size.y * 0.4) + "px";
+		this.close.style.height = (this.size.y * 0.4) + "px";
+		this.close.style.top = (this.size.y * 0.3) + "px";
+		this.close.style.right = (this.size.y * 0.3) + "px";
+		this.close.style.display = "block";
+	}
+	else
+	{
+		this.close.style.display = "none";
+	}
 
 	this.updateSelection();
 };

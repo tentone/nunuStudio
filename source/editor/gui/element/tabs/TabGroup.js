@@ -61,7 +61,7 @@ function TabGroup(parent, placement)
 	 * @property placement
 	 * @type {Number}
 	 */
-	this.placement = placement !== undefined ? placement : TabGroup.TOP
+	this.placement = placement !== undefined ? placement : TabGroup.TOP;
 	this.setPlacement(this.placement);
 
 	/**
@@ -351,40 +351,6 @@ TabGroup.prototype.updateOptionIndex = function()
 TabGroup.prototype.setPlacement = function(placement)
 {
 	this.placement = placement;
-
-	//Buttons and tab division
-	if(this.placement === TabGroup.TOP)
-	{	
-		this.buttons.position.set(0, 0);
-		this.buttons.updatePosition();
-
-		this.tab.position.set(0, this.buttonSize.y);
-		this.tab.updatePosition();
-	}
-	else if(this.placement === TabGroup.LEFT)
-	{
-		this.buttons.position.set(0, 0);
-		this.buttons.updatePosition();
-
-		this.tab.position.set(this.buttonSize.x, 0);
-		this.tab.updatePosition();
-	}
-	else if(this.placement === TabGroup.RIGHT)
-	{
-		this.buttons.position.set(this.size.x - this.buttonSize.x, 0);
-		this.buttons.updatePosition();
-
-		this.tab.position.set(0, 0);
-		this.tab.updatePosition();
-	}
-	else if(this.placement === TabGroup.BOTTOM)
-	{
-		this.buttons.position.set(0, this.size.y - this.buttonSize.y);
-		this.buttons.updatePosition();
-
-		this.tab.position.set(0, 0);
-		this.tab.updatePosition();
-	}
 };
 
 TabGroup.prototype.updateSize = function()
@@ -422,11 +388,7 @@ TabGroup.prototype.updateSize = function()
 		this.buttons.size.set(this.buttonSize.x, this.size.y);
 		this.buttons.updateSize();
 	}
-
-	//Tab size
-	this.tab.size.copy(tabSize);
-	this.tab.updateSize();
-
+	
 	//Update tab and buttons
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -440,5 +402,43 @@ TabGroup.prototype.updateSize = function()
 		button.position.copy(offset);
 		button.position.multiplyScalar(i);
 		button.updateInterface();
+	}
+
+	//Tab size
+	this.tab.size.copy(tabSize);
+	this.tab.updateSize();
+
+	//Buttons and tab division
+	if(this.placement === TabGroup.TOP)
+	{	
+		this.buttons.position.set(0, 0);
+		this.buttons.updatePosition();
+
+		this.tab.position.set(0, this.buttonSize.y);
+		this.tab.updatePosition();
+	}
+	else if(this.placement === TabGroup.LEFT)
+	{
+		this.buttons.position.set(0, 0);
+		this.buttons.updatePosition();
+
+		this.tab.position.set(this.buttonSize.x, 0);
+		this.tab.updatePosition();
+	}
+	else if(this.placement === TabGroup.RIGHT)
+	{
+		this.buttons.position.set(this.size.x - this.buttonSize.x, 0);
+		this.buttons.updatePosition();
+
+		this.tab.position.set(0, 0);
+		this.tab.updatePosition();
+	}
+	else if(this.placement === TabGroup.BOTTOM)
+	{
+		this.buttons.position.set(0, this.size.y - this.buttonSize.y);
+		this.buttons.updatePosition();
+
+		this.tab.position.set(0, 0);
+		this.tab.updatePosition();
 	}
 };

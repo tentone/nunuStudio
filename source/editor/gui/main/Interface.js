@@ -3,7 +3,7 @@
 function Interface()
 {
 	//Top Tab
-	this.tab = new TabGroupNew();
+	this.tab = new TabGroupNew(); //TabGroupNew
 
 	//Asset
 	this.assetExplorer = this.tab.addTab(AssetExplorer, false);
