@@ -15,12 +15,11 @@ function AnimationTab(parent, closeable, container, index)
 	this.animations = [];
 
 	//Bar
-	this.bar = document.createElement("div");
-	this.bar.style.position = "absolute";
-	this.bar.style.height = "20px";
-	this.bar.style.width = "100%";
-	this.bar.style.backgroundColor = Editor.theme.barColor;
-	this.element.appendChild(this.bar);
+	this.bar = new Element(this, "div");// document.createElement("div");
+	this.bar.element.style.position = "absolute";
+	this.bar.element.style.height = "20px";
+	this.bar.element.style.width = "100%";
+	this.bar.element.style.backgroundColor = Editor.theme.barColor;
 
 	//Animation
 	this.animationButton = new ButtonText(this.bar);

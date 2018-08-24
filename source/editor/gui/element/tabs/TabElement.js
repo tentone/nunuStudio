@@ -18,6 +18,9 @@ function TabElement(parent, closeable, container, index, title, icon)
 {
 	Element.call(this, parent, "div");
 
+	//TODO <SWITCH FOR PARENT>
+	this.container = container;
+
 	/**
 	 * UUID of this tab.
 	 *
@@ -33,8 +36,6 @@ function TabElement(parent, closeable, container, index, title, icon)
 	 * @type {Number}
 	 */
 	this.index = index;
-
-	this.container = container;
 
 	var self = this;
 

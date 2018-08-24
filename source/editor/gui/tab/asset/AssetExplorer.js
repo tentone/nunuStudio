@@ -9,13 +9,9 @@ function AssetExplorer(parent, closeable, container, index)
 	this.element.ondragover = undefined;
 
 	//Assets
-	this.assets = document.createElement("div");
-	this.assets.style.position = "absolute";
-	this.assets.style.display = "block";
-	this.assets.style.overflow = "auto";
-	this.assets.style.top = "20px";
-	this.assets.style.width = "100%";
-	this.element.appendChild(this.assets);
+	this.assets = new Element(this, "div");
+	this.assets.element.style.overflow = "auto";
+	this.assets.element.style.top = "20px";
 
 	//Drop event
 	this.element.ondrop = function(event)
@@ -236,5 +232,6 @@ AssetExplorer.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
-	this.assets.style.height = (this.size.y - 20) + "px";
+	this.assets.size.set(this.size.x, this.size.y - 20);
+	this.assets.updateSize();
 };
