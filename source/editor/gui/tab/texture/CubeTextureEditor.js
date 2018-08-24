@@ -166,13 +166,12 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	//Cube images
 	this.images = new Division(this.form);
-	this.images.element.style.pointerEvents = "auto";
 	this.images.size.set(400, 300);
 	this.form.add(this.images);
 	this.form.nextRow();
 
 	//Image
-	this.image = new ImageChooser(this.images.element);
+	this.image = new ImageChooser(this.images);
 	this.image.position.set(0, 0);
 	this.image.size.set(400, 200);
 	this.image.setOnChange(function()
@@ -188,7 +187,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.cube = [];
 
 	//Top
-	this.top = new ImageChooser(this.images.element);
+	this.top = new ImageChooser(this.images);
 	this.top.position.set(100, 0);
 	this.top.size.set(100, 100);
 	this.top.setOnChange(function()
@@ -201,7 +200,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.cube.push(this.top);
 
 	//Left
-	this.left = new ImageChooser(this.images.element);
+	this.left = new ImageChooser(this.images);
 	this.left.size.set(100, 100);
 	this.left.position.set(0, 100);
 	this.left.setOnChange(function()
@@ -214,7 +213,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.cube.push(this.left);
 
 	//Front
-	this.front = new ImageChooser(this.images.element);
+	this.front = new ImageChooser(this.images);
 	this.front.size.set(100, 100);
 	this.front.position.set(100, 100);
 	this.front.setOnChange(function()
@@ -227,7 +226,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.cube.push(this.front);
 
 	//Right
-	this.right = new ImageChooser(this.images.element);
+	this.right = new ImageChooser(this.images);
 	this.right.size.set(100, 100);
 	this.right.position.set(200, 100);
 	this.right.setOnChange(function()
@@ -240,7 +239,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.cube.push(this.right);
 
 	//Back
-	this.back = new ImageChooser(this.images.element);
+	this.back = new ImageChooser(this.images);
 	this.back.size.set(100, 100);
 	this.back.position.set(300, 100);
 	this.back.setOnChange(function()
@@ -253,7 +252,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.cube.push(this.back);
 
 	//Bottom
-	this.bottom = new ImageChooser(this.images.element);
+	this.bottom = new ImageChooser(this.images);
 	this.bottom.position.set(100, 200);
 	this.bottom.size.set(100, 100);
 	this.bottom.setOnChange(function()

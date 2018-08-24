@@ -18,6 +18,12 @@ function TabElement(parent, closeable, container, index, title, icon)
 {
 	Element.call(this, parent, "div");
 
+	var self = this;
+
+	this.element.style.overflow = "visible";
+	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.preventDragEvents();
+
 	//TODO <SWITCH FOR PARENT>
 	this.container = container;
 
@@ -36,12 +42,6 @@ function TabElement(parent, closeable, container, index, title, icon)
 	 * @type {Number}
 	 */
 	this.index = index;
-
-	var self = this;
-
-	this.element.style.overflow = "visible";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
-	this.preventDragEvents();
 
 	//Button
 	this.button = null;

@@ -7,7 +7,7 @@ function SettingsTab(parent, closeable, container, index)
 	this.tab = new TabGroup(this);
 	this.tab.element.style.backgroundColor = Editor.theme.barColor;
 	this.tab.buttonSize.set(200, 25);
-	this.tab.mode = TabGroup.LEFT;
+	this.tab.placement = TabGroup.LEFT;
 
 	this.tab.addTab(GeneralSettingsTab, false).activate();
 	this.tab.addTab(EditorSettingsTab, false);
@@ -19,22 +19,10 @@ function SettingsTab(parent, closeable, container, index)
 SettingsTab.prototype = Object.create(TabElement.prototype);
 
 //Update division Size
-SettingsTab.prototype.updateInterface = function()
+SettingsTab.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		this.tab.visible = this.visible;
-		this.tab.size.copy(this.size);
-		this.tab.updateInterface();
+	TabElement.prototype.updateSize.call(this);
 
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.tab.size.copy(this.size);
+	this.tab.updateInterface();
 };

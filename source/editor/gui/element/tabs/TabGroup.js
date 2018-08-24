@@ -10,16 +10,10 @@ function TabGroup(parent)
 	this.preventDragEvents();
 	
 	//Buttons
-	this.buttons = document.createElement("div");
-	this.buttons.style.overflow = "hidden";
-	this.buttons.style.position = "absolute";
-	this.element.appendChild(this.buttons);
+	this.buttons = new Division(this);
 
 	//Tab
-	this.tab = document.createElement("div");
-	this.tab.style.position = "absolute";
-	this.tab.style.overflow = "visible";
-	this.element.appendChild(this.tab);
+	this.tab = new Division(this);
 
 	//Empty message
 	this.empty = document.createElement("div");
@@ -32,12 +26,26 @@ function TabGroup(parent)
 	this.empty.style.justifyContent = "center";
 	this.empty.style.pointerEvents = "none";
 	this.empty.appendChild(document.createTextNode("Open new tab to edit content or create new project"));
-	this.tab.appendChild(this.empty);
+	this.element.appendChild(this.empty);
 
-	//Options
-	this.mode = TabGroup.TOP;
-	this.buttonSize = new THREE.Vector2(150, 22);
 	this.selected = null;
+	
+	/**
+	 * Tab buttons placement.
+	 *
+	 * @property placement
+	 * @type {Number}
+	 */
+	this.placement = TabGroup.TOP;
+
+	this.buttonSize = new THREE.Vector2(150, 22);
+	
+
+	/**
+	 * Tab elements attache to this group.
+	 * 
+	 * @type {Array}
+	 */
 	this.options = [];
 }
 
@@ -199,7 +207,6 @@ TabGroup.prototype.getTab = function(type, obj)
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {
 	tab.container.removeTab(tab.index, true);
-
 	tab.container = this;
 	tab.button.attachTo(this.buttons);
 	tab.attachTo(this.tab);
@@ -267,11 +274,30 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
 };
 
 //Remove all tabs
-TabGroup.prototype.clear = function()
+TabGroup.prototype.clear = function(forceAll)
 {
-	while(this.options.length > 0)
+	if(forceAll === true)
 	{
-		this.options.pop().destroy();
+		while(this.options.length > 0)
+		{
+			this.options.pop().destroy();
+		}
+	}
+	else
+	{
+		var i = 0;
+		while(i < this.options.length)
+		{
+			if(this.options[i].closeable)
+			{
+				this.options[i].destroy();
+				this.options.splice(i, 1);
+			}
+			else
+			{
+				i++;
+			}
+		}
 	}
 
 	this.selectTab(null);
@@ -306,8 +332,8 @@ TabGroup.prototype.updateSize = function()
 	var buttonSize = this.buttonSize.clone();
 	var offset = this.buttonSize.clone();
 
-	//Calculate size of the buttons
-	if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
+	//Calculate size of the buttons and offset
+	if(this.placement === TabGroup.TOP || this.placement === TabGroup.BOTTOM)
 	{
 		if(buttonSize.x * this.options.length > this.size.x)
 		{
@@ -317,7 +343,7 @@ TabGroup.prototype.updateSize = function()
 		tabSize.y -= this.buttonSize.y;
 		offset.y = 0;
 	}
-	else if(this.mode === TabGroup.LEFT || this.mode === TabGroup.RIGHT)
+	else if(this.placement === TabGroup.LEFT || this.placement === TabGroup.RIGHT)
 	{
 		if(buttonSize.y * this.options.length > this.size.y)
 		{
@@ -326,6 +352,56 @@ TabGroup.prototype.updateSize = function()
 		}
 		tabSize.x -= this.buttonSize.x;
 		offset.x = 0;
+	}
+
+	//Buttons and tab division
+	if(this.placement === TabGroup.TOP)
+	{	
+		this.buttons.position.set(0, 0);
+		this.buttons.updatePosition();
+		this.buttons.size.set(this.size.x, this.buttonSize.y);
+		this.buttons.updateSize();
+
+		this.tab.position.set(0, this.buttonSize.y);
+		this.tab.updatePosition();
+		this.tab.size.set(this.size.x, this.size.y - this.buttonSize.y);
+		this.tab.updateSize();
+	}
+	else if(this.placement === TabGroup.LEFT)
+	{
+		this.buttons.position.set(0, 0);
+		this.buttons.updatePosition();
+		this.buttons.size.set(this.buttonSize.x, this.size.y);
+		this.buttons.updateSize();
+
+		this.tab.position.set(this.buttonSize.x, 0);
+		this.tab.updatePosition();
+		this.tab.size.set(this.size.x - this.buttonSize.x, this.size.y);
+		this.tab.updateSize();
+	}
+	else if(this.placement === TabGroup.RIGHT)
+	{
+		this.buttons.position.set(this.size.x - this.buttonSize.x, 0);
+		this.buttons.updatePosition();
+		this.buttons.size.set(this.buttonSize.x, this.size.y);
+		this.buttons.updateSize();
+
+		this.tab.position.set(0, 0);
+		this.tab.updatePosition();
+		this.tab.size.set(this.size.x - this.buttonSize.x, this.size.y);
+		this.tab.updateSize();
+	}
+	else if(this.placement === TabGroup.BOTTOM)
+	{
+		this.buttons.position.set(0, this.size.y - this.buttonSize.y);
+		this.buttons.updatePosition();
+		this.buttons.size.set(this.size.x, this.buttonSize.y);
+		this.buttons.updateSize();
+
+		this.tab.position.set(0, 0);
+		this.tab.updatePosition();
+		this.tab.size.set(this.size.x, this.size.y - this.buttonSize.y);
+		this.tab.updateSize();
 	}
 
 	//Update tab and buttons
@@ -341,55 +417,5 @@ TabGroup.prototype.updateSize = function()
 		button.position.copy(offset);
 		button.position.multiplyScalar(i);
 		button.updateInterface();
-	}
-
-	//Buttons and tab division
-	if(this.mode === TabGroup.TOP)
-	{	
-		this.buttons.style.top = "0px";
-		this.buttons.style.left = "0px";
-		this.buttons.style.width = this.size.x + "px";
-		this.buttons.style.height = this.buttonSize.y + "px";
-
-		this.tab.style.left = "0px";
-		this.tab.style.top = this.buttonSize.y + "px";
-		this.tab.style.width = this.size.x + "px";
-		this.tab.style.height = (this.size.y - this.buttonSize.y) + "px";
-	}
-	else if(this.mode === TabGroup.LEFT)
-	{
-		this.buttons.style.top = "0px";
-		this.buttons.style.left = "0px";
-		this.buttons.style.width = this.buttonSize.x + "px";
-		this.buttons.style.height = this.size.y + "px";
-
-		this.tab.style.left = this.buttonSize.x + "px";
-		this.tab.style.top = "0px";
-		this.tab.style.width = (this.size.x - this.buttonSize.x) + "px";
-		this.tab.style.height = this.size.y + "px";
-	}
-	else if(this.mode === TabGroup.RIGHT)
-	{
-		this.buttons.style.top = "0px";
-		this.buttons.style.left = (this.size.x - this.buttonSize.x) + "px";
-		this.buttons.style.width = this.buttonSize.x + "px";
-		this.buttons.style.height = this.size.y + "px";
-
-		this.tab.style.left = "0px";
-		this.tab.style.top = "0px";
-		this.tab.style.width = (this.size.x - this.buttonSize.x) + "px";
-		this.tab.style.height = this.size.y + "px";
-	}
-	else if(this.mode === TabGroup.BOTTOM)
-	{
-		this.buttons.style.top = (this.size.y - this.buttonSize.y) + "px";
-		this.buttons.style.left = "0px";
-		this.buttons.style.width = this.size.x + "px";
-		this.buttons.style.height = this.buttonSize.y + "px";
-
-		this.tab.style.left = "0px";
-		this.tab.style.top = "0px";
-		this.tab.style.width = this.size.x + "px";
-		this.tab.style.height = (this.size.y - this.buttonSize.y) + "px";
 	}
 };

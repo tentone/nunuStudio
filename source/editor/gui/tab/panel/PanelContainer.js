@@ -68,138 +68,138 @@ PanelContainer.prototype.updateSelection = function()
 	{
 		if(object.locked)
 		{
-			this.panel = new LockedPanel(this.element, object);
+			this.panel = new LockedPanel(this, object);
 		}
 		else if(object instanceof SpineAnimation)
 		{
-			this.panel = new SpinePanel(this.element, object);
+			this.panel = new SpinePanel(this, object);
 		}
 		else if(object instanceof THREE.SkinnedMesh)
 		{
-			this.panel = new MeshPanel(this.element, object);
+			this.panel = new MeshPanel(this, object);
 		}
 		else if(object instanceof Text3D)
 		{
-			this.panel = new Text3DPanel(this.element, object);
+			this.panel = new Text3DPanel(this, object);
 		}
 		else if(object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line)
 		{
-			this.panel = new MeshPanel(this.element, object);
+			this.panel = new MeshPanel(this, object);
 		}
 		else if(object instanceof THREE.Light)
 		{
 			if(object instanceof THREE.PointLight)
 			{
-				this.panel = new PointLightPanel(this.element, object);
+				this.panel = new PointLightPanel(this, object);
 			}
 			else if(object instanceof THREE.RectAreaLight)
 			{
-				this.panel = new RectAreaLightPanel(this.element, object);
+				this.panel = new RectAreaLightPanel(this, object);
 			}
 			else if(object instanceof THREE.SpotLight)
 			{
-				this.panel = new SpotLightPanel(this.element, object);
+				this.panel = new SpotLightPanel(this, object);
 			}
 			else if(object instanceof THREE.DirectionalLight)
 			{
-				this.panel = new DirectionalLightPanel(this.element, object);
+				this.panel = new DirectionalLightPanel(this, object);
 			}
 			else if(object instanceof THREE.HemisphereLight)
 			{
-				this.panel = new HemisphereLightPanel(this.element, object);
+				this.panel = new HemisphereLightPanel(this, object);
 			}
 			else
 			{
-				this.panel = new AmbientLightPanel(this.element, object);
+				this.panel = new AmbientLightPanel(this, object);
 			}
 		}
 		else if(object instanceof ParticleEmitter)
 		{
-			this.panel = new ParticleEmitterPanel(this.element, object);
+			this.panel = new ParticleEmitterPanel(this, object);
 		}
 		else if(object instanceof Sky)
 		{
-			this.panel = new SkyPanel(this.element, object);
+			this.panel = new SkyPanel(this, object);
 		}
 		else if(object instanceof LeapMotion)
 		{
-			this.panel = new LeapPanel(this.element, object);
+			this.panel = new LeapPanel(this, object);
 		}
 		else if(object instanceof KinectDevice)
 		{
-			this.panel = new KinectPanel(this.element, object);
+			this.panel = new KinectPanel(this, object);
 		}
 		else if(object instanceof PerspectiveCamera)
 		{
-			this.panel = new PerspectiveCameraPanel(this.element, object);
+			this.panel = new PerspectiveCameraPanel(this, object);
 		}
 		else if(object instanceof OrthographicCamera)
 		{
-			this.panel = new OrthographicCameraPanel(this.element, object);
+			this.panel = new OrthographicCameraPanel(this, object);
 		}
 		else if(object instanceof CubeCamera)
 		{
-			this.panel = new CubeCameraPanel(this.element, object);
+			this.panel = new CubeCameraPanel(this, object);
 		}
 		else if(object instanceof THREE.Audio)
 		{
-			this.panel = new AudioEmitterPanel(this.element, object);
+			this.panel = new AudioEmitterPanel(this, object);
 		}
 		else if(object instanceof Scene)
 		{
-			this.panel = new ScenePanel(this.element, object);
+			this.panel = new ScenePanel(this, object);
 		}
 		else if(object instanceof Script)
 		{
-			this.panel = new ScriptPanel(this.element, object);
+			this.panel = new ScriptPanel(this, object);
 		}
 		else if(object instanceof Program)
 		{
-			this.panel = new ProgramPanel(this.element, object);
+			this.panel = new ProgramPanel(this, object);
 		}
 		else if(object instanceof PhysicsObject)
 		{
-			this.panel = new PhysicsPanel(this.element, object);
+			this.panel = new PhysicsPanel(this, object);
 		}
 		else if(object instanceof OrbitControls)
 		{
-			this.panel = new OrbitControlsPanel(this.element, object);
+			this.panel = new OrbitControlsPanel(this, object);
 		}
 		else if(object instanceof FirstPersonControls)
 		{
-			this.panel = new FirstPersonControlsPanel(this.element, object);
+			this.panel = new FirstPersonControlsPanel(this, object);
 		}
 		else
 		{
-			this.panel = new ObjectPanel(this.element, object);
+			this.panel = new ObjectPanel(this, object);
 		}
 	}
 	else if(object instanceof Resource)
 	{
 		if(object instanceof Audio)
 		{
-			this.panel = new AudioPanel(this.element, object);
+			this.panel = new AudioPanel(this, object);
 		}
 		else if(object instanceof Image)
 		{
-			this.panel = new ImagePanel(this.element, object);
+			this.panel = new ImagePanel(this, object);
 		}
 		else if(object instanceof Video)
 		{
-			this.panel = new VideoPanel(this.element, object);
+			this.panel = new VideoPanel(this, object);
 		}
 		else
 		{
-			this.panel = new ResourcePanel(this.element, object);
+			this.panel = new ResourcePanel(this, object);
 		}
 	}
 	else if(object instanceof THREE.Material)
 	{
-		this.panel = new MaterialPanel(this.element, object);
+		this.panel = new MaterialPanel(this, object);
 	}
 	else if(object instanceof THREE.Texture)
 	{
-		this.panel = new TexturePanel(this.element, object);
+		this.panel = new TexturePanel(this, object);
 	}
 
 	if(this.panel !== null)
