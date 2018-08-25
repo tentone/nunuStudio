@@ -103,12 +103,6 @@ DualDivision.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-
 		if(this.orientation === DualDivision.HORIZONTAL)
 		{
 			var tabPositionAbs = this.tabPosition * this.size.x;
@@ -144,8 +138,16 @@ DualDivision.prototype.updateInterface = function()
 
 		this.divA.style.width = this.divASize.x + "px";
 		this.divA.style.height = this.divASize.y + "px";
+
 		this.divB.style.width = this.divBSize.x + "px";
 		this.divB.style.height = this.divBSize.y + "px";
+
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
+
 	}
 	else
 	{

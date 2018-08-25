@@ -9,6 +9,7 @@ function TabContainer()
 {
 	Element.call(this, parent, "div");
 	
+	this.tab = null;
 }
 
 TabContainer.prototype = Object.create(Element.prototype);
