@@ -87,12 +87,14 @@ function TabButtonNew(parent, tab)
 		var tab = DragBuffer.popDragElement(uuid);
 
 		self.tab.container.attachTab(tab);
+
+		
 	};
 
 	//Drag over
 	this.element.ondragover = function(event)
 	{
-		if(self.tab.container.mode === TabGroup.TOP || self.tab.container.mode === TabGroup.BOTTOM)
+		if(self.tab.container.placement === TabGroup.TOP || self.tab.container.placement === TabGroup.BOTTOM)
 		{
 			if(event.layerX > self.size.x * 0.8 || event.target !== this)
 			{

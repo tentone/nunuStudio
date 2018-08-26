@@ -32,7 +32,10 @@ function Element(parent, type)
 	 * @type {Element}
 	 */
 	this.parent = null;
-	this.attachTo(parent !== undefined ? parent : DocumentBody);
+	if(parent !== undefined)
+	{
+		this.attachTo(parent);
+	}
 	
 	/** 
 	 * True if the element is visible.

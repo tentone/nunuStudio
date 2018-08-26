@@ -29,7 +29,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 		var track = self.track;
 		var animation = self.animation;
 
-		var context = new ContextMenu();
+		var context = new ContextMenu(DocumentBody);
 		context.size.set(150, 20);
 		context.position.set(event.clientX, event.clientY);
 		

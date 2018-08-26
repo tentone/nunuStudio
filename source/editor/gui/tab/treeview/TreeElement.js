@@ -144,7 +144,7 @@ function TreeElement(container)
 			var isScene = self.object instanceof Scene;
 
 			//Context menu
-			var context = new ContextMenu();
+			var context = new ContextMenu(DocumentBody);
 			context.size.set(150, 20);
 			context.position.set(event.clientX, event.clientY);
 			

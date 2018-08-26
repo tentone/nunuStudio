@@ -229,7 +229,10 @@ TabGroup.prototype.getTab = function(type, obj)
 //Attach tab to this group and remove it from the original group
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {
+	//Remove from old group
 	tab.container.removeTab(tab.index, true);
+	
+	//Attach to this group
 	tab.container = this;
 	tab.button.attachTo(this.buttons);
 	tab.attachTo(this.tab);
@@ -326,6 +329,15 @@ TabGroup.prototype.clear = function(forceAll)
 	this.selectTab(null);
 };
 
+//Update tabs index
+TabGroup.prototype.updateOptionIndex = function()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].index = i;
+	}
+};
+
 //Move tab from position to another
 TabGroup.prototype.moveButton = function(origin, destination)
 {
@@ -336,15 +348,6 @@ TabGroup.prototype.moveButton = function(origin, destination)
 
 	this.updateOptionIndex();
 	this.updateInterface();
-};
-
-//Update tabs index
-TabGroup.prototype.updateOptionIndex = function()
-{
-	for(var i = 0; i < this.options.length; i++)
-	{
-		this.options[i].index = i;
-	}
 };
 
 //Set the tab group buttons placement

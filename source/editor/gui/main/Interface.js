@@ -2,8 +2,10 @@
 
 function Interface()
 {
-	//Top Tab
-	this.tab = new TabGroupNew(); //TabGroupNew
+	this.container = new TabContainer(DocumentBody);
+
+	this.tab = new TabGroupNew();
+	this.container.attach(this.tab);
 
 	//Asset
 	this.assetExplorer = this.tab.addTab(AssetExplorer, false);
@@ -21,10 +23,10 @@ function Interface()
 	this.panelContainer = this.tab.addTab(PanelContainer, false);
 
 	//Top Bar
-	this.menuBar = new MainMenu();
+	this.menuBar = new MainMenu(DocumentBody);
 
 	//Side bar
-	this.sideBar = new Bar();
+	this.sideBar = new Bar(DocumentBody);
 	this.sideBar.position.set(0, this.menuBar.size.y);
 	this.sideBar.size.x = 40;
 	
@@ -34,20 +36,19 @@ function Interface()
 	new AddObjectSideBar(this.sideBar);
 }
 
-//Update this
 Interface.prototype.updateInterface = function()
 {
-	//Window size
-	var size = new THREE.Vector2(window.innerWidth, window.innerHeight);
+	var width = window.innerWidth;
+	var height = window.innerHeight;
 
 	//Side bar
-	this.sideBar.size.y = size.y - this.menuBar.size.y;
+	this.sideBar.size.y = height - this.menuBar.size.y;
 	this.sideBar.updateInterface();
 
 	//Container
-	this.tab.position.set(this.sideBar.size.x, this.menuBar.size.y);
-	this.tab.size.set(size.x - this.sideBar.size.x, size.y - this.menuBar.size.y);
-	this.tab.updateInterface();
+	this.container.position.set(this.sideBar.size.x, this.menuBar.size.y);
+	this.container.size.set(width - this.sideBar.size.x, height - this.menuBar.size.y);
+	this.container.updateInterface();
 };
 
 //Open to save program window

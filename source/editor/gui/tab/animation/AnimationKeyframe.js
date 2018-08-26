@@ -24,7 +24,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 	//this.elementframe context menu
 	this.element.oncontextmenu = function(event)
 	{
-		var context = new ContextMenu();
+		var context = new ContextMenu(DocumentBody);
 		context.size.set(150, 20);
 		context.position.set(event.clientX, event.clientY);
 		

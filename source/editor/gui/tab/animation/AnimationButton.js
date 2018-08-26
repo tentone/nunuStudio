@@ -17,7 +17,7 @@ function AnimationButton(parent, editor, animation)
 		var animation = self.animation;
 		var object = self.editor.object;
 
-		var context = new ContextMenu();
+		var context = new ContextMenu(DocumentBody);
 		context.size.set(150, 20);
 		context.position.set(event.clientX, event.clientY);
 		context.addOption("Rename", function()

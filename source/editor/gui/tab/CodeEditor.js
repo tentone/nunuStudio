@@ -22,7 +22,7 @@ function CodeEditor(parent, closeable, container, index)
 	//Context menu event
 	this.element.oncontextmenu = function(event)
 	{
-		var context = new ContextMenu();
+		var context = new ContextMenu(DocumentBody);
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
 		
