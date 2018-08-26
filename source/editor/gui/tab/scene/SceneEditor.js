@@ -416,7 +416,7 @@ SceneEditor.prototype.destroy = function()
 		this.renderer.forceContextLoss();
 		this.renderer = null;
 	}
-}
+};
 
 SceneEditor.prototype.attach = function(scene)
 {

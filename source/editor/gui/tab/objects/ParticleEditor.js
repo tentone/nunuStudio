@@ -11,9 +11,9 @@ function ParticleEditor(parent, closeable, container, index)
 	this.main.tabPositionMax = 0.95;
 
 	//Change main div aspect
-	this.main.divB.style.overflow = "auto";
-	this.main.divB.style.cursor = "default";
-	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
+	this.main.divB.element.style.overflow = "auto";
+	this.main.divB.element.style.cursor = "default";
+	this.main.divB.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Self pointer
 	var self = this;

@@ -20,7 +20,8 @@ function TabGroup(parent, placement)
 	
 	//Buttons
 	this.buttons = new Division(this);
-
+	this.buttons.element.style.backgroundColor = Editor.theme.barColor;
+	
 	//Tab
 	this.tab = new Division(this);
 
@@ -229,7 +230,6 @@ TabGroup.prototype.getTab = function(type, obj)
 //Attach tab to this group and remove it from the original group
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {
-
 	//Remove from old group
 	tab.container.removeTab(tab.index, true);
 	
@@ -238,6 +238,7 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 	tab.button.attachTo(this.buttons);
 	tab.attachTo(this.tab);
 	
+	//Add to options
 	if(insertIndex !== undefined)
 	{
 		tab.index = insertIndex;
@@ -249,12 +250,11 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 		this.options.push(tab);
 	}
 
+	//Select the tab if none selected
 	if(this.selected === null)
 	{
 		this.selectTab(tab);
 	}
-
-	console.log(this.options);
 	
 	this.updateOptionIndex();
 	this.updateInterface();
@@ -276,11 +276,11 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
 	{
 		var tab = this.options[index];
 
-		//Remove option from list
 		if(dontDestroy !== true)
 		{
 			tab.destroy();
 		}
+
 		this.options.splice(index, 1);
 
 		//Update tabs index
@@ -377,9 +377,6 @@ TabGroup.prototype.updateSize = function()
 		}
 		tabSize.y -= this.buttonSize.y;
 		offset.y = 0;
-
-		this.buttons.size.set(this.size.x, this.buttonSize.y);
-		this.buttons.updateSize();
 	}
 	else if(this.placement === TabGroup.LEFT || this.placement === TabGroup.RIGHT)
 	{
@@ -390,9 +387,6 @@ TabGroup.prototype.updateSize = function()
 		}
 		tabSize.x -= this.buttonSize.x;
 		offset.x = 0;
-
-		this.buttons.size.set(this.buttonSize.x, this.size.y);
-		this.buttons.updateSize();
 	}
 	
 	//Update tab and buttons
@@ -419,15 +413,29 @@ TabGroup.prototype.updateSize = function()
 	{	
 		this.buttons.position.set(0, 0);
 		this.buttons.updatePosition();
+		this.buttons.size.set(this.size.x, this.buttonSize.y);
+		this.buttons.updateSize();
 
 		this.tab.position.set(0, this.buttonSize.y);
+		this.tab.updatePosition();
+	}
+	else if(this.placement === TabGroup.BOTTOM)
+	{
+		this.buttons.position.set(0, this.size.y - this.buttonSize.y);
+		this.buttons.updatePosition();
+		this.buttons.size.set(this.size.x, this.buttonSize.y);
+		this.buttons.updateSize();
+
+		this.tab.position.set(0, 0);
 		this.tab.updatePosition();
 	}
 	else if(this.placement === TabGroup.LEFT)
 	{
 		this.buttons.position.set(0, 0);
 		this.buttons.updatePosition();
-
+		this.buttons.size.set(this.buttonSize.x, this.size.y);
+		this.buttons.updateSize();
+		
 		this.tab.position.set(this.buttonSize.x, 0);
 		this.tab.updatePosition();
 	}
@@ -435,14 +443,8 @@ TabGroup.prototype.updateSize = function()
 	{
 		this.buttons.position.set(this.size.x - this.buttonSize.x, 0);
 		this.buttons.updatePosition();
-
-		this.tab.position.set(0, 0);
-		this.tab.updatePosition();
-	}
-	else if(this.placement === TabGroup.BOTTOM)
-	{
-		this.buttons.position.set(0, this.size.y - this.buttonSize.y);
-		this.buttons.updatePosition();
+		this.buttons.size.set(this.buttonSize.x, this.size.y);
+		this.buttons.updateSize();
 
 		this.tab.position.set(0, 0);
 		this.tab.updatePosition();

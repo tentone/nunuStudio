@@ -239,7 +239,7 @@ Element.prototype.attachTo = function(parent)
 
 	if(this.parent !== null)
 	{
-		this.destroy();
+		Element.prototype.destroy.call(this);
 	}
 
 	this.parent = parent;
@@ -250,8 +250,7 @@ Element.prototype.attachTo = function(parent)
 	}
 	else
 	{
-		console.warn("nunuStudio: Parent is a DOM element." , this);
-		parent.appendChild(this.element);
+		console.warn("nunuStudio: Parent is not a Element." , this);
 	}
 };
 
@@ -266,7 +265,7 @@ Element.prototype.destroy = function()
 {
 	if(this.parent !== null)
 	{
-		if(this.parent.isElement)
+		if(this.parent.isElement === true)
 		{
 			if(this.parent.element.contains(this.element))
 			{
@@ -276,11 +275,7 @@ Element.prototype.destroy = function()
 		}
 		else
 		{
-			if(this.parent.contains(this.element))
-			{
-				this.parent.removeChild(this.element);
-				this.parent = null;
-			}
+			console.warn("nunuStudio: Parent is not a Element, not destroyed.", this);
 		}
 	}
 };

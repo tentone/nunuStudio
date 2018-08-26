@@ -72,6 +72,22 @@ DualContainer.VERTICAL = 1;
 
 DualContainer.prototype = Object.create(Element.prototype);
 
+DualContainer.prototype.attach = function(element)
+{
+	if(this.elementA === null)
+	{
+		this.attachA(element);	
+	}
+	else if(this.elementB === null)
+	{
+		this.attachB(element);
+	}
+	else
+	{
+		console.warn("nunuStudio: Cannot attach more elements.");
+	}
+};
+
 DualContainer.prototype.attachA = function(element)
 {
 	this.elementA = element;
@@ -84,7 +100,7 @@ DualContainer.prototype.attachB = function(element)
 	this.elementB.attachTo(this);
 };
 
-DualContainer.prototype.updateInterface = function()
+DualContainer.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
@@ -92,10 +108,13 @@ DualContainer.prototype.updateInterface = function()
 	{
 		var tabPositionAbs = this.tabPosition * this.size.x;
 
+		this.elementA.position.set(0, 0);
 		this.elementA.size.set(tabPositionAbs, this.size.y);
+		this.elementA.updateInterface();
 
 		this.elementB.size.set(this.size.x - tabPositionAbs - this.tabSize, this.size.y);
 		this.elementB.position.set(this.elementA.size.x + this.tabSize, 0);
+		this.elementB.updateInterface();
 
 		this.resizeTab.style.cursor = "e-resize";
 		this.resizeTab.style.top = "0px";
@@ -107,18 +126,18 @@ DualContainer.prototype.updateInterface = function()
 	{
 		var tabPositionAbs = this.tabPosition * this.size.y;
 		
+		this.elementA.position.set(0, 0);
 		this.elementA.size.set(this.size.x, tabPositionAbs);
+		this.elementA.updateInterface();
 		
 		this.elementB.size.set(this.size.x, this.size.y - tabPositionAbs - this.tabSize);
 		this.elementB.position.set(0, this.elementA.size.y + this.tabSize);
-		
+		this.elementB.updateInterface();
+
 		this.resizeTab.style.cursor = "n-resize";
 		this.resizeTab.style.top = this.elementA.size.y + "px";
 		this.resizeTab.style.left = "0px";
 		this.resizeTab.style.width = this.size.x + "px";
 		this.resizeTab.style.height = this.tabSize + "px";
 	}
-
-	this.elementA.updateInterface();
-	this.elementB.updateInterface();
 };

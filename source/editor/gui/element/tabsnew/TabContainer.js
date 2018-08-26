@@ -69,7 +69,7 @@ TabContainer.prototype.getTab = function(type, obj){};
 TabContainer.prototype.attachTab = function(tab, insertIndex){};
 
 //Remove tab from group
-TabContainer.prototype.removeTab = function(index, dontDestroy){};
+TabContainer.prototype.removeTab = function(index){};
 
 //Remove all tabs
 TabContainer.prototype.clear = function(forceAll){};

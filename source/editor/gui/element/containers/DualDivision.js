@@ -8,24 +8,12 @@ function DualDivision(parent)
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Division A
-	this.divA = document.createElement("div");
-	this.divA.style.position = "absolute";
-	this.divA.style.top = "0px";
-	this.divA.style.left = "0px";
-	this.divA.style.overflow = "hidden";
-	this.divA.style.backgroundColor = Editor.theme.panelColor;
-	this.element.appendChild(this.divA);
-
-	this.divASize = new THREE.Vector2(0, 0);
+	this.divA = new Element(this, "div");
+	this.divA.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Division B
-	this.divB = document.createElement("div");
-	this.divB.style.position = "absolute";
-	this.divB.style.overflow = "hidden";
-	this.divB.style.backgroundColor = Editor.theme.panelColor;
-	this.element.appendChild(this.divB);
-
-	this.divBSize = new THREE.Vector2(0, 0);
+	this.divB = new Element(this, "div");
+	this.divB.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Resize tab
 	this.resizeTab = document.createElement("div");
@@ -106,39 +94,37 @@ DualDivision.prototype.updateSize = function()
 	if(this.orientation === DualDivision.HORIZONTAL)
 	{
 		var tabPositionAbs = this.tabPosition * this.size.x;
-
-		this.divASize.set(tabPositionAbs, this.size.y);
-		this.divBSize.set(this.size.x - tabPositionAbs - this.tabSize, this.size.y);
 		
-		this.divB.style.top = "0px";
-		this.divB.style.left = (this.divASize.x + this.tabSize) + "px";
+		this.divA.position.set(0, 0);
+		this.divA.size.set(tabPositionAbs, this.size.y);
+		this.divA.updateInterface();
+
+		this.divB.size.set(this.size.x - tabPositionAbs - this.tabSize, this.size.y);
+		this.divB.position.set(this.divA.size.x + this.tabSize, 0);
+		this.divB.updateInterface();
 
 		this.resizeTab.style.cursor = "e-resize";
 		this.resizeTab.style.top = "0px";
-		this.resizeTab.style.left = this.divASize.x + "px";
+		this.resizeTab.style.left = this.divA.size.x + "px";
 		this.resizeTab.style.width = this.tabSize + "px";
 		this.resizeTab.style.height = this.size.y + "px";
 	}
 	else if(this.orientation === DualDivision.VERTICAL)
 	{
 		var tabPositionAbs = this.tabPosition * this.size.y;
-		
-		this.divASize.set(this.size.x, tabPositionAbs);
-		this.divBSize.set(this.size.x, this.size.y - tabPositionAbs - this.tabSize);
 
-		this.divB.style.top = (this.divASize.y + this.tabSize) + "px";
-		this.divB.style.left = "0px";
-		
+		this.divA.position.set(0, 0);
+		this.divA.size.set(this.size.x, tabPositionAbs);
+		this.divA.updateInterface();
+
+		this.divB.size.set(this.size.x, this.size.y - tabPositionAbs - this.tabSize);
+		this.divB.position.set(0, this.divA.size.y + this.tabSize);
+		this.divB.updateInterface();
+
 		this.resizeTab.style.cursor = "n-resize";
-		this.resizeTab.style.top = this.divASize.y + "px";
+		this.resizeTab.style.top = this.divA.size.y + "px";
 		this.resizeTab.style.left = "0px";
 		this.resizeTab.style.width = this.size.x + "px";
 		this.resizeTab.style.height = this.tabSize + "px";
 	}
-
-	this.divA.style.width = this.divASize.x + "px";
-	this.divA.style.height = this.divASize.y + "px";
-
-	this.divB.style.width = this.divBSize.x + "px";
-	this.divB.style.height = this.divBSize.y + "px";
 };

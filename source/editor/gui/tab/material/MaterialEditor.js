@@ -29,11 +29,11 @@ function MaterialEditor(parent, closeable, container, index)
 	this.preview.tabPositionMax = 0.8;
 
 	//Division style
-	this.preview.divA.style.overflow = "hidden";
-	this.preview.divA.style.backgroundColor = Editor.theme.panelColor;
-	this.main.divB.style.overflow = "auto";
-	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
-	this.preview.divB.style.overflow = "auto";
+	this.preview.divA.element.style.overflow = "hidden";
+	this.preview.divA.element.style.backgroundColor = Editor.theme.panelColor;
+	this.main.divB.element.style.overflow = "auto";
+	this.main.divB.element.style.backgroundColor = Editor.theme.panelColor;
+	this.preview.divB.element.style.overflow = "auto";
 
 	//Canvas
 	this.canvas = new RendererCanvas(this.preview.divA);

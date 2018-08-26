@@ -143,6 +143,11 @@ TabElement.prototype.updateSelection = function(){};
  */
 TabElement.prototype.activate = function()
 {
+	if(this.active === true)
+	{
+		this.deactivate();
+	}
+	
 	//TODO <IF TAB NEEDS UPDATE IT SHOULD TAKE CARE OF IT>
 	if(this.update !== undefined)
 	{
@@ -261,5 +266,8 @@ TabElement.prototype.destroy = function()
 {
 	Element.prototype.destroy.call(this);
 	
-	this.button.destroy();
+	if(this.button !== null)
+	{
+		this.button.destroy();
+	}
 };

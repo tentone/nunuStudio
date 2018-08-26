@@ -3,6 +3,45 @@
 function TabGroupNew(parent, placement)
 {
 	TabGroup.call(this, parent, placement);
+
+	var self = this;
+
+	//Drag drop
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+
+		var uuid = event.dataTransfer.getData("uuid");
+		var tab = DragBuffer.popDragElement(uuid);
+
+		//TODO <ADD CODE HERE>
+
+		if(tab !== null)
+		{
+			var group = self.split(TabGroup.RIGHT);
+			group.attachTab(tab);
+		}
+	};
+
+	//Drag over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+
+		//TODO <ADD CODE HERE>
+
+		console.log(event);
+	};
+
+	//Drag leave
+	this.element.ondragleave = function(event)
+	{
+		event.preventDefault();
+
+		//TODO <ADD CODE HERE>
+
+		console.log(event);
+	};
 }
 
 TabGroupNew.prototype = Object.create(TabGroup.prototype);
@@ -23,43 +62,32 @@ TabGroupNew.prototype.split = function(direction)
 
 	var container = new DualContainer();
 	var parent = this.parent;
+	var group = new TabGroupNew(container, this.placement);
 
-	//New tab on right
 	if(direction === TabGroup.RIGHT)
 	{
 		container.orientation = DualContainer.HORIZONTAL;
-		container.attachA(this);
-
-		var group = new TabGroupNew(container, this.placement);
-		container.attachB(group);
+		container.attach(this);
+		container.attach(group);
 	}
 	else if(direction === TabGroup.LEFT)
 	{
 		container.orientation = DualContainer.HORIZONTAL;
-		container.attachB(this);
-
-		var group = new TabGroupNew(container, this.placement);
-		container.attachA(group);
+		container.attach(group);
+		container.attach(this);
 	}
 	else if(direction === TabGroup.BOTTOM)
 	{
 		container.orientation = DualContainer.VERTICAL;
-		container.attachA(this);
-
-		var group = new TabGroupNew(container, this.placement);
-		container.attachB(group);
+		container.attach(this);
+		container.attach(group);
 	}
 	else if(direction === TabGroup.TOP)
 	{
 		container.orientation = DualContainer.VERTICAL;
-		container.attachB(this);
-
-		var group = new TabGroupNew(container, this.placement);
-		container.attachA(group);
+		container.attach(group);
+		container.attach(this);
 	}
-
-	//TODO <REMOVE THIS>
-	group.addTab(AboutTab, true);
 	
 	if(parent instanceof TabContainer)
 	{
@@ -79,26 +107,54 @@ TabGroupNew.prototype.split = function(direction)
 			parent.updateSize();
 		}
 	}
+
+	return group;
 };
 
 TabGroupNew.prototype.collapse = function()
 {
 	if(this.parent instanceof DualContainer)
 	{
-		if(parent.elementA === this)
+		var element;
+
+		if(this.parent.elementA === this)
 		{
-			//TODO <ADD CODE HERE>
+			element = this.parent.elementB;
 		}
-		else if(parent.elementB === this)
+		else if(this.parent.elementB === this)
 		{
-			//TODO <ADD CODE HERE>
+			element = this.parent.elementA;
 		}
+
+		this.parent.elementA = null;
+		this.parent.elementB = null;
+
+		var parent = this.parent.parent;
+
+		this.parent.destroy();
+		this.destroy();
+
+		parent.attach(element);
+		parent.updateSize();
+	}
+	else
+	{
+		console.warn("nunuStudio: Tab cannot be collapsed");
 	}
 };
 
 /**
  * If the group gets empty it should be collapsed.
  */
+TabGroupNew.prototype.removeTab = function(index, dontDestroy)
+{
+	TabGroup.prototype.removeTab.call(this, index, dontDestroy);
+
+	if(this.options.length === 0)
+	{
+		this.collapse();
+	}
+};
 
 //Add new option to tab grounp
 TabGroupNew.prototype.addTab = function(TabConstructor, closeable)
@@ -107,6 +163,7 @@ TabGroupNew.prototype.addTab = function(TabConstructor, closeable)
 	tab.button = new TabButtonNew(this.buttons, tab);
 
 	this.options.push(tab);
+
 	if(this.selected === null)
 	{
 		this.selectTab(tab);
