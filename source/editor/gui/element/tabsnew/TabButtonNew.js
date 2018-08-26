@@ -87,8 +87,6 @@ function TabButtonNew(parent, tab)
 		var tab = DragBuffer.popDragElement(uuid);
 
 		self.tab.container.attachTab(tab);
-
-		
 	};
 
 	//Drag over

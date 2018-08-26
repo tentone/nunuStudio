@@ -75,23 +75,13 @@ DualContainer.prototype = Object.create(Element.prototype);
 DualContainer.prototype.attachA = function(element)
 {
 	this.elementA = element;
-
-	if(element.parent !== this.element)
-	{
-		element.parent = this.element;
-		this.element.appendChild(element.element);
-	}
+	this.elementA.attachTo(this);
 };
 
 DualContainer.prototype.attachB = function(element)
 {
 	this.elementB = element;
-
-	if(element.parent !== this.element)
-	{
-		element.parent = this.element;
-		this.element.appendChild(element.element);
-	}
+	this.elementB.attachTo(this);
 };
 
 DualContainer.prototype.updateInterface = function()

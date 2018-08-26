@@ -58,19 +58,42 @@ TabGroupNew.prototype.split = function(direction)
 		container.attachA(group);
 	}
 
+	//TODO <REMOVE THIS>
+	group.addTab(AboutTab, true);
 	
 	if(parent instanceof TabContainer)
 	{
-		group.addTab(AboutTab, true);
-
 		parent.attach(container);
 		parent.updateSize();
+	}
+	else if(parent instanceof DualContainer)
+	{
+		if(parent.elementA === this)
+		{
+			parent.attachA(container);
+			parent.updateSize();
+		}
+		else if(parent.elementB === this)
+		{
+			parent.attachB(container);
+			parent.updateSize();
+		}
 	}
 };
 
 TabGroupNew.prototype.collapse = function()
 {
-
+	if(this.parent instanceof DualContainer)
+	{
+		if(parent.elementA === this)
+		{
+			//TODO <ADD CODE HERE>
+		}
+		else if(parent.elementB === this)
+		{
+			//TODO <ADD CODE HERE>
+		}
+	}
 };
 
 /**

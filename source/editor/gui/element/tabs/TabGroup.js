@@ -229,6 +229,7 @@ TabGroup.prototype.getTab = function(type, obj)
 //Attach tab to this group and remove it from the original group
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {
+
 	//Remove from old group
 	tab.container.removeTab(tab.index, true);
 	
@@ -253,6 +254,8 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 		this.selectTab(tab);
 	}
 
+	console.log(this.options);
+	
 	this.updateOptionIndex();
 	this.updateInterface();
 
@@ -263,7 +266,7 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 TabGroup.prototype.removeTab = function(index, dontDestroy)
 {	
 	//If index is an object get the actual index
-	if(index instanceof TabElement)
+	if(typeof index === "object")
 	{
 		index = this.options.indexOf(index);
 	}
