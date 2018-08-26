@@ -13,3 +13,12 @@ function TabContainer()
 }
 
 TabContainer.prototype = Object.create(Element.prototype);
+
+TabContainer.prototype.updateSize = function()
+{
+	Element.prototype.updateSize.call(this);
+
+	this.tab.position.set(0, 0);
+	this.tab.size.copy(this.size);
+	this.tab.updateInterface();
+};

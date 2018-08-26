@@ -7,11 +7,11 @@ function DualContainer(parent)
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	//Division A
-	this.divA = null
+	//Container A
+	this.elementA = null
 
-	//Division B
-	this.divB = null
+	//Container B
+	this.elementB = null
 
 	//Resize tab
 	this.resizeTab = document.createElement("div");
@@ -74,7 +74,7 @@ DualContainer.prototype = Object.create(Element.prototype);
 
 DualContainer.prototype.attachA = function(element)
 {
-	this.divA = element;
+	this.elementA = element;
 
 	if(element.parent !== this.element)
 	{
@@ -85,7 +85,7 @@ DualContainer.prototype.attachA = function(element)
 
 DualContainer.prototype.attachB = function(element)
 {
-	this.divB = element;
+	this.elementB = element;
 
 	if(element.parent !== this.element)
 	{
@@ -96,50 +96,39 @@ DualContainer.prototype.attachB = function(element)
 
 DualContainer.prototype.updateInterface = function()
 {
-	if(this.visible)
+	Element.prototype.updateSize.call(this);
+
+	if(this.orientation === DualContainer.HORIZONTAL)
 	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+		var tabPositionAbs = this.tabPosition * this.size.x;
 
-		if(this.orientation === DualContainer.HORIZONTAL)
-		{
-			var tabPositionAbs = this.tabPosition * this.size.x;
+		this.elementA.size.set(tabPositionAbs, this.size.y);
 
-			this.divA.size.set(tabPositionAbs, this.size.y);
+		this.elementB.size.set(this.size.x - tabPositionAbs - this.tabSize, this.size.y);
+		this.elementB.position.set(this.elementA.size.x + this.tabSize, 0);
 
-			this.divB.size.set(this.size.x - tabPositionAbs - this.tabSize, this.size.y);
-			this.divB.position.set(this.divA.size.x + this.tabSize, 0);
-
-			this.resizeTab.style.cursor = "e-resize";
-			this.resizeTab.style.top = "0px";
-			this.resizeTab.style.left = this.divA.size.x + "px";
-			this.resizeTab.style.width = this.tabSize + "px";
-			this.resizeTab.style.height = this.size.y + "px";
-		}
-		else if(this.orientation === DualContainer.VERTICAL)
-		{
-			var tabPositionAbs = this.tabPosition * this.size.y;
-			
-			this.divA.size.set(this.size.x, tabPositionAbs);
-			
-			this.divB.size.set(this.size.x, this.size.y - tabPositionAbs - this.tabSize);
-			this.divB.position.set(0, this.divA.size.y + this.tabSize);
-			
-			this.resizeTab.style.cursor = "n-resize";
-			this.resizeTab.style.top = this.divA.size.y + "px";
-			this.resizeTab.style.left = "0px";
-			this.resizeTab.style.width = this.size.x + "px";
-			this.resizeTab.style.height = this.tabSize + "px";
-		}
-
-		this.divA.updateInterface();
-		this.divB.updateInterface();
+		this.resizeTab.style.cursor = "e-resize";
+		this.resizeTab.style.top = "0px";
+		this.resizeTab.style.left = this.elementA.size.x + "px";
+		this.resizeTab.style.width = this.tabSize + "px";
+		this.resizeTab.style.height = this.size.y + "px";
 	}
-	else
+	else if(this.orientation === DualContainer.VERTICAL)
 	{
-		this.element.style.display = "none";
+		var tabPositionAbs = this.tabPosition * this.size.y;
+		
+		this.elementA.size.set(this.size.x, tabPositionAbs);
+		
+		this.elementB.size.set(this.size.x, this.size.y - tabPositionAbs - this.tabSize);
+		this.elementB.position.set(0, this.elementA.size.y + this.tabSize);
+		
+		this.resizeTab.style.cursor = "n-resize";
+		this.resizeTab.style.top = this.elementA.size.y + "px";
+		this.resizeTab.style.left = "0px";
+		this.resizeTab.style.width = this.size.x + "px";
+		this.resizeTab.style.height = this.tabSize + "px";
 	}
+
+	this.elementA.updateInterface();
+	this.elementB.updateInterface();
 };
