@@ -12,7 +12,7 @@ function TabGroupNew(parent, placement)
 		event.preventDefault();
 
 		var uuid = event.dataTransfer.getData("uuid");
-		var tab = DragBuffer.popDragElement(uuid);
+		var tab = DragBuffer.pop(uuid);
 
 		//TODO <ADD CODE HERE>
 

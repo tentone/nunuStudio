@@ -108,7 +108,7 @@ function TreeElement(container)
 		if(!self.object.locked)
 		{
 			event.dataTransfer.setData("uuid", self.object.uuid);
-			DragBuffer.pushDragElement(self.object);
+			DragBuffer.push(self.object);
 		}
 	};
 
@@ -122,7 +122,7 @@ function TreeElement(container)
 		{
 			//Try to remove event from buffer
 			var uuid = event.dataTransfer.getData("uuid");
-			var object = DragBuffer.popDragElement(uuid);
+			var object = DragBuffer.pop(uuid);
 		}
 	};
 
@@ -384,7 +384,7 @@ function TreeElement(container)
 
 		//Collect element from buffer
 		var uuid = event.dataTransfer.getData("uuid");
-		var object = DragBuffer.popDragElement(uuid);
+		var object = DragBuffer.pop(uuid);
 
 		//Object 3D
 		if(object instanceof THREE.Object3D)

@@ -86,7 +86,7 @@ function ImageAsset(parent)
 		if(self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
-			DragBuffer.pushDragElement(self.asset);
+			DragBuffer.push(self.asset);
 		}
 	};
 
@@ -95,7 +95,7 @@ function ImageAsset(parent)
 	{
 		//Try to remove font from drag buffer
 		var uuid = event.dataTransfer.getData("uuid");
-		var obj = DragBuffer.popDragElement(uuid);
+		var obj = DragBuffer.pop(uuid);
 	};
 }
 

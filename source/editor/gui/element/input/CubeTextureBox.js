@@ -40,7 +40,7 @@ function CubeTextureBox(parent)
 	this.preview.ondrop = function(event)
 	{
 		var uuid = event.dataTransfer.getData("uuid");
-		var texture = DragBuffer.popDragElement(uuid);
+		var texture = DragBuffer.pop(uuid);
 
 		if(texture.isCubeTexture)
 		{

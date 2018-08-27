@@ -703,7 +703,7 @@ SceneEditor.prototype.resetCanvas = function()
 
 		//Get object from drag buffer
 		var uuid = event.dataTransfer.getData("uuid");
-		var draggedObject = DragBuffer.popDragElement(uuid);
+		var draggedObject = DragBuffer.pop(uuid);
 
 		//Check intersected objects
 		var intersections = self.raycaster.intersectObjects(self.scene.children, true);

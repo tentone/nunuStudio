@@ -50,7 +50,7 @@ function ImageChooser(parent)
 		else
 		{
 			var uuid = event.dataTransfer.getData("uuid");
-			var value = DragBuffer.popDragElement(uuid);
+			var value = DragBuffer.pop(uuid);
 
 			if(value instanceof Image)
 			{

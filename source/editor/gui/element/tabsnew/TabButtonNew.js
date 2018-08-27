@@ -67,7 +67,7 @@ function TabButtonNew(parent, tab)
 	this.element.ondragstart = function(event)
 	{
 		event.dataTransfer.setData("uuid", self.tab.uuid);
-		DragBuffer.pushDragElement(self.tab);
+		DragBuffer.push(self.tab);
 
 		event.dataTransfer.setData("tab", self.tab.index);
 		dragState = 0;
@@ -84,7 +84,7 @@ function TabButtonNew(parent, tab)
 
 		//Move tab between containers
 		var uuid = event.dataTransfer.getData("uuid");
-		var tab = DragBuffer.popDragElement(uuid);
+		var tab = DragBuffer.pop(uuid);
 
 		self.tab.container.attachTab(tab);
 	};
@@ -160,7 +160,7 @@ function TabButtonNew(parent, tab)
 		event.preventDefault();
 
 		var uuid = event.dataTransfer.getData("uuid");
-		DragBuffer.popDragElement(uuid);
+		DragBuffer.pop(uuid);
 
 		dragState = 0;
 		this.style.borderLeft = null;

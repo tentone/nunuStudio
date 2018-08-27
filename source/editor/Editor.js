@@ -464,11 +464,12 @@ include("editor/gui/main/MainMenu.js");
 include("editor/gui/main/sidebar/ToolBar.js");
 include("editor/gui/main/sidebar/AddObjectSideBar.js");
 
+include("editor/gui/DragBuffer.js");
+
 include("editor/utils/DOMUtils.js");
 include("editor/utils/ObjectIcons.js");
 include("editor/utils/CodemirrorThemes.js");
 include("editor/utils/VirtualClipboard.js");
-include("editor/utils/DragBuffer.js");
 
 include("editor/history/History.js");
 include("editor/history/action/Action.js");
