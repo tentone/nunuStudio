@@ -84,7 +84,7 @@ function TabButtonNew(parent, tab)
 
 		//Move tab between containers
 		var uuid = event.dataTransfer.getData("uuid");
-		var tab = DragBuffer.pop(uuid);
+		var tab = DragBuffer.get(uuid);
 
 		self.tab.container.attachTab(tab);
 	};

@@ -384,7 +384,7 @@ function TreeElement(container)
 
 		//Collect element from buffer
 		var uuid = event.dataTransfer.getData("uuid");
-		var object = DragBuffer.pop(uuid);
+		var object = DragBuffer.get(uuid);
 
 		//Object 3D
 		if(object instanceof THREE.Object3D)

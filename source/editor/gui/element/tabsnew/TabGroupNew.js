@@ -12,8 +12,11 @@ function TabGroupNew(parent, placement)
 		event.preventDefault();
 
 		var uuid = event.dataTransfer.getData("uuid");
-		var tab = DragBuffer.pop(uuid);
+		
+		
+		var tab = DragBuffer.get(uuid);
 
+		console.log(uuid, tab);
 		//TODO <ADD CODE HERE>
 
 		if(tab !== null)
@@ -30,7 +33,7 @@ function TabGroupNew(parent, placement)
 
 		//TODO <ADD CODE HERE>
 
-		console.log(event);
+		//console.log(event);
 	};
 
 	//Drag leave
@@ -40,7 +43,7 @@ function TabGroupNew(parent, placement)
 
 		//TODO <ADD CODE HERE>
 
-		console.log(event);
+		//console.log(event);
 	};
 }
 

@@ -63,7 +63,7 @@ function TextureChooser(parent)
 		else
 		{
 			var uuid = event.dataTransfer.getData("uuid");
-			var value = DragBuffer.pop(uuid);
+			var value = DragBuffer.get(uuid);
 
 			//Texture
 			if(value instanceof THREE.Texture && (self.acceptAll || !value.isCubeTexture))

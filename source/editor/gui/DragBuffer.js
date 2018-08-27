@@ -3,6 +3,8 @@
 /**
  * The drag buffer is a global object used to store and get object being dragged.
  *
+ * Objects are stored in an array and are indetified with a UUID.
+ *
  * @static
  * @class DragBuffer
  */
@@ -45,6 +47,7 @@ DragBuffer.pop = function(uuid)
 			return obj;
 		}
 	}
+
 	return null;
 };
 
