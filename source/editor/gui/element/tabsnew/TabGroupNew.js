@@ -12,16 +12,32 @@ function TabGroupNew(parent, placement)
 		event.preventDefault();
 
 		var uuid = event.dataTransfer.getData("uuid");
-		
-		
 		var tab = DragBuffer.get(uuid);
 
-		console.log(uuid, tab);
+		console.log(event, uuid, tab);
 		//TODO <ADD CODE HERE>
 
 		if(tab !== null)
 		{
-			var group = self.split(TabGroup.RIGHT);
+			var group = null;
+			
+			if(event.offsetX < self.size.x * 0.3)
+			{
+				group = self.split(TabGroup.LEFT);
+			}
+			else if(event.offsetX > self.size.x * 0.7)
+			{
+				group = self.split(TabGroup.RIGHT);
+			}
+			if(event.offsetY < self.size.y * 0.3)
+			{
+				group = self.split(TabGroup.TOP);
+			}
+			else if(event.offsetY > self.size.y * 0.7)
+			{
+				group = self.split(TabGroup.BOTTOM);
+			}
+
 			group.attachTab(tab);
 		}
 	};
