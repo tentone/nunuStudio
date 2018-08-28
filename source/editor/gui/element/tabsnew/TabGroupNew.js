@@ -6,60 +6,160 @@ function TabGroupNew(parent, placement)
 
 	var self = this;
 
+	/**
+	 * Border where another another tabs can be dragged to for this tab to be spplited.
+	 *
+	 * @property dragBorder
+	 * @type {Number}
+	 */
+	this.dragBorder = 0.2;
+
+	/**
+	 * DOM element to be displayed when a tab is dragged over.
+	 *
+	 * @property tabArea
+	 * @type {DOM}
+	 */
+	this.tabArea = document.createElement("div");
+	this.tabArea.style.zIndex = "1000";
+	this.tabArea.style.position = "absolute";
+	this.tabArea.style.backgroundColor = "rgba(0.0, 0.0, 0.0, 0.2)";
+	this.tabArea.style.pointerEvents = "none";
+	this.tab.element.appendChild(self.tabArea);
+
 	//Drag drop
-	this.element.ondrop = function(event)
+	this.tab.element.ondrop = function(event)
 	{
 		event.preventDefault();
 
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
 
-		console.log(event, uuid, tab);
-		//TODO <ADD CODE HERE>
-
-		if(tab !== null)
+		if(true) //if(tab instanceof TabGroup)
 		{
-			var group = null;
-			
-			if(event.offsetX < self.size.x * 0.3)
+			//Left
+			if(event.offsetX < self.size.x * self.dragBorder)
 			{
-				group = self.split(TabGroup.LEFT);
+				self.split(TabGroup.LEFT).attachTab(tab);
 			}
-			else if(event.offsetX > self.size.x * 0.7)
+			//Right
+			else if(event.offsetX > self.size.x * (1 - self.dragBorder))
 			{
-				group = self.split(TabGroup.RIGHT);
+				self.split(TabGroup.RIGHT).attachTab(tab);
 			}
-			if(event.offsetY < self.size.y * 0.3)
+			//Top
+			else if(event.offsetY < self.size.y * self.dragBorder)
 			{
-				group = self.split(TabGroup.TOP);
+				self.split(TabGroup.TOP).attachTab(tab);
 			}
-			else if(event.offsetY > self.size.y * 0.7)
+			//Bottom
+			else if(event.offsetY > self.size.y * (1 - self.dragBorder))
 			{
-				group = self.split(TabGroup.BOTTOM);
+				self.split(TabGroup.BOTTOM).attachTab(tab);
 			}
 
-			group.attachTab(tab);
+			if(self.tab.element.contains(self.tabArea))
+			{
+				self.tab.element.removeChild(self.tabArea);
+			}
 		}
 	};
 
 	//Drag over
-	this.element.ondragover = function(event)
+	this.tab.element.ondragover = function(event)
 	{
 		event.preventDefault();
 
-		//TODO <ADD CODE HERE>
+		var uuid = event.dataTransfer.getData("uuid");
+		var tab = DragBuffer.get(uuid);
 
-		//console.log(event);
+		if(true) //if(tab instanceof TabGroup)
+		{
+			//Left
+			if(event.offsetX < self.size.x * self.dragBorder)
+			{
+				self.tabArea.style.right = null;
+				self.tabArea.style.bottom = null;
+				self.tabArea.style.top = "0px";
+				self.tabArea.style.left = "0px";
+				self.tabArea.style.width = "50%";
+				self.tabArea.style.height = "100%";
+
+				if(!self.tab.element.contains(self.tabArea))
+				{
+					self.tab.element.appendChild(self.tabArea);
+				}
+			}
+			//Right
+			else if(event.offsetX > self.size.x * (1 - self.dragBorder))
+			{
+				self.tabArea.style.left = null;
+				self.tabArea.style.bottom = null;
+				self.tabArea.style.top = "0px";
+				self.tabArea.style.right = "0px";
+				self.tabArea.style.width = "50%";
+				self.tabArea.style.height = "100%";
+
+				if(!self.tab.element.contains(self.tabArea))
+				{
+					self.tab.element.appendChild(self.tabArea);
+				}
+			}
+			//Top
+			else if(event.offsetY < self.size.y * self.dragBorder)
+			{
+				self.tabArea.style.right = null;
+				self.tabArea.style.bottom = null;
+				self.tabArea.style.top = "0px";
+				self.tabArea.style.left = "0px";
+				self.tabArea.style.width = "100%";
+				self.tabArea.style.height = "50%";
+
+				if(!self.tab.element.contains(self.tabArea))
+				{
+					self.tab.element.appendChild(self.tabArea);
+				}
+			}
+			//Bottom
+			else if(event.offsetY > self.size.y * (1 - self.dragBorder))
+			{
+				self.tabArea.style.top = null;
+				self.tabArea.style.right = null;
+				self.tabArea.style.bottom = "0px";
+				self.tabArea.style.left = "0px";
+				self.tabArea.style.width = "100%";
+				self.tabArea.style.height = "50%";
+
+				if(!self.tab.element.contains(self.tabArea))
+				{
+					self.tab.element.appendChild(self.tabArea);
+				}
+			}
+			else
+			{
+				if(self.tab.element.contains(self.tabArea))
+				{
+					self.tab.element.removeChild(self.tabArea);
+				}
+			}
+		}
 	};
 
 	//Drag leave
-	this.element.ondragleave = function(event)
+	this.tab.element.ondragleave = function(event)
 	{
 		event.preventDefault();
 
-		//TODO <ADD CODE HERE>
+		var uuid = event.dataTransfer.getData("uuid");
+		var tab = DragBuffer.get(uuid);
 
-		//console.log(event);
+		if(true) //if(tab instanceof TabGroup)
+		{
+			if(self.tab.element.contains(self.tabArea))
+			{
+				self.tab.element.removeChild(self.tabArea);
+			}
+		}
 	};
 }
 
