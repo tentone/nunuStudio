@@ -35,7 +35,7 @@ function TabGroupNew(parent, placement)
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
 
-		if(true) //if(tab instanceof TabGroup)
+		if(tab instanceof TabElement)
 		{
 			//Left
 			if(event.offsetX < self.size.x * self.dragBorder)
@@ -57,11 +57,11 @@ function TabGroupNew(parent, placement)
 			{
 				self.split(TabGroup.BOTTOM).attachTab(tab);
 			}
+		}
 
-			if(self.tab.element.contains(self.tabArea))
-			{
-				self.tab.element.removeChild(self.tabArea);
-			}
+		if(self.tab.element.contains(self.tabArea))
+		{
+			self.tab.element.removeChild(self.tabArea);
 		}
 	};
 
@@ -70,77 +70,71 @@ function TabGroupNew(parent, placement)
 	{
 		event.preventDefault();
 
-		var uuid = event.dataTransfer.getData("uuid");
-		var tab = DragBuffer.get(uuid);
-
-		if(true) //if(tab instanceof TabGroup)
+		//Left
+		if(event.offsetX < self.size.x * self.dragBorder)
 		{
-			//Left
-			if(event.offsetX < self.size.x * self.dragBorder)
-			{
-				self.tabArea.style.right = null;
-				self.tabArea.style.bottom = null;
-				self.tabArea.style.top = "0px";
-				self.tabArea.style.left = "0px";
-				self.tabArea.style.width = "50%";
-				self.tabArea.style.height = "100%";
+			self.tabArea.style.right = null;
+			self.tabArea.style.bottom = null;
+			self.tabArea.style.top = "0px";
+			self.tabArea.style.left = "0px";
+			self.tabArea.style.width = "50%";
+			self.tabArea.style.height = "100%";
 
-				if(!self.tab.element.contains(self.tabArea))
-				{
-					self.tab.element.appendChild(self.tabArea);
-				}
-			}
-			//Right
-			else if(event.offsetX > self.size.x * (1 - self.dragBorder))
+			if(!self.tab.element.contains(self.tabArea))
 			{
-				self.tabArea.style.left = null;
-				self.tabArea.style.bottom = null;
-				self.tabArea.style.top = "0px";
-				self.tabArea.style.right = "0px";
-				self.tabArea.style.width = "50%";
-				self.tabArea.style.height = "100%";
+				self.tab.element.appendChild(self.tabArea);
+			}
+		}
+		//Right
+		else if(event.offsetX > self.size.x * (1 - self.dragBorder))
+		{
+			self.tabArea.style.left = null;
+			self.tabArea.style.bottom = null;
+			self.tabArea.style.top = "0px";
+			self.tabArea.style.right = "0px";
+			self.tabArea.style.width = "50%";
+			self.tabArea.style.height = "100%";
 
-				if(!self.tab.element.contains(self.tabArea))
-				{
-					self.tab.element.appendChild(self.tabArea);
-				}
-			}
-			//Top
-			else if(event.offsetY < self.size.y * self.dragBorder)
+			if(!self.tab.element.contains(self.tabArea))
 			{
-				self.tabArea.style.right = null;
-				self.tabArea.style.bottom = null;
-				self.tabArea.style.top = "0px";
-				self.tabArea.style.left = "0px";
-				self.tabArea.style.width = "100%";
-				self.tabArea.style.height = "50%";
+				self.tab.element.appendChild(self.tabArea);
+			}
+		}
+		//Top
+		else if(event.offsetY < self.size.y * self.dragBorder)
+		{
+			self.tabArea.style.right = null;
+			self.tabArea.style.bottom = null;
+			self.tabArea.style.top = "0px";
+			self.tabArea.style.left = "0px";
+			self.tabArea.style.width = "100%";
+			self.tabArea.style.height = "50%";
 
-				if(!self.tab.element.contains(self.tabArea))
-				{
-					self.tab.element.appendChild(self.tabArea);
-				}
-			}
-			//Bottom
-			else if(event.offsetY > self.size.y * (1 - self.dragBorder))
+			if(!self.tab.element.contains(self.tabArea))
 			{
-				self.tabArea.style.top = null;
-				self.tabArea.style.right = null;
-				self.tabArea.style.bottom = "0px";
-				self.tabArea.style.left = "0px";
-				self.tabArea.style.width = "100%";
-				self.tabArea.style.height = "50%";
+				self.tab.element.appendChild(self.tabArea);
+			}
+		}
+		//Bottom
+		else if(event.offsetY > self.size.y * (1 - self.dragBorder))
+		{
+			self.tabArea.style.top = null;
+			self.tabArea.style.right = null;
+			self.tabArea.style.bottom = "0px";
+			self.tabArea.style.left = "0px";
+			self.tabArea.style.width = "100%";
+			self.tabArea.style.height = "50%";
 
-				if(!self.tab.element.contains(self.tabArea))
-				{
-					self.tab.element.appendChild(self.tabArea);
-				}
-			}
-			else
+			if(!self.tab.element.contains(self.tabArea))
 			{
-				if(self.tab.element.contains(self.tabArea))
-				{
-					self.tab.element.removeChild(self.tabArea);
-				}
+				self.tab.element.appendChild(self.tabArea);
+			}
+		}
+		else
+		{
+			if(self.tab.element.contains(self.tabArea))
+			{
+				self.tab.element.removeChild(self.tabArea);
 			}
 		}
 	};
@@ -150,15 +144,9 @@ function TabGroupNew(parent, placement)
 	{
 		event.preventDefault();
 
-		var uuid = event.dataTransfer.getData("uuid");
-		var tab = DragBuffer.get(uuid);
-
-		if(true) //if(tab instanceof TabGroup)
+		if(self.tab.element.contains(self.tabArea))
 		{
-			if(self.tab.element.contains(self.tabArea))
-			{
-				self.tab.element.removeChild(self.tabArea);
-			}
+			self.tab.element.removeChild(self.tabArea);
 		}
 	};
 }
@@ -230,6 +218,11 @@ TabGroupNew.prototype.split = function(direction)
 	return group;
 };
 
+/**
+ * If the tab is in a split container, move all the tabs to the other tabgroup in the container and close this group.
+ *
+ * @method collapse
+ */ 
 TabGroupNew.prototype.collapse = function()
 {
 	if(this.parent instanceof DualContainer)
@@ -262,20 +255,16 @@ TabGroupNew.prototype.collapse = function()
 	}
 };
 
-/**
- * If the group gets empty it should be collapsed.
- */
 TabGroupNew.prototype.removeTab = function(index, dontDestroy)
 {
 	TabGroup.prototype.removeTab.call(this, index, dontDestroy);
 
-	if(this.options.length === 0)
+	/*if(this.options.length === 0)
 	{
 		this.collapse();
-	}
+	}*/
 };
 
-//Add new option to tab grounp
 TabGroupNew.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
