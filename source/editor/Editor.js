@@ -251,7 +251,6 @@ include("lib/three/exporters/GLTFExporter.js");
 include("lib/zlib.min.js");
 include("lib/stats.min.js");
 include("lib/jsblend.js");
-include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/jszip.min.js");
@@ -470,6 +469,7 @@ include("editor/utils/DOMUtils.js");
 include("editor/utils/ObjectIcons.js");
 include("editor/utils/CodemirrorThemes.js");
 include("editor/utils/VirtualClipboard.js");
+include("editor/utils/LocalStorage.js");
 
 include("editor/history/History.js");
 include("editor/history/action/Action.js");

@@ -200,7 +200,7 @@ Settings.prototype.store = function()
 	//Cookie
 	else
 	{
-		Cookies.set("config", data);
+		LocalStorage.set("config", data);
 	}
 };
 
@@ -215,7 +215,7 @@ Settings.prototype.load = function()
 		}
 		else
 		{
-			var data = JSON.parse(Cookies.get("config"));
+			var data = LocalStorage.get("config");
 		}
 
 		for(var i in data)
