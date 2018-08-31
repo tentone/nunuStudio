@@ -85,7 +85,7 @@ function ScenePanel(parent, obj)
 
 	//Linear fog color
 	this.fogLinearForm.addText("Color");
-	this.fogLinearColor = new ColorChooser(this.fogLinearForm.element);
+	this.fogLinearColor = new ColorChooser(this.fogLinearForm);
 	this.fogLinearColor.size.set(80, 18);
 	this.fogLinearColor.setOnChange(function()
 	{
@@ -98,7 +98,7 @@ function ScenePanel(parent, obj)
 
 	//Linear fog near
 	this.fogLinearForm.addText("Near");
-	this.fogNear = new NumberBox(this.fogLinearForm.element);
+	this.fogNear = new NumberBox(this.fogLinearForm);
 	this.fogNear.size.set(60, 18);
 	this.fogNear.setOnChange(function()
 	{
@@ -109,7 +109,7 @@ function ScenePanel(parent, obj)
 
 	//Linear fog far
 	this.fogLinearForm.addText("Far");
-	this.fogFar = new NumberBox(this.fogLinearForm.element);
+	this.fogFar = new NumberBox(this.fogLinearForm);
 	this.fogFar.size.set(60, 18);
 	this.fogFar.setOnChange(function()
 	{
@@ -128,7 +128,7 @@ function ScenePanel(parent, obj)
 
 	//Exponential fog color
 	this.fogExponentialForm.addText("Color");
-	this.fogExponentialColor = new ColorChooser(this.fogExponentialForm.element);
+	this.fogExponentialColor = new ColorChooser(this.fogExponentialForm);
 	this.fogExponentialColor.size.set(80, 18);
 	this.fogExponentialColor.setOnChange(function()
 	{
@@ -141,7 +141,7 @@ function ScenePanel(parent, obj)
 
 	//Exponential fog density
 	this.fogExponentialForm.addText("Density")
-	this.fogDensity = new NumberBox(this.fogExponentialForm.element);
+	this.fogDensity = new NumberBox(this.fogExponentialForm);
 	this.fogDensity.size.set(100, 18);
 	this.fogDensity.setStep(0.0001);
 	this.fogDensity.setOnChange(function()

@@ -251,7 +251,7 @@ TabGroupNew.prototype.collapse = function()
 	}
 	else
 	{
-		console.warn("nunuStudio: Tab cannot be collapsed");
+		console.warn("nunuStudio: Tab cannot be collapsed.");
 	}
 };
 
@@ -259,10 +259,10 @@ TabGroupNew.prototype.removeTab = function(index, dontDestroy)
 {
 	TabGroup.prototype.removeTab.call(this, index, dontDestroy);
 
-	/*if(this.options.length === 0)
+	if(this.options.length === 0)
 	{
 		this.collapse();
-	}*/
+	}
 };
 
 TabGroupNew.prototype.addTab = function(TabConstructor, closeable)
