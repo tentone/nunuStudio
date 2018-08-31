@@ -228,7 +228,6 @@ TabGroupNew.prototype.collapse = function()
 	if(this.parent instanceof DualContainer)
 	{
 		var element;
-
 		if(this.parent.elementA === this)
 		{
 			element = this.parent.elementB;
@@ -237,15 +236,14 @@ TabGroupNew.prototype.collapse = function()
 		{
 			element = this.parent.elementA;
 		}
-
+		
+		var parent = this.parent.parent;
+		
 		this.parent.elementA = null;
 		this.parent.elementB = null;
-
-		var parent = this.parent.parent;
-
 		this.parent.destroy();
-		this.destroy();
 
+		this.destroy();
 		parent.attach(element);
 		parent.updateSize();
 	}
