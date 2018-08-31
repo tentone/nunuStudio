@@ -303,50 +303,39 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 	this.vertexShader.setText(material.vertexShader);
 };
 
-ShaderMaterialEditor.prototype.updateInterface = function()
+ShaderMaterialEditor.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+	TabElement.prototype.updateSize.call(this);
 
-		//Main
-		this.main.size.copy(this.size);
-		this.main.updateInterface();
+	//Main
+	this.main.size.copy(this.size);
+	this.main.updateInterface();
 
-		//Preview
-		this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
-		this.preview.updateInterface();
+	//Preview
+	this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
+	this.preview.updateInterface();
 
-		//Canvas
-		this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
-		this.canvas.updateInterface();
+	//Canvas
+	this.canvas.size.copy(this.preview.divA.size);
+	this.canvas.updateInterface();
 
-		//Tab size
-		this.tab.size.set(this.size.x - this.canvas.size.x - 5, this.size.y);
-		this.tab.updateInterface();
+	//Tab size
+	this.tab.size.set(this.size.x - this.canvas.size.x - 5, this.size.y);
+	this.tab.updateInterface();
 
-		//Preview form
-		this.previewForm.updateInterface();
+	//Preview form
+	this.previewForm.updateInterface();
 
-		//Form
-		this.form.updateInterface();
+	//Form
+	this.form.updateInterface();
 
-		//Fragment editor
-		this.fragmentShader.size.copy(this.tab.size);
-		this.fragmentShader.updateSettings();
-		this.fragmentShader.updateInterface();
+	//Fragment editor
+	this.fragmentShader.size.copy(this.tab.size);
+	this.fragmentShader.updateSettings();
+	this.fragmentShader.updateInterface();
 
-		//Vertex editor
-		this.vertexShader.size.copy(this.tab.size);
-		this.vertexShader.updateSettings();
-		this.vertexShader.updateInterface();
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	//Vertex editor
+	this.vertexShader.size.copy(this.tab.size);
+	this.vertexShader.updateSettings();
+	this.vertexShader.updateInterface();
 };

@@ -251,6 +251,7 @@ Element.prototype.attachTo = function(parent)
 	else
 	{
 		console.warn("nunuStudio: Parent is not a Element." , this);
+		this.parent.appendChild(this.element);
 	}
 };
 
@@ -276,6 +277,11 @@ Element.prototype.destroy = function()
 		else
 		{
 			console.warn("nunuStudio: Parent is not a Element, not destroyed.", this);
+			if(this.parent.contains(this.element))
+			{
+				this.parent.removeChild(this.element);
+				this.parent = null;
+			}
 		}
 	}
 };

@@ -47,58 +47,6 @@ function TransformGizmoRotate()
 		XYZE: [[new THREE.Mesh(new THREE.Geometry())]]
 	};
 
-	this.update = function(rotation, eye2)
-	{
-		TransformGizmo.prototype.update.apply(this, arguments);
-
-		var group =
-		{
-			handles: this.handles,
-			pickers: this.pickers
-		};
-
-		var tempMatrix = new THREE.Matrix4();
-		var worldRotation = new THREE.Euler(0, 0, 1);
-		var tempQuaternion = new THREE.Quaternion();
-		var unitX = new THREE.Vector3(1, 0, 0);
-		var unitY = new THREE.Vector3(0, 1, 0);
-		var unitZ = new THREE.Vector3(0, 0, 1);
-		var quaternionX = new THREE.Quaternion();
-		var quaternionY = new THREE.Quaternion();
-		var quaternionZ = new THREE.Quaternion();
-		var eye = eye2.clone();
-
-		worldRotation.copy(this.planes["XY"].rotation);
-		tempQuaternion.setFromEuler(worldRotation);
-
-		tempMatrix.makeRotationFromQuaternion(tempQuaternion).getInverse(tempMatrix);
-		eye.applyMatrix4(tempMatrix);
-
-		this.traverse(function(child)
-		{
-			tempQuaternion.setFromEuler(worldRotation);
-
-			if(child.name === "X")
-			{
-				quaternionX.setFromAxisAngle(unitX, Math.atan2(- eye.y, eye.z));
-				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionX);
-				child.quaternion.copy(tempQuaternion);
-			}
-			else if(child.name === "Y")
-			{
-				quaternionY.setFromAxisAngle(unitY, Math.atan2(eye.x, eye.z));
-				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionY);
-				child.quaternion.copy(tempQuaternion);
-			}
-			else if(child.name === "Z")
-			{
-				quaternionZ.setFromAxisAngle(unitZ, Math.atan2(eye.y, eye.x));
-				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionZ);
-				child.quaternion.copy(tempQuaternion);
-			}
-		});
-	};
-
 	TransformGizmo.call(this);
 }
 
@@ -122,4 +70,56 @@ TransformGizmoRotate.prototype.setActivePlane = function(axis)
 	{
 		this.activePlane = this.planes["XY"];
 	}
+};
+
+TransformGizmoRotate.prototype.update = function(rotation, eye2)
+{
+	TransformGizmo.prototype.update.apply(this, arguments);
+
+	var group =
+	{
+		handles: this.handles,
+		pickers: this.pickers
+	};
+
+	var tempMatrix = new THREE.Matrix4();
+	var worldRotation = new THREE.Euler(0, 0, 1);
+	var tempQuaternion = new THREE.Quaternion();
+	var unitX = new THREE.Vector3(1, 0, 0);
+	var unitY = new THREE.Vector3(0, 1, 0);
+	var unitZ = new THREE.Vector3(0, 0, 1);
+	var quaternionX = new THREE.Quaternion();
+	var quaternionY = new THREE.Quaternion();
+	var quaternionZ = new THREE.Quaternion();
+	var eye = eye2.clone();
+
+	worldRotation.copy(this.planes["XY"].rotation);
+	tempQuaternion.setFromEuler(worldRotation);
+
+	tempMatrix.makeRotationFromQuaternion(tempQuaternion).getInverse(tempMatrix);
+	eye.applyMatrix4(tempMatrix);
+
+	this.traverse(function(child)
+	{
+		tempQuaternion.setFromEuler(worldRotation);
+
+		if(child.name === "X")
+		{
+			quaternionX.setFromAxisAngle(unitX, Math.atan2(- eye.y, eye.z));
+			tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionX);
+			child.quaternion.copy(tempQuaternion);
+		}
+		else if(child.name === "Y")
+		{
+			quaternionY.setFromAxisAngle(unitY, Math.atan2(eye.x, eye.z));
+			tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionY);
+			child.quaternion.copy(tempQuaternion);
+		}
+		else if(child.name === "Z")
+		{
+			quaternionZ.setFromAxisAngle(unitZ, Math.atan2(eye.y, eye.x));
+			tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionZ);
+			child.quaternion.copy(tempQuaternion);
+		}
+	});
 };

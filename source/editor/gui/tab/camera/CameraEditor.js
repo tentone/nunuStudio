@@ -194,31 +194,18 @@ CameraEditor.prototype.isAttached = function(camera)
 	return this.camera === camera;
 };
 
-CameraEditor.prototype.updateInterface = function()
+CameraEditor.prototype.updateSize = function()
 {
-	//Visibility
-	if(this.visible)
-	{
-		//Form
-		this.form.updateInterface();
+	TabElement.prototype.updateSize.call(this);
 
-		//Main
-		this.main.size.copy(this.size);
-		this.main.updateInterface();
+	//Form
+	this.form.updateInterface();
 
-		//Canvas
-		this.canvas.size.set(this.size.x * this.main.tabPosition, this.size.y);
-		this.canvas.updateInterface();
+	//Main
+	this.main.size.copy(this.size);
+	this.main.updateInterface();
 
-		//Element
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	//Canvas
+	this.canvas.size.copy(this.main.divA.size);
+	this.canvas.updateInterface();
 };

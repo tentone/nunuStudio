@@ -331,39 +331,25 @@ MaterialEditor.prototype.update = function()
 };
 
 //Update elements
-MaterialEditor.prototype.updateInterface = function()
+MaterialEditor.prototype.updateSize = function()
 {	
-	//Visibility
-	if(this.visible)
-	{
-		this.element.style.display = "block";
+	TabElement.prototype.updateSize.call(this);
 
-		//Main
-		this.main.size.copy(this.size);
-		this.main.updateInterface();
+	//Main
+	this.main.size.copy(this.size);
+	this.main.updateInterface();
 
-		//Preview
-		this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
-		this.preview.updateInterface();
+	//Preview
+	this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
+	this.preview.updateInterface();
 
-		//Canvas
-		this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
-		this.canvas.updateInterface();
+	//Canvas
+	this.canvas.size.copy(this.preview.divA.size);
+	this.canvas.updateInterface();
 
-		//Preview form
-		this.previewForm.updateInterface();
+	//Preview form
+	this.previewForm.updateInterface();
 
-		//Form
-		this.form.updateInterface();
-
-		//Element
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	//Form
+	this.form.updateInterface();
 };

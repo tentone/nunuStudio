@@ -40,7 +40,7 @@ function TextureEditor(parent, closeable, container, index)
 	alpha.magFilter = THREE.Nearest;
 	alpha.minFilter = THREE.Nearest;
 	alpha.repeat.set(5, 5);
-
+	
 	var geometry = new THREE.PlaneBufferGeometry(1, 1);
 
 	this.background = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({map: alpha}));
@@ -303,30 +303,18 @@ TextureEditor.prototype.update = function()
 }
 
 //Update
-TextureEditor.prototype.updateInterface = function()
+TextureEditor.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		//Dual division
-		this.division.size.copy(this.size);
-		this.division.updateInterface();
+	TabElement.prototype.updateSize.call(this);
 
-		//Canvas
-		this.canvas.size.set(this.division.divA.offsetWidth, this.division.divA.offsetHeight);
-		this.canvas.updateInterface();
+	//Dual division
+	this.division.size.copy(this.size);
+	this.division.updateInterface();
 
-		//Form
-		this.form.updateInterface();
+	//Canvas
+	this.canvas.size.copy(this.division.divA.size);
+	this.canvas.updateInterface();
 
-		//Element
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	//Form
+	this.form.updateInterface();
 }
