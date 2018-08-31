@@ -15,7 +15,6 @@
  * @param {Number} bevelThickness
  * @param {Number} size
  * @param {Number} curveSegments
- * @constructor
  * @extends {Mesh}
  */
 function Text3D(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments)

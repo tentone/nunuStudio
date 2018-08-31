@@ -6,7 +6,6 @@
  * Canvas textures always start with black background and a red text "Canvas Texture".
  * 
  * @class CanvasTexture
- * @constructor
  * @extends {Texture}
  * @module Textures
  * @param {Number} width Canvas width

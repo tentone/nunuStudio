@@ -4,7 +4,6 @@
  * Geometry loader can be used to load geometry files.
  * 
  * @class GeometryLoader
- * @constructor
  * @module Loaders
  * @param {Object} manager
  */

@@ -11,7 +11,6 @@
  * 
  * @class Scene
  * @module Core
- * @constructor
  * @extends {Scene}
  */
 

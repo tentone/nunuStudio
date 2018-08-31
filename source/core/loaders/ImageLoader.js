@@ -4,7 +4,6 @@
  * ImageLoader can be used to load external image resources.
  *
  * @class ImageLoader
- * @constructor
  * @module Loaders
  * @param {Object} manager
  */

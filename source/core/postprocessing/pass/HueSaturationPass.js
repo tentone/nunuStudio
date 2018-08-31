@@ -5,7 +5,6 @@
  * 
  * @class HueSaturationPass
  * @module Postprocessing
- * @constructor
  * @param {Number} hue Hue rotation from -1 to 1
  * @param {Number} saturation Color saturation from -1  to 1
  */

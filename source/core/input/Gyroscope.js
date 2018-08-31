@@ -5,7 +5,6 @@
  *
  * @class Gyroscope
  * @module Input
- * @constructor
  */
 function Gyroscope()
 {

@@ -10,7 +10,6 @@
  * @author tentone
  * @class SSAOPass
  * @module Postprocessing
- * @constructor
  */
 /**
  * Ambient occlusion shadow radius.

@@ -8,7 +8,6 @@
  * @class PerspectiveCamera
  * @extends {PerspectiveCamera}
  * @module Cameras
- * @constructor
  * @param {Number} fov Field of view
  * @param {Number} aspect Aspect ratio
  * @param {Number} near Near projection plane (how closer can be objects visible by this camera)

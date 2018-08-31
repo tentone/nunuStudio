@@ -6,7 +6,6 @@
  * It can be rotated using the mouse left button, moved with the mouse right button or mouse wheel. 
  * 
  * @class OrbitControls
- * @constructor
  * @extends {Object3D}
  * @module Controls
  */

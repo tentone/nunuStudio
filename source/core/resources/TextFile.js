@@ -6,7 +6,6 @@
  * Text file data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.
  *
  * @class TextFile
- * @constructor
  * @extends {Resource}
  * @module Resources
  */

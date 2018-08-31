@@ -4,7 +4,6 @@
  * DotScreen pass generates a poster like effect on top of the scene.
  *  
  * @class DotScreenPass
- * @constructor
  * @module Postprocessing
  * @author alteredq / http://alteredqualia.com/
  * @param {Number} center Dot rotation center.

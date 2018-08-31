@@ -7,7 +7,6 @@
  * 
  * @class CubeCamera
  * @author alteredq
- * @constructor
  * @extends {Object3D}
  * @module Misc
  */

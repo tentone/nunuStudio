@@ -8,7 +8,6 @@
  * The mouse left button can be used to look around, and the keyboard arrows for movement.
  * 
  * @class FirstPersonControls
- * @constructor
  * @extends {Object3D}
  * @module Controls
  */

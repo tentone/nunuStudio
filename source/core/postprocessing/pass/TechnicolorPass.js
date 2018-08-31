@@ -5,7 +5,6 @@
  * 
  * @class TechnicolorPass
  * @module Postprocessing
- * @constructor
  */
 function TechnicolorPass()
 {

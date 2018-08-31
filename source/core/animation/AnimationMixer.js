@@ -8,7 +8,6 @@
  * The object stores animations in its animations attribute, wich is an array an of animation clips.
  * 
  * @class AnimationMixer
- * @constructor
  * @module Animation
  * @extends {AnimationMixer}
  * @param {Object3D} root Animation root object

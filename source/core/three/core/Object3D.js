@@ -456,7 +456,6 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
  * 
  * @class Object3D
  * @module THREE
- * @constructor
  */
 
 /**

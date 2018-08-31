@@ -12,7 +12,6 @@
  * @class PointLight
  * @extends {PointLight}
  * @module Lights
- * @constructor
  */
 function PointLight(hex, intensity, distance, decay)
 {

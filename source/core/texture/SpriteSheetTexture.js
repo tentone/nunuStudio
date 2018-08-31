@@ -8,7 +8,6 @@
  * Images are played row by row, changing every animationSpeed seconds.
  * 
  * @class SpriteSheetTexture
- * @constructor
  * @extends {Texture}
  * @module Textures
  * @param {Image} image

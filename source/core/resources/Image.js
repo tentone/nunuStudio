@@ -8,7 +8,6 @@
  * Some formats (tga, tiff, etc) are converted to png or jpeg in order to work with the rest of the code.
  * 
  * @class Image
- * @constructor
  * @extends {Resource}
  * @module Resources
  * @param {ArrayBuffer, Base64, String} data Can be URL to image, ArrayBuffer data or base64 encoded data.

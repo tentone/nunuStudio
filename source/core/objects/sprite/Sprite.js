@@ -8,7 +8,6 @@
  * @class Sprite
  * @module Sprite
  * @param {Material} material Material used to draw sprites
- * @constructor
  * @extends {Script}
  */
 

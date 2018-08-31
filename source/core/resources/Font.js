@@ -6,7 +6,6 @@
  * Font objects are used for booth 2D and 3D text.
  * 
  * @class Font
- * @constructor
  * @extends {Resource}
  * @module Resources
  * @param {String} url URL to font file

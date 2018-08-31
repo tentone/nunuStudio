@@ -10,7 +10,6 @@
  * Documentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/
  * 
  * @class PhysicsObject
- * @constructor
  * @extends {Group}
  * @module Physics
  */

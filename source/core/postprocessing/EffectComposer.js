@@ -7,7 +7,6 @@
  * 
  * @class EffectComposer
  * @module Postprocessing
- * @constructor
  */
 function EffectComposer()
 {

@@ -6,7 +6,6 @@
  * Used to connect nunuStudio to a leap motion hand tracker, works on Windows and MacOS.
  * 
  * @class LeapMotion
- * @constructor
  * @module Devices
  * @extends {Object3D}
  */

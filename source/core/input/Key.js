@@ -5,7 +5,6 @@
  *
  * @class Key
  * @module Input
- * @constructor
 */
 function Key()
 {

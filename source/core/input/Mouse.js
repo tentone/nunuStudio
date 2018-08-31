@@ -7,7 +7,6 @@
  * 
  * @class Mouse
  * @module Input
- * @constructor
  */
 function Mouse(domElement)
 {

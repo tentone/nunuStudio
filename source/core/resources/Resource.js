@@ -7,7 +7,6 @@
  * 
  * @class Resource
  * @module Resources
- * @constructor
  */
 
 /**

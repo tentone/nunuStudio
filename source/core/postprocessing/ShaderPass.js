@@ -6,7 +6,6 @@
  * @author alteredq / http://alteredqualia.com/
  * @class ShaderPass
  * @module Postprocessing
- * @constructor
  */
 function ShaderPass(shader, textureID)
 {

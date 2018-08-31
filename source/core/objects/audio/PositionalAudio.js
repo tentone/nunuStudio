@@ -9,7 +9,6 @@
  * @class PositionalAudio
  * @extends {AudioEmitter}
  * @module Audio
- * @constructor
  */
 function PositionalAudio(audio)
 {

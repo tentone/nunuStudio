@@ -4,7 +4,6 @@
  * Sobel pass is used to create a edge highlight effect with a sobel operator.
  *  
  * @class SobelPass
- * @constructor
  * @module Postprocessing
  */
 function SobelPass(center, angle, scale)

@@ -8,7 +8,6 @@
  * 
  * @class FXAAPass
  * @module Postprocessing
- * @constructor
  */
 function FXAAPass()
 {

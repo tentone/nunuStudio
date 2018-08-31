@@ -6,7 +6,6 @@
  * VideoTexture also provides methods for playback control.
  * 
  * @class VideoTexture
- * @constructor
  * @extends {Texture}
  * @module Textures
  * @param {Video} video

@@ -4,7 +4,6 @@
  * Audio loader can be used to load external audio resources.
  * 
  * @class AudioLoader
- * @constructor
  * @module Loaders
  * @param {Object} manager
  */

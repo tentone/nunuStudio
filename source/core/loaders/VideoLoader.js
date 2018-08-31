@@ -4,7 +4,6 @@
  * VideoLoader can be used to load external video resources.
  *
  * @class VideoLoader
- * @constructor
  * @module Loaders
  * @param {Object} manager
  */

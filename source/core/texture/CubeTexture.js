@@ -8,7 +8,6 @@
  * Is also possible to create dynamic cubetextures using the CubeCamera object.
  *
  * @class CubeTexture
- * @constructor
  * @extends {Texture}
  * @param {Array} images Image array
  * @param {Number} mapping

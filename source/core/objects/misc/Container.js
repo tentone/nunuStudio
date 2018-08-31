@@ -4,7 +4,6 @@
  * Containers are used to group objects together.
  * 
  * @class Container
- * @constructor
  * @extends {Group}
  * @module Misc
  */

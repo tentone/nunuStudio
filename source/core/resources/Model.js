@@ -7,7 +7,6 @@
  * 
  * @class Model
  * @extends {Resource}
- * @constructor
  * @module Resources
  */
 function Model()

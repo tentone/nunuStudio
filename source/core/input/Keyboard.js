@@ -7,7 +7,6 @@
  * 
  * @class Keyboard
  * @module Input
- * @constructor
  */
 function Keyboard()
 {

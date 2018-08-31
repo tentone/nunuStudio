@@ -9,7 +9,6 @@
  * @author spidersharma / http://eduperiment.com/
  * @class UnrealBloomPass
  * @module Postprocessing
- * @constructor
  * @param {Number} strength  Bloom effect strength.
  * @param {Number} radius Bloom effect radius.
  * @param {Number} threshold White point threshold.

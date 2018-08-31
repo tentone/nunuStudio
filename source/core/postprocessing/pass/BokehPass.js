@@ -5,7 +5,6 @@
  * 
  * @class BokehPass
  * @module Postprocessing
- * @constructor
  * @param {Number} focus Focus distance.
  * @param {Number} aperture Camera aperture.
  * @param {Number} maxblur Maximum level of blur.

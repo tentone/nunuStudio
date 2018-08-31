@@ -6,7 +6,6 @@
  * It uses WebRTC, the host must support it, otherwise WebcamTexture will display a black image.
  * 
  * @class WebcamTexture
- * @constructor
  * @extends {Texture}
  * @param {Number} mapping
  * @param {Number} wrapS

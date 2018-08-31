@@ -16,7 +16,6 @@
  * @class SpotLight
  * @extends {SpotLight}
  * @module Lights
- * @constructor
  */
 function SpotLight(hex, intensity, distance, angle, exponent, decay)
 {

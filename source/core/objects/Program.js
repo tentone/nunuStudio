@@ -7,7 +7,6 @@
  * 
  * @class Program
  * @module Core
- * @constructor
  * @param {String} name Program name
  * @extends {ResourceManager}
  * @extends {ResourceManager}

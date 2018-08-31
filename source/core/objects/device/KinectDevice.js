@@ -11,7 +11,6 @@
  * 
  * @class KinectDevice
  * @extends {Object3D}
- * @constructor
  * @module Devices
  */
 function KinectDevice()

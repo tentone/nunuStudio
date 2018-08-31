@@ -4,7 +4,6 @@
  * FontLoader can be used to load external font resources.
  *
  * @class FontLoader
- * @constructor
  * @module Loaders
  * @param {Object} manager
  */

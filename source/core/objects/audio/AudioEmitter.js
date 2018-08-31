@@ -9,7 +9,6 @@
  * @class AudioEmitter
  * @extends {Audio}
  * @module Audio
- * @constructor
  */
 function AudioEmitter(audio)
 {

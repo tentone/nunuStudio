@@ -5,7 +5,6 @@
  *
  * @class CopyPass
  * @module Postprocessing
- * @constructor
  */
 function CopyPass()
 {

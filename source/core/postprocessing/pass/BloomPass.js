@@ -6,7 +6,6 @@
  * @class BloomPass
  * @author alteredq / http://alteredqualia.com/
  * @module Postprocessing
- * @constructor
  * @param {Number} strength  Bloom effect strength.
  * @param {Number} kernelSize Bloom kernel size.
  * @param {Number} sigma Sigma.

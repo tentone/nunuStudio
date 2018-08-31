@@ -5,7 +5,6 @@
  * 
  * @class ColorifyPass
  * @module Postprocessing
- * @constructor
  */
 function ColorifyPass()
 {

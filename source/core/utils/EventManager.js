@@ -6,7 +6,6 @@
  * It is used by objects to make it easier to add and remove events from global DOM objects.
  *
  * @class EventManager
- * @constructor
  * @module Utils
  */
 

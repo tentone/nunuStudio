@@ -12,7 +12,6 @@
  * @class DirectionalLight
  * @extends {DirectionalLight}
  * @module Lights
- * @constructor
  */
 function DirectionalLight(hex, intensity)
 {

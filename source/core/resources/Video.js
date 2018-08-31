@@ -6,7 +6,6 @@
  * Video data stored in base64.
  * 
  * @class Video
- * @constructor
  * @extends {Resource}
  * @module Resources
  * @param {String} url URL to video file.

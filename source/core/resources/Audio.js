@@ -5,7 +5,6 @@
  * 
  * @class Audio
  * @extends {Resource}
- * @constructor
  * @module Resources
  * @param {ArrayBuffer, String} url URL to Audio file or ArrayBuffer data.
  * @param {String} encoding Audio encoding (mp3, wav, etc).

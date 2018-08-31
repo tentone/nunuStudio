@@ -3,7 +3,6 @@
 /**
  * TextureLoader can be used to load external textures.
  *
- * @constructor
  * @class TextureLoader
  * @module Loaders
  * @param {Object} manager

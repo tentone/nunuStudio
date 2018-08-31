@@ -11,7 +11,6 @@
  * 
  * @class Gamepad
  * @module Input
- * @constructor
  */
 function Gamepad()
 {

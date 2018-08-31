@@ -15,7 +15,6 @@
  *  - Geometries
  *
  * @class ResourceManager
- * @constructor
  * @module Resources
  * @extends {Object3D}
  */

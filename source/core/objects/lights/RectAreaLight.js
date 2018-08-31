@@ -12,7 +12,6 @@
  * @class RectAreaLight
  * @extends {RectAreaLight}
  * @module Lights
- * @constructor
  */
 function RectAreaLight(color, intensity, width, height)
 {

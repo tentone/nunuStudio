@@ -7,7 +7,6 @@
  *
  * @class Pass
  * @module Postprocessing
- * @constructor
  */
 
 function Pass()

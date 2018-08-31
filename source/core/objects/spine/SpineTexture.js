@@ -7,7 +7,6 @@
  * 
  * @class SpineTexture
  * @module Textures
- * @constructor
  * @param {Texture} texture
  */
 function SpineTexture(texture)

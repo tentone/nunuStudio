@@ -6,7 +6,8 @@
  * Loop time can be changed dinamically.
  *
  * @class Timer
- * @constructor
+ * @param {Function} callback Timer callback function.
+ * @param {Number} time Timer period.
  */
 function Timer(callback, time)
 {

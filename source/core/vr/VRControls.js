@@ -4,7 +4,6 @@
  * VRControl is used to get input from an HDM device and apply it to an Object.
  *
  * @class VRControls
- * @constructor
  * @module VirtualReality
  * @author mrdoob (http://mrdoob.com)
  * @author dmarcos (https://github.com/dmarcos)

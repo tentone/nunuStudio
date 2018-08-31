@@ -4,7 +4,6 @@
  * Film pass is used to simulate a film/TV like effect.
  *
  * @class FilmPass
- * @constructor
  * @module Postprocessing
  * @author alteredq / http://alteredqualia.com/
  */

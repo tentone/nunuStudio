@@ -12,7 +12,6 @@
  * @class LensFlare
  * @module Misc
  * @extends {Object3D}
- * @constructor
  * @author mikael emtinger / http://gomo.se/
  * @author alteredq / http://alteredqualia.com/
  * @author tentone

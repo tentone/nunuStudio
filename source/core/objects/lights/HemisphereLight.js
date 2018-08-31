@@ -11,7 +11,6 @@
  * @class HemisphereLight
  * @extends {HemisphereLight}
  * @module Lights
- * @constructor
  */
 function HemisphereLight(skyColor, groundColor, intensity)
 {

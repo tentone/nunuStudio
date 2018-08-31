@@ -8,7 +8,6 @@
  * Documentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html
  * 
  * @class ParticleEmitter
- * @constructor
  * @extends {Points}
  * @module Particles
  */

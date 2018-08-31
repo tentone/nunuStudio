@@ -7,7 +7,6 @@
  *
  * class AdaptiveToneMappingPass
  * @module Postprocessing
- * @constructor
  * @author miibond
  */
 function AdaptiveToneMappingPass(adaptive, resolution)

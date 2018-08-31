@@ -7,7 +7,6 @@
  * 
  * Can parse be used to load on runtime resources and objects from external isp project files.
  * 
- * @constructor
  * @class ObjectLoader
  * @module Loaders
  * @param {Object} manager

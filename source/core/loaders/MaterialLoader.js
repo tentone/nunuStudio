@@ -4,7 +4,6 @@
  * MaterialLoader can be used to load external materials.
  *
  * @class MaterialLoader
- * @constructor
  * @module Loaders
  * @param {Object} manager
  */

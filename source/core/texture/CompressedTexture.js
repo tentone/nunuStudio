@@ -14,7 +14,6 @@
  * The usage of these format can free a lot of video memory and is a must for mobile devices.
  * 
  * @class CompressedTexture
- * @constructor
  * @extends {Texture}
  * @param {Array} mipmaps Mipmaps levels
  * @param {Number} width

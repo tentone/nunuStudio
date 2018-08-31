@@ -15,7 +15,6 @@
  * @class Sky
  * @extends {Object3D}
  * @module Lights
- * @constructor
  */
 function Sky(autoUpdate, dayTime, sunDistance, time)
 {	

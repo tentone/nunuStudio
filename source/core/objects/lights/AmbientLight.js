@@ -11,7 +11,6 @@
  * @class AmbientLight
  * @extends {AmbientLight}
  * @module Lights
- * @constructor
  */
 function AmbientLight(hex)
 {
