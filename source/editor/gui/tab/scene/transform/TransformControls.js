@@ -99,13 +99,13 @@ TransformControls.prototype.setCanvas = function(canvas)
 TransformControls.prototype.setSize = function(size)
 {
 	this.size = size;
-	this.updateScale();
+	this.updatePose();
 };
 
 TransformControls.prototype.setSpace = function(space)
 {
 	this.space = space;
-	this.updateScale();
+	this.updatePose();
 };
 
 TransformControls.prototype.setSnap = function(snap)
@@ -144,7 +144,7 @@ TransformControls.prototype.attach = function(objects)
 	if(this.objects.length > 0)
 	{
 		this.visible = true;
-		this.updateScale();
+		this.updatePose();
 	}
 	else
 	{
@@ -191,13 +191,13 @@ TransformControls.prototype.setMode = function(mode)
 
 	this.visible = (found === true && this.objects.length > 0);
 
-	this.updateScale();
+	this.updatePose();
 };
 
 TransformControls.prototype.setCamera = function(camera)
 {
 	this.camera = camera;
-	this.updateScale();
+	this.updatePose();
 };
 
 TransformControls.prototype.update = function()
@@ -218,12 +218,12 @@ TransformControls.prototype.update = function()
 		this.onPointerMove();
 	}
 
-	this.updateScale();
+	this.updatePose();
 
 	return this.editing;
 };
 
-TransformControls.prototype.updateScale = function()
+TransformControls.prototype.updatePose = function()
 {
 	if(this.objects.length === 0)
 	{
@@ -290,7 +290,7 @@ TransformControls.prototype.onPointerHover = function()
 	if(this.axis !== axis)
 	{
 		this.axis = axis;
-		this.updateScale();
+		this.updatePose();
 	}
 };
 
@@ -307,7 +307,7 @@ TransformControls.prototype.onPointerDown = function()
 	{
 		this.editing = true;
 		this.axis = intersect.object.name;
-		this.updateScale();
+		this.updatePose();
 
 		this.eye.copy(this.camPosition).sub(this.position).normalize();
 		this.gizmo[this.mode].setActivePlane(this.axis, this.eye);
@@ -603,7 +603,7 @@ TransformControls.prototype.onPointerMove = function()
 		}
 	}
 
-	this.updateScale();
+	this.updatePose();
 };
 
 TransformControls.prototype.onPointerUp = function()

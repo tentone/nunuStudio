@@ -69,14 +69,16 @@ function TransformGizmo()
 	//Reset transformations
 	this.traverse(function(child)
 	{
-		if(child instanceof THREE.Mesh)
+		if(child.geometry !== undefined)
 		{
 			child.updateMatrix();
 
+			//Move geometry to origin
 			var tempGeometry = child.geometry.clone();
 			tempGeometry.applyMatrix(child.matrix);
-
 			child.geometry = tempGeometry;
+
+			//Reset pose
 			child.position.set(0, 0, 0);
 			child.rotation.set(0, 0, 0);
 			child.scale.set(1, 1, 1);
