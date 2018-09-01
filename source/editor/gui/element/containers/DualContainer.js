@@ -77,15 +77,16 @@ DualContainer.prototype.attach = function(element)
 	if(this.elementA === null)
 	{
 		this.attachA(element);	
+		return;
 	}
-	else if(this.elementB === null)
+	
+	if(this.elementB === null)
 	{
 		this.attachB(element);
+		return;
 	}
-	else
-	{
-		console.warn("nunuStudio: Cannot attach more elements.");
-	}
+	
+	console.warn("nunuStudio: Cannot attach more elements.");
 };
 
 DualContainer.prototype.attachA = function(element)
@@ -103,6 +104,12 @@ DualContainer.prototype.attachB = function(element)
 DualContainer.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
+
+	if(this.elementA === null || this.elementB === null)
+	{
+		console.log("nunuStudio: Dual container elements are null", this, this.elementA, this.elementB);
+		return;
+	}
 
 	if(this.orientation === DualContainer.HORIZONTAL)
 	{

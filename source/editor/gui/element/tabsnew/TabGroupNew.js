@@ -227,25 +227,33 @@ TabGroupNew.prototype.collapse = function()
 {
 	if(this.parent instanceof DualContainer)
 	{
-		var element;
+		var parent = this.parent.parent;
+		var group;
+
 		if(this.parent.elementA === this)
 		{
-			element = this.parent.elementB;
+			group = this.parent.elementB;
 		}
 		else if(this.parent.elementB === this)
 		{
-			element = this.parent.elementA;
+			group = this.parent.elementA;
 		}
-		
-		var parent = this.parent.parent;
-		
-		this.parent.elementA = null;
-		this.parent.elementB = null;
-		this.parent.destroy();
 
+		this.parent.destroy();
 		this.destroy();
-		parent.attach(element);
-		parent.updateSize();
+
+		console.log("nunuStudio: Collapse tab", group, parent);
+
+		//Check type of parent
+		if(parent instanceof DualContainer)
+		{
+			//TODO <ADD CODE HERE>
+		}
+		else
+		{
+			parent.attach(group);
+			parent.updateSize();
+		}
 	}
 	else
 	{
