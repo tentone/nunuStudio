@@ -180,9 +180,8 @@ function TabButtonNew(parent, tab)
 	this.element.ondragend = function(event)
 	{
 		event.preventDefault();
-
-		var uuid = event.dataTransfer.getData("uuid");
-		DragBuffer.pop(uuid);
+		
+		DragBuffer.pop(self.tab.uuid);
 
 		dragState = 0;
 		this.style.borderLeft = null;

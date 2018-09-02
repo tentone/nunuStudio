@@ -115,14 +115,12 @@ function TreeElement(container)
 	//Drag end
 	this.element.ondragend = function(event)
 	{
-		self.clearBorder();
 		event.preventDefault();
+		self.clearBorder();
 
 		if(!self.object.locked)
 		{
-			//Try to remove event from buffer
-			var uuid = event.dataTransfer.getData("uuid");
-			var object = DragBuffer.pop(uuid);
+			DragBuffer.pop(self.object.uuid);
 		}
 	};
 

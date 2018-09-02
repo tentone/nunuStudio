@@ -75,9 +75,7 @@ function FontAsset(parent)
 	//Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
-		//Try to remove font from drag buffer
-		var uuid = event.dataTransfer.getData("uuid");
-		var obj = DragBuffer.pop(uuid);
+		DragBuffer.pop(self.asset.uuid);
 	};
 }
 

@@ -116,8 +116,7 @@ function AudioAsset(parent)
 	//Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
-		var uuid = event.dataTransfer.getData("uuid");
-		var obj = DragBuffer.pop(uuid);
+		DragBuffer.pop(self.asset.uuid);
 	};
 }
 

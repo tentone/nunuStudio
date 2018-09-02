@@ -10,13 +10,12 @@ function ConsoleTab(parent, closeable, container, index)
 	this.filterThreeJS = false;
 
 	//Top bar
-	this.bar = document.createElement("div");
-	this.bar.style.top = "0px";
-	this.bar.style.left = "0px";
-	this.bar.style.width = "100%";
-	this.bar.style.height = "20px";
-	this.bar.style.backgroundColor = Editor.theme.barColor;
-	this.element.appendChild(this.bar);
+	this.bar = new Division(this);
+	this.bar.element.style.top = "0px";
+	this.bar.element.style.left = "0px";
+	this.bar.element.style.width = "100%";
+	this.bar.element.style.height = "20px";
+	this.bar.element.style.backgroundColor = Editor.theme.barColor;
 
 	var menu = new ButtonText(this.bar);
 	menu.setText("Clear");

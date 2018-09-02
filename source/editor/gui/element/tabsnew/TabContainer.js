@@ -35,83 +35,83 @@ TabContainer.prototype.updateSize = function()
 //Update all tabs object data
 TabContainer.prototype.updateMetadata = function()
 {
-	console.warn("nunuStudio: TODO implement updateMetadata.");
+	this.component.updateMetadata();
 };
 
 //Update all tab object views
 TabContainer.prototype.updateObjectsView = function()
 {
-	console.warn("nunuStudio: TODO implement updateObjectsView.");
+	this.component.updateObjectsView();
 };
 
 //Update all tab object views
 TabContainer.prototype.updateSelection = function()
 {
-	console.warn("nunuStudio: TODO implement updateSelection.");
+	this.component.updateSelection();
 };
 
 //Update all tab object views
 TabContainer.prototype.updateSettings = function()
 {
-	console.warn("nunuStudio: TODO implement updateSettings.");
+	this.component.updateSettings();
 };
 
 //Get actual tab
 TabContainer.prototype.getActual = function()
 {
-	console.warn("nunuStudio: TODO implement getActual.");
+	return this.component.getActual();
 };
 
 //Close actual tab if its closeable
 TabContainer.prototype.closeActual = function()
 {
-	console.warn("nunuStudio: TODO implement closeActual.");
+	this.component.closeActual();
 };
 
 //Select tab
 TabContainer.prototype.selectTab = function(tab)
 {
-	console.warn("nunuStudio: TODO implement selectTab.");
+	this.component.selectTab(tab);
 };
 
 //Select next tab
 TabContainer.prototype.selectNextTab = function()
 {
-	console.warn("nunuStudio: TODO implement selectNextTab.");
+	this.component.selectNextTab();
 };
 
 //Select previous tab
 TabContainer.prototype.selectPreviousTab = function()
 {
-	console.warn("nunuStudio: TODO implement selectPreviousTab.");
+	this.component.selectPreviousTab();
 };
 
 //Add new option to tab group
 TabContainer.prototype.addTab = function(TabConstructor, closeable)
 {
-	console.warn("nunuStudio: TODO implement addTab.");
+	return this.component.addTab(TabConstructor, closeable);
 };
 
 //Get tab from tab type and attached object is there is any
 TabContainer.prototype.getTab = function(type, obj)
 {
-	console.warn("nunuStudio: TODO implement getTab.");
+	return this.component.getTab(type, obj);
 };
 
 //Attach tab to this group and remove it from the original group
 TabContainer.prototype.attachTab = function(tab, insertIndex)
 {
-	console.warn("nunuStudio: TODO implement attachTab.");
+	return this.component.attachTab(tab, insertIndex);
 };
 
 //Remove tab from group
-TabContainer.prototype.removeTab = function(index)
+TabContainer.prototype.removeTab = function(index, dontDestroy)
 {
-	console.warn("nunuStudio: TODO implement removeTab.");
+	return this.component.removeTab(index, dontDestroy);
 };
 
 //Remove all tabs
 TabContainer.prototype.clear = function(forceAll)
 {
-	console.warn("nunuStudio: TODO implement clear.");
+	this.component.clear();
 };

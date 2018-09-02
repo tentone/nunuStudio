@@ -215,7 +215,7 @@ TabGroupNew.prototype.split = function(direction)
 		}
 	}
 
-	return group;
+	return container;
 };
 
 /**

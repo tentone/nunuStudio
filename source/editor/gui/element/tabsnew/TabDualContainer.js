@@ -35,6 +35,7 @@ TabDualContainer.prototype.updateSettings = function()
 TabDualContainer.prototype.getActual = function()
 {
 	console.warn("nunuStudio: TODO implement getActual.");
+	return null;
 };
 
 //Close actual tab if its closeable
@@ -65,24 +66,28 @@ TabDualContainer.prototype.selectPreviousTab = function()
 TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 {
 	console.warn("nunuStudio: TODO implement addTab.");
+	return null;
 };
 
 //Get tab from tab type and attached object is there is any
 TabDualContainer.prototype.getTab = function(type, obj)
 {
 	console.warn("nunuStudio: TODO implement getTab.");
+	return null;
 };
 
 //Attach tab to this group and remove it from the original group
 TabDualContainer.prototype.attachTab = function(tab, insertIndex)
 {
 	console.warn("nunuStudio: TODO implement attachTab.");
+	return null;
 };
 
 //Remove tab from group
 TabDualContainer.prototype.removeTab = function(index)
 {
 	console.warn("nunuStudio: TODO implement removeTab.");
+	return null;
 };
 
 //Remove all tabs

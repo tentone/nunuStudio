@@ -2,25 +2,41 @@
 
 function Interface()
 {
-	this.container = new TabContainer(DocumentBody);
+	/**
+	 * Tab container.
+	 * 
+	 * @attribute tab
+	 * @type {TabContainer}
+	 */
+	this.tab = new TabContainer(DocumentBody);
+	this.tab.attach(new TabGroupNew());
 
-	this.tab = new TabGroupNew();
-	this.container.attach(this.tab);
+	var main = this.tab.component.split(TabGroup.RIGHT);
+	main.tabPosition = 0.7;
+
+	var left = main.elementA.split(TabGroup.BOTTOM);
+	left.tabPosition = 0.7;
+	var leftTop = left.elementA;
+	var leftBottom = left.elementB;
+
+	var right = main.elementB.split(TabGroup.BOTTOM);
+	var rightTop = right.elementA;
+	var rightBottom = right.elementB;
 
 	//Asset
-	this.assetExplorer = this.tab.addTab(AssetExplorer, false);
+	this.assetExplorer = leftBottom.addTab(AssetExplorer, false);
 
 	//Console
-	this.console = this.tab.addTab(ConsoleTab, false);
+	//this.console = leftBottom.addTab(ConsoleTab, false);
 
 	//Animations
-	this.animation = this.tab.addTab(AnimationTab, false);
+	this.animation = leftBottom.addTab(AnimationTab, false);
 
 	//Tree view
-	this.treeView = this.tab.addTab(TreeView, false)
+	this.treeView = rightTop.addTab(TreeView, false)
 	
 	//Inspector
-	this.panelContainer = this.tab.addTab(PanelContainer, false);
+	this.panelContainer = rightBottom.addTab(PanelContainer, false);
 
 	//Top Bar
 	this.menuBar = new MainMenu(DocumentBody);
@@ -46,9 +62,9 @@ Interface.prototype.updateInterface = function()
 	this.sideBar.updateInterface();
 
 	//Container
-	this.container.position.set(this.sideBar.size.x, this.menuBar.size.y);
-	this.container.size.set(width - this.sideBar.size.x, height - this.menuBar.size.y);
-	this.container.updateInterface();
+	this.tab.position.set(this.sideBar.size.x, this.menuBar.size.y);
+	this.tab.size.set(width - this.sideBar.size.x, height - this.menuBar.size.y);
+	this.tab.updateInterface();
 };
 
 //Open to save program window

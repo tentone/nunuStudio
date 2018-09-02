@@ -20,11 +20,12 @@ DragBuffer.buffer = [];
 /** 
  * Push elemento to drag buffer.
  *
+ * Checks if element dont exist on drag buffer before inserting.
+ *
  * @method push
  */
 DragBuffer.push = function(obj)
 {
-	//Check if element dont exist on drag buffer
 	if(DragBuffer.buffer.indexOf(obj) === -1)
 	{
 		DragBuffer.buffer.push(obj);
@@ -35,6 +36,7 @@ DragBuffer.push = function(obj)
  * Get element from drag buffer using its identifier.
  *
  * @method pop
+ * @return {Object} Object indentfied by uuid, if not found return null.
  */
 DragBuffer.pop = function(uuid)
 {
@@ -42,7 +44,7 @@ DragBuffer.pop = function(uuid)
 	{
 		if(DragBuffer.buffer[i].uuid === uuid)
 		{
-			var obj = DragBuffer.buffer[i]; 
+			var obj = DragBuffer.buffer[i];
 			DragBuffer.buffer.splice(i, 1);
 			return obj;
 		}
@@ -55,6 +57,7 @@ DragBuffer.pop = function(uuid)
  * Get element from drag buffer without removing it.
  *
  * @method get
+ * @return {Object} Object indentfied by uuid, if not found return null.
  */
 DragBuffer.get = function(uuid)
 {
