@@ -40,7 +40,7 @@ PanelContainer.prototype.isAttached = function(object)
 	return false;
 };
 
-PanelContainer.prototype.updateObjectsView = function(changes)
+PanelContainer.prototype.updateObjectsView = function()
 {
 	if(this.panel !== null)
 	{	

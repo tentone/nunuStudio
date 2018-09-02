@@ -80,7 +80,11 @@ TabGroup.RIGHT = 3;
 
 TabGroup.prototype = Object.create(Element.prototype);
 
-//Update all tabs object data
+/**
+ * Update all tabs object data.
+ *
+ * @method updateMetadata
+ */
 TabGroup.prototype.updateMetadata = function()
 {
 	for(var i = 0; i < this.options.length; i++)
@@ -89,13 +93,64 @@ TabGroup.prototype.updateMetadata = function()
 	}
 };
 
-//Update all tab object views
-TabGroup.prototype.updateObjectsView = function(changes)
+/**
+ * Update all tab object views.
+ *
+ * @method updateMetadata
+ */
+TabGroup.prototype.updateObjectsView = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].updateObjectsView();
 	}
+};
+
+//Attach tab to this group and remove it from the original group
+TabGroup.prototype.attachTab = function(tab, insertIndex)
+{
+	//Remove from old group
+	tab.container.removeTab(tab.index, true);
+	
+	//Attach to this group
+	tab.container = this;
+	tab.button.attachTo(this.buttons);
+	tab.attachTo(this.tab);
+	
+	//Add to options
+	if(insertIndex !== undefined)
+	{
+		tab.index = insertIndex;
+		this.options.splice(insertIndex, 0, tab);
+	}
+	else
+	{
+		tab.index = this.options.length;
+		this.options.push(tab);
+	}
+
+	//Select the tab if none selected
+	if(this.selected === null)
+	{
+		this.selectTab(tab);
+	}
+	
+	this.updateOptionIndex();
+	this.updateInterface();
+
+	return tab;
+};
+
+//Move tab from position to another
+TabGroup.prototype.moveTabIndex = function(origin, destination)
+{
+	var button = this.options[origin];
+
+	this.options.splice(origin, 1);
+	this.options.splice(destination, 0, button);
+
+	this.updateOptionIndex();
+	this.updateInterface();
 };
 
 //Update all tab object views
@@ -227,41 +282,6 @@ TabGroup.prototype.getTab = function(type, obj)
 	return null;
 };
 
-//Attach tab to this group and remove it from the original group
-TabGroup.prototype.attachTab = function(tab, insertIndex)
-{
-	//Remove from old group
-	tab.container.removeTab(tab.index, true);
-	
-	//Attach to this group
-	tab.container = this;
-	tab.button.attachTo(this.buttons);
-	tab.attachTo(this.tab);
-	
-	//Add to options
-	if(insertIndex !== undefined)
-	{
-		tab.index = insertIndex;
-		this.options.splice(insertIndex, 0, tab);
-	}
-	else
-	{
-		tab.index = this.options.length;
-		this.options.push(tab);
-	}
-
-	//Select the tab if none selected
-	if(this.selected === null)
-	{
-		this.selectTab(tab);
-	}
-	
-	this.updateOptionIndex();
-	this.updateInterface();
-
-	return tab;
-};
-
 //Remove tab from group
 TabGroup.prototype.removeTab = function(index, dontDestroy)
 {	
@@ -339,18 +359,6 @@ TabGroup.prototype.updateOptionIndex = function()
 	{
 		this.options[i].index = i;
 	}
-};
-
-//Move tab from position to another
-TabGroup.prototype.moveButton = function(origin, destination)
-{
-	var button = this.options[origin];
-
-	this.options.splice(origin, 1);
-	this.options.splice(destination, 0, button);
-
-	this.updateOptionIndex();
-	this.updateInterface();
 };
 
 //Set the tab group buttons placement

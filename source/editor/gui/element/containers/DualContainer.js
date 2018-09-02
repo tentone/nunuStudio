@@ -76,7 +76,7 @@ DualContainer.prototype.attach = function(element)
 {
 	if(this.elementA === null)
 	{
-		this.attachA(element);	
+		this.attachA(element);
 		return;
 	}
 	

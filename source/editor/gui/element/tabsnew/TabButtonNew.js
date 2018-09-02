@@ -82,11 +82,33 @@ function TabButtonNew(parent, tab)
 		this.style.borderBottom = null;
 		this.style.borderTop = null;
 
-		//Move tab between containers
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
-
 		self.tab.container.attachTab(tab);
+
+		/*var index = event.dataTransfer.getData("tab");
+		if(index !== "")
+		{
+			index = parseInt(index);
+
+			if(index !== self.tab.index)
+			{	
+				//Before
+				if(dragState === 1)
+				{
+					self.tab.container.attachTab(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
+				}
+				//After
+				else if(dragState === 2)
+				{
+					self.tab.container.attachTab(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
+				}
+			}
+		}
+		else
+		{
+			self.tab.container.attachTab(tab);
+		}*/
 	};
 
 	//Drag over

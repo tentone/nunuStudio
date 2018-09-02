@@ -11,7 +11,7 @@ function Interface()
 	this.assetExplorer = this.tab.addTab(AssetExplorer, false);
 
 	//Console
-	//this.console = this.tab.addTab(ConsoleTab, false);
+	this.console = this.tab.addTab(ConsoleTab, false);
 
 	//Animations
 	this.animation = this.tab.addTab(AnimationTab, false);

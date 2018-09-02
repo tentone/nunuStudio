@@ -142,35 +142,32 @@ ButtonDrawer.prototype.updateOptions = function()
 	}
 };
 
-ButtonDrawer.prototype.updateInterface = function()
+ButtonDrawer.prototype.updateVisibility = function()
 {
 	if(this.visible)
 	{
-		if(this.expanded)
-		{
-			this.panelPosition.x = this.position.x + this.size.x;
-			this.panelPosition.y = this.position.y;
-			
-			this.panel.element.style.display = "block";
-			this.panel.element.style.top = this.panelPosition.y + "px";
-			this.panel.element.style.left = this.panelPosition.x + "px";
-			this.panel.element.style.width = this.panelSize.x + "px";
-			this.panel.element.style.height = this.panelSize.y + "px";
-		}
-		else
-		{
-			this.panel.element.style.display = "none";
-		}
-	
-		this.element.style.visibility = "visible";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+		this.element.style.display = "block";
+		this.panel.element.style.display = this.expanded ? "block" : "none";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 		this.panel.element.style.display = "none";
+	}
+};
+
+ButtonDrawer.prototype.updateSize = function()
+{
+	Element.prototype.updateSize.call(this);
+
+	if(this.expanded)
+	{
+		this.panelPosition.x = this.position.x + this.size.x;
+		this.panelPosition.y = this.position.y;
+		
+		this.panel.element.style.top = this.panelPosition.y + "px";
+		this.panel.element.style.left = this.panelPosition.x + "px";
+		this.panel.element.style.width = this.panelSize.x + "px";
+		this.panel.element.style.height = this.panelSize.y + "px";
 	}
 };

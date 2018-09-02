@@ -167,7 +167,7 @@ TabGroupNew.prototype.split = function(direction)
 		direction = TabGroup.RIGHT;
 	}
 
-	var container = new DualContainer();
+	var container = new TabDualContainer();
 	var parent = this.parent;
 	var group = new TabGroupNew(container, this.placement);
 
@@ -227,44 +227,38 @@ TabGroupNew.prototype.collapse = function()
 {
 	if(this.parent instanceof DualContainer)
 	{
-		console.log(this.parent);
+		var parent = this.parent.parent;
+		var group = this.parent.elementA === this ? this.parent.elementB : this.parent.elementA;
 
-		var parent = this.parent.parent;		 
-
-		console.log("nunuStudio: Collapse tab", group, parent);	
-
-		//Check type of parent
+		//Dual container
 		if(parent instanceof DualContainer)
 		{
-			this.parent.destroy();
-			this.destroy();
-
-			var group;
-			if(this.parent.elementA === this)
+			if(parent.elementA === this.parent)
 			{
-				group = this.parent.elementB;
+				this.parent.destroy();
+				this.destroy();
+				parent.attachA(group);
 			}
-			else
+			else if(parent.elementB === this.parent)
 			{
-				group = this.parent.elementA;
+				this.parent.destroy();
+				this.destroy();
+				parent.attachB(group);
 			}
-			
-			//TODO
-		
 		}
+		//Tab container
 		else
 		{
-			var group = this.parent.elementA === this ? this.parent.elementB : this.parent.elementA;
-
 			this.parent.destroy();
 			this.destroy();
 			parent.attach(group);
-			parent.updateSize();
 		}
+		
+		parent.updateSize();
 	}
 	else
 	{
-		console.warn("nunuStudio: Tab cannot be collapsed.");
+		console.warn("nunuStudio: Tab cannot be collapsed (parent is not a dual container).");
 	}
 };
 
@@ -272,7 +266,7 @@ TabGroupNew.prototype.removeTab = function(index, dontDestroy)
 {
 	TabGroup.prototype.removeTab.call(this, index, dontDestroy);
 
-	if(this.options.length === 0)
+	if(this.options.length === 0 && dontDestroy !== true)
 	{
 		this.collapse();
 	}

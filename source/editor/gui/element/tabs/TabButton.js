@@ -90,12 +90,12 @@ function TabButton(parent, tab)
 				//Before
 				if(dragState === 1)
 				{
-					self.tab.container.moveButton(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
+					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
 				}
 				//After
 				else if(dragState === 2)
 				{
-					self.tab.container.moveButton(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
+					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
 				}
 			}
 		}

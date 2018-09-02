@@ -121,7 +121,7 @@ TabElement.prototype.updateValues = function(){};
  *
  * @method updateObjectsView
  */
-TabElement.prototype.updateObjectsView = function(changes){};
+TabElement.prototype.updateObjectsView = function(){};
 
 /**
  * Update tab after object selection changed.
