@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Tab dual container is a dual container with tabgroups.
+ *
+ * @class TabDualContainer
+ * @extends {Element, TabDual}
+ */
 function TabDualContainer(parent)
 {
 	DualContainer.call(this, parent);
@@ -10,88 +16,115 @@ TabDualContainer.prototype = Object.create(DualContainer.prototype);
 //Update all tabs object data
 TabDualContainer.prototype.updateMetadata = function()
 {
-	console.warn("nunuStudio: TODO implement updateMetadata.");
+	this.elementA.updateMetadata();
+	this.elementB.updateMetadata();
 };
 
 //Update all tab object views
 TabDualContainer.prototype.updateObjectsView = function()
 {
-	console.warn("nunuStudio: TODO implement updateObjectsView.");
+	this.elementA.updateObjectsView();
+	this.elementB.updateObjectsView();
 };
 
 //Update all tab object views
 TabDualContainer.prototype.updateSelection = function()
 {
-	console.warn("nunuStudio: TODO implement updateSelection.");
+	this.elementA.updateSelection();
+	this.elementB.updateSelection();
 };
 
 //Update all tab object views
 TabDualContainer.prototype.updateSettings = function()
 {
-	console.warn("nunuStudio: TODO implement updateSettings.");
+	this.elementA.updateSettings();
+	this.elementB.updateSettings();
 };
 
 //Get actual tab
 TabDualContainer.prototype.getActual = function()
 {
-	console.warn("nunuStudio: TODO implement getActual.");
+	//TODO <ADD CODE HERE>
+	
+	//this.elementA.getActual();
+	//this.elementB.getActual();
+
 	return null;
 };
 
-//Close actual tab if its closeable
+//Close actual tab if it's closeable
 TabDualContainer.prototype.closeActual = function()
 {
-	console.warn("nunuStudio: TODO implement closeActual.");
+	//TODO <ADD CODE HERE>
+
+	//this.elementA.closeActual();
+	//this.elementB.closeActual();
 };
 
 //Select tab
 TabDualContainer.prototype.selectTab = function(tab)
 {
-	console.warn("nunuStudio: TODO implement selectTab.");
+	this.elementA.selectTab(tab);
+	this.elementB.selectTab(tab);
 };
 
 //Select next tab
 TabDualContainer.prototype.selectNextTab = function()
 {
-	console.warn("nunuStudio: TODO implement selectNextTab.");
+	//TODO <ADD CODE HERE>
+
+	//this.group.selectNextTab();
 };
 
 //Select previous tab
 TabDualContainer.prototype.selectPreviousTab = function()
 {
-	console.warn("nunuStudio: TODO implement selectPreviousTab.");
+	//TODO <ADD CODE HERE>
+
+	//this.group.selectPreviousTab();
 };
 
 //Add new option to tab group
 TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 {
-	console.warn("nunuStudio: TODO implement addTab.");
-	return null;
+	var tab = this.elementA.addTab(TabConstructor, closeable);
+	if(tab === null)
+	{
+		tab = this.elementB.addTab(TabConstructor, closeable);
+	}
+
+	return tab;
 };
 
 //Get tab from tab type and attached object is there is any
 TabDualContainer.prototype.getTab = function(type, obj)
 {
-	console.warn("nunuStudio: TODO implement getTab.");
-	return null;
+	var tab = this.elementA.getTab(type, obj);
+	if(tab === null)
+	{
+		tab = this.elementB.getTab(type, obj);
+	}
+
+	return tab;
 };
 
-//Attach tab to this group and remove it from the original group
-TabDualContainer.prototype.attachTab = function(tab, insertIndex)
+//Remove all tabs
+TabDualContainer.prototype.clear = function(forceAll)
 {
-	console.warn("nunuStudio: TODO implement attachTab.");
-	return null;
+	this.group.clear();
 };
 
 //Remove tab from group
 TabDualContainer.prototype.removeTab = function(index)
 {
 	console.warn("nunuStudio: TODO implement removeTab.");
+	
 	return null;
 };
 
 //Remove all tabs
 TabDualContainer.prototype.clear = function(forceAll)
 {
-	console.warn("nunuStudio: TODO implement clear.");
+	this.elementA.clear(forceAll);
+	this.elementB.clear(forceAll);
 };

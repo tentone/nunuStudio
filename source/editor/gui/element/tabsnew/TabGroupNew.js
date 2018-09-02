@@ -14,6 +14,9 @@ function TabGroupNew(parent, placement)
 	 */
 	this.dragBorder = 0.2;
 
+	this.canSplit = true;
+	this.canCollapse = true;
+
 	/**
 	 * DOM element to be displayed when a tab is dragged over.
 	 *
@@ -215,7 +218,7 @@ TabGroupNew.prototype.split = function(direction)
 		}
 	}
 
-	return container;
+	return group;
 };
 
 /**

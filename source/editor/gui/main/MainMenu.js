@@ -838,7 +838,6 @@ function MainMenu(parent)
 		{
 			tab = Editor.gui.tab.addTab(AboutTab, true);
 		}
-
 		tab.select();
 	});
 

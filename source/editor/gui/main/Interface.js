@@ -11,15 +11,15 @@ function Interface()
 	this.tab = new TabContainer(DocumentBody);
 	this.tab.attach(new TabGroupNew());
 
-	var main = this.tab.component.split(TabGroup.RIGHT);
+	var main = this.tab.split(TabGroup.RIGHT).parent;
 	main.tabPosition = 0.7;
 
-	var left = main.elementA.split(TabGroup.BOTTOM);
+	var left = main.elementA.split(TabGroup.BOTTOM).parent;
 	left.tabPosition = 0.7;
 	var leftTop = left.elementA;
 	var leftBottom = left.elementB;
 
-	var right = main.elementB.split(TabGroup.BOTTOM);
+	var right = main.elementB.split(TabGroup.BOTTOM).parent;
 	var rightTop = right.elementA;
 	var rightBottom = right.elementB;
 
@@ -27,7 +27,7 @@ function Interface()
 	this.assetExplorer = leftBottom.addTab(AssetExplorer, false);
 
 	//Console
-	//this.console = leftBottom.addTab(ConsoleTab, false);
+	this.console = leftBottom.addTab(ConsoleTab, false);
 
 	//Animations
 	this.animation = leftBottom.addTab(AnimationTab, false);
