@@ -29,6 +29,7 @@ function ConsoleTab(parent, closeable, container, index)
 
 	//Console messages division
 	this.console = document.createElement("div");
+	this.console.style.position = "absolute";
 	this.console.style.overflow = "auto";
 	this.console.style.top = "20px";
 	this.console.style.left = "0px";
@@ -207,14 +208,11 @@ ConsoleTab.prototype.filter = function(args)
 	return false;
 };
 
-ConsoleTab.prototype.updateInterface = function()
+ConsoleTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateInterface.call(this);
+	TabElement.prototype.updateSize.call(this);
 
-	if(this.visible)
-	{
-		this.console.style.height = (this.size.y - 45) + "px";
-	}
+	this.console.style.height = (this.size.y - 45) + "px";
 };
 
 //Create a new log division element and fill with information from the object
