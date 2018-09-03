@@ -174,7 +174,7 @@ TabGroup.prototype.updateSettings = function()
 };
 
 //Get actual tab
-TabGroup.prototype.getActiveTabs = function()
+TabGroup.prototype.getActiveTab = function()
 {
 	if(this.selected !== null)
 	{
@@ -200,6 +200,11 @@ TabGroup.prototype.closeActual = function()
 //Select tab
 TabGroup.prototype.selectTab = function(tab)
 {
+	if(tab === null && this.selected !== null)
+	{
+		throw new Error("nunuStudio: pooop");	
+	}
+	
 	if(this.selected !== null)
 	{
 		this.selected.deactivate();
@@ -252,7 +257,7 @@ TabGroup.prototype.selectPreviousTab = function()
 	}
 };
 
-//Add new option to tab grounp
+//Add new option to tab group.
 TabGroup.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
@@ -268,7 +273,13 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
 	return tab;
 };
 
-//Get tab from tab type and attached object is there is any
+/**
+ * Get tab from tab type and attached object is there is any.
+ *
+ * @method getTab
+ * @param {Type} type Type of tab to look for.
+ * @param {Object} obj Object attached to the tab.
+ */
 TabGroup.prototype.getTab = function(type, obj)
 {
 	for(var i = 0; i < this.options.length; i++)
@@ -325,7 +336,12 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
 	return null;
 };
 
-//Remove all tabs
+/**
+ * Remove all closable tabs from the group.
+ *
+ * @method clear
+ * @param {Boolean} forceAll Remove also the not closable tabs.
+ */
 TabGroup.prototype.clear = function(forceAll)
 {
 	if(forceAll === true)
@@ -334,6 +350,8 @@ TabGroup.prototype.clear = function(forceAll)
 		{
 			this.options.pop().destroy();
 		}
+
+		this.selectTab(null);
 	}
 	else
 	{
@@ -350,12 +368,21 @@ TabGroup.prototype.clear = function(forceAll)
 				i++;
 			}
 		}
-	}
 
-	this.selectTab(null);
+		//Check is selected tab is still available
+		var index = this.options.indexOf(this.selected);
+		if(index === -1 && this.options.length > 0)
+		{
+			this.selectTab(0);
+		}
+	}
 };
 
-//Update tabs index
+/**
+ * Update index variable stored in the tabs.
+ *
+ * @method updateOptionIndex
+ */
 TabGroup.prototype.updateOptionIndex = function()
 {
 	for(var i = 0; i < this.options.length; i++)
@@ -364,7 +391,12 @@ TabGroup.prototype.updateOptionIndex = function()
 	}
 };
 
-//Set the tab group buttons placement
+/**
+ * Set the tab group buttons placement.
+ *
+ * @method setPlacement
+ * @param {Number} placement
+ */
 TabGroup.prototype.setPlacement = function(placement)
 {
 	this.placement = placement;

@@ -41,7 +41,6 @@ function TabGroupNew(parent, placement)
 	this.tabArea.style.position = "absolute";
 	this.tabArea.style.backgroundColor = "rgba(0.0, 0.0, 0.0, 0.2)";
 	this.tabArea.style.pointerEvents = "none";
-	this.tab.element.appendChild(self.tabArea);
 
 	//Drag drop
 	this.tab.element.ondrop = function(event)

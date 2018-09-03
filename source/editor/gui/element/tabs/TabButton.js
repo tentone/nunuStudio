@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Tab button is used to navigate trough tabs.
+ *
+ * @class TabButton
+ * @extends {Element}
+ * @param {Element} parent
+ * @param {TabElement} tab
+ */
 function TabButton(parent, tab)
 {
 	Element.call(this, parent, "div");
@@ -11,7 +19,12 @@ function TabButton(parent, tab)
 	this.element.style.boxSizing = "border-box";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 
-	//Tab
+	/**
+	 * Pointer to the tab element related with this button.
+	 *
+	 * @property tab
+	 * @type {TabElement}
+	 */
 	this.tab = tab;
 
 	//Icon

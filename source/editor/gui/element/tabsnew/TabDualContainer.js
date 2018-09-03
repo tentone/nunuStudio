@@ -42,12 +42,12 @@ TabDualContainer.prototype.updateSettings = function()
 };
 
 //Get actual tab
-TabDualContainer.prototype.getActiveTabs = function()
+TabDualContainer.prototype.getActiveTab = function()
 {
 	//TODO <ADD CODE HERE>
 	
-	//this.elementA.getActiveTabs();
-	//this.elementB.getActiveTabs();
+	//this.elementA.getActiveTab();
+	//this.elementB.getActiveTab();
 
 	return null;
 };
@@ -55,7 +55,7 @@ TabDualContainer.prototype.getActiveTabs = function()
 //Close actual tab if it's closeable
 TabDualContainer.prototype.closeActual = function()
 {
-	//TODO <ADD CODE HERE>
+	//TODO <USE GROUP ON FOCUS>
 
 	//this.elementA.closeActual();
 	//this.elementB.closeActual();
@@ -71,22 +71,26 @@ TabDualContainer.prototype.selectTab = function(tab)
 //Select next tab
 TabDualContainer.prototype.selectNextTab = function()
 {
-	//TODO <ADD CODE HERE>
+	//TODO <USE GROUP ON FOCUS>
 
-	//this.group.selectNextTab();
+	this.elementA.selectNextTab();
+	this.elementB.selectNextTab();
 };
 
 //Select previous tab
 TabDualContainer.prototype.selectPreviousTab = function()
 {
-	//TODO <ADD CODE HERE>
+	//TODO <USE GROUP ON FOCUS>
 
-	//this.group.selectPreviousTab();
+	this.elementA.selectPreviousTab();
+	this.elementB.selectPreviousTab();
 };
 
 //Add new option to tab group
 TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 {
+	//TODO <USE GROUP ON FOCUS>
+
 	var tab = this.elementA.addTab(TabConstructor, closeable);
 	if(tab === null)
 	{

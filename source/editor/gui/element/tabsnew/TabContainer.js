@@ -65,15 +65,15 @@ TabContainer.prototype.updateSettings = function()
 };
 
 //Get actual tab
-TabContainer.prototype.getActiveTabs = function()
+TabContainer.prototype.getActiveTab = function()
 {
-	return this.group.getActiveTabs();
+	return this.group.getActiveTab();
 };
 
 //Close actual tab if its closeable
 TabContainer.prototype.closeActual = function()
 {
-	//this.group.closeActual();
+	this.group.closeActual();
 };
 
 //Select tab

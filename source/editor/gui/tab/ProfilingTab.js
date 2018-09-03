@@ -45,7 +45,7 @@ ProfilingTab.prototype = Object.create(TabElement.prototype);
 
 ProfilingTab.prototype.update = function()
 {
-	var tab = Editor.gui.tab.getActiveTabs();
+	var tab = Editor.gui.tab.getActiveTab();
 
 	if(tab.renderer !== undefined)
 	{

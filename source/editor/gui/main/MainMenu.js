@@ -849,7 +849,7 @@ function MainMenu(parent)
 	this.run.updateInterface();
 	this.run.setOnClick(function()
 	{
-		var tab = Editor.gui.tab.getActiveTabs();
+		var tab = Editor.gui.tab.getActiveTab();
 		if(tab instanceof SceneEditor)
 		{
 			if(tab.state === SceneEditor.EDITING)
