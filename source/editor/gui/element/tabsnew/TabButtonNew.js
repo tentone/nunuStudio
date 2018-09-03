@@ -83,11 +83,11 @@ function TabButtonNew(parent, tab)
 		this.style.borderTop = null;
 
 		var uuid = event.dataTransfer.getData("uuid");
+		var index = event.dataTransfer.getData("tab");
 		var tab = DragBuffer.get(uuid);
-		self.tab.container.attachTab(tab);
+			
 
-		/*var index = event.dataTransfer.getData("tab");
-		if(index !== "")
+		if(tab.container === self.tab.container)
 		{
 			index = parseInt(index);
 
@@ -96,19 +96,19 @@ function TabButtonNew(parent, tab)
 				//Before
 				if(dragState === 1)
 				{
-					self.tab.container.attachTab(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
+					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
 				}
 				//After
 				else if(dragState === 2)
 				{
-					self.tab.container.attachTab(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
+					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
 				}
 			}
 		}
 		else
 		{
 			self.tab.container.attachTab(tab);
-		}*/
+		}
 	};
 
 	//Drag over

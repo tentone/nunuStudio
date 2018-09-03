@@ -704,7 +704,7 @@ Editor.initialize = function()
 			}
 			else if(key === Keyboard.Z)
 			{
-				if(Editor.gui.tab.getActual() instanceof CodeEditor)
+				if(Editor.gui.tab.getActiveTabs() instanceof CodeEditor)
 				{
 					return;
 				}
@@ -712,7 +712,7 @@ Editor.initialize = function()
 			}
 			else if(key === Keyboard.Y)
 			{
-				if(Editor.gui.tab.getActual() instanceof CodeEditor)
+				if(Editor.gui.tab.getActiveTabs() instanceof CodeEditor)
 				{
 					return;
 				}
@@ -721,7 +721,7 @@ Editor.initialize = function()
 		}
 		else if(key === Keyboard.DEL)
 		{
-			if(Editor.gui.tab.getActual() instanceof CodeEditor)
+			if(Editor.gui.tab.getActiveTabs() instanceof CodeEditor)
 			{
 				return;
 			}
@@ -1034,7 +1034,7 @@ Editor.createDefaultResouces = function()
 //Select tool to manipulate objects
 Editor.selectTool = function(tool)
 {
-	var tab = Editor.gui.tab.getActual();
+	var tab = Editor.gui.tab.getActiveTabs();
 	if(tab instanceof SceneEditor)
 	{
 		tab.selectTool(tool);
@@ -1068,7 +1068,7 @@ Editor.updateSelectionGUI = function()
 {
 	//Center tab ground
 	Editor.gui.tab.updateMetadata();
-	var tab = Editor.gui.tab.getActual();
+	var tab = Editor.gui.tab.getActiveTabs();
 	if(tab !== null)
 	{
 		tab.updateSelection();

@@ -108,7 +108,9 @@ TabGroup.prototype.updateObjectsView = function()
 
 //Attach tab to this group and remove it from the original group
 TabGroup.prototype.attachTab = function(tab, insertIndex)
-{
+{	
+	console.log(tab, tab.container);
+
 	//Remove from old group
 	tab.container.removeTab(tab.index, true);
 	
@@ -172,7 +174,7 @@ TabGroup.prototype.updateSettings = function()
 };
 
 //Get actual tab
-TabGroup.prototype.getActual = function()
+TabGroup.prototype.getActiveTabs = function()
 {
 	if(this.selected !== null)
 	{
@@ -257,6 +259,7 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
 	tab.button = new TabButton(this.buttons, tab);
 
 	this.options.push(tab);
+	
 	if(this.selected === null)
 	{
 		this.selectTab(tab);

@@ -65,9 +65,9 @@ TabContainer.prototype.updateSettings = function()
 };
 
 //Get actual tab
-TabContainer.prototype.getActual = function()
+TabContainer.prototype.getActiveTabs = function()
 {
-	return this.group.getActual();
+	return this.group.getActiveTabs();
 };
 
 //Close actual tab if its closeable

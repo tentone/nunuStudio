@@ -42,12 +42,12 @@ TabDualContainer.prototype.updateSettings = function()
 };
 
 //Get actual tab
-TabDualContainer.prototype.getActual = function()
+TabDualContainer.prototype.getActiveTabs = function()
 {
 	//TODO <ADD CODE HERE>
 	
-	//this.elementA.getActual();
-	//this.elementB.getActual();
+	//this.elementA.getActiveTabs();
+	//this.elementB.getActiveTabs();
 
 	return null;
 };

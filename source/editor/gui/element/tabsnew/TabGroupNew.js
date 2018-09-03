@@ -14,7 +14,20 @@ function TabGroupNew(parent, placement)
 	 */
 	this.dragBorder = 0.2;
 
+	/**
+	 * If true the group can be split in two.
+	 *
+	 * @property canSplit
+	 * @type {Boolean}
+	 */
 	this.canSplit = true;
+
+	/**
+	 * If true the group can be collapsed.
+	 *
+	 * @property canCollapse
+	 * @type {Boolean}
+	 */
 	this.canCollapse = true;
 
 	/**
@@ -165,60 +178,67 @@ TabGroupNew.prototype = Object.create(TabGroup.prototype);
  */
 TabGroupNew.prototype.split = function(direction)
 {
-	if(direction === undefined)
+	if(this.canSplit)
 	{
-		direction = TabGroup.RIGHT;
-	}
-
-	var container = new TabDualContainer();
-	var parent = this.parent;
-	var group = new TabGroupNew(container, this.placement);
-
-	if(direction === TabGroup.RIGHT)
-	{
-		container.orientation = DualContainer.HORIZONTAL;
-		container.attach(this);
-		container.attach(group);
-	}
-	else if(direction === TabGroup.LEFT)
-	{
-		container.orientation = DualContainer.HORIZONTAL;
-		container.attach(group);
-		container.attach(this);
-	}
-	else if(direction === TabGroup.BOTTOM)
-	{
-		container.orientation = DualContainer.VERTICAL;
-		container.attach(this);
-		container.attach(group);
-	}
-	else if(direction === TabGroup.TOP)
-	{
-		container.orientation = DualContainer.VERTICAL;
-		container.attach(group);
-		container.attach(this);
-	}
-	
-	if(parent instanceof TabContainer)
-	{
-		parent.attach(container);
-		parent.updateSize();
-	}
-	else if(parent instanceof DualContainer)
-	{
-		if(parent.elementA === this)
+		if(direction === undefined)
 		{
-			parent.attachA(container);
+			direction = TabGroup.RIGHT;
+		}
+
+		var container = new TabDualContainer();
+		var parent = this.parent;
+		var group = new TabGroupNew(container, this.placement);
+
+		if(direction === TabGroup.RIGHT)
+		{
+			container.orientation = DualContainer.HORIZONTAL;
+			container.attach(this);
+			container.attach(group);
+		}
+		else if(direction === TabGroup.LEFT)
+		{
+			container.orientation = DualContainer.HORIZONTAL;
+			container.attach(group);
+			container.attach(this);
+		}
+		else if(direction === TabGroup.BOTTOM)
+		{
+			container.orientation = DualContainer.VERTICAL;
+			container.attach(this);
+			container.attach(group);
+		}
+		else if(direction === TabGroup.TOP)
+		{
+			container.orientation = DualContainer.VERTICAL;
+			container.attach(group);
+			container.attach(this);
+		}
+		
+		if(parent instanceof TabContainer)
+		{
+			parent.attach(container);
 			parent.updateSize();
 		}
-		else if(parent.elementB === this)
+		else if(parent instanceof DualContainer)
 		{
-			parent.attachB(container);
-			parent.updateSize();
+			if(parent.elementA === this)
+			{
+				parent.attachA(container);
+				parent.updateSize();
+			}
+			else if(parent.elementB === this)
+			{
+				parent.attachB(container);
+				parent.updateSize();
+			}
 		}
-	}
 
-	return group;
+		return group;
+	}
+	else
+	{
+		console.warn("nunuStudio: Tab is not splitable.");
+	}
 };
 
 /**
@@ -228,40 +248,47 @@ TabGroupNew.prototype.split = function(direction)
  */ 
 TabGroupNew.prototype.collapse = function()
 {
-	if(this.parent instanceof DualContainer)
+	if(this.canCollapse)
 	{
-		var parent = this.parent.parent;
-		var group = this.parent.elementA === this ? this.parent.elementB : this.parent.elementA;
-
-		//Dual container
-		if(parent instanceof DualContainer)
+		if(this.parent instanceof DualContainer)
 		{
-			if(parent.elementA === this.parent)
+			var parent = this.parent.parent;
+			var group = this.parent.elementA === this ? this.parent.elementB : this.parent.elementA;
+
+			//Dual container
+			if(parent instanceof DualContainer)
+			{
+				if(parent.elementA === this.parent)
+				{
+					this.parent.destroy();
+					this.destroy();
+					parent.attachA(group);
+				}
+				else if(parent.elementB === this.parent)
+				{
+					this.parent.destroy();
+					this.destroy();
+					parent.attachB(group);
+				}
+			}
+			//Tab container
+			else
 			{
 				this.parent.destroy();
 				this.destroy();
-				parent.attachA(group);
+				parent.attach(group);
 			}
-			else if(parent.elementB === this.parent)
-			{
-				this.parent.destroy();
-				this.destroy();
-				parent.attachB(group);
-			}
+			
+			parent.updateSize();
 		}
-		//Tab container
 		else
 		{
-			this.parent.destroy();
-			this.destroy();
-			parent.attach(group);
+			console.warn("nunuStudio: Tab cannot be collapsed (parent is not a dual container).");
 		}
-		
-		parent.updateSize();
 	}
 	else
 	{
-		console.warn("nunuStudio: Tab cannot be collapsed (parent is not a dual container).");
+		console.warn("nunuStudio: Tab is not collapsable.");
 	}
 };
 

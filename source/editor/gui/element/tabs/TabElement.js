@@ -24,7 +24,12 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 	this.preventDragEvents();
 
-	//TODO <SWITCH FOR PARENT>
+	/**
+	 * Pointer to the group where this tab is.
+	 *
+	 * @property container
+	 * @type {TabGroup}
+	 */
 	this.container = container;
 
 	/**
@@ -43,7 +48,12 @@ function TabElement(parent, closeable, container, index, title, icon)
 	 */
 	this.index = index;
 
-	//Button
+	/**
+	 * Pointer to the button associated with this tab.
+	 *
+	 * @property container
+	 * @type {TabButton}
+	 */
 	this.button = null;
 
 	//Meta

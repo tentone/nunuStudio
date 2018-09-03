@@ -45,7 +45,7 @@ ProfilingTab.prototype = Object.create(TabElement.prototype);
 
 ProfilingTab.prototype.update = function()
 {
-	var tab = Editor.gui.tab.getActual();
+	var tab = Editor.gui.tab.getActiveTabs();
 
 	if(tab.renderer !== undefined)
 	{
@@ -59,25 +59,14 @@ ProfilingTab.prototype.update = function()
 	}
 };
 
-ProfilingTab.prototype.updateInterface = function()
+ProfilingTab.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+	TabElement.prototype.updateSize.call(this);
+	
+	this.dual.size.copy(this.size);
+	this.dual.updateInterface();
 
-		this.dual.size.copy(this.size);
-		this.dual.updateInterface();
-
-		this.canvas.size.set(Number.parseInt(this.dual.divB.element.style.width), Number.parseInt(this.dual.divB.element.style.height));
-		this.canvas.updateInterface();
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.canvas.size.set(Number.parseInt(this.dual.divB.element.style.width), Number.parseInt(this.dual.divB.element.style.height));
+	this.canvas.updateInterface();
 };
 

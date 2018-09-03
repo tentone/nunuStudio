@@ -97,7 +97,7 @@ function ProgramPanel(parent, obj)
 	{
 		Editor.history.add(new ChangeAction(self.obj, "antialiasing", self.antialiasing.getValue()));
 		
-		var tab = Editor.gui.tab.getActual();
+		var tab = Editor.gui.tab.getActiveTabs();
 		if(tab instanceof SceneEditor)
 		{
 			tab.reloadContext();
@@ -184,7 +184,7 @@ ProgramPanel.prototype = Object.create(ObjectPanel.prototype);
 
 ProgramPanel.prototype.updateRenderer = function()
 {
-	var tab = Editor.gui.tab.getActual();
+	var tab = Editor.gui.tab.getActiveTabs();
 	if(tab instanceof SceneEditor)
 	{
 		tab.initializeRenderer();
