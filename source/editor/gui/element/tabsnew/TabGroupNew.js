@@ -85,6 +85,11 @@ function TabGroupNew(parent, placement)
 	{
 		event.preventDefault();
 
+		if(!(DragBuffer.buffer[0] instanceof TabElement))
+		{
+			return;
+		}
+
 		//Left
 		if(event.offsetX < self.size.x * self.dragBorder)
 		{

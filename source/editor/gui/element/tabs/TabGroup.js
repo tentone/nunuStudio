@@ -109,8 +109,6 @@ TabGroup.prototype.updateObjectsView = function()
 //Attach tab to this group and remove it from the original group
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {	
-	console.log(tab, tab.container);
-
 	//Remove from old group
 	tab.container.removeTab(tab.index, true);
 	
@@ -197,14 +195,14 @@ TabGroup.prototype.closeActual = function()
 	}
 };
 
-//Select tab
+/** 
+ * Select tab to set active on this group.
+ *
+ * @method selectTab
+ * @param {TabElement} tab
+ */
 TabGroup.prototype.selectTab = function(tab)
 {
-	if(tab === null && this.selected !== null)
-	{
-		throw new Error("nunuStudio: pooop");	
-	}
-	
 	if(this.selected !== null)
 	{
 		this.selected.deactivate();
@@ -232,7 +230,11 @@ TabGroup.prototype.selectTab = function(tab)
 	this.empty.style.display = this.selected === null ? "flex" : "none";
 };
 
-//Select next tab
+/**
+ * Select next tab.
+ *
+ * @method selectNextTab
+ */
 TabGroup.prototype.selectNextTab = function()
 {
 	if(this.options.length > 0)
@@ -241,7 +243,11 @@ TabGroup.prototype.selectNextTab = function()
 	}
 };
 
-//Select previous tab
+/**
+ * Select previous tab.
+ *
+ * @method selectPreviousTab
+ */
 TabGroup.prototype.selectPreviousTab = function()
 {
 	if(this.options.length > 0)
@@ -257,7 +263,11 @@ TabGroup.prototype.selectPreviousTab = function()
 	}
 };
 
-//Add new option to tab group.
+/**
+ * Add new option to tab group.
+ *
+ * @method addtab
+ */
 TabGroup.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
