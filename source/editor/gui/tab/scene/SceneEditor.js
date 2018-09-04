@@ -225,7 +225,7 @@ function SceneEditor(parent, closeable, container, index)
 		{
 			if(event.ctrlKey)
 			{
-				if(self.focused)
+				if(self.container.focused)
 				{
 					if(key === Keyboard.C)
 					{

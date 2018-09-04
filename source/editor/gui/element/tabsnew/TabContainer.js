@@ -67,6 +67,21 @@ TabContainer.prototype.updateSettings = function()
 //Get actual tab
 TabContainer.prototype.getActiveTab = function()
 {
+	var active = [];
+
+	if(this.group instanceof TabGroup)
+	{
+		var tab = this.group.getActiveTab();
+		if(tab !== null)
+		{
+			active.push(tab);
+		}
+	}
+	else
+	{
+		active = active.concat(this.group.getActiveTab());
+	}
+
 	return this.group.getActiveTab();
 };
 

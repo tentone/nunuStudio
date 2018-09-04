@@ -44,12 +44,36 @@ TabDualContainer.prototype.updateSettings = function()
 //Get actual tab
 TabDualContainer.prototype.getActiveTab = function()
 {
-	//TODO <ADD CODE HERE>
-	
-	//this.elementA.getActiveTab();
-	//this.elementB.getActiveTab();
+	var active = [];
 
-	return null;
+	if(this.elementA instanceof TabGroup)
+	{
+		var tab = this.elementA.getActiveTab();
+		if(tab !== null)
+		{
+			active.push(tab);
+		}
+	}
+	else
+	{
+		active = active.concat(this.elementA.getActiveTab());
+	}
+
+	if(this.elementB instanceof TabGroup)
+	{
+		var tab = this.elementB.getActiveTab();
+		if(tab !== null)
+		{
+			active.push(tab);
+		}
+		this.elementA.getActiveTab();
+	}
+	else
+	{
+		active = active.concat(this.elementB.getActiveTab());
+	}
+
+	return active;
 };
 
 //Close actual tab if it's closeable

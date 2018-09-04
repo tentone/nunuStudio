@@ -68,23 +68,6 @@ function TabElement(parent, closeable, container, index, title, icon)
 	 * @type {Boolean}
 	 */
 	this.active = false;
-
-	/**
-	 * Indicates if the tab is currently on focus.
-	 *
-	 * @property focused
-	 * @type {Boolean}
-	 */
-	this.focused = false;
-
-	this.element.onmouseenter = function()
-	{
-		self.focused = true;
-	};
-	this.element.onmouseleave = function()
-	{
-		self.focused = false;
-	};
 }
 
 TabElement.prototype = Object.create(Element.prototype);

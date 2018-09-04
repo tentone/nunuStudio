@@ -71,6 +71,23 @@ function TabGroup(parent, placement)
 	 * @type {Array}
 	 */
 	this.options = [];
+
+	/**
+	 * Indicates if the tab is currently on focus.
+	 *
+	 * @property focused
+	 * @type {Boolean}
+	 */
+	this.focused = false;
+
+	this.element.onmouseenter = function()
+	{
+		self.focused = true;
+	};
+	this.element.onmouseleave = function()
+	{
+		self.focused = false;
+	};
 }
 
 TabGroup.TOP = 0;
