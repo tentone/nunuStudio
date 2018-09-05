@@ -304,7 +304,7 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
  * Get tab from tab type and attached object is there is any.
  *
  * @method getTab
- * @param {Type} type Type of tab to look for.
+ * @param {Constructor} type Type of tab to look for.
  * @param {Object} obj Object attached to the tab.
  */
 TabGroup.prototype.getTab = function(type, obj)
@@ -323,7 +323,13 @@ TabGroup.prototype.getTab = function(type, obj)
 	return null;
 };
 
-//Remove tab from group
+/**
+ * Remove tab from group.
+ *
+ * @method removeTab
+ * @param {Number} index Index of tab to look for.
+ * @param {Boolean} dontDestroy If true the element is not destroyed.
+ */
 TabGroup.prototype.removeTab = function(index, dontDestroy)
 {	
 	//If index is an object get the actual index
