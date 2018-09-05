@@ -83,31 +83,48 @@ function TabButtonNew(parent, tab)
 		this.style.borderTop = null;
 
 		var uuid = event.dataTransfer.getData("uuid");
-		var index = event.dataTransfer.getData("tab");
 		var tab = DragBuffer.get(uuid);
-			
 
-		if(tab.container === self.tab.container)
+		if(tab instanceof TabElement)
 		{
-			index = parseInt(index);
+			//In the same container
+			if(tab.container === self.tab.container)
+			{
+				var index = event.dataTransfer.getData("tab");
+				index = parseInt(index);
 
-			if(index !== self.tab.index)
-			{	
+				if(index !== self.tab.index)
+				{	
+					//Before
+					if(dragState === 1)
+					{
+						self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
+					}
+					//After
+					else if(dragState === 2)
+					{
+						self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
+					}
+					
+					DragBuffer.pop(uuid);
+				}
+			}
+			//From another container
+			else
+			{
 				//Before
 				if(dragState === 1)
 				{
-					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
+					self.tab.container.attachTab(tab, self.tab.index);
 				}
 				//After
 				else if(dragState === 2)
 				{
-					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
+					self.tab.container.attachTab(tab, self.tab.index + 1);
 				}
+				
+				DragBuffer.pop(uuid);
 			}
-		}
-		else
-		{
-			self.tab.container.attachTab(tab);
 		}
 	};
 

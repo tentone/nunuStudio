@@ -72,6 +72,12 @@ function TabGroupNew(parent, placement)
 			{
 				self.split(TabGroup.BOTTOM).attachTab(tab);
 			}
+			else
+			{
+				self.attachTab(tab);
+			}
+
+			DragBuffer.pop(uuid);
 		}
 
 		if(self.tab.element.contains(self.tabArea))

@@ -13,6 +13,8 @@ function TabGroup(parent, placement)
 {
 	Element.call(this, parent, "div");
 
+	var self = this;
+
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
@@ -21,7 +23,20 @@ function TabGroup(parent, placement)
 	//Buttons
 	this.buttons = new Division(this);
 	this.buttons.element.style.backgroundColor = Editor.theme.barColor;
-	
+	this.buttons.element.ondrop = function(event)
+	{
+		event.preventDefault();
+
+		var uuid = event.dataTransfer.getData("uuid");
+		var tab = DragBuffer.get(uuid);
+
+		if(tab instanceof TabElement)
+		{
+			self.attachTab(tab);
+			DragBuffer.pop(uuid);
+		}
+	};
+
 	//Tab
 	this.tab = new Division(this);
 
