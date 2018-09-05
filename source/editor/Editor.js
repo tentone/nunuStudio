@@ -704,27 +704,27 @@ Editor.initialize = function()
 			}
 			else if(key === Keyboard.Z)
 			{
-				if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
+				/*if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
 				{
 					return;
-				}
+				}*/
 				Editor.undo();
 			}
 			else if(key === Keyboard.Y)
 			{
-				if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
+				/*if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
 				{
 					return;
-				}
+				}*/
 				Editor.redo();
 			}
 		}
 		else if(key === Keyboard.DEL)
 		{
-			if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
+			/*if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
 			{
 				return;
-			}
+			}*/
 
 			if(Editor.hasObjectSelected())
 			{
@@ -1034,10 +1034,16 @@ Editor.createDefaultResouces = function()
 //Select tool to manipulate objects
 Editor.selectTool = function(tool)
 {
-	var tab = Editor.gui.tab.getActiveTab();
-	if(tab instanceof SceneEditor)
+	var tabs = Editor.gui.tab.getActiveTab();
+
+	for(var i = 0; i < tabs.length; i++)
 	{
-		tab.selectTool(tool);
+		var tab = tabs[i];
+	
+		if(tab instanceof SceneEditor)
+		{
+			tab.selectTool(tool);
+		}
 	}
 };
 
@@ -1066,15 +1072,6 @@ Editor.updateValuesGUI = function()
 //Update tabs after changing selection
 Editor.updateSelectionGUI = function()
 {
-	//Center tab ground
-	Editor.gui.tab.updateMetadata();
-	var tab = Editor.gui.tab.getActiveTab();
-	if(tab !== null)
-	{
-		tab.updateSelection();
-	}
-
-	//Bottom tab group
 	Editor.gui.tab.updateMetadata();
 	Editor.gui.tab.updateSelection();
 	Editor.gui.treeView.updateSelection();

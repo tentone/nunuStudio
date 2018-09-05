@@ -849,16 +849,22 @@ function MainMenu(parent)
 	this.run.updateInterface();
 	this.run.setOnClick(function()
 	{
-		var tab = Editor.gui.tab.getActiveTab();
-		if(tab instanceof SceneEditor)
+		var tabs = Editor.gui.tab.getActiveTab();
+		
+		for(var i = 0; i < tabs.length; i++)
 		{
-			if(tab.state === SceneEditor.EDITING)
+			var tab = tabs[i];
+		
+			if(tab instanceof SceneEditor)
 			{
-				tab.setState(SceneEditor.TESTING);
-			}
-			else if(tab.state === SceneEditor.TESTING)
-			{
-				tab.setState(SceneEditor.EDITING);
+				if(tab.state === SceneEditor.EDITING)
+				{
+					tab.setState(SceneEditor.TESTING);
+				}
+				else if(tab.state === SceneEditor.TESTING)
+				{
+					tab.setState(SceneEditor.EDITING);
+				}
 			}
 		}
 	});

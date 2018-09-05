@@ -27,15 +27,15 @@ function ProfilingTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Frame");
-	this.frame = this.form.addText("123");
+	this.frame = this.form.addText("");
 	this.form.nextRow();
 
 	this.form.addText("Points");
-	this.points = this.form.addText("123");
+	this.points = this.form.addText("");
 	this.form.nextRow();
 
 	this.form.addText("Vertices");
-	this.vertices = this.form.addText("123");
+	this.vertices = this.form.addText("");
 	this.form.nextRow();
 
 	this.form.updateInterface();
@@ -45,17 +45,22 @@ ProfilingTab.prototype = Object.create(TabElement.prototype);
 
 ProfilingTab.prototype.update = function()
 {
-	var tab = Editor.gui.tab.getActiveTab();
-
-	if(tab.renderer !== undefined)
+	var tabs = Editor.gui.tab.getActiveTab();
+	
+	for(var i = 0; i < tabs.length; i++)
 	{
-		var info = tab.renderer.info;
+		var tab = tabs[i];
 
-		this.calls.setText(info.render.calls);
-		this.faces.setText(info.render.faces);
-		this.frame.setText(info.render.frame);
-		this.points.setText(info.render.points);
-		this.vertices.setText(info.render.vertices);
+		if(tab.renderer !== undefined)
+		{
+			var info = tab.renderer.info;
+
+			this.calls.setText(info.render.calls);
+			this.faces.setText(info.render.faces);
+			this.frame.setText(info.render.frame);
+			this.points.setText(info.render.points);
+			this.vertices.setText(info.render.vertices);
+		}
 	}
 };
 
@@ -69,4 +74,3 @@ ProfilingTab.prototype.updateSize = function()
 	this.canvas.size.set(Number.parseInt(this.dual.divB.element.style.width), Number.parseInt(this.dual.divB.element.style.height));
 	this.canvas.updateInterface();
 };
-

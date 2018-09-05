@@ -97,10 +97,15 @@ function ProgramPanel(parent, obj)
 	{
 		Editor.history.add(new ChangeAction(self.obj, "antialiasing", self.antialiasing.getValue()));
 		
-		var tab = Editor.gui.tab.getActiveTab();
-		if(tab instanceof SceneEditor)
+		var tabs = Editor.gui.tab.getActiveTab();
+		
+		for(var i = 0; i < tabs.length; i++)
 		{
-			tab.reloadContext();
+			var tab = tabs[i];		
+			if(tab instanceof SceneEditor)
+			{
+				tab.reloadContext();
+			}
 		}
 	});
 	this.form.add(this.antialiasing);
@@ -177,18 +182,22 @@ function ProgramPanel(parent, obj)
 	});
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
-
 }
 
 ProgramPanel.prototype = Object.create(ObjectPanel.prototype);
 
 ProgramPanel.prototype.updateRenderer = function()
 {
-	var tab = Editor.gui.tab.getActiveTab();
+	var tabs = Editor.gui.tab.getActiveTab();
 	
-	if(tab instanceof SceneEditor)
+	for(var i = 0; i < tabs.length; i++)
 	{
-		tab.initializeRenderer();
+		var tab = tabs[i];
+
+		if(tab instanceof SceneEditor)
+		{
+			tab.initializeRenderer();
+		}
 	}
 };
 
