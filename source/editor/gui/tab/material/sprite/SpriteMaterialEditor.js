@@ -18,7 +18,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 	//Sky
 	this.previewForm.addText("Sky");
-	this.skyEnabled = new CheckBox(this.previewForm.element);
+	this.skyEnabled = new CheckBox(this.previewForm);
 	this.skyEnabled.size.set(15, 15);
 	this.skyEnabled.setValue(this.sky.visible);
 	this.skyEnabled.setOnChange(function()

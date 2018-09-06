@@ -10,7 +10,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	
 	//Test model
 	this.previewForm.addText("Model");
-	this.testModel = new DropdownList(this.previewForm.element);
+	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
 	for(var i = 0; i < MaterialEditor.geometries.length; i++)
 	{

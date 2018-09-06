@@ -87,7 +87,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	
 	//Test model
 	this.previewForm.addText("Model");
-	this.testModel = new DropdownList(this.previewForm.element);
+	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
 	for(var i = 0; i < MaterialEditor.geometries.length; i++)
 	{
@@ -103,7 +103,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//Sky
 	this.previewForm.addText("Sky");
-	this.skyEnabled = new CheckBox(this.previewForm.element);
+	this.skyEnabled = new CheckBox(this.previewForm);
 	this.skyEnabled.size.set(15, 15);
 	this.skyEnabled.setValue(this.sky.visible);
 	this.skyEnabled.setOnChange(function()
@@ -115,7 +115,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//Point Light
 	this.previewForm.addText("Point Light");
-	this.lightEnabled = new CheckBox(this.previewForm.element);
+	this.lightEnabled = new CheckBox(this.previewForm);
 	this.lightEnabled.size.set(15, 15);
 	this.lightEnabled.setValue(this.pointLight.visible);
 	this.lightEnabled.setOnChange(function()
@@ -127,7 +127,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//Ambient Light
 	this.previewForm.addText("Ambient Light");
-	this.ambientLightEnabled = new CheckBox(this.previewForm.element);
+	this.ambientLightEnabled = new CheckBox(this.previewForm);
 	this.ambientLightEnabled.size.set(15, 15);
 	this.ambientLightEnabled.setValue(this.ambientLight.visible);
 	this.ambientLightEnabled.setOnChange(function()

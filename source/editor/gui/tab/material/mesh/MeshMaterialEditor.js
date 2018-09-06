@@ -24,7 +24,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	
 	//Test model
 	this.previewForm.addText("Model");
-	this.testModel = new DropdownList(this.previewForm.element);
+	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
 	for(var i = 0; i < MaterialEditor.geometries.length; i++)
 	{
@@ -40,7 +40,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 
 	//Sky
 	this.previewForm.addText("Sky");
-	this.skyEnabled = new CheckBox(this.previewForm.element);
+	this.skyEnabled = new CheckBox(this.previewForm);
 	this.skyEnabled.size.set(15, 15);
 	this.skyEnabled.setValue(this.sky.visible);
 	this.skyEnabled.setOnChange(function()
@@ -55,7 +55,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	this.previewForm.addText("Enabled");
-	this.lightEnabled = new CheckBox(this.previewForm.element);
+	this.lightEnabled = new CheckBox(this.previewForm);
 	this.lightEnabled.size.set(15, 15);
 	this.lightEnabled.setValue(this.pointLight.visible);
 	this.lightEnabled.setOnChange(function()
@@ -66,7 +66,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	this.previewForm.addText("Color");
-	this.pointLightColor = new ColorChooser(this.previewForm.element);
+	this.pointLightColor = new ColorChooser(this.previewForm);
 	this.pointLightColor.size.set(80, 18);
 	this.pointLightColor.setOnChange(function()
 	{
@@ -80,7 +80,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	this.previewForm.addText("Enabled");
-	this.ambientLightEnabled = new CheckBox(this.previewForm.element);
+	this.ambientLightEnabled = new CheckBox(this.previewForm);
 	this.ambientLightEnabled.size.set(15, 15);
 	this.ambientLightEnabled.setValue(this.ambientLight.visible);
 	this.ambientLightEnabled.setOnChange(function()
@@ -91,7 +91,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	this.previewForm.addText("Color");
-	this.ambientLightColor = new ColorChooser(this.previewForm.element);
+	this.ambientLightColor = new ColorChooser(this.previewForm);
 	this.ambientLightColor.size.set(80, 18);
 	this.ambientLightColor.setOnChange(function()
 	{

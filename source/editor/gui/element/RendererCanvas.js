@@ -5,12 +5,26 @@
  *
  * The renderer is automatically updated to match the canvas size, it also handles the device pixel ratio.
  * 
+ * Configuration object
+ * {
+ * 	precision: "highp",
+ * 	alpha: true,
+ * 	premultipliedAlpha: true,
+ * 	preserveDrawingBuffer: false,
+ * 	powerPreference: "high-performance",
+ * 	logarithmicDepthBuffer: false
+ * }
+ *
  * @class RendererCanvas
  * @extends {Element}
+ * @param {DOM} parent Parent element.
+ * @param {Object} configuration THREE.WebGlRenderer configuration.
  */
-function RendererCanvas(parent)
+function RendererCanvas(parent, configuration)
 {
 	Element.call(this, parent, "div");
+
+	this.configuration = configuration !== undefined ? configuration : RendererCanvas.defaultConfiguration;
 
 	/**
 	 * On resize callback, called every time the container is updated.
@@ -39,6 +53,22 @@ function RendererCanvas(parent)
 }
 
 RendererCanvas.prototype = Object.create(Element.prototype);
+
+/**
+ * Default configuration for the renderer.
+ * 
+ * @method defaultConfiguration
+ * @type {Object}
+ */
+RendererCanvas.defaultConfiguration =
+{
+	precision: "highp",
+	alpha: true,
+	premultipliedAlpha: true,
+	preserveDrawingBuffer: false,
+	powerPreference: "high-performance",
+	logarithmicDepthBuffer: false
+};
 
 /**
  * Set on resize callback, can be usefull to update cameras and other screen space dependent objects.
@@ -88,7 +118,7 @@ RendererCanvas.prototype.createRenderer = function()
 	
 	//var context = this.canvas.getContext("webgl2");
 	var context = null;
-	
+
 	this.renderer = new THREE.WebGLRenderer(
 	{
 		canvas: this.canvas,

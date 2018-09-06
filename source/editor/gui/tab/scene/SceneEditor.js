@@ -15,6 +15,7 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Canvas
 	this.canvas = null;
+	this.configuration = RendererCanvas.defaultConfiguration
 	this.resetCanvas();
 
 	//Raycaster
