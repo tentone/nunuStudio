@@ -1,7 +1,7 @@
 "use strict";
 
 //Object moved in the object tree.
-function MovedAction(object, newParent, newIndex)
+function MovedAction(object, newParent, newIndex, keepGlobalPose)
 {
 	Action.call(this);
 	
@@ -12,6 +12,8 @@ function MovedAction(object, newParent, newIndex)
 
 	this.newParent = newParent;
 	this.newIndex = newIndex;
+
+	this.keepGlobalPose = keepGlobalPose !== undefined ? keepGlobalPose : true;
 }
 
 MovedAction.prototype.apply = function()
@@ -28,6 +30,11 @@ MovedAction.prototype.apply = function()
 		var children = this.newParent.children;
 		children.splice(this.newIndex, 0, this.object);
 		this.object.parent = this.newParent;
+	}
+
+	if(keepGlobalPose)
+	{
+		
 	}
 
 	MovedAction.updateGUI(this.object, this.oldParent, this.newParent, this.newIndex);
