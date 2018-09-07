@@ -22,20 +22,7 @@ MovedAction.prototype.apply = function()
 	
 	if(this.keepGlobalPose)
 	{
-		var matrix = this.object.matrix;
-
-		//Apply world matrix to object (calculate transform as if it was on the root)
-		matrix.multiplyMatrices(this.oldParent.matrixWorld, matrix);
-
-		//Get inverse of the world matrix of the new parent
-		var inverse = new THREE.Matrix4();
-		inverse.getInverse(this.newParent.matrixWorld);
-
-		//Apply inverse transform to the object matrix
-		matrix.multiplyMatrices(inverse, matrix);
-
-		//Decompose matrix into components
-		matrix.decompose(this.object.position, this.object.quaternion, this.object.scale);
+		this.inverseTransform(this.oldParent, this.newParent);
 	}
 
 	if(this.newIndex === undefined)
@@ -57,6 +44,11 @@ MovedAction.prototype.apply = function()
 MovedAction.prototype.revert = function()
 {
 	this.newParent.remove(this.object);
+
+	if(this.keepGlobalPose)
+	{
+		this.inverseTransform(this.newParent, this.oldParent);
+	}
 
 	var children = this.oldParent.children;
 	children.splice(this.oldIndex, 0, this.object);
