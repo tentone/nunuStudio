@@ -20,6 +20,24 @@ MovedAction.prototype.apply = function()
 {
 	this.oldParent.remove(this.object);
 	
+	if(this.keepGlobalPose)
+	{
+		var matrix = this.object.matrix;
+
+		//Apply world matrix to object (calculate transform as if it was on the root)
+		matrix.multiplyMatrices(this.oldParent.matrixWorld, matrix);
+
+		//Get inverse of the world matrix of the new parent
+		var inverse = new THREE.Matrix4();
+		inverse.getInverse(this.newParent.matrixWorld);
+
+		//Apply inverse transform to the object matrix
+		matrix.multiplyMatrices(inverse, matrix);
+
+		//Decompose matrix into components
+		matrix.decompose(this.object.position, this.object.quaternion, this.object.scale);
+	}
+
 	if(this.newIndex === undefined)
 	{
 		this.newParent.add(this.object);
@@ -32,10 +50,6 @@ MovedAction.prototype.apply = function()
 		this.object.parent = this.newParent;
 	}
 
-	if(keepGlobalPose)
-	{
-		
-	}
 
 	MovedAction.updateGUI(this.object, this.oldParent, this.newParent, this.newIndex);
 };
@@ -49,6 +63,24 @@ MovedAction.prototype.revert = function()
 	this.object.parent = this.oldParent;
 
 	MovedAction.updateGUI(this.object, this.newParent, this.oldParent, this.oldIndex);
+};
+
+MovedAction.prototype.inverseTransform = function(oldParent, newParent)
+{
+	var matrix = this.object.matrix;
+
+	//Apply world matrix to object (calculate transform as if it was on the root)
+	matrix.multiplyMatrices(oldParent.matrixWorld, matrix);
+
+	//Get inverse of the world matrix of the new parent
+	var inverse = new THREE.Matrix4();
+	inverse.getInverse(newParent.matrixWorld);
+
+	//Apply inverse transform to the object matrix
+	matrix.multiplyMatrices(inverse, matrix);
+
+	//Decompose matrix into components
+	matrix.decompose(this.object.position, this.object.quaternion, this.object.scale);
 };
 
 MovedAction.updateGUI = function(object, oldParent, newParent, newIndex)
