@@ -4,32 +4,29 @@
  * A canvas element that also contains a thee.js webgl renderer object.
  *
  * The renderer is automatically updated to match the canvas size, it also handles the device pixel ratio.
- * 
- * Configuration object
- * {
- * 	precision: "highp",
- * 	alpha: true,
- * 	premultipliedAlpha: true,
- * 	preserveDrawingBuffer: false,
- * 	powerPreference: "high-performance",
- * 	logarithmicDepthBuffer: false
- * }
  *
  * @class RendererCanvas
  * @extends {Element}
  * @param {DOM} parent Parent element.
- * @param {Object} configuration THREE.WebGlRenderer configuration.
+ * @param {Boolean} alpha If true the background is transparent.
  */
-function RendererCanvas(parent, configuration)
+function RendererCanvas(parent, alpha)
 {
 	Element.call(this, parent, "div");
 
-	this.configuration = configuration !== undefined ? configuration : RendererCanvas.defaultConfiguration;
+	/**
+	 * Indicated if the background of the canvas is transparent or not.
+	 *
+	 * @attribute alpha
+	 * @type {Boolean}
+	 */
+	this.alpha = alpha !== undefined ? alpha : false;
 
 	/**
 	 * On resize callback, called every time the container is updated.
 	 *
 	 * @attribute onResize
+	 * @type {Function}
 	 */
 	this.onResize = null;
 
@@ -53,22 +50,6 @@ function RendererCanvas(parent, configuration)
 }
 
 RendererCanvas.prototype = Object.create(Element.prototype);
-
-/**
- * Default configuration for the renderer.
- * 
- * @method defaultConfiguration
- * @type {Object}
- */
-RendererCanvas.defaultConfiguration =
-{
-	precision: "highp",
-	alpha: true,
-	premultipliedAlpha: true,
-	preserveDrawingBuffer: false,
-	powerPreference: "high-performance",
-	logarithmicDepthBuffer: false
-};
 
 /**
  * Set on resize callback, can be usefull to update cameras and other screen space dependent objects.
@@ -115,7 +96,8 @@ RendererCanvas.prototype.resetCanvas = function()
 RendererCanvas.prototype.createRenderer = function()
 {
 	var settings = Editor.settings.render.followProject ? Editor.program : Editor.settings.render;
-	
+	var config = this.configuration;
+
 	//var context = this.canvas.getContext("webgl2");
 	var context = null;
 
@@ -124,7 +106,7 @@ RendererCanvas.prototype.createRenderer = function()
 		canvas: this.canvas,
 		context: context,
 		precision: "highp",
-		alpha: true,
+		alpha: this.alpha,
 		premultipliedAlpha: true,
 		antialias: settings.antialiasing,
 		preserveDrawingBuffer: false,
