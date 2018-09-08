@@ -139,6 +139,18 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.add(this.transformationSpace);
 	this.form.nextRow();
 
+	//Tranformations space
+	this.form.addText("Keep pose move").setAltText("Recalculate the object transformation to keep its global position when it is moved.");
+	this.keepTransformMove = new CheckBox(this.form);
+	this.keepTransformMove.size.set(15, 15);
+	this.keepTransformMove.setOnChange(function()
+	{
+		Editor.settings.editor.keepTransformMove = self.keepTransformMove.getValue();
+		Editor.gui.panelContainer.updateSelection();
+	});
+	this.form.add(this.keepTransformMove);
+	this.form.nextRow();
+
 	//Blank Space
 	this.form.addText("");
 	this.form.nextRow();
