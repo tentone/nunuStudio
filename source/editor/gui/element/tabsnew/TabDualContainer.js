@@ -79,10 +79,15 @@ TabDualContainer.prototype.getActiveTab = function()
 //Close actual tab if it's closeable
 TabDualContainer.prototype.closeActual = function()
 {
-	//TODO <USE GROUP ON FOCUS>
+	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
+	{
+		this.elementA.closeActual();
+	}
 
-	//this.elementA.closeActual();
-	//this.elementB.closeActual();
+	if(!(this.elementB instanceof TabGroup) || this.elementB.focused)
+	{
+		this.elementB.closeActual();
+	}
 };
 
 //Select tab
@@ -95,26 +100,34 @@ TabDualContainer.prototype.selectTab = function(tab)
 //Select next tab
 TabDualContainer.prototype.selectNextTab = function()
 {
-	//TODO <USE GROUP ON FOCUS>
+	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
+	{
+		this.elementA.selectNextTab();
+	}
 
-	this.elementA.selectNextTab();
-	this.elementB.selectNextTab();
+	if(!(this.elementB instanceof TabGroup) || this.elementB.focused)
+	{
+		this.elementB.selectNextTab();
+	}
 };
 
 //Select previous tab
 TabDualContainer.prototype.selectPreviousTab = function()
 {
-	//TODO <USE GROUP ON FOCUS>
+	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
+	{
+		this.elementA.selectPreviousTab();
+	}
 
-	this.elementA.selectPreviousTab();
-	this.elementB.selectPreviousTab();
+	if(!(this.elementB instanceof TabGroup) || this.elementB.focused)
+	{
+		this.elementB.selectPreviousTab();
+	}
 };
 
 //Add new option to tab group
 TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 {
-	//TODO <USE GROUP ON FOCUS>
-
 	var tab = this.elementA.addTab(TabConstructor, closeable);
 	if(tab === null)
 	{
@@ -134,20 +147,6 @@ TabDualContainer.prototype.getTab = function(type, obj)
 	}
 
 	return tab;
-};
-
-//Remove all tabs
-TabDualContainer.prototype.clear = function(forceAll)
-{
-	this.group.clear();
-};
-
-//Remove tab from group
-TabDualContainer.prototype.removeTab = function(index)
-{
-	console.warn("nunuStudio: TODO implement removeTab.");
-	
-	return null;
 };
 
 //Remove all tabs
