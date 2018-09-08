@@ -337,29 +337,45 @@ function TreeElement(container)
 	{
 		event.preventDefault();
 
+		if(DragBuffer.buffer[0] instanceof TabElement)
+		{
+			return;
+		}
+
 		if(!self.object.locked)
 		{
-			//Above
-			if(event.layerY < 5)
+			//Object drag
+			if(DragBuffer.buffer[0] instanceof THREE.Object3D)
 			{
-				if(state !== 1)
+				//Above
+				if(event.layerY < 5)
 				{
-					state = 1;
+					if(state !== 1)
+					{
+						state = 1;
+						self.clearBorder();
+						this.style.borderTop = "thin solid #999999";
+					}
+				}
+				//Bellow
+				else if(event.layerY > 15)
+				{
+					if(state !== 2)
+					{
+						state = 2;
+						self.clearBorder();
+						this.style.borderBottom = "thin solid #999999";
+					}
+				}
+				//Inside
+				else if(state !== 3)
+				{
+					state = 3;
 					self.clearBorder();
-					this.style.borderTop = "thin solid #999999";
+					this.style.border = "thin solid #999999";
 				}
 			}
-			//Bellow
-			else if(event.layerY > 15)
-			{
-				if(state !== 2)
-				{
-					state = 2;
-					self.clearBorder();
-					this.style.borderBottom = "thin solid #999999";
-				}
-			}
-			//Inside
+			//Resources, files, etc
 			else if(state !== 3)
 			{
 				state = 3;
