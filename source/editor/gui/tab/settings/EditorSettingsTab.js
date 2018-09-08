@@ -376,9 +376,9 @@ EditorSettingsTab.prototype.activate = function()
 	this.filePreviewSize.setValue(Editor.settings.general.filePreviewSize);
 	this.showUUID.setValue(Editor.settings.general.showUUID);
 	this.showType.setValue(Editor.settings.general.showType);
+	this.showStats.setValue(Editor.settings.general.showStats);
 	
 	//Editor
-	this.showStats.setValue(Editor.settings.general.showStats);
 	this.snap.setValue(Editor.settings.editor.snap);
 	this.snapAngle.setValue(Editor.settings.editor.snapAngle);
 	this.gridEnabled.setValue(Editor.settings.editor.gridEnabled);
@@ -404,5 +404,6 @@ EditorSettingsTab.prototype.activate = function()
 	this.cameraPreviewPosition.setValue(Editor.settings.editor.cameraPreviewPosition);
 
 	//Transformations
+	this.keepTransformMove.setValue(Editor.settings.editor.keepTransformMove);
 	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
 };

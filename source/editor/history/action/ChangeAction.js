@@ -39,6 +39,7 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
 	if(object instanceof THREE.Object3D)
 	{
 		Editor.gui.treeView.updateInterface();
+		
 		//TODO <3D OBJECT GUI>
 	}
 	else if(object instanceof THREE.Material)
