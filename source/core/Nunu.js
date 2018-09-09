@@ -76,7 +76,30 @@ Nunu.getVRDisplays = function(getDisplay)
 	});
 };
 
-/** 
+/**
+ * Create a web worker from code written in a string.
+ *
+ * Uses a blob to inject the code and loads it from and URL object.
+ *
+ * @method createWorker
+ * @param {String} code Javascript code for this worker.
+ * @param {Function} onMessage On message worker callback.
+ * @return {Worker} Returns a worker instance (for comunication).
+ */
+Nunu.createWorker = function(code, onMessage)
+{
+	var blob = new Blob([code], {type: "application/javascript"});
+	var worker = new Worker(URL.createObjectURL(blob));
+
+	if(onMessage !== undefined)
+	{
+		worker.onmessage = onMessage;
+	}
+	
+	return worker;
+};
+
+/**
  * Check if host supports WebAudio.
  *
  * @method webAudioAvailable
