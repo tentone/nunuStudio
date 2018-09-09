@@ -19,7 +19,7 @@ function VirtualClipboard()
 VirtualClipboard.prototype.set = function(data, id)
 {
 	this.values[id] = data;
-
+	VirtualClipboard.copy(data);
 };
 
 /**
