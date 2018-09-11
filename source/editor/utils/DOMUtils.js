@@ -33,9 +33,7 @@ DOMUtils.isVisible = function(element)
 		left += element.offsetLeft;
 	}
 
-	var value = top >= window.pageYOffset && left >= window.pageXOffset && (top + height) <= (window.pageYOffset + window.innerHeight) && (left + width) <= (window.pageXOffset + window.innerWidth);
-
-	return value;
+	return value = top >= window.pageYOffset && left >= window.pageXOffset && (top + height) <= (window.pageYOffset + window.innerHeight) && (left + width) <= (window.pageXOffset + window.innerWidth);
 };
 
 /**
