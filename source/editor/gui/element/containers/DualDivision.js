@@ -14,7 +14,7 @@ function DualDivision(parent)
 	//Division B
 	this.divB = new Element(this, "div");
 	this.divB.element.style.backgroundColor = Editor.theme.panelColor;
-
+	
 	//Resize tab
 	this.resizeTab = document.createElement("div");
 	this.resizeTab.style.position = "absolute";

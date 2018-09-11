@@ -16,6 +16,11 @@ function DOMUtils(){}
  */
 DOMUtils.isVisible = function(element)
 {
+	if(element.isElement === true)
+	{
+		element = element.element;
+	}
+
 	var top = element.offsetTop;
 	var left = element.offsetLeft;
 	var width = element.offsetWidth;
@@ -28,7 +33,9 @@ DOMUtils.isVisible = function(element)
 		left += element.offsetLeft;
 	}
 
-	return top >= window.pageYOffset && left >= window.pageXOffset && (top + height) <= (window.pageYOffset + window.innerHeight) && (left + width) <= (window.pageXOffset + window.innerWidth);
+	var value = top >= window.pageYOffset && left >= window.pageXOffset && (top + height) <= (window.pageYOffset + window.innerHeight) && (left + width) <= (window.pageXOffset + window.innerWidth);
+
+	return value;
 };
 
 /**
@@ -42,6 +49,11 @@ DOMUtils.isVisible = function(element)
  */
 DOMUtils.checkBorder = function(element)
 {
+	if(element.isElement === true)
+	{
+		element = element.element;
+	}
+
 	var top = element.offsetTop;
 	var left = element.offsetLeft;
 	var width = element.offsetWidth;
