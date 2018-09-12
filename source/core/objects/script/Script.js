@@ -93,7 +93,7 @@ Script.prototype = Object.create(THREE.Group.prototype);
  * @attribute DEFAULT
  * @type {String}
  */
-Script.DEFAULT = "function initialize()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nfunction update()\n{\n	//TODO <UPDATE CODE>\n}\n";
+Script.DEFAULT = "function initialize()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nfunction update(delta)\n{\n	//TODO <UPDATE CODE>\n}\n";
 
 /**
  * List of methods that a script can implement.

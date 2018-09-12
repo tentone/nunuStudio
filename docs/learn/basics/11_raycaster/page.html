@@ -105,6 +105,12 @@ function update()
 			<div>
 				<canvas id="raycaster" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
+			<p>A simpler way to use the raycaster is to declare a onMouseOver(intersects) method in the script. This method is automatically called when the mouse is over one of the children of that script.</p>
+			<pre><code>function onMouseOver(intersects)
+{
+	console.log(intersects);
+}
+</code></pre>
 
 		</div>
 	</section>
