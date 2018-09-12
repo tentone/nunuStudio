@@ -321,7 +321,13 @@
 											<div id="method_buttonDoubleClicked" class="method item">
 												<h3 class="name"><code>buttonDoubleClicked</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>button</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">Boolean</span>
@@ -346,6 +352,23 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">button</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Button to check status of</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -642,7 +665,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Canvas to be used for coordinates calculation relative to that canvas.</p>
+													<p>Element to be used for coordinates calculation relative to that canvas.</p>
 											
 												</div>
 											
@@ -920,7 +943,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates.</p>
+													<p>Canvas attached to this mouse instance used to calculate position and delta in element space coordinates.</p>
 											
 												</div>
 											
@@ -975,7 +998,7 @@
 											</div>
 											<div id="property_doubleClicked" class="property item">
 												<h3 class="name"><code>doubleClicked</code></h3>
-												<span class="type">Boolean</span>
+												<span class="type">Array</span>
 											
 											
 											
@@ -989,7 +1012,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Indicates if some button of the mouse was just double clicked.</p>
+													<p>Indicates a button of the mouse was double clicked.</p>
 											
 												</div>
 											

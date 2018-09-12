@@ -5008,8 +5008,8 @@
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
             "line": 54,
-            "description": "Indicates if some button of the mouse was just double clicked.",
-            "type": "{Boolean}",
+            "description": "Indicates a button of the mouse was double clicked.",
+            "type": "{Array}",
             "itemtype": "property",
             "name": "doubleClicked",
             "class": "Mouse",
@@ -5028,7 +5028,7 @@
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
             "line": 70,
-            "description": "Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates.",
+            "description": "Canvas attached to this mouse instance used to calculate position and delta in element space coordinates.",
             "type": "{DOM}",
             "itemtype": "property",
             "name": "canvas",
@@ -5037,7 +5037,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 198,
+            "line": 202,
             "description": "LEFT mouse button",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -5047,7 +5047,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 204,
+            "line": 208,
             "description": "MIDDLE mouse button",
             "itemtype": "attribute",
             "name": "MIDDLE",
@@ -5057,7 +5057,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 210,
+            "line": 214,
             "description": "RIGHT mouse button",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -5067,8 +5067,8 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 217,
-            "description": "Canvas to be used for coordinates calculation relative to that canvas.",
+            "line": 221,
+            "description": "Element to be used for coordinates calculation relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
             "params": [
@@ -5083,7 +5083,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 240,
+            "line": 244,
             "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -5096,7 +5096,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 256,
+            "line": 255,
             "description": "Set mouse lock state.",
             "itemtype": "method",
             "name": "setLock",
@@ -5112,7 +5112,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 299,
+            "line": 298,
             "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -5132,10 +5132,17 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 311,
+            "line": 310,
             "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
+            "params": [
+                {
+                    "name": "button",
+                    "description": "Button to check status of",
+                    "type": "Number"
+                }
+            ],
             "return": {
                 "description": "True if some mouse button was just double clicked",
                 "type": "Boolean"
@@ -5246,7 +5253,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 448,
+            "line": 449,
             "description": "Dispose mouse events.",
             "itemtype": "method",
             "name": "dispose",
