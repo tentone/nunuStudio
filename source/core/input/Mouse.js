@@ -17,7 +17,7 @@ function Mouse(domElement)
 	this._delta = new THREE.Vector2(0, 0);
 	this._wheel = 0;
 	this._wheelUpdated = false;
-	this._doubleClicked = false;
+	this._doubleClicked = new Array(3);
 
 	/**
 	 * Array with mouse buttons status.
@@ -33,7 +33,7 @@ function Mouse(domElement)
 	 * @type {Vector2}
 	 * @property position
 	 */
-	this.position = new THREE.Vector2(0,0);
+	this.position = new THREE.Vector2(0, 0);
 
 	/**
 	 * Mouse movement (coordinates in window space).
@@ -41,7 +41,7 @@ function Mouse(domElement)
 	 * @type {Vector2}
 	 * @property delta
 	 */
-	this.delta = new THREE.Vector2(0,0);
+	this.delta = new THREE.Vector2(0, 0);
 
 	/**
 	 * Mouse scroll wheel movement.
@@ -52,12 +52,12 @@ function Mouse(domElement)
 	this.wheel = 0;
 	
 	/**
-	 * Indicates if some button of the mouse was just double clicked.
+	 * Indicates a button of the mouse was double clicked.
 	 *
-	 * @type {Boolean}
+	 * @type {Array}
 	 * @property doubleClicked
 	 */
-	this.doubleClicked = false;
+	this.doubleClicked = new Array(3);
 
 	/**
 	 * DOM element where to attach the mouse events.
@@ -68,7 +68,7 @@ function Mouse(domElement)
 	this.domElement = (domElement !== undefined) ? domElement : window;
 
 	/**
-	 * Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates.
+	 * Canvas attached to this mouse instance used to calculate position and delta in element space coordinates.
 	 *
 	 * @type {DOM}
 	 * @property canvas
@@ -81,6 +81,8 @@ function Mouse(domElement)
 	//Initialize key instances
 	for(var i = 0; i < 3; i++)
 	{
+		this._doubleClicked[i] = false;
+		this.doubleClicked[i] = false;
 		this._keys[i] = new Key();
 		this.keys[i] = new Key();
 	}
@@ -96,7 +98,7 @@ function Mouse(domElement)
 		{
 			self._wheel = event.deltaY;
 			self._wheelUpdated = true;
-			event.preventDefault();
+			//event.preventDefault();
 		});
 	}
 	else if(window.addEventListener !== undefined)
@@ -106,7 +108,7 @@ function Mouse(domElement)
 		{
 			self._wheel = event.detail * 30;
 			self._wheelUpdated = true;
-			event.preventDefault();
+			//event.preventDefault();
 		});
 	}
 	else
@@ -115,12 +117,12 @@ function Mouse(domElement)
 		{
 			self._wheel = event.deltaY;
 			self._wheelUpdated = true;
-			event.preventDefault();
+			//event.preventDefault();
 		});
 	}
 
 	//Touchscreen input events
-	if("ontouchstart" in window || navigator.msMaxTouchPoints > 0)
+	if(window.ontouchstart !== undefined || navigator.msMaxTouchPoints > 0)
 	{
 		//Auxiliar variables to calculate touch delta
 		var lastTouch = new Vector2(0, 0);
@@ -185,8 +187,10 @@ function Mouse(domElement)
 
 	//Mouse double click
 	this.events.add(this.domElement, "dblclick", function(event)
-	{
-		self._doubleClicked = true;
+	{	
+		console.log(event);
+
+		self._doubleClicked[event.which - 1] = true;
 	});
 
 	this.events.create();
@@ -215,23 +219,23 @@ Mouse.MIDDLE = 1;
 Mouse.RIGHT = 2;
 
 /**
- * Canvas to be used for coordinates calculation relative to that canvas.
+ * Element to be used for coordinates calculation relative to that canvas.
  * 
  * @method setCanvas
  * @param {DOM} canvas Canvas to be attached to the Mouse instance
  */
-Mouse.setCanvas = function(canvas)
+Mouse.setCanvas = function(element)
 {
-	this.canvas = canvas;
+	this.canvas = element;
 
-	canvas.mouseInside = false;
+	element.mouseInside = false;
 
-	canvas.addEventListener("mouseenter", function()
+	element.addEventListener("mouseenter", function()
 	{
 		this.mouseInside = true;
 	});
 
-	canvas.addEventListener("mouseleave", function()
+	element.addEventListener("mouseleave", function()
 	{
 		this.mouseInside = false;
 	});
@@ -245,12 +249,7 @@ Mouse.setCanvas = function(canvas)
  */
 Mouse.insideCanvas = function()
 {
-	if(this.canvas === null)
-	{
-		return false;
-	}
-	
-	return this.canvas.mouseInside;
+	return this.canvas !== null && this.canvas.mouseInside;
 };
 
 /**
@@ -312,11 +311,12 @@ Mouse.buttonPressed = function(button)
  * Check if Mouse button was double clicked.
  * 
  * @method buttonDoubleClicked
+ * @param {Number} button Button to check status of
  * @return {boolean} True if some mouse button was just double clicked
  */
-Mouse.buttonDoubleClicked = function()
+Mouse.buttonDoubleClicked = function(button)
 {
-	return this.doubleClicked;
+	return this.doubleClicked[button];
 };
 
 /**
@@ -394,7 +394,7 @@ Mouse.updateKey = function(button, action)
 Mouse.update = function()
 {
 	//Update mouse keys state
-	for(var i = 0; i < this._keys.length; i++)
+	for(var i = 0; i < 3; i++)
 	{
 		if(this._keys[i].justPressed && this.keys[i].justPressed)
 		{
@@ -404,7 +404,19 @@ Mouse.update = function()
 		{
 			this._keys[i].justReleased = false;
 		}
+
 		this.keys[i].set(this._keys[i].justPressed, this._keys[i].pressed, this._keys[i].justReleased);
+
+		//Update mouse double click
+		if(this._doubleClicked[i] === true)
+		{
+			this.doubleClicked[i] = true;
+			this._doubleClicked[i] = false;
+		}
+		else
+		{
+			this.doubleClicked[i] = false;
+		}
 	}
 
 	//Update mouse wheel
@@ -416,17 +428,6 @@ Mouse.update = function()
 	else
 	{
 		this.wheel = 0;
-	}
-
-	//Update mouse double click
-	if(this._doubleClicked)
-	{
-		this.doubleClicked = true;
-		this._doubleClicked = false;
-	}
-	else
-	{
-		this.doubleClicked = false;
 	}
 
 	//Update mouse Position if needed

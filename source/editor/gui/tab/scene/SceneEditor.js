@@ -459,7 +459,7 @@ SceneEditor.prototype.update = function()
 				
 				if(Editor.selection.length > 0)
 				{
-					if(this.mouse.buttonDoubleClicked() || this.keyboard.keyJustPressed(Keyboard.F))
+					if(this.mouse.buttonDoubleClicked(Mouse.LEFT) || this.keyboard.keyJustPressed(Keyboard.F))
 					{
 						if(Editor.selection[0].isObject3D === true)
 						{
@@ -471,7 +471,7 @@ SceneEditor.prototype.update = function()
 			else
 			{
 				//If mouse double clicked select object
-				if(this.mouse.buttonDoubleClicked())
+				if(this.mouse.buttonDoubleClicked(Mouse.LEFT))
 				{
 					this.selectObjectWithMouse();
 				}
@@ -574,7 +574,7 @@ SceneEditor.prototype.render = function()
 		{
 			var code = this.orientation.raycast(this.mouse, this.canvas);
 			
-			if(code !== null && (this.mouse.buttonDoubleClicked() || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
+			if(code !== null && (this.mouse.buttonDoubleClicked(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
 			{
 				this.controls.setOrientation(code);
 			}
