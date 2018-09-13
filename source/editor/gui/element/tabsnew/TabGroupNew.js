@@ -302,6 +302,21 @@ TabGroupNew.prototype.collapse = function()
 	}
 };
 
+//Attach tab to this group and remove it from the original group
+TabGroupNew.prototype.attachTab = function(tab, insertIndex)
+{	
+	var container = tab.container;
+
+	var tab = TabGroup.prototype.attachTab.call(this, tab, insertIndex);
+
+	if(container.options.length === 0)
+	{
+		container.collapse();
+	}
+
+	return tab;
+};
+
 TabGroupNew.prototype.removeTab = function(index, dontDestroy)
 {
 	TabGroup.prototype.removeTab.call(this, index, dontDestroy);
