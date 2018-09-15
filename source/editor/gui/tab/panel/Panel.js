@@ -15,7 +15,7 @@ function Panel(parent, obj)
 	this.attach(obj);
 	this.preventDragEvents();
 
-	this.form = new Form(this);
+	this.form = new TableForm(this);
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
 }

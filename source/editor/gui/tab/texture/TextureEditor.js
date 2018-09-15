@@ -53,8 +53,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.sprite.position.set(0, 0, -1);
 	this.scene.add(this.sprite);
 
-	//Form
-	this.form = new Form(this.division.divB);
+	this.form = new TableForm(this.division.divB);
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
 
@@ -315,6 +314,5 @@ TextureEditor.prototype.updateSize = function()
 	this.canvas.size.copy(this.division.divA.size);
 	this.canvas.updateInterface();
 
-	//Form
 	this.form.updateInterface();
 }

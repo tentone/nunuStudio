@@ -2,7 +2,7 @@
 
 function PassNode(parent, name)
 {
-	Form.call(this, parent);
+	TableForm.call(this, parent);
 
 	this.element.style.overflow = "hidden"; 
 	

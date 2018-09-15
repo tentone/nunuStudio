@@ -45,8 +45,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.updateCamera();
 	this.scene.add(this.camera);
 
-	//Form
-	this.form = new Form(this.main.divB);
+	this.form = new TableForm(this.main.divB);
 	this.form.defaultTextWidth = 80;
 	this.form.position.set(10, 8);
 	this.form.spacing.set(10, 5);

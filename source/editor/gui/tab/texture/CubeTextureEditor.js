@@ -36,8 +36,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	//Texture
 	this.texture = null;
 
-	//Form
-	this.form = new Form(this.division.divB);
+	this.form = new TableForm(this.division.divB);
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
 

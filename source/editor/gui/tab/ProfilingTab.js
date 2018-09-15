@@ -12,8 +12,7 @@ function ProfilingTab(parent, closeable, container, index)
 	//Canvas
 	this.canvas = new Canvas(this.dual.divB);
 	
-	//Form
-	this.form = new Form(this.dual.divA);
+	this.form = new TableForm(this.dual.divA);
 
 	this.form.addText("Renderer");
 	this.form.nextRow();

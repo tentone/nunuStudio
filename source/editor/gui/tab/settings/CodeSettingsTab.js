@@ -9,8 +9,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Self pointer
 	var self = this;
 
-	//Form
-	this.form = new Form(this);
+	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 125;
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);

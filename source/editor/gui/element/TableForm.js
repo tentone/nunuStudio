@@ -1,13 +1,13 @@
 "use strict";
 
 /**
- * FormNew element automatically organizes element into a grid like form.
+ * Table form element automatically organizes element into a grid like form.
  * 
- * @class FormNew
+ * @class TableForm
  * @extends {Element}
  * @param {Element} parent Parent element.
  */
-function FormNew(parent)
+function TableForm(parent)
 {
 	Element.call(this, parent, "div");
 
@@ -22,10 +22,14 @@ function FormNew(parent)
 	this.defaultTextWidth = 80;
 }
 
-FormNew.prototype = Object.create(Element.prototype);
+TableForm.prototype = Object.create(Element.prototype);
 
-//Add a element to form (in actual row)
-FormNew.prototype.add = function(elem)
+/**
+ * Add a element to form (in actual row)-
+ *
+ * @method add
+ */
+TableForm.prototype.add = function(elem)
 {
 	if(this.rows.length > 0)
 	{
@@ -39,8 +43,12 @@ FormNew.prototype.add = function(elem)
 	}
 };
 
-//Create text element
-FormNew.prototype.addText = function(text, fit)
+/**
+ * Create text element.
+ *
+ * @method addText
+ */
+TableForm.prototype.addText = function(text, fit)
 {
 	var element = new Text(this);
 	element.setAlignment(Text.LEFT);
@@ -52,8 +60,12 @@ FormNew.prototype.addText = function(text, fit)
 	return element;
 };
 
-//Create division
-FormNew.prototype.addDivision = function(x, y)
+/**
+ * Create division.
+ *
+ * @method addDivision
+ */
+TableForm.prototype.addDivision = function(x, y)
 {
 	var division = new Division(this);
 	division.size.set(x, y);
@@ -62,14 +74,22 @@ FormNew.prototype.addDivision = function(x, y)
 	return division;
 };
 
-//Add new row to form
-FormNew.prototype.nextRow = function()
+/**
+ * Add new row to form.
+ *
+ * @method nextRow
+ */
+TableForm.prototype. = function()
 {
 	this.rows.push([]);
 };
 
-//Add last row from form
-FormNew.prototype.removeLastRow = function()
+/**
+ * Remove last row from form.
+ *
+ * @method removeLastRow
+ */
+TableForm.prototype.removeLastRow = function()
 {
 	if(this.rows.length > 0)
 	{
@@ -82,8 +102,12 @@ FormNew.prototype.removeLastRow = function()
 	}
 };
 
-//Clear all elements from form
-FormNew.prototype.removeAll = function()
+/**
+ * Clear all elements from form.
+ *
+ * @method removeAll
+ */
+TableForm.prototype.removeAll = function()
 {
 	for(var i = 0; i < this.rows.length; i++)
 	{
@@ -97,13 +121,14 @@ FormNew.prototype.removeAll = function()
 	this.rows.push([]);
 };
 
-FormNew.prototype.updateSize = function()
+TableForm.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
 	//Position tracker and size
 	var x = 0, y = 0;
-	var size = this.size.set(0, 0);
+	this.size.set(0, 0);
+	var size = this.size;
 
 	//Updated attached elements
 	for(var i = 0; i < this.rows.length; i++)

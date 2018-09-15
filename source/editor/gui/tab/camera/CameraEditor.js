@@ -22,8 +22,7 @@ function CameraEditor(parent, closeable, container, index)
 	//Self pointer
 	var self = this;
 
-	//Form
-	this.form = new Form(this.main.divB);
+	this.form = new TableForm(this.main.divB);
 	this.form.defaultTextWidth = 80;
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
@@ -92,7 +91,7 @@ function CameraEditor(parent, closeable, container, index)
 	addRenderPassButton("Copy", CopyPass);
 	self.form.nextRow();
 
-	this.postNodes = new Form(this.form);
+	this.postNodes = new TableForm(this.form);
 	this.form.add(this.postNodes);
 	this.form.nextRow();
 }
@@ -198,7 +197,6 @@ CameraEditor.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	//Form
 	this.form.updateInterface();
 
 	//Main

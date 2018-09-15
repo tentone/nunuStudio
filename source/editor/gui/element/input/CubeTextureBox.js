@@ -50,8 +50,7 @@ function CubeTextureBox(parent)
 		event.preventDefault();
 	};
 
-	//Form
-	this.form = new Form(this);
+	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 60;
 	this.form.spacing.set(10, 5);
 

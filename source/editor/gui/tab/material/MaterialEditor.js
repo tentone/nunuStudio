@@ -62,7 +62,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.scene.add(this.interactive);
 
 	//Preview configuration
-	this.previewForm = new Form(this.preview.divB);
+	this.previewForm = new TableForm(this.preview.divB);
 	this.previewForm.position.set(10, 5);
 	this.previewForm.spacing.set(5, 5);
 
@@ -70,8 +70,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.previewForm.addText("Configuration");
 	this.previewForm.nextRow();
 
-	//Form
-	this.form = new Form(this.main.divB);
+	this.form = new TableForm(this.main.divB);
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
 	this.form.defaultTextWidth = 100;
@@ -350,6 +349,5 @@ MaterialEditor.prototype.updateSize = function()
 	//Preview form
 	this.previewForm.updateInterface();
 
-	//Form
 	this.form.updateInterface();
 };

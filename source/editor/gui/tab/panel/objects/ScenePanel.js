@@ -80,7 +80,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	//Linear fog properties
-	this.fogLinearForm = new Form(this.form);
+	this.fogLinearForm = new TableForm(this.form);
 	this.fogLinearForm.spacing.set(5, 5);
 
 	//Linear fog color
@@ -123,7 +123,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	//Exponential fog properties
-	this.fogExponentialForm = new Form(this.form);
+	this.fogExponentialForm = new TableForm(this.form);
 	this.fogExponentialForm.spacing.set(5, 5);
 
 	//Exponential fog color

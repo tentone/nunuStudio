@@ -75,7 +75,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.scene.add(this.ambientLight);
 	
 	//Preview configuration
-	this.previewForm = new Form(this.preview.divB);
+	this.previewForm = new TableForm(this.preview.divB);
 	this.previewForm.position.set(10, 5);
 	this.previewForm.spacing.set(5, 5);
 	this.previewForm.addText("Configuration");
@@ -147,8 +147,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.general.setIcon(Editor.filePath + "icons/misc/material.png");
 	this.general.setName("Material");
 
-	//Form
-	this.form = new Form(this.general.element);
+	this.form = new TableForm(this.general.element);
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
 
@@ -326,7 +325,6 @@ ShaderMaterialEditor.prototype.updateSize = function()
 	//Preview form
 	this.previewForm.updateInterface();
 
-	//Form
 	this.form.updateInterface();
 
 	//Fragment editor

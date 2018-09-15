@@ -6,8 +6,7 @@ function TextureBox(parent)
 
 	this.element.style.overflow = "visible";
 	
-	//Form
-	this.form = new Form(this);
+	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 60;
 	this.form.spacing.set(10, 5);
 
@@ -130,7 +129,6 @@ TextureBox.prototype.updateSize = function()
 {
 	TextureChooser.prototype.updateSize.call(this);
 
-	//Form
 	this.form.position.set(this.size.y + 5, 0);
 	this.form.size.set(this.size.x - this.form.position.x, this.size.y)
 	this.form.visible = this.visible;
