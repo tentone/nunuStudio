@@ -132,7 +132,7 @@ function TabButtonNew(parent, tab)
 	this.element.ondragover = function(event)
 	{
 		if(self.tab.container.placement === TabGroup.TOP || self.tab.container.placement === TabGroup.BOTTOM)
-		{
+		{	
 			if(event.layerX > self.size.x * 0.8 || event.target !== this)
 			{
 				if(dragState !== 2)

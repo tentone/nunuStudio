@@ -52,23 +52,27 @@ function TabGroupNew(parent, placement)
 
 		if(tab instanceof TabElement)
 		{
+			var position = DOMUtils.getPosition(self.element);
+			var x = event.clientX - position.x;
+			var y = event.clientY - position.y;
+
 			//Left
-			if(event.offsetX < self.size.x * self.dragBorder)
+			if(x < self.size.x * self.dragBorder)
 			{
 				self.split(TabGroup.LEFT).attachTab(tab);
 			}
 			//Right
-			else if(event.offsetX > self.size.x * (1 - self.dragBorder))
+			else if(x > self.size.x * (1 - self.dragBorder))
 			{
 				self.split(TabGroup.RIGHT).attachTab(tab);
 			}
 			//Top
-			else if(event.offsetY < self.size.y * self.dragBorder)
+			else if(y < self.size.y * self.dragBorder)
 			{
 				self.split(TabGroup.TOP).attachTab(tab);
 			}
 			//Bottom
-			else if(event.offsetY > self.size.y * (1 - self.dragBorder))
+			else if(y > self.size.y * (1 - self.dragBorder))
 			{
 				self.split(TabGroup.BOTTOM).attachTab(tab);
 			}
@@ -96,8 +100,12 @@ function TabGroupNew(parent, placement)
 			return;
 		}
 
+		var position = DOMUtils.getPosition(self.element);
+		var x = event.clientX - position.x;
+		var y = event.clientY - position.y;
+
 		//Left
-		if(event.offsetX < self.size.x * self.dragBorder)
+		if(x < self.size.x * self.dragBorder)
 		{
 			self.tabArea.style.right = null;
 			self.tabArea.style.bottom = null;
@@ -112,7 +120,7 @@ function TabGroupNew(parent, placement)
 			}
 		}
 		//Right
-		else if(event.offsetX > self.size.x * (1 - self.dragBorder))
+		else if(x > self.size.x * (1 - self.dragBorder))
 		{
 			self.tabArea.style.left = null;
 			self.tabArea.style.bottom = null;
@@ -127,7 +135,7 @@ function TabGroupNew(parent, placement)
 			}
 		}
 		//Top
-		else if(event.offsetY < self.size.y * self.dragBorder)
+		else if(y < self.size.y * self.dragBorder)
 		{
 			self.tabArea.style.right = null;
 			self.tabArea.style.bottom = null;
@@ -142,7 +150,7 @@ function TabGroupNew(parent, placement)
 			}
 		}
 		//Bottom
-		else if(event.offsetY > self.size.y * (1 - self.dragBorder))
+		else if(y > self.size.y * (1 - self.dragBorder))
 		{
 			self.tabArea.style.top = null;
 			self.tabArea.style.right = null;

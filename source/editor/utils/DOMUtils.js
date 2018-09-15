@@ -37,6 +37,33 @@ DOMUtils.isVisible = function(element)
 };
 
 /**
+ * Get position of the dom element in the client window.
+ *
+ * @method getPosition
+ * @param {DOM} element DOM element to test.
+ */
+DOMUtils.getPosition = function(element)
+{
+	if(element.isElement === true)
+	{
+		element = element.element;
+	}
+
+	var top = element.offsetTop;
+	var left = element.offsetLeft;
+
+	while(element.offsetParent)
+	{
+		element = element.offsetParent;
+		top += element.offsetTop;
+		left += element.offsetLeft;
+	}
+
+	return {x: left, y: top};
+};
+
+
+/**
  * Check if a DOM element is out of the window and how far it is, returns object with x and y values.
  * 
  * If the value is 0 the element is inside the window on that axis.
