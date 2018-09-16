@@ -11,7 +11,7 @@ function Form(parent)
 {
 	Element.call(this, parent, "div");
 
-	//TODO <ADD CODE HERE>
+	this.categories = [];
 }
 
 Form.prototype = Object.create(Element.prototype);

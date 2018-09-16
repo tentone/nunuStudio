@@ -74,7 +74,7 @@ function PassNode(parent, name)
 	});
 }
 
-PassNode.prototype = Object.create(Form.prototype);
+PassNode.prototype = Object.create(TableForm.prototype);
 
 PassNode.passes = {};
 

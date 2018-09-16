@@ -96,7 +96,7 @@ TableForm.prototype.addDivision = function(x, y)
  *
  * @method nextRow
  */
-TableForm.prototype. = function()
+TableForm.prototype.nextRow = function()
 {
 	this.rows.push([]);
 };

@@ -15,6 +15,7 @@ function FormCategory(parent)
 {
 	Element.call(this, parent, "div");
 
+	
 	//TODO <ADD CODE HERE>
 }
 
