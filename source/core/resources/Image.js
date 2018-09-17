@@ -162,18 +162,32 @@ Image.prototype.hasTransparency = function()
  */
 Image.prototype.compressJPEG = function(quality)
 {
+	var image = document.createElement("img");
+	image.src = this.data;
+
+	var canvas = document.createElement("canvas");
+	canvas.width = image.width;
+	canvas.height = image.height;
+
+	var context = canvas.getContext("2d");
+	context.drawImage(image, 0, 0, image.width, image.height);
+
 	var self = this;
-	var blob = canvas.toBlob("image/jpeg", quality !== undefined ? quality : 0.7);
 
-	var reader = new FileReader();
-	reader.onload = function()
+	canvas.toBlob(function(blob)
 	{
-		self.encoding = "jpeg";
-		self.format = "arraybuffer";
-		self.data = reader.result;
-	};
+		var reader = new FileReader();
+		
+		reader.onload = function()
+		{
+			self.encoding = "jpeg";
+			self.format = "arraybuffer";
+			self.data = reader.result;
+		};
 
-	reader.readAsArrayBuffer(blob);
+		reader.readAsArrayBuffer(blob);
+
+	}, "image/jpeg", quality !== undefined ? quality : 0.7);
 };
 
 /**
