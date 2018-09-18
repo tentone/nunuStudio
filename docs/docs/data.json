@@ -5037,7 +5037,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 202,
+            "line": 198,
             "description": "LEFT mouse button",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -5047,7 +5047,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 208,
+            "line": 204,
             "description": "MIDDLE mouse button",
             "itemtype": "attribute",
             "name": "MIDDLE",
@@ -5057,7 +5057,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 214,
+            "line": 210,
             "description": "RIGHT mouse button",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -5067,7 +5067,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 221,
+            "line": 217,
             "description": "Element to be used for coordinates calculation relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -5083,7 +5083,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 244,
+            "line": 240,
             "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -5096,7 +5096,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 255,
+            "line": 251,
             "description": "Set mouse lock state.",
             "itemtype": "method",
             "name": "setLock",
@@ -5112,7 +5112,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 298,
+            "line": 294,
             "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -5132,7 +5132,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 310,
+            "line": 306,
             "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
@@ -5152,7 +5152,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 322,
+            "line": 318,
             "description": "Check if a mouse button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -5172,7 +5172,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 334,
+            "line": 330,
             "description": "Check if a mouse button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -5192,7 +5192,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 346,
+            "line": 342,
             "description": "Update mouse position.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updatePosition",
@@ -5223,7 +5223,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 372,
+            "line": 368,
             "description": "Update a mouse button.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updateKey",
@@ -5244,7 +5244,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 389,
+            "line": 385,
             "description": "Update mouse buttons state, position, wheel and delta synchronously.",
             "itemtype": "method",
             "name": "update",
@@ -5253,7 +5253,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 449,
+            "line": 445,
             "description": "Dispose mouse events.",
             "itemtype": "method",
             "name": "dispose",
@@ -10719,7 +10719,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 179,
+            "line": 193,
             "description": "Serialize Image resource to json.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
