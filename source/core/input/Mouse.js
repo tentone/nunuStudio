@@ -154,9 +154,7 @@ function Mouse(domElement)
 		this.events.add(document.body, "touchmove", function(event)
 		{
 			var touch = event.touches[0];
-
 			self.updatePosition(touch.clientX, touch.clientY, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
-
 			lastTouch.set(touch.clientX, touch.clientY);
 		});
 	}
@@ -188,8 +186,6 @@ function Mouse(domElement)
 	//Mouse double click
 	this.events.add(this.domElement, "dblclick", function(event)
 	{	
-		console.log(event);
-
 		self._doubleClicked[event.which - 1] = true;
 	});
 
