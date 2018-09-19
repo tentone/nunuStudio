@@ -77,6 +77,31 @@ Nunu.getVRDisplays = function(getDisplay)
 };
 
 /**
+ * Get the query parameter from the browser URL.
+ *
+ * @method getQueryParameters
+ * @return {Object} Object with parameters read from the URL.
+ */
+Nunu.getQueryParameters = function()
+{
+	var values = location.search.substring(1).split("&");
+	var parameters = {};
+	for(var i = 0; i < values.length; i++)
+	{
+		var pair = values[i].split("=");
+		if(pair.length > 1)
+		{
+			var name = unescape(pair[0]).replace(new RegExp("\"", "g"), "");
+			var value = unescape(pair[1]).replace(new RegExp("\"", "g"), "");
+			parameters[name] = value;
+		}
+	}
+
+	return parameters;
+};
+
+
+/**
  * Create a web worker from code written in a string.
  *
  * Uses a blob to inject the code and loads it from and URL object.

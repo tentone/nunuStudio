@@ -132,6 +132,11 @@ function removeJSComments(code)
 	return code.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, "");
 }
 
+function removeLogs(code)
+{
+	return code.replace(/console\.(error|log|warn|info)(.*)\;/gi, "");
+}
+
 function join(path, main)
 {
 	var code = readFile(main);

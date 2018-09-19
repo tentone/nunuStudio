@@ -546,18 +546,13 @@ Editor.initialize = function()
 		
 		//Arguments
 		Editor.args = [];
-		var parameters = location.search.substring(1).split("&");
-		for(var i = 0; i < parameters.length; i++)
-		{
-			var entry = parameters[i].split("=")[1];
-			if(entry !== undefined)
-			{
-				entry = unescape(entry);
-				entry = entry.replace(new RegExp("\"", "g"), "");
-				Editor.args.push(entry);
-			}
-		}
 
+		var parameters = Nunu.getQueryParameters();
+		for(var i in parameters)
+		{
+			Editor.args.push(parameters[i]);
+		}
+		
 		//Prevent some key combinations
 		var allowedKeys = [67, 86, 65, 88];
 		document.onkeydown = function(event)
