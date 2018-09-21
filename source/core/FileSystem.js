@@ -18,6 +18,17 @@ try
 catch(e){}
 
 /**
+ * Check if a file corresponds to a remote location.
+ *
+ * @method isRemote
+ * @returns {Boolean} If the file is remote returns true, false otherwise.
+ */
+FileSystem.isRemote = function(fname)
+{
+	return fname.startsWith("http");
+};
+
+/**
  * Read file content as text.
  *
  * @method readFile
@@ -108,7 +119,7 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress)
 	}
 
 	//NodeJS
-	if(FileSystem.fs !== undefined)
+	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(file))
 	{
 		if(sync)
 		{
@@ -193,7 +204,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
 	}
 	
 	//NodeJS
-	if(FileSystem.fs !== undefined)
+	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(file))
 	{
 		if(sync)
 		{

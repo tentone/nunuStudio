@@ -699,29 +699,41 @@ Editor.initialize = function()
 			}
 			else if(key === Keyboard.Z)
 			{
-				/*if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
+				var tabs = Editor.gui.tab.getActiveTab();
+				for(var i = 0; i < tabs.length; i++)
 				{
-					return;
-				}*/
+					if(tabs[i] instanceof CodeEditor)
+					{
+						return;
+					}
+				}
 				
 				Editor.undo();
 			}
 			else if(key === Keyboard.Y)
 			{
-				/*if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
+				var tabs = Editor.gui.tab.getActiveTab();
+				for(var i = 0; i < tabs.length; i++)
 				{
-					return;
-				}*/
+					if(tabs[i] instanceof CodeEditor)
+					{
+						return;
+					}
+				}
 
 				Editor.redo();
 			}
 		}
 		else if(key === Keyboard.DEL)
 		{
-			/*if(Editor.gui.tab.getActiveTab() instanceof CodeEditor)
+			var tabs = Editor.gui.tab.getActiveTab();
+			for(var i = 0; i < tabs.length; i++)
 			{
-				return;
-			}*/
+				if(tabs[i] instanceof CodeEditor)
+				{
+					return;
+				}
+			}
 
 			if(Editor.hasObjectSelected())
 			{
