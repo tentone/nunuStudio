@@ -27,7 +27,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	});
 	this.previewForm.add(this.skyEnabled);
 	this.previewForm.nextRow();
-
+	
 	//Color
 	this.form.addText("Color");
 	this.color = new ColorChooser(this.form);

@@ -4,44 +4,44 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Material", Editor.filePath + "icons/misc/material.png");
 
-	//Self pointer
 	var self = this;
 
-	//Main container
-	this.main = new DualDivision(this);
-	this.main.setOnResize(function()
-	{
-		self.updateInterface();
-	});
-	this.main.tabPosition = 0.5;
-	this.main.tabPositionMin = 0.05;
-	this.main.tabPositionMax = 0.95;
-
-	//Preview division
-	this.preview = new DualDivision(this.main.divA);
-	this.preview.setOnResize(function()
-	{
-		self.updateInterface();
-	});
-	this.preview.orientation = DualDivision.VERTICAL;
-	this.preview.tabPosition = 0.8;
-	this.preview.tabPositionMin = 0.05;
-	this.preview.tabPositionMax = 0.95;
-
-	//Division style
-	this.preview.divA.element.style.overflow = "hidden";
-	this.preview.divA.element.style.backgroundColor = Editor.theme.panelColor;
-	this.main.divB.element.style.overflow = "auto";
-	this.main.divB.element.style.backgroundColor = Editor.theme.panelColor;
-	this.preview.divB.element.style.overflow = "auto";
-
+	//Preview configuration
+	this.previewForm = new TableForm();
+	this.previewForm.position.set(10, 5);
+	this.previewForm.spacing.set(5, 5);
+	this.previewForm.addText("Configuration");
+	this.previewForm.nextRow();
+	
 	//Canvas
-	this.canvas = new RendererCanvas(this.preview.divA);
+	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
 		self.camera.aspect = x / y;
 		self.camera.updateProjectionMatrix();
 	});
+
+	//Preview division
+	this.preview = new DualContainer();
+	this.preview.orientation = DualDivision.VERTICAL;
+	this.preview.tabPosition = 0.8;
+	this.preview.tabPositionMin = 0.05;
+	this.preview.tabPositionMax = 0.95;
+	this.preview.attachA(this.canvas);
+	this.preview.attachB(this.previewForm);
+
+	//Tab container
+	this.tab = new TabGroup();
+	this.tab.element.style.backgroundColor = Editor.theme.barColor;
+	this.tab.buttonSize.set(150, 25);
+
+	//Main container
+	this.main = new DualContainer(this);
+	this.main.tabPosition = 0.5;
+	this.main.tabPositionMin = 0.05;
+	this.main.tabPositionMax = 0.95;
+	this.main.attachA(this.preview);
+	this.main.attachB(this.tab);
 
 	//Material UI File element
 	this.asset = null;
@@ -60,7 +60,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.interactive = new THREE.Object3D();
 	this.scene.add(this.interactive);
 	
-	//Preview scene
+	//Scene
 	this.sky = new Sky();
 	this.sky.visible = false;
 	this.scene.add(this.sky);
@@ -73,13 +73,6 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.ambientLight = new THREE.AmbientLight(0x555555);
 	this.ambientLight.visible = false;
 	this.scene.add(this.ambientLight);
-	
-	//Preview configuration
-	this.previewForm = new TableForm(this.preview.divB);
-	this.previewForm.position.set(10, 5);
-	this.previewForm.spacing.set(5, 5);
-	this.previewForm.addText("Configuration");
-	this.previewForm.nextRow();
 
 	//Mesh
 	this.mesh = new THREE.Mesh(MaterialEditor.geometries[0][1], null);
@@ -136,11 +129,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 	this.previewForm.add(this.ambientLightEnabled);
 	this.previewForm.nextRow();
-
-	//Tab container
-	this.tab = new TabGroup(this.main.divB);
-	this.tab.element.style.backgroundColor = Editor.theme.barColor;
-	this.tab.buttonSize.set(150, 25);
+	this.previewForm.updateInterface();
 
 	//General
 	this.general = this.tab.addTab(TabElement, false);
@@ -200,7 +189,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 		Editor.history.add(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
 		self.material.needsUpdate = true;
 	});
-	this.form.add(this.depthWrite );
+	this.form.add(this.depthWrite);
 	this.form.nextRow();
 
 	//Transparent
@@ -243,14 +232,11 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.wireframe);
 	this.form.nextRow();
+	this.form.updateInterface();
 
 	//Fragment tab
-	this.fragmentTab = this.tab.addTab(TabElement, false); 
-	this.fragmentTab.setIcon(Editor.filePath + "icons/misc/code.png");
-	this.fragmentTab.setName("Fragment");
-
-	//Fragment editor
-	this.fragmentShader = new CodeEditor(this.fragmentTab.element);
+	this.fragmentShader = this.tab.addTab(CodeEditor, false);
+	this.fragmentShader.setName("Fragment");
 	this.fragmentShader.setMode("glsl");
 	this.fragmentShader.setOnChange(function()
 	{
@@ -259,12 +245,8 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 
 	//Vertex tab
-	this.vertexTab = this.tab.addTab(TabElement, false);
-	this.vertexTab.setIcon(Editor.filePath + "icons/misc/code.png");
-	this.vertexTab.setName("Vertex");
-
-	//Vertex editor
-	this.vertexShader = new CodeEditor(this.vertexTab.element);
+	this.vertexShader = this.tab.addTab(CodeEditor, false);
+	this.vertexShader.setName("Vertex");
 	this.vertexShader.setMode("glsl");
 	this.vertexShader.setOnChange(function()
 	{
@@ -277,20 +259,17 @@ ShaderMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
 ShaderMaterialEditor.prototype.attach = function(material, asset)
 {
-	//Attach Material
 	this.mesh.material = material;
 
-	//Material asset
 	if(asset !== undefined)
 	{
 		this.asset = asset;
 	}
-	
-	//Store material
+
 	this.material = material;
 	this.updateMetadata();
 
-	//Generic material elements
+	//Base
 	this.name.setText(material.name);
 	this.side.setValue(material.side);
 	this.depthTest.setValue(material.depthTest);
@@ -298,6 +277,8 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 	this.transparent.setValue(material.transparent);
 	this.blending.setValue(material.blending);	
 	this.wireframe.setValue(material.wireframe);
+
+	//Shader
 	this.fragmentShader.setText(material.fragmentShader);
 	this.vertexShader.setText(material.vertexShader);
 };
@@ -306,34 +287,6 @@ ShaderMaterialEditor.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	//Main
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
-
-	//Preview
-	this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
-	this.preview.updateInterface();
-
-	//Canvas
-	this.canvas.size.copy(this.preview.divA.size);
-	this.canvas.updateInterface();
-
-	//Tab size
-	this.tab.size.set(this.size.x - this.canvas.size.x - 5, this.size.y);
-	this.tab.updateInterface();
-
-	//Preview form
-	this.previewForm.updateInterface();
-
-	this.form.updateInterface();
-
-	//Fragment editor
-	this.fragmentShader.size.copy(this.tab.size);
-	this.fragmentShader.updateSettings();
-	this.fragmentShader.updateInterface();
-
-	//Vertex editor
-	this.vertexShader.size.copy(this.tab.size);
-	this.vertexShader.updateSettings();
-	this.vertexShader.updateInterface();
 };

@@ -8,7 +8,6 @@ function OrthographicCameraPanel(parent, obj)
 	//Panel
 	ObjectPanel.call(this, parent, obj);
 
-	//Self pointer
 	var self = this;
 
 	//Size

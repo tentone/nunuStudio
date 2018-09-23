@@ -81,7 +81,6 @@ DualDivision.VERTICAL = 1;
 
 DualDivision.prototype = Object.create(Element.prototype);
 
-//Set container
 DualDivision.prototype.setOnResize = function(callback)
 {
 	this.onResize = callback;

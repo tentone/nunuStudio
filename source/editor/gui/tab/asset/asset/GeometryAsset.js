@@ -6,7 +6,6 @@ function GeometryAsset(parent)
 
 	this.setIcon(Editor.filePath + "icons/misc/scene.png");
 	
-	//Self pointer
 	var self = this;
 
 	//Image

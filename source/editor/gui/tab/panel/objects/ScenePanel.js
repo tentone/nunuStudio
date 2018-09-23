@@ -4,7 +4,6 @@ function ScenePanel(parent, obj)
 {
 	ObjectPanel.call(this, parent, obj);
 
-	//Self pointer
 	var self = this;
 
 	//Select scene as default

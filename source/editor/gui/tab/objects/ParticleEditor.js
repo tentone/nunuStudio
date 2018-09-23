@@ -15,7 +15,6 @@ function ParticleEditor(parent, closeable, container, index)
 	this.main.divB.element.style.cursor = "default";
 	this.main.divB.element.style.backgroundColor = Editor.theme.panelColor;
 
-	//Self pointer
 	var self = this;
 
 	//Canvas

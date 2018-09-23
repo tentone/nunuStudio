@@ -6,7 +6,6 @@ function AudioPlayer(parent)
 
 	this.element.style.overflow = "visible";
 
-	//Self pointer
 	var self = this;
 
 	//WebAudio context

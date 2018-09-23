@@ -6,7 +6,6 @@ function MaterialAsset(parent)
 
 	this.setIcon(Editor.filePath + "icons/misc/material.png");
 	
-	//Self pointer
 	var self = this;
 
 	//Use to store original material color on highlight

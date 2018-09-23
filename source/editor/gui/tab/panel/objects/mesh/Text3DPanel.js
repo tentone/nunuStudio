@@ -4,7 +4,6 @@ function Text3DPanel(parent, obj)
 {
 	DrawablePanel.call(this, parent, obj);
 
-	//Self pointer
 	var self = this;
 
 	function updateGeometry()

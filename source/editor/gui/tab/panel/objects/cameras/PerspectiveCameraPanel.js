@@ -8,7 +8,6 @@ function PerspectiveCameraPanel(parent, obj)
 	//Panel
 	ObjectPanel.call(this, parent, obj);
 
-	//Self pointer
 	var self = this;
 
 	//Fov

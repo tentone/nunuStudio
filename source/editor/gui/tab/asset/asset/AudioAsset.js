@@ -6,7 +6,6 @@ function AudioAsset(parent)
 
 	this.setIcon(Editor.filePath + "icons/misc/audio.png");
 	
-	//Self pointer
 	var self = this;
 
 	//Image

@@ -6,7 +6,6 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.element.style.overflow = "auto";
 
-	//Self pointer
 	var self = this;
 
 	this.form = new TableForm(this);

@@ -48,7 +48,6 @@ function TextureChooser(parent)
 	this.video.style.height = "100%";
 	this.preview.appendChild(this.video);
 
-	//Self pointer
 	var self = this;
 
 	//On drop get file dropped

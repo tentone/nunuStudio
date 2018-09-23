@@ -50,7 +50,6 @@ function DropdownMenu(parent)
 	this.optionsSize = new THREE.Vector2(150, 20);
 	this.options = [];
 
-	//Self pointer
 	var self = this;
 
 	//Mouse over

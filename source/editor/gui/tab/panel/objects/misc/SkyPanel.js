@@ -4,7 +4,6 @@ function SkyPanel(parent, obj)
 {
 	ObjectPanel.call(this, parent, obj);
 
-	//Self pointer
 	var self = this;
 
 	//Sky color

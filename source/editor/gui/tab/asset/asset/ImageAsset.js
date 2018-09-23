@@ -15,7 +15,6 @@ function ImageAsset(parent)
 
 	this.setIcon(Editor.filePath + "icons/misc/image.png");
 
-	//Self pointer
 	var self = this;
 
 	//Context menu event

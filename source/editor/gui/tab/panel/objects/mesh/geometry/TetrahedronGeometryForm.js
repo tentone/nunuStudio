@@ -5,7 +5,6 @@ function TetrahedronGeometryForm(form, obj)
 	this.form = form;
 	this.obj = obj;
 	
-	//Self pointer
 	var self = this;
 
 	//Update geometry function

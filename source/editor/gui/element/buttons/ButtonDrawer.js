@@ -25,7 +25,6 @@ function ButtonDrawer(parent)
 	this.optionsSpacing = new THREE.Vector2(3, 3);
 	this.expanded = false;
 
-	//Self pointer
 	var self = this;
 
 	//Mouse over and mouse out events

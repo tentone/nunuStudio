@@ -4,7 +4,6 @@ function ObjectPanel(parent, obj)
 {
 	Panel.call(this, parent, obj);
 
-	//Self pointer
 	var self = this;
 
 	//Name

@@ -6,7 +6,6 @@ function TextureAsset(parent)
 
 	this.setIcon(Editor.filePath + "icons/misc/texture.png");
 
-	//Self pointer
 	var self = this;
 
 	this.element.ondblclick = function()

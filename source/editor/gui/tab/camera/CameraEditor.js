@@ -19,7 +19,6 @@ function CameraEditor(parent, closeable, container, index)
 	//Canvas
 	this.canvas = new RendererCanvas(this.main.divA);
 
-	//Self pointer
 	var self = this;
 
 	this.form = new TableForm(this.main.divB);

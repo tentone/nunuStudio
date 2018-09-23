@@ -4,7 +4,6 @@ function ProgramPanel(parent, obj)
 {
 	ObjectPanel.call(this, parent, obj);
 
-	//Self pointer
 	var self = this;
 
 	//Program information

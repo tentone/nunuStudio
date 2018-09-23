@@ -6,7 +6,6 @@ function FileAsset(parent)
 
 	this.setIcon(Editor.filePath + "icons/misc/file.png");
 	
-	//Self pointer
 	var self = this;
 
 	//Image

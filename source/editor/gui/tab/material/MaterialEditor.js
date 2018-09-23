@@ -4,39 +4,10 @@ function MaterialEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Material", Editor.filePath + "icons/misc/material.png");
 
-	//Self pointer
 	var self = this;
 
-	//Main container
-	this.main = new DualDivision(this);
-	this.main.setOnResize(function()
-	{
-		self.updateInterface();
-	});
-	this.main.tabPosition = 0.5;
-	this.main.tabPositionMin = 0.05;
-	this.main.tabPositionMax = 0.95;
-
-	//Preview division
-	this.preview = new DualDivision(this.main.divA);
-	this.preview.setOnResize(function()
-	{
-		self.updateInterface();
-	});
-	this.preview.orientation = DualDivision.VERTICAL;
-	this.preview.tabPosition = 0.8;
-	this.preview.tabPositionMin = 0.3;
-	this.preview.tabPositionMax = 0.8;
-
-	//Division style
-	this.preview.divA.element.style.overflow = "hidden";
-	this.preview.divA.element.style.backgroundColor = Editor.theme.panelColor;
-	this.main.divB.element.style.overflow = "auto";
-	this.main.divB.element.style.backgroundColor = Editor.theme.panelColor;
-	this.preview.divB.element.style.overflow = "auto";
-
 	//Canvas
-	this.canvas = new RendererCanvas(this.preview.divA);
+	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
 		self.camera.aspect = x / y;
@@ -62,7 +33,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.scene.add(this.interactive);
 
 	//Preview configuration
-	this.previewForm = new TableForm(this.preview.divB);
+	this.previewForm = new TableForm();
 	this.previewForm.position.set(10, 5);
 	this.previewForm.spacing.set(5, 5);
 
@@ -70,7 +41,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.previewForm.addText("Configuration");
 	this.previewForm.nextRow();
 
-	this.form = new TableForm(this.main.divB);
+	//Form
+	this.form = new TableForm();
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
 	this.form.defaultTextWidth = 100;
@@ -204,16 +176,31 @@ function MaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.blending);
 	this.form.nextRow();
+
+	//Preview
+	this.preview = new DualContainer();
+	this.preview.orientation = DualDivision.VERTICAL;
+	this.preview.tabPosition = 0.8;
+	this.preview.tabPositionMin = 0.3;
+	this.preview.tabPositionMax = 0.8;
+	this.preview.attachA(this.canvas);
+	this.preview.attachB(this.previewForm);
+
+	//Main
+	this.main = new DualContainer(this);
+	this.main.tabPosition = 0.5;
+	this.main.tabPositionMin = 0.05;
+	this.main.tabPositionMax = 0.95;
+	this.main.attachA(this.preview);
+	this.main.attachB(this.form);
 }
 
 MaterialEditor.geometries = [
-	["Sphere", new THREE.SphereBufferGeometry(1, 32, 32)],
+	["Sphere", new THREE.SphereBufferGeometry(1, 40, 40)],
 	["Torus", new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64)],
 	["Cube", new THREE.BoxBufferGeometry(1, 1, 1, 1, 1, 1)],
 	["Torus Knot", new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],
-	["Cone", new THREE.ConeBufferGeometry(1, 2, 32)],
-	["Sphere HiPoly", new THREE.SphereBufferGeometry(1, 64, 64)],
-	["Cube HiPoly", new THREE.BoxBufferGeometry(1, 1, 1, 128, 128, 128)]
+	["Cone", new THREE.ConeBufferGeometry(1, 2, 32)]
 ];
 
 MaterialEditor.prototype = Object.create(TabElement.prototype);
@@ -334,20 +321,9 @@ MaterialEditor.prototype.updateSize = function()
 {	
 	TabElement.prototype.updateSize.call(this);
 
-	//Main
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
 
-	//Preview
-	this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
-	this.preview.updateInterface();
-
-	//Canvas
-	this.canvas.size.copy(this.preview.divA.size);
-	this.canvas.updateInterface();
-
-	//Preview form
 	this.previewForm.updateInterface();
-
 	this.form.updateInterface();
 };

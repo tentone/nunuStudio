@@ -33,7 +33,6 @@ function CubeTextureBox(parent)
 	this.img.style.height = "100%";
 	this.preview.appendChild(this.img);
 
-	//Self pointer
 	var self = this;
 
 	//On drop get file dropped
