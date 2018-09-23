@@ -8,8 +8,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//Preview configuration
 	this.previewForm = new TableForm();
-	this.previewForm.position.set(10, 5);
-	this.previewForm.spacing.set(5, 5);
+	this.previewForm.setAutoSize(false);
 	this.previewForm.addText("Configuration");
 	this.previewForm.nextRow();
 	
@@ -129,16 +128,14 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 	this.previewForm.add(this.ambientLightEnabled);
 	this.previewForm.nextRow();
-	this.previewForm.updateInterface();
 
 	//General
 	this.general = this.tab.addTab(TabElement, false);
 	this.general.setIcon(Editor.filePath + "icons/misc/material.png");
 	this.general.setName("Material");
 
-	this.form = new TableForm(this.general.element);
-	this.form.position.set(10, 5);
-	this.form.spacing.set(5, 5);
+	this.form = new TableForm(this.general);
+	this.form.setAutoSize(false);
 
 	//Name
 	this.form.addText("Name");
@@ -232,7 +229,6 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.wireframe);
 	this.form.nextRow();
-	this.form.updateInterface();
 
 	//Fragment tab
 	this.fragmentShader = this.tab.addTab(CodeEditor, false);
@@ -289,4 +285,7 @@ ShaderMaterialEditor.prototype.updateSize = function()
 
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
+
+	this.form.size.copy(this.general.size);
+	this.form.updateInterface();
 };

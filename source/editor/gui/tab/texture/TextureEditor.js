@@ -6,20 +6,10 @@ function TextureEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	this.Texture = null;
-
-	//Dual division
-	this.division = new DualDivision(this);
-	this.division.setOnResize(function()
-	{
-		self.updateInterface();
-	});
-	this.division.tabPosition = 0.5;
-	this.division.tabPositionMin = 0.3;
-	this.division.tabPositionMax = 0.7;
+	this.texture = null;
 
 	//Canvas
-	this.canvas = new RendererCanvas(this.division.divA);
+	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
 		self.camera.aspect = x / y;
@@ -39,13 +29,13 @@ function TextureEditor(parent, closeable, container, index)
 	alpha.wrapT = THREE.RepeatWrapping;
 	alpha.magFilter = THREE.Nearest;
 	alpha.minFilter = THREE.Nearest;
-	alpha.repeat.set(5, 5);
+	alpha.repeat.set(400, 400);
 	
 	var geometry = new THREE.PlaneBufferGeometry(1, 1);
 
 	this.background = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({map: alpha}));
 	this.background.position.set(0, 0, -2);
-	this.background.scale.set(2.5, 2.5, 0);
+	this.background.scale.set(200, 200, 0);
 	this.scene.add(this.background);
 	
 	//Plane geometry
@@ -53,12 +43,18 @@ function TextureEditor(parent, closeable, container, index)
 	this.sprite.position.set(0, 0, -1);
 	this.scene.add(this.sprite);
 
-	this.form = new TableForm(this.division.divB);
-	this.form.position.set(10, 5);
-	this.form.spacing.set(5, 5);
-
+	this.form = new TableForm();
+	this.form.setAutoSize(false);
 	this.form.addText("Texture Editor");
 	this.form.nextRow();
+
+	//Dual division
+	this.division = new DualContainer(this);
+	this.division.tabPosition = 0.5;
+	this.division.tabPositionMin = 0.1;
+	this.division.tabPositionMax = 0.9;
+	this.division.attachA(this.canvas);
+	this.division.attachB(this.form);
 
 	//Name
 	this.form.addText("Name");
@@ -295,24 +291,15 @@ TextureEditor.prototype.attach = function(texture)
 	this.updatePreview();
 };
 
-//Update
 TextureEditor.prototype.update = function()
 {
 	this.canvas.renderer.render(this.scene, this.camera);
-}
+};
 
-//Update
 TextureEditor.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	//Dual division
 	this.division.size.copy(this.size);
 	this.division.updateInterface();
-
-	//Canvas
-	this.canvas.size.copy(this.division.divA.size);
-	this.canvas.updateInterface();
-
-	this.form.updateInterface();
-}
+};

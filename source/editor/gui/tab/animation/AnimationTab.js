@@ -15,7 +15,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.animations = [];
 
 	//Bar
-	this.bar = new Element(this, "div");// document.createElement("div");
+	this.bar = new Element(this, "div");
 	this.bar.element.style.position = "absolute";
 	this.bar.element.style.height = "20px";
 	this.bar.element.style.width = "100%";
@@ -36,27 +36,49 @@ function AnimationTab(parent, closeable, container, index)
 				self.object.animations = [];
 			}
 
-			var clip = new AnimationClip("Animation" + self.object.animations.length, 10, []);
+			var clip = new AnimationClip("Animation" + self.object.animations.length, 3, []);
 			
-			var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
-			position.setInterpolation(THREE.InterpolateLinear);
-			position.setColor("#FF0000");
-			clip.tracks.push(position);
+			//Object 3D
+			if(self.object.isObject3D)
+			{
+				var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
+				position.setInterpolation(THREE.InterpolateLinear);
+				position.setColor("#FF0000");
+				clip.tracks.push(position);
 
-			var scale = new THREE.VectorKeyframeTrack(".scale", [0], self.object.scale.toArray());
-			scale.setInterpolation(THREE.InterpolateLinear);
-			scale.setColor("#00FF00");
-			clip.tracks.push(scale);
+				var scale = new THREE.VectorKeyframeTrack(".scale", [0], self.object.scale.toArray());
+				scale.setInterpolation(THREE.InterpolateLinear);
+				scale.setColor("#00FF00");
+				clip.tracks.push(scale);
 
-			var quaternion = new THREE.QuaternionKeyframeTrack(".quaternion", [0], self.object.quaternion.toArray());
-			quaternion.setInterpolation(THREE.InterpolateLinear);
-			quaternion.setColor("#0000FF");
-			clip.tracks.push(quaternion);
-			
-			var visible = new THREE.BooleanKeyframeTrack(".visible", [0], [self.object.visible]);
-			visible.setInterpolation(THREE.InterpolateDiscrete);
-			visible.setColor("#FFFF00");
-			clip.tracks.push(visible);
+				var quaternion = new THREE.QuaternionKeyframeTrack(".quaternion", [0], self.object.quaternion.toArray());
+				quaternion.setInterpolation(THREE.InterpolateLinear);
+				quaternion.setColor("#0000FF");
+				clip.tracks.push(quaternion);
+				
+				var visible = new THREE.BooleanKeyframeTrack(".visible", [0], [self.object.visible]);
+				visible.setInterpolation(THREE.InterpolateDiscrete);
+				visible.setColor("#FFFF00");
+				clip.tracks.push(visible);
+			}
+			//Material
+			else if(self.object.isMaterial)
+			{
+				if(self.object.color !== undefined)
+				{
+					console.log(self.object.color);
+
+					var color = new THREE.ColorKeyframeTrack(".color", [0], [self.object.color]);
+					color.setInterpolation(THREE.InterpolateLinear);
+					color.setColor("#00FF00");
+					clip.tracks.push(color);
+				}
+
+				var opacity = new THREE.NumberKeyframeTrack(".opacity", [0], [self.object.opacity]);
+				opacity.setInterpolation(THREE.InterpolateLinear);
+				opacity.setColor("#FF0000");
+				clip.tracks.push(opacity);
+			}
 
 			self.object.animations.push(clip);
 			self.attach(self.object);

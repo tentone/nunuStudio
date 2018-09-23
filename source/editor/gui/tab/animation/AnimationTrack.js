@@ -26,7 +26,7 @@ AnimationTrack.prototype.createKeyframes = function()
 
 	for(var k = 0; k < times.length; k++)
 	{
-		var key = new AnimationKeyframe(this.element, this.editor, this, this.track, k);
+		var key = new AnimationKeyframe(this, this.editor, this, this.track, k);
 		key.size.set(5, 30);
 		key.position.set(this.editor.zoom * times[k], 0);
 		key.updateInterface();

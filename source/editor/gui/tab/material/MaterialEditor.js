@@ -34,8 +34,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Preview configuration
 	this.previewForm = new TableForm();
-	this.previewForm.position.set(10, 5);
-	this.previewForm.spacing.set(5, 5);
+	this.previewForm.setAutoSize(false);
 
 	//Configuration text
 	this.previewForm.addText("Configuration");
@@ -43,8 +42,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Form
 	this.form = new TableForm();
-	this.form.position.set(10, 5);
-	this.form.spacing.set(5, 5);
+	this.form.setAutoSize(false);
 	this.form.defaultTextWidth = 100;
 
 	//Name

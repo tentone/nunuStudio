@@ -8,19 +8,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 	this.texture = null;
 
-	//Dual division
-	this.division = new DualDivision(this);
-	this.division.setOnResize(function()
-	{
-		self.updateInterface();
-	});
-	this.division.tabPosition = 0.5;
-	this.division.tabPositionMin = 0.3;
-	this.division.tabPositionMax = 0.7;
-	this.division.divB.element.style.overflow = "auto";
-	
 	//Canvas
-	this.canvas = new RendererCanvas(this.division.divA);
+	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
 		self.camera.aspect = x / y;
@@ -36,12 +25,20 @@ function CubeTextureEditor(parent, closeable, container, index)
 	//Texture
 	this.texture = null;
 
-	this.form = new TableForm(this.division.divB);
-	this.form.position.set(10, 5);
-	this.form.spacing.set(5, 5);
-
+	//Form
+	this.form = new TableForm();
+	this.form.setAutoSize(false);
 	this.form.addText("Cube Texture Editor");
 	this.form.nextRow();
+
+	//Dual division
+	this.division = new DualContainer(this);
+	this.division = new DualContainer(this);
+	this.division.tabPosition = 0.5;
+	this.division.tabPositionMin = 0.1;
+	this.division.tabPositionMax = 0.9;
+	this.division.attachA(this.canvas);
+	this.division.attachB(this.form);
 
 	//Name
 	this.form.addText("Name");
@@ -399,32 +396,10 @@ CubeTextureEditor.prototype.update = function()
 	this.canvas.renderer.render(this.scene, this.camera);
 };
 
-//Update
-CubeTextureEditor.prototype.updateInterface = function()
+CubeTextureEditor.prototype.updateSize = function()
 {
-	//Visibility
-	if(this.visible)
-	{	
-		//Dual division
-		this.division.size.copy(this.size);
-		this.division.updateInterface();
+	TabElement.prototype.updateSize.call(this);
 
-		//Canvas
-		this.canvas.size.set(this.size.x * this.division.tabPosition, this.size.y);
-		this.canvas.updateInterface();
-
-		//Form
-		this.form.updateInterface();
-
-		//Element
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.division.size.copy(this.size);
+	this.division.updateInterface();
 };

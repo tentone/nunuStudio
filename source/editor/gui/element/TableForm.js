@@ -14,6 +14,14 @@ function TableForm(parent)
 	this.element.style.overflow = "visible";
 	
 	/**
+	 * Set if the form neds to be automatically resized.
+	 *
+	 * @property autoSize
+	 * @type {Boolean}
+	 */
+	this.autoSize = true;
+
+	/**
 	 * Spacing between elements and rows.
 	 *
 	 * @property spacing
@@ -40,6 +48,18 @@ function TableForm(parent)
 }
 
 TableForm.prototype = Object.create(Element.prototype);
+
+/**
+ * Set if the form should be automatically resized, and ajust overflow value.
+ *
+ * @method setAutoSize
+ * @param {Boolean} autoSize
+ */
+TableForm.prototype.setAutoSize = function(autoSize)
+{
+	this.autoSize = autoSize;
+	this.element.style.overflow = autoSize ? "visible" : "auto";
+};
 
 /**
  * Add a element to form (in actual row).
@@ -140,12 +160,14 @@ TableForm.prototype.removeAll = function()
 
 TableForm.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
-
-	//Position tracker and size
 	var x = 0, y = 0;
-	this.size.set(0, 0);
-	var size = this.size;
+	var sizeX = 0;
+
+	if(!this.autoSize)
+	{
+		x = this.spacing.x;
+		y = this.spacing.y;
+	}
 
 	//Updated attached elements
 	for(var i = 0; i < this.rows.length; i++)
@@ -171,19 +193,23 @@ TableForm.prototype.updateSize = function()
 		}
 
 		//Update form size x
-		if(size.x < x)
+		if(sizeX < x)
 		{
-			size.x = x;
+			sizeX = x;
 		}
 
 		//Update position tracker
 		if(x !== 0)
 		{
-			x = 0;
+			x = this.autoSize ? 0 : this.spacing.x;
 			y += maxSizeY + this.spacing.y;
 		}
 	}
 
-	//Set size y
-	size.y = y;
+	if(this.autoSize)
+	{
+		this.size.set(sizeX, y);
+	}
+
+	Element.prototype.updateSize.call(this);
 };
