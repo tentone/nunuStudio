@@ -43,7 +43,6 @@ function MaterialEditor(parent, closeable, container, index)
 	//Form
 	this.form = new TableForm();
 	this.form.setAutoSize(false);
-	this.form.defaultTextWidth = 100;
 
 	//Name
 	this.form.addText("Name");

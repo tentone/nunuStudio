@@ -4,21 +4,10 @@ function ParticleEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Particle", Editor.filePath + "icons/misc/particles.png");
 
-	//Main container
-	this.main = new DualDivision(this);
-	this.main.tabPosition = 0.6;
-	this.main.tabPositionMin = 0.05;
-	this.main.tabPositionMax = 0.95;
-
-	//Change main div aspect
-	this.main.divB.element.style.overflow = "auto";
-	this.main.divB.element.style.cursor = "default";
-	this.main.divB.element.style.backgroundColor = Editor.theme.panelColor;
-
 	var self = this;
 
 	//Canvas
-	this.canvas = new RendererCanvas(this.main.divA);
+	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
 		self.camera.aspect = x / y;
@@ -44,11 +33,17 @@ function ParticleEditor(parent, closeable, container, index)
 	this.updateCamera();
 	this.scene.add(this.camera);
 
-	this.form = new TableForm(this.main.divB);
-	this.form.defaultTextWidth = 80;
-	this.form.position.set(10, 8);
-	this.form.spacing.set(10, 5);
-	
+	this.form = new TableForm();
+	this.form.setAutoSize(false);
+
+	//Main
+	this.main = new DualContainer(this);
+	this.main.tabPosition = 0.6;
+	this.main.tabPositionMin = 0.05;
+	this.main.tabPositionMax = 0.95;
+	this.main.attachA(this.canvas);
+	this.main.attachB(this.form);
+
 	//Name
 	this.form.addText("Name");
 	this.name = new TextBox(this.form);
@@ -583,35 +578,10 @@ ParticleEditor.prototype.update = function()
 	this.canvas.renderer.render(this.particle, this.camera);
 };
 
-//Update division
-ParticleEditor.prototype.updateInterface = function()
+ParticleEditor.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		//Main
-		this.main.size.copy(this.size);
-		this.main.updateInterface();
+	TabElement.prototype.updateSize.call(this);
 
-		//Canvas
-		this.canvas.size.set(this.size.x * this.main.tabPosition, this.size.y);
-		this.canvas.updateInterface();
-
-		//Children
-		for(var i = 0; i < this.children.length; i++)
-		{
-			this.children[i].updateInterface();
-		}
-
-		this.form.updateInterface();
-
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.main.size.copy(this.size);
+	this.main.updateInterface();
 };

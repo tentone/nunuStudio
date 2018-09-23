@@ -21,7 +21,6 @@ function ImageChooser(parent)
 	this.img.style.visibility = "inherit";
 	this.img.style.position = "absolute";
 	this.img.style.borderStyle = "none";
-	this.img.style.cursor = "pointer";
 	this.img.style.left = "0px";
 	this.img.style.top = "0px";
 	this.img.style.width = "100%";
@@ -32,6 +31,9 @@ function ImageChooser(parent)
 	this.value = null;
 
 	var self = this;
+
+	this.element.ondragover = Element.preventDefault;
+	this.element.ondragstart = Element.preventDefault;
 
 	//On drop get file dropped
 	this.element.ondrop = function(event)
@@ -63,9 +65,6 @@ function ImageChooser(parent)
 			}
 		}
 	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = Element.preventDefault;
 
 	//Onclick select image file
 	this.element.onclick = function()
@@ -106,6 +105,7 @@ ImageChooser.prototype = Object.create(Element.prototype);
 ImageChooser.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
+	this.img.style.cursor = "pointer";
 };
 
 //Set image URL
