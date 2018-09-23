@@ -4,16 +4,12 @@ function ProfilingTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Profiling", Editor.filePath + "icons/misc/speedometer.png");
 
-	this.dual = new DualDivision(this);
-	this.dual.divA.element.style.backgroundColor = Editor.theme.barColor;
-	this.dual.divA.element.style.overflow = "auto";
-	this.dual.tabPosition = 0.2;
-
 	//Canvas
-	this.canvas = new Canvas(this.dual.divB);
+	this.canvas = new Canvas();
 	
-	this.form = new TableForm(this.dual.divA);
-
+	//Form
+	this.form = new TableForm();
+	this.form.setAutoSize(false);
 	this.form.addText("Renderer");
 	this.form.nextRow();
 
@@ -37,7 +33,11 @@ function ProfilingTab(parent, closeable, container, index)
 	this.vertices = this.form.addText("");
 	this.form.nextRow();
 
-	this.form.updateInterface();
+	//Container
+	this.dual = new DualContainer(this);
+	this.dual.tabPosition = 0.2;
+	this.dual.attachA(this.canvas);
+	this.dual.attachA(this.form);
 }
 
 ProfilingTab.prototype = Object.create(TabElement.prototype);
@@ -69,7 +69,4 @@ ProfilingTab.prototype.updateSize = function()
 	
 	this.dual.size.copy(this.size);
 	this.dual.updateInterface();
-
-	this.canvas.size.set(Number.parseInt(this.dual.divB.element.style.width), Number.parseInt(this.dual.divB.element.style.height));
-	this.canvas.updateInterface();
 };

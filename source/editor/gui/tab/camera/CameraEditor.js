@@ -4,27 +4,21 @@ function CameraEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "camera", Editor.filePath + "icons/camera/camera.png");
 
-	this.camera = null;
-	
-	//Main container
-	this.main = new DualDivision(this);
-	this.main.tabPosition = 0.6;
-	this.main.tabPositionMin = 0.05;
-	this.main.tabPositionMax = 0.95;
-
-	//Change main div aspect
-	this.main.divB.element.style.overflow = "auto";
-	this.main.divB.element.style.backgroundColor = Editor.theme.panelColor;
-
-	//Canvas
-	this.canvas = new RendererCanvas(this.main.divA);
-
 	var self = this;
 
-	this.form = new TableForm(this.main.divB);
-	this.form.defaultTextWidth = 80;
-	this.form.position.set(10, 5);
-	this.form.spacing.set(5, 5);
+	this.camera = null;
+	
+	//Canvas
+	this.canvas = new RendererCanvas();
+
+	this.form = new TableForm();
+	this.form.setAutoSize(false);
+
+	//Main
+	this.main = new DualContainer(this);
+	this.main.tabPosition = 0.6;
+	this.main.attachA(this.canvas);
+	this.main.attachB(this.form);
 
 	//Camera
 	this.form.addText("Camera");
@@ -196,13 +190,6 @@ CameraEditor.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	this.form.updateInterface();
-
-	//Main
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
-
-	//Canvas
-	this.canvas.size.copy(this.main.divA.size);
-	this.canvas.updateInterface();
 };

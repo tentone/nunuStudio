@@ -217,13 +217,10 @@ TabGroup.prototype.getActiveTab = function()
 //Close actual tab if its closeable
 TabGroup.prototype.closeActual = function()
 {
-	if(this.selected !== null)
+	if(this.selected !== null && this.selected.closeable)
 	{
-		if(this.selected.closeable)
-		{
-			this.selected.deactivate();
-			this.removeTab(this.selected);
-		}
+		this.selected.deactivate();
+		this.removeTab(this.selected);
 	}
 };
 
@@ -307,7 +304,7 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
 
 	this.options.push(tab);
 	
-	if(this.selected === null)
+	if(this.selected === null || this.options.length === 1)
 	{
 		this.selectTab(tab);
 	}
@@ -369,11 +366,18 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
 		this.updateOptionIndex();
 
 		//Select option
-		if(this.options.length > 0)
+		if(this.selected === tab)
 		{
-			this.selectTab(index !== 0 ? index - 1 : 0);
+			if(this.options.length > 0)
+			{
+				this.selectTab(index !== 0 ? index - 1 : 0);
+			}
+			else
+			{
+				this.selectTab(null);
+			}
 		}
-		else
+		else 
 		{
 			this.selectTab(null);
 		}

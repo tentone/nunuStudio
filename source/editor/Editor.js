@@ -313,6 +313,7 @@ include("editor/gui/element/tabsnew/TabContainer.js");
 include("editor/gui/element/tabsnew/TabDualContainer.js");
 
 include("editor/gui/tab/ConsoleTab.js");
+include("editor/gui/tab/ProfilingTab.js");
 include("editor/gui/tab/CodeEditor.js");
 include("editor/gui/tab/AboutTab.js");
 include("editor/gui/tab/TextEditor.js");

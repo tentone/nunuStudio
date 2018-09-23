@@ -314,7 +314,6 @@ TabGroupNew.prototype.collapse = function()
 TabGroupNew.prototype.attachTab = function(tab, insertIndex)
 {	
 	var container = tab.container;
-
 	var tab = TabGroup.prototype.attachTab.call(this, tab, insertIndex);
 
 	if(container.options.length === 0)
@@ -339,10 +338,11 @@ TabGroupNew.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
 	tab.button = new TabButtonNew(this.buttons, tab);
+	tab.updateInterface();
 
 	this.options.push(tab);
 
-	if(this.selected === null)
+	if(this.selected === null || this.options.length === 1)
 	{
 		this.selectTab(tab);
 	}

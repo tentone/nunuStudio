@@ -22,8 +22,8 @@ function DualContainer(parent)
 
 	//Resize Tab
 	this.tabPosition = 0.5;
-	this.tabPositionMax = 1;
-	this.tabPositionMin = 0;
+	this.tabPositionMax = 0.95;
+	this.tabPositionMin = 0.05;
 	this.tabSize = 5;
 	this.orientation = DualContainer.HORIZONTAL;
 
