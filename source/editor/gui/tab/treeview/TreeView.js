@@ -5,8 +5,6 @@ function TreeView(parent, closeable, container, index)
 	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.filePath + "icons/misc/menu.png");
 
 	this.element.style.overflow = "auto";
-	this.element.style.display = "block";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	this.program = null;
 
@@ -43,6 +41,7 @@ TreeView.prototype.traverse = function(callback)
 	function traverse(node, callback)
 	{
 		callback(node);
+
 		for(var i = 0; i < node.children.length; i++)
 		{
 			traverse(node.children[i], callback);
@@ -228,8 +227,7 @@ TreeView.prototype.updateChildPosition = function()
 //Update division Size
 TreeView.prototype.updateSize = function()
 {
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
+	TreeElement.prototype.updateSize.call(this);
 	
 	if(this.root !== null)
 	{

@@ -6,8 +6,8 @@ function TreeElement(container)
 	this.container = container;
 
 	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
+	this.size = new THREE.Vector2(0, 0);
+	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
 	//Object attached
@@ -669,7 +669,7 @@ TreeElement.prototype.updateInterface = function()
 	{
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
-		
+
 		this.labelText.data = this.object.name;
 
 		var offset = this.level * 20;

@@ -8,7 +8,6 @@
  * @param {Number} hue Hue rotation from -1 to 1
  * @param {Number} saturation Color saturation from -1  to 1
  */
-
 function HueSaturationPass(hue, saturation)
 {
 	ShaderPass.call(this, THREE.HueSaturationShader);

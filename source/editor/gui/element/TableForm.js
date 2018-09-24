@@ -90,8 +90,17 @@ TableForm.prototype.addText = function(text, fit)
 	var element = new Text(this);
 	element.setAlignment(Text.LEFT);
 	element.setText(text);
-	element.fitContent = (fit === true);
 	element.size.set(this.defaultTextWidth, 20);
+	
+	if(fit === true)
+	{
+		element.fitContent = true;
+	}
+	else
+	{
+		element.setOverflow(Text.ELLIPSIS);
+	}
+
 	this.add(element);
 
 	return element;
