@@ -9937,7 +9937,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\pass\\HueSaturationPass.js",
-            "line": 40,
+            "line": 39,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14157,6 +14157,19 @@
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 20,
+            "description": "Check if a file corresponds to a remote location.",
+            "itemtype": "method",
+            "name": "isRemote",
+            "return": {
+                "description": "If the file is remote returns true, false otherwise.",
+                "type": "Boolean"
+            },
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\core\\FileSystem.js",
+            "line": 31,
             "description": "Read file content as text.",
             "itemtype": "method",
             "name": "readFile",
@@ -14191,7 +14204,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 93,
+            "line": 104,
             "description": "Read file as arraybuffer data.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
@@ -14226,7 +14239,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 178,
+            "line": 189,
             "description": "Read file as base64 data.",
             "itemtype": "method",
             "name": "readFileBase64",
@@ -14261,7 +14274,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 245,
+            "line": 256,
             "description": "Write text file.\n\nWhen running without NWJS it writes file as a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
@@ -14282,7 +14295,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 280,
+            "line": 291,
             "description": "Write binary file using base64 data.",
             "itemtype": "method",
             "name": "writeFileBase64",
@@ -14303,7 +14316,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 316,
+            "line": 327,
             "description": "Write binary file using arraybuffer data.",
             "itemtype": "method",
             "name": "writeFileArrayBuffer",
@@ -14324,7 +14337,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 350,
+            "line": 361,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.\n\nThe onLoad callback receives as array of files as parameter.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -14350,7 +14363,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 392,
+            "line": 403,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -14371,7 +14384,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 419,
+            "line": 430,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -14392,7 +14405,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 439,
+            "line": 450,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -14408,7 +14421,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 456,
+            "line": 467,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -14421,7 +14434,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 483,
+            "line": 494,
             "description": "Delete folders and all subfolders.\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "deleteFolder",
@@ -14437,7 +14450,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 516,
+            "line": 527,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -14458,7 +14471,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 560,
+            "line": 571,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -14478,7 +14491,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 581,
+            "line": 592,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -14498,7 +14511,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 603,
+            "line": 614,
             "description": "Get file name with extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.d.",
             "itemtype": "method",
             "name": "getFileNameWithExtension",
@@ -14518,7 +14531,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 625,
+            "line": 636,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -14538,7 +14551,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 644,
+            "line": 655,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -14558,7 +14571,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 666,
+            "line": 677,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -14639,6 +14652,19 @@
         {
             "file": "..\\..\\source\\core\\Nunu.js",
             "line": 79,
+            "description": "Get the query parameter from the browser URL.",
+            "itemtype": "method",
+            "name": "getQueryParameters",
+            "return": {
+                "description": "Object with parameters read from the URL.",
+                "type": "Object"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\..\\source\\core\\Nunu.js",
+            "line": 104,
             "description": "Create a web worker from code written in a string.\n\nUses a blob to inject the code and loads it from and URL object.",
             "itemtype": "method",
             "name": "createWorker",
@@ -14663,7 +14689,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 102,
+            "line": 127,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -14676,7 +14702,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 113,
+            "line": 138,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -14689,7 +14715,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 136,
+            "line": 161,
             "description": "Check if nunu if running in development mode.",
             "itemtype": "method",
             "name": "developmentMode",
@@ -14702,7 +14728,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 147,
+            "line": 172,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
@@ -14715,7 +14741,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 158,
+            "line": 183,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -14728,7 +14754,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 171,
+            "line": 196,
             "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
             "itemtype": "method",
             "name": "openWebpage",
@@ -14737,7 +14763,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 193,
+            "line": 218,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUse isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",

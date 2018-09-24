@@ -21,11 +21,11 @@ catch(e){}
  * Check if a file corresponds to a remote location.
  *
  * @method isRemote
- * @returns {Boolean} If the file is remote returns true, false otherwise.
+ * @return {Boolean} If the file is remote returns true, false otherwise.
  */
 FileSystem.isRemote = function(fname)
 {
-	return fname.startsWith("http");
+	return fname.startsWith("http") || (FileSystem.fs !== undefined && FileSystem.fs.existsSync(file));
 };
 
 /**
