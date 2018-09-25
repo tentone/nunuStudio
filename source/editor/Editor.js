@@ -307,10 +307,10 @@ include("editor/gui/element/tabs/TabGroup.js");
 include("editor/gui/element/tabs/TabElement.js");
 include("editor/gui/element/tabs/TabButton.js");
 
-include("editor/gui/element/tabsnew/TabGroupNew.js");
-include("editor/gui/element/tabsnew/TabButtonNew.js");
-include("editor/gui/element/tabsnew/TabContainer.js");
-include("editor/gui/element/tabsnew/TabDualContainer.js");
+include("editor/gui/element/tabs/splittable/TabGroupNew.js");
+include("editor/gui/element/tabs/splittable/TabButtonNew.js");
+include("editor/gui/element/tabs/splittable/TabContainer.js");
+include("editor/gui/element/tabs/splittable/TabDualContainer.js");
 
 include("editor/gui/tab/ConsoleTab.js");
 include("editor/gui/tab/ProfilingTab.js");
