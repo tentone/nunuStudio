@@ -227,8 +227,10 @@ TabGroup.prototype.closeActual = function()
 /** 
  * Select tab to set active on this group.
  *
+ * If not valid tab is selected the actual selection will be cleared.
+ *
  * @method selectTab
- * @param {TabElement} tab
+ * @param {TabElement} tab TabElement to be selected or index in the tab array.
  */
 TabGroup.prototype.selectTab = function(tab)
 {
@@ -242,14 +244,12 @@ TabGroup.prototype.selectTab = function(tab)
 	{
 		this.selected = tab;
 		this.selected.activate();
-		this.updateInterface();
 	}
 	//Tab as a index
 	else if(typeof tab === "number" && tab > -1 && tab < this.options.length)
 	{
 		this.selected = this.options[tab];
 		this.selected.activate();
-		this.updateInterface();
 	}
 	else
 	{
@@ -257,6 +257,7 @@ TabGroup.prototype.selectTab = function(tab)
 	}
 
 	this.empty.style.display = this.selected === null ? "flex" : "none";
+	this.updateInterface();
 };
 
 /**
@@ -301,12 +302,15 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = new TabConstructor(this.tab, closeable, this, this.options.length);
 	tab.button = new TabButton(this.buttons, tab);
-
 	this.options.push(tab);
 	
 	if(this.selected === null || this.options.length === 1)
 	{
 		this.selectTab(tab);
+	}
+	else
+	{
+		this.updateInterface();
 	}
 
 	return tab;
@@ -361,8 +365,6 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
 		}
 
 		this.options.splice(index, 1);
-
-		//Update tabs index
 		this.updateOptionIndex();
 
 		//Select option

@@ -34,6 +34,7 @@ function SceneEditor(parent, closeable, container, index)
 	//Performance meter
 	this.stats = new Stats();
 	this.stats.dom.style.position = "absolute";
+	this.stats.dom.style.display = "none";
 	this.stats.dom.style.left = "0px";
 	this.stats.dom.style.top = "0px";
 	this.stats.dom.style.zIndex = "0";
@@ -398,7 +399,7 @@ SceneEditor.prototype.updateSettings = function()
 	this.tool.setRotationSnap(Editor.settings.editor.snapAngle);
 
 	//Stats
-	this.stats.dom.style.display = Editor.settings.general.showStats ? "block" : "none";
+	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
 };
 
 SceneEditor.prototype.destroy = function()
@@ -1288,6 +1289,13 @@ SceneEditor.prototype.resizeCanvas = function()
 			this.programRunning.resize(width, height);
 		}
 	}
+};
+
+SceneEditor.prototype.updateVisibility = function()
+{
+	TabElement.prototype.updateVisibility.call(this);
+
+	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
 };
 
 //Update scene editor interface

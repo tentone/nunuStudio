@@ -346,6 +346,10 @@ TabGroupNew.prototype.addTab = function(TabConstructor, closeable)
 	{
 		this.selectTab(tab);
 	}
-
+	else
+	{
+		this.updateInterface();
+	}
+	
 	return tab;
 };
