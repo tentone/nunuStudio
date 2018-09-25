@@ -61,7 +61,7 @@ function TabButtonNew(parent, tab)
 	};
 	
 	//Drag state
-	var dragState = 0;
+	var dragState = TabButtonNew.NONE;
 
 	//Drag control
 	this.element.ondragstart = function(event)
@@ -70,7 +70,7 @@ function TabButtonNew(parent, tab)
 		DragBuffer.push(self.tab);
 
 		event.dataTransfer.setData("tab", self.tab.index);
-		dragState = 0;
+		dragState = TabButtonNew.NONE;
 	};
 
 	//Drag drop
@@ -96,12 +96,12 @@ function TabButtonNew(parent, tab)
 				if(index !== self.tab.index)
 				{	
 					//Before
-					if(dragState === 1)
+					if(dragState === TabButtonNew.PREVIOUS)
 					{
 						self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
 					}
 					//After
-					else if(dragState === 2)
+					else if(dragState === TabButtonNew.NEXT)
 					{
 						self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
 					}
@@ -113,12 +113,12 @@ function TabButtonNew(parent, tab)
 			else
 			{
 				//Before
-				if(dragState === 1)
+				if(dragState === TabButtonNew.PREVIOUS)
 				{
 					self.tab.container.attachTab(tab, self.tab.index);
 				}
 				//After
-				else if(dragState === 2)
+				else if(dragState === TabButtonNew.NEXT)
 				{
 					self.tab.container.attachTab(tab, self.tab.index + 1);
 				}
@@ -135,27 +135,27 @@ function TabButtonNew(parent, tab)
 		{	
 			if(event.layerX > self.size.x * 0.8 || event.target !== this)
 			{
-				if(dragState !== 2)
+				if(dragState !== TabButtonNew.NEXT)
 				{
-					dragState = 2;
+					dragState = TabButtonNew.NEXT;
 					this.style.borderLeft = null;
 					this.style.borderRight = "thick solid #999999";
 				}
 			}
 			else if(event.layerX < self.size.x * 0.2)
 			{
-				if(dragState !== 1)
+				if(dragState !== TabButtonNew.PREVIOUS)
 				{
-					dragState = 1;
+					dragState = TabButtonNew.PREVIOUS;
 					this.style.borderRight = null;
 					this.style.borderLeft = "thick solid #999999";
 				}
 			}
 			else
 			{
-				if(dragState !== 0)
+				if(dragState !== TabButtonNew.NONE)
 				{
-					dragState = 0;
+					dragState = TabButtonNew.NONE;
 					this.style.borderLeft = null;
 					this.style.borderRight = null;
 				}
@@ -165,27 +165,27 @@ function TabButtonNew(parent, tab)
 		{
 			if(event.layerY > self.size.y * 0.7 || event.target !== this)
 			{
-				if(dragState !== 2)
+				if(dragState !== TabButtonNew.NEXT)
 				{
-					dragState = 2;
+					dragState = TabButtonNew.NEXT;
 					this.style.borderTop = null;
 					this.style.borderBottom = "solid #999999";
 				}
 			}
 			else if(event.layerY < self.size.y * 0.3)
 			{
-				if(dragState !== 1)
+				if(dragState !== TabButtonNew.PREVIOUS)
 				{
-					dragState = 1;
+					dragState = TabButtonNew.PREVIOUS;
 					this.style.borderBottom = null;
 					this.style.borderTop = "solid #999999";
 				}
 			}
 			else
 			{
-				if(dragState !== 0)
+				if(dragState !== TabButtonNew.NONE)
 				{
-					dragState = 0;
+					dragState = TabButtonNew.NONE;
 					this.style.borderBottom = null;
 					this.style.borderTop = null;
 				}
@@ -200,7 +200,7 @@ function TabButtonNew(parent, tab)
 		
 		DragBuffer.pop(self.tab.uuid);
 
-		dragState = 0;
+		dragState = TabButtonNew.NONE;
 		this.style.borderLeft = null;
 		this.style.borderRight = null;
 		this.style.borderBottom = null;
@@ -212,24 +212,25 @@ function TabButtonNew(parent, tab)
 	{
 		event.preventDefault();
 		
-		dragState = 0;
+		dragState = TabButtonNew.NONE;
 		this.style.borderLeft = null;
 		this.style.borderRight = null;
 		this.style.borderBottom = null;
 		this.style.borderTop = null;
 	};
 
-	//Mouse click
-	this.element.onclick = function(event)
-	{
-		self.tab.container.selectTab(self.tab);
-	};
-
 	//Mouse down
 	this.element.onmousedown = function(event)
 	{
-		//Close tab on mouse middle click
-		if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
+		var button = event.which - 1;
+
+		//Select tab
+		if(button === Mouse.LEFT)
+		{
+			self.tab.container.selectTab(self.tab);
+		}
+		//Close tab
+		else if(tab.closeable && button === Mouse.MIDDLE)
 		{
 			self.tab.container.removeTab(self.tab);
 		}
@@ -256,6 +257,10 @@ function TabButtonNew(parent, tab)
 }
 
 TabButtonNew.prototype = Object.create(Element.prototype);
+
+TabButtonNew.NONE = 0;
+TabButtonNew.PREVIOUS = 1;
+TabButtonNew.NEXT = 2;
 
 //Set button icon
 TabButtonNew.prototype.setIcon = function(icon)

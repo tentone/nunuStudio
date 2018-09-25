@@ -75,13 +75,13 @@ function TabButton(parent, tab)
 
 
 	//Drag state
-	var dragState = 0;
+	var dragState = TabButton.NONE;
 
 	//Drag control
 	this.element.ondragstart = function(event)
 	{
 		event.dataTransfer.setData("tab", self.tab.index);
-		dragState = 0;
+		dragState = TabButton.NONE;
 	};
 
 	//Drag drop
@@ -101,12 +101,12 @@ function TabButton(parent, tab)
 			if(index !== self.tab.index)
 			{	
 				//Before
-				if(dragState === 1)
+				if(dragState === TabButton.PREVIOUS)
 				{
 					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
 				}
 				//After
-				else if(dragState === 2)
+				else if(dragState === TabButton.NEXT)
 				{
 					self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
 				}
@@ -121,27 +121,27 @@ function TabButton(parent, tab)
 		{
 			if(event.layerX > self.size.x * 0.8 || event.target !== this)
 			{
-				if(dragState !== 2)
+				if(dragState !== TabButton.NEXT)
 				{
-					dragState = 2;
+					dragState = TabButton.NEXT;
 					this.style.borderLeft = null;
 					this.style.borderRight = "thick solid #999999";
 				}
 			}
 			else if(event.layerX < self.size.x * 0.2)
 			{
-				if(dragState !== 1)
+				if(dragState !== TabButton.PREVIOUS)
 				{
-					dragState = 1;
+					dragState = TabButton.PREVIOUS;
 					this.style.borderRight = null;
 					this.style.borderLeft = "thick solid #999999";
 				}
 			}
 			else
 			{
-				if(dragState !== 0)
+				if(dragState !== TabButton.NONE	)
 				{
-					dragState = 0;
+					dragState = TabButton.NONE;
 					this.style.borderLeft = null;
 					this.style.borderRight = null;
 				}
@@ -151,27 +151,27 @@ function TabButton(parent, tab)
 		{
 			if(event.layerY > self.size.y * 0.7 || event.target !== this)
 			{
-				if(dragState !== 2)
+				if(dragState !== TabButton.NEXT)
 				{
-					dragState = 2;
+					dragState = TabButton.NEXT;
 					this.style.borderTop = null;
 					this.style.borderBottom = "solid #999999";
 				}
 			}
 			else if(event.layerY < self.size.y * 0.3)
 			{
-				if(dragState !== 1)
+				if(dragState !== TabButton.PREVIOUS)
 				{
-					dragState = 1;
+					dragState = TabButton.PREVIOUS;
 					this.style.borderBottom = null;
 					this.style.borderTop = "solid #999999";
 				}
 			}
 			else
 			{
-				if(dragState !== 0)
+				if(dragState !== TabButton.NONE	)
 				{
-					dragState = 0;
+					dragState = TabButton.NONE;
 					this.style.borderBottom = null;
 					this.style.borderTop = null;
 				}
@@ -184,7 +184,7 @@ function TabButton(parent, tab)
 	{
 		event.preventDefault();
 		
-		dragState = 0;
+		dragState = TabButton.NONE;
 		this.style.borderLeft = null;
 		this.style.borderRight = null;
 		this.style.borderBottom = null;
@@ -196,36 +196,34 @@ function TabButton(parent, tab)
 	{
 		event.preventDefault();
 		
-		dragState = 0;
+		dragState = TabButton.NONE;
 		this.style.borderLeft = null;
 		this.style.borderRight = null;
 		this.style.borderBottom = null;
 		this.style.borderTop = null;
 	};
 
-	//Mouse click
-	this.element.onclick = function(event)
-	{
-		self.tab.container.selectTab(self.tab);
-	};
-
-	//Mouse down
 	this.element.onmousedown = function(event)
 	{
-		//Close tab on mouse middle click
-		if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
+		var button = event.which - 1;
+
+		//Select tab
+		if(button === Mouse.LEFT)
+		{
+			self.tab.container.selectTab(self.tab);
+		}
+		//Close tab
+		else if(tab.closeable && button === Mouse.MIDDLE)
 		{
 			self.tab.container.removeTab(self.tab);
 		}
 	};
 
-	//Mouse enter
 	this.element.onmouseenter = function()
 	{
 		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
-	//Mouse leave
 	this.element.onmouseleave = function()
 	{
 		if(tab.isSelected())
@@ -240,6 +238,10 @@ function TabButton(parent, tab)
 }
 
 TabButton.prototype = Object.create(Element.prototype);
+
+TabButton.NONE = 0;
+TabButton.PREVIOUS = 1;
+TabButton.NEXT = 2;
 
 //Set button icon
 TabButton.prototype.setIcon = function(icon)
