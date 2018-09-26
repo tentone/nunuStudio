@@ -588,8 +588,6 @@ TreeNode.prototype = Object.create(Element.prototype);
  */
 TreeNode.prototype.clearBorder = function()
 {
-	console.log("Clear node border");
-	
 	this.element.style.border = null;
 	this.element.style.borderTop = null;
 	this.element.style.borderBottom = null;

@@ -888,9 +888,14 @@ Editor.deleteObject = function(object)
 		{
 			continue;
 		}
-		else if(selected[i].isObject3D === true && !selected[i].locked)
+		//Object3D
+		else if(selected[i].isObject3D && !selected[i].locked)
 		{
 			actions.push(new RemovedAction(selected[i]));
+		}
+		else
+		{
+			console.warn("nunuStudio: Cant delete type of object.");
 		}
 	}
 
@@ -1067,11 +1072,7 @@ Editor.updateObjectsViewsGUI = function()
 {
 	Editor.gui.tab.updateObjectsView();
 	Editor.gui.tab.updateMetadata();
-
-	Editor.gui.tab.updateObjectsView();
-	Editor.gui.tab.updateMetadata();
 };
-
 
 //Update values of objects attached to the GUI
 Editor.updateValuesGUI = function()
@@ -1084,8 +1085,8 @@ Editor.updateSelectionGUI = function()
 {
 	Editor.gui.tab.updateMetadata();
 	Editor.gui.tab.updateSelection();
-	Editor.gui.treeView.updateSelection();
-	Editor.gui.panelContainer.updateSelection();
+	//Editor.gui.treeView.updateSelection();
+	//Editor.gui.panelContainer.updateSelection();
 };
 
 //Reset editing flags
