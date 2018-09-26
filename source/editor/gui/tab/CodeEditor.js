@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Code editor tab element based on the codemirror code editor library.
+ *
+ * @class CodeEditor
+ * @extends TabElement
+ */
 function CodeEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Code", Editor.filePath + "icons/misc/code.png");
@@ -85,7 +91,6 @@ function CodeEditor(parent, closeable, container, index)
 
 CodeEditor.prototype = Object.create(TabElement.prototype);
 
-//Update script editor settings
 CodeEditor.prototype.updateSettings = function()
 {
 	this.setFontSize(Editor.settings.code.fontSize);
@@ -104,7 +109,12 @@ CodeEditor.prototype.updateSettings = function()
 	this.code.setOption("indentUnit", Editor.settings.code.indentUnit);
 };
 
-//Set code editor font size
+/**
+ * Set code editor font size.
+ *
+ * @method setFontSize
+ * @param {Number} size
+ */
 CodeEditor.prototype.setFontSize = function(size)
 {
 	if(size < 5)
@@ -147,7 +157,6 @@ CodeEditor.prototype.setOnChange = function(callback)
 	this.code.on("change", callback);
 };
 
-//Update loop
 CodeEditor.prototype.update = function()
 {
 	if(Editor.keyboard.keyPressed(Keyboard.CTRL) && Editor.mouse.wheel !== 0)
@@ -156,21 +165,9 @@ CodeEditor.prototype.update = function()
 	}
 };
 
-//Update division Size
-CodeEditor.prototype.updateInterface = function()
+CodeEditor.prototype.updateSize = function()
 {
-	if(this.visible)
-	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
+	TabElement.prototype.updateSize.call(this);
 
-		this.code.setSize(this.size.x, this.size.y);		
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.code.setSize(this.size.x, this.size.y);
 };

@@ -194,7 +194,12 @@ ConsoleTab.prototype.clear = function(args)
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
-//Apply filters to messages
+/**
+ * Apply filters to messages.
+ *
+ * @method filter
+ * @param {Array} Values to filter.
+ */
 ConsoleTab.prototype.filter = function(args)
 {
 	if(this.filterThreeJS)

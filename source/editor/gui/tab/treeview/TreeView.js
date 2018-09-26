@@ -1,5 +1,17 @@
 "use strict";
 
+/**
+ * TreeView component is used to represent a object tree.
+ *
+ * Each tree entry represents direclty a Object3D object present in the editor.
+ * 
+ * @class TreeView
+ * @extends {TabElement}
+ * @param {Element} parent Parent element.
+ * @param {Boolean} closeable If the tab is closeable.
+ * @param {TabGroup} container The container where this tab is inserted.
+ * @param {Number} index Index inside the container button array.
+ */
 function TreeView(parent, closeable, container, index)
 {	
 	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.filePath + "icons/misc/menu.png");
@@ -7,13 +19,17 @@ function TreeView(parent, closeable, container, index)
 	this.element.style.overflow = "auto";
 
 	this.program = null;
-
+	
 	this.root = null;
 }
 
 TreeView.prototype = Object.create(TabElement.prototype);
 
-//Attach a program to the tree view
+/**
+ * Attach a program to the tree view.
+ *
+ * @method attach
+ */
 TreeView.prototype.attach = function(program)
 {	
 	if(this.program === program)
@@ -31,26 +47,41 @@ TreeView.prototype.attach = function(program)
 	}
 
 	//Create program tree
-	this.createProgramTree();
+	this.buildTree();
 	this.updateChildPosition();
 };
 
-//Traverse the tree view nodes
+/**
+ * Traverse the whole tree view and call the callback method.
+ * 
+ * The callback method receives the object attached to the tree and the depth.
+ * 
+ * @method traverse
+ * @param {Function} callback Callback function(treeNode)
+ */
 TreeView.prototype.traverse = function(callback)
 {
-	function traverse(node, callback)
+	function traverse(node)
 	{
 		callback(node);
 
 		for(var i = 0; i < node.children.length; i++)
 		{
-			traverse(node.children[i], callback);
+			traverse(node.children[i]);
 		}
 	}
 
-	traverse(this.root, callback); 
+	traverse(this.root); 
 };
 
+/**
+ * Add new object to a parent in a specific position.
+ * 
+ * @method addObject
+ * @param {THREE.Object3D} object New object to add to the tree.
+ * @param {THREE.Object3D} parent Parent to insert the object.
+ * @param {Number} index Index to insert the object.
+ */
 TreeView.prototype.addObject = function(object, parent, index)
 {
 	var parentNode = null;
@@ -83,6 +114,13 @@ TreeView.prototype.addObject = function(object, parent, index)
 	}
 };
 
+/**
+ * Remove a object from the treeview.
+ * 
+ * @method removeObject
+ * @param {THREE.Object3D} object Object to be removed from the tree.
+ * @param {THREE.Object3D} parent Parent object.
+ */
 TreeView.prototype.removeObject = function(object, parent)
 {
 	var parentNode = null;
@@ -108,6 +146,15 @@ TreeView.prototype.removeObject = function(object, parent)
 	this.updateChildPosition();
 };
 
+/**
+ * Move object in the tree, from a position to another position and parent.
+ * 
+ * @method addObject
+ * @param {THREE.Object3D} object New object to add to the tree.
+ * @param {THREE.Object3D} oldParent Old parent to remove the object from.
+ * @param {THREE.Object3D} newParent New parent to insert the object into.
+ * @param {Number} index New index to insert the object.
+ */
 TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
 {
 	this.removeObject(object, oldParent);
@@ -115,9 +162,14 @@ TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
 	this.updateChildPosition();
 };
 
-TreeView.prototype.createProgramTree = function()
+/**
+ * Fill the tree view using object children.
+ * 
+ * @method buildTree
+ */
+TreeView.prototype.buildTree = function()
 {
-	//Fill tree roo with objects (recursive)
+	//Fill tree root with objects (recursive)
 	function fillTree(root, object)
 	{
 		var element = root.addObject(object);
@@ -133,7 +185,7 @@ TreeView.prototype.createProgramTree = function()
 		this.root.destroy();
 	}
 
-	this.root = new TreeElement(this);
+	this.root = new TreeNode(this);
 	this.root.attach(this.program);
 
 	for(var i = 0; i < this.program.children.length; i++)
@@ -142,10 +194,13 @@ TreeView.prototype.createProgramTree = function()
 	}
 };
 
-//Update which object is currently selected
+/**
+ * Update treeview to highlight the selected object.
+ *
+ * @updateSelection
+ */
 TreeView.prototype.updateSelection = function()
 {
-	//Update treeview to highlight the selected object recursive
 	function updateSelection(tree)
 	{
 		tree.element.style.backgroundColor = Editor.isObjectSelected(tree.object) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
@@ -163,7 +218,11 @@ TreeView.prototype.updateSelection = function()
 	}
 };
 
-//Update tree view children positions
+/**
+ * Update tree view children positions.
+ *
+ * @method updateChildPosition
+ */
 TreeView.prototype.updateChildPosition = function()
 {
 	//Check if parent if folded (recursive)
@@ -224,10 +283,9 @@ TreeView.prototype.updateChildPosition = function()
 	}
 };
 
-//Update division Size
 TreeView.prototype.updateSize = function()
 {
-	TreeElement.prototype.updateSize.call(this);
+	TreeNode.prototype.updateSize.call(this);
 	
 	if(this.root !== null)
 	{

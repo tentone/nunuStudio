@@ -319,7 +319,7 @@ include("editor/gui/tab/AboutTab.js");
 include("editor/gui/tab/TextEditor.js");
 
 include("editor/gui/tab/treeview/TreeView.js");
-include("editor/gui/tab/treeview/TreeElement.js");
+include("editor/gui/tab/treeview/TreeNode.js");
 
 include("editor/gui/tab/objects/ScriptEditor.js");
 include("editor/gui/tab/objects/ParticleEditor.js");
