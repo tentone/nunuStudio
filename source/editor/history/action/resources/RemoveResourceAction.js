@@ -1,6 +1,6 @@
 "use strict";
 
-function RemoveMaterialAction(resource)
+function RemoveResourceAction(resource)
 {
 	Action.call(this);
 	
@@ -9,12 +9,12 @@ function RemoveMaterialAction(resource)
 	//TODO <ADD CODE HERE>
 }
 
-RemoveMaterialAction.prototype.apply = function()
+RemoveResourceAction.prototype.apply = function()
 {
 	//TODO <ADD CODE HERE>
 };
 
-RemoveMaterialAction.prototype.revert = function()
+RemoveResourceAction.prototype.revert = function()
 {
 	//TODO <ADD CODE HERE>
 };

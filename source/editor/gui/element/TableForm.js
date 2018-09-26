@@ -188,7 +188,6 @@ TableForm.prototype.updateSize = function()
 			
 			if(element.visible)
 			{
-				//Update element
 				element.position.set(x, y);
 				element.updateInterface();
 
