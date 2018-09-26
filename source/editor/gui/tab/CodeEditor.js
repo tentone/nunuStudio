@@ -91,6 +91,13 @@ function CodeEditor(parent, closeable, container, index)
 
 CodeEditor.prototype = Object.create(TabElement.prototype);
 
+CodeEditor.prototype.activate = function()
+{
+	TabElement.prototype.activate.call(this);
+
+	this.updateSettings();
+};
+
 CodeEditor.prototype.updateSettings = function()
 {
 	this.setFontSize(Editor.settings.code.fontSize);
@@ -126,32 +133,45 @@ CodeEditor.prototype.setFontSize = function(size)
 	this.code.display.wrapper.style.fontSize = size + "px";
 };
 
-CodeEditor.prototype.activate = function()
-{
-	TabElement.prototype.activate.call(this);
-
-	this.updateSettings();
-};
-
-//Return editor text
+/**
+ * Get the code open in the editor.
+ *
+ * @method getText
+ * @return {String} The code in the editor.
+ */
 CodeEditor.prototype.getText = function()
 {
 	return this.code.getValue();
 };
 
-//Set editor text
+/**
+ * Set the code open in the editor.
+ *
+ * @method getText
+ * @param {String} text Code to put in the editor.
+ */
 CodeEditor.prototype.setText = function(text)
 {
 	this.code.setValue(text);
 };
 
-//Set language mode (javascript, glsl, etc)
+/**
+ * Set language mode (javascript, glsl, etc).
+ *
+ * @method setMode
+ * @param {String} mode Language mode.
+ */
 CodeEditor.prototype.setMode = function(mode)
 {
 	this.code.setOption("mode", mode);
 };
 
-//Set onchange callback
+/**
+ * Set onchange callback.
+ *
+ * @method setOnChange
+ * @param {Function} callback
+ */
 CodeEditor.prototype.setOnChange = function(callback)
 {
 	this.code.on("change", callback);
