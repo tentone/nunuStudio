@@ -37,7 +37,7 @@ function ProgramPanel(parent, obj)
 	//Mouse lock
 	this.lockPointer = new CheckBox(this.form);
 	this.form.addText("Lock pointer");
-	this.lockPointer.size.set(15, 15);
+	this.lockPointer.size.set(18, 18);
 	this.lockPointer.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "lockPointer", self.lockPointer.getValue()));
@@ -48,7 +48,7 @@ function ProgramPanel(parent, obj)
 	//Handle pixel ratio
 	this.handlePixelRatio = new CheckBox(this.form);
 	this.form.addText("Pixel Ratio");
-	this.handlePixelRatio.size.set(15, 15);
+	this.handlePixelRatio.size.set(18, 18);
 	this.handlePixelRatio.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "handlePixelRatio", self.handlePixelRatio.getValue()));
@@ -63,7 +63,7 @@ function ProgramPanel(parent, obj)
 	//VR Enabled
 	this.vr = new CheckBox(this.form);
 	this.form.addText("VR Enabled");
-	this.vr.size.set(15, 15);
+	this.vr.size.set(18, 18);
 	this.vr.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "vr", self.vr.getValue()));
@@ -91,7 +91,7 @@ function ProgramPanel(parent, obj)
 	//Antialiasing
 	this.antialiasing = new CheckBox(this.form);
 	this.form.addText("Antialiasing");
-	this.antialiasing.size.set(15, 15);
+	this.antialiasing.size.set(18, 18);
 	this.antialiasing.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "antialiasing", self.antialiasing.getValue()));
@@ -113,7 +113,7 @@ function ProgramPanel(parent, obj)
 	//Shadows
 	this.shadows = new CheckBox(this.form);
 	this.form.addText("Shadows");
-	this.shadows.size.set(15, 15);
+	this.shadows.size.set(18, 18);
 	this.shadows.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "shadows", self.shadows.getValue()));

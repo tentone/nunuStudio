@@ -9,7 +9,7 @@ function KinectPanel(parent, obj)
 	//Debug model
 	this.debugModel = new CheckBox(this.form);
 	this.form.addText("Debug model");
-	this.debugModel.size.set(15, 15);
+	this.debugModel.size.set(18, 18);
 	this.debugModel.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));

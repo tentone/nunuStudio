@@ -24,7 +24,7 @@ function PassNode(parent, name)
 	//Enabled
 	this.addText("Enabled");
 	this.enabled = new CheckBox(this);
-	this.enabled.size.set(15, 15);
+	this.enabled.size.set(18, 18);
 	this.enabled.setOnChange(function()
 	{
 		self.pass.enabled = self.enabled.getValue();
@@ -35,7 +35,7 @@ function PassNode(parent, name)
 	//Render to screen
 	this.addText("Output");
 	this.renderToScreen = new CheckBox(this);
-	this.renderToScreen.size.set(15, 15);
+	this.renderToScreen.size.set(18, 18);
 	this.renderToScreen.setOnChange(function()
 	{
 		self.pass.renderToScreen = self.renderToScreen.getValue();

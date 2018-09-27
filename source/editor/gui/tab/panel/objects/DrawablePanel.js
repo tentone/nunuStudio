@@ -9,7 +9,7 @@ function DrawablePanel(parent, obj)
 	//Cast shadow
 	this.form.addText("Cast Shadow");
 	this.castShadow = new CheckBox(this.form);
-	this.castShadow.size.set(15, 15);
+	this.castShadow.size.set(18, 18);
 	this.castShadow.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
@@ -20,7 +20,7 @@ function DrawablePanel(parent, obj)
 	//Receive shadow
 	this.form.addText("React Shadow");
 	this.receiveShadow = new CheckBox(this.form);
-	this.receiveShadow.size.set(15, 15);
+	this.receiveShadow.size.set(18, 18);
 	this.receiveShadow.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
@@ -31,7 +31,7 @@ function DrawablePanel(parent, obj)
 	//Frustum culled
 	this.form.addText("Frustum Culled");
 	this.frustumCulled = new CheckBox(this.form);
-	this.frustumCulled.size.set(15, 15);
+	this.frustumCulled.size.set(18, 18);
 	this.frustumCulled.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "frustumCulled", self.frustumCulled.getValue()));

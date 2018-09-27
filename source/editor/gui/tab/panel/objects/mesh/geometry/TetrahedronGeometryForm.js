@@ -39,7 +39,7 @@ function TetrahedronGeometryForm(form, obj)
 	//Buffer
 	this.buffer = new CheckBox(this.form);
 	this.form.addText("Buffered");
-	this.buffer.size.set(15, 15);
+	this.buffer.size.set(18, 18);
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();

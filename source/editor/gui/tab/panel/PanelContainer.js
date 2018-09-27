@@ -205,6 +205,7 @@ PanelContainer.prototype.updateSelection = function()
 	if(this.panel !== null)
 	{
 		this.panel.updatePanel();
+		this.panel.size.copy(this.size);
 		this.panel.updateInterface();
 	}
 };
@@ -214,5 +215,16 @@ PanelContainer.prototype.updateValues = function()
 	if(this.panel !== null)
 	{
 		this.panel.updatePanel();
+	}
+};
+
+PanelContainer.prototype.updateSize = function()
+{	
+	TabElement.prototype.updateSize.call(this);
+
+	if(this.panel !== null)
+	{
+		this.panel.size.copy(this.size);
+		this.panel.updateInterface();
 	}
 };

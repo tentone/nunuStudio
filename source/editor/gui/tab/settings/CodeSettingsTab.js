@@ -10,8 +10,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 
 	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 125;
-	this.form.position.set(5, 5);
-	this.form.spacing.set(5, 5);
+	this.form.setAutoSize(false);
 
 	//Code editor text
 	this.form.addText("Code Editor");
@@ -65,7 +64,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Show line numbers
 	this.form.addText("Show line number");
 	this.codeLineNumbers = new CheckBox(this.form);
-	this.codeLineNumbers.size.set(15, 15);
+	this.codeLineNumbers.size.set(18, 18);
 	this.codeLineNumbers.setOnChange(function()
 	{
 		Editor.settings.code.lineNumbers = self.codeLineNumbers.getValue();
@@ -76,7 +75,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Line wrapping
 	this.form.addText("Line wrap");
 	this.codeLineWrapping = new CheckBox(this.form);
-	this.codeLineWrapping.size.set(15, 15);
+	this.codeLineWrapping.size.set(18, 18);
 	this.codeLineWrapping.setOnChange(function()
 	{
 		Editor.settings.code.lineWrapping = self.codeLineWrapping.getValue();
@@ -87,7 +86,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Auto close brackets
 	this.form.addText("Auto close brackets");
 	this.codeAutoCloseBrackets = new CheckBox(this.form);
-	this.codeAutoCloseBrackets.size.set(15, 15);
+	this.codeAutoCloseBrackets.size.set(18, 18);
 	this.codeAutoCloseBrackets.setOnChange(function()
 	{
 		Editor.settings.code.autoCloseBrackets = self.codeAutoCloseBrackets.getValue();
@@ -98,7 +97,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Highlight active line
 	this.form.addText("Highlight line");
 	this.codeHighlightActiveLine = new CheckBox(this.form);
-	this.codeHighlightActiveLine.size.set(15, 15);
+	this.codeHighlightActiveLine.size.set(18, 18);
 	this.codeHighlightActiveLine.setOnChange(function()
 	{
 		Editor.settings.code.highlightActiveLine = self.codeHighlightActiveLine.getValue();
@@ -109,7 +108,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Show search match on scrollback
 	this.form.addText("Show match scrollbar");
 	this.showMatchesOnScrollbar = new CheckBox(this.form);
-	this.showMatchesOnScrollbar.size.set(15, 15);
+	this.showMatchesOnScrollbar.size.set(18, 18);
 	this.showMatchesOnScrollbar.setOnChange(function()
 	{
 		Editor.settings.code.showMatchesOnScrollbar = self.showMatchesOnScrollbar.getValue();
@@ -120,7 +119,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//File drag
 	this.form.addText("Drag files");
 	this.dragFiles = new CheckBox(this.form);
-	this.dragFiles.size.set(15, 15);
+	this.dragFiles.size.set(18, 18);
 	this.dragFiles.setOnChange(function()
 	{
 		Editor.settings.code.dragFiles = self.dragFiles.getValue();
@@ -131,7 +130,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Indent with tabs
 	this.form.addText("Indent with tabs");
 	this.indentWithTabs = new CheckBox(this.form);
-	this.indentWithTabs.size.set(15, 15);
+	this.indentWithTabs.size.set(18, 18);
 	this.indentWithTabs.setOnChange(function()
 	{
 		Editor.settings.code.indentWithTabs = self.indentWithTabs.getValue();
@@ -164,14 +163,10 @@ function CodeSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.indentUnit);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 CodeSettingsTab.prototype = Object.create(TabElement.prototype);
 
-//Activate
 CodeSettingsTab.prototype.activate = function()
 {
 	this.codeTheme.setValue(Editor.settings.code.theme);
@@ -187,3 +182,11 @@ CodeSettingsTab.prototype.activate = function()
 	this.tabSize.setValue(Editor.settings.code.tabSize);
 	this.indentUnit.setValue(Editor.settings.code.indentUnit);
 }; 
+
+CodeSettingsTab.prototype.updateSize = function()
+{
+	TabElement.prototype.updateSize.call(this);
+
+	this.form.size.copy(this.size);
+	this.form.updateInterface();
+};

@@ -10,8 +10,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 125;
-	this.form.position.set(5, 5);
-	this.form.spacing.set(5, 5);
+	this.form.setAutoSize(false);
 	
 	//Javascript
 	this.form.addText("Javascript");
@@ -20,7 +19,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Bitwise
 	this.form.addText("Warn Bitwise").setAltText("Prohibit bitwise operators (&, |, ^, etc.)");
 	this.bitwise = new CheckBox(this.form);
-	this.bitwise.size.set(15, 15);
+	this.bitwise.size.set(18, 18);
 	this.bitwise.setOnChange(function()
 	{
 		Editor.settings.jslint.bitwise = self.bitwise.getValue();
@@ -31,7 +30,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Curly
 	this.form.addText("Require curly").setAltText("Require {} for every new block or scope");
 	this.curly = new CheckBox(this.form);
-	this.curly.size.set(15, 15);
+	this.curly.size.set(18, 18);
 	this.curly.setOnChange(function()
 	{
 		Editor.settings.jslint.curly = self.curly.getValue();
@@ -42,7 +41,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Eqeqeq
 	this.form.addText("Require ===").setAltText("Require triple equals (===) for comparison");
 	this.eqeqeq = new CheckBox(this.form);
-	this.eqeqeq.size.set(15, 15);
+	this.eqeqeq.size.set(18, 18);
 	this.eqeqeq.setOnChange(function()
 	{
 		Editor.settings.jslint.eqeqeq = self.eqeqeq.getValue();
@@ -53,7 +52,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//For...in
 	this.form.addText("Filtering for...in").setAltText("Require filtering for..in loops with obj.hasOwnProperty()");
 	this.forin = new CheckBox(this.form);
-	this.forin.size.set(15, 15);
+	this.forin.size.set(18, 18);
 	this.forin.setOnChange(function()
 	{
 		Editor.settings.jslint.forin = self.forin.getValue();
@@ -64,7 +63,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Freeze
 	this.form.addText("Freeze").setAltText("Prohibits overwriting prototypes of native objects such as Array, Date etc");
 	this.freeze = new CheckBox(this.form);
-	this.freeze.size.set(15, 15);
+	this.freeze.size.set(18, 18);
 	this.freeze.setOnChange(function()
 	{
 		Editor.settings.jslint.freeze = self.freeze.getValue();
@@ -75,7 +74,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Latedef
 	this.form.addText("Late definition").setAltText("Require variables/functions to be defined before being used");
 	this.latedef = new CheckBox(this.form);
-	this.latedef.size.set(15, 15);
+	this.latedef.size.set(18, 18);
 	this.latedef.setOnChange(function()
 	{
 		Editor.settings.jslint.latedef = self.latedef.getValue();
@@ -86,7 +85,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Noarg
 	this.form.addText("No arguments").setAltText("Prohibit use of `arguments.caller` and `arguments.callee`");
 	this.noarg = new CheckBox(this.form);
-	this.noarg.size.set(15, 15);
+	this.noarg.size.set(18, 18);
 	this.noarg.setOnChange(function()
 	{
 		Editor.settings.jslint.noarg = self.noarg.getValue();
@@ -97,7 +96,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Nonbsp
 	this.form.addText("Non bsp").setAltText("Prohibit non-breaking whitespace characters.");
 	this.nonbsp = new CheckBox(this.form);
-	this.nonbsp.size.set(15, 15);
+	this.nonbsp.size.set(18, 18);
 	this.nonbsp.setOnChange(function()
 	{
 		Editor.settings.jslint.nonbsp = self.nonbsp.getValue();
@@ -108,7 +107,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//NoNew
 	this.form.addText("No new").setAltText("Prohibit use of constructors for side-effects (without assignment)");
 	this.nonew = new CheckBox(this.form);
-	this.nonew.size.set(15, 15);
+	this.nonew.size.set(18, 18);
 	this.nonew.setOnChange(function()
 	{
 		Editor.settings.jslint.nonew = self.nonew.getValue();
@@ -119,7 +118,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Pluplus
 	this.form.addText("Warn ++").setAltText("Prohibit use of ++ and --");
 	this.plusplus = new CheckBox(this.form);
-	this.plusplus.size.set(15, 15);
+	this.plusplus.size.set(18, 18);
 	this.plusplus.setOnChange(function()
 	{
 		Editor.settings.jslint.plusplus = self.plusplus.getValue();
@@ -130,7 +129,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	//Pluplus
 	this.form.addText("Warn Undefined").setAltText("Require all non-global variables to be declared (prevents global leaks)");
 	this.undef = new CheckBox(this.form);
-	this.undef.size.set(15, 15);
+	this.undef.size.set(18, 18);
 	this.undef.setOnChange(function()
 	{
 		Editor.settings.jslint.undef = self.undef.getValue();
@@ -148,7 +147,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.form.addText("No semicolons").setAltText("Tolerate Automatic Semicolon Insertion (no semicolons)");
 	this.asi = new CheckBox(this.form);
-	this.asi.size.set(15, 15);
+	this.asi.size.set(18, 18);
 	this.asi.setOnChange(function()
 	{
 		Editor.settings.jslint.asi = self.asi.getValue();
@@ -158,7 +157,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.form.addText("Assign on compare").setAltText("Tolerate assignments where comparisons would be expected");
 	this.boss = new CheckBox(this.form);
-	this.boss.size.set(15, 15);
+	this.boss.size.set(18, 18);
 	this.boss.setOnChange(function()
 	{
 		Editor.settings.jslint.boss = self.boss.getValue();
@@ -168,7 +167,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.form.addText("Debug statement").setAltText("Allow debugger statements e.g. browser breakpoints.");
 	this.debug = new CheckBox(this.form);
-	this.debug.size.set(15, 15);
+	this.debug.size.set(18, 18);
 	this.debug.setOnChange(function()
 	{
 		Editor.settings.jslint.debug = self.debug.getValue();
@@ -178,7 +177,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.form.addText("Null compare").setAltText("Tolerate use of == null");
 	this.eqnull = new CheckBox(this.form);
-	this.eqnull.size.set(15, 15);
+	this.eqnull.size.set(18, 18);
 	this.eqnull.setOnChange(function()
 	{
 		Editor.settings.jslint.eqnull = self.eqnull.getValue();
@@ -200,7 +199,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.form.addText("Allow moz").setAltText("Allow Mozilla specific syntax (extends and overrides esnext features)");
 	this.moz = new CheckBox(this.form);
-	this.moz.size.set(15, 15);
+	this.moz.size.set(18, 18);
 	this.moz.setOnChange(function()
 	{
 		Editor.settings.jslint.moz = self.moz.getValue();
@@ -210,21 +209,17 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.form.addText("Allow eval").setAltText("Tolerate use of eval() and new Function()");
 	this.evil = new CheckBox(this.form);
-	this.evil.size.set(15, 15);
+	this.evil.size.set(18, 18);
 	this.evil.setOnChange(function()
 	{
 		Editor.settings.jslint.evil = self.evil.getValue();
 	});
 	this.form.add(this.evil);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 JSHintSettingsTab.prototype = Object.create(TabElement.prototype);
 
-//Activate
 JSHintSettingsTab.prototype.activate = function()
 {
 	this.bitwise.setValue(Editor.settings.jslint.bitwise);
@@ -246,4 +241,12 @@ JSHintSettingsTab.prototype.activate = function()
 	this.esversion.setValue(Editor.settings.jslint.esversion);
 	this.moz.setValue(Editor.settings.jslint.moz);
 	this.evil.setValue(Editor.settings.jslint.evil);
+};
+
+JSHintSettingsTab.prototype.updateSize = function()
+{
+	TabElement.prototype.updateSize.call(this);
+	
+	this.form.size.copy(this.size);
+	this.form.updateInterface();
 };

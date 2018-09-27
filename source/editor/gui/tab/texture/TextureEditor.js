@@ -195,7 +195,7 @@ function TextureEditor(parent, closeable, container, index)
 	//Premultiply Alpha
 	this.form.addText("Premul. Alpha");
 	this.premultiplyAlpha = new CheckBox(this.form);
-	this.premultiplyAlpha.size.set(15, 15);
+	this.premultiplyAlpha.size.set(18, 18);
 	this.premultiplyAlpha.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.texture, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
@@ -207,7 +207,7 @@ function TextureEditor(parent, closeable, container, index)
 	//Flip Y
 	this.form.addText("Flip Y");
 	this.flipY = new CheckBox(this.form);
-	this.flipY.size.set(15, 15);
+	this.flipY.size.set(18, 18);
 	this.flipY.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.texture, "flipY", self.flipY.getValue()));

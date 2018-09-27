@@ -9,7 +9,7 @@ function CubeCameraPanel(parent, obj)
 	//Auto update
 	this.form.addText("Auto update");
 	this.autoUpdate = new CheckBox(this.form);
-	this.autoUpdate.size.set(15, 15);
+	this.autoUpdate.size.set(18, 18);
 	this.autoUpdate.position.set(5, 85);
 	this.autoUpdate.updateInterface();
 	this.autoUpdate.setOnChange(function()

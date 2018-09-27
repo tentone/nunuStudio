@@ -9,7 +9,7 @@ function ParticleEmitterPanel(parent, obj)
 	//Dynamic emitter
 	this.form.addText("Dynamic emitter");
 	this.dynamicEmitter = new CheckBox(this.form);
-	this.dynamicEmitter.size.set(15, 15);
+	this.dynamicEmitter.size.set(18, 18);
 	this.dynamicEmitter.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "dynamicEmitter", self.dynamicEmitter.getValue()));

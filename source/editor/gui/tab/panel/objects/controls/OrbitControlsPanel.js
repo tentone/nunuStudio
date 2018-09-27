@@ -46,7 +46,7 @@ function OrbitControlsPanel(parent, obj)
 	//Needs button pressed
 	this.form.addText("Require button");
 	this.needsButtonPressed = new CheckBox(this.form);
-	this.needsButtonPressed.size.set(15, 15);
+	this.needsButtonPressed.size.set(18, 18);
 	this.needsButtonPressed.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "needsButtonPressed", self.needsButtonPressed.getValue()));
@@ -57,7 +57,7 @@ function OrbitControlsPanel(parent, obj)
 	//Movement
 	this.form.addText("Movement");
 	this.movementEnabled = new CheckBox(this.form);
-	this.movementEnabled.size.set(15, 15);
+	this.movementEnabled.size.set(18, 18);
 	this.movementEnabled.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "movementEnabled", self.movementEnabled.getValue()));
@@ -107,7 +107,7 @@ function OrbitControlsPanel(parent, obj)
 	//Zoom
 	this.form.addText("Zoom");
 	this.zoomEnabled = new CheckBox(this.form);
-	this.zoomEnabled.size.set(15, 15);
+	this.zoomEnabled.size.set(18, 18);
 	this.zoomEnabled.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "zoomEnabled", self.zoomEnabled.getValue()));

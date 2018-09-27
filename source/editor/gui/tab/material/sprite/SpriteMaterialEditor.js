@@ -19,7 +19,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	//Sky
 	this.previewForm.addText("Sky");
 	this.skyEnabled = new CheckBox(this.previewForm);
-	this.skyEnabled.size.set(15, 15);
+	this.skyEnabled.size.set(18, 18);
 	this.skyEnabled.setValue(this.sky.visible);
 	this.skyEnabled.setOnChange(function()
 	{
@@ -56,7 +56,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new TextureBox(this.form);
+	this.map = new TextureForm(this.form);
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{

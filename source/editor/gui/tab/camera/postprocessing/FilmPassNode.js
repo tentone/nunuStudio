@@ -8,7 +8,7 @@ function FilmPassNode(parent)
 
 	this.addText("Grayscale");
 	this.grayscale = new CheckBox(this);
-	this.grayscale.size.set(15, 15);
+	this.grayscale.size.set(18, 18);
 	this.grayscale.setOnChange(function()
 	{
 		self.pass.grayscale = self.grayscale.getValue();

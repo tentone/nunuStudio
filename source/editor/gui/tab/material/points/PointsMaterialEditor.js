@@ -54,7 +54,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	//Size atenuation
 	this.form.addText("Size atenuation");
 	this.sizeAttenuation = new CheckBox(this.form);
-	this.sizeAttenuation.size.set(15, 15);
+	this.sizeAttenuation.size.set(18, 18);
 	this.sizeAttenuation.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "sizeAttenuation", self.sizeAttenuation.getValue()));
@@ -66,7 +66,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new TextureBox(this.form);
+	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));

@@ -14,12 +14,20 @@ function TableForm(parent)
 	this.element.style.overflow = "visible";
 	
 	/**
-	 * Set if the form neds to be automatically resized.
+	 * Set if the form needs to be automatically resized.
 	 *
 	 * @property autoSize
 	 * @type {Boolean}
 	 */
 	this.autoSize = true;
+
+	/**
+	 * Resize the last element of the rows to fit the size of the container.
+	 *
+	 * @method resizeLast
+	 * @type {Boolean}
+	 */
+	this.resizeLast = true;
 
 	/**
 	 * Spacing between elements and rows.
@@ -178,29 +186,37 @@ TableForm.prototype.updateSize = function()
 		y = this.spacing.y;
 	}
 
-	//Updated attached elements
 	for(var i = 0; i < this.rows.length; i++)
 	{
 		var maxSizeY = 0;
+
 		for(var j = 0; j < this.rows[i].length; j++)
 		{
 			var element = this.rows[i][j];
 			
 			if(element.visible)
 			{
+				//Resize last element
+				if(this.resizeLast && j === this.rows[i].length - 1)
+				{
+					element.size.x = this.size.x - x - (3 * this.spacing.x);
+				}
+
+				//Position
 				element.position.set(x, y);
 				element.updateInterface();
 
-				//Update position tracker
+				//Size tracker
 				if(element.size.y > maxSizeY)
 				{
 					maxSizeY = element.size.y;
 				}
+
 				x += element.size.x + this.spacing.x;
 			}
 		}
 
-		//Update form size x
+		//Form size x
 		if(sizeX < x)
 		{
 			sizeX = x;

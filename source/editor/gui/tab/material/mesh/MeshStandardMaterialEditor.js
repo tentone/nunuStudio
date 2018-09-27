@@ -9,7 +9,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Skinning
 	this.skinning = new CheckBox(this.form);
 	this.form.addText("Skinning");
-	this.skinning.size.set(15, 15);
+	this.skinning.size.set(18, 18);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
@@ -21,7 +21,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Morph targets
 	this.morphTargets = new CheckBox(this.form);
 	this.form.addText("Morph targets");
-	this.morphTargets.size.set(15, 15);
+	this.morphTargets.size.set(18, 18);
 	this.morphTargets.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
@@ -32,7 +32,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Wireframe
 	this.wireframe = new CheckBox(this.form);
 	this.form.addText("Wireframe");
-	this.wireframe.size.set(15, 15);
+	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
@@ -98,7 +98,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new TextureBox(this.form);
+	this.map = new TextureForm(this.form);
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{
@@ -111,7 +111,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Roughness map
 	this.form.addText("Roughness map");
 	this.form.nextRow();
-	this.roughnessMap = new TextureBox(this.form);
+	this.roughnessMap = new TextureForm(this.form);
 	this.roughnessMap.size.set(100, 100);
 	this.roughnessMap.setOnChange(function(file)
 	{
@@ -124,7 +124,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Metalness map
 	this.form.addText("Metalness map");
 	this.form.nextRow();
-	this.metalnessMap = new TextureBox(this.form);
+	this.metalnessMap = new TextureForm(this.form);
 	this.metalnessMap.size.set(100, 100);
 	this.metalnessMap.setOnChange(function(file)
 	{
@@ -137,7 +137,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Bump map
 	this.form.addText("Bump map");
 	this.form.nextRow();
-	this.bumpMap = new TextureBox(this.form);
+	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.size.set(100, 100);
 	this.bumpMap.setOnChange(function(file)
 	{
@@ -164,7 +164,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Normal map
 	this.form.addText("Normal map");
 	this.form.nextRow();
-	this.normalMap = new TextureBox(this.form);
+	this.normalMap = new TextureForm(this.form);
 	this.normalMap.size.set(100, 100);
 	this.normalMap.setOnChange(function(file)
 	{
@@ -190,7 +190,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Displacement map
 	this.form.addText("Displacement map");
 	this.form.nextRow();
-	this.displacementMap = new TextureBox(this.form);
+	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(100, 100);
 	this.displacementMap.setOnChange(function(file)
 	{
@@ -230,7 +230,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Emissive map
 	this.form.addText("Emissive map");
 	this.form.nextRow();
-	this.emissiveMap = new TextureBox(this.form);
+	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(100, 100);
 	this.emissiveMap.setOnChange(function(file)
 	{
@@ -268,7 +268,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.form.nextRow();
-	this.alphaMap = new TextureBox(this.form);
+	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(100, 100);
 	this.alphaMap.setOnChange(function(file)
 	{
@@ -320,7 +320,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Ambient Occlusion map
 	this.form.addText("Ambient Occlusion");
 	this.form.nextRow();
-	this.aoMap = new TextureBox(this.form);
+	this.aoMap = new TextureForm(this.form);
 	this.aoMap.size.set(100, 100);
 	this.aoMap.setOnChange(function(file)
 	{

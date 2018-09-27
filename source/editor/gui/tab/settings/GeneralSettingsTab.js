@@ -10,8 +10,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 125;
-	this.form.position.set(5, 5);
-	this.form.spacing.set(5, 5);
+	this.form.setAutoSize(false);
 
 	//General text
 	this.form.addText("General");
@@ -71,7 +70,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	{
 		this.form.addText("Auto update").setAltText("If checked the editor will auto-update to the latest version.");
 		this.autoUpdate = new CheckBox(this.form);
-		this.autoUpdate.size.set(15, 15);
+		this.autoUpdate.size.set(18, 18);
 		this.autoUpdate.setOnChange(function()
 		{
 			Editor.settings.general.autoUpdate = self.autoUpdate.getValue();
@@ -96,16 +95,13 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Immediate mode
 	this.form.addText("Use immediate mode").setAltText("If checked objects changed during runtime test will keep their state when the testing mode stops.");
 	this.immediateMode = new CheckBox(this.form);
-	this.immediateMode.size.set(15, 15);
+	this.immediateMode.size.set(18, 18);
 	this.immediateMode.setOnChange(function()
 	{
 		Editor.settings.general.immediateMode = self.immediateMode.getValue();
 	});
 	this.form.add(this.immediateMode);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 GeneralSettingsTab.prototype = Object.create(TabElement.prototype);
@@ -120,4 +116,12 @@ GeneralSettingsTab.prototype.activate = function()
 	this.historySize.setValue(Editor.settings.general.historySize);
 
 	this.immediateMode.setValue(Editor.settings.general.immediateMode);
+};
+
+GeneralSettingsTab.prototype.updateSize = function()
+{
+	TabElement.prototype.updateSize.call(this);
+	
+	this.form.size.copy(this.size);
+	this.form.updateInterface();
 };

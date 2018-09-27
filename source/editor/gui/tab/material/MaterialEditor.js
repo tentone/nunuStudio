@@ -75,7 +75,7 @@ function MaterialEditor(parent, closeable, container, index)
 	//Test depth
 	this.form.addText("Depth Test");
 	this.depthTest = new CheckBox(this.form);
-	this.depthTest.size.set(15, 15);
+	this.depthTest.size.set(18, 18);
 	this.depthTest.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "depthTest", self.depthTest.getValue()));
@@ -87,7 +87,7 @@ function MaterialEditor(parent, closeable, container, index)
 	//Write depth
 	this.form.addText("Depth Write");
 	this.depthWrite = new CheckBox(this.form);
-	this.depthWrite.size.set(15, 15);
+	this.depthWrite.size.set(18, 18);
 	this.depthWrite.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
@@ -119,7 +119,7 @@ function MaterialEditor(parent, closeable, container, index)
 	//Transparent
 	this.form.addText("Transparent");
 	this.transparent = new CheckBox(this.form);
-	this.transparent.size.set(15, 15);
+	this.transparent.size.set(18, 18);
 	this.transparent.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "transparent", self.transparent.getValue()));

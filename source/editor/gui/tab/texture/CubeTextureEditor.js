@@ -147,7 +147,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	//Flip Y
 	this.form.addText("Flip Y");
 	this.flipY = new CheckBox(this.form);
-	this.flipY.size.set(15, 15);
+	this.flipY.size.set(18, 18);
 	this.flipY.setOnChange(function()
 	{
 		self.texture.flipY = self.flipY.getValue();

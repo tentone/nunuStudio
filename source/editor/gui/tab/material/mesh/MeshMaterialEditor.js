@@ -41,7 +41,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	//Sky
 	this.previewForm.addText("Sky");
 	this.skyEnabled = new CheckBox(this.previewForm);
-	this.skyEnabled.size.set(15, 15);
+	this.skyEnabled.size.set(18, 18);
 	this.skyEnabled.setValue(this.sky.visible);
 	this.skyEnabled.setOnChange(function()
 	{
@@ -56,7 +56,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 
 	this.previewForm.addText("Enabled");
 	this.lightEnabled = new CheckBox(this.previewForm);
-	this.lightEnabled.size.set(15, 15);
+	this.lightEnabled.size.set(18, 18);
 	this.lightEnabled.setValue(this.pointLight.visible);
 	this.lightEnabled.setOnChange(function()
 	{
@@ -81,7 +81,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 
 	this.previewForm.addText("Enabled");
 	this.ambientLightEnabled = new CheckBox(this.previewForm);
-	this.ambientLightEnabled.size.set(15, 15);
+	this.ambientLightEnabled.size.set(18, 18);
 	this.ambientLightEnabled.setValue(this.ambientLight.visible);
 	this.ambientLightEnabled.setOnChange(function()
 	{

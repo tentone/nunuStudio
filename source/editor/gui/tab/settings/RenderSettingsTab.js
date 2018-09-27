@@ -9,10 +9,9 @@ function RenderSettingsTab(parent, closeable, container, index)
 	var self = this;
 
 	this.form = new TableForm(this);
+	this.form.setAutoSize(false);
 	this.form.defaultTextWidth = 125;
-	this.form.position.set(5, 5);
-	this.form.spacing.set(5, 5);
-	
+
 	//Renderer settings
 	this.form.addText("Renderer Quality");
 	this.form.nextRow();
@@ -20,7 +19,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Use project settings
 	this.form.addText("Follow project").setAltText("If checked the project rendering settings will be used, its better to preview the final result.");
 	this.followProject = new CheckBox(this.form);
-	this.followProject.size.set(15, 15);
+	this.followProject.size.set(18, 18);
 	this.followProject.setOnChange(function()
 	{
 		Editor.settings.render.followProject = self.followProject.getValue();
@@ -39,7 +38,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Antialiasing
 	this.form.addText("Antialiasing").setAltText("Antialiasing can be used to smooth jaged edges.");
 	this.antialiasing = new CheckBox(this.form);
-	this.antialiasing.size.set(15, 15);
+	this.antialiasing.size.set(18, 18);
 	this.antialiasing.setOnChange(function()
 	{
 		Editor.settings.render.antialiasing = self.antialiasing.getValue();
@@ -50,7 +49,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Shadows
 	this.form.addText("Shadows");
 	this.shadows = new CheckBox(this.form);
-	this.shadows.size.set(15, 15);
+	this.shadows.size.set(18, 18);
 	this.shadows.setOnChange(function()
 	{	
 		Editor.settings.render.shadows = self.shadows.getValue();
@@ -113,14 +112,10 @@ function RenderSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 RenderSettingsTab.prototype = Object.create(TabElement.prototype);
 
-//Activate
 RenderSettingsTab.prototype.activate = function()
 {
 	this.followProject.setValue(Editor.settings.render.followProject);
@@ -130,4 +125,12 @@ RenderSettingsTab.prototype.activate = function()
 	this.toneMapping.setValue(Editor.settings.render.toneMapping);
 	this.toneMappingExposure.setValue(Editor.settings.render.toneMappingExposure);
 	this.toneMappingWhitePoint.setValue(Editor.settings.render.toneMappingWhitePoint);
+};
+
+RenderSettingsTab.prototype.updateSize = function()
+{
+	TabElement.prototype.updateSize.call(this);
+	
+	this.form.size.copy(this.size);
+	this.form.updateInterface();
 };

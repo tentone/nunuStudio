@@ -9,7 +9,7 @@ function ScenePanel(parent, obj)
 	//Select scene as default
 	this.default = new CheckBox(this.form);
 	this.form.addText("Default scene");
-	this.default.size.set(15, 15);
+	this.default.size.set(18, 18);
 	this.default.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -161,7 +161,7 @@ function ScenePanel(parent, obj)
 	//Use physics
 	this.form.addText("Use physics");
 	this.usePhysics = new CheckBox(this.form);
-	this.usePhysics.size.set(15, 15);
+	this.usePhysics.size.set(18, 18);
 	this.usePhysics.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "usePhysics", self.usePhysics.getValue()));

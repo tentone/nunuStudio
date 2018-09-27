@@ -5,34 +5,51 @@ function Panel(parent, obj)
 	Element.call(this, parent, "div");
 
 	this.element.style.overflow = "auto";
-	this.element.style.top = "0px";
-	this.element.style.left = "0px";
-	this.element.style.width = "100%";
-	this.element.style.height = "100%";
-
-	this.obj = null;
-
-	this.attach(obj);
 	this.preventDragEvents();
 
+	/**
+	 * Object attached to this panel.
+	 * 
+	 * @property obj
+	 * @type {Object3D}
+	 */ 
+	this.obj = null;
+	this.attach(obj);
+
+	/**
+	 * Panel form.
+	 *
+	 * @property form
+	 * @type {TableForm}
+	 */
 	this.form = new TableForm(this);
-	this.form.position.set(5, 5);
-	this.form.spacing.set(5, 5);
+	this.form.setAutoSize(false);
 }
 
 Panel.prototype = Object.create(Element.prototype);
 
-//Attach object to panel
+/** 
+ * Attach object to panel.
+ *
+ * @method attach
+ * @param {Object3D} obj
+ */
 Panel.prototype.attach = function(obj)
 {
 	this.obj = obj;
 };
 
-//Update panel ui
+/**
+ * Update panel information to match the attached object.
+ *
+ * @method updatePanel
+ */
+Panel.prototype.updatePanel = function(){};
+
 Panel.prototype.updateSize = function()
 {
+	Element.prototype.updateSize.call(this);
+
+	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
-
-//Update panel information
-Panel.prototype.updatePanel = function(){};

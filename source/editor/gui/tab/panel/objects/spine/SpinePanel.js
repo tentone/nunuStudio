@@ -31,7 +31,7 @@ function SpinePanel(parent, obj)
 	//Cast shadow
 	this.castShadow = new CheckBox(this.form);
 	this.form.addText("Cast Shadow");
-	this.castShadow.size.set(15, 15);
+	this.castShadow.size.set(18, 18);
 	this.castShadow.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
@@ -42,7 +42,7 @@ function SpinePanel(parent, obj)
 	//Receive shadow
 	this.receiveShadow = new CheckBox(this.form);
 	this.form.addText("React Shadow");
-	this.receiveShadow.size.set(15, 15);
+	this.receiveShadow.size.set(18, 18);
 	this.receiveShadow.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));

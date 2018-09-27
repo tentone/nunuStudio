@@ -60,7 +60,7 @@ function ObjectPanel(parent, obj)
 	//Scale lock
 	this.scaleRatioLock = new CheckBox(this.form);
 	this.scaleRatioLock.setAltText("Lock scale ratio");
-	this.scaleRatioLock.size.set(15, 15);
+	this.scaleRatioLock.size.set(18, 18);
 	this.form.add(this.scaleRatioLock);
 	
 	//Scale
@@ -129,7 +129,7 @@ function ObjectPanel(parent, obj)
 	//Visible
 	this.form.addText("Visible");
 	this.visible = new CheckBox(this.form);
-	this.visible.size.set(15, 15);
+	this.visible.size.set(18, 18);
 	this.visible.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "visible", self.visible.getValue()));
@@ -140,7 +140,7 @@ function ObjectPanel(parent, obj)
 	//Static
 	this.form.addText("Static Object");
 	this.static = new CheckBox(this.form);
-	this.static.size.set(15, 15);
+	this.static.size.set(18, 18);
 	this.static.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "matrixAutoUpdate", !self.static.getValue()));

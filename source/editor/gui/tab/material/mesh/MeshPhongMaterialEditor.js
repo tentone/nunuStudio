@@ -9,7 +9,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Skinning
 	this.skinning = new CheckBox(this.form);
 	this.form.addText("Skinning");
-	this.skinning.size.set(15, 15);
+	this.skinning.size.set(18, 18);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
@@ -21,7 +21,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Morph targets
 	this.morphTargets = new CheckBox(this.form);
 	this.form.addText("Morph targets");
-	this.morphTargets.size.set(15, 15);
+	this.morphTargets.size.set(18, 18);
 	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()
 	{
@@ -33,7 +33,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Wireframe
 	this.wireframe = new CheckBox(this.form);
 	this.form.addText("Wireframe");
-	this.wireframe.size.set(15, 15);
+	this.wireframe.size.set(18, 18);
 	this.wireframe.updateInterface();
 	this.wireframe.setOnChange(function()
 	{
@@ -98,7 +98,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new TextureBox(this.form);
+	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
@@ -110,7 +110,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Bump map
 	this.form.addText("Bump map");
 	this.form.nextRow();
-	this.bumpMap = new TextureBox(this.form);
+	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
@@ -136,7 +136,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Normal map
 	this.form.addText("Normal map");
 	this.form.nextRow();
-	this.normalMap = new TextureBox(this.form);
+	this.normalMap = new TextureForm(this.form);
 	this.normalMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
@@ -161,7 +161,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Displacement map
 	this.form.addText("Displacement Map");
 	this.form.nextRow();
-	this.displacementMap = new TextureBox(this.form);
+	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
@@ -200,7 +200,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Specular map
 	this.form.addText("Specular map");
 	this.form.nextRow();
-	this.specularMap = new TextureBox(this.form);
+	this.specularMap = new TextureForm(this.form);
 	this.specularMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
@@ -212,7 +212,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Emissive map
 	this.form.addText("Emissive map");
 	this.form.nextRow();
-	this.emissiveMap = new TextureBox(this.form);
+	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
@@ -249,7 +249,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.form.nextRow();
-	this.alphaMap = new TextureBox(this.form);
+	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.setOnChange(function(file)
 	{
 		Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));

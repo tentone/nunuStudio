@@ -17,7 +17,6 @@ function SettingsTab(parent, closeable, container, index)
 
 SettingsTab.prototype = Object.create(TabElement.prototype);
 
-//Update division Size
 SettingsTab.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);

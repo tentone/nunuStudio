@@ -42,7 +42,7 @@ function AudioEmitterPanel(parent, obj)
 	//Autoplay
 	this.autoplay = new CheckBox(this.form);
 	this.form.addText("Autoplay");
-	this.autoplay.size.set(15, 15);
+	this.autoplay.size.set(18, 18);
 	this.autoplay.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "autoplay", self.autoplay.getValue()));
@@ -53,7 +53,7 @@ function AudioEmitterPanel(parent, obj)
 	//Loop
 	this.loop = new CheckBox(this.form);
 	this.form.addText("Loop");
-	this.loop.size.set(15, 15);
+	this.loop.size.set(18, 18);
 	this.loop.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "loop", self.loop.getValue()));

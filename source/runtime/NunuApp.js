@@ -153,13 +153,15 @@ include("core/utils/binary/BufferUtils.js");
 
 include("core/utils/struct/TreeUtils.js");
 
-include("core/utils/Timer.js");
-include("core/utils/AnimationTimer.js");
-include("core/utils/EventManager.js");
+include("core/utils/timer/Timer.js");
+include("core/utils/timer/AnimationTimer.js");
 
+include("core/utils/LocalStorage.js");
+include("core/utils/EventManager.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/PhysicsGenerator.js");
+
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.

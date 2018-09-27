@@ -64,7 +64,7 @@ function Text3DPanel(parent, obj)
 	//Bevel
 	this.bevel = new CheckBox(this.form);
 	this.form.addText("Bevel");
-	this.bevel.size.set(15, 15);
+	this.bevel.size.set(18, 18);
 	this.bevel.setOnChange(function()
 	{
 		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "bevel", self.bevel.getValue()), updateGeometry));

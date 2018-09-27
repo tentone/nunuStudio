@@ -96,7 +96,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Sky
 	this.previewForm.addText("Sky");
 	this.skyEnabled = new CheckBox(this.previewForm);
-	this.skyEnabled.size.set(15, 15);
+	this.skyEnabled.size.set(18, 18);
 	this.skyEnabled.setValue(this.sky.visible);
 	this.skyEnabled.setOnChange(function()
 	{
@@ -108,7 +108,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Point Light
 	this.previewForm.addText("Point Light");
 	this.lightEnabled = new CheckBox(this.previewForm);
-	this.lightEnabled.size.set(15, 15);
+	this.lightEnabled.size.set(18, 18);
 	this.lightEnabled.setValue(this.pointLight.visible);
 	this.lightEnabled.setOnChange(function()
 	{
@@ -120,7 +120,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Ambient Light
 	this.previewForm.addText("Ambient Light");
 	this.ambientLightEnabled = new CheckBox(this.previewForm);
-	this.ambientLightEnabled.size.set(15, 15);
+	this.ambientLightEnabled.size.set(18, 18);
 	this.ambientLightEnabled.setValue(this.ambientLight.visible);
 	this.ambientLightEnabled.setOnChange(function()
 	{
@@ -168,7 +168,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Test depth
 	this.form.addText("Depth Test");
 	this.depthTest = new CheckBox(this.form);
-	this.depthTest.size.set(15, 15);
+	this.depthTest.size.set(18, 18);
 	this.depthTest.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "depthTest", self.depthTest.getValue()));
@@ -180,7 +180,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Write depth
 	this.form.addText("Depth Write");
 	this.depthWrite = new CheckBox(this.form);
-	this.depthWrite.size.set(15, 15);
+	this.depthWrite.size.set(18, 18);
 	this.depthWrite.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
@@ -192,7 +192,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Transparent
 	this.form.addText("Transparent");
 	this.transparent = new CheckBox(this.form);
-	this.transparent.size.set(15, 15);
+	this.transparent.size.set(18, 18);
 	this.transparent.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "transparent", self.transparent.getValue()));
@@ -222,7 +222,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Wireframe
 	this.form.addText("Wireframe");
 	this.wireframe = new CheckBox(this.form);
-	this.wireframe.size.set(15, 15);
+	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));

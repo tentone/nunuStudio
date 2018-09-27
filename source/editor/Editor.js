@@ -160,10 +160,11 @@ include("core/utils/binary/BufferUtils.js");
 
 include("core/utils/struct/TreeUtils.js");
 
-include("core/utils/Timer.js");
-include("core/utils/AnimationTimer.js");
-include("core/utils/EventManager.js");
+include("core/utils/timer/Timer.js");
+include("core/utils/timer/AnimationTimer.js");
 
+include("core/utils/LocalStorage.js");
+include("core/utils/EventManager.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/PhysicsGenerator.js");
@@ -300,7 +301,7 @@ include("editor/gui/element/input/NumberBox.js");
 include("editor/gui/element/input/VectorBox.js");
 include("editor/gui/element/input/ImageChooser.js");
 include("editor/gui/element/input/TextureChooser.js");
-include("editor/gui/element/input/TextureBox.js");
+include("editor/gui/element/input/TextureForm.js");
 include("editor/gui/element/input/CubeTextureBox.js");
 
 include("editor/gui/element/tabs/TabGroup.js");
@@ -471,7 +472,6 @@ include("editor/utils/DOMUtils.js");
 include("editor/utils/ObjectIcons.js");
 include("editor/utils/CodemirrorThemes.js");
 include("editor/utils/VirtualClipboard.js");
-include("editor/utils/LocalStorage.js");
 
 include("editor/history/History.js");
 include("editor/history/action/Action.js");

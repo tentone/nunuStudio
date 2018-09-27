@@ -8,7 +8,7 @@ function SSAOPassNode(parent)
 
 	this.addText("Only AO");
 	this.onlyAO = new CheckBox(this);
-	this.onlyAO.size.set(15, 15);
+	this.onlyAO.size.set(18, 18);
 	this.onlyAO.setOnChange(function()
 	{
 		self.pass.onlyAO = self.onlyAO.getValue();

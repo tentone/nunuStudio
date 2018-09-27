@@ -22,7 +22,7 @@ function LeapPanel(parent, obj)
 	//Debug model
 	this.debugModel = new CheckBox(this.form);
 	this.form.addText("Debug model");
-	this.debugModel.size.set(15, 15);
+	this.debugModel.size.set(18, 18);
 	this.debugModel.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
@@ -33,7 +33,7 @@ function LeapPanel(parent, obj)
 	//Gestures Enabled
 	this.gesturesEnabled = new CheckBox(this.form);
 	this.form.addText("Gestures Enabled");
-	this.gesturesEnabled.size.set(15, 15);
+	this.gesturesEnabled.size.set(18, 18);
 	this.gesturesEnabled.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "gesturesEnabled", self.gesturesEnabled.getValue()));
@@ -44,7 +44,7 @@ function LeapPanel(parent, obj)
 	//Poses Enabled
 	this.posesEnabled = new CheckBox(this.form);
 	this.form.addText("Poses Enabled");
-	this.posesEnabled.size.set(15, 15);
+	this.posesEnabled.size.set(18, 18);
 	this.posesEnabled.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "posesEnabled", self.posesEnabled.getValue()));

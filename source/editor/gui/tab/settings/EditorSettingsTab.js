@@ -10,8 +10,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 
 	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 125;
-	this.form.position.set(5, 5);
-	this.form.spacing.set(5, 5);
+	this.form.setAutoSize(false);
 
 	//Scene editor
 	this.form.addText("Editor");
@@ -20,7 +19,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Show stats
 	this.form.addText("Show performance").setAltText("Show performance information in the scene editor.");
 	this.showStats = new CheckBox(this.form);
-	this.showStats.size.set(15, 15);
+	this.showStats.size.set(18, 18);
 	this.showStats.setOnChange(function()
 	{
 		Editor.settings.general.showStats = self.showStats.getValue();
@@ -31,7 +30,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Enable Grid
 	this.form.addText("Show grid");
 	this.gridEnabled = new CheckBox(this.form);
-	this.gridEnabled.size.set(15, 15);
+	this.gridEnabled.size.set(18, 18);
 	this.gridEnabled.setOnChange(function()
 	{
 		Editor.settings.editor.gridEnabled = self.gridEnabled.getValue();
@@ -68,7 +67,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Enable Axis
 	this.form.addText("Show axis");
 	this.axisEnabled = new CheckBox(this.form);
-	this.axisEnabled.size.set(15, 15);
+	this.axisEnabled.size.set(18, 18);
 	this.axisEnabled.setOnChange(function()
 	{
 		Editor.settings.editor.axisEnabled = self.axisEnabled.getValue();
@@ -79,7 +78,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Enable orientation cube
 	this.form.addText("Orientation cube");
 	this.cameraRotationCube = new CheckBox(this.form);
-	this.cameraRotationCube.size.set(15, 15);
+	this.cameraRotationCube.size.set(18, 18);
 	this.cameraRotationCube.setOnChange(function()
 	{
 		Editor.settings.editor.cameraRotationCube = self.cameraRotationCube.getValue();
@@ -103,7 +102,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Snap to grid
 	this.form.addText("Snap to grid");
 	this.snap = new CheckBox(this.form);
-	this.snap.size.set(15, 15);
+	this.snap.size.set(18, 18);
 	this.snap.setOnChange(function()
 	{
 		Editor.settings.editor.snap = self.snap.getValue();
@@ -140,7 +139,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Tranformations space
 	this.form.addText("Keep pose move").setAltText("Recalculate the object transformation to keep its global position when it is moved.");
 	this.keepTransformMove = new CheckBox(this.form);
-	this.keepTransformMove.size.set(15, 15);
+	this.keepTransformMove.size.set(18, 18);
 	this.keepTransformMove.setOnChange(function()
 	{
 		Editor.settings.editor.keepTransformMove = self.keepTransformMove.getValue();
@@ -160,7 +159,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Show UUID
 	this.form.addText("Show object UUID").setAltText("Show object UUID in the object panel.");
 	this.showUUID = new CheckBox(this.form);
-	this.showUUID.size.set(15, 15);
+	this.showUUID.size.set(18, 18);
 	this.showUUID.setOnChange(function()
 	{
 		Editor.settings.general.showUUID = self.showUUID.getValue();
@@ -172,7 +171,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Show type
 	this.form.addText("Show object type");
 	this.showType = new CheckBox(this.form);
-	this.showType.size.set(15, 15);
+	this.showType.size.set(18, 18);
 	this.showType.setOnChange(function()
 	{
 		Editor.settings.general.showType = self.showType.getValue();
@@ -212,7 +211,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Invert navigation
 	this.form.addText("Invert Vertical");
 	this.invertNavigation = new CheckBox(this.form);
-	this.invertNavigation.size.set(15, 15);
+	this.invertNavigation.size.set(18, 18);
 	this.invertNavigation.setOnChange(function()
 	{
 		Editor.settings.editor.invertNavigation = self.invertNavigation.getValue();
@@ -262,7 +261,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Mouse lock on camera move
 	this.form.addText("Lock mouse");
 	this.lockMouse = new CheckBox(this.form);
-	this.lockMouse.size.set(15, 15);
+	this.lockMouse.size.set(18, 18);
 	this.lockMouse.setOnChange(function()
 	{
 		Editor.settings.editor.lockMouse = self.lockMouse.getValue();
@@ -273,7 +272,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Keyboard navigation
 	this.form.addText("Keyboard navigation");
 	this.keyboardNavigation = new CheckBox(this.form);
-	this.keyboardNavigation.size.set(15, 15);
+	this.keyboardNavigation.size.set(18, 18);
 	this.keyboardNavigation.setOnChange(function()
 	{
 		Editor.settings.editor.keyboardNavigation = self.keyboardNavigation.getValue();
@@ -305,7 +304,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Enable camera preview
 	this.form.addText("Show preview");
 	this.cameraPreviewEnabled = new CheckBox(this.form);
-	this.cameraPreviewEnabled.size.set(15, 15);
+	this.cameraPreviewEnabled.size.set(18, 18);
 	this.cameraPreviewEnabled.setOnChange(function()
 	{
 		Editor.settings.editor.cameraPreviewEnabled = self.cameraPreviewEnabled.getValue();
@@ -404,4 +403,12 @@ EditorSettingsTab.prototype.activate = function()
 	//Transformations
 	this.keepTransformMove.setValue(Editor.settings.editor.keepTransformMove);
 	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
+};
+
+EditorSettingsTab.prototype.updateSize = function()
+{
+	TabElement.prototype.updateSize.call(this);
+	
+	this.form.size.copy(this.size);
+	this.form.updateInterface();
 };

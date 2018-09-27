@@ -26,7 +26,7 @@ function PerspectiveCameraPanel(parent, obj)
 	//Camera used
 	this.use = new CheckBox(this.form);
 	this.form.addText("Use camera");
-	this.use.size.set(15, 15);
+	this.use.size.set(18, 18);
 	this.use.setOnChange(function()
 	{
 		if(self.use.getValue())
@@ -127,7 +127,7 @@ function PerspectiveCameraPanel(parent, obj)
 	//Clear color
 	this.clearColor = new CheckBox(this.form);
 	this.form.addText("Clear color");
-	this.clearColor.size.set(15, 15);
+	this.clearColor.size.set(18, 18);
 	this.clearColor.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "clearColor", self.clearColor.getValue()));
@@ -138,7 +138,7 @@ function PerspectiveCameraPanel(parent, obj)
 	//Clear depth
 	this.clearDepth = new CheckBox(this.form);
 	this.form.addText("Clear depth");
-	this.clearDepth.size.set(15, 15);
+	this.clearDepth.size.set(18, 18);
 	this.clearDepth.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "clearDepth", self.clearDepth.getValue()));
@@ -149,7 +149,7 @@ function PerspectiveCameraPanel(parent, obj)
 	//Clear stencil
 	this.clearStencil = new CheckBox(this.form);
 	this.form.addText("Clear stencil");
-	this.clearStencil.size.set(15, 15);
+	this.clearStencil.size.set(18, 18);
 	this.clearStencil.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "clearStencil", self.clearStencil.getValue()));

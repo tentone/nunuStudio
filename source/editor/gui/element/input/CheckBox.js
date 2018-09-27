@@ -29,13 +29,14 @@ function CheckBox(parent)
 	};
 
 	this.check = document.createElement("img");
-	this.check.style.pointerEvents = "none";
 	this.check.style.visibility = "hidden";
+	this.check.style.pointerEvents = "none";
 	this.check.style.position = "absolute";
-	this.check.style.top = "15%";
-	this.check.style.left = "15%";
-	this.check.style.width = "70%";
-	this.check.style.height = "70%";
+	this.check.style.top = "20%";
+	this.check.style.left = "20%";
+	this.check.style.width = "60%";
+	this.check.style.height = "60%";
+
 	this.check.src = Editor.filePath + "icons/misc/check.png";
 	this.element.appendChild(this.check);
 
@@ -93,4 +94,10 @@ CheckBox.prototype.setOnChange = function(callback)
 CheckBox.prototype.updateVisibility = function()
 {
 	this.element.style.visibility = this.visible ? "visible" : "hidden";
+};
+
+CheckBox.prototype.updateSize = function()
+{
+	this.element.style.width = this.size.y + "px";
+	this.element.style.height = this.size.y + "px";
 };

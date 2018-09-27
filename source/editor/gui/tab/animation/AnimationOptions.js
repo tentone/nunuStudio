@@ -19,7 +19,7 @@ function AnimationOptions(parent, editor, animation)
 
 	this.enabled = new CheckBox(this);
 	this.enabled.position.set(55, 5);
-	this.enabled.size.set(15, 15);
+	this.enabled.size.set(18, 18);
 	this.enabled.updateInterface();
 	this.enabled.setOnChange(function()
 	{
