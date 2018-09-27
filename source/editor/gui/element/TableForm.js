@@ -24,10 +24,10 @@ function TableForm(parent)
 	/**
 	 * Resize the last element of the rows to fit the size of the container.
 	 *
-	 * @method resizeLast
+	 * @method fitElements
 	 * @type {Boolean}
 	 */
-	this.resizeLast = true;
+	this.fitElements = true;
 
 	/**
 	 * Spacing between elements and rows.
@@ -197,12 +197,11 @@ TableForm.prototype.updateSize = function()
 			if(element.visible)
 			{
 				//Resize last element
-				if(this.resizeLast && j === this.rows[i].length - 1)
+				if(this.fitElements && j === this.rows[i].length - 1)
 				{
-					element.size.x = this.size.x - x - (3 * this.spacing.x);
+					element.size.x = this.size.x - x - 15;
 				}
 
-				//Position
 				element.position.set(x, y);
 				element.updateInterface();
 
