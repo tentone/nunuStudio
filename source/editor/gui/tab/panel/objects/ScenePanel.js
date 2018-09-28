@@ -66,7 +66,7 @@ function ScenePanel(parent, obj)
 	//Fog
 	this.form.addText("Fog");
 	this.fog = new DropdownList(this.form);
-	this.fog.size.set(100, 20);
+	this.fog.size.set(100, 18);
 	this.fog.addValue("None", THREE.Fog.NONE);
 	this.fog.addValue("Linear", THREE.Fog.LINEAR);
 	this.fog.addValue("Exponential", THREE.Fog.EXPONENTIAL);

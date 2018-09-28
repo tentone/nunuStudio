@@ -19,7 +19,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Theme
 	this.form.addText("Theme");
 	this.theme = new DropdownList(this.form);
-	this.theme.size.set(150, 20);
+	this.theme.size.set(150, 18);
 	this.theme.setOnChange(function()
 	{
 		var value = self.theme.getValue();

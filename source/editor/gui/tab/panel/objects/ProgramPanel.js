@@ -125,7 +125,7 @@ function ProgramPanel(parent, obj)
 	//Shadow type
 	this.form.addText("Shadows type");
 	this.shadowsType = new DropdownList(this.form);
-	this.shadowsType.size.set(120, 20);
+	this.shadowsType.size.set(120, 18);
 	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
 	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
@@ -140,7 +140,7 @@ function ProgramPanel(parent, obj)
 	//Tonemapping
 	this.form.addText("Tonemapping");
 	this.toneMapping = new DropdownList(this.form);
-	this.toneMapping.size.set(120, 20);
+	this.toneMapping.size.set(120, 18);
 	this.toneMapping.addValue("None", THREE.NoToneMapping);
 	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
 	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);

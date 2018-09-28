@@ -7,7 +7,7 @@ function TextureForm(parent)
 	this.element.style.overflow = "visible";
 	
 	this.form = new TableForm(this);
-	this.form.defaultTextWidth = 70;
+	this.form.defaultTextWidth = 60;
 
 	//Use texture
 	this.form.addText("Use texture");

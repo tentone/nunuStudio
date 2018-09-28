@@ -382,7 +382,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form.addText("Base");
 	this.colorValue = new ColorGradientChooser(this.form);
-	this.colorValue.size.set(190, 20);
+	this.colorValue.size.set(190, 18);
 	this.colorValue.setOnChange(function(color, index)
 	{
 		Editor.history.add(new CallbackAction(new ChangeAction(self.particle.emitter.color.value, index, color.clone()), function()
@@ -395,7 +395,7 @@ function ParticleEditor(parent, closeable, container, index)
 	
 	this.form.addText("Spread");
 	this.colorSpread = new ColorGradientChooser(this.form);
-	this.colorSpread.size.set(190, 20);
+	this.colorSpread.size.set(190, 18);
 	this.colorSpread.setOnChange(function(color, index)
 	{
 		Editor.history.add(new CallbackAction(new ChangeAction(self.particle.emitter.color.spread, index, new THREE.Vector3(color.r, color.g, color.b)), function()

@@ -94,7 +94,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.offset = new VectorBox(this.form);
 	this.offset.setType(VectorBox.VECTOR2);
 	this.offset.setStep(0.05);
-	this.offset.size.set(160, 20);
+	this.offset.size.set(160, 18);
 	this.offset.setOnChange(function()
 	{	
 		var value = self.offset.getValue();
@@ -112,7 +112,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.viewport = new VectorBox(this.form);
 	this.viewport.setType(VectorBox.VECTOR2);
 	this.viewport.setStep(0.05);
-	this.viewport.size.set(160, 20);
+	this.viewport.size.set(160, 18);
 	this.viewport.setOnChange(function()
 	{
 		var value = self.viewport.getValue();

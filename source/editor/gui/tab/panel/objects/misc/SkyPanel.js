@@ -18,7 +18,7 @@ function SkyPanel(parent, obj)
 	//Top color
 	this.form.addText("Top color");
 	this.colorTop = new ColorGradientChooser(this.form);
-	this.colorTop.size.set(190, 20);
+	this.colorTop.size.set(190, 18);
 	this.colorTop.setOnChange(function(color, index)
 	{
 		Editor.history.add(new CallbackAction(new ChangeAction(self.obj.colorTop, index, color.clone()), updateSky));
@@ -29,7 +29,7 @@ function SkyPanel(parent, obj)
 	//Bottom color
 	this.form.addText("Bottom color");
 	this.colorBottom = new ColorGradientChooser(this.form);
-	this.colorBottom.size.set(190, 20);
+	this.colorBottom.size.set(190, 18);
 	this.colorBottom.setOnChange(function(color, index)
 	{
 		Editor.history.add(new CallbackAction(new ChangeAction(self.obj.colorBottom, index, color.clone()), updateSky));

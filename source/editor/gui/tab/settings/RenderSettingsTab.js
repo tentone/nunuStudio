@@ -60,7 +60,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Shadows settings
 	this.form.addText("Shadows type");
 	this.shadowsType = new DropdownList(this.form);
-	this.shadowsType.size.set(150, 20);
+	this.shadowsType.size.set(150, 18);
 	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
 	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
@@ -74,7 +74,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Tonemapping
 	this.form.addText("Tonemapping");
 	this.toneMapping = new DropdownList(this.form);
-	this.toneMapping.size.set(150, 20);
+	this.toneMapping.size.set(150, 18);
 	this.toneMapping.addValue("None", THREE.NoToneMapping);
 	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
 	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);

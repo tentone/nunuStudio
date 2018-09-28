@@ -187,7 +187,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 
 	this.form.addText("ECMAScript Version").setAltText("Specify the ECMAScript version to which the code must adhere");
 	this.esversion = new DropdownList(this.form);
-	this.esversion.size.set(50, 20);
+	this.esversion.size.set(50, 18);
 	this.esversion.addValue(5, 5);
 	this.esversion.addValue(6, 6);
 	this.esversion.setOnChange(function()

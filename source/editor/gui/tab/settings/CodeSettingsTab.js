@@ -19,7 +19,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Code Theme
 	this.form.addText("Editor theme");
 	this.codeTheme = new DropdownList(this.form);
-	this.codeTheme.size.set(120, 20);
+	this.codeTheme.size.set(120, 18);
 	this.codeTheme.setOnChange(function()
 	{
 		Editor.settings.code.theme = self.codeTheme.getValue();
@@ -36,7 +36,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Code keymap
 	this.form.addText("Key bindings");
 	this.codeKeymap = new DropdownList(this.form);
-	this.codeKeymap.size.set(120, 20);
+	this.codeKeymap.size.set(120, 18);
 	this.codeKeymap.addValue("codemirror", "default");
 	this.codeKeymap.addValue("sublime", "sublime");
 	this.codeKeymap.addValue("vim", "vim");

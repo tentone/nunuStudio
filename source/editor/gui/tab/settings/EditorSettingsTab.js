@@ -126,7 +126,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Tranformations space
 	this.form.addText("Transformations space");
 	this.transformationSpace = new DropdownList(this.form);
-	this.transformationSpace.size.set(150, 20);
+	this.transformationSpace.size.set(150, 18);
 	this.transformationSpace.addValue("Local", "local");
 	this.transformationSpace.addValue("World", "world");
 	this.transformationSpace.setOnChange(function()
@@ -192,7 +192,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Navigation
 	this.form.addText("Navigation Mode");
 	this.navigation = new DropdownList(this.form);
-	this.navigation.size.set(150, 20);
+	this.navigation.size.set(150, 18);
 	this.navigation.addValue("First-Person", Settings.FIRST_PERSON);
 	this.navigation.addValue("Orbit", Settings.ORBIT);
 	this.navigation.addValue("Left", Settings.PLANAR_LEFT);
@@ -328,7 +328,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	//Navigation
 	this.form.addText("Position");
 	this.cameraPreviewPosition = new DropdownList(this.form);
-	this.cameraPreviewPosition.size.set(150, 20);
+	this.cameraPreviewPosition.size.set(150, 18);
 	this.cameraPreviewPosition.addValue("Bottom Right", Settings.BOTTOM_RIGHT);
 	this.cameraPreviewPosition.addValue("Bottom Left", Settings.BOTTOM_LEFT);
 	this.cameraPreviewPosition.addValue("Top Right", Settings.TOP_RIGHT);
