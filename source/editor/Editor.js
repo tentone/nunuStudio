@@ -395,6 +395,7 @@ include("editor/gui/tab/material/mesh/MeshMaterialEditor.js");
 include("editor/gui/tab/material/mesh/MeshPhongMaterialEditor.js");
 include("editor/gui/tab/material/mesh/MeshLambertMaterialEditor.js");
 include("editor/gui/tab/material/mesh/MeshBasicMaterialEditor.js");
+include("editor/gui/tab/material/mesh/MeshMatcapMaterialEditor.js");
 include("editor/gui/tab/material/mesh/MeshStandardMaterialEditor.js");
 include("editor/gui/tab/material/mesh/MeshPhysicalMaterialEditor.js");
 

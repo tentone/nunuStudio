@@ -241,6 +241,14 @@ function AssetExplorerMenu(parent)
 		Editor.updateObjectsViewsGUI();
 	}, Editor.filePath + "icons/misc/material.png");
 
+	material.addOption("Matcap material", function()
+	{
+		var material = new THREE.MeshMatcapMaterial();
+		material.name = "matcap";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectsViewsGUI();
+	}, Editor.filePath + "icons/misc/material.png");
+
 	material.addOption("Sprite material", function()
 	{
 		var material = new THREE.SpriteMaterial({color: 0xffffff});

@@ -187,6 +187,20 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalScale);
 	this.form.nextRow();
 
+	//Normal type
+	this.form.addText("Normal type");
+	this.normalMapType = new DropdownList(this.form);
+	this.normalMapType.size.set(100, 18);
+	this.normalMapType.addValue("Tangent Space", THREE.TangentSpaceNormalMap);
+	this.normalMapType.addValue("Object Space", THREE.ObjectSpaceNormalMap);
+	this.normalMapType.setOnChange(function()
+	{
+		Editor.history.add(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.normalMapType);
+	this.form.nextRow();
+
 	//Displacement map
 	this.form.addText("Displacement map");
 	this.form.nextRow();
@@ -364,6 +378,7 @@ MeshStandardMaterialEditor.prototype.attach = function(material, asset)
 	this.bumpScale.setValue(material.bumpScale);
 	this.normalMap.setValue(material.normalMap);
 	this.normalScale.setValue(material.normalScale.x, material.normalScale.y);
+	this.normalMapType.setValue(material.normalMapType);
 	this.displacementMap.setValue(material.displacementMap);
 	this.displacementScale.setValue(material.displacementScale);
 	this.displacementBias.setValue(material.displacementBias);

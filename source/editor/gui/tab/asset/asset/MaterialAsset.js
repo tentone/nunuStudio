@@ -57,6 +57,10 @@ function MaterialAsset(parent)
 				{
 					tab = Editor.gui.tab.addTab(MeshLambertMaterialEditor, true);
 				}
+				else if(self.asset instanceof THREE.MeshMatcapMaterial)
+				{
+					tab = Editor.gui.tab.addTab(MeshMatcapMaterialEditor, true);
+				}
 				else if(self.asset instanceof THREE.MeshBasicMaterial)
 				{
 					tab = Editor.gui.tab.addTab(MeshBasicMaterialEditor, true);

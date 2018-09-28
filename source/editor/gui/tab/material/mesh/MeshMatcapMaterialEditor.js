@@ -1,6 +1,6 @@
 "use strict";
 
-function MeshPhongMaterialEditor(parent, closeable, container, index)
+function MeshMatcapMaterialEditor(parent, closeable, container, index)
 {
 	MeshMaterialEditor.call(this, parent, closeable, container, index);
 
@@ -22,7 +22,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.morphTargets = new CheckBox(this.form);
 	this.form.addText("Morph targets");
 	this.morphTargets.size.set(18, 18);
-	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
@@ -34,7 +33,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.wireframe = new CheckBox(this.form);
 	this.form.addText("Wireframe");
 	this.wireframe.size.set(18, 18);
-	this.wireframe.updateInterface();
 	this.wireframe.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
@@ -42,20 +40,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
-	//Shading mode
-	this.form.addText("Shading");
-	this.flatShading = new DropdownList(this.form);
-	this.flatShading.size.set(100, 18);
-	this.flatShading.addValue("Smooth", false);
-	this.flatShading.addValue("Flat", true);
-	this.flatShading.setOnChange(function()
-	{
-		Editor.history.add(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.flatShading);
-	this.form.nextRow();
-	
 	//Color
 	this.form.addText("Color");
 	this.color = new ColorChooser(this.form);
@@ -68,30 +52,16 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Specular color
-	this.form.addText("Specular");
-	this.specular = new ColorChooser(this.form);
-	this.specular.size.set(100, 18);
-	this.specular.setOnChange(function()
-	{
-		self.material.specular.setHex(self.specular.getValueHex());
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.specular);
+	//Matcap map
+	this.form.addText("Matcap map");
 	this.form.nextRow();
-
-	//Shininess
-	this.form.addText("Shininess");
-	this.shininess = new Slider(this.form);
-	this.shininess.size.set(160, 18);
-	this.shininess.setRange(0, 250);
-	this.shininess.setStep(0.1);
-	this.shininess.setOnChange(function()
+	this.matcap = new TextureForm(this.form);
+	this.matcap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "shininess", self.shininess.getValue()));
+		Editor.history.add(new ChangeAction(self.material, "matcap", self.matcap.getValue()));
 		self.material.needsUpdate = true;
 	});
-	this.form.add(this.shininess);
+	this.form.add(this.matcap);
 	this.form.nextRow();
 
 	//Texture map
@@ -210,55 +180,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementBias);
 	this.form.nextRow();
 
-	//Specular map
-	this.form.addText("Specular map");
-	this.form.nextRow();
-	this.specularMap = new TextureForm(this.form);
-	this.specularMap.setOnChange(function(file)
-	{
-		Editor.history.add(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.specularMap);
-	this.form.nextRow();
-
-	//Emissive map
-	this.form.addText("Emissive map");
-	this.form.nextRow();
-	this.emissiveMap = new TextureForm(this.form);
-	this.emissiveMap.setOnChange(function(file)
-	{
-		Editor.history.add(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.emissiveMap);
-	this.form.nextRow();
-
-	//Emissive color
-	this.form.addText("Color");
-	this.emissive = new ColorChooser(this.form);
-	this.emissive.size.set(100, 18);
-	this.emissive.setOnChange(function()
-	{
-		self.material.emissive.setHex(self.emissive.getValueHex());
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.emissive);
-	this.form.nextRow();
-
-	//Emissive intensity
-	this.form.addText("Intensity");
-	this.emissiveIntensity = new NumberBox(this.form);
-	this.emissiveIntensity.size.set(60, 18);
-	this.emissiveIntensity.setStep(0.1);
-	this.emissiveIntensity.setOnChange(function()
-	{
-		Editor.history.add(new ChangeAction(self.material, "emissiveIntensity", self.emissiveIntensity.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.emissiveIntensity);
-	this.form.nextRow();
-
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.form.nextRow();
@@ -270,74 +191,19 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
-
-	//Environment map
-	this.form.addText("Environment map");
-	this.form.nextRow();
-	this.envMap = new CubeTextureBox(this.form);
-	this.envMap.size.set(100, 100);
-	this.envMap.setOnChange(function(file)
-	{
-		Editor.history.add(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.envMap);
-	this.form.nextRow();
-
-	//Combine environment map
-	this.form.addText("Mode");
-	this.combine = new DropdownList(this.form);
-	this.combine.size.set(120, 18);
-	this.combine.addValue("Multiply", THREE.MultiplyOperation);
-	this.combine.addValue("Mix", THREE.MixOperation);
-	this.combine.addValue("Add", THREE.AddOperation);
-	this.combine.setOnChange(function()
-	{
-		Editor.history.add(new ChangeAction(self.material, "combine", self.combine.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.combine);
-	this.form.nextRow();
-
-	//Reflectivity
-	this.form.addText("Reflectivity");
-	this.reflectivity = new NumberBox(this.form);
-	this.reflectivity.size.set(60, 18);
-	this.reflectivity.setStep(0.05);
-	this.reflectivity.setOnChange(function()
-	{
-		Editor.history.add(new ChangeAction(self.material, "reflectivity", self.reflectivity.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.reflectivity);
-	this.form.nextRow();
-
-	//Refraction
-	this.form.addText("Refraction Ratio");
-	this.refractionRatio = new NumberBox(this.form);
-	this.refractionRatio.size.set(60, 18);
-	this.refractionRatio.setStep(0.05);
-	this.refractionRatio.setOnChange(function()
-	{
-		Editor.history.add(new ChangeAction(self.material, "refractionRatio", self.refractionRatio.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.refractionRatio);
 }
 
-MeshPhongMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
+MeshMatcapMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
 
-MeshPhongMaterialEditor.prototype.attach = function(material, asset)
+MeshMatcapMaterialEditor.prototype.attach = function(material, asset)
 {
 	MeshMaterialEditor.prototype.attach.call(this, material, asset);
 
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);
 	this.wireframe.setValue(material.wireframe);
-	this.flatShading.setValue(material.flatShading);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
-	this.specular.setValue(material.specular.r, material.specular.g, material.specular.b);
-	this.shininess.setValue(material.shininess);
+	this.matcap.setValue(material.matcap);
 	this.map.setValue(material.map);
 	this.bumpMap.setValue(material.bumpMap);
 	this.bumpScale.setValue(material.bumpScale);
@@ -347,13 +213,5 @@ MeshPhongMaterialEditor.prototype.attach = function(material, asset)
 	this.displacementMap.setValue(material.displacementMap);
 	this.displacementScale.setValue(material.displacementScale);
 	this.displacementBias.setValue(material.displacementBias);
-	this.specularMap.setValue(material.specularMap);
-	this.emissive.setValue(material.emissive.r, material.emissive.g, material.emissive.b);
-	this.emissiveIntensity.setValue(material.emissiveIntensity);
-	this.emissiveMap.setValue(material.emissiveMap);
 	this.alphaMap.setValue(material.alphaMap);
-	this.envMap.setValue(material.envMap);
-	this.combine.setValue(material.combine);
-	this.reflectivity.setValue(material.reflectivity || 0);
-	this.refractionRatio.setValue(material.refractionRatio || 0);
 };

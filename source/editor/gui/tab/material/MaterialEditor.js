@@ -59,7 +59,6 @@ function MaterialEditor(parent, closeable, container, index)
 	//Side
 	this.form.addText("Side");
 	this.side = new DropdownList(this.form);
-	this.side.position.set(100, 85);
 	this.side.size.set(100, 18);
 	this.side.addValue("Front", THREE.FrontSide);
 	this.side.addValue("Back", THREE.BackSide);
@@ -99,7 +98,6 @@ function MaterialEditor(parent, closeable, container, index)
 	//Depth mode
 	this.form.addText("Depth Mode");
 	this.depthFunc = new DropdownList(this.form);
-	this.depthFunc.position.set(100, 85);
 	this.depthFunc.size.set(100, 18);
 	this.depthFunc.addValue("Never", THREE.NeverDepth);
 	this.depthFunc.addValue("Always", THREE.AlwaysDepth);
@@ -159,7 +157,6 @@ function MaterialEditor(parent, closeable, container, index)
 	//Blending mode
 	this.form.addText("Blending Mode");
 	this.blending = new DropdownList(this.form);
-	this.blending.position.set(100, 85);
 	this.blending.size.set(100, 18);
 	this.blending.addValue("None", THREE.NoBlending);
 	this.blending.addValue("Normal", THREE.NormalBlending);
