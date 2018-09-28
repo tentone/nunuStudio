@@ -17,23 +17,33 @@ function DropdownMenu(parent)
 
 	this.preventDragEvents();
 
-	//Panel
+	/**
+	 * Panel element, where the options are stored.
+	 *
+	 * This DOM element is added directly to the parent DOM element.
+	 *
+	 * @attribute panel
+	 * @type {DOM}
+	 */
 	this.panel = new Element(parent, "div");
 	this.panel.element.style.overflow = "visible";
 	this.panel.element.style.display = "none";
 	this.panel.element.style.zIndex = "300";
 
-	//Icon
-	this.icon = document.createElement("img");
-	this.icon.style.display = "none";
-	this.icon.style.position = "absolute";
-	this.icon.style.left = "5px";
-	this.icon.style.top = "3px";
-	this.icon.style.width = "12px";
-	this.icon.style.height = "12px";
-	this.element.appendChild(this.icon);
+	/**
+	 * Option icon image, the element is only created when a icon is set.
+	 *
+	 * @attribute icon
+	 * @type {DOM}
+	 */
+	this.icon = null;
 
-	//Arrow
+	/**
+	 * Decorative arrow.
+	 *
+	 * @attribute arrow
+	 * @type {DOM}
+	 */
 	this.arrow = document.createElement("img");
 	this.arrow.style.display = "none";
 	this.arrow.style.position = "absolute";
@@ -44,35 +54,52 @@ function DropdownMenu(parent)
 	this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
 	this.element.appendChild(this.arrow);
 
-	//Options
+	/**
+	 * Direction to open the dropdown.
+	 *
+	 * @attribute direction
+	 * @type {Number}
+	 */
 	this.direction = DropdownMenu.DOWN;
+	
+	/**
+	 * Indicates if the dropdown menu is expanded.
+	 *
+	 * @attribute expanded
+	 * @type {Boolean}
+	 */
 	this.expanded = false;
 	this.optionsSize = new THREE.Vector2(150, 20);
+
+	/**
+	 * Options available in the dropdown.
+	 *
+	 * Options are stored as: {button:button, value:object, name:string}
+	 *
+	 * @attribute options
+	 * @type {Array}
+	 */
 	this.options = [];
 
 	var self = this;
 
-	//Mouse over
 	this.element.onmouseenter = function()
 	{
 		self.setExpanded(true);
 		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
-	//Mouse leave
 	this.element.onmouseleave = function()
 	{
 		self.setExpanded(false);
 		self.element.style.backgroundColor = Editor.theme.buttonColor;
 	};
 	
-	//Mouve over
 	this.panel.element.onmouseenter = function()
 	{
 		self.setExpanded(true);
 	};
 
-	//Mouse leave
 	this.panel.element.onmouseleave = function()
 	{
 		self.setExpanded(false);
@@ -114,7 +141,18 @@ DropdownMenu.prototype.showArrow = function()
  */
 DropdownMenu.prototype.setIcon = function(icon)
 {
-	this.icon.style.display = "block";
+	if(this.icon === null)
+	{
+		this.icon = document.createElement("img");
+		this.icon.style.display = "block";
+		this.icon.style.position = "absolute";
+		this.icon.style.left = "5px";
+		this.icon.style.top = "3px";
+		this.icon.style.width = "12px";
+		this.icon.style.height = "12px";
+		this.element.appendChild(this.icon);
+	}
+
 	this.icon.src = icon;
 };
 
