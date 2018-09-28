@@ -43,6 +43,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "KinectDevice",
         "LeapMotion",
         "LensFlare",
+        "LocalStorage",
         "Material",
         "MaterialLoader",
         "MathUtils",

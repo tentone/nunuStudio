@@ -804,11 +804,20 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\utils\\AnimationTimer.js": {
-            "name": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+        "..\\..\\source\\core\\utils\\timer\\AnimationTimer.js": {
+            "name": "..\\..\\source\\core\\utils\\timer\\AnimationTimer.js",
             "modules": {},
             "classes": {
                 "AnimationTimer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\utils\\timer\\Timer.js": {
+            "name": "..\\..\\source\\core\\utils\\timer\\Timer.js",
+            "modules": {},
+            "classes": {
+                "Timer": 1
             },
             "fors": {},
             "namespaces": {}
@@ -820,6 +829,15 @@
             },
             "classes": {
                 "EventManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\utils\\LocalStorage.js": {
+            "name": "..\\..\\source\\core\\utils\\LocalStorage.js",
+            "modules": {},
+            "classes": {
+                "LocalStorage": 1
             },
             "fors": {},
             "namespaces": {}
@@ -849,15 +867,6 @@
             },
             "classes": {
                 "PhysicsGenerator": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\utils\\Timer.js": {
-            "name": "..\\..\\source\\core\\utils\\Timer.js",
-            "modules": {},
-            "classes": {
-                "Timer": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1083,13 +1092,12 @@
             "elements": {},
             "classes": {
                 "PhysicsGenerator": 1,
-                "PhysicsObject": 1,
-                "Timer": 1
+                "PhysicsObject": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\Timer.js",
+            "file": "..\\..\\source\\core\\utils\\PhysicsGenerator.js",
             "line": 3,
             "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
@@ -1249,12 +1257,13 @@
                 "ByteArrayUtils": 1,
                 "Tree": 1,
                 "TreeUtils": 1,
-                "AnimationTimer": 1
+                "AnimationTimer": 1,
+                "Timer": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+            "file": "..\\..\\source\\core\\utils\\timer\\Timer.js",
             "line": 3,
             "description": "ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format"
         },
@@ -1264,6 +1273,7 @@
             "elements": {},
             "classes": {
                 "EventManager": 1,
+                "LocalStorage": 1,
                 "MathUtils": 1,
                 "ObjectUtils": 1
             },
@@ -3398,9 +3408,35 @@
             "extension_for": [],
             "module": "BinaryUtils",
             "namespace": "",
-            "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+            "file": "..\\..\\source\\core\\utils\\timer\\AnimationTimer.js",
             "line": 3,
             "description": "Animation timer is a special type of timer that uses the requestAnimationFrame method.\n\nThis timer calls the method with the same rate as the screen refesh rate.\n\nLoop time can be changed dinamically."
+        },
+        "Timer": {
+            "name": "Timer",
+            "shortname": "Timer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "BinaryUtils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\timer\\Timer.js",
+            "line": 3,
+            "description": "Time is user to call functions in loop at a defined rate.\n\nLoop time can be changed dinamically.",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "Timer callback function.",
+                    "type": "Function"
+                },
+                {
+                    "name": "time",
+                    "description": "Timer period.",
+                    "type": "Number"
+                }
+            ]
         },
         "EventManager": {
             "name": "EventManager",
@@ -3415,6 +3451,21 @@
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
             "line": 3,
             "description": "EventManager is used to manager DOM events creationg and destruction in a single function call.\n\nIt is used by objects to make it easier to add and remove events from global DOM objects."
+        },
+        "LocalStorage": {
+            "name": "LocalStorage",
+            "shortname": "LocalStorage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Utils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\LocalStorage.js",
+            "line": 3,
+            "description": "Utils to access the browser local storage.",
+            "static": 1
         },
         "MathUtils": {
             "name": "MathUtils",
@@ -3461,32 +3512,6 @@
             "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
             "author": "tentone",
             "static": 1
-        },
-        "Timer": {
-            "name": "Timer",
-            "shortname": "Timer",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Physics",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\utils\\Timer.js",
-            "line": 3,
-            "description": "Time is user to call functions in loop at a defined rate.\n\nLoop time can be changed dinamically.",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "Timer callback function.",
-                    "type": "Function"
-                },
-                {
-                    "name": "time",
-                    "description": "Timer period.",
-                    "type": "Number"
-                }
-            ]
         },
         "VRControls": {
             "name": "VRControls",
@@ -13490,7 +13515,7 @@
             "module": "BinaryUtils"
         },
         {
-            "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+            "file": "..\\..\\source\\core\\utils\\timer\\AnimationTimer.js",
             "line": 20,
             "description": "Start timer, is the timer is already running dosen't do anything.",
             "itemtype": "method",
@@ -13499,12 +13524,30 @@
             "module": "BinaryUtils"
         },
         {
-            "file": "..\\..\\source\\core\\utils\\AnimationTimer.js",
+            "file": "..\\..\\source\\core\\utils\\timer\\AnimationTimer.js",
             "line": 48,
             "description": "Stop animation timer.",
             "itemtype": "method",
             "name": "stop",
             "class": "AnimationTimer",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\timer\\Timer.js",
+            "line": 21,
+            "description": "Start timer, is the timer is already running dosen't do anything.\n\nThe callback is called right after starting the timer.",
+            "itemtype": "method",
+            "name": "start",
+            "class": "Timer",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\timer\\Timer.js",
+            "line": 51,
+            "description": "Stop timer.",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "Timer",
             "module": "BinaryUtils"
         },
         {
@@ -13568,6 +13611,87 @@
             "itemtype": "method",
             "name": "destroy",
             "class": "EventManager",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\LocalStorage.js",
+            "line": 11,
+            "description": "Store value in the local storage.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "LocalStorage",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\LocalStorage.js",
+            "line": 31,
+            "description": "Get value from the local storage.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Value obtained from the storage.",
+                "type": "Object"
+            },
+            "class": "LocalStorage",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\LocalStorage.js",
+            "line": 53,
+            "description": "Check if a key exists in the local storage.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "exists",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "True if the key exists false otherwise.",
+                "type": "Boolean"
+            },
+            "class": "LocalStorage",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\LocalStorage.js",
+            "line": 66,
+            "description": "Delete a key from the local storage.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "delete",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "LocalStorage",
             "module": "Utils"
         },
         {
@@ -14050,24 +14174,6 @@
                 "type": "Array"
             },
             "class": "PhysicsGenerator",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Timer.js",
-            "line": 21,
-            "description": "Start timer, is the timer is already running dosen't do anything.\n\nThe callback is called right after starting the timer.",
-            "itemtype": "method",
-            "name": "start",
-            "class": "Timer",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Timer.js",
-            "line": 51,
-            "description": "Stop timer.",
-            "itemtype": "method",
-            "name": "stop",
-            "class": "Timer",
             "module": "Physics"
         },
         {

@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio BinaryUtils</title>  
+	<title>nunuStudio LocalStorage</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -182,69 +182,312 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>BinaryUtils Module</h1>
-						<div class="box clearfix meta">
+						<h1>LocalStorage Class</h1>
+						<div class="box meta">
 						
 						
+						
+									Module: <a href="../modules/Utils.html">Utils</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format</p>
+							<p>Utils to access the browser local storage.</p>
 						
 						</div>
 						
 						
-						<div class="yui3-g">
-							<div class="yui3-u-1-2">
-									<p>This namespace provides the following classes:</p>
+						<div id="classdocs" class="tabview">
+							<ul class="api-class-tabs">
+								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/AnimationTimer.html">
-												AnimationTimer
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/ArraybufferUtils.html">
-												ArraybufferUtils
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Base64Utils.html">
-												Base64Utils
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/BufferUtils.html">
-												BufferUtils
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/ByteArrayUtils.html">
-												ByteArrayUtils
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Timer.html">
-												Timer
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Tree.html">
-												Tree
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/TreeUtils.html">
-												TreeUtils
-											</a>
-										</li>
-									</ul>
-							</div>
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+							</ul>
 						
-							<div class="yui3-u-1-2">
+							<div>
+								<div id="index" class="api-class-tabpanel index">
+									<h2 class="off-left">Item Index</h2>
+						
+										<div class="index-section methods">
+											<h3>Methods</h3>
+						
+											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_delete">delete</a>
+						
+															<span class="flag static">static</span>
+													</li>
+													<li class="index-item method">
+														<a href="#method_exists">exists</a>
+						
+															<span class="flag static">static</span>
+													</li>
+													<li class="index-item method">
+														<a href="#method_get">get</a>
+						
+															<span class="flag static">static</span>
+													</li>
+													<li class="index-item method">
+														<a href="#method_set">set</a>
+						
+															<span class="flag static">static</span>
+													</li>
+											</ul>
+										</div>
+						
+						
+						
+								</div>
+						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
+						
+											<div id="method_delete" class="method item">
+												<h3 class="name"><code>delete</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>key</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Delete a key from the local storage.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">key</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_exists" class="method item">
+												<h3 class="name"><code>exists</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>key</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Boolean</span>
+													</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if a key exists in the local storage.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">key</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Boolean</span>:
+																<p>True if the key exists false otherwise.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_get" class="method item">
+												<h3 class="name"><code>get</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>key</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Object</span>
+													</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get value from the local storage.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">key</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Object</span>:
+																<p>Value obtained from the storage.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_set" class="method item">
+												<h3 class="name"><code>set</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>key</code>
+															</li>
+															<li class="arg">
+																	<code>value</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Store value in the local storage.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">key</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">value</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+									</div>
+						
+						
+						
 							</div>
 						</div>
 					</div>
