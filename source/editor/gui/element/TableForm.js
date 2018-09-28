@@ -79,12 +79,7 @@ TableForm.prototype.add = function(element)
 	if(this.rows.length > 0)
 	{
 		this.rows[this.rows.length - 1].push(element);
-
-		if(element.parent !== this.element)
-		{
-			element.parent = this.element;
-			this.element.appendChild(element.element);
-		}
+		element.attachTo(this);
 	}
 };
 
