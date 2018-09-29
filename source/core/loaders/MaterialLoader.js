@@ -363,6 +363,12 @@ MaterialLoader.prototype.parse = function(json)
 		material.emissiveIntensity = json.emissiveIntensity;
 	}
 
+	//Matcap map
+	if(json.matcap !== undefined)
+	{
+		material.matcap = getTexture(json.matcap);
+	}
+
 	//Specular map
 	if(json.specularMap !== undefined)
 	{

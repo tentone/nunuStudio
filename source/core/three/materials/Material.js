@@ -138,6 +138,7 @@ THREE.Material.prototype.toJSON = function(meta)
 	if(this.normalMap && this.normalMap.isTexture)
 	{
 		data.normalMap = this.normalMap.toJSON(meta).uuid;
+		data.normalMapType = this.normalMapType;
 		data.normalScale = this.normalScale.toArray();
 	}
 
@@ -167,6 +168,12 @@ THREE.Material.prototype.toJSON = function(meta)
 	if(this.emissiveIntensity !== 1.0)
 	{
 		data.emissiveIntensity = this.emissiveIntensity;
+	}
+
+	//Matcap map
+	if(this.matcap && this.matcap.isTexture)
+	{
+		data.matcap = this.matcap.toJSON(meta).uuid;
 	}
 
 	//Emissive map
