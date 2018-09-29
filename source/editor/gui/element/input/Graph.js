@@ -165,7 +165,7 @@ Graph.prototype.addGraph = function(name, color)
 };
 
 /** 
- * Attach onchange onChange to a graph by its name.
+ * Attach onchange callback to a graph by its name.
  *
  * @method setOnChange
  * @param {Function} onChange

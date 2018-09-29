@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Slider element is used to select a numeric value using a visual slider bar.
+ * 
+ * @class Slider
+ * @extends {Element}
+ * @param {Element} parent Parent element.
+ */
 function Slider(parent)
 {
 	Element.call(this, parent, "div");
@@ -84,7 +91,12 @@ function Slider(parent)
 	this.mouseStart = 0;
 	this.valueStart = 0;
 
-	//Event manager
+	/**
+	 * Event manager to handle window events.
+	 *
+	 * @property manager
+	 * @type {EventManager}
+	 */
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
@@ -129,18 +141,12 @@ function Slider(parent)
 
 Slider.prototype = Object.create(Element.prototype);
 
-//Remove element
-Slider.prototype.destroy = function()
-{
-	Element.prototype.destroy.call(this);
-	
-	if(document.body.contains(this.text))
-	{
-		document.body.removeChild(this.text);
-	}
-};
-
-//Set if element if disabled
+/**
+ * Set if element is disabled.
+ *
+ * @method setDisabled
+ * @param {Boolean} value.
+ */
 Slider.prototype.setDisabled = function(value)
 {
 	//TODO
@@ -152,20 +158,37 @@ Slider.prototype.setStep = function(step)
 	this.step = step;
 };
 
-//Set slider range
+/**
+ * Set value range of the slider.
+ *
+ * @method setRange.
+ * @param {Number} min
+ * @param {Number} max
+ */
 Slider.prototype.setRange = function(min, max)
 {
 	this.min = min;
 	this.max = max;
 };
 
-//Set onchange onChange
+/** 
+ * Set onchange callback.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ * @param {String} name Graph name.
+ */
 Slider.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
 };
 
-//Get Slider value
+/**
+ * Set Slider value.
+ *
+ * @method setValue
+ * @param {Number} value
+ */
 Slider.prototype.setValue = function(value)
 {
 	if(value < this.min)
@@ -180,6 +203,7 @@ Slider.prototype.setValue = function(value)
 	if(this.step !== null)
 	{
 		var remainder = value % this.step;
+
 		value -= remainder;
 		if(remainder > this.step / 2)
 		{
@@ -200,21 +224,40 @@ Slider.prototype.setValue = function(value)
 	}
 
 	this.value = value;
-
-	//Update elements
-	var progress = ((this.value - this.min) / (this.max - this.min)) * 100;
-	this.progress.style.width = progress + "%";
-	this.scrubber.style.left = progress + "%";
-	this.textValue.data = value;
+	this.updateValue();
 };
 
-//Get Slider value
+/**
+ * Get Slider value.
+ *
+ * @method getValue
+ * @return {Number} Value of the slider.
+ */
 Slider.prototype.getValue = function()
 {
 	return this.value;
 };
 
-Slider.prototype.updateVisibility = function()
+/**
+ * Update the DOM elements to represent the value.
+ *
+ * @method updateValue
+ */
+Slider.prototype.updateValue = function()
 {
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
+	var progress = ((this.value - this.min) / (this.max - this.min)) * 100;
+
+	this.progress.style.width = progress + "%";
+	this.scrubber.style.left = progress + "%";
+	this.textValue.data = this.value;
+};
+
+Slider.prototype.destroy = function()
+{
+	Element.prototype.destroy.call(this);
+	
+	if(document.body.contains(this.text))
+	{
+		document.body.removeChild(this.text);
+	}
 };

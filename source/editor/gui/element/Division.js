@@ -5,7 +5,7 @@
  * 
  * @class Division
  * @extends {Element}
- * @param {DOM} parent Parent element.
+ * @param {Element} parent Parent element.
  */
 function Division(parent)
 {

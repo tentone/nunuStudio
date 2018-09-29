@@ -3,7 +3,7 @@
 /**
  * Body to represent the document.body
  * 
- * It does not extend the Element class, but has the same base attributes. 
+ * It does not extend the Element class, but has the same base attributes.
  */
 var DocumentBody = 
 {
@@ -25,7 +25,6 @@ Object.defineProperties(DocumentBody,
 			this._size.set(window.innerWidth, window.innerHeight);
 			return this._size;
 		},
-
 		set: function(){}
 	}
 });

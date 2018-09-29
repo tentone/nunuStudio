@@ -7,7 +7,7 @@
  *
  * @class RendererCanvas
  * @extends {Element}
- * @param {DOM} parent Parent element.
+ * @param {Element} parent Parent element.
  * @param {Boolean} alpha If true the background is transparent.
  */
 function RendererCanvas(parent, alpha)

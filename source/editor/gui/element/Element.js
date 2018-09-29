@@ -6,7 +6,7 @@
  * All GUI elements are based on the Element class, components can be inserted into other componens or into DOM elements.
  * 
  * @class Element
- * @param {DOM} parent Parent element.
+ * @param {Element} parent Parent element.
  * @param {String} type Type of the based DOM element.
  */
 function Element(parent, type)
