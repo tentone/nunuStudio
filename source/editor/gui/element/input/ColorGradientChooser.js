@@ -1,12 +1,38 @@
 "use strict";
 
+/**
+ * Color gradient chooser is used to select and preview a gradient of colors store in an array.
+ *
+ * @class ColorGradientChooser
+ * @extends {Element}
+ * @param {Element} parent Parent element.
+ */
 function ColorGradientChooser(parent)
 {
 	Element.call(this, parent, "div");
 
+	/**
+	 * On change callback function.
+	 *
+	 * @property onChange
+	 * @type {Function}
+	 */
 	this.onChange = null;
 
+	/**
+	 * Color values of the gradient.
+	 *
+	 * @property values
+	 * @type {Array}
+	 */
 	this.values = [];
+
+	/**
+	 * Buttons DOM element. Buttons have a onchange, color and index properties attached to them.
+	 *
+	 * @property buttons
+	 * @type {Array}
+	 */
 	this.buttons = [];
 
 	this.element.style.overflow = "hidden";
@@ -16,6 +42,12 @@ function ColorGradientChooser(parent)
 	this.element.style.borderRadius = "4px";
 	this.element.style.zIndex = "2000";
 
+	/**
+	 * Canvas DOM element used to draw the gradient.
+	 *
+	 * @property canvas
+	 * @type {DOM}
+	 */
 	this.canvas = document.createElement("canvas");
 	this.canvas.style.position = "absolute";
 	this.canvas.style.top = "0px";
@@ -27,6 +59,11 @@ function ColorGradientChooser(parent)
 
 ColorGradientChooser.prototype = Object.create(Element.prototype);
 
+/**
+ * Update the buttos to match new values.
+ *
+ * @method updateButtons
+ */
 ColorGradientChooser.prototype.updateButtons = function()
 {
 	var self = this;
@@ -35,7 +72,7 @@ ColorGradientChooser.prototype.updateButtons = function()
 	{
 		var rgb = this.color.rgb;
 
-		self.values[this.index].setRGB(rgb[0]/255, rgb[1]/255, rgb[2]/255);
+		self.values[this.index].setRGB(rgb[0] / 255, rgb[1] / 255, rgb[2] / 255);
 		self.updateValues();
 
 		if(self.onChange !== null)
@@ -85,11 +122,13 @@ ColorGradientChooser.prototype.updateButtons = function()
 	}
 };
 
+/**
+ * Update the representation of the gradient.
+ *
+ * @method updateValues
+ */
 ColorGradientChooser.prototype.updateValues = function()
 {
-	this.canvas.width = this.size.x;
-	this.canvas.height = this.size.y;
-		
 	var context = this.canvas.getContext("2d");
 	var gradient = context.createLinearGradient(0, 0, this.canvas.width, 0);
 
@@ -114,12 +153,23 @@ ColorGradientChooser.prototype.updateValues = function()
 	context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 };
 
-//Se onChange callback that receives (value, index) as arguments
+/**
+ * Set onChange callback that receives (value, index) as arguments.
+ *
+ * @method setOnChange
+ * @param {Function} onChange OnChange callback receives value and index as arguments.
+ */
 ColorGradientChooser.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
 };
 
+/**
+ * Set an array of color values to be displayed on this gradient.
+ *
+ * @method setValue
+ * @param {Array} values
+ */
 ColorGradientChooser.prototype.setValue = function(values)
 {
 	this.values = [];
@@ -135,12 +185,23 @@ ColorGradientChooser.prototype.setValue = function(values)
 	this.updateValues();
 };
 
+/**
+ * Get the values stored in this element.
+ *
+ * @method getValue
+ * @return {Array} Values of the gradient.
+ */
 ColorGradientChooser.prototype.getValue = function()
 {
 	return this.values;
 };
 
-ColorGradientChooser.prototype.updateVisibility = function()
+ColorGradientChooser.prototype.updateSize = function()
 {
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
+	Element.prototype.updateSize.call(this);
+	
+	this.canvas.width = this.size.x;
+	this.canvas.height = this.size.y;
+
+	this.updateValues();
 };

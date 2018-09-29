@@ -27,8 +27,8 @@ function Graph(parent, name, color)
 	this.buttonRadius = 10;
 
 	//Range
-	this.min = 0.0;
 	this.max = 1.0;
+	this.min = 0.0;
 
 	/**
 	 * Grid canvas element.
@@ -82,6 +82,8 @@ Graph.prototype.createScale = function(size)
 	{
 		this.element.removeChild(this.scale[i]);
 	}
+	
+	var step = (this.max - this.min) / (size - 1);
 
 	for(var i = 0; i < size; i++)
 	{
@@ -90,12 +92,27 @@ Graph.prototype.createScale = function(size)
 		scale.style.pointerEvents = "none";
 		scale.style.color = Editor.theme.textColor;
 
-		var text = document.createTextNode(1.0 - (0.5 * i));
+		var text = document.createTextNode(this.max - (step * i));
 		scale.text = text;
 		scale.appendChild(text);
 
 		this.scale.push(scale);
 		this.element.appendChild(scale);
+	}
+};
+
+/**
+ * Update values of the scale.
+ *
+ * @method updateScale
+ */
+Graph.prototype.updateScale = function()
+{
+	var step = (this.max - this.min) / (this.scale.length - 1);
+
+	for(var i = 0; i < this.scale.length; i++)
+	{
+		this.scale[(this.scale.length - 1) - i].text.data = this.min + (step * i);
 	}
 };
 
@@ -151,12 +168,7 @@ Graph.prototype.setRange = function(min, max)
 		}
 	}
 
-	//Update scale elements
-	var step = (this.max - this.min) / (this.scale.length - 1);
-	for(var i = 0; i < this.scale.length; i++)
-	{
-		this.scale[(this.scale.length - 1) - i].text.data = this.min + (step * i);
-	}
+	this.updateScale();
 
 	//Update grid to fit new scale
 	for(var i = 0; i < this.graph.length; i++)
