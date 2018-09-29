@@ -9,6 +9,8 @@
 function TabDualContainer(parent)
 {
 	DualContainer.call(this, parent);
+
+	this.element.style.overflow = "visible";
 }
 
 TabDualContainer.prototype = Object.create(DualContainer.prototype);
