@@ -6,7 +6,7 @@
  * It is meant to be used as input in forms to controls values in arrays.
  *
  * Multiple graph lines can be displayed, each graph line has a name that can be used to access its properties.
- *
+ * 
  * @class Graph
  * @extends {Element}
  * @param {Element} parent Parent element.
@@ -21,15 +21,36 @@ function Graph(parent, name, color)
 
 	this.element.style.overflow = "visible";
 
-	//Graphs
-	this.graph = [];
-
-	//Label margin
+	/**
+	 * Scale margin in pixels.
+	 *
+	 * @property scaleMargin
+	 * @type {Number}
+	 */
 	this.scaleMargin = 22;
+
+	/**
+	 * Value button size.
+	 *
+	 * @property buttonRadius
+	 * @type {Number}
+	 */
 	this.buttonRadius = 10;
 
-	//Range
+	/**
+	 * Maximum value displayed vertically.
+	 *
+	 * @property max
+	 * @type {Number}
+	 */
 	this.max = 1.0;
+
+	/**
+	 * Minimum value displayed vertically.
+	 *
+	 * @property min
+	 * @type {Number}
+	 */
 	this.min = 0.0;
 
 	/**
@@ -43,22 +64,14 @@ function Graph(parent, name, color)
 	this.grid.style.marginLeft = this.scaleMargin + "px";
 	this.element.appendChild(this.grid);
 
-	//Graph
-	var canvas = document.createElement("canvas");
-	canvas.style.position = "absolute";
-	canvas.style.marginLeft = this.scaleMargin + "px";
-	this.element.appendChild(canvas);
-
-	//Default graph
-	this.graph.push(
-	{
-		canvas: canvas,
-		name: (name !== undefined) ? name : "default",
-		color: (color !== undefined) ? color : "#FFFFFF",
-		values: [],
-		buttons: [],
-		onchange: null
-	});
+	/**
+	 * The graph lines stored in this graph.
+	 *
+	 * @property graph
+	 * @type {Array}
+	 */
+	this.graph = [];
+	this.addGraph(name, color);
 	
 	/**
 	 * Scale DOM elements.
@@ -71,6 +84,22 @@ function Graph(parent, name, color)
 }
 
 Graph.prototype = Object.create(Element.prototype);
+
+Graph.GaphLine = function(canvas, name, color)
+{
+	if(canvas === undefined)
+	{
+		canvas = document.createElement("canvas");
+		canvas.style.position = "absolute";
+	}
+
+	this.canvas = canvas;
+	this.name = (name !== undefined) ? name : "default";
+	this.color = (color !== undefined) ? color : "#FFFFFF";
+	this.values = [];
+	this.buttons = [];
+	this.onchange = null;
+};
 
 /**
  * Create numeric scale for this graph.
@@ -132,7 +161,7 @@ Graph.prototype.addGraph = function(name, color)
 	canvas.style.marginLeft = this.scaleMargin + "px";
 	this.element.appendChild(canvas);
 
-	this.graph.push({canvas: canvas, name: name, color: color, values: [], buttons: [], onchange: null});
+	this.graph.push(new Graph.GaphLine(canvas, name, color));
 };
 
 /** 
