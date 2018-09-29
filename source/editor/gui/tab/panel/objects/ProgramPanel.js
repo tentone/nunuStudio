@@ -200,7 +200,6 @@ ProgramPanel.prototype.updateRenderer = function()
 	}
 };
 
-//Update panel content from attached object
 ProgramPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);

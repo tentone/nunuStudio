@@ -14,7 +14,7 @@ function Text3DPanel(parent, obj)
 	//Text
 	this.form.addText("Text");
 	this.text = new TextArea(this.form);
-	this.text.size.set(190, 60);
+	this.text.size.set(190, 36);
 	this.text.setOnChange(function()
 	{
 		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "text", self.text.getText()), updateGeometry));
@@ -24,15 +24,15 @@ function Text3DPanel(parent, obj)
 
 	//Size
 	this.form.addText("Size");
-	this.size = new NumberBox(this.form);
-	this.size.size.set(60, 18);
-	this.size.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.size.setStep(0.1);
-	this.size.setOnChange(function()
+	this.textSize = new NumberBox(this.form);
+	this.textSize.size.set(60, 18);
+	this.textSize.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.textSize.setStep(0.1);
+	this.textSize.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "size", self.size.getValue()), updateGeometry));
+		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "size", self.textSize.getValue()), updateGeometry));
 	});
-	this.form.add(this.size);
+	this.form.add(this.textSize);
 	this.form.nextRow();
 
 	//Height
@@ -108,7 +108,7 @@ Text3DPanel.prototype.updatePanel = function()
 	this.castShadow.setValue(this.obj.castShadow);
 	this.receiveShadow.setValue(this.obj.receiveShadow);
 	this.text.setText(this.obj.text);
-	this.size.setValue(this.obj.size);
+	this.textSize.setValue(this.obj.size);
 	this.height.setValue(this.obj.height);
 	this.curveSegments.setValue(this.obj.curveSegments);
 	this.bevel.setValue(this.obj.bevel);

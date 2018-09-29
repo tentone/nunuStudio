@@ -40,10 +40,8 @@ function DrawablePanel(parent, obj)
 	this.form.nextRow();
 }
 
-//Super prototypes
 DrawablePanel.prototype = Object.create(ObjectPanel.prototype);
 
-//Update panel content from attached object
 DrawablePanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);

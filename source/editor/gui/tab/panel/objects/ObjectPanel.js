@@ -151,7 +151,6 @@ function ObjectPanel(parent, obj)
 
 ObjectPanel.prototype = Object.create(Panel.prototype);
 
-//Update panel information
 ObjectPanel.prototype.updatePanel = function()
 {
 	this.name.setText(this.obj.name);
