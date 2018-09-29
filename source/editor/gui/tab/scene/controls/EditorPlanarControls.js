@@ -92,7 +92,7 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 	//WASD movement
 	if(Editor.settings.editor.keyboardNavigation)
 	{
-		if(Editor.keyboard.keyPressed(Keyboard.W))
+		if(keyboard.keyPressed(Keyboard.W))
 		{
 			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;
@@ -102,7 +102,7 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 			this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 			needsUpdate = true;
 		}
-		if(Editor.keyboard.keyPressed(Keyboard.A))
+		if(keyboard.keyPressed(Keyboard.A))
 		{
 			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;
@@ -113,7 +113,7 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 			this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 			needsUpdate = true;
 		}
-		if(Editor.keyboard.keyPressed(Keyboard.S))
+		if(keyboard.keyPressed(Keyboard.S))
 		{
 			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;
@@ -123,7 +123,7 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 			this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
 			needsUpdate = true;
 		}
-		if(Editor.keyboard.keyPressed(Keyboard.D))
+		if(keyboard.keyPressed(Keyboard.D))
 		{
 			var direction = this.getWorldDirection(this.tempVector);
 			direction.y = 0;

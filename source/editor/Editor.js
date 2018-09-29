@@ -604,10 +604,6 @@ Editor.initialize = function()
 		}
 	}
 
-	//Input
-	Editor.keyboard = new Keyboard();
-	Editor.mouse = new Mouse();
-
 	//Load theme
 	Editor.theme = ThemeManager.get(Editor.settings.general.theme);
 
@@ -756,17 +752,6 @@ Editor.initialize = function()
 		}
 	});
 	Editor.manager.create();
-
-	//Start update loop
-	Editor.update();
-};
-
-//Update Editor
-Editor.update = function()
-{
-	Editor.mouse.update();
-	Editor.keyboard.update();
-	requestAnimationFrame(Editor.update);
 };
 
 //Select a single object

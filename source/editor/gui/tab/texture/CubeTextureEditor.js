@@ -16,6 +16,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 		self.camera.updateProjectionMatrix();
 	});
 
+	//Mouse
+	this.mouse = new Mouse(window, true);
+	this.mouse.setCanvas(this.canvas.element);
+
 	//Camera
 	this.camera = new PerspectiveCamera(100, this.canvas.width/this.canvas.height);
 
@@ -309,29 +313,33 @@ CubeTextureEditor.prototype.updateMode = function()
 	this.image.updateInterface();
 };
 
-//Check if texture is attached to tab
 CubeTextureEditor.prototype.isAttached = function(texture)
 {
 	return this.texture === texture;
 };
 
-//Activate
 CubeTextureEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	Editor.mouse.setCanvas(this.canvas.element);
+	this.mouse.create();
 };
 
-//Destroy
+CubeTextureEditor.prototype.deactivate = function()
+{
+	TabElement.prototype.deactivate.call(this);
+	
+	this.mouse.dispose();
+};
+
 CubeTextureEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
+	this.mouse.dispose();
 	this.canvas.destroy();
 };
 
-//Update object data
 CubeTextureEditor.prototype.updateMetadata = function()
 {
 	if(this.texture !== null)
@@ -351,7 +359,6 @@ CubeTextureEditor.prototype.updateMetadata = function()
 	}
 };
 
-//Attach texure
 CubeTextureEditor.prototype.attach = function(texture)
 {
 	this.texture = texture;
@@ -384,13 +391,13 @@ CubeTextureEditor.prototype.attach = function(texture)
 	this.updateMode();
 };
 
-//Update
 CubeTextureEditor.prototype.update = function()
 {
-	if(Editor.mouse.buttonPressed(Mouse.LEFT))
+	this.mouse.update();
+	
+	if(this.mouse.buttonPressed(Mouse.LEFT))
 	{
-		var delta = Editor.mouse.delta.x * 0.004;
-		this.camera.rotation.y += delta;
+		this.camera.rotation.y += this.mouse.delta.x * 0.004;
 	}
 
 	this.canvas.renderer.render(this.scene, this.camera);

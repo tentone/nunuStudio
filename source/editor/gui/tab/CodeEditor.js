@@ -177,6 +177,8 @@ CodeEditor.prototype.setOnChange = function(callback)
 	this.code.on("change", callback);
 };
 
+//TODO <MOVE TO SCROLL EVENTS>
+/*
 CodeEditor.prototype.update = function()
 {
 	if(Editor.keyboard.keyPressed(Keyboard.CTRL) && Editor.mouse.wheel !== 0)
@@ -184,6 +186,7 @@ CodeEditor.prototype.update = function()
 		this.setFontSize(Editor.settings.code.fontSize - Editor.mouse.wheel / 100);
 	}
 };
+*/
 
 CodeEditor.prototype.updateSize = function()
 {

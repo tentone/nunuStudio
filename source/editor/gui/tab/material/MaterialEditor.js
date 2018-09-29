@@ -225,13 +225,11 @@ MaterialEditor.prototype.attach = function(material, asset)
 	this.blending.setValue(material.blending);
 };
 
-//Check if material is attached to tab
 MaterialEditor.prototype.isAttached = function(material)
 {
 	return this.material === material;
 };
 
-//Activate
 MaterialEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
@@ -239,11 +237,18 @@ MaterialEditor.prototype.activate = function()
 	this.mouse.create();
 };
 
-//Destroy
+MaterialEditor.prototype.deactivate = function()
+{
+	TabElement.prototype.deactivate.call(this);
+	
+	this.mouse.dispose();
+};
+
 MaterialEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
+	this.mouse.dispose();
 	this.canvas.destroy();
 };
 

@@ -13,7 +13,11 @@ function ParticleEditor(parent, closeable, container, index)
 		self.camera.aspect = x / y;
 		self.camera.updateProjectionMatrix();
 	});
-	
+
+	//Mouse
+	this.mouse = new Mouse(window, true);
+	this.mouse.setCanvas(this.canvas.element);
+
 	//Particle preview
 	this.scene = new THREE.Scene();
 	this.scene.matrixAutoUpdate = false;
@@ -503,12 +507,6 @@ ParticleEditor.prototype.attach = function(particle)
 	this.particle.reload();
 };
 
-//Check if particle is attached to tab
-ParticleEditor.prototype.isAttached = function(particle)
-{
-	return this.particle === particle;
-};
-
 //Update camera position and rotation from variables
 ParticleEditor.prototype.updateCamera = function()
 {
@@ -519,33 +517,45 @@ ParticleEditor.prototype.updateCamera = function()
 	this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 };
 
-//Activate code editor
+ParticleEditor.prototype.isAttached = function(particle)
+{
+	return this.particle === particle;
+};
+
 ParticleEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	Editor.mouse.setCanvas(this.canvas.element);
+	this.mouse.create();
 };
 
-//Destroy
+ParticleEditor.prototype.deactivate = function()
+{
+	TabElement.prototype.deactivate.call(this);
+
+	this.mouse.dispose();
+};
+
 ParticleEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 	
+	this.mouse.dispose();
 	this.canvas.destroy();
 };
 
 //Update material editor
 ParticleEditor.prototype.update = function()
 {
-	//Get mouse input
-	if(Editor.mouse.insideCanvas())
+	this.mouse.update();
+
+	if(this.mouse.insideCanvas())
 	{
 		//Move camera
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
+		if(this.mouse.buttonPressed(Mouse.LEFT))
 		{
-			this.cameraRotation.x -= 0.003 * Editor.mouse.delta.x;
-			this.cameraRotation.y -= 0.003 * Editor.mouse.delta.y;
+			this.cameraRotation.x -= 0.003 * this.mouse.delta.x;
+			this.cameraRotation.y -= 0.003 * this.mouse.delta.y;
 
 			//Limit Vertical Rotation to 90 degrees
 			if(this.cameraRotation.y < -1.57)
@@ -559,7 +569,7 @@ ParticleEditor.prototype.update = function()
 		}
 
 		//Camera zoom
-		this.cameraDistance += Editor.mouse.wheel * 0.005;
+		this.cameraDistance += this.mouse.wheel * 0.005;
 		if(this.cameraDistance < 0.1)
 		{
 			this.cameraDistance = 0.1;

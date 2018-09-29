@@ -20,6 +20,10 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 		self.camera.updateProjectionMatrix();
 	});
 
+	//Mouse
+	this.mouse = new Mouse(window, true);
+	this.mouse.setCanvas(this.canvas.element);
+
 	//Preview division
 	this.preview = new DualContainer();
 	this.preview.orientation = DualDivision.VERTICAL;

@@ -8,7 +8,7 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Input
 	this.keyboard = new Keyboard();
-	this.mouse = new Mouse();
+	this.mouse = new Mouse(window, true);
 
 	//Renderer
 	this.renderer = null;
@@ -335,6 +335,7 @@ SceneEditor.prototype.activate = function()
 	this.updateSettings();
 	this.setState(SceneEditor.EDITING);
 
+	this.mouse.create();
 	this.manager.create();
 
 	Editor.gui.toolBar.selectTool(Editor.SELECT);
@@ -348,6 +349,7 @@ SceneEditor.prototype.deactivate = function()
 	Editor.gui.menuBar.run.visible = false;
 	Editor.gui.menuBar.run.updateInterface();
 
+	this.mouse.dispose();
 	this.manager.destroy();
 };
 
