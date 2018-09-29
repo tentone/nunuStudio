@@ -9,60 +9,6 @@
  * @extends {Object3D}
  * @module Controls
  */
-/**
- * Initial distance of the object relative to the center.
- * 
- * @property distance
- * @default 3
- * @type {Number}
- */
-/**
- * Mouse sensitivity.
- * 
- * @property sensitivity
- * @type {Number}
- */
-/**
- * Mouse scroll sensitivity.
- * 
- * @property zoomSensitivity
- * @type {Number}
- */
-/**
- * Top limit angle.
- * 
- * @property limitUp
- * @default 1.57
- * @type {Number}
- */
-/**
- * Bottom limit angle.
- * 
- * @property limitDown
- * @default -1.57
- * @type {Number}
- */
-/**
- * Indicates if the button left button needs to be pressed to rotate the object.
- * 
- * @property needsButtonPressed
- * @default true
- * @type {Boolean}
- */
-/**
- * Indicates if its possible to move the object around.
- * 
- * @property movementEnabled
- * @default true
- * @type {Boolean}
- */
-/**
- * Indicates if its possible to zoom in and out to the center point.
- * 
- * @property zoomEnabled
- * @default true
- * @type {Boolean}
- */
 function OrbitControls()
 {
 	THREE.Object3D.call(this);
@@ -70,16 +16,76 @@ function OrbitControls()
 	this.name = "orbit";
 	this.type = "OrbitControls";
 
+	/**
+	 * Initial distance of the object relative to the center.
+	 * 
+	 * @property distance
+	 * @default 3
+	 * @type {Number}
+	 */
 	this.distance = 4;
 	this.maxDistance = 20;
 	this.minDistance = 2;
+
+	/**
+	 * Mouse sensitivity.
+	 * 
+	 * @property sensitivity
+	 * @type {Number}
+	 */
 	this.sensitivity = 0.002;
+
+	/**
+	 * Mouse scroll sensitivity.
+	 * 
+	 * @property zoomSensitivity
+	 * @type {Number}
+	 */
 	this.zoomSensitivity = 0.001;
+
+	/**
+	 * Top limit angle.
+	 * 
+	 * @property limitUp
+	 * @default 1.57
+	 * @type {Number}
+	 */
 	this.limitUp = 1.57;
+
+	/**
+	 * Bottom limit angle.
+	 * 
+	 * @property limitDown
+	 * @default -1.57
+	 * @type {Number}
+	 */
 	this.limitDown = -1.57;
 
+	/**
+	 * Indicates if the button left button needs to be pressed to rotate the object.
+	 * 
+	 * @property needsButtonPressed
+	 * @default true
+	 * @type {Boolean}
+	 */
 	this.needsButtonPressed = true;
+
+	/**
+	 * Indicates if its possible to zoom in and out to the center point.
+	 * 
+	 * @property zoomEnabled
+	 * @default true
+	 * @type {Boolean}
+	 */
 	this.zoomEnabled = true;
+
+	/**
+	 * Indicates if its possible to move the object around.
+	 * 
+	 * @property movementEnabled
+	 * @default true
+	 * @type {Boolean}
+	 */
 	this.movementEnabled = true;
 
 	this.center = new THREE.Vector3(0, 0, 0);

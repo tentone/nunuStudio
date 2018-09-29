@@ -11,51 +11,6 @@
  * @extends {Object3D}
  * @module Controls
  */
-/**
- * Mouse sensitivity.
- * 
- * @property sensitivity
- * @default 0.001
- * @type {Number}
- */
-/**
- * Flag to indicate if the button left button needs to be pressed to rotate the object.
- * 
- * @property needsButtonPressed
- * @default true
- * @type {Boolean}
- */
-/**
- * Indicates if its possible to move the object using the Keyboard keys.
- * 
- * @property movementEnabled
- * @default true
- * @type {Boolean}
- */
-/**
- * Movement speed, relative to the world.
- * 
- * @property moveSpeed
- * @default moveSpeed
- * @type {Number}
- */
-/**
- * If set to true the object will only move on X and Z axis.
- * 
- * @property moveOnPlane
- * @default false
- * @type {Boolean}
- */
-/**
- * Array with keys to be used to move the object.
- *  - Forward
- *  - Backward
- *  - Left
- *  - Right
- * 
- * @property moveKeys
- * @type {Array}
- */
 function FirstPersonControls()
 {
 	THREE.Object3D.call(this);
@@ -63,12 +18,60 @@ function FirstPersonControls()
 	this.name = "controls";
 	this.type = "FirstPersonControls";
 
+	/**
+	 * Mouse sensitivity.
+	 * 
+	 * @property sensitivity
+	 * @type {Number}
+	 */
 	this.sensitivity = 0.005;
+
+	/**
+	 * Flag to indicate if the button left button needs to be pressed to rotate the object.
+	 * 
+	 * @property needsButtonPressed
+	 * @default true
+	 * @type {Boolean}
+	 */
 	this.needsButtonPressed = true;
 
+	/**
+	 * Indicates if its possible to move the object using the Keyboard keys.
+	 * 
+	 * @property movementEnabled
+	 * @default true
+	 * @type {Boolean}
+	 */
 	this.movementEnabled = true;
+
+	/**
+	 * Movement speed, relative to the world.
+	 * 
+	 * @property moveSpeed
+	 * @default moveSpeed
+	 * @type {Number}
+	 */
 	this.moveSpeed = 0.05;
+
+	/**
+	 * If set to true the object will only move on X and Z axis.
+	 * 
+	 * @property moveOnPlane
+	 * @default false
+	 * @type {Boolean}
+	 */
 	this.moveOnPlane = false;
+
+	/**
+	 * Array with keys to be used to move the object.
+	 *  - Forward
+	 *  - Backward
+	 *  - Left
+	 *  - Right
+	 * 
+	 * @property moveKeys
+	 * @type {Array}
+	 */
 	this.moveKeys = [Keyboard.W, Keyboard.S, Keyboard.A, Keyboard.D];
 
 	this.vector = new THREE.Vector2(0, 0);

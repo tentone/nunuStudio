@@ -17,7 +17,7 @@ function Gamepad()
 	this.vendor = -1;
 	this.product = -1;
 	this.connected = false;
-
+	
 	this.gamepad = null;
 	this.buttons = [];
 

@@ -11,7 +11,6 @@
  * @param {Material} material Material used to shade the superficie of the geometry
  * @extends {Mesh}
  */
-
 /**
  * Geometry defines the object structure.
  * 
