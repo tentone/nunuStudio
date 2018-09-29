@@ -13,9 +13,6 @@ function ParticleEditor(parent, closeable, container, index)
 		self.camera.aspect = x / y;
 		self.camera.updateProjectionMatrix();
 	});
-
-	//Element atributes
-	this.children = [];
 	
 	//Particle preview
 	this.scene = new THREE.Scene();
@@ -35,6 +32,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form = new TableForm();
 	this.form.setAutoSize(false);
+
 
 	//Main
 	this.main = new DualContainer(this);

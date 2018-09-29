@@ -1,5 +1,16 @@
 "use strict";
 
+/**
+ * Graph element is used to draw interactive line graphs.
+ *
+ * It is meant to be used as input in forms to controls values in arrays.
+ *
+ * @class Graph
+ * @extends {Element}
+ * @param {Element} parent Parent element.
+ * @param {String} name Name of the default graph.
+ * @param {String} color CSS hex color code of the default graph.
+ */
 function Graph(parent, name, color)
 {
 	Element.call(this, parent, "div");
@@ -8,19 +19,32 @@ function Graph(parent, name, color)
 
 	this.element.style.overflow = "visible";
 
-	//Grid
-	this.grid = document.createElement("canvas");
-	this.grid.style.position = "absolute";
-	this.grid.style.marginLeft = "30px";
-	this.element.appendChild(this.grid);
-
 	//Graphs
 	this.graph = [];
+
+	//Label margin
+	this.scaleMargin = 22;
+	this.buttonRadius = 10;
+
+	//Range
+	this.min = 0.0;
+	this.max = 1.0;
+
+	/**
+	 * Grid canvas element.
+	 *
+	 * @property grid
+	 * @type {DOM}
+	 */
+	this.grid = document.createElement("canvas");
+	this.grid.style.position = "absolute";
+	this.grid.style.marginLeft = this.scaleMargin + "px";
+	this.element.appendChild(this.grid);
 
 	//Graph
 	var canvas = document.createElement("canvas");
 	canvas.style.position = "absolute";
-	canvas.style.marginLeft = "30px";
+	canvas.style.marginLeft = this.scaleMargin + "px";
 	this.element.appendChild(canvas);
 
 	//Default graph
@@ -34,9 +58,32 @@ function Graph(parent, name, color)
 		onchange: null
 	});
 	
-	//Scale
+	/**
+	 * Scale DOM elements.
+	 *
+	 * @property scale
+	 * @type {Array}
+	 */
 	this.scale = [];
-	for(var i = 0; i < 3; i++)
+	this.createScale(3);
+}
+
+Graph.prototype = Object.create(Element.prototype);
+
+/**
+ * Create numeric scale for this graph.
+ *
+ * @method createScale
+ * @param {Number} size Number of values in the scale.
+ */
+Graph.prototype.createScale = function(size)
+{
+	for(var i = 0; i < this.scale; i++)
+	{
+		this.element.removeChild(this.scale[i]);
+	}
+
+	for(var i = 0; i < size; i++)
 	{
 		var scale = document.createElement("div");
 		scale.style.position = "absolute";
@@ -49,21 +96,15 @@ function Graph(parent, name, color)
 
 		this.scale.push(scale);
 		this.element.appendChild(scale);
-	}	
-
-	//Graph range
-	this.min = 0.0;
-	this.max = 1.0;
-}
-
-Graph.prototype = Object.create(Element.prototype);
+	}
+};
 
 //Add graph
 Graph.prototype.addGraph = function(name, color)
 {
 	var canvas = document.createElement("canvas");
 	canvas.style.position = "absolute";
-	canvas.style.marginLeft = "30px";
+	canvas.style.marginLeft = this.scaleMargin + "px";
 	this.element.appendChild(canvas);
 
 	this.graph.push({canvas: canvas, name: name, color: color, values: [], buttons: [], onchange: null});
@@ -114,11 +155,11 @@ Graph.prototype.setRange = function(min, max)
 	var step = (this.max - this.min) / (this.scale.length - 1);
 	for(var i = 0; i < this.scale.length; i++)
 	{
-		this.scale[this.scale.length - 1 - i].text.data = this.min + (step * i);
+		this.scale[(this.scale.length - 1) - i].text.data = this.min + (step * i);
 	}
 
 	//Update grid to fit new scale
-	for(i = 0; i < this.graph.length; i++)
+	for(var i = 0; i < this.graph.length; i++)
 	{
 		this.updateGraph(this.graph[i]);
 	}
@@ -141,10 +182,10 @@ Graph.prototype.setValue = function(values, name)
 		button.style.backgroundColor = graph.color;
 		button.style.cursor = "pointer";
 		button.style.position = "absolute";
-		button.style.marginTop = "-5px";
-		button.style.marginLeft = "25px";
-		button.style.width = "10px";
-		button.style.height = "10px";
+		button.style.marginTop = "-" + (this.buttonRadius / 2) + "px";
+		button.style.marginLeft = (this.scaleMargin - (this.buttonRadius / 2)) + "px";
+		button.style.width = this.buttonRadius + "px";
+		button.style.height = this.buttonRadius + "px";
 		button.index = graph.buttons.length;
 		button.graph = graph;
 
@@ -192,8 +233,7 @@ Graph.prototype.setValue = function(values, name)
 	//Remove buttons if necessary
 	while(graph.buttons.length > graph.values.length)
 	{
-		var button = graph.buttons.pop();
-		this.element.removeChild(button);
+		this.element.removeChild(graph.buttons.pop());
 	}
 
 	//Check if new values are in range
@@ -262,19 +302,22 @@ Graph.prototype.getGraph = function(name)
 //Update graph canvas and buttons
 Graph.prototype.updateGraph = function(graph)
 {
+	var width = this.size.x - this.scaleMargin;
+
 	//Get canvas context
 	var context = graph.canvas.getContext("2d");
-	context.clearRect(0, 0, this.size.x, this.size.y);
+	context.clearRect(0, 0, width, this.size.y);
 	context.strokeStyle = graph.color;
 	context.lineWidth = "2";
 
 	//Draw graph and set button positions
-	var step = this.size.x / (graph.values.length - 1);
+	var step = width / (graph.values.length - 1);
 	var delta = this.max - this.min;
 
 	context.moveTo(0, graph.values[0] * this.size.y);
 	context.beginPath();
-	for(var i = 0; i < graph.values.length; i ++)
+
+	for(var i = 0; i < graph.values.length; i++)
 	{
 		var x = i * step;
 		var y = (1 - ((graph.values[i] - this.min) / delta)) * this.size.y;
@@ -285,26 +328,34 @@ Graph.prototype.updateGraph = function(graph)
 		button.style.left = x + "px";
 		button.style.top = y + "px";
 	}
+
 	context.stroke();
 };
 
 //Draw background grid canvas
 Graph.prototype.updateGrid = function()
 {
+	var width = this.size.x - this.scaleMargin;
+
 	var context = this.grid.getContext("2d");
-	context.clearRect(0, 0, this.size.x, this.size.y);
+	context.clearRect(0, 0, width, this.size.y);
 	context.strokeStyle = "#222222";
 	context.lineWidth = "1";
 
 	//Border
 	context.beginPath();
-	context.rect(0, 0, this.size.x, this.size.y);
+	context.rect(0, 0, width, this.size.y);
 	context.stroke();
 	context.moveTo(0, 0);
 
-	//Vertical lines
-	var step = this.size.x / 10;
-	for(var i = 0; i < this.size.x; i += step)
+	var step = width / 10;
+	if(step <= 0)
+	{
+		return;
+	}
+
+	//Vertical lines	
+	for(var i = 0; i < width; i += step)
 	{
 		context.beginPath();
 		context.moveTo(i, 0);
@@ -313,11 +364,11 @@ Graph.prototype.updateGrid = function()
 	}
 
 	//Horizontal lines
-	for(i = 0; i < this.size.y; i += step)
+	for(var i = 0; i < this.size.y; i += step)
 	{
 		context.beginPath();
 		context.moveTo(0, i);
-		context.lineTo(this.size.x, i);
+		context.lineTo(width, i);
 		context.stroke();
 	}
 };
@@ -327,10 +378,12 @@ Graph.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
+	var width = this.size.x - this.scaleMargin;
+
 	//Grid
-	this.grid.width = this.size.x;
+	this.grid.width = width;
 	this.grid.height = this.size.y;
-	this.grid.style.width = this.size.x + "px";
+	this.grid.style.width = width + "px";
 	this.grid.style.height = this.size.y + "px";
 	this.updateGrid();
 
@@ -338,9 +391,9 @@ Graph.prototype.updateSize = function()
 	for(var i = 0; i < this.graph.length; i++)
 	{
 		var graph = this.graph[i];
-		graph.canvas.width = this.size.x;
+		graph.canvas.width = width;
 		graph.canvas.height = this.size.y;
-		graph.canvas.style.width = this.size.x + "px";
+		graph.canvas.style.width = width + "px";
 		graph.canvas.style.height = this.size.y + "px";
 		this.updateGraph(graph);
 	}
