@@ -9,8 +9,15 @@
 function CodeEditor(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Code", Editor.filePath + "icons/misc/code.png");
+	
+	var self = this;
 
-	//Codemirror editor
+	/**
+	 * Codemirror editor.
+	 * 
+	 * @property code
+	 * @type {CodeMirror}
+	 */
 	this.code = new CodeMirror(this.element,
 	{
 		value: "",
@@ -23,9 +30,6 @@ function CodeEditor(parent, closeable, container, index)
 		gutters: ["CodeMirror-lint-markers"]
 	});
 
-	var self = this;
-
-	//Context menu event
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
@@ -87,6 +91,24 @@ function CodeEditor(parent, closeable, container, index)
 		});
 		context.updateInterface();
 	};
+
+	/**
+	 * Event manager to scroll.
+	 *
+	 * @property manager
+	 * @type {EventManager}
+	 */
+	this.manager = new EventManager();
+	this.manager.addScrollEvent(this.element, function(event)
+	{
+		event.preventDefault();
+
+		if(event.ctrlKey && event.deltaY !== 0)
+		{
+			self.setFontSize(Editor.settings.code.fontSize - event.deltaY / 100);
+		}
+	});
+	this.manager.create();
 }
 
 CodeEditor.prototype = Object.create(TabElement.prototype);
@@ -176,17 +198,6 @@ CodeEditor.prototype.setOnChange = function(callback)
 {
 	this.code.on("change", callback);
 };
-
-//TODO <MOVE TO SCROLL EVENTS>
-/*
-CodeEditor.prototype.update = function()
-{
-	if(Editor.keyboard.keyPressed(Keyboard.CTRL) && Editor.mouse.wheel !== 0)
-	{
-		this.setFontSize(Editor.settings.code.fontSize - Editor.mouse.wheel / 100);
-	}
-};
-*/
 
 CodeEditor.prototype.updateSize = function()
 {

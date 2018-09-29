@@ -75,3 +75,23 @@ EventManager.prototype.destroy = function()
 		event[3] = false;
 	}
 };
+
+EventManager.prototype.addScrollEvent = function(target, callback)
+{
+	if(window.onmousewheel !== undefined)
+	{
+		this.add(target, "mousewheel", callback);
+	}
+	else if(window.addEventListener !== undefined)
+	{
+		this.add(target, "DOMMouseScroll", function(event)
+		{
+			event.deltaY = event.detail * 30;
+			callback(event);
+		});
+	}
+	else
+	{
+		this.add(target, "wheel", callback);
+	}
+};
