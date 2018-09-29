@@ -5,6 +5,8 @@
  *
  * It is meant to be used as input in forms to controls values in arrays.
  *
+ * Multiple graph lines can be displayed, each graph line has a name that can be used to access its properties.
+ *
  * @class Graph
  * @extends {Element}
  * @param {Element} parent Parent element.
@@ -116,7 +118,13 @@ Graph.prototype.updateScale = function()
 	}
 };
 
-//Add graph
+/**
+ * Add new graph line.
+ *
+ * @method addGraph
+ * @param {String} name Name of the graph.
+ * @param {Color} color Color of the graph.
+ */
 Graph.prototype.addGraph = function(name, color)
 {
 	var canvas = document.createElement("canvas");
@@ -127,14 +135,26 @@ Graph.prototype.addGraph = function(name, color)
 	this.graph.push({canvas: canvas, name: name, color: color, values: [], buttons: [], onchange: null});
 };
 
-//Attach onchange onChange to a graph
+/** 
+ * Attach onchange onChange to a graph by its name.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ * @param {String} name Graph name.
+ */
 Graph.prototype.setOnChange = function(onChange, name)
 {
 	var graph = this.getGraph(name);
 	graph.onchange = onChange;
 };
 
-//Set value range
+/**
+ * Set value range of the graph.
+ *
+ * @method setRange.
+ * @param {Number} min
+ * @param {Number} max
+ */
 Graph.prototype.setRange = function(min, max)
 {
 	this.min = min;
@@ -177,7 +197,13 @@ Graph.prototype.setRange = function(min, max)
 	}
 };
 
-//Set values to a graph
+/**
+ * Set values array to a graph using its name.
+ *
+ * @method setValue
+ * @param {Array} values Array of numeric values.
+ * @param {String} name Name of the graph line.
+ */
 Graph.prototype.setValue = function(values, name)
 {	
 	var self = this;
@@ -276,7 +302,12 @@ Graph.prototype.setValue = function(values, name)
 	this.updateGraph(graph);
 };
 
-//Return value array
+/**
+ * Return value array of a graph by its name.
+ *
+ * @method getValue
+ * @param {String} name Graph name.
+ */
 Graph.prototype.getValue = function(name)
 {
 	var graph = this.getGraph(name);
@@ -289,7 +320,12 @@ Graph.prototype.getValue = function(name)
 	return null;
 };
 
-//Get graph object by name
+/**
+ * Get graph object by name.
+ *
+ * @method getGraph
+ * @param {String} name Graph name.
+ */
 Graph.prototype.getGraph = function(name)
 {
 	if(name !== undefined)
@@ -311,7 +347,12 @@ Graph.prototype.getGraph = function(name)
 	return null;
 };
 
-//Update graph canvas and buttons
+/**
+ * Update graph canvas and buttons.
+ *
+ * @method updateGraph
+ * @param {Object} graph Graph object.
+ */
 Graph.prototype.updateGraph = function(graph)
 {
 	var width = this.size.x - this.scaleMargin;
@@ -344,7 +385,11 @@ Graph.prototype.updateGraph = function(graph)
 	context.stroke();
 };
 
-//Draw background grid canvas
+/**
+ * Draw background grid canvas.
+ *
+ * @method updateGrid
+ */
 Graph.prototype.updateGrid = function()
 {
 	var width = this.size.x - this.scaleMargin;
@@ -385,7 +430,6 @@ Graph.prototype.updateGrid = function()
 	}
 };
 
-//Update Graph Size
 Graph.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
