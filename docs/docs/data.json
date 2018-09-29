@@ -7191,18 +7191,17 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 14,
+            "line": 21,
             "description": "Mouse sensitivity.",
             "itemtype": "property",
             "name": "sensitivity",
-            "default": "0.001",
             "type": "{Number}",
             "class": "FirstPersonControls",
             "module": "Controls"
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 21,
+            "line": 29,
             "description": "Flag to indicate if the button left button needs to be pressed to rotate the object.",
             "itemtype": "property",
             "name": "needsButtonPressed",
@@ -7213,7 +7212,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 28,
+            "line": 38,
             "description": "Indicates if its possible to move the object using the Keyboard keys.",
             "itemtype": "property",
             "name": "movementEnabled",
@@ -7224,7 +7223,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 35,
+            "line": 47,
             "description": "Movement speed, relative to the world.",
             "itemtype": "property",
             "name": "moveSpeed",
@@ -7235,7 +7234,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 42,
+            "line": 56,
             "description": "If set to true the object will only move on X and Z axis.",
             "itemtype": "property",
             "name": "moveOnPlane",
@@ -7246,7 +7245,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 49,
+            "line": 65,
             "description": "Array with keys to be used to move the object.\n - Forward\n - Backward\n - Left\n - Right",
             "itemtype": "property",
             "name": "moveKeys",
@@ -7256,7 +7255,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 166,
+            "line": 169,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
@@ -7265,7 +7264,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 184,
+            "line": 187,
             "description": "Used to get camera direction for this controller.\n\nController direction can be used to simplify controlling physics objects, create objects in the camera direction, etc.",
             "itemtype": "method",
             "name": "getDirection",
@@ -7278,7 +7277,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 12,
+            "line": 19,
             "description": "Initial distance of the object relative to the center.",
             "itemtype": "property",
             "name": "distance",
@@ -7289,7 +7288,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 19,
+            "line": 30,
             "description": "Mouse sensitivity.",
             "itemtype": "property",
             "name": "sensitivity",
@@ -7299,7 +7298,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 25,
+            "line": 38,
             "description": "Mouse scroll sensitivity.",
             "itemtype": "property",
             "name": "zoomSensitivity",
@@ -7309,7 +7308,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 31,
+            "line": 46,
             "description": "Top limit angle.",
             "itemtype": "property",
             "name": "limitUp",
@@ -7320,7 +7319,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 38,
+            "line": 55,
             "description": "Bottom limit angle.",
             "itemtype": "property",
             "name": "limitDown",
@@ -7331,7 +7330,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 45,
+            "line": 64,
             "description": "Indicates if the button left button needs to be pressed to rotate the object.",
             "itemtype": "property",
             "name": "needsButtonPressed",
@@ -7342,18 +7341,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 52,
-            "description": "Indicates if its possible to move the object around.",
-            "itemtype": "property",
-            "name": "movementEnabled",
-            "default": "true",
-            "type": "{Boolean}",
-            "class": "OrbitControls",
-            "module": "Controls"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 59,
+            "line": 73,
             "description": "Indicates if its possible to zoom in and out to the center point.",
             "itemtype": "property",
             "name": "zoomEnabled",
@@ -7364,7 +7352,18 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 171,
+            "line": 82,
+            "description": "Indicates if its possible to move the object around.",
+            "itemtype": "property",
+            "name": "movementEnabled",
+            "default": "true",
+            "type": "{Boolean}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 177,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
@@ -7929,7 +7928,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 15,
+            "line": 14,
             "description": "Geometry defines the object structure.",
             "itemtype": "property",
             "name": "geometry",
@@ -7939,7 +7938,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 21,
+            "line": 20,
             "description": "Material is used to define how the geometry surface is shaded.",
             "itemtype": "property",
             "name": "material",
@@ -7949,7 +7948,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 27,
+            "line": 26,
             "description": "Determines how the mesh triangles are constructed from the vertices.\n\nOnly works when the geometry is a BufferGeometry.",
             "itemtype": "property",
             "name": "drawMode",
@@ -7959,7 +7958,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 50,
+            "line": 49,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
