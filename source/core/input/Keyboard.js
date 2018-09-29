@@ -51,8 +51,7 @@ function Keyboard()
 		self.reset();
 	});
 
-	//Initialize events
-	this.events.create();
+	this.create();
 }
 
 Keyboard.prototype = Keyboard;
@@ -130,6 +129,16 @@ Keyboard.keyJustPressed = function(key)
 Keyboard.keyJustReleased = function(key)
 {
 	return this.keys[key].justReleased;
+};
+
+/**
+ * Create keyboard events.
+ * 
+ * @method dispose
+ */
+Keyboard.create = function()
+{
+	this.events.create();
 };
 
 /**

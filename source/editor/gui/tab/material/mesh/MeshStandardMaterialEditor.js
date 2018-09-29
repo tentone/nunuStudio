@@ -211,7 +211,6 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 		Editor.history.add(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
 		self.material.needsUpdate = true;
 	});
-	this.children.push(this.displacementMap);
 	this.form.add(this.displacementMap);
 	this.form.nextRow();
 

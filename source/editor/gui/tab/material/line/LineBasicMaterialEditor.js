@@ -69,7 +69,7 @@ LineBasicMaterialEditor.prototype.update = function()
 {
 	MaterialEditor.prototype.update.call(this);
 
-	if(Editor.mouse.insideCanvas() && Editor.mouse.buttonPressed(Mouse.LEFT))
+	if(this.mouse.insideCanvas() && this.mouse.buttonPressed(Mouse.LEFT))
 	{
 		//TODO <CHANGE LINE DRAW MODE>
 	}

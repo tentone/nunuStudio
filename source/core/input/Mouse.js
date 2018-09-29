@@ -7,8 +7,10 @@
  * 
  * @class Mouse
  * @module Input
+ * @param {DOM} domElement DOM element to craete the mouse events.
+ * @param {Boolean} dontInitialize If true the mouse events are not created.
  */
-function Mouse(domElement)
+function Mouse(domElement, dontInitialize)
 {
 	//Raw data
 	this._keys = new Array(3);
@@ -189,7 +191,10 @@ function Mouse(domElement)
 		self._doubleClicked[event.which - 1] = true;
 	});
 
-	this.events.create();
+	if(dontInitialize !== true)
+	{
+		this.create();
+	}
 }
 
 Mouse.prototype = Mouse;
@@ -440,6 +445,16 @@ Mouse.update = function()
 		this.delta.x = 0;
 		this.delta.y = 0;
 	}
+};
+
+/**
+ * Create mouse events.
+ * 
+ * @method create
+ */
+Mouse.create = function()
+{
+	this.events.create();
 };
 
 /**

@@ -14,8 +14,9 @@ function MaterialEditor(parent, closeable, container, index)
 		self.camera.updateProjectionMatrix();
 	});
 
-	//Children
-	this.children = [];
+	//Mouse
+	this.mouse = new Mouse(window, true);
+	this.mouse.setCanvas(this.canvas.element);
 
 	//Material and corresponding asset
 	this.material = null;
@@ -23,7 +24,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Preview scene
 	this.scene = new THREE.Scene();
-	
+
 	//Camera
 	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x / this.canvas.size.y);
 	this.camera.position.set(0, 0, 2.5);
@@ -235,7 +236,7 @@ MaterialEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 	
-	Editor.mouse.setCanvas(this.canvas.element);
+	this.mouse.create();
 };
 
 //Destroy
@@ -269,6 +270,8 @@ MaterialEditor.prototype.updateMetadata = function()
 //Update material editor
 MaterialEditor.prototype.update = function()
 {
+	this.mouse.update();
+
 	//Render Material
 	if(this.material !== null)
 	{
@@ -294,16 +297,16 @@ MaterialEditor.prototype.update = function()
 	}
 
 	//Move material view
-	if(Editor.mouse.insideCanvas())
+	if(this.mouse.insideCanvas())
 	{
 		//Zoom
-		this.camera.position.z += this.camera.position.z * Editor.mouse.wheel * 0.001;
+		this.camera.position.z += this.camera.position.z * this.mouse.wheel * 0.001;
 
 		//Rotate object
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
+		if(this.mouse.buttonPressed(Mouse.LEFT))
 		{
 			var delta = new THREE.Quaternion();
-			delta.setFromEuler(new THREE.Euler(Editor.mouse.delta.y * 0.005, Editor.mouse.delta.x * 0.005, 0, 'XYZ'));
+			delta.setFromEuler(new THREE.Euler(this.mouse.delta.y * 0.005, this.mouse.delta.x * 0.005, 0, 'XYZ'));
 			
 			this.interactive.quaternion.multiplyQuaternions(delta, this.interactive.quaternion);
 		}
