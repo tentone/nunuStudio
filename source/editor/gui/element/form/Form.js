@@ -17,7 +17,7 @@ function Form(parent)
 Form.prototype = Object.create(Element.prototype);
 
 /**
- * Add a element to form (in actual row)-
+ * Add a element to form (in actual row).
  *
  * @method add
  */
