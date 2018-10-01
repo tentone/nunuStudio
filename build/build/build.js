@@ -9,6 +9,9 @@
  *
  * @author tentone
  */
+var fs = require("fs");
+var path = require("path");
+
 var sourcePath = "../../source/";
 var buildPath = "../";
 
@@ -199,16 +202,11 @@ function getIncludes(code, results)
 
 function readFile(fname)
 {
-	var fs = require("fs");
-
 	return fs.readFileSync(fname, "utf8");
 }
 
 function writeFile(fname, text)
 {
-	var fs = require("fs");
-	var path = require("path");
-
 	function checkDirectory(pathName)
 	{
 		var dirname = path.dirname(pathName);
@@ -226,8 +224,6 @@ function writeFile(fname, text)
 
 function copyFolder(src, dst)
 {
-	var fs = require("fs");
-
 	makeDirectory(dst);
 	var files = fs.readdirSync(src);
 
@@ -257,22 +253,24 @@ function copyFolder(src, dst)
 
 function copyFile(src, dst)
 {
-	var fs = require("fs");
+	fs.copyFileSync(src, dst);
+}
 
-	fs.createReadStream(src).pipe(fs.createWriteStream(dst));
+function renameFile(oldPath, newPath)
+{
+	fs.renameSync(oldPath, newPath);
 }
 
 function makeDirectory(dir)
 {
-	var fs = require("fs");
-
-	fs.mkdirSync(dir);
+	if(!fs.existsSync(dir))
+	{
+		fs.mkdirSync(dir);
+	}
 }
 
 function deleteFolder(path)
 {
-	var fs = require("fs");
-
 	if(fs.existsSync(path))
 	{
 		fs.readdirSync(path).forEach(function(file, index)
@@ -295,6 +293,5 @@ function deleteFolder(path)
 
 function deleteFile(fname)
 {
-	var fs = require("fs");
 	fs.unlinkSync(fname);
 }
