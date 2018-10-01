@@ -179,22 +179,29 @@ function join(path, main)
 	return {js: js, css: css};
 }
 
-function getIncludes(code, results)
+function getIncludes(code, regex)
 {
-	if(results === undefined)
+	if(regex === undefined)
 	{
-		results = [];
+		regex = /include\([\"\'].+?[\"\']\);/g;
 	}
 
-	var index = code.search(/include\(".+?"\);/gi);
-	if(index !== -1)
+	var results = [];
+	var match = regex.exec(code);
+	while(match !== null)
 	{
-		var sub = code.substring(index);
-		var end = sub.indexOf("\");");
-		var include = sub.substring(9, end);
+		var files = /\(\s*([^)]+?)\s*\)/.exec(match[0]);
+		if(files[1])
+		{
+			files = files[1].split(/\s*,\s*/);
+		}
 
-		results.push(include);
-		getIncludes(sub.substring(end), results);
+		for(var i = 0; i < files.length; i++)
+		{
+			results.push(files[i].replace(/[\"\']/gi, ""));
+		}
+
+		match = regex.exec(code);
 	}
 
 	return results;
