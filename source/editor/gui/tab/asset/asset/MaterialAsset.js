@@ -31,7 +31,7 @@ function MaterialAsset(parent)
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		if(!Editor.isObjectSelected(self.asset))
+		if(!Editor.isSelected(self.asset))
 		{
 			this.style.backgroundColor = null;
 		}

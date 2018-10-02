@@ -945,7 +945,7 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 	{	
 		if(this.keyboard.keyPressed(Keyboard.CTRL))
 		{	
-			if(Editor.isObjectSelected(intersects[0].object))
+			if(Editor.isSelected(intersects[0].object))
 			{
 				Editor.removeFromSelection(intersects[0].object);
 			}

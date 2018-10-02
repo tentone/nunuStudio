@@ -45,7 +45,7 @@ RemovedAction.prototype.revert = function()
 
 RemovedAction.updateGUI = function(object, parent)
 {
-	if(Editor.isObjectSelected(object))
+	if(Editor.isSelected(object))
 	{
 		Editor.removeFromSelection(object);
 	}

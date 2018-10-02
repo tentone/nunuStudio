@@ -203,7 +203,7 @@ TreeView.prototype.updateSelection = function()
 {
 	function updateSelection(tree)
 	{
-		tree.element.style.backgroundColor = Editor.isObjectSelected(tree.object) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
+		tree.element.style.backgroundColor = Editor.isSelected(tree.object) ? Editor.theme.buttonOverColor : Editor.theme.buttonLightColor;
 
 		var children = tree.children;
 		for(var i = 0; i < children.length; i++)

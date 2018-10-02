@@ -39,8 +39,6 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
 	if(object instanceof THREE.Object3D)
 	{
 		Editor.gui.treeView.updateInterface();
-		
-		//TODO <3D OBJECT GUI>
 	}
 	else if(object instanceof THREE.Material)
 	{
@@ -55,5 +53,13 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
 	else if(object instanceof Resource)
 	{
 		//TODO <RESOURCES TAB AND PREVIEW>
+	}
+
+	Editor.gui.tab.updateObjectsView();
+	Editor.gui.tab.updateMetadata();
+
+	if(Editor.isSelected(object))
+	{
+		Editor.gui.panelContainer.updateValues();
 	}
 };

@@ -57,7 +57,7 @@ function Asset(parent)
 
 	this.element.onmouseleave = function()
 	{
-		if(!Editor.isObjectSelected(self.asset))
+		if(!Editor.isSelected(self.asset))
 		{
 			this.style.backgroundColor = null;
 		}
@@ -67,7 +67,7 @@ function Asset(parent)
 	{
 		if(event.ctrlKey)
 		{
-			if(Editor.isObjectSelected(self.asset))
+			if(Editor.isSelected(self.asset))
 			{
 				Editor.removeFromSelection(self.asset);
 			}
@@ -88,7 +88,7 @@ Asset.prototype = Object.create(Element.prototype);
 //Update background based on selection state
 Asset.prototype.updateSelection = function()
 {
-	this.element.style.backgroundColor = Editor.isObjectSelected(this.asset) ? Editor.theme.buttonOverColor : "";
+	this.element.style.backgroundColor = Editor.isSelected(this.asset) ? Editor.theme.buttonOverColor : "";
 };
 
 //Set size

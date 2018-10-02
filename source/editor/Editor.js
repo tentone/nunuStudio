@@ -788,7 +788,7 @@ Editor.removeFromSelection = function(object)
 };
 
 //Check if object is selected
-Editor.isObjectSelected = function(object)
+Editor.isSelected = function(object)
 {
 	for(var i = 0; i < Editor.selection.length; i++)
 	{

@@ -169,6 +169,30 @@ Nunu.developmentMode = function()
 	return Nunu.TIMESTAMP === "DEVELOPMENT_VERSION";
 };
 
+Nunu.NWJS = 200;
+Nunu.BROWSER = 201;
+Nunu.CORDOVA = 202;
+
+/**
+ * Check in wich platform the enviroment is running.
+ *
+ * @method getPlatform
+ * @return {Number} Indicates the platform type.
+ */
+Nunu.getPlatform = function()
+{
+	if(window.nw !== undefined)
+	{
+		return Nunu.NWJS;
+	}
+	else if(window.cordova !== undefined)
+	{
+		return Nunu.CORDOVA;
+	}
+	
+	return Nunu.BROWSER;
+};
+
 /**
  * Check if nunu is running inside NWJS.
  *
@@ -213,7 +237,6 @@ Nunu.openWebpage = function(url)
 		window.open(url);
 	}
 };
-
 
 /**
  * Set an element into fullscreen mode or exit out of fullscreen mode.

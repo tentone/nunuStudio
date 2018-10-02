@@ -8,17 +8,16 @@
  * @class EventManager
  * @module Utils
  */
-
-/**
- * Stores all events in the manager, their target and callback.
- * 
- * Format [target, event, callback, active]
- * 
- * @attribute events
- * @type {Array}
- */
 function EventManager()
 {
+	/**
+	 * Stores all events in the manager, their target and callback.
+	 * 
+	 * Format [target, event, callback, active]
+	 * 
+	 * @attribute events
+	 * @type {Array}
+	 */
 	this.events = [];
 }
 
@@ -76,6 +75,13 @@ EventManager.prototype.destroy = function()
 	}
 };
 
+/**
+ * Add a scroll event to a target element.
+ *
+ * @method addScrollEvent
+ * @param {DOM} target Event target element.
+ * @param {Function} callback Callback function.
+ */
 EventManager.prototype.addScrollEvent = function(target, callback)
 {
 	if(window.onmousewheel !== undefined)

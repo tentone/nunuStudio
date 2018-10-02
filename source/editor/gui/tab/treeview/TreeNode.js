@@ -99,7 +99,7 @@ function TreeNode(container)
 
 	this.element.onmouseleave = function()
 	{
-		if(!Editor.isObjectSelected(self.object))
+		if(!Editor.isSelected(self.object))
 		{
 			this.style.backgroundColor = Editor.theme.buttonLightColor;
 		}
@@ -262,6 +262,24 @@ function TreeNode(container)
 				});
 			}
 
+			//Change attribute of an object and all its children
+			function setObjectAttribute(object, attribute, value)
+			{
+				var actions = [];
+
+				if(object[attribute] !== undefined)
+				{
+					actions.push(new ChangeAction(object, attribute, value));
+				}
+
+				object.traverse(function(child)
+				{
+					actions.push(new ChangeAction(child, attribute, value));
+				});
+
+				return actions;
+			};
+
 			if(!isScene && !isProgram)
 			{
 				var autoUpdate = context.addMenu("Static");
@@ -269,15 +287,15 @@ function TreeNode(container)
 				//Set object and children to static mode
 				autoUpdate.addOption("Static", function()
 				{
-					ObjectUtils.setMatrixAutoUpdate(self.object, false);
-					Editor.updateObjectsViewsGUI();
+					var actions = setObjectAttribute(self.object, "matrixAutoUpdate", false);
+					Editor.history.add(new ActionBundle(actions));
 				});
 
 				//Set object and children to dynamic mode
 				autoUpdate.addOption("Dynamic", function()
 				{
-					ObjectUtils.setMatrixAutoUpdate(self.object, true);
-					Editor.updateObjectsViewsGUI();
+					var actions = setObjectAttribute(self.object, "matrixAutoUpdate", true);
+					Editor.history.add(new ActionBundle(actions));
 				});
 
 				var shadow = context.addMenu("Shadows");
@@ -285,19 +303,17 @@ function TreeNode(container)
 				//Set object and children shadow casting mode
 				shadow.addOption("Enable", function()
 				{
-					ObjectUtils.setShadowCasting(self.object, true);
-					ObjectUtils.setShadowReceiving(self.object, true);
-
-					Editor.updateObjectsViewsGUI();
+					var cast = setObjectAttribute(self.object, "castShadow", true);
+					var receive = setObjectAttribute(self.object, "receiveShadow", true);
+					Editor.history.add(new ActionBundle(cast.concat(receive)));
 				});
 
 				//Set object and children shadow casting mode
 				shadow.addOption("Disable", function()
 				{
-					ObjectUtils.setShadowCasting(self.object, false);
-					ObjectUtils.setShadowReceiving(self.object, false);
-
-					Editor.updateObjectsViewsGUI();
+					var cast = setObjectAttribute(self.object, "castShadow", false);
+					var receive = setObjectAttribute(self.object, "receiveShadow", false);
+					Editor.history.add(new ActionBundle(cast.concat(receive)));
 				});
 
 				//Duplicate object
@@ -475,7 +491,7 @@ function TreeNode(container)
 	{
 		if(event.ctrlKey)
 		{
-			if(Editor.isObjectSelected(self.object))
+			if(Editor.isSelected(self.object))
 			{
 				Editor.removeFromSelection(self.object);
 			}
@@ -635,7 +651,7 @@ TreeNode.prototype.attach = function(object)
 	this.icon.src = this.object.locked ? ObjectIcons.locked : ObjectIcons.get(object.type);
 	this.arrow.src = this.folded ? TreeNode.ARROW_RIGHT : TreeNode.ARROW_DOWN;
 	
-	if(Editor.isObjectSelected(object))
+	if(Editor.isSelected(object))
 	{
 		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	}

@@ -31,57 +31,6 @@ ObjectUtils.getRoot = function(obj)
 };
 
 /**
- * Set object and all its children matrixAutoUpdate value
- *
- * @method setMatrixAutoUpdate
- * @param {Object3D} obj
- * @param {boolean} value
- */
-ObjectUtils.setMatrixAutoUpdate = function(obj, value)
-{
-	obj.matrixAutoUpdate = value;
-
-	obj.traverse(function(child)
-	{
-		child.matrixAutoUpdate = value;
-	});
-};
-
-/**
- * Set object and all children to receive shadows
- *
- * @method setShadowReceiving
- * @param {Object3D} obj
- * @param {boolean} value
- */
-ObjectUtils.setShadowReceiving = function(obj, value)
-{
-	obj.receiveShadow = value;
-
-	obj.traverse(function(child)
-	{
-		child.receiveShadow = value;
-	});
-};
-
-/**
- * Set object and all children to cast shadows
- *
- * @method setShadowCasting
- * @param {Object3D} obj
- * @param {boolean} value
- */
-ObjectUtils.setShadowCasting = function(obj, value)
-{
-	obj.castShadow = value;
-	
-	obj.traverse(function(child)
-	{
-		child.castShadow = value;
-	});
-};
-
-/**
  * Check if object is child of another object
  *
  * @method isChildOf
@@ -100,6 +49,32 @@ ObjectUtils.isChildOf = function(parent, child)
 	}
 	
 	return false;
+};
+
+/**
+ * Scale and center object into a unitary box, using its geometry.
+ * 
+ * @method scaleAndCenterObject
+ * @param {Object3D} object Object to be positioned and scaled.
+ */
+ObjectUtils.scaleAndCenterObject = function(object)
+{
+	var box = ObjectUtils.calculateBoundingBox(object);
+	
+	if(box !== null)
+	{
+		var size = new THREE.Vector3();
+		box.getSize(size);
+
+		var scale = 1 / (size.x > size.y ? size.x > size.z ? size.x : size.z : size.y > size.z ? size.y : size.z);
+		
+		var center = new THREE.Vector3();
+		box.getCenter(center);
+		center.multiplyScalar(scale);
+
+		object.scale.set(scale, scale, scale);
+		object.position.set(-center.x, -scale * box.min.y, -center.z);
+	}
 };
 
 /**
