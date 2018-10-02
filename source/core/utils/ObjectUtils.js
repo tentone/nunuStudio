@@ -31,27 +31,6 @@ ObjectUtils.getRoot = function(obj)
 };
 
 /**
- * Check if object is child of another object
- *
- * @method isChildOf
- * @param {Object3D} parent
- * @param {Object3D} child
- * @return {boolean} True if parent is parent of child
- */
-ObjectUtils.isChildOf = function(parent, child)
-{
-	for(var i = 0; i < parent.children.length; i++)
-	{
-		if(parent.children[i] === child || ObjectUtils.isChildOf(parent.children[i], child))
-		{
-			return true;
-		}
-	}
-	
-	return false;
-};
-
-/**
  * Scale and center object into a unitary box, using its geometry.
  * 
  * @method scaleAndCenterObject

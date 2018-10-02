@@ -15,6 +15,26 @@ THREE.Object3D.prototype.folded = false;
 THREE.Object3D.prototype.locked = false;
 
 /**
+ * Check if this object contains a object.
+ *
+ * @method contains
+ * @param {Object3D} object Object to look for.
+ * @return {boolean} True if this object contains the object.
+ */
+THREE.Object3D.prototype.contains = function(object)
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].uuid === object.uuid || this.children[i].contains(object))
+		{
+			return true;
+		}
+	}
+
+	return false;
+};
+
+/**
  * Play animations attached to this object.
  *
  * Animations rely on other objects, if some of these are missing the animation will have problems playing.

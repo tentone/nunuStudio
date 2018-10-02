@@ -414,9 +414,9 @@ function TreeNode(container)
 				Editor.alert("Cannot add object into itself.");
 				return;
 			}
-			else if(ObjectUtils.isChildOf(object, self.object))
+			else if(object.contains(self.object))
 			{
-				Editor.alert("Cannot add object into is child.");
+				Editor.alert("Cannot add object into is children.");
 				return;
 			}
 			else
