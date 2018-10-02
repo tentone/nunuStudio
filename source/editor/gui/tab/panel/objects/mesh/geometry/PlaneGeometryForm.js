@@ -3,7 +3,7 @@
 function PlaneGeometryForm(form, obj)
 {
 	this.form = form;
-	this.obj = obj;
+	this.object = obj;
 	
 	var self = this;
 
@@ -61,18 +61,18 @@ function PlaneGeometryForm(form, obj)
 
 PlaneGeometryForm.prototype.updateGeometry = function()
 {
-	this.obj.geometry.dispose();
+	this.object.geometry.dispose();
 
 	var GeometryConstructor = this.buffer.getValue() ? THREE.PlaneBufferGeometry : THREE.PlaneGeometry;
 
-	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue())));
+	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue())));
 };
 
 PlaneGeometryForm.prototype.updateValues = function()
 {
-	this.width.setValue(this.obj.geometry.parameters.width || 1);
-	this.height.setValue(this.obj.geometry.parameters.height || 1);
-	this.widthSegments.setValue(this.obj.geometry.parameters.widthSegments || 1);
-	this.heightSegments.setValue(this.obj.geometry.parameters.heightSegments || 1);
-	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
+	this.width.setValue(this.object.geometry.parameters.width || 1);
+	this.height.setValue(this.object.geometry.parameters.height || 1);
+	this.widthSegments.setValue(this.object.geometry.parameters.widthSegments || 1);
+	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };

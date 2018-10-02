@@ -96,7 +96,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Texture map
 	this.form.addText("Texture map");
-	this.form.nextRow();
 	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{
@@ -108,7 +107,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Bump map
 	this.form.addText("Bump map");
-	this.form.nextRow();
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.setOnChange(function(file)
 	{
@@ -134,7 +132,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Normal map
 	this.form.addText("Normal map");
-	this.form.nextRow();
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.setOnChange(function(file)
 	{
@@ -173,7 +170,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Displacement map
 	this.form.addText("Displacement Map");
-	this.form.nextRow();
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.setOnChange(function(file)
 	{
@@ -211,7 +207,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Specular map
 	this.form.addText("Specular map");
-	this.form.nextRow();
 	this.specularMap = new TextureForm(this.form);
 	this.specularMap.setOnChange(function(file)
 	{
@@ -223,7 +218,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Emissive map
 	this.form.addText("Emissive map");
-	this.form.nextRow();
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.setOnChange(function(file)
 	{
@@ -260,7 +254,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Alpha map
 	this.form.addText("Alpha map");
-	this.form.nextRow();
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.setOnChange(function(file)
 	{
@@ -272,7 +265,6 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Environment map
 	this.form.addText("Environment map");
-	this.form.nextRow();
 	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(100, 100);
 	this.envMap.setOnChange(function(file)

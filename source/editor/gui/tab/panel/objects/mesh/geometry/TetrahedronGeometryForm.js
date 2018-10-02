@@ -3,7 +3,7 @@
 function TetrahedronGeometryForm(form, obj)
 {
 	this.form = form;
-	this.obj = obj;
+	this.object = obj;
 	
 	var self = this;
 
@@ -47,16 +47,16 @@ function TetrahedronGeometryForm(form, obj)
 
 TetrahedronGeometryForm.prototype.updateGeometry = function()
 {
-	this.obj.geometry.dispose();
+	this.object.geometry.dispose();
 
 	var GeometryConstructor = this.buffer.getValue() ? THREE.TetrahedronBufferGeometry : THREE.TetrahedronGeometry;
 
-	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.detail.getValue())));
+	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.detail.getValue())));
 };
 
 TetrahedronGeometryForm.prototype.updateValues = function()
 {
-	this.radius.setValue(this.obj.geometry.parameters.radius || 2);
-	this.detail.setValue(this.obj.geometry.parameters.detail || 0);
-	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
+	this.radius.setValue(this.object.geometry.parameters.radius || 2);
+	this.detail.setValue(this.object.geometry.parameters.detail || 0);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };

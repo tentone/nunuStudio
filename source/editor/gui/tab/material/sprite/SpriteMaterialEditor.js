@@ -55,7 +55,6 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 	//Texture map
 	this.form.addText("Texture map");
-	this.form.nextRow();
 	this.map = new TextureForm(this.form);
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)

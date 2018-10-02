@@ -3,7 +3,7 @@
 function SphereGeometryForm(form, obj)
 {
 	this.form = form;
-	this.obj = obj;
+	this.object = obj;
 	
 	var self = this;
 
@@ -53,17 +53,17 @@ function SphereGeometryForm(form, obj)
 
 SphereGeometryForm.prototype.updateGeometry = function()
 {
-	this.obj.geometry.dispose();
+	this.object.geometry.dispose();
 
 	var GeometryConstructor = this.buffer.getValue() ? THREE.SphereBufferGeometry : THREE.SphereGeometry;
 
-	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue())));
+	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue())));
 };
 
 SphereGeometryForm.prototype.updateValues = function()
 {
-	this.radius.setValue(this.obj.geometry.parameters.radius || 50);
-	this.widthSegments.setValue(this.obj.geometry.parameters.widthSegments || 8);
-	this.heightSegments.setValue(this.obj.geometry.parameters.heightSegments || 6);
-	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
+	this.radius.setValue(this.object.geometry.parameters.radius || 50);
+	this.widthSegments.setValue(this.object.geometry.parameters.widthSegments || 8);
+	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 6);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };

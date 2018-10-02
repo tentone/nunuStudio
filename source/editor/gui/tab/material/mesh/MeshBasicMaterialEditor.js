@@ -54,7 +54,6 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 
 	//Texture map
 	this.form.addText("Texture map");
-	this.form.nextRow();
 	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{
@@ -66,7 +65,6 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 
 	//Alpha map
 	this.form.addText("Alpha map");
-	this.form.nextRow();
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.setOnChange(function(file)
 	{

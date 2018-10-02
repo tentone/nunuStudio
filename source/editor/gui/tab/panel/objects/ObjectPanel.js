@@ -55,13 +55,13 @@ function ObjectPanel(parent, obj)
 	this.form.nextRow();
 
 	var text = this.form.addText("Scale");
-	text.size.x -= 20;
 
 	//Scale lock
-	this.scaleRatioLock = new CheckBox(this.form);
+	this.scaleRatioLock = new CheckBox(text);
 	this.scaleRatioLock.setAltText("Lock scale ratio");
 	this.scaleRatioLock.size.set(18, 18);
-	this.form.add(this.scaleRatioLock);
+	this.scaleRatioLock.setMode(Element.TOP_RIGHT);
+	this.scaleRatioLock.updateInterface();
 	
 	//Scale
 	this.scale = new VectorBox(this.form);

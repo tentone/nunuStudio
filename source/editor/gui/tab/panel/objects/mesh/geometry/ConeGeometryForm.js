@@ -3,7 +3,7 @@
 function ConeGeometryForm(form, obj)
 {
 	this.form = form;
-	this.obj = obj;
+	this.object = obj;
 	
 	var self = this;
 
@@ -63,18 +63,18 @@ function ConeGeometryForm(form, obj)
 
 ConeGeometryForm.prototype.updateGeometry = function()
 {
-	this.obj.geometry.dispose();
+	this.object.geometry.dispose();
 
 	var GeometryConstructor = this.buffer.getValue() ? THREE.ConeBufferGeometry : THREE.ConeGeometry;
 
-	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
+	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
 };
 
 ConeGeometryForm.prototype.updateValues = function()
 {
-	this.radius.setValue(this.obj.geometry.parameters.radius || 20);
-	this.height.setValue(this.obj.geometry.parameters.height || 100);
-	this.radialSegments.setValue(this.obj.geometry.parameters.radialSegments || 8);
-	this.heightSegments.setValue(this.obj.geometry.parameters.heightSegments || 1);
-	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
+	this.radius.setValue(this.object.geometry.parameters.radius || 20);
+	this.height.setValue(this.object.geometry.parameters.height || 100);
+	this.radialSegments.setValue(this.object.geometry.parameters.radialSegments || 8);
+	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };

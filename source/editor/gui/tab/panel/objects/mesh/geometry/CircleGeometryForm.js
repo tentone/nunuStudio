@@ -3,7 +3,7 @@
 function CircleGeometryForm(form, obj)
 {
 	this.form = form;
-	this.obj = obj;
+	this.object = obj;
 	
 	var self = this;
 
@@ -65,18 +65,18 @@ function CircleGeometryForm(form, obj)
 
 CircleGeometryForm.prototype.updateGeometry = function()
 {
-	this.obj.geometry.dispose();
+	this.object.geometry.dispose();
 	
 	var GeometryConstructor = this.buffer.getValue() ? THREE.CircleBufferGeometry : THREE.CircleGeometry;
 
-	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
+	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
 };
 
 CircleGeometryForm.prototype.updateValues = function()
 {
-	this.radius.setValue(this.obj.geometry.parameters.radius || 1);
-	this.segments.setValue(this.obj.geometry.parameters.segments || 32);
-	this.thetaStart.setValue(this.obj.geometry.parameters.thetaStart || 0);
-	this.thetaLength.setValue(this.obj.geometry.parameters.thetaLength || Math.PI * 2);
-	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
+	this.radius.setValue(this.object.geometry.parameters.radius || 1);
+	this.segments.setValue(this.object.geometry.parameters.segments || 32);
+	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
+	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI * 2);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };

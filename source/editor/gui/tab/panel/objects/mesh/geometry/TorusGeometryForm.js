@@ -3,7 +3,7 @@
 function TorusGeometryForm(form, obj)
 {
 	this.form = form;
-	this.obj = obj;
+	this.object = obj;
 	
 	var self = this;
 
@@ -72,19 +72,17 @@ function TorusGeometryForm(form, obj)
 
 TorusGeometryForm.prototype.updateGeometry = function()
 {
-	this.obj.geometry.dispose();
-
+	this.object.geometry.dispose();
 	var GeometryConstructor = this.buffer.getValue() ? THREE.TorusBufferGeometry : THREE.TorusGeometry;
-
-	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue())));
+	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.tube.getValue(), this.radialSegments.getValue(), this.tubularSegments.getValue(), this.arc.getValue())));
 };
 
 TorusGeometryForm.prototype.updateValues = function()
 {
-	this.radius.setValue(this.obj.geometry.parameters.radius || 100);
-	this.tube.setValue(this.obj.geometry.parameters.tube || 40);
-	this.radialSegments.setValue(this.obj.geometry.parameters.radialSegments || 8);
-	this.tubularSegments.setValue(this.obj.geometry.parameters.tubularSegments || 6);
-	this.arc.setValue(this.obj.geometry.parameters.arc || Math.PI * 2);
-	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
+	this.radius.setValue(this.object.geometry.parameters.radius || 100);
+	this.tube.setValue(this.object.geometry.parameters.tube || 40);
+	this.radialSegments.setValue(this.object.geometry.parameters.radialSegments || 8);
+	this.tubularSegments.setValue(this.object.geometry.parameters.tubularSegments || 6);
+	this.arc.setValue(this.object.geometry.parameters.arc || Math.PI * 2);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };

@@ -3,7 +3,7 @@
 function CylinderGeometryForm(form, obj)
 {
 	this.form = form;
-	this.obj = obj;
+	this.object = obj;
 	
 	var self = this;
 
@@ -70,19 +70,19 @@ function CylinderGeometryForm(form, obj)
 
 CylinderGeometryForm.prototype.updateGeometry = function()
 {
-	this.obj.geometry.dispose();
+	this.object.geometry.dispose();
 	
 	var GeometryConstructor = this.buffer.getValue() ? THREE.CylinderBufferGeometry : THREE.CylinderGeometry;
 
-	Editor.history.add(new ChangeAction(this.obj, "geometry", new GeometryConstructor(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
+	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
 };
 
 CylinderGeometryForm.prototype.updateValues = function()
 {
-	this.radiusTop.setValue(this.obj.geometry.parameters.radiusTop || 20);
-	this.radiusBottom.setValue(this.obj.geometry.parameters.radiusBottom || 20);
-	this.height.setValue(this.obj.geometry.parameters.height || 100);
-	this.radialSegments.setValue(this.obj.geometry.parameters.radialSegments || 8);
-	this.heightSegments.setValue(this.obj.geometry.parameters.heightSegments || 1);
-	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
+	this.radiusTop.setValue(this.object.geometry.parameters.radiusTop || 20);
+	this.radiusBottom.setValue(this.object.geometry.parameters.radiusBottom || 20);
+	this.height.setValue(this.object.geometry.parameters.height || 100);
+	this.radialSegments.setValue(this.object.geometry.parameters.radialSegments || 8);
+	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };

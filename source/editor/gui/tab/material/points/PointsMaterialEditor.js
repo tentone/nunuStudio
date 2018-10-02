@@ -65,7 +65,6 @@ function PointsMaterialEditor(parent, closeable, container, index)
 
 	//Texture map
 	this.form.addText("Texture map");
-	this.form.nextRow();
 	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{

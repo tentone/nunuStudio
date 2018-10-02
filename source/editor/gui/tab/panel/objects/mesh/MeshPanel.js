@@ -15,6 +15,14 @@ MeshPanel.prototype.updatePanel = function()
 	
 	if(this.geometry !== null)
 	{
-		this.geometry.updateValues();
+		try
+		{
+			this.geometry.updateValues();
+		}
+		catch(e)
+		{
+			this.geometry.destroy();
+			this.geometry = GeometryForm.create(this.form, this.obj);
+		}
 	}
 };
