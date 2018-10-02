@@ -1060,19 +1060,11 @@ Editor.updateObjectsViewsGUI = function()
 	Editor.gui.tab.updateMetadata();
 };
 
-//Update values of objects attached to the GUI
-Editor.updateValuesGUI = function()
-{
-	Editor.gui.panelContainer.updateValues();
-};
-
 //Update tabs after changing selection
 Editor.updateSelectionGUI = function()
 {
 	Editor.gui.tab.updateMetadata();
 	Editor.gui.tab.updateSelection();
-	//Editor.gui.treeView.updateSelection();
-	//Editor.gui.panelContainer.updateSelection();
 };
 
 //Reset editing flags

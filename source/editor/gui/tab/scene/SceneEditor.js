@@ -497,7 +497,7 @@ SceneEditor.prototype.update = function()
 
 			if(isEditingObject)
 			{
-				Editor.updateValuesGUI();
+				Editor.gui.panelContainer.updateValues();
 			}
 			else
 			{
