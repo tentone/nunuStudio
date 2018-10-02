@@ -208,16 +208,29 @@ function TreeNode(container)
 					//Generate normals for the attached geometry
 					context.addOption("Compute normals", function()
 					{
-						self.object.geometry.computeVertexNormals();
+						var geometry = self.object.geometry.clone();
+						geometry.computeVertexNormals();
+
+						Editor.history.add();
 					});
 
 					//Apply transformation to geometry
 					context.addOption("Apply transformation", function()
 					{
-						self.object.geometry.applyMatrix(self.object.matrixWorld);
+						var geometry = self.object.geometry.clone();
+						geometry.applyMatrix(self.object.matrixWorld);
+
+
+						var actions = [];
+						actions.push(new ChangeAction(self.object, "geometry", geometry));
+						//actions.push(new ChangeAction(self.object, "position", new THREE.Vector3(0, 0, 0)));
+						//actions.push(new ChangeAction(self.object, "scale", new THREE.Vector3(1, 1, 1)));
+						//actions.push(new ChangeAction(self.object, "quaternion", new THREE.Quaternion(0, 0, 0, 1)));
 						self.object.position.set(0, 0, 0);
 						self.object.scale.set(1, 1, 1);
 						self.object.rotation.set(0, 0, 0);
+
+						Editor.history.add(new ActionBundle(actions));
 					});
 				}
 				
@@ -229,7 +242,6 @@ function TreeNode(container)
 					physics.name = object.name;
 					physics.position.copy(object.position);
 					physics.quaternion.copy(object.quaternion);
-
 					object.position.set(0, 0, 0);
 					object.quaternion.set(0, 0, 0, 1);
 
