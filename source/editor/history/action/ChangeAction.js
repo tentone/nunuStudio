@@ -17,19 +17,33 @@ function ChangeAction(object, attribute, newValue, oldValue)
 	this.object = object;
 	this.attribute = attribute;
 	this.newValue = newValue;
-	this.oldValue = (oldValue !== undefined) ? oldValue : object[attribute];
+	this.oldValue = oldValue !== undefined ? oldValue : (ChangeAction.isVetorial(object[attribute]) ? object[attribute].clone() : object[attribute]);
 }
 
 ChangeAction.prototype.apply = function()
 {
-	this.object[this.attribute] = this.newValue;
+	if(ChangeAction.isVetorial(this.object[this.attribute]))
+	{
+		this.object[this.attribute].copy(this.newValue)
+	}
+	else
+	{
+		this.object[this.attribute] = this.newValue;
+	}
 
 	ChangeAction.updateGUI(this.object, this.attribute, this.newValue);
 };
 
 ChangeAction.prototype.revert = function()
 {
-	this.object[this.attribute] = this.oldValue;
+	if(ChangeAction.isVetorial(this.object[this.attribute]))
+	{
+		this.object[this.attribute].copy(this.oldValue)
+	}
+	else
+	{
+		this.object[this.attribute] = this.oldValue;
+	}
 
 	ChangeAction.updateGUI(this.object, this.attribute, this.oldValue);
 };
@@ -62,4 +76,20 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
 	{
 		Editor.gui.panelContainer.updateValues();
 	}
+};
+
+/**
+ * Check if a attribute is a THREE vectorial data type.
+ * 
+ * Vetorial types have some common methods (toArray, copy, fromArray).
+ *
+ * (Matrix3, Matrix4, Vector2, Vector3, Vector4, Quaternion, Euler).
+ * 
+ * @static
+ * @method isVetorial
+ * @param {Object} object To be checked.
+ */
+ChangeAction.isVetorial = function(object)
+{
+	return object.isVector3 === true || object.isEuler === true || (object instanceof THREE.Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
 };

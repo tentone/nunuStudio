@@ -210,8 +210,7 @@ function TreeNode(container)
 					{
 						var geometry = self.object.geometry.clone();
 						geometry.computeVertexNormals();
-
-						Editor.history.add();
+						Editor.history.add(new ChangeAction(self.object, "geometry", geometry));
 					});
 
 					//Apply transformation to geometry
@@ -223,13 +222,9 @@ function TreeNode(container)
 
 						var actions = [];
 						actions.push(new ChangeAction(self.object, "geometry", geometry));
-						//actions.push(new ChangeAction(self.object, "position", new THREE.Vector3(0, 0, 0)));
-						//actions.push(new ChangeAction(self.object, "scale", new THREE.Vector3(1, 1, 1)));
-						//actions.push(new ChangeAction(self.object, "quaternion", new THREE.Quaternion(0, 0, 0, 1)));
-						self.object.position.set(0, 0, 0);
-						self.object.scale.set(1, 1, 1);
-						self.object.rotation.set(0, 0, 0);
-
+						actions.push(new ChangeAction(self.object, "position", new THREE.Vector3(0, 0, 0)));
+						actions.push(new ChangeAction(self.object, "scale", new THREE.Vector3(1, 1, 1)));
+						actions.push(new ChangeAction(self.object, "quaternion", new THREE.Quaternion(0, 0, 0, 1)));
 						Editor.history.add(new ActionBundle(actions));
 					});
 				}

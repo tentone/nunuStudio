@@ -20,11 +20,6 @@
  * @param {Number} encoding
  */
 /**
- * Name of the texture (doesn't need to be unique).
- * @property name
- * @type {String}
-*/
-/**
  * UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.
  * @property uuid
  * @type {String}
@@ -55,12 +50,6 @@
  * @default 0
  */
 /**
- * Image attached to the texture
- * 
- * @property img
- * @type {Image}
- */
-/**
  * False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.
  *
  * @property premultiplyAlpha
@@ -73,36 +62,19 @@
  * @type {Boolean}
  */
 /**
- * DOM element attached to the texture
- * 
- * @property image
- * @type {DOM}
- */
-/**
  * Array of user-specified mipmaps (optional).
  *
  * @property mipmaps
  * @type {Array}
  */
-/**
- * Name of the texture
- * 
- * @property name
- * @type {String}
- * @default "texture"
- */
-/**
- * Flag used to know is the texture has been disposed.
- * 
- * Is used to control animation when using a gif as a texture.
- * 
- * @property disposed
- * @type {boolean}
- * @default false
- */
 function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
-	//If image is a URL
+	/**
+	 * Image attached to the texture
+	 * 
+	 * @property img
+	 * @type {Image}
+	 */
 	if(typeof image === "string")
 	{
 		this.img = new Image(image);
@@ -116,17 +88,37 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 		this.img = image;
 	}
 
-	//Super constructor
 	THREE.Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
 	var self = this;
 
+	/**
+	 * Name of the texture (doesn't need to be unique).
+	 * @property name
+	 * @type {String}
+	*/
 	this.name = "texture";
 	this.category = "Image";
+
+	/**
+	 * Flag used to know is the texture has been disposed.
+	 * 
+	 * Is used to control animation when using a gif as a texture.
+	 * 
+	 * @property disposed
+	 * @type {boolean}
+	 * @default false
+	 */
 	this.disposed = false;
+
 	this.format = this.img.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 
-	//Image source
+	/**
+	 * DOM element attached to the texture
+	 * 
+	 * @property image
+	 * @type {DOM}
+	 */
 	this.image.src = this.img.data;
 
 	this.image.onload = function()

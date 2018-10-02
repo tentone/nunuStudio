@@ -26,11 +26,10 @@ function CodeSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.codeTheme);
 	this.form.nextRow();
-
-	var themes = CodemirrorThemes.list;
-	for(var i = 0; i < themes.length; i++)
+	
+	for(var i = 0; i < CodemirrorThemes.length; i++)
 	{
-		this.codeTheme.addValue(themes[i], themes[i]);
+		this.codeTheme.addValue(CodemirrorThemes[i], CodemirrorThemes[i]);
 	}
 
 	//Code keymap

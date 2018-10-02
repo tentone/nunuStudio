@@ -1,8 +1,12 @@
 "use strict";
 
-function CodemirrorThemes(){}
-
-CodemirrorThemes.list =
+/**
+ * Static class that contains a listage of the CodeMirror themes.
+ * 
+ * @static
+ * @class CodemirrorThemes
+ */
+var CodemirrorThemes =
 [
 	"3024-night",
 	"3024-day",
