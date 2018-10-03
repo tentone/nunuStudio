@@ -91,5 +91,10 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
  */
 ChangeAction.isVetorial = function(object)
 {
+	if(object === null || object === undefined)
+	{
+		return false;
+	}
+
 	return object.isVector3 === true || object.isEuler === true || (object instanceof THREE.Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
 };

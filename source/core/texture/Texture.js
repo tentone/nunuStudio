@@ -131,6 +131,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 		console.log("nunuStudio: Failed to load image " + self.img.uuid + " data.");
 		self.img.createSolidColor();
 		self.image.src = self.img.data;
+		self.needsUpdate = true;
 	};
 
 	//Check if image is animated

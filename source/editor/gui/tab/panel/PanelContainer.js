@@ -34,7 +34,7 @@ PanelContainer.prototype.isAttached = function(object)
 {
 	if(this.panel !== null)
 	{
-		return this.panel.obj === object;
+		return this.panel.object === object;
 	}
 
 	return false;
@@ -44,7 +44,7 @@ PanelContainer.prototype.updateObjectsView = function()
 {
 	if(this.panel !== null)
 	{	
-		var object = this.panel.obj;
+		var object = this.panel.object;
 
 		if(object.isObject3D === true && object.parent === null)
 		{
@@ -57,7 +57,7 @@ PanelContainer.prototype.updateSelection = function()
 {	
 	var object = Editor.hasObjectSelected() ? Editor.selection[0] : null;
 	
-	if(this.panel !== null && this.panel.obj === object)
+	if(this.panel !== null && this.panel.object === object)
 	{
 		return;
 	}
