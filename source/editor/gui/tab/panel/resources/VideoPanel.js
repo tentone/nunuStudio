@@ -1,8 +1,8 @@
 "use strict";
 
-function VideoPanel(parent, obj)
+function VideoPanel(parent, object)
 {
-	ResourcePanel.call(this, parent, obj);
+	ResourcePanel.call(this, parent, object);
 
 	var self = this;
 
@@ -19,5 +19,5 @@ VideoPanel.prototype.updatePanel = function()
 {
 	ResourcePanel.prototype.updatePanel.call(this);
 
-	this.video.setValue(this.obj);
+	this.video.setValue(this.object);
 };

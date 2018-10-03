@@ -1,8 +1,8 @@
 "use strict";
 
-function ScenePanel(parent, obj)
+function ScenePanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,13 +12,13 @@ function ScenePanel(parent, obj)
 	this.default.size.set(18, 18);
 	this.default.setOnChange(function()
 	{
-		if(self.obj !== null)
+		if(self.object !== null)
 		{
-			var program = self.obj.parent;
+			var program = self.object.parent;
 			
 			if(self.default.getValue())
 			{
-				Editor.history.add(new ChangeAction(program, "defaultScene",  self.obj.uuid));
+				Editor.history.add(new ChangeAction(program, "defaultScene",  self.object.uuid));
 			}
 			else
 			{
@@ -36,7 +36,7 @@ function ScenePanel(parent, obj)
 	this.background.setValue(0, 0, 0);
 	this.background.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "background", new THREE.Color(self.background.getValueHex())));
+		Editor.history.add(new ChangeAction(self.object, "background", new THREE.Color(self.background.getValueHex())));
 	});
 	this.form.add(this.background);
 	this.form.nextRow();
@@ -47,7 +47,7 @@ function ScenePanel(parent, obj)
 	this.backgroundTexture.acceptAll = true;
 	this.backgroundTexture.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.obj, "background", self.backgroundTexture.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "background", self.backgroundTexture.getValue()));
 	});
 	this.form.add(this.backgroundTexture);
 	this.form.nextRow();
@@ -58,7 +58,7 @@ function ScenePanel(parent, obj)
 	this.backgroundTransparent.size.set(100, 18);
 	this.backgroundTransparent.setOnClick(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "background", null));
+		Editor.history.add(new ChangeAction(self.object, "background", null));
 	});
 	this.form.add(this.backgroundTransparent);
 	this.form.nextRow();
@@ -72,7 +72,7 @@ function ScenePanel(parent, obj)
 	this.fog.addValue("Exponential", THREE.Fog.EXPONENTIAL);
 	this.fog.setOnChange(function()
 	{
-		self.obj.setFogMode(self.fog.getSelectedIndex());
+		self.object.setFogMode(self.fog.getSelectedIndex());
 		self.updatePanel();
 	});
 	this.form.add(this.fog);
@@ -90,7 +90,7 @@ function ScenePanel(parent, obj)
 	{
 		var color = self.fogLinearColor.getValueHex();
 		self.fogExponentialColor.setValueHex(color);
-		self.obj.fog.color.setHex(color);
+		self.object.fog.color.setHex(color);
 	});
 	this.fogLinearForm.add(this.fogLinearColor);
 	this.fogLinearForm.nextRow();
@@ -101,7 +101,7 @@ function ScenePanel(parent, obj)
 	this.fogNear.size.set(60, 18);
 	this.fogNear.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.fog, "near", self.fogNear.getValue()));
+		Editor.history.add(new ChangeAction(self.object.fog, "near", self.fogNear.getValue()));
 	});
 	this.fogLinearForm.add(this.fogNear);
 	this.fogLinearForm.nextRow();
@@ -112,7 +112,7 @@ function ScenePanel(parent, obj)
 	this.fogFar.size.set(60, 18);
 	this.fogFar.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.fog, "far", self.fogFar.getValue()));
+		Editor.history.add(new ChangeAction(self.object.fog, "far", self.fogFar.getValue()));
 	});
 	this.fogLinearForm.add(this.fogFar);
 	this.fogLinearForm.updateInterface();
@@ -133,7 +133,7 @@ function ScenePanel(parent, obj)
 	{
 		var color = self.fogExponentialColor.getValueHex();
 		self.fogLinearColor.setValueHex(color);
-		self.obj.fog.color.setHex(color);
+		self.object.fog.color.setHex(color);
 	});
 	this.fogExponentialForm.add(this.fogExponentialColor);
 	this.fogExponentialForm.nextRow();
@@ -145,7 +145,7 @@ function ScenePanel(parent, obj)
 	this.fogDensity.setStep(0.0001);
 	this.fogDensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.fog, "density", self.fogDensity.getValue()));
+		Editor.history.add(new ChangeAction(self.object.fog, "density", self.fogDensity.getValue()));
 	});
 	this.fogExponentialForm.add(this.fogDensity);
 	this.fogExponentialForm.updateInterface();
@@ -164,7 +164,7 @@ function ScenePanel(parent, obj)
 	this.usePhysics.size.set(18, 18);
 	this.usePhysics.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "usePhysics", self.usePhysics.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "usePhysics", self.usePhysics.getValue()));
 	});
 	this.form.add(this.usePhysics);
 	this.form.nextRow();
@@ -175,7 +175,7 @@ function ScenePanel(parent, obj)
 	this.gravity.setOnChange(function()
 	{
 		var gravity = self.gravity.getValue();
-		self.obj.world.gravity.set(gravity.x, gravity.y, gravity.z);
+		self.object.world.gravity.set(gravity.x, gravity.y, gravity.z);
 	});
 	this.form.add(this.gravity);
 	this.form.nextRow();
@@ -187,7 +187,7 @@ function ScenePanel(parent, obj)
 	this.tolerance.setStep(0.01);
 	this.tolerance.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.world.solver, "tolerance", self.tolerance.getValue()));
+		Editor.history.add(new ChangeAction(self.object.world.solver, "tolerance", self.tolerance.getValue()));
 	});
 	this.form.add(this.tolerance);
 	this.form.nextRow();
@@ -199,7 +199,7 @@ function ScenePanel(parent, obj)
 	this.iterations.setStep(1);
 	this.iterations.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.world.solver, "iterations", self.iterations.getValue()));
+		Editor.history.add(new ChangeAction(self.object.world.solver, "iterations", self.iterations.getValue()));
 	});
 	this.form.add(this.iterations);
 	this.form.nextRow();
@@ -211,21 +211,21 @@ ScenePanel.prototype = Object.create(ObjectPanel.prototype);
 //Update panel content from attached object
 ScenePanel.prototype.updatePanel = function()
 {
-	this.default.setValue(this.obj.uuid === this.obj.parent.defaultScene);
+	this.default.setValue(this.object.uuid === this.object.parent.defaultScene);
 	
-	if(this.obj.fog instanceof THREE.Fog)
+	if(this.object.fog instanceof THREE.Fog)
 	{
 		this.fog.setValue(THREE.Fog.LINEAR);
-		this.fogLinearColor.setValueHex(this.obj.fog.color.getHex());
-		this.fogNear.setValue(this.obj.fog.near);
-		this.fogFar.setValue(this.obj.fog.far);
+		this.fogLinearColor.setValueHex(this.object.fog.color.getHex());
+		this.fogNear.setValue(this.object.fog.near);
+		this.fogFar.setValue(this.object.fog.far);
 		this.updateForms();
 	}
-	else if(this.obj.fog instanceof THREE.FogExp2)
+	else if(this.object.fog instanceof THREE.FogExp2)
 	{
 		this.fog.setValue(THREE.Fog.EXPONENTIAL);
-		this.fogExponentialColor.setValueHex(this.obj.fog.color.getHex());
-		this.fogDensity.setValue(this.obj.fog.density);
+		this.fogExponentialColor.setValueHex(this.object.fog.color.getHex());
+		this.fogDensity.setValue(this.object.fog.density);
 		this.updateForms();
 	}
 	else
@@ -234,15 +234,15 @@ ScenePanel.prototype.updatePanel = function()
 		this.updateForms();
 	}
 
-	if(this.obj.background !== null)
+	if(this.object.background !== null)
 	{
-		if(this.obj.background instanceof THREE.Color)
+		if(this.object.background instanceof THREE.Color)
 		{
-			this.background.setValue(this.obj.background.r, this.obj.background.g, this.obj.background.b);
+			this.background.setValue(this.object.background.r, this.object.background.g, this.object.background.b);
 		}
-		else if(this.obj.background instanceof THREE.Texture)
+		else if(this.object.background instanceof THREE.Texture)
 		{
-			this.backgroundTexture.setValue(this.obj.background);
+			this.backgroundTexture.setValue(this.object.background);
 		}
 	}
 	else
@@ -251,10 +251,10 @@ ScenePanel.prototype.updatePanel = function()
 		this.backgroundTexture.setValue(null);
 	}
 
-	this.usePhysics.setValue(this.obj.usePhysics);
-	this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
-	this.tolerance.setValue(this.obj.world.solver.tolerance);
-	this.iterations.setValue(this.obj.world.solver.iterations);
+	this.usePhysics.setValue(this.object.usePhysics);
+	this.gravity.setValue(this.object.world.gravity.x, this.object.world.gravity.y, this.object.world.gravity.z);
+	this.tolerance.setValue(this.object.world.solver.tolerance);
+	this.iterations.setValue(this.object.world.solver.iterations);
 };
 
 //Update wich forms should be visible in the panel
@@ -262,10 +262,10 @@ ScenePanel.prototype.updateForms = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.fogLinearForm.visible = (this.obj.fog instanceof THREE.Fog) ? true : false;
+	this.fogLinearForm.visible = (this.object.fog instanceof THREE.Fog) ? true : false;
 	this.fogLinearForm.updateInterface();
 
-	this.fogExponentialForm.visible = (this.obj.fog instanceof THREE.FogExp2) ? true : false;
+	this.fogExponentialForm.visible = (this.object.fog instanceof THREE.FogExp2) ? true : false;
 	this.fogExponentialForm.updateInterface();
 
 	this.form.updateInterface();

@@ -1,9 +1,9 @@
 "use strict";
 
-function ConeGeometryForm(form, obj)
+function ConeGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

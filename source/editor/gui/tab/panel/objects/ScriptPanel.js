@@ -1,8 +1,8 @@
 "use strict";
 
-function ScriptPanel(parent, obj)
+function ScriptPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -11,7 +11,7 @@ function ScriptPanel(parent, obj)
 	this.mode.size.set(100, 18);
 	this.mode.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "mode", self.mode.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "mode", self.mode.getValue()));
 	});
 	this.mode.addValue("Evaluate", Script.EVALUATE);
 	this.mode.addValue("Append", Script.APPEND);
@@ -26,5 +26,5 @@ ScriptPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.mode.setValue(this.obj.mode);
+	this.mode.setValue(this.object.mode);
 };

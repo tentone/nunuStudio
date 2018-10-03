@@ -1,9 +1,9 @@
 "use strict";
 
-function BoxGeometryForm(form, obj)
+function BoxGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

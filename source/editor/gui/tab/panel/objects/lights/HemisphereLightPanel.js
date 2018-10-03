@@ -1,8 +1,8 @@
 "use strict";
 
-function HemisphereLightPanel(parent, obj)
+function HemisphereLightPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function HemisphereLightPanel(parent, obj)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.history.add(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -23,7 +23,7 @@ function HemisphereLightPanel(parent, obj)
 	this.groundColor.size.set(80, 18);
 	this.groundColor.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "groundColor", new THREE.Color(self.groundColor.getValueHex())));
+		Editor.history.add(new ChangeAction(self.object, "groundColor", new THREE.Color(self.groundColor.getValueHex())));
 	});
 	this.form.add(this.groundColor);
 	this.form.nextRow();
@@ -35,6 +35,6 @@ HemisphereLightPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 
-	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-	this.groundColor.setValue(this.obj.groundColor.r, this.obj.groundColor.g, this.obj.groundColor.b);
+	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
+	this.groundColor.setValue(this.object.groundColor.r, this.object.groundColor.g, this.object.groundColor.b);
 };

@@ -1,10 +1,10 @@
 "use strict";
 
-function MeshPanel(parent, obj)
+function MeshPanel(parent, object)
 {
-	DrawablePanel.call(this, parent, obj);
+	DrawablePanel.call(this, parent, object);
 
-	this.geometry = GeometryForm.create(this.form, this.obj);
+	this.geometry = GeometryForm.create(this.form, this.object);
 }
 
 MeshPanel.prototype = Object.create(DrawablePanel.prototype);
@@ -22,7 +22,7 @@ MeshPanel.prototype.updatePanel = function()
 		catch(e)
 		{
 			this.geometry.destroy();
-			this.geometry = GeometryForm.create(this.form, this.obj);
+			this.geometry = GeometryForm.create(this.form, this.object);
 		}
 	}
 };

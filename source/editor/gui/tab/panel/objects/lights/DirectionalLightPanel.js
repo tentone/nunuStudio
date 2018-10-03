@@ -1,8 +1,8 @@
 "use strict";
 
-function DirectionalLightPanel(parent, obj)
+function DirectionalLightPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function DirectionalLightPanel(parent, obj)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.history.add(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -29,7 +29,7 @@ function DirectionalLightPanel(parent, obj)
 	this.castShadow.updateInterface();
 	this.castShadow.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();
@@ -40,8 +40,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "width", self.shadowWidth.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.mapSize, "width", self.shadowWidth.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowWidth);
 	this.form.addText("x", true);
@@ -49,8 +49,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowHeight.size.set(60, 18);
 	this.shadowHeight.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "height", self.shadowHeight.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.mapSize, "height", self.shadowHeight.getValue()));
+		self.object.updateShadowMap();
 	});
 
 	this.form.add(this.shadowHeight);
@@ -69,8 +69,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowNear.setStep(0.1);
 	this.shadowNear.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "near", self.shadowNear.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.camera, "near", self.shadowNear.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowNear);
 	this.form.nextRow();
@@ -82,8 +82,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowFar.setStep(0.1);
 	this.shadowFar.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "far", self.shadowFar.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.camera, "far", self.shadowFar.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowFar);
 	this.form.nextRow();
@@ -95,8 +95,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowLeft.setStep(0.1);
 	this.shadowLeft.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "left", self.shadowLeft.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.camera, "left", self.shadowLeft.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowLeft);
 	this.form.nextRow();
@@ -108,8 +108,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowRight.setStep(0.1);
 	this.shadowRight.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "right", self.shadowRight.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.camera, "right", self.shadowRight.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowRight);
 	this.form.nextRow();
@@ -121,8 +121,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowTop.setStep(0.1);
 	this.shadowTop.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "top", self.shadowTop.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.camera, "top", self.shadowTop.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowTop);
 	this.form.nextRow();
@@ -134,8 +134,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowBottom.setStep(0.1);
 	this.shadowBottom.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "bottom", self.shadowBottom.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.camera, "bottom", self.shadowBottom.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowBottom);
 	this.form.nextRow();
@@ -148,14 +148,14 @@ DirectionalLightPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-	this.castShadow.setValue(this.obj.castShadow);
-	this.shadowWidth.setValue(this.obj.shadow.mapSize.width);
-	this.shadowHeight.setValue(this.obj.shadow.mapSize.height);
-	this.shadowNear.setValue(this.obj.shadow.camera.near);
-	this.shadowFar.setValue(this.obj.shadow.camera.far);
-	this.shadowLeft.setValue(this.obj.shadow.camera.left);
-	this.shadowRight.setValue(this.obj.shadow.camera.right);
-	this.shadowTop.setValue(this.obj.shadow.camera.top);
-	this.shadowBottom.setValue(this.obj.shadow.camera.bottom);
+	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
+	this.castShadow.setValue(this.object.castShadow);
+	this.shadowWidth.setValue(this.object.shadow.mapSize.width);
+	this.shadowHeight.setValue(this.object.shadow.mapSize.height);
+	this.shadowNear.setValue(this.object.shadow.camera.near);
+	this.shadowFar.setValue(this.object.shadow.camera.far);
+	this.shadowLeft.setValue(this.object.shadow.camera.left);
+	this.shadowRight.setValue(this.object.shadow.camera.right);
+	this.shadowTop.setValue(this.object.shadow.camera.top);
+	this.shadowBottom.setValue(this.object.shadow.camera.bottom);
 };

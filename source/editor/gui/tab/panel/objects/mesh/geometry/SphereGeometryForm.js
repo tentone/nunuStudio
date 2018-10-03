@@ -1,9 +1,9 @@
 "use strict";
 
-function SphereGeometryForm(form, obj)
+function SphereGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

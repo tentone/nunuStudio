@@ -1,12 +1,12 @@
 "use strict";
 
-function OrthographicCameraPanel(parent, obj)
+function OrthographicCameraPanel(parent, object)
 {
 	//Scene
 	this.scene = null;
 
 	//Panel
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -16,8 +16,8 @@ function OrthographicCameraPanel(parent, obj)
 	this.size.size.set(80, 18);
 	this.size.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "size", self.size.getValue()));
-		self.obj.updateProjectionMatrix();
+		Editor.history.add(new ChangeAction(self.object, "size", self.size.getValue()));
+		self.object.updateProjectionMatrix();
 	});
 	this.form.add(this.size);
 	this.form.nextRow();
@@ -30,7 +30,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.mode.addValue("Vertical", OrthographicCamera.RESIZE_VERTICAL);
 	this.mode.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "mode", self.mode.getSelectedIndex()));
+		Editor.history.add(new ChangeAction(self.object, "mode", self.mode.getSelectedIndex()));
 	});
 	this.form.add(this.mode);
 	this.form.nextRow();
@@ -41,15 +41,15 @@ function OrthographicCameraPanel(parent, obj)
 	this.use.size.set(18, 18);
 	this.use.setOnChange(function()
 	{
-		if(self.obj !== null && self.scene !== null)
+		if(self.object !== null && self.scene !== null)
 		{
 			if(self.use.getValue())
 			{
-				self.scene.addCamera(self.obj);
+				self.scene.addCamera(self.object);
 			}
 			else
 			{
-				self.scene.removeCamera(self.obj);
+				self.scene.removeCamera(self.object);
 			}
 		}
 	});
@@ -68,7 +68,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.near.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.near.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "near", self.near.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "near", self.near.getValue()));
 	});
 	this.form.add(this.near);
 	this.form.nextRow();
@@ -80,7 +80,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.far.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.far.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "far", self.far.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "far", self.far.getValue()));
 	});
 	this.form.add(this.far);
 	this.form.nextRow();
@@ -100,8 +100,8 @@ function OrthographicCameraPanel(parent, obj)
 		var value = self.offset.getValue();
 		Editor.history.add(new ActionBundle(
 		[
-			new ChangeAction(self.obj.offset, "x", value.x),
-			new ChangeAction(self.obj.offset, "y", value.y)
+			new ChangeAction(self.object.offset, "x", value.x),
+			new ChangeAction(self.object.offset, "y", value.y)
 		]));
 	});
 	this.form.add(this.offset);
@@ -118,8 +118,8 @@ function OrthographicCameraPanel(parent, obj)
 		var value = self.viewport.getValue();
 		Editor.history.add(new ActionBundle(
 		[
-			new ChangeAction(self.obj.viewport, "x", value.x),
-			new ChangeAction(self.obj.viewport, "y", value.y)
+			new ChangeAction(self.object.viewport, "x", value.x),
+			new ChangeAction(self.object.viewport, "y", value.y)
 		]));
 	});
 	this.form.add(this.viewport);
@@ -133,7 +133,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.order.setStep(1);
 	this.order.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "order", self.order.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "order", self.order.getValue()));
 		self.scene.updateCameraOrder();
 	});
 	this.form.add(this.order);
@@ -145,7 +145,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.clearColor.size.set(18, 18);
 	this.clearColor.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "clearColor", self.clearColor.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "clearColor", self.clearColor.getValue()));
 	});
 	this.form.add(this.clearColor);
 	this.form.nextRow();
@@ -156,7 +156,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.clearDepth.size.set(18, 18);
 	this.clearDepth.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "clearDepth", self.clearDepth.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "clearDepth", self.clearDepth.getValue()));
 	});
 	this.form.add(this.clearDepth);
 	this.form.nextRow();
@@ -167,7 +167,7 @@ function OrthographicCameraPanel(parent, obj)
 	this.clearStencil.size.set(18, 18);
 	this.clearStencil.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "clearStencil", self.clearStencil.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "clearStencil", self.clearStencil.getValue()));
 	});
 	this.form.add(this.clearStencil);
 	this.form.nextRow();
@@ -175,26 +175,26 @@ function OrthographicCameraPanel(parent, obj)
 
 OrthographicCameraPanel.prototype = Object.create(ObjectPanel.prototype);
 
-OrthographicCameraPanel.prototype.attach = function(obj)
+OrthographicCameraPanel.prototype.attach = function(object)
 {
-	ObjectPanel.prototype.attach.call(this, obj);
+	ObjectPanel.prototype.attach.call(this, object);
 
-	this.scene = obj.getScene();
+	this.scene = object.getScene();
 }
 
 OrthographicCameraPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.size.setValue(this.obj.size);
-	this.mode.setSelectedIndex(this.obj.mode);
-	this.use.setValue(this.scene.cameras.indexOf(this.obj) !== -1);
-	this.near.setValue(this.obj.near);
-	this.far.setValue(this.obj.far);
-	this.offset.setValue(this.obj.offset);
-	this.viewport.setValue(this.obj.viewport);
-	this.order.setValue(this.obj.order);
-	this.clearColor.setValue(this.obj.clearColor);
-	this.clearDepth.setValue(this.obj.clearDepth);
-	this.clearStencil.setValue(this.obj.clearStencil);
+	this.size.setValue(this.object.size);
+	this.mode.setSelectedIndex(this.object.mode);
+	this.use.setValue(this.scene.cameras.indexOf(this.object) !== -1);
+	this.near.setValue(this.object.near);
+	this.far.setValue(this.object.far);
+	this.offset.setValue(this.object.offset);
+	this.viewport.setValue(this.object.viewport);
+	this.order.setValue(this.object.order);
+	this.clearColor.setValue(this.object.clearColor);
+	this.clearDepth.setValue(this.object.clearDepth);
+	this.clearStencil.setValue(this.object.clearStencil);
 };

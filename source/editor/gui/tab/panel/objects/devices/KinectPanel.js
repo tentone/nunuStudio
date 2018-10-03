@@ -1,8 +1,8 @@
 "use strict";
 
-function KinectPanel(parent, obj)
+function KinectPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function KinectPanel(parent, obj)
 	this.debugModel.size.set(18, 18);
 	this.debugModel.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "debugModel", self.debugModel.getValue()));
 	});
 	this.form.add(this.debugModel);
 }
@@ -23,5 +23,5 @@ KinectPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.debugModel.setValue(this.obj.debugModel);
+	this.debugModel.setValue(this.object.debugModel);
 };

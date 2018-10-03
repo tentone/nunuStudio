@@ -1,8 +1,8 @@
 "use strict";
 
-function ImagePanel(parent, obj)
+function ImagePanel(parent, object)
 {
-	ResourcePanel.call(this, parent, obj);
+	ResourcePanel.call(this, parent, object);
 
 	var self = this;
 
@@ -19,5 +19,5 @@ ImagePanel.prototype.updatePanel = function()
 {
 	ResourcePanel.prototype.updatePanel.call(this);
 
-	this.image.setValue(this.obj);
+	this.image.setValue(this.object);
 };

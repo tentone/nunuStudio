@@ -1,8 +1,8 @@
 "use strict";
 
-function AmbientLightPanel(parent, obj)
+function AmbientLightPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function AmbientLightPanel(parent, obj)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.history.add(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -24,5 +24,5 @@ AmbientLightPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
+	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 };

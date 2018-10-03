@@ -1,11 +1,11 @@
 "use strict";
 
 //Based on code from cannonjs debug shape renderer made by schteppe
-function PhysicsObjectHelper(obj, color)
+function PhysicsObjectHelper(object, color)
 {
 	THREE.Object3D.call(this);
 
-	this.obj = obj;
+	this.object = object;
 
 	this.meshes = [];
 
@@ -38,9 +38,9 @@ PhysicsObjectHelper.prototype.update = function()
 
 	var meshIndex = 0;
 
-	var body = this.obj.body;
-	body.position.copy(this.obj.position);
-	body.quaternion.copy(this.obj.quaternion);
+	var body = this.object.body;
+	body.position.copy(this.object.position);
+	body.quaternion.copy(this.object.quaternion);
 
 	for(var j = 0; j < body.shapes.length; j++)
 	{

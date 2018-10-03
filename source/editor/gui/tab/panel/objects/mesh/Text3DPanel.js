@@ -1,14 +1,14 @@
 "use strict";
 
-function Text3DPanel(parent, obj)
+function Text3DPanel(parent, object)
 {
-	DrawablePanel.call(this, parent, obj);
+	DrawablePanel.call(this, parent, object);
 
 	var self = this;
 
 	function updateGeometry()
 	{
-		self.obj.updateGeometry();
+		self.object.updateGeometry();
 	}
 
 	//Text
@@ -17,7 +17,7 @@ function Text3DPanel(parent, obj)
 	this.text.size.set(190, 36);
 	this.text.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "text", self.text.getText()), updateGeometry));
+		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "text", self.text.getText()), updateGeometry));
 	});
 	this.form.add(this.text);
 	this.form.nextRow();
@@ -30,7 +30,7 @@ function Text3DPanel(parent, obj)
 	this.textSize.setStep(0.1);
 	this.textSize.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "size", self.textSize.getValue()), updateGeometry));
+		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "size", self.textSize.getValue()), updateGeometry));
 	});
 	this.form.add(this.textSize);
 	this.form.nextRow();
@@ -43,7 +43,7 @@ function Text3DPanel(parent, obj)
 	this.height.setStep(0.1);
 	this.height.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "height", self.height.getValue()), updateGeometry));
+		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "height", self.height.getValue()), updateGeometry));
 	});
 	this.form.add(this.height);
 	this.form.nextRow();
@@ -56,7 +56,7 @@ function Text3DPanel(parent, obj)
 	this.curveSegments.setStep(1.0);
 	this.curveSegments.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "curveSegments", self.curveSegments.getValue()), updateGeometry));
+		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "curveSegments", self.curveSegments.getValue()), updateGeometry));
 	});
 	this.form.add(this.curveSegments);
 	this.form.nextRow();
@@ -67,7 +67,7 @@ function Text3DPanel(parent, obj)
 	this.bevel.size.set(18, 18);
 	this.bevel.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "bevel", self.bevel.getValue()), updateGeometry));
+		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "bevel", self.bevel.getValue()), updateGeometry));
 	});
 	this.form.add(this.bevel);
 	this.form.nextRow();
@@ -80,7 +80,7 @@ function Text3DPanel(parent, obj)
 	this.bevelThickness.setStep(0.1);
 	this.bevelThickness.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "bevelThickness", self.bevelThickness.getValue()), updateGeometry));
+		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "bevelThickness", self.bevelThickness.getValue()), updateGeometry));
 	});
 	this.form.add(this.bevelThickness);
 	this.form.nextRow();
@@ -93,7 +93,7 @@ function Text3DPanel(parent, obj)
 	this.bevelSize.setStep(0.1);
 	this.bevelSize.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.obj, "bevelSize", self.bevelSize.getValue()), updateGeometry));
+		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "bevelSize", self.bevelSize.getValue()), updateGeometry));
 	});
 	this.form.add(this.bevelSize);
 	this.form.nextRow();
@@ -105,13 +105,13 @@ Text3DPanel.prototype.updatePanel = function()
 {
 	DrawablePanel.prototype.updatePanel.call(this);
 	
-	this.castShadow.setValue(this.obj.castShadow);
-	this.receiveShadow.setValue(this.obj.receiveShadow);
-	this.text.setText(this.obj.text);
-	this.textSize.setValue(this.obj.size);
-	this.height.setValue(this.obj.height);
-	this.curveSegments.setValue(this.obj.curveSegments);
-	this.bevel.setValue(this.obj.bevel);
-	this.bevelThickness.setValue(this.obj.bevelThickness);
-	this.bevelSize.setValue(this.obj.bevelSize);
+	this.castShadow.setValue(this.object.castShadow);
+	this.receiveShadow.setValue(this.object.receiveShadow);
+	this.text.setText(this.object.text);
+	this.textSize.setValue(this.object.size);
+	this.height.setValue(this.object.height);
+	this.curveSegments.setValue(this.object.curveSegments);
+	this.bevel.setValue(this.object.bevel);
+	this.bevelThickness.setValue(this.object.bevelThickness);
+	this.bevelSize.setValue(this.object.bevelSize);
 };

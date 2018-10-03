@@ -1,8 +1,8 @@
 "use strict";
 
-function ObjectPanel(parent, obj)
+function ObjectPanel(parent, object)
 {
-	Panel.call(this, parent, obj);
+	Panel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function ObjectPanel(parent, obj)
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "name", self.name.getText()));
+		Editor.history.add(new ChangeAction(self.object, "name", self.name.getText()));
 		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
@@ -42,7 +42,7 @@ function ObjectPanel(parent, obj)
 	this.position.setOnChange(function()
 	{
 		var position = self.position.getValue();
-		var object = self.obj.position;
+		var object = self.object.position;
 
 		Editor.history.add(new ActionBundle(
 		[
@@ -70,7 +70,7 @@ function ObjectPanel(parent, obj)
 	this.scale.setOnChange(function()
 	{
 		var scale = self.scale.getValue();
-		var object = self.obj.scale;
+		var object = self.object.scale;
 		
 		if(self.scaleRatioLock.getValue())
 		{
@@ -114,7 +114,7 @@ function ObjectPanel(parent, obj)
 	this.rotation.setOnChange(function()
 	{
 		var rotation = self.rotation.getValue();
-		var object = self.obj.rotation;
+		var object = self.object.rotation;
 
 		Editor.history.add(new ActionBundle(
 		[
@@ -132,7 +132,7 @@ function ObjectPanel(parent, obj)
 	this.visible.size.set(18, 18);
 	this.visible.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "visible", self.visible.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "visible", self.visible.getValue()));
 	});
 	this.form.add(this.visible);
 	this.form.nextRow();
@@ -143,7 +143,7 @@ function ObjectPanel(parent, obj)
 	this.static.size.set(18, 18);
 	this.static.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "matrixAutoUpdate", !self.static.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "matrixAutoUpdate", !self.static.getValue()));
 	});
 	this.form.add(this.static);
 	this.form.nextRow();
@@ -153,21 +153,21 @@ ObjectPanel.prototype = Object.create(Panel.prototype);
 
 ObjectPanel.prototype.updatePanel = function()
 {
-	this.name.setText(this.obj.name);
+	this.name.setText(this.object.name);
 		
 	if(this.uuid !== undefined)
 	{
-		this.uuid.setText(this.obj.uuid);
+		this.uuid.setText(this.object.uuid);
 	}
 	
 	if(this.type !== undefined)
 	{
-		this.type.setText(this.obj.type);
+		this.type.setText(this.object.type);
 	}
 
-	this.position.setValue(this.obj.position);
-	this.scale.setValue(this.obj.scale);
-	this.rotation.setValue(this.obj.rotation);
-	this.visible.setValue(this.obj.visible);
-	this.static.setValue(!this.obj.matrixAutoUpdate);
+	this.position.setValue(this.object.position);
+	this.scale.setValue(this.object.scale);
+	this.rotation.setValue(this.object.rotation);
+	this.visible.setValue(this.object.visible);
+	this.static.setValue(!this.object.matrixAutoUpdate);
 };

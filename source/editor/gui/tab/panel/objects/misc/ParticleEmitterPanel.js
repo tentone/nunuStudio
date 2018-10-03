@@ -1,8 +1,8 @@
 "use strict";
 
-function ParticleEmitterPanel(parent, obj)
+function ParticleEmitterPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function ParticleEmitterPanel(parent, obj)
 	this.dynamicEmitter.size.set(18, 18);
 	this.dynamicEmitter.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "dynamicEmitter", self.dynamicEmitter.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "dynamicEmitter", self.dynamicEmitter.getValue()));
 	});
 	this.form.add(this.dynamicEmitter);
 	this.form.nextRow();
@@ -24,6 +24,6 @@ ParticleEmitterPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 
-	this.dynamicEmitter.setValue(this.obj.dynamicEmitter);
+	this.dynamicEmitter.setValue(this.object.dynamicEmitter);
 };
 

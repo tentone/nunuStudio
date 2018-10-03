@@ -1,8 +1,8 @@
 "use strict";
 
-function LensFlarePanel(parent, obj)
+function LensFlarePanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 }

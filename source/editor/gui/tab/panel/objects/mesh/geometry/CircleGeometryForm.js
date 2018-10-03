@@ -1,9 +1,9 @@
 "use strict";
 
-function CircleGeometryForm(form, obj)
+function CircleGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

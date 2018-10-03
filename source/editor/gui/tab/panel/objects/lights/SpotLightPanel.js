@@ -1,8 +1,8 @@
 "use strict";
 
-function SpotLightPanel(parent, obj)
+function SpotLightPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function SpotLightPanel(parent, obj)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.history.add(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -27,7 +27,7 @@ function SpotLightPanel(parent, obj)
 	this.penumbra.updateInterface();
 	this.penumbra.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "penumbra", self.penumbra.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "penumbra", self.penumbra.getValue()));
 	});
 	this.form.add(this.penumbra);
 	this.form.nextRow();
@@ -40,7 +40,7 @@ function SpotLightPanel(parent, obj)
 	this.angle.setStep(0.01);
 	this.angle.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "angle", self.angle.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "angle", self.angle.getValue()));
 	});
 	this.form.add(this.angle);
 	this.form.nextRow();
@@ -57,7 +57,7 @@ function SpotLightPanel(parent, obj)
 	this.castShadow.updateInterface();
 	this.castShadow.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();
@@ -68,8 +68,8 @@ function SpotLightPanel(parent, obj)
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "width", self.shadowWidth.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.mapSize, "width", self.shadowWidth.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowWidth);
 	this.form.addText("x", true);
@@ -77,8 +77,8 @@ function SpotLightPanel(parent, obj)
 	this.shadowHeight.size.set(60, 18);
 	this.shadowHeight.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "height", self.shadowHeight.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.mapSize, "height", self.shadowHeight.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowHeight);
 	this.form.nextRow();
@@ -96,8 +96,8 @@ function SpotLightPanel(parent, obj)
 	this.shadowNear.setStep(0.1);
 	this.shadowNear.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "near", self.shadowNear.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.camera, "near", self.shadowNear.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowNear);
 	this.form.nextRow();
@@ -109,8 +109,8 @@ function SpotLightPanel(parent, obj)
 	this.shadowFar.setStep(0.1);
 	this.shadowFar.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "far", self.shadowFar.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object.shadow.camera, "far", self.shadowFar.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.shadowFar);
 	this.form.nextRow();
@@ -122,13 +122,13 @@ SpotLightPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 
-	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-	this.angle.setValue(this.obj.angle);
-	this.penumbra.setValue(this.obj.penumbra);
+	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
+	this.angle.setValue(this.object.angle);
+	this.penumbra.setValue(this.object.penumbra);
 	
-	this.castShadow.setValue(this.obj.castShadow);
-	this.shadowWidth.setValue(this.obj.shadow.mapSize.width);
-	this.shadowHeight.setValue(this.obj.shadow.mapSize.height);
-	this.shadowNear.setValue(this.obj.shadow.camera.near);
-	this.shadowFar.setValue(this.obj.shadow.camera.far);
+	this.castShadow.setValue(this.object.castShadow);
+	this.shadowWidth.setValue(this.object.shadow.mapSize.width);
+	this.shadowHeight.setValue(this.object.shadow.mapSize.height);
+	this.shadowNear.setValue(this.object.shadow.camera.near);
+	this.shadowFar.setValue(this.object.shadow.camera.far);
 };

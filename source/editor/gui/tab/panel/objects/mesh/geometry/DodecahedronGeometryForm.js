@@ -1,9 +1,9 @@
 "use strict";
 
-function DodecahedronGeometryForm(form, obj)
+function DodecahedronGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

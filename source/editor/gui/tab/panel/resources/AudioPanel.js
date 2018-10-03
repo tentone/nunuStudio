@@ -1,8 +1,8 @@
 "use strict";
 
-function AudioPanel(parent, obj)
+function AudioPanel(parent, object)
 {
-	ResourcePanel.call(this, parent, obj);
+	ResourcePanel.call(this, parent, object);
 
 	var self = this;
 
@@ -20,5 +20,5 @@ AudioPanel.prototype.updatePanel = function()
 {
 	ResourcePanel.prototype.updatePanel.call(this);
 
-	this.player.setAudioBuffer(this.obj.data);
+	this.player.setAudioBuffer(this.object.data);
 };

@@ -1,9 +1,9 @@
 "use strict";
 
-function PlaneGeometryForm(form, obj)
+function PlaneGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

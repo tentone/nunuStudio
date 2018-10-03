@@ -1,8 +1,8 @@
 "use strict";
 
-function CubeCameraPanel(parent, obj)
+function CubeCameraPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -14,7 +14,7 @@ function CubeCameraPanel(parent, obj)
 	this.autoUpdate.updateInterface();
 	this.autoUpdate.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "autoUpdate", self.autoUpdate.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "autoUpdate", self.autoUpdate.getValue()));
 	});
 	this.form.add(this.autoUpdate);
 	this.form.nextRow();
@@ -25,8 +25,8 @@ function CubeCameraPanel(parent, obj)
 	this.resolution.size.set(60, 18);
 	this.resolution.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "resolution", self.resolution.getValue()));
-		self.obj.updateShadowMap();
+		Editor.history.add(new ChangeAction(self.object, "resolution", self.resolution.getValue()));
+		self.object.updateShadowMap();
 	});
 	this.form.add(this.resolution);
 
@@ -43,6 +43,6 @@ CubeCameraPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.autoUpdate.setValue(this.obj.autoUpdate);
-	this.resolution.setValue(this.obj.resolution);
+	this.autoUpdate.setValue(this.object.autoUpdate);
+	this.resolution.setValue(this.object.resolution);
 };

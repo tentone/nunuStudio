@@ -1,8 +1,8 @@
 "use strict";
 
-function DrawablePanel(parent, obj)
+function DrawablePanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function DrawablePanel(parent, obj)
 	this.castShadow.size.set(18, 18);
 	this.castShadow.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();
@@ -23,7 +23,7 @@ function DrawablePanel(parent, obj)
 	this.receiveShadow.size.set(18, 18);
 	this.receiveShadow.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "receiveShadow", self.receiveShadow.getValue()));
 	});
 	this.form.add(this.receiveShadow);
 	this.form.nextRow();
@@ -34,7 +34,7 @@ function DrawablePanel(parent, obj)
 	this.frustumCulled.size.set(18, 18);
 	this.frustumCulled.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "frustumCulled", self.frustumCulled.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "frustumCulled", self.frustumCulled.getValue()));
 	});
 	this.form.add(this.frustumCulled);
 	this.form.nextRow();
@@ -46,7 +46,7 @@ DrawablePanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 
-	this.castShadow.setValue(this.obj.castShadow);
-	this.receiveShadow.setValue(this.obj.receiveShadow);
-	this.frustumCulled.setValue(this.obj.frustumCulled);
+	this.castShadow.setValue(this.object.castShadow);
+	this.receiveShadow.setValue(this.object.receiveShadow);
+	this.frustumCulled.setValue(this.object.frustumCulled);
 };

@@ -1,9 +1,9 @@
 "use strict";
 
-function TorusGeometryForm(form, obj)
+function TorusGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

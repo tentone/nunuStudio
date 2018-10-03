@@ -1,9 +1,9 @@
 "use strict";
 
-function CylinderGeometryForm(form, obj)
+function CylinderGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

@@ -1,8 +1,8 @@
 "use strict";
 
-function ProgramPanel(parent, obj)
+function ProgramPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -18,7 +18,7 @@ function ProgramPanel(parent, obj)
 	this.author.updateInterface();
 	this.author.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "author", self.author.getText()));
+		Editor.history.add(new ChangeAction(self.object, "author", self.author.getText()));
 	});
 	this.form.add(this.author);
 	this.form.nextRow();
@@ -29,7 +29,7 @@ function ProgramPanel(parent, obj)
 	this.version.size.set(100, 18);
 	this.version.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "version", self.version.getText()));
+		Editor.history.add(new ChangeAction(self.object, "version", self.version.getText()));
 	});
 	this.form.add(this.version);
 	this.form.nextRow();
@@ -40,7 +40,7 @@ function ProgramPanel(parent, obj)
 	this.lockPointer.size.set(18, 18);
 	this.lockPointer.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "lockPointer", self.lockPointer.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "lockPointer", self.lockPointer.getValue()));
 	});
 	this.form.add(this.lockPointer);
 	this.form.nextRow();
@@ -51,7 +51,7 @@ function ProgramPanel(parent, obj)
 	this.handlePixelRatio.size.set(18, 18);
 	this.handlePixelRatio.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "handlePixelRatio", self.handlePixelRatio.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "handlePixelRatio", self.handlePixelRatio.getValue()));
 	});
 	this.form.add(this.handlePixelRatio);
 	this.form.nextRow()
@@ -66,7 +66,7 @@ function ProgramPanel(parent, obj)
 	this.vr.size.set(18, 18);
 	this.vr.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "vr", self.vr.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "vr", self.vr.getValue()));
 	});
 	this.form.add(this.vr);
 	this.form.nextRow();
@@ -79,7 +79,7 @@ function ProgramPanel(parent, obj)
 	this.vrScale.setStep(0.05);
 	this.vrScale.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "vrScale", self.vrScale.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "vrScale", self.vrScale.getValue()));
 	});
 	this.form.add(this.vrScale);
 	this.form.nextRow();
@@ -94,7 +94,7 @@ function ProgramPanel(parent, obj)
 	this.antialiasing.size.set(18, 18);
 	this.antialiasing.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "antialiasing", self.antialiasing.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "antialiasing", self.antialiasing.getValue()));
 		
 		var tabs = Editor.gui.tab.getActiveTab();
 		
@@ -116,7 +116,7 @@ function ProgramPanel(parent, obj)
 	this.shadows.size.set(18, 18);
 	this.shadows.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "shadows", self.shadows.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "shadows", self.shadows.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.shadows);
@@ -131,7 +131,7 @@ function ProgramPanel(parent, obj)
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "shadowsType", self.shadowsType.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "shadowsType", self.shadowsType.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.shadowsType);
@@ -148,7 +148,7 @@ function ProgramPanel(parent, obj)
 	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "toneMapping", self.toneMapping.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.toneMapping);
@@ -162,7 +162,7 @@ function ProgramPanel(parent, obj)
 	this.toneMappingExposure.setStep(0.1);
 	this.toneMappingExposure.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "toneMappingExposure", self.toneMappingExposure.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "toneMappingExposure", self.toneMappingExposure.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.toneMappingExposure);
@@ -176,7 +176,7 @@ function ProgramPanel(parent, obj)
 	this.toneMappingWhitePoint.setStep(0.1);
 	this.toneMappingWhitePoint.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.toneMappingWhitePoint);
@@ -204,17 +204,17 @@ ProgramPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.author.setText(this.obj.author);
-	this.version.setText(this.obj.version);
-	this.lockPointer.setValue(this.obj.lockPointer);
-	this.handlePixelRatio.setValue(this.obj.handlePixelRatio);
-	this.vr.setValue(this.obj.vr);
-	this.vrScale.setValue(this.obj.vrScale);
+	this.author.setText(this.object.author);
+	this.version.setText(this.object.version);
+	this.lockPointer.setValue(this.object.lockPointer);
+	this.handlePixelRatio.setValue(this.object.handlePixelRatio);
+	this.vr.setValue(this.object.vr);
+	this.vrScale.setValue(this.object.vrScale);
 
-	this.shadows.setValue(this.obj.shadows);
-	this.shadowsType.setValue(this.obj.shadowsType);
-	this.antialiasing.setValue(this.obj.antialiasing);
-	this.toneMapping.setValue(this.obj.toneMapping);
-	this.toneMappingExposure.setValue(this.obj.toneMappingExposure);
-	this.toneMappingWhitePoint.setValue(this.obj.toneMappingWhitePoint);
+	this.shadows.setValue(this.object.shadows);
+	this.shadowsType.setValue(this.object.shadowsType);
+	this.antialiasing.setValue(this.object.antialiasing);
+	this.toneMapping.setValue(this.object.toneMapping);
+	this.toneMappingExposure.setValue(this.object.toneMappingExposure);
+	this.toneMappingWhitePoint.setValue(this.object.toneMappingWhitePoint);
 };

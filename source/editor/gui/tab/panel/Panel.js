@@ -1,6 +1,6 @@
 "use strict";
 
-function Panel(parent, obj)
+function Panel(parent, object)
 {
 	Element.call(this, parent, "div");
 
@@ -10,11 +10,11 @@ function Panel(parent, obj)
 	/**
 	 * Object attached to this panel.
 	 * 
-	 * @property obj
+	 * @property object
 	 * @type {Object3D}
 	 */ 
-	this.obj = null;
-	this.attach(obj);
+	this.object = null;
+	this.attach(object);
 
 	/**
 	 * Panel form.
@@ -32,11 +32,11 @@ Panel.prototype = Object.create(Element.prototype);
  * Attach object to panel.
  *
  * @method attach
- * @param {Object3D} obj
+ * @param {Object3D} object
  */
-Panel.prototype.attach = function(obj)
+Panel.prototype.attach = function(object)
 {
-	this.obj = obj;
+	this.object = object;
 };
 
 /**

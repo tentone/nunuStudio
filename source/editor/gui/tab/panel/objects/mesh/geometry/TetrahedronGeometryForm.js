@@ -1,9 +1,9 @@
 "use strict";
 
-function TetrahedronGeometryForm(form, obj)
+function TetrahedronGeometryForm(form, object)
 {
 	this.form = form;
-	this.object = obj;
+	this.object = object;
 	
 	var self = this;
 

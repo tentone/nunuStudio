@@ -1,8 +1,8 @@
 "use strict";
 
-function LockedPanel(parent, obj)
+function LockedPanel(parent, object)
 {
-	Panel.call(this, parent, obj);
+	Panel.call(this, parent, object);
 
 	//Name
 	this.form.addText("Name");
@@ -31,15 +31,15 @@ LockedPanel.prototype = Object.create(Panel.prototype);
 //Update panel information
 LockedPanel.prototype.updatePanel = function()
 {
-	this.name.setText(this.obj.name);
+	this.name.setText(this.object.name);
 	
 	if(this.type !== undefined)
 	{
-		this.type.setText(this.obj.type);
+		this.type.setText(this.object.type);
 	}
 
 	if(this.uuid !== undefined)
 	{
-		this.uuid.setText(this.obj.uuid);
+		this.uuid.setText(this.object.uuid);
 	}
 };

@@ -1,8 +1,8 @@
 "use strict";
 
-function RectAreaLightPanel(parent, obj)
+function RectAreaLightPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function RectAreaLightPanel(parent, obj)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.history.add(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -25,7 +25,7 @@ function RectAreaLightPanel(parent, obj)
 	this.intensity.setRange(0, 500);
 	this.intensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "intensity", self.intensity.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "intensity", self.intensity.getValue()));
 	});
 	this.form.add(this.intensity);
 	this.form.nextRow();
@@ -37,7 +37,7 @@ function RectAreaLightPanel(parent, obj)
 	this.width.setStep(0.1);
 	this.width.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "width", self.width.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "width", self.width.getValue()));
 	});
 	this.form.add(this.width);
 	this.form.nextRow();
@@ -49,7 +49,7 @@ function RectAreaLightPanel(parent, obj)
 	this.height.setStep(0.1);
 	this.height.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "height", self.height.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "height", self.height.getValue()));
 	});
 	this.form.add(this.height);
 	this.form.nextRow();
@@ -61,8 +61,8 @@ RectAreaLightPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-	this.intensity.setValue(this.obj.intensity);
-	this.width.setValue(this.obj.width);
-	this.height.setValue(this.obj.height);
+	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
+	this.intensity.setValue(this.object.intensity);
+	this.width.setValue(this.object.width);
+	this.height.setValue(this.object.height);
 };

@@ -1,8 +1,8 @@
 "use strict";
 
-function FirstPersonControlsPanel(parent, obj)
+function FirstPersonControlsPanel(parent, object)
 {
-	ObjectPanel.call(this, parent, obj);
+	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function FirstPersonControlsPanel(parent, obj)
 	this.needsButtonPressed.size.set(18, 18);
 	this.needsButtonPressed.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "needsButtonPressed", self.needsButtonPressed.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "needsButtonPressed", self.needsButtonPressed.getValue()));
 	});
 	this.form.add(this.needsButtonPressed);
 	this.form.nextRow();
@@ -25,7 +25,7 @@ function FirstPersonControlsPanel(parent, obj)
 	this.sensitivity.setRange(0, 0.05);
 	this.sensitivity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "sensitivity", self.sensitivity.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "sensitivity", self.sensitivity.getValue()));
 	});
 	this.form.add(this.sensitivity);
 	this.form.nextRow();
@@ -36,7 +36,7 @@ function FirstPersonControlsPanel(parent, obj)
 	this.movementEnabled.size.set(18, 18);
 	this.movementEnabled.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "movementEnabled", self.movementEnabled.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "movementEnabled", self.movementEnabled.getValue()));
 	});
 	this.form.add(this.movementEnabled);
 	this.form.nextRow();
@@ -49,7 +49,7 @@ function FirstPersonControlsPanel(parent, obj)
 	this.moveSpeed.setRange(0, 0.5);
 	this.moveSpeed.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "moveSpeed", self.moveSpeed.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "moveSpeed", self.moveSpeed.getValue()));
 	});
 	this.form.add(this.moveSpeed);
 	this.form.nextRow();
@@ -60,7 +60,7 @@ function FirstPersonControlsPanel(parent, obj)
 	this.moveOnPlane.size.set(18, 18);
 	this.moveOnPlane.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "moveOnPlane", self.moveOnPlane.getValue()));
+		Editor.history.add(new ChangeAction(self.object, "moveOnPlane", self.moveOnPlane.getValue()));
 	});
 	this.form.add(this.moveOnPlane);
 	this.form.nextRow();
@@ -72,9 +72,9 @@ FirstPersonControlsPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.needsButtonPressed.setValue(this.obj.needsButtonPressed);
-	this.movementEnabled.setValue(this.obj.movementEnabled);
-	this.sensitivity.setValue(this.obj.sensitivity);
-	this.moveSpeed.setValue(this.obj.moveSpeed);
-	this.moveOnPlane.setValue(this.obj.moveOnPlane);
+	this.needsButtonPressed.setValue(this.object.needsButtonPressed);
+	this.movementEnabled.setValue(this.object.movementEnabled);
+	this.sensitivity.setValue(this.object.sensitivity);
+	this.moveSpeed.setValue(this.object.moveSpeed);
+	this.moveOnPlane.setValue(this.object.moveOnPlane);
 };

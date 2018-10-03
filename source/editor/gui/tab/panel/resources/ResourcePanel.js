@@ -1,8 +1,8 @@
 "use strict";
 
-function ResourcePanel(parent, obj)
+function ResourcePanel(parent, object)
 {
-	Panel.call(this, parent, obj);
+	Panel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function ResourcePanel(parent, obj)
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "name", self.name.getText()));
+		Editor.history.add(new ChangeAction(self.object, "name", self.name.getText()));
 		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
@@ -39,15 +39,15 @@ ResourcePanel.prototype = Object.create(Panel.prototype);
 
 ResourcePanel.prototype.updatePanel = function()
 {
-	this.name.setText(this.obj.name);
+	this.name.setText(this.object.name);
 		
 	if(this.uuid !== undefined)
 	{
-		this.uuid.setText(this.obj.uuid);
+		this.uuid.setText(this.object.uuid);
 	}
 	
 	if(this.type !== undefined)
 	{
-		this.type.setText(this.obj.type);
+		this.type.setText(this.object.type);
 	}
 };

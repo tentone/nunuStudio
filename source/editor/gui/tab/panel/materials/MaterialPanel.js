@@ -1,8 +1,8 @@
 "use strict";
 
-function MaterialPanel(parent, obj)
+function MaterialPanel(parent, object)
 {
-	Panel.call(this, parent, obj);
+	Panel.call(this, parent, object);
 
 	var self = this;
 
@@ -12,7 +12,7 @@ function MaterialPanel(parent, obj)
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "name", self.name.getText()));
+		Editor.history.add(new ChangeAction(self.object, "name", self.name.getText()));
 		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
@@ -44,8 +44,8 @@ function MaterialPanel(parent, obj)
 	this.side.addValue("Double", THREE.DoubleSide);
 	this.side.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "side", self.side.getValue()));
-		self.obj.needsUpdate = true;
+		Editor.history.add(new ChangeAction(self.object, "side", self.side.getValue()));
+		self.object.needsUpdate = true;
 	});
 	this.form.add(this.side);
 	this.form.nextRow();
@@ -56,8 +56,8 @@ function MaterialPanel(parent, obj)
 	this.depthTest.size.set(18, 18);
 	this.depthTest.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "depthTest", self.depthTest.getValue()));
-		self.obj.needsUpdate = true;
+		Editor.history.add(new ChangeAction(self.object, "depthTest", self.depthTest.getValue()));
+		self.object.needsUpdate = true;
 	});
 	this.form.add(this.depthTest);
 	this.form.nextRow();
@@ -68,8 +68,8 @@ function MaterialPanel(parent, obj)
 	this.depthWrite.size.set(18, 18);
 	this.depthWrite.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "depthWrite", self.depthWrite.getValue()));
-		self.obj.needsUpdate = true;
+		Editor.history.add(new ChangeAction(self.object, "depthWrite", self.depthWrite.getValue()));
+		self.object.needsUpdate = true;
 	});
 	this.form.add(this.depthWrite);
 	this.form.nextRow();
@@ -88,8 +88,8 @@ function MaterialPanel(parent, obj)
 	this.depthFunc.addValue("Not equal", THREE.NotEqualDepth);
 	this.depthFunc.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "depthFunc", self.depthFunc.getValue()));
-		self.obj.needsUpdate = true;
+		Editor.history.add(new ChangeAction(self.object, "depthFunc", self.depthFunc.getValue()));
+		self.object.needsUpdate = true;
 	});
 	this.form.add(this.depthFunc);
 	this.form.nextRow();
@@ -100,8 +100,8 @@ function MaterialPanel(parent, obj)
 	this.transparent.size.set(18, 18);
 	this.transparent.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "transparent", self.transparent.getValue()));
-		self.obj.needsUpdate = true;
+		Editor.history.add(new ChangeAction(self.object, "transparent", self.transparent.getValue()));
+		self.object.needsUpdate = true;
 	});
 	this.form.add(this.transparent);
 	this.form.nextRow();
@@ -114,8 +114,8 @@ function MaterialPanel(parent, obj)
 	this.opacity.setStep(0.01);
 	this.opacity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "opacity", self.opacity.getValue()));
-		self.obj.needsUpdate = true;
+		Editor.history.add(new ChangeAction(self.object, "opacity", self.opacity.getValue()));
+		self.object.needsUpdate = true;
 	});
 	this.form.add(this.opacity);
 	this.form.nextRow();
@@ -128,8 +128,8 @@ function MaterialPanel(parent, obj)
 	this.alphaTest.setStep(0.01);
 	this.alphaTest.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "alphaTest", self.alphaTest.getValue()));
-		self.obj.needsUpdate = true;
+		Editor.history.add(new ChangeAction(self.object, "alphaTest", self.alphaTest.getValue()));
+		self.object.needsUpdate = true;
 	});
 	this.form.add(this.alphaTest);
 	this.form.nextRow();
@@ -146,8 +146,8 @@ function MaterialPanel(parent, obj)
 	this.blending.addValue("Multiply", THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.obj, "blending", self.blending.getValue()));
-		self.obj.needsUpdate = true;
+		Editor.history.add(new ChangeAction(self.object, "blending", self.blending.getValue()));
+		self.object.needsUpdate = true;
 	});
 	this.form.add(this.blending);
 	this.form.nextRow();
@@ -157,25 +157,25 @@ MaterialPanel.prototype = Object.create(Panel.prototype);
 
 MaterialPanel.prototype.updatePanel = function()
 {
-	this.name.setText(this.obj.name);
+	this.name.setText(this.object.name);
 		
 	if(this.uuid !== undefined)
 	{
-		this.uuid.setText(this.obj.uuid);
+		this.uuid.setText(this.object.uuid);
 	}
 	
 	if(this.type !== undefined)
 	{
-		this.type.setText(this.obj.type);
+		this.type.setText(this.object.type);
 	}
 
-	this.name.setText(this.obj.name);
-	this.side.setValue(this.obj.side);
-	this.depthTest.setValue(this.obj.depthTest);
-	this.depthWrite.setValue(this.obj.depthWrite);
-	this.depthFunc.setValue(this.obj.depthFunc);
-	this.transparent.setValue(this.obj.transparent);
-	this.opacity.setValue(this.obj.opacity);
-	this.alphaTest.setValue(this.obj.alphaTest);
-	this.blending.setValue(this.obj.blending);
+	this.name.setText(this.object.name);
+	this.side.setValue(this.object.side);
+	this.depthTest.setValue(this.object.depthTest);
+	this.depthWrite.setValue(this.object.depthWrite);
+	this.depthFunc.setValue(this.object.depthFunc);
+	this.transparent.setValue(this.object.transparent);
+	this.opacity.setValue(this.object.opacity);
+	this.alphaTest.setValue(this.object.alphaTest);
+	this.blending.setValue(this.object.blending);
 };
