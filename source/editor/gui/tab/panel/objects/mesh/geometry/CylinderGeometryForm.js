@@ -7,7 +7,6 @@ function CylinderGeometryForm(form, object)
 	
 	var self = this;
 
-	//Update geometry function
 	var updateGeometry = function()
 	{
 		self.updateGeometry();
@@ -71,9 +70,7 @@ function CylinderGeometryForm(form, object)
 CylinderGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	
 	var GeometryConstructor = this.buffer.getValue() ? THREE.CylinderBufferGeometry : THREE.CylinderGeometry;
-
 	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
 };
 

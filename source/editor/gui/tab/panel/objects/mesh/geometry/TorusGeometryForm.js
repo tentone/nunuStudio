@@ -7,7 +7,6 @@ function TorusGeometryForm(form, object)
 	
 	var self = this;
 
-	//Update geometry function
 	var updateGeometry = function()
 	{
 		self.updateGeometry();

@@ -7,7 +7,6 @@ function CircleGeometryForm(form, object)
 	
 	var self = this;
 
-	//Update geometry function
 	var updateGeometry = function()
 	{
 		self.updateGeometry();
@@ -66,9 +65,7 @@ function CircleGeometryForm(form, object)
 CircleGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	
 	var GeometryConstructor = this.buffer.getValue() ? THREE.CircleBufferGeometry : THREE.CircleGeometry;
-
 	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
 };
 
