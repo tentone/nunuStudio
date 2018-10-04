@@ -3290,7 +3290,7 @@
             "module": "THREE",
             "namespace": "",
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 450,
+            "line": 470,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
         },
         "Material": {
@@ -11989,16 +11989,6 @@
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
             "line": 22,
-            "description": "Name of the texture (doesn't need to be unique).",
-            "itemtype": "property",
-            "name": "name",
-            "type": "{String}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 27,
             "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
             "itemtype": "property",
             "name": "uuid",
@@ -12008,7 +11998,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 32,
+            "line": 27,
             "description": "How much a single repetition of the texture is offset from the beginning, in each direction U and V.",
             "itemtype": "property",
             "name": "offset",
@@ -12018,7 +12008,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 38,
+            "line": 33,
             "description": "How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to .",
             "itemtype": "property",
             "name": "repeat",
@@ -12028,7 +12018,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 44,
+            "line": 39,
             "description": "Indicates where the center of rotation is. To rotate around the center point set this value to (0.5, 0.5).",
             "itemtype": "property",
             "name": "center",
@@ -12038,7 +12028,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 50,
+            "line": 45,
             "description": "How much the texture is rotated around the center point, in radians. Postive values are counter-clockwise.",
             "itemtype": "property",
             "name": "rotation",
@@ -12049,17 +12039,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 57,
-            "description": "Image attached to the texture",
-            "itemtype": "property",
-            "name": "img",
-            "type": "{Image}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 63,
+            "line": 52,
             "description": "False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.",
             "itemtype": "property",
             "name": "premultiplyAlpha",
@@ -12069,7 +12049,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 69,
+            "line": 58,
             "description": "Flips the image's Y axis to match the WebGL texture coordinate space.",
             "itemtype": "property",
             "name": "flipY",
@@ -12079,17 +12059,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 75,
-            "description": "DOM element attached to the texture",
-            "itemtype": "property",
-            "name": "image",
-            "type": "{DOM}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 81,
+            "line": 64,
             "description": "Array of user-specified mipmaps (optional).",
             "itemtype": "property",
             "name": "mipmaps",
@@ -12099,18 +12069,27 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 87,
-            "description": "Name of the texture",
+            "line": 72,
+            "description": "Image attached to the texture",
             "itemtype": "property",
-            "name": "name",
-            "type": "{String}",
-            "default": "\"texture\"",
+            "name": "img",
+            "type": "{Image}",
             "class": "Texture",
             "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 94,
+            "line": 95,
+            "description": "Name of the texture (doesn't need to be unique).",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 103,
             "description": "Flag used to know is the texture has been disposed.\n\nIs used to control animation when using a gif as a texture.",
             "itemtype": "property",
             "name": "disposed",
@@ -12121,7 +12100,17 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 166,
+            "line": 116,
+            "description": "DOM element attached to the texture",
+            "itemtype": "property",
+            "name": "image",
+            "type": "{DOM}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 159,
             "description": "Dispose texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -12130,7 +12119,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 178,
+            "line": 171,
             "description": "Create JSON description for texture, serializes image used in the texture\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "params": [
                 {
@@ -12433,6 +12422,26 @@
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
             "line": 17,
+            "description": "Check if this object contains a object.",
+            "itemtype": "method",
+            "name": "contains",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to look for.",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "True if this object contains the object.",
+                "type": "Boolean"
+            },
+            "class": "Object3D",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 37,
             "description": "Play animations attached to this object.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
             "itemtype": "method",
             "name": "playAnimation",
@@ -12441,7 +12450,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 32,
+            "line": 52,
             "description": "Stop all animations playback.",
             "itemtype": "method",
             "name": "stopAnimation",
@@ -12450,7 +12459,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 45,
+            "line": 65,
             "description": "Initializes the object.\n\nThis method is calling one time on initialization.",
             "itemtype": "method",
             "name": "initialize",
@@ -12459,7 +12468,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 67,
+            "line": 87,
             "description": "Update the object state.\n\nCalled every time before rendering into the screen.",
             "itemtype": "method",
             "name": "update",
@@ -12475,7 +12484,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 88,
+            "line": 108,
             "description": "Resize this object, called everytime the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -12496,7 +12505,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 103,
+            "line": 123,
             "description": "Disposes the object from memory.\n\nShould be called when the object is no longer required to avoid memory leaks.",
             "itemtype": "method",
             "name": "dispose",
@@ -12505,7 +12514,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 123,
+            "line": 143,
             "description": "Add object as children of this object above the indicated children",
             "itemtype": "method",
             "name": "addAbove",
@@ -12526,7 +12535,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 160,
+            "line": 180,
             "description": "Add object as children of this object bellow the indicated children",
             "itemtype": "method",
             "name": "addBellow",
@@ -12547,7 +12556,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 197,
+            "line": 217,
             "description": "Get scene that contains this object.",
             "itemtype": "method",
             "name": "getScene",
@@ -12560,7 +12569,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 220,
+            "line": 240,
             "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
@@ -12569,7 +12578,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 233,
+            "line": 253,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -12582,7 +12591,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 244,
+            "line": 264,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
@@ -12591,7 +12600,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 268,
+            "line": 288,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12621,7 +12630,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 461,
+            "line": 481,
             "description": "Array with object's children.",
             "itemtype": "property",
             "name": "children",
@@ -12631,7 +12640,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 466,
+            "line": 486,
             "description": "When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.",
             "itemtype": "property",
             "name": "frustumCulled",
@@ -12642,7 +12651,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 472,
+            "line": 492,
             "description": "The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.",
             "itemtype": "property",
             "name": "layers",
@@ -12652,7 +12661,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 477,
+            "line": 497,
             "description": "The local transform matrix",
             "itemtype": "property",
             "name": "matrix",
@@ -12662,7 +12671,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 482,
+            "line": 502,
             "description": "When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.",
             "itemtype": "property",
             "name": "matrixAutoUpdate",
@@ -12673,7 +12682,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 488,
+            "line": 508,
             "description": "The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.",
             "itemtype": "property",
             "name": "matrixWorld",
@@ -12683,7 +12692,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 493,
+            "line": 513,
             "description": "Name of the object (doesn't need to be unique).",
             "itemtype": "property",
             "name": "name",
@@ -12693,7 +12702,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 498,
+            "line": 518,
             "description": "The object's local position.",
             "itemtype": "property",
             "name": "position",
@@ -12703,7 +12712,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 503,
+            "line": 523,
             "description": "Object's local rotation as a Quaternion.",
             "itemtype": "property",
             "name": "quaternion",
@@ -12713,7 +12722,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 508,
+            "line": 528,
             "description": "Object's local rotation (see Euler angles), in radians.",
             "itemtype": "property",
             "name": "rotation",
@@ -12723,7 +12732,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 513,
+            "line": 533,
             "description": "The object's local scale.",
             "itemtype": "property",
             "name": "scale",
@@ -12733,7 +12742,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 518,
+            "line": 538,
             "description": "This is used by the lookAt method, for example, to determine the orientation of the result.",
             "itemtype": "property",
             "name": "up",
@@ -12743,7 +12752,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 523,
+            "line": 543,
             "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
             "itemtype": "property",
             "name": "uuid",
@@ -12753,7 +12762,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 528,
+            "line": 548,
             "description": "Object gets rendered if true.",
             "itemtype": "property",
             "name": "visible",
@@ -12764,7 +12773,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 534,
+            "line": 554,
             "description": "This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.",
             "itemtype": "property",
             "name": "renderOrder",
@@ -12775,7 +12784,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 540,
+            "line": 560,
             "description": "Whether the object gets rendered into shadow map.",
             "itemtype": "property",
             "name": "castShadow",
@@ -12786,7 +12795,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 546,
+            "line": 566,
             "description": "Whether the material receives shadows.",
             "itemtype": "property",
             "name": "receiveShadow",
@@ -12797,7 +12806,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 552,
+            "line": 572,
             "description": "Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.",
             "itemtype": "property",
             "name": "userData",
@@ -12807,7 +12816,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 557,
+            "line": 577,
             "description": "Array with the animations available in this object.\n\nEach position contains an AnimationClip that has name, tracks, duration and uuid.",
             "itemtype": "property",
             "name": "animations",
@@ -12817,7 +12826,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 566,
+            "line": 586,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -12833,7 +12842,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 572,
+            "line": 592,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -12849,7 +12858,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 578,
+            "line": 598,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -12865,7 +12874,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 584,
+            "line": 604,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -12881,7 +12890,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 590,
+            "line": 610,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -12897,7 +12906,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 596,
+            "line": 616,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -12913,7 +12922,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 602,
+            "line": 622,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -12929,7 +12938,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 608,
+            "line": 628,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -12950,7 +12959,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 615,
+            "line": 635,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -12966,7 +12975,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 621,
+            "line": 641,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -12987,7 +12996,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 628,
+            "line": 648,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -13006,7 +13015,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 634,
+            "line": 654,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -13022,7 +13031,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 640,
+            "line": 660,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -13038,7 +13047,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 646,
+            "line": 666,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -13054,7 +13063,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 652,
+            "line": 672,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -13075,7 +13084,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 659,
+            "line": 679,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -13091,7 +13100,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 665,
+            "line": 685,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -13107,7 +13116,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 671,
+            "line": 691,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -13581,7 +13590,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 12,
+            "line": 13,
             "description": "Stores all events in the manager, their target and callback.\n\nFormat [target, event, callback, active]",
             "itemtype": "attribute",
             "name": "events",
@@ -13591,7 +13600,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 25,
+            "line": 24,
             "description": "Add new event to the manager.",
             "itemtype": "method",
             "name": "add",
@@ -13617,7 +13626,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 38,
+            "line": 37,
             "description": "Destroys this manager and remove all events.",
             "itemtype": "method",
             "name": "clear",
@@ -13626,7 +13635,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 49,
+            "line": 48,
             "description": "Creates all events in this manager.",
             "itemtype": "method",
             "name": "create",
@@ -13635,10 +13644,31 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 64,
+            "line": 63,
             "description": "Removes all events in this manager.",
             "itemtype": "method",
             "name": "destroy",
+            "class": "EventManager",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\EventManager.js",
+            "line": 78,
+            "description": "Add a scroll event to a target element.",
+            "itemtype": "method",
+            "name": "addScrollEvent",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "Event target element.",
+                    "type": "DOM"
+                },
+                {
+                    "name": "callback",
+                    "description": "Callback function.",
+                    "type": "Function"
+                }
+            ],
             "class": "EventManager",
             "module": "Utils"
         },
@@ -13789,19 +13819,14 @@
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
             "line": 33,
-            "description": "Set object and all its children matrixAutoUpdate value",
+            "description": "Scale and center object into a unitary box, using its geometry.",
             "itemtype": "method",
-            "name": "setMatrixAutoUpdate",
+            "name": "scaleAndCenterObject",
             "params": [
                 {
-                    "name": "obj",
-                    "description": "",
+                    "name": "object",
+                    "description": "Object to be positioned and scaled.",
                     "type": "Object3D"
-                },
-                {
-                    "name": "value",
-                    "description": "",
-                    "type": "Boolean"
                 }
             ],
             "class": "ObjectUtils",
@@ -13809,74 +13834,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 50,
-            "description": "Set object and all children to receive shadows",
-            "itemtype": "method",
-            "name": "setShadowReceiving",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "value",
-                    "description": "",
-                    "type": "Boolean"
-                }
-            ],
-            "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 67,
-            "description": "Set object and all children to cast shadows",
-            "itemtype": "method",
-            "name": "setShadowCasting",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "value",
-                    "description": "",
-                    "type": "Boolean"
-                }
-            ],
-            "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 84,
-            "description": "Check if object is child of another object",
-            "itemtype": "method",
-            "name": "isChildOf",
-            "params": [
-                {
-                    "name": "parent",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "child",
-                    "description": "",
-                    "type": "Object3D"
-                }
-            ],
-            "return": {
-                "description": "True if parent is parent of child",
-                "type": "Boolean"
-            },
-            "class": "ObjectUtils",
-            "module": "Utils"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 105,
+            "line": 59,
             "description": "Calculates a bouding box for an object considering all its children.",
             "itemtype": "method",
             "name": "calculateBoudingBox",
@@ -13896,7 +13854,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 143,
+            "line": 97,
             "description": "Recalculate all children origins, to be centered with their geometry.",
             "itemtype": "method",
             "name": "recalculateGeometryOrigin",
@@ -14863,7 +14821,20 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 172,
+            "line": 176,
+            "description": "Check in wich platform the enviroment is running.",
+            "itemtype": "method",
+            "name": "getPlatform",
+            "return": {
+                "description": "Indicates the platform type.",
+                "type": "Number"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\..\\source\\core\\Nunu.js",
+            "line": 196,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
@@ -14876,7 +14847,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 183,
+            "line": 207,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -14889,7 +14860,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 196,
+            "line": 220,
             "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
             "itemtype": "method",
             "name": "openWebpage",
@@ -14898,7 +14869,7 @@
         },
         {
             "file": "..\\..\\source\\core\\Nunu.js",
-            "line": 218,
+            "line": 241,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUse isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",

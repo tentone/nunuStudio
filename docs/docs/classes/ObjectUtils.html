@@ -222,23 +222,11 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_isChildOf">isChildOf</a>
-						
-													</li>
-													<li class="index-item method">
 														<a href="#method_recalculateGeometryOrigin">recalculateGeometryOrigin</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_setMatrixAutoUpdate">setMatrixAutoUpdate</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setShadowCasting">setShadowCasting</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setShadowReceiving">setShadowReceiving</a>
+														<a href="#method_scaleAndCenterObject">scaleAndCenterObject</a>
 						
 													</li>
 											</ul>
@@ -376,81 +364,6 @@
 													</div>
 											
 											</div>
-											<div id="method_isChildOf" class="method item">
-												<h3 class="name"><code>isChildOf</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>parent</code>
-															</li>
-															<li class="arg">
-																	<code>child</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if object is child of another object</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">parent</code>
-																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">child</code>
-																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if parent is parent of child</p>
-											
-														</div>
-													</div>
-											
-											</div>
 											<div id="method_recalculateGeometryOrigin" class="method item">
 												<h3 class="name"><code>recalculateGeometryOrigin</code></h3>
 											
@@ -502,16 +415,13 @@
 											
 											
 											</div>
-											<div id="method_setMatrixAutoUpdate" class="method item">
-												<h3 class="name"><code>setMatrixAutoUpdate</code></h3>
+											<div id="method_scaleAndCenterObject" class="method item">
+												<h3 class="name"><code>scaleAndCenterObject</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>obj</code>
-															</li>
-															<li class="arg">
-																	<code>value</code>
+																	<code>object</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -532,7 +442,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Set object and all its children matrixAutoUpdate value</p>
+													<p>Scale and center object into a unitary box, using its geometry.</p>
 											
 												</div>
 											
@@ -541,148 +451,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">obj</code>
+																	<code class="param-name">object</code>
 																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
 											
 											
 																<div class="param-description">
-																	 
-																</div>
+																	<p>Object to be positioned and scaled.</p>
 											
-															</li>
-															<li class="param">
-																	<code class="param-name">value</code>
-																	<span class="type">Boolean</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setShadowCasting" class="method item">
-												<h3 class="name"><code>setShadowCasting</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>obj</code>
-															</li>
-															<li class="arg">
-																	<code>value</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set object and all children to cast shadows</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">obj</code>
-																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">value</code>
-																	<span class="type">Boolean</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setShadowReceiving" class="method item">
-												<h3 class="name"><code>setShadowReceiving</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>obj</code>
-															</li>
-															<li class="arg">
-																	<code>value</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set object and all children to receive shadows</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">obj</code>
-																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">value</code>
-																	<span class="type">Boolean</span>
-											
-											
-																<div class="param-description">
-																	 
 																</div>
 											
 															</li>
