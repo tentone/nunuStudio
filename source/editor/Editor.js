@@ -483,6 +483,8 @@ include("editor/history/action/objects/AddedAction.js");
 include("editor/history/action/objects/RemovedAction.js");
 include("editor/history/action/objects/MovedAction.js");
 include("editor/history/action/objects/SwapAction.js");
+include("editor/history/action/resources/AddResourceAction.js");
+include("editor/history/action/resources/RemoveResourceAction.js");
 
 include("editor/Settings.js");
 
@@ -830,7 +832,18 @@ Editor.addObject = function(object, parent)
 		parent = Editor.program.scene;
 	}
 
-	Editor.history.add(new AddedAction(object, parent));
+	var actions = [new AddedAction(object, parent)];
+	var resources = ResourceManager.searchObject(object, Editor.program);
+
+	for(var category in resources)
+	{
+		for(var resource in resources[category])
+		{
+			actions.push(new AddResourceAction(resources[category][resource], category, Editor.program));
+		}
+	}
+
+	Editor.history.add(new ActionBundle(actions));
 };
 
 //Rename object, if none passed as argument selected object is used

@@ -1,20 +1,25 @@
 "use strict";
 
-function RemoveResourceAction(resource)
+function RemoveResourceAction(resource, category, manager)
 {
 	Action.call(this);
 	
 	this.resource = resource;
-
-	//TODO <ADD CODE HERE>
+	this.manager = manager;
+	this.category = category;
 }
 
 RemoveResourceAction.prototype.apply = function()
 {
-	//TODO <ADD CODE HERE>
+	this.manager.removeRes(this.resource, this.category);
 };
 
 RemoveResourceAction.prototype.revert = function()
 {
-	//TODO <ADD CODE HERE>
+	this.manager.addRes(this.resource, this.category);
+};
+
+RemoveResourceAction.updateGUI = function()
+{
+	Editor.gui.assetExplorer.updateObjectsView();
 };

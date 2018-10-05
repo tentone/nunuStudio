@@ -3,16 +3,7 @@
 /**
  * Resource manager is used to manage available resources used by objects
  * 
- * The resource manager is used to extend the Program object and is not designed to be used as a standalone
- * 
- * The manager is used to manage the following types of resources:
- *  - Images
- *  - Videos
- *  - Audio
- *  - Fonts
- *  - Textures
- *  - Materials
- *  - Geometries
+ * The resource manager is used to extend the Program object and is not meant to be used as a standalone.
  *
  * @class ResourceManager
  * @module Resources
@@ -21,6 +12,26 @@
 function ResourceManager()
 {
 	THREE.Object3D.call(this);
+	ResourceManager.ResourceContainer.call(this);
+}
+
+/**
+ * Constructor method for a resource container object.
+ *
+ * The container is used to store the following types of resources:
+ *  - Images
+ *  - Videos
+ *  - Audio
+ *  - Fonts
+ *  - Textures
+ *  - Materials
+ *  - Geometries
+ *  - Shapes
+ * 
+ * @function ResourceContainer
+ */
+ResourceManager.ResourceContainer = function()
+{
 	/**
 	 * Images.
 	 * 
@@ -92,27 +103,35 @@ function ResourceManager()
 	 * @type {Array}
 	 */
 	this.shapes = [];
-}
+};
 
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
- * Retrieve a list with all the resource in a object.
+ * Searches the object and all its children for resources that still dont exist in the resource manager.
  *
- * Searches the object and all its children for resource and adds them to resource manager.
+ * Stores them in a resource container object that is returned.
  *
  * @static
- * @method retrieveResources
+ * @method searchObject
  * @param {THREE.Object3D} object Object to search for resources.
- * @param {ResourceManager} manager Resource manager.
+ * @param {ResourceManager} manager Resource manager object.
+ * @param {ResourceContainer} target Optional resource container object that can be used to store the found resources.
+ * @return {ResourceContainer} Object with the new resources found in the object.
  */
-ResourceManager.retrieveResources = function(object, manager)
+ResourceManager.searchObject = function(object, manager, target)
 {
-	if(manager === undefined)
-	{
-		manager = object;
-	}
+	var resources;
 
+	if(target !== undefined)
+	{
+		resources = target;
+	}
+	else
+	{
+		resources = new ResourceManager.ResourceContainer();
+	}
+	
 	object.traverse(function(child)
 	{
 		if(child.locked)
@@ -125,7 +144,7 @@ ResourceManager.retrieveResources = function(object, manager)
 		{
 			if(manager.fonts[child.font.uuid] === undefined)
 			{
-				manager.fonts[child.font.uuid] = child.font;
+				resources.fonts[child.font.uuid] = child.font;
 			}
 		}
 
@@ -134,7 +153,7 @@ ResourceManager.retrieveResources = function(object, manager)
 		{
 			if(manager.audio[child.audio.uuid] === undefined)
 			{
-				manager.audio[child.audio.uuid] = child.audio;
+				resources.audio[child.audio.uuid] = child.audio;
 			}
 		}
 
@@ -176,7 +195,7 @@ ResourceManager.retrieveResources = function(object, manager)
 			{
 				if(manager.geometries[child.geometry.uuid] === undefined)
 				{
-					manager.geometries[child.geometry.uuid] = child.geometry;
+					resources.geometries[child.geometry.uuid] = child.geometry;
 				}			
 			}
 		}
@@ -193,7 +212,6 @@ ResourceManager.retrieveResources = function(object, manager)
 				addTexture(child.elements[i].texture);
 			}
 		}
-
 	});
 
 	function addMaterial(material)
@@ -202,7 +220,7 @@ ResourceManager.retrieveResources = function(object, manager)
 
 		if(manager.materials[material.uuid] === undefined)
 		{
-			manager.materials[material.uuid] = material;
+			resources.materials[material.uuid] = material;
 		}
 	}
 
@@ -228,7 +246,7 @@ ResourceManager.retrieveResources = function(object, manager)
 
 			if(manager.textures[texture.uuid] === undefined)
 			{
-				manager.textures[texture.uuid] = texture;	
+				resources.textures[texture.uuid] = texture;	
 			}
 		}
 	}
@@ -237,10 +255,9 @@ ResourceManager.retrieveResources = function(object, manager)
 	{
 		if(manager.images[image.uuid] === undefined)
 		{
-			manager.images[image.uuid] = image;
+			resources.images[image.uuid] = image;
 		}
 	}
-
 
 	function addResourcesTexture(texture)
 	{
@@ -254,7 +271,7 @@ ResourceManager.retrieveResources = function(object, manager)
 		{
 			if(manager.videos[texture.video.uuid] === undefined)
 			{
-				manager.videos[texture.video.uuid] = texture.video;
+				resources.videos[texture.video.uuid] = texture.video;
 			}
 		}
 		//Images array
@@ -275,6 +292,56 @@ ResourceManager.retrieveResources = function(object, manager)
 	for(var i in manager.textures)
 	{
 		addResourcesTexture(manager.textures[i]);
+	}
+
+	return resources;
+};
+
+ResourceManager.prototype.addRes = function(resource, category)
+{
+	this[category][resource.uuid] = resource;
+};
+
+ResourceManager.prototype.getResByName = function(name)
+{
+	for(var category in this)
+	{
+		for(var resources in category)
+		{
+			if(resources[i].name === name)
+			{
+				return resources[i];
+			}
+		}
+	}
+
+	return null;
+};
+
+ResourceManager.prototype.removeRes = function(resource, category)
+{
+	if(category === "materials")
+	{
+		this.removeMaterial(resource);
+	}
+	else if(category === "textures")
+	{
+		this.removeTexture(resource);
+	}
+	else if(category === "fonts")
+	{
+		this.removeFont(resource);
+	}
+	else if(category === "audio")
+	{
+		this.removeAudio(resource);
+	}
+	else
+	{
+		if(this[category][resource.uuid] !== undefined)
+		{
+			delete this.this[category][resource.uuid];
+		}
 	}
 };
 
@@ -309,8 +376,8 @@ ResourceManager.prototype.addResource = function(resource)
 {
 	if(resource instanceof Resource)
 	{
- 		this.resources[resource.uuid] = resource;
- 	}
+		this.resources[resource.uuid] = resource;
+	}
 }
 
 /**
@@ -500,7 +567,10 @@ ResourceManager.prototype.getTextureByName = function(name)
  */
 ResourceManager.prototype.addTexture = function(texture)
 {
- 	this.textures[texture.uuid] = texture;
+	if(material instanceof THREE.Texture)
+	{
+ 		this.textures[texture.uuid] = texture;
+	}
 };
 
 /**

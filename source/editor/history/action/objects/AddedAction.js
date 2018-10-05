@@ -37,7 +37,4 @@ AddedAction.prototype.revert = function()
 AddedAction.updateGUI = function(object, parent, index)
 {
 	Editor.gui.treeView.addObject(object, parent, index);
-
-	ResourceManager.retrieveResources(object, Editor.program);
-	Editor.gui.assetExplorer.updateObjectsView();
 };
