@@ -103,6 +103,14 @@ ResourceManager.ResourceContainer = function()
 	 * @type {Array}
 	 */
 	this.shapes = [];
+
+	/**
+	 * Skeletons.
+	 * 
+	 * @property skeletons
+	 * @type {Array}
+	 */
+	this.skeletons = [];
 };
 
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);

@@ -301,19 +301,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	//If root object initialize base structure
 	if(isRootObject)
 	{
-		meta =
-		{
-			fonts: {},
-			videos: {},
-			images: {},
-			audio: {},
-			geometries: {},
-			materials: {},
-			textures: {},
-			skeletons: {},
-			shapes: {},
-			resources: {}
-		};
+		meta = new ResourceManager.ResourceContainer();
 
 		output.metadata =
 		{
