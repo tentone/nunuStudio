@@ -13,7 +13,7 @@ function HueSaturationPassNode(parent)
 	this.hue.setRange(-1, 1);
 	this.hue.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.pass, "hue", self.hue.getValue()));
+		Editor.addAction(new ChangeAction(self.pass, "hue", self.hue.getValue()));
 	});
 	this.add(this.hue);
 	this.nextRow();
@@ -25,7 +25,7 @@ function HueSaturationPassNode(parent)
 	this.saturation.setRange(-1, 1);
 	this.saturation.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.pass, "saturation", self.saturation.getValue()));
+		Editor.addAction(new ChangeAction(self.pass, "saturation", self.saturation.getValue()));
 	});
 	this.add(this.saturation);
 	this.nextRow();

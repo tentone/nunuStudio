@@ -14,7 +14,7 @@ function LeapPanel(parent, object)
 	this.mode.addValue("HMD", Script.LOOP);
 	this.mode.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "mode", self.mode.getSelectedIndex()));
+		Editor.addAction(new ChangeAction(self.object, "mode", self.mode.getSelectedIndex()));
 	});
 	this.form.add(this.mode);
 	this.form.nextRow();
@@ -25,7 +25,7 @@ function LeapPanel(parent, object)
 	this.debugModel.size.set(18, 18);
 	this.debugModel.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "debugModel", self.debugModel.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "debugModel", self.debugModel.getValue()));
 	});
 	this.form.add(this.debugModel);
 	this.form.nextRow();
@@ -36,7 +36,7 @@ function LeapPanel(parent, object)
 	this.gesturesEnabled.size.set(18, 18);
 	this.gesturesEnabled.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "gesturesEnabled", self.gesturesEnabled.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "gesturesEnabled", self.gesturesEnabled.getValue()));
 	});
 	this.form.add(this.gesturesEnabled);
 	this.form.nextRow();
@@ -47,7 +47,7 @@ function LeapPanel(parent, object)
 	this.posesEnabled.size.set(18, 18);
 	this.posesEnabled.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "posesEnabled", self.posesEnabled.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "posesEnabled", self.posesEnabled.getValue()));
 	});
 	this.form.add(this.posesEnabled);
 }

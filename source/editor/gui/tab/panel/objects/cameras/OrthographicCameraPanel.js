@@ -16,7 +16,7 @@ function OrthographicCameraPanel(parent, object)
 	this.size.size.set(80, 18);
 	this.size.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "size", self.size.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "size", self.size.getValue()));
 		self.object.updateProjectionMatrix();
 	});
 	this.form.add(this.size);
@@ -30,7 +30,7 @@ function OrthographicCameraPanel(parent, object)
 	this.mode.addValue("Vertical", OrthographicCamera.RESIZE_VERTICAL);
 	this.mode.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "mode", self.mode.getSelectedIndex()));
+		Editor.addAction(new ChangeAction(self.object, "mode", self.mode.getSelectedIndex()));
 	});
 	this.form.add(this.mode);
 	this.form.nextRow();
@@ -68,7 +68,7 @@ function OrthographicCameraPanel(parent, object)
 	this.near.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.near.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "near", self.near.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "near", self.near.getValue()));
 	});
 	this.form.add(this.near);
 	this.form.nextRow();
@@ -80,7 +80,7 @@ function OrthographicCameraPanel(parent, object)
 	this.far.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.far.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "far", self.far.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "far", self.far.getValue()));
 	});
 	this.form.add(this.far);
 	this.form.nextRow();
@@ -98,7 +98,7 @@ function OrthographicCameraPanel(parent, object)
 	this.offset.setOnChange(function()
 	{	
 		var value = self.offset.getValue();
-		Editor.history.add(new ActionBundle(
+		Editor.addAction(new ActionBundle(
 		[
 			new ChangeAction(self.object.offset, "x", value.x),
 			new ChangeAction(self.object.offset, "y", value.y)
@@ -116,7 +116,7 @@ function OrthographicCameraPanel(parent, object)
 	this.viewport.setOnChange(function()
 	{
 		var value = self.viewport.getValue();
-		Editor.history.add(new ActionBundle(
+		Editor.addAction(new ActionBundle(
 		[
 			new ChangeAction(self.object.viewport, "x", value.x),
 			new ChangeAction(self.object.viewport, "y", value.y)
@@ -133,7 +133,7 @@ function OrthographicCameraPanel(parent, object)
 	this.order.setStep(1);
 	this.order.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "order", self.order.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "order", self.order.getValue()));
 		self.scene.updateCameraOrder();
 	});
 	this.form.add(this.order);
@@ -145,7 +145,7 @@ function OrthographicCameraPanel(parent, object)
 	this.clearColor.size.set(18, 18);
 	this.clearColor.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "clearColor", self.clearColor.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "clearColor", self.clearColor.getValue()));
 	});
 	this.form.add(this.clearColor);
 	this.form.nextRow();
@@ -156,7 +156,7 @@ function OrthographicCameraPanel(parent, object)
 	this.clearDepth.size.set(18, 18);
 	this.clearDepth.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "clearDepth", self.clearDepth.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "clearDepth", self.clearDepth.getValue()));
 	});
 	this.form.add(this.clearDepth);
 	this.form.nextRow();
@@ -167,7 +167,7 @@ function OrthographicCameraPanel(parent, object)
 	this.clearStencil.size.set(18, 18);
 	this.clearStencil.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "clearStencil", self.clearStencil.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "clearStencil", self.clearStencil.getValue()));
 	});
 	this.form.add(this.clearStencil);
 	this.form.nextRow();

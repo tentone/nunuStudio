@@ -21,7 +21,7 @@ function AudioEmitterPanel(parent, object)
 	this.volume.setStep(0.01);
 	this.volume.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "volume", self.volume.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "volume", self.volume.getValue()));
 	});
 	this.form.add(this.volume);
 	this.form.nextRow();
@@ -34,7 +34,7 @@ function AudioEmitterPanel(parent, object)
 	this.playbackRate.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.playbackRate.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "playbackRate", self.playbackRate.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "playbackRate", self.playbackRate.getValue()));
 	});
 	this.form.add(this.playbackRate);
 	this.form.nextRow();
@@ -45,7 +45,7 @@ function AudioEmitterPanel(parent, object)
 	this.autoplay.size.set(18, 18);
 	this.autoplay.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "autoplay", self.autoplay.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "autoplay", self.autoplay.getValue()));
 	});
 	this.form.add(this.autoplay);
 	this.form.nextRow();
@@ -56,7 +56,7 @@ function AudioEmitterPanel(parent, object)
 	this.loop.size.set(18, 18);
 	this.loop.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "loop", self.loop.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "loop", self.loop.getValue()));
 	});
 	this.form.add(this.loop);
 	this.form.nextRow();

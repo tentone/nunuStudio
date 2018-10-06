@@ -554,7 +554,7 @@ Program.prototype.addDefaultScene = function(material)
 
 	//Add scene to program
 	this.add(scene);
-	//ResourceManager.searchObject(scene, this);
+	ResourceManager.searchObject(scene, this, this);
 };
 
 /**

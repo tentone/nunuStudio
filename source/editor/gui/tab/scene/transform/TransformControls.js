@@ -623,7 +623,7 @@ TransformControls.prototype.onPointerUp = function()
 				actions.push(new ChangeAction(object, "z", object.z, this.oldPosition[i].z));
 			}
 
-			Editor.history.add(new ActionBundle(actions));
+			Editor.addAction(new ActionBundle(actions));
 		}
 		else if(this.mode === "scale")
 		{
@@ -637,7 +637,7 @@ TransformControls.prototype.onPointerUp = function()
 				actions.push(new ChangeAction(object, "z", object.z, this.oldScale[i].z));
 			}
 			
-			Editor.history.add(new ActionBundle(actions));
+			Editor.addAction(new ActionBundle(actions));
 		}
 		else if(this.mode === "rotate")
 		{
@@ -652,7 +652,7 @@ TransformControls.prototype.onPointerUp = function()
 				actions.push(new ChangeAction(object, "w", object.w, this.oldQuaternion[i].w));
 			}
 			
-			Editor.history.add(new ActionBundle(actions));
+			Editor.addAction(new ActionBundle(actions));
 		}
 	}
 

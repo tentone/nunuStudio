@@ -14,7 +14,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	this.dashSize.setStep(1);
 	this.dashSize.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "dashSize", self.dashSize.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "dashSize", self.dashSize.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.dashSize);
@@ -28,7 +28,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	this.gapSize.setStep(1);
 	this.gapSize.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "gapSize", self.gapSize.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "gapSize", self.gapSize.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.gapSize);
@@ -42,7 +42,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	this.dashScale.setStep(1);
 	this.dashScale.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "scale", self.dashScale.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "scale", self.dashScale.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.dashScale);

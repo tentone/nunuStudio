@@ -12,7 +12,7 @@ function TexturePanel(parent, object)
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "name", self.name.getText()));
+		Editor.addAction(new ChangeAction(self.object, "name", self.name.getText()));
 		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
@@ -35,7 +35,7 @@ function TexturePanel(parent, object)
 	this.wrapS.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
 	this.wrapS.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "wrapS", self.wrapS.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "wrapS", self.wrapS.getValue()));
 	});
 	this.form.add(this.wrapS);
 	this.form.nextRow();
@@ -49,7 +49,7 @@ function TexturePanel(parent, object)
 	this.wrapT.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
 	this.wrapT.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "wrapT", self.wrapT.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "wrapT", self.wrapT.getValue()));
 	});
 	this.form.add(this.wrapT);
 	this.form.nextRow();
@@ -103,7 +103,7 @@ function TexturePanel(parent, object)
 	this.rotation.setStep(0.1);
 	this.rotation.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "rotation", self.rotation.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "rotation", self.rotation.getValue()));
 	});
 	this.form.add(this.rotation);
 	this.form.nextRow();
@@ -120,7 +120,7 @@ function TexturePanel(parent, object)
 	this.minFilter.addValue("MIP Linear Linear", THREE.LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "minFilter", self.minFilter.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "minFilter", self.minFilter.getValue()));
 	});
 	this.form.add(this.minFilter);
 	this.form.nextRow();
@@ -133,7 +133,7 @@ function TexturePanel(parent, object)
 	this.magFilter.addValue("Linear", THREE.LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "magFilter", self.magFilter.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "magFilter", self.magFilter.getValue()));
 	});
 	this.form.add(this.magFilter);
 	this.form.nextRow();
@@ -144,7 +144,7 @@ function TexturePanel(parent, object)
 	this.premultiplyAlpha.size.set(18, 18);
 	this.premultiplyAlpha.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
 	});
 	this.form.add(this.premultiplyAlpha);
 	this.form.nextRow();
@@ -155,7 +155,7 @@ function TexturePanel(parent, object)
 	this.flipY.size.set(18, 18);
 	this.flipY.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "flipY", self.flipY.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "flipY", self.flipY.getValue()));
 	});
 	this.form.add(this.flipY);
 	this.form.nextRow();

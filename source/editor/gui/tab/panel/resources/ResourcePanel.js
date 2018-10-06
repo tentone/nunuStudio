@@ -12,7 +12,7 @@ function ResourcePanel(parent, object)
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "name", self.name.getText()));
+		Editor.addAction(new ChangeAction(self.object, "name", self.name.getText()));
 		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);

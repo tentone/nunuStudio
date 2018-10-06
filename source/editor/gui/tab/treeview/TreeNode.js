@@ -210,7 +210,7 @@ function TreeNode(container)
 					{
 						var geometry = self.object.geometry.clone();
 						geometry.computeVertexNormals();
-						Editor.history.add(new ChangeAction(self.object, "geometry", geometry));
+						Editor.addAction(new ChangeAction(self.object, "geometry", geometry));
 					});
 
 					//Apply transformation to geometry
@@ -225,7 +225,7 @@ function TreeNode(container)
 						actions.push(new ChangeAction(self.object, "position", new THREE.Vector3(0, 0, 0)));
 						actions.push(new ChangeAction(self.object, "scale", new THREE.Vector3(1, 1, 1)));
 						actions.push(new ChangeAction(self.object, "quaternion", new THREE.Quaternion(0, 0, 0, 1)));
-						Editor.history.add(new ActionBundle(actions));
+						Editor.addAction(new ActionBundle(actions));
 					});
 				}
 				
@@ -243,7 +243,7 @@ function TreeNode(container)
 					var actions = [];
 					actions.push(new AddedAction(physics, object.parent));
 					actions.push(new MovedAction(object, physics));
-					Editor.history.add(new ActionBundle(actions));
+					Editor.addAction(new ActionBundle(actions));
 				}
 
 				var physics = context.addMenu("Add physics");
@@ -295,14 +295,14 @@ function TreeNode(container)
 				autoUpdate.addOption("Static", function()
 				{
 					var actions = setObjectAttribute(self.object, "matrixAutoUpdate", false);
-					Editor.history.add(new ActionBundle(actions));
+					Editor.addAction(new ActionBundle(actions));
 				});
 
 				//Set object and children to dynamic mode
 				autoUpdate.addOption("Dynamic", function()
 				{
 					var actions = setObjectAttribute(self.object, "matrixAutoUpdate", true);
-					Editor.history.add(new ActionBundle(actions));
+					Editor.addAction(new ActionBundle(actions));
 				});
 
 				var shadow = context.addMenu("Shadows");
@@ -312,7 +312,7 @@ function TreeNode(container)
 				{
 					var cast = setObjectAttribute(self.object, "castShadow", true);
 					var receive = setObjectAttribute(self.object, "receiveShadow", true);
-					Editor.history.add(new ActionBundle(cast.concat(receive)));
+					Editor.addAction(new ActionBundle(cast.concat(receive)));
 				});
 
 				//Set object and children shadow casting mode
@@ -320,7 +320,7 @@ function TreeNode(container)
 				{
 					var cast = setObjectAttribute(self.object, "castShadow", false);
 					var receive = setObjectAttribute(self.object, "receiveShadow", false);
-					Editor.history.add(new ActionBundle(cast.concat(receive)));
+					Editor.addAction(new ActionBundle(cast.concat(receive)));
 				});
 
 				//Duplicate object
@@ -331,7 +331,7 @@ function TreeNode(container)
 					{
 						child.uuid = THREE.Math.generateUUID();
 					});
-					Editor.history.add(new AddedAction(object, self.object.parent));
+					Editor.addAction(new AddedAction(object, self.object.parent));
 				});
 
 				//Copy object
@@ -439,7 +439,7 @@ function TreeNode(container)
 					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
 					{
 						var index = self.object.parent.children.indexOf(self.object);
-						Editor.history.add(new MovedAction(object, self.object.parent, index));
+						Editor.addAction(new MovedAction(object, self.object.parent, index));
 					}
 				}
 				//Bellow
@@ -448,7 +448,7 @@ function TreeNode(container)
 					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
 					{
 						var index = self.object.parent.children.indexOf(self.object) + 1;
-						Editor.history.add(new MovedAction(object, self.object.parent, index));
+						Editor.addAction(new MovedAction(object, self.object.parent, index));
 					}
 				}
 				//Inside
@@ -456,7 +456,7 @@ function TreeNode(container)
 				{	
 					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
 					{
-						Editor.history.add(new MovedAction(object, self.object));	
+						Editor.addAction(new MovedAction(object, self.object));	
 					}
 				}
 			}
@@ -475,7 +475,7 @@ function TreeNode(container)
 
 			if(actions.length > 0)
 			{
-				Editor.history.add(new ActionBundle(actions));
+				Editor.addAction(new ActionBundle(actions));
 			}
 		}
 		//Dragged file

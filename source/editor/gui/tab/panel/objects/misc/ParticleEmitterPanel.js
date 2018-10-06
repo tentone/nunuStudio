@@ -12,7 +12,7 @@ function ParticleEmitterPanel(parent, object)
 	this.dynamicEmitter.size.set(18, 18);
 	this.dynamicEmitter.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "dynamicEmitter", self.dynamicEmitter.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "dynamicEmitter", self.dynamicEmitter.getValue()));
 	});
 	this.form.add(this.dynamicEmitter);
 	this.form.nextRow();

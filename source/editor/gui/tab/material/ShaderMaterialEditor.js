@@ -147,7 +147,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "name", self.name.getText()));
+		Editor.addAction(new ChangeAction(self.material, "name", self.name.getText()));
 		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
@@ -163,7 +163,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.side.addValue("Double", THREE.DoubleSide);
 	this.side.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "side", self.side.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "side", self.side.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.side);
@@ -175,7 +175,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.depthTest.size.set(18, 18);
 	this.depthTest.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "depthTest", self.depthTest.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "depthTest", self.depthTest.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.depthTest);
@@ -187,7 +187,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.depthWrite.size.set(18, 18);
 	this.depthWrite.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.depthWrite);
@@ -199,7 +199,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.transparent.size.set(18, 18);
 	this.transparent.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "transparent", self.transparent.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "transparent", self.transparent.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.transparent);
@@ -217,7 +217,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.blending.addValue("Multiply", THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "blending", self.blending.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "blending", self.blending.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.blending);
@@ -229,7 +229,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 	});
 	this.form.add(this.wireframe);
 	this.form.nextRow();
@@ -240,7 +240,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.fragmentShader.setMode("glsl");
 	this.fragmentShader.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "fragmentShader", self.fragmentShader.getText()));
+		Editor.addAction(new ChangeAction(self.material, "fragmentShader", self.fragmentShader.getText()));
 		self.material.needsUpdate = true;
 	});
 
@@ -250,7 +250,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.vertexShader.setMode("glsl");
 	this.vertexShader.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "vertexShader", self.vertexShader.getText()));
+		Editor.addAction(new ChangeAction(self.material, "vertexShader", self.vertexShader.getText()));
 		self.material.needsUpdate = true;
 	});
 }

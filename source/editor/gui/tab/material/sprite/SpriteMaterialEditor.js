@@ -34,7 +34,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -47,7 +47,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "rotation", self.rotation.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "rotation", self.rotation.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.rotation);
@@ -59,7 +59,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);

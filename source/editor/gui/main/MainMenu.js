@@ -633,7 +633,7 @@ function MainMenu(parent)
 		actions.push(new RemovedAction(b));
 		actions.push(new AddedAction(mesh, a.getScene()));
 
-		Editor.history.add(new ActionBundle(actions));
+		Editor.addAction(new ActionBundle(actions));
 	}
 
 	csg.addOption("Intersect", function()

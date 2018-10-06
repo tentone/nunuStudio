@@ -18,7 +18,7 @@ function ProgramPanel(parent, object)
 	this.author.updateInterface();
 	this.author.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "author", self.author.getText()));
+		Editor.addAction(new ChangeAction(self.object, "author", self.author.getText()));
 	});
 	this.form.add(this.author);
 	this.form.nextRow();
@@ -29,7 +29,7 @@ function ProgramPanel(parent, object)
 	this.version.size.set(100, 18);
 	this.version.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "version", self.version.getText()));
+		Editor.addAction(new ChangeAction(self.object, "version", self.version.getText()));
 	});
 	this.form.add(this.version);
 	this.form.nextRow();
@@ -40,7 +40,7 @@ function ProgramPanel(parent, object)
 	this.lockPointer.size.set(18, 18);
 	this.lockPointer.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "lockPointer", self.lockPointer.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "lockPointer", self.lockPointer.getValue()));
 	});
 	this.form.add(this.lockPointer);
 	this.form.nextRow();
@@ -51,7 +51,7 @@ function ProgramPanel(parent, object)
 	this.handlePixelRatio.size.set(18, 18);
 	this.handlePixelRatio.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "handlePixelRatio", self.handlePixelRatio.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "handlePixelRatio", self.handlePixelRatio.getValue()));
 	});
 	this.form.add(this.handlePixelRatio);
 	this.form.nextRow()
@@ -66,7 +66,7 @@ function ProgramPanel(parent, object)
 	this.vr.size.set(18, 18);
 	this.vr.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "vr", self.vr.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "vr", self.vr.getValue()));
 	});
 	this.form.add(this.vr);
 	this.form.nextRow();
@@ -79,7 +79,7 @@ function ProgramPanel(parent, object)
 	this.vrScale.setStep(0.05);
 	this.vrScale.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "vrScale", self.vrScale.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "vrScale", self.vrScale.getValue()));
 	});
 	this.form.add(this.vrScale);
 	this.form.nextRow();
@@ -94,7 +94,7 @@ function ProgramPanel(parent, object)
 	this.antialiasing.size.set(18, 18);
 	this.antialiasing.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "antialiasing", self.antialiasing.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "antialiasing", self.antialiasing.getValue()));
 		
 		var tabs = Editor.gui.tab.getActiveTab();
 		
@@ -116,7 +116,7 @@ function ProgramPanel(parent, object)
 	this.shadows.size.set(18, 18);
 	this.shadows.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "shadows", self.shadows.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "shadows", self.shadows.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.shadows);
@@ -131,7 +131,7 @@ function ProgramPanel(parent, object)
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "shadowsType", self.shadowsType.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "shadowsType", self.shadowsType.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.shadowsType);
@@ -148,7 +148,7 @@ function ProgramPanel(parent, object)
 	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.toneMapping);
@@ -162,7 +162,7 @@ function ProgramPanel(parent, object)
 	this.toneMappingExposure.setStep(0.1);
 	this.toneMappingExposure.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "toneMappingExposure", self.toneMappingExposure.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "toneMappingExposure", self.toneMappingExposure.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.toneMappingExposure);
@@ -176,7 +176,7 @@ function ProgramPanel(parent, object)
 	this.toneMappingWhitePoint.setStep(0.1);
 	this.toneMappingWhitePoint.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
 		self.updateRenderer();
 	});
 	this.form.add(this.toneMappingWhitePoint);

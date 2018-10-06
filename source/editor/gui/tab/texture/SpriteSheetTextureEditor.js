@@ -34,7 +34,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.totalFrames.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.totalFrames.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "totalFrames", self.totalFrames.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "totalFrames", self.totalFrames.getValue()));
 		self.beginFrame.setValue(self.texture.beginFrame);
 		self.endFrame.setValue(self.texture.endFrame);
 	});
@@ -49,7 +49,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.beginFrame.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.beginFrame.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "beginFrame", self.beginFrame.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "beginFrame", self.beginFrame.getValue()));
 	});
 	this.form.add(this.beginFrame);
 	this.form.nextRow();
@@ -62,7 +62,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.endFrame.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.endFrame.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "endFrame", self.endFrame.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "endFrame", self.endFrame.getValue()));
 	});
 	this.form.add(this.endFrame);
 	this.form.nextRow();
@@ -75,7 +75,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.animationSpeed.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.animationSpeed.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "animationSpeed", self.animationSpeed.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "animationSpeed", self.animationSpeed.getValue()));
 	});
 	this.form.add(this.animationSpeed);
 	this.form.nextRow();

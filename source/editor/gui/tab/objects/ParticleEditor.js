@@ -54,7 +54,7 @@ function ParticleEditor(parent, closeable, container, index)
 	{
 		if(self.particle !== null)
 		{
-			Editor.history.add(new ChangeAction(self.particle, "name", self.name.getText()));
+			Editor.addAction(new ChangeAction(self.particle, "name", self.name.getText()));
 			Editor.updateObjectsViewsGUI();
 		}
 	});
@@ -67,7 +67,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.texture.size.set(100, 100);
 	this.texture.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.particle.group, "texture", self.texture.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.group, "texture", self.texture.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.texture);
@@ -80,7 +80,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxParticleCount.size.set(100, 18);
 	this.maxParticleCount.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.group, "maxParticleCount", self.maxParticleCount.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.group, "maxParticleCount", self.maxParticleCount.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.maxParticleCount);
@@ -97,7 +97,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.blending.addValue("Multiply", THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.group, "blending", self.blending.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.group, "blending", self.blending.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.blending);
@@ -111,7 +111,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.direction.addValue("Backward", -1);
 	this.direction.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter, "direction", self.direction.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.emitter, "direction", self.direction.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.direction);
@@ -124,7 +124,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.particleCount.setStep(1);
 	this.particleCount.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter, "particleCount", self.particleCount.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.emitter, "particleCount", self.particleCount.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.particleCount);
@@ -143,7 +143,7 @@ function ParticleEditor(parent, closeable, container, index)
 			duration = null;
 		}
 
-		Editor.history.add(new ChangeAction(self.particle.emitter, "duration", duration));
+		Editor.addAction(new ChangeAction(self.particle.emitter, "duration", duration));
 		self.particle.reload();
 	});
 	this.form.add(this.duration);
@@ -158,7 +158,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.type.addValue("Disc", SPE.distributions.DISC);
 	this.type.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter, "type", self.type.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.emitter, "type", self.type.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.type);
@@ -171,7 +171,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxAgeValue.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAgeValue.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.maxAge, "value", self.maxAgeValue.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.emitter.maxAge, "value", self.maxAgeValue.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.maxAgeValue);
@@ -181,7 +181,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxAgeSpread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAgeSpread.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.maxAge, "spread", self.maxAgeSpread.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.emitter.maxAge, "spread", self.maxAgeSpread.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.maxAgeSpread);
@@ -266,7 +266,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.wiggleValue.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.wiggleValue.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.wiggle, "value", self.wiggleValue.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.emitter.wiggle, "value", self.wiggleValue.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.wiggleValue);
@@ -276,7 +276,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.wiggleSpread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.wiggleSpread.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.wiggle, "spread", self.wiggleSpread.getValue()));
+		Editor.addAction(new ChangeAction(self.particle.emitter.wiggle, "spread", self.wiggleSpread.getValue()));
 		self.particle.reload();
 	});
 	this.form.add(this.wiggleSpread);
@@ -288,12 +288,12 @@ function ParticleEditor(parent, closeable, container, index)
 	this.opacity.size.set(200, 120)
 	this.opacity.setOnChange(function(value)
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.opacity, "value", value));
+		Editor.addAction(new ChangeAction(self.particle.emitter.opacity, "value", value));
 	});
 	this.opacity.addGraph("spread", "#AAAAAA");
 	this.opacity.setOnChange(function(value)
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.opacity, "spread", value));
+		Editor.addAction(new ChangeAction(self.particle.emitter.opacity, "spread", value));
 	}, "spread");
 	this.form.add(this.opacity);
 	this.form.nextRow();
@@ -328,12 +328,12 @@ function ParticleEditor(parent, closeable, container, index)
 	this.scale.size.set(200, 120)
 	this.scale.setOnChange(function(value)
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.size, "value", value));
+		Editor.addAction(new ChangeAction(self.particle.emitter.size, "value", value));
 	});
 	this.scale.addGraph("spread", "#AAAAAA");
 	this.scale.setOnChange(function(value)
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.size, "spread", value));
+		Editor.addAction(new ChangeAction(self.particle.emitter.size, "spread", value));
 	}, "spread");
 	this.form.add(this.scale);
 	this.form.nextRow();
@@ -368,12 +368,12 @@ function ParticleEditor(parent, closeable, container, index)
 	this.angle.size.set(200, 120)
 	this.angle.setOnChange(function(value)
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.angle, "value", value));
+		Editor.addAction(new ChangeAction(self.particle.emitter.angle, "value", value));
 	});
 	this.angle.addGraph("spread", "#AAAAAA");
 	this.angle.setOnChange(function(value)
 	{
-		Editor.history.add(new ChangeAction(self.particle.emitter.angle, "spread", value));
+		Editor.addAction(new ChangeAction(self.particle.emitter.angle, "spread", value));
 	}, "spread");
 	this.form.add(this.angle);
 	this.form.nextRow();
@@ -387,7 +387,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.colorValue.size.set(190, 18);
 	this.colorValue.setOnChange(function(color, index)
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.particle.emitter.color.value, index, color.clone()), function()
+		Editor.addAction(new CallbackAction(new ChangeAction(self.particle.emitter.color.value, index, color.clone()), function()
 		{
 			self.particle.reload();
 		}));
@@ -400,7 +400,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.colorSpread.size.set(190, 18);
 	this.colorSpread.setOnChange(function(color, index)
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.particle.emitter.color.spread, index, new THREE.Vector3(color.r, color.g, color.b)), function()
+		Editor.addAction(new CallbackAction(new ChangeAction(self.particle.emitter.color.spread, index, new THREE.Vector3(color.r, color.g, color.b)), function()
 		{
 			self.particle.reload();
 		}));

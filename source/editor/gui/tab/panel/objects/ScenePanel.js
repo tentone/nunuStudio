@@ -18,11 +18,11 @@ function ScenePanel(parent, object)
 			
 			if(self.default.getValue())
 			{
-				Editor.history.add(new ChangeAction(program, "defaultScene",  self.object.uuid));
+				Editor.addAction(new ChangeAction(program, "defaultScene",  self.object.uuid));
 			}
 			else
 			{
-				Editor.history.add(new ChangeAction(program, "defaultScene",  null));
+				Editor.addAction(new ChangeAction(program, "defaultScene",  null));
 			}
 		}
 	});
@@ -36,7 +36,7 @@ function ScenePanel(parent, object)
 	this.background.setValue(0, 0, 0);
 	this.background.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "background", new THREE.Color(self.background.getValueHex())));
+		Editor.addAction(new ChangeAction(self.object, "background", new THREE.Color(self.background.getValueHex())));
 	});
 	this.form.add(this.background);
 	this.form.nextRow();
@@ -47,7 +47,7 @@ function ScenePanel(parent, object)
 	this.backgroundTexture.acceptAll = true;
 	this.backgroundTexture.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.object, "background", self.backgroundTexture.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "background", self.backgroundTexture.getValue()));
 	});
 	this.form.add(this.backgroundTexture);
 	this.form.nextRow();
@@ -58,7 +58,7 @@ function ScenePanel(parent, object)
 	this.backgroundTransparent.size.set(100, 18);
 	this.backgroundTransparent.setOnClick(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "background", null));
+		Editor.addAction(new ChangeAction(self.object, "background", null));
 	});
 	this.form.add(this.backgroundTransparent);
 	this.form.nextRow();
@@ -101,7 +101,7 @@ function ScenePanel(parent, object)
 	this.fogNear.size.set(60, 18);
 	this.fogNear.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.fog, "near", self.fogNear.getValue()));
+		Editor.addAction(new ChangeAction(self.object.fog, "near", self.fogNear.getValue()));
 	});
 	this.fogLinearForm.add(this.fogNear);
 	this.fogLinearForm.nextRow();
@@ -112,7 +112,7 @@ function ScenePanel(parent, object)
 	this.fogFar.size.set(60, 18);
 	this.fogFar.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.fog, "far", self.fogFar.getValue()));
+		Editor.addAction(new ChangeAction(self.object.fog, "far", self.fogFar.getValue()));
 	});
 	this.fogLinearForm.add(this.fogFar);
 	this.fogLinearForm.updateInterface();
@@ -145,7 +145,7 @@ function ScenePanel(parent, object)
 	this.fogDensity.setStep(0.0001);
 	this.fogDensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.fog, "density", self.fogDensity.getValue()));
+		Editor.addAction(new ChangeAction(self.object.fog, "density", self.fogDensity.getValue()));
 	});
 	this.fogExponentialForm.add(this.fogDensity);
 	this.fogExponentialForm.updateInterface();
@@ -164,7 +164,7 @@ function ScenePanel(parent, object)
 	this.usePhysics.size.set(18, 18);
 	this.usePhysics.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "usePhysics", self.usePhysics.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "usePhysics", self.usePhysics.getValue()));
 	});
 	this.form.add(this.usePhysics);
 	this.form.nextRow();
@@ -187,7 +187,7 @@ function ScenePanel(parent, object)
 	this.tolerance.setStep(0.01);
 	this.tolerance.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.world.solver, "tolerance", self.tolerance.getValue()));
+		Editor.addAction(new ChangeAction(self.object.world.solver, "tolerance", self.tolerance.getValue()));
 	});
 	this.form.add(this.tolerance);
 	this.form.nextRow();
@@ -199,7 +199,7 @@ function ScenePanel(parent, object)
 	this.iterations.setStep(1);
 	this.iterations.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.world.solver, "iterations", self.iterations.getValue()));
+		Editor.addAction(new ChangeAction(self.object.world.solver, "iterations", self.iterations.getValue()));
 	});
 	this.form.add(this.iterations);
 	this.form.nextRow();

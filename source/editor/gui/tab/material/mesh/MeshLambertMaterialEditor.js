@@ -13,7 +13,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
 	});
 	this.form.add(this.skinning);
 	this.form.nextRow();
@@ -24,7 +24,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.morphTargets.size.set(18, 18);
 	this.morphTargets.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
 	});
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
@@ -35,7 +35,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 	});
 	this.form.add(this.wireframe);
 	this.form.nextRow();
@@ -49,7 +49,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.flatShading.addValue("Flat", true);
 	this.flatShading.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
 			self.material.needsUpdate = true;
 	});
 	this.form.add(this.flatShading);
@@ -61,7 +61,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
 			self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -72,7 +72,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -83,7 +83,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.specularMap = new TextureForm(this.form);
 	this.specularMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.specularMap);
@@ -94,7 +94,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.alphaMap);
@@ -105,7 +105,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.emissiveMap);
@@ -130,7 +130,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.emissiveIntensity.setStep(0.1);
 	this.emissiveIntensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "emissiveIntensity", self.emissiveIntensity.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "emissiveIntensity", self.emissiveIntensity.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.emissiveIntensity);
@@ -142,7 +142,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.envMap.size.set(100, 100);
 	this.envMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.envMap);
@@ -158,7 +158,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.combine.addValue("Add", THREE.AddOperation);
 	this.combine.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "combine", self.combine.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "combine", self.combine.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.combine);
@@ -171,7 +171,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.reflectivity.setStep(0.05);
 	this.reflectivity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "reflectivity", self.reflectivity.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "reflectivity", self.reflectivity.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.reflectivity);
@@ -184,7 +184,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.refractionRatio.setStep(0.05);
 	this.refractionRatio.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "refractionRatio", self.refractionRatio.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "refractionRatio", self.refractionRatio.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.refractionRatio);

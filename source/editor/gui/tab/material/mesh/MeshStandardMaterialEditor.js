@@ -13,7 +13,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
 	});
 	this.form.add(this.skinning);
 	this.form.nextRow();
@@ -24,7 +24,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.morphTargets.size.set(18, 18);
 	this.morphTargets.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
 	});
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
@@ -35,7 +35,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 	});
 	this.form.add(this.wireframe);
 	this.form.nextRow();
@@ -49,7 +49,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.flatShading.addValue("Flat", true);
 	this.flatShading.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.flatShading);
@@ -61,7 +61,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -75,7 +75,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.roughness.setStep(0.01);
 	this.roughness.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "roughness", self.roughness.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "roughness", self.roughness.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.roughness);
@@ -89,7 +89,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.metalness.setStep(0.01);
 	this.metalness.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "metalness", self.metalness.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "metalness", self.metalness.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.metalness);
@@ -101,7 +101,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -113,7 +113,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.roughnessMap.size.set(100, 100);
 	this.roughnessMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "roughnessMap", self.roughnessMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "roughnessMap", self.roughnessMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.roughnessMap);
@@ -125,7 +125,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.metalnessMap.size.set(100, 100);
 	this.metalnessMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "metalnessMap", self.metalnessMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "metalnessMap", self.metalnessMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.metalnessMap);
@@ -137,7 +137,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.bumpMap.size.set(100, 100);
 	this.bumpMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.bumpMap);
@@ -151,7 +151,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.bumpScale.setStep(0.01);
 	this.bumpScale.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "bumpScale", self.bumpScale.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "bumpScale", self.bumpScale.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.bumpScale);
@@ -163,7 +163,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.normalMap.size.set(100, 100);
 	this.normalMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.normalMap);
@@ -190,7 +190,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.normalMapType.addValue("Object Space", THREE.ObjectSpaceNormalMap);
 	this.normalMapType.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.normalMapType);
@@ -202,7 +202,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.displacementMap.size.set(100, 100);
 	this.displacementMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.displacementMap);
@@ -215,7 +215,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.displacementScale.setStep(0.05);
 	this.displacementScale.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "displacementScale", self.displacementScale.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "displacementScale", self.displacementScale.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.displacementScale);
@@ -228,7 +228,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.displacementBias.setStep(0.1);
 	this.displacementBias.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "displacementBias", self.displacementBias.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "displacementBias", self.displacementBias.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.displacementBias);
@@ -240,7 +240,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.emissiveMap.size.set(100, 100);
 	this.emissiveMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.emissiveMap);
@@ -265,7 +265,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.emissiveIntensity.setStep(0.1);
 	this.emissiveIntensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "emissiveIntensity", self.emissiveIntensity.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "emissiveIntensity", self.emissiveIntensity.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.emissiveIntensity);
@@ -277,7 +277,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.alphaMap.size.set(100, 100);
 	this.alphaMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.alphaMap);
@@ -289,7 +289,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.envMap.size.set(100, 100);
 	this.envMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.envMap);
@@ -302,7 +302,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.envMapIntensity.setStep(0.05);
 	this.envMapIntensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "envMapIntensity", self.envMapIntensity.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "envMapIntensity", self.envMapIntensity.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.envMapIntensity);
@@ -315,7 +315,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.refractionRatio.setStep(0.05);
 	this.refractionRatio.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "refractionRatio", self.refractionRatio.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "refractionRatio", self.refractionRatio.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.refractionRatio);
@@ -327,7 +327,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.aoMap.size.set(100, 100);
 	this.aoMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "aoMap", self.aoMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "aoMap", self.aoMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.aoMap);
@@ -340,7 +340,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.aoMapIntensity.setStep(0.05);
 	this.aoMapIntensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "aoMapIntensity", self.aoMapIntensity.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "aoMapIntensity", self.aoMapIntensity.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.aoMapIntensity);

@@ -12,7 +12,7 @@ function RectAreaLightPanel(parent, object)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -25,7 +25,7 @@ function RectAreaLightPanel(parent, object)
 	this.intensity.setRange(0, 500);
 	this.intensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "intensity", self.intensity.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "intensity", self.intensity.getValue()));
 	});
 	this.form.add(this.intensity);
 	this.form.nextRow();
@@ -37,7 +37,7 @@ function RectAreaLightPanel(parent, object)
 	this.width.setStep(0.1);
 	this.width.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "width", self.width.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "width", self.width.getValue()));
 	});
 	this.form.add(this.width);
 	this.form.nextRow();
@@ -49,7 +49,7 @@ function RectAreaLightPanel(parent, object)
 	this.height.setStep(0.1);
 	this.height.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "height", self.height.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "height", self.height.getValue()));
 	});
 	this.form.add(this.height);
 	this.form.nextRow();

@@ -12,7 +12,7 @@ function ObjectPanel(parent, object)
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "name", self.name.getText()));
+		Editor.addAction(new ChangeAction(self.object, "name", self.name.getText()));
 		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
@@ -44,7 +44,7 @@ function ObjectPanel(parent, object)
 		var position = self.position.getValue();
 		var object = self.object.position;
 
-		Editor.history.add(new ActionBundle(
+		Editor.addAction(new ActionBundle(
 		[
 			new ChangeAction(object, "x", position.x),
 			new ChangeAction(object, "y", position.y),
@@ -96,7 +96,7 @@ function ObjectPanel(parent, object)
 			self.scale.setValue(scale.x, scale.y, scale.z);
 		}
 
-		Editor.history.add(new ActionBundle(
+		Editor.addAction(new ActionBundle(
 		[
 			new ChangeAction(object, "x", scale.x),
 			new ChangeAction(object, "y", scale.y),
@@ -116,7 +116,7 @@ function ObjectPanel(parent, object)
 		var rotation = self.rotation.getValue();
 		var object = self.object.rotation;
 
-		Editor.history.add(new ActionBundle(
+		Editor.addAction(new ActionBundle(
 		[
 			new ChangeAction(object, "x", rotation.x),
 			new ChangeAction(object, "y", rotation.y),
@@ -132,7 +132,7 @@ function ObjectPanel(parent, object)
 	this.visible.size.set(18, 18);
 	this.visible.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "visible", self.visible.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "visible", self.visible.getValue()));
 	});
 	this.form.add(this.visible);
 	this.form.nextRow();
@@ -143,7 +143,7 @@ function ObjectPanel(parent, object)
 	this.static.size.set(18, 18);
 	this.static.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "matrixAutoUpdate", !self.static.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "matrixAutoUpdate", !self.static.getValue()));
 	});
 	this.form.add(this.static);
 	this.form.nextRow();

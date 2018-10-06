@@ -824,6 +824,11 @@ Editor.clearSelection = function()
 	Editor.selection = [];
 };
 
+Editor.addAction = function(action)
+{
+	Editor.history.add(action);
+};
+
 //Add object to actual scene
 Editor.addObject = function(object, parent)
 {
@@ -839,11 +844,12 @@ Editor.addObject = function(object, parent)
 	{
 		for(var resource in resources[category])
 		{
+			console.log(resources[category][resource], category);
 			actions.push(new AddResourceAction(resources[category][resource], category, Editor.program));
 		}
 	}
 
-	Editor.history.add(new ActionBundle(actions));
+	Editor.addAction(new ActionBundle(actions));
 };
 
 //Rename object, if none passed as argument selected object is used
@@ -866,7 +872,7 @@ Editor.renameObject = function(object)
 		var name = prompt("Rename object", object.name);
 		if(name !== null && name !== "")
 		{
-			Editor.history.add(new ChangeAction(object, "name", name));
+			Editor.addAction(new ChangeAction(object, "name", name));
 		}
 	}
 };
@@ -901,7 +907,7 @@ Editor.deleteObject = function(object)
 	//Check if any action was added
 	if(actions.length > 0)
 	{
-		Editor.history.add(new ActionBundle(actions));
+		Editor.addAction(new ActionBundle(actions));
 	}
 };
 
@@ -956,7 +962,7 @@ Editor.cutObject = function(object)
 	if(!object.locked)
 	{
 		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
-		Editor.history.add(new RemovedAction(object));
+		Editor.addAction(new RemovedAction(object));
 	}
 };
 
@@ -978,11 +984,11 @@ Editor.pasteObject = function(target)
 		//Add object to target
 		if(target !== undefined && !target.locked)
 		{
-			Editor.history.add(new AddedAction(obj, target));
+			Editor.addAction(new AddedAction(obj, target));
 		}
 		else
 		{
-			Editor.history.add(new AddedAction(obj, Editor.program.scene));
+			Editor.addAction(new AddedAction(obj, Editor.program.scene));
 		}
 	}
 	catch(e)
@@ -1327,8 +1333,7 @@ Editor.loadTexture = function(file, onLoad)
 
 		texture.name = name;
 	
-		Editor.program.addTexture(texture);
-		Editor.updateObjectsViewsGUI();
+		Editor.addAction(new AddResourceAction(texture, "textures", Editor.program));
 
 		if(onLoad !== undefined)
 		{
@@ -1350,8 +1355,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		var texture = new VideoTexture(new Video(reader.result, extension));
 		texture.name = name;
 
-		Editor.program.addTexture(texture);
-		Editor.updateObjectsViewsGUI();
+		Editor.addAction(new AddResourceAction(texture, "textures", Editor.program));
 
 		if(onLoad !== undefined)
 		{
@@ -1378,8 +1382,7 @@ Editor.loadAudio = function(file, onLoad)
 			onLoad(audio);
 		}
 
-		Editor.program.addAudio(audio);
-		Editor.updateObjectsViewsGUI();
+		Editor.addAction(new AddResourceAction(audio, "audio", Editor.program));
 	};
 
 	reader.readAsArrayBuffer(file);
@@ -1410,8 +1413,7 @@ Editor.loadFont = function(file, onLoad)
 			onLoad(font);
 		}
 
-		Editor.program.addFont(font);
-		Editor.updateObjectsViewsGUI();
+		Editor.addAction(new AddResourceAction(font, "fonts", Editor.program));
 	};
 
 	if(extension === "json")
@@ -1435,8 +1437,7 @@ Editor.loadText = function(file)
 		var resource = new TextFile(reader.result, FileSystem.getFileExtension(name));
 		resource.name = name;
 
-		Editor.program.addResource(resource);
-		Editor.updateObjectsViewsGUI();
+		Editor.addAction(new AddResourceAction(resource, "resources", Editor.program));
 	};
 
 	reader.readAsText(file);

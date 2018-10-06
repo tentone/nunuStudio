@@ -12,7 +12,7 @@ function DrawablePanel(parent, object)
 	this.castShadow.size.set(18, 18);
 	this.castShadow.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "castShadow", self.castShadow.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();
@@ -23,7 +23,7 @@ function DrawablePanel(parent, object)
 	this.receiveShadow.size.set(18, 18);
 	this.receiveShadow.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "receiveShadow", self.receiveShadow.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "receiveShadow", self.receiveShadow.getValue()));
 	});
 	this.form.add(this.receiveShadow);
 	this.form.nextRow();
@@ -34,7 +34,7 @@ function DrawablePanel(parent, object)
 	this.frustumCulled.size.set(18, 18);
 	this.frustumCulled.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "frustumCulled", self.frustumCulled.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "frustumCulled", self.frustumCulled.getValue()));
 	});
 	this.form.add(this.frustumCulled);
 	this.form.nextRow();

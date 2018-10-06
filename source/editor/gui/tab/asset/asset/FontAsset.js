@@ -26,7 +26,7 @@ function FontAsset(parent)
 		
 		context.addOption("Rename", function()
 		{
-			Editor.history.add(new ChangeAction(self.asset, "name", Editor.prompt("Rename font", self.asset.name)));
+			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename font", self.asset.name)));
 			Editor.updateObjectsViewsGUI();
 		});
 		

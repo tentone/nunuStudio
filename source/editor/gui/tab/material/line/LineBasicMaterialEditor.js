@@ -32,7 +32,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -46,7 +46,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	this.linewidth.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.linewidth.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "linewidth", self.linewidth.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "linewidth", self.linewidth.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.linewidth);

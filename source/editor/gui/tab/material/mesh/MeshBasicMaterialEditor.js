@@ -13,7 +13,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
 	});
 	this.form.add(this.skinning);
 	this.form.nextRow();
@@ -24,7 +24,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.morphTargets.size.set(18, 18);
 	this.morphTargets.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
 	});
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
@@ -35,7 +35,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 	});
 	this.form.add(this.wireframe);
 	this.form.nextRow();
@@ -46,7 +46,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -57,7 +57,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -68,7 +68,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.alphaMap);

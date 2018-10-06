@@ -734,14 +734,14 @@ SceneEditor.prototype.resetCanvas = function()
 			{
 				var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
 				material.name = texture.name;
-				Editor.history.add(new ChangeAction(object, "material", material));
+				Editor.addAction(new ChangeAction(object, "material", material));
 				Editor.updateObjectsViewsGUI();
 			}
 			else if(object instanceof THREE.Sprite)
 			{
 				var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
 				material.name = texture.name;
-				Editor.history.add(new ChangeAction(object, "material", material));
+				Editor.addAction(new ChangeAction(object, "material", material));
 				Editor.updateObjectsViewsGUI();
 			}
 		}
@@ -813,7 +813,7 @@ SceneEditor.prototype.resetCanvas = function()
 					{
 						if(object instanceof THREE.Sprite)
 						{
-							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							Editor.updateObjectsViewsGUI();
 						}
 					}
@@ -822,14 +822,14 @@ SceneEditor.prototype.resetCanvas = function()
 					{
 						if(object instanceof THREE.Points)
 						{
-							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							Editor.updateObjectsViewsGUI();
 						}
 						else if(object.geometry !== undefined)
 						{
 							var newObject = new THREE.Points(object.geometry, draggedObject);
 							copyDetails(newObject, object);
-							Editor.history.add(new SwapAction(object, newObject, true));
+							Editor.addAction(new SwapAction(object, newObject, true));
 						}
 					}
 					//Line material
@@ -837,14 +837,14 @@ SceneEditor.prototype.resetCanvas = function()
 					{
 						if(object instanceof THREE.Line)
 						{
-							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							Editor.updateObjectsViewsGUI();
 						}
 						else if(object.geometry !== undefined)
 						{
 							var newObject = new THREE.Line(object.geometry, draggedObject);
 							copyDetails(newObject, object);
-							Editor.history.add(new SwapAction(object, newObject, true));
+							Editor.addAction(new SwapAction(object, newObject, true));
 						}
 					}
 					//Shader material
@@ -852,7 +852,7 @@ SceneEditor.prototype.resetCanvas = function()
 					{
 						if(object.material !== undefined)
 						{
-							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							Editor.updateObjectsViewsGUI();
 						}
 					}
@@ -861,14 +861,14 @@ SceneEditor.prototype.resetCanvas = function()
 					{
 						if(object instanceof THREE.Mesh)
 						{
-							Editor.history.add(new ChangeAction(object, "material", draggedObject));
+							Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							Editor.updateObjectsViewsGUI();
 						}
 						else if(object.geometry !== undefined)
 						{
 							var newObject = new THREE.Mesh(object.geometry, draggedObject);
 							copyDetails(newObject, object);
-							Editor.history.add(new SwapAction(object, newObject, true));
+							Editor.addAction(new SwapAction(object, newObject, true));
 						}
 					}
 				}
@@ -877,7 +877,7 @@ SceneEditor.prototype.resetCanvas = function()
 				{
 					if(object.material instanceof THREE.Material)
 					{
-						Editor.history.add(new ChangeAction(object.material, "envMap", draggedObject));
+						Editor.addAction(new ChangeAction(object.material, "envMap", draggedObject));
 						self.reloadContext();
 						Editor.updateObjectsViewsGUI();
 					}
@@ -911,7 +911,7 @@ SceneEditor.prototype.resetCanvas = function()
 				{
 					if(object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line)
 					{
-						Editor.history.add(new ChangeAction(object, "geometry", draggedObject));
+						Editor.addAction(new ChangeAction(object, "geometry", draggedObject));
 						Editor.updateObjectsViewsGUI();
 					}
 				}

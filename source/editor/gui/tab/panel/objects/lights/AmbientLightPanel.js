@@ -12,7 +12,7 @@ function AmbientLightPanel(parent, object)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();

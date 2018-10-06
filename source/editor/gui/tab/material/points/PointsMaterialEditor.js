@@ -32,7 +32,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -45,7 +45,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.pointSize.setStep(0.05);
 	this.pointSize.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "size", self.pointSize.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "size", self.pointSize.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.pointSize);
@@ -57,7 +57,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.sizeAttenuation.size.set(18, 18);
 	this.sizeAttenuation.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "sizeAttenuation", self.sizeAttenuation.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "sizeAttenuation", self.sizeAttenuation.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.sizeAttenuation);
@@ -68,7 +68,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);

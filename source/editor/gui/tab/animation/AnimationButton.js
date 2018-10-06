@@ -25,7 +25,7 @@ function AnimationButton(parent, editor, animation)
 			var value = Editor.prompt("Rename animation", animation.name);
 			if(value !== null && value !== "")
 			{
-				Editor.history.add(new ChangeAction(animation, "name", value));
+				Editor.addAction(new ChangeAction(animation, "name", value));
 				self.updateAnimation();
 			}
 		});

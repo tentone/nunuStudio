@@ -38,7 +38,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	this.autoplay.size.set(18, 18);
 	this.autoplay.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "autoplay", self.autoplay.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "autoplay", self.autoplay.getValue()));
 	});
 	this.form.add(this.autoplay);
 	this.form.nextRow();

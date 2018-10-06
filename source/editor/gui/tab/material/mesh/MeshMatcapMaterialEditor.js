@@ -13,7 +13,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
 	});
 	this.form.add(this.skinning);
 	this.form.nextRow();
@@ -24,7 +24,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.morphTargets.size.set(18, 18);
 	this.morphTargets.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
 	});
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
@@ -35,7 +35,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 	});
 	this.form.add(this.wireframe);
 	this.form.nextRow();
@@ -46,7 +46,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -57,7 +57,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.matcap = new TextureForm(this.form);
 	this.matcap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "matcap", self.matcap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "matcap", self.matcap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.matcap);
@@ -68,7 +68,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -79,7 +79,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.bumpMap);
@@ -93,7 +93,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.bumpScale.setStep(0.01);
 	this.bumpScale.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "bumpScale", self.bumpScale.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "bumpScale", self.bumpScale.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.bumpScale);
@@ -104,7 +104,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.normalMap);
@@ -131,7 +131,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.normalMapType.addValue("Object Space", THREE.ObjectSpaceNormalMap);
 	this.normalMapType.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.normalMapType);
@@ -142,7 +142,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.displacementMap);
@@ -155,7 +155,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.displacementScale.setStep(0.05);
 	this.displacementScale.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "displacementScale", self.displacementScale.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "displacementScale", self.displacementScale.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.displacementScale);
@@ -168,7 +168,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.displacementBias.setStep(0.1);
 	this.displacementBias.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.material, "displacementBias", self.displacementBias.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "displacementBias", self.displacementBias.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.displacementBias);
@@ -179,7 +179,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.setOnChange(function(file)
 	{
-		Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
+		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.alphaMap);

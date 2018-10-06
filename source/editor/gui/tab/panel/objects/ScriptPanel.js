@@ -11,7 +11,7 @@ function ScriptPanel(parent, object)
 	this.mode.size.set(100, 18);
 	this.mode.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "mode", self.mode.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "mode", self.mode.getValue()));
 	});
 	this.mode.addValue("Evaluate", Script.EVALUATE);
 	this.mode.addValue("Append", Script.APPEND);

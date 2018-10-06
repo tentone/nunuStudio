@@ -21,7 +21,7 @@ function SkyPanel(parent, object)
 	this.colorTop.size.set(190, 18);
 	this.colorTop.setOnChange(function(color, index)
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.object.colorTop, index, color.clone()), updateSky));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object.colorTop, index, color.clone()), updateSky));
 	});
 	this.form.add(this.colorTop);
 	this.form.nextRow();
@@ -32,7 +32,7 @@ function SkyPanel(parent, object)
 	this.colorBottom.size.set(190, 18);
 	this.colorBottom.setOnChange(function(color, index)
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.object.colorBottom, index, color.clone()), updateSky));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object.colorBottom, index, color.clone()), updateSky));
 	});
 	this.form.add(this.colorBottom);
 	this.form.nextRow();
@@ -43,7 +43,7 @@ function SkyPanel(parent, object)
 	this.sunColor.size.set(80, 18);
 	this.sunColor.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "sunColor", self.sunColor.getValueHex()), updateSky));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "sunColor", self.sunColor.getValueHex()), updateSky));
 	});
 	this.form.add(this.sunColor);
 	this.form.nextRow();
@@ -54,7 +54,7 @@ function SkyPanel(parent, object)
 	this.moonColor.size.set(80, 18);
 	this.moonColor.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "moonColor", self.moonColor.getValueHex()), updateSky));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "moonColor", self.moonColor.getValueHex()), updateSky));
 	});
 	this.form.add(this.moonColor);
 	this.form.nextRow();
@@ -67,7 +67,7 @@ function SkyPanel(parent, object)
 	this.intensity.setRange(0, 1);
 	this.intensity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "intensity", self.intensity.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "intensity", self.intensity.getValue()));
 	});
 	this.form.add(this.intensity);
 	this.form.nextRow();
@@ -82,7 +82,7 @@ function SkyPanel(parent, object)
 	this.autoUpdate.size.set(18, 18);
 	this.autoUpdate.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "autoUpdate", self.autoUpdate.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "autoUpdate", self.autoUpdate.getValue()));
 	});
 	this.form.add(this.autoUpdate);
 	this.form.nextRow();
@@ -101,12 +101,12 @@ function SkyPanel(parent, object)
 			dayTime = 0;
 			self.dayTime.setValue(dayTime);
 		}
-		Editor.history.add(new ChangeAction(self.object, "dayTime", dayTime));
+		Editor.addAction(new ChangeAction(self.object, "dayTime", dayTime));
 
 		//Check actual time
 		if(self.object.time > dayTime)
 		{
-			Editor.history.add(new ChangeAction(self.object, "time", dayTime));
+			Editor.addAction(new ChangeAction(self.object, "time", dayTime));
 			self.time.setValue(dayTime);
 		}
 
@@ -137,7 +137,7 @@ function SkyPanel(parent, object)
 			self.time.setValue(time);
 		}
 
-		Editor.history.add(new ChangeAction(self.object, "time", time));
+		Editor.addAction(new ChangeAction(self.object, "time", time));
 		self.object.updateSky();
 	});
 	this.form.add(this.time);
@@ -151,7 +151,7 @@ function SkyPanel(parent, object)
 	this.sunDistance.setStep(10);
 	this.sunDistance.setOnChange(function()
 	{
-		Editor.history.add(new CallbackAction(new ChangeAction(self.object, "sunDistance", self.sunDistance.getValue()), updateSky));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "sunDistance", self.sunDistance.getValue()), updateSky));
 	});
 	this.form.add(this.sunDistance);
 	this.form.nextRow();
@@ -168,7 +168,7 @@ function SkyPanel(parent, object)
 	this.castShadow.updateInterface();
 	this.castShadow.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.sun, "castShadow", self.castShadow.getValue()));
+		Editor.addAction(new ChangeAction(self.object.sun, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();
@@ -179,7 +179,7 @@ function SkyPanel(parent, object)
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.sun.shadow.mapSize, "width", self.shadowWidth.getValue()));
+		Editor.addAction(new ChangeAction(self.object.sun.shadow.mapSize, "width", self.shadowWidth.getValue()));
 		self.object.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowWidth);
@@ -188,7 +188,7 @@ function SkyPanel(parent, object)
 	this.shadowHeight.size.set(60, 18);
 	this.shadowHeight.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.sun.shadow.mapSize, "height", self.shadowHeight.getValue()));
+		Editor.addAction(new ChangeAction(self.object.sun.shadow.mapSize, "height", self.shadowHeight.getValue()));
 		self.object.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowHeight);
@@ -208,7 +208,7 @@ function SkyPanel(parent, object)
 	this.shadowNear.setStep(0.1);
 	this.shadowNear.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.sun.shadow.camera, "near", self.shadowNear.getValue()));
+		Editor.addAction(new ChangeAction(self.object.sun.shadow.camera, "near", self.shadowNear.getValue()));
 		self.object.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowNear);
@@ -221,7 +221,7 @@ function SkyPanel(parent, object)
 	this.shadowFar.setStep(0.1);
 	this.shadowFar.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object.sun.shadow.camera, "far", self.shadowFar.getValue()));
+		Editor.addAction(new ChangeAction(self.object.sun.shadow.camera, "far", self.shadowFar.getValue()));
 		self.object.sun.updateShadowMap();
 	});
 	this.form.add(this.shadowFar);

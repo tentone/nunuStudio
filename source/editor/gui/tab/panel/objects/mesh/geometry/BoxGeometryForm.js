@@ -78,7 +78,7 @@ BoxGeometryForm.prototype.updateGeometry = function()
 
 	var GeometryConstructor = this.buffer.getValue() ? THREE.BoxBufferGeometry : THREE.BoxGeometry;
 
-	Editor.history.add(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue())));
+	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue())));
 };
 
 BoxGeometryForm.prototype.updateValues = function()

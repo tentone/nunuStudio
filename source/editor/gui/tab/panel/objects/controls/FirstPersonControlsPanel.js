@@ -12,7 +12,7 @@ function FirstPersonControlsPanel(parent, object)
 	this.needsButtonPressed.size.set(18, 18);
 	this.needsButtonPressed.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "needsButtonPressed", self.needsButtonPressed.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "needsButtonPressed", self.needsButtonPressed.getValue()));
 	});
 	this.form.add(this.needsButtonPressed);
 	this.form.nextRow();
@@ -25,7 +25,7 @@ function FirstPersonControlsPanel(parent, object)
 	this.sensitivity.setRange(0, 0.05);
 	this.sensitivity.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "sensitivity", self.sensitivity.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "sensitivity", self.sensitivity.getValue()));
 	});
 	this.form.add(this.sensitivity);
 	this.form.nextRow();
@@ -36,7 +36,7 @@ function FirstPersonControlsPanel(parent, object)
 	this.movementEnabled.size.set(18, 18);
 	this.movementEnabled.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "movementEnabled", self.movementEnabled.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "movementEnabled", self.movementEnabled.getValue()));
 	});
 	this.form.add(this.movementEnabled);
 	this.form.nextRow();
@@ -49,7 +49,7 @@ function FirstPersonControlsPanel(parent, object)
 	this.moveSpeed.setRange(0, 0.5);
 	this.moveSpeed.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "moveSpeed", self.moveSpeed.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "moveSpeed", self.moveSpeed.getValue()));
 	});
 	this.form.add(this.moveSpeed);
 	this.form.nextRow();
@@ -60,7 +60,7 @@ function FirstPersonControlsPanel(parent, object)
 	this.moveOnPlane.size.set(18, 18);
 	this.moveOnPlane.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "moveOnPlane", self.moveOnPlane.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "moveOnPlane", self.moveOnPlane.getValue()));
 	});
 	this.form.add(this.moveOnPlane);
 	this.form.nextRow();

@@ -338,9 +338,9 @@ ResourceManager.prototype.removeRes = function(resource, category)
 	}
 	else
 	{
-		if(this[category][resource.uuid] !== undefined)
+		if(this[category] !== undefined && this[category][resource.uuid] !== undefined)
 		{
-			delete this.this[category][resource.uuid];
+			delete this[category][resource.uuid];
 		}
 	}
 };

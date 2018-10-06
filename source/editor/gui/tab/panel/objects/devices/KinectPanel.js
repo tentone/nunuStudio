@@ -12,7 +12,7 @@ function KinectPanel(parent, object)
 	this.debugModel.size.set(18, 18);
 	this.debugModel.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.object, "debugModel", self.debugModel.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "debugModel", self.debugModel.getValue()));
 	});
 	this.form.add(this.debugModel);
 }

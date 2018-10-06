@@ -32,7 +32,7 @@ function CameraEditor(parent, closeable, container, index)
 	{
 		if(self.camera !== null)
 		{
-			Editor.history.add(new ChangeAction(self.camera, "name", self.name.getText()));
+			Editor.addAction(new ChangeAction(self.camera, "name", self.name.getText()));
 			Editor.updateObjectsViewsGUI();
 		}
 	});

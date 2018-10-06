@@ -12,7 +12,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	this.width.size.set(120, 18);
 	this.width.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "width", self.width.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "width", self.width.getValue()));
 		self.texture.updateSize();
 		self.updatePreview();
 	});
@@ -25,7 +25,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	this.height.size.set(120, 18);
 	this.height.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "height", self.height.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "height", self.height.getValue()));
 		self.texture.updateSize();
 		self.updatePreview();
 	});

@@ -64,7 +64,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			Editor.history.add(new ChangeAction(self.texture, "name", self.name.getText()));
+			Editor.addAction(new ChangeAction(self.texture, "name", self.name.getText()));
 			self.updatePreview();
 			Editor.updateObjectsViewsGUI();
 		}
@@ -81,7 +81,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.wrapS.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
 	this.wrapS.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "wrapS", self.wrapS.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "wrapS", self.wrapS.getValue()));
 		self.updatePreview();
 	});
 	this.form.add(this.wrapS);
@@ -96,7 +96,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.wrapT.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
 	this.wrapT.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "wrapT", self.wrapT.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "wrapT", self.wrapT.getValue()));
 		self.updatePreview();
 	});
 	this.form.add(this.wrapT);
@@ -154,7 +154,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.rotation.setStep(0.1);
 	this.rotation.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "rotation", self.rotation.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "rotation", self.rotation.getValue()));
 		self.updatePreview();
 	});
 	this.form.add(this.rotation);
@@ -172,7 +172,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.minFilter.addValue("MIP Linear Linear", THREE.LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "minFilter", self.minFilter.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "minFilter", self.minFilter.getValue()));
 		self.updatePreview();
 	});
 	this.form.add(this.minFilter);
@@ -186,7 +186,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.magFilter.addValue("Linear", THREE.LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "magFilter", self.magFilter.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "magFilter", self.magFilter.getValue()));
 		self.updatePreview();
 	});
 	this.form.add(this.magFilter);
@@ -198,7 +198,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.premultiplyAlpha.size.set(18, 18);
 	this.premultiplyAlpha.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
 		self.updatePreview();
 	});
 	this.form.add(this.premultiplyAlpha);
@@ -210,7 +210,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.flipY.size.set(18, 18);
 	this.flipY.setOnChange(function()
 	{
-		Editor.history.add(new ChangeAction(self.texture, "flipY", self.flipY.getValue()));
+		Editor.addAction(new ChangeAction(self.texture, "flipY", self.flipY.getValue()));
 		self.updatePreview();
 	});
 	this.form.add(this.flipY);
