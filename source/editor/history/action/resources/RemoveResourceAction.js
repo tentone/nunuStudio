@@ -5,8 +5,8 @@ function RemoveResourceAction(resource, category, manager)
 	Action.call(this);
 	
 	this.resource = resource;
-	this.manager = manager;
 	this.category = category;
+	this.manager = manager;
 }
 
 RemoveResourceAction.prototype.apply = function()

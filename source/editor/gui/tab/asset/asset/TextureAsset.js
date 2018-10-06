@@ -52,7 +52,6 @@ function TextureAsset(parent)
 			if(self.asset !== null)
 			{
 				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename texture", self.asset.name)));
-				Editor.updateObjectsViewsGUI();
 			}
 		});
 		

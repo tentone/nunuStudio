@@ -117,8 +117,6 @@ function MaterialAsset(parent)
 			if(self.asset !== null)
 			{
 				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename material", self.asset.name)));
-				self.updateMetadata();
-				Editor.updateObjectsViewsGUI();
 			}
 		});
 		

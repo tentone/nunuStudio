@@ -360,12 +360,14 @@ function MainMenu(parent)
 						var program = loader.parse(JSON.parse(reader.result));
 					}
 
+					var actions = [];
+
 					for(var i = 0; i < program.children.length; i++)
 					{
-						Editor.program.add(program.children[i]);
+						actions.push(new AddedAction(program.children[i], Editor.program));
 					}
 
-					Editor.updateObjectsViewsGUI();
+					Editor.addAction(new ActionBundle(actions));
 				};
 
 				if(binary)

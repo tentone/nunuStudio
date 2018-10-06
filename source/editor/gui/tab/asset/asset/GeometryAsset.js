@@ -27,7 +27,6 @@ function GeometryAsset(parent)
 		context.addOption("Rename", function()
 		{
 			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename", self.asset.name)));
-			Editor.updateObjectsViewsGUI();
 		});
 		
 		context.addOption("Delete", function()

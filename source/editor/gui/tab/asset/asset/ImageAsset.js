@@ -29,7 +29,6 @@ function ImageAsset(parent)
 			if(self.asset !== null)
 			{
 				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename", self.asset.name)));
-				Editor.updateObjectsViewsGUI();
 			}
 		});
 		

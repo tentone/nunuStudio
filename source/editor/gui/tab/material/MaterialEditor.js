@@ -52,7 +52,6 @@ function MaterialEditor(parent, closeable, container, index)
 	this.name.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "name", self.name.getText()));
-		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
 	this.form.nextRow();
