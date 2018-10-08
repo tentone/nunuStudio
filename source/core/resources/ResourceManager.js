@@ -28,7 +28,7 @@ function ResourceManager()
  *  - Geometries
  *  - Shapes
  * 
- * @function ResourceContainer
+ * @method ResourceContainer
  */
 ResourceManager.ResourceContainer = function()
 {

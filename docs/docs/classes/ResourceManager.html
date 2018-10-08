@@ -197,17 +197,7 @@
 						
 						<div class="box intro">
 							<p>Resource manager is used to manage available resources used by objects</p>
-						<p>The resource manager is used to extend the Program object and is not designed to be used as a standalone</p>
-						<p>The manager is used to manage the following types of resources:</p>
-						<ul>
-						<li>Images</li>
-						<li>Videos</li>
-						<li>Audio</li>
-						<li>Fonts</li>
-						<li>Textures</li>
-						<li>Materials</li>
-						<li>Geometries</li>
-						</ul>
+						<p>The resource manager is used to extend the Program object and is not meant to be used as a standalone.</p>
 						
 						</div>
 						
@@ -305,7 +295,11 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_retrieveResources">retrieveResources</a>
+														<a href="#method_ResourceContainer">ResourceContainer</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_searchObject">searchObject</a>
 						
 															<span class="flag static">static</span>
 													</li>
@@ -342,6 +336,10 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_shapes">shapes</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_skeletons">skeletons</a>
 						
 													</li>
 													<li class="index-item property">
@@ -1482,8 +1480,47 @@
 											
 											
 											</div>
-											<div id="method_retrieveResources" class="method item">
-												<h3 class="name"><code>retrieveResources</code></h3>
+											<div id="method_ResourceContainer" class="method item">
+												<h3 class="name"><code>ResourceContainer</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Constructor method for a resource container object.</p>
+											<p>The container is used to store the following types of resources:</p>
+											<ul>
+											<li>Images</li>
+											<li>Videos</li>
+											<li>Audio</li>
+											<li>Fonts</li>
+											<li>Textures</li>
+											<li>Materials</li>
+											<li>Geometries</li>
+											<li>Shapes</li>
+											</ul>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="method_searchObject" class="method item">
+												<h3 class="name"><code>searchObject</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
@@ -1493,9 +1530,15 @@
 															<li class="arg">
 																	<code>manager</code>
 															</li>
+															<li class="arg">
+																	<code>target</code>
+															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
+													<span class="returns-inline">
+														<span class="type">ResourceContainer</span>
+													</span>
 											
 											
 											
@@ -1513,8 +1556,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Retrieve a list with all the resource in a object.</p>
-											<p>Searches the object and all its children for resource and adds them to resource manager.</p>
+													<p>Searches the object and all its children for resources that still dont exist in the resource manager.</p>
+											<p>Stores them in a resource container object that is returned.</p>
 											
 												</div>
 											
@@ -1539,7 +1582,18 @@
 											
 											
 																<div class="param-description">
-																	<p>Resource manager.</p>
+																	<p>Resource manager object.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">target</code>
+																	<span class="type">ResourceContainer</span>
+											
+											
+																<div class="param-description">
+																	<p>Optional resource container object that can be used to store the found resources.</p>
 											
 																</div>
 											
@@ -1547,6 +1601,15 @@
 														</ul>
 													</div>
 											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">ResourceContainer</span>:
+																<p>Object with the new resources found in the object.</p>
+											
+														</div>
+													</div>
 											
 											</div>
 									</div>
@@ -1709,6 +1772,29 @@
 											
 												<div class="description">
 													<p>Shapes.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_skeletons" class="property item">
+												<h3 class="name"><code>skeletons</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Skeletons.</p>
 											
 												</div>
 											
