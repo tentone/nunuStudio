@@ -1,6 +1,12 @@
 "use strict";
 
-//The planar controls are used to control 2D movement
+/**
+ * The planar controls are used to control 2D movement, fixed to one camera orientation.
+ *
+ * @class PlanarControls
+ * @extends {OrbitControls}
+ * @param {Number} mode Mode indicates the orientation to be locked.
+ */
 function EditorPlanarControls(mode)
 {
 	EditorOrbitControls.call(this);

@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Orbit controls can be used to navigate the world using a imaginary central point as reference.
+ *
+ * The camera orbits around that central point always looking towards it, and the distance to the point can be changes.
+ *
+ * @class OrbitControls
+ * @extends {EditorControls}
+ */
 function EditorOrbitControls()
 {
 	EditorControls.call(this);

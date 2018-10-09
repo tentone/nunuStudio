@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * A editor controls objects is used to control the camera inside of the editor.
+ *
+ * @class EditorControls
+ * @extends {THREE.Group}
+ */
 function EditorControls()
 {
 	THREE.Group.call(this);
