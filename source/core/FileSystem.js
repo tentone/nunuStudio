@@ -259,16 +259,31 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
  * When running without NWJS it writes file as a blob and auto downloads it.
  *
  * @method writeFile
- * @param {String} fname File name.
+ * @param {String} fname Name/path of the file to write.
  * @param {String} data Text to be written to the file.
+ * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs)
  */
-FileSystem.writeFile = function(fname, data)
+FileSystem.writeFile = function(fname, data, sync)
 {
 	if(FileSystem.fs !== undefined)
 	{
-		var stream = FileSystem.fs.createWriteStream(fname, "utf8");
-		stream.write(data);
-		stream.end();
+		if(FileSystem.fs.writeFileSync !== undefined)
+		{
+			if(sync === true)
+			{
+				FileSystem.fs.writeFileSync(fname, data, "utf8");
+			}
+			else
+			{
+				FileSystem.fs.writeFile(fname, data, "utf8");
+			}
+		}
+		else
+		{
+			var stream = FileSystem.fs.createWriteStream(fname, "utf8");
+			stream.write(data);
+			stream.end();
+		}
 	}
 	else
 	{
@@ -291,19 +306,36 @@ FileSystem.writeFile = function(fname, data)
 /**
  * Write binary file using base64 data.
  *
+ * If running on browser writes the file into a blob and auto downloads it.
+ *
  * @method writeFileBase64
- * @param {String} fname
- * @param {String} data
+ * @param {String} fname Name/path of the file to write.
+ * @param {String} data Base64 data to be written into the file.
+ * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs)
  */
-FileSystem.writeFileBase64 = function(fname, data)
+FileSystem.writeFileBase64 = function(fname, data, sync)
 {
 	if(FileSystem.fs !== undefined)
 	{
 		var buffer = Buffer.from(Base64Utils.removeHeader(data), "base64");
 
-		var stream = FileSystem.fs.createWriteStream(fname);
-		stream.write(buffer);
-		stream.end();
+		if(FileSystem.fs.writeFile !== undefined)
+		{
+			if(sync === true)
+			{
+				FileSystem.fs.writeFileSync(fname, buffer);
+			}
+			else
+			{
+				FileSystem.fs.writeFile(fname, buffer);
+			}
+		}
+		else
+		{
+			var stream = FileSystem.fs.createWriteStream(fname);
+			stream.write(buffer);
+			stream.end();
+		}
 	}
 	else
 	{
@@ -319,7 +351,6 @@ FileSystem.writeFileBase64 = function(fname, data)
 		};
 		download.style.display = "none";
 		document.body.appendChild(download);
-
 		download.click();
 	}
 };
@@ -327,18 +358,36 @@ FileSystem.writeFileBase64 = function(fname, data)
 /**
  * Write binary file using arraybuffer data. 
  *
+ * If running on browser writes the file into a blob and auto downloads it.
+ *
  * @method writeFileArrayBuffer
- * @param {String} fname
- * @param {String} data
+ * @param {String} fname Name/path of the file to write.
+ * @param {String} data Arraybuffer data to be written into the file.
+ * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs)
  */
-FileSystem.writeFileArrayBuffer = function(fname, data)
+FileSystem.writeFileArrayBuffer = function(fname, data, sync)
 {	
 	if(FileSystem.fs !== undefined)
 	{
 		var buffer = BufferUtils.fromArrayBuffer(data);
-		var stream = FileSystem.fs.createWriteStream(fname);
-		stream.write(buffer);
-		stream.end();
+
+		if(FileSystem.fs.writeFileSync !== undefined)
+		{
+			if(sync === true)
+			{
+				FileSystem.fs.writeFileSync(fname, buffer);
+			}
+			else
+			{
+				FileSystem.fs.writeFile(fname, buffer);
+			}
+		}
+		else
+		{
+			var stream = FileSystem.fs.createWriteStream(fname);
+			stream.write(buffer);
+			stream.end();
+		}
 	}
 	else
 	{
