@@ -261,21 +261,26 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
  * @method writeFile
  * @param {String} fname Name/path of the file to write.
  * @param {String} data Text to be written to the file.
- * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs)
+ * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs).
+ * @param {Function} onFinish Callback function called when the file is written.
  */
-FileSystem.writeFile = function(fname, data, sync)
+FileSystem.writeFile = function(fname, data, sync, onFinish)
 {
 	if(FileSystem.fs !== undefined)
 	{
 		if(FileSystem.fs.writeFileSync !== undefined)
 		{
-			if(sync === true)
+			if(sync !== false)
 			{
 				FileSystem.fs.writeFileSync(fname, data, "utf8");
+				if(onFinish !== undefined)
+				{
+					onFinish();
+				}
 			}
 			else
 			{
-				FileSystem.fs.writeFile(fname, data, "utf8");
+				FileSystem.fs.writeFile(fname, data, "utf8", onFinish);
 			}
 		}
 		else
@@ -298,8 +303,12 @@ FileSystem.writeFile = function(fname, data, sync)
 			document.body.removeChild(this);
 		};
 		document.body.appendChild(download);
-
 		download.click();
+
+		if(onFinish !== undefined)
+		{
+			onFinish();
+		}
 	}
 };
 
@@ -312,8 +321,9 @@ FileSystem.writeFile = function(fname, data, sync)
  * @param {String} fname Name/path of the file to write.
  * @param {String} data Base64 data to be written into the file.
  * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs)
+ * @param {Function} onFinish Callback function called when the file is written.
  */
-FileSystem.writeFileBase64 = function(fname, data, sync)
+FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
 {
 	if(FileSystem.fs !== undefined)
 	{
@@ -321,13 +331,18 @@ FileSystem.writeFileBase64 = function(fname, data, sync)
 
 		if(FileSystem.fs.writeFile !== undefined)
 		{
-			if(sync === true)
+			if(sync !== false)
 			{
 				FileSystem.fs.writeFileSync(fname, buffer);
+
+				if(onFinish !== undefined)
+				{
+					onFinish();
+				}
 			}
 			else
 			{
-				FileSystem.fs.writeFile(fname, buffer);
+				FileSystem.fs.writeFile(fname, buffer, onFinish);
 			}
 		}
 		else
@@ -352,6 +367,11 @@ FileSystem.writeFileBase64 = function(fname, data, sync)
 		download.style.display = "none";
 		document.body.appendChild(download);
 		download.click();
+
+		if(onFinish !== undefined)
+		{
+			onFinish();
+		}
 	}
 };
 
@@ -364,8 +384,9 @@ FileSystem.writeFileBase64 = function(fname, data, sync)
  * @param {String} fname Name/path of the file to write.
  * @param {String} data Arraybuffer data to be written into the file.
  * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs)
+ * @param {Function} onFinish Callback function called when the file is written.
  */
-FileSystem.writeFileArrayBuffer = function(fname, data, sync)
+FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
 {	
 	if(FileSystem.fs !== undefined)
 	{
@@ -373,13 +394,18 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync)
 
 		if(FileSystem.fs.writeFileSync !== undefined)
 		{
-			if(sync === true)
+			if(sync !== false)
 			{
 				FileSystem.fs.writeFileSync(fname, buffer);
+
+				if(onFinish !== undefined)
+				{
+					onFinish();
+				}
 			}
 			else
 			{
-				FileSystem.fs.writeFile(fname, buffer);
+				FileSystem.fs.writeFile(fname, buffer, onFinish);
 			}
 		}
 		else
@@ -402,8 +428,12 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync)
 		};
 		download.style.display = "none";
 		document.body.appendChild(download);
-
 		download.click();
+		
+		if(onFinish !== undefined)
+		{
+			onFinish();
+		}
 	}
 };
 

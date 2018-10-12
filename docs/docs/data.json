@@ -14402,13 +14402,23 @@
             "params": [
                 {
                     "name": "fname",
-                    "description": "File name.",
+                    "description": "Name/path of the file to write.",
                     "type": "String"
                 },
                 {
                     "name": "data",
                     "description": "Text to be written to the file.",
                     "type": "String"
+                },
+                {
+                    "name": "sync",
+                    "description": "If true the file is written syncronously. (Only available for Nodejs).",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "onFinish",
+                    "description": "Callback function called when the file is written.",
+                    "type": "Function"
                 }
             ],
             "class": "FileSystem",
@@ -14416,20 +14426,30 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 291,
-            "description": "Write binary file using base64 data.",
+            "line": 315,
+            "description": "Write binary file using base64 data.\n\nIf running on browser writes the file into a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFileBase64",
             "params": [
                 {
                     "name": "fname",
-                    "description": "",
+                    "description": "Name/path of the file to write.",
                     "type": "String"
                 },
                 {
                     "name": "data",
-                    "description": "",
+                    "description": "Base64 data to be written into the file.",
                     "type": "String"
+                },
+                {
+                    "name": "sync",
+                    "description": "If true the file is written syncronously. (Only available for Nodejs)",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "onFinish",
+                    "description": "Callback function called when the file is written.",
+                    "type": "Function"
                 }
             ],
             "class": "FileSystem",
@@ -14437,20 +14457,30 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 327,
-            "description": "Write binary file using arraybuffer data.",
+            "line": 378,
+            "description": "Write binary file using arraybuffer data. \n\nIf running on browser writes the file into a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFileArrayBuffer",
             "params": [
                 {
                     "name": "fname",
-                    "description": "",
+                    "description": "Name/path of the file to write.",
                     "type": "String"
                 },
                 {
                     "name": "data",
-                    "description": "",
+                    "description": "Arraybuffer data to be written into the file.",
                     "type": "String"
+                },
+                {
+                    "name": "sync",
+                    "description": "If true the file is written syncronously. (Only available for Nodejs)",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "onFinish",
+                    "description": "Callback function called when the file is written.",
+                    "type": "Function"
                 }
             ],
             "class": "FileSystem",
@@ -14458,7 +14488,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 361,
+            "line": 440,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.\n\nThe onLoad callback receives as array of files as parameter.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -14484,7 +14514,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 403,
+            "line": 482,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -14505,7 +14535,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 430,
+            "line": 509,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -14526,7 +14556,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 450,
+            "line": 529,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -14542,7 +14572,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 467,
+            "line": 546,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -14555,7 +14585,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 494,
+            "line": 573,
             "description": "Delete folders and all subfolders.\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "deleteFolder",
@@ -14571,7 +14601,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 527,
+            "line": 606,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -14592,7 +14622,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 571,
+            "line": 650,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -14612,7 +14642,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 592,
+            "line": 671,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -14632,7 +14662,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 614,
+            "line": 693,
             "description": "Get file name with extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.d.",
             "itemtype": "method",
             "name": "getFileNameWithExtension",
@@ -14652,7 +14682,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 636,
+            "line": 715,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -14672,7 +14702,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 655,
+            "line": 734,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -14692,7 +14722,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 677,
+            "line": 756,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
