@@ -46,6 +46,15 @@ function AddObjectSideBar(parent)
 		Editor.addObject(model);
 	}, "Sphere");
 
+	//Torus Knot
+	addModel.addOption(Editor.filePath + "icons/models/torusknot.png", function()
+	{
+		var geometry = new THREE.TorusKnotBufferGeometry(1, 0.4, 128, 96, 2, 3);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "torus knot";
+		Editor.addObject(model);
+	}, "Torus Knot");
+	
 	//Torus
 	addModel.addOption(Editor.filePath + "icons/models/torus.png", function()
 	{
@@ -107,9 +116,17 @@ function AddObjectSideBar(parent)
 		Editor.addObject(model);
 	}, "Cicle");
 
+	//Ring
+	addModel.addOption(Editor.filePath + "icons/models/ring.png", function()
+	{
+		var geometry = new THREE.RingBufferGeometry(1, 5, 32, 1);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "ring";
+		Editor.addObject(model);
+	}, "Ring");
+
 	//Parametric
-	/*
-	addModel.addOption(Editor.filePath + "icons/models/spline.png", function()
+	/*addModel.addOption(Editor.filePath + "icons/models/spline.png", function()
 	{
 		var klein = function (v, u, optionalTarget)
 		{
@@ -140,8 +157,7 @@ function AddObjectSideBar(parent)
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "parametric";
 		Editor.addObject(model);
-	}, "Parametric");
-	*/
+	}, "Parametric");*/
 
 	//Add lights
 	var addLight = new ButtonDrawer(parent);
