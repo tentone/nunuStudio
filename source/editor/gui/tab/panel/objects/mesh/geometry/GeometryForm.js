@@ -46,6 +46,11 @@ GeometryForm.create = function(form, object)
 	{
 		return new TorusKnotGeometryForm(form, object);
 	}
+	else if(geometry instanceof THREE.RingGeometry || geometry instanceof THREE.RingBufferGeometry)
+	{
+		return new RingGeometryForm(form, object);
+	}
+	
 
 	return null;
 };

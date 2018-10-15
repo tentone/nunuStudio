@@ -456,6 +456,7 @@ include("editor/gui/tab/panel/objects/mesh/geometry/CylinderGeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/TetrahedronGeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/DodecahedronGeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/CircleGeometryForm.js");
+include("editor/gui/tab/panel/objects/mesh/geometry/RingGeometryForm.js");
 
 include("editor/gui/preview/CubemapFlatRenderer.js");
 include("editor/gui/preview/FontRenderer.js");
