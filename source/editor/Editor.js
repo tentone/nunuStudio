@@ -449,6 +449,7 @@ include("editor/gui/tab/panel/objects/mesh/geometry/GeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/BoxGeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/SphereGeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/TorusGeometryForm.js");
+include("editor/gui/tab/panel/objects/mesh/geometry/TorusKnotGeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/PlaneGeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/ConeGeometryForm.js");
 include("editor/gui/tab/panel/objects/mesh/geometry/CylinderGeometryForm.js");

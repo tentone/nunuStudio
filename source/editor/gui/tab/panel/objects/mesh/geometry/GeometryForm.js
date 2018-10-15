@@ -42,6 +42,10 @@ GeometryForm.create = function(form, object)
 	{
 		return new CircleGeometryForm(form, object);
 	}
+	else if(geometry instanceof THREE.TorusKnotGeometry || geometry instanceof THREE.TorusKnotBufferGeometry)
+	{
+		return new TorusKnotGeometryForm(form, object);
+	}
 
 	return null;
 };
