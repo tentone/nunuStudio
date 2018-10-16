@@ -541,6 +541,22 @@ body
 	background: #333333;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active
+{
+	-webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+	-webkit-transition-delay: 9999s;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button
+{ 
+	-webkit-appearance: none;
+	margin: 0;
+}
+
 .cm-s-3024-day.CodeMirror { background: #f7f7f7; color: #3a3432; }
 .cm-s-3024-day div.CodeMirror-selected { background: #d6d5d4; }
 .cm-s-3024-day .CodeMirror-line::selection, .cm-s-3024-day .CodeMirror-line > span::selection, .cm-s-3024-day .CodeMirror-line > span > span::selection { background: #d6d5d4; }
