@@ -16,7 +16,7 @@
  *
  * If the PLY file uses non standard property names, they can be mapped while
  * loading. For example, the following maps the properties
- * “diffuse_(red|green|blue)” in the file to standard color names.
+ * ��diffuse_(red|green|blue)” in the file to standard color names.
  *
  * loader.setPropertyNameMapping( {
  *	diffuse_red: 'red',
