@@ -141,7 +141,19 @@ Element.prototype.removeClass = function(name)
 	}
 };
 
-/** 
+/**
+ * Change style of the base DOM element.
+ *
+ * @method setStyle
+ * @param {String} attribute Name of the style attribute.
+ * @param {String} value Value of the style.
+ */
+Element.prototype.setStyle = function(attribute, value)
+{
+	this.element.style[attribute] = value;
+};
+
+/**
  * Add and drag and drop default event prevention to this component.
  *
  * Usefull to avoid unwanted actions on draggable components. 
@@ -321,6 +333,18 @@ Element.prototype.setStyleList = function(styleList)
 	{
 		this.element.style[i] = styleList[i];
 	}
+};
+
+/**
+ * Calculate the position of the container to make it centered.
+ *
+ * Calculated relatively to its parent size.
+ * 
+ * @method center
+ */
+Element.prototype.center = function()
+{
+	this.position.set((this.parent.size.x - this.size.x) / 2, (this.parent.size.y - this.size.y) / 2);
 };
 
 /**

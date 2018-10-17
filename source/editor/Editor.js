@@ -271,6 +271,7 @@ include("editor/gui/element/Text.js");
 include("editor/gui/element/Canvas.js");
 include("editor/gui/element/RendererCanvas.js");
 include("editor/gui/element/TableForm.js");
+include("editor/gui/element/ImageContainer.js");
 
 include("editor/gui/element/dropdown/ContextMenu.js");
 include("editor/gui/element/dropdown/DropdownMenu.js");
@@ -278,6 +279,8 @@ include("editor/gui/element/dropdown/DropdownMenu.js");
 include("editor/gui/element/media/Media.js");
 include("editor/gui/element/media/AudioPlayer.js");
 include("editor/gui/element/media/VideoPlayer.js");
+
+include("editor/gui/element/modal/LoadingModal.js");
 
 include("editor/gui/element/buttons/Button.js");
 include("editor/gui/element/buttons/ButtonText.js");

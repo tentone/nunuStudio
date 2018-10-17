@@ -3,11 +3,11 @@
 /**
  * DOM image element.
  * 
- * @class Image
+ * @class ImageContainer
  * @extends {Element}
  * @param {Element} parent Parent element.
  */
-function Image(parent)
+function ImageContainer(parent)
 {
 	Element.call(this, parent, "img");
 
@@ -15,7 +15,7 @@ function Image(parent)
 	this.element.style.objectFit = "contain"; //cover | fill
 }
 
-Image.prototype = Object.create(Element.prototype);
+ImageContainer.prototype = Object.create(Element.prototype);
 
 /**
  * Set image from URL.
@@ -23,7 +23,7 @@ Image.prototype = Object.create(Element.prototype);
  * @method setImage
  * @param {String} source Image URL.
  */
-Image.prototype.setImage = function(source)
+ImageContainer.prototype.setImage = function(source)
 {
 	this.element.src = source;
 };

@@ -15,7 +15,7 @@ function LoadingModal(parent)
 	
 	var self = this;
 
-	this.element.style.backgroundColor = Palette.getColorAlpha("white", 0.7);
+	this.element.style.backgroundColor = "rgba(0.0, 0.0, 0.0, 0.3)"
 	this.element.style.zIndex = "200";
 
 	/**
@@ -37,9 +37,8 @@ function LoadingModal(parent)
 	 * @type {Text}
 	 */
 	this.text = new Text(this);
-	this.text.setText(Locale.text.misc.loading.loading);
-	this.text.setStyle("fontSize", "38px");
-	this.text.setStyle("color", Palette.getColor("sapphire"));
+	this.text.setText("Loading data");
+	this.text.setStyle("color", "#FFFFFF");
 
 	/**
 	 * Message presented in the loading box.
@@ -48,14 +47,13 @@ function LoadingModal(parent)
 	 * @type {Text}
 	 */
 	this.message = new Text(this);
-	this.message.setText(Locale.text.misc.loading.message);
-	this.message.setStyle("fontSize", "20px");
-	this.message.setStyle("color", Palette.getColor("dark-blue-grey"));
+	this.message.setText("Please wait");
+	this.message.setStyle("color", "#FFFFFF");
 	this.message.allowWordBreak(true);
 
 	//Icon
-	this.icon = new Image(this);
-	this.icon.setImage("data/resources/loading/hourglass.svg");
+	this.icon = new ImageContainer(this);
+	this.icon.setImage("editor/files/loading.png");
 	
 	var rotation = 0.0;
 	
@@ -129,20 +127,22 @@ LoadingModal.prototype.updateSize = function()
 	Element.prototype.updateSize.call(this);
 
 	//Text
+	this.text.setStyle("fontSize", "38px");
 	this.text.size.set(this.size.x, 100);
 	this.text.center();
 	this.text.position.y -= this.text.size.y;
 	this.text.updateInterface();
 	
 	//Message
-	this.message.size.set(350, 100);
+	this.message.setStyle("fontSize", "20px");
+	this.message.size.set(this.size.x, 100);
 	this.message.center();
-	this.message.position.y -= this.message.size.y / 4;
+	this.message.position.y -= this.message.size.y / 2;
 	this.message.updateInterface();
 
 	//Icon
-	this.icon.size.set(38, 71);
+	this.icon.size.set(80, 80);
 	this.icon.center();
-	this.icon.position.y += 80;
+	this.icon.position.y += 30;
 	this.icon.updateInterface();
 };
