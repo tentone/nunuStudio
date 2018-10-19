@@ -1915,8 +1915,8 @@ Editor.loadModel = function(file, parent)
 				{
 					var loader = new THREE.FBXLoader();
 					var object = loader.parse(reader.result, path);
-
-					if(object.animations.length > 0)
+					
+					if(object.animations !== undefined && object.animations.length > 0)
 					{					
 						object.traverse(function(child)
 						{
@@ -1926,7 +1926,7 @@ Editor.loadModel = function(file, parent)
 							}
 						});
 					}
-				
+
 					Editor.addObject(object, parent);
 				}
 				catch(e)
