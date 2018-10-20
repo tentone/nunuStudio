@@ -187,7 +187,11 @@
 	- New general settings tab
 	- Experimental android export support
  - V0.9.5 Beta
- 	- 
+ 	- Splitabble tabs in the UI
+ 	- Improved form GUI
+ 	- Support for meshcap materials
+ 	- Loading data screen
+ 	- Torus knot and ring geometries
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
