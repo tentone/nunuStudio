@@ -173,6 +173,7 @@ function MainMenu(parent)
 				{
 					FileSystem.deleteFolder("./temp/www");
 				}
+				
 				exportCordovaProject("./temp/www");
 
 				setTimeout(function()
@@ -531,7 +532,7 @@ function MainMenu(parent)
 	{
 		fileMenu.addOption("Exit", function()
 		{
-			if(Editor.confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+			if(Editor.confirm(Locale.unsavedChangesExit))
 			{
 				Editor.exit();
 			}

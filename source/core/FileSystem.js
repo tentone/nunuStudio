@@ -3,6 +3,8 @@
 /**
  * FileSystem is used to read and write files using nunuStudio.
  * 
+ * Its implements muitple solutions for each method depending on the platform (NodeJS, brower or cordova).
+ *
  * Some operations are platform specific and might not work everywhere.
  *
  * @module Files
@@ -519,10 +521,17 @@ FileSystem.copyFile = function(src, dst)
 {
 	if(FileSystem.fs !== undefined)
 	{
-		src.replace(new RegExp("/", 'g'), "\\");
-		dst.replace(new RegExp("/", 'g'), "\\");
+		if(FileSystem.fs.copyFileSync !== undefined)
+		{
+			FileSystem.fs.copyFileSync(src, dst);
+		}
+		else
+		{
+			src.replace(new RegExp("/", 'g'), "\\");
+			dst.replace(new RegExp("/", 'g'), "\\");
 
-		FileSystem.fs.createReadStream(src).pipe(FileSystem.fs.createWriteStream(dst));
+			FileSystem.fs.createReadStream(src).pipe(FileSystem.fs.createWriteStream(dst));
+		}
 	}
 };
 
@@ -558,7 +567,6 @@ FileSystem.getFilesDirectory = function(dir)
 		try
 		{
 			dir.replace(new RegExp("/", 'g'), "\\");
-
 			return FileSystem.fs.readdirSync(dir);
 		}
 		catch(e)

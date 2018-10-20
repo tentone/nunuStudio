@@ -539,7 +539,7 @@ Editor.initialize = function()
 		//Handle window close event
 		gui.Window.get().on("close", function()
 		{
-			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+			if(confirm(Locale.unsavedChangesExit))
 			{
 				Editor.exit();
 			}
@@ -581,7 +581,7 @@ Editor.initialize = function()
 		{
 			Editor.settings.store();
 
-			var message = "All unsaved changes to the project will be lost! Do you really wanna exit?";
+			var message = Locale.unsavedChangesExit;
 			event.returnValue = message;
 			return message;	
 		};
@@ -1459,6 +1459,8 @@ Editor.loadModel = function(file, parent)
 	var extension = FileSystem.getFileExtension(name);
 	var path = (file.path !== undefined) ? FileSystem.getFilePath(file.path) : "";
 
+	new LoadingModal(DocumentBody).show();
+	
 	try
 	{
 		//GCode
