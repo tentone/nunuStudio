@@ -117,6 +117,8 @@ LoadingModal.prototype.destroy = function()
 {
 	Element.prototype.destroy.call(this);
 
+	this.counter = 0;
+	this.timer.stop();
 	this.manager.destroy();
 };
 

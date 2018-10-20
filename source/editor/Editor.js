@@ -853,7 +853,6 @@ Editor.addObject = function(object, parent)
 	{
 		for(var resource in resources[category])
 		{
-			console.log(resources[category][resource], category);
 			actions.push(new AddResourceAction(resources[category][resource], category, Editor.program));
 		}
 	}
@@ -1452,14 +1451,24 @@ Editor.loadText = function(file)
 	reader.readAsText(file);
 };
 
+Editor.loadModelTest = function(file, parent)
+{
+	var modal = new LoadingModal(DocumentBody);
+	modal.show();
+
+	requestAnimationFrame(function()
+	{
+		Editor._loadModel(file, parent);
+		modal.hide();
+	});
+};
+
 //Load geometry from files
 Editor.loadModel = function(file, parent)
 {
 	var name = file.name;
 	var extension = FileSystem.getFileExtension(name);
 	var path = (file.path !== undefined) ? FileSystem.getFilePath(file.path) : "";
-
-	new LoadingModal(DocumentBody).show();
 	
 	try
 	{

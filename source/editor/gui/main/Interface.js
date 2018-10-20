@@ -48,7 +48,6 @@ function Interface()
 	
 	//Tool Bar
 	this.toolBar = new ToolBar(this.sideBar);
-	
 	new AddObjectSideBar(this.sideBar);
 }
 
