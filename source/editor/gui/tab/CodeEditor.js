@@ -101,10 +101,9 @@ function CodeEditor(parent, closeable, container, index)
 	this.manager = new EventManager();
 	this.manager.addScrollEvent(this.element, function(event)
 	{
-		event.preventDefault();
-
 		if(event.ctrlKey && event.deltaY !== 0)
 		{
+			event.preventDefault();
 			self.setFontSize(Editor.settings.code.fontSize - event.deltaY / 100);
 		}
 	});

@@ -17,9 +17,9 @@ function TreeView(parent, closeable, container, index)
 	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.filePath + "icons/misc/menu.png");
 
 	this.element.style.overflow = "auto";
+	this.element.style.backgroundColor = null;
 
 	this.program = null;
-	
 	this.root = null;
 }
 
@@ -285,7 +285,7 @@ TreeView.prototype.updateChildPosition = function()
 
 TreeView.prototype.updateSize = function()
 {
-	TreeNode.prototype.updateSize.call(this);
+	TabElement.prototype.updateSize.call(this);
 	
 	if(this.root !== null)
 	{

@@ -592,13 +592,14 @@ Editor.initialize = function()
 		for(var i = 0; i < event.dataTransfer.files.length; i++)
 		{
 			var file = event.dataTransfer.files[i];
+			var extension = FileSystem.getFileExtension(file.name);
 
 			//Project file
-			if(file.name.endsWith(".isp") || file.name.endsWith(".nsp"))
+			if(extension === "isp" || extension === "nsp")
 			{
 				if(confirm("All unsaved changes to the project will be lost! Load file?"))
 				{
-					Editor.loadProgram(file, file.name.endsWith(".nsp"));
+					Editor.loadProgram(file, extension === "nsp");
 					Editor.resetEditor();
 				}
 				break;
