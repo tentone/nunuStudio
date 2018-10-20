@@ -260,6 +260,9 @@ include("lib/ThreeCSG.js");
 
 include("editor/style.css");
 
+include("editor/locale/LocaleManager.js");
+include("editor/locale/LocaleEN.js");
+
 include("editor/theme/ThemeManager.js");
 include("editor/theme/ThemeDark.js");
 

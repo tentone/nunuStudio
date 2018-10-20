@@ -163,13 +163,12 @@ TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
 };
 
 /**
- * Fill the tree view using object children.
+ * Fill the tree view with the attached object children.
  * 
  * @method buildTree
  */
 TreeView.prototype.buildTree = function()
 {
-	//Fill tree root with objects (recursive)
 	function fillTree(root, object)
 	{
 		var element = root.addObject(object);
@@ -183,10 +182,12 @@ TreeView.prototype.buildTree = function()
 	if(this.root !== null)
 	{
 		this.root.destroy();
+		this.root = null;
 	}
 
 	this.root = new TreeNode(this);
 	this.root.attach(this.program);
+	this.root.updateInterface();
 
 	for(var i = 0; i < this.program.children.length; i++)
 	{
