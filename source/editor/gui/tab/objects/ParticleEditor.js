@@ -37,7 +37,6 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form = new TableForm();
 	this.form.setAutoSize(false);
 
-
 	//Main
 	this.main = new DualContainer(this);
 	this.main.tabPosition = 0.6;
@@ -52,11 +51,8 @@ function ParticleEditor(parent, closeable, container, index)
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
-		if(self.particle !== null)
-		{
-			Editor.addAction(new ChangeAction(self.particle, "name", self.name.getText()));
-			Editor.updateObjectsViewsGUI();
-		}
+		Editor.addAction(new ChangeAction(self.particle, "name", self.name.getText()));
+		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
 	this.form.nextRow();

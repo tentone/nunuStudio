@@ -195,7 +195,7 @@ ProgramPanel.prototype.updateRenderer = function()
 
 		if(tab instanceof SceneEditor)
 		{
-			tab.initializeRenderer();
+			tab.createRenderer();
 		}
 	}
 };

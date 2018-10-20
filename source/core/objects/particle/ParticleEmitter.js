@@ -42,25 +42,31 @@ function ParticleEmitter(group, emitter)
 	this.name = "particle";
 	this.frustumCulled = false;
 
+	/**
+	 * A dynamic particle emmiter ignores the position in its transform and applies it directly to the emitter origin.
+	 *
+	 * @property dinamicEmitter
+	 * @type {Boolean} 
+	 */
 	this.dynamicEmitter = false;
 
+	this.clock = new THREE.Clock();
+
+	/**
+	 * Texture attached to the group of this particle emitter.
+	 *
+	 * @property texture
+	 * @type {Texture} 
+	 */
 	var self = this;
 	Object.defineProperties(this,
 	{
 		texture:
 		{
-			get: function()
-			{
-				return self.group.texture;
-			},
-			set: function(value)
-			{
-				self.group.texture = value;
-			}
+			get: function(){return self.group.texture;},
+			set: function(value){self.group.texture = value;}
 		}
 	});
-
-	this.clock = new THREE.Clock();
 }
 
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
@@ -108,7 +114,9 @@ ParticleEmitter.defaultGroup =
 };
 
 /**
- * Reload internal material and geometry.
+ * Reload internal material and geometry of this particle emitter.
+ *
+ * Recretes the group and emitter object attached to the particle.
  *
  * May be required after changing material related parameters.
  * 
@@ -120,10 +128,9 @@ ParticleEmitter.prototype.reload = function()
 
 	var children = this.children;
 	this.children = [];
-	
 	var particle = new ObjectLoader().parse(this.toJSON());
-
 	this.children = children;
+
 	this.group = particle.group;
 	this.emitter = particle.emitter;
 	this.geometry = this.group.geometry;

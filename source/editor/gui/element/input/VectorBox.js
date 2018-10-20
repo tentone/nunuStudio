@@ -185,71 +185,57 @@ VectorBox.prototype.setOnChange = function(onChange)
 	this.w.onchange = onChange;
 };
 
-//Update Interface
-VectorBox.prototype.updateInterface = function()
+VectorBox.prototype.updateSize = function()
 {
-	if(this.visible)
+	Element.prototype.updateSize.call(this);
+	
+	var sizeX = Math.round((this.size.x - this.type * 15) / this.type);
+	var sizeY = this.size.y + "px";
+
+	this.xText.style.height = sizeY;
+	this.xText.style.lineHeight = sizeY;
+	this.x.style.width = sizeX + "px";
+
+	this.yText.style.left = (15 + sizeX) + "px";
+	this.yText.style.height = sizeY;
+	this.yText.style.lineHeight = sizeY;
+	this.y.style.left = (30 + sizeX) + "px";
+	this.y.style.width = sizeX + "px";
+
+	if(this.type >= VectorBox.VECTOR3)
 	{
-		this.element.style.visibility = "visible";
+		this.zText.style.left = (30 + (2 * sizeX)) + "px";
+		this.zText.style.height = sizeY;
+		this.zText.style.lineHeight = sizeY;
+		this.z.style.left = (45 + (2 * sizeX)) + "px";
+		this.z.style.width = sizeX + "px";
 
-		var sizeX = Math.round((this.size.x - this.type * 15) / this.type);
-		var sizeY = this.size.y + "px";
-
-		this.xText.style.height = sizeY;
-		this.xText.style.lineHeight = sizeY;
-		this.x.style.width = sizeX + "px";
-
-		this.yText.style.left = (15 + sizeX) + "px";
-		this.yText.style.height = sizeY;
-		this.yText.style.lineHeight = sizeY;
-		this.y.style.left = (30 + sizeX) + "px";
-		this.y.style.width = sizeX + "px";
-
-		if(this.type >= VectorBox.VECTOR3)
+		if(this.type === VectorBox.QUATERNION)
 		{
-			this.zText.style.left = (30 + (2 * sizeX)) + "px";
-			this.zText.style.height = sizeY;
-			this.zText.style.lineHeight = sizeY;
-			this.z.style.left = (45 + (2 * sizeX)) + "px";
-			this.z.style.width = sizeX + "px";
+			this.wText.style.left = (45 + (3 * sizeX)) + "px";
+			this.wText.style.height = sizeY;
+			this.wText.style.lineHeight = sizeY;
+			this.w.style.left = (60 + (3 * sizeX)) + "px";
+			this.w.style.width = sizeX + "px";
 
-			if(this.type === VectorBox.QUATERNION)
-			{
-				this.wText.style.left = (45 + (3 * sizeX)) + "px";
-				this.wText.style.height = sizeY;
-				this.wText.style.lineHeight = sizeY;
-				this.w.style.left = (60 + (3 * sizeX)) + "px";
-				this.w.style.width = sizeX + "px";
-
-				this.zText.style.visibility = "visible";
-				this.z.style.visibility = "visible";
-				this.w.style.visibility = "visible";
-				this.wText.style.visibility = "visible";
-			}
-			else
-			{
-				this.zText.style.visibility = "visible";
-				this.z.style.visibility = "visible";
-				this.w.style.visibility = "hidden";
-				this.wText.style.visibility = "hidden";
-			}
+			this.zText.style.visibility = "visible";
+			this.z.style.visibility = "visible";
+			this.w.style.visibility = "visible";
+			this.wText.style.visibility = "visible";
 		}
 		else
 		{
-			this.z.style.visibility = "hidden";
-			this.zText.style.visibility = "hidden";
+			this.zText.style.visibility = "visible";
+			this.z.style.visibility = "visible";
 			this.w.style.visibility = "hidden";
 			this.wText.style.visibility = "hidden";
 		}
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.z.style.visibility = "hidden";
+		this.zText.style.visibility = "hidden";
+		this.w.style.visibility = "hidden";
+		this.wText.style.visibility = "hidden";
 	}
-
-	//Main element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

@@ -186,7 +186,8 @@
 	- Resource preview on inspector
 	- New general settings tab
 	- Experimental android export support
-
+ - V0.9.5 Beta
+ 	- 
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
