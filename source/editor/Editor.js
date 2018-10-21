@@ -1224,7 +1224,7 @@ Editor.loadProgram = function(file, binary)
 		}
 		catch(e)
 		{
-			Editor.alert("Error loading file\n(" + e + ")");
+			Editor.alert(Locale.errorLoadFile + "\n(" + e + ")");
 			console.error("nunuStudio: Error loading file", e);
 		}
 	};
@@ -1451,25 +1451,15 @@ Editor.loadText = function(file)
 	reader.readAsText(file);
 };
 
-Editor.loadModelTest = function(file, parent)
-{
-	var modal = new LoadingModal(DocumentBody);
-	modal.show();
-
-	requestAnimationFrame(function()
-	{
-		Editor._loadModel(file, parent);
-		modal.hide();
-	});
-};
-
 //Load geometry from files
 Editor.loadModel = function(file, parent)
 {
 	var name = file.name;
 	var extension = FileSystem.getFileExtension(name);
 	var path = (file.path !== undefined) ? FileSystem.getFilePath(file.path) : "";
-	
+	var modal = new LoadingModal(DocumentBody);
+	modal.show();
+
 	try
 	{
 		//GCode
@@ -1481,6 +1471,7 @@ Editor.loadModel = function(file, parent)
 				var loader = new THREE.GCodeLoader();
 				var obj = loader.parse(reader.result);
 				Editor.addObject(obj, parent);
+				modal.destroy();
 			};
 
 			reader.readAsText(file);
@@ -1507,7 +1498,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(f)
 				{
-					Editor.alert("Error loading file: " + f);
+					Editor.alert(Locale.errorLoadFile + f);
 					console.error("nunuStudio: Error loading file", f);
 				}
 			}
@@ -1526,12 +1517,12 @@ Editor.loadModel = function(file, parent)
 
 					var obj = loader.parse(reader.result);
 					obj.name = FileSystem.getFileName(name);
-
 					Editor.addObject(obj, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1550,10 +1541,11 @@ Editor.loadModel = function(file, parent)
 					var loader = new THREE.ThreeMFLoader();
 					var obj = loader.parse(reader.result);
 					Editor.addObject(obj, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1571,10 +1563,11 @@ Editor.loadModel = function(file, parent)
 					loader._baseDir = path;
 					var awd = loader.parse(reader.result);
 					Editor.addObject(awd, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1591,10 +1584,11 @@ Editor.loadModel = function(file, parent)
 					var loader = new THREE.AMFLoader();
 					var amf = loader.parse(reader.result);
 					Editor.addObject(amf, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1611,10 +1605,11 @@ Editor.loadModel = function(file, parent)
 					var loader = new THREE.AssimpLoader();
 					var assimp = loader.parse(reader.result, path);
 					Editor.addObject(assimp.object, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1632,10 +1627,11 @@ Editor.loadModel = function(file, parent)
 					var json = JSON.parse(reader.result);
 					var assimp = loader.parse(json, path);
 					Editor.addObject(assimp, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1661,10 +1657,11 @@ Editor.loadModel = function(file, parent)
 						}
 					});
 					Editor.addObject(babylon, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1684,11 +1681,12 @@ Editor.loadModel = function(file, parent)
 						container.name = FileSystem.getNameWithoutExtension(name);
 						blend.three.loadScene(container);
 						Editor.addObject(container, parent);
+						modal.destroy();
 					});
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1706,10 +1704,11 @@ Editor.loadModel = function(file, parent)
 					loader.setPath(path);
 					var group = loader.parse(reader.result);
 					Editor.addObject(group, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1741,10 +1740,11 @@ Editor.loadModel = function(file, parent)
 					}
 					
 					Editor.addObject(scene, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1767,13 +1767,14 @@ Editor.loadModel = function(file, parent)
 
 						var mesh = new THREE.Mesh(geometry, Editor.defaultMaterial);
 						Editor.addObject(mesh, parent);
+						modal.destroy();
 
 						THREE.DRACOLoader.releaseDecoderModule();
 					});
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1808,11 +1809,12 @@ Editor.loadModel = function(file, parent)
 						}
 
 						Editor.addObject(scene, parent);
+						modal.destroy();
 					});
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1835,10 +1837,11 @@ Editor.loadModel = function(file, parent)
 					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
 					Editor.addObject(mesh, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1860,10 +1863,11 @@ Editor.loadModel = function(file, parent)
 					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
 					Editor.addObject(mesh, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1886,10 +1890,11 @@ Editor.loadModel = function(file, parent)
 					var mesh = new Mesh(geometry, Editor.defaultMaterial);
 					mesh.name = modelName;
 					Editor.addObject(mesh, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1911,10 +1916,12 @@ Editor.loadModel = function(file, parent)
 					{
 						Editor.addObject(scene.children[i], parent);
 					}
+
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1943,10 +1950,11 @@ Editor.loadModel = function(file, parent)
 					}
 
 					Editor.addObject(object, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2028,11 +2036,12 @@ Editor.loadModel = function(file, parent)
 
 							Editor.addObject(model, parent);
 						}
+						modal.destroy();
 					});
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2051,10 +2060,11 @@ Editor.loadModel = function(file, parent)
 					pcd.material.name = "points";
 
 					Editor.addObject(pcd, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2091,10 +2101,11 @@ Editor.loadModel = function(file, parent)
 					}
 
 					Editor.addObject(group, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2115,10 +2126,11 @@ Editor.loadModel = function(file, parent)
 					geometry.name = modelName;
 
 					Editor.addObject(new Mesh(geometry, Editor.defaultMaterial), parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2164,10 +2176,11 @@ Editor.loadModel = function(file, parent)
 					}
 
 					Editor.addObject(mesh, parent);
+					modal.destroy();
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading file: " + e);
+					Editor.alert(Locale.errorLoadFile + e);
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2175,13 +2188,15 @@ Editor.loadModel = function(file, parent)
 		}
 		else
 		{
+			modal.destroy();
 			Editor.alert("Unknown file format!");
 			console.warn("nunuStudio: Unknown file format");
 		}
 	}
 	catch(e)
 	{
-		Editor.alert("Error loading file: " + e);
+		modal.destroy();
+		Editor.alert(Locale.errorLoadFile + e);
 		console.error("nunuStudio: Error loading file", e);
 	}
 };

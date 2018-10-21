@@ -14,5 +14,6 @@ LocaleManager.register(
 		name: "English",
 		version: 1
 	},
-	unsavedChangesExit: "All unsaved changes to the project will be lost! Do you really wanna exit?"
+	unsavedChangesExit: "All unsaved changes to the project will be lost! Do you really wanna exit?",
+	errorLoadFile: "Error loading file "
 });
