@@ -27,12 +27,12 @@ function TexturePanel(parent, object)
 	}
 
 	//WrapS
-	this.form.addText("Wrap Hor.");
+	this.form.addText(Locale.wrapHor);
 	this.wrapS = new DropdownList(this.form);
 	this.wrapS.size.set(120, 18);
-	this.wrapS.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
+	this.wrapS.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
 	this.wrapS.addValue(Locale.repeat, THREE.RepeatWrapping);
-	this.wrapS.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
+	this.wrapS.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
 	this.wrapS.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "wrapS", self.wrapS.getValue()));
@@ -41,12 +41,12 @@ function TexturePanel(parent, object)
 	this.form.nextRow();
 
 	//WrapT
-	this.form.addText("Wrap Vert.");
+	this.form.addText(Locale.wrapVert);
 	this.wrapT = new DropdownList(this.form);
 	this.wrapT.size.set(120, 18);
-	this.wrapT.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
+	this.wrapT.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
 	this.wrapT.addValue(Locale.repeat, THREE.RepeatWrapping);
-	this.wrapT.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
+	this.wrapT.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
 	this.wrapT.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "wrapT", self.wrapT.getValue()));
@@ -139,7 +139,7 @@ function TexturePanel(parent, object)
 	this.form.nextRow();
 
 	//Premultiply Alpha
-	this.form.addText("Premul. Alpha");
+	this.form.addText(Locale.premulAlpha);
 	this.premultiplyAlpha = new CheckBox(this.form);
 	this.premultiplyAlpha.size.set(18, 18);
 	this.premultiplyAlpha.setOnChange(function()
