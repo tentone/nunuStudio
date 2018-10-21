@@ -41,7 +41,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Rotation
-	this.form.addText("Rotation");
+	this.form.addText(Locale.rotation);
 	this.rotation = new NumberBox(this.form);
 	this.rotation.size.set(60, 18);
 	this.rotation.setStep(0.01);

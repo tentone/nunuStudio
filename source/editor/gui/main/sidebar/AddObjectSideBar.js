@@ -26,7 +26,7 @@ function AddObjectSideBar(parent)
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cube";
 		Editor.addObject(model);
-	}, "Cube");
+	}, Locale.cube);
 
 	//Cylinder
 	addModel.addOption(Editor.filePath + "icons/models/cylinder.png", function()
@@ -53,7 +53,7 @@ function AddObjectSideBar(parent)
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "torus knot";
 		Editor.addObject(model);
-	}, "Torus Knot");
+	}, Locale.torusKnot);
 	
 	//Torus
 	addModel.addOption(Editor.filePath + "icons/models/torus.png", function()
@@ -62,7 +62,7 @@ function AddObjectSideBar(parent)
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "torus";
 		Editor.addObject(model);
-	}, "Torus");
+	}, Locale.torus);
 
 	//Cone
 	addModel.addOption(Editor.filePath + "icons/models/cone.png", function()
@@ -71,7 +71,7 @@ function AddObjectSideBar(parent)
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cone";
 		Editor.addObject(model);
-	}, "Cone");
+	}, Locale.cone);
 
 	//Text
 	addModel.addOption(Editor.filePath + "icons/models/text.png", function()

@@ -1006,7 +1006,7 @@ SceneEditor.prototype.setState = function(state)
 	if(state === SceneEditor.EDITING)
 	{
 		//Set run button text
-		Editor.gui.menuBar.run.setText("Run");
+		Editor.gui.menuBar.run.setText(Locale.run);
 		Editor.gui.menuBar.run.visible = true;
 		Editor.gui.menuBar.run.updateInterface();
 

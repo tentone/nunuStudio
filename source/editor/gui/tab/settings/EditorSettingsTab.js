@@ -326,7 +326,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Navigation
-	this.form.addText("Position");
+	this.form.addText(Locale.position);
 	this.cameraPreviewPosition = new DropdownList(this.form);
 	this.cameraPreviewPosition.size.set(150, 18);
 	this.cameraPreviewPosition.addValue("Bottom Right", Settings.BOTTOM_RIGHT);

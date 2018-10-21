@@ -142,7 +142,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.setAutoSize(false);
 
 	//Name
-	this.form.addText("Name");
+	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
@@ -154,7 +154,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Side
-	this.form.addText("Side");
+	this.form.addText(Locale.side);
 	this.side = new DropdownList(this.form);
 	this.side.position.set(100, 85);
 	this.side.size.set(150, 18);

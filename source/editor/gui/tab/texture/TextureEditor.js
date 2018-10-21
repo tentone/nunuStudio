@@ -57,7 +57,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.division.attachB(this.form);
 
 	//Name
-	this.form.addText("Name");
+	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
@@ -73,12 +73,12 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//WrapS
-	this.form.addText("Wrap Hor.");
+	this.form.addText(Locale.wrapHor);
 	this.wrapS = new DropdownList(this.form);
 	this.wrapS.size.set(120, 18);
-	this.wrapS.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
-	this.wrapS.addValue("Repeat", THREE.RepeatWrapping);
-	this.wrapS.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
+	this.wrapS.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
+	this.wrapS.addValue(Locale.repeat, THREE.RepeatWrapping);
+	this.wrapS.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
 	this.wrapS.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.texture, "wrapS", self.wrapS.getValue()));
@@ -88,12 +88,12 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//WrapT
-	this.form.addText("Wrap Vert.");
+	this.form.addText(Locale.wrapVert);
 	this.wrapT = new DropdownList(this.form);
 	this.wrapT.size.set(120, 18);
-	this.wrapT.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
-	this.wrapT.addValue("Repeat", THREE.RepeatWrapping);
-	this.wrapT.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
+	this.wrapT.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
+	this.wrapT.addValue(Locale.repeat, THREE.RepeatWrapping);
+	this.wrapT.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
 	this.wrapT.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.texture, "wrapT", self.wrapT.getValue()));
@@ -103,7 +103,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Repeat
-	this.form.addText("Repeat");
+	this.form.addText(Locale.repeat);
 	this.repeat = new VectorBox(this.form);
 	this.repeat.setType(VectorBox.VECTOR2);
 	this.repeat.size.set(120, 18);
@@ -118,7 +118,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Offset
-	this.form.addText("Offset");
+	this.form.addText(Locale.offset);
 	this.offset = new VectorBox(this.form);
 	this.offset.setType(VectorBox.VECTOR2);
 	this.offset.size.set(120, 18);
@@ -133,7 +133,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Center
-	this.form.addText("Center");
+	this.form.addText(Locale.center);
 	this.center = new VectorBox(this.form);
 	this.center.setType(VectorBox.VECTOR2);
 	this.center.size.set(120, 18);
@@ -148,7 +148,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Rotation
-	this.form.addText("Rotation");
+	this.form.addText(Locale.rotation);
 	this.rotation = new NumberBox(this.form);
 	this.rotation.size.set(60, 18);
 	this.rotation.setStep(0.1);
@@ -193,7 +193,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Premultiply Alpha
-	this.form.addText("Premul. Alpha");
+	this.form.addText(Locale.premulAlpha);
 	this.premultiplyAlpha = new CheckBox(this.form);
 	this.premultiplyAlpha.size.set(18, 18);
 	this.premultiplyAlpha.setOnChange(function()

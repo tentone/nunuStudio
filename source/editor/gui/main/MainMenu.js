@@ -796,7 +796,7 @@ function MainMenu(parent)
 
 	//Project
 	var projectMenu = new DropdownMenu(this);
-	projectMenu.setText("Project");
+	projectMenu.setText(Locale.project);
 	projectMenu.size.set(100, this.size.y);
 	projectMenu.position.set(220,0);
 
@@ -845,7 +845,7 @@ function MainMenu(parent)
 
 	//Run
 	this.run = new ButtonText(this);
-	this.run.setText("Run");
+	this.run.setText(Locale.run);
 	this.run.size.set(100, this.size.y);
 	this.run.position.set(420, 0);
 	this.run.updateInterface();

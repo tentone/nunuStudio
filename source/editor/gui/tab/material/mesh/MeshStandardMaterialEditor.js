@@ -209,7 +209,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map scale
-	this.form.addText("Scale");
+	this.form.addText(Locale.scale);
 	this.displacementScale = new NumberBox(this.form);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);

@@ -46,7 +46,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.setAutoSize(false);
 
 	//Name
-	this.form.addText("Name");
+	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
@@ -57,7 +57,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Side
-	this.form.addText("Side");
+	this.form.addText(Locale.side);
 	this.side = new DropdownList(this.form);
 	this.side.size.set(100, 18);
 	this.side.addValue("Front", THREE.FrontSide);
@@ -191,10 +191,10 @@ function MaterialEditor(parent, closeable, container, index)
 
 MaterialEditor.geometries = [
 	[Locale.sphere, new THREE.SphereBufferGeometry(1, 40, 40)],
-	["Torus", new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64)],
-	["Cube", new THREE.BoxBufferGeometry(1, 1, 1, 1, 1, 1)],
-	["Torus Knot", new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],
-	["Cone", new THREE.ConeBufferGeometry(1, 2, 32)]
+	[Locale.torus, new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64)],
+	[Locale.cube, new THREE.BoxBufferGeometry(1, 1, 1, 1, 1, 1)],
+	[Locale.torusKnot, new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],
+	[Locale.cone, new THREE.ConeBufferGeometry(1, 2, 32)]
 ];
 
 MaterialEditor.prototype = Object.create(TabElement.prototype);

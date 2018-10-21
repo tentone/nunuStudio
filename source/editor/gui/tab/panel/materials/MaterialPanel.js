@@ -7,7 +7,7 @@ function MaterialPanel(parent, object)
 	var self = this;
 
 	//Name
-	this.form.addText("Name");
+	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
@@ -21,7 +21,7 @@ function MaterialPanel(parent, object)
 	//UUID
 	if(Editor.settings.general.showUUID)
 	{
-		this.form.addText("UUID");
+		this.form.addText(Locale.uuid);
 		this.uuid = this.form.addText("");
 		this.form.nextRow();
 	}
@@ -35,7 +35,7 @@ function MaterialPanel(parent, object)
 	}
 
 	//Side
-	this.form.addText("Side");
+	this.form.addText(Locale.side);
 	this.side = new DropdownList(this.form);
 	this.side.position.set(100, 85);
 	this.side.size.set(100, 18);

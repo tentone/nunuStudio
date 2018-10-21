@@ -7,7 +7,7 @@ function ObjectPanel(parent, object)
 	var self = this;
 
 	//Name
-	this.form.addText("Name");
+	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
@@ -21,7 +21,7 @@ function ObjectPanel(parent, object)
 	//UUID
 	if(Editor.settings.general.showUUID)
 	{
-		this.form.addText("UUID");
+		this.form.addText(Locale.uuid);
 		this.uuid = this.form.addText("");
 		this.form.nextRow();
 	}
@@ -35,7 +35,7 @@ function ObjectPanel(parent, object)
 	}
 
 	//Position
-	this.form.addText("Position");
+	this.form.addText(Locale.position);
 	this.position = new VectorBox(this.form);
 	this.position.size.set(190, 18);
 	this.position.setStep(0.01);
@@ -54,7 +54,7 @@ function ObjectPanel(parent, object)
 	this.form.add(this.position);
 	this.form.nextRow();
 
-	var text = this.form.addText("Scale");
+	var text = this.form.addText(Locale.scale);
 
 	//Scale lock
 	this.scaleRatioLock = new CheckBox(text);
@@ -107,7 +107,7 @@ function ObjectPanel(parent, object)
 	this.form.nextRow();
 
 	//Rotation
-	this.form.addText("Rotation");
+	this.form.addText(Locale.rotation);
 	this.rotation = new VectorBox(this.form);
 	this.rotation.size.set(190, 18);
 	this.rotation.setStep(0.01);

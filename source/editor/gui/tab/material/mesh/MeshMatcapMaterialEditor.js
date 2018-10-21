@@ -86,7 +86,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Bump scale
-	this.form.addText("Scale");
+	this.form.addText(Locale.scale);
 	this.bumpScale = new Slider(this.form);
 	this.bumpScale.size.set(160, 18);
 	this.bumpScale.setRange(0, 1);
@@ -149,7 +149,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map scale
-	this.form.addText("Scale");
+	this.form.addText(Locale.scale);
 	this.displacementScale = new NumberBox(this.form);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);

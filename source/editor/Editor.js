@@ -877,7 +877,7 @@ Editor.renameObject = function(object)
 
 	if(!object.locked)
 	{
-		var name = prompt("Rename object", object.name);
+		var name = Editor.prompt("Rename object", object.name);
 		if(name !== null && name !== "")
 		{
 			Editor.addAction(new ChangeAction(object, "name", name));
@@ -2235,7 +2235,7 @@ Editor.loadModel = function(file, parent)
 		else
 		{
 			modal.destroy();
-			Editor.alert("Unknown file format!");
+			Editor.alert(Locale.unknownFileFormat);
 			console.warn("nunuStudio: Unknown file format");
 		}
 	}
@@ -2397,13 +2397,13 @@ Editor.updateNunu = function(silent)
 			if(parseInt(timestamp) > parseInt(Editor.TIMESTAMP))
 			{
 				FileSystem.writeFile("nunu.min.js", data);
-				Editor.alert("nunuStudio updated\nRestart the editor");
+				Editor.alert(Locale.updatedRestart);
 			}
 			else
 			{
 				if(!silent)
 				{
-					Editor.alert("nunuStudio already up to date!");
+					Editor.alert(Locale.alreadyUpdated);
 				}
 			}
 		});
@@ -2412,7 +2412,7 @@ Editor.updateNunu = function(silent)
 	{
 		if(!silent)
 		{
-			Editor.alert("Failed to download update files!");
+			Editor.alert(Locale.updateFailed);
 		}
 	}
 };

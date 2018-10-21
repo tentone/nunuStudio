@@ -54,7 +54,7 @@ function AnimationOptions(parent, editor, animation)
 	this.loop.position.set(260, 5);
 	this.loop.size.set(90, 18);
 	this.loop.addValue("Once", THREE.LoopOnce);
-	this.loop.addValue("Repeat", THREE.LoopRepeat);
+	this.loop.addValue(Locale.repeat, THREE.LoopRepeat);
 	this.loop.addValue("PingPong", THREE.LoopPingPong);
 	this.loop.updateInterface();
 	this.loop.setOnChange(function()

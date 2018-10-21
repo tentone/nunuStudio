@@ -90,7 +90,7 @@ function OrthographicCameraPanel(parent, object)
 	this.form.nextRow();
 
 	//Offset
-	this.form.addText("Position");
+	this.form.addText(Locale.position);
 	this.offset = new VectorBox(this.form);
 	this.offset.setType(VectorBox.VECTOR2);
 	this.offset.setStep(0.05);

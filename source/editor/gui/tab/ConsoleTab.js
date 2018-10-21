@@ -241,11 +241,11 @@ ConsoleTab.createMessage = function(object)
 		type.insertCell(0).appendChild(document.createTextNode("Image"));
 
 		var name = table.insertRow(1);
-		name.insertCell(0).appendChild(document.createTextNode("Name"));
+		name.insertCell(0).appendChild(document.createTextNode(Locale.name));
 		name.insertCell(1).appendChild(document.createTextNode(object.name));
 
 		var uuid = table.insertRow(2);
-		uuid.insertCell(0).appendChild(document.createTextNode("UUID"));
+		uuid.insertCell(0).appendChild(document.createTextNode(Locale.uuid));
 		uuid.insertCell(1).appendChild(document.createTextNode(object.uuid));
 
 		var format = table.insertRow(3);
@@ -272,11 +272,11 @@ ConsoleTab.createMessage = function(object)
 		type.insertCell(1).appendChild(document.createTextNode(object.type;
 
 		var name = table.insertRow(1);
-		name.insertCell(0).appendChild(document.createTextNode("Name";
+		name.insertCell(0).appendChild(document.createTextNode(Locale.name;
 		name.insertCell(1).appendChild(document.createTextNode(object.name;
 
 		var uuid = table.insertRow(2);
-		uuid.insertCell(0).appendChild(document.createTextNode("UUID";
+		uuid.insertCell(0).appendChild(document.createTextNode(Locale.uuid;
 		uuid.insertCell(1).appendChild(document.createTextNode(object.uuid;
 
 		log.appendChild(table);
@@ -295,11 +295,11 @@ ConsoleTab.createMessage = function(object)
 		type.insertCell(1).appendChild(document.createTextNode(object.type));
 
 		var name = table.insertRow(1);
-		name.insertCell(0).appendChild(document.createTextNode("Name"));
+		name.insertCell(0).appendChild(document.createTextNode(Locale.name));
 		name.insertCell(1).appendChild(document.createTextNode(object.name));
 
 		var uuid = table.insertRow(2);
-		uuid.insertCell(0).appendChild(document.createTextNode("UUID"));
+		uuid.insertCell(0).appendChild(document.createTextNode(Locale.uuid));
 		uuid.insertCell(1).appendChild(document.createTextNode(object.uuid));
 
 		log.appendChild(table);

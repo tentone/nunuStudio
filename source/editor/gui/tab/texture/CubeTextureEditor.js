@@ -45,7 +45,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.division.attachB(this.form);
 
 	//Name
-	this.form.addText("Name");
+	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
@@ -142,7 +142,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		self.updateMode();
 		Editor.updateObjectsViewsGUI();
 	});
-	this.mode.addValue("Cube", CubeTexture.CUBE);
+	this.mode.addValue(Locale.cube, CubeTexture.CUBE);
 	this.mode.addValue("Cross", CubeTexture.CROSS);
 	this.mode.addValue("Equirectangular", CubeTexture.EQUIRECTANGULAR);
 	this.form.add(this.mode);

@@ -46,7 +46,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.main.attachB(this.form);
 
 	//Name
-	this.form.addText("Name");
+	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
@@ -184,7 +184,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Position
-	this.form.addText("Position");
+	this.form.addText(Locale.position);
 	this.form.nextRow();
 
 	this.form.addText("Initial");
@@ -295,7 +295,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Scale
-	this.form.addText("Scale");
+	this.form.addText(Locale.scale);
 	this.form.addText("Min", true);
 	this.scaleMin = new NumberBox(this.form);
 	this.scaleMin.size.set(50, 18);
@@ -335,7 +335,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Rotation
-	this.form.addText("Rotation");
+	this.form.addText(Locale.rotation);
 	this.form.addText("Min", true);
 	this.angleMin = new NumberBox(this.form);
 	this.angleMin.size.set(50, 18);

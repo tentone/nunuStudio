@@ -16,7 +16,7 @@ function DotScreenPassNode(parent)
 	this.add(this.angle);
 	this.nextRow();
 
-	this.addText("Scale");
+	this.addText(Locale.scale);
 	this.scale = new NumberBox(this);
 	this.scale.size.set(60, 18);
 	this.scale.setOnChange(function()
@@ -26,7 +26,7 @@ function DotScreenPassNode(parent)
 	this.add(this.scale);
 	this.nextRow();
 
-	this.addText("Center");
+	this.addText(Locale.center);
 	this.center = new VectorBox(this);
 	this.center.setType(VectorBox.VECTOR2);
 	this.center.size.set(120, 18);
