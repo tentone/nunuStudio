@@ -546,12 +546,12 @@ function MainMenu(parent)
 	editMenu.size.set(100, this.size.y);
 	editMenu.position.set(120,0);
 
-	editMenu.addOption("Undo", function()
+	editMenu.addOption(Locale.undo, function()
 	{
 		Editor.undo();
 	}, Editor.filePath + "icons/misc/undo.png");
 
-	editMenu.addOption("Redo", function()
+	editMenu.addOption(Locale.redo, function()
 	{
 		Editor.redo();
 	}, Editor.filePath + "icons/misc/redo.png");
@@ -575,7 +575,7 @@ function MainMenu(parent)
 	{
 		if(Editor.hasObjectSelected())
 		{
-			var del = Editor.confirm("Delete objects?");
+			var del = Editor.confirm(Locale.deleteObjects);
 			if(del)
 			{
 				Editor.deleteObject();

@@ -507,7 +507,7 @@ Editor.initialize = function()
 	//Check WebGL Support
 	if(!Nunu.webglAvailable())
 	{
-		Editor.alert("WebGL is not supported or is disabled!\nnunuStudio cannot run!");
+		Editor.alert(Locale.webglNotSupported);
 		Editor.exit();
 	}
 	
@@ -600,7 +600,7 @@ Editor.initialize = function()
 			//Project file
 			if(extension === "isp" || extension === "nsp")
 			{
-				if(confirm("All unsaved changes to the project will be lost! Load file?"))
+				if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.loadProject))
 				{
 					Editor.loadProgram(file, extension === "nsp");
 					Editor.resetEditor();
@@ -746,7 +746,7 @@ Editor.initialize = function()
 
 			if(Editor.hasObjectSelected())
 			{
-				var del = Editor.confirm("Delete objects?");
+				var del = Editor.confirm(Locale.deleteObjects);
 				if(del)
 				{
 					Editor.deleteObject();
@@ -896,13 +896,8 @@ Editor.deleteObject = function(object)
 	//Delect selection
 	for(var i = 0; i < selected.length; i++)
 	{
-		//Avoid deleting program
-		if(selected[i] instanceof Program)
-		{
-			continue;
-		}
 		//Object3D
-		else if(selected[i].isObject3D && !selected[i].locked)
+		if(selected[i].isObject3D && !selected[i].locked && !(selected[i] instanceof Program))
 		{
 			actions.push(new RemovedAction(selected[i]));
 		}
@@ -1014,7 +1009,7 @@ Editor.redo = function()
 	}
 	else
 	{
-		Editor.alert("Nothing to redo!");
+		Editor.alert(Locale.nothingToRedo);
 	}
 };
 
@@ -1027,7 +1022,7 @@ Editor.undo = function()
 	}
 	else
 	{
-		Editor.alert("Not possible to undo any further");
+		Editor.alert(Locale.nothingToUndo);
 	}
 };
 
@@ -1196,12 +1191,12 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		
 		if(suppressMessage !== true)
 		{
-			Editor.alert("Project saved");
+			Editor.alert(Locale.projectSaved);
 		}
 	}
 	catch(e)
 	{
-		Editor.alert("Error saving file\n(" + e + ")");
+		Editor.alert(Locale.errorSavingFile + "\n(" + e + ")");
 		console.error("nunuStudio: Error saving file", e);
 	}
 };
@@ -1266,11 +1261,11 @@ Editor.loadProgram = function(file, binary)
 			Editor.setOpenFile(file);
 			Editor.setProgram(program);
 
-			Editor.alert("Project loaded");
+			Editor.alert(Locale.projectLoaded);
 		}
 		catch(e)
 		{
-			Editor.alert(Locale.errorLoadFile + "\n(" + e + ")");
+			Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 			console.error("nunuStudio: Error loading file", e);
 		}
 	};
@@ -1544,7 +1539,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(f)
 				{
-					Editor.alert(Locale.errorLoadFile + f);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + f + ")");
 					console.error("nunuStudio: Error loading file", f);
 				}
 			}
@@ -1568,7 +1563,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1591,7 +1586,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1613,7 +1608,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1634,7 +1629,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1655,7 +1650,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1677,7 +1672,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1707,7 +1702,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1732,7 +1727,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1754,7 +1749,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1790,7 +1785,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1820,7 +1815,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1860,7 +1855,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1887,7 +1882,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1913,7 +1908,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1940,7 +1935,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -1967,7 +1962,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2000,7 +1995,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2087,7 +2082,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2110,7 +2105,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2151,7 +2146,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2176,7 +2171,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2226,7 +2221,7 @@ Editor.loadModel = function(file, parent)
 				}
 				catch(e)
 				{
-					Editor.alert(Locale.errorLoadFile + e);
+					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 					console.error("nunuStudio: Error loading file", e);
 				}
 			};
@@ -2242,7 +2237,7 @@ Editor.loadModel = function(file, parent)
 	catch(e)
 	{
 		modal.destroy();
-		Editor.alert(Locale.errorLoadFile + e);
+		Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 		console.error("nunuStudio: Error loading file", e);
 	}
 };

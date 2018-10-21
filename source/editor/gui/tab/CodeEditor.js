@@ -81,11 +81,11 @@ function CodeEditor(parent, closeable, container, index)
 		{
 			self.code.execCommand("selectAll");
 		});
-		context.addOption("Undo", function()
+		context.addOption(Locale.undo, function()
 		{
 			self.code.execCommand("undo");
 		});
-		context.addOption("Redo", function()
+		context.addOption(Locale.redo, function()
 		{
 			self.code.execCommand("redo");
 		});

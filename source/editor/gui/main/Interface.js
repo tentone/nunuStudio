@@ -88,7 +88,7 @@ Interface.prototype.saveProgram = function()
 //Open to load program window
 Interface.prototype.loadProgram = function()
 {
-	if(Editor.confirm("All unsaved changes to the project will be lost! Load file?"))
+	if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.loadProject))
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -105,7 +105,7 @@ Interface.prototype.loadProgram = function()
 //Create new program
 Interface.prototype.newProgram = function()
 {
-	if(Editor.confirm("All unsaved changes to the project will be lost! Create new File?"))
+	if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.createProject))
 	{
 		Editor.createNewProgram();
 	}

@@ -23,6 +23,8 @@ LocaleManager.register(
 	duplicate: "Duplicate",
 	rename: "Rename",
 	select: "Select",
+	redo: "Redo",
+	undo: "Undo",
 
 	//Context menu
 	computeNormals: "Compute normals",
@@ -69,13 +71,27 @@ LocaleManager.register(
 	project: "Project",
 	run: "Run",
 
-	//Warnings
+	//Messages
+	projectSaved: "Project saved.",
+	projectLoaded: "Project loaded",
+
+	//Confirm
+	deleteObjects: "Delete objects?",
+	loadProjectChangesLost: "All unsaved changes to the project will be lost.",
+	loadProject: "Load project?",
+	createProject: "Create new project?",
+
+	//Warnings\
 	unsavedChangesExit: "All unsaved changes to the project will be lost! Do you really wanna exit?",
 	cannotAddItself: "Cannot add object into itself.",
 	cannotAddToChildren: "Cannot add object into is children.",
+	nothingToRedo: "Nothing to redo!",
+	nothingToUndo: "Not possible to undo any further",
 
 	//Errors
-	errorLoadFile: "Error loading file ",
+	webglNotSupported: "WebGL is not supported or is disabled!\nnunuStudio cannot run!",
+	errorLoadingFile: "Error loading file",
+	errorSavingFile: "Error saving file",
 	unknownFileFormat: "Unknown file format.",
 
 	//Update
