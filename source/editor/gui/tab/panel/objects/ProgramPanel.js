@@ -112,7 +112,7 @@ function ProgramPanel(parent, object)
 
 	//Shadows
 	this.shadows = new CheckBox(this.form);
-	this.form.addText("Shadows");
+	this.form.addText(Locale.shadows);
 	this.shadows.size.set(18, 18);
 	this.shadows.setOnChange(function()
 	{

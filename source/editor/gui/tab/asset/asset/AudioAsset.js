@@ -47,7 +47,7 @@ function AudioAsset(parent)
 			}
 		});
 
-		context.addOption("Rename", function()
+		context.addOption(Locale.rename, function()
 		{
 			if(self.asset !== null)
 			{
@@ -76,7 +76,7 @@ function AudioAsset(parent)
 			}
 		});
 		
-		context.addOption("Delete", function()
+		context.addOption(Locale.delete, function()
 		{
 			if(self.asset !== null && confirm("Delete audio?"))
 			{
@@ -84,7 +84,7 @@ function AudioAsset(parent)
 			}
 		});
 
-		context.addOption("Copy", function()
+		context.addOption(Locale.copy, function()
 		{
 			if(self.asset !== null)
 			{

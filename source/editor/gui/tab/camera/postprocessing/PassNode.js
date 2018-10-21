@@ -66,7 +66,7 @@ function PassNode(parent, name)
 	//Delete
 	this.delete = new ButtonText(this);
 	this.delete.size.set(70, 18);
-	this.delete.setText("Delete");
+	this.delete.setText(Locale.delete);
 	this.delete.setOnClick(function()
 	{
 		self.composer.removePass(self.pass);

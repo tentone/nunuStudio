@@ -28,7 +28,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 		context.size.set(150, 20);
 		context.position.set(event.clientX, event.clientY);
 		
-		context.addOption("Delete", function()
+		context.addOption(Locale.delete, function()
 		{
 			if(!Editor.confirm("Delete keyframe?"))
 			{

@@ -40,7 +40,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 			self.trackTimeline.updateKeyframes();
 		});
 
-		context.addOption("Delete", function()
+		context.addOption(Locale.delete, function()
 		{
 			if(!Editor.confirm("Delete track?"))
 			{

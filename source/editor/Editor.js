@@ -1094,7 +1094,11 @@ Editor.updateSelectionGUI = function()
 	Editor.gui.tab.updateSelection();
 };
 
-//Reset editing flags
+/**
+ * Reset the editor state.
+ *
+ * @method resetEditor
+ */
 Editor.resetEditor = function()
 {
 	Editor.clearSelection();
@@ -1105,16 +1109,58 @@ Editor.resetEditor = function()
 	Editor.gui.treeView.updateObjectsView();
 };
 
-//Craete new Program
+/**
+ * Create a program and set to the editor.
+ * 
+ * @method createNewProgram
+ */
 Editor.createNewProgram = function()
 {
-	Editor.createDefaultResouces();
-
 	var program = new Program();
-	program.addDefaultScene(Editor.defaultMaterial);
 	
+	Editor.createDefaultResouces();
 	Editor.setProgram(program);
+	Editor.addDefaultScene(Editor.defaultMaterial);
 	Editor.setOpenFile(null);
+};
+
+/**
+ * Create a scene using a default template.
+ * 
+ * This is the scene used when creating a new program or scene inside the editor.
+ * 
+ * @method addDefaultScene
+ * @param {Material} material Default material used by objects, if empty a new material is created
+ */
+Editor.addDefaultScene = function(material)
+{
+	if(material === undefined)
+	{
+		material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
+		material.name = "default";
+	}
+
+	//Create new scene
+	var scene = new Scene();
+
+	//Sky
+	var sky = new Sky();
+	sky.autoUpdate = false;
+	scene.add(sky);
+
+	//Box
+	var model = new Mesh(new THREE.BoxBufferGeometry(1, 1, 1), material);
+	model.name = "box";
+	scene.add(model);
+
+	//Floor
+	model = new Mesh(new THREE.BoxBufferGeometry(20, 1, 20), material);
+ 	model.position.set(0, -1.0, 0);
+	model.name = "ground";
+	scene.add(model);
+
+	//Add scene to program
+	Editor.addObject(scene, Editor.program);
 };
 
 //Save program to file
@@ -2324,7 +2370,13 @@ Editor.prompt = function(message, defaultValue)
 	return window.prompt(message, defaultValue);	
 };
 
-//Update nunuStudio editor version using build from github repo
+/**
+ * Try to update nunuStudio editor version using build from github repo.
+ *
+ * The version timestamp is compared to the local timestamp.
+ *
+ * @method updateNunu
+ */
 Editor.updateNunu = function(silent)
 {
 	if(silent === undefined)
@@ -2365,7 +2417,11 @@ Editor.updateNunu = function(silent)
 	}
 };
 
-//Exit the editor
+/**
+ * Exit the editor and close all windows.
+ *
+ * @method exit.
+ */
 Editor.exit = function()
 {
 	if(Nunu.runningOnDesktop())

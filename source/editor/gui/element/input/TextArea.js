@@ -20,18 +20,18 @@ function TextArea(parent)
 		var context = new ContextMenu(DocumentBody);
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
-		context.addOption("Copy", function()
+		context.addOption(Locale.copy, function()
 		{
 			var value = self.element.value;
 			Editor.clipboard.set(value.slice(self.element.selectionStart, self.element.selectionEnd), "text");
 		});
-		context.addOption("Cut", function()
+		context.addOption(Locale.cut, function()
 		{
 			var value = self.element.value;
 			Editor.clipboard.set(value.slice(self.element.selectionStart, self.element.selectionEnd), "text");
 			self.element.value = value.slice(0, self.element.selectionStart) + value.slice(self.element.selectionEnd, value.length);
 		});
-		context.addOption("Paste", function()
+		context.addOption(Locale.paste, function()
 		{
 			var value = self.element.value;
 			var paste = Editor.clipboard.get("text");

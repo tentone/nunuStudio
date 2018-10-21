@@ -35,7 +35,7 @@ function AddObjectSideBar(parent)
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cylinder";
 		Editor.addObject(model);
-	}, "Cylinder");
+	}, Locale.cylinder);
 
 	//Sphere
 	addModel.addOption(Editor.filePath + "icons/models/sphere.png", function()
@@ -44,7 +44,7 @@ function AddObjectSideBar(parent)
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "sphere";
 		Editor.addObject(model);
-	}, "Sphere");
+	}, Locale.sphere);
 
 	//Torus Knot
 	addModel.addOption(Editor.filePath + "icons/models/torusknot.png", function()
@@ -344,7 +344,7 @@ function AddObjectSideBar(parent)
 		obj.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
 		obj.name = "box";
 		Editor.addObject(obj);
-	}, "Box");
+	}, Locale.box);
 
 	//Physics sphere
 	addPhysics.addOption(Editor.filePath + "icons/models/sphere.png", function()
@@ -353,7 +353,7 @@ function AddObjectSideBar(parent)
 		obj.body.addShape(new CANNON.Sphere(1.0));
 		obj.name = "sphere";
 		Editor.addObject(obj);
-	}, "Sphere");
+	}, Locale.sphere);
 
 	//Physics Cylinder
 	addPhysics.addOption(Editor.filePath + "icons/models/cylinder.png", function()
@@ -362,7 +362,7 @@ function AddObjectSideBar(parent)
 		obj.body.addShape(new CANNON.Cylinder(1.0, 1.0, 2.0, 8));
 		obj.name = "cylinder";
 		Editor.addObject(obj);
-	}, "Cylinder");
+	}, Locale.cylinder);
 
 	//Physics Plane
 	addPhysics.addOption(Editor.filePath + "icons/models/plane.png", function()

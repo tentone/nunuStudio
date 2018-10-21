@@ -20,7 +20,7 @@ function AnimationButton(parent, editor, animation)
 		var context = new ContextMenu(DocumentBody);
 		context.size.set(150, 20);
 		context.position.set(event.clientX, event.clientY);
-		context.addOption("Rename", function()
+		context.addOption(Locale.rename, function()
 		{
 			var value = Editor.prompt("Rename animation", animation.name);
 			if(value !== null && value !== "")
@@ -100,7 +100,7 @@ function AnimationButton(parent, editor, animation)
 			self.editor.createTimeline();
 			self.editor.createAnimationMixer();
 		});
-		context.addOption("Delete", function()
+		context.addOption(Locale.delete, function()
 		{
 			if(!Editor.confirm("Delete animation?"))
 			{

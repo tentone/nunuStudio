@@ -42,8 +42,8 @@ function PhysicsPanel(parent, object)
 	this.form.addText("Type");
 	this.bodyType = new DropdownList(this.form);
 	this.bodyType.size.set(100, 18);
-	this.bodyType.addValue("Static", CANNON.Body.STATIC);
-	this.bodyType.addValue("Dynamic", CANNON.Body.DYNAMIC);
+	this.bodyType.addValue(Locale.static, CANNON.Body.STATIC);
+	this.bodyType.addValue(Locale.dynamic, CANNON.Body.DYNAMIC);
 	this.bodyType.addValue("Kinematic", CANNON.Body.KINEMATIC);
 	this.bodyType.setOnChange(function()
 	{

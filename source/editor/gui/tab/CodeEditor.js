@@ -37,7 +37,7 @@ function CodeEditor(parent, closeable, container, index)
 		context.position.set(event.clientX, event.clientY);
 		
 		var refactor = context.addMenu("Refactor");
-		refactor.addOption("Rename", function()
+		refactor.addOption(Locale.rename, function()
 		{
 			self.server.rename(self.code);
 		});
@@ -52,7 +52,7 @@ function CodeEditor(parent, closeable, container, index)
 			self.server.jumpToDef(self.code);
 		});
 
-		context.addOption("Copy", function()
+		context.addOption(Locale.copy, function()
 		{
 			var text = self.code.getSelection();
 			if(text !== "")
@@ -60,7 +60,7 @@ function CodeEditor(parent, closeable, container, index)
 				Editor.clipboard.set(text, "text");
 			}
 		});
-		context.addOption("Cut", function()
+		context.addOption(Locale.cut, function()
 		{
 			var text = self.code.getSelection();
 			if(text !== "")
@@ -69,7 +69,7 @@ function CodeEditor(parent, closeable, container, index)
 				self.code.replaceSelection("");
 			}
 		});
-		context.addOption("Paste", function()
+		context.addOption(Locale.paste, function()
 		{
 			self.code.replaceSelection(Editor.clipboard.get("text"));
 		});

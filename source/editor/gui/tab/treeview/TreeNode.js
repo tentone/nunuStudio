@@ -154,38 +154,37 @@ function TreeNode(container)
 			//Open editor
 			if(isScene)
 			{
-				context.addOption("Scene editor", openSceneTab);
+				context.addOption(Locale.sceneEditor, openSceneTab);
 			}
 			else if(isProgram)
 			{
-				context.addOption("Create scene", function()
+				context.addOption(Locale.createScene, function()
 				{
-					Editor.program.addDefaultScene();
-					Editor.updateObjectsViewsGUI();
+					Editor.addDefaultScene();
 				});			
 			}
 			else if(self.object.isObject3D === true)
 			{
-				context.addOption("Object editor", openSceneTab);
+				context.addOption(Locale.objectEditor, openSceneTab);
 
 				if(self.object instanceof Script)
 				{
-					context.addOption("Script editor", openScriptTab);
+					context.addOption(Locale.scriptEditor, openScriptTab);
 				}
 				else if(self.object instanceof ParticleEmitter)
 				{
-					context.addOption("Particle editor", openParticleTab);
+					context.addOption(Locale.particleEditor, openParticleTab);
 				}
 			}
 	
 			//Recalculate Origin
-			context.addOption("Recenter geometries", function()
+			context.addOption(Locale.recenterGeometries, function()
 			{
 				ObjectUtils.recalculateGeometryOrigin(self.object);
 			});
 
 			//Rename
-			context.addOption("Rename", function()
+			context.addOption(Locale.rename, function()
 			{
 				Editor.renameObject(self.object);
 			});
@@ -193,7 +192,7 @@ function TreeNode(container)
 			//Delete
 			if(!isProgram)
 			{
-				context.addOption("Delete", function()
+				context.addOption(Locale.delete, function()
 				{
 					Editor.deleteObject(self.object);
 				});
@@ -206,7 +205,7 @@ function TreeNode(container)
 				if(self.object.geometry !== undefined)
 				{
 					//Generate normals for the attached geometry
-					context.addOption("Compute normals", function()
+					context.addOption(Locale.computeNormals, function()
 					{
 						var geometry = self.object.geometry.clone();
 						geometry.computeVertexNormals();
@@ -214,7 +213,7 @@ function TreeNode(container)
 					});
 
 					//Apply transformation to geometry
-					context.addOption("Apply transformation", function()
+					context.addOption(Locale.applyTransformation, function()
 					{
 						var geometry = self.object.geometry.clone();
 						geometry.applyMatrix(self.object.matrixWorld);
@@ -248,22 +247,22 @@ function TreeNode(container)
 
 				var physics = context.addMenu("Add physics");
 
-				physics.addOption("Box", function()
+				physics.addOption(Locale.box, function()
 				{
 					createPhysics(self.object, PhysicsGenerator.Type.BOX);
 				});
 
-				physics.addOption("Sphere", function()
+				physics.addOption(Locale.sphere, function()
 				{
 					createPhysics(self.object, PhysicsGenerator.Type.SPHERE);
 				});
 
-				physics.addOption("Cylinder", function()
+				physics.addOption(Locale.cylinder, function()
 				{
 					createPhysics(self.object, PhysicsGenerator.Type.CYLINDER);
 				});
 	
-				physics.addOption("ConvexHull", function()
+				physics.addOption(Locale.convexHull, function()
 				{
 					createPhysics(self.object, PhysicsGenerator.Type.HULL);
 				});
@@ -289,26 +288,26 @@ function TreeNode(container)
 
 			if(!isScene && !isProgram)
 			{
-				var autoUpdate = context.addMenu("Static");
+				var autoUpdate = context.addMenu(Locale.static);
 
 				//Set object and children to static mode
-				autoUpdate.addOption("Static", function()
+				autoUpdate.addOption(Locale.static, function()
 				{
 					var actions = setObjectAttribute(self.object, "matrixAutoUpdate", false);
 					Editor.addAction(new ActionBundle(actions));
 				});
 
 				//Set object and children to dynamic mode
-				autoUpdate.addOption("Dynamic", function()
+				autoUpdate.addOption(Locale.dynamic, function()
 				{
 					var actions = setObjectAttribute(self.object, "matrixAutoUpdate", true);
 					Editor.addAction(new ActionBundle(actions));
 				});
 
-				var shadow = context.addMenu("Shadows");
+				var shadow = context.addMenu(Locale.shadows);
 
 				//Set object and children shadow casting mode
-				shadow.addOption("Enable", function()
+				shadow.addOption(Locale.enable, function()
 				{
 					var cast = setObjectAttribute(self.object, "castShadow", true);
 					var receive = setObjectAttribute(self.object, "receiveShadow", true);
@@ -316,7 +315,7 @@ function TreeNode(container)
 				});
 
 				//Set object and children shadow casting mode
-				shadow.addOption("Disable", function()
+				shadow.addOption(Locale.disable, function()
 				{
 					var cast = setObjectAttribute(self.object, "castShadow", false);
 					var receive = setObjectAttribute(self.object, "receiveShadow", false);
@@ -324,7 +323,7 @@ function TreeNode(container)
 				});
 
 				//Duplicate object
-				context.addOption("Duplicate", function()
+				context.addOption(Locale.duplicate, function()
 				{
 					var object = new ObjectLoader().parse(self.object.toJSON());
 					object.traverse(function(child)
@@ -335,13 +334,13 @@ function TreeNode(container)
 				});
 
 				//Copy object
-				context.addOption("Copy", function()
+				context.addOption(Locale.copy, function()
 				{
 					Editor.copyObject(self.object);
 				});
 
 				//Cut object
-				context.addOption("Cut", function()
+				context.addOption(Locale.cut, function()
 				{
 					Editor.cutObject(self.object);
 				});
@@ -350,7 +349,7 @@ function TreeNode(container)
 			if(!isProgram)
 			{
 				//Paste object form clipboard
-				context.addOption("Paste", function()
+				context.addOption(Locale.paste, function()
 				{
 					Editor.pasteObject(self.object);
 				});
@@ -418,12 +417,12 @@ function TreeNode(container)
 		{
 			if(object === self.object)
 			{
-				Editor.alert("Cannot add object into itself.");
+				Editor.alert(Locale.cannotAddItself);
 				return;
 			}
 			else if(object.contains(self.object))
 			{
-				Editor.alert("Cannot add object into is children.");
+				Editor.alert(Locale.cannotAddToChildren);
 				return;
 			}
 			else
@@ -755,11 +754,6 @@ TreeNode.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
-
-		this.labelText.data = this.object.name;
-
 		var offset = this.level * 20;
 
 		//Arrow
@@ -775,12 +769,15 @@ TreeNode.prototype.updateInterface = function()
 
 		this.icon.style.left = (25 + offset) + "px";
 		this.label.style.left = (45 + offset) + "px";
+		this.labelText.data = this.object.name;
 
-		//Update childs
 		for(var i = 0; i < this.children.length; i++)
 		{
 			this.children[i].updateInterface();
 		}
+
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
 	}
 	else
 	{

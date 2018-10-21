@@ -190,7 +190,7 @@ function MaterialEditor(parent, closeable, container, index)
 }
 
 MaterialEditor.geometries = [
-	["Sphere", new THREE.SphereBufferGeometry(1, 40, 40)],
+	[Locale.sphere, new THREE.SphereBufferGeometry(1, 40, 40)],
 	["Torus", new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64)],
 	["Cube", new THREE.BoxBufferGeometry(1, 1, 1, 1, 1, 1)],
 	["Torus Knot", new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],

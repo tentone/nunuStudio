@@ -44,7 +44,7 @@ function PointLightPanel(parent, object)
 	this.form.nextRow();
 
 	//Shadow map
-	this.form.addText("Shadows");
+	this.form.addText(Locale.shadows);
 	this.form.nextRow();
 
 	//Cast shadow

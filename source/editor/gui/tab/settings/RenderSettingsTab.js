@@ -47,7 +47,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Shadows
-	this.form.addText("Shadows");
+	this.form.addText(Locale.shadows);
 	this.shadows = new CheckBox(this.form);
 	this.shadows.size.set(18, 18);
 	this.shadows.setOnChange(function()

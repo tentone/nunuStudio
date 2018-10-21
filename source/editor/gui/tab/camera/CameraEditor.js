@@ -81,7 +81,7 @@ function CameraEditor(parent, closeable, container, index)
 	addRenderPassButton("Dot Screen", DotScreenPass);
 	addRenderPassButton("Sobel", SobelPass);
 	self.form.nextRow();
-	addRenderPassButton("Copy", CopyPass);
+	addRenderPassButton(Locale.copy, CopyPass);
 	self.form.nextRow();
 
 	this.postNodes = new TableForm(this.form);

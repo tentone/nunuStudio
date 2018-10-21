@@ -24,12 +24,12 @@ function FontAsset(parent)
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
 		
-		context.addOption("Rename", function()
+		context.addOption(Locale.rename, function()
 		{
 			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename font", self.asset.name)));
 		});
 		
-		context.addOption("Delete", function()
+		context.addOption(Locale.delete, function()
 		{
 			Editor.program.removeFont(self.asset, Editor.defaultFont);
 			Editor.updateObjectsViewsGUI();
@@ -47,7 +47,7 @@ function FontAsset(parent)
 			});
 		}
 
-		context.addOption("Copy", function()
+		context.addOption(Locale.copy, function()
 		{
 			try
 			{

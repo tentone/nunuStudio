@@ -24,7 +24,7 @@ function FileAsset(parent)
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
 
-		context.addOption("Rename", function()
+		context.addOption(Locale.rename, function()
 		{
 			if(self.asset !== null)
 			{
@@ -32,7 +32,7 @@ function FileAsset(parent)
 			}
 		});
 		
-		context.addOption("Delete", function()
+		context.addOption(Locale.delete, function()
 		{
 			if(self.asset !== null && confirm("Delete file?"))
 			{

@@ -24,15 +24,15 @@ function ImageAsset(parent)
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
 		
-		context.addOption("Rename", function()
+		context.addOption(Locale.rename, function()
 		{
 			if(self.asset !== null)
 			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename", self.asset.name)));
+				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.rename, self.asset.name)));
 			}
 		});
 		
-		context.addOption("Delete", function()
+		context.addOption(Locale.delete, function()
 		{
 			if(self.asset !== null && confirm("Delete?"))
 			{
@@ -41,7 +41,7 @@ function ImageAsset(parent)
 			}
 		});
 
-		context.addOption("Copy", function()
+		context.addOption(Locale.copy, function()
 		{
 			if(self.asset !== null)
 			{

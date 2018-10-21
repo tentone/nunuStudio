@@ -47,7 +47,7 @@ function TextureAsset(parent)
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
 		
-		context.addOption("Rename", function()
+		context.addOption(Locale.rename, function()
 		{
 			if(self.asset !== null)
 			{
@@ -55,7 +55,7 @@ function TextureAsset(parent)
 			}
 		});
 		
-		context.addOption("Delete", function()
+		context.addOption(Locale.delete, function()
 		{
 			if(self.asset !== null && confirm("Delete texture?"))
 			{
@@ -65,7 +65,7 @@ function TextureAsset(parent)
 			}
 		});
 
-		context.addOption("Copy", function()
+		context.addOption(Locale.copy, function()
 		{
 			if(self.asset !== null)
 			{
@@ -77,7 +77,7 @@ function TextureAsset(parent)
 			}
 		});
 		
-		context.addOption("Cut", function()
+		context.addOption(Locale.cut, function()
 		{
 			if(self.asset !== null)
 			{
@@ -93,7 +93,7 @@ function TextureAsset(parent)
 			}
 		});
 
-		context.addOption("Duplicate", function()
+		context.addOption(Locale.duplicate, function()
 		{
 			if(self.asset !== null)
 			{

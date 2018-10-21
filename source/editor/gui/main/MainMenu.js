@@ -556,22 +556,22 @@ function MainMenu(parent)
 		Editor.redo();
 	}, Editor.filePath + "icons/misc/redo.png");
 
-	editMenu.addOption("Copy", function()
+	editMenu.addOption(Locale.copy, function()
 	{
 		Editor.copyObject();
 	}, Editor.filePath + "icons/misc/copy.png");
 	
-	editMenu.addOption("Cut", function()
+	editMenu.addOption(Locale.cut, function()
 	{
 		Editor.cutObject();
 	}, Editor.filePath + "icons/misc/cut.png");
 
-	editMenu.addOption("Paste", function()
+	editMenu.addOption(Locale.paste, function()
 	{
 		Editor.pasteObject();
 	}, Editor.filePath + "icons/misc/paste.png");
 
-	editMenu.addOption("Delete", function()
+	editMenu.addOption(Locale.delete, function()
 	{
 		if(Editor.hasObjectSelected())
 		{
@@ -726,7 +726,7 @@ function MainMenu(parent)
 	}, Editor.filePath + "icons/models/figures.png");
 
 	//Compute mesh normals
-	editMenu.addOption("Compute normals", function()
+	editMenu.addOption(Locale.computeNormals, function()
 	{
 		if(Editor.selection.length < 1)
 		{
@@ -739,7 +739,7 @@ function MainMenu(parent)
 	}, Editor.filePath + "icons/misc/probe.png");
 
 	//Apply tranformation
-	editMenu.addOption("Apply transformation", function()
+	editMenu.addOption(Locale.applyTransformation, function()
 	{
 		if(Editor.selection.length < 1)
 		{
@@ -800,10 +800,9 @@ function MainMenu(parent)
 	projectMenu.size.set(100, this.size.y);
 	projectMenu.position.set(220,0);
 
-	projectMenu.addOption("Create Scene", function()
+	projectMenu.addOption(Locale.createScene, function()
 	{
-		Editor.program.addDefaultScene();
-		Editor.updateObjectsViewsGUI();
+		Editor.addDefaultScene();
 	}, Editor.filePath + "icons/misc/add.png");
 
 	projectMenu.addOption("Execute script", function()
