@@ -34,13 +34,13 @@ function MainMenu(parent)
 	fileMenu.position.set(0, 0);
 
 	//New project
-	fileMenu.addOption("New", function()
+	fileMenu.addOption(Locale.new, function()
 	{
 		Editor.gui.newProgram();
 	}, Editor.filePath + "icons/misc/new.png");
 
 	//Save project
-	fileMenu.addOption("Save", function()
+	fileMenu.addOption(Locale.save, function()
 	{
 		if(Editor.openFile !== null)
 		{
@@ -53,7 +53,7 @@ function MainMenu(parent)
 	}, Editor.filePath + "icons/misc/save.png");
 
 	//Save project
-	fileMenu.addOption("Save As", function()
+	fileMenu.addOption(Locale.saveAs, function()
 	{
 		Editor.gui.saveProgram();
 	}, Editor.filePath + "icons/misc/save.png").setAltText("CTRL+S");
@@ -71,13 +71,13 @@ function MainMenu(parent)
 	}
 
 	//Load Project
-	fileMenu.addOption("Load", function()
+	fileMenu.addOption(Locale.load, function()
 	{
 		Editor.gui.loadProgram();
 	}, Editor.filePath + "icons/misc/load.png").setAltText("CTRL+L");
 
 	//Settings
-	fileMenu.addOption("Settings", function()
+	fileMenu.addOption(Locale.settings, function()
 	{
 		var tab = Editor.gui.tab.getTab(SettingsTab);
 		if(tab === null)
@@ -88,7 +88,7 @@ function MainMenu(parent)
 	}, Editor.filePath + "icons/misc/settings.png");
 
 	//Publish
-	var publish = fileMenu.addMenu("Publish", Editor.filePath + "icons/misc/publish.png");
+	var publish = fileMenu.addMenu(Locale.publish, Editor.filePath + "icons/misc/publish.png");
 
 	if(Nunu.runningOnDesktop())
 	{
@@ -100,11 +100,11 @@ function MainMenu(parent)
 				try
 				{
 					Editor.exportWebProject(files[0].path);
-					Editor.alert("Project exported");
+					Editor.alert(Locale.projectExported);
 				}
 				catch(e)
 				{
-					Editor.alert("Error exporting project (" + e + ")");
+					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 				}
 			}, "", Editor.program.name);
 		}, Editor.filePath + "icons/platform/web.png");
@@ -243,7 +243,7 @@ function MainMenu(parent)
 				}
 				catch(e)
 				{
-					Editor.alert("Error exporting project (" + e + ")");
+					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 				}
 			});
 
@@ -257,7 +257,7 @@ function MainMenu(parent)
 					}
 					catch(e)
 					{
-						Editor.alert("Error exporting project (" + e + ")");
+						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, ".apk", Editor.program.name);
 			});
@@ -273,11 +273,11 @@ function MainMenu(parent)
 					try
 					{
 						Editor.exportWindowsProject(files[0].path);
-						Editor.alert("Project exported");
+						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
 					{
-						Editor.alert("Error exporting project (" + e + ")");
+						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
 			}, Editor.filePath + "icons/platform/windows.png");
@@ -293,11 +293,11 @@ function MainMenu(parent)
 					try
 					{
 						Editor.exportLinuxProject(files[0].path);
-						Editor.alert("Project exported");
+						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
 					{
-						Editor.alert("Error exporting project (" + e + ")");
+						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
 			}, Editor.filePath + "icons/platform/linux.png");
@@ -313,11 +313,11 @@ function MainMenu(parent)
 					try
 					{
 						Editor.exportMacOSProject(files[0].path);
-						Editor.alert("Project exported");
+						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
 					{
-						Editor.alert("Error exporting project (" + e + ")");
+						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
 			}, Editor.filePath + "icons/platform/osx.png");
@@ -331,13 +331,13 @@ function MainMenu(parent)
 			FileSystem.chooseFileName(function(fname)
 			{
 				Editor.exportWebProjectZip(fname);
-				Editor.alert("Project exported");
+				Editor.alert(Locale.projectExported);
 			}, ".zip");
 		}, Editor.filePath + "icons/platform/web.png");
 	}
 
 	//Import
-	fileMenu.addOption("Import", function()
+	fileMenu.addOption(Locale.import, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -385,7 +385,7 @@ function MainMenu(parent)
 	}, Editor.filePath + "icons/misc/import.png");
 
 	//Export menu
-	var exportMenu = fileMenu.addMenu("Export", Editor.filePath + "icons/misc/export.png");
+	var exportMenu = fileMenu.addMenu(Locale.export, Editor.filePath + "icons/misc/export.png");
 
 	//Export OBJ
 	exportMenu.addOption("Wavefront OBJ", function()
@@ -530,7 +530,7 @@ function MainMenu(parent)
 	//Exit
 	if(Nunu.runningOnDesktop())
 	{
-		fileMenu.addOption("Exit", function()
+		fileMenu.addOption(Locale.exit, function()
 		{
 			if(Editor.confirm(Locale.unsavedChangesExit))
 			{

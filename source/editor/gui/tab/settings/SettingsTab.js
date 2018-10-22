@@ -2,7 +2,7 @@
 
 function SettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Settings", Editor.filePath + "icons/misc/settings.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.settings, Editor.filePath + "icons/misc/settings.png");
 
 	this.tab = new TabGroup(this, TabGroup.LEFT);
 	this.tab.element.style.backgroundColor = Editor.theme.barColor;

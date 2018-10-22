@@ -70,10 +70,25 @@ LocaleManager.register(
 	//Editor
 	project: "Project",
 	run: "Run",
+	new: "New",
+	save: "Save",
+	saveAs: "Save as",
+	load: "Load",
+	settings: "Settings",
+	publish: "Publish",
+	import: "Import",
+	export: "Export",
+	exit: "Exit",
 
+	//Resources
+	image: "Image",
+	video: "Video",
+	file: "File",
+	
 	//Messages
 	projectSaved: "Project saved.",
 	projectLoaded: "Project loaded",
+	projectExported: "Project exported",
 
 	//Confirm
 	deleteObjects: "Delete objects?",
@@ -81,15 +96,16 @@ LocaleManager.register(
 	loadProject: "Load project?",
 	createProject: "Create new project?",
 
-	//Warnings\
-	unsavedChangesExit: "All unsaved changes to the project will be lost! Do you really wanna exit?",
+	//Warnings
+	unsavedChangesExit: "All unsaved changes to the project will be lost. Do you really wanna exit?",
 	cannotAddItself: "Cannot add object into itself.",
 	cannotAddToChildren: "Cannot add object into is children.",
 	nothingToRedo: "Nothing to redo!",
 	nothingToUndo: "Not possible to undo any further",
 
 	//Errors
-	webglNotSupported: "WebGL is not supported or is disabled!\nnunuStudio cannot run!",
+	errorExportingProject: "Error exporting project",
+	webglNotSupported: "WebGL is not supported or is disabled.\nnunuStudio cannot run.",
 	errorLoadingFile: "Error loading file",
 	errorSavingFile: "Error saving file",
 	unknownFileFormat: "Unknown file format.",

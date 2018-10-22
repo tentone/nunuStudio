@@ -55,7 +55,7 @@ function AudioAsset(parent)
 			}
 		});
 
-		context.addOption("Export", function()
+		context.addOption(Locale.export, function()
 		{
 			if(Nunu.runningOnDesktop())
 			{

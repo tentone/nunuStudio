@@ -29,13 +29,13 @@ function VideoAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.rename, self.asset.name)));
+				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.delete + " " + Locale.video, self.asset.name)));
 			}
 		});
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && confirm("Delete?"))
+			if(self.asset !== null && Editor.confirm(Locale.delete + " " + Locale.video))
 			{
 				Editor.program.removeVideo(self.asset);
 				Editor.updateObjectsViewsGUI();
@@ -54,7 +54,7 @@ function VideoAsset(parent)
 			}
 		});
 
-		context.addOption("Export", function()
+		context.addOption(Locale.export, function()
 		{
 			if(Nunu.runningOnDesktop())
 			{

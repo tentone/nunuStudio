@@ -12,7 +12,7 @@ function AssetExplorerMenu(parent)
 
 	//Import
 	var menu = new DropdownMenu(this);
-	menu.setText("Import");
+	menu.setText(Locale.import);
 	menu.size.set(100, 20);
 	menu.position.set(0, 0);
 

@@ -28,13 +28,13 @@ function ImageAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.rename, self.asset.name)));
+				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.rename + " " + Locale.image, self.asset.name)));
 			}
 		});
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && confirm("Delete?"))
+			if(self.asset !== null && Editor.confirm(Locale.delete + " " + Locale.image))
 			{
 				Editor.program.removeImage(self.asset);
 				Editor.updateObjectsViewsGUI();
@@ -53,7 +53,7 @@ function ImageAsset(parent)
 			}
 		});
 
-		context.addOption("Export", function()
+		context.addOption(Locale.export, function()
 		{
 			if(Nunu.runningOnDesktop())
 			{

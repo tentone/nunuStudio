@@ -57,7 +57,7 @@ function TextureAsset(parent)
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && confirm("Delete texture?"))
+			if(self.asset !== null && Editor.confirm("Delete texture?"))
 			{
 				self.asset.dispose();
 				Editor.program.removeTexture(self.asset, Editor.defaultTexture);

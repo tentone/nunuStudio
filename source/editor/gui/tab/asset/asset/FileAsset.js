@@ -28,20 +28,20 @@ function FileAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename file", self.asset.name)));
+				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.rename + " " + Locale.file, self.asset.name)));
 			}
 		});
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && confirm("Delete file?"))
+			if(self.asset !== null && Editor.confirm(Locale.delete + " " + Locale.file))
 			{
 				Editor.program.removeResource(self.asset);
 				Editor.updateObjectsViewsGUI();
 			}
 		});
 
-		context.addOption("Export", function()
+		context.addOption(Locale.export, function()
 		{
 			if(Nunu.runningOnDesktop())
 			{
