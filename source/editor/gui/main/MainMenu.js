@@ -843,11 +843,25 @@ function MainMenu(parent)
 		tab.select();
 	});
 
+	//Nodes
+	var nodes = new ButtonText(this);
+	nodes.setText("Blueprint");
+	nodes.size.set(100, this.size.y);
+	nodes.position.set(420, 0);
+	nodes.updateInterface();
+	nodes.setOnClick(function() {
+		var tab = Editor.gui.tab.getTab(NodesTab);
+		if (tab === null) {
+			tab = Editor.gui.tab.addTab(NodesTab, true);
+		}
+		tab.select();
+	});
+
 	//Run
 	this.run = new ButtonText(this);
 	this.run.setText(Locale.run);
 	this.run.size.set(100, this.size.y);
-	this.run.position.set(420, 0);
+	this.run.position.set(520, 0);
 	this.run.updateInterface();
 	this.run.setOnClick(function()
 	{
