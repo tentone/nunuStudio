@@ -260,6 +260,7 @@ include("lib/ThreeCSG.js");
 
 //Non-tentone libraries
 include("lib/litegraph.js");
+include("lib/litegraph.css");
 
 include("editor/style.css");
 
