@@ -435,7 +435,7 @@ function TreeNode(container)
 				//Above
 				if(dragState === TreeNode.ABOVE)
 				{
-					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
+					if((dragIsScene && selfIsScene) || (!dragIsScene && !selfIsProgram && !selfIsScene))
 					{
 						var index = self.object.parent.children.indexOf(self.object);
 						Editor.addAction(new MovedAction(object, self.object.parent, index));
@@ -444,7 +444,7 @@ function TreeNode(container)
 				//Bellow
 				else if(dragState === TreeNode.BELLOW)
 				{
-					if(!selfIsProgram || (dragIsScene && selfIsScene) || (!dragIsScene && !selfIsScene))
+					if((dragIsScene && selfIsScene) || (!dragIsScene && !selfIsProgram && !selfIsScene))
 					{
 						var index = self.object.parent.children.indexOf(self.object) + 1;
 						Editor.addAction(new MovedAction(object, self.object.parent, index));
