@@ -1156,6 +1156,10 @@ Editor.addDefaultScene = function(material)
 
 	//Add scene to program
 	Editor.addObject(scene, Editor.program);
+
+	//Open scene
+	var tab = Editor.gui.tab.addTab(SceneEditor, true);
+	tab.attach(scene);
 };
 
 //Save program to file
