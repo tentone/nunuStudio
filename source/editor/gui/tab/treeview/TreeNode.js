@@ -771,13 +771,13 @@ TreeNode.prototype.updateInterface = function()
 		this.label.style.left = (45 + offset) + "px";
 		this.labelText.data = this.object.name;
 
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+
 		for(var i = 0; i < this.children.length; i++)
 		{
 			this.children[i].updateInterface();
 		}
-
-		this.element.style.display = "block";
-		this.element.style.top = this.position.y + "px";
 	}
 	else
 	{

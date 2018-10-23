@@ -280,16 +280,5 @@ TreeView.prototype.updateChildPosition = function()
 	if(this.root !== null)
 	{
 		this.size.y = updateChildPosition(this.root, 20, 1, this.root.folded);
-		this.updateSize();
-	}
-};
-
-TreeView.prototype.updateSize = function()
-{
-	TabElement.prototype.updateSize.call(this);
-	
-	if(this.root !== null)
-	{
-		this.root.updateInterface();
 	}
 };
