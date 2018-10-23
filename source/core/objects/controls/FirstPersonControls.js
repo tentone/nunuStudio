@@ -8,12 +8,12 @@
  * The mouse left button can be used to look around, and the keyboard arrows for movement.
  * 
  * @class FirstPersonControls
- * @extends {Object3D}
+ * @extends {Group}
  * @module Controls
  */
 function FirstPersonControls()
 {
-	THREE.Object3D.call(this);
+	THREE.Group.call(this);
 
 	this.name = "controls";
 	this.type = "FirstPersonControls";
@@ -83,7 +83,7 @@ function FirstPersonControls()
 
 FirstPersonControls.UP = new THREE.Vector3(0, 1, 0);
 
-FirstPersonControls.prototype = Object.create(THREE.Object3D.prototype);
+FirstPersonControls.prototype = Object.create(THREE.Group.prototype);
 
 FirstPersonControls.prototype.initialize = function()
 {
@@ -101,7 +101,7 @@ FirstPersonControls.prototype.initialize = function()
 
 	this.updateControls();
 	
-	THREE.Object3D.prototype.initialize.call(this);
+	THREE.Group.prototype.initialize.call(this);
 };
 
 FirstPersonControls.prototype.update = function(delta)

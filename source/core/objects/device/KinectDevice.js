@@ -10,12 +10,12 @@
  * The server software is available inside the tools folder in the nunuStudio repository, and communicates using the port 8181 in the localhost.
  * 
  * @class KinectDevice
- * @extends {Object3D}
+ * @extends {Group}
  * @module Devices
  */
 function KinectDevice()
 {
-	THREE.Object3D.call(this);
+	THREE.Group.call(this);
 
 	this.type = "Kinect";
 	this.name = "kinect";
@@ -141,7 +141,7 @@ KinectDevice.JOINTS_NAME = [["head","shouldercenter"],["shouldercenter","shoulde
 							["shouldercenter","spine"],["spine","hipcenter"],["hipcenter","hipright"],["hipcenter","hipleft"],["hipright","kneeright"],
 							["hipleft","kneeleft"],["kneeright","ankleright"],["kneeleft","ankleleft"],["ankleright","footright"],["ankleleft","footleft"]];
 
-KinectDevice.prototype = Object.create(THREE.Object3D.prototype);
+KinectDevice.prototype = Object.create(THREE.Group.prototype);
 
 /**
  * Update kinect device state.
@@ -239,7 +239,7 @@ KinectDevice.prototype.setCameraMode = function(mode)
  */
 KinectDevice.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var data = THREE.Group.prototype.toJSON.call(this, meta);
 
 	data.object.debugModel = this.debugModel;
 

@@ -2,16 +2,18 @@
 
 /**
  * Folded attribute is used only for editing, if true the object shows as folded in the object explorer.
+ *
  * @property folded
  * @type {boolean}
-*/
+ */
 THREE.Object3D.prototype.folded = false;
 
 /**
- * Hidden objects do not show in the editor.
- * @property hidden
+ * Indicates if the object is locked. A locked object cannot be edited.
+ *
+ * @property locked
  * @type {boolean}
-*/
+ */
 THREE.Object3D.prototype.locked = false;
 
 /**

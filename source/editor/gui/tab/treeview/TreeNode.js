@@ -652,7 +652,6 @@ TreeNode.prototype.attach = function(object)
 	this.folded = object.folded;
 
 	this.element.draggable = !object.locked;
-
 	this.labelText.data = object.name;
 	this.icon.src = this.object.locked ? ObjectIcons.locked : ObjectIcons.get(object.type);
 	this.arrow.src = this.folded ? TreeNode.ARROW_RIGHT : TreeNode.ARROW_DOWN;

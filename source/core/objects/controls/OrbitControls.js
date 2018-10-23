@@ -6,12 +6,12 @@
  * It can be rotated using the mouse left button, moved with the mouse right button or mouse wheel. 
  * 
  * @class OrbitControls
- * @extends {Object3D}
+ * @extends {Group}
  * @module Controls
  */
 function OrbitControls()
 {
-	THREE.Object3D.call(this);
+	THREE.Group.call(this);
 
 	this.name = "orbit";
 	this.type = "OrbitControls";
@@ -99,7 +99,7 @@ function OrbitControls()
 OrbitControls.UP = new THREE.Vector3(0, 1, 0);
 OrbitControls.ZERO = new THREE.Vector3(0, 0, 0);
 
-OrbitControls.prototype = Object.create(THREE.Object3D.prototype);
+OrbitControls.prototype = Object.create(THREE.Group.prototype);
 
 OrbitControls.prototype.initialize = function()
 {
@@ -118,7 +118,7 @@ OrbitControls.prototype.initialize = function()
 	this.center.copy(this.position);
 	this.updateControls();
 
-	THREE.Object3D.prototype.initialize.call(this);
+	THREE.Group.prototype.initialize.call(this);
 };
 
 OrbitControls.prototype.update = function(delta)

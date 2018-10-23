@@ -7,11 +7,11 @@
  * 
  * @class LeapMotion
  * @module Devices
- * @extends {Object3D}
+ * @extends {Group}
  */
 function LeapMotion()
 {
-	THREE.Object3D.call(this);
+	THREE.Group.call(this);
 
 	this.type = "LeapDevice";
 	this.name = "leap";
@@ -87,7 +87,7 @@ function LeapMotion()
 	this.data = null;
 }
 
-LeapMotion.prototype = Object.create(THREE.Object3D.prototype);
+LeapMotion.prototype = Object.create(THREE.Group.prototype);
 
 /**
  * Leap tracking desktop mode
@@ -204,7 +204,7 @@ LeapMotion.prototype.initialize = function()
 	}).connect();
 
 	//Children
-	THREE.Object3D.prototype.initialize.call(this);
+	THREE.Group.prototype.initialize.call(this);
 };
 
 /**
@@ -232,8 +232,7 @@ LeapMotion.prototype.update = function(delta)
 		}
 	}
 
-	//Update children
-	THREE.Object3D.prototype.update.call(this, delta);
+	THREE.Group.prototype.update.call(this, delta);
 };
 
 /**
@@ -472,7 +471,7 @@ LeapMotion.prototype.updateDebugModel = function()
 				if(countBones !== 0)
 				{
 					var boneMesh = this.boneMeshes[countBones] || this.addMesh(this.boneMeshes);
-					this.updateMesh(bone, boneMesh);	
+					this.updateMesh(bone, boneMesh);
 				}
 				countBones++;
 			}
@@ -534,7 +533,7 @@ LeapMotion.prototype.getMovement = function()
  */
 LeapMotion.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var data = THREE.Group.prototype.toJSON.call(this, meta);
 
 	data.object.type = this.type;
 	data.object.debugModel = this.debugModel;
