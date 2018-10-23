@@ -258,6 +258,9 @@ include("lib/jszip.min.js");
 include("lib/quickhull.js");
 include("lib/ThreeCSG.js");
 
+//Non-tentone libraries
+include("lib/litegraph.js");
+
 include("editor/style.css");
 
 include("editor/locale/LocaleManager.js");
@@ -324,6 +327,9 @@ include("editor/gui/tab/ProfilingTab.js");
 include("editor/gui/tab/CodeEditor.js");
 include("editor/gui/tab/AboutTab.js");
 include("editor/gui/tab/TextEditor.js");
+
+//Nodes tab
+include("editor/gui/tab/nodes/NodesTab.js");
 
 include("editor/gui/tab/treeview/TreeView.js");
 include("editor/gui/tab/treeview/TreeNode.js");
