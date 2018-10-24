@@ -19,6 +19,8 @@ function TreeView(parent, closeable, container, index)
 	this.element.style.overflow = "auto";
 	this.element.style.backgroundColor = null;
 
+	this.search = new SearchBox(this);
+
 	this.program = null;
 	this.root = null;
 }
@@ -279,6 +281,16 @@ TreeView.prototype.updateChildPosition = function()
 
 	if(this.root !== null)
 	{
-		this.size.y = updateChildPosition(this.root, 20, 1, this.root.folded);
+		this.root.position.set(0,22);
+		this.root.updateInterface();
+
+		this.size.y = updateChildPosition(this.root, 42, 1, this.root.folded);
 	}
+};
+
+TreeView.prototype.updateSize = function() {
+	TabElement.prototype.updateSize.call(this);
+
+	this.search.size.set(this.size.x, 22);
+	this.search.updateInterface();
 };
