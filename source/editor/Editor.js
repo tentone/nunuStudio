@@ -332,9 +332,9 @@ include("editor/gui/tab/TextEditor.js");
 //Nodes tab
 include("editor/gui/tab/nodes/NodesTab.js");
 
-include("editor/gui/tab/EcMAMath.js");
+include("editor/gui/tab/nodes/EcMAMath.js");
 
-include("editor/gui/tab/nodes/TheeMath.js");
+include("editor/gui/tab/nodes/ThreeMath.js");
 include("editor/gui/tab/nodes/ThreeScene.js");
 include("editor/gui/tab/nodes/ThreeUtils.js");
 
