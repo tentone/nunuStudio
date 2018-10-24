@@ -41,7 +41,7 @@ var LiteGraph = global.LiteGraph = {
 	NODE_DEFAULT_COLOR: "#333",
 	NODE_DEFAULT_BGCOLOR: "#444",
 	NODE_DEFAULT_BOXCOLOR: "#888",
-	NODE_DEFAULT_SHAPE: "box",
+	NODE_DEFAULT_SHAPE: "round",
 	MAX_NUMBER_OF_NODES: 1000, //avoid infinite loops
 	DEFAULT_POSITION: [100,100],//default node position
 	node_images_path: "",
@@ -123,7 +123,7 @@ var LiteGraph = global.LiteGraph = {
 					case "circle": this._shape = LiteGraph.CIRCLE_SHAPE; break;
 					case "card": this._shape = LiteGraph.CARD_SHAPE; break;
 					default:
-						this._shape = v;
+						this._shape = LiteGraph.ROUND_SHAPE;
 				}
 			},
 			get: function(v)

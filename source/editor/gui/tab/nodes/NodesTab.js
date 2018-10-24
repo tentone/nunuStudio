@@ -2,6 +2,7 @@
 
 function NodesTab(parent, closeable, container, index)
 {
+
 	TabElement.call(this, parent, closeable, container, index, "Blueprint", Editor.filePath + "icons/script/blocks.png");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
