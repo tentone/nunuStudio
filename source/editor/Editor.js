@@ -325,6 +325,7 @@ include("editor/gui/tab/CodeEditor.js");
 include("editor/gui/tab/AboutTab.js");
 include("editor/gui/tab/TextEditor.js");
 
+include("editor/gui/tab/treeview/SearchBox.js");
 include("editor/gui/tab/treeview/TreeView.js");
 include("editor/gui/tab/treeview/TreeNode.js");
 
