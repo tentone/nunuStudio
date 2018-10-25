@@ -2,24 +2,20 @@
 	"name": "nunuStudio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "build/Nunu.js",
-	"directories":
-	{
+	"directories": {
 		"doc": "docs"
 	},
-	"scripts":
-	{
+	"scripts": {
 		"all": "cd build/build && node update.js && node build.js",
 		"build": "cd build/build && node build.js",
 		"update": "cd build/build && node update.js",
-		"start": "nw install 0.33.4-sdk && nw ./"
+		"start": "nw install 0.33.4-sdk && nw ./source/"
 	},
-	"repository":
-	{
+	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/tentone/nunuStudio.git"
 	},
-	"keywords":
-	[
+	"keywords": [
 		"three.js",
 		"editor",
 		"webgl",
@@ -29,13 +25,11 @@
 	],
 	"author": "Tentone",
 	"license": "MIT",
-	"bugs":
-	{
+	"bugs": {
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
 	"homepage": "https://www.nunustudio.org",
-	"devDependencies":
-	{
+	"devDependencies": {
 		"yuidocjs": "",
 		"cordova": "",
 		"nwjs": ""
