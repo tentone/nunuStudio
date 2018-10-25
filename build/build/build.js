@@ -41,10 +41,13 @@ out.js = addTimestamp("DEVELOPMENT_VERSION", out.js);
 writeFile(buildPath + "nunu.editor.js.temp", out.js);
 var css = compressCSS(out.css);
 writeFile(buildPath + "nunu.editor.css", css);
+
 console.log(" Optimizing with closure");
 closure("SIMPLE", "PRETTY_PRINT", inputMode, outputMode, buildPath + "nunu.editor.js.temp", buildPath + "nunu.editor.js");
+
 console.log(" Minifyng with closure");
 closure("WHITESPACE_ONLY", "SINGLE_QUOTES", outputMode, outputMode, buildPath + "nunu.editor.js", buildPath + "nunu.editor.min.js");
+
 console.log(" Removing temporary files");
 deleteFile("../nunu.editor.js");
 deleteFile("../nunu.editor.js.temp");
@@ -52,13 +55,17 @@ deleteFile("../nunu.editor.js.temp");
 console.log("----------------------------------------------------------------------");
 console.log("                              Runtime");
 console.log("----------------------------------------------------------------------");
+console.log(" Joining files");
 var out = join(sourcePath, sourcePath + runtimeMain);
 out.js = addTimestamp("DEVELOPMENT_VERSION", out.js);
 writeFile(buildPath + "nunu.js.temp", out.js);
+
 console.log(" Optimizing with closure");
 closure("SIMPLE", "PRETTY_PRINT", inputMode, outputMode, buildPath + "nunu.js.temp", buildPath + "nunu.js");
+
 console.log(" Minifyng with closure");
 closure("WHITESPACE_ONLY", "SINGLE_QUOTES", outputMode, outputMode, buildPath + "nunu.js", buildPath + "nunu.min.js");
+
 console.log(" Removing temporary files");
 deleteFile(buildPath + "nunu.js");
 deleteFile(buildPath + "nunu.js.temp");
@@ -67,11 +74,14 @@ console.log("-------------------------------------------------------------------
 console.log("                           Updating Webpage");
 console.log("----------------------------------------------------------------------");
 console.log(" Removing old editor files");
-deleteFolder(editorWebPath + "editor/files");
+deleteFolder(editorWebPath + "files");
 deleteFolder(editorWebPath + "runtime");
+
 console.log(" Copying editor files");
-copyFolder(sourcePath + "editor/files", editorWebPath + "editor/files");
+copyFolder(sourcePath + "files", editorWebPath + "files");
 copyFolder(sourcePath + "runtime", editorWebPath + "runtime");
+copyFile(sourcePath + "favicon.ico", editorWebPath + "favicon.ico");
+
 console.log(" Copying editor build");
 copyFile(buildPath + "nunu.min.js", editorWebPath + "nunu.min.js");
 copyFile(buildPath + "nunu.editor.min.js", editorWebPath + "nunu.editor.min.js");
@@ -82,8 +92,10 @@ console.log("                      Generating documentation");
 console.log("----------------------------------------------------------------------");
 //console.log(" Installing YuiDocJS from NPM");
 //require("child_process").execSync("npm -g install yuidocjs", function(error, stdout, stderr){});
+
 console.log(" Removing old files");
 deleteFolder("../../docs/docs");
+
 console.log(" Generating Docs");
 var command = "yuidoc -o " + docsPath + " -N -C -t " + docsThemePath + " -x lib " + docsSource;
 require("child_process").execSync(command, function(error, stdout, stderr)

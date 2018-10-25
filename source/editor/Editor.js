@@ -2,7 +2,7 @@
 
 function Editor(){}
 
-Editor.filePath = "editor/files/";
+Editor.filePath = "files/";
 Editor.runtimePath = "runtime/";
 Editor.NWJSPath = "../nwjs/";
 

@@ -248,11 +248,19 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
+														<a href="#property_dinamicEmitter">dinamicEmitter</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_emitter">emitter</a>
 						
 													</li>
 													<li class="index-item property">
 														<a href="#property_group">group</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_texture">texture</a>
 						
 													</li>
 											</ul>
@@ -354,7 +362,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Reload internal material and geometry.</p>
+													<p>Reload internal material and geometry of this particle emitter.</p>
+											<p>Recretes the group and emitter object attached to the particle.</p>
 											<p>May be required after changing material related parameters.</p>
 											
 												</div>
@@ -458,6 +467,29 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
+											<div id="property_dinamicEmitter" class="property item">
+												<h3 class="name"><code>dinamicEmitter</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>A dynamic particle emmiter ignores the position in its transform and applies it directly to the emitter origin.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_emitter" class="property item">
 												<h3 class="name"><code>emitter</code></h3>
 												<span class="type">SPE.Emitter</span>
@@ -501,6 +533,29 @@
 												<div class="description">
 													<p>SPE Group instance.</p>
 											<p><a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html</a></p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_texture" class="property item">
+												<h3 class="name"><code>texture</code></h3>
+												<span class="type"><a href="../classes/Texture.html" class="crosslink">Texture</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Texture attached to the group of this particle emitter.</p>
 											
 												</div>
 											
