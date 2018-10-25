@@ -6,10 +6,8 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"all": "cd build/build && node update.js && node build.js",
 		"build": "cd build/build && node build.js",
-		"update": "cd build/build && node update.js",
-		"start": "nw install 0.33.4-sdk && nw ./source/"
+		"update": "cd build/build && node update.js"
 	},
 	"repository": {
 		"type": "git",
@@ -30,8 +28,6 @@
 	},
 	"homepage": "https://www.nunustudio.org",
 	"devDependencies": {
-		"yuidocjs": "",
-		"cordova": "",
-		"nwjs": ""
+		"yuidocjs": ""
 	}
 }
