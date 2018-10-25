@@ -4,7 +4,7 @@
 	"chromium-args" : "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window":
 	{
-		"icon": "editor/files/icon.png",
+		"icon": "files/icon.png",
 		"frame": true,
 		"width": 1280,
 		"height": 720,

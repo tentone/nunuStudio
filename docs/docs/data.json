@@ -1310,7 +1310,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 3,
-            "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere.",
+            "description": "FileSystem is used to read and write files using nunuStudio.\n\nIts implements muitple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere.",
             "static": 1
         },
         "Runtime": {
@@ -1764,7 +1764,7 @@
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
             "line": 3,
             "description": "First person controls can be controlled using the mouse and keyboard.\n\nProvides a navigations system familiar to the one found on FPS games.\n\nThe mouse left button can be used to look around, and the keyboard arrows for movement.",
-            "extends": "{Object3D}"
+            "extends": "{Group}"
         },
         "OrbitControls": {
             "name": "OrbitControls",
@@ -1779,7 +1779,7 @@
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
             "line": 3,
             "description": "Orbit controls object can be controlled using the mouse.\n\nIt can be rotated using the mouse left button, moved with the mouse right button or mouse wheel.",
-            "extends": "{Object3D}"
+            "extends": "{Group}"
         },
         "KinectDevice": {
             "name": "KinectDevice",
@@ -1794,7 +1794,7 @@
             "file": "..\\..\\source\\core\\objects\\device\\KinectDevice.js",
             "line": 3,
             "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect V1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository, and communicates using the port 8181 in the localhost.",
-            "extends": "{Object3D}"
+            "extends": "{Group}"
         },
         "LeapMotion": {
             "name": "LeapMotion",
@@ -1809,7 +1809,7 @@
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
             "line": 3,
             "description": "Leap device object based on the official LeapJS runtime.\n\nUsed to connect nunuStudio to a leap motion hand tracker, works on Windows and MacOS.",
-            "extends": "{Object3D}"
+            "extends": "{Group}"
         },
         "AmbientLight": {
             "name": "AmbientLight",
@@ -3290,7 +3290,7 @@
             "module": "THREE",
             "namespace": "",
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 458,
+            "line": 460,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
         },
         "Material": {
@@ -3552,7 +3552,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 3,
-            "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere."
+            "description": "FileSystem is used to read and write files using nunuStudio.\n\nIts implements muitple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere."
         },
         "Nunu": {
             "name": "Nunu",
@@ -7774,7 +7774,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 239,
+            "line": 238,
             "description": "Check if a gesture is occuring, is true while the gesture is occuring.",
             "itemtype": "method",
             "name": "checkGesture",
@@ -7794,7 +7794,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 255,
+            "line": 254,
             "description": "Check if hand is in pose.",
             "itemtype": "method",
             "name": "checkPose",
@@ -7814,7 +7814,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 271,
+            "line": 270,
             "description": "Set hand tracking mode.\n\nCan be set to HDM or Desktop mode.",
             "itemtype": "method",
             "name": "setMode",
@@ -7830,7 +7830,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 284,
+            "line": 283,
             "description": "Update leap object pose flags from collected data.\n\nCalled automatically by the update methos.",
             "itemtype": "method",
             "name": "updatePoses",
@@ -7839,7 +7839,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 360,
+            "line": 359,
             "description": "Update leap object gesture flags from collected data.\n\nCalled automatically by the update method.",
             "itemtype": "method",
             "name": "updateGestures",
@@ -7848,7 +7848,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 433,
+            "line": 432,
             "description": "Update internal hand debug model.\n\nAutomatically called by the update method if debugModel is set to true.",
             "itemtype": "method",
             "name": "updateDebugModel",
@@ -7857,7 +7857,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 513,
+            "line": 512,
             "description": "Get hand speed (temporaly normalized).",
             "itemtype": "method",
             "name": "getMovement",
@@ -7870,7 +7870,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 530,
+            "line": 529,
             "description": "Create JSON for object.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8632,7 +8632,27 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 68,
+            "line": 45,
+            "description": "A dynamic particle emmiter ignores the position in its transform and applies it directly to the emitter origin.",
+            "itemtype": "property",
+            "name": "dinamicEmitter",
+            "type": "{Boolean}",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 55,
+            "description": "Texture attached to the group of this particle emitter.",
+            "itemtype": "property",
+            "name": "texture",
+            "type": "{Texture}",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 74,
             "description": "Default particle emitter configuration.",
             "itemtype": "attribute",
             "name": "defaultEmitter",
@@ -8642,7 +8662,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 89,
+            "line": 95,
             "description": "Default particle emitter group configuration.",
             "itemtype": "attribute",
             "name": "defaultGroup",
@@ -8652,8 +8672,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 110,
-            "description": "Reload internal material and geometry.\n\nMay be required after changing material related parameters.",
+            "line": 116,
+            "description": "Reload internal material and geometry of this particle emitter.\n\nRecretes the group and emitter object attached to the particle.\n\nMay be required after changing material related parameters.",
             "itemtype": "method",
             "name": "reload",
             "class": "ParticleEmitter",
@@ -8661,7 +8681,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 133,
+            "line": 140,
             "description": "Update particle object matrix.\n\nIgnores the particle position if the moveEmitter attribute is set true.",
             "itemtype": "method",
             "name": "updateMatrix",
@@ -8670,7 +8690,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 155,
+            "line": 162,
             "description": "Particle emitter state is automatically updated before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -8679,7 +8699,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 171,
+            "line": 178,
             "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
@@ -8688,7 +8708,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 185,
+            "line": 192,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9581,22 +9601,6 @@
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
             "line": 520,
-            "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
-            "itemtype": "method",
-            "name": "addDefaultScene",
-            "params": [
-                {
-                    "name": "material",
-                    "description": "Default material used by objects, if empty a new material is created",
-                    "type": "Material"
-                }
-            ],
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 560,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -9605,7 +9609,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 599,
+            "line": 559,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -9621,7 +9625,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 626,
+            "line": 586,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -9637,7 +9641,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 651,
+            "line": 611,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12439,17 +12443,17 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 10,
-            "description": "Hidden objects do not show in the editor.",
+            "line": 11,
+            "description": "Indicates if the object is locked. A locked object cannot be edited.",
             "itemtype": "property",
-            "name": "hidden",
+            "name": "locked",
             "type": "{boolean}",
             "class": "Object3D",
             "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 17,
+            "line": 19,
             "description": "Check if this object contains a object.",
             "itemtype": "method",
             "name": "contains",
@@ -12469,7 +12473,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 37,
+            "line": 39,
             "description": "Play animations attached to this object.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
             "itemtype": "method",
             "name": "playAnimation",
@@ -12478,7 +12482,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 52,
+            "line": 54,
             "description": "Stop all animations playback.",
             "itemtype": "method",
             "name": "stopAnimation",
@@ -12487,7 +12491,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 65,
+            "line": 67,
             "description": "Initializes the object.\n\nThis method is calling one time on initialization.",
             "itemtype": "method",
             "name": "initialize",
@@ -12496,7 +12500,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 87,
+            "line": 89,
             "description": "Update the object state.\n\nCalled every time before rendering into the screen.",
             "itemtype": "method",
             "name": "update",
@@ -12512,7 +12516,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 108,
+            "line": 110,
             "description": "Resize this object, called everytime the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -12533,7 +12537,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 123,
+            "line": 125,
             "description": "Disposes the object from memory.\n\nShould be called when the object is no longer required to avoid memory leaks.",
             "itemtype": "method",
             "name": "dispose",
@@ -12542,7 +12546,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 143,
+            "line": 145,
             "description": "Add object as children of this object above the indicated children",
             "itemtype": "method",
             "name": "addAbove",
@@ -12563,7 +12567,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 180,
+            "line": 182,
             "description": "Add object as children of this object bellow the indicated children",
             "itemtype": "method",
             "name": "addBellow",
@@ -12584,7 +12588,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 217,
+            "line": 219,
             "description": "Get scene that contains this object.",
             "itemtype": "method",
             "name": "getScene",
@@ -12597,7 +12601,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 240,
+            "line": 242,
             "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
@@ -12606,7 +12610,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 253,
+            "line": 255,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -12619,7 +12623,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 264,
+            "line": 266,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
@@ -12628,7 +12632,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 288,
+            "line": 290,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12658,7 +12662,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 469,
+            "line": 471,
             "description": "Array with object's children.",
             "itemtype": "property",
             "name": "children",
@@ -12668,7 +12672,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 474,
+            "line": 476,
             "description": "When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.",
             "itemtype": "property",
             "name": "frustumCulled",
@@ -12679,7 +12683,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 480,
+            "line": 482,
             "description": "The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.",
             "itemtype": "property",
             "name": "layers",
@@ -12689,7 +12693,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 485,
+            "line": 487,
             "description": "The local transform matrix",
             "itemtype": "property",
             "name": "matrix",
@@ -12699,7 +12703,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 490,
+            "line": 492,
             "description": "When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.",
             "itemtype": "property",
             "name": "matrixAutoUpdate",
@@ -12710,7 +12714,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 496,
+            "line": 498,
             "description": "The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.",
             "itemtype": "property",
             "name": "matrixWorld",
@@ -12720,7 +12724,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 501,
+            "line": 503,
             "description": "Name of the object (doesn't need to be unique).",
             "itemtype": "property",
             "name": "name",
@@ -12730,7 +12734,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 506,
+            "line": 508,
             "description": "The object's local position.",
             "itemtype": "property",
             "name": "position",
@@ -12740,7 +12744,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 511,
+            "line": 513,
             "description": "Object's local rotation as a Quaternion.",
             "itemtype": "property",
             "name": "quaternion",
@@ -12750,7 +12754,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 516,
+            "line": 518,
             "description": "Object's local rotation (see Euler angles), in radians.",
             "itemtype": "property",
             "name": "rotation",
@@ -12760,7 +12764,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 521,
+            "line": 523,
             "description": "The object's local scale.",
             "itemtype": "property",
             "name": "scale",
@@ -12770,7 +12774,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 526,
+            "line": 528,
             "description": "This is used by the lookAt method, for example, to determine the orientation of the result.",
             "itemtype": "property",
             "name": "up",
@@ -12780,7 +12784,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 531,
+            "line": 533,
             "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
             "itemtype": "property",
             "name": "uuid",
@@ -12790,7 +12794,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 536,
+            "line": 538,
             "description": "Object gets rendered if true.",
             "itemtype": "property",
             "name": "visible",
@@ -12801,7 +12805,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 542,
+            "line": 544,
             "description": "This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.",
             "itemtype": "property",
             "name": "renderOrder",
@@ -12812,7 +12816,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 548,
+            "line": 550,
             "description": "Whether the object gets rendered into shadow map.",
             "itemtype": "property",
             "name": "castShadow",
@@ -12823,7 +12827,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 554,
+            "line": 556,
             "description": "Whether the material receives shadows.",
             "itemtype": "property",
             "name": "receiveShadow",
@@ -12834,7 +12838,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 560,
+            "line": 562,
             "description": "Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.",
             "itemtype": "property",
             "name": "userData",
@@ -12844,7 +12848,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 565,
+            "line": 567,
             "description": "Array with the animations available in this object.\n\nEach position contains an AnimationClip that has name, tracks, duration and uuid.",
             "itemtype": "property",
             "name": "animations",
@@ -12854,7 +12858,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 574,
+            "line": 576,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -12870,7 +12874,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 580,
+            "line": 582,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -12886,7 +12890,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 586,
+            "line": 588,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -12902,7 +12906,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 592,
+            "line": 594,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -12918,7 +12922,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 598,
+            "line": 600,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -12934,7 +12938,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 604,
+            "line": 606,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -12950,7 +12954,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 610,
+            "line": 612,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -12966,7 +12970,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 616,
+            "line": 618,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -12987,7 +12991,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 623,
+            "line": 625,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -13003,7 +13007,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 629,
+            "line": 631,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -13024,7 +13028,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 636,
+            "line": 638,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -13043,7 +13047,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 642,
+            "line": 644,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -13059,7 +13063,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 648,
+            "line": 650,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -13075,7 +13079,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 654,
+            "line": 656,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -13091,7 +13095,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 660,
+            "line": 662,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -13112,7 +13116,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 667,
+            "line": 669,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -13128,7 +13132,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 673,
+            "line": 675,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -13144,7 +13148,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 679,
+            "line": 681,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -14277,7 +14281,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 20,
+            "line": 22,
             "description": "Check if a file corresponds to a remote location.",
             "itemtype": "method",
             "name": "isRemote",
@@ -14290,7 +14294,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 31,
+            "line": 33,
             "description": "Read file content as text.",
             "itemtype": "method",
             "name": "readFile",
@@ -14325,7 +14329,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 104,
+            "line": 106,
             "description": "Read file as arraybuffer data.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
@@ -14360,7 +14364,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 189,
+            "line": 191,
             "description": "Read file as base64 data.",
             "itemtype": "method",
             "name": "readFileBase64",
@@ -14395,7 +14399,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 256,
+            "line": 258,
             "description": "Write text file.\n\nWhen running without NWJS it writes file as a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
@@ -14426,7 +14430,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 315,
+            "line": 317,
             "description": "Write binary file using base64 data.\n\nIf running on browser writes the file into a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFileBase64",
@@ -14457,7 +14461,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 378,
+            "line": 380,
             "description": "Write binary file using arraybuffer data. \n\nIf running on browser writes the file into a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFileArrayBuffer",
@@ -14488,7 +14492,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 440,
+            "line": 442,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.\n\nThe onLoad callback receives as array of files as parameter.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -14514,7 +14518,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 482,
+            "line": 484,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -14535,7 +14539,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 509,
+            "line": 511,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -14556,7 +14560,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 529,
+            "line": 538,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -14572,7 +14576,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 546,
+            "line": 555,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -14585,7 +14589,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 573,
+            "line": 581,
             "description": "Delete folders and all subfolders.\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "deleteFolder",
@@ -14601,7 +14605,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 606,
+            "line": 614,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -14622,7 +14626,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 650,
+            "line": 658,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -14642,7 +14646,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 671,
+            "line": 679,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -14662,7 +14666,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 693,
+            "line": 701,
             "description": "Get file name with extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.d.",
             "itemtype": "method",
             "name": "getFileNameWithExtension",
@@ -14682,7 +14686,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 715,
+            "line": 723,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -14702,7 +14706,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 734,
+            "line": 742,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -14722,7 +14726,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 756,
+            "line": 764,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",

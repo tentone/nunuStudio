@@ -74,11 +74,11 @@ console.log("-------------------------------------------------------------------
 console.log("                           Updating Webpage");
 console.log("----------------------------------------------------------------------");
 console.log(" Removing old editor files");
-deleteFolder(editorWebPath + "editor/files");
+deleteFolder(editorWebPath + "files");
 deleteFolder(editorWebPath + "runtime");
 
 console.log(" Copying editor files");
-copyFolder(sourcePath + "editor/files", editorWebPath + "editor/files");
+copyFolder(sourcePath + "files", editorWebPath + "files");
 copyFolder(sourcePath + "runtime", editorWebPath + "runtime");
 copyFile(sourcePath + "favicon.ico", editorWebPath + "favicon.ico");
 
