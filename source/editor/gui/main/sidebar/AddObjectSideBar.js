@@ -233,7 +233,7 @@ function AddObjectSideBar(parent)
 	//Add script
 	var addScript = new ButtonDrawer(parent);
 	addScript.setImage(Editor.filePath + "icons/script/script.png");
-	addScript.optionsPerLine = 1;
+	addScript.optionsPerLine = 2;
 	addScript.size.set(size, size);
 	addScript.position.set(0, 350);
 	addScript.optionsSize.set(size, size);
@@ -244,6 +244,19 @@ function AddObjectSideBar(parent)
 	{
 		Editor.addObject(new Script());
 	}, "JS Script");
+
+	//Add blueprints
+	var addBlueprints = new ButtonDrawer(parent);
+	addBlueprints.setImage(Editor.filePath + "icons/script/blocks.png");
+	addBlueprints.optionsPerLine = 2;
+	addBlueprints.size.set(size, size);
+	addBlueprints.optionsSize.set(size, size);
+	addBlueprints.updateInterface();
+
+	//Visual script
+	addScript.addOption(Editor.filePath + "icons/script/blocks.png", function() {
+		Editor.addObject(new VisualScript());
+	}, "Visual script");
 
 	//Effects
 	var addEffects = new ButtonDrawer(parent);
