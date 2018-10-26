@@ -34,6 +34,6 @@ NodesTab.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	this.canvas.style.width = (this.size.x) + "px";
-	this.canvas.style.height = (this.size.y) + "px";
+	this.canvas.width = (this.size.x) + "px";
+	this.canvas.height = (this.size.y) + "px";
 };
