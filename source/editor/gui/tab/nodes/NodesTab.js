@@ -22,6 +22,10 @@ function NodesTab(parent, closeable, container, index)
 
 NodesTab.prototype = Object.create(TabElement.prototype);
 
+NodesTab.prototype.getNodes = function() {
+	return this.graph.serialize();
+}
+
 NodesTab.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
