@@ -244,15 +244,7 @@ function AddObjectSideBar(parent)
 	{
 		Editor.addObject(new Script());
 	}, "JS Script");
-
-	//Add blueprints
-	var addBlueprints = new ButtonDrawer(parent);
-	addBlueprints.setImage(Editor.filePath + "icons/script/blocks.png");
-	addBlueprints.optionsPerLine = 2;
-	addBlueprints.size.set(size, size);
-	addBlueprints.optionsSize.set(size, size);
-	addBlueprints.updateInterface();
-
+	
 	//Visual script
 	addScript.addOption(Editor.filePath + "icons/script/blocks.png", function() {
 		Editor.addObject(new VisualScript());

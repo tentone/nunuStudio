@@ -4,3 +4,5 @@ function VisualScript(nodes) {
 	this.type = "Script";
 	this.name = "Visual";
 }
+
+VisualScript.prototype = Object.create(THREE.Group.prototype);
