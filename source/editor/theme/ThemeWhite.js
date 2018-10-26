@@ -35,4 +35,4 @@ function ThemeWhite()
 	document.body.style.fontSize = "12px";
 }
 
-ThemeManager.register(ThemeWhite, "dark");
+ThemeManager.register(ThemeWhite, "white");
