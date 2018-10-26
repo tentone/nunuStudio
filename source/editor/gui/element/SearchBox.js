@@ -20,10 +20,6 @@ function SearchBox(parent)
 	this.search = new TextBox(this);
 	this.search.setMode(Element.TOP_RIGHT);
 	this.search.element.placeholder = "Search";
-	this.search.setOnChange(function()
-	{
-		console.log(this.value);
-	});
 
 	/**
 	 * Search icon.

@@ -275,6 +275,7 @@ include("editor/gui/element/Canvas.js");
 include("editor/gui/element/RendererCanvas.js");
 include("editor/gui/element/TableForm.js");
 include("editor/gui/element/ImageContainer.js");
+include("editor/gui/element/SearchBox.js");
 
 include("editor/gui/element/dropdown/ContextMenu.js");
 include("editor/gui/element/dropdown/DropdownMenu.js");
@@ -325,7 +326,6 @@ include("editor/gui/tab/CodeEditor.js");
 include("editor/gui/tab/AboutTab.js");
 include("editor/gui/tab/TextEditor.js");
 
-include("editor/gui/tab/treeview/SearchBox.js");
 include("editor/gui/tab/treeview/TreeView.js");
 include("editor/gui/tab/treeview/TreeNode.js");
 

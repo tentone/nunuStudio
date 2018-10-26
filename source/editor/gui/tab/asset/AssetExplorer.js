@@ -49,27 +49,15 @@ function AssetExplorer(parent, closeable, container, index)
 	this.bar = new AssetExplorerMenu(this);
 
 	//Search
-	this.search = new TextBox(this.bar);
+	this.search = new SearchBox(this.bar);
 	this.search.setMode(Element.TOP_RIGHT);
-	this.search.size.set(140, 17);
+	this.search.size.set(160, 20);
 	this.search.position.set(2, 0);
-	this.search.element.placeholder = "Search";
 	this.search.updateInterface();
 	this.search.setOnChange(function()
 	{
 		self.filterByName(this.value);
 	});
-
-	//Search icon
-	this.searchIcon = document.createElement("img");
-	this.searchIcon.style.position = "absolute";
-	this.searchIcon.style.display = "block";
-	this.searchIcon.style.top = "14px";
-	this.searchIcon.style.width = "14px";
-	this.searchIcon.style.top = "2px";
-	this.searchIcon.style.right = "150px";
-	this.searchIcon.src = Editor.filePath + "icons/misc/search.png";
-	this.element.appendChild(this.searchIcon);
 
 	//Files in explorer
 	this.files = [];
