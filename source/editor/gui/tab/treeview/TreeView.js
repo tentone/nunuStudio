@@ -281,23 +281,16 @@ TreeView.prototype.updateChildPosition = function()
 
 	if(this.root !== null)
 	{
-<<<<<<< HEAD
 		this.root.position.set(0,22);
-=======
 		this.root.position.set(0, 22);
->>>>>>> upstream/SearchTree
 		this.root.updateInterface();
 
 		this.size.y = updateChildPosition(this.root, 42, 1, this.root.folded);
 	}
 };
 
-<<<<<<< HEAD
-TreeView.prototype.updateSize = function() {
-=======
 TreeView.prototype.updateSize = function()
 {
->>>>>>> upstream/SearchTree
 	TabElement.prototype.updateSize.call(this);
 
 	this.search.size.set(this.size.x, 22);

@@ -332,7 +332,6 @@ include("editor/gui/tab/CodeEditor.js");
 include("editor/gui/tab/AboutTab.js");
 include("editor/gui/tab/TextEditor.js");
 
-<<<<<<< HEAD
 //Nodes tab
 include("editor/gui/tab/nodes/NodesTab.js");
 
@@ -342,8 +341,6 @@ include("editor/gui/tab/nodes/ThreeMath.js");
 include("editor/gui/tab/nodes/ThreeScene.js");
 include("editor/gui/tab/nodes/ThreeUtils.js");
 
-=======
->>>>>>> upstream/SearchTree
 include("editor/gui/tab/treeview/SearchBox.js");
 include("editor/gui/tab/treeview/TreeView.js");
 include("editor/gui/tab/treeview/TreeNode.js");
