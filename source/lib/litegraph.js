@@ -1642,6 +1642,12 @@ LGraph.prototype.load = function(url)
 	}
 }
 
+LGraph.prototype.setFromString = function(string) {
+	var that = this;
+	var data = JSON.parse(string);
+	that.configure(data);
+}
+
 LGraph.prototype.onNodeTrace = function(node, msg, color)
 {
 	//TODO
