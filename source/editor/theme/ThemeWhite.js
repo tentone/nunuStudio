@@ -11,23 +11,23 @@ function ThemeWhite()
 	this.font = "Arial";
 
 	//Color
-	this.barColor = "#222222";
-	this.sepColor = "#292929";
-	this.panelColor = "#333333";
-	this.resizeTabColor = "#222222";
-	this.boxColor = "#444444";
+	this.barColor = "#FFFFFF";
+	this.sepColor = "#FFFFFF";
+	this.panelColor = "#FFFFFF";
+	this.resizeTabColor = "#FFFFFF";
+	this.boxColor = "#FFFFFF";
 	this.textColor = "#FFFFFF";
 	this.iconColor = "#FFFFFF";
 
 	//Button
-	this.buttonColor = "#222222";
-	this.buttonOverColor = "#555555";
-	this.buttonLightColor = "#333333";
+	this.buttonColor = "#FFFFFF";
+	this.buttonOverColor = "#FFFFFF";
+	this.buttonLightColor = "#FFFFFF";
 	
 	//Audio player
-	this.audioTrack = "#222222";
+	this.audioTrack = "#FFFFFF";
 	this.audioScrubber = "#FFFFFF";
-	this.audioProgress = "#555555";
+	this.audioProgress = "#FFFFFF";
 
 	//Body
 	document.body.style.fontFamily = this.font;

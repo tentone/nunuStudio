@@ -272,6 +272,7 @@ include("editor/locale/LocaleEN.js");
 
 include("editor/theme/ThemeManager.js");
 include("editor/theme/ThemeDark.js");
+include("editor/theme/ThemeWhite.js");
 
 include("editor/gui/element/Element.js");
 include("editor/gui/element/DocumentBody.js");
@@ -342,7 +343,6 @@ include("editor/gui/tab/nodes/ThreeMath.js");
 include("editor/gui/tab/nodes/ThreeScene.js");
 include("editor/gui/tab/nodes/ThreeUtils.js");
 
-include("editor/gui/tab/treeview/SearchBox.js");
 include("editor/gui/tab/treeview/TreeView.js");
 include("editor/gui/tab/treeview/TreeNode.js");
 
