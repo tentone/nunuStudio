@@ -20,9 +20,9 @@ function ThemeWhite()
 	this.iconColor = "#FFFFFF";
 
 	//Button
-	this.buttonColor = "#FFFFFF";
-	this.buttonOverColor = "#FFFFFF";
-	this.buttonLightColor = "#FFFFFF";
+	this.buttonColor = "#ddd";
+	this.buttonOverColor = "#fff";
+	this.buttonLightColor = "#fff";
 	
 	//Audio player
 	this.audioTrack = "#FFFFFF";
