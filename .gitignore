@@ -1,7 +1,9 @@
-package-lock.json
-node_modules
-nwjs
+node_modules/
+nwjs/
+source/temp/
+source/node_modules/
+
 source/config
-source/temp/*
+package-lock.json
 *.db
 *.log

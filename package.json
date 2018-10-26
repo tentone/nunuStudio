@@ -1,12 +1,11 @@
 {
 	"name": "nunuStudio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
-	"main": "build/Nunu.js",
+	"main": "source/editor.html",
 	"directories": {
 		"doc": "docs"
 	},
 	"scripts": {
-		"all": "cd build/build && node update.js && node build.js",
 		"build": "cd build/build && node build.js",
 		"update": "cd build/build && node update.js"
 	},
@@ -29,7 +28,6 @@
 	},
 	"homepage": "https://www.nunustudio.org",
 	"devDependencies": {
-		"yuidocjs": "",
-		"cordova": ""
+		"yuidocjs": ""
 	}
 }

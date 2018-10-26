@@ -1,14 +1,39 @@
 {
 	"name": "nunuStudio",
+	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "editor.html",
-	"chromium-args" : "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
-	"window":
-	{
-		"icon": "editor/files/icon.png",
+	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
+	"window": {
+		"icon": "files/icon.png",
 		"frame": true,
 		"width": 1280,
 		"height": 720,
 		"min_width": 800,
 		"min_height": 600
+	},
+	"scripts": {
+		"start": "nw install 0.33.4-sdk && nw ./"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tentone/nunuStudio.git"
+	},
+	"keywords": [
+		"three.js",
+		"editor",
+		"webgl",
+		"engine",
+		"gamedev",
+		"cannonjs"
+	],
+	"author": "Tentone",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/tentone/nunuStudio/issues"
+	},
+	"homepage": "https://www.nunustudio.org",
+	"devDependencies": {
+		"cordova": "",
+		"nwjs": ""
 	}
 }

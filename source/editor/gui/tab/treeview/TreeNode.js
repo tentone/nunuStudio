@@ -569,8 +569,8 @@ function TreeNode(container)
 	}
 }
 
-TreeNode.ARROW_DOWN = "editor/files/icons/misc/arrow_down.png";
-TreeNode.ARROW_RIGHT = "editor/files/icons/misc/arrow_right.png";
+TreeNode.ARROW_DOWN = "files/icons/misc/arrow_down.png";
+TreeNode.ARROW_RIGHT = "files/icons/misc/arrow_right.png";
 
 /**
  * Default value.
