@@ -282,6 +282,7 @@ include("editor/gui/element/Canvas.js");
 include("editor/gui/element/RendererCanvas.js");
 include("editor/gui/element/TableForm.js");
 include("editor/gui/element/ImageContainer.js");
+include("editor/gui/element/SearchBox.js");
 
 include("editor/gui/element/dropdown/ContextMenu.js");
 include("editor/gui/element/dropdown/DropdownMenu.js");

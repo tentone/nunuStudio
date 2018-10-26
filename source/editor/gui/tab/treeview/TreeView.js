@@ -20,7 +20,8 @@ function TreeView(parent, closeable, container, index)
 	this.element.style.backgroundColor = null;
 
 	this.search = new SearchBox(this);
-
+	this.search.element.style.backgroundColor = Editor.theme.barColor;;
+	
 	this.program = null;
 	this.root = null;
 }
