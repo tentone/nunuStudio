@@ -26,6 +26,10 @@ NodesTab.prototype.getNodes = function() {
 	return this.graph.serialize();
 }
 
+NodesTab.prototype.setNodes = function(nodes) {
+	this.graph.setFromString(nodes);
+}
+
 NodesTab.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
