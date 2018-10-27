@@ -343,6 +343,11 @@ include("editor/gui/tab/nodes/ThreeMath.js");
 include("editor/gui/tab/nodes/ThreeScene.js");
 include("editor/gui/tab/nodes/ThreeUtils.js");
 
+//TODO: Components
+include("editor/gui/components/ComponentManager.js");
+
+//Still Nunu
+
 include("editor/gui/tab/treeview/TreeView.js");
 include("editor/gui/tab/treeview/TreeNode.js");
 
