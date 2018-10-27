@@ -8,6 +8,8 @@ function NodesTab(parent, closeable, container, index)
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
 	this.canvas = document.createElement("canvas");
+	this.canvas.width =  1000;
+	this.canvas.height = 1000;
 	this.canvas.id = "nodeed";
 
 	this.element.appendChild(this.canvas);
