@@ -9,8 +9,7 @@ function NodesTab(parent, closeable, container, index)
 
 	this.canvas = document.createElement("canvas");
 	this.canvas.id = "nodeed";
-	this.canvas.width = "683";
-	this.canvas.height= "491";
+
 	this.element.appendChild(this.canvas);
 
 	this.graph = new LGraph();
@@ -33,6 +32,9 @@ NodesTab.prototype.setNodes = function(nodes) {
 NodesTab.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
+
+	this.canvas.width = this.size.x;
+	this.canvas.height = this.size.y;
 
 	this.canvas.style.width = (this.size.x) + "px";
 	this.canvas.style.height = (this.size.y) + "px";
