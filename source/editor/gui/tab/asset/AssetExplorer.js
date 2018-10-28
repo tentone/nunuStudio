@@ -48,7 +48,12 @@ function AssetExplorer(parent, closeable, container, index)
 	//Bar
 	this.bar = new AssetExplorerMenu(this);
 
-	//Search
+	/**
+	 * Search box to filter by name.
+	 *
+	 * @property search
+	 * @type {SearchBox}
+	 */
 	this.search = new SearchBox(this.bar);
 	this.search.setMode(Element.TOP_RIGHT);
 	this.search.size.set(160, 20);
@@ -59,10 +64,20 @@ function AssetExplorer(parent, closeable, container, index)
 		self.filterByName(this.value);
 	});
 
-	//Files in explorer
+	/**
+	 * Assets in explorer.
+	 *
+	 * @property files
+	 * @type {Array}
+	 */
 	this.files = [];
 
-	//Resource manager attached to the explorer
+	/**
+	 * Resource manager attached to the explorer.
+	 *
+	 * @property manager
+	 * @type {ResourceManger}
+	 */
 	this.manager = null;
 }
 
@@ -87,16 +102,6 @@ AssetExplorer.prototype.filterByName = function(search)
 	}
 };
 
-AssetExplorer.prototype.activate = function()
-{
-	TabElement.prototype.activate.call(this);
-
-	if(this.manager !== null)
-	{
-		this.updateSelection();
-	}
-};
-
 AssetExplorer.prototype.updateSettings = function()
 {
 	for(var i = 0; i < this.files.length; i++)
@@ -105,12 +110,20 @@ AssetExplorer.prototype.updateSettings = function()
 	}
 };
 
+/**
+ * Update asset explorer to highlight the selected object.
+ *
+ * This method should be used only if stricly necessary.
+ *
+ * @updateSelection
+ */
 AssetExplorer.prototype.updateSelection = function()
-{
+{	
 	for(var i = 0; i < this.files.length; i++)
 	{
-		this.files[i].updateSelection();
+		this.files[i].setSelected(Editor.isSelected(this.files[i].asset));
 	}
+
 };
 
 AssetExplorer.prototype.attach = function(manager)
@@ -137,13 +150,13 @@ AssetExplorer.prototype.updateObjectsView = function()
 	}
 
 	//Geometries
-	/*var geometries = this.manager.geometries;
+	var geometries = this.manager.geometries;
 	for(var i in geometries)
 	{
 		var file = new GeometryAsset(this.assets);
 		file.setAsset(geometries[i]);
 		this.add(file);
-	}*/
+	}
 
 	//Textures
 	var textures = this.manager.textures;
@@ -200,7 +213,11 @@ AssetExplorer.prototype.updateObjectsView = function()
 	}
 };
 
-//Remove all files
+/** 
+ * Clear the explorer, remove all assets.
+ *
+ * @method clear
+ */
 AssetExplorer.prototype.clear = function()
 {
 	while(this.files.length > 0)
@@ -209,7 +226,12 @@ AssetExplorer.prototype.clear = function()
 	}
 };
 
-//Add file to explorer
+/** 
+ * Add asset to the explorer.
+ *
+ * @method add
+ * @param {Asset} file
+ */
 AssetExplorer.prototype.add = function(file)
 {
 	file.setSize(Editor.settings.general.filePreviewSize);
@@ -220,6 +242,9 @@ AssetExplorer.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
+	this.bar.size.set(this.size.x, 20);
+	this.bar.updateSize();
+	
 	this.assets.size.set(this.size.x, this.size.y - 20);
 	this.assets.updateSize();
 };

@@ -201,6 +201,8 @@ TreeView.prototype.buildTree = function()
 /**
  * Update treeview to highlight the selected object.
  *
+ * This method should be used if stricly necessary since it iterates trough the hole tree it is slow.
+ *
  * @updateSelection
  */
 TreeView.prototype.updateSelection = function()

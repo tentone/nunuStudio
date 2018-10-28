@@ -5,10 +5,6 @@ function AssetExplorerMenu(parent)
 	Element.call(this, parent, "div");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
-	this.element.style.overflow = "visible";
-	this.element.style.position = "absolute";
-	this.element.style.width = "100%";
-	this.element.style.height = "20px";
 
 	//Import
 	var menu = new DropdownMenu(this);

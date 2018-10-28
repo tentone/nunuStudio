@@ -1,5 +1,14 @@
 "use strict";
 
+/**
+ * Asset represents an resource in the asset explorer.
+ *
+ * There are multiple types of assets this class should be used as base for other types.
+ *
+ * @class Asset
+ * @param {Element} parent
+ * @extends {Element}
+ */
 function Asset(parent)
 {
 	Element.call(this, parent, "div");
@@ -85,36 +94,56 @@ function Asset(parent)
 
 Asset.prototype = Object.create(Element.prototype);
 
-//Update background based on selection state
-Asset.prototype.updateSelection = function()
+/**
+ * Update selection state and the matching visual elements.
+ *
+ * @method setSelected
+ * @param {Boolean} selected If true set selected, otherwise se unselected.
+ */
+Asset.prototype.setSelected = function(selected)
 {
-	this.element.style.backgroundColor = Editor.isSelected(this.asset) ? Editor.theme.buttonOverColor : "";
+	//this.selected = selected;
+
+	this.element.style.backgroundColor = selected ? Editor.theme.buttonOverColor : null;
 };
 
-//Set size
+/**
+ * Set the size of the asset.
+ *
+ * @method setSize
+ * @param {Number} size Size in px.
+ */
 Asset.prototype.setSize = function(size)
 {
 	this.element.style.width = size + "px";
 	this.element.style.height = size + "px";
 };
 
-//Set file icon
+/**
+ * Set icon to use in the asset.
+ *
+ * @method setIcon
+ * @param {String} icon Image URL.
+ */
 Asset.prototype.setIcon = function(icon)
 {
 	this.icon.src = icon;
 };
 
-//Set file label
+/**
+ * Set asset label.
+ *
+ * @method setText
+ * @param {String} text Asset label.
+ */
 Asset.prototype.setText = function(text)
 {
 	this.name.data = text;
 };
 
-//Update metadata
 Asset.prototype.updateMetadata = function()
 {
 	this.setText(this.asset.name);
 };
 
-//Update Interface
 Asset.prototype.updateInterface = function(){};
