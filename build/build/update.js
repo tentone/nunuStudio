@@ -5,18 +5,12 @@ console.log("                              nunuStudio");
 console.log("                    github.com/tentone/nunuStudio");
 console.log("                           Update dependencies");
 console.log("----------------------------------------------------------------------");
-console.log("                               three.js");
-console.log("----------------------------------------------------------------------");
 
 var threejsURL = "https://rawgit.com/mrdoob/three.js/dev";
 var threejsPath = "../../source/lib/three";
 
 downloadFolder(threejsPath, threejsURL + "/examples/js", true);
 download(threejsPath + "/three.min.js", threejsURL + "/build/three.min.js");
-
-console.log("----------------------------------------------------------------------");
-console.log("                               Codemirror");
-console.log("----------------------------------------------------------------------");
 
 var codemirrorURL = "https://rawgit.com/codemirror/CodeMirror/master";
 var codemirrorPath = "../../source/lib/codemirror";
@@ -86,17 +80,17 @@ function download(fname, url)
 			if(data.search("404: Not Found") === -1)
 			{
 				writeFile(fname, data);
-				console.log("Updated:" +  fname); // + "<<" + url);
+				console.log("Updated: " +  fname);
 			}
 			else
 			{
-				console.log("Failed:" +  fname); // + "<<" + url);
+				console.log("Failed: " +  fname);
 			}
 
 		});
 	}).on("error", function(error)
 	{
-		console.log("Error:" + fname + "(" +  error + ")");
+		console.log("Error: " + fname + ", " +  error);
 	});
 	request.end();
 }
