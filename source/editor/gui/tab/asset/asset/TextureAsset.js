@@ -154,11 +154,11 @@ function TextureAsset(parent)
 
 TextureAsset.prototype = Object.create(Asset.prototype);
 
-//Set object to file
-TextureAsset.prototype.setAsset = function(texture)
+TextureAsset.prototype.attach = function(asset)
 {
-	this.asset = texture;
-	this.preview = TextureRenderer.generateElement(texture);
+	Asset.prototype.attach.call(this, asset);
+
+	this.preview = TextureRenderer.generateElement(asset);
 
 	if(this.preview !== null)
 	{
@@ -170,6 +170,4 @@ TextureAsset.prototype.setAsset = function(texture)
 		this.preview.style.height = "66%";
 		this.element.appendChild(this.preview);	
 	}
-
-	this.updateMetadata();
 };

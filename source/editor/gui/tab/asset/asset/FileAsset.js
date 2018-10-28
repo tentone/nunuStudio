@@ -83,14 +83,6 @@ function FileAsset(parent)
 
 FileAsset.prototype = Object.create(Asset.prototype);
 
-//Set object to file
-FileAsset.prototype.setAsset = function(file)
-{
-	this.asset = file;
-	this.updateMetadata();
-};
-
-//Update material preview
 FileAsset.prototype.updateMetadata = function()
 {
 	this.setText(this.asset.name);

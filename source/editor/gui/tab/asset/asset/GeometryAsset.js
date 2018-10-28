@@ -67,14 +67,6 @@ function GeometryAsset(parent)
 
 GeometryAsset.prototype = Object.create(Asset.prototype);
 
-//Set object to file
-GeometryAsset.prototype.setAsset = function(geometry)
-{
-	this.asset = geometry;
-	this.updateMetadata();
-};
-
-//Update material preview
 GeometryAsset.prototype.updateMetadata = function()
 {
 	if(this.asset !== null)

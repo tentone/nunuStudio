@@ -79,17 +79,6 @@ function FontAsset(parent)
 
 FontAsset.prototype = Object.create(Asset.prototype);
 
-//Set object to file
-FontAsset.prototype.setAsset = function(font)
-{
-	if(font instanceof Font)
-	{
-		this.asset = font;
-		this.updateMetadata();
-	}
-};
-
-//Update material preview
 FontAsset.prototype.updateMetadata = function()
 {
 	var image = this.image;

@@ -232,16 +232,6 @@ MaterialAsset.prototype.destroy = function()
 	this.restoreMaterial();
 };
 
-//Set object to file
-MaterialAsset.prototype.setAsset = function(material)
-{
-	if(material instanceof THREE.Material)
-	{
-		this.asset = material;
-		this.updateMetadata();
-	}
-};
-
 //Highlight material
 MaterialAsset.prototype.highlightMaterial = function()
 {
@@ -266,7 +256,6 @@ MaterialAsset.prototype.restoreMaterial = function()
 	}
 };
 
-//Update material preview
 MaterialAsset.prototype.updateMetadata = function()
 {
 	if(this.asset !== null)

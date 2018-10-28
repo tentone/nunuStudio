@@ -118,13 +118,3 @@ function AudioAsset(parent)
 }
 
 AudioAsset.prototype = Object.create(Asset.prototype);
-
-//Set object to file
-AudioAsset.prototype.setAsset = function(audio)
-{
-	if(audio instanceof Audio)
-	{
-		this.asset = audio;
-		this.updateMetadata();
-	}
-};

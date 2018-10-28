@@ -98,16 +98,13 @@ function VideoAsset(parent)
 
 VideoAsset.prototype = Object.create(Asset.prototype);
 
-//Set object to file
-VideoAsset.prototype.setAsset = function(video)
+VideoAsset.prototype.attach = function(video)
 {
-	this.asset = video;
-	this.preview.src = video.data;
+	Asset.prototype.attach.call(this, asset);
 
-	this.updateMetadata();
+	this.preview.src = asset.data;
 };
 
-//Update material preview
 VideoAsset.prototype.updateMetadata = function()
 {
 	if(this.asset !== null)

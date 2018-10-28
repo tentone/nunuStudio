@@ -120,6 +120,18 @@ Asset.prototype.setSize = function(size)
 };
 
 /**
+ * Attach resource to this asset.
+ *
+ * @method attach
+ * @param {Resource} asset
+ */
+Asset.prototype.attach = function(asset)
+{
+	this.asset = asset;
+	this.updateMetadata();
+};
+
+/**
  * Set icon to use in the asset.
  *
  * @method setIcon

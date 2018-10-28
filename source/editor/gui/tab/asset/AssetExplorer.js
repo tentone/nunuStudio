@@ -126,18 +126,25 @@ AssetExplorer.prototype.updateSelection = function()
 
 };
 
+/**
+ * Attach a resource manager to this explorer.
+ *
+ * @method attach
+ * @param {ResourceManager} manager.
+ */
 AssetExplorer.prototype.attach = function(manager)
 {
 	if(this.manager !== manager)
 	{	
 		this.manager = manager;
-		this.clear();
 		this.updateObjectsView();
 	}
 };
 
 AssetExplorer.prototype.updateObjectsView = function()
 {
+	//TODO <USE ONLY TO INITIALIZE THE EXPLORER>
+
 	this.clear();
 
 	//Materials
@@ -145,7 +152,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	for(var i in materials)
 	{
 		var file = new MaterialAsset(this.assets);
-		file.setAsset(materials[i]);
+		file.attach(materials[i]);
 		this.add(file);
 	}
 
@@ -154,7 +161,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	for(var i in geometries)
 	{
 		var file = new GeometryAsset(this.assets);
-		file.setAsset(geometries[i]);
+		file.attach(geometries[i]);
 		this.add(file);
 	}
 
@@ -163,7 +170,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	for(var i in textures)
 	{
 		var file = new TextureAsset(this.assets);
-		file.setAsset(textures[i]);
+		file.attach(textures[i]);
 		this.add(file);
 	}
 
@@ -172,7 +179,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	for(var i in fonts)
 	{
 		var file = new FontAsset(this.assets);
-		file.setAsset(fonts[i]);
+		file.attach(fonts[i]);
 		this.add(file);
 	}
 
@@ -180,7 +187,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	for(var i in images)
 	{
 		var file = new ImageAsset(this.assets);
-		file.setAsset(images[i]);
+		file.attach(images[i]);
 		this.add(file);
 	}
 
@@ -188,7 +195,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	for(var i in videos)
 	{
 		var file = new VideoAsset(this.assets);
-		file.setAsset(videos[i]);
+		file.attach(videos[i]);
 		this.add(file);
 	}
 
@@ -197,7 +204,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 	for(var i in audio)
 	{
 		var file = new AudioAsset(this.assets);
-		file.setAsset(audio[i]);
+		file.attach(audio[i]);
 		this.add(file);
 	}
 
@@ -208,7 +215,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 		var resource = resources[i];
 
 		var file = new FileAsset(this.assets);
-		file.setAsset(resource);
+		file.attach(resource);
 		this.add(file);
 	}
 };
@@ -244,7 +251,7 @@ AssetExplorer.prototype.updateSize = function()
 
 	this.bar.size.set(this.size.x, 20);
 	this.bar.updateSize();
-	
+
 	this.assets.size.set(this.size.x, this.size.y - 20);
 	this.assets.updateSize();
 };

@@ -97,11 +97,9 @@ function ImageAsset(parent)
 
 ImageAsset.prototype = Object.create(Asset.prototype);
 
-//Set object to file
-ImageAsset.prototype.setAsset = function(image)
+ImageAsset.prototype.attach = function(asset)
 {
-	this.asset = image;
-	this.preview.src = image.data;
+	Asset.prototype.attach.call(this, asset);
 
-	this.updateMetadata();
+	this.preview.src = asset.data;
 };
