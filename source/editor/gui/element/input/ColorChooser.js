@@ -5,6 +5,7 @@ function ColorChooser(parent)
 	Element.call(this, parent, "input");
 
 	this.element.type = "text";
+	this.element.style.outline = "none";
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.textIndent = "4px";

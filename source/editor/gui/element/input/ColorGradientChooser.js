@@ -96,6 +96,7 @@ ColorGradientChooser.prototype.updateButtons = function()
 		button.style.width = "15px";
 		button.style.height = "100%";
 		button.style.cursor = "pointer";
+		button.style.outline = "none";
 		button.style.borderStyle = "none";
 		button.style.boxSizing = "border-box";
 		button.style.borderRadius = "2px";

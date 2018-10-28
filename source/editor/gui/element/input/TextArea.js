@@ -9,6 +9,7 @@ function TextArea(parent)
 	this.element.style.backgroundColor = Editor.theme.boxColor;
 	this.element.style.fontFamily = Editor.theme.font;
 	this.element.style.color = Editor.theme.textColor;
+	this.element.style.outline = "none";
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.borderRadius = "4px";

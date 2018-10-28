@@ -2,12 +2,6 @@
 
 function ThemeDark()
 {
-	this.name = "dark";
-	this.author = "tentone";
-	this.info = "";
-	this.version = "v1.0";
-
-	//Font
 	this.font = "Arial";
 
 	//Color

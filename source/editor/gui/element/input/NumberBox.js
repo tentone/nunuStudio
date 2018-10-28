@@ -8,6 +8,7 @@ function NumberBox(parent)
 	this.element.step = "0.1";
 	this.element.style.backgroundColor = Editor.theme.boxColor;
 	this.element.style.color = Editor.theme.textColor;
+	this.element.style.outline = "none";
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.textIndent = "4px";

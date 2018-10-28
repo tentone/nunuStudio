@@ -22,6 +22,7 @@ function TreeNode(container)
 	this.object = null;
 	this.uuid = null;
 	this.folded = false;
+	this.selected = false;
 
 	//Children and parent elements
 	this.parent = null;
@@ -87,25 +88,27 @@ function TreeNode(container)
 		this.style.opacity = 0.5;
 	};
 
-	this.arrow.onclick = function()
+	this.arrow.onclick = function(event)
 	{
+		event.stopPropagation();
+		
 		self.updateFoldedState(!self.folded);
 	};
 
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
+		if(!self.selected)
+		{
+			self.styleMouseOver();
+		}
 	};
 
 	this.element.onmouseleave = function()
 	{
-		if(!Editor.isSelected(self.object))
+		if(!self.selected)
 		{
-			this.style.backgroundColor = Editor.theme.buttonLightColor;
+			self.styleNormal();
 		}
-
-		dragState = TreeNode.NONE;
-		self.clearBorder();
 	};
 
 	this.element.ondragstart = function(event)
@@ -615,6 +618,57 @@ TreeNode.prototype.clearBorder = function()
 	this.element.style.borderBottom = null;
 };
 
+
+/**
+ * Set base style of the tree node.
+ *
+ * @method styleNormal
+ */
+TreeNode.prototype.styleNormal = function()
+{
+	this.element.style.backgroundColor = null;
+};
+
+/**
+ * Set style for node selected.
+ *
+ * @method styleSelected
+ */
+TreeNode.prototype.styleSelected = function()
+{
+	this.element.style.backgroundColor = Editor.theme.buttonOverColor;
+};
+
+/**
+ * Set style of the node on mouse over
+ *
+ * @method styleMouseOver
+ */
+TreeNode.prototype.styleMouseOver = function()
+{
+	this.element.style.backgroundColor = Editor.theme.buttonColor;
+};
+
+/**
+ * Set selection state of this tree node.
+ * 
+ * @method setSelected
+ * @param {Boolean} selected If true set selected, otherwise se unselected.
+ */
+TreeNode.prototype.setSelected = function(selected)
+{
+	this.selected = selected;
+
+	if(this.selected === true)
+	{
+		this.styleSelected();
+	}
+	else
+	{
+		this.styleNormal();
+	}
+};
+
 /**
  * Set node border.
  * 
@@ -633,7 +687,7 @@ TreeNode.prototype.setBorder = function(place)
 	{
 		this.element.style.borderBottom = "1px solid #999999";
 	}
-	else if(place === TreeNode.INSIDE)
+	else //if(place === TreeNode.INSIDE)
 	{
 		this.element.style.border = "1px solid #999999";
 	}
@@ -648,18 +702,16 @@ TreeNode.prototype.setBorder = function(place)
 TreeNode.prototype.attach = function(object)
 {
 	this.object = object;
+	this.object.gui = {treeNode: this};
+
 	this.uuid = object.uuid;
 	this.folded = object.folded;
+	this.setSelected(Editor.isSelected(object));
 
 	this.element.draggable = !object.locked;
 	this.labelText.data = object.name;
 	this.icon.src = this.object.locked ? ObjectIcons.locked : ObjectIcons.get(object.type);
 	this.arrow.src = this.folded ? TreeNode.ARROW_RIGHT : TreeNode.ARROW_DOWN;
-	
-	if(Editor.isSelected(object))
-	{
-		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
-	}
 };
 
 /**

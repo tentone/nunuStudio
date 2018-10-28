@@ -24,6 +24,7 @@ function VectorBox(parent)
 		input.style.boxSizing = "border-box";
 		input.style.textIndent = "4px";
 		input.style.borderRadius = "4px";
+		input.style.outline = "none";
 		input.style.MozAppearance = "textfield";
 		input.style.webkitAppearance = "caret";
 		input.style.appearance = "textfield";
@@ -71,12 +72,7 @@ function VectorBox(parent)
 	this.element.appendChild(this.wText);
 
 	//W
-	this.w = document.createElement("input");
-	this.w.type = "number";
-	this.w.style.backgroundColor = Editor.theme.boxColor;
-	this.w.style.color = Editor.theme.textColor;
-	this.w.style.borderStyle = "none";
-	this.w.style.position = "absolute";
+	this.w = createInput();
 	this.element.appendChild(this.w);
 
 	//Order
