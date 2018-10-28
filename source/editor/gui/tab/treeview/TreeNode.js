@@ -502,7 +502,7 @@ function TreeNode(container)
 		{
 			if(Editor.isSelected(self.object))
 			{
-				Editor.removeFromSelection(self.object);
+				Editor.unselectObject(self.object);
 			}
 			else
 			{
@@ -702,7 +702,7 @@ TreeNode.prototype.setBorder = function(place)
 TreeNode.prototype.attach = function(object)
 {
 	this.object = object;
-	this.object.gui = {treeNode: this};
+	this.object.gui = {node: this};
 
 	this.uuid = object.uuid;
 	this.folded = object.folded;
@@ -786,6 +786,25 @@ TreeNode.prototype.updateFoldedState = function(folded)
 	this.object.folded = this.folded;
 	this.arrow.src = this.folded ? TreeNode.ARROW_RIGHT : TreeNode.ARROW_DOWN;
 	this.container.updateChildPosition();
+};
+
+/**
+ * Expand all elements from this node to the root.
+ *
+ * @method expandToRoot
+ */
+TreeNode.prototype.expandToRoot = function()
+{
+	var parent = this.parent;
+
+	while(parent !== null)
+	{
+		parent.updateFoldedState(false);
+		parent.setVisibility(true);
+		parent = parent.parent;
+	}
+	
+	this.element.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
 };
 
 TreeNode.prototype.destroy = function()

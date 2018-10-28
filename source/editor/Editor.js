@@ -766,40 +766,86 @@ Editor.initialize = function()
 	Editor.manager.create();
 };
 
-//Select a single object
+/** 
+ * Select single object.
+ * 
+ * @method selectObject
+ * @param {THREE.Object3D} object Object to select.
+ */
 Editor.selectObject = function(object)
 {
+	for(var i = 0; i < Editor.selection.length; i++)
+	{
+		if(Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
+		{
+			Editor.selection[i].gui.node.setSelected(false);
+		}
+	}
+
 	Editor.selection = [object];
+
+	if(object.gui !== undefined && object.gui.node !== undefined)
+	{
+		object.gui.node.setSelected(true);
+		object.gui.node.expandToRoot();
+	}
+
 	Editor.updateSelectionGUI();
 	Editor.selectTool();
 };
 
-//Add object to selection
+/** 
+ * Add object to selection.
+ * 
+ * @method addToSelection
+ * @param {THREE.Object3D} object Object to add to selection.
+ * @param {Boolean} updateClient If false does not update the management client.
+ */
 Editor.addToSelection = function(object)
 {
 	Editor.selection.push(object);
+
+	if(object.gui !== undefined && object.gui.node !== undefined)
+	{
+		object.gui.node.setSelected(true);
+		object.gui.node.expandToRoot();
+	}
+
 	Editor.updateSelectionGUI();
 	Editor.selectTool();
 };
 
-//Remove object from selection
-Editor.removeFromSelection = function(object)
+/**
+ * Remove from selection.
+ * 
+ * @method unselectObject
+ * @param {THREE.Object3D} object Object to remove from selection.
+ */
+Editor.unselectObject = function(object)
 {
 	for(var i = 0; i < Editor.selection.length; i++)
 	{
 		if(Editor.selection[i].uuid === object.uuid)
 		{
+			if(Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
+			{
+				Editor.selection[i].gui.node.setSelected(false);
+			}
+			
 			Editor.selection.splice(i, 1);
-
 			Editor.updateSelectionGUI();
 			Editor.selectTool();
-
 			return;
 		}
 	}
 };
 
-//Check if object is selected
+/**
+ * Check if a object is selected.
+ * 
+ * @method isSelected
+ * @param {THREE.Object3D} Check if object is selected.
+ */
 Editor.isSelected = function(object)
 {
 	for(var i = 0; i < Editor.selection.length; i++)
@@ -813,7 +859,11 @@ Editor.isSelected = function(object)
 	return false;
 };
 
-//Resize to fit window
+/** 
+ * Resize the editor to fit the document body.
+ *
+ * @method resize
+ */
 Editor.resize = function()
 {
 	if(!Nunu.isFullscreen())
@@ -822,24 +872,55 @@ Editor.resize = function()
 	}
 };
 
-//Check if there is some object selected
+/**
+ * Check if there is some object selected.
+ *
+ * @method hasObjectSelected
+ * @return {Boolean} True if there is an object selected.
+ */
 Editor.hasObjectSelected = function()
 {
 	return Editor.selection.length > 0;
 };
 
-//Clear object selection
+/**
+ * Clear object selection.
+ * 
+ * @method clearSelection
+ */
 Editor.clearSelection = function()
 {
+	for(var i = 0; i < Editor.selection.length; i++)
+	{
+		if(Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
+		{
+			Editor.selection[i].gui.node.setSelected(false);
+		}
+	}
+
 	Editor.selection = [];
 };
 
+/**
+ * Add action to history.
+ *
+ * Automatically calls the change method of GUI elements.
+ * 
+ * @method addAction
+ * @param {Action} action Action to add to the history.
+ */
 Editor.addAction = function(action)
 {
 	Editor.history.add(action);
 };
 
-//Add object to actual scene
+/**
+ * Add objects to the actual scene, and creates an action in the editor history. 
+ * 
+ * @method addObject
+ * @param {Object3D} object Object to be added.
+ * @param {Object3D} parent Parent object, if undefined the program scene is used.
+ */
 Editor.addObject = function(object, parent)
 {
 	if(parent === undefined)
@@ -861,7 +942,12 @@ Editor.addObject = function(object, parent)
 	Editor.addAction(new ActionBundle(actions));
 };
 
-//Rename object, if none passed as argument selected object is used
+/**
+ * Rename object, if none passed as argument selected object is used.
+ *
+ * @method renameObject
+ * @param {Object3D} object Object to be renamed.
+ */
 Editor.renameObject = function(object)
 {
 	if(object === undefined)
@@ -886,7 +972,13 @@ Editor.renameObject = function(object)
 	}
 };
 
-//Delete selected Object
+
+/**
+ * Delete object from the editor, and creates an action in the editor history. 
+ * 
+ * @method deleteObject
+ * @param {Array} objects List of objects.
+ */
 Editor.deleteObject = function(object)
 {
 	var selected = (object === undefined) ? Editor.selection : [object];
@@ -915,7 +1007,14 @@ Editor.deleteObject = function(object)
 	}
 };
 
-//Copy selected object
+/**
+ * Copy selected object to the clipboard.
+ *
+ * Uses the JSON serialization of the object.
+ *
+ * @method copyObject
+ * @param {Object3D} object Object to copy.
+ */
 Editor.copyObject = function(object)
 {
 	//If no object passed copy selected object
@@ -942,7 +1041,14 @@ Editor.copyObject = function(object)
 	}
 };
 
-//Cut selected object
+/**
+ * Cut selected object, copy to the clipboard and delete it.
+ *
+ * Uses the JSON serialization of the object.
+ *
+ * @method copyObject
+ * @param {Object3D} object Object to copy.
+ */
 Editor.cutObject = function(object)
 {
 	if(object === undefined)
@@ -970,7 +1076,12 @@ Editor.cutObject = function(object)
 	}
 };
 
-//Paste object as children of target object
+/**
+ * Paste object as children of target object.
+ *
+ * @method pasteObject
+ * @param {Object3D} parent
+ */
 Editor.pasteObject = function(target)
 {
 	try
@@ -1001,7 +1112,11 @@ Editor.pasteObject = function(target)
 	}
 };
 
-//Redo action
+/**
+ * Redo history action.
+ * 
+ * @method redo
+ */
 Editor.redo = function()
 {
 	if(Editor.history.redo())
@@ -1014,7 +1129,11 @@ Editor.redo = function()
 	}
 };
 
-//Undo action
+/**
+ * Undo history action.
+ * 
+ * @method undo
+ */
 Editor.undo = function()
 {
 	if(Editor.history.undo())
@@ -1027,7 +1146,11 @@ Editor.undo = function()
 	}
 };
 
-//Create default resouces to be used when creating new objects
+/**
+ * Create default resouces to be used when creating new objects.
+ *
+ * @method createDefaultResouces
+ */
 Editor.createDefaultResouces = function()
 {
 	Editor.defaultImage = new Image(Editor.filePath + "default.png");
@@ -1055,7 +1178,11 @@ Editor.createDefaultResouces = function()
 	}
 };
 
-//Select tool to manipulate objects
+/**
+ * Select tool to manipulate objects-
+ *
+ * @method selectTool
+ */
 Editor.selectTool = function(tool)
 {
 	var tabs = Editor.gui.tab.getActiveTab();

@@ -199,32 +199,6 @@ TreeView.prototype.buildTree = function()
 };
 
 /**
- * Update treeview to highlight the selected object.
- *
- * This method should be used if stricly necessary since it iterates trough the hole tree it is slow.
- *
- * @updateSelection
- */
-TreeView.prototype.updateSelection = function()
-{
-	function updateSelection(tree)
-	{
-		tree.setSelected(Editor.isSelected(tree.object));
-
-		var children = tree.children;
-		for(var i = 0; i < children.length; i++)
-		{
-			updateSelection(children[i]);
-		}
-	}
-
-	if(this.root !== null)
-	{
-		updateSelection(this.root);
-	}
-};
-
-/**
  * Update tree view children positions.
  *
  * @method updateChildPosition

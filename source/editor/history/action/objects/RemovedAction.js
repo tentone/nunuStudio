@@ -47,7 +47,7 @@ RemovedAction.updateGUI = function(object, parent)
 {
 	if(Editor.isSelected(object))
 	{
-		Editor.removeFromSelection(object);
+		Editor.unselectObject(object);
 	}
 
 	Editor.gui.treeView.removeObject(object, parent);

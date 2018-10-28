@@ -111,22 +111,6 @@ AssetExplorer.prototype.updateSettings = function()
 };
 
 /**
- * Update asset explorer to highlight the selected object.
- *
- * This method should be used only if stricly necessary.
- *
- * @updateSelection
- */
-AssetExplorer.prototype.updateSelection = function()
-{	
-	for(var i = 0; i < this.files.length; i++)
-	{
-		this.files[i].setSelected(Editor.isSelected(this.files[i].asset));
-	}
-
-};
-
-/**
  * Attach a resource manager to this explorer.
  *
  * @method attach

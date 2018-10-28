@@ -78,7 +78,7 @@ function Asset(parent)
 		{
 			if(Editor.isSelected(self.asset))
 			{
-				Editor.removeFromSelection(self.asset);
+				Editor.unselectObject(self.asset);
 			}
 			else
 			{
@@ -128,6 +128,8 @@ Asset.prototype.setSize = function(size)
 Asset.prototype.attach = function(asset)
 {
 	this.asset = asset;
+	this.asset.gui = {node: this};
+	
 	this.updateMetadata();
 };
 

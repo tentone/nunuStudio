@@ -947,7 +947,7 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 		{	
 			if(Editor.isSelected(intersects[0].object))
 			{
-				Editor.removeFromSelection(intersects[0].object);
+				Editor.unselectObject(intersects[0].object);
 			}
 			else
 			{
@@ -1149,7 +1149,6 @@ SceneEditor.prototype.updateSelection = function()
 
 	//Transform tool
 	this.tool.attach(selectedObjects);
-
 	this.objectHelper.removeAll();
 
 	for(var i = 0; i < selectedObjects.length; i++)

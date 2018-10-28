@@ -176,7 +176,6 @@ function EditorSettingsTab(parent, closeable, container, index)
 	{
 		Editor.settings.general.showType = self.showType.getValue();
 		Editor.gui.panelContainer.updateSelection();
-		
 	});
 	this.form.add(this.showType);
 	this.form.nextRow();
