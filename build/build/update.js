@@ -81,10 +81,18 @@ function download(fname, url)
 			data += chunk;
 		});
 		
-		response.on("end", function()
+		response.on("end", function(event)
 		{
-			writeFile(fname, data);
-			console.log("Updated:" +  fname + "<<" + url);
+			if(data.search("404: Not Found") === -1)
+			{
+				writeFile(fname, data);
+				console.log("Updated:" +  fname); // + "<<" + url);
+			}
+			else
+			{
+				console.log("Failed:" +  fname); // + "<<" + url);
+			}
+
 		});
 	}).on("error", function(error)
 	{

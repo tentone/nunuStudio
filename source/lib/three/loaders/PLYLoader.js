@@ -16,7 +16,7 @@
  *
  * If the PLY file uses non standard property names, they can be mapped while
  * loading. For example, the following maps the properties
- * ��diffuse_(red|green|blue)” in the file to standard color names.
+ * “diffuse_(red|green|blue)” in the file to standard color names.
  *
  * loader.setPropertyNameMapping( {
  *	diffuse_red: 'red',
@@ -71,7 +71,7 @@ THREE.PLYLoader.prototype = {
 
 		function parseHeader( data ) {
 
-			var patternHeader = /ply([\s\S]*)end_header\s/;
+			var patternHeader = /ply([\s\S]*)end_header\r?\n/;
 			var headerText = '';
 			var headerLength = 0;
 			var result = patternHeader.exec( data );
