@@ -125,6 +125,18 @@ AssetExplorer.prototype.attach = function(manager)
 	}
 };
 
+/** 
+ * Add asset to the explorer.
+ *
+ * @method add
+ * @param {Asset} file
+ */
+AssetExplorer.prototype.add = function(file)
+{
+	file.setSize(Editor.settings.general.filePreviewSize);
+	this.files.push(file);
+};
+
 AssetExplorer.prototype.updateObjectsView = function()
 {
 	//TODO <USE ONLY TO INITIALIZE THE EXPLORER>
@@ -215,18 +227,6 @@ AssetExplorer.prototype.clear = function()
 	{
 		this.files.pop().destroy();
 	}
-};
-
-/** 
- * Add asset to the explorer.
- *
- * @method add
- * @param {Asset} file
- */
-AssetExplorer.prototype.add = function(file)
-{
-	file.setSize(Editor.settings.general.filePreviewSize);
-	this.files.push(file);
 };
 
 AssetExplorer.prototype.updateSize = function()

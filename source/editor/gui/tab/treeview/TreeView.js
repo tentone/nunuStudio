@@ -16,17 +16,55 @@ function TreeView(parent, closeable, container, index)
 {	
 	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.filePath + "icons/misc/menu.png");
 
+	var self = this;
+
 	this.element.style.overflow = "auto";
 	this.element.style.backgroundColor = null;
 
 	this.search = new SearchBox(this);
 	this.search.element.style.backgroundColor = Editor.theme.barColor;;
-	
+	this.search.setOnChange(function()
+	{
+		self.selectByName(this.value);
+	});
+
 	this.program = null;
 	this.root = null;
 }
 
 TreeView.prototype = Object.create(TabElement.prototype);
+
+/**
+ * Select tree nodes by their name.
+ *
+ * All nodes that contain the name will be selected.
+ *
+ * @method selectByName
+ * @param {String} name String with portion of the name to be found and filtered.
+ */
+TreeView.prototype.selectByName = function(search)
+{
+	search = search.toLowerCase();
+
+	Editor.clearSelection();
+
+	function filterRecursive(node)
+	{
+		var text = node.object.name.toLowerCase();
+		if(text.search(search) !== -1)
+		{
+			Editor.addToSelection(node.object);
+		}
+
+		for(var i = 0; i < node.children.length; i++)
+		{
+			filterRecursive(node.children[i]);
+		}
+	}
+
+	filterRecursive(this.root);
+};
+
 
 /**
  * Attach a program to the tree view.
@@ -269,6 +307,6 @@ TreeView.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	this.search.size.set(this.size.x, 22);
+	this.search.size.set(this.size.x, 20);
 	this.search.updateInterface();
 };
