@@ -786,8 +786,14 @@ Editor.selectObject = function(object)
 
 	if(object.gui !== undefined && object.gui.node !== undefined)
 	{
-		object.gui.node.setSelected(true);
-		object.gui.node.expandToRoot();
+		if(object.gui.node.setSelected !== undefined)
+		{
+			object.gui.node.setSelected(true);
+		}
+		if(object.gui.node.expandToRoot !== undefined)
+		{
+			object.gui.node.expandToRoot();
+		}
 	}
 
 	Editor.updateSelectionGUI();
@@ -807,8 +813,14 @@ Editor.addToSelection = function(object)
 
 	if(object.gui !== undefined && object.gui.node !== undefined)
 	{
-		object.gui.node.setSelected(true);
-		object.gui.node.expandToRoot();
+		if(object.gui.node.setSelected !== undefined)
+		{
+			object.gui.node.setSelected(true);
+		}
+		if(object.gui.node.expandToRoot !== undefined)
+		{
+			object.gui.node.expandToRoot();
+		}
 	}
 
 	Editor.updateSelectionGUI();
@@ -829,7 +841,10 @@ Editor.unselectObject = function(object)
 		{
 			if(Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
 			{
-				Editor.selection[i].gui.node.setSelected(false);
+				if(Editor.selection[i].gui.node.setSelected !== undefined)
+				{
+					Editor.selection[i].gui.node.setSelected(false);
+				}
 			}
 			
 			Editor.selection.splice(i, 1);
@@ -894,7 +909,10 @@ Editor.clearSelection = function()
 	{
 		if(Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
 		{
-			Editor.selection[i].gui.node.setSelected(false);
+			if(Editor.selection[i].gui.node.setSelected !== undefined)
+			{
+				Editor.selection[i].gui.node.setSelected(false);
+			}
 		}
 	}
 
