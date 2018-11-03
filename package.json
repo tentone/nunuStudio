@@ -7,7 +7,9 @@
 	},
 	"scripts": {
 		"build": "cd build/build && node build.js",
-		"update": "cd build/build && node update.js"
+		"update": "cd build/build && node update.js",
+		"build-windows:": "",
+		"build-linux:": ""
 	},
 	"repository": {
 		"type": "git",
@@ -28,6 +30,7 @@
 	},
 	"homepage": "https://www.nunustudio.org",
 	"devDependencies": {
-		"yuidocjs": ""
+		"yuidocjs": "",
+		
 	}
 }
