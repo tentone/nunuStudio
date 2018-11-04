@@ -175,7 +175,13 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		}
 	});
 
-	//Image source
+	/**
+	 * DOM element attached to the texture
+	 * 
+	 * @property image
+	 * @type {DOM}
+	 */
+	this.image.crossOrigin = "anonymous";
 	this.image.src = this.img.data;
 	this.image.onload = function()
 	{
@@ -202,7 +208,6 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 			setTimeout(update, self.animationSpeed * 1000);
 		}
 	};
-
 	update();
 }
 

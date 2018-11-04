@@ -54,21 +54,21 @@
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Video</h2>
 			<p>In this guide we will explore how to import and use video files in nunuStudio. Video files can be used as textures for objects.</p>
+			<p>To load a new video file select Texture and then Video texture, this will create two thing first a video resource that contains the video file select, and a Video texture that uses the video resource to display the file. Alternatively you can drag and drop a video file to the explorer or directly to an object.</p>
 
 			<h3 class="black">External files</h3>
 			<p>It is possible to load external files from their URL. When using external files if they are a diferent domain don't forget to make sure that the server has the appropiate CORS configuration. The code bellow demonstrates how to create a VideoTexture from an external URL and to use it as a texture for the default material.</p>
-			<pre><code>function initialize()
-{
-	var texture = new VideoTexture("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4");
+			<p>You can choose between a Video resource and a VideoStream resource, the main difference is that Video preloads the whole video files into memory and VideoStream loads the video as it goes.</p>
+			<pre><code>{
+	var texture = new VideoTexture(new VideoStream("sample.mp4"));
 	var material = program.getMaterialByName("default");
-	material.map = texture;
+	material.emissiveMap = texture;
+	material.emissive.setHex(0xFFFFFF);
 }</code></pre>
-
+			<p>To try this example in the editor you can download the <a class="underline" href="video.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/17_video/video.nsp">Web Editor</a>.</p>
 			<div>
 				<canvas id="video" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
-
-			<p>To try this example in the editor you can download the <a class="underline" href="video.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/17_video/video.nsp">Web Editor</a>.</p>
 		</div>
 	</section>
 

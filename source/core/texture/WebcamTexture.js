@@ -26,12 +26,11 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	 * @type {DOM}
 	 */
 	THREE.Texture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
-
-	//Disable mipmaps generation
+	
+	var self = this;
+	
 	this.generateMipmaps = false;
 	this.disposed = false;
-
-	//Attributes
 	this.name = "webcam";
 	this.category = "Webcam";	
 	this.mode = WebcamTexture.USER;
@@ -44,11 +43,9 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	 */
 	this.stream = null;
 
-	//Connect to camera
 	this.connect();
 
 	//Webcam video update loop
-	var self = this;
 	function update()
 	{
 		if(video.readyState >= video.HAVE_CURRENT_DATA)

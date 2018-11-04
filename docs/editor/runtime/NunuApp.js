@@ -98,6 +98,7 @@ include("core/resources/Image.js");
 include("core/resources/Model.js");
 include("core/resources/TextFile.js");
 include("core/resources/ResourceManager.js");
+include("core/resources/stream/VideoStream.js");
 
 include("core/texture/Texture.js");
 include("core/texture/CanvasTexture.js");

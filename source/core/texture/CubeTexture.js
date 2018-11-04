@@ -20,8 +20,6 @@
  * @param {Number} anisotropy
  * @param {Number} encoding
  */
-
-
 function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
 	if(mapping === undefined)
@@ -198,6 +196,7 @@ CubeTexture.prototype.updateImages = function()
 			}
 
 			var image = document.createElement("img");
+			image.crossOrigin = "anonymous";
 			image.index = i;
 			image.src = this.images[i].data;
 			image.onload = function()

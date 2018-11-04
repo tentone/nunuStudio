@@ -17,28 +17,11 @@
  */
 function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 {
-	/**
-	 * Image is used to store a DOM video element.
-	 * @property image
-	 * @type {DOM}
-	 */
-	if(typeof video === "string")
-	{
-		this.video = new Video(video);
-	}
-	else if(video instanceof Video)
-	{
-		this.video = video;
-	}
-
-	//Super constructor
 	THREE.Texture.call(this, document.createElement("video"), mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
-	//Texture control
 	this.disposed = false;
 	this.generateMipmaps = false;
 
-	//Name
 	this.name = "video";
 	this.category = "Video";
 
@@ -74,23 +57,36 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	 */
 	this.volume = 1.0;
 
-	//Video
-	this.image.src = this.video.data;
+	/**
+	 * Image is used to store a DOM video element.
+	 *
+	 * @property image
+	 * @type {DOM}
+	 */
+	this.image.crossOrigin = "anonymous";
 	this.image.autoplay = this.autoplay;
 	this.image.playbackRate = this.playbackRate;
 	this.image.loop = this.loop;
 	this.image.volume = this.volume;
 
+	/**
+	 * Video source resource.
+	 *
+	 * @property video
+	 * @type {Video}
+	 */
+	this.video = null;
+	this.setVideo(video);
+
 	//Video update loop
-	var texture = this;
-	var video = this.image;
+	var self = this;
 	function update()
 	{
-		if(!texture.disposed)
+		if(!self.disposed)
 		{
-			if(video.readyState >= video.HAVE_CURRENT_DATA)
+			if(self.image.readyState >= self.image.HAVE_CURRENT_DATA)
 			{
-				texture.needsUpdate = true;
+				self.needsUpdate = true;
 			}
 			requestAnimationFrame(update);
 		}
@@ -99,6 +95,35 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 }
 
 VideoTexture.prototype = Object.create(THREE.Texture.prototype);
+
+/**
+ * Set the video source to be used.
+ *
+ * Can be a Video, VideoStream or a URL String.
+ * 
+ * @param {Video} video
+ * @method setVideo
+ */
+VideoTexture.prototype.setVideo = function(video)
+{
+	if(video === null || video === undefined)
+	{
+		this.video = null;
+		this.image.src = null;
+		return;
+	}
+
+	if(typeof video === "string")
+	{
+		this.video = new Video(video);
+	}
+	else if(video instanceof Video)
+	{
+		this.video = video;
+	}
+
+	this.image.src = this.video.data;
+};
 
 /**
  * Set video time in seconds.

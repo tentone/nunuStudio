@@ -1,15 +1,18 @@
 {
 	"name": "nunuStudio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
-	"main": "source/editor.html",
-	"directories": {
-		"doc": "docs"
+	"main": "editor.html",
+	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
+	"window": {
+		"icon": "files/icon.png",
+		"frame": true,
+		"width": 1280,
+		"height": 720,
+		"min_width": 800,
+		"min_height": 600
 	},
 	"scripts": {
-		"build": "cd build/build && node build.js",
-		"update": "cd build/build && node update.js",
-		"build-windows:": "",
-		"build-linux:": ""
+		"start": "nw install 0.33.4-sdk && nw ./"
 	},
 	"repository": {
 		"type": "git",
@@ -30,7 +33,7 @@
 	},
 	"homepage": "https://www.nunustudio.org",
 	"devDependencies": {
-		"yuidocjs": "",
-		"nwjs-builder": ""
+		"cordova": "",
+		"nwjs": ""
 	}
 }

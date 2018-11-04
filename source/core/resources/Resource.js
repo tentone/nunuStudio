@@ -8,57 +8,60 @@
  * @class Resource
  * @module Resources
  */
-
-/**
- * Resource name.
- * 
- * Not required to be unique.
- * 
- * @property name
- * @type {String}
- */
-/**
- * UUID unique identifier.
- * 
- * @property uuid
- * @type {String}
- */
-/**
- * Resource type. Used to identify the type of the resource, usefull for serialization.
- * 
- * @property type
- * @type {String}
- */
-/**
- * Data format (base64, arraybuffer, blob, url, ...).
- * 
- * Indicates the format used to store the data.
- * 
- * @property format
- * @type {Object}
- */
-/**
- * Data encoding (mp3, jpg, mp4, ...).
- * 
- * Indicates how the data is encoded.
- * 
- * @property encoding
- * @type {String, ArrayBuffer, ...}
- */
-/**
- * Resource data.
- * 
- * @property data
- * @type {Object}
- */
 function Resource(name, type)
 {
+	/**
+	 * Resource name.
+	 * 
+	 * Not required to be unique.
+	 * 
+	 * @property name
+	 * @type {String}
+	 */
 	this.name = name;
+
+	/**
+	 * UUID unique identifier.
+	 * 
+	 * @property uuid
+	 * @type {String}
+	 */
 	this.uuid = THREE.Math.generateUUID();
+
+	/**
+	 * Resource type. Used to identify the type of the resource, usefull for serialization.
+	 * 
+	 * @property type
+	 * @type {String}
+	 */
 	this.type = type;
 
+	/**
+	 * Data format (base64, arraybuffer, blob, url, ...).
+	 * 
+	 * Indicates the format used to store the data.
+	 * 
+	 * @property format
+	 * @type {Object}
+	 */
 	this.format = "";
-	this.encoding = ""
+
+	/**
+	 * Data encoding (mp3, jpg, mp4, ...).
+	 * 
+	 * Indicates how the data is encoded.
+	 * 
+	 * @property encoding
+	 * @type {String, ArrayBuffer, ...}
+	 */
+	this.encoding = "";
+
+	/**
+	 * Resource data.
+	 * 
+	 * @property data
+	 * @type {Object}
+	 */
 	this.data = null;
 }
 

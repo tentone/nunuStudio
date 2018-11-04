@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio OrthographicCamera</title>  
+	<title>nunuStudio YoutubeTexture</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -184,22 +184,21 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>OrthographicCamera Class</h1>
+						<h1>YoutubeTexture Class</h1>
 						<div class="box meta">
 						
 								<div class="extends">
-									Extends <a href="../classes/OrthographicCamera.html" class="crosslink">OrthographicCamera</a>
+									Extends <a href="../classes/Texture.html" class="crosslink">Texture</a>
 								</div>
 						
 						
-									Module: <a href="../modules/Cameras.html">Cameras</a>
+									Module: <a href="../modules/Textures.html">Textures</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Orthographic Camera is used for 2D like image projection.</p>
-						<p>Based on THREE.OrthographicCamera, original documentation available at <a href="https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera">https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera</a>.</p>
+							<p>Video texture that uses youtube as a source.</p>
 						
 						</div>
 						
@@ -210,7 +209,6 @@
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -222,23 +220,7 @@
 						
 											<ul class="index-list methods extends">
 													<li class="index-item method">
-														<a href="#method_destroy">destroy</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_render">render</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_resize">resize</a>
-						
-													</li>
-													<li class="index-item method">
 														<a href="#method_toJSON">toJSON</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_updateProjectionMatrix">updateProjectionMatrix</a>
 						
 													</li>
 											</ul>
@@ -249,216 +231,34 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
-														<a href="#property_aspect">aspect</a>
+														<a href="#property_autoplay">autoplay</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_clearColor">clearColor</a>
+														<a href="#property_image">image</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_clearDepth">clearDepth</a>
+														<a href="#property_loop">loop</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_mode">mode</a>
+														<a href="#property_playbackRate">playbackRate</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_offset">offset</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_order">order</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_size">size</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_viewport">viewport</a>
+														<a href="#property_volume">volume</a>
 						
 													</li>
 											</ul>
 										</div>
 						
-										<div class="index-section attrs">
-											<h3>Attributes</h3>
-						
-											<ul class="index-list attrs extends">
-													<li class="index-item attr">
-														<a href="#attr_RESIZE_HORIZONTAL">RESIZE_HORIZONTAL</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_RESIZE_VERTICAL">RESIZE_VERTICAL</a>
-													</li>
-											</ul>
-										</div>
 						
 								</div>
 						
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_destroy" class="method item">
-												<h3 class="name"><code>destroy</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Destroy camera object and remove it from the scene.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_render" class="method item">
-												<h3 class="name"><code>render</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>renderer</code>
-															</li>
-															<li class="arg">
-																	<code>scene</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Render a scene using this camera and the internal EffectComposer.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">renderer</code>
-																	<span class="type">WebGLRenderer</span>
-											
-											
-																<div class="param-description">
-																	<p>WebGL renderer to use.</p>
-											
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">scene</code>
-																	<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
-											
-											
-																<div class="param-description">
-																	<p>Scene to be rendered.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_resize" class="method item">
-												<h3 class="name"><code>resize</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>x</code>
-															</li>
-															<li class="arg">
-																	<code>y</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Resize this camera, should be called every time after resizing the screen.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">x</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Width.</p>
-											
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">y</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Height.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
 											<div id="method_toJSON" class="method item">
 												<h3 class="name"><code>toJSON</code></h3>
 											
@@ -489,7 +289,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Serialize object to JSON.</p>
+													<p>Create Video texture json description.</p>
 											
 												</div>
 											
@@ -515,39 +315,10 @@
 											
 														<div class="returns-description">
 																	<span class="type">Object</span>:
-																<p>JSON descrition</p>
+																<p>json</p>
 											
 														</div>
 													</div>
-											
-											</div>
-											<div id="method_updateProjectionMatrix" class="method item">
-												<h3 class="name"><code>updateProjectionMatrix</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update camera projection matrix.</p>
-											<p>Should be called after chaging projection parameters.</p>
-											
-												</div>
-											
-											
 											
 											</div>
 									</div>
@@ -555,8 +326,79 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
-											<div id="property_aspect" class="property item">
-												<h3 class="name"><code>aspect</code></h3>
+											<div id="property_autoplay" class="property item">
+												<h3 class="name"><code>autoplay</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If true the video starts playing automatically.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> true</p>
+											
+											
+											</div>
+											<div id="property_image" class="property item">
+												<h3 class="name"><code>image</code></h3>
+												<span class="type">DOM</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Image is used to store a DOM video element.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_loop" class="property item">
+												<h3 class="name"><code>loop</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If true the video plays in loop.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> true</p>
+											
+											
+											</div>
+											<div id="property_playbackRate" class="property item">
+												<h3 class="name"><code>playbackRate</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -571,7 +413,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Aspect ratio X/Y.</p>
+													<p>Start time in seconds.</p>
 											
 												</div>
 											
@@ -579,56 +421,8 @@
 											
 											
 											</div>
-											<div id="property_clearColor" class="property item">
-												<h3 class="name"><code>clearColor</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Clear screen color flag.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> false</p>
-											
-											
-											</div>
-											<div id="property_clearDepth" class="property item">
-												<h3 class="name"><code>clearDepth</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Clear depth flag.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> false</p>
-											
-											
-											</div>
-											<div id="property_mode" class="property item">
-												<h3 class="name"><code>mode</code></h3>
+											<div id="property_volume" class="property item">
+												<h3 class="name"><code>volume</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -643,171 +437,16 @@
 												</div>
 											
 												<div class="description">
-													<p>Camera resize mode.</p>
+													<p>Video audio volume, its a values between 1.0 and 0.0</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> RESIZE_HORIZONTAL</p>
-											
-											
-											</div>
-											<div id="property_offset" class="property item">
-												<h3 class="name"><code>offset</code></h3>
-												<span class="type">Vector2</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Camera viewport offset.</p>
-											<p>Values range from 0.0 to 1.0 in screen space.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_order" class="property item">
-												<h3 class="name"><code>order</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Camera draw order preference.</p>
-											<p>If more than one camera has the same order value the draw order is undefined for those cameras.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> 0</p>
-											
-											
-											</div>
-											<div id="property_size" class="property item">
-												<h3 class="name"><code>size</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Camera size relative to resize mode.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> 10.0</p>
-											
-											
-											</div>
-											<div id="property_viewport" class="property item">
-												<h3 class="name"><code>viewport</code></h3>
-												<span class="type">Vector2</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Camera viewport size.</p>
-											<p>Values range from 0.0 to 1.0 in screen space.</p>
-											
-												</div>
-											
+													<p><strong>Default:</strong> 1.0</p>
 											
 											
 											</div>
 									</div>
 						
-									<div id="attrs" class="api-class-tabpanel">
-										<h2 class="off-left">Attributes</h2>
-						
-											<div id="attr_RESIZE_HORIZONTAL" class="attr item">
-												<a name="config_RESIZE_HORIZONTAL"></a> 
-												<h3 class="name"><code>RESIZE_HORIZONTAL</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Used to set camera to resize horizontally</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_RESIZE_VERTICAL" class="attr item">
-												<a name="config_RESIZE_VERTICAL"></a> 
-												<h3 class="name"><code>RESIZE_VERTICAL</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Used to set camera to resize vertically.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
 						
 							</div>
 						</div>

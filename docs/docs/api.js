@@ -93,8 +93,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "VRControls",
         "Video",
         "VideoLoader",
+        "VideoStream",
         "VideoTexture",
-        "WebcamTexture"
+        "WebcamTexture",
+        "YoutubeTexture"
     ],
     "modules": [
         "Animation",
@@ -212,7 +214,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Resources",
             "name": "Resources",
-            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API."
+            "description": "Video stream resource, used to load streamable video files."
         },
         {
             "displayName": "Runtime",

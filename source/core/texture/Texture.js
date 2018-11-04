@@ -89,7 +89,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	}
 
 	THREE.Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
-
+	
 	var self = this;
 
 	/**
@@ -119,13 +119,12 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	 * @property image
 	 * @type {DOM}
 	 */
+	this.image.crossOrigin = "anonymous";
 	this.image.src = this.img.data;
-
 	this.image.onload = function()
 	{
 		self.needsUpdate = true;
 	};
-
 	this.image.onerror = function()
 	{
 		console.log("nunuStudio: Failed to load image " + self.img.uuid + " data.");

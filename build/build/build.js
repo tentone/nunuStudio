@@ -81,6 +81,7 @@ console.log(" Copying editor files");
 copyFolder(sourcePath + "files", editorWebPath + "files");
 copyFolder(sourcePath + "runtime", editorWebPath + "runtime");
 copyFile(sourcePath + "favicon.ico", editorWebPath + "favicon.ico");
+copyFile(sourcePath + "package.json", editorWebPath + "package.json");
 
 console.log(" Copying editor build");
 copyFile(buildPath + "nunu.min.js", editorWebPath + "nunu.min.js");
@@ -90,9 +91,6 @@ copyFile(buildPath + "nunu.editor.css", editorWebPath + "nunu.editor.css");
 console.log("----------------------------------------------------------------------");
 console.log("                      Generating documentation");
 console.log("----------------------------------------------------------------------");
-//console.log(" Installing YuiDocJS from NPM");
-//require("child_process").execSync("npm -g install yuidocjs", function(error, stdout, stderr){});
-
 console.log(" Removing old files");
 deleteFolder("../../docs/docs");
 
@@ -139,14 +137,11 @@ function addTimestamp(keyword, code)
 
 function compressCSS(code)
 {
-    code = code.replace(/\/\*(?:(?!\*\/)[\s\S])*\*\/|[\r\n\t]+/g, '');
-    // now all comments, newlines and tabs have been removed
-    code = code.replace(/ {2,}/g, ' ');
-    // now there are no more than single adjacent spaces left
-    // now unnecessary: code = code.replace(/(\s)+\./g, ' .');
-    code = code.replace(/ ([{:}]) /g, '$1');
-    code = code.replace(/([;,]) /g, '$1');
-    code = code.replace(/ !/g, '!');
+	code = code.replace(/\/\*(?:(?!\*\/)[\s\S])*\*\/|[\r\n\t]+/g, '');
+	code = code.replace(/ {2,}/g, ' ');
+	code = code.replace(/ ([{:}]) /g, '$1');
+	code = code.replace(/([;,]) /g, '$1');
+	code = code.replace(/ !/g, '!');
 
 	return code;
 }
