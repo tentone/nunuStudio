@@ -6,10 +6,9 @@
 		"doc": "docs"
 	},
 	"scripts": {
+		"start-prod": "nwb nwbuild -v 0.33.4-sdk -r ./docs/editor",
 		"build": "cd build/build && node build.js",
-		"update": "cd build/build && node update.js",
-		"build-windows:": "",
-		"build-linux:": ""
+		"update": "cd build/build && node update.js"
 	},
 	"repository": {
 		"type": "git",

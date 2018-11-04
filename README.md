@@ -36,22 +36,19 @@
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/5.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/6.png)
 
 ### Installation
-- nunuStudio is intended to run with NWJS direcly on the desktop Linux and Windows are supported
+- nunuStudio is intended to run with NWJS on the desktop (Linux and Windows are supported)
 	- Download last version from releases in the github page
 - To run the development version of nunuStudio
-	- Download the last release from the github repository and unzip it
-	- Download last NWJS version from their webpage unzip it to nwjs/win or nwjs/linux (depending on your OS)
-	- Run the start.sh or start.bat file (depending on your OS)
 - There a web version available on the project webpage
-	- The web version cannot export desktop projects
+	- The web version cannot export desktop and mobile projects
 
 ### Building
-- nunuStudio uses a custom solution for code management
+- nunuStudio uses a custom solution for code management based of an include function
 - To build nunuStudio Java and NodeJS are required
 	- Javascript is optimized and minified using Google closure
-	- Documentation generation requires YuiDocs to be installed (npm -g install yuidocjs)
+	- Documentation generation uses YuiDocs
 - The building system generates minified builds for the runtime and for the editor
-- To build nunu (editor, runtime and documentation), navigate to the nunu/build/build directory and run "node build.js"
+- To build nunu editor, runtime and documentation, run "npm run build"
 - The build system is compatible with windows, linux and macos.
 
 ### ChangeLog
