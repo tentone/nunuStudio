@@ -31,16 +31,23 @@ function YoutubeTexture(url, mapping, wrapS, wrapT, type, anisotropy)
 
 YoutubeTexture.prototype = Object.create(THREE.Texture.prototype);
 
-YoutubeTexture.getVideoId = function(url)
+/**
+ * Get the youtube video id from the video URL.
+ *
+ * @static
+ * @method getVideoId
+ * @param {String} url
+ */
+YoutubeTexture.getVideoIdRegEx = function(url)
 {
-	var videoId = window.location.search.split("v=")[1];
-	var index = videoId.indexOf("&");
-	if(index !== -1)
+	var match = url.match(/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/);
+
+	if(match !== -1)
 	{
-		videoId = videoId.substring(0, index);
+		return match[1];	
 	}
 
-	return videoId;
+	return "";
 };
 
 YoutubeTexture.makeSuitableForTexture = function(srcElement)
