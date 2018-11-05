@@ -6,7 +6,8 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"start-prod": "nwb nwbuild -v 0.33.4-sdk -r ./docs/editor",
+		"start": "nwb nwbuild --with-ffmpeg -v 0.33.4-sdk -r ./docs/editor",
+		"build-desktop": "nwb nwbuild --executable-name nunuStudio --with-ffmpeg -v 0.33.4-sdk -p win64 --win-ico ./source/favicon.ico --side-by-side -o ./build ./docs/editor",
 		"build": "cd build/build && node build.js",
 		"update": "cd build/build && node update.js"
 	},
@@ -31,5 +32,23 @@
 	"devDependencies": {
 		"yuidocjs": "",
 		"nwjs-builder": ""
-	}
+	},
+	"dependencies": {
+		"npm": "^6.4.1"
+	},
+    "nwjsBuilder": {
+		"productName": "nunuStudio",
+		"productVersion": "",
+		"fileDescription": "",
+		"copyright": "Tentone",
+		"internalName": "",
+		"fileVersion": "",
+		"comments": "",
+		"companyName": "",
+		"legalTrademarks": "",
+		"originalFilename": "",
+		"privateBuild": "",
+		"specialBuild": "",
+		"bundleIdentifier": ""
+    }
 }

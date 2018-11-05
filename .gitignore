@@ -7,3 +7,4 @@ source/config
 package-lock.json
 *.db
 *.log
+docs/editor/config
