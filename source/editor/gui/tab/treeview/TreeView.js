@@ -296,6 +296,7 @@ TreeView.prototype.updateChildPosition = function()
 
 	if(this.root !== null)
 	{
+		this.root.position.set(0,22);
 		this.root.position.set(0, 22);
 		this.root.updateInterface();
 

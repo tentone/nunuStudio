@@ -523,6 +523,9 @@ function TreeNode(container)
 			{
 				openTab(ScriptEditor, self.object);
 			}
+			if (self.object instanceof VisualScript) {
+				openTab(NodesTab, self.object);
+			}
 			else if(self.object instanceof Scene)
 			{
 				openTab(SceneEditor, self.object);

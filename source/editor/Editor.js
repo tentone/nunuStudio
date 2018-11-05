@@ -141,7 +141,10 @@ include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
 include("core/objects/audio/AudioEmitter.js");
 include("core/objects/audio/PositionalAudio.js");
+
 include("core/objects/script/Script.js");
+include("core/objects/script/Blueprints.js");
+
 include("core/objects/physics/PhysicsObject.js");
 include("core/objects/spine/SpineAnimation.js");
 include("core/objects/spine/SpineTexture.js");
@@ -260,6 +263,10 @@ include("lib/jszip.min.js");
 include("lib/quickhull.js");
 include("lib/ThreeCSG.js");
 
+//Non-tentone libraries
+include("lib/litegraph.js");
+include("lib/litegraph.css");
+
 include("editor/style.css");
 
 include("editor/locale/LocaleManager.js");
@@ -267,6 +274,7 @@ include("editor/locale/LocaleEN.js");
 
 include("editor/theme/ThemeManager.js");
 include("editor/theme/ThemeDark.js");
+include("editor/theme/ThemeWhite.js");
 
 include("editor/gui/element/Element.js");
 include("editor/gui/element/DocumentBody.js");
@@ -327,6 +335,20 @@ include("editor/gui/tab/ProfilingTab.js");
 include("editor/gui/tab/CodeEditor.js");
 include("editor/gui/tab/AboutTab.js");
 include("editor/gui/tab/TextEditor.js");
+
+//Nodes tab
+include("editor/gui/tab/nodes/NodesTab.js");
+
+include("editor/gui/tab/nodes/EcMAMath.js");
+
+include("editor/gui/tab/nodes/ThreeMath.js");
+include("editor/gui/tab/nodes/ThreeScene.js");
+include("editor/gui/tab/nodes/ThreeUtils.js");
+
+//TODO: Components
+include("editor/gui/components/ComponentManager.js");
+
+//Still Nunu
 
 include("editor/gui/tab/treeview/TreeView.js");
 include("editor/gui/tab/treeview/TreeNode.js");
