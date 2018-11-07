@@ -12563,75 +12563,18 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\YoutubeTexture.js",
-            "line": 25,
-            "description": "If true the video starts playing automatically.",
-            "itemtype": "property",
-            "name": "autoplay",
-            "default": "true",
-            "type": "{boolean}",
-            "class": "YoutubeTexture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\YoutubeTexture.js",
-            "line": 33,
-            "description": "If true the video plays in loop.",
-            "itemtype": "property",
-            "name": "loop",
-            "default": "true",
-            "type": "{boolean}",
-            "class": "YoutubeTexture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\YoutubeTexture.js",
-            "line": 41,
-            "description": "Start time in seconds.",
-            "itemtype": "property",
-            "name": "playbackRate",
-            "default": "1.0",
-            "type": "{Number}",
-            "class": "YoutubeTexture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\YoutubeTexture.js",
-            "line": 49,
-            "description": "Video audio volume, its a values between 1.0 and 0.0",
-            "itemtype": "property",
-            "name": "volume",
-            "default": "1.0",
-            "type": "{Number}",
-            "class": "YoutubeTexture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\YoutubeTexture.js",
-            "line": 57,
-            "description": "Image is used to store a DOM video element.",
-            "itemtype": "property",
-            "name": "image",
-            "type": "{DOM}",
-            "class": "YoutubeTexture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\YoutubeTexture.js",
-            "line": 88,
-            "description": "Create Video texture json description.",
+            "line": 34,
+            "description": "Get the youtube video id from the video URL.",
+            "static": 1,
             "itemtype": "method",
-            "name": "toJSON",
+            "name": "getVideoId",
             "params": [
                 {
-                    "name": "meta",
+                    "name": "url",
                     "description": "",
-                    "type": "Object"
+                    "type": "String"
                 }
             ],
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
             "class": "YoutubeTexture",
             "module": "Textures"
         },

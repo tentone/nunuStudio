@@ -208,7 +208,6 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
@@ -220,38 +219,13 @@
 						
 											<ul class="index-list methods extends">
 													<li class="index-item method">
-														<a href="#method_toJSON">toJSON</a>
+														<a href="#method_getVideoId">getVideoId</a>
 						
+															<span class="flag static">static</span>
 													</li>
 											</ul>
 										</div>
 						
-										<div class="index-section properties">
-											<h3>Properties</h3>
-						
-											<ul class="index-list properties extends">
-													<li class="index-item property">
-														<a href="#property_autoplay">autoplay</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_image">image</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_loop">loop</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_playbackRate">playbackRate</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_volume">volume</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 						
 								</div>
@@ -259,24 +233,22 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_toJSON" class="method item">
-												<h3 class="name"><code>toJSON</code></h3>
+											<div id="method_getVideoId" class="method item">
+												<h3 class="name"><code>getVideoId</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>meta</code>
+																	<code>url</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
-													<span class="returns-inline">
-														<span class="type">Object</span>
-													</span>
 											
 											
 											
 											
+													<span class="flag static">static</span>
 											
 											
 											
@@ -289,7 +261,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Create Video texture json description.</p>
+													<p>Get the youtube video id from the video URL.</p>
 											
 												</div>
 											
@@ -298,8 +270,8 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">meta</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">url</code>
+																	<span class="type">String</span>
 											
 											
 																<div class="param-description">
@@ -310,142 +282,10 @@
 														</ul>
 													</div>
 											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Object</span>:
-																<p>json</p>
-											
-														</div>
-													</div>
 											
 											</div>
 									</div>
 						
-									<div id="properties" class="api-class-tabpanel">
-										<h2 class="off-left">Properties</h2>
-						
-											<div id="property_autoplay" class="property item">
-												<h3 class="name"><code>autoplay</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>If true the video starts playing automatically.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> true</p>
-											
-											
-											</div>
-											<div id="property_image" class="property item">
-												<h3 class="name"><code>image</code></h3>
-												<span class="type">DOM</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Image is used to store a DOM video element.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_loop" class="property item">
-												<h3 class="name"><code>loop</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>If true the video plays in loop.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> true</p>
-											
-											
-											</div>
-											<div id="property_playbackRate" class="property item">
-												<h3 class="name"><code>playbackRate</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Start time in seconds.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> 1.0</p>
-											
-											
-											</div>
-											<div id="property_volume" class="property item">
-												<h3 class="name"><code>volume</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Video audio volume, its a values between 1.0 and 0.0</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> 1.0</p>
-											
-											
-											</div>
-									</div>
 						
 						
 							</div>
