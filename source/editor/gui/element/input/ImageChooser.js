@@ -4,18 +4,6 @@ function ImageChooser(parent)
 {
 	Element.call(this, parent, "div");
 
-	//Background
-	this.alpha = document.createElement("img");
-	this.alpha.style.visibility = "inherit";
-	this.alpha.style.position = "absolute";
-	this.alpha.src = Editor.filePath + "alpha.png";
-	this.alpha.style.left = "0px";
-	this.alpha.style.top = "0px";
-	this.alpha.style.width = "100%";
-	this.alpha.style.height = "100%";
-	this.alpha.style.borderStyle = "none";
-	this.element.appendChild(this.alpha);
-
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.visibility = "inherit";
@@ -25,6 +13,11 @@ function ImageChooser(parent)
 	this.img.style.top = "0px";
 	this.img.style.width = "100%";
 	this.img.style.height = "100%";
+	this.img.style.objectFit = "contain";
+	this.img.style.backgroundPosition = "center";
+	this.img.style.backgroundImage = "url(\"" + Editor.filePath + "alpha.png\")";
+	this.img.style.backgroundRepeat = "repeat";
+	this.img.style.backgroundSize = "120px 120px";
 	this.element.appendChild(this.img);
 
 	//Value
@@ -124,22 +117,4 @@ ImageChooser.prototype.getValue = function()
 ImageChooser.prototype.updateVisibility = function()
 {
 	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
-
-ImageChooser.prototype.updateSize = function()
-{
-	//Keep aspect ratio
-	if(this.keepAspectRatio)
-	{
-		if(this.size.x < this.size.y)
-		{
-			this.size.y = this.size.x * this.img.naturalHeight / this.img.naturalWidth;
-		}
-		else
-		{
-			this.size.x = this.size.y * this.img.naturalWidth / this.img.naturalHeight;
-		}
-	}
-
-	Element.prototype.updateSize.call(this);
 };
