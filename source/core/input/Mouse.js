@@ -13,13 +13,13 @@
 function Mouse(domElement, dontInitialize)
 {
 	//Raw data
-	this._keys = new Array(3);
+	this._keys = new Array(5);
 	this._position = new THREE.Vector2(0, 0);
 	this._positionUpdated = false;
 	this._delta = new THREE.Vector2(0, 0);
 	this._wheel = 0;
 	this._wheelUpdated = false;
-	this._doubleClicked = new Array(3);
+	this._doubleClicked = new Array(5);
 
 	/**
 	 * Array with mouse buttons status.
@@ -27,7 +27,7 @@ function Mouse(domElement, dontInitialize)
 	 * @type {array}
 	 * @property keys
 	 */
-	this.keys = new Array(3);
+	this.keys = new Array(5);
 
 	/**
 	 * Mouse position inside of the window (coordinates in window space).
@@ -59,7 +59,7 @@ function Mouse(domElement, dontInitialize)
 	 * @type {Array}
 	 * @property doubleClicked
 	 */
-	this.doubleClicked = new Array(3);
+	this.doubleClicked = new Array(5);
 
 	/**
 	 * DOM element where to attach the mouse events.
@@ -81,7 +81,7 @@ function Mouse(domElement, dontInitialize)
 	this.events = new EventManager();
 
 	//Initialize key instances
-	for(var i = 0; i < 3; i++)
+	for(var i = 0; i < 5; i++)
 	{
 		this._doubleClicked[i] = false;
 		this.doubleClicked[i] = false;
@@ -201,23 +201,44 @@ Mouse.prototype = Mouse;
 Mouse.prototype.constructor = Mouse;
 
 /**
- * LEFT mouse button
+ * Left mouse button.
+ *
  * @attribute LEFT
  * @type {Number}
  */
 Mouse.LEFT = 0;
+
 /**
- * MIDDLE mouse button
+ * Middle mouse button.
+ *
  * @attribute MIDDLE
  * @type {Number}
  */
 Mouse.MIDDLE = 1;
+
 /**
- * RIGHT mouse button
+ * Right mouse button.
+ *
  * @attribute RIGHT
  * @type {Number}
  */
 Mouse.RIGHT = 2;
+
+/**
+ * Back mouse navigation button.
+ *
+ * @attribute BACK
+ * @type {Number}
+ */
+Mouse.BACK = 3;
+
+/**
+ * Forward mouse navigation button.
+ *
+ * @attribute FORWARD
+ * @type {Number}
+ */
+Mouse.FORWARD = 4;
 
 /**
  * Element to be used for coordinates calculation relative to that canvas.
@@ -395,7 +416,7 @@ Mouse.updateKey = function(button, action)
 Mouse.update = function()
 {
 	//Update mouse keys state
-	for(var i = 0; i < 3; i++)
+	for(var i = 0; i < 5; i++)
 	{
 		if(this._keys[i].justPressed && this.keys[i].justPressed)
 		{
