@@ -11,19 +11,10 @@ function TextureChooser(parent)
 	this.preview.style.position = "absolute";
 	this.preview.style.top = "0px";
 	this.preview.style.left = "0px";
+	this.preview.style.backgroundImage = "url(\"" + Editor.filePath + "alpha.png\")";
+	this.preview.style.backgroundRepeat = "repeat";
+	this.preview.style.backgroundSize = "120px 120px";
 	this.element.appendChild(this.preview);
-
-	//Alpha background
-	this.alpha = document.createElement("img");
-	this.alpha.src = Editor.filePath + "alpha.png";
-	this.alpha.style.visibility = "inherit";
-	this.alpha.style.pointerEvents = "none";
-	this.alpha.style.position = "absolute";
-	this.alpha.style.left = "0px";
-	this.alpha.style.top = "0px";
-	this.alpha.style.width = "100%";
-	this.alpha.style.height = "100%";
-	this.preview.appendChild(this.alpha);
 
 	//Image
 	this.img = document.createElement("img");
