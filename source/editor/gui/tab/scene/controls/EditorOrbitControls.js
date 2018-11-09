@@ -49,7 +49,7 @@ function EditorOrbitControls()
 	/**
 	 * Minimum distance allowed.
 	 *
-	 * @property maxDistance
+	 * @property minDistance
 	 * @type {Number}
 	 */
 	this.minDistance = 1e-10;
@@ -215,7 +215,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			this.center.x += up ? (-direction.x * y) : (direction.x * y);
 			this.center.z += up ? (-direction.z * y) : (direction.z * y);
 			
-			direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
+			direction.applyAxisAngle(EditorOrbitControls.UP, Math.PI/2);
 
 			var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x -= direction.x * x;

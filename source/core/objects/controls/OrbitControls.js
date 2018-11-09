@@ -24,7 +24,21 @@ function OrbitControls()
 	 * @type {Number}
 	 */
 	this.distance = 4;
+
+	/**
+	 * Maximum Distance allowed.
+	 *
+	 * @property maxDistance
+	 * @type {Number}
+	 */
 	this.maxDistance = 20;
+
+	/**
+	 * Minimum distance allowed.
+	 *
+	 * @property minDistance
+	 * @type {Number}
+	 */
 	this.minDistance = 2;
 
 	/**
@@ -88,8 +102,24 @@ function OrbitControls()
 	 */
 	this.movementEnabled = true;
 
+	/**
+	 * Central point of the orbit.
+	 *
+	 * @property center
+	 * @type {Vector3}
+	 */
 	this.center = new THREE.Vector3(0, 0, 0);
+
+	/**
+	 * Orientation of the camera.
+	 *
+	 * X is the horizontal orientation and Y the vertical orientation.
+	 *
+	 * @property vector
+	 * @type {Vector2}
+	 */	
 	this.vector = new THREE.Vector2(0, 0);
+
 	this.mouse = null;
 	this.keyboard = null;
 
@@ -157,7 +187,7 @@ OrbitControls.prototype.update = function(delta)
 		this.center.x -= direction.x * y;
 		this.center.z -= direction.z * y;
 
-		direction.applyAxisAngle(OrbitControls.UP, 1.57);
+		direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
 
 		var x = this.mouse.delta.x * this.sensitivity * this.distance;
 		this.center.x -= direction.x * x;

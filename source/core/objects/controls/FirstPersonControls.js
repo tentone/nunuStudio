@@ -73,8 +73,17 @@ function FirstPersonControls()
 	 * @type {Array}
 	 */
 	this.moveKeys = [Keyboard.W, Keyboard.S, Keyboard.A, Keyboard.D];
-
+	
+	/**
+	 * Orientation of the camera.
+	 *
+	 * X is the horizontal orientation and Y the vertical orientation.
+	 *
+	 * @property vector
+	 * @type {Vector2}
+	 */	
 	this.vector = new THREE.Vector2(0, 0);
+
 	this.mouse = null;
 	this.keyboard = null;
 
