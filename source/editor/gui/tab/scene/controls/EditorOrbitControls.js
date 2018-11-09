@@ -12,20 +12,73 @@ function EditorOrbitControls()
 {
 	EditorControls.call(this);
 
+	/**
+	 * Distance to the center of the orbit.
+	 *
+	 * @property distance
+	 * @type {Number}
+	 */
 	this.distance = 10;
+
+	/**
+	 * Central point of the orbit.
+	 *
+	 * @property center
+	 * @type {Vector3}
+	 */
 	this.center = new THREE.Vector3();
+
+	/**
+	 * Orientation of the camera.
+	 *
+	 * X is the horizontal orientation and Y the vertical orientation.
+	 *
+	 * @property orientation
+	 * @type {Vector2}
+	 */	 
 	this.orientation = new THREE.Vector2();
 
-	this.camera = null;
-
+	/**
+	 * Maximum Distance allowed.
+	 *
+	 * @property maxDistance
+	 * @type {Number}
+	 */
 	this.maxDistance = Number.MAX_SAFE_INTEGER;
+
+	/**
+	 * Minimum distance allowed.
+	 *
+	 * @property maxDistance
+	 * @type {Number}
+	 */
 	this.minDistance = 1e-10;
 	
+	/**
+	 * Maximum angle allowed in the y (vertical) orientation.
+	 *
+	 * @property limitUp
+	 * @type {Number}
+	 */
 	this.limitUp = 1.57;
+
+	/**
+	 * Minimum angle allowed in the y (vertical) orientation.
+	 *
+	 * @property limitDown
+	 * @type {Number}
+	 */
 	this.limitDown = -1.57;
 
 	this.tempVector = new THREE.Vector3(0, 0, 0);
 	this.tempMatrix = new THREE.Matrix4();
+
+	this.smooth = false;
+	this.friction = 0.8;
+	this.speed = 0.3;
+	this.speedDistance = 0;
+	this.speedCenter = new THREE.Vector3(0, 0, 0);
+	this.speedOrientation = new THREE.Vector2(0, 0);
 
 	this.reset();
 	this.updateControls();
@@ -109,15 +162,31 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 	if(mouse.buttonPressed(Mouse.LEFT))
 	{
-		this.orientation.y += Editor.settings.editor.mouseLookSensitivity * (Editor.settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
-		this.orientation.x -= Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
+		if(this.smooth === true)
+		{
+			this.speedOrientation.y += this.speed * Editor.settings.editor.mouseLookSensitivity * (Editor.settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
+			this.speedOrientation.x -= this.speed * Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
+		}
+		else
+		{
+			this.orientation.y += Editor.settings.editor.mouseLookSensitivity * (Editor.settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
+			this.orientation.x -= Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
+		}
 
 		needsUpdate = true;
 	}
 
 	if(mouse.buttonPressed(Mouse.MIDDLE))
 	{
-		this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
+		if(this.smooth === true)
+		{
+			this.speedCenter.y += this.speed * Editor.settings.editor.mouseLookSensitivity * mouse.delta.y * this.distance;
+		}
+		else
+		{
+			this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
+		}
+	
 		needsUpdate = true;
 	}
 
@@ -128,77 +197,124 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		direction.y = 0;
 		direction.normalize();
 
-		var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
-		this.center.x += up ? (-direction.x * y) : (direction.x * y);
-		this.center.z += up ? (-direction.z * y) : (direction.z * y);
-		
-		direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
+		if(this.smooth === true)
+		{
+			var y = this.speed * mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
+			this.speedCenter.x += up ? (-direction.x * y) : (direction.x * y);
+			this.speedCenter.z += up ? (-direction.z * y) : (direction.z * y);
+			
+			direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
 
-		var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
-		this.center.x -= direction.x * x;
-		this.center.z -= direction.z * x;
+			var x = this.speed * mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
+			this.speedCenter.x -= direction.x * x;
+			this.speedCenter.z -= direction.z * x;
+		}
+		else
+		{
+			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
+			this.center.x += up ? (-direction.x * y) : (direction.x * y);
+			this.center.z += up ? (-direction.z * y) : (direction.z * y);
+			
+			direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
+
+			var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
+			this.center.x -= direction.x * x;
+			this.center.z -= direction.z * x;
+		}
 
 		needsUpdate = true;
 	}
 
 	if(mouse.wheel !== 0)
 	{
-		this.distance += mouse.wheel * this.position.distanceTo(this.center) * Editor.settings.editor.mouseWheelSensitivity;
+		if(this.smooth === true)
+		{
+			this.speedDistance += this.speed * mouse.wheel * this.position.distanceTo(this.center) * Editor.settings.editor.mouseWheelSensitivity;
+		}
+		else
+		{
+			this.distance += mouse.wheel * this.position.distanceTo(this.center) * Editor.settings.editor.mouseWheelSensitivity;
+		}
+	
 		needsUpdate = true;
 	}
 	
-	//WASD movement
-	if(Editor.settings.editor.keyboardNavigation)
+	//Keyboard movement
+	if(Editor.settings.editor.keyboardNavigation && this.keyboardMovement(keyboard))
 	{
-		if(keyboard.keyPressed(Keyboard.S))
-		{
-			var direction = this.getWorldDirection(this.tempVector);
-			direction.y = 0;
-			direction.normalize();
-
-			this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
-			this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
-			needsUpdate = true;
-		}
-		if(keyboard.keyPressed(Keyboard.W))
-		{
-			var direction = this.getWorldDirection(this.tempVector);
-			direction.y = 0;
-			direction.normalize();
-
-			this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
-			this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
-			needsUpdate = true;
-		}
-		if(keyboard.keyPressed(Keyboard.A))
-		{
-			var direction = this.getWorldDirection(this.tempVector);
-			direction.y = 0;
-			direction.normalize();
-			direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
-
-			this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
-			this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
-			needsUpdate = true;
-		}
-		if(keyboard.keyPressed(Keyboard.D))
-		{
-			var direction = this.getWorldDirection(this.tempVector);
-			direction.y = 0;
-			direction.normalize();
-			direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
-
-			this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
-			this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
-			needsUpdate = true;
-		}
+		needsUpdate = true;
 	}
-	
+
+	//If smooth always update 
+	if(this.smooth === true)
+	{
+		this.distance += this.speedDistance;
+		this.center.add(this.speedCenter);
+		this.orientation.add(this.speedOrientation);
+
+		this.speedDistance *= this.friction;
+		this.speedOrientation.multiplyScalar(this.friction);
+		this.speedCenter.multiplyScalar(this.friction);
+
+		this.updateControls();
+		return;
+	}
+
 	if(needsUpdate === true)
 	{
 		this.updateControls();
 	}
 };
+
+OrbitControls.prototype.keyboardMovement = function(keyboard)
+{
+	var needsUpdate = false;
+
+	if(keyboard.keyPressed(Keyboard.S))
+	{
+		var direction = this.getWorldDirection(this.tempVector);
+		direction.y = 0;
+		direction.normalize();
+
+		this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
+		this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
+		needsUpdate = true;
+	}
+	if(keyboard.keyPressed(Keyboard.W))
+	{
+		var direction = this.getWorldDirection(this.tempVector);
+		direction.y = 0;
+		direction.normalize();
+
+		this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
+		this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
+		needsUpdate = true;
+	}
+	if(keyboard.keyPressed(Keyboard.A))
+	{
+		var direction = this.getWorldDirection(this.tempVector);
+		direction.y = 0;
+		direction.normalize();
+		direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
+
+		this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
+		this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
+		needsUpdate = true;
+	}
+	if(keyboard.keyPressed(Keyboard.D))
+	{
+		var direction = this.getWorldDirection(this.tempVector);
+		direction.y = 0;
+		direction.normalize();
+		direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
+
+		this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
+		this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
+		needsUpdate = true;
+	}
+
+	return needsUpdate;
+}
 
 EditorOrbitControls.prototype.updateControls = function()
 {

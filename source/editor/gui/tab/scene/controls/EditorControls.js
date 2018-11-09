@@ -9,6 +9,14 @@
 function EditorControls()
 {
 	THREE.Group.call(this);
+
+	/**
+	 * Camera object attached to this controls.
+	 *
+	 * @property camera
+	 * @type {Object3D}
+	 */
+	this.camera = null;
 }
 
 EditorControls.prototype = Object.create(THREE.Group.prototype);
