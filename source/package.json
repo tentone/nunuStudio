@@ -38,12 +38,12 @@
 		"packed": true,
 		"targets": ["zip","nsis7z"],
 		"strippedProperties":["build"],
-		"outputPattern": "${NAME} ${VERSION} ${PLATFORM} ${ARCH}",
+		"outputPattern": "${NAME}_${PLATFORM}_${ARCH}",
 		"win": {
 			"productName": "nunuStudio",
 			"companyName": "tentone",
 			"copyright": "MIT",
-			"icon": "./source/favicon.ico"
+			"icon": "./files/icon.ico"
 		},
 		"nsis": {
 			"installDirectory": "$PROGRAMFILES\\${_COMPANYNAME}\\${_APPNAME}",
