@@ -11,9 +11,6 @@
 		"min_width": 800,
 		"min_height": 600
 	},
-	"scripts": {
-		"start": "nw install 0.33.4-sdk && nw ./"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/tentone/nunuStudio.git"
@@ -33,7 +30,24 @@
 	},
 	"homepage": "https://www.nunustudio.org",
 	"devDependencies": {
-		"cordova": "",
-		"nwjs": ""
+		"cordova": ""
+	},
+	"build": {
+		"appId": "io.tentone.nunustudio",
+		"nwVersion": "0.34.2",
+		"packed": true,
+		"targets": ["zip","nsis7z"],
+		"strippedProperties":["build"],
+		"outputPattern": "${NAME} ${VERSION} ${PLATFORM} ${ARCH}",
+		"win": {
+			"productName": "nunuStudio",
+			"companyName": "tentone",
+			"copyright": "MIT",
+			"icon": "./source/favicon.ico"
+		},
+		"nsis": {
+			"installDirectory": "$PROGRAMFILES\\${_COMPANYNAME}\\${_APPNAME}",
+			"diffUpdaters": true
+		}
 	}
 }

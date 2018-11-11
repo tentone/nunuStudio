@@ -1,4 +1,4 @@
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/logo.png)
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/logo.png">
 
 [![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues) [![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers)
 
@@ -6,17 +6,17 @@
  - nunuStudio has a fully featured visual editor, supports a wide range of file formats, the tools are open source and completely free to use for both personal and commercial usage, it is powered by open web APIs like WebGL, WebVR and WebAudio.
  - Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters, etc and a powerful scripting API that allows the creation of complex applications.
 
-### Web Editor
+## Web Editor
  - There is a fully featured web version of the editor available at https://nunustudio.org/editor/editor
  - The web version was tested with Firefox, Chrome and Microsoft Edge, mobile browsers are not supported.
  
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/web.png)
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/web.png">
 
-### Documentation
+## Documentation
  - Documentation for the scripting API is available on the nunu webpage https://nunustudio.org/docs
  - nunuStudio was documented using YUIDocs
 
-### Features
+## Features
 - Visual application editor
 - Built on three.js
 	- Real time lighting and shadow map support
@@ -31,18 +31,18 @@
 - SPE particle system
 - Compatible with WebVR V1.1
 
-### Screenshots
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/2.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/3.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/4.png)
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/5.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/6.png)
+## Screenshots
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/2.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/3.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/4.png">
+<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/1.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/5.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/6.png">
 
-### Installation
+## Installation
 - nunuStudio is intended to run with NWJS on the desktop (Linux and Windows are supported)
 	- Download last version from releases in the github page
 - To run the development version of nunuStudio
 - There a web version available on the project webpage
 	- The web version cannot export desktop and mobile projects
 
-### Building
+## Building
 - nunuStudio uses a custom solution for code management based of an include function
 - To build nunuStudio Java and NodeJS are required
 	- Javascript is optimized and minified using Google closure
@@ -51,7 +51,7 @@
 - To build nunu editor, runtime and documentation, run "npm run build"
 - The build system is compatible with windows, linux and macos.
 
-### ChangeLog
+## ChangeLog
 - V0.8.9.15 Alpha
 	- Added font preview in asset explorer
 	- Fixed material preview projection
@@ -190,7 +190,7 @@
  	- Loading data screen
  	- Torus knot and ring geometries
 
-### Tech
+## Tech
 nunuStudio is built on top of a number of open source projects
 - NWJS
 	- nwjs.io
@@ -215,7 +215,7 @@ nunuStudio is built on top of a number of open source projects
 - Timeliner
 	- github.com/zz85/timeliner
 
-### Runtime
+## Runtime
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in HTML pages the following code can be used
 
@@ -230,5 +230,5 @@ nunuStudio is built on top of a number of open source projects
 </html>
 ```
 
-### License
+## License
 - nunuStudio uses a MIT license (Available on GitHub page)

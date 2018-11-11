@@ -2,12 +2,15 @@
 	"name": "nunuStudio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "source/editor.html",
+	"author": "Tentone",
+	"license": "MIT",
+	"homepage": "https://www.nunustudio.org",
 	"directories": {
 		"doc": "docs"
 	},
 	"scripts": {
-		"start": "nwb nwbuild --with-ffmpeg -v 0.33.4-sdk -r ./docs/editor",
-		"build-desktop": "nwb nwbuild --executable-name nunuStudio --with-ffmpeg -v 0.33.4-sdk -p win64 --win-ico ./source/favicon.ico --side-by-side -o ./build ./docs/editor",
+		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ ./source",
+		"dist": "build --with-ffmpeg --tasks win-x64,linux-x64,mac-x64 ./docs/editor",
 		"build": "cd build/build && node build.js",
 		"update": "cd build/build && node update.js"
 	},
@@ -23,32 +26,11 @@
 		"gamedev",
 		"cannonjs"
 	],
-	"author": "Tentone",
-	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
-	"homepage": "https://www.nunustudio.org",
 	"devDependencies": {
 		"yuidocjs": "",
-		"nwjs-builder": ""
-	},
-	"dependencies": {
-		"npm": "^6.4.1"
-	},
-	"nwjsBuilder": {
-		"productName": "nunuStudio",
-		"productVersion": "",
-		"fileDescription": "",
-		"copyright": "Tentone",
-		"internalName": "",
-		"fileVersion": "",
-		"comments": "",
-		"companyName": "",
-		"legalTrademarks": "",
-		"originalFilename": "",
-		"privateBuild": "",
-		"specialBuild": "",
-		"bundleIdentifier": ""
+		"nwjs-builder-phoenix": "^1.14.8"
 	}
 }

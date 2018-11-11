@@ -5178,7 +5178,7 @@
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
             "line": 203,
-            "description": "LEFT mouse button",
+            "description": "Left mouse button.",
             "itemtype": "attribute",
             "name": "LEFT",
             "type": "{Number}",
@@ -5187,8 +5187,8 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 209,
-            "description": "MIDDLE mouse button",
+            "line": 211,
+            "description": "Middle mouse button.",
             "itemtype": "attribute",
             "name": "MIDDLE",
             "type": "{Number}",
@@ -5197,8 +5197,8 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 215,
-            "description": "RIGHT mouse button",
+            "line": 219,
+            "description": "Right mouse button.",
             "itemtype": "attribute",
             "name": "RIGHT",
             "type": "{Number}",
@@ -5207,7 +5207,27 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 222,
+            "line": 227,
+            "description": "Back mouse navigation button.",
+            "itemtype": "attribute",
+            "name": "BACK",
+            "type": "{Number}",
+            "class": "Mouse",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Mouse.js",
+            "line": 235,
+            "description": "Forward mouse navigation button.",
+            "itemtype": "attribute",
+            "name": "FORWARD",
+            "type": "{Number}",
+            "class": "Mouse",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Mouse.js",
+            "line": 243,
             "description": "Element to be used for coordinates calculation relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -5223,7 +5243,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 245,
+            "line": 266,
             "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -5236,7 +5256,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 256,
+            "line": 277,
             "description": "Set mouse lock state.",
             "itemtype": "method",
             "name": "setLock",
@@ -5252,7 +5272,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 299,
+            "line": 320,
             "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -5272,7 +5292,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 311,
+            "line": 332,
             "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
@@ -5292,7 +5312,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 323,
+            "line": 344,
             "description": "Check if a mouse button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -5312,7 +5332,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 335,
+            "line": 356,
             "description": "Check if a mouse button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -5332,7 +5352,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 347,
+            "line": 368,
             "description": "Update mouse position.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updatePosition",
@@ -5363,7 +5383,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 373,
+            "line": 394,
             "description": "Update a mouse button.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updateKey",
@@ -5384,7 +5404,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 390,
+            "line": 411,
             "description": "Update mouse buttons state, position, wheel and delta synchronously.",
             "itemtype": "method",
             "name": "update",
@@ -5393,7 +5413,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 450,
+            "line": 471,
             "description": "Create mouse events.",
             "itemtype": "method",
             "name": "create",
@@ -5402,7 +5422,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 460,
+            "line": 481,
             "description": "Dispose mouse events.",
             "itemtype": "method",
             "name": "dispose",
@@ -7379,7 +7399,17 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 169,
+            "line": 77,
+            "description": "Orientation of the camera.\n\nX is the horizontal orientation and Y the vertical orientation.",
+            "itemtype": "property",
+            "name": "vector",
+            "type": "{Vector2}",
+            "class": "FirstPersonControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 178,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
@@ -7388,7 +7418,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
-            "line": 187,
+            "line": 196,
             "description": "Used to get camera direction for this controller.\n\nController direction can be used to simplify controlling physics objects, create objects in the camera direction, etc.",
             "itemtype": "method",
             "name": "getDirection",
@@ -7412,7 +7442,27 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 30,
+            "line": 28,
+            "description": "Maximum Distance allowed.",
+            "itemtype": "property",
+            "name": "maxDistance",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 36,
+            "description": "Minimum distance allowed.",
+            "itemtype": "property",
+            "name": "minDistance",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 44,
             "description": "Mouse sensitivity.",
             "itemtype": "property",
             "name": "sensitivity",
@@ -7422,7 +7472,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 38,
+            "line": 52,
             "description": "Mouse scroll sensitivity.",
             "itemtype": "property",
             "name": "zoomSensitivity",
@@ -7432,7 +7482,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 46,
+            "line": 60,
             "description": "Top limit angle.",
             "itemtype": "property",
             "name": "limitUp",
@@ -7443,7 +7493,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 55,
+            "line": 69,
             "description": "Bottom limit angle.",
             "itemtype": "property",
             "name": "limitDown",
@@ -7454,7 +7504,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 64,
+            "line": 78,
             "description": "Indicates if the button left button needs to be pressed to rotate the object.",
             "itemtype": "property",
             "name": "needsButtonPressed",
@@ -7465,7 +7515,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 73,
+            "line": 87,
             "description": "Indicates if its possible to zoom in and out to the center point.",
             "itemtype": "property",
             "name": "zoomEnabled",
@@ -7476,7 +7526,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 82,
+            "line": 96,
             "description": "Indicates if its possible to move the object around.",
             "itemtype": "property",
             "name": "movementEnabled",
@@ -7487,7 +7537,27 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 177,
+            "line": 105,
+            "description": "Central point of the orbit.",
+            "itemtype": "property",
+            "name": "center",
+            "type": "{Vector3}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 113,
+            "description": "Orientation of the camera.\n\nX is the horizontal orientation and Y the vertical orientation.",
+            "itemtype": "property",
+            "name": "vector",
+            "type": "{Vector2}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 207,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
