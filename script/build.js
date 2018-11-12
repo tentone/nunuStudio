@@ -12,8 +12,7 @@
 var fs = require("fs");
 var path = require("path");
 
-var WAIT_FOR_KEY = process.argv.indexOf("--waitKey") !== -1;
-var STAMP_GIT_REPOSITORY = process.argv.indexOf("--stampGit") !== -1;
+var WAIT_FOR_KEY = false;
 
 var sourcePath = "../source/";
 var buildPath = "../build/";
@@ -38,9 +37,23 @@ console.log("                    github.com/tentone/nunuStudio");
 console.log("----------------------------------------------------------------------");
 console.log("                                Editor");
 console.log("----------------------------------------------------------------------");
+
+console.log(" Reading package.json");
+var packageData = JSON.parse(readFile(sourcePath + "package.json"));
+
 console.log(" Joining files");
 var out = join(sourcePath, sourcePath + editorMain);
-out.js = addTimestamp("DEVELOPMENT_VERSION", out.js);
+
+console.log(" Filling build info");
+out.js = addTimestamp("<PLACEHOLDER_TIMESTAMP>", out.js);
+out.js = out.js.replace("<PLACEHOLDER_VERSION>", packageData.version);
+
+var branch = require("child_process").execSync("git rev-parse --abbrev-ref HEAD").toString().trim();
+var commit = require("child_process").execSync("git rev-parse HEAD").toString().trim();
+
+out.js = out.js.replace("<PLACEHOLDER_REPOSITORY_BRANCH>", branch);
+out.js = out.js.replace("<PLACEHOLDER_REPOSITORY_COMMIT>", commit);
+
 writeFile(buildPath + "nunu.editor.js.temp", out.js);
 
 console.log(" Compressing CSS");
@@ -97,7 +110,7 @@ console.log("-------------------------------------------------------------------
 console.log("                      Generating documentation");
 console.log("----------------------------------------------------------------------");
 console.log(" Removing old files");
-deleteFolder("../../docs/docs");
+deleteFolder(docsPath);
 
 console.log(" Generating Docs");
 var command = "yuidoc -o " + docsPath + " -N -C -t " + docsThemePath + " -x lib " + docsSource;
@@ -115,6 +128,12 @@ if(WAIT_FOR_KEY)
 	process.stdin.setRawMode(true);
 	process.stdin.resume();
 	process.stdin.on("data", process.exit.bind(process, 0));
+}
+else
+{
+	console.log("----------------------------------------------------------------------");
+	console.log("                                 Done!");
+	console.log("----------------------------------------------------------------------");
 }
 
 function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)

@@ -14995,6 +14995,28 @@
         {
             "file": "..\\source\\core\\Nunu.js",
             "line": 41,
+            "description": "Repository branch, used to track the version after publishing.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "REPOSITORY_BRANCH",
+            "type": "{String}",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 50,
+            "description": "Repository commit uuid, used to track the version after publishing.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "REPOSITORY_COMMIT",
+            "type": "{String}",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 59,
             "description": "Check if host supports WebVR and if there is a VR display available.",
             "itemtype": "method",
             "name": "webvrAvailable",
@@ -15007,7 +15029,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 52,
+            "line": 70,
             "description": "Used to get the first VR display available, the display is returned as argument of the getDisplay function.",
             "itemtype": "method",
             "name": "getVRDisplays",
@@ -15023,7 +15045,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 79,
+            "line": 97,
             "description": "Get the query parameter from the browser URL.",
             "itemtype": "method",
             "name": "getQueryParameters",
@@ -15036,7 +15058,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 104,
+            "line": 122,
             "description": "Create a web worker from code written in a string.\n\nUses a blob to inject the code and loads it from and URL object.",
             "itemtype": "method",
             "name": "createWorker",
@@ -15061,7 +15083,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 127,
+            "line": 145,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -15074,7 +15096,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 138,
+            "line": 156,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -15087,7 +15109,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 161,
+            "line": 179,
             "description": "Check if nunu if running in development mode.",
             "itemtype": "method",
             "name": "developmentMode",
@@ -15100,7 +15122,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 176,
+            "line": 194,
             "description": "Check in wich platform the enviroment is running.",
             "itemtype": "method",
             "name": "getPlatform",
@@ -15113,7 +15135,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 196,
+            "line": 214,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
@@ -15126,7 +15148,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 207,
+            "line": 225,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -15139,7 +15161,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 220,
+            "line": 238,
             "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
             "itemtype": "method",
             "name": "openWebpage",
@@ -15148,7 +15170,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 241,
+            "line": 259,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUse isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",

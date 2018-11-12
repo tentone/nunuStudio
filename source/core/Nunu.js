@@ -28,7 +28,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute VERSION
  * @type {String}
  */
-Nunu.VERSION = "V0.9.5 Beta";
+Nunu.VERSION = "<PLACEHOLDER_VERSION>";
 
 /**
  * Stores the nunu runtime dev timestamp.
@@ -36,7 +36,25 @@ Nunu.VERSION = "V0.9.5 Beta";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "DEVELOPMENT_VERSION";
+Nunu.TIMESTAMP = "<PLACEHOLDER_TIMESTAMP>";
+
+/**
+ * Repository branch, used to track the version after publishing.
+ * 
+ * @static
+ * @attribute REPOSITORY_BRANCH
+ * @type {String}
+ */
+Nunu.REPOSITORY_BRANCH = "<PLACEHOLDER_REPOSITORY_BRANCH>";
+
+/**
+ * Repository commit uuid, used to track the version after publishing.
+ * 
+ * @static
+ * @attribute REPOSITORY_COMMIT
+ * @type {String}
+ */
+Nunu.REPOSITORY_COMMIT = "<PLACEHOLDER_REPOSITORY_COMMIT>";
 
 /**
  * Check if host supports WebVR and if there is a VR display available.
