@@ -1,12 +1,13 @@
-node_modules/
-nwjs/
-source/temp/
-source/node_modules/
-
-source/config
-package-lock.json
 *.db
 *.log
+package-lock.json
+node_modules/
+nwjs/
+
+source/temp/
+source/node_modules/
+source/config
+
 docs/editor/config
 
 build/desktop/

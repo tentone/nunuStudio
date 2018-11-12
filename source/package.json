@@ -2,6 +2,7 @@
 	"name": "nunuStudio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "editor.html",
+	"version": "0.9.5.0",
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
 		"icon": "files/icon.png",
@@ -51,8 +52,7 @@
 			"name": "nunuStudio",
 			"displayName": "nunuStudio",
 			"companyName": "tentone",
-			"copyright": "MIT",
-			"icon": "./files/icon.ico"
+			"copyright": "MIT"
 		},
 		"nsis": {
 			"installDirectory": "$PROGRAMFILES\\${_COMPANYNAME}\\${_APPNAME}",
