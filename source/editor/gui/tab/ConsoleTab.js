@@ -227,7 +227,11 @@ ConsoleTab.createMessage = function(object)
 	log.style.width = "100%";
 	log.style.color = "#FFFFFF";
 
-	if(object instanceof Image)
+	if(object === undefined)
+	{
+		log.appendChild(document.createTextNode("undefined"));
+	}
+	else if(object instanceof Image)
 	{
 		var preview = document.createElement("img");
 		preview.src = object.data;
@@ -389,6 +393,10 @@ ConsoleTab.createMessage = function(object)
 	else if(object === null)
 	{
 		log.appendChild(document.createTextNode("null"));
+	}
+	else if(object instanceof Object)
+	{
+		log.appendChild(document.createTextNode(JSON.stringify(object, null, "\t")));
 	}
 	else
 	{

@@ -5,7 +5,8 @@ function AssetExplorerMenu(parent)
 	Element.call(this, parent, "div");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
-
+	this.element.style.overflow = "visible";
+	
 	//Import
 	var menu = new DropdownMenu(this);
 	menu.setText(Locale.import);
