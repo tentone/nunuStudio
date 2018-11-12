@@ -101,28 +101,28 @@ ConsoleTab.prototype.useConsole = function()
 	window.console.log = function()
 	{
 		self.log(arguments);
-		log.apply(window.console, arguments);
+		log.apply(null, arguments);
 	};
 
 	var warn = window.console.warn;
 	window.console.warn = function()
 	{
 		self.warn(arguments);
-		warn.apply(window.console, arguments);
+		warn.apply(null, arguments);
 	};
 
 	var error = window.console.error;
 	window.console.console = function()
 	{
 		self.error(arguments);
-		error.apply(window.console, arguments);
+		error.apply(null, arguments);
 	};
 
 	var clear = window.console.clear;
 	window.console.clear = function()
 	{
 		self.clear(arguments);
-		clear.apply(window.console, arguments);
+		clear.apply(null, arguments);
 	};
 };
 
