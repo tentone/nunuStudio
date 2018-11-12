@@ -27,7 +27,7 @@ function Interface()
 	this.assetExplorer = leftBottom.addTab(AssetExplorer, false);
 
 	//Console
-	//this.console = leftBottom.addTab(ConsoleTab, false);
+	this.console = leftBottom.addTab(ConsoleTab, false);
 
 	//Animations
 	this.animation = leftBottom.addTab(AnimationTab, false);
