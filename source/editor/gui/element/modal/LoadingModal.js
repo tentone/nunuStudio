@@ -53,7 +53,7 @@ function LoadingModal(parent)
 
 	//Icon
 	this.icon = new ImageContainer(this);
-	this.icon.setImage("files/loading.png");
+	this.icon.setImage("source/files/loading.png");
 	
 	var rotation = 0.0;
 	

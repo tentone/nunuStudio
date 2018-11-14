@@ -1,7 +1,8 @@
 {
 	"name": "nunuStudio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
-	"main": "source/editor.html",
+	"main": "editor.html",
+	"version": "0.9.5",
 	"author": "Tentone",
 	"license": "MIT",
 	"homepage": "https://www.nunustudio.org",
@@ -9,7 +10,7 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ ./source",
+		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"build": "cd script && node build.js",
 		"update": "cd script && node update.js",
 		"dist": "build --with-ffmpeg --mirror https://dl.nwjs.io/ --tasks win-x64 ./docs/editor",
@@ -33,5 +34,45 @@
 	"devDependencies": {
 		"yuidocjs": "",
 		"nwjs-builder-phoenix": "^1.14.8"
+	},
+	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
+	"window": {
+		"icon": "source/files/icon.png",
+		"frame": true,
+		"width": 1280,
+		"height": 720,
+		"min_width": 800,
+		"min_height": 600
+	},
+	"dependencies": {
+		"cordova": ""
+	},
+	"build": {
+		"appId": "io.tentone.nunustudio",
+		"nwVersion": "0.34.2",
+		"nwFlavor": "sdk",
+		"output": "../../build/desktop/",
+		"ffmpegIntegration": true,
+		"packed": true,
+		"targets": ["zip","nsis7z"],
+		"strippedProperties":["build"],
+		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
+		"win": {
+			"productName": "nunuStudio",
+			"companyName": "tentone",
+			"copyright": "MIT",
+			"icon": "./source/files/icon.ico"
+		},
+		"mac": {
+			"name": "nunuStudio",
+			"displayName": "nunuStudio",
+			"companyName": "tentone",
+			"copyright": "MIT"
+		},
+		"nsis": {
+			"installDirectory": "$PROGRAMFILES\\${_COMPANYNAME}\\${_APPNAME}",
+			"icon": "./source/files/icon.ico",
+			"diffUpdaters": false
+		}
 	}
 }

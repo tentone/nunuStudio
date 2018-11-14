@@ -14,7 +14,7 @@ var path = require("path");
 
 var WAIT_FOR_KEY = false;
 
-var sourcePath = "../source/";
+var sourcePath = "../";
 var buildPath = "../build/";
 
 var runtimeMain = "runtime/NunuApp.js";
@@ -23,7 +23,7 @@ var editorMain = "editor/Editor.js";
 var examplesPath = "../docs/examples/";
 var editorWebPath = "../docs/editor/";
 
-var docsSource = "../source/core/";
+var docsSource = sourcePath + "core/";
 var docsPath = "../docs/docs";
 var docsThemePath = "../docs/theme";
 

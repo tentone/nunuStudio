@@ -2,7 +2,7 @@
 
 var ObjectIcons = {};
 
-ObjectIcons.path = "files/icons/";
+ObjectIcons.path = "source/files/icons/";
 ObjectIcons.default = ObjectIcons.path + "misc/question.png";
 ObjectIcons.locked = ObjectIcons.path + "misc/padlock.png";
 
