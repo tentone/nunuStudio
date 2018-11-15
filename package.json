@@ -54,8 +54,13 @@
 		"output": "../../build/desktop/",
 		"ffmpegIntegration": true,
 		"packed": true,
-		"targets": ["zip","nsis7z"],
-		"strippedProperties":["build"],
+		"targets": [
+			"zip",
+			"nsis7z"
+		],
+		"strippedProperties": [
+			"build"
+		],
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"win": {
 			"productName": "nunuStudio",

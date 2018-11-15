@@ -7,13 +7,13 @@ console.log("                           Update dependencies");
 console.log("----------------------------------------------------------------------");
 
 var threejsURL = "https://rawgit.com/mrdoob/three.js/dev";
-var threejsPath = "../source/lib/three";
+var threejsPath = "../lib/three";
 
 downloadFolder(threejsPath, threejsURL + "/examples/js", true);
 download(threejsPath + "/three.min.js", threejsURL + "/build/three.min.js");
 
 var codemirrorURL = "https://rawgit.com/codemirror/CodeMirror/master";
-var codemirrorPath = "../source/lib/codemirror";
+var codemirrorPath = "../lib/codemirror";
 
 downloadFolder(codemirrorPath + "/keymap", codemirrorURL + "/keymap", false);
 downloadFolder(codemirrorPath + "/addon", codemirrorURL + "/addon", false);
