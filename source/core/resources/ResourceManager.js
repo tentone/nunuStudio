@@ -305,6 +305,13 @@ ResourceManager.searchObject = function(object, manager, target)
 	return resources;
 };
 
+/**
+ * Add resource (of any type) to category.
+ *
+ * @method addRes
+ * @param {Resource} resource
+ * @param {String} category
+ */
 ResourceManager.prototype.addRes = function(resource, category)
 {
 	this[category][resource.uuid] = resource;
@@ -326,23 +333,32 @@ ResourceManager.prototype.getResByName = function(name)
 	return null;
 };
 
-ResourceManager.prototype.removeRes = function(resource, category)
+/**
+ * Remove resource of any type from category.
+ *
+ * @method removeRes
+ * @param {Resource} resource
+ * @param {String} category
+ * @param {Object} defaultResource
+ * @param {Object} defaultSubResource
+ */ 
+ResourceManager.prototype.removeRes = function(resource, category, defaultResource, defaultSubResource)
 {
 	if(category === "materials")
 	{
-		this.removeMaterial(resource);
+		this.removeMaterial(resource, defaultResource, defaultSubResource);
 	}
 	else if(category === "textures")
 	{
-		this.removeTexture(resource);
+		this.removeTexture(resource, defaultResource);
 	}
 	else if(category === "fonts")
 	{
-		this.removeFont(resource);
+		this.removeFont(resource, defaultResource);
 	}
 	else if(category === "audio")
 	{
-		this.removeAudio(resource);
+		this.removeAudio(resource, defaultResource);
 	}
 	else
 	{
@@ -510,19 +526,19 @@ ResourceManager.prototype.addMaterial = function(material)
  * 
  * @method removeMaterial
  * @param {Material} material Material to be removed from manager.
- * @param {Material} defaultMaterial Default mesh material to replace objects mesh materials.
- * @param {Material} defaultMaterialSprite Defaul sprite material.
+ * @param {Material} defaultMeshMaterial Default mesh material to replace objects mesh materials.
+ * @param {Material} defaultSpriteMaterial Defaul sprite material.
  */
-ResourceManager.prototype.removeMaterial = function(material, defaultMaterial, defaultMaterialSprite)
+ResourceManager.prototype.removeMaterial = function(material, defaultMeshMaterial, defaultSpriteMaterial)
 {
-	if(defaultMaterial === undefined)
+	if(defaultMeshMaterial === undefined)
 	{
-		defaultMaterial = new THREE.MeshBasicMaterial();
+		defaultMeshMaterial = new THREE.MeshBasicMaterial();
 	}
 
-	if(defaultMaterialSprite === undefined)
+	if(defaultSpriteMaterial === undefined)
 	{
-		defaultMaterialSprite = new THREE.SpriteMaterial();
+		defaultSpriteMaterial = new THREE.SpriteMaterial();
 	}
 
 	if(material instanceof THREE.Material)
@@ -535,11 +551,11 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMaterial, d
 			{
 				if(child instanceof THREE.Sprite)
 				{
-					child.material = defaultMaterialSprite;
+					child.material = defaultSpriteMaterial;
 				}
 				else
 				{
-					child.material = defaultMaterial;
+					child.material = defaultMeshMaterial;
 				}
 			}
 		});

@@ -1014,6 +1014,47 @@ Editor.deleteObject = function(object)
 		{
 			actions.push(new RemovedAction(selected[i]));
 		}
+		//Material
+		else if(selected[i] instanceof THREE.Material)
+		{
+			Editor.addAction(new RemoveResourceAction(selected[i], "materials", Editor.program));
+		}
+		//Texture
+		else if(selected[i] instanceof THREE.Texture)
+		{
+			Editor.addAction(new RemoveResourceAction(selected[i], "textures", Editor.program));
+		}
+		//Font
+		else if(selected[i] instanceof Font)
+		{
+			Editor.addAction(new RemoveResourceAction(selected[i], "fonts", Editor.program));
+		}
+		//Audio
+		else if(selected[i] instanceof Audio)
+		{
+			Editor.addAction(new RemoveResourceAction(selected[i], "audio", Editor.program));
+		}
+		//Video
+		else if(selected[i] instanceof Video)
+		{
+			Editor.addAction(new RemoveResourceAction(selected[i], "videos", Editor.program));
+		}
+		//Geometries
+		else if(selected[i] instanceof THREE.Geometry || selected[i] instanceof THREE.BufferGeometry)
+		{
+			Editor.addAction(new RemoveResourceAction(selected[i], "geometries", Editor.program));
+		}
+		//Shapes
+		else if(selected[i] instanceof THREE.Shape)
+		{
+			Editor.addAction(new RemoveResourceAction(selected[i], "shapes", Editor.program));
+		}
+		//Resources
+		else if(selected[i] instanceof Resource)
+		{
+			Editor.addAction(new RemoveResourceAction(selected[i], "resources", Editor.program));
+		}
+		//Unknown
 		else
 		{
 			console.warn("nunuStudio: Cant delete type of object.");

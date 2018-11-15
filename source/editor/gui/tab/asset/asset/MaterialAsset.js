@@ -138,8 +138,7 @@ function MaterialAsset(parent)
 		{
 			if(self.asset !== null && confirm("Delete material?"))
 			{
-				Editor.program.removeMaterial(self.asset, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
-				Editor.updateObjectsViewsGUI();
+				Editor.addAction(new RemoveResourceAction(self.asset, "materials", Editor.program));
 			}
 		});
 
@@ -162,8 +161,7 @@ function MaterialAsset(parent)
 				try
 				{
 					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-					Editor.program.removeMaterial(self.asset, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
-					Editor.updateObjectsViewsGUI();
+					Editor.addAction(new RemoveResourceAction(self.asset, "materials", Editor.program));
 				}
 				catch(e){}
 			}

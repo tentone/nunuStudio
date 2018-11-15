@@ -1,16 +1,18 @@
 "use strict";
 
-/*
-images
-videos
-audio
-fonts
-materials
-textures
-geometries
-resources
-shapes
-*/
+/**
+ * Add resource to the manager.
+ *
+ * images
+ * videos
+ * audio
+ * fonts
+ * materials
+ * textures
+ * geometries
+ * resources
+ * shapes
+ */
 function AddResourceAction(resource, category, manager)
 {
 	Action.call(this);
@@ -23,16 +25,37 @@ function AddResourceAction(resource, category, manager)
 AddResourceAction.prototype.apply = function()
 {
 	this.manager.addRes(this.resource, this.category);
+	
 	AddResourceAction.updateGUI();
 };
 
 AddResourceAction.prototype.revert = function()
 {
-	this.manager.removeRes(this.resource, this.category);
-	AddResourceAction.updateGUI();
+	if(this.category === "materials")
+	{
+		this.manager.removeRes(this.resource, this.category, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
+	}
+	else if(this.category === "textures")
+	{
+		this.manager.removeRes(this.resource, this.category, Editor.defaultTexture);
+	}
+	else if(this.category === "fonts")
+	{
+		this.manager.removeRes(this.resource, this.category, Editor.defaultFont);
+	}
+	else if(this.category === "audio")
+	{
+		this.manager.removeRes(this.resource, this.category, Editor.defaultAudio);
+	}
+	else
+	{
+		this.manager.removeRes(this.resource, this.category);
+	}
+	
+	RemoveResourceAction.updateGUI();
 };
 
 AddResourceAction.updateGUI = function()
 {
-	Editor.gui.assetExplorer.updateObjectsView();
+	Editor.updateObjectsViewsGUI();
 };
