@@ -138,7 +138,7 @@ function MaterialAsset(parent)
 		{
 			if(self.asset !== null && confirm("Delete material?"))
 			{
-				Editor.addAction(new RemoveResourceAction(self.asset, "materials", Editor.program));
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "materials"));
 			}
 		});
 
@@ -161,7 +161,7 @@ function MaterialAsset(parent)
 				try
 				{
 					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-					Editor.addAction(new RemoveResourceAction(self.asset, "materials", Editor.program));
+					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "materials"));
 				}
 				catch(e){}
 			}

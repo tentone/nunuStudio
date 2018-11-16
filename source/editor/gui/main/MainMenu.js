@@ -365,7 +365,7 @@ function MainMenu(parent)
 
 					for(var i = 0; i < program.children.length; i++)
 					{
-						actions.push(new AddedAction(program.children[i], Editor.program));
+						actions.push(new AddAction(program.children[i], Editor.program));
 					}
 
 					Editor.addAction(new ActionBundle(actions));
@@ -632,9 +632,9 @@ function MainMenu(parent)
 		mesh.name = a.name;
 
 		var actions = [];
-		actions.push(new RemovedAction(a));
-		actions.push(new RemovedAction(b));
-		actions.push(new AddedAction(mesh, a.getScene()));
+		actions.push(new RemoveAction(a));
+		actions.push(new RemoveAction(b));
+		actions.push(new AddAction(mesh, a.getScene()));
 
 		Editor.addAction(new ActionBundle(actions));
 	}

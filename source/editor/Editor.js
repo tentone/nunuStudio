@@ -490,9 +490,9 @@ include("source/editor/history/action/Action.js");
 include("source/editor/history/action/ChangeAction.js");
 include("source/editor/history/action/ActionBundle.js");
 include("source/editor/history/action/CallbackAction.js");
-include("source/editor/history/action/objects/AddedAction.js");
-include("source/editor/history/action/objects/RemovedAction.js");
-include("source/editor/history/action/objects/MovedAction.js");
+include("source/editor/history/action/objects/AddAction.js");
+include("source/editor/history/action/objects/RemoveAction.js");
+include("source/editor/history/action/objects/MoveAction.js");
 include("source/editor/history/action/objects/SwapAction.js");
 include("source/editor/history/action/resources/AddResourceAction.js");
 include("source/editor/history/action/resources/RemoveResourceAction.js");
@@ -948,14 +948,14 @@ Editor.addObject = function(object, parent)
 		parent = Editor.program.scene;
 	}
 
-	var actions = [new AddedAction(object, parent)];
+	var actions = [new AddAction(object, parent)];
 	var resources = ResourceManager.searchObject(object, Editor.program);
 
 	for(var category in resources)
 	{
 		for(var resource in resources[category])
 		{
-			actions.push(new AddResourceAction(resources[category][resource], category, Editor.program));
+			actions.push(new AddResourceAction(resources[category][resource], Editor.program, category));
 		}
 	}
 
@@ -1012,47 +1012,47 @@ Editor.deleteObject = function(object)
 		//Object3D
 		if(selected[i].isObject3D && !selected[i].locked && !(selected[i] instanceof Program))
 		{
-			actions.push(new RemovedAction(selected[i]));
+			actions.push(new RemoveAction(selected[i]));
 		}
 		//Material
 		else if(selected[i] instanceof THREE.Material)
 		{
-			Editor.addAction(new RemoveResourceAction(selected[i], "materials", Editor.program));
+			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "materials"));
 		}
 		//Texture
 		else if(selected[i] instanceof THREE.Texture)
 		{
-			Editor.addAction(new RemoveResourceAction(selected[i], "textures", Editor.program));
+			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "textures"));
 		}
 		//Font
 		else if(selected[i] instanceof Font)
 		{
-			Editor.addAction(new RemoveResourceAction(selected[i], "fonts", Editor.program));
+			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "fonts"));
 		}
 		//Audio
 		else if(selected[i] instanceof Audio)
 		{
-			Editor.addAction(new RemoveResourceAction(selected[i], "audio", Editor.program));
+			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "audio"));
 		}
 		//Video
 		else if(selected[i] instanceof Video)
 		{
-			Editor.addAction(new RemoveResourceAction(selected[i], "videos", Editor.program));
+			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "videos"));
 		}
 		//Geometries
 		else if(selected[i] instanceof THREE.Geometry || selected[i] instanceof THREE.BufferGeometry)
 		{
-			Editor.addAction(new RemoveResourceAction(selected[i], "geometries", Editor.program));
+			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "geometries"));
 		}
 		//Shapes
 		else if(selected[i] instanceof THREE.Shape)
 		{
-			Editor.addAction(new RemoveResourceAction(selected[i], "shapes", Editor.program));
+			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "shapes"));
 		}
 		//Resources
 		else if(selected[i] instanceof Resource)
 		{
-			Editor.addAction(new RemoveResourceAction(selected[i], "resources", Editor.program));
+			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "resources"));
 		}
 		//Unknown
 		else
@@ -1133,7 +1133,7 @@ Editor.cutObject = function(object)
 	if(!object.locked)
 	{
 		Editor.clipboard.set(JSON.stringify(object.toJSON()), "text");
-		Editor.addAction(new RemovedAction(object));
+		Editor.addAction(new RemoveAction(object));
 	}
 };
 
@@ -1160,11 +1160,11 @@ Editor.pasteObject = function(target)
 		//Add object to target
 		if(target !== undefined && !target.locked)
 		{
-			Editor.addAction(new AddedAction(obj, target));
+			Editor.addAction(new AddAction(obj, target));
 		}
 		else
 		{
-			Editor.addAction(new AddedAction(obj, Editor.program.scene));
+			Editor.addAction(new AddAction(obj, Editor.program.scene));
 		}
 	}
 	catch(e)
@@ -1575,7 +1575,7 @@ Editor.loadTexture = function(file, onLoad)
 
 		texture.name = name;
 	
-		Editor.addAction(new AddResourceAction(texture, "textures", Editor.program));
+		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 
 		if(onLoad !== undefined)
 		{
@@ -1597,7 +1597,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		var texture = new VideoTexture(new Video(reader.result, extension));
 		texture.name = name;
 
-		Editor.addAction(new AddResourceAction(texture, "textures", Editor.program));
+		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 
 		if(onLoad !== undefined)
 		{
@@ -1624,7 +1624,7 @@ Editor.loadAudio = function(file, onLoad)
 			onLoad(audio);
 		}
 
-		Editor.addAction(new AddResourceAction(audio, "audio", Editor.program));
+		Editor.addAction(new AddResourceAction(audio, Editor.program, "audio"));
 	};
 
 	reader.readAsArrayBuffer(file);
@@ -1655,7 +1655,7 @@ Editor.loadFont = function(file, onLoad)
 			onLoad(font);
 		}
 
-		Editor.addAction(new AddResourceAction(font, "fonts", Editor.program));
+		Editor.addAction(new AddResourceAction(font, Editor.program, "fonts"));
 	};
 
 	if(extension === "json")
@@ -1679,7 +1679,7 @@ Editor.loadText = function(file)
 		var resource = new TextFile(reader.result, FileSystem.getFileExtension(name));
 		resource.name = name;
 
-		Editor.addAction(new AddResourceAction(resource, "resources", Editor.program));
+		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
 	};
 
 	reader.readAsText(file);

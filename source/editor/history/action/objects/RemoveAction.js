@@ -1,7 +1,14 @@
 "use strict";
 
-//Object removed.
-function RemovedAction(object, parent)
+/**
+ * Remove object from the scene.
+ *
+ * @class RemoveAction
+ * @extends {Action}
+ * @param {THREE.Object3D} object
+ * @param {THREE.Object3D} parent Optional.
+ */
+function RemoveAction(object, parent)
 {
 	Action.call(this);
 	
@@ -11,7 +18,7 @@ function RemovedAction(object, parent)
 	this.index = -1;
 }
 
-RemovedAction.prototype.apply = function()
+RemoveAction.prototype.apply = function()
 {
 	if(this.object instanceof THREE.Camera)
 	{
@@ -25,10 +32,10 @@ RemovedAction.prototype.apply = function()
 	this.index = this.parent.children.indexOf(this.object);
 	this.parent.remove(this.object);
 
-	RemovedAction.updateGUI(this.object, this.parent);
+	RemoveAction.updateGUI(this.object, this.parent);
 };
 
-RemovedAction.prototype.revert = function()
+RemoveAction.prototype.revert = function()
 {
 	if(this.index === -1)
 	{
@@ -40,10 +47,10 @@ RemovedAction.prototype.revert = function()
 		this.object.parent = this.parent;
 	}
 
-	AddedAction.updateGUI(this.object, this.parent, this.index);
+	AddAction.updateGUI(this.object, this.parent, this.index);
 };
 
-RemovedAction.updateGUI = function(object, parent)
+RemoveAction.updateGUI = function(object, parent)
 {
 	if(Editor.isSelected(object))
 	{

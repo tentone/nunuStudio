@@ -1,6 +1,16 @@
 "use strict";
 
-//Swap a object for another one
+/**
+ * Swap an object for another one.
+ *
+ * The children of the original object can be moved to the new object.
+ *
+ * @class SwapAction
+ * @extends {Action}
+ * @param {THREE.Object3D} originalObject Object originally in place, to be replaced.
+ * @param {THREE.Object3D} newObject Object to take place of the old one.
+ * @param {Boolean} moveChildren If tru move the children from the original object to the new.
+ */
 function SwapAction(originalObject, newObject, moveChildren)
 {
 	Action.call(this);
@@ -38,8 +48,8 @@ SwapAction.prototype.apply = function()
 		}
 	}
 
-	RemovedAction.updateGUI(this.originalObject, this.parent);
-	AddedAction.updateGUI(this.newObject, this.parent, this.index);
+	RemoveAction.updateGUI(this.originalObject, this.parent);
+	AddAction.updateGUI(this.newObject, this.parent, this.index);
 };
 
 SwapAction.prototype.revert = function()
@@ -61,6 +71,6 @@ SwapAction.prototype.revert = function()
 		}
 	}
 
-	RemovedAction.updateGUI(this.newObject, this.parent);
-	AddedAction.updateGUI(this.originalObject, this.parent, this.index);
+	RemoveAction.updateGUI(this.newObject, this.parent);
+	AddAction.updateGUI(this.originalObject, this.parent, this.index);
 };

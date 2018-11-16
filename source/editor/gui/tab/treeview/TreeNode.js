@@ -243,8 +243,8 @@ function TreeNode(container)
 					object.quaternion.set(0, 0, 0, 1);
 
 					var actions = [];
-					actions.push(new AddedAction(physics, object.parent));
-					actions.push(new MovedAction(object, physics));
+					actions.push(new AddAction(physics, object.parent));
+					actions.push(new MoveAction(object, physics));
 					Editor.addAction(new ActionBundle(actions));
 				}
 
@@ -333,7 +333,7 @@ function TreeNode(container)
 					{
 						child.uuid = THREE.Math.generateUUID();
 					});
-					Editor.addAction(new AddedAction(object, self.object.parent));
+					Editor.addAction(new AddAction(object, self.object.parent));
 				});
 
 				//Copy object
@@ -441,7 +441,7 @@ function TreeNode(container)
 					if((dragIsScene && selfIsScene) || (!dragIsScene && !selfIsProgram && !selfIsScene))
 					{
 						var index = self.object.parent.children.indexOf(self.object);
-						Editor.addAction(new MovedAction(object, self.object.parent, index));
+						Editor.addAction(new MoveAction(object, self.object.parent, index));
 					}
 				}
 				//Bellow
@@ -450,7 +450,7 @@ function TreeNode(container)
 					if((dragIsScene && selfIsScene) || (!dragIsScene && !selfIsProgram && !selfIsScene))
 					{
 						var index = self.object.parent.children.indexOf(self.object) + 1;
-						Editor.addAction(new MovedAction(object, self.object.parent, index));
+						Editor.addAction(new MoveAction(object, self.object.parent, index));
 					}
 				}
 				//Inside
@@ -458,7 +458,7 @@ function TreeNode(container)
 				{	
 					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
 					{
-						Editor.addAction(new MovedAction(object, self.object));	
+						Editor.addAction(new MoveAction(object, self.object));	
 					}
 				}
 			}

@@ -129,7 +129,7 @@ function AssetExplorerMenu(parent)
 				{
 					var texture = new SpriteSheetTexture(new Image(reader.result, extension), 1, 1 ,1);
 					texture.name = name;
-					Editor.addAction(new AddResourceAction(texture, "textures", Editor.program));
+					Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 				};
 
 				reader.readAsArrayBuffer(file);
@@ -142,7 +142,7 @@ function AssetExplorerMenu(parent)
 	{
 		var texture = new CubeTexture([Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage]);
 		texture.name = "cube";
-		Editor.addAction(new AddResourceAction(texture, "textures", Editor.program));
+		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 	}, Editor.filePath + "icons/misc/cube.png");
 
 	//Canvas texture
@@ -150,7 +150,7 @@ function AssetExplorerMenu(parent)
 	{
 		var texture = new CanvasTexture(512, 512);
 		texture.name = "canvas";
-		Editor.addAction(new AddResourceAction(texture, "textures", Editor.program));
+		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 	}, Editor.filePath + "icons/misc/canvas.png");
 
 	//Video texture
@@ -170,7 +170,7 @@ function AssetExplorerMenu(parent)
 	{
 		var texture = new WebcamTexture();
 		texture.name = "webcam";
-		Editor.addAction(new AddResourceAction(texture, "textures", Editor.program));
+		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 	}, Editor.filePath + "icons/hw/webcam.png");
 
 	texture.updateInterface();
@@ -185,84 +185,84 @@ function AssetExplorerMenu(parent)
 	{
 		var material = new THREE.MeshStandardMaterial();
 		material.name = "standard";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Physical material", function()
 	{
 		var material = new THREE.MeshPhysicalMaterial();
 		material.name = "physical";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Phong material", function()
 	{
 		var material = new THREE.MeshPhongMaterial();
 		material.name = "phong";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 	
 	material.addOption("Basic material", function()
 	{
 		var material = new THREE.MeshBasicMaterial();
 		material.name = "basic";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Toon material", function()
 	{
 		var material = new THREE.MeshToonMaterial();
 		material.name = "toon";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Lambert material", function()
 	{
 		var material = new THREE.MeshLambertMaterial();
 		material.name = "lambert";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Matcap material", function()
 	{
 		var material = new THREE.MeshMatcapMaterial();
 		material.name = "matcap";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.addOption("Sprite material", function()
 	{
 		var material = new THREE.SpriteMaterial({color: 0xffffff});
 		material.name = "sprite";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/image.png");
 
 	material.addOption("Points material", function()
 	{
 		var material = new THREE.PointsMaterial();
 		material.name = "points";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/models/points.png");
 
 	material.addOption("Line material", function()
 	{
 		var material = new THREE.LineBasicMaterial();
 		material.name = "line";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/nodes.png");
 
 	material.addOption("Line Dashed material", function()
 	{
 		var material = new THREE.LineDashedMaterial();
 		material.name = "line";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/nodes.png");
 
 	material.addOption("Shader material", function()
 	{
 		var material = new THREE.ShaderMaterial();
 		material.name = "shader";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/script/script.png");
 
 	var others = material.addMenu("Others");
@@ -271,28 +271,28 @@ function AssetExplorerMenu(parent)
 	{
 		var material = new THREE.MeshNormalMaterial();
 		material.name = "normal";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 	
 	others.addOption("Depth material", function()
 	{
 		var material = new THREE.MeshDepthMaterial();
 		material.name = "depth";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	others.addOption("Distance material", function()
 	{
 		var material = new THREE.MeshDistanceMaterial();
 		material.name = "distance";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	others.addOption("Shadow material", function()
 	{
 		var material = new THREE.ShadowMaterial();
 		material.name = "shadow";
-		Editor.addAction(new AddResourceAction(material, "materials", Editor.program));
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.updateInterface();

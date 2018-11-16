@@ -1,7 +1,19 @@
 "use strict";
 
-//Object moved in the object tree.
-function MovedAction(object, newParent, newIndex)
+/**
+ * Action to represent a object move in the children tree.
+ *
+ * Objects can be moved between parents, and to specific positions (index).
+ *
+ * If necessary the action can also calculate the inverse tranform to estimate new pose values to keep the global pose of the moved object the same.
+ *
+ * @class MoveAction
+ * @extends {Action}
+ * @param {THREE.Object3D} object Object to be moved.
+ * @param {THREE.Object3D} newParent New parent of the object.
+ * @param {Number} newIndex Index to insert the object.
+ */
+function MoveAction(object, newParent, newIndex)
 {
 	Action.call(this);
 	
@@ -16,7 +28,7 @@ function MovedAction(object, newParent, newIndex)
 	this.keepGlobalPose = Editor.settings.editor.keepTransformMove;
 }
 
-MovedAction.prototype.apply = function()
+MoveAction.prototype.apply = function()
 {
 	this.oldParent.remove(this.object);
 	
@@ -37,10 +49,10 @@ MovedAction.prototype.apply = function()
 		this.object.parent = this.newParent;
 	}
 
-	MovedAction.updateGUI(this.object, this.oldParent, this.newParent, this.newIndex);
+	MoveAction.updateGUI(this.object, this.oldParent, this.newParent, this.newIndex);
 };
 
-MovedAction.prototype.revert = function()
+MoveAction.prototype.revert = function()
 {
 	this.newParent.remove(this.object);
 
@@ -53,10 +65,10 @@ MovedAction.prototype.revert = function()
 	children.splice(this.oldIndex, 0, this.object);
 	this.object.parent = this.oldParent;
 
-	MovedAction.updateGUI(this.object, this.newParent, this.oldParent, this.oldIndex);
+	MoveAction.updateGUI(this.object, this.newParent, this.oldParent, this.oldIndex);
 };
 
-MovedAction.prototype.inverseTransform = function(oldParent, newParent)
+MoveAction.prototype.inverseTransform = function(oldParent, newParent)
 {
 	var matrix = this.object.matrix;
 
@@ -74,7 +86,7 @@ MovedAction.prototype.inverseTransform = function(oldParent, newParent)
 	matrix.decompose(this.object.position, this.object.quaternion, this.object.scale);
 };
 
-MovedAction.updateGUI = function(object, oldParent, newParent, newIndex)
+MoveAction.updateGUI = function(object, oldParent, newParent, newIndex)
 {
 	if(this.keepGlobalPose)
 	{

@@ -80,7 +80,7 @@ function AudioAsset(parent)
 		{
 			if(self.asset !== null && confirm("Delete audio?"))
 			{
-				Editor.addAction(new RemoveResourceAction(self.asset, "audio", Editor.program));
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "audio"));
 			}
 		});
 

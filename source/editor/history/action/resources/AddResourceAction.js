@@ -3,17 +3,12 @@
 /**
  * Add resource to the manager.
  *
- * images
- * videos
- * audio
- * fonts
- * materials
- * textures
- * geometries
- * resources
- * shapes
+ * @class AddResourceAction
+ * @param {Resource} resource Resource to add.
+ * @param {ResourceManager} manager Manager to insert the resource into.
+ * @param {String} category Category of the resource.
  */
-function AddResourceAction(resource, category, manager)
+function AddResourceAction(resource, manager, category)
 {
 	Action.call(this);
 	
