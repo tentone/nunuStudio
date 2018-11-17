@@ -23,7 +23,7 @@ var EDITOR_MAIN = "source/editor/Editor.js";
 var EXAMPLES_PATH = "../docs/examples/";
 var EDITOR_OUTPUT_PATH = "../docs/editor/";
 
-var DOCS_SOURCE_PATH = SOURCE_PATH + "core/";
+var DOCS_SOURCE_PATH = SOURCE_PATH + "source/core/";
 var DOCS_OUTPUT_PATH = "../docs/docs";
 var DOCS_THEME_PATH = "../docs/theme";
 
@@ -102,6 +102,22 @@ copyFolder(SOURCE_PATH + "source/files", EDITOR_OUTPUT_PATH + "source/files");
 copyFolder(SOURCE_PATH + "source/runtime", EDITOR_OUTPUT_PATH + "source/runtime");
 copyFile(SOURCE_PATH + "source/favicon.ico", EDITOR_OUTPUT_PATH + "source/favicon.ico");
 copyFile(SOURCE_PATH + "package.json", EDITOR_OUTPUT_PATH + "package.json");
+writeFile(EDITOR_OUTPUT_PATH + "index.html", "<!DOCTYPE html>\
+\
+<html>\
+	<head>\
+		<meta charset=\"UTF-8\">\
+		<meta http-equiv=\"content-type\" content=\"text/html; charset=ISO-8859-1\"/>\
+		<meta name=\"description\" content=\"nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR\">\
+		<meta name=\"keywords\" content=\"GameDev,Virtual Reality,Augmented Reality,JavaScript,JS,three.js\">\
+		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\">\
+	</head>\
+\
+	<body onload=\"Editor.initialize();\" onresize=\"Editor.resize();\">\
+		<script type=\"text/javascript\" src=\"nunu.editor.min.js\"></script>\
+		<link rel=\"stylesheet\" href=\"nunu.editor.css\">\
+	</body>\
+</html>");
 
 console.log(" Copying editor build");
 copyFile(OUTPUT_PATH + "nunu.min.js", EDITOR_OUTPUT_PATH + "nunu.min.js");

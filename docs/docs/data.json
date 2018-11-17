@@ -11228,7 +11228,59 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 356,
+            "line": 308,
+            "description": "Add resource (of any type) to category.",
+            "itemtype": "method",
+            "name": "addRes",
+            "params": [
+                {
+                    "name": "resource",
+                    "description": "",
+                    "type": "Resource"
+                },
+                {
+                    "name": "category",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 336,
+            "description": "Remove resource of any type from category.",
+            "itemtype": "method",
+            "name": "removeRes",
+            "params": [
+                {
+                    "name": "resource",
+                    "description": "",
+                    "type": "Resource"
+                },
+                {
+                    "name": "category",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "defaultResource",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "defaultSubResource",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 372,
             "description": "Get resource by name.",
             "itemtype": "method",
             "name": "getResourceByName",
@@ -11248,7 +11300,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 377,
+            "line": 393,
             "description": "Add resource to resources manager.",
             "itemtype": "method",
             "name": "addResource",
@@ -11264,7 +11316,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 391,
+            "line": 407,
             "description": "Remove resource from font list.",
             "itemtype": "method",
             "name": "removeResource",
@@ -11280,7 +11332,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 402,
+            "line": 418,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -11300,7 +11352,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 423,
+            "line": 439,
             "description": "Remove image.",
             "params": [
                 {
@@ -11316,7 +11368,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 438,
+            "line": 454,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -11336,7 +11388,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 459,
+            "line": 475,
             "description": "Remove video.",
             "params": [
                 {
@@ -11352,7 +11404,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 473,
+            "line": 489,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -11372,7 +11424,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 494,
+            "line": 510,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -11388,7 +11440,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 508,
+            "line": 524,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -11399,12 +11451,12 @@
                     "type": "Material"
                 },
                 {
-                    "name": "defaultMaterial",
+                    "name": "defaultMeshMaterial",
                     "description": "Default mesh material to replace objects mesh materials.",
                     "type": "Material"
                 },
                 {
-                    "name": "defaultMaterialSprite",
+                    "name": "defaultSpriteMaterial",
                     "description": "Defaul sprite material.",
                     "type": "Material"
                 }
@@ -11414,7 +11466,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 549,
+            "line": 565,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -11434,7 +11486,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 570,
+            "line": 586,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -11450,7 +11502,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 584,
+            "line": 600,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -11475,7 +11527,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 671,
+            "line": 687,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -11495,7 +11547,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 692,
+            "line": 708,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -11511,7 +11563,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 706,
+            "line": 722,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -11532,7 +11584,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 734,
+            "line": 750,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -11552,7 +11604,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 755,
+            "line": 771,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -11568,7 +11620,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 769,
+            "line": 785,
             "description": "Remove audio.",
             "params": [
                 {
