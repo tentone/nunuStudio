@@ -16,6 +16,13 @@ function AudioPanel(parent, object)
 
 AudioPanel.prototype = Object.create(ResourcePanel.prototype);
 
+AudioPanel.prototype.destroy = function()
+{
+	ResourcePanel.prototype.destroy.call(this);
+
+	this.player.destroy();
+};
+
 AudioPanel.prototype.updatePanel = function()
 {
 	ResourcePanel.prototype.updatePanel.call(this);

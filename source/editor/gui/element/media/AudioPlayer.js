@@ -302,12 +302,14 @@ AudioPlayer.prototype.toggle = function()
 	}
 };
 
-//Remove element
 AudioPlayer.prototype.destroy = function()
 {
-	//Stop audio playback
-	this.disconnect();
-	this.stop();
+	try
+	{
+		this.disconnect();
+		this.stop();
+	}
+	catch(e){}
 
 	Element.prototype.destroy.call(this);
 };

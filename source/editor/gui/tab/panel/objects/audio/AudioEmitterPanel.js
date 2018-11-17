@@ -66,12 +66,9 @@ AudioEmitterPanel.prototype = Object.create(ObjectPanel.prototype);
 
 AudioEmitterPanel.prototype.destroy = function()
 {
-	try
-	{
-		this.parent.removeChild(this.element);
-		this.player.destroy();
-	}
-	catch(e){}
+	ObjectPanel.prototype.destroy.call(this);
+
+	this.player.destroy();
 };
 
 AudioEmitterPanel.prototype.updatePanel = function()
