@@ -48,26 +48,18 @@ function FontAsset(parent)
 
 		context.addOption(Locale.copy, function()
 		{
-			try
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-			}
-			catch(e){}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 		});
 		
 		context.addOption(Locale.cut, function()
 		{
 			if(self.asset !== null)
 			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "fonts"));
-				}
-				catch(e){}
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "fonts"));
 			}
 		});
-		
+
 		context.updateInterface();
 	};
 
