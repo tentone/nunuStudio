@@ -31,8 +31,7 @@ function FontAsset(parent)
 		
 		context.addOption(Locale.delete, function()
 		{
-			Editor.program.removeFont(self.asset, Editor.defaultFont);
-			Editor.updateObjectsViewsGUI();
+			Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "fonts"));
 		});
 
 		if(self.asset.format === "arraybuffer")
@@ -54,6 +53,19 @@ function FontAsset(parent)
 				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 			}
 			catch(e){}
+		});
+		
+		context.addOption(Locale.cut, function()
+		{
+			if(self.asset !== null)
+			{
+				try
+				{
+					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "fonts"));
+				}
+				catch(e){}
+			}
 		});
 		
 		context.updateInterface();

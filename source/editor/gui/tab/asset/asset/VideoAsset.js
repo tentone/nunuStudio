@@ -37,8 +37,7 @@ function VideoAsset(parent)
 		{
 			if(self.asset !== null && Editor.confirm(Locale.delete + " " + Locale.video))
 			{
-				Editor.program.removeVideo(self.asset);
-				Editor.updateObjectsViewsGUI();
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "videos"));
 			}
 		});
 
@@ -49,6 +48,19 @@ function VideoAsset(parent)
 				try
 				{
 					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+				}
+				catch(e){}
+			}
+		});
+
+		context.addOption(Locale.cut, function()
+		{
+			if(self.asset !== null)
+			{
+				try
+				{
+					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "videos"));
 				}
 				catch(e){}
 			}

@@ -60,8 +60,7 @@ function TextureAsset(parent)
 			if(self.asset !== null && Editor.confirm("Delete texture?"))
 			{
 				self.asset.dispose();
-				Editor.program.removeTexture(self.asset, Editor.defaultTexture);
-				Editor.updateObjectsViewsGUI();
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "textures"));
 			}
 		});
 
@@ -86,8 +85,7 @@ function TextureAsset(parent)
 					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 
 					self.asset.dispose();
-					Editor.program.removeTexture(self.asset, Editor.defaultTexture);
-					Editor.updateObjectsViewsGUI();
+					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "textures"));
 				}
 				catch(e){}
 			}

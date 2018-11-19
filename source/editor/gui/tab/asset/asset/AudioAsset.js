@@ -96,6 +96,19 @@ function AudioAsset(parent)
 			}
 		});
 
+		context.addOption(Locale.cut, function()
+		{
+			if(self.asset !== null)
+			{
+				try
+				{
+					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "audio"));
+				}
+				catch(e){}
+			}
+		});
+
 		context.updateInterface();
 	};
 
