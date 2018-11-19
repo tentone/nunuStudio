@@ -41,31 +41,6 @@ function ImageAsset(parent)
 			}
 		});
 
-		context.addOption(Locale.copy, function()
-		{
-			if(self.asset !== null)
-			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				}
-				catch(e){}
-			}
-		});
-
-		context.addOption(Locale.cut, function()
-		{
-			if(self.asset !== null)
-			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "images"));
-				}
-				catch(e){}
-			}
-		});
-
 		context.addOption(Locale.export, function()
 		{
 			if(Nunu.runningOnDesktop())
@@ -84,6 +59,23 @@ function ImageAsset(parent)
 				{
 					self.asset.export(file);
 				}, "." + self.asset.encoding);
+			}
+		});
+
+		context.addOption(Locale.copy, function()
+		{
+			if(self.asset !== null)
+			{
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+			}
+		});
+
+		context.addOption(Locale.cut, function()
+		{
+			if(self.asset !== null)
+			{
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "images"));
 			}
 		});
 

@@ -45,11 +45,7 @@ function VideoAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				}
-				catch(e){}
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 			}
 		});
 
@@ -57,12 +53,8 @@ function VideoAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "videos"));
-				}
-				catch(e){}
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "videos"));
 			}
 		});
 

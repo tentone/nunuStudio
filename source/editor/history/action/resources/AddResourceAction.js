@@ -46,7 +46,12 @@ AddResourceAction.prototype.revert = function()
 	{
 		this.manager.removeRes(this.resource, this.category);
 	}
-	
+
+	if(this.resource.dispose !== undefined)
+	{
+		this.resource.dispose();
+	}
+
 	RemoveResourceAction.updateGUI();
 };
 

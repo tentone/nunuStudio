@@ -68,11 +68,7 @@ function TextureAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				}
-				catch(e){}
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 			}
 		});
 		
@@ -80,14 +76,8 @@ function TextureAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-
-					self.asset.dispose();
-					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "textures"));
-				}
-				catch(e){}
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "textures"));
 			}
 		});
 

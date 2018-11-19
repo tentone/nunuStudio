@@ -36,8 +36,7 @@ function FileAsset(parent)
 		{
 			if(self.asset !== null && Editor.confirm(Locale.delete + " " + Locale.file))
 			{
-				Editor.program.removeResource(self.asset);
-				Editor.updateObjectsViewsGUI();
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "resources"));
 			}
 		});
 
@@ -59,6 +58,20 @@ function FileAsset(parent)
 				{
 					self.asset.export(file);
 				}, "." + self.asset.encoding);
+			}
+		});
+
+		context.addOption(Locale.copy, function()
+		{
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+		});
+		
+		context.addOption(Locale.cut, function()
+		{
+			if(self.asset !== null)
+			{
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "resources"));
 			}
 		});
 
