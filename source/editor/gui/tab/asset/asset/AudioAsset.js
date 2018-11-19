@@ -88,11 +88,7 @@ function AudioAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				}
-				catch(e){}
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 			}
 		});
 
@@ -100,12 +96,8 @@ function AudioAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "audio"));
-				}
-				catch(e){}
+				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "audio"));
 			}
 		});
 
