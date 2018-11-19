@@ -98,7 +98,7 @@ function VideoAsset(parent)
 
 VideoAsset.prototype = Object.create(Asset.prototype);
 
-VideoAsset.prototype.attach = function(video)
+VideoAsset.prototype.attach = function(asset)
 {
 	Asset.prototype.attach.call(this, asset);
 

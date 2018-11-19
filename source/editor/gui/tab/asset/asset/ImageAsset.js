@@ -11,6 +11,7 @@ function ImageAsset(parent)
 	this.preview.style.left = "17%";
 	this.preview.style.width = "66%";
 	this.preview.style.height = "66%";
+	this.preview.style.objectFit = "contain";
 	this.element.appendChild(this.preview);
 
 	this.setIcon(Editor.filePath + "icons/misc/image.png");

@@ -1566,11 +1566,15 @@ Editor.loadTexture = function(file, onLoad)
 		{
 			var loader = new THREE.TGALoader();
 			var jpeg = loader.parse(reader.result).toDataURL("image/jpeg", 1.0);
-			var texture = new Texture(new Image(jpeg, "jpeg"));
+			var image = new Image(jpeg, "jpeg");
+			var texture = new Texture(image);
+			Editor.addAction(new AddResourceAction(image, Editor.program, "images"));
 		}
 		else
 		{
-			var texture = new Texture(new Image(reader.result, extension));
+			var image = new Image(reader.result, extension);
+			var texture = new Texture(image);
+			Editor.addAction(new AddResourceAction(image, Editor.program, "images"));
 		}
 
 		texture.name = name;
@@ -1594,9 +1598,13 @@ Editor.loadVideoTexture = function(file, onLoad)
 	var reader = new FileReader();
 	reader.onload = function()
 	{
-		var texture = new VideoTexture(new Video(reader.result, extension));
+		var video = new Video(reader.result, extension)
+		video.name = name;
+
+		var texture = new VideoTexture(video);
 		texture.name = name;
 
+		Editor.addAction(new AddResourceAction(video, Editor.program, "videos"));
 		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 
 		if(onLoad !== undefined)
