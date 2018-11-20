@@ -7,6 +7,18 @@ function PanelContainer(parent, closeable, container, index)
 	this.element.style.overflow = "auto";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
+	/**
+	 * Text shown when there is no object select to show on the inspector.
+	 *
+	 * @attribute emptyText
+	 * @type {Text}
+	 */
+	this.emptyText = new Text(this);
+	this.emptyText.allowWordBreak(true);
+	this.emptyText.setTextSize(12);
+	this.emptyText.setTextColor("#FFFFFF");
+	this.emptyText.setText(Locale.nothingToShow);
+
 	this.panel = null;
 }
 
@@ -19,6 +31,8 @@ PanelContainer.prototype.destroyPanel = function()
 		this.panel.destroy();
 		this.panel = null;
 	}
+
+	this.emptyText.setVisibility(true);
 };
 
 PanelContainer.prototype.attach = function(object)
@@ -204,6 +218,8 @@ PanelContainer.prototype.updateSelection = function()
 
 	if(this.panel !== null)
 	{
+		this.emptyText.setVisibility(false);
+		
 		this.panel.updatePanel();
 		this.panel.size.copy(this.size);
 		this.panel.updateInterface();
@@ -221,6 +237,10 @@ PanelContainer.prototype.updateValues = function()
 PanelContainer.prototype.updateSize = function()
 {	
 	TabElement.prototype.updateSize.call(this);
+
+	this.emptyText.position.x = (this.size.x * 0.1);
+	this.emptyText.size.set(this.size.x * 0.8, this.size.y);
+	this.emptyText.updateInterface();
 
 	if(this.panel !== null)
 	{

@@ -79,6 +79,7 @@ LocaleManager.register(
 	import: "Import",
 	export: "Export",
 	exit: "Exit",
+	nothingToShow: "Select an object to view its properties.",
 
 	//Resources
 	image: "Image",
