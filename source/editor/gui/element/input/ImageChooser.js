@@ -91,9 +91,6 @@ function ImageChooser(parent)
 	 * @type {Function}
 	 */
 	this.onChange = null;
-
-	//Attributes
-	this.size.set(100, 100);
 }
 
 ImageChooser.prototype = Object.create(Element.prototype);
