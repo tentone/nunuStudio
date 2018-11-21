@@ -58,19 +58,34 @@ TextBox.prototype.setDisabled = function(value)
 	this.element.disabled = value;
 };
 
-//Set onchange onChange
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 TextBox.prototype.setOnChange = function(onChange)
 {
 	this.element.onchange = onChange;
 };
 
-//Set text
+/**
+ * Set value stored in the input element.
+ *
+ * @method setText
+ * @param {Object} text
+ */
 TextBox.prototype.setText = function(text)
 {
 	this.element.value = text;
 };
 
-//Get text
+/**
+ * Get text stored in the input element.
+ *
+ * @method getText
+ * @return {String} Text stored in the input element.
+ */
 TextBox.prototype.getText = function()
 {
 	return this.element.value;

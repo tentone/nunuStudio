@@ -84,7 +84,12 @@ function ImageChooser(parent)
 		reader.readAsDataURL(file);
 	};
 
-	//onChange callback
+	/**
+	 * On change callback function.
+	 *
+	 * @property onChange
+	 * @type {Function}
+	 */
 	this.onChange = null;
 
 	//Attributes
@@ -93,21 +98,36 @@ function ImageChooser(parent)
 
 ImageChooser.prototype = Object.create(Element.prototype);
 
-//Set onChange callback
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 ImageChooser.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
 	this.img.style.cursor = "pointer";
 };
 
-//Set image URL
+/**
+ * Set value stored in the input element.
+ *
+ * @method setValue
+ * @param {Object} image
+ */
 ImageChooser.prototype.setValue = function(image)
 {
 	this.value = image;
 	this.img.src = image.data;
 };
 
-//Get image URL
+/**
+ * Get value stored in the input element.
+ *
+ * @method setValue
+ * @return {Object} Image URL.
+ */
 ImageChooser.prototype.getValue = function()
 {
 	return this.value;

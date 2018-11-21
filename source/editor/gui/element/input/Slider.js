@@ -78,8 +78,20 @@ function Slider(parent)
 	this.scrubber.style.width = "6px";
 	this.track.appendChild(this.scrubber);
 
-	//Value
+	/**
+	 * Value stored in the slider.
+	 *
+	 * @property value
+	 * @type {Number}
+	 */
 	this.value = 0.0;
+
+	/**
+	 * On change callback function.
+	 *
+	 * @property onChange
+	 * @type {Function}
+	 */
 	this.onChange = null;
 
 	//Range

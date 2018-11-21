@@ -78,7 +78,12 @@ function CubeTextureBox(parent)
 
 CubeTextureBox.prototype = Object.create(Element.prototype);
 
-//Set onChange onChange function
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 CubeTextureBox.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
@@ -86,7 +91,12 @@ CubeTextureBox.prototype.setOnChange = function(onChange)
 	this.mapping.setOnChange(onChange);
 };
 
-//Set texture value
+/**
+ * Set value stored in the input element.
+ *
+ * @method setValue
+ * @param {Texture} texture
+ */
 CubeTextureBox.prototype.setValue = function(texture)
 {
 	if(texture !== null && texture.isCubeTexture)
@@ -106,7 +116,12 @@ CubeTextureBox.prototype.setValue = function(texture)
 	}
 };
 
-//Get texture value
+/**
+ * Get value stored in the input element.
+ *
+ * @method setValue
+ * @return {Object} Value stored in the input element.
+ */
 CubeTextureBox.prototype.getValue = function()
 {
 	if(this.useTexture.getValue())

@@ -47,7 +47,12 @@ function TextureForm(parent)
 
 TextureForm.prototype = Object.create(TextureChooser.prototype);
 
-//Set onChange onChange function
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 TextureForm.prototype.setOnChange = function(onChange)
 {
 	TextureChooser.prototype.setOnChange.call(this, onChange);
@@ -58,7 +63,12 @@ TextureForm.prototype.setOnChange = function(onChange)
 	this.repeat.setOnChange(onChange);
 };
 
-//Set texture value
+/**
+ * Set value stored in the input element.
+ *
+ * @method setValue
+ * @param {Object} texture
+ */
 TextureForm.prototype.setValue = function(texture)
 {
 	if(texture instanceof THREE.Texture && !texture.isCubeTexture)
@@ -78,7 +88,12 @@ TextureForm.prototype.setValue = function(texture)
 	}
 };
 
-//Get texture value
+/**
+ * Get value stored in the input element.
+ *
+ * @method getValue
+ * @return {Object} Value stored in the input element.
+ */
 TextureForm.prototype.getValue = function()
 {
 	if(this.useTexture.getValue())

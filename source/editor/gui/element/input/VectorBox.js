@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * The vector box is used to represent Vector2, Vector3, Vector4 and Euler values.
+ *
+ * @class VectorBox
+ * @extends {Element}
+ */
 function VectorBox(parent)
 {
 	Element.call(this, parent, "div");
@@ -78,19 +84,23 @@ function VectorBox(parent)
 	//Order
 	this.order = "XYZ";
 	this.type = VectorBox.VECTOR3;
-
-	//Attributes
-	this.size.set(190, 18);
 }
 
-//Positionbox mode
 VectorBox.VECTOR2 = 2;
 VectorBox.VECTOR3 = 3;
 VectorBox.QUATERNION = 4;
 
 VectorBox.prototype = Object.create(Element.prototype);
 
-//Set position box mode
+/**
+ * Set the type of box, (type of data to use).
+ *  - VectorBox.VECTOR2
+ *  - VectorBox.VECTOR3
+ *  - VectorBox.QUATERNION
+ *
+ * @method setType
+ * @param {Number} type
+ */
 VectorBox.prototype.setType = function(type)
 {
 	if(this.type !== type)
@@ -100,7 +110,12 @@ VectorBox.prototype.setType = function(type)
 	}
 };
 
-//Set step for position box
+/**
+ * Set the values step.
+ *
+ * @method setStep
+ * @param {Number} value
+ */
 VectorBox.prototype.setStep = function(value)
 {
 	var value = String(value);
@@ -110,7 +125,13 @@ VectorBox.prototype.setStep = function(value)
 	this.w.step = value;
 };
 
-//Set coordinate range
+/**
+ * Set the values range
+ *
+ * @method setRange
+ * @param {Number} min
+ * @param {Number} max
+ */
 VectorBox.prototype.setRange = function(min, max)
 {
  	var min = String(min);
@@ -125,13 +146,27 @@ VectorBox.prototype.setRange = function(min, max)
 	this.w.max = max;	
 };
 
-//Get value of position box
+/**
+ * Get a value from the box.
+ *
+ * @method getValue
+ * @return {Object} Value stored.
+ */
 VectorBox.prototype.getValue = function()
 {
 	return {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
 };
 
-//Set value of position box
+/**
+ * Set value to the vector box.
+ *
+ * @method setValue
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} z
+ * @param {Number} w
+ * @param {Object} value Value
+ */
 VectorBox.prototype.setValue = function(x, y, z, w)
 {
 	if(x.isVector2)
@@ -172,7 +207,12 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 	}
 };
 
-//Set onchange onChange
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 VectorBox.prototype.setOnChange = function(onChange)
 {
 	this.x.onchange = onChange;

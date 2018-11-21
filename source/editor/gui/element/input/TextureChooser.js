@@ -94,19 +94,33 @@ function TextureChooser(parent)
 		}
 	};
 
-	this.size.set(100, 100);
-
-	//onChange function
+	/**
+	 * On change callback function.
+	 *
+	 * @property onChange
+	 * @type {Function}
+	 */
 	this.onChange = null;
+
 	this.acceptAll = false;
 
-	//Texture
+	/**
+	 * Texture stored in chooser.
+	 *
+	 * @property texture
+	 * @type {THREE.Texture}
+	 */
 	this.texture = null;
 }
 
 TextureChooser.prototype = Object.create(Element.prototype);
 
-//Set onChange onChange function
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 TextureChooser.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
@@ -126,7 +140,12 @@ TextureChooser.prototype.setValue = function(texture)
 	}
 };
 
-//Get texture value
+/**
+ * Get value stored in the input element.
+ *
+ * @method getValue
+ * @return {Object} Value stored in the input element.
+ */
 TextureChooser.prototype.getValue = function()
 {
 	return this.texture;

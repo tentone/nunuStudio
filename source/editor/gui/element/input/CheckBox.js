@@ -39,8 +39,20 @@ function CheckBox(parent)
 	this.check.src = Editor.filePath + "icons/misc/check.png";
 	this.element.appendChild(this.check);
 
+	/**
+	 * Value stored in the checkbox.
+	 *
+	 * @property value
+	 * @type {Boolean}
+	 */
 	this.value = false;
 
+	/**
+	 * On change callback function.
+	 *
+	 * @property onChange
+	 * @type {Function}
+	 */
 	this.onChange = null;
 };
 

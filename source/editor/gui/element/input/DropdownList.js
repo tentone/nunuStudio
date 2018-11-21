@@ -43,7 +43,12 @@ DropdownList.prototype.setDisabled = function(value)
 	this.select.disabled = value;
 }
 
-//Set onchange onChange
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 DropdownList.prototype.setOnChange = function(onChange)
 {
 	this.select.onchange = onChange;
@@ -68,8 +73,12 @@ DropdownList.prototype.clearValues = function()
 	}
 };
 
-
-//Get DropdownList value
+/**
+ * Get value stored in the input element.
+ *
+ * @method setValue
+ * @return {Object} Value stored in the input element.
+ */
 DropdownList.prototype.getValue = function()
 {
 	if(this.select.selectedIndex > -1)
@@ -79,7 +88,12 @@ DropdownList.prototype.getValue = function()
 	return null;
 }
 
-//Set dropdown list value
+/**
+ * Set value stored in the input element.
+ *
+ * @method setValue
+ * @param {Object} value
+ */
 DropdownList.prototype.setValue = function(value)
 {
 	//Get value index

@@ -10,23 +10,43 @@ function VectorArrayBox(parent)
 {
 	Element.call(this, parent, "div");
 
-	this.elements = [];
+	/**
+	 * Array with the values objects.
+	 *
+	 * Each value object is composed of {label:label, input:input}
+	 *
+	 * @attribute values
+	 * @type {Array}
+	 */
+	this.values = [];
 
 	//TODO <ADD CODE HERE>
 }
 
 VectorArrayBox.prototype = Object.create(Element.prototype);
 
-//Set step for position box
+/**
+ * Set the values step.
+ *
+ * @method setStep
+ * @param {Number} value
+ */
 VectorArrayBox.prototype.setStep = function(value)
 {
 	var value = String(value);
+
 	//this.x.step = value;
 
 	//TODO <ADD CODE HERE>
 };
 
-//Set coordinate range
+/**
+ * Set the values range
+ *
+ * @method setRange
+ * @param {Number} min
+ * @param {Number} max
+ */
 VectorArrayBox.prototype.setRange = function(min, max)
 {
  	var min = String(min);
@@ -38,25 +58,51 @@ VectorArrayBox.prototype.setRange = function(min, max)
 	//TODO <ADD CODE HERE>
 };
 
-//Get value of position box
-VectorArrayBox.prototype.getValue = function()
+/**
+ * Add value to the box
+ *
+ * @method addValue
+ * @param {String} name Name of de attribute.
+ */
+VectorArrayBox.prototype.addValue = function(name)
 {
-	return {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
-};
-
-//Set value of position box
-VectorArrayBox.prototype.setValue = function(x)
-{
-	//this.x.value = x.x;
-
 	//TODO <ADD CODE HERE>
 };
 
-//Set onchange onChange
+/**
+ * Get a value from the box.
+ *
+ * @method getValue
+ * @param {String} name Name of de attribute.
+ * @return {Object} Value stored in the attribute, null if there is no value.
+ */
+VectorArrayBox.prototype.getValue = function(name)
+{
+	//TODO <ADD CODE HERE>
+
+	return null;
+};
+
+/**
+ * Set value to the box
+ *
+ * @method setValue
+ * @param {String} name Name of de attribute.
+ * @param {Object} value Value
+ */
+VectorArrayBox.prototype.setValue = function(name, value)
+{
+	//TODO <ADD CODE HERE>
+};
+
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 VectorArrayBox.prototype.setOnChange = function(onChange)
 {
-	//this.x.onchange = onChange;
-
 	//TODO <ADD CODE HERE>
 };
 
@@ -64,5 +110,6 @@ VectorArrayBox.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 	
-	//TODO <ADD CODE HERE>
+	var sizeX = Math.round((this.size.x - this.values.length * 15) / this.values.length);
+	var sizeY = this.size.y + "px";
 };

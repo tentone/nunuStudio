@@ -40,19 +40,34 @@ NumberBox.prototype.setStep = function(value)
 	this.element.step = String(value);
 };
 
-//Set onchange onChange
+/**
+ * Set onchange callback, called after changes.
+ *
+ * @method setOnChange
+ * @param {Function} onChange
+ */
 NumberBox.prototype.setOnChange = function(onChange)
 {
 	this.element.onchange = onChange;
 };
 
-//Set value
+/**
+ * Set value stored in the input element.
+ *
+ * @method setValue
+ * @param {Number} value
+ */
 NumberBox.prototype.setValue = function(value)
 {
 	this.element.value = value;
 };
 
-//Get text
+/**
+ * Get value stored in the input element.
+ *
+ * @method setValue
+ * @return {Object} Value stored in the input element.
+ */
 NumberBox.prototype.getValue = function()
 {
 	return Number.parseFloat(this.element.value);
