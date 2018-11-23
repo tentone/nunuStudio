@@ -7557,7 +7557,47 @@
         },
         {
             "file": "..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 207,
+            "line": 123,
+            "description": "Enables smooth orbit movement.",
+            "itemtype": "property",
+            "name": "smooth",
+            "type": "{Boolean}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 131,
+            "description": "Orbit speed friction, higher value allow the orbit to retain more speed.\n\nOnly used when smooth is set true.",
+            "itemtype": "property",
+            "name": "friction",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 141,
+            "description": "Obit movement speed.\n\nOnly used when smooth is set true.",
+            "itemtype": "property",
+            "name": "friction",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 151,
+            "description": "If set true the Y orientation movement is inverted.",
+            "itemtype": "property",
+            "name": "invertNavigation",
+            "type": "{Boolean}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 299,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
