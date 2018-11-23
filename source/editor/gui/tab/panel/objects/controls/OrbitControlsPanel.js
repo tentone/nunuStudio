@@ -128,6 +128,53 @@ function OrbitControlsPanel(parent, object)
 	this.form.add(this.zoomSensitivity);
 	this.form.nextRow();
 
+	//Smooth
+	this.form.addText("Zoom");
+	this.smooth = new CheckBox(this.form);
+	this.smooth.size.set(18, 18);
+	this.smooth.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "smooth", self.smooth.getValue()));
+	});
+	this.form.add(this.smooth);
+	this.form.nextRow();
+
+	//Speed
+	this.form.addText("Speed");
+	this.speed = new Slider(this.form);
+	this.speed.size.set(18, 18);
+	this.speed.setStep(0.01);
+	this.speed.setRange(0, 1);
+	this.speed.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "speed", self.speed.getValue()));
+	});
+	this.form.add(this.speed);
+	this.form.nextRow();
+
+	//Friction
+	this.form.addText("Friction");
+	this.friction = new Slider(this.form);
+	this.friction.size.set(18, 18);
+	this.friction.setStep(0.01);
+	this.friction.setRange(0, 1);
+	this.friction.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "friction", self.friction.getValue()));
+	});
+	this.form.add(this.friction);
+	this.form.nextRow();
+
+	//Invert Navigation
+	this.form.addText("Invert Navigation");
+	this.invertNavigation = new CheckBox(this.form);
+	this.invertNavigation.size.set(18, 18);
+	this.invertNavigation.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "invertNavigation", self.invertNavigation.getValue()));
+	});
+	this.form.add(this.invertNavigation);
+	this.form.nextRow();
 }
 
 OrbitControlsPanel.prototype = Object.create(ObjectPanel.prototype);
@@ -146,4 +193,8 @@ OrbitControlsPanel.prototype.updatePanel = function()
 	this.limitDown.setValue(this.object.limitDown);
 	this.zoomEnabled.setValue(this.object.zoomEnabled);
 	this.zoomSensitivity.setValue(this.object.zoomSensitivity);
+	this.smooth.setValue(this.object.smooth);
+	this.friction.setValue(this.object.friction);
+	this.speed.setValue(this.object.speed);
+	this.invertNavigation.setValue(this.object.invertNavigation);
 };
