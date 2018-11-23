@@ -120,9 +120,48 @@ function OrbitControls()
 	 */	
 	this.vector = new THREE.Vector2(0, 0);
 
+	/**
+	 * Enables smooth orbit movement.
+	 *
+	 * @property smooth
+	 * @type {Boolean}
+	 */	
+	this.smooth = true;
+
+	/**
+	 * Orbit speed friction, higher value allow the orbit to retain more speed.
+	 *
+	 * Only used when smooth is set true.
+	 *
+	 * @property friction
+	 * @type {Number}
+	 */	
+	this.friction = 0.8;
+
+	/**
+	 * Obit movement speed.
+	 *
+	 * Only used when smooth is set true.
+	 *
+	 * @property friction
+	 * @type {Number}
+	 */	
+	this.speed = 0.3;
+
+	/**
+	 * If set true the Y orientation movement is inverted.
+	 *
+	 * @property invertNavigation
+	 * @type {Boolean}
+	 */
+	this.invertNavigation = false;
+
 	this.mouse = null;
 	this.keyboard = null;
 
+	this.speedDistance = 0;
+	this.speedCenter = new THREE.Vector3(0, 0, 0);
+	this.speedOrientation = new THREE.Vector2(0, 0);
 	this.tempVector = new THREE.Vector3();
 }
 
@@ -157,22 +196,46 @@ OrbitControls.prototype.update = function(delta)
 
 	if(!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
 	{
-		this.vector.y -= this.sensitivity * this.mouse.delta.y;
-		this.vector.x -= this.sensitivity * this.mouse.delta.x;
+		if(this.smooth === true)
+		{
+			this.speedOrientation.y += this.speed * this.sensitivity * (this.invertNavigation ? this.mouse.delta.y : -this.mouse.delta.y);
+			this.speedOrientation.x -= this.speed * this.sensitivity * this.mouse.delta.x;
+		}
+		else
+		{
+			this.vector.y -= this.sensitivity * (this.invertNavigation ? this.mouse.delta.y : -this.mouse.delta.y);
+			this.vector.x -= this.sensitivity * this.mouse.delta.x;
+		}
 		needsUpdate = true;
 	}
 
 	if(this.zoomEnabled)
 	{
-		if(this.mouse.wheel !== 0)
+		if(this.mouse.buttonPressed(Mouse.MIDDLE))
 		{
-			this.distance += this.mouse.wheel * this.zoomSensitivity * this.position.distanceTo(this.center);
+			if(this.smooth === true)
+			{
+				this.speedCenter.y += this.speed * this.sensitivity * this.mouse.delta.y * this.distance;
+			}
+			else
+			{
+				this.center.y += this.sensitivity * this.mouse.delta.y * this.distance;
+			}
+
 			needsUpdate = true;
 		}
 
-		if(this.mouse.buttonPressed(Mouse.MIDDLE))
+		if(this.mouse.wheel !== 0)
 		{
-			this.distance += this.mouse.delta.y * this.zoomSensitivity;
+			if(this.smooth === true)
+			{
+				this.speedDistance += this.speed * this.mouse.wheel * this.position.distanceTo(this.center) * this.sensitivity;
+			}
+			else
+			{
+				this.distance += this.mouse.wheel * this.position.distanceTo(this.center) * this.sensitivity;
+			}
+
 			needsUpdate = true;
 		}
 	}
@@ -183,20 +246,49 @@ OrbitControls.prototype.update = function(delta)
 		direction.y = 0;
 		direction.normalize();
 
-		var y = this.mouse.delta.y * this.sensitivity * this.distance;
-		this.center.x -= direction.x * y;
-		this.center.z -= direction.z * y;
+		if(this.smooth === true)
+		{
+			var y = this.speed * this.mouse.delta.y * this.sensitivity * this.distance;
+			this.speedCenter.x += up ? (-direction.x * y) : (direction.x * y);
+			this.speedCenter.z += up ? (-direction.z * y) : (direction.z * y);
+			
+			direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
 
-		direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
+			var x = this.speed * this.mouse.delta.x * this.sensitivity * this.distance;
+			this.speedCenter.x -= direction.x * x;
+			this.speedCenter.z -= direction.z * x;
+		}
+		else
+		{
+			var y = this.mouse.delta.y * this.sensitivity * this.distance;
+			this.center.x += up ? (-direction.x * y) : (direction.x * y);
+			this.center.z += up ? (-direction.z * y) : (direction.z * y);
+			
+			direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
 
-		var x = this.mouse.delta.x * this.sensitivity * this.distance;
-		this.center.x -= direction.x * x;
-		this.center.z -= direction.z * x;
+			var x = this.mouse.delta.x * this.sensitivity * this.distance;
+			this.center.x -= direction.x * x;
+			this.center.z -= direction.z * x;
+		}
 
 		needsUpdate = true;
 	}
 
-	if(needsUpdate)
+	if(this.smooth === true)
+	{
+		this.distance += this.speedDistance;
+		this.center.add(this.speedCenter);
+		this.vector.add(this.speedOrientation);
+
+		this.speedDistance *= this.friction;
+		this.speedOrientation.multiplyScalar(this.friction);
+		this.speedCenter.multiplyScalar(this.friction);
+
+		this.updateControls();
+		return;
+	}
+
+	if(needsUpdate === true)
 	{
 		this.updateControls();
 	}
@@ -254,6 +346,11 @@ OrbitControls.prototype.toJSON = function(meta)
 	data.object.needsButtonPressed = this.needsButtonPressed;
 	data.object.zoomEnabled = this.zoomEnabled;
 	data.object.movementEnabled = this.movementEnabled;
+
+	data.object.smooth = this.smooth;
+	data.object.friction = this.friction;
+	data.object.speed = this.speed;
+	data.object.invertNavigation = this.invertNavigation;
 
 	return data;
 };

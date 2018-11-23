@@ -788,6 +788,13 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			object.needsButtonPressed = data.needsButtonPressed;
 			object.zoomEnabled = data.zoomEnabled;
 			object.movementEnabled = data.movementEnabled;
+			if(data.smooth !== undefined)
+			{
+				object.smooth = data.smooth;
+				object.friction = data.friction;
+				object.speed = data.speed;
+				object.invertNavigation = data.invertNavigation;
+			}
 			break;
 			
 		case "Scene":
