@@ -1432,6 +1432,9 @@ Editor.setProgram = function(program)
 //Load program from file
 Editor.loadProgram = function(file, binary)
 {
+	var modal = new LoadingModal(DocumentBody);
+	modal.show();
+
 	function onload()
 	{
 		try
@@ -1461,6 +1464,8 @@ Editor.loadProgram = function(file, binary)
 			Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
 			console.error("nunuStudio: Error loading file", e);
 		}
+
+		modal.destroy();
 	};
 
 	if(file instanceof File)
