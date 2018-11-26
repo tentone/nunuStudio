@@ -1,5 +1,14 @@
 "use strict";
 
+/** 
+ * Wireframe helper is used to preview drawable objects.
+ * 
+ * Every line is drawn individually, usefull to analyse the geometry in detail.
+ *
+ * @class WireframeHelper
+ * @param {THREE.Object3D} object
+ * @param {Number} hex Helper color in hexadecimal.
+ */
 function WireframeHelper(object, hex) 
 {
 	THREE.Mesh.call(this, object.geometry, new THREE.MeshBasicMaterial(
@@ -8,6 +17,12 @@ function WireframeHelper(object, hex)
 		wireframe: true
 	}));
 
+	/**
+	 * Object attached to the helper
+	 *
+	 * @attribute object
+	 * @type {Object3D}
+	 */
 	this.object = object;
 	this.matrixAutoUpdate = false;
 	this.update();

@@ -14,7 +14,14 @@ function PointsHelper(object, hex)
 	this.material.color = new THREE.Color((hex !== undefined) ? hex : 0xFFFF00);
 	this.material.size = object.material.size * 1.2;
 
+	/**
+	 * Object attached to the helper
+	 *
+	 * @attribute object
+	 * @type {Object3D}
+	 */
 	this.object = object;
+
 	this.matrixAutoUpdate = false;
 	this.update();
 }

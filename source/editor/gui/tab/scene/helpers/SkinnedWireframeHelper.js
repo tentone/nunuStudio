@@ -10,6 +10,7 @@ function SkinnedWireframeHelper(object, hex)
 	}));
 
 	this.object = object;
+	
 	this.matrixAutoUpdate = false;
 	this.update();
 }

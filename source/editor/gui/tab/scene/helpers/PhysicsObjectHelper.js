@@ -1,10 +1,22 @@
 "use strict";
 
-//Based on code from cannonjs debug shape renderer made by schteppe
+/**
+ * Helper to preview cannonjs physics objects.
+ *
+ * Based on code from cannonjs debug shape renderer made by schteppe
+ *
+ * @class PhysicsObjectHelper
+ */
 function PhysicsObjectHelper(object, color)
 {
 	THREE.Object3D.call(this);
 
+	/**
+	 * Object attached to the helper.
+	 *
+	 * @attribute object
+	 * @type {Object3D}
+	 */
 	this.object = object;
 
 	this.meshes = [];
@@ -23,10 +35,10 @@ function PhysicsObjectHelper(object, color)
 	this.tmpQuat0 = new CANNON.Vec3();
 }
 
-PhysicsObjectHelper.sphere = new THREE.SphereBufferGeometry(1, 24, 24);
-PhysicsObjectHelper.box = new THREE.BoxBufferGeometry(1, 1, 1);
-PhysicsObjectHelper.plane = new THREE.PlaneBufferGeometry(100, 100);
-PhysicsObjectHelper.cylinder = new THREE.CylinderBufferGeometry(1, 1, 10, 32);
+PhysicsObjectHelper.SPHERE = new THREE.SphereBufferGeometry(1, 32, 32);
+PhysicsObjectHelper.BOX = new THREE.BoxBufferGeometry(1, 1, 1);
+PhysicsObjectHelper.PLANE = new THREE.PlaneBufferGeometry(100, 100);
+PhysicsObjectHelper.CYLINDER = new THREE.CylinderBufferGeometry(1, 1, 10, 32);
 
 PhysicsObjectHelper.prototype = Object.create(THREE.Object3D.prototype);
 
@@ -114,19 +126,19 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 	switch(shape.type)
 	{
 		case CANNON.Shape.types.SPHERE:
-			mesh = new THREE.Mesh(PhysicsObjectHelper.sphere, material);
+			mesh = new THREE.Mesh(PhysicsObjectHelper.SPHERE, material);
 			break;
 
 		case CANNON.Shape.types.PARTICLE:
-			mesh = new THREE.Mesh(PhysicsObjectHelper.sphere, material);
+			mesh = new THREE.Mesh(PhysicsObjectHelper.SPHERE, material);
 			break;
 
 		case CANNON.Shape.types.BOX:
-			mesh = new THREE.Mesh(PhysicsObjectHelper.box, material);
+			mesh = new THREE.Mesh(PhysicsObjectHelper.BOX, material);
 			break;
 
 		case CANNON.Shape.types.PLANE:
-			mesh = new THREE.Mesh(PhysicsObjectHelper.plane, material);
+			mesh = new THREE.Mesh(PhysicsObjectHelper.PLANE, material);
 			mesh.scale.set(1000, 1000, 1);
 			break;
 
