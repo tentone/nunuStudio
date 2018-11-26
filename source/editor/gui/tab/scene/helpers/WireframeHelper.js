@@ -24,6 +24,7 @@ function WireframeHelper(object, hex)
 	 * @type {Object3D}
 	 */
 	this.object = object;
+	
 	this.matrixAutoUpdate = false;
 	this.update();
 }
