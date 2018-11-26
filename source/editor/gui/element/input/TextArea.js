@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Image chooser is used for the user to select images.
+ *
+ * Images can be selected by opening a file explorer or by drag and drop.
+ *
+ * @class ImageChooser
+ * @extends {Element}
+ */
 function TextArea(parent)
 {
 	Element.call(this, parent, "textarea");
@@ -51,7 +59,12 @@ function TextArea(parent)
 
 TextArea.prototype = Object.create(Element.prototype);
 
-//Set if element if disabled
+/**
+ * Set the disabled state of the element.
+ *
+ * @method setDisabled
+ * @param {Boolean} disabled
+ */
 TextArea.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;

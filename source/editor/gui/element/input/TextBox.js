@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * DOM text input element.
+ * 
+ * @class TextBox
+ * @extends {Component}
+ * @param {Component} parent Parent element.
+ */
 function TextBox(parent)
 {
 	Element.call(this, parent, "input");
@@ -52,7 +59,12 @@ function TextBox(parent)
 
 TextBox.prototype = Object.create(Element.prototype);
 
-//Set if element if disabled
+/**
+ * Set the disabled state of the element.
+ *
+ * @method setDisabled
+ * @param {Boolean} disabled
+ */
 TextBox.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;

@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Image chooser is used for the user to select images.
+ *
+ * Images can be selected by opening a file explorer or by drag and drop.
+ *
+ * @class ImageChooser
+ * @extends {Element}
+ */
 function ImageChooser(parent)
 {
 	Element.call(this, parent, "div");

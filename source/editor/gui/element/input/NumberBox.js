@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Number input element.
+ * 
+ * @class NumberBox
+ * @extends {Component}
+ * @param {Component} parent Parent element.
+ */
 function NumberBox(parent)
 {
 	Element.call(this, parent, "input");
@@ -21,20 +28,36 @@ function NumberBox(parent)
 
 NumberBox.prototype = Object.create(Element.prototype);
 
-//Set if element if disabled
-NumberBox.prototype.setDisabled = function(value)
+/**
+ * Set the disabled state of the element.
+ *
+ * @method setDisabled
+ * @param {Boolean} disabled
+ */
+NumberBox.prototype.setDisabled = function(disabled)
 {
-	this.element.disabled = value;
+	this.element.disabled = disabled;
 };
 
-//Set numberbox range
+/**
+ * Set number range.
+ *
+ * @methos setRange
+ * @param {Number} min
+ * @param {Number} max
+ */
 NumberBox.prototype.setRange = function(min, max)
 {
 	this.element.min = String(min);
 	this.element.max = String(max);
 };
 
-//Set step
+/**
+ * Set number step.
+ *
+ * @method setStep
+ * @param {Number} value
+ */
 NumberBox.prototype.setStep = function(value)
 {
 	this.element.step = String(value);

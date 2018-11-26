@@ -37,7 +37,12 @@ function DropdownList(parent)
 
 DropdownList.prototype = Object.create(Element.prototype);
 
-//Set if element if disabled
+/**
+ * Set the disabled state of the element.
+ *
+ * @method setDisabled
+ * @param {Boolean} disabled
+ */
 DropdownList.prototype.setDisabled = function(value)
 {
 	this.select.disabled = value;

@@ -312,6 +312,7 @@ include("source/editor/gui/element/input/ImageChooser.js");
 include("source/editor/gui/element/input/TextureChooser.js");
 include("source/editor/gui/element/input/TextureForm.js");
 include("source/editor/gui/element/input/CubeTextureBox.js");
+include("source/editor/gui/element/input/NumberRow.js");
 
 include("source/editor/gui/element/tabs/TabGroup.js");
 include("source/editor/gui/element/tabs/TabElement.js");
@@ -1426,7 +1427,6 @@ Editor.setProgram = function(program)
 			scene.attach(Editor.program.scene);
 		}
 	}
-
 };
 
 //Load program from file
