@@ -15,7 +15,12 @@ function Text(parent)
 	this.element.style.color = Editor.theme.textColor;
 	this.element.style.display = "flex";
 
-	//Span
+	/** 
+	 * Span DOM element used to represent the text.
+	 *
+	 * @attribute span
+	 * @type {DOM}
+ 	 */
 	this.span = document.createElement("span");
 	this.span.style.overflow = "hidden";
 	this.element.appendChild(this.span);

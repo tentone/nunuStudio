@@ -45,6 +45,7 @@ function ScenePanel(parent, object)
 	this.form.addText("");
 	this.backgroundTexture = new TextureChooser(this.form);
 	this.backgroundTexture.acceptAll = true;
+	this.backgroundTexture.size.set(0, 100);
 	this.backgroundTexture.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.object, "background", self.backgroundTexture.getValue()));

@@ -161,26 +161,28 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Max age
-	this.form.addText("Max Age");
-	this.maxAgeValue = new NumberBox(this.form);
-	this.maxAgeValue.size.set(60, 18);
+	this.form.addText("Age");
+	this.ageRow = new NumberRow(this.form);
+	this.ageRow.labelSize = 20;
+	this.ageRow.size.set(0, 18);
+
+	this.maxAgeValue = this.ageRow.addValue("F");
 	this.maxAgeValue.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAgeValue.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.maxAge, "value", self.maxAgeValue.getValue()));
 		self.particle.reload();
 	});
-	this.form.add(this.maxAgeValue);
-	this.form.addText("+/-", true);
-	this.maxAgeSpread = new NumberBox(this.form);
-	this.maxAgeSpread.size.set(60, 18);
+
+	this.maxAgeSpread = this.ageRow.addValue("+/-");
 	this.maxAgeSpread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAgeSpread.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.maxAge, "spread", self.maxAgeSpread.getValue()));
 		self.particle.reload();
 	});
-	this.form.add(this.maxAgeSpread);
+
+	this.form.add(this.ageRow);
 	this.form.nextRow();
 
 	//Position
@@ -189,6 +191,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form.addText("Initial");
 	this.positionValue = new VectorBox(this.form);
+	this.positionValue.size.set(0, 18);
 	this.positionValue.setOnChange(function()
 	{
 		self.particle.emitter.position.value.copy(self.positionValue.getValue());
@@ -199,6 +202,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form.addText("Variation");
 	this.positionSpread = new VectorBox(this.form);
+	this.positionSpread.size.set(0, 18);
 	this.positionSpread.setOnChange(function()
 	{
 		self.particle.emitter.position.spread.copy(self.positionSpread.getValue());
@@ -213,6 +217,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form.addText("Initial");
 	this.velocityValue = new VectorBox(this.form);
+	this.velocityValue.size.set(0, 18);
 	this.velocityValue.setOnChange(function()
 	{
 		self.particle.emitter.velocity.value.copy(self.velocityValue.getValue());
@@ -223,6 +228,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form.addText("Variation");
 	this.velocitySpread = new VectorBox(this.form);
+	this.velocitySpread.size.set(0, 18);
 	this.velocitySpread.setOnChange(function()
 	{
 		self.particle.emitter.velocity.spread.copy(self.velocitySpread.getValue());
@@ -237,6 +243,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form.addText("Initial");
 	this.accelerationValue = new VectorBox(this.form);
+	this.accelerationValue.size.set(0, 18);
 	this.accelerationValue.setOnChange(function()
 	{
 		self.particle.emitter.acceleration.value.copy(self.accelerationValue.getValue());
@@ -247,6 +254,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form.addText("Variation");
 	this.accelerationSpread = new VectorBox(this.form);
+	this.accelerationSpread.size.set(0, 18);
 	this.accelerationSpread.setOnChange(function()
 	{
 		self.particle.emitter.acceleration.spread.copy(self.accelerationSpread.getValue());
@@ -257,25 +265,27 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Wiggle
 	this.form.addText("Wiggle");
-	this.wiggleValue = new NumberBox(this.form);
-	this.wiggleValue.size.set(60, 18);
+	this.wiggleRow = new NumberRow(this.form);
+	this.wiggleRow.labelSize = 20;
+	this.wiggleRow.size.set(0, 18);
+
+	this.wiggleValue = this.wiggleRow.addValue("F");
 	this.wiggleValue.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.wiggleValue.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.wiggle, "value", self.wiggleValue.getValue()));
 		self.particle.reload();
 	});
-	this.form.add(this.wiggleValue);
-	this.form.addText("+/-", true);
-	this.wiggleSpread = new NumberBox(this.form);
-	this.wiggleSpread.size.set(60, 18);
+
+	this.wiggleSpread = this.wiggleRow.addValue("+/-");
 	this.wiggleSpread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.wiggleSpread.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.wiggle, "spread", self.wiggleSpread.getValue()));
 		self.particle.reload();
 	});
-	this.form.add(this.wiggleSpread);
+
+	this.form.add(this.wiggleRow);
 	this.form.nextRow();
 	
 	//Opacity graph
@@ -296,26 +306,27 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Scale
 	this.form.addText(Locale.scale);
-	this.form.addText("Min", true);
-	this.scaleMin = new NumberBox(this.form);
-	this.scaleMin.size.set(50, 18);
+	this.sizeRow = new NumberRow(this.form);
+	this.sizeRow.labelSize = 35;
+	this.sizeRow.size.set(0, 18);
+
+	this.scaleMin = this.sizeRow.addValue("Min");
 	this.scaleMin.setOnChange(function()
 	{
 		var min = self.scaleMin.getValue();
 		var max = self.scaleMax.getValue();
 		self.scale.setRange(min, max);
 	});
-	this.form.add(this.scaleMin);
-	this.form.addText("Max", true);
-	this.scaleMax = new NumberBox(this.form);
-	this.scaleMax.size.set(50, 18);
+
+	this.scaleMax = this.sizeRow.addValue("Max");
 	this.scaleMax.setOnChange(function()
 	{
 		var min = self.scaleMin.getValue();
 		var max = self.scaleMax.getValue();
 		self.scale.setRange(min, max);
 	});
-	this.form.add(this.scaleMax);
+
+	this.form.add(this.sizeRow);
 	this.form.nextRow();
 
 	//Scale graph
@@ -336,26 +347,27 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Rotation
 	this.form.addText(Locale.rotation);
-	this.form.addText("Min", true);
-	this.angleMin = new NumberBox(this.form);
-	this.angleMin.size.set(50, 18);
+	this.angleRow = new NumberRow(this.form);
+	this.angleRow.labelSize = 35;
+	this.angleRow.size.set(0, 18);
+
+	this.angleMin = this.angleRow.addValue("Min");
 	this.angleMin.setOnChange(function()
 	{
 		var min = self.angleMin.getValue();
 		var max = self.angleMax.getValue();
 		self.angle.setRange(min, max);
 	});
-	this.form.add(this.angleMin);
-	this.form.addText("Max", true);
-	this.angleMax = new NumberBox(this.form);
-	this.angleMax.size.set(50, 18);
+
+	this.angleMax = this.angleRow.addValue("Max");
 	this.angleMax.setOnChange(function()
 	{
 		var min = self.angleMin.getValue();
 		var max = self.angleMax.getValue();
 		self.angle.setRange(min, max);
 	});
-	this.form.add(this.angleMax);
+
+	this.form.add(this.angleRow);
 	this.form.nextRow();
 
 	//Rotation graph

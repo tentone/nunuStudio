@@ -17,36 +17,34 @@ function PlaneGeometryForm(form, object)
 	
 	//Size
 	this.form.addText("Size");
-	this.form.addText("W", true);
-	this.width = new NumberBox(this.form);
-	this.width.size.set(40, 18);
+	this.sizeRow = new NumberRow(this.form);
+	this.sizeRow.size.set(0, 18);
+
+	this.width = this.sizeRow.addValue("W");
 	this.width.setStep(0.1);
 	this.width.setOnChange(updateGeometry);
-	this.form.add(this.width);
 
-	this.form.addText("H", true);
-	this.height = new NumberBox(this.form);
-	this.height.size.set(40, 18);
+	this.height = this.sizeRow.addValue("H");
 	this.height.setStep(0.1);
 	this.height.setOnChange(updateGeometry);
-	this.form.add(this.height);
+
+	this.form.add(this.sizeRow);
 	this.form.nextRow();
 	
 	//Segments
 	this.form.addText("Segments");
-	this.form.addText("W", true);
-	this.widthSegments = new NumberBox(this.form);
-	this.widthSegments.size.set(40, 18);
+	this.segmentsRow = new NumberRow(this.form);
+	this.segmentsRow.size.set(0, 18);
+
+	this.widthSegments = this.segmentsRow.addValue("W");
 	this.widthSegments.setStep(1);
 	this.widthSegments.setOnChange(updateGeometry);
-	this.form.add(this.widthSegments);
 
-	this.form.addText("H", true);
-	this.heightSegments = new NumberBox(this.form);
-	this.heightSegments.size.set(40, 18);
+	this.heightSegments = this.segmentsRow.addValue("H");
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);
-	this.form.add(this.heightSegments);
+
+	this.form.add(this.segmentsRow);
 	this.form.nextRow();
 
 	//Buffer

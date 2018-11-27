@@ -17,7 +17,7 @@ function BoxGeometryForm(form, object)
 	
 	//Size
 	this.form.addText("Size");
-	this.sizeRow = new NumberRow(this.form);	
+	this.sizeRow = new NumberRow(this.form);
 	this.sizeRow.size.set(0, 18);
 
 	this.width = this.sizeRow.addValue("X");

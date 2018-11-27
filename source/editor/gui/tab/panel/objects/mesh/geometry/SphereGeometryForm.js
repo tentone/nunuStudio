@@ -26,19 +26,18 @@ function SphereGeometryForm(form, object)
 
 	//Segments
 	this.form.addText("Segments");
-	this.form.addText("W", true);
-	this.widthSegments = new NumberBox(this.form);
-	this.widthSegments.size.set(40, 18);
+	this.segmentsRow = new NumberRow(this.form);
+	this.segmentsRow.size.set(0, 18);
+
+	this.widthSegments = this.segmentsRow.addValue("W");
 	this.widthSegments.setStep(1);
 	this.widthSegments.setOnChange(updateGeometry);
-	this.form.add(this.widthSegments);
 
-	this.form.addText("H", true);
-	this.heightSegments = new NumberBox(this.form);
-	this.heightSegments.size.set(40, 18);
+	this.heightSegments = this.segmentsRow.addValue("H");
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);
-	this.form.add(this.heightSegments);
+
+	this.form.add(this.segmentsRow);
 	this.form.nextRow();
 
 	this.form.addText("Phi Start");

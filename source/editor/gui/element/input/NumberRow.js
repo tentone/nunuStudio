@@ -19,6 +19,14 @@ function NumberRow(parent)
 	 * @type {Array}
 	 */
 	this.values = [];
+
+	/**
+	 * Label size in px.
+	 *
+	 * @attribute labelSize
+	 * @type {Number}
+	 */
+	this.labelSize = 15;
 }
 
 NumberRow.prototype = Object.create(Element.prototype);
@@ -66,10 +74,10 @@ NumberRow.prototype.setRange = function(min, max)
  */
 NumberRow.prototype.addValue = function(label)
 {
-	var text = new Text(this);
-	text.setText(label);
-
 	var input = new NumberBox(this);
+
+	var text = new Text(this);
+	text.setText(label);	
 
 	this.values.push(
 	{
@@ -84,21 +92,21 @@ NumberRow.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 	
-	var width = Math.round((this.size.x - this.values.length * 15) / this.values.length);
+	var width = Math.round((this.size.x - this.values.length * this.labelSize) / this.values.length);
 	var x = 0;
 	
 	for(var i = 0; i < this.values.length; i++)
 	{
 		var label = this.values[i].label;
 		label.position.set(x, 0);
-		label.size.set(15, this.size.y);
+		label.size.set(this.labelSize, this.size.y);
 		label.updateInterface();
 
 		var input = this.values[i].input;
-		input.position.set(x + 15, 0);
+		input.position.set(x + this.labelSize, 0);
 		input.size.set(width, this.size.y);
 		input.updateInterface();
 
-		x += width + 15;
+		x += width + this.labelSize;
 	}
 };

@@ -35,19 +35,18 @@ function TorusGeometryForm(form, object)
 
 	//Segments
 	this.form.addText("Segments");
-	this.form.addText("R", true);
-	this.radialSegments = new NumberBox(this.form);
-	this.radialSegments.size.set(40, 18);
+	this.segmentsRow = new NumberRow(this.form);
+	this.segmentsRow.size.set(0, 18);
+
+	this.radialSegments = this.segmentsRow.addValue("R");
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
-	this.form.add(this.radialSegments);
 
-	this.form.addText("T", true);
-	this.tubularSegments = new NumberBox(this.form);
-	this.tubularSegments.size.set(40, 18);
+	this.tubularSegments = this.segmentsRow.addValue("T");
 	this.tubularSegments.setStep(1);
 	this.tubularSegments.setOnChange(updateGeometry);
-	this.form.add(this.tubularSegments);
+
+	this.form.add(this.segmentsRow);
 	this.form.nextRow();
 	
 	//Arc
