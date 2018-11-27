@@ -66,15 +66,39 @@ NumberRow.prototype.setRange = function(min, max)
  */
 NumberRow.prototype.addValue = function(label)
 {
-	//TODO <ADD CODE HERE>
+	var text = new Text(this);
+	text.setText(label);
+
+	var input = new NumberBox(this);
+
+	this.values.push(
+	{
+		label: text,
+		input: input
+	});
+
+	return input;
 };
 
 NumberRow.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 	
-	var sizeX = Math.round((this.size.x - this.values.length * 15) / this.values.length);
-	var sizeY = this.size.y + "px";
-
+	var width = Math.round((this.size.x - this.values.length * 15) / this.values.length);
+	var x = 0;
 	
+	for(var i = 0; i < this.values.length; i++)
+	{
+		var label = this.values[i].label;
+		label.position.set(x, 0);
+		label.size.set(15, this.size.y);
+		label.updateInterface();
+
+		var input = this.values[i].input;
+		input.position.set(x + 15, 0);
+		input.size.set(width, this.size.y);
+		input.updateInterface();
+
+		x += width + 15;
+	}
 };

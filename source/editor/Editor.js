@@ -307,12 +307,12 @@ include("source/editor/gui/element/input/ColorGradientChooser.js");
 include("source/editor/gui/element/input/Slider.js");
 include("source/editor/gui/element/input/DropdownList.js");
 include("source/editor/gui/element/input/NumberBox.js");
+include("source/editor/gui/element/input/NumberRow.js");
 include("source/editor/gui/element/input/VectorBox.js");
 include("source/editor/gui/element/input/ImageChooser.js");
 include("source/editor/gui/element/input/TextureChooser.js");
 include("source/editor/gui/element/input/TextureForm.js");
 include("source/editor/gui/element/input/CubeTextureBox.js");
-include("source/editor/gui/element/input/NumberRow.js");
 
 include("source/editor/gui/element/tabs/TabGroup.js");
 include("source/editor/gui/element/tabs/TabElement.js");

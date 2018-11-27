@@ -17,50 +17,42 @@ function BoxGeometryForm(form, object)
 	
 	//Size
 	this.form.addText("Size");
-	this.form.addText("X", true);
-	this.width = new NumberBox(this.form);
-	this.width.size.set(40, 18);
+	this.sizeRow = new NumberRow(this.form);	
+	this.sizeRow.size.set(0, 18);
+
+	this.width = this.sizeRow.addValue("X");
 	this.width.setStep(0.1);
 	this.width.setOnChange(updateGeometry);
-	this.form.add(this.width);
 
-	this.form.addText("Y", true);
-	this.height = new NumberBox(this.form);
-	this.height.size.set(40, 18);
+	this.height = this.sizeRow.addValue("Y");
 	this.height.setStep(0.1);
 	this.height.setOnChange(updateGeometry);
-	this.form.add(this.height);
 
-	this.form.addText("Z", true);
-	this.depth = new NumberBox(this.form);
-	this.depth.size.set(40, 18);
+	this.depth = this.sizeRow.addValue("Z");
 	this.depth.setStep(0.1);
 	this.depth.setOnChange(updateGeometry);
-	this.form.add(this.depth);
+
+	this.form.add(this.sizeRow);
 	this.form.nextRow();
 
 	//Segments
 	this.form.addText("Segments");
-	this.form.addText("X", true);
-	this.widthSegments = new NumberBox(this.form);
-	this.widthSegments.size.set(40, 18);
+	this.segmentsRow = new NumberRow(this.form);
+	this.segmentsRow.size.set(0, 18);
+
+	this.widthSegments = this.segmentsRow.addValue("X");
 	this.widthSegments.setStep(1);
 	this.widthSegments.setOnChange(updateGeometry);
-	this.form.add(this.widthSegments);
 
-	this.form.addText("Y", true);
-	this.heightSegments = new NumberBox(this.form);
-	this.heightSegments.size.set(40, 18);
+	this.heightSegments = this.segmentsRow.addValue("Y");
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);
-	this.form.add(this.heightSegments);
 
-	this.form.addText("Z", true);
-	this.depthSegments = new NumberBox(this.form);
-	this.depthSegments.size.set(40, 18);
+	this.depthSegments = this.segmentsRow.addValue("Z");
 	this.depthSegments.setStep(1);
 	this.depthSegments.setOnChange(updateGeometry);
-	this.form.add(this.depthSegments);
+
+	this.form.add(this.segmentsRow);
 	this.form.nextRow();
 
 	//Buffer
