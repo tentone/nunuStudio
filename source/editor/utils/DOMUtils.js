@@ -39,6 +39,8 @@ DOMUtils.isVisible = function(element)
 /**
  * Get position of the dom element in the client window.
  *
+ * This method considers the window scrolling position.
+ *
  * @method getPosition
  * @param {DOM} element DOM element to test.
  */
@@ -48,20 +50,11 @@ DOMUtils.getPosition = function(element)
 	{
 		element = element.element;
 	}
+	
+	var rect = element.getBoundingClientRect();
 
-	var top = element.offsetTop;
-	var left = element.offsetLeft;
-
-	while(element.offsetParent)
-	{
-		element = element.offsetParent;
-		top += element.offsetTop;
-		left += element.offsetLeft;
-	}
-
-	return {x: left, y: top};
+	return {x: rect.left + window.scrollX, y: rect.top + window.scrollY};
 };
-
 
 /**
  * Check if a DOM element is out of the window and how far it is, returns object with x and y values.
