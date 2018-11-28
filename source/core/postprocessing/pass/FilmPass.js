@@ -7,30 +7,6 @@
  * @module Postprocessing
  * @author alteredq / http://alteredqualia.com/
  */
-/**
- * If set true a grascale effect will be applied.
- *
- * @property grayscale
- * @type {Boolean}
- */
-/**
- * Ammout of noise to be applied to the image.
- *
- * @property noiseIntensity
- * @type {Number}
- */
-/**
- * Scanline intensity.
- *
- * @property scanlinesIntensity
- * @type {Number}
- */
-/**
- * Number of scanline to be displayed.
- *
- * @property scanlinesCount
- * @type {Number}
- */
 function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 {
 	if(THREE.FilmShader === undefined)
@@ -65,24 +41,48 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 	var self = this;
 	Object.defineProperties(this,
 	{
+		/**
+		 * If set true a grascale effect will be applied.
+		 *
+		 * @property grayscale
+		 * @type {Boolean}
+		 */
 		grayscale:
 		{
 			get: function() {return this.uniforms["grayscale"].value;},
 			set: function(value) {this.uniforms["grayscale"].value = value;}
 		},
 
+		/**
+		 * Ammout of noise to be applied to the image.
+		 *
+		 * @property noiseIntensity
+		 * @type {Number}
+		 */
 		noiseIntensity:
 		{
 			get: function() {return this.uniforms["nIntensity"].value;},
 			set: function(value) {this.uniforms["nIntensity"].value = value;}
 		},
 
+		/**
+		 * Scanline intensity.
+		 *
+		 * @property scanlinesIntensity
+		 * @type {Number}
+		 */
 		scanlinesIntensity:
 		{
 			get: function() {return this.uniforms["sIntensity"].value;},
 			set: function(value) {this.uniforms["sIntensity"].value = value;}
 		},
 
+		/**
+		 * Number of scanline to be displayed.
+		 *
+		 * @property scanlinesCount
+		 * @type {Number}
+		 */
 		scanlinesCount:
 		{
 			get: function() {return this.uniforms["sCount"].value;},

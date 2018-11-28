@@ -10,24 +10,6 @@
  * @param {Number} angle Dot rotation angle.
  * @param {Number} scale Dot scale.
  */
-/**
- * Center of rotation of the dot grid in normalized coordinates.
- *
- * @property center
- * @type {Vector2}
- */
-/**
- * Rotation of the dot grid.
- *
- * @property angle
- * @type {Number}
- */
-/**
- * Scale of the dots used in the effect.
- *
- * @property scale
- * @type {Number}
- */
 function DotScreenPass(center, angle, scale)
 {
 	if(THREE.DotScreenShader === undefined)
@@ -49,7 +31,8 @@ function DotScreenPass(center, angle, scale)
 	this.uniforms["angle"].value = angle !== undefined ? angle : 0.5;
 	this.uniforms["scale"].value = scale !== undefined ? scale : 0.8;
 
-	this.material = new THREE.ShaderMaterial({
+	this.material = new THREE.ShaderMaterial(
+	{
 		uniforms: this.uniforms,
 		vertexShader: THREE.DotScreenShader.vertexShader,
 		fragmentShader: THREE.DotScreenShader.fragmentShader
@@ -65,18 +48,36 @@ function DotScreenPass(center, angle, scale)
 	var self = this;
 	Object.defineProperties(this,
 	{
+		/**
+		 * Center of rotation of the dot grid in normalized coordinates.
+		 *
+		 * @property center
+		 * @type {Vector2}
+		 */
 		center:
 		{
 			get: function() {return this.uniforms["center"].value;},
 			set: function(value) {this.uniforms["center"].value = value;}
 		},
 
+		/**
+		 * Rotation of the dot grid.
+		 *
+		 * @property angle
+		 * @type {Number}
+		 */
 		angle:
 		{
 			get: function() {return this.uniforms["angle"].value;},
 			set: function(value) {this.uniforms["angle"].value = value;}
 		},
 
+		/**
+		 * Scale of the dots used in the effect.
+		 *
+		 * @property scale
+		 * @type {Number}
+		 */
 		scale:
 		{
 			get: function() {return this.uniforms["scale"].value;},

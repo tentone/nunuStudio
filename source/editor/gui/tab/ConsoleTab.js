@@ -396,7 +396,14 @@ ConsoleTab.createMessage = function(object)
 	}
 	else if(object instanceof Object)
 	{
-		log.appendChild(document.createTextNode(JSON.stringify(object, null, "\t")));
+		try
+		{
+			log.appendChild(document.createTextNode(JSON.stringify(object, null, "\t")));
+		}
+		catch(e)
+		{
+			log.appendChild(document.createTextNode(object));
+		}
 	}
 	else
 	{

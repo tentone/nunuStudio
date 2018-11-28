@@ -9,6 +9,9 @@ Editor.NWJSPath = "../nwjs/";
 //Runtime
 include("lib/three/three.min.js");
 
+include("lib/three/QuickHull.js");
+include("lib/three/SimplexNoise.js");
+
 include("lib/three/shaders/CopyShader.js");
 include("lib/three/shaders/BokehShader.js");
 include("lib/three/shaders/SAOShader.js");

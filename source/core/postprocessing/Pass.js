@@ -8,7 +8,6 @@
  * @class Pass
  * @module Postprocessing
  */
-
 function Pass()
 {
 	this.uuid = THREE.Math.generateUUID();
