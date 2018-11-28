@@ -126,6 +126,7 @@ include("source/core/loaders/AudioLoader.js");
 include("source/core/loaders/MaterialLoader.js");
 include("source/core/loaders/TextureLoader.js");
 include("source/core/loaders/GeometryLoader.js");
+include("source/core/loaders/LegacyGeometryLoader.js");
 include("source/core/loaders/ObjectLoader.js");
 
 include("source/core/objects/device/LeapMotion.js");

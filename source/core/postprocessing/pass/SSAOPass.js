@@ -65,7 +65,12 @@ function SSAOPass()
 	});
 
 	//Blur render target
-	this.blurRenderTarget = this.ssaoRenderTarget.clone();
+	this.blurRenderTarget = new THREE.WebGLRenderTarget(1, 1,
+	{
+		minFilter: THREE.LinearFilter,
+		magFilter: THREE.LinearFilter,
+		format: THREE.RGBAFormat
+	});
 
 	//SSAO Shader material
 	this.ssaoMaterial = new THREE.ShaderMaterial({
@@ -290,11 +295,12 @@ SSAOPass.prototype.renderOverride = function (renderer, overrideMaterial, render
 SSAOPass.prototype.setSize = function(width, height)
 {
 	this.ssaoMaterial.uniforms["resolution"].value.set(width, height);
-	this.blurMaterial.uniforms["resolution"].value.set(this.width, this.height);
+	this.blurMaterial.uniforms["resolution"].value.set(width, height);
 
 	this.beautyRenderTarget.setSize(width, height);
 	this.normalRenderTarget.setSize(width, height);
 	this.ssaoRenderTarget.setSize(width, height);
+	this.blurRenderTarget.setSize(width, height);
 };
 
 /**

@@ -11,7 +11,7 @@ function GeometryLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 
-	this.geometryLoader = new THREE.JSONLoader();
+	this.geometryLoader = new LegacyGeometryLoader();
 	this.bufferGeometryLoader = new THREE.BufferGeometryLoader();
 
 	this.shapes = {};

@@ -220,9 +220,9 @@ function LensFlare()
 		tempMap.dispose();
 		occlusionMap.dispose();
 
-		for(var i = 0, l = elements.length; i < l; i ++)
+		for(var i = 0; i < this.elements.length; i++)
 		{
-			elements[i].texture.dispose();
+			this.elements[i].texture.dispose();
 		}
 	};
 }
