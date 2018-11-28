@@ -6,6 +6,7 @@ function SSAOPassNode(parent)
 
 	var self = this;
 
+	/*
 	this.addText("Only AO");
 	this.onlyAO = new CheckBox(this);
 	this.onlyAO.size.set(18, 18);
@@ -45,6 +46,7 @@ function SSAOPassNode(parent)
 	});
 	this.add(this.lumInfluence);
 	this.nextRow();
+	*/
 }
 
 SSAOPassNode.prototype = Object.create(PassNode.prototype);
@@ -55,8 +57,10 @@ SSAOPassNode.prototype.setPass = function(pass)
 {
 	PassNode.prototype.setPass.call(this, pass);
 
+	/*
 	this.radius.setValue(pass.radius);
 	this.onlyAO.setValue(pass.onlyAO);
 	this.aoClamp.setValue(pass.aoClamp);
 	this.lumInfluence.setValue(pass.lumInfluence);
+	*/
 };
