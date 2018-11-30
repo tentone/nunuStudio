@@ -40,12 +40,7 @@ function BokehPass(focus, aperture, maxblur)
 	this.needsSwap = false;
 
 	//Render targets
-	this.renderTargetColor = new THREE.WebGLRenderTarget(0, 0,
-	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.LinearFilter,
-		format: THREE.RGBFormat
-	});
+	this.renderTargetColor = new THREE.WebGLRenderTarget(0, 0, Pass.RGBLinear);
 	this.renderTargetDepth = this.renderTargetColor.clone();
 
 	//Depth material
@@ -60,7 +55,8 @@ function BokehPass(focus, aperture, maxblur)
 	this.uniforms["aperture"].value = (aperture !== undefined) ? aperture : 1.0;
 	this.uniforms["maxblur"].value = (maxblur !== undefined) ? maxblur : 0.2;
 
-	this.materialBokeh = new THREE.ShaderMaterial({
+	this.materialBokeh = new THREE.ShaderMaterial(
+	{
 		defines: THREE.BokehShader.defines,
 		uniforms: this.uniforms,
 		vertexShader: THREE.BokehShader.vertexShader,

@@ -46,6 +46,49 @@ function Pass()
 	this.renderToScreen = false;
 }
 
+/** 
+ * Parameters used for a RGBA linear filtered render target.
+ *
+ * @static
+ * @attribute RGBALinear
+ * @type {Object}
+ */
+Pass.RGBALinear =
+{
+	minFilter: THREE.LinearFilter,
+	magFilter: THREE.LinearFilter,
+	format: THREE.RGBAFormat
+};
+
+/** 
+ * Parameters used for a RGB linear filtered render target.
+ *
+ * @static
+ * @attribute RGBLinear
+ * @type {Object}
+ */
+Pass.RGBLinear =
+{
+	minFilter: THREE.LinearFilter,
+	magFilter: THREE.LinearFilter,
+	format: THREE.RGBFormat
+};
+
+
+/** 
+ * Parameters used for a RGBA unfiltered render target.
+ *
+ * @static
+ * @attribute RGBANearest
+ * @type {Object}
+ */
+Pass.RGBANearest =
+{
+	minFilter: THREE.NearestFilter,
+	magFilter: THREE.NearestFilter,
+	format: THREE.RGBAFormat
+};
+
 /**
  * Set resolution of this render pass.
  * 

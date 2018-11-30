@@ -13,44 +13,6 @@
  * @param {Number} radius Bloom effect radius.
  * @param {Number} threshold White point threshold.
  */
-/**
- * Scales the color of the whole bloom effect.
- *
- * @property strength
- * @type {Number}
- */
-/**
- * Bloom effect radius.
- *
- * @property radius
- * @type {Number}
- */
-/**
- * Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.
- * 
- * To have all scene colors contributing to the bloom, a volume of -1 needs to be used.
- *
- * @property threshold
- * @type {Number}
- */
-/**
- * Smooth factor.
- *
- * @property smooth
- * @type {Number}
- */
-/**
- * The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).
- *
- * @property bloomFactors
- * @type {Array}
- */
-/**
- * Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.
- *
- * @property bloomTintColors
- * @type {Array}
- */
 function UnrealBloomPass(strength, radius, threshold)
 {
 	if(THREE.LuminosityHighPassShader === undefined)
@@ -68,14 +30,6 @@ function UnrealBloomPass(strength, radius, threshold)
 	this.enabled = true;
 	this.needsSwap = false;
 	this.renderToScreen = false;
-
-	//Render targets
-	var parameters =
-	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.LinearFilter,
-		format: THREE.RGBAFormat
-	};
 	
 	//Render targets for passes
 	this.renderTargetsHorizontal = [];
@@ -84,17 +38,17 @@ function UnrealBloomPass(strength, radius, threshold)
 
 	for(var i = 0; i < this.nMips; i++)
 	{
-		var renderTarget = new THREE.WebGLRenderTarget(0, 0, parameters);
+		var renderTarget = new THREE.WebGLRenderTarget(0, 0, Pass.RGBALinear);
 		renderTarget.texture.generateMipmaps = false;
 		this.renderTargetsHorizontal.push(renderTarget);
 
-		var renderTarget = new THREE.WebGLRenderTarget(0, 0, parameters);
+		var renderTarget = new THREE.WebGLRenderTarget(0, 0, Pass.RGBALinear);
 		renderTarget.texture.generateMipmaps = false;
 		this.renderTargetsVertical.push(renderTarget);
 	}
 
 	//Render target for final pass
-	this.renderTargetBright = new THREE.WebGLRenderTarget(0, 0, parameters);
+	this.renderTargetBright = new THREE.WebGLRenderTarget(0, 0, Pass.RGBALinear);
 	this.renderTargetBright.texture.generateMipmaps = false;
 
 	//Luminosity high pass material
@@ -163,36 +117,74 @@ function UnrealBloomPass(strength, radius, threshold)
 	var self = this;
 	Object.defineProperties(this,
 	{
+		/**
+		 * Scales the color of the whole bloom effect.
+		 *
+		 * @property strength
+		 * @type {Number}
+		 */
 		strength:
 		{
 			get: function() {return this.compositeMaterial.uniforms["bloomStrength"].value;},
 			set: function(value) {this.compositeMaterial.uniforms["bloomStrength"].value = value;}
 		},
 
+		/**
+		 * Bloom effect radius.
+		 *
+		 * @property radius
+		 * @type {Number}
+		 */
 		radius:
 		{
 			get: function() {return this.compositeMaterial.uniforms["bloomRadius"].value;},
 			set: function(value) {this.compositeMaterial.uniforms["bloomRadius"].value = value;}
 		},
 
+		/**
+		 * Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.
+		 * 
+		 * To have all scene colors contributing to the bloom, a volume of -1 needs to be used.
+		 *
+		 * @property threshold
+		 * @type {Number}
+		 */
 		threshold:
 		{
 			get: function() {return this.highPassUniforms["luminosityThreshold"].value;},
 			set: function(value) {this.highPassUniforms["luminosityThreshold"].value;}
 		},
 
+		/**
+		 * Smooth factor.
+		 *
+		 * @property smooth
+		 * @type {Number}
+		 */
 		smooth:
 		{
 			get: function() {return this.highPassUniforms["smoothWidth"].value;},
 			set: function(value) {this.highPassUniforms["smoothWidth"].value;}
 		},
 
+		/**
+		 * The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).
+		 *
+		 * @property bloomFactors
+		 * @type {Array}
+		 */
 		bloomFactors:
 		{
 			get: function() {return this.compositeMaterial.uniforms["bloomFactors"].value;},
 			set: function(value) {this.compositeMaterial.uniforms["bloomFactors"].value;}
 		},
 
+		/**
+		 * Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.
+		 *
+		 * @property bloomTintColors
+		 * @type {Array}
+		 */
 		bloomTintColors:
 		{
 			get: function() {return this.compositeMaterial.uniforms["bloomTintColors"].value;},
