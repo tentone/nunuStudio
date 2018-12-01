@@ -231,6 +231,10 @@ ConsoleTab.createMessage = function(object)
 	{
 		log.appendChild(document.createTextNode("undefined"));
 	}
+	else if(object === null)
+	{
+		log.appendChild(document.createTextNode("null"));
+	}
 	else if(object instanceof Image)
 	{
 		var preview = document.createElement("img");
@@ -389,10 +393,6 @@ ConsoleTab.createMessage = function(object)
 		}
 
 		log.appendChild(table);
-	}
-	else if(object === null)
-	{
-		log.appendChild(document.createTextNode("null"));
 	}
 	else if(object instanceof Object)
 	{
