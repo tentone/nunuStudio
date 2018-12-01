@@ -197,8 +197,10 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 
 		if(pass.enabled === true)
 		{
+			//Render pass
 			pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
 
+			//Swap read and write buffers
 			if(pass.needsSwap)
 			{
 				if(maskActive)
@@ -211,6 +213,7 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 				this.swapBuffers();
 			}
 
+			//Check mask passes
 			if(THREE.MaskPass !== undefined)
 			{
 				if(pass instanceof THREE.MaskPass)
