@@ -32,6 +32,17 @@ function PassNode(parent, name)
 	this.add(this.enabled);
 	this.nextRow();
 
+	//Clear
+	this.addText("Clear");
+	this.clear = new CheckBox(this);
+	this.clear.size.set(18, 18);
+	this.clear.setOnChange(function()
+	{
+		self.pass.clear = self.clear.getValue();
+	});
+	this.add(this.clear);
+	this.nextRow();
+
 	//Render to screen
 	this.addText("Output");
 	this.renderToScreen = new CheckBox(this);
@@ -98,6 +109,7 @@ PassNode.prototype.setPass = function(pass)
 	this.pass = pass;
 
 	this.enabled.setValue(pass.enabled);
+	this.clear.setValue(pass.clear);
 	this.renderToScreen.setValue(pass.renderToScreen);
 };
 

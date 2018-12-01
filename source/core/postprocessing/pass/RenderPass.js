@@ -12,8 +12,6 @@ function RenderPass()
 	Pass.call(this);
 
 	this.type = "Render";
-	this.needsSwap = false;
-	this.clear = false;
 }
 
 RenderPass.prototype = Object.create(Pass.prototype);
@@ -26,6 +24,6 @@ RenderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 	}
 	else
 	{
-		renderer.render(scene, camera, readBuffer, this.clear);
+		renderer.render(scene, camera, writeBuffer, this.clear);
 	}
 };

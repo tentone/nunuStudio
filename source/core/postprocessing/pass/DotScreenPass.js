@@ -20,16 +20,9 @@ function DotScreenPass(center, angle, scale)
 	Pass.call(this);
 
 	this.type = "DotScreen";
+	this.createQuadScene();
 
 	this.uniforms = THREE.UniformsUtils.clone(THREE.DotScreenShader.uniforms);
-
-	if(center !== undefined)
-	{
-		this.uniforms["center"].value.copy(center);
-	}
-	
-	this.uniforms["angle"].value = angle !== undefined ? angle : 0.5;
-	this.uniforms["scale"].value = scale !== undefined ? scale : 0.8;
 
 	this.material = new THREE.ShaderMaterial(
 	{
@@ -37,12 +30,6 @@ function DotScreenPass(center, angle, scale)
 		vertexShader: THREE.DotScreenShader.vertexShader,
 		fragmentShader: THREE.DotScreenShader.fragmentShader
 	});
-
-	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	this.scene  = new THREE.Scene();
-	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
-	this.quad.frustumCulled = false;
-	this.scene.add(this.quad);
 
 	//Setters and getters for uniforms
 	var self = this;
@@ -84,6 +71,14 @@ function DotScreenPass(center, angle, scale)
 			set: function(value) {this.uniforms["scale"].value = value;}
 		}
 	});
+
+	if(center !== undefined)
+	{
+		this.center.copy(center);
+	}
+	
+	this.angle = angle !== undefined ? angle : 0.5;
+	this.scale = scale !== undefined ? scale : 0.8;
 };
 
 DotScreenPass.prototype = Object.create(Pass.prototype);
@@ -97,7 +92,7 @@ DotScreenPass.prototype.render = function(renderer, writeBuffer, readBuffer, del
 
 	if(this.renderToScreen)
 	{
-		renderer.render(this.scene, this.camera);
+		renderer.render(this.scene, this.camera, undefined, this.clear);
 	}
 	else
 	{

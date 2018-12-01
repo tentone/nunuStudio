@@ -17,6 +17,7 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 	Pass.call(this);
 
 	this.type = "Film";
+	this.createQuadScene();
 
 	this.uniforms = THREE.UniformsUtils.clone(THREE.FilmShader.uniforms);
 	this.material = new THREE.ShaderMaterial(
@@ -26,19 +27,8 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		fragmentShader: THREE.FilmShader.fragmentShader
 	});
 
-	this.uniforms.grayscale.value = (grayscale !== undefined) ? grayscale : false;
-	this.uniforms.nIntensity.value = (noiseIntensity !== undefined) ? noiseIntensity : 0.35;
-	this.uniforms.sIntensity.value = (scanlinesIntensity !== undefined) ? scanlinesIntensity : 0.5;
-	this.uniforms.sCount.value = (scanlinesCount !== undefined) ? scanlinesCount : 512;
-
-	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	this.scene  = new THREE.Scene();
-	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
-	this.quad.frustumCulled = false;
-	this.scene.add(this.quad);
-
-	//Setters and getters for uniforms
 	var self = this;
+
 	Object.defineProperties(this,
 	{
 		/**
@@ -49,8 +39,8 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		 */
 		grayscale:
 		{
-			get: function() {return this.uniforms["grayscale"].value;},
-			set: function(value) {this.uniforms["grayscale"].value = value;}
+			get: function(){return self.uniforms["grayscale"].value;},
+			set: function(value){self.uniforms["grayscale"].value = value;}
 		},
 
 		/**
@@ -61,8 +51,8 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		 */
 		noiseIntensity:
 		{
-			get: function() {return this.uniforms["nIntensity"].value;},
-			set: function(value) {this.uniforms["nIntensity"].value = value;}
+			get: function(){return self.uniforms["nIntensity"].value;},
+			set: function(value){self.uniforms["nIntensity"].value = value;}
 		},
 
 		/**
@@ -73,8 +63,8 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		 */
 		scanlinesIntensity:
 		{
-			get: function() {return this.uniforms["sIntensity"].value;},
-			set: function(value) {this.uniforms["sIntensity"].value = value;}
+			get: function() {return self.uniforms["sIntensity"].value;},
+			set: function(value) {self.uniforms["sIntensity"].value = value;}
 		},
 
 		/**
@@ -85,10 +75,15 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		 */
 		scanlinesCount:
 		{
-			get: function() {return this.uniforms["sCount"].value;},
-			set: function(value) {this.uniforms["sCount"].value = value;}
+			get: function(){return self.uniforms["sCount"].value;},
+			set: function(value){self.uniforms["sCount"].value = value;}
 		}
 	});
+
+	this.grayscale = (grayscale !== undefined) ? grayscale : false;
+	this.noiseIntensity = (noiseIntensity !== undefined) ? noiseIntensity : 0.35;
+	this.scanlinesIntensity = (scanlinesIntensity !== undefined) ? scanlinesIntensity : 0.5;
+	this.scanlinesCount = (scanlinesCount !== undefined) ? scanlinesCount : 512;
 };
 
 FilmPass.prototype = Object.create(Pass.prototype);
@@ -102,7 +97,7 @@ FilmPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 
 	if(this.renderToScreen)
 	{
-		renderer.render(this.scene, this.camera);
+		renderer.render(this.scene, this.camera, undefined, this.clear);
 	}
 	else
 	{

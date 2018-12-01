@@ -18,28 +18,35 @@ function SSAOPass()
 		console.warn("SSAOPass depends on THREE.SSAOShader");
 	}
 
-	Pass.call(this, THREE.SSAOShader);
+	Pass.call(this);
 
 	this.type = "SSAO";
-	this.renderToScreen = false;
 
-	this.kernelRadius = 8;
 	this.kernelSize = 64;
 	this.kernel = [];
 	this.noiseTexture = null;
-	this.output = 0;
-	this.minDistance = 0.005;
-	this.maxDistance = 10;
 
 	this.generateSampleKernel();
 	this.generateRandomKernelRotations();
-	
+	this.createQuadScene();
+
+	/**
+	 * Depth texture attached to the normal material
+	 *
+	 * @attribute depthTexture
+	 * @type {THREE.DepthTexture}
+	 */
 	this.depthTexture = new THREE.DepthTexture();
 	this.depthTexture.type = THREE.UnsignedShortType;
 	this.depthTexture.minFilter = THREE.NearestFilter;
 	this.depthTexture.maxFilter = THREE.NearestFilter;
 
-	//Normal material
+	/**
+	 * Normal rendering material.
+	 *
+	 * @attribute normalMaterial
+	 * @type {THREE.MeshNormalMaterial}
+	 */
 	this.normalMaterial = new THREE.MeshNormalMaterial();
 	this.normalMaterial.blending = THREE.NoBlending;
 
@@ -59,7 +66,12 @@ function SSAOPass()
 	//Blur render target
 	this.blurRenderTarget = new THREE.WebGLRenderTarget(1, 1, Pass.RGBALinear);
 
-	//Blur material
+	/**
+	 * Blur pass render material.
+	 *
+	 * @attribute blurMaterial
+	 * @type {THREE.ShaderMaterial}
+	 */
 	this.blurMaterial = new THREE.ShaderMaterial(
 	{
 		defines: Object.assign({}, THREE.SSAOBlurShader.defines),
@@ -69,7 +81,12 @@ function SSAOPass()
 	});
 	this.blurMaterial.uniforms["tDiffuse"].value = this.ssaoRenderTarget.texture;
 
-	//SSAO Shader material
+	/**
+	 * Shader material for the SSAO render pass.
+	 *
+	 * @attribute ssaoMaterial
+	 * @type {THREE.ShaderMaterial}
+	 */
 	this.ssaoMaterial = new THREE.ShaderMaterial(
 	{
 		defines: Object.assign({}, THREE.SSAOShader.defines),
@@ -81,8 +98,7 @@ function SSAOPass()
 	this.ssaoMaterial.uniforms["tNormal"].value = this.normalRenderTarget.texture;
 	this.ssaoMaterial.uniforms["tNoise"].value = this.noiseTexture;
 	this.ssaoMaterial.uniforms["kernel"].value = this.kernel;
-
-	//Material for rendering the content of a render target
+	
 	this.copyMaterial = new THREE.ShaderMaterial(
 	{
 		uniforms: THREE.UniformsUtils.clone(THREE.CopyShader.uniforms),
@@ -99,15 +115,53 @@ function SSAOPass()
 		blendEquationAlpha: THREE.AddEquation
 	});
 
-	//Quad scene
-	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	this.scene = new THREE.Scene();
-	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
-	this.quad.frustumCulled = false;
-	this.scene.add(this.quad);
-
 	//Original clean color
 	this.originalClearColor = new THREE.Color();
+	
+	var self = this;
+
+	Object.defineProperties(this,
+	{
+		/**
+		 * Kernel radius used for the SSAO effect.
+		 *
+		 * @property kernelRadius
+		 * @type {Boolean}
+		 */
+		kernelRadius:
+		{
+			get: function(){return self.ssaoMaterial.uniforms["kernelRadius"].value;},
+			set: function(value){self.ssaoMaterial.uniforms["kernelRadius"].value = value;}
+		},
+
+		/**
+		 * Minimum camera distance considered for the SSAO effect.
+		 *
+		 * @property minDistance
+		 * @type {Number}
+		 */
+		minDistance:
+		{
+			get: function(){return self.ssaoMaterial.uniforms["minDistance"].value;},
+			set: function(value){self.ssaoMaterial.uniforms["minDistance"].value = value;}
+		},
+
+		/**
+		 * Maximum camera distance considered for the SSAO effect.
+		 *
+		 * @property maxDistance
+		 * @type {Number}
+		 */
+		maxDistance:
+		{
+			get: function() {return self.ssaoMaterial.uniforms["maxDistance"].value;},
+			set: function(value) {self.ssaoMaterial.uniforms["maxDistance"].value = value;}
+		}
+	});
+
+	this.kernelRadius = 8;
+	this.minDistance = 0.1;
+	this.maxDistance = 1000;
 }
 
 SSAOPass.prototype = Object.create(Pass.prototype);
@@ -203,9 +257,6 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 	this.ssaoMaterial.uniforms["cameraFar"].value = camera.far;
 	this.ssaoMaterial.uniforms["cameraProjectionMatrix"].value.copy(camera.projectionMatrix);
 	this.ssaoMaterial.uniforms["cameraInverseProjectionMatrix"].value.getInverse(camera.projectionMatrix); 
-	this.ssaoMaterial.uniforms["kernelRadius"].value = this.kernelRadius;
-	this.ssaoMaterial.uniforms["minDistance"].value = this.minDistance;
-	this.ssaoMaterial.uniforms["maxDistance"].value = this.maxDistance;
 	this.renderPass(renderer, this.ssaoMaterial, this.ssaoRenderTarget);
 
 	//Render blur
@@ -217,12 +268,12 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 		//Copy SSAO result
 		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
 		this.copyMaterial.blending = THREE.NoBlending;
-		this.renderPass(renderer, this.copyMaterial, null);
+		this.renderPass(renderer, this.copyMaterial, undefined , this.clear);
 
 		//Copy blur and blend it to output
 		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
 		this.copyMaterial.blending = THREE.CustomBlending;
-		this.renderPass(renderer, this.copyMaterial, null);
+		this.renderPass(renderer, this.copyMaterial, undefined, false);
 	}
 	//Output to writeBuffer
 	else
@@ -230,14 +281,13 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 		//Copy SSAO result
 		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
 		this.copyMaterial.blending = THREE.NoBlending;
-		this.renderPass(renderer, this.copyMaterial, writeBuffer);
+		this.renderPass(renderer, this.copyMaterial, writeBuffer, this.clear);
 
 		//Copy blur and blend it to output
 		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
 		this.copyMaterial.blending = THREE.CustomBlending;
-		this.renderPass(renderer, this.copyMaterial, writeBuffer, this.clear);
-	}
-	
+		this.renderPass(renderer, this.copyMaterial, writeBuffer, false);
+	}	
 };
 
 /**
@@ -279,7 +329,6 @@ SSAOPass.prototype.setSize = function(width, height)
 	this.ssaoMaterial.uniforms["resolution"].value.set(width, height);
 	this.blurMaterial.uniforms["resolution"].value.set(width, height);
 
-	//this.beautyRenderTarget.setSize(width, height);
 	this.normalRenderTarget.setSize(width, height);
 	this.ssaoRenderTarget.setSize(width, height);
 	this.blurRenderTarget.setSize(width, height);
@@ -294,15 +343,10 @@ SSAOPass.prototype.setSize = function(width, height)
 SSAOPass.prototype.toJSON = function(meta)
 {
 	var data = Pass.prototype.toJSON.call(this, meta);
-		
-	//TODO <NEW SERIALIZATION CODE>
-
-	/*
-	data.onlyAO = this.onlyAO;
-	data.radius = this.radius;
-	data.aoClamp = this.aoClamp;
-	data.lumInfluence = this.lumInfluence;
-	*/
+	
+	data.kernelRadius = this.kernelRadius;
+	data.minDistance = this.minDistance;
+	data.maxDistance = this.maxDistance;
 
 	return data;
 };

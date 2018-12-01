@@ -26,6 +26,7 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 
 	this.type = "Bloom";
 	this.needsSwap = false;
+	this.createQuadScene();
 
 	strength = (strength !== undefined) ? strength : 1;
 	kernelSize = (kernelSize !== undefined) ? kernelSize : 25;
@@ -33,15 +34,15 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 	resolution = (resolution !== undefined) ? resolution : 256;
 
 	//Render targets
-	var pars = {minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat};
-	this.renderTargetX = new THREE.WebGLRenderTarget(resolution, resolution, pars);
-	this.renderTargetX.texture.name = "BloomPass.x";
-	this.renderTargetY = new THREE.WebGLRenderTarget(resolution, resolution, pars);
-	this.renderTargetY.texture.name = "BloomPass.y";
+	this.renderTargetX = new THREE.WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
+
+	//Render targets
+	this.renderTargetY = new THREE.WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
 
 	//Copy material
 	this.copyUniforms = THREE.UniformsUtils.clone(THREE.CopyShader.uniforms);
 	this.copyUniforms["opacity"].value = strength;
+
 	this.materialCopy = new THREE.ShaderMaterial(
 	{
 		uniforms: this.copyUniforms,
@@ -66,13 +67,7 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 			"KERNEL_SIZE_INT": kernelSize.toFixed(0)
 		}
 	});
-
-	//Scene
-	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	this.scene  = new THREE.Scene();
-	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
-	this.quad.frustumCulled = false;
-	this.scene.add(this.quad);
+	
 }
 
 BloomPass.blurX = new THREE.Vector2(0.001953125, 0.0);
@@ -109,7 +104,7 @@ BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 
 	if(this.renderToScreen)
 	{
-		renderer.render(this.scene, this.camera);
+		renderer.render(this.scene, this.camera, undefined, this.clear);
 	}
 	else
 	{

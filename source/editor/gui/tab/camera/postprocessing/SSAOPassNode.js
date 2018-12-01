@@ -6,47 +6,35 @@ function SSAOPassNode(parent)
 
 	var self = this;
 
-	/*
-	this.addText("Only AO");
-	this.onlyAO = new CheckBox(this);
-	this.onlyAO.size.set(18, 18);
-	this.onlyAO.setOnChange(function()
-	{
-		self.pass.onlyAO = self.onlyAO.getValue();
-	});
-	this.add(this.onlyAO);
-	this.nextRow();
-
 	this.addText("Radius");
-	this.radius = new NumberBox(this);
-	this.radius.size.set(60, 18);
-	this.radius.setOnChange(function()
+	this.kernelRadius = new NumberBox(this);
+	this.kernelRadius.size.set(60, 18);
+	this.kernelRadius.setOnChange(function()
 	{
-		self.pass.radius = self.radius.getValue();
+		self.pass.kernelRadius = self.kernelRadius.getValue();
 	});
-	this.add(this.radius);
+	this.add(this.kernelRadius);
 	this.nextRow();
 
-	this.addText("Clamp");
-	this.aoClamp = new NumberBox(this);
-	this.aoClamp.size.set(60, 18);
-	this.aoClamp.setOnChange(function()
+	this.addText("Min Distance");
+	this.minDistance = new NumberBox(this);
+	this.minDistance.size.set(60, 18);
+	this.minDistance.setOnChange(function()
 	{
-		self.pass.aoClamp = self.aoClamp.getValue();
+		self.pass.minDistance = self.minDistance.getValue();
 	});
-	this.add(this.aoClamp);
+	this.add(this.minDistance);
 	this.nextRow();
 
-	this.addText("Lum. Influence");
-	this.lumInfluence = new NumberBox(this);
-	this.lumInfluence.size.set(60, 18);
-	this.lumInfluence.setOnChange(function()
+	this.addText("Max Distance");
+	this.maxDistance = new NumberBox(this);
+	this.maxDistance.size.set(60, 18);
+	this.maxDistance.setOnChange(function()
 	{
-		self.pass.lumInfluence = self.lumInfluence.getValue();
+		self.pass.maxDistance = self.maxDistance.getValue();
 	});
-	this.add(this.lumInfluence);
+	this.add(this.maxDistance);
 	this.nextRow();
-	*/
 }
 
 SSAOPassNode.prototype = Object.create(PassNode.prototype);
@@ -57,10 +45,7 @@ SSAOPassNode.prototype.setPass = function(pass)
 {
 	PassNode.prototype.setPass.call(this, pass);
 
-	/*
-	this.radius.setValue(pass.radius);
-	this.onlyAO.setValue(pass.onlyAO);
-	this.aoClamp.setValue(pass.aoClamp);
-	this.lumInfluence.setValue(pass.lumInfluence);
-	*/
+	this.kernelRadius.setValue(pass.kernelRadius);
+	this.minDistance.setValue(pass.minDistance);
+	this.maxDistance.setValue(pass.maxDistance);
 };

@@ -27,9 +27,6 @@ function UnrealBloomPass(strength, radius, threshold)
 	Pass.call(this);
 	
 	this.type = "UnrealBloom";
-	this.enabled = true;
-	this.needsSwap = false;
-	this.renderToScreen = false;
 	
 	//Render targets for passes
 	this.renderTargetsHorizontal = [];
@@ -106,12 +103,8 @@ function UnrealBloomPass(strength, radius, threshold)
 	this.oldAutoClear = false;
 
 	//Quad scene
-	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	this.scene = new THREE.Scene();
+	this.createQuadScene();
 	this.basic = new THREE.MeshBasicMaterial();
-	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
-	this.quad.frustumCulled = false;
-	this.scene.add(this.quad);
 
 	//Setters and getters for uniforms
 	var self = this;
@@ -291,11 +284,11 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 	//Restore renderer settings
 	if(this.renderToScreen)
 	{
-		renderer.render(this.scene, this.camera, undefined, false);
+		renderer.render(this.scene, this.camera, undefined, this.clear);
 	}
 	else
 	{
-		renderer.render(this.scene, this.camera, readBuffer, false);
+		renderer.render(this.scene, this.camera, readBuffer, this.clear);
 	}
 
 	//Restore renderer settings

@@ -90,6 +90,43 @@ Pass.RGBANearest =
 };
 
 /**
+ * Create a quad scene to render post-processing effects.
+ *
+ * It creates multiple attributes in the object to support that scene.
+ *
+ * @method createQuadScene
+ */
+Pass.prototype.createQuadScene = function()
+{
+	/**
+	 * Quad rendering camera.
+	 *
+	 * @attribute camera
+	 * @type {THREE.OthographicCamera}
+	 */
+	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+	/**
+	 * Quad scene, that contains a single quad children.
+	 *
+	 * @attribute scene
+	 * @type {THREE.Scene}
+	 */
+	this.scene = new THREE.Scene();
+
+	/**
+	 * Quad mesh, composed of a 2 by 2 plane geometry.
+	 *
+	 * @attribute quad
+	 * @type {THREE.Mesh}
+	 */
+	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
+	this.quad.frustumCulled = false;
+	this.scene.add(this.quad);
+};
+
+
+/**
  * Set resolution of this render pass.
  * 
  * @method setSize

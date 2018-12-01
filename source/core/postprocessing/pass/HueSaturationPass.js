@@ -19,14 +19,14 @@ function HueSaturationPass(hue, saturation)
 	{
 		hue:
 		{
-			get: function() {return this.uniforms["hue"].value;},
-			set: function(value) {this.uniforms["hue"].value = value;}
+			get: function(){return this.uniforms["hue"].value;},
+			set: function(value){this.uniforms["hue"].value = value;}
 		},
 
 		saturation:
 		{
-			get: function() {return this.uniforms["saturation"].value;},
-			set: function(value) {this.uniforms["saturation"].value = value;}
+			get: function(){return this.uniforms["saturation"].value;},
+			set: function(value){this.uniforms["saturation"].value = value;}
 		}
 	});
 

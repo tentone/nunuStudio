@@ -34,7 +34,7 @@ LegacyGeometryLoader.prototype.load = function(url, onLoad, onProgress, onError)
 			{
 				if(type.toLowerCase() === "object")
 				{
-					console.error("Nunu: LegacyGeometryLoader: " + url + " should be loaded with ObjectLoader instead.");
+					console.error("nunuStudio: LegacyGeometryLoader: " + url + " should be loaded with ObjectLoader instead.");
 					return;
 				}
 			}

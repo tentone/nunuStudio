@@ -16,36 +16,64 @@ function EffectComposer()
 	}
 
 	this.uuid = THREE.Math.generateUUID();
-	this.passes = [];
-
 	this.width = 1;
 	this.height = 1;
 
-	this.renderTarget1 = new THREE.WebGLRenderTarget(this.width, this.height,
-	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.LinearFilter,
-		format: THREE.RGBAFormat,
-		stencilBuffer: false
-	});
-	this.renderTarget2 = this.renderTarget1.clone();
+	/**
+	 * Passes attached to this effect composer.
+	 *
+	 * The passes are rendered in order.
+	 *
+	 * @property passes
+	 * @type {Array}
+	 */
+	this.passes = [];
 
-	this.writeBuffer = this.renderTarget1;
-	this.readBuffer = this.renderTarget2;
+	/**
+	 * Input buffer passed to the render pass.
+	 *
+	 * @property writeBuffer
+	 * @type {THREE.WebGLRenderTarget}
+	 */
+	this.writeBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
 
+	/**
+	 * Input buffer passed to the render pass.
+	 *
+	 * @property readBuffer
+	 * @type {THREE.WebGLRenderTarget}
+	 */
+	this.readBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
+
+	/**
+	 * Copy shader used to copy data between the read and write buffer.
+	 *
+	 * @property copyPass
+	 * @type {ShaderPass}
+	 */
 	this.copyPass = new ShaderPass(THREE.CopyShader);
 }
+
+EffectComposer.bufferParameters =
+{
+	minFilter: THREE.LinearFilter,
+	magFilter: THREE.LinearFilter,
+	format: THREE.RGBAFormat,
+	stencilBuffer: false
+};
 
 /**
  * Swap rendering buffers.
  *
+ * Used to make the output buffer of a render pass the input of the next one.
+ * 
  * @method swapBuffers
  */
 EffectComposer.prototype.swapBuffers = function()
 {
-	var tmp = this.readBuffer;
+	var temp = this.readBuffer;
 	this.readBuffer = this.writeBuffer;
-	this.writeBuffer = tmp;
+	this.writeBuffer = temp;
 };
 
 /**
@@ -201,11 +229,14 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
  */
 EffectComposer.prototype.setSize = function(width, height)
 {
+	width = Math.floor(width);
+	height = Math.floor(height);
+
 	this.width = width;
 	this.height = height;
 
-	this.renderTarget1.setSize(width, height);
-	this.renderTarget2.setSize(width, height);
+	this.writeBuffer.setSize(width, height);
+	this.readBuffer.setSize(width, height);
 
 	for(var i = 0; i < this.passes.length; i++)
 	{
@@ -220,21 +251,11 @@ EffectComposer.prototype.setSize = function(width, height)
  */
 EffectComposer.prototype.reset = function()
 {
-	var renderTarget = this.renderTarget1.clone();
-
 	this.dispose();
 
-	this.renderTarget1 == new THREE.WebGLRenderTarget(this.width, this.height,
-	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.LinearFilter,
-		format: THREE.RGBAFormat,
-		stencilBuffer: false
-	});
-	this.renderTarget2 = this.renderTarget1.clone();
+	this.writeBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
 
-	this.writeBuffer = this.renderTarget1;
-	this.readBuffer = this.renderTarget2;
+	this.readBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
 };
 
 /**
@@ -244,11 +265,9 @@ EffectComposer.prototype.reset = function()
  */
 EffectComposer.prototype.dispose = function()
 {
-	this.renderTarget1.dispose();
-	this.renderTarget2.dispose();
+	this.writeBuffer.dispose();
+	this.readBuffer.dispose();
 
-	this.renderTarget1 = null;
-	this.renderTarget2 = null;
 	this.writeBuffer = null;
 	this.readBuffer = null;
 };
@@ -313,6 +332,13 @@ EffectComposer.fromJSON = function(json)
 			pass = new BloomPass(data.strength, data.kernelSize, data.sigma, data.resolution);
 		}
 		else if(data.type === "SSAO")
+		{
+			pass = new SSAOPass();
+			pass.kernelRadius = data.kernelRadius;
+			pass.minDistance = data.minDistance;
+			pass.maxDistance = data.maxDistance;
+		}
+		else if(data.type === "SSAOLegacy")
 		{
 			pass = new SSAOPass();
 			pass.onlyAO = data.onlyAO;

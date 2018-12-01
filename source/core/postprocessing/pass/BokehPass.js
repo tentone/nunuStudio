@@ -51,9 +51,6 @@ function BokehPass(focus, aperture, maxblur)
 	//Bokeh material
 	this.uniforms = THREE.UniformsUtils.clone(THREE.BokehShader.uniforms);
 	this.uniforms["tDepth"].value = this.renderTargetDepth.texture;
-	this.uniforms["focus"].value = (focus !== undefined) ? focus : 1.0;
-	this.uniforms["aperture"].value = (aperture !== undefined) ? aperture : 1.0;
-	this.uniforms["maxblur"].value = (maxblur !== undefined) ? maxblur : 0.2;
 
 	this.materialBokeh = new THREE.ShaderMaterial(
 	{
@@ -64,12 +61,8 @@ function BokehPass(focus, aperture, maxblur)
 	});
 
 	//Scene
-	this.scene  = new THREE.Scene();
-	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
+	this.createQuadScene();
 	this.quad.material = this.materialBokeh;
-	this.quad.frustumCulled = false;
-	this.scene.add(this.quad);
 
 	//Backup clear color and alpha
 	this.oldClearColor = new THREE.Color();
@@ -82,25 +75,29 @@ function BokehPass(focus, aperture, maxblur)
 	{
 		aperture:
 		{
-			get: function() {return this.uniforms["aperture"].value;},
-			set: function(value) {this.uniforms["aperture"].value = value;}
+			get: function() {return self.uniforms["aperture"].value;},
+			set: function(value) {self.uniforms["aperture"].value = value;}
 		},
 
 		focus:
 		{
-			get: function() {return this.uniforms["focus"].value;},
-			set: function(value) {this.uniforms["focus"].value = value;}
+			get: function() {return self.uniforms["focus"].value;},
+			set: function(value) {self.uniforms["focus"].value = value;}
 		},
 
 		maxblur:
 		{
-			get: function() {return this.uniforms["maxblur"].value;},
-			set: function(value) {this.uniforms["maxblur"].value = value;}
+			get: function() {return self.uniforms["maxblur"].value;},
+			set: function(value) {self.uniforms["maxblur"].value = value;}
 		},
 	});
+
+	this.focus = (focus !== undefined) ? focus : 1.0;
+	this.aperture = (aperture !== undefined) ? aperture : 1.0;
+	this.maxblur = (maxblur !== undefined) ? maxblur : 0.2;
 };
 
-BokehPass.prototype = Object.create(Pass.prototype)
+BokehPass.prototype = Object.create(Pass.prototype);
 
 BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
@@ -126,7 +123,7 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	//Render bokeh composite
 	if(this.renderToScreen)
 	{
-		renderer.render(this.scene, this.camera);
+		renderer.render(this.scene, this.camera, undefined, this.clear);
 	}
 	else
 	{
