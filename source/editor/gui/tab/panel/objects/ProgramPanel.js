@@ -146,6 +146,7 @@ function ProgramPanel(parent, object)
 	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);
 	this.toneMapping.addValue("Uncharted", THREE.Uncharted2ToneMapping);
 	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
+	this.toneMapping.addValue("ACES Filmic", THREE.ACESFilmicToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()));
