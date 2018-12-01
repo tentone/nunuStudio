@@ -173,7 +173,7 @@ SSAOPass.prototype = Object.create(Pass.prototype);
  */
 SSAOPass.prototype.generateSampleKernel = function()
 {
-	for(var i = 0; i < this.kernelSize; i ++)
+	for(var i = 0; i < this.kernelSize; i++)
 	{
 		var sample = new THREE.Vector3();
 		sample.x = (Math.random() * 2) - 1;

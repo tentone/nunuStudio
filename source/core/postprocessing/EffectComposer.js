@@ -179,9 +179,19 @@ EffectComposer.prototype.insertPass = function(pass, index)
 EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 {
 	var maskActive = false;
-	var length = this.passes.length;
 
-	for(var i = 0; i < length; i++)
+	//Store renderer configuration
+	var autoClear = renderer.autoClear;
+	var autoClearColor = renderer.autoClearColor;
+	var autoClearStencil = renderer.autoClearStencil;
+	var autoClearDepth = renderer.autoClearDepth;
+	renderer.autoClear = false;
+	renderer.autoClearColor = true;
+	renderer.autoClearStencil = true;
+	renderer.autoClearDepth = true;
+
+	//Render passes
+	for(var i = 0; i < this.passes.length; i++)
 	{
 		var pass = this.passes[i];
 
@@ -194,9 +204,7 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 				if(maskActive)
 				{
 					renderer.context.stencilFunc(renderer.context.NOTEQUAL, 1, 0xffffffff);
-
 					this.copyPass.render(renderer, this.writeBuffer, this.readBuffer, delta);
-
 					renderer.context.stencilFunc(renderer.context.EQUAL, 1, 0xffffffff);
 				}
 
@@ -216,6 +224,12 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 			}
 		}
 	}
+
+	//Restore renderer configuration
+	renderer.autoClear = autoClear;
+	renderer.autoClearColor = autoClearColor;
+	renderer.autoClearStencil = autoClearStencil;
+	renderer.autoClearDepth = autoClearDepth;
 };
 
 /**

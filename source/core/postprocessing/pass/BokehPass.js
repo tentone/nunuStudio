@@ -37,7 +37,6 @@ function BokehPass(focus, aperture, maxblur)
 	Pass.call(this);
 
 	this.type = "Bokeh";
-	this.needsSwap = false;
 
 	//Render targets
 	this.renderTargetColor = new THREE.WebGLRenderTarget(0, 0, Pass.RGBLinear);

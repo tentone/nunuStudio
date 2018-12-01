@@ -25,7 +25,6 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 	}
 
 	this.type = "Bloom";
-	this.needsSwap = false;
 	this.createQuadScene();
 
 	strength = (strength !== undefined) ? strength : 1;
@@ -43,6 +42,7 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 	this.copyUniforms = THREE.UniformsUtils.clone(THREE.CopyShader.uniforms);
 	this.copyUniforms["opacity"].value = strength;
 
+	//Copy material
 	this.materialCopy = new THREE.ShaderMaterial(
 	{
 		uniforms: this.copyUniforms,
@@ -73,7 +73,7 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 BloomPass.blurX = new THREE.Vector2(0.001953125, 0.0);
 BloomPass.blurY = new THREE.Vector2(0.0, 0.001953125);
 
-BloomPass.prototype = Object.create(THREE.Pass.prototype);
+BloomPass.prototype = Object.create(Pass.prototype);
 
 BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
