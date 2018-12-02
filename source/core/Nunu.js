@@ -276,7 +276,7 @@ Nunu.setFullscreen = function(enabled, element)
 		
 		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
 		
-		if(element.requestFullscreen)
+		if(element.requestFullscreen !== undefined)
 		{
 			element.requestFullscreen();
 		}
@@ -285,7 +285,7 @@ Nunu.setFullscreen = function(enabled, element)
 	{
 		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
 		
-		if(document.exitFullscreen)
+		if(document.exitFullscreen !== undefined)
 		{
 			document.exitFullscreen();
 		}

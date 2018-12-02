@@ -22,12 +22,8 @@ function SSAOPass()
 
 	this.type = "SSAO";
 
-	this.kernelSize = 64;
 	this.kernel = [];
 	this.noiseTexture = null;
-
-	this.generateSampleKernel();
-	this.generateRandomKernelRotations();
 	this.createQuadScene();
 
 	/**
@@ -96,8 +92,6 @@ function SSAOPass()
 		blending: THREE.NoBlending
 	});
 	this.ssaoMaterial.uniforms["tNormal"].value = this.normalRenderTarget.texture;
-	this.ssaoMaterial.uniforms["tNoise"].value = this.noiseTexture;
-	this.ssaoMaterial.uniforms["kernel"].value = this.kernel;
 	
 	this.copyMaterial = new THREE.ShaderMaterial(
 	{
@@ -117,6 +111,8 @@ function SSAOPass()
 
 	//Original clean color
 	this.originalClearColor = new THREE.Color();
+
+	this._kernelSize = 0;
 	
 	var self = this;
 
@@ -156,9 +152,29 @@ function SSAOPass()
 		{
 			get: function() {return self.ssaoMaterial.uniforms["maxDistance"].value;},
 			set: function(value) {self.ssaoMaterial.uniforms["maxDistance"].value = value;}
+		},
+
+		/**
+		 * SSAO effect kernel size.
+		 *
+		 * @property kernelSize
+		 * @type {Number}
+		 */
+		kernelSize:
+		{
+			get: function(){return self._kernelSize;},
+			set: function(value)
+			{
+				self._kernelSize = value;
+				self.generateSampleKernel();
+				self.generateRandomKernelRotations();
+				self.ssaoMaterial.uniforms["tNoise"].value = self.noiseTexture;
+				self.ssaoMaterial.uniforms["kernel"].value = self.kernel;
+			}
 		}
 	});
 
+	this.kernelSize = 64;
 	this.kernelRadius = 8;
 	this.minDistance = 0.1;
 	this.maxDistance = 1000;
@@ -173,7 +189,7 @@ SSAOPass.prototype = Object.create(Pass.prototype);
  */
 SSAOPass.prototype.generateSampleKernel = function()
 {
-	for(var i = 0; i < this.kernelSize; i++)
+	for(var i = 0; i < this._kernelSize; i++)
 	{
 		var sample = new THREE.Vector3();
 		sample.x = (Math.random() * 2) - 1;
@@ -181,7 +197,7 @@ SSAOPass.prototype.generateSampleKernel = function()
 		sample.z = Math.random();
 		sample.normalize();
 
-		var scale = i / this.kernelSize;
+		var scale = i / this._kernelSize;
 		scale = THREE.Math.lerp(0.1, 1, scale * scale);
 		sample.multiplyScalar(scale);
 		this.kernel.push(sample);
