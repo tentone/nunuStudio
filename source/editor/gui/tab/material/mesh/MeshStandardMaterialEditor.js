@@ -98,7 +98,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.map = new TextureForm(this.form);
-	this.map.size.set(100, 100);
+	this.map.size.set(0, 100);
 	this.map.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
@@ -110,7 +110,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Roughness map
 	this.form.addText("Roughness map");
 	this.roughnessMap = new TextureForm(this.form);
-	this.roughnessMap.size.set(100, 100);
+	this.roughnessMap.size.set(0, 100);
 	this.roughnessMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "roughnessMap", self.roughnessMap.getValue()));
@@ -122,7 +122,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Metalness map
 	this.form.addText("Metalness map");
 	this.metalnessMap = new TextureForm(this.form);
-	this.metalnessMap.size.set(100, 100);
+	this.metalnessMap.size.set(0, 100);
 	this.metalnessMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "metalnessMap", self.metalnessMap.getValue()));
@@ -134,7 +134,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Bump map
 	this.form.addText("Bump map");
 	this.bumpMap = new TextureForm(this.form);
-	this.bumpMap.size.set(100, 100);
+	this.bumpMap.size.set(0, 100);
 	this.bumpMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
@@ -160,7 +160,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Normal map
 	this.form.addText("Normal map");
 	this.normalMap = new TextureForm(this.form);
-	this.normalMap.size.set(100, 100);
+	this.normalMap.size.set(0, 100);
 	this.normalMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
@@ -172,6 +172,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Normal map scale
 	this.form.addText("Normal Scale");
 	this.normalScale = new VectorBox(this.form);
+	this.normalScale.size.set(0, 18);
 	this.normalScale.setType(VectorBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
 	this.normalScale.setOnChange(function()
@@ -199,7 +200,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Displacement map
 	this.form.addText("Displacement map");
 	this.displacementMap = new TextureForm(this.form);
-	this.displacementMap.size.set(100, 100);
+	this.displacementMap.size.set(0, 100);
 	this.displacementMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
@@ -237,7 +238,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Emissive map
 	this.form.addText("Emissive map");
 	this.emissiveMap = new TextureForm(this.form);
-	this.emissiveMap.size.set(100, 100);
+	this.emissiveMap.size.set(0, 100);
 	this.emissiveMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
@@ -274,7 +275,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.alphaMap = new TextureForm(this.form);
-	this.alphaMap.size.set(100, 100);
+	this.alphaMap.size.set(0, 100);
 	this.alphaMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
@@ -286,7 +287,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Environment map
 	this.form.addText("Environment map");
 	this.envMap = new CubeTextureBox(this.form);
-	this.envMap.size.set(100, 100);
+	this.envMap.size.set(0, 100);
 	this.envMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
@@ -324,7 +325,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	//Ambient Occlusion map
 	this.form.addText("Ambient Occlusion");
 	this.aoMap = new TextureForm(this.form);
-	this.aoMap.size.set(100, 100);
+	this.aoMap.size.set(0, 100);
 	this.aoMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "aoMap", self.aoMap.getValue()));

@@ -3,233 +3,93 @@
 /**
  * Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.
  *
+ * This variant of SSAO produces a halo like effect to simulate the effect.
+ * 
+ * More information about SSAO here
+ *  - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
+ *
+ * @author alteredq / http://alteredqualia.com/
  * @class SSAOPass
  * @module Postprocessing
  */
 function SSAOPass()
 {
-	if(THREE.SSAOShader === undefined)
-	{
-		console.warn("SSAOPass depends on THREE.SSAOShader");
-	}
-
-	Pass.call(this);
+	ShaderPass.call(this, SSAOShader);
 
 	this.type = "SSAO";
 
-	this.kernel = [];
-	this.noiseTexture = null;
-	this.createQuadScene();
+	//Depth material
+	this.depthMaterial = new THREE.MeshDepthMaterial();
+	this.depthMaterial.depthPacking = THREE.RGBADepthPacking;
+	this.depthMaterial.blending = THREE.NoBlending;
 
-	/**
-	 * Depth texture attached to the normal material
-	 *
-	 * @attribute depthTexture
-	 * @type {THREE.DepthTexture}
-	 */
-	this.depthTexture = new THREE.DepthTexture();
-	this.depthTexture.type = THREE.UnsignedShortType;
-	this.depthTexture.minFilter = THREE.NearestFilter;
-	this.depthTexture.maxFilter = THREE.NearestFilter;
+	//Depth render target
+	this.depthRenderTarget = new THREE.WebGLRenderTarget(2, 2, {minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter});
 
-	/**
-	 * Normal rendering material.
-	 *
-	 * @attribute normalMaterial
-	 * @type {THREE.MeshNormalMaterial}
-	 */
-	this.normalMaterial = new THREE.MeshNormalMaterial();
-	this.normalMaterial.blending = THREE.NoBlending;
+	//Shader uniforms
+	this.uniforms["tDepth"].value = this.depthRenderTarget.texture;
+	this.uniforms["size"].value.set(2, 2);
 
-	//Normal render target
-	this.normalRenderTarget = new THREE.WebGLRenderTarget(1, 1,
-	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.LinearFilter,
-		format: THREE.RGBAFormat,
-		depthTexture: this.depthTexture,
-		depthBuffer: true
-	});
-
-	//SSAO render target
-	this.ssaoRenderTarget = new THREE.WebGLRenderTarget(1, 1, Pass.RGBALinear);
-
-	//Blur render target
-	this.blurRenderTarget = new THREE.WebGLRenderTarget(1, 1, Pass.RGBALinear);
-
-	/**
-	 * Blur pass render material.
-	 *
-	 * @attribute blurMaterial
-	 * @type {THREE.ShaderMaterial}
-	 */
-	this.blurMaterial = new THREE.ShaderMaterial(
-	{
-		defines: Object.assign({}, THREE.SSAOBlurShader.defines),
-		uniforms: THREE.UniformsUtils.clone(THREE.SSAOBlurShader.uniforms),
-		vertexShader: THREE.SSAOBlurShader.vertexShader,
-		fragmentShader: THREE.SSAOBlurShader.fragmentShader
-	});
-	this.blurMaterial.uniforms["tDiffuse"].value = this.ssaoRenderTarget.texture;
-
-	/**
-	 * Shader material for the SSAO render pass.
-	 *
-	 * @attribute ssaoMaterial
-	 * @type {THREE.ShaderMaterial}
-	 */
-	this.ssaoMaterial = new THREE.ShaderMaterial(
-	{
-		defines: Object.assign({}, THREE.SSAOShader.defines),
-		uniforms: THREE.UniformsUtils.clone(THREE.SSAOShader.uniforms),
-		vertexShader: THREE.SSAOShader.vertexShader,
-		fragmentShader: THREE.SSAOShader.fragmentShader,
-		blending: THREE.NoBlending
-	});
-	this.ssaoMaterial.uniforms["tNormal"].value = this.normalRenderTarget.texture;
-	
-	this.copyMaterial = new THREE.ShaderMaterial(
-	{
-		uniforms: THREE.UniformsUtils.clone(THREE.CopyShader.uniforms),
-		vertexShader: THREE.CopyShader.vertexShader,
-		fragmentShader: THREE.CopyShader.fragmentShader,
-		transparent: true,
-		depthTest: false,
-		depthWrite: false,
-		blendSrc: THREE.DstColorFactor,
-		blendDst: THREE.ZeroFactor,
-		blendEquation: THREE.AddEquation,
-		blendSrcAlpha: THREE.DstAlphaFactor,
-		blendDstAlpha: THREE.ZeroFactor,
-		blendEquationAlpha: THREE.AddEquation
-	});
-
-	//Original clean color
-	this.originalClearColor = new THREE.Color();
-
-	this._kernelSize = 0;
-	
+	//Setters and getters for uniforms
 	var self = this;
-
 	Object.defineProperties(this,
 	{
 		/**
-		 * Kernel radius used for the SSAO effect.
+		 * Ambient occlusion shadow radius.
 		 *
-		 * @property kernelRadius
+		 * @property radius
+		 * @type {Number}
+		 */
+		radius:
+		{
+			get: function() {return this.uniforms["radius"].value;},
+			set: function(value) {this.uniforms["radius"].value = value;}
+		},
+
+		/**
+		 * Display only ambient occlusion result.
+		 *
+		 * @property onlyAO
 		 * @type {Boolean}
 		 */
-		kernelRadius:
+		onlyAO:
 		{
-			get: function(){return self.ssaoMaterial.uniforms["kernelRadius"].value;},
-			set: function(value){self.ssaoMaterial.uniforms["kernelRadius"].value = value;}
+			get: function() {return this.uniforms["onlyAO"].value;},
+			set: function(value) {this.uniforms["onlyAO"].value = value;}
 		},
 
 		/**
-		 * Minimum camera distance considered for the SSAO effect.
+		 * Ambient occlusion clamp.
 		 *
-		 * @property minDistance
+		 * @property aoClamp
 		 * @type {Number}
 		 */
-		minDistance:
+		aoClamp:
 		{
-			get: function(){return self.ssaoMaterial.uniforms["minDistance"].value;},
-			set: function(value){self.ssaoMaterial.uniforms["minDistance"].value = value;}
+			get: function() {return this.uniforms["aoClamp"].value;},
+			set: function(value) {this.uniforms["aoClamp"].value = value;}
 		},
 
 		/**
-		 * Maximum camera distance considered for the SSAO effect.
+		 * Pixel luminosity influence in AO calculation.
 		 *
-		 * @property maxDistance
+		 * @property lumInfluence
 		 * @type {Number}
 		 */
-		maxDistance:
+		lumInfluence:
 		{
-			get: function() {return self.ssaoMaterial.uniforms["maxDistance"].value;},
-			set: function(value) {self.ssaoMaterial.uniforms["maxDistance"].value = value;}
+			get: function() {return this.uniforms["lumInfluence"].value;},
+			set: function(value) {this.uniforms["lumInfluence"].value = value;}
 		},
-
-		/**
-		 * SSAO effect kernel size.
-		 *
-		 * @property kernelSize
-		 * @type {Number}
-		 */
-		kernelSize:
-		{
-			get: function(){return self._kernelSize;},
-			set: function(value)
-			{
-				self._kernelSize = value;
-				self.generateSampleKernel();
-				self.generateRandomKernelRotations();
-				self.ssaoMaterial.uniforms["tNoise"].value = self.noiseTexture;
-				self.ssaoMaterial.uniforms["kernel"].value = self.kernel;
-			}
-		}
 	});
 
-	this.kernelSize = 64;
-	this.kernelRadius = 8;
-	this.minDistance = 0.1;
-	this.maxDistance = 1000;
+	this.radius = 4;
+	this.onlyAO = false;
+	this.aoClamp = 0.25;
+	this.lumInfluence = 0.7;
 }
 
-SSAOPass.prototype = Object.create(Pass.prototype);
-
-/** 
- * Generate a sample kernel based on the kernelSize value.
- * 
- * @method generateSampleKernel
- */
-SSAOPass.prototype.generateSampleKernel = function()
-{
-	for(var i = 0; i < this._kernelSize; i++)
-	{
-		var sample = new THREE.Vector3();
-		sample.x = (Math.random() * 2) - 1;
-		sample.y = (Math.random() * 2) - 1;
-		sample.z = Math.random();
-		sample.normalize();
-
-		var scale = i / this._kernelSize;
-		scale = THREE.Math.lerp(0.1, 1, scale * scale);
-		sample.multiplyScalar(scale);
-		this.kernel.push(sample);
-	}
-};
-
-/**
- * Use noise to generate multiple pseudo random kernel rotations.
- *
- * @method generateRandomKernelRotations
- */
-SSAOPass.prototype.generateRandomKernelRotations = function()
-{
-	var width = 4, height = 4;
-
-	if(SimplexNoise === undefined)
-	{
-		console.error("SSAOPass: The pass relies on SimplexNoise.");
-	}
-
-	var simplex = new SimplexNoise();
-	var size = width * height;
-	var data = new Float32Array(size);
-
-	for(var i = 0; i < size; i++)
-	{
-		var x = (Math.random() * 2) - 1;
-		var y = (Math.random() * 2) - 1;
-		var z = 0;
-		data[i] = simplex.noise3d(x, y, z);
-	}
-
-	this.noiseTexture = new THREE.DataTexture(data, width, height, THREE.LuminanceFormat, THREE.FloatType);
-	this.noiseTexture.wrapS = THREE.RepeatWrapping;
-	this.noiseTexture.wrapT = THREE.RepeatWrapping;
-	this.noiseTexture.needsUpdate = true;
-};
+SSAOPass.prototype = Object.create(ShaderPass.prototype);
 
 /**
  * Render using this pass.
@@ -243,90 +103,18 @@ SSAOPass.prototype.generateRandomKernelRotations = function()
  */
 SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Backup renderer state
-	this.originalClearColor.copy(renderer.getClearColor());
-	var originalClearAlpha = renderer.getClearAlpha();
-	var originalAutoClear = renderer.autoClear;
+	this.uniforms["cameraNear"].value = camera.near;
+	this.uniforms["cameraFar"].value = camera.far;
 
-	//Render normals
-	scene.overrideMaterial = this.normalMaterial;
-	renderer.autoClear = false;
-	renderer.setClearColor(0x7777ff);
-	renderer.setClearAlpha(1.0);
-	renderer.render(scene, camera, this.normalRenderTarget, true);
+	//Render depth
+	scene.overrideMaterial = this.depthMaterial;
+	renderer.render(scene, camera, this.depthRenderTarget, true);
+
+	//Render shader
 	scene.overrideMaterial = null;
-
-	//Restore original state
-	renderer.autoClear = originalAutoClear;
-	renderer.setClearColor(this.originalClearColor);
-	renderer.setClearAlpha(originalClearAlpha);
-
-	//Render SSAO
-	this.ssaoMaterial.uniforms["tDepth"].value = this.depthTexture;
-	this.ssaoMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
-	this.ssaoMaterial.uniforms["cameraNear"].value = camera.near;
-	this.ssaoMaterial.uniforms["cameraFar"].value = camera.far;
-	this.ssaoMaterial.uniforms["cameraProjectionMatrix"].value.copy(camera.projectionMatrix);
-	this.ssaoMaterial.uniforms["cameraInverseProjectionMatrix"].value.getInverse(camera.projectionMatrix); 
-	this.renderPass(renderer, this.ssaoMaterial, this.ssaoRenderTarget);
-
-	//Render blur
-	this.renderPass(renderer, this.blurMaterial, this.blurRenderTarget);
-
-	//Output to screen
-	if(this.renderToScreen)
-	{
-		//Copy SSAO result
-		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
-		this.copyMaterial.blending = THREE.NoBlending;
-		this.renderPass(renderer, this.copyMaterial, undefined , this.clear);
-
-		//Copy blur and blend it to output
-		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
-		this.copyMaterial.blending = THREE.CustomBlending;
-		this.renderPass(renderer, this.copyMaterial, undefined, false);
-	}
-	//Output to writeBuffer
-	else
-	{
-		//Copy SSAO result
-		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
-		this.copyMaterial.blending = THREE.NoBlending;
-		this.renderPass(renderer, this.copyMaterial, writeBuffer, this.clear);
-
-		//Copy blur and blend it to output
-		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
-		this.copyMaterial.blending = THREE.CustomBlending;
-		this.renderPass(renderer, this.copyMaterial, writeBuffer, false);
-	}	
+	ShaderPass.prototype.render.call(this, renderer, writeBuffer, readBuffer, delta, maskActive);
 };
 
-/**
- * Render a quad scene using a pass material.
- *
- * @method renderPass
- */
-SSAOPass.prototype.renderPass = function(renderer, passMaterial, renderTarget, clear)
-{
-	this.quad.material = passMaterial;
-	renderer.render(this.scene, this.camera, renderTarget, clear);
-};
-
-SSAOPass.prototype.dispose = function()
-{
-	//Render targets
-	this.normalRenderTarget.dispose();
-	this.ssaoRenderTarget.dispose();
-	this.blurRenderTarget.dispose();
-
-	//Geometry
-	this.quad.geometry.dispose();
-
-	//Materials
-	this.normalMaterial.dispose();
-	this.blurMaterial.dispose();
-	this.copyMaterial.dispose();
-};
 
 /**
  * Set resolution of this render pass.
@@ -337,12 +125,8 @@ SSAOPass.prototype.dispose = function()
  */
 SSAOPass.prototype.setSize = function(width, height)
 {
-	this.ssaoMaterial.uniforms["resolution"].value.set(width, height);
-	this.blurMaterial.uniforms["resolution"].value.set(width, height);
-
-	this.normalRenderTarget.setSize(width, height);
-	this.ssaoRenderTarget.setSize(width, height);
-	this.blurRenderTarget.setSize(width, height);
+	this.uniforms["size"].value.set(width, height);
+	this.depthRenderTarget.setSize(width, height);
 };
 
 /**
@@ -355,9 +139,10 @@ SSAOPass.prototype.toJSON = function(meta)
 {
 	var data = Pass.prototype.toJSON.call(this, meta);
 	
-	data.kernelRadius = this.kernelRadius;
-	data.minDistance = this.minDistance;
-	data.maxDistance = this.maxDistance;
+	data.onlyAO = this.onlyAO;
+	data.radius = this.radius;
+	data.aoClamp = this.aoClamp;
+	data.lumInfluence = this.lumInfluence;
 
 	return data;
 };

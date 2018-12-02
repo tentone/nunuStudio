@@ -362,14 +362,14 @@ EffectComposer.fromJSON = function(json)
 		{
 			pass = new BloomPass(data.strength, data.kernelSize, data.sigma, data.resolution);
 		}
-		else if(data.type === "SSAO")
+		else if(data.type === "SSAONOH")
 		{
-			pass = new SSAOPass();
+			pass = new SSAONOHPass();
 			pass.kernelRadius = data.kernelRadius;
 			pass.minDistance = data.minDistance;
 			pass.maxDistance = data.maxDistance;
 		}
-		else if(data.type === "SSAOLegacy")
+		else if(data.type === "SSAO")
 		{
 			pass = new SSAOPass();
 			pass.onlyAO = data.onlyAO;

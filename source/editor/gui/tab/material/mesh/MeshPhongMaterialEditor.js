@@ -97,6 +97,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.map = new TextureForm(this.form);
+	this.map.size.set(0, 100);
 	this.map.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
@@ -108,6 +109,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Bump map
 	this.form.addText("Bump map");
 	this.bumpMap = new TextureForm(this.form);
+	this.bumpMap.size.set(0, 100);
 	this.bumpMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
@@ -133,6 +135,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Normal map
 	this.form.addText("Normal map");
 	this.normalMap = new TextureForm(this.form);
+	this.normalMap.size.set(0, 100);
 	this.normalMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
@@ -144,6 +147,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Normal map scale
 	this.form.addText("Normal scale");
 	this.normalScale = new VectorBox(this.form);
+	this.normalScale.size.set(0, 18);
 	this.normalScale.setType(VectorBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
 	this.normalScale.setOnChange(function()
@@ -171,6 +175,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Displacement map
 	this.form.addText("Displacement Map");
 	this.displacementMap = new TextureForm(this.form);
+	this.displacementMap.size.set(0, 100);
 	this.displacementMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
@@ -208,6 +213,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Specular map
 	this.form.addText("Specular map");
 	this.specularMap = new TextureForm(this.form);
+	this.specularMap.size.set(0, 100);
 	this.specularMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
@@ -219,6 +225,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Emissive map
 	this.form.addText("Emissive map");
 	this.emissiveMap = new TextureForm(this.form);
+	this.emissiveMap.size.set(0, 100);
 	this.emissiveMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
@@ -255,6 +262,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.alphaMap = new TextureForm(this.form);
+	this.alphaMap.size.set(0, 100);
 	this.alphaMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
@@ -266,7 +274,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Environment map
 	this.form.addText("Environment map");
 	this.envMap = new CubeTextureBox(this.form);
-	this.envMap.size.set(100, 100);
+	this.envMap.size.set(0, 100);
 	this.envMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
@@ -278,7 +286,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Combine environment map
 	this.form.addText("Mode");
 	this.combine = new DropdownList(this.form);
-	this.combine.size.set(120, 18);
+	this.combine.size.set(0, 18);
 	this.combine.addValue("Multiply", THREE.MultiplyOperation);
 	this.combine.addValue("Mix", THREE.MixOperation);
 	this.combine.addValue("Add", THREE.AddOperation);
@@ -293,7 +301,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Reflectivity
 	this.form.addText("Reflectivity");
 	this.reflectivity = new NumberBox(this.form);
-	this.reflectivity.size.set(60, 18);
+	this.reflectivity.size.set(0, 18);
 	this.reflectivity.setStep(0.05);
 	this.reflectivity.setOnChange(function()
 	{
@@ -306,7 +314,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	//Refraction
 	this.form.addText("Refraction Ratio");
 	this.refractionRatio = new NumberBox(this.form);
-	this.refractionRatio.size.set(60, 18);
+	this.refractionRatio.size.set(0, 18);
 	this.refractionRatio.setStep(0.05);
 	this.refractionRatio.setOnChange(function()
 	{

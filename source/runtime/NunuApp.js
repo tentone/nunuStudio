@@ -81,6 +81,7 @@ include("source/core/postprocessing/pass/RenderPass.js");
 include("source/core/postprocessing/pass/UnrealBloomPass.js");
 include("source/core/postprocessing/pass/BloomPass.js");
 include("source/core/postprocessing/pass/SSAOPass.js");
+include("source/core/postprocessing/pass/SSAONOHPass.js");
 include("source/core/postprocessing/pass/BokehPass.js");
 include("source/core/postprocessing/pass/CopyPass.js");
 include("source/core/postprocessing/pass/FilmPass.js");

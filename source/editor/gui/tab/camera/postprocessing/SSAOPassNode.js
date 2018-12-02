@@ -6,46 +6,44 @@ function SSAOPassNode(parent)
 
 	var self = this;
 
-	this.addText("Kernel Radius");
-	this.kernelRadius = new NumberBox(this);
-	this.kernelRadius.size.set(0, 18);
-	this.kernelRadius.setStep(1.0);
-	this.kernelRadius.setOnChange(function()
+	this.addText("Only AO");
+	this.onlyAO = new CheckBox(this);
+	this.onlyAO.size.set(18, 18);
+	this.onlyAO.setOnChange(function()
 	{
-		self.pass.kernelRadius = self.kernelRadius.getValue();
+		self.pass.onlyAO = self.onlyAO.getValue();
 	});
-	this.add(this.kernelRadius);
+	this.add(this.onlyAO);
 	this.nextRow();
 
-	this.addText("Kernel Size");
-	this.kernelSize = new NumberBox(this);
-	this.kernelSize.size.set(0, 18);
-	this.kernelSize.setStep(1.0);
-	this.kernelSize.setOnChange(function()
+	this.addText("Radius");
+	this.radius = new NumberBox(this);
+	this.radius.size.set(60, 18);
+	this.radius.setOnChange(function()
 	{
-		self.pass.kernelSize = self.kernelSize.getValue();
+		self.pass.radius = self.radius.getValue();
 	});
-	this.add(this.kernelSize);
+	this.add(this.radius);
 	this.nextRow();
 
-	this.addText("Min Distance");
-	this.minDistance = new NumberBox(this);
-	this.minDistance.size.set(0, 18);
-	this.minDistance.setOnChange(function()
+	this.addText("Clamp");
+	this.aoClamp = new NumberBox(this);
+	this.aoClamp.size.set(60, 18);
+	this.aoClamp.setOnChange(function()
 	{
-		self.pass.minDistance = self.minDistance.getValue();
+		self.pass.aoClamp = self.aoClamp.getValue();
 	});
-	this.add(this.minDistance);
+	this.add(this.aoClamp);
 	this.nextRow();
 
-	this.addText("Max Distance");
-	this.maxDistance = new NumberBox(this);
-	this.maxDistance.size.set(0, 18);
-	this.maxDistance.setOnChange(function()
+	this.addText("Lum. Influence");
+	this.lumInfluence = new NumberBox(this);
+	this.lumInfluence.size.set(60, 18);
+	this.lumInfluence.setOnChange(function()
 	{
-		self.pass.maxDistance = self.maxDistance.getValue();
+		self.pass.lumInfluence = self.lumInfluence.getValue();
 	});
-	this.add(this.maxDistance);
+	this.add(this.lumInfluence);
 	this.nextRow();
 }
 
@@ -57,8 +55,8 @@ SSAOPassNode.prototype.setPass = function(pass)
 {
 	PassNode.prototype.setPass.call(this, pass);
 
-	this.kernelRadius.setValue(pass.kernelRadius);
-	this.minDistance.setValue(pass.minDistance);
-	this.maxDistance.setValue(pass.maxDistance);
-	this.kernelSize.setValue(pass.kernelSize);
+	this.radius.setValue(pass.radius);
+	this.onlyAO.setValue(pass.onlyAO);
+	this.aoClamp.setValue(pass.aoClamp);
+	this.lumInfluence.setValue(pass.lumInfluence);
 };

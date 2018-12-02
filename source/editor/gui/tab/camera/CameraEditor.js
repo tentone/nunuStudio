@@ -73,7 +73,7 @@ function CameraEditor(parent, closeable, container, index)
 	addRenderPassButton("Bloom", BloomPass);
 	addRenderPassButton("Hue & Saturation", HueSaturationPass);
 	self.form.nextRow();
-	addRenderPassButton("SSAO", SSAOPass);
+	addRenderPassButton("SSAO NOH", SSAONOHPass);
 	addRenderPassButton("Bokeh", BokehPass);
 	addRenderPassButton("Technicolor", TechnicolorPass);
 	self.form.nextRow();
@@ -81,6 +81,7 @@ function CameraEditor(parent, closeable, container, index)
 	addRenderPassButton("Dot Screen", DotScreenPass);
 	addRenderPassButton("Sobel", SobelPass);
 	self.form.nextRow();
+	addRenderPassButton("SSAO", SSAOPass);
 	addRenderPassButton(Locale.copy, CopyPass);
 	self.form.nextRow();
 

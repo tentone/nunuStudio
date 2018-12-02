@@ -55,6 +55,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	//Matcap map
 	this.form.addText("Matcap map");
 	this.matcap = new TextureForm(this.form);
+	this.matcap.size.set(0, 100);
 	this.matcap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "matcap", self.matcap.getValue()));
@@ -66,6 +67,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	//Texture map
 	this.form.addText("Texture map");
 	this.map = new TextureForm(this.form);
+	this.map.size.set(0, 100);
 	this.map.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
@@ -77,6 +79,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	//Bump map
 	this.form.addText("Bump map");
 	this.bumpMap = new TextureForm(this.form);
+	this.bumpMap.size.set(0, 100);
 	this.bumpMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
@@ -102,6 +105,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	//Normal map
 	this.form.addText("Normal map");
 	this.normalMap = new TextureForm(this.form);
+	this.normalMap.size.set(0, 100);
 	this.normalMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
@@ -115,6 +119,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.normalScale = new VectorBox(this.form);
 	this.normalScale.setType(VectorBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
+	this.normalScale.size.set(0, 18);
 	this.normalScale.setOnChange(function()
 	{
 		self.material.normalScale.copy(self.normalScale.getValue());
@@ -140,6 +145,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	//Displacement map
 	this.form.addText("Displacement Map");
 	this.displacementMap = new TextureForm(this.form);
+	this.displacementMap.size.set(0, 100);
 	this.displacementMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
@@ -177,6 +183,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.alphaMap = new TextureForm(this.form);
+	this.alphaMap.size.set(0, 100);
 	this.alphaMap.setOnChange(function(file)
 	{
 		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
