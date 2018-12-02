@@ -189,6 +189,8 @@
  	- Support for meshcap materials
  	- Loading data screen
  	- Torus knot and ring geometries
+    - Post procesing refactored
+    - Audio detune
 
 ## Tech
 nunuStudio is built on top of a number of open source projects

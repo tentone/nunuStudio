@@ -97,6 +97,8 @@ include("source/core/postprocessing/pass/ColorifyPass.js");
 include("source/core/postprocessing/pass/TechnicolorPass.js");
 include("source/core/postprocessing/pass/HueSaturationPass.js");
 
+include("source/core/postprocessing/shaders/SSAOShader.js");
+
 include("source/core/vr/VRControls.js");
 include("source/core/vr/VREffect.js");
 

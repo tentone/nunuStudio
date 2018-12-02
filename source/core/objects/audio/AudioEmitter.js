@@ -51,6 +51,7 @@ function AudioEmitter(audio)
 
 	/**
 	 * If true the playback starts automatically.
+	 *
 	 * @property autoplay
 	 * @default true
 	 * @type {boolean}
@@ -59,6 +60,7 @@ function AudioEmitter(audio)
 
 	/**
 	 * Audio volume.
+	 *
 	 * @property volume
 	 * @default 1.0
 	 * @type {Number}
@@ -67,6 +69,7 @@ function AudioEmitter(audio)
 
 	/**
 	 * Start time in seconds.
+	 *
 	 * @property playbackRate
 	 * @default 1.0
 	 * @type {Number}
@@ -75,6 +78,7 @@ function AudioEmitter(audio)
 
 	/**
 	 * Start time in seconds.
+	 *
 	 * @property startTime
 	 * @default 0.0
 	 * @type {Number}
@@ -83,11 +87,20 @@ function AudioEmitter(audio)
 
 	/**
 	 * If true the audio plays in loop.
+	 *
 	 * @property loop
 	 * @default true
 	 * @type {boolean}
 	 */
 	this.loop = true;
+
+	/**
+	 * Modify pitch, measured in cents. +/- 100 is a semitone. +/- 1200 is an octave.
+	 *
+	 * @property detune
+	 * @type {Number}
+	 */
+	this.detune = 0;
 
 	this.disposed = false;
 	this.isPlaying = false;
@@ -146,7 +159,7 @@ AudioEmitter.prototype.setBuffer = function(audioBuffer)
  * Play audio.
  * 
  * @method play
- * @return {AudioEmitter} Self pointer for chaining
+ * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.play = function()
 {
@@ -163,6 +176,7 @@ AudioEmitter.prototype.play = function()
 
 	var source = this.context.createBufferSource();
 	source.buffer = this.buffer;
+	source.detune.value = this.detune;
 	source.loop = this.loop;
 	source.onended = this.onEnded.bind(this);
 	source.playbackRate.setValueAtTime(this.playbackRate, this.startTime);
@@ -178,7 +192,7 @@ AudioEmitter.prototype.play = function()
  * Pauses audio playback.
  * 
  * @method pause
- * @return {AudioEmitter} Self pointer for chaining
+ * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.pause = function()
 {
@@ -193,7 +207,7 @@ AudioEmitter.prototype.pause = function()
  * Stops audio playback and resets time to 0.
  * 
  * @method pause
- * @return {AudioEmitter} Self pointer for chaining
+ * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.stop = function()
 {
@@ -249,7 +263,7 @@ AudioEmitter.prototype.getVolume = function()
  * 
  * @method setVolume
  * @param {Number} value Audio volume
- * @return {AudioEmitter} Self pointer for chaining
+ * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.setVolume = function(value)
 {
@@ -264,7 +278,7 @@ AudioEmitter.prototype.setVolume = function(value)
  * 
  * @method setLoop
  * @param {boolean} loop
- * @return {AudioEmitter} Self pointer for chaining
+ * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.setLoop = function(loop)
 {
@@ -273,6 +287,25 @@ AudioEmitter.prototype.setLoop = function(loop)
 	if(this.isPlaying)
 	{
 		this.source.loop = this.loop;
+	}
+
+	return this;
+};
+
+/**
+ * Set detune value.
+ * 
+ * @method setDetune
+ * @param {Number} value
+ * @return {AudioEmitter} Self pointer for chaining.
+ */
+AudioEmitter.prototype.setDetune = function(value)
+{
+	this.detune = value;
+
+	if(this.isPlaying === true)
+	{
+		this.source.detune.setTargetAtTime(this.detune, this.context.currentTime, 0.01);
 	}
 
 	return this;
@@ -294,7 +327,7 @@ AudioEmitter.prototype.getLoop = function()
  * 
  * @method setPlaybackRate
  * @param {Number} speed
- * @return {AudioEmitter} Self pointer for chaining
+ * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.setPlaybackRate = function (speed)
 {
@@ -335,7 +368,7 @@ AudioEmitter.prototype.getFilters = function()
  * 
  * @method setFilters
  * @param {Array} value
- * @return {AudioEmitter} Self pointer for chaining
+ * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.setFilters = function(value)
 {
@@ -386,7 +419,7 @@ AudioEmitter.prototype.setFilter = function(filter)
  * 
  * @method setNodeSource
  * @param {Object} node
- * @return {AudioEmitter} Self pointer for chaining
+ * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.setNodeSource = function(node)
 {

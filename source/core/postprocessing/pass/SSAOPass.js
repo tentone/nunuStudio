@@ -210,7 +210,7 @@ SSAOPass.prototype.generateRandomKernelRotations = function()
 
 	if(SimplexNoise === undefined)
 	{
-		console.error("SSAOPass: The pass relies on THREE.SimplexNoise.");
+		console.error("SSAOPass: The pass relies on SimplexNoise.");
 	}
 
 	var simplex = new SimplexNoise();
