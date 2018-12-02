@@ -9,24 +9,7 @@
  * @param {Number} aperture Camera aperture.
  * @param {Number} maxblur Maximum level of blur.
  */
-/**
- * Focus point distance.
- *
- * @property focus
- * @type {Number}
- */
-/**
- * Camera aperture.
- *
- * @property aperture
- * @type {Number}
- */
-/**
- * Maximum level of blur that can be applied to more distant objects.
- *
- * @property enabled
- * @type {maxblur}
- */
+
 function BokehPass(focus, aperture, maxblur)
 {
 	if(THREE.BokehShader === undefined)
@@ -72,18 +55,36 @@ function BokehPass(focus, aperture, maxblur)
 	var self = this;
 	Object.defineProperties(this,
 	{
+		/**
+		 * Camera aperture.
+		 *
+		 * @property aperture
+		 * @type {Number}
+		 */
 		aperture:
 		{
 			get: function() {return self.uniforms["aperture"].value;},
 			set: function(value) {self.uniforms["aperture"].value = value;}
 		},
 
+		/**
+		 * Focus point distance.
+		 *
+		 * @property focus
+		 * @type {Number}
+		 */
 		focus:
 		{
 			get: function() {return self.uniforms["focus"].value;},
 			set: function(value) {self.uniforms["focus"].value = value;}
 		},
-
+		
+		/**
+		 * Maximum level of blur that can be applied to more distant objects.
+		 *
+		 * @property enabled
+		 * @type {maxblur}
+		 */
 		maxblur:
 		{
 			get: function() {return self.uniforms["maxblur"].value;},

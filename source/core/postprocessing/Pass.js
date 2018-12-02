@@ -44,6 +44,14 @@ function Pass()
 	 * @type {Boolean}
 	 */
 	this.renderToScreen = false;
+
+	/**
+	 * If set to true, the result of the pass needs to be copied to the ouput by the effect renderer if renderToScren is enabled.
+	 *
+	 * @property copyToScreen
+	 * @type {Boolean}
+	 */
+	this.copyToScreen = false;
 }
 
 /** 
@@ -73,7 +81,6 @@ Pass.RGBLinear =
 	magFilter: THREE.LinearFilter,
 	format: THREE.RGBFormat
 };
-
 
 /** 
  * Parameters used for a RGBA unfiltered render target.
@@ -124,7 +131,6 @@ Pass.prototype.createQuadScene = function()
 	this.quad.frustumCulled = false;
 	this.scene.add(this.quad);
 };
-
 
 /**
  * Set resolution of this render pass.

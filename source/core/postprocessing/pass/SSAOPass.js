@@ -3,11 +3,6 @@
 /**
  * Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.
  *
- * More information about SSAO here
- *  - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
- *
- * @author alteredq / http://alteredqualia.com/
- * @author tentone
  * @class SSAOPass
  * @module Postprocessing
  */

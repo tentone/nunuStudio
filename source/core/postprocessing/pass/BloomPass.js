@@ -25,6 +25,8 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 	}
 
 	this.type = "Bloom";
+	this.copyToScreen = true;
+
 	this.createQuadScene();
 
 	strength = (strength !== undefined) ? strength : 1;
@@ -102,14 +104,7 @@ BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 		renderer.context.enable(renderer.context.STENCIL_TEST);
 	}
 
-	if(this.renderToScreen)
-	{
-		renderer.render(this.scene, this.camera, undefined, this.clear);
-	}
-	else
-	{
-		renderer.render(this.scene, this.camera, writeBuffer, false);
-	}
+	renderer.render(this.scene, this.camera, writeBuffer, false);
 };
 
 BloomPass.prototype.toJSON = function(meta)

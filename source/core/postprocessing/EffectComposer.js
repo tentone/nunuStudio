@@ -46,7 +46,7 @@ function EffectComposer()
 	this.readBuffer = new THREE.WebGLRenderTarget(this.width, this.height, EffectComposer.bufferParameters);
 
 	/**
-	 * Copy shader used to copy data between the read and write buffer.
+	 * Copy shader used to copy data between the read and write buffer or to copy the writeBuffer to screen when necessary.
 	 *
 	 * @property copyPass
 	 * @type {ShaderPass}
@@ -195,10 +195,23 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 	{
 		var pass = this.passes[i];
 
+		//Render pass if its enabled
 		if(pass.enabled === true)
 		{
-			//Render pass
 			pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
+
+			//If rendered to screen stop here
+			if(pass.renderToScreen)
+			{
+				//Copy writeBuffer to screen
+				if(pass.copyToScreen)
+				{
+					this.copyPass.renderToScreen = true;
+					this.copyPass.render(renderer, this.readBuffer, this.writeBuffer, delta);
+				}
+
+				break;
+			}
 
 			//Swap read and write buffers
 			if(pass.needsSwap)
@@ -206,6 +219,7 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 				if(maskActive)
 				{
 					renderer.context.stencilFunc(renderer.context.NOTEQUAL, 1, 0xffffffff);
+					this.copyPass.renderToScreen = false;
 					this.copyPass.render(renderer, this.writeBuffer, this.readBuffer, delta);
 					renderer.context.stencilFunc(renderer.context.EQUAL, 1, 0xffffffff);
 				}

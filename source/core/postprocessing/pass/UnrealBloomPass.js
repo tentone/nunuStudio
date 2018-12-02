@@ -288,7 +288,7 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 	}
 	else
 	{
-		renderer.render(this.scene, this.camera, readBuffer, this.clear);
+		renderer.render(this.scene, this.camera, writeBuffer, this.clear);
 	}
 
 	//Restore renderer settings
