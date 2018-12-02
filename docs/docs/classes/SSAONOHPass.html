@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio VRControls</title>  
+	<title>nunuStudio SSAONOHPass</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -188,18 +188,24 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>VRControls Class</h1>
+						<h1>SSAONOHPass Class</h1>
 						<div class="box meta">
 						
 						
 						
-									Module: <a href="../modules/VirtualReality.html">VirtualReality</a>
+									Module: <a href="../modules/Postprocessing.html">Postprocessing</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>VRControl is used to get input from an HDM device and apply it to an Object.</p>
+							<p>Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.</p>
+						<p>Uses the normal-oriented hemisphere method produces a more realistic-looking than the basic Crysis method.</p>
+						<p>Based on the article from <a href="http://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html">http://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html</a></p>
+						<p>More information about SSAO here</p>
+						<ul>
+						<li><a href="http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf">http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf</a></li>
+						</ul>
 						
 						</div>
 						
@@ -210,6 +216,7 @@
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -221,15 +228,27 @@
 						
 											<ul class="index-list methods">
 													<li class="index-item method">
-														<a href="#method_dispose">dispose</a>
+														<a href="#method_generateRandomKernelRotations">generateRandomKernelRotations</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_resetPose">resetPose</a>
+														<a href="#method_generateSampleKernel">generateSampleKernel</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_update">update</a>
+														<a href="#method_render">render</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_renderPass">renderPass</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_setSize">setSize</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
 											</ul>
@@ -240,36 +259,50 @@
 						
 											<ul class="index-list properties">
 													<li class="index-item property">
-														<a href="#property_display">display</a>
+														<a href="#property_kernelRadius">kernelRadius</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_frameData">frameData</a>
+														<a href="#property_kernelSize">kernelSize</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_scale">scale</a>
+														<a href="#property_maxDistance">maxDistance</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_standing">standing</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_userHeight">userHeight</a>
+														<a href="#property_minDistance">minDistance</a>
 						
 													</li>
 											</ul>
 										</div>
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs">
+													<li class="index-item attr">
+														<a href="#attr_blurMaterial">blurMaterial</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_depthTexture">depthTexture</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_normalMaterial">normalMaterial</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_ssaoMaterial">ssaoMaterial</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_dispose" class="method item">
-												<h3 class="name"><code>dispose</code></h3>
+											<div id="method_generateRandomKernelRotations" class="method item">
+												<h3 class="name"><code>generateRandomKernelRotations</code></h3>
 											
 													<span class="paren">()</span>
 											
@@ -289,15 +322,15 @@
 												</div>
 											
 												<div class="description">
-													<p>Dispose object.</p>
+													<p>Use noise to generate multiple pseudo random kernel rotations.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="method_resetPose" class="method item">
-												<h3 class="name"><code>resetPose</code></h3>
+											<div id="method_generateSampleKernel" class="method item">
+												<h3 class="name"><code>generateSampleKernel</code></h3>
 											
 													<span class="paren">()</span>
 											
@@ -317,20 +350,32 @@
 												</div>
 											
 												<div class="description">
-													<p>Reset the HDM pose.</p>
+													<p>Generate a sample kernel based on the kernelSize value.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="method_update" class="method item">
-												<h3 class="name"><code>update</code></h3>
+											<div id="method_render" class="method item">
+												<h3 class="name"><code>render</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>object</code>
+																	<code>renderer</code>
+															</li>
+															<li class="arg">
+																	<code>writeBuffer</code>
+															</li>
+															<li class="arg">
+																	<code>readBuffer</code>
+															</li>
+															<li class="arg">
+																	<code>delta</code>
+															</li>
+															<li class="arg">
+																	<code>maskActive</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -351,7 +396,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Update VRControls object state.</p>
+													<p>Render using this pass.</p>
 											
 												</div>
 											
@@ -360,12 +405,197 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">object</code>
-																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+																	<code class="param-name">renderer</code>
+																	<span class="type">WebGLRenderer</span>
 											
 											
 																<div class="param-description">
-																	<p>Object to be updated</p>
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">writeBuffer</code>
+																	<span class="type">WebGLRenderTarget</span>
+											
+											
+																<div class="param-description">
+																	<p>Buffer to write output.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">readBuffer</code>
+																	<span class="type">WebGLRenderTarget</span>
+											
+											
+																<div class="param-description">
+																	<p>Input buffer.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">delta</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Delta time in milliseconds.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">maskActive</code>
+																	<span class="type">Boolean</span>
+											
+											
+																<div class="param-description">
+																	<p>Not used in this pass.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_renderPass" class="method item">
+												<h3 class="name"><code>renderPass</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Render a quad scene using a pass material.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="method_setSize" class="method item">
+												<h3 class="name"><code>setSize</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>width</code>
+															</li>
+															<li class="arg">
+																	<code>height</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set resolution of this render pass.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">width</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">height</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_toJSON" class="method item">
+												<h3 class="name"><code>toJSON</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>meta</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Serialize pass to json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">meta</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Metadata object.</p>
 											
 																</div>
 											
@@ -380,77 +610,8 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
-											<div id="property_display" class="property item">
-												<h3 class="name"><code>display</code></h3>
-												<span class="type">Object</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>VR display.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_frameData" class="property item">
-												<h3 class="name"><code>frameData</code></h3>
-												<span class="type">VRFrameData</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>VR Frame data.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_scale" class="property item">
-												<h3 class="name"><code>scale</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Scale from real units to world units.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_standing" class="property item">
-												<h3 class="name"><code>standing</code></h3>
+											<div id="property_kernelRadius" class="property item">
+												<h3 class="name"><code>kernelRadius</code></h3>
 												<span class="type">Boolean</span>
 											
 											
@@ -465,15 +626,15 @@
 												</div>
 											
 												<div class="description">
-													<p>Standing property, is set true the user height will be added to the position of the HMD.</p>
+													<p>Kernel radius used for the SSAO effect.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_userHeight" class="property item">
-												<h3 class="name"><code>userHeight</code></h3>
+											<div id="property_kernelSize" class="property item">
+												<h3 class="name"><code>kernelSize</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -488,7 +649,53 @@
 												</div>
 											
 												<div class="description">
-													<p>User height, used to calibrate when the user is standing.</p>
+													<p>SSAO effect kernel size.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_maxDistance" class="property item">
+												<h3 class="name"><code>maxDistance</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Maximum camera distance considered for the SSAO effect.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_minDistance" class="property item">
+												<h3 class="name"><code>minDistance</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Minimum camera distance considered for the SSAO effect.</p>
 											
 												</div>
 											
@@ -497,6 +704,118 @@
 											</div>
 									</div>
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_blurMaterial" class="attr item">
+												<a name="config_blurMaterial"></a> 
+												<h3 class="name"><code>blurMaterial</code></h3>
+												<span class="type">THREE.ShaderMaterial</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Blur pass render material.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_depthTexture" class="attr item">
+												<a name="config_depthTexture"></a> 
+												<h3 class="name"><code>depthTexture</code></h3>
+												<span class="type">THREE.DepthTexture</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Depth texture attached to the normal material</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_normalMaterial" class="attr item">
+												<a name="config_normalMaterial"></a> 
+												<h3 class="name"><code>normalMaterial</code></h3>
+												<span class="type">THREE.MeshNormalMaterial</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Normal rendering material.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_ssaoMaterial" class="attr item">
+												<a name="config_ssaoMaterial"></a> 
+												<h3 class="name"><code>ssaoMaterial</code></h3>
+												<span class="type">THREE.ShaderMaterial</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Shader material for the SSAO render pass.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>

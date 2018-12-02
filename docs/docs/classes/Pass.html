@@ -73,6 +73,7 @@
 								<li><a href="../classes/Keyboard.html">Keyboard</a></li>
 								<li><a href="../classes/KinectDevice.html">KinectDevice</a></li>
 								<li><a href="../classes/LeapMotion.html">LeapMotion</a></li>
+								<li><a href="../classes/LegacyGeometryLoader.html">LegacyGeometryLoader</a></li>
 								<li><a href="../classes/LensFlare.html">LensFlare</a></li>
 								<li><a href="../classes/LocalStorage.html">LocalStorage</a></li>
 								<li><a href="../classes/Material.html">Material</a></li>
@@ -96,6 +97,7 @@
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+								<li><a href="../classes/RendererState.html">RendererState</a></li>
 								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
@@ -111,7 +113,9 @@
 								<li><a href="../classes/SpotLight.html">SpotLight</a></li>
 								<li><a href="../classes/Sprite.html">Sprite</a></li>
 								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
+								<li><a href="../classes/SSAONOHPass.html">SSAONOHPass</a></li>
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
+								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
@@ -207,6 +211,7 @@
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -217,6 +222,10 @@
 											<h3>Methods</h3>
 						
 											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_createQuadScene">createQuadScene</a>
+						
+													</li>
 													<li class="index-item method">
 														<a href="#method_dispose">dispose</a>
 						
@@ -245,6 +254,10 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_copyToScreen">copyToScreen</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_enabled">enabled</a>
 						
 													</li>
@@ -259,12 +272,65 @@
 											</ul>
 										</div>
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs">
+													<li class="index-item attr">
+														<a href="#attr_camera">camera</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_quad">quad</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_RGBALinear">RGBALinear</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_RGBANearest">RGBANearest</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_RGBLinear">RGBLinear</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_scene">scene</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
+											<div id="method_createQuadScene" class="method item">
+												<h3 class="name"><code>createQuadScene</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Create a quad scene to render post-processing effects.</p>
+											<p>It creates multiple attributes in the object to support that scene.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="method_dispose" class="method item">
 												<h3 class="name"><code>dispose</code></h3>
 											
@@ -555,6 +621,29 @@
 											
 											
 											</div>
+											<div id="property_copyToScreen" class="property item">
+												<h3 class="name"><code>copyToScreen</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If set to true, the result of the pass needs to be copied to the ouput by the effect renderer if renderToScren is enabled.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_enabled" class="property item">
 												<h3 class="name"><code>enabled</code></h3>
 												<span class="type">Boolean</span>
@@ -626,6 +715,175 @@
 											</div>
 									</div>
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_camera" class="attr item">
+												<a name="config_camera"></a> 
+												<h3 class="name"><code>camera</code></h3>
+												<span class="type">THREE.OthographicCamera</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Quad rendering camera.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_quad" class="attr item">
+												<a name="config_quad"></a> 
+												<h3 class="name"><code>quad</code></h3>
+												<span class="type">THREE.Mesh</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Quad mesh, composed of a 2 by 2 plane geometry.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_RGBALinear" class="attr item">
+												<a name="config_RGBALinear"></a> 
+												<h3 class="name"><code>RGBALinear</code></h3>
+												<span class="type">Object</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parameters used for a RGBA linear filtered render target.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_RGBANearest" class="attr item">
+												<a name="config_RGBANearest"></a> 
+												<h3 class="name"><code>RGBANearest</code></h3>
+												<span class="type">Object</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parameters used for a RGBA unfiltered render target.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_RGBLinear" class="attr item">
+												<a name="config_RGBLinear"></a> 
+												<h3 class="name"><code>RGBLinear</code></h3>
+												<span class="type">Object</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parameters used for a RGB linear filtered render target.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_scene" class="attr item">
+												<a name="config_scene"></a> 
+												<h3 class="name"><code>scene</code></h3>
+												<span class="type">THREE.Scene</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Quad scene, that contains a single quad children.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>

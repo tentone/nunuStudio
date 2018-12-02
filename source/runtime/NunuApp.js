@@ -80,8 +80,8 @@ include("source/core/postprocessing/pass/antialiasing/FXAAPass.js");
 include("source/core/postprocessing/pass/RenderPass.js");
 include("source/core/postprocessing/pass/UnrealBloomPass.js");
 include("source/core/postprocessing/pass/BloomPass.js");
-include("source/core/postprocessing/pass/SSAOPass.js");
 include("source/core/postprocessing/pass/SSAONOHPass.js");
+include("source/core/postprocessing/pass/SSAOPass.js");
 include("source/core/postprocessing/pass/BokehPass.js");
 include("source/core/postprocessing/pass/CopyPass.js");
 include("source/core/postprocessing/pass/FilmPass.js");
@@ -90,6 +90,8 @@ include("source/core/postprocessing/pass/SobelPass.js");
 include("source/core/postprocessing/pass/ColorifyPass.js");
 include("source/core/postprocessing/pass/TechnicolorPass.js");
 include("source/core/postprocessing/pass/HueSaturationPass.js");
+
+include("source/core/postprocessing/shaders/SSAOShader.js");
 
 include("source/core/vr/VRControls.js");
 include("source/core/vr/VREffect.js");
@@ -120,6 +122,7 @@ include("source/core/loaders/AudioLoader.js");
 include("source/core/loaders/MaterialLoader.js");
 include("source/core/loaders/TextureLoader.js");
 include("source/core/loaders/GeometryLoader.js");
+include("source/core/loaders/LegacyGeometryLoader.js");
 include("source/core/loaders/ObjectLoader.js");
 
 include("source/core/objects/device/LeapMotion.js");
@@ -167,7 +170,6 @@ include("source/core/utils/EventManager.js");
 include("source/core/utils/MathUtils.js");
 include("source/core/utils/ObjectUtils.js");
 include("source/core/utils/PhysicsGenerator.js");
-
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.

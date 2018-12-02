@@ -95,6 +95,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\loaders\\LegacyGeometryLoader.js": {
+            "name": "..\\source\\core\\loaders\\LegacyGeometryLoader.js",
+            "modules": {},
+            "classes": {
+                "LegacyGeometryLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\loaders\\MaterialLoader.js": {
             "name": "..\\source\\core\\loaders\\MaterialLoader.js",
             "modules": {},
@@ -517,6 +526,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js": {
+            "name": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "modules": {},
+            "classes": {
+                "SSAONOHPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\postprocessing\\pass\\SSAOPass.js": {
             "name": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
             "modules": {},
@@ -553,6 +571,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\postprocessing\\shaders\\SSAOShader.js": {
+            "name": "..\\source\\core\\postprocessing\\shaders\\SSAOShader.js",
+            "modules": {},
+            "classes": {
+                "SSAOShader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\postprocessing\\EffectComposer.js": {
             "name": "..\\source\\core\\postprocessing\\EffectComposer.js",
             "modules": {},
@@ -567,6 +594,15 @@
             "modules": {},
             "classes": {
                 "Pass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\postprocessing\\RendererState.js": {
+            "name": "..\\source\\core\\postprocessing\\RendererState.js",
+            "modules": {},
+            "classes": {
+                "RendererState": 1
             },
             "fors": {},
             "namespaces": {}
@@ -966,6 +1002,7 @@
                 "FontLoader": 1,
                 "GeometryLoader": 1,
                 "ImageLoader": 1,
+                "LegacyGeometryLoader": 1,
                 "MaterialLoader": 1,
                 "ObjectLoader": 1,
                 "TextureLoader": 1,
@@ -1212,12 +1249,15 @@
                 "FilmPass": 1,
                 "HueSaturationPass": 1,
                 "RenderPass": 1,
+                "SSAONOHPass": 1,
                 "SSAOPass": 1,
                 "SobelPass": 1,
                 "TechnicolorPass": 1,
                 "UnrealBloomPass": 1,
+                "SSAOShader": 1,
                 "EffectComposer": 1,
                 "Pass": 1,
+                "RendererState": 1,
                 "ShaderPass": 1
             },
             "fors": {},
@@ -1535,6 +1575,21 @@
                     "type": "Object"
                 }
             ]
+        },
+        "LegacyGeometryLoader": {
+            "name": "LegacyGeometryLoader",
+            "shortname": "LegacyGeometryLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Loaders",
+            "namespace": "",
+            "file": "..\\source\\core\\loaders\\LegacyGeometryLoader.js",
+            "line": 3,
+            "description": "Legacy geometry loader is used to load the old threejs JSON file format.",
+            "author": "alteredq / http://alteredqualia.com/"
         },
         "MaterialLoader": {
             "name": "MaterialLoader",
@@ -2595,6 +2650,20 @@
             "description": "Render pass is used to render the scene the same way as if were using the renderer directly.",
             "extends": "{Pass}"
         },
+        "SSAONOHPass": {
+            "name": "SSAONOHPass",
+            "shortname": "SSAONOHPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 3,
+            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nUses the normal-oriented hemisphere method produces a more realistic-looking than the basic Crysis method.\n\nBased on the article from http://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html\n\nMore information about SSAO here\n - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf"
+        },
         "SSAOPass": {
             "name": "SSAOPass",
             "shortname": "SSAOPass",
@@ -2607,8 +2676,8 @@
             "namespace": "",
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
             "line": 3,
-            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nMore information about SSAO here\n - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf",
-            "author": "tentone"
+            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nThis variant of SSAO produces a halo like effect to simulate the effect.\n\nMore information about SSAO here\n - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf",
+            "author": "alteredq / http://alteredqualia.com/"
         },
         "SobelPass": {
             "name": "SobelPass",
@@ -2670,6 +2739,22 @@
                 }
             ]
         },
+        "SSAOShader": {
+            "name": "SSAOShader",
+            "shortname": "SSAOShader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\postprocessing\\shaders\\SSAOShader.js",
+            "line": 3,
+            "description": "Screen-space ambient occlusion shader\n   - http://devlog-martinsh.blogspot.com (assembled by Martins Upitis)\n   - http://www.gamedev.net/topic/550699-ssao-no-halo-artifacts/ (original technique is made by ArKano22)\n\nModified to use RGBA packed depth texture (use clear color 1,1,1,1 for depth pass)",
+            "static": 1,
+            "author": "alteredq / http://alteredqualia.com/"
+        },
         "EffectComposer": {
             "name": "EffectComposer",
             "shortname": "EffectComposer",
@@ -2697,6 +2782,20 @@
             "file": "..\\source\\core\\postprocessing\\Pass.js",
             "line": 3,
             "description": "A render Pass is used to render something in the graphics pipeline.\n\nCan be used to render a scene, apply post processing effects, merge buffers,  etc."
+        },
+        "RendererState": {
+            "name": "RendererState",
+            "shortname": "RendererState",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\postprocessing\\RendererState.js",
+            "line": 3,
+            "description": "Renderer state can be used to store and restore a renderer state between postprocessing passes.\n\nIt stores the clean configurations of the renderer."
         },
         "ShaderPass": {
             "name": "ShaderPass",
@@ -6457,7 +6556,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 60,
+            "line": 61,
             "description": "Audio volume.",
             "itemtype": "property",
             "name": "volume",
@@ -6468,7 +6567,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 68,
+            "line": 70,
             "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "playbackRate",
@@ -6479,7 +6578,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 76,
+            "line": 79,
             "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "startTime",
@@ -6490,7 +6589,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 84,
+            "line": 88,
             "description": "If true the audio plays in loop.",
             "itemtype": "property",
             "name": "loop",
@@ -6501,7 +6600,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 102,
+            "line": 97,
+            "description": "Modify pitch, measured in cents. +/- 100 is a semitone. +/- 1200 is an octave.",
+            "itemtype": "property",
+            "name": "detune",
+            "type": "{Number}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 115,
             "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
@@ -6510,7 +6619,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 125,
+            "line": 138,
             "description": "Set audio buffer to be used by this emitter.",
             "itemtype": "method",
             "name": "setBuffer",
@@ -6530,12 +6639,12 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 145,
+            "line": 158,
             "description": "Play audio.",
             "itemtype": "method",
             "name": "play",
             "return": {
-                "description": "Self pointer for chaining",
+                "description": "Self pointer for chaining.",
                 "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
@@ -6543,12 +6652,12 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 177,
+            "line": 191,
             "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
             "return": {
-                "description": "Self pointer for chaining",
+                "description": "Self pointer for chaining.",
                 "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
@@ -6556,12 +6665,12 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 192,
+            "line": 206,
             "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
             "return": {
-                "description": "Self pointer for chaining",
+                "description": "Self pointer for chaining.",
                 "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
@@ -6569,7 +6678,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 207,
+            "line": 221,
             "description": "Change audio resource.\n\nIf changed after initialization the audio buffer will be disconnected and reintialized.",
             "itemtype": "method",
             "name": "setAudio",
@@ -6585,7 +6694,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 236,
+            "line": 250,
             "description": "Get audio emitter volume.",
             "params": [
                 {
@@ -6601,7 +6710,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 247,
+            "line": 261,
             "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -6613,7 +6722,7 @@
                 }
             ],
             "return": {
-                "description": "Self pointer for chaining",
+                "description": "Self pointer for chaining.",
                 "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
@@ -6621,7 +6730,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 262,
+            "line": 276,
             "description": "Set loop mode. If loop set to True the audio repeats after ending.",
             "itemtype": "method",
             "name": "setLoop",
@@ -6633,7 +6742,7 @@
                 }
             ],
             "return": {
-                "description": "Self pointer for chaining",
+                "description": "Self pointer for chaining.",
                 "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
@@ -6641,7 +6750,27 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 281,
+            "line": 295,
+            "description": "Set detune value.",
+            "itemtype": "method",
+            "name": "setDetune",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Self pointer for chaining.",
+                "type": "AudioEmitter"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 314,
             "description": "Get loop mode.",
             "itemtype": "method",
             "name": "getLoop",
@@ -6654,7 +6783,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 292,
+            "line": 325,
             "description": "Set playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -6666,7 +6795,7 @@
                 }
             ],
             "return": {
-                "description": "Self pointer for chaining",
+                "description": "Self pointer for chaining.",
                 "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
@@ -6674,7 +6803,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 311,
+            "line": 344,
             "description": "Get the playback speed.",
             "itemtype": "method",
             "name": "getPlaybackRate",
@@ -6687,7 +6816,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 322,
+            "line": 355,
             "description": "Get Array with all the filters applied to this audio emitter.",
             "itemtype": "method",
             "name": "getFilters",
@@ -6700,7 +6829,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 333,
+            "line": 366,
             "description": "Set the entire filters array.",
             "itemtype": "method",
             "name": "setFilters",
@@ -6712,7 +6841,7 @@
                 }
             ],
             "return": {
-                "description": "Self pointer for chaining",
+                "description": "Self pointer for chaining.",
                 "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
@@ -6720,7 +6849,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 361,
+            "line": 394,
             "description": "Get a filter to the filters array.",
             "itemtype": "method",
             "name": "getFilter",
@@ -6739,7 +6868,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 373,
+            "line": 406,
             "description": "Set a filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -6755,7 +6884,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 384,
+            "line": 417,
             "description": "Change the source audio node.",
             "itemtype": "method",
             "name": "setNodeSource",
@@ -6767,7 +6896,7 @@
                 }
             ],
             "return": {
-                "description": "Self pointer for chaining",
+                "description": "Self pointer for chaining.",
                 "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
@@ -6775,7 +6904,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 402,
+            "line": 435,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -6788,7 +6917,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 413,
+            "line": 446,
             "description": "Dispose audio object, stops the playback and disconnects audio node.",
             "itemtype": "method",
             "name": "dispose",
@@ -6797,7 +6926,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 431,
+            "line": 464,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10067,17 +10196,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 12,
-            "description": "Focus point distance.",
-            "itemtype": "property",
-            "name": "focus",
-            "type": "{Number}",
-            "class": "BokehPass",
-            "module": "Postprocessing"
-        },
-        {
-            "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 18,
+            "line": 58,
             "description": "Camera aperture.",
             "itemtype": "property",
             "name": "aperture",
@@ -10087,7 +10206,17 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 24,
+            "line": 70,
+            "description": "Focus point distance.",
+            "itemtype": "property",
+            "name": "focus",
+            "type": "{Number}",
+            "class": "BokehPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
+            "line": 82,
             "description": "Maximum level of blur that can be applied to more distant objects.",
             "itemtype": "property",
             "name": "enabled",
@@ -10097,7 +10226,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 153,
+            "line": 146,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10129,7 +10258,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 13,
+            "line": 38,
             "description": "Center of rotation of the dot grid in normalized coordinates.",
             "itemtype": "property",
             "name": "center",
@@ -10139,7 +10268,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 19,
+            "line": 50,
             "description": "Rotation of the dot grid.",
             "itemtype": "property",
             "name": "angle",
@@ -10149,7 +10278,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 25,
+            "line": 62,
             "description": "Scale of the dots used in the effect.",
             "itemtype": "property",
             "name": "scale",
@@ -10159,7 +10288,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\FilmPass.js",
-            "line": 10,
+            "line": 34,
             "description": "If set true a grascale effect will be applied.",
             "itemtype": "property",
             "name": "grayscale",
@@ -10169,7 +10298,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\FilmPass.js",
-            "line": 16,
+            "line": 46,
             "description": "Ammout of noise to be applied to the image.",
             "itemtype": "property",
             "name": "noiseIntensity",
@@ -10179,7 +10308,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\FilmPass.js",
-            "line": 22,
+            "line": 58,
             "description": "Scanline intensity.",
             "itemtype": "property",
             "name": "scanlinesIntensity",
@@ -10189,7 +10318,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\FilmPass.js",
-            "line": 28,
+            "line": 70,
             "description": "Number of scanline to be displayed.",
             "itemtype": "property",
             "name": "scanlinesCount",
@@ -10214,8 +10343,188 @@
             "module": "Postprocessing"
         },
         {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 31,
+            "description": "Depth texture attached to the normal material",
+            "itemtype": "attribute",
+            "name": "depthTexture",
+            "type": "{THREE.DepthTexture}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 42,
+            "description": "Normal rendering material.",
+            "itemtype": "attribute",
+            "name": "normalMaterial",
+            "type": "{THREE.MeshNormalMaterial}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 67,
+            "description": "Blur pass render material.",
+            "itemtype": "attribute",
+            "name": "blurMaterial",
+            "type": "{THREE.ShaderMaterial}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 82,
+            "description": "Shader material for the SSAO render pass.",
+            "itemtype": "attribute",
+            "name": "ssaoMaterial",
+            "type": "{THREE.ShaderMaterial}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 123,
+            "description": "Kernel radius used for the SSAO effect.",
+            "itemtype": "property",
+            "name": "kernelRadius",
+            "type": "{Boolean}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 135,
+            "description": "Minimum camera distance considered for the SSAO effect.",
+            "itemtype": "property",
+            "name": "minDistance",
+            "type": "{Number}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 147,
+            "description": "Maximum camera distance considered for the SSAO effect.",
+            "itemtype": "property",
+            "name": "maxDistance",
+            "type": "{Number}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 159,
+            "description": "SSAO effect kernel size.",
+            "itemtype": "property",
+            "name": "kernelSize",
+            "type": "{Number}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 187,
+            "description": "Generate a sample kernel based on the kernelSize value.",
+            "itemtype": "method",
+            "name": "generateSampleKernel",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 209,
+            "description": "Use noise to generate multiple pseudo random kernel rotations.",
+            "itemtype": "method",
+            "name": "generateRandomKernelRotations",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 241,
+            "description": "Render using this pass.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "WebGLRenderer"
+                },
+                {
+                    "name": "writeBuffer",
+                    "description": "Buffer to write output.",
+                    "type": "WebGLRenderTarget"
+                },
+                {
+                    "name": "readBuffer",
+                    "description": "Input buffer.",
+                    "type": "WebGLRenderTarget"
+                },
+                {
+                    "name": "delta",
+                    "description": "Delta time in milliseconds.",
+                    "type": "Number"
+                },
+                {
+                    "name": "maskActive",
+                    "description": "Not used in this pass.",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 311,
+            "description": "Render a quad scene using a pass material.",
+            "itemtype": "method",
+            "name": "renderPass",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 338,
+            "description": "Set resolution of this render pass.",
+            "itemtype": "method",
+            "name": "setSize",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 355,
+            "description": "Serialize pass to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata object.",
+                    "type": "Object"
+                }
+            ],
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 14,
+            "line": 37,
             "description": "Ambient occlusion shadow radius.",
             "itemtype": "property",
             "name": "radius",
@@ -10225,7 +10534,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 20,
+            "line": 49,
             "description": "Display only ambient occlusion result.",
             "itemtype": "property",
             "name": "onlyAO",
@@ -10235,7 +10544,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 26,
+            "line": 61,
             "description": "Ambient occlusion clamp.",
             "itemtype": "property",
             "name": "aoClamp",
@@ -10245,7 +10554,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 32,
+            "line": 73,
             "description": "Pixel luminosity influence in AO calculation.",
             "itemtype": "property",
             "name": "lumInfluence",
@@ -10255,7 +10564,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 98,
+            "line": 94,
             "description": "Render using this pass.",
             "itemtype": "method",
             "name": "render",
@@ -10291,7 +10600,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 123,
+            "line": 119,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -10312,7 +10621,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 136,
+            "line": 132,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10328,7 +10637,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 16,
+            "line": 113,
             "description": "Scales the color of the whole bloom effect.",
             "itemtype": "property",
             "name": "strength",
@@ -10338,7 +10647,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 22,
+            "line": 125,
             "description": "Bloom effect radius.",
             "itemtype": "property",
             "name": "radius",
@@ -10348,7 +10657,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 28,
+            "line": 137,
             "description": "Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.\n\nTo have all scene colors contributing to the bloom, a volume of -1 needs to be used.",
             "itemtype": "property",
             "name": "threshold",
@@ -10358,7 +10667,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 36,
+            "line": 151,
             "description": "Smooth factor.",
             "itemtype": "property",
             "name": "smooth",
@@ -10368,7 +10677,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 42,
+            "line": 163,
             "description": "The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).",
             "itemtype": "property",
             "name": "bloomFactors",
@@ -10378,7 +10687,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 48,
+            "line": 175,
             "description": "Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.",
             "itemtype": "property",
             "name": "bloomTintColors",
@@ -10388,7 +10697,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 314,
+            "line": 299,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10397,8 +10706,48 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 39,
-            "description": "Swap rendering buffers.",
+            "line": 22,
+            "description": "Passes attached to this effect composer.\n\nThe passes are rendered in order.",
+            "itemtype": "property",
+            "name": "passes",
+            "type": "{Array}",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 32,
+            "description": "Input buffer passed to the render pass.",
+            "itemtype": "property",
+            "name": "writeBuffer",
+            "type": "{THREE.WebGLRenderTarget}",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 40,
+            "description": "Input buffer passed to the render pass.",
+            "itemtype": "property",
+            "name": "readBuffer",
+            "type": "{THREE.WebGLRenderTarget}",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 48,
+            "description": "Copy shader used to copy data between the read and write buffer or to copy the writeBuffer to screen when necessary.",
+            "itemtype": "property",
+            "name": "copyPass",
+            "type": "{ShaderPass}",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 65,
+            "description": "Swap rendering buffers.\n\nUsed to make the output buffer of a render pass the input of the next one.",
             "itemtype": "method",
             "name": "swapBuffers",
             "class": "EffectComposer",
@@ -10406,7 +10755,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 51,
+            "line": 79,
             "description": "Add new pass to the composer.",
             "itemtype": "method",
             "name": "addPass",
@@ -10422,7 +10771,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 62,
+            "line": 90,
             "description": "Move pass back in the list of render passes.\n\nMoving back means that the pass is rendered earlier in the pipeline.",
             "itemtype": "method",
             "name": "moveBack",
@@ -10442,7 +10791,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 89,
+            "line": 117,
             "description": "Move pass forward in the list of render passes.\n\nMoving forward in the list means being renderer later down the pipeline.",
             "itemtype": "method",
             "name": "moveForward",
@@ -10462,7 +10811,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 116,
+            "line": 144,
             "description": "Remove pass from this composer, if pass is not found nothing happens.",
             "itemtype": "method",
             "name": "removePass",
@@ -10478,7 +10827,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 131,
+            "line": 159,
             "description": "Insert new pass into the composer in a specific position.",
             "itemtype": "method",
             "name": "insertPass",
@@ -10499,7 +10848,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 143,
+            "line": 171,
             "description": "Render a scene using this effect composer and a renderer.",
             "itemtype": "method",
             "name": "render",
@@ -10525,7 +10874,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 193,
+            "line": 252,
             "description": "Set rendering size for the composer.\n\nAlso updates the size for all passes attached to the composer.",
             "itemtype": "method",
             "name": "setSize",
@@ -10546,7 +10895,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 216,
+            "line": 278,
             "description": "Reset this effect composer.",
             "itemtype": "method",
             "name": "reset",
@@ -10555,7 +10904,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 240,
+            "line": 292,
             "description": "Dispose this effect composer.",
             "itemtype": "method",
             "name": "dispose",
@@ -10564,7 +10913,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 256,
+            "line": 306,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10573,7 +10922,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 276,
+            "line": 326,
             "description": "Create a new effect composer loaded from json data.",
             "static": 1,
             "itemtype": "method",
@@ -10594,7 +10943,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
-            "line": 17,
+            "line": 16,
             "description": "If set to true, the pass is processed by the composer.",
             "itemtype": "property",
             "name": "enabled",
@@ -10604,7 +10953,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
-            "line": 25,
+            "line": 24,
             "description": "If set to true, the pass indicates to swap read and write buffer after rendering.",
             "itemtype": "property",
             "name": "needsSwap",
@@ -10614,7 +10963,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
-            "line": 33,
+            "line": 32,
             "description": "If set to true, the pass clears its buffer before rendering.",
             "itemtype": "property",
             "name": "clear",
@@ -10624,7 +10973,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
-            "line": 41,
+            "line": 40,
             "description": "If set to true, the result of the pass is rendered to screen.",
             "itemtype": "property",
             "name": "renderToScreen",
@@ -10634,7 +10983,89 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
-            "line": 50,
+            "line": 48,
+            "description": "If set to true, the result of the pass needs to be copied to the ouput by the effect renderer if renderToScren is enabled.",
+            "itemtype": "property",
+            "name": "copyToScreen",
+            "type": "{Boolean}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\Pass.js",
+            "line": 57,
+            "description": "Parameters used for a RGBA linear filtered render target.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "RGBALinear",
+            "type": "{Object}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\Pass.js",
+            "line": 71,
+            "description": "Parameters used for a RGB linear filtered render target.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "RGBLinear",
+            "type": "{Object}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\Pass.js",
+            "line": 85,
+            "description": "Parameters used for a RGBA unfiltered render target.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "RGBANearest",
+            "type": "{Object}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\Pass.js",
+            "line": 99,
+            "description": "Create a quad scene to render post-processing effects.\n\nIt creates multiple attributes in the object to support that scene.",
+            "itemtype": "method",
+            "name": "createQuadScene",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\Pass.js",
+            "line": 108,
+            "description": "Quad rendering camera.",
+            "itemtype": "attribute",
+            "name": "camera",
+            "type": "{THREE.OthographicCamera}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\Pass.js",
+            "line": 116,
+            "description": "Quad scene, that contains a single quad children.",
+            "itemtype": "attribute",
+            "name": "scene",
+            "type": "{THREE.Scene}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\Pass.js",
+            "line": 124,
+            "description": "Quad mesh, composed of a 2 by 2 plane geometry.",
+            "itemtype": "attribute",
+            "name": "quad",
+            "type": "{THREE.Mesh}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\Pass.js",
+            "line": 135,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -10655,7 +11086,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
-            "line": 59,
+            "line": 144,
             "description": "Render the scene using this render pass.",
             "itemtype": "method",
             "name": "render",
@@ -10696,7 +11127,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
-            "line": 72,
+            "line": 157,
             "description": "Dispose this render pass.",
             "itemtype": "method",
             "name": "dispose",
@@ -10705,7 +11136,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
-            "line": 79,
+            "line": 164,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10717,6 +11148,38 @@
                 }
             ],
             "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\RendererState.js",
+            "line": 25,
+            "description": "Store the renderer state.",
+            "itemtype": "method",
+            "name": "store",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "THREE.WebGlRenderer"
+                }
+            ],
+            "class": "RendererState",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\RendererState.js",
+            "line": 44,
+            "description": "Restore the renderer state.",
+            "itemtype": "method",
+            "name": "restore",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "THREE.WebGlRenderer"
+                }
+            ],
+            "class": "RendererState",
             "module": "Postprocessing"
         },
         {

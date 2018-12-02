@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio CompressedTexture</title>  
+	<title>nunuStudio SSAOShader</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -188,29 +188,23 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>CompressedTexture Class</h1>
+						<h1>SSAOShader Class</h1>
 						<div class="box meta">
 						
-								<div class="extends">
-									Extends <a href="../classes/Texture.html" class="crosslink">Texture</a>
-								</div>
 						
 						
-									Module: <a href="../modules/Textures.html">Textures</a>
+									Module: <a href="../modules/Postprocessing.html">Postprocessing</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>CompressTexture class is used to store textures using GPU compatible compressed data.</p>
-						<p>The advantage of using these texture is the fact that the texture does not get uncompressed in the GPU memory saving not only project space but also saving video memory during runtime.</p>
-						<p>The problem with compressed textures is that its hardware dependent (they dont work everywhere)</p>
+							<p>Screen-space ambient occlusion shader</p>
 						<ul>
-						<li>DXT: supported on desktop and some Android smartphones</li>
-						<li>PVR: supported on iOS and some Android smartphones</li>
-						<li>ETC1: supported by most Android smartphones</li>
+						<li><a href="http://devlog-martinsh.blogspot.com">http://devlog-martinsh.blogspot.com</a> (assembled by Martins Upitis)</li>
+						<li><a href="http://www.gamedev.net/topic/550699-ssao-no-halo-artifacts/">http://www.gamedev.net/topic/550699-ssao-no-halo-artifacts/</a> (original technique is made by ArKano22)</li>
 						</ul>
-						<p>The usage of these format can free a lot of video memory and is a must for mobile devices.</p>
+						<p>Modified to use RGBA packed depth texture (use clear color 1,1,1,1 for depth pass)</p>
 						
 						</div>
 						

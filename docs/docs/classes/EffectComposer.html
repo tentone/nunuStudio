@@ -73,6 +73,7 @@
 								<li><a href="../classes/Keyboard.html">Keyboard</a></li>
 								<li><a href="../classes/KinectDevice.html">KinectDevice</a></li>
 								<li><a href="../classes/LeapMotion.html">LeapMotion</a></li>
+								<li><a href="../classes/LegacyGeometryLoader.html">LegacyGeometryLoader</a></li>
 								<li><a href="../classes/LensFlare.html">LensFlare</a></li>
 								<li><a href="../classes/LocalStorage.html">LocalStorage</a></li>
 								<li><a href="../classes/Material.html">Material</a></li>
@@ -96,6 +97,7 @@
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+								<li><a href="../classes/RendererState.html">RendererState</a></li>
 								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
@@ -111,7 +113,9 @@
 								<li><a href="../classes/SpotLight.html">SpotLight</a></li>
 								<li><a href="../classes/Sprite.html">Sprite</a></li>
 								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
+								<li><a href="../classes/SSAONOHPass.html">SSAONOHPass</a></li>
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
+								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
@@ -206,6 +210,7 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
@@ -268,6 +273,28 @@
 											</ul>
 										</div>
 						
+										<div class="index-section properties">
+											<h3>Properties</h3>
+						
+											<ul class="index-list properties">
+													<li class="index-item property">
+														<a href="#property_copyPass">copyPass</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_passes">passes</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_readBuffer">readBuffer</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_writeBuffer">writeBuffer</a>
+						
+													</li>
+											</ul>
+										</div>
 						
 						
 								</div>
@@ -857,6 +884,7 @@
 											
 												<div class="description">
 													<p>Swap rendering buffers.</p>
+											<p>Used to make the output buffer of a render pass the input of the next one.</p>
 											
 												</div>
 											
@@ -893,6 +921,103 @@
 											</div>
 									</div>
 						
+									<div id="properties" class="api-class-tabpanel">
+										<h2 class="off-left">Properties</h2>
+						
+											<div id="property_copyPass" class="property item">
+												<h3 class="name"><code>copyPass</code></h3>
+												<span class="type"><a href="../classes/ShaderPass.html" class="crosslink">ShaderPass</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Copy shader used to copy data between the read and write buffer or to copy the writeBuffer to screen when necessary.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_passes" class="property item">
+												<h3 class="name"><code>passes</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Passes attached to this effect composer.</p>
+											<p>The passes are rendered in order.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_readBuffer" class="property item">
+												<h3 class="name"><code>readBuffer</code></h3>
+												<span class="type">THREE.WebGLRenderTarget</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Input buffer passed to the render pass.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_writeBuffer" class="property item">
+												<h3 class="name"><code>writeBuffer</code></h3>
+												<span class="type">THREE.WebGLRenderTarget</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Input buffer passed to the render pass.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 						
 							</div>
