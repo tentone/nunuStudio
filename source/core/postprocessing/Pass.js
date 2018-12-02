@@ -178,6 +178,7 @@ Pass.prototype.toJSON = function(meta)
 	data.needsSwap = this.needsSwap;
 	data.renderToScreen = this.renderToScreen;
 	data.clear = this.clear;
+	data.copyToScreen = this.copyToScreen;
 
 	return data;
 };

@@ -433,6 +433,7 @@ EffectComposer.fromJSON = function(json)
 		pass.needsSwap = data.needsSwap;
 		pass.renderToScreen = data.renderToScreen;
 		pass.clear = data.clear;
+		pass.copyToScreen = data.copyToScreen === true;
 
 		composer.addPass(pass);
 	}

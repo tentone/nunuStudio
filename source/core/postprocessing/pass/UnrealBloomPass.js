@@ -51,8 +51,6 @@ function UnrealBloomPass(strength, radius, threshold)
 	//Luminosity high pass material
 	var highPassShader = THREE.LuminosityHighPassShader;
 	this.highPassUniforms = THREE.UniformsUtils.clone(highPassShader.uniforms);
-	this.highPassUniforms["luminosityThreshold"].value = (threshold !== undefined) ? threshold : 0.7;
-	this.highPassUniforms["smoothWidth"].value = 0.01;
 	this.materialHighPassFilter = new THREE.ShaderMaterial(
 	{
 		uniforms: this.highPassUniforms,
@@ -77,6 +75,10 @@ function UnrealBloomPass(strength, radius, threshold)
 	this.compositeMaterial.uniforms["blurTexture3"].value = this.renderTargetsVertical[2].texture;
 	this.compositeMaterial.uniforms["blurTexture4"].value = this.renderTargetsVertical[3].texture;
 	this.compositeMaterial.uniforms["blurTexture5"].value = this.renderTargetsVertical[4].texture;
+
+	//Configuration parameters
+	this.highPassUniforms["luminosityThreshold"].value = (threshold !== undefined) ? threshold : 0.7;
+	this.highPassUniforms["smoothWidth"].value = 0.01;
 	this.compositeMaterial.uniforms["bloomStrength"].value = (strength !== undefined) ? strength : 0.8;
 	this.compositeMaterial.uniforms["bloomRadius"].value = (radius !== undefined) ? radius : 0.3;
 	this.compositeMaterial.uniforms["bloomFactors"].value = [1.0, 0.8, 0.6, 0.4, 0.2];
@@ -288,7 +290,7 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 	}
 	else
 	{
-		renderer.render(this.scene, this.camera, writeBuffer, this.clear);
+		renderer.render(this.scene, this.camera, readBuffer, this.clear);
 	}
 
 	//Restore renderer settings
