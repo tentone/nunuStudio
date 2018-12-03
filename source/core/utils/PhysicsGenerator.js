@@ -153,37 +153,71 @@ PhysicsGenerator.createBoundingBoxShape = function(object)
  */
 PhysicsGenerator.createConvexPolyhedron = function(object)
 {
-	var i, vertices, faces, hull;
-	var geometry = PhysicsGenerator.getGeometry(object);
+	var useOldConvexHull = true;
 
-	if(geometry instanceof THREE.BufferGeometry)
+	if(useOldConvexHull === true)
 	{
-		geometry = new THREE.Geometry().fromBufferGeometry(geometry);
+		var geometry = PhysicsGenerator.getGeometry(object);
+
+		if(geometry instanceof THREE.BufferGeometry)
+		{
+			geometry = new THREE.Geometry().fromBufferGeometry(geometry);
+		}
+
+		if(!geometry || !geometry.vertices.length)
+		{
+			return null;
+		}
+
+		//Compute the 3D convex hull
+		var hull = new quickhull()(geometry);
+
+		//Convert from Vector3 to CANNON.Vec3
+		var vertices = new Array(hull.vertices.length);
+		for(var i = 0; i < hull.vertices.length; i++)
+		{
+			vertices[i] = new CANNON.Vec3(hull.vertices[i].x, hull.vertices[i].y, hull.vertices[i].z);
+		}
+
+		//Convert from THREE.Face to Array<number>
+		var faces = new Array(hull.faces.length);
+		for(var i = 0; i < hull.faces.length; i++)
+		{
+			faces[i] = [hull.faces[i].a, hull.faces[i].b, hull.faces[i].c];
+		}
+
+		return new CANNON.ConvexPolyhedron(vertices, faces);
 	}
-
-	if(!geometry || !geometry.vertices.length)
+	else
 	{
+		var geometry = PhysicsGenerator.getGeometry(object);
+			
+		//TODO <NOT WORKING AT ALL>
+		//TODO <MOVE TO BUFFER GEOMETRY>
+
+		if(geometry instanceof THREE.BufferGeometry)
+		{
+			geometry = new THREE.Geometry().fromBufferGeometry(geometry);
+		}
+
+		var hull = new THREE.ConvexGeometry(geometry.vertices);
+
+		//Convert from Vector3 to CANNON.Vec3
+		var vertices = new Array(hull.vertices.length);
+		for(var i = 0; i < hull.vertices.length; i++)
+		{
+			vertices[i] = new CANNON.Vec3(hull.vertices[i].x, hull.vertices[i].y, hull.vertices[i].z);
+		}
+
+		//Convert from THREE.Face to Array<number>
+		var faces = new Array(hull.faces.length);
+		for(var i = 0; i < hull.faces.length; i++)
+		{
+			faces[i] = [hull.faces[i].a, hull.faces[i].b, hull.faces[i].c];
+		}
+
 		return null;
 	}
-
-	//Compute the 3D convex hull
-	var hull = new quickhull()(geometry);
-
-	//Convert from Vector3 to CANNON.Vec3
-	vertices = new Array(hull.vertices.length);
-	for(i = 0; i < hull.vertices.length; i++)
-	{
-		vertices[i] = new CANNON.Vec3(hull.vertices[i].x, hull.vertices[i].y, hull.vertices[i].z);
-	}
-
-	//Convert from THREE.Face to Array<number>
-	faces = new Array(hull.faces.length);
-	for(i = 0; i < hull.faces.length; i++)
-	{
-		faces[i] = [hull.faces[i].a, hull.faces[i].b, hull.faces[i].c];
-	}
-
-	return new CANNON.ConvexPolyhedron(vertices, faces);
 };
 
 /**
