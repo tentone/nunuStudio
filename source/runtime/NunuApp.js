@@ -68,6 +68,7 @@ include("source/core/animation/AnimationMixer.js");
 
 include("source/core/input/Key.js");
 include("source/core/input/Keyboard.js");
+include("source/core/input/TizenKeyboard.js");
 include("source/core/input/Mouse.js");
 include("source/core/input/Gamepad.js");
 include("source/core/input/Gyroscope.js");
