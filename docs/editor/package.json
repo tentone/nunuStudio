@@ -49,7 +49,7 @@
 	},
 	"build": {
 		"appId": "io.tentone.nunustudio",
-		"nwVersion": "0.34.2",
+		"nwVersion": "0.34.0",
 		"nwFlavor": "sdk",
 		"output": "../../build/desktop/",
 		"ffmpegIntegration": true,
