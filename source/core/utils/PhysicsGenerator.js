@@ -153,71 +153,34 @@ PhysicsGenerator.createBoundingBoxShape = function(object)
  */
 PhysicsGenerator.createConvexPolyhedron = function(object)
 {
-	var useOldConvexHull = true;
+	var quickhull = new THREE.QuickHull();
+	quickhull.setFromObject(object);
 
-	//TODO <REMOVE OLD CODE>
-	if(useOldConvexHull === true)
+	var vertices = [];
+	var faces = [];
+	var normals = [];
+
+	//Generate vertices and normals
+	for(var i = 0; i < quickhull.faces.length; i++)
 	{
-		var geometry = PhysicsGenerator.getGeometry(object);
-
-		if(geometry instanceof THREE.BufferGeometry)
+		var face = quickhull.faces[i];
+		var edge = face.edge;
+		
+		//We move along a doubly-connected edge list to access all face points
+		do
 		{
-			geometry = new THREE.Geometry().fromBufferGeometry(geometry);
+			var point = edge.head().point;
+			vertices.push(new CANNON.Vec3(point.x, point.y, point.z));
+			edge = edge.next;
 		}
+		while(edge !== face.edge);
 
-		if(!geometry || !geometry.vertices.length)
-		{
-			return null;
-		}
-
-		//Compute the 3D convex hull
-		var hull = new quickhull()(geometry);
-
-		//Convert from Vector3 to CANNON.Vec3
-		var vertices = new Array(hull.vertices.length);
-		for(var i = 0; i < hull.vertices.length; i++)
-		{
-			vertices[i] = new CANNON.Vec3(hull.vertices[i].x, hull.vertices[i].y, hull.vertices[i].z);
-		}
-
-		//Convert from THREE.Face to Array<number>
-		var faces = new Array(hull.faces.length);
-		for(var i = 0; i < hull.faces.length; i++)
-		{
-			faces[i] = [hull.faces[i].a, hull.faces[i].b, hull.faces[i].c];
-		}
-
-		return new CANNON.ConvexPolyhedron(vertices, faces);
+		//The face always has 3 points
+		faces.push([vertices.length - 3, vertices.length - 2, vertices.length - 1]);
+		normals.push(new CANNON.Vec3(face.normal.x, face.normal.y, face.normal.z));
 	}
-	else
-	{
-		var quickHull = new THREE.QuickHull();
-		quickhull.setFromObject(object);
 
-		var vertices = [];
-		var faces = [];
-
-		//Generate vertices and normals
-		var faces = quickHull.faces;
-		for(var i = 0; i < faces.length; i++)
-		{
-			var face = faces[i];
-			var edge = face.edge;
-
-			//We move along a doubly-connected edge list to access all face points (see HalfEdge docs)
-			do
-			{
-				var point = edge.head().point;
-				vertices.push(new CANNON.Vec3(point.x, point.y, point.z));
-				faces.push([vertices.length - 3, vertices.length - 2, vertices.length - 1]);
-
-				edge = edge.next;
-			}
-			while(edge !== face.edge);
-		}
-
-		return new CANNON.ConvexPolyhedron(vertices, faces)
-	}
+	return new CANNON.ConvexPolyhedron(vertices, faces, normals);
 };
 
 /**

@@ -45,8 +45,6 @@ include("lib/three/objects/Refractor.js");
 
 include("lib/three/loaders/TTFLoader.js");
 
-include("lib/three/geometries/ConvexGeometry.js");
-
 include("lib/pson/bytebuffer.min.js");
 include("lib/pson/long.min.js");
 include("lib/pson/PSON.min.js");
@@ -266,7 +264,6 @@ include("lib/jsblend.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/jszip.min.js");
-include("lib/quickhull.js");
 include("lib/ThreeCSG.js");
 
 include("source/editor/style.css");
