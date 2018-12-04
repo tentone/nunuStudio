@@ -5205,6 +5205,176 @@
             "module": "Input"
         },
         {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 617,
+            "description": "Tizen specific media play and pause key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_PLAY_PAUSE",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 624,
+            "description": "Tizen specific menu key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MENU",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 631,
+            "description": "Tizen specific media rewind key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_REWIND",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 638,
+            "description": "Tizen specific media rewind key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_REWIND",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 645,
+            "description": "Tizen specific media fast forward key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_FAST_FORWARD",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 652,
+            "description": "Tizen specific info key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_INFO",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 659,
+            "description": "Tizen specific media play key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_PLAY",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 666,
+            "description": "Tizen specific exit key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_EXIT",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 673,
+            "description": "Tizen specific media pause key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_PAUSE",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 680,
+            "description": "Tizen specific back key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_BACK",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 687,
+            "description": "Tizen specific media stop key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_STOP",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 694,
+            "description": "Tizen specific caption key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_CAPTION",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 701,
+            "description": "Tizen specific media record key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_RECORD",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 708,
+            "description": "Tizen specific channel list key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_CHANNEL_LIST",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 715,
+            "description": "Tizen specific media track previous key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_TRACK_PREVIOUS",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 722,
+            "description": "Tizen specific media next track key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_MEDIA_TRACK_NEXT",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\Keyboard.js",
+            "line": 729,
+            "description": "Tizen specific 3D key.",
+            "itemtype": "attribute",
+            "name": "TIZEN_3D",
+            "type": "{Number}",
+            "class": "Keyboard",
+            "module": "Input"
+        },
+        {
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 24,
             "description": "Array with mouse buttons status.",
@@ -10637,7 +10807,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 113,
+            "line": 115,
             "description": "Scales the color of the whole bloom effect.",
             "itemtype": "property",
             "name": "strength",
@@ -10647,7 +10817,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 125,
+            "line": 127,
             "description": "Bloom effect radius.",
             "itemtype": "property",
             "name": "radius",
@@ -10657,7 +10827,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 137,
+            "line": 139,
             "description": "Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.\n\nTo have all scene colors contributing to the bloom, a volume of -1 needs to be used.",
             "itemtype": "property",
             "name": "threshold",
@@ -10667,7 +10837,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 151,
+            "line": 153,
             "description": "Smooth factor.",
             "itemtype": "property",
             "name": "smooth",
@@ -10677,7 +10847,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 163,
+            "line": 165,
             "description": "The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).",
             "itemtype": "property",
             "name": "bloomFactors",
@@ -10687,7 +10857,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 175,
+            "line": 177,
             "description": "Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.",
             "itemtype": "property",
             "name": "bloomTintColors",
@@ -10697,7 +10867,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 299,
+            "line": 301,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14769,7 +14939,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 189,
+            "line": 186,
             "description": "Create cylinder shape from geometry.",
             "itemtype": "method",
             "name": "createCylinderShape",
@@ -14789,7 +14959,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 207,
+            "line": 204,
             "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingCylinderShape",
@@ -14809,7 +14979,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 235,
+            "line": 232,
             "description": "Plane shape from geometry.",
             "itemtype": "method",
             "name": "createPlaneShape",
@@ -14829,7 +14999,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 250,
+            "line": 247,
             "description": "Sphere shape from geometry.",
             "itemtype": "method",
             "name": "createSphereShape",
@@ -14849,7 +15019,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 262,
+            "line": 259,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingSphereShape",
@@ -14869,7 +15039,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 277,
+            "line": 274,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createTubeShape",
@@ -14889,7 +15059,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 291,
+            "line": 288,
             "description": "Trimesh shape from geometry.",
             "itemtype": "method",
             "name": "createTrimeshShape",
@@ -14909,7 +15079,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 311,
+            "line": 308,
             "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
             "itemtype": "method",
             "name": "getGeometry",
@@ -14929,7 +15099,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 373,
+            "line": 370,
             "description": "Get geometry vertices.",
             "itemtype": "method",
             "name": "getVertices",
@@ -14949,7 +15119,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
-            "line": 389,
+            "line": 386,
             "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
             "itemtype": "method",
             "name": "getMeshes",
