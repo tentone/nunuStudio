@@ -613,3 +613,122 @@ Keyboard.F11 = 122;
  * @type {Number}
  */
 Keyboard.F12 = 123;
+
+/**
+ * Tizen specific media play and pause key.
+ * @attribute TIZEN_MEDIA_PLAY_PAUSE
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_PLAY_PAUSE = 10252;
+
+/**
+ * Tizen specific menu key.
+ * @attribute TIZEN_MENU
+ * @type {Number}
+ */
+Keyboard.TIZEN_MENU = 18;
+
+/**
+ * Tizen specific media rewind key.
+ * @attribute TIZEN_MEDIA_REWIND
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_REWIND = 412;
+
+/**
+ * Tizen specific media rewind key.
+ * @attribute TIZEN_MEDIA_REWIND
+ * @type {Number}
+ */
+Keyboard.TIZEN_TOOLS = 10135;
+
+/**
+ * Tizen specific media fast forward key.
+ * @attribute TIZEN_MEDIA_FAST_FORWARD
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_FAST_FORWARD = 417;
+
+/**
+ * Tizen specific info key.
+ * @attribute TIZEN_INFO
+ * @type {Number}
+ */
+Keyboard.TIZEN_INFO = 457;
+
+/**
+ * Tizen specific media play key.
+ * @attribute TIZEN_MEDIA_PLAY
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_PLAY = 415;
+
+/**
+ * Tizen specific exit key.
+ * @attribute TIZEN_EXIT
+ * @type {Number}
+ */
+Keyboard.TIZEN_EXIT = 10182;
+
+/**
+ * Tizen specific media pause key.
+ * @attribute TIZEN_MEDIA_PAUSE
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_PAUSE = 19;
+
+/**
+ * Tizen specific back key.
+ * @attribute TIZEN_BACK
+ * @type {Number}
+ */
+Keyboard.TIZEN_BACK = 10009;
+
+/**
+ * Tizen specific media stop key.
+ * @attribute TIZEN_MEDIA_STOP
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_STOP = 413;
+
+/**
+ * Tizen specific caption key.
+ * @attribute TIZEN_CAPTION
+ * @type {Number}
+ */
+Keyboard.TIZEN_CAPTION = 10221;
+
+/**
+ * Tizen specific media record key.
+ * @attribute TIZEN_MEDIA_RECORD
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_RECORD = 416;
+
+/**
+ * Tizen specific channel list key.
+ * @attribute TIZEN_CHANNEL_LIST
+ * @type {Number}
+ */
+Keyboard.TIZEN_CHANNEL_LIST = 10073;
+
+/**
+ * Tizen specific media track previous key.
+ * @attribute TIZEN_MEDIA_TRACK_PREVIOUS
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_TRACK_PREVIOUS = 10232;
+
+/**
+ * Tizen specific media next track key.
+ * @attribute TIZEN_MEDIA_TRACK_NEXT
+ * @type {Number}
+ */
+Keyboard.TIZEN_MEDIA_TRACK_NEXT = 10233;
+
+/**
+ * Tizen specific 3D key.
+ * @attribute TIZEN_3D
+ * @type {Number}
+ */
+Keyboard.TIZEN_3D = 10199;
