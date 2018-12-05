@@ -57,6 +57,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\input\\TizenKeyboard.js": {
+            "name": "..\\source\\core\\input\\TizenKeyboard.js",
+            "modules": {},
+            "classes": {
+                "TizenKeyboard": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\loaders\\AudioLoader.js": {
             "name": "..\\source\\core\\loaders\\AudioLoader.js",
             "modules": {
@@ -984,12 +993,13 @@
                 "Gyroscope": 1,
                 "Key": 1,
                 "Keyboard": 1,
-                "Mouse": 1
+                "Mouse": 1,
+                "TizenKeyboard": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\input\\Mouse.js",
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
             "line": 3,
             "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/."
         },
@@ -1491,6 +1501,21 @@
                     "type": "Boolean"
                 }
             ]
+        },
+        "TizenKeyboard": {
+            "name": "TizenKeyboard",
+            "shortname": "TizenKeyboard",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Input",
+            "namespace": "",
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 3,
+            "description": "Tizen keyboard contains codes of multiple tizen specific key codes.\n\nThese key codes are used in Samsung Tizen TV, more infomration available\n - https://developer.samsung.com/stream-code101/tv/using-the-remote-control",
+            "static": 1
         },
         "AudioLoader": {
             "name": "AudioLoader",
@@ -5205,176 +5230,6 @@
             "module": "Input"
         },
         {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 617,
-            "description": "Tizen specific media play and pause key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_PLAY_PAUSE",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 624,
-            "description": "Tizen specific menu key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MENU",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 631,
-            "description": "Tizen specific media rewind key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_REWIND",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 638,
-            "description": "Tizen specific media rewind key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_REWIND",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 645,
-            "description": "Tizen specific media fast forward key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_FAST_FORWARD",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 652,
-            "description": "Tizen specific info key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_INFO",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 659,
-            "description": "Tizen specific media play key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_PLAY",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 666,
-            "description": "Tizen specific exit key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_EXIT",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 673,
-            "description": "Tizen specific media pause key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_PAUSE",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 680,
-            "description": "Tizen specific back key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_BACK",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 687,
-            "description": "Tizen specific media stop key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_STOP",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 694,
-            "description": "Tizen specific caption key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_CAPTION",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 701,
-            "description": "Tizen specific media record key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_RECORD",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 708,
-            "description": "Tizen specific channel list key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_CHANNEL_LIST",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 715,
-            "description": "Tizen specific media track previous key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_TRACK_PREVIOUS",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 722,
-            "description": "Tizen specific media next track key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_MEDIA_TRACK_NEXT",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
-            "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 729,
-            "description": "Tizen specific 3D key.",
-            "itemtype": "attribute",
-            "name": "TIZEN_3D",
-            "type": "{Number}",
-            "class": "Keyboard",
-            "module": "Input"
-        },
-        {
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 24,
             "description": "Array with mouse buttons status.",
@@ -5696,6 +5551,526 @@
             "itemtype": "method",
             "name": "dispose",
             "class": "Mouse",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 15,
+            "description": "Left key.",
+            "itemtype": "attribute",
+            "name": "ARROW_LEFT",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 22,
+            "description": "Up key.",
+            "itemtype": "attribute",
+            "name": "ARROW_UP",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 29,
+            "description": "Right key.",
+            "itemtype": "attribute",
+            "name": "ARROW_RIGHT",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 36,
+            "description": "Down key.",
+            "itemtype": "attribute",
+            "name": "ARROW_DOWN",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 43,
+            "description": "Tizen specific enter key.",
+            "itemtype": "attribute",
+            "name": "ENTER",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 50,
+            "description": "Tizen specific back key.",
+            "itemtype": "attribute",
+            "name": "BACK",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 57,
+            "description": "Volume up key.",
+            "itemtype": "attribute",
+            "name": "VOLUME_UP",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 64,
+            "description": "Volume down key.",
+            "itemtype": "attribute",
+            "name": "VOLUME_DOWN",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 71,
+            "description": "Volume mute key.",
+            "itemtype": "attribute",
+            "name": "VOLUME_MUTE",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 78,
+            "description": "Channel up key.",
+            "itemtype": "attribute",
+            "name": "CHANNEL_UP",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 85,
+            "description": "Channel down key.",
+            "itemtype": "attribute",
+            "name": "CHANNEL_DOWN",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 92,
+            "description": "Red/F0 key.",
+            "itemtype": "attribute",
+            "name": "F0_RED",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 99,
+            "description": "Green/F1 key.",
+            "itemtype": "attribute",
+            "name": "F1_GREEN",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 106,
+            "description": "Yellow/F2 key.",
+            "itemtype": "attribute",
+            "name": "F2_YELLOW",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 113,
+            "description": "Blue/F3 key.",
+            "itemtype": "attribute",
+            "name": "F3_BLUE",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 120,
+            "description": "Number 0 key.",
+            "itemtype": "attribute",
+            "name": "NUM_0",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 127,
+            "description": "Number 1 key.",
+            "itemtype": "attribute",
+            "name": "NUM_1",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 134,
+            "description": "Number 2 key.",
+            "itemtype": "attribute",
+            "name": "NUM_2",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 141,
+            "description": "Number 3 key.",
+            "itemtype": "attribute",
+            "name": "NUM_3",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 148,
+            "description": "Number 4 key.",
+            "itemtype": "attribute",
+            "name": "NUM_4",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 155,
+            "description": "Number 5 key.",
+            "itemtype": "attribute",
+            "name": "NUM_5",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 162,
+            "description": "Number 6 key.",
+            "itemtype": "attribute",
+            "name": "NUM_6",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 169,
+            "description": "Number 7 key.",
+            "itemtype": "attribute",
+            "name": "NUM_7",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 176,
+            "description": "Number 8 key.",
+            "itemtype": "attribute",
+            "name": "NUM_8",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 183,
+            "description": "Number 9 key.",
+            "itemtype": "attribute",
+            "name": "NUM_9",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 190,
+            "description": "Minus key.",
+            "itemtype": "attribute",
+            "name": "MINUS",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 197,
+            "description": "E-manual key.",
+            "itemtype": "attribute",
+            "name": "E_MANUAL",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 204,
+            "description": "Previous channel key.",
+            "itemtype": "attribute",
+            "name": "PREVIOUS_CHANNEL",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 211,
+            "description": "Picture size key.",
+            "itemtype": "attribute",
+            "name": "PICTURE_SIZE",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 218,
+            "description": "Soccer key.",
+            "itemtype": "attribute",
+            "name": "SOCCER",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 225,
+            "description": "Teletext key.",
+            "itemtype": "attribute",
+            "name": "TELETEXT",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 232,
+            "description": "Search key.",
+            "itemtype": "attribute",
+            "name": "SEARCH",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 239,
+            "description": "Guide key.",
+            "itemtype": "attribute",
+            "name": "GUIDE",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 246,
+            "description": "Source selection key.",
+            "itemtype": "attribute",
+            "name": "SOURCE",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 253,
+            "description": "Extra key.",
+            "itemtype": "attribute",
+            "name": "EXTRA",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 260,
+            "description": "MTS key.",
+            "itemtype": "attribute",
+            "name": "MTS",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 267,
+            "description": "Tizen specific media play and pause key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_PLAY_PAUSE",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 274,
+            "description": "Tizen specific menu key.",
+            "itemtype": "attribute",
+            "name": "MENU",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 281,
+            "description": "Tizen specific media rewind key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_REWIND",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 288,
+            "description": "Tizen specific media rewind key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_REWIND",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 295,
+            "description": "Tizen specific media fast forward key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_FAST_FORWARD",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 302,
+            "description": "Tizen specific info key.",
+            "itemtype": "attribute",
+            "name": "INFO",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 309,
+            "description": "Tizen specific media play key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_PLAY",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 316,
+            "description": "Tizen specific exit key.",
+            "itemtype": "attribute",
+            "name": "EXIT",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 323,
+            "description": "Tizen specific media pause key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_PAUSE",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 330,
+            "description": "Tizen specific media stop key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_STOP",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 337,
+            "description": "Tizen specific caption key.",
+            "itemtype": "attribute",
+            "name": "CAPTION",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 344,
+            "description": "Tizen specific media record key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_RECORD",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 351,
+            "description": "Tizen specific channel list key.",
+            "itemtype": "attribute",
+            "name": "CHANNEL_LIST",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 358,
+            "description": "Tizen specific media track previous key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_TRACK_PREVIOUS",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 365,
+            "description": "Tizen specific media next track key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_TRACK_NEXT",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\input\\TizenKeyboard.js",
+            "line": 372,
+            "description": "Tizen specific 3D key.",
+            "itemtype": "attribute",
+            "name": "MEDIA_3D",
+            "type": "{Number}",
+            "class": "TizenKeyboard",
             "module": "Input"
         },
         {

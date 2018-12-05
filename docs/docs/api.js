@@ -91,6 +91,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Texture",
         "TextureLoader",
         "Timer",
+        "TizenKeyboard",
         "Tree",
         "TreeUtils",
         "UnrealBloomPass",
