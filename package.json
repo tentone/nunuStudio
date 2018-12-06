@@ -33,7 +33,8 @@
 	},
 	"devDependencies": {
 		"yuidocjs": "",
-		"nwjs-builder-phoenix": "^1.14.8"
+		"nwjs-builder-phoenix": "^1.14.8",
+		"cordova": ""
 	},
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
@@ -44,9 +45,7 @@
 		"min_width": 800,
 		"min_height": 600
 	},
-	"dependencies": {
-		"cordova": ""
-	},
+	"dependencies": {},
 	"build": {
 		"appId": "io.tentone.nunustudio",
 		"nwVersion": "0.34.0",
@@ -57,6 +56,9 @@
 		"targets": [
 			"zip",
 			"nsis7z"
+		],
+		"excludes": [
+			"package-lock.json"
 		],
 		"strippedProperties": [
 			"build"
@@ -77,6 +79,10 @@
 		"nsis": {
 			"installDirectory": "$PROGRAMFILES\\${_COMPANYNAME}\\${_APPNAME}",
 			"icon": "./source/files/icon.ico",
+			"languages": [
+				"English"
+			],
+			"hashCalculation": true,
 			"diffUpdaters": false
 		}
 	}
