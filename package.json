@@ -13,8 +13,8 @@
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"build": "cd script && node build.js",
 		"update": "cd script && node update.js",
-		"dist": "build --with-ffmpeg --mirror https://dl.nwjs.io/ --tasks win-x64 ./docs/editor",
-		"dist-all": "npm run build && build --with-ffmpeg --mirror https://dl.nwjs.io/ --tasks win-x64,linux-x64,mac-x64 ./docs/editor"
+		"dist": "build --mirror https://dl.nwjs.io/ --tasks win-x64 ./docs/editor",
+		"dist-all": "npm run build && build --mirror https://dl.nwjs.io/ --tasks win-x64,linux-x64,mac-x64 ./docs/editor"
 	},
 	"repository": {
 		"type": "git",
@@ -51,7 +51,7 @@
 		"nwVersion": "0.34.0",
 		"nwFlavor": "sdk",
 		"output": "../../build/desktop/",
-		"ffmpegIntegration": true,
+		"ffmpegIntegration": false,
 		"packed": true,
 		"targets": [
 			"zip",
