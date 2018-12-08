@@ -13,8 +13,8 @@
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"build": "cd script && node build.js",
 		"update": "cd script && node update.js",
-		"dist": "build --mirror https://dl.nwjs.io/ --tasks win-x64 ./docs/editor",
-		"dist-all": "npm run build && build --mirror https://dl.nwjs.io/ --tasks win-x64,linux-x64,mac-x64 ./docs/editor"
+		"dist": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
+		"dist-all": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64,linux-x64,mac-x64 ./docs/editor"
 	},
 	"repository": {
 		"type": "git",
@@ -48,40 +48,35 @@
 	"dependencies": {},
 	"build": {
 		"appId": "io.tentone.nunustudio",
-		"nwVersion": "0.34.0",
-		"nwFlavor": "sdk",
 		"output": "../../build/desktop/",
-		"ffmpegIntegration": false,
+		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
+		"ffmpegIntegration": true,
 		"packed": true,
+		"nwVersion": "stable",
+		"nwFlavor": "normal",
 		"targets": [
-			"zip",
-			"nsis7z"
+			"zip"
 		],
 		"excludes": [
 			"package-lock.json"
 		],
 		"strippedProperties": [
+			"scripts",
+			"devDependencies",
 			"build"
 		],
-		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"win": {
 			"productName": "nunuStudio",
 			"companyName": "tentone",
-			"copyright": "MIT"
+			"copyright": "MIT",
+			"icon": "./source/files/icon.ico",
+			"versionStrings": {}
 		},
 		"mac": {
 			"name": "nunuStudio",
 			"displayName": "nunuStudio",
 			"companyName": "tentone",
 			"copyright": "MIT"
-		},
-		"nsis": {
-			"installDirectory": "$PROGRAMFILES\\${_COMPANYNAME}\\${_APPNAME}",
-			"languages": [
-				"English"
-			],
-			"hashCalculation": true,
-			"diffUpdaters": false
 		}
 	}
 }

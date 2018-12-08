@@ -12,24 +12,38 @@ function Keyboard()
 {
 	/**
 	 * Array with keyboard keys status.
-	 * @type {array}
+	 *
 	 * @property keys
+	 * @type {Array}
 	 */
-	this.keys = new Array(256);
+	this.keys = [];
+
+	/**
+	 * The actions array serves as a buffer for the key input actions.
+	 *
+	 * Until the update method is called it stores all the key stroke actions.
+	 *
+	 * On update the key strokes are updated and the keys array stores the correct values.
+	 *
+	 * @property actions
+	 * @type {Array}
+	 */
 	this.actions = [];
 
-	//Initialize Keys
-	for(var i = 0; i < 256; i++)
-	{
-		this.keys[i] = new Key();
-	}
-
-	//Events
-	this.events = new EventManager();
 
 	//Actions pointer
 	var actions = this.actions;
 	var self = this;
+
+	/**
+	 * Event manager used to handle the keyup, keydown and focus events.
+	 *
+	 * On each event actions are added to the actions array.
+	 *
+	 * @property events
+	 * @type {EventManager}
+	 */
+	this.events = new EventManager();
 
 	//Key down
 	this.events.add(window, "keydown", function(event)
@@ -71,6 +85,11 @@ Keyboard.update = function()
 		var key = this.actions.shift();
 		var action = this.actions.shift();
 
+		if(this.keys[key] === undefined)
+		{
+			this.keys[key] = new Key();
+		}
+
 		this.keys[key].update(action);
 
 		if(this.keys[key].justReleased || this.keys[key].justPressed)
@@ -94,7 +113,10 @@ Keyboard.reset = function()
 	//Reset all keys
 	for(var i = 0; i < this.keys.length; i++)
 	{
-		this.keys[i].reset();
+		if(this.keys[i] !== undefined)
+		{
+			this.keys[i].reset();
+		}
 	}
 };
 
@@ -106,7 +128,7 @@ Keyboard.reset = function()
  */
 Keyboard.keyPressed = function(key)
 {
-	return this.keys[key].pressed;
+	return this.keys[key] !== undefined && this.keys[key].pressed;
 };
 
 /**
@@ -117,7 +139,7 @@ Keyboard.keyPressed = function(key)
  */
 Keyboard.keyJustPressed = function(key)
 {
-	return this.keys[key].justPressed;
+	return this.keys[key] !== undefined && this.keys[key].justPressed;
 };
 
 /**
@@ -128,7 +150,7 @@ Keyboard.keyJustPressed = function(key)
  */
 Keyboard.keyJustReleased = function(key)
 {
-	return this.keys[key].justReleased;
+	return this.keys[key] !== undefined && this.keys[key].justReleased;
 };
 
 /**

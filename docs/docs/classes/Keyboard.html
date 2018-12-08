@@ -259,6 +259,14 @@
 						
 											<ul class="index-list properties">
 													<li class="index-item property">
+														<a href="#property_actions">actions</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_events">events</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_keys">keys</a>
 						
 													</li>
@@ -713,6 +721,55 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
+											<div id="property_actions" class="property item">
+												<h3 class="name"><code>actions</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>The actions array serves as a buffer for the key input actions.</p>
+											<p>Until the update method is called it stores all the key stroke actions.</p>
+											<p>On update the key strokes are updated and the keys array stores the correct values.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_events" class="property item">
+												<h3 class="name"><code>events</code></h3>
+												<span class="type"><a href="../classes/EventManager.html" class="crosslink">EventManager</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Event manager used to handle the keyup, keydown and focus events.</p>
+											<p>On each event actions are added to the actions array.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_keys" class="property item">
 												<h3 class="name"><code>keys</code></h3>
 												<span class="type">Array</span>

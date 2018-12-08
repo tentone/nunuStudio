@@ -77,7 +77,16 @@ function Mouse(domElement, dontInitialize)
 	 */
 	this.canvas = null;
 	
-	//Events
+	/**
+	 * Event manager responsible for updating the raw data variables.
+	 *
+	 * Diferent events are used depending on the host platform.
+	 *
+	 * When the update method is called the raw data is reset.
+	 *
+	 * @property events
+	 * @type {EventManager} 
+	 */
 	this.events = new EventManager();
 
 	//Initialize key instances
@@ -100,7 +109,6 @@ function Mouse(domElement, dontInitialize)
 		{
 			self._wheel = event.deltaY;
 			self._wheelUpdated = true;
-			//event.preventDefault();
 		});
 	}
 	else if(window.addEventListener !== undefined)
@@ -110,7 +118,6 @@ function Mouse(domElement, dontInitialize)
 		{
 			self._wheel = event.detail * 30;
 			self._wheelUpdated = true;
-			//event.preventDefault();
 		});
 	}
 	else
@@ -119,7 +126,6 @@ function Mouse(domElement, dontInitialize)
 		{
 			self._wheel = event.deltaY;
 			self._wheelUpdated = true;
-			//event.preventDefault();
 		});
 	}
 
