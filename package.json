@@ -52,12 +52,14 @@
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"ffmpegIntegration": true,
 		"packed": true,
-		"nwVersion": "stable",
-		"nwFlavor": "normal",
+		"nwVersion": "0.34.0",
+		"nwFlavor": "sdk",
 		"targets": [
-			"zip"
+			"zip",
+			"7z"
 		],
 		"excludes": [
+			"node_modules",
 			"package-lock.json"
 		],
 		"strippedProperties": [
@@ -69,7 +71,7 @@
 			"productName": "nunuStudio",
 			"companyName": "tentone",
 			"copyright": "MIT",
-			"icon": "./source/files/icon.ico",
+			"icon": "source/files/icon.ico",
 			"versionStrings": {}
 		},
 		"mac": {
