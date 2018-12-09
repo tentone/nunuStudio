@@ -33,9 +33,10 @@
 	},
 	"devDependencies": {
 		"yuidocjs": "",
-		"nwjs-builder-phoenix": "^1.14.8",
-		"cordova": ""
+		"cordova": "",
+		"nwjs-builder-phoenix": "1.14.8"
 	},
+	"dependencies": {},
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
 		"icon": "source/files/icon.png",
@@ -45,23 +46,25 @@
 		"min_width": 800,
 		"min_height": 600
 	},
-	"dependencies": {},
 	"build": {
 		"appId": "io.tentone.nunustudio",
 		"output": "../../build/desktop/",
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
-		"ffmpegIntegration": true,
-		"packed": true,
-		"nwVersion": "stable",
-		"nwFlavor": "normal",
+		"ffmpegIntegration": false,
+		"packed": false,
+		"nwVersion": "0.34.0",
+		"nwFlavor": "sdk",
 		"targets": [
-			"zip"
+			"zip",
+			"7z"
 		],
 		"excludes": [
+			"node_modules",
 			"package-lock.json"
 		],
 		"strippedProperties": [
 			"scripts",
+			"dependencies",
 			"devDependencies",
 			"build"
 		],
@@ -69,7 +72,7 @@
 			"productName": "nunuStudio",
 			"companyName": "tentone",
 			"copyright": "MIT",
-			"icon": "./source/files/icon.ico",
+			"icon": "source/files/icon.ico",
 			"versionStrings": {}
 		},
 		"mac": {
