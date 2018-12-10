@@ -4,9 +4,27 @@ function EditorFreeControls()
 {
 	EditorControls.call(this);
 
+	/**
+	 * Orientation of the camera.
+	 *
+	 * X is the horizontal orientation and Y the vertical orientation.
+	 *
+	 * @property orientation
+	 * @type {Vector2}
+	 */	 
 	this.orientation = new THREE.Vector2();
 
 	this.camera = null;
+
+	/**
+	 * Indicates if the orbit controls needed an update on the last update.
+	 *
+	 * The variable is reset on each update call.
+	 *
+	 * @property needsUpdate
+	 * @type {Boolean}
+	 */
+	this.needsUpdate = false;
 
 	this.temp = new THREE.Vector3();
 
@@ -29,10 +47,8 @@ EditorFreeControls.prototype.focusObject = function(object)
 {
 	var box = ObjectUtils.calculateBoundingBox(object);
 	box.applyMatrix4(object.matrixWorld);
+
 	var size = box.getSize(new THREE.Vector3()).length();
-
-	//var center = box.getCenter(new THREE.Vector3());
-
 	var distance = this.getWorldPosition(new THREE.Vector3()).distanceTo(object.getWorldPosition(new THREE.Vector3()));
 
 	var direction = object.position.clone();
@@ -41,8 +57,6 @@ EditorFreeControls.prototype.focusObject = function(object)
 	direction.multiplyScalar(distance - size);
 	
 	this.position.add(direction);
-	//this.lookAt(center);
-
 	this.updateControls();
 };
 
@@ -78,7 +92,7 @@ EditorFreeControls.prototype.setOrientation = function(code)
 
 EditorFreeControls.prototype.update = function(mouse, keyboard)
 {
-	var needsUpdate = false;
+	this.needsUpdate = false;
 
 	//Look camera
 	if(mouse.buttonPressed(Mouse.LEFT))
@@ -96,7 +110,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 			this.orientation.y = 1.57;
 		}
 
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 
 	//Move Camera on X and Z
@@ -121,7 +135,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		this.position.z -= mouse.delta.x * speed * angleCos;
 		this.position.x -= mouse.delta.x * speed * angleSin;
 
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 	
 	//Move Camera on Y
@@ -129,7 +143,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 	{
 		this.position.y += mouse.delta.y * Editor.settings.editor.mouseMoveSpeed * 100;
 
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 
 	//Move in camera direction using mouse scroll
@@ -153,7 +167,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		direction.multiplyScalar(speed);
 		this.position.add(direction);
 
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 
 	//WASD movement
@@ -164,14 +178,14 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 			var direction = this.getWorldDirection(this.temp);
 			direction.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.add(direction);
-			needsUpdate = true;
+			this.needsUpdate = true;
 		}
 		if(keyboard.keyPressed(Keyboard.W))
 		{
 			var direction = this.getWorldDirection(this.temp);
 			direction.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.sub(direction);
-			needsUpdate = true;
+			this.needsUpdate = true;
 		}
 		if(keyboard.keyPressed(Keyboard.D))
 		{
@@ -179,7 +193,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 			this.temp.normalize();
 			this.temp.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.sub(this.temp);
-			needsUpdate = true;
+			this.needsUpdate = true;
 		}
 		if(keyboard.keyPressed(Keyboard.A))
 		{
@@ -187,11 +201,11 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 			this.temp.normalize();
 			this.temp.multiplyScalar(Editor.settings.editor.keyboardNavigationSpeed);
 			this.position.sub(this.temp);
-			needsUpdate = true;
+			this.needsUpdate = true;
 		}
 	}
 
-	if(needsUpdate)
+	if(this.needsUpdate)
 	{
 		this.updateControls();
 	}

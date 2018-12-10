@@ -79,11 +79,3 @@ EditorControls.prototype.update = function(mouse, keyboard, delta){};
  * @method updateControls
  */
 EditorControls.prototype.updateControls = function(){};
-
-/**
- * Move the controller to a point.
- * 
- * @method moveTo
- * @param {Vector3} point
- */
-EditorControls.prototype.moveTo = function(point){};

@@ -69,16 +69,50 @@ function EditorOrbitControls()
 	 * @type {Number}
 	 */
 	this.limitDown = -1.57;
+	
+	/**
+	 * Indicates if the orbit controls needed an update on the last update.
+	 *
+	 * The variable is reset on each update call.
+	 *
+	 * @property needsUpdate
+	 * @type {Boolean}
+	 */
+	this.needsUpdate = false;
 
-	this.tempVector = new THREE.Vector3(0, 0, 0);
-	this.tempMatrix = new THREE.Matrix4();
-
+	/**
+	 * Enables smooth orbit movement.
+	 *
+	 * @property smooth
+	 * @type {Boolean}
+	 */	
 	this.smooth = false;
+
+	/**
+	 * Orbit speed friction, higher value allow the orbit to retain more speed.
+	 *
+	 * Only used when smooth is set true.
+	 *
+	 * @property friction
+	 * @type {Number}
+	 */	
 	this.friction = 0.8;
+
+	/**
+	 * Obit movement speed.
+	 *
+	 * Only used when smooth is set true.
+	 *
+	 * @property speed
+	 * @type {Number}
+	 */	
 	this.speed = 0.3;
 	this.speedDistance = 0;
 	this.speedCenter = new THREE.Vector3(0, 0, 0);
 	this.speedOrientation = new THREE.Vector2(0, 0);
+
+	this.tempVector = new THREE.Vector3(0, 0, 0);
+	this.tempMatrix = new THREE.Matrix4();
 
 	this.reset();
 	this.updateControls();
@@ -158,7 +192,7 @@ EditorOrbitControls.prototype.setOrientation = function(code)
 
 EditorOrbitControls.prototype.update = function(mouse, keyboard)
 {
-	var needsUpdate = false;
+	this.needsUpdate = false;
 
 	if(mouse.buttonPressed(Mouse.LEFT))
 	{
@@ -173,7 +207,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			this.orientation.x -= Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
 		}
 
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 
 	if(mouse.buttonPressed(Mouse.MIDDLE))
@@ -187,7 +221,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 		}
 	
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 
 	if(mouse.buttonPressed(Mouse.RIGHT))
@@ -222,7 +256,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			this.center.z -= direction.z * x;
 		}
 
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 
 	if(mouse.wheel !== 0)
@@ -236,13 +270,13 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			this.distance += mouse.wheel * this.distance * Editor.settings.editor.mouseWheelSensitivity;
 		}
 	
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 	
 	//Keyboard movement
 	if(Editor.settings.editor.keyboardNavigation && this.keyboardMovement(keyboard))
 	{
-		needsUpdate = true;
+		this.needsUpdate = true;
 	}
 
 	//If smooth always update 
@@ -252,6 +286,8 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		this.center.add(this.speedCenter);
 		this.orientation.add(this.speedOrientation);
 
+		this.applyLimits();
+
 		this.speedDistance *= this.friction;
 		this.speedOrientation.multiplyScalar(this.friction);
 		this.speedCenter.multiplyScalar(this.friction);
@@ -260,7 +296,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		return;
 	}
 
-	if(needsUpdate === true)
+	if(this.needsUpdate === true)
 	{
 		this.updateControls();
 	}
@@ -316,7 +352,7 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 	return needsUpdate;
 }
 
-EditorOrbitControls.prototype.updateControls = function()
+EditorOrbitControls.prototype.applyLimits = function()
 {
 	if(this.orientation.y < this.limitDown)
 	{
@@ -335,6 +371,11 @@ EditorOrbitControls.prototype.updateControls = function()
 	{
 		this.distance = this.maxDistance;
 	}
+};
+
+EditorOrbitControls.prototype.updateControls = function()
+{
+	this.applyLimits();
 
 	var cos = this.distance * Math.cos(this.orientation.y);
 	this.position.set(Math.cos(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y), Math.sin(this.orientation.x) * cos);
