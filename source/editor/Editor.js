@@ -266,6 +266,7 @@ include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/jszip.min.js");
 include("lib/ThreeCSG.js");
+include("lib/tween.js");
 
 include("source/editor/style.css");
 
@@ -493,6 +494,7 @@ include("source/editor/utils/DOMUtils.js");
 include("source/editor/utils/ObjectIcons.js");
 include("source/editor/utils/CodemirrorThemes.js");
 include("source/editor/utils/VirtualClipboard.js");
+include("source/editor/utils/animation/TweenAnimation.js");
 
 include("source/editor/history/History.js");
 include("source/editor/history/action/Action.js");

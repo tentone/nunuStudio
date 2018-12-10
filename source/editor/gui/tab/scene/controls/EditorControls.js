@@ -65,9 +65,11 @@ EditorControls.prototype.setOrientation = function(orientation){};
  * Update the orbit controls position.
  * 
  * @method update
- * @param Mouse mouse
+ * @param {Mouse} mouse
+ * @param {Keyboard} keyboard
+ * @param {Number} delta Time passed after from the last update.
  */
-EditorControls.prototype.update = function(mouse, keyboard){};
+EditorControls.prototype.update = function(mouse, keyboard, delta){};
 
 /**
  * Update controls position and rotation.
@@ -77,3 +79,11 @@ EditorControls.prototype.update = function(mouse, keyboard){};
  * @method updateControls
  */
 EditorControls.prototype.updateControls = function(){};
+
+/**
+ * Move the controller to a point.
+ * 
+ * @method moveTo
+ * @param {Vector3} point
+ */
+EditorControls.prototype.moveTo = function(point){};

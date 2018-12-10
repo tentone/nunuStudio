@@ -229,11 +229,11 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 	{
 		if(this.smooth === true)
 		{
-			this.speedDistance += this.speed * mouse.wheel * this.position.distanceTo(this.center) * Editor.settings.editor.mouseWheelSensitivity;
+			this.speedDistance += this.speed * mouse.wheel * this.distance * Editor.settings.editor.mouseWheelSensitivity;
 		}
 		else
 		{
-			this.distance += mouse.wheel * this.position.distanceTo(this.center) * Editor.settings.editor.mouseWheelSensitivity;
+			this.distance += mouse.wheel * this.distance * Editor.settings.editor.mouseWheelSensitivity;
 		}
 	
 		needsUpdate = true;

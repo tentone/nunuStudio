@@ -8,6 +8,7 @@
  * Loop time can be changed dinamically.
  *
  * @class AnimationTimer
+ * @param {Function} callback Timer callback function.
  */
 function AnimationTimer(callback)
 {
