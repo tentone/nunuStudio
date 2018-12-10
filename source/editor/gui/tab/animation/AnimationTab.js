@@ -1,5 +1,15 @@
 "use strict";
 
+/**
+ * The animation tab is used to display and edit object animations timelines.
+ *
+ * Animations can be composed of multiple tracks. A object can have multiple animations.
+ *
+ * Each track is composed of keyframes that represent the states of the animation.
+ *
+ * @class AnimationTab
+ * @param {Element} parent
+ */
 function AnimationTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
@@ -150,39 +160,46 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomText.updatePosition(Element.TOP_RIGHT);
 	this.zoomText.updateSize();
 
-	//Timeline
-	this.timeline = document.createElement("div");
-	this.timeline.style.position = "absolute";
-	this.timeline.style.overflow = "auto";
-	this.timeline.style.top = "20px";
-	this.element.appendChild(this.timeline);
+	/**
+	 * Timeline divisio occupies the hole tab except for the options bar.
+	 *
+	 * @property timeline
+	 * @type {Element}
+	 */
+	this.timeline = new Element(this, "div");
+	this.timeline.element.style.overflow = "auto";
 
-	//Iformation
-	this.info = document.createElement("div");
-	this.info.style.position = "absolute";
-	this.info.style.top = "0px";
-	this.info.style.backgroundColor = Editor.theme.barColor;
-	this.timeline.appendChild(this.info);
+	/**
+	 * Information button tab.
+	 *
+	 * @property info
+	 * @type {Division}
+	 */
+	this.info = new Division(this.timeline);
 
-	//Tracks
-	this.tracks = document.createElement("div");
-	this.tracks.style.position = "absolute";
-	this.tracks.style.top = "0px";
-	this.tracks.style.backgroundColor = Editor.theme.panelColor;
-	this.timeline.appendChild(this.tracks);
+	/**
+	 * Tracks section.
+	 *
+	 * @property info
+	 * @type {Division}
+	 */
+	this.tracks = new Division(this.timeline);
 
 	//Temporary variables for mouse movement
 	var mouse = 0, initial = 0;
 
-	//Resize tab
+	/**
+	 * Resize tab placed between the info and tracks divisions
+	 *
+	 * @property tab
+	 * @type {DOM}
+	 */
 	this.tab = document.createElement("div");
 	this.tab.style.position = "absolute";
-	this.tab.style.top = "0px";
-	this.tab.style.width = "5px";
 	this.tab.style.backgroundColor = Editor.theme.barColor;
 	this.tab.style.cursor = "e-resize";
 	this.tab.position = 250;
-	this.timeline.appendChild(this.tab);
+	this.timeline.element.appendChild(this.tab);
 
 	this.tab.onmousedown = function(event)
 	{
@@ -191,13 +208,18 @@ function AnimationTab(parent, closeable, container, index)
 		self.tabManager.create();
 	};
 
+	/** 
+	 * Tab drag event manager.
+	 *
+	 * @property tabManager
+	 * @type {EventManager}
+	 */
 	this.tabManager = new EventManager();
 	this.tabManager.add(window, "mousemove", function(event)
 	{
 		self.tab.position = initial + (event.clientX - mouse);
 		self.updateInterface();
 	});
-
 	this.tabManager.add(window, "mouseup", function(event)
 	{
 		self.tabManager.destroy();
@@ -288,14 +310,8 @@ AnimationTab.prototype.update = function()
 AnimationTab.prototype.createTimeline = function()
 {	
 	//Clear timeline elements
-	while(this.tracks.firstChild)
-	{
-		this.tracks.removeChild(this.tracks.firstChild);
-	}
-	while(this.info.firstChild)
-	{
-		this.info.removeChild(this.info.firstChild);
-	}
+	this.tracks.removeAllChildren();
+	this.info.removeAllChildren();
 
 	this.timebarHeight = 0;
 	this.animations = [];
@@ -382,27 +398,34 @@ AnimationTab.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
+		//Timeline
+		this.timeline.position.set(0, 20);
+		this.timeline.size.set(this.size.x, this.size.y - 20);
+		this.timeline.updateInterface();
+		
+		var weight = this.timeline.element.scrollHeight;
+
+		//Tab
+		this.tab.style.height = weight + "px";
+		this.tab.style.width = "5px";
+		this.tab.style.top = "0px";
+		this.tab.style.left = this.tab.position + "px";
+		
+		//Information
+		this.info.size.set(this.tab.position, weight);
+		this.info.updateInterface();
+		
+		//Tracks
+		this.tracks.position.set(this.tab.position + 5, 0);
+		this.tracks.size.set(1000, weight);
+		this.tracks.updateInterface();
+
+		//Element
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
-
-		//Timeline
-		this.timeline.style.width = this.size.x + "px";
-		this.timeline.style.height = (this.size.y - 20) + "px";
-		
-		//Tab
-		this.tab.style.height = this.timeline.scrollHeight + "px";
-		this.tab.style.left = this.info.style.width;
-		
-		//Information
-		this.info.style.width = this.tab.position + "px";
-		this.info.style.height = this.tab.style.height;
-		
-		//Tracks
-		this.tracks.style.left = (this.tab.position + 5) + "px";
-		this.tracks.style.height = this.tab.style.height;
 	}
 	else
 	{

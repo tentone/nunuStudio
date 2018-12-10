@@ -1209,7 +1209,7 @@ SceneEditor.prototype.updateSelection = function()
 		else if(object instanceof THREE.SkinnedMesh)
 		{
 			this.objectHelper.add(new SkeletonHelper(object.parent));
-			this.objectHelper.add(new SkinnedWireframeHelper(object, 0xFFFF00));
+			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
 		//Bone
 		else if(object instanceof THREE.Bone)

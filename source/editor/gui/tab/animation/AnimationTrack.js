@@ -16,7 +16,7 @@ AnimationTrack.prototype = Object.create(Element.prototype);
 
 AnimationTrack.prototype.updateKeyframes = function()
 {
-	this.clearKeyframes();
+	this.removeAllChildren();
 	this.createKeyframes();
 };
 
@@ -30,13 +30,5 @@ AnimationTrack.prototype.createKeyframes = function()
 		key.size.set(5, 30);
 		key.position.set(this.editor.zoom * times[k], 0);
 		key.updateInterface();
-	}
-};
-
-AnimationTrack.prototype.clearKeyframes = function()
-{
-	while(this.element.firstChild)
-	{
-		this.element.removeChild(this.element.firstChild);
 	}
 };

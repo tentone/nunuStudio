@@ -235,6 +235,19 @@ Element.prototype.setOnClick = function(callback)
 };
 
 /**
+ * Remove all DOM children from the element.
+ * 
+ * @method removeAllChildren
+ */
+Element.prototype.removeAllChildren = function()
+{
+	while(this.element.firstChild)
+	{
+		this.element.removeChild(this.element.firstChild);
+	}
+};
+
+/**
  * Attach this component to a new parent component.
  * 
  * Destroys the object and reataches the base DOM element to the new parent element.

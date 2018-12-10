@@ -31,7 +31,7 @@ function AnimationClipTrack(editor, animation)
 	this.timegrid.style.height = height + "px";
 	this.timegrid.width = width;
 	this.timegrid.height = height;
-	this.editor.tracks.appendChild(this.timegrid);
+	this.editor.tracks.element.appendChild(this.timegrid);
 
 	var context = this.timegrid.getContext("2d");
 	context.fillStyle = Editor.theme.barColor;
@@ -64,7 +64,7 @@ function AnimationClipTrack(editor, animation)
 
 		self.manager.create();
 	};
-	this.editor.tracks.appendChild(this.seek);
+	this.editor.tracks.element.appendChild(this.seek);
 
 	//Seekbar manager
 	this.manager = new EventManager();

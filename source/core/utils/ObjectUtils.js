@@ -119,3 +119,20 @@ ObjectUtils.recalculateGeometryOrigin = function(object)
 		}
 	});
 };
+
+/**
+ * Covert all the geometries found in the object to BufferGeometry format.
+ *
+ * @method convertToBufferGeometry
+ * @param {Object3D} object Object to search for geometries
+ */
+ObjectUtils.convertToBufferGeometry = function(object)
+{
+	object.traverse(function(children)
+	{
+		if(children.geometry !== undefined && children.geometry.isGeometry === true)
+		{
+			children.geometry = new THREE.BufferGeometry().fromGeometry(children.geometry);
+		}
+	});
+};
