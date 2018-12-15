@@ -175,9 +175,9 @@ function AssetExplorerMenu(parent)
 
 	texture.updateInterface();
 
-	//Create material
+	//Material
 	var material = new DropdownMenu(this);
-	material.setText("Material");
+	material.setText(Locale.material);
 	material.size.set(100, 20);
 	material.position.set(200, 0);
 	
@@ -296,6 +296,28 @@ function AssetExplorerMenu(parent)
 	}, Editor.filePath + "icons/misc/material.png");
 
 	material.updateInterface();
+
+	//Create menu
+	var create = new DropdownMenu(this);
+	create.setText("Create");
+	create.size.set(100, 20);
+	create.position.set(300, 0);
+	
+	create.addOption("HTML", function()
+	{
+		var resource = new TextFile("", "html");
+		resource.name = "html";
+		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
+	}, Editor.filePath + "icons/script/script.png");
+
+	create.addOption("Javascript", function()
+	{
+		var resource = new TextFile("", "js");
+		resource.name = "js";
+		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
+	}, Editor.filePath + "icons/script/script.png");
+
+	create.updateInterface();
 }
 
 AssetExplorerMenu.prototype = Object.create(Element.prototype);

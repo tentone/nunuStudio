@@ -85,6 +85,7 @@ LocaleManager.register(
 	image: "Image",
 	video: "Video",
 	file: "File",
+	material: "Material",
 	
 	//Messages
 	projectSaved: "Project saved.",
