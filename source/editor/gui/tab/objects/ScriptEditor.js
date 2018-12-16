@@ -1,15 +1,25 @@
 "use strict";
 
+/**
+ * The script editor is used to view and edit code of script objects.
+ *
+ * @class ScriptEditor
+ */
 function ScriptEditor(parent, closeable, container, index)
 {
 	CodeEditor.call(this, parent, closeable, container, index);
 
 	var self = this;
 
-	this.code.setOption("mode", "javascript");
+	this.setMode("javascript");
 	this.updateSettings();
 
-	//Tern server
+	/**
+	 * Tern server used to provide code analysis.
+	 *
+	 * @attribute server
+	 * @type {CodeMirror.TernServer}
+	 */
 	this.server = new CodeMirror.TernServer(
 	{
 		caseInsensitive: false,
@@ -59,16 +69,25 @@ function ScriptEditor(parent, closeable, container, index)
 		}
 	});
 
-	//Scroll position
+	/**
+	 * Scroll position
+	 *
+	 * @attribute scroll
+	 * @type {Object}
+	 */
 	this.scroll = null;
 
-	//Script attached to code editor
+	/**
+	 * Script object attached to code editor.
+	 *
+	 * @attribute script
+	 * @type {Script}
+	 */
 	this.script = null;
 }
 
 ScriptEditor.prototype = Object.create(CodeEditor.prototype);
 
-//Update object data
 ScriptEditor.prototype.updateMetadata = function()
 {
 	//Name
@@ -98,7 +117,6 @@ ScriptEditor.prototype.updateMetadata = function()
 	}
 };
 
-//Activate code editor
 ScriptEditor.prototype.activate = function()
 {
 	CodeEditor.prototype.activate.call(this);
@@ -106,13 +124,11 @@ ScriptEditor.prototype.activate = function()
 	this.updateCode();
 };
 
-//Check if script is attached to editor
 ScriptEditor.prototype.isAttached = function(script)
 {
 	return this.script === script;
 };
 
-//Attach Script to code editor
 ScriptEditor.prototype.attach = function(script)
 {
 	this.script = script;
@@ -120,7 +136,11 @@ ScriptEditor.prototype.attach = function(script)
 	this.updateMetadata();
 };
 
-//Update attached script
+/**
+ * Update the attached object script code.
+ *
+ * @method updateCode
+ */
 ScriptEditor.prototype.updateCode = function()
 {
 	if(this.script !== null)

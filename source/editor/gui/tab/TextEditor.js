@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * The text editor is used to edit text files.
+ *
+ * It can present colors for some programming language (javascript, glsl, html, css, etc).
+ *
+ * @class TextEditor
+ * @extends {CodeEditor}
+ */
 function TextEditor(parent, closeable, container, index)
 {
 	CodeEditor.call(this, parent, closeable, container, index);
@@ -37,7 +45,6 @@ function TextEditor(parent, closeable, container, index)
 
 TextEditor.prototype = Object.create(CodeEditor.prototype);
 
-//Update object data
 TextEditor.prototype.updateMetadata = function()
 {
 	this.setName(this.resource.name);
@@ -49,7 +56,6 @@ TextEditor.prototype.updateMetadata = function()
 	}
 };
 
-//Activate code editor
 TextEditor.prototype.activate = function()
 {
 	CodeEditor.prototype.activate.call(this);
@@ -57,13 +63,11 @@ TextEditor.prototype.activate = function()
 	this.updateCode();
 };
 
-//Check if script is attached to editor
 TextEditor.prototype.isAttached = function(resource)
 {
 	return this.resource === resource;
 };
 
-//Attach Script to code editor
 TextEditor.prototype.attach = function(resource)
 {
 	this.resource = resource;
@@ -71,15 +75,19 @@ TextEditor.prototype.attach = function(resource)
 
 	if(resource.encoding == "js")
 	{
-		this.code.setOption("mode", "javascript");
+		this.setMode("javascript");
 	}
-	else if(resource.encoding == "glsl")
+	else if(resource.encoding == "html")
 	{
-		this.code.setOption("mode", "glsl");
+		this.setMode("htmlmixed");
+	}
+	else if(resource.encoding == "css")
+	{
+		this.setMode("css");
 	}
 	else
 	{
-		this.code.setOption("mode", "");
+		this.setMode("");
 	}
 	
 	this.updateMetadata();
