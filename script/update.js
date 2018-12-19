@@ -18,7 +18,6 @@ var codemirrorPath = "../lib/codemirror";
 downloadFolder(codemirrorPath + "/keymap", codemirrorURL + "/keymap", false);
 downloadFolder(codemirrorPath + "/addon", codemirrorURL + "/addon", false);
 downloadFolder(codemirrorPath + "/theme", codemirrorURL + "/theme", false);
-download(codemirrorPath + "/mode/javascript.js", codemirrorURL + "/mode/javascript/javascript.js");
 download(codemirrorPath + "/codemirror.css", codemirrorURL + "/lib/codemirror.css");
 
 function downloadFolder(basePath, baseURL, ignoreRootFiles)
