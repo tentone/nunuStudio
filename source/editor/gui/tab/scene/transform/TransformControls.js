@@ -435,7 +435,7 @@ TransformControls.prototype.onPointerMove = function()
 
 			if(this.axis === "XYZ")
 			{
-				this.toolScale = 1 + ((this.point.y) / Math.max(this.oldScale[i].x, this.oldScale[i].y, this.oldScale[i].z));
+				this.toolScale = 1 + this.point.y;
 
 				this.objects[i].scale.copy(this.oldScale[i]);
 				this.objects[i].scale.multiplyScalar(this.toolScale);
@@ -446,15 +446,15 @@ TransformControls.prototype.onPointerMove = function()
 
 				if(this.axis === "X")
 				{
-					this.objects[i].scale.x = this.oldScale[i].x * (1 + this.point.x / this.oldScale[i].x);
+					this.objects[i].scale.x = this.oldScale[i].x * (1 + this.point.x);
 				}
 				else if(this.axis === "Y")
 				{
-					this.objects[i].scale.y = this.oldScale[i].y * (1 + this.point.y / this.oldScale[i].y);
+					this.objects[i].scale.y = this.oldScale[i].y * (1 + this.point.y);
 				}
 				else if(this.axis === "Z")
 				{
-					this.objects[i].scale.z = this.oldScale[i].z * (1 + this.point.z / this.oldScale[i].z);
+					this.objects[i].scale.z = this.oldScale[i].z * (1 + this.point.z);
 				}
 			}
 
