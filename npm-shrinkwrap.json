@@ -267,7 +267,7 @@
 		},
 		"content-disposition": {
 			"version": "0.5.2",
-			"resolved": "https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.2.tgz",
+			"resolved": "http://registry.npmjs.org/content-disposition/-/content-disposition-0.5.2.tgz",
 			"integrity": "sha1-DPaLud318r55YcOoUXjLhdunjLQ="
 		},
 		"content-type": {
@@ -5545,6 +5545,11 @@
 			"resolved": "https://registry.npmjs.org/negotiator/-/negotiator-0.6.1.tgz",
 			"integrity": "sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk="
 		},
+		"node-uuid": {
+			"version": "1.4.8",
+			"resolved": "https://registry.npmjs.org/node-uuid/-/node-uuid-1.4.8.tgz",
+			"integrity": "sha1-sEDrCSOWivq/jTL7HxfxFn/auQc="
+		},
 		"normalize-package-data": {
 			"version": "2.4.0",
 			"resolved": "https://registry.npmjs.org/normalize-package-data/-/normalize-package-data-2.4.0.tgz",
@@ -6282,11 +6287,6 @@
 					"version": "1.0.2",
 					"resolved": "http://registry.npmjs.org/mime-types/-/mime-types-1.0.2.tgz",
 					"integrity": "sha1-mVrhOSq4r/y/yyZB3QVOlDwNXc4="
-				},
-				"node-uuid": {
-					"version": "1.4.8",
-					"resolved": "https://registry.npmjs.org/node-uuid/-/node-uuid-1.4.8.tgz",
-					"integrity": "sha1-sEDrCSOWivq/jTL7HxfxFn/auQc="
 				},
 				"oauth-sign": {
 					"version": "0.3.0",
