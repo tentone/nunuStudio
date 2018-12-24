@@ -3640,7 +3640,14 @@
             "namespace": "",
             "file": "..\\source\\core\\utils\\timer\\AnimationTimer.js",
             "line": 3,
-            "description": "Animation timer is a special type of timer that uses the requestAnimationFrame method.\n\nThis timer calls the method with the same rate as the screen refesh rate.\n\nLoop time can be changed dinamically."
+            "description": "Animation timer is a special type of timer that uses the requestAnimationFrame method.\n\nThis timer calls the method with the same rate as the screen refesh rate.\n\nLoop time can be changed dinamically.",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "Timer callback function.",
+                    "type": "Function"
+                }
+            ]
         },
         "Timer": {
             "name": "Timer",
@@ -14933,7 +14940,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\timer\\AnimationTimer.js",
-            "line": 20,
+            "line": 21,
             "description": "Start timer, is the timer is already running dosen't do anything.",
             "itemtype": "method",
             "name": "start",
@@ -14942,7 +14949,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\timer\\AnimationTimer.js",
-            "line": 48,
+            "line": 49,
             "description": "Stop animation timer.",
             "itemtype": "method",
             "name": "stop",
@@ -15241,6 +15248,22 @@
                 {
                     "name": "object",
                     "description": "Object to recalculate origin of.",
+                    "type": "Object3D"
+                }
+            ],
+            "class": "ObjectUtils",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\source\\core\\utils\\ObjectUtils.js",
+            "line": 123,
+            "description": "Covert all the geometries found in the object to BufferGeometry format.",
+            "itemtype": "method",
+            "name": "convertToBufferGeometry",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to search for geometries",
                     "type": "Object3D"
                 }
             ],

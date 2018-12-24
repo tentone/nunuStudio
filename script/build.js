@@ -85,7 +85,6 @@ console.log(" Minifyng with closure");
 closure("WHITESPACE_ONLY", "SINGLE_QUOTES", OUTPUT_JS_MODE, OUTPUT_JS_MODE, OUTPUT_PATH + "nunu.js", OUTPUT_PATH + "nunu.min.js");
 
 console.log(" Removing temporary files");
-deleteFile(OUTPUT_PATH + "nunu.js");
 deleteFile(OUTPUT_PATH + "nunu.js.temp");
 
 console.log("----------------------------------------------------------------------");
