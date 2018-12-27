@@ -2366,9 +2366,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           b.modelViewMatrix.multiplyMatrices(d.matrixWorldInverse, b.matrixWorld);
           var f = a.update(b), k = b.material;
           if (Array.isArray(k)) {
-            for (var h = f.groups, p = 0, m = h.length; p < m; p++) {
-              var O = h[p], t = k[O.materialIndex];
-              t && t.visible && (t = u(b, t, E, n, d.near, d.far), g.renderBufferDirect(d, null, f, t, b, O));
+            for (var h = f.groups, p = 0, O = h.length; p < O; p++) {
+              var m = h[p], t = k[m.materialIndex];
+              t && t.visible && (t = u(b, t, E, n, d.near, d.far), g.renderBufferDirect(d, null, f, t, b, m));
             }
           } else {
             k.visible && (t = u(b, k, E, n, d.near, d.far), g.renderBufferDirect(d, null, f, t, b, null));
@@ -10976,7 +10976,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     g.uniforms = {};
     for (var b in this.uniforms) {
       var e = this.uniforms[b].value;
-      g.uniforms[b] = e.isTexture ? {type:"t", value:e.toJSON(a).uuid} : e.isColor ? {type:"c", value:e.getHex()} : e.isVector2 ? {type:"v2", value:e.toArray()} : e.isVector3 ? {type:"v3", value:e.toArray()} : e.isVector4 ? {type:"v4", value:e.toArray()} : e.isMatrix4 ? {type:"m4", value:e.toArray()} : {value:e};
+      g.uniforms[b] = e && e.isTexture ? {type:"t", value:e.toJSON(a).uuid} : e && e.isColor ? {type:"c", value:e.getHex()} : e && e.isVector2 ? {type:"v2", value:e.toArray()} : e && e.isVector3 ? {type:"v3", value:e.toArray()} : e && e.isVector4 ? {type:"v4", value:e.toArray()} : e && e.isMatrix4 ? {type:"m4", value:e.toArray()} : {value:e};
     }
     0 < Object.keys(this.defines).length && (g.defines = this.defines);
     g.vertexShader = this.vertexShader;
@@ -14511,16 +14511,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, splineThru:function(a) {
     this.currentPath.splineThru(a);
   }, toShapes:function(a, b) {
-    function g(a) {
-      for (var b = [], g = 0, e = a.length; g < e; g++) {
-        var c = a[g], d = new Lb;
+    function e(a) {
+      for (var b = [], e = 0, g = a.length; e < g; e++) {
+        var c = a[e], d = new Lb;
         d.curves = c.curves;
         b.push(d);
       }
       return b;
     }
-    function e(a, b) {
-      for (var g = b.length, e = !1, c = g - 1, d = 0; d < g; c = d++) {
+    function g(a, b) {
+      for (var e = b.length, g = !1, c = e - 1, d = 0; d < e; c = d++) {
         var l = b[c], f = b[d], k = f.x - l.x, p = f.y - l.y;
         if (Math.abs(p) > Number.EPSILON) {
           if (0 > p && (l = b[d], k = -k, f = b[c], p = -p), !(a.y < l.y || a.y > f.y)) {
@@ -14533,7 +14533,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
               if (0 === c) {
                 return !0;
               }
-              0 > c || (e = !e);
+              0 > c || (g = !g);
             }
           }
         } else {
@@ -14542,14 +14542,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           }
         }
       }
-      return e;
+      return g;
     }
     var c = wb.isClockWise, d = this.subPaths;
     if (0 === d.length) {
       return [];
     }
     if (!0 === b) {
-      return g(d);
+      return e(d);
     }
     b = [];
     if (1 === d.length) {
@@ -14570,7 +14570,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       (r = a ? !r : r) ? (!k && p[n] && n++, p[n] = {s:new Lb, p:q}, p[n].s.curves = l.curves, k && n++, h[n] = []) : h[n].push({h:l, p:q[0]});
     }
     if (!p[0]) {
-      return g(d);
+      return e(d);
     }
     if (1 < p.length) {
       m = !1;
@@ -14585,7 +14585,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           k = l[r];
           n = !0;
           for (q = 0; q < p.length; q++) {
-            e(k.p, p[q].p) && (c !== q && a.push({froms:c, tos:q, hole:r}), n ? (n = !1, f[q].push(k)) : m = !0);
+            g(k.p, p[q].p) && (c !== q && a.push({froms:c, tos:q, hole:r}), n ? (n = !1, f[q].push(k)) : m = !0);
           }
           n && f[c].push(k);
         }
@@ -15123,7 +15123,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return function(g) {
       A.prototype.updateMatrixWorld.call(this, g);
       if (!1 !== this.isPlaying) {
-        if (g = this.panner, this.matrixWorld.decompose(a, b, e), c.set(0, 0, 1).applyQuaternion(b), g.positionX) {
+        if (this.matrixWorld.decompose(a, b, e), c.set(0, 0, 1).applyQuaternion(b), g = this.panner, g.positionX) {
           var d = this.context.currentTime + this.listener.timeDelta;
           g.positionX.linearRampToValueAtTime(a.x, d);
           g.positionY.linearRampToValueAtTime(a.y, d);
@@ -19683,7 +19683,7 @@ THREE.TTFLoader.prototype = {constructor:THREE.TTFLoader, load:function(a, c, h,
         throw RangeError("Illegal offset: 0 <= " + a + " (+1) <= " + this.buffer.byteLength);
       }
     }
-    var c = a, e, d = -1;
+    var e = a, c, d = -1;
     n.decodeUTF8toUTF16(function() {
       if (0 === d) {
         return null;
@@ -19693,8 +19693,8 @@ THREE.TTFLoader.prototype = {constructor:THREE.TTFLoader, load:function(a, c, h,
       }
       d = this.view[a++];
       return 0 === d ? null : d;
-    }.bind(this), e = h(), !0);
-    return b ? (this.offset = a, e()) : {string:e(), length:a - c};
+    }.bind(this), c = h(), !0);
+    return b ? (this.offset = a, c()) : {string:c(), length:a - e};
   };
   k.writeIString = function(a, b) {
     var e = "undefined" === typeof b;
@@ -37895,7 +37895,7 @@ Nunu.webglAvailable = function() {
   return !1;
 };
 Nunu.developmentMode = function() {
-  return "201812241121" === Nunu.TIMESTAMP;
+  return "201812271025" === Nunu.TIMESTAMP;
 };
 Nunu.NWJS = 200;
 Nunu.BROWSER = 201;
