@@ -4,7 +4,7 @@ function AudioAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.setIcon(Editor.filePath + "icons/misc/audio.png");
+	this.setIcon(Editor.FILE_PATH + "icons/misc/audio.png");
 	
 	var self = this;
 
@@ -15,7 +15,7 @@ function AudioAsset(parent)
 	this.image.style.left = "17%";
 	this.image.style.width = "66%";
 	this.image.style.height = "66%";
-	this.image.src = Editor.filePath + "icons/misc/audio.png";
+	this.image.src = Editor.FILE_PATH + "icons/misc/audio.png";
 	this.element.appendChild(this.image);
 
 	//Context menu event

@@ -2,7 +2,7 @@
 
 function ParticleEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Particle", Editor.filePath + "icons/misc/particles.png");
+	TabElement.call(this, parent, closeable, container, index, "Particle", Editor.FILE_PATH + "icons/misc/particles.png");
 
 	var self = this;
 

@@ -1,10 +1,15 @@
 "use strict";
 
+/**
+ * nunuStudio main editor entry point. 
+ *
+ * @class Editor 
+ */
 function Editor(){}
 
-Editor.filePath = "source/files/";
-Editor.runtimePath = "runtime/";
-Editor.NWJSPath = "../nwjs/";
+Editor.FILE_PATH = "./source/files/";
+Editor.RUNTIME_PATH = "./source/runtime/";
+Editor.NWJS_PATH = "../nwjs/";
 
 //Runtime
 include("lib/three/three.min.js");
@@ -534,9 +539,9 @@ Editor.initialize = function()
 
 	//Register tern plugins
 	Editor.ternDefinitions = [];
-	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.filePath + "tern/threejs.json")));
-	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.filePath + "tern/browser.json")));
-	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.filePath + "tern/ecmascript.json")));
+	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.FILE_PATH + "tern/threejs.json")));
+	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.FILE_PATH + "tern/browser.json")));
+	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.FILE_PATH + "tern/ecmascript.json")));
 
 	//Disable body overflow
 	document.body.style.overflow = "hidden";
@@ -1228,14 +1233,14 @@ Editor.undo = function()
  */
 Editor.createDefaultResouces = function()
 {
-	Editor.defaultImage = new Image(Editor.filePath + "default.png");
-	Editor.defaultFont = new Font(Editor.filePath + "default.json");
-	Editor.defaultAudio = new Audio(Editor.filePath + "default.mp3");
+	Editor.defaultImage = new Image(Editor.FILE_PATH + "default.png");
+	Editor.defaultFont = new Font(Editor.FILE_PATH + "default.json");
+	Editor.defaultAudio = new Audio(Editor.FILE_PATH + "default.mp3");
 
 	Editor.defaultTexture = new Texture(Editor.defaultImage);
 	Editor.defaultTexture.name = "default";
 
-	Editor.defaultTextureParticle = new Texture(new Image(Editor.filePath + "particle.png"));
+	Editor.defaultTextureParticle = new Texture(new Image(Editor.FILE_PATH + "particle.png"));
 	Editor.defaultTextureParticle.name = "particle";
 
 	Editor.defaultMaterial = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
@@ -1247,7 +1252,7 @@ Editor.createDefaultResouces = function()
 	Editor.defaultTextureLensFlare = [];
 	for(var i = 0; i < 4; i++)
 	{
-		var texture = new Texture(new Image(Editor.filePath + "lensflare/lensflare" + i + ".png"));
+		var texture = new Texture(new Image(Editor.FILE_PATH + "lensflare/lensflare" + i + ".png"));
 		texture.name = "lensflare" + i;
 		Editor.defaultTextureLensFlare.push(texture);
 	}
@@ -2018,7 +2023,7 @@ Editor.loadModel = function(file, parent)
 			{
 				try
 				{
-					THREE.DRACOLoader.setDecoderPath(Editor.filePath + "wasm/draco/");
+					THREE.DRACOLoader.setDecoderPath(Editor.FILE_PATH + "wasm/draco/");
 					THREE.DRACOLoader.setDecoderConfig({type: "wasm"});
 					var loader = new THREE.DRACOLoader();
 					loader.decodeDracoFile(reader.result, function(geometry)
@@ -2495,10 +2500,10 @@ Editor.setOpenFile = function(file)
 Editor.exportWebProject = function(dir)
 {
 	FileSystem.makeDirectory(dir);
-	FileSystem.copyFile(Editor.runtimePath + "vr.png", dir + "/vr.png");
-	FileSystem.copyFile(Editor.runtimePath + "fullscreen.png", dir + "/fullscreen.png");
-	FileSystem.copyFile(Editor.runtimePath + "logo.png", dir + "/logo.png");
-	FileSystem.copyFile(Editor.runtimePath + "index.html", dir + "/index.html");
+	FileSystem.copyFile(Editor.RUNTIME_PATH + "vr.png", dir + "/vr.png");
+	FileSystem.copyFile(Editor.RUNTIME_PATH + "fullscreen.png", dir + "/fullscreen.png");
+	FileSystem.copyFile(Editor.RUNTIME_PATH + "logo.png", dir + "/logo.png");
+	FileSystem.copyFile(Editor.RUNTIME_PATH + "index.html", dir + "/index.html");
 	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : "../build/nunu.min.js", dir + "/nunu.min.js");
 	Editor.saveProgram(dir + "/app.nsp", true, true, true);
 };
@@ -2507,16 +2512,16 @@ Editor.exportWebProject = function(dir)
 Editor.exportWebProjectZip = function(fname)
 {
 	var zip = new JSZip();
-	zip.file("index.html", FileSystem.readFile(Editor.runtimePath + "index.html"));
+	zip.file("index.html", FileSystem.readFile(Editor.RUNTIME_PATH + "index.html"));
 	zip.file("nunu.min.js", FileSystem.readFile("nunu.min.js"));
 	
 	var pson = new dcodeIO.PSON.StaticPair();
 	var data = pson.toArrayBuffer(Editor.program.toJSON());
 
 	zip.file("app.nsp", Base64Utils.fromArraybuffer(data), {base64: true});
-	zip.file("logo.png", FileSystem.readFileBase64(Editor.runtimePath + "logo.png"), {base64: true});
-	zip.file("fullscreen.png", FileSystem.readFileBase64(Editor.runtimePath + "fullscreen.png"), {base64: true});
-	zip.file("vr.png", FileSystem.readFileBase64(Editor.runtimePath + "vr.png"), {base64: true});
+	zip.file("logo.png", FileSystem.readFileBase64(Editor.RUNTIME_PATH + "logo.png"), {base64: true});
+	zip.file("fullscreen.png", FileSystem.readFileBase64(Editor.RUNTIME_PATH + "fullscreen.png"), {base64: true});
+	zip.file("vr.png", FileSystem.readFileBase64(Editor.RUNTIME_PATH + "vr.png"), {base64: true});
 
 	zip.generateAsync({type:"blob"}).then(function(content)
 	{
@@ -2551,21 +2556,21 @@ Editor.exportNWJSProject = function(dir)
 //Export windows project
 Editor.exportWindowsProject = function(dir)
 {
-	FileSystem.copyFolder(Editor.NWJSPath + "win", dir);
+	FileSystem.copyFolder(Editor.NWJS_PATH + "win", dir);
 	Editor.exportNWJSProject(dir);
 };
 
 //Export linux project
 Editor.exportLinuxProject = function(dir)
 {
-	FileSystem.copyFolder(Editor.NWJSPath + "linux", dir);
+	FileSystem.copyFolder(Editor.NWJS_PATH + "linux", dir);
 	Editor.exportNWJSProject(dir);
 };
 
 //Export mac os project
 Editor.exportMacOSProject = function(dir)
 {
-	FileSystem.copyFolder(Editor.NWJSPath + "mac", dir);
+	FileSystem.copyFolder(Editor.NWJS_PATH + "mac", dir);
 	Editor.exportNWJSProject(dir);
 };
 

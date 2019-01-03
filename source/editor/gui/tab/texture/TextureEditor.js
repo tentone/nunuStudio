@@ -2,7 +2,7 @@
 
 function TextureEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Texture", Editor.filePath + "icons/misc/image.png");
+	TabElement.call(this, parent, closeable, container, index, "Texture", Editor.FILE_PATH + "icons/misc/image.png");
 
 	var self = this;
 
@@ -24,7 +24,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.scene = new THREE.Scene();
 
 	//Background
-	var alpha = new Texture(Editor.filePath + "alpha.png");
+	var alpha = new Texture(Editor.FILE_PATH + "alpha.png");
 	alpha.wrapS = THREE.RepeatWrapping;
 	alpha.wrapT = THREE.RepeatWrapping;
 	alpha.magFilter = THREE.Nearest;

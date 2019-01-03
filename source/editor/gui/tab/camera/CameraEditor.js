@@ -2,7 +2,7 @@
 
 function CameraEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "camera", Editor.filePath + "icons/camera/camera.png");
+	TabElement.call(this, parent, closeable, container, index, "camera", Editor.FILE_PATH + "icons/camera/camera.png");
 
 	var self = this;
 

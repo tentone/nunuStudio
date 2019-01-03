@@ -14,7 +14,7 @@ function VideoAsset(parent)
 	this.preview.style.height = "66%";
 	this.element.appendChild(this.preview);
 
-	this.setIcon(Editor.filePath + "icons/misc/video.png");
+	this.setIcon(Editor.FILE_PATH + "icons/misc/video.png");
 
 	var self = this;
 

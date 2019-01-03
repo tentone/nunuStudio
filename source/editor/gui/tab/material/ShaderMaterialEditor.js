@@ -2,7 +2,7 @@
 
 function ShaderMaterialEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.material, Editor.filePath + "icons/misc/material.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.material, Editor.FILE_PATH + "icons/misc/material.png");
 
 	var self = this;
 
@@ -135,7 +135,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//General
 	this.general = this.tab.addTab(TabElement, false);
-	this.general.setIcon(Editor.filePath + "icons/misc/material.png");
+	this.general.setIcon(Editor.FILE_PATH + "icons/misc/material.png");
 	this.general.setName(Locale.material);
 
 	this.form = new TableForm(this.general);

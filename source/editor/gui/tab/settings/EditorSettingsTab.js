@@ -2,7 +2,7 @@
 
 function EditorSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Editor", Editor.filePath + "icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, "Editor", Editor.FILE_PATH + "icons/misc/scene.png");
 
 	this.element.style.overflow = "auto";
 

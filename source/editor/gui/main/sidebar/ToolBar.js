@@ -15,7 +15,7 @@ function ToolBar(parent)
 	//Select
 	this.toolSelect = new ButtonImageToggle(parent);
 	this.toolSelect.setSelected(true);
-	this.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
+	this.toolSelect.setImage(Editor.FILE_PATH + "icons/tools/select.png");
 	this.toolSelect.size.set(size, size);
 	this.toolSelect.position.set(0, 40);
 	this.toolSelect.setAltText("Select (CTRL+1)");
@@ -27,7 +27,7 @@ function ToolBar(parent)
 
 	//Move
 	this.toolMove = new ButtonImageToggle(parent);
-	this.toolMove.setImage(Editor.filePath + "icons/tools/move.png");
+	this.toolMove.setImage(Editor.FILE_PATH + "icons/tools/move.png");
 	this.toolMove.size.set(size, size);
 	this.toolMove.position.set(0, 80);
 	this.toolMove.setAltText("Move (CTRL+2)");
@@ -39,7 +39,7 @@ function ToolBar(parent)
 
 	//Resize
 	this.toolScale = new ButtonImageToggle(parent);
-	this.toolScale.setImage(Editor.filePath + "icons/tools/resize.png");
+	this.toolScale.setImage(Editor.FILE_PATH + "icons/tools/resize.png");
 	this.toolScale.size.set(size, size);
 	this.toolScale.position.set(0, 120);
 	this.toolScale.setAltText("Scale (CTRL+3)");
@@ -51,7 +51,7 @@ function ToolBar(parent)
 
 	//Rotate
 	this.toolRotate = new ButtonImageToggle(parent);
-	this.toolRotate.setImage(Editor.filePath + "icons/tools/rotate.png");
+	this.toolRotate.setImage(Editor.FILE_PATH + "icons/tools/rotate.png");
 	this.toolRotate.size.set(size, size);
 	this.toolRotate.position.set(0, 160);
 	this.toolRotate.setAltText("Rotate (CTRL+4)");

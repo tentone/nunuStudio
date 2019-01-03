@@ -2,7 +2,7 @@
 
 function SceneEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Scene", Editor.filePath + "icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, "Scene", Editor.FILE_PATH + "icons/misc/scene.png");
 
 	var self = this;
 
@@ -83,7 +83,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.fullscreenButton = new ButtonImage(this);
 	this.fullscreenButton.position.set(5, 5);
 	this.fullscreenButton.size.set(30, 30);
-	this.fullscreenButton.setImage(Editor.filePath + "icons/misc/fullscreen.png");
+	this.fullscreenButton.setImage(Editor.FILE_PATH + "icons/misc/fullscreen.png");
 	this.fullscreenButton.setAltText("Toggle fullscreen");
 	this.fullscreenButton.setImageScale(0.8, 0.8);
 	this.fullscreenButton.updateSize();
@@ -112,7 +112,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.vrButton = new ButtonImage(this);
 	this.vrButton.size.set(30, 30);
 	this.vrButton.position.set(40, 5);
-	this.vrButton.setImage(Editor.filePath + "icons/misc/vr.png");
+	this.vrButton.setImage(Editor.FILE_PATH + "icons/misc/vr.png");
 	this.vrButton.setAltText("Toggle VR mode");
 	this.vrButton.setImageScale(0.8, 0.8);
 	this.vrButton.updateSize();
@@ -187,7 +187,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton = new ButtonImage(this);
 	this.cameraButton.position.set(5, 5);
 	this.cameraButton.size.set(30, 30);
-	this.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");
+	this.cameraButton.setImage(Editor.FILE_PATH + "icons/misc/3d.png");
 	this.cameraButton.setAltText("Change camera mode");
 	this.cameraButton.setImageScale(0.8, 0.8);
 	this.cameraButton.updateSize();
@@ -209,11 +209,11 @@ function SceneEditor(parent, closeable, container, index)
 
 		if(self.cameraMode === SceneEditor.ORTHOGRAPHIC)
 		{
-			self.cameraButton.setImage(Editor.filePath + "icons/misc/2d.png");
+			self.cameraButton.setImage(Editor.FILE_PATH + "icons/misc/2d.png");
 		}
 		else if(self.cameraMode === SceneEditor.PERSPECTIVE)
 		{
-			self.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");
+			self.cameraButton.setImage(Editor.FILE_PATH + "icons/misc/3d.png");
 		}
 	});
 
@@ -1159,7 +1159,7 @@ SceneEditor.prototype.updateSelection = function()
 		if(object instanceof THREE.Camera)
 		{
 			this.objectHelper.add(new THREE.CameraHelper(object));
-			this.objectHelper.add(new ObjectIconHelper(object, Editor.filePath + "icons/camera/camera.png"));
+			this.objectHelper.add(new ObjectIconHelper(object, Editor.FILE_PATH + "icons/camera/camera.png"));
 		}
 		//Light
 		else if(object instanceof THREE.Light)

@@ -36,7 +36,7 @@ function CheckBox(parent)
 	this.check.style.left = "20%";
 	this.check.style.width = "60%";
 	this.check.style.height = "60%";
-	this.check.src = Editor.filePath + "icons/misc/check.png";
+	this.check.src = Editor.FILE_PATH + "icons/misc/check.png";
 	this.element.appendChild(this.check);
 
 	/**

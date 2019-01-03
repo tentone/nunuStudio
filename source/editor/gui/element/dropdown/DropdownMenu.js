@@ -51,7 +51,7 @@ function DropdownMenu(parent)
 	this.arrow.style.top = "3px";
 	this.arrow.style.width = "12px";
 	this.arrow.style.height = "12px";
-	this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
+	this.arrow.src = Editor.FILE_PATH + "icons/misc/arrow_right.png";
 	this.element.appendChild(this.arrow);
 
 	/**

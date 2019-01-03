@@ -24,7 +24,7 @@ function MainMenu(parent)
 	logo.style.height = "18px";
 	logo.style.top = "3px";
 	logo.style.right = "3px";
-	logo.src = Editor.filePath + "logo.png";
+	logo.src = Editor.FILE_PATH + "logo.png";
 	this.element.appendChild(logo);
 
 	//File
@@ -37,7 +37,7 @@ function MainMenu(parent)
 	fileMenu.addOption(Locale.new, function()
 	{
 		Editor.gui.newProgram();
-	}, Editor.filePath + "icons/misc/new.png");
+	}, Editor.FILE_PATH + "icons/misc/new.png");
 
 	//Save project
 	fileMenu.addOption(Locale.save, function()
@@ -50,13 +50,13 @@ function MainMenu(parent)
 		{
 			Editor.gui.saveProgram();
 		}
-	}, Editor.filePath + "icons/misc/save.png");
+	}, Editor.FILE_PATH + "icons/misc/save.png");
 
 	//Save project
 	fileMenu.addOption(Locale.saveAs, function()
 	{
 		Editor.gui.saveProgram();
-	}, Editor.filePath + "icons/misc/save.png").setAltText("CTRL+S");
+	}, Editor.FILE_PATH + "icons/misc/save.png").setAltText("CTRL+S");
 
 	//Save readable legacy format
 	if(Nunu.developmentMode() && Nunu.runningOnDesktop())
@@ -67,14 +67,14 @@ function MainMenu(parent)
 			{
 				Editor.saveProgram(files[0].path, false, true);
 			}, ".isp", true);
-		}, Editor.filePath + "icons/misc/save.png");
+		}, Editor.FILE_PATH + "icons/misc/save.png");
 	}
 
 	//Load Project
 	fileMenu.addOption(Locale.load, function()
 	{
 		Editor.gui.loadProgram();
-	}, Editor.filePath + "icons/misc/load.png").setAltText("CTRL+L");
+	}, Editor.FILE_PATH + "icons/misc/load.png").setAltText("CTRL+L");
 
 	//Settings
 	fileMenu.addOption(Locale.settings, function()
@@ -85,10 +85,10 @@ function MainMenu(parent)
 			tab = Editor.gui.tab.addTab(SettingsTab, true);
 		}
 		tab.select();
-	}, Editor.filePath + "icons/misc/settings.png");
+	}, Editor.FILE_PATH + "icons/misc/settings.png");
 
 	//Publish
-	var publish = fileMenu.addMenu(Locale.publish, Editor.filePath + "icons/misc/publish.png");
+	var publish = fileMenu.addMenu(Locale.publish, Editor.FILE_PATH + "icons/misc/publish.png");
 
 	if(Nunu.runningOnDesktop())
 	{
@@ -107,12 +107,12 @@ function MainMenu(parent)
 					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 				}
 			}, "", Editor.program.name);
-		}, Editor.filePath + "icons/platform/web.png");
+		}, Editor.FILE_PATH + "icons/platform/web.png");
 
 		//Android
 		if(Nunu.developmentMode())
 		{
-			var android = publish.addMenu("Android", Editor.filePath + "icons/platform/android.png");
+			var android = publish.addMenu("Android", Editor.FILE_PATH + "icons/platform/android.png");
 
 			var RUN = 100;
 			var EXPORT_UNSIGNED = 101;
@@ -121,8 +121,8 @@ function MainMenu(parent)
 			function exportCordovaProject(dir)
 			{
 				FileSystem.makeDirectory(dir);
-				FileSystem.copyFile(Editor.runtimePath + "logo.png", dir + "/logo.png");
-				FileSystem.copyFile(Editor.runtimePath + "cordova.html", dir + "/index.html");
+				FileSystem.copyFile(Editor.RUNTIME_PATH + "logo.png", dir + "/logo.png");
+				FileSystem.copyFile(Editor.RUNTIME_PATH + "cordova.html", dir + "/index.html");
 				FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : "../build/nunu.min.js", dir + "/nunu.min.js");
 				Editor.saveProgram(dir + "/app.nsp", true, true, true);
 			}
@@ -264,7 +264,7 @@ function MainMenu(parent)
 		}
 
 		//Publish windows
-		if(FileSystem.fileExists(Editor.NWJSPath + "win"))
+		if(FileSystem.fileExists(Editor.NWJS_PATH + "win"))
 		{
 			publish.addOption("Windows", function()
 			{
@@ -280,11 +280,11 @@ function MainMenu(parent)
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
-			}, Editor.filePath + "icons/platform/windows.png");
+			}, Editor.FILE_PATH + "icons/platform/windows.png");
 		}
 
 		//Publish linux
-		if(FileSystem.fileExists(Editor.NWJSPath + "linux"))
+		if(FileSystem.fileExists(Editor.NWJS_PATH + "linux"))
 		{
 			publish.addOption("Linux", function()
 			{
@@ -300,11 +300,11 @@ function MainMenu(parent)
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
-			}, Editor.filePath + "icons/platform/linux.png");
+			}, Editor.FILE_PATH + "icons/platform/linux.png");
 		}
 
 		//Publish macos
-		if(FileSystem.fileExists(Editor.NWJSPath + "mac"))
+		if(FileSystem.fileExists(Editor.NWJS_PATH + "mac"))
 		{
 			publish.addOption("macOS", function()
 			{
@@ -320,7 +320,7 @@ function MainMenu(parent)
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
-			}, Editor.filePath + "icons/platform/osx.png");
+			}, Editor.FILE_PATH + "icons/platform/osx.png");
 		}
 	}
 	//Running on web browser
@@ -333,7 +333,7 @@ function MainMenu(parent)
 				Editor.exportWebProjectZip(fname);
 				Editor.alert(Locale.projectExported);
 			}, ".zip");
-		}, Editor.filePath + "icons/platform/web.png");
+		}, Editor.FILE_PATH + "icons/platform/web.png");
 	}
 
 	//Import
@@ -382,10 +382,10 @@ function MainMenu(parent)
 			}
 		}, ".isp, .nsp");
 
-	}, Editor.filePath + "icons/misc/import.png");
+	}, Editor.FILE_PATH + "icons/misc/import.png");
 
 	//Export menu
-	var exportMenu = fileMenu.addMenu(Locale.export, Editor.filePath + "icons/misc/export.png");
+	var exportMenu = fileMenu.addMenu(Locale.export, Editor.FILE_PATH + "icons/misc/export.png");
 
 	//Export OBJ
 	exportMenu.addOption("Wavefront OBJ", function()
@@ -411,7 +411,7 @@ function MainMenu(parent)
 				FileSystem.writeFile(fname, data);
 			}, ".obj");
 		}
-	}, Editor.filePath + "icons/misc/scene.png");
+	}, Editor.FILE_PATH + "icons/misc/scene.png");
 
 	//Export GLTF
 	exportMenu.addOption("GLTF", function()
@@ -443,7 +443,7 @@ function MainMenu(parent)
 				})
 			}, ".gltf");
 		}
-	}, Editor.filePath + "icons/gltf.png");
+	}, Editor.FILE_PATH + "icons/gltf.png");
 
 	//Export GLB
 	exportMenu.addOption("GLB", function()
@@ -473,7 +473,7 @@ function MainMenu(parent)
 				}, {binary: true, forceIndices: true, forcePowerOfTwoTextures: true});
 			}, ".glb");
 		}
-	}, Editor.filePath + "icons/gltf.png");
+	}, Editor.FILE_PATH + "icons/gltf.png");
 
 	//Export STL
 	exportMenu.addOption("STL", function()
@@ -499,7 +499,7 @@ function MainMenu(parent)
 				FileSystem.writeFile(fname, data);
 			}, ".stl");
 		}
-	}, Editor.filePath + "icons/misc/scene.png");
+	}, Editor.FILE_PATH + "icons/misc/scene.png");
 
 	//Export Binary STL
 	exportMenu.addOption("Binary STL", function()
@@ -525,7 +525,7 @@ function MainMenu(parent)
 				FileSystem.writeFileArrayBuffer(fname, data.buffer);
 			}, ".stl");
 		}
-	}, Editor.filePath + "icons/misc/scene.png");
+	}, Editor.FILE_PATH + "icons/misc/scene.png");
 
 	//Exit
 	if(Nunu.runningOnDesktop())
@@ -536,7 +536,7 @@ function MainMenu(parent)
 			{
 				Editor.exit();
 			}
-		}, Editor.filePath + "icons/misc/exit.png");
+		}, Editor.FILE_PATH + "icons/misc/exit.png");
 	}
 
 	fileMenu.updateInterface();
@@ -549,27 +549,27 @@ function MainMenu(parent)
 	editMenu.addOption(Locale.undo, function()
 	{
 		Editor.undo();
-	}, Editor.filePath + "icons/misc/undo.png");
+	}, Editor.FILE_PATH + "icons/misc/undo.png");
 
 	editMenu.addOption(Locale.redo, function()
 	{
 		Editor.redo();
-	}, Editor.filePath + "icons/misc/redo.png");
+	}, Editor.FILE_PATH + "icons/misc/redo.png");
 
 	editMenu.addOption(Locale.copy, function()
 	{
 		Editor.copyObject();
-	}, Editor.filePath + "icons/misc/copy.png");
+	}, Editor.FILE_PATH + "icons/misc/copy.png");
 	
 	editMenu.addOption(Locale.cut, function()
 	{
 		Editor.cutObject();
-	}, Editor.filePath + "icons/misc/cut.png");
+	}, Editor.FILE_PATH + "icons/misc/cut.png");
 
 	editMenu.addOption(Locale.paste, function()
 	{
 		Editor.pasteObject();
-	}, Editor.filePath + "icons/misc/paste.png");
+	}, Editor.FILE_PATH + "icons/misc/paste.png");
 
 	editMenu.addOption(Locale.delete, function()
 	{
@@ -581,9 +581,9 @@ function MainMenu(parent)
 				Editor.deleteObject();
 			}
 		}
-	}, Editor.filePath + "icons/misc/delete.png");
+	}, Editor.FILE_PATH + "icons/misc/delete.png");
 
-	var csg = editMenu.addMenu("CSG", Editor.filePath + "icons/models/figures.png");
+	var csg = editMenu.addMenu("CSG", Editor.FILE_PATH + "icons/models/figures.png");
 
 	//Create BSP for CSG operation
 	function createBSP(object)
@@ -648,7 +648,7 @@ function MainMenu(parent)
 
 			createCSGAction(a.intersect(b).toMesh(), Editor.selection[0], Editor.selection[1]);
 		}
-	}, Editor.filePath + "icons/misc/intersect.png");
+	}, Editor.FILE_PATH + "icons/misc/intersect.png");
 
 	csg.addOption("Subtract", function()
 	{
@@ -659,7 +659,7 @@ function MainMenu(parent)
 
 			createCSGAction(a.subtract(b).toMesh(), Editor.selection[0], Editor.selection[1]);
 		}
-	}, Editor.filePath + "icons/misc/subtract.png");
+	}, Editor.FILE_PATH + "icons/misc/subtract.png");
 
 	csg.addOption("Union", function()
 	{
@@ -670,9 +670,9 @@ function MainMenu(parent)
 
 			createCSGAction(a.union(b).toMesh(), Editor.selection[0], Editor.selection[1]);
 		}
-	}, Editor.filePath + "icons/misc/union.png");
+	}, Editor.FILE_PATH + "icons/misc/union.png");
 
-	var modifiers = editMenu.addMenu("Modifiers", Editor.filePath + "icons/models/figures.png");
+	var modifiers = editMenu.addMenu("Modifiers", Editor.FILE_PATH + "icons/models/figures.png");
 
 	modifiers.addOption("Simplify", function()
 	{
@@ -709,7 +709,7 @@ function MainMenu(parent)
 
 		Editor.alert("Reduced from " + vertices + " to " + Math.ceil(vertices * level) + " vertex.");
 
-	}, Editor.filePath + "icons/models/figures.png");
+	}, Editor.FILE_PATH + "icons/models/figures.png");
 
 	modifiers.addOption("Subdivide", function()
 	{
@@ -723,7 +723,7 @@ function MainMenu(parent)
 		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);
-	}, Editor.filePath + "icons/models/figures.png");
+	}, Editor.FILE_PATH + "icons/models/figures.png");
 
 	//Compute mesh normals
 	editMenu.addOption(Locale.computeNormals, function()
@@ -736,7 +736,7 @@ function MainMenu(parent)
 
 		Editor.selection[0].geometry.computeVertexNormals();
 
-	}, Editor.filePath + "icons/misc/probe.png");
+	}, Editor.FILE_PATH + "icons/misc/probe.png");
 
 	//Apply tranformation
 	editMenu.addOption(Locale.applyTransformation, function()
@@ -753,7 +753,7 @@ function MainMenu(parent)
 		obj.scale.set(1, 1, 1);
 		obj.rotation.set(0, 0, 0);
 
-	}, Editor.filePath + "icons/tools/move.png");
+	}, Editor.FILE_PATH + "icons/tools/move.png");
 
 	//Merge geometries
 	editMenu.addOption("Merge geometries", function()
@@ -790,7 +790,7 @@ function MainMenu(parent)
 		mesh.name = "merged";
 		Editor.addObject(mesh);
 
-	}, Editor.filePath + "icons/misc/union.png");
+	}, Editor.FILE_PATH + "icons/misc/union.png");
 
 	editMenu.updateInterface();
 
@@ -803,7 +803,7 @@ function MainMenu(parent)
 	projectMenu.addOption(Locale.createScene, function()
 	{
 		Editor.addDefaultScene();
-	}, Editor.filePath + "icons/misc/add.png");
+	}, Editor.FILE_PATH + "icons/misc/add.png");
 
 	projectMenu.addOption("Execute script", function()
 	{
@@ -823,7 +823,7 @@ function MainMenu(parent)
 				Editor.alert("Error: " + error);
 			}
 		}, ".js");
-	}, Editor.filePath + "icons/script/script.png");
+	}, Editor.FILE_PATH + "icons/script/script.png");
 
 	projectMenu.updateInterface();
 

@@ -2,7 +2,7 @@
 
 function AssetExplorer(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Assets", Editor.filePath + "icons/misc/new.png");
+	TabElement.call(this, parent, closeable, container, index, "Assets", Editor.FILE_PATH + "icons/misc/new.png");
 
 	var self = this;
 

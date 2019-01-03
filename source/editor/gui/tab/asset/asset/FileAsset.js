@@ -4,7 +4,7 @@ function FileAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.setIcon(Editor.filePath + "icons/misc/file.png");
+	this.setIcon(Editor.FILE_PATH + "icons/misc/file.png");
 	
 	var self = this;
 
@@ -102,10 +102,10 @@ FileAsset.prototype.updateMetadata = function()
 
 	if(this.asset.encoding === "js" || this.asset.encoding === "glsl")
 	{
-		this.image.src = Editor.filePath + "icons/script/script.png";
+		this.image.src = Editor.FILE_PATH + "icons/script/script.png";
 	}
 	else
 	{
-		this.image.src = Editor.filePath + "icons/misc/file.png";
+		this.image.src = Editor.FILE_PATH + "icons/misc/file.png";
 	}
 };

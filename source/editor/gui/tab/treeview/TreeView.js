@@ -14,7 +14,7 @@
  */
 function TreeView(parent, closeable, container, index)
 {	
-	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.filePath + "icons/misc/menu.png");
+	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.FILE_PATH + "icons/misc/menu.png");
 
 	var self = this;
 

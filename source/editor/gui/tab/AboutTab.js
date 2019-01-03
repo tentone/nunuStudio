@@ -2,7 +2,7 @@
 
 function AboutTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "About", Editor.filePath + "icons/misc/about.png");
+	TabElement.call(this, parent, closeable, container, index, "About", Editor.FILE_PATH + "icons/misc/about.png");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
@@ -15,7 +15,7 @@ function AboutTab(parent, closeable, container, index)
 	this.logo.style.width = "50%";
 	this.logo.style.height = "20%";
 	this.logo.style.objectFit = "contain";
-	this.logo.src = Editor.filePath + "logo.png";
+	this.logo.src = Editor.FILE_PATH + "logo.png";
 	this.element.appendChild(this.logo);
 
 	//Version

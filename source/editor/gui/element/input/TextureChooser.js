@@ -11,7 +11,7 @@ function TextureChooser(parent)
 	this.preview.style.position = "absolute";
 	this.preview.style.top = "0px";
 	this.preview.style.left = "0px";
-	this.preview.style.backgroundImage = "url(\"" + Editor.filePath + "alpha.png\")";
+	this.preview.style.backgroundImage = "url(\"" + Editor.FILE_PATH + "alpha.png\")";
 	this.preview.style.backgroundRepeat = "repeat";
 	this.preview.style.backgroundSize = "120px 120px";
 	this.element.appendChild(this.preview);

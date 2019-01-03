@@ -4,7 +4,7 @@ function FontAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.setIcon(Editor.filePath + "icons/misc/font.png");
+	this.setIcon(Editor.FILE_PATH + "icons/misc/font.png");
 	
 	var self = this;
 
