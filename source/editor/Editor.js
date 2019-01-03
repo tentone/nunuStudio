@@ -10,6 +10,7 @@ function Editor(){}
 Editor.FILE_PATH = "./source/files/";
 Editor.RUNTIME_PATH = "./source/runtime/";
 Editor.NWJS_PATH = "../nwjs/";
+Editor.BUILD_PATH = "./build/nunu.min.js";
 
 //Runtime
 include("lib/three/three.min.js");
@@ -2504,7 +2505,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile(Editor.RUNTIME_PATH + "fullscreen.png", dir + "/fullscreen.png");
 	FileSystem.copyFile(Editor.RUNTIME_PATH + "logo.png", dir + "/logo.png");
 	FileSystem.copyFile(Editor.RUNTIME_PATH + "index.html", dir + "/index.html");
-	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : "../build/nunu.min.js", dir + "/nunu.min.js");
+	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : Editor.BUILD_PATH, dir + "/nunu.min.js");
 	Editor.saveProgram(dir + "/app.nsp", true, true, true);
 };
 
