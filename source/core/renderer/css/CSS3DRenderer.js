@@ -1,12 +1,16 @@
 "use strict";
 
 /**
- * Based on http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
+ * 3D renderer using DOM elements.
+ *
+ * Applies the threejs transformation hierarchy to the DOM element using CSS3D.
+ *
+ * Only renders CSS specific objects, the output of the renderer is not combined with the WebGL output. Everything is renderer of top.
+ *
+ * Based on the three.js adaptation (mrdoob, yomotsu) of http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
  * 
  * @class CSS3DRenderer
- * @param {DOM} domElement
- * @author mrdoob / http://mrdoob.com/
- * @author yomotsu / https://yomotsu.net/
+ * @param {DOM} domElement DOM division to place rendered objects.
  */
 function CSS3DRenderer(domElement)
 {
@@ -155,13 +159,13 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 	function renderObject(object, camera, cameraCSSMatrix)
 	{
 		//Render only CSS objects
-		if(object instanceof CSS3DObject)
+		if(object.isCSS3DObject === true)
 		{
 			//Store the css transformation style value
 			var style;
 
 			//Remove rotation from the transformation matrix for Sprites
-			if(object instanceof CSS3DSprite)
+			if(object.isCSS3DSprite === true)
 			{
 				matrix.copy(camera.matrixWorldInverse);
 				matrix.transpose();

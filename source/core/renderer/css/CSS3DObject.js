@@ -37,3 +37,4 @@ function CSS3DObject(element)
 
 CSS3DObject.prototype = Object.create(THREE.Object3D.prototype);
 CSS3DObject.prototype.constructor = CSS3DObject;
+CSS3DObject.prototype.isCSS3DObject = true;

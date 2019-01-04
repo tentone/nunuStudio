@@ -16,3 +16,4 @@ function CSS3DSprite(element)
 
 CSS3DSprite.prototype = Object.create(CSS3DObject.prototype);
 CSS3DSprite.prototype.constructor = CSS3DSprite;
+CSS3DSprite.prototype.isCSS3DSprite = true;
