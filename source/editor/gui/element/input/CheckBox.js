@@ -54,6 +54,14 @@ function CheckBox(parent)
 	 * @type {Function}
 	 */
 	this.onChange = null;
+
+	/** 
+	 * If the checkbox is disabled the value cannot be edited.
+	 *
+	 * @attribute disabled
+	 * @type {Boolean}
+	 */
+	this.disabled = false;
 };
 
 CheckBox.prototype = Object.create(Element.prototype);
@@ -61,11 +69,24 @@ CheckBox.prototype = Object.create(Element.prototype);
 /**
  * Set if element is disabled.
  *
+ * When disabled the checkbox value cannot be edited.
+ *
  * @method setDisabled
  */
 CheckBox.prototype.setDisabled = function(value)
 {
-	this.element.disabled = value;
+	this.disabled = value;
+	
+	if(this.disabled === true)
+	{
+		this.element.style.cursor = "initial";
+		this.element.style.pointerEvents = "none";
+	}
+	else
+	{
+		this.element.style.cursor = "pointer";
+		this.element.style.pointerEvents = "auto";
+	}
 };
 
 /**
