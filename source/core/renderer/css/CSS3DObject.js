@@ -20,17 +20,36 @@ function CSS3DObject(element)
 	 *
 	 * It is automatically added to the appropiate DOM container used by the renderer.
 	 *
-	 * @property element
+	 * @attribute element
 	 * @type {DOM}
 	 */
 	this.element = element;
 	this.element.style.position = "absolute";
-
+	
 	this.addEventListener("removed", function()
 	{
 		if(this.element.parentNode !== null)
 		{
 			this.element.parentNode.removeChild(this.element);
+		}
+	});
+
+	var self = this;
+	var visible = true;
+	Object.defineProperties(this,
+	{
+		visible:
+		{
+			get: function()
+			{
+				return visible;
+			},
+			set: function(value)
+			{
+				visible = value;
+				
+				self.element.style.display = value ? "block" :"none";
+			}
 		}
 	});
 };
