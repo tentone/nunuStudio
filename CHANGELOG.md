@@ -3,7 +3,7 @@
 
 ## Unpublished
 ### V0.9.6 Beta
- - TODO
+ - CSS 3D renderer support.
 
 ## Published
 ### V0.9.5 Beta
