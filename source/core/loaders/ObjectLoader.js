@@ -795,6 +795,12 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				object.speed = data.speed;
 				object.invertNavigation = data.invertNavigation;
 			}
+			if(data.center !== undefined)
+			{
+				object.center.fromArray(data.center);
+				object.vector.fromArray(data.vector);
+			}
+
 			break;
 			
 		case "Scene":

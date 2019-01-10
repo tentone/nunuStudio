@@ -66,7 +66,8 @@ LocaleManager.register(
 	clampEdge: "Clamp to Edge",
 	repeatMirror: "Repeat Mirrored",
 	premulAlpha: "Premul. Alpha",
-
+	vector: "Vector",
+	
 	//Editor
 	project: "Project",
 	run: "Run",

@@ -9,7 +9,7 @@ function ObjectPanel(parent, object)
 	//Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
-	this.name.size.set(190, 18);
+	this.name.size.set(0, 18);
 	this.name.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "name", self.name.getText()));
@@ -37,7 +37,7 @@ function ObjectPanel(parent, object)
 	//Position
 	this.form.addText(Locale.position);
 	this.position = new VectorBox(this.form);
-	this.position.size.set(190, 18);
+	this.position.size.set(0, 18);
 	this.position.setStep(0.01);
 	this.position.setOnChange(function()
 	{
@@ -65,7 +65,7 @@ function ObjectPanel(parent, object)
 	
 	//Scale
 	this.scale = new VectorBox(this.form);
-	this.scale.size.set(190, 18);
+	this.scale.size.set(0, 18);
 	this.scale.setStep(0.01);
 	this.scale.setOnChange(function()
 	{
@@ -109,7 +109,7 @@ function ObjectPanel(parent, object)
 	//Rotation
 	this.form.addText(Locale.rotation);
 	this.rotation = new VectorBox(this.form);
-	this.rotation.size.set(190, 18);
+	this.rotation.size.set(0, 18);
 	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()
 	{

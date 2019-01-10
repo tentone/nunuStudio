@@ -175,6 +175,45 @@ function OrbitControlsPanel(parent, object)
 	});
 	this.form.add(this.invertNavigation);
 	this.form.nextRow();
+
+	//Position
+	this.form.addText(Locale.center);
+	this.center = new VectorBox(this.form);
+	this.center.size.set(0, 18);
+	this.center.setStep(0.01);
+	this.center.setOnChange(function()
+	{
+		var center = self.center.getValue();
+		var object = self.object.center;
+
+		Editor.addAction(new ActionBundle(
+		[
+			new ChangeAction(object, "x", center.x),
+			new ChangeAction(object, "y", center.y),
+			new ChangeAction(object, "z", center.z)
+		]));
+	});
+	this.form.add(this.center);
+	this.form.nextRow();
+
+	//Position
+	this.form.addText(Locale.vector);
+	this.vector = new VectorBox(this.form);
+	this.vector.size.set(0, 18);
+	this.vector.setStep(0.01);
+	this.vector.setOnChange(function()
+	{
+		var vector = self.vector.getValue();
+		var object = self.object.vector;
+
+		Editor.addAction(new ActionBundle(
+		[
+			new ChangeAction(object, "x", vector.x),
+			new ChangeAction(object, "y", vector.y)
+		]));
+	});
+	this.form.add(this.vector);
+	this.form.nextRow();
 }
 
 OrbitControlsPanel.prototype = Object.create(ObjectPanel.prototype);
@@ -197,4 +236,6 @@ OrbitControlsPanel.prototype.updatePanel = function()
 	this.friction.setValue(this.object.friction);
 	this.speed.setValue(this.object.speed);
 	this.invertNavigation.setValue(this.object.invertNavigation);
+	this.center.setValue(this.object.center);
+	this.vector.setValue(this.object.vector);
 };

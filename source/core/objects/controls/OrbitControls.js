@@ -118,7 +118,7 @@ function OrbitControls()
 	 * @property vector
 	 * @type {Vector2}
 	 */	
-	this.vector = new THREE.Vector2(0, 0);
+	this.vector = new THREE.Vector2(Math.PI / 2, 0);
 
 	/**
 	 * Enables smooth orbit movement.
@@ -351,6 +351,9 @@ OrbitControls.prototype.toJSON = function(meta)
 	data.object.friction = this.friction;
 	data.object.speed = this.speed;
 	data.object.invertNavigation = this.invertNavigation;
+
+	data.object.center = this.center.toArray();
+	data.object.vector = this.vector.toArray();
 
 	return data;
 };
