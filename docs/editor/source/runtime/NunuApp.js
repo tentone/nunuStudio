@@ -696,5 +696,5 @@ NunuApp.prototype.toggleFullscreen = function(element)
 		element = this.canvas;
 	}
 
-	Nunu.setFullscreen(element, !fullscreen);
+	Nunu.setFullscreen(!fullscreen, element);
 };

@@ -690,7 +690,7 @@ NunuApp.prototype.toggleVR = function() {
 NunuApp.prototype.toggleFullscreen = function(a) {
   var c = Nunu.isFullscreen();
   void 0 === a && (a = this.canvas);
-  Nunu.setFullscreen(a, !c);
+  Nunu.setFullscreen(!c, a);
 };
 (function(a, c) {
   "object" === typeof exports && "undefined" !== typeof module ? c(exports) : "function" === typeof define && define.amd ? define(["exports"], c) : c(a.THREE = {});
@@ -7123,12 +7123,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.x = g[a];
     this.y = g[a + 1];
     return this;
-  }, toArray:function(g, a) {
-    void 0 === g && (g = []);
-    void 0 === a && (a = 0);
-    g[a] = this.x;
-    g[a + 1] = this.y;
-    return g;
+  }, toArray:function(a, b) {
+    void 0 === a && (a = []);
+    void 0 === b && (b = 0);
+    a[b] = this.x;
+    a[b + 1] = this.y;
+    return a;
   }, fromBufferAttribute:function(a, b, d) {
     void 0 !== d && console.warn("THREE.Vector2: offset has been removed from .fromBufferAttribute().");
     this.x = a.getX(b);
@@ -12826,10 +12826,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return new Ya(a.name, a.duration, g);
   }, toJSON:function(a) {
-    var g = [], b = a.tracks;
-    a = {name:a.name, duration:a.duration, tracks:g, uuid:a.uuid};
-    for (var d = 0, c = b.length; d !== c; ++d) {
-      g.push(za.toJSON(b[d]));
+    var b = [], g = a.tracks;
+    a = {name:a.name, duration:a.duration, tracks:b, uuid:a.uuid};
+    for (var d = 0, c = g.length; d !== c; ++d) {
+      b.push(za.toJSON(g[d]));
     }
     return a;
   }, CreateFromMorphTargetSequence:function(a, b, d, c) {
@@ -37907,6 +37907,9 @@ Nunu.VERSION = "<PLACEHOLDER_VERSION>";
 Nunu.TIMESTAMP = "<PLACEHOLDER_TIMESTAMP>";
 Nunu.REPOSITORY_BRANCH = "<PLACEHOLDER_REPOSITORY_BRANCH>";
 Nunu.REPOSITORY_COMMIT = "<PLACEHOLDER_REPOSITORY_COMMIT>";
+Nunu.NWJS = 200;
+Nunu.BROWSER = 201;
+Nunu.CORDOVA = 202;
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -37945,11 +37948,8 @@ Nunu.webglAvailable = function() {
   return !1;
 };
 Nunu.developmentMode = function() {
-  return "201901100937" === Nunu.TIMESTAMP;
+  return "201901101105" === Nunu.TIMESTAMP;
 };
-Nunu.NWJS = 200;
-Nunu.BROWSER = 201;
-Nunu.CORDOVA = 202;
 Nunu.getPlatform = function() {
   return void 0 !== window.nw ? Nunu.NWJS : void 0 !== window.cordova ? Nunu.CORDOVA : Nunu.BROWSER;
 };
@@ -37957,13 +37957,13 @@ Nunu.runningOnDesktop = function() {
   return void 0 !== window.nw;
 };
 Nunu.isFullscreen = function() {
-  return document.webkitIsFullScreen || document.mozFullScreen || document.webkitIsFullScreen || document.webkitIsFullScreen || document.fullscreen || !1;
+  return !0 === document.webkitIsFullScreen || !0 === document.mozFullScreen || !0 === document.webkitIsFullScreen || !0 === document.webkitIsFullScreen || !0 === document.fullscreen || !1;
 };
 Nunu.openWebpage = function(a) {
   Nunu.runningOnDesktop() ? require("nw.gui").Shell.openExternal(a) : window.open(a);
 };
 Nunu.setFullscreen = function(a, c) {
-  !0 === a ? (void 0 === c && (c = document.body), c.requestFullscreen = c.requestFullscreen || c.mozRequestFullScreen || c.webkitRequestFullscreen || c.msRequestFullscreen, void 0 !== c.requestFullscreen && c.requestFullscreen()) : (document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, void 0 !== document.exitFullscreen && document.exitFullscreen());
+  !0 === a ? (void 0 === c && (c = document.body), a = c.requestFullscreen || c.mozRequestFullScreen || c.webkitRequestFullscreen || c.msRequestFullscreen, void 0 !== a && a()) : (a = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, void 0 !== a && a());
 };
 "use strict";
 function importFrom(a) {
