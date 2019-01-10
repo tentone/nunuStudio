@@ -301,21 +301,21 @@ Nunu.setFullscreen = function(enabled, element)
 		{
 			element = document.body;
 		}
+
+		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
 		
-		var requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
-		
-		if(requestFullscreen !== undefined)
+		if(element.requestFullscreen !== undefined)
 		{
-			requestFullscreen();
+			element.requestFullscreen();
 		}
 	}
 	else
 	{
-		var exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
 		
-		if(exitFullscreen !== undefined)
+		if(document.exitFullscreen !== undefined)
 		{
-			exitFullscreen();
+			document.exitFullscreen();
 		}
 	}
 };

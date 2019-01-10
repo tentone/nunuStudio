@@ -7123,12 +7123,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.x = g[a];
     this.y = g[a + 1];
     return this;
-  }, toArray:function(a, b) {
-    void 0 === a && (a = []);
-    void 0 === b && (b = 0);
-    a[b] = this.x;
-    a[b + 1] = this.y;
-    return a;
+  }, toArray:function(g, a) {
+    void 0 === g && (g = []);
+    void 0 === a && (a = 0);
+    g[a] = this.x;
+    g[a + 1] = this.y;
+    return g;
   }, fromBufferAttribute:function(a, b, d) {
     void 0 !== d && console.warn("THREE.Vector2: offset has been removed from .fromBufferAttribute().");
     this.x = a.getX(b);
@@ -12826,10 +12826,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return new Ya(a.name, a.duration, g);
   }, toJSON:function(a) {
-    var b = [], g = a.tracks;
-    a = {name:a.name, duration:a.duration, tracks:b, uuid:a.uuid};
-    for (var d = 0, c = g.length; d !== c; ++d) {
-      b.push(za.toJSON(g[d]));
+    var g = [], b = a.tracks;
+    a = {name:a.name, duration:a.duration, tracks:g, uuid:a.uuid};
+    for (var d = 0, c = b.length; d !== c; ++d) {
+      g.push(za.toJSON(b[d]));
     }
     return a;
   }, CreateFromMorphTargetSequence:function(a, b, d, c) {
@@ -37948,7 +37948,7 @@ Nunu.webglAvailable = function() {
   return !1;
 };
 Nunu.developmentMode = function() {
-  return "201901101105" === Nunu.TIMESTAMP;
+  return "201901101221" === Nunu.TIMESTAMP;
 };
 Nunu.getPlatform = function() {
   return void 0 !== window.nw ? Nunu.NWJS : void 0 !== window.cordova ? Nunu.CORDOVA : Nunu.BROWSER;
@@ -37963,7 +37963,7 @@ Nunu.openWebpage = function(a) {
   Nunu.runningOnDesktop() ? require("nw.gui").Shell.openExternal(a) : window.open(a);
 };
 Nunu.setFullscreen = function(a, c) {
-  !0 === a ? (void 0 === c && (c = document.body), a = c.requestFullscreen || c.mozRequestFullScreen || c.webkitRequestFullscreen || c.msRequestFullscreen, void 0 !== a && a()) : (a = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, void 0 !== a && a());
+  !0 === a ? (void 0 === c && (c = document.body), c.requestFullscreen = c.requestFullscreen || c.mozRequestFullScreen || c.webkitRequestFullscreen || c.msRequestFullscreen, void 0 !== c.requestFullscreen && c.requestFullscreen()) : (document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, void 0 !== document.exitFullscreen && document.exitFullscreen());
 };
 "use strict";
 function importFrom(a) {
