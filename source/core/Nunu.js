@@ -57,6 +57,33 @@ Nunu.REPOSITORY_BRANCH = "<PLACEHOLDER_REPOSITORY_BRANCH>";
 Nunu.REPOSITORY_COMMIT = "<PLACEHOLDER_REPOSITORY_COMMIT>";
 
 /**
+ * NWJS platform, used for desktop version.
+ *
+ * @static
+ * @attribute NWJS
+ * @type {Number}
+ */
+Nunu.NWJS = 200;
+
+/**
+ * Running inside of a regular web browser.
+ *
+ * @static
+ * @attribute BROWSER
+ * @type {Number}
+ */
+Nunu.BROWSER = 201;
+
+/**
+ * Cordova platform, used for mobile versions.
+ *
+ * @static
+ * @attribute CORDOVA
+ * @type {Number}
+ */
+Nunu.CORDOVA = 202;
+
+/**
  * Check if host supports WebVR and if there is a VR display available.
  * 
  * @method webvrAvailable
@@ -187,12 +214,13 @@ Nunu.developmentMode = function()
 	return Nunu.TIMESTAMP === "DEVELOPMENT_VERSION";
 };
 
-Nunu.NWJS = 200;
-Nunu.BROWSER = 201;
-Nunu.CORDOVA = 202;
-
 /**
  * Check in wich platform the enviroment is running.
+ *
+ * Possible return values are:
+ *    - Nunu.NWJS
+ *    - Nunu.BROWSER
+ *    - Nunu.CORDOVA
  *
  * @method getPlatform
  * @return {Number} Indicates the platform type.
@@ -232,7 +260,7 @@ Nunu.runningOnDesktop = function()
  */
 Nunu.isFullscreen = function()
 {
-	return document.webkitIsFullScreen || document.mozFullScreen || document.webkitIsFullScreen || document.webkitIsFullScreen || document.fullscreen || false;
+	return document.webkitIsFullScreen === true || document.mozFullScreen === true || document.webkitIsFullScreen === true || document.webkitIsFullScreen === true || document.fullscreen === true || false;
 };
 
 /**
@@ -274,20 +302,20 @@ Nunu.setFullscreen = function(enabled, element)
 			element = document.body;
 		}
 		
-		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
+		var requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
 		
-		if(element.requestFullscreen !== undefined)
+		if(requestFullscreen !== undefined)
 		{
-			element.requestFullscreen();
+			requestFullscreen();
 		}
 	}
 	else
 	{
-		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+		var exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
 		
-		if(document.exitFullscreen !== undefined)
+		if(exitFullscreen !== undefined)
 		{
-			document.exitFullscreen();
+			exitFullscreen();
 		}
 	}
 };
