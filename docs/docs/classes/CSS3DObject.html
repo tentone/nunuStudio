@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio SobelPass</title>  
+	<title>nunuStudio CSS3DObject</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -192,9 +192,12 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>SobelPass Class</h1>
+						<h1>CSS3DObject Class</h1>
 						<div class="box meta">
 						
+								<div class="extends">
+									Extends THREE.Object3D
+								</div>
 						
 						
 									Module: <a href="../modules/Postprocessing.html">Postprocessing</a>
@@ -203,7 +206,9 @@
 						
 						
 						<div class="box intro">
-							<p>Sobel pass is used to create a edge highlight effect with a sobel operator.</p>
+							<p>CSS 3D element projected in the 3D scene.</p>
+						<p>Encapsulated a DOM element that is projected into 3D space using the 3D object transform values.</p>
+						<p>CSS3D object always stay above everything elese in the 3D scene.</p>
 						
 						</div>
 						
@@ -212,6 +217,7 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -220,11 +226,52 @@
 						
 						
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs extends">
+													<li class="index-item attr">
+														<a href="#attr_element">element</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
 						
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_element" class="attr item">
+												<a name="config_element"></a> 
+												<h3 class="name"><code>element</code></h3>
+												<span class="type">DOM</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>The DOM element to be projected in 3D space.</p>
+											<p>It is automatically added to the appropiate DOM container used by the renderer.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>

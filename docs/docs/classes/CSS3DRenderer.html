@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio SobelPass</title>  
+	<title>nunuStudio CSS3DRenderer</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -192,7 +192,7 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>SobelPass Class</h1>
+						<h1>CSS3DRenderer Class</h1>
 						<div class="box meta">
 						
 						
@@ -203,7 +203,10 @@
 						
 						
 						<div class="box intro">
-							<p>Sobel pass is used to create a edge highlight effect with a sobel operator.</p>
+							<p>3D renderer using DOM elements.</p>
+						<p>Applies the threejs transformation hierarchy to the DOM element using CSS3D.</p>
+						<p>Only renders CSS specific objects, the output of the renderer is not combined with the WebGL output. Everything is renderer of top.</p>
+						<p>Based on the three.js adaptation (mrdoob, yomotsu) of <a href="http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs">http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs</a></p>
 						
 						</div>
 						
@@ -212,18 +215,317 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
 								<div id="index" class="api-class-tabpanel index">
 									<h2 class="off-left">Item Index</h2>
 						
+										<div class="index-section methods">
+											<h3>Methods</h3>
 						
+											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_getSize">getSize</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_render">render</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_setSize">setSize</a>
+						
+													</li>
+											</ul>
+										</div>
+						
+										<div class="index-section properties">
+											<h3>Properties</h3>
+						
+											<ul class="index-list properties">
+													<li class="index-item property">
+														<a href="#property_cache">cache</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_domElement">domElement</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_domElement">domElement</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_matrix">matrix</a>
+						
+													</li>
+											</ul>
+										</div>
 						
 						
 								</div>
 						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
 						
+											<div id="method_getSize" class="method item">
+												<h3 class="name"><code>getSize</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get the size of the renderer.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="method_render" class="method item">
+												<h3 class="name"><code>render</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>scene</code>
+															</li>
+															<li class="arg">
+																	<code>camera</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Render the CSS object of a scene using a camera.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">scene</code>
+																	<span class="type">THREE.Scene</span>
+											
+											
+																<div class="param-description">
+																	<p>Scene to be rendered.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">camera</code>
+																	<span class="type">THREE.Camera</span>
+											
+											
+																<div class="param-description">
+																	<p>Camera used to render the scene.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_setSize" class="method item">
+												<h3 class="name"><code>setSize</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>width</code>
+															</li>
+															<li class="arg">
+																	<code>height</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set the size of the renderer.</p>
+											<p>The size is also applie to the internal DOM division.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">width</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">height</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+									</div>
+						
+									<div id="properties" class="api-class-tabpanel">
+										<h2 class="off-left">Properties</h2>
+						
+											<div id="property_cache" class="property item">
+												<h3 class="name"><code>cache</code></h3>
+												<span class="type">Object</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Object cache, used to store the rendered objects state.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_domElement" class="property item">
+												<h3 class="name"><code>domElement</code></h3>
+												<span class="type">DOM</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Main DOM element used for the renderer.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_domElement" class="property item">
+												<h3 class="name"><code>domElement</code></h3>
+												<span class="type">DOM</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Camera projected DOM element.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_matrix" class="property item">
+												<h3 class="name"><code>matrix</code></h3>
+												<span class="type">THREE.Matrix4</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Temporary matrix object.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 						
 							</div>

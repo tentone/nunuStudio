@@ -625,6 +625,33 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\renderer\\css\\CSS3DObject.js": {
+            "name": "..\\source\\core\\renderer\\css\\CSS3DObject.js",
+            "modules": {},
+            "classes": {
+                "CSS3DObject": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\renderer\\css\\CSS3DRenderer.js": {
+            "name": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "modules": {},
+            "classes": {
+                "CSS3DRenderer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\renderer\\css\\CSS3DSprite.js": {
+            "name": "..\\source\\core\\renderer\\css\\CSS3DSprite.js",
+            "modules": {},
+            "classes": {
+                "CSS3DSprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\resources\\stream\\VideoStream.js": {
             "name": "..\\source\\core\\resources\\stream\\VideoStream.js",
             "modules": {
@@ -1268,12 +1295,15 @@
                 "EffectComposer": 1,
                 "Pass": 1,
                 "RendererState": 1,
-                "ShaderPass": 1
+                "ShaderPass": 1,
+                "CSS3DObject": 1,
+                "CSS3DRenderer": 1,
+                "CSS3DSprite": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\postprocessing\\ShaderPass.js",
+            "file": "..\\source\\core\\renderer\\css\\CSS3DSprite.js",
             "line": 3,
             "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
             "author": "miibond"
@@ -2836,6 +2866,71 @@
             "line": 3,
             "description": "Shader pass is used to apply a post processing effect over an already rendered scene.",
             "author": "alteredq / http://alteredqualia.com/"
+        },
+        "CSS3DObject": {
+            "name": "CSS3DObject",
+            "shortname": "CSS3DObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\renderer\\css\\CSS3DObject.js",
+            "line": 3,
+            "description": "CSS 3D element projected in the 3D scene.\n\nEncapsulated a DOM element that is projected into 3D space using the 3D object transform values.\n\nCSS3D object always stay above everything elese in the 3D scene.",
+            "extends": "{THREE.Object3D}",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element encapsulated in the object container.",
+                    "type": "DOM"
+                }
+            ]
+        },
+        "CSS3DRenderer": {
+            "name": "CSS3DRenderer",
+            "shortname": "CSS3DRenderer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 3,
+            "description": "3D renderer using DOM elements.\n\nApplies the threejs transformation hierarchy to the DOM element using CSS3D.\n\nOnly renders CSS specific objects, the output of the renderer is not combined with the WebGL output. Everything is renderer of top.\n\nBased on the three.js adaptation (mrdoob, yomotsu) of http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs",
+            "params": [
+                {
+                    "name": "domElement",
+                    "description": "DOM division to place rendered objects.",
+                    "type": "DOM"
+                }
+            ]
+        },
+        "CSS3DSprite": {
+            "name": "CSS3DSprite",
+            "shortname": "CSS3DSprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\renderer\\css\\CSS3DSprite.js",
+            "line": 3,
+            "description": "CSS 3D element drawn as a billboard.\n\nAlways faces the screen orientation (does not rotate).",
+            "extends": "{CSS3DObject}",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element encapsulated in the object container.",
+                    "type": "DOM"
+                }
+            ]
         },
         "VideoStream": {
             "name": "VideoStream",
@@ -11762,6 +11857,107 @@
                 }
             ],
             "class": "RendererState",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DObject.js",
+            "line": 18,
+            "description": "The DOM element to be projected in 3D space.\n\nIt is automatically added to the appropiate DOM container used by the renderer.",
+            "itemtype": "attribute",
+            "name": "element",
+            "type": "{DOM}",
+            "class": "CSS3DObject",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 24,
+            "description": "Temporary matrix object.",
+            "itemtype": "property",
+            "name": "matrix",
+            "type": "{THREE.Matrix4}",
+            "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 32,
+            "description": "Object cache, used to store the rendered objects state.",
+            "itemtype": "property",
+            "name": "cache",
+            "type": "{Object}",
+            "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 44,
+            "description": "Main DOM element used for the renderer.",
+            "itemtype": "property",
+            "name": "domElement",
+            "type": "{DOM}",
+            "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 53,
+            "description": "Camera projected DOM element.",
+            "itemtype": "property",
+            "name": "domElement",
+            "type": "{DOM}",
+            "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 65,
+            "description": "Get the size of the renderer.",
+            "itemtype": "method",
+            "name": "getSize",
+            "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 75,
+            "description": "Set the size of the renderer.\n\nThe size is also applie to the internal DOM division.",
+            "itemtype": "method",
+            "name": "setSize",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 97,
+            "description": "Render the CSS object of a scene using a camera.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "scene",
+                    "description": "Scene to be rendered.",
+                    "type": "THREE.Scene"
+                },
+                {
+                    "name": "camera",
+                    "description": "Camera used to render the scene.",
+                    "type": "THREE.Camera"
+                }
+            ],
+            "class": "CSS3DRenderer",
             "module": "Postprocessing"
         },
         {
