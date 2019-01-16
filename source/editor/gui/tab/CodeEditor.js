@@ -77,7 +77,7 @@ function CodeEditor(parent, closeable, container, index)
 		{
 			self.code.execCommand("indentAuto");
 		});
-		context.addOption("Select all", function()
+		context.addOption(Locale.selectAll, function()
 		{
 			self.code.execCommand("selectAll");
 		});

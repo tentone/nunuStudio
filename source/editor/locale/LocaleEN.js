@@ -81,7 +81,8 @@ LocaleManager.register(
 	export: "Export",
 	exit: "Exit",
 	nothingToShow: "Select an object to view its properties.",
-
+	selectAll: "Select all",
+	
 	//Resources
 	image: "Image",
 	video: "Video",

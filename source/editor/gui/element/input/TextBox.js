@@ -48,7 +48,7 @@ function TextBox(parent)
 				self.element.value = value.slice(0, self.element.selectionStart) + paste + value.slice(self.element.selectionEnd, value.length);
 			}
 		});
-		context.addOption("Select all", function()
+		context.addOption(Locale.selectAll, function()
 		{
 			console.log(self.element);
 			self.element.select();
@@ -58,6 +58,31 @@ function TextBox(parent)
 }
 
 TextBox.prototype = Object.create(Element.prototype);
+
+/**
+ * Set font configuration to use for the text presented in this component.
+ *
+ * May also affect some types of children components. 
+ * 
+ * @method setFont
+ * @param {String} fontFamily Font family.
+ * @param {Number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
+ * @param {String} fontStyle Font style, specifies the font style for a text.
+ */
+TextBox.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
+{
+	this.element.style.fontFamily = fontFamily;
+
+	if(fontWeight !== undefined)
+	{
+		this.element.style.fontWeight = fontWeight;
+	}
+
+	if(fontStyle !== undefined)
+	{
+		this.element.style.fontStyle = fontStyle;
+	}
+};
 
 /**
  * Set the disabled state of the element.
@@ -101,9 +126,4 @@ TextBox.prototype.setText = function(text)
 TextBox.prototype.getText = function()
 {
 	return this.element.value;
-};
-
-TextBox.prototype.updateVisibility = function()
-{
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
 };

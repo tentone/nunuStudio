@@ -47,7 +47,7 @@ function TextArea(parent)
 				self.element.value = value.slice(0, self.element.selectionStart) + paste + value.slice(self.element.selectionEnd, value.length);
 			}
 		});
-		context.addOption("Select all", function()
+		context.addOption(Locale.selectAll, function()
 		{
 			self.element.select();
 		});
@@ -56,6 +56,64 @@ function TextArea(parent)
 }
 
 TextArea.prototype = Object.create(Element.prototype);
+
+/**
+ * The text in the textarea is not wrapped. This is default.
+ *
+ * @static
+ * @attribute SOFT
+ * @type {String}
+ */
+TextArea.SOFT = "soft";
+
+/**
+ * The text in the textarea is wrapped (contains newlines).
+ *
+ * When "hard" is used, the cols attribute must be specified.
+ *
+ * @static
+ * @attribute HARD
+ * @type {String}
+ */
+TextArea.HARD = "hard";
+
+/**
+ * Set font configuration to use for the text presented in this component.
+ *
+ * May also affect some types of children components. 
+ * 
+ * @method setFont
+ * @param {String} fontFamily Font family.
+ * @param {Number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
+ * @param {String} fontStyle Font style, specifies the font style for a text.
+ */
+TextArea.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
+{
+	this.element.style.fontFamily = fontFamily;
+
+	if(fontWeight !== undefined)
+	{
+		this.element.style.fontWeight = fontWeight;
+	}
+
+	if(fontStyle !== undefined)
+	{
+		this.element.style.fontStyle = fontStyle;
+	}
+};
+
+/**
+ * Set the wrap mode used for this text area.
+ *
+ * Only affects the value on form submission.
+ *
+ * @method setWrap
+ * @param {String} mode The wrap mode to use.
+ */
+TextArea.prototype.setWrap = function(mode)
+{
+	this.element.wrap = mode;
+};
 
 /**
  * Set the disabled state of the element.
@@ -101,7 +159,18 @@ TextArea.prototype.getText = function()
 	return this.element.value;
 };
 
-TextArea.prototype.updateVisibility = function()
-{
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
+/**
+ * Set value stored in the input element. Same as setText().
+ *
+ * @method setValue
+ * @param {Object} text
+ */
+TextArea.prototype.setValue = TextArea.prototype.setText;
+
+/**
+ * Get text stored in the input element. Same as getText().
+ *
+ * @method getValue
+ * @return {String} Text stored in the input element.
+ */
+TextArea.prototype.getValue = TextArea.prototype.getText;
