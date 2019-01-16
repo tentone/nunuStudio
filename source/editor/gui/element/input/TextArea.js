@@ -1,12 +1,10 @@
 "use strict";
 
 /**
- * Image chooser is used for the user to select images.
+ * Text area input is used to handle multi line string values.
  *
- * Images can be selected by opening a file explorer or by drag and drop.
- *
- * @class ImageChooser
- * @extends {Element}
+ * @class TextArea
+ * @extends {Component}
  */
 function TextArea(parent)
 {
