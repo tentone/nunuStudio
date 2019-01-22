@@ -9725,7 +9725,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
   }, updateWorldMatrix:function(a, b) {
     var g = this.parent;
-    !0 === a && null !== g && g.updateWorldMatrix(!0, !1);
+    !0 === a && null !== g && g.updateWorldMatrix(! 0, !1);
     this.matrixAutoUpdate && this.updateMatrix();
     null === this.parent ? this.matrixWorld.copy(this.matrix) : this.matrixWorld.multiplyMatrices(this.parent.matrixWorld, this.matrix);
     if (!0 === b) {
@@ -15120,7 +15120,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (!1 === this.hasPlaybackControl) {
       console.warn("THREE.Audio: this Audio has no playback control.");
     } else {
-      return this.playbackRate = a, ! 0 === this.isPlaying && this.source.playbackRate.setTargetAtTime(this.playbackRate, this.context.currentTime, .01), this;
+      return this.playbackRate = a, !0 === this.isPlaying && this.source.playbackRate.setTargetAtTime(this.playbackRate, this.context.currentTime, .01), this;
     }
   }, getPlaybackRate:function() {
     return this.playbackRate;
@@ -15735,7 +15735,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         this._mixer.dispatchEvent({type:"finished", action:this, direction:0 > a ? -1 : 1});
       }
     } else {
-      -1 === c && (0 <= a ? (c = 0, this._setEndings(!0, 0 === this.repetitions, f)) : this._setEndings(0 === this.repetitions, ! 0, f));
+      -1 === c && (0 <= a ? (c = 0, this._setEndings(!0, 0 === this.repetitions, f)) : this._setEndings(0 === this.repetitions, !0, f));
       if (b >= d || 0 > b) {
         g = Math.floor(b / d);
         b -= d * g;
@@ -18563,7 +18563,7 @@ THREE.Lensflare = function() {
   c.magFilter = THREE.NearestFilter;
   c.wrapS = THREE.ClampToEdgeWrapping;
   c.wrapT = THREE.ClampToEdgeWrapping;
-  c.needsUpdate = !			0;
+  c.needsUpdate = !0;
   var h = new THREE.DataTexture(new Uint8Array(768), 16, 16, THREE.RGBFormat);
   h.minFilter = THREE.NearestFilter;
   h.magFilter = THREE.NearestFilter;
@@ -18650,7 +18650,6 @@ THREE.Reflector = function(a, c) {
   c.uniforms.color.value = a;
   c.uniforms.textureMatrix.value = z;
   this.material = c;
-  this.renderOrder = -Infinity;
   this.onBeforeRender = function(a, b, c) {
     if ("recursion" in c.userData) {
       if (c.userData.recursion === m) {
@@ -37948,7 +37947,7 @@ Nunu.webglAvailable = function() {
   return !1;
 };
 Nunu.developmentMode = function() {
-  return "201901101221" === Nunu.TIMESTAMP;
+  return "201901221938" === Nunu.TIMESTAMP;
 };
 Nunu.getPlatform = function() {
   return void 0 !== window.nw ? Nunu.NWJS : void 0 !== window.cordova ? Nunu.CORDOVA : Nunu.BROWSER;
