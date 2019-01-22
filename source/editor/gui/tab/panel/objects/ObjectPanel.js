@@ -137,6 +137,19 @@ function ObjectPanel(parent, object)
 	this.form.add(this.visible);
 	this.form.nextRow();
 
+	//Render order
+	this.form.addText("Render order");
+	this.renderOrder = new NumberBox(this.form);
+	this.renderOrder.size.set(0, 18);
+	this.renderOrder.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.renderOrder.setStep(1);
+	this.renderOrder.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "renderOrder", self.renderOrder.getValue()));
+	});
+	this.form.add(this.renderOrder);
+	this.form.nextRow();
+
 	//Static
 	this.form.addText("Static Object");
 	this.static = new CheckBox(this.form);
@@ -169,5 +182,6 @@ ObjectPanel.prototype.updatePanel = function()
 	this.scale.setValue(this.object.scale);
 	this.rotation.setValue(this.object.rotation);
 	this.visible.setValue(this.object.visible);
+	this.renderOrder.setValue(this.object.renderOrder);
 	this.static.setValue(!this.object.matrixAutoUpdate);
 };
