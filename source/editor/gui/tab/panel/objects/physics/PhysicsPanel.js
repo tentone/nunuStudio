@@ -35,11 +35,11 @@ function PhysicsPanel(parent, object)
 		}
 	});
 
-	this.form.addText("Physics");
+	this.form.addText(Locale.physics);
 	this.form.nextRow();
 
 	//Body Type
-	this.form.addText("Type");
+	this.form.addText(Locale.type);
 	this.bodyType = new DropdownList(this.form);
 	this.bodyType.size.set(100, 18);
 	this.bodyType.addValue(Locale.static, CANNON.Body.STATIC);

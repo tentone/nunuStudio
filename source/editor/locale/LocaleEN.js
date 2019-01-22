@@ -67,6 +67,8 @@ LocaleManager.register(
 	repeatMirror: "Repeat Mirrored",
 	premulAlpha: "Premul. Alpha",
 	vector: "Vector",
+	type: "Type",
+	physics: "Physics",
 	
 	//Editor
 	project: "Project",

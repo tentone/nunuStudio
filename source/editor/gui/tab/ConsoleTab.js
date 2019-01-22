@@ -276,7 +276,7 @@ ConsoleTab.createMessage = function(object)
 		table.style.display = "inline-block";
 
 		var type = table.insertRow(0);
-		type.insertCell(0).appendChild(document.createTextNode("Type";
+		type.insertCell(0).appendChild(document.createTextNode(Locale.type;
 		type.insertCell(1).appendChild(document.createTextNode(object.type;
 
 		var name = table.insertRow(1);
@@ -299,7 +299,7 @@ ConsoleTab.createMessage = function(object)
 		table.style.display = "inline-block";
 
 		var type = table.insertRow(0);
-		type.insertCell(0).appendChild(document.createTextNode("Type"));
+		type.insertCell(0).appendChild(document.createTextNode(Locale.type));
 		type.insertCell(1).appendChild(document.createTextNode(object.type));
 
 		var name = table.insertRow(1);

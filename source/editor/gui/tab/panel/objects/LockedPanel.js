@@ -12,7 +12,7 @@ function LockedPanel(parent, object)
 	//Type
 	if(Editor.settings.general.showType)
 	{
-		this.form.addText("Type");
+		this.form.addText(Locale.type);
 		this.type = this.form.addText("");
 		this.form.nextRow();
 	}

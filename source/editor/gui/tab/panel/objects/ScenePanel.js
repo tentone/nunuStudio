@@ -156,7 +156,7 @@ function ScenePanel(parent, object)
 	this.form.nextRow();
 	
 	//Physics world
-	this.form.addText("Physics");
+	this.form.addText(Locale.physics);
 	this.form.nextRow();
 
 	//Use physics
