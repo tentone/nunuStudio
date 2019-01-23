@@ -119,8 +119,3 @@ ColorChooser.prototype.getValueHex = function()
 {
 	return (this.color.rgb[0] << 16 ^ this.color.rgb[1] << 8 ^ this.color.rgb[2] << 0);
 };
-
-ColorChooser.prototype.updateVisibility = function()
-{
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};

@@ -137,8 +137,3 @@ ImageChooser.prototype.getValue = function()
 {
 	return this.value;
 };
-
-ImageChooser.prototype.updateVisibility = function()
-{
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
