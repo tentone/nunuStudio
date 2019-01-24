@@ -536,7 +536,7 @@ FileSystem.copyFile = function(src, dst)
 };
 
 /**
- * Make a directory (dont trow exeption if directory already exists).
+ * Make a directory (dont throw exeption if directory already exists).
  * 
  * Only works when running inside NWJS.
  *
