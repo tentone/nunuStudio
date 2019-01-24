@@ -444,14 +444,15 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
  *
  * Save mode does not work inside the browser.
  *
- * The onLoad callback receives as array of files as parameter.
+ * The onLoad callback receives an array of files as parameter.
  *
  * @method chooseFile
- * @param {Function} onLoad onLoad callback that receives array of files choosen as parameter
- * @param {String} filter File type filter
- * @param {String} saveas Save as format can be also a boolean value
+ * @param {Function} onLoad onLoad callback that receives array of files choosen as parameter.
+ * @param {String} filter File type filter.
+ * @param {String} saveas File format or name to be used, optinonally it can be a boolean value indicating savemode.
+ * @param {Boolean} multiFile If true the chooser will accept multiple files.
  */
-FileSystem.chooseFile = function(onLoad, filter, saveas)
+FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
 {
 	var chooser = document.createElement("input");
 	chooser.type = "file";
@@ -461,6 +462,11 @@ FileSystem.chooseFile = function(onLoad, filter, saveas)
 	if(filter !== undefined)
 	{
 		chooser.accept = filter;
+	}
+
+	if(multiFile === true)
+	{
+		chooser.multiple = true;
 	}
 
 	chooser.onchange = function(event)
