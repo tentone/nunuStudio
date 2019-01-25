@@ -117,8 +117,6 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress)
 	//NodeJS
 	if(FileSystem.fs !== undefined)
 	{
-		console.log("nunuSTudi: Read file array buyffer");
-		
 		if(sync === true)
 		{
 			var buffer = FileSystem.fs.readFileSync(fname);
