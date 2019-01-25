@@ -49,9 +49,9 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 	}
 
 	//NodeJS
-	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(file))
+	if(FileSystem.fs !== undefined)
 	{
-		if(sync)
+		if(sync === true)
 		{
 			var data = FileSystem.fs.readFileSync(fname, "utf8");
 
@@ -66,10 +66,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 		{
 			FileSystem.fs.readFile(fname, "utf8", function(error, data)
 			{
-				if(onLoad !== undefined)
-				{
-					onLoad(data);
-				}
+				onLoad(data);
 			});
 
 			return null;
@@ -91,10 +88,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 		
 		if(onProgress !== undefined)
 		{
-			file.onprogress = function(event)
-			{
-				onProgress(event);
-			};
+			file.onprogress = onProgress;
 		}
 
 		file.send(null);
@@ -121,39 +115,22 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress)
 	}
 
 	//NodeJS
-	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(file))
+	if(FileSystem.fs !== undefined)
 	{
-		if(sync)
+		console.log("nunuSTudi: Read file array buyffer");
+		
+		if(sync === true)
 		{
 			var buffer = FileSystem.fs.readFileSync(fname);
-			var length = buffer.length;
-			var array = new ArrayBuffer(length);
-			var view = new Uint8Array(array);
-
-			for(var i = 0; i < length; i++)
-			{
-				view[i] = buffer[i];
-			}
-
-			return array;
+			var arraybuffer = ArraybufferUtils.fromBuffer(buffer);
+			return arraybuffer;
 		}
 		else
 		{
 			FileSystem.fs.readFile(fname, function(error, buffer)
 			{
-				if(onLoad !== undefined)
-				{
-					var length = buffer.length;
-					var array = new ArrayBuffer(length);
-					var view = new Uint8Array(array);
-
-					for(var i = 0; i < length; i++)
-					{
-						view[i] = buffer[i];
-					}
-
-					onLoad(array);
-				}
+				var arraybuffer = ArraybufferUtils.fromBuffer(buffer);
+				onLoad(arraybuffer);
 			});
 
 			return null;
@@ -206,9 +183,9 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
 	}
 	
 	//NodeJS
-	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(file))
+	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(fname))
 	{
-		if(sync)
+		if(sync === true)
 		{
 			var buffer = FileSystem.fs.readFileSync(fname);
 			return new Buffer(buffer).toString("base64");
@@ -554,7 +531,7 @@ FileSystem.makeDirectory = function(dir)
 	if(FileSystem.fs !== undefined)
 	{
 		dir.replace(new RegExp("/", 'g'), "\\");
-		FileSystem.fs.mkdirSync(dir);
+		FileSystem.fs.mkdirSync(dir, {recursive: true});
 	}
 };
 

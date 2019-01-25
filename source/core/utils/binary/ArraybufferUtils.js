@@ -19,15 +19,15 @@ function ArraybufferUtils(){}
 ArraybufferUtils.fromBinaryString = function(str)
 {
 	var length = str.length;
-	var array = new ArrayBuffer(length);
-	var view = new Uint8Array(array);
+	var arraybuffer = new ArrayBuffer(length);
+	var view = new Uint8Array(arraybuffer);
 
 	for(var i = 0; i < length; i++)
 	{
 		view[i] = str.charCodeAt(i);
 	}
 
-	return array;
+	return arraybuffer;
 };
 
 /**
@@ -41,8 +41,8 @@ ArraybufferUtils.fromBase64 = function(str)
 {
 	var encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	var length = str.length / 4 * 3;
-	var array = new ArrayBuffer(length);
-	var view = new Uint8Array(array);
+	var arraybuffer = new ArrayBuffer(length);
+	var view = new Uint8Array(arraybuffer);
 
 	var a, b, c, d;
 
@@ -64,7 +64,7 @@ ArraybufferUtils.fromBase64 = function(str)
 		}
 	}
 
-	return array;
+	return arraybuffer;
 };
 
 /**
@@ -76,13 +76,5 @@ ArraybufferUtils.fromBase64 = function(str)
  */
 ArraybufferUtils.fromBuffer = function(buffer)
 {
-	var array = new ArrayBuffer(buffer.length);
-	var view = new Uint8Array(array);
-
-	for(var i = 0; i < buffer.length; i++)
-	{
-		view[i] = buffer[i];
-	}
-
-	return array;
+	return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
 };
