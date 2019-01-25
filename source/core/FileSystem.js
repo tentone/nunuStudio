@@ -27,20 +27,23 @@ catch(e){}
  */
 FileSystem.isRemote = function(fname)
 {
-	return fname.startsWith("http") || (FileSystem.fs !== undefined && FileSystem.fs.existsSync(file));
+	return fname.startsWith("http");
 };
 
 /**
- * Read file content as text.
+ * Read a local or remote file as text data.
  *
+ * When running on desktop uses nodejs to access files, on the web performs a http GET request.
+ * 
  * @method readFile
- * @param {String} fname URL to the file.
+ * @param {String} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
- * @param {Function} onLoad onLoad callback.
- * @param {Function} onProgress onProgress callback.
- * @return {String} File content as a string, null if reading async.
+ * @param {Function} onLoad onLoad callback receives the read data as parameter.
+ * @param {Function} onProgress onProgress callback used to check the file reading progress.
+ * @param {Function} onError onError call is called when a error occurs while reading the file.
+ * @return {String} File text, or null if the request is async.
  */
-FileSystem.readFile = function(fname, sync, onLoad, onProgress)
+FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 {
 	//Sync default to true
 	if(sync === undefined)
@@ -49,7 +52,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 	}
 
 	//NodeJS
-	if(FileSystem.fs !== undefined)
+	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
 	{
 		if(sync === true)
 		{
@@ -85,29 +88,35 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 				onLoad(file.response);
 			}
 		};
-		
 		if(onProgress !== undefined)
 		{
 			file.onprogress = onProgress;
 		}
+		if(onError !== undefined)
+		{
+			file.onerror = onError;
+		}
 
 		file.send(null);
 
-		return file.response;
+		return sync === true ? file.response : null;
 	}
 };
 
 /**
- * Read file as arraybuffer data.
+ * Read a local or remote file as arraybuffer data.
  *
+ * When running on desktop uses nodejs to access files, on the web performs a http GET request.
+ * 
  * @method readFileArrayBuffer
- * @param {String} fname Name of the file
+ * @param {String} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
- * @param {Function} onLoad onLoad callback.
- * @param {Function} onProgress onProgress callback.
- * @return {ArrayBuffer} File data as array buffer, null on error
+ * @param {Function} onLoad onLoad callback receives the read data as parameter.
+ * @param {Function} onProgress onProgress callback used to check the file reading progress.
+ * @param {Function} onError onError call is called when a error occurs while reading the file.
+ * @return {ArrayBuffer} File data as array buffer, or null if the request is async.
  */
-FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress)
+FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onError)
 {
 	if(sync === undefined)
 	{
@@ -115,7 +124,7 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress)
 	}
 
 	//NodeJS
-	if(FileSystem.fs !== undefined)
+	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
 	{
 		if(sync === true)
 		{
@@ -140,7 +149,6 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress)
 		var file = new XMLHttpRequest();
 		file.open("GET", fname, !sync);
 		file.overrideMimeType("text/plain; charset=x-user-defined");
-
 		file.onload = function()
 		{
 			if((file.status === 200 || file.status === 0) && onLoad !== undefined)
@@ -151,29 +159,33 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress)
 
 		if(onProgress !== undefined)
 		{
-			file.onprogress = function(event)
-			{
-				onProgress(event);
-			};
+			file.onprogress = onProgress;
+		}
+		if(onError !== undefined)
+		{
+			file.onerror = onError;
 		}
 
 		file.send(null);
 
-		return ArraybufferUtils.fromBinaryString(file.response);
+		return sync === true ? ArraybufferUtils.fromBinaryString(file.response) : null;
 	}
 };
 
 /**
- * Read file as base64 data.
+ * Read a local or remote file as base64 data.
  *
+ * When running on desktop uses nodejs to access files, on the web performs a http GET request.
+ * 
  * @method readFileBase64
- * @param {String} fname Name of the file
+ * @param {String} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
- * @param {Function} onLoad onLoad callback.
- * @param {Function} onProgress onProgress callback.
- * @return {String} File data in base64, null on error
+ * @param {Function} onLoad onLoad callback receives the read data as parameter.
+ * @param {Function} onProgress onProgress callback used to check the file reading progress.
+ * @param {Function} onError onError call is called when a error occurs while reading the file.
+ * @return {String} File data as base64, or null if the request is async.
  */
-FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
+FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 {
 	if(sync === undefined)
 	{
@@ -181,7 +193,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
 	}
 	
 	//NodeJS
-	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(fname))
+	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
 	{
 		if(sync === true)
 		{
@@ -192,10 +204,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
 		{
 			FileSystem.fs.readFile(fname, function(error, buffer)
 			{
-				if(onLoad !== undefined)
-				{
-					onLoad(new Buffer(buffer).toString("base64"));
-				}
+				onLoad(new Buffer(buffer).toString("base64"));
 			});
 
 			return null;
@@ -218,20 +227,21 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
 
 		if(onProgress !== undefined)
 		{
-			file.onprogress = function(event)
-			{
-				onProgress(event);
-			};
+			file.onprogress = onProgress;
+		}
+		if(onError !== undefined)
+		{
+			file.onerror = onError;
 		}
 
 		file.send(null);
 
-		return Base64Utils.fromBinaryString(file.response);
+		return sync === true ? Base64Utils.fromBinaryString(file.response) : null;
 	}
 };
 
 /**
- * Write text file.
+ * Write text to a file file.
  * 
  * When running without NWJS it writes file as a blob and auto downloads it.
  *
