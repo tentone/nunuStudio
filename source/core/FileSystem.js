@@ -45,7 +45,6 @@ FileSystem.isRemote = function(fname)
  */
 FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 {
-	//Sync default to true
 	if(sync === undefined)
 	{
 		sync = true;
@@ -69,7 +68,14 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 		{
 			FileSystem.fs.readFile(fname, "utf8", function(error, data)
 			{
-				onLoad(data);
+				if(error !== null && onError !== undefined)
+				{
+					onError(error);
+				}
+				else
+				{
+					onLoad(data);
+				}
 			});
 
 			return null;
@@ -129,15 +135,20 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 		if(sync === true)
 		{
 			var buffer = FileSystem.fs.readFileSync(fname);
-			var arraybuffer = ArraybufferUtils.fromBuffer(buffer);
-			return arraybuffer;
+			return ArraybufferUtils.fromBuffer(buffer);
 		}
 		else
 		{
 			FileSystem.fs.readFile(fname, function(error, buffer)
 			{
-				var arraybuffer = ArraybufferUtils.fromBuffer(buffer);
-				onLoad(arraybuffer);
+				if(error !== null && onError !== undefined)
+				{
+					onError(error);
+				}
+				else
+				{
+					onLoad(ArraybufferUtils.fromBuffer(buffer));
+				}
 			});
 
 			return null;
@@ -204,7 +215,14 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 		{
 			FileSystem.fs.readFile(fname, function(error, buffer)
 			{
-				onLoad(new Buffer(buffer).toString("base64"));
+				if(error !== null && onError !== undefined)
+				{
+					onError(error);
+				}
+				else
+				{
+					onLoad(new Buffer(buffer).toString("base64"));
+				}
 			});
 
 			return null;
@@ -241,9 +259,9 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 };
 
 /**
- * Write text to a file file.
+ * Write text to a file.
  * 
- * When running without NWJS it writes file as a blob and auto downloads it.
+ * When running on the web it writes file to a blob and auto downloads it.
  *
  * @method writeFile
  * @param {String} fname Name/path of the file to write.
@@ -302,7 +320,7 @@ FileSystem.writeFile = function(fname, data, sync, onFinish)
 /**
  * Write binary file using base64 data.
  *
- * If running on browser writes the file into a blob and auto downloads it.
+ * If running on the web writes the file into a blob and auto downloads it.
  *
  * @method writeFileBase64
  * @param {String} fname Name/path of the file to write.
@@ -365,7 +383,7 @@ FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
 /**
  * Write binary file using arraybuffer data. 
  *
- * If running on browser writes the file into a blob and auto downloads it.
+ * If running on the web writes the file into a blob and auto downloads it.
  *
  * @method writeFileArrayBuffer
  * @param {String} fname Name/path of the file to write.
