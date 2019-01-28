@@ -238,7 +238,7 @@ Text.prototype.setMargin = function(margin)
 
 Text.prototype.updateVisibility = function()
 {
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
+	this.element.style.display = this.visible ? "flex" : "none";
 }
 
 Text.prototype.updateSize = function()
