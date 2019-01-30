@@ -1,9 +1,13 @@
 # Changelog
  - All notable changes to this project will be documented in this file, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+
 ## Unpublished
 ### V0.9.6 Beta
  - CSS 3D renderer support.
+
+
 
 ## Published
 ### V0.9.5 Beta
@@ -25,6 +29,8 @@
  - VideoStream object
  - Mouse back and forward buttons support (Chrome and desktop only).
 
+
+
 ### V0.9.4 Beta
  - Multi object edit (position, rotation and scale)
  - Support for SVG file loading
@@ -35,6 +41,8 @@
  - Resource preview on inspector
  - New general settings tab
  - Experimental android export support
+
+
 
 ### V0.9.3 Beta
  - Shadow material
@@ -52,25 +60,29 @@
  - Fixed particle scalling issues
  - File export API
 
+
+
 ### V0.9.2 Beta
  - Support for multi selection
  - Geometry binary operations (CSG)
-	 - Subtract
-	 - Intersect
-	 - Union
+    - Subtract
+     - Intersect
+     - Union
  - Immediate mode
  - Postprocessing
-	 - Postprocessing editor
+    - Postprocessing editor
  - Resize is now a part of Object3D
  - Improvements to nsp files
-	 - Moved from base64 to raw binary data.
+    - Moved from base64 to raw binary data.
  - Cube camera preview
  - Fixed dropdown menus getting out of screen
 
+
+
 ### V0.9.1 Beta
  - Internal debug console
-	 - Preview materials and textures in console
-	 - Visualize math structures
+    - Preview materials and textures in console
+     - Visualize math structures
  - Desktop auto update mechanism (auto download build from github master branch)
  - Load 3D file drag and drop with texture support
  - Skeleton serialization (@takahirox)
@@ -78,11 +90,15 @@
  - Support for line and points material
  - Improvements in material editor
 
+
+
 ### V0.9.0 Beta
  - Division property for HTML elements
  - Camera preview positioning
  - Cubemaps from equirectangular projection
  - Binary project files (.nsp)
+
+
 
 ### V0.8.9.26 Alpha
  - Improved audio implementation
@@ -94,17 +110,23 @@
  - Keep file name on web version
  - Force webgl context loss when tabs closed
 
+
+
 ### V0.8.9.25 Alpha
  - Added CubeCamera
  - Added SpriteSheet texture animation support
  - Gamepad support
  - Improved UI elements
 
+
+
 ### V0.8.9.24 Alpha
  - Added snap to grid
  - First version of NodeJS build system (@GGAlanSmithee)
  - Open ISP as url argument on web version
  - Support for orbit navigation
+
+
 
 ### V0.8.9.23 Alpha
  - Added support for STL files
@@ -113,8 +135,12 @@
  - Support for 3DS files
  - CircleGeometry
 
+
+
 ### V0.8.9.22 Alpha
  - Removed editor state, tabs are self updated
+
+
 
 ### V0.8.9.21 Alpha
  - Editor standalone version (@Seagat2011)
@@ -125,15 +151,21 @@
  - Drag and drop CubeTextures
  - Drag and drop tabs in editor
 
+
+
 ### V0.8.9.20 Alpha
  - Cubetexture support
  - Improved material serialization
  - Sort objects in the explorer
 
+
+
 ### V0.8.9.19 Alpha
  - Renamed variables variable_name to variableName
  - Added Texture Editor
  - Documentation page
+
+
 
 ### V0.8.9.18 Alpha
  - Added geometry properties to geometry panels
@@ -141,6 +173,8 @@
  - Fixed OBJ and MTL loading
  - Default app export template loading screen
  - Audio preview
+
+
 
 ### V0.8.9.17 Alpha
  - Particle editor position, velocity and acceleration delta now shows in different a row
@@ -151,6 +185,8 @@
  - Added program, scene and self variables to scripts (can be used without this reference)
  - Generic multi file format 3D model loading
 
+
+
 ### V0.8.9.16 Alpha
  - Fixed file path changing after project export
  - Program rendering settings (Antialiasing, Shadows)
@@ -160,6 +196,8 @@
  - Added program.sendDataApp and app.setOnDataReceived for app/page communication
  - Renamed NunuRuntime to NunuApp (Makes more sense)
  - Fixed copy/paste inside object panels
+
+
 
 ### V0.8.9.15 Alpha
  - Added font preview in asset explorer
