@@ -12,14 +12,14 @@ function OrthographicCameraPanel(parent, object)
 
 	//Size
 	this.form.addText("Size");
-	this.size = new NumberBox(this.form);
-	this.size.size.set(80, 18);
-	this.size.setOnChange(function()
+	this.sizeBox = new NumberBox(this.form);
+	this.sizeBox.size.set(80, 18);
+	this.sizeBox.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "size", self.size.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "size", self.sizeBox.getValue()));
 		self.object.updateProjectionMatrix();
 	});
-	this.form.add(this.size);
+	this.form.add(this.sizeBox);
 	this.form.nextRow();
 
 	//Camera resize Mode
@@ -186,7 +186,7 @@ OrthographicCameraPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
-	this.size.setValue(this.object.size);
+	this.sizeBox.setValue(this.object.size);
 	this.mode.setSelectedIndex(this.object.mode);
 	this.use.setValue(this.scene.cameras.indexOf(this.object) !== -1);
 	this.near.setValue(this.object.near);

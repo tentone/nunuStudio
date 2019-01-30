@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Panel container is used to display object inspector panels.
+ *
+ * It is responsible for selection the appropiate panel for the type of object selected.
+ *
+ * @class PanelContainer
+ * @extends {TabElement}
+ */
 function PanelContainer(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Inspector", Editor.FILE_PATH + "icons/misc/magnifier.png");
