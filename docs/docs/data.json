@@ -15861,13 +15861,13 @@
         {
             "file": "..\\source\\core\\FileSystem.js",
             "line": 33,
-            "description": "Read file content as text.",
+            "description": "Read a local or remote file as text data.\n\nWhen running on desktop uses nodejs to access files, on the web performs a http GET request.",
             "itemtype": "method",
             "name": "readFile",
             "params": [
                 {
                     "name": "fname",
-                    "description": "URL to the file.",
+                    "description": "Path or URL of the file being read.",
                     "type": "String"
                 },
                 {
@@ -15877,17 +15877,22 @@
                 },
                 {
                     "name": "onLoad",
-                    "description": "onLoad callback.",
+                    "description": "onLoad callback receives the read data as parameter.",
                     "type": "Function"
                 },
                 {
                     "name": "onProgress",
-                    "description": "onProgress callback.",
+                    "description": "onProgress callback used to check the file reading progress.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "onError call is called when a error occurs while reading the file.",
                     "type": "Function"
                 }
             ],
             "return": {
-                "description": "File content as a string, null if reading async.",
+                "description": "File text, or null if the request is async.",
                 "type": "String"
             },
             "class": "FileSystem",
@@ -15895,14 +15900,14 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 106,
-            "description": "Read file as arraybuffer data.",
+            "line": 112,
+            "description": "Read a local or remote file as arraybuffer data.\n\nWhen running on desktop uses nodejs to access files, on the web performs a http GET request.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
             "params": [
                 {
                     "name": "fname",
-                    "description": "Name of the file",
+                    "description": "Path or URL of the file being read.",
                     "type": "String"
                 },
                 {
@@ -15912,17 +15917,22 @@
                 },
                 {
                     "name": "onLoad",
-                    "description": "onLoad callback.",
+                    "description": "onLoad callback receives the read data as parameter.",
                     "type": "Function"
                 },
                 {
                     "name": "onProgress",
-                    "description": "onProgress callback.",
+                    "description": "onProgress callback used to check the file reading progress.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "onError call is called when a error occurs while reading the file.",
                     "type": "Function"
                 }
             ],
             "return": {
-                "description": "File data as array buffer, null on error",
+                "description": "File data as array buffer, or null if the request is async.",
                 "type": "ArrayBuffer"
             },
             "class": "FileSystem",
@@ -15930,14 +15940,14 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 191,
-            "description": "Read file as base64 data.",
+            "line": 186,
+            "description": "Read a local or remote file as base64 data.\n\nWhen running on desktop uses nodejs to access files, on the web performs a http GET request.",
             "itemtype": "method",
             "name": "readFileBase64",
             "params": [
                 {
                     "name": "fname",
-                    "description": "Name of the file",
+                    "description": "Path or URL of the file being read.",
                     "type": "String"
                 },
                 {
@@ -15947,17 +15957,22 @@
                 },
                 {
                     "name": "onLoad",
-                    "description": "onLoad callback.",
+                    "description": "onLoad callback receives the read data as parameter.",
                     "type": "Function"
                 },
                 {
                     "name": "onProgress",
-                    "description": "onProgress callback.",
+                    "description": "onProgress callback used to check the file reading progress.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "onError call is called when a error occurs while reading the file.",
                     "type": "Function"
                 }
             ],
             "return": {
-                "description": "File data in base64, null on error",
+                "description": "File data as base64, or null if the request is async.",
                 "type": "String"
             },
             "class": "FileSystem",
@@ -15965,8 +15980,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 258,
-            "description": "Write text file.\n\nWhen running without NWJS it writes file as a blob and auto downloads it.",
+            "line": 261,
+            "description": "Write text to a file.\n\nWhen running on the web it writes file to a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
             "params": [
@@ -15996,8 +16011,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 317,
-            "description": "Write binary file using base64 data.\n\nIf running on browser writes the file into a blob and auto downloads it.",
+            "line": 320,
+            "description": "Write binary file using base64 data.\n\nIf running on the web writes the file into a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFileBase64",
             "params": [
@@ -16027,8 +16042,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 380,
-            "description": "Write binary file using arraybuffer data. \n\nIf running on browser writes the file into a blob and auto downloads it.",
+            "line": 383,
+            "description": "Write binary file using arraybuffer data. \n\nIf running on the web writes the file into a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFileArrayBuffer",
             "params": [
@@ -16058,25 +16073,30 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 442,
-            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.\n\nThe onLoad callback receives as array of files as parameter.",
+            "line": 445,
+            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.\n\nThe onLoad callback receives an array of files as parameter.",
             "itemtype": "method",
             "name": "chooseFile",
             "params": [
                 {
                     "name": "onLoad",
-                    "description": "onLoad callback that receives array of files choosen as parameter",
+                    "description": "onLoad callback that receives array of files choosen as parameter.",
                     "type": "Function"
                 },
                 {
                     "name": "filter",
-                    "description": "File type filter",
+                    "description": "File type filter.",
                     "type": "String"
                 },
                 {
                     "name": "saveas",
-                    "description": "Save as format can be also a boolean value",
+                    "description": "File format or name to be used, optinonally it can be a boolean value indicating savemode.",
                     "type": "String"
+                },
+                {
+                    "name": "multiFile",
+                    "description": "If true the chooser will accept multiple files.",
+                    "type": "Boolean"
                 }
             ],
             "class": "FileSystem",
@@ -16084,7 +16104,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 484,
+            "line": 493,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -16105,7 +16125,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 511,
+            "line": 520,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -16126,8 +16146,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 538,
-            "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
+            "line": 547,
+            "description": "Make a directory (dont throw exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
             "params": [
@@ -16142,7 +16162,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 555,
+            "line": 564,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -16155,7 +16175,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 581,
+            "line": 590,
             "description": "Delete folders and all subfolders.\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "deleteFolder",
@@ -16171,7 +16191,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 614,
+            "line": 623,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -16192,7 +16212,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 658,
+            "line": 667,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -16212,7 +16232,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 679,
+            "line": 688,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -16232,7 +16252,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 701,
+            "line": 710,
             "description": "Get file name with extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.d.",
             "itemtype": "method",
             "name": "getFileNameWithExtension",
@@ -16252,7 +16272,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 723,
+            "line": 732,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -16272,7 +16292,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 742,
+            "line": 751,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -16292,7 +16312,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 764,
+            "line": 773,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",

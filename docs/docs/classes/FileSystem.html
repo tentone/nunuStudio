@@ -329,6 +329,9 @@
 															<li class="arg">
 																	<code>saveas</code>
 															</li>
+															<li class="arg">
+																	<code>multiFile</code>
+															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
@@ -350,7 +353,7 @@
 												<div class="description">
 													<p>Open file chooser dialog receives onLoad callback, file filter, saveas.</p>
 											<p>Save mode does not work inside the browser.</p>
-											<p>The onLoad callback receives as array of files as parameter.</p>
+											<p>The onLoad callback receives an array of files as parameter.</p>
 											
 												</div>
 											
@@ -364,7 +367,7 @@
 											
 											
 																<div class="param-description">
-																	<p>onLoad callback that receives array of files choosen as parameter</p>
+																	<p>onLoad callback that receives array of files choosen as parameter.</p>
 											
 																</div>
 											
@@ -375,7 +378,7 @@
 											
 											
 																<div class="param-description">
-																	<p>File type filter</p>
+																	<p>File type filter.</p>
 											
 																</div>
 											
@@ -386,7 +389,18 @@
 											
 											
 																<div class="param-description">
-																	<p>Save as format can be also a boolean value</p>
+																	<p>File format or name to be used, optinonally it can be a boolean value indicating savemode.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">multiFile</code>
+																	<span class="type">Boolean</span>
+											
+											
+																<div class="param-description">
+																	<p>If true the chooser will accept multiple files.</p>
 											
 																</div>
 											
@@ -1127,7 +1141,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Make a directory (dont trow exeption if directory already exists).</p>
+													<p>Make a directory (dont throw exeption if directory already exists).</p>
 											<p>Only works when running inside NWJS.</p>
 											
 												</div>
@@ -1168,6 +1182,9 @@
 															<li class="arg">
 																	<code>onProgress</code>
 															</li>
+															<li class="arg">
+																	<code>onError</code>
+															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
@@ -1190,7 +1207,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Read file content as text.</p>
+													<p>Read a local or remote file as text data.</p>
+											<p>When running on desktop uses nodejs to access files, on the web performs a http GET request.</p>
 											
 												</div>
 											
@@ -1204,7 +1222,7 @@
 											
 											
 																<div class="param-description">
-																	<p>URL to the file.</p>
+																	<p>Path or URL of the file being read.</p>
 											
 																</div>
 											
@@ -1226,7 +1244,7 @@
 											
 											
 																<div class="param-description">
-																	<p>onLoad callback.</p>
+																	<p>onLoad callback receives the read data as parameter.</p>
 											
 																</div>
 											
@@ -1237,7 +1255,18 @@
 											
 											
 																<div class="param-description">
-																	<p>onProgress callback.</p>
+																	<p>onProgress callback used to check the file reading progress.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onError</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	<p>onError call is called when a error occurs while reading the file.</p>
 											
 																</div>
 											
@@ -1250,7 +1279,7 @@
 											
 														<div class="returns-description">
 																	<span class="type">String</span>:
-																<p>File content as a string, null if reading async.</p>
+																<p>File text, or null if the request is async.</p>
 											
 														</div>
 													</div>
@@ -1272,6 +1301,9 @@
 															</li>
 															<li class="arg">
 																	<code>onProgress</code>
+															</li>
+															<li class="arg">
+																	<code>onError</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -1295,7 +1327,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Read file as arraybuffer data.</p>
+													<p>Read a local or remote file as arraybuffer data.</p>
+											<p>When running on desktop uses nodejs to access files, on the web performs a http GET request.</p>
 											
 												</div>
 											
@@ -1309,7 +1342,7 @@
 											
 											
 																<div class="param-description">
-																	<p>Name of the file</p>
+																	<p>Path or URL of the file being read.</p>
 											
 																</div>
 											
@@ -1331,7 +1364,7 @@
 											
 											
 																<div class="param-description">
-																	<p>onLoad callback.</p>
+																	<p>onLoad callback receives the read data as parameter.</p>
 											
 																</div>
 											
@@ -1342,7 +1375,18 @@
 											
 											
 																<div class="param-description">
-																	<p>onProgress callback.</p>
+																	<p>onProgress callback used to check the file reading progress.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onError</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	<p>onError call is called when a error occurs while reading the file.</p>
 											
 																</div>
 											
@@ -1355,7 +1399,7 @@
 											
 														<div class="returns-description">
 																	<span class="type">ArrayBuffer</span>:
-																<p>File data as array buffer, null on error</p>
+																<p>File data as array buffer, or null if the request is async.</p>
 											
 														</div>
 													</div>
@@ -1377,6 +1421,9 @@
 															</li>
 															<li class="arg">
 																	<code>onProgress</code>
+															</li>
+															<li class="arg">
+																	<code>onError</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -1400,7 +1447,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Read file as base64 data.</p>
+													<p>Read a local or remote file as base64 data.</p>
+											<p>When running on desktop uses nodejs to access files, on the web performs a http GET request.</p>
 											
 												</div>
 											
@@ -1414,7 +1462,7 @@
 											
 											
 																<div class="param-description">
-																	<p>Name of the file</p>
+																	<p>Path or URL of the file being read.</p>
 											
 																</div>
 											
@@ -1436,7 +1484,7 @@
 											
 											
 																<div class="param-description">
-																	<p>onLoad callback.</p>
+																	<p>onLoad callback receives the read data as parameter.</p>
 											
 																</div>
 											
@@ -1447,7 +1495,18 @@
 											
 											
 																<div class="param-description">
-																	<p>onProgress callback.</p>
+																	<p>onProgress callback used to check the file reading progress.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onError</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	<p>onError call is called when a error occurs while reading the file.</p>
 											
 																</div>
 											
@@ -1460,7 +1519,7 @@
 											
 														<div class="returns-description">
 																	<span class="type">String</span>:
-																<p>File data in base64, null on error</p>
+																<p>File data as base64, or null if the request is async.</p>
 											
 														</div>
 													</div>
@@ -1502,8 +1561,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Write text file.</p>
-											<p>When running without NWJS it writes file as a blob and auto downloads it.</p>
+													<p>Write text to a file.</p>
+											<p>When running on the web it writes file to a blob and auto downloads it.</p>
 											
 												</div>
 											
@@ -1597,7 +1656,7 @@
 											
 												<div class="description">
 													<p>Write binary file using arraybuffer data.</p>
-											<p>If running on browser writes the file into a blob and auto downloads it.</p>
+											<p>If running on the web writes the file into a blob and auto downloads it.</p>
 											
 												</div>
 											
@@ -1691,7 +1750,7 @@
 											
 												<div class="description">
 													<p>Write binary file using base64 data.</p>
-											<p>If running on browser writes the file into a blob and auto downloads it.</p>
+											<p>If running on the web writes the file into a blob and auto downloads it.</p>
 											
 												</div>
 											
