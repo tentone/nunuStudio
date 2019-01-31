@@ -3,9 +3,9 @@
 /**
  * MathUtils contains auxiliar values and function to help with mathematical operations.
  *
+ * @static
  * @class MathUtils
  * @module Utils
- * @static
  */
 function MathUtils(){}
 
@@ -15,7 +15,7 @@ function MathUtils(){}
  * @attribute pi2
  * @type {Number}
  */
-MathUtils.pi2 = 2 * Math.PI;
+MathUtils.PI2 = 2 * Math.PI;
 
 /**
  * Value of PI/3. 60 degrees.
@@ -23,7 +23,7 @@ MathUtils.pi2 = 2 * Math.PI;
  * @attribute pid3
  * @type {Number}
  */
-MathUtils.pid3 = Math.PI / 3;
+MathUtils.PID3 = Math.PI / 3;
 
 /**
  * Value of PI/2. 45 degrees.
@@ -31,7 +31,7 @@ MathUtils.pid3 = Math.PI / 3;
  * @attribute pid2
  * @type {Number}
  */
-MathUtils.pid2 = Math.PI / 2;
+MathUtils.PID2 = Math.PI / 2;
 
 /**
  * Generates a random color code.

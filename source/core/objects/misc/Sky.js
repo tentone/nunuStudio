@@ -344,7 +344,7 @@ Sky.prototype.updateSky = function()
 	}
 
 	//Update sun position
-	var rotation = (MathUtils.pi2 * time) - MathUtils.pid2;
+	var rotation = (MathUtils.PI2 * time) - MathUtils.PID2;
 	if(time > 0.25 && time < 0.75)
 	{
 		this.sun.position.x = this.sunDistance * Math.cos(rotation);

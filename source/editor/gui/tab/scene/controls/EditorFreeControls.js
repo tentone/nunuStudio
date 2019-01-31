@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Free controls can be used to navigate the world in a first person like way.
+ *
+ * The mouse can be used to look around or control the movement.
+ *
+ * @class EditorFreeControls
+ * @extends {EditorControls}
+ */
 function EditorFreeControls()
 {
 	EditorControls.call(this);
@@ -130,8 +138,8 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		this.position.x -= mouse.delta.y * speed * angleSin;
 
 		//Move Camera Lateral
-		var angleCos = Math.cos(this.orientation.x + MathUtils.pid2);
-		var angleSin = Math.sin(this.orientation.x + MathUtils.pid2);
+		var angleCos = Math.cos(this.orientation.x + MathUtils.PID2);
+		var angleSin = Math.sin(this.orientation.x + MathUtils.PID2);
 		this.position.z -= mouse.delta.x * speed * angleCos;
 		this.position.x -= mouse.delta.x * speed * angleSin;
 
