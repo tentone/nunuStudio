@@ -37978,7 +37978,7 @@ Nunu.webglAvailable = function() {
   return !1;
 };
 Nunu.developmentMode = function() {
-  return "201901301631" === Nunu.TIMESTAMP;
+  return "201901311210" === Nunu.TIMESTAMP;
 };
 Nunu.getPlatform = function() {
   return void 0 !== window.nw ? Nunu.NWJS : void 0 !== window.cordova ? Nunu.CORDOVA : Nunu.BROWSER;
@@ -43291,7 +43291,7 @@ Sky.prototype.updateSky = function() {
   }
   .2 > a ? (this.sun.intensity = this.intensity, this.sun.color.setHex(this.moonColor)) : .3 > a ? (c = 10 * (a - .2), .5 > c ? (this.sun.intensity = (2 - 2 * c) * this.intensity, this.sun.color.setHex(this.moonColor)) : (this.sun.intensity = 2 * c * this.intensity, this.sun.color.setHex(this.sunColor))) : .7 > a ? (this.sun.intensity = this.intensity, this.sun.color.setHex(this.sunColor)) : .8 > a ? (c = 10 * (a - .7), .5 > c ? (this.sun.intensity = (2 - 2 * c) * this.intensity, this.sun.color.setHex(this.sunColor)) : 
   (this.sun.intensity = 2 * c * this.intensity, this.sun.color.setHex(this.moonColor))) : (this.sun.intensity = this.intensity, this.sun.color.setHex(this.moonColor));
-  c = MathUtils.pi2 * a - MathUtils.pid2;
+  c = MathUtils.PI2 * a - MathUtils.PID2;
   .25 < a && .75 > a ? (this.sun.position.x = this.sunDistance * Math.cos(c), this.sun.position.y = this.sunDistance * Math.sin(c)) : (this.sun.position.x = this.sunDistance * Math.cos(c + Math.PI), this.sun.position.y = this.sunDistance * Math.sin(c + Math.PI));
 };
 Sky.prototype.toJSON = function(a) {
@@ -44195,9 +44195,9 @@ EventManager.prototype.addScrollEvent = function(a, c) {
 "use strict";
 function MathUtils() {
 }
-MathUtils.pi2 = 2 * Math.PI;
-MathUtils.pid3 = Math.PI / 3;
-MathUtils.pid2 = Math.PI / 2;
+MathUtils.PI2 = 2 * Math.PI;
+MathUtils.PID3 = Math.PI / 3;
+MathUtils.PID2 = Math.PI / 2;
 MathUtils.randomColor = function() {
   for (var a = "#", c = 0; 6 > c; c++) {
     a += "0123456789ABCDEF"[Math.floor(16 * Math.random())];
