@@ -144,6 +144,16 @@ function update()
 	object.rotation.y += 0.01;
 }</code></pre>
 			
+			<h3 class="black">Object attributes</h3>
+			<p>The self pointer in the script object can be used to store aditional attributes that can be accessed by other scripts. Attributes can also be stored into objects be carefull to avoid collisions with the already existing ones provided by the nunuStudio API.</p>
+			<p>In the example bellow we create a counter variable attached to the script object and a increaseCounter function that can be accessed and called by other scripts.</p>
+			<pre><code>self.counter = 0;
+
+self.increaseCounter = function()
+{
+	self.counter++;
+}</code></pre>
+
 			<h3 class="black">DOM Elements</h3>
 			<p>Its possible to attach dom elements to the program created. To do this we can use the division property of the program that gives us access to a DOM division element (parent of the canvas element used to draw content) where we can add HTML elements.</p>
 			<p>The example below demonstrates how to create a new red division with size 50 x 50 add it to the program and remove it when the program is being closed.</p>
