@@ -260,10 +260,22 @@ function AssetExplorerMenu(parent)
 
 	material.addOption("Shader material", function()
 	{
-		var material = new THREE.ShaderMaterial();
+		var material = new THREE.ShaderMaterial(
+		{
+			vertexShader: "void main()\n{\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}",
+			fragmentShader: "void main()\n{\n\tgl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n}"
+		});
 		material.name = "shader";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Editor.FILE_PATH + "icons/script/script.png");
+
+	material.addOption("Raw Shader material", function()
+	{
+		var material = new THREE.RawShaderMaterial();
+		material.name = "rawshader";
+		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
+	}, Editor.FILE_PATH + "icons/script/script.png");
+
 
 	var others = material.addMenu("Others");
 
