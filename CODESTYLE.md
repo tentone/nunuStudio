@@ -1,6 +1,7 @@
 # Code Guidelines
 
 - This document defines JavaScript ES5, GLSL and HTML coding rules for booth style and functionality.
+  - [ECMAScript Specification 5.1](http://ecma-international.org/ecma-262/5.1/#sec-4.3.13)
 - The statements in this document should be followed as strictly as possible.
 - If any undefined code situation arises it should be discussed by the development team and the document should be updated.
 - Format files with \n as the line ending (Unix line endings). Do not use \r\n (Windows line endings) or \r (Apple OS's). 
@@ -13,11 +14,6 @@
 
 - Code should be indented using tabs (don't use spaces for indentation).
   - Allows each development to configure its IDE to display spacing as preferred.
-- Never create local copies of constant values, use the constant values directly.
-- Avoid creating functions that are specific to a single use scenario.
-- Never create single use variables
-  - e.g `var a = 2; abc(a);` write `abc(2);` instead.
-- Variables should be always explicitly declared.
 
 
 
@@ -116,11 +112,13 @@ That does not represent documentation.
 ### Documentation
 
 - Documentation is done using JSDoc format.
+- JSDoc supports many HTML tags, like <code>, <pre>, <tt>, <strong>, <ul>, <ol>, <li>, <a>, this means that plaintext formatting is not respected. So, don't rely on whitespace to format JSDoc.
 - Every methods, properties and attributes of Classes, Types, Enums, Interfaces, etc. public or private needs to be documented.
 - The only exception is for getters, setters that don't have any code logic associated and inherited properties.
 - Local variables should never be documented, they should instead if necessary use simple comments.
-- Always use explicitly the @class, @method, @attribute, @property and @static tags.
+- Always use explicitly the JSDoc tags, not all code generators are able to parse code and identify patterns properly (@class, @method, @attribute, @property, @static, @constructor, @extends etc).
 - Always leave a empty line between the documentation description the the documentation tags.
+- Classes must be documented with a description and a type tag that identifies the constructor.
 
 ```javascript
 /**
@@ -128,7 +126,10 @@ That does not represent documentation.
  *
  * It is used to create automatically forms to edit the object attributes.
  *
+ * @constructor
  * @class AttributeMeta
+ * @param {String} name Name of the attribute.
+ * ...
  */
 function AttributeMeta(name, type, units, editable)
 {
@@ -240,6 +241,8 @@ else
 - Avoid for loops with empty statement use a while loop instead.
 - Place brackets on for every `switch` case, even when it only have a single line.
 - Only use `switch` where there are multiple cases that can be true from a single value, avoid single options case switches.
+- Avoid attributions on control statements, they may not be obvious to every programmer.
+- In JavaScript condition checks are accepted 
 
 
 
@@ -253,6 +256,10 @@ else
 
 ### Variables
 
+- Never create local copies of constant values, use the constant values directly.
+- Never create single use variables
+  - e.g `var a = 2; abc(a);` write `abc(2);` instead.
+- Variables should be always explicitly declared.
 - Always declare variables on their own line unless they are being declared in a control statement.
 
 ```javascript
@@ -270,6 +277,7 @@ for(var i = 0, j= 0;  i < x && j < y; i++; j++)
 ### Functions
 
 - If a portion of code is used more than once it must be declared into a function.
+  - Never create functions that are specific to a single use scenario. (Except for public API).
 - Function should be always declared using the keyword `function`.
 - For functions assigned to variables, place a `;` after the closing `}`, for functions that are *not* assigned to variables, do not place a `;` after the closing `}`.
 
@@ -392,6 +400,11 @@ var a = new OtherClass();
 - Array declaration should be done using the `[]` syntax.
 - If the array size is known use the `new Array(length)` constructor.
 - For object that need a explicit type declaration always use a typed array (e.g `Float64Array`, `Int8Array`). Unless strictly necessary to use a normal array (e.g array size is unknown).
+- Arrays can be pre-initialized in a single line when they fit (up to 300 characters).
+
+```javascript
+var arr = [1, 2, 3];
+```
 
 
 
@@ -419,11 +432,48 @@ var c = {};
 
 
 
+### Operations
+
+- Place spaces between your operations. Use parenthesis as much as possible to explicitly indicate the operation order and make the code more readable.
+
+```javascript
+var a = ((b * c) + (d * f)) / e;
+var b = Math.pow(a * b, c * d);
+```
+
+- Avoid mixed type operations. The result may not be clear to every programmer, making the code hard to understand. As an example some mixed operation type results.
+
+```javascript
+// In arithmetic operations (+, -, *, /, &, |, etc) boolean true is treated as 1 and false as a 0
+false * 2; //returns 0
+true * 2; //returns 2
+true + 2; //returns 3
+true * false // returns 0
+
+// In arithmetic operations Strings may be represented as NaN if not empty, 0 if empty, or concatenated if the operation is +
+2 * ""; //returns 0
+2 * "something"; //return nAn
+true * "something"; //returns nAn
+
+// In logic operations the last value checked is returned (the value that succeded or the one that failed)
+2 || true; //returns 2
+true || 2; //returns true
+2 && true && "abc" && 0 && false; //returns 0
+```
+
+- Avoid splitting binary and ternary operations into multiple lines. If doesn't fit in a single line probably its better/cleaner to use a if statement.
+
+```javascript
+var x = a ? b : c;
+```
+
+
+
 ### Strings
 
 - Prefer always to declare strings using the  `"` character.
 - The only exception is when using Template Strings or writing multi line strings.
-  - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+  - [Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
 - Never build multi line strings by concatenation, use template strings or the `\` char on line splits.
 
 
@@ -613,6 +663,7 @@ v0 = v1 * (f0 * f1);
 - Couple of articles regarding javascript ES5 patterns
   - http://bguiz.github.io/js-standards/intro/
   - https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
+- [Google Javascript Guide](https://google.github.io/styleguide/javascriptguide.xml)
 - [Khronos OpenGL GLSL recommendations](https://www.khronos.org/opengl/wiki/GLSL_:_recommendations)
 - [Apple OpenGL ES Best Practices for Shaders](https://developer.apple.com/library/archive/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/BestPracticesforShaders/BestPracticesforShaders.html)
 - [W3School HTML style guide](https://www.w3schools.com/html/html5_syntax.asp)
