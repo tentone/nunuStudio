@@ -53,25 +53,26 @@ function LensFlare()
 	var shader = THREE.Lensflare.Shader;
 	var material1a = new THREE.RawShaderMaterial(
 	{
-		uniforms: {
-			"scale": {value: null},
-			"screenPosition": {value: null}
+		uniforms:
+		{
+			scale: {value: null},
+			screenPosition: {value: null}
 		},
-		vertexShader: [
-			"precision highp float;",
-			"uniform vec3 screenPosition;",
-			"uniform vec2 scale;",
-			"attribute vec3 position;",
-			"void main() {",
-			"	gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);",
-			"}"
-		].join("\n"),
-		fragmentShader: [
-			"precision highp float;",
-			"void main() {",
-			"	gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);",
-			"}"
-		].join("\n"),
+		vertexShader: 
+			"precision highp float; \
+			uniform vec3 screenPosition; \
+			uniform vec2 scale; \
+			attribute vec3 position; \
+			void main() \
+			{ \
+				gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0); \
+			}",
+		fragmentShader:
+			"precision highp float; \
+			void main() \
+			{ \
+				gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0); \
+			}",
 		depthTest: true,
 		depthWrite: false,
 		transparent: false
@@ -81,49 +82,47 @@ function LensFlare()
 	{
 		uniforms:
 		{
-			"map": {value: tempMap},
-			"scale": {value: null},
-			"screenPosition": {value: null}
+			map: {value: tempMap},
+			scale: {value: null},
+			screenPosition: {value: null}
 		},
 		vertexShader:
-		[
-			"precision highp float;",
-			"uniform vec3 screenPosition;",
-			"uniform vec2 scale;",
-			"attribute vec3 position;",
-			"attribute vec2 uv;",
-			"varying vec2 vUV;",
-			"void main() {",
-			"	vUV = uv;",
-			"	gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);",
-			"}"
-		].join("\n"),
+			"precision highp float; \
+			uniform vec3 screenPosition; \
+			uniform vec2 scale; \
+			attribute vec3 position; \
+			attribute vec2 uv; \
+			varying vec2 vUV; \
+			void main() \
+			{ \
+				vUV = uv; \
+				gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0); \
+			}",
 		fragmentShader:
-		[
-			"precision highp float;",
-			"uniform sampler2D map;",
-			"varying vec2 vUV;",
-			"void main() {",
-			"	gl_FragColor = texture2D(map, vUV);",
-			"}"
-		].join("\n"),
+			"precision highp float; \
+			uniform sampler2D map; \
+			varying vec2 vUV; \
+			void main() \
+			{ \
+				gl_FragColor = texture2D(map, vUV); \
+			}",
 		depthTest: false,
 		depthWrite: false,
 		transparent: false
 	});
 
-	// the following object is used forocclusionMap generation
+	// The following object is used for occlusionMap generation
 	var mesh1 = new THREE.Mesh(geometry, material1a);
 	var shader = THREE.LensflareElement.Shader;
 	var material2 = new THREE.RawShaderMaterial(
 	{
 		uniforms:
 		{
-			"map": {value: null},
-			"occlusionMap": {value: occlusionMap},
-			"color": {value: new THREE.Color(0xffffff)},
-			"scale": {value: new THREE.Vector2()},
-			"screenPosition": {value: new THREE.Vector3()}
+			map: {value: null},
+			occlusionMap: {value: occlusionMap},
+			color: {value: new THREE.Color(0xffffff)},
+			scale: {value: new THREE.Vector2()},
+			screenPosition: {value: new THREE.Vector3()}
 		},
 		vertexShader: shader.vertexShader,
 		fragmentShader: shader.fragmentShader,

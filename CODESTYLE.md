@@ -443,7 +443,18 @@ if (error === null || error === undefined)
 
 ## GLSL
 
-- Declare all the GLSL code inline on your JavaScript code.
+- Declare all the GLSL code inline on your JavaScript code. Use multiline strings to write the code. Keep the GLSL at the same block level as your JavaScript code.
+
+```javascript
+var vertex = "varying vec3 vWorldPosition; \
+void main() \
+{ \
+	vec4 worldPosition = modelMatrix * vec4(position, 1.0); \
+	vWorldPosition = worldPosition.xyz; \
+	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \
+}";
+```
+
 - Use precision hints whenever its possible.
   - Colors in the `0.0` to `1.0` range can usually be represented using low precision variables.
   - Position data should usually be stored as high precision.
@@ -460,7 +471,7 @@ varying vec2 texCoord;
 
 - Avoid branching instructions when possible
   - Branches are discouraged in shaders, as they can reduce the ability to execute operations in parallel.
-  - Use preprocessing for branching in all constant values.
+  - Use pre-processing for branching in all constant values.
 - Avoid and/or eliminate loop instructions as much as possible.
 - Be careful when performing vectorial operations. Not all graphics processors include vector processors.
 

@@ -44,52 +44,49 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 	{
 		defines:
 		{
-			"MIP_LEVEL_1X1" : (Math.log(this.resolution) / Math.log(2.0)).toFixed(1)
+			MIP_LEVEL_1X1 : (Math.log(this.resolution) / Math.log(2.0)).toFixed(1)
 		},
 		uniforms:
 		{
-			"lastLum": {value: null},
-			"currentLum": {value: null},
-			"minLuminance": {value: 0.01},
-			"delta": {value: 0.016},
-			"tau": {value: 1.0}
+			lastLum: {value: null},
+			currentLum: {value: null},
+			minLuminance: {value: 0.01},
+			delta: {value: 0.016},
+			tau: {value: 1.0}
 		},
 		vertexShader:
-		[
-			"varying vec2 vUv;",
-			"void main(){",
-
-				"vUv = uv;",
-				"gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);",
-
-			"}"
-		].join('\n'),
+			"varying vec2 vUv; \
+			void main(){ \
+			\
+				vUv = uv; \
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \
+			\
+			}",
 		fragmentShader:
-		[
-			"varying vec2 vUv;",
-
-			"uniform sampler2D lastLum;",
-			"uniform sampler2D currentLum;",
-			"uniform float minLuminance;",
-			"uniform float delta;",
-			"uniform float tau;",
-
-			"void main(){",
-
-				"vec4 lastLum = texture2D(lastLum, vUv, MIP_LEVEL_1X1);",
-				"vec4 currentLum = texture2D(currentLum, vUv, MIP_LEVEL_1X1);",
-
-				"float fLastLum = max(minLuminance, lastLum.r);",
-				"float fCurrentLum = max(minLuminance, currentLum.r);",
-
-				//The adaption seems to work better in extreme lighting differences if the input luminance is squared.
-				"fCurrentLum *= fCurrentLum;",
-
-				//Adapt the luminance using Pattanaik's technique
-				"float fAdaptedLum = fLastLum + (fCurrentLum - fLastLum) * (1.0 - exp(-delta * tau));",
-				"gl_FragColor.r = fAdaptedLum;",
-			"}"
-		].join('\n')
+			"varying vec2 vUv; \
+			\
+			uniform sampler2D lastLum; \
+			uniform sampler2D currentLum; \
+			uniform float minLuminance; \
+			uniform float delta; \
+			uniform float tau; \
+			\
+			void main() \
+			{ \
+				\
+				vec4 lastLum = texture2D(lastLum, vUv, MIP_LEVEL_1X1); \
+				vec4 currentLum = texture2D(currentLum, vUv, MIP_LEVEL_1X1); \
+				\
+				float fLastLum = max(minLuminance, lastLum.r); \
+				float fCurrentLum = max(minLuminance, currentLum.r); \
+				\
+				// The adaption seems to work better in extreme lighting differences if the input luminance is squared.\
+				fCurrentLum *= fCurrentLum; \
+				\
+				// Adapt the luminance using Pattanaik's technique\
+				float fAdaptedLum = fLastLum + (fCurrentLum - fLastLum) * (1.0 - exp(-delta * tau)); \
+				gl_FragColor.r = fAdaptedLum; \
+			}",
 	};
 
 	this.materialAdaptiveLum = new THREE.ShaderMaterial(
