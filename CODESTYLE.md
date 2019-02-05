@@ -310,7 +310,7 @@ var exampleFunction = function()
 
 - Classes should be declared from functions.
 - Static attributes of the class should be attached to a Class defining function.
-- The prototype of the `Class` should be the `Class` itself in order to make the Class static method available from the object context.
+- Always store the class constructor in the prototype.
 
 ```javascript
 function ThisIsAClass(parameter)
@@ -318,7 +318,9 @@ function ThisIsAClass(parameter)
 	this.attribute = "something";
 }
 
-ThisIsAClass.STATIC_CONST = 2;
+
+
+ThisIsAClass.prototype.constructor = ThisIsAClass;
 
 ThisIsAClass.prototype.methodXPTO = function()
 {
@@ -330,7 +332,26 @@ a.methodXPTO();
 a.attribute = "something else";
 ```
 
-- Inheritance is achieved by calling the base `Class` constructor on the second `Class` constructor and by copying the base class prototype.
+- When there are static elements in the class the prototype of the class should be the class itself in order to make the static methods and properties available from the object context.
+
+```javascript
+function ThisIsAClass(parameter){}
+
+ThisIsAClass.prototype = ThisIsAClass;
+ThisIsAClass.prototype.constructor = ThisIsAClass;
+
+ThisIsAClass.STATIC_CONST = 2;
+ThisIsAClass.staticMethod = function()
+{
+    console.log("Static method");
+}
+
+var a = new ThisIsAClass();
+a.staticMethod();
+console.log(a.STATIC_CONST);
+```
+
+- Inheritance is achieved by calling the base class constructor on the new class constructor and by copying the base class prototype.
 
 ```javascript
 function OtherClass(parameter)
@@ -380,7 +401,8 @@ var a = new OtherClass();
 - Object declaration can be done in a single line up to 3 attributes, more than 3 attributes and the object declarations should always be spitted into lines.
 - Use `{key: "val1", key2: "val2"}` never declare objects as `new Object()`.
 - There should never be any space between the curly brackets and the attribute name when writing inline.
-- Always access object attributes as obj.attribute, only use obj["attribute"] when using a string variable.
+- Always access object attributes as `obj.attribute`, only use `obj["attribute"]` when using a string stored in a variable.
+- Never write attribute names as strings on declaration, neve declare objects as `{"attribute": 2}` declare as `{attribute: 2}` instead.
 ```javascript
 methodXPTO({a: 123, b: "abc", c: new Abc()});
 
@@ -444,15 +466,15 @@ if (error === null || error === undefined)
 ## GLSL
 
 - Declare all the GLSL code inline on your JavaScript code. Use multiline strings to write the code. Keep the GLSL at the same block level as your JavaScript code.
+- Be careful when writing your strings. Always place line breaks between statements they are necessary for pre-processing code and may lead to compile errors if not placed properly.
 
 ```javascript
-var vertex = "varying vec3 vWorldPosition; \
-void main() \
-{ \
-	vec4 worldPosition = modelMatrix * vec4(position, 1.0); \
-	vWorldPosition = worldPosition.xyz; \
-	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \
-}";
+var vertex = "varying vec2 vUv;\n\
+void main()\n\
+{\n\
+	vUv = uv;\n\
+	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
+}",
 ```
 
 - Use precision hints whenever its possible.
@@ -499,11 +521,11 @@ v0 = v1 * (f0 * f1);
 - Element and attribute names must be in all lower case:
 
 ```html
-<!-- Correct -->
+<!-- Good -->
 <input name="name" type="text" />
 
-<!-- Wrong -->
-<input name="name" TYPE="text" />
+<!-- Bad -->
+<input NAME="name" TYPE="text" />
 ```
 
 - Non-empty elements must have corresponding closing tags.
@@ -530,7 +552,6 @@ v0 = v1 * (f0 * f1);
 - Nested elements must be nested appropriately - for example:
 
 ```html
-<!-- Correct -->
 <div>
   <p>Some text</p>
 </div>
@@ -541,10 +562,10 @@ v0 = v1 * (f0 * f1);
 - Attribute values, even numeric attributes should be quoted.
 
 ```html
-<!-- Correct -->
+<!-- Good -->
 <input name="age" type="text" size="3" />
 
-<!-- Wrong -->
+<!-- Bad -->
 <input name=age type=text size=3 />
 ```
 

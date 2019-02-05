@@ -27,16 +27,18 @@ function CubemapFlatRenderer(envMap, faceSizePx, paddingLeftPx, paddingRightPx)
 
 	var material = new THREE.ShaderMaterial(
 	{
-		vertexShader: "attribute vec3 envLookup; \
-		varying vec3 vEnvLookup; \
-		void main() {\
-			vEnvLookup = envLookup;\
-			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\
+		vertexShader: "attribute vec3 envLookup;\n\
+		varying vec3 vEnvLookup;\n\
+		void main()\n\
+		{\n\
+			vEnvLookup = envLookup;\n\
+			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
 		}",
-		fragmentShader: "uniform samplerCube envMap;\
-		varying vec3 vEnvLookup;\
-		void main() {\
-			gl_FragColor = textureCube(envMap, vEnvLookup);\
+		fragmentShader: "uniform samplerCube envMap;\n\
+		varying vec3 vEnvLookup;\n\
+		void main()\n\
+		{\n\
+			gl_FragColor = textureCube(envMap, vEnvLookup);\n\
 		}",
 		uniforms:
 		{

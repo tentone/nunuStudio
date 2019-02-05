@@ -16,7 +16,7 @@ function FontRenderer()
 	this.scene = new THREE.Scene();
 
 	//Text
-	this.text = new Text3D("Abc", new THREE.MeshBasicMaterial({color: 0xFFFFFF}), null);
+	this.text = new TextMesh("Abc", new THREE.MeshBasicMaterial({color: 0xFFFFFF}), null);
 	this.text.position.z = -3;
 	this.scene.add(this.text);
 }

@@ -130,7 +130,7 @@ include("source/core/objects/device/LeapMotion.js");
 include("source/core/objects/device/KinectDevice.js");
 include("source/core/objects/mesh/Mesh.js");
 include("source/core/objects/mesh/SkinnedMesh.js");
-include("source/core/objects/mesh/Text3D.js");
+include("source/core/objects/text/TextMesh.js");
 include("source/core/objects/sprite/Sprite.js");
 include("source/core/objects/lights/PointLight.js");
 include("source/core/objects/lights/SpotLight.js");

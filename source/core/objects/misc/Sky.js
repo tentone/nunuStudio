@@ -88,24 +88,24 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.add(this.sun);
 
 	//Vertex Shader
-	var vertex = "varying vec3 vWorldPosition; \
-	void main() \
-	{ \
-		vec4 worldPosition = modelMatrix * vec4(position, 1.0); \
-		vWorldPosition = worldPosition.xyz; \
-		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \
+	var vertex = "varying vec3 vWorldPosition;\n\
+	void main()\n\
+	{\n\
+		vec4 worldPosition = modelMatrix * vec4(position, 1.0);\n\
+		vWorldPosition = worldPosition.xyz;\n\
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
 	}";
 
 	//Pixel shader
-	var fragment = "uniform vec3 topColor; \
-	uniform vec3 bottomColor; \
-	uniform float offset; \
-	uniform float exponent; \
-	varying vec3 vWorldPosition; \
-	void main() \
-	{ \
-		float h = normalize(vWorldPosition + offset).y; \
-		gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h , 0.0), exponent), 0.0)), 1.0); \
+	var fragment = "uniform vec3 topColor;\n\
+	uniform vec3 bottomColor;\n\
+	uniform float offset;\n\
+	uniform float exponent;\n\
+	varying vec3 vWorldPosition;\n\
+	void main()\n\
+	{\n\
+		float h = normalize(vWorldPosition + offset).y;\n\
+		gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h , 0.0), exponent), 0.0)), 1.0);\n\
 	}";
 
 	//Uniforms

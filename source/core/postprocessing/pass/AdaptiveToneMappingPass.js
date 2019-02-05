@@ -55,37 +55,36 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 			tau: {value: 1.0}
 		},
 		vertexShader:
-			"varying vec2 vUv; \
-			void main(){ \
-			\
-				vUv = uv; \
-				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \
-			\
+			"varying vec2 vUv;\n\
+			void main(){\n\
+			\n\
+				vUv = uv;\n\
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
+			\n\
 			}",
 		fragmentShader:
-			"varying vec2 vUv; \
-			\
-			uniform sampler2D lastLum; \
-			uniform sampler2D currentLum; \
-			uniform float minLuminance; \
-			uniform float delta; \
-			uniform float tau; \
-			\
-			void main() \
-			{ \
-				\
-				vec4 lastLum = texture2D(lastLum, vUv, MIP_LEVEL_1X1); \
-				vec4 currentLum = texture2D(currentLum, vUv, MIP_LEVEL_1X1); \
-				\
-				float fLastLum = max(minLuminance, lastLum.r); \
-				float fCurrentLum = max(minLuminance, currentLum.r); \
-				\
+			"varying vec2 vUv;\n\
+			\n\
+			uniform sampler2D lastLum;\n\
+			uniform sampler2D currentLum;\n\
+			uniform float minLuminance;\n\
+			uniform float delta;\n\
+			uniform float tau;\n\
+			\n\
+			void main()\n\
+			{\n\
+				vec4 lastLum = texture2D(lastLum, vUv, MIP_LEVEL_1X1);\n\
+				vec4 currentLum = texture2D(currentLum, vUv, MIP_LEVEL_1X1);\n\
+				\n\
+				float fLastLum = max(minLuminance, lastLum.r);\n\
+				float fCurrentLum = max(minLuminance, currentLum.r);\n\
+				\n\
 				// The adaption seems to work better in extreme lighting differences if the input luminance is squared.\
-				fCurrentLum *= fCurrentLum; \
-				\
+				fCurrentLum *= fCurrentLum;\n\
+				\n\
 				// Adapt the luminance using Pattanaik's technique\
-				float fAdaptedLum = fLastLum + (fCurrentLum - fLastLum) * (1.0 - exp(-delta * tau)); \
-				gl_FragColor.r = fAdaptedLum; \
+				float fAdaptedLum = fLastLum + (fCurrentLum - fLastLum) * (1.0 - exp(-delta * tau));\n\
+				gl_FragColor.r = fAdaptedLum;\n\
 			}",
 	};
 

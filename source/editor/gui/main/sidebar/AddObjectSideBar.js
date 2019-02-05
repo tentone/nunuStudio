@@ -76,7 +76,7 @@ function AddObjectSideBar(parent)
 	//Text
 	addModel.addOption(Editor.FILE_PATH + "icons/models/text.png", function()
 	{
-		var model = new Text3D("text", Editor.defaultMaterial, Editor.defaultFont);
+		var model = new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont);
 		Editor.addObject(model);
 	}, "3D Text");
 

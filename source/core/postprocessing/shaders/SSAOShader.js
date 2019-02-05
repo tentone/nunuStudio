@@ -55,7 +55,6 @@ var SSAOShader =
 \n\
 	varying vec2 vUv;\n\
 \n\
-	//#define PI 3.14159265\n\
 	#define DL 2.399963229728653 //PI *(3.0 - sqrt(5.0))\n\
 	#define EULER 2.718281828459045\n\
 \n\

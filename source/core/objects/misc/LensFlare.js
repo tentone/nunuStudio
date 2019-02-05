@@ -59,19 +59,19 @@ function LensFlare()
 			screenPosition: {value: null}
 		},
 		vertexShader: 
-			"precision highp float; \
-			uniform vec3 screenPosition; \
-			uniform vec2 scale; \
-			attribute vec3 position; \
-			void main() \
-			{ \
-				gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0); \
+			"precision highp float;\n\
+			uniform vec3 screenPosition;\n\
+			uniform vec2 scale;\n\
+			attribute vec3 position;\n\
+			void main()\n\
+			{\n\
+				gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);\n\
 			}",
 		fragmentShader:
-			"precision highp float; \
-			void main() \
-			{ \
-				gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0); \
+			"precision highp float;\n\
+			void main()\n\
+			{\n\
+				gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);\n\
 			}",
 		depthTest: true,
 		depthWrite: false,
@@ -87,24 +87,24 @@ function LensFlare()
 			screenPosition: {value: null}
 		},
 		vertexShader:
-			"precision highp float; \
-			uniform vec3 screenPosition; \
-			uniform vec2 scale; \
-			attribute vec3 position; \
-			attribute vec2 uv; \
-			varying vec2 vUV; \
-			void main() \
-			{ \
-				vUV = uv; \
-				gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0); \
+			"precision highp float;\n\
+			uniform vec3 screenPosition;\n\
+			uniform vec2 scale;\n\
+			attribute vec3 position;\n\
+			attribute vec2 uv;\n\
+			varying vec2 vUV;\n\
+			void main()\n\
+			{\n\
+				vUV = uv;\n\
+				gl_Position = vec4(position.xy * scale + screenPosition.xy, screenPosition.z, 1.0);\n\
 			}",
 		fragmentShader:
-			"precision highp float; \
-			uniform sampler2D map; \
-			varying vec2 vUV; \
-			void main() \
-			{ \
-				gl_FragColor = texture2D(map, vUV); \
+			"precision highp float;\n\
+			uniform sampler2D map;\n\
+			varying vec2 vUV;\n\
+			void main()\n\
+			{\n\
+				gl_FragColor = texture2D(map, vUV);\n\
 			}",
 		depthTest: false,
 		depthWrite: false,
