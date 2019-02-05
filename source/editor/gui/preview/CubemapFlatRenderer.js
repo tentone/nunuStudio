@@ -1,10 +1,17 @@
 "use strict";
 
-function CubemapFlatRenderer(envMap, faceSizePx, paddingLeftPx, paddingRightPx)
+/** 
+ * The cube map flat renderer generates preview for cube map textures.
+ *
+ * Is draws the faces of the cube map into a flat surface.
+ *
+ * @class CubemapFlatRenderer
+ */
+function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 {
-	var faces = [], faceOffsets = [];
-	var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-	var scene  = new THREE.Scene();
+	this.faceSize = faceSize;
+	this.paddingLeft = paddingLeft;
+	this.paddingRight = paddingRight;
 
 	function setEnvLookupVector(vIdx, vEnvLookup, outputArray)
 	{
@@ -45,53 +52,66 @@ function CubemapFlatRenderer(envMap, faceSizePx, paddingLeftPx, paddingRightPx)
 			envMap: {type: "t", value: envMap}
 		}
 	});
+	
+	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
+	this.scene  = new THREE.Scene();
+
+	this.faces = [];
 	for(var i = 0; i < 6; i++)
 	{
-		var geometry = new THREE.PlaneBufferGeometry(faceSizePx, faceSizePx);
+		var geometry = new THREE.PlaneBufferGeometry(faceSize, faceSize);
 		var envLookupArray = new Float32Array(12);
 		geometry.addAttribute("envLookup", new THREE.BufferAttribute(envLookupArray, 3));
 		for(var j = 0; j < 4; j++)
 		{
 			setEnvLookupVector(j, geometryEnvLookupVectors[i][j], envLookupArray);
 		}
-		faces[i] = new THREE.Mesh(geometry, material);
-		scene.add(faces[i]);
+		this.faces[i] = new THREE.Mesh(geometry, material);
+		this.scene.add(this.faces[i]);
 	}
 
-	// Faces layout:
-	//   2
-	// 1 4 0 5
-	//   3
-	faceOffsets[0] = [2 * faceSizePx, faceSizePx];
-	faceOffsets[1] = [0, faceSizePx];
-	faceOffsets[2] = [faceSizePx, 0];
-	faceOffsets[3] = [faceSizePx, 2 * faceSizePx];
-	faceOffsets[4] = [faceSizePx, faceSizePx];
-	faceOffsets[5] = [3 * faceSizePx, faceSizePx];
+	/**
+	 * Faces layout offsets.
+	 *   2
+	 * 1 4 0 5
+	 *   3
+	 *
+	 * @attribute faceOffsets
+	 * @type {Array}
+	 */
+	this.faceOffsets =
+	[
+		[2 * faceSize, faceSize],
+		[0, faceSize],
+		[faceSize, 0],
+		[faceSize, 2 * faceSize],
+		[faceSize, faceSize],
+		[3 * faceSize, faceSize]
+	];
+};
 
-	this.setSize = function(width, height)
+CubemapFlatRenderer.prototype.setSize = function(width, height)
+{
+	var halfWidth = width / 2;
+	var halfHeight = height / 2;
+
+	this.camera.left = -halfWidth;
+	this.camera.right = halfWidth;
+	this.camera.top = halfHeight;
+	this.camera.bottom = -halfHeight;
+	this.camera.updateProjectionMatrix();
+
+	var offsetX = -halfWidth + this.paddingLeft + this.faceSize / 2;
+	var offsetY = halfHeight - this.paddingRight - this.faceSize / 2;
+
+	for(var i = 0; i < this.faces.length; i += 1)
 	{
-		var halfWidth = width / 2;
-		var halfHeight = height / 2;
+		this.faces[i].position.set(offsetX + this.faceOffsets[i][0], offsetY - this.faceOffsets[i][1], 0);
+	}
+};
 
-		camera.left = -halfWidth;
-		camera.right = halfWidth;
-		camera.top = halfHeight;
-		camera.bottom = -halfHeight;
-		camera.updateProjectionMatrix();
-
-		var commonOffsetX = -halfWidth + paddingLeftPx + faceSizePx / 2;
-		var commonOffsetY = halfHeight - paddingRightPx - faceSizePx / 2;
-
-		for(var i = 0; i < faces.length; i += 1)
-		{
-			faces[i].position.set(commonOffsetX + faceOffsets[i][0], commonOffsetY - faceOffsets[i][1], 0);
-		}
-	};
-
-	this.render = function(renderer)
-	{
-		renderer.render(scene, camera);
-	};
+CubemapFlatRenderer.prototype.render = function(renderer)
+{
+	renderer.render(this.scene, this.camera);
 };

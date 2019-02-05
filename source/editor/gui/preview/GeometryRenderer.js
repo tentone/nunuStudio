@@ -1,19 +1,19 @@
 "use strict";
 
+/** 
+ * The geometry renderer is used to generate preview thumbnails.
+ *
+ * A basic phong material is used to preview the geometry.
+ *
+ * @class TextureRenderer
+ * @extends {PreviewRenderer}
+ */
 function GeometryRenderer()
 {
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({alpha: true});
-	this.renderer.setSize(64, 64);
+	PreviewRenderer.call(this);
 	
-	//Canvas
-	this.canvas = this.renderer.domElement;
-	
-	//Camera
 	this.camera = new OrthographicCamera(3, 1);
 
-	//Scene
-	this.scene = new THREE.Scene();
 	var directional = new THREE.DirectionalLight(0x777777, 1.0);
 	directional.position.set(3000, 10000, 400);
 	this.scene.add(directional);
@@ -22,6 +22,8 @@ function GeometryRenderer()
 	this.mesh = new THREE.Mesh(new THREE.Geometry(), new THREE.MeshPhongMaterial({color: 0xFFFFFF}));
 	this.scene.add(this.mesh);
 }
+
+GeometryRenderer.prototype = Object.create(PreviewRenderer.prototype);
 
 GeometryRenderer.render = function(material, onRender)
 {
@@ -33,13 +35,6 @@ GeometryRenderer.render = function(material, onRender)
 	GeometryRenderer.instance.render(material, onRender);
 };
 
-//Set render size
-GeometryRenderer.prototype.setSize = function(x, y)
-{
-	this.renderer.setSize(x, y);
-};
-
-//Render material to internal canvas and copy image to html image element
 GeometryRenderer.prototype.render = function(geometry, onRender)
 {
 	geometry.computeBoundingBox();

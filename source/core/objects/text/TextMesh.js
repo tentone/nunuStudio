@@ -38,7 +38,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * @property extruded
 	 * @type {Boolean}
 	 */
-	this.extruded = extruded !== undefined ? extruded : false;
+	this.extruded = extruded !== undefined ? extruded : true;
 
 	/**
 	 * Size of the text (depth).

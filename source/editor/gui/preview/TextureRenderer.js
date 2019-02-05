@@ -1,20 +1,17 @@
 "use strict";
 
+/** 
+ * The texture renderer is used to generate preview thumbnails.
+ *
+ * @class TextureRenderer
+ * @extends {PreviewRenderer}
+ */
 function TextureRenderer()
 {
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({alpha: true});
-	this.renderer.shadowMap.enabled = false;
-	this.renderer.setSize(64, 64);
-	
-	//Canvas
-	this.canvas = this.renderer.domElement;
-	
+	PreviewRenderer.call(this);
+
 	//Camera
 	this.camera = new OrthographicCamera(1, 1, OrthographicCamera.RESIZE_VERTICAL);
-
-	//Scene
-	this.scene = new THREE.Scene();
 
 	//Material
 	this.material = new THREE.MeshBasicMaterial({transparent: true});
@@ -24,6 +21,8 @@ function TextureRenderer()
 	this.plane.position.set(0, 0, -1);
 	this.scene.add(this.plane);
 }
+
+TextureRenderer.prototype = Object.create(PreviewRenderer.prototype);
 
 TextureRenderer.generateElement = function(texture)
 {
@@ -46,13 +45,6 @@ TextureRenderer.render = function(texture, onRender)
 	TextureRenderer.instance.render(texture, onRender);
 };
 
-//Set render size
-TextureRenderer.prototype.setSize = function(x, y)
-{
-	this.renderer.setSize(x, y);
-};
-
-//Render texture to internal canvas and create dataURL that is passed to onRender callback
 TextureRenderer.prototype.render = function(texture, onRender)
 {
 	if(texture.isCubeTexture)

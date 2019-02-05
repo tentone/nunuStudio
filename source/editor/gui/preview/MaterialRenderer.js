@@ -1,19 +1,17 @@
 "use strict";
 
+/** 
+ * The material renderer is used to generate preview thumbnails.
+ *
+ * @class MaterialRenderer
+ * @extends {PreviewRenderer}
+ */
 function MaterialRenderer()
 {
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({alpha: true});
-	this.renderer.setSize(64, 64);
-	
-	//Canvas
-	this.canvas = this.renderer.domElement;
-	
+	PreviewRenderer.call(this);
+
 	//Camera
 	this.camera = new OrthographicCamera(2.15, 1);
-
-	//Scene
-	this.scene = new THREE.Scene();
 
 	//Sphere
 	this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16));
@@ -33,6 +31,8 @@ function MaterialRenderer()
 	point.position.set(-0.5, 1, 1.5);
 	this.scene.add(point);
 }
+
+MaterialRenderer.prototype = Object.create(PreviewRenderer.prototype);
 
 MaterialRenderer.generateElement = function(material)
 {
@@ -55,13 +55,6 @@ MaterialRenderer.render = function(material, onRender)
 	MaterialRenderer.instance.render(material, onRender);
 };
 
-//Set render size
-MaterialRenderer.prototype.setSize = function(x, y)
-{
-	this.renderer.setSize(x, y);
-};
-
-//Render material to internal canvas and create dataURL that is passed to onRender callback
 MaterialRenderer.prototype.render = function(material, onRender)
 {
 	//Set material

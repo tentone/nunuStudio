@@ -486,11 +486,12 @@ include("source/editor/gui/tab/panel/objects/mesh/geometry/DodecahedronGeometryF
 include("source/editor/gui/tab/panel/objects/mesh/geometry/CircleGeometryForm.js");
 include("source/editor/gui/tab/panel/objects/mesh/geometry/RingGeometryForm.js");
 
-include("source/editor/gui/preview/CubemapFlatRenderer.js");
+include("source/editor/gui/preview/PreviewRenderer.js");
 include("source/editor/gui/preview/FontRenderer.js");
 include("source/editor/gui/preview/MaterialRenderer.js");
 include("source/editor/gui/preview/TextureRenderer.js");
 include("source/editor/gui/preview/GeometryRenderer.js");
+include("source/editor/gui/preview/CubemapFlatRenderer.js");
 
 include("source/editor/gui/main/Interface.js");
 include("source/editor/gui/main/MainMenu.js");

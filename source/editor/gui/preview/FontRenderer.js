@@ -1,19 +1,17 @@
 "use strict";
 
+/** 
+ * The font renderer is used to generate preview thumbnails for fonts.
+ *
+ * @class FontRenderer
+ * @extends {PreviewRenderer}
+ */
 function FontRenderer()
 {
-	//Renderer
-	this.renderer = new THREE.WebGLRenderer({alpha: true});
-	this.renderer.setSize(64, 64);
-	
-	//Canvas
-	this.canvas = this.renderer.domElement;
-	
+	PreviewRenderer.call(this);
+
 	//Camera
 	this.camera = new OrthographicCamera(3, 1);
-
-	//Scene
-	this.scene = new THREE.Scene();
 
 	//Text
 	this.text = new TextMesh("Abc", new THREE.MeshBasicMaterial({color: 0xFFFFFF}), null);
@@ -21,23 +19,18 @@ function FontRenderer()
 	this.scene.add(this.text);
 }
 
-FontRenderer.render = function(material, onRender)
+FontRenderer.prototype = Object.create(PreviewRenderer.prototype);
+
+FontRenderer.render = function(font, onRender)
 {
 	if(FontRenderer.instance === undefined)
 	{
 		FontRenderer.instance = new FontRenderer();
 	}
 
-	FontRenderer.instance.render(material, onRender);
+	FontRenderer.instance.render(font, onRender);
 };
 
-//Set render size
-FontRenderer.prototype.setSize = function(x, y)
-{
-	this.renderer.setSize(x, y);
-};
-
-//Render material to internal canvas and copy image to html image element
 FontRenderer.prototype.render = function(font, onRender)
 {
 	this.text.setFont(font);
