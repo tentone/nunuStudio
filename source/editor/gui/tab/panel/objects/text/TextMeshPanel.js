@@ -35,6 +35,17 @@ function TextMeshPanel(parent, object)
 	this.form.add(this.textSize);
 	this.form.nextRow();
 
+	//Extruded
+	this.extruded = new CheckBox(this.form);
+	this.form.addText("Extruded");
+	this.extruded.size.set(18, 18);
+	this.extruded.setOnChange(function()
+	{
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "extruded", self.extruded.getValue()), updateGeometry));
+	});
+	this.form.add(this.extruded);
+	this.form.nextRow();
+
 	//Height
 	this.form.addText("Thickness");
 	this.height = new NumberBox(this.form);
@@ -109,6 +120,7 @@ TextMeshPanel.prototype.updatePanel = function()
 	this.receiveShadow.setValue(this.object.receiveShadow);
 	this.text.setText(this.object.text);
 	this.textSize.setValue(this.object.size);
+	this.extruded.setValue(this.object.extruded);
 	this.height.setValue(this.object.height);
 	this.curveSegments.setValue(this.object.curveSegments);
 	this.bevel.setValue(this.object.bevel);

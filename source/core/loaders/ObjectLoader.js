@@ -650,7 +650,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "TextMesh":
 		case "Text3D":
-			object = new TextMesh(data.text, getMaterial(data.material), getFont(data.font), data.height, data.bevel, data.bevelThickness, data.bevelSize, data.size, data.curveSegments);
+			object = new TextMesh(data.text, getMaterial(data.material), getFont(data.font), data.height, data.bevel, data.bevelThickness, data.bevelSize, data.size, data.curveSegments, data.extruded);
 			break;
 
 		case "Program":

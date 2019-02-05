@@ -17,22 +17,32 @@
  * @param {Number} curveSegments
  * @extends {Mesh}
  */
-function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments)
+function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments, extruded)
 {
-	Mesh.call(this, undefined, material);
+	Mesh.call(this, TextMesh.EMPTY_GEOMETRY, material);
 	
 	this.name = "text";
 	this.type = "TextMesh";
 
 	/**
 	 * Font used to draw text.
+	 *
 	 * @property font
 	 * @type {Font}
 	 */
 	this.font = font !== undefined ? font : null;
 
 	/**
+	 * Indicates if the text mesh has volume or not.
+	 *
+	 * @property extruded
+	 * @type {Boolean}
+	 */
+	this.extruded = extruded !== undefined ? extruded : false;
+
+	/**
 	 * Size of the text (depth).
+	 *
 	 * @property size
 	 * @type {Number}
 	 */
@@ -40,6 +50,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 
 	/**
 	 * Height of the text.
+	 *
 	 * @property height
 	 * @type {Number}
 	 */
@@ -47,6 +58,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 
 	/**
 	 * Number of segments that compose a curve in the font.
+	 *
 	 * @property curveSegments
 	 * @type {Number}
 	 */
@@ -54,6 +66,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 
 	/**
 	 * If true a bevel is added to the text.
+	 *
 	 * @property bevel
 	 * @type {boolean}
 	 */
@@ -61,6 +74,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 
 	/**
 	 * Bevel thickness.
+	 *
 	 * @property bevelThickness
 	 * @type {Number}
 	 */
@@ -68,20 +82,25 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 
 	/**
 	 * Bevel size.
+	 *
 	 * @property bevelSize
 	 * @type {Number}
 	 */
 	this.bevelSize = bevelSize !== undefined ? bevelSize : 0.05;
 
 	/**
-	 * Text.
+	 * Text to be diplayed in the mesh.
+	 *
 	 * @property text
 	 * @type {String}
 	 */
+	this.text = "";
 	this.setText(text !== undefined ? text : "text");
 }
 
 TextMesh.prototype = Object.create(Mesh.prototype);
+
+TextMesh.EMPTY_GEOMETRY = new THREE.Geometry();
 
 /**
  * Set font used by this text 3D instance.
@@ -129,25 +148,39 @@ TextMesh.prototype.updateGeometry = function()
 			this.geometry.dispose();
 		}
 
-		this.geometry = new THREE.TextBufferGeometry(this.text,
+		if(this.font.isFont !== true)
 		{
-			size: this.size,
-			curveSegments: this.curveSegments,
-			font: this.font,
-			height: this.height,
-			bevelEnabled: this.bevel,
-			bevelSize: this.bevelSize,
-			bevelThickness: this.bevelThickness
-		});
-		this.geometry.computeVertexNormals();
+			console.warn("nunuStudio: Font parameter is not an instance of THREE.Font.");
+			this.geometry = TextMesh.EMPTY_GEOMETRY;
+			return;
+		}
+
+		var shapes = this.font.generateShapes(this.text, this.size);
+
+		if(this.extruded)
+		{		
+			this.geometry = new THREE.ExtrudeBufferGeometry(shapes,
+			{
+				curveSegments: this.curveSegments,
+				depth: this.height,
+				bevelEnabled: this.bevel,
+				bevelSize: this.bevelSize,
+				bevelThickness: this.bevelThickness
+			});
+			this.geometry.computeVertexNormals();
+		}
+		else
+		{
+			this.geometry = new THREE.ShapeBufferGeometry(shapes, this.curveSegments);
+		}
 	}
 };
 
 /**
- * Clone this TextMesh instance.
+ * Clone this object instance into a new object.
  * 
  * @method clone
- * @return {TextMesh} Clone of this object
+ * @return {TextMesh} Clone of this object.
  */
 TextMesh.prototype.clone = function()
 {
@@ -176,13 +209,13 @@ TextMesh.prototype.toJSON = function(meta)
 
 	data.object.text = this.text;
 	data.object.font = font.uuid;
-
 	data.object.size = this.size;
 	data.object.curveSegments = this.curveSegments;
 	data.object.height = this.height;
 	data.object.bevel = this.bevel;
 	data.object.bevelThickness = this.bevelThickness;
 	data.object.bevelSize = this.bevelSize;
+	data.object.extruded = this.extruded;
 
 	this.geometry = geometry;
 

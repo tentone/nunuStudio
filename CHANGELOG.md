@@ -6,7 +6,7 @@
 ## Unpublished
 ### V0.9.6 Beta
  - CSS 3D renderer support.
-
+ - Support for extruded or planar Text Mesh.
 
 
 ## Published
