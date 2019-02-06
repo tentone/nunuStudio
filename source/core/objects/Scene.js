@@ -13,30 +13,6 @@
  * @module Core
  * @extends {Scene}
  */
-
-/**
- * Cannon.js world used for physics simulation.
- * The world is configured by default with a NaiveBroadphase and a SplitSolver.
- * Documentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.
- * @property {World} world
- */
-/**
- * Raycaster used for mouse interaction with 3D objects.
- * This raycaster is automatically updated using the first camera being drawn.
- * @property {Raycaster} raycaster
- */
-/**
- * Normalized mouse coordinates used by the scene internal raycaster.
- * @property {Vector2} mouse
- */
-/**
- * Program that contains this scene.
- * @property {Program} program
- */
-/**
- * Canvas used to draw this scene.
- * @property {DOM} canvas
- */
 function Scene()
 {
 	THREE._Scene.call(this);
@@ -46,6 +22,15 @@ function Scene()
 
 	this.usePhysics = true;
 
+	/**
+	 * Cannon.js world used for physics simulation.
+	 *
+	 * The world is configured by default with a NaiveBroadphase and a SplitSolver.
+	 *
+	 * Documentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.
+	 *
+	 * @property {World} world
+	 */
 	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
 	this.world.defaultContactMaterial.contactEquationRelaxation = 4;
@@ -61,17 +46,37 @@ function Scene()
 
 	//Cameras in use
 	this.cameras = [];
-
-	//Runtime objects
-	this.raycaster = new THREE.Raycaster();
 	this.clock = new THREE.Clock();
 	this.delta = 0;
 
-	//Renderer canvas
+	/**
+	 * Raycaster used for mouse interaction with 3D objects.
+	 *
+	 * This raycaster is automatically updated using the first camera being drawn.
+	 *
+	 * @property {Raycaster} raycaster
+	 */
+	this.raycaster = new THREE.Raycaster();
+
+	/**
+	 * Program that contains this scene.
+	 *
+	 * @property {Program} program
+	 */
 	this.program = null;
+
+	/**
+	 * Canvas used to draw this scene.
+	 *
+	 * @property {DOM} canvas
+	 */
 	this.canvas = null;
 
-	//Mouse normalized
+	/**
+	 * Normalized mouse coordinates used by the scene internal raycaster.
+	 *
+	 * @property {Vector2} mouse
+	 */
 	this.mouse = new THREE.Vector2(0, 0);
 }
 
@@ -92,7 +97,6 @@ Scene.prototype.initialize = function()
 	this.program = this.parent;
 	this.canvas = this.parent.canvas;
 
-	//Initialize children
 	THREE.Object3D.prototype.initialize.call(this);
 
 	//Start clock
