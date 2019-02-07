@@ -420,8 +420,4 @@ TextBitmap.prototype.updateGeometry = function()
 {
 	//Update BMFont geometry to match config
 	this.geometry.update(this.config);
-
-	//Center the geometry
-	//this.geometry.rotateX(Math.PI);
-	//this.geometry.center();
 };
