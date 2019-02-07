@@ -88,15 +88,18 @@ function TextBitmap(config, texture, mode)
 	var material = new THREE.ShaderMaterial(
 	{
 		uniforms: THREE.UniformsUtils.clone(uniforms),
-		fragmentShader: shader.fragmentShader,
-		vertexShader: shader.vertexShader,
+		fragmentShader: shader,
+		vertexShader: TextBitmap.VERTEX_SHADER,
 		side: THREE.DoubleSide,
 		transparent: true,
 		depthTest: false
 	});
 	material.uniforms.map.value = texture;
 
-	THREE.Mesh.call(this, createGeometry(this.config), material);
+	var geometry = createGeometry(this.config);
+	geometry.computeBoundingSphere = THREE.BufferGeometry.prototype.computeBoundingSphere;
+
+	THREE.Mesh.call(this, geometry, material);
 
 	this.name = "text";
 	this.type = "TextBitmap";
@@ -281,115 +284,113 @@ TextBitmap.CENTER = "center";
 TextBitmap.RIGHT = "right";
 
 /**
+ * Vertex shader used to draw the text, is responsible for applying the billboard effect by removing the rotation from the transformation matrix.
+ *
+ * @static
+ * @attribute VERTEX_SHADER
+ * @type {String}
+ */
+TextBitmap.VERTEX_SHADER = "\n\
+#define BILLBOARD false \n\
+\n\
+varying vec2 vUv;\n\
+\n\
+void main()\n\
+{\n\
+	vUv = uv;\n\
+	\n\
+	#if BILLBOARD\n\
+		mat4 model = modelViewMatrix; \n\
+		model[0][1] = 0.0;\n\
+		model[0][2] = 0.0;\n\
+		model[1][0] = 0.0;\n\
+		model[1][2] = 0.0;\n\
+		model[2][0] = 0.0;\n\
+		model[2][1] = 0.0;\n\
+		gl_Position = projectionMatrix * model * vec4(position, 1.0);\n\
+	#else\n\
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
+	#endif\n\
+	\n\
+}";
+
+/**
  * Shader object used to render the bitmap directly without any processing.
  *
- * Contains the shader vertex and fragment code.
+ * Contains only the fragment shader code, the vertex is the same for every render mode.
  *
  * @static
  * @attribute BITMAP_SHADER
- * @type {Object}
+ * @type {String}
  */
-TextBitmap.BITMAP_SHADER =
-{
-	vertexShader: "\n\
-	varying vec2 vUv;\n\
-	\n\
-	void main()\n\
-	{\n\
-		vUv = uv;\n\
-		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
-	}",
-	fragmentShader: "\n\
-	varying vec2 vUv;\n\
-	uniform sampler2D map;\n\
-	\n\
-	void main()\n\
-	{\n\
-		gl_FragColor = texture2D(map, vUv);\n\
-	}"
-};
+TextBitmap.BITMAP_SHADER = "\n\
+varying vec2 vUv;\n\
+uniform sampler2D map;\n\
+\n\
+void main()\n\
+{\n\
+	gl_FragColor = texture2D(map, vUv);\n\
+}";
 
 /**
  * Shader object used to render single channel SDF data.
  *
- * Contains the shader vertex and fragment code.
+ * Contains only the fragment shader code, the vertex is the same for every render mode.
  * 
  * Details about signed distance fields for vetorial shapes rendering.
  *    - https://steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf
  *
  * @static
  * @attribute SDF_SHADER
- * @type {Object}
+ * @type {String}
  */
-TextBitmap.SDF_SHADER =
-{
-	vertexShader: "\n\
-	varying vec2 vUv;\n\
-	\n\
-	void main()\n\
-	{\n\
-		vUv = uv;\n\
-		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
-	}",
-	fragmentShader: "\n\
-	varying vec2 vUv;\n\
-	uniform sampler2D map;\n\
-	uniform vec3 color;\n\
-	uniform float smoothing;\n\
-	uniform float threshold;\n\
-	\n\
-	void main()\n\
-	{\n\
-		float distance = texture2D(map, vUv).a;\n\
-		float alpha = smoothstep(threshold - smoothing, threshold + smoothing, distance);\n\
-		gl_FragColor = vec4(color, alpha);\n\
-	}"
-};
+TextBitmap.SDF_SHADER = "\n\
+varying vec2 vUv;\n\
+uniform sampler2D map;\n\
+uniform vec3 color;\n\
+uniform float smoothing;\n\
+uniform float threshold;\n\
+\n\
+void main()\n\
+{\n\
+	float distance = texture2D(map, vUv).a;\n\
+	float alpha = smoothstep(threshold - smoothing, threshold + smoothing, distance);\n\
+	gl_FragColor = vec4(color, alpha);\n\
+}";
 
 /**
  * Shader object used to render single channel MSDF data.
  *
- * Contains the shader vertex and fragment code.
+ * Contains only the fragment shader code, the vertex is the same for every render mode.
  * 
  * Details about Multi‐Channel Signed Distance Fields for vetorial shapes rendering.
  *    - https://onlinelibrary.wiley.com/doi/full/10.1111/cgf.13265
  *
  * @static
  * @attribute SDF_SHADER
- * @type {Object}
+ * @type {String}
  */
-TextBitmap.MSDF_SHADER =
-{
-	vertexShader: "\n\
-	varying vec2 vUv;\n\
-	\n\
-	void main()\n\
-	{\n\
-		vUv = uv;\n\
-		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
-	}",
-	fragmentShader: "\n\
-	#extension GL_OES_standard_derivatives : enable\n\
-	\n\
-	varying vec2 vUv;\n\
-	uniform sampler2D map;\n\
-	uniform vec3 color;\n\
-	uniform float smoothing;\n\
-	uniform float threshold;\n\
-	\n\
-	float median(float r, float g, float b)\n\
-	{\n\
-		return max(min(r, g), min(max(r, g), b));\n\
-	}\n\
-	\n\
-	void main()\n\
-	{\n\
-		vec3 sample = texture2D(map, vUv).rgb;\n\
-		float sigDist = median(sample.r, sample.g, sample.b) - 0.5;\n\
-		float alpha = clamp(sigDist / fwidth(sigDist) + 0.5, 0.0, 1.0);\n\
-		gl_FragColor = vec4(color, 1.0 - alpha);\n\
-	}"
-};
+TextBitmap.MSDF_SHADER = "\n\
+#extension GL_OES_standard_derivatives : enable\n\
+\n\
+varying vec2 vUv;\n\
+uniform sampler2D map;\n\
+uniform vec3 color;\n\
+uniform float smoothing;\n\
+uniform float threshold;\n\
+\n\
+float median(float r, float g, float b)\n\
+{\n\
+	return max(min(r, g), min(max(r, g), b));\n\
+}\n\
+\n\
+void main()\n\
+{\n\
+	vec3 sample = texture2D(map, vUv).rgb;\n\
+	float sigDist = median(sample.r, sample.g, sample.b) - 0.5;\n\
+	float alpha = clamp(sigDist / fwidth(sigDist) + 0.5, 0.0, 1.0);\n\
+	gl_FragColor = vec4(color, 1.0 - alpha);\n\
+}";
 
 /**
  * Set the text to be displayed.
@@ -415,5 +416,5 @@ TextBitmap.prototype.updateGeometry = function()
 	this.geometry.update(this.config);
 
 	//Center the geometry
-	//this.geometry.center();
+	this.geometry.center();
 };
