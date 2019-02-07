@@ -73,12 +73,31 @@ function AddObjectSideBar(parent)
 		Editor.addObject(model);
 	}, Locale.cone);
 
-	//Text
+	//Text mesh
 	addModel.addOption(Editor.FILE_PATH + "icons/models/text.png", function()
 	{
 		var model = new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont);
 		Editor.addObject(model);
-	}, "3D Text");
+	}, "Text Mesh");
+
+	if(Nunu.developmentMode())
+	{
+		addModel.addOption(Editor.FILE_PATH + "icons/models/text.png", function()
+		{
+			var text = new TextBitmap(
+			{
+				font: JSON.parse(FileSystem.readFile(Editor.FILE_PATH + "sdf/roboto-bold.json")),
+				text: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+				width: 500,
+				align: "center",
+				letterSpacing: 3,
+				color: "#FF0000"
+			}, new Texture(Editor.FILE_PATH + "sdf/roboto-bold.png"), TextBitmap.SDF);
+			text.scale.set(0.001, 0.001, 0.001);
+
+			Editor.addObject(text);
+		}, "Text Bitmap");
+	}
 
 	//Tetrahedron
 	addModel.addOption(Editor.FILE_PATH + "icons/models/pyramid.png", function()

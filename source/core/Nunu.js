@@ -84,6 +84,17 @@ Nunu.BROWSER = 201;
 Nunu.CORDOVA = 202;
 
 /**
+ * Check if nunu if running in development mode.
+ *
+ * @method developmentMode
+ * @return {boolean} True if running as development mode.
+ */
+Nunu.developmentMode = function()
+{
+	return Nunu.TIMESTAMP === "<PLACEHOLDER_TIMESTAMP>";
+};
+
+/**
  * Check if host supports WebVR and if there is a VR display available.
  * 
  * @method webvrAvailable
@@ -201,17 +212,6 @@ Nunu.webglAvailable = function()
 	}
 
 	return false;
-};
-
-/**
- * Check if nunu if running in development mode.
- *
- * @method developmentMode
- * @return {boolean} True if running as development mode.
- */
-Nunu.developmentMode = function()
-{
-	return Nunu.TIMESTAMP === "DEVELOPMENT_VERSION";
 };
 
 /**

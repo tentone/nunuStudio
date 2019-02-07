@@ -312,6 +312,23 @@ var exampleFunction = function()
 }();
 ```
 
+- Getter and setter functions that contain an attribution and a single statement may be written on the same line to improve readability.
+
+```javascript
+Object.defineProperties(this,
+{
+	foo: 
+	{
+		get: function(){return this.object.foo;},
+		set: function(value){this.object.foo = value; this.updateStuff();}
+	},
+	derp:
+	{
+		get: function(){return this.object.derp;},
+		set: function(value){this.object.derp = value; this.updateStuff();}
+	}
+}
+```
 
 
 ### Classes
@@ -388,8 +405,8 @@ function OtherClass()
 OtherClass.prototype = Object.create(BaseClassA.prototype);
 Object.assign(OtherClass.prototype, BaseClassB.prototype);
 
-// "a instanceof BaseClassA" returns true
-// "a instanceof BaseClassB" returns false
+//"a instanceof BaseClassA" returns true
+//"a instanceof BaseClassB" returns false
 var a = new OtherClass();
 ```
 
@@ -444,18 +461,18 @@ var b = Math.pow(a * b, c * d);
 - Avoid mixed type operations. The result may not be clear to every programmer, making the code hard to understand. As an example some mixed operation type results.
 
 ```javascript
-// In arithmetic operations (+, -, *, /, &, |, etc) boolean true is treated as 1 and false as a 0
+//In arithmetic operations (+, -, *, /, &, |, etc) boolean true is treated as 1 and false as a 0
 false * 2; //returns 0
 true * 2; //returns 2
 true + 2; //returns 3
 true * false // returns 0
 
-// In arithmetic operations Strings may be represented as NaN if not empty, 0 if empty, or concatenated if the operation is +
+//In arithmetic operations Strings may be represented as NaN if not empty, 0 if empty, or concatenated if the operation is +
 2 * ""; //returns 0
 2 * "something"; //return nAn
 true * "something"; //returns nAn
 
-// In logic operations the last value checked is returned (the value that succeded or the one that failed)
+//In logic operations the last value checked is returned (the value that succeded or the one that failed)
 2 || true; //returns 2
 true || 2; //returns true
 2 && true && "abc" && 0 && false; //returns 0
@@ -493,10 +510,10 @@ var x = a ? b : c;
 - Use `null` where its a part of the API or conventional. Never return an `undefined` value, if the output expects an object return a `null` instead in case of error or missing data.
 
 ```javascript
-// Bad
+//Bad
 return undefined;
 
-// Good
+//Good
 return null;
 return;
 ```
@@ -504,10 +521,10 @@ return;
 - Always explicitly check if objects are `null` or `undefined`.
 
 ```javascript
-// Bad
+//Bad
 if (error == null)
     
-// Good
+//Good
 if (error === null || error === undefined)
 ```
 
@@ -519,7 +536,9 @@ if (error === null || error === undefined)
 - Be careful when writing your strings. Always place line breaks between statements they are necessary for pre-processing code and may lead to compile errors if not placed properly.
 
 ```javascript
-var vertex = "varying vec2 vUv;\n\
+var vertex = "\n\
+varying vec2 vUv;\n\
+\n\
 void main()\n\
 {\n\
 	vUv = uv;\n\
@@ -532,12 +551,12 @@ void main()\n\
   - Position data should usually be stored as high precision.
 
 ```c
-// Defines precision for float and float-derived (vector/matrix) types.
+//Defines precision for float and float-derived (vector/matrix) types.
 precision highp float;
-// Texture2D() result is lowp.
+//Texture2D() result is lowp.
 uniform lowp sampler2D sampler; 
 varying lowp vec4 color;
-// Uses default highp precision.
+//Uses default highp precision.
 varying vec2 texCoord;
 ```
 

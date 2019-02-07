@@ -42,6 +42,7 @@ include("lib/pson/bytebuffer.min.js");
 include("lib/pson/long.min.js");
 include("lib/pson/PSON.min.js");
 
+include("lib/three-bmfont.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/SPE.min.js");
@@ -131,6 +132,7 @@ include("source/core/objects/device/KinectDevice.js");
 include("source/core/objects/mesh/Mesh.js");
 include("source/core/objects/mesh/SkinnedMesh.js");
 include("source/core/objects/text/TextMesh.js");
+include("source/core/objects/text/TextBitmap.js");
 include("source/core/objects/sprite/Sprite.js");
 include("source/core/objects/lights/PointLight.js");
 include("source/core/objects/lights/SpotLight.js");
