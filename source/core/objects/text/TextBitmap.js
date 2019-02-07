@@ -14,9 +14,11 @@
  * @class TextBitmap
  * @extends {THREE.Mesh}
  * @param {Object} config Configuration object with all parameters for bmfont.
- * @param {Number} The text rendering mode to be used (Bitmap, SDF, MSDF).
+ * @param {THREE.Texture} texture Texture with the image character atlas to be used.
+ * @param {Number} mode The text rendering mode to be used (Bitmap, SDF, MSDF).
+ * @param {Number} color Color of the text.
  */
-function TextBitmap(config, texture, mode)
+function TextBitmap(config, texture, mode, color)
 {
 	if(config.font === undefined)
 	{
@@ -39,10 +41,6 @@ function TextBitmap(config, texture, mode)
 	{
 		config.letterSpacing = 5;
 	}
-	if(config.color === undefined)
-	{
-		config.color = 0xFFFFFF;
-	}
 	if(config.text === undefined)
 	{
 		config.text = "";
@@ -60,7 +58,10 @@ function TextBitmap(config, texture, mode)
 	 *    align: (String) Side to align the text,
 	 *    lineHeight: (Number) Line height/font size,
 	 *    letterSpacing: (Number) Spacing between characters,
-	 *    color: (String | Number) Color for the text
+	 *    mode: (String) a mode for word-wrapper; can be 'pre' (maintain spacing), or 'nowrap' (collapse whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse whitespace, break at width or newlines)
+	 *    tabSize: (Number) the number of spaces to use in a single tab (default 4)
+	 *    start: (Number) the starting index into the text to layout (default 0)
+	 *    end: (Number) the ending index (exclusive) into the text to layout (default text.length)
 	 * }
 	 */
 	this.config = config;
@@ -80,7 +81,7 @@ function TextBitmap(config, texture, mode)
 	var uniforms = 
 	{
 		map: {type: "t", value: texture},
-		color: {type: "v3", value: new THREE.Color(this.config.color)},
+		color: {type: "v3", value: new THREE.Color(color !== undefined ? color : 0xFFFFFF)},
 		smoothing: {type: "f", value: 0.0},
 		threshold: {type: "f", value: 0.4}
 	};
@@ -97,14 +98,12 @@ function TextBitmap(config, texture, mode)
 	material.uniforms.map.value = texture;
 
 	var geometry = createGeometry(this.config);
-	geometry.computeBoundingSphere = THREE.BufferGeometry.prototype.computeBoundingSphere;
 
 	THREE.Mesh.call(this, geometry, material);
 
 	this.name = "text";
 	this.type = "TextBitmap";
 
-	this.rotation.x = Math.PI;
 	this.updateGeometry();
 
 	Object.defineProperties(this,
@@ -301,18 +300,25 @@ void main()\n\
 	\n\
 	#if BILLBOARD\n\
 		mat4 model = modelViewMatrix; \n\
+		model[0][0] = 1.0;\n\
 		model[0][1] = 0.0;\n\
 		model[0][2] = 0.0;\n\
+		\n\
 		model[1][0] = 0.0;\n\
+		model[1][1] = 1.0;\n\
 		model[1][2] = 0.0;\n\
+		\n\
 		model[2][0] = 0.0;\n\
 		model[2][1] = 0.0;\n\
+		model[2][2] = 1.0;\n\
+		\n\
 		gl_Position = projectionMatrix * model * vec4(position, 1.0);\n\
 	#else\n\
 		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
 	#endif\n\
 	\n\
 }";
+
 
 /**
  * Shader object used to render the bitmap directly without any processing.
@@ -416,5 +422,6 @@ TextBitmap.prototype.updateGeometry = function()
 	this.geometry.update(this.config);
 
 	//Center the geometry
-	this.geometry.center();
+	//this.geometry.rotateX(Math.PI);
+	//this.geometry.center();
 };

@@ -24,7 +24,7 @@ function CSS3DRenderer(domElement)
 	/**
 	 * Temporary matrix object.
 	 *
-	 * @property matrix
+	 * @attribute matrix
 	 * @type {THREE.Matrix4}
 	 */
 	this.matrix = new THREE.Matrix4();
@@ -32,7 +32,7 @@ function CSS3DRenderer(domElement)
 	/**
 	 * Object cache, used to store the rendered objects state.
 	 *
-	 * @property cache
+	 * @attribute cache
 	 * @type {Object}
 	 */
 	this.cache =
@@ -44,16 +44,17 @@ function CSS3DRenderer(domElement)
 	/**
 	 * Main DOM element used for the renderer.
 	 *
-	 * @property domElement
+	 * @attribute domElement
 	 * @type {DOM}
 	 */
 	this.domElement = domElement !== undefined ? domElement : document.createElement("div");
 	this.domElement.style.overflow = "hidden";
+	this.domElement.style.pointerEvents = "none";
 
 	/**
 	 * Camera projected DOM element.
 	 *
-	 * @property domElement
+	 * @attribute domElement
 	 * @type {DOM}
 	 */
 	this.cameraElement = document.createElement("div");
