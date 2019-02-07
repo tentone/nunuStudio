@@ -18,6 +18,11 @@
  */
 function TextBitmap(config, texture, mode)
 {
+	if(config.font === undefined)
+	{
+		throw new Error("TextBitmap configuration font is required.");
+	}
+
 	if(config.width === undefined)
 	{
 		config.width = 500;
@@ -37,6 +42,10 @@ function TextBitmap(config, texture, mode)
 	if(config.color === undefined)
 	{
 		config.color = 0xFFFFFF;
+	}
+	if(config.text === undefined)
+	{
+		config.text = "";
 	}
 
 	/**
@@ -72,7 +81,7 @@ function TextBitmap(config, texture, mode)
 	{
 		map: {type: "t", value: texture},
 		color: {type: "v3", value: new THREE.Color(this.config.color)},
-		smoothing: {type: "f", value: 0.01},
+		smoothing: {type: "f", value: 0.0},
 		threshold: {type: "f", value: 0.4}
 	};
 
@@ -150,13 +159,13 @@ function TextBitmap(config, texture, mode)
 		},
 
 		/**
-		 * Text alignment can be:
+		 * Horizontal text alignment can be
 		 *    - TextBitmap.LEFT
 		 *    - TextBitmap.RIGHT
 		 *    - TextBitmap.CENTER
 		 *
 		 * @attribute align
-		 * @type {Number}
+		 * @type {String}
 		 */
 		align:
 		{
@@ -383,6 +392,17 @@ TextBitmap.MSDF_SHADER =
 };
 
 /**
+ * Set the text to be displayed.
+ *
+ * @method setText
+ * @param {String} text
+ */
+TextBitmap.prototype.setText = function(text)
+{
+	this.text = text;
+};
+
+/**
  * Update the text bitmap geometry.
  *
  * Should be called every time after changes to configuration are made.
@@ -391,9 +411,9 @@ TextBitmap.MSDF_SHADER =
  */
 TextBitmap.prototype.updateGeometry = function()
 {
-	//Update geometry to match config
+	//Update BMFont geometry to match config
 	this.geometry.update(this.config);
 
 	//Center the geometry
-	THREE.GeometryUtils.center(this.geometry);
+	//this.geometry.center();
 };
