@@ -3,21 +3,24 @@
 function AddObjectSideBar(parent)
 {
 	var size = 40;
-	
+	var position = 210;
+
 	//Add Text
 	var add = new Text(parent);
 	add.setText("Add");
 	add.size.set(40, 20);
-	add.position.set(0, 210);
+	add.position.set(0, position);
 	add.updateInterface();
+	position += add.size.y;
 
 	//Add Models
 	var addModel = new ButtonDrawer(parent);
 	addModel.setImage(Editor.FILE_PATH + "icons/models/models.png");
 	addModel.size.set(size, size);
-	addModel.position.set(0, 230);
+	addModel.position.set(0, position);
 	addModel.optionsSize.set(size, size);
 	addModel.updateInterface();
+	position += size;
 
 	//Cube
 	addModel.addOption(Editor.FILE_PATH + "icons/models/cube.png", function()
@@ -72,32 +75,6 @@ function AddObjectSideBar(parent)
 		model.name = "cone";
 		Editor.addObject(model);
 	}, Locale.cone);
-
-	//Text mesh
-	addModel.addOption(Editor.FILE_PATH + "icons/models/text.png", function()
-	{
-		var model = new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont);
-		Editor.addObject(model);
-	}, "Text Mesh");
-
-	if(Nunu.developmentMode())
-	{
-		addModel.addOption(Editor.FILE_PATH + "icons/models/text.png", function()
-		{
-			var text = new TextBitmap(
-			{
-				font: JSON.parse(FileSystem.readFile(Editor.FILE_PATH + "sdf/roboto-bold.json")),
-				text: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-				width: 500,
-				align: "center",
-				letterSpacing: 3,
-				color: "#FF0000"
-			}, new Texture(Editor.FILE_PATH + "sdf/roboto-bold.png"), TextBitmap.SDF);
-			text.scale.set(0.001, 0.001, 0.001);
-
-			Editor.addObject(text);
-		}, "Text Bitmap");
-	}
 
 	//Tetrahedron
 	addModel.addOption(Editor.FILE_PATH + "icons/models/pyramid.png", function()
@@ -178,13 +155,54 @@ function AddObjectSideBar(parent)
 		Editor.addObject(model);
 	}, "Parametric");*/
 
+	//Text
+	var addText = new ButtonDrawer(parent);
+	addText.setImage(Editor.FILE_PATH + "icons/text/text.png");
+	addText.size.set(size, size);
+	addText.position.set(0, position);
+	addText.optionsSize.set(size, size);
+	addText.updateInterface();
+	position += size;
+
+	addText.addOption(Editor.FILE_PATH + "icons/text/meshtext.png", function()
+	{
+		var model = new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont);
+		Editor.addObject(model);
+	}, "Text Mesh");
+
+	if(Nunu.developmentMode())
+	{
+		addText.addOption(Editor.FILE_PATH + "icons/text/text.png", function()
+		{
+			var text = new TextBitmap(
+			{
+				font: JSON.parse(FileSystem.readFile(Editor.FILE_PATH + "sdf/roboto-bold.json")),
+				text: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+				width: 500,
+				align: TextBitmap.CENTER,
+				letterSpacing: 3,
+				color: 0xFFFFFF
+			}, new Texture(Editor.FILE_PATH + "sdf/roboto-bold.png"), TextBitmap.SDF);
+			text.scale.set(0.001, 0.001, 0.001);
+
+			Editor.addObject(text);
+		}, "Text Bitmap");
+
+		addText.addOption(Editor.FILE_PATH + "icons/text/text.png", function()
+		{
+			//TODO <ADD CODE HERE>
+		}, "Text Sprite");
+	}
+
+
 	//Add lights
 	var addLight = new ButtonDrawer(parent);
 	addLight.setImage(Editor.FILE_PATH + "icons/lights/point.png");
 	addLight.size.set(size, size);
-	addLight.position.set(0, 270);
+	addLight.position.set(0, position);
 	addLight.optionsSize.set(size, size);
 	addLight.updateInterface();
+	position += size;
 
 	//Point Light
 	addLight.addOption(Editor.FILE_PATH + "icons/lights/point.png", function()
@@ -233,9 +251,10 @@ function AddObjectSideBar(parent)
 	addCamera.setImage(Editor.FILE_PATH + "icons/camera/camera.png");
 	addCamera.optionsPerLine = 2;
 	addCamera.size.set(size, size);
-	addCamera.position.set(0, 310);
+	addCamera.position.set(0, position);
 	addCamera.optionsSize.set(size, size);
 	addCamera.updateInterface();
+	position += size;
 
 	//Perspective camera
 	addCamera.addOption(Editor.FILE_PATH + "icons/camera/prespective.png", function()
@@ -254,24 +273,26 @@ function AddObjectSideBar(parent)
 	addScript.setImage(Editor.FILE_PATH + "icons/script/script.png");
 	addScript.optionsPerLine = 1;
 	addScript.size.set(size, size);
-	addScript.position.set(0, 350);
+	addScript.position.set(0, position);
 	addScript.optionsSize.set(size, size);
 	addScript.updateInterface();
+	position += size;
 
 	//Javascript script
 	addScript.addOption(Editor.FILE_PATH + "icons/script/script.png", function()
 	{
 		Editor.addObject(new Script());
-	}, "JS Script");
+	}, "Javascript Script");
 
 	//Effects
 	var addEffects = new ButtonDrawer(parent);
 	addEffects.setImage(Editor.FILE_PATH + "icons/misc/particles.png");
 	addEffects.optionsPerLine = 3;
 	addEffects.size.set(size, size);
-	addEffects.position.set(0, 390);
+	addEffects.position.set(0, position);
 	addEffects.optionsSize.set(size, size);
 	addEffects.updateInterface();
+	position += size;
 
 	//Sprite
 	addEffects.addOption(Editor.FILE_PATH + "icons/misc/sprite.png", function()
@@ -352,9 +373,10 @@ function AddObjectSideBar(parent)
 	addPhysics.setImage(Editor.FILE_PATH + "icons/misc/physics.png");
 	addPhysics.optionsPerLine = 3;
 	addPhysics.size.set(size, size);
-	addPhysics.position.set(0, 430);
+	addPhysics.position.set(0, position);
 	addPhysics.optionsSize.set(size, size);
 	addPhysics.updateInterface();
+	position += size;
 
 	//Physics box
 	addPhysics.addOption(Editor.FILE_PATH + "icons/models/cube.png", function()
@@ -408,9 +430,10 @@ function AddObjectSideBar(parent)
 	addControls.setImage(Editor.FILE_PATH + "icons/misc/controller.png");
 	addControls.optionsPerLine = 3;
 	addControls.size.set(size, size);
-	addControls.position.set(0, 470);
+	addControls.position.set(0, position);
 	addControls.optionsSize.set(size, size);
 	addControls.updateInterface();
+	position += size;
 
 	//Orbit controls
 	addControls.addOption(Editor.FILE_PATH + "icons/misc/orbit.png", function()
