@@ -291,7 +291,7 @@ TextBitmap.RIGHT = "right";
  * @type {String}
  */
 TextBitmap.VERTEX_SHADER = "\n\
-#define BILLBOARD false \n\
+#define BILLBOARD 0 \n\
 \n\
 varying vec2 vUv;\n\
 \n\
