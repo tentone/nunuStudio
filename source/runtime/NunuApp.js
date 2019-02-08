@@ -115,7 +115,6 @@ include("source/core/texture/WebcamTexture.js");
 include("source/core/texture/CubeTexture.js");
 include("source/core/texture/CompressedTexture.js");
 include("source/core/texture/SpriteSheetTexture.js");
-include("source/core/texture/YoutubeTexture.js");
 
 include("source/core/loaders/FontLoader.js");
 include("source/core/loaders/ImageLoader.js");
@@ -162,8 +161,6 @@ include("source/core/objects/Scene.js");
 include("source/core/utils/binary/Base64Utils.js");
 include("source/core/utils/binary/ArraybufferUtils.js");
 include("source/core/utils/binary/BufferUtils.js");
-
-include("source/core/utils/struct/TreeUtils.js");
 
 include("source/core/utils/timer/Timer.js");
 include("source/core/utils/timer/AnimationTimer.js");

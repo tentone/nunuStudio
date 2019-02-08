@@ -7,6 +7,9 @@
  *
  * @class RendererState
  */
+
+//TODO <NOT USED>
+
 function RendererState()
 {
 	//Auto clear configuration

@@ -61,12 +61,6 @@ SpotLight.prototype.updateShadowMap = function()
 	this.shadow.camera.updateProjectionMatrix();
 };
 
-/**
- * Serialize SpotLight data to JSON.
- *
- * @method toJSON
- * @param {Object} meta Meta.
- */
 SpotLight.prototype.toJSON = function(meta)
 {
 	var data = THREE.Light.prototype.toJSON.call(this, meta);

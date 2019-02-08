@@ -2,6 +2,8 @@
 
 /**
  * Containers are used to group objects together.
+ *
+ * They are not drawn in the scene are just used as logic containers.
  * 
  * @class Container
  * @extends {Group}

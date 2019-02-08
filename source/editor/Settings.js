@@ -1,5 +1,12 @@
 "use strict";
 
+/** 
+ * Settings store all user configurable settings of the editor.
+ *
+ * Everything regarding editor, code analysis, rendering etc is stored in this object.
+ *
+ * @class Settings
+ */
 function Settings()
 {
 	this.loadDefault();
@@ -178,7 +185,11 @@ Settings.prototype.loadDefault = function()
 	}
 };
 
-//Store settings
+/**
+ * Store settings in the local storage.
+ *
+ * @method store
+ */
 Settings.prototype.store = function()
 {
 	var data = JSON.stringify(
@@ -205,7 +216,11 @@ Settings.prototype.store = function()
 	}
 };
 
-//Load settings
+/**
+ * Load settings from the local storage.
+ *
+ * @method load
+ */
 Settings.prototype.load = function()
 {
 	try

@@ -262,13 +262,6 @@ LensFlare.prototype.addElement = function(element)
 	this.elements.push(element);
 };
 
-/**
- * Serialize lensflare data to json.
- *
- * @method toJSON
- * @param {Object} meta Metadata.
- * @return {Object} Serialized data.
- */
 LensFlare.prototype.toJSON = function(meta)
 {
 	var self = this;

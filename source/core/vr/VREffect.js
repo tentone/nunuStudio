@@ -1,3 +1,5 @@
+"use strict";
+
 /*
  * The VR effect is used to render virtual reality applications.
  * 

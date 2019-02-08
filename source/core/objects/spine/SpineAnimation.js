@@ -222,13 +222,6 @@ SpineAnimation.prototype.setSkin = function(name)
 	}
 };
 
-/**
- * Serialize spine animation as JSON.
- *
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
 SpineAnimation.prototype.toJSON = function(meta)
 {
 	//Avoid serializing geometry and material

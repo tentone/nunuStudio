@@ -14,82 +14,95 @@
  * @param {Number} near Near projection plane
  * @param {Number} far Far projection plane
  */
-
-/**
- * Camera size relative to resize mode.
- * 
- * @property size
- * @default 10.0
- * @type {Number}
-*/
-/**
- * Aspect ratio X/Y.
- * 
- * @property aspect
- * @default 1.0
- * @type {Number}
-*/
-/**
- * Camera resize mode.
- * 
- * @property mode
- * @default RESIZE_HORIZONTAL
- * @type {Number}
-*/
-/**
- * Camera viewport offset.
- * 
- * Values range from 0.0 to 1.0 in screen space.
- * 
- * @property offset
- * @type {Vector2}
-*/
-/**
- * Camera viewport size.
- * 
- * Values range from 0.0 to 1.0 in screen space.
- * 
- * @property viewport
- * @type {Vector2}
-*/
-/**
- * Clear screen color flag.
- * 
- * @property clearColor
- * @default false
- * @type {boolean}
-*/
-/**
- * Clear depth flag.
- * 
- * @property clearDepth
- * @default false
- * @type {boolean}
-*/
-/**
- * Camera draw order preference.
- * 
- * If more than one camera has the same order value the draw order is undefined for those cameras.
- * 
- * @property order
- * @default 0
- * @type {Number}
-*/
 function OrthographicCamera(size, aspect, mode, near, far)
 {
 	THREE.OrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
 
 	this.name = "camera";
 
+	/**
+	 * Camera size relative to resize mode.
+	 * 
+	 * @property size
+	 * @default 10.0
+	 * @type {Number}
+	*/
 	this.size = (size != undefined) ? size : 10.0;
+
+	/**
+	 * Aspect ratio X/Y.
+	 * 
+	 * @property aspect
+	 * @default 1.0
+	 * @type {Number}
+	*/
 	this.aspect = (aspect != undefined) ? aspect : 1.0;
+
+	/**
+	 * Camera resize mode.
+	 * 
+	 * @property mode
+	 * @default RESIZE_HORIZONTAL
+	 * @type {Number}
+	*/
 	this.mode = (mode !== undefined) ? mode : OrthographicCamera.RESIZE_HORIZONTAL;
 
+	/**
+	 * Camera viewport offset.
+	 * 
+	 * Values range from 0.0 to 1.0 in screen space.
+	 * 
+	 * @property offset
+	 * @type {Vector2}
+	*/
 	this.offset = new THREE.Vector2(0.0, 0.0);
+
+	/**
+	 * Camera viewport size.
+	 * 
+	 * Values range from 0.0 to 1.0 in screen space.
+	 * 
+	 * @property viewport
+	 * @type {Vector2}
+	*/
 	this.viewport = new THREE.Vector2(1.0, 1.0);
+
+	/**
+	 * Clear screen color flag.
+	 * 
+	 * @property clearColor
+	 * @default false
+	 * @type {boolean}
+	*/
 	this.clearColor = true;
+
+	/**
+	 * Clear depth flag.
+	 * 
+	 * @property clearDepth
+	 * @default false
+	 * @type {boolean}
+	*/
 	this.clearDepth = true;
+
+	/**
+	 * Clear stencil buffer flag.
+	 * 
+	 * @property clearDepth
+	 * @default false
+	 * @type {boolean}
+	*/
 	this.clearStencil = true;
+
+	/**
+	 * Camera draw order preference.
+	 * 
+	 * If more than one camera has the same order value the draw order is undefined for those cameras.
+	 * 
+	 * @property order
+	 * @default 0
+	 * @type {Number}
+	*/
 	this.order = 0;
 
 	this.updateProjectionMatrix();
@@ -97,6 +110,14 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	var renderPass = new RenderPass();
 	renderPass.renderToScreen = true;
 	
+	/**
+	 * Effect composed of this camera. Is used to render the scene to the screen and apply effects.
+	 *
+	 * It is inialized with a RenderPass attached to it.
+	 * 
+	 * @property composer
+	 * @type {EffectComposer}
+	 */
 	this.composer = new EffectComposer();
 	this.composer.addPass(renderPass);
 }
@@ -191,13 +212,6 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 	THREE.OrthographicCamera.prototype.updateProjectionMatrix.call(this);
 };
 
-/**
- * Serialize object to JSON.
- * 
- * @method toJSON
- * @param  {Object} meta
- * @return {Object} JSON descrition
- */
 OrthographicCamera.prototype.toJSON = function(meta)
 {
 	var data = THREE.OrthographicCamera.prototype.toJSON.call(this, meta);

@@ -127,6 +127,7 @@ PhysicsObject.prototype.addShape = function(shape)
 
 /**
  * Create JSON for object.
+ *
  * Need to backup material and geometry and set to undefined to avoid it being stored.
  *
  * @method toJSON

@@ -87,27 +87,6 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.sun.locked = true;
 	this.add(this.sun);
 
-	//Vertex Shader
-	var vertex = "varying vec3 vWorldPosition;\n\
-	void main()\n\
-	{\n\
-		vec4 worldPosition = modelMatrix * vec4(position, 1.0);\n\
-		vWorldPosition = worldPosition.xyz;\n\
-		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
-	}";
-
-	//Pixel shader
-	var fragment = "uniform vec3 topColor;\n\
-	uniform vec3 bottomColor;\n\
-	uniform float offset;\n\
-	uniform float exponent;\n\
-	varying vec3 vWorldPosition;\n\
-	void main()\n\
-	{\n\
-		float h = normalize(vWorldPosition + offset).y;\n\
-		gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h , 0.0), exponent), 0.0)), 1.0);\n\
-	}";
-
 	//Uniforms
 	var uniforms =
 	{
@@ -121,7 +100,13 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 
 	//Sky
 	var geometry = new THREE.SphereBufferGeometry(1500, 16, 16);
-	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
+	var material = new THREE.ShaderMaterial(
+	{
+		vertexShader: Sky.VERTEX,
+		fragmentShader: Sky.FRAGMENT,
+		uniforms: uniforms,
+		side: THREE.BackSide
+	});
 
 	/**
 	 * Sky mesh with material shader to calculate dinamically sky color.
@@ -177,6 +162,25 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 }
 
 Sky.prototype = Object.create(THREE.Group.prototype);
+
+Sky.VERTEX = "varying vec3 vWorldPosition;\n\
+void main()\n\
+{\n\
+	vec4 worldPosition = modelMatrix * vec4(position, 1.0);\n\
+	vWorldPosition = worldPosition.xyz;\n\
+	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
+}";
+
+Sky.FRAGMENT = "uniform vec3 topColor;\n\
+uniform vec3 bottomColor;\n\
+uniform float offset;\n\
+uniform float exponent;\n\
+varying vec3 vWorldPosition;\n\
+void main()\n\
+{\n\
+	float h = normalize(vWorldPosition + offset).y;\n\
+	gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h , 0.0), exponent), 0.0)), 1.0);\n\
+}";
 
 /**
  * Initialize sky object.
@@ -357,13 +361,6 @@ Sky.prototype.updateSky = function()
 	}
 };
 
-/**
- * Create JSON for object.
- * 
- * @param {Object} meta
- * @method toJSON
- * @return {Object} json
- */
 Sky.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);

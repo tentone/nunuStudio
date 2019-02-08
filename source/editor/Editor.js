@@ -128,7 +128,6 @@ include("source/core/texture/WebcamTexture.js");
 include("source/core/texture/CubeTexture.js");
 include("source/core/texture/CompressedTexture.js");
 include("source/core/texture/SpriteSheetTexture.js");
-include("source/core/texture/YoutubeTexture.js");
 
 include("source/core/loaders/FontLoader.js");
 include("source/core/loaders/ImageLoader.js");

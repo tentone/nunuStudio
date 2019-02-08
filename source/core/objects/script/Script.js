@@ -417,13 +417,6 @@ Script.prototype.compileCode = function(code, onReady)
 	}
 };
 
-/**
- * Create JSON for script.
- *
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
 Script.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);

@@ -526,11 +526,6 @@ LeapMotion.prototype.getMovement = function()
 	return speed;
 };
 
-/**
- * Create JSON for object.
- * 
- * @method toJSON
- */
 LeapMotion.prototype.toJSON = function(meta)
 {
 	var data = THREE.Group.prototype.toJSON.call(this, meta);

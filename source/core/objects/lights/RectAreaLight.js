@@ -25,12 +25,6 @@ THREE.RectAreaLight = RectAreaLight;
 
 RectAreaLight.prototype = Object.create(THREE._RectAreaLight.prototype);
 
-/**
- * Create JSON description
- * @method toJSON
- * @param {Object} meta
- * @return {Object} JSON descrition
- */
 RectAreaLight.prototype.toJSON = function(meta)
 {
 	var data = THREE.Light.prototype.toJSON.call(this, meta);

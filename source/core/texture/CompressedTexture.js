@@ -1,6 +1,5 @@
 "use strict";
 
-
 /**
  * CompressTexture class is used to store textures using GPU compatible compressed data.
  *

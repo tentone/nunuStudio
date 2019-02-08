@@ -196,13 +196,6 @@ CubeCamera.prototype.dispose = function()
 	THREE.Object3D.prototype.dispose.call(this);
 };
 
-/**
- * Serialize object to JSON.
- *
- * @method toJSON
- * @param {Object} meta Meta data.
- * @return {Object} JSON description.
- */
 CubeCamera.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);

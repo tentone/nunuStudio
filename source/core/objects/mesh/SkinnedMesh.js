@@ -84,12 +84,6 @@ SkinnedMesh.prototype.dispose = function()
  * @param {Matrix4} bindMatrix
  */
 
-/**
- * Serialize skinned mesh to json.
- *
- * @method toJSON
- * @param {Object} meta Metadata
- */
 SkinnedMesh.prototype.toJSON = function(meta)
 {
 	var self = this;

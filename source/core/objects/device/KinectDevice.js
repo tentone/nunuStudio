@@ -232,11 +232,6 @@ KinectDevice.prototype.setCameraMode = function(mode)
 	}
 };
 
-/**
- * Create JSON for object.
- * 
- * @method toJSON
- */
 KinectDevice.prototype.toJSON = function(meta)
 {
 	var data = THREE.Group.prototype.toJSON.call(this, meta);

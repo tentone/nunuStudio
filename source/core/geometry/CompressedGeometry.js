@@ -1,5 +1,7 @@
 "use strict";
 
+//TODO <THIS IS NOT USED>
+
 function CompressedGeometry()
 {
 	THREE.BufferGeometry.call(this);

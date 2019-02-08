@@ -275,15 +275,6 @@ Scene.prototype.setFogMode = function(mode)
 	}
 };
 
-/**
- * Serialize scene object as JSON.
- * 
- * Also serializes physics world information.
- * 
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
 Scene.prototype.toJSON = function(meta)
 {
 	if(this.parent == null || this.parent.type !== "Program")
