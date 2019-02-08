@@ -175,8 +175,6 @@ include("source/core/utils/binary/Base64Utils.js");
 include("source/core/utils/binary/ArraybufferUtils.js");
 include("source/core/utils/binary/BufferUtils.js");
 
-include("source/core/utils/struct/TreeUtils.js");
-
 include("source/core/utils/timer/Timer.js");
 include("source/core/utils/timer/AnimationTimer.js");
 
