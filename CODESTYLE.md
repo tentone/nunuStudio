@@ -112,7 +112,7 @@ That does not represent documentation.
 ### Documentation
 
 - Documentation is done using JSDoc format.
-- JSDoc supports many HTML tags, like <code>, <pre>, <tt>, <strong>, <ul>, <ol>, <li>, <a>, this means that plaintext formatting is not respected. So, don't rely on whitespace to format JSDoc.
+- JSDoc supports many HTML tags, like `<code>, <pre>, <tt>, <strong>, <ul>, <ol>, <li>, <a>`,  this means that plaintext formatting is not respected. So, don't rely on whitespace to format JSDoc.
 - Every methods, properties and attributes of Classes, Types, Enums, Interfaces, etc. public or private needs to be documented.
 - The only exception is for getters, setters that don't have any code logic associated and inherited properties.
 - Local variables should never be documented, they should instead if necessary use simple comments.
@@ -488,8 +488,7 @@ var x = a ? b : c;
 
 ### Strings
 
-- Prefer always to declare strings using the  `"` character.
-- The only exception is when using Template Strings or writing multi line strings.
+- Always declare strings using the  `"` character except when using Template Strings or writing multi line strings.
   - [Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
 - Never build multi line strings by concatenation, use template strings or the `\` char on line splits.
 
@@ -544,6 +543,19 @@ void main()\n\
 	vUv = uv;\n\
 	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
 }",
+    
+var fragment = `
+precision highp float;
+precision highp int;
+
+` + fragmentShaderXPTO + `
+
+uniform mat4 viewMatrix;
+uniform mat4 uViewInv;
+uniform mat4 uProjInv;
+uniform vec3 cameraPosition;
+
+...`;
 ```
 
 - Use precision hints whenever its possible.
