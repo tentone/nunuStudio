@@ -3,7 +3,7 @@
 /**
  * Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64).
  * 
- * Font objects are used for booth 2D and 3D text.
+ * Font objects are used to draw text using the TextMesh object and/or generate text bitmap.
  * 
  * @class Font
  * @extends {Resource}
