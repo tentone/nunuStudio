@@ -16,6 +16,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "CSS3DObject",
         "CSS3DRenderer",
         "CSS3DSprite",
+        "CanvasSprite",
         "CanvasTexture",
         "ColorifyPass",
         "CompressedTexture",
@@ -89,8 +90,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "Sprite",
         "SpriteSheetTexture",
         "TechnicolorPass",
-        "Text3D",
+        "TextBitmap",
         "TextFile",
+        "TextMesh",
+        "TextSprite",
         "Texture",
         "TextureLoader",
         "Timer",
@@ -103,8 +106,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "VideoLoader",
         "VideoStream",
         "VideoTexture",
-        "WebcamTexture",
-        "YoutubeTexture"
+        "WebcamTexture"
     ],
     "modules": [
         "Animation",
@@ -197,12 +199,12 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Meshes",
             "name": "Meshes",
-            "description": "A Mesh combines a geometry and a material forming a complete rederizable object.\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh."
+            "description": "Special mesh type used to draw 3D text.\n\nIt receives a Font resource that is used to triangulate and extrude font data into a 3D mesh."
         },
         {
             "displayName": "Misc",
             "name": "Misc",
-            "description": "Containers are used to group objects together."
+            "description": "Containers are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers."
         },
         {
             "displayName": "Particles",

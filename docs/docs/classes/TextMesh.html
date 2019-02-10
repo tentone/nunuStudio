@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Text3D</title>  
+	<title>nunuStudio TextMesh</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -44,6 +44,7 @@
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
+								<li><a href="../classes/CanvasSprite.html">CanvasSprite</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
 								<li><a href="../classes/CompressedTexture.html">CompressedTexture</a></li>
@@ -120,8 +121,10 @@
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
-								<li><a href="../classes/Text3D.html">Text3D</a></li>
+								<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
+								<li><a href="../classes/TextMesh.html">TextMesh</a></li>
+								<li><a href="../classes/TextSprite.html">TextSprite</a></li>
 								<li><a href="../classes/Texture.html">Texture</a></li>
 								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
 								<li><a href="../classes/Timer.html">Timer</a></li>
@@ -135,7 +138,6 @@
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
 								<li><a href="../classes/VRControls.html">VRControls</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
-								<li><a href="../classes/YoutubeTexture.html">YoutubeTexture</a></li>
 							</ul>
 				
 							<ul id="api-modules" class="apis modules">
@@ -192,7 +194,7 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Text3D Class</h1>
+						<h1>TextMesh Class</h1>
 						<div class="box meta">
 						
 								<div class="extends">
@@ -272,6 +274,10 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_extruded">extruded</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_font">font</a>
 						
 													</li>
@@ -302,7 +308,7 @@
 													<span class="paren">()</span>
 											
 													<span class="returns-inline">
-														<span class="type"><a href="../classes/Text3D.html" class="crosslink">Text3D</a></span>
+														<span class="type"><a href="../classes/TextMesh.html" class="crosslink">TextMesh</a></span>
 													</span>
 											
 											
@@ -320,7 +326,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Clone this Text3D instance.</p>
+													<p>Clone this object instance into a new object.</p>
 											
 												</div>
 											
@@ -329,8 +335,8 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type"><a href="../classes/Text3D.html" class="crosslink">Text3D</a></span>:
-																<p>Clone of this object</p>
+																	<span class="type"><a href="../classes/TextMesh.html" class="crosslink">TextMesh</a></span>:
+																<p>Clone of this object.</p>
 											
 														</div>
 													</div>
@@ -521,8 +527,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Update text geometry.</p>
-											<p>Should be called after chaging any attribute.</p>
+													<p>Update the text geometry.</p>
+											<p>Should be called after chaging any attribute to generate a new geometry.</p>
 											
 												</div>
 											
@@ -626,6 +632,29 @@
 											
 											
 											</div>
+											<div id="property_extruded" class="property item">
+												<h3 class="name"><code>extruded</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Indicates if the text mesh has volume or not.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_font" class="property item">
 												<h3 class="name"><code>font</code></h3>
 												<span class="type"><a href="../classes/Font.html" class="crosslink">Font</a></span>
@@ -711,7 +740,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Text.</p>
+													<p>Text to be diplayed in the mesh.</p>
 											
 												</div>
 											

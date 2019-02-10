@@ -42,6 +42,7 @@ include("lib/pson/bytebuffer.min.js");
 include("lib/pson/long.min.js");
 include("lib/pson/PSON.min.js");
 
+include("lib/three-bmfont.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/SPE.min.js");
@@ -114,7 +115,6 @@ include("source/core/texture/WebcamTexture.js");
 include("source/core/texture/CubeTexture.js");
 include("source/core/texture/CompressedTexture.js");
 include("source/core/texture/SpriteSheetTexture.js");
-include("source/core/texture/YoutubeTexture.js");
 
 include("source/core/loaders/FontLoader.js");
 include("source/core/loaders/ImageLoader.js");
@@ -130,7 +130,8 @@ include("source/core/objects/device/LeapMotion.js");
 include("source/core/objects/device/KinectDevice.js");
 include("source/core/objects/mesh/Mesh.js");
 include("source/core/objects/mesh/SkinnedMesh.js");
-include("source/core/objects/mesh/Text3D.js");
+include("source/core/objects/text/TextMesh.js");
+include("source/core/objects/text/TextBitmap.js");
 include("source/core/objects/sprite/Sprite.js");
 include("source/core/objects/lights/PointLight.js");
 include("source/core/objects/lights/SpotLight.js");
@@ -160,8 +161,6 @@ include("source/core/objects/Scene.js");
 include("source/core/utils/binary/Base64Utils.js");
 include("source/core/utils/binary/ArraybufferUtils.js");
 include("source/core/utils/binary/BufferUtils.js");
-
-include("source/core/utils/struct/TreeUtils.js");
 
 include("source/core/utils/timer/Timer.js");
 include("source/core/utils/timer/AnimationTimer.js");

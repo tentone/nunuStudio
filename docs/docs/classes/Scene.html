@@ -44,6 +44,7 @@
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
+								<li><a href="../classes/CanvasSprite.html">CanvasSprite</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
 								<li><a href="../classes/CompressedTexture.html">CompressedTexture</a></li>
@@ -120,8 +121,10 @@
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
-								<li><a href="../classes/Text3D.html">Text3D</a></li>
+								<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
+								<li><a href="../classes/TextMesh.html">TextMesh</a></li>
+								<li><a href="../classes/TextSprite.html">TextSprite</a></li>
 								<li><a href="../classes/Texture.html">Texture</a></li>
 								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
 								<li><a href="../classes/Timer.html">Timer</a></li>
@@ -135,7 +138,6 @@
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
 								<li><a href="../classes/VRControls.html">VRControls</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
-								<li><a href="../classes/YoutubeTexture.html">YoutubeTexture</a></li>
 							</ul>
 				
 							<ul id="api-modules" class="apis modules">
@@ -256,10 +258,6 @@
 													</li>
 													<li class="index-item method">
 														<a href="#method_setFogMode">setFogMode</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
 													<li class="index-item method">
@@ -650,69 +648,6 @@
 											
 											
 											</div>
-											<div id="method_toJSON" class="method item">
-												<h3 class="name"><code>toJSON</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>meta</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Object</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Serialize scene object as JSON.</p>
-											<p>Also serializes physics world information.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">meta</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Object</span>:
-																<p>json</p>
-											
-														</div>
-													</div>
-											
-											</div>
 											<div id="method_update" class="method item">
 												<h3 class="name"><code>update</code></h3>
 											
@@ -861,8 +796,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Raycaster used for mouse interaction with 3D objects.
-											This raycaster is automatically updated using the first camera being drawn.</p>
+													<p>Raycaster used for mouse interaction with 3D objects.</p>
+											<p>This raycaster is automatically updated using the first camera being drawn.</p>
 											
 												</div>
 											
@@ -885,9 +820,9 @@
 												</div>
 											
 												<div class="description">
-													<p>Cannon.js world used for physics simulation.
-											The world is configured by default with a NaiveBroadphase and a SplitSolver.
-											Documentation for cannon.js physics World object can be found here <a href="http://schteppe.github.io/cannon.js/docs/classes/World.html">http://schteppe.github.io/cannon.js/docs/classes/World.html</a>.</p>
+													<p>Cannon.js world used for physics simulation.</p>
+											<p>The world is configured by default with a NaiveBroadphase and a SplitSolver.</p>
+											<p>Documentation for cannon.js physics World object can be found here <a href="http://schteppe.github.io/cannon.js/docs/classes/World.html">http://schteppe.github.io/cannon.js/docs/classes/World.html</a>.</p>
 											
 												</div>
 											

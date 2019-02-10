@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio YoutubeTexture</title>  
+	<title>nunuStudio TextSprite</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -44,6 +44,7 @@
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
+								<li><a href="../classes/CanvasSprite.html">CanvasSprite</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
 								<li><a href="../classes/CompressedTexture.html">CompressedTexture</a></li>
@@ -120,8 +121,10 @@
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
-								<li><a href="../classes/Text3D.html">Text3D</a></li>
+								<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
+								<li><a href="../classes/TextMesh.html">TextMesh</a></li>
+								<li><a href="../classes/TextSprite.html">TextSprite</a></li>
 								<li><a href="../classes/Texture.html">Texture</a></li>
 								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
 								<li><a href="../classes/Timer.html">Timer</a></li>
@@ -135,7 +138,6 @@
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
 								<li><a href="../classes/VRControls.html">VRControls</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
-								<li><a href="../classes/YoutubeTexture.html">YoutubeTexture</a></li>
 							</ul>
 				
 							<ul id="api-modules" class="apis modules">
@@ -192,21 +194,23 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>YoutubeTexture Class</h1>
+						<h1>TextSprite Class</h1>
 						<div class="box meta">
 						
 								<div class="extends">
-									Extends <a href="../classes/Texture.html" class="crosslink">Texture</a>
+									Extends <a href="../classes/CanvasSprite.html" class="crosslink">CanvasSprite</a>
 								</div>
 						
 						
-									Module: <a href="../modules/Textures.html">Textures</a>
+									Module: <a href="../modules/Meshes.html">Meshes</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Video texture that uses youtube as a source.</p>
+							<p>Text sprite is used to represent text as a sprite.</p>
+						<p>This approach is memory expensive since it needs to write a new texture for each text. But allows the used to access any font available in the browser.</p>
+						<p>The text is rendered to canvas and then copied to a texture. It automatically ajusts the object scale to match the text aspect.</p>
 						
 						</div>
 						
@@ -216,6 +220,7 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -227,27 +232,72 @@
 						
 											<ul class="index-list methods extends">
 													<li class="index-item method">
-														<a href="#method_getVideoId">getVideoId</a>
+														<a href="#method_setText">setText</a>
 						
-															<span class="flag static">static</span>
+													</li>
+													<li class="index-item method">
+														<a href="#method_updateCanvas">updateCanvas</a>
+						
 													</li>
 											</ul>
 										</div>
 						
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs extends">
+													<li class="index-item attr">
+														<a href="#attr_align">align</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_CENTER">CENTER</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_color">color</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_font">font</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_LEFT">LEFT</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_outline">outline</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_outlineColor">outlineColor</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_outlineWidth">outlineWidth</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_resolution">resolution</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_RIGHT">RIGHT</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_size">size</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_text">text</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_getVideoId" class="method item">
-												<h3 class="name"><code>getVideoId</code></h3>
+											<div id="method_setText" class="method item">
+												<h3 class="name"><code>setText</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>url</code>
+																	<code>text</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -256,7 +306,6 @@
 											
 											
 											
-													<span class="flag static">static</span>
 											
 											
 											
@@ -269,7 +318,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Get the youtube video id from the video URL.</p>
+													<p>Set the text to be displayed.</p>
 											
 												</div>
 											
@@ -278,7 +327,7 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">url</code>
+																	<code class="param-name">text</code>
 																	<span class="type">String</span>
 											
 											
@@ -292,9 +341,375 @@
 											
 											
 											</div>
+											<div id="method_updateCanvas" class="method item">
+												<h3 class="name"><code>updateCanvas</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Update the canvas texture.</p>
+											<p>Redraw text into the canvas and update scale.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 									</div>
 						
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_align" class="attr item">
+												<a name="config_align"></a> 
+												<h3 class="name"><code>align</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Horizontal text alignment can be</p>
+											<ul>
+											<li>TextSprite.LEFT</li>
+											<li>TextSprite.RIGHT</li>
+											<li>TextSprite.CENTER</li>
+											</ul>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_CENTER" class="attr item">
+												<a name="config_CENTER"></a> 
+												<h3 class="name"><code>CENTER</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Align text to the center.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_color" class="attr item">
+												<a name="config_color"></a> 
+												<h3 class="name"><code>color</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>CSS color of the text.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_font" class="attr item">
+												<a name="config_font"></a> 
+												<h3 class="name"><code>font</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>CSS Font style to be used.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_LEFT" class="attr item">
+												<a name="config_LEFT"></a> 
+												<h3 class="name"><code>LEFT</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Align text to the left side.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_outline" class="attr item">
+												<a name="config_outline"></a> 
+												<h3 class="name"><code>outline</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Indicates if the text has an outline border.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_outlineColor" class="attr item">
+												<a name="config_outlineColor"></a> 
+												<h3 class="name"><code>outlineColor</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>CSS color of the outline.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_outlineWidth" class="attr item">
+												<a name="config_outlineWidth"></a> 
+												<h3 class="name"><code>outlineWidth</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Width of the text outline.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_resolution" class="attr item">
+												<a name="config_resolution"></a> 
+												<h3 class="name"><code>resolution</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Vertical resolution of the texture created from canvas used.</p>
+											<p>Should always be a npot of 2.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_RIGHT" class="attr item">
+												<a name="config_RIGHT"></a> 
+												<h3 class="name"><code>RIGHT</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Align text to the right side.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_size" class="attr item">
+												<a name="config_size"></a> 
+												<h3 class="name"><code>size</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Scale of the object.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_text" class="attr item">
+												<a name="config_text"></a> 
+												<h3 class="name"><code>text</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Text of this object.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>

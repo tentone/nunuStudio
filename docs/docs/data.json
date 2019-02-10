@@ -296,9 +296,7 @@
         },
         "..\\source\\core\\objects\\mesh\\Mesh.js": {
             "name": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "modules": {
-                "Meshes": 1
-            },
+            "modules": {},
             "classes": {
                 "Mesh": 1
             },
@@ -310,15 +308,6 @@
             "modules": {},
             "classes": {
                 "SkinnedMesh": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\source\\core\\objects\\mesh\\Text3D.js": {
-            "name": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "modules": {},
-            "classes": {
-                "Text3D": 1
             },
             "fors": {},
             "namespaces": {}
@@ -421,6 +410,44 @@
             },
             "classes": {
                 "Sprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\text\\CanvasSprite.js": {
+            "name": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "modules": {},
+            "classes": {
+                "CanvasSprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\text\\TextBitmap.js": {
+            "name": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "modules": {},
+            "classes": {
+                "TextBitmap": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\text\\TextMesh.js": {
+            "name": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "modules": {
+                "Meshes": 1
+            },
+            "classes": {
+                "TextMesh": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\text\\TextSprite.js": {
+            "name": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "modules": {},
+            "classes": {
+                "TextSprite": 1
             },
             "fors": {},
             "namespaces": {}
@@ -800,15 +827,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\texture\\YoutubeTexture.js": {
-            "name": "..\\source\\core\\texture\\YoutubeTexture.js",
-            "modules": {},
-            "classes": {
-                "YoutubeTexture": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\three\\core\\Object3D.js": {
             "name": "..\\source\\core\\three\\core\\Object3D.js",
             "modules": {
@@ -1137,16 +1155,17 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "TextMesh": 1,
                 "Mesh": 1,
                 "SkinnedMesh": 1,
-                "Text3D": 1
+                "TextSprite": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
             "line": 3,
-            "description": "A Mesh combines a geometry and a material forming a complete rederizable object.\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh."
+            "description": "Special mesh type used to draw 3D text.\n\nIt receives a Font resource that is used to triangulate and extrude font data into a 3D mesh."
         },
         "Misc": {
             "name": "Misc",
@@ -1162,7 +1181,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\misc\\LensFlare.js",
             "line": 3,
-            "description": "Containers are used to group objects together."
+            "description": "Containers are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers."
         },
         "Particles": {
             "name": "Particles",
@@ -1233,13 +1252,12 @@
                 "SpriteSheetTexture": 1,
                 "Texture": 1,
                 "VideoTexture": 1,
-                "WebcamTexture": 1,
-                "YoutubeTexture": 1
+                "WebcamTexture": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\texture\\YoutubeTexture.js",
+            "file": "..\\source\\core\\texture\\WebcamTexture.js",
             "line": 3,
             "description": "Canvas textures can be used to draw content to the texture during runtime, using the context property.\n\nCanvas textures always start with black background and a red text \"Canvas Texture\"."
         },
@@ -1248,12 +1266,14 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "Sprite": 1
+                "Sprite": 1,
+                "CanvasSprite": 1,
+                "TextBitmap": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
             "line": 3,
             "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite."
         },
@@ -2197,63 +2217,6 @@
             ],
             "extends": "{SkinnedMesh}"
         },
-        "Text3D": {
-            "name": "Text3D",
-            "shortname": "Text3D",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Meshes",
-            "namespace": "",
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 3,
-            "description": "Special mesh type used to draw 3D text.\n\nIt receives a Font resource that is used to triangulate and extrude font data into a 3D mesh.",
-            "params": [
-                {
-                    "name": "text",
-                    "description": "Text to be draw",
-                    "type": "String"
-                },
-                {
-                    "name": "material",
-                    "description": "Material used to shade the superficie of the geometry",
-                    "type": "Material"
-                },
-                {
-                    "name": "font",
-                    "description": "Font",
-                    "type": "Font"
-                },
-                {
-                    "name": "height",
-                    "description": "Text height",
-                    "type": "Number"
-                },
-                {
-                    "name": "bevel",
-                    "description": "",
-                    "type": "Boolean"
-                },
-                {
-                    "name": "bevelThickness",
-                    "description": "",
-                    "type": "Number"
-                },
-                {
-                    "name": "size",
-                    "description": "",
-                    "type": "Number"
-                },
-                {
-                    "name": "curveSegments",
-                    "description": "",
-                    "type": "Number"
-                }
-            ],
-            "extends": "{Mesh}"
-        },
         "Container": {
             "name": "Container",
             "shortname": "Container",
@@ -2266,7 +2229,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\misc\\Container.js",
             "line": 3,
-            "description": "Containers are used to group objects together.",
+            "description": "Containers are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers.",
             "extends": "{Group}"
         },
         "CubeCamera": {
@@ -2469,6 +2432,144 @@
                 }
             ],
             "extends": "{Script}"
+        },
+        "CanvasSprite": {
+            "name": "CanvasSprite",
+            "shortname": "CanvasSprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Sprite",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 3,
+            "description": "Canvas sprite is used to render canvas based elements in a 2D canvas.\n\nThe sprite can be configured to keep a relative size to the screen of an absolute size.",
+            "extends": "{THREE.Sprite}",
+            "params": [
+                {
+                    "name": "material",
+                    "description": "Override material if it is present no canvas and texture will be created internally.",
+                    "type": "THREE.SpriteMaterial"
+                }
+            ]
+        },
+        "TextBitmap": {
+            "name": "TextBitmap",
+            "shortname": "TextBitmap",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Sprite",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 3,
+            "description": "Text bitmap atlas with support for signed distance field data.\n\nInput data should be composed of a BMFont file (can be a .fnt, .json. etc) file and a character atlas texture from an image.\n\nFont atlas can be generate using the tool http://www.angelcode.com/products/bmfont/\n\nBased on the three-bmfont-text library.\n - https://github.com/Jam3/three-bmfont-text\n - https://github.com/Jam3/load-bmfont",
+            "extends": "{THREE.Mesh}",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Configuration object with all parameters for bmfont.",
+                    "type": "Object"
+                },
+                {
+                    "name": "texture",
+                    "description": "Texture with the image character atlas to be used.",
+                    "type": "THREE.Texture"
+                },
+                {
+                    "name": "mode",
+                    "description": "The text rendering mode to be used (Bitmap, SDF, MSDF).",
+                    "type": "Number"
+                },
+                {
+                    "name": "color",
+                    "description": "Color of the text.",
+                    "type": "Number"
+                }
+            ]
+        },
+        "TextMesh": {
+            "name": "TextMesh",
+            "shortname": "TextMesh",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Meshes",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 3,
+            "description": "Special mesh type used to draw 3D text.\n\nIt receives a Font resource that is used to triangulate and extrude font data into a 3D mesh.",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "Text to be draw",
+                    "type": "String"
+                },
+                {
+                    "name": "material",
+                    "description": "Material used to shade the superficie of the geometry",
+                    "type": "Material"
+                },
+                {
+                    "name": "font",
+                    "description": "Font",
+                    "type": "Font"
+                },
+                {
+                    "name": "height",
+                    "description": "Text height",
+                    "type": "Number"
+                },
+                {
+                    "name": "bevel",
+                    "description": "",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "bevelThickness",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "size",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "curveSegments",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{Mesh}"
+        },
+        "TextSprite": {
+            "name": "TextSprite",
+            "shortname": "TextSprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Meshes",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 3,
+            "description": "Text sprite is used to represent text as a sprite.\n\nThis approach is memory expensive since it needs to write a new texture for each text. But allows the used to access any font available in the browser.\n\nThe text is rendered to canvas and then copied to a texture. It automatically ajusts the object scale to match the text aspect.",
+            "extends": "{CanvasSprite}",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "Text to draw in the sprite.",
+                    "type": "String"
+                }
+            ]
         },
         "Program": {
             "name": "Program",
@@ -2998,7 +3099,7 @@
             "namespace": "",
             "file": "..\\source\\core\\resources\\Font.js",
             "line": 3,
-            "description": "Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64).\n\nFont objects are used for booth 2D and 3D text.",
+            "description": "Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64).\n\nFont objects are used to draw text using the TextMesh object and/or generate text bitmap.",
             "extends": "{Resource}",
             "params": [
                 {
@@ -3204,7 +3305,7 @@
             "module": "Textures",
             "namespace": "",
             "file": "..\\source\\core\\texture\\CompressedTexture.js",
-            "line": 4,
+            "line": 3,
             "description": "CompressTexture class is used to store textures using GPU compatible compressed data.\n\nThe advantage of using these texture is the fact that the texture does not get uncompressed in the GPU memory saving not only project space but also saving video memory during runtime.\n\nThe problem with compressed textures is that its hardware dependent (they dont work everywhere)\n - DXT: supported on desktop and some Android smartphones\n - PVR: supported on iOS and some Android smartphones\n - ETC1: supported by most Android smartphones\n\nThe usage of these format can free a lot of video memory and is a must for mobile devices.",
             "extends": "{Texture}",
             "params": [
@@ -3545,53 +3646,6 @@
                 }
             ]
         },
-        "YoutubeTexture": {
-            "name": "YoutubeTexture",
-            "shortname": "YoutubeTexture",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Textures",
-            "namespace": "",
-            "file": "..\\source\\core\\texture\\YoutubeTexture.js",
-            "line": 3,
-            "description": "Video texture that uses youtube as a source.",
-            "extends": "{Texture}",
-            "params": [
-                {
-                    "name": "video",
-                    "description": "",
-                    "type": "Video"
-                },
-                {
-                    "name": "mapping",
-                    "description": "",
-                    "type": "Number"
-                },
-                {
-                    "name": "wrapS",
-                    "description": "",
-                    "type": "Number"
-                },
-                {
-                    "name": "wrapT",
-                    "description": "",
-                    "type": "Number"
-                },
-                {
-                    "name": "type",
-                    "description": "",
-                    "type": "Number"
-                },
-                {
-                    "name": "anisotropy",
-                    "description": "",
-                    "type": "Number"
-                }
-            ]
-        },
         "Object3D": {
             "name": "Object3D",
             "shortname": "Object3D",
@@ -3705,7 +3759,7 @@
             "module": "BinaryUtils",
             "namespace": "",
             "file": "..\\source\\core\\utils\\struct\\Tree.js",
-            "line": 3,
+            "line": 5,
             "description": "Tree structure used to represent Trees.\n\nEvery tree stores Trees as children and have a parent children.\n\nIf the parent is null then the Tree is the root."
         },
         "TreeUtils": {
@@ -3719,7 +3773,7 @@
             "module": "BinaryUtils",
             "namespace": "",
             "file": "..\\source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 3,
+            "line": 5,
             "description": "TreeUtils used to compare Tree.\n\nCan also be used to compare Object structure.",
             "static": 1
         },
@@ -5233,7 +5287,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 555,
+            "line": 554,
             "description": "F1 key",
             "itemtype": "attribute",
             "name": "F1",
@@ -5243,7 +5297,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 562,
+            "line": 561,
             "description": "F2 key",
             "itemtype": "attribute",
             "name": "F2",
@@ -5253,7 +5307,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 569,
+            "line": 568,
             "description": "F3 key",
             "itemtype": "attribute",
             "name": "F3",
@@ -5263,7 +5317,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 576,
+            "line": 575,
             "description": "F4 key",
             "itemtype": "attribute",
             "name": "F4",
@@ -5273,7 +5327,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 583,
+            "line": 582,
             "description": "F5 key",
             "itemtype": "attribute",
             "name": "F5",
@@ -5283,7 +5337,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 590,
+            "line": 589,
             "description": "F6 key",
             "itemtype": "attribute",
             "name": "F6",
@@ -5293,7 +5347,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 597,
+            "line": 596,
             "description": "F7 key",
             "itemtype": "attribute",
             "name": "F7",
@@ -5303,7 +5357,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 604,
+            "line": 603,
             "description": "F8 key",
             "itemtype": "attribute",
             "name": "F8",
@@ -5313,7 +5367,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 611,
+            "line": 610,
             "description": "F9 key",
             "itemtype": "attribute",
             "name": "F9",
@@ -5323,7 +5377,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 618,
+            "line": 617,
             "description": "F10 key",
             "itemtype": "attribute",
             "name": "F10",
@@ -5333,7 +5387,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 625,
+            "line": 624,
             "description": "F11 key",
             "itemtype": "attribute",
             "name": "F11",
@@ -5343,7 +5397,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 632,
+            "line": 631,
             "description": "F12 key",
             "itemtype": "attribute",
             "name": "F12",
@@ -7789,7 +7843,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 18,
+            "line": 23,
             "description": "Camera size relative to resize mode.",
             "itemtype": "property",
             "name": "size",
@@ -7800,7 +7854,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 25,
+            "line": 32,
             "description": "Aspect ratio X/Y.",
             "itemtype": "property",
             "name": "aspect",
@@ -7811,7 +7865,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 32,
+            "line": 41,
             "description": "Camera resize mode.",
             "itemtype": "property",
             "name": "mode",
@@ -7822,7 +7876,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 39,
+            "line": 50,
             "description": "Camera viewport offset.\n\nValues range from 0.0 to 1.0 in screen space.",
             "itemtype": "property",
             "name": "offset",
@@ -7832,7 +7886,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 47,
+            "line": 60,
             "description": "Camera viewport size.\n\nValues range from 0.0 to 1.0 in screen space.",
             "itemtype": "property",
             "name": "viewport",
@@ -7842,7 +7896,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 55,
+            "line": 70,
             "description": "Clear screen color flag.",
             "itemtype": "property",
             "name": "clearColor",
@@ -7853,7 +7907,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 62,
+            "line": 79,
             "description": "Clear depth flag.",
             "itemtype": "property",
             "name": "clearDepth",
@@ -7864,7 +7918,18 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 69,
+            "line": 88,
+            "description": "Clear stencil buffer flag.",
+            "itemtype": "property",
+            "name": "clearDepth",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 97,
             "description": "Camera draw order preference.\n\nIf more than one camera has the same order value the draw order is undefined for those cameras.",
             "itemtype": "property",
             "name": "order",
@@ -7875,7 +7940,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 106,
+            "line": 113,
+            "description": "Effect composed of this camera. Is used to render the scene to the screen and apply effects.\n\nIt is inialized with a RenderPass attached to it.",
+            "itemtype": "property",
+            "name": "composer",
+            "type": "{EffectComposer}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 127,
             "description": "Used to set camera to resize horizontally",
             "itemtype": "attribute",
             "name": "RESIZE_HORIZONTAL",
@@ -7885,7 +7960,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 113,
+            "line": 134,
             "description": "Used to set camera to resize vertically.",
             "itemtype": "attribute",
             "name": "RESIZE_VERTICAL",
@@ -7895,7 +7970,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 121,
+            "line": 142,
             "description": "Render a scene using this camera and the internal EffectComposer.",
             "itemtype": "method",
             "name": "render",
@@ -7916,7 +7991,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 133,
+            "line": 154,
             "description": "Resize this camera, should be called every time after resizing the screen.",
             "itemtype": "method",
             "name": "resize",
@@ -7937,7 +8012,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 150,
+            "line": 171,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -7946,7 +8021,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 166,
+            "line": 187,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -7954,28 +8029,8 @@
             "module": "Cameras"
         },
         {
-            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 194,
-            "description": "Serialize object to JSON.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "JSON descrition",
-                "type": "Object"
-            },
-            "class": "OrthographicCamera",
-            "module": "Cameras"
-        },
-        {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 17,
+            "line": 16,
             "description": "Camera field of view in degrees.",
             "itemtype": "property",
             "name": "fov",
@@ -7986,7 +8041,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 24,
+            "line": 23,
             "description": "Camera aspect ratio X/Y.",
             "itemtype": "property",
             "name": "aspect",
@@ -7997,7 +8052,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 31,
+            "line": 30,
             "description": "Camera zoom.",
             "itemtype": "property",
             "name": "zoom",
@@ -8008,7 +8063,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 38,
+            "line": 39,
             "description": "Camera viewport offset.\n\nValues range from 0.0 to 1.0 in screen space.",
             "itemtype": "property",
             "name": "offset",
@@ -8018,7 +8073,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 46,
+            "line": 49,
             "description": "Camera viewport size.\n\nValues range from 0.0 to 1.0 in screen space.",
             "itemtype": "property",
             "name": "viewport",
@@ -8028,7 +8083,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 54,
+            "line": 63,
             "description": "Clear screen color flag.",
             "itemtype": "property",
             "name": "clearColor",
@@ -8039,7 +8094,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 61,
+            "line": 72,
             "description": "Clear depth flag.",
             "itemtype": "property",
             "name": "clearDepth",
@@ -8050,7 +8105,18 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 68,
+            "line": 81,
+            "description": "Clear stencil buffer flag.",
+            "itemtype": "property",
+            "name": "clearDepth",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 90,
             "description": "Camera draw order preference.\n\nIf more than one camera has the same order value the draw order is undefined for those cameras.",
             "itemtype": "property",
             "name": "order",
@@ -8061,7 +8127,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 101,
+            "line": 106,
+            "description": "Effect composed of this camera. Is used to render the scene to the screen and apply effects.\n\nIt is inialized with a RenderPass attached to it.",
+            "itemtype": "property",
+            "name": "composer",
+            "type": "{EffectComposer}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 120,
             "description": "Render a scene using this camera and the internal EffectComposer.",
             "itemtype": "method",
             "name": "render",
@@ -8082,7 +8158,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 113,
+            "line": 132,
             "description": "Resize this camera, should be called every time after resizing the screen.",
             "itemtype": "method",
             "name": "resize",
@@ -8103,7 +8179,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 130,
+            "line": 149,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -8112,30 +8188,10 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 146,
+            "line": 165,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
-            "class": "PerspectiveCamera",
-            "module": "Cameras"
-        },
-        {
-            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 168,
-            "description": "Serialize object to JSON.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "JSON descrition",
-                "type": "Object"
-            },
             "class": "PerspectiveCamera",
             "module": "Cameras"
         },
@@ -8551,15 +8607,6 @@
             "module": "Devices"
         },
         {
-            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 235,
-            "description": "Create JSON for object.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "class": "KinectDevice",
-            "module": "Devices"
-        },
-        {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
             "line": 19,
             "description": "Debug model flag.",
@@ -8879,15 +8926,6 @@
             "module": "Devices"
         },
         {
-            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 529,
-            "description": "Create JSON for object.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "class": "LeapMotion",
-            "module": "Devices"
-        },
-        {
             "file": "..\\source\\core\\objects\\lights\\DirectionalLight.js",
             "line": 33,
             "description": "Update light shadow map atributtes at runtime",
@@ -8903,26 +8941,6 @@
             "itemtype": "method",
             "name": "updateShadowMap",
             "class": "PointLight",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\source\\core\\objects\\lights\\RectAreaLight.js",
-            "line": 28,
-            "description": "Create JSON description",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "JSON descrition",
-                "type": "Object"
-            },
-            "class": "RectAreaLight",
             "module": "Lights"
         },
         {
@@ -8947,22 +8965,6 @@
             "description": "Update light shadow map atributtes at runtime.",
             "itemtype": "method",
             "name": "updateShadowMap",
-            "class": "SpotLight",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 64,
-            "description": "Serialize SpotLight data to JSON.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "Meta.",
-                    "type": "Object"
-                }
-            ],
             "class": "SpotLight",
             "module": "Lights"
         },
@@ -9073,176 +9075,6 @@
                 }
             ],
             "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 87,
-            "description": "Serialize skinned mesh to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "Metadata",
-                    "type": "Object"
-                }
-            ],
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 27,
-            "description": "Font used to draw text.",
-            "itemtype": "property",
-            "name": "font",
-            "type": "{Font}",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 34,
-            "description": "Size of the text (depth).",
-            "itemtype": "property",
-            "name": "size",
-            "type": "{Number}",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 41,
-            "description": "Height of the text.",
-            "itemtype": "property",
-            "name": "height",
-            "type": "{Number}",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 48,
-            "description": "Number of segments that compose a curve in the font.",
-            "itemtype": "property",
-            "name": "curveSegments",
-            "type": "{Number}",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 55,
-            "description": "If true a bevel is added to the text.",
-            "itemtype": "property",
-            "name": "bevel",
-            "type": "{boolean}",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 62,
-            "description": "Bevel thickness.",
-            "itemtype": "property",
-            "name": "bevelThickness",
-            "type": "{Number}",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 69,
-            "description": "Bevel size.",
-            "itemtype": "property",
-            "name": "bevelSize",
-            "type": "{Number}",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 76,
-            "description": "Text.",
-            "itemtype": "property",
-            "name": "text",
-            "type": "{String}",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 86,
-            "description": "Set font used by this text 3D instance.",
-            "params": [
-                {
-                    "name": "font",
-                    "description": "Font",
-                    "type": "Font"
-                }
-            ],
-            "itemtype": "method",
-            "name": "setFont",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 101,
-            "description": "Change text.",
-            "params": [
-                {
-                    "name": "text",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "itemtype": "method",
-            "name": "setText",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 116,
-            "description": "Update text geometry.\n\nShould be called after chaging any attribute.",
-            "itemtype": "method",
-            "name": "updateGeometry",
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 146,
-            "description": "Clone this Text3D instance.",
-            "itemtype": "method",
-            "name": "clone",
-            "return": {
-                "description": "Clone of this object",
-                "type": "Text3D"
-            },
-            "class": "Text3D",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 157,
-            "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
-            "class": "Text3D",
             "module": "Meshes"
         },
         {
@@ -9380,28 +9212,8 @@
             "module": "Misc"
         },
         {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 199,
-            "description": "Serialize object to JSON.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "Meta data.",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "JSON description.",
-                "type": "Object"
-            },
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
             "file": "..\\source\\core\\objects\\misc\\LensFlare.js",
-            "line": 232,
+            "line": 231,
             "description": "Add texture to the lensFlare object.",
             "itemtype": "method",
             "name": "add",
@@ -9427,26 +9239,6 @@
                     "type": "Color"
                 }
             ],
-            "class": "LensFlare",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\LensFlare.js",
-            "line": 266,
-            "description": "Serialize lensflare data to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "Metadata.",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "Serialized data.",
-                "type": "Object"
-            },
             "class": "LensFlare",
             "module": "Misc"
         },
@@ -9524,7 +9316,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 126,
+            "line": 111,
             "description": "Sky mesh with material shader to calculate dinamically sky color.",
             "itemtype": "property",
             "name": "sky",
@@ -9534,7 +9326,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 143,
+            "line": 128,
             "description": "If set to true the sky auto updates its time.",
             "itemtype": "property",
             "name": "autoUpdate",
@@ -9545,7 +9337,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 152,
+            "line": 137,
             "description": "Sun distance.",
             "itemtype": "property",
             "name": "sunDistance",
@@ -9555,7 +9347,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 160,
+            "line": 145,
             "description": "Day time in seconds.",
             "itemtype": "property",
             "name": "dayTime",
@@ -9565,7 +9357,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 168,
+            "line": 153,
             "description": "Current day time in seconds.",
             "itemtype": "property",
             "name": "time",
@@ -9575,7 +9367,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 181,
+            "line": 185,
             "description": "Initialize sky object.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -9584,7 +9376,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 195,
+            "line": 199,
             "description": "Update sky state.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -9593,30 +9385,10 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 221,
+            "line": 225,
             "description": "Update sky color and sun position.\n\nIf autoUpdate set to true is automatically called by the update method.",
             "itemtype": "method",
             "name": "updateSky",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 360,
-            "description": "Create JSON for object.",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "itemtype": "method",
-            "name": "toJSON",
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
             "class": "Sky",
             "module": "Lights"
         },
@@ -9793,7 +9565,7 @@
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
             "line": 128,
-            "description": "Create JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
+            "description": "Create JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -10034,26 +9806,6 @@
             "module": "Script"
         },
         {
-            "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 420,
-            "description": "Create JSON for script.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
-            "class": "Script",
-            "module": "Script"
-        },
-        {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 85,
             "description": "Spine animation data.",
@@ -10170,26 +9922,6 @@
             "module": "Animations"
         },
         {
-            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 225,
-            "description": "Serialize spine animation as JSON.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
-            "class": "SpineAnimation",
-            "module": "Animations"
-        },
-        {
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
             "line": 14,
             "description": "Material used to render the sprite.",
@@ -10207,6 +9939,661 @@
             "name": "dispose",
             "class": "Sprite",
             "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 16,
+            "description": "DOM canvas to draw.",
+            "itemtype": "attribute",
+            "name": "canvas",
+            "type": "{DOM}",
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 24,
+            "description": "Texture where the text is drawn to.",
+            "itemtype": "attribute",
+            "name": "texture",
+            "type": "{THREE.CanvasTexture}",
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 47,
+            "description": "Size of the sprite.\n\nIf configured as relative to the screen (from 0 to 1) or absolutely in px.",
+            "itemtype": "attribute",
+            "name": "size",
+            "type": "{Number}",
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 57,
+            "description": "Sizing mode, can be relative of absolute.",
+            "itemtype": "attribute",
+            "name": "resizeMode",
+            "type": "{Number}",
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 69,
+            "description": "Relative sizing is done relative to the screen height.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "RELATIVE",
+            "type": "{Number}",
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 78,
+            "description": "Scaled sizing is done relative to the camera position.\n\nIs similar to the RELATIVE sizing but the actual sprite size is recalculated (slower) but allows for raytracing to be performed properly.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "SCALED",
+            "type": "{Number}",
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 89,
+            "description": "Absolute sizing is performed directly in px.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "ABSOLUTE",
+            "type": "{Number}",
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 98,
+            "description": "Redraw the content on the canvas.\n\nShould be called everytime that information that needs to be displayed is updated.\n\nWhen relative scalling is enabled size changed should be applied here.",
+            "itemtype": "method",
+            "name": "draw",
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
+            "line": 109,
+            "description": "Set the sizing mode for this canvas.",
+            "itemtype": "method",
+            "name": "setSizingMode",
+            "params": [
+                {
+                    "name": "sizingMode",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "CanvasSprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 49,
+            "description": "BMFont text configuration object.\n\nPassed to the BMFont text geometry generator. It is a object with the format.\n\n{\n   font: (Object) Font data should be parsed from (.json, .fnt, etc) file,\n   text: (String),\n   width: (Number) Width of the text area,\n   align: (String) Side to align the text,\n   lineHeight: (Number) Line height/font size,\n   letterSpacing: (Number) Spacing between characters,\n   mode: (String) a mode for word-wrapper; can be 'pre' (maintain spacing), or 'nowrap' (collapse whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse whitespace, break at width or newlines)\n   tabSize: (Number) the number of spaces to use in a single tab (default 4)\n   start: (Number) the starting index into the text to layout (default 0)\n   end: (Number) the ending index (exclusive) into the text to layout (default text.length)\n}",
+            "itemtype": "attribute",
+            "name": "config",
+            "type": "{Object}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 72,
+            "description": "Text bitmap rendering mode, can be:\n   - TextBitmap.BITMAP \n   - TextBitmap.SDF \n   - TextBitmap.MSDF",
+            "itemtype": "attribute",
+            "name": "mode",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 114,
+            "description": "BMFont text font data, contains the data about all characters available, and their position in the atlas.\n\nFont data should be parsed from (.json, .fnt, etc) file.\n\nPassed to the BMFont text geometry generator.",
+            "itemtype": "attribute",
+            "name": "font",
+            "type": "{Object}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 130,
+            "description": "Text displayed on the object.",
+            "itemtype": "attribute",
+            "name": "text",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 142,
+            "description": "Space between each text line.",
+            "itemtype": "attribute",
+            "name": "lineHeight",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 154,
+            "description": "Spacing between each letter.",
+            "itemtype": "attribute",
+            "name": "letterSpacing",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 166,
+            "description": "Horizontal text alignment can be\n   - TextBitmap.LEFT\n   - TextBitmap.RIGHT\n   - TextBitmap.CENTER",
+            "itemtype": "attribute",
+            "name": "align",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 181,
+            "description": "Width of the text box.",
+            "itemtype": "attribute",
+            "name": "width",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 193,
+            "description": "Color of the text, only applied for SDF and MSDF modes.",
+            "itemtype": "attribute",
+            "name": "color",
+            "type": "{THREE.Color}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 205,
+            "description": "SDF distance alpha threshold.",
+            "itemtype": "attribute",
+            "name": "threshold",
+            "type": "{THREE.Color}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 217,
+            "description": "Smoothing of the text borders.",
+            "itemtype": "attribute",
+            "name": "smoothing",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 234,
+            "description": "Simple bitmap font atlas.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "BITMAP",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 243,
+            "description": "Single channel signed distance field font atlas.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "SDF",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 252,
+            "description": "Multi channel signed distance field font atlas.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "MSDF",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 261,
+            "description": "Align text to the left side.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "LEFT",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 270,
+            "description": "Align text to the center.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "CENTER",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 279,
+            "description": "Align text to the right side.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "RIGHT",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 288,
+            "description": "Vertex shader used to draw the text, is responsible for applying the billboard effect by removing the rotation from the transformation matrix.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "VERTEX_SHADER",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 326,
+            "description": "Shader object used to render the bitmap directly without any processing.\n\nContains only the fragment shader code, the vertex is the same for every render mode.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "BITMAP_SHADER",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 344,
+            "description": "Shader object used to render single channel SDF data.\n\nContains only the fragment shader code, the vertex is the same for every render mode.\n\nDetails about signed distance fields for vetorial shapes rendering.\n   - https://steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "SDF_SHADER",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 370,
+            "description": "Shader object used to render single channel MSDF data.\n\nContains only the fragment shader code, the vertex is the same for every render mode.\n\nDetails about Multi‐Channel Signed Distance Fields for vetorial shapes rendering.\n   - https://onlinelibrary.wiley.com/doi/full/10.1111/cgf.13265",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "SDF_SHADER",
+            "type": "{String}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 404,
+            "description": "Set the text to be displayed.",
+            "itemtype": "method",
+            "name": "setText",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 415,
+            "description": "Update the text bitmap geometry.\n\nShould be called every time after changes to configuration are made.",
+            "itemtype": "method",
+            "name": "updateGeometry",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 27,
+            "description": "Font used to draw text.",
+            "itemtype": "property",
+            "name": "font",
+            "type": "{Font}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 35,
+            "description": "Indicates if the text mesh has volume or not.",
+            "itemtype": "property",
+            "name": "extruded",
+            "type": "{Boolean}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 43,
+            "description": "Size of the text (depth).",
+            "itemtype": "property",
+            "name": "size",
+            "type": "{Number}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 51,
+            "description": "Height of the text.",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{Number}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 59,
+            "description": "Number of segments that compose a curve in the font.",
+            "itemtype": "property",
+            "name": "curveSegments",
+            "type": "{Number}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 67,
+            "description": "If true a bevel is added to the text.",
+            "itemtype": "property",
+            "name": "bevel",
+            "type": "{boolean}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 75,
+            "description": "Bevel thickness.",
+            "itemtype": "property",
+            "name": "bevelThickness",
+            "type": "{Number}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 83,
+            "description": "Bevel size.",
+            "itemtype": "property",
+            "name": "bevelSize",
+            "type": "{Number}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 91,
+            "description": "Text to be diplayed in the mesh.",
+            "itemtype": "property",
+            "name": "text",
+            "type": "{String}",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 105,
+            "description": "Set font used by this text 3D instance.",
+            "params": [
+                {
+                    "name": "font",
+                    "description": "Font",
+                    "type": "Font"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setFont",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 120,
+            "description": "Change text.",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setText",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 135,
+            "description": "Update the text geometry.\n\nShould be called after chaging any attribute to generate a new geometry.",
+            "itemtype": "method",
+            "name": "updateGeometry",
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 179,
+            "description": "Clone this object instance into a new object.",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "Clone of this object.",
+                "type": "TextMesh"
+            },
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextMesh.js",
+            "line": 190,
+            "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "TextMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 30,
+            "description": "Scale of the object.",
+            "itemtype": "attribute",
+            "name": "size",
+            "type": "{Number}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 42,
+            "description": "CSS Font style to be used.",
+            "itemtype": "attribute",
+            "name": "font",
+            "type": "{String}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 54,
+            "description": "Horizontal text alignment can be\n   - TextSprite.LEFT\n   - TextSprite.RIGHT\n   - TextSprite.CENTER",
+            "itemtype": "attribute",
+            "name": "align",
+            "type": "{String}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 69,
+            "description": "CSS color of the text.",
+            "itemtype": "attribute",
+            "name": "color",
+            "type": "{String}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 81,
+            "description": "Text of this object.",
+            "itemtype": "attribute",
+            "name": "text",
+            "type": "{String}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 100,
+            "description": "Indicates if the text has an outline border.",
+            "itemtype": "attribute",
+            "name": "outline",
+            "type": "{Boolean}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 112,
+            "description": "CSS color of the outline.",
+            "itemtype": "attribute",
+            "name": "outlineColor",
+            "type": "{String}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 124,
+            "description": "Width of the text outline.",
+            "itemtype": "attribute",
+            "name": "outlineWidth",
+            "type": "{Number}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 136,
+            "description": "Vertical resolution of the texture created from canvas used.\n\nShould always be a npot of 2.",
+            "itemtype": "attribute",
+            "name": "resolution",
+            "type": "{Number}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 159,
+            "description": "Align text to the left side.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "LEFT",
+            "type": "{String}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 168,
+            "description": "Align text to the center.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "CENTER",
+            "type": "{String}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 177,
+            "description": "Align text to the right side.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "RIGHT",
+            "type": "{String}",
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 186,
+            "description": "Set the text to be displayed.",
+            "itemtype": "method",
+            "name": "setText",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "TextSprite",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
+            "line": 197,
+            "description": "Update the canvas texture.\n\nRedraw text into the canvas and update scale.",
+            "itemtype": "method",
+            "name": "updateCanvas",
+            "class": "TextSprite",
+            "module": "Meshes"
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
@@ -10676,8 +11063,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 17,
-            "description": "Cannon.js world used for physics simulation.\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\nDocumentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.",
+            "line": 25,
+            "description": "Cannon.js world used for physics simulation.\n\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\n\nDocumentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.",
             "itemtype": "property",
             "name": "world",
             "type": "World",
@@ -10686,8 +11073,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 23,
-            "description": "Raycaster used for mouse interaction with 3D objects.\nThis raycaster is automatically updated using the first camera being drawn.",
+            "line": 52,
+            "description": "Raycaster used for mouse interaction with 3D objects.\n\nThis raycaster is automatically updated using the first camera being drawn.",
             "itemtype": "property",
             "name": "raycaster",
             "type": "Raycaster",
@@ -10696,17 +11083,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 28,
-            "description": "Normalized mouse coordinates used by the scene internal raycaster.",
-            "itemtype": "property",
-            "name": "mouse",
-            "type": "Vector2",
-            "class": "Scene",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 32,
+            "line": 61,
             "description": "Program that contains this scene.",
             "itemtype": "property",
             "name": "program",
@@ -10716,7 +11093,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 36,
+            "line": 68,
             "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
@@ -10726,7 +11103,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 82,
+            "line": 75,
+            "description": "Normalized mouse coordinates used by the scene internal raycaster.",
+            "itemtype": "property",
+            "name": "mouse",
+            "type": "Vector2",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 87,
             "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -10735,7 +11122,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 102,
+            "line": 106,
             "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -10744,7 +11131,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 130,
+            "line": 134,
             "description": "Render scene using all active cameras.",
             "itemtype": "method",
             "name": "render",
@@ -10760,7 +11147,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 161,
+            "line": 165,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -10780,7 +11167,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 193,
+            "line": 197,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -10796,7 +11183,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 208,
+            "line": 212,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -10805,7 +11192,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 223,
+            "line": 227,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -10821,7 +11208,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 238,
+            "line": 242,
             "description": "Check is camera is active.",
             "params": [
                 {
@@ -10837,7 +11224,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 250,
+            "line": 254,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -10848,26 +11235,6 @@
             ],
             "itemtype": "method",
             "name": "setFogMode",
-            "class": "Scene",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 274,
-            "description": "Serialize scene object as JSON.\n\nAlso serializes physics world information.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
             "class": "Scene",
             "module": "Core"
         },
@@ -11829,7 +12196,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 25,
+            "line": 28,
             "description": "Store the renderer state.",
             "itemtype": "method",
             "name": "store",
@@ -11845,7 +12212,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 44,
+            "line": 47,
             "description": "Restore the renderer state.",
             "itemtype": "method",
             "name": "restore",
@@ -11873,7 +12240,7 @@
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
             "line": 24,
             "description": "Temporary matrix object.",
-            "itemtype": "property",
+            "itemtype": "attribute",
             "name": "matrix",
             "type": "{THREE.Matrix4}",
             "class": "CSS3DRenderer",
@@ -11883,7 +12250,7 @@
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
             "line": 32,
             "description": "Object cache, used to store the rendered objects state.",
-            "itemtype": "property",
+            "itemtype": "attribute",
             "name": "cache",
             "type": "{Object}",
             "class": "CSS3DRenderer",
@@ -11893,7 +12260,7 @@
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
             "line": 44,
             "description": "Main DOM element used for the renderer.",
-            "itemtype": "property",
+            "itemtype": "attribute",
             "name": "domElement",
             "type": "{DOM}",
             "class": "CSS3DRenderer",
@@ -11901,9 +12268,9 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 53,
+            "line": 54,
             "description": "Camera projected DOM element.",
-            "itemtype": "property",
+            "itemtype": "attribute",
             "name": "domElement",
             "type": "{DOM}",
             "class": "CSS3DRenderer",
@@ -11911,7 +12278,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 65,
+            "line": 66,
             "description": "Get the size of the renderer.",
             "itemtype": "method",
             "name": "getSize",
@@ -11920,7 +12287,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 75,
+            "line": 76,
             "description": "Set the size of the renderer.\n\nThe size is also applie to the internal DOM division.",
             "itemtype": "method",
             "name": "setSize",
@@ -11941,7 +12308,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 97,
+            "line": 98,
             "description": "Render the CSS object of a scene using a camera.",
             "itemtype": "method",
             "name": "render",
@@ -13965,23 +14332,6 @@
             "module": "Textures"
         },
         {
-            "file": "..\\source\\core\\texture\\YoutubeTexture.js",
-            "line": 34,
-            "description": "Get the youtube video id from the video URL.",
-            "static": 1,
-            "itemtype": "method",
-            "name": "getVideoId",
-            "params": [
-                {
-                    "name": "url",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "class": "YoutubeTexture",
-            "module": "Textures"
-        },
-        {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
             "line": 3,
             "description": "Folded attribute is used only for editing, if true the object shows as folded in the object explorer.",
@@ -14983,7 +15333,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\Tree.js",
-            "line": 21,
+            "line": 23,
             "description": "Add new element to tree.",
             "itemtype": "method",
             "name": "add",
@@ -14999,7 +15349,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\Tree.js",
-            "line": 44,
+            "line": 46,
             "description": "Remove element from tree.",
             "itemtype": "method",
             "name": "remove",
@@ -15015,7 +15365,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\Tree.js",
-            "line": 64,
+            "line": 66,
             "description": "Clone tree recursively.\n\nThe cloned tree has the same UUID.",
             "itemtype": "method",
             "name": "clone",
@@ -15028,7 +15378,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\Tree.js",
-            "line": 86,
+            "line": 88,
             "description": "Print tree into console, recursively.",
             "itemtype": "method",
             "name": "print",
@@ -15044,7 +15394,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 13,
+            "line": 15,
             "description": "Flag used to indicate ADDED diff.",
             "itemtype": "attribute",
             "name": "DIFF_ADDED",
@@ -15054,7 +15404,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 21,
+            "line": 23,
             "description": "Flag used to indicate REMOVED diff.",
             "itemtype": "attribute",
             "name": "DIFF_REMOVED",
@@ -15064,7 +15414,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 29,
+            "line": 31,
             "description": "Flag used to indicate MOVED diff.",
             "itemtype": "attribute",
             "name": "DIFF_MOVED",
@@ -15074,7 +15424,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 37,
+            "line": 39,
             "description": "Compare two trees and return list of changes.\n\noldTree is compared to newTree. The list of changes indicate wath needs to be changed in oldTree to become wqual to the newTree.\n\nElements inside Trees are compared using their UUID.\n\nThe array returned from this method contains objects in the format {status:<Operation>, uuid: <UUID>, from: <Tree>, to: <Tree>}",
             "static": 1,
             "itemtype": "method",
@@ -15115,7 +15465,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\struct\\TreeUtils.js",
-            "line": 205,
+            "line": 207,
             "description": "Print tree into console, recursively.\n\nTrees are represented by a UUID a parent and a children array.",
             "itemtype": "method",
             "name": "print",
@@ -16419,6 +16769,19 @@
         {
             "file": "..\\source\\core\\Nunu.js",
             "line": 86,
+            "description": "Check if nunu if running in development mode.",
+            "itemtype": "method",
+            "name": "developmentMode",
+            "return": {
+                "description": "True if running as development mode.",
+                "type": "Boolean"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 97,
             "description": "Check if host supports WebVR and if there is a VR display available.",
             "itemtype": "method",
             "name": "webvrAvailable",
@@ -16431,7 +16794,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 97,
+            "line": 108,
             "description": "Used to get the first VR display available, the display is returned as argument of the getDisplay function.",
             "itemtype": "method",
             "name": "getVRDisplays",
@@ -16447,7 +16810,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 124,
+            "line": 135,
             "description": "Get the query parameter from the browser URL.",
             "itemtype": "method",
             "name": "getQueryParameters",
@@ -16460,7 +16823,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 149,
+            "line": 160,
             "description": "Create a web worker from code written in a string.\n\nUses a blob to inject the code and loads it from and URL object.",
             "itemtype": "method",
             "name": "createWorker",
@@ -16485,7 +16848,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 172,
+            "line": 183,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -16498,25 +16861,12 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 183,
+            "line": 194,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
             "return": {
                 "description": "True if WebGL is available.",
-                "type": "Boolean"
-            },
-            "class": "Nunu",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\core\\Nunu.js",
-            "line": 206,
-            "description": "Check if nunu if running in development mode.",
-            "itemtype": "method",
-            "name": "developmentMode",
-            "return": {
-                "description": "True if running as development mode.",
                 "type": "Boolean"
             },
             "class": "Nunu",

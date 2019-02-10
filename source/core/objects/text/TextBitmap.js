@@ -63,6 +63,9 @@ function TextBitmap(config, texture, mode, color)
 	 *    start: (Number) the starting index into the text to layout (default 0)
 	 *    end: (Number) the ending index (exclusive) into the text to layout (default text.length)
 	 * }
+	 *
+	 * @attribute config
+	 * @type {Object}
 	 */
 	this.config = config;
 
