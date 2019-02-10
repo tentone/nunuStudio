@@ -589,11 +589,11 @@ Editor.initialize = function()
 		}
 		
 		//Prevent some key combinations
-		var allowedKeys = [67, 86, 65, 88];
+		var allowedKeys = [Keyboard.C, Keyboard.V, Keyboard.A, Keyboard.X];
 		document.onkeydown = function(event)
 		{
-			//If F1-F12 or CTRL+Key prevent default
-			if((event.keyCode > 112 && event.keyCode < 122) || (!event.altKey && event.ctrlKey && allowedKeys.indexOf(event.keyCode) === -1))
+			//If F1-F11 or CTRL+Key prevent default action
+			if((event.keyCode > Keyboard.F1 && event.keyCode < Keyboard.F11) || (!event.altKey && event.ctrlKey && allowedKeys.indexOf(event.keyCode) === -1))
 			{
 				event.preventDefault();
 			}
