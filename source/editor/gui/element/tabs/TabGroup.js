@@ -40,7 +40,12 @@ function TabGroup(parent, placement)
 	//Tab
 	this.tab = new Division(this);
 
-	//Empty message
+	/**
+	 * Division used to display a message indicating that the tab is empty.
+	 *
+	 * @property empty
+	 * @type {DOM}
+	 */
 	this.empty = document.createElement("div");
 	this.empty.style.position = "absolute";
 	this.empty.style.textAlign = "center";
@@ -54,7 +59,7 @@ function TabGroup(parent, placement)
 	this.element.appendChild(this.empty);
 
 	/**
-	 * Currently selected tab.
+	 * Tab that is currently selected.
 	 *
 	 * @property selected
 	 * @type {TabElement}

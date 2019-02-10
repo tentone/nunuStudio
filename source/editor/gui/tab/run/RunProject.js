@@ -20,7 +20,7 @@ function RunProject(parent, closeable, container, index)
 	this.resetCanvas();
 
 	//Test program
-	this.programRunning = null;
+	this.program = null;
 
 	//Performance meter
 	this.stats = new Stats();
@@ -89,7 +89,6 @@ RunProject.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
 RunProject.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
 RunProject.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
 
-//Update container object data
 RunProject.prototype.updateMetadata = function()
 {
 	if(this.scene !== null)
@@ -121,7 +120,6 @@ RunProject.prototype.updateMetadata = function()
 	}
 };
 
-//Set fullscreen mode
 RunProject.prototype.setFullscreen = function(fullscreen)
 {
 	if(fullscreen)
@@ -138,7 +136,6 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 	}
 };
 
-//Activate
 RunProject.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
@@ -158,7 +155,6 @@ RunProject.prototype.activate = function()
 	Editor.gui.toolBar.selectTool(Editor.SELECT);
 };
 
-//Deactivate
 RunProject.prototype.deactivate = function()
 {
 	TabElement.prototype.deactivate.call(this);
@@ -170,7 +166,6 @@ RunProject.prototype.deactivate = function()
 	this.manager.destroy();
 };
 
-//Update settings
 RunProject.prototype.updateSettings = function()
 {
 	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
@@ -200,7 +195,6 @@ RunProject.prototype.attach = function(scene)
 	this.updateMetadata();
 };
 
-//Check if scene is attached
 RunProject.prototype.isAttached = function(scene)
 {
 	return this.scene === scene;
@@ -219,7 +213,7 @@ RunProject.prototype.update = function()
 
 	try
 	{
-		this.programRunning.update();
+		this.program.update();
 	}
 	catch(e)
 	{
@@ -239,7 +233,7 @@ RunProject.prototype.render = function()
 {
 	try
 	{
-		this.programRunning.render(renderer, this.canvas.width, this.canvas.height);
+		this.program.render(renderer, this.canvas.width, this.canvas.height);
 	}
 	catch(e)
 	{
@@ -263,22 +257,22 @@ RunProject.prototype.setState = function(state)
 	//Run the program directly all changed made with code are kept
 	if(Editor.settings.general.immediateMode)
 	{
-		this.programRunning = Editor.program;
+		this.program = Editor.program;
 	}
 	//Run a copy of the program
 	else
 	{
-		this.programRunning = Editor.program.clone();
+		this.program = Editor.program.clone();
 	}
 	
 	//Use editor camera as default camera for program
-	this.programRunning.defaultCamera = this.camera;
-	this.programRunning.setRenderer(this.renderer);
+	this.program.defaultCamera = this.camera;
+	this.program.setRenderer(this.renderer);
 
 	//Initialize scene
-	this.programRunning.setMouseKeyboard(this.mouse, this.keyboard);
-	this.programRunning.initialize();
-	this.programRunning.resize(this.canvas.width, this.canvas.height);
+	this.program.setMouseKeyboard(this.mouse, this.keyboard);
+	this.program.initialize();
+	this.program.resize(this.canvas.width, this.canvas.height);
 
 	//Show full screen and VR buttons
 	this.fullscreenButton.setVisibility(true);
@@ -287,7 +281,7 @@ RunProject.prototype.setState = function(state)
 	this.navigation.setVisibility(false);
 
 	//If program uses VR set button
-	if(this.programRunning.vr)
+	if(this.program.vr)
 	{
 		if(Nunu.webvrAvailable())
 		{
@@ -300,11 +294,11 @@ RunProject.prototype.setState = function(state)
 			{
 				if(vr)
 				{
-					this.programRunning.displayVR();
+					this.program.displayVR();
 				}
 				else
 				{
-					this.programRunning.exitVR();
+					this.program.exitVR();
 				}
 
 				vr = !vr;
@@ -313,7 +307,7 @@ RunProject.prototype.setState = function(state)
 	}
 
 	//Lock mouse pointer
-	if(this.programRunning.lockPointer)
+	if(this.program.lockPointer)
 	{
 		this.mouse.setLock(true);
 	}
@@ -335,11 +329,11 @@ RunProject.prototype.setState = function(state)
 RunProject.prototype.disposeRunningProgram = function()
 {
 	//Dispose running program if there is one
-	if(this.programRunning !== null)
+	if(this.program !== null)
 	{
 		this.setFullscreen(false);
-		this.programRunning.dispose();
-		this.programRunning = null;
+		this.program.dispose();
+		this.program = null;
 	}
 
 	//Unlock mouse
@@ -366,7 +360,7 @@ RunProject.prototype.resizeCanvas = function()
 
 		if(this.state === RunProject.TESTING)
 		{
-			this.programRunning.resize(width, height);
+			this.program.resize(width, height);
 		}
 	}
 };

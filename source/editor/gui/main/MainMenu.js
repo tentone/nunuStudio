@@ -396,8 +396,9 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
+					//TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.OBJExporter();
-					var data = exporter.parse(Editor.program);
+					var data = exporter.parse(Editor.program.scene);
 					FileSystem.writeFile(files[0].path, data);
 				}
 			}, ".obj", true);
@@ -406,8 +407,9 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
+				//TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.OBJExporter();
-				var data = exporter.parse(Editor.program);
+				var data = exporter.parse(Editor.program.scene);
 				FileSystem.writeFile(fname, data);
 			}, ".obj");
 		}
@@ -422,6 +424,7 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
+					//TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.GLTFExporter();
 					exporter.parse(Editor.program.scene, function(result)
 					{
@@ -435,6 +438,7 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
+				//TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.GLTFExporter();
 				exporter.parse(Editor.program.scene, function(result)
 				{
@@ -454,6 +458,7 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
+					//TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.GLTFExporter();
 					exporter.parse(Editor.program.scene, function(result)
 					{
@@ -466,6 +471,7 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
+				//TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.GLTFExporter();
 				exporter.parse(Editor.program.scene, function(result)
 				{
