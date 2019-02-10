@@ -46,5 +46,5 @@ AddAction.prototype.revert = function()
 
 AddAction.updateGUI = function(object, parent, index)
 {
-	Editor.gui.treeView.addObject(object, parent, index);
+	Editor.gui.tree.addObject(object, parent, index);
 };

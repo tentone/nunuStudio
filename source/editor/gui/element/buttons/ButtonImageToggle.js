@@ -68,8 +68,3 @@ ButtonImageToggle.prototype.setOnClick = function(callback)
 		callback();	
 	};
 };
-
-ButtonImageToggle.prototype.updateVisibility = function()
-{
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};

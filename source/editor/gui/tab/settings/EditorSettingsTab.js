@@ -143,7 +143,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.keepTransformMove.setOnChange(function()
 	{
 		Editor.settings.editor.keepTransformMove = self.keepTransformMove.getValue();
-		Editor.gui.panelContainer.updateSelection();
+		Editor.gui.inspector.updateSelection();
 	});
 	this.form.add(this.keepTransformMove);
 	this.form.nextRow();
@@ -163,7 +163,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.showUUID.setOnChange(function()
 	{
 		Editor.settings.general.showUUID = self.showUUID.getValue();
-		Editor.gui.panelContainer.updateSelection();
+		Editor.gui.inspector.updateSelection();
 	});
 	this.form.add(this.showUUID);
 	this.form.nextRow();
@@ -175,7 +175,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.showType.setOnChange(function()
 	{
 		Editor.settings.general.showType = self.showType.getValue();
-		Editor.gui.panelContainer.updateSelection();
+		Editor.gui.inspector.updateSelection();
 	});
 	this.form.add(this.showType);
 	this.form.nextRow();

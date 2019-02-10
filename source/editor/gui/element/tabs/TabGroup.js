@@ -50,7 +50,7 @@ function TabGroup(parent, placement)
 	this.empty.style.flexDirection = "column";
 	this.empty.style.justifyContent = "center";
 	this.empty.style.pointerEvents = "none";
-	this.empty.appendChild(document.createTextNode("Open new tab to edit content or create new project"));
+	this.empty.appendChild(document.createTextNode(Locale.openTabToEditContent));
 	this.element.appendChild(this.empty);
 
 	/**
@@ -501,11 +501,10 @@ TabGroup.prototype.updateSize = function()
 		button.updateInterface();
 	}
 
-	//Tab size
 	this.tab.size.copy(tabSize);
 	this.tab.updateSize();
 
-	//Buttons and tab division
+	//Position buttons and tab division
 	if(this.placement === TabGroup.TOP)
 	{	
 		this.buttons.position.set(0, 0);

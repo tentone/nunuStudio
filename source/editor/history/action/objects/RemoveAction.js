@@ -57,5 +57,5 @@ RemoveAction.updateGUI = function(object, parent)
 		Editor.unselectObject(object);
 	}
 
-	Editor.gui.treeView.removeObject(object, parent);
+	Editor.gui.tree.removeObject(object, parent);
 };

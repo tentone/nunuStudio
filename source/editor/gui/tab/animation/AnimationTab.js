@@ -301,7 +301,7 @@ AnimationTab.prototype.update = function()
 		//Update object panel when playing
 		if(this.mixer.playing)
 		{
-			Editor.gui.panelContainer.updateValues();
+			Editor.gui.inspector.updateValues();
 		}
 	}
 };

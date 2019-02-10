@@ -33,10 +33,10 @@ function Interface()
 	this.animation = leftBottom.addTab(AnimationTab, false);
 
 	//Tree view
-	this.treeView = rightTop.addTab(TreeView, false)
+	this.tree = rightTop.addTab(TreeView, false)
 	
 	//Inspector
-	this.panelContainer = rightBottom.addTab(PanelContainer, false);
+	this.inspector = rightBottom.addTab(PanelContainer, false);
 
 	//Top Bar
 	this.menuBar = new MainMenu(DocumentBody);

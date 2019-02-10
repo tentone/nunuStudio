@@ -52,17 +52,15 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
 {
 	if(object instanceof THREE.Object3D)
 	{
-		Editor.gui.treeView.updateInterface();
+		
 	}
 	else if(object instanceof THREE.Material)
 	{
 		object.needsUpdate = true;
-		//TODO <MATERIAL GUI>
 	}
 	else if(object instanceof THREE.Texture)
 	{
 		object.needsUpdate = true;
-		//TODO <TEXTURE GUI>
 	}
 	else if(object instanceof Resource)
 	{
@@ -74,7 +72,7 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
 
 	if(Editor.isSelected(object))
 	{
-		Editor.gui.panelContainer.updateValues();
+		Editor.gui.inspector.updateValues();
 	}
 };
 

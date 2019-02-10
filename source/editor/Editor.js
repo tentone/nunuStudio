@@ -1004,7 +1004,7 @@ Editor.renameObject = function(object)
 
 	if(!object.locked)
 	{
-		var name = Editor.prompt("Rename object", object.name);
+		var name = Editor.prompt(Locale.renameObject, object.name);
 		if(name !== null && name !== "")
 		{
 			Editor.addAction(new ChangeAction(object, "name", name));
@@ -1189,7 +1189,7 @@ Editor.pasteObject = function(target)
 	}
 	catch(e)
 	{
-		Editor.alert("Error pasting object");
+		Editor.alert(Locale.errorPaste);
 	}
 };
 
@@ -1284,14 +1284,22 @@ Editor.updateSettings = function()
 	Editor.gui.tab.updateSettings();
 };
 
-//Update all object views
+/**
+ * Update all object views
+ *
+ * @method updateObjectsViewsGUI
+ */
 Editor.updateObjectsViewsGUI = function()
 {
 	Editor.gui.tab.updateObjectsView();
 	Editor.gui.tab.updateMetadata();
 };
 
-//Update tabs after changing selection
+/**
+ * Update tabs after changing selection.
+ *
+ * @method updateSelectionGUI
+ */
 Editor.updateSelectionGUI = function()
 {
 	Editor.gui.tab.updateMetadata();
@@ -1307,10 +1315,10 @@ Editor.resetEditor = function()
 {
 	Editor.clearSelection();
 	Editor.selectTool(Editor.SELECT);
-	Editor.updateSelectionGUI();
-	Editor.updateObjectsViewsGUI();
 
-	Editor.gui.treeView.updateObjectsView();
+	Editor.gui.tab.updateObjectsView();
+	Editor.gui.tab.updateMetadata();
+	Editor.gui.tab.updateSelection();
 };
 
 /**
@@ -1427,7 +1435,7 @@ Editor.setProgram = function(program)
 		Editor.program = program;
 
 		//Tree view
-		Editor.gui.treeView.attach(Editor.program);
+		Editor.gui.tree.attach(Editor.program);
 		Editor.gui.assetExplorer.attach(Editor.program);
 
 		//History
@@ -2593,7 +2601,7 @@ Editor.prompt = function(message, defaultValue)
 /**
  * Try to update nunuStudio editor version using build from github repo.
  *
- * The version timestamp is compared to the local timestamp.
+ * The version timestamp (Nunu.TIMESTAMP) is parsed compared to the local timestamp.
  *
  * @method updateNunu
  */

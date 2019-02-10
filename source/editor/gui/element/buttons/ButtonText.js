@@ -26,7 +26,6 @@ function ButtonText(parent)
 	this.span.appendChild(this.text);
 
 	this.setColor(Editor.theme.buttonColor, Editor.theme.buttonOverColor);
-
 	this.allowWordBreak(false);
 	this.setVerticalAlignment(Text.CENTER);
 	this.setAlignment(Text.CENTER);
@@ -34,8 +33,3 @@ function ButtonText(parent)
 
 ButtonText.prototype = Object.create(Button.prototype);
 Object.assign(ButtonText.prototype, Text.prototype);
-
-ButtonText.prototype.updateVisibility = function()
-{
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
-};

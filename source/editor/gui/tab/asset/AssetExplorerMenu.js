@@ -85,7 +85,7 @@ function AssetExplorerMenu(parent)
 					}
 					catch(e)
 					{
-						Editor.alert("Failed to load Spine animation, make sure that .json and .atlas have the same name (" + e + ")");
+						Editor.alert(Locale.failedLoadSpine + "(" + e + ")");
 					}
 				}
 			}, ".json, .spine");
@@ -317,7 +317,7 @@ function AssetExplorerMenu(parent)
 	
 	create.addOption("HTML", function()
 	{
-		var resource = new TextFile("", "html");
+		var resource = new TextFile("<!DOCTYPE html>\n<html>\n<head>\n\t<title></title>\n</head>\n<body>\n\n</body>\n</html>", "html");
 		resource.name = "html";
 		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
 	}, Editor.FILE_PATH + "icons/script/script.png");

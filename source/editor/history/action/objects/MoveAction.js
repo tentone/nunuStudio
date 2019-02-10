@@ -90,10 +90,10 @@ MoveAction.updateGUI = function(object, oldParent, newParent, newIndex)
 {
 	if(this.keepGlobalPose)
 	{
-		Editor.gui.panelContainer.updateValues();
+		Editor.gui.inspector.updateValues();
 	}
 	
-	Editor.gui.treeView.moveObject(object, oldParent, newParent, newIndex);
+	Editor.gui.tree.moveObject(object, oldParent, newParent, newIndex);
 };
 
 

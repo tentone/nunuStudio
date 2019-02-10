@@ -22,6 +22,7 @@ LocaleManager.register(
 	cut: "Cut",
 	duplicate: "Duplicate",
 	rename: "Rename",
+	renameObject: "Rename object",
 	select: "Select",
 	redo: "Redo",
 	undo: "Undo",
@@ -108,6 +109,7 @@ LocaleManager.register(
 	cannotAddToChildren: "Cannot add object into is children.",
 	nothingToRedo: "Nothing to redo!",
 	nothingToUndo: "Not possible to undo any further",
+	openTabToEditContent: "Open new tab to edit content or create new project",
 
 	//Errors
 	errorExportingProject: "Error exporting project",
@@ -115,6 +117,8 @@ LocaleManager.register(
 	errorLoadingFile: "Error loading file",
 	errorSavingFile: "Error saving file",
 	unknownFileFormat: "Unknown file format.",
+	failedLoadSpine: "Failed to load Spine animation, make sure that .json and .atlas have the same name.",
+	errorPaste: "Error pasting object",
 
 	//Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",

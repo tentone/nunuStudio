@@ -2,11 +2,15 @@
  - All notable changes to this project will be documented in this file, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-
 ## Unpublished
 ### V0.9.6 Beta
- - CSS 3D renderer support.
+ - CSS 3D renderer support. (IN PROGRESS)
+    - Perspective transformed HTML containers. (IN PROGRESS)
+    - Billboarded HTML containers. (IN PROGRESS)
  - Support for extruded or planar Text Mesh.
+ - Fixed bug with tree overlaping other tabs.
+ - Added bitmap text with support for SDF and MSDF text rendering. (IN PROGRESS)
+ - Added canvas based text with support for CSS styling. (IN PROGRESS)
 
 
 ## Published
@@ -66,8 +70,8 @@
  - Support for multi selection
  - Geometry binary operations (CSG)
     - Subtract
-     - Intersect
-     - Union
+    - Intersect
+    - Union
  - Immediate mode
  - Postprocessing
     - Postprocessing editor
@@ -82,7 +86,7 @@
 ### V0.9.1 Beta
  - Internal debug console
     - Preview materials and textures in console
-     - Visualize math structures
+    - Visualize math structures
  - Desktop auto update mechanism (auto download build from github master branch)
  - Load 3D file drag and drop with texture support
  - Skeleton serialization (@takahirox)
