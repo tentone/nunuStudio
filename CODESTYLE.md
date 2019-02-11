@@ -1,7 +1,9 @@
 # Code Guidelines
 
 - This document defines JavaScript ES5, GLSL and HTML coding rules for booth style and functionality.
-  - [ECMAScript Specification 5.1](http://ecma-international.org/ecma-262/5.1/#sec-4.3.13)
+  - [ECMAScript Specification 5.1 Edition](http://ecma-international.org/ecma-262/5.1/#sec-4.3.13)
+  - [ECMAScript Specification 9th Edition](http://ecma-international.org/ecma-262/9.0/index.html#Title)
+- Even tough these guidelines are targeted at ES5 development there may some scenarios where more recent features (e.g. Maps) may be useful to improve performance. Some of these features are also in considered guidelines.
 - The statements in this document should be followed as strictly as possible.
 - If any undefined code situation arises it should be discussed by the development team and the document should be updated.
 - Format files with \n as the line ending (Unix line endings). Do not use \r\n (Windows line endings) or \r (Apple OS's). 
@@ -166,9 +168,10 @@ AttributeMeta.DISTANCE = 201;
 
 ### Exceptions
 
-- Empty exception handlers should be avoided as much as possible. Use only when strictly necessary.
+- Exceptions may cause the current execution thread to stop if not handled properly (using a `try...catch` statement).
+- Empty exception handlers should be avoided as much as possible. Use only when strictly necessary to avoid top level code crashes.
 - If a method requires a error to be handled externally it should throw an Error.
-- Error situations should never come as a returned value. Throw an exception to be handled externally instead.
+- Error situations should never come as a returned value. Throw a Error object to be handled externally instead.
 - Always threat exceptions at some level, exceptions can cause the program to stop unnecessarily.
 - Always assume that the program is running on strict mode. Some errors regarding syntax and reference access are only thrown in this mode.
 
@@ -221,7 +224,7 @@ if(isWeekDay)
 
 ### Control Statements
 
-- Never place a space between the i`f, for, while` and the condition being defined.
+- Never place a space between the `if, for, while` and the condition being defined.
 - On `if...else` chained control statements the following statement should start on a new line.
 - Prefer to explicitly check the `Boolean` value stored in variables.
 
@@ -331,9 +334,30 @@ Object.defineProperties(this,
 ```
 
 
+
+### Recursive functions
+
+- For most JavaScript engines there is a reasonable low depth (usually less than 100000 calls) allowed for recursion.
+- Too much recursion may lead to [InternalError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError) being thrown.
+- Always place proper stopping condition on recursive methods and test them carefully. Use counter and big datasets to check the recursive depth of the function.
+
+```javascript
+function a()
+{
+	a();
+}
+
+//Throws an exception
+a();
+```
+
+
+
 ### Classes
 
-- Classes should be declared from functions.
+- Classes should be declared from constructor functions.
+- Objects should always be created using the `new` keyword.
+- Each constructor is a function that has a property named “prototype” that is used to implement prototype-based inheritance and shared properties
 - Static attributes of the class should be attached to a Class defining function.
 - Always store the class constructor in the prototype.
 
@@ -342,8 +366,6 @@ function ThisIsAClass(parameter)
 {
 	this.attribute = "something";
 }
-
-
 
 ThisIsAClass.prototype.constructor = ThisIsAClass;
 
@@ -408,6 +430,29 @@ Object.assign(OtherClass.prototype, BaseClassB.prototype);
 //"a instanceof BaseClassA" returns true
 //"a instanceof BaseClassB" returns false
 var a = new OtherClass();
+```
+
+
+
+### Maps
+
+- Maps were introduced in ES6 but are a useful feature to improve performance of the application.
+  - The Map object holds key-value pairs and remembers the original insertion order of the keys.
+- They should always be used when indexing objects by another objects.
+- Never use objects attribute name to index data, always use a map instead.
+
+```javascript
+//Bad
+var a = {};
+a["abc"] = new Abc();
+a["dfg"] = new Dfg();
+var b = a["abc"];
+
+//Good
+var a = new Map();
+a.set("abc", new Abc());
+a.set("dfg", new Dfg());
+var b = a.get("abc");
 ```
 
 
