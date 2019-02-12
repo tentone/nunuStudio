@@ -15,35 +15,60 @@ function TabDualContainer(parent)
 
 TabDualContainer.prototype = Object.create(DualContainer.prototype);
 
-//Update all tabs object data
+/**
+ * Update all tabs object data.
+ *
+ * @method updateMetadata
+ */
 TabDualContainer.prototype.updateMetadata = function()
 {
 	this.elementA.updateMetadata();
 	this.elementB.updateMetadata();
 };
 
-//Update all tab object views
+/**
+ * Update all tab object views.
+ *
+ * @method updateObjectsView
+ */
 TabDualContainer.prototype.updateObjectsView = function()
 {
 	this.elementA.updateObjectsView();
 	this.elementB.updateObjectsView();
 };
 
-//Update all tab object views
+/**
+ * Update all tab object selection status.
+ * 
+ * Should be called after object selection changes.
+ *
+ * @method updateSelection
+ */
 TabDualContainer.prototype.updateSelection = function()
 {
 	this.elementA.updateSelection();
 	this.elementB.updateSelection();
 };
 
-//Update all tab object views
+/**
+ * Update all tab settings.
+ *
+ * Should be called after editor settings are changed.
+ *
+ * @method updateSettings
+ */
 TabDualContainer.prototype.updateSettings = function()
 {
 	this.elementA.updateSettings();
 	this.elementB.updateSettings();
 };
 
-//Get actual tab
+/**
+ * Get an array with all the tabs currently active.
+ *
+ * @method getActiveTab
+ * @return {Array} Active tabs.
+ */
 TabDualContainer.prototype.getActiveTab = function()
 {
 	var active = [];
@@ -78,7 +103,11 @@ TabDualContainer.prototype.getActiveTab = function()
 	return active;
 };
 
-//Close actual tab if it's closeable
+/**
+ * Close the tab that is currently being shown if it is closeable.
+ *
+ * @method closeActual
+ */
 TabDualContainer.prototype.closeActual = function()
 {
 	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
@@ -92,14 +121,23 @@ TabDualContainer.prototype.closeActual = function()
 	}
 };
 
-//Select tab
+/**
+ * Select a specific tab from the container tab tree.
+ *
+ * @method selectTab
+ * @param {TabElement} tab Tab to select.
+ */
 TabDualContainer.prototype.selectTab = function(tab)
 {
 	this.elementA.selectTab(tab);
 	this.elementB.selectTab(tab);
 };
 
-//Select next tab
+/**
+ * Select next tab from the currently focused tab group.
+ *
+ * @method selectNextTab
+ */
 TabDualContainer.prototype.selectNextTab = function()
 {
 	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
@@ -113,7 +151,11 @@ TabDualContainer.prototype.selectNextTab = function()
 	}
 };
 
-//Select previous tab
+/**
+ * Select previous tab from the currently focused tab group.
+ *
+ * @method selectPreviousTab
+ */
 TabDualContainer.prototype.selectPreviousTab = function()
 {
 	if(!(this.elementA instanceof TabGroup) || this.elementA.focused)
@@ -127,7 +169,15 @@ TabDualContainer.prototype.selectPreviousTab = function()
 	}
 };
 
-//Add new option to tab group
+/**
+ * Add new option to tab group.
+ *
+ * Prefer the tab group stored on the elementA.
+ *
+ * @method addTab
+ * @param {Constructor} TabConstructor Constructor if the TabElement to be added to the container.
+ * @param {Boolean} closeable Indicates if the tab can be closed.
+ */
 TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 {
 	var tab = this.elementA.addTab(TabConstructor, closeable);
@@ -139,19 +189,30 @@ TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 	return tab;
 };
 
-//Get tab from tab type and attached object is there is any
-TabDualContainer.prototype.getTab = function(type, obj)
+/**
+ * Get tab from tab type and attached object is there is any.
+ *
+ * @param {Constructor} type Type of the tab to look for.
+ * @param {Object} object Object attached to the tab.
+ * @return TabElement The tab from the type specified that has the object attached to it.
+ */
+TabDualContainer.prototype.getTab = function(type, object)
 {
-	var tab = this.elementA.getTab(type, obj);
+	var tab = this.elementA.getTab(type, object);
+	
 	if(tab === null)
 	{
-		tab = this.elementB.getTab(type, obj);
+		tab = this.elementB.getTab(type, object);
 	}
 
 	return tab;
 };
 
-//Remove all tabs
+/**
+ * Remove all tabs from the container.
+ * 
+ * @method clear
+ */
 TabDualContainer.prototype.clear = function(forceAll)
 {
 	this.elementA.clear(forceAll);

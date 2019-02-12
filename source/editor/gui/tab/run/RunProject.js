@@ -22,7 +22,7 @@ function RunProject(parent, closeable, container, index)
 	 * @attribute keyboard
 	 * @type {Keyboard}
 	 */
-	this.keyboard = new Keyboard();
+	this.keyboard = new Keyboard(true);
 
 	/** 
 	 * Mouse input object
@@ -207,15 +207,17 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 
 RunProject.prototype.activate = function()
 {
-
 	this.getProgram();
 
 	this.createRenderer();
 	this.updateSettings();
 
 	this.mouse.create();
+	this.keyboard.create();
 
 	this.runProgram();
+
+	Editor.gui.menuBar.run.setText(Locale.stop);
 
 	TabElement.prototype.activate.call(this);
 };
@@ -224,23 +226,31 @@ RunProject.prototype.deactivate = function()
 {
 	TabElement.prototype.deactivate.call(this);
 
+	this.disposeProgram();
 	this.mouse.dispose();
-	//this.keyboard.dispose();
+	this.keyboard.dispose();
+
+	Editor.gui.menuBar.run.setText(Locale.run);
 };
+
+RunProject.prototype.isAttached = function(program)
+{
+	return program === Editor.program;
+};
+
 
 RunProject.prototype.updateSettings = function()
 {
 	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
 };
 
-RunProject.prototype.destroy = function()
+/** 
+ * Dispose runnning program.
+ *
+ * @method disposeProgram
+ */
+RunProject.prototype.disposeProgram = function()
 {
-	TabElement.prototype.destroy.call(this);
-
-	this.mouse.dispose();
-	this.keyboard.dispose();
-
-	//Dispose running program
 	if(this.program !== null)
 	{
 		this.setFullscreen(false);
@@ -250,21 +260,22 @@ RunProject.prototype.destroy = function()
 
 	//Unlock mouse
 	this.mouse.setLock(false);
+};
 
-	//Dispose renderer
+RunProject.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	this.mouse.dispose();
+	this.keyboard.dispose();
+	this.disposeProgram();
+
 	if(this.renderer !== null)
 	{
 		this.renderer.dispose();
 		this.renderer.forceContextLoss();
 		this.renderer = null;
 	}
-};
-
-RunProject.prototype.attach = function(program){};
-
-RunProject.prototype.isAttached = function(program)
-{
-	return false;
 };
 
 /**
@@ -274,6 +285,12 @@ RunProject.prototype.isAttached = function(program)
  */
 RunProject.prototype.update = function()
 {
+	if(this.program === null)
+	{
+		console.warn("nunuStudio: RunProject tab program is null.", this);
+		return;
+	}
+
 	this.mouse.update();
 	this.keyboard.update();
 
@@ -289,8 +306,8 @@ RunProject.prototype.update = function()
 	}
 	catch(error)
 	{
-		//Editor.alert("Error testing program\nState update caused an error\n(" + e + ")");
-		console.warn("nunuStudio: Error running program.", error);
+		Editor.alert("Error while running program.\n(" + error + ")");
+		console.warn("nunuStudio: Error while running program.", error);
 	}
 
 	if(this.stats !== null)
@@ -381,9 +398,6 @@ RunProject.prototype.runProgram = function()
 	//Renderer size
 	this.renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
 	this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
-
-	//Run button text
-	Editor.gui.menuBar.run.setText("Stop");
 };
 
 /**
@@ -406,7 +420,7 @@ RunProject.prototype.resizeCanvas = function()
 	if(this.renderer !== null)
 	{
 		this.renderer.setSize(this.size.x, this.size.y, false);
-		
+
 		if(this.program !== null)
 		{
 			this.program.resize(width, height);

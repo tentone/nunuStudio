@@ -332,15 +332,15 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
  *
  * @method getTab
  * @param {Constructor} type Type of tab to look for.
- * @param {Object} obj Object attached to the tab.
+ * @param {Object} object Object attached to the tab.
  */
-TabGroup.prototype.getTab = function(type, obj)
+TabGroup.prototype.getTab = function(type, object)
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
 		if(this.options[i] instanceof type)
 		{
-			if(obj === undefined || this.options[i].isAttached(obj))
+			if(object === undefined || this.options[i].isAttached(object))
 			{
 				return this.options[i];
 			}

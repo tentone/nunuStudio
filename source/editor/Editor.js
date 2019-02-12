@@ -1375,13 +1375,21 @@ Editor.addDefaultScene = function(material)
 
 	//Add scene to program
 	Editor.addObject(scene, Editor.program);
-	
+
 	//Open scene
 	var tab = Editor.gui.tab.addTab(SceneEditor, true);
 	tab.attach(scene);
 };
 
-//Save program to file
+/**
+ * Save program to file.
+ *
+ * @method saveProgram
+ * @param {String} fname
+ * @param {Boolean} binary If true the file is saved as nsp.
+ * @param {Boolean} keepDirectory
+ * @param {Boolean} supressMessage
+ */
 Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 {
 	try
@@ -1424,7 +1432,12 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 	}
 };
 
-//Set a program to be edited, create new history object and clear editor windows
+/**
+ * Set a program to be edited, create new history object and clear editor windows.
+ *
+ * @method setProgram
+ * @param {Program} program
+ */
 Editor.setProgram = function(program)
 {
 	if(Editor.program !== program)

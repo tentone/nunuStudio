@@ -47,31 +47,56 @@ TabContainer.prototype.updateSize = function()
 	}
 };
 
-//Update all tabs object data
+/**
+ * Update all tabs object data.
+ *
+ * @method updateMetadata
+ */
 TabContainer.prototype.updateMetadata = function()
 {
 	this.group.updateMetadata();
 };
 
-//Update all tab object views
+/**
+ * Update all tab object views.
+ *
+ * @method updateObjectsView
+ */
 TabContainer.prototype.updateObjectsView = function()
 {
 	this.group.updateObjectsView();
 };
 
-//Update all tab object views
+/**
+ * Update all tab object selection status.
+ * 
+ * Should be called after object selection changes.
+ *
+ * @method updateSelection
+ */
 TabContainer.prototype.updateSelection = function()
 {
 	this.group.updateSelection();
 };
 
-//Update all tab object views
+/**
+ * Update all tab settings.
+ *
+ * Should be called after editor settings are changed.
+ *
+ * @method updateSettings
+ */
 TabContainer.prototype.updateSettings = function()
 {
 	this.group.updateSettings();
 };
 
-//Get actual tab
+/**
+ * Get an array with all the tabs currently active.
+ *
+ * @method getActiveTab
+ * @return {Array} Active tabs.
+ */
 TabContainer.prototype.getActiveTab = function()
 {
 	var active = [];
@@ -103,7 +128,7 @@ TabContainer.prototype.closeActual = function()
 };
 
 /**
- * Select a tab from the container tab tree.
+ * Select a specific tab from the container tab tree.
  *
  * @method selectTab
  * @param {TabElement} tab Tab to select.
@@ -152,9 +177,9 @@ TabContainer.prototype.addTab = function(TabConstructor, closeable)
  * @param {Object} object Object attached to the tab.
  * @return TabElement The tab from the type specified that has the object attached to it.
  */
-TabContainer.prototype.getTab = function(type, obj)
+TabContainer.prototype.getTab = function(type, object)
 {
-	return this.group.getTab(type, obj);
+	return this.group.getTab(type, object);
 };
 
 /**

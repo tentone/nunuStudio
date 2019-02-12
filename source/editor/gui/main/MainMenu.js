@@ -857,22 +857,18 @@ function MainMenu(parent)
 	this.run.updateInterface();
 	this.run.setOnClick(function()
 	{
-		var tabs = Editor.gui.tab.getActiveTab();
-		var tab = null;
-
-		for(var i = 0; i < tabs.length; i++)
-		{
-			if(tabs[i] instanceof RunProject)
-			{
-				tab = tabs[i];
-				return;
-			}
-		}
+		var tab = Editor.gui.tab.getTab(RunProject, Editor.program);
 
 		if(tab === null)
 		{
 			tab = Editor.gui.tab.addTab(RunProject, true);
-			//Editor.gui.tab.selectTab(tab);
+			tab.select();
+			Editor.gui.menuBar.run.setText(Locale.stop);
+		}
+		else
+		{
+			tab.close();
+			Editor.gui.menuBar.run.setText(Locale.run);
 		}
 	});
 }

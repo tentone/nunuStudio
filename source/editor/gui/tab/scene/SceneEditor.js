@@ -314,28 +314,6 @@ SceneEditor.prototype.updateMetadata = function()
 	}
 };
 
-/**
- * Set fullscreen mode of the tab canvas
- *
- * @method setFullscreen
- * @param {Boolean} fullscreen If true enters fullscreen if false exits fullscreen.
- */
-SceneEditor.prototype.setFullscreen = function(fullscreen)
-{
-	if(fullscreen)
-	{
-		Nunu.setFullscreen(true, this.element);
-		this.position.set(0, 0);	
-		this.size.set(window.screen.width, window.screen.height);
-		this.updateInterface();
-	}
-	else
-	{
-		Nunu.setFullscreen(false);
-		Editor.gui.updateInterface();
-	}
-};
-
 SceneEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);

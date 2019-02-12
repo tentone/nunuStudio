@@ -74,6 +74,7 @@ LocaleManager.register(
 	//Editor
 	project: "Project",
 	run: "Run",
+	stop: "Stop",
 	new: "New",
 	save: "Save",
 	saveAs: "Save as",
