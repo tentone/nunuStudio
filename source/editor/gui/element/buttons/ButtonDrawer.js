@@ -1,5 +1,14 @@
 "use strict";
 
+/**
+ * Button with text, inherits all methods available on the Text class.
+ * 
+ * Used in menu bars, panels, etc.
+ *
+ * @class ButtonDrawer
+ * @extends {ButtonImage}
+ * @param {Element} parent Parent element.
+ */
 function ButtonDrawer(parent)
 {
 	ButtonImage.call(this, parent);
@@ -125,18 +134,28 @@ ButtonDrawer.prototype.removeOption = function(index)
  */
 ButtonDrawer.prototype.updatePanelSize = function()
 {
-	this.panelSize.x = (this.optionsSize.x * this.optionsPerLine);
-	this.panelSize.y = (this.optionsSize.y * (Math.floor((this.options.length - 1) / this.optionsPerLine) + 1));
+	var optionsPerLine = (this.options.length < this.optionsPerLine) ? this.options.length : this.optionsPerLine;
+
+	this.panelSize.x = (this.optionsSize.x * optionsPerLine);
+	this.panelSize.y = (this.optionsSize.y * (Math.floor((this.options.length - 1) / optionsPerLine) + 1));
 };
 
-//Update drawer options position and size (should be called after change in options displacement variables)
+/**
+ * Update drawer options position and size.
+ *
+ * Should be called after change in options displacement variables).
+ *
+ * @method updateOptions
+ */
 ButtonDrawer.prototype.updateOptions = function()
 {
+	var optionsPerLine = (this.options.length < this.optionsPerLine) ? this.options.length : this.optionsPerLine;
+
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
-		this.options[i].position.x = this.optionsSize.x * (i % this.optionsPerLine);
-		this.options[i].position.y = this.optionsSize.y * Math.floor(i / this.optionsPerLine);
+		this.options[i].position.x = this.optionsSize.x * (i % optionsPerLine);
+		this.options[i].position.y = this.optionsSize.y * Math.floor(i / optionsPerLine);
 		this.options[i].updateInterface();
 	}
 };

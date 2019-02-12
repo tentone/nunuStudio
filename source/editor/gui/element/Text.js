@@ -5,7 +5,7 @@
  * 
  * @class Text
  * @extends {Element}
- * @param {DOM} parent Parent element.
+ * @param {Element} parent Parent element.
  */
 function Text(parent)
 {

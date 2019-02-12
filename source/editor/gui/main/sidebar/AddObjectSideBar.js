@@ -164,7 +164,7 @@ function AddObjectSideBar(parent)
 	addText.updateInterface();
 	position += size;
 
-	addText.addOption(Editor.FILE_PATH + "icons/text/meshtext.png", function()
+	addText.addOption(Editor.FILE_PATH + "icons/text/text.png", function()
 	{
 		var model = new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont);
 		Editor.addObject(model);
@@ -193,7 +193,6 @@ function AddObjectSideBar(parent)
 			//TODO <ADD CODE HERE>
 		}, "Text Sprite");
 	}
-
 
 	//Add lights
 	var addLight = new ButtonDrawer(parent);
@@ -271,7 +270,6 @@ function AddObjectSideBar(parent)
 	//Add script
 	var addScript = new ButtonDrawer(parent);
 	addScript.setImage(Editor.FILE_PATH + "icons/script/script.png");
-	addScript.optionsPerLine = 1;
 	addScript.size.set(size, size);
 	addScript.position.set(0, position);
 	addScript.optionsSize.set(size, size);
@@ -287,7 +285,6 @@ function AddObjectSideBar(parent)
 	//Effects
 	var addEffects = new ButtonDrawer(parent);
 	addEffects.setImage(Editor.FILE_PATH + "icons/misc/particles.png");
-	addEffects.optionsPerLine = 3;
 	addEffects.size.set(size, size);
 	addEffects.position.set(0, position);
 	addEffects.optionsSize.set(size, size);

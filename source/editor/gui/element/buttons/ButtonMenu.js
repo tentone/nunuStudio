@@ -7,7 +7,7 @@
  *
  * @class ButtonMenu
  * @extends {ButtonText}
- * @param {DOM} parent Parent element.
+ * @param {Element} parent Parent element.
  */
 function ButtonMenu(parent)
 {

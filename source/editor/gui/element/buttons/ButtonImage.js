@@ -5,7 +5,7 @@
  *
  * @class ButtonImageToggle
  * @extends {Button}
- * @param {DOM} parent Parent element.
+ * @param {Element} parent Parent element.
  */
 function ButtonImage(parent)
 {

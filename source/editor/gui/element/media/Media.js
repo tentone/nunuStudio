@@ -7,7 +7,7 @@
  *
  * @class Media
  * @extends {Element}
- * @param {DOM} parent Parent element.
+ * @param {Element} parent Parent element.
  */
 function Media(parent, type)
 {

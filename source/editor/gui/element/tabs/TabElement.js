@@ -7,7 +7,7 @@
  *
  * @class TabElement
  * @extends {Element}
- * @param {DOM} parent Parent DOM element.
+ * @param {Element} parent Parent element.
  * @param {Boolean} closeable If false the tab cannot be closed.
  * @param {TabContainer} container Container for this tab.
  * @param {Number} index Index of the tab.

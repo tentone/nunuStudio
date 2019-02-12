@@ -1,7 +1,5 @@
 "use strict";
 
-//TODO <NOT IN USE>
-
 /** 
  * Tab used to preview a project running.
  *
@@ -12,7 +10,7 @@
  */
 function RunProject(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Run", Editor.FILE_PATH + "icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, "Run", Editor.FILE_PATH + "icons/misc/play.png");
 
 	var self = this;
 
