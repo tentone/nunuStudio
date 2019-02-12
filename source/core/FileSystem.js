@@ -87,13 +87,15 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 		var file = new XMLHttpRequest();
 		file.overrideMimeType("text/plain");
 		file.open("GET", fname, !sync);
-		file.onload = function()
+		
+		if(onLoad !== undefined)
 		{
-			if((file.status === 200 || file.status === 0) && onLoad !== undefined)
+			file.onload = function()
 			{
 				onLoad(file.response);
-			}
-		};
+			};
+		}
+
 		if(onProgress !== undefined)
 		{
 			file.onprogress = onProgress;
@@ -160,13 +162,14 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 		var file = new XMLHttpRequest();
 		file.open("GET", fname, !sync);
 		file.overrideMimeType("text/plain; charset=x-user-defined");
-		file.onload = function()
+
+		if(onLoad !== undefined)
 		{
-			if((file.status === 200 || file.status === 0) && onLoad !== undefined)
+			file.onload = function()
 			{
 				onLoad(ArraybufferUtils.fromBinaryString(file.response));
-			}
-		};
+			};
+		}
 
 		if(onProgress !== undefined)
 		{
@@ -235,14 +238,13 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 		file.open("GET", fname, !sync);
 		file.overrideMimeType("text/plain; charset=x-user-defined");
 		
-		file.onload = function()
-		{
-			if((file.status === 200 || file.status === 0) && onLoad !== undefined)
+		if(onLoad !== undefined)
+		{		
+			file.onload = function()
 			{
 				onLoad(Base64Utils.fromBinaryString(file.response));
-			}
-		};
-
+			};
+		}
 		if(onProgress !== undefined)
 		{
 			file.onprogress = onProgress;

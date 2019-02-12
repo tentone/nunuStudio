@@ -546,6 +546,21 @@ var x = a ? b : c;
 
 
 
+### Regular Expressions
+
+- Regular expressions should always be written in their literal form between slashes for known expressions.
+- For expressions built as strings during runtime use the RegExp object constructor.
+
+```javascript
+//Literal form
+/ab+c/;
+
+//Object constructor
+new RegExp("ab+c");
+```
+
+
+
 ### Null vs Undefined
 
 - Always use and check them explicitly. They have different meaning.
