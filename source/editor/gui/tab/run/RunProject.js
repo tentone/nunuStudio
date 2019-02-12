@@ -207,16 +207,17 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 
 RunProject.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
 
 	this.getProgram();
+
 	this.createRenderer();
 	this.updateSettings();
 
 	this.mouse.create();
-	this.manager.create();
 
 	this.runProgram();
+
+	TabElement.prototype.activate.call(this);
 };
 
 RunProject.prototype.deactivate = function()
@@ -224,9 +225,7 @@ RunProject.prototype.deactivate = function()
 	TabElement.prototype.deactivate.call(this);
 
 	this.mouse.dispose();
-	this.keyboard.dispose();
-
-	this.manager.destroy();
+	//this.keyboard.dispose();
 };
 
 RunProject.prototype.updateSettings = function()
@@ -265,9 +264,14 @@ RunProject.prototype.attach = function(program){};
 
 RunProject.prototype.isAttached = function(program)
 {
-	return program === Editor.program;
+	return false;
 };
 
+/**
+ * Update the program logic and render the program to the canvas using the renderer.
+ *
+ * @method update
+ */
 RunProject.prototype.update = function()
 {
 	this.mouse.update();
@@ -281,14 +285,13 @@ RunProject.prototype.update = function()
 	try
 	{
 		this.program.update();
+		this.program.render(this.renderer);
 	}
-	catch(e)
+	catch(error)
 	{
 		//Editor.alert("Error testing program\nState update caused an error\n(" + e + ")");
-		console.error("nunuStudio: Error updating program state", e);
+		console.warn("nunuStudio: Error running program.", error);
 	}
-
-	this.render();
 
 	if(this.stats !== null)
 	{
@@ -296,23 +299,6 @@ RunProject.prototype.update = function()
 	}
 };
 
-/**
- * Render the program to the canvas using the renderer.
- *
- * @method render
- */
-RunProject.prototype.render = function()
-{
-	try
-	{
-		this.program.render(this.renderer, this.canvas.width, this.canvas.height);
-	}
-	catch(e)
-	{
-		//Editor.alert("Error testing program\nRender caused an error\n(" + e + ")");
-		console.error("nunuStudio: Error rendering program", e);
-	}
-};
 
 RunProject.prototype.resetCanvas = function()
 {
@@ -360,7 +346,7 @@ RunProject.prototype.runProgram = function()
 	this.program.resize(this.canvas.width, this.canvas.height);
 
 	//If program uses VR set button
-	if(this.program.vr)
+	if(this.program.vr === true)
 	{
 		if(Nunu.webvrAvailable())
 		{
@@ -369,15 +355,16 @@ RunProject.prototype.runProgram = function()
 
 			//Create VR switch callback
 			var vr = true;
+			var self = this;
 			this.vrButton.setOnClick(function()
 			{
 				if(vr)
 				{
-					this.program.displayVR();
+					self.program.displayVR();
 				}
 				else
 				{
-					this.program.exitVR();
+					self.program.exitVR();
 				}
 
 				vr = !vr;
@@ -397,8 +384,6 @@ RunProject.prototype.runProgram = function()
 
 	//Run button text
 	Editor.gui.menuBar.run.setText("Stop");
-
-	this.updateInterface();
 };
 
 /**
@@ -421,11 +406,11 @@ RunProject.prototype.resizeCanvas = function()
 	if(this.renderer !== null)
 	{
 		this.renderer.setSize(this.size.x, this.size.y, false);
-
-		this.camera.aspect = width / height;
-		this.camera.updateProjectionMatrix();
-
-		this.program.resize(width, height);
+		
+		if(this.program !== null)
+		{
+			this.program.resize(width, height);
+		}
 	}
 };
 

@@ -7,8 +7,9 @@
  * 
  * @class Keyboard
  * @module Input
+ * @param {Boolean} dontInitialize If true the mouse events are not created.
  */
-function Keyboard()
+function Keyboard(dontInitialize)
 {
 	/**
 	 * Array with keyboard keys status.
@@ -30,10 +31,8 @@ function Keyboard()
 	 */
 	this.actions = [];
 
-
-	//Actions pointer
-	var actions = this.actions;
 	var self = this;
+	var actions = this.actions;
 
 	/**
 	 * Event manager used to handle the keyup, keydown and focus events.
@@ -44,28 +43,25 @@ function Keyboard()
 	 * @type {EventManager}
 	 */
 	this.events = new EventManager();
-
-	//Key down
 	this.events.add(window, "keydown", function(event)
 	{
 		actions.push(event.keyCode);
 		actions.push(Key.DOWN);
 	});
-
-	//Key up
 	this.events.add(window, "keyup", function(event)
 	{
 		actions.push(event.keyCode);
 		actions.push(Key.UP);
 	});
-
-	//Reset
 	this.events.add(window, "focus", function(event)
 	{
 		self.reset();
 	});
 
-	this.create();
+	if(dontInitialize !== true)
+	{
+		this.create();
+	}
 }
 
 Keyboard.prototype = Keyboard;

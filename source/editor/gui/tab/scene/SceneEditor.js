@@ -96,7 +96,14 @@ function SceneEditor(parent, closeable, container, index)
 	this.toolScene = new THREE.Scene();
 	this.toolScene.matrixAutoUpdate = false;
 
-	//Camera orientation scene
+	/**
+	 * Camera orientation cube.
+	 *
+	 * Used to preview the orientation of the editor camera.
+	 *
+	 * @attribute orientation
+	 * @type {OrientationCube}
+	 */
 	this.orientation = new OrientationCube();
 
 	//Grid
@@ -127,7 +134,12 @@ function SceneEditor(parent, closeable, container, index)
 	this.controls = null;
 	this.setCameraMode(SceneEditor.PERSPECTIVE);
 
-	//Transformation mode
+	/**
+	 * Transformation controls mode can be local or world.
+	 *
+	 * @attribute transformationSpace
+	 * @type {DropdownList}
+	 */
 	this.transformationSpace = new DropdownList(this);
 	this.transformationSpace.size.set(60, 30);
 	this.transformationSpace.position.set(145, 5);
@@ -150,7 +162,12 @@ function SceneEditor(parent, closeable, container, index)
 		this.style.opacity = 0.5;
 	};
 
-	//Navigation modes
+	/**
+	 * Dropdown to select the world navigation mode to use.
+	 *
+	 * @attribute navigation
+	 * @type {DropdownList}
+	 */
 	this.navigation = new DropdownList(this);
 	this.navigation.setAltText("Camera navigation mode");
 	this.navigation.size.set(100, 30);
@@ -180,7 +197,12 @@ function SceneEditor(parent, closeable, container, index)
 		this.style.opacity = 0.5;
 	};
 
-	//Camera mode button
+	/**
+	 * Button to toggle the camera mode between ORTHOGRAPHIC and PERSPECTIVE.
+	 *
+	 * @method cameraButton
+	 * @type {ButtonImage}
+	 */
 	this.cameraButton = new ButtonImage(this);
 	this.cameraButton.position.set(5, 5);
 	this.cameraButton.size.set(30, 30);
@@ -214,7 +236,12 @@ function SceneEditor(parent, closeable, container, index)
 		}
 	});
 
-	//Event manager
+	/**
+	 * Event manager to handley keyboard shortcuts.
+	 *
+	 * @attribute manager
+	 * @type {EventManager}
+	 */
 	this.manager = new EventManager();
 	this.manager.add(document.body, "keydown", function(event)
 	{
@@ -1045,7 +1072,7 @@ SceneEditor.prototype.selectTool = function(tool)
  */
 SceneEditor.prototype.updateSelection = function()
 {
-	//Filter Object3D objects
+	//Filter Object3D objects only (to exclude resources)
 	var selectedObjects = [];
 	for(var i = 0; i < Editor.selection.length; i++)
 	{
@@ -1055,7 +1082,6 @@ SceneEditor.prototype.updateSelection = function()
 		}
 	}
 
-	//Transform tool
 	this.tool.attach(selectedObjects);
 	this.objectHelper.removeAll();
 
