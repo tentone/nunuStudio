@@ -68,11 +68,14 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 		{
 			FileSystem.fs.readFile(fname, "utf8", function(error, data)
 			{
-				if(error !== null && onError !== undefined)
+				if(error !== null)
 				{
-					onError(error);
+					if(onError !== undefined)
+					{
+						onError(error);
+					}
 				}
-				else
+				else if(onLoad !== undefined)
 				{
 					onLoad(data);
 				}
@@ -143,11 +146,14 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 		{
 			FileSystem.fs.readFile(fname, function(error, buffer)
 			{
-				if(error !== null && onError !== undefined)
+				if(error !== null)
 				{
-					onError(error);
+					if(onError !== undefined)
+					{
+						onError(error);
+					}
 				}
-				else
+				else if(onLoad !== undefined)
 				{
 					onLoad(ArraybufferUtils.fromBuffer(buffer));
 				}
@@ -218,11 +224,14 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 		{
 			FileSystem.fs.readFile(fname, function(error, buffer)
 			{
-				if(error !== null && onError !== undefined)
+				if(error !== null)
 				{
-					onError(error);
+					if(onError !== undefined)
+					{
+						onError(error);
+					}
 				}
-				else
+				else if(onLoad !== undefined)
 				{
 					onLoad(new Buffer(buffer).toString("base64"));
 				}
@@ -783,6 +792,8 @@ FileSystem.getFilePath = function(file)
  */
 FileSystem.getFileExtension = function(file)
 {
+	console.log("nunuStudio: getFileExtension ", file);
+	
 	if(file !== undefined)
 	{
 		return file.substring(file.lastIndexOf(".") + 1, file.length).toLowerCase();
