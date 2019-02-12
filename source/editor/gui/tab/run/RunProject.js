@@ -1,28 +1,71 @@
 "use strict";
 
 //TODO <NOT IN USE>
+
+/** 
+ * Tab used to preview a project running.
+ *
+ * Clones the project instance and run it. Changes appplied in other tabs are not applied to the running instance.
+ *
+ * @class RunProject
+ * @extends {TabElement}
+ */
 function RunProject(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Scene", Editor.FILE_PATH + "icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, "Run", Editor.FILE_PATH + "icons/misc/scene.png");
 
 	var self = this;
 
-	//Input
+	/**
+	 * Keyboard input object.
+	 *
+	 * @attribute keyboard
+	 * @type {Keyboard}
+	 */
 	this.keyboard = new Keyboard();
+
+	/** 
+	 * Mouse input object
+	 *
+	 * It is attached to the window object to capture movement outside of the tab division.
+	 *
+	 * @attribute mouse
+	 * @type {Mouse}
+	 */
 	this.mouse = new Mouse(window, true);
 
-	//Renderer
+	/**
+	 * WebGL renderer used to draw the objects
+	 *
+	 * @attribute renderer
+	 * @type {THREE.WebGLRenderer}
+	 */
 	this.renderer = null;
 
-	//Canvas
+	/**
+	 * Canvas element to where the renderer outputs.
+	 *
+	 * @attribute canvas
+	 * @type {Canvas}
+	 */
 	this.canvas = null;
 	this.alpha = true;
 	this.resetCanvas();
 
-	//Test program
+	/**
+	 * Program being run on this tab.
+	 *
+	 * @attribute program
+	 * @type {Program}
+	 */
 	this.program = null;
 
-	//Performance meter
+	/**
+	 * Performance meter GUI.
+	 *
+	 * @attribute stats
+	 * @type {Stats}
+	 */
 	this.stats = new Stats();
 	this.stats.dom.style.position = "absolute";
 	this.stats.dom.style.display = "none";
@@ -31,7 +74,12 @@ function RunProject(parent, closeable, container, index)
 	this.stats.dom.style.zIndex = "0";
 	this.element.appendChild(this.stats.dom);
 
-	//Fullscreen button
+	/**
+	 * Fullscreen button used to toggle fullscreen mode.
+	 *
+	 * @attribute fullscreenButton
+	 * @type {ButtonImage}
+	 */
 	this.fullscreenButton = new ButtonImage(this);
 	this.fullscreenButton.position.set(5, 5);
 	this.fullscreenButton.size.set(30, 30);
@@ -60,7 +108,14 @@ function RunProject(parent, closeable, container, index)
 		fullscreen = !fullscreen;
 	});
 
-	//VR button
+	/**
+	 * VR button used to toggle vr mode.
+	 *
+	 * It is only displayed when VR is available.
+	 *
+	 * @attribute vrButton
+	 * @type {ButtonImage}
+	 */
 	this.vrButton = new ButtonImage(this);
 	this.vrButton.size.set(30, 30);
 	this.vrButton.position.set(40, 5);
@@ -91,22 +146,22 @@ RunProject.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLos
 
 RunProject.prototype.updateMetadata = function()
 {
-	if(this.scene !== null)
+	if(this.program !== null)
 	{
-		this.setName(this.scene.name);
+		this.setName(this.program.name);
 
 		//Check if object has a parent
-		if(this.scene.parent === null)
+		if(this.program.parent === null)
 		{
 			this.close();
 			return;
 		}
 
 		//Check if object exists in parent
-		var children = this.scene.parent.children;
+		var children = this.program.parent.children;
 		for(var i = 0; i < children.length; i++)
 		{
-			if(this.scene.uuid === children[i].uuid)
+			if(this.program.uuid === children[i].uuid)
 			{
 				return;
 			}
@@ -120,11 +175,18 @@ RunProject.prototype.updateMetadata = function()
 	}
 };
 
+/**
+ * Set fullscreen mode of the tab canvas
+ *
+ * @method setFullscreen
+ * @param {Boolean} fullscreen If true enters fullscreen if false exits fullscreen.
+ */
 RunProject.prototype.setFullscreen = function(fullscreen)
 {
 	if(fullscreen)
 	{
 		Nunu.setFullscreen(true, this.element);
+
 		this.position.set(0, 0);	
 		this.size.set(window.screen.width, window.screen.height);
 		this.updateInterface();
@@ -140,9 +202,9 @@ RunProject.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	if(this.scene instanceof Scene)
+	if(this.program instanceof Scene)
 	{
-		Editor.program.scene = this.scene;
+		Editor.program.scene = this.program;
 	}
 
 	this.createRenderer();
@@ -179,7 +241,7 @@ RunProject.prototype.destroy = function()
 	this.keyboard.dispose();
 	this.tool.dispose();
 
-	this.disposeRunningProgram();
+	this.disposeProgram();
 
 	if(this.renderer !== null)
 	{
@@ -189,18 +251,17 @@ RunProject.prototype.destroy = function()
 	}
 };
 
-RunProject.prototype.attach = function(scene)
+RunProject.prototype.attach = function(program)
 {
-	this.scene = scene;
+	this.program = program;
 	this.updateMetadata();
 };
 
-RunProject.prototype.isAttached = function(scene)
+RunProject.prototype.isAttached = function(program)
 {
-	return this.scene === scene;
+	return this.program === program;
 };
 
-//Update scene editor logic
 RunProject.prototype.update = function()
 {
 	this.mouse.update();
@@ -229,6 +290,11 @@ RunProject.prototype.update = function()
 	}
 };
 
+/**
+ * Render the program to the canvas using the renderer.
+ *
+ * @method render
+ */
 RunProject.prototype.render = function()
 {
 	try
@@ -249,11 +315,8 @@ RunProject.prototype.resetCanvas = function()
 	this.mouse.setCanvas(this.canvas);
 };
 
-//Set scene editor state
-RunProject.prototype.setState = function(state)
+RunProject.prototype.setState = function()
 {
-	this.state = state;
-
 	//Run the program directly all changed made with code are kept
 	if(Editor.settings.general.immediateMode)
 	{
@@ -321,12 +384,15 @@ RunProject.prototype.setState = function(state)
 	Editor.gui.menuBar.run.visible = true;
 	Editor.gui.menuBar.run.updateInterface();
 
-	//Update interface
 	this.updateInterface();
 };
 
-//Dispose running program if there is one
-RunProject.prototype.disposeRunningProgram = function()
+/** 
+ * Dispose the running program.
+ *
+ * @method disposeProgram
+ */
+RunProject.prototype.disposeProgram = function()
 {
 	//Dispose running program if there is one
 	if(this.program !== null)
@@ -340,7 +406,13 @@ RunProject.prototype.disposeRunningProgram = function()
 	this.mouse.setLock(false);
 };
 
-//Resize scene editor canvas and camera
+/**
+ * Resize canvas and camera to match the size of the tab.
+ *
+ * Also applies the window.devicePixelRatio to the canvas size.
+ *
+ * @method resizeCanvas
+ */
 RunProject.prototype.resizeCanvas = function()
 {
 	var width = this.size.x * window.devicePixelRatio;
@@ -358,10 +430,7 @@ RunProject.prototype.resizeCanvas = function()
 		this.camera.aspect = width / height;
 		this.camera.updateProjectionMatrix();
 
-		if(this.state === RunProject.TESTING)
-		{
-			this.program.resize(width, height);
-		}
+		this.program.resize(width, height);
 	}
 };
 

@@ -351,6 +351,8 @@ include("source/editor/gui/tab/treeview/TreeNode.js");
 include("source/editor/gui/tab/objects/ScriptEditor.js");
 include("source/editor/gui/tab/objects/ParticleEditor.js");
 
+include("source/editor/gui/tab/scene/RunProject.js");
+
 include("source/editor/gui/tab/scene/SceneEditor.js");
 include("source/editor/gui/tab/scene/transform/TransformControls.js");
 include("source/editor/gui/tab/scene/transform/material/GizmoMaterial.js");

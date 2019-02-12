@@ -863,7 +863,7 @@ function MainMenu(parent)
 		{
 			var tab = tabs[i];
 		
-			if(tab instanceof SceneEditor)
+			/*if(tab instanceof SceneEditor)
 			{
 				if(tab.state === SceneEditor.EDITING)
 				{
@@ -873,7 +873,9 @@ function MainMenu(parent)
 				{
 					tab.setState(SceneEditor.EDITING);
 				}
-			}
+			}*/
+
+			//TODO <ADD CODE HERE>
 		}
 	});
 }
