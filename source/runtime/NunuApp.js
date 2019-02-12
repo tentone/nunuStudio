@@ -312,7 +312,7 @@ NunuApp.prototype.run = function()
 	this.program.app = this;
 
 	//Create default camera
-	this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1000000);
+	this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
 	this.program.defaultCamera.position.set(0, 5, -5);
 
 	//Set renderer

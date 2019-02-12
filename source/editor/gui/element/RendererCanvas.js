@@ -15,7 +15,7 @@ function RendererCanvas(parent, alpha)
 	Element.call(this, parent, "div");
 
 	/**
-	 * Indicated if the background of the canvas is transparent or not.
+	 * Indicates if the background of the canvas is transparent or not.
 	 *
 	 * @attribute alpha
 	 * @type {Boolean}

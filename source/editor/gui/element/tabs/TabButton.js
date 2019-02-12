@@ -243,14 +243,24 @@ TabButton.NONE = 0;
 TabButton.PREVIOUS = 1;
 TabButton.NEXT = 2;
 
-//Set button icon
+/**
+ * Set the tab icon image.
+ *
+ * @method setIcon
+ * @param {String} icon URL of the icon image.
+ */
 TabButton.prototype.setIcon = function(icon)
 {
 	this.tab.icon = icon;
 	this.icon.src = icon;
 };
 
-//Set button name
+/**
+ * Set text to be displayed in the button as its name.
+ *
+ * @method setName
+ * @param {String} text
+ */
 TabButton.prototype.setName = function(text)
 {
 	this.tab.title = text;
@@ -263,7 +273,6 @@ TabButton.prototype.updateSelection = function()
 	this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
 };
 
-//Update Interface
 TabButton.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);

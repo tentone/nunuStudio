@@ -858,24 +858,21 @@ function MainMenu(parent)
 	this.run.setOnClick(function()
 	{
 		var tabs = Editor.gui.tab.getActiveTab();
-		
+		var tab = null;
+
 		for(var i = 0; i < tabs.length; i++)
 		{
-			var tab = tabs[i];
-		
-			/*if(tab instanceof SceneEditor)
+			if(tabs[i] instanceof RunProject)
 			{
-				if(tab.state === SceneEditor.EDITING)
-				{
-					tab.setState(SceneEditor.TESTING);
-				}
-				else if(tab.state === SceneEditor.TESTING)
-				{
-					tab.setState(SceneEditor.EDITING);
-				}
-			}*/
+				tab = tabs[i];
+				return;
+			}
+		}
 
-			//TODO <ADD CODE HERE>
+		if(tab === null)
+		{
+			tab = Editor.gui.tab.addTab(RunProject, true);
+			//Editor.gui.tab.selectTab(tab);
 		}
 	});
 }

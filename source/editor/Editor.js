@@ -334,8 +334,8 @@ include("source/editor/gui/element/tabs/TabGroup.js");
 include("source/editor/gui/element/tabs/TabElement.js");
 include("source/editor/gui/element/tabs/TabButton.js");
 
-include("source/editor/gui/element/tabs/splittable/TabGroupNew.js");
-include("source/editor/gui/element/tabs/splittable/TabButtonNew.js");
+include("source/editor/gui/element/tabs/splittable/TabGroupSplit.js");
+include("source/editor/gui/element/tabs/splittable/TabButtonSplit.js");
 include("source/editor/gui/element/tabs/splittable/TabContainer.js");
 include("source/editor/gui/element/tabs/splittable/TabDualContainer.js");
 
@@ -351,7 +351,7 @@ include("source/editor/gui/tab/treeview/TreeNode.js");
 include("source/editor/gui/tab/objects/ScriptEditor.js");
 include("source/editor/gui/tab/objects/ParticleEditor.js");
 
-include("source/editor/gui/tab/scene/RunProject.js");
+include("source/editor/gui/tab/run/RunProject.js");
 
 include("source/editor/gui/tab/scene/SceneEditor.js");
 include("source/editor/gui/tab/scene/transform/TransformControls.js");
@@ -1375,7 +1375,7 @@ Editor.addDefaultScene = function(material)
 
 	//Add scene to program
 	Editor.addObject(scene, Editor.program);
-
+	
 	//Open scene
 	var tab = Editor.gui.tab.addTab(SceneEditor, true);
 	tab.attach(scene);

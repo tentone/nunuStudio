@@ -143,7 +143,13 @@ TabGroup.prototype.updateObjectsView = function()
 	}
 };
 
-//Attach tab to this group and remove it from the original group
+/**
+ * Attach tab to this group and remove it from the original group.
+ *
+ * @method attachTab
+ * @param {TabElement} tab Tab to be moved.
+ * @param {Number} insertIndex Index where to place the tab.
+ */
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {	
 	//Remove from old group

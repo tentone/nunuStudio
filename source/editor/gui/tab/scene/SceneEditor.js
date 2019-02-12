@@ -44,9 +44,16 @@ function SceneEditor(parent, closeable, container, index)
 	 * Canvas element to where the renderer outputs.
 	 *
 	 * @attribute canvas
-	 * @type {Canvas}
+	 * @type {DOM}
 	 */
 	this.canvas = null;
+
+	/**
+	 * Indicates if the background of the canvas is transparent or not.
+	 *
+	 * @attribute alpha
+	 * @type {Boolean}
+	 */
 	this.alpha = true;
 	this.resetCanvas();
 
@@ -249,7 +256,6 @@ SceneEditor.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
 SceneEditor.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
 SceneEditor.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
 
-//Update container object data
 SceneEditor.prototype.updateMetadata = function()
 {
 	if(this.scene !== null)
@@ -325,9 +331,6 @@ SceneEditor.prototype.activate = function()
 SceneEditor.prototype.deactivate = function()
 {
 	TabElement.prototype.deactivate.call(this);
-
-	Editor.gui.menuBar.run.visible = false;
-	Editor.gui.menuBar.run.updateInterface();
 
 	this.mouse.dispose();
 	this.manager.destroy();
@@ -984,11 +987,6 @@ SceneEditor.prototype.setState = function(state)
 
 	if(state === SceneEditor.EDITING)
 	{
-		//Set run button text
-		Editor.gui.menuBar.run.setText(Locale.run);
-		Editor.gui.menuBar.run.visible = true;
-		Editor.gui.menuBar.run.updateInterface();
-
 		this.mouse.setLock(false);
 
 		//Set buttons

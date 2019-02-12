@@ -98,7 +98,6 @@ function PerspectiveCamera(fov, aspect, near, far)
 	*/
 	this.order = 0;
 
-
 	//Render pass
 	var renderPass = new RenderPass();
 	renderPass.renderToScreen = true;

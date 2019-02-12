@@ -46,9 +46,16 @@ function RunProject(parent, closeable, container, index)
 	 * Canvas element to where the renderer outputs.
 	 *
 	 * @attribute canvas
-	 * @type {Canvas}
+	 * @type {DOM}
 	 */
 	this.canvas = null;
+
+	/**
+	 * Indicates if the background of the canvas is transparent or not.
+	 *
+	 * @attribute alpha
+	 * @type {Boolean}
+	 */
 	this.alpha = true;
 	this.resetCanvas();
 
@@ -202,29 +209,23 @@ RunProject.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	if(this.program instanceof Scene)
-	{
-		Editor.program.scene = this.program;
-	}
-
+	this.getProgram();
 	this.createRenderer();
 	this.updateSettings();
-	this.setState(RunProject.EDITING);
 
 	this.mouse.create();
 	this.manager.create();
 
-	Editor.gui.toolBar.selectTool(Editor.SELECT);
+	this.runProgram();
 };
 
 RunProject.prototype.deactivate = function()
 {
 	TabElement.prototype.deactivate.call(this);
 
-	Editor.gui.menuBar.run.visible = false;
-	Editor.gui.menuBar.run.updateInterface();
-
 	this.mouse.dispose();
+	this.keyboard.dispose();
+
 	this.manager.destroy();
 };
 
@@ -239,10 +240,19 @@ RunProject.prototype.destroy = function()
 
 	this.mouse.dispose();
 	this.keyboard.dispose();
-	this.tool.dispose();
 
-	this.disposeProgram();
+	//Dispose running program
+	if(this.program !== null)
+	{
+		this.setFullscreen(false);
+		this.program.dispose();
+		this.program = null;
+	}
 
+	//Unlock mouse
+	this.mouse.setLock(false);
+
+	//Dispose renderer
 	if(this.renderer !== null)
 	{
 		this.renderer.dispose();
@@ -251,15 +261,11 @@ RunProject.prototype.destroy = function()
 	}
 };
 
-RunProject.prototype.attach = function(program)
-{
-	this.program = program;
-	this.updateMetadata();
-};
+RunProject.prototype.attach = function(program){};
 
 RunProject.prototype.isAttached = function(program)
 {
-	return this.program === program;
+	return program === Editor.program;
 };
 
 RunProject.prototype.update = function()
@@ -278,7 +284,7 @@ RunProject.prototype.update = function()
 	}
 	catch(e)
 	{
-		Editor.alert("Error testing program\nState update caused an error\n(" + e + ")");
+		//Editor.alert("Error testing program\nState update caused an error\n(" + e + ")");
 		console.error("nunuStudio: Error updating program state", e);
 	}
 
@@ -299,11 +305,11 @@ RunProject.prototype.render = function()
 {
 	try
 	{
-		this.program.render(renderer, this.canvas.width, this.canvas.height);
+		this.program.render(this.renderer, this.canvas.width, this.canvas.height);
 	}
 	catch(e)
 	{
-		Editor.alert("Error testing program\nRender caused an error\n(" + e + ")");
+		//Editor.alert("Error testing program\nRender caused an error\n(" + e + ")");
 		console.error("nunuStudio: Error rendering program", e);
 	}
 };
@@ -315,7 +321,12 @@ RunProject.prototype.resetCanvas = function()
 	this.mouse.setCanvas(this.canvas);
 };
 
-RunProject.prototype.setState = function()
+/** 
+ * Get the Editor.program object to be run in this tab.
+ *
+ * @method getProgram
+ */
+RunProject.prototype.getProgram = function()
 {
 	//Run the program directly all changed made with code are kept
 	if(Editor.settings.general.immediateMode)
@@ -327,21 +338,26 @@ RunProject.prototype.setState = function()
 	{
 		this.program = Editor.program.clone();
 	}
-	
-	//Use editor camera as default camera for program
-	this.program.defaultCamera = this.camera;
+};
+
+/** 
+ * Prepare the program to be run, create a default camera.
+ *
+ * Run the initialization scripts from the object and set the renderer size.
+ *
+ * @method runProgram
+ */
+RunProject.prototype.runProgram = function()
+{
+	//Create a default camera for program (same as runtime).
+	this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
+	this.program.defaultCamera.position.set(0, 5, -5);
 	this.program.setRenderer(this.renderer);
 
 	//Initialize scene
 	this.program.setMouseKeyboard(this.mouse, this.keyboard);
 	this.program.initialize();
 	this.program.resize(this.canvas.width, this.canvas.height);
-
-	//Show full screen and VR buttons
-	this.fullscreenButton.setVisibility(true);
-	this.cameraButton.setVisibility(false);
-	this.transformationSpace.setVisibility(false);
-	this.navigation.setVisibility(false);
 
 	//If program uses VR set button
 	if(this.program.vr)
@@ -381,29 +397,8 @@ RunProject.prototype.setState = function()
 
 	//Run button text
 	Editor.gui.menuBar.run.setText("Stop");
-	Editor.gui.menuBar.run.visible = true;
-	Editor.gui.menuBar.run.updateInterface();
 
 	this.updateInterface();
-};
-
-/** 
- * Dispose the running program.
- *
- * @method disposeProgram
- */
-RunProject.prototype.disposeProgram = function()
-{
-	//Dispose running program if there is one
-	if(this.program !== null)
-	{
-		this.setFullscreen(false);
-		this.program.dispose();
-		this.program = null;
-	}
-
-	//Unlock mouse
-	this.mouse.setLock(false);
 };
 
 /**

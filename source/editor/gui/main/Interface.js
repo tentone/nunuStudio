@@ -9,7 +9,7 @@ function Interface()
 	 * @type {TabContainer}
 	 */
 	this.tab = new TabContainer(DocumentBody);
-	this.tab.attach(new TabGroupNew());
+	this.tab.attach(new TabGroupSplit());
 
 	var main = this.tab.split(TabGroup.RIGHT).parent;
 	main.tabPosition = 0.7;

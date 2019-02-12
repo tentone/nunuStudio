@@ -17,6 +17,13 @@ function TabContainer(parent)
 
 TabContainer.prototype = Object.create(Element.prototype);
 
+/**
+ * Split this tab group into two new tab groups.
+ *
+ * @method split
+ * @param {Number} direction Direction where to insert the new tab.
+ * @return {TabGroupSplit} The new created tab group.
+ */
 TabContainer.prototype.split = function(direction)
 {
 	return this.group.split(direction);
@@ -85,43 +92,76 @@ TabContainer.prototype.getActiveTab = function()
 	return this.group.getActiveTab();
 };
 
-//Close actual tab if its closeable
+/**
+ * Close the tab that is currently being shown if it is closeable.
+ *
+ * @method closeActual
+ */
 TabContainer.prototype.closeActual = function()
 {
 	this.group.closeActual();
 };
 
-//Select tab
+/**
+ * Select a tab from the container tab tree.
+ *
+ * @method selectTab
+ * @param {TabElement} tab Tab to select.
+ */
 TabContainer.prototype.selectTab = function(tab)
 {
 	this.group.selectTab(tab);
 };
 
-//Select next tab
+/**
+ * Select next tab from the currently focused tab group.
+ *
+ * @method selectNextTab
+ */
 TabContainer.prototype.selectNextTab = function()
 {
 	this.group.selectNextTab();
 };
 
-//Select previous tab
+/**
+ * Select previous tab from the currently focused tab group.
+ *
+ * @method selectPreviousTab
+ */
 TabContainer.prototype.selectPreviousTab = function()
 {
 	this.group.selectPreviousTab();
 };
 
-//Add new option to tab group
+/**
+ * Add new tab to the tab container.
+ * 
+ * @method addTab
+ * @param {Constructor} TabConstructor Constructor if the TabElement to be added to the container.
+ * @param {Boolean} closeable Indicates if the tab can be closed.
+ */
 TabContainer.prototype.addTab = function(TabConstructor, closeable)
 {
 	return this.group.addTab(TabConstructor, closeable);
 };
 
-//Get tab from tab type and attached object is there is any
+/**
+ * Get tab from tab type and attached object is there is any.
+ *
+ * @param {Constructor} type Type of the tab to look for.
+ * @param {Object} object Object attached to the tab.
+ * @return TabElement The tab from the type specified that has the object attached to it.
+ */
 TabContainer.prototype.getTab = function(type, obj)
 {
 	return this.group.getTab(type, obj);
 };
 
-//Remove all tabs
+/**
+ * Remove all tabs from the container.
+ * 
+ * @method clear
+ */
 TabContainer.prototype.clear = function(forceAll)
 {
 	this.group.clear();
