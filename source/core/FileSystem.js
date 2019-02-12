@@ -791,9 +791,7 @@ FileSystem.getFilePath = function(file)
  * @return {String}
  */
 FileSystem.getFileExtension = function(file)
-{
-	console.log("nunuStudio: getFileExtension ", file);
-	
+{	
 	if(file !== undefined)
 	{
 		return file.substring(file.lastIndexOf(".") + 1, file.length).toLowerCase();

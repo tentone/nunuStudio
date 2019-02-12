@@ -35,7 +35,7 @@ function Font(url)
 	if(url !== undefined)
 	{	
 		//Arraybuffer
-		if(url instanceof window.ArrayBuffer)
+		if(url instanceof ArrayBuffer)
 		{
 			this.data = url;
 			this.format = "arraybuffer";

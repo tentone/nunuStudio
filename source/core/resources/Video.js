@@ -18,7 +18,7 @@ function Video(url, encoding)
 	if(url !== undefined)
 	{	
 		//ArrayBuffer
-		if(url instanceof window.ArrayBuffer)
+		if(url instanceof ArrayBuffer)
 		{
 			this.loadArrayBufferData(url, encoding);
 		}

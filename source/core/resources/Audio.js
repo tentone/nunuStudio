@@ -16,7 +16,7 @@ function Audio(url, encoding)
 	if(url !== undefined)
 	{
 		//Arraybuffer
-		if(url instanceof window.ArrayBuffer)
+		if(url instanceof ArrayBuffer)
 		{
 			this.data = url;
 			this.encoding = (encoding !== undefined) ? encoding : "";
