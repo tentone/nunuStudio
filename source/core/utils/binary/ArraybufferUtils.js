@@ -76,5 +76,16 @@ ArraybufferUtils.fromBase64 = function(str)
  */
 ArraybufferUtils.fromBuffer = function(buffer)
 {
-	return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
+	var array = new ArrayBuffer(buffer.length);
+	var view = new Uint8Array(array);
+
+	for(var i = 0; i < buffer.length; i++)
+	{
+		view[i] = buffer[i];
+	}
+
+	return array;
+
+	//Faster but the results is failing the "instanceof ArrayBuffer" test
+	//return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
 };
