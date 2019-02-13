@@ -15,6 +15,9 @@ function TextSprite(text)
 {
 	CanvasSprite.call(this);
 	
+	this.name = "text";
+	this.type = "TextSprite";
+	
 	var textValue = "";
 	var colorValue = "#FFFFFF";
 	var outlineValue = true;

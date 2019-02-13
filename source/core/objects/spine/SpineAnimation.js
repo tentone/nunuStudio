@@ -72,12 +72,10 @@ function SpineAnimation(json, atlas, path, textures)
 
 	spine.threejs.SkeletonMesh.call(this, skeleton);
 
-	//Attributes
 	this.name = "spine";
 	this.type = "SpineAnimation";
 	
 	this.frustumCulled = false;
-
 	this.receiveShadow = true;
 	this.castShadow = true;
 	this.scale.set(0.01, 0.01, 0.01);
@@ -106,13 +104,40 @@ function SpineAnimation(json, atlas, path, textures)
 	 */
 	this.textures = textures;
 
-	//Default animation and skin
-	this.skin = (this.getSkins().length > 0) ? this.getSkins()[0].name: null;
-	this.animation = (this.getAnimations().length > 0) ? this.getAnimations()[0].name: null;
+	/**
+	 * The animation can have multiple skins that define diferent sets of textures for the same animation.
+	 *
+	 * @attribute skin
+	 * @type {Object}
+	 */
+	this.skin = (this.getSkins().length > 0) ? this.getSkins()[0].name : null;
+	
+	/**
+	 * Animation currently playing, animations are split into tracks.
+	 *
+	 * An animation (e.g. walk) can be composed of multiple tracks.
+	 *
+	 * @attribute animation
+	 * @type {Object}
+	 */
+	this.animation = (this.getAnimations().length > 0) ? this.getAnimations()[0].name : null;
+		
+	/** 
+	 * Index of the animation track playing.
+	 *
+	 * @attribute track
+	 * @type {Number}
+	 */
 	this.track = 0;
+
+	/** 
+	 * Indicates the loop mode of the animation if set true the animation starts again after it ends.
+	 *
+	 * @attribute loop
+	 * @type {Boolean}
+	 */
 	this.loop = true;
 
-	//Clock
 	this.clock = new THREE.Clock();
 	
 	this.play();

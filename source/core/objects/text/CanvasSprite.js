@@ -44,6 +44,9 @@ function CanvasSprite(material)
 
 	THREE.Sprite.call(this, material);
 
+	this.name = "sprite";
+	this.type = "CanvasSprite";
+
 	/** 
 	 * Size of the sprite.
 	 *
