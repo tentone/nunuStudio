@@ -187,13 +187,14 @@ OrthographicCamera.prototype.destroy = function()
 /**
  * Update camera projection matrix.
  * 
+ * Also updates left right, top and bottom values from aspect and size.
+ *
  * Should be called after chaging projection parameters.
  * 
  * @method updateProjectionMatrix
  */
 OrthographicCamera.prototype.updateProjectionMatrix = function()
 {
-	//Update left right, top and bottom values from aspect and size
 	if(this.mode === OrthographicCamera.RESIZE_HORIZONTAL)
 	{
 		this.top = this.size / 2;
