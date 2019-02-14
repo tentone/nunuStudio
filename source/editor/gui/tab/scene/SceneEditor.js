@@ -88,14 +88,6 @@ function SceneEditor(parent, closeable, container, index)
 	this.stats.dom.style.zIndex = "0";
 	this.element.appendChild(this.stats.dom);
 
-	//Helper scene
-	this.helperScene = new THREE.Scene();
-	this.helperScene.matrixAutoUpdate = false;
-
-	//Tool scene
-	this.toolScene = new THREE.Scene();
-	this.toolScene.matrixAutoUpdate = false;
-
 	/**
 	 * Camera orientation cube.
 	 *
@@ -106,12 +98,31 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.orientation = new OrientationCube();
 
-	//Grid
+	/**
+	 * Helper scene stored the object and editor preview objects.
+	 *
+	 * @attribute helperScene
+	 * @type {THREE.Scene}
+	 */
+	this.helperScene = new THREE.Scene();
+	this.helperScene.matrixAutoUpdate = false;
+
+	/**
+	 * Grid helper configured to match editor settings.
+	 *
+	 * @attribute gridHelper
+	 * @type {GridHelper}
+	 */
 	this.gridHelper = new GridHelper(Editor.settings.editor.gridSize, Editor.settings.editor.gridSpacing, 0x888888);
 	this.gridHelper.visible = Editor.settings.editor.gridEnabled;
 	this.helperScene.add(this.gridHelper);
 
-	//Axis
+	/**
+	 * Axes helper configured to match editor settings.
+	 *
+	 * @attribute axisHelper
+	 * @type {THREE.AxesHelper}
+	 */
 	this.axisHelper = new THREE.AxesHelper(Editor.settings.editor.gridSize);
 	this.axisHelper.material.depthWrite = false;
 	this.axisHelper.material.transparent = true;
@@ -119,12 +130,25 @@ function SceneEditor(parent, closeable, container, index)
 	this.axisHelper.visible = Editor.settings.editor.axisEnabled;
 	this.helperScene.add(this.axisHelper);
 
-	//Object helper container
+	/**
+	 * Object helper container.
+	 *
+	 * @attribute objectHelper
+	 * @type {THREE.Group}
+	 */
 	this.objectHelper = new THREE.Group();
 	this.objectHelper.matrixAutoUpdate = true;
 	this.helperScene.add(this.objectHelper);
 
-	//Tool
+	/**
+	 * Group where the object manipulation tools are drawn
+	 *
+	 * @attribute toolScene
+	 * @type {THREE.Scene}
+	 */
+	this.toolScene = new THREE.Scene();
+	this.toolScene.matrixAutoUpdate = false;
+
 	this.toolMode = Editor.SELECT;
 	this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 	this.toolScene.add(this.tool);
@@ -421,13 +445,22 @@ SceneEditor.prototype.attach = function(scene)
 	this.updateMetadata();
 };
 
-//Check if scene is attached
+/**
+ * Check if a scene or object is attached to the editor.
+ *
+ * @method isAttached
+ * @param {THREE.Object3D} scene
+ */
 SceneEditor.prototype.isAttached = function(scene)
 {
 	return this.scene === scene;
 };
 
-//Update scene editor logic
+/**
+ * Update scene editor logic.
+ *
+ * @method update
+ */
 SceneEditor.prototype.update = function()
 {
 	this.mouse.update();
@@ -529,14 +562,17 @@ SceneEditor.prototype.update = function()
 };
 
 /**
- * Render the scene to the canvas using the renderer.
+ * Render all the editor scenes to the canvas using the renderer.
  *
+ * Draws the attached scene/object after that it renders the helpers and tool scenes, the overlay orientation cube and then the camera previews.
+ * 
  * @method render
  */
 SceneEditor.prototype.render = function()
 {
 	if(this.renderer === null)
 	{
+		console.warn("nunuStudio: SceneEditor renderer is null.", this);
 		return;
 	}
 
