@@ -227,8 +227,10 @@ PositionalAudio.prototype.toJSON = function(meta)
 {
 	var data = AudioEmitter.prototype.toJSON.call(this, meta);
 
-	//data.object.distanceModel = distanceModel;
-	//data.object.panningModel = panningModel;
+	//TODO <SERIALIZE AND LOAD THESE VALUES>
+	
+	//data.object.distanceModel = this.distanceModel;
+	//data.object.panningModel = this.panningModel;
 
 	return data;
 };
