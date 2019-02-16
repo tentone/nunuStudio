@@ -29,6 +29,14 @@ function AudioEmitter(audio)
 	this.context = this.listener.context;
 	this.matrixAutoUpdate = false;
 
+	/** 
+	 * WebAudio gain node, used to control the volume.
+	 *
+	 * https://developer.mozilla.org/en-US/docs/Web/API/GainNode
+	 *
+	 * @property gain
+	 * @type {GainNode}
+	 */
 	this.gain = this.context.createGain();
 	this.gain.connect(this.listener.getInput());
 
@@ -47,6 +55,13 @@ function AudioEmitter(audio)
 	 * @default {"empty"}
 	 */
 	this.sourceType = "empty";
+
+	/**
+	 * Audio source resource.
+	 *
+	 * @property audio
+	 * @type {Audio}
+	 */
 	this.audio = (audio !== undefined) ? audio : null;
 
 	/**

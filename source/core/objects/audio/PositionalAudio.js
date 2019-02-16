@@ -4,7 +4,7 @@
  * PositionalAudio is used to play audio with positional audio effect using a WebAudio panner.
  *
  * Using the positional audio object the sound is controlled by the camera that renders first in the scene.
- *
+ * 
  * @param {Audio} audio Audio used by this emitter
  * @class PositionalAudio
  * @extends {AudioEmitter}
@@ -17,11 +17,30 @@ function PositionalAudio(audio)
 	this.type = "PositionalAudio";
 	this.matrixAutoUpdate = true;
 
-	//Attributes
+	/**
+	 * Distance model to be applied to the audio panner.
+	 *
+	 * @property distanceModel
+	 * @type {String}
+	 */
 	this.distanceModel = "inverse";
+
+	/**
+	 * Model to be applied to the audio panner.
+	 *
+	 * @property panningModel
+	 * @type {String}
+	 */
 	this.panningModel = "HRTF";
 
-	//Create panner
+	/**
+	 * WebAudio panner effect.
+	 *
+	 * https://developer.mozilla.org/en-US/docs/Web/API/PannerNode
+	 * 
+	 * @property panner
+	 * @type {PannerNode}
+	 */
 	this.panner = this.context.createPanner();
 	this.panner.connect(this.gain);
 	this.panner.panningModel = this.panningModel;
@@ -33,7 +52,6 @@ function PositionalAudio(audio)
 	this.panner.coneOuterAngle = 0;
 	this.panner.coneOuterGain = 0;
 
-	//Runtime variables
 	this.cameras = null;
 	this.tempPosition = new THREE.Vector3();
 	this.tempPositionCamera = new THREE.Vector3();
