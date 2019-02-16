@@ -93,13 +93,11 @@ Scene.prototype = Object.create(THREE._Scene.prototype);
  */
 Scene.prototype.initialize = function()
 {
-	//Canvas and program
 	this.program = this.parent;
 	this.canvas = this.parent.canvas;
 
 	THREE.Object3D.prototype.initialize.call(this);
 
-	//Start clock
 	this.clock.start();
 };
 
@@ -169,19 +167,19 @@ Scene.prototype.render = function(renderer)
  * @param {String} uuid UUID of the camera
  * @return {Camera} Camera if found, else null
  */
-Scene.prototype.getCamera = function(uuid, obj)
+Scene.prototype.getCamera = function(uuid, object)
 {
-	if(obj === undefined)
+	if(object === undefined)
 	{
-		obj = this;
+		object = this;
 	}
 
-	if(uuid === obj.uuid)
+	if(uuid === object.uuid)
 	{
-		return obj;
+		return object;
 	}
 
-	var children = obj.children;
+	var children = object.children;
 	for(var i = 0; i < children.length; i++)
 	{
 		var camera = this.getCamera(uuid, children[i]);
@@ -254,8 +252,10 @@ Scene.prototype.isCameraActive = function(camera)
 /**
  * Set scene fog mode.
  * 
- * @param {Number} mode
+ * It recreates the fog object attached to the scene and set the same color.
+ *
  * @method setFogMode
+ * @param {Number} mode
  */
 Scene.prototype.setFogMode = function(mode)
 {	

@@ -116,6 +116,31 @@ ResourceManager.ResourceContainer = function()
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
+ * Dispose all the resources present in the resource manager.
+ *
+ * @method dispose
+ */
+ResourceManager.prototype.dispose = function()
+{
+	//var libraries = ["images", "videos", "audio", "fonts", "materials", "textures", "geometries", "resources", "shapes", "skeletons"];
+
+	for(var i in this.geometries)
+	{
+		this.geometries[i].dispose();
+	}
+
+	for(var i in this.textures)
+	{
+		this.textures[i].dispose();
+	}
+
+	for(var i in this.materials)
+	{
+		this.materials[i].dispose();
+	}
+};
+
+/**
  * Searches the object and all its children for resources that still dont exist in the resource manager.
  *
  * Stores them in a resource container object that is returned.

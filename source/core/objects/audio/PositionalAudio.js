@@ -223,13 +223,6 @@ PositionalAudio.prototype.setMaxDistance = function(value)
 	this.panner.maxDistance = value;
 };
 
-/**
- * Serialize object to JSON.
- * 
- * @method toJSON
- * @param  {Object} meta
- * @return {Object} JSON descrition
- */
 PositionalAudio.prototype.toJSON = function(meta)
 {
 	var data = AudioEmitter.prototype.toJSON.call(this, meta);

@@ -476,13 +476,6 @@ AudioEmitter.prototype.dispose = function()
 	THREE.Object3D.prototype.dispose.call(this);
 };
 
-/**
- * Serialize object to JSON.
- * 
- * @method toJSON
- * @param {Object} meta
- * @return {Object} JSON descrition
- */
 AudioEmitter.prototype.toJSON = function(meta)
 {
 	var audio = this.audio;

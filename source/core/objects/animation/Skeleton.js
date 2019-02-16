@@ -79,13 +79,6 @@ THREE.Skeleton = Skeleton;
 
 Skeleton.prototype = Object.create(THREE._Skeleton.prototype);
 
-/**
- * Serialize skeleton to json.
- *
- * @method toJSON
- * @param {Object} meta Meta.
- * @return {Object} Serialized data.
- */
 Skeleton.prototype.toJSON = function(meta)
 {
 	var data = {};

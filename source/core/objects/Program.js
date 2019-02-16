@@ -21,7 +21,9 @@ function Program(name)
 
 	/**
 	 * NunuRuntime instance used to communication between nunu app and the host webpage.
+	 *
 	 * Inside the editor communication with the app is simulated on the debug console.
+	 *
 	 * @property app
 	 * @type {NunuApp}
 	 */
@@ -35,21 +37,24 @@ function Program(name)
 	this.name = (name !== undefined) ? name : "program";
 
 	/**
-	 * Program description
+	 * Program description.
+	 *
 	 * @property description
 	 * @type {String}
 	 */
 	this.description = "";
 
 	/**
-	 * Program author
+	 * Program author.
+	 *
 	 * @property author
 	 * @type {String}
 	 */
 	this.author = "";
 
 	/**
-	 * Program version
+	 * Program version.
+	 *
 	 * @property version
 	 * @type {String}
 	 * @default "0"
@@ -57,7 +62,8 @@ function Program(name)
 	this.version = "0";
 
 	/**
-	 * Flag to control pointer locking
+	 * Flag to control pointer locking.
+	 *
 	 * @property lockPointer
 	 * @type {boolean}
 	 * @default false
@@ -65,7 +71,8 @@ function Program(name)
 	this.lockPointer = false;
 
 	/**
-	 * Flag to indicate if the runtime should handle device pixel ratio
+	 * Flag to indicate if the runtime should handle device pixel ratio.
+	 *
 	 * @property handlePixelRatio
 	 * @type {boolean}
 	 * @default false
@@ -73,7 +80,8 @@ function Program(name)
 	this.handlePixelRatio = false;
 
 	/**
-	 * Enable virtual reality flag
+	 * Enable virtual reality flag.
+	 *
 	 * @property vr
 	 * @default false
 	 * @type {boolean}
@@ -81,7 +89,10 @@ function Program(name)
 	this.vr = false;
 
 	/**
-	 * Virtual reality movement scale
+	 * Virtual reality movement scale.
+	 * 
+	 * Indicates the relation between the real movement and virtual world movement.
+	 *
 	 * @property vrScale
 	 * @type {Number}
 	 * @default 1.0
@@ -89,7 +100,8 @@ function Program(name)
 	this.vrScale = 1;
 
 	/**
-	 * Antialiasing flag
+	 * Antialiasing flag.
+	 *
 	 * @property antialiasing
 	 * @type {boolean}
 	 * @default false
@@ -105,7 +117,8 @@ function Program(name)
 	this.shadows = true;
 
 	/**
-	 * Shadow type
+	 * Shadow map filtering type.
+	 *
 	 * @property shadowsType
 	 * @type {Number}
 	 * @default PCFSoftShadowMap
@@ -113,7 +126,8 @@ function Program(name)
 	this.shadowsType = THREE.PCFSoftShadowMap;
 
 	/**
-	 * Tonemapping mode
+	 * Tonemapping mode.
+	 *
 	 * @property toneMapping
 	 * @type {Number}
 	 * @default NoToneMapping
@@ -123,19 +137,35 @@ function Program(name)
 	this.toneMappingExposure = 1.0;
 	this.toneMappingWhitePoint = 1.0;
 
-	//Defaults
+	/**
+	 * Scene loaded as default on startup.
+	 *
+	 * @property defaultScene
+	 * @type {THREE.Scene}
+	 */
 	this.defaultScene = null;
+
+	/**
+	 * Default camera to be used by scenes where there is no camera.
+	 *
+	 * On the editor this value is automatically set to the last editor camera point used
+	 *
+	 * @property defaultCamera
+	 * @type {THREE.Camera}
+	 */
 	this.defaultCamera = null;
 
 	/**
-	 * Keyboard input object
+	 * Keyboard input object.
+	 *
 	 * @property keyboard
 	 * @type {Keyboard}
 	 */
 	this.keyboard = null;
 
 	/**
-	 * Mouse input object
+	 * Mouse input object.
+	 *
 	 * @property mouse
 	 * @type {Mouse}
 	 */
@@ -143,13 +173,15 @@ function Program(name)
 
 	/**
 	 * Renderer being used during runtime.
+	 *
 	 * @property renderer
 	 * @type {WebGLRenderer}
 	 */
 	this.renderer = null;
 
 	/**
-	 * Scene currently in use.
+	 * Scene currently running in the program.
+	 *
 	 * @property scene
 	 * @type {Scene}
 	 */
@@ -159,6 +191,7 @@ function Program(name)
 	 * Canvas being used to draw content.
 	 *
 	 * This canvas is where the WebGL rendering context was created.
+	 *
 	 * @property canvas
 	 * @type {DOM}
 	 */
@@ -168,6 +201,7 @@ function Program(name)
 	 * DOM Division element that can be used to add html content to the app.
 	 *
 	 * All content added to this division should be manually removed before the app exits.
+	 *
 	 * @property division
 	 * @type {DOM}
 	 */
@@ -178,10 +212,14 @@ function Program(name)
 	this.display = null;
 	this.effect = null;
 	this.controls = null;
-	
+		
+	/**
+	 * Event manager used to handle VR display presentation change event.
+	 *
+	 * @propety manager
+	 * @type {EventManager}
+	 */
 	this.manager = new EventManager();
-	
-	//VR display present change event
 	this.manager.add(window, "vrdisplaypresentchange", function()
 	{
 		if(self.display !== null && !self.display.isPresenting)
@@ -421,6 +459,11 @@ Program.prototype.exitVR = function()
  */
 Program.prototype.setScene = function(scene)
 {
+	if(this.scene !== null)
+	{
+		this.scene.dispose();
+	}
+
 	if(scene instanceof Scene)
 	{
 		this.scene = scene;
@@ -528,32 +571,18 @@ Program.prototype.dispose = function()
 {
 	this.manager.destroy();
 
-	//Geometry
-	for(var i in this.geometries)
-	{
-		this.geometries[i].dispose();
-	}
-
-	//Textures
-	for(var i in this.textures)
-	{
-		this.textures[i].dispose();
-	}
-	
-	//Materials
-	for(var i in this.materials)
-	{
-		this.materials[i].dispose();
-	}
-
-	//Children objects
-	THREE.Object3D.prototype.dispose.call(this);
-
-	//VR Effect
 	if(this.effect !== null)
 	{
 		this.effect.dispose();
 	}
+
+	if(this.scene !== null)
+	{
+		this.scene.dispose();
+	}
+	
+	ResourceManager.prototype.dispose.call(this);
+	THREE.Object3D.prototype.dispose.call(this);
 };
 
 /**
@@ -609,12 +638,12 @@ Program.prototype.sendDataApp = function(data)
 };
 
 /**
- * Serialize object to JSON.
+ * Serialize the object to JSON format.
  * 
  * @method toJSON
- * @param {Object} meta
+ * @param {Object} meta Metadata object passed to the objects and resources toJSON method to store data.
  * @param {boolean} exportResources If true all resouces in the program are exported, else only resources attached to objects are exported
- * @return {Object} json
+ * @return {Object} json Serialized JSON data containing the program, all scenes and resources stored.
  */
 Program.prototype.toJSON = function(meta, exportResources)
 {
