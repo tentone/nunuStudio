@@ -159,8 +159,6 @@ AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readB
 	this.quad.material = this.materialToneMap;
 	this.materialToneMap.uniforms.tDiffuse.value = readBuffer.texture;
 
-
-	//TODO <CHECK THREEJS DOCS>
 	if(this.clear)
 	{
 		renderer.clear();
@@ -211,10 +209,6 @@ AdaptiveToneMappingPass.prototype.reset = function(renderer)
 	this.materialLuminance.needsUpdate = true;
 	this.materialAdaptiveLum.needsUpdate = true;
 	this.materialToneMap.needsUpdate = true;
-
-	//renderer.render(this.scene, this.camera, this.luminanceRT);
-	//renderer.render(this.scene, this.camera, this.previousLuminanceRT);
-	//renderer.render(this.scene, this.camera, this.currentLuminanceRT);
 };
 
 AdaptiveToneMappingPass.prototype.setAdaptive = function(adaptive)
