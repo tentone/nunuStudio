@@ -245,13 +245,16 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 	{
 		this.quad.material = this.basic;
 		this.basic.map = readBuffer.texture;
-		renderer.render(this.scene, this.camera, undefined, true);
+		renderer.clear();
+		renderer.render(this.scene, this.camera);
 	}
 
 	//Extract Bright Areas
 	this.highPassUniforms["tDiffuse"].value = readBuffer.texture;
 	this.quad.material = this.materialHighPassFilter;
-	renderer.render(this.scene, this.camera, this.renderTargetBright, true);
+	renderer.clear();
+	renderer.setRenderTarget(this.renderTargetBright);
+	renderer.render(this.scene, this.camera);
 
 	//Blur All the mips progressively
 	var inputRenderTarget = this.renderTargetBright;
@@ -261,18 +264,27 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 
 		this.separableBlurMaterials[i].uniforms["colorTexture"].value = inputRenderTarget.texture;
 		this.separableBlurMaterials[i].uniforms["direction"].value = UnrealBloomPass.BlurDirectionX;
-		renderer.render(this.scene, this.camera, this.renderTargetsHorizontal[i], true);
+
+		renderer.clear();
+		renderer.setRenderTarget(this.renderTargetsHorizontal[i]);
+		renderer.render(this.scene, this.camera);
 
 		this.separableBlurMaterials[i].uniforms["colorTexture"].value = this.renderTargetsHorizontal[i].texture;
 		this.separableBlurMaterials[i].uniforms["direction"].value = UnrealBloomPass.BlurDirectionY;
-		renderer.render(this.scene, this.camera, this.renderTargetsVertical[i], true);
+
+		renderer.clear();
+		renderer.setRenderTarget(this.renderTargetsVertical[i]);
+		renderer.render(this.scene, this.camera);
 
 		inputRenderTarget = this.renderTargetsVertical[i];
 	}
 
 	//Composite All the mips
 	this.quad.material = this.compositeMaterial;
-	renderer.render(this.scene, this.camera, this.renderTargetsHorizontal[0], true);
+
+	renderer.clear();
+	renderer.setRenderTarget(this.renderTargetsHorizontal[0]);
+	renderer.render(this.scene, this.camera);
 
 	//Blend it additively over the input texture
 	this.quad.material = this.materialCopy;
@@ -283,15 +295,13 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 		renderer.context.enable(renderer.context.STENCIL_TEST);
 	}
 
-	//Restore renderer settings
-	if(this.renderToScreen)
+	if(this.clear === true)
 	{
-		renderer.render(this.scene, this.camera, undefined, this.clear);
+		renderer.clear();
 	}
-	else
-	{
-		renderer.render(this.scene, this.camera, readBuffer, this.clear);
-	}
+
+	renderer.setRenderTarget(this.renderToScreen ? null : readBuffer);
+	renderer.render(this.scene, this.camera);
 
 	//Restore renderer settings
 	renderer.setClearColor(this.oldClearColor, this.oldClearAlpha);

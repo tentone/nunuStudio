@@ -121,14 +121,13 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	this.uniforms["aspect"].value = camera.aspect;
 
 	//Render bokeh composite
-	if(this.renderToScreen)
+	if(this.clear === true)
 	{
-		renderer.render(this.scene, this.camera, undefined, this.clear);
+		renderer.clear();
 	}
-	else
-	{
-		renderer.render(this.scene, this.camera, writeBuffer, this.clear);
-	}	
+
+	renderer.setRenderTarget(this.renderToScreen ? undefined : writeBuffer);
+	renderer.render(this.scene, this.camera);
 
 	//Restore scene and renderer
 	scene.overrideMaterial = null;

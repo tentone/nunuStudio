@@ -260,7 +260,11 @@ SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta
 	renderer.autoClear = false;
 	renderer.setClearColor(0x7777ff);
 	renderer.setClearAlpha(1.0);
-	renderer.render(scene, camera, this.normalRenderTarget, true);
+
+	renderer.clear();
+	renderer.setRenderTarget(this.normalRenderTarget);
+	renderer.render(scene, camera);
+
 	scene.overrideMaterial = null;
 
 	//Restore original state
@@ -316,7 +320,14 @@ SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta
 SSAONOHPass.prototype.renderPass = function(renderer, passMaterial, renderTarget, clear)
 {
 	this.quad.material = passMaterial;
-	renderer.render(this.scene, this.camera, renderTarget, clear);
+
+	if(clear === true)
+	{
+		renderer.clear();
+	}
+	
+	renderer.setRenderTarget(renderTarget);
+	renderer.render(this.scene, this.camera);
 };
 
 SSAONOHPass.prototype.dispose = function()

@@ -104,7 +104,8 @@ BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 		renderer.context.enable(renderer.context.STENCIL_TEST);
 	}
 
-	renderer.render(this.scene, this.camera, writeBuffer, false);
+	renderer.setRenderTarget(writeBuffer);
+	renderer.render(this.scene, this.camera);
 };
 
 BloomPass.prototype.toJSON = function(meta)

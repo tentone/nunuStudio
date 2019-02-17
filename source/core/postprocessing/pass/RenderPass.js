@@ -18,12 +18,11 @@ RenderPass.prototype = Object.create(Pass.prototype);
 
 RenderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	if(this.renderToScreen)
+	if(this.clear === true)
 	{
-		renderer.render(scene, camera, null, this.clear);
+		renderer.clear();
 	}
-	else
-	{
-		renderer.render(scene, camera, writeBuffer, this.clear);
-	}
+	
+	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
+	renderer.render(scene, camera);
 };

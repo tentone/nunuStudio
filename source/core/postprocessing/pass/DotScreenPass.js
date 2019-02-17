@@ -90,14 +90,13 @@ DotScreenPass.prototype.render = function(renderer, writeBuffer, readBuffer, del
 
 	this.quad.material = this.material;
 
-	if(this.renderToScreen)
+	if(this.clear === true)
 	{
-		renderer.render(this.scene, this.camera, undefined, this.clear);
+		renderer.clear();
 	}
-	else
-	{
-		renderer.render(this.scene, this.camera, writeBuffer, this.clear);
-	}
+
+	renderer.setRenderTarget(this.renderToScreen ? undefined : writeBuffer);
+	renderer.render(this.scene, this.camera);
 };
 
 DotScreenPass.prototype.toJSON = function(meta)

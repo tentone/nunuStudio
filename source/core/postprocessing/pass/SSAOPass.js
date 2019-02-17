@@ -108,7 +108,10 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 
 	//Render depth
 	scene.overrideMaterial = this.depthMaterial;
-	renderer.render(scene, camera, this.depthRenderTarget, true);
+	
+	renderer.clear();
+	renderer.setRenderTarget(this.depthRenderTarget);
+	renderer.render(scene, camera);
 
 	//Render shader
 	scene.overrideMaterial = null;

@@ -52,6 +52,9 @@ function EffectComposer()
 	 * @type {ShaderPass}
 	 */
 	this.copyPass = new ShaderPass(THREE.CopyShader);
+
+
+	this.rendererState = new RendererState();
 }
 
 EffectComposer.bufferParameters =
@@ -180,17 +183,8 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 {
 	var maskActive = false;
 
-	//Store renderer configuration
-	var autoClear = renderer.autoClear;
-	var autoClearColor = renderer.autoClearColor;
-	var autoClearStencil = renderer.autoClearStencil;
-	var autoClearDepth = renderer.autoClearDepth;
-	renderer.autoClear = false;
-	renderer.autoClearColor = true;
-	renderer.autoClearStencil = true;
-	renderer.autoClearDepth = true;
+	this.rendererState.backup(renderer);
 
-	//Render passes
 	for(var i = 0; i < this.passes.length; i++)
 	{
 		var pass = this.passes[i];
@@ -201,10 +195,10 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 			pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
 
 			//If rendered to screen stop here
-			if(pass.renderToScreen)
+			if(pass.renderToScreen === true)
 			{
 				//Copy writeBuffer to screen
-				if(pass.copyToScreen)
+				if(pass.copyToScreen === true)
 				{
 					this.copyPass.renderToScreen = true;
 					this.copyPass.render(renderer, this.readBuffer, this.writeBuffer, delta);
@@ -214,9 +208,9 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 			}
 
 			//Swap read and write buffers
-			if(pass.needsSwap)
+			if(pass.needsSwap === true)
 			{
-				if(maskActive)
+				if(maskActive === true)
 				{
 					renderer.context.stencilFunc(renderer.context.NOTEQUAL, 1, 0xffffffff);
 					this.copyPass.renderToScreen = false;
@@ -242,11 +236,7 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 		}
 	}
 
-	//Restore renderer configuration
-	renderer.autoClear = autoClear;
-	renderer.autoClearColor = autoClearColor;
-	renderer.autoClearStencil = autoClearStencil;
-	renderer.autoClearDepth = autoClearDepth;
+	this.rendererState.restore(renderer);
 };
 
 /**
