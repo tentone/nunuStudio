@@ -87,6 +87,7 @@ include("source/core/input/Mouse.js");
 include("source/core/input/Gamepad.js");
 include("source/core/input/Gyroscope.js");
 
+include("source/core/postprocessing/RendererState.js");
 include("source/core/postprocessing/Pass.js");
 include("source/core/postprocessing/ShaderPass.js");
 include("source/core/postprocessing/EffectComposer.js");
@@ -1636,7 +1637,13 @@ Editor.loadTexture = function(file, onLoad)
 	reader.readAsArrayBuffer(file);
 };
 
-//Load video texture from file object
+/**
+ * Load video file as texture from file object.
+ *
+ * @method loadVideoTexture
+ * @param {File} file
+ * @param {Function} onLoad Callback function called after the resource is loaded.
+ */
 Editor.loadVideoTexture = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
@@ -1723,7 +1730,12 @@ Editor.loadFont = function(file, onLoad)
 	}
 };
 
-//Load text file
+/**
+ * Load text from file and add it as a resource to the program.
+ *
+ * @method loadText
+ * @param {File} file File to load.
+ */
 Editor.loadText = function(file)
 {
 	var reader = new FileReader();
@@ -1740,7 +1752,15 @@ Editor.loadText = function(file)
 	reader.readAsText(file);
 };
 
-//Load geometry from files
+/**
+ * Load a 3D file containing objects to be added to the scene.
+ *
+ * If no parent is specified it adds the objects to currently open scene.
+ * 
+ * @method loadModel
+ * @param {File} file File to be read and parsed.
+ * @param {THREE.Object3D} parent Object to add the objects.
+ */
 Editor.loadModel = function(file, parent)
 {
 	var name = file.name;
@@ -2490,7 +2510,14 @@ Editor.loadModel = function(file, parent)
 	}
 };
 
-//Set currently open file (also updates the editor title), if running in browser never shows openfile
+/**
+ * Set currently open file (also updates the editor title), if running in browser is not used.
+ *
+ * Used for the editor to remember the file location that it is currently working on.
+ *
+ * @method setOpenFile
+ * @param {String} file Path of file currently open.
+ */
 Editor.setOpenFile = function(file)
 {
 	if(file !== undefined && file !== null)
@@ -2520,7 +2547,14 @@ Editor.setOpenFile = function(file)
 	}
 };
 
-//Export web project
+/**
+ * Export web project to a folder.
+ *
+ * Saves the project and exports the runtime to run the project.
+ *
+ * @method exportWebProject
+ * @param {String} dir Directory to export the project to.
+ */
 Editor.exportWebProject = function(dir)
 {
 	FileSystem.makeDirectory(dir);
@@ -2532,7 +2566,14 @@ Editor.exportWebProject = function(dir)
 	Editor.saveProgram(dir + "/app.nsp", true, true, true);
 };
 
-//Export web project as a zip package
+/**
+ * Export web project as a zip package using JSZip.
+ *
+ * Used in the web version to export projects.
+ *
+ * @method exportWebProjectZip
+ * @param {String} fname Name of the file.
+ */
 Editor.exportWebProjectZip = function(fname)
 {
 	var zip = new JSZip();
@@ -2562,7 +2603,14 @@ Editor.exportWebProjectZip = function(fname)
 	});
 }
 
-//Export NWJS project
+/**
+ * Export a NWJS project folder.
+ *
+ * Only the runtime and javascript portion of the project.
+ *
+ * @method exportNWJSProject
+ * @param {String} dir Output directory.
+ */
 Editor.exportNWJSProject = function(dir)
 {
 	Editor.exportWebProject(dir + "/package.nw");
@@ -2577,23 +2625,44 @@ Editor.exportNWJSProject = function(dir)
 	}));
 };
 
-//Export windows project
+/**
+ * Export NWJS windows project.
+ *
+ * @method exportWindowsProject
+ * @param {String} dir Output directory.
+ */
 Editor.exportWindowsProject = function(dir)
 {
+	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
+
 	FileSystem.copyFolder(Editor.NWJS_PATH + "win", dir);
 	Editor.exportNWJSProject(dir);
 };
 
-//Export linux project
+/**
+ * Export NWJS linux project.
+ *
+ * @method exportLinuxProject
+ * @param {String} dir Output directory.
+ */
 Editor.exportLinuxProject = function(dir)
 {
+	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
+
 	FileSystem.copyFolder(Editor.NWJS_PATH + "linux", dir);
 	Editor.exportNWJSProject(dir);
 };
 
-//Export mac os project
+/**
+ * Export NWJS macOS project.
+ *
+ * @method exportMacOSProject
+ * @param {String} dir Output directory.
+ */
 Editor.exportMacOSProject = function(dir)
 {
+	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
+
 	FileSystem.copyFolder(Editor.NWJS_PATH + "mac", dir);
 	Editor.exportNWJSProject(dir);
 };

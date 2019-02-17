@@ -138,32 +138,36 @@ AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readB
 		//Render the luminance of the current scene into a render target with mipmapping enabled
 		this.quad.material = this.materialLuminance;
 		this.materialLuminance.uniforms.tDiffuse.value = readBuffer.texture;
-		renderer.render(this.scene, this.camera, this.currentLuminanceRT);
+		renderer.setRenderTarget(this.currentLuminanceRT);
+		renderer.render(this.scene, this.camera);
 
 		//Use the new luminance values, the previous luminance and the frame delta to adapt the luminance over time.
 		this.quad.material = this.materialAdaptiveLum;
 		this.materialAdaptiveLum.uniforms.delta.value = delta;
 		this.materialAdaptiveLum.uniforms.lastLum.value = this.previousLuminanceRT.texture;
 		this.materialAdaptiveLum.uniforms.currentLum.value = this.currentLuminanceRT.texture;
-		renderer.render(this.scene, this.camera, this.luminanceRT);
+		renderer.setRenderTarget(this.luminanceRT);
+		renderer.render(this.scene, this.camera);
 
 		//Copy the new adapted luminance value so that it can be used by the next frame.
 		this.quad.material = this.materialCopy;
 		this.copyUniforms.tDiffuse.value = this.luminanceRT.texture;
-		renderer.render(this.scene, this.camera, this.previousLuminanceRT);
+		renderer.setRenderTarget(this.previousLuminanceRT);
+		renderer.render(this.scene, this.camera);
 	}
 
 	this.quad.material = this.materialToneMap;
 	this.materialToneMap.uniforms.tDiffuse.value = readBuffer.texture;
 
-	if(this.renderToScreen)
+
+	//TODO <CHECK THREEJS DOCS>
+	if(this.clear)
 	{
-		renderer.render(this.scene, this.camera, undefined, this.clear);
+		renderer.clear();
 	}
-	else
-	{
-		renderer.render(this.scene, this.camera, writeBuffer, this.clear);
-	}
+
+	renderer.setRenderTarget(this.renderToScreen ? undefined : writeBuffer);
+	renderer.render(this.scene, this.camera);
 };
 
 AdaptiveToneMappingPass.prototype.reset = function(renderer)

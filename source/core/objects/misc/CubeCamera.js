@@ -180,20 +180,11 @@ CubeCamera.prototype.updateCubeMap = function(renderer, scene)
 	{
 		this.cameras[i].updateMatrixWorld();
 		this.target.activeCubeFace = i;
-		renderer.render(scene, this.cameras[i], this.target);
+		renderer.setRenderTarget(this.target);
+		renderer.render(scene, this.cameras[i]);
 	}
 
 	renderer.autoClear = autoClear;
-};
-
-/**
- * Disposes the CubeCamera.
- * 
- * @method dispose
- */
-CubeCamera.prototype.dispose = function()
-{
-	THREE.Object3D.prototype.dispose.call(this);
 };
 
 CubeCamera.prototype.toJSON = function(meta)
