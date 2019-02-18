@@ -1,7 +1,5 @@
 "use strict";
 
-//TODO <NOT IN USE>
-
 /**
  * The viewport object is used to handle virtual visualization windows for the WebGL renderer.
  * 
@@ -111,31 +109,31 @@ Viewport.prototype.isInside = function(canvas, mouse)
 
 	if(this.anchor === Viewport.TOP_LEFT)
 	{
-		return mouse.offset.x > offset.x &&
-		mouse.offset.x < offset.x + viewport.x &&
-		mouse.offset.y > offset.y &&
-		mouse.offset.y < offset.y + viewport.y;
+		return mouse.position.x > offset.x &&
+		mouse.position.x < offset.x + viewport.x &&
+		mouse.position.y > offset.y &&
+		mouse.position.y < offset.y + viewport.y;
 	}
 	else if(this.anchor === Viewport.TOP_RIGHT)
 	{
-		return mouse.offset.x > canvas.width - viewport.x - offset.x &&
-		mouse.offset.x < canvas.width - offset.x &&
-		mouse.offset.y > offset.y &&
-		mouse.offset.y < offset.y + viewport.y;
+		return mouse.position.x > canvas.width - viewport.x - offset.x &&
+		mouse.position.x < canvas.width - offset.x &&
+		mouse.position.y > offset.y &&
+		mouse.position.y < offset.y + viewport.y;
 	}
 	else if(this.anchor === Viewport.BOTTOM_LEFT)
 	{
-		return mouse.offset.x > offset.x &&
-		mouse.offset.x < offset.x + viewport.x &&
-		mouse.offset.y > canvas.height - offset.y - viewport.y &&
-		mouse.offset.y < canvas.height - offset.y;
+		return mouse.position.x > offset.x &&
+		mouse.position.x < offset.x + viewport.x &&
+		mouse.position.y > canvas.height - offset.y - viewport.y &&
+		mouse.position.y < canvas.height - offset.y;
 	}
 	else //if(this.anchor === Viewport.BOTTOM_RIGHT)
 	{
-		return mouse.offset.x > canvas.width - viewport.x - offset.x &&
-		mouse.offset.x < canvas.width - offset.x &&
-		mouse.offset.y > canvas.height - offset.y - viewport.y &&
-		mouse.offset.y < canvas.height - offset.y;
+		return mouse.position.x > canvas.width - viewport.x - offset.x &&
+		mouse.position.x < canvas.width - offset.x &&
+		mouse.position.y > canvas.height - offset.y - viewport.y &&
+		mouse.position.y < canvas.height - offset.y;
 	}
 };
 
@@ -166,26 +164,26 @@ Viewport.prototype.getNormalized = function(canvas, mouse)
 
 		if(this.anchor === Viewport.TOP_LEFT)
 		{
-			var x = mouse.offset.x - viewport.x - offset.x;
-			var y = mouse.offset.y - offset.y;
+			var x = mouse.position.x - viewport.x - offset.x;
+			var y = mouse.position.y - offset.y;
 			normalized.set((x / viewport.x) * 2 + 1, (-y / viewport.y) * 2 + 1);
 		}
 		else if(this.anchor === Viewport.TOP_RIGHT)
 		{
-			var x = canvas.width - mouse.offset.x - viewport.x - offset.x;
-			var y = mouse.offset.y - offset.y;
+			var x = canvas.width - mouse.position.x - viewport.x - offset.x;
+			var y = mouse.position.y - offset.y;
 			normalized.set((-x / viewport.x) * 2 - 1, (-y / viewport.y) * 2 + 1);
 		}
 		else if(this.anchor === Viewport.BOTTOM_LEFT)
 		{
-			var x = mouse.offset.x - viewport.x - offset.x;
-			var y = canvas.height - mouse.offset.y - offset.y;
+			var x = mouse.position.x - viewport.x - offset.x;
+			var y = canvas.height - mouse.position.y - offset.y;
 			normalized.set((x / viewport.x) * 2 + 1, (y / viewport.y) * 2 - 1);
 		}
 		else //if(this.anchor === Viewport.BOTTOM_RIGHT)
 		{
-			var x = canvas.width - mouse.offset.x - viewport.x - offset.x;
-			var y = canvas.height - mouse.offset.y - offset.y;
+			var x = canvas.width - mouse.position.x - viewport.x - offset.x;
+			var y = canvas.height - mouse.position.y - offset.y;
 			normalized.set((-x / viewport.x) * 2 - 1, (y / viewport.y) * 2 - 1);
 		}
 		
@@ -214,28 +212,61 @@ Viewport.prototype.enable = function(renderer)
 		var viewport = this.viewport;
 	}
 
-	if(this.anchor === Viewport.TOP_LEFT)
+	if(this.anchor === Viewport.BOTTOM_LEFT)
 	{
 		renderer.setViewport(offset.x, offset.y, viewport.x, viewport.y);
 		renderer.setScissor(offset.x, offset.y, viewport.x, viewport.y);
 	}
-	else if(this.anchor === Viewport.TOP_RIGHT)
+	else if(this.anchor === Viewport.BOTTOM_RIGHT)
 	{
 		var x = renderer.domElement.width - viewport.x - offset.x;
 		renderer.setViewport(x, offset.y, viewport.x, viewport.y);
 		renderer.setScissor(x, offset.y, viewport.x, viewport.y);
 	}
-	else if(this.anchor === Viewport.BOTTOM_LEFT)
+	else if(this.anchor === Viewport.TOP_LEFT)
 	{
 		var y = renderer.domElement.height - viewport.y - offset.y;
 		renderer.setViewport(offset.x, y, viewport.x, viewport.y);
 		renderer.setScissor(offset.x, y, viewport.x, viewport.y);
 	}
-	else if(this.anchor === Viewport.BOTTOM_RIGHT)
+	else if(this.anchor === Viewport.TOP_RIGHT)
 	{
 		var x = renderer.domElement.width - viewport.x - offset.x;
 		var y = renderer.domElement.height - viewport.y - offset.y;
 		renderer.setViewport(x, y, viewport.x, viewport.y);
 		renderer.setScissor(x, y, viewport.x, viewport.y);
 	}
+};
+
+/**
+ * Serializer viewport data to JSON.
+ *
+ * @method toJSON
+ * @return {Object} Serialized viewport object.
+ */
+Viewport.prototype.toJSON = function()
+{
+	var data = 
+	{
+		offset: this.offset.toArray(),
+		viewport: this.viewport.toArray(),
+		mode: this.mode,
+		anchor: this.anchor
+	};
+
+	return data;
+};
+
+/**
+ * Fill viewport data from serialized JSON data.
+ *
+ * @method toJSON
+ * @param {Object} data Serialized viewport object.
+ */
+Viewport.prototype.fromJSON = function(data)
+{
+	this.offset.fromArray(data.offset);
+	this.viewport.fromArray(data.viewport);
+	this.mode = data.mode;
+	this.anchor = data.anchor;
 };

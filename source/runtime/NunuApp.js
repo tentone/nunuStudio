@@ -74,6 +74,7 @@ include("source/core/input/Mouse.js");
 include("source/core/input/Gamepad.js");
 include("source/core/input/Gyroscope.js");
 
+include("source/core/postprocessing/RendererState.js");
 include("source/core/postprocessing/Pass.js");
 include("source/core/postprocessing/ShaderPass.js");
 include("source/core/postprocessing/EffectComposer.js");
@@ -133,14 +134,18 @@ include("source/core/objects/mesh/SkinnedMesh.js");
 include("source/core/objects/text/TextMesh.js");
 include("source/core/objects/text/TextBitmap.js");
 include("source/core/objects/sprite/Sprite.js");
+
 include("source/core/objects/lights/PointLight.js");
 include("source/core/objects/lights/SpotLight.js");
 include("source/core/objects/lights/AmbientLight.js");
 include("source/core/objects/lights/DirectionalLight.js");
 include("source/core/objects/lights/HemisphereLight.js");
 include("source/core/objects/lights/RectAreaLight.js");
+
+include("source/core/objects/cameras/Viewport.js");
 include("source/core/objects/cameras/PerspectiveCamera.js");
 include("source/core/objects/cameras/OrthographicCamera.js");
+
 include("source/core/objects/audio/AudioEmitter.js");
 include("source/core/objects/audio/PositionalAudio.js");
 include("source/core/objects/script/Script.js");
