@@ -29,7 +29,8 @@ function Scene()
 	 *
 	 * Documentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.
 	 *
-	 * @property {World} world
+	 * @property world
+	 * @type {CANNON.World}
 	 */
 	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
@@ -42,10 +43,28 @@ function Scene()
 	this.world.solver.tolerance = 0.05;
 	this.world.solver.iterations = 7;
 
+	/**
+	 * Background of the scene.
+	 *
+	 * The background of the scene is drawn after the renderer clears the buffers.
+	 *
+	 * It can be a color, a texture or a cubemap.
+	 *
+	 * @property background
+	 * @type {THREE.Color|THREE.Texture}
+	 */
 	this.background = new THREE.Color(0x000000);
 
-	//Cameras in use
+	/** 
+	 * List of active cameras currently being displayed.
+	 *
+	 * The cameras are rendered by their render order.
+	 *
+	 * @property cameras
+	 * @type {Array}
+	 */
 	this.cameras = [];
+
 	this.clock = new THREE.Clock();
 	this.delta = 0;
 
@@ -54,28 +73,32 @@ function Scene()
 	 *
 	 * This raycaster is automatically updated using the first camera being drawn.
 	 *
-	 * @property {Raycaster} raycaster
+	 * @property raycaster
+	 * @type {THREE.Raycaster}
 	 */
 	this.raycaster = new THREE.Raycaster();
 
 	/**
 	 * Program that contains this scene.
 	 *
-	 * @property {Program} program
+	 * @property program
+	 * @type {Program}
 	 */
 	this.program = null;
 
 	/**
 	 * Canvas used to draw this scene.
 	 *
-	 * @property {DOM} canvas
+	 * @property canvas
+	 * @type {DOM}
 	 */
 	this.canvas = null;
 
 	/**
 	 * Normalized mouse coordinates used by the scene internal raycaster.
 	 *
-	 * @property {Vector2} mouse
+	 * @property mouse
+	 * @type {THREE.Vector2}
 	 */
 	this.mouse = new THREE.Vector2(0, 0);
 }
@@ -308,7 +331,7 @@ Scene.prototype.toJSON = function(meta)
 	}
 
 	data.object.usePhysics = this.usePhysics;
-
+	
 	data.object.cameras = [];
 	for(var i = 0; i < this.cameras.length; i++)
 	{
