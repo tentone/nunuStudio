@@ -1,11 +1,31 @@
 "use strict";
 
+/** 
+ * Orietantion cube can be used to preview and change the rotation of an object.
+ * 
+ * Is used in the editor to preview and manipulate the camera prespective.
+ * 
+ * @class OrientationCube
+ */
 function OrientationCube()
 {
-	//Viewport
-	this.size = new THREE.Vector2(150, 150);
+	/**
+	 * Orientation cube viewport.
+	 * 
+	 * @attribute viewport
+	 * @type {Viewport}
+	 */
+	this.viewport = new Viewport(Viewport.ABSOLUTE);
+	this.viewport.viewport.set(150, 150);
+	this.viewport.offset.set(10, 10);
+	this.viewport.anchor = Viewport.TOP_RIGHT;
 
-	//Camera
+	/**
+	 * Cube visualization camera
+	 *
+	 * @attribute camera
+	 * @type {THREE.PerspectiveCamera}
+	 */
 	this.camera = new THREE.PerspectiveCamera(60, 1, 0.1, 10);
 	this.camera.position.z = 2;
 
@@ -90,16 +110,16 @@ OrientationCube.Y_NEG = 3;
 OrientationCube.Z_POS = 4;
 OrientationCube.Z_NEG = 5;
 
-//Raycast cube from mouse normalized coordinates
+/**
+ * Raycast cube from mouse normalized coordinates.
+ *
+ * @method raycast
+ */
 OrientationCube.prototype.raycast = function(mouse, canvas)
 {
-	var x = canvas.width - this.size.x;
-
-	if(mouse.position.x > x && mouse.position.y > 0 && mouse.position.x < canvas.width && mouse.position.y < this.size.y)
+	if(this.viewport.isInside(canvas, mouse))
 	{
-		//Raycast cube
-		this.normalized.set((mouse.position.x - x) / this.size.x * 2 - 1, -(mouse.position.y / this.size.y * 2 - 1));
-		this.raycaster.setFromCamera(this.normalized , this.camera);
+		this.raycaster.setFromCamera(this.viewport.getNormalized(canvas, mouse), this.camera);
 
 		var intersects = this.raycaster.intersectObjects(this.scene.children, true);
 		if(intersects.length > 0)
@@ -121,13 +141,15 @@ OrientationCube.prototype.updateRotation = function(camera)
 	this.scene.matrix.getInverse(this.scene.matrix, false);
 };
 
+/**
+ * Render cube to canvas using a renderer orientation.
+ *
+ * @method render
+ */
 OrientationCube.prototype.render = function(renderer, canvas)
 {
-	var x = canvas.width - this.size.x;
-	
-	renderer.setScissorTest(true);
-	renderer.setViewport(x, 0, this.size.x, this.size.y);
-	renderer.setScissor(x, 0, this.size.x, this.size.y);
+	this.viewport.enable(renderer);
+
 	renderer.render(this.scene, this.camera);
 
 	if(this.selected !== null)
@@ -135,8 +157,4 @@ OrientationCube.prototype.render = function(renderer, canvas)
 		this.selected.material.color.set(0xFFFFFF);
 		this.selected = null;
 	}
-
-	renderer.setScissorTest(false);
-	renderer.setViewport(0, 0, canvas.width, canvas.height);
-	renderer.setScissor(0, 0, canvas.width, canvas.height);
 };

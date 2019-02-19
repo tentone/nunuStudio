@@ -404,7 +404,7 @@ SceneEditor.prototype.updateSettings = function()
 
 	//Orientation
 	var size = Editor.settings.editor.cameraRotationCubeSize;
-	this.orientation.size.set(size, size);
+	this.orientation.viewport.viewport.set(size, size);
 
 	//Controls
 	this.navigation.setValue(Editor.settings.editor.navigation);
