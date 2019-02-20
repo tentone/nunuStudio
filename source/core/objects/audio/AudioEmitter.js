@@ -465,6 +465,8 @@ AudioEmitter.prototype.getOutput = function()
  */
 AudioEmitter.prototype.dispose = function()
 {
+	console.log("nunuStudio: Audio emitter disposed!");
+	
 	if(this.isPlaying)
 	{
 		this.stop();

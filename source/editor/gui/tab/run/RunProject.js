@@ -180,6 +180,63 @@ RunProject.prototype.updateMetadata = function()
 	}
 };
 
+RunProject.prototype.activate = function()
+{
+	this.createRenderer();
+	this.updateSettings();
+
+	this.mouse.create();
+	this.keyboard.create();
+
+	if(this.program === null)
+	{
+		this.getProgram();
+		this.runProgram();
+	}
+
+	Editor.gui.menuBar.run.setText(Locale.stop);
+
+	TabElement.prototype.activate.call(this);
+};
+
+RunProject.prototype.deactivate = function()
+{
+	TabElement.prototype.deactivate.call(this);
+
+	this.mouse.dispose();
+	this.keyboard.dispose();
+
+	Editor.gui.menuBar.run.setText(Locale.run);
+};
+
+RunProject.prototype.isAttached = function(program)
+{
+	return program === Editor.program;
+};
+
+
+RunProject.prototype.updateSettings = function()
+{
+	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
+};
+
+RunProject.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	this.stopProgram();
+	
+	this.mouse.dispose();
+	this.keyboard.dispose();
+
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+	}
+};
+
 /**
  * Set fullscreen mode of the tab canvas
  *
@@ -203,76 +260,22 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 	}
 };
 
-RunProject.prototype.activate = function()
-{
-	this.getProgram();
-
-	this.createRenderer();
-	this.updateSettings();
-
-	this.mouse.create();
-	this.keyboard.create();
-
-	this.runProgram();
-
-	Editor.gui.menuBar.run.setText(Locale.stop);
-
-	TabElement.prototype.activate.call(this);
-};
-
-RunProject.prototype.deactivate = function()
-{
-	TabElement.prototype.deactivate.call(this);
-
-	this.disposeProgram();
-	this.mouse.dispose();
-	this.keyboard.dispose();
-
-	Editor.gui.menuBar.run.setText(Locale.run);
-};
-
-RunProject.prototype.isAttached = function(program)
-{
-	return program === Editor.program;
-};
-
-
-RunProject.prototype.updateSettings = function()
-{
-	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
-};
-
 /** 
  * Dispose runnning program.
  *
- * @method disposeProgram
+ * @method stopProgram
  */
-RunProject.prototype.disposeProgram = function()
+RunProject.prototype.stopProgram = function()
 {
+	this.setFullscreen(false);
+	this.mouse.setLock(false);
+
+	console.warn("nunuStudio: RunProject stopProgram, program.", this.program);
+
 	if(this.program !== null)
 	{
-		this.setFullscreen(false);
 		this.program.dispose();
 		this.program = null;
-	}
-
-	//Unlock mouse
-	this.mouse.setLock(false);
-};
-
-RunProject.prototype.destroy = function()
-{
-	TabElement.prototype.destroy.call(this);
-
-	this.mouse.dispose();
-	this.keyboard.dispose();
-	this.disposeProgram();
-
-	if(this.renderer !== null)
-	{
-		this.renderer.dispose();
-		this.renderer.forceContextLoss();
-		this.renderer = null;
 	}
 };
 
@@ -396,6 +399,18 @@ RunProject.prototype.runProgram = function()
 	//Renderer size
 	this.renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
 	this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
+};
+
+/** 
+ * Restart the program running in the tab.
+ *
+ * @method restartProgram
+ */
+RunProject.prototype.restartProgram = function()
+{
+	this.stopProgram();
+	this.getProgram();
+	this.runProgram();
 };
 
 /**

@@ -580,6 +580,10 @@ Program.prototype.dispose = function()
 	{
 		this.scene.dispose();
 	}
+	else
+	{
+		console.warn("nunuStudio: Program dispose() scene is null.", this);
+	}
 	
 	ResourceManager.prototype.dispose.call(this);
 	THREE.Object3D.prototype.dispose.call(this);
