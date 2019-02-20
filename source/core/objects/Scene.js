@@ -164,7 +164,6 @@ Scene.prototype.render = function(renderer)
 	var y = renderer.domElement.height;
 
 	renderer.setClearColor(this.background);
-	renderer.clear(true, true, true);
 	renderer.setScissorTest(true);
 
 	for(var i = 0; i < this.cameras.length; i++)
@@ -304,7 +303,7 @@ Scene.prototype.toJSON = function(meta)
 	if(this.parent == null || this.parent.type !== "Program")
 	{
 		console.warn("nunuStudio: Scene is not on top level serializing as Group.");
-		
+
 		this.type = "Group";
 		return THREE.Object3D.prototype.toJSON.call(this, meta);
 	}
