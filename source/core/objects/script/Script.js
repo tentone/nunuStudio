@@ -191,7 +191,6 @@ Script.removeIncludes = function(code)
  */
 Script.prototype.initialize = function()
 {
-	//Program and scene
 	var node = this;
 	while(node.parent !== null)
 	{
@@ -206,12 +205,10 @@ Script.prototype.initialize = function()
 		}
 	}
 
-	//Initialize children
 	THREE.Object3D.prototype.initialize.call(this);
 
 	var self = this;
 
-	//Compile script
 	this.compileCode(this.code, function()
 	{
 		if(self.script.initialize !== undefined)
@@ -276,11 +273,6 @@ Script.prototype.resize = function(x, y)
 	if(this.script.onResize !== undefined)
 	{
 		this.script.onResize.call(this, x, y);
-	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].resize(x, y);
 	}
 };
 

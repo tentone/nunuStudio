@@ -182,13 +182,6 @@ void main()\n\
 	gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h , 0.0), exponent), 0.0)), 1.0);\n\
 }";
 
-/**
- * Initialize sky object.
- * 
- * Called automatically by the runtime.
- * 
- * @method initialize
- */
 Sky.prototype.initialize = function()
 {
 	this.updateSky();
@@ -197,15 +190,12 @@ Sky.prototype.initialize = function()
 };
 
 /**
- * Update sky state.
- * 
- * Called automatically by the runtime.
- * 
+ * Update sky state, updates the time value and the gradient uniform values.
+ *
  * @method update
  */
 Sky.prototype.update = function(delta)
 {
-	//Update time
 	if(this.autoUpdate)
 	{
 		this.time += delta;
@@ -218,7 +208,6 @@ Sky.prototype.update = function(delta)
 		this.updateSky();
 	}
 
-	//Update children
 	THREE.Object3D.prototype.update.call(this, delta);
 };
 

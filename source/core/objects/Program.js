@@ -322,9 +322,9 @@ Program.prototype.setRenderer = function(renderer, configure)
  * 
  * @method update
  */
-Program.prototype.update = function()
+Program.prototype.update = function(delta)
 {
-	this.scene.update();
+	this.scene.update(delta);
 };
 
 /**
@@ -369,13 +369,6 @@ Program.prototype.resize = function(x, y)
 	if(this.effect !== null)
 	{
 		this.effect.setSize(x, y);
-	}
-
-	//Resize active cameras
-	for(var i = 0; i < this.scene.cameras.length; i++)
-	{
-		this.scene.cameras[i].aspect = x / y;
-		this.scene.cameras[i].updateProjectionMatrix();
 	}
 
 	//Resize the default camera
@@ -455,7 +448,7 @@ Program.prototype.exitVR = function()
  * This method should be used inside of script objects during runtime.
  * 
  * @method setScene
- * @param {Scene|String} scene
+ * @param {Scene|String} scene Scene object or name of the scene to be used.
  */
 Program.prototype.setScene = function(scene)
 {
@@ -492,17 +485,31 @@ Program.prototype.setScene = function(scene)
  */
 Program.prototype.remove = function(scene)
 {
-	var index = this.children.indexOf(scene);
-	if(index > -1)
+	if(scene instanceof Scene)
 	{
-		this.children.splice(index, 1);
-		scene.parent = null;
-	}
+		//Remove scene from the children list
+		var index = this.children.indexOf(scene);
+		if(index > -1)
+		{
+			this.children.splice(index, 1);
+			scene.parent = null;
+		}
 
-	//If no scene on program set actual scene to null
-	if(this.children.length === 0)
+		//If the scene remove was in use, dispose it
+		if(scene === this.scene)
+		{
+			this.scene.dispose();
+			this.scene = null;
+		}
+		//If no scene on program set actual scene to null
+		else if(this.children.length === 0)
+		{
+			this.scene = null;
+		}
+	}
+	else
 	{
-		this.scene = null;
+		console.warn("nunuStudio: Trying to remove Object3D from program, only Scene objects allowed.");
 	}
 };
 
@@ -519,7 +526,6 @@ Program.prototype.add = function(scene)
 	if(scene instanceof Scene)
 	{
 		scene.parent = this;
-
 		this.children.push(scene);
 
 		//If first scene set as actual scene

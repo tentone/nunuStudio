@@ -1,5 +1,7 @@
 "use strict";
 
+//TODO <NOT BEING USED>
+
 function ProfilingTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Profiling", Editor.FILE_PATH + "icons/misc/speedometer.png");

@@ -356,6 +356,7 @@ RunProject.prototype.runProgram = function()
 	//Create a default camera for program (same as runtime).
 	this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
 	this.program.defaultCamera.position.set(0, 5, -5);
+	
 	this.program.setRenderer(this.renderer);
 
 	//Initialize scene

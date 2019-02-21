@@ -110,8 +110,6 @@ Scene.prototype = Object.create(THREE._Scene.prototype);
 /**
  * Initialize scene objects.
  * 
- * Called automatically by the runtime.
- * 
  * @method initialize
  */
 Scene.prototype.initialize = function()
@@ -122,16 +120,22 @@ Scene.prototype.initialize = function()
 	THREE.Object3D.prototype.initialize.call(this);
 
 	this.clock.start();
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].traverse(function(children)
+		{
+			children.initialize();
+		});
+	}
 };
 
 /**
  * Update scene objects and the physics world.
  * 
- * Called automatically by the runtime.
- * 
  * @method update
  */
-Scene.prototype.update = function()
+Scene.prototype.update = function(delta)
 {
 	this.mouse.set(this.program.mouse.position.x/this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y/this.canvas.height + 1);
 	if(this.cameras.length > 0)
@@ -146,9 +150,43 @@ Scene.prototype.update = function()
 		this.world.step((this.delta < 0.05) ? this.delta : 0.05);
 	}
 
+	var delta = this.delta;
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update(this.delta);
+		this.children[i].traverse(function(children)
+		{
+			children.update(delta);
+		});
+	}
+};
+
+OrthographicCamera.prototype.resize = function(x, y)
+{
+	for(var i = 0; i < this.cameras.length; i++)
+	{
+		this.cameras[i].aspect = x / y;
+		this.cameras[i].updateProjectionMatrix();
+	}
+
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].traverse(function(children)
+		{
+			children.resize(x, y);
+		});
+	}
+};
+
+
+Scene.prototype.dispose = function()
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].traverse(function(children)
+		{
+			children.dispose();
+		});
 	}
 };
 

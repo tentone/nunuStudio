@@ -186,31 +186,25 @@ LeapMotion.POINTING = 2;
 /**
  * Initialize LeapMotion object.
  * 
- * Called automatically by the runtime.
- * 
  * Connects to the websocket provided by the leap driver.
  * 
  * @method initialize
  */
 LeapMotion.prototype.initialize = function()
 {
-	//Self pointer
 	var self = this;
 
 	//Start leap worker to collect data
-	Leap.loop({background:true}, function(data)
+	Leap.loop({background: true}, function(data)
 	{
 		self.data = data;
 	}).connect();
 
-	//Children
-	THREE.Group.prototype.initialize.call(this);
+	THREE.Object3D.prototype.initialize.call(this);
 };
 
 /**
  * Update leap status.
- * 
- * Called automatically by the runtime.
  * 
  * @method update
  */
@@ -232,7 +226,7 @@ LeapMotion.prototype.update = function(delta)
 		}
 	}
 
-	THREE.Group.prototype.update.call(this, delta);
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**

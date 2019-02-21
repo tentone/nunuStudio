@@ -79,11 +79,6 @@ THREE.Object3D.prototype.initialize = function()
 		this.mixer.createActions(this.animations);
 		this.mixer.play();
 	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
 };
 
 /**
@@ -100,11 +95,6 @@ THREE.Object3D.prototype.update = function(delta)
 	{
 		this.mixer.update(delta);
 	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update(delta);
-	}
 };
 
 /**
@@ -114,13 +104,7 @@ THREE.Object3D.prototype.update = function(delta)
  * @param {Number} x Screen width.
  * @param {Number} y Screen height.
  */
-THREE.Object3D.prototype.resize = function(x, y)
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].resize(x, y);
-	}
-};
+THREE.Object3D.prototype.resize = function(x, y){};
 
 /**
  * Disposes the object from memory.
@@ -134,11 +118,6 @@ THREE.Object3D.prototype.dispose = function()
 	if(this.mixer !== undefined)
 	{
 		this.mixer.dispose();
-	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].dispose();
 	}
 };
 

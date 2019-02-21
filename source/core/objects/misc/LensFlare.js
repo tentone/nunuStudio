@@ -139,7 +139,7 @@ function LensFlare()
 
 	this.onBeforeRender = function(renderer, scene, camera)
 	{
-		viewport.copy(renderer.getCurrentViewport());
+		renderer.getCurrentViewport(viewport);
 
 		var invAspect = viewport.w / viewport.z;
 		var halfViewportWidth = viewport.z / 2.0;

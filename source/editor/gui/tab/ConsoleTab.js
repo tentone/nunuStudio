@@ -6,8 +6,13 @@ function ConsoleTab(parent, closeable, container, index)
 
 	this.history = [];
 
-	//Filters
-	this.filterThreeJS = false;
+	/**
+	 * List of filter keywords. If the log message starts with one of these words it is ommited.
+	 *
+	 * @attribute filters
+	 * @type {Array}
+	 */
+	this.filters = []; //["THREE"];
 
 	//Top bar
 	this.bar = new Division(this);
@@ -92,7 +97,13 @@ function ConsoleTab(parent, closeable, container, index)
 
 ConsoleTab.prototype = Object.create(TabElement.prototype);
 
-//Use this console as the predefined console
+/**
+ * Use this console as the predefined console.
+ *
+ * Overrides the browser provided window.console methods and displays the logs in this tab.
+ *
+ * @method useConsole
+ */
 ConsoleTab.prototype.useConsole = function()
 {
 	var self = this;
@@ -202,9 +213,9 @@ ConsoleTab.prototype.clear = function(args)
  */
 ConsoleTab.prototype.filter = function(args)
 {
-	if(this.filterThreeJS)
+	for(var i = 0; i < this.filters.length; i++)
 	{
-		if(args.length > 0 && (args[0] + "").startsWith("THREE"))
+		if(args.length > 0 && (args[0] + "").startsWith(this.filters[i]))
 		{
 			return true;
 		}
@@ -220,7 +231,16 @@ ConsoleTab.prototype.updateSize = function()
 	this.console.style.height = (this.size.y - 45) + "px";
 };
 
-//Create a new log division element and fill with information from the object
+/**
+ * Create a new log division element and fill with information from the object.
+ *
+ * Checks the type of the object and creates the log accordingly.
+ * 
+ * @static
+ * @method createMessage
+ * @param {Object} object Object to be logged into the console.
+ * @return {DOM} Element created.
+ */
 ConsoleTab.createMessage = function(object)
 {
 	var log = document.createElement("div");
@@ -413,6 +433,13 @@ ConsoleTab.createMessage = function(object)
 	return log;
 };
 
+/**
+ * Create a separator bar division.
+ *
+ * @static
+ * @method createBar
+ * @return {DOM} Element created.
+ */
 ConsoleTab.createBar = function()
 {
 	var bar = document.createElement("div");

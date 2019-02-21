@@ -345,7 +345,6 @@ include("source/editor/gui/element/tabs/splittable/TabContainer.js");
 include("source/editor/gui/element/tabs/splittable/TabDualContainer.js");
 
 include("source/editor/gui/tab/ConsoleTab.js");
-include("source/editor/gui/tab/ProfilingTab.js");
 include("source/editor/gui/tab/CodeEditor.js");
 include("source/editor/gui/tab/AboutTab.js");
 include("source/editor/gui/tab/TextEditor.js");
