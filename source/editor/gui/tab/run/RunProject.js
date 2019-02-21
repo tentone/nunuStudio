@@ -149,37 +149,6 @@ RunProject.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
 RunProject.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
 RunProject.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
 
-RunProject.prototype.updateMetadata = function()
-{
-	if(this.program !== null)
-	{
-		this.setName(this.program.name);
-
-		//Check if object has a parent
-		if(this.program.parent === null)
-		{
-			this.close();
-			return;
-		}
-
-		//Check if object exists in parent
-		var children = this.program.parent.children;
-		for(var i = 0; i < children.length; i++)
-		{
-			if(this.program.uuid === children[i].uuid)
-			{
-				return;
-			}
-		}
-
-		//If not found close tab
-		if(i >= children.length)
-		{
-			this.close();
-		}
-	}
-};
-
 RunProject.prototype.activate = function()
 {
 	this.createRenderer();
@@ -223,8 +192,6 @@ RunProject.prototype.updateSettings = function()
 RunProject.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
-
-	console.warn("nunuStudio: RunProject destroy() called.", this.program);
 
 	this.stopProgram();
 	
@@ -272,8 +239,6 @@ RunProject.prototype.stopProgram = function()
 	this.setFullscreen(false);
 	this.mouse.setLock(false);
 
-	console.warn("nunuStudio: RunProject stopProgram, program.", this.program);
-
 	if(this.program !== null)
 	{
 		this.program.dispose();
@@ -290,7 +255,6 @@ RunProject.prototype.update = function()
 {
 	if(this.program === null)
 	{
-		console.warn("nunuStudio: RunProject tab program is null.", this);
 		return;
 	}
 
