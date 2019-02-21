@@ -377,7 +377,6 @@ Program.prototype.resize = function(x, y)
 		this.defaultCamera.resize(x, y);
 	}
 
-	//Resize scene
 	this.scene.resize(x, y);
 };
 
@@ -501,8 +500,9 @@ Program.prototype.remove = function(scene)
 			this.scene.dispose();
 			this.scene = null;
 		}
-		//If no scene on program set actual scene to null
-		else if(this.children.length === 0)
+		
+		//If there are no scenes on program set actual scene to null
+		if(this.children.length === 0)
 		{
 			this.scene = null;
 		}

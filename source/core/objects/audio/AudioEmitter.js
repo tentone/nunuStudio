@@ -117,7 +117,6 @@ function AudioEmitter(audio)
 	 */
 	this.detune = 0;
 
-	this.disposed = false;
 	this.isPlaying = false;
 	this.hasPlaybackControl = true;
 }
@@ -143,7 +142,11 @@ AudioEmitter.prototype.initialize = function()
 			self.setBuffer(buffer);
 		});
 	}
-
+	else
+	{
+		console.warn("nunuStudio: AudioEmitter audio is null.");
+	}
+	
 	this.setVolume(this.volume);
 	this.setPlaybackRate(this.playbackRate);
 
@@ -162,7 +165,7 @@ AudioEmitter.prototype.setBuffer = function(audioBuffer)
 	this.buffer = audioBuffer;
 	this.sourceType = "buffer";
 
-	if(this.autoplay && !this.disposed)
+	if(this.autoplay === true)
 	{
 		this.play();
 	}
@@ -465,15 +468,11 @@ AudioEmitter.prototype.getOutput = function()
  */
 AudioEmitter.prototype.dispose = function()
 {
-	console.log("nunuStudio: Audio emitter disposed!");
-	
 	if(this.isPlaying)
 	{
 		this.stop();
 		this.disconnect();
 	}
-
-	this.disposed = true;
 
 	THREE.Object3D.prototype.dispose.call(this);
 };

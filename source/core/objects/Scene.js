@@ -107,11 +107,6 @@ THREE._Scene = THREE.Scene;
 
 Scene.prototype = Object.create(THREE._Scene.prototype);
 
-/**
- * Initialize scene objects.
- * 
- * @method initialize
- */
 Scene.prototype.initialize = function()
 {
 	this.program = this.parent;
@@ -134,10 +129,11 @@ Scene.prototype.initialize = function()
  * Update scene objects and the physics world.
  * 
  * @method update
+ * @param {Number} delta The time since the last frame.
  */
 Scene.prototype.update = function(delta)
 {
-	this.mouse.set(this.program.mouse.position.x/this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y/this.canvas.height + 1);
+	this.mouse.set(this.program.mouse.position.x / this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y / this.canvas.height + 1);
 	if(this.cameras.length > 0)
 	{
 		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);
@@ -160,14 +156,13 @@ Scene.prototype.update = function(delta)
 	}
 };
 
-OrthographicCamera.prototype.resize = function(x, y)
+Scene.prototype.resize = function(x, y)
 {
 	for(var i = 0; i < this.cameras.length; i++)
 	{
 		this.cameras[i].aspect = x / y;
 		this.cameras[i].updateProjectionMatrix();
 	}
-
 
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -177,7 +172,6 @@ OrthographicCamera.prototype.resize = function(x, y)
 		});
 	}
 };
-
 
 Scene.prototype.dispose = function()
 {

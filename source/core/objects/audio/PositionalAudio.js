@@ -52,7 +52,14 @@ function PositionalAudio(audio)
 	this.panner.coneOuterAngle = 0;
 	this.panner.coneOuterGain = 0;
 
-	this.cameras = null;
+	/**
+	 * Runtime pointer to the scene to get the camera list.
+	 *
+	 * @attribute scene
+	 * @type {Scene}
+	 */
+	this.scene = null;
+
 	this.tempPosition = new THREE.Vector3();
 	this.tempPositionCamera = new THREE.Vector3();
 	this.tempQuaternionCamera = new THREE.Quaternion();
@@ -72,14 +79,16 @@ PositionalAudio.prototype.initialize = function()
 {
 	AudioEmitter.prototype.initialize.call(this);
 	
-	var node = this;
-	while(node.parent !== null)
+	var node = this.parent;
+	while(node !== null)
 	{
-		node = node.parent;
 		if(node instanceof Scene)
 		{
-			this.cameras = node.cameras;
+			this.scene = node;
+			break;
 		}
+
+		node = node.parent;
 	}
 };
 
@@ -90,9 +99,9 @@ PositionalAudio.prototype.initialize = function()
  */
 PositionalAudio.prototype.update = function(delta)
 {
-	if(this.cameras.length > 0)
+	if(this.scene.cameras.length > 0)
 	{
-		var camera = this.cameras[0];
+		var camera = this.scene.cameras[0];
 
 		this.getWorldPosition(this.tempPosition);
 		camera.getWorldPosition(this.tempPositionCamera);
