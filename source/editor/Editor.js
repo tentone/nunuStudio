@@ -961,6 +961,22 @@ Editor.addAction = function(action)
 };
 
 /**
+ * Get currently active scene in the editor.
+ *
+ * @method getScene
+ * @return {Scene} The scene currently active in the editor, null if none available.
+ */
+Editor.getScene = function()
+{
+	if(Editor.program.children.length > 0)
+	{
+		return Editor.program.children[0];
+	}
+
+	return null;
+};
+
+/**
  * Add objects to the actual scene, and creates an action in the editor history. 
  * 
  * @method addObject
@@ -971,7 +987,7 @@ Editor.addObject = function(object, parent)
 {
 	if(parent === undefined)
 	{
-		parent = Editor.program.scene;
+		parent = Editor.getScene();
 	}
 
 	var actions = [new AddAction(object, parent)];
@@ -1186,11 +1202,11 @@ Editor.pasteObject = function(target)
 		//Add object to target
 		if(target !== undefined && !target.locked)
 		{
-			Editor.addAction(new AddAction(obj, target));
+			Editor.addObject(obj, target);
 		}
 		else
 		{
-			Editor.addAction(new AddAction(obj, Editor.program.scene));
+			Editor.addObject(obj);
 		}
 	}
 	catch(e)
@@ -1467,10 +1483,10 @@ Editor.setProgram = function(program)
 		Editor.resetEditor();
 
 		//Add new scene tab to interface
-		if(Editor.program.scene !== null)
+		if(program.children.length > 0)
 		{
 			var scene = Editor.gui.tab.addTab(SceneEditor, true);
-			scene.attach(Editor.program.scene);
+			scene.attach(program.children[0]);
 		}
 	}
 };

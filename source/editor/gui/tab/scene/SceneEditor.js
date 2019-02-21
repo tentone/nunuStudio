@@ -342,11 +342,6 @@ SceneEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	if(this.scene instanceof Scene)
-	{
-		Editor.program.scene = this.scene;
-	}
-
 	this.createRenderer();
 	this.updateSettings();
 	this.setState(SceneEditor.EDITING);

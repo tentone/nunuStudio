@@ -398,7 +398,7 @@ function MainMenu(parent)
 				{
 					//TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.OBJExporter();
-					var data = exporter.parse(Editor.program.scene);
+					var data = exporter.parse(Editor.getScene());
 					FileSystem.writeFile(files[0].path, data);
 				}
 			}, ".obj", true);
@@ -409,7 +409,7 @@ function MainMenu(parent)
 			{
 				//TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.OBJExporter();
-				var data = exporter.parse(Editor.program.scene);
+				var data = exporter.parse(Editor.getScene());
 				FileSystem.writeFile(fname, data);
 			}, ".obj");
 		}
@@ -426,7 +426,7 @@ function MainMenu(parent)
 				{
 					//TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.GLTFExporter();
-					exporter.parse(Editor.program.scene, function(result)
+					exporter.parse(Editor.getScene(), function(result)
 					{
 						var data = JSON.stringify(result, null, 2);
 						FileSystem.writeFile(files[0].path, data);
@@ -440,7 +440,7 @@ function MainMenu(parent)
 			{
 				//TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.GLTFExporter();
-				exporter.parse(Editor.program.scene, function(result)
+				exporter.parse(Editor.getScene(), function(result)
 				{
 					var data = JSON.stringify(result, null, 2);
 					FileSystem.writeFile(fname, data);
@@ -460,7 +460,7 @@ function MainMenu(parent)
 				{
 					//TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.GLTFExporter();
-					exporter.parse(Editor.program.scene, function(result)
+					exporter.parse(Editor.getScene(), function(result)
 					{
 						FileSystem.writeFileArrayBuffer(files[0].path, result);
 					}, {binary: true, forceIndices: true, forcePowerOfTwoTextures: true});
@@ -473,7 +473,7 @@ function MainMenu(parent)
 			{
 				//TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.GLTFExporter();
-				exporter.parse(Editor.program.scene, function(result)
+				exporter.parse(Editor.getScene(), function(result)
 				{
 					FileSystem.writeFileArrayBuffer(fname, result);
 				}, {binary: true, forceIndices: true, forcePowerOfTwoTextures: true});

@@ -224,6 +224,8 @@ RunProject.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
+	console.warn("nunuStudio: RunProject destroy() called.", this.program);
+
 	this.stopProgram();
 	
 	this.mouse.dispose();
