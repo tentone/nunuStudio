@@ -65,6 +65,16 @@ function Scene()
 	 */
 	this.cameras = [];
 
+	/**
+	 * Default camera of the scene used where there is no active camera.
+	 *
+	 * While using the editor the scene default camera gets set as the last camera configuration used.
+	 * 
+	 * @property defaultCamera
+	 * @type {THREE.Camera}
+	 */
+	this.defaultCamera = null;
+
 	this.clock = new THREE.Clock();
 	this.delta = 0;
 
