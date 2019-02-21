@@ -22,14 +22,14 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	 * @property near
 	 * @type {Number}
 	 */
-	this.near = (near !== undefined) ? near : 0.01;
+	this.near = (near !== undefined) ? near : 1e-2;
 
 	/**
 	 * CubeCamera far plane.
 	 * @property far
 	 * @type {Number}
 	 */
-	this.far = (far !== undefined) ? far : 10000;
+	this.far = (far !== undefined) ? far : 1e4;
 
 	/**
 	 * Resolution of each face. Should be a power of 2 (32, 64, 128, ...).

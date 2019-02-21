@@ -34,7 +34,6 @@ function Skeleton(bones, boneInverses)
 	 */
 	this.boneMatrices = new Float32Array(this.bones.length * 16);
 
-
 	/**
 	 * An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.
 	 * 
@@ -55,7 +54,7 @@ function Skeleton(bones, boneInverses)
 		}
 		else
 		{
-			console.warn("THREE.Skeleton boneInverses is the wrong length.");
+			console.warn("nunuStudio: Skeleton boneInverses is the wrong length.");
 
 			this.boneInverses = [];
 

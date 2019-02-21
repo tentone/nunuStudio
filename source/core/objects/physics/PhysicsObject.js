@@ -61,8 +61,6 @@ PhysicsObject.prototype = Object.create(THREE.Group.prototype);
 /**
  * Intialize physics object and add it to the scene physics world.
  * 
- * Automatically called by the runtime.
- * 
  * @method initialize
  */
 PhysicsObject.prototype.initialize = function()
@@ -88,14 +86,11 @@ PhysicsObject.prototype.initialize = function()
 		}
 	}
 
-	//Children
 	THREE.Object3D.prototype.initialize.call(this);
 };
 
 /**
  * Update object position and rotation based on cannon.js body.
- * 
- * Automatically called by the runtime.
  * 
  * @method update
  */
@@ -107,7 +102,6 @@ PhysicsObject.prototype.update = function(delta)
 		this.quaternion.copy(this.body.quaternion);
 	}
 
-	//Update children
 	THREE.Object3D.prototype.update.call(this, delta);
 };
 

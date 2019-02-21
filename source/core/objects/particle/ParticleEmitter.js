@@ -52,7 +52,7 @@ function ParticleEmitter(group, emitter)
 
 	this.clock = new THREE.Clock();
 	this.temp = new THREE.Vector4();
-	
+
 	/**
 	 * Texture attached to the group of this particle emitter.
 	 *
@@ -170,7 +170,7 @@ ParticleEmitter.prototype.onBeforeRender = function(renderer, scene, camera, ren
 	this.group.uniforms.scale.value = renderer.getCurrentViewport(this.temp).w;
 	this.group.tick(this.clock.getDelta());
 
-	if(this.dynamicEmitter)
+	if(this.dynamicEmitter === true)
 	{
 		this.emitter.position.value = this.position;	
 	}

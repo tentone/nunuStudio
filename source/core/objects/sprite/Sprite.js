@@ -28,11 +28,6 @@ THREE.Sprite = Sprite;
 
 Sprite.prototype = Object.create(THREE._Sprite.prototype);
 
-/**
- * Dispose the sprite material.
- * 
- * @method dispose
- */
 Sprite.prototype.dispose = function()
 {
 	if(this.material !== null && this.material.dispose !== undefined)
