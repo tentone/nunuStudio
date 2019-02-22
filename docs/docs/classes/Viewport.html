@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio FilmPass</title>  
+	<title>nunuStudio Viewport</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -195,18 +195,19 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>FilmPass Class</h1>
+						<h1>Viewport Class</h1>
 						<div class="box meta">
 						
 						
 						
-									Module: <a href="../modules/Postprocessing.html">Postprocessing</a>
+									Module: <a href="../modules/Cameras.html">Cameras</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Film pass is used to simulate a film/TV like effect.</p>
+							<p>The viewport object is used to handle virtual visualization windows for the WebGL renderer.</p>
+						<p>It uses normalized coordinates [0 to 1] when using RELATIVE mode or pixel based coordinated for ABSOLUTE mode.</p>
 						
 						</div>
 						
@@ -215,69 +216,405 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
 								<div id="index" class="api-class-tabpanel index">
 									<h2 class="off-left">Item Index</h2>
 						
+										<div class="index-section methods">
+											<h3>Methods</h3>
+						
+											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_enable">enable</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_getAspectRatio">getAspectRatio</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_getNormalized">getNormalized</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_isInside">isInside</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_toJSON">toJSON</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_toJSON">toJSON</a>
+						
+													</li>
+											</ul>
+										</div>
 						
 										<div class="index-section properties">
 											<h3>Properties</h3>
 						
 											<ul class="index-list properties">
 													<li class="index-item property">
-														<a href="#property_grayscale">grayscale</a>
+														<a href="#property_anchor">anchor</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_noiseIntensity">noiseIntensity</a>
+														<a href="#property_mode">mode</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_scanlinesCount">scanlinesCount</a>
+														<a href="#property_offset">offset</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_scanlinesIntensity">scanlinesIntensity</a>
+														<a href="#property_viewport">viewport</a>
 						
 													</li>
 											</ul>
 										</div>
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs">
+													<li class="index-item attr">
+														<a href="#attr_ABSOLUTE">ABSOLUTE</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_RELATIVE">RELATIVE</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
+						
+											<div id="method_enable" class="method item">
+												<h3 class="name"><code>enable</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>renderer</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Enable this viewport for rendering using a WebGLRenderer</p>
+											<p>After rendering the WebGL renderer has to manually reset to the original values.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">renderer</code>
+																	<span class="type">THREE.WebGLRenderer</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_getAspectRatio" class="method item">
+												<h3 class="name"><code>getAspectRatio</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>canvas</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get the aspect ratio of this viewport x/y.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">canvas</code>
+																	<span class="type">Canvas</span>
+											
+											
+																<div class="param-description">
+																	<p>DOM canvas only required to calculate aspect ration on relative sizing.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>The aspect ratio of the viewport.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_getNormalized" class="method item">
+												<h3 class="name"><code>getNormalized</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">THREE.Vector2</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get normalized coordinates between [-1, 1] for a canvas size and mouse position.</p>
+											<p>Usefull to use raycasting for object picking in a viewport.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">THREE.Vector2</span>:
+																<p>Normalized coordinated of the mouse.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_isInside" class="method item">
+												<h3 class="name"><code>isInside</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>canvas</code>
+															</li>
+															<li class="arg">
+																	<code>mouse</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if the mouse is inside this viewport.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">canvas</code>
+																	<span class="type">DOM</span>
+											
+											
+																<div class="param-description">
+																	<p>Canvas for offset calculation.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">mouse</code>
+																	<span class="type"><a href="../classes/Mouse.html" class="crosslink">Mouse</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Mouse object.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_toJSON" class="method item">
+												<h3 class="name"><code>toJSON</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">Object</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Serializer viewport data to JSON.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Object</span>:
+																<p>Serialized viewport object.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_toJSON" class="method item">
+												<h3 class="name"><code>toJSON</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Fill viewport data from serialized JSON data.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Serialized viewport object.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+									</div>
 						
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
-											<div id="property_grayscale" class="property item">
-												<h3 class="name"><code>grayscale</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>If set true a grascale effect will be applied.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_noiseIntensity" class="property item">
-												<h3 class="name"><code>noiseIntensity</code></h3>
+											<div id="property_anchor" class="property item">
+												<h3 class="name"><code>anchor</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -292,15 +629,15 @@
 												</div>
 											
 												<div class="description">
-													<p>Ammout of noise to be applied to the image.</p>
+													<p>Positioning anchor of the viewport.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_scanlinesCount" class="property item">
-												<h3 class="name"><code>scanlinesCount</code></h3>
+											<div id="property_mode" class="property item">
+												<h3 class="name"><code>mode</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -315,16 +652,17 @@
 												</div>
 											
 												<div class="description">
-													<p>Number of scanline to be displayed.</p>
+													<p>Viewport sizing mode.</p>
+											<p>Can be RELATIVE or ABSOLUTE.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_scanlinesIntensity" class="property item">
-												<h3 class="name"><code>scanlinesIntensity</code></h3>
-												<span class="type">Number</span>
+											<div id="property_offset" class="property item">
+												<h3 class="name"><code>offset</code></h3>
+												<span class="type">THREE.Vector2</span>
 											
 											
 											
@@ -338,7 +676,32 @@
 												</div>
 											
 												<div class="description">
-													<p>Scanline intensity.</p>
+													<p>Camera viewport offset.</p>
+											<p>Values range from 0.0 to 1.0 in screen space when in RELATIVE mode.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_viewport" class="property item">
+												<h3 class="name"><code>viewport</code></h3>
+												<span class="type">THREE.Vector2</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Camera viewport size.</p>
+											<p>Values range from 0.0 to 1.0 in screen space.</p>
 											
 												</div>
 											
@@ -347,6 +710,66 @@
 											</div>
 									</div>
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_ABSOLUTE" class="attr item">
+												<a name="config_ABSOLUTE"></a> 
+												<h3 class="name"><code>ABSOLUTE</code></h3>
+												<span class="type"></span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Viewport defined absolutely in pixels.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_RELATIVE" class="attr item">
+												<a name="config_RELATIVE"></a> 
+												<h3 class="name"><code>RELATIVE</code></h3>
+												<span class="type"></span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Viewport calculated relatively to the screen viewport.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>

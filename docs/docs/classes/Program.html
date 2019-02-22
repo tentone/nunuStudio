@@ -136,6 +136,7 @@
 								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
 								<li><a href="../classes/VideoStream.html">VideoStream</a></li>
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
+								<li><a href="../classes/Viewport.html">Viewport</a></li>
 								<li><a href="../classes/VRControls.html">VRControls</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
 							</ul>
@@ -209,7 +210,8 @@
 						
 						<div class="box intro">
 							<p>Program class contains all the data of a nunuStudio program.</p>
-						<p>Program is also used to store and manage all available resources.</p>
+						<p>Is stores and manages all available resources used by the children objects.</p>
+						<p>Is responsible for handling runtime tasks, initialization, update, resizes etc.</p>
 						
 						</div>
 						
@@ -326,6 +328,14 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_defaultCamera">defaultCamera</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_defaultScene">defaultScene</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_description">description</a>
 						
 													</li>
@@ -343,6 +353,10 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_lockPointer">lockPointer</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_manager">manager</a>
 						
 													</li>
 													<li class="index-item property">
@@ -371,6 +385,14 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_toneMapping">toneMapping</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_toneMappingExposure">toneMappingExposure</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_toneMappingWhitePoint">toneMappingWhitePoint</a>
 						
 													</li>
 													<li class="index-item property">
@@ -1091,7 +1113,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Scene object or name of the scene to be used.</p>
+											
 																</div>
 											
 															</li>
@@ -1133,7 +1156,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Serialize object to JSON.</p>
+													<p>Serialize the object to JSON format.</p>
 											
 												</div>
 											
@@ -1147,7 +1170,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Metadata object passed to the objects and resources toJSON method to store data.</p>
+											
 																</div>
 											
 															</li>
@@ -1170,7 +1194,7 @@
 											
 														<div class="returns-description">
 																	<span class="type">Object</span>:
-																<p>json</p>
+																<p>json Serialized JSON data containing the program, all scenes and resources stored.</p>
 											
 														</div>
 													</div>
@@ -1254,7 +1278,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Antialiasing flag</p>
+													<p>Antialiasing flag.</p>
 											
 												</div>
 											
@@ -1278,8 +1302,8 @@
 												</div>
 											
 												<div class="description">
-													<p>NunuRuntime instance used to communication between nunu app and the host webpage.
-											Inside the editor communication with the app is simulated on the debug console.</p>
+													<p>NunuRuntime instance used to communication between nunu app and the host webpage.</p>
+											<p>Inside the editor communication with the app is simulated on the debug console.</p>
 											
 												</div>
 											
@@ -1302,7 +1326,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Program author</p>
+													<p>Program author.</p>
 											
 												</div>
 											
@@ -1333,6 +1357,53 @@
 											
 											
 											</div>
+											<div id="property_defaultCamera" class="property item">
+												<h3 class="name"><code>defaultCamera</code></h3>
+												<span class="type">THREE.Camera</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Default camera to be used by scenes where there is no camera.</p>
+											<p>On the editor this value is automatically set to the last editor camera point used</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_defaultScene" class="property item">
+												<h3 class="name"><code>defaultScene</code></h3>
+												<span class="type">THREE.Scene</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Scene loaded as default on startup.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_description" class="property item">
 												<h3 class="name"><code>description</code></h3>
 												<span class="type">String</span>
@@ -1349,7 +1420,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Program description</p>
+													<p>Program description.</p>
 											
 												</div>
 											
@@ -1396,7 +1467,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Flag to indicate if the runtime should handle device pixel ratio</p>
+													<p>Flag to indicate if the runtime should handle device pixel ratio.</p>
 											
 												</div>
 											
@@ -1420,7 +1491,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Keyboard input object</p>
+													<p>Keyboard input object.</p>
 											
 												</div>
 											
@@ -1443,11 +1514,34 @@
 												</div>
 											
 												<div class="description">
-													<p>Flag to control pointer locking</p>
+													<p>Flag to control pointer locking.</p>
 											
 												</div>
 											
 													<p><strong>Default:</strong> false</p>
+											
+											
+											</div>
+											<div id="property_manager" class="property item">
+												<h3 class="name"><code>manager</code></h3>
+												<span class="type"><a href="../classes/EventManager.html" class="crosslink">EventManager</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Event manager used to handle VR display presentation change event.</p>
+											
+												</div>
+											
 											
 											
 											</div>
@@ -1467,7 +1561,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Mouse input object</p>
+													<p>Mouse input object.</p>
 											
 												</div>
 											
@@ -1536,7 +1630,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Scene currently in use.</p>
+													<p>Scene currently running in the program.</p>
 											
 												</div>
 											
@@ -1583,7 +1677,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Shadow type</p>
+													<p>Shadow map filtering type.</p>
 											
 												</div>
 											
@@ -1607,11 +1701,57 @@
 												</div>
 											
 												<div class="description">
-													<p>Tonemapping mode</p>
+													<p>Tone mapping mode.</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> NoToneMapping</p>
+													<p><strong>Default:</strong> THREE.NoToneMapping</p>
+											
+											
+											</div>
+											<div id="property_toneMappingExposure" class="property item">
+												<h3 class="name"><code>toneMappingExposure</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Exposure level of tone mapping.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_toneMappingWhitePoint" class="property item">
+												<h3 class="name"><code>toneMappingWhitePoint</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Tone mapping white point.</p>
+											
+												</div>
+											
 											
 											
 											</div>
@@ -1631,7 +1771,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Program version</p>
+													<p>Program version.</p>
 											
 												</div>
 											
@@ -1655,7 +1795,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Enable virtual reality flag</p>
+													<p>Enable virtual reality flag.</p>
 											
 												</div>
 											
@@ -1679,7 +1819,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Virtual reality movement scale</p>
+													<p>Virtual reality movement scale.</p>
+											<p>Indicates the relation between the real movement and virtual world movement.</p>
 											
 												</div>
 											

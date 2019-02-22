@@ -106,6 +106,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "VideoLoader",
         "VideoStream",
         "VideoTexture",
+        "Viewport",
         "WebcamTexture"
     ],
     "modules": [
@@ -169,7 +170,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Core",
             "name": "Core",
-            "description": "Program class contains all the data of a nunuStudio program.\n\nProgram is also used to store and manage all available resources."
+            "description": "Program class contains all the data of a nunuStudio program.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc."
         },
         {
             "displayName": "Devices",

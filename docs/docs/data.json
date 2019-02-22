@@ -200,6 +200,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\cameras\\Viewport.js": {
+            "name": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "modules": {},
+            "classes": {
+                "Viewport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\controls\\FirstPersonControls.js": {
             "name": "..\\source\\core\\objects\\controls\\FirstPersonControls.js",
             "modules": {
@@ -1091,12 +1100,13 @@
             "elements": {},
             "classes": {
                 "OrthographicCamera": 1,
-                "PerspectiveCamera": 1
+                "PerspectiveCamera": 1,
+                "Viewport": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
             "line": 3,
             "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
         },
@@ -1290,7 +1300,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\Scene.js",
             "line": 3,
-            "description": "Program class contains all the data of a nunuStudio program.\n\nProgram is also used to store and manage all available resources."
+            "description": "Program class contains all the data of a nunuStudio program.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc."
         },
         "Postprocessing": {
             "name": "Postprocessing",
@@ -1524,7 +1534,14 @@
             "namespace": "",
             "file": "..\\source\\core\\input\\Keyboard.js",
             "line": 3,
-            "description": "Keyboard instance for input in sync with the running 3D application.\n\nThe keyboard object provided by scripts is automatically updated by the runtime handler."
+            "description": "Keyboard instance for input in sync with the running 3D application.\n\nThe keyboard object provided by scripts is automatically updated by the runtime handler.",
+            "params": [
+                {
+                    "name": "dontInitialize",
+                    "description": "If true the mouse events are not created.",
+                    "type": "Boolean"
+                }
+            ]
         },
         "Mouse": {
             "name": "Mouse",
@@ -1897,6 +1914,27 @@
                 {
                     "name": "far",
                     "description": "Far projection plane (how far can be objects visible by this camera)",
+                    "type": "Number"
+                }
+            ]
+        },
+        "Viewport": {
+            "name": "Viewport",
+            "shortname": "Viewport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Cameras",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 3,
+            "description": "The viewport object is used to handle virtual visualization windows for the WebGL renderer.\n\nIt uses normalized coordinates [0 to 1] when using RELATIVE mode or pixel based coordinated for ABSOLUTE mode.",
+            "params": [
+                {
+                    "name": "mode",
+                    "description": "",
                     "type": "Number"
                 }
             ]
@@ -2583,7 +2621,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\Program.js",
             "line": 3,
-            "description": "Program class contains all the data of a nunuStudio program.\n\nProgram is also used to store and manage all available resources.",
+            "description": "Program class contains all the data of a nunuStudio program.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc.",
             "params": [
                 {
                     "name": "name",
@@ -2950,7 +2988,7 @@
             "module": "Postprocessing",
             "namespace": "",
             "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 3,
+            "line": 5,
             "description": "Renderer state can be used to store and restore a renderer state between postprocessing passes.\n\nIt stores the clean configurations of the renderer."
         },
         "ShaderPass": {
@@ -3657,7 +3695,7 @@
             "module": "THREE",
             "namespace": "",
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 460,
+            "line": 439,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
         },
         "Material": {
@@ -4642,7 +4680,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 13,
+            "line": 14,
             "description": "Array with keyboard keys status.",
             "itemtype": "property",
             "name": "keys",
@@ -4652,7 +4690,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 21,
+            "line": 22,
             "description": "The actions array serves as a buffer for the key input actions.\n\nUntil the update method is called it stores all the key stroke actions.\n\nOn update the key strokes are updated and the keys array stores the correct values.",
             "itemtype": "property",
             "name": "actions",
@@ -4662,7 +4700,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 38,
+            "line": 37,
             "description": "Event manager used to handle the keyup, keydown and focus events.\n\nOn each event actions are added to the actions array.",
             "itemtype": "property",
             "name": "events",
@@ -4672,7 +4710,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 74,
+            "line": 70,
             "description": "Update key flags synchronously.",
             "itemtype": "method",
             "name": "update",
@@ -4681,7 +4719,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 104,
+            "line": 100,
             "description": "Reset keyboard status to default.\n\nDoes not clean the action list.",
             "itemtype": "method",
             "name": "reset",
@@ -4690,7 +4728,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 123,
+            "line": 119,
             "description": "Check if a key is pressed.",
             "itemtype": "method",
             "name": "keyPressed",
@@ -4703,7 +4741,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 134,
+            "line": 130,
             "description": "Check is a key as just pressed.",
             "itemtype": "method",
             "name": "keyJustPressed",
@@ -4716,7 +4754,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 145,
+            "line": 141,
             "description": "Check if a key was just released.",
             "itemtype": "method",
             "name": "keyJustReleased",
@@ -4729,7 +4767,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 156,
+            "line": 152,
             "description": "Create keyboard events.",
             "itemtype": "method",
             "name": "dispose",
@@ -4738,7 +4776,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 166,
+            "line": 162,
             "description": "Dispose keyboard events.",
             "itemtype": "method",
             "name": "dispose",
@@ -4747,7 +4785,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 176,
+            "line": 172,
             "description": "TAB key",
             "itemtype": "attribute",
             "name": "TAB",
@@ -4757,7 +4795,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 183,
+            "line": 179,
             "description": "ENTER key",
             "itemtype": "attribute",
             "name": "ENTER",
@@ -4767,7 +4805,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 190,
+            "line": 186,
             "description": "SHIFT key",
             "itemtype": "attribute",
             "name": "SHIFT",
@@ -4777,7 +4815,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 197,
+            "line": 193,
             "description": "CTRL key",
             "itemtype": "attribute",
             "name": "CTRL",
@@ -4787,7 +4825,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 204,
+            "line": 200,
             "description": "ALT key",
             "itemtype": "attribute",
             "name": "ALT",
@@ -4797,7 +4835,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 211,
+            "line": 207,
             "description": "CAPS_LOCK key",
             "itemtype": "attribute",
             "name": "CAPS_LOCK",
@@ -4807,7 +4845,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 218,
+            "line": 214,
             "description": "ESC key",
             "itemtype": "attribute",
             "name": "ESC",
@@ -4817,7 +4855,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 225,
+            "line": 221,
             "description": "SPACEBAR key",
             "itemtype": "attribute",
             "name": "SPACEBAR",
@@ -4827,7 +4865,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 232,
+            "line": 228,
             "description": "PAGE_UP key",
             "itemtype": "attribute",
             "name": "PAGE_UP",
@@ -4837,7 +4875,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 239,
+            "line": 235,
             "description": "PAGE_DOWN key",
             "itemtype": "attribute",
             "name": "PAGE_DOWN",
@@ -4847,7 +4885,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 246,
+            "line": 242,
             "description": "END key",
             "itemtype": "attribute",
             "name": "END",
@@ -4857,7 +4895,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 253,
+            "line": 249,
             "description": "HOME key",
             "itemtype": "attribute",
             "name": "HOME",
@@ -4867,7 +4905,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 260,
+            "line": 256,
             "description": "INSERT key",
             "itemtype": "attribute",
             "name": "INSERT",
@@ -4877,7 +4915,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 267,
+            "line": 263,
             "description": "DEL key",
             "itemtype": "attribute",
             "name": "DEL",
@@ -4887,7 +4925,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 274,
+            "line": 270,
             "description": "LEFT key",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -4897,7 +4935,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 281,
+            "line": 277,
             "description": "RIGHT key",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -4907,7 +4945,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 288,
+            "line": 284,
             "description": "UP key",
             "itemtype": "attribute",
             "name": "UP",
@@ -4917,7 +4955,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 295,
+            "line": 291,
             "description": "DOWN key",
             "itemtype": "attribute",
             "name": "DOWN",
@@ -4927,7 +4965,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 302,
+            "line": 298,
             "description": "NUM0 key",
             "itemtype": "attribute",
             "name": "NUM0",
@@ -4937,7 +4975,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 309,
+            "line": 305,
             "description": "NUM1 key",
             "itemtype": "attribute",
             "name": "NUM1",
@@ -4947,7 +4985,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 316,
+            "line": 312,
             "description": "NUM2 key",
             "itemtype": "attribute",
             "name": "NUM2",
@@ -4957,7 +4995,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 323,
+            "line": 319,
             "description": "NUM3 key",
             "itemtype": "attribute",
             "name": "NUM3",
@@ -4967,7 +5005,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 330,
+            "line": 326,
             "description": "NUM4 key",
             "itemtype": "attribute",
             "name": "NUM4",
@@ -4977,7 +5015,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 337,
+            "line": 333,
             "description": "NUM5 key",
             "itemtype": "attribute",
             "name": "NUM5",
@@ -4987,7 +5025,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 344,
+            "line": 340,
             "description": "NUM6 key",
             "itemtype": "attribute",
             "name": "NUM6",
@@ -4997,7 +5035,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 351,
+            "line": 347,
             "description": "NUM7 key",
             "itemtype": "attribute",
             "name": "NUM7",
@@ -5007,7 +5045,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 358,
+            "line": 354,
             "description": "NUM8 key",
             "itemtype": "attribute",
             "name": "NUM8",
@@ -5017,7 +5055,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 365,
+            "line": 361,
             "description": "NUM9 key",
             "itemtype": "attribute",
             "name": "NUM9",
@@ -5027,7 +5065,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 372,
+            "line": 368,
             "description": "A key",
             "itemtype": "attribute",
             "name": "A",
@@ -5037,7 +5075,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 379,
+            "line": 375,
             "description": "B key",
             "itemtype": "attribute",
             "name": "B",
@@ -5047,7 +5085,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 386,
+            "line": 382,
             "description": "C key",
             "itemtype": "attribute",
             "name": "C",
@@ -5057,7 +5095,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 393,
+            "line": 389,
             "description": "D key",
             "itemtype": "attribute",
             "name": "D",
@@ -5067,7 +5105,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 400,
+            "line": 396,
             "description": "E key",
             "itemtype": "attribute",
             "name": "E",
@@ -5077,7 +5115,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 407,
+            "line": 403,
             "description": "F key",
             "itemtype": "attribute",
             "name": "F",
@@ -5087,7 +5125,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 414,
+            "line": 410,
             "description": "G key",
             "itemtype": "attribute",
             "name": "G",
@@ -5097,7 +5135,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 421,
+            "line": 417,
             "description": "H key",
             "itemtype": "attribute",
             "name": "H",
@@ -5107,7 +5145,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 428,
+            "line": 424,
             "description": "I key",
             "itemtype": "attribute",
             "name": "I",
@@ -5117,7 +5155,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 435,
+            "line": 431,
             "description": "J key",
             "itemtype": "attribute",
             "name": "J",
@@ -5127,7 +5165,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 442,
+            "line": 438,
             "description": "K key",
             "itemtype": "attribute",
             "name": "K",
@@ -5137,7 +5175,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 449,
+            "line": 445,
             "description": "L key",
             "itemtype": "attribute",
             "name": "L",
@@ -5147,7 +5185,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 456,
+            "line": 452,
             "description": "M key",
             "itemtype": "attribute",
             "name": "M",
@@ -5157,7 +5195,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 463,
+            "line": 459,
             "description": "N key",
             "itemtype": "attribute",
             "name": "N",
@@ -5167,7 +5205,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 470,
+            "line": 466,
             "description": "O key",
             "itemtype": "attribute",
             "name": "O",
@@ -5177,7 +5215,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 477,
+            "line": 473,
             "description": "P key",
             "itemtype": "attribute",
             "name": "P",
@@ -5187,7 +5225,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 484,
+            "line": 480,
             "description": "Q key",
             "itemtype": "attribute",
             "name": "Q",
@@ -5197,7 +5235,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 491,
+            "line": 487,
             "description": "R key",
             "itemtype": "attribute",
             "name": "R",
@@ -5207,7 +5245,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 498,
+            "line": 494,
             "description": "S key",
             "itemtype": "attribute",
             "name": "S",
@@ -5217,7 +5255,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 505,
+            "line": 501,
             "description": "T key",
             "itemtype": "attribute",
             "name": "T",
@@ -5227,7 +5265,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 512,
+            "line": 508,
             "description": "U key",
             "itemtype": "attribute",
             "name": "U",
@@ -5237,7 +5275,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 519,
+            "line": 515,
             "description": "V key",
             "itemtype": "attribute",
             "name": "V",
@@ -5247,7 +5285,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 526,
+            "line": 522,
             "description": "W key",
             "itemtype": "attribute",
             "name": "W",
@@ -5257,7 +5295,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 533,
+            "line": 529,
             "description": "X key",
             "itemtype": "attribute",
             "name": "X",
@@ -5267,7 +5305,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 540,
+            "line": 536,
             "description": "Y key",
             "itemtype": "attribute",
             "name": "Y",
@@ -5277,7 +5315,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 547,
+            "line": 543,
             "description": "Z key",
             "itemtype": "attribute",
             "name": "Z",
@@ -5287,7 +5325,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 554,
+            "line": 550,
             "description": "F1 key",
             "itemtype": "attribute",
             "name": "F1",
@@ -5297,7 +5335,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 561,
+            "line": 557,
             "description": "F2 key",
             "itemtype": "attribute",
             "name": "F2",
@@ -5307,7 +5345,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 568,
+            "line": 564,
             "description": "F3 key",
             "itemtype": "attribute",
             "name": "F3",
@@ -5317,7 +5355,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 575,
+            "line": 571,
             "description": "F4 key",
             "itemtype": "attribute",
             "name": "F4",
@@ -5327,7 +5365,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 582,
+            "line": 578,
             "description": "F5 key",
             "itemtype": "attribute",
             "name": "F5",
@@ -5337,7 +5375,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 589,
+            "line": 585,
             "description": "F6 key",
             "itemtype": "attribute",
             "name": "F6",
@@ -5347,7 +5385,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 596,
+            "line": 592,
             "description": "F7 key",
             "itemtype": "attribute",
             "name": "F7",
@@ -5357,7 +5395,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 603,
+            "line": 599,
             "description": "F8 key",
             "itemtype": "attribute",
             "name": "F8",
@@ -5367,7 +5405,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 610,
+            "line": 606,
             "description": "F9 key",
             "itemtype": "attribute",
             "name": "F9",
@@ -5377,7 +5415,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 617,
+            "line": 613,
             "description": "F10 key",
             "itemtype": "attribute",
             "name": "F10",
@@ -5387,7 +5425,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 624,
+            "line": 620,
             "description": "F11 key",
             "itemtype": "attribute",
             "name": "F11",
@@ -5397,7 +5435,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 631,
+            "line": 627,
             "description": "F12 key",
             "itemtype": "attribute",
             "name": "F12",
@@ -7215,7 +7253,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 38,
+            "line": 37,
             "description": "An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.\n\nUse the supplied bone inverses or calculate the inverses.",
             "itemtype": "property",
             "name": "boneInverses",
@@ -7225,31 +7263,11 @@
         },
         {
             "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 69,
+            "line": 68,
             "description": "The DataTexture holding the bone data when using a vertex texture.",
             "itemtype": "property",
             "name": "boneTexture",
             "type": "{DataTexture}",
-            "class": "Skeleton",
-            "module": "Animation"
-        },
-        {
-            "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 82,
-            "description": "Serialize skeleton to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "Meta.",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "Serialized data.",
-                "type": "Object"
-            },
             "class": "Skeleton",
             "module": "Animation"
         },
@@ -7265,7 +7283,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 39,
+            "line": 32,
+            "description": "WebAudio gain node, used to control the volume.\n\nhttps://developer.mozilla.org/en-US/docs/Web/API/GainNode",
+            "itemtype": "property",
+            "name": "gain",
+            "type": "{GainNode}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 47,
             "description": "Audio source type, can have the following values:\n - empty\n - buffer\n - audioNode",
             "itemtype": "property",
             "name": "sourceType",
@@ -7276,7 +7304,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 52,
+            "line": 59,
+            "description": "Audio source resource.",
+            "itemtype": "property",
+            "name": "audio",
+            "type": "{Audio}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 67,
             "description": "If true the playback starts automatically.",
             "itemtype": "property",
             "name": "autoplay",
@@ -7287,7 +7325,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 61,
+            "line": 76,
             "description": "Audio volume.",
             "itemtype": "property",
             "name": "volume",
@@ -7298,7 +7336,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 70,
+            "line": 85,
             "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "playbackRate",
@@ -7309,7 +7347,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 79,
+            "line": 94,
             "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "startTime",
@@ -7320,7 +7358,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 88,
+            "line": 103,
             "description": "If true the audio plays in loop.",
             "itemtype": "property",
             "name": "loop",
@@ -7331,7 +7369,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 97,
+            "line": 112,
             "description": "Modify pitch, measured in cents. +/- 100 is a semitone. +/- 1200 is an octave.",
             "itemtype": "property",
             "name": "detune",
@@ -7341,7 +7379,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 115,
+            "line": 129,
             "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
@@ -7350,7 +7388,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 138,
+            "line": 156,
             "description": "Set audio buffer to be used by this emitter.",
             "itemtype": "method",
             "name": "setBuffer",
@@ -7370,7 +7408,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 158,
+            "line": 176,
             "description": "Play audio.",
             "itemtype": "method",
             "name": "play",
@@ -7383,7 +7421,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 191,
+            "line": 209,
             "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
@@ -7396,7 +7434,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 206,
+            "line": 224,
             "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
@@ -7409,7 +7447,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 221,
+            "line": 239,
             "description": "Change audio resource.\n\nIf changed after initialization the audio buffer will be disconnected and reintialized.",
             "itemtype": "method",
             "name": "setAudio",
@@ -7425,7 +7463,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 250,
+            "line": 268,
             "description": "Get audio emitter volume.",
             "params": [
                 {
@@ -7441,7 +7479,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 261,
+            "line": 279,
             "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -7461,7 +7499,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 276,
+            "line": 294,
             "description": "Set loop mode. If loop set to True the audio repeats after ending.",
             "itemtype": "method",
             "name": "setLoop",
@@ -7481,7 +7519,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 295,
+            "line": 313,
             "description": "Set detune value.",
             "itemtype": "method",
             "name": "setDetune",
@@ -7501,7 +7539,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 314,
+            "line": 332,
             "description": "Get loop mode.",
             "itemtype": "method",
             "name": "getLoop",
@@ -7514,7 +7552,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 325,
+            "line": 343,
             "description": "Set playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -7534,7 +7572,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 344,
+            "line": 362,
             "description": "Get the playback speed.",
             "itemtype": "method",
             "name": "getPlaybackRate",
@@ -7547,7 +7585,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 355,
+            "line": 373,
             "description": "Get Array with all the filters applied to this audio emitter.",
             "itemtype": "method",
             "name": "getFilters",
@@ -7560,7 +7598,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 366,
+            "line": 384,
             "description": "Set the entire filters array.",
             "itemtype": "method",
             "name": "setFilters",
@@ -7580,7 +7618,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 394,
+            "line": 412,
             "description": "Get a filter to the filters array.",
             "itemtype": "method",
             "name": "getFilter",
@@ -7599,7 +7637,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 406,
+            "line": 424,
             "description": "Set a filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -7615,7 +7653,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 417,
+            "line": 435,
             "description": "Change the source audio node.",
             "itemtype": "method",
             "name": "setNodeSource",
@@ -7635,7 +7673,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 435,
+            "line": 453,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -7648,7 +7686,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 446,
+            "line": 464,
             "description": "Dispose audio object, stops the playback and disconnects audio node.",
             "itemtype": "method",
             "name": "dispose",
@@ -7656,28 +7694,48 @@
             "module": "Audio"
         },
         {
-            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 464,
-            "description": "Serialize object to JSON.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "JSON descrition",
-                "type": "Object"
-            },
-            "class": "AudioEmitter",
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 20,
+            "description": "Distance model to be applied to the audio panner.",
+            "itemtype": "property",
+            "name": "distanceModel",
+            "type": "{String}",
+            "class": "PositionalAudio",
             "module": "Audio"
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 48,
+            "line": 28,
+            "description": "Model to be applied to the audio panner.",
+            "itemtype": "property",
+            "name": "panningModel",
+            "type": "{String}",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 36,
+            "description": "WebAudio panner effect.\n\nhttps://developer.mozilla.org/en-US/docs/Web/API/PannerNode",
+            "itemtype": "property",
+            "name": "panner",
+            "type": "{PannerNode}",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 55,
+            "description": "Runtime pointer to the scene to get the camera list.",
+            "itemtype": "attribute",
+            "name": "scene",
+            "type": "{Scene}",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 73,
             "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
@@ -7686,7 +7744,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 68,
+            "line": 95,
             "description": "Update positional audio panner relative to the camera.",
             "itemtype": "method",
             "name": "update",
@@ -7695,7 +7753,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 98,
+            "line": 125,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -7708,7 +7766,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 109,
+            "line": 136,
             "description": "Get reference distance.",
             "itemtype": "method",
             "name": "getRefDistance",
@@ -7721,7 +7779,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 120,
+            "line": 147,
             "description": "Set reference distance.",
             "itemtype": "method",
             "name": "setRefDistance",
@@ -7737,7 +7795,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 131,
+            "line": 158,
             "description": "Get rolloff factor.",
             "itemtype": "method",
             "name": "getRolloffFactor",
@@ -7750,7 +7808,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 142,
+            "line": 169,
             "description": "Set rolloff factor.",
             "itemtype": "method",
             "name": "setRolloffFactor",
@@ -7766,7 +7824,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 154,
+            "line": 181,
             "description": "Get distance model in use by this audio emitter.",
             "itemtype": "method",
             "name": "getDistanceModel",
@@ -7779,7 +7837,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 165,
+            "line": 192,
             "description": "Set distance model to be used.\n\nDistance model defined how the emitter controls its volume from its position in the world, relative to the camera.\n\nBy default the mode used is \"inverse\", can be also set to:\n - \"linear\": A linear distance model calculating the gain induced by the distance according to\n   - 1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)\n - \"inverse\": An inverse distance model calculating the gain induced by the distance according to:\n   - refDistance / (refDistance + rolloffFactor * (distance - refDistance))\n - \"exponential\": An exponential distance model calculating the gain induced by the distance according to:\n   - pow(distance / refDistance, -rolloffFactor).",
             "itemtype": "method",
             "name": "setDistanceModel",
@@ -7795,7 +7853,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 186,
+            "line": 213,
             "description": "Get maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "getMaxDistance",
@@ -7807,7 +7865,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 197,
+            "line": 224,
             "description": "Set maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "setMaxDistance",
@@ -7818,26 +7876,6 @@
                     "type": "Number"
                 }
             ],
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 208,
-            "description": "Serialize object to JSON.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "JSON descrition",
-                "type": "Object"
-            },
             "class": "PositionalAudio",
             "module": "Audio"
         },
@@ -8012,7 +8050,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 171,
+            "line": 166,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -8021,8 +8059,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 187,
-            "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
+            "line": 182,
+            "description": "Update camera projection matrix.\n\nAlso updates left right, top and bottom values from aspect and size.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
             "class": "OrthographicCamera",
@@ -8127,7 +8165,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 106,
+            "line": 105,
             "description": "Effect composed of this camera. Is used to render the scene to the screen and apply effects.\n\nIt is inialized with a RenderPass attached to it.",
             "itemtype": "property",
             "name": "composer",
@@ -8137,7 +8175,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 120,
+            "line": 119,
             "description": "Render a scene using this camera and the internal EffectComposer.",
             "itemtype": "method",
             "name": "render",
@@ -8158,7 +8196,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 132,
+            "line": 131,
             "description": "Resize this camera, should be called every time after resizing the screen.",
             "itemtype": "method",
             "name": "resize",
@@ -8179,7 +8217,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 149,
+            "line": 143,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -8188,11 +8226,170 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 165,
+            "line": 159,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
             "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 13,
+            "description": "Camera viewport offset.\n\nValues range from 0.0 to 1.0 in screen space when in RELATIVE mode.",
+            "itemtype": "property",
+            "name": "offset",
+            "type": "{THREE.Vector2}",
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 23,
+            "description": "Camera viewport size.\n\nValues range from 0.0 to 1.0 in screen space.",
+            "itemtype": "property",
+            "name": "viewport",
+            "type": "{THREE.Vector2}",
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 33,
+            "description": "Viewport sizing mode.\n\nCan be RELATIVE or ABSOLUTE.",
+            "itemtype": "property",
+            "name": "mode",
+            "type": "{Number}",
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 43,
+            "description": "Positioning anchor of the viewport.",
+            "itemtype": "property",
+            "name": "anchor",
+            "type": "{Number}",
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 52,
+            "description": "Viewport calculated relatively to the screen viewport.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "RELATIVE",
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 60,
+            "description": "Viewport defined absolutely in pixels.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "ABSOLUTE",
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 73,
+            "description": "Get the aspect ratio of this viewport x/y.",
+            "itemtype": "method",
+            "name": "getAspectRatio",
+            "params": [
+                {
+                    "name": "canvas",
+                    "description": "DOM canvas only required to calculate aspect ration on relative sizing.",
+                    "type": "Canvas"
+                }
+            ],
+            "return": {
+                "description": "The aspect ratio of the viewport.",
+                "type": "Number"
+            },
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 90,
+            "description": "Check if the mouse is inside this viewport.",
+            "itemtype": "method",
+            "name": "isInside",
+            "params": [
+                {
+                    "name": "canvas",
+                    "description": "Canvas for offset calculation.",
+                    "type": "DOM"
+                },
+                {
+                    "name": "mouse",
+                    "description": "Mouse object.",
+                    "type": "Mouse"
+                }
+            ],
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 140,
+            "description": "Get normalized coordinates between [-1, 1] for a canvas size and mouse position.\n\nUsefull to use raycasting for object picking in a viewport.",
+            "itemtype": "method",
+            "name": "getNormalized",
+            "return": {
+                "description": "Normalized coordinated of the mouse.",
+                "type": "THREE.Vector2"
+            },
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 194,
+            "description": "Enable this viewport for rendering using a WebGLRenderer\n\nAfter rendering the WebGL renderer has to manually reset to the original values.",
+            "itemtype": "method",
+            "name": "enable",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "THREE.WebGLRenderer"
+                }
+            ],
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 241,
+            "description": "Serializer viewport data to JSON.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "return": {
+                "description": "Serialized viewport object.",
+                "type": "Object"
+            },
+            "class": "Viewport",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
+            "line": 260,
+            "description": "Fill viewport data from serialized JSON data.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Serialized viewport object.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Viewport",
             "module": "Cameras"
         },
         {
@@ -8814,7 +9011,7 @@
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
             "line": 186,
-            "description": "Initialize LeapMotion object.\n\nCalled automatically by the runtime.\n\nConnects to the websocket provided by the leap driver.",
+            "description": "Initialize LeapMotion object.\n\nConnects to the websocket provided by the leap driver.",
             "itemtype": "method",
             "name": "initialize",
             "class": "LeapMotion",
@@ -8822,8 +9019,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 210,
-            "description": "Update leap status.\n\nCalled automatically by the runtime.",
+            "line": 206,
+            "description": "Update leap status.",
             "itemtype": "method",
             "name": "update",
             "class": "LeapMotion",
@@ -8831,7 +9028,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 238,
+            "line": 232,
             "description": "Check if a gesture is occuring, is true while the gesture is occuring.",
             "itemtype": "method",
             "name": "checkGesture",
@@ -8851,7 +9048,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 254,
+            "line": 248,
             "description": "Check if hand is in pose.",
             "itemtype": "method",
             "name": "checkPose",
@@ -8871,7 +9068,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 270,
+            "line": 264,
             "description": "Set hand tracking mode.\n\nCan be set to HDM or Desktop mode.",
             "itemtype": "method",
             "name": "setMode",
@@ -8887,7 +9084,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 283,
+            "line": 277,
             "description": "Update leap object pose flags from collected data.\n\nCalled automatically by the update methos.",
             "itemtype": "method",
             "name": "updatePoses",
@@ -8896,7 +9093,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 359,
+            "line": 353,
             "description": "Update leap object gesture flags from collected data.\n\nCalled automatically by the update method.",
             "itemtype": "method",
             "name": "updateGestures",
@@ -8905,7 +9102,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 432,
+            "line": 426,
             "description": "Update internal hand debug model.\n\nAutomatically called by the update method if debugModel is set to true.",
             "itemtype": "method",
             "name": "updateDebugModel",
@@ -8914,7 +9111,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 512,
+            "line": 506,
             "description": "Get hand speed (temporaly normalized).",
             "itemtype": "method",
             "name": "getMovement",
@@ -9203,15 +9400,6 @@
             "module": "Misc"
         },
         {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 189,
-            "description": "Disposes the CubeCamera.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
             "file": "..\\source\\core\\objects\\misc\\LensFlare.js",
             "line": 231,
             "description": "Add texture to the lensFlare object.",
@@ -9367,17 +9555,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 185,
-            "description": "Initialize sky object.\n\nCalled automatically by the runtime.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "Sky",
-            "module": "Lights"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 199,
-            "description": "Update sky state.\n\nCalled automatically by the runtime.",
+            "line": 192,
+            "description": "Update sky state, updates the time value and the gradient uniform values.",
             "itemtype": "method",
             "name": "update",
             "class": "Sky",
@@ -9385,7 +9564,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\Sky.js",
-            "line": 225,
+            "line": 214,
             "description": "Update sky color and sun position.\n\nIf autoUpdate set to true is automatically called by the update method.",
             "itemtype": "method",
             "name": "updateSky",
@@ -9424,7 +9603,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 55,
+            "line": 56,
             "description": "Texture attached to the group of this particle emitter.",
             "itemtype": "property",
             "name": "texture",
@@ -9434,7 +9613,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 74,
+            "line": 75,
             "description": "Default particle emitter configuration.",
             "itemtype": "attribute",
             "name": "defaultEmitter",
@@ -9444,7 +9623,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 95,
+            "line": 96,
             "description": "Default particle emitter group configuration.",
             "itemtype": "attribute",
             "name": "defaultGroup",
@@ -9454,7 +9633,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 116,
+            "line": 117,
             "description": "Reload internal material and geometry of this particle emitter.\n\nRecretes the group and emitter object attached to the particle.\n\nMay be required after changing material related parameters.",
             "itemtype": "method",
             "name": "reload",
@@ -9463,7 +9642,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 140,
+            "line": 141,
             "description": "Update particle object matrix.\n\nIgnores the particle position if the moveEmitter attribute is set true.",
             "itemtype": "method",
             "name": "updateMatrix",
@@ -9472,7 +9651,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 162,
+            "line": 163,
             "description": "Particle emitter state is automatically updated before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -9481,7 +9660,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 178,
+            "line": 179,
             "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
@@ -9490,7 +9669,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 192,
+            "line": 193,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9531,7 +9710,7 @@
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
             "line": 61,
-            "description": "Intialize physics object and add it to the scene physics world.\n\nAutomatically called by the runtime.",
+            "description": "Intialize physics object and add it to the scene physics world.",
             "itemtype": "method",
             "name": "initialize",
             "class": "PhysicsObject",
@@ -9539,8 +9718,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 95,
-            "description": "Update object position and rotation based on cannon.js body.\n\nAutomatically called by the runtime.",
+            "line": 92,
+            "description": "Update object position and rotation based on cannon.js body.",
             "itemtype": "method",
             "name": "update",
             "class": "PhysicsObject",
@@ -9548,7 +9727,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 114,
+            "line": 108,
             "description": "Add shape to physics object body.",
             "params": [
                 {
@@ -9564,7 +9743,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 128,
+            "line": 122,
             "description": "Create JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9743,7 +9922,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 224,
+            "line": 221,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -9752,7 +9931,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 250,
+            "line": 247,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -9761,7 +9940,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 267,
+            "line": 264,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -9770,7 +9949,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 287,
+            "line": 279,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -9786,7 +9965,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 303,
+            "line": 295,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "compileCode",
@@ -9807,7 +9986,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 85,
+            "line": 83,
             "description": "Spine animation data.",
             "itemtype": "property",
             "name": "json",
@@ -9817,7 +9996,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 93,
+            "line": 91,
             "description": "Texture atlas information.",
             "itemtype": "property",
             "name": "atlas",
@@ -9827,7 +10006,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 101,
+            "line": 99,
             "description": "Array of SpineTextures used by the animation.",
             "itemtype": "property",
             "name": "textures",
@@ -9837,7 +10016,47 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 107,
+            "description": "The animation can have multiple skins that define diferent sets of textures for the same animation.",
+            "itemtype": "attribute",
+            "name": "skin",
+            "type": "{Object}",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 115,
+            "description": "Animation currently playing, animations are split into tracks.\n\nAn animation (e.g. walk) can be composed of multiple tracks.",
+            "itemtype": "attribute",
+            "name": "animation",
+            "type": "{Object}",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 125,
+            "description": "Index of the animation track playing.",
+            "itemtype": "attribute",
+            "name": "track",
+            "type": "{Number}",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 133,
+            "description": "Indicates the loop mode of the animation if set true the animation starts again after it ends.",
+            "itemtype": "attribute",
+            "name": "loop",
+            "type": "{Boolean}",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 150,
             "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -9846,7 +10065,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 138,
+            "line": 163,
             "description": "Play animation.",
             "itemtype": "method",
             "name": "play",
@@ -9855,7 +10074,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 157,
+            "line": 182,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -9868,7 +10087,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 168,
+            "line": 193,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -9894,7 +10113,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 194,
+            "line": 219,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -9907,7 +10126,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 205,
+            "line": 230,
             "description": "Set skin to be used by this animation",
             "itemtype": "method",
             "name": "setSkin",
@@ -9928,15 +10147,6 @@
             "itemtype": "property",
             "name": "material",
             "type": "{Material}",
-            "class": "Sprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
-            "line": 31,
-            "description": "Dispose the sprite material.",
-            "itemtype": "method",
-            "name": "dispose",
             "class": "Sprite",
             "module": "Sprite"
         },
@@ -9962,7 +10172,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 47,
+            "line": 50,
             "description": "Size of the sprite.\n\nIf configured as relative to the screen (from 0 to 1) or absolutely in px.",
             "itemtype": "attribute",
             "name": "size",
@@ -9972,7 +10182,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 57,
+            "line": 60,
             "description": "Sizing mode, can be relative of absolute.",
             "itemtype": "attribute",
             "name": "resizeMode",
@@ -9982,7 +10192,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 69,
+            "line": 72,
             "description": "Relative sizing is done relative to the screen height.",
             "static": 1,
             "itemtype": "attribute",
@@ -9993,7 +10203,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 78,
+            "line": 81,
             "description": "Scaled sizing is done relative to the camera position.\n\nIs similar to the RELATIVE sizing but the actual sprite size is recalculated (slower) but allows for raytracing to be performed properly.",
             "static": 1,
             "itemtype": "attribute",
@@ -10004,7 +10214,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 89,
+            "line": 92,
             "description": "Absolute sizing is performed directly in px.",
             "static": 1,
             "itemtype": "attribute",
@@ -10015,7 +10225,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 98,
+            "line": 101,
             "description": "Redraw the content on the canvas.\n\nShould be called everytime that information that needs to be displayed is updated.\n\nWhen relative scalling is enabled size changed should be applied here.",
             "itemtype": "method",
             "name": "draw",
@@ -10024,7 +10234,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 109,
+            "line": 112,
             "description": "Set the sizing mode for this canvas.",
             "itemtype": "method",
             "name": "setSizingMode",
@@ -10449,7 +10659,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 30,
+            "line": 33,
             "description": "Scale of the object.",
             "itemtype": "attribute",
             "name": "size",
@@ -10459,7 +10669,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 42,
+            "line": 45,
             "description": "CSS Font style to be used.",
             "itemtype": "attribute",
             "name": "font",
@@ -10469,7 +10679,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 54,
+            "line": 57,
             "description": "Horizontal text alignment can be\n   - TextSprite.LEFT\n   - TextSprite.RIGHT\n   - TextSprite.CENTER",
             "itemtype": "attribute",
             "name": "align",
@@ -10479,7 +10689,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 69,
+            "line": 72,
             "description": "CSS color of the text.",
             "itemtype": "attribute",
             "name": "color",
@@ -10489,7 +10699,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 81,
+            "line": 84,
             "description": "Text of this object.",
             "itemtype": "attribute",
             "name": "text",
@@ -10499,7 +10709,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 100,
+            "line": 103,
             "description": "Indicates if the text has an outline border.",
             "itemtype": "attribute",
             "name": "outline",
@@ -10509,7 +10719,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 112,
+            "line": 115,
             "description": "CSS color of the outline.",
             "itemtype": "attribute",
             "name": "outlineColor",
@@ -10519,7 +10729,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 124,
+            "line": 127,
             "description": "Width of the text outline.",
             "itemtype": "attribute",
             "name": "outlineWidth",
@@ -10529,7 +10739,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 136,
+            "line": 139,
             "description": "Vertical resolution of the texture created from canvas used.\n\nShould always be a npot of 2.",
             "itemtype": "attribute",
             "name": "resolution",
@@ -10539,7 +10749,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 159,
+            "line": 162,
             "description": "Align text to the left side.",
             "static": 1,
             "itemtype": "attribute",
@@ -10550,7 +10760,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 168,
+            "line": 171,
             "description": "Align text to the center.",
             "static": 1,
             "itemtype": "attribute",
@@ -10561,7 +10771,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 177,
+            "line": 180,
             "description": "Align text to the right side.",
             "static": 1,
             "itemtype": "attribute",
@@ -10572,7 +10782,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 186,
+            "line": 189,
             "description": "Set the text to be displayed.",
             "itemtype": "method",
             "name": "setText",
@@ -10588,7 +10798,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 197,
+            "line": 200,
             "description": "Update the canvas texture.\n\nRedraw text into the canvas and update scale.",
             "itemtype": "method",
             "name": "updateCanvas",
@@ -10597,8 +10807,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 22,
-            "description": "NunuRuntime instance used to communication between nunu app and the host webpage.\nInside the editor communication with the app is simulated on the debug console.",
+            "line": 23,
+            "description": "NunuRuntime instance used to communication between nunu app and the host webpage.\n\nInside the editor communication with the app is simulated on the debug console.",
             "itemtype": "property",
             "name": "app",
             "type": "{NunuApp}",
@@ -10607,7 +10817,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 30,
+            "line": 33,
             "description": "Program name.",
             "itemtype": "property",
             "name": "name",
@@ -10617,8 +10827,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 37,
-            "description": "Program description",
+            "line": 40,
+            "description": "Program description.",
             "itemtype": "property",
             "name": "description",
             "type": "{String}",
@@ -10627,8 +10837,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 44,
-            "description": "Program author",
+            "line": 48,
+            "description": "Program author.",
             "itemtype": "property",
             "name": "author",
             "type": "{String}",
@@ -10637,8 +10847,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 51,
-            "description": "Program version",
+            "line": 56,
+            "description": "Program version.",
             "itemtype": "property",
             "name": "version",
             "type": "{String}",
@@ -10648,8 +10858,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 59,
-            "description": "Flag to control pointer locking",
+            "line": 65,
+            "description": "Flag to control pointer locking.",
             "itemtype": "property",
             "name": "lockPointer",
             "type": "{boolean}",
@@ -10659,8 +10869,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 67,
-            "description": "Flag to indicate if the runtime should handle device pixel ratio",
+            "line": 74,
+            "description": "Flag to indicate if the runtime should handle device pixel ratio.",
             "itemtype": "property",
             "name": "handlePixelRatio",
             "type": "{boolean}",
@@ -10670,8 +10880,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 75,
-            "description": "Enable virtual reality flag",
+            "line": 83,
+            "description": "Enable virtual reality flag.",
             "itemtype": "property",
             "name": "vr",
             "default": "false",
@@ -10681,8 +10891,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 83,
-            "description": "Virtual reality movement scale",
+            "line": 92,
+            "description": "Virtual reality movement scale.\n\nIndicates the relation between the real movement and virtual world movement.",
             "itemtype": "property",
             "name": "vrScale",
             "type": "{Number}",
@@ -10692,8 +10902,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 91,
-            "description": "Antialiasing flag",
+            "line": 103,
+            "description": "Antialiasing flag.",
             "itemtype": "property",
             "name": "antialiasing",
             "type": "{boolean}",
@@ -10703,7 +10913,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 99,
+            "line": 112,
             "description": "If true the program is rendered with shadows",
             "itemtype": "property",
             "name": "shadows",
@@ -10714,8 +10924,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 107,
-            "description": "Shadow type",
+            "line": 120,
+            "description": "Shadow map filtering type.",
             "itemtype": "property",
             "name": "shadowsType",
             "type": "{Number}",
@@ -10725,19 +10935,59 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 115,
-            "description": "Tonemapping mode",
+            "line": 129,
+            "description": "Tone mapping mode.",
             "itemtype": "property",
             "name": "toneMapping",
             "type": "{Number}",
-            "default": "NoToneMapping",
+            "default": "THREE.NoToneMapping",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 130,
-            "description": "Keyboard input object",
+            "line": 138,
+            "description": "Exposure level of tone mapping.",
+            "itemtype": "property",
+            "name": "toneMappingExposure",
+            "type": "{Number}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 146,
+            "description": "Tone mapping white point.",
+            "itemtype": "property",
+            "name": "toneMappingWhitePoint",
+            "type": "{Number}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 154,
+            "description": "Scene loaded as default on startup.",
+            "itemtype": "property",
+            "name": "defaultScene",
+            "type": "{THREE.Scene}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 162,
+            "description": "Default camera to be used by scenes where there is no camera.\n\nOn the editor this value is automatically set to the last editor camera point used",
+            "itemtype": "property",
+            "name": "defaultCamera",
+            "type": "{THREE.Camera}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 172,
+            "description": "Keyboard input object.",
             "itemtype": "property",
             "name": "keyboard",
             "type": "{Keyboard}",
@@ -10746,8 +10996,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 137,
-            "description": "Mouse input object",
+            "line": 180,
+            "description": "Mouse input object.",
             "itemtype": "property",
             "name": "mouse",
             "type": "{Mouse}",
@@ -10756,7 +11006,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 144,
+            "line": 188,
             "description": "Renderer being used during runtime.",
             "itemtype": "property",
             "name": "renderer",
@@ -10766,8 +11016,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 151,
-            "description": "Scene currently in use.",
+            "line": 196,
+            "description": "Scene currently running in the program.",
             "itemtype": "property",
             "name": "scene",
             "type": "{Scene}",
@@ -10776,7 +11026,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 158,
+            "line": 204,
             "description": "Canvas being used to draw content.\n\nThis canvas is where the WebGL rendering context was created.",
             "itemtype": "property",
             "name": "canvas",
@@ -10786,7 +11036,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 167,
+            "line": 214,
             "description": "DOM Division element that can be used to add html content to the app.\n\nAll content added to this division should be manually removed before the app exits.",
             "itemtype": "property",
             "name": "division",
@@ -10796,7 +11046,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 196,
+            "line": 230,
+            "description": "Event manager used to handle VR display presentation change event.",
+            "itemtype": "property",
+            "name": "manager",
+            "type": "{EventManager}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 248,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -10805,7 +11065,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 248,
+            "line": 300,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -10826,7 +11086,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 261,
+            "line": 313,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -10847,7 +11107,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 282,
+            "line": 334,
             "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
@@ -10856,7 +11116,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 292,
+            "line": 344,
             "description": "Render current scene to canvas.\n\nWhen rendering in VR mode all effects and camera parameters are ignored.\n\nRenderer should be initialized and passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -10872,7 +11132,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 321,
+            "line": 373,
             "description": "Resize the current scene elements.",
             "itemtype": "method",
             "name": "resize",
@@ -10893,7 +11153,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 353,
+            "line": 397,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -10902,7 +11162,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 372,
+            "line": 416,
             "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "displayVR",
@@ -10911,7 +11171,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 400,
+            "line": 444,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -10920,14 +11180,14 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 414,
+            "line": 458,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
             "params": [
                 {
                     "name": "scene",
-                    "description": "",
+                    "description": "Scene object or name of the scene to be used.",
                     "type": "Scene|String"
                 }
             ],
@@ -10936,7 +11196,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 444,
+            "line": 493,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -10952,7 +11212,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 466,
+            "line": 530,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -10968,7 +11228,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 494,
+            "line": 557,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -10981,7 +11241,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 507,
+            "line": 570,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -10997,7 +11257,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 520,
+            "line": 583,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -11006,7 +11266,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 559,
+            "line": 612,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -11022,7 +11282,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 586,
+            "line": 639,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -11038,14 +11298,14 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 611,
-            "description": "Serialize object to JSON.",
+            "line": 664,
+            "description": "Serialize the object to JSON format.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
                 {
                     "name": "meta",
-                    "description": "",
+                    "description": "Metadata object passed to the objects and resources toJSON method to store data.",
                     "type": "Object"
                 },
                 {
@@ -11055,7 +11315,7 @@
                 }
             ],
             "return": {
-                "description": "json",
+                "description": "json Serialized JSON data containing the program, all scenes and resources stored.",
                 "type": "Object"
             },
             "class": "Program",
@@ -11067,71 +11327,119 @@
             "description": "Cannon.js world used for physics simulation.\n\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\n\nDocumentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.",
             "itemtype": "property",
             "name": "world",
-            "type": "World",
+            "type": "{CANNON.World}",
             "class": "Scene",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 52,
-            "description": "Raycaster used for mouse interaction with 3D objects.\n\nThis raycaster is automatically updated using the first camera being drawn.",
+            "line": 46,
+            "description": "Background of the scene.\n\nThe background of the scene is drawn after the renderer clears the buffers.\n\nIt can be a color, a texture or a cubemap.",
             "itemtype": "property",
-            "name": "raycaster",
-            "type": "Raycaster",
+            "name": "background",
+            "type": "{THREE.Color|THREE.Texture}",
             "class": "Scene",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 61,
-            "description": "Program that contains this scene.",
+            "line": 58,
+            "description": "List of active cameras currently being displayed.\n\nThe cameras are rendered by their render order.",
             "itemtype": "property",
-            "name": "program",
-            "type": "Program",
+            "name": "cameras",
+            "type": "{Array}",
             "class": "Scene",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
             "line": 68,
+            "description": "Default camera of the scene used where there is no active camera.\n\nWhile using the editor the scene default camera gets set as the last camera configuration used.",
+            "itemtype": "property",
+            "name": "defaultCamera",
+            "type": "{THREE.Camera}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 78,
+            "description": "Clock object used to measure times between frames.",
+            "itemtype": "property",
+            "name": "clock",
+            "type": "{THREE.Clock}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 86,
+            "description": "Stores the time since the last frame.",
+            "itemtype": "property",
+            "name": "delta",
+            "type": "{Number}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 94,
+            "description": "Raycaster used for mouse interaction with 3D objects.\n\nThis raycaster is automatically updated using the first camera being drawn.",
+            "itemtype": "property",
+            "name": "raycaster",
+            "type": "{THREE.Raycaster}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 104,
+            "description": "Program that contains this scene.",
+            "itemtype": "property",
+            "name": "program",
+            "type": "{Program}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 112,
             "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
-            "type": "DOM",
+            "type": "{DOM}",
             "class": "Scene",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 75,
+            "line": 120,
             "description": "Normalized mouse coordinates used by the scene internal raycaster.",
             "itemtype": "property",
             "name": "mouse",
-            "type": "Vector2",
+            "type": "{THREE.Vector2}",
             "class": "Scene",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 87,
-            "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "Scene",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 106,
-            "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
+            "line": 151,
+            "description": "Update scene objects and the physics world.",
             "itemtype": "method",
             "name": "update",
+            "params": [
+                {
+                    "name": "delta",
+                    "description": "The time since the last frame.",
+                    "type": "Number"
+                }
+            ],
             "class": "Scene",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 134,
+            "line": 216,
             "description": "Render scene using all active cameras.",
             "itemtype": "method",
             "name": "render",
@@ -11147,7 +11455,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 165,
+            "line": 253,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -11167,7 +11475,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 197,
+            "line": 285,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -11183,7 +11491,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 212,
+            "line": 300,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -11192,7 +11500,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 227,
+            "line": 315,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -11208,7 +11516,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 242,
+            "line": 330,
             "description": "Check is camera is active.",
             "params": [
                 {
@@ -11224,8 +11532,10 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 254,
-            "description": "Set scene fog mode.",
+            "line": 342,
+            "description": "Set scene fog mode.\n\nIt recreates the fog object attached to the scene and set the same color.",
+            "itemtype": "method",
+            "name": "setFogMode",
             "params": [
                 {
                     "name": "mode",
@@ -11233,8 +11543,6 @@
                     "type": "Number"
                 }
             ],
-            "itemtype": "method",
-            "name": "setFogMode",
             "class": "Scene",
             "module": "Core"
         },
@@ -11270,7 +11578,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 146,
+            "line": 145,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11522,7 +11830,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 311,
+            "line": 315,
             "description": "Render a quad scene using a pass material.",
             "itemtype": "method",
             "name": "renderPass",
@@ -11531,7 +11839,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 338,
+            "line": 349,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -11552,7 +11860,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 355,
+            "line": 366,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11644,7 +11952,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 119,
+            "line": 122,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -11665,7 +11973,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 132,
+            "line": 135,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11741,7 +12049,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 301,
+            "line": 311,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11790,7 +12098,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 65,
+            "line": 68,
             "description": "Swap rendering buffers.\n\nUsed to make the output buffer of a render pass the input of the next one.",
             "itemtype": "method",
             "name": "swapBuffers",
@@ -11799,7 +12107,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 79,
+            "line": 82,
             "description": "Add new pass to the composer.",
             "itemtype": "method",
             "name": "addPass",
@@ -11815,7 +12123,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 90,
+            "line": 93,
             "description": "Move pass back in the list of render passes.\n\nMoving back means that the pass is rendered earlier in the pipeline.",
             "itemtype": "method",
             "name": "moveBack",
@@ -11835,7 +12143,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 117,
+            "line": 120,
             "description": "Move pass forward in the list of render passes.\n\nMoving forward in the list means being renderer later down the pipeline.",
             "itemtype": "method",
             "name": "moveForward",
@@ -11855,7 +12163,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 144,
+            "line": 147,
             "description": "Remove pass from this composer, if pass is not found nothing happens.",
             "itemtype": "method",
             "name": "removePass",
@@ -11871,7 +12179,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 159,
+            "line": 162,
             "description": "Insert new pass into the composer in a specific position.",
             "itemtype": "method",
             "name": "insertPass",
@@ -11892,7 +12200,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 171,
+            "line": 174,
             "description": "Render a scene using this effect composer and a renderer.",
             "itemtype": "method",
             "name": "render",
@@ -11918,7 +12226,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 252,
+            "line": 242,
             "description": "Set rendering size for the composer.\n\nAlso updates the size for all passes attached to the composer.",
             "itemtype": "method",
             "name": "setSize",
@@ -11939,7 +12247,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 278,
+            "line": 268,
             "description": "Reset this effect composer.",
             "itemtype": "method",
             "name": "reset",
@@ -11948,7 +12256,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 292,
+            "line": 282,
             "description": "Dispose this effect composer.",
             "itemtype": "method",
             "name": "dispose",
@@ -11957,7 +12265,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 306,
+            "line": 296,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11966,7 +12274,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 326,
+            "line": 316,
             "description": "Create a new effect composer loaded from json data.",
             "static": 1,
             "itemtype": "method",
@@ -12196,10 +12504,10 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 28,
+            "line": 23,
             "description": "Store the renderer state.",
             "itemtype": "method",
-            "name": "store",
+            "name": "backup",
             "params": [
                 {
                     "name": "renderer",
@@ -12212,7 +12520,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 47,
+            "line": 40,
             "description": "Restore the renderer state.",
             "itemtype": "method",
             "name": "restore",
@@ -12846,6 +13154,15 @@
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
             "line": 118,
+            "description": "Dispose all the resources present in the resource manager.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 143,
             "description": "Searches the object and all its children for resources that still dont exist in the resource manager.\n\nStores them in a resource container object that is returned.",
             "static": 1,
             "itemtype": "method",
@@ -12876,7 +13193,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 308,
+            "line": 333,
             "description": "Add resource (of any type) to category.",
             "itemtype": "method",
             "name": "addRes",
@@ -12897,7 +13214,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 336,
+            "line": 361,
             "description": "Remove resource of any type from category.",
             "itemtype": "method",
             "name": "removeRes",
@@ -12928,7 +13245,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 372,
+            "line": 397,
             "description": "Get resource by name.",
             "itemtype": "method",
             "name": "getResourceByName",
@@ -12948,7 +13265,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 393,
+            "line": 418,
             "description": "Add resource to resources manager.",
             "itemtype": "method",
             "name": "addResource",
@@ -12964,7 +13281,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 407,
+            "line": 432,
             "description": "Remove resource from font list.",
             "itemtype": "method",
             "name": "removeResource",
@@ -12980,7 +13297,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 418,
+            "line": 443,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -13000,7 +13317,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 439,
+            "line": 464,
             "description": "Remove image.",
             "params": [
                 {
@@ -13016,7 +13333,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 454,
+            "line": 479,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -13036,7 +13353,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 475,
+            "line": 500,
             "description": "Remove video.",
             "params": [
                 {
@@ -13052,7 +13369,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 489,
+            "line": 514,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -13072,7 +13389,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 510,
+            "line": 535,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -13088,7 +13405,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 524,
+            "line": 549,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -13114,7 +13431,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 565,
+            "line": 590,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -13134,7 +13451,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 586,
+            "line": 611,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -13150,7 +13467,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 600,
+            "line": 625,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -13175,7 +13492,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 687,
+            "line": 712,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -13195,7 +13512,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 708,
+            "line": 733,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -13211,7 +13528,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 722,
+            "line": 747,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -13232,7 +13549,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 750,
+            "line": 775,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -13252,7 +13569,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 771,
+            "line": 796,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -13268,7 +13585,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 785,
+            "line": 810,
             "description": "Remove audio.",
             "params": [
                 {
@@ -14400,7 +14717,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 89,
+            "line": 84,
             "description": "Update the object state.\n\nCalled every time before rendering into the screen.",
             "itemtype": "method",
             "name": "update",
@@ -14416,7 +14733,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 110,
+            "line": 100,
             "description": "Resize this object, called everytime the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -14437,7 +14754,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 125,
+            "line": 109,
             "description": "Disposes the object from memory.\n\nShould be called when the object is no longer required to avoid memory leaks.",
             "itemtype": "method",
             "name": "dispose",
@@ -14446,7 +14763,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 145,
+            "line": 124,
             "description": "Add object as children of this object above the indicated children",
             "itemtype": "method",
             "name": "addAbove",
@@ -14467,7 +14784,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 182,
+            "line": 161,
             "description": "Add object as children of this object bellow the indicated children",
             "itemtype": "method",
             "name": "addBellow",
@@ -14488,7 +14805,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 219,
+            "line": 198,
             "description": "Get scene that contains this object.",
             "itemtype": "method",
             "name": "getScene",
@@ -14501,7 +14818,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 242,
+            "line": 221,
             "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
@@ -14510,7 +14827,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 255,
+            "line": 234,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -14523,7 +14840,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 266,
+            "line": 245,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
@@ -14532,7 +14849,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 290,
+            "line": 269,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14562,7 +14879,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 471,
+            "line": 450,
             "description": "Array with object's children.",
             "itemtype": "property",
             "name": "children",
@@ -14572,7 +14889,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 476,
+            "line": 455,
             "description": "When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.",
             "itemtype": "property",
             "name": "frustumCulled",
@@ -14583,7 +14900,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 482,
+            "line": 461,
             "description": "The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.",
             "itemtype": "property",
             "name": "layers",
@@ -14593,7 +14910,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 487,
+            "line": 466,
             "description": "The local transform matrix",
             "itemtype": "property",
             "name": "matrix",
@@ -14603,7 +14920,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 492,
+            "line": 471,
             "description": "When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.",
             "itemtype": "property",
             "name": "matrixAutoUpdate",
@@ -14614,7 +14931,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 498,
+            "line": 477,
             "description": "The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.",
             "itemtype": "property",
             "name": "matrixWorld",
@@ -14624,7 +14941,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 503,
+            "line": 482,
             "description": "Name of the object (doesn't need to be unique).",
             "itemtype": "property",
             "name": "name",
@@ -14634,7 +14951,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 508,
+            "line": 487,
             "description": "The object's local position.",
             "itemtype": "property",
             "name": "position",
@@ -14644,7 +14961,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 513,
+            "line": 492,
             "description": "Object's local rotation as a Quaternion.",
             "itemtype": "property",
             "name": "quaternion",
@@ -14654,7 +14971,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 518,
+            "line": 497,
             "description": "Object's local rotation (see Euler angles), in radians.",
             "itemtype": "property",
             "name": "rotation",
@@ -14664,7 +14981,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 523,
+            "line": 502,
             "description": "The object's local scale.",
             "itemtype": "property",
             "name": "scale",
@@ -14674,7 +14991,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 528,
+            "line": 507,
             "description": "This is used by the lookAt method, for example, to determine the orientation of the result.",
             "itemtype": "property",
             "name": "up",
@@ -14684,7 +15001,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 533,
+            "line": 512,
             "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
             "itemtype": "property",
             "name": "uuid",
@@ -14694,7 +15011,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 538,
+            "line": 517,
             "description": "Object gets rendered if true.",
             "itemtype": "property",
             "name": "visible",
@@ -14705,7 +15022,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 544,
+            "line": 523,
             "description": "This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.",
             "itemtype": "property",
             "name": "renderOrder",
@@ -14716,7 +15033,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 550,
+            "line": 529,
             "description": "Whether the object gets rendered into shadow map.",
             "itemtype": "property",
             "name": "castShadow",
@@ -14727,7 +15044,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 556,
+            "line": 535,
             "description": "Whether the material receives shadows.",
             "itemtype": "property",
             "name": "receiveShadow",
@@ -14738,7 +15055,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 562,
+            "line": 541,
             "description": "Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.",
             "itemtype": "property",
             "name": "userData",
@@ -14748,7 +15065,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 567,
+            "line": 546,
             "description": "Array with the animations available in this object.\n\nEach position contains an AnimationClip that has name, tracks, duration and uuid.",
             "itemtype": "property",
             "name": "animations",
@@ -14758,7 +15075,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 576,
+            "line": 555,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -14774,7 +15091,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 582,
+            "line": 561,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -14790,7 +15107,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 588,
+            "line": 567,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -14806,7 +15123,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 594,
+            "line": 573,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -14822,7 +15139,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 600,
+            "line": 579,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -14838,7 +15155,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 606,
+            "line": 585,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -14854,7 +15171,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 612,
+            "line": 591,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -14870,7 +15187,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 618,
+            "line": 597,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -14891,7 +15208,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 625,
+            "line": 604,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -14907,7 +15224,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 631,
+            "line": 610,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -14928,7 +15245,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 638,
+            "line": 617,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -14947,7 +15264,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 644,
+            "line": 623,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -14963,7 +15280,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 650,
+            "line": 629,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -14979,7 +15296,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 656,
+            "line": 635,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -14995,7 +15312,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 662,
+            "line": 641,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -15016,7 +15333,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 669,
+            "line": 648,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -15032,7 +15349,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 675,
+            "line": 654,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -15048,7 +15365,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 681,
+            "line": 660,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -16250,7 +16567,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 112,
+            "line": 117,
             "description": "Read a local or remote file as arraybuffer data.\n\nWhen running on desktop uses nodejs to access files, on the web performs a http GET request.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
@@ -16290,7 +16607,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 186,
+            "line": 195,
             "description": "Read a local or remote file as base64 data.\n\nWhen running on desktop uses nodejs to access files, on the web performs a http GET request.",
             "itemtype": "method",
             "name": "readFileBase64",
@@ -16330,7 +16647,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 261,
+            "line": 272,
             "description": "Write text to a file.\n\nWhen running on the web it writes file to a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
@@ -16361,7 +16678,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 320,
+            "line": 331,
             "description": "Write binary file using base64 data.\n\nIf running on the web writes the file into a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFileBase64",
@@ -16392,7 +16709,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 383,
+            "line": 394,
             "description": "Write binary file using arraybuffer data. \n\nIf running on the web writes the file into a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFileArrayBuffer",
@@ -16423,7 +16740,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 445,
+            "line": 456,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.\n\nThe onLoad callback receives an array of files as parameter.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -16454,7 +16771,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 493,
+            "line": 504,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -16475,7 +16792,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 520,
+            "line": 531,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -16496,7 +16813,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 547,
+            "line": 558,
             "description": "Make a directory (dont throw exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -16512,7 +16829,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 564,
+            "line": 575,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -16525,7 +16842,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 590,
+            "line": 601,
             "description": "Delete folders and all subfolders.\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "deleteFolder",
@@ -16541,7 +16858,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 623,
+            "line": 634,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -16562,7 +16879,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 667,
+            "line": 678,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -16582,7 +16899,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 688,
+            "line": 699,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -16602,7 +16919,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 710,
+            "line": 721,
             "description": "Get file name with extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.d.",
             "itemtype": "method",
             "name": "getFileNameWithExtension",
@@ -16622,7 +16939,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 732,
+            "line": 743,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -16642,7 +16959,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 751,
+            "line": 762,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -16662,7 +16979,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 773,
+            "line": 784,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -16900,7 +17217,16 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 253,
+            "line": 254,
+            "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
+            "itemtype": "method",
+            "name": "openWebpage",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 275,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -16913,23 +17239,14 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 266,
-            "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
-            "itemtype": "method",
-            "name": "openWebpage",
-            "class": "Nunu",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\core\\Nunu.js",
-            "line": 287,
-            "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUse isFullscreen to check if the application is running in fullscreen mode already.",
+            "line": 289,
+            "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUses isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",
             "params": [
                 {
-                    "name": "enable",
-                    "description": "If true the application will enter fullscreen mode, if false it will exit.",
+                    "name": "fullscreen",
+                    "description": "If true the application will enter fullscreen mode, if false it will exit, if undefine it will toggle the value.",
                     "type": "Boolean"
                 },
                 {

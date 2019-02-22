@@ -230,7 +230,7 @@ function Program(name)
 	/**
 	 * Event manager used to handle VR display presentation change event.
 	 *
-	 * @propety manager
+	 * @property manager
 	 * @type {EventManager}
 	 */
 	this.manager = new EventManager();

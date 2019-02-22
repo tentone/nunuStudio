@@ -136,6 +136,7 @@
 								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
 								<li><a href="../classes/VideoStream.html">VideoStream</a></li>
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
+								<li><a href="../classes/Viewport.html">Viewport</a></li>
 								<li><a href="../classes/VRControls.html">VRControls</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
 							</ul>
@@ -309,10 +310,6 @@
 														<a href="#method_setVolume">setVolume</a>
 						
 													</li>
-													<li class="index-item method">
-														<a href="#method_toJSON">toJSON</a>
-						
-													</li>
 											</ul>
 										</div>
 						
@@ -321,11 +318,19 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
+														<a href="#property_audio">audio</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_autoplay">autoplay</a>
 						
 													</li>
 													<li class="index-item property">
 														<a href="#property_detune">detune</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_gain">gain</a>
 						
 													</li>
 													<li class="index-item property">
@@ -713,7 +718,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Pauses audio playback.</p>
+													<p>Stops audio playback and resets time to 0.</p>
 											
 												</div>
 											
@@ -753,7 +758,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Stops audio playback and resets time to 0.</p>
+													<p>Pauses audio playback.</p>
 											
 												</div>
 											
@@ -1347,22 +1352,14 @@
 													</div>
 											
 											</div>
-											<div id="method_toJSON" class="method item">
-												<h3 class="name"><code>toJSON</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>meta</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Object</span>
-													</span>
-											
-											
+									</div>
+						
+									<div id="properties" class="api-class-tabpanel">
+										<h2 class="off-left">Properties</h2>
+						
+											<div id="property_audio" class="property item">
+												<h3 class="name"><code>audio</code></h3>
+												<span class="type"><a href="../classes/Audio.html" class="crosslink">Audio</a></span>
 											
 											
 											
@@ -1373,47 +1370,16 @@
 													</p>
 											
 											
-											
 												</div>
 											
 												<div class="description">
-													<p>Serialize object to JSON.</p>
+													<p>Audio source resource.</p>
 											
 												</div>
 											
-													<div class="params">
-														<h4>Parameters:</h4>
 											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">meta</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Object</span>:
-																<p>JSON descrition</p>
-											
-														</div>
-													</div>
 											
 											</div>
-									</div>
-						
-									<div id="properties" class="api-class-tabpanel">
-										<h2 class="off-left">Properties</h2>
-						
 											<div id="property_autoplay" class="property item">
 												<h3 class="name"><code>autoplay</code></h3>
 												<span class="type">Boolean</span>
@@ -1455,6 +1421,30 @@
 											
 												<div class="description">
 													<p>Modify pitch, measured in cents. +/- 100 is a semitone. +/- 1200 is an octave.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_gain" class="property item">
+												<h3 class="name"><code>gain</code></h3>
+												<span class="type">GainNode</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>WebAudio gain node, used to control the volume.</p>
+											<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/GainNode">https://developer.mozilla.org/en-US/docs/Web/API/GainNode</a></p>
 											
 												</div>
 											

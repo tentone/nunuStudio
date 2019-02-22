@@ -136,6 +136,7 @@
 								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
 								<li><a href="../classes/VideoStream.html">VideoStream</a></li>
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
+								<li><a href="../classes/Viewport.html">Viewport</a></li>
 								<li><a href="../classes/VRControls.html">VRControls</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
 							</ul>
@@ -241,10 +242,6 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_initialize">initialize</a>
-						
-													</li>
-													<li class="index-item method">
 														<a href="#method_isCameraActive">isCameraActive</a>
 						
 													</li>
@@ -276,7 +273,27 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
+														<a href="#property_background">background</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_cameras">cameras</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_canvas">canvas</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_clock">clock</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_defaultCamera">defaultCamera</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_delta">delta</a>
 						
 													</li>
 													<li class="index-item property">
@@ -415,35 +432,6 @@
 											
 														</div>
 													</div>
-											
-											</div>
-											<div id="method_initialize" class="method item">
-												<h3 class="name"><code>initialize</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Initialize scene objects.</p>
-											<p>Called automatically by the runtime.</p>
-											
-												</div>
-											
-											
 											
 											</div>
 											<div id="method_isCameraActive" class="method item">
@@ -626,6 +614,7 @@
 											
 												<div class="description">
 													<p>Set scene fog mode.</p>
+											<p>It recreates the fog object attached to the scene and set the same color.</p>
 											
 												</div>
 											
@@ -651,7 +640,13 @@
 											<div id="method_update" class="method item">
 												<h3 class="name"><code>update</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>delta</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 											
 											
@@ -670,10 +665,26 @@
 											
 												<div class="description">
 													<p>Update scene objects and the physics world.</p>
-											<p>Called automatically by the runtime.</p>
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">delta</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>The time since the last frame.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 											
 											</div>
@@ -711,6 +722,55 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
+											<div id="property_background" class="property item">
+												<h3 class="name"><code>background</code></h3>
+												<span class="type">THREE.Color | THREE.Texture</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Background of the scene.</p>
+											<p>The background of the scene is drawn after the renderer clears the buffers.</p>
+											<p>It can be a color, a texture or a cubemap.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_cameras" class="property item">
+												<h3 class="name"><code>cameras</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>List of active cameras currently being displayed.</p>
+											<p>The cameras are rendered by their render order.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_canvas" class="property item">
 												<h3 class="name"><code>canvas</code></h3>
 												<span class="type">DOM</span>
@@ -734,9 +794,79 @@
 											
 											
 											</div>
+											<div id="property_clock" class="property item">
+												<h3 class="name"><code>clock</code></h3>
+												<span class="type">THREE.Clock</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Clock object used to measure times between frames.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_defaultCamera" class="property item">
+												<h3 class="name"><code>defaultCamera</code></h3>
+												<span class="type">THREE.Camera</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Default camera of the scene used where there is no active camera.</p>
+											<p>While using the editor the scene default camera gets set as the last camera configuration used.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_delta" class="property item">
+												<h3 class="name"><code>delta</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Stores the time since the last frame.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_mouse" class="property item">
 												<h3 class="name"><code>mouse</code></h3>
-												<span class="type">Vector2</span>
+												<span class="type">THREE.Vector2</span>
 											
 											
 											
@@ -782,7 +912,7 @@
 											</div>
 											<div id="property_raycaster" class="property item">
 												<h3 class="name"><code>raycaster</code></h3>
-												<span class="type">Raycaster</span>
+												<span class="type">THREE.Raycaster</span>
 											
 											
 											
@@ -806,7 +936,7 @@
 											</div>
 											<div id="property_world" class="property item">
 												<h3 class="name"><code>world</code></h3>
-												<span class="type">World</span>
+												<span class="type">CANNON.World</span>
 											
 											
 											
