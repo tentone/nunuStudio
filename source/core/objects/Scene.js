@@ -75,7 +75,20 @@ function Scene()
 	 */
 	this.defaultCamera = null;
 
+	/**
+	 * Clock object used to measure times between frames.
+	 *
+	 * @property clock
+	 * @type {THREE.Clock}
+	 */
 	this.clock = new THREE.Clock();
+
+	/**
+	 * Stores the time since the last frame.
+	 *
+	 * @property delta
+	 * @type {Number}
+	 */
 	this.delta = 0;
 
 	/**
@@ -168,6 +181,12 @@ Scene.prototype.update = function(delta)
 
 Scene.prototype.resize = function(x, y)
 {
+	if(this.defaultCamera !== null)
+	{
+		this.defaultCamera.aspect = x / y;
+		this.defaultCamera.updateProjectionMatrix();
+	}
+
 	for(var i = 0; i < this.cameras.length; i++)
 	{
 		this.cameras[i].aspect = x / y;
@@ -376,7 +395,17 @@ Scene.prototype.toJSON = function(meta)
 
 	if(this.defaultCamera !== null)
 	{
-		data.object.defaultCamera = this.defaultCamera.toJSON(meta);
+		var position = new THREE.Vector3();
+		var quaternion = new THREE.Quaternion();
+		var scale = new THREE.Vector3();
+
+		this.defaultCamera.matrixWorld.decompose(position, quaternion, scale);
+
+		var defaultCamera = this.defaultCamera.toJSON(meta);
+		defaultCamera.object.position = position.toArray();
+		defaultCamera.object.quaternion = quaternion.toArray();
+		defaultCamera.object.scale = scale.toArray();
+		data.object.defaultCamera = defaultCamera;
 	}
 
 	if(this.fog !== null)

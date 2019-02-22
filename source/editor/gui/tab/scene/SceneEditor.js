@@ -566,7 +566,10 @@ SceneEditor.prototype.update = function()
 			}
 			
 			//Update object helper
-			this.objectHelper.update();
+			this.objectHelper.traverse(function(children)
+			{
+				children.update();	
+			});
 		}
 	}
 
@@ -1051,14 +1054,6 @@ SceneEditor.prototype.setState = function(state)
 	if(state === SceneEditor.EDITING)
 	{
 		this.mouse.setLock(false);
-
-		//Set buttons
-		this.cameraButton.setVisibility(true);
-		this.transformationSpace.setVisibility(true);
-		this.navigation.setVisibility(true);
-
-		//Update interface
-		this.updateInterface();
 	}
 };
 

@@ -3,12 +3,13 @@
 /**
  * Program class contains all the data of a nunuStudio program.
  * 
- * Program is also used to store and manage all available resources.
+ * Is stores and manages all available resources used by the children objects.
+ *
+ * Is responsible for handling runtime tasks, initialization, update, resizes etc.
  * 
  * @class Program
  * @module Core
  * @param {String} name Program name
- * @extends {ResourceManager}
  * @extends {ResourceManager}
  */
 function Program(name)
@@ -126,15 +127,28 @@ function Program(name)
 	this.shadowsType = THREE.PCFSoftShadowMap;
 
 	/**
-	 * Tonemapping mode.
+	 * Tone mapping mode.
 	 *
 	 * @property toneMapping
 	 * @type {Number}
-	 * @default NoToneMapping
+	 * @default THREE.NoToneMapping
 	 */
 	this.toneMapping = THREE.NoToneMapping;
 
+	/**
+	 * Exposure level of tone mapping.
+	 *
+	 * @property toneMappingExposure
+	 * @type {Number}
+	 */
 	this.toneMappingExposure = 1.0;
+
+	/**
+	 * Tone mapping white point.
+	 *
+	 * @property toneMappingWhitePoint
+	 * @type {Number}
+	 */
 	this.toneMappingWhitePoint = 1.0;
 
 	/**

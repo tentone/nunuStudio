@@ -9,27 +9,7 @@
  */
 function ObjectIconHelper(object, icon)
 {
-	var self = this;
-
-	var element = document.createElement("img");
-	var texture = new THREE.Texture(element);
-	element.onload = function()
-	{
-		self.ratio = this.naturalWidth / this.naturalHeight;
-		texture.needsUpdate = true;
-	};
-	element.src = icon;
-
-	THREE.Sprite.call(this, new THREE.SpriteMaterial(
-	{
-		map: texture,
-		opacity: 0.8,
-		transparent: true,
-		depthTest: false,
-		depthWrite: false,
-		sizeAttenuation: false,
-		alphaTest: 0.2
-	}));
+	THREE.Sprite.call(this, ObjectIconHelper.getMaterial(icon));
 
 	/**
 	 * Object attached to the helper
@@ -40,25 +20,66 @@ function ObjectIconHelper(object, icon)
 	this.object = object;
 
 	/**
-	 * Icon aspect ratio.
-	 *
-	 * @attribute ratio
-	 * @type {Number}
-	 */
-	this.ratio = 1.0;
-
-	/**
 	 * Size of the helper.
 	 *
 	 * @attribute size
 	 * @type {Number}
 	 */
 	this.size = 0.1;
-
+	
 	this.matrixAutoUpdate = false;
 }
 
 ObjectIconHelper.prototype = Object.create(THREE.Sprite.prototype);
+
+/**
+ * Cache of icon helper materials.
+ *
+ * @static
+ * @attribute MATERIALS
+ * @type {Map}
+ */
+ObjectIconHelper.MATERIALS = new Map();
+
+/**
+ * Get the sprite material for a icon url.
+ *
+ * @static
+ * @method getMaterial
+ * @param {String} icon Icon URL.
+ */
+ObjectIconHelper.getMaterial = function(icon)
+{
+	if(ObjectIconHelper.MATERIALS.has(icon))
+	{
+		return ObjectIconHelper.MATERIALS.get(icon);
+	}
+
+	var element = document.createElement("img");
+	var texture = new THREE.Texture(element);
+	var material = new THREE.SpriteMaterial(
+	{
+		map: texture,
+		transparent: true,
+		depthTest: false,
+		depthWrite: false,
+		sizeAttenuation: false,
+		alphaTest: 0.2
+	});
+	
+	material.ratio = 1.0;
+
+	element.onload = function()
+	{
+		material.ratio = this.naturalWidth / this.naturalHeight;
+		texture.needsUpdate = true;	
+	};
+	element.src = icon;
+
+	ObjectIconHelper.MATERIALS.set(icon, material);
+
+	return material;
+};
 
 ObjectIconHelper.prototype.update = function()
 {
@@ -69,6 +90,7 @@ ObjectIconHelper.prototype.update = function()
 
 	//Scale
 	this.matrix.elements[0] = this.size;
-	this.matrix.elements[5] = this.size / this.ratio;
+	this.matrix.elements[5] = this.size / this.material.ratio;
 	this.matrix.elements[10] = this.size;
+
 };
