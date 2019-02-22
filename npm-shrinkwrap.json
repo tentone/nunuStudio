@@ -6079,9 +6079,9 @@
 			}
 		},
 		"uc.micro": {
-			"version": "1.0.5",
-			"resolved": "https://registry.npmjs.org/uc.micro/-/uc.micro-1.0.5.tgz",
-			"integrity": "sha512-JoLI4g5zv5qNyT09f4YAvEZIIV1oOjqnewYg5D38dkQljIzpPT296dbIGvKro3digYI1bkb7W6EP1y4uDlmzLg=="
+			"version": "1.0.6",
+			"resolved": "https://registry.npmjs.org/uc.micro/-/uc.micro-1.0.6.tgz",
+			"integrity": "sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA=="
 		},
 		"universalify": {
 			"version": "0.1.2",
