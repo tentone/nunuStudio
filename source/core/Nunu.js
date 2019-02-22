@@ -250,18 +250,6 @@ Nunu.runningOnDesktop = function()
 	return window.nw !== undefined;
 };
 
-/**
- * Check if there is some element on fullscreen mode.
- *
- * Returns true even the fullscreen element is not related with the app.
- * 
- * @method isFullscreen
- * @return {boolean} True if there is some element in fullscreen mode.
- */
-Nunu.isFullscreen = function()
-{
-	return document.webkitIsFullScreen === true || document.mozFullScreen === true || document.webkitIsFullScreen === true || document.webkitIsFullScreen === true || document.fullscreen === true || false;
-};
 
 /**
  * Open a webpage on a new window.
@@ -285,37 +273,64 @@ Nunu.openWebpage = function(url)
 };
 
 /**
+ * Check if there is some element on fullscreen mode.
+ *
+ * Returns true even the fullscreen element is not related with the app.
+ * 
+ * @method isFullscreen
+ * @return {boolean} True if there is some element in fullscreen mode.
+ */
+Nunu.isFullscreen = function()
+{
+	return document.webkitIsFullScreen === true || document.mozFullScreen === true || document.webkitIsFullScreen === true || document.webkitIsFullScreen === true || document.fullscreen === true || false;
+};
+
+
+/**
  * Set an element into fullscreen mode or exit out of fullscreen mode.
  *
- * Use isFullscreen to check if the application is running in fullscreen mode already.
+ * Uses isFullscreen to check if the application is running in fullscreen mode already.
  * 
  * @method setFullscreen
- * @param {boolean} enable If true the application will enter fullscreen mode, if false it will exit.
+ * @param {boolean} fullscreen If true the application will enter fullscreen mode, if false it will exit, if undefine it will toggle the value.
  * @param {DOM} element DOM element to put into fullscreen.
  */
-Nunu.setFullscreen = function(enabled, element)
+Nunu.setFullscreen = function(fullscreen, element)
 {
-	if(enabled === true)
+	var isFullscreen = Nunu.isFullscreen();
+	
+	if(fullscreen === undefined)
+	{
+		fullscreen = !isFullscreen;	
+	}
+
+	if(fullscreen === true)
 	{
 		if(element === undefined)
 		{
 			element = document.body;
 		}
 
-		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
-		
-		if(element.requestFullscreen !== undefined)
+		if(isFullscreen === false)
 		{
-			element.requestFullscreen();
+			element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
+			
+			if(element.requestFullscreen !== undefined)
+			{
+				element.requestFullscreen();
+			}
 		}
 	}
 	else
 	{
-		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
-		
-		if(document.exitFullscreen !== undefined)
-		{
-			document.exitFullscreen();
+		if(isFullscreen === true)
+		{		
+			document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+			
+			if(document.exitFullscreen !== undefined)
+			{
+				document.exitFullscreen();
+			}
 		}
 	}
 };

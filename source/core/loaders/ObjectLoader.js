@@ -834,7 +834,8 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 			if(data.defaultCamera !== undefined)
 			{
-				object.defaultCamera = this.parseObject(data.defaultCamera, geometries, materials, textures, audio, fonts);
+				var loader = new ObjectLoader();
+				object.defaultCamera = loader.parse(data.defaultCamera);
 			}
 
 			if(data.cameras !== undefined)
