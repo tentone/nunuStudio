@@ -467,9 +467,9 @@ Program.prototype.setScene = function(scene)
 
 	if(this.scene !== null)
 	{
-		if(this.scene.cameras.length === 0)
+		if(this.scene.defaultCamera === null)
 		{
-			this.scene.cameras.push(this.defaultCamera);
+			this.scene.defaultCamera = this.defaultCamera;
 		}
 
 		this.scene.initialize();

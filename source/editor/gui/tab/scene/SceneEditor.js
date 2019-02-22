@@ -126,7 +126,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.axisHelper = new THREE.AxesHelper(Editor.settings.editor.gridSize);
 	this.axisHelper.material.depthWrite = false;
 	this.axisHelper.material.transparent = true;
-	this.axisHelper.material.opacity = 1;
+	this.axisHelper.material.opacity = 1.0;
 	this.axisHelper.visible = Editor.settings.editor.axisEnabled;
 	this.helperScene.add(this.axisHelper);
 
@@ -148,13 +148,30 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.toolScene = new THREE.Scene();
 	this.toolScene.matrixAutoUpdate = false;
-
 	this.toolMode = Editor.SELECT;
 	this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 	this.toolScene.add(this.tool);
 
-	//Camera
+	/**
+	 * Camera object used to visualize the scene.
+	 *
+	 * This object is attached to the scene as the defaultCamera, allowing it to be used for runtime when there is no default camera.
+	 *
+	 * Can be a an OrthographicCamera or PerspectiveCamera dependeing on the cameraMode value.
+	 *
+	 * @attribute camera
+	 * @type {THREE.Camera}
+	 */
 	this.camera = null;
+	
+	/** 
+	 * Camera controls object used to manipulate the camera position.
+	 *
+	 * Can be EditorFreeControls, EditorOrbitControls or EditorPlanarControls.
+	 *
+	 * @attribute controls
+	 * @type {THREE.Group}
+	 */
 	this.controls = null;
 	this.setCameraMode(SceneEditor.PERSPECTIVE);
 
@@ -438,6 +455,11 @@ SceneEditor.prototype.attach = function(scene)
 {
 	this.scene = scene;
 	this.updateMetadata();
+
+	if(this.camera !== null)
+	{
+		this.scene.defaultCamera = this.camera;
+	}
 };
 
 /**
@@ -1005,6 +1027,11 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	else if(this.cameraMode === SceneEditor.PERSPECTIVE)
 	{
 		this.camera = new PerspectiveCamera(60, aspect);
+	}
+
+	if(this.scene !== null)
+	{
+		this.scene.defaultCamera = this.camera;
 	}
 
 	this.tool.setCamera(this.camera);

@@ -789,6 +789,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			object.needsButtonPressed = data.needsButtonPressed;
 			object.zoomEnabled = data.zoomEnabled;
 			object.movementEnabled = data.movementEnabled;
+			
 			if(data.smooth !== undefined)
 			{
 				object.smooth = data.smooth;
@@ -829,6 +830,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				{
 					object.fog = new THREE.FogExp2(data.fog.color, data.fog.density);
 				}
+			}
+
+			if(data.defaultCamera !== undefined)
+			{
+				object.defaultCamera = this.parseObject(data.defaultCamera, geometries, materials, textures, audio, fonts);
 			}
 
 			if(data.cameras !== undefined)
@@ -942,7 +948,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			}
 			if(data.view !== undefined)
 			{
-				object.view = Object.assign( {}, data.view );
+				object.view = Object.assign({}, data.view);
 			}
 			break;
 

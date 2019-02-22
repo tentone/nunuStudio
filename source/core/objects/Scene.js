@@ -202,27 +202,33 @@ Scene.prototype.dispose = function()
  */
 Scene.prototype.render = function(renderer)
 {
-	var x = renderer.domElement.width;
-	var y = renderer.domElement.height;
-
 	renderer.setClearColor(this.background);
-	renderer.setScissorTest(true);
 
-	for(var i = 0; i < this.cameras.length; i++)
-	{	
-		var camera = this.cameras[i];
+	if(this.cameras.length > 0)
+	{
+		var x = renderer.domElement.width;
+		var y = renderer.domElement.height;
 
-		renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
-		renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
+		renderer.setScissorTest(true);
+		for(var i = 0; i < this.cameras.length; i++)
+		{
+			var camera = this.cameras[i];
 
-		renderer.autoClearColor = camera.clearColor;
-		renderer.autoClearDepth = camera.clearDepth;
-		renderer.autoClearStencil = camera.clearStencil;
+			renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
+			renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
 
-		camera.render(renderer, this);
+			renderer.autoClearColor = camera.clearColor;
+			renderer.autoClearDepth = camera.clearDepth;
+			renderer.autoClearStencil = camera.clearStencil;
+
+			camera.render(renderer, this);
+		}
+		renderer.setScissorTest(false);
 	}
-
-	renderer.setScissorTest(false);
+	else if(this.defaultCamera !== null)
+	{
+		this.defaultCamera.render(renderer, this);
+	}
 };
 
 /**
@@ -366,6 +372,11 @@ Scene.prototype.toJSON = function(meta)
 	if(background !== null)
 	{
 		data.object.background = background;
+	}
+
+	if(this.defaultCamera !== null)
+	{
+		data.object.defaultCamera = this.defaultCamera.toJSON(meta);
 	}
 
 	if(this.fog !== null)
