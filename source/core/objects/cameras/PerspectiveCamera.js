@@ -37,24 +37,12 @@
 function PerspectiveCamera(fov, aspect, near, far)
 {
 	/**
-	 * Camera viewport offset.
-	 * 
-	 * Values range from 0.0 to 1.0 in screen space.
-	 * 
-	 * @property offset
-	 * @type {Vector2}
-	*/
-	this.offset = new THREE.Vector2(0.0, 0.0);
-
-	/**
-	 * Camera viewport size.
-	 * 
-	 * Values range from 0.0 to 1.0 in screen space.
+	 * Camera viewport indicates where the image is drawn on the screen.
 	 * 
 	 * @property viewport
-	 * @type {Vector2}
+	 * @type {Viewport}
 	*/
-	this.viewport = new THREE.Vector2(1.0, 1.0);
+	this.viewport = new Viewport();
 	
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
 
@@ -116,6 +104,22 @@ function PerspectiveCamera(fov, aspect, near, far)
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
 /**
+ * Prepare the renderer to render the frame using the camera settings.
+ *
+ * Should be called before the render() method to setup clear configuration and viewport.
+ *
+ * @method setupRenderer
+ * @param {WebGLRenderer} renderer WebGL renderer to configure.
+ */
+PerspectiveCamera.prototype.setupRenderer = function(renderer)
+{
+	renderer.autoClearColor = this.clearColor;
+	renderer.autoClearDepth = this.clearDepth;
+	renderer.autoClearStencil = this.clearStencil;
+	this.viewport.enable(renderer);
+};
+
+/**
  * Render a scene using this camera and the internal EffectComposer.
  *
  * @method render
@@ -136,7 +140,14 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
  */
 PerspectiveCamera.prototype.resize = function(x, y)
 {
-	this.composer.setSize(x * this.viewport.x, y * this.viewport.y);
+	if(this.viewport.mode === Viewport.RELATIVE)
+	{
+		this.composer.setSize(x * this.viewport.viewport.x, y * this.viewport.viewport.y);
+	}
+	else if(this.viewport.mode === Viewport.ABSOLUTE)
+	{
+		this.composer.setSize(this.viewport.viewport.x, this.viewport.viewport.y);
+	}
 };
 
 /**
@@ -166,7 +177,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 {
 	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov) / this.zoom;
 	var height = 2 * top;
-	var width = this.aspect * height * this.viewport.x / this.viewport.y;
+	var width = this.aspect * height * this.viewport.getAspectRatio();
 	var left = -0.5 * width;
 
 	if(this.filmOffset !== 0)
@@ -185,8 +196,7 @@ PerspectiveCamera.prototype.toJSON = function(meta)
 	data.object.clearDepth = this.clearDepth;
 	data.object.clearStencil = this.clearStencil;
 
-	data.object.viewport = this.viewport.toArray();
-	data.object.offset = this.offset.toArray();
+	data.object.viewport = this.viewport.toJSON();
 
 	data.object.order = this.order;
 	data.object.composer = this.composer.toJSON();

@@ -98,7 +98,7 @@ function Program(name)
 	 * @type {Number}
 	 * @default 1.0
 	 */
-	this.vrScale = 1;
+	this.vrScale = 1.0;
 
 	/**
 	 * Antialiasing flag.
@@ -236,6 +236,14 @@ function Program(name)
 		}
 	});
 
+	/**
+	 * Clock object used to measure times between frames.
+	 *
+	 * @property clock
+	 * @type {THREE.Clock}
+	 */
+	this.clock = new THREE.Clock();
+
 	//VR runtime control
 	this.vrEnabled = false;
 	this.vrDisplay = null;
@@ -295,6 +303,8 @@ Program.prototype.initialize = function()
 			self.vrEffect = new VREffect(self.renderer);
 		});
 	}
+
+	this.clock.start();
 };
 
 /**
@@ -336,8 +346,10 @@ Program.prototype.setRenderer = function(renderer, configure)
  * 
  * @method update
  */
-Program.prototype.update = function(delta)
+Program.prototype.update = function()
 {
+	var delta = this.clock.getDelta();
+
 	this.scene.update(delta);
 };
 

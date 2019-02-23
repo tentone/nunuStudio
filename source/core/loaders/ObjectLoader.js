@@ -834,8 +834,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 			if(data.defaultCamera !== undefined)
 			{
-				var loader = new ObjectLoader();
-				object.defaultCamera = loader.parse(data.defaultCamera);
+				object.defaultCamera = this.parse(data.defaultCamera);
 			}
 
 			if(data.cameras !== undefined)
@@ -882,14 +881,20 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.view = Object.assign({}, data.view);
 			}
+
 			if(data.viewport !== undefined)
 			{
-				object.viewport.fromArray(data.viewport);
+				if(data.viewport instanceof Array)
+				{
+					object.viewport.fromArray(data.viewport);
+					object.offset.fromArray(data.offset);
+				}
+				else
+				{
+					object.viewport.fromJSON(data.viewport);
+				}
 			}
-			if(data.offset !== undefined)
-			{
-				object.offset.fromArray(data.offset);
-			}
+
 			if(data.clearColor !== undefined)
 			{
 				object.clearColor = data.clearColor;
@@ -915,14 +920,20 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "OrthographicCamera":
 			object = new OrthographicCamera(data.size, data.aspect, data.mode, data.near, data.far);
+
 			if(data.viewport !== undefined)
 			{
-				object.viewport.fromArray(data.viewport);
+				if(data.viewport instanceof Array)
+				{
+					object.viewport.fromArray(data.viewport);
+					object.offset.fromArray(data.offset);
+				}
+				else
+				{
+					object.viewport.fromJSON(data.viewport);
+				}
 			}
-			if(data.offset !== undefined)
-			{
-				object.offset.fromArray(data.offset);
-			}
+
 			if(data.clearColor !== undefined)
 			{
 				object.clearColor = data.clearColor;

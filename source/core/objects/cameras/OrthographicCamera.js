@@ -48,24 +48,12 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.mode = (mode !== undefined) ? mode : OrthographicCamera.RESIZE_HORIZONTAL;
 
 	/**
-	 * Camera viewport offset.
-	 * 
-	 * Values range from 0.0 to 1.0 in screen space.
-	 * 
-	 * @property offset
-	 * @type {Vector2}
-	*/
-	this.offset = new THREE.Vector2(0.0, 0.0);
-
-	/**
-	 * Camera viewport size.
-	 * 
-	 * Values range from 0.0 to 1.0 in screen space.
+	 * Camera viewport indicates where the image is drawn on the screen.
 	 * 
 	 * @property viewport
-	 * @type {Vector2}
+	 * @type {Viewport}
 	*/
-	this.viewport = new THREE.Vector2(1.0, 1.0);
+	this.viewport = new Viewport();
 
 	/**
 	 * Clear screen color flag.
@@ -140,6 +128,22 @@ OrthographicCamera.RESIZE_HORIZONTAL = 0;
 OrthographicCamera.RESIZE_VERTICAL = 1;
 
 /**
+ * Prepare the renderer to render the frame using the camera settings.
+ *
+ * Should be called before the render() method to setup clear configuration and viewport.
+ *
+ * @method setupRenderer
+ * @param {WebGLRenderer} renderer WebGL renderer to configure.
+ */
+OrthographicCamera.prototype.setupRenderer = function(renderer)
+{
+	renderer.autoClearColor = this.clearColor;
+	renderer.autoClearDepth = this.clearDepth;
+	renderer.autoClearStencil = this.clearStencil;
+	this.viewport.enable(renderer);
+};
+
+/**
  * Render a scene using this camera and the internal EffectComposer.
  *
  * @method render
@@ -160,7 +164,14 @@ OrthographicCamera.prototype.render = function(renderer, scene)
  */
 OrthographicCamera.prototype.resize = function(x, y)
 {
-	this.composer.setSize(x * this.viewport.x, y * this.viewport.y);
+	if(this.viewport.mode === Viewport.RELATIVE)
+	{
+		this.composer.setSize(x * this.viewport.viewport.x, y * this.viewport.viewport.y);
+	}
+	else if(this.viewport.mode === Viewport.ABSOLUTE)
+	{
+		this.composer.setSize(this.viewport.viewport.x, this.viewport.viewport.y);
+	}
 };
 
 /**
@@ -194,14 +205,14 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 	{
 		this.top = this.size / 2;
 		this.bottom = -this.top;
-		this.right = this.top * this.aspect * (this.viewport.x / this.viewport.y);
+		this.right = this.top * this.aspect * this.viewport.getAspectRatio();
 		this.left = -this.right;
 	}
 	else if(this.mode === OrthographicCamera.RESIZE_VERTICAL)
 	{
 		this.right = this.size / 2;
 		this.left = -this.right;
-		this.top = this.right / this.aspect * (this.viewport.x / this.viewport.y);
+		this.top = this.right / this.aspect * this.viewport.getAspectRatio();
 		this.bottom = -this.top;
 	}
 
@@ -220,8 +231,7 @@ OrthographicCamera.prototype.toJSON = function(meta)
 	data.object.clearDepth = this.clearDepth;
 	data.object.clearStencil = this.clearStencil;
 
-	data.object.viewport = this.viewport.toArray();
-	data.object.offset = this.offset.toArray();
+	data.object.viewport = this.viewport.toJSON();
 	
 	data.object.order = this.order;
 	data.object.composer = this.composer.toJSON();

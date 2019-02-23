@@ -77,13 +77,8 @@ Viewport.BOTTOM_RIGHT = 304;
  * @param {Canvas} canvas DOM canvas only required to calculate aspect ration on relative sizing.
  * @return {Number} The aspect ratio of the viewport.
  */
-Viewport.prototype.getAspectRatio = function(canvas)
+Viewport.prototype.getAspectRatio = function()
 {
-	if(this.mode === Viewport.RELATIVE)
-	{
-		return (this.viewport.x * canvas.width) / (this.viewport.y * canvas.height);
-	}
-
 	return this.viewport.x / this.viewport.y;
 };
 
@@ -92,7 +87,7 @@ Viewport.prototype.getAspectRatio = function(canvas)
  * 
  * @method isInside
  * @param {DOM} canvas Canvas for offset calculation.
- * @param {Mouse} mouse Mouse object.
+ * @param {Mouse} mouse Mouse object with coordinates inside of the canvas.
  */
 Viewport.prototype.isInside = function(canvas, mouse)
 {
@@ -147,7 +142,7 @@ Viewport.prototype.isInside = function(canvas, mouse)
  *
  * @method getNormalized
  * @param {DOM} canvas Canvas for offset calculation.
- * @param {Mouse} mouse Mouse object.
+ * @param {Mouse} mouse Mouse object with coordinates inside of the canvas.
  * @return {THREE.Vector2} Normalized coordinated of the mouse.
  */
 Viewport.prototype.getNormalized = function()

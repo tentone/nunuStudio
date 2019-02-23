@@ -76,14 +76,6 @@ function Scene()
 	this.defaultCamera = null;
 
 	/**
-	 * Clock object used to measure times between frames.
-	 *
-	 * @property clock
-	 * @type {THREE.Clock}
-	 */
-	this.clock = new THREE.Clock();
-
-	/**
 	 * Stores the time since the last frame.
 	 *
 	 * @property delta
@@ -137,8 +129,6 @@ Scene.prototype.initialize = function()
 
 	THREE.Object3D.prototype.initialize.call(this);
 
-	this.clock.start();
-
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].traverse(function(children)
@@ -151,25 +141,27 @@ Scene.prototype.initialize = function()
 /**
  * Update scene objects and the physics world.
  * 
+ * Also updates the global raycaster object used for object culling.
+ *
  * @method update
  * @param {Number} delta The time since the last frame.
  */
 Scene.prototype.update = function(delta)
 {
+	//TODO <USE THE VIEWPORT OBJECT>
+
 	this.mouse.set(this.program.mouse.position.x / this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y / this.canvas.height + 1);
+	
 	if(this.cameras.length > 0)
 	{
 		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);
 	}
-
-	this.delta = this.clock.getDelta();
 	
 	if(this.usePhysics)
 	{
-		this.world.step((this.delta < 0.05) ? this.delta : 0.05);
+		this.world.step(delta < 0.05 ? delta : 0.05);
 	}
 
-	var delta = this.delta;
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].traverse(function(children)
@@ -225,23 +217,14 @@ Scene.prototype.render = function(renderer)
 
 	if(this.cameras.length > 0)
 	{
-		var x = renderer.domElement.width;
-		var y = renderer.domElement.height;
-
 		renderer.setScissorTest(true);
+		
 		for(var i = 0; i < this.cameras.length; i++)
 		{
-			var camera = this.cameras[i];
-
-			renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
-			renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
-
-			renderer.autoClearColor = camera.clearColor;
-			renderer.autoClearDepth = camera.clearDepth;
-			renderer.autoClearStencil = camera.clearStencil;
-
-			camera.render(renderer, this);
+			this.cameras[i].setupRenderer(renderer);
+			this.cameras[i].render(renderer, this);
 		}
+
 		renderer.setScissorTest(false);
 	}
 	else if(this.defaultCamera !== null)
