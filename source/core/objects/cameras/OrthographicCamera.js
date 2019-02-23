@@ -106,9 +106,6 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.order = 0;
 
 	this.updateProjectionMatrix();
-
-	var renderPass = new RenderPass();
-	renderPass.renderToScreen = true;
 	
 	/**
 	 * Effect composed of this camera. Is used to render the scene to the screen and apply effects.
@@ -119,6 +116,9 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * @type {EffectComposer}
 	 */
 	this.composer = new EffectComposer();
+
+	var renderPass = new RenderPass();
+	renderPass.renderToScreen = true;
 	this.composer.addPass(renderPass);
 }
 

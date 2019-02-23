@@ -96,10 +96,13 @@ Viewport.prototype.getAspectRatio = function(canvas)
  */
 Viewport.prototype.isInside = function(canvas, mouse)
 {
+	var width = canvas.width;
+	var height = canvas.height;
+
 	if(this.mode === Viewport.RELATIVE)
 	{
-		var offset = new THREE.Vector2(this.offset.x * canvas.width, this.offset.y * canvas.height);
-		var viewport = new THREE.Vector2(this.viewport.x * canvas.width, this.viewport.y * canvas.height);
+		var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
+		var viewport = new THREE.Vector2(this.viewport.x * width, this.viewport.y * height);
 	}
 	else //if(this.mode === Viewport.ABSOLUTE)
 	{
@@ -116,8 +119,8 @@ Viewport.prototype.isInside = function(canvas, mouse)
 	}
 	else if(this.anchor === Viewport.TOP_RIGHT)
 	{
-		return mouse.position.x > canvas.width - viewport.x - offset.x &&
-		mouse.position.x < canvas.width - offset.x &&
+		return mouse.position.x > width - viewport.x - offset.x &&
+		mouse.position.x < width - offset.x &&
 		mouse.position.y > offset.y &&
 		mouse.position.y < offset.y + viewport.y;
 	}
@@ -125,15 +128,15 @@ Viewport.prototype.isInside = function(canvas, mouse)
 	{
 		return mouse.position.x > offset.x &&
 		mouse.position.x < offset.x + viewport.x &&
-		mouse.position.y > canvas.height - offset.y - viewport.y &&
-		mouse.position.y < canvas.height - offset.y;
+		mouse.position.y > height - offset.y - viewport.y &&
+		mouse.position.y < height - offset.y;
 	}
 	else //if(this.anchor === Viewport.BOTTOM_RIGHT)
 	{
-		return mouse.position.x > canvas.width - viewport.x - offset.x &&
-		mouse.position.x < canvas.width - offset.x &&
-		mouse.position.y > canvas.height - offset.y - viewport.y &&
-		mouse.position.y < canvas.height - offset.y;
+		return mouse.position.x > width - viewport.x - offset.x &&
+		mouse.position.x < width - offset.x &&
+		mouse.position.y > height - offset.y - viewport.y &&
+		mouse.position.y < height - offset.y;
 	}
 };
 
@@ -143,18 +146,23 @@ Viewport.prototype.isInside = function(canvas, mouse)
  * Usefull to use raycasting for object picking in a viewport.
  *
  * @method getNormalized
+ * @param {DOM} canvas Canvas for offset calculation.
+ * @param {Mouse} mouse Mouse object.
  * @return {THREE.Vector2} Normalized coordinated of the mouse.
  */
-Viewport.prototype.getNormalized = function(canvas, mouse)
+Viewport.prototype.getNormalized = function()
 {
 	var normalized = new THREE.Vector2();
 
 	return function(canvas, mouse)
 	{
+		var width = canvas.width;
+		var height = canvas.height;
+
 		if(this.mode === Viewport.RELATIVE)
 		{
-			var offset = new THREE.Vector2(this.offset.x * canvas.width, this.offset.y * canvas.height);
-			var viewport = new THREE.Vector2(this.viewport.x * canvas.width, this.viewport.y * canvas.height);
+			var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
+			var viewport = new THREE.Vector2(this.viewport.x * width, this.viewport.y * height);
 		}
 		else //if(this.mode === Viewport.ABSOLUTE)
 		{
@@ -170,20 +178,20 @@ Viewport.prototype.getNormalized = function(canvas, mouse)
 		}
 		else if(this.anchor === Viewport.TOP_RIGHT)
 		{
-			var x = canvas.width - mouse.position.x - viewport.x - offset.x;
+			var x = width - mouse.position.x - viewport.x - offset.x;
 			var y = mouse.position.y - offset.y;
 			normalized.set((-x / viewport.x) * 2 - 1, (-y / viewport.y) * 2 + 1);
 		}
 		else if(this.anchor === Viewport.BOTTOM_LEFT)
 		{
 			var x = mouse.position.x - viewport.x - offset.x;
-			var y = canvas.height - mouse.position.y - offset.y;
+			var y = height - mouse.position.y - offset.y;
 			normalized.set((x / viewport.x) * 2 + 1, (y / viewport.y) * 2 - 1);
 		}
 		else //if(this.anchor === Viewport.BOTTOM_RIGHT)
 		{
-			var x = canvas.width - mouse.position.x - viewport.x - offset.x;
-			var y = canvas.height - mouse.position.y - offset.y;
+			var x = width - mouse.position.x - viewport.x - offset.x;
+			var y = height - mouse.position.y - offset.y;
 			normalized.set((-x / viewport.x) * 2 - 1, (y / viewport.y) * 2 - 1);
 		}
 		
@@ -201,10 +209,13 @@ Viewport.prototype.getNormalized = function(canvas, mouse)
  */
 Viewport.prototype.enable = function(renderer)
 {
+	var width = renderer.domElement.width;
+	var height = renderer.domElement.height;
+
 	if(this.mode === Viewport.RELATIVE)
 	{
-		var offset = new THREE.Vector2(this.offset.x * renderer.domElement.width, this.offset.y * renderer.domElement.height);
-		var viewport = new THREE.Vector2(this.viewport.x * renderer.domElement.width, this.viewport.y * renderer.domElement.height);
+		var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
+		var viewport = new THREE.Vector2(this.viewport.x * width, this.viewport.y * height);
 	}
 	else //if(this.mode === Viewport.ABSOLUTE)
 	{
@@ -219,20 +230,20 @@ Viewport.prototype.enable = function(renderer)
 	}
 	else if(this.anchor === Viewport.BOTTOM_RIGHT)
 	{
-		var x = renderer.domElement.width - viewport.x - offset.x;
+		var x = width - viewport.x - offset.x;
 		renderer.setViewport(x, offset.y, viewport.x, viewport.y);
 		renderer.setScissor(x, offset.y, viewport.x, viewport.y);
 	}
 	else if(this.anchor === Viewport.TOP_LEFT)
 	{
-		var y = renderer.domElement.height - viewport.y - offset.y;
+		var y = height - viewport.y - offset.y;
 		renderer.setViewport(offset.x, y, viewport.x, viewport.y);
 		renderer.setScissor(offset.x, y, viewport.x, viewport.y);
 	}
-	else if(this.anchor === Viewport.TOP_RIGHT)
+	else //if(this.anchor === Viewport.TOP_RIGHT)
 	{
-		var x = renderer.domElement.width - viewport.x - offset.x;
-		var y = renderer.domElement.height - viewport.y - offset.y;
+		var x = width - viewport.x - offset.x;
+		var y = height - viewport.y - offset.y;
 		renderer.setViewport(x, y, viewport.x, viewport.y);
 		renderer.setScissor(x, y, viewport.x, viewport.y);
 	}
