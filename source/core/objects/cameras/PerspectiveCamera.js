@@ -113,10 +113,8 @@ PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
  */
 PerspectiveCamera.prototype.setupRenderer = function(renderer)
 {
-	renderer.autoClearColor = this.clearColor;
-	renderer.autoClearDepth = this.clearDepth;
-	renderer.autoClearStencil = this.clearStencil;
 	this.viewport.enable(renderer);
+	renderer.clear(this.clearColor, this.clearDepth, this.clearStencil);
 };
 
 /**

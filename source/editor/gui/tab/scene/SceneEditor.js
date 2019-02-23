@@ -648,9 +648,11 @@ SceneEditor.prototype.render = function()
 			camera.updateProjectionMatrix();
 			camera.resize(width, height);
 
-			renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-			renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-			renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
+			//TODO <USE CAMERA VIEWPORT>
+			//renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+			//renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+			//renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
+			
 			camera.render(renderer, scene);
 		}
 		//Cube camera
@@ -692,9 +694,11 @@ SceneEditor.prototype.render = function()
 				camera.updateProjectionMatrix();
 				camera.resize(width, height);
 
-				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
+				//TODO <USE CAMERA VIEWPORT>
+				//renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+				//renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+				//renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
+				
 				camera.render(renderer, scene);
 			}
 		}
