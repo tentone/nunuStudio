@@ -221,12 +221,6 @@ function Program(name)
 	 */
 	this.division = null;
 
-	//VR runtime objects
-	this.useVR = false;
-	this.display = null;
-	this.effect = null;
-	this.controls = null;
-		
 	/**
 	 * Event manager used to handle VR display presentation change event.
 	 *
@@ -236,11 +230,17 @@ function Program(name)
 	this.manager = new EventManager();
 	this.manager.add(window, "vrdisplaypresentchange", function()
 	{
-		if(self.display !== null && !self.display.isPresenting)
+		if(self.vrDisplay !== null && !self.vrDisplay.isPresenting)
 		{
-			self.useVR = false;
+			self.vrEnabled = false;
 		}
 	});
+
+	//VR runtime control
+	this.vrEnabled = false;
+	this.vrDisplay = null;
+	this.vrEffect = null;
+	this.vrControls = null;
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -290,9 +290,9 @@ Program.prototype.initialize = function()
 
 		Nunu.getVRDisplays(function(display)
 		{
-			self.display = display;
-			self.controls = new VRControls();
-			self.effect = new VREffect(self.renderer);
+			self.vrDisplay = display;
+			self.vrControls = new VRControls();
+			self.vrEffect = new VREffect(self.renderer);
 		});
 	}
 };
@@ -354,13 +354,13 @@ Program.prototype.update = function(delta)
 Program.prototype.render = function(renderer)
 {
 	//Render as a VR application (ignores all camera parameters and effects)
-	if(this.useVR)
+	if(this.vrEnabled)
 	{
 		for(var i = 0; i < this.scene.cameras.length; i++)
 		{
 			var camera = this.scene.cameras[i];
-			this.controls.update(camera);
-			this.effect.render(this.scene, camera, undefined, true);
+			this.vrControls.update(camera);
+			this.vrEffect.render(this.scene, camera, undefined, true);
 		}
 	}
 	//Render normally
@@ -380,9 +380,9 @@ Program.prototype.render = function(renderer)
 Program.prototype.resize = function(x, y)
 {
 	//Resize vr effect
-	if(this.effect !== null)
+	if(this.vrEffect !== null)
 	{
-		this.effect.setSize(x, y);
+		this.vrEffect.setSize(x, y);
 	}
 
 	//Resize the default camera
@@ -428,10 +428,10 @@ Program.prototype.displayVR = function()
 	{
 		try
 		{
-			if(!this.display.isPresenting)
+			if(!this.vrDisplay.isPresenting)
 			{
-				this.display.requestPresent([{source : this.canvas}]);
-				this.useVR = true;
+				this.vrDisplay.requestPresent([{source : this.canvas}]);
+				this.vrEnabled = true;
 			}
 		}
 		catch(e)
@@ -448,10 +448,10 @@ Program.prototype.displayVR = function()
  */
 Program.prototype.exitVR = function()
 {
-	if(this.display.isPresenting)
+	if(this.vrDisplay.isPresenting)
 	{
-		this.display.exitPresent();
-		this.useVR = false;
+		this.vrDisplay.exitPresent();
+		this.vrEnabled = false;
 	}
 };
 
@@ -591,9 +591,9 @@ Program.prototype.dispose = function()
 {
 	this.manager.destroy();
 
-	if(this.effect !== null)
+	if(this.vrEffect !== null)
 	{
-		this.effect.dispose();
+		this.vrEffect.dispose();
 	}
 
 	if(this.scene !== null)
