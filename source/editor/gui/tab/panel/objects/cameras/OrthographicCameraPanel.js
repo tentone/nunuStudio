@@ -89,41 +89,7 @@ function OrthographicCameraPanel(parent, object)
 	this.form.addText("Viewport");
 	this.form.nextRow();
 
-	//Offset
-	this.form.addText(Locale.position);
-	this.offset = new VectorBox(this.form);
-	this.offset.setType(VectorBox.VECTOR2);
-	this.offset.setStep(0.05);
-	this.offset.size.set(160, 18);
-	this.offset.setOnChange(function()
-	{	
-		var value = self.offset.getValue();
-		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(self.object.offset, "x", value.x),
-			new ChangeAction(self.object.offset, "y", value.y)
-		]));
-	});
-	this.form.add(this.offset);
-	this.form.nextRow();
-
-	//Size
-	this.form.addText("Size");
-	this.viewport = new VectorBox(this.form);
-	this.viewport.setType(VectorBox.VECTOR2);
-	this.viewport.setStep(0.05);
-	this.viewport.size.set(160, 18);
-	this.viewport.setOnChange(function()
-	{
-		var value = self.viewport.getValue();
-		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(self.object.viewport, "x", value.x),
-			new ChangeAction(self.object.viewport, "y", value.y)
-		]));
-	});
-	this.form.add(this.viewport);
-	this.form.nextRow();
+	this.viewport = new ViewportFormTemplate(this.form);
 
 	//Order
 	this.form.addText("Render Order").setAltText("Camera with lower order renders first.");
@@ -180,6 +146,7 @@ OrthographicCameraPanel.prototype.attach = function(object)
 	ObjectPanel.prototype.attach.call(this, object);
 
 	this.scene = object.getScene();
+	this.viewport.attach(this.object.viewport);
 }
 
 OrthographicCameraPanel.prototype.updatePanel = function()
@@ -191,10 +158,10 @@ OrthographicCameraPanel.prototype.updatePanel = function()
 	this.use.setValue(this.scene.cameras.indexOf(this.object) !== -1);
 	this.near.setValue(this.object.near);
 	this.far.setValue(this.object.far);
-	this.offset.setValue(this.object.offset);
-	this.viewport.setValue(this.object.viewport);
 	this.order.setValue(this.object.order);
 	this.clearColor.setValue(this.object.clearColor);
 	this.clearDepth.setValue(this.object.clearDepth);
 	this.clearStencil.setValue(this.object.clearStencil);
+
+	this.viewport.updateValues();
 };

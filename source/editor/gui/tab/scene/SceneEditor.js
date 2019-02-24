@@ -639,6 +639,7 @@ SceneEditor.prototype.render = function()
 		renderer.setScissorTest(true);
 		renderer.setViewport(x, y, width, height);
 		renderer.setScissor(x, y, width, height);
+		
 
 		//Preview selected camera
 		if(Editor.selection[0] instanceof PerspectiveCamera || Editor.selection[0] instanceof OrthographicCamera)
@@ -653,6 +654,7 @@ SceneEditor.prototype.render = function()
 			//renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 			//renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
 			
+			renderer.clear(true, true, true);
 			camera.render(renderer, scene);
 		}
 		//Cube camera
@@ -665,6 +667,7 @@ SceneEditor.prototype.render = function()
 				renderer.setViewport(x, y, w, h);
 				renderer.setScissor(x, y, w, h);
 				renderer.clear(true, true, true);
+
 				cameras[index].updateMatrixWorld();
 				cameras[index].render(renderer, scene);
 			}
@@ -683,9 +686,8 @@ SceneEditor.prototype.render = function()
 		//Preview all cameras in use
 		else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
 		{
-			//Clear before starting rendering
-			renderer.clear();
-
+			renderer.clear(true, true, true);
+			
 			//Render all cameras
 			for(var i = 0; i < scene.cameras.length; i++)
 			{

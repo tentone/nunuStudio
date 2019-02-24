@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * A panel inspector is used to inspect and change the attributes of an object.
+ *
+ * @constructor
+ * @class Panel
+ * @extends {Element}
+ */
 function Panel(parent, object)
 {
 	Element.call(this, parent, "div");
