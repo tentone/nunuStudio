@@ -2,16 +2,12 @@
 
 function OrthographicCameraPanel(parent, object)
 {
-	//Scene
-	this.scene = null;
-
-	//Panel
 	ObjectPanel.call(this, parent, object);
 
 	var self = this;
 
 	//Size
-	this.form.addText("Size");
+	this.form.addText(Locale.size);
 	this.sizeBox = new NumberBox(this.form);
 	this.sizeBox.size.set(80, 18);
 	this.sizeBox.setOnChange(function()
@@ -41,16 +37,14 @@ function OrthographicCameraPanel(parent, object)
 	this.use.size.set(18, 18);
 	this.use.setOnChange(function()
 	{
-		if(self.object !== null && self.scene !== null)
+		var scene = self.object.getScene();
+		if(self.use.getValue() && scene !== null)
 		{
-			if(self.use.getValue())
-			{
-				self.scene.addCamera(self.object);
-			}
-			else
-			{
-				self.scene.removeCamera(self.object);
-			}
+			scene.addCamera(self.object);
+		}
+		else
+		{
+			scene.removeCamera(self.object);
 		}
 	});
 	this.form.add(this.use);
@@ -86,10 +80,11 @@ function OrthographicCameraPanel(parent, object)
 	this.form.nextRow();
 
 	//Viewport
-	this.form.addText("Viewport");
+	this.form.addText(Locale.viewport);
 	this.form.nextRow();
 
-	this.viewport = new ViewportFormTemplate(this.form);
+	this.viewport = new ViewportFormTemplate(this.form, object);
+	console.log(this.viewport);
 
 	//Order
 	this.form.addText("Render Order").setAltText("Camera with lower order renders first.");
@@ -100,7 +95,9 @@ function OrthographicCameraPanel(parent, object)
 	this.order.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "order", self.order.getValue()));
-		self.scene.updateCameraOrder();
+
+		var scene = self.object.getScene();
+		scene.updateCameraOrder();
 	});
 	this.form.add(this.order);
 	this.form.nextRow();
@@ -141,27 +138,18 @@ function OrthographicCameraPanel(parent, object)
 
 OrthographicCameraPanel.prototype = Object.create(ObjectPanel.prototype);
 
-OrthographicCameraPanel.prototype.attach = function(object)
-{
-	ObjectPanel.prototype.attach.call(this, object);
-
-	this.scene = object.getScene();
-	this.viewport.attach(this.object.viewport);
-}
-
 OrthographicCameraPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 	
 	this.sizeBox.setValue(this.object.size);
 	this.mode.setSelectedIndex(this.object.mode);
-	this.use.setValue(this.scene.cameras.indexOf(this.object) !== -1);
+	this.use.setValue(this.object.getScene().cameras.indexOf(this.object) !== -1);
 	this.near.setValue(this.object.near);
 	this.far.setValue(this.object.far);
 	this.order.setValue(this.object.order);
 	this.clearColor.setValue(this.object.clearColor);
 	this.clearDepth.setValue(this.object.clearDepth);
 	this.clearStencil.setValue(this.object.clearStencil);
-
-	this.viewport.updateValues();
+	this.viewport.attach(this.object.viewport);
 };

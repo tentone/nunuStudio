@@ -113,7 +113,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Size
-	this.form.addText("Size");
+	this.form.addText(Locale.size);
 	this.textureSize = new DropdownList(this.form);
 	this.textureSize.size.set(120, 18);
 	this.textureSize.setOnChange(function()

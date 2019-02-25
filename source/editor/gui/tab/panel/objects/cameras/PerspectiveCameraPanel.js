@@ -2,10 +2,6 @@
 
 function PerspectiveCameraPanel(parent, object)
 {
-	//Scene
-	this.scene = null;
-
-	//Panel
 	ObjectPanel.call(this, parent, object);
 
 	var self = this;
@@ -29,13 +25,14 @@ function PerspectiveCameraPanel(parent, object)
 	this.use.size.set(18, 18);
 	this.use.setOnChange(function()
 	{
-		if(self.use.getValue())
+		var scene = self.object.getScene();
+		if(self.use.getValue() && scene !== null)
 		{
-			self.scene.addCamera(self.object);
+			scene.addCamera(self.object);
 		}
 		else
 		{
-			self.scene.removeCamera(self.object);
+			scene.removeCamera(self.object);
 		}
 	});
 	this.form.add(this.use);
@@ -71,44 +68,10 @@ function PerspectiveCameraPanel(parent, object)
 	this.form.nextRow();
 
 	//Viewport
-	this.form.addText("Viewport");
+	this.form.addText(Locale.viewport);
 	this.form.nextRow();
 
-	//Offset
-	this.form.addText(Locale.position);
-	this.offset = new VectorBox(this.form);
-	this.offset.setType(VectorBox.VECTOR2);
-	this.offset.setStep(0.05);
-	this.offset.size.set(160, 18);
-	this.offset.setOnChange(function()
-	{	
-		var value = self.offset.getValue();
-		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(self.object.offset, "x", value.x),
-			new ChangeAction(self.object.offset, "y", value.y)
-		]));
-	});
-	this.form.add(this.offset);
-	this.form.nextRow();
-
-	//Size
-	this.form.addText("Size");
-	this.viewport = new VectorBox(this.form);
-	this.viewport.setType(VectorBox.VECTOR2);
-	this.viewport.setStep(0.05);
-	this.viewport.size.set(160, 18);
-	this.viewport.setOnChange(function()
-	{
-		var value = self.viewport.getValue();
-		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(self.object.viewport, "x", value.x),
-			new ChangeAction(self.object.viewport, "y", value.y)
-		]));
-	});
-	this.form.add(this.viewport);
-	this.form.nextRow();
+	this.viewport = new ViewportFormTemplate(this.form, object);
 	
 	//Order
 	this.form.addText("Render Order").setAltText("Camera with lower order renders first.");
@@ -119,7 +82,8 @@ function PerspectiveCameraPanel(parent, object)
 	this.order.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "order", self.order.getValue()));
-		self.scene.updateCameraOrder();
+		var scene = self.object.getScene();
+		scene.updateCameraOrder();
 	});
 	this.form.add(this.order);
 	this.form.nextRow();
@@ -160,25 +124,17 @@ function PerspectiveCameraPanel(parent, object)
 
 PerspectiveCameraPanel.prototype = Object.create(ObjectPanel.prototype);
 
-PerspectiveCameraPanel.prototype.attach = function(object)
-{
-	ObjectPanel.prototype.attach.call(this, object);
-
-	this.scene = object.getScene();
-}
-
 PerspectiveCameraPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
 
 	this.fov.setValue(this.object.fov);
-	this.use.setValue(this.scene.isCameraActive(this.object));
+	this.use.setValue(this.object.getScene().isCameraActive(this.object));
 	this.near.setValue(this.object.near);
 	this.far.setValue(this.object.far);
-	this.offset.setValue(this.object.offset);
-	this.viewport.setValue(this.object.viewport);
 	this.order.setValue(this.object.order);
 	this.clearColor.setValue(this.object.clearColor);
 	this.clearDepth.setValue(this.object.clearDepth);
 	this.clearStencil.setValue(this.object.clearStencil);
+	this.viewport.attach(this.object.viewport);
 };

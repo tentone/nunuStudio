@@ -70,6 +70,8 @@ LocaleManager.register(
 	vector: "Vector",
 	type: "Type",
 	physics: "Physics",
+	size: "Size",
+	viewport: "Viewport",
 	
 	//Editor
 	project: "Project",

@@ -3,9 +3,13 @@
 /**
  * A panel inspector is used to inspect and change the attributes of an object.
  *
+ * The panel has a form element that should be used to place the object attribute editing GUI.
+ *
  * @constructor
  * @class Panel
  * @extends {Element}
+ * @param {Element} parent
+ * @param {Object} object Object to be edited by this inspector panel.
  */
 function Panel(parent, object)
 {

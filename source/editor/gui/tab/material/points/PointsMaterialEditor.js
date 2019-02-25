@@ -39,7 +39,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Size
-	this.form.addText("Size");
+	this.form.addText(Locale.size);
 	this.pointSize = new NumberBox(this.form);
 	this.pointSize.size.set(60, 18);
 	this.pointSize.setStep(0.05);

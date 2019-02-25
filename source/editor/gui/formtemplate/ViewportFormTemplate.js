@@ -28,7 +28,7 @@ function ViewportFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Size
-	this.form.addText("Size");
+	this.form.addText(Locale.size);
 	this.viewport = new VectorBox(this.form);
 	this.viewport.setType(VectorBox.VECTOR2);
 	this.viewport.setStep(0.05);

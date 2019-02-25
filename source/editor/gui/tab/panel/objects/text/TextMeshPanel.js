@@ -23,7 +23,7 @@ function TextMeshPanel(parent, object)
 	this.form.nextRow();
 
 	//Size
-	this.form.addText("Size");
+	this.form.addText(Locale.size);
 	this.textSize = new NumberBox(this.form);
 	this.textSize.size.set(60, 18);
 	this.textSize.setRange(0, Number.MAX_SAFE_INTEGER);

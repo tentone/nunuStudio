@@ -16,7 +16,7 @@ function PlaneGeometryForm(form, object)
 	this.form.nextRow();
 	
 	//Size
-	this.form.addText("Size");
+	this.form.addText(Locale.size);
 	this.sizeRow = new NumberRow(this.form);
 	this.sizeRow.size.set(0, 18);
 
