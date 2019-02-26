@@ -269,12 +269,25 @@ RunProject.prototype.update = function()
 	try
 	{
 		this.program.update();
-		this.program.render(this.renderer);
 	}
 	catch(error)
 	{
 		Editor.alert("Error while running program.\n(" + error + ")");
 		console.warn("nunuStudio: Error while running program.", error);
+		this.close();
+		return;
+	}
+
+	try
+	{
+		this.program.render(this.renderer);
+	}
+	catch(error)
+	{
+		Editor.alert("Error while rendering program.\n(" + error + ")");
+		console.warn("nunuStudio: Error while rendering program.", error);
+		this.close();
+		return;
 	}
 
 	if(this.stats !== null)
@@ -319,16 +332,28 @@ RunProject.prototype.getProgram = function()
  */
 RunProject.prototype.runProgram = function()
 {
-	//Create a default camera for program (same as runtime).
-	this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
-	this.program.defaultCamera.position.set(0, 5, -5);
-	
-	this.program.setRenderer(this.renderer);
+	try
+	{
+		//Create a default camera for program (same as runtime).
+		this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
+		this.program.defaultCamera.position.set(0, 5, -5);
+		
+		this.program.setRenderer(this.renderer);
 
-	//Initialize scene
-	this.program.setMouseKeyboard(this.mouse, this.keyboard);
-	this.program.initialize();
-	this.program.resize(this.canvas.width, this.canvas.height);
+		//Initialize scene
+		this.program.setMouseKeyboard(this.mouse, this.keyboard);
+
+
+		this.program.initialize();
+		this.program.resize(this.canvas.width, this.canvas.height);
+	}
+	catch(error)
+	{
+		Editor.alert("Error while initializing program.\n(" + error + ")");
+		console.warn("nunuStudio: Error while initializing program.", error);
+		this.close();
+		return;
+	}
 
 	//If program uses VR set button
 	if(this.program.vr === true)

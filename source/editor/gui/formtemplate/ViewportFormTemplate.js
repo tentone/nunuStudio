@@ -9,6 +9,8 @@ function ViewportFormTemplate(form, object)
 {
 	FormTemplate.call(this, form, object);
 
+	var self = this;
+	
 	//Offset
 	this.form.addText(Locale.position);
 	this.offset = new VectorBox(this.form);
