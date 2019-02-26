@@ -40,8 +40,8 @@ function ViewportFormTemplate(form, object)
 		var value = self.viewport.getValue();
 		Editor.addAction(new ActionBundle(
 		[
-			new ChangeAction(self.object.viewport, "x", value.x),
-			new ChangeAction(self.object.viewport, "y", value.y)
+			new ChangeAction(self.object.size, "x", value.x),
+			new ChangeAction(self.object.size, "y", value.y)
 		]));
 	});
 	this.form.add(this.viewport);
@@ -53,5 +53,5 @@ ViewportFormTemplate.prototype = Object.create(FormTemplate.prototype);
 ViewportFormTemplate.prototype.updateValues = function()
 {
 	this.offset.setValue(this.object.offset);
-	this.viewport.setValue(this.object.viewport);
+	this.viewport.setValue(this.object.size);
 };

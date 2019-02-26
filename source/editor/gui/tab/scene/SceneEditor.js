@@ -416,7 +416,7 @@ SceneEditor.prototype.updateSettings = function()
 
 	//Orientation
 	var size = Editor.settings.editor.cameraRotationCubeSize;
-	this.orientation.viewport.viewport.set(size, size);
+	this.orientation.viewport.size.set(size, size);
 
 	//Controls
 	this.navigation.setValue(Editor.settings.editor.navigation);
@@ -634,7 +634,7 @@ SceneEditor.prototype.render = function()
 
 		var viewport = new Viewport();
 		viewport.offset = new THREE.Vector2(10, 10);
-		viewport.viewport = new THREE.Vector2(width, height);
+		viewport.size = new THREE.Vector2(width, height);
 		viewport.anchor = Editor.settings.editor.cameraPreviewPosition;
 		viewport.mode = Viewport.ABSOLUTE;
 

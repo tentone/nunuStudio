@@ -23,12 +23,12 @@ function Viewport(mode)
 	/**
 	 * Camera viewport size.
 	 * 
-	 * Values range from 0.0 to 1.0 in screen space.
+	 * Values range from 0.0 to 1.0 in screen space when in RELATIVE mode.
 	 * 
-	 * @property viewport
+	 * @property size
 	 * @type {THREE.Vector2}
 	 */
-	this.viewport = new THREE.Vector2(1.0, 1.0);
+	this.size = new THREE.Vector2(1.0, 1.0);
 
 	/** 
 	 * Viewport sizing mode.
@@ -47,6 +47,16 @@ function Viewport(mode)
 	 * @type {Number}
 	 */
 	this.anchor = Viewport.TOP_LEFT;
+
+	/**
+	 * Calculated absolute viewport value.
+	 *
+	 * It is calculated using the update() method that should be called after applying changes.
+	 *
+	 * @property viewport
+	 * @type {THREE.Vector4}
+	 */
+	this.viewport = new THREE.Vector4();
 }
 
 /** 
@@ -79,7 +89,7 @@ Viewport.BOTTOM_RIGHT = 304;
  */
 Viewport.prototype.getAspectRatio = function()
 {
-	return this.viewport.x / this.viewport.y;
+	return this.size.x / this.size.y;
 };
 
 /**
@@ -97,12 +107,12 @@ Viewport.prototype.isInside = function(canvas, mouse)
 	if(this.mode === Viewport.RELATIVE)
 	{
 		var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
-		var viewport = new THREE.Vector2(this.viewport.x * width, this.viewport.y * height);
+		var viewport = new THREE.Vector2(this.size.x * width, this.size.y * height);
 	}
 	else //if(this.mode === Viewport.ABSOLUTE)
 	{
 		var offset = this.offset;
-		var viewport = this.viewport;
+		var viewport = this.size;
 	}
 
 	if(this.anchor === Viewport.TOP_LEFT)
@@ -157,12 +167,12 @@ Viewport.prototype.getNormalized = function()
 		if(this.mode === Viewport.RELATIVE)
 		{
 			var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
-			var viewport = new THREE.Vector2(this.viewport.x * width, this.viewport.y * height);
+			var viewport = new THREE.Vector2(this.size.x * width, this.size.y * height);
 		}
 		else //if(this.mode === Viewport.ABSOLUTE)
 		{
 			var offset = this.offset;
-			var viewport = this.viewport;
+			var viewport = this.size;
 		}
 
 		if(this.anchor === Viewport.TOP_LEFT)
@@ -210,12 +220,12 @@ Viewport.prototype.enable = function(renderer)
 	if(this.mode === Viewport.RELATIVE)
 	{
 		var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
-		var viewport = new THREE.Vector2(this.viewport.x * width, this.viewport.y * height);
+		var viewport = new THREE.Vector2(this.size.x * width, this.size.y * height);
 	}
 	else //if(this.mode === Viewport.ABSOLUTE)
 	{
 		var offset = this.offset;
-		var viewport = this.viewport;
+		var viewport = this.size;
 	}
 
 	if(this.anchor === Viewport.BOTTOM_LEFT)
@@ -255,7 +265,7 @@ Viewport.prototype.toJSON = function()
 	var data = 
 	{
 		offset: this.offset.toArray(),
-		viewport: this.viewport.toArray(),
+		size: this.size.toArray(),
 		mode: this.mode,
 		anchor: this.anchor
 	};
@@ -272,7 +282,7 @@ Viewport.prototype.toJSON = function()
 Viewport.prototype.fromJSON = function(data)
 {
 	this.offset.fromArray(data.offset);
-	this.viewport.fromArray(data.viewport);
+	this.size.fromArray(data.size);
 	this.mode = data.mode;
 	this.anchor = data.anchor;
 };

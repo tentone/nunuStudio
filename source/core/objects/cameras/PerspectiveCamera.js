@@ -140,11 +140,11 @@ PerspectiveCamera.prototype.resize = function(x, y)
 {
 	if(this.viewport.mode === Viewport.RELATIVE)
 	{
-		this.composer.setSize(x * this.viewport.viewport.x, y * this.viewport.viewport.y);
+		this.composer.setSize(x * this.viewport.size.x, y * this.viewport.size.y);
 	}
 	else if(this.viewport.mode === Viewport.ABSOLUTE)
 	{
-		this.composer.setSize(this.viewport.viewport.x, this.viewport.viewport.y);
+		this.composer.setSize(this.viewport.size.x, this.viewport.size.y);
 	}
 };
 

@@ -16,7 +16,7 @@ function OrientationCube()
 	 * @type {Viewport}
 	 */
 	this.viewport = new Viewport(Viewport.ABSOLUTE);
-	this.viewport.viewport.set(150, 150);
+	this.viewport.size.set(150, 150);
 	this.viewport.offset.set(10, 10);
 	this.viewport.anchor = Viewport.TOP_RIGHT;
 
