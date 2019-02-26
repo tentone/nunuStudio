@@ -628,18 +628,18 @@ SceneEditor.prototype.render = function()
 	//Camera preview
 	if(Editor.settings.editor.cameraPreviewEnabled)
 	{
+		var scene = this.scene;
 		var width = Editor.settings.editor.cameraPreviewPercentage * this.canvas.width;
 		var height = Editor.settings.editor.cameraPreviewPercentage * this.canvas.height;
-		var scene = this.scene;
-		
-		var position = Editor.settings.editor.cameraPreviewPosition;
-		var x = (position === Settings.BOTTOM_RIGHT || position === Settings.TOP_RIGHT) ? this.canvas.width - width - 10 : 10;
-		var y = (position === Settings.BOTTOM_RIGHT || position === Settings.BOTTOM_LEFT) ? this.canvas.height - height - 10 : 10;
+
+		var viewport = new Viewport();
+		viewport.offset = new THREE.Vector2(10, 10);
+		viewport.viewport = new THREE.Vector2(width, height);
+		viewport.anchor = Editor.settings.editor.cameraPreviewPosition;
+		viewport.mode = Viewport.ABSOLUTE;
 
 		renderer.setScissorTest(true);
-		renderer.setViewport(x, y, width, height);
-		renderer.setScissor(x, y, width, height);
-		
+		viewport.enable(renderer);
 
 		//Preview selected camera
 		if(Editor.selection[0] instanceof PerspectiveCamera || Editor.selection[0] instanceof OrthographicCamera)

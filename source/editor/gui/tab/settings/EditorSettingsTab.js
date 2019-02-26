@@ -328,10 +328,10 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.addText(Locale.position);
 	this.cameraPreviewPosition = new DropdownList(this.form);
 	this.cameraPreviewPosition.size.set(150, 18);
-	this.cameraPreviewPosition.addValue("Bottom Right", Settings.BOTTOM_RIGHT);
-	this.cameraPreviewPosition.addValue("Bottom Left", Settings.BOTTOM_LEFT);
-	this.cameraPreviewPosition.addValue("Top Right", Settings.TOP_RIGHT);
-	this.cameraPreviewPosition.addValue("Top Left", Settings.TOP_LEFT);
+	this.cameraPreviewPosition.addValue("Bottom Right", Viewport.BOTTOM_RIGHT);
+	this.cameraPreviewPosition.addValue("Bottom Left", Viewport.BOTTOM_LEFT);
+	this.cameraPreviewPosition.addValue("Top Right", Viewport.TOP_RIGHT);
+	this.cameraPreviewPosition.addValue("Top Left", Viewport.TOP_LEFT);
 	this.cameraPreviewPosition.setOnChange(function()
 	{
 		Editor.settings.editor.cameraPreviewPosition = self.cameraPreviewPosition.getValue();

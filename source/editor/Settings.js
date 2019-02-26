@@ -26,12 +26,6 @@ Settings.PLANAR_BACK = 15;
 Settings.PLANAR_TOP = 16;
 Settings.PLANAR_BOTTOM = 17;
 
-//Position
-Settings.TOP_LEFT = 20;
-Settings.TOP_RIGHT = 21;
-Settings.BOTTOM_LEFT = 22;
-Settings.BOTTOM_RIGHT = 23;
-
 //Update channel
 Settings.STABLE = 30;
 Settings.BETA = 31;
@@ -66,7 +60,7 @@ Settings.prototype.loadDefault = function()
 		axisEnabled: true,
 		cameraPreviewEnabled: true,
 		cameraPreviewPercentage: 0.35,
-		cameraPreviewPosition: Settings.BOTTOM_RIGHT,
+		cameraPreviewPosition: Viewport.BOTTOM_RIGHT,
 		lockMouse: true,
 		transformationSpace: "world",
 		navigation: Settings.ORBIT,
