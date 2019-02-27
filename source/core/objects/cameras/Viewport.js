@@ -80,6 +80,18 @@ Viewport.TOP_RIGHT = 302;
 Viewport.BOTTOM_LEFT = 303;
 Viewport.BOTTOM_RIGHT = 304;
 
+/** 
+ * Update the viewport box from the values.
+ *
+ * Has to be called after applying changes to the viewport.
+ *
+ * @method update
+ */
+Viewport.prototype.update = function()
+{
+	//TODO <ADD CODE HERE>
+};
+
 /**
  * Get the aspect ratio of this viewport x/y.
  * 
