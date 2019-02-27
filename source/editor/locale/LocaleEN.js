@@ -72,6 +72,26 @@ LocaleManager.register(
 	physics: "Physics",
 	size: "Size",
 	viewport: "Viewport",
+	mode: "Mode",
+	anchor: "Anchor",
+	
+	//Values
+	relative: "Relative",
+	absolute: "Absolute",
+	bottomRight: "Bottom-Right",
+	bottomLeft: "Bottom-Left",
+	topRight: "Top-Right",
+	topLeft: "Top-Left",
+	firstPerson: "First-Person",
+	orbit: "Orbit",
+	left: "Left",
+	right: "Right",
+	front: "Front",
+	back: "Back",
+	top: "Top",
+	bottom: "Bottom",
+	local: "Local",
+	world: "World",
 	
 	//Editor
 	project: "Project",

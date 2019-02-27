@@ -127,8 +127,8 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.addText("Transformations space");
 	this.transformationSpace = new DropdownList(this.form);
 	this.transformationSpace.size.set(150, 18);
-	this.transformationSpace.addValue("Local", "local");
-	this.transformationSpace.addValue("World", "world");
+	this.transformationSpace.addValue(Locale.local, "local");
+	this.transformationSpace.addValue(Locale.world, "world");
 	this.transformationSpace.setOnChange(function()
 	{
 		Editor.settings.editor.transformationSpace = self.transformationSpace.getValue();
@@ -192,14 +192,14 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.addText("Navigation Mode");
 	this.navigation = new DropdownList(this.form);
 	this.navigation.size.set(150, 18);
-	this.navigation.addValue("First-Person", Settings.FIRST_PERSON);
-	this.navigation.addValue("Orbit", Settings.ORBIT);
-	this.navigation.addValue("Left", Settings.PLANAR_LEFT);
-	this.navigation.addValue("Right", Settings.PLANAR_RIGHT);
-	this.navigation.addValue("Front", Settings.PLANAR_FRONT);
-	this.navigation.addValue("Back", Settings.PLANAR_BACK);
-	this.navigation.addValue("Top", Settings.PLANAR_TOP);
-	this.navigation.addValue("Bottom", Settings.PLANAR_BOTTOM);
+	this.navigation.addValue(Locale.firstPerson, Settings.FIRST_PERSON);
+	this.navigation.addValue(Locale.orbit, Settings.ORBIT);
+	this.navigation.addValue(Locale.left, Settings.PLANAR_LEFT);
+	this.navigation.addValue(Locale.right, Settings.PLANAR_RIGHT);
+	this.navigation.addValue(Locale.front, Settings.PLANAR_FRONT);
+	this.navigation.addValue(Locale.back, Settings.PLANAR_BACK);
+	this.navigation.addValue(Locale.top, Settings.PLANAR_TOP);
+	this.navigation.addValue(Locale.bottom, Settings.PLANAR_BOTTOM);
 	this.navigation.setOnChange(function()
 	{
 		Editor.settings.editor.navigation = self.navigation.getValue();
@@ -328,10 +328,10 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.addText(Locale.position);
 	this.cameraPreviewPosition = new DropdownList(this.form);
 	this.cameraPreviewPosition.size.set(150, 18);
-	this.cameraPreviewPosition.addValue("Bottom Right", Viewport.BOTTOM_RIGHT);
-	this.cameraPreviewPosition.addValue("Bottom Left", Viewport.BOTTOM_LEFT);
-	this.cameraPreviewPosition.addValue("Top Right", Viewport.TOP_RIGHT);
-	this.cameraPreviewPosition.addValue("Top Left", Viewport.TOP_LEFT);
+	this.cameraPreviewPosition.addValue(Locale.bottomRight, Viewport.BOTTOM_RIGHT);
+	this.cameraPreviewPosition.addValue(Locale.bottomLeft, Viewport.BOTTOM_LEFT);
+	this.cameraPreviewPosition.addValue(Locale.topRight, Viewport.TOP_RIGHT);
+	this.cameraPreviewPosition.addValue(Locale.topLeft, Viewport.TOP_LEFT);
 	this.cameraPreviewPosition.setOnChange(function()
 	{
 		Editor.settings.editor.cameraPreviewPosition = self.cameraPreviewPosition.getValue();

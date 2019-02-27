@@ -153,7 +153,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Combine environment map
-	this.form.addText("Mode");
+	this.form.addText(Locale.mode);
 	this.combine = new DropdownList(this.form);
 	this.combine.position.set(100, 85);
 	this.combine.size.set(0, 18);

@@ -158,8 +158,8 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.side = new DropdownList(this.form);
 	this.side.position.set(100, 85);
 	this.side.size.set(150, 18);
-	this.side.addValue("Front", THREE.FrontSide);
-	this.side.addValue("Back", THREE.BackSide);
+	this.side.addValue(Locale.front, THREE.FrontSide);
+	this.side.addValue(Locale.back, THREE.BackSide);
 	this.side.addValue("Double", THREE.DoubleSide);
 	this.side.setOnChange(function()
 	{

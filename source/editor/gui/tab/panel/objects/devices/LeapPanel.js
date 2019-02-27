@@ -7,7 +7,7 @@ function LeapPanel(parent, object)
 	var self = this;
 
 	//Mode
-	this.form.addText("Mode");
+	this.form.addText(Locale.mode);
 	this.mode = new DropdownList(this.form);
 	this.mode.size.set(80, 18);
 	this.mode.addValue("Desk", Script.INIT);

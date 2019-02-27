@@ -132,7 +132,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	}
 
 	//Mode
-	this.form.addText("Mode");
+	this.form.addText(Locale.mode);
 	this.mode = new DropdownList(this.form);
 	this.mode.size.set(120, 18);
 	this.mode.setOnChange(function()

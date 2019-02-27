@@ -186,8 +186,8 @@ function SceneEditor(parent, closeable, container, index)
 	this.transformationSpace.position.set(145, 5);
 	this.transformationSpace.updatePosition(Element.BOTTOM_RIGHT);
 	this.transformationSpace.updateSize();
-	this.transformationSpace.addValue("Local", "local");
-	this.transformationSpace.addValue("World", "world");
+	this.transformationSpace.addValue(Locale.local, "local");
+	this.transformationSpace.addValue(Locale.world, "world");
 	this.transformationSpace.element.style.opacity = 0.5;
 	this.transformationSpace.setOnChange(function()
 	{
@@ -215,14 +215,14 @@ function SceneEditor(parent, closeable, container, index)
 	this.navigation.position.set(40, 5);
 	this.navigation.updatePosition(Element.BOTTOM_RIGHT);
 	this.navigation.updateSize();
-	this.navigation.addValue("First-Person", Settings.FIRST_PERSON);
-	this.navigation.addValue("Orbit", Settings.ORBIT);
-	this.navigation.addValue("Left", Settings.PLANAR_LEFT);
-	this.navigation.addValue("Right", Settings.PLANAR_RIGHT);
-	this.navigation.addValue("Front", Settings.PLANAR_FRONT);
-	this.navigation.addValue("Back", Settings.PLANAR_BACK);
-	this.navigation.addValue("Top", Settings.PLANAR_TOP);
-	this.navigation.addValue("Bottom", Settings.PLANAR_BOTTOM);
+	this.navigation.addValue(Locale.firstPerson, Settings.FIRST_PERSON);
+	this.navigation.addValue(Locale.orbit, Settings.ORBIT);
+	this.navigation.addValue(Locale.left, Settings.PLANAR_LEFT);
+	this.navigation.addValue(Locale.right, Settings.PLANAR_RIGHT);
+	this.navigation.addValue(Locale.front, Settings.PLANAR_FRONT);
+	this.navigation.addValue(Locale.back, Settings.PLANAR_BACK);
+	this.navigation.addValue(Locale.top, Settings.PLANAR_TOP);
+	this.navigation.addValue(Locale.bottom, Settings.PLANAR_BOTTOM);
 	this.navigation.element.style.opacity = 0.5;
 	this.navigation.setOnChange(function()
 	{

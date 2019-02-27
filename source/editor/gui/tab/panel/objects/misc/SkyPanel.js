@@ -228,7 +228,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Shadowmap camera left
-	this.form.addText("Left");
+	this.form.addText(Locale.left);
 	this.shadowLeft = new NumberBox(this.form);
 	this.shadowLeft.size.set(60, 18);
 	this.shadowLeft.setStep(0.1);
@@ -241,7 +241,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Shadowmap camera right
-	this.form.addText("Right");
+	this.form.addText(Locale.right);
 	this.shadowRight = new NumberBox(this.form);
 	this.shadowRight.size.set(60, 18);
 	this.shadowRight.setStep(0.1);
@@ -254,7 +254,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Shadowmap camera top
-	this.form.addText("Top");
+	this.form.addText(Locale.top);
 	this.shadowTop = new NumberBox(this.form);
 	this.shadowTop.size.set(60, 18);
 	this.shadowTop.setStep(0.1);
@@ -267,7 +267,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Shadowmap camera bottom
-	this.form.addText("Bottom");
+	this.form.addText(Locale.bottom);
 	this.shadowBottom = new NumberBox(this.form);
 	this.shadowBottom.size.set(60, 18);
 	this.shadowBottom.setStep(0.1);
