@@ -30,6 +30,26 @@ function Viewport(mode)
 	 */
 	this.size = new THREE.Vector2(1.0, 1.0);
 
+	/**
+	 * Width of the final output canvas.
+	 *
+	 * This width should match the canvas size / rendering resolution.
+	 *
+	 * @property width
+	 * @type {Number}
+	 */
+	this.width = 1;
+
+	/**
+	 * Height of the final output canvas.
+	 *
+	 * This height should match the canvas size / rendering resolution.
+	 *
+	 * @property height
+	 * @type {Number}
+	 */
+	this.height = 1;
+
 	/** 
 	 * Viewport sizing mode.
 	 * 
@@ -83,13 +103,43 @@ Viewport.BOTTOM_RIGHT = 304;
 /** 
  * Update the viewport box from the values.
  *
- * Has to be called after applying changes to the viewport.
+ * Has to be called after applying changes to the viewport, the viewport is resized of the 
  *
  * @method update
  */
 Viewport.prototype.update = function()
 {
-	//TODO <ADD CODE HERE>
+	if(this.mode === Viewport.RELATIVE)
+	{
+		var offset = new THREE.Vector2(this.offset.x * this.width, this.offset.y * this.height);
+		var viewport = new THREE.Vector2(this.size.x * this.width, this.size.y * this.height);
+	}
+	else if(this.mode === Viewport.ABSOLUTE)
+	{
+		var offset = this.offset;
+		var viewport = this.size;
+	}
+
+	if(this.anchor === Viewport.BOTTOM_LEFT)
+	{
+		this.viewport.set(offset.x, offset.y, viewport.x, viewport.y);
+	}
+	else if(this.anchor === Viewport.BOTTOM_RIGHT)
+	{
+		var x = this.width - viewport.x - offset.x;
+		this.viewport.set(x, offset.y, viewport.x, viewport.y);
+	}
+	else if(this.anchor === Viewport.TOP_LEFT)
+	{
+		var y = this.height - viewport.y - offset.y;
+		this.viewport.set(offset.x, y, viewport.x, viewport.y);
+	}
+	else if(this.anchor === Viewport.TOP_RIGHT)
+	{
+		var x = this.width - viewport.x - offset.x;
+		var y = this.height - viewport.y - offset.y;
+		this.viewport.set(x, y, viewport.x, viewport.y);
+	}
 };
 
 /**
@@ -113,48 +163,15 @@ Viewport.prototype.getAspectRatio = function()
  */
 Viewport.prototype.isInside = function(canvas, mouse)
 {
-	var width = canvas.width;
-	var height = canvas.height;
+	//TODO <REMOVE LATER>
+	this.width = canvas.width;
+	this.height = canvas.height;
+	this.update();
 
-	if(this.mode === Viewport.RELATIVE)
-	{
-		var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
-		var viewport = new THREE.Vector2(this.size.x * width, this.size.y * height);
-	}
-	else //if(this.mode === Viewport.ABSOLUTE)
-	{
-		var offset = this.offset;
-		var viewport = this.size;
-	}
-
-	if(this.anchor === Viewport.TOP_LEFT)
-	{
-		return mouse.position.x > offset.x &&
-		mouse.position.x < offset.x + viewport.x &&
-		mouse.position.y > offset.y &&
-		mouse.position.y < offset.y + viewport.y;
-	}
-	else if(this.anchor === Viewport.TOP_RIGHT)
-	{
-		return mouse.position.x > width - viewport.x - offset.x &&
-		mouse.position.x < width - offset.x &&
-		mouse.position.y > offset.y &&
-		mouse.position.y < offset.y + viewport.y;
-	}
-	else if(this.anchor === Viewport.BOTTOM_LEFT)
-	{
-		return mouse.position.x > offset.x &&
-		mouse.position.x < offset.x + viewport.x &&
-		mouse.position.y > height - offset.y - viewport.y &&
-		mouse.position.y < height - offset.y;
-	}
-	else //if(this.anchor === Viewport.BOTTOM_RIGHT)
-	{
-		return mouse.position.x > width - viewport.x - offset.x &&
-		mouse.position.x < width - offset.x &&
-		mouse.position.y > height - offset.y - viewport.y &&
-		mouse.position.y < height - offset.y;
-	}
+	return mouse.position.x > this.viewport.x &&
+	mouse.position.x < this.viewport.x + this.viewport.z &&
+	mouse.position.y < this.height - this.viewport.y &&
+	mouse.position.y > this.height - this.viewport.y - this.viewport.w;
 };
 
 /** 
@@ -173,45 +190,16 @@ Viewport.prototype.getNormalized = function()
 
 	return function(canvas, mouse)
 	{
-		var width = canvas.width;
-		var height = canvas.height;
+		//TODO <REMOVE LATER>
+		this.width = canvas.width;
+		this.height = canvas.height;
+		this.update();
 
-		if(this.mode === Viewport.RELATIVE)
-		{
-			var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
-			var viewport = new THREE.Vector2(this.size.x * width, this.size.y * height);
-		}
-		else //if(this.mode === Viewport.ABSOLUTE)
-		{
-			var offset = this.offset;
-			var viewport = this.size;
-		}
+		var x = mouse.position.x - this.viewport.z - this.viewport.x;
+		var y = mouse.position.y - (this.height - (this.viewport.y + this.viewport.w));
 
-		if(this.anchor === Viewport.TOP_LEFT)
-		{
-			var x = mouse.position.x - viewport.x - offset.x;
-			var y = mouse.position.y - offset.y;
-			normalized.set((x / viewport.x) * 2 + 1, (-y / viewport.y) * 2 + 1);
-		}
-		else if(this.anchor === Viewport.TOP_RIGHT)
-		{
-			var x = width - mouse.position.x - viewport.x - offset.x;
-			var y = mouse.position.y - offset.y;
-			normalized.set((-x / viewport.x) * 2 - 1, (-y / viewport.y) * 2 + 1);
-		}
-		else if(this.anchor === Viewport.BOTTOM_LEFT)
-		{
-			var x = mouse.position.x - viewport.x - offset.x;
-			var y = height - mouse.position.y - offset.y;
-			normalized.set((x / viewport.x) * 2 + 1, (y / viewport.y) * 2 - 1);
-		}
-		else //if(this.anchor === Viewport.BOTTOM_RIGHT)
-		{
-			var x = width - mouse.position.x - viewport.x - offset.x;
-			var y = height - mouse.position.y - offset.y;
-			normalized.set((-x / viewport.x) * 2 - 1, (y / viewport.y) * 2 - 1);
-		}
-		
+		normalized.set((x / this.viewport.z) * 2 + 1, (-y / this.viewport.w) * 2 + 1);
+
 		return normalized;
 	};
 }();
@@ -226,44 +214,13 @@ Viewport.prototype.getNormalized = function()
  */
 Viewport.prototype.enable = function(renderer)
 {
-	var width = renderer.domElement.width;
-	var height = renderer.domElement.height;
-
-	if(this.mode === Viewport.RELATIVE)
-	{
-		var offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
-		var viewport = new THREE.Vector2(this.size.x * width, this.size.y * height);
-	}
-	else //if(this.mode === Viewport.ABSOLUTE)
-	{
-		var offset = this.offset;
-		var viewport = this.size;
-	}
-
-	if(this.anchor === Viewport.BOTTOM_LEFT)
-	{
-		renderer.setViewport(offset.x, offset.y, viewport.x, viewport.y);
-		renderer.setScissor(offset.x, offset.y, viewport.x, viewport.y);
-	}
-	else if(this.anchor === Viewport.BOTTOM_RIGHT)
-	{
-		var x = width - viewport.x - offset.x;
-		renderer.setViewport(x, offset.y, viewport.x, viewport.y);
-		renderer.setScissor(x, offset.y, viewport.x, viewport.y);
-	}
-	else if(this.anchor === Viewport.TOP_LEFT)
-	{
-		var y = height - viewport.y - offset.y;
-		renderer.setViewport(offset.x, y, viewport.x, viewport.y);
-		renderer.setScissor(offset.x, y, viewport.x, viewport.y);
-	}
-	else //if(this.anchor === Viewport.TOP_RIGHT)
-	{
-		var x = width - viewport.x - offset.x;
-		var y = height - viewport.y - offset.y;
-		renderer.setViewport(x, y, viewport.x, viewport.y);
-		renderer.setScissor(x, y, viewport.x, viewport.y);
-	}
+	//TODO <REMOVE LATER>
+	this.width = renderer.domElement.width;
+	this.height = renderer.domElement.height;
+	this.update();
+	
+	renderer.setViewport(this.viewport);
+	renderer.setScissor(this.viewport);
 };
 
 /**
