@@ -10,7 +10,7 @@
  */
 function RunProject(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Run", Editor.FILE_PATH + "icons/misc/play.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.run, Editor.FILE_PATH + "icons/misc/play.png");
 
 	var self = this;
 
@@ -89,7 +89,7 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.position.set(5, 5);
 	this.fullscreenButton.size.set(30, 30);
 	this.fullscreenButton.setImage(Editor.FILE_PATH + "icons/misc/fullscreen.png");
-	this.fullscreenButton.setAltText("Toggle fullscreen");
+	this.fullscreenButton.setAltText(Locale.toggleFullscreen);
 	this.fullscreenButton.setImageScale(0.8, 0.8);
 	this.fullscreenButton.updateSize();
 	this.fullscreenButton.updatePosition(Element.BOTTOM_RIGHT);
@@ -125,7 +125,7 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton.size.set(30, 30);
 	this.vrButton.position.set(40, 5);
 	this.vrButton.setImage(Editor.FILE_PATH + "icons/misc/vr.png");
-	this.vrButton.setAltText("Toggle VR mode");
+	this.vrButton.setAltText(Locale.toggleVR);
 	this.vrButton.setImageScale(0.8, 0.8);
 	this.vrButton.updateSize();
 	this.vrButton.updatePosition(Element.BOTTOM_RIGHT);
@@ -272,7 +272,7 @@ RunProject.prototype.update = function()
 	}
 	catch(error)
 	{
-		Editor.alert("Error while running program.\n(" + error + ")");
+		Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
 		console.warn("nunuStudio: Error while running program.", error);
 		this.close();
 		return;
@@ -284,7 +284,7 @@ RunProject.prototype.update = function()
 	}
 	catch(error)
 	{
-		Editor.alert("Error while rendering program.\n(" + error + ")");
+		Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
 		console.warn("nunuStudio: Error while rendering program.", error);
 		this.close();
 		return;
@@ -345,7 +345,7 @@ RunProject.prototype.runProgram = function()
 	}
 	catch(error)
 	{
-		Editor.alert("Error while initializing program.\n(" + error + ")");
+		Editor.alert(Locale.errorRunInitialize + "\n(" + error + ")");
 		console.warn("nunuStudio: Error while initializing program.", error);
 		this.close();
 		return;

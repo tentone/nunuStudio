@@ -115,6 +115,10 @@ LocaleManager.register(
 	file: "File",
 	material: "Material",
 	
+	//Run tab
+	toggleVR: "Toggle Virtual Reality",
+	toggleFullscreen: "Toggle Fullscreen",
+
 	//Messages
 	projectSaved: "Project saved.",
 	projectLoaded: "Project loaded",
@@ -142,6 +146,9 @@ LocaleManager.register(
 	unknownFileFormat: "Unknown file format.",
 	failedLoadSpine: "Failed to load Spine animation, make sure that .json and .atlas have the same name.",
 	errorPaste: "Error pasting object",
+	errorRunInitialize: "Error while initializing program.",
+	errorRunpdate: "Error while running program.",
+	errorRunRender: "Error while rendering program.",
 
 	//Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",
