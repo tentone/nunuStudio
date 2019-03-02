@@ -175,14 +175,13 @@ Scene.prototype.resize = function(x, y)
 {
 	if(this.defaultCamera !== null)
 	{
-		this.defaultCamera.aspect = x / y;
-		this.defaultCamera.updateProjectionMatrix();
+		this.defaultCamera.resize(x, y);
 	}
 
 	for(var i = 0; i < this.cameras.length; i++)
 	{
-		this.cameras[i].aspect = x / y;
-		this.cameras[i].updateProjectionMatrix();
+
+		this.cameras[i].resize(x, y);
 	}
 
 	for(var i = 0; i < this.children.length; i++)

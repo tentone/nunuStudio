@@ -128,6 +128,28 @@ OrthographicCamera.RESIZE_HORIZONTAL = 0;
 OrthographicCamera.RESIZE_VERTICAL = 1;
 
 /**
+ * Resize this camera, should be called every time after resizing the screen.
+ *
+ * Updates the viewport, rendering composer and the camera projection matrix.
+ *
+ * @method resize
+ * @param {Number} x Width of the screen.
+ * @param {Number} y Height of the screen.
+ * @param {Viewport} viewport Viewport that encapsulates the viewport of the camera.
+ */
+OrthographicCamera.prototype.resize = function(x, y, viewport)
+{
+	this.aspect = x / y;
+	this.updateProjectionMatrix();
+
+	this.viewport.width = x;
+	this.viewport.height = y;
+	this.viewport.update();
+
+	this.composer.setSize(this.viewport.viewport.z, this.viewport.viewport.w);
+};
+
+/**
  * Prepare the renderer to render the frame using the camera settings.
  *
  * Should be called before the render() method to setup clear configuration and viewport.
@@ -151,25 +173,6 @@ OrthographicCamera.prototype.setupRenderer = function(renderer)
 OrthographicCamera.prototype.render = function(renderer, scene)
 {
 	this.composer.render(renderer, scene, this, 0.016);
-};
-
-/**
- * Resize this camera, should be called every time after resizing the screen.
- *
- * @method resize
- * @param {Number} x Width.
- * @param {Number} y Height.
- */
-OrthographicCamera.prototype.resize = function(x, y)
-{
-	if(this.viewport.mode === Viewport.RELATIVE)
-	{
-		this.composer.setSize(x * this.viewport.size.x, y * this.viewport.size.y);
-	}
-	else if(this.viewport.mode === Viewport.ABSOLUTE)
-	{
-		this.composer.setSize(this.viewport.size.x, this.viewport.size.y);
-	}
 };
 
 /**

@@ -629,32 +629,29 @@ SceneEditor.prototype.render = function()
 	if(Editor.settings.editor.cameraPreviewEnabled)
 	{
 		var scene = this.scene;
-		var width = Editor.settings.editor.cameraPreviewPercentage * this.canvas.width;
-		var height = Editor.settings.editor.cameraPreviewPercentage * this.canvas.height;
-
-		var viewport = new Viewport();
-		viewport.offset = new THREE.Vector2(10, 10);
-		viewport.size = new THREE.Vector2(width, height);
-		viewport.anchor = Editor.settings.editor.cameraPreviewPosition;
-		viewport.mode = Viewport.ABSOLUTE;
+		var width = this.canvas.width;
+		var height = this.canvas.height;
 
 		renderer.setScissorTest(true);
+
+		var viewport = new Viewport();
+		viewport.width = width;
+		viewport.height = height;
+		viewport.offset = new THREE.Vector2(10, 10);
+		viewport.size = new THREE.Vector2(Editor.settings.editor.cameraPreviewPercentage * this.canvas.width, Editor.settings.editor.cameraPreviewPercentage * this.canvas.height);
+		viewport.anchor = Editor.settings.editor.cameraPreviewPosition;
+		viewport.mode = Viewport.ABSOLUTE;
+		viewport.update();
 		viewport.enable(renderer);
 
 		//Preview selected camera
 		if(Editor.selection[0] instanceof PerspectiveCamera || Editor.selection[0] instanceof OrthographicCamera)
 		{
-			var camera = Editor.selection[0];
-			camera.aspect = width / height;
-			camera.updateProjectionMatrix();
-			camera.resize(width, height);
-
-			//TODO <USE CAMERA VIEWPORT>
-			//renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-			//renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-			//renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
-			
 			renderer.clear(true, true, true);
+
+			var camera = Editor.selection[0];
+			camera.resize(width, height, viewport);
+			camera.setupRenderer(renderer);
 			camera.render(renderer, scene);
 		}
 		//Cube camera
@@ -687,20 +684,12 @@ SceneEditor.prototype.render = function()
 		else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
 		{
 			renderer.clear(true, true, true);
-			
-			//Render all cameras
+
 			for(var i = 0; i < scene.cameras.length; i++)
 			{
 				var camera = scene.cameras[i];
-				camera.aspect = width / height;
-				camera.updateProjectionMatrix();
-				camera.resize(width, height);
-
-				//TODO <USE CAMERA VIEWPORT>
-				//renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				//renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				//renderer.clear(camera.clearColor, camera.clearDepth, camera.clearStencil);
-				
+				camera.resize(width, height, viewport);
+				camera.setupRenderer(renderer);
 				camera.render(renderer, scene);
 			}
 		}

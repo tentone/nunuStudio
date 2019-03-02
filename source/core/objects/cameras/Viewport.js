@@ -69,7 +69,7 @@ function Viewport(mode)
 	this.anchor = Viewport.TOP_LEFT;
 
 	/**
-	 * Calculated absolute viewport value.
+	 * Calculated absolute viewport values (x, y, width, height) stored in a vector.
 	 *
 	 * It is calculated using the update() method that should be called after applying changes.
 	 *
@@ -106,39 +106,56 @@ Viewport.BOTTOM_RIGHT = 304;
  * Has to be called after applying changes to the viewport, the viewport is resized of the 
  *
  * @method update
+ * @param {Viewport} container Viewport that contains this viewport.
  */
-Viewport.prototype.update = function()
+Viewport.prototype.update = function(container)
 {
+	var width, height;
+	var x, y;
+
+	if(container === undefined)
+	{
+		width = this.width;
+		height = this.height;
+		x = 0;
+		y = 0;
+	}
+	else
+	{
+		width = container.viewport.z;
+		height = container.viewport.w;
+		x = container.viewport.x;
+		y = container.viewport.y;
+	}
+
+	var offset, viewport;
+
 	if(this.mode === Viewport.RELATIVE)
 	{
-		var offset = new THREE.Vector2(this.offset.x * this.width, this.offset.y * this.height);
-		var viewport = new THREE.Vector2(this.size.x * this.width, this.size.y * this.height);
+		offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
+		viewport = new THREE.Vector2(this.size.x * width, this.size.y * height);
 	}
 	else if(this.mode === Viewport.ABSOLUTE)
 	{
-		var offset = this.offset;
-		var viewport = this.size;
+		offset = this.offset;
+		viewport = this.size;
 	}
 
 	if(this.anchor === Viewport.BOTTOM_LEFT)
 	{
-		this.viewport.set(offset.x, offset.y, viewport.x, viewport.y);
+		this.viewport.set(offset.x + x, offset.y + y, viewport.x, viewport.y);
 	}
 	else if(this.anchor === Viewport.BOTTOM_RIGHT)
 	{
-		var x = this.width - viewport.x - offset.x;
-		this.viewport.set(x, offset.y, viewport.x, viewport.y);
+		this.viewport.set(width - viewport.x - offset.x + x, offset.y + y, viewport.x, viewport.y);
 	}
 	else if(this.anchor === Viewport.TOP_LEFT)
 	{
-		var y = this.height - viewport.y - offset.y;
-		this.viewport.set(offset.x, y, viewport.x, viewport.y);
+		this.viewport.set(offset.x + x, height - viewport.y - offset.y + y, viewport.x, viewport.y);
 	}
 	else if(this.anchor === Viewport.TOP_RIGHT)
 	{
-		var x = this.width - viewport.x - offset.x;
-		var y = this.height - viewport.y - offset.y;
-		this.viewport.set(x, y, viewport.x, viewport.y);
+		this.viewport.set(width - viewport.x - offset.x + x, height - viewport.y - offset.y + y, viewport.x, viewport.y);
 	}
 };
 
@@ -163,11 +180,6 @@ Viewport.prototype.getAspectRatio = function()
  */
 Viewport.prototype.isInside = function(canvas, mouse)
 {
-	//TODO <REMOVE LATER>
-	this.width = canvas.width;
-	this.height = canvas.height;
-	this.update();
-
 	return mouse.position.x > this.viewport.x &&
 	mouse.position.x < this.viewport.x + this.viewport.z &&
 	mouse.position.y < this.height - this.viewport.y &&
@@ -214,11 +226,6 @@ Viewport.prototype.getNormalized = function()
  */
 Viewport.prototype.enable = function(renderer)
 {
-	//TODO <REMOVE LATER>
-	this.width = renderer.domElement.width;
-	this.height = renderer.domElement.height;
-	this.update();
-	
 	renderer.setViewport(this.viewport);
 	renderer.setScissor(this.viewport);
 };
