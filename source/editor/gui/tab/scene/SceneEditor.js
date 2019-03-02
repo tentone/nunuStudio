@@ -596,17 +596,20 @@ SceneEditor.prototype.render = function()
 		return;
 	}
 
+	var width = this.canvas.width;
+	var height = this.canvas.height;
+
 	var renderer = this.renderer;
 	renderer.autoClear = false;
+	renderer.setViewport(0, 0, width, height);
+	renderer.setScissor(0, 0, width, height);
 
-	//Render scene
-	renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
-	renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
+	//Clear with scene background
 	renderer.setClearColor(this.scene.background);
 	renderer.clear(true, true, true);
-	renderer.render(this.scene, this.camera);
 
-	//Render tools
+	//Render scene
+	renderer.render(this.scene, this.camera);
 	renderer.render(this.helperScene, this.camera);
 	renderer.render(this.toolScene, this.camera);
 
@@ -628,17 +631,13 @@ SceneEditor.prototype.render = function()
 	//Camera preview
 	if(Editor.settings.editor.cameraPreviewEnabled)
 	{
-		var scene = this.scene;
-		var width = this.canvas.width;
-		var height = this.canvas.height;
-
 		renderer.setScissorTest(true);
 
 		var viewport = new Viewport();
 		viewport.width = width;
 		viewport.height = height;
 		viewport.offset = new THREE.Vector2(10, 10);
-		viewport.size = new THREE.Vector2(Editor.settings.editor.cameraPreviewPercentage * this.canvas.width, Editor.settings.editor.cameraPreviewPercentage * this.canvas.height);
+		viewport.size = new THREE.Vector2(Editor.settings.editor.cameraPreviewPercentage * width, Editor.settings.editor.cameraPreviewPercentage * height);
 		viewport.anchor = Editor.settings.editor.cameraPreviewPosition;
 		viewport.mode = Viewport.ABSOLUTE;
 		viewport.update();
@@ -652,7 +651,7 @@ SceneEditor.prototype.render = function()
 			var camera = Editor.selection[0];
 			camera.resize(width, height, viewport);
 			camera.setupRenderer(renderer);
-			camera.render(renderer, scene);
+			camera.render(renderer, this.scene);
 		}
 		//Cube camera
 		else if(Editor.selection[0] instanceof CubeCamera)
@@ -666,11 +665,10 @@ SceneEditor.prototype.render = function()
 				renderer.clear(true, true, true);
 
 				cameras[index].updateMatrixWorld();
-				cameras[index].render(renderer, scene);
+				cameras[index].render(renderer, this.scene);
 			}
 
-			var size = height/3;
-			
+			var size = height / 3;
 			x += width - size * 4;
 			
 			renderCamera(CubeTexture.LEFT, x, y + size, size, size);
@@ -685,19 +683,17 @@ SceneEditor.prototype.render = function()
 		{
 			renderer.clear(true, true, true);
 
-			for(var i = 0; i < scene.cameras.length; i++)
+			for(var i = 0; i < this.scene.cameras.length; i++)
 			{
-				var camera = scene.cameras[i];
+				var camera = this.scene.cameras[i];
 				camera.resize(width, height, viewport);
 				camera.setupRenderer(renderer);
-				camera.render(renderer, scene);
+				camera.render(renderer, this.scene);
 			}
 		}
 	}
 
-	//Clear scissor configuration
 	renderer.setScissorTest(false);
-	renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
 };
 
 SceneEditor.prototype.resetCanvas = function()
@@ -1224,8 +1220,6 @@ SceneEditor.prototype.resizeCanvas = function()
 	var width = this.size.x * window.devicePixelRatio;
 	var height = this.size.y * window.devicePixelRatio;
 
-	this.canvas.width = width;
-	this.canvas.height = height;
 	this.canvas.style.width = this.size.x + "px";
 	this.canvas.style.height = this.size.y + "px";
 

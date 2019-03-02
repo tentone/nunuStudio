@@ -115,12 +115,12 @@ PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
  */
 PerspectiveCamera.prototype.resize = function(x, y, viewport)
 {
-	this.aspect = x / y;
-	this.updateProjectionMatrix();
-
 	this.viewport.width = x;
 	this.viewport.height = y;
-	this.viewport.update();
+	this.viewport.update(viewport);
+
+	this.aspect = this.viewport.getAspectRatio();
+	this.updateProjectionMatrix();
 
 	this.composer.setSize(this.viewport.viewport.z, this.viewport.viewport.w);
 };
@@ -179,7 +179,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 {
 	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov) / this.zoom;
 	var height = 2 * top;
-	var width = this.aspect * height * this.viewport.getAspectRatio();
+	var width = this.aspect * height;
 	var left = -0.5 * width;
 
 	if(this.filmOffset !== 0)

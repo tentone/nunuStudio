@@ -30,6 +30,24 @@ function Viewport(mode)
 	 */
 	this.size = new THREE.Vector2(1.0, 1.0);
 
+	/** 
+	 * Viewport sizing mode.
+	 * 
+	 * Can be RELATIVE or ABSOLUTE.
+	 *
+	 * @property mode
+	 * @type {Number}
+	 */
+	this.mode = mode !== undefined ? mode : Viewport.RELATIVE;
+
+	/** 
+	 * Positioning anchor of the viewport.
+	 *
+	 * @property anchor
+	 * @type {Number}
+	 */
+	this.anchor = Viewport.TOP_LEFT;
+
 	/**
 	 * Width of the final output canvas.
 	 *
@@ -50,24 +68,6 @@ function Viewport(mode)
 	 */
 	this.height = 1;
 
-	/** 
-	 * Viewport sizing mode.
-	 * 
-	 * Can be RELATIVE or ABSOLUTE.
-	 *
-	 * @property mode
-	 * @type {Number}
-	 */
-	this.mode = mode !== undefined ? mode : Viewport.RELATIVE;
-
-	/** 
-	 * Positioning anchor of the viewport.
-	 *
-	 * @property anchor
-	 * @type {Number}
-	 */
-	this.anchor = Viewport.TOP_LEFT;
-
 	/**
 	 * Calculated absolute viewport values (x, y, width, height) stored in a vector.
 	 *
@@ -76,7 +76,7 @@ function Viewport(mode)
 	 * @property viewport
 	 * @type {THREE.Vector4}
 	 */
-	this.viewport = new THREE.Vector4();
+	this.viewport = new THREE.Vector4(0, 0, 1, 1);
 }
 
 /** 
@@ -106,7 +106,7 @@ Viewport.BOTTOM_RIGHT = 304;
  * Has to be called after applying changes to the viewport, the viewport is resized of the 
  *
  * @method update
- * @param {Viewport} container Viewport that contains this viewport.
+ * @param {Viewport} container Viewport that contains this viewport (optional).
  */
 Viewport.prototype.update = function(container)
 {
@@ -115,17 +115,17 @@ Viewport.prototype.update = function(container)
 
 	if(container === undefined)
 	{
-		width = this.width;
-		height = this.height;
 		x = 0;
 		y = 0;
+		width = this.width;
+		height = this.height;
 	}
 	else
 	{
-		width = container.viewport.z;
-		height = container.viewport.w;
 		x = container.viewport.x;
 		y = container.viewport.y;
+		width = container.viewport.z;
+		height = container.viewport.w;
 	}
 
 	var offset, viewport;
@@ -160,15 +160,14 @@ Viewport.prototype.update = function(container)
 };
 
 /**
- * Get the aspect ratio of this viewport x/y.
+ * Get the aspect ratio of this viewport in x / y.
  * 
  * @method getAspectRatio
- * @param {Canvas} canvas DOM canvas only required to calculate aspect ration on relative sizing.
  * @return {Number} The aspect ratio of the viewport.
  */
 Viewport.prototype.getAspectRatio = function()
 {
-	return this.size.x / this.size.y;
+	return this.viewport.z / this.viewport.w;
 };
 
 /**
@@ -202,11 +201,6 @@ Viewport.prototype.getNormalized = function()
 
 	return function(canvas, mouse)
 	{
-		//TODO <REMOVE LATER>
-		this.width = canvas.width;
-		this.height = canvas.height;
-		this.update();
-
 		var x = mouse.position.x - this.viewport.z - this.viewport.x;
 		var y = mouse.position.y - (this.height - (this.viewport.y + this.viewport.w));
 

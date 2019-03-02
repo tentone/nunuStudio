@@ -339,11 +339,7 @@ RunProject.prototype.runProgram = function()
 		this.program.defaultCamera.position.set(0, 5, -5);
 		
 		this.program.setRenderer(this.renderer);
-
-		//Initialize scene
 		this.program.setMouseKeyboard(this.mouse, this.keyboard);
-
-
 		this.program.initialize();
 		this.program.resize(this.canvas.width, this.canvas.height);
 	}
@@ -387,10 +383,6 @@ RunProject.prototype.runProgram = function()
 	{
 		this.mouse.setLock(true);
 	}
-
-	//Renderer size
-	this.renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
-	this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
 };
 
 /** 
@@ -417,8 +409,6 @@ RunProject.prototype.resizeCanvas = function()
 	var width = this.size.x * window.devicePixelRatio;
 	var height = this.size.y * window.devicePixelRatio;
 
-	this.canvas.width = width;
-	this.canvas.height = height;
 	this.canvas.style.width = this.size.x + "px";
 	this.canvas.style.height = this.size.y + "px";
 

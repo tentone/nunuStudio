@@ -19,6 +19,7 @@ function OrientationCube()
 	this.viewport.size.set(150, 150);
 	this.viewport.offset.set(10, 10);
 	this.viewport.anchor = Viewport.TOP_RIGHT;
+	
 
 	/**
 	 * Cube visualization camera
@@ -148,6 +149,9 @@ OrientationCube.prototype.updateRotation = function(camera)
  */
 OrientationCube.prototype.render = function(renderer, canvas)
 {
+	this.viewport.width = renderer.domElement.width;
+	this.viewport.height = renderer.domElement.height;
+	this.viewport.update();
 	this.viewport.enable(renderer);
 
 	renderer.render(this.scene, this.camera);

@@ -139,12 +139,12 @@ OrthographicCamera.RESIZE_VERTICAL = 1;
  */
 OrthographicCamera.prototype.resize = function(x, y, viewport)
 {
-	this.aspect = x / y;
-	this.updateProjectionMatrix();
-
 	this.viewport.width = x;
 	this.viewport.height = y;
-	this.viewport.update();
+	this.viewport.update(viewport);
+
+	this.aspect = this.viewport.getAspectRatio();
+	this.updateProjectionMatrix();
 
 	this.composer.setSize(this.viewport.viewport.z, this.viewport.viewport.w);
 };
@@ -206,14 +206,14 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 	{
 		this.top = this.size / 2;
 		this.bottom = -this.top;
-		this.right = this.top * this.aspect * this.viewport.getAspectRatio();
+		this.right = this.top * this.aspect;
 		this.left = -this.right;
 	}
 	else if(this.mode === OrthographicCamera.RESIZE_VERTICAL)
 	{
 		this.right = this.size / 2;
 		this.left = -this.right;
-		this.top = this.right / this.aspect * this.viewport.getAspectRatio();
+		this.top = this.right / this.aspect;
 		this.bottom = -this.top;
 	}
 
