@@ -1,11 +1,11 @@
 "use strict";
 
 /** 
- * Viewport object form template.
+ * Renderer configuration object form template.
  *
- * @class ViewportFormTemplate
+ * @class RendererConfigurationFormTemplate
  */
-function ViewportFormTemplate(form, object)
+function RendererConfigurationFormTemplate(form, object)
 {
 	FormTemplate.call(this, form, object);
 
@@ -76,9 +76,9 @@ function ViewportFormTemplate(form, object)
 	this.form.nextRow();
 }
 
-ViewportFormTemplate.prototype = Object.create(FormTemplate.prototype);
+RendererConfigurationFormTemplate.prototype = Object.create(FormTemplate.prototype);
 
-ViewportFormTemplate.prototype.updateValues = function()
+RendererConfigurationFormTemplate.prototype.updateValues = function()
 {
 	this.offset.setValue(this.object.offset);
 	this.sizeBox.setValue(this.object.size);

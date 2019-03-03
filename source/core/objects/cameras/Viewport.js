@@ -232,15 +232,12 @@ Viewport.prototype.enable = function(renderer)
  */
 Viewport.prototype.toJSON = function()
 {
-	var data = 
-	{
+	return {
 		offset: this.offset.toArray(),
 		size: this.size.toArray(),
 		mode: this.mode,
 		anchor: this.anchor
 	};
-
-	return data;
 };
 
 /**

@@ -17,6 +17,11 @@ function RendererConfiguration()
 	 */
 	this.backend = RendererConfiguration.WEBGL;
 
+	this.autoClear = false;
+	this.autoClearColor = false;
+	this.autoClearDepth = false;
+	this.autoClearStencil = false;
+
 	/**
 	 * Antialiasing flag.
 	 *
@@ -187,11 +192,7 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 
 	if(this.backend === RendererConfiguration.WEBGL2)
 	{
-
-	}
-	else
-	{
-
+		context = canvas.getContext("webgl2");
 	}
 
 	var renderer = new THREE.WebGLRenderer(
@@ -208,10 +209,10 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 		logarithmicDepthBuffer: this.logarithmicDepthBuffer
 	});
 
-	renderer.autoClear = false;
-	renderer.autoClearColor = false;
-	renderer.autoClearDepth = false;
-	renderer.autoClearStencil = false;
+	renderer.autoClear = this.autoClear;
+	renderer.autoClearColor = this.autoClearColor;
+	renderer.autoClearDepth = this.autoClearDepth;
+	renderer.autoClearStencil = this.autoClearStencil;
 
 	renderer.shadowMap.enabled = this.shadows;
 	renderer.shadowMap.type = this.shadowsType;
@@ -233,10 +234,50 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 
 RendererConfiguration.prototype.toJSON = function()
 {
-	//TODO <ADD CODE HERE>
+	return {
+		backend: this.backend,
+		antialiasing: this.antialiasing,
+		shadows: this.shadows,
+		stencil: this.stencil,
+		shadowsType: this.shadowsType,
+		shadowsAutoUpdate: this.shadowsAutoUpdate,
+		toneMapping: this.toneMapping,
+		toneMappingExposure: this.toneMappingExposure,
+		toneMappingWhitePoint: this.toneMappingWhitePoint,
+		sortObjects: this.sortObjects,
+		gammaFactor: this.gammaFactor,
+		gammaInput: this.gammaInput,
+		gammaOutput: this.gammaOutput,
+		precision: this.precision,
+		alpha: this.alpha,
+		premultipliedAlpha: this.premultipliedAlpha,
+		preserveDrawingBuffer: this.preserveDrawingBuffer,
+		powerPreference: this.powerPreference,
+		logarithmicDepthBuffer: this.logarithmicDepthBuffer,
+		physicallyCorrectLights: this.physicallyCorrectLights
+	};
 };
 
 RendererConfiguration.prototype.fromJSON = function(data)
 {
-	//TODO <ADD CODE HERE>
+	this.backend = data.backend;
+	this.antialiasing = data.antialiasing;
+	this.shadows = data.shadows;
+	this.stencil = data.stencil;
+	this.shadowsType = data.shadowsType;
+	this.shadowsAutoUpdate = data.shadowsAutoUpdate;
+	this.toneMapping = data.toneMapping;
+	this.toneMappingExposure = data.toneMappingExposure;
+	this.toneMappingWhitePoint = data.toneMappingWhitePoint;
+	this.sortObjects = data.sortObjects;
+	this.gammaFactor = data.gammaFactor;
+	this.gammaInput = data.gammaInput;
+	this.gammaOutput = data.gammaOutput;
+	this.precision = data.precision;
+	this.alpha = data.alpha;
+	this.premultipliedAlpha = data.premultipliedAlpha;
+	this.preserveDrawingBuffer = data.preserveDrawingBuffer;
+	this.powerPreference = data.powerPreference;
+	this.logarithmicDepthBuffer = data.logarithmicDepthBuffer;
+	this.physicallyCorrectLights = data.physicallyCorrectLights;
 };
