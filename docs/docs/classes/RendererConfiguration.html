@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Mouse</title>  
+	<title>nunuStudio RendererConfiguration</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -196,19 +196,18 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Mouse Class</h1>
+						<h1>RendererConfiguration Class</h1>
 						<div class="box meta">
 						
 						
 						
-									Module: <a href="../modules/Input.html">Input</a>
+									Module: <a href="../modules/Core.html">Core</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Mouse instance for input in sync with the running 3D application.</p>
-						<p>The mouse object provided by scripts is automatically updated by the runtime handler.</p>
+							<p>Renderer configuration stores all the WebGL renderer related parameters.</p>
 						
 						</div>
 						
@@ -217,7 +216,6 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
@@ -226,95 +224,105 @@
 								<div id="index" class="api-class-tabpanel index">
 									<h2 class="off-left">Item Index</h2>
 						
-										<div class="index-section methods">
-											<h3>Methods</h3>
-						
-											<ul class="index-list methods">
-													<li class="index-item method">
-														<a href="#method_buttonDoubleClicked">buttonDoubleClicked</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_buttonJustPressed">buttonJustPressed</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_buttonJustReleased">buttonJustReleased</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_buttonPressed">buttonPressed</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_create">create</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_dispose">dispose</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_insideCanvas">insideCanvas</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setCanvas">setCanvas</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setLock">setLock</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_update">update</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_updateKey">updateKey</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_updatePosition">updatePosition</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 										<div class="index-section properties">
 											<h3>Properties</h3>
 						
 											<ul class="index-list properties">
 													<li class="index-item property">
-														<a href="#property_canvas">canvas</a>
+														<a href="#property_@stencil">@stencil</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_delta">delta</a>
+														<a href="#property_antialiasing">antialiasing</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_domElement">domElement</a>
+														<a href="#property_autoClear">autoClear</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_doubleClicked">doubleClicked</a>
+														<a href="#property_autoClearColor">autoClearColor</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_events">events</a>
+														<a href="#property_autoClearDepth">autoClearDepth</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_keys">keys</a>
+														<a href="#property_autoClearStencil">autoClearStencil</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_position">position</a>
+														<a href="#property_backend">backend</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_wheel">wheel</a>
+														<a href="#property_gammaFactor">gammaFactor</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_gammaInput">gammaInput</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_gammaOutput">gammaOutput</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_logarithmicDepthBuffer">logarithmicDepthBuffer</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_physicallyCorrectLights">physicallyCorrectLights</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_powerPreference">powerPreference</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_precision">precision</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_premultipliedAlpha">premultipliedAlpha</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_premultipliedAlpha">premultipliedAlpha</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_preserveDrawingBuffer">preserveDrawingBuffer</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_shadows">shadows</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_shadowsAutoUpdate">shadowsAutoUpdate</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_shadowsType">shadowsType</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_sortObjects">sortObjects</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_toneMapping">toneMapping</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_toneMappingExposure">toneMappingExposure</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_toneMappingWhitePoint">toneMappingWhitePoint</a>
 						
 													</li>
 											</ul>
@@ -325,668 +333,23 @@
 						
 											<ul class="index-list attrs">
 													<li class="index-item attr">
-														<a href="#attr_BACK">BACK</a>
+														<a href="#attr_WEBGL">WEBGL</a>
 													</li>
 													<li class="index-item attr">
-														<a href="#attr_FORWARD">FORWARD</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_LEFT">LEFT</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_MIDDLE">MIDDLE</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_RIGHT">RIGHT</a>
+														<a href="#attr_WEBGL2">WEBGL2</a>
 													</li>
 											</ul>
 										</div>
 						
 								</div>
 						
-									<div id="methods" class="api-class-tabpanel">
-										<h2 class="off-left">Methods</h2>
-						
-											<div id="method_buttonDoubleClicked" class="method item">
-												<h3 class="name"><code>buttonDoubleClicked</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if Mouse button was double clicked.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to check status of</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if some mouse button was just double clicked</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_buttonJustPressed" class="method item">
-												<h3 class="name"><code>buttonJustPressed</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if a mouse button was just pressed.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to check status of</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if button was just pressed</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_buttonJustReleased" class="method item">
-												<h3 class="name"><code>buttonJustReleased</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if a mouse button was just released.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to check status of</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if button was just released</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_buttonPressed" class="method item">
-												<h3 class="name"><code>buttonPressed</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if mouse button is currently pressed.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Button to check status of</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if button is currently pressed</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_create" class="method item">
-												<h3 class="name"><code>create</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Create mouse events.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_dispose" class="method item">
-												<h3 class="name"><code>dispose</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Dispose mouse events.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_insideCanvas" class="method item">
-												<h3 class="name"><code>insideCanvas</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if mouse is inside attached canvas (updated async).</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if mouse is currently inside the canvas</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_setCanvas" class="method item">
-												<h3 class="name"><code>setCanvas</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>canvas</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Element to be used for coordinates calculation relative to that canvas.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">canvas</code>
-																	<span class="type">DOM</span>
-											
-											
-																<div class="param-description">
-																	<p>Canvas to be attached to the Mouse instance</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setLock" class="method item">
-												<h3 class="name"><code>setLock</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>value</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set mouse lock state.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">value</code>
-																	<span class="type">Boolean</span>
-											
-											
-																<div class="param-description">
-																	<p>If true pointer lock will be requested for the canvas attached to the Mouse instance</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_update" class="method item">
-												<h3 class="name"><code>update</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update mouse buttons state, position, wheel and delta synchronously.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_updateKey" class="method item">
-												<h3 class="name"><code>updateKey</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>button</code>
-															</li>
-															<li class="arg">
-																	<code>action</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update a mouse button.</p>
-											<p>Automatically called by the runtime.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">button</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">action</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_updatePosition" class="method item">
-												<h3 class="name"><code>updatePosition</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>x</code>
-															</li>
-															<li class="arg">
-																	<code>y</code>
-															</li>
-															<li class="arg">
-																	<code>xDiff</code>
-															</li>
-															<li class="arg">
-																	<code>yDiff</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update mouse position.</p>
-											<p>Automatically called by the runtime.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">x</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">y</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">xDiff</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">yDiff</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-									</div>
 						
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
-											<div id="property_canvas" class="property item">
-												<h3 class="name"><code>canvas</code></h3>
-												<span class="type">DOM</span>
+											<div id="property_@stencil" class="property item">
+												<h3 class="name"><code>@stencil</code></h3>
+												<span class="type">Boolean</span>
 											
 											
 											
@@ -1000,16 +363,16 @@
 												</div>
 											
 												<div class="description">
-													<p>Canvas attached to this mouse instance used to calculate position and delta in element space coordinates.</p>
+													<p>Whether the drawing buffer has a stencil buffer of at least 8 bits.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_delta" class="property item">
-												<h3 class="name"><code>delta</code></h3>
-												<span class="type">Vector2</span>
+											<div id="property_antialiasing" class="property item">
+												<h3 class="name"><code>antialiasing</code></h3>
+												<span class="type">Boolean</span>
 											
 											
 											
@@ -1023,16 +386,17 @@
 												</div>
 											
 												<div class="description">
-													<p>Mouse movement (coordinates in window space).</p>
+													<p>Antialiasing flag.</p>
 											
 												</div>
 											
+													<p><strong>Default:</strong> false</p>
 											
 											
 											</div>
-											<div id="property_domElement" class="property item">
-												<h3 class="name"><code>domElement</code></h3>
-												<span class="type">DOM</span>
+											<div id="property_autoClear" class="property item">
+												<h3 class="name"><code>autoClear</code></h3>
+												<span class="type">Boolean</span>
 											
 											
 											
@@ -1046,16 +410,16 @@
 												</div>
 											
 												<div class="description">
-													<p>DOM element where to attach the mouse events.</p>
+													<p>Defines whether the renderer should automatically clear its output before rendering a frame.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_doubleClicked" class="property item">
-												<h3 class="name"><code>doubleClicked</code></h3>
-												<span class="type">Array</span>
+											<div id="property_autoClearColor" class="property item">
+												<h3 class="name"><code>autoClearColor</code></h3>
+												<span class="type">Boolean</span>
 											
 											
 											
@@ -1069,16 +433,16 @@
 												</div>
 											
 												<div class="description">
-													<p>Indicates a button of the mouse was double clicked.</p>
+													<p>Defines whether the renderer should clear the color buffer.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_events" class="property item">
-												<h3 class="name"><code>events</code></h3>
-												<span class="type"><a href="../classes/EventManager.html" class="crosslink">EventManager</a></span>
+											<div id="property_autoClearDepth" class="property item">
+												<h3 class="name"><code>autoClearDepth</code></h3>
+												<span class="type">Boolean</span>
 											
 											
 											
@@ -1092,18 +456,16 @@
 												</div>
 											
 												<div class="description">
-													<p>Event manager responsible for updating the raw data variables.</p>
-											<p>Diferent events are used depending on the host platform.</p>
-											<p>When the update method is called the raw data is reset.</p>
+													<p>Defines whether the renderer should clear the depth buffer.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_keys" class="property item">
-												<h3 class="name"><code>keys</code></h3>
-												<span class="type">Array</span>
+											<div id="property_autoClearStencil" class="property item">
+												<h3 class="name"><code>autoClearStencil</code></h3>
+												<span class="type">Boolean</span>
 											
 											
 											
@@ -1117,38 +479,15 @@
 												</div>
 											
 												<div class="description">
-													<p>Array with mouse buttons status.</p>
+													<p>Defines whether the renderer should clear the stencil buffer.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_position" class="property item">
-												<h3 class="name"><code>position</code></h3>
-												<span class="type">Vector2</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Mouse position inside of the window (coordinates in window space).</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_wheel" class="property item">
-												<h3 class="name"><code>wheel</code></h3>
+											<div id="property_backend" class="property item">
+												<h3 class="name"><code>backend</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -1163,7 +502,404 @@
 												</div>
 											
 												<div class="description">
-													<p>Mouse scroll wheel movement.</p>
+													<p>Prefered redering backend API to use if available.</p>
+											<p>If the selected backend is not available it defaults to WebGL.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_gammaFactor" class="property item">
+												<h3 class="name"><code>gammaFactor</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Gamma factor applied to the image.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_gammaInput" class="property item">
+												<h3 class="name"><code>gammaInput</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If set, then it expects that all textures and colors are premultiplied gamma.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_gammaOutput" class="property item">
+												<h3 class="name"><code>gammaOutput</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If set, then it expects that all textures and colors need to be outputted in premultiplied gamma.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_logarithmicDepthBuffer" class="property item">
+												<h3 class="name"><code>logarithmicDepthBuffer</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_physicallyCorrectLights" class="property item">
+												<h3 class="name"><code>physicallyCorrectLights</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Whether to use physically correct lighting mode.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_powerPreference" class="property item">
+												<h3 class="name"><code>powerPreference</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be &quot;high-performance&quot;, &quot;low-power&quot; or &quot;default&quot;.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_precision" class="property item">
+												<h3 class="name"><code>precision</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Shader precision. Can be &quot;highp&quot;, &quot;mediump&quot; or &quot;lowp&quot;. Defaults to &quot;highp&quot; if supported by the device.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_premultipliedAlpha" class="property item">
+												<h3 class="name"><code>premultipliedAlpha</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Whether the canvas contains an alpha (transparency) buffer or not.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_premultipliedAlpha" class="property item">
+												<h3 class="name"><code>premultipliedAlpha</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Whether the renderer will assume that colors have premultiplied alpha.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_preserveDrawingBuffer" class="property item">
+												<h3 class="name"><code>preserveDrawingBuffer</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Whether to preserve the buffers until manually cleared or overwritten.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_shadows" class="property item">
+												<h3 class="name"><code>shadows</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If true the program is rendered with shadows.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> true</p>
+											
+											
+											</div>
+											<div id="property_shadowsAutoUpdate" class="property item">
+												<h3 class="name"><code>shadowsAutoUpdate</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Enables automatic updates to the shadows in the scene.</p>
+											<p>If you do not require dynamic lighting / shadows, you may set this to false.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_shadowsType" class="property item">
+												<h3 class="name"><code>shadowsType</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Shadow map filtering type.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> PCFSoftShadowMap</p>
+											
+											
+											</div>
+											<div id="property_sortObjects" class="property item">
+												<h3 class="name"><code>sortObjects</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If true the renderer sorts the objects from back to front for rendering.</p>
+											<p>Important if using multiple transparent objects.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_toneMapping" class="property item">
+												<h3 class="name"><code>toneMapping</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Tone mapping mode.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> THREE.NoToneMapping</p>
+											
+											
+											</div>
+											<div id="property_toneMappingExposure" class="property item">
+												<h3 class="name"><code>toneMappingExposure</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Exposure level of tone mapping.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_toneMappingWhitePoint" class="property item">
+												<h3 class="name"><code>toneMappingWhitePoint</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Tone mapping white point.</p>
 											
 												</div>
 											
@@ -1175,14 +911,15 @@
 									<div id="attrs" class="api-class-tabpanel">
 										<h2 class="off-left">Attributes</h2>
 						
-											<div id="attr_BACK" class="attr item">
-												<a name="config_BACK"></a> 
-												<h3 class="name"><code>BACK</code></h3>
+											<div id="attr_WEBGL" class="attr item">
+												<a name="config_WEBGL"></a> 
+												<h3 class="name"><code>WEBGL</code></h3>
 												<span class="type">Number</span>
 											
 											
 											
 											
+													<span class="flag static">static</span>
 											
 											
 											
@@ -1195,21 +932,23 @@
 												</div>
 											
 												<div class="description">
-													<p>Back mouse navigation button.</p>
+													<p>Use WebGL 1.0 to render data.</p>
+											<p>Most devices fully support WebGL 1.0 at this point, should work for any type of device.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="attr_FORWARD" class="attr item">
-												<a name="config_FORWARD"></a> 
-												<h3 class="name"><code>FORWARD</code></h3>
+											<div id="attr_WEBGL2" class="attr item">
+												<a name="config_WEBGL2"></a> 
+												<h3 class="name"><code>WEBGL2</code></h3>
 												<span class="type">Number</span>
 											
 											
 											
 											
+													<span class="flag static">static</span>
 											
 											
 											
@@ -1222,88 +961,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Forward mouse navigation button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_LEFT" class="attr item">
-												<a name="config_LEFT"></a> 
-												<h3 class="name"><code>LEFT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Left mouse button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_MIDDLE" class="attr item">
-												<a name="config_MIDDLE"></a> 
-												<h3 class="name"><code>MIDDLE</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Middle mouse button.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_RIGHT" class="attr item">
-												<a name="config_RIGHT"></a> 
-												<h3 class="name"><code>RIGHT</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Right mouse button.</p>
+													<p>Use WebGL 2.0 to render data, should be faster for some types of data.</p>
+											<p>Additinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.</p>
 											
 												</div>
 											

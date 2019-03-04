@@ -101,6 +101,7 @@
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+								<li><a href="../classes/RendererConfiguration.html">RendererConfiguration</a></li>
 								<li><a href="../classes/RendererState.html">RendererState</a></li>
 								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
@@ -253,6 +254,10 @@
 														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
+													<li class="index-item method">
+														<a href="#method_update">update</a>
+						
+													</li>
 											</ul>
 										</div>
 						
@@ -265,6 +270,10 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_height">height</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_mode">mode</a>
 						
 													</li>
@@ -273,7 +282,15 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_size">size</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_viewport">viewport</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_width">width</a>
 						
 													</li>
 											</ul>
@@ -351,13 +368,7 @@
 											<div id="method_getAspectRatio" class="method item">
 												<h3 class="name"><code>getAspectRatio</code></h3>
 											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>canvas</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
+													<span class="paren">()</span>
 											
 													<span class="returns-inline">
 														<span class="type">Number</span>
@@ -378,27 +389,10 @@
 												</div>
 											
 												<div class="description">
-													<p>Get the aspect ratio of this viewport x/y.</p>
+													<p>Get the aspect ratio of this viewport in x / y.</p>
 											
 												</div>
 											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">canvas</code>
-																	<span class="type">Canvas</span>
-											
-											
-																<div class="param-description">
-																	<p>DOM canvas only required to calculate aspect ration on relative sizing.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -414,7 +408,16 @@
 											<div id="method_getNormalized" class="method item">
 												<h3 class="name"><code>getNormalized</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>canvas</code>
+															</li>
+															<li class="arg">
+																	<code>mouse</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">THREE.Vector2</span>
@@ -440,6 +443,34 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">canvas</code>
+																	<span class="type">DOM</span>
+											
+											
+																<div class="param-description">
+																	<p>Canvas for offset calculation.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">mouse</code>
+																	<span class="type"><a href="../classes/Mouse.html" class="crosslink">Mouse</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Mouse object with coordinates inside of the canvas.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -507,7 +538,7 @@
 											
 											
 																<div class="param-description">
-																	<p>Mouse object.</p>
+																	<p>Mouse object with coordinates inside of the canvas.</p>
 											
 																</div>
 											
@@ -608,6 +639,58 @@
 											
 											
 											</div>
+											<div id="method_update" class="method item">
+												<h3 class="name"><code>update</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>container</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Update the viewport box from the values.</p>
+											<p>Has to be called after applying changes to the viewport, the viewport is resized of the</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">container</code>
+																	<span class="type"><a href="../classes/Viewport.html" class="crosslink">Viewport</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Viewport that contains this viewport (optional).</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 									</div>
 						
 									<div id="properties" class="api-class-tabpanel">
@@ -630,6 +713,30 @@
 											
 												<div class="description">
 													<p>Positioning anchor of the viewport.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_height" class="property item">
+												<h3 class="name"><code>height</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Height of the final output canvas.</p>
+											<p>This height should match the canvas size / rendering resolution.</p>
 											
 												</div>
 											
@@ -684,8 +791,8 @@
 											
 											
 											</div>
-											<div id="property_viewport" class="property item">
-												<h3 class="name"><code>viewport</code></h3>
+											<div id="property_size" class="property item">
+												<h3 class="name"><code>size</code></h3>
 												<span class="type">THREE.Vector2</span>
 											
 											
@@ -701,7 +808,55 @@
 											
 												<div class="description">
 													<p>Camera viewport size.</p>
-											<p>Values range from 0.0 to 1.0 in screen space.</p>
+											<p>Values range from 0.0 to 1.0 in screen space when in RELATIVE mode.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_viewport" class="property item">
+												<h3 class="name"><code>viewport</code></h3>
+												<span class="type">THREE.Vector4</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Calculated absolute viewport values (x, y, width, height) stored in a vector.</p>
+											<p>It is calculated using the update() method that should be called after applying changes.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_width" class="property item">
+												<h3 class="name"><code>width</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Width of the final output canvas.</p>
+											<p>This width should match the canvas size / rendering resolution.</p>
 											
 												</div>
 											

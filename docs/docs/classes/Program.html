@@ -101,6 +101,7 @@
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+								<li><a href="../classes/RendererConfiguration.html">RendererConfiguration</a></li>
 								<li><a href="../classes/RendererState.html">RendererState</a></li>
 								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
@@ -312,10 +313,6 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
-														<a href="#property_antialiasing">antialiasing</a>
-						
-													</li>
-													<li class="index-item property">
 														<a href="#property_app">app</a>
 						
 													</li>
@@ -325,6 +322,10 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_canvas">canvas</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_clock">clock</a>
 						
 													</li>
 													<li class="index-item property">
@@ -372,27 +373,11 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_rendererConfig">rendererConfig</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_scene">scene</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_shadows">shadows</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_shadowsType">shadowsType</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_toneMapping">toneMapping</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_toneMappingExposure">toneMappingExposure</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_toneMappingWhitePoint">toneMappingWhitePoint</a>
 						
 													</li>
 													<li class="index-item property">
@@ -1262,30 +1247,6 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
-											<div id="property_antialiasing" class="property item">
-												<h3 class="name"><code>antialiasing</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Antialiasing flag.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> false</p>
-											
-											
-											</div>
 											<div id="property_app" class="property item">
 												<h3 class="name"><code>app</code></h3>
 												<span class="type">NunuApp</span>
@@ -1351,6 +1312,29 @@
 												<div class="description">
 													<p>Canvas being used to draw content.</p>
 											<p>This canvas is where the WebGL rendering context was created.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_clock" class="property item">
+												<h3 class="name"><code>clock</code></h3>
+												<span class="type">THREE.Clock</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Clock object used to measure times between frames.</p>
 											
 												</div>
 											
@@ -1614,6 +1598,29 @@
 											
 											
 											</div>
+											<div id="property_rendererConfig" class="property item">
+												<h3 class="name"><code>rendererConfig</code></h3>
+												<span class="type"><a href="../classes/RendererConfiguration.html" class="crosslink">RendererConfiguration</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Renderer configuration applied to the WebGL renderer.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_scene" class="property item">
 												<h3 class="name"><code>scene</code></h3>
 												<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
@@ -1631,124 +1638,6 @@
 											
 												<div class="description">
 													<p>Scene currently running in the program.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_shadows" class="property item">
-												<h3 class="name"><code>shadows</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>If true the program is rendered with shadows</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> true</p>
-											
-											
-											</div>
-											<div id="property_shadowsType" class="property item">
-												<h3 class="name"><code>shadowsType</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Shadow map filtering type.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> PCFSoftShadowMap</p>
-											
-											
-											</div>
-											<div id="property_toneMapping" class="property item">
-												<h3 class="name"><code>toneMapping</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Tone mapping mode.</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> THREE.NoToneMapping</p>
-											
-											
-											</div>
-											<div id="property_toneMappingExposure" class="property item">
-												<h3 class="name"><code>toneMappingExposure</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Exposure level of tone mapping.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_toneMappingWhitePoint" class="property item">
-												<h3 class="name"><code>toneMappingWhitePoint</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Tone mapping white point.</p>
 											
 												</div>
 											
