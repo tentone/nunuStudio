@@ -17,9 +17,36 @@ function RendererConfiguration()
 	 */
 	this.backend = RendererConfiguration.WEBGL;
 
+	/** 
+	 * Defines whether the renderer should automatically clear its output before rendering a frame.
+	 *
+	 * @property autoClear
+	 * @type {Boolean}
+	 */
 	this.autoClear = false;
+
+	/** 
+	 * Defines whether the renderer should clear the color buffer.
+	 *
+	 * @property autoClearColor
+	 * @type {Boolean}
+	 */
 	this.autoClearColor = false;
+
+	/** 
+	 * Defines whether the renderer should clear the depth buffer.
+	 *
+	 * @property autoClearDepth
+	 * @type {Boolean}
+	 */
 	this.autoClearDepth = false;
+	
+	/** 
+	 * Defines whether the renderer should clear the stencil buffer.
+	 *
+	 * @property autoClearStencil
+	 * @type {Boolean}
+	 */
 	this.autoClearStencil = false;
 
 	/**
@@ -183,8 +210,27 @@ function RendererConfiguration()
 	this.physicallyCorrectLights = false;
 }
 
-RendererConfiguration.WEBGL = 1000;
-RendererConfiguration.WEBGL2 = 1001;
+/** 
+ * Use WebGL 1.0 to render data.
+ *
+ * Most devices fully support WebGL 1.0 at this point, should work for any type of device.
+ *
+ * @static
+ * @attribute WEBGL
+ * @type {Number}
+ */
+RendererConfiguration.WEBGL = 1;
+
+/** 
+ * Use WebGL 2.0 to render data, should be faster for some types of data.
+ *
+ * Additinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.
+ *
+ * @static
+ * @attribute WEBGL2
+ * @type {Number}
+ */
+RendererConfiguration.WEBGL2 = 2;
 
 RendererConfiguration.prototype.createRenderer = function(canvas)
 {
@@ -234,6 +280,8 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 	renderer.gammaOutput = this.gammaOutput;
 
 	renderer.physicallyCorrectLights = this.physicallyCorrectLights;
+
+	return renderer;
 };
 
 RendererConfiguration.prototype.toJSON = function()

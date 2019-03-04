@@ -89,50 +89,20 @@ RendererCanvas.prototype.resetCanvas = function()
 };
 
 /**
- * Create WebGl renderer.
+ * Create WebGL renderer.
  * 
  * @method createRenderer
  */
 RendererCanvas.prototype.createRenderer = function()
 {
-	var settings = Editor.settings.render.followProject ? Editor.program : Editor.settings.render;
-	var config = this.configuration;
+	var rendererConfig = Editor.settings.render.followProject ? Editor.program.rendererConfig : Editor.settings.render;
+	var alpha = rendererConfig.alpha;
+	rendererConfig.alpha = this.alpha;
 
-	//var context = this.canvas.getContext("webgl2");
-	var context = null;
-
-	this.renderer = new THREE.WebGLRenderer(
-	{
-		canvas: this.canvas,
-		context: context,
-		precision: "highp",
-		alpha: this.alpha,
-		premultipliedAlpha: true,
-		antialias: settings.antialiasing,
-		preserveDrawingBuffer: false,
-		powerPreference: "high-performance",
-		logarithmicDepthBuffer: false
-	});
-
-	this.renderer.shadowMap.enabled = settings.shadows;
-	this.renderer.shadowMap.type = settings.shadowsType;
-	this.renderer.shadowMap.autoUpdate = true;
-	this.renderer.shadowMap.needsUpdate = false;
-
-	this.renderer.toneMapping = settings.toneMapping;
-	this.renderer.toneMappingExposure = settings.toneMappingExposure;
-	this.renderer.toneMappingWhitePoint = settings.toneMappingWhitePoint;
-
-	this.renderer.autoClear = false;
-	this.renderer.autoClearColor = false;
-	this.renderer.autoClearDepth = false;
-	this.renderer.autoClearStencil = false;
-
-	this.renderer.sortObjects = true;
-
-	this.renderer.gammaFactor = 2;
-	this.renderer.gammaInput = false;
-	this.renderer.gammaOutput = false;
+	this.renderer = rendererConfig.createRenderer(this.canvas);
+	this.renderer.alpha = this.alpha;
+	
+	rendererConfig.alpha = alpha;
 };
 
 /**

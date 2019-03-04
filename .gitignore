@@ -12,3 +12,5 @@ docs/editor/config
 
 build/desktop/
 config
+
+config\.json

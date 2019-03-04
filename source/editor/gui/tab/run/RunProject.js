@@ -145,9 +145,14 @@ function RunProject(parent, closeable, container, index)
 
 RunProject.prototype = Object.create(TabElement.prototype);
 
-RunProject.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
 RunProject.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
 RunProject.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
+
+RunProject.prototype.createRenderer = function()
+{
+	this.renderer = Editor.program.rendererConfig.createRenderer(this.canvas);
+};
+
 
 RunProject.prototype.activate = function()
 {

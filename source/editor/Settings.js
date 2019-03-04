@@ -12,6 +12,8 @@ function Settings()
 	this.loadDefault();
 }
 
+Settings.CONFIG_FILE = "config.json";
+
 //Angles
 Settings.RADIANS = 0;
 Settings.DEGREES = 1;
@@ -75,16 +77,8 @@ Settings.prototype.loadDefault = function()
 	};
 
 	//Render
-	this.render =
-	{
-		followProject: true,
-		toneMapping: THREE.LinearToneMapping,
-		toneMappingExposure: 1.0,
-		toneMappingWhitePoint: 1.0,
-		antialiasing: true,
-		shadows: true,
-		shadowsType: THREE.PCFSoftShadowMap
-	};
+	this.render = new RendererConfiguration();
+	this.render.followProject = true;
 
 	//Code
 	this.code =
@@ -201,7 +195,7 @@ Settings.prototype.store = function()
 	//Store file
 	if(Nunu.runningOnDesktop())
 	{
-		FileSystem.writeFile("config", data);
+		FileSystem.writeFile(Settings.CONFIG_FILE, data);
 	}
 	//Cookie
 	else
@@ -221,7 +215,7 @@ Settings.prototype.load = function()
 	{
 		if(Nunu.runningOnDesktop())
 		{
-			var data = JSON.parse(FileSystem.readFile("config"));
+			var data = JSON.parse(FileSystem.readFile(Settings.CONFIG_FILE));
 		}
 		else
 		{
