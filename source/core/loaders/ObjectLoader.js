@@ -663,15 +663,15 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			object.vr = data.vr;
 			object.vrScale = data.vrScale;
 
-			if(data.antialiasing !== undefined)
+			if(data.rendererConfig !== undefined)
+			{
+				object.rendererConfig.fromJSON(data.rendererConfig);
+			}
+			else
 			{
 				object.antialiasing = data.antialiasing;
 				object.shadows = data.shadows;
 				object.shadowsType = data.shadowsType;
-			}
-			
-			if(data.toneMapping !== undefined)
-			{
 				object.toneMapping = data.toneMapping;
 				object.toneMappingWhitePoint = data.toneMappingWhitePoint;
 				object.toneMappingExposure = data.toneMappingExposure;

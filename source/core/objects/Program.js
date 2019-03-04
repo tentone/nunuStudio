@@ -100,56 +100,13 @@ function Program(name)
 	 */
 	this.vrScale = 1.0;
 
-	/**
-	 * Antialiasing flag.
+	/** 
+	 * Renderer configuration applied to the WebGL renderer.
 	 *
-	 * @property antialiasing
-	 * @type {boolean}
-	 * @default false
+	 * @property rendererConfig
+	 * @type {RendererConfiguration}
 	 */
-	this.antialiasing = true;
-
-	/**
-	 * If true the program is rendered with shadows
-	 * @property shadows
-	 * @type {boolean}
-	 * @default true
-	 */
-	this.shadows = true;
-
-	/**
-	 * Shadow map filtering type.
-	 *
-	 * @property shadowsType
-	 * @type {Number}
-	 * @default PCFSoftShadowMap
-	 */
-	this.shadowsType = THREE.PCFSoftShadowMap;
-
-	/**
-	 * Tone mapping mode.
-	 *
-	 * @property toneMapping
-	 * @type {Number}
-	 * @default THREE.NoToneMapping
-	 */
-	this.toneMapping = THREE.NoToneMapping;
-
-	/**
-	 * Exposure level of tone mapping.
-	 *
-	 * @property toneMappingExposure
-	 * @type {Number}
-	 */
-	this.toneMappingExposure = 1.0;
-
-	/**
-	 * Tone mapping white point.
-	 *
-	 * @property toneMappingWhitePoint
-	 * @type {Number}
-	 */
-	this.toneMappingWhitePoint = 1.0;
+	this.rendererConfig = new RendererConfiguration();
 
 	/**
 	 * Scene loaded as default on startup.
@@ -766,12 +723,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 	data.object.vrScale = this.vrScale;
 
 	//Rendering
-	data.object.antialiasing = this.antialiasing;
-	data.object.shadows = this.shadows;
-	data.object.shadowsType = this.shadowsType;
-	data.object.toneMapping = this.toneMapping;
-	data.object.toneMappingExposure = this.toneMappingExposure;
-	data.object.toneMappingWhitePoint = this.toneMappingWhitePoint;
+	data.object.rendererConfig = this.rendererConfig.toJSON();
 
 	return data;
 };

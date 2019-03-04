@@ -10,69 +10,123 @@ function RendererConfigurationFormTemplate(form, object)
 	FormTemplate.call(this, form, object);
 
 	var self = this;
-	
-	//Offset
-	this.form.addText(Locale.position);
-	this.offset = new VectorBox(this.form);
-	this.offset.setType(VectorBox.VECTOR2);
-	this.offset.setStep(0.05);
-	this.offset.size.set(160, 18);
-	this.offset.setOnChange(function()
-	{	
-		var value = self.offset.getValue();
-		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(self.object.offset, "x", value.x),
-			new ChangeAction(self.object.offset, "y", value.y)
-		]));
+
+	/*backend: this.backend,
+	autoClear: this.autoClear,
+	autoClearColor: this.autoClearColor,
+	autoClearDepth: this.autoClearDepth,
+	autoClearStencil: this.autoClearStencil,
+	antialiasing: this.antialiasing,
+	shadows: this.shadows,
+	stencil: this.stencil,
+	shadowsType: this.shadowsType,
+	shadowsAutoUpdate: this.shadowsAutoUpdate,
+	toneMapping: this.toneMapping,
+	toneMappingExposure: this.toneMappingExposure,
+	toneMappingWhitePoint: this.toneMappingWhitePoint,
+	sortObjects: this.sortObjects,
+	gammaFactor: this.gammaFactor,
+	gammaInput: this.gammaInput,
+	gammaOutput: this.gammaOutput,
+	precision: this.precision,
+	alpha: this.alpha,
+	premultipliedAlpha: this.premultipliedAlpha,
+	preserveDrawingBuffer: this.preserveDrawingBuffer,
+	powerPreference: this.powerPreference,
+	logarithmicDepthBuffer: this.logarithmicDepthBuffer,
+	physicallyCorrectLights: this.physicallyCorrectLights*/
+
+	//Shadows settings
+	this.form.addText("Backend").setAltText("Prefered redering backend API to use if available.");
+	this.backend = new DropdownList(this.form);
+	this.backend.size.set(150, 18);
+	this.backend.addValue("WebGL", RendererConfiguration.WEBGL);
+	this.backend.addValue("WebGL 2", RendererConfiguration.WEBGL2);
+	this.backend.setOnChange(function()
+	{
+		self.object.backend = self.backend.getValue();
 	});
-	this.form.add(this.offset);
+	this.form.add(this.shadowsType);
 	this.form.nextRow();
 
-	//Size
-	this.form.addText(Locale.size);
-	this.sizeBox = new VectorBox(this.form);
-	this.sizeBox.setType(VectorBox.VECTOR2);
-	this.sizeBox.setStep(0.05);
-	this.sizeBox.size.set(160, 18);
-	this.sizeBox.setOnChange(function()
+
+	//Antialiasing
+	this.form.addText("Antialiasing").setAltText("Antialiasing can be used to smooth jaged edges.");
+	this.antialiasing = new CheckBox(this.form);
+	this.antialiasing.size.set(18, 18);
+	this.antialiasing.setOnChange(function()
 	{
-		var value = self.sizeBox.getValue();
-		Editor.addAction(new ActionBundle(
-		[
-			new ChangeAction(self.object.size, "x", value.x),
-			new ChangeAction(self.object.size, "y", value.y)
-		]));
+
 	});
-	this.form.add(this.sizeBox);
+	this.form.add(this.antialiasing);
 	this.form.nextRow();
 
-	//Mode
-	this.form.addText(Locale.mode);
-	this.modeDrop = new DropdownList(this.form);
-	this.modeDrop.size.set(0, 18);
-	this.modeDrop.addValue(Locale.relative, Viewport.RELATIVE);
-	this.modeDrop.addValue(Locale.absolute, Viewport.ABSOLUTE);
-	this.modeDrop.setOnChange(function()
+	//Shadows
+	this.form.addText(Locale.shadows);
+	this.shadows = new CheckBox(this.form);
+	this.shadows.size.set(18, 18);
+	this.shadows.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "mode", self.modeDrop.getValue()));
+
 	});
-	this.form.add(this.modeDrop);
+	this.form.add(this.shadows);
 	this.form.nextRow();
 
-	//Anchor
-	this.form.addText(Locale.anchor);
-	this.anchor = new DropdownList(this.form);
-	this.anchor.size.set(0, 18);
-	this.anchor.addValue(Locale.bottomRight, Viewport.BOTTOM_RIGHT);
-	this.anchor.addValue(Locale.bottomLeft, Viewport.BOTTOM_LEFT);
-	this.anchor.addValue(Locale.topRight, Viewport.TOP_RIGHT);
-	this.anchor.addValue(Locale.topLeft, Viewport.TOP_LEFT);
-	this.anchor.setOnChange(function()
+	//Shadows settings
+	this.form.addText("Shadows type");
+	this.shadowsType = new DropdownList(this.form);
+	this.shadowsType.size.set(150, 18);
+	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
+	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
+	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
+	this.shadowsType.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "anchor", self.anchor.getValue()));
+		Editor.settings.render.shadowsType = self.shadowsType.getValue();
 	});
-	this.form.add(this.anchor);
+	this.form.add(this.shadowsType);
+	this.form.nextRow();
+
+	//Tonemapping
+	this.form.addText("Tonemapping");
+	this.toneMapping = new DropdownList(this.form);
+	this.toneMapping.size.set(150, 18);
+	this.toneMapping.addValue("None", THREE.NoToneMapping);
+	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
+	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);
+	this.toneMapping.addValue("Uncharted", THREE.Uncharted2ToneMapping);
+	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
+	this.toneMapping.addValue("ACES Filmic", THREE.ACESFilmicToneMapping);
+	this.toneMapping.setOnChange(function()
+	{
+		Editor.settings.render.toneMapping = self.toneMapping.getValue();
+	});
+	this.form.add(this.toneMapping);
+	this.form.nextRow();
+
+	//Tonemapping exposure
+	this.form.addText("Exposure");
+	this.toneMappingExposure = new NumberBox(this.form);
+	this.toneMappingExposure.size.set(60, 18);
+	this.toneMappingExposure.setRange(0.0, Number.MAX_SAFE_INTEGER);
+	this.toneMappingExposure.setStep(0.1);
+	this.toneMappingExposure.setOnChange(function()
+	{
+		Editor.settings.render.toneMappingExposure = self.toneMappingExposure.getValue();
+	});
+	this.form.add(this.toneMappingExposure);
+	this.form.nextRow();
+
+	//Tonemapping whitepoint
+	this.form.addText("Whitepoint");
+	this.toneMappingWhitePoint = new NumberBox(this.form);
+	this.toneMappingWhitePoint.size.set(60, 18);
+	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
+	this.toneMappingWhitePoint.setStep(0.1);
+	this.toneMappingWhitePoint.setOnChange(function()
+	{
+		Editor.settings.render.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
+	});
+	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
 }
 
@@ -80,8 +134,5 @@ RendererConfigurationFormTemplate.prototype = Object.create(FormTemplate.prototy
 
 RendererConfigurationFormTemplate.prototype.updateValues = function()
 {
-	this.offset.setValue(this.object.offset);
-	this.sizeBox.setValue(this.object.size);
-	this.modeDrop.setValue(this.object.mode);
-	this.anchor.setValue(this.object.anchor);
+	
 };

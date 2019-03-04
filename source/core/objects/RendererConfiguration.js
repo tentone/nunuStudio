@@ -8,7 +8,7 @@
 function RendererConfiguration()
 {
 	/**
-	 * Prefered backend to use if available.
+	 * Prefered redering backend API to use if available.
 	 *
 	 * If the selected backend is not available it defaults to WebGL.
 	 *
@@ -192,7 +192,11 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 
 	if(this.backend === RendererConfiguration.WEBGL2)
 	{
-		context = canvas.getContext("webgl2");
+		try
+		{
+			context = canvas.getContext("webgl2");
+		}
+		catch(e){}
 	}
 
 	var renderer = new THREE.WebGLRenderer(
@@ -236,6 +240,10 @@ RendererConfiguration.prototype.toJSON = function()
 {
 	return {
 		backend: this.backend,
+		autoClear: this.autoClear,
+		autoClearColor: this.autoClearColor,
+		autoClearDepth: this.autoClearDepth,
+		autoClearStencil: this.autoClearStencil,
 		antialiasing: this.antialiasing,
 		shadows: this.shadows,
 		stencil: this.stencil,
@@ -261,6 +269,10 @@ RendererConfiguration.prototype.toJSON = function()
 RendererConfiguration.prototype.fromJSON = function(data)
 {
 	this.backend = data.backend;
+	this.autoClear = data.autoClear;
+	this.autoClearColor = data.autoClearColor;
+	this.autoClearDepth = data.autoClearDepth;
+	this.autoClearStencil = data.autoClearStencil;
 	this.antialiasing = data.antialiasing;
 	this.shadows = data.shadows;
 	this.stencil = data.stencil;
