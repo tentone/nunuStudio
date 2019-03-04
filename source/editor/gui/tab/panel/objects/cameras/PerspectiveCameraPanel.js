@@ -70,7 +70,6 @@ function PerspectiveCameraPanel(parent, object)
 	//Viewport
 	this.form.addText(Locale.viewport);
 	this.form.nextRow();
-
 	this.viewport = new ViewportFormTemplate(this.form, object);
 	
 	//Order

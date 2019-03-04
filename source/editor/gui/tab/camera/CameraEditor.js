@@ -65,7 +65,7 @@ function CameraEditor(parent, closeable, container, index)
 	};
 
 
-	addRenderPassButton("Render", RenderPass);
+	addRenderPassButton(Locale.render, RenderPass);
 	addRenderPassButton("FXAA", FXAAPass);
 	addRenderPassButton("Colorify", ColorifyPass);
 	self.form.nextRow();

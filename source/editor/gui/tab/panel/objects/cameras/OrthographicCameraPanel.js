@@ -82,9 +82,7 @@ function OrthographicCameraPanel(parent, object)
 	//Viewport
 	this.form.addText(Locale.viewport);
 	this.form.nextRow();
-
 	this.viewport = new ViewportFormTemplate(this.form, object);
-	console.log(this.viewport);
 
 	//Order
 	this.form.addText("Render Order").setAltText("Camera with lower order renders first.");

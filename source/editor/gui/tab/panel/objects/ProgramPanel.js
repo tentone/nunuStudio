@@ -87,101 +87,7 @@ function ProgramPanel(parent, object)
 	//Rendering
 	this.form.addText("Rendering");
 	this.form.nextRow();
-
-	//Antialiasing
-	this.antialiasing = new CheckBox(this.form);
-	this.form.addText("Antialiasing");
-	this.antialiasing.size.set(18, 18);
-	this.antialiasing.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object, "antialiasing", self.antialiasing.getValue()));
-		
-		var tabs = Editor.gui.tab.getActiveTab();
-		
-		for(var i = 0; i < tabs.length; i++)
-		{
-			var tab = tabs[i];		
-			if(tab instanceof SceneEditor)
-			{
-				tab.reloadContext();
-			}
-		}
-	});
-	this.form.add(this.antialiasing);
-	this.form.nextRow();
-
-	//Shadows
-	this.shadows = new CheckBox(this.form);
-	this.form.addText(Locale.shadows);
-	this.shadows.size.set(18, 18);
-	this.shadows.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object, "shadows", self.shadows.getValue()));
-		self.updateRenderer();
-	});
-	this.form.add(this.shadows);
-	this.form.nextRow();
-
-	//Shadow type
-	this.form.addText("Shadows type");
-	this.shadowsType = new DropdownList(this.form);
-	this.shadowsType.size.set(120, 18);
-	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
-	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
-	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
-	this.shadowsType.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object, "shadowsType", self.shadowsType.getValue()));
-		self.updateRenderer();
-	});
-	this.form.add(this.shadowsType);
-	this.form.nextRow();
-
-	//Tonemapping
-	this.form.addText("Tonemapping");
-	this.toneMapping = new DropdownList(this.form);
-	this.toneMapping.size.set(120, 18);
-	this.toneMapping.addValue("None", THREE.NoToneMapping);
-	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
-	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);
-	this.toneMapping.addValue("Uncharted", THREE.Uncharted2ToneMapping);
-	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
-	this.toneMapping.addValue("ACES Filmic", THREE.ACESFilmicToneMapping);
-	this.toneMapping.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()));
-		self.updateRenderer();
-	});
-	this.form.add(this.toneMapping);
-	this.form.nextRow();
-
-	//Tonemapping exposure
-	this.form.addText("Exposure");
-	this.toneMappingExposure = new NumberBox(this.form);
-	this.toneMappingExposure.size.set(40, 18);
-	this.toneMappingExposure.setRange(0.0, Number.MAX_SAFE_INTEGER);
-	this.toneMappingExposure.setStep(0.1);
-	this.toneMappingExposure.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object, "toneMappingExposure", self.toneMappingExposure.getValue()));
-		self.updateRenderer();
-	});
-	this.form.add(this.toneMappingExposure);
-	this.form.nextRow();
-
-	//Tonemapping whitepoint
-	this.form.addText("Whitepoint");
-	this.toneMappingWhitePoint = new NumberBox(this.form);
-	this.toneMappingWhitePoint.size.set(40, 18);
-	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
-	this.toneMappingWhitePoint.setStep(0.1);
-	this.toneMappingWhitePoint.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
-		self.updateRenderer();
-	});
-	this.form.add(this.toneMappingWhitePoint);
-	this.form.nextRow();
+	this.rendererConfig = new RendererConfigurationFormTemplate(this.form, object.rendererConfig);
 }
 
 ProgramPanel.prototype = Object.create(ObjectPanel.prototype);
@@ -211,11 +117,5 @@ ProgramPanel.prototype.updatePanel = function()
 	this.handlePixelRatio.setValue(this.object.handlePixelRatio);
 	this.vr.setValue(this.object.vr);
 	this.vrScale.setValue(this.object.vrScale);
-
-	this.shadows.setValue(this.object.shadows);
-	this.shadowsType.setValue(this.object.shadowsType);
-	this.antialiasing.setValue(this.object.antialiasing);
-	this.toneMapping.setValue(this.object.toneMapping);
-	this.toneMappingExposure.setValue(this.object.toneMappingExposure);
-	this.toneMappingWhitePoint.setValue(this.object.toneMappingWhitePoint);
+	this.rendererConfig.attach(this.object.rendererConfig);
 };

@@ -39,7 +39,6 @@ LocaleManager.register(
 	disable: "Disable",
 	static: "Static",
 	dynamic: "Dynamic",
-	shadows: "Shadows",
 	createScene: "Create scene",
 
 	//Geometries
@@ -74,7 +73,31 @@ LocaleManager.register(
 	viewport: "Viewport",
 	mode: "Mode",
 	anchor: "Anchor",
-	
+	antialiasing: "Antialiasing",
+	exposure: "Exposure",
+	backend: "Back-end",
+	whitepoint: "Whitepoint",
+	tonemapping: "Tonemapping",
+	shadows: "Shadows",
+	shadowType: "Shadows type",
+	shadowsAutoUpdate: "Shadow Auto Update",
+	autoClear: "Auto Clear",
+	autoClearColor: "Auto Clear Color",
+	autoClearDepth: "Auto Clear Depth",
+	autoClearStencil: "Auto Clear Stencil",
+	stencil: "Stenci",
+	sortObjects: "Sort objects",
+	gammaFactor: "Gamma Factor",
+	gammaInput: "Gamma Input",
+	gammaOutput: "Gamma Output",
+	precision: "Precision",
+	alpha: "Alpha",
+	premultipliedAlpha: "Premultiply Alpha",
+	preserveDrawingBuffer: "Preserver Buffers",
+	powerPreference: "Power Preference",
+	logarithmicDepthBuffer: "Logaritmic Depth",
+	physicallyCorrectLights: "Physically Correct Lights",
+
 	//Values
 	relative: "Relative",
 	absolute: "Absolute",
@@ -92,7 +115,13 @@ LocaleManager.register(
 	bottom: "Bottom",
 	local: "Local",
 	world: "World",
-	
+	highp: "High precision",
+	mediump: "Medium precision",
+	lowp: "Low precision",
+	highPerformance: "High performance",
+	lowPower: "Low power",
+	default: "Default",
+
 	//Editor
 	project: "Project",
 	run: "Run",
@@ -108,6 +137,7 @@ LocaleManager.register(
 	exit: "Exit",
 	nothingToShow: "Select an object to view its properties.",
 	selectAll: "Select all",
+	render: "Render",
 	
 	//Resources
 	image: "Image",

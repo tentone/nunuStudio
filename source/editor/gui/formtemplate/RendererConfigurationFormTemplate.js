@@ -11,55 +11,146 @@ function RendererConfigurationFormTemplate(form, object)
 
 	var self = this;
 
-	/*backend: this.backend,
-	autoClear: this.autoClear,
-	autoClearColor: this.autoClearColor,
-	autoClearDepth: this.autoClearDepth,
-	autoClearStencil: this.autoClearStencil,
-	antialiasing: this.antialiasing,
-	shadows: this.shadows,
-	stencil: this.stencil,
-	shadowsType: this.shadowsType,
-	shadowsAutoUpdate: this.shadowsAutoUpdate,
-	toneMapping: this.toneMapping,
-	toneMappingExposure: this.toneMappingExposure,
-	toneMappingWhitePoint: this.toneMappingWhitePoint,
-	sortObjects: this.sortObjects,
-	gammaFactor: this.gammaFactor,
-	gammaInput: this.gammaInput,
-	gammaOutput: this.gammaOutput,
-	precision: this.precision,
-	alpha: this.alpha,
-	premultipliedAlpha: this.premultipliedAlpha,
-	preserveDrawingBuffer: this.preserveDrawingBuffer,
-	powerPreference: this.powerPreference,
-	logarithmicDepthBuffer: this.logarithmicDepthBuffer,
-	physicallyCorrectLights: this.physicallyCorrectLights*/
-
-	//Shadows settings
-	this.form.addText("Backend").setAltText("Prefered redering backend API to use if available.");
+	this.form.addText(Locale.backend).setAltText("Prefered redering backend API to use if available.");
 	this.backend = new DropdownList(this.form);
 	this.backend.size.set(150, 18);
 	this.backend.addValue("WebGL", RendererConfiguration.WEBGL);
 	this.backend.addValue("WebGL 2", RendererConfiguration.WEBGL2);
 	this.backend.setOnChange(function()
 	{
-		self.object.backend = self.backend.getValue();
+		Editor.addAction(new ChangeAction(self.object, "backend", self.backend.getValue()));
 	});
-	this.form.add(this.shadowsType);
+	this.form.add(this.backend);
 	this.form.nextRow();
 
-
 	//Antialiasing
-	this.form.addText("Antialiasing").setAltText("Antialiasing can be used to smooth jaged edges.");
+	this.form.addText(Locale.antialiasing).setAltText("Antialiasing can be used to smooth jaged edges.");
 	this.antialiasing = new CheckBox(this.form);
 	this.antialiasing.size.set(18, 18);
 	this.antialiasing.setOnChange(function()
 	{
-
+		Editor.addAction(new ChangeAction(self.object, "antialiasing", self.antialiasing.getValue()));
 	});
 	this.form.add(this.antialiasing);
 	this.form.nextRow();
+
+	//Alpha
+	this.form.addText(Locale.alpha);
+	this.alpha = new CheckBox(this.form);
+	this.alpha.size.set(18, 18);
+	this.alpha.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "alpha", self.alpha.getValue()));
+	});
+	this.form.add(this.alpha);
+	this.form.nextRow();
+
+	//Premultiplied Alpha
+	this.form.addText(Locale.premultipliedAlpha);
+	this.premultipliedAlpha = new CheckBox(this.form);
+	this.premultipliedAlpha.size.set(18, 18);
+	this.premultipliedAlpha.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "premultipliedAlpha", self.premultipliedAlpha.getValue()));
+	});
+	this.form.add(this.premultipliedAlpha);
+	this.form.nextRow();
+
+	//Preserver drawing buffer
+	this.form.addText(Locale.preserveDrawingBuffer);
+	this.preserveDrawingBuffer = new CheckBox(this.form);
+	this.preserveDrawingBuffer.size.set(18, 18);
+	this.preserveDrawingBuffer.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "preserveDrawingBuffer", self.preserveDrawingBuffer.getValue()));
+	});
+	this.form.add(this.preserveDrawingBuffer);
+	this.form.nextRow();
+
+	//Logaritmic depth
+	this.form.addText(Locale.physicallyCorrectLights);
+	this.physicallyCorrectLights = new CheckBox(this.form);
+	this.physicallyCorrectLights.size.set(18, 18);
+	this.physicallyCorrectLights.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "physicallyCorrectLights", self.physicallyCorrectLights.getValue()));
+	});
+	this.form.add(this.physicallyCorrectLights);
+	this.form.nextRow();
+
+	//Logaritmic depth
+	this.form.addText(Locale.logarithmicDepthBuffer);
+	this.logarithmicDepthBuffer = new CheckBox(this.form);
+	this.logarithmicDepthBuffer.size.set(18, 18);
+	this.logarithmicDepthBuffer.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "logarithmicDepthBuffer", self.logarithmicDepthBuffer.getValue()));
+	});
+	this.form.add(this.logarithmicDepthBuffer);
+	this.form.nextRow();
+
+	//Auto clear
+	this.form.addText(Locale.autoClear);
+	this.autoClear = new CheckBox(this.form);
+	this.autoClear.size.set(18, 18);
+	this.autoClear.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "autoClear", self.autoClear.getValue()));
+	});
+	this.form.add(this.autoClear);
+	this.form.nextRow();
+
+	this.form.addText(Locale.autoClearColor);
+	this.autoClearColor = new CheckBox(this.form);
+	this.autoClearColor.size.set(18, 18);
+	this.autoClearColor.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "autoClearColor", self.autoClearColor.getValue()));
+	});
+	this.form.add(this.autoClearColor);
+	this.form.nextRow();
+
+	this.form.addText(Locale.autoClearDepth);
+	this.autoClearDepth = new CheckBox(this.form);
+	this.autoClearDepth.size.set(18, 18);
+	this.autoClearDepth.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "autoClearDepth", self.autoClearDepth.getValue()));
+	});
+	this.form.add(this.autoClearDepth);
+	this.form.nextRow();
+
+	this.form.addText(Locale.autoClearStencil);
+	this.autoClearStencil = new CheckBox(this.form);
+	this.autoClearStencil.size.set(18, 18);
+	this.autoClearStencil.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "autoClearStencil", self.autoClearStencil.getValue()));
+	});
+	this.form.add(this.autoClearStencil);
+	this.form.nextRow();
+
+	this.form.addText(Locale.stencil);
+	this.stencil = new CheckBox(this.form);
+	this.stencil.size.set(18, 18);
+	this.stencil.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "stencil", self.stencil.getValue()));
+	});
+	this.form.add(this.stencil);
+	this.form.nextRow();
+
+
+	this.form.addText(Locale.sortObjects);
+	this.sortObjects = new CheckBox(this.form);
+	this.sortObjects.size.set(18, 18);
+	this.sortObjects.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "sortObjects", self.sortObjects.getValue()));
+	});
+	this.form.add(this.sortObjects);
+	this.form.nextRow();
+
 
 	//Shadows
 	this.form.addText(Locale.shadows);
@@ -67,13 +158,13 @@ function RendererConfigurationFormTemplate(form, object)
 	this.shadows.size.set(18, 18);
 	this.shadows.setOnChange(function()
 	{
-
+		Editor.addAction(new ChangeAction(self.object, "shadows", self.shadows.getValue()));
 	});
 	this.form.add(this.shadows);
 	this.form.nextRow();
 
 	//Shadows settings
-	this.form.addText("Shadows type");
+	this.form.addText(Locale.shadowType);
 	this.shadowsType = new DropdownList(this.form);
 	this.shadowsType.size.set(150, 18);
 	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
@@ -81,13 +172,86 @@ function RendererConfigurationFormTemplate(form, object)
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
-		Editor.settings.render.shadowsType = self.shadowsType.getValue();
+		Editor.addAction(new ChangeAction(self.object, "shadowsType", self.shadowsType.getValue()));
 	});
 	this.form.add(this.shadowsType);
 	this.form.nextRow();
 
+	this.form.addText(Locale.shadowsAutoUpdate);
+	this.shadowsAutoUpdate = new CheckBox(this.form);
+	this.shadowsAutoUpdate.size.set(18, 18);
+	this.shadowsAutoUpdate.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "shadowsAutoUpdate", self.shadowsAutoUpdate.getValue()));
+	});
+	this.form.add(this.shadowsAutoUpdate);
+	this.form.nextRow();
+
+	//Gamma
+	this.form.addText(Locale.gammaFactor);
+	this.gammaFactor = new NumberBox(this.form);
+	this.gammaFactor.size.set(60, 18);
+	this.gammaFactor.setRange(0.0, Number.MAX_SAFE_INTEGER);
+	this.gammaFactor.setStep(0.1);
+	this.gammaFactor.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "gammaFactor", self.gammaFactor.getValue()));
+	});
+	this.form.add(this.gammaFactor);
+	this.form.nextRow()
+
+	//Gamma input
+	this.form.addText(Locale.gammaInput);
+	this.gammaInput = new CheckBox(this.form);
+	this.gammaInput.size.set(18, 18);
+	this.gammaInput.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "gammaInput", self.gammaInput.getValue()));
+	});
+	this.form.add(this.gammaInput);
+	this.form.nextRow();
+
+	//Gamma output
+	this.form.addText(Locale.gammaOutput);
+	this.gammaOutput = new CheckBox(this.form);
+	this.gammaOutput.size.set(18, 18);
+	this.gammaOutput.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "gammaOutput", self.gammaOutput.getValue()));
+	});
+	this.form.add(this.gammaOutput);
+	this.form.nextRow();
+
+	//Power preference
+	this.form.addText(Locale.powerPreference);
+	this.powerPreference = new DropdownList(this.form);
+	this.powerPreference.size.set(150, 18);
+	this.powerPreference.addValue(Locale.default, "default");
+	this.powerPreference.addValue(Locale.highPerformance, "high-performance");
+	this.powerPreference.addValue(Locale.lowPower, "low-power");
+	this.powerPreference.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "powerPreference", self.powerPreference.getValue()));
+	});
+	this.form.add(this.powerPreference);
+	this.form.nextRow();
+
+	//Precision
+	this.form.addText(Locale.precision);
+	this.precision = new DropdownList(this.form);
+	this.precision.size.set(150, 18);
+	this.precision.addValue(Locale.highp, "highp");
+	this.precision.addValue(Locale.mediump, "mediump");
+	this.precision.addValue(Locale.lowp, "lowp");
+	this.precision.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "precision", self.precision.getValue()));
+	});
+	this.form.add(this.precision);
+	this.form.nextRow();
+
 	//Tonemapping
-	this.form.addText("Tonemapping");
+	this.form.addText(Locale.tonemapping);
 	this.toneMapping = new DropdownList(this.form);
 	this.toneMapping.size.set(150, 18);
 	this.toneMapping.addValue("None", THREE.NoToneMapping);
@@ -98,33 +262,33 @@ function RendererConfigurationFormTemplate(form, object)
 	this.toneMapping.addValue("ACES Filmic", THREE.ACESFilmicToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
-		Editor.settings.render.toneMapping = self.toneMapping.getValue();
+		Editor.addAction(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()));
 	});
 	this.form.add(this.toneMapping);
 	this.form.nextRow();
 
 	//Tonemapping exposure
-	this.form.addText("Exposure");
+	this.form.addText(Locale.exposure);
 	this.toneMappingExposure = new NumberBox(this.form);
 	this.toneMappingExposure.size.set(60, 18);
 	this.toneMappingExposure.setRange(0.0, Number.MAX_SAFE_INTEGER);
 	this.toneMappingExposure.setStep(0.1);
 	this.toneMappingExposure.setOnChange(function()
 	{
-		Editor.settings.render.toneMappingExposure = self.toneMappingExposure.getValue();
+		Editor.addAction(new ChangeAction(self.object, "toneMappingExposure", self.toneMappingExposure.getValue()));
 	});
 	this.form.add(this.toneMappingExposure);
 	this.form.nextRow();
 
 	//Tonemapping whitepoint
-	this.form.addText("Whitepoint");
+	this.form.addText(Locale.whitepoint);
 	this.toneMappingWhitePoint = new NumberBox(this.form);
 	this.toneMappingWhitePoint.size.set(60, 18);
 	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
 	this.toneMappingWhitePoint.setStep(0.1);
 	this.toneMappingWhitePoint.setOnChange(function()
 	{
-		Editor.settings.render.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
+		Editor.addAction(new ChangeAction(self.object, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
 	});
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
@@ -134,5 +298,28 @@ RendererConfigurationFormTemplate.prototype = Object.create(FormTemplate.prototy
 
 RendererConfigurationFormTemplate.prototype.updateValues = function()
 {
-	
+	this.backend.setValue(this.object.backend);
+	this.autoClear.setValue(this.object.autoClear);
+	this.autoClearColor.setValue(this.object.autoClearColor);
+	this.autoClearDepth.setValue(this.object.autoClearDepth);
+	this.autoClearStencil.setValue(this.object.autoClearStencil);
+	this.antialiasing.setValue(this.object.antialiasing);
+	this.shadows.setValue(this.object.shadows);
+	this.stencil.setValue(this.object.stencil);
+	this.shadowsType.setValue(this.object.shadowsType);
+	this.shadowsAutoUpdate.setValue(this.object.shadowsAutoUpdate);
+	this.toneMapping.setValue(this.object.toneMapping);
+	this.toneMappingExposure.setValue(this.object.toneMappingExposure);
+	this.toneMappingWhitePoint.setValue(this.object.toneMappingWhitePoint);
+	this.sortObjects.setValue(this.object.sortObjects);
+	this.gammaFactor.setValue(this.object.gammaFactor);
+	this.gammaInput.setValue(this.object.gammaInput);
+	this.gammaOutput.setValue(this.object.gammaOutput);
+	this.precision.setValue(this.object.precision);
+	this.alpha.setValue(this.object.alpha);
+	this.premultipliedAlpha.setValue(this.object.premultipliedAlpha);
+	this.preserveDrawingBuffer.setValue(this.object.preserveDrawingBuffer);
+	this.powerPreference.setValue(this.object.powerPreference);
+	this.logarithmicDepthBuffer.setValue(this.object.logarithmicDepthBuffer);
+	this.physicallyCorrectLights.setValue(this.object.physicallyCorrectLights);
 };
