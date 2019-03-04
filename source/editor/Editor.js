@@ -173,6 +173,7 @@ include("source/core/objects/misc/LensFlare.js");
 include("source/core/objects/animation/Skeleton.js");
 include("source/core/objects/controls/OrbitControls.js");
 include("source/core/objects/controls/FirstPersonControls.js");
+include("source/core/objects/RendererConfiguration.js");
 include("source/core/objects/Program.js");
 include("source/core/objects/Scene.js");
 
