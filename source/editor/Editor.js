@@ -814,7 +814,6 @@ Editor.selectObject = function(object)
 	}
 
 	Editor.updateSelectionGUI();
-	Editor.selectTool();
 };
 
 /** 
@@ -841,7 +840,6 @@ Editor.addToSelection = function(object)
 	}
 
 	Editor.updateSelectionGUI();
-	Editor.selectTool();
 };
 
 /**
@@ -866,7 +864,6 @@ Editor.unselectObject = function(object)
 			
 			Editor.selection.splice(i, 1);
 			Editor.updateSelectionGUI();
-			Editor.selectTool();
 			return;
 		}
 	}
@@ -1270,26 +1267,6 @@ Editor.createDefaultResouces = function()
 	}
 };
 
-/**
- * Select tool to manipulate objects-
- *
- * @method selectTool
- */
-Editor.selectTool = function(tool)
-{
-	var tabs = Editor.gui.tab.getActiveTab();
-
-	for(var i = 0; i < tabs.length; i++)
-	{
-		var tab = tabs[i];
-	
-		if(tab instanceof SceneEditor)
-		{
-			tab.selectTool(tool);
-		}
-	}
-};
-
 Editor.updateSettings = function()
 {
 	Editor.gui.tab.updateSettings();
@@ -1325,7 +1302,6 @@ Editor.updateSelectionGUI = function()
 Editor.resetEditor = function()
 {
 	Editor.clearSelection();
-	Editor.selectTool(Editor.SELECT);
 
 	Editor.gui.tab.updateObjectsView();
 	Editor.gui.tab.updateMetadata();

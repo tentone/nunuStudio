@@ -1,10 +1,7 @@
 "use strict";
 
-function AddObjectSideBar(parent)
+function AddObjectSideBar(parent, size, position)
 {
-	var size = 40;
-	var position = 210;
-
 	//Add Text
 	var add = new Text(parent);
 	add.setText("Add");
