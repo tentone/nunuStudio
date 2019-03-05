@@ -42597,7 +42597,7 @@ ObjectLoader.prototype.parseObject = function(a, c, k, b, f, d, h) {
       void 0 !== a.filmGauge && (u.filmGauge = a.filmGauge);
       void 0 !== a.filmOffset && (u.filmOffset = a.filmOffset);
       void 0 !== a.view && (u.view = Object.assign({}, a.view));
-      void 0 !== a.viewport && (a.viewport instanceof Array ? (u.viewport.fromArray(a.viewport), u.offset.fromArray(a.offset)) : u.viewport.fromJSON(a.viewport));
+      void 0 !== a.viewport && (a.viewport instanceof Array ? (u.viewport.size.fromArray(a.viewport), u.viewport.offset.fromArray(a.offset)) : u.viewport.fromJSON(a.viewport));
       void 0 !== a.clearColor && (u.clearColor = a.clearColor);
       void 0 !== a.clearDepth && (u.clearDepth = a.clearDepth);
       void 0 !== a.clearStencil && (u.clearStencil = a.clearStencil);
@@ -42606,7 +42606,7 @@ ObjectLoader.prototype.parseObject = function(a, c, k, b, f, d, h) {
       break;
     case "OrthographicCamera":
       u = new OrthographicCamera(a.size, a.aspect, a.mode, a.near, a.far);
-      void 0 !== a.viewport && (a.viewport instanceof Array ? (u.viewport.fromArray(a.viewport), u.offset.fromArray(a.offset)) : u.viewport.fromJSON(a.viewport));
+      void 0 !== a.viewport && (a.viewport instanceof Array ? (u.viewport.size.fromArray(a.viewport), u.viewport.offset.fromArray(a.offset)) : u.viewport.fromJSON(a.viewport));
       void 0 !== a.clearColor && (u.clearColor = a.clearColor);
       void 0 !== a.clearDepth && (u.clearDepth = a.clearDepth);
       void 0 !== a.clearStencil && (u.clearStencil = a.clearStencil);

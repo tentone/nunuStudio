@@ -886,8 +886,8 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				if(data.viewport instanceof Array)
 				{
-					object.viewport.fromArray(data.viewport);
-					object.offset.fromArray(data.offset);
+					object.viewport.size.fromArray(data.viewport);
+					object.viewport.offset.fromArray(data.offset);
 				}
 				else
 				{
@@ -925,8 +925,8 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				if(data.viewport instanceof Array)
 				{
-					object.viewport.fromArray(data.viewport);
-					object.offset.fromArray(data.offset);
+					object.viewport.size.fromArray(data.viewport);
+					object.viewport.offset.fromArray(data.offset);
 				}
 				else
 				{
