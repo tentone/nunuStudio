@@ -88,6 +88,13 @@ function SceneEditor(parent, closeable, container, index)
 	this.stats.dom.style.zIndex = "0";
 	this.element.appendChild(this.stats.dom);
 
+	//Side bar
+	this.sideBar = new Bar(this);
+
+	
+	this.toolBar = new ToolBar(this.sideBar);
+	new AddObjectSideBar(this.sideBar);
+
 	/**
 	 * Camera orientation cube.
 	 *
@@ -295,7 +302,23 @@ function SceneEditor(parent, closeable, container, index)
 			{
 				if(self.container.focused)
 				{
-					if(key === Keyboard.C)
+					if(key === Keyboard.NUM1)
+					{
+						self.toolBar.selectTool(Editor.SELECT);
+					}
+					else if(key === Keyboard.NUM2)
+					{
+						self.toolBar.selectTool(Editor.MOVE);
+					}
+					else if(key === Keyboard.NUM3)
+					{
+						self.toolBar.selectTool(Editor.SCALE);
+					}
+					else if(key === Keyboard.NUM4)
+					{
+						self.toolBar.selectTool(Editor.ROTATE);
+					}
+					else if(key === Keyboard.C)
 					{
 						Editor.copyObject();
 					}
@@ -367,7 +390,7 @@ SceneEditor.prototype.activate = function()
 	this.mouse.create();
 	this.manager.create();
 
-	Editor.gui.toolBar.selectTool(Editor.SELECT);
+	this.toolBar.selectTool(Editor.SELECT);
 };
 
 SceneEditor.prototype.deactivate = function()
@@ -1255,6 +1278,10 @@ SceneEditor.prototype.updateVisibility = function()
 SceneEditor.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
+
+	this.sideBar.position.set(0, 0);
+	this.sideBar.size.set(40, this.size.y);
+	this.sideBar.updateInterface();
 
 	this.resizeCanvas();
 };

@@ -40,15 +40,6 @@ function Interface()
 
 	//Top Bar
 	this.menuBar = new MainMenu(DocumentBody);
-
-	//Side bar
-	this.sideBar = new Bar(DocumentBody);
-	this.sideBar.position.set(0, this.menuBar.size.y);
-	this.sideBar.size.x = 40;
-	
-	//Tool Bar
-	this.toolBar = new ToolBar(this.sideBar);
-	new AddObjectSideBar(this.sideBar);
 }
 
 Interface.prototype.updateInterface = function()
@@ -56,13 +47,8 @@ Interface.prototype.updateInterface = function()
 	var width = window.innerWidth;
 	var height = window.innerHeight;
 
-	//Side bar
-	this.sideBar.size.y = height - this.menuBar.size.y;
-	this.sideBar.updateInterface();
-
-	//Container
-	this.tab.position.set(this.sideBar.size.x, this.menuBar.size.y);
-	this.tab.size.set(width - this.sideBar.size.x, height - this.menuBar.size.y);
+	this.tab.position.set(0, this.menuBar.size.y);
+	this.tab.size.set(width, height - this.menuBar.size.y);
 	this.tab.updateInterface();
 };
 
@@ -94,9 +80,7 @@ Interface.prototype.loadProgram = function()
 		{
 			if(files.length > 0)
 			{
-				var file = files[0];
-
-				Editor.loadProgram(file, file.name.endsWith(".nsp"));
+				Editor.loadProgram(files[0], files[0].name.endsWith(".nsp"));
 			}
 		}, ".isp, .nsp");
 	}

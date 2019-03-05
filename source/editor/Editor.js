@@ -363,6 +363,8 @@ include("source/editor/gui/tab/objects/ParticleEditor.js");
 include("source/editor/gui/tab/run/RunProject.js");
 
 include("source/editor/gui/tab/scene/SceneEditor.js");
+include("source/editor/gui/tab/scene/sidebar/ToolBar.js");
+include("source/editor/gui/tab/scene/sidebar/AddObjectSideBar.js");
 include("source/editor/gui/tab/scene/transform/TransformControls.js");
 include("source/editor/gui/tab/scene/transform/material/GizmoMaterial.js");
 include("source/editor/gui/tab/scene/transform/material/GizmoLineMaterial.js");
@@ -505,8 +507,6 @@ include("source/editor/gui/preview/CubemapFlatRenderer.js");
 
 include("source/editor/gui/main/Interface.js");
 include("source/editor/gui/main/MainMenu.js");
-include("source/editor/gui/main/sidebar/ToolBar.js");
-include("source/editor/gui/main/sidebar/AddObjectSideBar.js");
 
 include("source/editor/gui/DragBuffer.js");
 
@@ -697,23 +697,7 @@ Editor.initialize = function()
 
 		if(event.ctrlKey)
 		{
-			if(key === Keyboard.NUM1)
-			{
-				Editor.gui.toolBar.selectTool(Editor.SELECT);
-			}
-			else if(key === Keyboard.NUM2)
-			{
-				Editor.gui.toolBar.selectTool(Editor.MOVE);
-			}
-			else if(key === Keyboard.NUM3)
-			{
-				Editor.gui.toolBar.selectTool(Editor.SCALE);
-			}
-			else if(key === Keyboard.NUM4)
-			{
-				Editor.gui.toolBar.selectTool(Editor.ROTATE);
-			}
-			else if(key === Keyboard.S)
+			if(key === Keyboard.S)
 			{
 				if(Editor.openFile === null)
 				{
