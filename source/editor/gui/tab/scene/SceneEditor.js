@@ -173,6 +173,7 @@ function SceneEditor(parent, closeable, container, index)
 	 * @type {THREE.Group}
 	 */
 	this.controls = null;
+	this.controlsMode = -1;
 	this.setCameraMode(SceneEditor.PERSPECTIVE);
 
 	/**
@@ -387,6 +388,13 @@ SceneEditor.prototype.deactivate = function()
  */
 SceneEditor.prototype.updateCameraControls = function(mode)
 {
+	if(this.controlsMode === mode)
+	{
+		return;
+	}
+	
+	this.controlsMode = mode;
+
 	if(mode === Settings.FIRST_PERSON)
 	{
 		this.controls = new EditorFreeControls();
@@ -1005,6 +1013,11 @@ SceneEditor.prototype.updateRaycaster = function(x, y)
  */
 SceneEditor.prototype.setCameraMode = function(mode)
 {
+	if(mode === this.cameraMode)
+	{
+		return;
+	}
+
 	if(mode === undefined)
 	{
 		mode = (this.cameraMode === SceneEditor.PERSPECTIVE) ? SceneEditor.ORTHOGRAPHIC : SceneEditor.PERSPECTIVE;

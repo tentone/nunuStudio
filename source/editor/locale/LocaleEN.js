@@ -180,6 +180,15 @@ LocaleManager.register(
 	errorRunpdate: "Error while running program.",
 	errorRunRender: "Error while rendering program.",
 
+	//Hints
+	hintAntialiasing: "Antialiasing can be used to smooth jaged edges.",
+	hintBackend: "Prefered redering backend API to use if available.",
+	hintStencil: "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
+	hintSortObjects: "If true the renderer sorts the objects from back to front for rendering. Important if using multiple transparent objects.",
+	hintAlpha: "Whether the canvas contains an alpha (transparency) buffer or not.",
+	hintPremultipliedAlpha: "Whether the renderer will assume that colors have premultiplied alpha.",
+	hintLogarithmicDepthBuffer: "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
+
 	//Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",
 	alreadyUpdated: "nunuStudio already up to date.",

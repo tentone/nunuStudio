@@ -11,7 +11,7 @@ function RendererConfigurationFormTemplate(form, object)
 
 	var self = this;
 
-	this.form.addText(Locale.backend).setAltText("Prefered redering backend API to use if available.");
+	this.form.addText(Locale.backend).setAltText(Locale.hintBackend);
 	this.backend = new DropdownList(this.form);
 	this.backend.size.set(150, 18);
 	this.backend.addValue("WebGL", RendererConfiguration.WEBGL);
@@ -24,7 +24,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Antialiasing
-	this.form.addText(Locale.antialiasing).setAltText("Antialiasing can be used to smooth jaged edges.");
+	this.form.addText(Locale.antialiasing).setAltText(Locale.hintAntialiasing);
 	this.antialiasing = new CheckBox(this.form);
 	this.antialiasing.size.set(18, 18);
 	this.antialiasing.setOnChange(function()
@@ -35,7 +35,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Alpha
-	this.form.addText(Locale.alpha);
+	this.form.addText(Locale.alpha).setAltText(Locale.hintAlpha);
 	this.alpha = new CheckBox(this.form);
 	this.alpha.size.set(18, 18);
 	this.alpha.setOnChange(function()
@@ -46,7 +46,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Premultiplied Alpha
-	this.form.addText(Locale.premultipliedAlpha);
+	this.form.addText(Locale.premultipliedAlpha).setAltText(Locale.hintPremultipliedAlpha);
 	this.premultipliedAlpha = new CheckBox(this.form);
 	this.premultipliedAlpha.size.set(18, 18);
 	this.premultipliedAlpha.setOnChange(function()
@@ -79,7 +79,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Logaritmic depth
-	this.form.addText(Locale.logarithmicDepthBuffer);
+	this.form.addText(Locale.logarithmicDepthBuffer).setAltText(Locale.hintLogarithmicDepthBuffer);
 	this.logarithmicDepthBuffer = new CheckBox(this.form);
 	this.logarithmicDepthBuffer.size.set(18, 18);
 	this.logarithmicDepthBuffer.setOnChange(function()
@@ -130,7 +130,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.autoClearStencil);
 	this.form.nextRow();
 
-	this.form.addText(Locale.stencil);
+	this.form.addText(Locale.stencil).setAltText(Locale.hintStencil);
 	this.stencil = new CheckBox(this.form);
 	this.stencil.size.set(18, 18);
 	this.stencil.setOnChange(function()
@@ -141,7 +141,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 
-	this.form.addText(Locale.sortObjects);
+	this.form.addText(Locale.sortObjects).setAltText(Locale.hintSortObjects);
 	this.sortObjects = new CheckBox(this.form);
 	this.sortObjects.size.set(18, 18);
 	this.sortObjects.setOnChange(function()
