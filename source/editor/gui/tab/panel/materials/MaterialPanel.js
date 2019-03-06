@@ -41,7 +41,7 @@ function MaterialPanel(parent, object)
 	this.side.size.set(100, 18);
 	this.side.addValue(Locale.front, THREE.FrontSide);
 	this.side.addValue(Locale.back, THREE.BackSide);
-	this.side.addValue("Double", THREE.DoubleSide);
+	this.side.addValue(Locale.double, THREE.DoubleSide);
 	this.side.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "side", self.side.getValue()));
@@ -51,7 +51,7 @@ function MaterialPanel(parent, object)
 	this.form.nextRow();
 
 	//Test depth
-	this.form.addText("Depth Test");
+	this.form.addText(Locale.depthTest);
 	this.depthTest = new CheckBox(this.form);
 	this.depthTest.size.set(18, 18);
 	this.depthTest.setOnChange(function()
@@ -63,7 +63,7 @@ function MaterialPanel(parent, object)
 	this.form.nextRow();
 	
 	//Write depth
-	this.form.addText("Depth Write");
+	this.form.addText(Locale.depthWrite);
 	this.depthWrite = new CheckBox(this.form);
 	this.depthWrite.size.set(18, 18);
 	this.depthWrite.setOnChange(function()
@@ -75,16 +75,16 @@ function MaterialPanel(parent, object)
 	this.form.nextRow();
 
 	//Depth mode
-	this.form.addText("Depth Mode");
+	this.form.addText(Locale.depthMode);
 	this.depthFunc = new DropdownList(this.form);
 	this.depthFunc.position.set(100, 85);
 	this.depthFunc.size.set(100, 18);
-	this.depthFunc.addValue("Never", THREE.NeverDepth);
-	this.depthFunc.addValue("Always", THREE.AlwaysDepth);
-	this.depthFunc.addValue("Less", THREE.LessDepth);
+	this.depthFunc.addValue(Locale.never, THREE.NeverDepth);
+	this.depthFunc.addValue(Locale.always, THREE.AlwaysDepth);
+	this.depthFunc.addValue(Locale.less, THREE.LessDepth);
 	this.depthFunc.addValue("Less or equal", THREE.LessEqualDepth);
 	this.depthFunc.addValue("Greater or equal", THREE.GreaterEqualDepth);
-	this.depthFunc.addValue("Greater", THREE.GreaterDepth);
+	this.depthFunc.addValue(Locale.greater, THREE.GreaterDepth);
 	this.depthFunc.addValue("Not equal", THREE.NotEqualDepth);
 	this.depthFunc.setOnChange(function()
 	{
@@ -139,11 +139,11 @@ function MaterialPanel(parent, object)
 	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);
 	this.blending.size.set(100, 18);
-	this.blending.addValue("None", THREE.NoBlending);
+	this.blending.addValue(Locale.none, THREE.NoBlending);
 	this.blending.addValue("Normal", THREE.NormalBlending);
 	this.blending.addValue("Additive", THREE.AdditiveBlending);
 	this.blending.addValue("Subtractive", THREE.SubtractiveBlending);
-	this.blending.addValue("Multiply", THREE.MultiplyBlending);
+	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "blending", self.blending.getValue()));

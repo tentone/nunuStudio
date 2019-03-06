@@ -65,7 +65,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.lightEnabled);
 	this.previewForm.nextRow();
 
-	this.previewForm.addText("Color");
+	this.previewForm.addText(Locale.color);
 	this.pointLightColor = new ColorChooser(this.previewForm);
 	this.pointLightColor.size.set(80, 18);
 	this.pointLightColor.setOnChange(function()
@@ -90,7 +90,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.ambientLightEnabled);
 	this.previewForm.nextRow();
 
-	this.previewForm.addText("Color");
+	this.previewForm.addText(Locale.color);
 	this.ambientLightColor = new ColorChooser(this.previewForm);
 	this.ambientLightColor.size.set(80, 18);
 	this.ambientLightColor.setOnChange(function()

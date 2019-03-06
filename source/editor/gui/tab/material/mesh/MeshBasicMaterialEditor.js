@@ -41,7 +41,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Color
-	this.form.addText("Color");
+	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(0, 18);
 	this.color.setOnChange(function()

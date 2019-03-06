@@ -27,7 +27,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Color
-	this.form.addText("Color");
+	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()

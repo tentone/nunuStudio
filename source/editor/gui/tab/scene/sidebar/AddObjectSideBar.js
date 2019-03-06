@@ -4,7 +4,7 @@ function AddObjectSideBar(parent, size, position)
 {
 	//Add Text
 	var add = new Text(parent);
-	add.setText("Add");
+	add.setText(Locale.add);
 	add.size.set(40, 20);
 	add.position.set(0, position);
 	add.updateInterface();

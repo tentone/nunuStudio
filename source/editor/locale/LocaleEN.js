@@ -26,6 +26,9 @@ LocaleManager.register(
 	select: "Select",
 	redo: "Redo",
 	undo: "Undo",
+	add: "Add",
+	mix: "Mix",
+	multiply: "Multiply",
 
 	//Context menu
 	computeNormals: "Compute normals",
@@ -97,7 +100,16 @@ LocaleManager.register(
 	powerPreference: "Power Preference",
 	logarithmicDepthBuffer: "Logaritmic Depth",
 	physicallyCorrectLights: "Physically Correct Lights",
-
+	depthWrite: "Depth Write",
+	depthTest: "Depth Test",
+	depthMode: "Depth Mode",
+	background: "Background",
+	fog: "Fog",
+	color: "Color",
+	density: "Density",
+	near: "Near",
+	far: "Far",
+	
 	//Values
 	relative: "Relative",
 	absolute: "Absolute",
@@ -121,6 +133,14 @@ LocaleManager.register(
 	highPerformance: "High performance",
 	lowPower: "Low power",
 	default: "Default",
+	never: "Never",
+	always: "Always",
+	double: "Double",
+	less: "Less",
+	greater: "Greater",
+	none: "None",
+	linear: "Linear",
+	exponential: "Exponential",
 
 	//Editor
 	project: "Project",

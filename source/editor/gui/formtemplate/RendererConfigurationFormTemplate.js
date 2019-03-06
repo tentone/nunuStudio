@@ -254,8 +254,8 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.addText(Locale.tonemapping);
 	this.toneMapping = new DropdownList(this.form);
 	this.toneMapping.size.set(150, 18);
-	this.toneMapping.addValue("None", THREE.NoToneMapping);
-	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
+	this.toneMapping.addValue(Locale.none, THREE.NoToneMapping);
+	this.toneMapping.addValue(Locale.linear, THREE.LinearToneMapping);
 	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);
 	this.toneMapping.addValue("Uncharted", THREE.Uncharted2ToneMapping);
 	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);

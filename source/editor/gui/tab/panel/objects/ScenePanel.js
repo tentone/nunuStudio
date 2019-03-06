@@ -30,7 +30,7 @@ function ScenePanel(parent, object)
 	this.form.nextRow();
 
 	//Background color
-	this.form.addText("Background");
+	this.form.addText(Locale.background);
 	this.background = new ColorChooser(this.form);
 	this.background.size.set(100, 18);
 	this.background.setValue(0, 0, 0);
@@ -65,12 +65,12 @@ function ScenePanel(parent, object)
 	this.form.nextRow();
 
 	//Fog
-	this.form.addText("Fog");
+	this.form.addText(Locale.fog);
 	this.fog = new DropdownList(this.form);
 	this.fog.size.set(100, 18);
-	this.fog.addValue("None", THREE.Fog.NONE);
-	this.fog.addValue("Linear", THREE.Fog.LINEAR);
-	this.fog.addValue("Exponential", THREE.Fog.EXPONENTIAL);
+	this.fog.addValue(Locale.none, THREE.Fog.NONE);
+	this.fog.addValue(Locale.linear, THREE.Fog.LINEAR);
+	this.fog.addValue(Locale.exponential, THREE.Fog.EXPONENTIAL);
 	this.fog.setOnChange(function()
 	{
 		self.object.setFogMode(self.fog.getSelectedIndex());
@@ -84,7 +84,7 @@ function ScenePanel(parent, object)
 	this.fogLinearForm.spacing.set(5, 5);
 
 	//Linear fog color
-	this.fogLinearForm.addText("Color");
+	this.fogLinearForm.addText(Locale.color);
 	this.fogLinearColor = new ColorChooser(this.fogLinearForm);
 	this.fogLinearColor.size.set(80, 18);
 	this.fogLinearColor.setOnChange(function()
@@ -97,7 +97,7 @@ function ScenePanel(parent, object)
 	this.fogLinearForm.nextRow();
 
 	//Linear fog near
-	this.fogLinearForm.addText("Near");
+	this.fogLinearForm.addText(Locale.near);
 	this.fogNear = new NumberBox(this.fogLinearForm);
 	this.fogNear.size.set(60, 18);
 	this.fogNear.setOnChange(function()
@@ -108,7 +108,7 @@ function ScenePanel(parent, object)
 	this.fogLinearForm.nextRow();
 
 	//Linear fog far
-	this.fogLinearForm.addText("Far");
+	this.fogLinearForm.addText(Locale.near);
 	this.fogFar = new NumberBox(this.fogLinearForm);
 	this.fogFar.size.set(60, 18);
 	this.fogFar.setOnChange(function()
@@ -127,7 +127,7 @@ function ScenePanel(parent, object)
 	this.fogExponentialForm.spacing.set(5, 5);
 
 	//Exponential fog color
-	this.fogExponentialForm.addText("Color");
+	this.fogExponentialForm.addText(Locale.color);
 	this.fogExponentialColor = new ColorChooser(this.fogExponentialForm);
 	this.fogExponentialColor.size.set(80, 18);
 	this.fogExponentialColor.setOnChange(function()
@@ -140,7 +140,7 @@ function ScenePanel(parent, object)
 	this.fogExponentialForm.nextRow();
 
 	//Exponential fog density
-	this.fogExponentialForm.addText("Density")
+	this.fogExponentialForm.addText(Locale.density)
 	this.fogDensity = new NumberBox(this.fogExponentialForm);
 	this.fogDensity.size.set(100, 18);
 	this.fogDensity.setStep(0.0001);

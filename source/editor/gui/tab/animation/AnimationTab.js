@@ -35,7 +35,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.animationButton = new ButtonText(this.bar);
 	this.animationButton.position.set(0, 0);
 	this.animationButton.size.set(100, 20);
-	this.animationButton.setText("Add")
+	this.animationButton.setText(Locale.add)
 	this.animationButton.updateInterface();
 	this.animationButton.setOnClick(function()
 	{

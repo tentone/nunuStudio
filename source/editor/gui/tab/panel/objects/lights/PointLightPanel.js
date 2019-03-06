@@ -7,7 +7,7 @@ function PointLightPanel(parent, object)
 	var self = this;
 
 	//Color
-	this.form.addText("Color");
+	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
@@ -88,7 +88,7 @@ function PointLightPanel(parent, object)
 	}
 
 	//Shadowmap camera near
-	this.form.addText("Near");
+	this.form.addText(Locale.near);
 	this.shadowNear = new NumberBox(this.form);
 	this.shadowNear.size.set(60, 18);
 	this.shadowNear.setStep(0.1);
@@ -101,7 +101,7 @@ function PointLightPanel(parent, object)
 	this.form.nextRow();
 	
 	//Shadowmap camera far
-	this.form.addText("Far");
+	this.form.addText(Locale.near);
 	this.shadowFar = new NumberBox(this.form);
 	this.shadowFar.size.set(60, 18);
 	this.shadowFar.setStep(0.1);

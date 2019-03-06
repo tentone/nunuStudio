@@ -6,7 +6,7 @@ function ColorifyPassNode(parent)
 
 	var self = this;
 
-	this.addText("Color");
+	this.addText(Locale.color);
 	this.color = new ColorChooser(this);
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()

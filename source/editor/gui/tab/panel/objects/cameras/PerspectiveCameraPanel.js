@@ -43,7 +43,7 @@ function PerspectiveCameraPanel(parent, object)
 	this.form.nextRow();
 
 	//Near
-	this.form.addText("Near");
+	this.form.addText(Locale.near);
 	this.near = new NumberBox(this.form);
 	this.near.size.set(60, 18);
 	this.near.setStep(0.1);
@@ -56,7 +56,7 @@ function PerspectiveCameraPanel(parent, object)
 	this.form.nextRow();
 	
 	//Far
-	this.form.addText("Far");
+	this.form.addText(Locale.near);
 	this.far = new NumberBox(this.form);
 	this.far.size.set(80, 18);
 	this.far.setRange(0, Number.MAX_SAFE_INTEGER);

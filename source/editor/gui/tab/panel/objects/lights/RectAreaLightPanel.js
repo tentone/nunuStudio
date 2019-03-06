@@ -7,7 +7,7 @@ function RectAreaLightPanel(parent, object)
 	var self = this;
 
 	//Color
-	this.form.addText("Color");
+	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()

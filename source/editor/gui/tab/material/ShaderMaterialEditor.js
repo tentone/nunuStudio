@@ -160,7 +160,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.side.size.set(150, 18);
 	this.side.addValue(Locale.front, THREE.FrontSide);
 	this.side.addValue(Locale.back, THREE.BackSide);
-	this.side.addValue("Double", THREE.DoubleSide);
+	this.side.addValue(Locale.double, THREE.DoubleSide);
 	this.side.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "side", self.side.getValue()));
@@ -170,7 +170,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Test depth
-	this.form.addText("Depth Test");
+	this.form.addText(Locale.depthTest);
 	this.depthTest = new CheckBox(this.form);
 	this.depthTest.size.set(18, 18);
 	this.depthTest.setOnChange(function()
@@ -182,7 +182,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	
 	//Write depth
-	this.form.addText("Depth Write");
+	this.form.addText(Locale.depthWrite);
 	this.depthWrite = new CheckBox(this.form);
 	this.depthWrite.size.set(18, 18);
 	this.depthWrite.setOnChange(function()
@@ -210,11 +210,11 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);
 	this.blending.size.set(100, 18);
-	this.blending.addValue("None", THREE.NoBlending);
+	this.blending.addValue(Locale.none, THREE.NoBlending);
 	this.blending.addValue("Normal", THREE.NormalBlending);
 	this.blending.addValue("Additive", THREE.AdditiveBlending);
 	this.blending.addValue("Subtractive", THREE.SubtractiveBlending);
-	this.blending.addValue("Multiply", THREE.MultiplyBlending);
+	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "blending", self.blending.getValue()));

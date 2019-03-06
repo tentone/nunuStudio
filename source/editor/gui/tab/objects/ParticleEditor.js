@@ -86,11 +86,11 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.addText("Blending Mode");
 	this.blending = new DropdownList(this.form);
 	this.blending.size.set(100, 18);
-	this.blending.addValue("None", THREE.NoBlending);
+	this.blending.addValue(Locale.none, THREE.NoBlending);
 	this.blending.addValue("Normal", THREE.NormalBlending);
 	this.blending.addValue("Additive", THREE.AdditiveBlending);
 	this.blending.addValue("Subtractive", THREE.SubtractiveBlending);
-	this.blending.addValue("Multiply", THREE.MultiplyBlending);
+	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.group, "blending", self.blending.getValue()));
@@ -387,7 +387,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Color
-	this.form.addText("Color");
+	this.form.addText(Locale.color);
 	this.form.nextRow();
 
 	this.form.addText("Base");

@@ -56,7 +56,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Color
-	this.form.addText("Color");
+	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
@@ -116,7 +116,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Emissive color
-	this.form.addText("Color");
+	this.form.addText(Locale.color);
 	this.emissive = new ColorChooser(this.form);
 	this.emissive.size.set(100, 18);
 	this.emissive.setOnChange(function()
@@ -157,9 +157,9 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.combine = new DropdownList(this.form);
 	this.combine.position.set(100, 85);
 	this.combine.size.set(0, 18);
-	this.combine.addValue("Multiply", THREE.MultiplyOperation);
-	this.combine.addValue("Mix", THREE.MixOperation);
-	this.combine.addValue("Add", THREE.AddOperation);
+	this.combine.addValue(Locale.multiply, THREE.MultiplyOperation);
+	this.combine.addValue(Locale.mix, THREE.MixOperation);
+	this.combine.addValue(Locale.add, THREE.AddOperation);
 	this.combine.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "combine", self.combine.getValue()));

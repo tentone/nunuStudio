@@ -113,7 +113,7 @@ function TexturePanel(parent, object)
 	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
 	this.minFilter.addValue("Nearest", THREE.NearestFilter);
-	this.minFilter.addValue("Linear", THREE.LinearFilter);
+	this.minFilter.addValue(Locale.linear, THREE.LinearFilter);
 	this.minFilter.addValue("MIP Nearest Nearest", THREE.NearestMipMapNearestFilter);
 	this.minFilter.addValue("MIP Nearest Linear", THREE.NearestMipMapLinearFilter);
 	this.minFilter.addValue("MIP Linear Nearest", THREE.LinearMipMapNearestFilter);
@@ -130,7 +130,7 @@ function TexturePanel(parent, object)
 	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
 	this.magFilter.addValue("Nearest", THREE.NearestFilter);
-	this.magFilter.addValue("Linear", THREE.LinearFilter);
+	this.magFilter.addValue(Locale.linear, THREE.LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "magFilter", self.magFilter.getValue()));

@@ -138,7 +138,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	this.interpolation.position.set(22, 5);
 	this.interpolation.updatePosition(Element.TOP_RIGHT);
 	this.interpolation.updateSize();
-	this.interpolation.addValue("Linear", THREE.InterpolateLinear);
+	this.interpolation.addValue(Locale.linear, THREE.InterpolateLinear);
 	this.interpolation.addValue("Smooth", THREE.Smooth);
 	this.interpolation.addValue("Discrete", THREE.InterpolateDiscrete);
 	this.interpolation.setOnChange(function()
