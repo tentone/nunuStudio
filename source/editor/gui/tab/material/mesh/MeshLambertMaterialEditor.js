@@ -30,7 +30,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Wireframe
-	this.form.addText("Wireframe");
+	this.form.addText(Locale.wireframe);
 	this.wireframe = new CheckBox(this.form);
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
@@ -128,7 +128,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Emissive intensity
-	this.form.addText("Intensity");
+	this.form.addText(Locale.intensity);
 	this.emissiveIntensity = new NumberBox(this.form);
 	this.emissiveIntensity.size.set(60, 18);
 	this.emissiveIntensity.setStep(0.1);

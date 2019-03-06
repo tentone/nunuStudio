@@ -29,6 +29,7 @@ LocaleManager.register(
 	add: "Add",
 	mix: "Mix",
 	multiply: "Multiply",
+	setTransparent: "Set transparent",
 
 	//Context menu
 	computeNormals: "Compute normals",
@@ -88,6 +89,9 @@ LocaleManager.register(
 	autoClearColor: "Auto Clear Color",
 	autoClearDepth: "Auto Clear Depth",
 	autoClearStencil: "Auto Clear Stencil",
+	clearColor: "Clear color",
+	clearDepth: "Clear depth",
+	clearStencil: "Clear stencil",
 	stencil: "Stenci",
 	sortObjects: "Sort objects",
 	gammaFactor: "Gamma Factor",
@@ -109,6 +113,22 @@ LocaleManager.register(
 	density: "Density",
 	near: "Near",
 	far: "Far",
+	wireframe: "Wireframe",
+	transparent: "Transparent",
+	opacity: "Opacity",
+	alphaTest: "Alpha test",
+	blendingMode: "Blending Mode",
+	useCamera: "Use camera",
+	renderOrder: "Render order",
+	fov: "FOV",
+	clippingPlanes: "Clipping planes",
+	iterations: "Iterations",
+	tolerance: "Tolerance",
+	gravity: "Gravity",
+	usePhysics: "Use physics",
+	defaultScene: "Default scene",
+	intensity: "Intensity",
+	time: "Time",
 	
 	//Values
 	relative: "Relative",
@@ -137,10 +157,18 @@ LocaleManager.register(
 	always: "Always",
 	double: "Double",
 	less: "Less",
+	lessOrEqual: "Less or equal",
 	greater: "Greater",
+	greaterOrEqual: "Greater or equal",
+	notEqual: "Not equal",
 	none: "None",
 	linear: "Linear",
 	exponential: "Exponential",
+	normal: "Normal",
+	additive: "Additive",
+	subtractive: "Subtractive",
+	horizontal: "Horizontal",
+	vertical: "Vertical",
 
 	//Editor
 	project: "Project",
@@ -208,6 +236,7 @@ LocaleManager.register(
 	hintAlpha: "Whether the canvas contains an alpha (transparency) buffer or not.",
 	hintPremultipliedAlpha: "Whether the renderer will assume that colors have premultiplied alpha.",
 	hintLogarithmicDepthBuffer: "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
+	hintRenderOrder: "Camera with lower order gets rendered first.",
 
 	//Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",

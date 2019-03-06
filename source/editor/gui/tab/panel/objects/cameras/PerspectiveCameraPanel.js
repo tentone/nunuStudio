@@ -7,7 +7,7 @@ function PerspectiveCameraPanel(parent, object)
 	var self = this;
 
 	//Fov
-	this.form.addText("FOV");
+	this.form.addText(Locale.fov);
 	this.fov = new Slider(this.form);
 	this.fov.size.set(160, 18);
 	this.fov.setRange(30, 160);
@@ -21,7 +21,7 @@ function PerspectiveCameraPanel(parent, object)
 
 	//Camera used
 	this.use = new CheckBox(this.form);
-	this.form.addText("Use camera");
+	this.form.addText(Locale.useCamera);
 	this.use.size.set(18, 18);
 	this.use.setOnChange(function()
 	{
@@ -39,7 +39,7 @@ function PerspectiveCameraPanel(parent, object)
 	this.form.nextRow();
 
 	//Distance
-	this.form.addText("Clipping planes");
+	this.form.addText(Locale.clippingPlanes);
 	this.form.nextRow();
 
 	//Near
@@ -73,7 +73,7 @@ function PerspectiveCameraPanel(parent, object)
 	this.viewport = new ViewportFormTemplate(this.form, object);
 	
 	//Order
-	this.form.addText("Render Order").setAltText("Camera with lower order renders first.");
+	this.form.addText(Locale.renderOrder).setAltText(Locale.hintRenderOrder);
 	this.order = new NumberBox(this.form);
 	this.order.size.set(80, 18);
 	this.order.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -89,7 +89,7 @@ function PerspectiveCameraPanel(parent, object)
 
 	//Clear color
 	this.clearColor = new CheckBox(this.form);
-	this.form.addText("Clear color");
+	this.form.addText(Locale.clearColor);
 	this.clearColor.size.set(18, 18);
 	this.clearColor.setOnChange(function()
 	{
@@ -100,7 +100,7 @@ function PerspectiveCameraPanel(parent, object)
 
 	//Clear depth
 	this.clearDepth = new CheckBox(this.form);
-	this.form.addText("Clear depth");
+	this.form.addText(Locale.clearDepth);
 	this.clearDepth.size.set(18, 18);
 	this.clearDepth.setOnChange(function()
 	{
@@ -111,7 +111,7 @@ function PerspectiveCameraPanel(parent, object)
 
 	//Clear stencil
 	this.clearStencil = new CheckBox(this.form);
-	this.form.addText("Clear stencil");
+	this.form.addText(Locale.clearStencil);
 	this.clearStencil.size.set(18, 18);
 	this.clearStencil.setOnChange(function()
 	{

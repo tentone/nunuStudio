@@ -31,7 +31,7 @@ function PointLightPanel(parent, object)
 	this.form.nextRow();
 
 	//Intensity
-	this.form.addText("Intensity");
+	this.form.addText(Locale.intensity);
 	this.intensity = new Slider(this.form);
 	this.intensity.size.set(160, 18);
 	this.intensity.setStep(0.1);

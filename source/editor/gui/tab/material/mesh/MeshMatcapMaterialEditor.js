@@ -31,7 +31,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 
 	//Wireframe
 	this.wireframe = new CheckBox(this.form);
-	this.form.addText("Wireframe");
+	this.form.addText(Locale.wireframe);
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{

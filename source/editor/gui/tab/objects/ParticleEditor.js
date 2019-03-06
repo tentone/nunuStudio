@@ -83,13 +83,13 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Blending mode
-	this.form.addText("Blending Mode");
+	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.size.set(100, 18);
 	this.blending.addValue(Locale.none, THREE.NoBlending);
-	this.blending.addValue("Normal", THREE.NormalBlending);
-	this.blending.addValue("Additive", THREE.AdditiveBlending);
-	this.blending.addValue("Subtractive", THREE.SubtractiveBlending);
+	this.blending.addValue(Locale.normal, THREE.NormalBlending);
+	this.blending.addValue(Locale.additive, THREE.AdditiveBlending);
+	this.blending.addValue(Locale.subtractive, THREE.SubtractiveBlending);
 	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
@@ -289,7 +289,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	
 	//Opacity graph
-	this.form.addText("Opacity");
+	this.form.addText(Locale.opacity);
 	this.opacity = new Graph(this.form);
 	this.opacity.size.set(200, 120)
 	this.opacity.setOnChange(function(value)

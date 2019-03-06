@@ -194,7 +194,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Transparent
-	this.form.addText("Transparent");
+	this.form.addText(Locale.transparent);
 	this.transparent = new CheckBox(this.form);
 	this.transparent.size.set(18, 18);
 	this.transparent.setOnChange(function()
@@ -206,14 +206,14 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	
 	//Blending mode
-	this.form.addText("Blending Mode");
+	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);
 	this.blending.size.set(100, 18);
 	this.blending.addValue(Locale.none, THREE.NoBlending);
-	this.blending.addValue("Normal", THREE.NormalBlending);
-	this.blending.addValue("Additive", THREE.AdditiveBlending);
-	this.blending.addValue("Subtractive", THREE.SubtractiveBlending);
+	this.blending.addValue(Locale.normal, THREE.NormalBlending);
+	this.blending.addValue(Locale.additive, THREE.AdditiveBlending);
+	this.blending.addValue(Locale.subtractive, THREE.SubtractiveBlending);
 	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
@@ -224,7 +224,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Wireframe
-	this.form.addText("Wireframe");
+	this.form.addText(Locale.wireframe);
 	this.wireframe = new CheckBox(this.form);
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()

@@ -60,7 +60,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Intensity
-	this.form.addText("Intensity");
+	this.form.addText(Locale.intensity);
 	this.intensity = new Slider(this.form);
 	this.intensity.size.set(160, 18);
 	this.intensity.setStep(0.01);
@@ -118,7 +118,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Actual time 
-	this.form.addText("Time");
+	this.form.addText(Locale.time);
 	this.time = new NumberBox(this.form);
 	this.time.size.set(60, 18);
 	this.time.setStep(0.1);

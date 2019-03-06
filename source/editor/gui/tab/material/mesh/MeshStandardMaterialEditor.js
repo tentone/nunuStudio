@@ -31,7 +31,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	//Wireframe
 	this.wireframe = new CheckBox(this.form);
-	this.form.addText("Wireframe");
+	this.form.addText(Locale.wireframe);
 	this.wireframe.size.set(18, 18);
 	this.wireframe.setOnChange(function()
 	{
@@ -260,7 +260,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Emissive intensity
-	this.form.addText("Intensity");
+	this.form.addText(Locale.intensity);
 	this.emissiveIntensity = new NumberBox(this.form);
 	this.emissiveIntensity.size.set(60, 18);
 	this.emissiveIntensity.setStep(0.1);
@@ -297,7 +297,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Intensity");
+	this.form.addText(Locale.intensity);
 	this.envMapIntensity = new NumberBox(this.form);
 	this.envMapIntensity.size.set(60, 18);
 	this.envMapIntensity.setStep(0.05);
@@ -335,7 +335,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Ambient Occlusion
-	this.form.addText("Intensity");
+	this.form.addText(Locale.intensity);
 	this.aoMapIntensity = new NumberBox(this.form);
 	this.aoMapIntensity.size.set(60, 18);
 	this.aoMapIntensity.setStep(0.05);

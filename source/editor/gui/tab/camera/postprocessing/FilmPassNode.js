@@ -26,7 +26,7 @@ function FilmPassNode(parent)
 	this.add(this.noiseIntensity);
 	this.nextRow();
 
-	this.addText("Intensity");
+	this.addText(Locale.intensity);
 	this.scanlinesIntensity = new NumberBox(this);
 	this.scanlinesIntensity.size.set(60, 18);
 	this.scanlinesIntensity.setOnChange(function()

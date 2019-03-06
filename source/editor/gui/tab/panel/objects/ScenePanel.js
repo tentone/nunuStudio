@@ -8,7 +8,7 @@ function ScenePanel(parent, object)
 
 	//Select scene as default
 	this.default = new CheckBox(this.form);
-	this.form.addText("Default scene");
+	this.form.addText(Locale.defaultScene);
 	this.default.size.set(18, 18);
 	this.default.setOnChange(function()
 	{
@@ -55,7 +55,7 @@ function ScenePanel(parent, object)
 
 	this.form.addText("");
 	this.backgroundTransparent = new ButtonText(this.form);
-	this.backgroundTransparent.setText("Set transparent");
+	this.backgroundTransparent.setText(Locale.setTransparent);
 	this.backgroundTransparent.size.set(100, 18);
 	this.backgroundTransparent.setOnClick(function()
 	{
@@ -160,7 +160,7 @@ function ScenePanel(parent, object)
 	this.form.nextRow();
 
 	//Use physics
-	this.form.addText("Use physics");
+	this.form.addText(Locale.usePhysics);
 	this.usePhysics = new CheckBox(this.form);
 	this.usePhysics.size.set(18, 18);
 	this.usePhysics.setOnChange(function()
@@ -171,7 +171,7 @@ function ScenePanel(parent, object)
 	this.form.nextRow();
 
 	//Gravity
-	this.form.addText("Gravity");
+	this.form.addText(Locale.gravity);
 	this.gravity = new VectorBox(this.form);
 	this.gravity.setOnChange(function()
 	{
@@ -181,7 +181,7 @@ function ScenePanel(parent, object)
 	this.form.add(this.gravity);
 	this.form.nextRow();
 
-	this.form.addText("Tolerance");
+	this.form.addText(Locale.tolerance);
 	this.tolerance = new NumberBox(this.form);
 	this.tolerance.size.set(50, 18);
 	this.tolerance.setRange(0, 1000);
@@ -193,7 +193,7 @@ function ScenePanel(parent, object)
 	this.form.add(this.tolerance);
 	this.form.nextRow();
 
-	this.form.addText("Iterations");
+	this.form.addText(Locale.iterations);
 	this.iterations = new NumberBox(this.form);
 	this.iterations.size.set(50, 18);
 	this.iterations.setRange(0, 1000);

@@ -82,10 +82,10 @@ function MaterialPanel(parent, object)
 	this.depthFunc.addValue(Locale.never, THREE.NeverDepth);
 	this.depthFunc.addValue(Locale.always, THREE.AlwaysDepth);
 	this.depthFunc.addValue(Locale.less, THREE.LessDepth);
-	this.depthFunc.addValue("Less or equal", THREE.LessEqualDepth);
-	this.depthFunc.addValue("Greater or equal", THREE.GreaterEqualDepth);
+	this.depthFunc.addValue(Locale.lessOrEqual, THREE.LessEqualDepth);
+	this.depthFunc.addValue(Locale.greaterOrEqual, THREE.GreaterEqualDepth);
 	this.depthFunc.addValue(Locale.greater, THREE.GreaterDepth);
-	this.depthFunc.addValue("Not equal", THREE.NotEqualDepth);
+	this.depthFunc.addValue(Locale.notEqual, THREE.NotEqualDepth);
 	this.depthFunc.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "depthFunc", self.depthFunc.getValue()));
@@ -95,7 +95,7 @@ function MaterialPanel(parent, object)
 	this.form.nextRow();
 
 	//Transparent
-	this.form.addText("Transparent");
+	this.form.addText(Locale.transparent);
 	this.transparent = new CheckBox(this.form);
 	this.transparent.size.set(18, 18);
 	this.transparent.setOnChange(function()
@@ -107,7 +107,7 @@ function MaterialPanel(parent, object)
 	this.form.nextRow();
 
 	//Opacity level
-	this.form.addText("Opacity");
+	this.form.addText(Locale.opacity);
 	this.opacity = new Slider(this.form);
 	this.opacity.size.set(160, 18);
 	this.opacity.setRange(0, 1);
@@ -121,7 +121,7 @@ function MaterialPanel(parent, object)
 	this.form.nextRow();
 	
 	//Alpha test
-	this.form.addText("Alpha test");
+	this.form.addText(Locale.alphaTest);
 	this.alphaTest = new Slider(this.form);
 	this.alphaTest.size.set(160, 18);
 	this.alphaTest.setRange(0, 1);
@@ -135,14 +135,14 @@ function MaterialPanel(parent, object)
 	this.form.nextRow();
 	
 	//Blending mode
-	this.form.addText("Blending Mode");
+	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);
 	this.blending.size.set(100, 18);
 	this.blending.addValue(Locale.none, THREE.NoBlending);
-	this.blending.addValue("Normal", THREE.NormalBlending);
-	this.blending.addValue("Additive", THREE.AdditiveBlending);
-	this.blending.addValue("Subtractive", THREE.SubtractiveBlending);
+	this.blending.addValue(Locale.normal, THREE.NormalBlending);
+	this.blending.addValue(Locale.additive, THREE.AdditiveBlending);
+	this.blending.addValue(Locale.subtractive, THREE.SubtractiveBlending);
 	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{

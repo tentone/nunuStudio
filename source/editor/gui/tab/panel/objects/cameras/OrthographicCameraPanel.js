@@ -22,8 +22,8 @@ function OrthographicCameraPanel(parent, object)
 	this.form.addText("Resize Mode");
 	this.mode = new DropdownList(this.form);
 	this.mode.size.set(130, 18);
-	this.mode.addValue("Horizontal", OrthographicCamera.RESIZE_HORIZONTAL);
-	this.mode.addValue("Vertical", OrthographicCamera.RESIZE_VERTICAL);
+	this.mode.addValue(Locale.horizontal, OrthographicCamera.RESIZE_HORIZONTAL);
+	this.mode.addValue(Locale.vertical, OrthographicCamera.RESIZE_VERTICAL);
 	this.mode.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "mode", self.mode.getSelectedIndex()));
@@ -33,7 +33,7 @@ function OrthographicCameraPanel(parent, object)
 
 	//Camera used
 	this.use = new CheckBox(this.form);
-	this.form.addText("Use camera");
+	this.form.addText(Locale.useCamera);
 	this.use.size.set(18, 18);
 	this.use.setOnChange(function()
 	{
@@ -51,7 +51,7 @@ function OrthographicCameraPanel(parent, object)
 	this.form.nextRow();
 	
 	//Distance
-	this.form.addText("Clipping planes");
+	this.form.addText(Locale.clippingPlanes);
 	this.form.nextRow();
 
 	//Near
@@ -85,7 +85,7 @@ function OrthographicCameraPanel(parent, object)
 	this.viewport = new ViewportFormTemplate(this.form, object);
 
 	//Order
-	this.form.addText("Render Order").setAltText("Camera with lower order renders first.");
+	this.form.addText(Locale.renderOrder).setAltText(Locale.hintRenderOrder);
 	this.order = new NumberBox(this.form);
 	this.order.size.set(80, 18);
 	this.order.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -101,7 +101,7 @@ function OrthographicCameraPanel(parent, object)
 	this.form.nextRow();
 
 	//Clear color
-	this.form.addText("Clear color");
+	this.form.addText(Locale.clearColor);
 	this.clearColor = new CheckBox(this.form);
 	this.clearColor.size.set(18, 18);
 	this.clearColor.setOnChange(function()
@@ -113,7 +113,7 @@ function OrthographicCameraPanel(parent, object)
 
 	//Clear depth
 	this.clearDepth = new CheckBox(this.form);
-	this.form.addText("Clear depth");
+	this.form.addText(Locale.clearDepth);
 	this.clearDepth.size.set(18, 18);
 	this.clearDepth.setOnChange(function()
 	{
@@ -124,7 +124,7 @@ function OrthographicCameraPanel(parent, object)
 
 	//Clear stencil
 	this.clearStencil = new CheckBox(this.form);
-	this.form.addText("Clear stencil");
+	this.form.addText(Locale.clearStencil);
 	this.clearStencil.size.set(18, 18);
 	this.clearStencil.setOnChange(function()
 	{
