@@ -98,7 +98,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	//Sky
-	this.previewForm.addText("Sky");
+	this.previewForm.addText(Locale.sky);
 	this.skyEnabled = new CheckBox(this.previewForm);
 	this.skyEnabled.size.set(18, 18);
 	this.skyEnabled.setValue(this.sky.visible);

@@ -8,7 +8,7 @@ function ToolBar(parent, editor, size, position)
 	
 	//Text
 	var text = new Text(parent);
-	text.setText("Tools");
+	text.setText(Locale.tools);
 	text.size.set(40, 20);
 	text.position.set(0, position);
 	text.updateInterface();
@@ -20,7 +20,7 @@ function ToolBar(parent, editor, size, position)
 	this.select.setImage(Editor.FILE_PATH + "icons/tools/select.png");
 	this.select.size.set(size, size);
 	this.select.position.set(0, position);
-	this.select.setAltText("Select (CTRL+1)");
+	this.select.setAltText(Locale.selectShortcut);
 	this.select.updateInterface();
 	this.select.setOnClick(function()
 	{
@@ -33,7 +33,7 @@ function ToolBar(parent, editor, size, position)
 	this.move.setImage(Editor.FILE_PATH + "icons/tools/move.png");
 	this.move.size.set(size, size);
 	this.move.position.set(0, position);
-	this.move.setAltText("Move (CTRL+2)");
+	this.move.setAltText(Locale.moveShortcut);
 	this.move.updateInterface();
 	this.move.setOnClick(function()
 	{
@@ -46,7 +46,7 @@ function ToolBar(parent, editor, size, position)
 	this.scale.setImage(Editor.FILE_PATH + "icons/tools/resize.png");
 	this.scale.size.set(size, size);
 	this.scale.position.set(0, position);
-	this.scale.setAltText("Scale (CTRL+3)");
+	this.scale.setAltText(Locale.scaleShortcut);
 	this.scale.updateInterface();
 	this.scale.setOnClick(function()
 	{
@@ -59,7 +59,7 @@ function ToolBar(parent, editor, size, position)
 	this.rotate.setImage(Editor.FILE_PATH + "icons/tools/rotate.png");
 	this.rotate.size.set(size, size);
 	this.rotate.position.set(0, position);
-	this.rotate.setAltText("Rotate (CTRL+4)");
+	this.rotate.setAltText(Locale.rotateShortcut);
 	this.rotate.updateInterface();
 	this.rotate.setOnClick(function()
 	{

@@ -129,7 +129,16 @@ LocaleManager.register(
 	defaultScene: "Default scene",
 	intensity: "Intensity",
 	time: "Time",
-	
+	shading: "Shading",
+	skinning: "Skinning",
+	roughness: "Roughness",
+	metalness: "Metalness",
+	bias: "Bias",
+	refraction: "Refraction",
+	morphTargets: "Morph targets",
+	textureMap: "Texture map",
+	sky: "Sky",
+
 	//Values
 	relative: "Relative",
 	absolute: "Absolute",
@@ -169,6 +178,8 @@ LocaleManager.register(
 	subtractive: "Subtractive",
 	horizontal: "Horizontal",
 	vertical: "Vertical",
+	smooth: "Smooth",
+	flat: "Flat",
 
 	//Editor
 	project: "Project",
@@ -186,7 +197,12 @@ LocaleManager.register(
 	nothingToShow: "Select an object to view its properties.",
 	selectAll: "Select all",
 	render: "Render",
-	
+	tools: "Tools",
+	selectShortcut: "Select (CTRL+1)",
+	moveShortcut: "Move (CTRL+2)",
+	scaleShortcut: "Scale (CTRL+3)",
+	rotateShortcut: "Rotate (CTRL+4)",
+
 	//Resources
 	image: "Image",
 	video: "Video",

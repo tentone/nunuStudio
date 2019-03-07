@@ -8,7 +8,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Skinning
 	this.skinning = new CheckBox(this.form);
-	this.form.addText("Skinning");
+	this.form.addText(Locale.skinning);
 	this.skinning.size.set(18, 18);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
@@ -20,7 +20,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	//Morph targets
 	this.morphTargets = new CheckBox(this.form);
-	this.form.addText("Morph targets");
+	this.form.addText(Locale.morphTargets);
 	this.morphTargets.size.set(18, 18);
 	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()
@@ -43,11 +43,11 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Shading mode
-	this.form.addText("Shading");
+	this.form.addText(Locale.shading);
 	this.flatShading = new DropdownList(this.form);
 	this.flatShading.size.set(100, 18);
-	this.flatShading.addValue("Smooth", false);
-	this.flatShading.addValue("Flat", true);
+	this.flatShading.addValue(Locale.smooth, false);
+	this.flatShading.addValue(Locale.flat, true);
 	this.flatShading.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
@@ -95,7 +95,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Texture map
-	this.form.addText("Texture map");
+	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
 	this.map.setOnChange(function(file)
@@ -198,7 +198,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map bias
-	this.form.addText("Bias");
+	this.form.addText(Locale.bias);
 	this.displacementBias = new NumberBox(this.form);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);

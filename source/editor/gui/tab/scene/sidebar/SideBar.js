@@ -262,7 +262,7 @@ SideBar.createObject = function(parent, size, position)
 	addLight.addOption(Editor.FILE_PATH + "icons/lights/sky.png", function()
 	{
 		Editor.addObject(new Sky());
-	}, "Sky");
+	}, Locale.sky);
 
 	//Add camera
 	var addCamera = new ButtonDrawer(parent);

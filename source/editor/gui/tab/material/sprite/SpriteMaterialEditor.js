@@ -17,7 +17,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.interactive.add(this.sprite);
 
 	//Sky
-	this.previewForm.addText("Sky");
+	this.previewForm.addText(Locale.sky);
 	this.skyEnabled = new CheckBox(this.previewForm);
 	this.skyEnabled.size.set(18, 18);
 	this.skyEnabled.setValue(this.sky.visible);
@@ -54,7 +54,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Texture map
-	this.form.addText("Texture map");
+	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)

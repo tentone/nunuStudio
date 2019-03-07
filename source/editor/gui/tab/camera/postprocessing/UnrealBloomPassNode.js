@@ -36,7 +36,7 @@ function UnrealBloomPassNode(parent)
 	this.add(this.threshold);
 	this.nextRow();
 
-	this.addText("Smooth");
+	this.addText(Locale.smooth);
 	this.smooth = new NumberBox(this);
 	this.smooth.size.set(60, 18);
 	this.smooth.setOnChange(function()

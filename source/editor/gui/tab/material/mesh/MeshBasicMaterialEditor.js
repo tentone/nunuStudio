@@ -8,7 +8,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 
 	//Skinning
 	this.skinning = new CheckBox(this.form);
-	this.form.addText("Skinning");
+	this.form.addText(Locale.skinning);
 	this.skinning.size.set(0, 18);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
@@ -20,7 +20,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 
 	//Morph targets
 	this.morphTargets = new CheckBox(this.form);
-	this.form.addText("Morph targets");
+	this.form.addText(Locale.morphTargets);
 	this.morphTargets.size.set(0, 18);
 	this.morphTargets.setOnChange(function()
 	{
@@ -53,7 +53,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Texture map
-	this.form.addText("Texture map");
+	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
 	this.map.setOnChange(function(file)
