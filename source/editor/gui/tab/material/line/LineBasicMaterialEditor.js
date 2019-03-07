@@ -39,7 +39,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Line width
-	this.form.addText("Width");
+	this.form.addText(Locale.width);
 	this.linewidth = new NumberBox(this.form);
 	this.linewidth.size.set(60, 18);
 	this.linewidth.setStep(1);

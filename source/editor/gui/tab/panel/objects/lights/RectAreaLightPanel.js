@@ -31,7 +31,7 @@ function RectAreaLightPanel(parent, object)
 	this.form.nextRow();
 
 	//Rect width
-	this.form.addText("Width");
+	this.form.addText(Locale.width);
 	this.width = new NumberBox(this.form);
 	this.width.size.set(60, 18);
 	this.width.setStep(0.1);
@@ -43,7 +43,7 @@ function RectAreaLightPanel(parent, object)
 	this.form.nextRow();
 	
 	//Rect height
-	this.form.addText("Height");
+	this.form.addText(Locale.height);
 	this.height = new NumberBox(this.form);
 	this.height.size.set(60, 18);
 	this.height.setStep(0.1);

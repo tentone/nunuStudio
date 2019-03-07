@@ -77,7 +77,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Auto update
-	this.form.addText("Auto update");
+	this.form.addText(Locale.autoUpdate);
 	this.autoUpdate = new CheckBox(this.form);
 	this.autoUpdate.size.set(18, 18);
 	this.autoUpdate.setOnChange(function()
@@ -145,7 +145,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Sun distance
-	this.form.addText("Sun distance");
+	this.form.addText(Locale.sunDistance);
 	this.sunDistance = new NumberBox(this.form);
 	this.sunDistance.size.set(60, 18);
 	this.sunDistance.setStep(10);
@@ -162,7 +162,7 @@ function SkyPanel(parent, object)
 
 	//Cast shadow
 	this.castShadow = new CheckBox(this.form);
-	this.form.addText("Cast Shadows");
+	this.form.addText(Locale.castShadows);
 	this.castShadow.size.set(18, 18);
 	this.castShadow.position.set(5, 85);
 	this.castShadow.updateInterface();
@@ -174,7 +174,7 @@ function SkyPanel(parent, object)
 	this.form.nextRow();
 
 	//Shadow resolution
-	this.form.addText("Resolution");
+	this.form.addText(Locale.resolution);
 	this.shadowWidth = new DropdownList(this.form);
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()

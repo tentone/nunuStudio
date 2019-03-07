@@ -51,7 +51,7 @@ function SpotLightPanel(parent, object)
 
 	//Cast shadow
 	this.castShadow = new CheckBox(this.form);
-	this.form.addText("Cast Shadows");
+	this.form.addText(Locale.castShadows);
 	this.castShadow.size.set(18, 18);
 	this.castShadow.position.set(5, 85);
 	this.castShadow.updateInterface();
@@ -63,7 +63,7 @@ function SpotLightPanel(parent, object)
 	this.form.nextRow();
 
 	//Shadow resolution
-	this.form.addText("Resolution");
+	this.form.addText(Locale.resolution);
 	this.shadowWidth = new DropdownList(this.form);
 	this.shadowWidth.size.set(60, 18);
 	this.shadowWidth.setOnChange(function()

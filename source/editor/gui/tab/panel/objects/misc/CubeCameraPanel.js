@@ -7,7 +7,7 @@ function CubeCameraPanel(parent, object)
 	var self = this;
 
 	//Auto update
-	this.form.addText("Auto update");
+	this.form.addText(Locale.autoUpdate);
 	this.autoUpdate = new CheckBox(this.form);
 	this.autoUpdate.size.set(18, 18);
 	this.autoUpdate.position.set(5, 85);
@@ -20,7 +20,7 @@ function CubeCameraPanel(parent, object)
 	this.form.nextRow();
 
 	//Resolution
-	this.form.addText("Resolution");
+	this.form.addText(Locale.resolution);
 	this.resolution = new DropdownList(this.form);
 	this.resolution.size.set(60, 18);
 	this.resolution.setOnChange(function()

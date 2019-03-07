@@ -138,6 +138,9 @@ LocaleManager.register(
 	morphTargets: "Morph targets",
 	textureMap: "Texture map",
 	sky: "Sky",
+	castShadows: "Cast Shadows",
+	sunDistance: "Sun distance",
+	autoUpdate: "Auto update",
 
 	//Values
 	relative: "Relative",
@@ -180,7 +183,10 @@ LocaleManager.register(
 	vertical: "Vertical",
 	smooth: "Smooth",
 	flat: "Flat",
-
+	width: "Width",
+	height: "Height",
+	resolution: "Resolution",
+	
 	//Editor
 	project: "Project",
 	run: "Run",
@@ -203,6 +209,13 @@ LocaleManager.register(
 	scaleShortcut: "Scale (CTRL+3)",
 	rotateShortcut: "Rotate (CTRL+4)",
 
+	//Editor settings
+	reset: "Reset",
+	general: "General",
+	theme: "Theme",
+	historySize: "History size",
+	hintHistory: "How many changes are stored in the history.",
+	
 	//Resources
 	image: "Image",
 	video: "Video",

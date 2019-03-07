@@ -2,7 +2,7 @@
 
 function GeneralSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "General", Editor.FILE_PATH + "icons/misc/tool.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.general, Editor.FILE_PATH + "icons/misc/tool.png");
 
 	this.element.style.overflow = "auto";
 
@@ -13,11 +13,11 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.setAutoSize(false);
 
 	//General text
-	this.form.addText("General");
+	this.form.addText(Locale.general);
 	this.form.nextRow();
 	
 	//Theme
-	this.form.addText("Theme");
+	this.form.addText(Locale.theme);
 	this.theme = new DropdownList(this.form);
 	this.theme.size.set(150, 18);
 	this.theme.setOnChange(function()
@@ -37,7 +37,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	}
 
 	//History size
-	this.form.addText("History size").setAltText("How many changes are stored in the history.");
+	this.form.addText(Locale.historySize).setAltText(Locale.hintHistory);
 	this.historySize = new NumberBox(this.form);
 	this.historySize.size.set(60, 18);
 	this.historySize.setRange(1.0, Number.MAX_SAFE_INTEGER);
@@ -50,7 +50,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.historySize);
 	this.form.nextRow();
 
-	this.form.addText("Reset").setAltText("Reset editor back to default settings.");
+	this.form.addText(Locale.reset).setAltText("Reset editor back to default settings.");
 	this.resetDefault = new ButtonText(this.form);
 	this.resetDefault.setText("Reset settings");
 	this.resetDefault.size.set(120, 18);
@@ -68,7 +68,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Auto update
 	if(Nunu.runningOnDesktop())
 	{
-		this.form.addText("Auto update").setAltText("If checked the editor will auto-update to the latest version.");
+		this.form.addText(Locale.autoUpdate).setAltText("If checked the editor will auto-update to the latest version.");
 		this.autoUpdate = new CheckBox(this.form);
 		this.autoUpdate.size.set(18, 18);
 		this.autoUpdate.setOnChange(function()

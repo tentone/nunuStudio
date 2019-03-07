@@ -24,7 +24,7 @@ function ConeGeometryForm(form, object)
 	this.form.add(this.radius);
 	this.form.nextRow();
 
-	this.form.addText("Height");
+	this.form.addText(Locale.height);
 	this.height = new NumberBox(this.form);
 	this.height.size.set(40, 18);
 	this.height.setStep(0.1);
