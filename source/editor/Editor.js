@@ -363,7 +363,6 @@ include("source/editor/gui/tab/run/RunProject.js");
 
 include("source/editor/gui/tab/scene/SceneEditor.js");
 include("source/editor/gui/tab/scene/sidebar/ToolBar.js");
-include("source/editor/gui/tab/scene/sidebar/SideBarObject.js");
 include("source/editor/gui/tab/scene/sidebar/SideBar.js");
 include("source/editor/gui/tab/scene/transform/TransformControls.js");
 include("source/editor/gui/tab/scene/transform/material/GizmoMaterial.js");

@@ -77,7 +77,12 @@ ToolBar.prototype.destroy = function()
 	this.rotate.destroy();
 };
 
-//Select object manipulation tool
+/**
+ * Select object manipulation tool.
+ *
+ * @method selectTool
+ * @param {Number} tool
+ */
 ToolBar.prototype.selectTool = function(tool)
 {
 	this.select.setSelected(tool === Editor.SELECT);
