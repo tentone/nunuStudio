@@ -88,11 +88,16 @@ function SceneEditor(parent, closeable, container, index)
 	this.stats.dom.style.zIndex = "0";
 	this.element.appendChild(this.stats.dom);
 
-	//this.sideBar = new Bar(this);
+	/** 
+	 * The tool bar contains the selector for the transform tools and object placing icons.
+	 *
+	 * @attribute sideBar
+	 * @type {SideBar}
+	 */
+	this.sideBar = new SideBar(this);
 
-	this.toolBar = new ToolBar(this, 40, 10);
-	AddObjectSideBar(this, 40, 190);
-
+	this.toolBar = this.sideBar.toolBar;
+	
 	/**
 	 * Camera orientation cube.
 	 *
@@ -1277,9 +1282,9 @@ SceneEditor.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	//this.sideBar.position.set(0, 0);
-	//this.sideBar.size.set(40, this.size.y);
-	//this.sideBar.updateInterface();
+	this.sideBar.position.set(0, 0);
+	this.sideBar.size.set(40, this.size.y);
+	this.sideBar.updateInterface();
 
 	this.resizeCanvas();
 };

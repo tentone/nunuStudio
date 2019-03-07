@@ -1,11 +1,11 @@
 "use strict";
 
-function ToolBar(parent, size, position)
+function ToolBar(parent, editor, size, position)
 {
 	var self = this;
 
-	this.editor = parent;
-
+	this.editor = editor;
+	
 	//Text
 	var text = new Text(parent);
 	text.setText("Tools");

@@ -293,7 +293,6 @@ include("source/editor/theme/ThemeDark.js");
 include("source/editor/gui/element/Element.js");
 include("source/editor/gui/element/DocumentBody.js");
 include("source/editor/gui/element/Division.js");
-include("source/editor/gui/element/Bar.js");
 include("source/editor/gui/element/Text.js");
 include("source/editor/gui/element/Canvas.js");
 include("source/editor/gui/element/RendererCanvas.js");
@@ -364,7 +363,8 @@ include("source/editor/gui/tab/run/RunProject.js");
 
 include("source/editor/gui/tab/scene/SceneEditor.js");
 include("source/editor/gui/tab/scene/sidebar/ToolBar.js");
-include("source/editor/gui/tab/scene/sidebar/AddObjectSideBar.js");
+include("source/editor/gui/tab/scene/sidebar/SideBarObject.js");
+include("source/editor/gui/tab/scene/sidebar/SideBar.js");
 include("source/editor/gui/tab/scene/transform/TransformControls.js");
 include("source/editor/gui/tab/scene/transform/material/GizmoMaterial.js");
 include("source/editor/gui/tab/scene/transform/material/GizmoLineMaterial.js");

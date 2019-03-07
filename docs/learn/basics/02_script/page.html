@@ -144,6 +144,17 @@ function update()
 	object.rotation.y += 0.01;
 }</code></pre>
 			
+			<h3 class="black">Switch scenes</h3>
+			<p>Its possible to create multiple scenes in the editor and switch between them using scripts. Scenes can be accessed from the program variable accessible to all scripts. The setScene() method discards the current scene and loads a new scene it receives the scene name or the scene object (stored in the program.scenes array) as argument</p>
+			<p>The code bellow can be used to switch to the "scene2" after the W key is pressed on the keyboard. To return to the original scene the scene2 has to implement a similar logic there is no automatic scene navigation flow.</p>
+			<pre><code>function update(delta)
+{
+	if(Keyboard.keyPressed(Keyboard.W))
+	{
+		program.setScene("scene2");
+	}
+}</code></pre>
+
 			<h3 class="black">Object attributes</h3>
 			<p>The self pointer in the script object can be used to store aditional attributes that can be accessed by other scripts. Attributes can also be stored into objects be carefull to avoid collisions with the already existing ones provided by the nunuStudio API.</p>
 			<p>In the example bellow we create a counter variable attached to the script object and a increaseCounter function that can be accessed and called by other scripts.</p>
