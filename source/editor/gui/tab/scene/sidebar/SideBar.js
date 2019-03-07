@@ -11,7 +11,7 @@ function SideBar(parent)
 
 	this.toolBar = new ToolBar(this, parent, 40, 5);
 	
-	SideBar.createObject(this, 40, 190);
+	this.createObject();
 }
 
 SideBar.prototype = Object.create(Element.prototype);
@@ -19,13 +19,15 @@ SideBar.prototype = Object.create(Element.prototype);
 /** 
  * Create the icons to add objects to the scene.
  *
- * @static
  * @method createObject
  */
-SideBar.createObject = function(parent, size, position)
+SideBar.prototype.createObject = function()
 {
+	var size = 40;
+	var position = 190;
+
 	//Add Text
-	var add = new Text(parent);
+	var add = new Text(this);
 	add.setText(Locale.add);
 	add.size.set(40, 20);
 	add.position.set(0, position);
@@ -33,7 +35,7 @@ SideBar.createObject = function(parent, size, position)
 	position += add.size.y;
 
 	//Add Models
-	var addModel = new ButtonDrawer(parent);
+	var addModel = new ButtonDrawer(this);
 	addModel.setImage(Editor.FILE_PATH + "icons/models/models.png");
 	addModel.size.set(size, size);
 	addModel.position.set(0, position);
@@ -175,7 +177,7 @@ SideBar.createObject = function(parent, size, position)
 	}, "Parametric");*/
 
 	//Text
-	var addText = new ButtonDrawer(parent);
+	var addText = new ButtonDrawer(this);
 	addText.setImage(Editor.FILE_PATH + "icons/text/text.png");
 	addText.size.set(size, size);
 	addText.position.set(0, position);
@@ -214,7 +216,7 @@ SideBar.createObject = function(parent, size, position)
 	}
 
 	//Add lights
-	var addLight = new ButtonDrawer(parent);
+	var addLight = new ButtonDrawer(this);
 	addLight.setImage(Editor.FILE_PATH + "icons/lights/point.png");
 	addLight.size.set(size, size);
 	addLight.position.set(0, position);
@@ -265,7 +267,7 @@ SideBar.createObject = function(parent, size, position)
 	}, Locale.sky);
 
 	//Add camera
-	var addCamera = new ButtonDrawer(parent);
+	var addCamera = new ButtonDrawer(this);
 	addCamera.setImage(Editor.FILE_PATH + "icons/camera/camera.png");
 	addCamera.optionsPerLine = 2;
 	addCamera.size.set(size, size);
@@ -287,7 +289,7 @@ SideBar.createObject = function(parent, size, position)
 	}, "Orthographic Camera");
 
 	//Add script
-	var addScript = new ButtonDrawer(parent);
+	var addScript = new ButtonDrawer(this);
 	addScript.setImage(Editor.FILE_PATH + "icons/script/script.png");
 	addScript.size.set(size, size);
 	addScript.position.set(0, position);
@@ -302,7 +304,7 @@ SideBar.createObject = function(parent, size, position)
 	}, "Javascript Script");
 
 	//Effects
-	var addEffects = new ButtonDrawer(parent);
+	var addEffects = new ButtonDrawer(this);
 	addEffects.setImage(Editor.FILE_PATH + "icons/misc/particles.png");
 	addEffects.size.set(size, size);
 	addEffects.position.set(0, position);
@@ -385,7 +387,7 @@ SideBar.createObject = function(parent, size, position)
 	}
 
 	//Physics
-	var addPhysics = new ButtonDrawer(parent);
+	var addPhysics = new ButtonDrawer(this);
 	addPhysics.setImage(Editor.FILE_PATH + "icons/misc/physics.png");
 	addPhysics.optionsPerLine = 3;
 	addPhysics.size.set(size, size);
@@ -442,7 +444,7 @@ SideBar.createObject = function(parent, size, position)
 	}, "Particle");
 
 	//Add device
-	var addControls = new ButtonDrawer(parent);
+	var addControls = new ButtonDrawer(this);
 	addControls.setImage(Editor.FILE_PATH + "icons/misc/controller.png");
 	addControls.optionsPerLine = 3;
 	addControls.size.set(size, size);
