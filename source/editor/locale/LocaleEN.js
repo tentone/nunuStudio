@@ -141,7 +141,8 @@ LocaleManager.register(
 	castShadows: "Cast Shadows",
 	sunDistance: "Sun distance",
 	autoUpdate: "Auto update",
-
+	skyColor: "Sky color",
+	groundColor: "Ground color",
 	//Values
 	relative: "Relative",
 	absolute: "Absolute",

@@ -7,7 +7,7 @@ function SkyPanel(parent, object)
 	var self = this;
 
 	//Sky color
-	this.form.addText("Sky color");
+	this.form.addText(Locale.skyColor);
 	this.form.nextRow();
 
 	function updateSky()
