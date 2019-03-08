@@ -11,11 +11,12 @@ function SideBar(parent)
 
 	var position = 5;
 	var size = 40;
+	var self = this;
 
 	//Text
 	var text = new Text(this);
 	text.setText(Locale.tools);
-	text.size.set(40, 20);
+	text.size.set(size, 20);
 	text.position.set(0, position);
 	text.updateInterface();
 	position += text.size.y;
@@ -73,9 +74,19 @@ function SideBar(parent)
 	});
 	position += size;
 	
+	/**
+	 * List of object 
+	 */	
 	this.buttons = [];
 
 	this.createObject();
+
+	this.more = new ButtonDrawer(this);
+	this.more.setImage(Editor.FILE_PATH + "icons/misc/more.png");
+	this.more.setOnClick(function()
+	{
+		self.selectTool(Editor.ROTATE);
+	});
 }
 
 SideBar.prototype = Object.create(Element.prototype);
@@ -100,20 +111,37 @@ SideBar.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
-	console.log("Update size");
-
 	var size = this.size.x;
 	var position = 210, i = 0;
 
-	while(position < this.size.y && i < this.buttons.length)
+	while(position < this.size.y - 2 * size && i < this.buttons.length)
 	{
 		this.buttons[i].size.set(size, size);
 		this.buttons[i].position.set(0, position);
 		this.buttons[i].optionsSize.set(size, size);
+		this.buttons[i].visible = true;
 		this.buttons[i].updateInterface();
 
 		i++;
 		position += size;
+	}
+
+	if(i < this.buttons.length)
+	{	
+		this.more.size.set(size, size);
+		this.more.position.set(0, position);
+		this.more.visible = true;
+		this.more.updateInterface();
+
+		while(i < this.buttons.length)
+		{
+			this.buttons[i].setVisibility(false);
+			i++;
+		}
+	}
+	else
+	{
+		this.more.setVisibility(false);
 	}
 
 };
