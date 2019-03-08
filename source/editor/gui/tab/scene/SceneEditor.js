@@ -95,8 +95,6 @@ function SceneEditor(parent, closeable, container, index)
 	 * @type {SideBar}
 	 */
 	this.sideBar = new SideBar(this);
-
-	this.toolBar = this.sideBar.toolBar;
 	
 	/**
 	 * Camera orientation cube.
@@ -307,19 +305,19 @@ function SceneEditor(parent, closeable, container, index)
 				{
 					if(key === Keyboard.NUM1)
 					{
-						self.toolBar.selectTool(Editor.SELECT);
+						self.sideBar.selectTool(Editor.SELECT);
 					}
 					else if(key === Keyboard.NUM2)
 					{
-						self.toolBar.selectTool(Editor.MOVE);
+						self.sideBar.selectTool(Editor.MOVE);
 					}
 					else if(key === Keyboard.NUM3)
 					{
-						self.toolBar.selectTool(Editor.SCALE);
+						self.sideBar.selectTool(Editor.SCALE);
 					}
 					else if(key === Keyboard.NUM4)
 					{
-						self.toolBar.selectTool(Editor.ROTATE);
+						self.sideBar.selectTool(Editor.ROTATE);
 					}
 					else if(key === Keyboard.C)
 					{
@@ -393,7 +391,7 @@ SceneEditor.prototype.activate = function()
 	this.mouse.create();
 	this.manager.create();
 
-	this.toolBar.selectTool(Editor.SELECT);
+	this.sideBar.selectTool(Editor.SELECT);
 };
 
 SceneEditor.prototype.deactivate = function()

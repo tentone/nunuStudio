@@ -100,18 +100,22 @@ SideBar.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
-	var size = this.size.x;
+	console.log("Update size");
 
-	for(var i = 0; i < this.buttons.length; i++)
+	var size = this.size.x;
+	var position = 210, i = 0;
+
+	while(position < this.size.y && i < this.buttons.length)
 	{
 		this.buttons[i].size.set(size, size);
 		this.buttons[i].position.set(0, position);
 		this.buttons[i].optionsSize.set(size, size);
 		this.buttons[i].updateInterface();
+
+		i++;
+		position += size;
 	}
 
-
-	//TODO <ADD CODE HERE>
 };
 
 /** 
@@ -121,16 +125,12 @@ SideBar.prototype.updateSize = function()
  */
 SideBar.prototype.createObject = function()
 {
-	var size = 40;
-	var position = 190;
-
 	//Add Text
 	var add = new Text(this);
 	add.setText(Locale.add);
 	add.size.set(40, 20);
-	add.position.set(0, position);
+	add.position.set(0, 190);
 	add.updateInterface();
-	position += add.size.y;
 
 	//Add Models
 	var models = new ButtonDrawer(this);
@@ -308,7 +308,6 @@ SideBar.prototype.createObject = function()
 	var lights = new ButtonDrawer(this);
 	lights.setImage(Editor.FILE_PATH + "icons/lights/point.png");
 	this.buttons.push(lights);
-	position += size;
 
 	//Point Light
 	lights.addOption(Editor.FILE_PATH + "icons/lights/point.png", function()
@@ -372,7 +371,7 @@ SideBar.prototype.createObject = function()
 	//Add script
 	var scripts = new ButtonDrawer(this);
 	scripts.setImage(Editor.FILE_PATH + "icons/script/script.png");
-	this.icon.push(scripts);
+	this.buttons.push(scripts);
 
 	//Javascript script
 	scripts.addOption(Editor.FILE_PATH + "icons/script/script.png", function()

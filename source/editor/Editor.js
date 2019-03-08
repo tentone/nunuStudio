@@ -362,7 +362,6 @@ include("source/editor/gui/tab/objects/ParticleEditor.js");
 include("source/editor/gui/tab/run/RunProject.js");
 
 include("source/editor/gui/tab/scene/SceneEditor.js");
-include("source/editor/gui/tab/scene/sidebar/ToolBar.js");
 include("source/editor/gui/tab/scene/sidebar/SideBar.js");
 include("source/editor/gui/tab/scene/transform/TransformControls.js");
 include("source/editor/gui/tab/scene/transform/material/GizmoMaterial.js");
