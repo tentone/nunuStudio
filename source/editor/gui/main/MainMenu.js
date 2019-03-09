@@ -680,7 +680,7 @@ function MainMenu(parent)
 
 	var modifiers = editMenu.addMenu("Modifiers", Editor.FILE_PATH + "icons/models/figures.png");
 
-	modifiers.addOption("Simplify", function()
+	modifiers.addOption(Locale.simplify, function()
 	{
 		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{

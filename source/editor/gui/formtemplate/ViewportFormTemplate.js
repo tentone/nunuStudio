@@ -4,6 +4,7 @@
  * Viewport object form template.
  *
  * @class ViewportFormTemplate
+ * @extends {FormTemplate}
  */
 function ViewportFormTemplate(form, object)
 {

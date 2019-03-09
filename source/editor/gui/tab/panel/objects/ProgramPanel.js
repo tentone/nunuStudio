@@ -92,6 +92,7 @@ function ProgramPanel(parent, object)
 
 ProgramPanel.prototype = Object.create(ObjectPanel.prototype);
 
+/*
 ProgramPanel.prototype.updateRenderer = function()
 {
 	var tabs = Editor.gui.tab.getActiveTab();
@@ -106,6 +107,7 @@ ProgramPanel.prototype.updateRenderer = function()
 		}
 	}
 };
+*/
 
 ProgramPanel.prototype.updatePanel = function()
 {
@@ -117,5 +119,6 @@ ProgramPanel.prototype.updatePanel = function()
 	this.handlePixelRatio.setValue(this.object.handlePixelRatio);
 	this.vr.setValue(this.object.vr);
 	this.vrScale.setValue(this.object.vrScale);
+
 	this.rendererConfig.attach(this.object.rendererConfig);
 };

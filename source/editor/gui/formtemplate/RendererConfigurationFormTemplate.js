@@ -3,7 +3,10 @@
 /** 
  * Renderer configuration object form template.
  *
+ * Contains all rendering related configurations, to be used booth for editor settings and the program object.
+ * 
  * @class RendererConfigurationFormTemplate
+ * @extends {FormTemplate}
  */
 function RendererConfigurationFormTemplate(form, object)
 {
