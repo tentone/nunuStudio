@@ -15,64 +15,90 @@ function ButtonDrawer(parent)
 
 	this.element.style.zIndex = "200";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
+	this.element.style.overflow = "visible";
 
 	//Panel
-	this.panel = new Element(parent, "div");
+	this.panel = new Element(this, "div");
 	this.panel.element.style.overflow = "visible";
 	this.panel.element.style.backgroundColor = Editor.theme.barColor;
 	this.panel.element.style.zIndex = "250";
 
-	//Attributes
-	this.panelSize = new THREE.Vector2(0, 0);
-	this.panelPosition = new THREE.Vector2(0, 0);
-
-	//Options
+	/** 
+	 * List of the options in this panel.
+	 *
+	 * @attribute options
+	 * @type {Array}
+	 */
 	this.options = [];
+
+	/**
+	 * Number of maximum options per row
+	 *
+	 * @attribute optionsPerLine
+	 * @type {Number}
+	 */
 	this.optionsPerLine = 3;
+	
+	/**
+	 * Size of each option, also affects the size of the panel.
+	 *
+	 * @attribute optionsSize
+	 * @type {THREE.Vector2}
+	 */
 	this.optionsSize = new THREE.Vector2(40, 40);
+
+	/**
+	 * Scale of the inner icon of the options created from the addOption() method.
+	 *
+	 * @attribute optionsScale
+	 * @type {THREE.Vector2}
+	 */
 	this.optionsScale = new THREE.Vector2(0.7, 0.7);
-	this.optionsSpacing = new THREE.Vector2(3, 3);
+
+	/**
+	 * Indicates if the button drawer panel is visible.
+	 *
+	 * @attribute expanded
+	 * @type {Boolean}
+	 */
 	this.expanded = false;
+	this.setExpanded(false);
 
 	var self = this;
 
-	//Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
-		self.expanded = true;
-		self.updateInterface();
 		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
+		self.setExpanded(true);
 	};
-
 	this.element.onmouseleave = function()
 	{
-		self.expanded = false;
-		self.updateInterface();
 		self.element.style.backgroundColor = Editor.theme.buttonColor;
+		self.setExpanded(false);
 	};
 
 	this.panel.element.onmouseenter = function()
 	{
-		self.expanded = true;
-		self.updateInterface();
+		self.setExpanded(true);
 	};
-
 	this.panel.element.onmouseleave = function()
 	{
-		self.expanded = false;
-		self.updateInterface();
+		self.setExpanded(false);
 	};
-
-	this.updatePanelSize();
 }
 
 ButtonDrawer.prototype = Object.create(ButtonImage.prototype);
 
-ButtonDrawer.prototype.destroy = function()
+/** 
+ * Expand or close the button drawer panel.
+ *
+ * @method setExpanded
+ * @param {Boolean} expanded
+ */
+ButtonDrawer.prototype.setExpanded = function(expanded)
 {
-	ButtonImage.prototype.destroy.call(this);
-
-	this.parent.destroy();
+	this.expanded = expanded;
+	this.panel.element.style.display = this.expanded ? "block" : "none";
 };
 
 /** 
@@ -84,14 +110,7 @@ ButtonDrawer.prototype.destroy = function()
 ButtonDrawer.prototype.insertOption = function(element)
 {
 	element.attachTo(this.panel);
-
 	this.options.push(element);
-
-	/*this.updatePanelSize();
-	element.size.set(this.optionsSize.x, this.optionsSize.y);
-	element.position.x = this.optionsSize.x * ((this.options.length - 1) % this.optionsPerLine);
-	element.position.y = this.optionsSize.y * Math.floor((this.options.length - 1) / this.optionsPerLine);
-	element.updateInterface();*/
 };
 
 
@@ -105,17 +124,10 @@ ButtonDrawer.prototype.insertOption = function(element)
  */
 ButtonDrawer.prototype.addOption = function(image, callback, altText)
 {
+	var self = this;
+
 	var button = new ButtonImage(this.panel);
 	button.setImage(image);
-
-	//Alt text
-	if(altText !== undefined)
-	{
-		button.setAltText(altText);
-	}
-
-	//Button callback
-	var self = this;
 	button.setOnClick(function()
 	{
 		callback();
@@ -123,15 +135,12 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
 		self.updateInterface();
 	});
 
-	//Add button
-	this.options.push(button);
+	if(altText !== undefined)
+	{
+		button.setAltText(altText);
+	}
 
-	//Set button
-	/*this.updatePanelSize();
-	button.size.set(this.optionsSize.x, this.optionsSize.y);
-	button.position.x = this.optionsSize.x * ((this.options.length - 1) % this.optionsPerLine);
-	button.position.y = this.optionsSize.y * Math.floor((this.options.length - 1) / this.optionsPerLine);
-	button.updateInterface();*/
+	this.options.push(button);
 };
 
 /**
@@ -146,8 +155,6 @@ ButtonDrawer.prototype.removeOption = function(index)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
-		this.updatePanelSize();
-		this.updateInterface();
 	}
 };
 
@@ -160,8 +167,12 @@ ButtonDrawer.prototype.updatePanelSize = function()
 {
 	var optionsPerLine = (this.options.length < this.optionsPerLine) ? this.options.length : this.optionsPerLine;
 
-	this.panelSize.x = (this.optionsSize.x * optionsPerLine);
-	this.panelSize.y = (this.optionsSize.y * (Math.floor((this.options.length - 1) / optionsPerLine) + 1));
+	this.panel.size.x = (this.optionsSize.x * optionsPerLine);
+	this.panel.size.y = (this.optionsSize.y * (Math.floor((this.options.length - 1) / optionsPerLine) + 1));
+	this.panel.updateSize();
+
+	this.panel.position.set(this.optionsSize.x, 0);
+	this.panel.updatePosition();
 };
 
 /**
@@ -188,30 +199,5 @@ ButtonDrawer.prototype.updateOptions = function()
 
 ButtonDrawer.prototype.updateVisibility = function()
 {
-	if(this.visible)
-	{
-		this.element.style.display = "block";
-		this.panel.element.style.display = this.expanded ? "block" : "none";
-	}
-	else
-	{
-		this.element.style.display = "none";
-		this.panel.element.style.display = "none";
-	}
-};
-
-ButtonDrawer.prototype.updateSize = function()
-{
-	Element.prototype.updateSize.call(this);
-
-	if(this.expanded)
-	{
-		this.panelPosition.x = this.position.x + this.size.x;
-		this.panelPosition.y = this.position.y;
-		
-		this.panel.element.style.top = this.panelPosition.y + "px";
-		this.panel.element.style.left = this.panelPosition.x + "px";
-		this.panel.element.style.width = this.panelSize.x + "px";
-		this.panel.element.style.height = this.panelSize.y + "px";
-	}
+	this.element.style.display = this.visible ? "block" : "none";
 };

@@ -310,6 +310,8 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model);
 	}, "Parametric");*/
 
+	models.updateOptions();
+
 	//Text
 	var text = new ButtonDrawer(this);
 	text.setImage(Editor.FILE_PATH + "icons/text/text.png");
@@ -343,6 +345,8 @@ SideBar.prototype.createObject = function()
 			//TODO <ADD CODE HERE>
 		}, "Text Sprite");
 	}
+
+	text.updateOptions();
 
 	//Add lights
 	var lights = new ButtonDrawer(this);
@@ -391,6 +395,8 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(new Sky());
 	}, Locale.sky);
 
+	lights.updateOptions();
+
 	//Add camera
 	var cameras = new ButtonDrawer(this);
 	cameras.setImage(Editor.FILE_PATH + "icons/camera/camera.png");
@@ -408,6 +414,8 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL));
 	}, "Orthographic Camera");
 
+	cameras.updateOptions();
+
 	//Add script
 	var scripts = new ButtonDrawer(this);
 	scripts.setImage(Editor.FILE_PATH + "icons/script/script.png");
@@ -418,6 +426,8 @@ SideBar.prototype.createObject = function()
 	{
 		Editor.addObject(new Script());
 	}, "Javascript Script");
+
+	scripts.updateOptions();
 
 	//Effects
 	var effects = new ButtonDrawer(this);
@@ -498,6 +508,8 @@ SideBar.prototype.createObject = function()
 		}, "Refractor");
 	}
 
+	effects.updateOptions();
+
 	//Physics
 	var physics = new ButtonDrawer(this);
 	physics.setImage(Editor.FILE_PATH + "icons/misc/physics.png");
@@ -550,6 +562,8 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(obj);
 	}, "Particle");
 
+	physics.updateOptions();
+
 	//Add device
 	var controls = new ButtonDrawer(this);
 	controls.setImage(Editor.FILE_PATH + "icons/misc/controller.png");
@@ -578,4 +592,6 @@ SideBar.prototype.createObject = function()
 	{
 		Editor.addObject(new KinectDevice());
 	}, "Microsoft Kinect");
+
+	controls.updateOptions();
 };
