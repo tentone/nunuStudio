@@ -29,7 +29,7 @@ function ButtonDrawer(parent)
 	//Options
 	this.options = [];
 	this.optionsPerLine = 3;
-	this.optionsSize = new THREE.Vector2(50, 50);
+	this.optionsSize = new THREE.Vector2(40, 40);
 	this.optionsScale = new THREE.Vector2(0.7, 0.7);
 	this.optionsSpacing = new THREE.Vector2(3, 3);
 	this.expanded = false;
@@ -75,10 +75,33 @@ ButtonDrawer.prototype.destroy = function()
 	this.parent.destroy();
 };
 
+/** 
+ * Insert new option from already created element.
+ *
+ * @method insertOption
+ * @param {Element} Element of the option to be inserted in the drawer
+ */
+ButtonDrawer.prototype.insertOption = function(element)
+{
+	element.attachTo(this.panel);
+
+	this.options.push(element);
+
+	/*this.updatePanelSize();
+	element.size.set(this.optionsSize.x, this.optionsSize.y);
+	element.position.x = this.optionsSize.x * ((this.options.length - 1) % this.optionsPerLine);
+	element.position.y = this.optionsSize.y * Math.floor((this.options.length - 1) / this.optionsPerLine);
+	element.updateInterface();*/
+};
+
+
 /**
  * Add new option to the menu.
  * 
  * @method addOption
+ * @param {String} image
+ * @param {Function} callback
+ * @param {String} altText
  */
 ButtonDrawer.prototype.addOption = function(image, callback, altText)
 {
@@ -102,19 +125,20 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
 
 	//Add button
 	this.options.push(button);
-	this.updatePanelSize();
 
 	//Set button
+	/*this.updatePanelSize();
 	button.size.set(this.optionsSize.x, this.optionsSize.y);
 	button.position.x = this.optionsSize.x * ((this.options.length - 1) % this.optionsPerLine);
 	button.position.y = this.optionsSize.y * Math.floor((this.options.length - 1) / this.optionsPerLine);
-	button.updateInterface();
+	button.updateInterface();*/
 };
 
 /**
- * Remove option from the menu.
+ * Remove an option from the menu.
  *
  * @method removeOption
+ * @param {Number} index
  */
 ButtonDrawer.prototype.removeOption = function(index)
 {
@@ -128,7 +152,7 @@ ButtonDrawer.prototype.removeOption = function(index)
 };
 
 /**
- * Updates drawer panel size.
+ * Updates drawer panel size based on the number of options available.
  * 
  * @method updatePanelSize
  */
@@ -149,6 +173,8 @@ ButtonDrawer.prototype.updatePanelSize = function()
  */
 ButtonDrawer.prototype.updateOptions = function()
 {
+	this.updatePanelSize();
+
 	var optionsPerLine = (this.options.length < this.optionsPerLine) ? this.options.length : this.optionsPerLine;
 
 	for(var i = 0; i < this.options.length; i++)

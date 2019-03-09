@@ -13,7 +13,6 @@ function SideBar(parent)
 	var size = 40;
 	var self = this;
 
-	//Text
 	var text = new Text(this);
 	text.setText(Locale.tools);
 	text.size.set(size, 20);
@@ -74,8 +73,17 @@ function SideBar(parent)
 	});
 	position += size;
 	
+	this.addText = new Text(this);
+	this.addText.setText(Locale.add);
+	this.addText.size.set(40, 20);
+	this.addText.position.set(0, 190);
+	this.addText.updateInterface();
+
 	/**
-	 * List of object 
+	 * List of object placing buttons.
+	 *
+	 * @attribute buttons
+	 * @type {Array}
 	 */	
 	this.buttons = [];
 
@@ -83,10 +91,7 @@ function SideBar(parent)
 
 	this.more = new ButtonDrawer(this);
 	this.more.setImage(Editor.FILE_PATH + "icons/misc/more.png");
-	this.more.setOnClick(function()
-	{
-		self.selectTool(Editor.ROTATE);
-	});
+	this.more.optionsPerLine = 1;
 }
 
 SideBar.prototype = Object.create(Element.prototype);
@@ -116,6 +121,7 @@ SideBar.prototype.updateSize = function()
 
 	while(position < this.size.y - 2 * size && i < this.buttons.length)
 	{
+		this.buttons[i].attachTo(this);
 		this.buttons[i].size.set(size, size);
 		this.buttons[i].position.set(0, position);
 		this.buttons[i].optionsSize.set(size, size);
@@ -126,24 +132,37 @@ SideBar.prototype.updateSize = function()
 		position += size;
 	}
 
-	if(i < this.buttons.length)
-	{	
-		this.more.size.set(size, size);
-		this.more.position.set(0, position);
-		this.more.visible = true;
-		this.more.updateInterface();
 
-		while(i < this.buttons.length)
-		{
-			this.buttons[i].setVisibility(false);
-			i++;
-		}
+	if(this.size.y < 250)
+	{
+		this.addText.setVisibility(false);
+		this.more.setVisibility(false);
 	}
 	else
 	{
-		this.more.setVisibility(false);
-	}
+		if(i < this.buttons.length)
+		{
+			this.more.optionsSize.set(size, size);
+			this.more.size.set(size, size);
+			this.more.position.set(0, position);
+			this.more.visible = true;
 
+			while(i < this.buttons.length)
+			{
+				this.more.insertOption(this.buttons[i]);
+				i++;
+			}
+
+			this.more.updateOptions();
+			this.more.updateInterface();
+		}
+		else
+		{
+			this.more.setVisibility(false);
+		}
+
+		this.addText.setVisibility(true);
+	}
 };
 
 /** 
@@ -153,13 +172,6 @@ SideBar.prototype.updateSize = function()
  */
 SideBar.prototype.createObject = function()
 {
-	//Add Text
-	var add = new Text(this);
-	add.setText(Locale.add);
-	add.size.set(40, 20);
-	add.position.set(0, 190);
-	add.updateInterface();
-
 	//Add Models
 	var models = new ButtonDrawer(this);
 	models.setImage(Editor.FILE_PATH + "icons/models/models.png");
