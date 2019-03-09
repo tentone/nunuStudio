@@ -89,7 +89,17 @@ function ButtonDrawer(parent)
 
 ButtonDrawer.prototype = Object.create(ButtonImage.prototype);
 
-/** 
+ButtonDrawer.prototype.clear = function()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].destroy();
+	}
+	
+	this.options = [];
+};
+
+/**
  * Expand or close the button drawer panel.
  *
  * @method setExpanded

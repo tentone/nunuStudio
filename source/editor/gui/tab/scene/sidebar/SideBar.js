@@ -142,6 +142,7 @@ SideBar.prototype.updateSize = function()
 	{
 		if(i < this.buttons.length)
 		{
+			this.more.clear();
 			this.more.optionsSize.set(size, size);
 			this.more.size.set(size, size);
 			this.more.position.set(0, position);
