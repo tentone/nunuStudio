@@ -797,14 +797,12 @@ SceneEditor.prototype.resetCanvas = function()
 				var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
 				material.name = texture.name;
 				Editor.addAction(new ChangeAction(object, "material", material));
-				Editor.updateObjectsViewsGUI();
 			}
 			else if(object instanceof THREE.Sprite)
 			{
 				var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
 				material.name = texture.name;
 				Editor.addAction(new ChangeAction(object, "material", material));
-				Editor.updateObjectsViewsGUI();
 			}
 		}
 
@@ -876,7 +874,6 @@ SceneEditor.prototype.resetCanvas = function()
 						if(object instanceof THREE.Sprite)
 						{
 							Editor.addAction(new ChangeAction(object, "material", draggedObject));
-							Editor.updateObjectsViewsGUI();
 						}
 					}
 					//Points material
@@ -885,7 +882,6 @@ SceneEditor.prototype.resetCanvas = function()
 						if(object instanceof THREE.Points)
 						{
 							Editor.addAction(new ChangeAction(object, "material", draggedObject));
-							Editor.updateObjectsViewsGUI();
 						}
 						else if(object.geometry !== undefined)
 						{
@@ -900,7 +896,6 @@ SceneEditor.prototype.resetCanvas = function()
 						if(object instanceof THREE.Line)
 						{
 							Editor.addAction(new ChangeAction(object, "material", draggedObject));
-							Editor.updateObjectsViewsGUI();
 						}
 						else if(object.geometry !== undefined)
 						{
@@ -915,7 +910,6 @@ SceneEditor.prototype.resetCanvas = function()
 						if(object.material !== undefined)
 						{
 							Editor.addAction(new ChangeAction(object, "material", draggedObject));
-							Editor.updateObjectsViewsGUI();
 						}
 					}
 					//Mesh material
@@ -924,7 +918,6 @@ SceneEditor.prototype.resetCanvas = function()
 						if(object instanceof THREE.Mesh)
 						{
 							Editor.addAction(new ChangeAction(object, "material", draggedObject));
-							Editor.updateObjectsViewsGUI();
 						}
 						else if(object.geometry !== undefined)
 						{
@@ -941,7 +934,6 @@ SceneEditor.prototype.resetCanvas = function()
 					{
 						Editor.addAction(new ChangeAction(object.material, "envMap", draggedObject));
 						self.reloadContext();
-						Editor.updateObjectsViewsGUI();
 					}
 				}
 				//Texture
@@ -974,7 +966,6 @@ SceneEditor.prototype.resetCanvas = function()
 					if(object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line)
 					{
 						Editor.addAction(new ChangeAction(object, "geometry", draggedObject));
-						Editor.updateObjectsViewsGUI();
 					}
 				}
 			}

@@ -50,11 +50,7 @@ ChangeAction.prototype.revert = function()
 
 ChangeAction.updateGUI = function(object, attribute, newValue)
 {
-	if(object instanceof THREE.Object3D)
-	{
-		
-	}
-	else if(object instanceof THREE.Material)
+	if(object instanceof THREE.Material)
 	{
 		object.needsUpdate = true;
 	}
@@ -62,13 +58,8 @@ ChangeAction.updateGUI = function(object, attribute, newValue)
 	{
 		object.needsUpdate = true;
 	}
-	else if(object instanceof Resource)
-	{
-		//TODO <RESOURCES TAB AND PREVIEW>
-	}
 
-	Editor.gui.tab.updateObjectsView();
-	Editor.gui.tab.updateMetadata();
+	Editor.updateObjectsViewsGUI();
 
 	if(Editor.isSelected(object))
 	{
