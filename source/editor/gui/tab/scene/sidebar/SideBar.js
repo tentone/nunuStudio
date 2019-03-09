@@ -30,7 +30,7 @@ function SideBar(parent)
 	this.select.updateInterface();
 	this.select.setOnClick(function()
 	{
-		self.selectTool(Editor.SELECT);
+		self.selectTool(SceneEditor.SELECT);
 	});
 	position += size;
 
@@ -43,7 +43,7 @@ function SideBar(parent)
 	this.move.updateInterface();
 	this.move.setOnClick(function()
 	{
-		self.selectTool(Editor.MOVE);
+		self.selectTool(SceneEditor.MOVE);
 	});
 	position += size;
 
@@ -56,7 +56,7 @@ function SideBar(parent)
 	this.scale.updateInterface();
 	this.scale.setOnClick(function()
 	{
-		self.selectTool(Editor.SCALE);
+		self.selectTool(SceneEditor.SCALE);
 	});
 	position += size;
 
@@ -69,7 +69,7 @@ function SideBar(parent)
 	this.rotate.updateInterface();
 	this.rotate.setOnClick(function()
 	{
-		self.selectTool(Editor.ROTATE);
+		self.selectTool(SceneEditor.ROTATE);
 	});
 	position += size;
 	
@@ -104,10 +104,10 @@ SideBar.prototype = Object.create(Element.prototype);
  */
 SideBar.prototype.selectTool = function(tool)
 {
-	this.select.setSelected(tool === Editor.SELECT);
-	this.move.setSelected(tool === Editor.MOVE);
-	this.scale.setSelected(tool === Editor.SCALE);
-	this.rotate.setSelected(tool === Editor.ROTATE);
+	this.select.setSelected(tool === SceneEditor.SELECT);
+	this.move.setSelected(tool === SceneEditor.MOVE);
+	this.scale.setSelected(tool === SceneEditor.SCALE);
+	this.rotate.setSelected(tool === SceneEditor.ROTATE);
 	
 	this.parent.selectTool(tool);
 };

@@ -57,12 +57,14 @@ function SceneEditor(parent, closeable, container, index)
 	this.alpha = true;
 	this.resetCanvas();
 
-	//Raycaster
+	/** 
+	 * Raycaster object used for object picking.
+	 *
+	 * @attribute raycaster
+	 * @type {THREE.Raycaster}
+	 */
 	this.raycaster = new THREE.Raycaster(); 
 	this.normalized = new THREE.Vector2();
-
-	//State
-	this.state = null;
 
 	/**
 	 * Scene being edited in this tab.
@@ -156,9 +158,24 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.toolScene = new THREE.Scene();
 	this.toolScene.matrixAutoUpdate = false;
-	this.toolMode = Editor.SELECT;
-	this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
-	this.toolScene.add(this.tool);
+
+	/**
+	 * Editor manipulation mode.
+	 *
+	 * @attribute mode
+	 * @type {Number}
+	 */
+	this.mode = SceneEditor.SELECT;
+
+	/** 
+	 * Transform controls tool.
+	 *
+	 * @attribute transform
+	 * @type {TransformControls}
+	 */
+	this.transform = new TransformControls(this.camera, this.canvas, this.mouse);
+	this.transform.visible = false;
+	this.toolScene.add(this.transform);
 
 	/**
 	 * Camera object used to visualize the scene.
@@ -201,7 +218,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.transformationSpace.setOnChange(function()
 	{
 		Editor.settings.editor.transformationSpace = self.transformationSpace.getValue();
-		self.tool.setSpace(Editor.settings.editor.transformationSpace);
+		self.transform.setSpace(Editor.settings.editor.transformationSpace);
 	});
 	this.transformationSpace.element.onmouseenter = function()
 	{
@@ -297,51 +314,51 @@ function SceneEditor(parent, closeable, container, index)
 	{
 		var key = event.keyCode;
 
-		if(self.state === SceneEditor.EDITING)
+		if(event.ctrlKey)
 		{
-			if(event.ctrlKey)
+			if(self.container.focused)
 			{
-				if(self.container.focused)
+				if(key === Keyboard.NUM1)
 				{
-					if(key === Keyboard.NUM1)
-					{
-						self.sideBar.selectTool(Editor.SELECT);
-					}
-					else if(key === Keyboard.NUM2)
-					{
-						self.sideBar.selectTool(Editor.MOVE);
-					}
-					else if(key === Keyboard.NUM3)
-					{
-						self.sideBar.selectTool(Editor.SCALE);
-					}
-					else if(key === Keyboard.NUM4)
-					{
-						self.sideBar.selectTool(Editor.ROTATE);
-					}
-					else if(key === Keyboard.C)
-					{
-						Editor.copyObject();
-					}
-					else if(key === Keyboard.V)
-					{
-						Editor.pasteObject();
-					}
-					else if(key === Keyboard.X)
-					{
-						Editor.cutObject();
-					}
+					self.sideBar.selectTool(SceneEditor.SELECT);
+				}
+				else if(key === Keyboard.NUM2)
+				{
+					self.sideBar.selectTool(SceneEditor.MOVE);
+				}
+				else if(key === Keyboard.NUM3)
+				{
+					self.sideBar.selectTool(SceneEditor.SCALE);
+				}
+				else if(key === Keyboard.NUM4)
+				{
+					self.sideBar.selectTool(SceneEditor.ROTATE);
+				}
+				else if(key === Keyboard.C)
+				{
+					Editor.copyObject();
+				}
+				else if(key === Keyboard.V)
+				{
+					Editor.pasteObject();
+				}
+				else if(key === Keyboard.X)
+				{
+					Editor.cutObject();
 				}
 			}
 		}
 	});
 }
 
-SceneEditor.EDITING = 9;
-SceneEditor.TESTING = 10;
-
 SceneEditor.ORTHOGRAPHIC = 20;
 SceneEditor.PERSPECTIVE = 21;
+
+SceneEditor.SELECT = 0;
+
+SceneEditor.MOVE = 100;
+SceneEditor.SCALE = 101;
+SceneEditor.ROTATE = 102;
 
 SceneEditor.prototype = Object.create(TabElement.prototype);
 
@@ -386,12 +403,13 @@ SceneEditor.prototype.activate = function()
 
 	this.createRenderer();
 	this.updateSettings();
-	this.setState(SceneEditor.EDITING);
+
+	this.mouse.setLock(false);
 
 	this.mouse.create();
 	this.manager.create();
 
-	this.sideBar.selectTool(Editor.SELECT);
+	this.sideBar.selectTool(SceneEditor.SELECT);
 };
 
 SceneEditor.prototype.deactivate = function()
@@ -456,10 +474,10 @@ SceneEditor.prototype.updateSettings = function()
 
 	//Tool
 	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
-	this.tool.setSpace(Editor.settings.editor.transformationSpace);
-	this.tool.setSnap(Editor.settings.editor.snap);
-	this.tool.setTranslationSnap(Editor.settings.editor.gridSpacing);
-	this.tool.setRotationSnap(Editor.settings.editor.snapAngle);
+	this.transform.setSpace(Editor.settings.editor.transformationSpace);
+	this.transform.setSnap(Editor.settings.editor.snap);
+	this.transform.setTranslationSnap(Editor.settings.editor.gridSpacing);
+	this.transform.setRotationSnap(Editor.settings.editor.snapAngle);
 
 	//Stats
 	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
@@ -471,7 +489,7 @@ SceneEditor.prototype.destroy = function()
 
 	this.mouse.dispose();
 	this.keyboard.dispose();
-	this.tool.dispose();
+	this.transform.dispose();
 
 	this.mouse.setLock(false);
 
@@ -522,87 +540,84 @@ SceneEditor.prototype.update = function()
 
 	var isEditingObject = false;
 
-	if(this.state === SceneEditor.EDITING)
+	//Check if mouse is inside canvas
+	if(this.mouse.insideCanvas())
 	{
-		//Check if mouse is inside canvas
-		if(this.mouse.insideCanvas())
+		//Update selection
+		if(this.mode === SceneEditor.SELECT)
 		{
-			//Update selection
-			if(this.toolMode === Editor.SELECT)
+			if(this.mouse.buttonJustPressed(Mouse.LEFT))
 			{
-				if(this.mouse.buttonJustPressed(Mouse.LEFT))
+				this.selectObjectWithMouse();
+			}
+			
+			if(Editor.selection.length > 0)
+			{
+				if(this.mouse.buttonDoubleClicked(Mouse.LEFT) || this.keyboard.keyJustPressed(Keyboard.F))
 				{
-					this.selectObjectWithMouse();
-				}
-				
-				if(Editor.selection.length > 0)
-				{
-					if(this.mouse.buttonDoubleClicked(Mouse.LEFT) || this.keyboard.keyJustPressed(Keyboard.F))
+					if(Editor.selection[0].isObject3D === true)
 					{
-						if(Editor.selection[0].isObject3D === true)
-						{
-							this.controls.focusObject(Editor.selection[0]);
-						}
+						this.controls.focusObject(Editor.selection[0]);
 					}
 				}
 			}
-			else
-			{
-				//If mouse double clicked select object
-				if(this.mouse.buttonDoubleClicked(Mouse.LEFT))
-				{
-					this.selectObjectWithMouse();
-				}
-
-				isEditingObject = this.tool.update();
-			}
-
-			//Lock mouse when camera is moving
-			if(Editor.settings.editor.lockMouse && Nunu.runningOnDesktop())
-			{
-				if(!isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
-				{
-					this.mouse.setLock(true);
-				}
-				else if(this.mouse.buttonJustReleased(Mouse.LEFT) || this.mouse.buttonJustReleased(Mouse.RIGHT) || this.mouse.buttonJustReleased(Mouse.MIDDLE))
-				{
-					this.mouse.setLock(false);
-				}
-			}
-
-			if(isEditingObject)
-			{
-				Editor.gui.inspector.updateValues();
-			}
-			else
-			{
-				//Update controls
-				this.controls.update(this.mouse, this.keyboard);
-
-				//Update grid helper position
-				this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
-				this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Editor.settings.editor.gridSpacing);
-			}
 		}
-
-		//If has objects selected
-		if(Editor.hasObjectSelected())
+		else
 		{
-			//Update object transformation matrix
-			for(var i = 0; i < Editor.selection.length; i++)
+			//If mouse double clicked select object
+			if(this.mouse.buttonDoubleClicked(Mouse.LEFT))
 			{
-				if(Editor.selection[i].matrixAutoUpdate === false)
-				{
-					Editor.selection[i].updateMatrix();
-				}
+				this.selectObjectWithMouse();
 			}
-			
-			//Update object helper
-			this.objectHelper.traverse(function(children)
-			{
-				children.update();	
-			});
+
+			isEditingObject = this.transform.update();
 		}
+
+		//Lock mouse when camera is moving
+		if(Editor.settings.editor.lockMouse && Nunu.runningOnDesktop())
+		{
+			if(!isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
+			{
+				this.mouse.setLock(true);
+			}
+			else if(this.mouse.buttonJustReleased(Mouse.LEFT) || this.mouse.buttonJustReleased(Mouse.RIGHT) || this.mouse.buttonJustReleased(Mouse.MIDDLE))
+			{
+				this.mouse.setLock(false);
+			}
+		}
+
+		if(isEditingObject)
+		{
+			Editor.gui.inspector.updateValues();
+		}
+		else
+		{
+			//Update controls
+			this.controls.update(this.mouse, this.keyboard);
+
+			//Update grid helper position
+			this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
+			this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Editor.settings.editor.gridSpacing);
+		}
+	}
+
+	//If has objects selected
+	if(Editor.hasObjectSelected())
+	{
+		//Update object transformation matrix
+		for(var i = 0; i < Editor.selection.length; i++)
+		{
+			if(Editor.selection[i].matrixAutoUpdate === false)
+			{
+				Editor.selection[i].updateMatrix();
+			}
+		}
+		
+		//Update object helper
+		this.objectHelper.traverse(function(children)
+		{
+			children.update();	
+		});
 	}
 
 	this.render();
@@ -1065,7 +1080,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 		this.scene.defaultCamera = this.camera;
 	}
 
-	this.tool.setCamera(this.camera);
+	this.transform.setCamera(this.camera);
 
 	if(this.controls !== null)
 	{
@@ -1074,22 +1089,11 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	}
 };
 
-//Set scene editor state
-SceneEditor.prototype.setState = function(state)
-{
-	this.state = state;
-
-	if(state === SceneEditor.EDITING)
-	{
-		this.mouse.setLock(false);
-	}
-};
-
 /**
  * Select transform tool, possible values are:
- * - Editor.MOVE
- * - Editor.SCALE
- * - Editor.ROTATE
+ * - SceneEditor.MOVE
+ * - SceneEditor.SCALE
+ * - SceneEditor.ROTATE
  *
  * @param selectTool
  * @param {Number} tool Tool to select.
@@ -1098,27 +1102,26 @@ SceneEditor.prototype.selectTool = function(tool)
 {	
 	if(tool !== undefined)
 	{
-		this.toolMode = tool;
+		this.mode = tool;
 	}
 
-	if(this.toolMode === Editor.MOVE)
+	if(this.mode === SceneEditor.MOVE)
 	{
-		this.tool.setMode("translate");
-		this.tool.setSpace(Editor.settings.editor.transformationSpace);
+		this.transform.setMode("translate");
+		this.transform.setSpace(Editor.settings.editor.transformationSpace);
 	}
-	else if(this.toolMode === Editor.SCALE)
+	else if(this.mode === SceneEditor.SCALE)
 	{
-		this.tool.setMode("scale");
+		this.transform.setMode("scale");
 	}
-	else if(this.toolMode === Editor.ROTATE)
+	else if(this.mode === SceneEditor.ROTATE)
 	{
-		this.tool.setMode("rotate");
-		this.tool.setSpace(Editor.settings.editor.transformationSpace);
+		this.transform.setMode("rotate");
+		this.transform.setSpace(Editor.settings.editor.transformationSpace);
 	}
-	
-	if(this.toolMode === Editor.SELECT)
+	else //if(this.mode === SceneEditor.SELECT)
 	{
-		this.tool.visible = false;
+		this.transform.visible = false;
 	}
 };
 
@@ -1141,7 +1144,7 @@ SceneEditor.prototype.updateSelection = function()
 		}
 	}
 
-	this.tool.attach(selectedObjects);
+	this.transform.attach(selectedObjects);
 	this.objectHelper.removeAll();
 
 	for(var i = 0; i < selectedObjects.length; i++)

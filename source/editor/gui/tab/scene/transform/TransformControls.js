@@ -143,12 +143,7 @@ TransformControls.prototype.attach = function(objects)
 
 	if(this.objects.length > 0)
 	{
-		this.visible = true;
 		this.updatePose();
-	}
-	else
-	{
-		this.visible = false;
 	}
 };
 

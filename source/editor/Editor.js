@@ -528,11 +528,6 @@ include("source/editor/history/action/resources/RemoveResourceAction.js");
 
 include("source/editor/Settings.js");
 
-Editor.SELECT = 0;
-Editor.MOVE = 1;
-Editor.SCALE = 2;
-Editor.ROTATE = 3;
-
 //Initialize
 Editor.initialize = function()
 {
