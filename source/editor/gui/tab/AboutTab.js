@@ -2,7 +2,7 @@
 
 function AboutTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "About", Editor.FILE_PATH + "icons/misc/about.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.about, Editor.FILE_PATH + "icons/misc/about.png");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 

@@ -143,6 +143,7 @@ LocaleManager.register(
 	autoUpdate: "Auto update",
 	skyColor: "Sky color",
 	groundColor: "Ground color",
+
 	//Values
 	relative: "Relative",
 	absolute: "Absolute",
@@ -188,6 +189,12 @@ LocaleManager.register(
 	height: "Height",
 	resolution: "Resolution",
 	
+	//Operations
+	union: "Union",
+	subtract: "Subtract",
+	intersect: "Intersect",
+	simplify: "Simplify",
+
 	//Editor
 	project: "Project",
 	run: "Run",
@@ -209,6 +216,7 @@ LocaleManager.register(
 	moveShortcut: "Move (CTRL+2)",
 	scaleShortcut: "Scale (CTRL+3)",
 	rotateShortcut: "Rotate (CTRL+4)",
+	about: "About",
 
 	//Editor settings
 	reset: "Reset",

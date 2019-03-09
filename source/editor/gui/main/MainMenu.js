@@ -645,7 +645,7 @@ function MainMenu(parent)
 		Editor.addAction(new ActionBundle(actions));
 	}
 
-	csg.addOption("Intersect", function()
+	csg.addOption(Locale.intersect, function()
 	{
 		if(verifyCSG())
 		{
@@ -656,7 +656,7 @@ function MainMenu(parent)
 		}
 	}, Editor.FILE_PATH + "icons/misc/intersect.png");
 
-	csg.addOption("Subtract", function()
+	csg.addOption(Locale.subtract, function()
 	{
 		if(verifyCSG())
 		{
@@ -667,7 +667,7 @@ function MainMenu(parent)
 		}
 	}, Editor.FILE_PATH + "icons/misc/subtract.png");
 
-	csg.addOption("Union", function()
+	csg.addOption(Locale.union, function()
 	{
 		if(verifyCSG())
 		{
@@ -835,7 +835,7 @@ function MainMenu(parent)
 
 	//About
 	var about = new ButtonText(this);
-	about.setText("About");
+	about.setText(Locale.about);
 	about.size.set(100, this.size.y);
 	about.position.set(320, 0);
 	about.updateInterface();
