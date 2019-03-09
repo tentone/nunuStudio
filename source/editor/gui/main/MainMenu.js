@@ -857,19 +857,7 @@ function MainMenu(parent)
 	this.run.updateInterface();
 	this.run.setOnClick(function()
 	{
-		var tab = Editor.gui.tab.getTab(RunProject, Editor.program);
-
-		if(tab === null)
-		{
-			tab = Editor.gui.tab.addTab(RunProject, true);
-			tab.select();
-			Editor.gui.menuBar.run.setText(Locale.stop);
-		}
-		else
-		{
-			tab.close();
-			Editor.gui.menuBar.run.setText(Locale.run);
-		}
+		Editor.runProject();
 	});
 }
 

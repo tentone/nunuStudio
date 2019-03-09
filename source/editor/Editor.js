@@ -770,13 +770,37 @@ Editor.initialize = function()
 		}
 		else if(key === Keyboard.F5)
 		{
-			//TODO <ADD CODE HERE>
+			Editor.runProject();
 		}
 	});
 	Editor.manager.create();
 };
 
 /** 
+ * Run the project that is currently open in the editor.
+ *
+ * Opens a new tab, and sets the run button text.
+ *
+ * @method runProject
+ */
+Editor.runProject = function()
+{
+	var tab = Editor.gui.tab.getTab(RunProject, Editor.program);
+
+	if(tab === null)
+	{
+		tab = Editor.gui.tab.addTab(RunProject, true);
+		tab.select();
+		Editor.gui.menuBar.run.setText(Locale.stop);
+	}
+	else
+	{
+		tab.close();
+		Editor.gui.menuBar.run.setText(Locale.run);
+	}
+};
+
+/**
  * Select single object.
  * 
  * @method selectObject

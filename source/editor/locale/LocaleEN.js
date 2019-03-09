@@ -92,7 +92,7 @@ LocaleManager.register(
 	clearColor: "Clear color",
 	clearDepth: "Clear depth",
 	clearStencil: "Clear stencil",
-	stencil: "Stenci",
+	stencil: "Stencil",
 	sortObjects: "Sort objects",
 	gammaFactor: "Gamma Factor",
 	gammaInput: "Gamma Input",
