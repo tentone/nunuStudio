@@ -70,7 +70,10 @@ PanelContainer.prototype.updateObjectsView = function()
 
 		if(object.isObject3D === true && object.parent === null)
 		{
-			this.destroyPanel();
+			if(!(object instanceof Program))
+			{
+				this.destroyPanel();
+			}
 		}
 	}
 };

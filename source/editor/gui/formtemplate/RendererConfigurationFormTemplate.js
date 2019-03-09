@@ -14,6 +14,21 @@ function RendererConfigurationFormTemplate(form, object)
 
 	var self = this;
 
+	var updateTabs = function()
+	{
+		var tabs = Editor.gui.tab.getActiveTab();
+
+		for(var i = 0; i < tabs.length; i++)
+		{
+			var tab = tabs[i];
+
+			if(tab instanceof SceneEditor)
+			{
+				tab.createRenderer();
+			}
+		}
+	};
+
 	this.form.addText(Locale.backend).setAltText(Locale.hintBackend);
 	this.backend = new DropdownList(this.form);
 	this.backend.size.set(150, 18);
@@ -21,7 +36,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.backend.addValue("WebGL 2", RendererConfiguration.WEBGL2);
 	this.backend.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "backend", self.backend.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "backend", self.backend.getValue()), updateTabs));
 	});
 	this.form.add(this.backend);
 	this.form.nextRow();
@@ -32,7 +47,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.antialiasing.size.set(18, 18);
 	this.antialiasing.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "antialiasing", self.antialiasing.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "antialiasing", self.antialiasing.getValue()), updateTabs));
 	});
 	this.form.add(this.antialiasing);
 	this.form.nextRow();
@@ -43,7 +58,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.alpha.size.set(18, 18);
 	this.alpha.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "alpha", self.alpha.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "alpha", self.alpha.getValue()), updateTabs));
 	});
 	this.form.add(this.alpha);
 	this.form.nextRow();
@@ -54,7 +69,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.premultipliedAlpha.size.set(18, 18);
 	this.premultipliedAlpha.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "premultipliedAlpha", self.premultipliedAlpha.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "premultipliedAlpha", self.premultipliedAlpha.getValue()), updateTabs));
 	});
 	this.form.add(this.premultipliedAlpha);
 	this.form.nextRow();
@@ -65,7 +80,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.preserveDrawingBuffer.size.set(18, 18);
 	this.preserveDrawingBuffer.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "preserveDrawingBuffer", self.preserveDrawingBuffer.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "preserveDrawingBuffer", self.preserveDrawingBuffer.getValue()), updateTabs));
 	});
 	this.form.add(this.preserveDrawingBuffer);
 	this.form.nextRow();
@@ -76,7 +91,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.physicallyCorrectLights.size.set(18, 18);
 	this.physicallyCorrectLights.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "physicallyCorrectLights", self.physicallyCorrectLights.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "physicallyCorrectLights", self.physicallyCorrectLights.getValue()), updateTabs));
 	});
 	this.form.add(this.physicallyCorrectLights);
 	this.form.nextRow();
@@ -87,7 +102,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.logarithmicDepthBuffer.size.set(18, 18);
 	this.logarithmicDepthBuffer.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "logarithmicDepthBuffer", self.logarithmicDepthBuffer.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "logarithmicDepthBuffer", self.logarithmicDepthBuffer.getValue()), updateTabs));
 	});
 	this.form.add(this.logarithmicDepthBuffer);
 	this.form.nextRow();
@@ -98,7 +113,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.autoClear.size.set(18, 18);
 	this.autoClear.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "autoClear", self.autoClear.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "autoClear", self.autoClear.getValue()), updateTabs));
 	});
 	this.form.add(this.autoClear);
 	this.form.nextRow();
@@ -108,7 +123,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.autoClearColor.size.set(18, 18);
 	this.autoClearColor.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "autoClearColor", self.autoClearColor.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "autoClearColor", self.autoClearColor.getValue()), updateTabs));
 	});
 	this.form.add(this.autoClearColor);
 	this.form.nextRow();
@@ -118,7 +133,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.autoClearDepth.size.set(18, 18);
 	this.autoClearDepth.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "autoClearDepth", self.autoClearDepth.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "autoClearDepth", self.autoClearDepth.getValue()), updateTabs));
 	});
 	this.form.add(this.autoClearDepth);
 	this.form.nextRow();
@@ -128,7 +143,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.autoClearStencil.size.set(18, 18);
 	this.autoClearStencil.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "autoClearStencil", self.autoClearStencil.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "autoClearStencil", self.autoClearStencil.getValue()), updateTabs));
 	});
 	this.form.add(this.autoClearStencil);
 	this.form.nextRow();
@@ -138,7 +153,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.stencil.size.set(18, 18);
 	this.stencil.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "stencil", self.stencil.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "stencil", self.stencil.getValue()), updateTabs));
 	});
 	this.form.add(this.stencil);
 	this.form.nextRow();
@@ -149,7 +164,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.sortObjects.size.set(18, 18);
 	this.sortObjects.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "sortObjects", self.sortObjects.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "sortObjects", self.sortObjects.getValue()), updateTabs));
 	});
 	this.form.add(this.sortObjects);
 	this.form.nextRow();
@@ -161,7 +176,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.shadows.size.set(18, 18);
 	this.shadows.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "shadows", self.shadows.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "shadows", self.shadows.getValue()), updateTabs));
 	});
 	this.form.add(this.shadows);
 	this.form.nextRow();
@@ -175,7 +190,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "shadowsType", self.shadowsType.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "shadowsType", self.shadowsType.getValue()), updateTabs));
 	});
 	this.form.add(this.shadowsType);
 	this.form.nextRow();
@@ -185,7 +200,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.shadowsAutoUpdate.size.set(18, 18);
 	this.shadowsAutoUpdate.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "shadowsAutoUpdate", self.shadowsAutoUpdate.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "shadowsAutoUpdate", self.shadowsAutoUpdate.getValue()), updateTabs));
 	});
 	this.form.add(this.shadowsAutoUpdate);
 	this.form.nextRow();
@@ -198,7 +213,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.gammaFactor.setStep(0.1);
 	this.gammaFactor.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "gammaFactor", self.gammaFactor.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "gammaFactor", self.gammaFactor.getValue()), updateTabs));
 	});
 	this.form.add(this.gammaFactor);
 	this.form.nextRow()
@@ -209,7 +224,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.gammaInput.size.set(18, 18);
 	this.gammaInput.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "gammaInput", self.gammaInput.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "gammaInput", self.gammaInput.getValue()), updateTabs));
 	});
 	this.form.add(this.gammaInput);
 	this.form.nextRow();
@@ -220,7 +235,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.gammaOutput.size.set(18, 18);
 	this.gammaOutput.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "gammaOutput", self.gammaOutput.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "gammaOutput", self.gammaOutput.getValue()), updateTabs));
 	});
 	this.form.add(this.gammaOutput);
 	this.form.nextRow();
@@ -234,7 +249,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.powerPreference.addValue(Locale.lowPower, "low-power");
 	this.powerPreference.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "powerPreference", self.powerPreference.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "powerPreference", self.powerPreference.getValue()), updateTabs));
 	});
 	this.form.add(this.powerPreference);
 	this.form.nextRow();
@@ -248,7 +263,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.precision.addValue(Locale.lowp, "lowp");
 	this.precision.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "precision", self.precision.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "precision", self.precision.getValue()), updateTabs));
 	});
 	this.form.add(this.precision);
 	this.form.nextRow();
@@ -265,7 +280,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.toneMapping.addValue("ACES Filmic", THREE.ACESFilmicToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()), updateTabs));
 	});
 	this.form.add(this.toneMapping);
 	this.form.nextRow();
@@ -278,7 +293,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.toneMappingExposure.setStep(0.1);
 	this.toneMappingExposure.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "toneMappingExposure", self.toneMappingExposure.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "toneMappingExposure", self.toneMappingExposure.getValue()), updateTabs));
 	});
 	this.form.add(this.toneMappingExposure);
 	this.form.nextRow();
@@ -291,7 +306,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.toneMappingWhitePoint.setStep(0.1);
 	this.toneMappingWhitePoint.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
+		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()), updateTabs));
 	});
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();

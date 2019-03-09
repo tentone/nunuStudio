@@ -92,23 +92,6 @@ function ProgramPanel(parent, object)
 
 ProgramPanel.prototype = Object.create(ObjectPanel.prototype);
 
-/*
-ProgramPanel.prototype.updateRenderer = function()
-{
-	var tabs = Editor.gui.tab.getActiveTab();
-	
-	for(var i = 0; i < tabs.length; i++)
-	{
-		var tab = tabs[i];
-
-		if(tab instanceof SceneEditor)
-		{
-			tab.createRenderer();
-		}
-	}
-};
-*/
-
 ProgramPanel.prototype.updatePanel = function()
 {
 	ObjectPanel.prototype.updatePanel.call(this);
