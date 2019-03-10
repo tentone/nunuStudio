@@ -188,7 +188,9 @@ LocaleManager.register(
 	width: "Width",
 	height: "Height",
 	resolution: "Resolution",
-	
+	webgl: "WebGL 1.0",
+	webgl2: "WebGL 2.0",
+
 	//Operations
 	union: "Union",
 	subtract: "Subtract",
@@ -266,16 +268,24 @@ LocaleManager.register(
 	errorRunpdate: "Error while running program.",
 	errorRunRender: "Error while rendering program.",
 
-	//Hints
-	hintAntialiasing: "Antialiasing can be used to smooth jaged edges.",
-	hintBackend: "Prefered redering backend API to use if available.",
+	//Hints renderer
 	hintStencil: "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
 	hintSortObjects: "If true the renderer sorts the objects from back to front for rendering. Important if using multiple transparent objects.",
 	hintAlpha: "Whether the canvas contains an alpha (transparency) buffer or not.",
+	hintAntialiasing: "Antialiasing can be used to smooth jaged edges.",
+	hintBackend: "Prefered redering backend API to use if available. Shader code might not be cross compatible between rendering backends.",
 	hintPremultipliedAlpha: "Whether the renderer will assume that colors have premultiplied alpha.",
 	hintLogarithmicDepthBuffer: "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
 	hintRenderOrder: "Camera with lower order gets rendered first.",
-
+	hintShadowsAutoUpdate: "Enables automatic updates to the shadows in the scene. If you do not require dynamic lighting / shadows, you may set this to false.",
+	hintPrecision: "Shader precision. Can be \"highp\", \"mediump\" or \"lowp\". Defaults to \"highp\" if supported by the device.",
+	hintPowerPreference: "Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context.",
+	hintTonemapping: "Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.",
+	hintAutoClearColor: "Defines whether the renderer should clear the color buffer.",
+	hintAutoClearDepth: "Defines whether the renderer should clear the depth buffer.",
+	hintAutoClearStencil: "Defines whether the renderer should clear the stencil buffer.",
+	hintPhysicallyCorrectLights: "Whether to use physically correct lighting mode.",
+	
 	//Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",
 	alreadyUpdated: "nunuStudio already up to date.",

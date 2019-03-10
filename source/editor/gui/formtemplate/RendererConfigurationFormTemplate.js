@@ -32,8 +32,8 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.addText(Locale.backend).setAltText(Locale.hintBackend);
 	this.backend = new DropdownList(this.form);
 	this.backend.size.set(150, 18);
-	this.backend.addValue("WebGL", RendererConfiguration.WEBGL);
-	this.backend.addValue("WebGL 2", RendererConfiguration.WEBGL2);
+	this.backend.addValue(Locale.webgl, RendererConfiguration.WEBGL);
+	this.backend.addValue(Locale.webgl2, RendererConfiguration.WEBGL2);
 	this.backend.setOnChange(function()
 	{
 		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "backend", self.backend.getValue()), updateRenderers));
@@ -86,7 +86,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Logaritmic depth
-	this.form.addText(Locale.physicallyCorrectLights);
+	this.form.addText(Locale.physicallyCorrectLights).setAltText(Locale.hintPhysicallyCorrectLights);
 	this.physicallyCorrectLights = new CheckBox(this.form);
 	this.physicallyCorrectLights.size.set(18, 18);
 	this.physicallyCorrectLights.setOnChange(function()
@@ -118,7 +118,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.autoClear);
 	this.form.nextRow();
 
-	this.form.addText(Locale.autoClearColor);
+	this.form.addText(Locale.autoClearColor).setAltText(Locale.hintAutoClearColor);
 	this.autoClearColor = new CheckBox(this.form);
 	this.autoClearColor.size.set(18, 18);
 	this.autoClearColor.setOnChange(function()
@@ -128,7 +128,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.autoClearColor);
 	this.form.nextRow();
 
-	this.form.addText(Locale.autoClearDepth);
+	this.form.addText(Locale.autoClearDepth).setAltText(Locale.hintAutoClearDepth);
 	this.autoClearDepth = new CheckBox(this.form);
 	this.autoClearDepth.size.set(18, 18);
 	this.autoClearDepth.setOnChange(function()
@@ -138,7 +138,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.autoClearDepth);
 	this.form.nextRow();
 
-	this.form.addText(Locale.autoClearStencil);
+	this.form.addText(Locale.autoClearStencil).setAltText(Locale.hintAutoClearStencil);
 	this.autoClearStencil = new CheckBox(this.form);
 	this.autoClearStencil.size.set(18, 18);
 	this.autoClearStencil.setOnChange(function()
@@ -195,7 +195,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.shadowsType);
 	this.form.nextRow();
 
-	this.form.addText(Locale.shadowsAutoUpdate);
+	this.form.addText(Locale.shadowsAutoUpdate).setAltText(Locale.hintShadowsAutoUpdate);
 	this.shadowsAutoUpdate = new CheckBox(this.form);
 	this.shadowsAutoUpdate.size.set(18, 18);
 	this.shadowsAutoUpdate.setOnChange(function()
@@ -241,7 +241,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Power preference
-	this.form.addText(Locale.powerPreference);
+	this.form.addText(Locale.powerPreference).setAltText(Locale.hintPowerPreference);
 	this.powerPreference = new DropdownList(this.form);
 	this.powerPreference.size.set(150, 18);
 	this.powerPreference.addValue(Locale.default, "default");
@@ -255,7 +255,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Precision
-	this.form.addText(Locale.precision);
+	this.form.addText(Locale.precision).setAltText(Locale.hintPrecision);
 	this.precision = new DropdownList(this.form);
 	this.precision.size.set(150, 18);
 	this.precision.addValue(Locale.highp, "highp");
@@ -269,7 +269,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.nextRow();
 
 	//Tonemapping
-	this.form.addText(Locale.tonemapping);
+	this.form.addText(Locale.tonemapping).setAltText(Locale.hintTonemapping);
 	this.toneMapping = new DropdownList(this.form);
 	this.toneMapping.size.set(150, 18);
 	this.toneMapping.addValue(Locale.none, THREE.NoToneMapping);

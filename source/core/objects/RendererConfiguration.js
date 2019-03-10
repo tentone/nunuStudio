@@ -12,6 +12,8 @@ function RendererConfiguration()
 	 *
 	 * If the selected backend is not available it defaults to WebGL.
 	 *
+	 * Shader code might not be cross compatible between rendering backends.
+	 *
 	 * @property backend
 	 * @type {Number}
 	 */
@@ -95,7 +97,7 @@ function RendererConfiguration()
 	this.shadowsAutoUpdate = true;
 
 	/**
-	 * Tone mapping mode.
+	 * Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.
 	 *
 	 * @property toneMapping
 	 * @type {Number}
