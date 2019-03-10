@@ -184,7 +184,6 @@ Element.prototype.setAltText = function(altText)
 	element.style.color = Editor.theme.textColor;
 	element.style.backgroundColor = Editor.theme.barColor;
 	element.style.borderColor = Editor.theme.barColor;
-	element.style.width = "fit-content";
 	element.style.height = "fit-content";
 	document.body.appendChild(element);
 
@@ -210,8 +209,8 @@ Element.prototype.setAltText = function(altText)
 	this.element.onmousemove = function(event)
 	{
 		element.style.display = "flex";
-		element.style.left = event.clientX + "px";
-		element.style.top = (event.clientY - 30) + "px";
+		element.style.left = (event.clientX + 8) + "px";
+		element.style.top = (event.clientY - 20) + "px";
 	};
 
 	//Mouse out event
