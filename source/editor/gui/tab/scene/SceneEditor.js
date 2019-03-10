@@ -749,12 +749,8 @@ SceneEditor.prototype.resetCanvas = function()
 
 	this.mouse.setCanvas(this.canvas);
 
-	//Prevent deafault when object dragged over
-	this.canvas.ondragover = Element.preventDefault;
-
 	var self = this;
-
-	//Canvas ondrop
+	this.canvas.ondragover = Element.preventDefault;
 	this.canvas.ondrop = function(event)
 	{
 		event.preventDefault();

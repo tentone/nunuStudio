@@ -83,7 +83,15 @@ RendererCanvas.prototype.resetCanvas = function()
 	this.canvas.style.display = "block";
 	this.canvas.style.top = "0px";
 	this.canvas.style.left = "0px";
-	this.element.appendChild(this.canvas);
+
+	if(this.element.children.length === 0)
+	{
+		this.element.appendChild(this.canvas);
+	}
+	else
+	{
+		this.element.insertBefore(this.canvas, this.element.firstChild);
+	}
 
 	this.resizeCanvas();
 };
