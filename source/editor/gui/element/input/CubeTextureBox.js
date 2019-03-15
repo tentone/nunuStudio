@@ -38,12 +38,40 @@ function CubeTextureBox(parent)
 	//On drop get file dropped
 	this.preview.ondrop = function(event)
 	{
-		var uuid = event.dataTransfer.getData("uuid");
-		var texture = DragBuffer.get(uuid);
-
-		if(texture.isCubeTexture)
+		//File
+		if(event.dataTransfer.files.length > 0)
 		{
-			self.setTexture(texture);
+			var file = event.dataTransfer.files[0];
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				var image = new Image(reader.result);
+				var texture = new CubeTexture([image]);
+				texture.name = image.name;
+				Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
+				self.setTexture(texture);
+			};
+			reader.readAsDataURL(file);
+		}
+		//Resource
+		else
+		{		
+			var uuid = event.dataTransfer.getData("uuid");
+			var texture = DragBuffer.get(uuid);
+
+			//Cube texture
+			if(texture instanceof THREE.Texture && texture.isCubeTexture)
+			{
+				self.setTexture(texture);
+			}
+			//Image
+			else if(texture instanceof Image)
+			{
+				var texture = new CubeTexture([texture]);
+				texture.name = texture.name;
+				Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
+				self.setTexture(texture);
+			}
 		}
 
 		event.preventDefault();
@@ -61,7 +89,7 @@ function CubeTextureBox(parent)
 	this.form.nextRow();
 
 	//WrapS
-	this.form.addText("Mapping");
+	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this);
 	this.mapping.size.set(120, 18);
 	this.mapping.addValue("Reflection Mapping", THREE.CubeReflectionMapping);

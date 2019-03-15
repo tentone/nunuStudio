@@ -143,7 +143,11 @@ LocaleManager.register(
 	autoUpdate: "Auto update",
 	skyColor: "Sky color",
 	groundColor: "Ground color",
-
+	mapping: "Mapping",
+	minFilter: "Min. filter",
+	magFilter: "Mag. filter",
+	flipY: "Flip Y",
+	
 	//Values
 	relative: "Relative",
 	absolute: "Absolute",
@@ -190,6 +194,7 @@ LocaleManager.register(
 	resolution: "Resolution",
 	webgl: "WebGL 1.0",
 	webgl2: "WebGL 2.0",
+	nearest: "Nearest",
 
 	//Operations
 	union: "Union",

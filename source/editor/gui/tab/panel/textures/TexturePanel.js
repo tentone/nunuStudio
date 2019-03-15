@@ -109,10 +109,10 @@ function TexturePanel(parent, object)
 	this.form.nextRow();
 
 	//Minification filter
-	this.form.addText("Min. filter");
+	this.form.addText(Locale.minFilter);
 	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
-	this.minFilter.addValue("Nearest", THREE.NearestFilter);
+	this.minFilter.addValue(Locale.nearest, THREE.NearestFilter);
 	this.minFilter.addValue(Locale.linear, THREE.LinearFilter);
 	this.minFilter.addValue("MIP Nearest Nearest", THREE.NearestMipMapNearestFilter);
 	this.minFilter.addValue("MIP Nearest Linear", THREE.NearestMipMapLinearFilter);
@@ -126,10 +126,10 @@ function TexturePanel(parent, object)
 	this.form.nextRow();
 
 	//Magnification filter
-	this.form.addText("Mag. filter");
+	this.form.addText(Locale.magFilter);
 	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
-	this.magFilter.addValue("Nearest", THREE.NearestFilter);
+	this.magFilter.addValue(Locale.nearest, THREE.NearestFilter);
 	this.magFilter.addValue(Locale.linear, THREE.LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
@@ -150,7 +150,7 @@ function TexturePanel(parent, object)
 	this.form.nextRow();
 
 	//Flip Y
-	this.form.addText("Flip Y");
+	this.form.addText(Locale.flipY);
 	this.flipY = new CheckBox(this.form);
 	this.flipY.size.set(18, 18);
 	this.flipY.setOnChange(function()

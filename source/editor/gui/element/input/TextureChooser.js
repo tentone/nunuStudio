@@ -44,12 +44,12 @@ function TextureChooser(parent)
 	//On drop get file dropped
 	this.preview.ondrop = function(event)
 	{
-		//File dragged
+		//File
 		if(event.dataTransfer.files.length > 0)
 		{
 			self.loadTexture(event.dataTransfer.files[0]);
 		}
-		//Resouce dragged
+		//Resource
 		else
 		{
 			var uuid = event.dataTransfer.getData("uuid");

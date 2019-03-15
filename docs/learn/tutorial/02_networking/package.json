@@ -1,0 +1,12 @@
+{
+	"name": "nunuStudio",
+	"description": "",
+	"main": "server.js",
+	"version": "0.0.1",
+	"author": "Tentone",
+	"license": "MIT",
+	"keywords": [],
+	"devDependencies": {
+		"websocket": ""
+	}
+}

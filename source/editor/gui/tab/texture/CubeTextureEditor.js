@@ -61,10 +61,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Minification filter
-	this.form.addText("Min. filter");
+	this.form.addText(Locale.minFilter);
 	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
-	this.minFilter.addValue("Nearest", THREE.NearestFilter);
+	this.minFilter.addValue(Locale.nearest, THREE.NearestFilter);
 	this.minFilter.addValue(Locale.linear, THREE.LinearFilter);
 	this.minFilter.addValue("MIP Nearest Nearest", THREE.NearestMipMapNearestFilter);
 	this.minFilter.addValue("MIP Nearest Linear", THREE.NearestMipMapLinearFilter);
@@ -82,10 +82,10 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Magnification filter
-	this.form.addText("Mag. filter");
+	this.form.addText(Locale.magFilter);
 	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
-	this.magFilter.addValue("Nearest", THREE.NearestFilter);
+	this.magFilter.addValue(Locale.nearest, THREE.NearestFilter);
 	this.magFilter.addValue(Locale.linear, THREE.LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
@@ -99,7 +99,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Mapping
-	this.form.addText("Mapping");
+	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this.form);
 	this.mapping.size.set(150, 18);
 	this.mapping.addValue("Reflection Mapping", THREE.CubeReflectionMapping);
@@ -149,7 +149,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Flip Y
-	this.form.addText("Flip Y");
+	this.form.addText(Locale.flipY);
 	this.flipY = new CheckBox(this.form);
 	this.flipY.size.set(18, 18);
 	this.flipY.setOnChange(function()
