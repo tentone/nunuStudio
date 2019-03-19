@@ -23,7 +23,7 @@ function ConsoleTab(parent, closeable, container, index)
 	this.bar.element.style.backgroundColor = Editor.theme.barColor;
 
 	var menu = new ButtonText(this.bar);
-	menu.setText("Clear");
+	menu.setText(Locale.clear);
 	menu.size.set(100, 20);
 	menu.position.set(0, 0);
 	menu.setOnClick(function()

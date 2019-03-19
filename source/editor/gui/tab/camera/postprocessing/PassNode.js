@@ -33,7 +33,7 @@ function PassNode(parent, name)
 	this.nextRow();
 
 	//Clear
-	this.addText("Clear");
+	this.addText(Locale.clear);
 	this.clear = new CheckBox(this);
 	this.clear.size.set(18, 18);
 	this.clear.setOnChange(function()

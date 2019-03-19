@@ -42,8 +42,6 @@ function CodeEditor(parent, closeable, container, index)
 			self.server.rename(self.code);
 		});
 
-		
-
 		refactor.addOption(Locale.select, function()
 		{
 			self.server.selectName(self.code);

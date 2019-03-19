@@ -227,6 +227,7 @@ LocaleManager.register(
 	search: "Search",
 	replace: "Replace",
 	replaceAll: "Replace all",
+	clear: "Clear",
 	
 	//Editor settings
 	reset: "Reset",
