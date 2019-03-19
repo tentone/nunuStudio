@@ -224,7 +224,10 @@ LocaleManager.register(
 	scaleShortcut: "Scale (CTRL+3)",
 	rotateShortcut: "Rotate (CTRL+4)",
 	about: "About",
-
+	search: "Search",
+	replace: "Replace",
+	replaceAll: "Replace all",
+	
 	//Editor settings
 	reset: "Reset",
 	general: "General",

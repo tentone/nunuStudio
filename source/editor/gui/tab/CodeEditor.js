@@ -42,9 +42,26 @@ function CodeEditor(parent, closeable, container, index)
 			self.server.rename(self.code);
 		});
 
+		
+
 		refactor.addOption(Locale.select, function()
 		{
 			self.server.selectName(self.code);
+		});
+
+		context.addOption(Locale.search, function()
+		{
+			self.code.execCommand("find");
+		});
+
+		context.addOption(Locale.replace, function()
+		{
+			self.code.execCommand("replace");
+		});
+
+		context.addOption(Locale.replaceAll, function()
+		{
+			self.code.execCommand("replaceAll");
 		});
 
 		context.addOption("Documentation", function()

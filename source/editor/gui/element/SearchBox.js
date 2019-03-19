@@ -19,7 +19,7 @@ function SearchBox(parent)
 	 */
 	this.search = new TextBox(this);
 	this.search.setMode(Element.TOP_RIGHT);
-	this.search.element.placeholder = "Search";
+	this.search.element.placeholder = Locale.search;
 
 	/**
 	 * Search icon.
