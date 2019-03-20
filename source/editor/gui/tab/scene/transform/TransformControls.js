@@ -89,6 +89,13 @@ function TransformControls(camera, canvas, mouse)
 	this.oldRotationMatrix = [];
 }
 
+TransformControls.TRANSLATE = "translate";
+TransformControls.ROTATE = "rotate";
+TransformControls.SCALE = "scale";
+
+TransformControls.LOCAL = "local";
+TransformControls.WORLD = "world";
+
 TransformControls.prototype = Object.create(THREE.Object3D.prototype);
 
 TransformControls.prototype.setCanvas = function(canvas)
@@ -125,7 +132,15 @@ TransformControls.prototype.setRotationSnap = function(rotationSnap)
 
 TransformControls.prototype.attach = function(objects)
 {
-	this.objects = objects;
+	this.objects = [];
+
+	for(var i = 0; i < objects.length; i++)
+	{
+		if(objects[i].isObject3D && objects[i].parent !== null)
+		{
+			this.objects.push(objects[i]);
+		}
+	}
 
 	//Add more temporary attibutes if necessary
 	while(this.oldPosition.length < this.objects.length)
@@ -143,7 +158,12 @@ TransformControls.prototype.attach = function(objects)
 
 	if(this.objects.length > 0)
 	{
+		this.visible = true;
 		this.updatePose();
+	}
+	else
+	{
+		this.detach();
 	}
 };
 
