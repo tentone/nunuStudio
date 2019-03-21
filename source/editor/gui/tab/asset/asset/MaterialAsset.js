@@ -4,7 +4,7 @@ function MaterialAsset(parent)
 {
 	Asset.call(this, parent);
 
-	this.setIcon(Editor.FILE_PATH + "icons/misc/material.png");
+	this.setIcon(Global.FILE_PATH + "icons/misc/material.png");
 	
 	var self = this;
 

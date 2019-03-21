@@ -124,7 +124,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	keyframe.style.width = "12px";
 	keyframe.style.height = "12px";
 	keyframe.style.cursor = "pointer";
-	keyframe.src = Editor.FILE_PATH + "icons/misc/add.png";
+	keyframe.src = Global.FILE_PATH + "icons/misc/add.png";
 	keyframe.onclick = function()
 	{
 		self.editor.addKeyFrame(self.track, self.editor.object);

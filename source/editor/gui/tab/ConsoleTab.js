@@ -2,7 +2,7 @@
 
 function ConsoleTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Console", Editor.FILE_PATH + "icons/misc/console.png");
+	TabElement.call(this, parent, closeable, container, index, "Console", Global.FILE_PATH + "icons/misc/console.png");
 
 	this.history = [];
 

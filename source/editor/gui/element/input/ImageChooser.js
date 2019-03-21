@@ -22,7 +22,7 @@ function ImageChooser(parent)
 	this.img.style.width = "100%";
 	this.img.style.height = "100%";
 	this.img.style.objectFit = "contain";
-	this.img.style.backgroundImage = "url(\"" + Editor.FILE_PATH + "alpha.png\")";
+	this.img.style.backgroundImage = "url(\"" + Global.FILE_PATH + "alpha.png\")";
 	this.img.style.backgroundRepeat = "repeat";
 	this.img.style.backgroundSize = "120px 120px";
 	this.element.appendChild(this.img);

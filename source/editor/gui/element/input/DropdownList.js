@@ -28,7 +28,7 @@ function DropdownList(parent)
 	this.arrow.style.right = "6px";
 	this.arrow.style.width = "10px";
 	this.arrow.style.height = "10px";
-	this.arrow.src = Editor.FILE_PATH + "icons/misc/arrow_down.png";
+	this.arrow.src = Global.FILE_PATH + "icons/misc/arrow_down.png";
 	this.element.appendChild(this.arrow);
 
 	//Attributes

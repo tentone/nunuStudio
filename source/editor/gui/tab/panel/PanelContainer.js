@@ -10,7 +10,7 @@
  */
 function PanelContainer(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Inspector", Editor.FILE_PATH + "icons/misc/magnifier.png");
+	TabElement.call(this, parent, closeable, container, index, "Inspector", Global.FILE_PATH + "icons/misc/magnifier.png");
 
 	this.element.style.overflow = "auto";
 	this.element.style.backgroundColor = Editor.theme.panelColor;

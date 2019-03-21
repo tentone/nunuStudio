@@ -2,7 +2,7 @@
 
 function JSHintSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Javascript", Editor.FILE_PATH + "icons/misc/js.png");
+	TabElement.call(this, parent, closeable, container, index, "Javascript", Global.FILE_PATH + "icons/misc/js.png");
 
 	this.element.style.overflow = "auto";
 

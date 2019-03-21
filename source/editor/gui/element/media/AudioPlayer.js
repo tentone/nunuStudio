@@ -46,7 +46,7 @@ function AudioPlayer(parent)
 	this.icon.style.top = "15%";
 	this.icon.style.width = "70%";
 	this.icon.style.height = "70%";
-	this.icon.src = Editor.FILE_PATH + "icons/misc/play.png";
+	this.icon.src = Global.FILE_PATH + "icons/misc/play.png";
 	this.button.appendChild(this.icon);
 
 	//Track
@@ -247,7 +247,7 @@ AudioPlayer.prototype.play = function(time)
 	this.source.start(this.context.currentTime, this.time);
 	this.playing = true;
 
-	this.icon.src = Editor.FILE_PATH + "icons/misc/pause.png";
+	this.icon.src = Global.FILE_PATH + "icons/misc/pause.png";
 };
 
 //Pause audio
@@ -259,7 +259,7 @@ AudioPlayer.prototype.pause = function()
 		this.source.stop();
 		this.time = this.context.currentTime - this.startTime;
 
-		this.icon.src = Editor.FILE_PATH + "icons/misc/play.png";
+		this.icon.src = Global.FILE_PATH + "icons/misc/play.png";
 	}
 };
 
@@ -272,7 +272,7 @@ AudioPlayer.prototype.stop = function()
 		this.time = 0;
 		this.playing = false;
 
-		this.icon.src = Editor.FILE_PATH + "icons/misc/play.png";
+		this.icon.src = Global.FILE_PATH + "icons/misc/play.png";
 	}
 };
 

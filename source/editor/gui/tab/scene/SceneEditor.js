@@ -10,7 +10,7 @@
  */
 function SceneEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.scene, Editor.FILE_PATH + "icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.scene, Global.FILE_PATH + "icons/misc/scene.png");
 
 	var self = this;
 
@@ -273,7 +273,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton = new ButtonImage(this);
 	this.cameraButton.position.set(5, 5);
 	this.cameraButton.size.set(30, 30);
-	this.cameraButton.setImage(Editor.FILE_PATH + "icons/misc/3d.png");
+	this.cameraButton.setImage(Global.FILE_PATH + "icons/misc/3d.png");
 	this.cameraButton.setAltText(Locale.cameraMode);
 	this.cameraButton.setImageScale(0.8, 0.8);
 	this.cameraButton.updateSize();
@@ -295,11 +295,11 @@ function SceneEditor(parent, closeable, container, index)
 
 		if(self.cameraMode === SceneEditor.ORTHOGRAPHIC)
 		{
-			self.cameraButton.setImage(Editor.FILE_PATH + "icons/misc/2d.png");
+			self.cameraButton.setImage(Global.FILE_PATH + "icons/misc/2d.png");
 		}
 		else if(self.cameraMode === SceneEditor.PERSPECTIVE)
 		{
-			self.cameraButton.setImage(Editor.FILE_PATH + "icons/misc/3d.png");
+			self.cameraButton.setImage(Global.FILE_PATH + "icons/misc/3d.png");
 		}
 	});
 
@@ -1154,7 +1154,7 @@ SceneEditor.prototype.updateSelection = function()
 		if(object instanceof THREE.Camera)
 		{
 			this.objectHelper.add(new THREE.CameraHelper(object));
-			this.objectHelper.add(new ObjectIconHelper(object, Editor.FILE_PATH + "icons/camera/camera.png"));
+			this.objectHelper.add(new ObjectIconHelper(object, Global.FILE_PATH + "icons/camera/camera.png"));
 		}
 		//Light
 		else if(object instanceof THREE.Light)

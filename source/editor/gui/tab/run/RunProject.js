@@ -10,7 +10,7 @@
  */
 function RunProject(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.run, Editor.FILE_PATH + "icons/misc/play.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.run, Global.FILE_PATH + "icons/misc/play.png");
 
 	var self = this;
 
@@ -88,7 +88,7 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton = new ButtonImage(this);
 	this.fullscreenButton.position.set(5, 5);
 	this.fullscreenButton.size.set(30, 30);
-	this.fullscreenButton.setImage(Editor.FILE_PATH + "icons/misc/fullscreen.png");
+	this.fullscreenButton.setImage(Global.FILE_PATH + "icons/misc/fullscreen.png");
 	this.fullscreenButton.setAltText(Locale.toggleFullscreen);
 	this.fullscreenButton.setImageScale(0.8, 0.8);
 	this.fullscreenButton.updateSize();
@@ -124,7 +124,7 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton = new ButtonImage(this);
 	this.vrButton.size.set(30, 30);
 	this.vrButton.position.set(40, 5);
-	this.vrButton.setImage(Editor.FILE_PATH + "icons/misc/vr.png");
+	this.vrButton.setImage(Global.FILE_PATH + "icons/misc/vr.png");
 	this.vrButton.setAltText(Locale.toggleVR);
 	this.vrButton.setImageScale(0.8, 0.8);
 	this.vrButton.updateSize();

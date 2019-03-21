@@ -23,7 +23,7 @@ function AssetExplorerMenu(parent)
 				Editor.loadModel(files[i]);
 			}
 		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
-	}, Editor.FILE_PATH + "icons/models/models.png");
+	}, Global.FILE_PATH + "icons/models/models.png");
 
 	//Load Font
 	menu.addOption("Font", function()
@@ -35,7 +35,7 @@ function AssetExplorerMenu(parent)
 				Editor.loadFont(files[i]);
 			}
 		}, ".json, .ttf, .otf");
-	}, Editor.FILE_PATH + "icons/misc/font.png");
+	}, Global.FILE_PATH + "icons/misc/font.png");
 
 	//Load text
 	menu.addOption("Text", function()
@@ -47,7 +47,7 @@ function AssetExplorerMenu(parent)
 				Editor.loadText(files[i]);
 			}
 		}, ".js, .txt, .glsl, .json, .xml, .yaml, .csv, .css, .html");
-	}, Editor.FILE_PATH + "icons/misc/file.png");
+	}, Global.FILE_PATH + "icons/misc/file.png");
 
 	//Audio file
 	menu.addOption("Audio", function()
@@ -59,7 +59,7 @@ function AssetExplorerMenu(parent)
 				Editor.loadAudio(files[i]);
 			}
 		}, "audio/*");
-	}, Editor.FILE_PATH + "icons/misc/audio.png");
+	}, Global.FILE_PATH + "icons/misc/audio.png");
 	
 	//Spine Animation
 	if(Nunu.runningOnDesktop())
@@ -89,7 +89,7 @@ function AssetExplorerMenu(parent)
 					}
 				}
 			}, ".json, .spine");
-		}, Editor.FILE_PATH + "icons/misc/spine.png");
+		}, Global.FILE_PATH + "icons/misc/spine.png");
 	}
 
 	menu.updateInterface();
@@ -110,7 +110,7 @@ function AssetExplorerMenu(parent)
 				Editor.loadTexture(files[i]);
 			}
 		}, "image/*");
-	}, Editor.FILE_PATH + "icons/misc/image.png");
+	}, Global.FILE_PATH + "icons/misc/image.png");
 
 	//Spritesheet texture
 	texture.addOption("SpriteSheet Texture", function()
@@ -135,7 +135,7 @@ function AssetExplorerMenu(parent)
 				reader.readAsArrayBuffer(file);
 			}
 		}, "image/*");
-	}, Editor.FILE_PATH + "icons/misc/grid.png");
+	}, Global.FILE_PATH + "icons/misc/grid.png");
 
 	//Cube texture
 	texture.addOption("Cube Texture", function()
@@ -143,7 +143,7 @@ function AssetExplorerMenu(parent)
 		var texture = new CubeTexture([Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage]);
 		texture.name = "cube";
 		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
-	}, Editor.FILE_PATH + "icons/misc/cube.png");
+	}, Global.FILE_PATH + "icons/misc/cube.png");
 
 	//Canvas texture
 	texture.addOption("Canvas Texture", function()
@@ -151,7 +151,7 @@ function AssetExplorerMenu(parent)
 		var texture = new CanvasTexture(512, 512);
 		texture.name = "canvas";
 		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
-	}, Editor.FILE_PATH + "icons/misc/canvas.png");
+	}, Global.FILE_PATH + "icons/misc/canvas.png");
 
 	//Video texture
 	texture.addOption("Video Texture", function()
@@ -163,7 +163,7 @@ function AssetExplorerMenu(parent)
 				Editor.loadVideoTexture(files[i]);
 			}
 		}, "video/*");
-	}, Editor.FILE_PATH + "icons/misc/video.png");
+	}, Global.FILE_PATH + "icons/misc/video.png");
 
 	//Webcam texture
 	texture.addOption("Webcam Texture", function()
@@ -171,7 +171,7 @@ function AssetExplorerMenu(parent)
 		var texture = new WebcamTexture();
 		texture.name = "webcam";
 		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
-	}, Editor.FILE_PATH + "icons/hw/webcam.png");
+	}, Global.FILE_PATH + "icons/hw/webcam.png");
 
 	texture.updateInterface();
 
@@ -186,77 +186,77 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshStandardMaterial();
 		material.name = "standard";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption("Physical material", function()
 	{
 		var material = new THREE.MeshPhysicalMaterial();
 		material.name = "physical";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption("Phong material", function()
 	{
 		var material = new THREE.MeshPhongMaterial();
 		material.name = "phong";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 	
 	material.addOption("Basic material", function()
 	{
 		var material = new THREE.MeshBasicMaterial();
 		material.name = "basic";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption("Toon material", function()
 	{
 		var material = new THREE.MeshToonMaterial();
 		material.name = "toon";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption("Lambert material", function()
 	{
 		var material = new THREE.MeshLambertMaterial();
 		material.name = "lambert";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption("Matcap material", function()
 	{
 		var material = new THREE.MeshMatcapMaterial();
 		material.name = "matcap";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption("Sprite material", function()
 	{
 		var material = new THREE.SpriteMaterial({color: 0xffffff});
 		material.name = "sprite";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/image.png");
+	}, Global.FILE_PATH + "icons/misc/image.png");
 
 	material.addOption("Points material", function()
 	{
 		var material = new THREE.PointsMaterial();
 		material.name = "points";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/models/points.png");
+	}, Global.FILE_PATH + "icons/models/points.png");
 
 	material.addOption("Line material", function()
 	{
 		var material = new THREE.LineBasicMaterial();
 		material.name = "line";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/nodes.png");
+	}, Global.FILE_PATH + "icons/misc/nodes.png");
 
 	material.addOption("Line Dashed material", function()
 	{
 		var material = new THREE.LineDashedMaterial();
 		material.name = "line";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/nodes.png");
+	}, Global.FILE_PATH + "icons/misc/nodes.png");
 
 	material.addOption("Shader material", function()
 	{
@@ -267,14 +267,14 @@ function AssetExplorerMenu(parent)
 		});
 		material.name = "shader";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/script/script.png");
+	}, Global.FILE_PATH + "icons/script/script.png");
 
 	material.addOption("Raw Shader material", function()
 	{
 		var material = new THREE.RawShaderMaterial();
 		material.name = "rawshader";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/script/script.png");
+	}, Global.FILE_PATH + "icons/script/script.png");
 
 
 	var others = material.addMenu("Others");
@@ -284,28 +284,28 @@ function AssetExplorerMenu(parent)
 		var material = new THREE.MeshNormalMaterial();
 		material.name = "normal";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 	
 	others.addOption("Depth material", function()
 	{
 		var material = new THREE.MeshDepthMaterial();
 		material.name = "depth";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	others.addOption("Distance material", function()
 	{
 		var material = new THREE.MeshDistanceMaterial();
 		material.name = "distance";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	others.addOption("Shadow material", function()
 	{
 		var material = new THREE.ShadowMaterial();
 		material.name = "shadow";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
-	}, Editor.FILE_PATH + "icons/misc/material.png");
+	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.updateInterface();
 
@@ -320,14 +320,14 @@ function AssetExplorerMenu(parent)
 		var resource = new TextFile("<!DOCTYPE html>\n<html>\n<head>\n\t<title></title>\n</head>\n<body>\n\n</body>\n</html>", "html");
 		resource.name = "html";
 		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
-	}, Editor.FILE_PATH + "icons/script/script.png");
+	}, Global.FILE_PATH + "icons/script/script.png");
 
 	create.addOption("Javascript", function()
 	{
 		var resource = new TextFile("", "js");
 		resource.name = "js";
 		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
-	}, Editor.FILE_PATH + "icons/script/script.png");
+	}, Global.FILE_PATH + "icons/script/script.png");
 
 	create.updateInterface();
 }

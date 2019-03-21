@@ -8,7 +8,7 @@
  */
 function CodeEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Code", Editor.FILE_PATH + "icons/misc/code.png");
+	TabElement.call(this, parent, closeable, container, index, "Code", Global.FILE_PATH + "icons/misc/code.png");
 	
 	var self = this;
 

@@ -44,7 +44,7 @@ function OrientationCube()
 	var plane = new THREE.PlaneBufferGeometry(1, 1);
 
 	//Cube faces
-	var texture = new Texture(Editor.FILE_PATH + "camera/xPos.png");
+	var texture = new Texture(Global.FILE_PATH + "camera/xPos.png");
 	texture.format = THREE.RGBFormat;
 	this.xPos = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.xPos.code = OrientationCube.X_POS;
@@ -54,7 +54,7 @@ function OrientationCube()
 	this.xPos.updateMatrix();
 	this.scene.add(this.xPos);
 
-	var texture = new Texture(Editor.FILE_PATH + "camera/xNeg.png");
+	var texture = new Texture(Global.FILE_PATH + "camera/xNeg.png");
 	texture.format = THREE.RGBFormat;
 	this.xNeg = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.xNeg.code = OrientationCube.X_NEG;
@@ -64,7 +64,7 @@ function OrientationCube()
 	this.xNeg.updateMatrix();
 	this.scene.add(this.xNeg);
 
-	var texture = new Texture(Editor.FILE_PATH + "camera/yPos.png");
+	var texture = new Texture(Global.FILE_PATH + "camera/yPos.png");
 	texture.format = THREE.RGBFormat;
 	this.yPos = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.yPos.code = OrientationCube.Y_POS;
@@ -74,7 +74,7 @@ function OrientationCube()
 	this.yPos.updateMatrix();
 	this.scene.add(this.yPos);
 
-	var texture = new Texture(Editor.FILE_PATH + "camera/yNeg.png");
+	var texture = new Texture(Global.FILE_PATH + "camera/yNeg.png");
 	texture.format = THREE.RGBFormat;
 	this.yNeg = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.yNeg.code = OrientationCube.Y_NEG;
@@ -84,7 +84,7 @@ function OrientationCube()
 	this.yNeg.updateMatrix();
 	this.scene.add(this.yNeg);
 
-	var texture = new Texture(Editor.FILE_PATH + "camera/zPos.png");
+	var texture = new Texture(Global.FILE_PATH + "camera/zPos.png");
 	texture.format = THREE.RGBFormat;
 	this.zPos = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.zPos.code = OrientationCube.Z_POS;
@@ -93,7 +93,7 @@ function OrientationCube()
 	this.zPos.updateMatrix();
 	this.scene.add(this.zPos);
 
-	var texture = new Texture(Editor.FILE_PATH + "camera/zNeg.png");
+	var texture = new Texture(Global.FILE_PATH + "camera/zNeg.png");
 	texture.format = THREE.RGBFormat;
 	this.zNeg = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.zNeg.code = OrientationCube.Z_NEG;

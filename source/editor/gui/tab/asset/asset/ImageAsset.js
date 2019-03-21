@@ -14,7 +14,7 @@ function ImageAsset(parent)
 	this.preview.style.objectFit = "contain";
 	this.element.appendChild(this.preview);
 
-	this.setIcon(Editor.FILE_PATH + "icons/misc/image.png");
+	this.setIcon(Global.FILE_PATH + "icons/misc/image.png");
 
 	var self = this;
 

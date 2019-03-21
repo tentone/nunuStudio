@@ -12,7 +12,7 @@
  */
 function AnimationTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.FILE_PATH + "icons/misc/animation.png");
+	TabElement.call(this, parent, closeable, container, index, "Animation", Global.FILE_PATH + "icons/misc/animation.png");
 
 	var self = this;
 

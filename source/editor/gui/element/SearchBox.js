@@ -28,7 +28,7 @@ function SearchBox(parent)
 	 * @type {DOM}
 	 */
 	this.searchIcon = new ImageContainer(this);
-	this.searchIcon.setImage(Editor.FILE_PATH + "icons/misc/search.png");
+	this.searchIcon.setImage(Global.FILE_PATH + "icons/misc/search.png");
 }
 
 SearchBox.prototype = Object.create(Element.prototype);

@@ -2,7 +2,7 @@
 
 function MaterialEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.material, Editor.FILE_PATH + "icons/misc/material.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.material, Global.FILE_PATH + "icons/misc/material.png");
 
 	var self = this;
 

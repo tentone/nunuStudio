@@ -14,7 +14,7 @@ function CubeTextureBox(parent)
 
 	//Alpha background
 	this.alpha = document.createElement("img");
-	this.alpha.src = Editor.FILE_PATH + "alpha.png";
+	this.alpha.src = Global.FILE_PATH + "alpha.png";
 	this.alpha.style.pointerEvents = "none";
 	this.alpha.style.position = "absolute";
 	this.alpha.style.left = "0px";
@@ -187,7 +187,7 @@ CubeTextureBox.prototype.updatePreview = function()
 	else if(this.texture instanceof CompressedTexture)
 	{
 		//TODO <ADD CODE HERE>
-		this.img.src = Editor.FILE_PATH + "icon.png";
+		this.img.src = Global.FILE_PATH + "icon.png";
 	}
 };
 

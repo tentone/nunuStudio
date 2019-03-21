@@ -157,7 +157,6 @@ TransformControls.prototype.attach = function(objects)
 		this.oldRotationMatrix.push(new THREE.Matrix4());
 	}
 
-
 	if(this.objects.length > 0)
 	{
 		this.updatePose();

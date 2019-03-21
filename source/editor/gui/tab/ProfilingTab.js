@@ -4,7 +4,7 @@
 
 function ProfilingTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Profiling", Editor.FILE_PATH + "icons/misc/speedometer.png");
+	TabElement.call(this, parent, closeable, container, index, "Profiling", Global.FILE_PATH + "icons/misc/speedometer.png");
 
 	//Canvas
 	this.canvas = new Canvas();
