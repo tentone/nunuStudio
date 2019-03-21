@@ -10,7 +10,7 @@
  */
 function SceneEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Scene", Editor.FILE_PATH + "icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.scene, Editor.FILE_PATH + "icons/misc/scene.png");
 
 	var self = this;
 
@@ -41,21 +41,12 @@ function SceneEditor(parent, closeable, container, index)
 	this.renderer = null;
 
 	/**
-	 * Canvas element to where the renderer outputs.
-	 *
-	 * @attribute canvas
-	 * @type {DOM}
-	 */
-	this.canvas = null;
-
-	/**
 	 * Indicates if the background of the canvas is transparent or not.
 	 *
 	 * @attribute alpha
 	 * @type {Boolean}
 	 */
 	this.alpha = true;
-	this.resetCanvas();
 
 	/** 
 	 * Raycaster object used for object picking.
@@ -173,9 +164,18 @@ function SceneEditor(parent, closeable, container, index)
 	 * @attribute transform
 	 * @type {TransformControls}
 	 */
-	this.transform = new TransformControls(this.camera, this.canvas, this.mouse);
+	this.transform = new TransformControls(this.camera, null, this.mouse);
 	this.transform.visible = false;
 	this.toolScene.add(this.transform);
+
+	/**
+	 * Canvas element to where the renderer outputs.
+	 *
+	 * @attribute canvas
+	 * @type {DOM}
+	 */
+	this.canvas = null;
+	this.resetCanvas();
 
 	/**
 	 * Camera object used to visualize the scene.
@@ -212,8 +212,8 @@ function SceneEditor(parent, closeable, container, index)
 	this.transformationSpace.position.set(145, 5);
 	this.transformationSpace.updatePosition(Element.BOTTOM_RIGHT);
 	this.transformationSpace.updateSize();
-	this.transformationSpace.addValue(Locale.local, "local");
-	this.transformationSpace.addValue(Locale.world, "world");
+	this.transformationSpace.addValue(Locale.local, TransformControls.LOCAL);
+	this.transformationSpace.addValue(Locale.world, TransformControls.WORLD);
 	this.transformationSpace.element.style.opacity = 0.5;
 	this.transformationSpace.setOnChange(function()
 	{
@@ -236,7 +236,7 @@ function SceneEditor(parent, closeable, container, index)
 	 * @type {DropdownList}
 	 */
 	this.navigation = new DropdownList(this);
-	this.navigation.setAltText("Camera navigation mode");
+	this.navigation.setAltText(Locale.cameraNavigation);
 	this.navigation.size.set(100, 30);
 	this.navigation.position.set(40, 5);
 	this.navigation.updatePosition(Element.BOTTOM_RIGHT);
@@ -274,7 +274,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton.position.set(5, 5);
 	this.cameraButton.size.set(30, 30);
 	this.cameraButton.setImage(Editor.FILE_PATH + "icons/misc/3d.png");
-	this.cameraButton.setAltText("Change camera mode");
+	this.cameraButton.setAltText(Locale.cameraMode);
 	this.cameraButton.setImageScale(0.8, 0.8);
 	this.cameraButton.updateSize();
 	this.cameraButton.updatePosition(Element.BOTTOM_RIGHT);
@@ -355,7 +355,6 @@ SceneEditor.ORTHOGRAPHIC = 20;
 SceneEditor.PERSPECTIVE = 21;
 
 SceneEditor.SELECT = 0;
-
 SceneEditor.MOVE = 100;
 SceneEditor.SCALE = 101;
 SceneEditor.ROTATE = 102;
@@ -747,6 +746,7 @@ SceneEditor.prototype.resetCanvas = function()
 {
 	RendererCanvas.prototype.resetCanvas.call(this);
 
+	this.transform.setCanvas(this.canvas);
 	this.mouse.setCanvas(this.canvas);
 
 	var self = this;
@@ -1094,16 +1094,16 @@ SceneEditor.prototype.selectTool = function(tool)
 
 	if(this.mode === SceneEditor.MOVE)
 	{
-		this.transform.setMode("translate");
+		this.transform.setMode(TransformControls.TRANSLATE);
 		this.transform.setSpace(Editor.settings.editor.transformationSpace);
 	}
 	else if(this.mode === SceneEditor.SCALE)
 	{
-		this.transform.setMode("scale");
+		this.transform.setMode(TransformControls.SCALE);
 	}
 	else if(this.mode === SceneEditor.ROTATE)
 	{
-		this.transform.setMode("rotate");
+		this.transform.setMode(TransformControls.ROTATE);
 		this.transform.setSpace(Editor.settings.editor.transformationSpace);
 	}
 	else //if(this.mode === SceneEditor.SELECT)

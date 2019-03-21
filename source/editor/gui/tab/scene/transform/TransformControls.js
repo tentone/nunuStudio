@@ -21,7 +21,7 @@ function TransformControls(camera, canvas, mouse)
 
 	this.objects = [];
 	this.visible = false;
-	this.space = "world";
+	this.space = TransformControls.WORLD;
 	this.size = 1;
 	this.axis = null;
 
@@ -29,15 +29,15 @@ function TransformControls(camera, canvas, mouse)
 	this.translationSnap = 1;
 	this.rotationSnap = 0.1;
 
-	this.mode = "translate";
+	this.mode = TransformControls.TRANSLATE;
 	this.dragging = false;
 	this.editing = false;
 
 	this.gizmo =
 	{
-		"translate": new TransformGizmoTranslate(),
-		"rotate": new TransformGizmoRotate(),
-		"scale": new TransformGizmoScale()
+		translate: new TransformGizmoTranslate(),
+		rotate: new TransformGizmoRotate(),
+		scale: new TransformGizmoScale()
 	};
 
 	for(var type in this.gizmo)
@@ -89,6 +89,7 @@ function TransformControls(camera, canvas, mouse)
 	this.oldRotationMatrix = [];
 }
 
+TransformControls.NONE = "none";
 TransformControls.TRANSLATE = "translate";
 TransformControls.ROTATE = "rotate";
 TransformControls.SCALE = "scale";
@@ -136,7 +137,7 @@ TransformControls.prototype.attach = function(objects)
 
 	for(var i = 0; i < objects.length; i++)
 	{
-		if(objects[i].isObject3D && objects[i].parent !== null)
+		if(objects[i].isObject3D && !objects[i].locked && objects[i].parent !== null)
 		{
 			this.objects.push(objects[i]);
 		}
@@ -184,9 +185,9 @@ TransformControls.prototype.setMode = function(mode)
 	this.mode = mode;
 
 	//If scale mode force local space
-	if(this.mode === "scale")
+	if(this.mode === TransformControls.SCALE)
 	{
-		this.space = "local";
+		this.space = TransformControls.LOCAL;
 	}
 
 	//Gizmo visibility
@@ -205,7 +206,6 @@ TransformControls.prototype.setMode = function(mode)
 	}
 
 	this.visible = (found === true && this.objects.length > 0);
-
 	this.updatePose();
 };
 
@@ -275,11 +275,11 @@ TransformControls.prototype.updatePose = function()
 	
 	this.eye.copy(this.camPosition).sub(this.position).normalize();
 
-	if(this.space === "local" || this.mode === "scale")
+	if(this.space === TransformControls.LOCAL || this.mode === TransformControls.SCALE)
 	{
 		this.gizmo[this.mode].update(this.worldRotation[0], this.eye);
 	}
-	else if(this.space === "world")
+	else if(this.space === TransformControls.WORLD)
 	{
 		this.gizmo[this.mode].update(new THREE.Euler(), this.eye);
 	}
@@ -362,7 +362,7 @@ TransformControls.prototype.onPointerMove = function()
 		return;
 	}
 	
-	if(this.mode === "translate")
+	if(this.mode === TransformControls.TRANSLATE)
 	{
 		for(var i = 0; i < this.objects.length; i++)
 		{
@@ -383,7 +383,7 @@ TransformControls.prototype.onPointerMove = function()
 				this.point.z = 0;
 			}
 					
-			if(this.space === "world" || this.axis.search("XYZ") !== -1)
+			if(this.space === TransformControls.WORLD || this.axis.search("XYZ") !== -1)
 			{
 				this.point.applyMatrix4(this.tempMatrix.getInverse(this.parentRotationMatrix[i]));
 
@@ -393,7 +393,7 @@ TransformControls.prototype.onPointerMove = function()
 					this.objects[i].position.add(this.point);
 				}
 			}
-			else if(this.space === "local")
+			else if(this.space === TransformControls.LOCAL)
 			{
 				if(this.axis.length > 1)
 				{
@@ -415,7 +415,7 @@ TransformControls.prototype.onPointerMove = function()
 			if(this.snap)
 			{
 
-				if(this.space === "local")
+				if(this.space === TransformControls.LOCAL)
 				{
 					this.objects[i].position.applyMatrix4(this.tempMatrix.getInverse(this.worldRotationMatrix[i]));
 				}
@@ -433,14 +433,14 @@ TransformControls.prototype.onPointerMove = function()
 					this.objects[i].position.z = Math.round(this.objects[i].position.z / this.translationSnap) * this.translationSnap;
 				}
 
-				if(this.space === "local" )
+				if(this.space === TransformControls.LOCAL )
 				{
 					this.objects[i].position.applyMatrix4(this.worldRotationMatrix[i]);
 				}
 			}
 		}
 	}
-	else if(this.mode === "scale")
+	else if(this.mode === TransformControls.SCALE)
 	{
 		for(var i = 0; i < this.objects.length; i++)
 		{
@@ -497,7 +497,7 @@ TransformControls.prototype.onPointerMove = function()
 			}
 		}
 	}
-	else if(this.mode === "rotate")
+	else if(this.mode === TransformControls.ROTATE)
 	{
 		for(var i = 0; i < this.objects.length; i++)
 		{
@@ -538,7 +538,7 @@ TransformControls.prototype.onPointerMove = function()
 
 				this.objects[i].quaternion.copy(this.tempQuaternion);
 			}
-			else if(this.space === "local")
+			else if(this.space === TransformControls.LOCAL)
 			{
 				this.point.applyMatrix4(this.tempMatrix.getInverse(this.worldRotationMatrix[i]));
 
@@ -577,7 +577,7 @@ TransformControls.prototype.onPointerMove = function()
 
 				this.objects[i].quaternion.copy(this.quaternionXYZ);
 			}
-			else if(this.space === "world")
+			else if(this.space === TransformControls.WORLD)
 			{
 				this.toolRotation.set(Math.atan2(this.point.z, this.point.y), Math.atan2(this.point.x, this.point.z), Math.atan2(this.point.y, this.point.x));
 				this.offsetRotation.set(Math.atan2(this.tempVector.z, this.tempVector.y), Math.atan2(this.tempVector.x, this.tempVector.z), Math.atan2(this.tempVector.y, this.tempVector.x));
@@ -626,7 +626,7 @@ TransformControls.prototype.onPointerUp = function()
 	//Add changes made to the editor history
 	if(this.editing)
 	{
-		if(this.mode === "translate")
+		if(this.mode === TransformControls.TRANSLATE)
 		{
 			var actions = [];
 
@@ -640,7 +640,7 @@ TransformControls.prototype.onPointerUp = function()
 
 			Editor.addAction(new ActionBundle(actions));
 		}
-		else if(this.mode === "scale")
+		else if(this.mode === TransformControls.SCALE)
 		{
 			var actions = [];
 
@@ -654,7 +654,7 @@ TransformControls.prototype.onPointerUp = function()
 			
 			Editor.addAction(new ActionBundle(actions));
 		}
-		else if(this.mode === "rotate")
+		else if(this.mode === TransformControls.ROTATE)
 		{
 			var actions = [];
 

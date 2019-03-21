@@ -1473,7 +1473,15 @@ Editor.setProgram = function(program)
 	}
 };
 
-//Load program from file
+/**
+ * Load program from file.
+ *
+ * Programs can be stored as textual json files, or PSON files (binary).
+ *
+ * @method loadProgram
+ * @param {File} file
+ * @param {Boolean} binary Indicates if the file is binary.
+ */
 Editor.loadProgram = function(file, binary)
 {
 	var modal = new LoadingModal(DocumentBody);
@@ -1540,56 +1548,64 @@ Editor.loadProgram = function(file, binary)
 	}
 };
 
-//Load compressed texture from data parsed by the texture loaders (PVR, DDS, etc)
-Editor.loadCompressedTexture = function(data)
-{
-	var texture = new CompressedTexture();
-	
-	if(data.isCubemap === true)
-	{
-		var faces = data.mipmaps.length / data.mipmapCount;
-
-		texture.isCubeTexture = true;
-		texture.image = [];
-
-		for(var f = 0; f < faces; f++)
-		{
-			texture.image[f] = {mipmaps: []};
-
-			for(var i = 0; i < data.mipmapCount; i ++)
-			{
-				texture.image[f].mipmaps.push(data.mipmaps[f * data.mipmapCount + i]);
-				texture.image[f].format = data.format;
-				texture.image[f].width = data.width;
-				texture.image[f].height = data.height;
-			}
-		}
-
-		texture.magFilter = THREE.LinearFilter;
-		texture.minFilter = THREE.LinearFilter;
-		texture.mapping = THREE.CubeReflectionMapping;
-	}
-	else
-	{
-		texture.image.width = data.width;
-		texture.image.height = data.height;
-		texture.mipmaps = data.mipmaps;
-	}
-
-	if(data.mipmapCount === 1)
-	{
-		texture.minFilter = THREE.LinearFilter;
-	}
-
-	texture.format = data.format;
-	texture.needsUpdate = true;
-
-	return texture;
-}
-
-//Load texture from file object
+/**
+ * Load texture from file object, checks the type of the file, can be used to load all types of textures
+ *
+ * Supports browser supported format (png, jpeg, bmp, gif, etc), and GPU compressed formats (pvr, dds, ktx, etc).
+ *
+ * @method loadTexture
+ * @param {File} file
+ * @param {Function} onLoad
+ */
 Editor.loadTexture = function(file, onLoad)
 {
+	//Load compressed texture from data parsed by the texture loaders.
+	function loadCompressedTexture(data)
+	{
+		var texture = new CompressedTexture();
+		
+		if(data.isCubemap === true)
+		{
+			var faces = data.mipmaps.length / data.mipmapCount;
+
+			texture.isCubeTexture = true;
+			texture.image = [];
+
+			for(var f = 0; f < faces; f++)
+			{
+				texture.image[f] = {mipmaps: []};
+
+				for(var i = 0; i < data.mipmapCount; i ++)
+				{
+					texture.image[f].mipmaps.push(data.mipmaps[f * data.mipmapCount + i]);
+					texture.image[f].format = data.format;
+					texture.image[f].width = data.width;
+					texture.image[f].height = data.height;
+				}
+			}
+
+			texture.magFilter = THREE.LinearFilter;
+			texture.minFilter = THREE.LinearFilter;
+			texture.mapping = THREE.CubeReflectionMapping;
+		}
+		else
+		{
+			texture.image.width = data.width;
+			texture.image.height = data.height;
+			texture.mipmaps = data.mipmaps;
+		}
+
+		if(data.mipmapCount === 1)
+		{
+			texture.minFilter = THREE.LinearFilter;
+		}
+
+		texture.format = data.format;
+		texture.needsUpdate = true;
+
+		return texture;
+	}
+
 	var name = FileSystem.getFileName(file.name);
 	var extension = FileSystem.getFileExtension(file.name);
 
@@ -1599,17 +1615,17 @@ Editor.loadTexture = function(file, onLoad)
 		if(extension === "dds")
 		{
 			var loader = new THREE.DDSLoader();
-			var texture = Editor.loadCompressedTexture(loader._parser(reader.result));	
+			var texture = loadCompressedTexture(loader._parser(reader.result));	
 		}
 		else if(extension === "pvr")
 		{
 			var loader = new THREE.PVRLoader();
-			var texture = Editor.loadCompressedTexture(loader._parser(reader.result));	
+			var texture = loadCompressedTexture(loader._parser(reader.result));	
 		}
 		else if(extension === "ktx")
 		{
 			var loader = new THREE.KTXLoader();
-			var texture = Editor.loadCompressedTexture(loader._parser(reader.result));	
+			var texture = loadCompressedTexture(loader._parser(reader.result));	
 		}
 		else if(extension === "tga")
 		{
@@ -1627,7 +1643,6 @@ Editor.loadTexture = function(file, onLoad)
 		}
 
 		texture.name = name;
-	
 		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 
 		if(onLoad !== undefined)

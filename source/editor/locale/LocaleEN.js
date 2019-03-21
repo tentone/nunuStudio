@@ -228,6 +228,9 @@ LocaleManager.register(
 	replace: "Replace",
 	replaceAll: "Replace all",
 	clear: "Clear",
+	cameraNavigation: "Camera navigation mode",
+	cameraMode: "Change camera mode",
+	scene: "Scene",
 	
 	//Editor settings
 	reset: "Reset",
