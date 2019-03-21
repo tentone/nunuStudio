@@ -788,18 +788,30 @@ SceneEditor.prototype.resetCanvas = function()
 		//Auxiliar method to attach textures to objects
 		function attachTexture(texture, object)
 		{
+			var material = null;
 			if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 			{
-				var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+				material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
 				material.name = texture.name;
-				Editor.addAction(new ChangeAction(object, "material", material));
+			}
+			else if(object instanceof THREE.Line)
+			{
+				material = new THREE.LineBasicMaterial({color:0xffffff});
+				material.name = texture.name;
+			}
+			else if(object instanceof THREE.Points)
+			{
+				material = new THREE.PointsMaterial({map:texture, color:0xffffff});
+				material.name = texture.name;
 			}
 			else if(object instanceof THREE.Sprite)
 			{
-				var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
+				material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
 				material.name = texture.name;
-				Editor.addAction(new ChangeAction(object, "material", material));
 			}
+
+			
+			Editor.addAction(new ChangeAction(object, "material", material));
 		}
 
 		//Dragged file
@@ -1106,9 +1118,9 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.transform.setMode(TransformControls.ROTATE);
 		this.transform.setSpace(Editor.settings.editor.transformationSpace);
 	}
-	else //if(this.mode === SceneEditor.SELECT)
+	else if(this.mode === SceneEditor.SELECT)
 	{
-		this.transform.visible = false;
+		this.transform.setMode(TransformControls.NONE);
 	}
 };
 

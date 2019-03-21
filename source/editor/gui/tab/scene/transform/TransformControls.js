@@ -157,9 +157,9 @@ TransformControls.prototype.attach = function(objects)
 		this.oldRotationMatrix.push(new THREE.Matrix4());
 	}
 
+
 	if(this.objects.length > 0)
 	{
-		this.visible = true;
 		this.updatePose();
 	}
 	else
@@ -182,31 +182,34 @@ TransformControls.prototype.getMode = function()
 
 TransformControls.prototype.setMode = function(mode)
 {
+	if(this.mode === mode)
+	{
+		return;
+	}
+
 	this.mode = mode;
 
-	//If scale mode force local space
-	if(this.mode === TransformControls.SCALE)
+	if(this.mode === TransformControls.NONE)
 	{
-		this.space = TransformControls.LOCAL;
+		this.visible = false;
 	}
-
-	//Gizmo visibility
-	var found = false;
-	for(var type in this.gizmo)
+	else
 	{
-		if(type === this.mode)
+		//If scale mode force local space
+		if(this.mode === TransformControls.SCALE)
 		{
-			this.gizmo[type].visible = true;
-			found = true;
+			this.space = TransformControls.LOCAL;
 		}
-		else
-		{
-			this.gizmo[type].visible = false;
-		}
-	}
 
-	this.visible = (found === true && this.objects.length > 0);
-	this.updatePose();
+		//Gizmo visibility
+		for(var type in this.gizmo)
+		{
+			this.gizmo[type].visible = type === this.mode;
+		}
+
+		this.visible = this.objects.length > 0;
+		this.updatePose();
+	}
 };
 
 TransformControls.prototype.setCamera = function(camera)
@@ -242,9 +245,16 @@ TransformControls.prototype.updatePose = function()
 {
 	if(this.objects.length === 0)
 	{
+		this.detach();
 		return;
 	}
 
+	if(this.mode === TransformControls.NONE)
+	{
+		return;
+	}
+	
+	this.visible = true;
 	this.position.set(0, 0, 0);
 
 	for(var i = 0; i < this.objects.length; i++)
@@ -275,21 +285,24 @@ TransformControls.prototype.updatePose = function()
 	
 	this.eye.copy(this.camPosition).sub(this.position).normalize();
 
-	if(this.space === TransformControls.LOCAL || this.mode === TransformControls.SCALE)
-	{
-		this.gizmo[this.mode].update(this.worldRotation[0], this.eye);
-	}
-	else if(this.space === TransformControls.WORLD)
-	{
-		this.gizmo[this.mode].update(new THREE.Euler(), this.eye);
-	}
+	if(this.mode !== TransformControls.NONE)
+	{	
+		if(this.space === TransformControls.LOCAL || this.mode === TransformControls.SCALE)
+		{
+			this.gizmo[this.mode].update(this.worldRotation[0], this.eye);
+		}
+		else if(this.space === TransformControls.WORLD)
+		{
+			this.gizmo[this.mode].update(new THREE.Euler(), this.eye);
+		}
 
-	this.gizmo[this.mode].highlight(this.axis);
+		this.gizmo[this.mode].highlight(this.axis);
+	}
 };
 
 TransformControls.prototype.onPointerHover = function()
 {
-	if(this.objects.length === 0 || this.dragging === true) 
+	if(this.objects.length === 0 || this.dragging === true || this.mode === TransformControls.NONE)
 	{
 		return;
 	}
@@ -311,7 +324,7 @@ TransformControls.prototype.onPointerHover = function()
 
 TransformControls.prototype.onPointerDown = function()
 {
-	if(this.objects.length === 0 || this.dragging === true) 
+	if(this.objects.length === 0 || this.dragging === true || this.mode === TransformControls.NONE)
 	{
 		return;
 	}
@@ -351,7 +364,7 @@ TransformControls.prototype.onPointerDown = function()
 
 TransformControls.prototype.onPointerMove = function()
 {
-	if(this.objects.length === 0 || this.axis === null || this.dragging === false)
+	if(this.objects.length === 0 || this.axis === null || this.dragging === false || this.mode === TransformControls.NONE)
 	{
 		return;
 	}
