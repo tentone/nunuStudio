@@ -257,7 +257,6 @@ include("lib/three/loaders/TDSLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/XLoader.js");
-
 include("lib/three/loaders/DDSLoader.js");
 include("lib/three/loaders/PVRLoader.js");
 include("lib/three/loaders/TGALoader.js");
@@ -269,6 +268,8 @@ include("lib/three/modifiers/SubdivisionModifier.js");
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/GLTFExporter.js");
+include("lib/three/exporters/ColladaExporter.js");
+include("lib/three/exporters/PLYExporter.js");
 
 include("lib/zlib.min.js");
 include("lib/stats.min.js");
