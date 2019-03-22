@@ -261,6 +261,7 @@ include("lib/three/loaders/DDSLoader.js");
 include("lib/three/loaders/PVRLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/KTXLoader.js");
+include("lib/three/loaders/LDrawLoader.js");
 
 include("lib/three/modifiers/SimplifyModifier.js");
 include("lib/three/modifiers/SubdivisionModifier.js");

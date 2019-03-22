@@ -252,6 +252,20 @@ Editor.loadModel = function(file, parent)
 
 			reader.readAsText(file);
 		}
+		//LDrawLoader
+		//TODO <STUDY HOW TO IMPO
+		/*else if(extension === "mpd")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				var loader = new THREE.LDrawLoader();
+				var obj = loader.parse(reader.result);
+				Editor.addObject(obj, parent);
+				modal.destroy();
+			};
+			reader.readAsText(file);
+		}*/
 		//Wavefront OBJ
 		else if(extension === "obj")
 		{
@@ -539,13 +553,13 @@ Editor.loadModel = function(file, parent)
 					var loader = new THREE.DRACOLoader();
 					loader.decodeDracoFile(reader.result, function(geometry)
 					{
+						THREE.DRACOLoader.releaseDecoderModule();
+
 						geometry.computeVertexNormals();
 
 						var mesh = new THREE.Mesh(geometry, Editor.defaultMaterial);
 						Editor.addObject(mesh, parent);
 						modal.destroy();
-
-						THREE.DRACOLoader.releaseDecoderModule();
 					});
 				}
 				catch(e)
@@ -565,8 +579,13 @@ Editor.loadModel = function(file, parent)
 				try
 				{
 					var loader = new THREE.GLTFLoader();
+					THREE.DRACOLoader.setDecoderPath(Global.FILE_PATH + "wasm/draco/");
+					THREE.DRACOLoader.setDecoderConfig({type: "wasm"});
+					loader.dracoLoader = new THREE.DRACOLoader();
 					loader.parse(reader.result, path, function(gltf)
 					{
+						THREE.DRACOLoader.releaseDecoderModule();
+
 						var scene = gltf.scene;
 						scene.type = "Group";
 						scene.name = FileSystem.getNameWithoutExtension(name);
