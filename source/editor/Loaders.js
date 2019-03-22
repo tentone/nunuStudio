@@ -252,20 +252,6 @@ Editor.loadModel = function(file, parent)
 
 			reader.readAsText(file);
 		}
-		//LDrawLoader
-		//TODO <STUDY HOW TO IMPO
-		/*else if(extension === "mpd")
-		{
-			var reader = new FileReader();
-			reader.onload = function()
-			{
-				var loader = new THREE.LDrawLoader();
-				var obj = loader.parse(reader.result);
-				Editor.addObject(obj, parent);
-				modal.destroy();
-			};
-			reader.readAsText(file);
-		}*/
 		//Wavefront OBJ
 		else if(extension === "obj")
 		{
