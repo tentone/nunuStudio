@@ -750,9 +750,11 @@ SceneEditor.prototype.resetCanvas = function()
 	this.mouse.setCanvas(this.canvas);
 
 	var self = this;
+
 	this.canvas.ondragover = Element.preventDefault;
 	this.canvas.ondrop = function(event)
 	{
+
 		event.preventDefault();
 
 		//Canvas element
@@ -769,6 +771,8 @@ SceneEditor.prototype.resetCanvas = function()
 
 		//Check intersected objects
 		var intersections = self.raycaster.intersectObjects(self.scene.children, true);
+
+		console.log("nunuStudio: Editor drag event.", event, intersections);
 
 		//Auxiliar method to copy details from a object to a destination
 		function copyDetails(destination, object)
