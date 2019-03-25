@@ -367,6 +367,40 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/gltf.png");
 
+	//Export Google Draco
+	exportMenu.addOption("Draco", function()
+	{
+		if(Editor.selection.length > 0 && Editor.selection[0].geometry !== undefined)
+		{
+			var geometry = Editor.selection[0].geometry;
+			var exporter = new THREE.DRACOExporter();
+
+			if(Nunu.runningOnDesktop())
+			{
+				FileSystem.chooseFile(function(files)
+				{
+					if(files.length > 0)
+					{
+						var arraybuffer = exporter.parse(geometry);
+						FileSystem.writeFileArrayBuffer(files[0].path, arraybuffer);
+					}
+				}, ".drc", true);
+			}
+			else
+			{
+				FileSystem.chooseFileName(function(fname)
+				{
+					var arraybuffer = exporter.parse(geometry);
+					FileSystem.writeFileArrayBuffer(fname, arraybuffer);
+				}, ".drc");
+			}
+		}
+		else
+		{
+			Editor.alert(Locale.selectObjectGeometry);
+		}
+	}, Global.FILE_PATH + "icons/misc/scene.png");
+
 	//Export Collada
 	exportMenu.addOption("Collada", function()
 	{

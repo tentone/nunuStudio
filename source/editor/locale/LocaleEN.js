@@ -267,18 +267,19 @@ LocaleManager.register(
 	nothingToRedo: "Nothing to redo!",
 	nothingToUndo: "Not possible to undo any further",
 	openTabToEditContent: "Open new tab to edit content or create new project",
-
+	selectObjectGeometry: "Select an object that contains a geometry first.",
+	
 	//Errors
 	errorExportingProject: "Error exporting project",
-	webglNotSupported: "WebGL is not supported or is disabled.\nnunuStudio cannot run.",
 	errorLoadingFile: "Error loading file",
 	errorSavingFile: "Error saving file",
-	unknownFileFormat: "Unknown file format.",
-	failedLoadSpine: "Failed to load Spine animation, make sure that .json and .atlas have the same name.",
 	errorPaste: "Error pasting object",
 	errorRunInitialize: "Error while initializing program.",
 	errorRunpdate: "Error while running program.",
 	errorRunRender: "Error while rendering program.",
+	webglNotSupported: "WebGL is not supported or is disabled.\nnunuStudio cannot run.",
+	unknownFileFormat: "Unknown file format.",
+	failedLoadSpine: "Failed to load Spine animation, make sure that .json and .atlas have the same name.",
 
 	//Hints renderer
 	hintStencil: "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
