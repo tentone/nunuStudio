@@ -698,5 +698,6 @@ TransformControls.prototype.intersectObjects = function(objects)
 	this.ray.setFromCamera(this.pointerVector, this.camera);
 
 	var intersections = this.ray.intersectObjects(objects, true);
+
 	return intersections.length > 0 ? intersections[0] : false;
 };

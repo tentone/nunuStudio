@@ -268,11 +268,11 @@ LocaleManager.register(
 	nothingToUndo: "Not possible to undo any further",
 	openTabToEditContent: "Open new tab to edit content or create new project",
 	needsObjectGeometry: "Operation needs an object that contains a geometry.",
-	needsObjectMesh: "Operation needs a mesh object."
+	needsObjectMesh: "Operation needs a mesh object.",
 	needsTwoObjectMesh: "Operation needs two mesh object.",
 	needsTwoObjectGeometry: "Operation needs two objects with geometries",
 	needsTwoObjects: "Operation needs two objects.",
-	
+
 	//Errors
 	errorExportingProject: "Error exporting project",
 	errorLoadingFile: "Error loading file",

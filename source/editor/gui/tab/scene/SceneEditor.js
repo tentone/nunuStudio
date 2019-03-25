@@ -746,30 +746,30 @@ SceneEditor.prototype.resetCanvas = function()
 {
 	RendererCanvas.prototype.resetCanvas.call(this);
 
+	var self = this;
+
 	this.transform.setCanvas(this.canvas);
 	this.mouse.setCanvas(this.canvas);
-
-	var self = this;
 
 	this.canvas.ondragover = Element.preventDefault;
 	this.canvas.ondrop = function(event)
 	{
-
 		event.preventDefault();
 
 		//Canvas element
-		var canvas = self.element;
-		var rect = canvas.getBoundingClientRect();
+		//var canvas = self.element;
+		//var rect = canvas.getBoundingClientRect();
 
 		//Update raycaster direction
-		var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-		self.updateRaycaster(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
-
+		//var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
+		//self.updateRaycaster(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
 		//Get object from drag buffer
+
 		var uuid = event.dataTransfer.getData("uuid");
 		var draggedObject = DragBuffer.get(uuid);
 
 		//Check intersected objects
+		self.updateRaycasterFromMouse();
 		var intersections = self.raycaster.intersectObjects(self.scene.children, true);
 
 		console.log("nunuStudio: Editor drag event.", event, intersections);
@@ -827,7 +827,7 @@ SceneEditor.prototype.resetCanvas = function()
 			{
 				var file = files[i];
 
-				//Check if mouse instersects and object
+				//Check if mouse intersects and object
 				if(intersections.length > 0)
 				{
 					var name = FileSystem.getFileName(file.name);
@@ -1002,6 +1002,9 @@ SceneEditor.prototype.updateRaycasterFromMouse = function()
 {
 	this.normalized.set((this.mouse.position.x / this.canvas.width) * 2 - 1, -(this.mouse.position.y / this.canvas.height) * 2 + 1);
 	this.raycaster.setFromCamera(this.normalized, this.camera);
+
+	//TODO <REMOVE THIS>
+	console.log(this.normalized)
 };
 
 /**
@@ -1014,6 +1017,10 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 	this.updateRaycasterFromMouse();
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
+
+	//TODO <REMOVE THIS>
+	console.log(this.raycaster, intersects);
+
 	if(intersects.length > 0)
 	{	
 		if(this.keyboard.keyPressed(Keyboard.CTRL))
