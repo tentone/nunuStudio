@@ -1002,9 +1002,6 @@ SceneEditor.prototype.updateRaycasterFromMouse = function()
 {
 	this.normalized.set((this.mouse.position.x / this.canvas.width) * 2 - 1, -(this.mouse.position.y / this.canvas.height) * 2 + 1);
 	this.raycaster.setFromCamera(this.normalized, this.camera);
-
-	//TODO <REMOVE THIS>
-	console.log(this.normalized)
 };
 
 /**
@@ -1017,9 +1014,6 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 	this.updateRaycasterFromMouse();
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
-
-	//TODO <REMOVE THIS>
-	console.log(this.raycaster, intersects);
 
 	if(intersects.length > 0)
 	{	
