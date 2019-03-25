@@ -397,7 +397,7 @@ function MainMenu(parent)
 		}
 		else
 		{
-			Editor.alert(Locale.selectObjectGeometry);
+			Editor.alert(Locale.needsObjectGeometry);
 		}
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
@@ -639,7 +639,7 @@ function MainMenu(parent)
 	{
 		if(Editor.selection.length < 2)
 		{
-			Editor.alert("Operation needs two objects");
+			Editor.alert(Locale.needsTwoObjects);
 			return false;
 		}
 
@@ -647,7 +647,7 @@ function MainMenu(parent)
 		{
 			if(Editor.selection[i].geometry === undefined)
 			{
-				Editor.alert("Operation needs two objects with geometries");
+				Editor.alert(Locale.needsTwoObjectGeometry);
 				return false;
 			}
 		}
@@ -708,7 +708,7 @@ function MainMenu(parent)
 	{
 		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{
-			Editor.alert("Operation needs a object with geometry");
+			Editor.alert(Locale.needsObjectGeometry);
 			return;
 		}
 
@@ -745,7 +745,7 @@ function MainMenu(parent)
 	{
 		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{
-			Editor.alert("Operation needs a object with geometry");
+			Editor.alert(Locale.needsObjectGeometry);
 			return;
 		}
 
@@ -760,7 +760,7 @@ function MainMenu(parent)
 	{
 		if(Editor.selection.length < 1)
 		{
-			Editor.alert("Operation needs a mesh object.");
+			Editor.alert(Locale.needsObjectMesh);
 			return;
 		}
 
@@ -773,7 +773,7 @@ function MainMenu(parent)
 	{
 		if(Editor.selection.length < 1)
 		{
-			Editor.alert("Operation needs a mesh object.");
+			Editor.alert(Locale.needsObjectMesh);
 			return;
 		}
 
@@ -790,7 +790,7 @@ function MainMenu(parent)
 	{
 		if(Editor.selection.length < 2)
 		{
-			Editor.alert("Operation needs 2 mesh object.");
+			Editor.alert(Locale.needsTwoObjectMesh);
 			return;
 		}
 
