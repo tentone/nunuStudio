@@ -18,7 +18,7 @@ var SOURCE_PATH = "../";
 var OUTPUT_PATH = "../build/";
 
 var RUNTIME_MAIN = "source/runtime/NunuApp.js";
-var EDITOR_MAIN = "source/editor/Editor.js";
+var EDITOR_MAIN = "source/editor/Main.js";
 
 var EXAMPLES_PATH = "../docs/examples/";
 var EDITOR_OUTPUT_PATH = "../docs/editor/";

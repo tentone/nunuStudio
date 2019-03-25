@@ -33,10 +33,11 @@
 	},
 	"devDependencies": {
 		"yuidocjs": "",
-		"cordova": "",
 		"nwjs-builder-phoenix": "1.14.8"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"cordova": ""
+	},
 	"chromium-args": "--use-angle=gl --ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
 		"icon": "source/files/icon.png",

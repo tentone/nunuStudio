@@ -5578,11 +5578,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     this.addAttribute("position", new N(r, 3));
   }
-  function Yb(g, a, b, e, d, c, l, f) {
+  function Yb(g, a, b, e, c, d, l, f) {
     H.call(this);
     this.type = "CylinderGeometry";
-    this.parameters = {radiusTop:g, radiusBottom:a, height:b, radialSegments:e, heightSegments:d, openEnded:c, thetaStart:l, thetaLength:f};
-    this.fromBufferGeometry(new wb(g, a, b, e, d, c, l, f));
+    this.parameters = {radiusTop:g, radiusBottom:a, height:b, radialSegments:e, heightSegments:c, openEnded:d, thetaStart:l, thetaLength:f};
+    this.fromBufferGeometry(new wb(g, a, b, e, c, d, l, f));
     this.mergeVertices();
   }
   function wb(g, a, b, e, c, l, f, h) {
@@ -6912,24 +6912,24 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return e + (g - a) * (c - e) / (b - a);
   }, lerp:function(g, a, b) {
     return (1 - b) * g + b * a;
-  }, smoothstep:function(g, a, b) {
-    if (g <= a) {
+  }, smoothstep:function(a, b, e) {
+    if (a <= b) {
       return 0;
     }
-    if (g >= b) {
+    if (a >= e) {
       return 1;
     }
-    g = (g - a) / (b - a);
-    return g * g * (3 - 2 * g);
-  }, smootherstep:function(g, a, b) {
-    if (g <= a) {
+    a = (a - b) / (e - b);
+    return a * a * (3 - 2 * a);
+  }, smootherstep:function(a, b, e) {
+    if (a <= b) {
       return 0;
     }
-    if (g >= b) {
+    if (a >= e) {
       return 1;
     }
-    g = (g - a) / (b - a);
-    return g * g * g * (g * (6 * g - 15) + 10);
+    a = (a - b) / (e - b);
+    return a * a * a * (a * (6 * a - 15) + 10);
   }, randInt:function(a, b) {
     return a + Math.floor(Math.random() * (b - a + 1));
   }, randFloat:function(a, b) {
@@ -14458,14 +14458,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return c;
   }, parseTextures:function(a, b) {
-    function g(a, b) {
+    function e(a, b) {
       if ("number" === typeof a) {
         return a;
       }
       console.warn("THREE.ObjectLoader.parseTexture: Constant should be in numeric form.", a);
       return b[a];
     }
-    var e = {};
+    var g = {};
     if (void 0 !== a) {
       for (var c = 0, d = a.length; c < d; c++) {
         var l = a[c];
@@ -14475,25 +14475,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         f.needsUpdate = !0;
         f.uuid = l.uuid;
         void 0 !== l.name && (f.name = l.name);
-        void 0 !== l.mapping && (f.mapping = g(l.mapping, Gg));
+        void 0 !== l.mapping && (f.mapping = e(l.mapping, Gg));
         void 0 !== l.offset && f.offset.fromArray(l.offset);
         void 0 !== l.repeat && f.repeat.fromArray(l.repeat);
         void 0 !== l.center && f.center.fromArray(l.center);
         void 0 !== l.rotation && (f.rotation = l.rotation);
-        void 0 !== l.wrap && (f.wrapS = g(l.wrap[0], Vf), f.wrapT = g(l.wrap[1], Vf));
+        void 0 !== l.wrap && (f.wrapS = e(l.wrap[0], Vf), f.wrapT = e(l.wrap[1], Vf));
         void 0 !== l.format && (f.format = l.format);
         void 0 !== l.type && (f.type = l.type);
         void 0 !== l.encoding && (f.encoding = l.encoding);
-        void 0 !== l.minFilter && (f.minFilter = g(l.minFilter, Wf));
-        void 0 !== l.magFilter && (f.magFilter = g(l.magFilter, Wf));
+        void 0 !== l.minFilter && (f.minFilter = e(l.minFilter, Wf));
+        void 0 !== l.magFilter && (f.magFilter = e(l.magFilter, Wf));
         void 0 !== l.anisotropy && (f.anisotropy = l.anisotropy);
         void 0 !== l.flipY && (f.flipY = l.flipY);
         void 0 !== l.premultiplyAlpha && (f.premultiplyAlpha = l.premultiplyAlpha);
         void 0 !== l.unpackAlignment && (f.unpackAlignment = l.unpackAlignment);
-        e[l.uuid] = f;
+        g[l.uuid] = f;
       }
     }
-    return e;
+    return g;
   }, parseObject:function(a, b, e) {
     function g(a) {
       void 0 === b[a] && console.warn("THREE.ObjectLoader: Undefined geometry", a);
@@ -18337,6 +18337,7 @@ THREE.EffectComposer = function(a, c) {
   this.renderTarget2.texture.name = "EffectComposer.rt2";
   this.writeBuffer = this.renderTarget1;
   this.readBuffer = this.renderTarget2;
+  this.renderToScreen = !0;
   this.passes = [];
   void 0 === THREE.CopyShader && console.error("THREE.EffectComposer relies on THREE.CopyShader");
   void 0 === THREE.ShaderPass && console.error("THREE.EffectComposer relies on THREE.ShaderPass");
@@ -18353,6 +18354,13 @@ Object.assign(THREE.EffectComposer.prototype, {swapBuffers:function() {
   a.setSize(c.width, c.height);
 }, insertPass:function(a, c) {
   this.passes.splice(c, 0, a);
+}, isLastEnabledPass:function(a) {
+  for (a += 1; a < this.passes.length; a++) {
+    if (this.passes[a].enabled) {
+      return !1;
+    }
+  }
+  return !0;
 }, render:function(a) {
   void 0 === a && (a = .001 * (Date.now() - this._previousFrameTime));
   this._previousFrameTime = Date.now();
@@ -18360,6 +18368,7 @@ Object.assign(THREE.EffectComposer.prototype, {swapBuffers:function() {
   for (b = 0; b < f; b++) {
     var d = this.passes[b];
     if (!1 !== d.enabled) {
+      d.renderToScreen = this.renderToScreen && this.isLastEnabledPass(b);
       d.render(this.renderer, this.writeBuffer, this.readBuffer, a, k);
       if (d.needsSwap) {
         if (k) {
@@ -18401,6 +18410,20 @@ Object.assign(THREE.Pass.prototype, {setSize:function(a, c) {
 }, render:function(a, c, k, b, f) {
   console.error("THREE.Pass: .render() must be implemented in derived pass.");
 }});
+THREE.Pass.FullScreenQuad = function() {
+  var a = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1), c = new THREE.PlaneBufferGeometry(2, 2), k = function(a) {
+    this._mesh = new THREE.Mesh(c, a);
+  };
+  Object.defineProperty(k.prototype, "material", {get:function() {
+    return this._mesh.material;
+  }, set:function(a) {
+    this._mesh.material = a;
+  }});
+  Object.assign(k.prototype, {render:function(b) {
+    b.render(this._mesh, a);
+  }});
+  return k;
+}();
 THREE.RenderPass = function(a, c, k, b, f) {
   THREE.Pass.call(this);
   this.scene = a;
@@ -18432,17 +18455,13 @@ THREE.ShaderPass = function(a, c) {
   THREE.Pass.call(this);
   this.textureID = void 0 !== c ? c : "tDiffuse";
   a instanceof THREE.ShaderMaterial ? (this.uniforms = a.uniforms, this.material = a) : a && (this.uniforms = THREE.UniformsUtils.clone(a.uniforms), this.material = new THREE.ShaderMaterial({defines:Object.assign({}, a.defines), uniforms:this.uniforms, vertexShader:a.vertexShader, fragmentShader:a.fragmentShader}));
-  this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-  this.scene = new THREE.Scene;
-  this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
-  this.quad.frustumCulled = !1;
-  this.scene.add(this.quad);
+  this.fsQuad = new THREE.Pass.FullScreenQuad(this.material);
 };
 THREE.ShaderPass.prototype = Object.assign(Object.create(THREE.Pass.prototype), {constructor:THREE.ShaderPass, render:function(a, c, k, b, f) {
   this.uniforms[this.textureID] && (this.uniforms[this.textureID].value = k.texture);
-  this.quad.material = this.material;
+  this.fsQuad.material = this.material;
   this.renderToScreen ? a.setRenderTarget(null) : (a.setRenderTarget(c), this.clear && a.clear(a.autoClearColor, a.autoClearDepth, a.autoClearStencil));
-  a.render(this.scene, this.camera);
+  this.fsQuad.render(a);
 }});
 THREE.MaskPass = function(a, c) {
   THREE.Pass.call(this);
