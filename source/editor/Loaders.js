@@ -541,9 +541,16 @@ Editor.loadModel = function(file, parent)
 					{
 						THREE.DRACOLoader.releaseDecoderModule();
 
-						geometry.computeVertexNormals();
+						if(geometry.isBufferGeometry === true)
+						{
+							var normals = geometry.getAttribute("normal");
+							if(normals === undefined)
+							{
+								geometry.computeVertexNormals();
+							}
+						}
 
-						var mesh = new THREE.Mesh(geometry, Editor.defaultMaterial);
+						var mesh = new Mesh(geometry, Editor.defaultMaterial);
 						Editor.addObject(mesh, parent);
 						modal.destroy();
 					});
