@@ -498,15 +498,13 @@ function TreeNode(container)
 
 	this.element.onclick = function(event)
 	{
-		if(event.shiftKey && Editor.selection.length > 0)
+		if(event.shiftKey && Editor.selection.length > 0 && Editor.selection[Editor.selection.length - 1].isObject3D === true)
 		{
-			var node = Editor.selection[0].gui.node;
+			var object = Editor.selection[Editor.selection.length - 1];
+			var node = object.gui.node;
 
-
-			if(node !== null)
-			{
-				console.log(node, event);
-			}
+			//TODO <SELECT TREE>
+			console.log(object, node, event);
 		}
 		else if(event.ctrlKey)
 		{
