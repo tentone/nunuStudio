@@ -24,7 +24,7 @@ function TreeNode(container)
 	this.folded = false;
 	this.selected = false;
 
-	//Children and parent elements
+	//Children and parent tree nodes
 	this.parent = null;
 	this.children = [];
 	this.level = 0;
@@ -498,7 +498,17 @@ function TreeNode(container)
 
 	this.element.onclick = function(event)
 	{
-		if(event.ctrlKey)
+		if(event.shiftKey && Editor.selection.length > 0)
+		{
+			var node = Editor.selection[0].gui.node;
+
+
+			if(node !== null)
+			{
+				console.log(node, event);
+			}
+		}
+		else if(event.ctrlKey)
 		{
 			if(Editor.isSelected(self.object))
 			{
