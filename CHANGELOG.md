@@ -13,6 +13,8 @@
  - Added canvas based text with support for CSS styling. (IN PROGRESS)
  - Select multiple tree objects using SHIFT.
  - Export draco compressed geometries.
+ - Scene editor toolbar is now attached to the scene editor tab.
+ 
  
 ## Published
 ### V0.9.5 Beta

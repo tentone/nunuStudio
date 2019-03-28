@@ -9,9 +9,18 @@ function SideBar(parent)
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
+	/**
+	 * Scene editor to where this sidebar is attached.
+	 *
+	 * @attribute editor
+	 * @type {SceneEditor}
+	 */
+	this.editor = parent;
+
 	var position = 5;
 	var size = 40;
 	var self = this;
+
 
 	var text = new Text(this);
 	text.setText(Locale.tools);
@@ -109,7 +118,7 @@ SideBar.prototype.selectTool = function(tool)
 	this.scale.setSelected(tool === SceneEditor.SCALE);
 	this.rotate.setSelected(tool === SceneEditor.ROTATE);
 	
-	this.parent.selectTool(tool);
+	this.editor.selectTool(tool);
 };
 
 SideBar.prototype.updateSize = function()
@@ -173,6 +182,8 @@ SideBar.prototype.updateSize = function()
  */
 SideBar.prototype.createObject = function()
 {
+	var self = this;
+
 	//Add Models
 	var models = new ButtonDrawer(this);
 	models.setImage(Global.FILE_PATH + "icons/models/models.png");
@@ -184,7 +195,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cube";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, Locale.cube);
 
 	//Cylinder
@@ -193,7 +204,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cylinder";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, Locale.cylinder);
 
 	//Sphere
@@ -202,7 +213,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "sphere";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, Locale.sphere);
 
 	//Torus Knot
@@ -211,7 +222,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.TorusKnotBufferGeometry(1, 0.4, 128, 96, 2, 3);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "torus knot";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, Locale.torusKnot);
 	
 	//Torus
@@ -220,7 +231,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "torus";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, Locale.torus);
 
 	//Cone
@@ -229,7 +240,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cone";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, Locale.cone);
 
 	//Tetrahedron
@@ -238,7 +249,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.TetrahedronBufferGeometry(1, 0);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "tetrahedron";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, "Tetrahedron");
 
 	//Dodecahedron
@@ -247,7 +258,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.DodecahedronBufferGeometry(1, 0);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "dodecahedron";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, "Dodecahedron");
 
 	//Plane
@@ -256,7 +267,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.PlaneBufferGeometry(1, 1);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "plane";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, "Plane");
 
 	//Circle
@@ -265,7 +276,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.CircleBufferGeometry(1, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "circle";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, "Cicle");
 
 	//Ring
@@ -274,7 +285,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.RingBufferGeometry(1, 5, 32, 1);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "ring";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, "Ring");
 
 	//Parametric
@@ -308,7 +319,7 @@ SideBar.prototype.createObject = function()
 		var geometry = new THREE.ParametricGeometry(klein, 25, 25);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "parametric";
-		Editor.addObject(model);
+		Editor.addObject(model, self.editor.scene);
 	}, "Parametric");*/
 
 	models.updateOptions();
@@ -320,7 +331,7 @@ SideBar.prototype.createObject = function()
 
 	text.addOption(Global.FILE_PATH + "icons/text/text.png", function()
 	{
-		Editor.addObject(new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont));
+		Editor.addObject(new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont), self.editor.scene);
 	}, "Text Mesh");
 
 	if(Nunu.developmentMode())
@@ -338,7 +349,7 @@ SideBar.prototype.createObject = function()
 			}, new Texture(Global.FILE_PATH + "sdf/roboto-bold.png"), TextBitmap.SDF);
 			object.scale.set(0.001, 0.001, 0.001);
 
-			Editor.addObject(object);
+			Editor.addObject(object, self.editor.scene);
 		}, "Text Bitmap");
 
 		text.addOption(Global.FILE_PATH + "icons/text/text.png", function()
@@ -357,43 +368,43 @@ SideBar.prototype.createObject = function()
 	//Point Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/point.png", function()
 	{
-		Editor.addObject(new PointLight(0x444444));
+		Editor.addObject(new PointLight(0x444444), self.editor.scene);
 	}, "Point Light");
 
 	//Ambient Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/ambient.png", function()
 	{
-		Editor.addObject(new AmbientLight(0x444444));
+		Editor.addObject(new AmbientLight(0x444444), self.editor.scene);
 	}, "Ambient Light");
 
 	//Spot Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/spot.png", function()
 	{
-		Editor.addObject(new SpotLight(0x444444));
+		Editor.addObject(new SpotLight(0x444444), self.editor.scene);
 	}, "Spot Light");
 
 	//Directional Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/directional.png", function()
 	{
-		Editor.addObject(new DirectionalLight(0x444444));
+		Editor.addObject(new DirectionalLight(0x444444), self.editor.scene);
 	}, "Directional Light");
 
 	//Hemisphere Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/hemisphere.png", function()
 	{
-		Editor.addObject(new HemisphereLight(0x444444));
+		Editor.addObject(new HemisphereLight(0x444444), self.editor.scene);
 	}, "Hemisphere Light");
 
 	//RectArea Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/rectarea.png", function()
 	{
-		Editor.addObject(new RectAreaLight(0x444444, 100, 1, 1));
+		Editor.addObject(new RectAreaLight(0x444444, 100, 1, 1), self.editor.scene);
 	}, "RectArea Light");
 
 	//Sky
 	lights.addOption(Global.FILE_PATH + "icons/lights/sky.png", function()
 	{
-		Editor.addObject(new Sky());
+		Editor.addObject(new Sky(), self.editor.scene);
 	}, Locale.sky);
 
 	lights.updateOptions();
@@ -406,13 +417,13 @@ SideBar.prototype.createObject = function()
 	//Perspective camera
 	cameras.addOption(Global.FILE_PATH + "icons/camera/prespective.png", function()
 	{
-		Editor.addObject(new PerspectiveCamera(60, 1));
+		Editor.addObject(new PerspectiveCamera(60, 1), self.editor.scene);
 	}, "Perspective Camera");
 
 	//Orthographic camera
 	cameras.addOption(Global.FILE_PATH + "icons/camera/orthographic.png", function()
 	{
-		Editor.addObject(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL));
+		Editor.addObject(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL), self.editor.scene);
 	}, "Orthographic Camera");
 
 	cameras.updateOptions();
@@ -425,7 +436,7 @@ SideBar.prototype.createObject = function()
 	//Javascript script
 	scripts.addOption(Global.FILE_PATH + "icons/script/script.png", function()
 	{
-		Editor.addObject(new Script());
+		Editor.addObject(new Script(), self.editor.scene);
 	}, "Javascript Script");
 
 	scripts.updateOptions();
@@ -438,7 +449,7 @@ SideBar.prototype.createObject = function()
 	//Sprite
 	effects.addOption(Global.FILE_PATH + "icons/misc/sprite.png", function()
 	{
-		Editor.addObject(new Sprite(Editor.defaultSpriteMaterial));
+		Editor.addObject(new Sprite(Editor.defaultSpriteMaterial), self.editor.scene);
 	}, "Sprite");
 
 	//Particle emitter
@@ -447,31 +458,31 @@ SideBar.prototype.createObject = function()
 		var particle = new ParticleEmitter()
 		particle.texture = Editor.defaultTextureParticle;
 		particle.reload();
-		Editor.addObject(particle);
+		Editor.addObject(particle, self.editor.scene);
 	}, "Particle Emitter");
 
 	//Container
 	effects.addOption(Global.FILE_PATH + "icons/misc/container.png", function()
 	{
-		Editor.addObject(new Container());
+		Editor.addObject(new Container(), self.editor.scene);
 	}, "Container");
 
 	//Cube Camera
 	effects.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()
 	{
-		Editor.addObject(new CubeCamera());
+		Editor.addObject(new CubeCamera(), self.editor.scene);
 	}, "Cube Camera")
 
 	//Audio
 	effects.addOption(Global.FILE_PATH + "icons/misc/audio.png", function()
 	{
-		Editor.addObject(new AudioEmitter(Editor.defaultAudio));
+		Editor.addObject(new AudioEmitter(Editor.defaultAudio), self.editor.scene);
 	}, "Audio");
 
 	//Positional Audio
 	effects.addOption(Global.FILE_PATH + "icons/misc/audio_positional.png", function()
 	{
-		Editor.addObject(new PositionalAudio(Editor.defaultAudio));
+		Editor.addObject(new PositionalAudio(Editor.defaultAudio), self.editor.scene);
 	}, "Positional Audio");
 
 	//Lens flare
@@ -488,7 +499,7 @@ SideBar.prototype.createObject = function()
 		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 120, 0.9);
 		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 70, 1.0);
 
-		Editor.addObject(lensFlare);
+		Editor.addObject(lensFlare, self.editor.scene);
 	}, "Lens flare");
 
 	if(Nunu.developmentMode())
@@ -498,14 +509,14 @@ SideBar.prototype.createObject = function()
 		{
 			var object = new THREE.Reflector(new THREE.PlaneBufferGeometry());
 
-			Editor.addObject(object);
+			Editor.addObject(object, self.editor.scene);
 		}, "Reflector");
 
 		//Refractor
 		effects.addOption(Global.FILE_PATH + "icons/misc/waves.png", function()
 		{
 			var object = new THREE.Refractor(new THREE.PlaneBufferGeometry());
-			Editor.addObject(object);
+			Editor.addObject(object, self.editor.scene);
 		}, "Refractor");
 	}
 
@@ -522,7 +533,7 @@ SideBar.prototype.createObject = function()
 		var object = new PhysicsObject();
 		object.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
 		object.name = "box";
-		Editor.addObject(obj);
+		Editor.addObject(object, self.editor.scene);
 	}, Locale.box);
 
 	//Physics sphere
@@ -531,7 +542,7 @@ SideBar.prototype.createObject = function()
 		var object = new PhysicsObject();
 		object.body.addShape(new CANNON.Sphere(1.0));
 		object.name = "sphere";
-		Editor.addObject(obj);
+		Editor.addObject(object, self.editor.scene);
 	}, Locale.sphere);
 
 	//Physics Cylinder
@@ -540,7 +551,7 @@ SideBar.prototype.createObject = function()
 		var object = new PhysicsObject();
 		object.body.addShape(new CANNON.Cylinder(1.0, 1.0, 2.0, 8));
 		object.name = "cylinder";
-		Editor.addObject(obj);
+		Editor.addObject(object, self.editor.scene);
 	}, Locale.cylinder);
 
 	//Physics Plane
@@ -551,7 +562,7 @@ SideBar.prototype.createObject = function()
 		object.body.addShape(new CANNON.Plane());
 		object.body.type = CANNON.Body.KINEMATIC;
 		object.name = "ground";
-		Editor.addObject(obj);
+		Editor.addObject(object, self.editor.scene);
 	}, "Ground");
 
 	//Physics Particle
@@ -560,7 +571,7 @@ SideBar.prototype.createObject = function()
 		var object = new PhysicsObject();
 		object.body.addShape(new CANNON.Particle());
 		object.name = "particle";
-		Editor.addObject(obj);
+		Editor.addObject(object, self.editor.scene);
 	}, "Particle");
 
 	physics.updateOptions();
@@ -573,25 +584,25 @@ SideBar.prototype.createObject = function()
 	//Orbit controls
 	controls.addOption(Global.FILE_PATH + "icons/misc/orbit.png", function()
 	{
-		Editor.addObject(new OrbitControls());
+		Editor.addObject(new OrbitControls(), self.editor.scene);
 	}, "Orbit Controls");
 
 	//FPS controls
 	controls.addOption(Global.FILE_PATH + "icons/misc/crosshair.png", function()
 	{
-		Editor.addObject(new FirstPersonControls());
+		Editor.addObject(new FirstPersonControls(), self.editor.scene);
 	}, "First Person Controls");
 
 	//Leap Hand
 	controls.addOption(Global.FILE_PATH + "icons/hw/leap.png", function()
 	{
-		Editor.addObject(new LeapMotion());
+		Editor.addObject(new LeapMotion(), self.editor.scene);
 	}, "Leap Motion");
 
 	//Kinect Skeleton
 	controls.addOption(Global.FILE_PATH + "icons/hw/kinect.png", function()
 	{
-		Editor.addObject(new KinectDevice());
+		Editor.addObject(new KinectDevice(), self.editor.scene);
 	}, "Microsoft Kinect");
 
 	controls.updateOptions();

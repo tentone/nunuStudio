@@ -505,10 +505,8 @@ function TreeNode(container)
 
 			var selecting = false;
 			var done = false;
-
-			var scene = object.getScene();
-
-			scene.traverse(function(child)
+			
+			Editor.program.traverse(function(child)
 			{
 				if(done === true)
 				{
