@@ -503,8 +503,47 @@ function TreeNode(container)
 			var object = Editor.selection[Editor.selection.length - 1];
 			var node = object.gui.node;
 
-			//TODO <SELECT TREE>
-			console.log(object, node, event);
+			var selecting = false;
+			var done = false;
+
+			var scene = object.getScene();
+
+			scene.traverse(function(child)
+			{
+				if(done === true)
+				{
+					return;
+				}
+
+				if(selecting === false)
+				{
+					if(child === object || child === self.object)
+					{
+						if(!Editor.isSelected(child))
+						{
+							Editor.addToSelection(child);
+						}
+						selecting = true;
+					}
+				}
+				else
+				{
+					if(child === object || child === self.object)
+					{
+						if(!Editor.isSelected(child))
+						{
+							Editor.addToSelection(child);
+						}
+
+						selecting = false;
+						done = true;
+					}
+					else
+					{
+						Editor.addToSelection(child);
+					}
+				}
+			});
 		}
 		else if(event.ctrlKey)
 		{

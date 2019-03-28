@@ -11,8 +11,9 @@
  - Fixed bug with tree overlaping other tabs.
  - Added bitmap text with support for SDF and MSDF text rendering. (IN PROGRESS)
  - Added canvas based text with support for CSS styling. (IN PROGRESS)
-
-
+ - Select multiple tree objects using SHIFT.
+ - Export draco compressed geometries.
+ 
 ## Published
 ### V0.9.5 Beta
  - Splitabble tabs in the UI
