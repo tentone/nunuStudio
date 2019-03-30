@@ -231,6 +231,7 @@ LocaleManager.register(
 	cameraNavigation: "Camera navigation mode",
 	cameraMode: "Change camera mode",
 	scene: "Scene",
+	move: "Move",
 	
 	//Editor settings
 	reset: "Reset",
@@ -272,6 +273,7 @@ LocaleManager.register(
 	needsTwoObjectMesh: "Operation needs two mesh object.",
 	needsTwoObjectGeometry: "Operation needs two objects with geometries",
 	needsTwoObjects: "Operation needs two objects.",
+	selectObjectFirst: "Select an object first.",
 
 	//Errors
 	errorExportingProject: "Error exporting project",

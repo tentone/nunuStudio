@@ -1,6 +1,12 @@
 "use strict";
 
-function AnimationOptions(parent, editor, animation)
+/**
+ * Animation tab menu bar with options to set the properties of the animation clip.
+ *
+ * @class AnimationClipMenuBar
+ * @extends {Element}
+ */
+function AnimationClipMenuBar(parent, editor, animation)
 {
 	Element.call(this, parent, "div");
 
@@ -82,9 +88,9 @@ function AnimationOptions(parent, editor, animation)
 	this.updateAnimation();
 }
 
-AnimationOptions.prototype = Object.create(Element.prototype);
+AnimationClipMenuBar.prototype = Object.create(Element.prototype);
 
-AnimationOptions.prototype.updateAnimation = function()
+AnimationClipMenuBar.prototype.updateAnimation = function()
 {
 	this.loop.setValue(this.animation.loop);
 	this.timeScale.setValue(this.animation.timeScale);
@@ -92,10 +98,10 @@ AnimationOptions.prototype.updateAnimation = function()
 	this.enabled.setValue(this.animation.enabled);
 };
 
-AnimationOptions.prototype.updateInterface = function()
+AnimationClipMenuBar.prototype.updateInterface = function()
 {
 	this.element.style.left = this.position.x + "px";
 	this.element.style.top = this.position.y + "px";
+	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-	this.element.style.width = "100%";
 };

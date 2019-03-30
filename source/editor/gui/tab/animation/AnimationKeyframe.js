@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Animation keyframe is a point the the animation track relative to a specific object.
+ *
+ * Keyframes can be added moved or deleted in the animation timeline.
+ *
+ * @class AnimationKeyframe
+ * @extends {Element}
+ */
 function AnimationKeyframe(parent, editor, trackEditor, track, index)
 {
 	Element.call(this, parent, "div");
@@ -70,7 +78,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 			self.editor.createAnimationMixer();
 		});
 
-		context.addOption("Move", function()
+		context.addOption(Locale.move, function()
 		{
 			var time = Number.parseFloat(Editor.prompt("Keyframe time"));
 

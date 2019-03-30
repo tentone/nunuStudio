@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Button displyed on the left side that shows the attribute track being edited.
+ *
+ * @class AnimationTrackButton
+ * @extends {Element}
+ */
 function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 {
 	Element.call(this, parent, "div");

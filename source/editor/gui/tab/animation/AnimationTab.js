@@ -8,6 +8,7 @@
  * Each track is composed of keyframes that represent the states of the animation.
  *
  * @class AnimationTab
+ * @extends {AnimationTab}
  * @param {Element} parent
  */
 function AnimationTab(parent, closeable, container, index)
@@ -24,20 +25,30 @@ function AnimationTab(parent, closeable, container, index)
 	this.timebarHeight = 0;
 	this.animations = [];
 
-	//Bar
+	/**
+	 * Menu bar where the options to create animation clip, and play the animation controls are located.
+	 *
+	 * @attribute bar
+	 * @type {Element}
+	 */
 	this.bar = new Element(this, "div");
 	this.bar.element.style.position = "absolute";
 	this.bar.element.style.height = "20px";
 	this.bar.element.style.width = "100%";
 	this.bar.element.style.backgroundColor = Editor.theme.barColor;
 
-	//Animation
-	this.animationButton = new ButtonText(this.bar);
-	this.animationButton.position.set(0, 0);
-	this.animationButton.size.set(100, 20);
-	this.animationButton.setText(Locale.add)
-	this.animationButton.updateInterface();
-	this.animationButton.setOnClick(function()
+	/**
+	 * Add animation clip button.
+	 *
+	 * @attribute add
+	 * @type {ButtonText}
+	 */
+	this.add = new ButtonText(this.bar);
+	this.add.position.set(0, 0);
+	this.add.size.set(100, 20);
+	this.add.setText(Locale.add)
+	this.add.updateInterface();
+	this.add.setOnClick(function()
 	{
 		if(self.object !== null)
 		{
@@ -92,6 +103,10 @@ function AnimationTab(parent, closeable, container, index)
 
 			self.object.animations.push(clip);
 			self.attach(self.object);
+		}
+		else
+		{
+			Editor.alert(Locale.selectObjectFirst);
 		}
 	});
 
@@ -150,7 +165,6 @@ function AnimationTab(parent, closeable, container, index)
 		self.zoom = self.zoomSlider.getValue();
 		self.createTimeline();
 	});
-
 	this.zoomSlider.text.style.right = "5px";
 
 	this.zoomText = new Text(this.bar);

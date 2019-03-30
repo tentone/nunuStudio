@@ -1,6 +1,14 @@
 "use strict";
 
-function AnimationButton(parent, editor, animation)
+/**
+ * Button displyed on the left side that contains the name of the animation track.
+ *
+ * Each animation has multiple attribute tracks.
+ *
+ * @class AnimationClipButton
+ * @extends {Element}
+ */
+function AnimationClipButton(parent, editor, animation)
 {
 	Element.call(this, parent, "div");
 
@@ -145,14 +153,14 @@ function AnimationButton(parent, editor, animation)
 	this.updateAnimation();
 }
 
-AnimationButton.prototype = Object.create(Element.prototype);
+AnimationClipButton.prototype = Object.create(Element.prototype);
 
-AnimationButton.prototype.updateAnimation = function()
+AnimationClipButton.prototype.updateAnimation = function()
 {
 	this.name.appendChild(document.createTextNode(this.animation.name));
 };
 
-AnimationButton.prototype.updateInterface = function()
+AnimationClipButton.prototype.updateInterface = function()
 {
 	this.element.style.left = this.position.x + "px";
 	this.element.style.top = this.position.y + "px";

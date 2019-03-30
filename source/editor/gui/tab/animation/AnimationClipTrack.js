@@ -10,12 +10,12 @@ function AnimationClipTrack(editor, animation)
 	var height = 30 * tracks.length + 1;
 	var self = this;
 
-	this.button = new AnimationButton(this.editor.info, this.editor, animation);
+	this.button = new AnimationClipButton(this.editor.info, this.editor, animation);
 	this.button.position.set(0, this.editor.timebarHeight);
 	this.button.size.set(0, 30);
 	this.button.updateInterface();
 
-	this.options = new AnimationOptions(this.editor.tracks, this.editor, animation);
+	this.options = new AnimationClipMenuBar(this.editor.tracks, this.editor, animation);
 	this.options.position.set(0, this.editor.timebarHeight);
 	this.options.size.set(width, 30);
 	this.options.updateInterface();

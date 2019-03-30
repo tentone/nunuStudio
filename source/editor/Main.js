@@ -401,8 +401,8 @@ include("source/editor/gui/tab/asset/asset/VideoAsset.js");
 
 include("source/editor/gui/tab/animation/AnimationTab.js");
 include("source/editor/gui/tab/animation/AnimationClipTrack.js");
-include("source/editor/gui/tab/animation/AnimationOptions.js");
-include("source/editor/gui/tab/animation/AnimationButton.js");
+include("source/editor/gui/tab/animation/AnimationClipMenuBar.js");
+include("source/editor/gui/tab/animation/AnimationClipButton.js");
 include("source/editor/gui/tab/animation/AnimationKeyframe.js");
 include("source/editor/gui/tab/animation/AnimationTrack.js");
 include("source/editor/gui/tab/animation/AnimationTrackButton.js");
