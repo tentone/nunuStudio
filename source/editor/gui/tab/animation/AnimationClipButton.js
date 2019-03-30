@@ -12,9 +12,11 @@ function AnimationClipButton(parent, editor, animation)
 {
 	Element.call(this, parent, "div");
 
-	this.element.style.position = "absolute";
+	this.element.style.position = "relative";
 	this.element.style.backgroundColor = Editor.theme.barColor;
-	
+	this.element.style.width = "100%";
+	this.element.style.height = "30px";
+
 	this.editor = editor;
 	this.animation = animation;
 
@@ -160,10 +162,4 @@ AnimationClipButton.prototype.updateAnimation = function()
 	this.name.appendChild(document.createTextNode(this.animation.name));
 };
 
-AnimationClipButton.prototype.updateInterface = function()
-{
-	this.element.style.left = this.position.x + "px";
-	this.element.style.top = this.position.y + "px";
-	this.element.style.height = this.size.y + "px";
-	this.element.style.width = "100%";
-};
+AnimationClipButton.prototype.updateInterface = function(){};

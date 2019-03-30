@@ -215,7 +215,6 @@ LocaleManager.register(
 	import: "Import",
 	export: "Export",
 	exit: "Exit",
-	nothingToShow: "Select an object to view its properties.",
 	selectAll: "Select all",
 	render: "Render",
 	tools: "Tools",
@@ -232,6 +231,7 @@ LocaleManager.register(
 	cameraMode: "Change camera mode",
 	scene: "Scene",
 	move: "Move",
+	play: "Play",
 	
 	//Editor settings
 	reset: "Reset",
@@ -273,7 +273,8 @@ LocaleManager.register(
 	needsTwoObjectMesh: "Operation needs two mesh object.",
 	needsTwoObjectGeometry: "Operation needs two objects with geometries",
 	needsTwoObjects: "Operation needs two objects.",
-	selectObjectFirst: "Select an object first.",
+	selectObjectEditAnimation: "Select an object to edit animation.",
+	nothingToShow: "Select an object to view its properties.",
 
 	//Errors
 	errorExportingProject: "Error exporting project",

@@ -10,8 +10,10 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 {
 	Element.call(this, parent, "div");
 
+	this.element.style.position = "relative";
 	this.element.style.backgroundColor = Editor.theme.barColor;
-	this.element.style.overflow = "hidden";
+	this.element.style.width = "100%";
+	this.element.style.height = "30px";
 
 	this.editor = editor;
 	this.animation = animation;
@@ -177,9 +179,4 @@ AnimationTrackButton.prototype.updateTrack = function()
 };
 
 AnimationTrackButton.prototype.updateInterface = function()
-{
-	this.element.style.left = this.position.x + "px";
-	this.element.style.top = this.position.y + "px";
-	this.element.style.height = this.size.y + "px";
-	this.element.style.width = "100%";
-};
+{};

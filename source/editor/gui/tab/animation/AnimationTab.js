@@ -22,7 +22,6 @@ function AnimationTab(parent, closeable, container, index)
 	this.clock = new THREE.Clock();
 	
 	this.zoom = 120.0; //Pixels/sec
-	this.timebarHeight = 0;
 	this.animations = [];
 
 	/**
@@ -106,14 +105,14 @@ function AnimationTab(parent, closeable, container, index)
 		}
 		else
 		{
-			Editor.alert(Locale.selectObjectFirst);
+			Editor.alert(Locale.selectObjectEditAnimation);
 		}
 	});
 
 	this.play = new ButtonText(this.bar);
 	this.play.position.set(100, 0);
 	this.play.size.set(100, 20);
-	this.play.setText("Play")
+	this.play.setText(Locale.play)
 	this.play.updateInterface();
 	this.play.setOnClick(function()
 	{
@@ -126,7 +125,7 @@ function AnimationTab(parent, closeable, container, index)
 		if(self.mixer.playing)
 		{
 			self.mixer.pause();
-			self.play.setText("Play");
+			self.play.setText(Locale.play);
 		}
 		else
 		{
@@ -148,7 +147,7 @@ function AnimationTab(parent, closeable, container, index)
 			return;
 		}
 
-		self.play.setText("Play");
+		self.play.setText(Locale.play);
 		self.mixer.stop();
 	});
 
@@ -175,13 +174,15 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomText.updateSize();
 
 	/**
-	 * Timeline divisio occupies the hole tab except for the options bar.
+	 * Timeline division (movable tab) occupies the hole tab except for the options bar.
+	 *
+	 * Contains the info on the left and tracks on right side.
 	 *
 	 * @property timeline
 	 * @type {Element}
 	 */
 	this.timeline = new Element(this, "div");
-	this.timeline.element.style.overflow = "auto";
+	this.timeline.element.style.overflowY = "auto";
 
 	/**
 	 * Information button tab.
@@ -190,6 +191,7 @@ function AnimationTab(parent, closeable, container, index)
 	 * @type {Division}
 	 */
 	this.info = new Division(this.timeline);
+	this.info.element.style.backgroundColor = Editor.theme.barColor;
 
 	/**
 	 * Tracks section.
@@ -198,6 +200,18 @@ function AnimationTab(parent, closeable, container, index)
 	 * @type {Division}
 	 */
 	this.tracks = new Division(this.timeline);
+
+	/**
+	 * Text shown when there is no object selected to display animation timeline.
+	 *
+	 * @attribute emptyText
+	 * @type {Text}
+	 */
+	this.emptyText = new Text(this);
+	this.emptyText.allowWordBreak(true);
+	this.emptyText.setTextSize(12);
+	this.emptyText.setTextColor("#FFFFFF");
+	this.emptyText.setText(Locale.selectObjectEditAnimation);
 
 	//Temporary variables for mouse movement
 	var mouse = 0, initial = 0;
@@ -209,9 +223,12 @@ function AnimationTab(parent, closeable, container, index)
 	 * @type {DOM}
 	 */
 	this.tab = document.createElement("div");
-	this.tab.style.position = "absolute";
 	this.tab.style.backgroundColor = Editor.theme.barColor;
+	this.tab.style.position = "absolute";
 	this.tab.style.cursor = "e-resize";
+	this.tab.style.width = "5px";
+	this.tab.style.top = "0px";
+	this.tab.style.height = "100%";
 	this.tab.position = 250;
 	this.timeline.element.appendChild(this.tab);
 
@@ -245,8 +262,19 @@ AnimationTab.prototype = Object.create(TabElement.prototype);
 AnimationTab.prototype.attach = function(object)
 {
 	this.object = object;
-	this.createAnimationMixer();
-	this.createTimeline();
+
+	if(this.object !== null)
+	{
+		this.createAnimationMixer();
+		this.createTimeline();
+	}
+	else
+	{
+		this.clearAnimationMixer();
+		this.clearTimeline();
+	}
+
+	this.emptyText.setVisibility(this.object === null);
 };
 
 AnimationTab.prototype.activate = function()
@@ -262,18 +290,39 @@ AnimationTab.prototype.deactivate = function()
 
 	if(this.mixer !== null && this.mixer.playing)
 	{
-		this.play.setText("Play");
+		this.play.setText(Locale.play);
 		this.mixer.stop();
 	}
 };
 
-//Attach object to animation editor
 AnimationTab.prototype.updateSelection = function()
 {
 	this.attach(Editor.selection.length > 0 ? Editor.selection[0] : null);
 };
 
-//Create a new animation mixer
+/**
+ * Clear animation mixer object.
+ *
+ * @method clearAnimationMixer
+ */
+AnimationTab.prototype.clearAnimationMixer = function(keepTime)
+{
+	if(this.mixer !== null)
+	{
+		this.play.setText(Locale.play);
+		this.mixer.stop();
+		this.mixer.dispose();
+		this.mixer = null;
+	}
+};
+
+/**
+ * Create a new animation mixer for the attached object.
+ *
+ * Destroy the old animation mixed and recreate a new one.
+ *
+ * @method createAnimationMixer
+ */
 AnimationTab.prototype.createAnimationMixer = function(keepTime)
 {
 	var time = 0;
@@ -286,10 +335,7 @@ AnimationTab.prototype.createAnimationMixer = function(keepTime)
 			time = this.mixer.time;
 		}
 
-		this.play.setText("Play");
-		this.mixer.stop();
-		this.mixer.dispose();
-		this.mixer = null;
+		this.clearAnimationMixer();
 	}
 
 	//Check if the object has animations
@@ -320,20 +366,31 @@ AnimationTab.prototype.update = function()
 	}
 };
 
-//Create new timeline elements
-AnimationTab.prototype.createTimeline = function()
-{	
-	//Clear timeline elements
+/**
+ * Clear timeline GUI elements.
+ *
+ * @method clearTimeline
+ */
+AnimationTab.prototype.clearTimeline = function()
+{
 	this.tracks.removeAllChildren();
 	this.info.removeAllChildren();
+};
 
-	this.timebarHeight = 0;
+/**
+ * Create new timeline GUI elements remove the old ones from the tab.
+ *
+ * @method createTimeline
+ */
+AnimationTab.prototype.createTimeline = function()
+{
+	this.clearTimeline();
 	this.animations = [];
 
-	//Create new timeline
 	if(this.object !== null && this.object.animations !== undefined)
 	{
 		var animations = this.object.animations;
+
 		for(var i = 0; i < animations.length; i++)
 		{
 			this.animations.push(new AnimationClipTrack(this, animations[i]));
@@ -343,10 +400,16 @@ AnimationTab.prototype.createTimeline = function()
 	this.updateInterface();
 };
 
-AnimationTab.prototype.addKeyFrame = function(track, object)
+/**
+ * Add a new keyframe to a specific track with a specific value.
+ *
+ * @method addKeyframe
+ * @param {Object} track
+ * @param {Object} value
+ */
+AnimationTab.prototype.addKeyFrame = function(track, value)
 {
 	var attributes = track.name.split(".");
-	var value = object;
 
 	for(var i = 0; i < attributes.length; i++)
 	{
@@ -416,23 +479,23 @@ AnimationTab.prototype.updateInterface = function()
 		this.timeline.position.set(0, 20);
 		this.timeline.size.set(this.size.x, this.size.y - 20);
 		this.timeline.updateInterface();
-		
-		var weight = this.timeline.element.scrollHeight;
 
 		//Tab
-		this.tab.style.height = weight + "px";
-		this.tab.style.width = "5px";
-		this.tab.style.top = "0px";
 		this.tab.style.left = this.tab.position + "px";
-		
+
 		//Information
-		this.info.size.set(this.tab.position, weight);
+		this.info.size.set(this.tab.position, this.size.y - 20);
 		this.info.updateInterface();
 		
 		//Tracks
 		this.tracks.position.set(this.tab.position + 5, 0);
-		this.tracks.size.set(1000, weight);
+		this.tracks.size.set(this.size.x - this.tracks.position.x, this.size.y - 20);
 		this.tracks.updateInterface();
+		
+		//Empty text
+		this.emptyText.position.set(0, 0);
+		this.emptyText.size.set(this.size.x, this.size.y);
+		this.emptyText.updateInterface();
 
 		//Element
 		this.element.style.display = "block";

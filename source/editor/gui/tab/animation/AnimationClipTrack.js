@@ -1,37 +1,58 @@
 "use strict";
 
+/**
+ * Animation clip track contains all the elements of an animation track.
+ *
+ * Creates the animation clip button and option bar and all the tracks buttons and timegrids.
+ *
+ * @class AnimationClipTrack
+ */
 function AnimationClipTrack(editor, animation)
 {
 	this.editor = editor;
 	this.animation = animation;
 
 	var tracks = animation.tracks;
-	var width = this.editor.zoom * animation.duration + 1;
-	var height = 30 * tracks.length + 1;
+
+	var width = this.editor.zoom * animation.duration;
+	var height = 30 * tracks.length;
+
 	var self = this;
 
+	/**
+	 * Button of the animation clip.
+	 *
+	 * @attribute button
+	 * @type {AnimationClipButton}
+	 */
 	this.button = new AnimationClipButton(this.editor.info, this.editor, animation);
-	this.button.position.set(0, this.editor.timebarHeight);
-	this.button.size.set(0, 30);
-	this.button.updateInterface();
 
+	/**
+	 * Options of this animation clip track.
+	 *
+	 * @attribute options
+	 * @type {AnimationClipMenuBar}
+	 */
 	this.options = new AnimationClipMenuBar(this.editor.tracks, this.editor, animation);
-	this.options.position.set(0, this.editor.timebarHeight);
-	this.options.size.set(width, 30);
-	this.options.updateInterface();
 
-	this.editor.timebarHeight += 30;
+	this.timeline = document.createElement("div");
+	this.timeline.style.overflowX = "auto";
+	this.timeline.style.overflowY = "hidden";
+	this.timeline.style.position = "relative";
+	this.timeline.style.width = "100%";
+	this.timeline.style.height = height + "px";
+	this.editor.tracks.element.appendChild(this.timeline);
 
-	//Canvas
+	/**
+	 * Timeline grid canvas where the timeline is drawn into.
+	 *
+	 * @attribute timegrid
+	 * @type {DOM}
+	 */
 	this.timegrid = document.createElement("canvas");
-	this.timegrid.style.position = "absolute";
-	this.timegrid.style.top = this.editor.timebarHeight + "px";
-	this.timegrid.style.left = "0px";
-	this.timegrid.style.width = width + "px";
-	this.timegrid.style.height = height + "px";
-	this.timegrid.width = width;
+	this.timegrid.width = width + 1;
 	this.timegrid.height = height;
-	this.editor.tracks.element.appendChild(this.timegrid);
+	this.timeline.appendChild(this.timegrid);
 
 	var context = this.timegrid.getContext("2d");
 	context.fillStyle = Editor.theme.barColor;
@@ -51,10 +72,10 @@ function AnimationClipTrack(editor, animation)
 	this.seek.style.position = "absolute";
 	this.seek.style.backgroundColor = "#FFFFFF";
 	this.seek.style.zIndex = "100";
-	this.seek.style.top = this.editor.timebarHeight + "px";
+	this.seek.style.top = "0px";
 	this.seek.style.left = "0px";
 	this.seek.style.width = "4px";
-	this.seek.style.height = height + "px";
+	this.seek.style.height = "100%";
 	this.seek.style.overflow = "hidden";
 	this.seek.style.cursor = "e-resize";
 	this.seek.onmousedown = function(event)
@@ -64,7 +85,7 @@ function AnimationClipTrack(editor, animation)
 
 		self.manager.create();
 	};
-	this.editor.tracks.element.appendChild(this.seek);
+	this.timeline.appendChild(this.seek);
 
 	//Seekbar manager
 	this.manager = new EventManager();
@@ -93,16 +114,14 @@ function AnimationClipTrack(editor, animation)
 	//Tracks
 	for(var j = 0; j < tracks.length; j++)
 	{
-		var track = new AnimationTrack(this.editor.tracks, this.editor, tracks[j]);
-		track.position.set(0, this.editor.timebarHeight);
-		track.size.set(this.editor.zoom * animation.duration, 30);
+		var track = new AnimationTrack(this.timeline, this.editor, tracks[j]);
+		track.position.set(0, j * 30);
+		track.size.set(width, 30);
 		track.updateInterface();
 		
 		var button = new AnimationTrackButton(this.editor.info, this.editor, animation, tracks[j], track);
-		button.position.set(0, this.editor.timebarHeight);
+		button.position.set(0, j * 30);
 		button.size.set(0, 30);
 		button.updateInterface();
-
-		this.editor.timebarHeight += 30;
 	}
 }
