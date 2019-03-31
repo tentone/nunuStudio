@@ -92,8 +92,13 @@ function CubeTextureBox(parent)
 	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this);
 	this.mapping.size.set(120, 18);
-	this.mapping.addValue("Reflection Mapping", THREE.CubeReflectionMapping);
-	this.mapping.addValue("Refraction Mapping", THREE.CubeRefractionMapping);
+	this.mapping.addValue("Cube Reflection", THREE.CubeReflectionMapping);
+	this.mapping.addValue("Cube Refraction", THREE.CubeRefractionMapping);
+	this.mapping.addValue("Equirectangular Reflection", THREE.EquirectangularReflectionMapping);
+	this.mapping.addValue("Equirectangular Reflection", THREE.EquirectangularRefractionMapping);
+	this.mapping.addValue("Spherical Reflection", THREE.SphericalReflectionMapping);
+	this.mapping.addValue("Cube UV Reflection", THREE.CubeUVReflectionMapping);
+	this.mapping.addValue("Cube UV Reflection", THREE.CubeUVRefractionMapping);
 	this.form.add(this.mapping);
 	this.form.nextRow();
 

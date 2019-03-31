@@ -210,6 +210,8 @@ MaterialEditor.prototype.attach = function(material, asset)
 	
 	//Store material
 	this.material = material;
+	this.material.needsUpdate = true;
+
 	this.updateMetadata();
 
 	//Generic material elements
@@ -263,6 +265,8 @@ MaterialEditor.prototype.updateMetadata = function()
 			this.name.setText(this.material.name);
 		}
 
+		this.scene.background = this.material.envMap !== null ? this.material.envMap : null;
+
 		//If not found close tab
 		if(Editor.program.materials[this.material.uuid] === undefined)
 		{
@@ -284,14 +288,7 @@ MaterialEditor.prototype.update = function()
 		{
 			Editor.updateObjectsViewsGUI();
 			
-			if(this.material.envMap != null)
-			{
-				this.scene.background = this.material.envMap;
-			}
-			else
-			{
-				this.scene.background = null;
-			}
+			this.scene.background = this.material.envMap !== null ? this.material.envMap : null;
 
 			this.material.needsUpdate = true;
 		}

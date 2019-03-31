@@ -102,8 +102,13 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this.form);
 	this.mapping.size.set(150, 18);
-	this.mapping.addValue("Reflection Mapping", THREE.CubeReflectionMapping);
-	this.mapping.addValue("Refraction Mapping", THREE.CubeRefractionMapping);
+	this.mapping.addValue("Cube Reflection", THREE.CubeReflectionMapping);
+	this.mapping.addValue("Cube Refraction", THREE.CubeRefractionMapping);
+	this.mapping.addValue("Equirectangular Reflection", THREE.EquirectangularReflectionMapping);
+	this.mapping.addValue("Equirectangular Reflection", THREE.EquirectangularRefractionMapping);
+	this.mapping.addValue("Spherical Reflection", THREE.SphericalReflectionMapping);
+	this.mapping.addValue("Cube UV Reflection", THREE.CubeUVReflectionMapping);
+	this.mapping.addValue("Cube UV Reflection", THREE.CubeUVRefractionMapping);
 	this.mapping.setOnChange(function()
 	{
 		self.texture.mapping = self.mapping.getValue();
@@ -267,12 +272,9 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 CubeTextureEditor.prototype = Object.create(TabElement.prototype);
 
-//Update test material
 CubeTextureEditor.prototype.updateMaterial = function()
 {
 	this.texture.needsUpdate = true;
-	
-	//TODO <ADD CHANGE TO HISTORY>
 };
 
 //Update input elements
