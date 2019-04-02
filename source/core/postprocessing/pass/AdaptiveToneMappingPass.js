@@ -31,7 +31,6 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 		depthTest: false
 	});
 
-
 	this.materialLuminance = new THREE.ShaderMaterial(
 	{
 		uniforms: THREE.UniformsUtils.clone(THREE.LuminosityShader.uniforms),
@@ -161,10 +160,17 @@ AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readB
 
 	if(this.clear === true)
 	{
-		renderer.clear();
+		renderer.autoClear = true;
+		renderer.autoClearColor = true;
+		renderer.autoClearDepth = true;
+		renderer.autoClearStencil = true;
+	}
+	else
+	{
+		renderer.autoClear = false;
 	}
 
-	renderer.setRenderTarget(this.renderToScreen ? undefined : writeBuffer);
+	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
 	renderer.render(this.scene, this.camera);
 };
 

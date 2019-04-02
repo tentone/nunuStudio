@@ -24,7 +24,7 @@ function ShaderPass(shader, textureID)
 		this.uniforms = THREE.UniformsUtils.clone(shader.uniforms);
 		this.material = new THREE.ShaderMaterial(
 		{
-			defines: shader.defines || {},
+			defines: Object.assign({}, shader.defines),
 			uniforms: this.uniforms,
 			vertexShader: shader.vertexShader,
 			fragmentShader: shader.fragmentShader
@@ -47,7 +47,14 @@ ShaderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 
 	if(this.clear === true)
 	{
-		renderer.clear();
+		renderer.autoClear = true;
+		renderer.autoClearColor = true;
+		renderer.autoClearDepth = true;
+		renderer.autoClearStencil = true;
+	}
+	else
+	{
+		renderer.autoClear = false;
 	}
 
 	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);

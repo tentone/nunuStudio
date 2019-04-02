@@ -92,10 +92,17 @@ DotScreenPass.prototype.render = function(renderer, writeBuffer, readBuffer, del
 
 	if(this.clear === true)
 	{
-		renderer.clear();
+		renderer.autoClear = true;
+		renderer.autoClearColor = true;
+		renderer.autoClearDepth = true;
+		renderer.autoClearStencil = true;
+	}
+	else
+	{
+		renderer.autoClear = false;
 	}
 
-	renderer.setRenderTarget(this.renderToScreen ? undefined : writeBuffer);
+	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
 	renderer.render(this.scene, this.camera);
 };
 

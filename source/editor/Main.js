@@ -86,9 +86,9 @@ include("source/core/postprocessing/RendererState.js");
 include("source/core/postprocessing/Pass.js");
 include("source/core/postprocessing/ShaderPass.js");
 include("source/core/postprocessing/EffectComposer.js");
+include("source/core/postprocessing/RenderPass.js");
 
 include("source/core/postprocessing/pass/antialiasing/FXAAPass.js");
-include("source/core/postprocessing/pass/RenderPass.js");
 include("source/core/postprocessing/pass/UnrealBloomPass.js");
 include("source/core/postprocessing/pass/BloomPass.js");
 include("source/core/postprocessing/pass/SSAONOHPass.js");

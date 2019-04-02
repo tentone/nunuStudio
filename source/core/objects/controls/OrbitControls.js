@@ -240,6 +240,8 @@ OrbitControls.prototype.update = function(delta)
 		}
 	}
 
+	var up = true;
+	
 	if(this.movementEnabled && this.mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection(this.tempVector);

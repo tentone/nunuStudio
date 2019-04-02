@@ -1,7 +1,5 @@
 "use strict";
 
-//TODO <NOT USED>
-
 /**
  * Renderer state can be used to store and restore a renderer state between postprocessing passes.
  *

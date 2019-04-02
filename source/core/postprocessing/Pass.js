@@ -30,7 +30,7 @@ function Pass()
 	this.needsSwap = true;
 
 	/**
-	 * If set to true, the pass clears its buffer before rendering.
+	 * If set to true, the pass clears its target buffer before rendering.
 	 *
 	 * @property clear
 	 * @type {Boolean}
@@ -174,10 +174,10 @@ Pass.prototype.toJSON = function(meta)
 	data.uuid = this.uuid;
 	data.type = this.type;
 
+	data.clear = this.clear;
 	data.enabled = this.enabled;
 	data.needsSwap = this.needsSwap;
 	data.renderToScreen = this.renderToScreen;
-	data.clear = this.clear;
 	data.copyToScreen = this.copyToScreen;
 
 	return data;

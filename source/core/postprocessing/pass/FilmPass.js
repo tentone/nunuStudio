@@ -90,16 +90,24 @@ FilmPass.prototype = Object.create(Pass.prototype);
 
 FilmPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	this.uniforms["tDiffuse"].value = readBuffer.texture;
 	this.uniforms["time"].value += delta;
+	this.uniforms["tDiffuse"].value = readBuffer.texture;
+
 	this.quad.material = this.material;
 
 	if(this.clear === true)
 	{
-		renderer.clear();
+		renderer.autoClear = true;
+		renderer.autoClearColor = true;
+		renderer.autoClearDepth = true;
+		renderer.autoClearStencil = true;
+	}
+	else
+	{
+		renderer.autoClear = false;
 	}
 
-	renderer.setRenderTarget(this.renderToScreen ? undefined : writeBuffer);
+	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
 	renderer.render(this.scene, this.camera);
 };
 
