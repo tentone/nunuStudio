@@ -571,15 +571,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\postprocessing\\pass\\RenderPass.js": {
-            "name": "..\\source\\core\\postprocessing\\pass\\RenderPass.js",
-            "modules": {},
-            "classes": {
-                "RenderPass": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js": {
             "name": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
             "modules": {},
@@ -648,6 +639,15 @@
             "modules": {},
             "classes": {
                 "Pass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\postprocessing\\RenderPass.js": {
+            "name": "..\\source\\core\\postprocessing\\RenderPass.js",
+            "modules": {},
+            "classes": {
+                "RenderPass": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1325,7 +1325,6 @@
                 "DotScreenPass": 1,
                 "FilmPass": 1,
                 "HueSaturationPass": 1,
-                "RenderPass": 1,
                 "SSAONOHPass": 1,
                 "SSAOPass": 1,
                 "SobelPass": 1,
@@ -1334,6 +1333,7 @@
                 "SSAOShader": 1,
                 "EffectComposer": 1,
                 "Pass": 1,
+                "RenderPass": 1,
                 "RendererState": 1,
                 "ShaderPass": 1,
                 "CSS3DObject": 1,
@@ -2853,21 +2853,6 @@
                 }
             ]
         },
-        "RenderPass": {
-            "name": "RenderPass",
-            "shortname": "RenderPass",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Postprocessing",
-            "namespace": "",
-            "file": "..\\source\\core\\postprocessing\\pass\\RenderPass.js",
-            "line": 3,
-            "description": "Render pass is used to render the scene the same way as if were using the renderer directly.",
-            "extends": "{Pass}"
-        },
         "SSAONOHPass": {
             "name": "SSAONOHPass",
             "shortname": "SSAONOHPass",
@@ -3001,6 +2986,21 @@
             "line": 3,
             "description": "A render Pass is used to render something in the graphics pipeline.\n\nCan be used to render a scene, apply post processing effects, merge buffers,  etc."
         },
+        "RenderPass": {
+            "name": "RenderPass",
+            "shortname": "RenderPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\postprocessing\\RenderPass.js",
+            "line": 3,
+            "description": "Render pass is used to render the scene the same way as if were using the renderer directly.",
+            "extends": "{Pass}"
+        },
         "RendererState": {
             "name": "RendererState",
             "shortname": "RendererState",
@@ -3012,7 +3012,7 @@
             "module": "Postprocessing",
             "namespace": "",
             "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 5,
+            "line": 3,
             "description": "Renderer state can be used to store and restore a renderer state between postprocessing passes.\n\nIt stores the clean configurations of the renderer."
         },
         "ShaderPass": {
@@ -8753,7 +8753,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 299,
+            "line": 301,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",
@@ -11887,7 +11887,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 145,
+            "line": 151,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12358,7 +12358,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 311,
+            "line": 318,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12625,7 +12625,7 @@
         {
             "file": "..\\source\\core\\postprocessing\\Pass.js",
             "line": 32,
-            "description": "If set to true, the pass clears its buffer before rendering.",
+            "description": "If set to true, the pass clears its target buffer before rendering.",
             "itemtype": "property",
             "name": "clear",
             "type": "{Boolean}",
@@ -12813,7 +12813,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 23,
+            "line": 21,
             "description": "Store the renderer state.",
             "itemtype": "method",
             "name": "backup",
@@ -12829,7 +12829,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 40,
+            "line": 38,
             "description": "Restore the renderer state.",
             "itemtype": "method",
             "name": "restore",

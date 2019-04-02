@@ -5510,7 +5510,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       g = 0;
       for (r = h.length; g < r; g++) {
-        k = h[g], e.push(k.x, k.y, 0), c.push(0, 0, 1), d.push(k.x, k.y);
+        k = h[g], e.push(k.x, k.y, 0), d.push(0, 0, 1), c.push(k.x, k.y);
       }
       g = 0;
       for (r = F.length; g < r; g++) {
@@ -5521,7 +5521,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.type = "ShapeBufferGeometry";
     this.parameters = {shapes:g, curveSegments:a};
     a = a || 12;
-    var b = [], e = [], c = [], d = [], l = 0, f = 0;
+    var b = [], e = [], d = [], c = [], l = 0, f = 0;
     if (!1 === Array.isArray(g)) {
       r(g);
     } else {
@@ -5531,8 +5531,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     this.setIndex(b);
     this.addAttribute("position", new N(e, 3));
-    this.addAttribute("normal", new N(c, 3));
-    this.addAttribute("uv", new N(d, 2));
+    this.addAttribute("normal", new N(d, 3));
+    this.addAttribute("uv", new N(c, 2));
   }
   function Ff(g, a) {
     a.shapes = [];
@@ -5551,20 +5551,20 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.parameters = {thresholdAngle:a};
     var r = [];
     a = Math.cos(ia.DEG2RAD * (void 0 !== a ? a : 1));
-    var b = [0, 0], e = {}, c = ["a", "b", "c"];
+    var b = [0, 0], e = {}, d = ["a", "b", "c"];
     if (g.isBufferGeometry) {
-      var d = new H;
-      d.fromBufferGeometry(g);
+      var c = new H;
+      c.fromBufferGeometry(g);
     } else {
-      d = g.clone();
+      c = g.clone();
     }
-    d.mergeVertices();
-    d.computeFaceNormals();
-    g = d.vertices;
-    d = d.faces;
-    for (var l = 0, f = d.length; l < f; l++) {
-      for (var h = d[l], p = 0; 3 > p; p++) {
-        var k = h[c[p]], m = h[c[(p + 1) % 3]];
+    c.mergeVertices();
+    c.computeFaceNormals();
+    g = c.vertices;
+    c = c.faces;
+    for (var l = 0, f = c.length; l < f; l++) {
+      for (var h = c[l], p = 0; 3 > p; p++) {
+        var k = h[d[p]], m = h[d[(p + 1) % 3]];
         b[0] = Math.min(k, m);
         b[1] = Math.max(k, m);
         k = b[0] + "," + b[1];
@@ -5572,17 +5572,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
     }
     for (k in e) {
-      if (b = e[k], void 0 === b.face2 || d[b.face1].normal.dot(d[b.face2].normal) <= a) {
-        c = g[b.index1], r.push(c.x, c.y, c.z), c = g[b.index2], r.push(c.x, c.y, c.z);
+      if (b = e[k], void 0 === b.face2 || c[b.face1].normal.dot(c[b.face2].normal) <= a) {
+        d = g[b.index1], r.push(d.x, d.y, d.z), d = g[b.index2], r.push(d.x, d.y, d.z);
       }
     }
     this.addAttribute("position", new N(r, 3));
   }
-  function Yb(g, a, b, e, c, d, l, f) {
+  function Yb(g, a, b, e, d, c, l, f) {
     H.call(this);
     this.type = "CylinderGeometry";
-    this.parameters = {radiusTop:g, radiusBottom:a, height:b, radialSegments:e, heightSegments:c, openEnded:d, thetaStart:l, thetaLength:f};
-    this.fromBufferGeometry(new wb(g, a, b, e, c, d, l, f));
+    this.parameters = {radiusTop:g, radiusBottom:a, height:b, radialSegments:e, heightSegments:d, openEnded:c, thetaStart:l, thetaLength:f};
+    this.fromBufferGeometry(new wb(g, a, b, e, d, c, l, f));
     this.mergeVertices();
   }
   function wb(g, a, b, e, c, l, f, h) {
@@ -6897,21 +6897,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
   }});
   var ia = {DEG2RAD:Math.PI / 180, RAD2DEG:180 / Math.PI, generateUUID:function() {
-    for (var g = [], a = 0; 256 > a; a++) {
-      g[a] = (16 > a ? "0" : "") + a.toString(16);
+    for (var a = [], b = 0; 256 > b; b++) {
+      a[b] = (16 > b ? "0" : "") + b.toString(16);
     }
     return function() {
-      var a = 4294967295 * Math.random() | 0, b = 4294967295 * Math.random() | 0, r = 4294967295 * Math.random() | 0, e = 4294967295 * Math.random() | 0;
-      return (g[a & 255] + g[a >> 8 & 255] + g[a >> 16 & 255] + g[a >> 24 & 255] + "-" + g[b & 255] + g[b >> 8 & 255] + "-" + g[b >> 16 & 15 | 64] + g[b >> 24 & 255] + "-" + g[r & 63 | 128] + g[r >> 8 & 255] + "-" + g[r >> 16 & 255] + g[r >> 24 & 255] + g[e & 255] + g[e >> 8 & 255] + g[e >> 16 & 255] + g[e >> 24 & 255]).toUpperCase();
+      var g = 4294967295 * Math.random() | 0, b = 4294967295 * Math.random() | 0, r = 4294967295 * Math.random() | 0, e = 4294967295 * Math.random() | 0;
+      return (a[g & 255] + a[g >> 8 & 255] + a[g >> 16 & 255] + a[g >> 24 & 255] + "-" + a[b & 255] + a[b >> 8 & 255] + "-" + a[b >> 16 & 15 | 64] + a[b >> 24 & 255] + "-" + a[r & 63 | 128] + a[r >> 8 & 255] + "-" + a[r >> 16 & 255] + a[r >> 24 & 255] + a[e & 255] + a[e >> 8 & 255] + a[e >> 16 & 255] + a[e >> 24 & 255]).toUpperCase();
     };
-  }(), clamp:function(g, a, b) {
-    return Math.max(a, Math.min(b, g));
-  }, euclideanModulo:function(g, a) {
-    return (g % a + a) % a;
-  }, mapLinear:function(g, a, b, e, c) {
-    return e + (g - a) * (c - e) / (b - a);
-  }, lerp:function(g, a, b) {
-    return (1 - b) * g + b * a;
+  }(), clamp:function(a, b, e) {
+    return Math.max(b, Math.min(e, a));
+  }, euclideanModulo:function(a, b) {
+    return (a % b + b) % b;
+  }, mapLinear:function(a, b, e, c, d) {
+    return c + (a - b) * (d - c) / (e - b);
+  }, lerp:function(a, b, e) {
+    return (1 - e) * a + e * b;
   }, smoothstep:function(a, b, e) {
     if (a <= b) {
       return 0;
@@ -14276,30 +14276,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.crossOrigin = a;
     return this;
   }, parse:function(a, b) {
-    var g = this.parseShape(a.shapes);
-    g = this.parseGeometries(a.geometries, g);
-    var e = this.parseImages(a.images, function() {
+    var e = this.parseShape(a.shapes);
+    e = this.parseGeometries(a.geometries, e);
+    var g = this.parseImages(a.images, function() {
       void 0 !== b && b(c);
     });
-    e = this.parseTextures(a.textures, e);
-    e = this.parseMaterials(a.materials, e);
-    var c = this.parseObject(a.object, g, e);
+    g = this.parseTextures(a.textures, g);
+    g = this.parseMaterials(a.materials, g);
+    var c = this.parseObject(a.object, e, g);
     a.animations && (c.animations = this.parseAnimations(a.animations));
     void 0 !== a.images && 0 !== a.images.length || void 0 === b || b(c);
     return c;
   }, parseShape:function(a) {
     var b = {};
     if (void 0 !== a) {
-      for (var g = 0, e = a.length; g < e; g++) {
-        var c = (new Mb).fromJSON(a[g]);
+      for (var e = 0, g = a.length; e < g; e++) {
+        var c = (new Mb).fromJSON(a[e]);
         b[c.uuid] = c;
       }
     }
     return b;
   }, parseGeometries:function(a, b) {
-    var g = {};
+    var e = {};
     if (void 0 !== a) {
-      for (var e = new Ee, c = 0, d = a.length; c < d; c++) {
+      for (var g = new Ee, c = 0, d = a.length; c < d; c++) {
         var l = a[c];
         switch(l.type) {
           case "PlaneGeometry":
@@ -14382,7 +14382,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             f = new Ha[l.type](f, l.options);
             break;
           case "BufferGeometry":
-            f = e.parse(l);
+            f = g.parse(l);
             break;
           case "Geometry":
             "THREE" in window && "LegacyJSONLoader" in THREE ? f = (new THREE.LegacyJSONLoader).parse(l, this.resourcePath).geometry : console.error('THREE.ObjectLoader: You have to import LegacyJSONLoader in order load geometry data of type "Geometry".');
@@ -14394,12 +14394,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         f.uuid = l.uuid;
         void 0 !== l.name && (f.name = l.name);
         !0 === f.isBufferGeometry && void 0 !== l.userData && (f.userData = l.userData);
-        g[l.uuid] = f;
+        e[l.uuid] = f;
       }
     }
-    return g;
+    return e;
   }, parseMaterials:function(a, b) {
-    var g = {}, e = {};
+    var e = {}, g = {};
     if (void 0 !== a) {
       var c = new he;
       c.setTextures(b);
@@ -14409,34 +14409,34 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         if ("MultiMaterial" === l.type) {
           for (var f = [], h = 0; h < l.materials.length; h++) {
             var p = l.materials[h];
-            void 0 === g[p.uuid] && (g[p.uuid] = c.parse(p));
-            f.push(g[p.uuid]);
+            void 0 === e[p.uuid] && (e[p.uuid] = c.parse(p));
+            f.push(e[p.uuid]);
           }
-          e[l.uuid] = f;
+          g[l.uuid] = f;
         } else {
-          void 0 === g[l.uuid] && (g[l.uuid] = c.parse(l)), e[l.uuid] = g[l.uuid];
+          void 0 === e[l.uuid] && (e[l.uuid] = c.parse(l)), g[l.uuid] = e[l.uuid];
         }
       }
     }
-    return e;
+    return g;
   }, parseAnimations:function(a) {
-    for (var b = [], g = 0; g < a.length; g++) {
-      var e = a[g], c = Sa.parse(e);
-      void 0 !== e.uuid && (c.uuid = e.uuid);
+    for (var b = [], e = 0; e < a.length; e++) {
+      var g = a[e], c = Sa.parse(g);
+      void 0 !== g.uuid && (c.uuid = g.uuid);
       b.push(c);
     }
     return b;
   }, parseImages:function(a, b) {
-    function g(a) {
-      e.manager.itemStart(a);
+    function e(a) {
+      g.manager.itemStart(a);
       return d.load(a, function() {
-        e.manager.itemEnd(a);
+        g.manager.itemEnd(a);
       }, void 0, function() {
-        e.manager.itemError(a);
-        e.manager.itemEnd(a);
+        g.manager.itemError(a);
+        g.manager.itemEnd(a);
       });
     }
-    var e = this, c = {};
+    var g = this, c = {};
     if (void 0 !== a && 0 < a.length) {
       b = new Ae(b);
       var d = new vd(b);
@@ -14448,11 +14448,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           c[f.uuid] = [];
           for (var p = 0, k = h.length; p < k; p++) {
             var m = h[p];
-            m = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(m) ? m : e.resourcePath + m;
-            c[f.uuid].push(g(m));
+            m = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(m) ? m : g.resourcePath + m;
+            c[f.uuid].push(e(m));
           }
         } else {
-          m = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(f.url) ? f.url : e.resourcePath + f.url, c[f.uuid] = g(m);
+          m = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(f.url) ? f.url : g.resourcePath + f.url, c[f.uuid] = e(m);
         }
       }
     }
@@ -35860,10 +35860,10 @@ var __extends = this && this.__extends || function(a, c) {
       if (void 0 === this.points) {
         return [];
       }
-      for (var b = [], c = [], d = 0; d < this.points.length; d += 1) {
-        var f = this.points[d];
-        c.push(f);
-        f.lastPointOfContour && (b.push(c), c = []);
+      for (var b = [], c = [], e = 0; e < this.points.length; e += 1) {
+        var d = this.points[e];
+        c.push(d);
+        d.lastPointOfContour && (b.push(c), c = []);
       }
       return h.argument(0 === c.length, "There are still points left in the current contour."), b;
     };
@@ -39838,10 +39838,10 @@ Pass.prototype.toJSON = function(a) {
   a = {};
   a.uuid = this.uuid;
   a.type = this.type;
+  a.clear = this.clear;
   a.enabled = this.enabled;
   a.needsSwap = this.needsSwap;
   a.renderToScreen = this.renderToScreen;
-  a.clear = this.clear;
   a.copyToScreen = this.copyToScreen;
   return a;
 };
@@ -39850,14 +39850,14 @@ function ShaderPass(a, c) {
   Pass.call(this);
   this.type = "Shader";
   this.textureID = void 0 !== c ? c : "tDiffuse";
-  a instanceof THREE.ShaderMaterial ? (this.uniforms = a.uniforms, this.material = a) : a && (this.uniforms = THREE.UniformsUtils.clone(a.uniforms), this.material = new THREE.ShaderMaterial({defines:a.defines || {}, uniforms:this.uniforms, vertexShader:a.vertexShader, fragmentShader:a.fragmentShader}));
+  a instanceof THREE.ShaderMaterial ? (this.uniforms = a.uniforms, this.material = a) : a && (this.uniforms = THREE.UniformsUtils.clone(a.uniforms), this.material = new THREE.ShaderMaterial({defines:Object.assign({}, a.defines), uniforms:this.uniforms, vertexShader:a.vertexShader, fragmentShader:a.fragmentShader}));
   this.createQuadScene();
 }
 ShaderPass.prototype = Object.create(Pass.prototype);
 ShaderPass.prototype.render = function(a, c, k, b, f, d, h) {
   this.uniforms[this.textureID] && (this.uniforms[this.textureID].value = k.texture);
   this.quad.material = this.material;
-  !0 === this.clear && a.clear();
+  !0 === this.clear ? (a.autoClear = !0, a.autoClearColor = !0, a.autoClearDepth = !0, a.autoClearStencil = !0) : a.autoClear = !1;
   a.setRenderTarget(this.renderToScreen ? null : c);
   a.render(this.scene, this.camera);
 };
@@ -39986,6 +39986,18 @@ EffectComposer.fromJSON = function(a) {
   return c;
 };
 "use strict";
+function RenderPass() {
+  Pass.call(this);
+  this.type = "Render";
+  this.clear = !0;
+}
+RenderPass.prototype = Object.create(Pass.prototype);
+RenderPass.prototype.render = function(a, c, k, b, f, d, h) {
+  !0 === this.clear ? (a.autoClear = !0, a.autoClearColor = !0, a.autoClearDepth = !0, a.autoClearStencil = !0) : a.autoClear = !1;
+  a.setRenderTarget(this.renderToScreen ? null : c);
+  a.render(d, h);
+};
+"use strict";
 function FXAAPass() {
   ShaderPass.call(this, THREE.FXAAShader);
   this.type = "FXAA";
@@ -39993,17 +40005,6 @@ function FXAAPass() {
 FXAAPass.prototype = Object.create(ShaderPass.prototype);
 FXAAPass.prototype.setSize = function(a, c) {
   this.uniforms.resolution.value.set(1 / a, 1 / c);
-};
-"use strict";
-function RenderPass() {
-  Pass.call(this);
-  this.type = "Render";
-}
-RenderPass.prototype = Object.create(Pass.prototype);
-RenderPass.prototype.render = function(a, c, k, b, f, d, h) {
-  !0 === this.clear && a.clear();
-  a.setRenderTarget(this.renderToScreen ? null : c);
-  a.render(d, h);
 };
 "use strict";
 function UnrealBloomPass(a, c, k) {
@@ -40124,7 +40125,7 @@ UnrealBloomPass.prototype.render = function(a, c, k, b, f, d, h) {
   this.quad.material = this.materialCopy;
   this.copyUniforms.tDiffuse.value = this.renderTargetsHorizontal[0].texture;
   f && a.context.enable(a.context.STENCIL_TEST);
-  !0 === this.clear && a.clear();
+  !0 === this.clear ? (a.autoClear = !0, a.autoClearColor = !0, a.autoClearDepth = !0, a.autoClearStencil = !0) : a.autoClear = !1;
   a.setRenderTarget(this.renderToScreen ? null : k);
   a.render(this.scene, this.camera);
   a.setClearColor(this.oldClearColor, this.oldClearAlpha);
@@ -40432,8 +40433,8 @@ BokehPass.prototype.render = function(a, c, k, b, f, d, h) {
   this.uniforms.nearClip.value = h.near;
   this.uniforms.farClip.value = h.far;
   this.uniforms.aspect.value = h.aspect;
-  !0 === this.clear && a.clear();
-  a.setRenderTarget(this.renderToScreen ? void 0 : c);
+  !0 === this.clear ? (a.autoClear = !0, a.autoClearColor = !0, a.autoClearDepth = !0, a.autoClearStencil = !0) : a.autoClear = !1;
+  a.setRenderTarget(this.renderToScreen ? null : c);
   a.render(this.scene, this.camera);
   d.overrideMaterial = null;
   a.setClearColor(this.oldClearColor);
@@ -40490,11 +40491,11 @@ function FilmPass(a, c, k, b) {
 }
 FilmPass.prototype = Object.create(Pass.prototype);
 FilmPass.prototype.render = function(a, c, k, b, f, d, h) {
-  this.uniforms.tDiffuse.value = k.texture;
   this.uniforms.time.value += b;
+  this.uniforms.tDiffuse.value = k.texture;
   this.quad.material = this.material;
-  !0 === this.clear && a.clear();
-  a.setRenderTarget(this.renderToScreen ? void 0 : c);
+  !0 === this.clear ? (a.autoClear = !0, a.autoClearColor = !0, a.autoClearDepth = !0, a.autoClearStencil = !0) : a.autoClear = !1;
+  a.setRenderTarget(this.renderToScreen ? null : c);
   a.render(this.scene, this.camera);
 };
 FilmPass.prototype.toJSON = function(a) {
@@ -40535,8 +40536,8 @@ DotScreenPass.prototype.render = function(a, c, k, b, f, d, h) {
   this.uniforms.tDiffuse.value = k.texture;
   this.uniforms.tSize.value.set(k.width, k.height);
   this.quad.material = this.material;
-  !0 === this.clear && a.clear();
-  a.setRenderTarget(this.renderToScreen ? void 0 : c);
+  !0 === this.clear ? (a.autoClear = !0, a.autoClearColor = !0, a.autoClearDepth = !0, a.autoClearStencil = !0) : a.autoClear = !1;
+  a.setRenderTarget(this.renderToScreen ? null : c);
   a.render(this.scene, this.camera);
 };
 DotScreenPass.prototype.toJSON = function(a) {
@@ -44421,14 +44422,14 @@ OrbitControls.prototype.update = function(a) {
     c.normalize();
     if (!0 === this.smooth) {
       var k = this.speed * this.mouse.delta.y * this.sensitivity * this.distance;
-      this.speedCenter.x += up ? -c.x * k : c.x * k;
-      this.speedCenter.z += up ? -c.z * k : c.z * k;
+      this.speedCenter.x += -c.x * k;
+      this.speedCenter.z += -c.z * k;
       c.applyAxisAngle(OrbitControls.UP, Math.PI / 2);
       k = this.speed * this.mouse.delta.x * this.sensitivity * this.distance;
       this.speedCenter.x -= c.x * k;
       this.speedCenter.z -= c.z * k;
     } else {
-      k = this.mouse.delta.y * this.sensitivity * this.distance, this.center.x += up ? -c.x * k : c.x * k, this.center.z += up ? -c.z * k : c.z * k, c.applyAxisAngle(OrbitControls.UP, Math.PI / 2), k = this.mouse.delta.x * this.sensitivity * this.distance, this.center.x -= c.x * k, this.center.z -= c.z * k;
+      k = this.mouse.delta.y * this.sensitivity * this.distance, this.center.x += -c.x * k, this.center.z += -c.z * k, c.applyAxisAngle(OrbitControls.UP, Math.PI / 2), k = this.mouse.delta.x * this.sensitivity * this.distance, this.center.x -= c.x * k, this.center.z -= c.z * k;
     }
     c = !0;
   }
