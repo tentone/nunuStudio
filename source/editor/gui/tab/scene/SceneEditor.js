@@ -76,8 +76,8 @@ function SceneEditor(parent, closeable, container, index)
 	this.stats = new Stats();
 	this.stats.dom.style.position = "absolute";
 	this.stats.dom.style.display = "none";
-	this.stats.dom.style.left = "0px";
-	this.stats.dom.style.top = "0px";
+	this.stats.dom.style.left = "45px";
+	this.stats.dom.style.top = "5px";
 	this.stats.dom.style.zIndex = "0";
 	this.element.appendChild(this.stats.dom);
 
