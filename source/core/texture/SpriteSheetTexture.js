@@ -188,9 +188,14 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		self.needsUpdate = true;
 	}
 	
+	/**
+	 * Indicates the current frame of the animation.
+	 *
+	 * @property currentFrame
+	 * @type {Number}
+	 */
 	this.currentFrame = 0;
 
-	//Update loop
 	function update()
 	{
 		self.currentFrame++;
@@ -209,6 +214,9 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		}
 	};
 	update();
+
+	//TODO REMOVE THIS TEST CODE
+	console.log(this);
 }
 
 SpriteSheetTexture.prototype = Object.create(THREE.Texture.prototype);
