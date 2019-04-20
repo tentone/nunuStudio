@@ -67,16 +67,16 @@
 
 ## Libraries
 - nunuStudio is built on top of a number of open source projects
-  - NWJS ([nwjs.io]())
-  - three.js ([github.com/mrdoob/three.js]())
-  - Cannon.JS ([schteppe.github.io/cannon.js]())
-  - opentype ([opentype.js.org]())
-  - SPE ([github.com/squarefeet/ShaderParticleEngine]())
-  - JSColor ([jscolor.com]())
-  - CodeMirror ([codemirror.net]())
-  - LeapJS ([github.com/leapmotion/leapjs]())
-  - JSHint ([jshint.com]())
-  - YUIDocs ([yui.github.io/yuidoc]())
+  - NWJS ([nwjs.io](https://nwjs.io))
+  - three.js ([github.com/mrdoob/three.js](https://github.com/mrdoob/three.js))
+  - Cannon.JS ([schteppe.github.io/cannon.js](https://schteppe.github.io/cannon.js))
+  - opentype ([opentype.js.org](https://opentype.js.org))
+  - SPE ([github.com/squarefeet/ShaderParticleEngine](https://github.com/squarefeet/ShaderParticleEngine))
+  - JSColor ([jscolor.com](http://jscolor.com))
+  - CodeMirror ([codemirror.net](https://codemirror.net))
+  - LeapJS ([github.com/leapmotion/leapjs](https://github.com/leapmotion/leapjs))
+  - JSHint ([jshint.com](https://jshint.com))
+  - YUIDocs ([yui.github.io/yuidoc](https://yui.github.io/yuidoc))
 
 
 
