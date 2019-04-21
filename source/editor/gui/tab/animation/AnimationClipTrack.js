@@ -40,7 +40,7 @@ function AnimationClipTrack(editor, animation)
 	this.timeline.style.overflowY = "hidden";
 	this.timeline.style.position = "relative";
 	this.timeline.style.width = "100%";
-	this.timeline.style.height = height + "px";
+	this.timeline.style.height = (height + 1) + "px";
 	this.editor.tracks.element.appendChild(this.timeline);
 
 	/**
@@ -51,7 +51,7 @@ function AnimationClipTrack(editor, animation)
 	 */
 	this.timegrid = document.createElement("canvas");
 	this.timegrid.width = width + 1;
-	this.timegrid.height = height;
+	this.timegrid.height = height + 1;
 	this.timeline.appendChild(this.timegrid);
 
 	var context = this.timegrid.getContext("2d");
