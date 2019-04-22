@@ -54,7 +54,14 @@ function SceneEditor(parent, closeable, container, index)
 	 * @attribute raycaster
 	 * @type {THREE.Raycaster}
 	 */
-	this.raycaster = new THREE.Raycaster(); 
+	this.raycaster = new THREE.Raycaster();
+
+	/**
+	 * Normalized mouse coordinates for raycasting.
+	 *
+	 * @attribute normalized
+	 * @type {THREE.Vector2}
+	 */
 	this.normalized = new THREE.Vector2();
 
 	/**
@@ -1014,6 +1021,8 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 	this.updateRaycasterFromMouse();
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
+	
+	console.log("nunuStudio: intersects ", intersects);
 
 	if(intersects.length > 0)
 	{	
