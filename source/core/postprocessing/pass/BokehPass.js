@@ -46,11 +46,6 @@ function BokehPass(focus, aperture, maxblur)
 	this.createQuadScene();
 	this.quad.material = this.materialBokeh;
 
-	//Backup clear color and alpha
-	this.oldClearColor = new THREE.Color();
-	this.oldClearAlpha = 1;
-	this.oldAutoClear = false;
-
 	//Setters and getters for uniforms
 	var self = this;
 	Object.defineProperties(this,
@@ -101,11 +96,6 @@ BokehPass.prototype = Object.create(Pass.prototype);
 
 BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Backup renderer configuration
-	this.oldClearColor.copy(renderer.getClearColor());
-	this.oldClearAlpha = renderer.getClearAlpha();
-	this.oldAutoClear = renderer.autoClear;
-
 	//Render depth into texture
 	scene.overrideMaterial = this.materialDepth;
 
@@ -135,11 +125,8 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
 	renderer.render(this.scene, this.camera);
 
-	//Restore scene and renderer
+	//Restore scene
 	scene.overrideMaterial = null;
-	renderer.setClearColor(this.oldClearColor);
-	renderer.setClearAlpha(this.oldClearAlpha);
-	renderer.autoClear = this.oldAutoClear;
 };
 
 BokehPass.prototype.setSize = function(width, height)

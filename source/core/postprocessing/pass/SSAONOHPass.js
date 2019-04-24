@@ -111,10 +111,7 @@ function SSAONOHPass()
 		blendEquationAlpha: THREE.AddEquation
 	});
 
-	//Original clean color
-	this.originalClearColor = new THREE.Color();
-
-	this._kernelSize = 0;
+	var kernelSize = 0;
 	
 	var self = this;
 
@@ -164,10 +161,11 @@ function SSAONOHPass()
 		 */
 		kernelSize:
 		{
-			get: function(){return self._kernelSize;},
+			get: function(){return kernelSize;},
 			set: function(value)
 			{
-				self._kernelSize = value;
+				kernelSize = value;
+				
 				self.generateSampleKernel();
 				self.generateRandomKernelRotations();
 				self.ssaoMaterial.uniforms["tNoise"].value = self.noiseTexture;
@@ -250,11 +248,6 @@ SSAONOHPass.prototype.generateRandomKernelRotations = function()
  */
 SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Backup renderer state
-	this.originalClearColor.copy(renderer.getClearColor());
-	var originalClearAlpha = renderer.getClearAlpha();
-	var originalAutoClear = renderer.autoClear;
-
 	//Render normals
 	scene.overrideMaterial = this.normalMaterial;
 	renderer.autoClear = false;
@@ -266,11 +259,6 @@ SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta
 	renderer.render(scene, camera);
 
 	scene.overrideMaterial = null;
-
-	//Restore original state
-	renderer.autoClear = originalAutoClear;
-	renderer.setClearColor(this.originalClearColor);
-	renderer.setClearAlpha(originalClearAlpha);
 
 	//Render SSAO
 	this.ssaoMaterial.uniforms["tDepth"].value = this.depthTexture;
@@ -325,7 +313,8 @@ SSAONOHPass.prototype.renderPass = function(renderer, passMaterial, renderTarget
 	{
 		renderer.clear(true, true, true);
 	}
-	
+
+	renderer.autoClear = false;
 	renderer.setRenderTarget(renderTarget);
 	renderer.render(this.scene, this.camera);
 };

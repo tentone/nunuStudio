@@ -53,7 +53,14 @@ function EffectComposer()
 	 */
 	this.copyPass = new ShaderPass(THREE.CopyShader);
 
-
+	/**
+	 * Renderer state configuration, stored the clear configuration of the renderer.
+	 *
+	 * Used to store and restore states.
+	 *
+	 * @property rendererState
+	 * @type {RendererState}
+	 */
 	this.rendererState = new RendererState();
 }
 

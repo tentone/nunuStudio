@@ -99,11 +99,6 @@ function UnrealBloomPass(strength, radius, threshold)
 		transparent: true
 	});
 
-	//Renderer properties backup
-	this.oldClearColor = new THREE.Color();
-	this.oldClearAlpha = 1;
-	this.oldAutoClear = false;
-
 	//Quad scene
 	this.createQuadScene();
 	this.basic = new THREE.MeshBasicMaterial();
@@ -226,11 +221,6 @@ UnrealBloomPass.prototype.setSize = function(width, height)
 
 UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Backup renderer settings
-	this.oldClearColor.copy(renderer.getClearColor());
-	this.oldClearAlpha = renderer.getClearAlpha();
-	this.oldAutoClear = renderer.autoClear;
-
 	//Configure renderer
 	renderer.autoClear = false;
 	renderer.setClearColor(new THREE.Color(0, 0, 0), 0);
@@ -309,10 +299,6 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 
 	renderer.setRenderTarget(this.renderToScreen ? null : readBuffer);
 	renderer.render(this.scene, this.camera);
-
-	//Restore renderer settings
-	renderer.setClearColor(this.oldClearColor, this.oldClearAlpha);
-	renderer.autoClear = this.oldAutoClear;
 };
 
 /**
