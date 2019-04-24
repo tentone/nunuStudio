@@ -763,23 +763,17 @@ SceneEditor.prototype.resetCanvas = function()
 	{
 		event.preventDefault();
 
-		//Canvas element
-		//var canvas = self.element;
-		//var rect = canvas.getBoundingClientRect();
-
-		//Update raycaster direction
-		//var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-		//self.updateRaycaster(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
-		//Get object from drag buffer
-
 		var uuid = event.dataTransfer.getData("uuid");
 		var draggedObject = DragBuffer.get(uuid);
 
-		//Check intersected objects
-		self.updateRaycasterFromMouse();
-		var intersections = self.raycaster.intersectObjects(self.scene.children, true);
+		var canvas = self.element;
+		var rect = canvas.getBoundingClientRect();
 
-		console.log("nunuStudio: Editor drag event.", event, intersections);
+		var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
+		var normalized = new THREE.Vector2(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
+		self.raycaster.setFromCamera(normalized, self.camera);
+
+		var intersections = self.raycaster.intersectObjects(self.scene.children, true);
 
 		//Auxiliar method to copy details from a object to a destination
 		function copyDetails(destination, object)
@@ -1021,8 +1015,6 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 	this.updateRaycasterFromMouse();
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
-	
-	console.log("nunuStudio: intersects ", intersects);
 
 	if(intersects.length > 0)
 	{	
