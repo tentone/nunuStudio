@@ -101,6 +101,7 @@ include("source/core/postprocessing/pass/SobelPass.js");
 include("source/core/postprocessing/pass/ColorifyPass.js");
 include("source/core/postprocessing/pass/TechnicolorPass.js");
 include("source/core/postprocessing/pass/HueSaturationPass.js");
+include("source/core/postprocessing/pass/AdaptiveToneMappingPass.js");
 
 include("source/core/postprocessing/shaders/SSAOShader.js");
 
@@ -417,6 +418,7 @@ include("source/editor/gui/tab/camera/postprocessing/DotScreenPassNode.js");
 include("source/editor/gui/tab/camera/postprocessing/FilmPassNode.js");
 include("source/editor/gui/tab/camera/postprocessing/ColorifyPassNode.js");
 include("source/editor/gui/tab/camera/postprocessing/HueSaturationPassNode.js");
+include("source/editor/gui/tab/camera/postprocessing/AdaptiveToneMappingPassNode.js");
 
 include("source/editor/gui/tab/settings/SettingsTab.js");
 include("source/editor/gui/tab/settings/EditorSettingsTab.js");

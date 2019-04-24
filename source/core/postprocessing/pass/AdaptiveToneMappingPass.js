@@ -13,6 +13,7 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 {
 	THREE.Pass.call(this);
 
+	this.type = "AdaptiveToneMapping";
 	this.resolution = (resolution !== undefined) ? resolution : 256;
 	this.needsInit = true;
 	this.adaptive = adaptive !== undefined ? !! adaptive : true;

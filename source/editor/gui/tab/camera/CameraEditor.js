@@ -83,6 +83,7 @@ function CameraEditor(parent, closeable, container, index)
 	self.form.nextRow();
 	addRenderPassButton("SSAO", SSAOPass);
 	addRenderPassButton(Locale.copy, CopyPass);
+	addRenderPassButton("Adaptive Tone Mapping", AdaptiveToneMappingPass);
 	self.form.nextRow();
 
 	this.postNodes = new TableForm(this.form);
