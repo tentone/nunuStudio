@@ -290,12 +290,12 @@ SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta
 		//Copy SSAO result
 		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
 		this.copyMaterial.blending = THREE.NoBlending;
-		this.renderPass(renderer, this.copyMaterial, undefined , this.clear);
+		this.renderPass(renderer, this.copyMaterial, null , this.clear);
 
 		//Copy blur and blend it to output
 		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
 		this.copyMaterial.blending = THREE.CustomBlending;
-		this.renderPass(renderer, this.copyMaterial, undefined, false);
+		this.renderPass(renderer, this.copyMaterial, null, false);
 	}
 	//Output to writeBuffer
 	else
@@ -323,7 +323,7 @@ SSAONOHPass.prototype.renderPass = function(renderer, passMaterial, renderTarget
 
 	if(clear === true)
 	{
-		renderer.clear();
+		renderer.clear(true, true, true);
 	}
 	
 	renderer.setRenderTarget(renderTarget);

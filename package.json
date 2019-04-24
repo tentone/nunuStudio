@@ -53,7 +53,7 @@
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"ffmpegIntegration": false,
 		"packed": false,
-		"nwVersion": "0.36.2",
+		"nwVersion": "0.37.4",
 		"nwFlavor": "sdk",
 		"targets": [
 			"zip",

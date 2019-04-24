@@ -115,6 +115,7 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 
 	//Render shader
 	scene.overrideMaterial = null;
+	
 	ShaderPass.prototype.render.call(this, renderer, writeBuffer, readBuffer, delta, maskActive);
 };
 
