@@ -197,15 +197,15 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 		var pass = this.passes[i];
 
 		//Render pass if its enabled
-		if(pass.enabled === true)
+		if(pass.enabled)
 		{
 			pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
 
 			//If rendered to screen stop here
-			if(pass.renderToScreen === true)
+			if(pass.renderToScreen)
 			{
 				//Copy writeBuffer to screen
-				if(pass.copyToScreen === true)
+				if(pass.copyToScreen)
 				{
 					this.copyPass.renderToScreen = true;
 					this.copyPass.render(renderer, this.readBuffer, this.writeBuffer, delta);
@@ -215,9 +215,9 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 			}
 
 			//Swap read and write buffers
-			if(pass.needsSwap === true)
+			if(pass.needsSwap)
 			{
-				if(maskActive === true)
+				if(maskActive)
 				{
 					renderer.context.stencilFunc(renderer.context.NOTEQUAL, 1, 0xffffffff);
 					this.copyPass.renderToScreen = false;

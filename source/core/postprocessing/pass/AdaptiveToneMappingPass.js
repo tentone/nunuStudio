@@ -158,7 +158,7 @@ AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readB
 	this.quad.material = this.materialToneMap;
 	this.materialToneMap.uniforms.tDiffuse.value = readBuffer.texture;
 
-	if(this.clear === true)
+	if(this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;

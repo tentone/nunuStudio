@@ -14,6 +14,32 @@ function ConsoleTab(parent, closeable, container, index)
 	 */
 	this.filters = []; //["THREE"];
 
+	/**
+	 * Stores a pointer to the original console functions.
+	 *
+	 * Used to enable and disable the virtual console.
+	 *
+	 * @attribute handlers
+	 * @type {Object}
+	 */
+	this.handlers = 
+	{
+		log: window.console.log,
+		info: window.console.info,
+		warn: window.console.warn,
+		error: window.console.error,
+		clear: window.console.clear
+	};
+
+	/**
+	 * Indicates if the virtual console is enable or disable.
+	 *
+	 * @attribute enable
+	 * @type {Boolean} 
+	 */
+	this.enabled = true;
+
+
 	//Top bar
 	this.bar = new Division(this);
 	this.bar.element.style.top = "0px";
@@ -32,7 +58,29 @@ function ConsoleTab(parent, closeable, container, index)
 	});
 	menu.updateInterface();
 
-	//Console messages division
+	/**
+	 * Button to toggle the console.
+	 *
+	 * @property enableButton
+	 * @type {ButtonText}
+	 */
+	this.enableButton = new ButtonText(this.bar);
+	this.enableButton.setText(Locale.disable);
+	this.enableButton.size.set(100, 20);
+	this.enableButton.position.set(100, 0);
+	this.enableButton.setOnClick(function()
+	{
+		self.useConsole(!self.enabled);
+	});
+	this.enableButton.updateInterface();
+
+
+	/**
+	 * Console messages division
+	 *
+	 * @property console
+	 * @type {DOM}
+	 */
 	this.console = document.createElement("div");
 	this.console.style.position = "absolute";
 	this.console.style.overflow = "auto";
@@ -103,38 +151,49 @@ ConsoleTab.prototype = Object.create(TabElement.prototype);
  * Overrides the browser provided window.console methods and displays the logs in this tab.
  *
  * @method useConsole
+ * @param {Boolean} enabled
  */
-ConsoleTab.prototype.useConsole = function()
+ConsoleTab.prototype.useConsole = function(enabled)
 {
 	var self = this;
 
-	var log = window.console.log;
-	window.console.log = function()
-	{
-		self.log(arguments);
-		log.apply(null, arguments);
-	};
+	this.enabled = enabled;
+	this.enableButton.setText(this.enabled ? Locale.disable : Locale.enable);
 
-	var warn = window.console.warn;
-	window.console.warn = function()
-	{
-		self.warn(arguments);
-		warn.apply(null, arguments);
-	};
 
-	var error = window.console.error;
-	window.console.console = function()
+	if(this.enabled)
 	{
-		self.error(arguments);
-		error.apply(null, arguments);
-	};
+		window.console.log = function()
+		{
+			self.log(arguments);
+			self.handlers.log.apply(null, arguments);
+		};
 
-	var clear = window.console.clear;
-	window.console.clear = function()
+		window.console.warn = function()
+		{
+			self.warn(arguments);
+			self.handlers.warn.apply(null, arguments);
+		};
+
+		window.console.error = function()
+		{
+			self.error(arguments);
+			self.handlers.error.apply(null, arguments);
+		};
+
+		window.console.clear = function()
+		{
+			self.clear(arguments);
+			self.handlers.clear.apply(null, arguments);
+		};
+	}
+	else
 	{
-		self.clear(arguments);
-		clear.apply(null, arguments);
-	};
+		window.console.log = self.handlers.log;
+		window.console.warn = self.handlers.warn;
+		window.console.error = self.handlers.error;
+		window.console.clear = self.handlers.clear;
+	}
 };
 
 //Normal log messsage

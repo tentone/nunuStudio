@@ -165,7 +165,7 @@ function SSAONOHPass()
 			set: function(value)
 			{
 				kernelSize = value;
-				
+
 				self.generateSampleKernel();
 				self.generateRandomKernelRotations();
 				self.ssaoMaterial.uniforms["tNoise"].value = self.noiseTexture;
@@ -248,14 +248,15 @@ SSAONOHPass.prototype.generateRandomKernelRotations = function()
  */
 SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Render normals
-	scene.overrideMaterial = this.normalMaterial;
+	//Render configuration
 	renderer.autoClear = false;
 	renderer.setClearColor(0x7777ff);
 	renderer.setClearAlpha(1.0);
 
-	renderer.clear();
+	//Render normals
+	scene.overrideMaterial = this.normalMaterial;
 	renderer.setRenderTarget(this.normalRenderTarget);
+	renderer.clear(true, true, true);
 	renderer.render(scene, camera);
 
 	scene.overrideMaterial = null;
@@ -309,13 +310,14 @@ SSAONOHPass.prototype.renderPass = function(renderer, passMaterial, renderTarget
 {
 	this.quad.material = passMaterial;
 
-	if(clear === true)
+	renderer.autoClear = false;
+	renderer.setRenderTarget(renderTarget);
+
+	if(clear)
 	{
 		renderer.clear(true, true, true);
 	}
 
-	renderer.autoClear = false;
-	renderer.setRenderTarget(renderTarget);
 	renderer.render(this.scene, this.camera);
 };
 

@@ -10,7 +10,7 @@ var threejsURL = "https://rawgit.com/mrdoob/three.js/dev";
 var threejsPath = "../lib/three";
 
 downloadFolder(threejsPath, threejsURL + "/examples/js", true);
-download(threejsPath + "/three.min.js", threejsURL + "/build/three.min.js");
+download(threejsPath + "/three.js", threejsURL + "/build/three.js");
 
 var codemirrorURL = "https://rawgit.com/codemirror/CodeMirror/master";
 var codemirrorPath = "../lib/codemirror";

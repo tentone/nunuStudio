@@ -8,7 +8,7 @@
 function Editor(){}
 
 //Runtime
-include("lib/three/three.min.js");
+include("lib/three/three.js");
 
 include("lib/three/QuickHull.js");
 include("lib/three/SimplexNoise.js");

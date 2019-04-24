@@ -110,7 +110,7 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	this.uniforms["farClip"].value = camera.far;
 	this.uniforms["aspect"].value = camera.aspect;
 
-	if(this.clear === true)
+	if(this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;

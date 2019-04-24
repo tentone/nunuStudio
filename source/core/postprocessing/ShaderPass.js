@@ -45,18 +45,12 @@ ShaderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 
 	this.quad.material = this.material;
 
-	if(this.clear === true)
+	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
+
+	if(this.clear)
 	{
-		renderer.autoClear = true;
-		renderer.autoClearColor = true;
-		renderer.autoClearDepth = true;
-		renderer.autoClearStencil = true;
-	}
-	else
-	{
-		renderer.autoClear = false;
+		renderer.clear();
 	}
 
-	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
 	renderer.render(this.scene, this.camera);
 };

@@ -95,7 +95,7 @@ FilmPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 
 	this.quad.material = this.material;
 
-	if(this.clear === true)
+	if(this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;

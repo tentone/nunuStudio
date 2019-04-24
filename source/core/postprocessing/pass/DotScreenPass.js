@@ -90,7 +90,7 @@ DotScreenPass.prototype.render = function(renderer, writeBuffer, readBuffer, del
 
 	this.quad.material = this.material;
 
-	if(this.clear === true)
+	if(this.clear)
 	{
 		renderer.autoClear = true;
 		renderer.autoClearColor = true;

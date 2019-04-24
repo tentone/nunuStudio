@@ -221,7 +221,6 @@ UnrealBloomPass.prototype.setSize = function(width, height)
 
 UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Configure renderer
 	renderer.autoClear = false;
 	renderer.setClearColor(new THREE.Color(0, 0, 0), 0);
 	
@@ -230,11 +229,13 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 		renderer.context.disable(renderer.context.STENCIL_TEST);
 	}
 
-	//Render input to screen
+	//Clear screen
 	if(this.renderToScreen)
 	{
 		this.quad.material = this.basic;
 		this.basic.map = readBuffer.texture;
+
+		renderer.setRenderTarget(null);
 		renderer.clear();
 		renderer.render(this.scene, this.camera);
 	}
@@ -242,8 +243,8 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 	//Extract Bright Areas
 	this.highPassUniforms["tDiffuse"].value = readBuffer.texture;
 	this.quad.material = this.materialHighPassFilter;
-	renderer.clear();
 	renderer.setRenderTarget(this.renderTargetBright);
+	renderer.clear();
 	renderer.render(this.scene, this.camera);
 
 	//Blur All the mips progressively
@@ -255,15 +256,15 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 		this.separableBlurMaterials[i].uniforms["colorTexture"].value = inputRenderTarget.texture;
 		this.separableBlurMaterials[i].uniforms["direction"].value = UnrealBloomPass.BlurDirectionX;
 
-		renderer.clear();
 		renderer.setRenderTarget(this.renderTargetsHorizontal[i]);
+		renderer.clear();
 		renderer.render(this.scene, this.camera);
 
 		this.separableBlurMaterials[i].uniforms["colorTexture"].value = this.renderTargetsHorizontal[i].texture;
 		this.separableBlurMaterials[i].uniforms["direction"].value = UnrealBloomPass.BlurDirectionY;
 
-		renderer.clear();
 		renderer.setRenderTarget(this.renderTargetsVertical[i]);
+		renderer.clear();
 		renderer.render(this.scene, this.camera);
 
 		inputRenderTarget = this.renderTargetsVertical[i];
@@ -271,8 +272,6 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 
 	//Composite All the mips
 	this.quad.material = this.compositeMaterial;
-
-	renderer.clear();
 	renderer.setRenderTarget(this.renderTargetsHorizontal[0]);
 	renderer.render(this.scene, this.camera);
 
@@ -283,18 +282,6 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 	if(maskActive)
 	{
 		renderer.context.enable(renderer.context.STENCIL_TEST);
-	}
-
-	if(this.clear === true)
-	{
-		renderer.autoClear = true;
-		renderer.autoClearColor = true;
-		renderer.autoClearDepth = true;
-		renderer.autoClearStencil = true;
-	}
-	else
-	{
-		renderer.autoClear = false;
 	}
 
 	renderer.setRenderTarget(this.renderToScreen ? null : readBuffer);
