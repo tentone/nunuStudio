@@ -11,12 +11,15 @@
  */
 function AdaptiveToneMappingPass(adaptive, resolution)
 {
-	THREE.Pass.call(this);
+	Pass.call(this);
 
+	var self = this;
+	
 	this.type = "AdaptiveToneMapping";
-	this.resolution = (resolution !== undefined) ? resolution : 256;
 	this.needsInit = true;
-	this.adaptive = adaptive !== undefined ? !! adaptive : true;
+
+	this.resolution = resolution !== undefined ? resolution : 256;
+	this.adaptive = adaptive !== undefined ? adaptive : true;
 
 	this.luminanceRT = null;
 	this.previousLuminanceRT = null;
@@ -55,37 +58,37 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 			tau: {value: 1.0}
 		},
 		vertexShader:
-			"varying vec2 vUv;\n\
-			void main(){\n\
-			\n\
-				vUv = uv;\n\
-				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
-			\n\
-			}",
+		"varying vec2 vUv;\n\
+		void main(){\n\
+		\n\
+			vUv = uv;\n\
+			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\
+		\n\
+		}",
 		fragmentShader:
-			"varying vec2 vUv;\n\
+		"varying vec2 vUv;\n\
+		\n\
+		uniform sampler2D lastLum;\n\
+		uniform sampler2D currentLum;\n\
+		uniform float minLuminance;\n\
+		uniform float delta;\n\
+		uniform float tau;\n\
+		\n\
+		void main()\n\
+		{\n\
+			vec4 lastLum = texture2D(lastLum, vUv, MIP_LEVEL_1X1);\n\
+			vec4 currentLum = texture2D(currentLum, vUv, MIP_LEVEL_1X1);\n\
 			\n\
-			uniform sampler2D lastLum;\n\
-			uniform sampler2D currentLum;\n\
-			uniform float minLuminance;\n\
-			uniform float delta;\n\
-			uniform float tau;\n\
+			float fLastLum = max(minLuminance, lastLum.r);\n\
+			float fCurrentLum = max(minLuminance, currentLum.r);\n\
 			\n\
-			void main()\n\
-			{\n\
-				vec4 lastLum = texture2D(lastLum, vUv, MIP_LEVEL_1X1);\n\
-				vec4 currentLum = texture2D(currentLum, vUv, MIP_LEVEL_1X1);\n\
-				\n\
-				float fLastLum = max(minLuminance, lastLum.r);\n\
-				float fCurrentLum = max(minLuminance, currentLum.r);\n\
-				\n\
-				// The adaption seems to work better in extreme lighting differences if the input luminance is squared.\
-				fCurrentLum *= fCurrentLum;\n\
-				\n\
-				// Adapt the luminance using Pattanaik's technique\
-				float fAdaptedLum = fLastLum + (fCurrentLum - fLastLum) * (1.0 - exp(-delta * tau));\n\
-				gl_FragColor.r = fAdaptedLum;\n\
-			}",
+			// The adaption seems to work better in extreme lighting differences if the input luminance is squared.\
+			fCurrentLum *= fCurrentLum;\n\
+			\n\
+			// Adapt the luminance using Pattanaik's technique\
+			float fAdaptedLum = fLastLum + (fCurrentLum - fLastLum) * (1.0 - exp(-delta * tau));\n\
+			gl_FragColor.r = fAdaptedLum;\n\
+		}",
 	};
 
 	this.materialAdaptiveLum = new THREE.ShaderMaterial(
@@ -110,15 +113,42 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 		blending: THREE.NoBlending
 	});
 
-	this.camera = new THREE.OrthographicCamera(- 1, 1, 1, - 1, 0, 1);
+	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 	this.scene  = new THREE.Scene();
 
 	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
 	this.quad.frustumCulled = false;
 	this.scene.add(this.quad);
+
+	Object.defineProperties(this,
+	{
+		/**
+		 * Minimum luminance.
+		 *
+		 * @property minLuminance
+		 * @type {Number}
+		 */
+		minLuminance:
+		{
+			get: function(){return self.adaptLuminanceShader.uniforms["minLuminance"].value;},
+			set: function(value){self.adaptLuminanceShader.uniforms["minLuminance"].value = value;}
+		},
+
+		/**
+		 * Rate of luminance variation.
+		 *
+		 * @property tau
+		 * @type {Number}
+		 */
+		tau:
+		{
+			get: function(){return self.adaptLuminanceShader.uniforms["tau"].value;},
+			set: function(value){self.adaptLuminanceShader.uniforms["tau"].value = value;}
+		}
+	});
 };
 
-AdaptiveToneMappingPass.prototype = Object.create(THREE.Pass.prototype);
+AdaptiveToneMappingPass.prototype = Object.create(Pass.prototype);
 
 AdaptiveToneMappingPass.prototype.constructor = AdaptiveToneMappingPass;
 

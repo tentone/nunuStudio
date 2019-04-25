@@ -23,7 +23,7 @@ function SSAONOHPass()
 	Pass.call(this);
 
 	this.type = "SSAONOH";
-
+	
 	this.kernel = [];
 	this.noiseTexture = null;
 	this.createQuadScene();
@@ -95,6 +95,12 @@ function SSAONOHPass()
 	});
 	this.ssaoMaterial.uniforms["tNormal"].value = this.normalRenderTarget.texture;
 	
+	/**
+	 * Material used to copy data between buffers.
+	 *
+	 * @attribute copyMaterial
+	 * @type {THREE.ShaderMaterial}
+	 */
 	this.copyMaterial = new THREE.ShaderMaterial(
 	{
 		uniforms: THREE.UniformsUtils.clone(THREE.CopyShader.uniforms),
