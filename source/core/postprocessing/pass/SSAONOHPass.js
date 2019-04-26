@@ -117,7 +117,7 @@ function SSAONOHPass()
 		blendEquationAlpha: THREE.AddEquation
 	});
 
-	var kernelSize = 0;
+	this._kernelSize = 0;
 	
 	var self = this;
 
@@ -167,11 +167,10 @@ function SSAONOHPass()
 		 */
 		kernelSize:
 		{
-			get: function(){return kernelSize;},
+			get: function(){return self._kernelSize;},
 			set: function(value)
 			{
-				kernelSize = value;
-
+				self._kernelSize = value;
 				self.generateSampleKernel();
 				self.generateRandomKernelRotations();
 				self.ssaoMaterial.uniforms["tNoise"].value = self.noiseTexture;
@@ -370,6 +369,7 @@ SSAONOHPass.prototype.toJSON = function(meta)
 {
 	var data = Pass.prototype.toJSON.call(this, meta);
 	
+	data.kernelSize = this.kernelSize;
 	data.kernelRadius = this.kernelRadius;
 	data.minDistance = this.minDistance;
 	data.maxDistance = this.maxDistance;

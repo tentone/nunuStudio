@@ -365,6 +365,7 @@ EffectComposer.fromJSON = function(json)
 			pass.kernelRadius = data.kernelRadius;
 			pass.minDistance = data.minDistance;
 			pass.maxDistance = data.maxDistance;
+			pass.kernelSize = data.kernelSize;
 		}
 		else if(data.type === "SSAO")
 		{
