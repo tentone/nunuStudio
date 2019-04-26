@@ -11,7 +11,7 @@ function DotScreenPassNode(parent)
 	this.angle.size.set(60, 18);
 	this.angle.setOnChange(function()
 	{
-		self.pass.angle = self.angle.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "angle", self.angle.getValue()));
 	});
 	this.add(this.angle);
 	this.nextRow();
@@ -21,7 +21,7 @@ function DotScreenPassNode(parent)
 	this.scale.size.set(60, 18);
 	this.scale.setOnChange(function()
 	{
-		self.pass.scale = self.scale.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "scale", self.scale.getValue()));
 	});
 	this.add(this.scale);
 	this.nextRow();
@@ -34,7 +34,11 @@ function DotScreenPassNode(parent)
 	this.center.setOnChange(function()
 	{
 		var value = self.center.getValue();
-		self.pass.center.set(value.x, value.y);
+
+		var center = self.pass.center.clone();
+		center.set(value.x, value.y);
+
+		Editor.addAction(new ChangeAction(self.pass, "center", center));
 	});
 	this.add(this.center);
 	this.nextRow();

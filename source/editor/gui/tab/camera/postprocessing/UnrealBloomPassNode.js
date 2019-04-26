@@ -11,7 +11,7 @@ function UnrealBloomPassNode(parent)
 	this.strength.size.set(60, 18);
 	this.strength.setOnChange(function()
 	{
-		self.pass.strength = self.strength.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "strength", self.strength.getValue()));
 	});
 	this.add(this.strength);
 	this.nextRow();
@@ -21,7 +21,7 @@ function UnrealBloomPassNode(parent)
 	this.radius.size.set(60, 18);
 	this.radius.setOnChange(function()
 	{
-		self.pass.radius = self.radius.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "radius", self.radius.getValue()));
 	});
 	this.add(this.radius);
 	this.nextRow();
@@ -31,7 +31,7 @@ function UnrealBloomPassNode(parent)
 	this.threshold.size.set(60, 18);
 	this.threshold.setOnChange(function()
 	{
-		self.pass.threshold = self.threshold.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "threshold", self.threshold.getValue()));
 	});
 	this.add(this.threshold);
 	this.nextRow();
@@ -41,7 +41,7 @@ function UnrealBloomPassNode(parent)
 	this.smooth.size.set(60, 18);
 	this.smooth.setOnChange(function()
 	{
-		self.pass.smooth = self.smooth.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "smooth", self.smooth.getValue()));
 	});
 	this.add(this.smooth);
 	this.nextRow();

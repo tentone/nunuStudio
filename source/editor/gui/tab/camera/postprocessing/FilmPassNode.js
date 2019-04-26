@@ -11,7 +11,7 @@ function FilmPassNode(parent)
 	this.grayscale.size.set(18, 18);
 	this.grayscale.setOnChange(function()
 	{
-		self.pass.grayscale = self.grayscale.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "grayscale", self.grayscale.getValue()));
 	});
 	this.add(this.grayscale);
 	this.nextRow();
@@ -21,7 +21,7 @@ function FilmPassNode(parent)
 	this.noiseIntensity.size.set(60, 18);
 	this.noiseIntensity.setOnChange(function()
 	{
-		self.pass.noiseIntensity = self.noiseIntensity.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "noiseIntensity", self.noiseIntensity.getValue()));
 	});
 	this.add(this.noiseIntensity);
 	this.nextRow();
@@ -31,7 +31,7 @@ function FilmPassNode(parent)
 	this.scanlinesIntensity.size.set(60, 18);
 	this.scanlinesIntensity.setOnChange(function()
 	{
-		self.pass.scanlinesIntensity = self.scanlinesIntensity.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "scanlinesIntensity", self.scanlinesIntensity.getValue()));
 	});
 	this.add(this.scanlinesIntensity);
 	this.nextRow();
@@ -41,7 +41,7 @@ function FilmPassNode(parent)
 	this.scanlinesCount.size.set(60, 18);
 	this.scanlinesCount.setOnChange(function()
 	{
-		self.pass.scanlinesCount = self.scanlinesCount.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "scanlinesCount", self.scanlinesCount.getValue()));
 	});
 	this.add(this.scanlinesCount);
 	this.nextRow();

@@ -11,7 +11,7 @@ function SSAOPassNode(parent)
 	this.onlyAO.size.set(18, 18);
 	this.onlyAO.setOnChange(function()
 	{
-		self.pass.onlyAO = self.onlyAO.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "onlyAO", self.onlyAO.getValue()));
 	});
 	this.add(this.onlyAO);
 	this.nextRow();
@@ -21,7 +21,7 @@ function SSAOPassNode(parent)
 	this.radius.size.set(60, 18);
 	this.radius.setOnChange(function()
 	{
-		self.pass.radius = self.radius.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "radius", self.radius.getValue()));
 	});
 	this.add(this.radius);
 	this.nextRow();
@@ -31,7 +31,7 @@ function SSAOPassNode(parent)
 	this.aoClamp.size.set(60, 18);
 	this.aoClamp.setOnChange(function()
 	{
-		self.pass.aoClamp = self.aoClamp.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "aoClamp", self.aoClamp.getValue()));
 	});
 	this.add(this.aoClamp);
 	this.nextRow();
@@ -41,7 +41,7 @@ function SSAOPassNode(parent)
 	this.lumInfluence.size.set(60, 18);
 	this.lumInfluence.setOnChange(function()
 	{
-		self.pass.lumInfluence = self.lumInfluence.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "lumInfluence", self.lumInfluence.getValue()));
 	});
 	this.add(this.lumInfluence);
 	this.nextRow();

@@ -12,7 +12,7 @@ function SSAONOHPassNode(parent)
 	this.kernelRadius.setStep(1.0);
 	this.kernelRadius.setOnChange(function()
 	{
-		self.pass.kernelRadius = self.kernelRadius.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "kernelRadius", self.kernelRadius.getValue()));
 	});
 	this.add(this.kernelRadius);
 	this.nextRow();
@@ -23,7 +23,7 @@ function SSAONOHPassNode(parent)
 	this.kernelSize.setStep(1.0);
 	this.kernelSize.setOnChange(function()
 	{
-		self.pass.kernelSize = self.kernelSize.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "kernelSize", self.kernelSize.getValue()));
 	});
 	this.add(this.kernelSize);
 	this.nextRow();
@@ -33,7 +33,7 @@ function SSAONOHPassNode(parent)
 	this.minDistance.size.set(0, 18);
 	this.minDistance.setOnChange(function()
 	{
-		self.pass.minDistance = self.minDistance.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "minDistance", self.minDistance.getValue()));
 	});
 	this.add(this.minDistance);
 	this.nextRow();
@@ -43,7 +43,7 @@ function SSAONOHPassNode(parent)
 	this.maxDistance.size.set(0, 18);
 	this.maxDistance.setOnChange(function()
 	{
-		self.pass.maxDistance = self.maxDistance.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "maxDistance", self.maxDistance.getValue()));
 	});
 	this.add(this.maxDistance);
 	this.nextRow();

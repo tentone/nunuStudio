@@ -11,8 +11,12 @@ function ColorifyPassNode(parent)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		var color = self.color.getValue();
-		self.pass.color.setRGB(color.r, color.g, color.b);
+		var value = self.color.getValue();
+
+		var color = self.pass.color.clone();
+		color.setRGB(value.r, value.g, value.b);
+
+		Editor.addAction(new ChangeAction(self.pass, "color", color));
 	});
 	this.add(this.color);
 	this.nextRow();

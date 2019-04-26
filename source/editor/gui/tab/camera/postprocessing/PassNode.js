@@ -27,7 +27,7 @@ function PassNode(parent, name)
 	this.enabled.size.set(18, 18);
 	this.enabled.setOnChange(function()
 	{
-		self.pass.enabled = self.enabled.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "enabled", self.enabled.getValue()));
 	});
 	this.add(this.enabled);
 	this.nextRow();
@@ -38,7 +38,7 @@ function PassNode(parent, name)
 	this.clear.size.set(18, 18);
 	this.clear.setOnChange(function()
 	{
-		self.pass.clear = self.clear.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "clear", self.clear.getValue()));
 	});
 	this.add(this.clear);
 	this.nextRow();
@@ -49,7 +49,7 @@ function PassNode(parent, name)
 	this.renderToScreen.size.set(18, 18);
 	this.renderToScreen.setOnChange(function()
 	{
-		self.pass.renderToScreen = self.renderToScreen.getValue();
+		Editor.addAction(new ChangeAction(self.pass, "renderToScreen", self.renderToScreen.getValue()));
 	});
 	this.add(this.renderToScreen);
 	this.nextRow();

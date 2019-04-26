@@ -420,6 +420,12 @@ EffectComposer.fromJSON = function(json)
 			pass.hue = data.hue;
 			pass.saturation = data.saturation;
 		}
+		else if(data.type === "AdaptiveToneMapping")
+		{
+			pass = new AdaptiveToneMappingPass(data.adaptive);
+			pass.tau = data.tau;
+			pass.minLuminance = data.minLuminance;
+		}
 		else
 		{
 			pass = new RenderPass();
