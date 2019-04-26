@@ -39,8 +39,12 @@ function ConsoleTab(parent, closeable, container, index)
 	 */
 	this.enabled = true;
 
-
-	//Top bar
+	/**
+	 * Top menu bar displayed on top of the console.
+	 *
+	 * @attribute bar
+	 * @type {Division}
+	 */
 	this.bar = new Division(this);
 	this.bar.element.style.top = "0px";
 	this.bar.element.style.left = "0px";
@@ -72,8 +76,7 @@ function ConsoleTab(parent, closeable, container, index)
 	{
 		self.useConsole(!self.enabled);
 	});
-	this.enableButton.updateInterface();
-
+	this.enableButton.updateInterface();	
 
 	/**
 	 * Console messages division
@@ -140,7 +143,7 @@ function ConsoleTab(parent, closeable, container, index)
 		}
 	};
 
-	this.useConsole();
+	this.useConsole(true);
 }
 
 ConsoleTab.prototype = Object.create(TabElement.prototype);
@@ -159,7 +162,6 @@ ConsoleTab.prototype.useConsole = function(enabled)
 
 	this.enabled = enabled;
 	this.enableButton.setText(this.enabled ? Locale.disable : Locale.enable);
-
 
 	if(this.enabled)
 	{

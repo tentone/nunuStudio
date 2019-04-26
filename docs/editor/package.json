@@ -33,10 +33,10 @@
 	},
 	"devDependencies": {
 		"yuidocjs": "",
-		"nwjs-builder-phoenix": "1.14.8"
+		"nwjs-builder-phoenix": "1.15.0"
 	},
 	"dependencies": {
-		"cordova": ""
+		"cordova": "^9.0.0"
 	},
 	"chromium-args": "--use-angle=gl --ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
@@ -53,7 +53,7 @@
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"ffmpegIntegration": false,
 		"packed": false,
-		"nwVersion": "0.36.2",
+		"nwVersion": "0.37.4",
 		"nwFlavor": "sdk",
 		"targets": [
 			"zip",

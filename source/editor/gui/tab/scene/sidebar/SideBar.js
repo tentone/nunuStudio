@@ -141,6 +141,10 @@ SideBar.prototype.updateSize = function()
 		position += size;
 	}
 
+	this.select.setVisibility(this.size.y > this.select.position.y + this.select.size.y);
+	this.move.setVisibility(this.size.y > this.move.position.y + this.move.size.y);
+	this.scale.setVisibility(this.size.y > this.scale.position.y + this.scale.size.y);
+	this.rotate.setVisibility(this.size.y > this.rotate.position.y + this.rotate.size.y);
 
 	if(this.size.y < 250)
 	{

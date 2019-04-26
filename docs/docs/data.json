@@ -11856,8 +11856,38 @@
             "module": "Core"
         },
         {
+            "file": "..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js",
+            "line": 65,
+            "description": "Minimum luminance.",
+            "itemtype": "property",
+            "name": "minLuminance",
+            "type": "{Number}",
+            "class": "BloomPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js",
+            "line": 77,
+            "description": "Rate of luminance variation (adaptation rate).",
+            "itemtype": "property",
+            "name": "tau",
+            "type": "{Number}",
+            "class": "BloomPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js",
+            "line": 89,
+            "description": "Rate of luminance variation (adaptation rate).",
+            "itemtype": "property",
+            "name": "tau",
+            "type": "{Number}",
+            "class": "BloomPass",
+            "module": "Postprocessing"
+        },
+        {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 58,
+            "line": 53,
             "description": "Camera aperture.",
             "itemtype": "property",
             "name": "aperture",
@@ -11867,7 +11897,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 70,
+            "line": 65,
             "description": "Focus point distance.",
             "itemtype": "property",
             "name": "focus",
@@ -11877,7 +11907,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 82,
+            "line": 77,
             "description": "Maximum level of blur that can be applied to more distant objects.",
             "itemtype": "property",
             "name": "enabled",
@@ -11887,7 +11917,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 151,
+            "line": 138,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12045,7 +12075,17 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 123,
+            "line": 98,
+            "description": "Material used to copy data between buffers.",
+            "itemtype": "attribute",
+            "name": "copyMaterial",
+            "type": "{THREE.ShaderMaterial}",
+            "class": "SSAONOHPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
+            "line": 126,
             "description": "Kernel radius used for the SSAO effect.",
             "itemtype": "property",
             "name": "kernelRadius",
@@ -12055,7 +12095,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 135,
+            "line": 138,
             "description": "Minimum camera distance considered for the SSAO effect.",
             "itemtype": "property",
             "name": "minDistance",
@@ -12065,7 +12105,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 147,
+            "line": 150,
             "description": "Maximum camera distance considered for the SSAO effect.",
             "itemtype": "property",
             "name": "maxDistance",
@@ -12075,7 +12115,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 159,
+            "line": 162,
             "description": "SSAO effect kernel size.",
             "itemtype": "property",
             "name": "kernelSize",
@@ -12085,7 +12125,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 187,
+            "line": 190,
             "description": "Generate a sample kernel based on the kernelSize value.",
             "itemtype": "method",
             "name": "generateSampleKernel",
@@ -12094,7 +12134,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 209,
+            "line": 212,
             "description": "Use noise to generate multiple pseudo random kernel rotations.",
             "itemtype": "method",
             "name": "generateRandomKernelRotations",
@@ -12103,7 +12143,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 241,
+            "line": 244,
             "description": "Render using this pass.",
             "itemtype": "method",
             "name": "render",
@@ -12139,7 +12179,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 315,
+            "line": 309,
             "description": "Render a quad scene using a pass material.",
             "itemtype": "method",
             "name": "renderPass",
@@ -12148,7 +12188,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 349,
+            "line": 345,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -12169,7 +12209,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
-            "line": 366,
+            "line": 362,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12261,7 +12301,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 122,
+            "line": 123,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -12282,7 +12322,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 135,
+            "line": 136,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12298,7 +12338,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 115,
+            "line": 110,
             "description": "Scales the color of the whole bloom effect.",
             "itemtype": "property",
             "name": "strength",
@@ -12308,7 +12348,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 127,
+            "line": 122,
             "description": "Bloom effect radius.",
             "itemtype": "property",
             "name": "radius",
@@ -12318,7 +12358,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 139,
+            "line": 134,
             "description": "Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.\n\nTo have all scene colors contributing to the bloom, a volume of -1 needs to be used.",
             "itemtype": "property",
             "name": "threshold",
@@ -12328,7 +12368,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 153,
+            "line": 148,
             "description": "Smooth factor.",
             "itemtype": "property",
             "name": "smooth",
@@ -12338,7 +12378,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 165,
+            "line": 160,
             "description": "The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).",
             "itemtype": "property",
             "name": "bloomFactors",
@@ -12348,7 +12388,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 177,
+            "line": 172,
             "description": "Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.",
             "itemtype": "property",
             "name": "bloomTintColors",
@@ -12358,7 +12398,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 318,
+            "line": 291,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12407,7 +12447,17 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 68,
+            "line": 56,
+            "description": "Renderer state configuration, stored the clear configuration of the renderer.\n\nUsed to store and restore states.",
+            "itemtype": "property",
+            "name": "rendererState",
+            "type": "{RendererState}",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 75,
             "description": "Swap rendering buffers.\n\nUsed to make the output buffer of a render pass the input of the next one.",
             "itemtype": "method",
             "name": "swapBuffers",
@@ -12416,7 +12466,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 82,
+            "line": 89,
             "description": "Add new pass to the composer.",
             "itemtype": "method",
             "name": "addPass",
@@ -12432,7 +12482,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 93,
+            "line": 100,
             "description": "Move pass back in the list of render passes.\n\nMoving back means that the pass is rendered earlier in the pipeline.",
             "itemtype": "method",
             "name": "moveBack",
@@ -12452,7 +12502,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 120,
+            "line": 127,
             "description": "Move pass forward in the list of render passes.\n\nMoving forward in the list means being renderer later down the pipeline.",
             "itemtype": "method",
             "name": "moveForward",
@@ -12472,7 +12522,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 147,
+            "line": 154,
             "description": "Remove pass from this composer, if pass is not found nothing happens.",
             "itemtype": "method",
             "name": "removePass",
@@ -12488,7 +12538,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 162,
+            "line": 169,
             "description": "Insert new pass into the composer in a specific position.",
             "itemtype": "method",
             "name": "insertPass",
@@ -12509,7 +12559,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 174,
+            "line": 181,
             "description": "Render a scene using this effect composer and a renderer.",
             "itemtype": "method",
             "name": "render",
@@ -12535,7 +12585,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 242,
+            "line": 249,
             "description": "Set rendering size for the composer.\n\nAlso updates the size for all passes attached to the composer.",
             "itemtype": "method",
             "name": "setSize",
@@ -12556,7 +12606,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 268,
+            "line": 275,
             "description": "Reset this effect composer.",
             "itemtype": "method",
             "name": "reset",
@@ -12565,7 +12615,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 282,
+            "line": 289,
             "description": "Dispose this effect composer.",
             "itemtype": "method",
             "name": "dispose",
@@ -12574,7 +12624,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 296,
+            "line": 303,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12583,7 +12633,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 316,
+            "line": 323,
             "description": "Create a new effect composer loaded from json data.",
             "static": 1,
             "itemtype": "method",
@@ -14433,7 +14483,17 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 216,
+            "line": 191,
+            "description": "Indicates the current frame of the animation.",
+            "itemtype": "property",
+            "name": "currentFrame",
+            "type": "{Number}",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 224,
             "description": "Set animation playback speed.",
             "itemtype": "method",
             "name": "setAnimationSpeed",
@@ -14449,7 +14509,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 227,
+            "line": 235,
             "description": "Set the sprite sheet grid dimension.\n\nAutomatically sets the totalFrame value to framesHorizontal * framesVertical.",
             "itemtype": "method",
             "name": "setFrameGrid",
@@ -14470,7 +14530,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 244,
+            "line": 252,
             "description": "Set frames to be used for this animation.\n\nFrame starts counting from 0.",
             "itemtype": "method",
             "name": "setAnimationFrames",
@@ -14491,7 +14551,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 259,
+            "line": 267,
             "description": "Dispose spritesheet texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -14500,7 +14560,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 271,
+            "line": 279,
             "description": "Create texture json description.",
             "itemtype": "method",
             "name": "toJSON",

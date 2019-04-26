@@ -132,7 +132,7 @@ Editor.initialize = function()
 	Editor.gui = new Interface();
 	Editor.gui.updateInterface();
 
-	//Check is some .isp file passed as argument
+	//Check is some project file passed as argument
 	for(var i = 0; i < Editor.args.length; i++)
 	{
 		if(Editor.args[i].endsWith(".isp"))

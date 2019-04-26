@@ -1,6 +1,6 @@
 "use strict";
 
-include("lib/three/three.min.js");
+include("lib/three/three.js");
 
 include("lib/three/QuickHull.js");
 include("lib/three/SimplexNoise.js");
@@ -93,6 +93,7 @@ include("source/core/postprocessing/pass/SobelPass.js");
 include("source/core/postprocessing/pass/ColorifyPass.js");
 include("source/core/postprocessing/pass/TechnicolorPass.js");
 include("source/core/postprocessing/pass/HueSaturationPass.js");
+include("source/core/postprocessing/pass/AdaptiveToneMappingPass.js");
 
 include("source/core/postprocessing/shaders/SSAOShader.js");
 

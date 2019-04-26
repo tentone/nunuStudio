@@ -7,15 +7,17 @@
  - CSS 3D renderer support. (IN PROGRESS)
     - Perspective transformed HTML containers. (IN PROGRESS)
     - Billboarded HTML containers. (IN PROGRESS)
- - Support for extruded or planar Text Mesh.
- - Fixed bug with tree overlaping other tabs.
  - Added bitmap text with support for SDF and MSDF text rendering. (IN PROGRESS)
  - Added canvas based text with support for CSS styling. (IN PROGRESS)
+ - Support for extruded or planar Text Mesh.
+ - Fixed bug with tree overlaping other tabs.
  - Select multiple tree objects using SHIFT.
  - Export draco compressed geometries.
- - Scene editor toolbar is now attached to the scene editor tab.
- 
- 
+ - Scene editor toolbar is now attached to the scene editor tab. 
+ - Fixed postprocessing pipeline bugs.
+ - Adaptive luminance pass.
+
+
 ## Published
 ### V0.9.5 Beta
  - Splitabble tabs in the UI
