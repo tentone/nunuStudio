@@ -357,6 +357,7 @@
 			"version": "0.4.2",
 			"resolved": "https://registry.npmjs.org/boom/-/boom-0.4.2.tgz",
 			"integrity": "sha1-emNune1O/O+xnO9JR6PGffrukRs=",
+			"optional": true,
 			"requires": {
 				"hoek": "0.9.x"
 			}
@@ -1875,7 +1876,8 @@
 		"hoek": {
 			"version": "0.9.1",
 			"resolved": "https://registry.npmjs.org/hoek/-/hoek-0.9.1.tgz",
-			"integrity": "sha1-PTIkYrrfB3Fup+uFuviAec3c5QU="
+			"integrity": "sha1-PTIkYrrfB3Fup+uFuviAec3c5QU=",
+			"optional": true
 		},
 		"hosted-git-info": {
 			"version": "2.7.1",
