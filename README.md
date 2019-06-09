@@ -10,7 +10,7 @@
 
 
 ## Web Editor
- - There is a fully featured web version of the editor available at https://nunustudio.org/editor/editor
+ - There is a fully featured web version of the editor available at https://nunustudio.org/editor
  - The web version was tested with Firefox, Chrome and Microsoft Edge, mobile browsers are not supported.
 
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/web.png">
