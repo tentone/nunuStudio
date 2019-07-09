@@ -56,6 +56,7 @@ include("lib/leap.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");
+include("lib/chevrotain.min.js");
 
 include("source/core/Nunu.js");
 include("source/core/Global.js");
