@@ -90,13 +90,15 @@ Script.prototype = Object.create(THREE.Group.prototype);
 
 /**
  * Default script code used when creating a new Script.
+ *
  * @attribute DEFAULT
  * @type {String}
  */
 Script.DEFAULT = "function initialize()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nfunction update(delta)\n{\n	//TODO <UPDATE CODE>\n}\n";
 
 /**
- * List of methods that a script can implement.
+ * List of default methods that can be implemented by scripts.
+ *
  * @attribute METHODS
  * @type {Array}
  */
@@ -184,9 +186,10 @@ Script.removeIncludes = function(code)
 }
 
 /**
- * Initialize script
- * Automatically called by the runtime
- * Calls the script initialize method if it exists
+ * Initialize script. Automatically called by the runtime.
+ *
+ * Compiles the script code and calls the script initialize method if it exists after the code is compiled.
+ *
  * @method initialize
  */
 Script.prototype.initialize = function()

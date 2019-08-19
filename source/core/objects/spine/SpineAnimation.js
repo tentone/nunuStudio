@@ -3,7 +3,7 @@
 /**
  * Spine animation object, to used with animation produced inside Esoteric spine.
  * 
- * Based on the official threejs runtime code available at https://github.com/EsotericSoftware/spine-runtimes.
+ * Based on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.
  * 
  * More information abou spine available here www.esotericsoftware.com.
  * 
