@@ -33,7 +33,8 @@
 	},
 	"devDependencies": {
 		"yuidocjs": "~0.10.2",
-		"nwjs-builder-phoenix": "~1.15.0"
+		"nwjs-builder-phoenix": "~1.15.0",
+		"tern": "~0.24.1"
 	},
 	"dependencies": {
 		"cordova": "~9.0.0"
