@@ -32,11 +32,11 @@
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
 	"devDependencies": {
-		"yuidocjs": "",
-		"nwjs-builder-phoenix": "1.15.0"
+		"yuidocjs": "~0.10.2",
+		"nwjs-builder-phoenix": "~1.15.0"
 	},
 	"dependencies": {
-		"cordova": "^9.0.0"
+		"cordova": "~9.0.0"
 	},
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
