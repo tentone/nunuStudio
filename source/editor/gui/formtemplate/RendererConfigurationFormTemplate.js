@@ -188,6 +188,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
 	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
+	this.shadowsType.addValue("VSM", VSMShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
 		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "shadowsType", self.shadowsType.getValue()), updateRenderers));
