@@ -14,7 +14,7 @@ var path = require("path");
 
 var WAIT_FOR_KEY = false;
 
-var CLOSURE_PATH = "closure.jar";
+var CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar";
 
 var SOURCE_PATH = "../";
 var OUTPUT_PATH = "../build/";
