@@ -66,6 +66,8 @@ THREE.Material.prototype.toJSON = function(meta)
 	data.type = this.type;
 	data.name = this.name;
 
+	data.toneMapped = this.toneMapped;
+
 	//Depth
 	data.depthFunc = this.depthFunc;
 	data.depthTest = this.depthTest;
@@ -100,13 +102,17 @@ THREE.Material.prototype.toJSON = function(meta)
 	}
 
 	//Clear coat (PBR)
-	if(this.clearCoat !== undefined)
+	if(this.clearcoat !== undefined)
 	{
-		data.clearCoat = this.clearCoat;
+		data.clearcoat = this.clearcoat;
 	}
-	if(this.clearCoatRoughness !== undefined)
+	if(this.clearcoatRoughness !== undefined)
 	{
-		data.clearCoatRoughness = this.clearCoatRoughness;
+		data.clearcoatRoughness = this.clearcoatRoughness;
+	}
+	if(this.transparency !== undefined)
+	{
+		data.transparency = this.transparency;
 	}
 
 	//Color map
@@ -140,6 +146,13 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.normalMap = this.normalMap.toJSON(meta).uuid;
 		data.normalMapType = this.normalMapType;
 		data.normalScale = this.normalScale.toArray();
+	}
+
+	//Clear coat normal map (PBR)
+	if(this.clearcoatNormalMap && this.clearcoatNormalMap.isTexture)
+	{
+		data.clearcoatNormalMap = this.clearcoatNormalMap.toJSON(meta).uuid;
+		data.clearcoatNormalScale = this.clearcoatNormalScale.toArray();
 	}
 
 	//Displacement map

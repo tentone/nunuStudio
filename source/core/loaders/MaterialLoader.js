@@ -76,6 +76,8 @@ MaterialLoader.prototype.parse = function(json)
 		material.name = json.name;
 	}
 
+	material.toneMapped = json.toneMapped !== false;
+
 	//Color
 	if(json.color !== undefined)
 	{
@@ -115,15 +117,29 @@ MaterialLoader.prototype.parse = function(json)
 	}
 	
 	//Clear coat (PBR)
-	if(json.clearCoat !== undefined)
+	if(json.clearcoat !== undefined)
 	{
-		material.clearCoat = json.clearCoat;
+		material.clearcoat = json.clearcoat;
 	}
-	if(json.clearCoatRoughness !== undefined)
+	if(json.clearcoatRoughness !== undefined)
 	{
-		material.clearCoatRoughness = json.clearCoatRoughness;
+		material.clearcoatRoughness = json.clearcoatRoughness;
 	}
-	
+	if(json.transparency !== undefined)
+	{
+		material.transparency = json.transparency;
+	}
+
+	//Clear coat normal map (PBR)
+	if(json.clearcoatNormalMap !== undefined)
+	{
+		material.clearcoatNormalMap = getTexture(json.clearcoatNormalMap);
+	}
+	if(json.clearcoatNormalScale !== undefined)
+	{
+		material.clearcoatNormalScale = new Vector2().fromArray(json.clearcoatNormalScale);
+	}
+
 	//Shader params (Shader)
 	if(json.uniforms !== undefined)
 	{

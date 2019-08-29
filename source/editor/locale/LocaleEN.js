@@ -147,6 +147,7 @@ LocaleManager.register(
 	minFilter: "Min. filter",
 	magFilter: "Mag. filter",
 	flipY: "Flip Y",
+	toneMapped: "Tone mapped",
 	
 	//Values
 	relative: "Relative",

@@ -71,6 +71,18 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.side);
 	this.form.nextRow();
 
+	//Tone mapping
+	this.form.addText(Locale.depthTest);
+	this.toneMapped = new CheckBox(this.form);
+	this.toneMapped.size.set(18, 18);
+	this.toneMapped.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "toneMapped", self.toneMapped.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.toneMapped);
+	this.form.nextRow();
+	
 	//Test depth
 	this.form.addText(Locale.depthTest);
 	this.depthTest = new CheckBox(this.form);
