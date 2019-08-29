@@ -1257,7 +1257,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com."
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com."
         },
         "Textures": {
             "name": "Textures",
@@ -2413,7 +2413,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com.",
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com.",
             "extends": "{spine.threejs.SkeletonMesh}",
             "params": [
                 {
@@ -9920,8 +9920,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 98,
-            "description": "List of methods that a script can implement.",
+            "line": 99,
+            "description": "List of default methods that can be implemented by scripts.",
             "itemtype": "attribute",
             "name": "METHODS",
             "type": "{Array}",
@@ -9930,7 +9930,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 105,
+            "line": 107,
             "description": "Append libraries on initialization.\n\nLibraries are appended to the script code on initialization.",
             "itemtype": "attribute",
             "name": "APPEND",
@@ -9940,7 +9940,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 115,
+            "line": 117,
             "description": "Evaluate libs during runtime.\n\nThis allows to load new libs during runtime, but its not possible to access private statements.",
             "itemtype": "attribute",
             "name": "EVALUATE",
@@ -9950,7 +9950,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 125,
+            "line": 127,
             "description": "Include file into the document.body.\n\nThis imports the JS file as any other file included into a <script> tag.",
             "itemtype": "attribute",
             "name": "INCLUDE",
@@ -9960,7 +9960,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 135,
+            "line": 137,
             "description": "Auxiliar function to include javascript source file from resource into the script.\n\nThe imported source is evaluated and loaded in the context of the script.\n\nGlobal declarations need to be cleaned using the dipose method.",
             "itemtype": "method",
             "name": "include",
@@ -9976,7 +9976,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 146,
+            "line": 148,
             "description": "Get includes from the code.\n\nUsed to extract includes from code when loading libraries in APPEND mode.",
             "static": 1,
             "itemtype": "method",
@@ -9993,7 +9993,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 172,
+            "line": 174,
             "description": "Remove includes from code.\n\nUsed to remove include statements when initializing code in APPEND mode.",
             "static": 1,
             "itemtype": "method",
@@ -10010,8 +10010,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 186,
-            "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
+            "line": 188,
+            "description": "Initialize script. Automatically called by the runtime.\n\nCompiles the script code and calls the script initialize method if it exists after the code is compiled.",
             "itemtype": "method",
             "name": "initialize",
             "class": "Script",
@@ -10019,7 +10019,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 221,
+            "line": 224,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -10028,7 +10028,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 247,
+            "line": 250,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -10037,7 +10037,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 264,
+            "line": 267,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -10046,7 +10046,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 279,
+            "line": 282,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -10062,7 +10062,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 295,
+            "line": 298,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "compileCode",

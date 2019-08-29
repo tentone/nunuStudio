@@ -14,6 +14,8 @@ var path = require("path");
 
 var WAIT_FOR_KEY = false;
 
+var CLOSURE_PATH = "closure.jar";
+
 var SOURCE_PATH = "../";
 var OUTPUT_PATH = "../build/";
 
@@ -155,7 +157,7 @@ else
 
 function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 {
-	var command = "java -jar closure.jar --compilation_level " + level + " --warning_level QUIET --formatting " + formatting + " --language_in " + languageIn + " --language_out " + languageOut + " --js " + fileIn + " --js_output_file " + fileOut;
+	var command = "java -jar " + CLOSURE_PATH + " --compilation_level " + level + " --warning_level QUIET --formatting " + formatting + " --language_in " + languageIn + " --language_out " + languageOut + " --js " + fileIn + " --js_output_file " + fileOut;
 	
 	require("child_process").execSync(command, function(error, stdout, stderr)
 	{

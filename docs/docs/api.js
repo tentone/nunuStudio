@@ -146,7 +146,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Animations",
             "name": "Animations",
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com."
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com."
         },
         {
             "displayName": "Audio",

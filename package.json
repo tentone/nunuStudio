@@ -34,7 +34,8 @@
 	"devDependencies": {
 		"yuidocjs": "~0.10.2",
 		"nwjs-builder-phoenix": "~1.15.0",
-		"tern": "~0.24.1"
+		"tern": "~0.24.1",
+		"google-closure-compiler": "^20190301.0.0"
 	},
 	"dependencies": {
 		"cordova": "~9.0.0"
