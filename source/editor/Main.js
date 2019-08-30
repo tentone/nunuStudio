@@ -13,6 +13,7 @@ include("lib/three/three.js");
 include("lib/three/QuickHull.js");
 include("lib/three/SimplexNoise.js");
 
+include("lib/three/shaders/AfterimageShader.js");
 include("lib/three/shaders/CopyShader.js");
 include("lib/three/shaders/BokehShader.js");
 include("lib/three/shaders/SAOShader.js");
@@ -90,6 +91,7 @@ include("source/core/postprocessing/EffectComposer.js");
 include("source/core/postprocessing/RenderPass.js");
 
 include("source/core/postprocessing/pass/antialiasing/FXAAPass.js");
+include("source/core/postprocessing/pass/AfterimagePass.js");
 include("source/core/postprocessing/pass/UnrealBloomPass.js");
 include("source/core/postprocessing/pass/BloomPass.js");
 include("source/core/postprocessing/pass/SSAONOHPass.js");
@@ -420,6 +422,7 @@ include("source/editor/gui/tab/camera/postprocessing/FilmPassNode.js");
 include("source/editor/gui/tab/camera/postprocessing/ColorifyPassNode.js");
 include("source/editor/gui/tab/camera/postprocessing/HueSaturationPassNode.js");
 include("source/editor/gui/tab/camera/postprocessing/AdaptiveToneMappingPassNode.js");
+include("source/editor/gui/tab/camera/postprocessing/AfterimagePassNode.js");
 
 include("source/editor/gui/tab/settings/SettingsTab.js");
 include("source/editor/gui/tab/settings/EditorSettingsTab.js");

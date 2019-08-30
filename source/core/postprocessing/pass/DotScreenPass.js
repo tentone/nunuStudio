@@ -31,7 +31,6 @@ function DotScreenPass(center, angle, scale)
 		fragmentShader: THREE.DotScreenShader.fragmentShader
 	});
 
-	//Setters and getters for uniforms
 	var self = this;
 	Object.defineProperties(this,
 	{

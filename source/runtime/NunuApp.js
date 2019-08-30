@@ -5,6 +5,7 @@ include("lib/three/three.js");
 include("lib/three/QuickHull.js");
 include("lib/three/SimplexNoise.js");
 
+include("lib/three/shaders/AfterimageShader.js");
 include("lib/three/shaders/CopyShader.js");
 include("lib/three/shaders/BokehShader.js");
 include("lib/three/shaders/SAOShader.js");
@@ -48,6 +49,7 @@ include("lib/leap.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");
+include("lib/chevrotain.min.js");
 
 include("source/core/Nunu.js");
 include("source/core/Global.js");
@@ -81,6 +83,7 @@ include("source/core/postprocessing/EffectComposer.js");
 include("source/core/postprocessing/RenderPass.js");
 
 include("source/core/postprocessing/pass/antialiasing/FXAAPass.js");
+include("source/core/postprocessing/pass/AfterimagePass.js");
 include("source/core/postprocessing/pass/UnrealBloomPass.js");
 include("source/core/postprocessing/pass/BloomPass.js");
 include("source/core/postprocessing/pass/SSAONOHPass.js");

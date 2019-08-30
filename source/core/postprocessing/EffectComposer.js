@@ -427,6 +427,11 @@ EffectComposer.fromJSON = function(json)
 			pass.tau = data.tau;
 			pass.minLuminance = data.minLuminance;
 		}
+		else if(data.type === "Afterimage")
+		{
+			pass = new AfterimagePass();
+			pass.damp = data.damp;
+		}
 		else
 		{
 			pass = new RenderPass();

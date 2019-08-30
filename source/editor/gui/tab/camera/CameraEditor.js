@@ -85,7 +85,9 @@ function CameraEditor(parent, closeable, container, index)
 	addRenderPassButton(Locale.copy, CopyPass);
 	addRenderPassButton("Adaptive Tone Mapping", AdaptiveToneMappingPass);
 	self.form.nextRow();
-
+	addRenderPassButton("After image", AfterimagePass);
+	self.form.nextRow();
+	
 	this.postNodes = new TableForm(this.form);
 	this.form.add(this.postNodes);
 	this.form.nextRow();
