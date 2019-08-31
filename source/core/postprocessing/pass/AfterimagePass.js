@@ -21,14 +21,14 @@ function AfterimagePass(damp)
 
 	this.uniforms = THREE.UniformsUtils.clone(THREE.AfterimageShader.uniforms);
 
-	this.textureComp = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight,
+	this.textureComp = new THREE.WebGLRenderTarget(1, 1,
 	{
 		minFilter: THREE.LinearFilter,
 		magFilter: THREE.NearestFilter,
 		format: THREE.RGBAFormat
 	});
 
-	this.textureOld = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight,
+	this.textureOld = new THREE.WebGLRenderTarget(1, 1,
 	{
 		minFilter: THREE.LinearFilter,
 		magFilter: THREE.NearestFilter,
@@ -42,9 +42,9 @@ function AfterimagePass(damp)
 		fragmentShader: THREE.AfterimageShader.fragmentShader
 	});
 
+	this.basicMaterial = new THREE.MeshBasicMaterial();
 
-	this.compFsQuad = new THREE.Pass.FullScreenQuad(this.shaderMaterial);
-	this.copyFsQuad = new THREE.Pass.FullScreenQuad(new THREE.MeshBasicMaterial());
+	this.createQuadScene();
 
 	var self = this;
 	Object.defineProperties(this,
@@ -69,18 +69,25 @@ AfterimagePass.prototype = Object.create(Pass.prototype);
 
 AfterimagePass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	// Swap buffers.
-	this.uniforms["tOld"].value = this.textureOld.texture;
+	//Swap texture
+	var temp = this.textureOld;
+	this.textureOld = this.textureComp;
+	this.textureComp = temp;
+
+	//Setup uniforms
 	this.uniforms["tNew"].value = readBuffer.texture;
+	this.uniforms["tOld"].value = this.textureOld.texture;
 
-	// Render textureComp
+	//Render textureComp
+	this.quad.material = this.shaderMaterial;
+	renderer.autoClear = false;
 	renderer.setRenderTarget(this.textureComp);
-	this.compFsQuad.render(renderer);
+	renderer.render(this.scene, this.camera);
 
-	// Set copy from texture
-	this.copyFsQuad.material.map = this.textureComp.texture;
+	//Set copy from texture
+	this.basicMaterial.map = this.textureComp.texture;
 
-	// Clear configuration
+	//Clear configuration
 	if(this.clear)
 	{
 		renderer.autoClear = true;
@@ -93,8 +100,9 @@ AfterimagePass.prototype.render = function(renderer, writeBuffer, readBuffer, de
 		renderer.autoClear = false;
 	}
 
+	this.quad.material = this.basicMaterial;
 	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
-	this.copyFsQuad.render(renderer);
+	renderer.render(this.scene, this.camera);
 };
 
 
