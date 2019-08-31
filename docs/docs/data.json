@@ -508,6 +508,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\postprocessing\\pass\\AfterimagePass.js": {
+            "name": "..\\source\\core\\postprocessing\\pass\\AfterimagePass.js",
+            "modules": {},
+            "classes": {
+                "AfterimagePass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\postprocessing\\pass\\BloomPass.js": {
             "name": "..\\source\\core\\postprocessing\\pass\\BloomPass.js",
             "modules": {},
@@ -1318,6 +1327,7 @@
             "elements": {},
             "classes": {
                 "FXAAPass": 1,
+                "AfterimagePass": 1,
                 "BloomPass": 1,
                 "BokehPass": 1,
                 "ColorifyPass": 1,
@@ -2683,6 +2693,20 @@
             "file": "..\\source\\core\\postprocessing\\pass\\antialiasing\\FXAAPass.js",
             "line": 3,
             "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf"
+        },
+        "AfterimagePass": {
+            "name": "AfterimagePass",
+            "shortname": "AfterimagePass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\postprocessing\\pass\\AfterimagePass.js",
+            "line": 3,
+            "description": "After image render pass blends the current frame with the previous frame.\n\nA dampening value is applied in the blend, that is performed additively."
         },
         "BloomPass": {
             "name": "BloomPass",
@@ -11862,7 +11886,7 @@
             "itemtype": "property",
             "name": "minLuminance",
             "type": "{Number}",
-            "class": "BloomPass",
+            "class": "AfterimagePass",
             "module": "Postprocessing"
         },
         {
@@ -11872,7 +11896,7 @@
             "itemtype": "property",
             "name": "tau",
             "type": "{Number}",
-            "class": "BloomPass",
+            "class": "AfterimagePass",
             "module": "Postprocessing"
         },
         {
@@ -11882,7 +11906,17 @@
             "itemtype": "property",
             "name": "tau",
             "type": "{Number}",
-            "class": "BloomPass",
+            "class": "AfterimagePass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\postprocessing\\pass\\AfterimagePass.js",
+            "line": 52,
+            "description": "Dampening applied to the previous frame.",
+            "itemtype": "property",
+            "name": "damp",
+            "type": "{Number}",
+            "class": "AfterimagePass",
             "module": "Postprocessing"
         },
         {
@@ -11949,7 +11983,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 38,
+            "line": 37,
             "description": "Center of rotation of the dot grid in normalized coordinates.",
             "itemtype": "property",
             "name": "center",
@@ -11959,7 +11993,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 50,
+            "line": 49,
             "description": "Rotation of the dot grid.",
             "itemtype": "property",
             "name": "angle",
@@ -11969,7 +12003,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 62,
+            "line": 61,
             "description": "Scale of the dots used in the effect.",
             "itemtype": "property",
             "name": "scale",

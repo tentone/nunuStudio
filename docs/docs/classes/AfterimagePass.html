@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio THREE</title>  
+	<title>nunuStudio AfterimagePass</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -197,46 +197,160 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>THREE Module</h1>
-						<div class="box clearfix meta">
+						<h1>AfterimagePass Class</h1>
+						<div class="box meta">
 						
 						
+						
+									Module: <a href="../modules/Postprocessing.html">Postprocessing</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.</p>
-						<p>This page provides documentation for some of the main features of this class, the original documentation of this class can be found at <a href="https://threejs.org/docs/index.html#Reference/Core/Object3D">https://threejs.org/docs/index.html#Reference/Core/Object3D</a>.</p>
-						<p>All nunuStudio objects extend the Object3D class of some other higher level class from three.js.</p>
+							<p>After image render pass blends the current frame with the previous frame.</p>
+						<p>A dampening value is applied in the blend, that is performed additively.</p>
 						
 						</div>
 						
 						
-						<div class="yui3-g">
-							<div class="yui3-u-1-2">
-									<p>This namespace provides the following classes:</p>
+						<div id="classdocs" class="tabview">
+							<ul class="api-class-tabs">
+								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/Fog.html">
-												Fog
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Material.html">
-												Material
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Object3D.html">
-												Object3D
-											</a>
-										</li>
-									</ul>
-							</div>
+									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+							</ul>
 						
-							<div class="yui3-u-1-2">
+							<div>
+								<div id="index" class="api-class-tabpanel index">
+									<h2 class="off-left">Item Index</h2>
+						
+						
+										<div class="index-section properties">
+											<h3>Properties</h3>
+						
+											<ul class="index-list properties">
+													<li class="index-item property">
+														<a href="#property_damp">damp</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_minLuminance">minLuminance</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_tau">tau</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_tau">tau</a>
+						
+													</li>
+											</ul>
+										</div>
+						
+						
+								</div>
+						
+						
+									<div id="properties" class="api-class-tabpanel">
+										<h2 class="off-left">Properties</h2>
+						
+											<div id="property_damp" class="property item">
+												<h3 class="name"><code>damp</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Dampening applied to the previous frame.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_minLuminance" class="property item">
+												<h3 class="name"><code>minLuminance</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Minimum luminance.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_tau" class="property item">
+												<h3 class="name"><code>tau</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Rate of luminance variation (adaptation rate).</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_tau" class="property item">
+												<h3 class="name"><code>tau</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Rate of luminance variation (adaptation rate).</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
+						
+						
 							</div>
 						</div>
 					</div>
