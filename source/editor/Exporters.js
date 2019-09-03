@@ -33,68 +33,91 @@ Editor.exportAndroid = function(mode, outputPath)
 		console.error("nunuStudio: Failed to create cordova project.");
 	}
 
-	//Check requirements
-	var output = system.execSync("cordova requirements", {cwd:"./temp"}).toString();
-	if(output.indexOf("Java JDK: installed") === -1)
-	{
-		console.error("nunuStudio: Missing java JDK (get it at http://www.oracle.com/technetwork/java/javase/downloads/index.html)");
-	}
-	if(output.indexOf("Android SDK: installed true") === -1)
-	{
-		console.error("nunuStudio: Missing Android SDK (get it at https://developer.android.com/studio/)");
-	}
 
-	//Supported Android SDK versions
-	/*
-	var versions = output.split("android-");
-	versions.shift();
-	for(var i = 0; i < versions.length; i++)
-	{
-		versions[i] = Number.parseInt(versions[i])
-	}
-	*/
-
-	//Export code
 	if(FileSystem.fileExists("./temp/www"))
 	{
 		FileSystem.deleteFolder("./temp/www");
 	}
 	
+	//Export nunu project
 	Editor.exportCordovaProject("./temp/www");
+
+	//Clean the temporary files created
+	function cleanFiles()
+	{
+		if(FileSystem.fileExists("./temp"))
+		{
+			FileSystem.deleteFolder("./temp");
+		}
+	}
 
 	setTimeout(function()
 	{
-		//Android platform
+		//Android platform project
 		var output = system.execSync("cordova platform add android", {cwd:"./temp"}).toString();
 		if(output.indexOf("Android project created") === -1)
 		{
 			console.error("nunuStudio: Failed to create cordova android project.");
 		}
 
+		//Check requirements
+		output = system.execSync("cordova requirements", {cwd:"./temp"}).toString();
+
+		if(output.indexOf("Java JDK: installed") === -1)
+		{
+			Editor.alert("Missing java JDK (get it at http://www.oracle.com/technetwork/java/javase/downloads/index.html)");
+			console.error("nunuStudio: Missing java JDK (get it at http://www.oracle.com/technetwork/java/javase/downloads/index.html)");
+			cleanFiles();
+			return;
+		}
+		if(output.indexOf("Android SDK: installed true") === -1)
+		{
+			Editor.alert("Missing Android SDK (get it at https://developer.android.com/studio/)");
+			console.error("nunuStudio: Missing Android SDK (get it at https://developer.android.com/studio/)");
+			cleanFiles();
+			return;
+		}
+
+		//Supported Android SDK versions
+		/*
+		var versions = output.split("android-");
+		versions.shift();
+		for(var i = 0; i < versions.length; i++)
+		{
+			versions[i] = Number.parseInt(versions[i])
+		}
+		*/
+
 		//Send code to device
 		if(mode === Editor.ANDROID_RUN)
 		{
 			//Build code
-			var output = system.execSync("cordova build android", {cwd:"./temp"}).toString();
-			if(output.indexOf("BUILD SUCCESSFUL") === -1)
+			output = system.execSync("cordova build android", {cwd:"./temp"}).toString();
+			if(output.indexOf("SUCCESSFUL") === -1)
 			{
 				console.error("nunuStudio: Failed to build android project.");
+				cleanFiles();
+				return;
 			}
 
 			//Launch on device
-			var output = system.execSync("cordova run android", {cwd:"./temp"}).toString();
-			if(output.indexOf("LAUNCH SUCCESS") === -1)
+			output = system.execSync("cordova run android", {cwd:"./temp"}).toString();
+			if(output.indexOf("SUCCESS") === -1)
 			{
 				console.error("nunuStudio: Failed to launch android application on device.");
+				cleanFiles();
+				return;
 			}
 		}
 		//Export test version
 		else if(mode === Editor.ANDROID_EXPORT_UNSIGNED)
 		{
-			var output = system.execSync("cordova build android", {cwd:"./temp"}).toString();
-			if(output.indexOf("BUILD SUCCESSFUL") === -1)
+			output = system.execSync("cordova build android", {cwd:"./temp"}).toString();
+			if(output.indexOf("SUCCESSFUL") === -1)
 			{
 				console.error("nunuStudio: Failed to build android project.");
+				cleanFiles();
+				return;
 			}
 
 			FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
@@ -102,20 +125,18 @@ Editor.exportAndroid = function(mode, outputPath)
 		//Export signed version
 		else if(mode === Editor.ANDROID_EXPORT_SIGNED)
 		{
-			var output = system.execSync("cordova build android --release -- --keystore=\"..\\android.keystore\" --storePassword=android --alias=mykey", {cwd:"./temp"}).toString();
-			if(output.indexOf("BUILD SUCCESSFUL") === -1)
+			output = system.execSync("cordova build android --release -- --keystore=\"..\\android.keystore\" --storePassword=android --alias=mykey", {cwd:"./temp"}).toString();
+			if(output.indexOf("SUCCESSFUL") === -1)
 			{
 				console.error("nunuStudio: Failed to build android project.");
+				cleanFiles();
+				return;
 			}
 
 			//FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
 		}
 
-		//Clean files created
-		if(FileSystem.fileExists("./temp"))
-		{
-			FileSystem.deleteFolder("./temp");
-		}
+		cleanFiles();
 
 		Editor.alert("Android project exported!");
 	}, 100);

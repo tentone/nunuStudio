@@ -14,3 +14,5 @@ build/desktop/
 config
 
 config\.json
+
+temp/
