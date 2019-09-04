@@ -86,6 +86,22 @@ Editor.loadTexture = function(file, onLoad)
 			var texture = new Texture(image);
 			Editor.addAction(new AddResourceAction(image, Editor.program, "images"));
 		}
+		else if(extension === "basis")
+		{
+			var loader = new BasisTextureLoader();
+			loader.setTranscoderPath(Global.FILE_PATH + "wasm/basis/");
+			//loader.detectSupport(renderer);
+			loader._createTexture(reader.result).then(function(texture)
+			{
+				texture.encoding = THREE.sRGBEncoding;
+				material.map = texture;
+				material.needsUpdate = true;
+			}).catch(function(error)
+			{
+				Editor.alert("Error decoding basis texture.");
+				console.error("nunuStudio: Error decoding basis texture.", error);
+			});
+		}
 		else
 		{
 			var image = new Image(reader.result, extension);

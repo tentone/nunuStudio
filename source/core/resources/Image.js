@@ -69,7 +69,7 @@ Image.fileIsImage = function(file)
 
 		file = file.name.toLocaleLowerCase();
 
-		return file.endsWith("tga") || file.endsWith("dds") || file.endsWith("pvr") || file.endsWith("ktx");
+		return file.endsWith("tga") || file.endsWith("dds") || file.endsWith("pvr") || file.endsWith("ktx") || file.endsWith("basis");
 	}
 
 	return false;

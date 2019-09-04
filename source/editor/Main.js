@@ -244,6 +244,7 @@ include("lib/three/loaders/AMFLoader.js");
 include("lib/three/loaders/AssimpJSONLoader.js");
 include("lib/three/loaders/AssimpLoader.js");
 include("lib/three/loaders/AWDLoader.js");
+include("lib/three/loaders/BasisTextureLoader.js");
 include("lib/three/loaders/BabylonLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/DRACOLoader.js");
