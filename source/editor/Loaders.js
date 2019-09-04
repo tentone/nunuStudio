@@ -66,21 +66,21 @@ Editor.loadTexture = function(file, onLoad)
 		if(extension === "dds")
 		{
 			var loader = new THREE.DDSLoader();
-			var texture = loadCompressedTexture(loader._parser(reader.result));
+			var texture = loadCompressedTexture(loader.parse(reader.result));
 			texture.name = name;
 			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 		}
 		else if(extension === "pvr")
 		{
 			var loader = new THREE.PVRLoader();
-			var texture = loadCompressedTexture(loader._parser(reader.result));
+			var texture = loadCompressedTexture(loader.parse(reader.result));
 			texture.name = name;
 			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 		}
 		else if(extension === "ktx")
 		{
 			var loader = new THREE.KTXLoader();
-			var texture = loadCompressedTexture(loader._parser(reader.result));
+			var texture = loadCompressedTexture(loader.parse(reader.result));
 			texture.name = name;
 			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 		}
