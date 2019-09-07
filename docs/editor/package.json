@@ -11,6 +11,7 @@
 	},
 	"scripts": {
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
+		"cordova-requirements": "cd ./temp && cordova requirements",
 		"build": "cd script && node build.js",
 		"update": "cd script && node update.js",
 		"dist": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
@@ -34,7 +35,6 @@
 	"devDependencies": {
 		"yuidocjs": "~0.10.2",
 		"nwjs-builder-phoenix": "~1.15.0",
-		"tern": "~0.24.1",
 		"google-closure-compiler": "^20190301.0.0"
 	},
 	"dependencies": {
@@ -55,7 +55,7 @@
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"ffmpegIntegration": false,
 		"packed": false,
-		"nwVersion": "0.37.4",
+		"nwVersion": "0.40.2",
 		"nwFlavor": "sdk",
 		"targets": [
 			"zip",
