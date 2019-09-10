@@ -7279,8 +7279,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return (h % a + a) % a;
   }, mapLinear:function(h, a, d, b, c) {
     return b + (h - a) * (c - b) / (d - a);
-  }, lerp:function(a, d, b) {
-    return (1 - b) * a + b * d;
+  }, lerp:function(h, a, d) {
+    return (1 - d) * h + d * a;
   }, smoothstep:function(a, d, b) {
     if (a <= d) {
       return 0;
@@ -10179,6 +10179,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.color && this.color.isColor && (b.color = this.color.getHex());
     void 0 !== this.roughness && (b.roughness = this.roughness);
     void 0 !== this.metalness && (b.metalness = this.metalness);
+    this.sheen && this.sheen.isColor && (b.sheen = this.sheen.getHex());
     this.emissive && this.emissive.isColor && (b.emissive = this.emissive.getHex());
     this.emissiveIntensity && 1 !== this.emissiveIntensity && (b.emissiveIntensity = this.emissiveIntensity);
     this.specular && this.specular.isColor && (b.specular = this.specular.getHex());
@@ -13694,32 +13695,32 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   La.prototype.isCatmullRomCurve3 = !0;
   La.prototype.getPoint = function(a, d) {
     d = d || new e;
-    var b = this.points, h = b.length;
-    a *= h - (this.closed ? 0 : 1);
+    var h = this.points, b = h.length;
+    a *= b - (this.closed ? 0 : 1);
     var c = Math.floor(a);
     a -= c;
-    this.closed ? c += 0 < c ? 0 : (Math.floor(Math.abs(c) / h) + 1) * h : 0 === a && c === h - 1 && (c = h - 2, a = 1);
+    this.closed ? c += 0 < c ? 0 : (Math.floor(Math.abs(c) / b) + 1) * b : 0 === a && c === b - 1 && (c = b - 2, a = 1);
     if (this.closed || 0 < c) {
-      var l = b[(c - 1) % h];
+      var l = h[(c - 1) % b];
     } else {
-      Sf.subVectors(b[0], b[1]).add(b[0]), l = Sf;
+      Sf.subVectors(h[0], h[1]).add(h[0]), l = Sf;
     }
-    var f = b[c % h];
-    var k = b[(c + 1) % h];
-    this.closed || c + 2 < h ? b = b[(c + 2) % h] : (Sf.subVectors(b[h - 1], b[h - 2]).add(b[h - 1]), b = Sf);
+    var f = h[c % b];
+    var k = h[(c + 1) % b];
+    this.closed || c + 2 < b ? h = h[(c + 2) % b] : (Sf.subVectors(h[b - 1], h[b - 2]).add(h[b - 1]), h = Sf);
     if ("centripetal" === this.curveType || "chordal" === this.curveType) {
       var p = "chordal" === this.curveType ? .5 : .25;
-      h = Math.pow(l.distanceToSquared(f), p);
+      b = Math.pow(l.distanceToSquared(f), p);
       c = Math.pow(f.distanceToSquared(k), p);
-      p = Math.pow(k.distanceToSquared(b), p);
+      p = Math.pow(k.distanceToSquared(h), p);
       1E-4 > c && (c = 1);
-      1E-4 > h && (h = c);
+      1E-4 > b && (b = c);
       1E-4 > p && (p = c);
-      ch.initNonuniformCatmullRom(l.x, f.x, k.x, b.x, h, c, p);
-      dh.initNonuniformCatmullRom(l.y, f.y, k.y, b.y, h, c, p);
-      eh.initNonuniformCatmullRom(l.z, f.z, k.z, b.z, h, c, p);
+      ch.initNonuniformCatmullRom(l.x, f.x, k.x, h.x, b, c, p);
+      dh.initNonuniformCatmullRom(l.y, f.y, k.y, h.y, b, c, p);
+      eh.initNonuniformCatmullRom(l.z, f.z, k.z, h.z, b, c, p);
     } else {
-      "catmullrom" === this.curveType && (ch.initCatmullRom(l.x, f.x, k.x, b.x, this.tension), dh.initCatmullRom(l.y, f.y, k.y, b.y, this.tension), eh.initCatmullRom(l.z, f.z, k.z, b.z, this.tension));
+      "catmullrom" === this.curveType && (ch.initCatmullRom(l.x, f.x, k.x, h.x, this.tension), dh.initCatmullRom(l.y, f.y, k.y, h.y, this.tension), eh.initCatmullRom(l.z, f.z, k.z, h.z, this.tension));
     }
     d.set(ch.calc(a), dh.calc(a), eh.calc(a));
     return d;
@@ -14329,6 +14330,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 !== a.color && h.color.setHex(a.color);
     void 0 !== a.roughness && (h.roughness = a.roughness);
     void 0 !== a.metalness && (h.metalness = a.metalness);
+    void 0 !== a.sheen && (h.sheen = (new A).setHex(a.sheen));
     void 0 !== a.emissive && h.emissive.setHex(a.emissive);
     void 0 !== a.specular && h.specular.setHex(a.specular);
     void 0 !== a.shininess && (h.shininess = a.shininess);
@@ -17392,6 +17394,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   fc.loadCompressedTextureCube = function() {
     console.error("THREE.ImageUtils.loadCompressedTextureCube has been removed. Use THREE.DDSLoader instead.");
   };
+  "undefined" !== typeof __THREE_DEVTOOLS__ && __THREE_DEVTOOLS__.dispatchEvent(new CustomEvent("register", {detail:{revision:"109dev"}}));
   a.ACESFilmicToneMapping = 5;
   a.AddEquation = 100;
   a.AddOperation = 2;
@@ -35597,40 +35600,40 @@ var __extends = this && this.__extends || function(a, c) {
         c[f] = d, d += 1 << b[f];
       }
     }
-    function r(b, c, d, e) {
+    function r(b, d, c, e) {
       var f, l;
       for (f = 0; 16 > f; ++f) {
         b.table[f] = 0;
       }
       for (f = 0; e > f; ++f) {
-        b.table[c[d + f]]++;
+        b.table[d[c + f]]++;
       }
       for (f = l = b.table[0] = 0; 16 > f; ++f) {
         C[f] = l, l += b.table[f];
       }
       for (f = 0; e > f; ++f) {
-        c[d + f] && (b.trans[C[c[d + f]]++] = f);
+        d[c + f] && (b.trans[C[d[c + f]]++] = f);
       }
     }
-    function t(b, c, d) {
-      if (!c) {
-        return d;
+    function t(b, d, c) {
+      if (!d) {
+        return c;
       }
       for (; 24 > b.bitcount;) {
         b.tag |= b.source[b.sourceIndex++] << b.bitcount, b.bitcount += 8;
       }
-      var e = b.tag & 65535 >>> 16 - c;
-      return b.tag >>>= c, b.bitcount -= c, e + d;
+      var e = b.tag & 65535 >>> 16 - d;
+      return b.tag >>>= d, b.bitcount -= d, e + c;
     }
-    function q(b, c) {
+    function q(b, d) {
       for (; 24 > b.bitcount;) {
         b.tag |= b.source[b.sourceIndex++] << b.bitcount, b.bitcount += 8;
       }
-      var d = 0, e = 0, f = 0, l = b.tag;
+      var c = 0, e = 0, f = 0, l = b.tag;
       do {
-        e = 2 * e + (1 & l), l >>>= 1, ++f, d += c.table[f], e -= c.table[f];
+        e = 2 * e + (1 & l), l >>>= 1, ++f, c += d.table[f], e -= d.table[f];
       } while (0 <= e);
-      return b.tag = l, b.bitcount -= f, c.trans[d + e];
+      return b.tag = l, b.bitcount -= f, d.trans[c + e];
     }
     function n(b, c, e) {
       for (;;) {
@@ -35652,32 +35655,32 @@ var __extends = this && this.__extends || function(a, c) {
       }
     }
     var d = 0, l = new e, m = new e, w = new Uint8Array(30), x = new Uint16Array(30), z = new Uint8Array(30), p = new Uint16Array(30), v = new Uint8Array([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]), y = new e, A = new Uint8Array(320), C = new Uint16Array(16);
-    (function(b, c) {
-      var d;
-      for (d = 0; 7 > d; ++d) {
-        b.table[d] = 0;
+    (function(b, d) {
+      var c;
+      for (c = 0; 7 > c; ++c) {
+        b.table[c] = 0;
       }
       b.table[7] = 24;
       b.table[8] = 152;
       b.table[9] = 112;
-      for (d = 0; 24 > d; ++d) {
-        b.trans[d] = 256 + d;
+      for (c = 0; 24 > c; ++c) {
+        b.trans[c] = 256 + c;
       }
-      for (d = 0; 144 > d; ++d) {
-        b.trans[24 + d] = d;
+      for (c = 0; 144 > c; ++c) {
+        b.trans[24 + c] = c;
       }
-      for (d = 0; 8 > d; ++d) {
-        b.trans[168 + d] = 280 + d;
+      for (c = 0; 8 > c; ++c) {
+        b.trans[168 + c] = 280 + c;
       }
-      for (d = 0; 112 > d; ++d) {
-        b.trans[176 + d] = 144 + d;
+      for (c = 0; 112 > c; ++c) {
+        b.trans[176 + c] = 144 + c;
       }
-      for (d = 0; 5 > d; ++d) {
-        c.table[d] = 0;
+      for (c = 0; 5 > c; ++c) {
+        d.table[c] = 0;
       }
-      c.table[5] = 32;
-      for (d = 0; 32 > d; ++d) {
-        c.trans[d] = d;
+      d.table[5] = 32;
+      for (c = 0; 32 > c; ++c) {
+        d.trans[c] = c;
       }
     })(l, m);
     f(w, x, 4, 3);
