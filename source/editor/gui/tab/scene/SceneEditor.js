@@ -1266,10 +1266,12 @@ SceneEditor.prototype.updateSelection = function()
  */
 SceneEditor.prototype.resizeCanvas = function()
 {
-	var sizeX = this.size.x - 40;
+	var sizeX = this.size.x - this.sideBar.size.x;
+
 	var width = sizeX * window.devicePixelRatio;
 	var height = this.size.y * window.devicePixelRatio;
 
+	this.canvas.style.left = this.sideBar.size.x + "px"; 
 	this.canvas.style.width = sizeX + "px";
 	this.canvas.style.height = this.size.y + "px";
 
