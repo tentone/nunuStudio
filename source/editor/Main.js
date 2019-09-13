@@ -84,6 +84,10 @@ include("source/core/input/Mouse.js");
 include("source/core/input/Gamepad.js");
 include("source/core/input/Gyroscope.js");
 
+include("source/core/renderer/css/CSS3DRenderer.js");
+include("source/core/renderer/css/CSS3DObject.js");
+include("source/core/renderer/css/CSS3DSprite.js");
+
 include("source/core/postprocessing/RendererState.js");
 include("source/core/postprocessing/Pass.js");
 include("source/core/postprocessing/ShaderPass.js");
@@ -165,18 +169,27 @@ include("source/core/objects/cameras/OrthographicCamera.js");
 
 include("source/core/objects/audio/AudioEmitter.js");
 include("source/core/objects/audio/PositionalAudio.js");
+
 include("source/core/objects/script/Script.js");
+
 include("source/core/objects/physics/PhysicsObject.js");
+
 include("source/core/objects/spine/SpineAnimation.js");
 include("source/core/objects/spine/SpineTexture.js");
+
 include("source/core/objects/particle/ParticleEmitter.js");
+
 include("source/core/objects/misc/Sky.js");
 include("source/core/objects/misc/Container.js");
 include("source/core/objects/misc/CubeCamera.js");
 include("source/core/objects/misc/LensFlare.js");
+include("source/core/objects/misc/WebView.js");
+
 include("source/core/objects/animation/Skeleton.js");
+
 include("source/core/objects/controls/OrbitControls.js");
 include("source/core/objects/controls/FirstPersonControls.js");
+
 include("source/core/objects/RendererConfiguration.js");
 include("source/core/objects/Program.js");
 include("source/core/objects/Scene.js");

@@ -529,6 +529,12 @@ SideBar.prototype.createObject = function()
 
 	if(Nunu.developmentMode())
 	{
+		//Web View
+		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
+		{
+			Editor.addObject(new WebView("https://www.techpowerup.com/"), self.editor.scene);
+		}, "Web View");
+
 		//Reflector
 		effects.addOption(Global.FILE_PATH + "icons/misc/mirror.png", function()
 		{
