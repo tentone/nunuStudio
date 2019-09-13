@@ -175,6 +175,10 @@ function SceneEditor(parent, closeable, container, index)
 	this.transform.visible = false;
 	this.toolScene.add(this.transform);
 
+	this.useCSSRenderer = true;
+	this.cssRenderer = null;
+	this.cssDivision = null;
+
 	/**
 	 * Canvas element to where the renderer outputs.
 	 *
@@ -1262,16 +1266,16 @@ SceneEditor.prototype.updateSelection = function()
  */
 SceneEditor.prototype.resizeCanvas = function()
 {
-	var width = this.size.x * window.devicePixelRatio;
+	var sizeX = this.size.x - 40;
+	var width = sizeX * window.devicePixelRatio;
 	var height = this.size.y * window.devicePixelRatio;
 
-	this.canvas.style.width = this.size.x + "px";
+	this.canvas.style.width = sizeX + "px";
 	this.canvas.style.height = this.size.y + "px";
 
 	if(this.renderer !== null)
 	{
-		this.renderer.setSize(this.size.x, this.size.y, false);
-
+		this.renderer.setSize(sizeX, this.size.y, false);
 		this.camera.aspect = width / height;
 		this.camera.updateProjectionMatrix();
 	}
