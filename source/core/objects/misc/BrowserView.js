@@ -1,22 +1,22 @@
 "use strict";
 
 /**
- * WebView object is used to navigate webpages inside of the 3D scene.
+ * BrowserView object is used to navigate webpages inside of the 3D scene.
  *
  * Can be used to display external web widget using a iframe. Some pages might present limitations regarding their usage inside of a iframe element.
  * 
- * @class WebView
+ * @class BrowserView
  * @extends {CSS3DObject}
  * @param {String} url URL to be opened by default.
  */
-function WebView(url)
+function BrowserView(url)
 {
 	var element = document.createElement("iframe");
 	element.style.border = "none";
 	
 	CSS3DObject.call(this, element);
 
-	this.name = "webview" + this.uuid.substr(0, 3);
+	this.name = "browserview";
 
 	var self = this;
 	var url, width, height;
@@ -34,7 +34,7 @@ function WebView(url)
 			get: function(){return url;},
 			set: function(value)
 			{
-				url = value !== undefined ? WebView.processURL(value) : "";
+				url = value !== undefined ? BrowserView.processURL(value) : "";
 				self.element.src = url;
 			}
 		},
@@ -77,9 +77,9 @@ function WebView(url)
 	this.url = url !== undefined ? url : "";
 }
 
-WebView.prototype = Object.create(CSS3DObject.prototype);
+BrowserView.prototype = Object.create(CSS3DObject.prototype);
 
-WebView.prototype.constructor = WebView;
+BrowserView.prototype.constructor = BrowserView;
 
 /** 
  * Process URL to transform it into embedded URL when possible for common services.
@@ -87,7 +87,7 @@ WebView.prototype.constructor = WebView;
  * @method processURL
  * @param {String} url
  */
-WebView.processURL = function(url)
+BrowserView.processURL = function(url)
 {	
 	//Youtube use embeded link
 	url = url.replace("watch?v=", "embed/");
@@ -97,7 +97,7 @@ WebView.processURL = function(url)
 	return url;			
 };
 
-WebView.prototype.toJSON = function(resources)
+BrowserView.prototype.toJSON = function(resources)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, resources);
 

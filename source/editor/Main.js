@@ -183,7 +183,7 @@ include("source/core/objects/misc/Sky.js");
 include("source/core/objects/misc/Container.js");
 include("source/core/objects/misc/CubeCamera.js");
 include("source/core/objects/misc/LensFlare.js");
-include("source/core/objects/misc/WebView.js");
+include("source/core/objects/misc/BrowserView.js");
 
 include("source/core/objects/animation/Skeleton.js");
 

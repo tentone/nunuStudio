@@ -39,8 +39,6 @@ function Mesh(geometry, material)
 
 	this.receiveShadow = true;
 	this.castShadow = true;
-
-	this.billboard = false
 }
 
 THREE._Mesh = THREE.Mesh;

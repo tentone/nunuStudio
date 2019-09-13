@@ -529,11 +529,13 @@ SideBar.prototype.createObject = function()
 
 	if(Nunu.developmentMode())
 	{
-		//Web View
+		// TODO <MISSING SERIALIZATION, STILL NEEDS TESTING>
+
+		//Browser View
 		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
 		{
-			Editor.addObject(new WebView("https://www.techpowerup.com/"), self.editor.scene);
-		}, "Web View");
+			Editor.addObject(new BrowserView("https://www.techpowerup.com/"), self.editor.scene);
+		}, "Browser View");
 
 		//Reflector
 		effects.addOption(Global.FILE_PATH + "icons/misc/mirror.png", function()

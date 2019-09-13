@@ -10,7 +10,7 @@
  * @param {Element} parent Parent element.
  * @param {Boolean} alpha If true the background is transparent.
  */
-function RendererCanvas(parent, alpha)
+function RendererCanvas(parent, alpha, useCSSRenderer)
 {
 	Element.call(this, parent, "div");
 
@@ -29,6 +29,30 @@ function RendererCanvas(parent, alpha)
 	 * @type {Function}
 	 */
 	this.onResize = null;
+
+	/**
+	 * Indicates if a CSS renderer should be created alongside the WebGL renderer.
+	 *
+	 * @attribute useCSSRenderer
+	 * @type {Boolean}
+	 */
+	this.useCSSRenderer = useCSSRenderer === false;
+
+	/**
+	 * CSS renderer used alongside.
+	 *
+	 * @attribute cssRenderer
+	 * @type {CSS3DObject}
+	 */
+	this.cssRenderer = null;
+
+	/**
+	 * Overlay division used to place the css rendered DOM objects.
+	 *
+	 * @attribute cssDivision
+	 * @type {DOM}
+	 */
+	this.cssDivision = null;
 
 	/**
 	 * Canvas DOM element.
@@ -93,6 +117,21 @@ RendererCanvas.prototype.resetCanvas = function()
 		this.element.insertBefore(this.canvas, this.element.firstChild);
 	}
 
+	if(this.element.contains(this.cssDivision))
+	{
+		this.element.removeChild(this.cssDivision);
+	}
+
+	if(this.useCSSRenderer === true)
+	{
+		this.cssDivision = document.createElement("div");
+		this.cssDivision.style.position = "absolute";
+		this.cssDivision.style.display = "block";
+		this.cssDivision.style.top = "0px";
+		this.cssDivision.style.left = "0px";
+		this.element.appendChild(this.cssDivision);
+	}
+
 	this.resizeCanvas();
 };
 
@@ -111,6 +150,27 @@ RendererCanvas.prototype.createRenderer = function()
 	this.renderer.alpha = this.alpha;
 	
 	rendererConfig.alpha = alpha;
+
+	//CSS Renderer
+	if(this.useCSSRenderer === true)
+	{
+		this.cssRenderer = new CSS3DRenderer(this.cssDivision);
+	}
+};
+
+/**
+ * Get blob with data present on this rendering canvas.
+ *
+ * If the preserveDrawingBuffer is set to false.
+ *
+ * @method getBlob
+ * @param {Function} onLoad Blob load callback.
+ * @param {String} encoding Image encoding.
+ * @param {Number} quality Quality of the JPEG encoding is used.
+ */
+RendererCanvas.prototype.getBlob = function(onLoad, encoding, quality)
+{
+	this.canvas.toBlob(onLoad, encoding !== undefined ? encoding : "image/jpeg", quality !== undefined ? quality : 0.7);
 };
 
 /**
@@ -170,6 +230,12 @@ RendererCanvas.prototype.resizeCanvas = function()
 	this.canvas.style.width = this.size.x + "px";
 	this.canvas.style.height = this.size.y + "px";
 
+	if(this.useCSSRenderer === true)
+	{
+		this.cssDivision.style.width = this.size.x + "px";
+		this.cssDivision.style.height = this.size.y + "px";
+	}
+
 	if(this.onResize !== null)
 	{
 		this.onResize(width, height);
@@ -190,4 +256,9 @@ RendererCanvas.prototype.updateSize = function()
 	this.resizeCanvas();
 	
 	this.renderer.setSize(this.size.x, this.size.y, false);
+
+	if(this.useCSSRenderer === true)
+	{
+		this.cssRenderer.setSize(this.size.x, this.size.y);
+	}
 };
