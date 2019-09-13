@@ -246,25 +246,7 @@ SideBar.prototype.createObject = function()
 		model.name = "cone";
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.cone);
-
-	//Tetrahedron
-	models.addOption(Global.FILE_PATH + "icons/models/pyramid.png", function()
-	{
-		var geometry = new THREE.TetrahedronBufferGeometry(1, 0);
-		var model = new Mesh(geometry, Editor.defaultMaterial);
-		model.name = "tetrahedron";
-		Editor.addObject(model, self.editor.scene);
-	}, "Tetrahedron");
-
-	//Dodecahedron
-	models.addOption(Global.FILE_PATH + "icons/models/dodecahedron.png", function()
-	{
-		var geometry = new THREE.DodecahedronBufferGeometry(1, 0);
-		var model = new Mesh(geometry, Editor.defaultMaterial);
-		model.name = "dodecahedron";
-		Editor.addObject(model, self.editor.scene);
-	}, "Dodecahedron");
-
+	
 	//Plane
 	models.addOption(Global.FILE_PATH + "icons/models/plane.png", function()
 	{
@@ -291,6 +273,42 @@ SideBar.prototype.createObject = function()
 		model.name = "ring";
 		Editor.addObject(model, self.editor.scene);
 	}, "Ring");
+
+	//Icosahedron
+	models.addOption(Global.FILE_PATH + "icons/models/icosahedron.png", function()
+	{
+		var geometry = new THREE.IcosahedronBufferGeometry(1, 0);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "icosahedron";
+		Editor.addObject(model, self.editor.scene);
+	}, "Icosahedron");
+
+	//Tetrahedron
+	models.addOption(Global.FILE_PATH + "icons/models/pyramid.png", function()
+	{
+		var geometry = new THREE.TetrahedronBufferGeometry(1, 0);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "tetrahedron";
+		Editor.addObject(model, self.editor.scene);
+	}, "Tetrahedron");
+
+	//Octahedron
+	models.addOption(Global.FILE_PATH + "icons/models/octahedron.png", function()
+	{
+		var geometry = new THREE.OctahedronBufferGeometry(1, 0);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "octahedron";
+		Editor.addObject(model, self.editor.scene);
+	}, "Octahedron");
+
+	//Dodecahedron
+	models.addOption(Global.FILE_PATH + "icons/models/dodecahedron.png", function()
+	{
+		var geometry = new THREE.DodecahedronBufferGeometry(1, 0);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "dodecahedron";
+		Editor.addObject(model, self.editor.scene);
+	}, "Dodecahedron");
 
 	//Parametric
 	/*models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
@@ -342,15 +360,18 @@ SideBar.prototype.createObject = function()
 	{
 		text.addOption(Global.FILE_PATH + "icons/text/text.png", function()
 		{
+			var texture = new Texture(Global.FILE_PATH + "sdf/roboto-bold.png");
+
+
 			var object = new TextBitmap(
 			{
 				font: JSON.parse(FileSystem.readFile(Global.FILE_PATH + "sdf/roboto-bold.json")),
-				text: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+				text: "Text Bitmap",
 				width: 500,
 				align: TextBitmap.CENTER,
 				letterSpacing: 3,
 				color: 0xFFFFFF
-			}, new Texture(Global.FILE_PATH + "sdf/roboto-bold.png"), TextBitmap.SDF);
+			}, texture, TextBitmap.SDF);
 			object.scale.set(0.001, 0.001, 0.001);
 
 			Editor.addObject(object, self.editor.scene);
@@ -358,7 +379,7 @@ SideBar.prototype.createObject = function()
 
 		text.addOption(Global.FILE_PATH + "icons/text/text.png", function()
 		{
-			//TODO <ADD CODE HERE>
+			Editor.addObject(new TextSprite("Text Sprite"), self.editor.scene);
 		}, "Text Sprite");
 	}
 

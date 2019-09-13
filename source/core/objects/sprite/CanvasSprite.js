@@ -7,42 +7,38 @@
  * 
  * @class CanvasSprite
  * @extends {THREE.Sprite}
- * @param {THREE.SpriteMaterial} material Override material if it is present no canvas and texture will be created internally.
  */
-function CanvasSprite(material)
+function CanvasSprite()
 {
-	if(material === undefined)
+	/**
+	 * DOM canvas to draw.
+	 * 
+	 * @attribute canvas
+	 * @type {DOM}
+	 */
+	this.canvas = document.createElement("canvas");
+
+	/**
+	 * Texture where the text is drawn to.
+	 * 
+	 * @attribute texture
+	 * @type {CanvasTexture}
+	 */
+	this.texture = new CanvasTexture(this.canvas);
+	this.texture.premultiplyAlpha = true;
+
+	this.material = new THREE.SpriteMaterial(
 	{
-		/**
-		 * DOM canvas to draw.
-		 * 
-		 * @attribute canvas
-		 * @type {DOM}
-		 */
-		this.canvas = document.createElement("canvas");
+		map: this.texture,
+		color: 0xffffff,
+		transparent: true,
+		alphaTest: 0.2,
+		depthTest: false,
+		depthWrite: false,
+		sizeAttenuation: false
+	});
 
-		/**
-		 * Texture where the text is drawn to.
-		 * 
-		 * @attribute texture
-		 * @type {THREE.CanvasTexture}
-		 */
-		this.texture = new THREE.CanvasTexture(this.canvas);
-		this.texture.premultiplyAlpha = true;
-
-		material = new THREE.SpriteMaterial(
-		{
-			map: this.texture,
-			color: 0xffffff,
-			transparent: true,
-			alphaTest: 0.2,
-			depthTest: false,
-			depthWrite: false,
-			sizeAttenuation: false
-		});
-	}
-
-	THREE.Sprite.call(this, material);
+	THREE.Sprite.call(this, this.material);
 
 	this.name = "sprite";
 	this.type = "CanvasSprite";
@@ -81,7 +77,7 @@ CanvasSprite.RELATIVE = 100;
 /**
  * Scaled sizing is done relative to the camera position.
  *
- * Is similar to the RELATIVE sizing but the actual sprite size is recalculated (slower) but allows for raytracing to be performed properly.
+ * Is similar to the RELATIVE sizing but the actual sprite size is recalculated (slower) but allows for ray-casting to be performed properly.
  *
  * @static
  * @attribute SCALED

@@ -141,11 +141,16 @@ include("source/core/loaders/ObjectLoader.js");
 
 include("source/core/objects/device/LeapMotion.js");
 include("source/core/objects/device/KinectDevice.js");
+
 include("source/core/objects/mesh/Mesh.js");
 include("source/core/objects/mesh/SkinnedMesh.js");
+
+include("source/core/objects/sprite/CanvasSprite.js");
+include("source/core/objects/sprite/Sprite.js");
+
 include("source/core/objects/text/TextMesh.js");
 include("source/core/objects/text/TextBitmap.js");
-include("source/core/objects/sprite/Sprite.js");
+include("source/core/objects/text/TextSprite.js");
 
 include("source/core/objects/lights/PointLight.js");
 include("source/core/objects/lights/SpotLight.js");
