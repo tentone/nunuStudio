@@ -24,7 +24,7 @@ function RendererConfigurationFormTemplate(form, object)
 
 			if(tab instanceof SceneEditor)
 			{
-				tab.reloadContext();
+				tab.canvas.reloadContext();
 			}
 		}
 	};

@@ -55,6 +55,14 @@ function RendererCanvas(parent, alpha, useCSSRenderer)
 	this.cssDivision = null;
 
 	/**
+	 * Rendering resolution accouting for the device pixel ratio.
+	 *
+	 * @attribute resolution
+	 * @type {THREE.Vector2}
+	 */
+	this.resolution = new THREE.Vector2();
+
+	/**
 	 * Canvas DOM element.
 	 * 
 	 * @attribute canvas
@@ -143,6 +151,7 @@ RendererCanvas.prototype.resetCanvas = function()
 RendererCanvas.prototype.createRenderer = function()
 {
 	var rendererConfig = Editor.settings.render.followProject ? Editor.program.rendererConfig : Editor.settings.render;
+
 	var alpha = rendererConfig.alpha;
 	rendererConfig.alpha = this.alpha;
 
@@ -222,11 +231,11 @@ RendererCanvas.prototype.forceContextLoss = function()
  */
 RendererCanvas.prototype.resizeCanvas = function()
 {
-	var width = this.size.x * window.devicePixelRatio;
-	var height = this.size.y * window.devicePixelRatio;
+	this.resolution.copy(this.size);
+	this.resolution.multiplyScalar(window.devicePixelRatio);
 
-	this.canvas.width = width;
-	this.canvas.height = height;
+	this.canvas.width = this.resolution.x;
+	this.canvas.height = this.resolution.y;
 	this.canvas.style.width = this.size.x + "px";
 	this.canvas.style.height = this.size.y + "px";
 
@@ -238,7 +247,7 @@ RendererCanvas.prototype.resizeCanvas = function()
 
 	if(this.onResize !== null)
 	{
-		this.onResize(width, height);
+		this.onResize(this.resolution.x, this.resolution.y);
 	}
 };
 
@@ -254,8 +263,11 @@ RendererCanvas.prototype.updateSize = function()
 	Element.prototype.updateSize.call(this);
 
 	this.resizeCanvas();
-	
-	this.renderer.setSize(this.size.x, this.size.y, false);
+
+	if(this.renderer !== null)
+	{
+		this.renderer.setSize(this.size.x, this.size.y, false);
+	}
 
 	if(this.useCSSRenderer === true)
 	{
