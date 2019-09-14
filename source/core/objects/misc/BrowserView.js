@@ -99,11 +99,11 @@ BrowserView.processURL = function(url)
 
 BrowserView.prototype.toJSON = function(resources)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, resources);
+	var data = CSS3DObject.prototype.toJSON.call(this, resources);
 
-	data.data.height = this.height;
-	data.data.width = this.width;
-	data.data.url = this.url;
+	data.object.height = this.height;
+	data.object.width = this.width;
+	data.object.url = this.url;
 
 	return data;
 };
