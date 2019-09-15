@@ -522,6 +522,8 @@ include("source/editor/gui/tab/panel/objects/mesh/geometry/TetrahedronGeometryFo
 include("source/editor/gui/tab/panel/objects/mesh/geometry/DodecahedronGeometryForm.js");
 include("source/editor/gui/tab/panel/objects/mesh/geometry/CircleGeometryForm.js");
 include("source/editor/gui/tab/panel/objects/mesh/geometry/RingGeometryForm.js");
+include("source/editor/gui/tab/panel/objects/mesh/geometry/IcosahedronGeometryForm.js");
+include("source/editor/gui/tab/panel/objects/mesh/geometry/OctahedronGeometryForm.js");
 
 include("source/editor/gui/preview/PreviewRenderer.js");
 include("source/editor/gui/preview/FontRenderer.js");

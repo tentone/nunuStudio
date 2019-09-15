@@ -30,12 +30,6 @@ function CSS3DRenderer(domElement)
 	 */
 	this.halfSize = new THREE.Vector2(1, 1);
 
-	this.size.x = 2;
-	this.size.y = 2;
-	
-	this.halfSize.x = 1;
-	this.halfSize.y = 1;
-
 	/**
 	 * Temporary matrix object.
 	 *

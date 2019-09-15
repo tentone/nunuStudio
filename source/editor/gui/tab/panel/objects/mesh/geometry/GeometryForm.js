@@ -50,6 +50,14 @@ GeometryForm.create = function(form, object)
 	{
 		return new RingGeometryForm(form, object);
 	}
+	else if(geometry instanceof THREE.IcosahedronGeometry || geometry instanceof THREE.IcosahedronBufferGeometry)
+	{
+		return new IcosahedronGeometryForm(form, object);
+	}
+	else if(geometry instanceof THREE.OctahedronGeometry || geometry instanceof THREE.OctahedronBufferGeometry)
+	{
+		return new OctahedronGeometryForm(form, object);
+	}
 	
 
 	return null;
