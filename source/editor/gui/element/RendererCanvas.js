@@ -36,7 +36,7 @@ function RendererCanvas(parent, alpha, useCSSRenderer)
 	 * @attribute useCSSRenderer
 	 * @type {Boolean}
 	 */
-	this.useCSSRenderer = useCSSRenderer === false;
+	this.useCSSRenderer = useCSSRenderer !== undefined ? useCSSRenderer : true;
 
 	/**
 	 * CSS renderer used alongside.
@@ -130,7 +130,7 @@ RendererCanvas.prototype.resetCanvas = function()
 		this.element.removeChild(this.cssDivision);
 	}
 
-	if(this.useCSSRenderer === true)
+	if(this.useCSSRenderer)
 	{
 		this.cssDivision = document.createElement("div");
 		this.cssDivision.style.position = "absolute";
@@ -161,7 +161,7 @@ RendererCanvas.prototype.createRenderer = function()
 	rendererConfig.alpha = alpha;
 
 	//CSS Renderer
-	if(this.useCSSRenderer === true)
+	if(this.useCSSRenderer)
 	{
 		this.cssRenderer = new CSS3DRenderer(this.cssDivision);
 	}
@@ -239,7 +239,7 @@ RendererCanvas.prototype.resizeCanvas = function()
 	this.canvas.style.width = this.size.x + "px";
 	this.canvas.style.height = this.size.y + "px";
 
-	if(this.useCSSRenderer === true)
+	if(this.useCSSRenderer)
 	{
 		this.cssDivision.style.width = this.size.x + "px";
 		this.cssDivision.style.height = this.size.y + "px";
@@ -269,7 +269,7 @@ RendererCanvas.prototype.updateSize = function()
 		this.renderer.setSize(this.size.x, this.size.y, false);
 	}
 
-	if(this.useCSSRenderer === true)
+	if(this.useCSSRenderer)
 	{
 		this.cssRenderer.setSize(this.size.x, this.size.y);
 	}

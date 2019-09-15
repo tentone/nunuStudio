@@ -263,6 +263,7 @@ function SceneEditor(parent, closeable, container, index)
 			}
 		};
 	};
+
 	/**
 	 * Keyboard input object.
 	 *
@@ -580,6 +581,8 @@ function SceneEditor(parent, closeable, container, index)
 			}
 		}
 	});
+
+	this.canvas.resetCanvas();
 }
 
 SceneEditor.ORTHOGRAPHIC = 20;
@@ -868,8 +871,8 @@ SceneEditor.prototype.render = function()
 		return;
 	}
 
-	var width = this.canvas.canvas.width;
-	var height = this.canvas.canvas.height;
+	var width = this.canvas.resolution.x;
+	var height = this.canvas.resolution.y;
 	var canvas = this.canvas.canvas;
 	var renderer = this.canvas.renderer;
 
@@ -883,6 +886,12 @@ SceneEditor.prototype.render = function()
 
 	//Render scene
 	renderer.render(this.scene, this.camera);
+
+	if(this.canvas.cssRenderer !== null)
+	{
+		this.canvas.cssRenderer.render(this.scene, this.camera);
+	}
+
 	renderer.render(this.helperScene, this.camera);
 	renderer.render(this.toolScene, this.camera);
 

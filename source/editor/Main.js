@@ -84,6 +84,7 @@ include("source/core/input/Mouse.js");
 include("source/core/input/Gamepad.js");
 include("source/core/input/Gyroscope.js");
 
+include("source/core/renderer/RendererConfiguration.js");
 include("source/core/renderer/css/CSS3DRenderer.js");
 include("source/core/renderer/css/CSS3DObject.js");
 include("source/core/renderer/css/CSS3DSprite.js");
@@ -190,7 +191,6 @@ include("source/core/objects/animation/Skeleton.js");
 include("source/core/objects/controls/OrbitControls.js");
 include("source/core/objects/controls/FirstPersonControls.js");
 
-include("source/core/objects/RendererConfiguration.js");
 include("source/core/objects/Program.js");
 include("source/core/objects/Scene.js");
 

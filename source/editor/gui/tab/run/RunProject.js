@@ -24,7 +24,8 @@ function RunProject(parent, closeable, container, index)
 	this.canvas.createRenderer = function (argument)
 	{
 		this.renderer = Editor.program.rendererConfig.createRenderer(this.canvas);
-		if(this.useCSSRenderer === true)
+		
+		if(this.useCSSRenderer)
 		{
 			this.cssRenderer = new CSS3DRenderer(this.cssDivision);
 		}
@@ -265,7 +266,7 @@ RunProject.prototype.update = function()
 
 	try
 	{
-		this.program.render(this.renderer);
+		this.program.render(this.canvas.renderer);
 	}
 	catch(error)
 	{

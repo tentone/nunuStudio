@@ -234,6 +234,12 @@ RendererConfiguration.WEBGL = 1;
  */
 RendererConfiguration.WEBGL2 = 2;
 
+/**
+ * Create a THREE renderer object based on the renderer configuration.
+ *
+ * @method createRenderer
+ * @return {THREE.WebGLRenderer} Renderer created from the configuration.
+ */
 RendererConfiguration.prototype.createRenderer = function(canvas)
 {
 	var context = null;
