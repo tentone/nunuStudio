@@ -186,8 +186,8 @@ TextSprite.prototype.drawText = function()
 	var width = THREE.Math.ceilPowerOfTwo(size);
 	var ratio = width / height;
 
-	this.width = width;
-	this.height = height;
+	this.texture.width = width;
+	this.texture.height = height;
 
 	context.clearRect(0, 0, width, height);
 	
@@ -210,8 +210,6 @@ TextSprite.prototype.drawText = function()
 	}
 
 	this.scale.x = ratio * this.scale.y;
-
-
 	this.texture.needsUpdate = true;
 };
 

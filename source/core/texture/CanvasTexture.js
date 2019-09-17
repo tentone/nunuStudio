@@ -102,8 +102,15 @@ CanvasTexture.prototype.placeholder = function()
  */
 CanvasTexture.prototype.clear = function(color)
 {
-	this.context.fillStyle = color;
-	this.context.fillRect(0, 0, this.width, this.height);
+	if(color === undefined)
+	{
+		this.context.clearRect(0, 0, width, height);
+	}
+	else
+	{
+		this.context.fillStyle = color;
+		this.context.fillRect(0, 0, this.width, this.height);
+	}
 };
 
 /**

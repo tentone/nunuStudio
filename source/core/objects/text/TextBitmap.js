@@ -80,7 +80,21 @@ function TextBitmap(config, texture, mode, color)
 	 */
 	this.mode = mode !== undefined ? mode : TextBitmap.BITMAP;
 
-	var shader = this.mode === TextBitmap.SDF ? TextBitmap.SDF_SHADER : this.mode === TextBitmap.MSDF ? TextBitmap.MSDF_SHADER : TextBitmap.BITMAP_SHADER;
+	var shader;
+
+	if(this.mode === TextBitmap.SDF)
+	{
+		shader = TextBitmap.SDF_SHADER;
+	}
+	else if(this.mode === TextBitmap.MSDF)
+	{
+		shader = TextBitmap.MSDF_SHADER;
+	}
+	else
+	{
+		shader = TextBitmap.BITMAP_SHADER;
+	}
+
 	var uniforms = 
 	{
 		map: {type: "t", value: texture},
@@ -98,6 +112,7 @@ function TextBitmap(config, texture, mode, color)
 		transparent: true,
 		depthTest: false
 	});
+
 	material.uniforms.map.value = texture;
 
 	var geometry = createGeometry(this.config);
@@ -136,7 +151,14 @@ function TextBitmap(config, texture, mode, color)
 		text:
 		{
 			get: function(){return this.config.text;},
-			set: function(value){this.config.text = value; this.updateGeometry();}
+			set: function(value)
+			{
+				if(this.config.text !== value)
+				{					
+					this.config.text = value;
+					this.updateGeometry();
+				}
+			}
 		},
 
 		/**
@@ -428,6 +450,8 @@ TextBitmap.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
+	data.object.mode = this.mode;
+	
 	data.object.text = this.text;
 	data.object.font = this.font;
 	data.object.lineHeight = this.lineHeight;

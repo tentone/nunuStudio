@@ -29,7 +29,7 @@ function CanvasSprite()
 	var material = new THREE.SpriteMaterial(
 	{
 		map: this.texture,
-		color: 0xffffff,
+		color: 0xFFFFFF,
 		transparent: true,
 		alphaTest: 0.4,
 		depthTest: true,

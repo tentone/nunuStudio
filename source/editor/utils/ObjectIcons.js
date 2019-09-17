@@ -32,10 +32,14 @@ ObjectIcons.icons =
 	ParticleEmiter: ObjectIcons.path + "misc/particles.png",
 	Script: ObjectIcons.path + "script/script.png",
 	Sprite: ObjectIcons.path + "misc/image.png",
-	TextMesh: ObjectIcons.path + "text/text.png",
 	Points: ObjectIcons.path + "models/points.png",
 	Line: ObjectIcons.path + "misc/nodes.png",
 	LineSegments: ObjectIcons.path + "misc/nodes.png",
+	
+	//Text
+	TextMesh: ObjectIcons.path + "text/textmesh.png",
+	TextBitmap: ObjectIcons.path + "text/text.png",
+	TextSprite: ObjectIcons.path + "text/textcanvas.png",
 
 	//Program
 	Program: ObjectIcons.path + "script/script.png",
