@@ -214,9 +214,6 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		}
 	};
 	update();
-
-	//TODO REMOVE THIS TEST CODE
-	console.log(this);
 }
 
 SpriteSheetTexture.prototype = Object.create(THREE.Texture.prototype);

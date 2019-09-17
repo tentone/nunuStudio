@@ -61,6 +61,7 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 }
 
 CanvasTexture.prototype = Object.create(THREE.Texture.prototype);
+CanvasTexture.prototype.isCanvasTexture = true;
 
 /**
  * Update the size of the canvas texture.

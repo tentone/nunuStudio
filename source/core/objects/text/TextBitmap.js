@@ -413,7 +413,7 @@ TextBitmap.prototype.setText = function(text)
 };
 
 /**
- * Update the text bitmap geometry.
+ * Update the text bitmap geometry to match config.
  *
  * Should be called every time after changes to configuration are made.
  *
@@ -421,6 +421,22 @@ TextBitmap.prototype.setText = function(text)
  */
 TextBitmap.prototype.updateGeometry = function()
 {
-	//Update BMFont geometry to match config
 	this.geometry.update(this.config);
+};
+
+TextBitmap.prototype.toJSON = function(meta)
+{
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+
+	data.object.text = this.text;
+	data.object.font = this.font;
+	data.object.lineHeight = this.lineHeight;
+	data.object.letterSpacing = this.letterSpacing;
+	data.object.align = this.align;
+	data.object.width = this.width;
+	data.object.color = this.color;
+	data.object.threshold = this.threshold;
+	data.object.smoothing = this.smoothing;
+
+	return data;
 };
