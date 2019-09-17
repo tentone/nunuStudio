@@ -94,8 +94,23 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * @property text
 	 * @type {String}
 	 */
-	this.text = "";
-	this.setText(text !== undefined ? text : "text");
+	var text = text !== undefined ? text : "text";
+	Object.defineProperties(this,
+	{
+		text:
+		{
+			get: function(){return text;},
+			set: function(value)
+			{
+				if(text !== value)
+				{
+					text = value;
+					this.updateGeometry();
+				}}
+			}
+	});
+	
+	this.updateGeometry();
 }
 
 TextMesh.prototype = Object.create(Mesh.prototype);
@@ -125,11 +140,7 @@ TextMesh.prototype.setFont = function(font)
  */
 TextMesh.prototype.setText = function(text)
 {
-	if(this.text !== text)
-	{
-		this.text = text;
-		this.updateGeometry();
-	}
+	this.text = text;
 };
 
 /**
