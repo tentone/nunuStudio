@@ -9,9 +9,8 @@
  * 
  * @class TextSprite
  * @extends {CanvasSprite}
- * @param {String} text Text to draw in the sprite.
  */
-function TextSprite(text)
+function TextSprite()
 {
 	CanvasSprite.call(this);
 	
@@ -38,7 +37,7 @@ function TextSprite(text)
 		font:
 		{
 			get: function(){return font;},
-			set: function(value){font = value; this.draw();}
+			set: function(value){font = value; this.drawText();}
 		},
 
 		/**
@@ -53,7 +52,7 @@ function TextSprite(text)
 		align:
 		{
 			get: function(){return align;},
-			set: function(value){align = value; this.draw();}
+			set: function(value){align = value; this.drawText();}
 		},
 
 		/**
@@ -65,7 +64,7 @@ function TextSprite(text)
 		color:
 		{
 			get: function(){return color;},
-			set: function(value){color = value; this.draw();}
+			set: function(value){color = value; this.drawText();}
 		},
 
 		/**
@@ -82,7 +81,7 @@ function TextSprite(text)
 				if(value !== text)
 				{
 					text = value;
-					this.draw();
+					this.drawText();
 				}
 			}
 		},
@@ -96,7 +95,7 @@ function TextSprite(text)
 		outline:
 		{
 			get: function(){return outline;},
-			set: function(value){outline = value; this.draw();}
+			set: function(value){outline = value; this.drawText();}
 		},
 
 		/**
@@ -108,7 +107,7 @@ function TextSprite(text)
 		outlineColor:
 		{
 			get: function(){return outlineColor;},
-			set: function(value){outlineColor = value; this.draw();}
+			set: function(value){outlineColor = value; this.drawText();}
 		},
 
 		/**
@@ -120,7 +119,7 @@ function TextSprite(text)
 		outlineWidth:
 		{
 			get: function(){return outlineWidth;},
-			set: function(value){outlineWidth = value; this.draw();}
+			set: function(value){outlineWidth = value; this.drawText();}
 		},
 
 		/**
@@ -134,12 +133,11 @@ function TextSprite(text)
 		resolution:
 		{
 			get: function(){return resolution;},
-			set: function(value){resolution = value; this.draw();}
+			set: function(value){resolution = value; this.drawText();}
 		}
 	});
 
-	this.text = (text !== undefined) ? text : "text";
-	this.draw();
+	this.text = "text";
 }
 
 TextSprite.prototype = Object.create(CanvasSprite.prototype);
@@ -172,26 +170,31 @@ TextSprite.CENTER = "center";
 TextSprite.RIGHT = "right";
 
 /**
- * Update the canvas texture, redraw text into the canvas.
+ * Update the canvas texture, redrawText text into the canvas.
  *
- * @method draw
+ * @method drawText
  */
-TextSprite.prototype.draw = function()
+TextSprite.prototype.drawText = function()
 {
 	var height = this.resolution;
 	var fontSize = height * 0.8;
 
-	var context = this.canvas.getContext("2d");
+	var context = this.texture.context;
 	context.font = fontSize + "px " + this.font;
 
 	var size = context.measureText(this.text).width;
 	var width = THREE.Math.ceilPowerOfTwo(size);
 	var ratio = width / height;
 
-	this.canvas.width = width;
-	this.canvas.height = height;
+	this.width = width;
+	this.height = height;
 
 	context.clearRect(0, 0, width, height);
+	
+	if(this.text.length === 0)
+	{
+		return;
+	}
 
 	context.font = fontSize + "px " + this.font;
 	context.textAlign = this.align;
@@ -207,7 +210,8 @@ TextSprite.prototype.draw = function()
 	}
 
 	this.scale.x = ratio * this.scale.y;
-	this.updateWorldMatrix(true);
+
+
 	this.texture.needsUpdate = true;
 };
 

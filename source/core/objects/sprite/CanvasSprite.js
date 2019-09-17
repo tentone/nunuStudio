@@ -26,18 +26,18 @@ function CanvasSprite()
 	 */
 	this.canvas = this.texture.image;
 
-	this.material = new THREE.SpriteMaterial(
+	var material = new THREE.SpriteMaterial(
 	{
 		map: this.texture,
 		color: 0xffffff,
 		transparent: true,
-		alphaTest: 0.2,
-		depthTest: false,
-		depthWrite: false,
+		alphaTest: 0.4,
+		depthTest: true,
+		depthWrite: true,
 		sizeAttenuation: true
 	});
 
-	THREE.Sprite.call(this, this.material);
+	THREE.Sprite.call(this, material);
 
 	this.name = "sprite";
 	this.type = "CanvasSprite";
@@ -63,13 +63,3 @@ function CanvasSprite()
 }	
 
 CanvasSprite.prototype = Object.create(THREE.Sprite.prototype);
-
-
-/**
- * Method used to draw the content on the canvas.
- *
- * Should be called everytime that information that needs to be displayed is updated.
- *
- * @method draw
- */
-CanvasSprite.prototype.draw = function(){};

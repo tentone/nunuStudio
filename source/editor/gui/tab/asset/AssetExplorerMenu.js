@@ -149,6 +149,7 @@ function AssetExplorerMenu(parent)
 	texture.addOption("Canvas Texture", function()
 	{
 		var texture = new CanvasTexture(512, 512);
+		texture.placeholder();
 		texture.name = "canvas";
 		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 	}, Global.FILE_PATH + "icons/misc/canvas.png");
