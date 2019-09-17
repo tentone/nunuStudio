@@ -127,6 +127,15 @@ function TextBitmap(config, texture, mode, color)
 	Object.defineProperties(this,
 	{
 		/**
+		 * Texture containing the bitmap characters.
+		 */
+		texture:
+		{
+			get: function(){return this.material.uniforms.map.value;},
+			set: function(value){this.material.uniforms.map.value = value; this.material.needsUpdate = true;}
+		},
+
+		/**
 		 * BMFont text font data, contains the data about all characters available, and their position in the atlas.
 		 *
 		 * Font data should be parsed from (.json, .fnt, etc) file.
@@ -450,6 +459,7 @@ TextBitmap.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
+	data.object.texture = this.texture.toJSON(meta).uuid;
 	data.object.mode = this.mode;
 	
 	data.object.text = this.text;

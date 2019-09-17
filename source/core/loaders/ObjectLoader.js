@@ -1046,7 +1046,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 
 		case "TextBitmap":
-			object = new TextBitmap(data, getTexture(data.texture));
+			object = new TextBitmap(data, getTexture(data.texture), data.mode);
 			object.color = data.color;
 			object.threshold = data.threshold;
 			object.smoothing = data.smoothing;
