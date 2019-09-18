@@ -17,7 +17,6 @@ function ButtonDrawer(parent)
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.style.overflow = "visible";
 
-	//Panel
 	this.panel = new Element(this, "div");
 	this.panel.element.style.overflow = "visible";
 	this.panel.element.style.backgroundColor = Editor.theme.barColor;

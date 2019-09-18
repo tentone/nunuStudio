@@ -36,7 +36,7 @@ function Interface()
 	this.tree = rightTop.addTab(TreeView, false)
 	
 	//Inspector
-	this.inspector = rightBottom.addTab(PanelContainer, false);
+	this.inspector = rightBottom.addTab(InspectorContainer, false);
 
 	//Top Bar
 	this.menuBar = new MainMenu(DocumentBody);

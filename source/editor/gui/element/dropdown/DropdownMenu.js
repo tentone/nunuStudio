@@ -18,7 +18,7 @@ function DropdownMenu(parent)
 	this.preventDragEvents();
 
 	/**
-	 * Panel element, where the options are stored.
+	 * Element, where the options are stored.
 	 *
 	 * This DOM element is added directly to the parent DOM element.
 	 *
@@ -323,7 +323,6 @@ DropdownMenu.prototype.setExpanded = function(expanded)
  */
 DropdownMenu.prototype.updateOptions = function()
 {
-	//Options
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
@@ -331,7 +330,6 @@ DropdownMenu.prototype.updateOptions = function()
 		this.options[i].updateInterface();
 	}
 
-	//Panel
 	this.panel.element.style.width = this.size.x + "px";
 	this.panel.element.style.height = (this.optionsSize.y * this.options.length) + "px";
 };
