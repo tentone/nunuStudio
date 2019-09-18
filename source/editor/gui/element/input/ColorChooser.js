@@ -55,13 +55,20 @@ ColorChooser.prototype.setOnChange = function(onChange)
  * Set value stored in the input element.
  *
  * @method setValue
- * @param {Number} r
- * @param {Number} g
- * @param {Number} b
+ * @param {Number} r Red color channel, if a THREE.Color value is received it is used instead.
+ * @param {Number} g Green color channel.
+ * @param {Number} b Blue color channel.
  */
 ColorChooser.prototype.setValue = function(r, g, b)
 {
-	this.color.fromRGB(r * 255, g * 255, b * 255);
+	if(r instanceof THREE.Color)
+	{
+		this.color.fromRGB(r.r * 255, r.g * 255, r.b * 255)
+	}
+	else
+	{
+		this.color.fromRGB(r * 255, g * 255, b * 255);
+	}
 };
 
 /**
