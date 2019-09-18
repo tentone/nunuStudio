@@ -158,7 +158,6 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.stencil);
 	this.form.nextRow();
 
-
 	this.form.addText(Locale.sortObjects).setAltText(Locale.hintSortObjects);
 	this.sortObjects = new CheckBox(this.form);
 	this.sortObjects.size.set(18, 18);
@@ -168,7 +167,6 @@ function RendererConfigurationFormTemplate(form, object)
 	});
 	this.form.add(this.sortObjects);
 	this.form.nextRow();
-
 
 	//Shadows
 	this.form.addText(Locale.shadows);

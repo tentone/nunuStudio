@@ -356,30 +356,27 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont), self.editor.scene);
 	}, "Text Mesh");
 
-	if(Nunu.developmentMode())
+	text.addOption(Global.FILE_PATH + "icons/text/text.png", function()
 	{
-		text.addOption(Global.FILE_PATH + "icons/text/text.png", function()
+		var texture = new Texture(Global.FILE_PATH + "sdf/roboto-bold.png");
+		var object = new TextBitmap(
 		{
-			var texture = new Texture(Global.FILE_PATH + "sdf/roboto-bold.png");
-			var object = new TextBitmap(
-			{
-				font: JSON.parse(FileSystem.readFile(Global.FILE_PATH + "sdf/roboto-bold.json")),
-				text: "text",
-				width: 500,
-				align: TextBitmap.CENTER,
-				letterSpacing: 3,
-				color: 0xFFFFFF
-			}, texture, TextBitmap.SDF);
-			object.scale.set(0.001, 0.001, 0.001);
+			font: JSON.parse(FileSystem.readFile(Global.FILE_PATH + "sdf/roboto-bold.json")),
+			text: "text",
+			width: 500,
+			align: TextBitmap.CENTER,
+			letterSpacing: 3,
+			color: 0xFFFFFF
+		}, texture, TextBitmap.SDF);
+		object.scale.set(0.001, 0.001, 0.001);
 
-			Editor.addObject(object, self.editor.scene);
-		}, "Text Bitmap");
+		Editor.addObject(object, self.editor.scene);
+	}, "Text Bitmap");
 
-		text.addOption(Global.FILE_PATH + "icons/text/textcanvas.png", function()
-		{
-			Editor.addObject(new TextSprite("text"), self.editor.scene);
-		}, "Text Sprite");
-	}
+	text.addOption(Global.FILE_PATH + "icons/text/textcanvas.png", function()
+	{
+		Editor.addObject(new TextSprite("text"), self.editor.scene);
+	}, "Text Sprite");
 
 	text.updateOptions();
 

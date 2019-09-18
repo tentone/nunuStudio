@@ -148,7 +148,20 @@ LocaleManager.register(
 	magFilter: "Mag. filter",
 	flipY: "Flip Y",
 	toneMapped: "Tone mapped",
-	
+	text: "Text",
+	thickness: "Thickness",
+	bevel: "Bevel",
+	lineHeight: "Line Height",
+	letterSpacing: "Letter Spacing",
+	align: "Align",
+	smoothing: "Smoothing",
+	threshold: "Threshold",
+	shader: "Shader",
+	outline: "Outline",
+	outlineColor: "Outline color",
+	outlineWidth: "Outline Width",
+	font: "Font",
+
 	//Values
 	relative: "Relative",
 	absolute: "Absolute",

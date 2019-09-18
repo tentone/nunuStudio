@@ -15,36 +15,21 @@
  * @extends {THREE.Mesh}
  * @param {Object} config Configuration object with all parameters for bmfont.
  * @param {THREE.Texture} texture Texture with the image character atlas to be used.
- * @param {Number} mode The text rendering mode to be used (Bitmap, SDF, MSDF).
+ * @param {Number} shader The text rendering shader to be used (Bitmap, SDF, MSDF).
  * @param {Number} color Color of the text.
  */
-function TextBitmap(config, texture, mode, color)
+function TextBitmap(config, texture, shader, color)
 {
 	if(config.font === undefined)
 	{
 		throw new Error("TextBitmap configuration font is required.");
 	}
 
-	if(config.width === undefined)
-	{
-		config.width = 500;
-	}
-	if(config.align === undefined)
-	{
-		config.align = TextBitmap.CENTER;
-	}
-	if(config.lineHeight === undefined)
-	{
-		config.lineHeight = config.font.common.lineHeight;
-	}
-	if(config.letterSpacing === undefined)
-	{
-		config.letterSpacing = 5;
-	}
-	if(config.text === undefined)
-	{
-		config.text = "";
-	}
+	if(config.width === undefined){config.width = 500;}
+	if(config.align === undefined){config.align = TextBitmap.CENTER;}
+	if(config.lineHeight === undefined){config.lineHeight = config.font.common.lineHeight;}
+	if(config.letterSpacing === undefined){config.letterSpacing = 5;}
+	if(config.text === undefined){config.text = "";}
 
 	/**
 	 * BMFont text configuration object.
@@ -70,32 +55,12 @@ function TextBitmap(config, texture, mode, color)
 	this.config = config;
 
 	/**
-	 * Text bitmap rendering mode, can be:
-	 *    - TextBitmap.BITMAP 
-	 *    - TextBitmap.SDF 
-	 *    - TextBitmap.MSDF 
+	 * Uniforms passed to the text rendering shaders.
 	 *
-	 * @attribute mode
-	 * @type {Number}
+	 * @attribute uniforms
+	 * @type {Object}
 	 */
-	this.mode = mode !== undefined ? mode : TextBitmap.BITMAP;
-
-	var shader;
-
-	if(this.mode === TextBitmap.SDF)
-	{
-		shader = TextBitmap.SDF_SHADER;
-	}
-	else if(this.mode === TextBitmap.MSDF)
-	{
-		shader = TextBitmap.MSDF_SHADER;
-	}
-	else
-	{
-		shader = TextBitmap.BITMAP_SHADER;
-	}
-
-	var uniforms = 
+	this.uniforms =
 	{
 		map: {type: "t", value: texture},
 		color: {type: "v3", value: new THREE.Color(color !== undefined ? color : 0xFFFFFF)},
@@ -103,36 +68,44 @@ function TextBitmap(config, texture, mode, color)
 		threshold: {type: "f", value: 0.4}
 	};
 
-	var material = new THREE.ShaderMaterial(
-	{
-		uniforms: THREE.UniformsUtils.clone(uniforms),
-		fragmentShader: shader,
-		vertexShader: TextBitmap.VERTEX_SHADER,
-		side: THREE.DoubleSide,
-		transparent: true,
-		depthTest: false
-	});
-
-	material.uniforms.map.value = texture;
-
-	var geometry = createGeometry(this.config);
-
-	THREE.Mesh.call(this, geometry, material);
+	THREE.Mesh.call(this, createGeometry(this.config), null);
 
 	this.name = "text";
 	this.type = "TextBitmap";
+
+	var shader = shader !== undefined ? shader : TextBitmap.BITMAP;
 
 	this.updateGeometry();
 
 	Object.defineProperties(this,
 	{
 		/**
+		 * Text bitmap rendering shader, can be:
+		 *    - TextBitmap.BITMAP 
+		 *    - TextBitmap.SDF 
+		 *    - TextBitmap.MSDF 
+		 *
+		 * @attribute shader
+		 * @type {Number}
+		 */
+		shader:
+		{
+			get: function(){return shader;},
+			set: function(value){shader = value; this.updateShader();}
+		},
+
+		/**
 		 * Texture containing the bitmap characters.
+		 *
+		 * Data specifiyng the position of each character in the texture should be placed in the font.
+		 *
+		 * @attribute texture
+		 * @type {THREE.Texture}
 		 */
 		texture:
 		{
-			get: function(){return this.material.uniforms.map.value;},
-			set: function(value){this.material.uniforms.map.value = value; this.material.needsUpdate = true;}
+			get: function(){return this.uniforms.map.value;},
+			set: function(value){this.uniforms.map.value = value; this.material.needsUpdate = true;}
 		},
 
 		/**
@@ -229,20 +202,20 @@ function TextBitmap(config, texture, mode, color)
 		 */
 		color:
 		{
-			get: function(){return this.material.uniforms.color.value;},
-			set: function(value){this.material.uniforms.color.value = value;}
+			get: function(){return this.uniforms.color.value;},
+			set: function(value){this.uniforms.color.value = value;}
 		},
 
 		/** 
 		 * SDF distance alpha threshold.
 		 *
 		 * @attribute threshold
-		 * @type {THREE.Color}
+		 * @type {Number}
 		 */
 		threshold: 
 		{
-			get: function(){return this.material.uniforms.threshold.value;},
-			set: function(value){this.material.uniforms.threshold.value = value;}
+			get: function(){return this.uniforms.threshold.value;},
+			set: function(value){this.uniforms.threshold.value = value;}
 		},
 
 		/** 
@@ -253,10 +226,12 @@ function TextBitmap(config, texture, mode, color)
 		 */
 		smoothing:
 		{
-			get: function(){return this.material.uniforms.smoothing.value;},
-			set: function(value){this.material.uniforms.smoothing.value = value;}
+			get: function(){return this.uniforms.smoothing.value;},
+			set: function(value){this.uniforms.smoothing.value = value;}
 		}
 	});
+
+	this.updateShader(texture);
 }
 
 TextBitmap.prototype = Object.create(THREE.Mesh.prototype);
@@ -444,6 +419,40 @@ TextBitmap.prototype.setText = function(text)
 };
 
 /**
+ * Update the shader used to draw the bitmap information in the screen.
+ *
+ * @method updateShader
+ */
+TextBitmap.prototype.updateShader = function()
+{
+	var fragmentShader;
+
+	if(this.shader === TextBitmap.SDF)
+	{
+		fragmentShader = TextBitmap.SDF_SHADER;
+	}
+	else if(this.shader === TextBitmap.MSDF)
+	{
+		fragmentShader = TextBitmap.MSDF_SHADER;
+	}
+	else
+	{
+		fragmentShader = TextBitmap.BITMAP_SHADER;
+	}
+
+	this.material = new THREE.ShaderMaterial(
+	{
+		uniforms: this.uniforms,
+		fragmentShader: fragmentShader,
+		vertexShader: TextBitmap.VERTEX_SHADER,
+		side: THREE.DoubleSide,
+		transparent: true,
+		depthTest: true
+	});
+};
+
+
+/**
  * Update the text bitmap geometry to match config.
  *
  * Should be called every time after changes to configuration are made.
@@ -453,6 +462,7 @@ TextBitmap.prototype.setText = function(text)
 TextBitmap.prototype.updateGeometry = function()
 {
 	this.geometry.update(this.config);
+
 };
 
 TextBitmap.prototype.toJSON = function(meta)
@@ -460,8 +470,7 @@ TextBitmap.prototype.toJSON = function(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.texture = this.texture.toJSON(meta).uuid;
-	data.object.mode = this.mode;
-	
+	data.object.shader = this.shader;
 	data.object.text = this.text;
 	data.object.font = this.font;
 	data.object.lineHeight = this.lineHeight;

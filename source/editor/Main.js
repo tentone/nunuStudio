@@ -506,6 +506,8 @@ include("source/editor/gui/tab/inspector/objects/misc/ParticleEmitterInspector.j
 include("source/editor/gui/tab/inspector/objects/misc/SkyInspector.js");
 include("source/editor/gui/tab/inspector/objects/spine/SpineInspector.js");
 include("source/editor/gui/tab/inspector/objects/text/TextMeshInspector.js");
+include("source/editor/gui/tab/inspector/objects/text/TextSpriteInspector.js");
+include("source/editor/gui/tab/inspector/objects/text/TextBitmapInspector.js");
 include("source/editor/gui/tab/inspector/objects/controls/OrbitControlsInspector.js");
 include("source/editor/gui/tab/inspector/objects/controls/FirstPersonControlsInspector.js");
 

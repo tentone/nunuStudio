@@ -103,6 +103,14 @@ InspectorContainer.prototype.updateSelection = function()
 		{
 			this.panel = new MeshInspector(this, object);
 		}
+		else if(object instanceof TextSprite)
+		{
+			this.panel = new TextSpriteInspector(this, object);
+		}
+		else if(object instanceof TextBitmap)
+		{
+			this.panel = new TextBitmapInspector(this, object);
+		}
 		else if(object instanceof TextMesh)
 		{
 			this.panel = new TextMeshInspector(this, object);

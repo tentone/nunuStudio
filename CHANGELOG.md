@@ -4,11 +4,11 @@
 
 ## Unpublished
 ### V0.9.6 Beta
- - CSS 3D renderer support. (IN PROGRESS)
-    - Perspective transformed HTML containers. (IN PROGRESS)
-    - Billboarded HTML containers. (IN PROGRESS)
- - Added bitmap text with support for SDF and MSDF text rendering. (IN PROGRESS)
- - Added canvas based text with support for CSS styling. (IN PROGRESS)
+ - CSS 3D renderer support.
+    - Perspective transformed HTML containers.
+    - Billboarded HTML containers.
+ - Added bitmap text with support for SDF and MSDF text rendering.
+ - Added canvas based text with support for CSS styling.
  - Support for extruded or planar Text Mesh.
  - Fixed bug with tree overlaping other tabs.
  - Select multiple tree objects using SHIFT.
@@ -16,6 +16,8 @@
  - Scene editor toolbar is now attached to the scene editor tab. 
  - Fixed postprocessing pipeline bugs.
  - Adaptive luminance pass.
+ - Improve search text box.
+
 
 
 ## Published

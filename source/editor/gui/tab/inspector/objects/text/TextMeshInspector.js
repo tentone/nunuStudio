@@ -12,9 +12,9 @@ function TextMeshInspector(parent, object)
 	}
 
 	//Text
-	this.form.addText("Text");
+	this.form.addText(Locale.text);
 	this.text = new TextArea(this.form);
-	this.text.size.set(190, 36);
+	this.text.size.set(190, 55);
 	this.text.setOnChange(function()
 	{
 		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "text", self.text.getText()), updateGeometry));
@@ -25,7 +25,7 @@ function TextMeshInspector(parent, object)
 	//Size
 	this.form.addText(Locale.size);
 	this.textSize = new NumberBox(this.form);
-	this.textSize.size.set(60, 18);
+	this.textSize.size.set(0, 18);
 	this.textSize.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.textSize.setStep(0.1);
 	this.textSize.setOnChange(function()
@@ -47,9 +47,9 @@ function TextMeshInspector(parent, object)
 	this.form.nextRow();
 
 	//Height
-	this.form.addText("Thickness");
+	this.form.addText(Locale.thickness);
 	this.height = new NumberBox(this.form);
-	this.height.size.set(60, 18);
+	this.height.size.set(0, 18);
 	this.height.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.height.setStep(0.1);
 	this.height.setOnChange(function()
@@ -62,7 +62,7 @@ function TextMeshInspector(parent, object)
 	//Curve segments
 	this.form.addText("Curve Detail");
 	this.curveSegments = new NumberBox(this.form);
-	this.curveSegments.size.set(60, 18);
+	this.curveSegments.size.set(0, 18);
 	this.curveSegments.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.curveSegments.setStep(1.0);
 	this.curveSegments.setOnChange(function()
@@ -74,7 +74,7 @@ function TextMeshInspector(parent, object)
 
 	//Bevel
 	this.bevel = new CheckBox(this.form);
-	this.form.addText("Bevel");
+	this.form.addText(Locale.bevel);
 	this.bevel.size.set(18, 18);
 	this.bevel.setOnChange(function()
 	{
@@ -86,7 +86,7 @@ function TextMeshInspector(parent, object)
 	//Bevel thickness
 	this.form.addText("Bevel Thickness");
 	this.bevelThickness = new NumberBox(this.form);
-	this.bevelThickness.size.set(60, 18);
+	this.bevelThickness.size.set(0, 18);
 	this.bevelThickness.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.bevelThickness.setStep(0.1);
 	this.bevelThickness.setOnChange(function()
@@ -99,7 +99,7 @@ function TextMeshInspector(parent, object)
 	//Bevel size
 	this.form.addText("Bevel Size");
 	this.bevelSize = new NumberBox(this.form);
-	this.bevelSize.size.set(60, 18);
+	this.bevelSize.size.set(0, 18);
 	this.bevelSize.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.bevelSize.setStep(0.1);
 	this.bevelSize.setOnChange(function()
@@ -115,9 +115,7 @@ TextMeshInspector.prototype = Object.create(DrawableInspector.prototype);
 TextMeshInspector.prototype.updateInspector = function()
 {
 	DrawableInspector.prototype.updateInspector.call(this);
-	
-	this.castShadow.setValue(this.object.castShadow);
-	this.receiveShadow.setValue(this.object.receiveShadow);
+
 	this.text.setText(this.object.text);
 	this.textSize.setValue(this.object.size);
 	this.extruded.setValue(this.object.extruded);

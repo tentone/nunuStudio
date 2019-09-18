@@ -38,7 +38,7 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/font.png");
 
 	//Load text
-	menu.addOption("Text", function()
+	menu.addOption(Locale.text, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
