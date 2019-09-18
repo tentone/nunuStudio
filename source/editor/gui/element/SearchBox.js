@@ -35,7 +35,7 @@ SearchBox.prototype = Object.create(Element.prototype);
 
 SearchBox.prototype.setOnChange = function(callback)
 {
-	this.search.setOnChange(callback);
+	this.search.setOnInput(callback);
 };
 
 SearchBox.prototype.updateSize = function()

@@ -1,12 +1,20 @@
 "use strict";
 
 /**
- * Alternative to node clipboard to enable simple copy paste inside the editor web version
+ * Alternative to node clipboard to enable simple copy paste inside the editor web version.
+ *
+ * When copying data also copies data to the system clipboard.
  *
  * @class virtualClipboard
  */
 function VirtualClipboard()
 {
+	/**
+	 * Values stored in the virtual clipboard.
+	 *
+	 * @attribute values
+	 * @type {Array}
+	 */
 	this.values = [];
 }
 

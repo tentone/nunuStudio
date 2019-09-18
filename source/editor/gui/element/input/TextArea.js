@@ -127,6 +127,19 @@ TextArea.prototype.setDisabled = function(value)
 };
 
 /**
+ * Set oninput callback called after every letter typed into the box.
+ *
+ * Should be used only for immediate input effect.
+ *
+ * @method setOnInput
+ * @param {Function} onInput
+ */
+TextArea.prototype.setOnInput = function(onInput)
+{
+	this.element.oninput = onInput;
+};
+
+/**
  * Set onchange callback, called after changes.
  *
  * @method setOnChange

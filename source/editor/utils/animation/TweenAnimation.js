@@ -14,7 +14,7 @@
  */
 function TweenAnimation(object, attribute, target, time, onUpdate)
 {
-	var isVectorial = ValidationUtils.isVetorial(object[attribute]);
+	var isVectorial = TweenAnimation.isVetorial(object[attribute]);
 
 	var self = this;
 
@@ -92,6 +92,28 @@ function TweenAnimation(object, attribute, target, time, onUpdate)
 		}
 	});
 }
+
+/**
+ * Check if a attribute is a THREE vectorial data type.
+ * 
+ * Vetorial types have some common methods (toArray, copy, fromArray).
+ *
+ * (Matrix3, Matrix4, Vector2, Vector3, Vector4, Quaternion, Euler).
+ * 
+ * @method isVetorial
+ * @param {Object} object To be checked.
+ * @return {Boolean} True if the object is of a vectorial type.
+ */
+TweenAnimation.isVetorial = function(object)
+{
+	if(object === null || object === undefined)
+	{
+		return false;
+	}
+	
+	return object.isVector3 === true || object.isEuler === true || (object instanceof THREE.Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
+};
+
 
 /**
  * Set an on complete callback function, that is executed when the animation finishes.
