@@ -43,6 +43,7 @@
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
 								<li><a href="../classes/BloomPass.html">BloomPass</a></li>
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
+								<li><a href="../classes/BrowserView.html">BrowserView</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
 								<li><a href="../classes/CanvasSprite.html">CanvasSprite</a></li>
@@ -205,7 +206,7 @@
 								</div>
 						
 						
-									Module: <a href="../modules/Sprite.html">Sprite</a>
+									Module: <a href="../modules/Textures.html">Textures</a>
 						
 						</div>
 						
@@ -221,7 +222,6 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
@@ -229,20 +229,6 @@
 								<div id="index" class="api-class-tabpanel index">
 									<h2 class="off-left">Item Index</h2>
 						
-										<div class="index-section methods">
-											<h3>Methods</h3>
-						
-											<ul class="index-list methods extends">
-													<li class="index-item method">
-														<a href="#method_draw">draw</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setSizingMode">setSizingMode</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 						
 										<div class="index-section attrs">
@@ -250,22 +236,10 @@
 						
 											<ul class="index-list attrs extends">
 													<li class="index-item attr">
-														<a href="#attr_ABSOLUTE">ABSOLUTE</a>
-													</li>
-													<li class="index-item attr">
 														<a href="#attr_canvas">canvas</a>
 													</li>
 													<li class="index-item attr">
-														<a href="#attr_RELATIVE">RELATIVE</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_resizeMode">resizeMode</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_SCALED">SCALED</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_size">size</a>
+														<a href="#attr_sizeAttenuation">sizeAttenuation</a>
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_texture">texture</a>
@@ -275,123 +249,11 @@
 						
 								</div>
 						
-									<div id="methods" class="api-class-tabpanel">
-										<h2 class="off-left">Methods</h2>
-						
-											<div id="method_draw" class="method item">
-												<h3 class="name"><code>draw</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Redraw the content on the canvas.</p>
-											<p>Should be called everytime that information that needs to be displayed is updated.</p>
-											<p>When relative scalling is enabled size changed should be applied here.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_setSizingMode" class="method item">
-												<h3 class="name"><code>setSizingMode</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>sizingMode</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set the sizing mode for this canvas.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">sizingMode</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-									</div>
 						
 						
 									<div id="attrs" class="api-class-tabpanel">
 										<h2 class="off-left">Attributes</h2>
 						
-											<div id="attr_ABSOLUTE" class="attr item">
-												<a name="config_ABSOLUTE"></a> 
-												<h3 class="name"><code>ABSOLUTE</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-													<span class="flag static">static</span>
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Absolute sizing is performed directly in px.</p>
-											
-												</div>
-											
-											
-											
-											</div>
 											<div id="attr_canvas" class="attr item">
 												<a name="config_canvas"></a> 
 												<h3 class="name"><code>canvas</code></h3>
@@ -419,37 +281,9 @@
 											
 											
 											</div>
-											<div id="attr_RELATIVE" class="attr item">
-												<a name="config_RELATIVE"></a> 
-												<h3 class="name"><code>RELATIVE</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-													<span class="flag static">static</span>
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Relative sizing is done relative to the screen height.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_resizeMode" class="attr item">
-												<a name="config_resizeMode"></a> 
-												<h3 class="name"><code>resizeMode</code></h3>
+											<div id="attr_sizeAttenuation" class="attr item">
+												<a name="config_sizeAttenuation"></a> 
+												<h3 class="name"><code>sizeAttenuation</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -467,64 +301,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Sizing mode, can be relative of absolute.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_SCALED" class="attr item">
-												<a name="config_SCALED"></a> 
-												<h3 class="name"><code>SCALED</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-													<span class="flag static">static</span>
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Scaled sizing is done relative to the camera position.</p>
-											<p>Is similar to the RELATIVE sizing but the actual sprite size is recalculated (slower) but allows for raytracing to be performed properly.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_size" class="attr item">
-												<a name="config_size"></a> 
-												<h3 class="name"><code>size</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Size of the sprite.</p>
-											<p>If configured as relative to the screen (from 0 to 1) or absolutely in px.</p>
+													<p>Size attenuation indicates how the sprite should be scaled relative to the camera.</p>
 											
 												</div>
 											
@@ -534,7 +311,7 @@
 											<div id="attr_texture" class="attr item">
 												<a name="config_texture"></a> 
 												<h3 class="name"><code>texture</code></h3>
-												<span class="type">THREE.CanvasTexture</span>
+												<span class="type"><a href="../classes/CanvasTexture.html" class="crosslink">CanvasTexture</a></span>
 											
 											
 											

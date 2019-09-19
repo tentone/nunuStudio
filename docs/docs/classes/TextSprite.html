@@ -43,6 +43,7 @@
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
 								<li><a href="../classes/BloomPass.html">BloomPass</a></li>
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
+								<li><a href="../classes/BrowserView.html">BrowserView</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
 								<li><a href="../classes/CanvasSprite.html">CanvasSprite</a></li>
@@ -235,11 +236,7 @@
 						
 											<ul class="index-list methods extends">
 													<li class="index-item method">
-														<a href="#method_setText">setText</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_updateCanvas">updateCanvas</a>
+														<a href="#method_drawText">drawText</a>
 						
 													</li>
 											</ul>
@@ -281,9 +278,6 @@
 														<a href="#attr_RIGHT">RIGHT</a>
 													</li>
 													<li class="index-item attr">
-														<a href="#attr_size">size</a>
-													</li>
-													<li class="index-item attr">
 														<a href="#attr_text">text</a>
 													</li>
 											</ul>
@@ -294,58 +288,8 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_setText" class="method item">
-												<h3 class="name"><code>setText</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>text</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set the text to be displayed.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">text</code>
-																	<span class="type">String</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_updateCanvas" class="method item">
-												<h3 class="name"><code>updateCanvas</code></h3>
+											<div id="method_drawText" class="method item">
+												<h3 class="name"><code>drawText</code></h3>
 											
 													<span class="paren">()</span>
 											
@@ -365,8 +309,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Update the canvas texture.</p>
-											<p>Redraw text into the canvas and update scale.</p>
+													<p>Update the canvas texture, redrawText text into the canvas.</p>
 											
 												</div>
 											
@@ -652,33 +595,6 @@
 											
 												<div class="description">
 													<p>Align text to the right side.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_size" class="attr item">
-												<a name="config_size"></a> 
-												<h3 class="name"><code>size</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Scale of the object.</p>
 											
 												</div>
 											

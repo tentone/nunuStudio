@@ -43,6 +43,7 @@
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
 								<li><a href="../classes/BloomPass.html">BloomPass</a></li>
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
+								<li><a href="../classes/BrowserView.html">BrowserView</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
 								<li><a href="../classes/CanvasSprite.html">CanvasSprite</a></li>
@@ -247,6 +248,10 @@
 														<a href="#method_updateGeometry">updateGeometry</a>
 						
 													</li>
+													<li class="index-item method">
+														<a href="#method_updateShader">updateShader</a>
+						
+													</li>
 											</ul>
 										</div>
 						
@@ -277,6 +282,9 @@
 														<a href="#attr_font">font</a>
 													</li>
 													<li class="index-item attr">
+														<a href="#attr_fontScale">fontScale</a>
+													</li>
+													<li class="index-item attr">
 														<a href="#attr_LEFT">LEFT</a>
 													</li>
 													<li class="index-item attr">
@@ -284,9 +292,6 @@
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_lineHeight">lineHeight</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_mode">mode</a>
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_MSDF">MSDF</a>
@@ -304,13 +309,22 @@
 														<a href="#attr_SDF_SHADER">SDF_SHADER</a>
 													</li>
 													<li class="index-item attr">
+														<a href="#attr_shader">shader</a>
+													</li>
+													<li class="index-item attr">
 														<a href="#attr_smoothing">smoothing</a>
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_text">text</a>
 													</li>
 													<li class="index-item attr">
+														<a href="#attr_texture">texture</a>
+													</li>
+													<li class="index-item attr">
 														<a href="#attr_threshold">threshold</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_uniforms">uniforms</a>
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_VERTEX_SHADER">VERTEX_SHADER</a>
@@ -397,8 +411,36 @@
 												</div>
 											
 												<div class="description">
-													<p>Update the text bitmap geometry.</p>
+													<p>Update the text bitmap geometry to match config.</p>
 											<p>Should be called every time after changes to configuration are made.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="method_updateShader" class="method item">
+												<h3 class="name"><code>updateShader</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Update the shader used to draw the bitmap information in the screen.</p>
 											
 												</div>
 											
@@ -624,6 +666,33 @@
 											
 											
 											</div>
+											<div id="attr_fontScale" class="attr item">
+												<a name="config_fontScale"></a> 
+												<h3 class="name"><code>fontScale</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Scale applied to the generated text geometry.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="attr_LEFT" class="attr item">
 												<a name="config_LEFT"></a> 
 												<h3 class="name"><code>LEFT</code></h3>
@@ -700,38 +769,6 @@
 											
 												<div class="description">
 													<p>Space between each text line.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_mode" class="attr item">
-												<a name="config_mode"></a> 
-												<h3 class="name"><code>mode</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Text bitmap rendering mode, can be:</p>
-											<ul>
-											<li>TextBitmap.BITMAP</li>
-											<li>TextBitmap.SDF</li>
-											<li>TextBitmap.MSDF</li>
-											</ul>
 											
 												</div>
 											
@@ -888,6 +925,38 @@
 											
 											
 											</div>
+											<div id="attr_shader" class="attr item">
+												<a name="config_shader"></a> 
+												<h3 class="name"><code>shader</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Text bitmap rendering shader, can be:</p>
+											<ul>
+											<li>TextBitmap.BITMAP</li>
+											<li>TextBitmap.SDF</li>
+											<li>TextBitmap.MSDF</li>
+											</ul>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="attr_smoothing" class="attr item">
 												<a name="config_smoothing"></a> 
 												<h3 class="name"><code>smoothing</code></h3>
@@ -942,10 +1011,38 @@
 											
 											
 											</div>
+											<div id="attr_texture" class="attr item">
+												<a name="config_texture"></a> 
+												<h3 class="name"><code>texture</code></h3>
+												<span class="type">THREE.Texture</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Texture containing the bitmap characters.</p>
+											<p>Data specifiyng the position of each character in the texture should be placed in the font.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="attr_threshold" class="attr item">
 												<a name="config_threshold"></a> 
 												<h3 class="name"><code>threshold</code></h3>
-												<span class="type">THREE.Color</span>
+												<span class="type">Number</span>
 											
 											
 											
@@ -963,6 +1060,33 @@
 											
 												<div class="description">
 													<p>SDF distance alpha threshold.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_uniforms" class="attr item">
+												<a name="config_uniforms"></a> 
+												<h3 class="name"><code>uniforms</code></h3>
+												<span class="type">Object</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Uniforms passed to the text rendering shaders.</p>
 											
 												</div>
 											

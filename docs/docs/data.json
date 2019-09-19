@@ -321,6 +321,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\misc\\BrowserView.js": {
+            "name": "..\\source\\core\\objects\\misc\\BrowserView.js",
+            "modules": {},
+            "classes": {
+                "BrowserView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\misc\\Container.js": {
             "name": "..\\source\\core\\objects\\misc\\Container.js",
             "modules": {
@@ -412,6 +421,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\sprite\\CanvasSprite.js": {
+            "name": "..\\source\\core\\objects\\sprite\\CanvasSprite.js",
+            "modules": {},
+            "classes": {
+                "CanvasSprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\sprite\\Sprite.js": {
             "name": "..\\source\\core\\objects\\sprite\\Sprite.js",
             "modules": {
@@ -419,15 +437,6 @@
             },
             "classes": {
                 "Sprite": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\source\\core\\objects\\text\\CanvasSprite.js": {
-            "name": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "modules": {},
-            "classes": {
-                "CanvasSprite": 1
             },
             "fors": {},
             "namespaces": {}
@@ -468,15 +477,6 @@
             },
             "classes": {
                 "Program": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\source\\core\\objects\\RendererConfiguration.js": {
-            "name": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "modules": {},
-            "classes": {
-                "RendererConfiguration": 1
             },
             "fors": {},
             "namespaces": {}
@@ -702,6 +702,15 @@
             "modules": {},
             "classes": {
                 "CSS3DSprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\renderer\\RendererConfiguration.js": {
+            "name": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "modules": {},
+            "classes": {
+                "RendererConfiguration": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1186,6 +1195,7 @@
                 "TextMesh": 1,
                 "Mesh": 1,
                 "SkinnedMesh": 1,
+                "BrowserView": 1,
                 "TextSprite": 1
             },
             "fors": {},
@@ -1275,6 +1285,7 @@
             "classes": {
                 "CanvasTexture": 1,
                 "SpineTexture": 1,
+                "CanvasSprite": 1,
                 "CompressedTexture": 1,
                 "CubeTexture": 1,
                 "SpriteSheetTexture": 1,
@@ -1295,7 +1306,6 @@
             "elements": {},
             "classes": {
                 "Sprite": 1,
-                "CanvasSprite": 1,
                 "TextBitmap": 1
             },
             "fors": {},
@@ -1311,7 +1321,6 @@
             "elements": {},
             "classes": {
                 "Program": 1,
-                "RendererConfiguration": 1,
                 "Scene": 1
             },
             "fors": {},
@@ -1348,12 +1357,13 @@
                 "ShaderPass": 1,
                 "CSS3DObject": 1,
                 "CSS3DRenderer": 1,
-                "CSS3DSprite": 1
+                "CSS3DSprite": 1,
+                "RendererConfiguration": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\renderer\\css\\CSS3DSprite.js",
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
             "line": 3,
             "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
             "author": "miibond"
@@ -2275,6 +2285,28 @@
             ],
             "extends": "{SkinnedMesh}"
         },
+        "BrowserView": {
+            "name": "BrowserView",
+            "shortname": "BrowserView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Meshes",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
+            "line": 3,
+            "description": "BrowserView object is used to navigate webpages inside of the 3D scene.\n\nCan be used to display external web widget using a iframe. Some pages might present limitations regarding their usage inside of a iframe element.",
+            "extends": "{CSS3DObject}",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL to be opened by default.",
+                    "type": "String"
+                }
+            ]
+        },
         "Container": {
             "name": "Container",
             "shortname": "Container",
@@ -2469,6 +2501,21 @@
                 }
             ]
         },
+        "CanvasSprite": {
+            "name": "CanvasSprite",
+            "shortname": "CanvasSprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\sprite\\CanvasSprite.js",
+            "line": 3,
+            "description": "Canvas sprite is used to render canvas based elements in a 2D canvas.\n\nThe sprite can be configured to keep a relative size to the screen of an absolute size.",
+            "extends": "{THREE.Sprite}"
+        },
         "Sprite": {
             "name": "Sprite",
             "shortname": "Sprite",
@@ -2490,28 +2537,6 @@
                 }
             ],
             "extends": "{Script}"
-        },
-        "CanvasSprite": {
-            "name": "CanvasSprite",
-            "shortname": "CanvasSprite",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Sprite",
-            "namespace": "",
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 3,
-            "description": "Canvas sprite is used to render canvas based elements in a 2D canvas.\n\nThe sprite can be configured to keep a relative size to the screen of an absolute size.",
-            "extends": "{THREE.Sprite}",
-            "params": [
-                {
-                    "name": "material",
-                    "description": "Override material if it is present no canvas and texture will be created internally.",
-                    "type": "THREE.SpriteMaterial"
-                }
-            ]
         },
         "TextBitmap": {
             "name": "TextBitmap",
@@ -2539,8 +2564,8 @@
                     "type": "THREE.Texture"
                 },
                 {
-                    "name": "mode",
-                    "description": "The text rendering mode to be used (Bitmap, SDF, MSDF).",
+                    "name": "shader",
+                    "description": "The text rendering shader to be used (Bitmap, SDF, MSDF).",
                     "type": "Number"
                 },
                 {
@@ -2620,14 +2645,7 @@
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
             "line": 3,
             "description": "Text sprite is used to represent text as a sprite.\n\nThis approach is memory expensive since it needs to write a new texture for each text. But allows the used to access any font available in the browser.\n\nThe text is rendered to canvas and then copied to a texture. It automatically ajusts the object scale to match the text aspect.",
-            "extends": "{CanvasSprite}",
-            "params": [
-                {
-                    "name": "text",
-                    "description": "Text to draw in the sprite.",
-                    "type": "String"
-                }
-            ]
+            "extends": "{CanvasSprite}"
         },
         "Program": {
             "name": "Program",
@@ -2650,20 +2668,6 @@
                 }
             ],
             "extends": "{ResourceManager}"
-        },
-        "RendererConfiguration": {
-            "name": "RendererConfiguration",
-            "shortname": "RendererConfiguration",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Core",
-            "namespace": "",
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 3,
-            "description": "Renderer configuration stores all the WebGL renderer related parameters."
         },
         "Scene": {
             "name": "Scene",
@@ -3118,6 +3122,20 @@
                     "type": "DOM"
                 }
             ]
+        },
+        "RendererConfiguration": {
+            "name": "RendererConfiguration",
+            "shortname": "RendererConfiguration",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 3,
+            "description": "Renderer configuration stores all the WebGL renderer related parameters."
         },
         "VideoStream": {
             "name": "VideoStream",
@@ -9367,7 +9385,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 56,
+            "line": 57,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
@@ -9376,7 +9394,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 77,
+            "line": 78,
             "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -9393,6 +9411,52 @@
                 }
             ],
             "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
+            "line": 26,
+            "description": "URL of the webpage to open in the view.",
+            "itemtype": "attribute",
+            "name": "url",
+            "type": "{String}",
+            "class": "BrowserView",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
+            "line": 42,
+            "description": "Width in pixels of the web view port.",
+            "itemtype": "attribute",
+            "name": "size",
+            "type": "{Number}",
+            "class": "BrowserView",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
+            "line": 58,
+            "description": "Height in pixels of the web view port.",
+            "itemtype": "attribute",
+            "name": "height",
+            "type": "{Number}",
+            "class": "BrowserView",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
+            "line": 84,
+            "description": "Process URL to transform it into embedded URL when possible for common services.",
+            "itemtype": "method",
+            "name": "processURL",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "BrowserView",
             "module": "Meshes"
         },
         {
@@ -10262,6 +10326,36 @@
             "module": "Animations"
         },
         {
+            "file": "..\\source\\core\\objects\\sprite\\CanvasSprite.js",
+            "line": 13,
+            "description": "Texture where the text is drawn to.",
+            "itemtype": "attribute",
+            "name": "texture",
+            "type": "{CanvasTexture}",
+            "class": "CanvasSprite",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\objects\\sprite\\CanvasSprite.js",
+            "line": 21,
+            "description": "DOM canvas to draw.",
+            "itemtype": "attribute",
+            "name": "canvas",
+            "type": "{DOM}",
+            "class": "CanvasSprite",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\objects\\sprite\\CanvasSprite.js",
+            "line": 47,
+            "description": "Size attenuation indicates how the sprite should be scaled relative to the camera.",
+            "itemtype": "attribute",
+            "name": "sizeAttenuation",
+            "type": "{Number}",
+            "class": "CanvasSprite",
+            "module": "Textures"
+        },
+        {
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
             "line": 14,
             "description": "Material used to render the sprite.",
@@ -10272,106 +10366,8 @@
             "module": "Sprite"
         },
         {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 16,
-            "description": "DOM canvas to draw.",
-            "itemtype": "attribute",
-            "name": "canvas",
-            "type": "{DOM}",
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 24,
-            "description": "Texture where the text is drawn to.",
-            "itemtype": "attribute",
-            "name": "texture",
-            "type": "{THREE.CanvasTexture}",
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 50,
-            "description": "Size of the sprite.\n\nIf configured as relative to the screen (from 0 to 1) or absolutely in px.",
-            "itemtype": "attribute",
-            "name": "size",
-            "type": "{Number}",
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 60,
-            "description": "Sizing mode, can be relative of absolute.",
-            "itemtype": "attribute",
-            "name": "resizeMode",
-            "type": "{Number}",
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 72,
-            "description": "Relative sizing is done relative to the screen height.",
-            "static": 1,
-            "itemtype": "attribute",
-            "name": "RELATIVE",
-            "type": "{Number}",
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 81,
-            "description": "Scaled sizing is done relative to the camera position.\n\nIs similar to the RELATIVE sizing but the actual sprite size is recalculated (slower) but allows for raytracing to be performed properly.",
-            "static": 1,
-            "itemtype": "attribute",
-            "name": "SCALED",
-            "type": "{Number}",
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 92,
-            "description": "Absolute sizing is performed directly in px.",
-            "static": 1,
-            "itemtype": "attribute",
-            "name": "ABSOLUTE",
-            "type": "{Number}",
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 101,
-            "description": "Redraw the content on the canvas.\n\nShould be called everytime that information that needs to be displayed is updated.\n\nWhen relative scalling is enabled size changed should be applied here.",
-            "itemtype": "method",
-            "name": "draw",
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\CanvasSprite.js",
-            "line": 112,
-            "description": "Set the sizing mode for this canvas.",
-            "itemtype": "method",
-            "name": "setSizingMode",
-            "params": [
-                {
-                    "name": "sizingMode",
-                    "description": "",
-                    "type": "Number"
-                }
-            ],
-            "class": "CanvasSprite",
-            "module": "Sprite"
-        },
-        {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 49,
+            "line": 34,
             "description": "BMFont text configuration object.\n\nPassed to the BMFont text geometry generator. It is a object with the format.\n\n{\n   font: (Object) Font data should be parsed from (.json, .fnt, etc) file,\n   text: (String),\n   width: (Number) Width of the text area,\n   align: (String) Side to align the text,\n   lineHeight: (Number) Line height/font size,\n   letterSpacing: (Number) Spacing between characters,\n   mode: (String) a mode for word-wrapper; can be 'pre' (maintain spacing), or 'nowrap' (collapse whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse whitespace, break at width or newlines)\n   tabSize: (Number) the number of spaces to use in a single tab (default 4)\n   start: (Number) the starting index into the text to layout (default 0)\n   end: (Number) the ending index (exclusive) into the text to layout (default text.length)\n}",
             "itemtype": "attribute",
             "name": "config",
@@ -10381,17 +10377,47 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 72,
-            "description": "Text bitmap rendering mode, can be:\n   - TextBitmap.BITMAP \n   - TextBitmap.SDF \n   - TextBitmap.MSDF",
+            "line": 57,
+            "description": "Uniforms passed to the text rendering shaders.",
             "itemtype": "attribute",
-            "name": "mode",
+            "name": "uniforms",
+            "type": "{Object}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 81,
+            "description": "Scale applied to the generated text geometry.",
+            "itemtype": "attribute",
+            "name": "fontScale",
             "type": "{Number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 114,
+            "line": 93,
+            "description": "Text bitmap rendering shader, can be:\n   - TextBitmap.BITMAP \n   - TextBitmap.SDF \n   - TextBitmap.MSDF",
+            "itemtype": "attribute",
+            "name": "shader",
+            "type": "{Number}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 108,
+            "description": "Texture containing the bitmap characters.\n\nData specifiyng the position of each character in the texture should be placed in the font.",
+            "itemtype": "attribute",
+            "name": "texture",
+            "type": "{THREE.Texture}",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 122,
             "description": "BMFont text font data, contains the data about all characters available, and their position in the atlas.\n\nFont data should be parsed from (.json, .fnt, etc) file.\n\nPassed to the BMFont text geometry generator.",
             "itemtype": "attribute",
             "name": "font",
@@ -10401,7 +10427,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 130,
+            "line": 138,
             "description": "Text displayed on the object.",
             "itemtype": "attribute",
             "name": "text",
@@ -10411,7 +10437,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 142,
+            "line": 157,
             "description": "Space between each text line.",
             "itemtype": "attribute",
             "name": "lineHeight",
@@ -10421,7 +10447,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 154,
+            "line": 169,
             "description": "Spacing between each letter.",
             "itemtype": "attribute",
             "name": "letterSpacing",
@@ -10431,7 +10457,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 166,
+            "line": 181,
             "description": "Horizontal text alignment can be\n   - TextBitmap.LEFT\n   - TextBitmap.RIGHT\n   - TextBitmap.CENTER",
             "itemtype": "attribute",
             "name": "align",
@@ -10441,7 +10467,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 181,
+            "line": 196,
             "description": "Width of the text box.",
             "itemtype": "attribute",
             "name": "width",
@@ -10451,7 +10477,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 193,
+            "line": 208,
             "description": "Color of the text, only applied for SDF and MSDF modes.",
             "itemtype": "attribute",
             "name": "color",
@@ -10461,17 +10487,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 205,
+            "line": 220,
             "description": "SDF distance alpha threshold.",
             "itemtype": "attribute",
             "name": "threshold",
-            "type": "{THREE.Color}",
+            "type": "{Number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 217,
+            "line": 232,
             "description": "Smoothing of the text borders.",
             "itemtype": "attribute",
             "name": "smoothing",
@@ -10481,7 +10507,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 234,
+            "line": 252,
             "description": "Simple bitmap font atlas.",
             "static": 1,
             "itemtype": "attribute",
@@ -10492,7 +10518,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 243,
+            "line": 261,
             "description": "Single channel signed distance field font atlas.",
             "static": 1,
             "itemtype": "attribute",
@@ -10503,7 +10529,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 252,
+            "line": 270,
             "description": "Multi channel signed distance field font atlas.",
             "static": 1,
             "itemtype": "attribute",
@@ -10514,7 +10540,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 261,
+            "line": 279,
             "description": "Align text to the left side.",
             "static": 1,
             "itemtype": "attribute",
@@ -10525,7 +10551,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 270,
+            "line": 288,
             "description": "Align text to the center.",
             "static": 1,
             "itemtype": "attribute",
@@ -10536,7 +10562,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 279,
+            "line": 297,
             "description": "Align text to the right side.",
             "static": 1,
             "itemtype": "attribute",
@@ -10547,7 +10573,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 288,
+            "line": 306,
             "description": "Vertex shader used to draw the text, is responsible for applying the billboard effect by removing the rotation from the transformation matrix.",
             "static": 1,
             "itemtype": "attribute",
@@ -10558,7 +10584,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 326,
+            "line": 344,
             "description": "Shader object used to render the bitmap directly without any processing.\n\nContains only the fragment shader code, the vertex is the same for every render mode.",
             "static": 1,
             "itemtype": "attribute",
@@ -10569,7 +10595,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 344,
+            "line": 362,
             "description": "Shader object used to render single channel SDF data.\n\nContains only the fragment shader code, the vertex is the same for every render mode.\n\nDetails about signed distance fields for vetorial shapes rendering.\n   - https://steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf",
             "static": 1,
             "itemtype": "attribute",
@@ -10580,7 +10606,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 370,
+            "line": 388,
             "description": "Shader object used to render single channel MSDF data.\n\nContains only the fragment shader code, the vertex is the same for every render mode.\n\nDetails about Multi‐Channel Signed Distance Fields for vetorial shapes rendering.\n   - https://onlinelibrary.wiley.com/doi/full/10.1111/cgf.13265",
             "static": 1,
             "itemtype": "attribute",
@@ -10591,7 +10617,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 404,
+            "line": 422,
             "description": "Set the text to be displayed.",
             "itemtype": "method",
             "name": "setText",
@@ -10607,8 +10633,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
-            "line": 415,
-            "description": "Update the text bitmap geometry.\n\nShould be called every time after changes to configuration are made.",
+            "line": 433,
+            "description": "Update the shader used to draw the bitmap information in the screen.",
+            "itemtype": "method",
+            "name": "updateShader",
+            "class": "TextBitmap",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
+            "line": 467,
+            "description": "Update the text bitmap geometry to match config.\n\nShould be called every time after changes to configuration are made.",
             "itemtype": "method",
             "name": "updateGeometry",
             "class": "TextBitmap",
@@ -10706,7 +10741,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextMesh.js",
-            "line": 105,
+            "line": 120,
             "description": "Set font used by this text 3D instance.",
             "params": [
                 {
@@ -10722,7 +10757,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextMesh.js",
-            "line": 120,
+            "line": 135,
             "description": "Change text.",
             "params": [
                 {
@@ -10738,7 +10773,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextMesh.js",
-            "line": 135,
+            "line": 146,
             "description": "Update the text geometry.\n\nShould be called after chaging any attribute to generate a new geometry.",
             "itemtype": "method",
             "name": "updateGeometry",
@@ -10747,7 +10782,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextMesh.js",
-            "line": 179,
+            "line": 190,
             "description": "Clone this object instance into a new object.",
             "itemtype": "method",
             "name": "clone",
@@ -10760,7 +10795,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextMesh.js",
-            "line": 190,
+            "line": 201,
             "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10780,17 +10815,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 33,
-            "description": "Scale of the object.",
-            "itemtype": "attribute",
-            "name": "size",
-            "type": "{Number}",
-            "class": "TextSprite",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 45,
+            "line": 31,
             "description": "CSS Font style to be used.",
             "itemtype": "attribute",
             "name": "font",
@@ -10800,7 +10825,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 57,
+            "line": 43,
             "description": "Horizontal text alignment can be\n   - TextSprite.LEFT\n   - TextSprite.RIGHT\n   - TextSprite.CENTER",
             "itemtype": "attribute",
             "name": "align",
@@ -10810,7 +10835,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 72,
+            "line": 58,
             "description": "CSS color of the text.",
             "itemtype": "attribute",
             "name": "color",
@@ -10820,7 +10845,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 84,
+            "line": 70,
             "description": "Text of this object.",
             "itemtype": "attribute",
             "name": "text",
@@ -10830,7 +10855,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 103,
+            "line": 89,
             "description": "Indicates if the text has an outline border.",
             "itemtype": "attribute",
             "name": "outline",
@@ -10840,7 +10865,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 115,
+            "line": 101,
             "description": "CSS color of the outline.",
             "itemtype": "attribute",
             "name": "outlineColor",
@@ -10850,7 +10875,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 127,
+            "line": 113,
             "description": "Width of the text outline.",
             "itemtype": "attribute",
             "name": "outlineWidth",
@@ -10860,7 +10885,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 139,
+            "line": 125,
             "description": "Vertical resolution of the texture created from canvas used.\n\nShould always be a npot of 2.",
             "itemtype": "attribute",
             "name": "resolution",
@@ -10870,7 +10895,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 162,
+            "line": 145,
             "description": "Align text to the left side.",
             "static": 1,
             "itemtype": "attribute",
@@ -10881,7 +10906,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 171,
+            "line": 154,
             "description": "Align text to the center.",
             "static": 1,
             "itemtype": "attribute",
@@ -10892,7 +10917,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 180,
+            "line": 163,
             "description": "Align text to the right side.",
             "static": 1,
             "itemtype": "attribute",
@@ -10903,26 +10928,10 @@
         },
         {
             "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 189,
-            "description": "Set the text to be displayed.",
+            "line": 172,
+            "description": "Update the canvas texture, redrawText text into the canvas.",
             "itemtype": "method",
-            "name": "setText",
-            "params": [
-                {
-                    "name": "text",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "class": "TextSprite",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\text\\TextSprite.js",
-            "line": 200,
-            "description": "Update the canvas texture.\n\nRedraw text into the canvas and update scale.",
-            "itemtype": "method",
-            "name": "updateCanvas",
+            "name": "drawText",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -11396,272 +11405,6 @@
                 "type": "Object"
             },
             "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 10,
-            "description": "Prefered redering backend API to use if available.\n\nIf the selected backend is not available it defaults to WebGL.\n\nShader code might not be cross compatible between rendering backends.",
-            "itemtype": "property",
-            "name": "backend",
-            "type": "{Number}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 22,
-            "description": "Defines whether the renderer should automatically clear its output before rendering a frame.",
-            "itemtype": "property",
-            "name": "autoClear",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 30,
-            "description": "Defines whether the renderer should clear the color buffer.",
-            "itemtype": "property",
-            "name": "autoClearColor",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 38,
-            "description": "Defines whether the renderer should clear the depth buffer.",
-            "itemtype": "property",
-            "name": "autoClearDepth",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 46,
-            "description": "Defines whether the renderer should clear the stencil buffer.",
-            "itemtype": "property",
-            "name": "autoClearStencil",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 54,
-            "description": "Antialiasing flag.",
-            "itemtype": "property",
-            "name": "antialiasing",
-            "type": "{boolean}",
-            "default": "false",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 63,
-            "description": "If true the program is rendered with shadows.",
-            "itemtype": "property",
-            "name": "shadows",
-            "type": "{boolean}",
-            "default": "true",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 72,
-            "description": "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
-            "itemtype": "property",
-            "name": "@stencil",
-            "type": "{boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 80,
-            "description": "Shadow map filtering type.",
-            "itemtype": "property",
-            "name": "shadowsType",
-            "type": "{Number}",
-            "default": "PCFSoftShadowMap",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 89,
-            "description": "Enables automatic updates to the shadows in the scene.\n\nIf you do not require dynamic lighting / shadows, you may set this to false.",
-            "itemtype": "property",
-            "name": "shadowsAutoUpdate",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 99,
-            "description": "Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.",
-            "itemtype": "property",
-            "name": "toneMapping",
-            "type": "{Number}",
-            "default": "THREE.NoToneMapping",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 108,
-            "description": "Exposure level of tone mapping.",
-            "itemtype": "property",
-            "name": "toneMappingExposure",
-            "type": "{Number}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 116,
-            "description": "Tone mapping white point.",
-            "itemtype": "property",
-            "name": "toneMappingWhitePoint",
-            "type": "{Number}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 124,
-            "description": "If true the renderer sorts the objects from back to front for rendering.\n\nImportant if using multiple transparent objects.",
-            "itemtype": "property",
-            "name": "sortObjects",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 134,
-            "description": "Gamma factor applied to the image.",
-            "itemtype": "property",
-            "name": "gammaFactor",
-            "type": "{Number}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 142,
-            "description": "If set, then it expects that all textures and colors are premultiplied gamma.",
-            "itemtype": "property",
-            "name": "gammaInput",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 150,
-            "description": "If set, then it expects that all textures and colors need to be outputted in premultiplied gamma.",
-            "itemtype": "property",
-            "name": "gammaOutput",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 158,
-            "description": "Shader precision. Can be \"highp\", \"mediump\" or \"lowp\". Defaults to \"highp\" if supported by the device.",
-            "itemtype": "property",
-            "name": "precision",
-            "type": "{String}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 166,
-            "description": "Whether the canvas contains an alpha (transparency) buffer or not.",
-            "itemtype": "property",
-            "name": "premultipliedAlpha",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 174,
-            "description": "Whether the renderer will assume that colors have premultiplied alpha.",
-            "itemtype": "property",
-            "name": "premultipliedAlpha",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 182,
-            "description": "Whether to preserve the buffers until manually cleared or overwritten.",
-            "itemtype": "property",
-            "name": "preserveDrawingBuffer",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 190,
-            "description": "Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be \"high-performance\", \"low-power\" or \"default\".",
-            "itemtype": "property",
-            "name": "powerPreference",
-            "type": "{String}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 198,
-            "description": "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
-            "itemtype": "property",
-            "name": "logarithmicDepthBuffer",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 206,
-            "description": "Whether to use physically correct lighting mode.",
-            "itemtype": "property",
-            "name": "physicallyCorrectLights",
-            "type": "{Boolean}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 215,
-            "description": "Use WebGL 1.0 to render data.\n\nMost devices fully support WebGL 1.0 at this point, should work for any type of device.",
-            "static": 1,
-            "itemtype": "attribute",
-            "name": "WEBGL",
-            "type": "{Number}",
-            "class": "RendererConfiguration",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\RendererConfiguration.js",
-            "line": 226,
-            "description": "Use WebGL 2.0 to render data, should be faster for some types of data.\n\nAdditinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.",
-            "static": 1,
-            "itemtype": "attribute",
-            "name": "WEBGL2",
-            "type": "{Number}",
-            "class": "RendererConfiguration",
             "module": "Core"
         },
         {
@@ -12939,7 +12682,27 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 24,
+            "line": 17,
+            "description": "Size of the renderer viewport.",
+            "itemtype": "attribute",
+            "name": "size",
+            "type": "{THREE.Vector2}",
+            "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 25,
+            "description": "Size of the renderer viewport.",
+            "itemtype": "attribute",
+            "name": "size",
+            "type": "{THREE.Vector2}",
+            "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
+            "line": 33,
             "description": "Temporary matrix object.",
             "itemtype": "attribute",
             "name": "matrix",
@@ -12949,7 +12712,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 32,
+            "line": 41,
             "description": "Object cache, used to store the rendered objects state.",
             "itemtype": "attribute",
             "name": "cache",
@@ -12959,7 +12722,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 44,
+            "line": 53,
             "description": "Main DOM element used for the renderer.",
             "itemtype": "attribute",
             "name": "domElement",
@@ -12969,7 +12732,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 54,
+            "line": 63,
             "description": "Camera projected DOM element.",
             "itemtype": "attribute",
             "name": "domElement",
@@ -12979,7 +12742,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 66,
+            "line": 75,
             "description": "Get the size of the renderer.",
             "itemtype": "method",
             "name": "getSize",
@@ -12988,7 +12751,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 76,
+            "line": 85,
             "description": "Set the size of the renderer.\n\nThe size is also applie to the internal DOM division.",
             "itemtype": "method",
             "name": "setSize",
@@ -13009,7 +12772,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
-            "line": 98,
+            "line": 105,
             "description": "Render the CSS object of a scene using a camera.",
             "itemtype": "method",
             "name": "render",
@@ -13026,6 +12789,285 @@
                 }
             ],
             "class": "CSS3DRenderer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 10,
+            "description": "Prefered redering backend API to use if available.\n\nIf the selected backend is not available it defaults to WebGL.\n\nShader code might not be cross compatible between rendering backends.",
+            "itemtype": "property",
+            "name": "backend",
+            "type": "{Number}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 22,
+            "description": "Defines whether the renderer should automatically clear its output before rendering a frame.",
+            "itemtype": "property",
+            "name": "autoClear",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 30,
+            "description": "Defines whether the renderer should clear the color buffer.",
+            "itemtype": "property",
+            "name": "autoClearColor",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 38,
+            "description": "Defines whether the renderer should clear the depth buffer.",
+            "itemtype": "property",
+            "name": "autoClearDepth",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 46,
+            "description": "Defines whether the renderer should clear the stencil buffer.",
+            "itemtype": "property",
+            "name": "autoClearStencil",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 54,
+            "description": "Antialiasing flag.",
+            "itemtype": "property",
+            "name": "antialiasing",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 63,
+            "description": "If true the program is rendered with shadows.",
+            "itemtype": "property",
+            "name": "shadows",
+            "type": "{boolean}",
+            "default": "true",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 72,
+            "description": "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
+            "itemtype": "property",
+            "name": "@stencil",
+            "type": "{boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 80,
+            "description": "Shadow map filtering type.",
+            "itemtype": "property",
+            "name": "shadowsType",
+            "type": "{Number}",
+            "default": "PCFSoftShadowMap",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 89,
+            "description": "Enables automatic updates to the shadows in the scene.\n\nIf you do not require dynamic lighting / shadows, you may set this to false.",
+            "itemtype": "property",
+            "name": "shadowsAutoUpdate",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 99,
+            "description": "Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.",
+            "itemtype": "property",
+            "name": "toneMapping",
+            "type": "{Number}",
+            "default": "THREE.NoToneMapping",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 108,
+            "description": "Exposure level of tone mapping.",
+            "itemtype": "property",
+            "name": "toneMappingExposure",
+            "type": "{Number}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 116,
+            "description": "Tone mapping white point.",
+            "itemtype": "property",
+            "name": "toneMappingWhitePoint",
+            "type": "{Number}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 124,
+            "description": "If true the renderer sorts the objects from back to front for rendering.\n\nImportant if using multiple transparent objects.",
+            "itemtype": "property",
+            "name": "sortObjects",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 134,
+            "description": "Gamma factor applied to the image.",
+            "itemtype": "property",
+            "name": "gammaFactor",
+            "type": "{Number}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 142,
+            "description": "If set, then it expects that all textures and colors are premultiplied gamma.",
+            "itemtype": "property",
+            "name": "gammaInput",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 150,
+            "description": "If set, then it expects that all textures and colors need to be outputted in premultiplied gamma.",
+            "itemtype": "property",
+            "name": "gammaOutput",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 158,
+            "description": "Shader precision. Can be \"highp\", \"mediump\" or \"lowp\". Defaults to \"highp\" if supported by the device.",
+            "itemtype": "property",
+            "name": "precision",
+            "type": "{String}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 166,
+            "description": "Whether the canvas contains an alpha (transparency) buffer or not.",
+            "itemtype": "property",
+            "name": "premultipliedAlpha",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 174,
+            "description": "Whether the renderer will assume that colors have premultiplied alpha.",
+            "itemtype": "property",
+            "name": "premultipliedAlpha",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 182,
+            "description": "Whether to preserve the buffers until manually cleared or overwritten.",
+            "itemtype": "property",
+            "name": "preserveDrawingBuffer",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 190,
+            "description": "Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be \"high-performance\", \"low-power\" or \"default\".",
+            "itemtype": "property",
+            "name": "powerPreference",
+            "type": "{String}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 198,
+            "description": "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
+            "itemtype": "property",
+            "name": "logarithmicDepthBuffer",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 206,
+            "description": "Whether to use physically correct lighting mode.",
+            "itemtype": "property",
+            "name": "physicallyCorrectLights",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 215,
+            "description": "Use WebGL 1.0 to render data.\n\nMost devices fully support WebGL 1.0 at this point, should work for any type of device.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "WEBGL",
+            "type": "{Number}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 226,
+            "description": "Use WebGL 2.0 to render data, should be faster for some types of data.\n\nAdditinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "WEBGL2",
+            "type": "{Number}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 237,
+            "description": "Create a THREE renderer object based on the renderer configuration.",
+            "itemtype": "method",
+            "name": "createRenderer",
+            "return": {
+                "description": "Renderer created from the configuration.",
+                "type": "THREE.WebGLRenderer"
+            },
+            "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
         {
@@ -14112,8 +14154,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 37,
-            "description": "Canvas width.",
+            "line": 39,
+            "description": "Canvas width, internal resolution of the canvas texture.",
             "itemtype": "property",
             "name": "width",
             "type": "{Number}",
@@ -14122,8 +14164,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 45,
-            "description": "Canvas height.",
+            "line": 51,
+            "description": "Canvas height, internal resolution of the canvas texture.",
             "itemtype": "property",
             "name": "height",
             "type": "{Number}",
@@ -14132,7 +14174,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 53,
+            "line": 67,
             "description": "Canvas context 2D, can be used to draw content do the canvas texture.",
             "itemtype": "property",
             "name": "context",
@@ -14142,16 +14184,16 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 65,
-            "description": "Update the size of the canvas texture.\n\nThe texture is image is reset to the default.\n\nShould be called after changing the width or height properties.",
+            "line": 79,
+            "description": "Draw a placeholder figure into the canvas texture.",
             "itemtype": "method",
-            "name": "updateSize",
+            "name": "placeholder",
             "class": "CanvasTexture",
             "module": "Textures"
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 89,
+            "line": 95,
             "description": "Clear canvas texture with a background color.\n\nUses the internal context to draw a rect to fill the canvas.",
             "itemtype": "method",
             "name": "clear",
@@ -14167,7 +14209,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 103,
+            "line": 116,
             "description": "Create JSON description for canvas texture, canvas image is not serialized.",
             "params": [
                 {
@@ -14204,7 +14246,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 73,
+            "line": 72,
             "description": "Cubemap right image index",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -14214,7 +14256,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 81,
+            "line": 80,
             "description": "Cubemap left image index",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -14224,7 +14266,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 89,
+            "line": 88,
             "description": "Cubemap top image index",
             "itemtype": "attribute",
             "name": "TOP",
@@ -14234,7 +14276,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 97,
+            "line": 96,
             "description": "Cubemap bottom image index",
             "itemtype": "attribute",
             "name": "BOTTOM",
@@ -14244,7 +14286,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 105,
+            "line": 104,
             "description": "Cubemap front image index",
             "itemtype": "attribute",
             "name": "FRONT",
@@ -14254,7 +14296,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 113,
+            "line": 112,
             "description": "Cubemap back image index",
             "itemtype": "attribute",
             "name": "BACK",
@@ -14264,7 +14306,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 121,
+            "line": 120,
             "description": "CubeMap mode, 6 images used as source for the texture.",
             "itemtype": "attribute",
             "name": "CUBE",
@@ -14274,7 +14316,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 129,
+            "line": 128,
             "description": "CubeMap mode, single image used as source.",
             "itemtype": "attribute",
             "name": "CROSS",
@@ -14284,7 +14326,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 137,
+            "line": 136,
             "description": "Equirectangular projection mode, 1 single image used as source.\n\nSource image should have a 2:1 aspect ratio.",
             "itemtype": "attribute",
             "name": "EQUIRECTANGULAR",
@@ -14294,7 +14336,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 148,
+            "line": 147,
             "description": "Set resolution of each face of the cubemap.\n\nThe size has to be a power of 2.",
             "itemtype": "method",
             "name": "setSize",
@@ -14310,7 +14352,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 167,
+            "line": 166,
             "description": "Set new images for this cube texture.",
             "itemtype": "method",
             "name": "setImages",
@@ -14331,7 +14373,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 180,
+            "line": 179,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -14340,7 +14382,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 270,
+            "line": 269,
             "description": "Resample an image pixel from ImageData to ImageData, using bilinear interpolation.",
             "itemtype": "method",
             "name": "resampleBilinear",
@@ -14376,7 +14418,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 308,
+            "line": 307,
             "description": "Render a cube face from equirectangular projection.",
             "itemtype": "method",
             "name": "renderEquirectFace",
@@ -14411,7 +14453,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 378,
+            "line": 377,
             "description": "Serialize cube texture to JSON.\n\nAll images of the cube texture are stored individually.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14527,7 +14569,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 224,
+            "line": 221,
             "description": "Set animation playback speed.",
             "itemtype": "method",
             "name": "setAnimationSpeed",
@@ -14543,7 +14585,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 235,
+            "line": 232,
             "description": "Set the sprite sheet grid dimension.\n\nAutomatically sets the totalFrame value to framesHorizontal * framesVertical.",
             "itemtype": "method",
             "name": "setFrameGrid",
@@ -14564,7 +14606,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 252,
+            "line": 249,
             "description": "Set frames to be used for this animation.\n\nFrame starts counting from 0.",
             "itemtype": "method",
             "name": "setAnimationFrames",
@@ -14585,7 +14627,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 267,
+            "line": 264,
             "description": "Dispose spritesheet texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -14594,7 +14636,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 279,
+            "line": 276,
             "description": "Create texture json description.",
             "itemtype": "method",
             "name": "toJSON",

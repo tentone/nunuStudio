@@ -12,6 +12,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Base64Utils",
         "BloomPass",
         "BokehPass",
+        "BrowserView",
         "BufferUtils",
         "ByteArrayUtils",
         "CSS3DObject",
