@@ -24,8 +24,8 @@ function TreeView(parent, closeable, container, index)
 	this.search = new SearchBox(this);
 	this.search.element.style.backgroundColor = Editor.theme.barColor;
 	this.search.setOnChange(function()
-	{
-		self.selectByName(this.value);
+	{	
+		self.selectByName(self.search.search.getText());
 	});
 
 	this.program = null;

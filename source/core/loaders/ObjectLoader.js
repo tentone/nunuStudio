@@ -1050,6 +1050,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			object.color = data.color;
 			object.threshold = data.threshold;
 			object.smoothing = data.smoothing;
+			object.fontScale = data.fontScale;
 			break;
 
 		case "TextSprite":

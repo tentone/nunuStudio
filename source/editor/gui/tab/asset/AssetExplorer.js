@@ -61,7 +61,7 @@ function AssetExplorer(parent, closeable, container, index)
 	this.search.updateInterface();
 	this.search.setOnChange(function()
 	{
-		self.filterByName(this.value);
+		self.filterByName(self.search.search.getText());
 	});
 
 	/**

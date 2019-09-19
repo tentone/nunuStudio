@@ -74,11 +74,22 @@ function TextBitmap(config, texture, shader, color)
 	this.type = "TextBitmap";
 
 	var shader = shader !== undefined ? shader : TextBitmap.BITMAP;
-
-	this.updateGeometry();
+	var fontScale = 0.01;
 
 	Object.defineProperties(this,
 	{
+		/**
+		 * Scale applied to the generated text geometry.
+		 *
+		 * @attribute fontScale
+		 * @type {Number}
+		 */
+		fontScale:
+		{
+			get: function(){return fontScale;},
+			set: function(value){fontScale = value; this.updateGeometry();}
+		},
+
 		/**
 		 * Text bitmap rendering shader, can be:
 		 *    - TextBitmap.BITMAP 
@@ -231,6 +242,7 @@ function TextBitmap(config, texture, shader, color)
 		}
 	});
 
+	this.updateGeometry();
 	this.updateShader(texture);
 }
 
@@ -463,6 +475,14 @@ TextBitmap.prototype.updateGeometry = function()
 {
 	this.geometry.update(this.config);
 
+	if(this.fontScale !== 1.0)
+	{
+		var position = this.geometry.attributes.position.array;
+		for(var i = 0; i < position.length; i++)
+		{
+			position[i] *= this.fontScale;
+		}
+	}
 };
 
 TextBitmap.prototype.toJSON = function(meta)
@@ -470,6 +490,7 @@ TextBitmap.prototype.toJSON = function(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.texture = this.texture.toJSON(meta).uuid;
+	data.object.fontScale = this.fontScale;
 	data.object.shader = this.shader;
 	data.object.text = this.text;
 	data.object.font = this.font;

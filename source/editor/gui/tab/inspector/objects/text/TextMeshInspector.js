@@ -15,10 +15,10 @@ function TextMeshInspector(parent, object)
 	this.form.addText(Locale.text);
 	this.text = new TextArea(this.form);
 	this.text.size.set(190, 55);
-	this.text.setOnChange(function()
+	this.text.setOnInput(function()
 	{
 		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "text", self.text.getText()), updateGeometry));
-	});
+	}, 500);
 	this.form.add(this.text);
 	this.form.nextRow();
 

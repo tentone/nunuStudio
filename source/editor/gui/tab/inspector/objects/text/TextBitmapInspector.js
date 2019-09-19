@@ -10,10 +10,10 @@ function TextBitmapInspector(parent, object)
 	this.form.addText(Locale.text);
 	this.text = new TextArea(this.form);
 	this.text.size.set(0, 55);
-	this.text.setOnChange(function()
+	this.text.setOnInput(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "text", self.text.getText()));
-	});
+	}, 500);
 	this.form.add(this.text);
 	this.form.nextRow();
 

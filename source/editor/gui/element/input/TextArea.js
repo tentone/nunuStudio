@@ -129,14 +129,38 @@ TextArea.prototype.setDisabled = function(value)
 /**
  * Set oninput callback called after every letter typed into the box.
  *
- * Should be used only for immediate input effect.
+ * Should be used only for immediate input effect, or can be used with a timeout value to prevent high CPU usage.
  *
  * @method setOnInput
- * @param {Function} onInput
+ * @param {Function} onInput Callback method called everytime the user types something.
+ * @param {Number} timeout Time (ms) after the user stopped typing to activate the callback.
  */
-TextArea.prototype.setOnInput = function(onInput)
+TextArea.prototype.setOnInput = function(onInput, timeout)
 {
-	this.element.oninput = onInput;
+	if(timeout !== undefined)
+	{
+		var timer = null;
+		var self = this;
+
+		this.element.oninput = function(event)
+		{
+			if(timer !== null)
+			{
+				clearTimeout(timer);
+				timer = null;
+			}
+
+			timer = setTimeout(function()
+			{
+				onInput();
+				timer = null;
+			}, timeout)
+		};
+	}
+	else
+	{
+		this.element.oninput = onInput;
+	}
 };
 
 /**

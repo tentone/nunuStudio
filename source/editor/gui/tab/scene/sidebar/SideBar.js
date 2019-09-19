@@ -368,7 +368,6 @@ SideBar.prototype.createObject = function()
 			letterSpacing: 3,
 			color: 0xFFFFFF
 		}, texture, TextBitmap.SDF);
-		object.scale.set(0.001, 0.001, 0.001);
 
 		Editor.addObject(object, self.editor.scene);
 	}, "Text Bitmap");
