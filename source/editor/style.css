@@ -11,6 +11,11 @@ body
 	-webkit-scrollbar;
 }
 
+select {
+	-moz-appearance: window;
+	-webkit-appearance: none;
+}
+
 /*Only used by webkit browsers*/
 ::-webkit-scrollbar
 {

@@ -14,7 +14,7 @@ function PreviewRenderer()
 	 * @type {THREE.WebGLRenderer}
 	 */
 	this.renderer = new THREE.WebGLRenderer({alpha: true});
-	this.renderer.setSize(64, 64);
+	this.renderer.setSize(128, 128);
 	
 	/**
 	 * DOM canvas where the result is rendered to.

@@ -92,8 +92,6 @@ BrowserView.processURL = function(url)
 	//Youtube use embeded link
 	url = url.replace("watch?v=", "embed/");
 
-	//http://x-frame-options-bypass.herokuapp.com/?url=
-	
 	return url;			
 };
 

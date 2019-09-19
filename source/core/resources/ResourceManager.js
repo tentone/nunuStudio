@@ -191,7 +191,7 @@ ResourceManager.searchObject = function(object, manager, target)
 		}
 
 		//Material/textures
-		if(child.material !== undefined && !(child instanceof LensFlare || child instanceof ParticleEmitter || child instanceof Sky || child instanceof SpineAnimation))
+		if(child.material !== undefined && !(child instanceof TextBitmap || child instanceof TextSprite ||child instanceof LensFlare || child instanceof ParticleEmitter || child instanceof Sky || child instanceof SpineAnimation))
 		{
 			if(child.material instanceof THREE.Material)
 			{
@@ -222,7 +222,7 @@ ResourceManager.searchObject = function(object, manager, target)
 		}
 
 		//Geometries
-		if(child instanceof THREE.Mesh || child instanceof THREE.SkinnedMesh)
+		if((child instanceof THREE.Mesh || child instanceof THREE.SkinnedMesh) && !(child instanceof TextBitmap))
 		{
 			if(child.geometry.type === "BufferGeometry" || child.geometry.type === "Geometry")
 			{
@@ -234,7 +234,7 @@ ResourceManager.searchObject = function(object, manager, target)
 		}
 
 		//Textures
-		if(child.texture !== undefined)
+		if(child.texture !== undefined && !(child instanceof TextSprite))
 		{
 			addTexture(child.texture);
 		}
