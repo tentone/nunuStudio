@@ -95,6 +95,10 @@ InspectorContainer.prototype.updateSelection = function()
 		{
 			this.panel = new LockedInspector(this, object);
 		}
+		else if(object instanceof ParticleEmitter)
+		{
+			this.panel = new ParticleEmitterInspector(this, object);
+		}
 		else if(object instanceof SpineAnimation)
 		{
 			this.panel = new SpineInspector(this, object);
@@ -145,10 +149,6 @@ InspectorContainer.prototype.updateSelection = function()
 			{
 				this.panel = new AmbientLightInspector(this, object);
 			}
-		}
-		else if(object instanceof ParticleEmitter)
-		{
-			this.panel = new ParticleEmitterInspector(this, object);
 		}
 		else if(object instanceof Sky)
 		{
