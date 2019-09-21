@@ -13,4 +13,3 @@ function importFrom(namespace)
 
 importFrom(THREE);
 importFrom(CANNON);
-importFrom(SPE);

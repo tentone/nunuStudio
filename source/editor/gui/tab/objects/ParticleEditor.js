@@ -149,9 +149,9 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.addText("Emitter Type");
 	this.type = new DropdownList(this.form);
 	this.type.size.set(100, 18);
-	this.type.addValue(Locale.box, SPE.distributions.BOX);
-	this.type.addValue(Locale.sphere, SPE.distributions.SPHERE);
-	this.type.addValue("Disc", SPE.distributions.DISC);
+	this.type.addValue(Locale.box, ParticleDistributions.BOX);
+	this.type.addValue(Locale.sphere, ParticleDistributions.SPHERE);
+	this.type.addValue("Disc", ParticleDistributions.DISC);
 	this.type.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter, "type", self.type.getValue()));

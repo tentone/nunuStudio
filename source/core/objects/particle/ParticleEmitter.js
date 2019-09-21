@@ -21,7 +21,7 @@ function ParticleEmitter(group, emitter)
 	 * @property group
 	 * @type {SPE.Group}
 	 */
-	this.group = new SPE.Group(group !== undefined ? group : ParticleEmitter.defaultGroup);
+	this.group = new ParticleGroup(group !== undefined ? group : ParticleEmitter.defaultGroup);
 
 	/**
 	 * SPE Emitter instance.
@@ -33,7 +33,7 @@ function ParticleEmitter(group, emitter)
 	 * @property emitter
 	 * @type {SPE.Emitter}
 	 */
-	this.emitter = new SPE.Emitter(emitter !== undefined ? emitter : ParticleEmitter.defaultEmitter);
+	this.emitter = new ParticleEmitterControl(emitter !== undefined ? emitter : ParticleEmitter.defaultEmitter);
 	this.group.addEmitter(this.emitter);
 
 	THREE.Points.call(this, this.group.geometry, this.group.material);
@@ -69,6 +69,49 @@ function ParticleEmitter(group, emitter)
 		}
 	});
 }
+
+/**
+ * A map of supported distribution types used by ParticleEmitterControl instances.
+ *
+ * These distribution types can be applied to an emitter globally, which will affect the `position`, `velocity`, and `acceleration` value calculations for an emitter, or they can be applied on a per-property basis.
+ *
+ * @enum {Number}
+ */
+var ParticleDistributions = {
+	/**
+	 * Values will be distributed within a box.
+	 * @type {Number}
+	 */
+	BOX: 1,
+
+	/**
+	 * Values will be distributed on a sphere.
+	 * @type {Number}
+	 */
+	SPHERE: 2,
+
+	/**
+	 * Values will be distributed on a 2d-disc shape.
+	 * @type {Number}
+	 */
+	DISC: 3,
+};
+
+
+/**
+ * Set this value to however many "steps" you want value-over-lifetime properties to have.
+ *
+ * Its adjustable to fix an interpolation problem:
+ *
+ * Assuming you specify an opacity value as [0, 1, 0] and the `valueOverLifetimeLength` is 4, then the opacity value array will be reinterpolated to be [0, 0.66, 0.66, 0].
+ * This isn"t ideal, as particles would never reach full opacity.
+ *
+ * This property affects the length of ALL value-over-lifetime properties for ALL  emitters and ALL groups. Only values >= 3 && <= 4 are allowed.
+ *
+ * @type {Number}
+ */
+var valueOverLifetimeLength = 4;
+
 
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
 
@@ -222,7 +265,7 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	return data;
 };
 
-SPE.Group.prototype.toJSON = function(meta)
+ParticleGroup.prototype.toJSON = function(meta)
 {
 	var data = {};
 
@@ -246,7 +289,7 @@ SPE.Group.prototype.toJSON = function(meta)
 	return data;
 };
 
-SPE.Emitter.prototype.toJSON = function(meta)
+ParticleEmitterControl.prototype.toJSON = function(meta)
 {
 	var data = {};
 

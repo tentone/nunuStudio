@@ -46,7 +46,6 @@ include("lib/pson/PSON.min.js");
 include("lib/three-bmfont.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
-include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");
 include("lib/chevrotain.min.js");
@@ -170,6 +169,13 @@ include("source/core/objects/physics/PhysicsObject.js");
 include("source/core/objects/spine/SpineAnimation.js");
 include("source/core/objects/spine/SpineTexture.js");
 
+include("source/core/objects/particle/core/ParticleEmitterControl.js");
+include("source/core/objects/particle/core/ParticleGroup.js");
+include("source/core/objects/particle/core/ShaderUtils.js");
+include("source/core/objects/particle/helpers/ShaderAttribute.js");
+include("source/core/objects/particle/helpers/TypedArrayHelper.js");
+include("source/core/objects/particle/shaders/ParticleShaderChunks.js");
+include("source/core/objects/particle/shaders/ParticleShaders.js");
 include("source/core/objects/particle/ParticleEmitter.js");
 
 include("source/core/objects/misc/Sky.js");
