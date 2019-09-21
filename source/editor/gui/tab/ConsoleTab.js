@@ -37,7 +37,7 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @attribute enable
 	 * @type {Boolean} 
 	 */
-	this.enabled = true;
+	this.enabled = !Nunu.developmentMode();
 
 	/**
 	 * Top menu bar displayed on top of the console.
@@ -143,7 +143,7 @@ function ConsoleTab(parent, closeable, container, index)
 		}
 	};
 
-	this.useConsole(true);
+	this.useConsole(this.enabled);
 }
 
 ConsoleTab.prototype = Object.create(TabElement.prototype);

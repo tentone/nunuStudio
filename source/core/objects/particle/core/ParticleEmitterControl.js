@@ -332,7 +332,8 @@ ParticleEmitterControl.prototype._createGetterSetters = function(propObj, propNa
 						self.updateFlags.rotationCenter = true;
 						self.updateCounts.rotationCenter = 0.0;
 					 }
-					 else if(prop === "_randomise") {
+					 else if(prop === "_randomise")
+					 {
 						self.resetFlags[mapName] = value;
 					 }
 					 else
@@ -347,7 +348,8 @@ ParticleEmitterControl.prototype._createGetterSetters = function(propObj, propNa
 
 					 // If the previous value was an array, then make
 					 // sure the provided value is interpolated correctly.
-					 if(Array.isArray(prevValue)) {
+					 if(Array.isArray(prevValue))
+					 {
 						 ShaderUtils.ensureValueOverLifetimeCompliance(self[propName], length, length);
 					 }
 				  };
@@ -376,10 +378,8 @@ ParticleEmitterControl.prototype._calculatePPSValue = function(groupMaxAge)
 {
 	var particleCount = this.particleCount;
 
-
-	// Calculate the `particlesPerSecond` value for this emitter. It"s used
-	// when determining which particles should die and which should live to
-	// see another day. Or be born, for that matter. The "God" property.
+	// Calculate the `particlesPerSecond` value for this emitter.
+	// It"s used  when determining which particles should die and which should live to see another day. Or be born, for that matter. The "God" property.
 	if(this.duration)
 	{
 		this.particlesPerSecond = particleCount / (groupMaxAge < this.duration ? groupMaxAge : this.duration);
@@ -400,36 +400,37 @@ ParticleEmitterControl.prototype._setAttributeOffset = function(startIndex)
 
 ParticleEmitterControl.prototype._assignValue = function(prop, index)
 {
-	switch (prop) {
+	switch (prop)
+	{
 		case "position":
-		  this._assignPositionValue(index);
-		  break;
+			this._assignPositionValue(index);
+			break;
 
 		case "velocity":
 		case "acceleration":
-		  this._assignForceValue(index, prop);
-		  break;
+			this._assignForceValue(index, prop);
+			break;
 
 		case "size":
 		case "opacity":
-		  this._assignAbsLifetimeValue(index, prop);
-		  break;
+			this._assignAbsLifetimeValue(index, prop);
+			break;
 
 		case "angle":
-		  this._assignAngleValue(index);
-		  break;
+			this._assignAngleValue(index);
+			break;
 
 		case "params":
-		  this._assignParamsValue(index);
-		  break;
+			this._assignParamsValue(index);
+			break;
 
 		case "rotation":
-		  this._assignRotationValue(index);
-		  break;
+			this._assignRotationValue(index);
+			break;
 
 		case "color":
-		  this._assignColorValue(index);
-		  break;
+			this._assignColorValue(index);
+			break;
 	}
 };
 
@@ -443,18 +444,17 @@ ParticleEmitterControl.prototype._assignPositionValue = function(index)
 		spread = prop._spread,
 		distribution = prop._distribution;
 
-	switch (distribution) {
+	switch (distribution)
+	{
 		case distributions.BOX:
-		  ShaderUtils.randomVector3(attr, index, value, spread, prop._spreadClamp);
-		  break;
-
+			ShaderUtils.randomVector3(attr, index, value, spread, prop._spreadClamp);
+			break;
 		case distributions.SPHERE:
-		  ShaderUtils.randomVector3OnSphere(attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x, prop._distributionClamp || this.particleCount);
-		  break;
-
+			ShaderUtils.randomVector3OnSphere(attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x, prop._distributionClamp || this.particleCount);
+			break;
 		case distributions.DISC:
-		  ShaderUtils.randomVector3OnDisc(attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x);
-		  break;
+			ShaderUtils.randomVector3OnDisc(attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x);
+			break;
 	}
 };
 
@@ -474,44 +474,44 @@ ParticleEmitterControl.prototype._assignForceValue = function(index, attrName)
 
 	switch (distribution) {
 		case distributions.BOX:
-		  ShaderUtils.randomVector3(this.attributes[attrName], index, value, spread);
-		  break;
+			ShaderUtils.randomVector3(this.attributes[attrName], index, value, spread);
+			break;
 
 		case distributions.SPHERE:
-		  pos = this.attributes.position.typedArray.array;
-		  i = index * 3;
+			pos = this.attributes.position.typedArray.array;
+			i = index * 3;
 
-		  // Ensure position values aren"t zero, otherwise no force will be applied.
-		  positionX = pos[i];
-		  positionY = pos[i + 1];
-		  positionZ = pos[i + 2];
+			// Ensure position values aren"t zero, otherwise no force will be applied.
+			positionX = pos[i];
+			positionY = pos[i + 1];
+			positionZ = pos[i + 2];
 
-		  ShaderUtils.randomDirectionVector3OnSphere(
-			  this.attributes[attrName], index,
-			  positionX, positionY, positionZ,
-			  this.position._value,
-			  prop._value.x,
-			  prop._spread.x
-		  );
-		  break;
+			ShaderUtils.randomDirectionVector3OnSphere(
+				this.attributes[attrName], index,
+				positionX, positionY, positionZ,
+				this.position._value,
+				prop._value.x,
+				prop._spread.x
+			);
+			break;
 
 		case distributions.DISC:
-		  pos = this.attributes.position.typedArray.array;
-		  i = index * 3;
+			pos = this.attributes.position.typedArray.array;
+			i = index * 3;
 
-		  // Ensure position values aren"t zero, otherwise no force will be applied.
-		  positionX = pos[i];
-		  positionY = pos[i + 1];
-		  positionZ = pos[i + 2];
+			// Ensure position values aren"t zero, otherwise no force will be applied.
+			positionX = pos[i];
+			positionY = pos[i + 1];
+			positionZ = pos[i + 2];
 
-		  ShaderUtils.randomDirectionVector3OnDisc(
-			  this.attributes[attrName], index,
-			  positionX, positionY, positionZ,
-			  this.position._value,
-			  prop._value.x,
-			  prop._spread.x
-		  );
-		  break;
+			ShaderUtils.randomDirectionVector3OnDisc(
+				this.attributes[attrName], index,
+				positionX, positionY, positionZ,
+				this.position._value,
+				prop._value.x,
+				prop._spread.x
+			);
+			break;
 	}
 
 	if(attrName === "acceleration")
@@ -896,11 +896,12 @@ ParticleEmitterControl.prototype.disable = function()
  */
 ParticleEmitterControl.prototype.remove = function()
 {
-	
-	if(this.group !== null) {
+	if(this.group !== null)
+	{
 		this.group.removeEmitter(this);
 	}
-	else {
+	else
+	{
 		console.error("ParticleEmitterControl does not belong to a group, cannot remove.");
 	}
 

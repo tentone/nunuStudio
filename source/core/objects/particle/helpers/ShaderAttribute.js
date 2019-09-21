@@ -184,19 +184,11 @@ ShaderAttribute.prototype._createBufferAttribute = function(size)
 	// Make sure the typedArray is present and correct.
 	this._ensureTypedArray(size);
 
-	// Don"t create it if it already exists, but do flag that it needs updating on the next render cycle.
+	// Don't create it if it already exists, but do flag that it needs updating on the next render cycle.
 	if(this.bufferAttribute !== null)
 	{
 		this.bufferAttribute.array = this.typedArray.array;
-
-		// Since THREE.js version 81, dynamic count calculation was removed so I need to do it manually here.
-		//
-		// In the next minor release, I may well remove this check and force dependency on THREE r81+.
-		if(parseFloat(THREE.REVISION) >= 81)
-		{
-			this.bufferAttribute.count = this.bufferAttribute.array.length / this.bufferAttribute.itemSize;
-		}
-
+		this.bufferAttribute.count = this.bufferAttribute.array.length / this.bufferAttribute.itemSize;
 		this.bufferAttribute.needsUpdate = true;
 		return;
 	}

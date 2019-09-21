@@ -1,5 +1,7 @@
-var ParticleShaders = {
-	vertex: [
+var ParticleShaders =
+{
+	vertex:
+	[
 		ParticleShaderChunks.defines,
 		ParticleShaderChunks.uniforms,
 		ParticleShaderChunks.attributes,
@@ -27,7 +29,6 @@ var ParticleShaders = {
 		"    highp float maxAge = getMaxAge();",
 		"    highp float positionInTime = (age / maxAge);",
 		"    highp float isAlive = when_gt(alive, 0.0);",
-
 		"    #ifdef SHOULD_WIGGLE_PARTICLES",
 		"        float wiggleAmount = positionInTime * getWiggle();",
 		"        float wiggleSin = isAlive * sin(wiggleAmount);",
@@ -146,7 +147,8 @@ var ParticleShaders = {
 		"}"
 	].join("\n"),
 
-	fragment: [
+	fragment:
+	[
 		ParticleShaderChunks.uniforms,
 
 		THREE.ShaderChunk.common,

@@ -4,13 +4,15 @@
  * @author Luke Moody
  * @type {Object}
  */
-var ShaderUtils = {
+var ShaderUtils =
+{
 	/**
 	 * A map of types used by `ShaderUtils.ensureTypedArg` and `ShaderUtils.ensureArrayTypedArg` to compare types against.
 	 *
 	 * @enum {String}
 	 */
-	types: {
+	types:
+	{
 		/**
 		 * Boolean type.
 		 * @type {String}
@@ -97,13 +99,13 @@ var ShaderUtils = {
 	 * @param  {Object} defaultValue A default fallback value if instance check fails
 	 * @return {Object}              The given value if type check passes, or the default value if it fails.
 	 */
-	ensureInstanceOf: function(arg, instance, defaultValue) {
-		
-
+	ensureInstanceOf: function(arg, instance, defaultValue)
+	{
 		if(instance !== undefined && arg instanceof instance) {
 			return arg;
 		}
-		else {
+		else
+		{
 			return defaultValue;
 		}
 	},
@@ -120,12 +122,9 @@ var ShaderUtils = {
 	 * @param  {Object} defaultValue A default fallback value if instance check fails
 	 * @return {Object}              The given value if type check passes, or the default value if it fails.
 	 */
-	ensureArrayInstanceOf: function(arg, instance, defaultValue) {
-		
-
-		// If the argument being checked is an array, loop through
-		// it and ensure all the values are of the correct type,
-		// falling back to the defaultValue if any aren"t.
+	ensureArrayInstanceOf: function(arg, instance, defaultValue)
+	{
+		// If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
 		if(Array.isArray(arg))
 		{
 			for(var i = arg.length - 1; i >= 0; --i)
@@ -277,20 +276,23 @@ var ShaderUtils = {
 		{
 			return start + ((end - start) * delta);
 		}
-		else if(start instanceof THREE.Vector2 && end instanceof THREE.Vector2) {
+		else if(start instanceof THREE.Vector2 && end instanceof THREE.Vector2)
+		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
 			out.y = this.lerp(start.y, end.y, delta);
 			return out;
 		}
-		else if(start instanceof THREE.Vector3 && end instanceof THREE.Vector3) {
+		else if(start instanceof THREE.Vector3 && end instanceof THREE.Vector3)
+		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
 			out.y = this.lerp(start.y, end.y, delta);
 			out.z = this.lerp(start.z, end.z, delta);
 			return out;
 		}
-		else if(start instanceof THREE.Vector4 && end instanceof THREE.Vector4) {
+		else if(start instanceof THREE.Vector4 && end instanceof THREE.Vector4)
+		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
 			out.y = this.lerp(start.y, end.y, delta);
@@ -298,14 +300,16 @@ var ShaderUtils = {
 			out.w = this.lerp(start.w, end.w, delta);
 			return out;
 		}
-		else if(start instanceof THREE.Color && end instanceof THREE.Color) {
+		else if(start instanceof THREE.Color && end instanceof THREE.Color)
+		{
 			out = start.clone();
 			out.r = this.lerp(start.r, end.r, delta);
 			out.g = this.lerp(start.g, end.g, delta);
 			out.b = this.lerp(start.b, end.b, delta);
 			return out;
 		}
-		else {
+		else
+		{
 			console.warn("Invalid argument types, or argument types do not match:", start, end);
 		}
 	},
@@ -395,9 +399,8 @@ var ShaderUtils = {
 	 * @param  {Object} spread      THREE.Vector3 instance describing the random variance to apply to the start value.
 	 * @param  {Object} spreadClamp THREE.Vector3 instance describing the multiples to clamp the randomness to.
 	 */
-	randomVector3: function(attribute, index, base, spread, spreadClamp) {
-		
-
+	randomVector3: function(attribute, index, base, spread, spreadClamp)
+	{
 		var x = base.x + (Math.random() * spread.x - (spread.x * 0.5)),
 			y = base.y + (Math.random() * spread.y - (spread.y * 0.5)),
 			z = base.z + (Math.random() * spread.z - (spread.z * 0.5));
@@ -406,7 +409,8 @@ var ShaderUtils = {
 		// y = this.randomFloat(base.y, spread.y),
 		// z = this.randomFloat(base.z, spread.z);
 
-		if(spreadClamp) {
+		if(spreadClamp)
+		{
 			x = -spreadClamp.x * 0.5 + this.roundToNearestMultiple(x, spreadClamp.x);
 			y = -spreadClamp.y * 0.5 + this.roundToNearestMultiple(y, spreadClamp.y);
 			z = -spreadClamp.z * 0.5 + this.roundToNearestMultiple(z, spreadClamp.z);
@@ -423,9 +427,8 @@ var ShaderUtils = {
 	 * @param  {Object} base      THREE.Color instance describing the start color.
 	 * @param  {Object} spread    THREE.Vector3 instance describing the random variance to apply to the start color.
 	 */
-	randomColor: function(attribute, index, base, spread) {
-		
-
+	randomColor: function(attribute, index, base, spread)
+	{
 		var r = base.r + (Math.random() * spread.x),
 			g = base.g + (Math.random() * spread.y),
 			b = base.b + (Math.random() * spread.z);
@@ -439,20 +442,20 @@ var ShaderUtils = {
 	},
 
 
-	randomColorAsHex: (function() {
-		
-
+	randomColorAsHex: (function()
+	{
 		var workingColor = new THREE.Color();
 
 		/**
 		 * Assigns a random color value, encoded as a hex value in decimal
 		 * format, to a ShaderAttribute instance.
 		 * @param  {Object} attribute The instance of ShaderAttribute to save the result to.
-		 * @param  {Number} index     The offset in the attribute"s TypedArray to save the result from.
-		 * @param  {Object} base      THREE.Color instance describing the start color.
-		 * @param  {Object} spread    THREE.Vector3 instance describing the random variance to apply to the start color.
+		 * @param  {Number} index The offset in the attribute"s TypedArray to save the result from.
+		 * @param  {Object} base THREE.Color instance describing the start color.
+		 * @param  {Object} spread THREE.Vector3 instance describing the random variance to apply to the start color.
 		 */
-		return function(attribute, index, base, spread) {
+		return function(attribute, index, base, spread)
+		{
 			var numItems = base.length,
 				colors = [];
 
@@ -488,11 +491,8 @@ var ShaderUtils = {
 	 * @param  {Object} radiusScale       THREE.Vector3 instance describing the scale of each axis of the sphere.
 	 * @param  {Number} radiusSpreadClamp What numeric multiple the projected value should be clamped to.
 	 */
-	randomVector3OnSphere: function(
-		attribute, index, base, radius, radiusSpread, radiusScale, radiusSpreadClamp, distributionClamp
-   ) {
-		
-
+	randomVector3OnSphere: function(attribute, index, base, radius, radiusSpread, radiusScale, radiusSpreadClamp, distributionClamp)
+	{
 		var depth = 2 * Math.random() - 1,
 			t = 6.2832 * Math.random(),
 			r = Math.sqrt(1 - depth * depth),
@@ -502,11 +502,10 @@ var ShaderUtils = {
 			z = 0;
 
 
-		if(radiusSpreadClamp) {
+		if(radiusSpreadClamp)
+		{
 			rand = Math.round(rand / radiusSpreadClamp) * radiusSpreadClamp;
 		}
-
-
 
 		// Set position on sphere
 		x = r * Math.cos(t) * rand;

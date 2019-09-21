@@ -89,9 +89,9 @@ function ParticleGroup(options)
 
 	this.particleCount = 0;
 
-
 	// Map of uniforms to be applied to the ShaderMaterial instance.
-	this.uniforms = {
+	this.uniforms =
+	{
 		texture: {
 			type: "t",
 			value: this.texture
@@ -136,7 +136,8 @@ function ParticleGroup(options)
 	};
 
 	// Add some defines into the mix...
-	this.defines = {
+	this.defines =
+	{
 		HAS_PERSPECTIVE: this.hasPerspective,
 		COLORIZE: this.colorize,
 		VALUE_OVER_LIFETIME_LENGTH: valueOverLifetimeLength,
@@ -151,7 +152,8 @@ function ParticleGroup(options)
 	// Map of all attributes to be applied to the particles.
 	//
 	// See ShaderAttribute for a bit more info on this bit.
-	this.attributes = {
+	this.attributes =
+	{
 		position: new ShaderAttribute("v3", true),
 		acceleration: new ShaderAttribute("v4", true), // w component is drag
 		velocity: new ShaderAttribute("v3", true),
@@ -169,7 +171,8 @@ function ParticleGroup(options)
 
 	// Create the ShaderMaterial instance that"ll help render the
 	// particles.
-	this.material = new THREE.ShaderMaterial({
+	this.material = new THREE.ShaderMaterial(
+	{
 		uniforms: this.uniforms,
 		vertexShader: ParticleShaders.vertex,
 		fragmentShader: ParticleShaders.fragment,
@@ -186,17 +189,16 @@ function ParticleGroup(options)
 	this.geometry = new THREE.BufferGeometry();
 	this.mesh = new THREE.Points(this.geometry, this.material);
 
-	if(this.maxParticleCount === null) {
+	if(this.maxParticleCount === null)
+	{
 		console.warn("ParticleGroup: No maxParticleCount specified. Adding emitters after rendering will probably cause errors.");
 	}
 }
 
 ParticleGroup.constructor = ParticleGroup;
 
-
-ParticleGroup.prototype._updateDefines = function() {
-	
-
+ParticleGroup.prototype._updateDefines = function()
+{
 	var emitters = this.emitters,
 		i = emitters.length - 1,
 		emitter,
@@ -229,9 +231,8 @@ ParticleGroup.prototype._updateDefines = function() {
 	this.material.needsUpdate = true;
 };
 
-ParticleGroup.prototype._applyAttributesToGeometry = function() {
-	
-
+ParticleGroup.prototype._applyAttributesToGeometry = function()
+{
 	var attributes = this.attributes,
 		geometry = this.geometry,
 		geometryAttributes = geometry.attributes,
@@ -240,22 +241,24 @@ ParticleGroup.prototype._applyAttributesToGeometry = function() {
 
 	// Loop through all the shader attributes and assign (or re-assign)
 	// typed array buffers to each one.
-	for(var attr in attributes) {
-		if(attributes.hasOwnProperty(attr)) {
+	for(var attr in attributes)
+	{
+		if(attributes.hasOwnProperty(attr))
+		{
 			attribute = attributes[attr];
 			geometryAttribute = geometryAttributes[attr];
 
 			// Update the array if this attribute exists on the geometry.
 			//
-			// This needs to be done because the attribute"s typed array might have
-			// been resized and reinstantiated, and might now be looking at a
-			// different ArrayBuffer, so reference needs updating.
-			if(geometryAttribute) {
+			// This needs to be done because the attribute"s typed array might have been resized and reinstantiated, and might now be looking at a different ArrayBuffer, so reference needs updating.
+			if(geometryAttribute)
+			{
 				geometryAttribute.array = attribute.typedArray.array;
 			}
 
-			// // Add the attribute to the geometry if it doesn"t already exist.
-			else {
+			// Add the attribute to the geometry if it doesn"t already exist.
+			else
+			{
 				geometry.addAttribute(attr, attribute.bufferAttribute);
 			}
 
@@ -277,29 +280,29 @@ ParticleGroup.prototype._applyAttributesToGeometry = function() {
  *
  * @param {ParticleEmitterControl} emitter The emitter to add to this group.
  */
-ParticleGroup.prototype.addEmitter = function(emitter) {
-	
-
+ParticleGroup.prototype.addEmitter = function(emitter)
+{
 	// Ensure an actual emitter instance is passed here.
 	//
-	// Decided not to throw here, just in case a scene"s
-	// rendering would be paused. Logging an error instead
-	// of stopping execution if exceptions aren"t caught.
-	if(emitter instanceof ParticleEmitterControl === false) {
+	// Decided not to throw here, just in case a scene"s rendering would be paused. Logging an error instead of stopping execution if exceptions aren"t caught.
+	if(emitter instanceof ParticleEmitterControl === false)
+	{
 		console.error("`emitter` argument must be instance of ParticleEmitterControl. Was provided with:", emitter);
 		return;
 	}
 
 	// If the emitter already exists as a member of this group, then
 	// stop here, we don"t want to add it again.
-	else if(this.emitterIDs.indexOf(emitter.uuid) > -1) {
+	else if(this.emitterIDs.indexOf(emitter.uuid) > -1)
+	{
 		console.error("ParticleEmitterControl already exists in this group. Will not add again.");
 		return;
 	}
 
 	// And finally, if the emitter is a member of another group,
 	// don"t add it to this group.
-	else if(emitter.group !== null) {
+	else if(emitter.group !== null)
+	{
 		console.error("ParticleEmitterControl already belongs to another group. Will not add to requested group.");
 		return;
 	}
@@ -312,36 +315,30 @@ ParticleGroup.prototype.addEmitter = function(emitter) {
 	this.particleCount = end;
 
 	// Emit a warning if the emitter being added will exceed the buffer sizes specified.
-	if(this.maxParticleCount !== null && this.particleCount > this.maxParticleCount) {
+	if(this.maxParticleCount !== null && this.particleCount > this.maxParticleCount)
+	{
 		console.warn("ParticleGroup: maxParticleCount exceeded. Requesting", this.particleCount, "particles, can support only", this.maxParticleCount);
 	}
 
-
-	// Set the `particlesPerSecond` value (PPS) on the emitter.
-	// It"s used to determine how many particles to release
-	// on a per-frame basis.
+	// Set the `particlesPerSecond` value (PPS) on the emitter. It"s used to determine how many particles to release on a per-frame basis.
 	emitter._calculatePPSValue(emitter.maxAge._value + emitter.maxAge._spread);
 	emitter._setBufferUpdateRanges(this.attributeKeys);
 
 	// Store the offset value in the TypedArray attributes for this emitter.
 	emitter._setAttributeOffset(start);
 
-	// Save a reference to this group on the emitter so it knows
-	// where it belongs.
+	// Save a reference to this group on the emitter so it knows where it belongs.
 	emitter.group = this;
 
-	// Store reference to the attributes on the emitter for
-	// easier access during the emitter"s tick function.
+	// Store reference to the attributes on the emitter for easier access during the emitter"s tick function.
 	emitter.attributes = this.attributes;
 
-
-
-	// Ensure the attributes and their BufferAttributes exist, and their
-	// TypedArrays are of the correct size.
-	for(var attr in attributes) {
-		if(attributes.hasOwnProperty(attr)) {
-			// When creating a buffer, pass through the maxParticle count
-			// if one is specified.
+	// Ensure the attributes and their BufferAttributes exist, and their TypedArrays are of the correct size.
+	for(var attr in attributes)
+	{
+		if(attributes.hasOwnProperty(attr))
+		{
+			// When creating a buffer, pass through the maxParticle count if one is specified.
 			attributes[attr]._createBufferAttribute(
 				this.maxParticleCount !== null ?
 				this.maxParticleCount :
@@ -385,15 +382,14 @@ ParticleGroup.prototype.addEmitter = function(emitter) {
 };
 
 /**
- * Removes an ParticleEmitterControl instance from this group. When called,
- * all particle"s belonging to the given emitter will be instantly
- * removed from the scene.
+ * Removes an ParticleEmitterControl instance from this group.
+ *
+ * When called, all particle"s belonging to the given emitter will be instantly removed from the scene.
  *
  * @param {ParticleEmitterControl} emitter The emitter to add to this group.
  */
-ParticleGroup.prototype.removeEmitter = function(emitter) {
-	
-
+ParticleGroup.prototype.removeEmitter = function(emitter)
+{
 	var emitterIndex = this.emitterIDs.indexOf(emitter.uuid);
 
 	// Ensure an actual emitter instance is passed here.
@@ -401,13 +397,15 @@ ParticleGroup.prototype.removeEmitter = function(emitter) {
 	// Decided not to throw here, just in case a scene"s
 	// rendering would be paused. Logging an error instead
 	// of stopping execution if exceptions aren"t caught.
-	if(emitter instanceof ParticleEmitterControl === false) {
+	if(emitter instanceof ParticleEmitterControl === false)
+	{
 		console.error("`emitter` argument must be instance of ParticleEmitterControl. Was provided with:", emitter);
 		return;
 	}
 
 	// Issue an error if the emitter isn"t a member of this group.
-	else if(emitterIndex === -1) {
+	else if(emitterIndex === -1)
+	{
 		console.error("ParticleEmitterControl does not exist in this group. Will not remove.");
 		return;
 	}
@@ -431,8 +429,10 @@ ParticleGroup.prototype.removeEmitter = function(emitter) {
 	// Remove this emitter"s attribute values from all shader attributes.
 	// The `.splice()` call here also marks each attribute"s buffer
 	// as needing to update it"s entire contents.
-	for(var attr in this.attributes) {
-		if(this.attributes.hasOwnProperty(attr)) {
+	for(var attr in this.attributes)
+	{
+		if(this.attributes.hasOwnProperty(attr))
+		{
 			this.attributes[attr].splice(start, end);
 		}
 	}
@@ -460,10 +460,12 @@ ParticleGroup.prototype.getFromPool = function()
 	var pool = this.pool,
 		createNew = this._createNewWhenPoolEmpty;
 
-	if(pool.length) {
+	if(pool.length)
+	{
 		return pool.pop();
 	}
-	else if(createNew) {
+	else if(createNew)
+	{
 		var emitter = new ParticleEmitterControl(this.poolCreationSettings);
 		
 		this.addEmitter(emitter);
@@ -494,7 +496,6 @@ ParticleGroup.prototype.releaseIntoPool = function(emitter)
 	return this;
 };
 
-
 /**
  * Get the pool array
  *
@@ -504,7 +505,6 @@ ParticleGroup.prototype.getPool = function()
 {
 	return this.pool;
 };
-
 
 /**
  * Add a pool of emitters to this particle group

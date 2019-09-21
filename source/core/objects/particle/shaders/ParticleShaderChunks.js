@@ -1,14 +1,17 @@
 "use strict";
 
-var ParticleShaderChunks = {
+var ParticleShaderChunks =
+{
 	// Register color-packing define statements.
-	defines: [
+	defines:
+	[
 		"#define PACKED_COLOR_SIZE 256.0",
 		"#define PACKED_COLOR_DIVISOR 255.0"
 	].join("\n"),
 
 	// All uniforms used by vertex / fragment shaders
-	uniforms: [
+	uniforms:
+	[
 		"uniform float deltaTime;",
 		"uniform float runTime;",
 		"uniform sampler2D texture;",
@@ -21,7 +24,8 @@ var ParticleShaderChunks = {
 	// Note that some attributes are squashed into other ones:
 	//
 	// * Drag is acceleration.w
-	attributes: [
+	attributes:
+	[
 		"attribute vec4 acceleration;",
 		"attribute vec3 velocity;",
 		"attribute vec4 rotation;",
@@ -34,7 +38,8 @@ var ParticleShaderChunks = {
 	].join("\n"),
 
 	//
-	varyings: [
+	varyings:
+	[
 		"varying vec4 vColor;",
 		"#ifdef SHOULD_ROTATE_TEXTURE",
 		"    varying float vAngle;",
@@ -48,7 +53,8 @@ var ParticleShaderChunks = {
 
 	// Branch-avoiding comparison fns
 	// - http://theorangeduck.com/page/avoiding-shader-conditionals
-	branchAvoidanceFunctions: [
+	branchAvoidanceFunctions:
+	[
 		"float when_gt(float x, float y) {",
 		"    return max(sign(x - y), 0.0);",
 		"}",
@@ -83,7 +89,8 @@ var ParticleShaderChunks = {
 	// From:
 	// - http://stackoverflow.com/a/12553149
 	// - https://stackoverflow.com/questions/22895237/hexadecimal-to-rgb-values-in-webgl-shader
-	unpackColor: [
+	unpackColor:
+	[
 		"vec3 unpackColor(in float hex) {",
 		"   vec3 c = vec3(0.0);",
 
@@ -99,7 +106,8 @@ var ParticleShaderChunks = {
 		"}",
 	].join("\n"),
 
-	unpackRotationAxis: [
+	unpackRotationAxis:
+	[
 		"vec3 unpackRotationAxis(in float hex) {",
 		"   vec3 c = vec3(0.0);",
 
@@ -118,7 +126,8 @@ var ParticleShaderChunks = {
 		"}",
 	].join("\n"),
 
-	floatOverLifetime: [
+	floatOverLifetime:
+	[
 		"float getFloatOverLifetime(in float positionInTime, in vec4 attr) {",
 		"    highp float value = 0.0;",
 		"    float deltaAge = positionInTime * float(VALUE_OVER_LIFETIME_LENGTH - 1);",
@@ -142,7 +151,8 @@ var ParticleShaderChunks = {
 		"}",
 	].join("\n"),
 
-	colorOverLifetime: [
+	colorOverLifetime:
+	[
 		"vec3 getColorOverLifetime(in float positionInTime, in vec3 color1, in vec3 color2, in vec3 color3, in vec3 color4) {",
 		"    vec3 value = vec3(0.0);",
 		"    value.x = getFloatOverLifetime(positionInTime, vec4(color1.x, color2.x, color3.x, color4.x));",
@@ -152,7 +162,8 @@ var ParticleShaderChunks = {
 		"}",
 	].join("\n"),
 
-	paramFetchingFunctions: [
+	paramFetchingFunctions:
+	[
 		"float getAlive() {",
 		"   return params.x;",
 		"}",
@@ -170,7 +181,8 @@ var ParticleShaderChunks = {
 		"}",
 	].join("\n"),
 
-	forceFetchingFunctions: [
+	forceFetchingFunctions:
+	[
 		"vec4 getPosition(in float age) {",
 		"   return modelViewMatrix * vec4(position, 1.0);",
 		"}",
@@ -185,7 +197,8 @@ var ParticleShaderChunks = {
 	].join("\n"),
 
 
-	rotationFunctions: [
+	rotationFunctions:
+	[
 		// Huge thanks to:
 		// - http://www.neilmendoza.com/glsl-rotation-about-an-arbitrary-axis/
 		"#ifdef SHOULD_ROTATE_PARTICLES",
@@ -223,7 +236,8 @@ var ParticleShaderChunks = {
 
 
 	// Fragment chunks
-	rotateTexture: [
+	rotateTexture:
+	[
 		"    vec2 vUv = vec2(gl_PointCoord.x, 1.0 - gl_PointCoord.y);",
 		"",
 		"    #ifdef SHOULD_ROTATE_TEXTURE",
