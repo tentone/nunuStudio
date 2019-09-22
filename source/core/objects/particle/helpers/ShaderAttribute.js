@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * A helper to handle creating and updating a THREE.BufferAttribute instance.
  *
@@ -119,8 +121,8 @@ ShaderAttribute.prototype.resetDynamic = function()
 
 /**
  * Perform a splice operation on this attribute"s buffer.
- * @param  {Number} start The start index of the splice. Will be multiplied by the number of components for this attribute.
- * @param  {Number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
+ * @param {Number} start The start index of the splice. Will be multiplied by the number of components for this attribute.
+ * @param {Number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
  */
 ShaderAttribute.prototype.splice = function(start, end)
 {
@@ -146,17 +148,17 @@ ShaderAttribute.prototype.forceUpdateAll = function()
  *
  * If not, a new TypedArrayHelper instance will be created.
  *
- * @param  {Number} size The size of the typed array to create or update to.
+ * @param {Number} size The size of the typed array to create or update to.
  */
 ShaderAttribute.prototype._ensureTypedArray = function(size)
 {
-	//Condition that"s most likely to be true at the top: no change.
+	//Condition that's most likely to be true at the top: no change.
 	if(this.typedArray !== null && this.typedArray.size === size * this.componentSize)
 	{
 		return;
 	}
 
-	//Resize the array if we need to, telling the TypedArrayHelper to ignore it"s component size when evaluating size.
+	//Resize the array if we need to, telling the TypedArrayHelper to ignore it's component size when evaluating size.
 	else if(this.typedArray !== null && this.typedArray.size !== size)
 	{
 		this.typedArray.setSize(size);
@@ -177,7 +179,7 @@ ShaderAttribute.prototype._ensureTypedArray = function(size)
  *
  * If a buffer attribute exists already, then it will be marked as needing an update.
  *
- * @param  {Number} size The size of the typed array to create if one doesn't exist, or resize existing array to.
+ * @param {Number} size The size of the typed array to create if one doesn't exist, or resize existing array to.
  */
 ShaderAttribute.prototype._createBufferAttribute = function(size)
 {

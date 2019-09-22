@@ -1,3 +1,5 @@
+"use strict";
+
 var ParticleShaders =
 {
 	vertex:
@@ -61,7 +63,7 @@ var ParticleShaders =
 		"    #endif",
 
 
-		//Rotate the emitter around it"s central point
+		//Rotate the emitter around it's central point
 		"    #ifdef SHOULD_ROTATE_PARTICLES",
 		"        pos = getRotation(pos, positionInTime);",
 		"    #endif",
@@ -107,7 +109,7 @@ var ParticleShaders =
 		"        vAngle = isAlive * getFloatOverLifetime(positionInTime, angle);",
 		"    #endif",
 
-		//If this particle is using a sprite-sheet as a texture, we"ll have to figure out what frame of the texture the particle is using at it"s current position in time.
+		//If this particle is using a sprite-sheet as a texture, we"ll have to figure out what frame of the texture the particle is using at it's current position in time.
 		"    #ifdef SHOULD_CALCULATE_SPRITE",
 		"        float framesX = textureAnimation.x;",
 		"        float framesY = textureAnimation.y;",

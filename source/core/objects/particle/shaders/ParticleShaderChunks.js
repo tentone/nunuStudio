@@ -134,7 +134,7 @@ var ParticleShaderChunks =
 		"    float fIndex = 0.0;",
 		"    float shouldApplyValue = 0.0;",
 
-		//This might look a little odd, but it"s faster in the testing I"ve done than using branches. Uses basic maths to avoid branching.
+		//This might look a little odd, but it's faster in the testing I"ve done than using branches. Uses basic maths to avoid branching.
 		//
 		//Take a look at the branch-avoidance functions defined above, and be sure to check out The Orange Duck site where I got this from (link above).
 		//
