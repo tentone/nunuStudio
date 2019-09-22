@@ -228,3 +228,20 @@ TextSprite.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+
+TextSprite.fromJSON = function(data)
+{
+	var object = new TextSprite();
+	object.text = data.text;
+	object.color = data.color;
+	object.outline = data.outline;
+	object.outlineColor = data.outlineColor;
+	object.outlineWidth = data.outlineWidth;
+	object.resolution = data.resolution;
+	object.align = data.align;
+	object.font = data.font;
+	
+	return object;
+};
+

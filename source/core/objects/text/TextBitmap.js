@@ -504,3 +504,15 @@ TextBitmap.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+TextBitmap.fromJSON = function(data, texture)
+{
+	var object = new TextBitmap(data, texture, data.shader);
+	object.color = data.color;
+	object.threshold = data.threshold;
+	object.smoothing = data.smoothing;
+	object.fontScale = data.fontScale;
+	
+	return object;
+};
+

@@ -1046,23 +1046,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 
 		case "TextBitmap":
-			object = new TextBitmap(data, getTexture(data.texture), data.mode);
-			object.color = data.color;
-			object.threshold = data.threshold;
-			object.smoothing = data.smoothing;
-			object.fontScale = data.fontScale;
+			object = TextBitmap.fromJSON(data, getTexture(data.texture));
 			break;
 
 		case "TextSprite":
-			object = new TextSprite();
-			object.text = data.text;
-			object.color = data.color;
-			object.outline = data.outline;
-			object.outlineColor = data.outlineColor;
-			object.outlineWidth = data.outlineWidth;
-			object.resolution = data.resolution;
-			object.align = data.align;
-			object.font = data.font;
+			object = TextSprite.fromJSON(data);
 			break;
 
 		case "LOD":
