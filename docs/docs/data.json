@@ -19560,10 +19560,5 @@
             "module": "Runtime"
         }
     ],
-    "warnings": [
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\objects\\particle\\helpers\\TypedArrayHelper.js:90"
-        }
-    ]
+    "warnings": []
 }
