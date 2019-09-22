@@ -40,7 +40,7 @@
  * @property {Number} [drag.value=0] A number between 0 and 1 describing the amount of drag to apply to all particles.
  * @property {Number} [drag.spread=0] A number describing the drag variance on a per-particle basis.
  * @property {Boolean} [drag.randomise=false] When a particle is re-spawned, whether it"s drag should be re-randomised or not. Can incur a performance hit.
- * @property {Object} [wiggle={}] This is quite a fun one! The values of this object will determine whether a particle will wiggle, or jiggle, or wave,  or shimmy, or waggle, or... Well you get the idea. The wiggle is calculated over-time, meaning that a particle will  start off with no wiggle, and end up wiggling about with the distance of the `value` specified by the time it dies.  It"s quite handy to simulate fire embers, or similar effects where the particle"s position should slightly change over  time, and such change isn"t easily controlled by rotation, velocity, or acceleration. The wiggle is a combination of sin and cos calculations, so is circular in nature.
+ * @property {Object} [wiggle={}] This is quite a fun one! The values of this object will determine whether a particle will wiggle, or jiggle, or wave,  or shimmy, or waggle, or... Well you get the idea. The wiggle is calculated over-time, meaning that a particle will  start off with no wiggle, and end up wiggling about with the distance of the `value` specified by the time it dies.  It"s quite handy to simulate fire embers, or similar effects where the particle"s position should slightly change over  time, and such change isn't easily controlled by rotation, velocity, or acceleration. The wiggle is a combination of sin and cos calculations, so is circular in nature.
  * @property {Number} [wiggle.value=0] A number describing the amount of wiggle to apply to all particles. It"s measured in distance.
  * @property {Number} [wiggle.spread=0] A number describing the wiggle variance on a per-particle basis.
  * @property {Object} [rotation={}] An object describing this emitter"s rotation. It can either be static, or set to rotate from 0radians to the value of `rotation.value`   over a particle"s lifetime. Rotation values affect both a particle"s position and the forces applied to it.
@@ -83,7 +83,7 @@ function ParticleEmitterControl(options)
 		types = ShaderUtils.types,
 		lifetimeLength = valueOverLifetimeLength;
 
-	// Ensure we have a map of options to play with, and that each option is in the correct format.
+	//Ensure we have a map of options to play with, and that each option is in the correct format.
 	options = ShaderUtils.ensureTypedArg(options, types.OBJECT, {});
 	options.position = ShaderUtils.ensureTypedArg(options.position, types.OBJECT, {});
 	options.velocity = ShaderUtils.ensureTypedArg(options.velocity, types.OBJECT, {});
@@ -106,9 +106,9 @@ function ParticleEmitterControl(options)
 
 	this.type = ShaderUtils.ensureTypedArg(options.type, types.NUMBER, ParticleDistributions.BOX);
 
-	// Start assigning properties...kicking it off with props that DON"T support values over lifetimes.
+	//Start assigning properties...kicking it off with props that DON"T support values over lifetimes.
 	//
-	// Btw, values over lifetimes are just the new way of referring to *Start, *Middle, and *End.
+	//Btw, values over lifetimes are just the new way of referring to *Start, *Middle, and *End.
 	this.position = {
 		_value: ShaderUtils.ensureInstanceOf(options.position.value, THREE.Vector3, new THREE.Vector3()),
 		_spread: ShaderUtils.ensureInstanceOf(options.position.spread, THREE.Vector3, new THREE.Vector3()),
@@ -161,7 +161,7 @@ function ParticleEmitterControl(options)
 		_spread: ShaderUtils.ensureTypedArg(options.maxAge.spread, types.NUMBER, 0)
 	};
 
-	// The following properties can support either single values, or an array of values that change the property over a particle"s lifetime (value over lifetime).
+	//The following properties can support either single values, or an array of values that change the property over a particle"s lifetime (value over lifetime).
 	this.color = {
 		_value: ShaderUtils.ensureArrayInstanceOf(options.color.value, THREE.Color, new THREE.Color()),
 		_spread: ShaderUtils.ensureArrayInstanceOf(options.color.spread, THREE.Vector3, new THREE.Vector3()),
@@ -187,65 +187,60 @@ function ParticleEmitterControl(options)
 	};
 
 
-	// Assign renaining option values.
+	//Assign renaining option values.
 	this.particleCount = ShaderUtils.ensureTypedArg(options.particleCount, types.NUMBER, 100);
 	this.duration = ShaderUtils.ensureTypedArg(options.duration, types.NUMBER, null);
 	this.isStatic = ShaderUtils.ensureTypedArg(options.isStatic, types.BOOLEAN, false);
 	this.activeMultiplier = ShaderUtils.ensureTypedArg(options.activeMultiplier, types.NUMBER, 1);
 	this.direction = ShaderUtils.ensureTypedArg(options.direction, types.NUMBER, 1);
 
-	// Whether this emitter is alive or not.
+	//Whether this emitter is alive or not.
 	this.alive = ShaderUtils.ensureTypedArg(options.alive, types.BOOLEAN, true);
 
-	// The following properties are set internally and are not user-controllable.
+	//The following properties are set internally and are not user-controllable.
 	this.particlesPerSecond = 0;
 
-	// The current particle index for which particles should be marked as active on the next update cycle.
+	//The current particle index for which particles should be marked as active on the next update cycle.
 	this.activationIndex = 0;
 
-	// The offset in the typed arrays this emitter"s particle"s values will start at
+	//The offset in the typed arrays this emitter"s particle"s values will start at
 	this.attributeOffset = 0;
 
-	// The end of the range in the attribute buffers
+	//The end of the range in the attribute buffers
 	this.attributeEnd = 0;
 
-	// Holds the time the emitter has been alive for.
+	//Holds the time the emitter has been alive for.
 	this.age = 0.0;
 
-	// Holds the number of currently-alive particles
+	//Holds the number of currently-alive particles
 	this.activeParticleCount = 0.0;
 
-	// Holds a reference to this emitter"s group once
-	// it"s added to one.
+	//Holds a reference to this emitter"s group once
+	//it"s added to one.
 	this.group = null;
 
-	// Holds a reference to this emitter"s group"s attributes object
-	// for easier access.
+	//Holds a reference to this emitter"s group"s attributes object
+	//for easier access.
 	this.attributes = null;
 
-	// Holds a reference to the params attribute"s typed array
-	// for quicker access.
+	//Holds a reference to the params attribute"s typed array
+	//for quicker access.
 	this.paramsArray = null;
 
-	// A set of flags to determine whether particular properties
-	// should be re-randomised when a particle is reset.
+	//A set of flags to determine whether particular properties should be re-randomised when a particle is reset.
 	//
-	// If a `randomise` property is given, this is preferred.
-	// Otherwise, it looks at whether a spread value has been
-	// given.
+	//If a `randomise` property is given, this is preferred. Otherwise, it looks at whether a spread value has been given.
 	//
-	// It allows randomization to be turned off as desired. If
-	// all randomization is turned off, then I"d expect a performance
-	// boost as no attribute buffers (excluding the `params`)
-	// would have to be re-passed to the GPU each frame (since nothing
-	// except the `params` attribute would have changed).
+	//It allows randomization to be turned off as desired. If
+	//all randomization is turned off, then I"d expect a performance
+	//boost as no attribute buffers (excluding the `params`)
+	//would have to be re-passed to the GPU each frame (since nothing
+	//except the `params` attribute would have changed).
 	this.resetFlags =
 	{
-		position: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false) ||
-		  ShaderUtils.ensureTypedArg(options.radius.randomise, types.BOOLEAN, false),
+		position: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false) || ShaderUtils.ensureTypedArg(options.radius.randomise, types.BOOLEAN, false),
 		velocity: ShaderUtils.ensureTypedArg(options.velocity.randomise, types.BOOLEAN, false),
-		acceleration: ShaderUtils.ensureTypedArg(options.acceleration.randomise, types.BOOLEAN, false) ||
-		  ShaderUtils.ensureTypedArg(options.drag.randomise, types.BOOLEAN, false),
+		acceleration: ShaderUtils.ensureTypedArg(options.acceleration.randomise, types.BOOLEAN, false) || ShaderUtils.ensureTypedArg(options.drag.randomise, types.BOOLEAN, false),
 		rotation: ShaderUtils.ensureTypedArg(options.rotation.randomise, types.BOOLEAN, false),
 		rotationCenter: ShaderUtils.ensureTypedArg(options.rotation.randomise, types.BOOLEAN, false),
 		size: ShaderUtils.ensureTypedArg(options.size.randomise, types.BOOLEAN, false),
@@ -257,7 +252,7 @@ function ParticleEmitterControl(options)
 	this.updateFlags = {};
 	this.updateCounts = {};
 
-	// A map to indicate which emitter parameters should update which attribute.
+	//A map to indicate which emitter parameters should update which attribute.
 	this.updateMap = {
 		maxAge: "params",
 		position: "position",
@@ -287,10 +282,9 @@ function ParticleEmitterControl(options)
 	this.attributeCount = 0;
 
 
-	// Ensure that the value-over-lifetime property objects above
-	// have value and spread properties that are of the same length.
+	//Ensure that the value-over-lifetime property objects above have value and spread properties that are of the same length.
 	//
-	// Also, for now, make sure they have a length of 3 (min/max arguments here).
+	//Also, for now, make sure they have a length of 3 (min/max arguments here).
 	ShaderUtils.ensureValueOverLifetimeCompliance(this.color, lifetimeLength, lifetimeLength);
 	ShaderUtils.ensureValueOverLifetimeCompliance(this.opacity, lifetimeLength, lifetimeLength);
 	ShaderUtils.ensureValueOverLifetimeCompliance(this.size, lifetimeLength, lifetimeLength);
@@ -346,8 +340,7 @@ ParticleEmitterControl.prototype._createGetterSetters = function(propObj, propNa
 
 					 this[prop] = value;
 
-					 // If the previous value was an array, then make
-					 // sure the provided value is interpolated correctly.
+					 //If the previous value was an array, then make sure the provided value is interpolated correctly.
 					 if(Array.isArray(prevValue))
 					 {
 						 ShaderUtils.ensureValueOverLifetimeCompliance(self[propName], length, length);
@@ -378,8 +371,8 @@ ParticleEmitterControl.prototype._calculatePPSValue = function(groupMaxAge)
 {
 	var particleCount = this.particleCount;
 
-	// Calculate the `particlesPerSecond` value for this emitter.
-	// It"s used  when determining which particles should die and which should live to see another day. Or be born, for that matter. The "God" property.
+	//Calculate the `particlesPerSecond` value for this emitter.
+	//It"s used  when determining which particles should die and which should live to see another day. Or be born, for that matter. The "God" property.
 	if(this.duration)
 	{
 		this.particlesPerSecond = particleCount / (groupMaxAge < this.duration ? groupMaxAge : this.duration);
@@ -481,7 +474,7 @@ ParticleEmitterControl.prototype._assignForceValue = function(index, attrName)
 			pos = this.attributes.position.typedArray.array;
 			i = index * 3;
 
-			// Ensure position values aren"t zero, otherwise no force will be applied.
+			//Ensure position values aren't zero, otherwise no force will be applied.
 			positionX = pos[i];
 			positionY = pos[i + 1];
 			positionZ = pos[i + 2];
@@ -499,7 +492,7 @@ ParticleEmitterControl.prototype._assignForceValue = function(index, attrName)
 			pos = this.attributes.position.typedArray.array;
 			i = index * 3;
 
-			// Ensure position values aren"t zero, otherwise no force will be applied.
+			//Ensure position values aren't zero, otherwise no force will be applied.
 			positionX = pos[i];
 			positionY = pos[i + 1];
 			positionZ = pos[i + 2];
@@ -649,7 +642,7 @@ ParticleEmitterControl.prototype._resetBufferRanges = function()
 
 ParticleEmitterControl.prototype._onRemove = function()
 {
-	// Reset any properties of the emitter that were set by a group when it was added.
+	//Reset any properties of the emitter that were set by a group when it was added.
 	this.particlesPerSecond = 0;
 	this.attributeOffset = 0;
 	this.activationIndex = 0;
@@ -683,7 +676,7 @@ ParticleEmitterControl.prototype._checkParticleAges = function(start, end, param
 		  continue;
 		}
 
-		// Increment age
+		//Increment age
 		age = params[index + 1];
 		maxAge = params[index + 2];
 
@@ -724,30 +717,30 @@ ParticleEmitterControl.prototype._activateParticles = function(activationStart, 
 	for(var i = activationStart, index, dtValue; i < activationEnd; ++i) {
 		index = i * 4;
 
-		// Don"t re-activate particles that aren"t dead yet.
-		// if(params[index] !== 0.0 && (this.particleCount !== 1 || this.activeMultiplier !== 1)) {
-		//    continue;
-		// }
+		//Don't re-activate particles that aren't dead yet.
+		//if(params[index] !== 0.0 && (this.particleCount !== 1 || this.activeMultiplier !== 1)) {
+		//   continue;
+		//}
 
 		if(params[index] != 0.0 && this.particleCount !== 1) {
 		  continue;
 		}
 
-		// Increment the active particle count.
+		//Increment the active particle count.
 		this._incrementParticleCount();
 
-		// Mark the particle as alive.
+		//Mark the particle as alive.
 		params[index] = 1.0;
 
-		// Reset the particle
+		//Reset the particle
 		this._resetParticle(i);
 
-		// Move each particle being activated to
-		// it"s actual position in time.
+		//Move each particle being activated to
+		//it"s actual position in time.
 		//
-		// This stops particles being "clumped" together
-		// when frame rates are on the lower side of 60fps
-		// or not constant (a very real possibility!)
+		//This stops particles being "clumped" together
+		//when frame rates are on the lower side of 60fps
+		//or not constant (a very real possibility!)
 		dtValue = dtPerParticle * (i - activationStart)
 		params[index + 1] = direction === -1 ? params[index + 2] - dtValue : dtValue;
 
@@ -778,27 +771,27 @@ ParticleEmitterControl.prototype.tick = function(dt)
 
 	var start = this.attributeOffset,
 		end = start + this.particleCount,
-		params = this.paramsArray, // vec3(alive, age, maxAge, wiggle)
+		params = this.paramsArray, //vec3(alive, age, maxAge, wiggle)
 		ppsDt = this.particlesPerSecond * this.activeMultiplier * dt,
 		activationIndex = this.activationIndex;
 
-	// Reset the buffer update indices.
+	//Reset the buffer update indices.
 	this._resetBufferRanges();
 
-	// Increment age for those particles that are alive,
-	// and kill off any particles whose age is over the limit.
+	//Increment age for those particles that are alive,
+	//and kill off any particles whose age is over the limit.
 	this._checkParticleAges(start, end, params, dt);
 
-	// If the emitter is dead, reset the age of the emitter to zero,
-	// ready to go again if required
+	//If the emitter is dead, reset the age of the emitter to zero,
+	//ready to go again if required
 	if(this.alive === false)
 	{
 		this.age = 0.0;
 		return;
 	}
 
-	// If the emitter has a specified lifetime and we"ve exceeded it,
-	// mark the emitter as dead.
+	//If the emitter has a specified lifetime and we"ve exceeded it,
+	//mark the emitter as dead.
 	if(this.duration !== null && this.age > this.duration)
 	{
 		this.alive = false;
@@ -814,7 +807,7 @@ ParticleEmitterControl.prototype.tick = function(dt)
 
 	this._activateParticles(activationStart, activationEnd, params, dtPerParticle);
 
-	// Move the activation window forward, soldier.
+	//Move the activation window forward, soldier.
 	this.activationIndex += ppsDt;
 
 	if(this.activationIndex > end)
@@ -822,7 +815,7 @@ ParticleEmitterControl.prototype.tick = function(dt)
 		this.activationIndex = start;
 	}
 
-	// Increment the age of the emitter.
+	//Increment the age of the emitter.
 	this.age += dt;
 };
 

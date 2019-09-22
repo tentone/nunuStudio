@@ -23,7 +23,7 @@ var ParticleShaders =
 
 		"void main() {",
 
-		// Setup
+		//Setup
 		"    highp float age = getAge();",
 		"    highp float alive = getAlive();",
 		"    highp float maxAge = getMaxAge();",
@@ -35,27 +35,25 @@ var ParticleShaders =
 		"        float wiggleCos = isAlive * cos(wiggleAmount);",
 		"    #endif",
 
-		//
-		// Forces
-		//
+		//Forces
 
-		// Get forces & position
+		//Get forces & position
 		"    vec3 vel = getVelocity(age);",
 		"    vec3 accel = getAcceleration(age);",
 		"    vec3 force = vec3(0.0);",
 		"    vec3 pos = vec3(position);",
 
-		// Calculate the required drag to apply to the forces.
+		//Calculate the required drag to apply to the forces.
 		"    float drag = 1.0 - (positionInTime * 0.5) * acceleration.w;",
 
-		// Integrate forces...
+		//Integrate forces...
 		"    force += vel;",
 		"    force *= drag;",
 		"    force += accel * age;",
 		"    pos += force;",
 
 
-		// Wiggly wiggly wiggle!
+		//Wiggly wiggly wiggle!
 		"    #ifdef SHOULD_WIGGLE_PARTICLES",
 		"        pos.x += wiggleSin;",
 		"        pos.y += wiggleCos;",
@@ -63,33 +61,30 @@ var ParticleShaders =
 		"    #endif",
 
 
-		// Rotate the emitter around it"s central point
+		//Rotate the emitter around it"s central point
 		"    #ifdef SHOULD_ROTATE_PARTICLES",
 		"        pos = getRotation(pos, positionInTime);",
 		"    #endif",
 
-		// Convert pos to a world-space value
+		//Convert pos to a world-space value
 		"    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);",
 
-		// Determine point size.
+		//Determine point size.
 		"    highp float pointSize = getFloatOverLifetime(positionInTime, size) * isAlive;",
 
-		// Determine perspective
+		//Determine perspective
 		"    #ifdef HAS_PERSPECTIVE",
 		"        float perspective = scale / length(mvPosition.xyz);",
 		"    #else",
 		"        float perspective = 1.0;",
 		"    #endif",
 
-		// Apply perpective to pointSize value
+		//Apply perpective to pointSize value
 		"    float pointSizePerspective = pointSize * perspective;",
 
+		//Appearance
 
-		//
-		// Appearance
-		//
-
-		// Determine color and opacity for this particle
+		//Determine color and opacity for this particle
 		"    #ifdef COLORIZE",
 		"       vec3 c = isAlive * getColorOverLifetime(",
 		"           positionInTime,",
@@ -104,16 +99,15 @@ var ParticleShaders =
 
 		"    float o = isAlive * getFloatOverLifetime(positionInTime, opacity);",
 
-		// Assign color to vColor varying.
+		//Assign color to vColor varying.
 		"    vColor = vec4(c, o);",
 
-		// Determine angle
+		//Determine angle
 		"    #ifdef SHOULD_ROTATE_TEXTURE",
 		"        vAngle = isAlive * getFloatOverLifetime(positionInTime, angle);",
 		"    #endif",
 
-		// If this particle is using a sprite-sheet as a texture, we"ll have to figure out
-		// what frame of the texture the particle is using at it"s current position in time.
+		//If this particle is using a sprite-sheet as a texture, we"ll have to figure out what frame of the texture the particle is using at it"s current position in time.
 		"    #ifdef SHOULD_CALCULATE_SPRITE",
 		"        float framesX = textureAnimation.x;",
 		"        float framesY = textureAnimation.y;",
@@ -133,11 +127,8 @@ var ParticleShaders =
 		"        vSpriteSheet.w = rowNorm;",
 		"    #endif",
 
-		//
-		// Write values
-		//
-
-		// Set PointSize according to size at current point in time.
+		//Write values
+		//Set PointSize according to size at current point in time.
 		"    gl_PointSize = pointSizePerspective;",
 		"    gl_Position = projectionMatrix * mvPosition;",
 

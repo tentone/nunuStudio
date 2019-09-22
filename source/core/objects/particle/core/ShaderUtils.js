@@ -15,24 +15,28 @@ var ShaderUtils =
 	{
 		/**
 		 * Boolean type.
+		 *
 		 * @type {String}
 		 */
 		BOOLEAN: "boolean",
 
 		/**
 		 * String type.
+		 *
 		 * @type {String}
 		 */
 		STRING: "string",
 
 		/**
 		 * Number type.
+		 *
 		 * @type {String}
 		 */
 		NUMBER: "number",
 
 		/**
 		 * Object type.
+		 *
 		 * @type {String}
 		 */
 		OBJECT: "object"
@@ -63,7 +67,7 @@ var ShaderUtils =
 	/**
 	 * Given an array of values, a type, and a default value, ensure the given array"s contents ALL adhere to the provided type, returning the default value if type check fails.
 	 *
-	 * If the given value to check isn"t an Array, delegates to ShaderUtils.ensureTypedArg.
+	 * If the given value to check isn't an Array, delegates to ShaderUtils.ensureTypedArg.
 	 *
 	 * @param {Array|boolean|string|number|object} arg The array of values to check type of.
 	 * @param {String} type The type that should be adhered to.
@@ -72,7 +76,7 @@ var ShaderUtils =
 	 */
 	ensureArrayTypedArg: function(arg, type, defaultValue)
 	{
-		// If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
+		//If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
 		if(Array.isArray(arg))
 		{
 			for(var i = arg.length - 1; i >= 0; --i)
@@ -86,8 +90,7 @@ var ShaderUtils =
 			return arg;
 		}
 
-		// If the arg isn"t an array then just fallback to
-		// checking the type.
+		//If the arg isn't an array then just fallback to checking the type.
 		return this.ensureTypedArg(arg, type, defaultValue);
 	},
 
@@ -115,7 +118,7 @@ var ShaderUtils =
 	 * matches the given instance constructor falling back to a default value if
 	 * the check fails.
 	 *
-	 * If given value isn"t an Array, delegates to `ShaderUtils.ensureInstanceOf`.
+	 * If given value isn't an Array, delegates to `ShaderUtils.ensureInstanceOf`.
 	 *
 	 * @param  {Array|Object} arg          The value to perform the instanceof check on.
 	 * @param  {Function} instance     The constructor of the instance to check against.
@@ -124,7 +127,7 @@ var ShaderUtils =
 	 */
 	ensureArrayInstanceOf: function(arg, instance, defaultValue)
 	{
-		// If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
+		//If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
 		if(Array.isArray(arg))
 		{
 			for(var i = arg.length - 1; i >= 0; --i)
@@ -138,8 +141,8 @@ var ShaderUtils =
 			return arg;
 		}
 
-		// If the arg isn"t an array then just fallback to
-		// checking the type.
+		//If the arg isn't an array then just fallback to
+		//checking the type.
 		return this.ensureInstanceOf(arg, instance, defaultValue);
 	},
 
@@ -149,7 +152,7 @@ var ShaderUtils =
 	 *
 	 * Delegates to `ShaderUtils.interpolateArray` for array resizing.
 	 *
-	 * If properties aren"t arrays, then property values are put into one.
+	 * If properties aren't arrays, then property values are put into one.
 	 *
 	 * @param  {Object} property  The property of an ParticleEmitterControl instance to check compliance of.
 	 * @param  {Number} minLength The minimum length of the array to create.
@@ -160,7 +163,7 @@ var ShaderUtils =
 		minLength = minLength || 3;
 		maxLength = maxLength || 3;
 
-		// First, ensure both properties are arrays.
+		//First, ensure both properties are arrays.
 		if(Array.isArray(property._value) === false)
 		{
 			property._value = [property._value];
@@ -265,7 +268,7 @@ var ShaderUtils =
 	 * @param {(number|Object)} start The start value of the lerp.
 	 * @param {(number|object)} end The end value of the lerp.
 	 * @param {Number} delta The delta posiiton of the lerp operation. Ideally between 0 and 1 (inclusive).
-	 * @return {(number|object|undefined)} The result of the operation. Result will be undefined if the start and end arguments aren"t a supported type, or if their types do not match.
+	 * @return {(number|object|undefined)} The result of the operation. Result will be undefined if the start and end arguments aren't a supported type, or if their types do not match.
 	 */
 	lerpTypeAgnostic: function(start, end, delta)
 	{
@@ -405,9 +408,9 @@ var ShaderUtils =
 			y = base.y + (Math.random() * spread.y - (spread.y * 0.5)),
 			z = base.z + (Math.random() * spread.z - (spread.z * 0.5));
 
-		// var x = this.randomFloat(base.x, spread.x),
-		// y = this.randomFloat(base.y, spread.y),
-		// z = this.randomFloat(base.z, spread.z);
+		//var x = this.randomFloat(base.x, spread.x),
+		//y = this.randomFloat(base.y, spread.y),
+		//z = this.randomFloat(base.z, spread.z);
 
 		if(spreadClamp)
 		{
@@ -507,22 +510,22 @@ var ShaderUtils =
 			rand = Math.round(rand / radiusSpreadClamp) * radiusSpreadClamp;
 		}
 
-		// Set position on sphere
+		//Set position on sphere
 		x = r * Math.cos(t) * rand;
 		y = r * Math.sin(t) * rand;
 		z = depth * rand;
 
-		// Apply radius scale to this position
+		//Apply radius scale to this position
 		x *= radiusScale.x;
 		y *= radiusScale.y;
 		z *= radiusScale.z;
 
-		// Translate to the base position.
+		//Translate to the base position.
 		x += base.x;
 		y += base.y;
 		z += base.z;
 
-		// Set the values in the typed array.
+		//Set the values in the typed array.
 		attribute.typedArray.setVec3Components(index, x, y, z);
 	},
 
@@ -556,20 +559,20 @@ var ShaderUtils =
 			rand = Math.round(rand / radiusSpreadClamp) * radiusSpreadClamp;
 		}
 
-		// Set position on sphere
+		//Set position on sphere
 		x = Math.cos(t) * rand;
 		y = Math.sin(t) * rand;
 
-		// Apply radius scale to this position
+		//Apply radius scale to this position
 		x *= radiusScale.x;
 		y *= radiusScale.y;
 
-		// Translate to the base position.
+		//Translate to the base position.
 		x += base.x;
 		y += base.y;
 		z += base.z;
 
-		// Set the values in the typed array.
+		//Set the values in the typed array.
 		attribute.typedArray.setVec3Components(index, x, y, z);
 	},
 
