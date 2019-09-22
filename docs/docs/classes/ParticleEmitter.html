@@ -94,7 +94,11 @@
 								<li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
 								<li><a href="../classes/OrbitControls.html">OrbitControls</a></li>
 								<li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
+								<li><a href="../classes/ParticleDistributions.html">ParticleDistributions</a></li>
 								<li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
+								<li><a href="../classes/ParticleEmitterControl.html">ParticleEmitterControl</a></li>
+								<li><a href="../classes/ParticleEmitterControlOptions.html">ParticleEmitterControlOptions</a></li>
+								<li><a href="../classes/ParticleGroup.html">ParticleGroup</a></li>
 								<li><a href="../classes/Pass.html">Pass</a></li>
 								<li><a href="../classes/PerspectiveCamera.html">PerspectiveCamera</a></li>
 								<li><a href="../classes/PhysicsGenerator.html">PhysicsGenerator</a></li>
@@ -110,7 +114,9 @@
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
 								<li><a href="../classes/Script.html">Script</a></li>
+								<li><a href="../classes/ShaderAttribute.html">ShaderAttribute</a></li>
 								<li><a href="../classes/ShaderPass.html">ShaderPass</a></li>
+								<li><a href="../classes/ShaderUtils.html">ShaderUtils</a></li>
 								<li><a href="../classes/Skeleton.html">Skeleton</a></li>
 								<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
 								<li><a href="../classes/Sky.html">Sky</a></li>
@@ -134,6 +140,7 @@
 								<li><a href="../classes/TizenKeyboard.html">TizenKeyboard</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
 								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
+								<li><a href="../classes/TypedArrayHelper.html">TypedArrayHelper</a></li>
 								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
 								<li><a href="../classes/Video.html">Video</a></li>
 								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
@@ -142,6 +149,7 @@
 								<li><a href="../classes/Viewport.html">Viewport</a></li>
 								<li><a href="../classes/VRControls.html">VRControls</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
+								<li><a href="../classes/{Object} ParticleGroupOptions.html">{Object} ParticleGroupOptions</a></li>
 							</ul>
 				
 							<ul id="api-modules" class="apis modules">
@@ -223,41 +231,13 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
 								<div id="index" class="api-class-tabpanel index">
 									<h2 class="off-left">Item Index</h2>
 						
-										<div class="index-section methods">
-											<h3>Methods</h3>
-						
-											<ul class="index-list methods extends">
-													<li class="index-item method">
-														<a href="#method_dispose">dispose</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_onBeforeRender">onBeforeRender</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_reload">reload</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_toJSON">toJSON</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_updateMatrix">updateMatrix</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 										<div class="index-section properties">
 											<h3>Properties</h3>
@@ -282,203 +262,9 @@
 											</ul>
 										</div>
 						
-										<div class="index-section attrs">
-											<h3>Attributes</h3>
-						
-											<ul class="index-list attrs extends">
-													<li class="index-item attr">
-														<a href="#attr_defaultEmitter">defaultEmitter</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_defaultGroup">defaultGroup</a>
-													</li>
-											</ul>
-										</div>
 						
 								</div>
 						
-									<div id="methods" class="api-class-tabpanel">
-										<h2 class="off-left">Methods</h2>
-						
-											<div id="method_dispose" class="method item">
-												<h3 class="name"><code>dispose</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Dispose particle emitter.</p>
-											<p>Should be called when destroying particle emitter.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_onBeforeRender" class="method item">
-												<h3 class="name"><code>onBeforeRender</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Particle emitter state is automatically updated before rendering.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_reload" class="method item">
-												<h3 class="name"><code>reload</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Reload internal material and geometry of this particle emitter.</p>
-											<p>Recretes the group and emitter object attached to the particle.</p>
-											<p>May be required after changing material related parameters.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_toJSON" class="method item">
-												<h3 class="name"><code>toJSON</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>meta</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Object</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Serialize object to JSON.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">meta</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Object</span>:
-																<p>json</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_updateMatrix" class="method item">
-												<h3 class="name"><code>updateMatrix</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update particle object matrix.</p>
-											<p>Ignores the particle position if the moveEmitter attribute is set true.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
 						
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
@@ -508,7 +294,7 @@
 											</div>
 											<div id="property_emitter" class="property item">
 												<h3 class="name"><code>emitter</code></h3>
-												<span class="type">SPE.Emitter</span>
+												<span class="type"><a href="../classes/ParticleEmitterControl.html" class="crosslink">ParticleEmitterControl</a></span>
 											
 											
 											
@@ -522,9 +308,8 @@
 												</div>
 											
 												<div class="description">
-													<p>SPE Emitter instance.</p>
+													<p>Emitter instance.</p>
 											<p>Emitter has attributes that can be used to controll the particle system</p>
-											<p><a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html</a></p>
 											
 												</div>
 											
@@ -533,7 +318,7 @@
 											</div>
 											<div id="property_group" class="property item">
 												<h3 class="name"><code>group</code></h3>
-												<span class="type">SPE.Group</span>
+												<span class="type"><a href="../classes/ParticleGroup.html" class="crosslink">ParticleGroup</a></span>
 											
 											
 											
@@ -547,8 +332,7 @@
 												</div>
 											
 												<div class="description">
-													<p>SPE Group instance.</p>
-											<p><a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html</a></p>
+													<p>Particle group instance.</p>
 											
 												</div>
 											
@@ -580,64 +364,6 @@
 											</div>
 									</div>
 						
-									<div id="attrs" class="api-class-tabpanel">
-										<h2 class="off-left">Attributes</h2>
-						
-											<div id="attr_defaultEmitter" class="attr item">
-												<a name="config_defaultEmitter"></a> 
-												<h3 class="name"><code>defaultEmitter</code></h3>
-												<span class="type">Object</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Default particle emitter configuration.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_defaultGroup" class="attr item">
-												<a name="config_defaultGroup"></a> 
-												<h3 class="name"><code>defaultGroup</code></h3>
-												<span class="type">Object</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Default particle emitter group configuration.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
 						
 							</div>
 						</div>

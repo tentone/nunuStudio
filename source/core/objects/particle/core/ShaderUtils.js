@@ -12,42 +12,22 @@ var ShaderUtils =
 	/**
 	 * A map of types used by ShaderUtils.ensureTypedArg and ShaderUtils.ensureArrayTypedArg to compare types against.
 	 *
-	 * @enum {String}
+	 * @static
+	 * @attribute types
+	 * @type {Object}
 	 */
 	types:
 	{
-		/**
-		 * Boolean type.
-		 *
-		 * @type {String}
-		 */
 		BOOLEAN: "boolean",
-
-		/**
-		 * String type.
-		 *
-		 * @type {String}
-		 */
 		STRING: "string",
-
-		/**
-		 * Number type.
-		 *
-		 * @type {String}
-		 */
 		NUMBER: "number",
-
-		/**
-		 * Object type.
-		 *
-		 * @type {String}
-		 */
 		OBJECT: "object"
 	},
 
 	/**
 	 * Given a value, a type, and a default value to fallback to, ensure the given argument adheres to the type requesting, returning the default value if type check is false.
 	 *
+	 * @method ensureTypedArg
 	 * @param {(boolean|string|number|object)} arg The value to perform a type-check on.
 	 * @param {String} type The type the arg argument should adhere to.
 	 * @param {(boolean|string|number|object)} defaultValue A default value to fallback on if the type check fails.
@@ -70,6 +50,8 @@ var ShaderUtils =
 	 *
 	 * If the given value to check isn't an Array, delegates to ShaderUtils.ensureTypedArg.
 	 *
+	 * @static
+	 * @attribute ensureArrayTypedArg
 	 * @param {Array|boolean|string|number|object} arg The array of values to check type of.
 	 * @param {String} type The type that should be adhered to.
 	 * @param {(boolean|string|number|object)} defaultValue A default fallback value.
@@ -98,6 +80,8 @@ var ShaderUtils =
 	/**
 	 * Ensures the given value is an instance of a constructor function.
 	 *
+	 * @static
+	 * @attribute ensureInstanceOf
 	 * @param Object} arg The value to check instance of.
 	 * @param {Function} instance The constructor of the instance to check against.
 	 * @param {Object} defaultValue A default fallback value if instance check fails
@@ -119,6 +103,8 @@ var ShaderUtils =
 	 *
 	 * If given value isn't an Array, delegates to ShaderUtils.ensureInstanceOf.
 	 *
+	 * @static
+	 * @attribute ensureArrayInstanceOf
 	 * @param {Array|Object} arg The value to perform the instanceof check on.
 	 * @param {Function} instance The constructor of the instance to check against.
 	 * @param {Object} defaultValue A default fallback value if instance check fails
@@ -150,6 +136,8 @@ var ShaderUtils =
 	 *
 	 * If properties aren't arrays, then property values are put into one.
 	 *
+	 * @static
+	 * @attribute ensureValueOverLifetimeCompliance
 	 * @param {Object} property  The property of an ParticleEmitterControl instance to check compliance of.
 	 * @param {Number} minLength The minimum length of the array to create.
 	 * @param {Number} maxLength The maximum length of the array to create.
@@ -192,6 +180,8 @@ var ShaderUtils =
 	 *
 	 * Delegates to ShaderUtils.lerpTypeAgnostic to perform the actual interpolation.
 	 *
+	 * @static
+	 * @attribute interpolateArray
 	 * @param {Array} srcArray  The array to lerp.
 	 * @param {Number} newLength The length the array should be interpolated to.
 	 * @return {Array} The interpolated array.
@@ -225,6 +215,8 @@ var ShaderUtils =
 	/**
 	 * Clamp a number to between the given min and max values.
 	 *
+	 * @static
+	 * @attribute clamp
 	 * @param {Number} value The number to clamp.
 	 * @param {Number} min The minimum value.
 	 * @param {Number} max The maximum value.
@@ -237,16 +229,19 @@ var ShaderUtils =
 
 	/**
 	 * If the given value is less than the epsilon value, then return a randomised epsilon value if specified, or just the epsilon value if not.
+	 *
 	 * Works for negative numbers as well as positive.
 	 *
+	 * @static
+	 * @attribute zeroToEpsilon
 	 * @param {Number} value     The value to perform the operation on.
 	 * @param {Boolean} randomise Whether the value should be randomised.
 	 * @return {Number}           The result of the operation.
 	 */
 	zeroToEpsilon: function(value, randomise)
 	{
-		var epsilon = 0.00001,
-			result = value;
+		var epsilon = 0.00001;
+		var result = value;
 
 		result = randomise ? Math.random() * epsilon * 10 : epsilon;
 
@@ -261,6 +256,8 @@ var ShaderUtils =
 	/**
 	 * Linearly interpolates two values of various types. The given values must be of the same type for the interpolation to work.
 	 *
+	 * @static
+	 * @attribute lerpTypeAgnostic
 	 * @param {(number|Object)} start The start value of the lerp.
 	 * @param {(number|object)} end The end value of the lerp.
 	 * @param {Number} delta The delta posiiton of the lerp operation. Ideally between 0 and 1 (inclusive).
@@ -316,6 +313,8 @@ var ShaderUtils =
 	/**
 	 * Perform a linear interpolation operation on two numbers.
 	 *
+	 * @static
+	 * @attribute lerp
 	 * @param {Number} start The start value.
 	 * @param {Number} end The end value.
 	 * @param {Number} delta The position to interpolate to.
@@ -329,6 +328,8 @@ var ShaderUtils =
 	/**
 	 * Rounds a number to a nearest multiple.
 	 *
+	 * @static
+	 * @attribute roundToNearestMultiple
 	 * @param {Number} n The number to round.
 	 * @param {Number} multiple The multiple to round to.
 	 * @return {Number} The result of the round operation.
@@ -360,6 +361,8 @@ var ShaderUtils =
 	/**
 	 * Check if all items in an array are equal. Uses strict equality.
 	 *
+	 * @static
+	 * @attribute arrayValuesAreEqual
 	 * @param {Array} array The array of values to check equality of.
 	 * @return {Boolean}       Whether the array"s values are all equal or not.
 	 */
@@ -377,8 +380,10 @@ var ShaderUtils =
 	},
 
 	/**
-	 * Given a start value and a spread value, create and return a random
-	 * number.
+	 * Given a start value and a spread value, create and return a random number.
+	 *
+	 * @static
+	 * @attribute randomFloat
 	 * @param {Number} base   The start value.
 	 * @param {Number} spread The size of the random variance to apply.
 	 * @return {Number}        A randomised number.
@@ -389,13 +394,14 @@ var ShaderUtils =
 	},
 
 	/**
-	 * Given an ShaderAttribute instance, and various other settings,
-	 * assign values to the attribute"s array in a vec3 format.
+	 * Given an ShaderAttribute instance, and various other settings, assign values to the attribute"s array in a vec3 format.
 	 *
-	 * @param {Object} attribute   The instance of ShaderAttribute to save the result to.
-	 * @param {Number} index       The offset in the attribute"s TypedArray to save the result from.
-	 * @param {Object} base        THREE.Vector3 instance describing the start value.
-	 * @param {Object} spread      THREE.Vector3 instance describing the random variance to apply to the start value.
+	 * @static
+	 * @attribute randomVector3
+	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
+	 * @param {Number} index The offset in the attribute"s TypedArray to save the result from.
+	 * @param {Object} base THREE.Vector3 instance describing the start value.
+	 * @param {Object} spread THREE.Vector3 instance describing the random variance to apply to the start value.
 	 * @param {Object} spreadClamp THREE.Vector3 instance describing the multiples to clamp the randomness to.
 	 */
 	randomVector3: function(attribute, index, base, spread, spreadClamp)
@@ -403,10 +409,6 @@ var ShaderUtils =
 		var x = base.x + (Math.random() * spread.x - (spread.x * 0.5)),
 			y = base.y + (Math.random() * spread.y - (spread.y * 0.5)),
 			z = base.z + (Math.random() * spread.z - (spread.z * 0.5));
-
-		//var x = this.randomFloat(base.x, spread.x),
-		//y = this.randomFloat(base.y, spread.y),
-		//z = this.randomFloat(base.z, spread.z);
 
 		if(spreadClamp)
 		{
@@ -419,12 +421,14 @@ var ShaderUtils =
 	},
 
 	/**
-	 * Given an Shader attribute instance, and various other settings,
-	 * assign Color values to the attribute.
+	 * Given an Shader attribute instance, and various other settings, assign Color values to the attribute.
+	 *
+	 * @static
+	 * @attribute randomColor
 	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
-	 * @param {Number} index     The offset in the attribute"s TypedArray to save the result from.
-	 * @param {Object} base      THREE.Color instance describing the start color.
-	 * @param {Object} spread    THREE.Vector3 instance describing the random variance to apply to the start color.
+	 * @param {Number} index The offset in the attribute"s TypedArray to save the result from.
+	 * @param {Object} base THREE.Color instance describing the start color.
+	 * @param {Object} spread THREE.Vector3 instance describing the random variance to apply to the start color.
 	 */
 	randomColor: function(attribute, index, base, spread)
 	{
@@ -441,18 +445,20 @@ var ShaderUtils =
 	},
 
 
+	/**
+	 * Assigns a random color value, encoded as a hex value in decimal format, to a ShaderAttribute instance.
+	 *
+	 * @static
+	 * @attribute randomColorAsHex
+	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
+	 * @param {Number} index The offset in the attribute"s TypedArray to save the result from.
+	 * @param {Object} base THREE.Color instance describing the start color.
+	 * @param {Object} spread THREE.Vector3 instance describing the random variance to apply to the start color.
+	 */
 	randomColorAsHex: (function()
 	{
 		var workingColor = new THREE.Color();
 
-		/**
-		 * Assigns a random color value, encoded as a hex value in decimal
-		 * format, to a ShaderAttribute instance.
-		 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
-		 * @param {Number} index The offset in the attribute"s TypedArray to save the result from.
-		 * @param {Object} base THREE.Color instance describing the start color.
-		 * @param {Object} spread THREE.Vector3 instance describing the random variance to apply to the start color.
-		 */
 		return function(attribute, index, base, spread)
 		{
 			var numItems = base.length,
@@ -479,9 +485,10 @@ var ShaderUtils =
 	}()),
 
 	/**
-	 * Assigns a random vector 3 value to an ShaderAttribute instance, projecting the
-	 * given values onto a sphere.
+	 * Assigns a random vector 3 value to an ShaderAttribute instance, projecting the given values onto a sphere.
 	 *
+	 * @static
+	 * @attribute randomVector3OnSphere
 	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
 	 * @param {Number} index     The offset in the attribute"s TypedArray to save the result from.
 	 * @param {Object} base              THREE.Vector3 instance describing the origin of the transform.
@@ -534,6 +541,8 @@ var ShaderUtils =
 	/**
 	 * Assigns a random vector 3 value to an ShaderAttribute instance, projecting the given values onto a 2d-disc.
 	 *
+	 * @static
+	 * @attribute randomVector3OnDisc
 	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
 	 * @param {Number} index The offset in the attribute"s TypedArray to save the result from.
 	 * @param {Object} base THREE.Vector3 instance describing the origin of the transform.
@@ -572,23 +581,25 @@ var ShaderUtils =
 		attribute.typedArray.setVec3Components(index, x, y, z);
 	},
 
+	/**
+	 * Given an ShaderAttribute instance, create a direction vector from the given
+	 * position, using speed as the magnitude. Values are saved to the attribute.
+	 *
+	 * @static
+	 * @attribute randomDirectionVector3OnSphere
+	 * @param {Object} attribute       The instance of ShaderAttribute to save the result to.
+	 * @param {Number} index           The offset in the attribute"s TypedArray to save the result from.
+	 * @param {Number} posX            The particle"s x coordinate.
+	 * @param {Number} posY            The particle"s y coordinate.
+	 * @param {Number} posZ            The particle"s z coordinate.
+	 * @param {Object} emitterPosition THREE.Vector3 instance describing the emitter"s base position.
+	 * @param {Number} speed           The magnitude to apply to the vector.
+	 * @param {Number} speedSpread     The amount of randomness to apply to the magnitude.
+	 */
 	randomDirectionVector3OnSphere: (function()
 	{
 		var v = new THREE.Vector3();
 
-		/**
-		 * Given an ShaderAttribute instance, create a direction vector from the given
-		 * position, using speed as the magnitude. Values are saved to the attribute.
-		 *
-		 * @param {Object} attribute       The instance of ShaderAttribute to save the result to.
-		 * @param {Number} index           The offset in the attribute"s TypedArray to save the result from.
-		 * @param {Number} posX            The particle"s x coordinate.
-		 * @param {Number} posY            The particle"s y coordinate.
-		 * @param {Number} posZ            The particle"s z coordinate.
-		 * @param {Object} emitterPosition THREE.Vector3 instance describing the emitter"s base position.
-		 * @param {Number} speed           The magnitude to apply to the vector.
-		 * @param {Number} speedSpread     The amount of randomness to apply to the magnitude.
-		 */
 		return function(attribute, index, posX, posY, posZ, emitterPosition, speed, speedSpread)
 		{
 			v.copy(emitterPosition);
@@ -604,23 +615,24 @@ var ShaderUtils =
 	}()),
 
 
+	/**
+	 * Given an ShaderAttribute instance, create a direction vector from the given position, using speed as the magnitude. Values are saved to the attribute.
+	 *
+	 * @static
+	 * @attribute randomDirectionVector3OnDisc
+	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
+	 * @param {Number} index The offset in the attribute"s TypedArray to save the result from.
+	 * @param {Number} posX The particle"s x coordinate.
+	 * @param {Number} posY The particle"s y coordinate.
+	 * @param {Number} posZ The particle"s z coordinate.
+	 * @param {Object} emitterPosition THREE.Vector3 instance describing the emitter"s base position.
+	 * @param {Number} speed The magnitude to apply to the vector.
+	 * @param {Number} speedSpread The amount of randomness to apply to the magnitude.
+	 */
 	randomDirectionVector3OnDisc: (function()
 	{
 		var v = new THREE.Vector3();
 
-		/**
-		 * Given an ShaderAttribute instance, create a direction vector from the given
-		 * position, using speed as the magnitude. Values are saved to the attribute.
-		 *
-		 * @param {Object} attribute       The instance of ShaderAttribute to save the result to.
-		 * @param {Number} index           The offset in the attribute"s TypedArray to save the result from.
-		 * @param {Number} posX            The particle"s x coordinate.
-		 * @param {Number} posY            The particle"s y coordinate.
-		 * @param {Number} posZ            The particle"s z coordinate.
-		 * @param {Object} emitterPosition THREE.Vector3 instance describing the emitter"s base position.
-		 * @param {Number} speed           The magnitude to apply to the vector.
-		 * @param {Number} speedSpread     The amount of randomness to apply to the magnitude.
-		 */
 		return function(attribute, index, posX, posY, posZ, emitterPosition, speed, speedSpread)
 		{
 			v.copy(emitterPosition);
@@ -635,6 +647,15 @@ var ShaderUtils =
 		};
 	}()),
 
+	/**
+	 * Given a rotation axis, and a rotation axis spread vector, calculate a randomised rotation axis, and pack it into a hexadecimal value represented in decimal form.
+	 *
+	 * @static
+	 * @attribute getPackedRotationAxis
+	 * @param {Object} axis THREE.Vector3 instance describing the rotation axis.
+	 * @param {Object} axisSpread THREE.Vector3 instance describing the amount of randomness to apply to the rotation axis.
+	 * @return {Number} The packed rotation axis, with randomness.
+	 */
 	getPackedRotationAxis: (function()
 	{
 		var v = new THREE.Vector3(),
@@ -642,14 +663,6 @@ var ShaderUtils =
 			c = new THREE.Color(),
 			addOne = new THREE.Vector3(1, 1, 1);
 
-		/**
-		 * Given a rotation axis, and a rotation axis spread vector,
-		 * calculate a randomised rotation axis, and pack it into
-		 * a hexadecimal value represented in decimal form.
-		 * @param {Object} axis THREE.Vector3 instance describing the rotation axis.
-		 * @param {Object} axisSpread THREE.Vector3 instance describing the amount of randomness to apply to the rotation axis.
-		 * @return {Number} The packed rotation axis, with randomness.
-		 */
 		return function(axis, axisSpread)
 		{
 			v.copy(axis).normalize();

@@ -22,7 +22,6 @@ var ParticleShaders =
 		ParticleShaderChunks.forceFetchingFunctions,
 		ParticleShaderChunks.rotationFunctions,
 
-
 		"void main() {",
 
 		//Setup
@@ -83,8 +82,6 @@ var ParticleShaders =
 
 		//Apply perpective to pointSize value
 		"    float pointSizePerspective = pointSize * perspective;",
-
-		//Appearance
 
 		//Determine color and opacity for this particle
 		"    #ifdef COLORIZE",

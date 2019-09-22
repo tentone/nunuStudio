@@ -3,8 +3,9 @@
 /**
  * A helper to handle creating and updating a THREE.BufferAttribute instance.
  *
- * @author Luke Moody
  * @constructor
+ * @class ShaderAttribute
+ * @author Luke Moody
  * @param {String} type The buffer attribute type. See ShaderAttribute.typeSizeMap for valid values.
  * @param {Boolean} dynamicBuffer Whether this buffer attribute should be marked as dynamic or not.
  * @param {Function} arrayType A reference to a TypedArray constructor. Defaults to Float32Array if none provided.
@@ -28,57 +29,25 @@ ShaderAttribute.constructor = ShaderAttribute;
 
 /**
  * A map of uniform types to their component size.
- * @enum {Number}
+ *
+ * @static
+ * @attribute typeSizeMap
  */
 ShaderAttribute.typeSizeMap =
 {
-	/**
-	 * Float
-	 * @type {Number}
-	 */
 	f: 1,
-
-	/**
-	 * Vec2
-	 * @type {Number}
-	 */
 	v2: 2,
-
-	/**
-	 * Vec3
-	 * @type {Number}
-	 */
 	v3: 3,
-
-	/**
-	 * Vec4
-	 * @type {Number}
-	 */
 	v4: 4,
-
-	/**
-	 * Color
-	 * @type {Number}
-	 */
 	c: 3,
-
-	/**
-	 * Mat3
-	 * @type {Number}
-	 */
 	m3: 9,
-
-	/**
-	 * Mat4
-	 * @type {Number}
-	 */
 	m4: 16
 };
 
 /**
- * Calculate the minimum and maximum update range for this buffer attribute using
- * component size independant min and max values.
+ * Calculate the minimum and maximum update range for this buffer attribute using component size independant min and max values.
  *
+ * @method setUpdateRange
  * @param {Number} min The start of the range to mark as needing an update.
  * @param {Number} max The end of the range to mark as needing an update.
  */
@@ -89,8 +58,9 @@ ShaderAttribute.prototype.setUpdateRange = function(min, max)
 };
 
 /**
- * Calculate the number of indices that this attribute should mark as needing
- * updating. Also marks the attribute as needing an update.
+ * Calculate the number of indices that this attribute should mark as needing updating. Also marks the attribute as needing an update.
+ *
+ * @method flagUpdate
  */
 ShaderAttribute.prototype.flagUpdate = function()
 {
@@ -107,6 +77,8 @@ ShaderAttribute.prototype.flagUpdate = function()
 
 /**
  * Reset the index update counts for this attribute
+ *
+ * @method resetUpdateRange
  */
 ShaderAttribute.prototype.resetUpdateRange = function()
 {
@@ -121,6 +93,8 @@ ShaderAttribute.prototype.resetDynamic = function()
 
 /**
  * Perform a splice operation on this attribute"s buffer.
+ *
+ * @method splice
  * @param {Number} start The start index of the splice. Will be multiplied by the number of components for this attribute.
  * @param {Number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
  */
@@ -148,6 +122,7 @@ ShaderAttribute.prototype.forceUpdateAll = function()
  *
  * If not, a new TypedArrayHelper instance will be created.
  *
+ * @method _ensureTypedArray
  * @param {Number} size The size of the typed array to create or update to.
  */
 ShaderAttribute.prototype._ensureTypedArray = function(size)
@@ -179,6 +154,7 @@ ShaderAttribute.prototype._ensureTypedArray = function(size)
  *
  * If a buffer attribute exists already, then it will be marked as needing an update.
  *
+ * @method _createBufferAttribute
  * @param {Number} size The size of the typed array to create if one doesn't exist, or resize existing array to.
  */
 ShaderAttribute.prototype._createBufferAttribute = function(size)
@@ -201,6 +177,8 @@ ShaderAttribute.prototype._createBufferAttribute = function(size)
 
 /**
  * Returns the length of the typed array associated with this attribute.
+ *
+ * @method getLength
  * @return {Number} The length of the typed array. Will be 0 if no typed array has been created yet.
  */
 ShaderAttribute.prototype.getLength = function()

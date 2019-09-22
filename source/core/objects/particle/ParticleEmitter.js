@@ -71,23 +71,29 @@ function ParticleEmitter(group, emitter)
  *
  * These distribution types can be applied to an emitter globally, which will affect the position, velocity, and acceleration value calculations for an emitter, or they can be applied on a per-property basis.
  *
- * @enum {Number}
+ * @class ParticleDistributions
  */
 var ParticleDistributions = {
 	/**
 	 * Values will be distributed within a box.
+	 *
+	 * @attribute BOX
 	 * @type {Number}
 	 */
 	BOX: 1,
 
 	/**
 	 * Values will be distributed on a sphere.
+	 *
+	 * @attribute SPHERE
 	 * @type {Number}
 	 */
 	SPHERE: 2,
 
 	/**
 	 * Values will be distributed on a 2d-disc shape.
+	 *
+	 * @attribute DISC
 	 * @type {Number}
 	 */
 	DISC: 3,
@@ -104,10 +110,10 @@ var ParticleDistributions = {
  *
  * This property affects the length of ALL value-over-lifetime properties for ALL  emitters and ALL groups. Only values >= 3 && <= 4 are allowed.
  *
+ * @attribute valueOverLifetimeLength
  * @type {Number}
  */
-var valueOverLifetimeLength = 4;
-
+ParticleEmitter.valueOverLifetimeLength = 4;
 
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
 

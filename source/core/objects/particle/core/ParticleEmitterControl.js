@@ -74,24 +74,20 @@
  */
 function ParticleEmitterControl(options)
 {
-	var utils = utils;
-	var types = ShaderUtils.types;
-	var lifetimeLength = valueOverLifetimeLength;
-
 	//Ensure we have a map of options to play with, and that each option is in the correct format.
-	options = ShaderUtils.ensureTypedArg(options, types.OBJECT, {});
-	options.position = ShaderUtils.ensureTypedArg(options.position, types.OBJECT, {});
-	options.velocity = ShaderUtils.ensureTypedArg(options.velocity, types.OBJECT, {});
-	options.acceleration = ShaderUtils.ensureTypedArg(options.acceleration, types.OBJECT, {});
-	options.radius = ShaderUtils.ensureTypedArg(options.radius, types.OBJECT, {});
-	options.drag = ShaderUtils.ensureTypedArg(options.drag, types.OBJECT, {});
-	options.rotation = ShaderUtils.ensureTypedArg(options.rotation, types.OBJECT, {});
-	options.color = ShaderUtils.ensureTypedArg(options.color, types.OBJECT, {});
-	options.opacity = ShaderUtils.ensureTypedArg(options.opacity, types.OBJECT, {});
-	options.size = ShaderUtils.ensureTypedArg(options.size, types.OBJECT, {});
-	options.angle = ShaderUtils.ensureTypedArg(options.angle, types.OBJECT, {});
-	options.wiggle = ShaderUtils.ensureTypedArg(options.wiggle, types.OBJECT, {});
-	options.maxAge = ShaderUtils.ensureTypedArg(options.maxAge, types.OBJECT, {});
+	options = ShaderUtils.ensureTypedArg(options, ShaderUtils.types.OBJECT, {});
+	options.position = ShaderUtils.ensureTypedArg(options.position, ShaderUtils.types.OBJECT, {});
+	options.velocity = ShaderUtils.ensureTypedArg(options.velocity, ShaderUtils.types.OBJECT, {});
+	options.acceleration = ShaderUtils.ensureTypedArg(options.acceleration, ShaderUtils.types.OBJECT, {});
+	options.radius = ShaderUtils.ensureTypedArg(options.radius, ShaderUtils.types.OBJECT, {});
+	options.drag = ShaderUtils.ensureTypedArg(options.drag, ShaderUtils.types.OBJECT, {});
+	options.rotation = ShaderUtils.ensureTypedArg(options.rotation, ShaderUtils.types.OBJECT, {});
+	options.color = ShaderUtils.ensureTypedArg(options.color, ShaderUtils.types.OBJECT, {});
+	options.opacity = ShaderUtils.ensureTypedArg(options.opacity, ShaderUtils.types.OBJECT, {});
+	options.size = ShaderUtils.ensureTypedArg(options.size, ShaderUtils.types.OBJECT, {});
+	options.angle = ShaderUtils.ensureTypedArg(options.angle, ShaderUtils.types.OBJECT, {});
+	options.wiggle = ShaderUtils.ensureTypedArg(options.wiggle, ShaderUtils.types.OBJECT, {});
+	options.maxAge = ShaderUtils.ensureTypedArg(options.maxAge, ShaderUtils.types.OBJECT, {});
 
 	if(options.onParticleSpawn)
 	{
@@ -100,64 +96,64 @@ function ParticleEmitterControl(options)
 
 	this.uuid = THREE.Math.generateUUID();
 
-	this.type = ShaderUtils.ensureTypedArg(options.type, types.NUMBER, ParticleDistributions.BOX);
+	this.type = ShaderUtils.ensureTypedArg(options.type, ShaderUtils.types.NUMBER, ParticleDistributions.BOX);
 
 	this.position =
 	{
 		_value: ShaderUtils.ensureInstanceOf(options.position.value, THREE.Vector3, new THREE.Vector3()),
 		_spread: ShaderUtils.ensureInstanceOf(options.position.spread, THREE.Vector3, new THREE.Vector3()),
 		_spreadClamp: ShaderUtils.ensureInstanceOf(options.position.spreadClamp, THREE.Vector3, new THREE.Vector3()),
-		_distribution: ShaderUtils.ensureTypedArg(options.position.distribution, types.NUMBER, this.type),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false),
-		_radius: ShaderUtils.ensureTypedArg(options.position.radius, types.NUMBER, 10),
+		_distribution: ShaderUtils.ensureTypedArg(options.position.distribution, ShaderUtils.types.NUMBER, this.type),
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false),
+		_radius: ShaderUtils.ensureTypedArg(options.position.radius, ShaderUtils.types.NUMBER, 10),
 		_radiusScale: ShaderUtils.ensureInstanceOf(options.position.radiusScale, THREE.Vector3, new THREE.Vector3(1, 1, 1)),
-		_distributionClamp: ShaderUtils.ensureTypedArg(options.position.distributionClamp, types.NUMBER, 0),
+		_distributionClamp: ShaderUtils.ensureTypedArg(options.position.distributionClamp, ShaderUtils.types.NUMBER, 0),
 	};
 
 	this.velocity =
 	{
 		_value: ShaderUtils.ensureInstanceOf(options.velocity.value, THREE.Vector3, new THREE.Vector3()),
 		_spread: ShaderUtils.ensureInstanceOf(options.velocity.spread, THREE.Vector3, new THREE.Vector3()),
-		_distribution: ShaderUtils.ensureTypedArg(options.velocity.distribution, types.NUMBER, this.type),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
+		_distribution: ShaderUtils.ensureTypedArg(options.velocity.distribution, ShaderUtils.types.NUMBER, this.type),
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.acceleration =
 	{
 		_value: ShaderUtils.ensureInstanceOf(options.acceleration.value, THREE.Vector3, new THREE.Vector3()),
 		_spread: ShaderUtils.ensureInstanceOf(options.acceleration.spread, THREE.Vector3, new THREE.Vector3()),
-		_distribution: ShaderUtils.ensureTypedArg(options.acceleration.distribution, types.NUMBER, this.type),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
+		_distribution: ShaderUtils.ensureTypedArg(options.acceleration.distribution, ShaderUtils.types.NUMBER, this.type),
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.drag =
 	{
-		_value: ShaderUtils.ensureTypedArg(options.drag.value, types.NUMBER, 0),
-		_spread: ShaderUtils.ensureTypedArg(options.drag.spread, types.NUMBER, 0),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
+		_value: ShaderUtils.ensureTypedArg(options.drag.value, ShaderUtils.types.NUMBER, 0),
+		_spread: ShaderUtils.ensureTypedArg(options.drag.spread, ShaderUtils.types.NUMBER, 0),
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.wiggle =
 	{
-		_value: ShaderUtils.ensureTypedArg(options.wiggle.value, types.NUMBER, 0),
-		_spread: ShaderUtils.ensureTypedArg(options.wiggle.spread, types.NUMBER, 0)
+		_value: ShaderUtils.ensureTypedArg(options.wiggle.value, ShaderUtils.types.NUMBER, 0),
+		_spread: ShaderUtils.ensureTypedArg(options.wiggle.spread, ShaderUtils.types.NUMBER, 0)
 	};
 
 	this.rotation =
 	{
 		_axis: ShaderUtils.ensureInstanceOf(options.rotation.axis, THREE.Vector3, new THREE.Vector3(0.0, 1.0, 0.0)),
 		_axisSpread: ShaderUtils.ensureInstanceOf(options.rotation.axisSpread, THREE.Vector3, new THREE.Vector3()),
-		_angle: ShaderUtils.ensureTypedArg(options.rotation.angle, types.NUMBER, 0),
-		_angleSpread: ShaderUtils.ensureTypedArg(options.rotation.angleSpread, types.NUMBER, 0),
-		_static: ShaderUtils.ensureTypedArg(options.rotation.static, types.BOOLEAN, false),
+		_angle: ShaderUtils.ensureTypedArg(options.rotation.angle, ShaderUtils.types.NUMBER, 0),
+		_angleSpread: ShaderUtils.ensureTypedArg(options.rotation.angleSpread, ShaderUtils.types.NUMBER, 0),
+		_static: ShaderUtils.ensureTypedArg(options.rotation.static, ShaderUtils.types.BOOLEAN, false),
 		_center: ShaderUtils.ensureInstanceOf(options.rotation.center, THREE.Vector3, this.position._value.clone()),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.maxAge =
 	{
-		_value: ShaderUtils.ensureTypedArg(options.maxAge.value, types.NUMBER, 2),
-		_spread: ShaderUtils.ensureTypedArg(options.maxAge.spread, types.NUMBER, 0)
+		_value: ShaderUtils.ensureTypedArg(options.maxAge.value, ShaderUtils.types.NUMBER, 2),
+		_spread: ShaderUtils.ensureTypedArg(options.maxAge.spread, ShaderUtils.types.NUMBER, 0)
 	};
 
 	//The following properties can support either single values, or an array of values that change the property over a particle"s lifetime (value over lifetime).
@@ -165,39 +161,39 @@ function ParticleEmitterControl(options)
 	{
 		_value: ShaderUtils.ensureArrayInstanceOf(options.color.value, THREE.Color, new THREE.Color()),
 		_spread: ShaderUtils.ensureArrayInstanceOf(options.color.spread, THREE.Vector3, new THREE.Vector3()),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.opacity =
 	{
-		_value: ShaderUtils.ensureArrayTypedArg(options.opacity.value, types.NUMBER, 1),
-		_spread: ShaderUtils.ensureArrayTypedArg(options.opacity.spread, types.NUMBER, 0),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
+		_value: ShaderUtils.ensureArrayTypedArg(options.opacity.value, ShaderUtils.types.NUMBER, 1),
+		_spread: ShaderUtils.ensureArrayTypedArg(options.opacity.spread, ShaderUtils.types.NUMBER, 0),
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.size =
 	{
-		_value: ShaderUtils.ensureArrayTypedArg(options.size.value, types.NUMBER, 1),
-		_spread: ShaderUtils.ensureArrayTypedArg(options.size.spread, types.NUMBER, 0),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
+		_value: ShaderUtils.ensureArrayTypedArg(options.size.value, ShaderUtils.types.NUMBER, 1),
+		_spread: ShaderUtils.ensureArrayTypedArg(options.size.spread, ShaderUtils.types.NUMBER, 0),
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.angle =
 	{
-		_value: ShaderUtils.ensureArrayTypedArg(options.angle.value, types.NUMBER, 0),
-		_spread: ShaderUtils.ensureArrayTypedArg(options.angle.spread, types.NUMBER, 0),
-		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false)
+		_value: ShaderUtils.ensureArrayTypedArg(options.angle.value, ShaderUtils.types.NUMBER, 0),
+		_spread: ShaderUtils.ensureArrayTypedArg(options.angle.spread, ShaderUtils.types.NUMBER, 0),
+		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	//Assign renaining option values.
-	this.particleCount = ShaderUtils.ensureTypedArg(options.particleCount, types.NUMBER, 100);
-	this.duration = ShaderUtils.ensureTypedArg(options.duration, types.NUMBER, null);
-	this.isStatic = ShaderUtils.ensureTypedArg(options.isStatic, types.BOOLEAN, false);
-	this.activeMultiplier = ShaderUtils.ensureTypedArg(options.activeMultiplier, types.NUMBER, 1);
-	this.direction = ShaderUtils.ensureTypedArg(options.direction, types.NUMBER, 1);
+	this.particleCount = ShaderUtils.ensureTypedArg(options.particleCount, ShaderUtils.types.NUMBER, 100);
+	this.duration = ShaderUtils.ensureTypedArg(options.duration, ShaderUtils.types.NUMBER, null);
+	this.isStatic = ShaderUtils.ensureTypedArg(options.isStatic, ShaderUtils.types.BOOLEAN, false);
+	this.activeMultiplier = ShaderUtils.ensureTypedArg(options.activeMultiplier, ShaderUtils.types.NUMBER, 1);
+	this.direction = ShaderUtils.ensureTypedArg(options.direction, ShaderUtils.types.NUMBER, 1);
 
 	//Whether this emitter is alive or not.
-	this.alive = ShaderUtils.ensureTypedArg(options.alive, types.BOOLEAN, true);
+	this.alive = ShaderUtils.ensureTypedArg(options.alive, ShaderUtils.types.BOOLEAN, true);
 
 	//The following properties are set internally and are not user-controllable.
 	this.particlesPerSecond = 0;
@@ -236,15 +232,15 @@ function ParticleEmitterControl(options)
 	//It allows randomization to be turned off as desired. If all randomization is turned off, then I'd expect a performance boost as no attribute buffers (excluding the params) would have to be re-passed to the GPU each frame (since nothing except the params attribute would have changed).
 	this.resetFlags =
 	{
-		position: ShaderUtils.ensureTypedArg(options.position.randomise, types.BOOLEAN, false) || ShaderUtils.ensureTypedArg(options.radius.randomise, types.BOOLEAN, false),
-		velocity: ShaderUtils.ensureTypedArg(options.velocity.randomise, types.BOOLEAN, false),
-		acceleration: ShaderUtils.ensureTypedArg(options.acceleration.randomise, types.BOOLEAN, false) || ShaderUtils.ensureTypedArg(options.drag.randomise, types.BOOLEAN, false),
-		rotation: ShaderUtils.ensureTypedArg(options.rotation.randomise, types.BOOLEAN, false),
-		rotationCenter: ShaderUtils.ensureTypedArg(options.rotation.randomise, types.BOOLEAN, false),
-		size: ShaderUtils.ensureTypedArg(options.size.randomise, types.BOOLEAN, false),
-		color: ShaderUtils.ensureTypedArg(options.color.randomise, types.BOOLEAN, false),
-		opacity: ShaderUtils.ensureTypedArg(options.opacity.randomise, types.BOOLEAN, false),
-		angle: ShaderUtils.ensureTypedArg(options.angle.randomise, types.BOOLEAN, false)
+		position: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false) || ShaderUtils.ensureTypedArg(options.radius.randomise, ShaderUtils.types.BOOLEAN, false),
+		velocity: ShaderUtils.ensureTypedArg(options.velocity.randomise, ShaderUtils.types.BOOLEAN, false),
+		acceleration: ShaderUtils.ensureTypedArg(options.acceleration.randomise, ShaderUtils.types.BOOLEAN, false) || ShaderUtils.ensureTypedArg(options.drag.randomise, ShaderUtils.types.BOOLEAN, false),
+		rotation: ShaderUtils.ensureTypedArg(options.rotation.randomise, ShaderUtils.types.BOOLEAN, false),
+		rotationCenter: ShaderUtils.ensureTypedArg(options.rotation.randomise, ShaderUtils.types.BOOLEAN, false),
+		size: ShaderUtils.ensureTypedArg(options.size.randomise, ShaderUtils.types.BOOLEAN, false),
+		color: ShaderUtils.ensureTypedArg(options.color.randomise, ShaderUtils.types.BOOLEAN, false),
+		opacity: ShaderUtils.ensureTypedArg(options.opacity.randomise, ShaderUtils.types.BOOLEAN, false),
+		angle: ShaderUtils.ensureTypedArg(options.angle.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.updateFlags = {};
@@ -284,10 +280,10 @@ function ParticleEmitterControl(options)
 	//Ensure that the value-over-lifetime property objects above have value and spread properties that are of the same length.
 	//
 	//Also, for now, make sure they have a length of 3 (min/max arguments here).
-	ShaderUtils.ensureValueOverLifetimeCompliance(this.color, lifetimeLength, lifetimeLength);
-	ShaderUtils.ensureValueOverLifetimeCompliance(this.opacity, lifetimeLength, lifetimeLength);
-	ShaderUtils.ensureValueOverLifetimeCompliance(this.size, lifetimeLength, lifetimeLength);
-	ShaderUtils.ensureValueOverLifetimeCompliance(this.angle, lifetimeLength, lifetimeLength);
+	ShaderUtils.ensureValueOverLifetimeCompliance(this.color, ParticleEmitter.valueOverLifetimeLength, ParticleEmitter.valueOverLifetimeLength);
+	ShaderUtils.ensureValueOverLifetimeCompliance(this.opacity, ParticleEmitter.valueOverLifetimeLength, ParticleEmitter.valueOverLifetimeLength);
+	ShaderUtils.ensureValueOverLifetimeCompliance(this.size, ParticleEmitter.valueOverLifetimeLength, ParticleEmitter.valueOverLifetimeLength);
+	ShaderUtils.ensureValueOverLifetimeCompliance(this.angle, ParticleEmitter.valueOverLifetimeLength, ParticleEmitter.valueOverLifetimeLength);
 }
 
 ParticleEmitterControl.constructor = ParticleEmitterControl;
@@ -318,7 +314,7 @@ ParticleEmitterControl.prototype._createGetterSetters = function(propObj, propNa
 				  {
 					 var mapName = self.updateMap[propName],
 						 prevValue = this[prop],
-						 length = valueOverLifetimeLength;
+						 length = ParticleEmitter.valueOverLifetimeLength;
 
 					 if(prop === "_rotationCenter")
 					 {
@@ -741,6 +737,7 @@ ParticleEmitterControl.prototype._activateParticles = function(activationStart, 
  *
  * If the emitter is marked as static, then this function will do nothing.
  *
+ * @method tick
  * @param {Number} dt The number of seconds to simulate (deltaTime)
  */
 ParticleEmitterControl.prototype.tick = function(dt)
@@ -805,6 +802,7 @@ ParticleEmitterControl.prototype.tick = function(dt)
 /**
  * Resets all the emitter"s particles to their start positions and marks the particles as dead if the force argument is true.
  *
+ * @method reset
  * @param {Boolean} [force=undefined] If true, all particles will be marked as dead instantly.
  * @return {ParticleEmitterControl} This emitter instance.
  */
@@ -839,6 +837,7 @@ ParticleEmitterControl.prototype.reset = function(force)
 /**
  * Enables the emitter. If not already enabled, the emitter will start emitting particles.
  *
+ * @method enable
  * @return {ParticleEmitterControl} This emitter instance.
  */
 ParticleEmitterControl.prototype.enable = function()
@@ -852,6 +851,7 @@ ParticleEmitterControl.prototype.enable = function()
  *
  * Any particle"s alive will be allowed to finish their lifecycle.
  *
+ * @method disable
  * @return {ParticleEmitterControl} This emitter instance.
  */
 ParticleEmitterControl.prototype.disable = function()
@@ -862,13 +862,13 @@ ParticleEmitterControl.prototype.disable = function()
 
 /**
  * Remove this emitter from it's parent group (if it has been added to one).
+ *
  * Delgates to group.prototype.removeEmitter().
  *
- * When called, all particle"s belonging to this emitter will be instantly
- * removed from the scene.
+ * When called, all particle"s belonging to this emitter will be instantly removed from the scene.
  *
+ * @method remove
  * @return {ParticleEmitterControl} This emitter instance.
- * @see Group.prototype.removeEmitter
  */
 ParticleEmitterControl.prototype.remove = function()
 {

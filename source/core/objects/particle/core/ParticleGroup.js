@@ -3,7 +3,7 @@
 /**
  * A map of options to configure an ParticleGroup instance.
  *
- * @typedef {Object} ParticleGroupOptions
+ * @class {Object} ParticleGroupOptions
  * @property {Object} texture An object describing the texture used by the group.
  * @property {Object} texture.value An instance of THREE.Texture.
  * @property {Object=} texture.frames A THREE.Vector2 instance describing the number of frames on the x- and y-axis of the given texture. If not provided, the texture will NOT be treated as a sprite-sheet and as such will NOT be animated.
@@ -133,7 +133,7 @@ function ParticleGroup(options)
 	{
 		HAS_PERSPECTIVE: this.hasPerspective,
 		COLORIZE: this.colorize,
-		VALUE_OVER_LIFETIME_LENGTH: valueOverLifetimeLength,
+		VALUE_OVER_LIFETIME_LENGTH: ParticleEmitter.valueOverLifetimeLength,
 		SHOULD_ROTATE_TEXTURE: false,
 		SHOULD_ROTATE_PARTICLES: false,
 		SHOULD_WIGGLE_PARTICLES: false,
@@ -583,7 +583,7 @@ ParticleGroup.prototype._resetBufferRanges = function()
 {
 	var keys = this.attributeKeys;
 
-	for(i = this.attributeCount - 1; i >= 0; --i)
+	for(var i = this.attributeCount - 1; i >= 0; --i)
 	{
 		this.attributes[keys[i]].resetUpdateRange();
 	}
