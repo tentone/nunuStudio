@@ -12,6 +12,7 @@
 	"scripts": {
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"cordova-requirements": "cd ./temp && cordova requirements",
+		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
 		"build": "cd script && node build.js",
 		"update": "cd script && node update.js",
 		"dist": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",

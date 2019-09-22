@@ -93,7 +93,7 @@ TypedArrayHelper.prototype.grow = function(size)
  * @method splice
  * @param {Number} start The start index of the splice. Will be multiplied by the number of components for this attribute.
  * @param {Number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
- * @returns {Object} The TypedArrayHelper instance.
+ * @return {Object} The TypedArrayHelper instance.
  */
 TypedArrayHelper.prototype.splice = function(start, end)
 {

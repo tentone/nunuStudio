@@ -1372,8 +1372,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   function ka(g, a, d) {
     p.call(this, g, a, d);
   }
-  function Da(g, a, d, b, c, e, l, f, n, m, r, k) {
-    h.call(this, null, e, l, f, n, m, b, c, r, k);
+  function Da(g, a, d, b, c, e, l, f, n, m, r, q) {
+    h.call(this, null, e, l, f, n, m, b, c, r, q);
     this.image = {data:g || null, width:a || 1, height:d || 1};
     this.magFilter = void 0 !== n ? n : 1003;
     this.minFilter = void 0 !== m ? m : 1003;
@@ -1454,9 +1454,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     b = Math.floor(b) || 1;
     var e = d + 1, l = b + 1, f = g / d, h = a / b, K = [], n = [], m = [], r = [];
     for (g = 0; g < l; g++) {
-      var k = g * h - c;
+      var q = g * h - c;
       for (a = 0; a < e; a++) {
-        n.push(a * f - u, -k, 0), m.push(0, 0, 1), r.push(a / d), r.push(1 - g / b);
+        n.push(a * f - u, -q, 0), m.push(0, 0, 1), r.push(a / d), r.push(1 - g / b);
       }
     }
     for (g = 0; g < b; g++) {
@@ -1557,7 +1557,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     l !== e && (console.warn("THREE.WebGLRenderer:", e, "not supported, using", l, "instead."), e = l);
     d = !0 === d.logarithmicDepthBuffer;
     l = g.getParameter(34930);
-    var f = g.getParameter(35660), h = g.getParameter(3379), K = g.getParameter(34076), n = g.getParameter(34921), m = g.getParameter(36347), r = g.getParameter(36348), k = g.getParameter(36349), q = 0 < f, p = c || !!a.get("OES_texture_float"), t = q && p, v = c ? g.getParameter(36183) : 0, w = a.get("OVR_multiview2"), y = c && !!w && !g.getContextAttributes().antialias;
+    var f = g.getParameter(35660), h = g.getParameter(3379), K = g.getParameter(34076), n = g.getParameter(34921), m = g.getParameter(36347), r = g.getParameter(36348), q = g.getParameter(36349), k = 0 < f, p = c || !!a.get("OES_texture_float"), t = k && p, v = c ? g.getParameter(36183) : 0, w = a.get("OVR_multiview2"), y = c && !!w && !g.getContextAttributes().antialias;
     w = y ? g.getParameter(w.MAX_VIEWS_OVR) : 0;
     return {isWebGL2:c, getMaxAnisotropy:function() {
       if (void 0 !== b) {
@@ -1565,7 +1565,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       var u = a.get("EXT_texture_filter_anisotropic");
       return b = null !== u ? g.getParameter(u.MAX_TEXTURE_MAX_ANISOTROPY_EXT) : 0;
-    }, getMaxPrecision:u, precision:e, logarithmicDepthBuffer:d, maxTextures:l, maxVertexTextures:f, maxTextureSize:h, maxCubemapSize:K, maxAttributes:n, maxVertexUniforms:m, maxVaryings:r, maxFragmentUniforms:k, vertexTextures:q, floatFragmentTextures:p, floatVertexTextures:t, maxSamples:v, multiview:y, maxMultiviewViews:w};
+    }, getMaxPrecision:u, precision:e, logarithmicDepthBuffer:d, maxTextures:l, maxVertexTextures:f, maxTextureSize:h, maxCubemapSize:K, maxAttributes:n, maxVertexUniforms:m, maxVaryings:r, maxFragmentUniforms:q, vertexTextures:k, floatFragmentTextures:p, floatVertexTextures:t, maxSamples:v, multiview:y, maxMultiviewViews:w};
   }
   function rb() {
     function g() {
@@ -1617,13 +1617,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         l ? a(null) : g();
       } else {
         f = l ? 0 : c;
-        var r = 4 * f, k = K.clippingState || null;
-        m.value = k;
-        k = a(u, h, r, n);
+        var r = 4 * f, q = K.clippingState || null;
+        m.value = q;
+        q = a(u, h, r, n);
         for (u = 0; u !== r; ++u) {
-          k[u] = b[u];
+          q[u] = b[u];
         }
-        K.clippingState = k;
+        K.clippingState = q;
         this.numIntersection = d ? this.numPlanes : 0;
         this.numPlanes += f;
       }
@@ -2318,14 +2318,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return u;
   }
   function kj(g, a, d, b, c, e) {
-    var u = g.getContext(), l = b.defines, f = c.vertexShader, h = c.fragmentShader, K = gj(e), n = hj(e, b), m = ij(e, b), r = jj(e, b), k = 0 < g.gammaFactor ? g.gammaFactor : 1, q = e.isWebGL2 ? "" : ej(b.extensions, e, a), p = fj(l), t = u.createProgram(), v = (l = g.getRenderTarget()) && l.isWebGLMultiviewRenderTarget ? l.numViews : 0;
-    b.isRawShaderMaterial ? (l = [p].filter(Rd).join("\n"), 0 < l.length && (l += "\n"), a = [q, p].filter(Rd).join("\n"), 0 < a.length && (a += "\n")) : (l = [Eh(e), "#define SHADER_NAME " + c.name, p, e.supportsVertexTextures ? "#define VERTEX_TEXTURES" : "", "#define GAMMA_FACTOR " + k, "#define MAX_BONES " + e.maxBones, e.useFog && e.fog ? "#define USE_FOG" : "", e.useFog && e.fogExp2 ? "#define FOG_EXP2" : "", e.map ? "#define USE_MAP" : "", e.envMap ? "#define USE_ENVMAP" : "", e.envMap ? "#define " + 
+    var u = g.getContext(), l = b.defines, f = c.vertexShader, h = c.fragmentShader, K = gj(e), n = hj(e, b), m = ij(e, b), r = jj(e, b), q = 0 < g.gammaFactor ? g.gammaFactor : 1, k = e.isWebGL2 ? "" : ej(b.extensions, e, a), p = fj(l), t = u.createProgram(), v = (l = g.getRenderTarget()) && l.isWebGLMultiviewRenderTarget ? l.numViews : 0;
+    b.isRawShaderMaterial ? (l = [p].filter(Rd).join("\n"), 0 < l.length && (l += "\n"), a = [k, p].filter(Rd).join("\n"), 0 < a.length && (a += "\n")) : (l = [Eh(e), "#define SHADER_NAME " + c.name, p, e.supportsVertexTextures ? "#define VERTEX_TEXTURES" : "", "#define GAMMA_FACTOR " + q, "#define MAX_BONES " + e.maxBones, e.useFog && e.fog ? "#define USE_FOG" : "", e.useFog && e.fogExp2 ? "#define FOG_EXP2" : "", e.map ? "#define USE_MAP" : "", e.envMap ? "#define USE_ENVMAP" : "", e.envMap ? "#define " + 
     m : "", e.lightMap ? "#define USE_LIGHTMAP" : "", e.aoMap ? "#define USE_AOMAP" : "", e.emissiveMap ? "#define USE_EMISSIVEMAP" : "", e.bumpMap ? "#define USE_BUMPMAP" : "", e.normalMap ? "#define USE_NORMALMAP" : "", e.normalMap && e.objectSpaceNormalMap ? "#define OBJECTSPACE_NORMALMAP" : "", e.normalMap && e.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", e.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", e.displacementMap && e.supportsVertexTextures ? "#define USE_DISPLACEMENTMAP" : 
     "", e.specularMap ? "#define USE_SPECULARMAP" : "", e.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", e.metalnessMap ? "#define USE_METALNESSMAP" : "", e.alphaMap ? "#define USE_ALPHAMAP" : "", e.vertexTangents ? "#define USE_TANGENT" : "", e.vertexColors ? "#define USE_COLOR" : "", e.vertexUvs ? "#define USE_UV" : "", e.flatShading ? "#define FLAT_SHADED" : "", e.skinning ? "#define USE_SKINNING" : "", e.useVertexTexture ? "#define BONE_TEXTURE" : "", e.morphTargets ? "#define USE_MORPHTARGETS" : 
     "", e.morphNormals && !1 === e.flatShading ? "#define USE_MORPHNORMALS" : "", e.doubleSided ? "#define DOUBLE_SIDED" : "", e.flipSided ? "#define FLIP_SIDED" : "", e.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", e.shadowMapEnabled ? "#define " + K : "", e.sizeAttenuation ? "#define USE_SIZEATTENUATION" : "", e.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", e.logarithmicDepthBuffer && (e.isWebGL2 || a.get("EXT_frag_depth")) ? "#define USE_LOGDEPTHBUF_EXT" : "", "uniform mat4 modelMatrix;", 
     "uniform vec3 cameraPosition;", 0 < v ? ["uniform mat4 modelViewMatrices[" + v + "];", "uniform mat3 normalMatrices[" + v + "];", "uniform mat4 viewMatrices[" + v + "];", "uniform mat4 projectionMatrices[" + v + "];", "#define modelViewMatrix modelViewMatrices[VIEW_ID]\n#define normalMatrix normalMatrices[VIEW_ID]\n#define viewMatrix viewMatrices[VIEW_ID]\n#define projectionMatrix projectionMatrices[VIEW_ID]"].join("\n") : "uniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform mat4 viewMatrix;\nuniform mat3 normalMatrix;", 
     "attribute vec3 position;", "attribute vec3 normal;", "attribute vec2 uv;", "#ifdef USE_TANGENT", "\tattribute vec4 tangent;", "#endif", "#ifdef USE_COLOR", "\tattribute vec3 color;", "#endif", "#ifdef USE_MORPHTARGETS", "\tattribute vec3 morphTarget0;", "\tattribute vec3 morphTarget1;", "\tattribute vec3 morphTarget2;", "\tattribute vec3 morphTarget3;", "\t#ifdef USE_MORPHNORMALS", "\t\tattribute vec3 morphNormal0;", "\t\tattribute vec3 morphNormal1;", "\t\tattribute vec3 morphNormal2;", "\t\tattribute vec3 morphNormal3;", 
-    "\t#else", "\t\tattribute vec3 morphTarget4;", "\t\tattribute vec3 morphTarget5;", "\t\tattribute vec3 morphTarget6;", "\t\tattribute vec3 morphTarget7;", "\t#endif", "#endif", "#ifdef USE_SKINNING", "\tattribute vec4 skinIndex;", "\tattribute vec4 skinWeight;", "#endif", "\n"].filter(Rd).join("\n"), a = [q, Eh(e), "#define SHADER_NAME " + c.name, p, e.alphaTest ? "#define ALPHATEST " + e.alphaTest + (e.alphaTest % 1 ? "" : ".0") : "", "#define GAMMA_FACTOR " + k, e.useFog && e.fog ? "#define USE_FOG" : 
+    "\t#else", "\t\tattribute vec3 morphTarget4;", "\t\tattribute vec3 morphTarget5;", "\t\tattribute vec3 morphTarget6;", "\t\tattribute vec3 morphTarget7;", "\t#endif", "#endif", "#ifdef USE_SKINNING", "\tattribute vec4 skinIndex;", "\tattribute vec4 skinWeight;", "#endif", "\n"].filter(Rd).join("\n"), a = [k, Eh(e), "#define SHADER_NAME " + c.name, p, e.alphaTest ? "#define ALPHATEST " + e.alphaTest + (e.alphaTest % 1 ? "" : ".0") : "", "#define GAMMA_FACTOR " + q, e.useFog && e.fog ? "#define USE_FOG" : 
     "", e.useFog && e.fogExp2 ? "#define FOG_EXP2" : "", e.map ? "#define USE_MAP" : "", e.matcap ? "#define USE_MATCAP" : "", e.envMap ? "#define USE_ENVMAP" : "", e.envMap ? "#define " + n : "", e.envMap ? "#define " + m : "", e.envMap ? "#define " + r : "", e.lightMap ? "#define USE_LIGHTMAP" : "", e.aoMap ? "#define USE_AOMAP" : "", e.emissiveMap ? "#define USE_EMISSIVEMAP" : "", e.bumpMap ? "#define USE_BUMPMAP" : "", e.normalMap ? "#define USE_NORMALMAP" : "", e.normalMap && e.objectSpaceNormalMap ? 
     "#define OBJECTSPACE_NORMALMAP" : "", e.normalMap && e.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", e.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", e.specularMap ? "#define USE_SPECULARMAP" : "", e.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", e.metalnessMap ? "#define USE_METALNESSMAP" : "", e.alphaMap ? "#define USE_ALPHAMAP" : "", e.sheen ? "#define USE_SHEEN" : "", e.vertexTangents ? "#define USE_TANGENT" : "", e.vertexColors ? "#define USE_COLOR" : "", 
     e.vertexUvs ? "#define USE_UV" : "", e.gradientMap ? "#define USE_GRADIENTMAP" : "", e.flatShading ? "#define FLAT_SHADED" : "", e.doubleSided ? "#define DOUBLE_SIDED" : "", e.flipSided ? "#define FLIP_SIDED" : "", e.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", e.shadowMapEnabled ? "#define " + K : "", e.premultipliedAlpha ? "#define PREMULTIPLIED_ALPHA" : "", e.physicallyCorrectLights ? "#define PHYSICALLY_CORRECT_LIGHTS" : "", e.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", e.logarithmicDepthBuffer && 
@@ -2356,7 +2356,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       K = u.getShaderInfoLog(h).trim();
       m = n = !0;
       if (!1 === u.getProgramParameter(t, 35714)) {
-        n = !1, r = Ah(u, f, "vertex"), k = Ah(u, h, "fragment"), console.error("THREE.WebGLProgram: shader error: ", u.getError(), "35715", u.getProgramParameter(t, 35715), "gl.getProgramInfoLog", g, r, k);
+        n = !1, r = Ah(u, f, "vertex"), q = Ah(u, h, "fragment"), console.error("THREE.WebGLProgram: shader error: ", u.getError(), "35715", u.getProgramParameter(t, 35715), "gl.getProgramInfoLog", g, r, q);
       } else {
         if ("" !== g) {
           console.warn("THREE.WebGLProgram: gl.getProgramInfoLog()", g);
@@ -2572,7 +2572,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       for (var f = 0, h = 0, K = 0, n = 0; 9 > n; n++) {
         a.probe[n].set(0, 0, 0);
       }
-      var m = u = 0, r = 0, k = 0, q = 0, p = 0, t = 0, v = 0;
+      var m = u = 0, r = 0, q = 0, k = 0, p = 0, t = 0, v = 0;
       e = e.matrixWorldInverse;
       d.sort(sj);
       n = 0;
@@ -2619,7 +2619,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
                 r++;
               } else {
                 if (w.isRectAreaLight) {
-                  A = g.get(w), A.color.copy(y).multiplyScalar(x), A.position.setFromMatrixPosition(w.matrixWorld), A.position.applyMatrix4(e), l.identity(), c.copy(w.matrixWorld), c.premultiply(e), l.extractRotation(c), A.halfWidth.set(.5 * w.width, 0, 0), A.halfHeight.set(0, .5 * w.height, 0), A.halfWidth.applyMatrix4(l), A.halfHeight.applyMatrix4(l), a.rectArea[k] = A, k++;
+                  A = g.get(w), A.color.copy(y).multiplyScalar(x), A.position.setFromMatrixPosition(w.matrixWorld), A.position.applyMatrix4(e), l.identity(), c.copy(w.matrixWorld), c.premultiply(e), l.extractRotation(c), A.halfWidth.set(.5 * w.width, 0, 0), A.halfHeight.set(0, .5 * w.height, 0), A.halfWidth.applyMatrix4(l), A.halfHeight.applyMatrix4(l), a.rectArea[q] = A, q++;
                 } else {
                   if (w.isPointLight) {
                     A = g.get(w);
@@ -2634,7 +2634,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
                     a.point[m] = A;
                     m++;
                   } else {
-                    w.isHemisphereLight && (A = g.get(w), A.direction.setFromMatrixPosition(w.matrixWorld), A.direction.transformDirection(e), A.direction.normalize(), A.skyColor.copy(w.color).multiplyScalar(x), A.groundColor.copy(w.groundColor).multiplyScalar(x), a.hemi[q] = A, q++);
+                    w.isHemisphereLight && (A = g.get(w), A.direction.setFromMatrixPosition(w.matrixWorld), A.direction.transformDirection(e), A.direction.normalize(), A.skyColor.copy(w.color).multiplyScalar(x), A.groundColor.copy(w.groundColor).multiplyScalar(x), a.hemi[k] = A, k++);
                   }
                 }
               }
@@ -2646,8 +2646,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a.ambient[1] = h;
       a.ambient[2] = K;
       d = a.hash;
-      if (d.directionalLength !== u || d.pointLength !== m || d.spotLength !== r || d.rectAreaLength !== k || d.hemiLength !== q || d.numDirectionalShadows !== p || d.numPointShadows !== t || d.numSpotShadows !== v) {
-        a.directional.length = u, a.spot.length = r, a.rectArea.length = k, a.point.length = m, a.hemi.length = q, a.directionalShadowMap.length = p, a.pointShadowMap.length = t, a.spotShadowMap.length = v, a.directionalShadowMatrix.length = p, a.pointShadowMatrix.length = t, a.spotShadowMatrix.length = v, d.directionalLength = u, d.pointLength = m, d.spotLength = r, d.rectAreaLength = k, d.hemiLength = q, d.numDirectionalShadows = p, d.numPointShadows = t, d.numSpotShadows = v, a.version = uj++;
+      if (d.directionalLength !== u || d.pointLength !== m || d.spotLength !== r || d.rectAreaLength !== q || d.hemiLength !== k || d.numDirectionalShadows !== p || d.numPointShadows !== t || d.numSpotShadows !== v) {
+        a.directional.length = u, a.spot.length = r, a.rectArea.length = q, a.point.length = m, a.hemi.length = k, a.directionalShadowMap.length = p, a.pointShadowMap.length = t, a.spotShadowMap.length = v, a.directionalShadowMatrix.length = p, a.pointShadowMatrix.length = t, a.spotShadowMatrix.length = v, d.directionalLength = u, d.pointLength = m, d.spotLength = r, d.rectAreaLength = q, d.hemiLength = k, d.numDirectionalShadows = p, d.numPointShadows = t, d.numSpotShadows = v, a.version = uj++;
       }
     }, state:a};
   }
@@ -2736,9 +2736,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           d.modelViewMatrix.multiplyMatrices(l.matrixWorldInverse, d.matrixWorld);
           var K = a.update(d), n = d.material;
           if (Array.isArray(n)) {
-            for (var m = K.groups, r = 0, k = m.length; r < k; r++) {
-              var q = m[r], p = n[q.materialIndex];
-              p && p.visible && (p = u(d, p, f, l.near, l.far, h), g.renderBufferDirect(l, null, K, p, d, q));
+            for (var m = K.groups, r = 0, q = m.length; r < q; r++) {
+              var k = m[r], p = n[k.materialIndex];
+              p && p.visible && (p = u(d, p, f, l.near, l.far, h), g.renderBufferDirect(l, null, K, p, d, k));
             }
           } else {
             n.visible && (p = u(d, n, f, l.near, l.far, h), g.renderBufferDirect(l, null, K, p, d, null));
@@ -2929,7 +2929,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         u = null;
         b.set(-1, 0, 0, 0);
       }};
-    }, k = new function() {
+    }, q = new function() {
       var a = !1, d = null, u = null, b = null;
       return {setTest:function(g) {
         g ? e(2929) : l(2929);
@@ -2979,7 +2979,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         a = !1;
         b = u = d = null;
       }};
-    }, q = new function() {
+    }, k = new function() {
       var a = !1, d = null, u = null, b = null, c = null, f = null, h = null, K = null, n = null;
       return {setTest:function(g) {
         a || (g ? e(2960) : l(2960));
@@ -3009,15 +3009,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     U[3553] = u(3553, 3553, 1);
     U[34067] = u(34067, 34069, 6);
     r.setClear(0, 0, 0, 1);
-    k.setClear(1);
-    q.setClear(0);
+    q.setClear(1);
+    k.setClear(0);
     e(2929);
-    k.setFunc(3);
+    q.setFunc(3);
     h(!1);
     K(1);
     e(2884);
     f(0);
-    return {buffers:{color:r, depth:k, stencil:q}, initAttributes:function() {
+    return {buffers:{color:r, depth:q, stencil:k}, initAttributes:function() {
       for (var g = 0, a = v.length; g < a; g++) {
         v[g] = 0;
       }
@@ -3042,13 +3042,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a && (d = !d);
       h(d);
       1 === g.blending && !1 === g.transparent ? f(0) : f(g.blending, g.blendEquation, g.blendSrc, g.blendDst, g.blendEquationAlpha, g.blendSrcAlpha, g.blendDstAlpha, g.premultipliedAlpha);
-      k.setFunc(g.depthFunc);
-      k.setTest(g.depthTest);
-      k.setMask(g.depthWrite);
+      q.setFunc(g.depthFunc);
+      q.setTest(g.depthTest);
+      q.setMask(g.depthWrite);
       r.setMask(g.colorWrite);
       a = g.stencilWrite;
-      q.setTest(a);
-      a && (q.setMask(g.stencilWriteMask), q.setFunc(g.stencilFunc, g.stencilRef, g.stencilFuncMask), q.setOp(g.stencilFail, g.stencilZFail, g.stencilZPass));
+      k.setTest(a);
+      a && (k.setMask(g.stencilWriteMask), k.setFunc(g.stencilFunc, g.stencilRef, g.stencilFuncMask), k.setOp(g.stencilFail, g.stencilZFail, g.stencilZPass));
       n(g.polygonOffset, g.polygonOffsetFactor, g.polygonOffsetUnits);
     }, setFlipSided:h, setCullFace:K, setLineWidth:function(a) {
       a !== R && (L && g.lineWidth(a), R = a);
@@ -3092,8 +3092,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       I = {};
       N = O = D = z = null;
       r.reset();
-      k.reset();
       q.reset();
+      k.reset();
     }};
   }
   function xj(g, a, d, b, c, e, l) {
@@ -3137,17 +3137,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     function r(g) {
       return 1003 === g || 1004 === g || 1005 === g ? 9728 : 9729;
     }
-    function k(a) {
+    function q(a) {
       a = a.target;
-      a.removeEventListener("dispose", k);
+      a.removeEventListener("dispose", q);
       var d = b.get(a);
       void 0 !== d.__webglInit && (g.deleteTexture(d.__webglTexture), b.remove(a));
       a.isVideoTexture && A.delete(a);
       l.memory.textures--;
     }
-    function q(a) {
+    function k(a) {
       a = a.target;
-      a.removeEventListener("dispose", q);
+      a.removeEventListener("dispose", k);
       var d = b.get(a), u = b.get(a.texture);
       if (a) {
         void 0 !== u.__webglTexture && g.deleteTexture(u.__webglTexture);
@@ -3204,30 +3204,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           g.pixelStorei(37440, a.flipY);
           var r = a && a.isCompressedTexture;
           u = a.image[0] && a.image[0].isDataTexture;
-          for (var k = [], q = 0; 6 > q; q++) {
-            k[q] = r || u ? u ? a.image[q].image : a.image[q] : f(a.image[q], !1, !0, c.maxCubemapSize);
+          for (var q = [], k = 0; 6 > k; k++) {
+            q[k] = r || u ? u ? a.image[k].image : a.image[k] : f(a.image[k], !1, !0, c.maxCubemapSize);
           }
-          var p = k[0], t = h(p) || c.isWebGL2, v = e.convert(a.format), y = e.convert(a.type), x = K(v, y);
+          var p = q[0], t = h(p) || c.isWebGL2, v = e.convert(a.format), y = e.convert(a.type), x = K(v, y);
           Z(34067, a, t);
           if (r) {
-            for (q = 0; 6 > q; q++) {
-              var ma = k[q].mipmaps;
+            for (k = 0; 6 > k; k++) {
+              var ma = q[k].mipmaps;
               for (r = 0; r < ma.length; r++) {
                 var z = ma[r];
-                1023 !== a.format && 1022 !== a.format ? -1 < d.getCompressedTextureFormats().indexOf(v) ? d.compressedTexImage2D(34069 + q, r, x, z.width, z.height, 0, z.data) : console.warn("THREE.WebGLRenderer: Attempt to load unsupported compressed texture format in .setTextureCube()") : d.texImage2D(34069 + q, r, x, z.width, z.height, 0, v, y, z.data);
+                1023 !== a.format && 1022 !== a.format ? -1 < d.getCompressedTextureFormats().indexOf(v) ? d.compressedTexImage2D(34069 + k, r, x, z.width, z.height, 0, z.data) : console.warn("THREE.WebGLRenderer: Attempt to load unsupported compressed texture format in .setTextureCube()") : d.texImage2D(34069 + k, r, x, z.width, z.height, 0, v, y, z.data);
               }
             }
             l.__maxMipLevel = ma.length - 1;
           } else {
             ma = a.mipmaps;
-            for (q = 0; 6 > q; q++) {
+            for (k = 0; 6 > k; k++) {
               if (u) {
-                for (d.texImage2D(34069 + q, 0, x, k[q].width, k[q].height, 0, v, y, k[q].data), r = 0; r < ma.length; r++) {
-                  z = ma[r], z = z.image[q].image, d.texImage2D(34069 + q, r + 1, x, z.width, z.height, 0, v, y, z.data);
+                for (d.texImage2D(34069 + k, 0, x, q[k].width, q[k].height, 0, v, y, q[k].data), r = 0; r < ma.length; r++) {
+                  z = ma[r], z = z.image[k].image, d.texImage2D(34069 + k, r + 1, x, z.width, z.height, 0, v, y, z.data);
                 }
               } else {
-                for (d.texImage2D(34069 + q, 0, x, v, y, k[q]), r = 0; r < ma.length; r++) {
-                  z = ma[r], d.texImage2D(34069 + q, r + 1, x, v, y, z.image[q]);
+                for (d.texImage2D(34069 + k, 0, x, v, y, q[k]), r = 0; r < ma.length; r++) {
+                  z = ma[r], d.texImage2D(34069 + k, r + 1, x, v, y, z.image[k]);
                 }
               }
             }
@@ -3253,7 +3253,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       !(l = a.get("EXT_texture_filter_anisotropic")) || 1015 === u.type && null === a.get("OES_texture_float_linear") || 1016 === u.type && null === (c.isWebGL2 || a.get("OES_texture_half_float_linear")) || !(1 < u.anisotropy || b.get(u).__currentAnisotropy) || (g.texParameterf(d, l.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(u.anisotropy, c.getMaxAnisotropy())), b.get(u).__currentAnisotropy = u.anisotropy);
     }
     function w(a, d) {
-      void 0 === a.__webglInit && (a.__webglInit = !0, d.addEventListener("dispose", k), a.__webglTexture = g.createTexture(), l.memory.textures++);
+      void 0 === a.__webglInit && (a.__webglInit = !0, d.addEventListener("dispose", q), a.__webglTexture = g.createTexture(), l.memory.textures++);
     }
     function y(a, u, b) {
       var l = 3553;
@@ -3379,11 +3379,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.setTextureCubeDynamic = v;
     this.setupRenderTarget = function(u) {
       var f = b.get(u), r = b.get(u.texture);
-      u.addEventListener("dispose", q);
+      u.addEventListener("dispose", k);
       r.__webglTexture = g.createTexture();
       l.memory.textures++;
-      var k = !0 === u.isWebGLRenderTargetCube, t = !0 === u.isWebGLMultisampleRenderTarget, v = !0 === u.isWebGLMultiviewRenderTarget, w = h(u) || c.isWebGL2;
-      if (k) {
+      var q = !0 === u.isWebGLRenderTargetCube, t = !0 === u.isWebGLMultisampleRenderTarget, v = !0 === u.isWebGLMultiviewRenderTarget, w = h(u) || c.isWebGL2;
+      if (q) {
         f.__webglFramebuffer = [];
         for (var y = 0; 6 > y; y++) {
           f.__webglFramebuffer[y] = g.createFramebuffer();
@@ -3443,7 +3443,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           }
         }
       }
-      if (k) {
+      if (q) {
         d.bindTexture(34067, r.__webglTexture);
         Z(34067, u.texture, w);
         for (y = 0; 6 > y; y++) {
@@ -14272,8 +14272,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return this;
   }});
   ec.prototype = Object.assign(Object.create(lb.prototype), {constructor:ec, getPointsHoles:function(a) {
-    for (var d = [], b = 0, g = this.holes.length; b < g; b++) {
-      d[b] = this.holes[b].getPoints(a);
+    for (var d = [], g = 0, b = this.holes.length; g < b; g++) {
+      d[g] = this.holes[g].getPoints(a);
     }
     return d;
   }, extractPoints:function(a) {
@@ -14281,7 +14281,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, copy:function(a) {
     lb.prototype.copy.call(this, a);
     this.holes = [];
-    for (var d = 0, b = a.holes.length; d < b; d++) {
+    for (var d = 0, g = a.holes.length; d < g; d++) {
       this.holes.push(a.holes[d].clone());
     }
     return this;
@@ -16232,23 +16232,23 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, _activateAction:function(a) {
     if (!this._isActiveAction(a)) {
       if (null === a._cacheIndex) {
-        var d = (a._localRoot || this._root).uuid, b = a._clip.uuid, c = this._actionsByClip[b];
-        this._bindAction(a, c && c.knownActions[0]);
+        var d = (a._localRoot || this._root).uuid, b = a._clip.uuid, g = this._actionsByClip[b];
+        this._bindAction(a, g && g.knownActions[0]);
         this._addInactiveAction(a, b, d);
       }
       d = a._propertyBindings;
       b = 0;
-      for (c = d.length; b !== c; ++b) {
-        var g = d[b];
-        0 === g.useCount++ && (this._lendBinding(g), g.saveOriginalState());
+      for (g = d.length; b !== g; ++b) {
+        var c = d[b];
+        0 === c.useCount++ && (this._lendBinding(c), c.saveOriginalState());
       }
       this._lendAction(a);
     }
   }, _deactivateAction:function(a) {
     if (this._isActiveAction(a)) {
-      for (var d = a._propertyBindings, b = 0, c = d.length; b !== c; ++b) {
-        var g = d[b];
-        0 === --g.useCount && (g.restoreOriginalState(), this._takeBackBinding(g));
+      for (var d = a._propertyBindings, b = 0, g = d.length; b !== g; ++b) {
+        var c = d[b];
+        0 === --c.useCount && (c.restoreOriginalState(), this._takeBackBinding(c));
       }
       this._takeBackAction(a);
     }
@@ -16279,50 +16279,50 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = a._cacheIndex;
     return null !== a && a < this._nActiveActions;
   }, _addInactiveAction:function(a, d, b) {
-    var c = this._actions, g = this._actionsByClip, l = g[d];
-    void 0 === l ? (l = {knownActions:[a], actionByRoot:{}}, a._byClipCacheIndex = 0, g[d] = l) : (d = l.knownActions, a._byClipCacheIndex = d.length, d.push(a));
-    a._cacheIndex = c.length;
-    c.push(a);
+    var g = this._actions, c = this._actionsByClip, l = c[d];
+    void 0 === l ? (l = {knownActions:[a], actionByRoot:{}}, a._byClipCacheIndex = 0, c[d] = l) : (d = l.knownActions, a._byClipCacheIndex = d.length, d.push(a));
+    a._cacheIndex = g.length;
+    g.push(a);
     l.actionByRoot[b] = a;
   }, _removeInactiveAction:function(a) {
-    var d = this._actions, b = d[d.length - 1], c = a._cacheIndex;
-    b._cacheIndex = c;
-    d[c] = b;
+    var d = this._actions, b = d[d.length - 1], g = a._cacheIndex;
+    b._cacheIndex = g;
+    d[g] = b;
     d.pop();
     a._cacheIndex = null;
     d = a._clip.uuid;
     b = this._actionsByClip;
-    c = b[d];
-    var g = c.knownActions, l = g[g.length - 1], e = a._byClipCacheIndex;
+    g = b[d];
+    var c = g.knownActions, l = c[c.length - 1], e = a._byClipCacheIndex;
     l._byClipCacheIndex = e;
-    g[e] = l;
-    g.pop();
+    c[e] = l;
+    c.pop();
     a._byClipCacheIndex = null;
-    delete c.actionByRoot[(a._localRoot || this._root).uuid];
-    0 === g.length && delete b[d];
+    delete g.actionByRoot[(a._localRoot || this._root).uuid];
+    0 === c.length && delete b[d];
     this._removeInactiveBindingsForAction(a);
   }, _removeInactiveBindingsForAction:function(a) {
     a = a._propertyBindings;
     for (var d = 0, b = a.length; d !== b; ++d) {
-      var c = a[d];
-      0 === --c.referenceCount && this._removeInactiveBinding(c);
+      var g = a[d];
+      0 === --g.referenceCount && this._removeInactiveBinding(g);
     }
   }, _lendAction:function(a) {
-    var d = this._actions, b = a._cacheIndex, c = this._nActiveActions++, g = d[c];
-    a._cacheIndex = c;
-    d[c] = a;
-    g._cacheIndex = b;
-    d[b] = g;
+    var d = this._actions, b = a._cacheIndex, g = this._nActiveActions++, c = d[g];
+    a._cacheIndex = g;
+    d[g] = a;
+    c._cacheIndex = b;
+    d[b] = c;
   }, _takeBackAction:function(a) {
-    var d = this._actions, b = a._cacheIndex, c = --this._nActiveActions, g = d[c];
-    a._cacheIndex = c;
-    d[c] = a;
-    g._cacheIndex = b;
-    d[b] = g;
+    var d = this._actions, b = a._cacheIndex, g = --this._nActiveActions, c = d[g];
+    a._cacheIndex = g;
+    d[g] = a;
+    c._cacheIndex = b;
+    d[b] = c;
   }, _addInactiveBinding:function(a, d, b) {
-    var c = this._bindingsByRootAndName, g = c[d], l = this._bindings;
-    void 0 === g && (g = {}, c[d] = g);
-    g[b] = a;
+    var g = this._bindingsByRootAndName, c = g[d], l = this._bindings;
+    void 0 === c && (c = {}, g[d] = c);
+    c[b] = a;
     a._cacheIndex = l.length;
     l.push(a);
   }, _removeInactiveBinding:function(a) {
@@ -23413,10 +23413,10 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     c = c("../math/Vec3");
     b.prototype.constructor = b;
     b.id = 0;
-    b.prototype.setSpookParams = function(b, d, c) {
-      this.a = 4 / (c * (1 + 4 * d));
-      this.b = 4 * d / (1 + 4 * d);
-      this.eps = 4 / (c * c * b * (1 + 4 * d));
+    b.prototype.setSpookParams = function(d, b, c) {
+      this.a = 4 / (c * (1 + 4 * b));
+      this.b = 4 * b / (1 + 4 * b);
+      this.eps = 4 / (c * c * d * (1 + 4 * b));
     };
     b.prototype.computeB = function(b, d, c) {
       var e = this.computeGW(), l = this.computeGq(), f = this.computeGiMf();
@@ -23439,14 +23439,14 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     };
     var h = new c, t = new c, p = new c, q = new c;
     b.prototype.computeGiMf = function() {
-      var b = this.jacobianElementA, d = this.jacobianElementB, c = this.bi, e = this.bj, f = c.force, r = c.torque, k = e.force, n = e.torque, A = c.invMassSolve, C = e.invMassSolve;
-      return c.invInertiaWorldSolve ? c.invInertiaWorldSolve.vmult(r, p) : p.set(0, 0, 0), e.invInertiaWorldSolve ? e.invInertiaWorldSolve.vmult(n, q) : q.set(0, 0, 0), f.mult(A, h), k.mult(C, t), b.multiplyVectors(h, p) + d.multiplyVectors(t, q);
+      var d = this.jacobianElementA, b = this.jacobianElementB, c = this.bi, e = this.bj, f = c.force, r = c.torque, k = e.force, n = e.torque, A = c.invMassSolve, C = e.invMassSolve;
+      return c.invInertiaWorldSolve ? c.invInertiaWorldSolve.vmult(r, p) : p.set(0, 0, 0), e.invInertiaWorldSolve ? e.invInertiaWorldSolve.vmult(n, q) : q.set(0, 0, 0), f.mult(A, h), k.mult(C, t), d.multiplyVectors(h, p) + b.multiplyVectors(t, q);
     };
     var n = new c;
     b.prototype.computeGiMGt = function() {
-      var b = this.jacobianElementA, d = this.jacobianElementB, c = this.bi, e = this.bj, f = c.invInertiaWorldSolve, h = e.invInertiaWorldSolve;
+      var d = this.jacobianElementA, b = this.jacobianElementB, c = this.bi, e = this.bj, f = c.invInertiaWorldSolve, h = e.invInertiaWorldSolve;
       c = c.invMassSolve + e.invMassSolve;
-      return f && (f.vmult(b.rotational, n), c += n.dot(b.rotational)), h && (h.vmult(d.rotational, n), c += n.dot(d.rotational)), c;
+      return f && (f.vmult(d.rotational, n), c += n.dot(d.rotational)), h && (h.vmult(b.rotational, n), c += n.dot(b.rotational)), c;
     };
     var d = new c;
     new c;
@@ -24585,9 +24585,9 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     var e = new k;
     b.prototype.getNeighbors = function(b, c) {
       for (var d = this.particles.length, f = b.id, l = this.smoothingRadius * this.smoothingRadius, h = 0; h !== d; h++) {
-        var k = this.particles[h];
-        k.position.vsub(b.position, e);
-        f !== k.id && e.norm2() < l && c.push(k);
+        var r = this.particles[h];
+        r.position.vsub(b.position, e);
+        f !== r.id && e.norm2() < l && c.push(r);
       }
     };
     var f = new k, h = new k, t = new k, p = new k, q = new k, n = new k;
@@ -35088,40 +35088,40 @@ var __extends = this && this.__extends || function(a, c) {
         c[f] = d, d += 1 << b[f];
       }
     }
-    function t(b, c, d, e) {
+    function t(b, d, c, e) {
       var f, h;
       for (f = 0; 16 > f; ++f) {
         b.table[f] = 0;
       }
       for (f = 0; e > f; ++f) {
-        b.table[c[d + f]]++;
+        b.table[d[c + f]]++;
       }
       for (f = h = b.table[0] = 0; 16 > f; ++f) {
         C[f] = h, h += b.table[f];
       }
       for (f = 0; e > f; ++f) {
-        c[d + f] && (b.trans[C[c[d + f]]++] = f);
+        d[c + f] && (b.trans[C[d[c + f]]++] = f);
       }
     }
-    function p(b, c, d) {
-      if (!c) {
-        return d;
+    function p(b, d, c) {
+      if (!d) {
+        return c;
       }
       for (; 24 > b.bitcount;) {
         b.tag |= b.source[b.sourceIndex++] << b.bitcount, b.bitcount += 8;
       }
-      var e = b.tag & 65535 >>> 16 - c;
-      return b.tag >>>= c, b.bitcount -= c, e + d;
+      var e = b.tag & 65535 >>> 16 - d;
+      return b.tag >>>= d, b.bitcount -= d, e + c;
     }
-    function q(b, c) {
+    function q(b, d) {
       for (; 24 > b.bitcount;) {
         b.tag |= b.source[b.sourceIndex++] << b.bitcount, b.bitcount += 8;
       }
-      var d = 0, e = 0, f = 0, h = b.tag;
+      var c = 0, e = 0, f = 0, h = b.tag;
       do {
-        e = 2 * e + (1 & h), h >>>= 1, ++f, d += c.table[f], e -= c.table[f];
+        e = 2 * e + (1 & h), h >>>= 1, ++f, c += d.table[f], e -= d.table[f];
       } while (0 <= e);
-      return b.tag = h, b.bitcount -= f, c.trans[d + e];
+      return b.tag = h, b.bitcount -= f, d.trans[c + e];
     }
     function n(b, c, e) {
       for (;;) {
@@ -35143,32 +35143,32 @@ var __extends = this && this.__extends || function(a, c) {
       }
     }
     var d = 0, l = new e, m = new e, w = new Uint8Array(30), x = new Uint16Array(30), z = new Uint8Array(30), r = new Uint16Array(30), v = new Uint8Array([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]), y = new e, A = new Uint8Array(320), C = new Uint16Array(16);
-    (function(b, c) {
-      var d;
-      for (d = 0; 7 > d; ++d) {
-        b.table[d] = 0;
+    (function(b, d) {
+      var c;
+      for (c = 0; 7 > c; ++c) {
+        b.table[c] = 0;
       }
       b.table[7] = 24;
       b.table[8] = 152;
       b.table[9] = 112;
-      for (d = 0; 24 > d; ++d) {
-        b.trans[d] = 256 + d;
+      for (c = 0; 24 > c; ++c) {
+        b.trans[c] = 256 + c;
       }
-      for (d = 0; 144 > d; ++d) {
-        b.trans[24 + d] = d;
+      for (c = 0; 144 > c; ++c) {
+        b.trans[24 + c] = c;
       }
-      for (d = 0; 8 > d; ++d) {
-        b.trans[168 + d] = 280 + d;
+      for (c = 0; 8 > c; ++c) {
+        b.trans[168 + c] = 280 + c;
       }
-      for (d = 0; 112 > d; ++d) {
-        b.trans[176 + d] = 144 + d;
+      for (c = 0; 112 > c; ++c) {
+        b.trans[176 + c] = 144 + c;
       }
-      for (d = 0; 5 > d; ++d) {
-        c.table[d] = 0;
+      for (c = 0; 5 > c; ++c) {
+        d.table[c] = 0;
       }
-      c.table[5] = 32;
-      for (d = 0; 32 > d; ++d) {
-        c.trans[d] = d;
+      d.table[5] = 32;
+      for (c = 0; 32 > c; ++c) {
+        d.trans[c] = c;
       }
     })(l, m);
     h(w, x, 4, 3);
@@ -48978,59 +48978,58 @@ SpineTexture.getTextureWrap = function(a) {
 };
 "use strict";
 function ParticleEmitterControl(a) {
-  var c = ShaderUtils.types, k = valueOverLifetimeLength;
-  a = ShaderUtils.ensureTypedArg(a, c.OBJECT, {});
-  a.position = ShaderUtils.ensureTypedArg(a.position, c.OBJECT, {});
-  a.velocity = ShaderUtils.ensureTypedArg(a.velocity, c.OBJECT, {});
-  a.acceleration = ShaderUtils.ensureTypedArg(a.acceleration, c.OBJECT, {});
-  a.radius = ShaderUtils.ensureTypedArg(a.radius, c.OBJECT, {});
-  a.drag = ShaderUtils.ensureTypedArg(a.drag, c.OBJECT, {});
-  a.rotation = ShaderUtils.ensureTypedArg(a.rotation, c.OBJECT, {});
-  a.color = ShaderUtils.ensureTypedArg(a.color, c.OBJECT, {});
-  a.opacity = ShaderUtils.ensureTypedArg(a.opacity, c.OBJECT, {});
-  a.size = ShaderUtils.ensureTypedArg(a.size, c.OBJECT, {});
-  a.angle = ShaderUtils.ensureTypedArg(a.angle, c.OBJECT, {});
-  a.wiggle = ShaderUtils.ensureTypedArg(a.wiggle, c.OBJECT, {});
-  a.maxAge = ShaderUtils.ensureTypedArg(a.maxAge, c.OBJECT, {});
+  a = ShaderUtils.ensureTypedArg(a, ShaderUtils.types.OBJECT, {});
+  a.position = ShaderUtils.ensureTypedArg(a.position, ShaderUtils.types.OBJECT, {});
+  a.velocity = ShaderUtils.ensureTypedArg(a.velocity, ShaderUtils.types.OBJECT, {});
+  a.acceleration = ShaderUtils.ensureTypedArg(a.acceleration, ShaderUtils.types.OBJECT, {});
+  a.radius = ShaderUtils.ensureTypedArg(a.radius, ShaderUtils.types.OBJECT, {});
+  a.drag = ShaderUtils.ensureTypedArg(a.drag, ShaderUtils.types.OBJECT, {});
+  a.rotation = ShaderUtils.ensureTypedArg(a.rotation, ShaderUtils.types.OBJECT, {});
+  a.color = ShaderUtils.ensureTypedArg(a.color, ShaderUtils.types.OBJECT, {});
+  a.opacity = ShaderUtils.ensureTypedArg(a.opacity, ShaderUtils.types.OBJECT, {});
+  a.size = ShaderUtils.ensureTypedArg(a.size, ShaderUtils.types.OBJECT, {});
+  a.angle = ShaderUtils.ensureTypedArg(a.angle, ShaderUtils.types.OBJECT, {});
+  a.wiggle = ShaderUtils.ensureTypedArg(a.wiggle, ShaderUtils.types.OBJECT, {});
+  a.maxAge = ShaderUtils.ensureTypedArg(a.maxAge, ShaderUtils.types.OBJECT, {});
   a.onParticleSpawn && console.warn("nunuStudio: onParticleSpawn has been removed. Please set properties directly to alter values at runtime.");
   this.uuid = THREE.Math.generateUUID();
-  this.type = ShaderUtils.ensureTypedArg(a.type, c.NUMBER, ParticleDistributions.BOX);
-  this.position = {_value:ShaderUtils.ensureInstanceOf(a.position.value, THREE.Vector3, new THREE.Vector3), _spread:ShaderUtils.ensureInstanceOf(a.position.spread, THREE.Vector3, new THREE.Vector3), _spreadClamp:ShaderUtils.ensureInstanceOf(a.position.spreadClamp, THREE.Vector3, new THREE.Vector3), _distribution:ShaderUtils.ensureTypedArg(a.position.distribution, c.NUMBER, this.type), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1), _radius:ShaderUtils.ensureTypedArg(a.position.radius, 
-  c.NUMBER, 10), _radiusScale:ShaderUtils.ensureInstanceOf(a.position.radiusScale, THREE.Vector3, new THREE.Vector3(1, 1, 1)), _distributionClamp:ShaderUtils.ensureTypedArg(a.position.distributionClamp, c.NUMBER, 0)};
-  this.velocity = {_value:ShaderUtils.ensureInstanceOf(a.velocity.value, THREE.Vector3, new THREE.Vector3), _spread:ShaderUtils.ensureInstanceOf(a.velocity.spread, THREE.Vector3, new THREE.Vector3), _distribution:ShaderUtils.ensureTypedArg(a.velocity.distribution, c.NUMBER, this.type), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1)};
-  this.acceleration = {_value:ShaderUtils.ensureInstanceOf(a.acceleration.value, THREE.Vector3, new THREE.Vector3), _spread:ShaderUtils.ensureInstanceOf(a.acceleration.spread, THREE.Vector3, new THREE.Vector3), _distribution:ShaderUtils.ensureTypedArg(a.acceleration.distribution, c.NUMBER, this.type), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1)};
-  this.drag = {_value:ShaderUtils.ensureTypedArg(a.drag.value, c.NUMBER, 0), _spread:ShaderUtils.ensureTypedArg(a.drag.spread, c.NUMBER, 0), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1)};
-  this.wiggle = {_value:ShaderUtils.ensureTypedArg(a.wiggle.value, c.NUMBER, 0), _spread:ShaderUtils.ensureTypedArg(a.wiggle.spread, c.NUMBER, 0)};
-  this.rotation = {_axis:ShaderUtils.ensureInstanceOf(a.rotation.axis, THREE.Vector3, new THREE.Vector3(0, 1, 0)), _axisSpread:ShaderUtils.ensureInstanceOf(a.rotation.axisSpread, THREE.Vector3, new THREE.Vector3), _angle:ShaderUtils.ensureTypedArg(a.rotation.angle, c.NUMBER, 0), _angleSpread:ShaderUtils.ensureTypedArg(a.rotation.angleSpread, c.NUMBER, 0), _static:ShaderUtils.ensureTypedArg(a.rotation.static, c.BOOLEAN, !1), _center:ShaderUtils.ensureInstanceOf(a.rotation.center, THREE.Vector3, this.position._value.clone()), 
-  _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1)};
-  this.maxAge = {_value:ShaderUtils.ensureTypedArg(a.maxAge.value, c.NUMBER, 2), _spread:ShaderUtils.ensureTypedArg(a.maxAge.spread, c.NUMBER, 0)};
-  this.color = {_value:ShaderUtils.ensureArrayInstanceOf(a.color.value, THREE.Color, new THREE.Color), _spread:ShaderUtils.ensureArrayInstanceOf(a.color.spread, THREE.Vector3, new THREE.Vector3), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1)};
-  this.opacity = {_value:ShaderUtils.ensureArrayTypedArg(a.opacity.value, c.NUMBER, 1), _spread:ShaderUtils.ensureArrayTypedArg(a.opacity.spread, c.NUMBER, 0), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1)};
-  this.size = {_value:ShaderUtils.ensureArrayTypedArg(a.size.value, c.NUMBER, 1), _spread:ShaderUtils.ensureArrayTypedArg(a.size.spread, c.NUMBER, 0), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1)};
-  this.angle = {_value:ShaderUtils.ensureArrayTypedArg(a.angle.value, c.NUMBER, 0), _spread:ShaderUtils.ensureArrayTypedArg(a.angle.spread, c.NUMBER, 0), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1)};
-  this.particleCount = ShaderUtils.ensureTypedArg(a.particleCount, c.NUMBER, 100);
-  this.duration = ShaderUtils.ensureTypedArg(a.duration, c.NUMBER, null);
-  this.isStatic = ShaderUtils.ensureTypedArg(a.isStatic, c.BOOLEAN, !1);
-  this.activeMultiplier = ShaderUtils.ensureTypedArg(a.activeMultiplier, c.NUMBER, 1);
-  this.direction = ShaderUtils.ensureTypedArg(a.direction, c.NUMBER, 1);
-  this.alive = ShaderUtils.ensureTypedArg(a.alive, c.BOOLEAN, !0);
+  this.type = ShaderUtils.ensureTypedArg(a.type, ShaderUtils.types.NUMBER, ParticleDistributions.BOX);
+  this.position = {_value:ShaderUtils.ensureInstanceOf(a.position.value, THREE.Vector3, new THREE.Vector3), _spread:ShaderUtils.ensureInstanceOf(a.position.spread, THREE.Vector3, new THREE.Vector3), _spreadClamp:ShaderUtils.ensureInstanceOf(a.position.spreadClamp, THREE.Vector3, new THREE.Vector3), _distribution:ShaderUtils.ensureTypedArg(a.position.distribution, ShaderUtils.types.NUMBER, this.type), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1), _radius:ShaderUtils.ensureTypedArg(a.position.radius, 
+  ShaderUtils.types.NUMBER, 10), _radiusScale:ShaderUtils.ensureInstanceOf(a.position.radiusScale, THREE.Vector3, new THREE.Vector3(1, 1, 1)), _distributionClamp:ShaderUtils.ensureTypedArg(a.position.distributionClamp, ShaderUtils.types.NUMBER, 0)};
+  this.velocity = {_value:ShaderUtils.ensureInstanceOf(a.velocity.value, THREE.Vector3, new THREE.Vector3), _spread:ShaderUtils.ensureInstanceOf(a.velocity.spread, THREE.Vector3, new THREE.Vector3), _distribution:ShaderUtils.ensureTypedArg(a.velocity.distribution, ShaderUtils.types.NUMBER, this.type), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1)};
+  this.acceleration = {_value:ShaderUtils.ensureInstanceOf(a.acceleration.value, THREE.Vector3, new THREE.Vector3), _spread:ShaderUtils.ensureInstanceOf(a.acceleration.spread, THREE.Vector3, new THREE.Vector3), _distribution:ShaderUtils.ensureTypedArg(a.acceleration.distribution, ShaderUtils.types.NUMBER, this.type), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1)};
+  this.drag = {_value:ShaderUtils.ensureTypedArg(a.drag.value, ShaderUtils.types.NUMBER, 0), _spread:ShaderUtils.ensureTypedArg(a.drag.spread, ShaderUtils.types.NUMBER, 0), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1)};
+  this.wiggle = {_value:ShaderUtils.ensureTypedArg(a.wiggle.value, ShaderUtils.types.NUMBER, 0), _spread:ShaderUtils.ensureTypedArg(a.wiggle.spread, ShaderUtils.types.NUMBER, 0)};
+  this.rotation = {_axis:ShaderUtils.ensureInstanceOf(a.rotation.axis, THREE.Vector3, new THREE.Vector3(0, 1, 0)), _axisSpread:ShaderUtils.ensureInstanceOf(a.rotation.axisSpread, THREE.Vector3, new THREE.Vector3), _angle:ShaderUtils.ensureTypedArg(a.rotation.angle, ShaderUtils.types.NUMBER, 0), _angleSpread:ShaderUtils.ensureTypedArg(a.rotation.angleSpread, ShaderUtils.types.NUMBER, 0), _static:ShaderUtils.ensureTypedArg(a.rotation.static, ShaderUtils.types.BOOLEAN, !1), _center:ShaderUtils.ensureInstanceOf(a.rotation.center, 
+  THREE.Vector3, this.position._value.clone()), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1)};
+  this.maxAge = {_value:ShaderUtils.ensureTypedArg(a.maxAge.value, ShaderUtils.types.NUMBER, 2), _spread:ShaderUtils.ensureTypedArg(a.maxAge.spread, ShaderUtils.types.NUMBER, 0)};
+  this.color = {_value:ShaderUtils.ensureArrayInstanceOf(a.color.value, THREE.Color, new THREE.Color), _spread:ShaderUtils.ensureArrayInstanceOf(a.color.spread, THREE.Vector3, new THREE.Vector3), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1)};
+  this.opacity = {_value:ShaderUtils.ensureArrayTypedArg(a.opacity.value, ShaderUtils.types.NUMBER, 1), _spread:ShaderUtils.ensureArrayTypedArg(a.opacity.spread, ShaderUtils.types.NUMBER, 0), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1)};
+  this.size = {_value:ShaderUtils.ensureArrayTypedArg(a.size.value, ShaderUtils.types.NUMBER, 1), _spread:ShaderUtils.ensureArrayTypedArg(a.size.spread, ShaderUtils.types.NUMBER, 0), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1)};
+  this.angle = {_value:ShaderUtils.ensureArrayTypedArg(a.angle.value, ShaderUtils.types.NUMBER, 0), _spread:ShaderUtils.ensureArrayTypedArg(a.angle.spread, ShaderUtils.types.NUMBER, 0), _randomise:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1)};
+  this.particleCount = ShaderUtils.ensureTypedArg(a.particleCount, ShaderUtils.types.NUMBER, 100);
+  this.duration = ShaderUtils.ensureTypedArg(a.duration, ShaderUtils.types.NUMBER, null);
+  this.isStatic = ShaderUtils.ensureTypedArg(a.isStatic, ShaderUtils.types.BOOLEAN, !1);
+  this.activeMultiplier = ShaderUtils.ensureTypedArg(a.activeMultiplier, ShaderUtils.types.NUMBER, 1);
+  this.direction = ShaderUtils.ensureTypedArg(a.direction, ShaderUtils.types.NUMBER, 1);
+  this.alive = ShaderUtils.ensureTypedArg(a.alive, ShaderUtils.types.BOOLEAN, !0);
   this.activeParticleCount = this.age = this.attributeEnd = this.attributeOffset = this.activationIndex = this.particlesPerSecond = 0;
   this.paramsArray = this.attributes = this.group = null;
-  this.resetFlags = {position:ShaderUtils.ensureTypedArg(a.position.randomise, c.BOOLEAN, !1) || ShaderUtils.ensureTypedArg(a.radius.randomise, c.BOOLEAN, !1), velocity:ShaderUtils.ensureTypedArg(a.velocity.randomise, c.BOOLEAN, !1), acceleration:ShaderUtils.ensureTypedArg(a.acceleration.randomise, c.BOOLEAN, !1) || ShaderUtils.ensureTypedArg(a.drag.randomise, c.BOOLEAN, !1), rotation:ShaderUtils.ensureTypedArg(a.rotation.randomise, c.BOOLEAN, !1), rotationCenter:ShaderUtils.ensureTypedArg(a.rotation.randomise, 
-  c.BOOLEAN, !1), size:ShaderUtils.ensureTypedArg(a.size.randomise, c.BOOLEAN, !1), color:ShaderUtils.ensureTypedArg(a.color.randomise, c.BOOLEAN, !1), opacity:ShaderUtils.ensureTypedArg(a.opacity.randomise, c.BOOLEAN, !1), angle:ShaderUtils.ensureTypedArg(a.angle.randomise, c.BOOLEAN, !1)};
+  this.resetFlags = {position:ShaderUtils.ensureTypedArg(a.position.randomise, ShaderUtils.types.BOOLEAN, !1) || ShaderUtils.ensureTypedArg(a.radius.randomise, ShaderUtils.types.BOOLEAN, !1), velocity:ShaderUtils.ensureTypedArg(a.velocity.randomise, ShaderUtils.types.BOOLEAN, !1), acceleration:ShaderUtils.ensureTypedArg(a.acceleration.randomise, ShaderUtils.types.BOOLEAN, !1) || ShaderUtils.ensureTypedArg(a.drag.randomise, ShaderUtils.types.BOOLEAN, !1), rotation:ShaderUtils.ensureTypedArg(a.rotation.randomise, 
+  ShaderUtils.types.BOOLEAN, !1), rotationCenter:ShaderUtils.ensureTypedArg(a.rotation.randomise, ShaderUtils.types.BOOLEAN, !1), size:ShaderUtils.ensureTypedArg(a.size.randomise, ShaderUtils.types.BOOLEAN, !1), color:ShaderUtils.ensureTypedArg(a.color.randomise, ShaderUtils.types.BOOLEAN, !1), opacity:ShaderUtils.ensureTypedArg(a.opacity.randomise, ShaderUtils.types.BOOLEAN, !1), angle:ShaderUtils.ensureTypedArg(a.angle.randomise, ShaderUtils.types.BOOLEAN, !1)};
   this.updateFlags = {};
   this.updateCounts = {};
   this.updateMap = {maxAge:"params", position:"position", velocity:"velocity", acceleration:"acceleration", drag:"acceleration", wiggle:"params", rotation:"rotation", size:"size", color:"color", opacity:"opacity", angle:"angle"};
-  for (var b in this.updateMap) {
-    this.updateMap.hasOwnProperty(b) && (this.updateCounts[this.updateMap[b]] = 0, this.updateFlags[this.updateMap[b]] = !1, this._createGetterSetters(this[b], b));
+  for (var c in this.updateMap) {
+    this.updateMap.hasOwnProperty(c) && (this.updateCounts[this.updateMap[c]] = 0, this.updateFlags[this.updateMap[c]] = !1, this._createGetterSetters(this[c], c));
   }
   this.bufferUpdateRanges = {};
   this.attributeKeys = null;
   this.attributeCount = 0;
-  ShaderUtils.ensureValueOverLifetimeCompliance(this.color, k, k);
-  ShaderUtils.ensureValueOverLifetimeCompliance(this.opacity, k, k);
-  ShaderUtils.ensureValueOverLifetimeCompliance(this.size, k, k);
-  ShaderUtils.ensureValueOverLifetimeCompliance(this.angle, k, k);
+  ShaderUtils.ensureValueOverLifetimeCompliance(this.color, ParticleEmitter.valueOverLifetimeLength, ParticleEmitter.valueOverLifetimeLength);
+  ShaderUtils.ensureValueOverLifetimeCompliance(this.opacity, ParticleEmitter.valueOverLifetimeLength, ParticleEmitter.valueOverLifetimeLength);
+  ShaderUtils.ensureValueOverLifetimeCompliance(this.size, ParticleEmitter.valueOverLifetimeLength, ParticleEmitter.valueOverLifetimeLength);
+  ShaderUtils.ensureValueOverLifetimeCompliance(this.angle, ParticleEmitter.valueOverLifetimeLength, ParticleEmitter.valueOverLifetimeLength);
 }
 ParticleEmitterControl.constructor = ParticleEmitterControl;
 ParticleEmitterControl.prototype._createGetterSetters = function(a, c) {
@@ -49044,7 +49043,7 @@ ParticleEmitterControl.prototype._createGetterSetters = function(a, c) {
         };
       }(b), set:function(a) {
         return function(b) {
-          var e = k.updateMap[c], f = this[a], h = valueOverLifetimeLength;
+          var e = k.updateMap[c], f = this[a], h = ParticleEmitter.valueOverLifetimeLength;
           "_rotationCenter" === a ? (k.updateFlags.rotationCenter = !0, k.updateCounts.rotationCenter = 0) : "_randomise" === a ? k.resetFlags[e] = b : (k.updateFlags[e] = !0, k.updateCounts[e] = 0);
           k.group._updateDefines();
           this[a] = b;
@@ -49311,7 +49310,7 @@ function ParticleGroup(a) {
   this._attributesNeedDynamicReset = this._attributesNeedRefresh = !1;
   this.particleCount = 0;
   this.uniforms = {textureSampler:{type:"t", value:this.texture}, textureAnimation:{type:"v4", value:new THREE.Vector4(this.textureFrames.x, this.textureFrames.y, this.textureFrameCount, Math.max(Math.abs(this.textureLoop), 1))}, fogColor:{type:"c", value:null}, fogNear:{type:"f", value:10}, fogFar:{type:"f", value:200}, fogDensity:{type:"f", value:.5}, deltaTime:{type:"f", value:0}, runTime:{type:"f", value:0}, scale:{type:"f", value:this.scale}};
-  this.defines = {HAS_PERSPECTIVE:this.hasPerspective, COLORIZE:this.colorize, VALUE_OVER_LIFETIME_LENGTH:valueOverLifetimeLength, SHOULD_ROTATE_TEXTURE:!1, SHOULD_ROTATE_PARTICLES:!1, SHOULD_WIGGLE_PARTICLES:!1, SHOULD_CALCULATE_SPRITE:1 < this.textureFrames.x || 1 < this.textureFrames.y};
+  this.defines = {HAS_PERSPECTIVE:this.hasPerspective, COLORIZE:this.colorize, VALUE_OVER_LIFETIME_LENGTH:ParticleEmitter.valueOverLifetimeLength, SHOULD_ROTATE_TEXTURE:!1, SHOULD_ROTATE_PARTICLES:!1, SHOULD_WIGGLE_PARTICLES:!1, SHOULD_CALCULATE_SPRITE:1 < this.textureFrames.x || 1 < this.textureFrames.y};
   this.attributes = {position:new ShaderAttribute("v3", !0), acceleration:new ShaderAttribute("v4", !0), velocity:new ShaderAttribute("v3", !0), rotation:new ShaderAttribute("v4", !0), rotationCenter:new ShaderAttribute("v3", !0), params:new ShaderAttribute("v4", !0), size:new ShaderAttribute("v4", !0), angle:new ShaderAttribute("v4", !0), color:new ShaderAttribute("v4", !0), opacity:new ShaderAttribute("v4", !0)};
   this.attributeKeys = Object.keys(this.attributes);
   this.attributeCount = this.attributeKeys.length;
@@ -49443,9 +49442,8 @@ ParticleGroup.prototype._updateUniforms = function(a) {
   this.uniforms.deltaTime.value = a;
 };
 ParticleGroup.prototype._resetBufferRanges = function() {
-  var a = this.attributeKeys;
-  for (i = this.attributeCount - 1; 0 <= i; --i) {
-    this.attributes[a[i]].resetUpdateRange();
+  for (var a = this.attributeKeys, c = this.attributeCount - 1; 0 <= c; --c) {
+    this.attributes[a[c]].resetUpdateRange();
   }
 };
 ParticleGroup.prototype._updateBuffers = function(a) {
@@ -49859,7 +49857,8 @@ function ParticleEmitter(a, c) {
     k.group.texture = a;
   }}});
 }
-var ParticleDistributions = {BOX:1, SPHERE:2, DISC:3}, valueOverLifetimeLength = 4;
+var ParticleDistributions = {BOX:1, SPHERE:2, DISC:3};
+ParticleEmitter.valueOverLifetimeLength = 4;
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
 ParticleEmitter.defaultEmitter = {particleCount:200, velocity:{value:new THREE.Vector3(0, 0, 0), spread:new THREE.Vector3(3, 3, 3)}, acceleration:{value:new THREE.Vector3(0, 0, 0), spread:new THREE.Vector3(0, 0, 0)}};
 ParticleEmitter.defaultGroup = {texture:{value:null}, maxParticleCount:200, blending:THREE.AdditiveBlending, fog:!1, depthWrite:!1, depthTest:!0, transparent:!0, hasPerspective:!0};
