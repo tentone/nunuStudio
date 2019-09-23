@@ -1850,6 +1850,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.minFilter = this.magFilter = 1003;
     this.wrapR = 1001;
     this.flipY = this.generateMipmaps = !1;
+    this.needsUpdate = !0;
   }
   function Eb(g, a, d, b) {
     h.call(this, null);
@@ -1857,6 +1858,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.minFilter = this.magFilter = 1003;
     this.wrapR = 1001;
     this.flipY = this.generateMipmaps = !1;
+    this.needsUpdate = !0;
   }
   function Xa(g, a, d) {
     var u = g[0];
@@ -11184,7 +11186,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       void 0 !== m && d.faceVertexUvs[0].push([(new k).fromArray(m, 2 * a), (new k).fromArray(m, 2 * g), (new k).fromArray(m, 2 * b)]);
       void 0 !== n && d.faceVertexUvs[1].push([(new k).fromArray(n, 2 * a), (new k).fromArray(n, 2 * g), (new k).fromArray(n, 2 * b)]);
     }
-    var d = this, b = null !== a.index ? a.index.array : void 0, c = a.attributes, l = c.position.array, f = void 0 !== c.normal ? c.normal.array : void 0, h = void 0 !== c.color ? c.color.array : void 0, m = void 0 !== c.uv ? c.uv.array : void 0, n = void 0 !== c.uv2 ? c.uv2.array : void 0;
+    var d = this, b = null !== a.index ? a.index.array : void 0, c = a.attributes;
+    if (void 0 === c.position) {
+      return console.error("THREE.Geometry.fromBufferGeometry(): Position attribute required for conversion."), this;
+    }
+    var l = c.position.array, f = void 0 !== c.normal ? c.normal.array : void 0, h = void 0 !== c.color ? c.color.array : void 0, m = void 0 !== c.uv ? c.uv.array : void 0, n = void 0 !== c.uv2 ? c.uv2.array : void 0;
     void 0 !== n && (this.faceVertexUvs[1] = []);
     for (c = 0; c < l.length; c += 3) {
       d.vertices.push((new e).fromArray(l, c)), void 0 !== h && d.colors.push((new A).fromArray(h, c));
