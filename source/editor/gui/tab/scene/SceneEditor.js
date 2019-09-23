@@ -865,7 +865,7 @@ SceneEditor.prototype.update = function()
  */
 SceneEditor.prototype.render = function()
 {
-	if(this.renderer === null)
+	if(this.canvas.renderer === null)
 	{
 		console.warn("nunuStudio: SceneEditor renderer is null.", this);
 		return;
