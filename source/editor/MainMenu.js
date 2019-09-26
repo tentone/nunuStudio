@@ -314,8 +314,7 @@ function MainMenu(parent)
 					var exporter = new THREE.GLTFExporter();
 					exporter.parse(Editor.getScene(), function(result)
 					{
-						var data = JSON.stringify(result, null, 2);
-						FileSystem.writeFile(files[0].path, data);
+						FileSystem.writeFile(files[0].path, JSON.stringify(result, null, "\t"));
 					});
 				}
 			}, ".gltf", true);
@@ -328,8 +327,7 @@ function MainMenu(parent)
 				var exporter = new THREE.GLTFExporter();
 				exporter.parse(Editor.getScene(), function(result)
 				{
-					var data = JSON.stringify(result, null, 2);
-					FileSystem.writeFile(fname, data);
+					FileSystem.writeFile(fname, JSON.stringify(result, null, "\t"));
 				})
 			}, ".gltf");
 		}
