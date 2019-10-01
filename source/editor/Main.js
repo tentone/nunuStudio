@@ -277,7 +277,6 @@ include("lib/three/loaders/GCodeLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJLoader.js");
-include("lib/three/loaders/OBJLoader2.js");
 include("lib/three/loaders/PCDLoader.js");
 include("lib/three/loaders/PLYLoader.js");
 include("lib/three/loaders/PRWMLoader.js");
