@@ -17,7 +17,7 @@ function RendererConfiguration()
 	 * @property backend
 	 * @type {Number}
 	 */
-	this.backend = RendererConfiguration.WEBGL;
+	this.backend = RendererConfiguration.WEBGL2;
 
 	/** 
 	 * Defines whether the renderer should automatically clear its output before rendering a frame.
@@ -90,6 +90,8 @@ function RendererConfiguration()
 	 * Enables automatic updates to the shadows in the scene.
 	 *
 	 * If you do not require dynamic lighting / shadows, you may set this to false.
+	 *
+	 * Use renderer.shadowMap.needsUpdate to update the shadow map.
 	 *
 	 * @property shadowsAutoUpdate
 	 * @type {Boolean}
@@ -210,6 +212,14 @@ function RendererConfiguration()
 	 * @type {Boolean}
 	 */
 	this.physicallyCorrectLights = false;
+
+	/**
+	 * Defines whether material shader programs are checked for errors during compilation and linkage process.
+	 *
+	 * @property checkShaderErrors
+ 	 * @type {Boolean}
+	 */
+	this.checkShaderErrors = true;
 }
 
 /** 
@@ -281,6 +291,7 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 	renderer.toneMappingExposure = this.toneMappingExposure;
 	renderer.toneMappingWhitePoint = this.toneMappingWhitePoint;
 
+	renderer.debug.checkShaderErrors = this.checkShaderErrors;
 	renderer.sortObjects = this.sortObjects;
 
 	renderer.gammaFactor = this.gammaFactor;
@@ -309,6 +320,7 @@ RendererConfiguration.prototype.toJSON = function()
 		toneMappingExposure: this.toneMappingExposure,
 		toneMappingWhitePoint: this.toneMappingWhitePoint,
 		sortObjects: this.sortObjects,
+		checkShaderErrors: this.checkShaderErrors,
 		gammaFactor: this.gammaFactor,
 		gammaInput: this.gammaInput,
 		gammaOutput: this.gammaOutput,
@@ -338,6 +350,7 @@ RendererConfiguration.prototype.fromJSON = function(data)
 	this.toneMappingExposure = data.toneMappingExposure;
 	this.toneMappingWhitePoint = data.toneMappingWhitePoint;
 	this.sortObjects = data.sortObjects;
+	this.checkShaderErrors = data.checkShaderErrors;
 	this.gammaFactor = data.gammaFactor;
 	this.gammaInput = data.gammaInput;
 	this.gammaOutput = data.gammaOutput;

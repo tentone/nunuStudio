@@ -20,16 +20,7 @@ function RunProject(parent, closeable, container, index)
 	 * @attribute canvas
 	 * @type {RendererCanvas}
 	 */
-	this.canvas = new RendererCanvas(this);
-	this.canvas.createRenderer = function (argument)
-	{
-		this.renderer = Editor.program.rendererConfig.createRenderer(this.canvas);
-		
-		if(this.useCSSRenderer)
-		{
-			this.cssRenderer = new CSS3DRenderer(this.cssDivision);
-		}
-	};
+	this.canvas = new RendererCanvas(this, Editor.program.rendererConfig);
 	
 	/**
 	 * Keyboard input object.

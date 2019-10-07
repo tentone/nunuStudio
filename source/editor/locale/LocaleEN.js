@@ -89,6 +89,7 @@ LocaleManager.register(
 	autoClearColor: "Auto Clear Color",
 	autoClearDepth: "Auto Clear Depth",
 	autoClearStencil: "Auto Clear Stencil",
+	checkShaderErrors: "Check Shaders",
 	clearColor: "Clear color",
 	clearDepth: "Clear depth",
 	clearStencil: "Clear stencil",
@@ -304,6 +305,7 @@ LocaleManager.register(
 	failedLoadSpine: "Failed to load Spine animation, make sure that .json and .atlas have the same name.",
 
 	//Hints renderer
+	hintCheckShaderErrors: "Defines whether material shader programs are checked for errors during compilation and linkage process.",
 	hintStencil: "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
 	hintSortObjects: "If true the renderer sorts the objects from back to front for rendering. Important if using multiple transparent objects.",
 	hintAlpha: "Whether the canvas contains an alpha (transparency) buffer or not.",

@@ -9,7 +9,7 @@ function GeometryInspector(parent, object)
 	// Geometry preview
 	this.form.addText(Locale.geometry);
 	this.preview = new RendererCanvas(this.form);
-	this.preview.size.set(120, 120);
+	this.preview.size.set(120, 180);
 	this.preview.setOnResize(function(x, y)
 	{
 		self.camera.aspect = x / y;
@@ -29,7 +29,7 @@ function GeometryInspector(parent, object)
 	this.grid = null;
 
 	var directional = new THREE.DirectionalLight(0x777777, 1.0);
-	directional.position.set(3000, 10000, 400);
+	directional.position.set(3e3, 1e4, 4e2);
 	this.scene.add(directional);
 	this.scene.add(new THREE.AmbientLight(0x888888));
 
@@ -52,8 +52,6 @@ function GeometryInspector(parent, object)
 		{
 			return;
 		}
-
-		self.camera.position.x += 0.001;
 		
 		self.mouse.update();
 		self.controls.update(self.mouse);
@@ -85,7 +83,7 @@ GeometryInspector.prototype.updateInspector = function()
 
 	var size = new THREE.Vector3();
 	box.getSize(size);
-	
+
 	var max = size.toArray().reduce(function(a, b)
 	{
 		return a > b ? a : b;

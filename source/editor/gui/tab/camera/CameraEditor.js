@@ -9,7 +9,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.camera = null;
 	
 	//Canvas
-	this.canvas = new RendererCanvas();
+	this.canvas = new RendererCanvas(undefined, Editor.getRendererConfig());
 
 	this.form = new TableForm();
 	this.form.setAutoSize(false);

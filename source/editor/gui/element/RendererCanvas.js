@@ -10,17 +10,17 @@
  * @param {Element} parent Parent element.
  * @param {Boolean} alpha If true the background is transparent.
  */
-function RendererCanvas(parent, alpha, useCSSRenderer)
+function RendererCanvas(parent, options, useCSSRenderer)
 {
 	Element.call(this, parent, "div");
 
-	/**
-	 * Indicates if the background of the canvas is transparent or not.
+	/** 
+	 * List os parameters to be passed to the WebGLrenderer.
 	 *
-	 * @attribute alpha
-	 * @type {Boolean}
+	 * @attribute options
+	 * @type {Object}
 	 */
-	this.alpha = alpha !== undefined ? alpha : false;
+	this.options = options !== undefined ? options : new RendererConfiguration();
 
 	/**
 	 * On resize callback, called every time the container is updated.
@@ -159,21 +159,18 @@ RendererCanvas.prototype.resetCanvas = function()
 };
 
 /**
- * Create WebGL renderer.
+ * Creates a new threejs WebGL renderer.
+ * 
+ * The renderer is created with the options specified on the object, always uses the canvas attached to the component.
+ *
+ * The user has to ensure that the old context was disposed before creating a new renderer.
  * 
  * @method createRenderer
  */
 RendererCanvas.prototype.createRenderer = function()
 {
-	var rendererConfig = Editor.settings.render.followProject ? Editor.program.rendererConfig : Editor.settings.render;
-
-	var alpha = rendererConfig.alpha;
-	rendererConfig.alpha = this.alpha;
-
-	this.renderer = rendererConfig.createRenderer(this.canvas);
-	this.renderer.alpha = this.alpha;
-	
-	rendererConfig.alpha = alpha;
+	//Create renderer
+	this.renderer = this.options.createRenderer(this.canvas);
 
 	//CSS Renderer
 	if(this.useCSSRenderer)

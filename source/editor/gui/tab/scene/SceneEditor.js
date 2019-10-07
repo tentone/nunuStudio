@@ -20,7 +20,7 @@ function SceneEditor(parent, closeable, container, index)
 	 * @attribute canvas
 	 * @type {RendererCanvas}
 	 */
-	this.canvas = new RendererCanvas(this);
+	this.canvas = new RendererCanvas(this, Editor.getRendererConfig());
 	this.canvas.resetCanvas = function()
 	{
 		RendererCanvas.prototype.resetCanvas.call(this);

@@ -1139,6 +1139,11 @@ Editor.updateNunu = function(silent)
 	}
 };
 
+Editor.getRendererConfig = function()
+{
+	return Editor.settings.render.followProject ? Editor.program.rendererConfig : Editor.settings.render;
+};
+
 /**
  * Exit the editor and close all windows.
  *
