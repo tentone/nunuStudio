@@ -184,7 +184,13 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 	return tab;
 };
 
-//Move tab from position to another
+/**
+ * Move tab from position to another.
+ *
+ * @method moveTabIndex
+ * @param {Number} origin Origin index.
+ * @param {Number} destination Destination index.
+ */
 TabGroup.prototype.moveTabIndex = function(origin, destination)
 {
 	var button = this.options[origin];
@@ -196,7 +202,6 @@ TabGroup.prototype.moveTabIndex = function(origin, destination)
 	this.updateInterface();
 };
 
-//Update all tab object views
 TabGroup.prototype.updateSelection = function()
 {
 	for(var i = 0; i < this.options.length; i++)
@@ -205,7 +210,6 @@ TabGroup.prototype.updateSelection = function()
 	}
 };
 
-//Update all tab object views
 TabGroup.prototype.updateSettings = function()
 {
 	for(var i = 0; i < this.options.length; i++)
@@ -214,7 +218,11 @@ TabGroup.prototype.updateSettings = function()
 	}
 };
 
-//Get actual tab
+/**
+ * Get the currently active tab of the group.
+ *
+ * @method getActiveTab
+ */
 TabGroup.prototype.getActiveTab = function()
 {
 	if(this.selected !== null)
@@ -225,7 +233,11 @@ TabGroup.prototype.getActiveTab = function()
 	return null;
 };
 
-//Close actual tab if its closeable
+/**
+ * Close actual tab if its closeable.
+ *
+ * @method closeActual
+ */
 TabGroup.prototype.closeActual = function()
 {
 	if(this.selected !== null && this.selected.closeable)

@@ -19,22 +19,27 @@ function GeometryInspector(parent, object)
 	this.form.nextRow();
 
 	//Mouse
-	this.mouse = new Mouse(window, true);
+	this.mouse = new Mouse(window, false);
 	this.mouse.setCanvas(this.preview.canvas);
 
 	// Scene
 	this.scene = new THREE.Scene();
-	this.scene.add(new THREE.AmbientLight(0xBBBBBB));
-	//this.scene.add(new THREE.GridHelper(50, 50, 0x888888));
-	//this.scene.add(new THREE.AxesHelper(50));
 
-	//Controls
-	this.controls = new EditorOrbitControls();
-	this.scene.add(this.controls);
+	// Grid
+	this.grid = null;
+
+	var directional = new THREE.DirectionalLight(0x777777, 1.0);
+	directional.position.set(3000, 10000, 400);
+	this.scene.add(directional);
+	this.scene.add(new THREE.AmbientLight(0x888888));
 
 	//Camera
 	this.camera = new PerspectiveCamera(90, this.preview.size.x / this.preview.size.y);
-	this.controls.add(this.camera);
+
+	//Controls
+	this.controls = new EditorOrbitControls();
+	this.controls.attach(this.camera);
+	this.scene.add(this.controls);
 
 	//Mesh
 	this.mesh = new THREE.Mesh(new THREE.Geometry(), new THREE.MeshPhongMaterial());
@@ -48,8 +53,8 @@ function GeometryInspector(parent, object)
 			return;
 		}
 
-		//TODO <REMOVE THIS>
-		console.log("asdasd");
+		self.camera.position.x += 0.001;
+		
 		self.mouse.update();
 		self.controls.update(self.mouse);
 		self.preview.renderer.render(self.scene, self.camera);
@@ -70,6 +75,32 @@ GeometryInspector.prototype.updateInspector = function()
 {
 	ResourceInspector.prototype.updateInspector.call(this);
 
-	this.mesh.geometry = this.object;
+	var geometry = this.object;
+	geometry.computeBoundingBox();
+	
+	var box = geometry.boundingBox;
+	var center = new THREE.Vector3();
+	center.addVectors(box.min, box.max);
+	center.multiplyScalar(-0.5);
+
+	var size = new THREE.Vector3();
+	box.getSize(size);
+	
+	var max = size.toArray().reduce(function(a, b)
+	{
+		return a > b ? a : b;
+	});
+
+	if(this.grid !== null)
+	{
+		this.scene.remove(this.grid);
+	}
+
+	this.grid = new THREE.GridHelper(max * 2, 50, 0x888888);
+	this.scene.add(this.grid);
+
+	this.mesh.geometry = geometry;
+	this.mesh.position.copy(center);
+
 	this.controls.focusObject(this.mesh);
 };
