@@ -207,7 +207,7 @@ InspectorContainer.prototype.updateSelection = function()
 			this.panel = new ObjectInspector(this, object);
 		}
 	}
-	else if(object instanceof THREE.Geometry)
+	else if(object instanceof THREE.Geometry || object instanceof THREE.BufferGeometry)
 	{
 		this.panel = new GeometryInspector(this, object);
 	}

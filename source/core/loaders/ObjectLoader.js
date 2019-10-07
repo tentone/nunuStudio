@@ -64,7 +64,7 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 	var fonts = this.parseFonts(json.fonts);
 	var textures = this.parseTextures(json.textures, images, videos);
 	var materials = this.parseMaterials(json.materials, textures);
-	var object = this.parseObject(json.object, geometries, materials, textures, audio, fonts, resources);
+	var object = this.parseObject(json.object, geometries, materials, textures, audio, fonts, resources, images, videos, shapes, skeletons);
 
 	if(json.skeletons)
 	{
@@ -140,7 +140,7 @@ ObjectLoader.prototype.parseResources = function(json)
 /**
  * Parse geometries on JSON.
  *
- * @method parseGeometries
+ * @method parseShape
  * @param {Object} json
  * @return {Array} geometries
  */
@@ -445,8 +445,12 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
  * @param {Array} audio
  * @param {Array} fonts
  * @return {Array} objects
+ * @param {Array} images
+ * @param {Array} videos
+ * @param {Array} shapes
+ * @return {Array} skeletons
  */
-ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts, resources)
+ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts, resources, images, videos, shapes, skeletons)
 {
 	var object;
 
@@ -1166,7 +1170,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	{
 		for(var child in data.children)
 		{
-			object.add(this.parseObject(data.children[child], geometries, materials, textures, audio, fonts));
+			object.add(this.parseObject(data.children[child], geometries, materials, textures, audio, fonts, images, videos, shapes, skeletons));
 		}
 	}
 
@@ -1190,7 +1194,13 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		object.resources = resources;
 		object.fonts = fonts;
 		object.audio = audio;
+		object.geometries = geometries;
+		object.images = images;
+		object.videos = videos;
+		object.shapes = shapes;
+		object.skeletons = skeletons;
 	}
+
 	//Get scene default cameras
 	else if(data.type === "Scene")
 	{

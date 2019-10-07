@@ -304,6 +304,11 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 
 OrbitControls.prototype.keyboardMovement = function(keyboard)
 {
+	if(keyboard === undefined)
+	{
+		return false;
+	}
+
 	var needsUpdate = false;
 
 	if(keyboard.keyPressed(Keyboard.S))

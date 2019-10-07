@@ -28,7 +28,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.particle = null;
 
 	//Camera
-	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
+	this.camera = new PerspectiveCamera(90, this.canvas.size.x / this.canvas.size.y);
 	this.cameraRotation = new THREE.Vector2(0, 0.5);
 	this.cameraDistance = 5;
 	this.updateCamera();
@@ -520,7 +520,7 @@ ParticleEditor.prototype.updateCamera = function()
 {
 	//Calculate direction vector
 	var cosAngleY = Math.cos(this.cameraRotation.y);
-	var position = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x)*cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
+	var position = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x) * cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
 	this.camera.position.copy(position);
 	this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 };

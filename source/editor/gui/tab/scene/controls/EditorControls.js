@@ -62,7 +62,7 @@ EditorControls.prototype.focusObject = function(object){};
 EditorControls.prototype.setOrientation = function(orientation){};
 
 /**
- * Update the orbit controls position.
+ * Update the orbit controls position, the keyboard movement should be optional.
  * 
  * @method update
  * @param {Mouse} mouse
