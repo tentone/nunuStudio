@@ -7112,7 +7112,7 @@
             "line": 140,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
-            "name": "parseGeometries",
+            "name": "parseShape",
             "params": [
                 {
                     "name": "json",
@@ -7375,10 +7375,25 @@
                     "name": "fonts",
                     "description": "",
                     "type": "Array"
+                },
+                {
+                    "name": "images",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "videos",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "shapes",
+                    "description": "",
+                    "type": "Array"
                 }
             ],
             "return": {
-                "description": "objects",
+                "description": "skeletons",
                 "type": "Array"
             },
             "class": "ObjectLoader",
