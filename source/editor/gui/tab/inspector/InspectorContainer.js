@@ -207,6 +207,10 @@ InspectorContainer.prototype.updateSelection = function()
 			this.panel = new ObjectInspector(this, object);
 		}
 	}
+	else if(object instanceof THREE.Geometry)
+	{
+		this.panel = new GeometryInspector(this, object);
+	}
 	else if(object instanceof Resource)
 	{
 		if(object instanceof Audio)

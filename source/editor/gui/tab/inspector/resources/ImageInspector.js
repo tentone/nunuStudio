@@ -6,7 +6,7 @@ function ImageInspector(parent, object)
 
 	var self = this;
 
-	this.form.addText("Image");
+	this.form.addText(Locale.image);
 	this.image = new ImageChooser(this.form);
 	this.image.size.set(120, 120);
 	this.form.add(this.image);

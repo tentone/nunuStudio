@@ -259,6 +259,7 @@ LocaleManager.register(
 	video: "Video",
 	file: "File",
 	material: "Material",
+	geometry: "Geometry",
 	
 	//Run tab
 	toggleVR: "Toggle Virtual Reality",

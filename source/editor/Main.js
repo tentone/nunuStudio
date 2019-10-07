@@ -486,6 +486,7 @@ include("source/editor/gui/tab/inspector/resources/ResourceInspector.js");
 include("source/editor/gui/tab/inspector/resources/AudioInspector.js");
 include("source/editor/gui/tab/inspector/resources/ImageInspector.js");
 include("source/editor/gui/tab/inspector/resources/VideoInspector.js");
+include("source/editor/gui/tab/inspector/resources/GeometryInspector.js");
 
 include("source/editor/gui/tab/inspector/objects/ObjectInspector.js");
 include("source/editor/gui/tab/inspector/objects/LockedInspector.js");

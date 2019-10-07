@@ -36,11 +36,11 @@ function SceneEditor(parent, closeable, container, index)
 			var uuid = event.dataTransfer.getData("uuid");
 			var draggedObject = DragBuffer.get(uuid);
 
-			var canvas = self.canvas.element;
+			var canvas = this;
 			var rect = canvas.getBoundingClientRect();
 
 			var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-			var normalized = new THREE.Vector2(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
+			var normalized = new THREE.Vector2(position.x / canvas.width * 2 - 1, -2 * position.y / canvas.height + 1);
 			self.raycaster.setFromCamera(normalized, self.camera);
 
 			var intersections = self.raycaster.intersectObjects(self.scene.children, true);
