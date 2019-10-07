@@ -63,6 +63,16 @@ function RendererCanvas(parent, alpha, useCSSRenderer)
 	this.resolution = new THREE.Vector2();
 
 	/**
+	 * Method called when the canvas is reset, might need to be used to replace canvas related events.
+	 *
+	 * Receives the RendererCanvas object as argument.
+	 *
+	 * @attribute onCanvasReset
+	 * @type {Function}
+	 */
+	this.onCanvasReset = null;
+
+	/**
 	 * Canvas DOM element.
 	 * 
 	 * @attribute canvas
@@ -141,6 +151,11 @@ RendererCanvas.prototype.resetCanvas = function()
 	}
 
 	this.resizeCanvas();
+
+	if(this.onCanvasReset !== null)
+	{
+		this.onCanvasReset(this);
+	}
 };
 
 /**
