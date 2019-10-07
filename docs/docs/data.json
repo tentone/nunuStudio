@@ -14758,7 +14758,7 @@
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
             "line": 89,
-            "description": "Enables automatic updates to the shadows in the scene.\n\nIf you do not require dynamic lighting / shadows, you may set this to false.",
+            "description": "Enables automatic updates to the shadows in the scene.\n\nIf you do not require dynamic lighting / shadows, you may set this to false.\n\nUse renderer.shadowMap.needsUpdate to update the shadow map.",
             "itemtype": "property",
             "name": "shadowsAutoUpdate",
             "type": "{Boolean}",
@@ -14767,7 +14767,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 99,
+            "line": 101,
             "description": "Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.",
             "itemtype": "property",
             "name": "toneMapping",
@@ -14778,7 +14778,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 108,
+            "line": 110,
             "description": "Exposure level of tone mapping.",
             "itemtype": "property",
             "name": "toneMappingExposure",
@@ -14788,7 +14788,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 116,
+            "line": 118,
             "description": "Tone mapping white point.",
             "itemtype": "property",
             "name": "toneMappingWhitePoint",
@@ -14798,7 +14798,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 124,
+            "line": 126,
             "description": "If true the renderer sorts the objects from back to front for rendering.\n\nImportant if using multiple transparent objects.",
             "itemtype": "property",
             "name": "sortObjects",
@@ -14808,7 +14808,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 134,
+            "line": 136,
             "description": "Gamma factor applied to the image.",
             "itemtype": "property",
             "name": "gammaFactor",
@@ -14818,7 +14818,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 142,
+            "line": 144,
             "description": "If set, then it expects that all textures and colors are premultiplied gamma.",
             "itemtype": "property",
             "name": "gammaInput",
@@ -14828,7 +14828,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 150,
+            "line": 152,
             "description": "If set, then it expects that all textures and colors need to be outputted in premultiplied gamma.",
             "itemtype": "property",
             "name": "gammaOutput",
@@ -14838,7 +14838,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 158,
+            "line": 160,
             "description": "Shader precision. Can be \"highp\", \"mediump\" or \"lowp\". Defaults to \"highp\" if supported by the device.",
             "itemtype": "property",
             "name": "precision",
@@ -14848,7 +14848,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 166,
+            "line": 168,
             "description": "Whether the canvas contains an alpha (transparency) buffer or not.",
             "itemtype": "property",
             "name": "premultipliedAlpha",
@@ -14858,7 +14858,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 174,
+            "line": 176,
             "description": "Whether the renderer will assume that colors have premultiplied alpha.",
             "itemtype": "property",
             "name": "premultipliedAlpha",
@@ -14868,7 +14868,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 182,
+            "line": 184,
             "description": "Whether to preserve the buffers until manually cleared or overwritten.",
             "itemtype": "property",
             "name": "preserveDrawingBuffer",
@@ -14878,7 +14878,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 190,
+            "line": 192,
             "description": "Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be \"high-performance\", \"low-power\" or \"default\".",
             "itemtype": "property",
             "name": "powerPreference",
@@ -14888,7 +14888,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 198,
+            "line": 200,
             "description": "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
             "itemtype": "property",
             "name": "logarithmicDepthBuffer",
@@ -14898,7 +14898,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 206,
+            "line": 208,
             "description": "Whether to use physically correct lighting mode.",
             "itemtype": "property",
             "name": "physicallyCorrectLights",
@@ -14908,7 +14908,17 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 215,
+            "line": 216,
+            "description": "Defines whether material shader programs are checked for errors during compilation and linkage process.",
+            "itemtype": "property",
+            "name": "checkShaderErrors",
+            "type": "{Boolean}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 225,
             "description": "Use WebGL 1.0 to render data.\n\nMost devices fully support WebGL 1.0 at this point, should work for any type of device.",
             "static": 1,
             "itemtype": "attribute",
@@ -14919,7 +14929,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 226,
+            "line": 236,
             "description": "Use WebGL 2.0 to render data, should be faster for some types of data.\n\nAdditinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.",
             "static": 1,
             "itemtype": "attribute",
@@ -14930,7 +14940,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 237,
+            "line": 247,
             "description": "Create a THREE renderer object based on the renderer configuration.",
             "itemtype": "method",
             "name": "createRenderer",

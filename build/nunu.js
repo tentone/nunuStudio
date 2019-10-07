@@ -7576,25 +7576,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.x = h.x - a.x;
     this.y = h.y - a.y;
     return this;
-  }, multiply:function(h) {
-    this.x *= h.x;
-    this.y *= h.y;
+  }, multiply:function(a) {
+    this.x *= a.x;
+    this.y *= a.y;
     return this;
-  }, multiplyScalar:function(h) {
-    this.x *= h;
-    this.y *= h;
+  }, multiplyScalar:function(a) {
+    this.x *= a;
+    this.y *= a;
     return this;
-  }, divide:function(h) {
-    this.x /= h.x;
-    this.y /= h.y;
+  }, divide:function(a) {
+    this.x /= a.x;
+    this.y /= a.y;
     return this;
-  }, divideScalar:function(h) {
-    return this.multiplyScalar(1 / h);
-  }, applyMatrix3:function(h) {
-    var a = this.x, d = this.y;
-    h = h.elements;
-    this.x = h[0] * a + h[3] * d + h[6];
-    this.y = h[1] * a + h[4] * d + h[7];
+  }, divideScalar:function(a) {
+    return this.multiplyScalar(1 / a);
+  }, applyMatrix3:function(a) {
+    var h = this.x, d = this.y;
+    a = a.elements;
+    this.x = a[0] * h + a[3] * d + a[6];
+    this.y = a[1] * h + a[4] * d + a[7];
     return this;
   }, min:function(a) {
     this.x = Math.min(this.x, a.x);
@@ -14292,8 +14292,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return this;
   }});
   gc.prototype = Object.assign(Object.create(lb.prototype), {constructor:gc, getPointsHoles:function(a) {
-    for (var d = [], h = 0, b = this.holes.length; h < b; h++) {
-      d[h] = this.holes[h].getPoints(a);
+    for (var d = [], b = 0, h = this.holes.length; b < h; b++) {
+      d[b] = this.holes[b].getPoints(a);
     }
     return d;
   }, extractPoints:function(a) {
@@ -14301,7 +14301,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, copy:function(a) {
     lb.prototype.copy.call(this, a);
     this.holes = [];
-    for (var d = 0, h = a.holes.length; d < h; d++) {
+    for (var d = 0, b = a.holes.length; d < b; d++) {
       this.holes.push(a.holes[d].clone());
     }
     return this;
@@ -16119,12 +16119,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, halt:function(a) {
     return this.warp(this._effectiveTimeScale, 0, a);
   }, warp:function(a, d, b) {
-    var h = this._mixer, c = h.time, e = this._timeScaleInterpolant, l = this.timeScale;
-    null === e && (this._timeScaleInterpolant = e = h._lendControlInterpolant());
-    h = e.parameterPositions;
+    var c = this._mixer, h = c.time, e = this._timeScaleInterpolant, l = this.timeScale;
+    null === e && (this._timeScaleInterpolant = e = c._lendControlInterpolant());
+    c = e.parameterPositions;
     e = e.sampleValues;
-    h[0] = c;
-    h[1] = c + b;
+    c[0] = h;
+    c[1] = h + b;
     e[0] = a / l;
     e[1] = d / l;
     return this;
@@ -16168,9 +16168,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       d = this.weight;
       var b = this._weightInterpolant;
       if (null !== b) {
-        var h = b.evaluate(a)[0];
-        d *= h;
-        a > b.parameterPositions[1] && (this.stopFading(), 0 === h && (this.enabled = !1));
+        var c = b.evaluate(a)[0];
+        d *= c;
+        a > b.parameterPositions[1] && (this.stopFading(), 0 === c && (this.enabled = !1));
       }
     }
     return this._effectiveWeight = d;
@@ -16180,8 +16180,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       d = this.timeScale;
       var b = this._timeScaleInterpolant;
       if (null !== b) {
-        var h = b.evaluate(a)[0];
-        d *= h;
+        var c = b.evaluate(a)[0];
+        d *= c;
         a > b.parameterPositions[1] && (this.stopWarping(), 0 === d ? this.paused = !0 : this.timeScale = d);
       }
     }
@@ -44425,7 +44425,7 @@ Gyroscope.prototype.dispose = function() {
 };
 "use strict";
 function RendererConfiguration() {
-  this.backend = RendererConfiguration.WEBGL;
+  this.backend = RendererConfiguration.WEBGL2;
   this.autoClearStencil = this.autoClearDepth = this.autoClearColor = this.autoClear = !1;
   this.stencil = this.shadows = this.antialiasing = !0;
   this.shadowsType = THREE.PCFSoftShadowMap;
@@ -44440,6 +44440,7 @@ function RendererConfiguration() {
   this.preserveDrawingBuffer = !1;
   this.powerPreference = "high-performance";
   this.physicallyCorrectLights = this.logarithmicDepthBuffer = !1;
+  this.checkShaderErrors = !0;
 }
 RendererConfiguration.WEBGL = 1;
 RendererConfiguration.WEBGL2 = 2;
@@ -44463,6 +44464,7 @@ RendererConfiguration.prototype.createRenderer = function(a) {
   a.toneMapping = this.toneMapping;
   a.toneMappingExposure = this.toneMappingExposure;
   a.toneMappingWhitePoint = this.toneMappingWhitePoint;
+  a.debug.checkShaderErrors = this.checkShaderErrors;
   a.sortObjects = this.sortObjects;
   a.gammaFactor = this.gammaFactor;
   a.gammaInput = this.gammaInput;
@@ -44471,8 +44473,8 @@ RendererConfiguration.prototype.createRenderer = function(a) {
   return a;
 };
 RendererConfiguration.prototype.toJSON = function() {
-  return {backend:this.backend, autoClear:this.autoClear, autoClearColor:this.autoClearColor, autoClearDepth:this.autoClearDepth, autoClearStencil:this.autoClearStencil, antialiasing:this.antialiasing, shadows:this.shadows, stencil:this.stencil, shadowsType:this.shadowsType, shadowsAutoUpdate:this.shadowsAutoUpdate, toneMapping:this.toneMapping, toneMappingExposure:this.toneMappingExposure, toneMappingWhitePoint:this.toneMappingWhitePoint, sortObjects:this.sortObjects, gammaFactor:this.gammaFactor, 
-  gammaInput:this.gammaInput, gammaOutput:this.gammaOutput, precision:this.precision, alpha:this.alpha, premultipliedAlpha:this.premultipliedAlpha, preserveDrawingBuffer:this.preserveDrawingBuffer, powerPreference:this.powerPreference, logarithmicDepthBuffer:this.logarithmicDepthBuffer, physicallyCorrectLights:this.physicallyCorrectLights};
+  return {backend:this.backend, autoClear:this.autoClear, autoClearColor:this.autoClearColor, autoClearDepth:this.autoClearDepth, autoClearStencil:this.autoClearStencil, antialiasing:this.antialiasing, shadows:this.shadows, stencil:this.stencil, shadowsType:this.shadowsType, shadowsAutoUpdate:this.shadowsAutoUpdate, toneMapping:this.toneMapping, toneMappingExposure:this.toneMappingExposure, toneMappingWhitePoint:this.toneMappingWhitePoint, sortObjects:this.sortObjects, checkShaderErrors:this.checkShaderErrors, 
+  gammaFactor:this.gammaFactor, gammaInput:this.gammaInput, gammaOutput:this.gammaOutput, precision:this.precision, alpha:this.alpha, premultipliedAlpha:this.premultipliedAlpha, preserveDrawingBuffer:this.preserveDrawingBuffer, powerPreference:this.powerPreference, logarithmicDepthBuffer:this.logarithmicDepthBuffer, physicallyCorrectLights:this.physicallyCorrectLights};
 };
 RendererConfiguration.prototype.fromJSON = function(a) {
   this.backend = a.backend;
@@ -44489,6 +44491,7 @@ RendererConfiguration.prototype.fromJSON = function(a) {
   this.toneMappingExposure = a.toneMappingExposure;
   this.toneMappingWhitePoint = a.toneMappingWhitePoint;
   this.sortObjects = a.sortObjects;
+  this.checkShaderErrors = a.checkShaderErrors;
   this.gammaFactor = a.gammaFactor;
   this.gammaInput = a.gammaInput;
   this.gammaOutput = a.gammaOutput;
