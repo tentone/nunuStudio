@@ -114,13 +114,10 @@ function MaterialAsset(parent)
 		
 		context.addOption(Locale.rename, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename material", self.asset.name)));
-			}
+			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.renameMaterial, self.asset.name)));
 		});
 		
-		context.addOption("Select objects", function()
+		context.addOption(Locale.selectObjects, function()
 		{	
 			Editor.clearSelection();
 			Editor.program.traverse(function(child)
@@ -136,7 +133,7 @@ function MaterialAsset(parent)
 
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && confirm("Delete material?"))
+			if(Editor.confirm(Locale.deleteMaterial))
 			{
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "materials"));
 			}
@@ -144,54 +141,36 @@ function MaterialAsset(parent)
 
 		context.addOption(Locale.copy, function()
 		{
-			if(self.asset !== null)
-			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				}
-				catch(e){}
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 		});
 
 		context.addOption(Locale.cut, function()
 		{
-			if(self.asset !== null)
-			{
-				try
-				{
-					Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-					Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "materials"));
-				}
-				catch(e){}
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+			Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "materials"));
 		});
 
 		context.addOption(Locale.duplicate, function()
 		{
-			if(self.asset !== null)
+			try
 			{
-				try
-				{
-					//Serialize
-					var json = self.asset.toJSON();
+				//Serialize
+				var json = self.asset.toJSON();
 
-					//Loader
-					var loader = new MaterialLoader();
-					loader.setTextures(Editor.program.textures);
+				//Loader
+				var loader = new MaterialLoader();
+				loader.setTextures(Editor.program.textures);
 
-					//Load
-					var material = loader.parse(json); 
-					material.uuid = THREE.Math.generateUUID();
-					
-					//Add
-					Editor.program.addMaterial(material);
-					Editor.updateSelectionGUI();
-				}
-				catch(e)
-				{
-					Editor.alert("Material duplication failed\n" + e.stack);
-				}
+				//Load
+				var material = loader.parse(json); 
+				material.uuid = THREE.Math.generateUUID();
+				material.name += "*";
+				
+				Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
+			}
+			catch(e)
+			{
+				Editor.alert("Material duplication failed.\n" + e.stack);
 			}
 		});
 

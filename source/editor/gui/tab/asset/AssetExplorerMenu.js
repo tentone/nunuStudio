@@ -80,7 +80,7 @@ function AssetExplorerMenu(parent)
 						
 						var animation = new SpineAnimation(json, atlas, path);
 						animation.name = FileSystem.getFileName(file);
-
+						
 						Editor.addObject(animation);
 					}
 					catch(e)

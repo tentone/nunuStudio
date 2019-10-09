@@ -51,13 +51,13 @@ function TextureAsset(parent)
 		{
 			if(self.asset !== null)
 			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename texture", self.asset.name)));
+				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.renameTexture, self.asset.name)));
 			}
 		});
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && Editor.confirm("Delete texture?"))
+			if(self.asset !== null && Editor.confirm(Locale.deleteTexture))
 			{
 				self.asset.dispose();
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "textures"));
@@ -83,40 +83,36 @@ function TextureAsset(parent)
 
 		context.addOption(Locale.duplicate, function()
 		{
-			if(self.asset !== null)
+			try
 			{
-				try
+				var resources =
 				{
-					var resources =
-					{
-						videos: {},
-						images: {},
-						fonts: {},
-						textures: {}
-					};
+					videos: {},
+					images: {},
+					fonts: {},
+					textures: {}
+				};
 
-					//Serialize
-					var json = self.asset.toJSON(resources);
-					var images = ObjectLoader.prototype.parseImages.call(this, resources.images);
-					var videos = ObjectLoader.prototype.parseVideos.call(this, resources.videos);
+				//Serialize
+				var json = self.asset.toJSON(resources);
+				var images = ObjectLoader.prototype.parseImages.call(this, resources.images);
+				var videos = ObjectLoader.prototype.parseVideos.call(this, resources.videos);
 
-					//Loader
-					var loader = new TextureLoader();
-					loader.setImages(images);
-					loader.setVideos(videos);
+				//Loader
+				var loader = new TextureLoader();
+				loader.setImages(images);
+				loader.setVideos(videos);
 
-					//Load
-					var texture = loader.parse(json); 
-					texture.uuid = THREE.Math.generateUUID();
-					
-					//Add
-					Editor.program.addTexture(texture);
-					Editor.updateObjectsViewsGUI();
-				}
-				catch(e)
-				{
-					Editor.alert("Texture duplication failed\n" + e.stack);
-				}
+				//Load
+				var texture = loader.parse(json); 
+				texture.uuid = THREE.Math.generateUUID();
+				texture.name += "*";
+				
+				Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
+			}
+			catch(e)
+			{
+				Editor.alert("Texture duplication failed.\n" + e.stack);
 			}
 		});
 		context.updateInterface();

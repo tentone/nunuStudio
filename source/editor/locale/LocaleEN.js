@@ -16,6 +16,7 @@ LocaleManager.register(
 	},
 
 	//Actions
+	reverse: "Reverse",
 	delete: "Delete",
 	copy: "Copy",
 	paste: "Paste",
@@ -23,6 +24,12 @@ LocaleManager.register(
 	duplicate: "Duplicate",
 	rename: "Rename",
 	renameObject: "Rename object",
+	renameMaterial: "Rename material",
+	renameTexture: "Rename texture",
+	renameFont: "Rename font",
+	deleteObjects: "Delete objects?",
+	deleteMaterial: "Delete material?",
+	deleteTexture: "Delete texture?",
 	select: "Select",
 	redo: "Redo",
 	undo: "Undo",
@@ -161,7 +168,6 @@ LocaleManager.register(
 	outline: "Outline",
 	outlineColor: "Outline color",
 	outlineWidth: "Outline Width",
-	font: "Font",
 
 	//Values
 	relative: "Relative",
@@ -247,7 +253,8 @@ LocaleManager.register(
 	scene: "Scene",
 	move: "Move",
 	play: "Play",
-	
+	selectObjects: "Select objects",
+
 	//Editor settings
 	reset: "Reset",
 	general: "General",
@@ -261,7 +268,8 @@ LocaleManager.register(
 	file: "File",
 	material: "Material",
 	geometry: "Geometry",
-	
+	font: "Font",
+
 	//Run tab
 	toggleVR: "Toggle Virtual Reality",
 	toggleFullscreen: "Toggle Fullscreen",
@@ -272,7 +280,6 @@ LocaleManager.register(
 	projectExported: "Project exported",
 
 	//Confirm
-	deleteObjects: "Delete objects?",
 	loadProjectChangesLost: "All unsaved changes to the project will be lost.",
 	loadProject: "Load project?",
 	createProject: "Create new project?",

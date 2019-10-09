@@ -26,15 +26,12 @@ function FileAsset(parent)
 
 		context.addOption(Locale.rename, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.rename + " " + Locale.file, self.asset.name)));
-			}
+			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.rename + " " + Locale.file, self.asset.name)));
 		});
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && Editor.confirm(Locale.delete + " " + Locale.file))
+			if(Editor.confirm(Locale.delete + " " + Locale.file))
 			{
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "resources"));
 			}
@@ -68,11 +65,8 @@ function FileAsset(parent)
 		
 		context.addOption(Locale.cut, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "resources"));
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+			Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "resources"));
 		});
 
 		context.updateInterface();

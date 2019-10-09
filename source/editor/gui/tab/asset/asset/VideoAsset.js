@@ -27,15 +27,12 @@ function VideoAsset(parent)
 		
 		context.addOption(Locale.rename, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.delete + " " + Locale.video, self.asset.name)));
-			}
+			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.delete + " " + Locale.video, self.asset.name)));
 		});
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && Editor.confirm(Locale.delete + " " + Locale.video))
+			if(Editor.confirm(Locale.delete + " " + Locale.video))
 			{
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "videos"));
 			}
@@ -43,19 +40,13 @@ function VideoAsset(parent)
 
 		context.addOption(Locale.copy, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 		});
 
 		context.addOption(Locale.cut, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "videos"));
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+			Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "videos"));
 		});
 
 		context.addOption(Locale.export, function()

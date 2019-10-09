@@ -137,6 +137,13 @@ AssetExplorer.prototype.add = function(file)
 	this.files.push(file);
 };
 
+/**
+ * Update the full object view in the asset explorer.
+ *
+ * Should only be used to initialize the explorer the first time. After it gets initialized use the add and remove methods.
+ *
+ * @method updateObjectsView
+ */
 AssetExplorer.prototype.updateObjectsView = function()
 {
 	//TODO <USE ONLY TO INITIALIZE THE EXPLORER>

@@ -451,8 +451,10 @@ Editor.getScene = function()
 };
 
 /**
- * Add objects to the actual scene, and creates an action in the editor history. 
+ * Add objects to a parent, and creates an action in the editor history. 
  * 
+ * If no parent is specified it adds to object to the current scene. 
+ *
  * @method addObject
  * @param {Object3D} object Object to be added.
  * @param {Object3D} parent Parent object, if undefined the program scene is used.

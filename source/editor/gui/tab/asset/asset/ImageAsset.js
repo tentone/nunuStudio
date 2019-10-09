@@ -35,7 +35,7 @@ function ImageAsset(parent)
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && Editor.confirm(Locale.delete + " " + Locale.image))
+			if(Editor.confirm(Locale.delete + " " + Locale.image))
 			{
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "images"));
 			}
@@ -64,19 +64,13 @@ function ImageAsset(parent)
 
 		context.addOption(Locale.copy, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 		});
 
 		context.addOption(Locale.cut, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "images"));
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+			Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "images"));
 		});
 
 		context.updateInterface();

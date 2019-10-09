@@ -26,7 +26,7 @@ function FontAsset(parent)
 		
 		context.addOption(Locale.rename, function()
 		{
-			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename font", self.asset.name)));
+			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt(Locale.renameFont, self.asset.name)));
 		});
 		
 		context.addOption(Locale.delete, function()
@@ -36,9 +36,9 @@ function FontAsset(parent)
 
 		if(self.asset.format === "arraybuffer")
 		{
-			context.addOption("Reverse", function()
+			context.addOption(Locale.reverse, function()
 			{
-				if(confirm("Reverse font glyphs?"))
+				if(Editor.confirm("Reverse font glyphs?"))
 				{
 					self.asset.reverseGlyphs();
 					self.updateMetadata();
@@ -53,11 +53,8 @@ function FontAsset(parent)
 		
 		context.addOption(Locale.cut, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "fonts"));
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+			Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "fonts"));
 		});
 
 		context.updateInterface();

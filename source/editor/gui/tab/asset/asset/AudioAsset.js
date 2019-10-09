@@ -49,10 +49,7 @@ function AudioAsset(parent)
 
 		context.addOption(Locale.rename, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename audio", self.asset.name)));
-			}
+			Editor.addAction(new ChangeAction(self.asset, "name", Editor.prompt("Rename audio", self.asset.name)));
 		});
 
 		context.addOption(Locale.export, function()
@@ -78,7 +75,7 @@ function AudioAsset(parent)
 		
 		context.addOption(Locale.delete, function()
 		{
-			if(self.asset !== null && confirm("Delete audio?"))
+			if(Editor.confirm("Delete audio?"))
 			{
 				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "audio"));
 			}
@@ -86,19 +83,13 @@ function AudioAsset(parent)
 
 		context.addOption(Locale.copy, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
 		});
 
 		context.addOption(Locale.cut, function()
 		{
-			if(self.asset !== null)
-			{
-				Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
-				Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "audio"));
-			}
+			Editor.clipboard.set(JSON.stringify(self.asset.toJSON()), "text");
+			Editor.addAction(new RemoveResourceAction(self.asset, Editor.program, "audio"));
 		});
 
 		context.updateInterface();
