@@ -168,7 +168,7 @@ function RendererConfiguration()
 	/**
 	 * Whether the canvas contains an alpha (transparency) buffer or not.
 	 *
-	 * @property premultipliedAlpha
+	 * @property alpha
 	 * @type {Boolean}
 	 */
 	this.alpha = true;

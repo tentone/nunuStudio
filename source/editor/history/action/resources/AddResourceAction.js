@@ -42,6 +42,10 @@ AddResourceAction.prototype.revert = function()
 	{
 		this.manager.removeRes(this.resource, this.category, Editor.defaultAudio);
 	}
+	else if(this.category === "geometries")
+	{
+		this.manager.removeRes(this.resource, this.category, Editor.defaultGeometry);
+	}
 	else
 	{
 		this.manager.removeRes(this.resource, this.category);

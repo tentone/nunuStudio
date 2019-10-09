@@ -560,6 +560,7 @@ include("source/editor/history/action/objects/SwapAction.js");
 include("source/editor/history/action/resources/AddResourceAction.js");
 include("source/editor/history/action/resources/RemoveResourceAction.js");
 
+include("source/editor/ResourceUtils.js");
 include("source/editor/Settings.js");
 include("source/editor/Interface.js");
 include("source/editor/MainMenu.js");
