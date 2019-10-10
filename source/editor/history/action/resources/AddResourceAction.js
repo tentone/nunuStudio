@@ -19,37 +19,14 @@ function AddResourceAction(resource, manager, category)
 
 AddResourceAction.prototype.apply = function()
 {
-	this.manager.addRes(this.resource, this.category);
+	ResourceUtils.addResource(this.manager, this.resource, this.category);
 	
 	AddResourceAction.updateGUI();
 };
 
 AddResourceAction.prototype.revert = function()
 {
-	if(this.category === "materials")
-	{
-		this.manager.removeRes(this.resource, this.category, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
-	}
-	else if(this.category === "textures")
-	{
-		this.manager.removeRes(this.resource, this.category, Editor.defaultTexture);
-	}
-	else if(this.category === "fonts")
-	{
-		this.manager.removeRes(this.resource, this.category, Editor.defaultFont);
-	}
-	else if(this.category === "audio")
-	{
-		this.manager.removeRes(this.resource, this.category, Editor.defaultAudio);
-	}
-	else if(this.category === "geometries")
-	{
-		this.manager.removeRes(this.resource, this.category, Editor.defaultGeometry);
-	}
-	else
-	{
-		this.manager.removeRes(this.resource, this.category);
-	}
+	ResourceManager.removeResource(this.manager, this.resource, this.category);
 
 	if(this.resource.dispose !== undefined)
 	{

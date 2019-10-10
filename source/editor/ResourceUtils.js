@@ -9,6 +9,85 @@
 function ResourceUtils(){}
 
 /**
+ * Add resource (of any type) to category.
+ *
+ * @static
+ * @method addResource
+ * @param {ResourceManager} manager
+ * @param {Resource} resource
+ * @param {String} category
+ */
+ResourceUtils.addResource = function(manager, resource, category)
+{
+	manager[category][resource.uuid] = resource;
+};
+
+/**
+ * Remove resource of any type from category.
+ *
+ * If any resource needs replacement in an object is uses the default scene resources.
+ *
+ * @static
+ * @method removeResource
+ * @param {ResourceManager} manager
+ * @param {Resource} resource
+ * @param {String} category
+ */ 
+ResourceManager.removeResource = function(manager, resource, category)
+{
+	if(category === "materials")
+	{
+		manager.removeMaterial(resource, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
+	}
+	else if(category === "textures")
+	{
+		manager.removeTexture(resource, Editor.defaultTexture);
+	}
+	else if(category === "fonts")
+	{
+		manager.removeFont(resource, Editor.defaultFont);
+	}
+	else if(category === "audio")
+	{
+		manager.removeAudio(resource, Editor.defaultAudio);
+	}
+	else if(category === "geometries")
+	{
+		manager.removeGeometry(resource, Editor.defaultGeometry);
+	}
+	else
+	{
+		if(manager[category] !== undefined && manager[category][resource.uuid] !== undefined)
+		{
+			delete manager[category][resource.uuid];
+		}
+	}
+};
+
+/**
+ * Get a resource from any category by its name, only returns the first resource found.
+ *
+ * @static
+ * @param {ResourceManager} manager
+ * @param {String} name
+ */
+ResourceManager.getResourceByName = function(manager, name)
+{
+	for(var category in manager)
+	{
+		for(var resources in category)
+		{
+			if(resources[i].name === name)
+			{
+				return resources[i];
+			}
+		}
+	}
+
+	return null;
+};
+
+/**
  * Searches the object and all its children for resources that still dont exist in the resource manager.
  *
  * Stores them in a resource container object that is returned.

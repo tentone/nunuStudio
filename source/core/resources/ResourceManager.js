@@ -141,74 +141,6 @@ ResourceManager.prototype.dispose = function()
 };
 
 /**
- * Add resource (of any type) to category.
- *
- * @method addRes
- * @param {Resource} resource
- * @param {String} category
- */
-ResourceManager.prototype.addRes = function(resource, category)
-{
-	this[category][resource.uuid] = resource;
-};
-
-ResourceManager.prototype.getResByName = function(name)
-{
-	for(var category in this)
-	{
-		for(var resources in category)
-		{
-			if(resources[i].name === name)
-			{
-				return resources[i];
-			}
-		}
-	}
-
-	return null;
-};
-
-/**
- * Remove resource of any type from category.
- *
- * @method removeRes
- * @param {Resource} resource
- * @param {String} category
- * @param {Object} defaultResource
- * @param {Object} defaultSubResource
- */ 
-ResourceManager.prototype.removeRes = function(resource, category, defaultResource, defaultSubResource)
-{
-	if(category === "materials")
-	{
-		this.removeMaterial(resource, defaultResource, defaultSubResource);
-	}
-	else if(category === "textures")
-	{
-		this.removeTexture(resource, defaultResource);
-	}
-	else if(category === "fonts")
-	{
-		this.removeFont(resource, defaultResource);
-	}
-	else if(category === "audio")
-	{
-		this.removeAudio(resource, defaultResource);
-	}
-	else if(category === "geometries")
-	{
-		this.removeGeometry(resource, defaultResource);
-	}
-	else
-	{
-		if(this[category] !== undefined && this[category][resource.uuid] !== undefined)
-		{
-			delete this[category][resource.uuid];
-		}
-	}
-};
-
-/**
  * Remove geometry from the list and replace by other.
  * 
  * @method removeGeometry
@@ -641,7 +573,7 @@ ResourceManager.prototype.addAudio = function(audio)
 };
 
 /**
- * Remove audio.
+ * Remove audio resource from the manager, replace on objects that are using it with another resource.
  * 
  * @param {Audio} audio
  * @param {Audio} defaultAudio
