@@ -171,7 +171,7 @@ function RendererConfiguration()
 	 * @property alpha
 	 * @type {Boolean}
 	 */
-	this.alpha = true;
+	this.alpha = false;
 
 	/**
 	 * Whether the renderer will assume that colors have premultiplied alpha.
@@ -285,7 +285,7 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 	renderer.shadowMap.enabled = this.shadows;
 	renderer.shadowMap.type = this.shadowsType;
 	renderer.shadowMap.autoUpdate = this.shadowsAutoUpdate;
-	renderer.shadowMap.needsUpdate = false;
+	renderer.shadowMap.needsUpdate = true;
 
 	renderer.toneMapping = this.toneMapping;
 	renderer.toneMappingExposure = this.toneMappingExposure;
