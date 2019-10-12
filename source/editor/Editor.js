@@ -846,7 +846,10 @@ Editor.addDefaultScene = function(material)
 	scene.add(model);
 
 	//Floor
-	model = new Mesh(new THREE.BoxBufferGeometry(20, 1, 20), material);
+	var ground = new THREE.BoxBufferGeometry(20, 1, 20);
+	ground.name = "ground";
+	
+	model = new Mesh(ground, material);
  	model.position.set(0, -1.0, 0);
 	model.name = "ground";
 	scene.add(model);

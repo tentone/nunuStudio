@@ -197,8 +197,11 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+		geometry.name = "cube";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cube";
+
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.cube);
 
@@ -206,8 +209,11 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/cylinder.png", function()
 	{
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
+		geometry.name = "cylinder";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cylinder";
+
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.cylinder);
 
@@ -215,8 +221,11 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/sphere.png", function()
 	{
 		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
+		geometry.name = "sphere";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "sphere";
+
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.sphere);
 
@@ -224,8 +233,11 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/torusknot.png", function()
 	{
 		var geometry = new THREE.TorusKnotBufferGeometry(1, 0.4, 128, 96, 2, 3);
+		geometry.name = "torusknot";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "torus knot";
+
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.torusKnot);
 	
@@ -233,6 +245,8 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/torus.png", function()
 	{
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
+		geometry.name = "torus";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "torus";
 		Editor.addObject(model, self.editor.scene);
@@ -242,8 +256,11 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/cone.png", function()
 	{
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
+		geometry.name = "cone";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "cone";
+
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.cone);
 	
@@ -251,6 +268,8 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/plane.png", function()
 	{
 		var geometry = new THREE.PlaneBufferGeometry(1, 1);
+		geometry.name = "plane";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "plane";
 		Editor.addObject(model, self.editor.scene);
@@ -260,6 +279,8 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/circle.png", function()
 	{
 		var geometry = new THREE.CircleBufferGeometry(1, 32);
+		geometry.name = "circle";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "circle";
 		Editor.addObject(model, self.editor.scene);
@@ -269,8 +290,11 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/ring.png", function()
 	{
 		var geometry = new THREE.RingBufferGeometry(1, 5, 32, 1);
+		geometry.name = "ring";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "ring";
+
 		Editor.addObject(model, self.editor.scene);
 	}, "Ring");
 
@@ -278,6 +302,8 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/icosahedron.png", function()
 	{
 		var geometry = new THREE.IcosahedronBufferGeometry(1, 0);
+		geometry.name = "icosahedron";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "icosahedron";
 		Editor.addObject(model, self.editor.scene);
@@ -287,6 +313,8 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/pyramid.png", function()
 	{
 		var geometry = new THREE.TetrahedronBufferGeometry(1, 0);
+		geometry.name = "tetrahedron";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "tetrahedron";
 		Editor.addObject(model, self.editor.scene);
@@ -296,6 +324,8 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/octahedron.png", function()
 	{
 		var geometry = new THREE.OctahedronBufferGeometry(1, 0);
+		geometry.name = "octahedron";
+
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "octahedron";
 		Editor.addObject(model, self.editor.scene);
@@ -305,6 +335,8 @@ SideBar.prototype.createObject = function()
 	models.addOption(Global.FILE_PATH + "icons/models/dodecahedron.png", function()
 	{
 		var geometry = new THREE.DodecahedronBufferGeometry(1, 0);
+		geometry.name = "dodecahedron";
+		
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "dodecahedron";
 		Editor.addObject(model, self.editor.scene);
