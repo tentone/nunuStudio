@@ -516,22 +516,22 @@ include("source/editor/gui/tab/inspector/objects/text/TextSpriteInspector.js");
 include("source/editor/gui/tab/inspector/objects/text/TextBitmapInspector.js");
 include("source/editor/gui/tab/inspector/objects/controls/OrbitControlsInspector.js");
 include("source/editor/gui/tab/inspector/objects/controls/FirstPersonControlsInspector.js");
-
 include("source/editor/gui/tab/inspector/objects/mesh/MeshInspector.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/GeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/BoxGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/SphereGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/TorusGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/TorusKnotGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/PlaneGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/ConeGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/CylinderGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/TetrahedronGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/DodecahedronGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/CircleGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/RingGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/IcosahedronGeometryForm.js");
-include("source/editor/gui/tab/inspector/objects/mesh/geometry/OctahedronGeometryForm.js");
+
+include("source/editor/gui/tab/inspector/geometries/GeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/BoxGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/SphereGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/TorusGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/TorusKnotGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/PlaneGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/ConeGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/CylinderGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/TetrahedronGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/DodecahedronGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/CircleGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/RingGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/IcosahedronGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/OctahedronGeometryForm.js");
 
 include("source/editor/gui/preview/PreviewRenderer.js");
 include("source/editor/gui/preview/FontRenderer.js");
@@ -559,6 +559,7 @@ include("source/editor/history/action/objects/MoveAction.js");
 include("source/editor/history/action/objects/SwapAction.js");
 include("source/editor/history/action/resources/AddResourceAction.js");
 include("source/editor/history/action/resources/RemoveResourceAction.js");
+include("source/editor/history/action/resources/SwapResourceAcation.js");
 
 include("source/editor/ResourceUtils.js");
 include("source/editor/Settings.js");
