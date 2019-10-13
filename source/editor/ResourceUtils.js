@@ -9,6 +9,110 @@
 function ResourceUtils(){}
 
 /**
+ * Auxiliar method to traverse any type of JS object in depth.
+ *
+ * Is called recursively for every Array or Object found, the callback receives the (value, parent, attribute) as parameters.
+ *
+ * If the callback method returns false it does not traverse the object.
+ * 
+ * @static
+ * @method traverseDeep
+ * @param {Object} object Object to be traversed.
+ * @param {Function} callback Callback to process every attribute from the object.
+ */
+ResourceUtils.traverseDeep = function(object, callback)
+{
+	if(callback === undefined)
+	{
+		return;
+	}
+
+	for(var i in object)
+	{
+		var value = object[i];
+
+		if((value instanceof Array || value instanceof Object) && !(value instanceof Function))
+		{
+			if(callback(value, object, i) !== false)
+			{
+				traverseDeep(value, callback);
+			}
+		}
+		else
+		{
+			callback(value, object, i);
+		}
+	}
+};
+
+/**
+ * Swap a resource from the program, changes the resource in the manager.
+ *
+ * Searches and replaces all usages of the old resource.
+ *
+ * @static
+ * @method swapResource
+ * @param {ResourceManager} manager Resource manage with program.
+ * @param {String} category Name of the resource category.
+ * @param {Resource} oldResource Old resource being replaced.
+ * @param {Resource} newResource New resource used to replace the old one.
+ */
+ResourceUtils.swapResource = function(manager, category, oldResource, newResource)
+{	
+	if(manager[category][oldResource.uuid] === undefined)
+	{
+		throw new Error("Old resource not found in the resource manager.");
+	}
+	
+	// Swap resource in the manager
+	delete manager[category][oldResource.uuid];
+	manager[category][newResource.uuid] = newResource;
+
+	// Replace all instances found
+	ResourceUtils.traverseDeep(manager, function(value, object, attribute)
+	{
+		if(value === oldResource)
+		{
+			object[attribute] = newResource;
+		}
+
+		return false;
+	});
+};
+
+/**
+ * Remove all duplicate resources from object.
+ *
+ * @static
+ * @method removeDuplicated
+ */
+ResourceUtils.removeDuplicated = function(object)
+{
+	// Check if two resources are similar
+	function areEqual(a, b)
+	{
+		//TODO <ADD CODE HERE>
+	}
+
+	var textures = [];
+	var materials = [];
+
+	// Fetch resources to be optimized
+	ResourceUtils.traverseDeep(object, function(value)
+	{
+		if(value instanceof THREE.Texture)
+		{
+
+		}
+		else if(value instanceof THREE.Materials)
+		{
+
+		}
+	});
+
+};
+
+/**
  * Add resource (of any type) to category.
  *
  * @static
@@ -33,7 +137,7 @@ ResourceUtils.addResource = function(manager, resource, category)
  * @param {Resource} resource
  * @param {String} category
  */ 
-ResourceManager.removeResource = function(manager, resource, category)
+ResourceUtils.removeResource = function(manager, resource, category)
 {
 	if(category === "materials")
 	{
@@ -71,7 +175,7 @@ ResourceManager.removeResource = function(manager, resource, category)
  * @param {ResourceManager} manager
  * @param {String} name
  */
-ResourceManager.getResourceByName = function(manager, name)
+ResourceUtils.getResourceByName = function(manager, name)
 {
 	for(var category in manager)
 	{

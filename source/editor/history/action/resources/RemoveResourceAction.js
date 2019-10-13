@@ -3,6 +3,8 @@
 /**
  * Remove a resource from the manager.
  *
+ * Usages of the resource being removed are replaced with a default resource of the same category.
+ *
  * @class RemoveResourceAction
  * @param {Resource} resource Resource to remove.
  * @param {ResourceManager} manager Manager to insert the resource into.
@@ -19,7 +21,7 @@ function RemoveResourceAction(resource, manager, category)
 
 RemoveResourceAction.prototype.apply = function()
 {
-	ResourceManager.removeResource(this.manager, this.resource, this.category);
+	ResourceUtils.removeResource(this.manager, this.resource, this.category);
 
 	if(this.resource.dispose !== undefined)
 	{

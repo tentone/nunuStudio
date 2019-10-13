@@ -33,7 +33,7 @@ function ResourceManager()
 ResourceManager.ResourceContainer = function()
 {
 	/**
-	 * Images.
+	 * Image resources.
 	 * 
 	 * @property images
 	 * @type {Array}

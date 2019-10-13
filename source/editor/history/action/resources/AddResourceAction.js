@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Add resource to the manager.
+ * Add resource to the resource manager.
  *
  * @class AddResourceAction
  * @param {Resource} resource Resource to add.
@@ -26,7 +26,7 @@ AddResourceAction.prototype.apply = function()
 
 AddResourceAction.prototype.revert = function()
 {
-	ResourceManager.removeResource(this.manager, this.resource, this.category);
+	ResourceUtils.removeResource(this.manager, this.resource, this.category);
 
 	if(this.resource.dispose !== undefined)
 	{
