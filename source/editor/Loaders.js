@@ -287,7 +287,7 @@ Editor.loadModel = function(file, parent)
 		else if(extension === "obj")
 		{
 			var materials = null;
-
+			
 			//Look for MTL file
 			if(Nunu.runningOnDesktop())
 			{
@@ -297,10 +297,10 @@ Editor.loadModel = function(file, parent)
 
 					if(FileSystem.fileExists(mtl))
 					{
-						console.log("nunuStudio: MTL Found");
+						console.log("nunuStudio: MTL file found.", path);
 						var mtlLoader = new THREE.MTLLoader()
 						mtlLoader.setPath(path);
-						materials = mtlLoader.parse(FileSystem.readFile(mtl));
+						materials = mtlLoader.parse(FileSystem.readFile(mtl), path);
 					}
 				}
 				catch(f)
