@@ -5,13 +5,13 @@
  *
  * Usages of the old resource are replaced with the new one as well.
  *
- * @class SwapResourceAcation
+ * @class SwapResourceAction
  * @param {Resource} oldResource Resource to remove.
  * @param {Resource} newResource Resource to add.
  * @param {ResourceManager} manager Manager to insert the resource into.
  * @param {String} category Category of the resource.
  */
-function SwapResourceAcation(oldResource, newResource, manager, category)
+function SwapResourceAction(oldResource, newResource, manager, category)
 {
 	Action.call(this);
 	
@@ -21,26 +21,31 @@ function SwapResourceAcation(oldResource, newResource, manager, category)
 	this.category = category;
 }
 
-SwapResourceAcation.prototype.apply = function()
-{	
+SwapResourceAction.prototype.apply = function()
+{
 	ResourceUtils.swapResource(this.manager, this.category, this.oldResource, this.newResource);
 	
-	SwapResourceAcation.updateGUI();
+	if(this.oldResource.dispose !== undefined)
+	{
+		this.oldResource.dispose();
+	}
+
+	SwapResourceAction.updateGUI();
 };
 
-SwapResourceAcation.prototype.revert = function()
+SwapResourceAction.prototype.revert = function()
 {
 	ResourceUtils.swapResource(this.manager, this.category, this.newResource, this.oldResource);
 
-	if(this.resource.dispose !== undefined)
+	if(this.newResource.dispose !== undefined)
 	{
-		this.resource.dispose();
+		this.newResource.dispose();
 	}
 
-	RemoveResourceAction.updateGUI();
+	SwapResourceAction.updateGUI();
 };
 
-SwapResourceAcation.updateGUI = function()
+SwapResourceAction.updateGUI = function()
 {
 	Editor.updateObjectsViewsGUI();
 };

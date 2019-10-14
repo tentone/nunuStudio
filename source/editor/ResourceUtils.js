@@ -22,6 +22,9 @@ function ResourceUtils(){}
  */
 ResourceUtils.traverseDeep = function(object, callback)
 {
+	// TODO <REMOVE DEBUG CODE>
+	// console.log("nunuStudio: traverseDeep", object);
+
 	if(callback === undefined)
 	{
 		return;
@@ -31,11 +34,11 @@ ResourceUtils.traverseDeep = function(object, callback)
 	{
 		var value = object[i];
 
-		if((value instanceof Array || value instanceof Object) && !(value instanceof Function))
+		if(typeof value === "object")
 		{
 			if(callback(value, object, i) !== false)
 			{
-				traverseDeep(value, callback);
+				ResourceUtils.traverseDeep(value, callback);
 			}
 		}
 		else
@@ -66,18 +69,23 @@ ResourceUtils.swapResource = function(manager, category, oldResource, newResourc
 	
 	// Swap resource in the manager
 	delete manager[category][oldResource.uuid];
-	manager[category][newResource.uuid] = newResource;
 
 	// Replace all instances found
 	ResourceUtils.traverseDeep(manager, function(value, object, attribute)
 	{
 		if(value === oldResource)
 		{
+			// TODO <REMOVE DEBUG CODE>
+			// console.log("nunuStudio: Found resource to swap.", value, object, attribute);
+			
 			object[attribute] = newResource;
+			return false;
 		}
 
-		return false;
+		return true;
 	});
+
+	manager[category][newResource.uuid] = newResource;
 };
 
 /**

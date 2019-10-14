@@ -559,7 +559,7 @@ include("source/editor/history/action/objects/MoveAction.js");
 include("source/editor/history/action/objects/SwapAction.js");
 include("source/editor/history/action/resources/AddResourceAction.js");
 include("source/editor/history/action/resources/RemoveResourceAction.js");
-include("source/editor/history/action/resources/SwapResourceAcation.js");
+include("source/editor/history/action/resources/SwapResourceAction.js");
 
 include("source/editor/ResourceUtils.js");
 include("source/editor/Settings.js");
