@@ -88,7 +88,10 @@ WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
  */
 WebcamTexture.prototype.connect = function()
 {
-	var constrains = (this.mode === WebcamTexture.USER) ? {facingMode: "user"} : {facingMode: {exact: "environment"}};
+	var constrains = {
+		facingMode: (this.mode === WebcamTexture.USER) ?  "user" : {exact: "environment"}
+	};
+
 	var self = this;
 	
 	if(navigator.webkitGetUserMedia !== undefined)
@@ -96,8 +99,20 @@ WebcamTexture.prototype.connect = function()
 		navigator.getUserMedia = navigator.webkitGetUserMedia;
 	}
 	
-	//Chorme
-	if(navigator.getUserMedia)
+	if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+	{
+		navigator.mediaDevices.getUserMedia({video:constrains}).then(function(stream)
+		{
+			self.stream = stream;
+			self.image.srcObject = stream;
+			self.image.play();
+		})
+		.catch(function(error)
+		{
+			console.warn("nunuStudio: No webcam available");
+		});				
+	}
+	else if(navigator.getUserMedia)
 	{
 		navigator.getUserMedia({video:true}, function(stream)
 		{
@@ -108,19 +123,6 @@ WebcamTexture.prototype.connect = function()
 		{
 			console.warn("nunuStudio: No webcam available");
 		});		
-	}
-	//Firefox
-	else if(navigator.mediaDevices.getUserMedia)
-	{
-		navigator.mediaDevices.getUserMedia({video:constrains}).then(function(stream)
-		{
-			self.stream = stream;
-			self.image.src = URL.createObjectURL(stream);
-		})
-		.catch(function(error)
-		{
-			console.warn("nunuStudio: No webcam available");
-		});				
 	}
 };
 
