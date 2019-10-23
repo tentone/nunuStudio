@@ -15370,7 +15370,7 @@
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
             "line": 35,
-            "description": "Images.",
+            "description": "Image resources.",
             "itemtype": "property",
             "name": "images",
             "type": "{Array}",
@@ -16875,7 +16875,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 127,
+            "line": 129,
             "description": "Disconnect from camera.",
             "itemtype": "method",
             "name": "disconnect",
@@ -16884,7 +16884,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 144,
+            "line": 146,
             "description": "Dispose webcam texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -16893,7 +16893,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 162,
+            "line": 164,
             "description": "Serialize webcam texture to JSON.",
             "itemtype": "method",
             "name": "toJSON",
