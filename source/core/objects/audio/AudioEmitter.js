@@ -98,7 +98,7 @@ function AudioEmitter(audio)
 	 * @default 0.0
 	 * @type {Number}
 	 */
-	this.startTime = 0;
+	this.startTime = 0.0;
 
 	/**
 	 * If true the audio plays in loop.
@@ -197,6 +197,7 @@ AudioEmitter.prototype.play = function()
 	source.detune.value = this.detune;
 	source.loop = this.loop;
 	source.onended = this.onEnded.bind(this);
+	console.log(this);
 	source.playbackRate.setValueAtTime(this.playbackRate, this.startTime);
 	source.start(0, this.startTime);
 
@@ -213,7 +214,8 @@ AudioEmitter.prototype.play = function()
  * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.pause = function()
-{
+{	
+	console.log(this.context.currentTime);
 	this.source.stop();
 	this.startTime = this.context.currentTime;
 	this.isPlaying = false;
@@ -230,7 +232,7 @@ AudioEmitter.prototype.pause = function()
 AudioEmitter.prototype.stop = function()
 {
 	this.source.stop();
-	this.startTime = 0;
+	this.startTime = 0.0;
 	this.isPlaying = false;
 
 	return this;

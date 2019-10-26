@@ -555,6 +555,8 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.volume = data.volume;
 			}
+			object.distanceModel = data.distanceModel;
+			object.panningModel = data.panningModel;
 			break;
 
 		case "Physics":

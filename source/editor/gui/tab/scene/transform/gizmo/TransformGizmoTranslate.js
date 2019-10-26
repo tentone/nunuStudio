@@ -10,13 +10,13 @@ function TransformGizmoTranslate()
 	arrowGeometry.merge(mesh.geometry, mesh.matrix);
 
 	var lineXGeometry = new THREE.BufferGeometry();
-	lineXGeometry.addAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  1, 0, 0], 3));
+	lineXGeometry.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  1, 0, 0], 3));
 
 	var lineYGeometry = new THREE.BufferGeometry();
-	lineYGeometry.addAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  0, 1, 0], 3));
+	lineYGeometry.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  0, 1, 0], 3));
 
 	var lineZGeometry = new THREE.BufferGeometry();
-	lineZGeometry.addAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  0, 0, 1], 3));
+	lineZGeometry.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  0, 0, 1], 3));
 
 	this.handleGizmos =
 	{

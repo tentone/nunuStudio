@@ -31,7 +31,7 @@ GridHelper.prototype.setSpacing = function(spacing)
 GridHelper.prototype.update = function()
 {
 	var geometry = this.geometry;
-	geometry.removeAttribute("position");
+	geometry.deleteAttribute("position");
 
 	var divisions = Math.round(this.size / this.spacing) * 2;
 	var center = divisions / 2;
@@ -45,5 +45,5 @@ GridHelper.prototype.update = function()
 		vertices.push(k, 0, -this.size, k, 0, this.size);
 	}
 
-	geometry.addAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+	geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
 };

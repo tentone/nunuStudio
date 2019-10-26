@@ -62,7 +62,7 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 	{
 		var geometry = new THREE.PlaneBufferGeometry(faceSize, faceSize);
 		var envLookupArray = new Float32Array(12);
-		geometry.addAttribute("envLookup", new THREE.BufferAttribute(envLookupArray, 3));
+		geometry.setAttribute("envLookup", new THREE.BufferAttribute(envLookupArray, 3));
 		for(var j = 0; j < 4; j++)
 		{
 			setEnvLookupVector(j, geometryEnvLookupVectors[i][j], envLookupArray);

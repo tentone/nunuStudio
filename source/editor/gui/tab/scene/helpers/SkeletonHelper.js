@@ -24,8 +24,8 @@ function SkeletonHelper(object)
 		}
 	}
 
-	geometry.addAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
-	geometry.addAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+	geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+	geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
 
 	THREE.LineSegments.call(this, geometry, new THREE.LineBasicMaterial(
 	{
