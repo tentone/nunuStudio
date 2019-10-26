@@ -7769,8 +7769,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 129,
-            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.",
+            "line": 132,
+            "description": "Method called when the audio playback stoped.",
+            "itemtype": "method",
+            "name": "onEnded",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 185,
+            "description": "Initialize audio object, loads audio data decodes it and starts playback ifautoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
             "class": "AudioEmitter",
@@ -7778,7 +7787,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 156,
+            "line": 212,
             "description": "Set audio buffer to be used by this emitter.",
             "itemtype": "method",
             "name": "setBuffer",
@@ -7798,7 +7807,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 176,
+            "line": 232,
             "description": "Play audio.",
             "itemtype": "method",
             "name": "play",
@@ -7811,7 +7820,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 209,
+            "line": 265,
             "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
@@ -7824,7 +7833,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 224,
+            "line": 280,
             "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
@@ -7837,7 +7846,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 239,
+            "line": 295,
             "description": "Change audio resource.\n\nIf changed after initialization the audio buffer will be disconnected and reintialized.",
             "itemtype": "method",
             "name": "setAudio",
@@ -7853,7 +7862,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 268,
+            "line": 324,
             "description": "Get audio emitter volume.",
             "params": [
                 {
@@ -7869,7 +7878,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 279,
+            "line": 335,
             "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -7889,7 +7898,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 294,
+            "line": 350,
             "description": "Set loop mode. If loop set to True the audio repeats after ending.",
             "itemtype": "method",
             "name": "setLoop",
@@ -7909,7 +7918,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 313,
+            "line": 369,
             "description": "Set detune value.",
             "itemtype": "method",
             "name": "setDetune",
@@ -7929,7 +7938,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 332,
+            "line": 388,
             "description": "Get loop mode.",
             "itemtype": "method",
             "name": "getLoop",
@@ -7942,7 +7951,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 343,
+            "line": 399,
             "description": "Set playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -7962,7 +7971,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 362,
+            "line": 418,
             "description": "Get the playback speed.",
             "itemtype": "method",
             "name": "getPlaybackRate",
@@ -7975,7 +7984,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 373,
+            "line": 429,
             "description": "Get Array with all the filters applied to this audio emitter.",
             "itemtype": "method",
             "name": "getFilters",
@@ -7988,7 +7997,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 384,
+            "line": 440,
             "description": "Set the entire filters array.",
             "itemtype": "method",
             "name": "setFilters",
@@ -8008,7 +8017,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 412,
+            "line": 468,
             "description": "Get a filter to the filters array.",
             "itemtype": "method",
             "name": "getFilter",
@@ -8027,7 +8036,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 424,
+            "line": 480,
             "description": "Set a filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -8043,7 +8052,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 435,
+            "line": 491,
             "description": "Change the source audio node.",
             "itemtype": "method",
             "name": "setNodeSource",
@@ -8063,7 +8072,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 453,
+            "line": 509,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -8076,7 +8085,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 464,
+            "line": 520,
             "description": "Dispose audio object, stops the playback and disconnects audio node.",
             "itemtype": "method",
             "name": "dispose",
