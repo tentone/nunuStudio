@@ -119,15 +119,71 @@ function AudioEmitter(audio)
 
 	this.isPlaying = false;
 	this.hasPlaybackControl = true;
+
+	this.filters = [];
 }
 
 THREE._Audio = THREE.Audio;
 THREE.Audio = AudioEmitter;
 
-AudioEmitter.prototype = Object.create(THREE._Audio.prototype);
+AudioEmitter.prototype = Object.create(THREE.Object3D.prototype);
+
 
 /**
- * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.
+ * Method called when the audio playback stoped.
+ *
+ * @method onEnded
+ */
+AudioEmitter.prototype.onEnded = function()
+{
+	this.isPlaying = false;
+};
+
+AudioEmitter.prototype.connect = function()
+{
+	if(this.filters.length > 0)
+	{
+		this.source.connect(this.filters[0]);
+
+		for (var i = 1, l = this.filters.length; i < l; i ++)
+		{
+			this.filters[i - 1].connect(this.filters[i]);
+		}
+
+		this.filters[this.filters.length - 1].connect(this.getOutput());
+	}
+	else
+	{
+		this.source.connect(this.getOutput());
+	}
+
+	return this;
+
+};
+
+AudioEmitter.prototype.disconnect = function()
+{
+	if(this.filters.length > 0)
+	{
+		this.source.disconnect(this.filters[0]);
+
+		for (var i = 1, l = this.filters.length; i < l; i ++)
+		{
+			this.filters[i - 1].disconnect(this.filters[i]);
+		}
+
+		this.filters[this.filters.length - 1].disconnect(this.getOutput());
+	}
+	else
+	{
+		this.source.disconnect(this.getOutput());
+	}
+
+	return this;
+};
+
+/**
+ * Initialize audio object, loads audio data decodes it and starts playback ifautoplay is set to True.
  * 
  * @method initialize
  */
@@ -197,7 +253,6 @@ AudioEmitter.prototype.play = function()
 	source.detune.value = this.detune;
 	source.loop = this.loop;
 	source.onended = this.onEnded.bind(this);
-	console.log(this);
 	source.playbackRate.setValueAtTime(this.playbackRate, this.startTime);
 	source.start(0, this.startTime);
 
@@ -214,8 +269,7 @@ AudioEmitter.prototype.play = function()
  * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.pause = function()
-{	
-	console.log(this.context.currentTime);
+{
 	this.source.stop();
 	this.startTime = this.context.currentTime;
 	this.isPlaying = false;

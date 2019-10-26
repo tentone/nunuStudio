@@ -527,7 +527,7 @@ ParticleGroup.prototype._triggerSingleEmitter = function(pos)
 
 	if(emitter === null)
 	{
-		console.log("ParticleGroup pool ran out.");
+		console.log("nunuStudio: ParticleGroup pool ran out.");
 		return;
 	}
 
