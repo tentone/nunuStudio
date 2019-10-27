@@ -560,21 +560,6 @@ SideBar.prototype.createObject = function()
 		{
 			Editor.addObject(new BrowserView("https://www.techpowerup.com/"), self.editor.scene);
 		}, "Browser View");
-
-		//Reflector
-		effects.addOption(Global.FILE_PATH + "icons/misc/mirror.png", function()
-		{
-			var object = new THREE.Reflector(new THREE.PlaneBufferGeometry());
-
-			Editor.addObject(object, self.editor.scene);
-		}, "Reflector");
-
-		//Refractor
-		effects.addOption(Global.FILE_PATH + "icons/misc/waves.png", function()
-		{
-			var object = new THREE.Refractor(new THREE.PlaneBufferGeometry());
-			Editor.addObject(object, self.editor.scene);
-		}, "Refractor");
 	}
 
 	effects.updateOptions();

@@ -10,7 +10,7 @@ function AssetExplorerMenu(parent)
 	//Import
 	var menu = new DropdownMenu(this);
 	menu.setText(Locale.import);
-	menu.size.set(100, 20);
+	menu.size.set(100, 25);
 	menu.position.set(0, 0);
 
 	//3D Models Loader
@@ -97,7 +97,7 @@ function AssetExplorerMenu(parent)
 	//Textures
 	var texture = new DropdownMenu(this);
 	texture.setText("Texture");
-	texture.size.set(100, 20);
+	texture.size.set(100, 25);
 	texture.position.set(100, 0);
 
 	//Image texture
@@ -179,7 +179,7 @@ function AssetExplorerMenu(parent)
 	//Material
 	var material = new DropdownMenu(this);
 	material.setText(Locale.material);
-	material.size.set(100, 20);
+	material.size.set(100, 25);
 	material.position.set(200, 0);
 	
 	material.addOption("Standard material", function()
@@ -313,7 +313,7 @@ function AssetExplorerMenu(parent)
 	//Create menu
 	var create = new DropdownMenu(this);
 	create.setText("Create");
-	create.size.set(100, 20);
+	create.size.set(100, 25);
 	create.position.set(300, 0);
 	
 	create.addOption("HTML", function()

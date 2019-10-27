@@ -11,7 +11,6 @@ function AssetExplorer(parent, closeable, container, index)
 	//Assets
 	this.assets = new Element(this, "div");
 	this.assets.element.style.overflow = "auto";
-	this.assets.element.style.top = "20px";
 
 	//Drop event
 	this.element.ondrop = function(event)
@@ -56,8 +55,8 @@ function AssetExplorer(parent, closeable, container, index)
 	 */
 	this.search = new SearchBox(this.bar);
 	this.search.setMode(Element.TOP_RIGHT);
-	this.search.size.set(160, 20);
-	this.search.position.set(2, 0);
+	this.search.size.set(200, 25);
+	this.search.position.set(1, 0);
 	this.search.updateInterface();
 	this.search.setOnChange(function()
 	{
@@ -240,9 +239,10 @@ AssetExplorer.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
-	this.bar.size.set(this.size.x, 20);
+	this.bar.size.set(this.size.x, 25);
 	this.bar.updateSize();
 
+	this.assets.position.set(0, 25);
 	this.assets.size.set(this.size.x, this.size.y - 20);
-	this.assets.updateSize();
+	this.assets.updateInterface();
 };
