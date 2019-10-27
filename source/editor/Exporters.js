@@ -245,15 +245,28 @@ Editor.exportNWJSProject = function(dir)
  */
 Editor.exportWindows = function(dir)
 {
+
+	var builder = require("nwjs-builder-phoenix");
+	var options = {
+		arch: "x64",
+		flavor: "normal",
+		forceCaches: false,
+		mirror: "https://dl.nwjs.io/",
+		platform: "win32",
+		showProgress: true,
+		useCaches: true,
+		version: "0.42.0"
+	};
+	builder.Builder(options, dir);
+
+	Editor.exportNWJSProject(dir);
 	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
 	//FileSystem.copyFolder(Global.NWJS_PATH + "win", dir);
-	//Editor.exportNWJSProject(dir);
 };
 
 Editor.canExportWindows = function()
 {
-	//return Nunu.runningOnDesktop() && FileSystem.fileExists(Global.NWJS_PATH + "win");
-	return false;
+	return Nunu.runningOnDesktop();
 };
 
 /**
@@ -265,6 +278,7 @@ Editor.canExportWindows = function()
 Editor.exportLinux = function(dir)
 {
 	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
+
 	//FileSystem.copyFolder(Global.NWJS_PATH + "linux", dir);
 	//Editor.exportNWJSProject(dir);
 };
@@ -284,6 +298,7 @@ Editor.canExportLinux = function()
 Editor.exportMacOS = function(dir)
 {
 	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
+
 	//FileSystem.copyFolder(Global.NWJS_PATH + "mac", dir);
 	//Editor.exportNWJSProject(dir);
 };
