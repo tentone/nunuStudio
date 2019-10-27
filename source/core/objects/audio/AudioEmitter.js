@@ -123,11 +123,22 @@ function AudioEmitter(audio)
 	this.filters = [];
 }
 
-THREE._Audio = THREE.Audio;
 THREE.Audio = AudioEmitter;
 
 AudioEmitter.prototype = Object.create(THREE.Object3D.prototype);
 
+/**
+ * Possible source types for the audio emitter.
+ *
+ * @static
+ * @attribute SOURCE
+ * @type {Object}
+ */
+AudioEmitter.SOURCE = {
+	EMPTY: "empty",
+	BUFFER: "buffer",
+	NODE: "audioNode"
+}
 
 /**
  * Method called when the audio playback stoped.
@@ -139,6 +150,13 @@ AudioEmitter.prototype.onEnded = function()
 	this.isPlaying = false;
 };
 
+/**
+ * Connect the audio source.
+ *
+ * Used internally on initialisation and when setting / removing
+ *
+ * @method connect
+ */
 AudioEmitter.prototype.connect = function()
 {
 	if(this.filters.length > 0)
@@ -161,6 +179,13 @@ AudioEmitter.prototype.connect = function()
 
 };
 
+/**
+ * Disconnect the audio source.
+ *
+ * Used internally when setting / removing filters.
+ *
+ * @method disconnect
+ */
 AudioEmitter.prototype.disconnect = function()
 {
 	if(this.filters.length > 0)

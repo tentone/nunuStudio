@@ -65,7 +65,6 @@ function PositionalAudio(audio)
 	this.tempQuaternionCamera = new THREE.Quaternion();
 }
 
-THREE._PositionalAudio = THREE.PositionalAudio;
 THREE.PositionalAudio = PositionalAudio;
 
 PositionalAudio.prototype = Object.create(AudioEmitter.prototype);

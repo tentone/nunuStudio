@@ -331,7 +331,7 @@ RunProject.prototype.runProgram = function()
 	//If program uses VR set button
 	if(this.program.vr === true)
 	{
-		if(Nunu.webvrAvailable())
+		if(Nunu.webVRAvailable())
 		{
 			//Show VR button
 			this.vrButton.setVisibility(true);

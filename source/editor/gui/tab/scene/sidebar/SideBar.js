@@ -555,8 +555,6 @@ SideBar.prototype.createObject = function()
 
 	if(Nunu.developmentMode())
 	{
-		// TODO <MISSING SERIALIZATION, STILL NEEDS TESTING>
-
 		//Browser View
 		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
 		{

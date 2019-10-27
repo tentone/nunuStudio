@@ -1,12 +1,9 @@
 "use strict";
 
 /**
- * nunuStudio
- * MIT license (http://opensource.org/licenses/MIT)
+ * nunuStudio core main file.
  *   
- * Class used to store nunuStudio development version and timestamp.
- *
- * Contains methods to check browser feature support.
+ * Store nunuStudio development version and timestamp and contains global method to check browser feature support.
  * 
  * @class Nunu
  * @module Runtime
@@ -97,10 +94,10 @@ Nunu.developmentMode = function()
 /**
  * Check if host supports WebVR and if there is a VR display available.
  * 
- * @method webvrAvailable
+ * @method webVRAvailable
  * @return {boolean} True is WebVR is available.
  */
-Nunu.webvrAvailable = function()
+Nunu.webVRAvailable = function()
 {
 	return navigator.getVRDisplays !== undefined;
 };
@@ -113,9 +110,9 @@ Nunu.webvrAvailable = function()
  */
 Nunu.getVRDisplays = function(getDisplay)
 {
-	if(navigator.getVRDisplays === undefined)
+	if(!Nunu.webVRAvailable())
 	{
-		console.warn("nunuStudio: WebVR is not supported.");
+		console.warn("nunuStudio: WebVR support is not available.");
 		return;
 	}
 
