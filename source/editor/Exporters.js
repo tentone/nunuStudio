@@ -225,8 +225,8 @@ Editor.exportWebProjectZip = function(fname)
  */
 Editor.exportNWJSProject = function(dir)
 {
-	Editor.exportWebProject(dir + "/package.nw");
-	FileSystem.writeFile(dir + "/package.nw/package.json", JSON.stringify(
+	Editor.exportWebProject(dir);
+	FileSystem.writeFile(dir + "/package.json", JSON.stringify(
 	{
 		name: Editor.program.name,
 		main: "index.html",
@@ -245,9 +245,10 @@ Editor.exportNWJSProject = function(dir)
  */
 Editor.exportWindows = function(dir)
 {
+	Editor.exportNWJSProject(dir);
 
-	var builder = require("nwjs-builder-phoenix");
-	var options = {
+	/*var builder = require("nwjs-builder-phoenix");
+	builder.Builder({
 		arch: "x64",
 		flavor: "normal",
 		forceCaches: false,
@@ -256,12 +257,13 @@ Editor.exportWindows = function(dir)
 		showProgress: true,
 		useCaches: true,
 		version: "0.42.0"
-	};
-	builder.Builder(options, dir);
+	}, dir);*/
 
-	Editor.exportNWJSProject(dir);
-	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
-	//FileSystem.copyFolder(Global.NWJS_PATH + "win", dir);
+	var system = require("child_process");
+	var output = system.execSync("build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 " + dir);
+
+	// TODO <REMOVE THIS>
+	console.log("nunuStudio: Desktop build result.", output);
 };
 
 Editor.canExportWindows = function()

@@ -122,6 +122,7 @@ function MainMenu(parent)
 				}
 				catch(e)
 				{
+					console.error("nunuStudio: Error exporting android project.", e);
 					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 				}
 			});
@@ -136,6 +137,7 @@ function MainMenu(parent)
 					}
 					catch(e)
 					{
+						console.error("nunuStudio: Error exporting android project.", e);
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, ".apk", Editor.program.name);
@@ -156,6 +158,7 @@ function MainMenu(parent)
 					}
 					catch(e)
 					{
+						console.error("nunuStudio: Error exporting windows project.", e);
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
@@ -176,6 +179,7 @@ function MainMenu(parent)
 					}
 					catch(e)
 					{
+						console.error("nunuStudio: Error exporting linux project.", e);
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
@@ -196,6 +200,7 @@ function MainMenu(parent)
 					}
 					catch(e)
 					{
+						console.error("nunuStudio: Error exporting macOS project.", e);
 						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 					}
 				}, "", Editor.program.name);
@@ -216,6 +221,7 @@ function MainMenu(parent)
 				}
 				catch(e)
 				{
+					console.error("nunuStudio: Error exporting web project.", e);
 					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
 				}
 			}, ".zip");
