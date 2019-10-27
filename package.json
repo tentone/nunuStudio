@@ -33,13 +33,13 @@
 	"bugs": {
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
+	"dependencies": {
+		"cordova": "~9.0.0",
+		"nwjs-builder-phoenix": "~1.15.0"
+	},
 	"devDependencies": {
 		"yuidocjs": "~0.10.2",
-		"nwjs-builder-phoenix": "~1.15.0",
 		"google-closure-compiler": "^20190301.0.0"
-	},
-	"dependencies": {
-		"cordova": "~9.0.0"
 	},
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
