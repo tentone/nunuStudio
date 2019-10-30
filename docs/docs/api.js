@@ -241,7 +241,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Runtime",
             "name": "Runtime",
-            "description": "nunuStudio\nMIT license (http://opensource.org/licenses/MIT)\n  \nClass used to store nunuStudio development version and timestamp.\n\nContains methods to check browser feature support."
+            "description": "nunuStudio core main file.\n  \nStore nunuStudio development version and timestamp and contains global method to check browser feature support."
         },
         {
             "displayName": "Script",

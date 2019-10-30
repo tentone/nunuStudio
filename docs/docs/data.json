@@ -1541,7 +1541,7 @@
             "tag": "module",
             "file": "..\\source\\core\\Nunu.js",
             "line": 3,
-            "description": "nunuStudio\nMIT license (http://opensource.org/licenses/MIT)\n  \nClass used to store nunuStudio development version and timestamp.\n\nContains methods to check browser feature support."
+            "description": "nunuStudio core main file.\n  \nStore nunuStudio development version and timestamp and contains global method to check browser feature support."
         }
     },
     "classes": {
@@ -4353,7 +4353,7 @@
             "namespace": "",
             "file": "..\\source\\core\\Nunu.js",
             "line": 3,
-            "description": "nunuStudio\nMIT license (http://opensource.org/licenses/MIT)\n  \nClass used to store nunuStudio development version and timestamp.\n\nContains methods to check browser feature support."
+            "description": "nunuStudio core main file.\n  \nStore nunuStudio development version and timestamp and contains global method to check browser feature support."
         }
     },
     "elements": {},
@@ -7769,7 +7769,18 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 132,
+            "line": 130,
+            "description": "Possible source types for the audio emitter.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "SOURCE",
+            "type": "{Object}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 143,
             "description": "Method called when the audio playback stoped.",
             "itemtype": "method",
             "name": "onEnded",
@@ -7778,7 +7789,25 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 185,
+            "line": 153,
+            "description": "Connect the audio source.\n\nUsed internally on initialisation and when setting / removing",
+            "itemtype": "method",
+            "name": "connect",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 182,
+            "description": "Disconnect the audio source.\n\nUsed internally when setting / removing filters.",
+            "itemtype": "method",
+            "name": "disconnect",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 210,
             "description": "Initialize audio object, loads audio data decodes it and starts playback ifautoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
@@ -7787,7 +7816,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 212,
+            "line": 237,
             "description": "Set audio buffer to be used by this emitter.",
             "itemtype": "method",
             "name": "setBuffer",
@@ -7807,7 +7836,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 232,
+            "line": 257,
             "description": "Play audio.",
             "itemtype": "method",
             "name": "play",
@@ -7820,7 +7849,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 265,
+            "line": 290,
             "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
@@ -7833,7 +7862,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 280,
+            "line": 305,
             "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
@@ -7846,7 +7875,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 295,
+            "line": 320,
             "description": "Change audio resource.\n\nIf changed after initialization the audio buffer will be disconnected and reintialized.",
             "itemtype": "method",
             "name": "setAudio",
@@ -7862,7 +7891,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 324,
+            "line": 349,
             "description": "Get audio emitter volume.",
             "params": [
                 {
@@ -7878,7 +7907,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 335,
+            "line": 360,
             "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -7898,7 +7927,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 350,
+            "line": 375,
             "description": "Set loop mode. If loop set to True the audio repeats after ending.",
             "itemtype": "method",
             "name": "setLoop",
@@ -7918,7 +7947,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 369,
+            "line": 394,
             "description": "Set detune value.",
             "itemtype": "method",
             "name": "setDetune",
@@ -7938,7 +7967,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 388,
+            "line": 413,
             "description": "Get loop mode.",
             "itemtype": "method",
             "name": "getLoop",
@@ -7951,7 +7980,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 399,
+            "line": 424,
             "description": "Set playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -7971,7 +8000,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 418,
+            "line": 443,
             "description": "Get the playback speed.",
             "itemtype": "method",
             "name": "getPlaybackRate",
@@ -7984,7 +8013,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 429,
+            "line": 454,
             "description": "Get Array with all the filters applied to this audio emitter.",
             "itemtype": "method",
             "name": "getFilters",
@@ -7997,7 +8026,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 440,
+            "line": 465,
             "description": "Set the entire filters array.",
             "itemtype": "method",
             "name": "setFilters",
@@ -8017,7 +8046,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 468,
+            "line": 493,
             "description": "Get a filter to the filters array.",
             "itemtype": "method",
             "name": "getFilter",
@@ -8036,7 +8065,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 480,
+            "line": 505,
             "description": "Set a filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -8052,7 +8081,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 491,
+            "line": 516,
             "description": "Change the source audio node.",
             "itemtype": "method",
             "name": "setNodeSource",
@@ -8072,7 +8101,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 509,
+            "line": 534,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -8085,7 +8114,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 520,
+            "line": 545,
             "description": "Dispose audio object, stops the playback and disconnects audio node.",
             "itemtype": "method",
             "name": "dispose",
@@ -8134,7 +8163,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 73,
+            "line": 72,
             "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
@@ -8143,7 +8172,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 95,
+            "line": 94,
             "description": "Update positional audio panner relative to the camera.",
             "itemtype": "method",
             "name": "update",
@@ -8152,7 +8181,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 125,
+            "line": 124,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -8165,7 +8194,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 136,
+            "line": 135,
             "description": "Get reference distance.",
             "itemtype": "method",
             "name": "getRefDistance",
@@ -8178,7 +8207,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 147,
+            "line": 146,
             "description": "Set reference distance.",
             "itemtype": "method",
             "name": "setRefDistance",
@@ -8194,7 +8223,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 158,
+            "line": 157,
             "description": "Get rolloff factor.",
             "itemtype": "method",
             "name": "getRolloffFactor",
@@ -8207,7 +8236,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 169,
+            "line": 168,
             "description": "Set rolloff factor.",
             "itemtype": "method",
             "name": "setRolloffFactor",
@@ -8223,7 +8252,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 181,
+            "line": 180,
             "description": "Get distance model in use by this audio emitter.",
             "itemtype": "method",
             "name": "getDistanceModel",
@@ -8236,7 +8265,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 192,
+            "line": 191,
             "description": "Set distance model to be used.\n\nDistance model defined how the emitter controls its volume from its position in the world, relative to the camera.\n\nBy default the mode used is \"inverse\", can be also set to:\n - \"linear\": A linear distance model calculating the gain induced by the distance according to\n   - 1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)\n - \"inverse\": An inverse distance model calculating the gain induced by the distance according to:\n   - refDistance / (refDistance + rolloffFactor * (distance - refDistance))\n - \"exponential\": An exponential distance model calculating the gain induced by the distance according to:\n   - pow(distance / refDistance, -rolloffFactor).",
             "itemtype": "method",
             "name": "setDistanceModel",
@@ -8252,7 +8281,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 213,
+            "line": 212,
             "description": "Get maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "getMaxDistance",
@@ -8264,7 +8293,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 224,
+            "line": 223,
             "description": "Set maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "setMaxDistance",
@@ -19267,7 +19296,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 16,
+            "line": 13,
             "description": "nunuStudio",
             "itemtype": "attribute",
             "name": "NAME",
@@ -19278,7 +19307,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 25,
+            "line": 22,
             "description": "Stores the nunu runtime version.",
             "itemtype": "attribute",
             "name": "VERSION",
@@ -19288,7 +19317,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 33,
+            "line": 30,
             "description": "Stores the nunu runtime dev timestamp.",
             "itemtype": "attribute",
             "name": "TIMESTAMP",
@@ -19298,7 +19327,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 41,
+            "line": 38,
             "description": "Repository branch, used to track the version after publishing.",
             "static": 1,
             "itemtype": "attribute",
@@ -19309,7 +19338,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 50,
+            "line": 47,
             "description": "Repository commit uuid, used to track the version after publishing.",
             "static": 1,
             "itemtype": "attribute",
@@ -19320,7 +19349,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 59,
+            "line": 56,
             "description": "NWJS platform, used for desktop version.",
             "static": 1,
             "itemtype": "attribute",
@@ -19331,7 +19360,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 68,
+            "line": 65,
             "description": "Running inside of a regular web browser.",
             "static": 1,
             "itemtype": "attribute",
@@ -19342,7 +19371,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 77,
+            "line": 74,
             "description": "Cordova platform, used for mobile versions.",
             "static": 1,
             "itemtype": "attribute",
@@ -19353,7 +19382,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 86,
+            "line": 83,
             "description": "Check if nunu if running in development mode.",
             "itemtype": "method",
             "name": "developmentMode",
@@ -19366,10 +19395,10 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 97,
+            "line": 94,
             "description": "Check if host supports WebVR and if there is a VR display available.",
             "itemtype": "method",
-            "name": "webvrAvailable",
+            "name": "webVRAvailable",
             "return": {
                 "description": "True is WebVR is available.",
                 "type": "Boolean"
@@ -19379,7 +19408,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 108,
+            "line": 105,
             "description": "Used to get the first VR display available, the display is returned as argument of the getDisplay function.",
             "itemtype": "method",
             "name": "getVRDisplays",
@@ -19395,7 +19424,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 135,
+            "line": 132,
             "description": "Get the query parameter from the browser URL.",
             "itemtype": "method",
             "name": "getQueryParameters",
@@ -19408,7 +19437,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 160,
+            "line": 157,
             "description": "Create a web worker from code written in a string.\n\nUses a blob to inject the code and loads it from and URL object.",
             "itemtype": "method",
             "name": "createWorker",
@@ -19433,7 +19462,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 183,
+            "line": 180,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -19446,7 +19475,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 194,
+            "line": 191,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -19459,7 +19488,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 217,
+            "line": 214,
             "description": "Check in wich platform the enviroment is running.\n\nPossible return values are:\n   - Nunu.NWJS\n   - Nunu.BROWSER\n   - Nunu.CORDOVA",
             "itemtype": "method",
             "name": "getPlatform",
@@ -19472,7 +19501,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 242,
+            "line": 239,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
@@ -19485,7 +19514,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 254,
+            "line": 251,
             "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
             "itemtype": "method",
             "name": "openWebpage",
@@ -19494,7 +19523,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 275,
+            "line": 272,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -19507,7 +19536,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 289,
+            "line": 286,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUses isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",
