@@ -223,18 +223,39 @@ Editor.exportWebProjectZip = function(fname)
  * @method exportNWJSProject
  * @param {String} dir Output directory.
  */
-Editor.exportNWJSProject = function(dir)
+Editor.exportNWJSProject = function(dir, target)
 {
-	Editor.exportWebProject(dir);
-	FileSystem.writeFile(dir + "/package.json", JSON.stringify(
+	// Export web project
+	Editor.exportWebProject("./temp/");
+
+	// Write package json with nwjs builder configuration
+	FileSystem.writeFile("./temp/package.json", JSON.stringify(
 	{
 		name: Editor.program.name,
+		description: Editor.program.description,
+		author: Editor.program.author,
 		main: "index.html",
 		window:
 		{
 			frame: true
+		},
+		build:
+		{
+			output: dir,
+			outputPattern: "${NAME}-${PLATFORM}-${ARCH}",
+			packed: true,
+			//targets: ["zip", "nsis7z"],
+			win:
+			{
+				productName: Editor.program.name,
+				companyName: Editor.program.author
+			},
 		}
 	}));
+
+	// Build directory
+	var system = require("child_process");
+	var output = system.execSync("build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks " + target + " ./temp");
 };
 
 /**
@@ -245,25 +266,7 @@ Editor.exportNWJSProject = function(dir)
  */
 Editor.exportWindows = function(dir)
 {
-	Editor.exportNWJSProject(dir);
-
-	/*var builder = require("nwjs-builder-phoenix");
-	builder.Builder({
-		arch: "x64",
-		flavor: "normal",
-		forceCaches: false,
-		mirror: "https://dl.nwjs.io/",
-		platform: "win32",
-		showProgress: true,
-		useCaches: true,
-		version: "0.42.0"
-	}, dir);*/
-
-	var system = require("child_process");
-	var output = system.execSync("build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 " + dir);
-
-	// TODO <REMOVE THIS>
-	console.log("nunuStudio: Desktop build result.", output);
+	Editor.exportNWJSProject(dir, "win-x64");
 };
 
 Editor.canExportWindows = function()
@@ -279,16 +282,12 @@ Editor.canExportWindows = function()
  */
 Editor.exportLinux = function(dir)
 {
-	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
-
-	//FileSystem.copyFolder(Global.NWJS_PATH + "linux", dir);
-	//Editor.exportNWJSProject(dir);
+	Editor.exportNWJSProject(dir, "linux-x64");
 };
 
 Editor.canExportLinux = function()
 {
-	//return Nunu.runningOnDesktop() && FileSystem.fileExists(Global.NWJS_PATH + "linux");
-	return false;
+	return Nunu.runningOnDesktop();
 };
 
 /**
@@ -299,14 +298,10 @@ Editor.canExportLinux = function()
  */
 Editor.exportMacOS = function(dir)
 {
-	//TODO <HAS TO BE UPDATED TO USE NWJS FROM WEB>
-
-	//FileSystem.copyFolder(Global.NWJS_PATH + "mac", dir);
-	//Editor.exportNWJSProject(dir);
+	Editor.exportNWJSProject(dir, "mac-x64");
 };
 
 Editor.canExportMacOS = function()
 {
-	//return Nunu.runningOnDesktop() && FileSystem.fileExists(Global.NWJS_PATH + "mac");
-	return false;
+	return Nunu.runningOnDesktop();
 };
