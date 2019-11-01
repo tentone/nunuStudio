@@ -32,13 +32,14 @@ function Program(name)
 
 	/**
 	 * Program name.
+	 *
 	 * @property name
 	 * @type {String}
 	 */
 	this.name = (name !== undefined) ? name : "program";
 
 	/**
-	 * Program description.
+	 * Program description, will be stamped when the app is exported.
 	 *
 	 * @property description
 	 * @type {String}
@@ -46,7 +47,7 @@ function Program(name)
 	this.description = "";
 
 	/**
-	 * Program author.
+	 * Program author, will be stamped when the app is exported.
 	 *
 	 * @property author
 	 * @type {String}
@@ -54,16 +55,16 @@ function Program(name)
 	this.author = "";
 
 	/**
-	 * Program version.
+	 * Program version should adhere to semantic versioning, but it is not mandatory.
 	 *
 	 * @property version
 	 * @type {String}
-	 * @default "0"
+	 * @default "0.0.0"
 	 */
-	this.version = "0";
+	this.version = "0.0.0";
 
 	/**
-	 * Flag to control pointer locking.
+	 * Flag to control pointer locking, when set true the cursor is locked into the application window.
 	 *
 	 * @property lockPointer
 	 * @type {boolean}
@@ -73,6 +74,8 @@ function Program(name)
 
 	/**
 	 * Flag to indicate if the runtime should handle device pixel ratio.
+	 *
+	 * If set false the runtime will ignore the pixel ratio, and use in browser coordinates.
 	 *
 	 * @property handlePixelRatio
 	 * @type {boolean}

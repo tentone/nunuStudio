@@ -144,9 +144,9 @@ function MainMenu(parent)
 			});
 		}
 
-		//Publish windows
-		if(Editor.canExportWindows())
+		if(Nunu.runningOnDesktop())
 		{
+			//Publish windows
 			publish.addOption("Windows", function()
 			{
 				FileSystem.chooseFile(function(files)
@@ -163,11 +163,8 @@ function MainMenu(parent)
 					}
 				}, "", Editor.program.name);
 			}, Global.FILE_PATH + "icons/platform/windows.png");
-		}
 
-		//Publish linux
-		if(Editor.canExportLinux())
-		{
+			//Publish linux
 			publish.addOption("Linux", function()
 			{
 				FileSystem.chooseFile(function(files)
@@ -184,11 +181,9 @@ function MainMenu(parent)
 					}
 				}, "", Editor.program.name);
 			}, Global.FILE_PATH + "icons/platform/linux.png");
-		}
+	
 
-		//Publish macos
-		if(Editor.canExportMacOS())
-		{
+			//Publish macos
 			publish.addOption("macOS", function()
 			{
 				FileSystem.chooseFile(function(files)

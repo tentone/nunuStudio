@@ -5,6 +5,29 @@ Editor.ANDROID_EXPORT_UNSIGNED = 101;
 Editor.ANDROID_EXPORT_SIGNED = 102;
 
 /**
+ * Editor temporary data folder, should be used for operations that require temporary file storage.
+ *
+ * Only available on desktop.
+ *
+ * @static
+ * @attribute TEMP
+ */
+Editor.TEMP = "./temp";
+
+/**
+ * Clean the temporary files created under the temporary folder.
+ *
+ * @method deleteTemp
+ */
+Editor.deleteTemp = function()
+{
+	if(FileSystem.fileExists(Editor.TEMP))
+	{
+		FileSystem.deleteFolder(Editor.TEMP);
+	}
+};
+
+/**
  * Export a android project using cordova.
  *
  * Cordova has to be installed from NPM globaly, it is run trough the command line.
@@ -21,10 +44,7 @@ Editor.exportAndroid = function(mode, outputPath)
 	var packageName = "com." + author + "." + name;
 
 	//Delete old project data
-	if(FileSystem.fileExists("./temp"))
-	{
-		FileSystem.deleteFolder("./temp");
-	}
+	Editor.deleteTemp();
 
 	//Create cordova project
 	var output = system.execSync("cordova create temp " + packageName + " " + name).toString();
@@ -33,48 +53,34 @@ Editor.exportAndroid = function(mode, outputPath)
 		console.error("nunuStudio: Failed to create cordova project.");
 	}
 
-
-	if(FileSystem.fileExists("./temp/www"))
-	{
-		FileSystem.deleteFolder("./temp/www");
-	}
-	
 	//Export nunu project
-	Editor.exportCordovaProject("./temp/www");
+	Editor.exportCordovaProject(Editor.TEMP + "/www");
 
-	//Clean the temporary files created
-	function cleanFiles()
-	{
-		if(FileSystem.fileExists("./temp"))
-		{
-			FileSystem.deleteFolder("./temp");
-		}
-	}
 
 	setTimeout(function()
 	{
 		//Android platform project
-		var output = system.execSync("cordova platform add android", {cwd:"./temp"}).toString();
+		var output = system.execSync("cordova platform add android", {cwd:Editor.TEMP}).toString();
 		if(output.indexOf("Android project created") === -1)
 		{
 			console.error("nunuStudio: Failed to create cordova android project.");
 		}
 
 		//Check requirements
-		output = system.execSync("cordova requirements", {cwd:"./temp"}).toString();
+		output = system.execSync("cordova requirements", {cwd:Editor.TEMP}).toString();
 
 		if(output.indexOf("Java JDK: installed") === -1)
 		{
 			Editor.alert("Missing java JDK (get it at http://www.oracle.com/technetwork/java/javase/downloads/index.html)");
 			console.error("nunuStudio: Missing java JDK (get it at http://www.oracle.com/technetwork/java/javase/downloads/index.html)");
-			cleanFiles();
+			Editor.deleteTemp();
 			return;
 		}
 		if(output.indexOf("Android SDK: installed true") === -1)
 		{
 			Editor.alert("Missing Android SDK (get it at https://developer.android.com/studio/)");
 			console.error("nunuStudio: Missing Android SDK (get it at https://developer.android.com/studio/)");
-			cleanFiles();
+			Editor.deleteTemp();
 			return;
 		}
 
@@ -92,54 +98,54 @@ Editor.exportAndroid = function(mode, outputPath)
 		if(mode === Editor.ANDROID_RUN)
 		{
 			//Build code
-			output = system.execSync("cordova build android", {cwd:"./temp"}).toString();
+			output = system.execSync("cordova build android", {cwd:Editor.TEMP}).toString();
 			if(output.indexOf("SUCCESSFUL") === -1)
 			{
 				console.error("nunuStudio: Failed to build android project.");
-				cleanFiles();
+				Editor.deleteTemp();
 				return;
 			}
 
 			//Launch on device
-			output = system.execSync("cordova run android", {cwd:"./temp"}).toString();
+			output = system.execSync("cordova run android", {cwd:Editor.TEMP}).toString();
 			if(output.indexOf("SUCCESS") === -1)
 			{
 				console.error("nunuStudio: Failed to launch android application on device.");
-				cleanFiles();
+				Editor.deleteTemp();
 				return;
 			}
 		}
 		//Export test version
 		else if(mode === Editor.ANDROID_EXPORT_UNSIGNED)
 		{
-			output = system.execSync("cordova build android", {cwd:"./temp"}).toString();
+			output = system.execSync("cordova build android", {cwd:Editor.TEMP}).toString();
 			if(output.indexOf("SUCCESSFUL") === -1)
 			{
 				console.error("nunuStudio: Failed to build android project.");
-				cleanFiles();
+				Editor.deleteTemp();
 				return;
 			}
 
-			FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
+			FileSystem.copyFile(Editor.TEMP + "/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
 		}
 		//Export signed version
 		else if(mode === Editor.ANDROID_EXPORT_SIGNED)
 		{
-			output = system.execSync("cordova build android --release -- --keystore=\"..\\android.keystore\" --storePassword=android --alias=mykey", {cwd:"./temp"}).toString();
+			output = system.execSync("cordova build android --release -- --keystore=\"..\\android.keystore\" --storePassword=android --alias=mykey", {cwd:Editor.TEMP}).toString();
 			if(output.indexOf("SUCCESSFUL") === -1)
 			{
 				console.error("nunuStudio: Failed to build android project.");
-				cleanFiles();
+				Editor.deleteTemp();
 				return;
 			}
 
-			//FileSystem.copyFile("./temp/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
+			//FileSystem.copyFile(Editor.TEMP + "/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
 		}
 
-		cleanFiles();
+		Editor.deleteTemp();
 
 		Editor.alert("Android project exported!");
-	}, 100);
+	}, 500);
 };
 
 /**
@@ -226,10 +232,10 @@ Editor.exportWebProjectZip = function(fname)
 Editor.exportNWJSProject = function(dir, target)
 {
 	// Export web project
-	Editor.exportWebProject("./temp/");
+	Editor.exportWebProject(Editor.TEMP);
 
 	// Write package json with nwjs builder configuration
-	FileSystem.writeFile("./temp/package.json", JSON.stringify(
+	FileSystem.writeFile(Editor.TEMP + "/package.json", JSON.stringify(
 	{
 		name: Editor.program.name,
 		description: Editor.program.description,
@@ -237,12 +243,18 @@ Editor.exportNWJSProject = function(dir, target)
 		main: "index.html",
 		window:
 		{
-			frame: true
+			frame: true,
+			fullscreen: true,
+			resizable: true
+		},
+		webkit:
+		{
+			plugin: false
 		},
 		build:
 		{
 			output: dir,
-			outputPattern: "${NAME}-${PLATFORM}-${ARCH}",
+			outputPattern: "${PLATFORM}-${ARCH}",
 			packed: true,
 			//targets: ["zip", "nsis7z"],
 			win:
@@ -253,9 +265,12 @@ Editor.exportNWJSProject = function(dir, target)
 		}
 	}));
 
-	// Build directory
+	// Build application
 	var system = require("child_process");
-	var output = system.execSync("build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks " + target + " ./temp");
+	var output = system.execSync("build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks " + target + " " + Editor.TEMP);
+
+	// Delete temporary folders
+	Editor.deleteTemp();
 };
 
 /**
@@ -269,11 +284,6 @@ Editor.exportWindows = function(dir)
 	Editor.exportNWJSProject(dir, "win-x64");
 };
 
-Editor.canExportWindows = function()
-{
-	return Nunu.runningOnDesktop();
-};
-
 /**
  * Export NWJS linux project.
  *
@@ -285,10 +295,6 @@ Editor.exportLinux = function(dir)
 	Editor.exportNWJSProject(dir, "linux-x64");
 };
 
-Editor.canExportLinux = function()
-{
-	return Nunu.runningOnDesktop();
-};
 
 /**
  * Export NWJS macOS project.
@@ -299,9 +305,4 @@ Editor.canExportLinux = function()
 Editor.exportMacOS = function(dir)
 {
 	Editor.exportNWJSProject(dir, "mac-x64");
-};
-
-Editor.canExportMacOS = function()
-{
-	return Nunu.runningOnDesktop();
 };

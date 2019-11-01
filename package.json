@@ -50,6 +50,9 @@
 		"min_width": 800,
 		"min_height": 600
 	},
+	"webkit": {
+		"plugin": false
+	},
 	"build": {
 		"appId": "io.tentone.nunustudio",
 		"output": "../../build/desktop/",
