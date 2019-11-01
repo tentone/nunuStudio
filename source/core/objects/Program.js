@@ -112,6 +112,14 @@ function Program(name)
 	this.rendererConfig = new RendererConfiguration();
 
 	/**
+	 * Target related configurations applied when exporting the app.
+	 *
+	 * @property targetConfig
+	 * @type {TargetConfig}
+	 */
+	this.targetConfig = new TargetConfig();
+
+	/**
 	 * Scene loaded as default on startup.
 	 *
 	 * @property defaultScene

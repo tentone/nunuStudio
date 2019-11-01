@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 /**
  * Load texture from file object, checks the type of the file, can be used to load all types of textures
  *
