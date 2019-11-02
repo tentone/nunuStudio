@@ -40,7 +40,7 @@ Editor.exportAndroid = function(mode, outputPath)
 {
 	var system = require("child_process");
 	var name = Editor.program.name !== "" ? Editor.program.name : "program";
-	var author = Editor.program.author !== "" ? Editor.program.author : "nunustudio";
+	var author = Editor.program.author !== "" ? Editor.program.author : "author";
 	var packageName = "com." + author + "." + name;
 
 	//Delete old project data
