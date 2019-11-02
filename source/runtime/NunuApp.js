@@ -51,6 +51,7 @@ include("lib/chevrotain.min.js");
 include("source/core/Nunu.js");
 include("source/core/Global.js");
 include("source/core/FileSystem.js");
+include("source/core/TargetConfig.js");
 
 include("source/core/three/animation/KeyframeTrack.js");
 include("source/core/three/animation/AnimationClip.js");
@@ -202,7 +203,6 @@ include("source/core/utils/EventManager.js");
 include("source/core/utils/MathUtils.js");
 include("source/core/utils/ObjectUtils.js");
 include("source/core/utils/PhysicsGenerator.js");
-include("source/core/utils/TargetConfig.js");
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.

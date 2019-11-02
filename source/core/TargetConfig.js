@@ -7,6 +7,12 @@
  */
 function TargetConfig()
 {
+	/**
+	 * Desktop related export properties.
+	 *
+	 * @attribute desktop
+	 * @type {Object}
+	 */
 	this.desktop =
 	{
 		fullscreen: false,

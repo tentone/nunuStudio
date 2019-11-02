@@ -234,6 +234,8 @@ Editor.exportNWJSProject = function(dir, target)
 	// Export web project
 	Editor.exportWebProject(Editor.TEMP);
 
+	var config = Editor.program.targetConfig;
+
 	// Write package json with nwjs builder configuration
 	FileSystem.writeFile(Editor.TEMP + "/package.json", JSON.stringify(
 	{
@@ -243,9 +245,9 @@ Editor.exportNWJSProject = function(dir, target)
 		main: "index.html",
 		window:
 		{
-			frame: true,
-			fullscreen: true,
-			resizable: true
+			frame: config.desktop.frame,
+			fullscreen: config.desktop.fullscreen,
+			resizable: config.desktop.resizable
 		},
 		webkit:
 		{
