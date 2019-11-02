@@ -1095,6 +1095,15 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "..\\source\\core\\TargetConfig.js": {
+            "name": "..\\source\\core\\TargetConfig.js",
+            "modules": {},
+            "classes": {
+                "TargetConfig": 1
+            },
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {
@@ -1534,12 +1543,13 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "Nunu": 1
+                "Nunu": 1,
+                "TargetConfig": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\Nunu.js",
+            "file": "..\\source\\core\\TargetConfig.js",
             "line": 3,
             "description": "nunuStudio core main file.\n  \nStore nunuStudio development version and timestamp and contains global method to check browser feature support."
         }
@@ -4354,6 +4364,20 @@
             "file": "..\\source\\core\\Nunu.js",
             "line": 3,
             "description": "nunuStudio core main file.\n  \nStore nunuStudio development version and timestamp and contains global method to check browser feature support."
+        },
+        "TargetConfig": {
+            "name": "TargetConfig",
+            "shortname": "TargetConfig",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Runtime",
+            "namespace": "",
+            "file": "..\\source\\core\\TargetConfig.js",
+            "line": 3,
+            "description": "Target configuration stores platform specific configurations used when exporting the application to a platform."
         }
     },
     "elements": {},
@@ -12866,8 +12890,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 40,
-            "description": "Program description.",
+            "line": 41,
+            "description": "Program description, will be stamped when the app is exported.",
             "itemtype": "property",
             "name": "description",
             "type": "{String}",
@@ -12876,8 +12900,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 48,
-            "description": "Program author.",
+            "line": 49,
+            "description": "Program author, will be stamped when the app is exported.",
             "itemtype": "property",
             "name": "author",
             "type": "{String}",
@@ -12886,19 +12910,19 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 56,
-            "description": "Program version.",
+            "line": 57,
+            "description": "Program version should adhere to semantic versioning, but it is not mandatory.",
             "itemtype": "property",
             "name": "version",
             "type": "{String}",
-            "default": "\"0\"",
+            "default": "\"0.0.0\"",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 65,
-            "description": "Flag to control pointer locking.",
+            "line": 66,
+            "description": "Flag to control pointer locking, when set true the cursor is locked into the application window.",
             "itemtype": "property",
             "name": "lockPointer",
             "type": "{boolean}",
@@ -12908,8 +12932,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 74,
-            "description": "Flag to indicate if the runtime should handle device pixel ratio.",
+            "line": 75,
+            "description": "Flag to indicate if the runtime should handle device pixel ratio.\n\nIf set false the runtime will ignore the pixel ratio, and use in browser coordinates.",
             "itemtype": "property",
             "name": "handlePixelRatio",
             "type": "{boolean}",
@@ -12919,7 +12943,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 83,
+            "line": 86,
             "description": "Enable virtual reality flag.",
             "itemtype": "property",
             "name": "vr",
@@ -12930,7 +12954,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 92,
+            "line": 95,
             "description": "Virtual reality movement scale.\n\nIndicates the relation between the real movement and virtual world movement.",
             "itemtype": "property",
             "name": "vrScale",
@@ -12941,7 +12965,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 103,
+            "line": 106,
             "description": "Renderer configuration applied to the WebGL renderer.",
             "itemtype": "property",
             "name": "rendererConfig",
@@ -12951,7 +12975,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 111,
+            "line": 114,
+            "description": "Target related configurations applied when exporting the app.",
+            "itemtype": "property",
+            "name": "targetConfig",
+            "type": "{TargetConfig}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 122,
             "description": "Scene loaded as default on startup.",
             "itemtype": "property",
             "name": "defaultScene",
@@ -12961,7 +12995,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 119,
+            "line": 130,
             "description": "Default camera to be used by scenes where there is no camera.\n\nOn the editor this value is automatically set to the last editor camera point used",
             "itemtype": "property",
             "name": "defaultCamera",
@@ -12971,7 +13005,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 129,
+            "line": 140,
             "description": "Keyboard input object.",
             "itemtype": "property",
             "name": "keyboard",
@@ -12981,7 +13015,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 137,
+            "line": 148,
             "description": "Mouse input object.",
             "itemtype": "property",
             "name": "mouse",
@@ -12991,7 +13025,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 145,
+            "line": 156,
             "description": "Renderer being used during runtime.",
             "itemtype": "property",
             "name": "renderer",
@@ -13001,7 +13035,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 153,
+            "line": 164,
             "description": "Scene currently running in the program.",
             "itemtype": "property",
             "name": "scene",
@@ -13011,7 +13045,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 161,
+            "line": 172,
             "description": "Canvas being used to draw content.\n\nThis canvas is where the WebGL rendering context was created.",
             "itemtype": "property",
             "name": "canvas",
@@ -13021,7 +13055,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 171,
+            "line": 182,
             "description": "DOM Division element that can be used to add html content to the app.\n\nAll content added to this division should be manually removed before the app exits.",
             "itemtype": "property",
             "name": "division",
@@ -13031,7 +13065,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 181,
+            "line": 192,
             "description": "Event manager used to handle VR display presentation change event.",
             "itemtype": "property",
             "name": "manager",
@@ -13041,7 +13075,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 196,
+            "line": 207,
             "description": "Clock object used to measure times between frames.",
             "itemtype": "property",
             "name": "clock",
@@ -13051,7 +13085,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 213,
+            "line": 224,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -13060,7 +13094,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 267,
+            "line": 278,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -13081,7 +13115,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 280,
+            "line": 291,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -13102,7 +13136,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 301,
+            "line": 312,
             "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
@@ -13111,7 +13145,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 313,
+            "line": 324,
             "description": "Render current scene to canvas.\n\nWhen rendering in VR mode all effects and camera parameters are ignored.\n\nRenderer should be initialized and passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -13127,7 +13161,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 342,
+            "line": 353,
             "description": "Resize the current scene elements.",
             "itemtype": "method",
             "name": "resize",
@@ -13148,7 +13182,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 366,
+            "line": 377,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -13157,7 +13191,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 385,
+            "line": 396,
             "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "displayVR",
@@ -13166,7 +13200,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 413,
+            "line": 424,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -13175,7 +13209,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 427,
+            "line": 438,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -13191,7 +13225,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 462,
+            "line": 473,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -13207,7 +13241,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 499,
+            "line": 510,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -13223,7 +13257,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 526,
+            "line": 537,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -13236,7 +13270,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 539,
+            "line": 550,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -13252,7 +13286,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 552,
+            "line": 563,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -13261,7 +13295,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 581,
+            "line": 592,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -13277,7 +13311,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 608,
+            "line": 619,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -13293,7 +13327,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 633,
+            "line": 644,
             "description": "Serialize the object to JSON format.",
             "itemtype": "method",
             "name": "toJSON",
@@ -19553,6 +19587,16 @@
                 }
             ],
             "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\TargetConfig.js",
+            "line": 10,
+            "description": "Desktop related export properties.",
+            "itemtype": "attribute",
+            "name": "desktop",
+            "type": "{Object}",
+            "class": "TargetConfig",
             "module": "Runtime"
         }
     ],

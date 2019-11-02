@@ -51,6 +51,7 @@ include("lib/chevrotain.min.js");
 include("source/core/Nunu.js");
 include("source/core/Global.js");
 include("source/core/FileSystem.js");
+include("source/core/TargetConfig.js");
 
 include("source/core/three/animation/KeyframeTrack.js");
 include("source/core/three/animation/AnimationClip.js");

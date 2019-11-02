@@ -129,6 +129,7 @@
 								<li><a href="../classes/SSAONOHPass.html">SSAONOHPass</a></li>
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
+								<li><a href="../classes/TargetConfig.html">TargetConfig</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
 								<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
@@ -388,6 +389,10 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_scene">scene</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_targetConfig">targetConfig</a>
 						
 													</li>
 													<li class="index-item property">
@@ -1297,7 +1302,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Program author.</p>
+													<p>Program author, will be stamped when the app is exported.</p>
 											
 												</div>
 											
@@ -1414,7 +1419,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Program description.</p>
+													<p>Program description, will be stamped when the app is exported.</p>
 											
 												</div>
 											
@@ -1462,6 +1467,7 @@
 											
 												<div class="description">
 													<p>Flag to indicate if the runtime should handle device pixel ratio.</p>
+											<p>If set false the runtime will ignore the pixel ratio, and use in browser coordinates.</p>
 											
 												</div>
 											
@@ -1508,7 +1514,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Flag to control pointer locking.</p>
+													<p>Flag to control pointer locking, when set true the cursor is locked into the application window.</p>
 											
 												</div>
 											
@@ -1654,6 +1660,29 @@
 											
 											
 											</div>
+											<div id="property_targetConfig" class="property item">
+												<h3 class="name"><code>targetConfig</code></h3>
+												<span class="type"><a href="../classes/TargetConfig.html" class="crosslink">TargetConfig</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Target related configurations applied when exporting the app.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_version" class="property item">
 												<h3 class="name"><code>version</code></h3>
 												<span class="type">String</span>
@@ -1670,11 +1699,11 @@
 												</div>
 											
 												<div class="description">
-													<p>Program version.</p>
+													<p>Program version should adhere to semantic versioning, but it is not mandatory.</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> &quot;0&quot;</p>
+													<p><strong>Default:</strong> &quot;0.0.0&quot;</p>
 											
 											
 											</div>

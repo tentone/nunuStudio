@@ -98,6 +98,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "SpotLight",
         "Sprite",
         "SpriteSheetTexture",
+        "TargetConfig",
         "TechnicolorPass",
         "TextBitmap",
         "TextFile",
