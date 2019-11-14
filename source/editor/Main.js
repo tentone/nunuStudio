@@ -41,6 +41,8 @@ include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
 
+include("lib/three/vr/WebVR.js");
+
 include("lib/three/objects/Lensflare.js");
 
 include("lib/three/loaders/TTFLoader.js");
@@ -110,9 +112,6 @@ include("source/core/postprocessing/pass/HueSaturationPass.js");
 include("source/core/postprocessing/pass/AdaptiveToneMappingPass.js");
 
 include("source/core/postprocessing/shaders/SSAOShader.js");
-
-include("source/core/vr/VRControls.js");
-include("source/core/vr/VREffect.js");
 
 include("source/core/resources/Resource.js");
 include("source/core/resources/Font.js");

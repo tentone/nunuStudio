@@ -84,7 +84,9 @@ function Program(name)
 	this.handlePixelRatio = false;
 
 	/**
-	 * Enable virtual reality flag.
+	 * Enable virtual reality flag, allows the application to run in VR mode.
+	 *
+	 * VR mode can only be enabled if the system and browser have support for VR.
 	 *
 	 * @property vr
 	 * @default false
@@ -215,7 +217,6 @@ function Program(name)
 	//VR runtime control
 	this.vrEnabled = false;
 	this.vrDisplay = null;
-	this.vrEffect = null;
 	this.vrControls = null;
 }
 
@@ -260,17 +261,15 @@ Program.prototype.initialize = function()
 		this.setScene(this.children[0]);
 	}
 
-	if(this.vr)
+	/*if(this.vr)
 	{
 		var self = this;
 
 		Nunu.getVRDisplays(function(display)
 		{
-			self.vrDisplay = display;
 			self.vrControls = new VRControls();
-			self.vrEffect = new VREffect(self.renderer);
 		});
-	}
+	}*/
 
 	this.clock.start();
 };
@@ -333,21 +332,7 @@ Program.prototype.update = function()
  */
 Program.prototype.render = function(renderer)
 {
-	//Render as a VR application (ignores all camera parameters and effects)
-	if(this.vrEnabled)
-	{
-		for(var i = 0; i < this.scene.cameras.length; i++)
-		{
-			var camera = this.scene.cameras[i];
-			this.vrControls.update(camera);
-			this.vrEffect.render(this.scene, camera, undefined, true);
-		}
-	}
-	//Render normally
-	else
-	{
-		this.scene.render(renderer);
-	}
+	this.scene.render(renderer);
 };
 
 /**
@@ -359,12 +344,6 @@ Program.prototype.render = function(renderer)
  */
 Program.prototype.resize = function(x, y)
 {
-	//Resize vr effect
-	if(this.vrEffect !== null)
-	{
-		this.vrEffect.setSize(x, y);
-	}
-
 	//Resize the default camera
 	if(this.defaultCamera !== null)
 	{
@@ -406,7 +385,9 @@ Program.prototype.displayVR = function()
 {
 	if(this.vr)
 	{
-		try
+		this.renderer.vr.enabled = true;
+		
+		/*try
 		{
 			if(!this.vrDisplay.isPresenting)
 			{
@@ -417,7 +398,7 @@ Program.prototype.displayVR = function()
 		catch(e)
 		{
 			console.warn("nunuStudio: Failed to enter in VR mode", e);
-		}		
+		}*/
 	}
 };
 
@@ -428,11 +409,13 @@ Program.prototype.displayVR = function()
  */
 Program.prototype.exitVR = function()
 {
-	if(this.vrDisplay.isPresenting)
+	this.renderer.vr.enabled = false;
+
+	/*if(this.vrDisplay.isPresenting)
 	{
 		this.vrDisplay.exitPresent();
 		this.vrEnabled = false;
-	}
+	}*/
 };
 
 /**

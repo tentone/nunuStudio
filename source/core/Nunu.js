@@ -99,7 +99,9 @@ Nunu.developmentMode = function()
  */
 Nunu.webVRAvailable = function()
 {
-	return navigator.getVRDisplays !== undefined;
+	// TODO <VR SUPPORT>
+	return true;
+	//return navigator.getVRDisplays !== undefined;
 };
 
 /**
@@ -108,7 +110,7 @@ Nunu.webVRAvailable = function()
  * @method getVRDisplays
  * @param {Function} getDisplay Function used to get the display, receives the display as argument.
  */
-Nunu.getVRDisplays = function(getDisplay)
+/*Nunu.getVRDisplays = function(getDisplay)
 {
 	if(!Nunu.webVRAvailable())
 	{
@@ -127,7 +129,7 @@ Nunu.getVRDisplays = function(getDisplay)
 			console.warn("nunuStudio: WebVR supported but no display is available.");
 		}
 	});
-};
+};*/
 
 /**
  * Get the query parameter from the browser URL.
