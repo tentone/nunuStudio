@@ -157,6 +157,7 @@ include("source/core/objects/lights/RectAreaLight.js");
 include("source/core/objects/cameras/Viewport.js");
 include("source/core/objects/cameras/PerspectiveCamera.js");
 include("source/core/objects/cameras/OrthographicCamera.js");
+include("source/core/objects/cameras/CubeCamera.js");
 
 include("source/core/objects/audio/AudioEmitter.js");
 include("source/core/objects/audio/PositionalAudio.js");
@@ -179,7 +180,6 @@ include("source/core/objects/particle/ParticleEmitter.js");
 
 include("source/core/objects/misc/Sky.js");
 include("source/core/objects/misc/Container.js");
-include("source/core/objects/misc/CubeCamera.js");
 include("source/core/objects/misc/LensFlare.js");
 include("source/core/objects/misc/BrowserView.js");
 
