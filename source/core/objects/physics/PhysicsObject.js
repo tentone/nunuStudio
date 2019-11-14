@@ -71,6 +71,7 @@ PhysicsObject.prototype.initialize = function()
 	var quaternion = this.getWorldQuaternion();
 	this.body.quaternion.copy(quaternion);*/
 	
+	// Copy position and quaternion
 	this.body.position.copy(this.position);
 	this.body.quaternion.copy(this.quaternion);
 

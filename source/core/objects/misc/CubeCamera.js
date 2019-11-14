@@ -179,8 +179,7 @@ CubeCamera.prototype.updateCubeMap = function(renderer, scene)
 	for(var i = 0; i < 6; i++)
 	{
 		this.cameras[i].updateMatrixWorld();
-		this.target.activeCubeFace = i;
-		renderer.setRenderTarget(this.target);
+		renderer.setRenderTarget(this.target, i);
 		renderer.render(scene, this.cameras[i]);
 	}
 

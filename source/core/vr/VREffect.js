@@ -264,7 +264,6 @@ function VREffect(renderer, onError)
 			}
 
 
-
 			if(camera.parent === null)
 			{
 				camera.updateMatrixWorld();
@@ -314,7 +313,13 @@ function VREffect(renderer, onError)
 				renderer.setScissor(renderRectL.x, renderRectL.y, renderRectL.width, renderRectL.height);
 			}
 			
-			renderer.render(scene, cameraL, renderTarget, forceClear);
+			renderer.setRenderTarget(renderTarget);
+			if(forceClear)
+			{
+				renderer.clear(true, true, true);
+			}
+
+			renderer.render(scene, cameraL);
 			
 			//render right eye
 			if(renderTarget)
@@ -328,7 +333,13 @@ function VREffect(renderer, onError)
 				renderer.setScissor(renderRectR.x, renderRectR.y, renderRectR.width, renderRectR.height);
 			}
 			
-			renderer.render(scene, cameraR, renderTarget, forceClear);
+			renderer.setRenderTarget(renderTarget);
+			if(forceClear)
+			{
+				renderer.clear(true, true, true);
+			}
+
+			renderer.render(scene, cameraR);
 			
 			if(renderTarget)
 			{
@@ -357,7 +368,12 @@ function VREffect(renderer, onError)
 		}
 
 		//Regular render mode if not HMD
-		renderer.render(scene, camera, renderTarget, forceClear);
+		renderer.setRenderTarget(renderTarget);
+		if(forceClear)
+		{
+			renderer.clear(true, true, true);
+		}
+		renderer.render(scene, camera);
 	};
 
 	this.dispose = function()

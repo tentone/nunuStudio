@@ -102,7 +102,9 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	renderer.autoClear = false;
 	renderer.setClearColor(0xffffff);
 	renderer.setClearAlpha(1.0);
-	renderer.render(scene, camera, this.renderTargetDepth, true);
+	renderer.setRenderTarget(this.renderTargetDepth);
+	renderer.clear(true, true, true);
+	renderer.render(scene, camera);
 
 	//Update camera uniforms
 	this.uniforms["tColor"].value = readBuffer.texture;

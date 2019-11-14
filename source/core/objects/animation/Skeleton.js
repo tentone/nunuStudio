@@ -81,16 +81,15 @@ Skeleton.prototype = Object.create(THREE._Skeleton.prototype);
 Skeleton.prototype.toJSON = function(meta)
 {
 	var data = {};
-
 	var bones = [];
 	var boneInverses = [];
 
-	for(var i = 0, il = this.bones.length; i < il; i++)
+	for(var i = 0; i < this.bones.length; i++)
 	{
 		bones.push(this.bones[i].uuid);
 	}
 
-	for(var i = 0, il = this.boneInverses.length; i < il; i++)
+	for(var i = 0; i < this.boneInverses.length; i++)
 	{
 		boneInverses.push(this.boneInverses[i].toArray());
 	}
