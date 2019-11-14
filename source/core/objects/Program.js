@@ -261,15 +261,15 @@ Program.prototype.initialize = function()
 		this.setScene(this.children[0]);
 	}
 
-	/*if(this.vr)
+	if(this.vr)
 	{
 		var self = this;
 
-		Nunu.getVRDisplays(function(display)
+		Nunu.getVRDisplay(function(display)
 		{
 			self.vrControls = new VRControls();
 		});
-	}*/
+	}
 
 	this.clock.start();
 };

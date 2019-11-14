@@ -3,7 +3,7 @@
 Editor.initialize = function()
 {
 	//Check WebGL Support
-	if(!Nunu.webglAvailable())
+	if(!Nunu.webGLAvailable())
 	{
 		Editor.alert(Locale.webglNotSupported);
 		Editor.exit();

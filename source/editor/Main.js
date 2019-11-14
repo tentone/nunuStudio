@@ -41,8 +41,6 @@ include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
 
-include("lib/three/vr/WebVR.js");
-
 include("lib/three/objects/Lensflare.js");
 
 include("lib/three/loaders/TTFLoader.js");
@@ -210,6 +208,8 @@ include("source/core/utils/EventManager.js");
 include("source/core/utils/MathUtils.js");
 include("source/core/utils/ObjectUtils.js");
 include("source/core/utils/PhysicsGenerator.js");
+
+include("source/core/vr/VRControls.js");
 
 //Editor
 include("source/editor/Editor.js");

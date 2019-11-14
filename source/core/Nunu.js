@@ -91,26 +91,98 @@ Nunu.developmentMode = function()
 	return Nunu.TIMESTAMP === "<PLACEHOLDER_TIMESTAMP>";
 };
 
+Nunu.vrAvailable = function()
+{
+	return Nunu.webVRAvailable() || Nunu.webXRAvailable();
+};
+
+Nunu.vrDevice = null;
+Nunu.xrSession = null;
+
 /**
- * Check if host supports WebVR and if there is a VR display available.
+ * Enter virtual reality mode using WebXR or WebVR depending on the API available.
+ *
+ * If booth API are available the WebXR API is used.
+ */
+Nunu.enterVR = function(renderer)
+{
+	if(Nunu.webXRAvailable())
+	{
+		Nunu.getXRSession(function(session)
+		{
+			Nunu.xrSession = session;
+			renderer.vr.enabled = true;
+			renderer.vr.setSession(session);
+		});
+	}
+	else if(Nunu.webVRAvailable())
+	{
+		Nunu.getVRDisplay(function(device)
+		{
+			Nunu.vrDevice = device;
+			renderer.vr.enabled = true;
+			renderer.vr.setDevice(device);
+		});
+	}
+	else
+	{
+		console.warn("nunuStudio: VR support is not available.");
+	}
+};
+
+
+/**
+ * Check if host supports WebXR.
+ * 
+ * @method webXRAvailable
+ * @return {boolean} True is WebVR is available.
+ */
+Nunu.webXRAvailable = function()
+{
+	return navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined;
+};
+
+/**
+ * Get WebXR session.
+ *
+ * @method getXRSession
+ * @param {Function} onSession Function used to get the XR session, receives the session as argument.
+ */
+Nunu.getXRSession = function(onSession)
+{
+	if(navigator.xr === undefined)
+	{
+		console.warn("nunuStudio: WebXR support is not available.");
+		return;
+	}
+
+	navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
+	{
+		if(supported)
+		{
+			navigator.xr.requestSession("immersive-vr",{optionalFeatures: ["local-floor", "bounded-floor"]}).then(onSession);
+		}
+	});
+}
+
+/**
+ * Check if host supports WebVR.
  * 
  * @method webVRAvailable
  * @return {boolean} True is WebVR is available.
  */
 Nunu.webVRAvailable = function()
 {
-	// TODO <VR SUPPORT>
-	return true;
-	//return navigator.getVRDisplays !== undefined;
+	return navigator.getVRDisplays !== undefined;
 };
 
 /**
- * Used to get the first VR display available, the display is returned as argument of the getDisplay function.
+ * Used to get the first VR display available, the display is returned as argument of the onDisplay function.
  * 
  * @method getVRDisplays
- * @param {Function} getDisplay Function used to get the display, receives the display as argument.
+ * @param {Function} onDisplay Function used to get the display, receives the display as argument.
  */
-/*Nunu.getVRDisplays = function(getDisplay)
+Nunu.getVRDisplay = function(onDisplay)
 {
 	if(!Nunu.webVRAvailable())
 	{
@@ -118,18 +190,21 @@ Nunu.webVRAvailable = function()
 		return;
 	}
 
-	navigator.getVRDisplays().then(function(displays)
+	if(navigator.getVRDisplays !== undefined)
 	{
-		if(displays.length > 0)
+		navigator.getVRDisplays().then(function(displays)
 		{
-			getDisplay(displays[0]);
-		}
-		else
-		{
-			console.warn("nunuStudio: WebVR supported but no display is available.");
-		}
-	});
-};*/
+			if(displays.length > 0)
+			{
+				onDisplay(displays[0]);
+			}
+			else
+			{
+				console.warn("nunuStudio: WebVR supported but no display is available.");
+			}
+		});
+	}
+};
 
 /**
  * Get the query parameter from the browser URL.
@@ -196,7 +271,7 @@ Nunu.webAudioAvailable = function()
  * @method webglAvailable
  * @return {boolean} True if WebGL is available.
  */
-Nunu.webglAvailable = function()
+Nunu.webGLAvailable = function()
 {
 	try
 	{
