@@ -112,7 +112,7 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton.setImageScale(0.8, 0.8);
 	this.vrButton.updateSize();
 	this.vrButton.updatePosition(Element.BOTTOM_RIGHT);
-	this.vrButton.visible = false;
+	this.vrButton.setVisibility(false);
 	this.vrButton.element.style.backgroundColor = "#333333";
 	this.vrButton.element.style.borderRadius = "5px";
 	this.vrButton.element.style.opacity = 0.5;
@@ -329,26 +329,23 @@ RunProject.prototype.runProgram = function()
 	}
 
 	//If program uses VR set button
-	if(this.program.vr && Nunu.vrAvailable())
+	if(this.program.vrAvailable())
 	{
 		//Show VR button
 		this.vrButton.setVisibility(true);
 
 		//Create VR switch callback
-		var vr = true;
 		var program = this.program;
 		this.vrButton.setOnClick(function()
 		{
-			if(vr)
-			{
-				program.enterVR();
-			}
-			else
+			if(program.vrRunning)
 			{
 				program.exitVR();
 			}
-
-			vr = !vr;
+			else
+			{
+				program.enterVR();
+			}
 		});
 	}
 

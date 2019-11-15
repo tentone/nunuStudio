@@ -182,7 +182,27 @@ Nunu.exitVR = function(renderer)
 	}
 };
 
+/**
+ * WebXR session created.
+ *
+ * @attribute webXRSession
+ * @type {XRSession}
+ */
 Nunu.webXRSession = null;
+
+Nunu.webXRSupported = false;
+
+// Check if there is XR session supported.
+if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
+{
+	navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
+	{
+		if(supported)
+		{
+			Nunu.webXRSupported = supported;
+		}
+	});
+}
 
 /**
  * Check if host supports WebXR.
@@ -192,7 +212,7 @@ Nunu.webXRSession = null;
  */
 Nunu.webXRAvailable = function()
 {
-	return navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined;
+	return Nunu.webXRSupported;
 };
 
 /**
@@ -203,7 +223,7 @@ Nunu.webXRAvailable = function()
  */
 Nunu.getXRSession = function(onSession)
 {
-	if(navigator.xr === undefined)
+	if(!Nunu.webXRAvailable())
 	{
 		console.warn("nunuStudio: WebXR support is not available.");
 		return;
@@ -215,21 +235,33 @@ Nunu.getXRSession = function(onSession)
 	}
 	else
 	{	
-		navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
+		navigator.xr.requestSession("immersive-vr",{optionalFeatures: ["local-floor", "bounded-floor"]}).then(function(session)
 		{
-			if(supported)
-			{
-				navigator.xr.requestSession("immersive-vr",{optionalFeatures: ["local-floor", "bounded-floor"]}).then(function(session)
-				{
-					Nunu.webXRSession = session;
-					onSession(session);	
-				});
-			}
+			Nunu.webXRSession = session;
+			onSession(session);
 		});
 	}
 }
 
+/**
+ * Web VR display obtained.
+ *
+ * @metho
+ */
 Nunu.webVRDisplay = null;
+
+Nunu.webVRHasDisplay = false;
+
+if(navigator.getVRDisplays !== undefined)
+{
+	navigator.getVRDisplays().then(function(displays)
+	{
+		if(displays.length > 0)
+		{
+			Nunu.webVRHasDisplay = true;
+		}
+	});
+}
 
 /**
  * Check if host supports WebVR.
@@ -239,7 +271,7 @@ Nunu.webVRDisplay = null;
  */
 Nunu.webVRAvailable = function()
 {
-	return navigator.getVRDisplays !== undefined;
+	return navigator.getVRDisplays !== undefined && Nunu.webVRHasDisplay;
 };
 
 /**

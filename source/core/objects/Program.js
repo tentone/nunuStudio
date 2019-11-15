@@ -360,9 +360,9 @@ Program.prototype.updateRenderer = function()
 
 
 /**
- * Enter virtual reality mode.
+ * Check if virtual reality is available. 
  * 
- * @method enterVR
+ * @method vrAvailable
  */
 Program.prototype.vrAvailable = function()
 {
@@ -378,7 +378,11 @@ Program.prototype.enterVR = function()
 {
 	if(this.vr)
 	{
-		Nunu.enterVR(this.renderer);
+		var self = this;
+		Nunu.enterVR(this.renderer, function()
+		{
+			self.vrRunning = true;
+		});
 	}
 };
 
@@ -392,6 +396,7 @@ Program.prototype.exitVR = function()
 	if(this.vr)
 	{
 		Nunu.exitVR(this.renderer);
+		this.vrRunning = false;
 	}
 };
 
