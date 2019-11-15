@@ -42979,12 +42979,12 @@ Nunu.exitVR = function(a) {
   });
 };
 Nunu.webXRSession = null;
-Nunu.webXRSupported = !1;
+Nunu.webXRSupported = null;
 void 0 !== navigator.xr && void 0 !== navigator.xr.isSessionSupported && navigator.xr.isSessionSupported("immersive-vr").then(function(a) {
-  a && (Nunu.webXRSupported = a);
+  Nunu.webXRSupported = a;
 });
 Nunu.webXRAvailable = function() {
-  return Nunu.webXRSupported;
+  return void 0 !== navigator.xr && void 0 !== navigator.xr.isSessionSupported && !1 !== Nunu.webXRSupported;
 };
 Nunu.getXRSession = function(a) {
   Nunu.webXRAvailable() ? null !== Nunu.webXRSession ? a(Nunu.webXRSession) : navigator.xr.requestSession("immersive-vr", {optionalFeatures:["local-floor", "bounded-floor"]}).then(function(c) {
@@ -42993,12 +42993,12 @@ Nunu.getXRSession = function(a) {
   }) : console.warn("nunuStudio: WebXR support is not available.");
 };
 Nunu.webVRDisplay = null;
-Nunu.webVRHasDisplay = !1;
+Nunu.webVRHasDisplay = null;
 void 0 !== navigator.getVRDisplays && navigator.getVRDisplays().then(function(a) {
-  0 < a.length && (Nunu.webVRHasDisplay = !0);
+  Nunu.webVRHasDisplay = 0 < a.length;
 });
 Nunu.webVRAvailable = function() {
-  return void 0 !== navigator.getVRDisplays && Nunu.webVRHasDisplay;
+  return void 0 !== navigator.getVRDisplays && !1 !== Nunu.webVRHasDisplay;
 };
 Nunu.getVRDisplay = function(a) {
   Nunu.webVRAvailable() ? null !== Nunu.webVRDisplay ? a(Nunu.webVRDisplay) : navigator.getVRDisplays().then(function(c) {

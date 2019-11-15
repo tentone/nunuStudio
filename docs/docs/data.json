@@ -19396,7 +19396,7 @@
         {
             "file": "..\\source\\core\\Nunu.js",
             "line": 194,
-            "description": "Flag checking if there is support for XR immersive VR mode.\n\nChecked on the library startup if XR is supported.",
+            "description": "Flag checking if there is support for XR immersive VR mode.\n\nChecked on the library startup if XR is supported, while the check does not finish it is set to null.",
             "itemtype": "attribute",
             "name": "webXRSupported",
             "type": "{boolean}",
@@ -19405,7 +19405,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 215,
+            "line": 212,
             "description": "Check if host supports WebXR.",
             "itemtype": "method",
             "name": "webXRAvailable",
@@ -19418,7 +19418,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 226,
+            "line": 223,
             "description": "Get WebXR session.",
             "itemtype": "method",
             "name": "getXRSession",
@@ -19434,7 +19434,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 254,
+            "line": 251,
             "description": "Web VR display obtained.",
             "itemtype": "attribute",
             "name": "webVRDisplay",
@@ -19444,8 +19444,8 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 262,
-            "description": "Flag indicating if there are any VR displays available.\n\nChecked on the library bootup if WebVR is available.",
+            "line": 259,
+            "description": "Flag indicating if there are any VR displays available.\n\nChecked on the library bootup if WebVR is available, while the check does not finish it is set to null.",
             "itemtype": "attribute",
             "name": "webVRHasDisplay",
             "type": "{boolean}",
@@ -19454,7 +19454,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 283,
+            "line": 277,
             "description": "Check if host supports WebVR.",
             "itemtype": "method",
             "name": "webVRAvailable",
@@ -19467,7 +19467,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 294,
+            "line": 288,
             "description": "Used to get the first VR display available, the display is returned as argument of the onDisplay function.",
             "itemtype": "method",
             "name": "getVRDisplays",
@@ -19483,7 +19483,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 329,
+            "line": 323,
             "description": "Get the query parameter from the browser URL.",
             "itemtype": "method",
             "name": "getQueryParameters",
@@ -19496,7 +19496,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 354,
+            "line": 348,
             "description": "Create a web worker from code written in a string.\n\nUses a blob to inject the code and loads it from and URL object.",
             "itemtype": "method",
             "name": "createWorker",
@@ -19521,7 +19521,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 377,
+            "line": 371,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -19534,7 +19534,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 388,
+            "line": 382,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -19547,7 +19547,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 411,
+            "line": 405,
             "description": "Check in wich platform the enviroment is running.\n\nPossible return values are:\n   - Nunu.NWJS\n   - Nunu.BROWSER\n   - Nunu.CORDOVA",
             "itemtype": "method",
             "name": "getPlatform",
@@ -19560,7 +19560,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 436,
+            "line": 430,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
@@ -19573,7 +19573,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 448,
+            "line": 442,
             "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
             "itemtype": "method",
             "name": "openWebpage",
@@ -19582,7 +19582,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 469,
+            "line": 463,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -19595,7 +19595,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 483,
+            "line": 477,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUses isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",
