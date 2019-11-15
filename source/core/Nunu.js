@@ -190,9 +190,16 @@ Nunu.exitVR = function(renderer)
  */
 Nunu.webXRSession = null;
 
+/**
+ * Flag checking if there is support for XR immersive VR mode.
+ *
+ * Checked on the library startup if XR is supported.
+ *
+ * @attribute webXRSupported
+ * @type {boolean}
+ */
 Nunu.webXRSupported = false;
 
-// Check if there is XR session supported.
 if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
 {
 	navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
@@ -246,10 +253,19 @@ Nunu.getXRSession = function(onSession)
 /**
  * Web VR display obtained.
  *
- * @metho
+ * @attribute webVRDisplay
+ * @type {VRDisplay}
  */
 Nunu.webVRDisplay = null;
 
+/**
+ * Flag indicating if there are any VR displays available.
+ *
+ * Checked on the library bootup if WebVR is available.
+ *
+ * @attribute webVRHasDisplay
+ * @type {boolean}
+ */
 Nunu.webVRHasDisplay = false;
 
 if(navigator.getVRDisplays !== undefined)

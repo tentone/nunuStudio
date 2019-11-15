@@ -694,7 +694,7 @@ NunuApp.prototype.toggleVR = function()
 	}
 	else
 	{
-		console.warn("nunuStudio: Loaded program is not VR enabled");
+		console.warn("nunuStudio: Loaded program is not VR enabled.");
 	}
 };
 
