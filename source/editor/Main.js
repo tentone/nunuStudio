@@ -52,7 +52,7 @@ include("lib/pson/PSON.min.js");
 include("lib/three-bmfont.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
-include("lib/spine.js");
+include("lib/spine-threejs.js");
 include("lib/opentype.min.js");
 include("lib/chevrotain.min.js");
 
