@@ -112,7 +112,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "TreeUtils",
         "TypedArrayHelper",
         "UnrealBloomPass",
-        "VRControls",
         "Video",
         "VideoLoader",
         "VideoStream",
@@ -145,8 +144,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Sprite",
         "THREE",
         "Textures",
-        "Utils",
-        "VirtualReality"
+        "Utils"
     ],
     "allModules": [
         {
@@ -268,11 +266,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Utils",
             "name": "Utils",
             "description": "EventManager is used to manager DOM events creationg and destruction in a single function call.\n\nIt is used by objects to make it easier to add and remove events from global DOM objects."
-        },
-        {
-            "displayName": "VirtualReality",
-            "name": "VirtualReality",
-            "description": "VRControl is used to get input from an HDM device and apply it to an Object."
         }
     ],
     "elements": []

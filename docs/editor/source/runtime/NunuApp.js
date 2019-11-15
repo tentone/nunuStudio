@@ -103,9 +103,6 @@ include("source/core/postprocessing/pass/AdaptiveToneMappingPass.js");
 
 include("source/core/postprocessing/shaders/SSAOShader.js");
 
-include("source/core/vr/VRControls.js");
-include("source/core/vr/VREffect.js");
-
 include("source/core/resources/Resource.js");
 include("source/core/resources/Font.js");
 include("source/core/resources/Video.js");
@@ -157,6 +154,7 @@ include("source/core/objects/lights/RectAreaLight.js");
 include("source/core/objects/cameras/Viewport.js");
 include("source/core/objects/cameras/PerspectiveCamera.js");
 include("source/core/objects/cameras/OrthographicCamera.js");
+include("source/core/objects/cameras/CubeCamera.js");
 
 include("source/core/objects/audio/AudioEmitter.js");
 include("source/core/objects/audio/PositionalAudio.js");
@@ -179,7 +177,6 @@ include("source/core/objects/particle/ParticleEmitter.js");
 
 include("source/core/objects/misc/Sky.js");
 include("source/core/objects/misc/Container.js");
-include("source/core/objects/misc/CubeCamera.js");
 include("source/core/objects/misc/LensFlare.js");
 include("source/core/objects/misc/BrowserView.js");
 
@@ -212,7 +209,7 @@ include("source/core/utils/PhysicsGenerator.js");
  * @class NunuApp
  * @module Runtime
  * @constructor
- * @param {DOM} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
+ * @param {Element} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
  */
 function NunuApp(canvas)
 {
@@ -234,7 +231,7 @@ function NunuApp(canvas)
 	 * Runtime control, if true the app is running.
 	 * 
 	 * @property running
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.running = false;
 
@@ -252,7 +249,7 @@ function NunuApp(canvas)
 	/**
 	 * Canvas used to render graphics.
 	 * @property canvas
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.canvas = canvas;
 
@@ -282,8 +279,8 @@ function NunuApp(canvas)
  *
  * @static
  * @method loadApp
- * @param {URL} url URL for the nsp or isp nunuStudio file.
- * @param {String} canvas Canvas object or canvas id.
+ * @param {string} url URL for the nsp or isp nunuStudio file.
+ * @param {string} canvas Canvas object or canvas id.
  */
 NunuApp.loadApp = function(url, canvas)
 {	
@@ -380,7 +377,7 @@ NunuApp.prototype.run = function()
  * Load program asynchronously and run it after its loaded.
  * 
  * @method loadRunProgram
- * @param {String} fname Name of the file to load
+ * @param {string} fname Name of the file to load
  * @param {Function} onLoad onLoad callback
  * @param {Function} onProgress onProgress callback
  */
@@ -401,7 +398,7 @@ NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
  * Load program from file.
  * 
  * @method loadProgram
- * @param {String} fname Name of the file to load
+ * @param {string} fname Name of the file to load
  */
 NunuApp.prototype.loadProgram = function(fname)
 {
@@ -426,7 +423,7 @@ NunuApp.prototype.loadProgram = function(fname)
  * Load program from file, asynchronously.
  * 
  * @method loadProgramAsync
- * @param {String} fname Name of the file to load
+ * @param {string} fname Name of the file to load
  * @param {Function} onLoad onLoad callback. Receives as argument the loaded application.
  * @param {Function} onProgress onProgress callback
  */
@@ -549,18 +546,9 @@ NunuApp.prototype.resume = function()
 			if(self.running)
 			{
 				self.update();
-
-				if(self.program.useVR)
-				{
-					self.program.display.requestAnimationFrame(update);
-				}
-				else
-				{
-					requestAnimationFrame(update);
-				}
+				requestAnimationFrame(update);
 			}
 		};
-
 		this.running = true;
 		update();
 	}
@@ -582,7 +570,7 @@ NunuApp.prototype.pause = function()
  * Should be set before starting the program.
  *
  * @method setCanvas
- * @param {DOM} canvas Canvas
+ * @param {Element} canvas Canvas
  */
 NunuApp.prototype.setCanvas = function(canvas)
 {
@@ -681,7 +669,7 @@ NunuApp.prototype.setOnExit = function(callback)
  */
 NunuApp.prototype.vrAvailable = function()
 {
-	return this.program !== null && this.program.vr && Nunu.webVRAvailable();	
+	return this.program !== null && this.program.vrAvailable();
 };
 
 /**
@@ -693,18 +681,18 @@ NunuApp.prototype.toggleVR = function()
 {
 	if(this.vrAvailable())
 	{
-		if(this.program.useVR)
+		if(this.program.vrRunning)
 		{
 			this.program.exitVR();
 		}
 		else
 		{
-			this.program.displayVR();
+			this.program.enterVR();
 		}
 	}
 	else
 	{
-		console.warn("nunuStudio: loaded program is not VR enabled");
+		console.warn("nunuStudio: Loaded program is not VR enabled.");
 	}
 };
 
@@ -712,7 +700,7 @@ NunuApp.prototype.toggleVR = function()
  * Set a element to fullscreen mode, if none is passed the rendering canvas is used.
  *
  * @method toggleFullscreen
- * @param {DOM} element DOM element to go fullscren by default the rendering canvas is used
+ * @param {Element} element DOM element to go fullscren by default the rendering canvas is used
  */
 NunuApp.prototype.toggleFullscreen = function(element)
 {

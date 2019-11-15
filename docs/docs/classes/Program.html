@@ -148,7 +148,6 @@
 								<li><a href="../classes/VideoStream.html">VideoStream</a></li>
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
 								<li><a href="../classes/Viewport.html">Viewport</a></li>
-								<li><a href="../classes/VRControls.html">VRControls</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
 								<li><a href="../classes/{Object} ParticleGroupOptions.html">{Object} ParticleGroupOptions</a></li>
 							</ul>
@@ -178,7 +177,6 @@
 								<li><a href="../modules/Textures.html">Textures</a></li>
 								<li><a href="../modules/THREE.html">THREE</a></li>
 								<li><a href="../modules/Utils.html">Utils</a></li>
-								<li><a href="../modules/VirtualReality.html">VirtualReality</a></li>
 							</ul>
 						</div>
 					</div>
@@ -253,11 +251,11 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_displayVR">displayVR</a>
+														<a href="#method_dispose">dispose</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_dispose">dispose</a>
+														<a href="#method_enterVR">enterVR</a>
 						
 													</li>
 													<li class="index-item method">
@@ -314,6 +312,10 @@
 													</li>
 													<li class="index-item method">
 														<a href="#method_updateRenderer">updateRenderer</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_vrAvailable">vrAvailable</a>
 						
 													</li>
 											</ul>
@@ -401,6 +403,10 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_vr">vr</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_vrRunning">vrRunning</a>
 						
 													</li>
 													<li class="index-item property">
@@ -508,36 +514,6 @@
 													</div>
 											
 											</div>
-											<div id="method_displayVR" class="method item">
-												<h3 class="name"><code>displayVR</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Enter virtual reality mode.</p>
-											<p>To enter virtual reality mode a WebVR enabled browser is required.</p>
-											<p>When displaying VR content the display.requestAnimationFrame should be used to call the render method.</p>
-											
-												</div>
-											
-											
-											
-											</div>
 											<div id="method_dispose" class="method item">
 												<h3 class="name"><code>dispose</code></h3>
 											
@@ -561,6 +537,34 @@
 												<div class="description">
 													<p>Dispose program data to avoid memory leaks.</p>
 											<p>Called when exiting the program.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="method_enterVR" class="method item">
+												<h3 class="name"><code>enterVR</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Enter virtual reality mode.</p>
 											
 												</div>
 											
@@ -1257,6 +1261,34 @@
 											
 											
 											</div>
+											<div id="method_vrAvailable" class="method item">
+												<h3 class="name"><code>vrAvailable</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if virtual reality is available.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 									</div>
 						
 									<div id="properties" class="api-class-tabpanel">
@@ -1311,7 +1343,7 @@
 											</div>
 											<div id="property_canvas" class="property item">
 												<h3 class="name"><code>canvas</code></h3>
-												<span class="type">DOM</span>
+												<span class="type">Element</span>
 											
 											
 											
@@ -1428,7 +1460,7 @@
 											</div>
 											<div id="property_division" class="property item">
 												<h3 class="name"><code>division</code></h3>
-												<span class="type">DOM</span>
+												<span class="type">Element</span>
 											
 											
 											
@@ -1538,7 +1570,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Event manager used to handle VR display presentation change event.</p>
+													<p>Event manager used to attach in program events.</p>
 											
 												</div>
 											
@@ -1723,11 +1755,35 @@
 												</div>
 											
 												<div class="description">
-													<p>Enable virtual reality flag.</p>
+													<p>Enable virtual reality flag, allows the application to run in VR mode.</p>
+											<p>VR mode can only be enabled if the system and browser have support for VR.</p>
 											
 												</div>
 											
 													<p><strong>Default:</strong> false</p>
+											
+											
+											</div>
+											<div id="property_vrRunning" class="property item">
+												<h3 class="name"><code>vrRunning</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>VR runtime control, true when the app is running in VR mode.</p>
+											
+												</div>
+											
 											
 											
 											</div>

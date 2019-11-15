@@ -111,6 +111,7 @@ Nunu.vrAvailable = function()
  *
  * When displaying VR content the display.requestAnimationFrame should be used to call the render method.
  *
+ * @method enterVR
  * @param {THREE.WebGLRenderer} renderer Renderer used to draw the scene.
  * @param {Function} onSuccess Method called if the application entered VR successfully.
  */

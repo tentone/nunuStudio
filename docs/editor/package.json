@@ -10,6 +10,7 @@
 		"doc": "docs"
 	},
 	"scripts": {
+		"serve": "http-server . -p 8080 --cors -o http://localhost:8080/index.html",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"cordova-requirements": "cd ./temp && cordova requirements",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
@@ -38,6 +39,7 @@
 		"nwjs-builder-phoenix": "~1.15.0"
 	},
 	"devDependencies": {
+		"http-server": "0.11.1",
 		"yuidocjs": "~0.10.2",
 		"google-closure-compiler": "^20190301.0.0"
 	},

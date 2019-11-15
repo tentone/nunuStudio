@@ -180,6 +180,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\cameras\\CubeCamera.js": {
+            "name": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "modules": {},
+            "classes": {
+                "CubeCamera": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\cameras\\OrthographicCamera.js": {
             "name": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
             "modules": {
@@ -337,15 +346,6 @@
             },
             "classes": {
                 "Container": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\source\\core\\objects\\misc\\CubeCamera.js": {
-            "name": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "modules": {},
-            "classes": {
-                "CubeCamera": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1063,17 +1063,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\vr\\VRControls.js": {
-            "name": "..\\source\\core\\vr\\VRControls.js",
-            "modules": {
-                "VirtualReality": 1
-            },
-            "classes": {
-                "VRControls": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\FileSystem.js": {
             "name": "..\\source\\core\\FileSystem.js",
             "modules": {
@@ -1178,6 +1167,22 @@
             "line": 3,
             "description": "AudioEmitter is a Object3D used to play audio inside the scene."
         },
+        "Misc": {
+            "name": "Misc",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Container": 1,
+                "CubeCamera": 1,
+                "LensFlare": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\misc\\LensFlare.js",
+            "line": 3,
+            "description": "Containers are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers."
+        },
         "Cameras": {
             "name": "Cameras",
             "submodules": {},
@@ -1269,22 +1274,6 @@
             "line": 3,
             "description": "Special mesh type used to draw 3D text.\n\nIt receives a Font resource that is used to triangulate and extrude font data into a 3D mesh."
         },
-        "Misc": {
-            "name": "Misc",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "Container": 1,
-                "CubeCamera": 1,
-                "LensFlare": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "..\\source\\core\\objects\\misc\\LensFlare.js",
-            "line": 3,
-            "description": "Containers are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers."
-        },
         "Particles": {
             "name": "Particles",
             "submodules": {},
@@ -1302,7 +1291,9 @@
         },
         "Physics": {
             "name": "Physics",
-            "submodules": {},
+            "submodules": {
+                "undefined": 1
+            },
             "elements": {},
             "classes": {
                 "PhysicsGenerator": 1,
@@ -1509,20 +1500,6 @@
             "line": 3,
             "description": "EventManager is used to manager DOM events creationg and destruction in a single function call.\n\nIt is used by objects to make it easier to add and remove events from global DOM objects."
         },
-        "VirtualReality": {
-            "name": "VirtualReality",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "VRControls": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 3,
-            "description": "VRControl is used to get input from an HDM device and apply it to an Object."
-        },
         "Files": {
             "name": "Files",
             "submodules": {},
@@ -1656,7 +1633,7 @@
                 {
                     "name": "domElement",
                     "description": "DOM element to craete the mouse events.",
-                    "type": "DOM"
+                    "type": "Element"
                 },
                 {
                     "name": "dontInitialize",
@@ -1934,6 +1911,22 @@
                 }
             ],
             "extends": "{AudioEmitter}"
+        },
+        "CubeCamera": {
+            "name": "CubeCamera",
+            "shortname": "CubeCamera",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Misc",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 3,
+            "description": "Reflection probes are used to create CubeTextures dinamically.\n\nThese CubeTextures can be attributed to materials programatically.",
+            "author": "alteredq",
+            "extends": "{Object3D}"
         },
         "OrthographicCamera": {
             "name": "OrthographicCamera",
@@ -2387,22 +2380,6 @@
             "line": 3,
             "description": "Containers are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers.",
             "extends": "{Group}"
-        },
-        "CubeCamera": {
-            "name": "CubeCamera",
-            "shortname": "CubeCamera",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Misc",
-            "namespace": "",
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 3,
-            "description": "Reflection probes are used to create CubeTextures dinamically.\n\nThese CubeTextures can be attributed to materials programatically.",
-            "author": "alteredq",
-            "extends": "{Object3D}"
         },
         "LensFlare": {
             "name": "LensFlare",
@@ -3395,7 +3372,7 @@
                 {
                     "name": "element",
                     "description": "DOM element encapsulated in the object container.",
-                    "type": "DOM"
+                    "type": "Element"
                 }
             ]
         },
@@ -3416,7 +3393,7 @@
                 {
                     "name": "domElement",
                     "description": "DOM division to place rendered objects.",
-                    "type": "DOM"
+                    "type": "Element"
                 }
             ]
         },
@@ -3438,7 +3415,7 @@
                 {
                     "name": "element",
                     "description": "DOM element encapsulated in the object container.",
-                    "type": "DOM"
+                    "type": "Element"
                 }
             ]
         },
@@ -4322,21 +4299,6 @@
             "author": "tentone",
             "static": 1
         },
-        "VRControls": {
-            "name": "VRControls",
-            "shortname": "VRControls",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "VirtualReality",
-            "namespace": "",
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 3,
-            "description": "VRControl is used to get input from an HDM device and apply it to an Object.",
-            "author": "dmarcos (https://github.com/dmarcos)"
-        },
         "FileSystem": {
             "name": "FileSystem",
             "shortname": "FileSystem",
@@ -4636,7 +4598,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 216,
             "description": "Gamepad LEFT button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "LEFT",
             "class": "Gamepad",
@@ -4646,7 +4608,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 223,
             "description": "Gamepad RIGHT button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "RIGHT",
             "class": "Gamepad",
@@ -4656,7 +4618,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 230,
             "description": "Gamepad DOWN button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "DOWN",
             "class": "Gamepad",
@@ -4666,7 +4628,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 237,
             "description": "Gamepad UP button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "UP",
             "class": "Gamepad",
@@ -4676,7 +4638,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 244,
             "description": "Gamepad SELECT button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "SELECT",
             "class": "Gamepad",
@@ -4686,7 +4648,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 251,
             "description": "Gamepad START button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "START",
             "class": "Gamepad",
@@ -4696,7 +4658,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 258,
             "description": "Gamepad HOME button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "HOME",
             "class": "Gamepad",
@@ -4706,7 +4668,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 265,
             "description": "Gamepad LEFT_TRIGGER_A button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "LEFT_TRIGGER_A",
             "class": "Gamepad",
@@ -4716,7 +4678,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 272,
             "description": "Gamepad LEFT_TRIGGER_B button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "LEFT_TRIGGER_B",
             "class": "Gamepad",
@@ -4726,7 +4688,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 279,
             "description": "Gamepad RIGHT_TRIGGER_A button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "RIGHT_TRIGGER_A",
             "class": "Gamepad",
@@ -4736,7 +4698,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 286,
             "description": "Gamepad RIGHT_TRIGGER_B button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "RIGHT_TRIGGER_B",
             "class": "Gamepad",
@@ -4746,7 +4708,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 293,
             "description": "Gamepad L1 button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "L1",
             "class": "Gamepad",
@@ -4756,7 +4718,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 300,
             "description": "Gamepad L2 button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "L2",
             "class": "Gamepad",
@@ -4766,7 +4728,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 307,
             "description": "Gamepad L3 button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "L3",
             "class": "Gamepad",
@@ -4776,7 +4738,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 314,
             "description": "Gamepad R1 button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "R1",
             "class": "Gamepad",
@@ -4786,7 +4748,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 321,
             "description": "Gamepad R2 button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "R2",
             "class": "Gamepad",
@@ -4796,7 +4758,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 328,
             "description": "Gamepad R3 button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "R3",
             "class": "Gamepad",
@@ -4806,7 +4768,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 335,
             "description": "Gamepad A button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "A",
             "class": "Gamepad",
@@ -4816,7 +4778,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 342,
             "description": "Gamepad B button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "B",
             "class": "Gamepad",
@@ -4826,7 +4788,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 349,
             "description": "Gamepad C button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "C",
             "class": "Gamepad",
@@ -4836,7 +4798,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 356,
             "description": "Gamepad D button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "D",
             "class": "Gamepad",
@@ -4846,7 +4808,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 363,
             "description": "Gamepad X button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "X",
             "class": "Gamepad",
@@ -4856,7 +4818,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 370,
             "description": "Gamepad Y button.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "Y",
             "class": "Gamepad",
@@ -4866,7 +4828,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 377,
             "description": "Gamepad LEFT_ANALOGUE_BUT axis.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "LEFT_ANALOGUE_BUT",
             "class": "Gamepad",
@@ -4876,7 +4838,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 384,
             "description": "Gamepad LEFT_ANALOGUE_HOR axis.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "LEFT_ANALOGUE_HOR",
             "class": "Gamepad",
@@ -4886,7 +4848,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 391,
             "description": "Gamepad LEFT_ANALOGUE_VERT axis.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "LEFT_ANALOGUE_VERT",
             "class": "Gamepad",
@@ -4896,7 +4858,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 398,
             "description": "Gamepad RIGHT_ANALOGUE_BUT axis.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "RIGHT_ANALOGUE_BUT",
             "class": "Gamepad",
@@ -4906,7 +4868,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 405,
             "description": "Gamepad RIGHT_ANALOGUE_HOR axis.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "RIGHT_ANALOGUE_HOR",
             "class": "Gamepad",
@@ -4916,7 +4878,7 @@
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 412,
             "description": "Gamepad RIGHT_ANALOGUE_VERT axis.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "attribute",
             "name": "RIGHT_ANALOGUE_VERT",
             "class": "Gamepad",
@@ -4928,7 +4890,7 @@
             "description": "Alpha rotation.",
             "itemtype": "property",
             "name": "alpha",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Gyroscope",
             "module": "Input"
         },
@@ -4938,7 +4900,7 @@
             "description": "Beta rotation.",
             "itemtype": "property",
             "name": "beta",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Gyroscope",
             "module": "Input"
         },
@@ -4948,7 +4910,7 @@
             "description": "Gamma rotation.",
             "itemtype": "property",
             "name": "gamma",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Gyroscope",
             "module": "Input"
         },
@@ -4958,7 +4920,7 @@
             "description": "Device orientation.",
             "itemtype": "property",
             "name": "orientation",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Gyroscope",
             "module": "Input"
         },
@@ -5026,7 +4988,7 @@
             "description": "Down",
             "itemtype": "attribute",
             "name": "DOWN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Key",
             "module": "Input"
         },
@@ -5036,7 +4998,7 @@
             "description": "Up",
             "itemtype": "attribute",
             "name": "UP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Key",
             "module": "Input"
         },
@@ -5046,7 +5008,7 @@
             "description": "Reset",
             "itemtype": "attribute",
             "name": "RESET",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Key",
             "module": "Input"
         },
@@ -5188,7 +5150,7 @@
             "description": "TAB key",
             "itemtype": "attribute",
             "name": "TAB",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5198,7 +5160,7 @@
             "description": "ENTER key",
             "itemtype": "attribute",
             "name": "ENTER",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5208,7 +5170,7 @@
             "description": "SHIFT key",
             "itemtype": "attribute",
             "name": "SHIFT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5218,7 +5180,7 @@
             "description": "CTRL key",
             "itemtype": "attribute",
             "name": "CTRL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5228,7 +5190,7 @@
             "description": "ALT key",
             "itemtype": "attribute",
             "name": "ALT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5238,7 +5200,7 @@
             "description": "CAPS_LOCK key",
             "itemtype": "attribute",
             "name": "CAPS_LOCK",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5248,7 +5210,7 @@
             "description": "ESC key",
             "itemtype": "attribute",
             "name": "ESC",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5258,7 +5220,7 @@
             "description": "SPACEBAR key",
             "itemtype": "attribute",
             "name": "SPACEBAR",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5268,7 +5230,7 @@
             "description": "PAGE_UP key",
             "itemtype": "attribute",
             "name": "PAGE_UP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5278,7 +5240,7 @@
             "description": "PAGE_DOWN key",
             "itemtype": "attribute",
             "name": "PAGE_DOWN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5288,7 +5250,7 @@
             "description": "END key",
             "itemtype": "attribute",
             "name": "END",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5298,7 +5260,7 @@
             "description": "HOME key",
             "itemtype": "attribute",
             "name": "HOME",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5308,7 +5270,7 @@
             "description": "INSERT key",
             "itemtype": "attribute",
             "name": "INSERT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5318,7 +5280,7 @@
             "description": "DEL key",
             "itemtype": "attribute",
             "name": "DEL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5328,7 +5290,7 @@
             "description": "LEFT key",
             "itemtype": "attribute",
             "name": "LEFT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5338,7 +5300,7 @@
             "description": "RIGHT key",
             "itemtype": "attribute",
             "name": "RIGHT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5348,7 +5310,7 @@
             "description": "UP key",
             "itemtype": "attribute",
             "name": "UP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5358,7 +5320,7 @@
             "description": "DOWN key",
             "itemtype": "attribute",
             "name": "DOWN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5368,7 +5330,7 @@
             "description": "NUM0 key",
             "itemtype": "attribute",
             "name": "NUM0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5378,7 +5340,7 @@
             "description": "NUM1 key",
             "itemtype": "attribute",
             "name": "NUM1",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5388,7 +5350,7 @@
             "description": "NUM2 key",
             "itemtype": "attribute",
             "name": "NUM2",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5398,7 +5360,7 @@
             "description": "NUM3 key",
             "itemtype": "attribute",
             "name": "NUM3",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5408,7 +5370,7 @@
             "description": "NUM4 key",
             "itemtype": "attribute",
             "name": "NUM4",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5418,7 +5380,7 @@
             "description": "NUM5 key",
             "itemtype": "attribute",
             "name": "NUM5",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5428,7 +5390,7 @@
             "description": "NUM6 key",
             "itemtype": "attribute",
             "name": "NUM6",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5438,7 +5400,7 @@
             "description": "NUM7 key",
             "itemtype": "attribute",
             "name": "NUM7",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5448,7 +5410,7 @@
             "description": "NUM8 key",
             "itemtype": "attribute",
             "name": "NUM8",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5458,7 +5420,7 @@
             "description": "NUM9 key",
             "itemtype": "attribute",
             "name": "NUM9",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5468,7 +5430,7 @@
             "description": "A key",
             "itemtype": "attribute",
             "name": "A",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5478,7 +5440,7 @@
             "description": "B key",
             "itemtype": "attribute",
             "name": "B",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5488,7 +5450,7 @@
             "description": "C key",
             "itemtype": "attribute",
             "name": "C",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5498,7 +5460,7 @@
             "description": "D key",
             "itemtype": "attribute",
             "name": "D",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5508,7 +5470,7 @@
             "description": "E key",
             "itemtype": "attribute",
             "name": "E",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5518,7 +5480,7 @@
             "description": "F key",
             "itemtype": "attribute",
             "name": "F",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5528,7 +5490,7 @@
             "description": "G key",
             "itemtype": "attribute",
             "name": "G",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5538,7 +5500,7 @@
             "description": "H key",
             "itemtype": "attribute",
             "name": "H",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5548,7 +5510,7 @@
             "description": "I key",
             "itemtype": "attribute",
             "name": "I",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5558,7 +5520,7 @@
             "description": "J key",
             "itemtype": "attribute",
             "name": "J",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5568,7 +5530,7 @@
             "description": "K key",
             "itemtype": "attribute",
             "name": "K",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5578,7 +5540,7 @@
             "description": "L key",
             "itemtype": "attribute",
             "name": "L",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5588,7 +5550,7 @@
             "description": "M key",
             "itemtype": "attribute",
             "name": "M",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5598,7 +5560,7 @@
             "description": "N key",
             "itemtype": "attribute",
             "name": "N",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5608,7 +5570,7 @@
             "description": "O key",
             "itemtype": "attribute",
             "name": "O",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5618,7 +5580,7 @@
             "description": "P key",
             "itemtype": "attribute",
             "name": "P",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5628,7 +5590,7 @@
             "description": "Q key",
             "itemtype": "attribute",
             "name": "Q",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5638,7 +5600,7 @@
             "description": "R key",
             "itemtype": "attribute",
             "name": "R",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5648,7 +5610,7 @@
             "description": "S key",
             "itemtype": "attribute",
             "name": "S",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5658,7 +5620,7 @@
             "description": "T key",
             "itemtype": "attribute",
             "name": "T",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5668,7 +5630,7 @@
             "description": "U key",
             "itemtype": "attribute",
             "name": "U",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5678,7 +5640,7 @@
             "description": "V key",
             "itemtype": "attribute",
             "name": "V",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5688,7 +5650,7 @@
             "description": "W key",
             "itemtype": "attribute",
             "name": "W",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5698,7 +5660,7 @@
             "description": "X key",
             "itemtype": "attribute",
             "name": "X",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5708,7 +5670,7 @@
             "description": "Y key",
             "itemtype": "attribute",
             "name": "Y",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5718,7 +5680,7 @@
             "description": "Z key",
             "itemtype": "attribute",
             "name": "Z",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5728,7 +5690,7 @@
             "description": "F1 key",
             "itemtype": "attribute",
             "name": "F1",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5738,7 +5700,7 @@
             "description": "F2 key",
             "itemtype": "attribute",
             "name": "F2",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5748,7 +5710,7 @@
             "description": "F3 key",
             "itemtype": "attribute",
             "name": "F3",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5758,7 +5720,7 @@
             "description": "F4 key",
             "itemtype": "attribute",
             "name": "F4",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5768,7 +5730,7 @@
             "description": "F5 key",
             "itemtype": "attribute",
             "name": "F5",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5778,7 +5740,7 @@
             "description": "F6 key",
             "itemtype": "attribute",
             "name": "F6",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5788,7 +5750,7 @@
             "description": "F7 key",
             "itemtype": "attribute",
             "name": "F7",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5798,7 +5760,7 @@
             "description": "F8 key",
             "itemtype": "attribute",
             "name": "F8",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5808,7 +5770,7 @@
             "description": "F9 key",
             "itemtype": "attribute",
             "name": "F9",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5818,7 +5780,7 @@
             "description": "F10 key",
             "itemtype": "attribute",
             "name": "F10",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5828,7 +5790,7 @@
             "description": "F11 key",
             "itemtype": "attribute",
             "name": "F11",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5838,7 +5800,7 @@
             "description": "F12 key",
             "itemtype": "attribute",
             "name": "F12",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Keyboard",
             "module": "Input"
         },
@@ -5876,7 +5838,7 @@
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 48,
             "description": "Mouse scroll wheel movement.",
-            "type": "{Number}",
+            "type": "{number}",
             "itemtype": "property",
             "name": "wheel",
             "class": "Mouse",
@@ -5898,7 +5860,7 @@
             "description": "DOM element where to attach the mouse events.",
             "itemtype": "property",
             "name": "domElement",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "Mouse",
             "module": "Input"
         },
@@ -5906,7 +5868,7 @@
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 72,
             "description": "Canvas attached to this mouse instance used to calculate position and delta in element space coordinates.",
-            "type": "{DOM}",
+            "type": "{Element}",
             "itemtype": "property",
             "name": "canvas",
             "class": "Mouse",
@@ -5928,7 +5890,7 @@
             "description": "Left mouse button.",
             "itemtype": "attribute",
             "name": "LEFT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Mouse",
             "module": "Input"
         },
@@ -5938,7 +5900,7 @@
             "description": "Middle mouse button.",
             "itemtype": "attribute",
             "name": "MIDDLE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Mouse",
             "module": "Input"
         },
@@ -5948,7 +5910,7 @@
             "description": "Right mouse button.",
             "itemtype": "attribute",
             "name": "RIGHT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Mouse",
             "module": "Input"
         },
@@ -5958,7 +5920,7 @@
             "description": "Back mouse navigation button.",
             "itemtype": "attribute",
             "name": "BACK",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Mouse",
             "module": "Input"
         },
@@ -5968,7 +5930,7 @@
             "description": "Forward mouse navigation button.",
             "itemtype": "attribute",
             "name": "FORWARD",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Mouse",
             "module": "Input"
         },
@@ -5982,7 +5944,7 @@
                 {
                     "name": "canvas",
                     "description": "Canvas to be attached to the Mouse instance",
-                    "type": "DOM"
+                    "type": "Element"
                 }
             ],
             "class": "Mouse",
@@ -6182,7 +6144,7 @@
             "description": "Left key.",
             "itemtype": "attribute",
             "name": "ARROW_LEFT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6192,7 +6154,7 @@
             "description": "Up key.",
             "itemtype": "attribute",
             "name": "ARROW_UP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6202,7 +6164,7 @@
             "description": "Right key.",
             "itemtype": "attribute",
             "name": "ARROW_RIGHT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6212,7 +6174,7 @@
             "description": "Down key.",
             "itemtype": "attribute",
             "name": "ARROW_DOWN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6222,7 +6184,7 @@
             "description": "Tizen specific enter key.",
             "itemtype": "attribute",
             "name": "ENTER",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6232,7 +6194,7 @@
             "description": "Tizen specific back key.",
             "itemtype": "attribute",
             "name": "BACK",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6242,7 +6204,7 @@
             "description": "Volume up key.",
             "itemtype": "attribute",
             "name": "VOLUME_UP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6252,7 +6214,7 @@
             "description": "Volume down key.",
             "itemtype": "attribute",
             "name": "VOLUME_DOWN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6262,7 +6224,7 @@
             "description": "Volume mute key.",
             "itemtype": "attribute",
             "name": "VOLUME_MUTE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6272,7 +6234,7 @@
             "description": "Channel up key.",
             "itemtype": "attribute",
             "name": "CHANNEL_UP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6282,7 +6244,7 @@
             "description": "Channel down key.",
             "itemtype": "attribute",
             "name": "CHANNEL_DOWN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6292,7 +6254,7 @@
             "description": "Red/F0 key.",
             "itemtype": "attribute",
             "name": "F0_RED",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6302,7 +6264,7 @@
             "description": "Green/F1 key.",
             "itemtype": "attribute",
             "name": "F1_GREEN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6312,7 +6274,7 @@
             "description": "Yellow/F2 key.",
             "itemtype": "attribute",
             "name": "F2_YELLOW",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6322,7 +6284,7 @@
             "description": "Blue/F3 key.",
             "itemtype": "attribute",
             "name": "F3_BLUE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6332,7 +6294,7 @@
             "description": "Number 0 key.",
             "itemtype": "attribute",
             "name": "NUM_0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6342,7 +6304,7 @@
             "description": "Number 1 key.",
             "itemtype": "attribute",
             "name": "NUM_1",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6352,7 +6314,7 @@
             "description": "Number 2 key.",
             "itemtype": "attribute",
             "name": "NUM_2",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6362,7 +6324,7 @@
             "description": "Number 3 key.",
             "itemtype": "attribute",
             "name": "NUM_3",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6372,7 +6334,7 @@
             "description": "Number 4 key.",
             "itemtype": "attribute",
             "name": "NUM_4",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6382,7 +6344,7 @@
             "description": "Number 5 key.",
             "itemtype": "attribute",
             "name": "NUM_5",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6392,7 +6354,7 @@
             "description": "Number 6 key.",
             "itemtype": "attribute",
             "name": "NUM_6",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6402,7 +6364,7 @@
             "description": "Number 7 key.",
             "itemtype": "attribute",
             "name": "NUM_7",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6412,7 +6374,7 @@
             "description": "Number 8 key.",
             "itemtype": "attribute",
             "name": "NUM_8",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6422,7 +6384,7 @@
             "description": "Number 9 key.",
             "itemtype": "attribute",
             "name": "NUM_9",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6432,7 +6394,7 @@
             "description": "Minus key.",
             "itemtype": "attribute",
             "name": "MINUS",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6442,7 +6404,7 @@
             "description": "E-manual key.",
             "itemtype": "attribute",
             "name": "E_MANUAL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6452,7 +6414,7 @@
             "description": "Previous channel key.",
             "itemtype": "attribute",
             "name": "PREVIOUS_CHANNEL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6462,7 +6424,7 @@
             "description": "Picture size key.",
             "itemtype": "attribute",
             "name": "PICTURE_SIZE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6472,7 +6434,7 @@
             "description": "Soccer key.",
             "itemtype": "attribute",
             "name": "SOCCER",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6482,7 +6444,7 @@
             "description": "Teletext key.",
             "itemtype": "attribute",
             "name": "TELETEXT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6492,7 +6454,7 @@
             "description": "Search key.",
             "itemtype": "attribute",
             "name": "SEARCH",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6502,7 +6464,7 @@
             "description": "Guide key.",
             "itemtype": "attribute",
             "name": "GUIDE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6512,7 +6474,7 @@
             "description": "Source selection key.",
             "itemtype": "attribute",
             "name": "SOURCE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6522,7 +6484,7 @@
             "description": "Extra key.",
             "itemtype": "attribute",
             "name": "EXTRA",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6532,7 +6494,7 @@
             "description": "MTS key.",
             "itemtype": "attribute",
             "name": "MTS",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6542,7 +6504,7 @@
             "description": "Tizen specific media play and pause key.",
             "itemtype": "attribute",
             "name": "MEDIA_PLAY_PAUSE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6552,7 +6514,7 @@
             "description": "Tizen specific menu key.",
             "itemtype": "attribute",
             "name": "MENU",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6562,7 +6524,7 @@
             "description": "Tizen specific media rewind key.",
             "itemtype": "attribute",
             "name": "MEDIA_REWIND",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6572,7 +6534,7 @@
             "description": "Tizen specific media rewind key.",
             "itemtype": "attribute",
             "name": "MEDIA_REWIND",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6582,7 +6544,7 @@
             "description": "Tizen specific media fast forward key.",
             "itemtype": "attribute",
             "name": "MEDIA_FAST_FORWARD",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6592,7 +6554,7 @@
             "description": "Tizen specific info key.",
             "itemtype": "attribute",
             "name": "INFO",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6602,7 +6564,7 @@
             "description": "Tizen specific media play key.",
             "itemtype": "attribute",
             "name": "MEDIA_PLAY",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6612,7 +6574,7 @@
             "description": "Tizen specific exit key.",
             "itemtype": "attribute",
             "name": "EXIT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6622,7 +6584,7 @@
             "description": "Tizen specific media pause key.",
             "itemtype": "attribute",
             "name": "MEDIA_PAUSE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6632,7 +6594,7 @@
             "description": "Tizen specific media stop key.",
             "itemtype": "attribute",
             "name": "MEDIA_STOP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6642,7 +6604,7 @@
             "description": "Tizen specific caption key.",
             "itemtype": "attribute",
             "name": "CAPTION",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6652,7 +6614,7 @@
             "description": "Tizen specific media record key.",
             "itemtype": "attribute",
             "name": "MEDIA_RECORD",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6662,7 +6624,7 @@
             "description": "Tizen specific channel list key.",
             "itemtype": "attribute",
             "name": "CHANNEL_LIST",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6672,7 +6634,7 @@
             "description": "Tizen specific media track previous key.",
             "itemtype": "attribute",
             "name": "MEDIA_TRACK_PREVIOUS",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6682,7 +6644,7 @@
             "description": "Tizen specific media next track key.",
             "itemtype": "attribute",
             "name": "MEDIA_TRACK_NEXT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -6692,7 +6654,7 @@
             "description": "Tizen specific 3D key.",
             "itemtype": "attribute",
             "name": "MEDIA_3D",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TizenKeyboard",
             "module": "Input"
         },
@@ -7711,7 +7673,7 @@
             "description": "Audio source type, can have the following values:\n - empty\n - buffer\n - audioNode",
             "itemtype": "property",
             "name": "sourceType",
-            "type": "{String}",
+            "type": "{string}",
             "default": "{\"empty\"}",
             "class": "AudioEmitter",
             "module": "Audio"
@@ -7744,7 +7706,7 @@
             "itemtype": "property",
             "name": "volume",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "AudioEmitter",
             "module": "Audio"
         },
@@ -7755,7 +7717,7 @@
             "itemtype": "property",
             "name": "playbackRate",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "AudioEmitter",
             "module": "Audio"
         },
@@ -7766,7 +7728,7 @@
             "itemtype": "property",
             "name": "startTime",
             "default": "0.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "AudioEmitter",
             "module": "Audio"
         },
@@ -7787,7 +7749,7 @@
             "description": "Modify pitch, measured in cents. +/- 100 is a semitone. +/- 1200 is an octave.",
             "itemtype": "property",
             "name": "detune",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "AudioEmitter",
             "module": "Audio"
         },
@@ -8151,7 +8113,7 @@
             "description": "Distance model to be applied to the audio panner.",
             "itemtype": "property",
             "name": "distanceModel",
-            "type": "{String}",
+            "type": "{string}",
             "class": "PositionalAudio",
             "module": "Audio"
         },
@@ -8161,7 +8123,7 @@
             "description": "Model to be applied to the audio panner.",
             "itemtype": "property",
             "name": "panningModel",
-            "type": "{String}",
+            "type": "{string}",
             "class": "PositionalAudio",
             "module": "Audio"
         },
@@ -8332,13 +8294,147 @@
             "module": "Audio"
         },
         {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 20,
+            "description": "CubeCamera near plane.",
+            "itemtype": "property",
+            "name": "near",
+            "type": "{number}",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 27,
+            "description": "CubeCamera far plane.",
+            "itemtype": "property",
+            "name": "far",
+            "type": "{number}",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 34,
+            "description": "Resolution of each face. Should be a power of 2 (32, 64, 128, ...).",
+            "itemtype": "property",
+            "name": "resolution",
+            "type": "{number}",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 41,
+            "description": "Auto update indicates if the cube camera is updated automatically each frame.",
+            "itemtype": "property",
+            "name": "autoUpdate",
+            "type": "{boolean}",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 49,
+            "description": "Array of 6 cameras used to render each face of the cube.",
+            "itemtype": "property",
+            "name": "cameras",
+            "type": "{Array}",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 75,
+            "description": "WebGL cube render target to where the scene is rendered.",
+            "itemtype": "property",
+            "name": "target",
+            "type": "{WebGLRenderTargetCube}",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 87,
+            "description": "CubeTexture generated by this CubeCamera.\n\nCan be attached to materials as envMap.",
+            "itemtype": "property",
+            "name": "cube",
+            "type": "{CubeTexture}",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 108,
+            "description": "Initialize CubeCamera object.\n\nGets the attached scene and the renderer in use.",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 135,
+            "description": "Update CubeCamera object.\n\nIf autoUpdate is set to true the CubeCamera updates the CubeTexture automatically.",
+            "itemtype": "method",
+            "name": "update",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 153,
+            "description": "Set the CubeCamera resolution.",
+            "itemtype": "method",
+            "name": "setResolution",
+            "params": [
+                {
+                    "name": "resolution",
+                    "description": "CubeCamera resolution (per face). Should be a 2 pot.",
+                    "type": "Number"
+                }
+            ],
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 165,
+            "description": "Clear cube camera render target.",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\CubeCamera.js",
+            "line": 183,
+            "description": "Render new cube faces. \n\nShould be called every time a change in the scene is made.",
+            "itemtype": "method",
+            "name": "updateCubeMap",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "Renderer to be used.",
+                    "type": "WebGLRenderer"
+                },
+                {
+                    "name": "scene",
+                    "description": "Scene to be renderer.",
+                    "type": "Scene"
+                }
+            ],
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
             "line": 23,
             "description": "Camera size relative to resize mode.",
             "itemtype": "property",
             "name": "size",
             "default": "10.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrthographicCamera",
             "module": "Cameras"
         },
@@ -8349,7 +8445,7 @@
             "itemtype": "property",
             "name": "aspect",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrthographicCamera",
             "module": "Cameras"
         },
@@ -8360,7 +8456,7 @@
             "itemtype": "property",
             "name": "mode",
             "default": "RESIZE_HORIZONTAL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrthographicCamera",
             "module": "Cameras"
         },
@@ -8414,7 +8510,7 @@
             "itemtype": "property",
             "name": "order",
             "default": "0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrthographicCamera",
             "module": "Cameras"
         },
@@ -8434,7 +8530,7 @@
             "description": "Used to set camera to resize horizontally",
             "itemtype": "attribute",
             "name": "RESIZE_HORIZONTAL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrthographicCamera",
             "module": "Cameras"
         },
@@ -8444,7 +8540,7 @@
             "description": "Used to set camera to resize vertically.",
             "itemtype": "attribute",
             "name": "RESIZE_VERTICAL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrthographicCamera",
             "module": "Cameras"
         },
@@ -8536,7 +8632,7 @@
             "itemtype": "property",
             "name": "fov",
             "default": "50",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "PerspectiveCamera",
             "module": "Cameras"
         },
@@ -8547,7 +8643,7 @@
             "itemtype": "property",
             "name": "aspect",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "PerspectiveCamera",
             "module": "Cameras"
         },
@@ -8558,7 +8654,7 @@
             "itemtype": "property",
             "name": "zoom",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "PerspectiveCamera",
             "module": "Cameras"
         },
@@ -8612,7 +8708,7 @@
             "itemtype": "property",
             "name": "order",
             "default": "0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "PerspectiveCamera",
             "module": "Cameras"
         },
@@ -8733,7 +8829,7 @@
             "description": "Viewport sizing mode.\n\nCan be RELATIVE or ABSOLUTE.",
             "itemtype": "property",
             "name": "mode",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Viewport",
             "module": "Cameras"
         },
@@ -8743,7 +8839,7 @@
             "description": "Positioning anchor of the viewport.",
             "itemtype": "property",
             "name": "anchor",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Viewport",
             "module": "Cameras"
         },
@@ -8753,7 +8849,7 @@
             "description": "Width of the final output canvas.\n\nThis width should match the canvas size / rendering resolution.",
             "itemtype": "property",
             "name": "width",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Viewport",
             "module": "Cameras"
         },
@@ -8763,7 +8859,7 @@
             "description": "Height of the final output canvas.\n\nThis height should match the canvas size / rendering resolution.",
             "itemtype": "property",
             "name": "height",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Viewport",
             "module": "Cameras"
         },
@@ -8836,7 +8932,7 @@
                 {
                     "name": "canvas",
                     "description": "Canvas for offset calculation.",
-                    "type": "DOM"
+                    "type": "Element"
                 },
                 {
                     "name": "mouse",
@@ -8857,7 +8953,7 @@
                 {
                     "name": "canvas",
                     "description": "Canvas for offset calculation.",
-                    "type": "DOM"
+                    "type": "Element"
                 },
                 {
                     "name": "mouse",
@@ -8923,7 +9019,7 @@
             "description": "Mouse sensitivity.",
             "itemtype": "property",
             "name": "sensitivity",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "FirstPersonControls",
             "module": "Controls"
         },
@@ -8934,7 +9030,7 @@
             "itemtype": "property",
             "name": "needsButtonPressed",
             "default": "true",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "FirstPersonControls",
             "module": "Controls"
         },
@@ -8945,7 +9041,7 @@
             "itemtype": "property",
             "name": "movementEnabled",
             "default": "true",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "FirstPersonControls",
             "module": "Controls"
         },
@@ -8956,7 +9052,7 @@
             "itemtype": "property",
             "name": "moveSpeed",
             "default": "moveSpeed",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "FirstPersonControls",
             "module": "Controls"
         },
@@ -8967,7 +9063,7 @@
             "itemtype": "property",
             "name": "moveOnPlane",
             "default": "false",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "FirstPersonControls",
             "module": "Controls"
         },
@@ -9020,7 +9116,7 @@
             "itemtype": "property",
             "name": "distance",
             "default": "3",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9030,7 +9126,7 @@
             "description": "Maximum Distance allowed.",
             "itemtype": "property",
             "name": "maxDistance",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9040,7 +9136,7 @@
             "description": "Minimum distance allowed.",
             "itemtype": "property",
             "name": "minDistance",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9050,7 +9146,7 @@
             "description": "Mouse sensitivity.",
             "itemtype": "property",
             "name": "sensitivity",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9060,7 +9156,7 @@
             "description": "Mouse scroll sensitivity.",
             "itemtype": "property",
             "name": "zoomSensitivity",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9071,7 +9167,7 @@
             "itemtype": "property",
             "name": "limitUp",
             "default": "1.57",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9082,7 +9178,7 @@
             "itemtype": "property",
             "name": "limitDown",
             "default": "-1.57",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9093,7 +9189,7 @@
             "itemtype": "property",
             "name": "needsButtonPressed",
             "default": "true",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9104,7 +9200,7 @@
             "itemtype": "property",
             "name": "zoomEnabled",
             "default": "true",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9115,7 +9211,7 @@
             "itemtype": "property",
             "name": "movementEnabled",
             "default": "true",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9145,7 +9241,7 @@
             "description": "Enables smooth orbit movement.",
             "itemtype": "property",
             "name": "smooth",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9155,7 +9251,7 @@
             "description": "Orbit speed friction, higher value allow the orbit to retain more speed.\n\nOnly used when smooth is set true.",
             "itemtype": "property",
             "name": "friction",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9165,7 +9261,7 @@
             "description": "Obit movement speed.\n\nOnly used when smooth is set true.",
             "itemtype": "property",
             "name": "friction",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9175,7 +9271,7 @@
             "description": "If set true the Y orientation movement is inverted.",
             "itemtype": "property",
             "name": "invertNavigation",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "OrbitControls",
             "module": "Controls"
         },
@@ -9226,7 +9322,7 @@
             "description": "Time until data is considered too obsolete to be usable.",
             "itemtype": "property",
             "name": "dataTimeout",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "KinectDevice",
             "module": "Devices"
         },
@@ -9256,7 +9352,7 @@
             "description": "Kinect default data timeout in seconds.",
             "itemtype": "attribute",
             "name": "DATA_TIMEOUT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "KinectDevice",
             "module": "Devices"
         },
@@ -9266,7 +9362,7 @@
             "description": "Kinect camera depth mode.",
             "itemtype": "attribute",
             "name": "DEPTH",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "KinectDevice",
             "module": "Devices"
         },
@@ -9276,7 +9372,7 @@
             "description": "Kinect camera color mode.",
             "itemtype": "attribute",
             "name": "COLOR",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "KinectDevice",
             "module": "Devices"
         },
@@ -9368,7 +9464,7 @@
             "itemtype": "property",
             "name": "mode",
             "default": "DESK",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9389,7 +9485,7 @@
             "description": "Leap tracking desktop mode",
             "itemtype": "attribute",
             "name": "DESK",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9399,7 +9495,7 @@
             "description": "Leap tracking HDM mode",
             "itemtype": "attribute",
             "name": "DESK",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9409,7 +9505,7 @@
             "description": "Leap SWIPE gesture",
             "itemtype": "attribute",
             "name": "SWIPE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9419,7 +9515,7 @@
             "description": "Leap SWIPE_LEFT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_LEFT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9429,7 +9525,7 @@
             "description": "Leap SWIPE_RIGHT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_RIGHT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9439,7 +9535,7 @@
             "description": "Leap SWIPE_FRONT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_FRONT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9449,7 +9545,7 @@
             "description": "Leap SWIPE_BACK gesture",
             "itemtype": "attribute",
             "name": "SWIPE_BACK",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9459,7 +9555,7 @@
             "description": "Leap SWIPE_UP gesture",
             "itemtype": "attribute",
             "name": "SWIPE_UP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9469,7 +9565,7 @@
             "description": "Leap SWIPE_DOWN gesture",
             "itemtype": "attribute",
             "name": "SWIPE_DOWN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9479,7 +9575,7 @@
             "description": "Leap CIRCLE gesture",
             "itemtype": "attribute",
             "name": "CIRCLE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9489,7 +9585,7 @@
             "description": "Leap SCREEN_TAP gesture",
             "itemtype": "attribute",
             "name": "SCREEN_TAP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9499,7 +9595,7 @@
             "description": "Leap KEY_TAP gesture",
             "itemtype": "attribute",
             "name": "KEY_TAP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9509,7 +9605,7 @@
             "description": "Hand CLOSED pose",
             "itemtype": "attribute",
             "name": "CLOSED",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9519,7 +9615,7 @@
             "description": "Hand OPEN pose",
             "itemtype": "attribute",
             "name": "OPEN",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9529,7 +9625,7 @@
             "description": "Hand POINTING pose",
             "itemtype": "attribute",
             "name": "POINTING",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "LeapMotion",
             "module": "Devices"
         },
@@ -9805,7 +9901,7 @@
             "description": "URL of the webpage to open in the view.",
             "itemtype": "attribute",
             "name": "url",
-            "type": "{String}",
+            "type": "{string}",
             "class": "BrowserView",
             "module": "Meshes"
         },
@@ -9815,7 +9911,7 @@
             "description": "Width in pixels of the web view port.",
             "itemtype": "attribute",
             "name": "size",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "BrowserView",
             "module": "Meshes"
         },
@@ -9825,7 +9921,7 @@
             "description": "Height in pixels of the web view port.",
             "itemtype": "attribute",
             "name": "height",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "BrowserView",
             "module": "Meshes"
         },
@@ -9844,131 +9940,6 @@
             ],
             "class": "BrowserView",
             "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 20,
-            "description": "CubeCamera near plane.",
-            "itemtype": "property",
-            "name": "near",
-            "type": "{Number}",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 27,
-            "description": "CubeCamera far plane.",
-            "itemtype": "property",
-            "name": "far",
-            "type": "{Number}",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 34,
-            "description": "Resolution of each face. Should be a power of 2 (32, 64, 128, ...).",
-            "itemtype": "property",
-            "name": "resolution",
-            "type": "{Number}",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 41,
-            "description": "Auto update indicates if the cube camera is updated automatically each frame.",
-            "itemtype": "property",
-            "name": "autoUpdate",
-            "type": "{Boolean}",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 49,
-            "description": "Array of 6 cameras used to render each face of the cube.",
-            "itemtype": "property",
-            "name": "cameras",
-            "type": "{Array}",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 75,
-            "description": "WebGL cube render target to where the scene is rendered.",
-            "itemtype": "property",
-            "name": "target",
-            "type": "{WebGLRenderTargetCube}",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 87,
-            "description": "CubeTexture generated by this CubeCamera.\n\nCan be attached to materials as envMap.",
-            "itemtype": "property",
-            "name": "cube",
-            "type": "{CubeTexture}",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 108,
-            "description": "Initialize CubeCamera object.\n\nGets the attached scene and the renderer in use.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 135,
-            "description": "Update CubeCamera object.\n\nIf autoUpdate is set to true the CubeCamera updates the CubeTexture automatically.",
-            "itemtype": "method",
-            "name": "update",
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 153,
-            "description": "Set the CubeCamera resolution.",
-            "itemtype": "method",
-            "name": "setResolution",
-            "params": [
-                {
-                    "name": "resolution",
-                    "description": "CubeCamera resolution (per face). Should be a 2 pot.",
-                    "type": "Number"
-                }
-            ],
-            "class": "CubeCamera",
-            "module": "Misc"
-        },
-        {
-            "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 165,
-            "description": "Render new cube faces. \n\nShould be called every time a change in the scene is made.",
-            "itemtype": "method",
-            "name": "updateCubeMap",
-            "params": [
-                {
-                    "name": "renderer",
-                    "description": "Renderer to be used.",
-                    "type": "WebGLRenderer"
-                },
-                {
-                    "name": "scene",
-                    "description": "Scene to be renderer.",
-                    "type": "Scene"
-                }
-            ],
-            "class": "CubeCamera",
-            "module": "Misc"
         },
         {
             "file": "..\\source\\core\\objects\\misc\\LensFlare.js",
@@ -10027,7 +9998,7 @@
             "description": "Sun color in hex RGB.",
             "itemtype": "property",
             "name": "sunColor",
-            "type": "{Number}",
+            "type": "{number}",
             "default": "0xFFFFAA",
             "class": "Sky",
             "module": "Lights"
@@ -10038,7 +10009,7 @@
             "description": "Sun color intensity.",
             "itemtype": "property",
             "name": "intensity",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Sky",
             "module": "Lights"
         },
@@ -10048,7 +10019,7 @@
             "description": "Moon color in hex RGB.",
             "itemtype": "property",
             "name": "moonColor",
-            "type": "{Number}",
+            "type": "{number}",
             "default": "0x5555BB",
             "class": "Sky",
             "module": "Lights"
@@ -10100,7 +10071,7 @@
             "description": "Sun distance.",
             "itemtype": "property",
             "name": "sunDistance",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Sky",
             "module": "Lights"
         },
@@ -10110,7 +10081,7 @@
             "description": "Day time in seconds.",
             "itemtype": "property",
             "name": "dayTime",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Sky",
             "module": "Lights"
         },
@@ -10120,7 +10091,7 @@
             "description": "Current day time in seconds.",
             "itemtype": "property",
             "name": "time",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Sky",
             "module": "Lights"
         },
@@ -11675,7 +11646,7 @@
             "description": "A dynamic particle emmiter ignores the position in its transform and applies it directly to the emitter origin.",
             "itemtype": "property",
             "name": "dinamicEmitter",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "ParticleEmitter",
             "module": "Particles"
         },
@@ -11695,7 +11666,7 @@
             "description": "Values will be distributed within a box.",
             "itemtype": "attribute",
             "name": "BOX",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "ParticleDistributions",
             "module": "Particles"
         },
@@ -11705,7 +11676,7 @@
             "description": "Values will be distributed on a sphere.",
             "itemtype": "attribute",
             "name": "SPHERE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "ParticleDistributions",
             "module": "Particles"
         },
@@ -11715,7 +11686,7 @@
             "description": "Values will be distributed on a 2d-disc shape.",
             "itemtype": "attribute",
             "name": "DISC",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "ParticleDistributions",
             "module": "Particles"
         },
@@ -11725,7 +11696,7 @@
             "description": "Set this value to however many \"steps\" you want value-over-lifetime properties to have.\n\nIts adjustable to fix an interpolation problem:\n\nAssuming you specify an opacity value as [0, 1, 0] and the valueOverLifetimeLength is 4, then the opacity value array will be reinterpolated to be [0, 0.66, 0.66, 0].\nThis isn't ideal, as particles would never reach full opacity.\n\nThis property affects the length of ALL value-over-lifetime properties for ALL  emitters and ALL groups. Only values >= 3 && <= 4 are allowed.",
             "itemtype": "attribute",
             "name": "valueOverLifetimeLength",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "ParticleDistributions",
             "module": "Particles"
         },
@@ -11836,7 +11807,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 92,
+            "line": 93,
             "description": "Update object position and rotation based on cannon.js body.",
             "itemtype": "method",
             "name": "update",
@@ -11845,7 +11816,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 108,
+            "line": 109,
             "description": "Add shape to physics object body.",
             "params": [
                 {
@@ -11861,7 +11832,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 122,
+            "line": 123,
             "description": "Create JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11885,7 +11856,7 @@
             "description": "Javascript code attached to the script.",
             "itemtype": "property",
             "name": "code",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Script",
             "module": "Script"
         },
@@ -11895,7 +11866,7 @@
             "description": "Mode indicates how to include external javascripts files into the script.\n\nCan be Script.APPEND, Script.EVALUATE or Script.INCLUDE.",
             "itemtype": "property",
             "name": "mode",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Script",
             "module": "Script"
         },
@@ -11935,7 +11906,7 @@
             "description": "Default script code used when creating a new Script.",
             "itemtype": "attribute",
             "name": "DEFAULT",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Script",
             "module": "Script"
         },
@@ -11955,7 +11926,7 @@
             "description": "Append libraries on initialization.\n\nLibraries are appended to the script code on initialization.",
             "itemtype": "attribute",
             "name": "APPEND",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Script",
             "module": "Script"
         },
@@ -11965,7 +11936,7 @@
             "description": "Evaluate libs during runtime.\n\nThis allows to load new libs during runtime, but its not possible to access private statements.",
             "itemtype": "attribute",
             "name": "EVALUATE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Script",
             "module": "Script"
         },
@@ -11975,7 +11946,7 @@
             "description": "Include file into the document.body.\n\nThis imports the JS file as any other file included into a <script> tag.",
             "itemtype": "attribute",
             "name": "INCLUDE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Script",
             "module": "Script"
         },
@@ -12158,7 +12129,7 @@
             "description": "Index of the animation track playing.",
             "itemtype": "attribute",
             "name": "track",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SpineAnimation",
             "module": "Animations"
         },
@@ -12168,7 +12139,7 @@
             "description": "Indicates the loop mode of the animation if set true the animation starts again after it ends.",
             "itemtype": "attribute",
             "name": "loop",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "SpineAnimation",
             "module": "Animations"
         },
@@ -12274,7 +12245,7 @@
             "description": "DOM canvas to draw.",
             "itemtype": "attribute",
             "name": "canvas",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "CanvasSprite",
             "module": "Textures"
         },
@@ -12284,7 +12255,7 @@
             "description": "Size attenuation indicates how the sprite should be scaled relative to the camera.",
             "itemtype": "attribute",
             "name": "sizeAttenuation",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CanvasSprite",
             "module": "Textures"
         },
@@ -12324,7 +12295,7 @@
             "description": "Scale applied to the generated text geometry.",
             "itemtype": "attribute",
             "name": "fontScale",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12334,7 +12305,7 @@
             "description": "Text bitmap rendering shader, can be:\n   - TextBitmap.BITMAP \n   - TextBitmap.SDF \n   - TextBitmap.MSDF",
             "itemtype": "attribute",
             "name": "shader",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12364,7 +12335,7 @@
             "description": "Text displayed on the object.",
             "itemtype": "attribute",
             "name": "text",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12374,7 +12345,7 @@
             "description": "Space between each text line.",
             "itemtype": "attribute",
             "name": "lineHeight",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12384,7 +12355,7 @@
             "description": "Spacing between each letter.",
             "itemtype": "attribute",
             "name": "letterSpacing",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12394,7 +12365,7 @@
             "description": "Horizontal text alignment can be\n   - TextBitmap.LEFT\n   - TextBitmap.RIGHT\n   - TextBitmap.CENTER",
             "itemtype": "attribute",
             "name": "align",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12404,7 +12375,7 @@
             "description": "Width of the text box.",
             "itemtype": "attribute",
             "name": "width",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12424,7 +12395,7 @@
             "description": "SDF distance alpha threshold.",
             "itemtype": "attribute",
             "name": "threshold",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12434,7 +12405,7 @@
             "description": "Smoothing of the text borders.",
             "itemtype": "attribute",
             "name": "smoothing",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12445,7 +12416,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "BITMAP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12456,7 +12427,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "SDF",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12467,7 +12438,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "MSDF",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12478,7 +12449,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "LEFT",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12489,7 +12460,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "CENTER",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12500,7 +12471,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "RIGHT",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12511,7 +12482,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "VERTEX_SHADER",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12522,7 +12493,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "BITMAP_SHADER",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12533,7 +12504,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "SDF_SHADER",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12544,7 +12515,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "SDF_SHADER",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextBitmap",
             "module": "Sprite"
         },
@@ -12598,7 +12569,7 @@
             "description": "Indicates if the text mesh has volume or not.",
             "itemtype": "property",
             "name": "extruded",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "TextMesh",
             "module": "Meshes"
         },
@@ -12608,7 +12579,7 @@
             "description": "Size of the text (depth).",
             "itemtype": "property",
             "name": "size",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextMesh",
             "module": "Meshes"
         },
@@ -12618,7 +12589,7 @@
             "description": "Height of the text.",
             "itemtype": "property",
             "name": "height",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextMesh",
             "module": "Meshes"
         },
@@ -12628,7 +12599,7 @@
             "description": "Number of segments that compose a curve in the font.",
             "itemtype": "property",
             "name": "curveSegments",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextMesh",
             "module": "Meshes"
         },
@@ -12648,7 +12619,7 @@
             "description": "Bevel thickness.",
             "itemtype": "property",
             "name": "bevelThickness",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextMesh",
             "module": "Meshes"
         },
@@ -12658,7 +12629,7 @@
             "description": "Bevel size.",
             "itemtype": "property",
             "name": "bevelSize",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextMesh",
             "module": "Meshes"
         },
@@ -12668,7 +12639,7 @@
             "description": "Text to be diplayed in the mesh.",
             "itemtype": "property",
             "name": "text",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextMesh",
             "module": "Meshes"
         },
@@ -12752,7 +12723,7 @@
             "description": "CSS Font style to be used.",
             "itemtype": "attribute",
             "name": "font",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12762,7 +12733,7 @@
             "description": "Horizontal text alignment can be\n   - TextSprite.LEFT\n   - TextSprite.RIGHT\n   - TextSprite.CENTER",
             "itemtype": "attribute",
             "name": "align",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12772,7 +12743,7 @@
             "description": "CSS color of the text.",
             "itemtype": "attribute",
             "name": "color",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12782,7 +12753,7 @@
             "description": "Text of this object.",
             "itemtype": "attribute",
             "name": "text",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12792,7 +12763,7 @@
             "description": "Indicates if the text has an outline border.",
             "itemtype": "attribute",
             "name": "outline",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12802,7 +12773,7 @@
             "description": "CSS color of the outline.",
             "itemtype": "attribute",
             "name": "outlineColor",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12812,7 +12783,7 @@
             "description": "Width of the text outline.",
             "itemtype": "attribute",
             "name": "outlineWidth",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12822,7 +12793,7 @@
             "description": "Vertical resolution of the texture created from canvas used.\n\nShould always be a npot of 2.",
             "itemtype": "attribute",
             "name": "resolution",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12833,7 +12804,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "LEFT",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12844,7 +12815,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "CENTER",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12855,7 +12826,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "RIGHT",
-            "type": "{String}",
+            "type": "{string}",
             "class": "TextSprite",
             "module": "Meshes"
         },
@@ -12884,7 +12855,7 @@
             "description": "Program name.",
             "itemtype": "property",
             "name": "name",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Program",
             "module": "Core"
         },
@@ -12894,7 +12865,7 @@
             "description": "Program description, will be stamped when the app is exported.",
             "itemtype": "property",
             "name": "description",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Program",
             "module": "Core"
         },
@@ -12904,7 +12875,7 @@
             "description": "Program author, will be stamped when the app is exported.",
             "itemtype": "property",
             "name": "author",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Program",
             "module": "Core"
         },
@@ -12914,7 +12885,7 @@
             "description": "Program version should adhere to semantic versioning, but it is not mandatory.",
             "itemtype": "property",
             "name": "version",
-            "type": "{String}",
+            "type": "{string}",
             "default": "\"0.0.0\"",
             "class": "Program",
             "module": "Core"
@@ -12944,7 +12915,7 @@
         {
             "file": "..\\source\\core\\objects\\Program.js",
             "line": 86,
-            "description": "Enable virtual reality flag.",
+            "description": "Enable virtual reality flag, allows the application to run in VR mode.\n\nVR mode can only be enabled if the system and browser have support for VR.",
             "itemtype": "property",
             "name": "vr",
             "default": "false",
@@ -12954,18 +12925,18 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 95,
+            "line": 97,
             "description": "Virtual reality movement scale.\n\nIndicates the relation between the real movement and virtual world movement.",
             "itemtype": "property",
             "name": "vrScale",
-            "type": "{Number}",
+            "type": "{number}",
             "default": "1.0",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 106,
+            "line": 108,
             "description": "Renderer configuration applied to the WebGL renderer.",
             "itemtype": "property",
             "name": "rendererConfig",
@@ -12975,7 +12946,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 114,
+            "line": 116,
             "description": "Target related configurations applied when exporting the app.",
             "itemtype": "property",
             "name": "targetConfig",
@@ -12985,7 +12956,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 122,
+            "line": 124,
             "description": "Scene loaded as default on startup.",
             "itemtype": "property",
             "name": "defaultScene",
@@ -12995,7 +12966,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 130,
+            "line": 132,
             "description": "Default camera to be used by scenes where there is no camera.\n\nOn the editor this value is automatically set to the last editor camera point used",
             "itemtype": "property",
             "name": "defaultCamera",
@@ -13005,7 +12976,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 140,
+            "line": 142,
             "description": "Keyboard input object.",
             "itemtype": "property",
             "name": "keyboard",
@@ -13015,7 +12986,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 148,
+            "line": 150,
             "description": "Mouse input object.",
             "itemtype": "property",
             "name": "mouse",
@@ -13025,7 +12996,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 156,
+            "line": 158,
             "description": "Renderer being used during runtime.",
             "itemtype": "property",
             "name": "renderer",
@@ -13035,7 +13006,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 164,
+            "line": 166,
             "description": "Scene currently running in the program.",
             "itemtype": "property",
             "name": "scene",
@@ -13045,28 +13016,28 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 172,
+            "line": 174,
             "description": "Canvas being used to draw content.\n\nThis canvas is where the WebGL rendering context was created.",
             "itemtype": "property",
             "name": "canvas",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 182,
+            "line": 184,
             "description": "DOM Division element that can be used to add html content to the app.\n\nAll content added to this division should be manually removed before the app exits.",
             "itemtype": "property",
             "name": "division",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 192,
-            "description": "Event manager used to handle VR display presentation change event.",
+            "line": 194,
+            "description": "Event manager used to attach in program events.",
             "itemtype": "property",
             "name": "manager",
             "type": "{EventManager}",
@@ -13075,7 +13046,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 207,
+            "line": 202,
             "description": "Clock object used to measure times between frames.",
             "itemtype": "property",
             "name": "clock",
@@ -13085,7 +13056,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 224,
+            "line": 210,
+            "description": "VR runtime control, true when the app is running in VR mode.",
+            "itemtype": "property",
+            "name": "vrRunning",
+            "type": "{boolean}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 221,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -13094,7 +13075,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 278,
+            "line": 263,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -13115,7 +13096,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 291,
+            "line": 276,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -13136,7 +13117,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 312,
+            "line": 297,
             "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
@@ -13145,7 +13126,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 324,
+            "line": 309,
             "description": "Render current scene to canvas.\n\nWhen rendering in VR mode all effects and camera parameters are ignored.\n\nRenderer should be initialized and passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -13161,7 +13142,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 353,
+            "line": 324,
             "description": "Resize the current scene elements.",
             "itemtype": "method",
             "name": "resize",
@@ -13182,7 +13163,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 377,
+            "line": 342,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -13191,16 +13172,25 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 396,
-            "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
+            "line": 362,
+            "description": "Check if virtual reality is available.",
             "itemtype": "method",
-            "name": "displayVR",
+            "name": "vrAvailable",
             "class": "Program",
             "module": "Core"
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 424,
+            "line": 372,
+            "description": "Enter virtual reality mode.",
+            "itemtype": "method",
+            "name": "enterVR",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 389,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -13209,7 +13199,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 438,
+            "line": 403,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -13225,7 +13215,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 473,
+            "line": 438,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -13241,7 +13231,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 510,
+            "line": 475,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -13257,7 +13247,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 537,
+            "line": 502,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -13270,7 +13260,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 550,
+            "line": 515,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -13286,7 +13276,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 563,
+            "line": 528,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -13295,7 +13285,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 592,
+            "line": 552,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -13311,7 +13301,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 619,
+            "line": 579,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -13327,7 +13317,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 644,
+            "line": 604,
             "description": "Serialize the object to JSON format.",
             "itemtype": "method",
             "name": "toJSON",
@@ -13396,7 +13386,7 @@
             "description": "Stores the time since the last frame.",
             "itemtype": "property",
             "name": "delta",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Scene",
             "module": "Core"
         },
@@ -13426,7 +13416,7 @@
             "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "Scene",
             "module": "Core"
         },
@@ -13571,7 +13561,7 @@
             "description": "Minimum luminance.",
             "itemtype": "property",
             "name": "minLuminance",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "AfterimagePass",
             "module": "Postprocessing"
         },
@@ -13581,7 +13571,7 @@
             "description": "Rate of luminance variation (adaptation rate).",
             "itemtype": "property",
             "name": "tau",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "AfterimagePass",
             "module": "Postprocessing"
         },
@@ -13591,7 +13581,7 @@
             "description": "Rate of luminance variation (adaptation rate).",
             "itemtype": "property",
             "name": "tau",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "AfterimagePass",
             "module": "Postprocessing"
         },
@@ -13601,7 +13591,7 @@
             "description": "Dampening applied to the previous frame.",
             "itemtype": "property",
             "name": "damp",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "AfterimagePass",
             "module": "Postprocessing"
         },
@@ -13611,7 +13601,7 @@
             "description": "Camera aperture.",
             "itemtype": "property",
             "name": "aperture",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "BokehPass",
             "module": "Postprocessing"
         },
@@ -13621,7 +13611,7 @@
             "description": "Focus point distance.",
             "itemtype": "property",
             "name": "focus",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "BokehPass",
             "module": "Postprocessing"
         },
@@ -13637,7 +13627,7 @@
         },
         {
             "file": "..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 138,
+            "line": 140,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -13683,7 +13673,7 @@
             "description": "Rotation of the dot grid.",
             "itemtype": "property",
             "name": "angle",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "DotScreenPass",
             "module": "Postprocessing"
         },
@@ -13693,7 +13683,7 @@
             "description": "Scale of the dots used in the effect.",
             "itemtype": "property",
             "name": "scale",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "DotScreenPass",
             "module": "Postprocessing"
         },
@@ -13703,7 +13693,7 @@
             "description": "If set true a grascale effect will be applied.",
             "itemtype": "property",
             "name": "grayscale",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "FilmPass",
             "module": "Postprocessing"
         },
@@ -13713,7 +13703,7 @@
             "description": "Ammout of noise to be applied to the image.",
             "itemtype": "property",
             "name": "noiseIntensity",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "FilmPass",
             "module": "Postprocessing"
         },
@@ -13723,7 +13713,7 @@
             "description": "Scanline intensity.",
             "itemtype": "property",
             "name": "scanlinesIntensity",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "FilmPass",
             "module": "Postprocessing"
         },
@@ -13733,7 +13723,7 @@
             "description": "Number of scanline to be displayed.",
             "itemtype": "property",
             "name": "scanlinesCount",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "FilmPass",
             "module": "Postprocessing"
         },
@@ -13809,7 +13799,7 @@
             "description": "Kernel radius used for the SSAO effect.",
             "itemtype": "property",
             "name": "kernelRadius",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "SSAONOHPass",
             "module": "Postprocessing"
         },
@@ -13819,7 +13809,7 @@
             "description": "Minimum camera distance considered for the SSAO effect.",
             "itemtype": "property",
             "name": "minDistance",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SSAONOHPass",
             "module": "Postprocessing"
         },
@@ -13829,7 +13819,7 @@
             "description": "Maximum camera distance considered for the SSAO effect.",
             "itemtype": "property",
             "name": "maxDistance",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SSAONOHPass",
             "module": "Postprocessing"
         },
@@ -13839,7 +13829,7 @@
             "description": "SSAO effect kernel size.",
             "itemtype": "property",
             "name": "kernelSize",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SSAONOHPass",
             "module": "Postprocessing"
         },
@@ -13949,7 +13939,7 @@
             "description": "Ambient occlusion shadow radius.",
             "itemtype": "property",
             "name": "radius",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SSAOPass",
             "module": "Postprocessing"
         },
@@ -13959,7 +13949,7 @@
             "description": "Display only ambient occlusion result.",
             "itemtype": "property",
             "name": "onlyAO",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "SSAOPass",
             "module": "Postprocessing"
         },
@@ -13969,7 +13959,7 @@
             "description": "Ambient occlusion clamp.",
             "itemtype": "property",
             "name": "aoClamp",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SSAOPass",
             "module": "Postprocessing"
         },
@@ -13979,7 +13969,7 @@
             "description": "Pixel luminosity influence in AO calculation.",
             "itemtype": "property",
             "name": "lumInfluence",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SSAOPass",
             "module": "Postprocessing"
         },
@@ -14062,7 +14052,7 @@
             "description": "Scales the color of the whole bloom effect.",
             "itemtype": "property",
             "name": "strength",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "UnrealBloomPass",
             "module": "Postprocessing"
         },
@@ -14072,7 +14062,7 @@
             "description": "Bloom effect radius.",
             "itemtype": "property",
             "name": "radius",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "UnrealBloomPass",
             "module": "Postprocessing"
         },
@@ -14082,7 +14072,7 @@
             "description": "Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.\n\nTo have all scene colors contributing to the bloom, a volume of -1 needs to be used.",
             "itemtype": "property",
             "name": "threshold",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "UnrealBloomPass",
             "module": "Postprocessing"
         },
@@ -14092,7 +14082,7 @@
             "description": "Smooth factor.",
             "itemtype": "property",
             "name": "smooth",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "UnrealBloomPass",
             "module": "Postprocessing"
         },
@@ -14378,7 +14368,7 @@
             "description": "If set to true, the pass is processed by the composer.",
             "itemtype": "property",
             "name": "enabled",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "Pass",
             "module": "Postprocessing"
         },
@@ -14388,7 +14378,7 @@
             "description": "If set to true, the pass indicates to swap read and write buffer after rendering.",
             "itemtype": "property",
             "name": "needsSwap",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "Pass",
             "module": "Postprocessing"
         },
@@ -14398,7 +14388,7 @@
             "description": "If set to true, the pass clears its target buffer before rendering.",
             "itemtype": "property",
             "name": "clear",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "Pass",
             "module": "Postprocessing"
         },
@@ -14408,7 +14398,7 @@
             "description": "If set to true, the result of the pass is rendered to screen.",
             "itemtype": "property",
             "name": "renderToScreen",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "Pass",
             "module": "Postprocessing"
         },
@@ -14418,7 +14408,7 @@
             "description": "If set to true, the result of the pass needs to be copied to the ouput by the effect renderer if renderToScren is enabled.",
             "itemtype": "property",
             "name": "copyToScreen",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "Pass",
             "module": "Postprocessing"
         },
@@ -14619,7 +14609,7 @@
             "description": "The DOM element to be projected in 3D space.\n\nIt is automatically added to the appropiate DOM container used by the renderer.",
             "itemtype": "attribute",
             "name": "element",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "CSS3DObject",
             "module": "Postprocessing"
         },
@@ -14669,7 +14659,7 @@
             "description": "Main DOM element used for the renderer.",
             "itemtype": "attribute",
             "name": "domElement",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "CSS3DRenderer",
             "module": "Postprocessing"
         },
@@ -14679,7 +14669,7 @@
             "description": "Camera projected DOM element.",
             "itemtype": "attribute",
             "name": "domElement",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "CSS3DRenderer",
             "module": "Postprocessing"
         },
@@ -14740,7 +14730,7 @@
             "description": "Prefered redering backend API to use if available.\n\nIf the selected backend is not available it defaults to WebGL.\n\nShader code might not be cross compatible between rendering backends.",
             "itemtype": "property",
             "name": "backend",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14750,7 +14740,7 @@
             "description": "Defines whether the renderer should automatically clear its output before rendering a frame.",
             "itemtype": "property",
             "name": "autoClear",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14760,7 +14750,7 @@
             "description": "Defines whether the renderer should clear the color buffer.",
             "itemtype": "property",
             "name": "autoClearColor",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14770,7 +14760,7 @@
             "description": "Defines whether the renderer should clear the depth buffer.",
             "itemtype": "property",
             "name": "autoClearDepth",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14780,7 +14770,7 @@
             "description": "Defines whether the renderer should clear the stencil buffer.",
             "itemtype": "property",
             "name": "autoClearStencil",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14822,7 +14812,7 @@
             "description": "Shadow map filtering type.",
             "itemtype": "property",
             "name": "shadowsType",
-            "type": "{Number}",
+            "type": "{number}",
             "default": "PCFSoftShadowMap",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
@@ -14833,7 +14823,7 @@
             "description": "Enables automatic updates to the shadows in the scene.\n\nIf you do not require dynamic lighting / shadows, you may set this to false.\n\nUse renderer.shadowMap.needsUpdate to update the shadow map.",
             "itemtype": "property",
             "name": "shadowsAutoUpdate",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14843,7 +14833,7 @@
             "description": "Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.",
             "itemtype": "property",
             "name": "toneMapping",
-            "type": "{Number}",
+            "type": "{number}",
             "default": "THREE.NoToneMapping",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
@@ -14854,7 +14844,7 @@
             "description": "Exposure level of tone mapping.",
             "itemtype": "property",
             "name": "toneMappingExposure",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14864,7 +14854,7 @@
             "description": "Tone mapping white point.",
             "itemtype": "property",
             "name": "toneMappingWhitePoint",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14874,7 +14864,7 @@
             "description": "If true the renderer sorts the objects from back to front for rendering.\n\nImportant if using multiple transparent objects.",
             "itemtype": "property",
             "name": "sortObjects",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14884,7 +14874,7 @@
             "description": "Gamma factor applied to the image.",
             "itemtype": "property",
             "name": "gammaFactor",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14894,7 +14884,7 @@
             "description": "If set, then it expects that all textures and colors are premultiplied gamma.",
             "itemtype": "property",
             "name": "gammaInput",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14904,7 +14894,7 @@
             "description": "If set, then it expects that all textures and colors need to be outputted in premultiplied gamma.",
             "itemtype": "property",
             "name": "gammaOutput",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14914,7 +14904,7 @@
             "description": "Shader precision. Can be \"highp\", \"mediump\" or \"lowp\". Defaults to \"highp\" if supported by the device.",
             "itemtype": "property",
             "name": "precision",
-            "type": "{String}",
+            "type": "{string}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14924,7 +14914,7 @@
             "description": "Whether the canvas contains an alpha (transparency) buffer or not.",
             "itemtype": "property",
             "name": "alpha",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14934,7 +14924,7 @@
             "description": "Whether the renderer will assume that colors have premultiplied alpha.",
             "itemtype": "property",
             "name": "premultipliedAlpha",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14944,7 +14934,7 @@
             "description": "Whether to preserve the buffers until manually cleared or overwritten.",
             "itemtype": "property",
             "name": "preserveDrawingBuffer",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14954,7 +14944,7 @@
             "description": "Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be \"high-performance\", \"low-power\" or \"default\".",
             "itemtype": "property",
             "name": "powerPreference",
-            "type": "{String}",
+            "type": "{string}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14964,7 +14954,7 @@
             "description": "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
             "itemtype": "property",
             "name": "logarithmicDepthBuffer",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14974,7 +14964,7 @@
             "description": "Whether to use physically correct lighting mode.",
             "itemtype": "property",
             "name": "physicallyCorrectLights",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14984,7 +14974,7 @@
             "description": "Defines whether material shader programs are checked for errors during compilation and linkage process.",
             "itemtype": "property",
             "name": "checkShaderErrors",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -14995,7 +14985,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "WEBGL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -15006,7 +14996,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "WEBGL2",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
@@ -15340,7 +15330,7 @@
             "description": "Resource name.\n\nNot required to be unique.",
             "itemtype": "property",
             "name": "name",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Resource",
             "module": "Resources"
         },
@@ -15350,7 +15340,7 @@
             "description": "UUID unique identifier.",
             "itemtype": "property",
             "name": "uuid",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Resource",
             "module": "Resources"
         },
@@ -15360,7 +15350,7 @@
             "description": "Resource type. Used to identify the type of the resource, usefull for serialization.",
             "itemtype": "property",
             "name": "type",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Resource",
             "module": "Resources"
         },
@@ -16034,7 +16024,7 @@
             "description": "Image is used to store a DOM canvas element.",
             "itemtype": "property",
             "name": "image",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "CanvasTexture",
             "module": "Textures"
         },
@@ -16044,7 +16034,7 @@
             "description": "Canvas width, internal resolution of the canvas texture.",
             "itemtype": "property",
             "name": "width",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CanvasTexture",
             "module": "Textures"
         },
@@ -16054,7 +16044,7 @@
             "description": "Canvas height, internal resolution of the canvas texture.",
             "itemtype": "property",
             "name": "height",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CanvasTexture",
             "module": "Textures"
         },
@@ -16115,7 +16105,7 @@
             "description": "Size of each one of the texture that compose the CubeTexture.",
             "itemtype": "property",
             "name": "size",
-            "type": "{Number}",
+            "type": "{number}",
             "default": "512",
             "class": "CubeTexture",
             "module": "Textures"
@@ -16126,7 +16116,7 @@
             "description": "Cube texture mode, the mode specifies how the cube texture is created.\n\nSource format may vary from a mode to another.",
             "itemtype": "property",
             "name": "mode",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16136,7 +16126,7 @@
             "description": "Cubemap right image index",
             "itemtype": "attribute",
             "name": "RIGHT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16146,7 +16136,7 @@
             "description": "Cubemap left image index",
             "itemtype": "attribute",
             "name": "LEFT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16156,7 +16146,7 @@
             "description": "Cubemap top image index",
             "itemtype": "attribute",
             "name": "TOP",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16166,7 +16156,7 @@
             "description": "Cubemap bottom image index",
             "itemtype": "attribute",
             "name": "BOTTOM",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16176,7 +16166,7 @@
             "description": "Cubemap front image index",
             "itemtype": "attribute",
             "name": "FRONT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16186,7 +16176,7 @@
             "description": "Cubemap back image index",
             "itemtype": "attribute",
             "name": "BACK",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16196,7 +16186,7 @@
             "description": "CubeMap mode, 6 images used as source for the texture.",
             "itemtype": "attribute",
             "name": "CUBE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16206,7 +16196,7 @@
             "description": "CubeMap mode, single image used as source.",
             "itemtype": "attribute",
             "name": "CROSS",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16216,7 +16206,7 @@
             "description": "Equirectangular projection mode, 1 single image used as source.\n\nSource image should have a 2:1 aspect ratio.",
             "itemtype": "attribute",
             "name": "EQUIRECTANGULAR",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "CubeTexture",
             "module": "Textures"
         },
@@ -16375,7 +16365,7 @@
             "itemtype": "property",
             "name": "animationSpeed",
             "default": "0.1",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
@@ -16386,7 +16376,7 @@
             "itemtype": "property",
             "name": "framesHorizontal",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
@@ -16397,7 +16387,7 @@
             "itemtype": "property",
             "name": "framesVertical",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
@@ -16407,7 +16397,7 @@
             "description": "The offset frame can be ajusted to control in which frame the animation ends.",
             "itemtype": "property",
             "name": "endFrame",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
@@ -16418,7 +16408,7 @@
             "itemtype": "property",
             "name": "beginFrame",
             "default": "0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
@@ -16429,7 +16419,7 @@
             "itemtype": "property",
             "name": "totalFrames",
             "default": "1",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
@@ -16439,7 +16429,7 @@
             "description": "DOM element attached to the texture",
             "itemtype": "property",
             "name": "image",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
@@ -16449,7 +16439,7 @@
             "description": "Indicates the current frame of the animation.",
             "itemtype": "property",
             "name": "currentFrame",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "SpriteSheetTexture",
             "module": "Textures"
         },
@@ -16546,7 +16536,7 @@
             "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
             "itemtype": "property",
             "name": "uuid",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Texture",
             "module": "Textures"
         },
@@ -16586,7 +16576,7 @@
             "description": "How much the texture is rotated around the center point, in radians. Postive values are counter-clockwise.",
             "itemtype": "property",
             "name": "rotation",
-            "type": "{Number}",
+            "type": "{number}",
             "default": "0",
             "class": "Texture",
             "module": "Textures"
@@ -16597,7 +16587,7 @@
             "description": "False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.",
             "itemtype": "property",
             "name": "premultiplyAlpha",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "Texture",
             "module": "Textures"
         },
@@ -16607,7 +16597,7 @@
             "description": "Flips the image's Y axis to match the WebGL texture coordinate space.",
             "itemtype": "property",
             "name": "flipY",
-            "type": "{Boolean}",
+            "type": "{boolean}",
             "class": "Texture",
             "module": "Textures"
         },
@@ -16637,7 +16627,7 @@
             "description": "Name of the texture (doesn't need to be unique).",
             "itemtype": "property",
             "name": "name",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Texture",
             "module": "Textures"
         },
@@ -16658,7 +16648,7 @@
             "description": "DOM element attached to the texture",
             "itemtype": "property",
             "name": "image",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "Texture",
             "module": "Textures"
         },
@@ -16716,7 +16706,7 @@
             "itemtype": "property",
             "name": "playbackRate",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "VideoTexture",
             "module": "Textures"
         },
@@ -16727,7 +16717,7 @@
             "itemtype": "property",
             "name": "volume",
             "default": "1.0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "VideoTexture",
             "module": "Textures"
         },
@@ -16737,7 +16727,7 @@
             "description": "Image is used to store a DOM video element.",
             "itemtype": "property",
             "name": "image",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "VideoTexture",
             "module": "Textures"
         },
@@ -16900,7 +16890,7 @@
             "description": "Image is used to store a DOM video element",
             "itemtype": "property",
             "name": "image",
-            "type": "{DOM}",
+            "type": "{Element}",
             "class": "WebcamTexture",
             "module": "Textures"
         },
@@ -16921,7 +16911,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "USER",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "WebcamTexture",
             "module": "Textures"
         },
@@ -16932,7 +16922,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "ENVIRONMENT",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "WebcamTexture",
             "module": "Textures"
         },
@@ -17276,7 +17266,7 @@
             "description": "Name of the object (doesn't need to be unique).",
             "itemtype": "property",
             "name": "name",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Object3D",
             "module": "THREE"
         },
@@ -17336,7 +17326,7 @@
             "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
             "itemtype": "property",
             "name": "uuid",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Object3D",
             "module": "THREE"
         },
@@ -17358,7 +17348,7 @@
             "itemtype": "property",
             "name": "renderOrder",
             "default": "0",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Object3D",
             "module": "THREE"
         },
@@ -17745,7 +17735,7 @@
             "description": "No fog",
             "itemtype": "attribute",
             "name": "NONE",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Fog",
             "module": "THREE"
         },
@@ -17755,7 +17745,7 @@
             "description": "Linear fog",
             "itemtype": "attribute",
             "name": "LINEAR",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Fog",
             "module": "THREE"
         },
@@ -17765,7 +17755,7 @@
             "description": "Exponential fog",
             "itemtype": "attribute",
             "name": "EXPONENTIAL",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Fog",
             "module": "THREE"
         },
@@ -17835,7 +17825,7 @@
             "description": "Charset used to encode binary data.",
             "itemtype": "attribute",
             "name": "encoding",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Base64Utils",
             "module": "BinaryUtils"
         },
@@ -18046,7 +18036,7 @@
             "description": "Flag used to indicate ADDED diff.",
             "itemtype": "attribute",
             "name": "DIFF_ADDED",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TreeUtils",
             "module": "BinaryUtils"
         },
@@ -18056,7 +18046,7 @@
             "description": "Flag used to indicate REMOVED diff.",
             "itemtype": "attribute",
             "name": "DIFF_REMOVED",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TreeUtils",
             "module": "BinaryUtils"
         },
@@ -18066,7 +18056,7 @@
             "description": "Flag used to indicate MOVED diff.",
             "itemtype": "attribute",
             "name": "DIFF_MOVED",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "TreeUtils",
             "module": "BinaryUtils"
         },
@@ -18188,7 +18178,7 @@
                 {
                     "name": "target",
                     "description": "Event target element.",
-                    "type": "DOM"
+                    "type": "Element"
                 },
                 {
                     "name": "event",
@@ -18241,7 +18231,7 @@
                 {
                     "name": "target",
                     "description": "Event target element.",
-                    "type": "DOM"
+                    "type": "Element"
                 },
                 {
                     "name": "callback",
@@ -18339,7 +18329,7 @@
             "description": "Value of PI*2. 360 degrees.",
             "itemtype": "attribute",
             "name": "pi2",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "MathUtils",
             "module": "Utils"
         },
@@ -18349,7 +18339,7 @@
             "description": "Value of PI/3. 60 degrees.",
             "itemtype": "attribute",
             "name": "pid3",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "MathUtils",
             "module": "Utils"
         },
@@ -18359,7 +18349,7 @@
             "description": "Value of PI/2. 45 degrees.",
             "itemtype": "attribute",
             "name": "pid2",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "MathUtils",
             "module": "Utils"
         },
@@ -18758,90 +18748,6 @@
             },
             "class": "PhysicsGenerator",
             "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 13,
-            "description": "VR display.",
-            "itemtype": "property",
-            "name": "display",
-            "type": "{Object}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 20,
-            "description": "Scale from real units to world units.",
-            "itemtype": "property",
-            "name": "scale",
-            "type": "{Number}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 27,
-            "description": "Standing property, is set true the user height will be added to the position of the HMD.",
-            "itemtype": "property",
-            "name": "standing",
-            "type": "{boolean}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 34,
-            "description": "User height, used to calibrate when the user is standing.",
-            "itemtype": "property",
-            "name": "userHeight",
-            "type": "{Number}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 41,
-            "description": "VR Frame data.",
-            "itemtype": "property",
-            "name": "frameData",
-            "type": "{VRFrameData}",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 75,
-            "description": "Update VRControls object state.",
-            "itemtype": "method",
-            "name": "update",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "Object to be updated",
-                    "type": "Object3D"
-                }
-            ],
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 130,
-            "description": "Dispose object.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "VRControls",
-            "module": "VirtualReality"
-        },
-        {
-            "file": "..\\source\\core\\vr\\VRControls.js",
-            "line": 140,
-            "description": "Reset the HDM pose.",
-            "itemtype": "method",
-            "name": "resetPose",
-            "class": "VRControls",
-            "module": "VirtualReality"
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
@@ -19334,7 +19240,7 @@
             "description": "nunuStudio",
             "itemtype": "attribute",
             "name": "NAME",
-            "type": "{String}",
+            "type": "{string}",
             "default": "\"nunuStudio\"",
             "class": "Nunu",
             "module": "Runtime"
@@ -19345,7 +19251,7 @@
             "description": "Stores the nunu runtime version.",
             "itemtype": "attribute",
             "name": "VERSION",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Nunu",
             "module": "Runtime"
         },
@@ -19355,7 +19261,7 @@
             "description": "Stores the nunu runtime dev timestamp.",
             "itemtype": "attribute",
             "name": "TIMESTAMP",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Nunu",
             "module": "Runtime"
         },
@@ -19366,7 +19272,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "REPOSITORY_BRANCH",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Nunu",
             "module": "Runtime"
         },
@@ -19377,7 +19283,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "REPOSITORY_COMMIT",
-            "type": "{String}",
+            "type": "{string}",
             "class": "Nunu",
             "module": "Runtime"
         },
@@ -19388,7 +19294,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "NWJS",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Nunu",
             "module": "Runtime"
         },
@@ -19399,7 +19305,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "BROWSER",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Nunu",
             "module": "Runtime"
         },
@@ -19410,7 +19316,7 @@
             "static": 1,
             "itemtype": "attribute",
             "name": "CORDOVA",
-            "type": "{Number}",
+            "type": "{number}",
             "class": "Nunu",
             "module": "Runtime"
         },
@@ -19430,7 +19336,126 @@
         {
             "file": "..\\source\\core\\Nunu.js",
             "line": 94,
-            "description": "Check if host supports WebVR and if there is a VR display available.",
+            "description": "Check if there is any VR API available, on the device.\n\nChecks if there is support for WebVR or WebXR.",
+            "itemtype": "method",
+            "name": "vrAvailable",
+            "return": {
+                "description": "True if the browser supports vr.",
+                "type": "Boolean"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 107,
+            "description": "Enter virtual reality mode using WebXR or WebVR depending on the API available.\n\nIf booth API are available the WebXR API is used.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
+            "itemtype": "method",
+            "name": "enterVR",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "Renderer used to draw the scene.",
+                    "type": "THREE.WebGLRenderer"
+                },
+                {
+                    "name": "onSuccess",
+                    "description": "Method called if the application entered VR successfully.",
+                    "type": "Function"
+                }
+            ],
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 156,
+            "description": "Enter virtual reality mode, if the application is not running on VR mode does not do anything.",
+            "itemtype": "method",
+            "name": "exitVR",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "Renderer used to draw the scene.",
+                    "type": "THREE.WebGLRenderer"
+                }
+            ],
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 186,
+            "description": "WebXR session created.",
+            "itemtype": "attribute",
+            "name": "webXRSession",
+            "type": "{XRSession}",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 194,
+            "description": "Flag checking if there is support for XR immersive VR mode.\n\nChecked on the library startup if XR is supported.",
+            "itemtype": "attribute",
+            "name": "webXRSupported",
+            "type": "{boolean}",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 215,
+            "description": "Check if host supports WebXR.",
+            "itemtype": "method",
+            "name": "webXRAvailable",
+            "return": {
+                "description": "True is WebVR is available.",
+                "type": "Boolean"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 226,
+            "description": "Get WebXR session.",
+            "itemtype": "method",
+            "name": "getXRSession",
+            "params": [
+                {
+                    "name": "onSession",
+                    "description": "Function used to get the XR session, receives the session as argument.",
+                    "type": "Function"
+                }
+            ],
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 254,
+            "description": "Web VR display obtained.",
+            "itemtype": "attribute",
+            "name": "webVRDisplay",
+            "type": "{VRDisplay}",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 262,
+            "description": "Flag indicating if there are any VR displays available.\n\nChecked on the library bootup if WebVR is available.",
+            "itemtype": "attribute",
+            "name": "webVRHasDisplay",
+            "type": "{boolean}",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 283,
+            "description": "Check if host supports WebVR.",
             "itemtype": "method",
             "name": "webVRAvailable",
             "return": {
@@ -19442,13 +19467,13 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 105,
-            "description": "Used to get the first VR display available, the display is returned as argument of the getDisplay function.",
+            "line": 294,
+            "description": "Used to get the first VR display available, the display is returned as argument of the onDisplay function.",
             "itemtype": "method",
             "name": "getVRDisplays",
             "params": [
                 {
-                    "name": "getDisplay",
+                    "name": "onDisplay",
                     "description": "Function used to get the display, receives the display as argument.",
                     "type": "Function"
                 }
@@ -19458,7 +19483,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 132,
+            "line": 329,
             "description": "Get the query parameter from the browser URL.",
             "itemtype": "method",
             "name": "getQueryParameters",
@@ -19471,7 +19496,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 157,
+            "line": 354,
             "description": "Create a web worker from code written in a string.\n\nUses a blob to inject the code and loads it from and URL object.",
             "itemtype": "method",
             "name": "createWorker",
@@ -19496,7 +19521,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 180,
+            "line": 377,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -19509,7 +19534,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 191,
+            "line": 388,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -19522,7 +19547,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 214,
+            "line": 411,
             "description": "Check in wich platform the enviroment is running.\n\nPossible return values are:\n   - Nunu.NWJS\n   - Nunu.BROWSER\n   - Nunu.CORDOVA",
             "itemtype": "method",
             "name": "getPlatform",
@@ -19535,7 +19560,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 239,
+            "line": 436,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
@@ -19548,7 +19573,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 251,
+            "line": 448,
             "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
             "itemtype": "method",
             "name": "openWebpage",
@@ -19557,7 +19582,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 272,
+            "line": 469,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -19570,7 +19595,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 286,
+            "line": 483,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUses isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",
@@ -19583,7 +19608,7 @@
                 {
                     "name": "element",
                     "description": "DOM element to put into fullscreen.",
-                    "type": "DOM"
+                    "type": "Element"
                 }
             ],
             "class": "Nunu",
