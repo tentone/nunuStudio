@@ -548,18 +548,9 @@ NunuApp.prototype.resume = function()
 			if(self.running)
 			{
 				self.update();
-
-				if(self.program.vr)
-				{
-					self.program.display.requestAnimationFrame(update);
-				}
-				else
-				{
-					requestAnimationFrame(update);
-				}
+				requestAnimationFrame(update);
 			}
 		};
-
 		this.running = true;
 		update();
 	}
@@ -680,7 +671,7 @@ NunuApp.prototype.setOnExit = function(callback)
  */
 NunuApp.prototype.vrAvailable = function()
 {
-	return Nunu.vrAvailable() && this.program !== null && this.program.vr;	
+	return this.program !== null && this.program.vrAvailable();
 };
 
 /**
@@ -692,7 +683,7 @@ NunuApp.prototype.toggleVR = function()
 {
 	if(this.vrAvailable())
 	{
-		if(this.program.vr)
+		if(this.program.vrRunning)
 		{
 			this.program.exitVR();
 		}
@@ -703,7 +694,7 @@ NunuApp.prototype.toggleVR = function()
 	}
 	else
 	{
-		console.warn("nunuStudio: loaded program is not VR enabled");
+		console.warn("nunuStudio: Loaded program is not VR enabled");
 	}
 };
 

@@ -210,10 +210,10 @@ function Program(name)
 	/**
 	 * VR runtime control, true when the app is running in VR mode.
 	 *
-	 * @property vrEnabled
+	 * @property vrRunning
 	 * @type {boolean}
 	 */
-	this.vrEnabled = false;
+	this.vrRunning = false;
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -356,6 +356,17 @@ Program.prototype.updateRenderer = function()
 		this.renderer.toneMappingExposure = this.toneMappingExposure;
 		this.renderer.toneMappingWhitePoint = this.toneMappingWhitePoint;
 	}
+};
+
+
+/**
+ * Enter virtual reality mode.
+ * 
+ * @method enterVR
+ */
+Program.prototype.vrAvailable = function()
+{
+	return this.vr && Nunu.vrAvailable();
 };
 
 /**
