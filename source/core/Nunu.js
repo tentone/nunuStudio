@@ -194,21 +194,18 @@ Nunu.webXRSession = null;
 /**
  * Flag checking if there is support for XR immersive VR mode.
  *
- * Checked on the library startup if XR is supported.
+ * Checked on the library startup if XR is supported, while the check does not finish it is set to null.
  *
  * @attribute webXRSupported
  * @type {boolean}
  */
-Nunu.webXRSupported = false;
+Nunu.webXRSupported = null;
 
 if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
 {
 	navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
 	{
-		if(supported)
-		{
-			Nunu.webXRSupported = supported;
-		}
+		Nunu.webXRSupported = supported;
 	});
 }
 
@@ -220,7 +217,7 @@ if(navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined)
  */
 Nunu.webXRAvailable = function()
 {
-	return Nunu.webXRSupported;
+	return navigator.xr !== undefined && navigator.xr.isSessionSupported !== undefined && Nunu.webXRSupported !== false;
 };
 
 /**
@@ -262,21 +259,18 @@ Nunu.webVRDisplay = null;
 /**
  * Flag indicating if there are any VR displays available.
  *
- * Checked on the library bootup if WebVR is available.
+ * Checked on the library bootup if WebVR is available, while the check does not finish it is set to null.
  *
  * @attribute webVRHasDisplay
  * @type {boolean}
  */
-Nunu.webVRHasDisplay = false;
+Nunu.webVRHasDisplay = null;
 
 if(navigator.getVRDisplays !== undefined)
 {
 	navigator.getVRDisplays().then(function(displays)
 	{
-		if(displays.length > 0)
-		{
-			Nunu.webVRHasDisplay = true;
-		}
+		Nunu.webVRHasDisplay = displays.length > 0;
 	});
 }
 
@@ -288,7 +282,7 @@ if(navigator.getVRDisplays !== undefined)
  */
 Nunu.webVRAvailable = function()
 {
-	return navigator.getVRDisplays !== undefined && Nunu.webVRHasDisplay;
+	return navigator.getVRDisplays !== undefined && Nunu.webVRHasDisplay !== false;
 };
 
 /**
