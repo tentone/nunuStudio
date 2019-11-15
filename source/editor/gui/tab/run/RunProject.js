@@ -341,7 +341,7 @@ RunProject.prototype.runProgram = function()
 		{
 			if(vr)
 			{
-				program.displayVR();
+				program.enterVR();
 			}
 			else
 			{

@@ -192,19 +192,12 @@ function Program(name)
 	this.division = null;
 
 	/**
-	 * Event manager used to handle VR display presentation change event.
+	 * Event manager used to attach in program events.
 	 *
 	 * @property manager
 	 * @type {EventManager}
 	 */
 	this.manager = new EventManager();
-	/*this.manager.add(window, "vrdisplaypresentchange", function()
-	{
-		if(self.vrDisplay !== null && !self.vrDisplay.isPresenting)
-		{
-			self.vrEnabled = false;
-		}
-	});*/
 
 	/**
 	 * Clock object used to measure times between frames.
@@ -214,10 +207,13 @@ function Program(name)
 	 */
 	this.clock = new THREE.Clock();
 
-	//VR runtime control
+	/**
+	 * VR runtime control, true when the app is running in VR mode.
+	 *
+	 * @property vrEnabled
+	 * @type {boolean}
+	 */
 	this.vrEnabled = false;
-	//this.vrDisplay = null;
-	//this.vrControls = null;
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -260,18 +256,6 @@ Program.prototype.initialize = function()
 	{
 		this.setScene(this.children[0]);
 	}
-
-	/*
-	if(this.vr)
-	{
-		var self = this;
-
-		Nunu.getVRDisplay(function(display)
-		{
-			self.vrControls = new VRControls();
-		});
-	}
-	*/
 	
 	this.clock.start();
 };
@@ -376,31 +360,14 @@ Program.prototype.updateRenderer = function()
 
 /**
  * Enter virtual reality mode.
- *
- * To enter virtual reality mode a WebVR enabled browser is required.
- *
- * When displaying VR content the display.requestAnimationFrame should be used to call the render method.
  * 
- * @method displayVR
+ * @method enterVR
  */
-Program.prototype.displayVR = function()
+Program.prototype.enterVR = function()
 {
 	if(this.vr)
 	{
 		Nunu.enterVR(this.renderer);
-
-		/*try
-		{
-			if(!this.vrDisplay.isPresenting)
-			{
-				this.vrDisplay.requestPresent([{source : this.canvas}]);
-				this.vrEnabled = true;
-			}
-		}
-		catch(e)
-		{
-			console.warn("nunuStudio: Failed to enter in VR mode", e);
-		}*/
 	}
 };
 
@@ -411,13 +378,10 @@ Program.prototype.displayVR = function()
  */
 Program.prototype.exitVR = function()
 {
-	this.renderer.vr.enabled = false;
-
-	/*if(this.vrDisplay.isPresenting)
+	if(this.vr)
 	{
-		this.vrDisplay.exitPresent();
-		this.vrEnabled = false;
-	}*/
+		Nunu.exitVR(this.renderer);
+	}
 };
 
 /**

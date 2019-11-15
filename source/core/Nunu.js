@@ -109,6 +109,8 @@ Nunu.vrAvailable = function()
  *
  * If booth API are available the WebXR API is used.
  *
+ * When displaying VR content the display.requestAnimationFrame should be used to call the render method.
+ *
  * @param {THREE.WebGLRenderer} renderer Renderer used to draw the scene.
  * @param {Function} onSuccess Method called if the application entered VR successfully.
  */

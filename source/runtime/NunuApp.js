@@ -698,7 +698,7 @@ NunuApp.prototype.toggleVR = function()
 		}
 		else
 		{
-			this.program.displayVR();
+			this.program.enterVR();
 		}
 	}
 	else

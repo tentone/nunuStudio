@@ -10,7 +10,7 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"serve": "http-server . -p 8080 --cors -o",
+		"serve": "http-server . -p 8080 --cors -o http://localhost:8080/index.html",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"cordova-requirements": "cd ./temp && cordova requirements",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
