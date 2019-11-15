@@ -8,8 +8,8 @@
  * @class Video
  * @extends {Resource}
  * @module Resources
- * @param {String} url URL to video file.
- * @param {String} encoding Image encoding, required for ArrayBuffer data.
+ * @param {string} url URL to video file.
+ * @param {string} encoding Image encoding, required for ArrayBuffer data.
  */
 function Video(url, encoding)
 {
@@ -67,7 +67,7 @@ Video.fileIsVideo = function(file)
  *
  * @method loadArrayBufferData
  * @param {ArrayBuffer} data Data to be loaded.
- * @param {String} encoding Video enconding (mp4, webm, etc).
+ * @param {string} encoding Video enconding (mp4, webm, etc).
  */
 Video.prototype.loadArrayBufferData = function(data, encoding)
 {

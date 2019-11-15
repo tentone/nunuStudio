@@ -50,7 +50,7 @@ function KinectDevice()
 	 * Time until data is considered too obsolete to be usable.
 	 * 
 	 * @property dataTimeout
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.dataTimeout = 0;
 
@@ -109,7 +109,7 @@ function KinectDevice()
  * Kinect default data timeout in seconds.
  * 
  * @attribute DATA_TIMEOUT
- * @type {Number}
+ * @type {number}
  */
 KinectDevice.DATA_TIMEOUT = 20;
 
@@ -118,7 +118,7 @@ KinectDevice.DATA_TIMEOUT = 20;
  * Kinect camera depth mode.
  * 
  * @attribute DEPTH
- * @type {Number}
+ * @type {number}
  */
 KinectDevice.DEPTH = 0;
 
@@ -126,7 +126,7 @@ KinectDevice.DEPTH = 0;
  * Kinect camera color mode.
  * 
  * @attribute COLOR
- * @type {Number}
+ * @type {number}
  */
 KinectDevice.COLOR = 1;
 

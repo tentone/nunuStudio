@@ -21,7 +21,7 @@ function PositionalAudio(audio)
 	 * Distance model to be applied to the audio panner.
 	 *
 	 * @property distanceModel
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.distanceModel = "inverse";
 
@@ -29,7 +29,7 @@ function PositionalAudio(audio)
 	 * Model to be applied to the audio panner.
 	 *
 	 * @property panningModel
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.panningModel = "HRTF";
 
@@ -136,7 +136,7 @@ PositionalAudio.prototype.getOutput = function()
  * Get reference distance.
  * 
  * @method getRefDistance
- * @return {Number} Reference distance.
+ * @return {number} Reference distance.
  */
 PositionalAudio.prototype.getRefDistance = function()
 {
@@ -147,7 +147,7 @@ PositionalAudio.prototype.getRefDistance = function()
  * Set reference distance.
  * 
  * @method setRefDistance
- * @param {Number} value Reference distance.
+ * @param {number} value Reference distance.
  */
 PositionalAudio.prototype.setRefDistance = function(value)
 {
@@ -158,7 +158,7 @@ PositionalAudio.prototype.setRefDistance = function(value)
  * Get rolloff factor.
  * 
  * @method getRolloffFactor
- * @return {Number} Rolloff factor.
+ * @return {number} Rolloff factor.
  */
 PositionalAudio.prototype.getRolloffFactor = function()
 {
@@ -169,7 +169,7 @@ PositionalAudio.prototype.getRolloffFactor = function()
  * Set rolloff factor.
  * 
  * @method setRolloffFactor
- * @param {Number} value Rolloff factor.
+ * @param {number} value Rolloff factor.
  */
 PositionalAudio.prototype.setRolloffFactor = function(value)
 {
@@ -181,7 +181,7 @@ PositionalAudio.prototype.setRolloffFactor = function(value)
  * Get distance model in use by this audio emitter.
  *
  * @method getDistanceModel
- * @return {String} Distance model.
+ * @return {string} Distance model.
  */
 PositionalAudio.prototype.getDistanceModel = function()
 {
@@ -202,7 +202,7 @@ PositionalAudio.prototype.getDistanceModel = function()
  *    - pow(distance / refDistance, -rolloffFactor).
  * 
  * @method setDistanceModel
- * @param {String} model Distance Model to be used.
+ * @param {string} model Distance Model to be used.
  */
 PositionalAudio.prototype.setDistanceModel = function(distanceModel)
 {
@@ -224,7 +224,7 @@ PositionalAudio.prototype.getMaxDistance = function()
  * Set maximum distance for this audio emitter.
  *
  * @method setMaxDistance
- * @param {Number} value Maximum distance.
+ * @param {number} value Maximum distance.
  */
 PositionalAudio.prototype.setMaxDistance = function(value)
 {

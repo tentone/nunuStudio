@@ -23,7 +23,7 @@ catch(e){}
  * Check if a file corresponds to a remote location.
  *
  * @method isRemote
- * @return {Boolean} If the file is remote returns true, false otherwise.
+ * @return {boolean} If the file is remote returns true, false otherwise.
  */
 FileSystem.isRemote = function(fname)
 {
@@ -36,12 +36,12 @@ FileSystem.isRemote = function(fname)
  * When running on desktop uses nodejs to access files, on the web performs a http GET request.
  * 
  * @method readFile
- * @param {String} fname Path or URL of the file being read.
+ * @param {string} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
  * @param {Function} onLoad onLoad callback receives the read data as parameter.
  * @param {Function} onProgress onProgress callback used to check the file reading progress.
  * @param {Function} onError onError call is called when a error occurs while reading the file.
- * @return {String} File text, or null if the request is async.
+ * @return {string} File text, or null if the request is async.
  */
 FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 {
@@ -120,7 +120,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
  * When running on desktop uses nodejs to access files, on the web performs a http GET request.
  * 
  * @method readFileArrayBuffer
- * @param {String} fname Path or URL of the file being read.
+ * @param {string} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
  * @param {Function} onLoad onLoad callback receives the read data as parameter.
  * @param {Function} onProgress onProgress callback used to check the file reading progress.
@@ -198,12 +198,12 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
  * When running on desktop uses nodejs to access files, on the web performs a http GET request.
  * 
  * @method readFileBase64
- * @param {String} fname Path or URL of the file being read.
+ * @param {string} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
  * @param {Function} onLoad onLoad callback receives the read data as parameter.
  * @param {Function} onProgress onProgress callback used to check the file reading progress.
  * @param {Function} onError onError call is called when a error occurs while reading the file.
- * @return {String} File data as base64, or null if the request is async.
+ * @return {string} File data as base64, or null if the request is async.
  */
 FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 {
@@ -275,9 +275,9 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
  * When running on the web it writes file to a blob and auto downloads it.
  *
  * @method writeFile
- * @param {String} fname Name/path of the file to write.
- * @param {String} data Text to be written to the file.
- * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs).
+ * @param {string} fname Name/path of the file to write.
+ * @param {string} data Text to be written to the file.
+ * @param {boolean} sync If true the file is written syncronously. (Only available for Nodejs).
  * @param {Function} onFinish Callback function called when the file is written.
  */
 FileSystem.writeFile = function(fname, data, sync, onFinish)
@@ -334,9 +334,9 @@ FileSystem.writeFile = function(fname, data, sync, onFinish)
  * If running on the web writes the file into a blob and auto downloads it.
  *
  * @method writeFileBase64
- * @param {String} fname Name/path of the file to write.
- * @param {String} data Base64 data to be written into the file.
- * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs)
+ * @param {string} fname Name/path of the file to write.
+ * @param {string} data Base64 data to be written into the file.
+ * @param {boolean} sync If true the file is written syncronously. (Only available for Nodejs)
  * @param {Function} onFinish Callback function called when the file is written.
  */
 FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
@@ -397,9 +397,9 @@ FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
  * If running on the web writes the file into a blob and auto downloads it.
  *
  * @method writeFileArrayBuffer
- * @param {String} fname Name/path of the file to write.
- * @param {String} data Arraybuffer data to be written into the file.
- * @param {Boolean} sync If true the file is written syncronously. (Only available for Nodejs)
+ * @param {string} fname Name/path of the file to write.
+ * @param {string} data Arraybuffer data to be written into the file.
+ * @param {boolean} sync If true the file is written syncronously. (Only available for Nodejs)
  * @param {Function} onFinish Callback function called when the file is written.
  */
 FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
@@ -462,9 +462,9 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
  *
  * @method chooseFile
  * @param {Function} onLoad onLoad callback that receives array of files choosen as parameter.
- * @param {String} filter File type filter.
- * @param {String} saveas File format or name to be used, optinonally it can be a boolean value indicating savemode.
- * @param {Boolean} multiFile If true the chooser will accept multiple files.
+ * @param {string} filter File type filter.
+ * @param {string} saveas File format or name to be used, optinonally it can be a boolean value indicating savemode.
+ * @param {boolean} multiFile If true the chooser will accept multiple files.
  */
 FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
 {
@@ -508,7 +508,7 @@ FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
  * 
  * @method chooseFileName
  * @param {Function} onLoad onLoad callback
- * @param {String} saveas File extension
+ * @param {string} saveas File extension
  */
 FileSystem.chooseFileName = function(onLoad, saveas, name)
 {
@@ -534,8 +534,8 @@ FileSystem.chooseFileName = function(onLoad, saveas, name)
  * Only works when running inside NWJS.
  *
  * @method copyFile
- * @param {String} src
- * @param {String} dst
+ * @param {string} src
+ * @param {string} dst
  */
 FileSystem.copyFile = function(src, dst)
 {
@@ -561,7 +561,7 @@ FileSystem.copyFile = function(src, dst)
  * Only works when running inside NWJS.
  *
  * @method makeDirectory
- * @param {String} dir
+ * @param {string} dir
  */
 FileSystem.makeDirectory = function(dir)
 {
@@ -604,7 +604,7 @@ FileSystem.getFilesDirectory = function(dir)
  * Only works when running inside NWJS.
  *
  * @method deleteFolder
- * @param {String} path
+ * @param {string} path
  */
 FileSystem.deleteFolder = function(path)
 {
@@ -637,8 +637,8 @@ FileSystem.deleteFolder = function(path)
  * Only works when running inside NWJS.
  *
  * @method copyFolder
- * @param {String} src
- * @param {String} dst
+ * @param {string} src
+ * @param {string} dst
  */
 FileSystem.copyFolder = function(src, dst)
 {
@@ -681,7 +681,7 @@ FileSystem.copyFolder = function(src, dst)
  * Only works inside of NWJS. When running inside the browser always returns false.
  *
  * @method fileExists
- * @param {String} file File path
+ * @param {string} file File path
  * @return {boolean} True is file exists
  */
 FileSystem.fileExists = function(file)
@@ -702,8 +702,8 @@ FileSystem.fileExists = function(file)
  * If input is a/b/c/abc.d output is abc.
  * 
  * @method getFileName
- * @param {String} file File path
- * @return {String} File name without path and extension
+ * @param {string} file File path
+ * @return {string} File name without path and extension
  */
 FileSystem.getFileName = function(file)
 {
@@ -724,8 +724,8 @@ FileSystem.getFileName = function(file)
  * If input is a/b/c/abc.d output is abc.d.
  * 
  * @method getFileNameWithExtension
- * @param {String} file File path
- * @return {String} File name without path with extension
+ * @param {string} file File path
+ * @return {string} File name without path with extension
  */
 FileSystem.getFileNameWithExtension = function(file)
 {
@@ -746,8 +746,8 @@ FileSystem.getFileNameWithExtension = function(file)
  * If input is a/b/c/abc.d output is a/b/c/abc.
  *
  * @method getNameWithoutExtension
- * @param {String} file File path
- * @return {String}
+ * @param {string} file File path
+ * @return {string}
  */
 FileSystem.getNameWithoutExtension = function(file)
 {
@@ -765,8 +765,8 @@ FileSystem.getNameWithoutExtension = function(file)
  * If input is a/b/c/abc.d output is a/b/c/
  *
  * @method getFilePath
- * @param {String} file File path
- * @return {String}
+ * @param {string} file File path
+ * @return {string}
  */
 FileSystem.getFilePath = function(file)
 {
@@ -787,8 +787,8 @@ FileSystem.getFilePath = function(file)
  * If input is a/b/c/abc.d output is d.
  *
  * @method getFileExtension
- * @param {String} file File path
- * @return {String}
+ * @param {string} file File path
+ * @return {string}
  */
 FileSystem.getFileExtension = function(file)
 {	

@@ -7,8 +7,8 @@
  * 
  * @class Mouse
  * @module Input
- * @param {DOM} domElement DOM element to craete the mouse events.
- * @param {Boolean} dontInitialize If true the mouse events are not created.
+ * @param {Element} domElement DOM element to craete the mouse events.
+ * @param {boolean} dontInitialize If true the mouse events are not created.
  */
 function Mouse(domElement, dontInitialize)
 {
@@ -48,7 +48,7 @@ function Mouse(domElement, dontInitialize)
 	/**
 	 * Mouse scroll wheel movement.
 	 *
-	 * @type {Number}
+	 * @type {number}
 	 * @property wheel
 	 */
 	this.wheel = 0;
@@ -65,14 +65,14 @@ function Mouse(domElement, dontInitialize)
 	 * DOM element where to attach the mouse events.
 	 *
 	 * @property domElement
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.domElement = (domElement !== undefined) ? domElement : window;
 
 	/**
 	 * Canvas attached to this mouse instance used to calculate position and delta in element space coordinates.
 	 *
-	 * @type {DOM}
+	 * @type {Element}
 	 * @property canvas
 	 */
 	this.canvas = null;
@@ -210,7 +210,7 @@ Mouse.prototype.constructor = Mouse;
  * Left mouse button.
  *
  * @attribute LEFT
- * @type {Number}
+ * @type {number}
  */
 Mouse.LEFT = 0;
 
@@ -218,7 +218,7 @@ Mouse.LEFT = 0;
  * Middle mouse button.
  *
  * @attribute MIDDLE
- * @type {Number}
+ * @type {number}
  */
 Mouse.MIDDLE = 1;
 
@@ -226,7 +226,7 @@ Mouse.MIDDLE = 1;
  * Right mouse button.
  *
  * @attribute RIGHT
- * @type {Number}
+ * @type {number}
  */
 Mouse.RIGHT = 2;
 
@@ -234,7 +234,7 @@ Mouse.RIGHT = 2;
  * Back mouse navigation button.
  *
  * @attribute BACK
- * @type {Number}
+ * @type {number}
  */
 Mouse.BACK = 3;
 
@@ -242,7 +242,7 @@ Mouse.BACK = 3;
  * Forward mouse navigation button.
  *
  * @attribute FORWARD
- * @type {Number}
+ * @type {number}
  */
 Mouse.FORWARD = 4;
 
@@ -250,7 +250,7 @@ Mouse.FORWARD = 4;
  * Element to be used for coordinates calculation relative to that canvas.
  * 
  * @method setCanvas
- * @param {DOM} canvas Canvas to be attached to the Mouse instance
+ * @param {Element} canvas Canvas to be attached to the Mouse instance
  */
 Mouse.setCanvas = function(element)
 {
@@ -327,7 +327,7 @@ Mouse.setLock = function(value)
  * Check if mouse button is currently pressed.
  * 
  * @method buttonPressed
- * @param {Number} button Button to check status of
+ * @param {number} button Button to check status of
  * @return {boolean} True if button is currently pressed
  */
 Mouse.buttonPressed = function(button)
@@ -339,7 +339,7 @@ Mouse.buttonPressed = function(button)
  * Check if Mouse button was double clicked.
  * 
  * @method buttonDoubleClicked
- * @param {Number} button Button to check status of
+ * @param {number} button Button to check status of
  * @return {boolean} True if some mouse button was just double clicked
  */
 Mouse.buttonDoubleClicked = function(button)
@@ -351,7 +351,7 @@ Mouse.buttonDoubleClicked = function(button)
  * Check if a mouse button was just pressed.
  * 
  * @method buttonJustPressed
- * @param {Number} button Button to check status of
+ * @param {number} button Button to check status of
  * @return {boolean} True if button was just pressed
  */
 Mouse.buttonJustPressed = function(button)
@@ -363,7 +363,7 @@ Mouse.buttonJustPressed = function(button)
  * Check if a mouse button was just released.
  * 
  * @method buttonJustReleased
- * @param {Number} button Button to check status of
+ * @param {number} button Button to check status of
  * @return {boolean} True if button was just released
  */
 Mouse.buttonJustReleased = function(button)
@@ -377,10 +377,10 @@ Mouse.buttonJustReleased = function(button)
  * Automatically called by the runtime.
  * 
  * @method updatePosition
- * @param {Number} x
- * @param {Number} y
- * @param {Number} xDiff
- * @param {Number} yDiff
+ * @param {number} x
+ * @param {number} y
+ * @param {number} xDiff
+ * @param {number} yDiff
  */
 Mouse.updatePosition = function(x, y, xDiff, yDiff)
 {
@@ -403,8 +403,8 @@ Mouse.updatePosition = function(x, y, xDiff, yDiff)
  * Automatically called by the runtime.
  *
  * @method updateKey
- * @param {Number} button
- * @param {Number} action
+ * @param {number} button
+ * @param {number} action
  */
 Mouse.updateKey = function(button, action)
 {

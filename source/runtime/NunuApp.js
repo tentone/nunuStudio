@@ -211,7 +211,7 @@ include("source/core/utils/PhysicsGenerator.js");
  * @class NunuApp
  * @module Runtime
  * @constructor
- * @param {DOM} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
+ * @param {Element} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
  */
 function NunuApp(canvas)
 {
@@ -233,7 +233,7 @@ function NunuApp(canvas)
 	 * Runtime control, if true the app is running.
 	 * 
 	 * @property running
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.running = false;
 
@@ -251,7 +251,7 @@ function NunuApp(canvas)
 	/**
 	 * Canvas used to render graphics.
 	 * @property canvas
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.canvas = canvas;
 
@@ -281,8 +281,8 @@ function NunuApp(canvas)
  *
  * @static
  * @method loadApp
- * @param {URL} url URL for the nsp or isp nunuStudio file.
- * @param {String} canvas Canvas object or canvas id.
+ * @param {string} url URL for the nsp or isp nunuStudio file.
+ * @param {string} canvas Canvas object or canvas id.
  */
 NunuApp.loadApp = function(url, canvas)
 {	
@@ -379,7 +379,7 @@ NunuApp.prototype.run = function()
  * Load program asynchronously and run it after its loaded.
  * 
  * @method loadRunProgram
- * @param {String} fname Name of the file to load
+ * @param {string} fname Name of the file to load
  * @param {Function} onLoad onLoad callback
  * @param {Function} onProgress onProgress callback
  */
@@ -400,7 +400,7 @@ NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
  * Load program from file.
  * 
  * @method loadProgram
- * @param {String} fname Name of the file to load
+ * @param {string} fname Name of the file to load
  */
 NunuApp.prototype.loadProgram = function(fname)
 {
@@ -425,7 +425,7 @@ NunuApp.prototype.loadProgram = function(fname)
  * Load program from file, asynchronously.
  * 
  * @method loadProgramAsync
- * @param {String} fname Name of the file to load
+ * @param {string} fname Name of the file to load
  * @param {Function} onLoad onLoad callback. Receives as argument the loaded application.
  * @param {Function} onProgress onProgress callback
  */
@@ -549,7 +549,7 @@ NunuApp.prototype.resume = function()
 			{
 				self.update();
 
-				if(self.program.useVR)
+				if(self.program.vr)
 				{
 					self.program.display.requestAnimationFrame(update);
 				}
@@ -581,7 +581,7 @@ NunuApp.prototype.pause = function()
  * Should be set before starting the program.
  *
  * @method setCanvas
- * @param {DOM} canvas Canvas
+ * @param {Element} canvas Canvas
  */
 NunuApp.prototype.setCanvas = function(canvas)
 {
@@ -680,7 +680,7 @@ NunuApp.prototype.setOnExit = function(callback)
  */
 NunuApp.prototype.vrAvailable = function()
 {
-	return this.program !== null && this.program.vr && Nunu.vrAvailable();	
+	return Nunu.vrAvailable() && this.program !== null && this.program.vr;	
 };
 
 /**
@@ -692,7 +692,7 @@ NunuApp.prototype.toggleVR = function()
 {
 	if(this.vrAvailable())
 	{
-		if(this.program.useVR)
+		if(this.program.vr)
 		{
 			this.program.exitVR();
 		}
@@ -711,7 +711,7 @@ NunuApp.prototype.toggleVR = function()
  * Set a element to fullscreen mode, if none is passed the rendering canvas is used.
  *
  * @method toggleFullscreen
- * @param {DOM} element DOM element to go fullscren by default the rendering canvas is used
+ * @param {Element} element DOM element to go fullscren by default the rendering canvas is used
  */
 NunuApp.prototype.toggleFullscreen = function(element)
 {

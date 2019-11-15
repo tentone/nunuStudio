@@ -10,15 +10,15 @@
  * @class CubeTexture
  * @extends {Texture}
  * @param {Array} images Image array
- * @param {Number} mapping
- * @param {Number} wrapS
- * @param {Number} wrapT
- * @param {Number} magFilter
- * @param {Number} minFilter
- * @param {Number} format
- * @param {Number} type
- * @param {Number} anisotropy
- * @param {Number} encoding
+ * @param {number} mapping
+ * @param {number} wrapS
+ * @param {number} wrapT
+ * @param {number} magFilter
+ * @param {number} minFilter
+ * @param {number} format
+ * @param {number} type
+ * @param {number} anisotropy
+ * @param {number} encoding
  */
 function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
@@ -41,7 +41,7 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 	 * Size of each one of the texture that compose the CubeTexture.
 	 *
 	 * @property size
-	 * @type {Number}
+	 * @type {number}
 	 * @default 512
 	 */
 	this.size = 512;
@@ -53,7 +53,7 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 	 *
 	 * Source format may vary from a mode to another.
 	 * @property mode
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.mode = (this.images.length === 6) ? CubeTexture.CUBE : CubeTexture.CROSS;
 
@@ -73,7 +73,7 @@ CubeTexture.prototype.isCubeTexture = true;
  * Cubemap right image index
  *
  * @attribute RIGHT
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.RIGHT = 0;
 
@@ -81,7 +81,7 @@ CubeTexture.RIGHT = 0;
  * Cubemap left image index
  *
  * @attribute LEFT
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.LEFT = 1;
 
@@ -89,7 +89,7 @@ CubeTexture.LEFT = 1;
  * Cubemap top image index
  *
  * @attribute TOP
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.TOP = 2;
 
@@ -97,7 +97,7 @@ CubeTexture.TOP = 2;
  * Cubemap bottom image index
  *
  * @attribute BOTTOM
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.BOTTOM = 3;
 
@@ -105,7 +105,7 @@ CubeTexture.BOTTOM = 3;
  * Cubemap front image index
  *
  * @attribute FRONT
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.FRONT = 4;
 
@@ -113,7 +113,7 @@ CubeTexture.FRONT = 4;
  * Cubemap back image index
  *
  * @attribute BACK
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.BACK = 5;
 
@@ -121,7 +121,7 @@ CubeTexture.BACK = 5;
  * CubeMap mode, 6 images used as source for the texture.
  *
  * @attribute CUBE
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.CUBE = 20;
 
@@ -129,7 +129,7 @@ CubeTexture.CUBE = 20;
  * CubeMap mode, single image used as source.
  *
  * @attribute CROSS
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.CROSS = 21;
 
@@ -139,7 +139,7 @@ CubeTexture.CROSS = 21;
  * Source image should have a 2:1 aspect ratio.
  *
  * @attribute EQUIRECTANGULAR
- * @type {Number}
+ * @type {number}
  */
 CubeTexture.EQUIRECTANGULAR = 22;
 
@@ -150,7 +150,7 @@ CubeTexture.EQUIRECTANGULAR = 22;
  * The size has to be a power of 2.
  * 
  * @method setSize
- * @param {Number} size Cube face resolution.
+ * @param {number} size Cube face resolution.
  */
 CubeTexture.prototype.setSize = function(size)
 {
@@ -168,7 +168,7 @@ CubeTexture.prototype.setSize = function(size)
  *
  * @method setImages
  * @param {Array} images Cube texture images.
- * @param {Number} mode Mode to be used.
+ * @param {number} mode Mode to be used.
  */
 CubeTexture.prototype.setImages = function(images, mode)
 {
@@ -272,9 +272,9 @@ CubeTexture.prototype.updateImages = function()
  * @method resampleBilinear
  * @param {ImageData} read Where to read data from.
  * @param {ImageData} write Where to write data.
- * @param {Number} x Origin pixel x.
- * @param {Number} y Origin pixel y.
- * @param {Number} index Target index.
+ * @param {number} x Origin pixel x.
+ * @param {number} y Origin pixel y.
+ * @param {number} index Target index.
  */
 CubeTexture.resampleBilinear = function(read, write, x, y, index)
 {
@@ -309,9 +309,9 @@ CubeTexture.resampleBilinear = function(read, write, x, y, index)
  *
  * @method renderEquirectFace
  * @param {ImageData} read Equirectangular image.
- * @param {Number} face Face to render.
- * @param {Number} rotation Image rotation
- * @param {Number} size Face size.
+ * @param {number} face Face to render.
+ * @param {number} rotation Image rotation
+ * @param {number} size Face size.
  * @return {ImageData} Face data.
  */
 CubeTexture.renderEquirectFace = function(read, face, rotation, size)

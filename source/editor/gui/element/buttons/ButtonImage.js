@@ -15,7 +15,7 @@ function ButtonImage(parent)
 	 * Button icon.
 	 * 
 	 * @attribute icon
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.icon = document.createElement("img");
 	this.icon.style.pointerEvents = "none";
@@ -35,7 +35,7 @@ ButtonImage.prototype = Object.create(Button.prototype);
  * Set button drawer icon.
  *
  * @method setImage
- * @param {String} image Image URL.
+ * @param {string} image Image URL.
  */
 ButtonImage.prototype.setImage = function(image)
 {

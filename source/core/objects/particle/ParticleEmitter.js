@@ -42,7 +42,7 @@ function ParticleEmitter(group, emitter)
 	 * A dynamic particle emmiter ignores the position in its transform and applies it directly to the emitter origin.
 	 *
 	 * @property dinamicEmitter
-	 * @type {Boolean} 
+	 * @type {boolean} 
 	 */
 	this.dynamicEmitter = false;
 
@@ -78,7 +78,7 @@ var ParticleDistributions = {
 	 * Values will be distributed within a box.
 	 *
 	 * @attribute BOX
-	 * @type {Number}
+	 * @type {number}
 	 */
 	BOX: 1,
 
@@ -86,7 +86,7 @@ var ParticleDistributions = {
 	 * Values will be distributed on a sphere.
 	 *
 	 * @attribute SPHERE
-	 * @type {Number}
+	 * @type {number}
 	 */
 	SPHERE: 2,
 
@@ -94,7 +94,7 @@ var ParticleDistributions = {
 	 * Values will be distributed on a 2d-disc shape.
 	 *
 	 * @attribute DISC
-	 * @type {Number}
+	 * @type {number}
 	 */
 	DISC: 3,
 };
@@ -111,7 +111,7 @@ var ParticleDistributions = {
  * This property affects the length of ALL value-over-lifetime properties for ALL  emitters and ALL groups. Only values >= 3 && <= 4 are allowed.
  *
  * @attribute valueOverLifetimeLength
- * @type {Number}
+ * @type {number}
  */
 ParticleEmitter.valueOverLifetimeLength = 4;
 

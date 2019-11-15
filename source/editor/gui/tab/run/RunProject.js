@@ -187,7 +187,7 @@ RunProject.prototype.destroy = function()
  * Set fullscreen mode of the tab canvas
  *
  * @method setFullscreen
- * @param {Boolean} fullscreen If true enters fullscreen if false exits fullscreen.
+ * @param {boolean} fullscreen If true enters fullscreen if false exits fullscreen.
  */
 RunProject.prototype.setFullscreen = function(fullscreen)
 {
@@ -329,30 +329,27 @@ RunProject.prototype.runProgram = function()
 	}
 
 	//If program uses VR set button
-	if(this.program.vr === true)
+	if(this.program.vr && Nunu.vrAvailable())
 	{
-		if(Nunu.vrAvailable())
+		//Show VR button
+		this.vrButton.setVisibility(true);
+
+		//Create VR switch callback
+		var vr = true;
+		var program = this.program;
+		this.vrButton.setOnClick(function()
 		{
-			//Show VR button
-			this.vrButton.setVisibility(true);
-
-			//Create VR switch callback
-			var vr = true;
-			var self = this;
-			this.vrButton.setOnClick(function()
+			if(vr)
 			{
-				if(vr)
-				{
-					self.program.displayVR();
-				}
-				else
-				{
-					self.program.exitVR();
-				}
+				program.displayVR();
+			}
+			else
+			{
+				program.exitVR();
+			}
 
-				vr = !vr;
-			});
-		}
+			vr = !vr;
+		});
 	}
 
 	//Lock mouse pointer

@@ -6,7 +6,7 @@
  * @class AddResourceAction
  * @param {Resource} resource Resource to add.
  * @param {ResourceManager} manager Manager to insert the resource into.
- * @param {String} category Category of the resource.
+ * @param {string} category Category of the resource.
  */
 function AddResourceAction(resource, manager, category)
 {

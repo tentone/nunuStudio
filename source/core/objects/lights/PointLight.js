@@ -5,10 +5,10 @@
  * 
  * Based on THREE.PointLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/PointLight
  * 
- * @param {Number} hex Light color in hex RGB
- * @param {Number} intensity Light intensity
- * @param {Number} distance Maximum PointLight range
- * @param {Number} decay
+ * @param {number} hex Light color in hex RGB
+ * @param {number} intensity Light intensity
+ * @param {number} distance Maximum PointLight range
+ * @param {number} decay
  * @class PointLight
  * @extends {PointLight}
  * @module Lights

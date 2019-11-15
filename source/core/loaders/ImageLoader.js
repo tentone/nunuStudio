@@ -19,7 +19,7 @@ function ImageLoader(manager)
  * Set cross origin path for the loader.
  * 
  * @method setCrossOrigin
- * @param {String} url URL.
+ * @param {string} url URL.
  * @return {ImageLoader} Self for chaining.
  */
 ImageLoader.prototype.setCrossOrigin = function(url)
@@ -32,7 +32,7 @@ ImageLoader.prototype.setCrossOrigin = function(url)
  * Set base path for texture loading.
  * 
  * @method setPath
- * @param {String} path Path
+ * @param {string} path Path
  * @return {ImageLoader} Self for chaining.
  */
 ImageLoader.prototype.setPath = function(path)
@@ -45,7 +45,7 @@ ImageLoader.prototype.setPath = function(path)
  * Load image resource from url.
  *
  * @method loadJSON
- * @param {String} url
+ * @param {string} url
  * @param {Function} onLoad
  * @param {Function} onProgress
  * @param {Function} onError

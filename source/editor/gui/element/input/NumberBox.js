@@ -32,7 +32,7 @@ NumberBox.prototype = Object.create(Element.prototype);
  * Set the disabled state of the element.
  *
  * @method setDisabled
- * @param {Boolean} disabled
+ * @param {boolean} disabled
  */
 NumberBox.prototype.setDisabled = function(disabled)
 {
@@ -43,8 +43,8 @@ NumberBox.prototype.setDisabled = function(disabled)
  * Set number range.
  *
  * @methos setRange
- * @param {Number} min
- * @param {Number} max
+ * @param {number} min
+ * @param {number} max
  */
 NumberBox.prototype.setRange = function(min, max)
 {
@@ -56,7 +56,7 @@ NumberBox.prototype.setRange = function(min, max)
  * Set number step.
  *
  * @method setStep
- * @param {Number} value
+ * @param {number} value
  */
 NumberBox.prototype.setStep = function(value)
 {
@@ -78,7 +78,7 @@ NumberBox.prototype.setOnChange = function(onChange)
  * Set value stored in the input element.
  *
  * @method setValue
- * @param {Number} value
+ * @param {number} value
  */
 NumberBox.prototype.setValue = function(value)
 {

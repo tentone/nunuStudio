@@ -88,7 +88,7 @@ AssetExplorer.prototype = Object.create(TabElement.prototype);
  * Only assets that contain the name will be shown.
  *
  * @method filterByName
- * @param {String} name String with portion of the name to be found and filtered.
+ * @param {string} name String with portion of the name to be found and filtered.
  */
 AssetExplorer.prototype.filterByName = function(search)
 {

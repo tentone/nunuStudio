@@ -11,7 +11,7 @@
  * @extends {Resource}
  * @module Resources
  * @param {ArrayBuffer, Base64, String} data Can be URL to image, ArrayBuffer data or base64 encoded data.
- * @param {String} encoding Image encoding, required for ArrayBuffer data.
+ * @param {string} encoding Image encoding, required for ArrayBuffer data.
  */
 function Image(url, encoding)
 {
@@ -81,7 +81,7 @@ Image.fileIsImage = function(file)
  * Can be called externally on data load error to load dummy data.
  *
  * @method createSolidColor
- * @param {String} color Color code
+ * @param {string} color Color code
  */
 Image.prototype.createSolidColor = function(color)
 {
@@ -105,7 +105,7 @@ Image.prototype.createSolidColor = function(color)
  *
  * @method loadArrayBufferData
  * @param {ArrayBuffer} data Data to be loaded.
- * @param {String} encoding Image enconding (jpeg, png, etc).
+ * @param {string} encoding Image enconding (jpeg, png, etc).
  */
 Image.prototype.loadArrayBufferData = function(data, encoding)
 {
@@ -158,7 +158,7 @@ Image.prototype.hasTransparency = function()
  * Can be used to compress data and save some space.
  * 
  * @method compressJPEG
- * @param {Number} quality JPEG compression quality level by default 0.7 is used (1.0  means max quality).
+ * @param {number} quality JPEG compression quality level by default 0.7 is used (1.0  means max quality).
  */
 Image.prototype.compressJPEG = function(quality)
 {

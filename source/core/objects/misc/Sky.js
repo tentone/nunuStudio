@@ -9,9 +9,9 @@
  * 	- Mesh
  * 
  * @param {boolean} autoUpdate If true sky auto updated its state 
- * @param {Number} dayTime Day duration in seconds
- * @param {Number} sunDistance Distance of the sun
- * @param {Number} time Starting time
+ * @param {number} dayTime Day duration in seconds
+ * @param {number} sunDistance Distance of the sun
+ * @param {number} time Starting time
  * @class Sky
  * @extends {Object3D}
  * @module Lights
@@ -43,7 +43,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * Sun color in hex RGB.
 	 *
 	 * @property sunColor
-	 * @type {Number}
+	 * @type {number}
 	 * @default 0xFFFFAA
 	 */
 	this.sunColor = 0xFFFFAA;
@@ -52,7 +52,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * Sun color intensity.
 	 *
 	 * @property intensity
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.intensity = 0.3;
 
@@ -60,7 +60,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * Moon color in hex RGB.
 	 *
 	 * @property moonColor
-	 * @type {Number}
+	 * @type {number}
 	 * @default 0x5555BB
 	 */
 	this.moonColor = 0x5555BB;
@@ -138,7 +138,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * Sun distance.
 	 *
 	 * @property sunDistance
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.sunDistance = sunDistance !== undefined ? sunDistance : 100;
 
@@ -146,7 +146,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * Day time in seconds.
 	 *
 	 * @property dayTime
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.dayTime = dayTime !== undefined ? dayTime : 120;
 
@@ -154,7 +154,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * Current day time in seconds.
 	 *
 	 * @property time
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.time = time !== undefined ? time : 75;
 	

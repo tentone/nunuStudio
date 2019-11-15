@@ -21,7 +21,7 @@ function ObjectLoader(manager)
  * Load object file from URL.
  *
  * @method load
- * @param {String} url
+ * @param {string} url
  * @param {Function} onLoad
  * @param {Function} onProgress
  * @param {Function} onError
@@ -92,7 +92,7 @@ ObjectLoader.prototype.parse = function(json, onLoad)
  * Define base path for external texture loading.
  *
  * @method setTexturePath
- * @param {String} path
+ * @param {string} path
  */
 ObjectLoader.prototype.setTexturePath = function(path)
 {
@@ -103,7 +103,7 @@ ObjectLoader.prototype.setTexturePath = function(path)
  * Set cross origin.
  *
  * @method setCrossOrigin
- * @param {String} origin
+ * @param {string} origin
  */
 ObjectLoader.prototype.setCrossOrigin = function(origin)
 {

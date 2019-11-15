@@ -9,20 +9,20 @@
  * @extends {Texture}
  * @module Textures
  * @param {Image} image
- * @param {Number} mapping
- * @param {Number} wrapS
- * @param {Number} wrapT
- * @param {Number} magFilter
- * @param {Number} minFilter
- * @param {Number} format
- * @param {Number} type
- * @param {Number} anisotropy
- * @param {Number} encoding
+ * @param {number} mapping
+ * @param {number} wrapS
+ * @param {number} wrapT
+ * @param {number} magFilter
+ * @param {number} minFilter
+ * @param {number} format
+ * @param {number} type
+ * @param {number} anisotropy
+ * @param {number} encoding
  */
 /**
  * UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.
  * @property uuid
- * @type {String}
+ * @type {string}
  */
 /**
  * How much a single repetition of the texture is offset from the beginning, in each direction U and V.
@@ -46,20 +46,20 @@
  * How much the texture is rotated around the center point, in radians. Postive values are counter-clockwise.
  *
  * @property rotation
- * @type {Number}
+ * @type {number}
  * @default 0
  */
 /**
  * False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.
  *
  * @property premultiplyAlpha
- * @type {Boolean}
+ * @type {boolean}
  */
 /**
  * Flips the image's Y axis to match the WebGL texture coordinate space.
  *
  * @property flipY
- * @type {Boolean}
+ * @type {boolean}
  */
 /**
  * Array of user-specified mipmaps (optional).
@@ -95,7 +95,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	/**
 	 * Name of the texture (doesn't need to be unique).
 	 * @property name
-	 * @type {String}
+	 * @type {string}
 	*/
 	this.name = "texture";
 	this.category = "Image";
@@ -117,7 +117,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	 * DOM element attached to the texture
 	 * 
 	 * @property image
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.image.crossOrigin = "anonymous";
 	this.image.src = this.img.data;

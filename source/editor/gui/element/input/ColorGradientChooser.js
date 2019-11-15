@@ -46,7 +46,7 @@ function ColorGradientChooser(parent)
 	 * Canvas DOM element used to draw the gradient.
 	 *
 	 * @property canvas
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.canvas = document.createElement("canvas");
 	this.canvas.style.position = "absolute";

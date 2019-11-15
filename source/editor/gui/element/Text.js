@@ -19,7 +19,7 @@ function Text(parent)
 	 * Span DOM element used to represent the text.
 	 *
 	 * @attribute span
-	 * @type {DOM}
+	 * @type {Element}
  	 */
 	this.span = document.createElement("span");
 	this.span.style.overflow = "hidden";
@@ -33,7 +33,7 @@ function Text(parent)
 	 * If set to true the text container will automatically fit the text size.
 	 *
 	 * @attribute fitContent
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.fitContent = false;
 
@@ -57,9 +57,9 @@ Text.prototype = Object.create(Element.prototype);
  * Set font to use for the text.
  * 
  * @method setFont
- * @param {String} fontFamily Font family.
- * @param {Number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
- * @param {String} fontStyle Font style, specifies the font style for a text.
+ * @param {string} fontFamily Font family.
+ * @param {number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
+ * @param {string} fontStyle Font style, specifies the font style for a text.
  */
 Text.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
 {
@@ -80,7 +80,7 @@ Text.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
  * Enable of disable word breaking.
  *
  * @method allowWordBreak
- * @param {Boolean} line If true words can be breaked.
+ * @param {boolean} line If true words can be breaked.
  */
 Text.prototype.allowWordBreak = function(value)
 {
@@ -100,7 +100,7 @@ Text.prototype.allowWordBreak = function(value)
  * Set text.
  *
  * @method setText
- * @param {String} text Text. 
+ * @param {string} text Text. 
  */
 Text.prototype.setText = function(text)
 {
@@ -111,8 +111,8 @@ Text.prototype.setText = function(text)
  * Set text border.
  *
  * @method setTextBorder
- * @param {Number} size Border size in pixels.
- * @param {String} color CSS Color. 
+ * @param {number} size Border size in pixels.
+ * @param {string} color CSS Color. 
  */
 Text.prototype.setTextBorder = function(size, color)
 {
@@ -123,7 +123,7 @@ Text.prototype.setTextBorder = function(size, color)
  * Set Text size, in pixels.
  * 
  * @method setTextSize
- * @param {Number} size Size in pixel for this text element.
+ * @param {number} size Size in pixel for this text element.
  */
 Text.prototype.setTextSize = function(size)
 {
@@ -134,7 +134,7 @@ Text.prototype.setTextSize = function(size)
  * Set text color.
  * 
  * @method setTextColor
- * @param {String} color Color code.
+ * @param {string} color Color code.
  */
 Text.prototype.setTextColor = function(color)
 {
@@ -145,7 +145,7 @@ Text.prototype.setTextColor = function(color)
  * Set text overflow handling
  *
  * @method setOverflow
- * @param {Number} overflow
+ * @param {number} overflow
  */
 Text.prototype.setOverflow = function(overflow)
 {
@@ -168,7 +168,7 @@ Text.prototype.setOverflow = function(overflow)
  *  - Text.RIGHT
  * 
  * @method setAlignment
- * @param {Number} align Alingment mode.
+ * @param {number} align Alingment mode.
  */
 Text.prototype.setAlignment = function(align)
 {
@@ -196,7 +196,7 @@ Text.prototype.setAlignment = function(align)
  *  - Text.BOTTOM
  * 
  * @method setVerticalAlignment
- * @param {Number} align Alingment mode.
+ * @param {number} align Alingment mode.
  */
 Text.prototype.setVerticalAlignment = function(align)
 {
@@ -229,7 +229,7 @@ Text.prototype.measure = function()
  * Set text internal margin in pixels.
  * 
  * @method setMargin
- * @param {Number} margin Margin size in pixels.
+ * @param {number} margin Margin size in pixels.
  */
 Text.prototype.setMargin = function(margin)
 {

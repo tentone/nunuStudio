@@ -163,7 +163,7 @@ ResourceManager.prototype.removeGeometry = function(geometry, defaultGeometry)
  * Get resource by name.
  * 
  * @method getResourceByName
- * @param {String} name Resource name
+ * @param {string} name Resource name
  * @return {Resource} Resource if found else null
  */
 ResourceManager.prototype.getResourceByName = function(name)
@@ -209,7 +209,7 @@ ResourceManager.prototype.removeResource = function(resource)
  * Get image by name.
  * 
  * @method getImageByName
- * @param {String} name Image name
+ * @param {string} name Image name
  * @return {Image} Image if found else null
  */
 ResourceManager.prototype.getImageByName = function(name)
@@ -245,7 +245,7 @@ ResourceManager.prototype.removeImage = function(image)
  * Get video by name.
  * 
  * @method getVideoByName
- * @param {String} name Video name
+ * @param {string} name Video name
  * @return {Video} Video if found else null
  */
 ResourceManager.prototype.getVideoByName = function(name)
@@ -280,7 +280,7 @@ ResourceManager.prototype.removeVideo = function(video)
  * Get material by its name.
  * 
  * @method getMaterialByName
- * @param {String} name Material name
+ * @param {string} name Material name
  * @return {Material} Material if found else null
  */
 ResourceManager.prototype.getMaterialByName = function(name)
@@ -356,7 +356,7 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMeshMateria
  * Get texture by name.
  * 
  * @method getTextureByName
- * @param {String} name Texture name.
+ * @param {string} name Texture name.
  * @return {Texture} Texture is found else null.
  */
 ResourceManager.prototype.getTextureByName = function(name)
@@ -478,7 +478,7 @@ ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
  * Get font by name.
  * 
  * @method getFontByName
- * @param {String} name
+ * @param {string} name
  * @return {Font} Font if found, else null
  */
 ResourceManager.prototype.getFontByName = function(name)
@@ -541,7 +541,7 @@ ResourceManager.prototype.removeFont = function(font, defaultFont)
  * Get audio by name.
  * 
  * @method getAudioByName
- * @param {String} name
+ * @param {string} name
  * @return {Audio} Audio if found, else null
  */
 ResourceManager.prototype.getAudioByName = function(name)

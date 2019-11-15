@@ -56,7 +56,7 @@ ResourceUtils.traverseDeep = function(object, callback)
  * @static
  * @method swapResource
  * @param {ResourceManager} manager Resource manage with program.
- * @param {String} category Name of the resource category.
+ * @param {string} category Name of the resource category.
  * @param {Resource} oldResource Old resource being replaced.
  * @param {Resource} newResource New resource used to replace the old one.
  */
@@ -127,7 +127,7 @@ ResourceUtils.removeDuplicated = function(object)
  * @method addResource
  * @param {ResourceManager} manager
  * @param {Resource} resource
- * @param {String} category
+ * @param {string} category
  */
 ResourceUtils.addResource = function(manager, resource, category)
 {
@@ -143,7 +143,7 @@ ResourceUtils.addResource = function(manager, resource, category)
  * @method removeResource
  * @param {ResourceManager} manager
  * @param {Resource} resource
- * @param {String} category
+ * @param {string} category
  */ 
 ResourceUtils.removeResource = function(manager, resource, category)
 {
@@ -181,7 +181,7 @@ ResourceUtils.removeResource = function(manager, resource, category)
  *
  * @static
  * @param {ResourceManager} manager
- * @param {String} name
+ * @param {string} name
  */
 ResourceUtils.getResourceByName = function(manager, name)
 {

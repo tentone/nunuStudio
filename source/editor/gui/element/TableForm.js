@@ -17,7 +17,7 @@ function TableForm(parent)
 	 * Set if the form needs to be automatically resized.
 	 *
 	 * @property autoSize
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.autoSize = true;
 
@@ -25,7 +25,7 @@ function TableForm(parent)
 	 * Resize the last element of the rows to fit the size of the container.
 	 *
 	 * @method fitElements
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.fitElements = true;
 
@@ -41,7 +41,7 @@ function TableForm(parent)
 	 * Default text width.
 	 *
 	 * @property defaultTextWidth
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.defaultTextWidth = 80;
 
@@ -61,7 +61,7 @@ TableForm.prototype = Object.create(Element.prototype);
  * Set if the form should be automatically resized, and ajust overflow value.
  *
  * @method setAutoSize
- * @param {Boolean} autoSize
+ * @param {boolean} autoSize
  */
 TableForm.prototype.setAutoSize = function(autoSize)
 {

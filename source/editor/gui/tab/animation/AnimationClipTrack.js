@@ -47,7 +47,7 @@ function AnimationClipTrack(editor, animation)
 	 * Timeline grid canvas where the timeline is drawn into.
 	 *
 	 * @attribute timegrid
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.timegrid = document.createElement("canvas");
 	this.timegrid.width = width + 1;

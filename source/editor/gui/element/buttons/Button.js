@@ -24,8 +24,8 @@ Button.prototype = Object.create(Element.prototype);
  * When mouse is over the button uses the overColor, when the mouse gets outside of the button it uses the base color.
  * 
  * @method setColor
- * @param {String} baseColor CSS color for the button background.
- * @param {String} overColor CSS color for the button when mouse is over it.
+ * @param {string} baseColor CSS color for the button background.
+ * @param {string} overColor CSS color for the button when mouse is over it.
  */
 Button.prototype.setColor = function(baseColor, overColor)
 {

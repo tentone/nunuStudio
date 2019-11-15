@@ -145,8 +145,8 @@ Gamepad.prototype.update = function(delta)
  * If the button is not analog enabled it will return 0 if button is not pressed or 1 if the button is pressed.
  *
  * @method getAnalogueButton
- * @param {Number} button Button to get analogue value from.
- * @return {Number} Value between 0 and 1 depending how hard the button is pressed.
+ * @param {number} button Button to get analogue value from.
+ * @return {number} Value between 0 and 1 depending how hard the button is pressed.
  */
 Gamepad.prototype.getAnalogueButton = function(button)
 {
@@ -157,8 +157,8 @@ Gamepad.prototype.getAnalogueButton = function(button)
  * Get axis value between -1 and 1 depending on the direction.
  *
  * @method getAxis
- * @param {Number} Axis to get value from.
- * @return {Number} Value between -1 and 1 depending on the axis direction
+ * @param {number} Axis to get value from.
+ * @return {number} Value between -1 and 1 depending on the axis direction
  */
 Gamepad.prototype.getAxis = function(axis)
 {
@@ -169,7 +169,7 @@ Gamepad.prototype.getAxis = function(axis)
  * Check if a button exists in the connected Gamepad.
  * 
  * @method buttonExists
- * @param {Number} button Button to check status of
+ * @param {number} button Button to check status of
  * @return {boolean} True if button exists in the connected gamepad.
  */
 Gamepad.prototype.buttonExists = function(button)
@@ -181,7 +181,7 @@ Gamepad.prototype.buttonExists = function(button)
  * Check if gamepad button is currently pressed.
  * 
  * @method buttonPressed
- * @param {Number} button Button to check status of
+ * @param {number} button Button to check status of
  * @return {boolean} True if button is currently pressed
  */
 Gamepad.prototype.buttonPressed = function(button)
@@ -193,7 +193,7 @@ Gamepad.prototype.buttonPressed = function(button)
  * Check if a gamepad button was just pressed.
  * 
  * @method buttonJustPressed
- * @param {Number} button Button to check status of
+ * @param {number} button Button to check status of
  * @return {boolean} True if button was just pressed
  */
 Gamepad.prototype.buttonJustPressed = function(button)
@@ -205,7 +205,7 @@ Gamepad.prototype.buttonJustPressed = function(button)
  * Check if a gamepad button was just released.
  * 
  * @method buttonJustReleased
- * @param {Number} button Button to check status of
+ * @param {number} button Button to check status of
  * @return {boolean} True if button was just released
  */
 Gamepad.prototype.buttonJustReleased = function(button)
@@ -215,203 +215,203 @@ Gamepad.prototype.buttonJustReleased = function(button)
 
 /**
  * Gamepad LEFT button.
- * @type {Number}
+ * @type {number}
  * @attribute LEFT
  */
 Gamepad.LEFT = 14;
 
 /**
  * Gamepad RIGHT button.
- * @type {Number}
+ * @type {number}
  * @attribute RIGHT
  */
 Gamepad.RIGHT = 15;
 
 /**
  * Gamepad DOWN button.
- * @type {Number}
+ * @type {number}
  * @attribute DOWN
  */
 Gamepad.DOWN = 13;
 
 /**
  * Gamepad UP button.
- * @type {Number}
+ * @type {number}
  * @attribute UP
  */
 Gamepad.UP = 12;
 
 /**
  * Gamepad SELECT button.
- * @type {Number}
+ * @type {number}
  * @attribute SELECT
  */
 Gamepad.SELECT = 8;
 
 /**
  * Gamepad START button.
- * @type {Number}
+ * @type {number}
  * @attribute START
  */
 Gamepad.START = 9;
 
 /**
  * Gamepad HOME button.
- * @type {Number}
+ * @type {number}
  * @attribute HOME
  */
 Gamepad.HOME = 16;
 
 /**
  * Gamepad LEFT_TRIGGER_A button.
- * @type {Number}
+ * @type {number}
  * @attribute LEFT_TRIGGER_A
  */
 Gamepad.LEFT_TRIGGER_A = 4;
 
 /**
  * Gamepad LEFT_TRIGGER_B button.
- * @type {Number}
+ * @type {number}
  * @attribute LEFT_TRIGGER_B
  */
 Gamepad.LEFT_TRIGGER_B = 6;
 
 /**
  * Gamepad RIGHT_TRIGGER_A button.
- * @type {Number}
+ * @type {number}
  * @attribute RIGHT_TRIGGER_A
  */
 Gamepad.RIGHT_TRIGGER_A = 5;
 
 /**
  * Gamepad RIGHT_TRIGGER_B button.
- * @type {Number}
+ * @type {number}
  * @attribute RIGHT_TRIGGER_B
  */
 Gamepad.RIGHT_TRIGGER_B = 7;
 
 /**
  * Gamepad L1 button.
- * @type {Number}
+ * @type {number}
  * @attribute L1
  */
 Gamepad.L1 = 4;
 
 /**
  * Gamepad L2 button.
- * @type {Number}
+ * @type {number}
  * @attribute L2
  */
 Gamepad.L2 = 6;
 
 /**
  * Gamepad L3 button.
- * @type {Number}
+ * @type {number}
  * @attribute L3
  */
 Gamepad.L3 = 6;
 
 /**
  * Gamepad R1 button.
- * @type {Number}
+ * @type {number}
  * @attribute R1
  */
 Gamepad.R1 = 5;
 
 /**
  * Gamepad R2 button.
- * @type {Number}
+ * @type {number}
  * @attribute R2
  */
 Gamepad.R2 = 7;
 
 /**
  * Gamepad R3 button.
- * @type {Number}
+ * @type {number}
  * @attribute R3
  */
 Gamepad.R3 = 11;
 
 /**
  * Gamepad A button.
- * @type {Number}
+ * @type {number}
  * @attribute A
  */
 Gamepad.A = 0;
 
 /**
  * Gamepad B button.
- * @type {Number}
+ * @type {number}
  * @attribute B
  */
 Gamepad.B = 1;
 
 /**
  * Gamepad C button.
- * @type {Number}
+ * @type {number}
  * @attribute C
  */
 Gamepad.C = 2;
 
 /**
  * Gamepad D button.
- * @type {Number}
+ * @type {number}
  * @attribute D
  */
 Gamepad.D = 3;
 
 /**
  * Gamepad X button.
- * @type {Number}
+ * @type {number}
  * @attribute X
  */
 Gamepad.X = 2;
 
 /**
  * Gamepad Y button.
- * @type {Number}
+ * @type {number}
  * @attribute Y
  */
 Gamepad.Y = 3;
 
 /**
  * Gamepad LEFT_ANALOGUE_BUT axis.
- * @type {Number}
+ * @type {number}
  * @attribute LEFT_ANALOGUE_BUT
  */
 Gamepad.LEFT_ANALOGUE_BUT = 10;
 
 /**
  * Gamepad LEFT_ANALOGUE_HOR axis.
- * @type {Number}
+ * @type {number}
  * @attribute LEFT_ANALOGUE_HOR
  */
 Gamepad.LEFT_ANALOGUE_HOR = 0;
 
 /**
  * Gamepad LEFT_ANALOGUE_VERT axis.
- * @type {Number}
+ * @type {number}
  * @attribute LEFT_ANALOGUE_VERT
  */
 Gamepad.LEFT_ANALOGUE_VERT = 1;
 
 /**
  * Gamepad RIGHT_ANALOGUE_BUT axis.
- * @type {Number}
+ * @type {number}
  * @attribute RIGHT_ANALOGUE_BUT
  */
 Gamepad.RIGHT_ANALOGUE_BUT = 11;
 
 /**
  * Gamepad RIGHT_ANALOGUE_HOR axis.
- * @type {Number}
+ * @type {number}
  * @attribute RIGHT_ANALOGUE_HOR
  */
 Gamepad.RIGHT_ANALOGUE_HOR = 2;
 
 /**
  * Gamepad RIGHT_ANALOGUE_VERT axis.
- * @type {Number}
+ * @type {number}
  * @attribute RIGHT_ANALOGUE_VERT
  */
 Gamepad.RIGHT_ANALOGUE_VERT = 3;

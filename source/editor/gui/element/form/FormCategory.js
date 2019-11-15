@@ -25,7 +25,7 @@ FormCategory.prototype = Object.create(Element.prototype);
  * Set the title of this category.
  *
  * @method setTitle
- * @param {String} title Title of the category.
+ * @param {string} title Title of the category.
  */
 FormCategory.prototype.setTitle = function(title)
 {

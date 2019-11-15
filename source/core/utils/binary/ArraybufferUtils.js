@@ -13,7 +13,7 @@ function ArraybufferUtils(){}
  * Create arraybuffer from binary string
  *
  * @method fromBinaryString
- * @param {String} str
+ * @param {string} str
  * @return {Arraybuffer} data
  */
 ArraybufferUtils.fromBinaryString = function(str)
@@ -34,7 +34,7 @@ ArraybufferUtils.fromBinaryString = function(str)
  * Create arraybuffer from base64 string
  *
  * @method fromBase64
- * @param {String} base64
+ * @param {string} base64
  * @return {Arraybuffer} data
  */
 ArraybufferUtils.fromBase64 = function(str)

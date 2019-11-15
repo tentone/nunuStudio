@@ -8,7 +8,7 @@
  * @class Font
  * @extends {Resource}
  * @module Resources
- * @param {String} url URL to font file
+ * @param {string} url URL to font file
  */
 function Font(url)
 {
@@ -78,7 +78,7 @@ Font.prototype = Object.create(Resource.prototype);
  *
  * @method fileIsFont
  * @static
- * @param {String} fname
+ * @param {string} fname
  * @return {boolean} True if the fname refers to a supported font format.
  */
 Font.fileIsFont = function(file)
@@ -169,9 +169,9 @@ Font.prototype.toJSON = function(meta)
  * The shapes generated can be extruded to create 3D geometry.
  *
  * @method generateShapes
- * @param {String} text
- * @param {Number} size
- * @param {Number} divisions
+ * @param {string} text
+ * @param {number} size
+ * @param {number} divisions
  * @return {Array} paths
  */
 Font.prototype.generateShapes = function(text, size, divisions)

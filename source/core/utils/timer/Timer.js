@@ -7,7 +7,7 @@
  *
  * @class Timer
  * @param {Function} callback Timer callback function.
- * @param {Number} time Timer period.
+ * @param {number} time Timer period.
  */
 function Timer(callback, time)
 {

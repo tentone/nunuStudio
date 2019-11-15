@@ -9,7 +9,7 @@
  * @extends {Action}
  * @param {THREE.Object3D} originalObject Object originally in place, to be replaced.
  * @param {THREE.Object3D} newObject Object to take place of the old one.
- * @param {Boolean} moveChildren If tru move the children from the original object to the new.
+ * @param {boolean} moveChildren If tru move the children from the original object to the new.
  */
 function SwapAction(originalObject, newObject, moveChildren)
 {

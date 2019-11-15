@@ -17,7 +17,7 @@ function Pass()
 	 * If set to true, the pass is processed by the composer.
 	 *
 	 * @property enabled
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.enabled = true;
 
@@ -25,7 +25,7 @@ function Pass()
 	 * If set to true, the pass indicates to swap read and write buffer after rendering.
 	 *
 	 * @property needsSwap
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.needsSwap = true;
 
@@ -33,7 +33,7 @@ function Pass()
 	 * If set to true, the pass clears its target buffer before rendering.
 	 *
 	 * @property clear
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.clear = false;
 
@@ -41,7 +41,7 @@ function Pass()
 	 * If set to true, the result of the pass is rendered to screen.
 	 *
 	 * @property renderToScreen
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.renderToScreen = false;
 
@@ -49,7 +49,7 @@ function Pass()
 	 * If set to true, the result of the pass needs to be copied to the ouput by the effect renderer if renderToScren is enabled.
 	 *
 	 * @property copyToScreen
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.copyToScreen = false;
 }
@@ -136,8 +136,8 @@ Pass.prototype.createQuadScene = function()
  * Set resolution of this render pass.
  * 
  * @method setSize
- * @param {Number} width
- * @param {Number} height
+ * @param {number} width
+ * @param {number} height
  */
 Pass.prototype.setSize = function(width, height){};
 
@@ -148,8 +148,8 @@ Pass.prototype.setSize = function(width, height){};
  * @param {WebGLRenderer} renderer
  * @param {WebGLRenderTarget} writeBuffer Buffer to write output.
  * @param {WebGLRenderTarget} readBuffer Input buffer.
- * @param {Number} delta Delta time in milliseconds.
- * @param {Boolean} maskActive Not used in this pass.
+ * @param {number} delta Delta time in milliseconds.
+ * @param {boolean} maskActive Not used in this pass.
  * @param {Scene} scene Scene to render.
  */
 Pass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera){};

@@ -14,8 +14,8 @@ function StringUtils(){}
  *
  * @static
  * @method accentFolding
- * @param {String} str Input string to be processed.
- * @return {String} Processed string without accented chars.
+ * @param {string} str Input string to be processed.
+ * @return {string} Processed string without accented chars.
  */
 StringUtils.accentFolding = function(str)
 {
@@ -41,8 +41,8 @@ StringUtils.accentFolding = function(str)
  *
  * @static
  * @method accentFolding
- * @param {String} str Input string to be processed.
- * @return {String} Processed string without accented chars.
+ * @param {string} str Input string to be processed.
+ * @return {string} Processed string without accented chars.
  */
 StringUtils.removePunctuation = function(str)
 {

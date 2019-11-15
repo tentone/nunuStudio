@@ -7,9 +7,9 @@
  *
  * @class TweenAnimation
  * @param {Object} object Object that contains the attribute.
- * @param {String} attribute Name of the attribute.
+ * @param {string} attribute Name of the attribute.
  * @param {Object} target Final target value.
- * @param {Number} time Time of the animation in milliseconds.
+ * @param {number} time Time of the animation in milliseconds.
  * @param {Function} onUpdate Callback function that runs after updating the value.
  */
 function TweenAnimation(object, attribute, target, time, onUpdate)
@@ -30,7 +30,7 @@ function TweenAnimation(object, attribute, target, time, onUpdate)
 	 * Name of the attribute.
 	 *
 	 * @attribute attribute
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.attribute = attribute;
 
@@ -54,7 +54,7 @@ function TweenAnimation(object, attribute, target, time, onUpdate)
 	 * Animation duration in milliseconds.
 	 *
 	 * @attribute time
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.time = time;
 
@@ -102,7 +102,7 @@ function TweenAnimation(object, attribute, target, time, onUpdate)
  * 
  * @method isVetorial
  * @param {Object} object To be checked.
- * @return {Boolean} True if the object is of a vectorial type.
+ * @return {boolean} True if the object is of a vectorial type.
  */
 TweenAnimation.isVetorial = function(object)
 {

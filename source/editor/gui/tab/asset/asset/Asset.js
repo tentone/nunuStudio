@@ -98,7 +98,7 @@ Asset.prototype = Object.create(Element.prototype);
  * Update selection state and the matching visual elements.
  *
  * @method setSelected
- * @param {Boolean} selected If true set selected, otherwise se unselected.
+ * @param {boolean} selected If true set selected, otherwise se unselected.
  */
 Asset.prototype.setSelected = function(selected)
 {
@@ -111,7 +111,7 @@ Asset.prototype.setSelected = function(selected)
  * Set the size of the asset.
  *
  * @method setSize
- * @param {Number} size Size in px.
+ * @param {number} size Size in px.
  */
 Asset.prototype.setSize = function(size)
 {
@@ -137,7 +137,7 @@ Asset.prototype.attach = function(asset)
  * Set icon to use in the asset.
  *
  * @method setIcon
- * @param {String} icon Image URL.
+ * @param {string} icon Image URL.
  */
 Asset.prototype.setIcon = function(icon)
 {
@@ -148,7 +148,7 @@ Asset.prototype.setIcon = function(icon)
  * Set asset label.
  *
  * @method setText
- * @param {String} text Asset label.
+ * @param {string} text Asset label.
  */
 Asset.prototype.setText = function(text)
 {

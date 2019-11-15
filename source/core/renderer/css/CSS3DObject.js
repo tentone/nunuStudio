@@ -9,7 +9,7 @@
  *
  * @class CSS3DObject
  * @extends {THREE.Object3D}
- * @param {DOM} element DOM element encapsulated in the object container.
+ * @param {Element} element DOM element encapsulated in the object container.
  */
 function CSS3DObject(element)
 {
@@ -21,7 +21,7 @@ function CSS3DObject(element)
 	 * It is automatically added to the appropiate DOM container used by the renderer.
 	 *
 	 * @attribute element
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.element = element;
 	this.element.style.position = "absolute";

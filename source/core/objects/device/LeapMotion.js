@@ -48,7 +48,7 @@ function LeapMotion()
 	 * 
 	 * @property mode
 	 * @default DESK
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.mode = LeapMotion.DESK;
 
@@ -92,94 +92,94 @@ LeapMotion.prototype = Object.create(THREE.Group.prototype);
 /**
  * Leap tracking desktop mode
  * @attribute DESK
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.DESK = 0;
 
 /**
  * Leap tracking HDM mode
  * @attribute DESK
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.HDM = 1;
 
 /**
  * Leap SWIPE gesture
  * @attribute SWIPE
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.SWIPE = 0;
 /**
  * Leap SWIPE_LEFT gesture
  * @attribute SWIPE_LEFT
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.SWIPE_LEFT = 1;
 /**
  * Leap SWIPE_RIGHT gesture
  * @attribute SWIPE_RIGHT
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.SWIPE_RIGHT = 2;
 /**
  * Leap SWIPE_FRONT gesture
  * @attribute SWIPE_FRONT
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.SWIPE_FRONT = 3;
 /**
  * Leap SWIPE_BACK gesture
  * @attribute SWIPE_BACK
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.SWIPE_BACK = 4;
 /**
  * Leap SWIPE_UP gesture
  * @attribute SWIPE_UP
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.SWIPE_UP = 5;
 /**
  * Leap SWIPE_DOWN gesture
  * @attribute SWIPE_DOWN
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.SWIPE_DOWN = 6;
 /**
  * Leap CIRCLE gesture
  * @attribute CIRCLE
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.CIRCLE = 7;
 /**
  * Leap SCREEN_TAP gesture
  * @attribute SCREEN_TAP
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.SCREEN_TAP = 8;
 /**
  * Leap KEY_TAP gesture
  * @attribute KEY_TAP
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.KEY_TAP = 9;
 
 /**
  * Hand CLOSED pose
  * @attribute CLOSED
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.CLOSED = 0;
 /**
  * Hand OPEN pose
  * @attribute OPEN
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.OPEN = 1;
 /**
  * Hand POINTING pose
  * @attribute POINTING
- * @type {Number}
+ * @type {number}
  */
 LeapMotion.POINTING = 2;
 
@@ -233,7 +233,7 @@ LeapMotion.prototype.update = function(delta)
  * Check if a gesture is occuring, is true while the gesture is occuring.
  * 
  * @method checkGesture
- * @param {Number} gesture Gesture to check
+ * @param {number} gesture Gesture to check
  * @return {boolean} True if the gesture is occuring
  */
 LeapMotion.prototype.checkGesture = function(gesture)
@@ -249,7 +249,7 @@ LeapMotion.prototype.checkGesture = function(gesture)
  * Check if hand is in pose.
  *
  * @method checkPose
- * @param {Number} pose Pose to be checked
+ * @param {number} pose Pose to be checked
  * @return {boolean} True is hand is in this pose
  */
 LeapMotion.prototype.checkPose = function(pose)
@@ -267,7 +267,7 @@ LeapMotion.prototype.checkPose = function(pose)
  * Can be set to HDM or Desktop mode.
  * 
  * @method setMode
- * @param {Number} mode Mode
+ * @param {number} mode Mode
  */
 LeapMotion.prototype.setMode = function(mode)
 {
@@ -507,7 +507,7 @@ LeapMotion.prototype.updateMesh = function(bone, mesh)
  * Get hand speed (temporaly normalized).
  * 
  * @method getMovement
- * @return {Number} Hand speed
+ * @return {number} Hand speed
  */
 LeapMotion.prototype.getMovement = function()
 {

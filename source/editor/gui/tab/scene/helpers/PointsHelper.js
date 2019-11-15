@@ -5,7 +5,7 @@
  * 
  * @class PointsHelper
  * @param {THREE.Points} object
- * @param {Number} hex Helper color in hexadecimal.
+ * @param {number} hex Helper color in hexadecimal.
  */
 function PointsHelper(object, hex)
 {

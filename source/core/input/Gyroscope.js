@@ -11,28 +11,28 @@ function Gyroscope()
 	/**
 	 * Alpha rotation.
 	 * @property alpha
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.alpha = 0;
 	
 	/**
 	 * Beta rotation.
 	 * @property beta
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.beta = 0;
 
 	/**
 	 * Gamma rotation.
 	 * @property gamma
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.gamma = 0;
 
 	/**
 	 * Device orientation.
 	 * @property orientation
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.orientation = 0;
 

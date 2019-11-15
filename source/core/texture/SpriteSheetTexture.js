@@ -11,12 +11,12 @@
  * @extends {Texture}
  * @module Textures
  * @param {Image} image
- * @param {Number} framesHorizontal
- * @param {Number} framesVertical
- * @param {Number} totalFrames
- * @param {Number} mapping
- * @param {Number} type
- * @param {Number} anisotropy
+ * @param {number} framesHorizontal
+ * @param {number} framesVertical
+ * @param {number} totalFrames
+ * @param {number} mapping
+ * @param {number} type
+ * @param {number} anisotropy
  */
 function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames, mapping, type, anisotropy)
 {
@@ -49,7 +49,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	 * Animation speed in seconds.
 	 * @property animationSpeed
 	 * @default 0.1
-	 * @type {Number}
+	 * @type {number}
 	*/
 	this.animationSpeed = 0.1;
 
@@ -68,7 +68,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		 * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
 		 * @property framesHorizontal
 		 * @default 1.0
-		 * @type {Number}
+		 * @type {number}
 		*/
 		framesHorizontal:
 		{
@@ -90,7 +90,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		 * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
 		 * @property framesVertical
 		 * @default 1.0
-		 * @type {Number}
+		 * @type {number}
 		*/
 		framesVertical:
 		{
@@ -110,7 +110,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		 * The offset frame can be ajusted to control in which frame the animation ends.
 		 * 
 		 * @property endFrame
-		 * @type {Number}
+		 * @type {number}
 		 */
 		endFrame:
 		{
@@ -133,7 +133,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		 * 
 		 * @property beginFrame
 		 * @default 0
-		 * @type {Number}
+		 * @type {number}
 		 */
 		beginFrame:
 		{
@@ -158,7 +158,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		 * Sometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.
 		 * @property totalFrames
 		 * @default 1
-		 * @type {Number}
+		 * @type {number}
 		*/
 		totalFrames:
 		{
@@ -179,7 +179,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	 * DOM element attached to the texture
 	 * 
 	 * @property image
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.image.crossOrigin = "anonymous";
 	this.image.src = this.img.data;
@@ -192,7 +192,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	 * Indicates the current frame of the animation.
 	 *
 	 * @property currentFrame
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.currentFrame = 0;
 
@@ -222,7 +222,7 @@ SpriteSheetTexture.prototype = Object.create(THREE.Texture.prototype);
  * Set animation playback speed.
  * 
  * @method setAnimationSpeed
- * @param {Number} animationSpeed
+ * @param {number} animationSpeed
  */
 SpriteSheetTexture.prototype.setAnimationSpeed = function(animationSpeed)
 {
@@ -235,8 +235,8 @@ SpriteSheetTexture.prototype.setAnimationSpeed = function(animationSpeed)
  * Automatically sets the totalFrame value to framesHorizontal * framesVertical.
  * 	
  * @method setFrameGrid
- * @param {Number} framesHorizontal
- * @param {Number} framesVertical
+ * @param {number} framesHorizontal
+ * @param {number} framesVertical
  */
 SpriteSheetTexture.prototype.setFrameGrid = function(framesHorizontal, framesVertical)
 {
@@ -252,8 +252,8 @@ SpriteSheetTexture.prototype.setFrameGrid = function(framesHorizontal, framesVer
  * Frame starts counting from 0.
  * 
  * @method setAnimationFrames
- * @param {Number} beginFrame
- * @param {Number} endFrame
+ * @param {number} beginFrame
+ * @param {number} endFrame
  */
 SpriteSheetTexture.prototype.setAnimationFrames = function(beginFrame, endFrame)
 {

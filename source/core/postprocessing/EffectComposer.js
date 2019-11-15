@@ -104,7 +104,7 @@ EffectComposer.prototype.addPass = function(pass)
  * 
  * @method moveBack
  * @param {Pass} pass Pass to be moved.
- * @return {Boolean} Returns true on success, false otherwise.
+ * @return {boolean} Returns true on success, false otherwise.
  */
 EffectComposer.prototype.moveBack = function(pass)
 {
@@ -131,7 +131,7 @@ EffectComposer.prototype.moveBack = function(pass)
  * 
  * @method moveForward
  * @param {Pass} pass Pass to be moved.
- * @return {Boolean} Returns true on success, false otherwise.
+ * @return {boolean} Returns true on success, false otherwise.
  */
 EffectComposer.prototype.moveForward = function(pass)
 {
@@ -171,7 +171,7 @@ EffectComposer.prototype.removePass = function(pass)
  *
  * @method insertPass
  * @param {Pass} pass Rendering pass to be added.
- * @param {Number} index Index to be inserted on.
+ * @param {number} index Index to be inserted on.
  */
 EffectComposer.prototype.insertPass = function(pass, index)
 {
@@ -252,8 +252,8 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
  * Also updates the size for all passes attached to the composer.
  *
  * @method setSize
- * @param {Number} width Width.
- * @param {Number} height Height.
+ * @param {number} width Width.
+ * @param {number} height Height.
  */
 EffectComposer.prototype.setSize = function(width, height)
 {

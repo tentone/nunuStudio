@@ -6,7 +6,7 @@
  * @class ChangeAction
  * @extends {Action}
  * @param {Object} object Object to be changed.
- * @param {String} attribute Name of the attribute.
+ * @param {string} attribute Name of the attribute.
  * @param {Object} newValue New value for the object attribute.
  * @param {Object} oldValue Optionally we can pass the old value.
  */

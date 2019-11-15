@@ -156,7 +156,7 @@ CodeEditor.prototype.updateSettings = function()
  * Set code editor font size.
  *
  * @method setFontSize
- * @param {Number} size
+ * @param {number} size
  */
 CodeEditor.prototype.setFontSize = function(size)
 {
@@ -173,7 +173,7 @@ CodeEditor.prototype.setFontSize = function(size)
  * Get the code open in the editor.
  *
  * @method getText
- * @return {String} The code in the editor.
+ * @return {string} The code in the editor.
  */
 CodeEditor.prototype.getText = function()
 {
@@ -184,7 +184,7 @@ CodeEditor.prototype.getText = function()
  * Set the code open in the editor.
  *
  * @method getText
- * @param {String} text Code to put in the editor.
+ * @param {string} text Code to put in the editor.
  */
 CodeEditor.prototype.setText = function(text)
 {
@@ -195,7 +195,7 @@ CodeEditor.prototype.setText = function(text)
  * Set language mode (javascript, glsl, etc).
  *
  * @method setMode
- * @param {String} mode Language mode.
+ * @param {string} mode Language mode.
  */
 CodeEditor.prototype.setMode = function(mode)
 {

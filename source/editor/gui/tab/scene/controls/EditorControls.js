@@ -67,7 +67,7 @@ EditorControls.prototype.setOrientation = function(orientation){};
  * @method update
  * @param {Mouse} mouse
  * @param {Keyboard} keyboard
- * @param {Number} delta Time passed after from the last update.
+ * @param {number} delta Time passed after from the last update.
  */
 EditorControls.prototype.update = function(mouse, keyboard, delta){};
 

@@ -26,7 +26,7 @@ Media.prototype.constructor = Media;
  * Set element Media volume.
  * 
  * @method setVolume
- * @param {Number} volume Volume level from 0 to 1.
+ * @param {number} volume Volume level from 0 to 1.
  */
 Media.prototype.setVolume = function(volume)
 {
@@ -48,7 +48,7 @@ Media.prototype.setValue = function(video)
  * Set URL of the media to play.
  *
  * @method setURL
- * @param {String} value Media url.
+ * @param {string} value Media url.
  */
 Media.prototype.setURL = function(value)
 {
@@ -59,7 +59,7 @@ Media.prototype.setURL = function(value)
  * Set the playback time.
  *
  * @method setTime
- * @param {Number} time Time to be set.
+ * @param {number} time Time to be set.
  */
 Media.prototype.setTime = function(time)
 {
@@ -70,7 +70,7 @@ Media.prototype.setTime = function(time)
  * Set autoplay mode.
  * 
  * @method setAutoplay
- * @param {Boolean} value If true the media starts playing automatically.
+ * @param {boolean} value If true the media starts playing automatically.
  */
 Media.prototype.setAutoplay = function(value)
 {
@@ -81,7 +81,7 @@ Media.prototype.setAutoplay = function(value)
  * Check if the media is playing.
  * 
  * @method isPlaying
- * @return {Boolean} True if the media is playing.
+ * @return {boolean} True if the media is playing.
  */
 Media.prototype.isPlaying = function(value)
 {
@@ -92,7 +92,7 @@ Media.prototype.isPlaying = function(value)
  * Set loop mode.
  * 
  * @method setLoop
- * @param {Boolean} value If true the media plays in loop.
+ * @param {boolean} value If true the media plays in loop.
  */
 Media.prototype.setLoop = function(value)
 {
@@ -103,7 +103,7 @@ Media.prototype.setLoop = function(value)
  * Set playback rate.
  * 
  * @method setPlaybackRate
- * @param {Number} setPlaybackRate The velocity of playback.
+ * @param {number} setPlaybackRate The velocity of playback.
  */
 Media.prototype.setPlaybackRate = function(playbackRate)
 {

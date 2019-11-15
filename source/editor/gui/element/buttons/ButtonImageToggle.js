@@ -46,7 +46,7 @@ ButtonImageToggle.prototype = Object.create(ButtonImage.prototype);
  * Set the seleted state of the toggle button.
  * 
  * @method setSelected
- * @param {Boolean} selected
+ * @param {boolean} selected
  */
 ButtonImageToggle.prototype.setSelected = function(selected)
 {

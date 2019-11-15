@@ -20,7 +20,7 @@ function VRControls()
 	/**
 	 * Scale from real units to world units.
 	 * @property scale
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.scale = 1;
 
@@ -34,7 +34,7 @@ function VRControls()
 	/**
 	 * User height, used to calibrate when the user is standing.
 	 * @property userHeight
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.userHeight = 1.6;
 

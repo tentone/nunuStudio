@@ -55,9 +55,9 @@ ColorChooser.prototype.setOnChange = function(onChange)
  * Set value stored in the input element.
  *
  * @method setValue
- * @param {Number} r Red color channel, if a THREE.Color value is received it is used instead.
- * @param {Number} g Green color channel.
- * @param {Number} b Blue color channel.
+ * @param {number} r Red color channel, if a THREE.Color value is received it is used instead.
+ * @param {number} g Green color channel.
+ * @param {number} b Blue color channel.
  */
 ColorChooser.prototype.setValue = function(r, g, b)
 {
@@ -75,7 +75,7 @@ ColorChooser.prototype.setValue = function(r, g, b)
  * Set value from numeric hex.
  *
  * @method setValueHex
- * @param {Number} hex
+ * @param {number} hex
  */
 ColorChooser.prototype.setValueHex = function(hex)
 {
@@ -87,7 +87,7 @@ ColorChooser.prototype.setValueHex = function(hex)
  * Set value from CSS string.
  *
  * @method setValueString
- * @param {Number} color
+ * @param {number} color
  */
 ColorChooser.prototype.setValueString = function(color)
 {
@@ -98,7 +98,7 @@ ColorChooser.prototype.setValueString = function(color)
  * Get color value HEX as string.
  *
  * @method getValueString
- * @return {String} String hex color.
+ * @return {string} String hex color.
  */
 ColorChooser.prototype.getValueString = function(color)
 {
@@ -120,7 +120,7 @@ ColorChooser.prototype.getValue = function()
  * Get color value HEX.
  *
  * @method getValueHex
- * @return {Number} Numeric hex color.
+ * @return {number} Numeric hex color.
  */
 ColorChooser.prototype.getValueHex = function()
 {

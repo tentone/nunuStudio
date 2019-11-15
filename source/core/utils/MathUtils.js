@@ -13,7 +13,7 @@ function MathUtils(){}
  * Value of PI*2. 360 degrees.
  *
  * @attribute pi2
- * @type {Number}
+ * @type {number}
  */
 MathUtils.PI2 = 2 * Math.PI;
 
@@ -21,7 +21,7 @@ MathUtils.PI2 = 2 * Math.PI;
  * Value of PI/3. 60 degrees.
  *
  * @attribute pid3
- * @type {Number}
+ * @type {number}
  */
 MathUtils.PID3 = Math.PI / 3;
 
@@ -29,7 +29,7 @@ MathUtils.PID3 = Math.PI / 3;
  * Value of PI/2. 45 degrees.
  *
  * @attribute pid2
- * @type {Number}
+ * @type {number}
  */
 MathUtils.PID2 = Math.PI / 2;
 
@@ -39,7 +39,7 @@ MathUtils.PID2 = Math.PI / 2;
  * Uses the #RRGGBB format.
  *
  * @method randomColor
- * @return {String} Generated color code.
+ * @return {string} Generated color code.
  */
 MathUtils.randomColor = function()
 {

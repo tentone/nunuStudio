@@ -9,9 +9,9 @@
  * @author spidersharma / http://eduperiment.com/
  * @class UnrealBloomPass
  * @module Postprocessing
- * @param {Number} strength  Bloom effect strength.
- * @param {Number} radius Bloom effect radius.
- * @param {Number} threshold White point threshold.
+ * @param {number} strength  Bloom effect strength.
+ * @param {number} radius Bloom effect radius.
+ * @param {number} threshold White point threshold.
  */
 function UnrealBloomPass(strength, radius, threshold)
 {
@@ -111,7 +111,7 @@ function UnrealBloomPass(strength, radius, threshold)
 		 * Scales the color of the whole bloom effect.
 		 *
 		 * @property strength
-		 * @type {Number}
+		 * @type {number}
 		 */
 		strength:
 		{
@@ -123,7 +123,7 @@ function UnrealBloomPass(strength, radius, threshold)
 		 * Bloom effect radius.
 		 *
 		 * @property radius
-		 * @type {Number}
+		 * @type {number}
 		 */
 		radius:
 		{
@@ -137,7 +137,7 @@ function UnrealBloomPass(strength, radius, threshold)
 		 * To have all scene colors contributing to the bloom, a volume of -1 needs to be used.
 		 *
 		 * @property threshold
-		 * @type {Number}
+		 * @type {number}
 		 */
 		threshold:
 		{
@@ -149,7 +149,7 @@ function UnrealBloomPass(strength, radius, threshold)
 		 * Smooth factor.
 		 *
 		 * @property smooth
-		 * @type {Number}
+		 * @type {number}
 		 */
 		smooth:
 		{

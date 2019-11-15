@@ -7,7 +7,7 @@
  * 
  * @class Keyboard
  * @module Input
- * @param {Boolean} dontInitialize If true the mouse events are not created.
+ * @param {boolean} dontInitialize If true the mouse events are not created.
  */
 function Keyboard(dontInitialize)
 {
@@ -172,461 +172,461 @@ Keyboard.dispose = function()
 /**
  * TAB key
  * @attribute TAB
- * @type {Number}
+ * @type {number}
  */
 Keyboard.TAB = 9;
 
 /**
  * ENTER key
  * @attribute ENTER
- * @type {Number}
+ * @type {number}
  */
 Keyboard.ENTER = 13;
 
 /**
  * SHIFT key
  * @attribute SHIFT
- * @type {Number}
+ * @type {number}
  */
 Keyboard.SHIFT = 16;
 
 /**
  * CTRL key
  * @attribute CTRL
- * @type {Number}
+ * @type {number}
  */
 Keyboard.CTRL = 17;
 
 /**
  * ALT key
  * @attribute ALT
- * @type {Number}
+ * @type {number}
  */
 Keyboard.ALT = 18;
 
 /**
  * CAPS_LOCK key
  * @attribute CAPS_LOCK
- * @type {Number}
+ * @type {number}
  */
 Keyboard.CAPS_LOCK = 20;
 
 /**
  * ESC key
  * @attribute ESC
- * @type {Number}
+ * @type {number}
  */
 Keyboard.ESC = 27;
 
 /**
  * SPACEBAR key
  * @attribute SPACEBAR
- * @type {Number}
+ * @type {number}
  */
 Keyboard.SPACEBAR = 32;
 
 /**
  * PAGE_UP key
  * @attribute PAGE_UP
- * @type {Number}
+ * @type {number}
  */
 Keyboard.PAGE_UP = 33;
 
 /**
  * PAGE_DOWN key
  * @attribute PAGE_DOWN
- * @type {Number}
+ * @type {number}
  */
 Keyboard.PAGE_DOWN = 34;
 
 /**
  * END key
  * @attribute END
- * @type {Number}
+ * @type {number}
  */
 Keyboard.END = 35;
 
 /**
  * HOME key
  * @attribute HOME
- * @type {Number}
+ * @type {number}
  */
 Keyboard.HOME = 36;
 
 /**
  * INSERT key
  * @attribute INSERT
- * @type {Number}
+ * @type {number}
  */
 Keyboard.INSERT = 45;
 
 /**
  * DEL key
  * @attribute DEL
- * @type {Number}
+ * @type {number}
  */
 Keyboard.DEL = 46;
 
 /**
  * LEFT key
  * @attribute LEFT
- * @type {Number}
+ * @type {number}
  */
 Keyboard.LEFT = 37;
 
 /**
  * RIGHT key
  * @attribute RIGHT
- * @type {Number}
+ * @type {number}
  */
 Keyboard.RIGHT = 39;
 
 /**
  * UP key
  * @attribute UP
- * @type {Number}
+ * @type {number}
  */
 Keyboard.UP = 38;
 
 /**
  * DOWN key
  * @attribute DOWN
- * @type {Number}
+ * @type {number}
  */
 Keyboard.DOWN = 40;
 
 /**
  * NUM0 key
  * @attribute NUM0
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM0 = 48;
 
 /**
  * NUM1 key
  * @attribute NUM1
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM1 = 49;
 
 /**
  * NUM2 key
  * @attribute NUM2
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM2 = 50;
 
 /**
  * NUM3 key
  * @attribute NUM3
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM3 = 51;
 
 /**
  * NUM4 key
  * @attribute NUM4
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM4 = 52;
 
 /**
  * NUM5 key
  * @attribute NUM5
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM5 = 53;
 
 /**
  * NUM6 key
  * @attribute NUM6
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM6 = 54;
 
 /**
  * NUM7 key
  * @attribute NUM7
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM7 = 55;
 
 /**
  * NUM8 key
  * @attribute NUM8
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM8 = 56;
 
 /**
  * NUM9 key
  * @attribute NUM9
- * @type {Number}
+ * @type {number}
  */
 Keyboard.NUM9 = 57;
 
 /**
  * A key
  * @attribute A
- * @type {Number}
+ * @type {number}
  */
 Keyboard.A = 65;
 
 /**
  * B key
  * @attribute B
- * @type {Number}
+ * @type {number}
  */
 Keyboard.B = 66;
 
 /**
  * C key
  * @attribute C
- * @type {Number}
+ * @type {number}
  */
 Keyboard.C = 67;
 
 /**
  * D key
  * @attribute D
- * @type {Number}
+ * @type {number}
  */
 Keyboard.D = 68;
 
 /**
  * E key
  * @attribute E
- * @type {Number}
+ * @type {number}
  */
 Keyboard.E = 69;
 
 /**
  * F key
  * @attribute F
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F = 70;
 
 /**
  * G key
  * @attribute G
- * @type {Number}
+ * @type {number}
  */
 Keyboard.G = 71;
 
 /**
  * H key
  * @attribute H
- * @type {Number}
+ * @type {number}
  */
 Keyboard.H = 72;
 
 /**
  * I key
  * @attribute I
- * @type {Number}
+ * @type {number}
  */
 Keyboard.I = 73;
 
 /**
  * J key
  * @attribute J
- * @type {Number}
+ * @type {number}
  */
 Keyboard.J = 74;
 
 /**
  * K key
  * @attribute K
- * @type {Number}
+ * @type {number}
  */
 Keyboard.K = 75;
 
 /**
  * L key
  * @attribute L
- * @type {Number}
+ * @type {number}
  */
 Keyboard.L = 76;
 
 /**
  * M key
  * @attribute M
- * @type {Number}
+ * @type {number}
  */
 Keyboard.M = 77;
 
 /**
  * N key
  * @attribute N
- * @type {Number}
+ * @type {number}
  */
 Keyboard.N = 78;
 
 /**
  * O key
  * @attribute O
- * @type {Number}
+ * @type {number}
  */
 Keyboard.O = 79;
 
 /**
  * P key
  * @attribute P
- * @type {Number}
+ * @type {number}
  */
 Keyboard.P = 80;
 
 /**
  * Q key
  * @attribute Q
- * @type {Number}
+ * @type {number}
  */
 Keyboard.Q = 81;
 
 /**
  * R key
  * @attribute R
- * @type {Number}
+ * @type {number}
  */
 Keyboard.R = 82;
 
 /**
  * S key
  * @attribute S
- * @type {Number}
+ * @type {number}
  */
 Keyboard.S = 83;
 
 /**
  * T key
  * @attribute T
- * @type {Number}
+ * @type {number}
  */
 Keyboard.T = 84;
 
 /**
  * U key
  * @attribute U
- * @type {Number}
+ * @type {number}
  */
 Keyboard.U = 85;
 
 /**
  * V key
  * @attribute V
- * @type {Number}
+ * @type {number}
  */
 Keyboard.V = 86;
 
 /**
  * W key
  * @attribute W
- * @type {Number}
+ * @type {number}
  */
 Keyboard.W = 87;
 
 /**
  * X key
  * @attribute X
- * @type {Number}
+ * @type {number}
  */
 Keyboard.X = 88;
 
 /**
  * Y key
  * @attribute Y
- * @type {Number}
+ * @type {number}
  */
 Keyboard.Y = 89;
 
 /**
  * Z key
  * @attribute Z
- * @type {Number}
+ * @type {number}
  */
 Keyboard.Z = 90;
 
 /**
  * F1 key
  * @attribute F1
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F1 = 112;
 
 /**
  * F2 key
  * @attribute F2
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F2 = 113;
 
 /**
  * F3 key
  * @attribute F3
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F3 = 114;
 
 /**
  * F4 key
  * @attribute F4
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F4 = 115;
 
 /**
  * F5 key
  * @attribute F5
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F5 = 116;
 
 /**
  * F6 key
  * @attribute F6
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F6 = 117;
 
 /**
  * F7 key
  * @attribute F7
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F7 = 118;
 
 /**
  * F8 key
  * @attribute F8
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F8 = 119;
 
 /**
  * F9 key
  * @attribute F9
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F9 = 120;
 
 /**
  * F10 key
  * @attribute F10
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F10 = 121;
 
 /**
  * F11 key
  * @attribute F11
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F11 = 122;
 
 /**
  * F12 key
  * @attribute F12
- * @type {Number}
+ * @type {number}
  */
 Keyboard.F12 = 123;

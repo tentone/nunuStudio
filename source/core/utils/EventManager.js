@@ -25,8 +25,8 @@ function EventManager()
  * Add new event to the manager.
  *
  * @method add
- * @param {DOM} target Event target element.
- * @param {String} event Event name.
+ * @param {Element} target Event target element.
+ * @param {string} event Event name.
  * @param {Function} callback Callback function.
  */
 EventManager.prototype.add = function(target, event, callback)
@@ -79,7 +79,7 @@ EventManager.prototype.destroy = function()
  * Add a scroll event to a target element.
  *
  * @method addScrollEvent
- * @param {DOM} target Event target element.
+ * @param {Element} target Event target element.
  * @param {Function} callback Callback function.
  */
 EventManager.prototype.addScrollEvent = function(target, callback)

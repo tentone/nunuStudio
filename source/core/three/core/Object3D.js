@@ -87,7 +87,7 @@ THREE.Object3D.prototype.initialize = function()
  * Called every time before rendering into the screen.
  * 
  * @method update
- * @param {Number} delta Time since last update call.
+ * @param {number} delta Time since last update call.
  */
 THREE.Object3D.prototype.update = function(delta)
 {
@@ -101,8 +101,8 @@ THREE.Object3D.prototype.update = function(delta)
  * Resize this object, called everytime the window is resized.
  * 
  * @method resize
- * @param {Number} x Screen width.
- * @param {Number} y Screen height.
+ * @param {number} x Screen width.
+ * @param {number} y Screen height.
  */
 THREE.Object3D.prototype.resize = function(x, y){};
 
@@ -126,7 +126,7 @@ THREE.Object3D.prototype.dispose = function()
  *
  * @method addAbove
  * @param {Object3D} object
- * @param {Number} index
+ * @param {number} index
  */
 THREE.Object3D.prototype.addAbove = function(object, children)
 {
@@ -163,7 +163,7 @@ THREE.Object3D.prototype.addAbove = function(object, children)
  *
  * @method addBellow
  * @param {Object3D} object
- * @param {Number} index
+ * @param {number} index
  */
 THREE.Object3D.prototype.addBellow = function(object, children)
 {
@@ -482,7 +482,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 /**
  * Name of the object (doesn't need to be unique).
  * @property name
- * @type {String}
+ * @type {string}
 */
 /**
  * The object's local position.
@@ -512,7 +512,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 /**
  * UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.
  * @property uuid
- * @type {String}
+ * @type {string}
  */
 /**
  * Object gets rendered if true.
@@ -524,7 +524,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
  * This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.
  * @property renderOrder
  * @default 0
- * @type {Number}
+ * @type {number}
 */
 /**
  * Whether the object gets rendered into shadow map.
@@ -603,13 +603,13 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 /**
  * Searches through the object's children and returns the first with a matching name.
- * @param {String} name String to match to the children's Object3d.name property.
+ * @param {string} name String to match to the children's Object3d.name property.
  * @method getObjectByName
  */
 
 /**
  * Searches through the object's children and returns the first with a property that matches the aclue given.
- * @param {String} name The property name to search for.
+ * @param {string} name The property name to search for.
  * @param {Object} value Value of the given property.
  * @method getObjectByProperty
  */
@@ -642,23 +642,23 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
  * Rotate an object along an axis in object space. The axis is assumed to be normalized..
  * @method rotateOnAxis
  * @param {Vector3} axis A normalized vector in object space.
- * @param {Number} angle The angle in radians.
+ * @param {number} angle The angle in radians.
  */
 
 /**
  * Rotates the object around x axis in local space.
  * @method rotateX
- * @param {Number} rad The angle to rotate in radians.
+ * @param {number} rad The angle to rotate in radians.
  */
 
 /**
  * Rotates the object around y axis in local space.
  * @method rotateY
- * @param {Number} rad The angle to rotate in radians.
+ * @param {number} rad The angle to rotate in radians.
  */
 
 /**
  * Rotates the object around z axis in local space.
  * @method rotateZ
- * @param {Number} rad The angle to rotate in radians.
+ * @param {number} rad The angle to rotate in radians.
  */

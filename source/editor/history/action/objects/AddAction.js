@@ -9,7 +9,7 @@
  * @extends {Action}
  * @param {THREE.Object3D} object Object to be added.
  * @param {THREE.Object3D} parent Parent to add the object.
- * @param {Number} index Index to add the object to.
+ * @param {number} index Index to add the object to.
  */
 function AddAction(object, parent, index)
 {

@@ -7,7 +7,7 @@
  * 
  * @class Element
  * @param {Element} parent Parent element.
- * @param {String} type Type of the based DOM element.
+ * @param {string} type Type of the based DOM element.
  */
 function Element(parent, type)
 {
@@ -17,7 +17,7 @@ function Element(parent, type)
 	 * Different components may use diferent base element types.
 	 * 
 	 * @attribute element
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.element = document.createElement(type !== undefined ? type : "div");
 	this.element.style.position = "absolute";
@@ -41,7 +41,7 @@ function Element(parent, type)
 	 * True if the element is visible.
 	 *
 	 * @attribute visible
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.visible = true;
 	
@@ -65,7 +65,7 @@ function Element(parent, type)
 	 * Positioning mode, indicates how to anchor the component.
 	 *
 	 * @attribute mode
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this._mode = Element.TOP_LEFT;
 }
@@ -79,7 +79,7 @@ Element.prototype.isElement = true;
  *
  * @static
  * @attribute TOP_LEFT
- * @type {Number}
+ * @type {number}
  */
 Element.TOP_LEFT = 0;
 
@@ -88,7 +88,7 @@ Element.TOP_LEFT = 0;
  *
  * @static
  * @attribute TOP_RIGHT
- * @type {Number}
+ * @type {number}
  */
 Element.TOP_RIGHT = 1;
 
@@ -97,7 +97,7 @@ Element.TOP_RIGHT = 1;
  *
  * @static
  * @attribute BOTTOM_LEFT
- * @type {Number}
+ * @type {number}
  */
 Element.BOTTOM_LEFT = 2;
 
@@ -106,7 +106,7 @@ Element.BOTTOM_LEFT = 2;
  *
  * @static
  * @attribute BOTTOM_RIGHT
- * @type {Number}
+ * @type {number}
  */
 Element.BOTTOM_RIGHT = 3;
 
@@ -120,7 +120,7 @@ Element.preventDefault = function(event)
  * Add a CSS class to the base DOM element of this Element.
  * 
  * @method addClass
- * @param {String} name Name of the class to be added.
+ * @param {string} name Name of the class to be added.
  */
 Element.prototype.addClass = function(name)
 {
@@ -131,7 +131,7 @@ Element.prototype.addClass = function(name)
  * Remove a CSS class from the base DOM element of this Element.
  * 
  * @method removeClass
- * @param {String} name Name of the class to be removed.
+ * @param {string} name Name of the class to be removed.
  */
 Element.prototype.removeClass = function(name)
 {
@@ -145,8 +145,8 @@ Element.prototype.removeClass = function(name)
  * Change style of the base DOM element.
  *
  * @method setStyle
- * @param {String} attribute Name of the style attribute.
- * @param {String} value Value of the style.
+ * @param {string} attribute Name of the style attribute.
+ * @param {string} value Value of the style.
  */
 Element.prototype.setStyle = function(attribute, value)
 {
@@ -170,7 +170,7 @@ Element.prototype.preventDragEvents = function()
  * Set alt text, that is displayed when the mouse is over the element. Returns the element created that is attached to the document body.
  *
  * @method setAltText
- * @param {String} altText Alt text.
+ * @param {string} altText Alt text.
  */
 Element.prototype.setAltText = function(altText)
 {
@@ -314,7 +314,7 @@ Element.prototype.destroy = function()
  * Set positioning mode.
  * 
  * @method setMode
- * @param {Number} setMode
+ * @param {number} setMode
  */
 Element.prototype.setMode = function(mode)
 {

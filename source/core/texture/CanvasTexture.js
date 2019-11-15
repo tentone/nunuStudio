@@ -8,17 +8,17 @@
  * @class CanvasTexture
  * @extends {Texture}
  * @module Textures
- * @param {Number} width Canvas width
- * @param {Number} height Canvas height
- * @param {Number} mapping
- * @param {Number} wrapS
- * @param {Number} wrapT
- * @param {Number} magFilter
- * @param {Number} minFilter
- * @param {Number} format
- * @param {Number} type
- * @param {Number} anisotropy
- * @param {Number} encoding
+ * @param {number} width Canvas width
+ * @param {number} height Canvas height
+ * @param {number} mapping
+ * @param {number} wrapS
+ * @param {number} wrapT
+ * @param {number} magFilter
+ * @param {number} minFilter
+ * @param {number} format
+ * @param {number} type
+ * @param {number} anisotropy
+ * @param {number} encoding
  */
 function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
@@ -26,7 +26,7 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 	 * Image is used to store a DOM canvas element.
 	 * 
 	 * @property image
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	THREE.Texture.call(this, document.createElement("canvas"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
@@ -40,7 +40,7 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 		 * Canvas width, internal resolution of the canvas texture.
 		 * 
 		 * @property width
-		 * @type {Number}
+		 * @type {number}
 		 */
 		width:
 		{
@@ -52,7 +52,7 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 		 * Canvas height, internal resolution of the canvas texture.
 		 * 
 		 * @property height
-		 * @type {Number}
+		 * @type {number}
 		 */
 		height:
 		{
@@ -98,7 +98,7 @@ CanvasTexture.prototype.placeholder = function()
  * Uses the internal context to draw a rect to fill the canvas.
  *
  * @method clear
- * @param {String} color
+ * @param {string} color
  */
 CanvasTexture.prototype.clear = function(color)
 {

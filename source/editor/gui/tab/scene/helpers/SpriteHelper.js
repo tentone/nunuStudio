@@ -5,7 +5,7 @@
  *
  * @class SpriteHelper
  * @param {THREE.Object3D} object
- * @param {Number} hex Helper color in hexadecimal.
+ * @param {number} hex Helper color in hexadecimal.
  */
 function SpriteHelper(object, hex) 
 {

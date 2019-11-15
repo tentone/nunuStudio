@@ -65,9 +65,9 @@ TextBox.prototype = Object.create(Element.prototype);
  * May also affect some types of children components. 
  * 
  * @method setFont
- * @param {String} fontFamily Font family.
- * @param {Number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
- * @param {String} fontStyle Font style, specifies the font style for a text.
+ * @param {string} fontFamily Font family.
+ * @param {number} fontWeight Font weigth, sets how thick or thin characters in text should be displayed.
+ * @param {string} fontStyle Font style, specifies the font style for a text.
  */
 TextBox.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
 {
@@ -88,7 +88,7 @@ TextBox.prototype.setFont = function(fontFamily, fontWeight, fontStyle)
  * Set the disabled state of the element.
  *
  * @method setDisabled
- * @param {Boolean} disabled
+ * @param {boolean} disabled
  */
 TextBox.prototype.setDisabled = function(value)
 {
@@ -102,7 +102,7 @@ TextBox.prototype.setDisabled = function(value)
  *
  * @method setOnInput
  * @param {Function} onInput Callback method called everytime the user types something.
- * @param {Number} timeout Time (ms) after the user stopped typing to activate the callback.
+ * @param {number} timeout Time (ms) after the user stopped typing to activate the callback.
  */
 TextBox.prototype.setOnInput = function(onInput, timeout)
 {
@@ -158,7 +158,7 @@ TextBox.prototype.setText = function(text)
  * Get text stored in the input element.
  *
  * @method getText
- * @return {String} Text stored in the input element.
+ * @return {string} Text stored in the input element.
  */
 TextBox.prototype.getText = function()
 {

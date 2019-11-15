@@ -7,14 +7,14 @@
  * 
  * @class TextMesh
  * @module Meshes
- * @param {String} text Text to be draw
+ * @param {string} text Text to be draw
  * @param {Material} material Material used to shade the superficie of the geometry
  * @param {Font} font Font
- * @param {Number} height Text height
+ * @param {number} height Text height
  * @param {boolean} bevel
- * @param {Number} bevelThickness
- * @param {Number} size
- * @param {Number} curveSegments
+ * @param {number} bevelThickness
+ * @param {number} size
+ * @param {number} curveSegments
  * @extends {Mesh}
  */
 function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments, extruded)
@@ -36,7 +36,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * Indicates if the text mesh has volume or not.
 	 *
 	 * @property extruded
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.extruded = extruded !== undefined ? extruded : true;
 
@@ -44,7 +44,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * Size of the text (depth).
 	 *
 	 * @property size
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.size = size !== undefined ? size : 1;
 
@@ -52,7 +52,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * Height of the text.
 	 *
 	 * @property height
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.height = height !== undefined ? height : 0.5;
 
@@ -60,7 +60,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * Number of segments that compose a curve in the font.
 	 *
 	 * @property curveSegments
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.curveSegments = curveSegments !== undefined ? curveSegments : 15;
 
@@ -76,7 +76,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * Bevel thickness.
 	 *
 	 * @property bevelThickness
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.bevelThickness = bevelThickness !== undefined ? bevelThickness : 0.1;
 
@@ -84,7 +84,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * Bevel size.
 	 *
 	 * @property bevelSize
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.bevelSize = bevelSize !== undefined ? bevelSize : 0.05;
 
@@ -92,7 +92,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 	 * Text to be diplayed in the mesh.
 	 *
 	 * @property text
-	 * @type {String}
+	 * @type {string}
 	 */
 	var text = text !== undefined ? text : "text";
 	Object.defineProperties(this,
@@ -135,7 +135,7 @@ TextMesh.prototype.setFont = function(font)
 /**
  * Change text.
  * 
- * @param {String} text
+ * @param {string} text
  * @method setText
  */
 TextMesh.prototype.setText = function(text)

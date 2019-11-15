@@ -4,6 +4,9 @@
  * Body to represent the document.body
  * 
  * It does not extend the Element class, but has the same base attributes.
+ *
+ * @static
+ * @class DocumentBody
  */
 var DocumentBody = 
 {

@@ -6,7 +6,7 @@
  * It uses normalized coordinates [0 to 1] when using RELATIVE mode or pixel based coordinated for ABSOLUTE mode.
  * 
  * @class Viewport
- * @param {Number} mode
+ * @param {number} mode
  */
 function Viewport(mode)
 {
@@ -36,7 +36,7 @@ function Viewport(mode)
 	 * Can be RELATIVE or ABSOLUTE.
 	 *
 	 * @property mode
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.mode = mode !== undefined ? mode : Viewport.RELATIVE;
 
@@ -44,7 +44,7 @@ function Viewport(mode)
 	 * Positioning anchor of the viewport.
 	 *
 	 * @property anchor
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.anchor = Viewport.TOP_LEFT;
 
@@ -54,7 +54,7 @@ function Viewport(mode)
 	 * This width should match the canvas size / rendering resolution.
 	 *
 	 * @property width
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.width = 1;
 
@@ -64,7 +64,7 @@ function Viewport(mode)
 	 * This height should match the canvas size / rendering resolution.
 	 *
 	 * @property height
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.height = 1;
 
@@ -163,7 +163,7 @@ Viewport.prototype.update = function(container)
  * Get the aspect ratio of this viewport in x / y.
  * 
  * @method getAspectRatio
- * @return {Number} The aspect ratio of the viewport.
+ * @return {number} The aspect ratio of the viewport.
  */
 Viewport.prototype.getAspectRatio = function()
 {
@@ -174,7 +174,7 @@ Viewport.prototype.getAspectRatio = function()
  * Check if the mouse is inside this viewport.
  * 
  * @method isInside
- * @param {DOM} canvas Canvas for offset calculation.
+ * @param {Element} canvas Canvas for offset calculation.
  * @param {Mouse} mouse Mouse object with coordinates inside of the canvas.
  */
 Viewport.prototype.isInside = function(canvas, mouse)
@@ -191,7 +191,7 @@ Viewport.prototype.isInside = function(canvas, mouse)
  * Usefull to use raycasting for object picking in a viewport.
  *
  * @method getNormalized
- * @param {DOM} canvas Canvas for offset calculation.
+ * @param {Element} canvas Canvas for offset calculation.
  * @param {Mouse} mouse Mouse object with coordinates inside of the canvas.
  * @return {THREE.Vector2} Normalized coordinated of the mouse.
  */

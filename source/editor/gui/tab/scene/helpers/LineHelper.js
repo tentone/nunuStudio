@@ -5,7 +5,7 @@
  * 
  * @class LineHelper
  * @param {THREE.Line} object
- * @param {Number} hex Helper color in hexadecimal.
+ * @param {number} hex Helper color in hexadecimal.
  */
 function LineHelper(object, hex)
 {

@@ -11,7 +11,7 @@
  * @extends {Action}
  * @param {THREE.Object3D} object Object to be moved.
  * @param {THREE.Object3D} newParent New parent of the object.
- * @param {Number} newIndex Index to insert the object.
+ * @param {number} newIndex Index to insert the object.
  */
 function MoveAction(object, newParent, newIndex)
 {

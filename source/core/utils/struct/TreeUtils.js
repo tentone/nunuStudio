@@ -16,7 +16,7 @@ function TreeUtils(){}
  * Flag used to indicate ADDED diff.
  * 
  * @attribute DIFF_ADDED
- * @type {Number}
+ * @type {number}
  */
 TreeUtils.DIFF_ADDED = 0;
 
@@ -24,7 +24,7 @@ TreeUtils.DIFF_ADDED = 0;
  * Flag used to indicate REMOVED diff.
  * 
  * @attribute DIFF_REMOVED
- * @type {Number}
+ * @type {number}
  */
 TreeUtils.DIFF_REMOVED = 1;
 
@@ -32,7 +32,7 @@ TreeUtils.DIFF_REMOVED = 1;
  * Flag used to indicate MOVED diff.
  * 
  * @attribute DIFF_MOVED
- * @type {Number}
+ * @type {number}
  */
 TreeUtils.DIFF_MOVED = 2;
 
@@ -211,7 +211,7 @@ TreeUtils.compare = function(oldTree, newTree, diffs, pathOldTree, pathNewTree)
  *
  * @method print
  * @param {Tree} tree Tree object to be printed.
- * @param {Number} level Recursive parameter, not required.
+ * @param {number} level Recursive parameter, not required.
  */
 TreeUtils.print = function(tree, level)
 {

@@ -6,9 +6,9 @@
  * @class DotScreenPass
  * @module Postprocessing
  * @author alteredq / http://alteredqualia.com/
- * @param {Number} center Dot rotation center.
- * @param {Number} angle Dot rotation angle.
- * @param {Number} scale Dot scale.
+ * @param {number} center Dot rotation center.
+ * @param {number} angle Dot rotation angle.
+ * @param {number} scale Dot scale.
  */
 function DotScreenPass(center, angle, scale)
 {
@@ -50,7 +50,7 @@ function DotScreenPass(center, angle, scale)
 		 * Rotation of the dot grid.
 		 *
 		 * @property angle
-		 * @type {Number}
+		 * @type {number}
 		 */
 		angle:
 		{
@@ -62,7 +62,7 @@ function DotScreenPass(center, angle, scale)
 		 * Scale of the dots used in the effect.
 		 *
 		 * @property scale
-		 * @type {Number}
+		 * @type {number}
 		 */
 		scale:
 		{

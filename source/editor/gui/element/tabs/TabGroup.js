@@ -44,7 +44,7 @@ function TabGroup(parent, placement)
 	 * Division used to display a message indicating that the tab is empty.
 	 *
 	 * @property empty
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.empty = document.createElement("div");
 	this.empty.style.position = "absolute";
@@ -80,7 +80,7 @@ function TabGroup(parent, placement)
 	 * Tab buttons placement.
 	 *
 	 * @property placement
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.placement = placement !== undefined ? placement : TabGroup.TOP;
 	this.setPlacement(this.placement);
@@ -96,7 +96,7 @@ function TabGroup(parent, placement)
 	 * Indicates if the tab is currently on focus.
 	 *
 	 * @property focused
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.focused = false;
 
@@ -148,7 +148,7 @@ TabGroup.prototype.updateObjectsView = function()
  *
  * @method attachTab
  * @param {TabElement} tab Tab to be moved.
- * @param {Number} insertIndex Index where to place the tab.
+ * @param {number} insertIndex Index where to place the tab.
  */
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {	
@@ -188,8 +188,8 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
  * Move tab from position to another.
  *
  * @method moveTabIndex
- * @param {Number} origin Origin index.
- * @param {Number} destination Destination index.
+ * @param {number} origin Origin index.
+ * @param {number} destination Destination index.
  */
 TabGroup.prototype.moveTabIndex = function(origin, destination)
 {
@@ -366,8 +366,8 @@ TabGroup.prototype.getTab = function(type, object)
  * Remove tab from group.
  *
  * @method removeTab
- * @param {Number} index Index of tab to look for.
- * @param {Boolean} dontDestroy If true the element is not destroyed.
+ * @param {number} index Index of tab to look for.
+ * @param {boolean} dontDestroy If true the element is not destroyed.
  */
 TabGroup.prototype.removeTab = function(index, dontDestroy)
 {	
@@ -417,7 +417,7 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
  * Remove all closable tabs from the group.
  *
  * @method clear
- * @param {Boolean} forceAll Remove also the not closable tabs.
+ * @param {boolean} forceAll Remove also the not closable tabs.
  */
 TabGroup.prototype.clear = function(forceAll)
 {
@@ -472,7 +472,7 @@ TabGroup.prototype.updateOptionIndex = function()
  * Set the tab group buttons placement.
  *
  * @method setPlacement
- * @param {Number} placement
+ * @param {number} placement
  */
 TabGroup.prototype.setPlacement = function(placement)
 {

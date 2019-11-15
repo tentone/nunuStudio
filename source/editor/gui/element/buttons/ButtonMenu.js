@@ -19,7 +19,7 @@ function ButtonMenu(parent)
 	 * Icon element.
 	 *
 	 * @attribute icon
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.icon = null;
 
@@ -34,7 +34,7 @@ ButtonMenu.prototype = Object.create(ButtonText.prototype);
  * Creates the element if it still doesnt exist.
  *
  * @method setIcon
- * @param {String} icon Image URL.
+ * @param {string} icon Image URL.
  */
 ButtonMenu.prototype.setIcon = function(icon)
 {

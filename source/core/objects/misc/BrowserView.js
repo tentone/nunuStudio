@@ -7,7 +7,7 @@
  * 
  * @class BrowserView
  * @extends {CSS3DObject}
- * @param {String} url URL to be opened by default.
+ * @param {string} url URL to be opened by default.
  */
 function BrowserView(url)
 {
@@ -27,7 +27,7 @@ function BrowserView(url)
 		 * URL of the webpage to open in the view.
 		 *
 		 * @attribute url
-		 * @type {String}
+		 * @type {string}
 		 */
 		url:
 		{
@@ -43,7 +43,7 @@ function BrowserView(url)
 		 * Width in pixels of the web view port.
 		 *
 		 * @attribute size
-		 * @type {Number}
+		 * @type {number}
 		 */
 		width:
 		{
@@ -59,7 +59,7 @@ function BrowserView(url)
 		 * Height in pixels of the web view port.
 		 *
 		 * @attribute height
-		 * @type {Number}
+		 * @type {number}
 		 */
 		height:
 		{
@@ -85,7 +85,7 @@ BrowserView.prototype.constructor = BrowserView;
  * Process URL to transform it into embedded URL when possible for common services.
  *
  * @method processURL
- * @param {String} url
+ * @param {string} url
  */
 BrowserView.processURL = function(url)
 {	

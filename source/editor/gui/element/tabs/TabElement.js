@@ -8,11 +8,11 @@
  * @class TabElement
  * @extends {Element}
  * @param {Element} parent Parent element.
- * @param {Boolean} closeable If false the tab cannot be closed.
+ * @param {boolean} closeable If false the tab cannot be closed.
  * @param {TabContainer} container Container for this tab.
- * @param {Number} index Index of the tab.
- * @param {String} title Title of the tab.
- * @param {String} icon Icon of the tab.
+ * @param {number} index Index of the tab.
+ * @param {string} title Title of the tab.
+ * @param {string} icon Icon of the tab.
  */
 function TabElement(parent, closeable, container, index, title, icon)
 {
@@ -36,7 +36,7 @@ function TabElement(parent, closeable, container, index, title, icon)
 	 * UUID of this tab.
 	 *
 	 * @property uuid
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.uuid = THREE.Math.generateUUID();
 
@@ -44,7 +44,7 @@ function TabElement(parent, closeable, container, index, title, icon)
 	 * Index of the tab inside of the container
 	 *
 	 * @property index
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.index = index;
 
@@ -65,7 +65,7 @@ function TabElement(parent, closeable, container, index, title, icon)
 	 * Indicates if the tab is currently active (on display).
 	 *
 	 * @property active
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.active = false;
 }
@@ -220,7 +220,7 @@ TabElement.prototype.select = function()
  * Check if tab is selected
  *
  * @method isSelected
- * @return {Boolean} True if the tab is selected in the container.
+ * @return {boolean} True if the tab is selected in the container.
  */
 TabElement.prototype.isSelected = function()
 {
@@ -233,7 +233,7 @@ TabElement.prototype.isSelected = function()
  * The button should have a .setIcon(url) method.
  *
  * @method setIcon
- * @param {String} icon URL of the icon.
+ * @param {string} icon URL of the icon.
  */
 TabElement.prototype.setIcon = function(icon)
 {
@@ -247,7 +247,7 @@ TabElement.prototype.setIcon = function(icon)
  * The button should have a .setName(text) method.
  *
  * @method setName
- * @param {String} text
+ * @param {string} text
  */
 TabElement.prototype.setName = function(text)
 {

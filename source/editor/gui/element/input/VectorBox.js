@@ -99,7 +99,7 @@ VectorBox.prototype = Object.create(Element.prototype);
  *  - VectorBox.QUATERNION
  *
  * @method setType
- * @param {Number} type
+ * @param {number} type
  */
 VectorBox.prototype.setType = function(type)
 {
@@ -114,7 +114,7 @@ VectorBox.prototype.setType = function(type)
  * Set the values step.
  *
  * @method setStep
- * @param {Number} value
+ * @param {number} value
  */
 VectorBox.prototype.setStep = function(value)
 {
@@ -129,8 +129,8 @@ VectorBox.prototype.setStep = function(value)
  * Set the values range
  *
  * @method setRange
- * @param {Number} min
- * @param {Number} max
+ * @param {number} min
+ * @param {number} max
  */
 VectorBox.prototype.setRange = function(min, max)
 {
@@ -161,10 +161,10 @@ VectorBox.prototype.getValue = function()
  * Set value to the vector box.
  *
  * @method setValue
- * @param {Number} x
- * @param {Number} y
- * @param {Number} z
- * @param {Number} w
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ * @param {number} w
  * @param {Object} value Value
  */
 VectorBox.prototype.setValue = function(x, y, z, w)

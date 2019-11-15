@@ -79,7 +79,7 @@ function Scene()
 	 * Stores the time since the last frame.
 	 *
 	 * @property delta
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.delta = 0;
 
@@ -105,7 +105,7 @@ function Scene()
 	 * Canvas used to draw this scene.
 	 *
 	 * @property canvas
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.canvas = null;
 
@@ -144,7 +144,7 @@ Scene.prototype.initialize = function()
  * Also updates the global raycaster object used for object culling.
  *
  * @method update
- * @param {Number} delta The time since the last frame.
+ * @param {number} delta The time since the last frame.
  */
 Scene.prototype.update = function(delta)
 {
@@ -236,7 +236,7 @@ Scene.prototype.render = function(renderer)
  * Get camera from scene using cameras uuid.
  * 
  * @method getCamera
- * @param {String} uuid UUID of the camera
+ * @param {string} uuid UUID of the camera
  * @return {Camera} Camera if found, else null
  */
 Scene.prototype.getCamera = function(uuid, object)
@@ -327,7 +327,7 @@ Scene.prototype.isCameraActive = function(camera)
  * It recreates the fog object attached to the scene and set the same color.
  *
  * @method setFogMode
- * @param {Number} mode
+ * @param {number} mode
  */
 Scene.prototype.setFogMode = function(mode)
 {	

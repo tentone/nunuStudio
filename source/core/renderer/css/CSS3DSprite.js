@@ -7,7 +7,7 @@
  *
  * @class CSS3DSprite
  * @extends {CSS3DObject}
- * @param {DOM} element DOM element encapsulated in the object container.
+ * @param {Element} element DOM element encapsulated in the object container.
  */
 function CSS3DSprite(element)
 {

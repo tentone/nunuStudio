@@ -7,8 +7,8 @@
  * 
  * Based on THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight
  * 
- * @param {Number} hex Light color in hex RGB
- * @param {Number} intensity Light intensity
+ * @param {number} hex Light color in hex RGB
+ * @param {number} intensity Light intensity
  * @class DirectionalLight
  * @extends {DirectionalLight}
  * @module Lights

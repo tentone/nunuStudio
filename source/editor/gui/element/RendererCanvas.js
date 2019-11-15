@@ -8,7 +8,7 @@
  * @class RendererCanvas
  * @extends {Element}
  * @param {Element} parent Parent element.
- * @param {Boolean} alpha If true the background is transparent.
+ * @param {boolean} alpha If true the background is transparent.
  */
 function RendererCanvas(parent, options, useCSSRenderer)
 {
@@ -34,7 +34,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 * Indicates if a CSS renderer should be created alongside the WebGL renderer.
 	 *
 	 * @attribute useCSSRenderer
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.useCSSRenderer = useCSSRenderer !== undefined ? useCSSRenderer : true;
 
@@ -50,7 +50,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 * Overlay division used to place the css rendered DOM objects.
 	 *
 	 * @attribute cssDivision
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.cssDivision = null;
 
@@ -76,7 +76,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 * Canvas DOM element.
 	 * 
 	 * @attribute canvas
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.canvas = null;
 	this.resetCanvas();
@@ -186,8 +186,8 @@ RendererCanvas.prototype.createRenderer = function()
  *
  * @method getBlob
  * @param {Function} onLoad Blob load callback.
- * @param {String} encoding Image encoding.
- * @param {Number} quality Quality of the JPEG encoding is used.
+ * @param {string} encoding Image encoding.
+ * @param {number} quality Quality of the JPEG encoding is used.
  */
 RendererCanvas.prototype.getBlob = function(onLoad, encoding, quality)
 {

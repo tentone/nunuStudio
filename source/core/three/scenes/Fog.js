@@ -13,7 +13,7 @@
  * No fog
  * 
  * @attribute NONE
- * @type {Number}
+ * @type {number}
  */
 THREE.Fog.NONE = 0;
 
@@ -21,7 +21,7 @@ THREE.Fog.NONE = 0;
  * Linear fog
  * 
  * @attribute LINEAR
- * @type {Number}
+ * @type {number}
  */
 THREE.Fog.LINEAR = 1;
 
@@ -29,6 +29,6 @@ THREE.Fog.LINEAR = 1;
  * Exponential fog
  * 
  * @attribute EXPONENTIAL
- * @type {Number}
+ * @type {number}
  */
 THREE.Fog.EXPONENTIAL = 2;

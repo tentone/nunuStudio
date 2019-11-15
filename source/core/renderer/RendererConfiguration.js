@@ -15,7 +15,7 @@ function RendererConfiguration()
 	 * Shader code might not be cross compatible between rendering backends.
 	 *
 	 * @property backend
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.backend = RendererConfiguration.WEBGL2;
 
@@ -23,7 +23,7 @@ function RendererConfiguration()
 	 * Defines whether the renderer should automatically clear its output before rendering a frame.
 	 *
 	 * @property autoClear
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.autoClear = false;
 
@@ -31,7 +31,7 @@ function RendererConfiguration()
 	 * Defines whether the renderer should clear the color buffer.
 	 *
 	 * @property autoClearColor
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.autoClearColor = false;
 
@@ -39,7 +39,7 @@ function RendererConfiguration()
 	 * Defines whether the renderer should clear the depth buffer.
 	 *
 	 * @property autoClearDepth
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.autoClearDepth = false;
 	
@@ -47,7 +47,7 @@ function RendererConfiguration()
 	 * Defines whether the renderer should clear the stencil buffer.
 	 *
 	 * @property autoClearStencil
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.autoClearStencil = false;
 
@@ -81,7 +81,7 @@ function RendererConfiguration()
 	 * Shadow map filtering type.
 	 *
 	 * @property shadowsType
-	 * @type {Number}
+	 * @type {number}
 	 * @default PCFSoftShadowMap
 	 */
 	this.shadowsType = THREE.PCFSoftShadowMap;
@@ -94,7 +94,7 @@ function RendererConfiguration()
 	 * Use renderer.shadowMap.needsUpdate to update the shadow map.
 	 *
 	 * @property shadowsAutoUpdate
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.shadowsAutoUpdate = true;
 
@@ -102,7 +102,7 @@ function RendererConfiguration()
 	 * Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.
 	 *
 	 * @property toneMapping
-	 * @type {Number}
+	 * @type {number}
 	 * @default THREE.NoToneMapping
 	 */
 	this.toneMapping = THREE.NoToneMapping;
@@ -111,7 +111,7 @@ function RendererConfiguration()
 	 * Exposure level of tone mapping.
 	 *
 	 * @property toneMappingExposure
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.toneMappingExposure = 1.0;
 
@@ -119,7 +119,7 @@ function RendererConfiguration()
 	 * Tone mapping white point.
 	 *
 	 * @property toneMappingWhitePoint
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.toneMappingWhitePoint = 1.0;
 
@@ -129,7 +129,7 @@ function RendererConfiguration()
 	 * Important if using multiple transparent objects.
 	 *
 	 * @property sortObjects
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.sortObjects = true;
 
@@ -137,7 +137,7 @@ function RendererConfiguration()
 	 * Gamma factor applied to the image.
 	 *
 	 * @property gammaFactor
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.gammaFactor = 2.0;
 
@@ -145,7 +145,7 @@ function RendererConfiguration()
 	 * If set, then it expects that all textures and colors are premultiplied gamma.
 	 *
 	 * @property gammaInput
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.gammaInput = false;
 
@@ -153,7 +153,7 @@ function RendererConfiguration()
 	 * If set, then it expects that all textures and colors need to be outputted in premultiplied gamma. 
 	 *
 	 * @property gammaOutput
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.gammaOutput = false;
 
@@ -161,7 +161,7 @@ function RendererConfiguration()
 	 * Shader precision. Can be "highp", "mediump" or "lowp". Defaults to "highp" if supported by the device.
 	 *
 	 * @property precision
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.precision = "highp";
 
@@ -169,7 +169,7 @@ function RendererConfiguration()
 	 * Whether the canvas contains an alpha (transparency) buffer or not.
 	 *
 	 * @property alpha
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.alpha = false;
 
@@ -177,7 +177,7 @@ function RendererConfiguration()
 	 * Whether the renderer will assume that colors have premultiplied alpha.
 	 *
 	 * @property premultipliedAlpha
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.premultipliedAlpha = true;
 
@@ -185,7 +185,7 @@ function RendererConfiguration()
 	 * Whether to preserve the buffers until manually cleared or overwritten.
 	 *
 	 * @property preserveDrawingBuffer
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.preserveDrawingBuffer = false;
 
@@ -193,7 +193,7 @@ function RendererConfiguration()
 	 * Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be "high-performance", "low-power" or "default".
 	 *
 	 * @property powerPreference
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.powerPreference = "high-performance";
 
@@ -201,7 +201,7 @@ function RendererConfiguration()
 	 * Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.
 	 *
 	 * @property logarithmicDepthBuffer
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.logarithmicDepthBuffer = false;
 
@@ -209,7 +209,7 @@ function RendererConfiguration()
 	 * Whether to use physically correct lighting mode.
 	 *
 	 * @property physicallyCorrectLights
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.physicallyCorrectLights = false;
 
@@ -217,7 +217,7 @@ function RendererConfiguration()
 	 * Defines whether material shader programs are checked for errors during compilation and linkage process.
 	 *
 	 * @property checkShaderErrors
- 	 * @type {Boolean}
+ 	 * @type {boolean}
 	 */
 	this.checkShaderErrors = true;
 }
@@ -229,7 +229,7 @@ function RendererConfiguration()
  *
  * @static
  * @attribute WEBGL
- * @type {Number}
+ * @type {number}
  */
 RendererConfiguration.WEBGL = 1;
 
@@ -240,7 +240,7 @@ RendererConfiguration.WEBGL = 1;
  *
  * @static
  * @attribute WEBGL2
- * @type {Number}
+ * @type {number}
  */
 RendererConfiguration.WEBGL2 = 2;
 

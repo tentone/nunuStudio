@@ -37,7 +37,7 @@ ContextMenu.prototype = Object.create(Element.prototype);
  * Set the text of this context menu.
  * 
  * @method setText
- * @param {String} text
+ * @param {string} text
  */
 ContextMenu.prototype.setText = function(text)
 {
@@ -48,7 +48,7 @@ ContextMenu.prototype.setText = function(text)
  * Remove option from context menu.
  *
  * @method removeOption
- * @param {Number} index
+ * @param {number} index
  */
 ContextMenu.prototype.removeOption = function(index)
 {
@@ -63,7 +63,7 @@ ContextMenu.prototype.removeOption = function(index)
  * Add new option to context menu
  *
  * @method addOption
- * @param {String} name of the option
+ * @param {string} name of the option
  * @param {Function} callback Callback function
  */
 ContextMenu.prototype.addOption = function(name, callback)
@@ -88,7 +88,7 @@ ContextMenu.prototype.addOption = function(name, callback)
  * Add new menu to context menu
  *
  * @method addOption
- * @param {String} name of the option.
+ * @param {string} name of the option.
  * @return {DropdownMenu} The new menu created.
  */
 ContextMenu.prototype.addMenu = function(name)

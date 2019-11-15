@@ -4,7 +4,7 @@
  * Manages the history state of multiple objects.
  *
  * @class History
- * @param {Number} limit Maximum actions stored in the object.
+ * @param {number} limit Maximum actions stored in the object.
  */
 function History(limit)
 {
@@ -18,7 +18,7 @@ function History(limit)
  * Get action from its id.
  * 
  * @method getAction
- * @param {Number} id Action identifier.
+ * @param {number} id Action identifier.
  * @return {Action} The action requested, if it is not found returns null.
  */
 History.prototype.getAction = function(id)

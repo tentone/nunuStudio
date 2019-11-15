@@ -698,7 +698,7 @@ TreeNode.prototype.styleMouseOver = function()
  * Set selection state of this tree node.
  * 
  * @method setSelected
- * @param {Boolean} selected If true set selected, otherwise se unselected.
+ * @param {boolean} selected If true set selected, otherwise se unselected.
  */
 TreeNode.prototype.setSelected = function(selected)
 {
@@ -718,7 +718,7 @@ TreeNode.prototype.setSelected = function(selected)
  * Set node border.
  * 
  * @method setBorder
- * @param {Number} place Border position.
+ * @param {number} place Border position.
  */
 TreeNode.prototype.setBorder = function(place)
 {
@@ -779,7 +779,7 @@ TreeNode.prototype.addObject = function(object)
  *
  * @method insertObject
  * @param {Object3D} object
- * @param {Number} index
+ * @param {number} index
  */
 TreeNode.prototype.insertObject = function(object, index)
 {
@@ -819,7 +819,7 @@ TreeNode.prototype.removeElementUUID = function(uuid)
  * Update folded state for this tree element.
  *
  * @method updatedFoldedState
- * @param {Boolean} folded.
+ * @param {boolean} folded.
  */
 TreeNode.prototype.updateFoldedState = function(folded)
 {

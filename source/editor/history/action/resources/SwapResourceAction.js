@@ -9,7 +9,7 @@
  * @param {Resource} oldResource Resource to remove.
  * @param {Resource} newResource Resource to add.
  * @param {ResourceManager} manager Manager to insert the resource into.
- * @param {String} category Category of the resource.
+ * @param {string} category Category of the resource.
  */
 function SwapResourceAction(oldResource, newResource, manager, category)
 {

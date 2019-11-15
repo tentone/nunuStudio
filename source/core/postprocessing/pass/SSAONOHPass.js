@@ -127,7 +127,7 @@ function SSAONOHPass()
 		 * Kernel radius used for the SSAO effect.
 		 *
 		 * @property kernelRadius
-		 * @type {Boolean}
+		 * @type {boolean}
 		 */
 		kernelRadius:
 		{
@@ -139,7 +139,7 @@ function SSAONOHPass()
 		 * Minimum camera distance considered for the SSAO effect.
 		 *
 		 * @property minDistance
-		 * @type {Number}
+		 * @type {number}
 		 */
 		minDistance:
 		{
@@ -151,7 +151,7 @@ function SSAONOHPass()
 		 * Maximum camera distance considered for the SSAO effect.
 		 *
 		 * @property maxDistance
-		 * @type {Number}
+		 * @type {number}
 		 */
 		maxDistance:
 		{
@@ -163,7 +163,7 @@ function SSAONOHPass()
 		 * SSAO effect kernel size.
 		 *
 		 * @property kernelSize
-		 * @type {Number}
+		 * @type {number}
 		 */
 		kernelSize:
 		{
@@ -248,8 +248,8 @@ SSAONOHPass.prototype.generateRandomKernelRotations = function()
  * @param {WebGLRenderer} renderer
  * @param {WebGLRenderTarget} writeBuffer Buffer to write output.
  * @param {WebGLRenderTarget} readBuffer Input buffer.
- * @param {Number} delta Delta time in milliseconds.
- * @param {Boolean} maskActive Not used in this pass.
+ * @param {number} delta Delta time in milliseconds.
+ * @param {boolean} maskActive Not used in this pass.
  */
 SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
@@ -346,8 +346,8 @@ SSAONOHPass.prototype.dispose = function()
  * Set resolution of this render pass.
  * 
  * @method setSize
- * @param {Number} width
- * @param {Number} height
+ * @param {number} width
+ * @param {number} height
  */
 SSAONOHPass.prototype.setSize = function(width, height)
 {

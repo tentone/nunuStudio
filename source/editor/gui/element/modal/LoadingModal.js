@@ -26,7 +26,7 @@ function LoadingModal(parent)
 	 * The box is only hidden if counter goes bellow 1.
 	 *
 	 * @attribute counter
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.counter = 0;
 
@@ -78,7 +78,7 @@ LoadingModal.prototype = Object.create(Element.prototype);
  * Show the loading box.
  * 
  * @method show
- * @param {Boolean} showCancel If true shows the cancel button.
+ * @param {boolean} showCancel If true shows the cancel button.
  * @param {Function} callback Callback function.
  */
 LoadingModal.prototype.show = function()
@@ -98,7 +98,7 @@ LoadingModal.prototype.show = function()
  * Hide modal box.
  *
  * @method hide
- * @param {Boolean} force Hide box and reset counter;
+ * @param {boolean} force Hide box and reset counter;
  */
 LoadingModal.prototype.hide = function(force)
 {

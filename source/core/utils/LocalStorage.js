@@ -13,7 +13,7 @@ function LocalStorage(){}
  * 
  * @static
  * @method set
- * @param {String} key
+ * @param {string} key
  * @param {Object} value
  */
 LocalStorage.set = function(key, value)
@@ -33,7 +33,7 @@ LocalStorage.set = function(key, value)
  * 
  * @static
  * @method get
- * @param {String} key
+ * @param {string} key
  * @return {Object} Value obtained from the storage.
  */
 LocalStorage.get = function(key)
@@ -55,8 +55,8 @@ LocalStorage.get = function(key)
  * 
  * @static
  * @method exists
- * @param {String} key
- * @return {Boolean} True if the key exists false otherwise.
+ * @param {string} key
+ * @return {boolean} True if the key exists false otherwise.
  */
 LocalStorage.exists = function(key)
 {
@@ -68,7 +68,7 @@ LocalStorage.exists = function(key)
  * 
  * @static
  * @method delete
- * @param {String} key
+ * @param {string} key
  */
 LocalStorage.delete = function(key)
 {

@@ -9,9 +9,9 @@
  * @author Luke Moody
  * @class TypedArrayHelper
  * @param {Function} TypedArrayConstructor The constructor to use (Float32Array, Uint8Array, etc.)
- * @param {Number} size The size of the array to create
- * @param {Number} componentSize The number of components per-value (ie. 3 for a vec3, 9 for a Mat3, etc.)
- * @param {Number} indexOffset The index in the array from which to start assigning values. Default 0 if none provided
+ * @param {number} size The size of the array to create
+ * @param {number} componentSize The number of components per-value (ie. 3 for a vec3, 9 for a Mat3, etc.)
+ * @param {number} indexOffset The index in the array from which to start assigning values. Default 0 if none provided
  */
 function TypedArrayHelper(TypedArrayConstructor, size, componentSize, indexOffset)
 {
@@ -32,7 +32,7 @@ TypedArrayHelper.constructor = TypedArrayHelper;
  * Note that if the array is to be shrunk, data will be lost.
  *
  * @method setSize
- * @param {Number} size The new size of the array.
+ * @param {number} size The new size of the array.
  */
 TypedArrayHelper.prototype.setSize = function(size, noComponentMultiply)
 {
@@ -57,7 +57,7 @@ TypedArrayHelper.prototype.setSize = function(size, noComponentMultiply)
  * Shrinks the internal array.
  *
  * @method shrink
- * @param {Number} size The new size of the typed array. Must be smaller than this.array.length.
+ * @param {number} size The new size of the typed array. Must be smaller than this.array.length.
  * @return {TypedArrayHelper} Instance of this class.
  */
 TypedArrayHelper.prototype.shrink = function(size)
@@ -71,7 +71,7 @@ TypedArrayHelper.prototype.shrink = function(size)
  * Grows the internal array.
  *
  * @method grow
- * @param {Number} size The new size of the typed array. Must be larger than this.array.length.
+ * @param {number} size The new size of the typed array. Must be larger than this.array.length.
  * @return {TypedArrayHelper} Instance of this class.
  */
 TypedArrayHelper.prototype.grow = function(size)
@@ -91,8 +91,8 @@ TypedArrayHelper.prototype.grow = function(size)
  * Perform a splice operation on this arrays buffer.
  *
  * @method splice
- * @param {Number} start The start index of the splice. Will be multiplied by the number of components for this attribute.
- * @param {Number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
+ * @param {number} start The start index of the splice. Will be multiplied by the number of components for this attribute.
+ * @param {number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
  * @return {Object} The TypedArrayHelper instance.
  */
 TypedArrayHelper.prototype.splice = function(start, end)
@@ -124,7 +124,7 @@ TypedArrayHelper.prototype.splice = function(start, end)
  * Alias for TypedArray.set. Will automatically resize if the given source array is of a larger size than the internal array.
  *
  * @method setFromArray
- * @param {Number} index The start position from which to copy into this array.
+ * @param {number} index The start position from which to copy into this array.
  * @param {TypedArray} array The array from which to copy; the source array.
  * @return {TypedArrayHelper} Instance of this class.
  */
@@ -151,7 +151,7 @@ TypedArrayHelper.prototype.setFromArray = function(index, array)
  * Set a Vector2 value at index.
  *
  * @method setVec2
- * @param {Number} index The index at which to set the vec2 values from.
+ * @param {number} index The index at which to set the vec2 values from.
  * @param {Vector2} vec2  Any object that has x and y properties.
  * @return {TypedArrayHelper} Instance of this class.
  */
@@ -164,9 +164,9 @@ TypedArrayHelper.prototype.setVec2 = function(index, vec2)
  * Set a Vector2 value using raw components.
  *
  * @method setVec2Components
- * @param {Number} index The index at which to set the vec2 values from.
- * @param {Number} x The Vec2"s x component.
- * @param {Number} y The Vec2"s y component.
+ * @param {number} index The index at which to set the vec2 values from.
+ * @param {number} x The Vec2"s x component.
+ * @param {number} y The Vec2"s y component.
  * @return {TypedArrayHelper} Instance of this class.
  */
 TypedArrayHelper.prototype.setVec2Components = function(index, x, y)
@@ -183,7 +183,7 @@ TypedArrayHelper.prototype.setVec2Components = function(index, x, y)
  * Set a Vector3 value at index.
  *
  * @method setVec3
- * @param {Number} index The index at which to set the vec3 values from.
+ * @param {number} index The index at which to set the vec3 values from.
  * @param {Vector3} vec2  Any object that has x, y, and z properties.
  * @return {TypedArrayHelper} Instance of this class.
  */
@@ -196,10 +196,10 @@ TypedArrayHelper.prototype.setVec3 = function(index, vec3)
  * Set a Vector3 value using raw components.
  *
  * @method setVec3Components
- * @param {Number} index The index at which to set the vec3 values from.
- * @param {Number} x The Vec3"s x component.
- * @param {Number} y The Vec3"s y component.
- * @param {Number} z The Vec3"s z component.
+ * @param {number} index The index at which to set the vec3 values from.
+ * @param {number} x The Vec3"s x component.
+ * @param {number} y The Vec3"s y component.
+ * @param {number} z The Vec3"s z component.
  * @return {TypedArrayHelper} Instance of this class.
  */
 TypedArrayHelper.prototype.setVec3Components = function(index, x, y, z)
@@ -217,7 +217,7 @@ TypedArrayHelper.prototype.setVec3Components = function(index, x, y, z)
  * Set a Vector4 value at index.
  *
  * @method setVec4
- * @param {Number} index The index at which to set the vec4 values from.
+ * @param {number} index The index at which to set the vec4 values from.
  * @param {Vector4} vec2  Any object that has x, y, z, and w properties.
  * @return {TypedArrayHelper} Instance of this class.
  */
@@ -230,11 +230,11 @@ TypedArrayHelper.prototype.setVec4 = function(index, vec4)
  * Set a Vector4 value using raw components.
  *
  * @method setVec4Components
- * @param {Number} index The index at which to set the vec4 values from.
- * @param {Number} x The Vec4"s x component.
- * @param {Number} y The Vec4"s y component.
- * @param {Number} z The Vec4"s z component.
- * @param {Number} w The Vec4"s w component.
+ * @param {number} index The index at which to set the vec4 values from.
+ * @param {number} x The Vec4"s x component.
+ * @param {number} y The Vec4"s y component.
+ * @param {number} z The Vec4"s z component.
+ * @param {number} w The Vec4"s w component.
  * @return {TypedArrayHelper} Instance of this class.
  */
 TypedArrayHelper.prototype.setVec4Components = function(index, x, y, z, w)
@@ -253,7 +253,7 @@ TypedArrayHelper.prototype.setVec4Components = function(index, x, y, z, w)
  * Set a Matrix3 value at index.
  *
  * @method setMat3
- * @param {Number} index The index at which to set the matrix values from.
+ * @param {number} index The index at which to set the matrix values from.
  * @param {Matrix3} mat3 The 3x3 matrix to set from. Must have a TypedArray property named elements to copy from.
  * @return {TypedArrayHelper} Instance of this class.
  */
@@ -266,7 +266,7 @@ TypedArrayHelper.prototype.setMat3 = function(index, mat3)
  * Set a Matrix4 value at index.
  *
  * @method setMat4
- * @param {Number} index The index at which to set the matrix values from.
+ * @param {number} index The index at which to set the matrix values from.
  * @param {Matrix4} mat3 The 4x4 matrix to set from. Must have a TypedArray property named elements to copy from.
  * @return {TypedArrayHelper} Instance of this class.
  */
@@ -279,7 +279,7 @@ TypedArrayHelper.prototype.setMat4 = function(index, mat4)
  * Set a Color value at index.
  *
  * @method setColor
- * @param {Number} index The index at which to set the vec3 values from.
+ * @param {number} index The index at which to set the vec3 values from.
  * @param {Color} color  Any object that has r, g, and b properties.
  * @return {TypedArrayHelper} Instance of this class.
  */
@@ -292,8 +292,8 @@ TypedArrayHelper.prototype.setColor = function(index, color)
  * Set a Number value at index.
  *
  * @method setNumber
- * @param {Number} index The index at which to set the vec3 values from.
- * @param {Number} numericValue  The number to assign to this index in the array.
+ * @param {number} index The index at which to set the vec3 values from.
+ * @param {number} numericValue  The number to assign to this index in the array.
  * @return {TypedArrayHelper} Instance of this class.
  */
 TypedArrayHelper.prototype.setNumber = function(index, numericValue)
@@ -308,8 +308,8 @@ TypedArrayHelper.prototype.setNumber = function(index, numericValue)
  * Note that this function ignores the component size and will just return a single value.
  *
  * @method getValueAtIndex
- * @param {Number} index The index in the array to fetch.
- * @return {Number} The value at the given index.
+ * @param {number} index The index in the array to fetch.
+ * @return {number} The value at the given index.
  */
 TypedArrayHelper.prototype.getValueAtIndex = function(index)
 {
@@ -322,7 +322,7 @@ TypedArrayHelper.prototype.getValueAtIndex = function(index)
  * If the componentSize is set to 3, then it will return a new TypedArray of length 3.
  *
  * @method getComponentValueAtIndex
- * @param {Number} index The index in the array to fetch.
+ * @param {number} index The index in the array to fetch.
  * @return {TypedArray} The component value at the given index.
  */
 TypedArrayHelper.prototype.getComponentValueAtIndex = function(index)

@@ -19,7 +19,7 @@ function TabGroupSplit(parent, placement)
 	 * Border where another another tabs can be dragged to for this tab to be spplited.
 	 *
 	 * @property dragBorder
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.dragBorder = 0.2;
 
@@ -27,7 +27,7 @@ function TabGroupSplit(parent, placement)
 	 * If true the group can be split in two.
 	 *
 	 * @property canSplit
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.canSplit = true;
 
@@ -35,7 +35,7 @@ function TabGroupSplit(parent, placement)
 	 * If true the group can be collapsed.
 	 *
 	 * @property canCollapse
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.canCollapse = true;
 
@@ -43,7 +43,7 @@ function TabGroupSplit(parent, placement)
 	 * DOM element to be displayed when a tab is dragged over.
 	 *
 	 * @property tabArea
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.tabArea = document.createElement("div");
 	this.tabArea.style.zIndex = "1000";
@@ -200,7 +200,7 @@ TabGroupSplit.prototype = Object.create(TabGroup.prototype);
  * Split this tab group into two new tab groups.
  *
  * @method split
- * @param {Number} direction Direction where to insert the new tab.
+ * @param {number} direction Direction where to insert the new tab.
  * @return {TabGroupSplit} The new created tab group.
  */
 TabGroupSplit.prototype.split = function(direction)
@@ -324,7 +324,7 @@ TabGroupSplit.prototype.collapse = function()
  *
  * @method attachTab
  * @param {TabElement} tab Tab to be moved.
- * @param {Number} insertIndex Index where to place the tab.
+ * @param {number} insertIndex Index where to place the tab.
  */
 TabGroupSplit.prototype.attachTab = function(tab, insertIndex)
 {	

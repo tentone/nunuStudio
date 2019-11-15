@@ -10,7 +10,7 @@
  * Based on the three.js adaptation (mrdoob, yomotsu) of http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
  * 
  * @class CSS3DRenderer
- * @param {DOM} domElement DOM division to place rendered objects.
+ * @param {Element} domElement DOM division to place rendered objects.
  */
 function CSS3DRenderer(domElement)
 {
@@ -54,7 +54,7 @@ function CSS3DRenderer(domElement)
 	 * Main DOM element used for the renderer.
 	 *
 	 * @attribute domElement
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.domElement = domElement !== undefined ? domElement : document.createElement("div");
 	this.domElement.style.overflow = "hidden";
@@ -64,7 +64,7 @@ function CSS3DRenderer(domElement)
 	 * Camera projected DOM element.
 	 *
 	 * @attribute domElement
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.cameraElement = document.createElement("div");
 	this.cameraElement.style.WebkitTransformStyle = "preserve-3d";
@@ -88,8 +88,8 @@ CSS3DRenderer.prototype.getSize = function()
  * The size is also applie to the internal DOM division.
  *
  * @method setSize
- * @param {Number} width
- * @param {Number} height
+ * @param {number} width
+ * @param {number} height
  */
 CSS3DRenderer.prototype.setSize = function(width, height)
 {

@@ -32,7 +32,7 @@ function TextSprite()
 		 * CSS Font style to be used.
 		 * 
 		 * @attribute font
-		 * @type {String}
+		 * @type {string}
 		 */
 		font:
 		{
@@ -47,7 +47,7 @@ function TextSprite()
 		 *    - TextSprite.CENTER
 		 *
 		 * @attribute align
-		 * @type {String}
+		 * @type {string}
 		 */
 		align:
 		{
@@ -59,7 +59,7 @@ function TextSprite()
 		 * CSS color of the text.
 		 * 
 		 * @attribute color
-		 * @type {String}
+		 * @type {string}
 		 */
 		color:
 		{
@@ -71,7 +71,7 @@ function TextSprite()
 		 * Text of this object.
 		 * 
 		 * @attribute text
-		 * @type {String}
+		 * @type {string}
 		 */
 		text:
 		{
@@ -90,7 +90,7 @@ function TextSprite()
 		 * Indicates if the text has an outline border.
 		 * 
 		 * @attribute outline
-		 * @type {Boolean}
+		 * @type {boolean}
 		 */
 		outline:
 		{
@@ -102,7 +102,7 @@ function TextSprite()
 		 * CSS color of the outline.
 		 * 
 		 * @attribute outlineColor
-		 * @type {String}
+		 * @type {string}
 		 */
 		outlineColor:
 		{
@@ -114,7 +114,7 @@ function TextSprite()
 		 * Width of the text outline.
 		 * 
 		 * @attribute outlineWidth
-		 * @type {Number}
+		 * @type {number}
 		 */
 		outlineWidth:
 		{
@@ -128,7 +128,7 @@ function TextSprite()
 		 * Should always be a npot of 2.
 		 *
 		 * @attribute resolution
-		 * @type {Number}
+		 * @type {number}
 		 */
 		resolution:
 		{
@@ -147,7 +147,7 @@ TextSprite.prototype = Object.create(CanvasSprite.prototype);
  *
  * @static
  * @attribute LEFT
- * @type {String}
+ * @type {string}
  */
 TextSprite.LEFT = "left";
 
@@ -156,7 +156,7 @@ TextSprite.LEFT = "left";
  *
  * @static
  * @attribute CENTER
- * @type {String}
+ * @type {string}
  */
 TextSprite.CENTER = "center";
 
@@ -165,7 +165,7 @@ TextSprite.CENTER = "center";
  *
  * @static
  * @attribute RIGHT
- * @type {String}
+ * @type {string}
  */
 TextSprite.RIGHT = "right";
 

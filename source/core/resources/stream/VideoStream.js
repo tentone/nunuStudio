@@ -6,8 +6,8 @@
  * @class VideoStream
  * @extends {Video}
  * @module Resources
- * @param {String} url URL to video file.
- * @param {String} encoding Image encoding, required for ArrayBuffer data.
+ * @param {string} url URL to video file.
+ * @param {string} encoding Image encoding, required for ArrayBuffer data.
  */
 function VideoStream(url)
 {

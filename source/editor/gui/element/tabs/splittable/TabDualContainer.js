@@ -176,7 +176,7 @@ TabDualContainer.prototype.selectPreviousTab = function()
  *
  * @method addTab
  * @param {Constructor} TabConstructor Constructor if the TabElement to be added to the container.
- * @param {Boolean} closeable Indicates if the tab can be closed.
+ * @param {boolean} closeable Indicates if the tab can be closed.
  */
 TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
 {

@@ -23,7 +23,7 @@ function DropdownMenu(parent)
 	 * This DOM element is added directly to the parent DOM element.
 	 *
 	 * @attribute panel
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.panel = new Element(parent, "div");
 	this.panel.element.style.overflow = "visible";
@@ -34,7 +34,7 @@ function DropdownMenu(parent)
 	 * Option icon image, the element is only created when a icon is set.
 	 *
 	 * @attribute icon
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.icon = null;
 
@@ -42,7 +42,7 @@ function DropdownMenu(parent)
 	 * Decorative arrow.
 	 *
 	 * @attribute arrow
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.arrow = document.createElement("img");
 	this.arrow.style.display = "none";
@@ -58,7 +58,7 @@ function DropdownMenu(parent)
 	 * Direction to open the dropdown.
 	 *
 	 * @attribute direction
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.direction = DropdownMenu.DOWN;
 	
@@ -66,7 +66,7 @@ function DropdownMenu(parent)
 	 * Indicates if the dropdown menu is expanded.
 	 *
 	 * @attribute expanded
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.expanded = false;
 	this.optionsSize = new THREE.Vector2(150, 20);
@@ -137,7 +137,7 @@ DropdownMenu.prototype.showArrow = function()
  * Set icon.
  *
  * @method setIcon
- * @param {String} icon Image URL.
+ * @param {string} icon Image URL.
  */
 DropdownMenu.prototype.setIcon = function(icon)
 {
@@ -160,7 +160,7 @@ DropdownMenu.prototype.setIcon = function(icon)
  * Remove option from menu.
  *
  * @method removeOption
- * @param {Number} index
+ * @param {number} index
  */
 DropdownMenu.prototype.removeOption = function(index)
 {
@@ -175,9 +175,9 @@ DropdownMenu.prototype.removeOption = function(index)
  * Add new option to menu
  *
  * @method addOption
- * @param {String} name of the option
+ * @param {string} name of the option
  * @param {Function} callback Callback function
- * @param {String} icon Icon URL.
+ * @param {string} icon Icon URL.
  * @return {ButtonMenu} Button created for the new option.
  */
 DropdownMenu.prototype.addOption = function(name, callback, icon)
@@ -209,8 +209,8 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
  * Add new menu to menu.
  *
  * @method addOption
- * @param {String} name Name of the option.
- * @param {String} icon Optional icon, image URL.
+ * @param {string} name Name of the option.
+ * @param {string} icon Optional icon, image URL.
  * @return {DropdownMenu} The new menu created.
  */
 DropdownMenu.prototype.addMenu = function(name, icon)
@@ -236,7 +236,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
  * Update expanded state, position all options in this dropdown.
  * 
  * @method setExpanded
- * @param {Boolean} expanded If true the menu will be expanded.
+ * @param {boolean} expanded If true the menu will be expanded.
  */
 DropdownMenu.prototype.setExpanded = function(expanded)
 {

@@ -51,7 +51,7 @@ function AudioEmitter(audio)
 	 *  - audioNode
 	 *
 	 * @property sourceType
-	 * @type {String}
+	 * @type {string}
 	 * @default {"empty"}
 	 */
 	this.sourceType = "empty";
@@ -78,7 +78,7 @@ function AudioEmitter(audio)
 	 *
 	 * @property volume
 	 * @default 1.0
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.volume = 1.0;
 
@@ -87,7 +87,7 @@ function AudioEmitter(audio)
 	 *
 	 * @property playbackRate
 	 * @default 1.0
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.playbackRate = 1.0;
 
@@ -96,7 +96,7 @@ function AudioEmitter(audio)
 	 *
 	 * @property startTime
 	 * @default 0.0
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.startTime = 0.0;
 
@@ -113,7 +113,7 @@ function AudioEmitter(audio)
 	 * Modify pitch, measured in cents. +/- 100 is a semitone. +/- 1200 is an octave.
 	 *
 	 * @property detune
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.detune = 0;
 
@@ -349,7 +349,7 @@ AudioEmitter.prototype.setAudio = function(audio)
 /**
  * Get audio emitter volume.
  * 
- * @param {Number} volume
+ * @param {number} volume
  * @method getVolume
  */
 AudioEmitter.prototype.getVolume = function()
@@ -361,7 +361,7 @@ AudioEmitter.prototype.getVolume = function()
  * Set audio emitter volume.
  * 
  * @method setVolume
- * @param {Number} value Audio volume
+ * @param {number} value Audio volume
  * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.setVolume = function(value)
@@ -395,7 +395,7 @@ AudioEmitter.prototype.setLoop = function(loop)
  * Set detune value.
  * 
  * @method setDetune
- * @param {Number} value
+ * @param {number} value
  * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.setDetune = function(value)
@@ -425,7 +425,7 @@ AudioEmitter.prototype.getLoop = function()
  * Set playback speed.
  * 
  * @method setPlaybackRate
- * @param {Number} speed
+ * @param {number} speed
  * @return {AudioEmitter} Self pointer for chaining.
  */
 AudioEmitter.prototype.setPlaybackRate = function (speed)
@@ -444,7 +444,7 @@ AudioEmitter.prototype.setPlaybackRate = function (speed)
  * Get the playback speed.
  *
  * @method getPlaybackRate
- * @return {Number} Playback speed.
+ * @return {number} Playback speed.
  */
 AudioEmitter.prototype.getPlaybackRate = function()
 {
@@ -494,7 +494,7 @@ AudioEmitter.prototype.setFilters = function(value)
  * Get a filter to the filters array.
  * 
  * @method getFilter
- * @param {Number} index Index of the filter.
+ * @param {number} index Index of the filter.
  * @return Filter.
  */
 AudioEmitter.prototype.getFilter = function(index)

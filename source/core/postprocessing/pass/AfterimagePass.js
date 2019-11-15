@@ -53,7 +53,7 @@ function AfterimagePass(damp)
 		 * Dampening applied to the previous frame.
 		 *
 		 * @property damp
-		 * @type {Number}
+		 * @type {number}
 		 */
 		damp:
 		{

@@ -66,7 +66,7 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 		 * Minimum luminance.
 		 *
 		 * @property minLuminance
-		 * @type {Number}
+		 * @type {number}
 		 */
 		minLuminance:
 		{
@@ -78,7 +78,7 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 		 * Rate of luminance variation (adaptation rate).
 		 *
 		 * @property tau
-		 * @type {Number}
+		 * @type {number}
 		 */
 		tau:
 		{
@@ -90,7 +90,7 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 		 * Rate of luminance variation (adaptation rate).
 		 *
 		 * @property tau
-		 * @type {Number}
+		 * @type {number}
 		 */
 		adaptive:
 		{

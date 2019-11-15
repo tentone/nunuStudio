@@ -89,7 +89,7 @@ Tree.prototype.clone = function()
  * Print tree into console, recursively.
  *
  * @method print
- * @param {Number} level Recursive parameter, not required.
+ * @param {number} level Recursive parameter, not required.
  */
 Tree.prototype.print = function(level)
 {

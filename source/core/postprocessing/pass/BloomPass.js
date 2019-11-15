@@ -6,10 +6,10 @@
  * @class BloomPass
  * @author alteredq / http://alteredqualia.com/
  * @module Postprocessing
- * @param {Number} strength  Bloom effect strength.
- * @param {Number} kernelSize Bloom kernel size.
- * @param {Number} sigma Sigma.
- * @param {Number} resolution Bloom buffer resolution.
+ * @param {number} strength  Bloom effect strength.
+ * @param {number} kernelSize Bloom kernel size.
+ * @param {number} sigma Sigma.
+ * @param {number} resolution Bloom buffer resolution.
  */
 function BloomPass(strength, kernelSize, sigma, resolution)
 {

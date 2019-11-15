@@ -26,7 +26,7 @@ THREE.TextureLoader = TextureLoader;
  * Set cross origin path for the loader.
  * 
  * @method setCrossOrigin
- * @param {String} url URL.
+ * @param {string} url URL.
  * @return {TextureLoader} Self for chaining.
  */
 TextureLoader.prototype.setCrossOrigin = function(url)
@@ -39,7 +39,7 @@ TextureLoader.prototype.setCrossOrigin = function(url)
  * Set base path for texture loading.
  * 
  * @method setPath
- * @param {String} path Path
+ * @param {string} path Path
  * @return {TextureLoader} Self for chaining.
  */
 TextureLoader.prototype.setPath = function(path)
@@ -90,7 +90,7 @@ TextureLoader.prototype.setFonts = function(fonts)
  * Does the same as creating a new Texture object.
  * 
  * @method load
- * @param {String} url
+ * @param {string} url
  * @param {Function} onLoad
  * @param {Function} onProgress
  * @param {Function} onError
@@ -124,7 +124,7 @@ TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
  * Load texture object from JSON.
  *
  * @method loadJSON
- * @param {String} url
+ * @param {string} url
  * @param {Function} onLoad
  * @param {Function} onProgress
  * @param {Function} onError
@@ -144,7 +144,7 @@ TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
  * Parse a texture object JSON description.
  *
  * @method parse
- * @param {String} url
+ * @param {string} url
  * @param {Function} onLoad
  */
 TextureLoader.prototype.parse = function(json, onLoad)

@@ -35,7 +35,7 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		 * If set true a grascale effect will be applied.
 		 *
 		 * @property grayscale
-		 * @type {Boolean}
+		 * @type {boolean}
 		 */
 		grayscale:
 		{
@@ -47,7 +47,7 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		 * Ammout of noise to be applied to the image.
 		 *
 		 * @property noiseIntensity
-		 * @type {Number}
+		 * @type {number}
 		 */
 		noiseIntensity:
 		{
@@ -59,7 +59,7 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		 * Scanline intensity.
 		 *
 		 * @property scanlinesIntensity
-		 * @type {Number}
+		 * @type {number}
 		 */
 		scanlinesIntensity:
 		{
@@ -71,7 +71,7 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 		 * Number of scanline to be displayed.
 		 *
 		 * @property scanlinesCount
-		 * @type {Number}
+		 * @type {number}
 		 */
 		scanlinesCount:
 		{

@@ -5,7 +5,7 @@
  *
  * @class PlanarControls
  * @extends {OrbitControls}
- * @param {Number} mode Mode indicates the orientation to be locked.
+ * @param {number} mode Mode indicates the orientation to be locked.
  */
 function EditorPlanarControls(mode)
 {

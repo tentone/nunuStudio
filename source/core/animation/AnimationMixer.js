@@ -46,7 +46,7 @@ AnimationMixer.prototype.createActions = function(animations)
  * Set animation mixer time.
  * 
  * @method setTime
- * @param {Number} time Time in seconds.
+ * @param {number} time Time in seconds.
  */
 AnimationMixer.prototype.setTime = function(time)
 {
@@ -101,8 +101,8 @@ AnimationMixer.prototype.dispose = function()
  * Update animation state.
  * 
  * @method update
- * @param {Number} delta Time since last call.
- * @param {Boolean} forceUpdate If set true the mixer is updated even if it isnt playing.
+ * @param {number} delta Time since last call.
+ * @param {boolean} forceUpdate If set true the mixer is updated even if it isnt playing.
  */
 AnimationMixer.prototype.update = function(delta, forceUpdate)
 {

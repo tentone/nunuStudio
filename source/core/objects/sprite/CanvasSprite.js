@@ -22,7 +22,7 @@ function CanvasSprite()
 	 * DOM canvas to draw.
 	 * 
 	 * @attribute canvas
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.canvas = this.texture.image;
 
@@ -48,7 +48,7 @@ function CanvasSprite()
 		 * Size attenuation indicates how the sprite should be scaled relative to the camera.
 		 *
 		 * @attribute sizeAttenuation
-		 * @type {Number}
+		 * @type {number}
 		 */
 		sizeAttenuation:
 		{

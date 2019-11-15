@@ -8,7 +8,7 @@
  * @class RemoveResourceAction
  * @param {Resource} resource Resource to remove.
  * @param {ResourceManager} manager Manager to insert the resource into.
- * @param {String} category Category of the resource.
+ * @param {string} category Category of the resource.
  */
 function RemoveResourceAction(resource, manager, category)
 {

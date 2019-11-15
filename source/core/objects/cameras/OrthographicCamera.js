@@ -8,11 +8,11 @@
  * @class OrthographicCamera
  * @extends {OrthographicCamera}
  * @module Cameras
- * @param {Number} size Camera size relative to resize mode
- * @param {Number} aspect Aspect ratio X/Y
- * @param {Number} mode Camera resize mode (RESIZE_HORIZONTAL or RESIZE_VERTICAL)
- * @param {Number} near Near projection plane
- * @param {Number} far Far projection plane
+ * @param {number} size Camera size relative to resize mode
+ * @param {number} aspect Aspect ratio X/Y
+ * @param {number} mode Camera resize mode (RESIZE_HORIZONTAL or RESIZE_VERTICAL)
+ * @param {number} near Near projection plane
+ * @param {number} far Far projection plane
  */
 function OrthographicCamera(size, aspect, mode, near, far)
 {
@@ -25,7 +25,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * 
 	 * @property size
 	 * @default 10.0
-	 * @type {Number}
+	 * @type {number}
 	*/
 	this.size = (size != undefined) ? size : 10.0;
 
@@ -34,7 +34,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * 
 	 * @property aspect
 	 * @default 1.0
-	 * @type {Number}
+	 * @type {number}
 	*/
 	this.aspect = (aspect != undefined) ? aspect : 1.0;
 
@@ -43,7 +43,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * 
 	 * @property mode
 	 * @default RESIZE_HORIZONTAL
-	 * @type {Number}
+	 * @type {number}
 	*/
 	this.mode = (mode !== undefined) ? mode : OrthographicCamera.RESIZE_HORIZONTAL;
 
@@ -89,7 +89,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	 * 
 	 * @property order
 	 * @default 0
-	 * @type {Number}
+	 * @type {number}
 	*/
 	this.order = 0;
 
@@ -115,7 +115,7 @@ OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype)
 /**
  * Used to set camera to resize horizontally 
  * @attribute RESIZE_HORIZONTAL
- * @type {Number}
+ * @type {number}
  */
 OrthographicCamera.RESIZE_HORIZONTAL = 0;
 
@@ -123,7 +123,7 @@ OrthographicCamera.RESIZE_HORIZONTAL = 0;
  * Used to set camera to resize vertically.
  *  
  * @attribute RESIZE_VERTICAL
- * @type {Number}
+ * @type {number}
  */
 OrthographicCamera.RESIZE_VERTICAL = 1;
 
@@ -133,8 +133,8 @@ OrthographicCamera.RESIZE_VERTICAL = 1;
  * Updates the viewport, rendering composer and the camera projection matrix.
  *
  * @method resize
- * @param {Number} x Width of the screen.
- * @param {Number} y Height of the screen.
+ * @param {number} x Width of the screen.
+ * @param {number} y Height of the screen.
  * @param {Viewport} viewport Viewport that encapsulates the viewport of the camera.
  */
 OrthographicCamera.prototype.resize = function(x, y, viewport)

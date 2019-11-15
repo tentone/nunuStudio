@@ -33,8 +33,8 @@ Editor.deleteTemp = function()
  * Cordova has to be installed from NPM globaly, it is run trough the command line.
  *
  * @method exportAndroid
- * @param {Number} mode The app can be just run on the device, or exported as a signed or unsigned apk.
- * @param {String} outputPath Path to stored the output apk file in case there is one to store.
+ * @param {number} mode The app can be just run on the device, or exported as a signed or unsigned apk.
+ * @param {string} outputPath Path to stored the output apk file in case there is one to store.
  */
 Editor.exportAndroid = function(mode, outputPath)
 {
@@ -154,7 +154,7 @@ Editor.exportAndroid = function(mode, outputPath)
  * The mobile version of the runtime does not include any fullscreen and VR buttons, the application is run by default as fullscreen.
  *
  * @method exportCordovaProject
- * @param {String} dir Directory to export the project to.
+ * @param {string} dir Directory to export the project to.
  */
 Editor.exportCordovaProject = function(dir)
 {
@@ -171,7 +171,7 @@ Editor.exportCordovaProject = function(dir)
  * Saves the project and exports the runtime to run the project.
  *
  * @method exportWebProject
- * @param {String} dir Directory to export the project to.
+ * @param {string} dir Directory to export the project to.
  */
 Editor.exportWebProject = function(dir)
 {
@@ -190,7 +190,7 @@ Editor.exportWebProject = function(dir)
  * Used in the web version to export projects.
  *
  * @method exportWebProjectZip
- * @param {String} fname Name of the file.
+ * @param {string} fname Name of the file.
  */
 Editor.exportWebProjectZip = function(fname)
 {
@@ -227,7 +227,7 @@ Editor.exportWebProjectZip = function(fname)
  * Only the runtime and javascript portion of the project.
  *
  * @method exportNWJSProject
- * @param {String} dir Output directory.
+ * @param {string} dir Output directory.
  */
 Editor.exportNWJSProject = function(dir, target)
 {
@@ -279,7 +279,7 @@ Editor.exportNWJSProject = function(dir, target)
  * Export NWJS windows project.
  *
  * @method exportWindowsProject
- * @param {String} dir Output directory.
+ * @param {string} dir Output directory.
  */
 Editor.exportWindows = function(dir)
 {
@@ -290,7 +290,7 @@ Editor.exportWindows = function(dir)
  * Export NWJS linux project.
  *
  * @method exportLinuxProject
- * @param {String} dir Output directory.
+ * @param {string} dir Output directory.
  */
 Editor.exportLinux = function(dir)
 {
@@ -302,7 +302,7 @@ Editor.exportLinux = function(dir)
  * Export NWJS macOS project.
  *
  * @method exportMacOSProject
- * @param {String} dir Output directory.
+ * @param {string} dir Output directory.
  */
 Editor.exportMacOS = function(dir)
 {

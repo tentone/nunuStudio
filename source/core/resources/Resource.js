@@ -16,7 +16,7 @@ function Resource(name, type)
 	 * Not required to be unique.
 	 * 
 	 * @property name
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.name = name;
 
@@ -24,7 +24,7 @@ function Resource(name, type)
 	 * UUID unique identifier.
 	 * 
 	 * @property uuid
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.uuid = THREE.Math.generateUUID();
 
@@ -32,7 +32,7 @@ function Resource(name, type)
 	 * Resource type. Used to identify the type of the resource, usefull for serialization.
 	 * 
 	 * @property type
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.type = type;
 
@@ -69,7 +69,7 @@ function Resource(name, type)
  * Export resource data to file.
  *
  * @method export
- * @param {String} fname File name or file path.
+ * @param {string} fname File name or file path.
  */
 Resource.prototype.export = function(fname)
 {

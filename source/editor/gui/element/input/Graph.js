@@ -10,8 +10,8 @@
  * @class Graph
  * @extends {Element}
  * @param {Element} parent Parent element.
- * @param {String} name Name of the default graph.
- * @param {String} color CSS hex color code of the default graph.
+ * @param {string} name Name of the default graph.
+ * @param {string} color CSS hex color code of the default graph.
  */
 function Graph(parent, name, color)
 {
@@ -25,7 +25,7 @@ function Graph(parent, name, color)
 	 * Scale margin in pixels.
 	 *
 	 * @property scaleMargin
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.scaleMargin = 22;
 
@@ -33,7 +33,7 @@ function Graph(parent, name, color)
 	 * Value button size.
 	 *
 	 * @property buttonRadius
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.buttonRadius = 10;
 
@@ -41,7 +41,7 @@ function Graph(parent, name, color)
 	 * Maximum value displayed vertically.
 	 *
 	 * @property max
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.max = 1.0;
 
@@ -49,7 +49,7 @@ function Graph(parent, name, color)
 	 * Minimum value displayed vertically.
 	 *
 	 * @property min
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.min = 0.0;
 
@@ -57,7 +57,7 @@ function Graph(parent, name, color)
 	 * Grid canvas element.
 	 *
 	 * @property grid
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.grid = document.createElement("canvas");
 	this.grid.style.position = "absolute";
@@ -105,7 +105,7 @@ Graph.GaphLine = function(canvas, name, color)
  * Create numeric scale for this graph.
  *
  * @method createScale
- * @param {Number} size Number of values in the scale.
+ * @param {number} size Number of values in the scale.
  */
 Graph.prototype.createScale = function(size)
 {
@@ -151,7 +151,7 @@ Graph.prototype.updateScale = function()
  * Add new graph line.
  *
  * @method addGraph
- * @param {String} name Name of the graph.
+ * @param {string} name Name of the graph.
  * @param {Color} color Color of the graph.
  */
 Graph.prototype.addGraph = function(name, color)
@@ -169,7 +169,7 @@ Graph.prototype.addGraph = function(name, color)
  *
  * @method setOnChange
  * @param {Function} onChange
- * @param {String} name Graph name.
+ * @param {string} name Graph name.
  */
 Graph.prototype.setOnChange = function(onChange, name)
 {
@@ -181,8 +181,8 @@ Graph.prototype.setOnChange = function(onChange, name)
  * Set value range of the graph.
  *
  * @method setRange.
- * @param {Number} min
- * @param {Number} max
+ * @param {number} min
+ * @param {number} max
  */
 Graph.prototype.setRange = function(min, max)
 {
@@ -231,7 +231,7 @@ Graph.prototype.setRange = function(min, max)
  *
  * @method setValue
  * @param {Array} values Array of numeric values.
- * @param {String} name Name of the graph line.
+ * @param {string} name Name of the graph line.
  */
 Graph.prototype.setValue = function(values, name)
 {	
@@ -335,7 +335,7 @@ Graph.prototype.setValue = function(values, name)
  * Return value array of a graph by its name.
  *
  * @method getValue
- * @param {String} name Graph name.
+ * @param {string} name Graph name.
  */
 Graph.prototype.getValue = function(name)
 {
@@ -353,7 +353,7 @@ Graph.prototype.getValue = function(name)
  * Get graph object by name.
  *
  * @method getGraph
- * @param {String} name Graph name.
+ * @param {string} name Graph name.
  */
 Graph.prototype.getGraph = function(name)
 {

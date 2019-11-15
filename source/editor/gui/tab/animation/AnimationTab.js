@@ -220,7 +220,7 @@ function AnimationTab(parent, closeable, container, index)
 	 * Resize tab placed between the info and tracks divisions
 	 *
 	 * @property tab
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.tab = document.createElement("div");
 	this.tab.style.backgroundColor = Editor.theme.barColor;

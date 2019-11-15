@@ -13,7 +13,7 @@ function Base64Utils(){}
  * Charset used to encode binary data.
  *
  * @attribute encoding
- * @type {String}
+ * @type {string}
  */
 Base64Utils.encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
@@ -24,7 +24,7 @@ Base64Utils.encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
  *
  * @method isBase64
  * @param {Object} data Data to be tested.
- * @return {Boolean} True if data is base64 encoded, false otherwise.
+ * @return {boolean} True if data is base64 encoded, false otherwise.
  */
 Base64Utils.isBase64 = function(data)
 {
@@ -57,8 +57,8 @@ Base64Utils.isBase64 = function(data)
  * Usefull for removing the heander from image, audio, video, etc.
  *
  * @method removeHeader
- * @param {String} base64
- * @return {String} base64
+ * @param {string} base64
+ * @return {string} base64
  */
 Base64Utils.removeHeader = function(data)
 {
@@ -69,8 +69,8 @@ Base64Utils.removeHeader = function(data)
  * Get the file format present in the base64 string.
  *
  * @method getFileFormat
- * @param  {String} data Base64 data.
- * @return {String} File format present in the JSON data.
+ * @param  {string} data Base64 data.
+ * @return {string} File format present in the JSON data.
  */
 Base64Utils.getFileFormat = function(data)
 {
@@ -85,7 +85,7 @@ Base64Utils.getFileFormat = function(data)
  *
  * @method fromArraybuffer
  * @param {Arraybuffer} arraybuffer
- * @return {String} base64
+ * @return {string} base64
  */
 Base64Utils.fromArraybuffer = function(arraybuffer)
 {
@@ -139,8 +139,8 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
  * Create base64 string from binary string.
  *
  * @method fromBinaryString
- * @param {String} str
- * @return {String} base64
+ * @param {string} str
+ * @return {string} base64
  */
 Base64Utils.fromBinaryString = function(str)
 {

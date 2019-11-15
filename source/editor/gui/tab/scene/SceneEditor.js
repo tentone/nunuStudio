@@ -395,7 +395,7 @@ function SceneEditor(parent, closeable, container, index)
 	 * Editor manipulation mode.
 	 *
 	 * @attribute mode
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.mode = SceneEditor.SELECT;
 
@@ -659,7 +659,7 @@ SceneEditor.prototype.deactivate = function()
  * Select a new controls object based on the mode passed as argument and attach the editor camera to it.
  *
  * @method updateCameraControls
- * @param {Number} mode Camera mode.
+ * @param {number} mode Camera mode.
  */
 SceneEditor.prototype.updateCameraControls = function(mode)
 {
@@ -1024,8 +1024,8 @@ SceneEditor.prototype.selectObjectWithMouse = function()
  * Update raycaster with new x and y positions (normalized -1 to 1).
  *
  * @method updateRaycaster
- * @param {Number} x
- * @param {Number} y
+ * @param {number} x
+ * @param {number} y
  */
 SceneEditor.prototype.updateRaycaster = function(x, y)
 {
@@ -1037,7 +1037,7 @@ SceneEditor.prototype.updateRaycaster = function(x, y)
  * Set the editor camera projection mode (ortographic or perspective).
  *
  * @method setCameraMode
- * @param {Number} mode
+ * @param {number} mode
  */
 SceneEditor.prototype.setCameraMode = function(mode)
 {
@@ -1085,7 +1085,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
  * - SceneEditor.ROTATE
  *
  * @param selectTool
- * @param {Number} tool Tool to select.
+ * @param {number} tool Tool to select.
  */
 SceneEditor.prototype.selectTool = function(tool)
 {	

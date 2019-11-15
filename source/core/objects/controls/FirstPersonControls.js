@@ -22,7 +22,7 @@ function FirstPersonControls()
 	 * Mouse sensitivity.
 	 * 
 	 * @property sensitivity
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.sensitivity = 0.005;
 
@@ -31,7 +31,7 @@ function FirstPersonControls()
 	 * 
 	 * @property needsButtonPressed
 	 * @default true
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.needsButtonPressed = true;
 
@@ -40,7 +40,7 @@ function FirstPersonControls()
 	 * 
 	 * @property movementEnabled
 	 * @default true
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.movementEnabled = true;
 
@@ -49,7 +49,7 @@ function FirstPersonControls()
 	 * 
 	 * @property moveSpeed
 	 * @default moveSpeed
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.moveSpeed = 0.05;
 
@@ -58,7 +58,7 @@ function FirstPersonControls()
 	 * 
 	 * @property moveOnPlane
 	 * @default false
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.moveOnPlane = false;
 

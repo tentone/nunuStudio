@@ -7,11 +7,11 @@
  * 
  * @class WebcamTexture
  * @extends {Texture}
- * @param {Number} mapping
- * @param {Number} wrapS
- * @param {Number} wrapT
- * @param {Number} type
- * @param {Number} anisotropy
+ * @param {number} mapping
+ * @param {number} wrapS
+ * @param {number} wrapT
+ * @param {number} type
+ * @param {number} anisotropy
  */
 function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 {	
@@ -23,7 +23,7 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	 * Image is used to store a DOM video element
 	 * 
 	 * @property image
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	THREE.Texture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 	
@@ -66,7 +66,7 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
  * 
  * @static
  * @attribute USER
- * @type {Number}
+ * @type {number}
  */
 WebcamTexture.USER = 21;
 
@@ -75,7 +75,7 @@ WebcamTexture.USER = 21;
  * 
  * @static
  * @attribute ENVIRONMENT
- * @type {Number}
+ * @type {number}
  */
 WebcamTexture.ENVIRONMENT = 22;
 

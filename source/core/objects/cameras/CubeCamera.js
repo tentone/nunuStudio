@@ -20,21 +20,21 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	/**
 	 * CubeCamera near plane.
 	 * @property near
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.near = (near !== undefined) ? near : 1e-2;
 
 	/**
 	 * CubeCamera far plane.
 	 * @property far
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.far = (far !== undefined) ? far : 1e4;
 
 	/**
 	 * Resolution of each face. Should be a power of 2 (32, 64, 128, ...).
 	 * @property resolution
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.resolution = (resolution !== undefined) ? resolution : 256;
 
@@ -42,7 +42,7 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	 * Auto update indicates if the cube camera is updated automatically each frame.
 	 * 
 	 * @property autoUpdate
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.autoUpdate = (autoUpdate !== undefined) ? autoUpdate : false;
 
@@ -154,7 +154,7 @@ CubeCamera.prototype.update = function(delta)
  * Set the CubeCamera resolution.
  *
  * @method setResolution
- * @param {Number} resolution CubeCamera resolution (per face). Should be a 2 pot.
+ * @param {number} resolution CubeCamera resolution (per face). Should be a 2 pot.
  */
 CubeCamera.prototype.setResolution = function(resolution)
 {

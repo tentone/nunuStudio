@@ -21,7 +21,7 @@ function OrbitControls()
 	 * 
 	 * @property distance
 	 * @default 3
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.distance = 4;
 
@@ -29,7 +29,7 @@ function OrbitControls()
 	 * Maximum Distance allowed.
 	 *
 	 * @property maxDistance
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.maxDistance = 20;
 
@@ -37,7 +37,7 @@ function OrbitControls()
 	 * Minimum distance allowed.
 	 *
 	 * @property minDistance
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.minDistance = 2;
 
@@ -45,7 +45,7 @@ function OrbitControls()
 	 * Mouse sensitivity.
 	 * 
 	 * @property sensitivity
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.sensitivity = 0.002;
 
@@ -53,7 +53,7 @@ function OrbitControls()
 	 * Mouse scroll sensitivity.
 	 * 
 	 * @property zoomSensitivity
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.zoomSensitivity = 0.001;
 
@@ -62,7 +62,7 @@ function OrbitControls()
 	 * 
 	 * @property limitUp
 	 * @default 1.57
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.limitUp = 1.57;
 
@@ -71,7 +71,7 @@ function OrbitControls()
 	 * 
 	 * @property limitDown
 	 * @default -1.57
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.limitDown = -1.57;
 
@@ -80,7 +80,7 @@ function OrbitControls()
 	 * 
 	 * @property needsButtonPressed
 	 * @default true
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.needsButtonPressed = true;
 
@@ -89,7 +89,7 @@ function OrbitControls()
 	 * 
 	 * @property zoomEnabled
 	 * @default true
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.zoomEnabled = true;
 
@@ -98,7 +98,7 @@ function OrbitControls()
 	 * 
 	 * @property movementEnabled
 	 * @default true
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.movementEnabled = true;
 
@@ -124,7 +124,7 @@ function OrbitControls()
 	 * Enables smooth orbit movement.
 	 *
 	 * @property smooth
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */	
 	this.smooth = true;
 
@@ -134,7 +134,7 @@ function OrbitControls()
 	 * Only used when smooth is set true.
 	 *
 	 * @property friction
-	 * @type {Number}
+	 * @type {number}
 	 */	
 	this.friction = 0.8;
 
@@ -144,7 +144,7 @@ function OrbitControls()
 	 * Only used when smooth is set true.
 	 *
 	 * @property friction
-	 * @type {Number}
+	 * @type {number}
 	 */	
 	this.speed = 0.3;
 
@@ -152,7 +152,7 @@ function OrbitControls()
 	 * If set true the Y orientation movement is inverted.
 	 *
 	 * @property invertNavigation
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.invertNavigation = false;
 

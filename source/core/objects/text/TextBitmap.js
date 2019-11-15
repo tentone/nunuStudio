@@ -15,8 +15,8 @@
  * @extends {THREE.Mesh}
  * @param {Object} config Configuration object with all parameters for bmfont.
  * @param {THREE.Texture} texture Texture with the image character atlas to be used.
- * @param {Number} shader The text rendering shader to be used (Bitmap, SDF, MSDF).
- * @param {Number} color Color of the text.
+ * @param {number} shader The text rendering shader to be used (Bitmap, SDF, MSDF).
+ * @param {number} color Color of the text.
  */
 function TextBitmap(config, texture, shader, color)
 {
@@ -82,7 +82,7 @@ function TextBitmap(config, texture, shader, color)
 		 * Scale applied to the generated text geometry.
 		 *
 		 * @attribute fontScale
-		 * @type {Number}
+		 * @type {number}
 		 */
 		fontScale:
 		{
@@ -97,7 +97,7 @@ function TextBitmap(config, texture, shader, color)
 		 *    - TextBitmap.MSDF 
 		 *
 		 * @attribute shader
-		 * @type {Number}
+		 * @type {number}
 		 */
 		shader:
 		{
@@ -139,7 +139,7 @@ function TextBitmap(config, texture, shader, color)
 		 * Text displayed on the object.
 		 *
 		 * @attribute text
-		 * @type {String}
+		 * @type {string}
 		 */
 		text:
 		{
@@ -158,7 +158,7 @@ function TextBitmap(config, texture, shader, color)
 		 * Space between each text line.
 		 *
 		 * @attribute lineHeight
-		 * @type {Number}
+		 * @type {number}
 		 */
 		lineHeight:
 		{
@@ -170,7 +170,7 @@ function TextBitmap(config, texture, shader, color)
 		 * Spacing between each letter.
 		 *
 		 * @attribute letterSpacing
-		 * @type {Number}
+		 * @type {number}
 		 */
 		letterSpacing:
 		{
@@ -185,7 +185,7 @@ function TextBitmap(config, texture, shader, color)
 		 *    - TextBitmap.CENTER
 		 *
 		 * @attribute align
-		 * @type {String}
+		 * @type {string}
 		 */
 		align:
 		{
@@ -197,7 +197,7 @@ function TextBitmap(config, texture, shader, color)
 		 * Width of the text box.
 		 *
 		 * @attribute width
-		 * @type {Number}
+		 * @type {number}
 		 */
 		width:
 		{
@@ -221,7 +221,7 @@ function TextBitmap(config, texture, shader, color)
 		 * SDF distance alpha threshold.
 		 *
 		 * @attribute threshold
-		 * @type {Number}
+		 * @type {number}
 		 */
 		threshold: 
 		{
@@ -233,7 +233,7 @@ function TextBitmap(config, texture, shader, color)
 		 * Smoothing of the text borders.
 		 *
 		 * @attribute smoothing
-		 * @type {Number}
+		 * @type {number}
 		 */
 		smoothing:
 		{
@@ -254,7 +254,7 @@ TextBitmap.prototype.constructor = TextBitmap;
  *
  * @static
  * @attribute BITMAP
- * @type {Number}
+ * @type {number}
  */
 TextBitmap.BITMAP = 100;
 
@@ -263,7 +263,7 @@ TextBitmap.BITMAP = 100;
  *
  * @static
  * @attribute SDF
- * @type {Number}
+ * @type {number}
  */
 TextBitmap.SDF = 101;
 
@@ -272,7 +272,7 @@ TextBitmap.SDF = 101;
  *
  * @static
  * @attribute MSDF
- * @type {Number}
+ * @type {number}
  */
 TextBitmap.MSDF = 102;
 
@@ -281,7 +281,7 @@ TextBitmap.MSDF = 102;
  *
  * @static
  * @attribute LEFT
- * @type {String}
+ * @type {string}
  */
 TextBitmap.LEFT = "left";
 
@@ -290,7 +290,7 @@ TextBitmap.LEFT = "left";
  *
  * @static
  * @attribute CENTER
- * @type {String}
+ * @type {string}
  */
 TextBitmap.CENTER = "center";
 
@@ -299,7 +299,7 @@ TextBitmap.CENTER = "center";
  *
  * @static
  * @attribute RIGHT
- * @type {String}
+ * @type {string}
  */
 TextBitmap.RIGHT = "right";
 
@@ -308,7 +308,7 @@ TextBitmap.RIGHT = "right";
  *
  * @static
  * @attribute VERTEX_SHADER
- * @type {String}
+ * @type {string}
  */
 TextBitmap.VERTEX_SHADER = "\n\
 #define BILLBOARD 0 \n\
@@ -348,7 +348,7 @@ void main()\n\
  *
  * @static
  * @attribute BITMAP_SHADER
- * @type {String}
+ * @type {string}
  */
 TextBitmap.BITMAP_SHADER = "\n\
 varying vec2 vUv;\n\
@@ -369,7 +369,7 @@ void main()\n\
  *
  * @static
  * @attribute SDF_SHADER
- * @type {String}
+ * @type {string}
  */
 TextBitmap.SDF_SHADER = "\n\
 varying vec2 vUv;\n\
@@ -395,7 +395,7 @@ void main()\n\
  *
  * @static
  * @attribute SDF_SHADER
- * @type {String}
+ * @type {string}
  */
 TextBitmap.MSDF_SHADER = "\n\
 #extension GL_OES_standard_derivatives : enable\n\
@@ -423,7 +423,7 @@ void main()\n\
  * Set the text to be displayed.
  *
  * @method setText
- * @param {String} text
+ * @param {string} text
  */
 TextBitmap.prototype.setText = function(text)
 {

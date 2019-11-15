@@ -11,8 +11,8 @@ function DOMUtils(){}
  * Check if a DOM element in completely visible in the viewport
  *
  * @method isVisible
- * @param {DOM} element DOM element to test.
- * @return {Boolean} True if the element is inside of the browser viewport.
+ * @param {Element} element DOM element to test.
+ * @return {boolean} True if the element is inside of the browser viewport.
  */
 DOMUtils.isVisible = function(element)
 {
@@ -42,7 +42,7 @@ DOMUtils.isVisible = function(element)
  * This method considers the window scrolling position.
  *
  * @method getPosition
- * @param {DOM} element DOM element to test.
+ * @param {Element} element DOM element to test.
  */
 DOMUtils.getPosition = function(element)
 {
@@ -62,7 +62,7 @@ DOMUtils.getPosition = function(element)
  * If the value is 0 the element is inside the window on that axis.
  *
  * @method checkBorder
- * @param {DOM} element DOM element to test.
+ * @param {Element} element DOM element to test.
  * @return {THREE.Vector2} Distance outside of the viewport.
  */
 DOMUtils.checkBorder = function(element)

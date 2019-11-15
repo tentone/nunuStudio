@@ -109,7 +109,7 @@ SideBar.prototype = Object.create(Element.prototype);
  * Select object manipulation tool.
  *
  * @method selectTool
- * @param {Number} tool
+ * @param {number} tool
  */
 SideBar.prototype.selectTool = function(tool)
 {

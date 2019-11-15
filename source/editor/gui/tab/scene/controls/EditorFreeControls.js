@@ -30,7 +30,7 @@ function EditorFreeControls()
 	 * The variable is reset on each update call.
 	 *
 	 * @property needsUpdate
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.needsUpdate = false;
 

@@ -16,7 +16,7 @@ function EditorOrbitControls()
 	 * Distance to the center of the orbit.
 	 *
 	 * @property distance
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.distance = 10;
 
@@ -42,7 +42,7 @@ function EditorOrbitControls()
 	 * Maximum Distance allowed.
 	 *
 	 * @property maxDistance
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.maxDistance = Number.MAX_SAFE_INTEGER;
 
@@ -50,7 +50,7 @@ function EditorOrbitControls()
 	 * Minimum distance allowed.
 	 *
 	 * @property minDistance
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.minDistance = 1e-10;
 	
@@ -58,7 +58,7 @@ function EditorOrbitControls()
 	 * Maximum angle allowed in the y (vertical) orientation.
 	 *
 	 * @property limitUp
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.limitUp = 1.57;
 
@@ -66,7 +66,7 @@ function EditorOrbitControls()
 	 * Minimum angle allowed in the y (vertical) orientation.
 	 *
 	 * @property limitDown
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.limitDown = -1.57;
 	
@@ -76,7 +76,7 @@ function EditorOrbitControls()
 	 * The variable is reset on each update call.
 	 *
 	 * @property needsUpdate
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.needsUpdate = false;
 
@@ -84,7 +84,7 @@ function EditorOrbitControls()
 	 * Enables smooth orbit movement.
 	 *
 	 * @property smooth
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */	
 	this.smooth = false;
 
@@ -94,7 +94,7 @@ function EditorOrbitControls()
 	 * Only used when smooth is set true.
 	 *
 	 * @property friction
-	 * @type {Number}
+	 * @type {number}
 	 */	
 	this.friction = 0.8;
 
@@ -104,7 +104,7 @@ function EditorOrbitControls()
 	 * Only used when smooth is set true.
 	 *
 	 * @property speed
-	 * @type {Number}
+	 * @type {number}
 	 */	
 	this.speed = 0.3;
 	this.speedDistance = 0;

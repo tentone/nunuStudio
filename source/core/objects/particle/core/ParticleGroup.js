@@ -7,18 +7,18 @@
  * @property {Object} texture An object describing the texture used by the group.
  * @property {Object} texture.value An instance of THREE.Texture.
  * @property {Object=} texture.frames A THREE.Vector2 instance describing the number of frames on the x- and y-axis of the given texture. If not provided, the texture will NOT be treated as a sprite-sheet and as such will NOT be animated.
- * @property {Number} [texture.frameCount=texture.frames.x * texture.frames.y] The total number of frames in the sprite-sheet.                                Allows for sprite-sheets that don't fill the entire                                texture.
- * @property {Number} texture.loop The number of loops through the sprite-sheet that should   be performed over the course of a single particle"s lifetime.
- * @property {Number} fixedTimeStep If no dt (or deltaTime) value is passed to this group"s    tick() function, this number will be used to move the particle    simulation forward. Value in SECONDS.
- * @property {Boolean} hasPerspective Whether the distance a particle is from the camera should affect the particle"s size.
- * @property {Boolean} colorize Whether the particles in this group should be rendered with color, or whether the only color of particles will come from the provided texture.
- * @property {Number} blending One of Three.js"s blending modes to apply to this group"s ShaderMaterial.
- * @property {Boolean} transparent Whether these particle"s should be rendered with transparency.
- * @property {Number} alphaTest Sets the alpha value to be used when running an alpha test on the texture.value property. Value between 0 and 1.
- * @property {Boolean} depthWrite Whether rendering the group has any effect on the depth buffer.
- * @property {Boolean} depthTest Whether to have depth test enabled when rendering this group.
- * @property {Boolean} fog Whether this group"s particles should be affected by their scene"s fog.
- * @property {Number} scale The scale factor to apply to this group"s particle sizes. Useful for setting particle sizes to be relative to renderer size.
+ * @property {number} [texture.frameCount=texture.frames.x * texture.frames.y] The total number of frames in the sprite-sheet.                                Allows for sprite-sheets that don't fill the entire                                texture.
+ * @property {number} texture.loop The number of loops through the sprite-sheet that should   be performed over the course of a single particle"s lifetime.
+ * @property {number} fixedTimeStep If no dt (or deltaTime) value is passed to this group"s    tick() function, this number will be used to move the particle    simulation forward. Value in SECONDS.
+ * @property {boolean} hasPerspective Whether the distance a particle is from the camera should affect the particle"s size.
+ * @property {boolean} colorize Whether the particles in this group should be rendered with color, or whether the only color of particles will come from the provided texture.
+ * @property {number} blending One of Three.js"s blending modes to apply to this group"s ShaderMaterial.
+ * @property {boolean} transparent Whether these particle"s should be rendered with transparency.
+ * @property {number} alphaTest Sets the alpha value to be used when running an alpha test on the texture.value property. Value between 0 and 1.
+ * @property {boolean} depthWrite Whether rendering the group has any effect on the depth buffer.
+ * @property {boolean} depthTest Whether to have depth test enabled when rendering this group.
+ * @property {boolean} fog Whether this group"s particles should be affected by their scene"s fog.
+ * @property {number} scale The scale factor to apply to this group"s particle sizes. Useful for setting particle sizes to be relative to renderer size.
  */
 
 
@@ -489,9 +489,9 @@ ParticleGroup.prototype.getPool = function()
  * Add a pool of emitters to this particle group
  *
  * @method addPool
- * @param {Number} numEmitters The number of emitters to add to the pool.
+ * @param {number} numEmitters The number of emitters to add to the pool.
  * @param {ParticleEmitterControlOptions|Array} emitterOptions  An object, or array of objects, describing the options to pass to each emitter.
- * @param {Boolean} createNew Should a new emitter be created if the pool runs out?
+ * @param {boolean} createNew Should a new emitter be created if the pool runs out?
  * @return {ParticleGroup} This group instance.
  */
 ParticleGroup.prototype.addPool = function(numEmitters, emitterOptions, createNew)
@@ -552,7 +552,7 @@ ParticleGroup.prototype._triggerSingleEmitter = function(pos)
  * Set a given number of emitters as alive, with an optional position vector3 to move them to.
  *
  * @method triggerEmitter
- * @param {Number} numEmitters The number of emitters to activate
+ * @param {number} numEmitters The number of emitters to activate
  * @param {Object} [position=undefined] A THREE.Vector3 instance describing the position to activate the emitter(s) at.
  * @return {ParticleGroup} This group instance.
  */
@@ -614,7 +614,7 @@ ParticleGroup.prototype._updateBuffers = function(emitter)
  * Simulate all the emitter"s belonging to this group, updating attribute values along the way.
  *
  * @method tick
- * @param {Number} [dt=ParticleGroup"s fixedTimeStep value] The number of seconds to simulate the group"s emitters for(deltaTime)
+ * @param {number} [dt=ParticleGroup"s fixedTimeStep value] The number of seconds to simulate the group"s emitters for(deltaTime)
  */
 ParticleGroup.prototype.tick = function(dt)
 {

@@ -9,11 +9,11 @@
  * @extends {Texture}
  * @module Textures
  * @param {Video} video
- * @param {Number} mapping
- * @param {Number} wrapS
- * @param {Number} wrapT
- * @param {Number} type
- * @param {Number} anisotropy
+ * @param {number} mapping
+ * @param {number} wrapS
+ * @param {number} wrapT
+ * @param {number} type
+ * @param {number} anisotropy
  */
 function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 {
@@ -45,7 +45,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	 * Start time in seconds.
 	 * @property playbackRate
 	 * @default 1.0
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.playbackRate = 1.0;
 
@@ -53,7 +53,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	 * Video audio volume, its a values between 1.0 and 0.0
 	 * @property volume
 	 * @default 1.0
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.volume = 1.0;
 
@@ -61,7 +61,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	 * Image is used to store a DOM video element.
 	 *
 	 * @property image
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.image.crossOrigin = "anonymous";
 	this.image.autoplay = this.autoplay;
@@ -128,7 +128,7 @@ VideoTexture.prototype.setVideo = function(video)
 /**
  * Set video time in seconds.
  * 
- * @param {Number} time
+ * @param {number} time
  * @method setTime
  */
 VideoTexture.prototype.setTime = function(time)
@@ -151,7 +151,7 @@ VideoTexture.prototype.setLoop = function(loop)
 /**
  * Set video volume.
  * 
- * @param {Number} volume
+ * @param {number} volume
  * @method setVolume
  */
 VideoTexture.prototype.setVolume = function(volume)
@@ -178,7 +178,7 @@ VideoTexture.prototype.setAutoPlay = function(value)
  * Set video playback speed.
  * 
  * @method setPlaybackRate
- * @param {Number} playbackRate
+ * @param {number} playbackRate
  */
 VideoTexture.prototype.setPlaybackRate = function(playbackRate)
 {

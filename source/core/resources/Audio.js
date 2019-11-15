@@ -7,7 +7,7 @@
  * @extends {Resource}
  * @module Resources
  * @param {ArrayBuffer, String} url URL to Audio file or ArrayBuffer data.
- * @param {String} encoding Audio encoding (mp3, wav, etc).
+ * @param {string} encoding Audio encoding (mp3, wav, etc).
  */
 function Audio(url, encoding)
 {

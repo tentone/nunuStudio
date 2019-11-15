@@ -24,7 +24,7 @@ function NumberRow(parent)
 	 * Label size in px.
 	 *
 	 * @attribute labelSize
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.labelSize = 15;
 }
@@ -35,7 +35,7 @@ NumberRow.prototype = Object.create(Element.prototype);
  * Set the values step.
  *
  * @method setStep
- * @param {Number} value
+ * @param {number} value
  */
 NumberRow.prototype.setStep = function(value)
 {
@@ -51,8 +51,8 @@ NumberRow.prototype.setStep = function(value)
  * Set the values range
  *
  * @method setRange
- * @param {Number} min
- * @param {Number} max
+ * @param {number} min
+ * @param {number} max
  */
 NumberRow.prototype.setRange = function(min, max)
 {
@@ -69,7 +69,7 @@ NumberRow.prototype.setRange = function(min, max)
  * Add value to the box
  *
  * @method addValue
- * @param {String} label Label of de attribute.
+ * @param {string} label Label of de attribute.
  * @return {NumberBox} The input number box created for this value.
  */
 NumberRow.prototype.addValue = function(label)

@@ -15,7 +15,7 @@ function ByteArrayUtils(){}
  * Create byte array from base64 string data.
  *
  * @method fromBase64
- * @param {String} base64
+ * @param {string} base64
  * @return {Array} data
  */
 ByteArrayUtils.fromBase64 = function(str)

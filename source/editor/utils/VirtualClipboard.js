@@ -22,7 +22,7 @@ function VirtualClipboard()
  * Set data to clipboard
  * 
  * @param {Object} data Data to insert into the clipboard
- * @param {String} id Entry id.
+ * @param {string} id Entry id.
  */
 VirtualClipboard.prototype.set = function(data, id)
 {
@@ -33,7 +33,7 @@ VirtualClipboard.prototype.set = function(data, id)
 /**
  * Get data from clipboard
  * 
- * @param {String} id Entry id.
+ * @param {string} id Entry id.
  * @return {Object} Data stored in the clipboard
  */
 VirtualClipboard.prototype.get = function(id)

@@ -37,7 +37,7 @@ PhysicsGenerator.Type =
  *
  * @method createShape
  * @param {Object3D} object
- * @param {String} type PhysicsGenerator.Type
+ * @param {string} type PhysicsGenerator.Type
  * @return {CANNON.Shape} shape
  */
 PhysicsGenerator.createShape = function(object, type)

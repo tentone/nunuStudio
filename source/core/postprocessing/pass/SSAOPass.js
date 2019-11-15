@@ -38,7 +38,7 @@ function SSAOPass()
 		 * Ambient occlusion shadow radius.
 		 *
 		 * @property radius
-		 * @type {Number}
+		 * @type {number}
 		 */
 		radius:
 		{
@@ -50,7 +50,7 @@ function SSAOPass()
 		 * Display only ambient occlusion result.
 		 *
 		 * @property onlyAO
-		 * @type {Boolean}
+		 * @type {boolean}
 		 */
 		onlyAO:
 		{
@@ -62,7 +62,7 @@ function SSAOPass()
 		 * Ambient occlusion clamp.
 		 *
 		 * @property aoClamp
-		 * @type {Number}
+		 * @type {number}
 		 */
 		aoClamp:
 		{
@@ -74,7 +74,7 @@ function SSAOPass()
 		 * Pixel luminosity influence in AO calculation.
 		 *
 		 * @property lumInfluence
-		 * @type {Number}
+		 * @type {number}
 		 */
 		lumInfluence:
 		{
@@ -98,8 +98,8 @@ SSAOPass.prototype = Object.create(ShaderPass.prototype);
  * @param {WebGLRenderer} renderer
  * @param {WebGLRenderTarget} writeBuffer Buffer to write output.
  * @param {WebGLRenderTarget} readBuffer Input buffer.
- * @param {Number} delta Delta time in milliseconds.
- * @param {Boolean} maskActive Not used in this pass.
+ * @param {number} delta Delta time in milliseconds.
+ * @param {boolean} maskActive Not used in this pass.
  */
 SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
@@ -124,8 +124,8 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
  * Set resolution of this render pass.
  * 
  * @method setSize
- * @param {Number} width
- * @param {Number} height
+ * @param {number} width
+ * @param {number} height
  */
 SSAOPass.prototype.setSize = function(width, height)
 {

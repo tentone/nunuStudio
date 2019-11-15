@@ -36,21 +36,21 @@ function Key()
 /**
  * Down
  * @attribute DOWN
- * @type {Number}
+ * @type {number}
  */
 Key.DOWN = -1;
 
 /**
  * Up
  * @attribute UP
- * @type {Number}
+ * @type {number}
  */
 Key.UP = 1;
 
 /**
  * Reset
  * @attribute RESET
- * @type {Number}
+ * @type {number}
  */
 Key.RESET = 0;
 

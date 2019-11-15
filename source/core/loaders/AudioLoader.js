@@ -16,7 +16,7 @@ function AudioLoader(manager)
  * Load audio file from URL.
  *
  * @method load
- * @param {String} url
+ * @param {string} url
  * @param {Function} onLoad
  * @param {Function} onProgress
  * @param {Function} onError

@@ -82,7 +82,7 @@ function Slider(parent)
 	 * Value stored in the slider.
 	 *
 	 * @property value
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.value = 0.0;
 
@@ -157,7 +157,7 @@ Slider.prototype = Object.create(Element.prototype);
  * Set if element is disabled.
  *
  * @method setDisabled
- * @param {Boolean} value.
+ * @param {boolean} value.
  */
 Slider.prototype.setDisabled = function(value)
 {
@@ -174,8 +174,8 @@ Slider.prototype.setStep = function(step)
  * Set value range of the slider.
  *
  * @method setRange.
- * @param {Number} min
- * @param {Number} max
+ * @param {number} min
+ * @param {number} max
  */
 Slider.prototype.setRange = function(min, max)
 {
@@ -188,7 +188,7 @@ Slider.prototype.setRange = function(min, max)
  *
  * @method setOnChange
  * @param {Function} onChange
- * @param {String} name Graph name.
+ * @param {string} name Graph name.
  */
 Slider.prototype.setOnChange = function(onChange)
 {
@@ -199,7 +199,7 @@ Slider.prototype.setOnChange = function(onChange)
  * Set Slider value.
  *
  * @method setValue
- * @param {Number} value
+ * @param {number} value
  */
 Slider.prototype.setValue = function(value)
 {
@@ -243,7 +243,7 @@ Slider.prototype.setValue = function(value)
  * Get Slider value.
  *
  * @method getValue
- * @return {Number} Value of the slider.
+ * @return {number} Value of the slider.
  */
 Slider.prototype.getValue = function()
 {

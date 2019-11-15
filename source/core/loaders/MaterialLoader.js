@@ -17,7 +17,7 @@ function MaterialLoader(manager)
  * Load material file from URL.
  *
  * @method load
- * @param {String} url
+ * @param {string} url
  * @param {Function} onLoad
  * @param {Function} onProgress
  * @param {Function} onError

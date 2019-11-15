@@ -15,17 +15,17 @@
  * @class CompressedTexture
  * @extends {Texture}
  * @param {Array} mipmaps Mipmaps levels
- * @param {Number} width
- * @param {Number} height
- * @param {Number} format
- * @param {Number} type
- * @param {Number} mapping
- * @param {Number} wrapS
- * @param {Number} wrapT
- * @param {Number} magFilter
- * @param {Number} minFilter
- * @param {Number} anisotropy
- * @param {Number} encoding
+ * @param {number} width
+ * @param {number} height
+ * @param {number} format
+ * @param {number} type
+ * @param {number} mapping
+ * @param {number} wrapS
+ * @param {number} wrapT
+ * @param {number} magFilter
+ * @param {number} minFilter
+ * @param {number} anisotropy
+ * @param {number} encoding
  */
 function CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, encoding)
 {

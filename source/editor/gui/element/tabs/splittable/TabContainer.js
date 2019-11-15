@@ -21,7 +21,7 @@ TabContainer.prototype = Object.create(Element.prototype);
  * Split this tab group into two new tab groups.
  *
  * @method split
- * @param {Number} direction Direction where to insert the new tab.
+ * @param {number} direction Direction where to insert the new tab.
  * @return {TabGroupSplit} The new created tab group.
  */
 TabContainer.prototype.split = function(direction)
@@ -163,7 +163,7 @@ TabContainer.prototype.selectPreviousTab = function()
  * 
  * @method addTab
  * @param {Constructor} TabConstructor Constructor if the TabElement to be added to the container.
- * @param {Boolean} closeable Indicates if the tab can be closed.
+ * @param {boolean} closeable Indicates if the tab can be closed.
  */
 TabContainer.prototype.addTab = function(TabConstructor, closeable)
 {

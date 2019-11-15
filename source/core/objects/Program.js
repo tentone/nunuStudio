@@ -9,7 +9,7 @@
  * 
  * @class Program
  * @module Core
- * @param {String} name Program name
+ * @param {string} name Program name
  * @extends {ResourceManager}
  */
 function Program(name)
@@ -34,7 +34,7 @@ function Program(name)
 	 * Program name.
 	 *
 	 * @property name
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.name = (name !== undefined) ? name : "program";
 
@@ -42,7 +42,7 @@ function Program(name)
 	 * Program description, will be stamped when the app is exported.
 	 *
 	 * @property description
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.description = "";
 
@@ -50,7 +50,7 @@ function Program(name)
 	 * Program author, will be stamped when the app is exported.
 	 *
 	 * @property author
-	 * @type {String}
+	 * @type {string}
 	 */
 	this.author = "";
 
@@ -58,7 +58,7 @@ function Program(name)
 	 * Program version should adhere to semantic versioning, but it is not mandatory.
 	 *
 	 * @property version
-	 * @type {String}
+	 * @type {string}
 	 * @default "0.0.0"
 	 */
 	this.version = "0.0.0";
@@ -100,7 +100,7 @@ function Program(name)
 	 * Indicates the relation between the real movement and virtual world movement.
 	 *
 	 * @property vrScale
-	 * @type {Number}
+	 * @type {number}
 	 * @default 1.0
 	 */
 	this.vrScale = 1.0;
@@ -177,7 +177,7 @@ function Program(name)
 	 * This canvas is where the WebGL rendering context was created.
 	 *
 	 * @property canvas
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.canvas = null;
 
@@ -187,7 +187,7 @@ function Program(name)
 	 * All content added to this division should be manually removed before the app exits.
 	 *
 	 * @property division
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.division = null;
 
@@ -198,13 +198,13 @@ function Program(name)
 	 * @type {EventManager}
 	 */
 	this.manager = new EventManager();
-	this.manager.add(window, "vrdisplaypresentchange", function()
+	/*this.manager.add(window, "vrdisplaypresentchange", function()
 	{
 		if(self.vrDisplay !== null && !self.vrDisplay.isPresenting)
 		{
 			self.vrEnabled = false;
 		}
-	});
+	});*/
 
 	/**
 	 * Clock object used to measure times between frames.
@@ -216,8 +216,8 @@ function Program(name)
 
 	//VR runtime control
 	this.vrEnabled = false;
-	this.vrDisplay = null;
-	this.vrControls = null;
+	//this.vrDisplay = null;
+	//this.vrControls = null;
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -261,6 +261,7 @@ Program.prototype.initialize = function()
 		this.setScene(this.children[0]);
 	}
 
+	/*
 	if(this.vr)
 	{
 		var self = this;
@@ -270,7 +271,8 @@ Program.prototype.initialize = function()
 			self.vrControls = new VRControls();
 		});
 	}
-
+	*/
+	
 	this.clock.start();
 };
 
@@ -339,8 +341,8 @@ Program.prototype.render = function(renderer)
  * Resize the current scene elements.
  * 
  * @method resize
- * @param {Number} x Width.
- * @param {Number} y Height.
+ * @param {number} x Width.
+ * @param {number} y Height.
  */
 Program.prototype.resize = function(x, y)
 {
@@ -385,8 +387,8 @@ Program.prototype.displayVR = function()
 {
 	if(this.vr)
 	{
-		this.renderer.vr.enabled = true;
-		
+		Nunu.enterVR(this.renderer);
+
 		/*try
 		{
 			if(!this.vrDisplay.isPresenting)
@@ -536,7 +538,7 @@ Program.prototype.clone = function()
  * This method is used by the editor.
  * 
  * @method setInitialScene
- * @param {String} uuid Scene uuid
+ * @param {string} uuid Scene uuid
  */
 Program.prototype.setInitialScene = function(scene)
 {
@@ -553,11 +555,6 @@ Program.prototype.setInitialScene = function(scene)
 Program.prototype.dispose = function()
 {
 	this.manager.destroy();
-
-	if(this.vrEffect !== null)
-	{
-		this.vrEffect.dispose();
-	}
 
 	if(this.scene !== null)
 	{

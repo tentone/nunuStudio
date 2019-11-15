@@ -20,7 +20,7 @@ Canvas.prototype = Object.create(Element.prototype);
  * Get a context from this canvas.
  * 
  * @method getContext
- * @param {String} type Type of context to get "2d", "webgl", etc
+ * @param {string} type Type of context to get "2d", "webgl", etc
  * @return {Object} Context obtained from the canvas.
  */
 Canvas.prototype.getContext = function(type)

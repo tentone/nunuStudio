@@ -42,7 +42,7 @@ DropdownList.prototype = Object.create(Element.prototype);
  * Set the disabled state of the element.
  *
  * @method setDisabled
- * @param {Boolean} disabled
+ * @param {boolean} disabled
  */
 DropdownList.prototype.setDisabled = function(value)
 {
@@ -64,7 +64,7 @@ DropdownList.prototype.setOnChange = function(onChange)
  * Add option to the dropdown list.
  *
  * @method addValue
- * @param {String} text Label of the option.
+ * @param {string} text Label of the option.
  * @param {Object} value Value of the option.
  */
 DropdownList.prototype.addValue = function(text, value)

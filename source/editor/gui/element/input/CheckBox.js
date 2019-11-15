@@ -43,7 +43,7 @@ function CheckBox(parent)
 	 * Value stored in the checkbox.
 	 *
 	 * @property value
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.value = false;
 
@@ -59,7 +59,7 @@ function CheckBox(parent)
 	 * If the checkbox is disabled the value cannot be edited.
 	 *
 	 * @attribute disabled
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.disabled = false;
 };
@@ -93,7 +93,7 @@ CheckBox.prototype.setDisabled = function(value)
  * Set checkbox value.
  * 
  * @method setValue
- * @param {Boolean} value
+ * @param {boolean} value
  */
 CheckBox.prototype.setValue = function(value)
 {
@@ -105,7 +105,7 @@ CheckBox.prototype.setValue = function(value)
  * Get checkbox value.
  * 
  * @method getValue
- * @return {Boolean} Value from the element.
+ * @return {boolean} Value from the element.
  */
 CheckBox.prototype.getValue = function()
 {

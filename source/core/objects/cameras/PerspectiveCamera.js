@@ -8,31 +8,31 @@
  * @class PerspectiveCamera
  * @extends {PerspectiveCamera}
  * @module Cameras
- * @param {Number} fov Field of view
- * @param {Number} aspect Aspect ratio
- * @param {Number} near Near projection plane (how closer can be objects visible by this camera)
- * @param {Number} far Far projection plane (how far can be objects visible by this camera)
+ * @param {number} fov Field of view
+ * @param {number} aspect Aspect ratio
+ * @param {number} near Near projection plane (how closer can be objects visible by this camera)
+ * @param {number} far Far projection plane (how far can be objects visible by this camera)
  */
 /**
  * Camera field of view in degrees.
  * 
  * @property fov
  * @default 50
- * @type {Number}
+ * @type {number}
  */
 /**
  * Camera aspect ratio X/Y.
  * 
  * @property aspect
  * @default 1.0
- * @type {Number}
+ * @type {number}
  */
 /**
  * Camera zoom.
  * 
  * @property zoom
  * @default 1.0
- * @type {Number}
+ * @type {number}
  */
 function PerspectiveCamera(fov, aspect, near, far)
 {
@@ -82,7 +82,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	 * 
 	 * @property order
 	 * @default 0
-	 * @type {Number}
+	 * @type {number}
 	*/
 	this.order = 0;
 
@@ -109,8 +109,8 @@ PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
  * Updates the viewport, rendering composer and the camera projection matrix.
  *
  * @method resize
- * @param {Number} x Width of the screen.
- * @param {Number} y Height of the screen.
+ * @param {number} x Width of the screen.
+ * @param {number} y Height of the screen.
  * @param {Viewport} viewport Viewport that encapsulates the viewport of the camera.
  */
 PerspectiveCamera.prototype.resize = function(x, y, viewport)

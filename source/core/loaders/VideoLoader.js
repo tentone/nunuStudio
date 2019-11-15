@@ -16,7 +16,7 @@ function VideoLoader(manager)
  * Load video resource from URL.
  *
  * @method load
- * @param {String} url
+ * @param {string} url
  * @param {Function} onLoad
  * @param {Function} onProgress
  * @param {Function} onError

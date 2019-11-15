@@ -247,7 +247,7 @@ TabButton.NEXT = 2;
  * Set the tab icon image.
  *
  * @method setIcon
- * @param {String} icon URL of the icon image.
+ * @param {string} icon URL of the icon image.
  */
 TabButton.prototype.setIcon = function(icon)
 {
@@ -259,7 +259,7 @@ TabButton.prototype.setIcon = function(icon)
  * Set text to be displayed in the button as its name.
  *
  * @method setName
- * @param {String} text
+ * @param {string} text
  */
 TabButton.prototype.setName = function(text)
 {

@@ -23,7 +23,7 @@ function ObjectIconHelper(object, icon)
 	 * Size of the helper.
 	 *
 	 * @attribute size
-	 * @type {Number}
+	 * @type {number}
 	 */
 	this.size = 0.1;
 	
@@ -46,7 +46,7 @@ ObjectIconHelper.MATERIALS = new Map();
  *
  * @static
  * @method getMaterial
- * @param {String} icon Icon URL.
+ * @param {string} icon Icon URL.
  */
 ObjectIconHelper.getMaterial = function(icon)
 {

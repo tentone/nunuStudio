@@ -35,7 +35,7 @@ function ConsoleTab(parent, closeable, container, index)
 	 * Indicates if the virtual console is enable or disable.
 	 *
 	 * @attribute enable
-	 * @type {Boolean} 
+	 * @type {boolean} 
 	 */
 	this.enabled = !Nunu.developmentMode();
 
@@ -82,7 +82,7 @@ function ConsoleTab(parent, closeable, container, index)
 	 * Console messages division
 	 *
 	 * @property console
-	 * @type {DOM}
+	 * @type {Element}
 	 */
 	this.console = document.createElement("div");
 	this.console.style.position = "absolute";
@@ -154,7 +154,7 @@ ConsoleTab.prototype = Object.create(TabElement.prototype);
  * Overrides the browser provided window.console methods and displays the logs in this tab.
  *
  * @method useConsole
- * @param {Boolean} enabled
+ * @param {boolean} enabled
  */
 ConsoleTab.prototype.useConsole = function(enabled)
 {
@@ -300,7 +300,7 @@ ConsoleTab.prototype.updateSize = function()
  * @static
  * @method createMessage
  * @param {Object} object Object to be logged into the console.
- * @return {DOM} Element created.
+ * @return {Element} Element created.
  */
 ConsoleTab.createMessage = function(object)
 {
@@ -499,7 +499,7 @@ ConsoleTab.createMessage = function(object)
  *
  * @static
  * @method createBar
- * @return {DOM} Element created.
+ * @return {Element} Element created.
  */
 ConsoleTab.createBar = function()
 {
