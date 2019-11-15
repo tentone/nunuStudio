@@ -70,23 +70,7 @@ function AssetExplorerMenu(parent)
 			{
 				for(var i = 0; i < files.length; i++)
 				{
-					try
-					{
-						var file = files[i].path;
-						
-						var json = FileSystem.readFile(file);
-						var atlas = FileSystem.readFile(file.replace("json", "atlas"));
-						var path = FileSystem.getFilePath(file);
-						
-						var animation = new SpineAnimation(json, atlas, path);
-						animation.name = FileSystem.getFileName(file);
-						
-						Editor.addObject(animation);
-					}
-					catch(e)
-					{
-						Editor.alert(Locale.failedLoadSpine + "(" + e + ")");
-					}
+					Editor.loadSpineAnimation(files[i]);
 				}
 			}, ".json, .spine");
 		}, Global.FILE_PATH + "icons/misc/spine.png");

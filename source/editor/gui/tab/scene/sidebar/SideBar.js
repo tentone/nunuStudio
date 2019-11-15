@@ -21,7 +21,6 @@ function SideBar(parent)
 	var size = 40;
 	var self = this;
 
-
 	var text = new Text(this);
 	text.setText(Locale.tools);
 	text.size.set(size, 20);

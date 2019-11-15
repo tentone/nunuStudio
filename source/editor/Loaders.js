@@ -230,6 +230,51 @@ Editor.loadFont = function(file, onLoad)
 };
 
 /**
+ * Load spine animation file from file.
+ *
+ * Also searches for the .atlas file on the file path.
+ *
+ * @method loadSpineAnimation
+ * @param {File} file File to load.
+ */
+Editor.loadSpineAnimation = function(file)
+{
+	try
+	{
+		var path = FileSystem.getFilePath(file.path);
+
+		var atlasFile = null;
+		var files = FileSystem.getFilesDirectory(path);
+		for(var i = 0; i < files.length; i++)
+		{
+			if(files[i].endsWith("atlas"))
+			{
+				atlasFile = path + files[i];
+				break;
+			}
+		}
+
+		if(atlasFile === null)
+		{
+			Editor.alert(Locale.failedLoadSpine);
+			console.warn("nunuStudio: No atlas file found in the directory.");
+			return;
+		}
+
+		var data = FileSystem.readFile(file.path);
+		var atlas = FileSystem.readFile(atlasFile);
+
+		var animation = new SpineAnimation(data, atlas, path);
+		animation.name = FileSystem.getFileName(file.path);
+		Editor.addObject(animation);
+	}
+	catch(e)
+	{
+		Editor.alert(Locale.failedLoadSpine + "(" + e + ")");
+	}
+};
+
+/**
  * Load text from file and add it as a resource to the program.
  *
  * @method loadText
