@@ -96,9 +96,6 @@ Nunu.vrAvailable = function()
 	return Nunu.webVRAvailable() || Nunu.webXRAvailable();
 };
 
-Nunu.vrDevice = null;
-Nunu.xrSession = null;
-
 /**
  * Enter virtual reality mode using WebXR or WebVR depending on the API available.
  *
@@ -110,7 +107,7 @@ Nunu.enterVR = function(renderer)
 	{
 		Nunu.getXRSession(function(session)
 		{
-			Nunu.xrSession = session;
+			Nunu.webXRSession = session;
 			renderer.vr.enabled = true;
 			renderer.vr.setSession(session);
 		});
@@ -119,7 +116,7 @@ Nunu.enterVR = function(renderer)
 	{
 		Nunu.getVRDisplay(function(device)
 		{
-			Nunu.vrDevice = device;
+			Nunu.webVRDisplay = device;
 			renderer.vr.enabled = true;
 			renderer.vr.setDevice(device);
 		});
@@ -130,6 +127,7 @@ Nunu.enterVR = function(renderer)
 	}
 };
 
+Nunu.webXRSession = null;
 
 /**
  * Check if host supports WebXR.
@@ -156,14 +154,27 @@ Nunu.getXRSession = function(onSession)
 		return;
 	}
 
-	navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
+	if(Nunu.webXRSession !== null)
 	{
-		if(supported)
+		onSession(Nunu.webXRSession);
+	}
+	else
+	{	
+		navigator.xr.isSessionSupported("immersive-vr").then(function(supported)
 		{
-			navigator.xr.requestSession("immersive-vr",{optionalFeatures: ["local-floor", "bounded-floor"]}).then(onSession);
-		}
-	});
+			if(supported)
+			{
+				navigator.xr.requestSession("immersive-vr",{optionalFeatures: ["local-floor", "bounded-floor"]}).then(function(session)
+				{
+					Nunu.webXRSession = session;
+					onSession(session);	
+				});
+			}
+		});
+	}
 }
+
+Nunu.webVRDisplay = null;
 
 /**
  * Check if host supports WebVR.
@@ -190,12 +201,17 @@ Nunu.getVRDisplay = function(onDisplay)
 		return;
 	}
 
-	if(navigator.getVRDisplays !== undefined)
+	if(Nunu.webVRDisplay !== null)
+	{
+		onDisplay(Nunu.webVRDisplay);
+	}
+	else
 	{
 		navigator.getVRDisplays().then(function(displays)
 		{
 			if(displays.length > 0)
 			{
+				Nunu.webVRDisplay = displays[0];
 				onDisplay(displays[0]);
 			}
 			else

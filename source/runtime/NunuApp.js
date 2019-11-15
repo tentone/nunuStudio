@@ -680,7 +680,7 @@ NunuApp.prototype.setOnExit = function(callback)
  */
 NunuApp.prototype.vrAvailable = function()
 {
-	return this.program !== null && this.program.vr && Nunu.webVRAvailable();	
+	return this.program !== null && this.program.vr && Nunu.vrAvailable();	
 };
 
 /**
