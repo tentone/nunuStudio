@@ -74,12 +74,12 @@ include("source/core/input/Mouse.js");
 include("source/core/input/Gamepad.js");
 include("source/core/input/Gyroscope.js");
 
+include("source/core/renderer/RendererState.js");
 include("source/core/renderer/RendererConfiguration.js");
 include("source/core/renderer/css/CSS3DRenderer.js");
 include("source/core/renderer/css/CSS3DObject.js");
 include("source/core/renderer/css/CSS3DSprite.js");
 
-include("source/core/postprocessing/RendererState.js");
 include("source/core/postprocessing/Pass.js");
 include("source/core/postprocessing/ShaderPass.js");
 include("source/core/postprocessing/EffectComposer.js");
