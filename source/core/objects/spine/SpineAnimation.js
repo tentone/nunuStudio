@@ -147,7 +147,7 @@ SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
 
 SpineAnimation.prototype.update = function(delta)
 {
-	spine.threejs.SkeletonMesh.prototype.update.call(this, delta);
+	//spine.threejs.SkeletonMesh.prototype.update.call(this, delta);
 	THREE.Object3D.prototype.update.call(this);
 };
 
