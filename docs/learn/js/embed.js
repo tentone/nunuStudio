@@ -21,9 +21,9 @@ function initialize(fname, canvasId)
 		canvas.parentElement.appendChild(fs);
 
 		//VR Button
-		if(app.vrAvailable())
+		setTimeout(function()
 		{
-			Nunu.getVRDisplays(function(display)
+			if(app.vrAvailable())
 			{
 				var vr = createButton("Enter VR");
 				vr.onclick = function()
@@ -31,8 +31,8 @@ function initialize(fname, canvasId)
 					app.toggleVR();
 				};
 				canvas.parentElement.appendChild(vr);
-			});
-		}
+			}
+		}, 1000)
 	};
 
 	app.loadRunProgram(fname, onLoad);
