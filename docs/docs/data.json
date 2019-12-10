@@ -709,15 +709,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\postprocessing\\RendererState.js": {
-            "name": "..\\source\\core\\postprocessing\\RendererState.js",
-            "modules": {},
-            "classes": {
-                "RendererState": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\postprocessing\\ShaderPass.js": {
             "name": "..\\source\\core\\postprocessing\\ShaderPass.js",
             "modules": {},
@@ -759,6 +750,15 @@
             "modules": {},
             "classes": {
                 "RendererConfiguration": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\renderer\\RendererState.js": {
+            "name": "..\\source\\core\\renderer\\RendererState.js",
+            "modules": {},
+            "classes": {
+                "RendererState": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1409,17 +1409,17 @@
                 "EffectComposer": 1,
                 "Pass": 1,
                 "RenderPass": 1,
-                "RendererState": 1,
                 "ShaderPass": 1,
                 "CSS3DObject": 1,
                 "CSS3DRenderer": 1,
                 "CSS3DSprite": 1,
-                "RendererConfiguration": 1
+                "RendererConfiguration": 1,
+                "RendererState": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "file": "..\\source\\core\\renderer\\RendererState.js",
             "line": 3,
             "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
             "author": "miibond"
@@ -3325,20 +3325,6 @@
             "description": "Render pass is used to render the scene the same way as if were using the renderer directly.",
             "extends": "{Pass}"
         },
-        "RendererState": {
-            "name": "RendererState",
-            "shortname": "RendererState",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Postprocessing",
-            "namespace": "",
-            "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 3,
-            "description": "Renderer state can be used to store and restore a renderer state between postprocessing passes.\n\nIt stores the clean configurations of the renderer."
-        },
         "ShaderPass": {
             "name": "ShaderPass",
             "shortname": "ShaderPass",
@@ -3432,6 +3418,20 @@
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
             "line": 3,
             "description": "Renderer configuration stores all the WebGL renderer related parameters."
+        },
+        "RendererState": {
+            "name": "RendererState",
+            "shortname": "RendererState",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\source\\core\\renderer\\RendererState.js",
+            "line": 3,
+            "description": "Renderer state can be used to store and restore a renderer state between postprocessing passes.\n\nIt stores the clean configurations of the renderer."
         },
         "VideoStream": {
             "name": "VideoStream",
@@ -12145,7 +12145,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 150,
+            "line": 154,
             "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -12154,7 +12154,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 163,
+            "line": 167,
             "description": "Play animation.",
             "itemtype": "method",
             "name": "play",
@@ -12163,7 +12163,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 182,
+            "line": 185,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -12176,7 +12176,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 193,
+            "line": 196,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -12202,7 +12202,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 219,
+            "line": 222,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -12215,7 +12215,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 230,
+            "line": 233,
             "description": "Set skin to be used by this animation",
             "itemtype": "method",
             "name": "setSkin",
@@ -14572,38 +14572,6 @@
             "module": "Postprocessing"
         },
         {
-            "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 21,
-            "description": "Store the renderer state.",
-            "itemtype": "method",
-            "name": "backup",
-            "params": [
-                {
-                    "name": "renderer",
-                    "description": "",
-                    "type": "THREE.WebGlRenderer"
-                }
-            ],
-            "class": "RendererState",
-            "module": "Postprocessing"
-        },
-        {
-            "file": "..\\source\\core\\postprocessing\\RendererState.js",
-            "line": 38,
-            "description": "Restore the renderer state.",
-            "itemtype": "method",
-            "name": "restore",
-            "params": [
-                {
-                    "name": "renderer",
-                    "description": "",
-                    "type": "THREE.WebGlRenderer"
-                }
-            ],
-            "class": "RendererState",
-            "module": "Postprocessing"
-        },
-        {
             "file": "..\\source\\core\\renderer\\css\\CSS3DObject.js",
             "line": 18,
             "description": "The DOM element to be projected in 3D space.\n\nIt is automatically added to the appropiate DOM container used by the renderer.",
@@ -15011,6 +14979,38 @@
                 "type": "THREE.WebGLRenderer"
             },
             "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererState.js",
+            "line": 23,
+            "description": "Store the renderer state.",
+            "itemtype": "method",
+            "name": "backup",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "THREE.WebGlRenderer"
+                }
+            ],
+            "class": "RendererState",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererState.js",
+            "line": 42,
+            "description": "Restore the renderer state.",
+            "itemtype": "method",
+            "name": "restore",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "THREE.WebGlRenderer"
+                }
+            ],
+            "class": "RendererState",
             "module": "Postprocessing"
         },
         {
