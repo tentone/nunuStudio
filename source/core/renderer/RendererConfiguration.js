@@ -279,8 +279,6 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 	renderer.sortObjects = this.sortObjects;
 
 	renderer.gammaFactor = this.gammaFactor;
-	renderer.gammaInput = this.gammaInput;
-	renderer.gammaOutput = this.gammaOutput;
 
 	renderer.physicallyCorrectLights = this.physicallyCorrectLights;
 

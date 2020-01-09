@@ -51,6 +51,7 @@ LocaleManager.register(
 	static: "Static",
 	dynamic: "Dynamic",
 	createScene: "Create scene",
+	toInstancedMesh: "To Instanced Mesh",
 
 	//Objects
 	particleEmitter: "Particle Emitter",

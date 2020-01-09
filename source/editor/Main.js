@@ -515,6 +515,7 @@ include("source/editor/gui/tab/inspector/objects/text/TextBitmapInspector.js");
 include("source/editor/gui/tab/inspector/objects/controls/OrbitControlsInspector.js");
 include("source/editor/gui/tab/inspector/objects/controls/FirstPersonControlsInspector.js");
 include("source/editor/gui/tab/inspector/objects/mesh/MeshInspector.js");
+include("source/editor/gui/tab/inspector/objects/mesh/InstancedMeshInspector.js");
 
 include("source/editor/gui/tab/inspector/geometries/GeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/BoxGeometryForm.js");

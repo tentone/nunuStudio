@@ -103,6 +103,10 @@ InspectorContainer.prototype.updateSelection = function()
 		{
 			this.panel = new SpineInspector(this, object);
 		}
+		else if(object instanceof InstancedMesh)
+		{
+			this.panel = new InstancedMeshInspector(this, object);
+		}
 		else if(object instanceof THREE.SkinnedMesh)
 		{
 			this.panel = new MeshInspector(this, object);

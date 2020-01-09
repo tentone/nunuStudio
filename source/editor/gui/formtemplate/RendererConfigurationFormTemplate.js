@@ -319,8 +319,6 @@ RendererConfigurationFormTemplate.prototype.updateValues = function()
 	this.toneMappingWhitePoint.setValue(this.object.toneMappingWhitePoint);
 	this.sortObjects.setValue(this.object.sortObjects);
 	this.gammaFactor.setValue(this.object.gammaFactor);
-	this.gammaInput.setValue(this.object.gammaInput);
-	this.gammaOutput.setValue(this.object.gammaOutput);
 	this.precision.setValue(this.object.precision);
 	this.alpha.setValue(this.object.alpha);
 	this.premultipliedAlpha.setValue(this.object.premultipliedAlpha);

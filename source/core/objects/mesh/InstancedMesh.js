@@ -21,7 +21,6 @@ function InstancedMesh(geometry, material, count)
 	this.receiveShadow = true;
 	this.castShadow = true;
 
-	var count = 0;
 	Object.defineProperties(this,
 	{
 		/**
