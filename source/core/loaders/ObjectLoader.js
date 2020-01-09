@@ -1040,10 +1040,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		case "InstancedMesh":
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);
-			
 			object = new InstancedMesh(geometry, material, data.count);
-			//object
-			// TODO <ADD CODE HERE>
+			
+			//TODO <Load instanceMatrix data>
+
 			break;
 
 		case "HTMLView":
