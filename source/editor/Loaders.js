@@ -126,8 +126,6 @@ Editor.loadTexture = function(file, onLoad)
 			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 		}
 
-
-
 		if(onLoad !== undefined)
 		{
 			onLoad(texture);

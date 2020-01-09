@@ -216,29 +216,7 @@ function RendererConfigurationFormTemplate(form, object)
 	});
 	this.form.add(this.gammaFactor);
 	this.form.nextRow()
-
-	//Gamma input
-	this.form.addText(Locale.gammaInput);
-	this.gammaInput = new CheckBox(this.form);
-	this.gammaInput.size.set(18, 18);
-	this.gammaInput.setOnChange(function()
-	{
-		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "gammaInput", self.gammaInput.getValue()), updateRenderers));
-	});
-	this.form.add(this.gammaInput);
-	this.form.nextRow();
-
-	//Gamma output
-	this.form.addText(Locale.gammaOutput);
-	this.gammaOutput = new CheckBox(this.form);
-	this.gammaOutput.size.set(18, 18);
-	this.gammaOutput.setOnChange(function()
-	{
-		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "gammaOutput", self.gammaOutput.getValue()), updateRenderers));
-	});
-	this.form.add(this.gammaOutput);
-	this.form.nextRow();
-
+	
 	//Power preference
 	this.form.addText(Locale.powerPreference).setAltText(Locale.hintPowerPreference);
 	this.powerPreference = new DropdownList(this.form);

@@ -142,22 +142,6 @@ function RendererConfiguration()
 	this.gammaFactor = 2.0;
 
 	/**
-	 * If set, then it expects that all textures and colors are premultiplied gamma.
-	 *
-	 * @property gammaInput
-	 * @type {boolean}
-	 */
-	this.gammaInput = false;
-
-	/**
-	 * If set, then it expects that all textures and colors need to be outputted in premultiplied gamma. 
-	 *
-	 * @property gammaOutput
-	 * @type {boolean}
-	 */
-	this.gammaOutput = false;
-
-	/**
 	 * Shader precision. Can be "highp", "mediump" or "lowp". Defaults to "highp" if supported by the device.
 	 *
 	 * @property precision
@@ -322,8 +306,6 @@ RendererConfiguration.prototype.toJSON = function()
 		sortObjects: this.sortObjects,
 		checkShaderErrors: this.checkShaderErrors,
 		gammaFactor: this.gammaFactor,
-		gammaInput: this.gammaInput,
-		gammaOutput: this.gammaOutput,
 		precision: this.precision,
 		alpha: this.alpha,
 		premultipliedAlpha: this.premultipliedAlpha,
@@ -352,8 +334,6 @@ RendererConfiguration.prototype.fromJSON = function(data)
 	this.sortObjects = data.sortObjects;
 	this.checkShaderErrors = data.checkShaderErrors;
 	this.gammaFactor = data.gammaFactor;
-	this.gammaInput = data.gammaInput;
-	this.gammaOutput = data.gammaOutput;
 	this.precision = data.precision;
 	this.alpha = data.alpha;
 	this.premultipliedAlpha = data.premultipliedAlpha;
