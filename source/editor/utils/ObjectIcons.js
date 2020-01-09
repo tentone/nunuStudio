@@ -27,8 +27,9 @@ ObjectIcons.icons =
 
 	//Objects
 	SpineAnimation: ObjectIcons.path + "misc/spine.png",
-	Mesh: ObjectIcons.path + "models/cube.png",
+	InstancedMesh: ObjectIcons.path + "models/cubes.png",
 	SkinnedMesh: ObjectIcons.path + "misc/skeleton.png",
+	Mesh: ObjectIcons.path + "models/cube.png",
 	ParticleEmiter: ObjectIcons.path + "misc/particles.png",
 	Script: ObjectIcons.path + "script/script.png",
 	Sprite: ObjectIcons.path + "misc/image.png",

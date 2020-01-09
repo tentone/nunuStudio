@@ -7,7 +7,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	var self = this;
 	
 	//Volume
-	this.form.addText("Volume");
+	this.form.addText(Locale.volume);
 	this.volume = new Slider(this.form);
 	this.volume.size.set(80, 18);
 	this.volume.setRange(0, 1);
@@ -45,7 +45,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 
 	//Loop
 	this.loop = new CheckBox(this.form);
-	this.form.addText("Loop");
+	this.form.addText(Locale.loop);
 	this.loop.size.set(18, 18);
 	this.loop.setOnChange(function()
 	{

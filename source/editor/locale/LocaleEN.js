@@ -182,7 +182,9 @@ LocaleManager.register(
 	outline: "Outline",
 	outlineColor: "Outline color",
 	outlineWidth: "Outline Width",
-
+	loop: "Loop",
+	volume: "Volume",
+	
 	//Values
 	relative: "Relative",
 	absolute: "Absolute",

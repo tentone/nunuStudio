@@ -202,7 +202,7 @@ function TreeNode(container)
 			}
 
 			//Mesh specific stuff
-			if(self.object instanceof THREE.Mesh || self.object instanceof THREE.SkinnedMesh)
+			if(self.object instanceof THREE.Mesh || self.object instanceof THREE.SkinnedMesh || self.object instanceof THREE.InstancedMesh)
 			{
 				//If mesh has a geometry attached
 				if(self.object.geometry !== undefined)
@@ -221,7 +221,6 @@ function TreeNode(container)
 						var geometry = self.object.geometry.clone();
 						geometry.applyMatrix(self.object.matrixWorld);
 
-
 						var actions = [];
 						actions.push(new ChangeAction(self.object, "geometry", geometry));
 						actions.push(new ChangeAction(self.object, "position", new THREE.Vector3(0, 0, 0)));
@@ -230,7 +229,11 @@ function TreeNode(container)
 						Editor.addAction(new ActionBundle(actions));
 					});
 				}
-				
+			}
+
+			// Add physics to object
+			if(self.object instanceof THREE.Mesh || self.object instanceof THREE.SkinnedMesh)
+			{
 				//Add physics object
 				function createPhysics(object, mode)
 				{
@@ -239,12 +242,13 @@ function TreeNode(container)
 					physics.name = object.name;
 					physics.position.copy(object.position);
 					physics.quaternion.copy(object.quaternion);
+
 					object.position.set(0, 0, 0);
 					object.quaternion.set(0, 0, 0, 1);
 
 					var actions = [];
-					actions.push(new AddAction(physics, object.parent));
-					actions.push(new MoveAction(object, physics));
+					actions.push(new SwapAction(object, physics, true));
+					actions.push(new AddAction(object, physics));
 					Editor.addAction(new ActionBundle(actions));
 				}
 

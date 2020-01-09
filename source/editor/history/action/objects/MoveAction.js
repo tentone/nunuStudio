@@ -13,7 +13,7 @@
  * @param {THREE.Object3D} newParent New parent of the object.
  * @param {number} newIndex Index to insert the object.
  */
-function MoveAction(object, newParent, newIndex)
+function MoveAction(object, newParent, newIndex, keepGlobalPose)
 {
 	Action.call(this);
 	
@@ -25,7 +25,7 @@ function MoveAction(object, newParent, newIndex)
 	this.newParent = newParent;
 	this.newIndex = newIndex;
 
-	this.keepGlobalPose = Editor.settings.editor.keepTransformMove;
+	this.keepGlobalPose = keepGlobalPose !== undefined ? keepGlobalPose : Editor.settings.editor.keepTransformMove;
 }
 
 MoveAction.prototype.apply = function()

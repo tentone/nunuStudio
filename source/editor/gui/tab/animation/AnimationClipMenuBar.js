@@ -56,7 +56,7 @@ function AnimationClipMenuBar(parent, editor, animation)
 	var text = new Text(this);
 	text.position.set(190, 5);
 	text.size.set(100, 20);
-	text.setText("Loop");
+	text.setText(Locale.loop);
 	text.updateInterface();
 
 	this.loop = new DropdownList(this);
