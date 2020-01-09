@@ -178,7 +178,7 @@ include("source/core/objects/particle/ParticleEmitter.js");
 include("source/core/objects/misc/Sky.js");
 include("source/core/objects/misc/Container.js");
 include("source/core/objects/misc/LensFlare.js");
-include("source/core/objects/misc/BrowserView.js");
+include("source/core/objects/misc/HTMLView.js");
 
 include("source/core/objects/animation/Skeleton.js");
 

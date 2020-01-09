@@ -1,22 +1,23 @@
 "use strict";
 
 /**
- * BrowserView object is used to navigate webpages inside of the 3D scene.
+ * HTMLView object is used to navigate webpages inside of the 3D scene.
  *
  * Can be used to display external web widget using a iframe. Some pages might present limitations regarding their usage inside of a iframe element.
  * 
- * @class BrowserView
+ * @class HTMLView
  * @extends {CSS3DObject}
  * @param {string} url URL to be opened by default.
  */
-function BrowserView(url)
+function HTMLView(url)
 {
 	var element = document.createElement("iframe");
 	element.style.border = "none";
 	
 	CSS3DObject.call(this, element);
 
-	this.name = "browserview";
+	this.type = "HTMLView";
+	this.name = "webview";
 
 	var self = this;
 	var url, width, height;
@@ -34,7 +35,7 @@ function BrowserView(url)
 			get: function(){return url;},
 			set: function(value)
 			{
-				url = value !== undefined ? BrowserView.processURL(value) : "";
+				url = value !== undefined ? HTMLView.processURL(value) : "";
 				self.element.src = url;
 			}
 		},
@@ -77,9 +78,9 @@ function BrowserView(url)
 	this.url = url !== undefined ? url : "";
 }
 
-BrowserView.prototype = Object.create(CSS3DObject.prototype);
+HTMLView.prototype = Object.create(CSS3DObject.prototype);
 
-BrowserView.prototype.constructor = BrowserView;
+HTMLView.prototype.constructor = HTMLView;
 
 /** 
  * Process URL to transform it into embedded URL when possible for common services.
@@ -87,17 +88,15 @@ BrowserView.prototype.constructor = BrowserView;
  * @method processURL
  * @param {string} url
  */
-BrowserView.processURL = function(url)
+HTMLView.processURL = function(url)
 {	
-	//Youtube use embeded link
-	url = url.replace("watch?v=", "embed/");
-
-	return url;			
+	//Replace youtube url to use embeded link
+	return url.replace("watch?v=", "embed/");			
 };
 
-BrowserView.prototype.toJSON = function(resources)
+HTMLView.prototype.toJSON = function(meta)
 {
-	var data = CSS3DObject.prototype.toJSON.call(this, resources);
+	var data = CSS3DObject.prototype.toJSON.call(this, meta);
 
 	data.object.height = this.height;
 	data.object.width = this.width;

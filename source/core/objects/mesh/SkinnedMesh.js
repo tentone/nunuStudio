@@ -11,7 +11,7 @@
  * @module Meshes
  * @param {Geometry} geometry Geometry used by this mesh
  * @param {Material} material Material used to shade the superficie of the geometry
- * @extends {SkinnedMesh}
+ * @extends {THREE.SkinnedMesh}
  */
 /**
  * Geometry defined the object structure.

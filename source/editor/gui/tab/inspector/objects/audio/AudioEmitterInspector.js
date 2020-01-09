@@ -7,7 +7,7 @@ function AudioEmitterInspector(parent, object)
 	var self = this;
 
 	//Audio player
-	this.form.addText("Audio");
+	this.form.addText(Locale.audio);
 	this.player = new AudioPlayer(this.form);
 	this.player.size.set(190, 18);
 	this.form.add(this.player);

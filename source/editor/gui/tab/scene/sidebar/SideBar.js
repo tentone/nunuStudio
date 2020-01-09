@@ -468,13 +468,13 @@ SideBar.prototype.createObject = function()
 	cameras.addOption(Global.FILE_PATH + "icons/camera/prespective.png", function()
 	{
 		Editor.addObject(new PerspectiveCamera(60, 1), self.editor.scene);
-	}, "Perspective Camera");
+	}, Locale.perspectiveCamera);
 
 	//Orthographic camera
 	cameras.addOption(Global.FILE_PATH + "icons/camera/orthographic.png", function()
 	{
 		Editor.addObject(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL), self.editor.scene);
-	}, "Orthographic Camera");
+	}, Locale.orthographicCamera);
 
 	cameras.updateOptions();
 
@@ -500,7 +500,7 @@ SideBar.prototype.createObject = function()
 	effects.addOption(Global.FILE_PATH + "icons/misc/sprite.png", function()
 	{
 		Editor.addObject(new Sprite(Editor.defaultSpriteMaterial), self.editor.scene);
-	}, "Sprite");
+	}, Locale.sprite);
 
 	//Particle emitter
 	effects.addOption(Global.FILE_PATH + "icons/misc/particles.png", function()
@@ -509,31 +509,31 @@ SideBar.prototype.createObject = function()
 		particle.texture = Editor.defaultTextureParticle;
 		particle.reload();
 		Editor.addObject(particle, self.editor.scene);
-	}, "Particle Emitter");
+	}, Locale.particleEmitter);
 
 	//Container
 	effects.addOption(Global.FILE_PATH + "icons/misc/container.png", function()
 	{
 		Editor.addObject(new Container(), self.editor.scene);
-	}, "Container");
+	}, Locale.container);
 
 	//Cube Camera
 	effects.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()
 	{
 		Editor.addObject(new CubeCamera(), self.editor.scene);
-	}, "Cube Camera")
+	}, Locale.cubeCamera)
 
 	//Audio
 	effects.addOption(Global.FILE_PATH + "icons/misc/audio.png", function()
 	{
 		Editor.addObject(new AudioEmitter(Editor.defaultAudio), self.editor.scene);
-	}, "Audio");
+	}, Locale.audio);
 
 	//Positional Audio
 	effects.addOption(Global.FILE_PATH + "icons/misc/audio_positional.png", function()
 	{
 		Editor.addObject(new PositionalAudio(Editor.defaultAudio), self.editor.scene);
-	}, "Positional Audio");
+	}, Locale.positionalAudio);
 
 	//Lens flare
 	effects.addOption(Global.FILE_PATH + "icons/misc/flare.png", function()
@@ -550,15 +550,14 @@ SideBar.prototype.createObject = function()
 		lensFlare.addFlare(Editor.defaultTextureLensFlare[3], 70, 1.0);
 
 		Editor.addObject(lensFlare, self.editor.scene);
-	}, "Lens flare");
+	}, Locale.lensFlare);
 
 	if(Nunu.developmentMode())
 	{
-		//Browser View
 		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
 		{
-			Editor.addObject(new BrowserView("https://www.techpowerup.com/"), self.editor.scene);
-		}, "Browser View");
+			Editor.addObject(new HTMLView("https://www.techpowerup.com/"), self.editor.scene);
+		}, Locale.htmlView);
 	}
 
 	effects.updateOptions();
@@ -626,13 +625,13 @@ SideBar.prototype.createObject = function()
 	controls.addOption(Global.FILE_PATH + "icons/misc/orbit.png", function()
 	{
 		Editor.addObject(new OrbitControls(), self.editor.scene);
-	}, "Orbit Controls");
+	}, Locale.orbitControls);
 
 	//FPS controls
 	controls.addOption(Global.FILE_PATH + "icons/misc/crosshair.png", function()
 	{
 		Editor.addObject(new FirstPersonControls(), self.editor.scene);
-	}, "First Person Controls");
+	}, Locale.firstPersonControls);
 
 	//Leap Hand
 	controls.addOption(Global.FILE_PATH + "icons/hw/leap.png", function()

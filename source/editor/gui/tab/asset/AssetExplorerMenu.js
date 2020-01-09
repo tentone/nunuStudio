@@ -50,7 +50,7 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/file.png");
 
 	//Audio file
-	menu.addOption("Audio", function()
+	menu.addOption(Locale.audio, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{

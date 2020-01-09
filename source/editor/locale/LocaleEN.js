@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * LocaleEN defines text and audio for the English language.
+ * LocaleEN defines text of the GUI for the English language.
  * 
  * @static
  * @class LocaleEN
@@ -52,6 +52,20 @@ LocaleManager.register(
 	dynamic: "Dynamic",
 	createScene: "Create scene",
 
+	//Objects
+	particleEmitter: "Particle Emitter",
+	cubeCamera: "Cube camera",
+	positionalAudio: "Positional Audio",
+	audio: "Audio",
+	container: "Container",
+	sprite: "Sprite",
+	perspectiveCamera: "Perspective Camera",
+	orthographicCamera: "Orthographic Camera",
+	lensFlare: "Lens flare",
+	htmlView: "HTML View",
+	orbitControls: "Orbit Controls",
+	firstPersonControls: "First Person Controls",
+	
 	//Geometries
 	box: "Box",
 	sphere: "Sphere",
