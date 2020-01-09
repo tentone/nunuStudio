@@ -20,7 +20,7 @@ function InstancedMesh(geometry, material, count)
 
 	this.receiveShadow = true;
 	this.castShadow = true;
-
+	
 	Object.defineProperties(this,
 	{
 		/**

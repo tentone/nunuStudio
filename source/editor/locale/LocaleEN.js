@@ -78,6 +78,7 @@ LocaleManager.register(
 	cone: "Cone",
 
 	//Properties
+	count: "Count",
 	name: "Name",
 	side: "Side",
 	position: "Position",

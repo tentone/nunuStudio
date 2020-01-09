@@ -1041,9 +1041,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);
 			object = new InstancedMesh(geometry, material, data.count);
-			
-			//TODO <Load instanceMatrix data>
-
+			object.instanceMatrix = new THREE.BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
 			break;
 
 		case "HTMLView":

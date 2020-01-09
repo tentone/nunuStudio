@@ -4,7 +4,9 @@ function InstancedMeshInspector(parent, object)
 {
 	MeshInspector.call(this, parent, object);
 
-	this.form.addText("Count");
+	var self = this;
+	
+	this.form.addText(Locale.count);
 	this.count = new NumberBox(this.form);
 	this.count.size.set(0, 18);
 	this.count.setRange(0, 1000);
