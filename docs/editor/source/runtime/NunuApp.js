@@ -50,8 +50,9 @@ include("lib/chevrotain.min.js");
 
 include("source/core/Nunu.js");
 include("source/core/Global.js");
+
 include("source/core/FileSystem.js");
-include("source/core/TargetConfig.js");
+include("source/core/platform/TargetConfig.js");
 
 include("source/core/three/animation/KeyframeTrack.js");
 include("source/core/three/animation/AnimationClip.js");
@@ -136,6 +137,7 @@ include("source/core/objects/device/KinectDevice.js");
 
 include("source/core/objects/mesh/Mesh.js");
 include("source/core/objects/mesh/SkinnedMesh.js");
+include("source/core/objects/mesh/InstancedMesh.js");
 
 include("source/core/objects/sprite/CanvasSprite.js");
 include("source/core/objects/sprite/Sprite.js");
@@ -178,7 +180,7 @@ include("source/core/objects/particle/ParticleEmitter.js");
 include("source/core/objects/misc/Sky.js");
 include("source/core/objects/misc/Container.js");
 include("source/core/objects/misc/LensFlare.js");
-include("source/core/objects/misc/BrowserView.js");
+include("source/core/objects/misc/HTMLView.js");
 
 include("source/core/objects/animation/Skeleton.js");
 

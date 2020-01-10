@@ -312,6 +312,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\mesh\\InstancedMesh.js": {
+            "name": "..\\source\\core\\objects\\mesh\\InstancedMesh.js",
+            "modules": {},
+            "classes": {
+                "InstancedMesh": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\mesh\\Mesh.js": {
             "name": "..\\source\\core\\objects\\mesh\\Mesh.js",
             "modules": {},
@@ -330,15 +339,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\objects\\misc\\BrowserView.js": {
-            "name": "..\\source\\core\\objects\\misc\\BrowserView.js",
-            "modules": {},
-            "classes": {
-                "BrowserView": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\objects\\misc\\Container.js": {
             "name": "..\\source\\core\\objects\\misc\\Container.js",
             "modules": {
@@ -346,6 +346,15 @@
             },
             "classes": {
                 "Container": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\misc\\HTMLView.js": {
+            "name": "..\\source\\core\\objects\\misc\\HTMLView.js",
+            "modules": {},
+            "classes": {
+                "HTMLView": 1
             },
             "fors": {},
             "namespaces": {}
@@ -534,6 +543,15 @@
             "modules": {},
             "classes": {
                 "Scene": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\platform\\TargetConfig.js": {
+            "name": "..\\source\\core\\platform\\TargetConfig.js",
+            "modules": {},
+            "classes": {
+                "TargetConfig": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1084,15 +1102,6 @@
             },
             "fors": {},
             "namespaces": {}
-        },
-        "..\\source\\core\\TargetConfig.js": {
-            "name": "..\\source\\core\\TargetConfig.js",
-            "modules": {},
-            "classes": {
-                "TargetConfig": 1
-            },
-            "fors": {},
-            "namespaces": {}
         }
     },
     "modules": {
@@ -1174,6 +1183,7 @@
             "classes": {
                 "Container": 1,
                 "CubeCamera": 1,
+                "HTMLView": 1,
                 "LensFlare": 1
             },
             "fors": {},
@@ -1262,9 +1272,9 @@
             "elements": {},
             "classes": {
                 "TextMesh": 1,
+                "InstancedMesh": 1,
                 "Mesh": 1,
                 "SkinnedMesh": 1,
-                "BrowserView": 1,
                 "TextSprite": 1
             },
             "fors": {},
@@ -1377,12 +1387,13 @@
             "elements": {},
             "classes": {
                 "Program": 1,
-                "Scene": 1
+                "Scene": 1,
+                "TargetConfig": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\objects\\Scene.js",
+            "file": "..\\source\\core\\platform\\TargetConfig.js",
             "line": 3,
             "description": "Program class contains all the data of a nunuStudio program.\n\nIs stores and manages all available resources used by the children objects.\n\nIs responsible for handling runtime tasks, initialization, update, resizes etc."
         },
@@ -1520,13 +1531,12 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "Nunu": 1,
-                "TargetConfig": 1
+                "Nunu": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\TargetConfig.js",
+            "file": "..\\source\\core\\Nunu.js",
             "line": 3,
             "description": "nunuStudio core main file.\n  \nStore nunuStudio development version and timestamp and contains global method to check browser feature support."
         }
@@ -2290,6 +2300,33 @@
             ],
             "extends": "{SpotLight}"
         },
+        "InstancedMesh": {
+            "name": "InstancedMesh",
+            "shortname": "InstancedMesh",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Meshes",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\mesh\\InstancedMesh.js",
+            "line": 3,
+            "description": "A instanced mesh is a mesh that can be drawn multiple times at once, it can be used to optimize the draw of large amount of the same geometry material combination.\n\nThe usage of InstancedMesh will help you to reduce the number of draw calls and thus improve the overall rendering performance in your application.",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "Geometry used by this mesh",
+                    "type": "Geometry"
+                },
+                {
+                    "name": "material",
+                    "description": "Material used to shade the superficie of the geometry",
+                    "type": "Material"
+                }
+            ],
+            "extends": "{THREE.InstancedMesh}"
+        },
         "Mesh": {
             "name": "Mesh",
             "shortname": "Mesh",
@@ -2315,7 +2352,7 @@
                     "type": "Material"
                 }
             ],
-            "extends": "{Mesh}"
+            "extends": "{THREE.Mesh}"
         },
         "SkinnedMesh": {
             "name": "SkinnedMesh",
@@ -2342,29 +2379,7 @@
                     "type": "Material"
                 }
             ],
-            "extends": "{SkinnedMesh}"
-        },
-        "BrowserView": {
-            "name": "BrowserView",
-            "shortname": "BrowserView",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Meshes",
-            "namespace": "",
-            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
-            "line": 3,
-            "description": "BrowserView object is used to navigate webpages inside of the 3D scene.\n\nCan be used to display external web widget using a iframe. Some pages might present limitations regarding their usage inside of a iframe element.",
-            "extends": "{CSS3DObject}",
-            "params": [
-                {
-                    "name": "url",
-                    "description": "URL to be opened by default.",
-                    "type": "String"
-                }
-            ]
+            "extends": "{THREE.SkinnedMesh}"
         },
         "Container": {
             "name": "Container",
@@ -2380,6 +2395,28 @@
             "line": 3,
             "description": "Containers are used to group objects together.\n\nThey are not drawn in the scene are just used as logic containers.",
             "extends": "{Group}"
+        },
+        "HTMLView": {
+            "name": "HTMLView",
+            "shortname": "HTMLView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Misc",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\misc\\HTMLView.js",
+            "line": 3,
+            "description": "HTMLView object is used to navigate webpages inside of the 3D scene.\n\nCan be used to display external web widget using a iframe. Some pages might present limitations regarding their usage inside of a iframe element.",
+            "extends": "{CSS3DObject}",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL to be opened by default.",
+                    "type": "String"
+                }
+            ]
         },
         "LensFlare": {
             "name": "LensFlare",
@@ -2979,6 +3016,20 @@
             "line": 3,
             "description": "Scenes allow you to set up what and where is to be rendered by the engine.\n\nThis is where you place objects, lights and cameras.\n\nA program may contain multiple scenes, its possible to change between scene using scripts.\n \nScene three.js documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.",
             "extends": "{Scene}"
+        },
+        "TargetConfig": {
+            "name": "TargetConfig",
+            "shortname": "TargetConfig",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "..\\source\\core\\platform\\TargetConfig.js",
+            "line": 3,
+            "description": "Target configuration stores platform specific configurations used when exporting the application to a platform."
         },
         "FXAAPass": {
             "name": "FXAAPass",
@@ -4326,20 +4377,6 @@
             "file": "..\\source\\core\\Nunu.js",
             "line": 3,
             "description": "nunuStudio core main file.\n  \nStore nunuStudio development version and timestamp and contains global method to check browser feature support."
-        },
-        "TargetConfig": {
-            "name": "TargetConfig",
-            "shortname": "TargetConfig",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Runtime",
-            "namespace": "",
-            "file": "..\\source\\core\\TargetConfig.js",
-            "line": 3,
-            "description": "Target configuration stores platform specific configurations used when exporting the application to a platform."
         }
     },
     "elements": {},
@@ -9787,6 +9824,16 @@
             "module": "Lights"
         },
         {
+            "file": "..\\source\\core\\objects\\mesh\\InstancedMesh.js",
+            "line": 26,
+            "description": "The number of instances. The count value represents the maximum number of instances of this mesh.\n\nYou can change the number of instances at runtime to an integer value in the range [0, count].",
+            "itemtype": "attribute",
+            "name": "url",
+            "type": "{string}",
+            "class": "InstancedMesh",
+            "module": "Meshes"
+        },
+        {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
             "line": 14,
             "description": "Geometry defines the object structure.",
@@ -9896,38 +9943,38 @@
             "module": "Meshes"
         },
         {
-            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
-            "line": 26,
+            "file": "..\\source\\core\\objects\\misc\\HTMLView.js",
+            "line": 27,
             "description": "URL of the webpage to open in the view.",
             "itemtype": "attribute",
             "name": "url",
             "type": "{string}",
-            "class": "BrowserView",
-            "module": "Meshes"
+            "class": "HTMLView",
+            "module": "Misc"
         },
         {
-            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
-            "line": 42,
+            "file": "..\\source\\core\\objects\\misc\\HTMLView.js",
+            "line": 43,
             "description": "Width in pixels of the web view port.",
             "itemtype": "attribute",
             "name": "size",
             "type": "{number}",
-            "class": "BrowserView",
-            "module": "Meshes"
+            "class": "HTMLView",
+            "module": "Misc"
         },
         {
-            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
-            "line": 58,
+            "file": "..\\source\\core\\objects\\misc\\HTMLView.js",
+            "line": 59,
             "description": "Height in pixels of the web view port.",
             "itemtype": "attribute",
             "name": "height",
             "type": "{number}",
-            "class": "BrowserView",
-            "module": "Meshes"
+            "class": "HTMLView",
+            "module": "Misc"
         },
         {
-            "file": "..\\source\\core\\objects\\misc\\BrowserView.js",
-            "line": 84,
+            "file": "..\\source\\core\\objects\\misc\\HTMLView.js",
+            "line": 85,
             "description": "Process URL to transform it into embedded URL when possible for common services.",
             "itemtype": "method",
             "name": "processURL",
@@ -9938,8 +9985,8 @@
                     "type": "String"
                 }
             ],
-            "class": "BrowserView",
-            "module": "Meshes"
+            "class": "HTMLView",
+            "module": "Misc"
         },
         {
             "file": "..\\source\\core\\objects\\misc\\LensFlare.js",
@@ -13556,6 +13603,16 @@
             "module": "Core"
         },
         {
+            "file": "..\\source\\core\\platform\\TargetConfig.js",
+            "line": 10,
+            "description": "Desktop related export properties.",
+            "itemtype": "attribute",
+            "name": "desktop",
+            "type": "{Object}",
+            "class": "TargetConfig",
+            "module": "Core"
+        },
+        {
             "file": "..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js",
             "line": 65,
             "description": "Minimum luminance.",
@@ -14849,26 +14906,6 @@
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
             "line": 144,
-            "description": "If set, then it expects that all textures and colors are premultiplied gamma.",
-            "itemtype": "property",
-            "name": "gammaInput",
-            "type": "{boolean}",
-            "class": "RendererConfiguration",
-            "module": "Postprocessing"
-        },
-        {
-            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 152,
-            "description": "If set, then it expects that all textures and colors need to be outputted in premultiplied gamma.",
-            "itemtype": "property",
-            "name": "gammaOutput",
-            "type": "{boolean}",
-            "class": "RendererConfiguration",
-            "module": "Postprocessing"
-        },
-        {
-            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 160,
             "description": "Shader precision. Can be \"highp\", \"mediump\" or \"lowp\". Defaults to \"highp\" if supported by the device.",
             "itemtype": "property",
             "name": "precision",
@@ -14878,7 +14915,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 168,
+            "line": 152,
             "description": "Whether the canvas contains an alpha (transparency) buffer or not.",
             "itemtype": "property",
             "name": "alpha",
@@ -14888,7 +14925,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 176,
+            "line": 160,
             "description": "Whether the renderer will assume that colors have premultiplied alpha.",
             "itemtype": "property",
             "name": "premultipliedAlpha",
@@ -14898,7 +14935,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 184,
+            "line": 168,
             "description": "Whether to preserve the buffers until manually cleared or overwritten.",
             "itemtype": "property",
             "name": "preserveDrawingBuffer",
@@ -14908,7 +14945,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 192,
+            "line": 176,
             "description": "Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be \"high-performance\", \"low-power\" or \"default\".",
             "itemtype": "property",
             "name": "powerPreference",
@@ -14918,7 +14955,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 200,
+            "line": 184,
             "description": "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
             "itemtype": "property",
             "name": "logarithmicDepthBuffer",
@@ -14928,7 +14965,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 208,
+            "line": 192,
             "description": "Whether to use physically correct lighting mode.",
             "itemtype": "property",
             "name": "physicallyCorrectLights",
@@ -14938,7 +14975,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 216,
+            "line": 200,
             "description": "Defines whether material shader programs are checked for errors during compilation and linkage process.",
             "itemtype": "property",
             "name": "checkShaderErrors",
@@ -14948,7 +14985,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 225,
+            "line": 209,
             "description": "Use WebGL 1.0 to render data.\n\nMost devices fully support WebGL 1.0 at this point, should work for any type of device.",
             "static": 1,
             "itemtype": "attribute",
@@ -14959,7 +14996,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 236,
+            "line": 220,
             "description": "Use WebGL 2.0 to render data, should be faster for some types of data.\n\nAdditinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.",
             "static": 1,
             "itemtype": "attribute",
@@ -14970,7 +15007,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 247,
+            "line": 231,
             "description": "Create a THREE renderer object based on the renderer configuration.",
             "itemtype": "method",
             "name": "createRenderer",
@@ -19612,16 +19649,6 @@
                 }
             ],
             "class": "Nunu",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\core\\TargetConfig.js",
-            "line": 10,
-            "description": "Desktop related export properties.",
-            "itemtype": "attribute",
-            "name": "desktop",
-            "type": "{Object}",
-            "class": "TargetConfig",
             "module": "Runtime"
         }
     ],
