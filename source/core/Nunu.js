@@ -121,8 +121,8 @@ Nunu.enterVR = function(renderer, onSuccess)
 	{
 		Nunu.getXRSession(function(session)
 		{
-			renderer.vr.enabled = true;
-			renderer.vr.setSession(session);
+			renderer.xr.enabled = true;
+			renderer.xr.setSession(session);
 
 			if(onSuccess !== undefined)
 			{
@@ -136,8 +136,8 @@ Nunu.enterVR = function(renderer, onSuccess)
 		{
 			if(!display.isPresenting)
 			{
-				renderer.vr.enabled = true;
-				renderer.vr.setDevice(display);
+				renderer.xr.enabled = true;
+				renderer.xr.setDevice(display);
 				display.requestPresent([{source : renderer.domElement}]);
 				
 				if(onSuccess !== undefined)
@@ -165,8 +165,8 @@ Nunu.exitVR = function(renderer)
 	{
 		Nunu.getXRSession(function(session)
 		{
-			renderer.vr.enabled = false;
-			renderer.vr.setSession(null);
+			renderer.xr.enabled = false;
+			renderer.xr.setSession(null);
 		});
 	}
 	else if(Nunu.webVRAvailable())
@@ -175,8 +175,8 @@ Nunu.exitVR = function(renderer)
 		{
 			if(display.isPresenting)
 			{
-				renderer.vr.enabled = false;
-				renderer.vr.setDevice(null);
+				renderer.xr.enabled = false;
+				renderer.xr.setDevice(null);
 				device.exitPresent();
 			}
 		});
