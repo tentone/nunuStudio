@@ -1040,6 +1040,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		case "InstancedMesh":
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);
+			console.log(data);
 			object = new InstancedMesh(geometry, material, data.count);
 			object.instanceMatrix = new THREE.BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
 			break;

@@ -232,15 +232,14 @@ function TreeNode(container)
 			}
 
 			// Convert mesh to instanced mesh
-			if(self.object instanceof THREE.Mesh)
+			if(self.object instanceof THREE.Mesh && self.object.geometry !== undefined)
 			{
 				context.addOption(Locale.toInstancedMesh, function()
 				{
 					var instanced = new InstancedMesh(self.object.geometry, self.object.material, 1);
-
-					//instanced.position.copy(self.object.position);
-					//instanced.scale.copy(self.object.scale);
-					//instanced.quaternion.copy(self.object.quaternion);
+					instanced.position.copy(self.object.position);
+					instanced.scale.copy(self.object.scale);
+					instanced.quaternion.copy(self.object.quaternion);
 
 					Editor.addAction(new SwapAction(self.object, instanced));
 				});

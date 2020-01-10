@@ -39,7 +39,7 @@ function InstancedMesh(geometry, material, count)
 				// Resize the instanceMatrix to fit the number of instances
 				if(value > count)
 				{
-					this.instanceMatrix = new THREE.BufferAttribute(new Float32Array(count * 16), 16);
+					this.instanceMatrix = new THREE.BufferAttribute(new Float32Array(value * 16), 16);
 				}
 				
 				count = value;

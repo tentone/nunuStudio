@@ -139,7 +139,26 @@ GeometryLoader.prototype.parse = function(data)
 			geometry = new THREE[data.type](geometryShapes, data.curveSegments);
 			break; 
 
+		case "ExtrudeGeometry":
+		case "ExtrudeBufferGeometry":
+			var geometryShapes = [];
+			for(var j = 0; j < data.shapes.length; j ++)
+			{
+				var shape = this.shapes[data.shapes[j]];
+				geometryShapes.push(shape);
+			}
+
+			var extrudePath = data.options.extrudePath;
+			if(extrudePath !== undefined)
+			{
+				data.options.extrudePath = new Curves[extrudePath.type]().fromJSON(extrudePath);
+			}
+
+			geometry = new Geometries[data.type](geometryShapes, data.options);
+			break;
+
 		case "BufferGeometry":
+		case "InstancedBufferGeometry":
 			geometry = this.bufferGeometryLoader.parse(data);
 			break;
 
@@ -148,7 +167,7 @@ GeometryLoader.prototype.parse = function(data)
 			break;
 
 		default:
-			console.warn("GeometryLoader: Unsupported geometry type " + data.type);
+			console.warn("GeometryLoader: Unsupported geometry type " + data.type + ".", data);
 			geometry = new THREE.Geometry();
 			break;
 	}
