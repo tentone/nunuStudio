@@ -75,7 +75,7 @@ function TransformGizmo()
 
 			//Move geometry to origin
 			var tempGeometry = child.geometry.clone();
-			tempGeometry.applyMatrix(child.matrix);
+			tempGeometry.applyMatrix4(child.matrix);
 			child.geometry = tempGeometry;
 
 			//Reset pose

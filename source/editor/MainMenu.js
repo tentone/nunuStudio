@@ -628,7 +628,7 @@ function MainMenu(parent)
 			geometry = geometry.clone();
 		}
 		
-		geometry.applyMatrix(object.matrixWorld);
+		geometry.applyMatrix4(object.matrixWorld);
 
 		return new ThreeBSP(geometry);
 	}
@@ -777,7 +777,7 @@ function MainMenu(parent)
 		}
 
 		var obj = Editor.selection[0];
-		obj.geometry.applyMatrix(obj.matrixWorld);
+		obj.geometry.applyMatrix4(obj.matrixWorld);
 		obj.position.set(0, 0, 0);
 		obj.scale.set(1, 1, 1);
 		obj.rotation.set(0, 0, 0);
