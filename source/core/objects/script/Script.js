@@ -167,25 +167,26 @@ Script.INCLUDE = 102;
 Script.getIncludes = function(code)
 {
 	var results = [];
-	var matches = code.matchAll(Script.includeRegex);
-	var match = null;
 
-	do
+	// Regex object is statefull and iterates on each exec() call
+	var includeRegex = new RegExp(Script.includeRegex, 'gi');
+
+	while(true)
 	{
-		match = matches.next();
-		if(match.done)
+		var match = includeRegex.exec(code);
+		if(match === null)
 		{
-			return results;
+			break;
 		}
 
-		var include = match.value[0];
+		var include = match[0];
 		include = include.replace(Script.includeRegexStart, '');
 		include = include.replace(Script.includeRegexEnd, '');
-		results.push(include);
+		
+		console.log("nunuStudio: Include script.", match, include);
 
-		// console.log("nunuStudio: Include script.", match, include);
+		results.push(include);
 	}
-	while(!match.done);
 
 	return results;
 }
