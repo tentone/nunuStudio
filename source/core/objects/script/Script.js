@@ -89,6 +89,16 @@ function Script(code, mode)
 Script.prototype = Object.create(THREE.Group.prototype);
 
 /**
+ * Regular expression to obtain all the include calls placed inside of scripts.
+ *
+ * @attribute includeRegex
+ * @type {RegExp}
+ */
+Script.includeRegex = /include[ ]*\([ \n]*["'].+?["'][ \n]*\);*/gi;
+Script.includeRegexStart = /include[ ]*\([ \n]*["']/gi;
+Script.includeRegexEnd = /["'][ \n]*\);*/gi;
+
+/**
  * Default script code used when creating a new Script.
  *
  * @attribute DEFAULT
@@ -157,16 +167,25 @@ Script.INCLUDE = 102;
 Script.getIncludes = function(code)
 {
 	var results = [];
+	var matches = code.matchAll(Script.includeRegex);
+	var match = null;
 
-	var index = code.search(/include\(".+?"\);/gi);
-	if(index !== -1)
+	do
 	{
-		var sub = code.substring(index);
-		var end = sub.indexOf("\");");
-		var include = sub.substring(9, end);
+		match = matches.next();
+		if(match.done)
+		{
+			return results;
+		}
 
+		var include = match.value[0];
+		include = include.replace(Script.includeRegexStart, '');
+		include = include.replace(Script.includeRegexEnd, '');
 		results.push(include);
+
+		// console.log("nunuStudio: Include script.", match, include);
 	}
+	while(!match.done);
 
 	return results;
 }
@@ -182,7 +201,7 @@ Script.getIncludes = function(code)
  */
 Script.removeIncludes = function(code)
 {
-	return code.replace(/include\(".+?"\);/gi, "");
+	return code.replace(Script.includeRegex, "");
 }
 
 /**
