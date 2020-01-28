@@ -22,7 +22,7 @@
 	<script src="../../js/embed.js"></script>
 </head>
 
-<body onload="initialize('sepia.nsp', 'sepia');">
+<body onload="initialize('sepia.nsp', 'sepia'); initialize('blur.nsp', 'blur');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -53,10 +53,20 @@
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Post-Processing</h2>
-			<p>In this guide we will learn how to use post-processing effects inside of nunuStudio.</p>
+			<p>In this guide we will learn how to use post-processing effects inside of nunuStudio, post-processing effects are applied after the base image was rendered. These effects can be used to give a totally different atmosphere to a scene.</p>
+			<p>The Post-processing pipeline is composed of a series of steps used to produce the final image, each step is performed by order (changing its order produces a different results). The pipeline is attached to the camera object.</p>
+			<p>To open the post-processing pipeline editor double click the camera object on the explorer.</p>
+			<p>Each post-processing step has its own custom set of attributes that can be adjusted in the editor and during runtime. Post-processing steps can be enabled/disabled and used as an output for the final image. </p>
+
+			<img src="editor.png" class="img-normal"></img>
+
+			<p>To try this example in the editor you can download the <a class="underline" href="blur.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/16_postprocessing/blur.nsp">Web Editor</a>.</p>
+			<div>
+				<canvas id="blur" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 			
 			<h3 class="black">Custom effects</h3>
-			<p>It´s possible to create custom post-processing effects using GLSL shaders. This can be achieved using a script object that creates a custom shader pass and attaches is to the camera object as shown bellow.</p>
+			<p>It is possible to create custom post-processing effects using GLSL shaders. This can be achieved using a script object that creates a custom shader pass and attaches is to the camera object as shown bellow.</p>
 			<p>The programmer has to be carefull and manage its own uniform values passed to the shader. If the effects craeted need to render to the screen dont forget to set the renderToScreen variable true.</p>
 <pre><code>include("SepiaShader.js");
 
