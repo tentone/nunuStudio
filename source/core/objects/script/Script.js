@@ -179,12 +179,10 @@ Script.getIncludes = function(code)
 			break;
 		}
 
+		// Filter only the resource/library name
 		var include = match[0];
 		include = include.replace(Script.includeRegexStart, '');
 		include = include.replace(Script.includeRegexEnd, '');
-		
-		console.log("nunuStudio: Include script.", match, include);
-
 		results.push(include);
 	}
 
