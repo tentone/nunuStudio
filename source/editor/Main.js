@@ -37,6 +37,8 @@ include("lib/three/postprocessing/RenderPass.js");
 include("lib/three/postprocessing/ShaderPass.js");
 include("lib/three/postprocessing/MaskPass.js");
 
+include("lib/three/lights/LightProbeGenerator.js");
+
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
@@ -160,6 +162,7 @@ include("source/core/objects/lights/AmbientLight.js");
 include("source/core/objects/lights/DirectionalLight.js");
 include("source/core/objects/lights/HemisphereLight.js");
 include("source/core/objects/lights/RectAreaLight.js");
+include("source/core/objects/lights/LightProbe.js");
 
 include("source/core/objects/cameras/Viewport.js");
 include("source/core/objects/cameras/PerspectiveCamera.js");
