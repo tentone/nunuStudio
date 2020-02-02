@@ -375,46 +375,52 @@ include("source/editor/gui/element/tabs/splittable/TabButtonSplit.js");
 include("source/editor/gui/element/tabs/splittable/TabContainer.js");
 include("source/editor/gui/element/tabs/splittable/TabDualContainer.js");
 
-include("source/editor/gui/formtemplate/FormTemplate.js");
-include("source/editor/gui/formtemplate/ViewportFormTemplate.js");
-include("source/editor/gui/formtemplate/RendererConfigurationFormTemplate.js");
+include("source/editor/gui/form-template/FormTemplate.js");
+include("source/editor/gui/form-template/ViewportFormTemplate.js");
+include("source/editor/gui/form-template/RendererConfigurationFormTemplate.js");
 
 include("source/editor/gui/tab/ConsoleTab.js");
 include("source/editor/gui/tab/CodeEditor.js");
 include("source/editor/gui/tab/AboutTab.js");
 include("source/editor/gui/tab/TextEditor.js");
 
-include("source/editor/gui/tab/treeview/TreeView.js");
-include("source/editor/gui/tab/treeview/TreeNode.js");
+include("source/editor/gui/tab/tree-view/TreeView.js");
+include("source/editor/gui/tab/tree-view/TreeNode.js");
 
 include("source/editor/gui/tab/objects/ScriptEditor.js");
 include("source/editor/gui/tab/objects/ParticleEditor.js");
 
 include("source/editor/gui/tab/run/RunProject.js");
 
-include("source/editor/gui/tab/scene/SceneEditor.js");
-include("source/editor/gui/tab/scene/sidebar/SideBar.js");
-include("source/editor/gui/tab/scene/transform/TransformControls.js");
-include("source/editor/gui/tab/scene/transform/material/GizmoMaterial.js");
-include("source/editor/gui/tab/scene/transform/material/GizmoLineMaterial.js");
-include("source/editor/gui/tab/scene/transform/gizmo/TransformGizmo.js");
-include("source/editor/gui/tab/scene/transform/gizmo/TransformGizmoRotate.js");
-include("source/editor/gui/tab/scene/transform/gizmo/TransformGizmoScale.js");
-include("source/editor/gui/tab/scene/transform/gizmo/TransformGizmoTranslate.js");
-include("source/editor/gui/tab/scene/controls/EditorControls.js");
-include("source/editor/gui/tab/scene/controls/EditorFreeControls.js");
-include("source/editor/gui/tab/scene/controls/EditorOrbitControls.js");
-include("source/editor/gui/tab/scene/controls/EditorPlanarControls.js");
-include("source/editor/gui/tab/scene/utils/OrientationCube.js");
-include("source/editor/gui/tab/scene/helpers/ObjectIconHelper.js");
-include("source/editor/gui/tab/scene/helpers/PhysicsObjectHelper.js");
-include("source/editor/gui/tab/scene/helpers/WireframeHelper.js");
-include("source/editor/gui/tab/scene/helpers/SkinnedWireframeHelper.js");
-include("source/editor/gui/tab/scene/helpers/PointsHelper.js");
-include("source/editor/gui/tab/scene/helpers/LineHelper.js");
-include("source/editor/gui/tab/scene/helpers/GridHelper.js");
-include("source/editor/gui/tab/scene/helpers/RectAreaLightHelper.js");
-include("source/editor/gui/tab/scene/helpers/SkeletonHelper.js");
+include("source/editor/gui/tab/scene-editor/SceneEditor.js");
+
+include("source/editor/gui/tab/scene-editor/sidebar/SideBar.js");
+
+include("source/editor/gui/tab/scene-editor/transform/TransformControls.js");
+include("source/editor/gui/tab/scene-editor/transform/material/GizmoMaterial.js");
+include("source/editor/gui/tab/scene-editor/transform/material/GizmoLineMaterial.js");
+include("source/editor/gui/tab/scene-editor/transform/gizmo/TransformGizmo.js");
+include("source/editor/gui/tab/scene-editor/transform/gizmo/TransformGizmoRotate.js");
+include("source/editor/gui/tab/scene-editor/transform/gizmo/TransformGizmoScale.js");
+include("source/editor/gui/tab/scene-editor/transform/gizmo/TransformGizmoTranslate.js");
+
+include("source/editor/gui/tab/scene-editor/controls/EditorControls.js");
+include("source/editor/gui/tab/scene-editor/controls/EditorFreeControls.js");
+include("source/editor/gui/tab/scene-editor/controls/EditorOrbitControls.js");
+include("source/editor/gui/tab/scene-editor/controls/EditorPlanarControls.js");
+
+include("source/editor/gui/tab/scene-editor/utils/OrientationCube.js");
+
+include("source/editor/gui/tab/scene-editor/helpers/LightProbeHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/ObjectIconHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/PhysicsObjectHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/WireframeHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/SkinnedWireframeHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/PointsHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/LineHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/GridHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/RectAreaLightHelper.js");
+include("source/editor/gui/tab/scene-editor/helpers/SkeletonHelper.js");
 
 include("source/editor/gui/tab/asset/AssetExplorer.js");
 include("source/editor/gui/tab/asset/AssetExplorerMenu.js");
@@ -507,6 +513,7 @@ include("source/editor/gui/tab/inspector/objects/lights/HemisphereLightInspector
 include("source/editor/gui/tab/inspector/objects/lights/PointLightInspector.js");
 include("source/editor/gui/tab/inspector/objects/lights/DirectionalLightInspector.js");
 include("source/editor/gui/tab/inspector/objects/lights/SpotLightInspector.js");
+include("source/editor/gui/tab/inspector/objects/lights/LightProbeInspector.js");
 include("source/editor/gui/tab/inspector/objects/misc/CubeCameraInspector.js");
 include("source/editor/gui/tab/inspector/objects/misc/LensFlareInspector.js");
 include("source/editor/gui/tab/inspector/objects/misc/ParticleEmitterInspector.js");

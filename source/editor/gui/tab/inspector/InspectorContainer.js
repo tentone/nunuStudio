@@ -149,6 +149,10 @@ InspectorContainer.prototype.updateSelection = function()
 			{
 				this.panel = new HemisphereLightInspector(this, object);
 			}
+			else if(object instanceof THREE.LightProbe)
+			{
+				this.panel = new LightProbeInspector(this, object);
+			}
 			else
 			{
 				this.panel = new AmbientLightInspector(this, object);

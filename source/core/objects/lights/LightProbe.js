@@ -25,8 +25,19 @@ LightProbe.prototype = Object.create(THREE._LightProbe.prototype);
 /**
  * Generate light probe data from cube camera render.
  */
-LightProbe.prototype.generateFromCubeCamera = function(scene, renderer)
+LightProbe.prototype.generate = function()
 {
+	var scene = this.getScene();
+	if(scene === null)
+	{
+		console.warn("nunuStudio: LightProbe cannot generate, no scene.", this);
+		return;
+	}
+
+	var canvas = new OffscreenCanvas(256, 256);
+
+	var renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true});
+	
 	var cubeCamera = new THREE.CubeCamera(1, 1000, 256,
 	{	
 		format: THREE.RGBAFormat,
