@@ -451,6 +451,12 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(new RectAreaLight(0x444444, 100, 1, 1), self.editor.scene);
 	}, "Rectarea Light");
 
+	//Probe
+	lights.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()
+	{
+		Editor.addObject(new LightProbe(), self.editor.scene);
+	}, "Light Probe");
+
 	//Sky
 	lights.addOption(Global.FILE_PATH + "icons/lights/sky.png", function()
 	{
