@@ -75,9 +75,9 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	/**
 	 * WebGL cube render target to where the scene is rendered.
 	 * @property target
-	 * @type {WebGLRenderTargetCube}
+	 * @type {WebGLCubeRenderTarget}
 	 */
-	this.target = new THREE.WebGLRenderTargetCube(this.resolution, this.resolution,
+	this.renderTarget = new THREE.WebGLCubeRenderTarget(new THREE.Vector2(this.resolution, this.resolution),
 	{
 		format: THREE.RGBFormat,
 		magFilter: THREE.LinearFilter,
@@ -92,7 +92,7 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	 * @property cube
 	 * @type {CubeTexture}
 	 */
-	this.cube = this.target.texture;
+	this.cube = this.renderTarget.texture;
 	this.cube.generateMipmaps = false;
 	this.cube.name = "cube";
 
@@ -159,7 +159,7 @@ CubeCamera.prototype.update = function(delta)
 CubeCamera.prototype.setResolution = function(resolution)
 {
 	this.resolution = resolution;
-	this.target.setSize(resolution, resolution);
+	this.renderTarget.setSize(resolution, resolution);
 };
 
 /**
@@ -173,7 +173,7 @@ CubeCamera.prototype.clear = function(renderer, color, depth, stencil)
 
 	for(var i = 0; i < 6; i++)
 	{
-		renderer.setRenderTarget(this.target, i);
+		renderer.setRenderTarget(this.renderTarget, i);
 		renderer.clear(color, depth, stencil);
 	}
 
@@ -197,7 +197,7 @@ CubeCamera.prototype.updateCubeMap = function(renderer, scene)
 	for(var i = 0; i < 6; i++)
 	{
 		this.cameras[i].updateMatrixWorld();
-		renderer.setRenderTarget(this.target, i);
+		renderer.setRenderTarget(this.renderTarget, i);
 		renderer.render(scene, this.cameras[i]);
 	}
 

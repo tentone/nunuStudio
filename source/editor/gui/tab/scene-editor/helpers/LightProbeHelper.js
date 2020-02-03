@@ -1,8 +1,8 @@
+"use strict";
+
 function LightProbeHelper(lightProbe, size)
 {
-
 	this.lightProbe = lightProbe;
-
 	this.size = size;
 
 	var material = new THREE.ShaderMaterial({

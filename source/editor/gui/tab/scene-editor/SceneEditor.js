@@ -1157,7 +1157,7 @@ SceneEditor.prototype.updateSelection = function()
 			//Light probe
 			else if(object instanceof THREE.LightProbe)
 			{
-				this.objectHelper.add(new THREE.LightProbeHelper(object, 2));
+				this.objectHelper.add(new LightProbeHelper(object, 2));
 			}
 			//Point light
 			else if(object instanceof THREE.PointLight)
