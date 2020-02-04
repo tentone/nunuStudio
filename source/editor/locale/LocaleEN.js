@@ -272,6 +272,7 @@ LocaleManager.register(
 	move: "Move",
 	play: "Play",
 	selectObjects: "Select objects",
+	calculateProbe: "Calculate light",
 
 	//Editor settings
 	reset: "Reset",

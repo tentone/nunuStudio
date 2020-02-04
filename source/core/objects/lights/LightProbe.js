@@ -38,7 +38,7 @@ LightProbe.prototype.generate = function()
 
 	var renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true});
 	
-	var cubeCamera = new THREE.CubeCamera(1, 1000, 256,
+	var cubeCamera = new THREE._CubeCamera(1, 1000, 256,
 	{	
 		format: THREE.RGBAFormat,
 		magFilter: THREE.LinearFilter,

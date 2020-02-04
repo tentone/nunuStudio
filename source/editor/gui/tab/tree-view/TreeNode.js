@@ -180,6 +180,14 @@ function TreeNode(container)
 				}
 			}
 	
+			if(self.object instanceof LightProbe)
+			{
+				context.addOption(Locale.calculateProbe, function()
+				{
+					self.object.generate();
+				});
+			}
+
 			//Recalculate Origin
 			context.addOption(Locale.recenterGeometries, function()
 			{
