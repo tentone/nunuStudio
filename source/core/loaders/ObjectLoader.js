@@ -1052,6 +1052,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			object.url = data.url;
 			break;
 
+		case "LightProbe":
+			object = new LightProbe();
+			object.sh.fromArray(data.sh);
+			break;
+
 		case "Mesh":
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);

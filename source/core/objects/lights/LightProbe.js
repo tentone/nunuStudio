@@ -52,14 +52,16 @@ LightProbe.prototype.generate = function()
 	cubeCamera.renderTarget.texture.encoding = THREE.sRGBEncoding;
 	cubeCamera.update(renderer, scene);
 
-	this.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeCamera.renderTarget));
+	// Calculate probe from cube camera result
+	var result = LightProbeGenerator.fromCubeRenderTarget(renderer, cubeCamera.renderTarget);
+	this.sh = result.sh;
 };
 
 LightProbe.prototype.toJSON = function(meta)
 {
 	var data = THREE.Light.prototype.toJSON.call(this, meta);
 
-	data.sh = this.sh.toArray();
+	data.object.sh = this.sh.toArray();
 
 	return data;
 };
