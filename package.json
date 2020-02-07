@@ -11,6 +11,7 @@
 	},
 	"scripts": {
 		"serve": "http-server . -p 8080 --cors -o http://localhost:8080/index.html",
+		"serve-page": "http-server ./docs -p 8081 --cors -o http://localhost:8081/index.html",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"cordova-requirements": "cd ./temp && cordova requirements",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
