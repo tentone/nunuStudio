@@ -13,6 +13,9 @@ function RendererConfiguration(options)
 	 * Canvas background color, optional only used if specified.
 	 *
 	 * Different from the clear color used to clear the render target.
+	 *
+	 * @property backgroundColor
+	 * @type {string}
 	 */
 	this.backgroundColor = null;
 

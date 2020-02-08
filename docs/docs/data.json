@@ -285,6 +285,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\lights\\LightProbe.js": {
+            "name": "..\\source\\core\\objects\\lights\\LightProbe.js",
+            "modules": {},
+            "classes": {
+                "LightProbe": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\lights\\PointLight.js": {
             "name": "..\\source\\core\\objects\\lights\\PointLight.js",
             "modules": {},
@@ -1248,6 +1257,7 @@
                 "AmbientLight": 1,
                 "DirectionalLight": 1,
                 "HemisphereLight": 1,
+                "LightProbe": 1,
                 "PointLight": 1,
                 "RectAreaLight": 1,
                 "SpotLight": 1,
@@ -2178,6 +2188,33 @@
                 }
             ],
             "extends": "{HemisphereLight}"
+        },
+        "LightProbe": {
+            "name": "LightProbe",
+            "shortname": "LightProbe",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\lights\\LightProbe.js",
+            "line": 3,
+            "description": "A LightProbe is a source of indirect-diffuse light.",
+            "params": [
+                {
+                    "name": "sh",
+                    "description": "Light color in hex RGB",
+                    "type": "Number"
+                },
+                {
+                    "name": "intensity",
+                    "description": "Light intensity",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{LightProbe}"
         },
         "PointLight": {
             "name": "PointLight",
@@ -3468,7 +3505,15 @@
             "namespace": "",
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
             "line": 3,
-            "description": "Renderer configuration stores all the WebGL renderer related parameters."
+            "description": "Renderer configuration stores all the WebGL renderer related parameters.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Options object with the values to be used in the rendere configuration, values not specified are set to default.",
+                    "type": "Object"
+                }
+            ]
         },
         "RendererState": {
             "name": "RendererState",
@@ -8386,7 +8431,7 @@
             "description": "WebGL cube render target to where the scene is rendered.",
             "itemtype": "property",
             "name": "target",
-            "type": "{WebGLRenderTargetCube}",
+            "type": "{WebGLCubeRenderTarget}",
             "class": "CubeCamera",
             "module": "Misc"
         },
@@ -9790,6 +9835,13 @@
             "module": "Lights"
         },
         {
+            "file": "..\\source\\core\\objects\\lights\\LightProbe.js",
+            "line": 25,
+            "description": "Generate light probe data from cube camera render.",
+            "class": "LightProbe",
+            "module": "Lights"
+        },
+        {
             "file": "..\\source\\core\\objects\\lights\\PointLight.js",
             "line": 34,
             "description": "Update light shadow map atributtes at runtime",
@@ -11128,7 +11180,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 30,
+            "line": 28,
             "description": "A map of uniform types to their component size.",
             "static": 1,
             "itemtype": "attribute",
@@ -11138,7 +11190,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 47,
+            "line": 45,
             "description": "Calculate the minimum and maximum update range for this buffer attribute using component size independant min and max values.",
             "itemtype": "method",
             "name": "setUpdateRange",
@@ -11159,7 +11211,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 60,
+            "line": 58,
             "description": "Calculate the number of indices that this attribute should mark as needing updating. Also marks the attribute as needing an update.",
             "itemtype": "method",
             "name": "flagUpdate",
@@ -11168,7 +11220,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 78,
+            "line": 72,
             "description": "Reset the index update counts for this attribute",
             "itemtype": "method",
             "name": "resetUpdateRange",
@@ -11177,7 +11229,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 94,
+            "line": 88,
             "description": "Perform a splice operation on this attribute\"s buffer.",
             "itemtype": "method",
             "name": "splice",
@@ -11198,7 +11250,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 118,
+            "line": 112,
             "description": "Make sure this attribute has a typed array associated with it.\n\nIf it does, then it will ensure the typed array is of the correct size.\n\nIf not, a new TypedArrayHelper instance will be created.",
             "itemtype": "method",
             "name": "_ensureTypedArray",
@@ -11214,7 +11266,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 150,
+            "line": 144,
             "description": "Creates a THREE.BufferAttribute instance if one doesn't exist already.\n\nEnsures a typed array is present by calling _ensureTypedArray() first.\n\nIf a buffer attribute exists already, then it will be marked as needing an update.",
             "itemtype": "method",
             "name": "_createBufferAttribute",
@@ -11230,7 +11282,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\helpers\\ShaderAttribute.js",
-            "line": 178,
+            "line": 172,
             "description": "Returns the length of the typed array associated with this attribute.",
             "itemtype": "method",
             "name": "getLength",
@@ -12042,7 +12094,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 194,
+            "line": 192,
             "description": "Remove includes from code.\n\nUsed to remove include statements when initializing code in APPEND mode.",
             "static": 1,
             "itemtype": "method",
@@ -12059,7 +12111,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 208,
+            "line": 206,
             "description": "Initialize script. Automatically called by the runtime.\n\nCompiles the script code and calls the script initialize method if it exists after the code is compiled.",
             "itemtype": "method",
             "name": "initialize",
@@ -12068,7 +12120,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 244,
+            "line": 242,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -12077,7 +12129,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 270,
+            "line": 268,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -12086,7 +12138,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 287,
+            "line": 285,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -12095,7 +12147,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 302,
+            "line": 300,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -12111,7 +12163,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 318,
+            "line": 316,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "compileCode",
@@ -14761,7 +14813,14 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 10,
+            "line": 12,
+            "description": "Canvas background color, optional only used if specified.\n\nDifferent from the clear color used to clear the render target.",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 19,
             "description": "Prefered redering backend API to use if available.\n\nIf the selected backend is not available it defaults to WebGL.\n\nShader code might not be cross compatible between rendering backends.",
             "itemtype": "property",
             "name": "backend",
@@ -14771,7 +14830,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 22,
+            "line": 31,
             "description": "Defines whether the renderer should automatically clear its output before rendering a frame.",
             "itemtype": "property",
             "name": "autoClear",
@@ -14781,7 +14840,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 30,
+            "line": 39,
             "description": "Defines whether the renderer should clear the color buffer.",
             "itemtype": "property",
             "name": "autoClearColor",
@@ -14791,7 +14850,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 38,
+            "line": 47,
             "description": "Defines whether the renderer should clear the depth buffer.",
             "itemtype": "property",
             "name": "autoClearDepth",
@@ -14801,7 +14860,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 46,
+            "line": 55,
             "description": "Defines whether the renderer should clear the stencil buffer.",
             "itemtype": "property",
             "name": "autoClearStencil",
@@ -14811,7 +14870,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 54,
+            "line": 63,
             "description": "Antialiasing flag.",
             "itemtype": "property",
             "name": "antialiasing",
@@ -14822,7 +14881,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 63,
+            "line": 72,
             "description": "If true the program is rendered with shadows.",
             "itemtype": "property",
             "name": "shadows",
@@ -14833,7 +14892,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 72,
+            "line": 81,
             "description": "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
             "itemtype": "property",
             "name": "@stencil",
@@ -14843,7 +14902,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 80,
+            "line": 89,
             "description": "Shadow map filtering type.",
             "itemtype": "property",
             "name": "shadowsType",
@@ -14854,7 +14913,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 89,
+            "line": 98,
             "description": "Enables automatic updates to the shadows in the scene.\n\nIf you do not require dynamic lighting / shadows, you may set this to false.\n\nUse renderer.shadowMap.needsUpdate to update the shadow map.",
             "itemtype": "property",
             "name": "shadowsAutoUpdate",
@@ -14864,7 +14923,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 101,
+            "line": 110,
             "description": "Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.",
             "itemtype": "property",
             "name": "toneMapping",
@@ -14875,7 +14934,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 110,
+            "line": 119,
             "description": "Exposure level of tone mapping.",
             "itemtype": "property",
             "name": "toneMappingExposure",
@@ -14885,7 +14944,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 118,
+            "line": 127,
             "description": "Tone mapping white point.",
             "itemtype": "property",
             "name": "toneMappingWhitePoint",
@@ -14895,7 +14954,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 126,
+            "line": 135,
             "description": "If true the renderer sorts the objects from back to front for rendering.\n\nImportant if using multiple transparent objects.",
             "itemtype": "property",
             "name": "sortObjects",
@@ -14905,7 +14964,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 136,
+            "line": 145,
             "description": "Gamma factor applied to the image.",
             "itemtype": "property",
             "name": "gammaFactor",
@@ -14915,7 +14974,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 144,
+            "line": 153,
             "description": "Shader precision. Can be \"highp\", \"mediump\" or \"lowp\". Defaults to \"highp\" if supported by the device.",
             "itemtype": "property",
             "name": "precision",
@@ -14925,7 +14984,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 152,
+            "line": 161,
             "description": "Whether the canvas contains an alpha (transparency) buffer or not.",
             "itemtype": "property",
             "name": "alpha",
@@ -14935,7 +14994,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 160,
+            "line": 169,
             "description": "Whether the renderer will assume that colors have premultiplied alpha.",
             "itemtype": "property",
             "name": "premultipliedAlpha",
@@ -14945,7 +15004,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 168,
+            "line": 177,
             "description": "Whether to preserve the buffers until manually cleared or overwritten.",
             "itemtype": "property",
             "name": "preserveDrawingBuffer",
@@ -14955,7 +15014,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 176,
+            "line": 185,
             "description": "Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be \"high-performance\", \"low-power\" or \"default\".",
             "itemtype": "property",
             "name": "powerPreference",
@@ -14965,7 +15024,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 184,
+            "line": 193,
             "description": "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
             "itemtype": "property",
             "name": "logarithmicDepthBuffer",
@@ -14975,7 +15034,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 192,
+            "line": 201,
             "description": "Whether to use physically correct lighting mode.",
             "itemtype": "property",
             "name": "physicallyCorrectLights",
@@ -14985,7 +15044,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 200,
+            "line": 209,
             "description": "Defines whether material shader programs are checked for errors during compilation and linkage process.",
             "itemtype": "property",
             "name": "checkShaderErrors",
@@ -14995,7 +15054,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 209,
+            "line": 230,
             "description": "Use WebGL 1.0 to render data.\n\nMost devices fully support WebGL 1.0 at this point, should work for any type of device.",
             "static": 1,
             "itemtype": "attribute",
@@ -15006,7 +15065,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 220,
+            "line": 241,
             "description": "Use WebGL 2.0 to render data, should be faster for some types of data.\n\nAdditinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.",
             "static": 1,
             "itemtype": "attribute",
@@ -15017,7 +15076,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 231,
+            "line": 252,
             "description": "Create a THREE renderer object based on the renderer configuration.",
             "itemtype": "method",
             "name": "createRenderer",
@@ -19662,5 +19721,14 @@
             "module": "Runtime"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type\nGenerate light probe data from cube camera render.",
+            "line": " ..\\source\\core\\objects\\lights\\LightProbe.js:25"
+        },
+        {
+            "message": "Missing item type\nCanvas background color, optional only used if specified.\n\nDifferent from the clear color used to clear the render target.",
+            "line": " ..\\source\\core\\renderer\\RendererConfiguration.js:12"
+        }
+    ]
 }

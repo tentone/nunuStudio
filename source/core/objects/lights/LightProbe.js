@@ -24,6 +24,8 @@ LightProbe.prototype = Object.create(THREE._LightProbe.prototype);
 
 /**
  * Generate light probe data from cube camera render.
+ *
+ * @method generate
  */
 LightProbe.prototype.generate = function()
 {

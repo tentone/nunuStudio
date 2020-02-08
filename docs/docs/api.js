@@ -51,6 +51,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "LeapMotion",
         "LegacyGeometryLoader",
         "LensFlare",
+        "LightProbe",
         "LocalStorage",
         "Material",
         "MaterialLoader",
