@@ -3,10 +3,19 @@
 /** 
  * Renderer configuration stores all the WebGL renderer related parameters.
  *
+ * @constructor
  * @class RendererConfiguration
+ * @param {Object} options Options object with the values to be used in the rendere configuration, values not specified are set to default.
  */
-function RendererConfiguration()
+function RendererConfiguration(options)
 {
+	/**
+	 * Canvas background color, optional only used if specified.
+	 *
+	 * Different from the clear color used to clear the render target.
+	 */
+	this.backgroundColor = null;
+
 	/**
 	 * Prefered redering backend API to use if available.
 	 *
@@ -204,6 +213,18 @@ function RendererConfiguration()
  	 * @type {boolean}
 	 */
 	this.checkShaderErrors = true;
+
+	// Copy values received from the options parameter
+	if(options !== undefined)
+	{	
+		for(var i in this)
+		{
+			if(options[i] !== undefined)
+			{
+				this[i] = options[i];
+			}
+		}
+	}
 }
 
 /** 
@@ -261,6 +282,11 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 		logarithmicDepthBuffer: this.logarithmicDepthBuffer
 	});
 
+	if(this.backgroundColor !== null)
+	{
+		canvas.style.backgroundColor = this.backgroundColor;
+	}
+
 	renderer.autoClear = this.autoClear;
 	renderer.autoClearColor = this.autoClearColor;
 	renderer.autoClearDepth = this.autoClearDepth;
@@ -288,6 +314,7 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 RendererConfiguration.prototype.toJSON = function()
 {
 	return {
+		backgroundColor: this.backgroundColor,
 		backend: this.backend,
 		autoClear: this.autoClear,
 		autoClearColor: this.autoClearColor,
@@ -316,6 +343,7 @@ RendererConfiguration.prototype.toJSON = function()
 
 RendererConfiguration.prototype.fromJSON = function(data)
 {
+	this.backgroundColor = data.backgroundColor;
 	this.backend = data.backend;
 	this.autoClear = data.autoClear;
 	this.autoClearColor = data.autoClearColor;

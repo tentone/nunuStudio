@@ -194,6 +194,8 @@ LocaleManager.register(
 	loop: "Loop",
 	volume: "Volume",
 	enabled: "Enabled",
+	fragment: "Fragment",
+	vertex: "Vertex",
 	
 	//Values
 	relative: "Relative",

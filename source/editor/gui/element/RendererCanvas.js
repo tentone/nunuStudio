@@ -14,6 +14,8 @@ function RendererCanvas(parent, options, useCSSRenderer)
 {
 	Element.call(this, parent, "div");
 
+	this.element.style.backgroundColor = "#000000";
+	
 	/** 
 	 * List os parameters to be passed to the WebGLrenderer.
 	 *
