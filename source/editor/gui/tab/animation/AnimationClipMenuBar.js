@@ -23,7 +23,7 @@ function AnimationClipMenuBar(parent, editor, animation)
 	var text = new Text(this);
 	text.position.set(5, 5);
 	text.size.set(50, 20);
-	text.setText("Enabled");
+	text.setText(Locale.enabled);
 	text.updateInterface();
 
 	this.enabled = new CheckBox(this);
@@ -39,7 +39,7 @@ function AnimationClipMenuBar(parent, editor, animation)
 	var text = new Text(this);
 	text.position.set(70, 5);
 	text.size.set(100, 20);
-	text.setText("Duration");
+	text.setText(Locale.duration);
 	text.updateInterface();
 
 	this.duration = new NumberBox(this);

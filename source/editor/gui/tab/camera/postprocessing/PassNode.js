@@ -22,7 +22,7 @@ function PassNode(parent, name)
 	var self = this;
 
 	//Enabled
-	this.addText("Enabled");
+	this.addText(Locale.enabled);
 	this.enabled = new CheckBox(this);
 	this.enabled.size.set(18, 18);
 	this.enabled.setOnChange(function()

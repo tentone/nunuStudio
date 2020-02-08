@@ -54,6 +54,8 @@ LocaleManager.register(
 	toInstancedMesh: "To Instanced Mesh",
 
 	//Objects
+	ambientLight: "Ambient Light",
+	pointLight: "Point Light",
 	particleEmitter: "Particle Emitter",
 	cubeCamera: "Cube camera",
 	positionalAudio: "Positional Audio",
@@ -78,6 +80,11 @@ LocaleManager.register(
 	cone: "Cone",
 
 	//Properties
+	duration: "Duration",
+	backward: "Backward",
+	forward: "Forward",
+	direction: "Direction",
+	texture: "Texture",
 	count: "Count",
 	name: "Name",
 	side: "Side",
@@ -186,6 +193,7 @@ LocaleManager.register(
 	outlineWidth: "Outline Width",
 	loop: "Loop",
 	volume: "Volume",
+	enabled: "Enabled",
 	
 	//Values
 	relative: "Relative",

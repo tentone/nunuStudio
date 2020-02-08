@@ -383,12 +383,11 @@ include("source/editor/gui/tab/ConsoleTab.js");
 include("source/editor/gui/tab/CodeEditor.js");
 include("source/editor/gui/tab/AboutTab.js");
 include("source/editor/gui/tab/TextEditor.js");
+include("source/editor/gui/tab/ScriptEditor.js");
+include("source/editor/gui/tab/ParticleEditor.js");
 
 include("source/editor/gui/tab/tree-view/TreeView.js");
 include("source/editor/gui/tab/tree-view/TreeNode.js");
-
-include("source/editor/gui/tab/objects/ScriptEditor.js");
-include("source/editor/gui/tab/objects/ParticleEditor.js");
 
 include("source/editor/gui/tab/run/RunProject.js");
 

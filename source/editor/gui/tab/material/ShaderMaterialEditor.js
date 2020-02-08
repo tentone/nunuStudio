@@ -82,7 +82,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.interactive.add(this.mesh);
 	
 	//Test model
-	this.previewForm.addText("Model");
+	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
 	for(var i = 0; i < MaterialEditor.geometries.length; i++)
@@ -110,7 +110,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	//Point Light
-	this.previewForm.addText("Point Light");
+	this.previewForm.addText(Locale.pointLight);
 	this.lightEnabled = new CheckBox(this.previewForm);
 	this.lightEnabled.size.set(18, 18);
 	this.lightEnabled.setValue(this.pointLight.visible);
@@ -122,7 +122,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	//Ambient Light
-	this.previewForm.addText("Ambient Light");
+	this.previewForm.addText(Locale.ambientLight);
 	this.ambientLightEnabled = new CheckBox(this.previewForm);
 	this.ambientLightEnabled.size.set(18, 18);
 	this.ambientLightEnabled.setValue(this.ambientLight.visible);

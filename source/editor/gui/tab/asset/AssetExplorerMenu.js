@@ -80,12 +80,12 @@ function AssetExplorerMenu(parent)
 
 	//Textures
 	var texture = new DropdownMenu(this);
-	texture.setText("Texture");
+	texture.setText(Locale.texture);
 	texture.size.set(100, 25);
 	texture.position.set(100, 0);
 
 	//Image texture
-	texture.addOption("Texture", function()
+	texture.addOption(Locale.texture, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{

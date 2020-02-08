@@ -419,13 +419,13 @@ SideBar.prototype.createObject = function()
 	lights.addOption(Global.FILE_PATH + "icons/lights/point.png", function()
 	{
 		Editor.addObject(new PointLight(0x444444), self.editor.scene);
-	}, "Point Light");
+	}, Locale.pointLight);
 
 	//Ambient Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/ambient.png", function()
 	{
 		Editor.addObject(new AmbientLight(0x444444), self.editor.scene);
-	}, "Ambient Light");
+	}, Locale.ambientLight);
 
 	//Spot Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/spot.png", function()

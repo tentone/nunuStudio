@@ -9,7 +9,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.interactive.add(this.points);
 	
 	//Test model
-	this.previewForm.addText("Model");
+	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
 	for(var i = 0; i < MaterialEditor.geometries.length; i++)

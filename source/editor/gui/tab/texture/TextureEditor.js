@@ -2,7 +2,7 @@
 
 function TextureEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Texture", Global.FILE_PATH + "icons/misc/image.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/image.png");
 
 	var self = this;
 
