@@ -21,7 +21,7 @@ function PhysicsObject()
 	this.type = "Physics";
 
 	/**
-	 * Physics body contains the following attributes.
+	 * Physics body contains the following attributes:
 	 *  - position Vec3
 	 *  - velocity Vec3
 	 *  - torque Vec3
@@ -54,9 +54,37 @@ function PhysicsObject()
 	 * @type {CANNON.World}
 	 */
 	this.world = null;
+
+	/**
+	 * Physics object position mode.
+	 *
+	 * @attribute mode
+	 * @type {number}
+	 */
+	this.mode = PhysicsObject.WORLD;
 }
 
 PhysicsObject.prototype = Object.create(THREE.Group.prototype);
+
+/**
+ * The position of the object is copied directly from the body.
+ *
+ * @static
+ * @attribute WORLD
+ * @type {number}
+ */
+PhysicsObject.WORLD = 100;
+
+/**
+ * The position of the object is adjusted to follow the parent object transformation.
+ *
+ * This mode should be used for objects placed inside others.
+ *
+ * @static
+ * @attribute LOCAL
+ * @type {number}
+ */
+PhysicsObject.LOCAL = 101;
 
 /**
  * Intialize physics object and add it to the scene physics world.
@@ -65,15 +93,19 @@ PhysicsObject.prototype = Object.create(THREE.Group.prototype);
  */
 PhysicsObject.prototype.initialize = function()
 {
-	/*var position = this.getWorldPosition();
-	this.body.position.copy(position);
+	if(this.mode === PhysicsObject.WORLD)
+	{
+		this.body.position.copy(this.position);
+		this.body.quaternion.copy(this.quaternion);	
+	}
+	else if(this.mode === PhysicsObject.LOCAL)
+	{
+		var position = this.getWorldPosition();
+		this.body.position.copy(position);
 
-	var quaternion = this.getWorldQuaternion();
-	this.body.quaternion.copy(quaternion);*/
-	
-	// Copy position and quaternion
-	this.body.position.copy(this.position);
-	this.body.quaternion.copy(this.quaternion);
+		var quaternion = this.getWorldQuaternion();
+		this.body.quaternion.copy(quaternion);
+	}
 
 	//Physics world
 	var node = this;
@@ -97,11 +129,25 @@ PhysicsObject.prototype.initialize = function()
  */
 PhysicsObject.prototype.update = function(delta)
 {
-	this.position.copy(this.body.position);
-	if(!this.body.fixedRotation)
+	if(this.mode === PhysicsObject.WORLD)
 	{
-		this.quaternion.copy(this.body.quaternion);
+		this.position.copy(this.body.position);
+		if(!this.body.fixedRotation)
+		{
+			this.quaternion.copy(this.body.quaternion);
+		}
 	}
+	else if(this.mode === PhysicsObject.LOCAL)
+	{
+		//TODO <ADD CODE HERE>
+		//this.position.copy(this.body.position);
+
+		if(!this.body.fixedRotation)
+		{
+			//this.quaternion.copy(this.body.quaternion);
+		}
+	}
+
 
 	THREE.Object3D.prototype.update.call(this, delta);
 };
@@ -132,6 +178,8 @@ PhysicsObject.prototype.addShape = function(shape)
 PhysicsObject.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+
+
 
 	//Body
 	data.object.body = {};
