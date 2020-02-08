@@ -12,10 +12,8 @@
  */
 function ShaderAttribute(type, dynamicBuffer, arrayType)
 {
-	var typeMap = ShaderAttribute.typeSizeMap;
-
-	this.type = typeof type === "string" && typeMap.hasOwnProperty(type) ? type : "f";
-	this.componentSize = typeMap[this.type];
+	this.type = typeof type === "string" && ShaderAttribute.typeSizeMap.hasOwnProperty(type) ? type : "f";
+	this.componentSize = ShaderAttribute.typeSizeMap[this.type];
 	this.arrayType = arrayType || Float32Array;
 	this.typedArray = null;
 	this.bufferAttribute = null;
@@ -64,16 +62,12 @@ ShaderAttribute.prototype.setUpdateRange = function(min, max)
  */
 ShaderAttribute.prototype.flagUpdate = function()
 {
-	var attr = this.bufferAttribute,
-		range = attr.updateRange;
-
+	var range = this.bufferAttribute.updateRange;
 	range.offset = this.updateMin;
 	range.count = Math.min((this.updateMax - this.updateMin) + this.componentSize, this.typedArray.array.length);
 
-	attr.needsUpdate = true;
+	this.bufferAttribute.needsUpdate = true;
 };
-
-
 
 /**
  * Reset the index update counts for this attribute
@@ -88,7 +82,7 @@ ShaderAttribute.prototype.resetUpdateRange = function()
 
 ShaderAttribute.prototype.resetDynamic = function()
 {
-	this.bufferAttribute.dynamic = this.dynamicBuffer;
+	this.bufferAttribute.usage = this.dynamicBuffer ? THREE.DynamicDrawUsage : THREE.StaticDrawUsage;
 };
 
 /**
@@ -111,7 +105,7 @@ ShaderAttribute.prototype.forceUpdateAll = function()
 	this.bufferAttribute.array = this.typedArray.array;
 	this.bufferAttribute.updateRange.offset = 0;
 	this.bufferAttribute.updateRange.count = -1;
-	this.bufferAttribute.dynamic = false;
+	this.bufferAttribute.usage = THREE.StaticDrawUsage;
 	this.bufferAttribute.needsUpdate = true;
 };
 
@@ -172,7 +166,7 @@ ShaderAttribute.prototype._createBufferAttribute = function(size)
 	}
 
 	this.bufferAttribute = new THREE.BufferAttribute(this.typedArray.array, this.componentSize);
-	this.bufferAttribute.dynamic = this.dynamicBuffer;
+	this.bufferAttribute.usage = this.dynamicBuffer ? THREE.DynamicDrawUsage : THREE.StaticDrawUsage;
 };
 
 /**
