@@ -561,6 +561,12 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "Physics":
 			object = new PhysicsObject();
+			
+			if(data.mode !== undefined)
+			{
+				object.mode = data.mode;
+			}
+
 			object.body.type = data.body.type;
 			object.body.mass = data.body.mass;
 			object.body.linearDamping = data.body.linearDamping;
