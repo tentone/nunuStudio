@@ -75,7 +75,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Max particle count
-	this.form.addText("Particle count");
+	this.form.addText("Particle Count");
 	this.maxParticleCount = new NumberBox(this.form);
 	this.maxParticleCount.setStep(1.0);
 	this.maxParticleCount.size.set(100, 18);
@@ -119,7 +119,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Particle Count
-	this.form.addText("Particle rate");
+	this.form.addText("Particle Rate");
 	this.particleCount = new NumberBox(this.form);
 	this.particleCount.size.set(50, 18);
 	this.particleCount.setStep(1);
@@ -156,7 +156,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.type.size.set(100, 18);
 	this.type.addValue(Locale.box, ParticleDistributions.BOX);
 	this.type.addValue(Locale.sphere, ParticleDistributions.SPHERE);
-	this.type.addValue("Disc", ParticleDistributions.DISC);
+	this.type.addValue(Locale.disc, ParticleDistributions.DISC);
 	this.type.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter, "type", self.type.getValue()));
@@ -166,7 +166,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Max age
-	this.form.addText("Age");
+	this.form.addText(Locale.age);
 	this.ageRow = new NumberRow(this.form);
 	this.ageRow.labelSize = 20;
 	this.ageRow.size.set(0, 18);

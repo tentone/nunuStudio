@@ -72,6 +72,7 @@ LocaleManager.register(
 	//Geometries
 	box: "Box",
 	sphere: "Sphere",
+	disc: "Disc",
 	cylinder: "Cylinder",
 	convexHull: "ConvexHull",
 	cube: "Cube",
@@ -196,6 +197,7 @@ LocaleManager.register(
 	enabled: "Enabled",
 	fragment: "Fragment",
 	vertex: "Vertex",
+	age: "Age",
 	
 	//Values
 	relative: "Relative",
