@@ -7,7 +7,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Clear coat
-	this.form.addText("Clear coat");
+	this.form.addText(Locale.clearcoat);
 	this.clearcoat = new Slider(this.form);
 	this.clearcoat.size.set(160, 18);
 	this.clearcoat.setRange(0, 1);
@@ -21,7 +21,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Clear coat roughness
-	this.form.addText("Clear coat roughness");
+	this.form.addText(Locale.clearcoatRoughness);
 	this.clearcoatRoughness = new Slider(this.form);
 	this.clearcoatRoughness.size.set(160, 18);
 	this.clearcoatRoughness.setRange(0, 1);
@@ -35,7 +35,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Reflectivity");
+	this.form.addText(Locale.reflectivity);
 	this.reflectivity = new Slider(this.form);
 	this.reflectivity.size.set(160, 18);
 	this.reflectivity.setRange(0, 1);
@@ -49,7 +49,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Transparency
-	this.form.addText("Transparency");
+	this.form.addText(Locale.transparency);
 	this.transparency = new Slider(this.form);
 	this.transparency.size.set(160, 18);
 	this.transparency.setRange(0, 1);
@@ -63,7 +63,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Clear coat normal map
-	this.form.addText("Clearcoat normal map");
+	this.form.addText(Locale.clearcoatNormalMap);
 	this.clearcoatNormalMap = new TextureForm(this.form);
 	this.clearcoatNormalMap.size.set(0, 100);
 	this.clearcoatNormalMap.setOnChange(function(file)
@@ -75,7 +75,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Clear coat normal map scale
-	this.form.addText("Clearcoat normal Scale");
+	this.form.addText(Locale.clearcoatNormalScale);
 	this.clearcoatNormalScale = new VectorBox(this.form);
 	this.clearcoatNormalScale.size.set(0, 18);
 	this.clearcoatNormalScale.setType(VectorBox.VECTOR2);

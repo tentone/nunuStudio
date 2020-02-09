@@ -145,7 +145,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal map scale
-	this.form.addText("Normal scale");
+	this.form.addText(Locale.normalScale);
 	this.normalScale = new VectorBox(this.form);
 	this.normalScale.size.set(0, 18);
 	this.normalScale.setType(VectorBox.VECTOR2);
@@ -159,11 +159,11 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal type
-	this.form.addText("Normal type");
+	this.form.addText(Locale.normalType);
 	this.normalMapType = new DropdownList(this.form);
 	this.normalMapType.size.set(100, 18);
-	this.normalMapType.addValue("Tangent Space", THREE.TangentSpaceNormalMap);
-	this.normalMapType.addValue("Object Space", THREE.ObjectSpaceNormalMap);
+	this.normalMapType.addValue(Locale.tangentSpace, THREE.TangentSpaceNormalMap);
+	this.normalMapType.addValue(Locale.objectSpace, THREE.ObjectSpaceNormalMap);
 	this.normalMapType.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
@@ -173,7 +173,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map
-	this.form.addText("Displacement Map");
+	this.form.addText(Locale.displacementMap);
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(0, 100);
 	this.displacementMap.setOnChange(function(file)
@@ -299,7 +299,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Reflectivity");
+	this.form.addText(Locale.reflectivity);
 	this.reflectivity = new NumberBox(this.form);
 	this.reflectivity.size.set(0, 18);
 	this.reflectivity.setStep(0.05);

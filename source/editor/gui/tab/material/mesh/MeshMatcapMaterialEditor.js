@@ -115,7 +115,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal map scale
-	this.form.addText("Normal scale");
+	this.form.addText(Locale.normalScale);
 	this.normalScale = new VectorBox(this.form);
 	this.normalScale.setType(VectorBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
@@ -129,11 +129,11 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal type
-	this.form.addText("Normal type");
+	this.form.addText(Locale.normalType);
 	this.normalMapType = new DropdownList(this.form);
 	this.normalMapType.size.set(100, 18);
-	this.normalMapType.addValue("Tangent Space", THREE.TangentSpaceNormalMap);
-	this.normalMapType.addValue("Object Space", THREE.ObjectSpaceNormalMap);
+	this.normalMapType.addValue(Locale.tangentSpace, THREE.TangentSpaceNormalMap);
+	this.normalMapType.addValue(Locale.objectSpace, THREE.ObjectSpaceNormalMap);
 	this.normalMapType.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
@@ -143,7 +143,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map
-	this.form.addText("Displacement Map");
+	this.form.addText(Locale.displacementMap);
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(0, 100);
 	this.displacementMap.setOnChange(function(file)

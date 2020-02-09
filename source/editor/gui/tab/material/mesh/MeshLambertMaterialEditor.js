@@ -169,7 +169,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Reflectivity");
+	this.form.addText(Locale.reflectivity);
 	this.reflectivity = new NumberBox(this.form);
 	this.reflectivity.size.set(0, 18);
 	this.reflectivity.setStep(0.05);

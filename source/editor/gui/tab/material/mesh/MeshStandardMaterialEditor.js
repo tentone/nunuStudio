@@ -144,7 +144,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Bump map scale
-	this.form.addText("Bump Scale");
+	this.form.addText(Locale.bumpScale);
 	this.bumpScale = new Slider(this.form);
 	this.bumpScale.size.set(160, 18);
 	this.bumpScale.setRange(0, 1);
@@ -170,7 +170,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal map scale
-	this.form.addText("Normal Scale");
+	this.form.addText(Locale.normalScale);
 	this.normalScale = new VectorBox(this.form);
 	this.normalScale.size.set(0, 18);
 	this.normalScale.setType(VectorBox.VECTOR2);
@@ -184,11 +184,11 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal type
-	this.form.addText("Normal type");
+	this.form.addText(Locale.normalType);
 	this.normalMapType = new DropdownList(this.form);
 	this.normalMapType.size.set(100, 18);
-	this.normalMapType.addValue("Tangent Space", THREE.TangentSpaceNormalMap);
-	this.normalMapType.addValue("Object Space", THREE.ObjectSpaceNormalMap);
+	this.normalMapType.addValue(Locale.tangentSpace, THREE.TangentSpaceNormalMap);
+	this.normalMapType.addValue(Locale.objectSpace, THREE.ObjectSpaceNormalMap);
 	this.normalMapType.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
