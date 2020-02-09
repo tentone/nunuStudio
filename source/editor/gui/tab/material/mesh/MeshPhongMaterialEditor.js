@@ -312,7 +312,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Refraction
-	this.form.addText("Refraction Ratio");
+	this.form.addText(Locale.refractionRatio);
 	this.refractionRatio = new NumberBox(this.form);
 	this.refractionRatio.size.set(0, 18);
 	this.refractionRatio.setStep(0.05);
