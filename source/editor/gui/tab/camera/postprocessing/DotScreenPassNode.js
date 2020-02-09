@@ -6,7 +6,7 @@ function DotScreenPassNode(parent)
 
 	var self = this;
 
-	this.addText("Angle");
+	this.addText(Locale.angle);
 	this.angle = new NumberBox(this);
 	this.angle.size.set(60, 18);
 	this.angle.setOnChange(function()

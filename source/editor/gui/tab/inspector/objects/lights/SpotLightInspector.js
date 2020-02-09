@@ -18,7 +18,7 @@ function SpotLightInspector(parent, object)
 	this.form.nextRow();
 
 	//Penumbra
-	this.form.addText("Penumbra");
+	this.form.addText(Locale.penumbra);
 	this.penumbra = new Slider(this.form);
 	this.penumbra.size.set(160, 18);
 	this.penumbra.position.set(65, 110);
@@ -33,7 +33,7 @@ function SpotLightInspector(parent, object)
 	this.form.nextRow();
 
 	//Angle
-	this.form.addText("Angle");
+	this.form.addText(Locale.angle);
 	this.angle = new Slider(this.form);
 	this.angle.size.set(160, 18);
 	this.angle.setRange(0, 1.57);

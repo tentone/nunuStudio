@@ -65,7 +65,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Alpha map
-	this.form.addText("Alpha map");
+	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
 	this.alphaMap.setOnChange(function(file)

@@ -618,7 +618,7 @@ SideBar.prototype.createObject = function()
 		object.body.addShape(new CANNON.Particle());
 		object.name = "particle";
 		Editor.addObject(object, self.editor.scene);
-	}, "Particle");
+	}, Locale.particle);
 
 	physics.updateOptions();
 

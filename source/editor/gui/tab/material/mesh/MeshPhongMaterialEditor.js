@@ -107,7 +107,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Bump map
-	this.form.addText("Bump map");
+	this.form.addText(Locale.bumpMap);
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.size.set(0, 100);
 	this.bumpMap.setOnChange(function(file)
@@ -133,7 +133,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal map
-	this.form.addText("Normal map");
+	this.form.addText(Locale.normalMap);
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.size.set(0, 100);
 	this.normalMap.setOnChange(function(file)
@@ -211,7 +211,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Specular map
-	this.form.addText("Specular map");
+	this.form.addText(Locale.specularMap);
 	this.specularMap = new TextureForm(this.form);
 	this.specularMap.size.set(0, 100);
 	this.specularMap.setOnChange(function(file)
@@ -223,7 +223,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Emissive map
-	this.form.addText("Emissive map");
+	this.form.addText(Locale.emissiveMap);
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(0, 100);
 	this.emissiveMap.setOnChange(function(file)
@@ -260,7 +260,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Alpha map
-	this.form.addText("Alpha map");
+	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
 	this.alphaMap.setOnChange(function(file)
@@ -272,7 +272,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Environment map
-	this.form.addText("Environment map");
+	this.form.addText(Locale.environmentMap);
 	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(0, 100);
 	this.envMap.setOnChange(function(file)

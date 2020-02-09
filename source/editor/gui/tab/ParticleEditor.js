@@ -7,7 +7,7 @@
  */
 function ParticleEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Particle", Global.FILE_PATH + "icons/misc/particles.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.particle, Global.FILE_PATH + "icons/misc/particles.png");
 
 	var self = this;
 
@@ -151,7 +151,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Emmitter type
-	this.form.addText("Emitter Type");
+	this.form.addText(Locale.emitterType);
 	this.type = new DropdownList(this.form);
 	this.type.size.set(100, 18);
 	this.type.addValue(Locale.box, ParticleDistributions.BOX);
@@ -194,7 +194,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.addText(Locale.position);
 	this.form.nextRow();
 
-	this.form.addText("Initial");
+	this.form.addText(Locale.initial);
 	this.positionValue = new VectorBox(this.form);
 	this.positionValue.size.set(0, 18);
 	this.positionValue.setOnChange(function()
@@ -205,7 +205,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.positionValue);
 	this.form.nextRow();
 
-	this.form.addText("Variation");
+	this.form.addText(Locale.variation);
 	this.positionSpread = new VectorBox(this.form);
 	this.positionSpread.size.set(0, 18);
 	this.positionSpread.setOnChange(function()
@@ -217,10 +217,10 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Velocity
-	this.form.addText("Velocity");
+	this.form.addText(Locale.velocity);
 	this.form.nextRow();
 
-	this.form.addText("Initial");
+	this.form.addText(Locale.initial);
 	this.velocityValue = new VectorBox(this.form);
 	this.velocityValue.size.set(0, 18);
 	this.velocityValue.setOnChange(function()
@@ -231,7 +231,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.velocityValue);
 	this.form.nextRow();
 
-	this.form.addText("Variation");
+	this.form.addText(Locale.variation);
 	this.velocitySpread = new VectorBox(this.form);
 	this.velocitySpread.size.set(0, 18);
 	this.velocitySpread.setOnChange(function()
@@ -243,10 +243,10 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Acceleration
-	this.form.addText("Acceleration");
+	this.form.addText(Locale.acceleration);
 	this.form.nextRow();
 
-	this.form.addText("Initial");
+	this.form.addText(Locale.initial);
 	this.accelerationValue = new VectorBox(this.form);
 	this.accelerationValue.size.set(0, 18);
 	this.accelerationValue.setOnChange(function()
@@ -257,7 +257,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.accelerationValue);
 	this.form.nextRow();
 
-	this.form.addText("Variation");
+	this.form.addText(Locale.variation);
 	this.accelerationSpread = new VectorBox(this.form);
 	this.accelerationSpread.size.set(0, 18);
 	this.accelerationSpread.setOnChange(function()
@@ -269,7 +269,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Wiggle
-	this.form.addText("Wiggle");
+	this.form.addText(Locale.wiggle);
 	this.wiggleRow = new NumberRow(this.form);
 	this.wiggleRow.labelSize = 20;
 	this.wiggleRow.size.set(0, 18);
@@ -315,7 +315,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.sizeRow.labelSize = 35;
 	this.sizeRow.size.set(0, 18);
 
-	this.scaleMin = this.sizeRow.addValue("Min");
+	this.scaleMin = this.sizeRow.addValue(Locale.min);
 	this.scaleMin.setOnChange(function()
 	{
 		var min = self.scaleMin.getValue();
@@ -323,7 +323,7 @@ function ParticleEditor(parent, closeable, container, index)
 		self.scale.setRange(min, max);
 	});
 
-	this.scaleMax = this.sizeRow.addValue("Max");
+	this.scaleMax = this.sizeRow.addValue(Locale.max);
 	this.scaleMax.setOnChange(function()
 	{
 		var min = self.scaleMin.getValue();
@@ -356,7 +356,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.angleRow.labelSize = 35;
 	this.angleRow.size.set(0, 18);
 
-	this.angleMin = this.angleRow.addValue("Min");
+	this.angleMin = this.angleRow.addValue(Locale.min);
 	this.angleMin.setOnChange(function()
 	{
 		var min = self.angleMin.getValue();
@@ -364,7 +364,7 @@ function ParticleEditor(parent, closeable, container, index)
 		self.angle.setRange(min, max);
 	});
 
-	this.angleMax = this.angleRow.addValue("Max");
+	this.angleMax = this.angleRow.addValue(Locale.max);
 	this.angleMax.setOnChange(function()
 	{
 		var min = self.angleMin.getValue();
@@ -395,7 +395,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.addText(Locale.color);
 	this.form.nextRow();
 
-	this.form.addText("Base");
+	this.form.addText(Locale.base);
 	this.colorValue = new ColorGradientChooser(this.form);
 	this.colorValue.size.set(190, 18);
 	this.colorValue.setOnChange(function(color, index)
@@ -408,7 +408,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.colorValue);
 	this.form.nextRow();
 	
-	this.form.addText("Spread");
+	this.form.addText(Locale.spread);
 	this.colorSpread = new ColorGradientChooser(this.form);
 	this.colorSpread.size.set(190, 18);
 	this.colorSpread.setOnChange(function(color, index)

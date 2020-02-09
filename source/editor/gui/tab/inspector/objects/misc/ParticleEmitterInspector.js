@@ -7,7 +7,7 @@ function ParticleEmitterInspector(parent, object)
 	var self = this;
 
 	//Dynamic emitter
-	this.form.addText("Dynamic emitter");
+	this.form.addText(Locale.dynamicEmitter);
 	this.dynamicEmitter = new CheckBox(this.form);
 	this.dynamicEmitter.size.set(18, 18);
 	this.dynamicEmitter.setOnChange(function()

@@ -80,7 +80,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Specular map
-	this.form.addText("Specular map");
+	this.form.addText(Locale.specularMap);
 	this.specularMap = new TextureForm(this.form);
 	this.specularMap.size.set(0, 100);
 	this.specularMap.setOnChange(function(file)
@@ -92,7 +92,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Alpha map
-	this.form.addText("Alpha map");
+	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
 	this.alphaMap.setOnChange(function(file)
@@ -104,7 +104,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Emissive map
-	this.form.addText("Emissive map");
+	this.form.addText(Locale.emissiveMap);
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(0, 100);
 	this.emissiveMap.setOnChange(function(file)
@@ -141,7 +141,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Environment map
-	this.form.addText("Environment map");
+	this.form.addText(Locale.environmentMap);
 	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(0, 100);
 	this.envMap.setOnChange(function(file)

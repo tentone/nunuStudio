@@ -108,7 +108,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Roughness map
-	this.form.addText("Roughness map");
+	this.form.addText(Locale.roughnessMap);
 	this.roughnessMap = new TextureForm(this.form);
 	this.roughnessMap.size.set(0, 100);
 	this.roughnessMap.setOnChange(function(file)
@@ -120,7 +120,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Metalness map
-	this.form.addText("Metalness map");
+	this.form.addText(Locale.metalnessMap);
 	this.metalnessMap = new TextureForm(this.form);
 	this.metalnessMap.size.set(0, 100);
 	this.metalnessMap.setOnChange(function(file)
@@ -132,7 +132,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Bump map
-	this.form.addText("Bump map");
+	this.form.addText(Locale.bumpMap);
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.size.set(0, 100);
 	this.bumpMap.setOnChange(function(file)
@@ -158,7 +158,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal map
-	this.form.addText("Normal map");
+	this.form.addText(Locale.normalMap);
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.size.set(0, 100);
 	this.normalMap.setOnChange(function(file)
@@ -198,7 +198,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map
-	this.form.addText("Displacement map");
+	this.form.addText(Locale.displacementMap);
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(0, 100);
 	this.displacementMap.setOnChange(function(file)
@@ -236,7 +236,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Emissive map
-	this.form.addText("Emissive map");
+	this.form.addText(Locale.emissiveMap);
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(0, 100);
 	this.emissiveMap.setOnChange(function(file)
@@ -273,7 +273,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Alpha map
-	this.form.addText("Alpha map");
+	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
 	this.alphaMap.setOnChange(function(file)
@@ -285,7 +285,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	
 	//Environment map
-	this.form.addText("Environment map");
+	this.form.addText(Locale.environmentMap);
 	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(0, 100);
 	this.envMap.setOnChange(function(file)
@@ -323,7 +323,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	
 	//Ambient Occlusion map
-	this.form.addText("Ambient Occlusion");
+	this.form.addText(Locale.ambientOcclusion);
 	this.aoMap = new TextureForm(this.form);
 	this.aoMap.size.set(0, 100);
 	this.aoMap.setOnChange(function(file)

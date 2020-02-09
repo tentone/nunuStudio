@@ -56,7 +56,7 @@ function PhysicsObject()
 	this.world = null;
 
 	/**
-	 * Physics object position mode.
+	 * Physics object position mode, indicates how coordinates from the physics engine are transformed.
 	 *
 	 * @attribute mode
 	 * @type {number}
@@ -139,6 +139,13 @@ PhysicsObject.prototype.update = function(delta)
 	}
 	else if(this.mode === PhysicsObject.LOCAL)
 	{
+		//Physics transform matrix
+		var transform = new THREE.Matrix4();
+
+		//Get inverse of the world matrix
+		var inverse = new THREE.Matrix4();
+		inverse.getInverse(this.object.matrixWorld);
+
 		//TODO <ADD CODE HERE>
 		//this.position.copy(this.body.position);
 
