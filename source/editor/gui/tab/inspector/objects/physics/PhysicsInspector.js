@@ -46,7 +46,7 @@ function PhysicsInspector(parent, object)
 	this.mode.addValue(Locale.local, PhysicsObject.LOCAL);
 	this.mode.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.mode, "mode", self.mode.getValue()));
+		Editor.addAction(new ChangeAction(self.object, "mode", self.mode.getValue()));
 	});
 	this.form.add(this.mode);
 	this.form.nextRow();

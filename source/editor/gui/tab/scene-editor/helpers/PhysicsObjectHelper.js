@@ -1,9 +1,9 @@
 "use strict";
 
 /**
- * Helper to preview cannonjs physics objects.
+ * Helper to preview physics objects on the editor.
  *
- * Based on code from cannonjs debug shape renderer made by schteppe
+ * Based on code from CANNON debug shape renderer made by schteppe
  *
  * @class PhysicsObjectHelper
  */
@@ -42,6 +42,11 @@ PhysicsObjectHelper.CYLINDER = new THREE.CylinderBufferGeometry(1, 1, 10, 32);
 
 PhysicsObjectHelper.prototype = Object.create(THREE.Object3D.prototype);
 
+/**
+ * Update the helper from the physics body.
+ *
+ * @method update
+ */
 PhysicsObjectHelper.prototype.update = function()
 {
 	var meshes = this.meshes;
@@ -103,6 +108,12 @@ PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
 	this.scaleMesh(mesh, shape);
 };
 
+/**
+ * Check if the mesh attahched to this helper object matches the CANNON body shape.
+ *
+ * @method typeMatch
+ * @return {boolean} True if the mesh matches the shape.
+ */
 PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 {
 	if(!mesh)
@@ -118,10 +129,16 @@ PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 	(geometry.id === shape.geometryId && (shape instanceof CANNON.ConvexPolyhedron || shape instanceof CANNON.Trimesh) || shape instanceof CANNON.Heightfield);
 };
 
+/**
+ * Create a mesh to represent a CANNON physics shape and attach it to this helper object.
+ *
+ * @method createMesh
+ * @return {THREE.Mesh} Mesh created to represent the shape.
+ */
 PhysicsObjectHelper.prototype.createMesh = function(shape)
 {
-	var mesh;
 	var material = this.material;
+	var mesh = null;
 
 	switch(shape.type)
 	{
@@ -224,7 +241,7 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 			break;
 	}
 
-	if(mesh)
+	if(mesh !== null)
 	{
 		this.add(mesh);
 	}
@@ -232,6 +249,13 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 	return mesh;
 };
 
+/**
+ * Set to correct scale of the helper mesh based on the shape type and size configuration.
+ *
+ * @method scaleMesh
+ * @param {THREE.Mesh} mesh Mesh to be changed.
+ * @param {CANNON.Shape} shape Shape to analyse and extract scale from.
+ */
 PhysicsObjectHelper.prototype.scaleMesh = function(mesh, shape)
 {
 	var type = shape.type;

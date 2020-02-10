@@ -93,8 +93,6 @@ PhysicsObject.LOCAL = 101;
  */
 PhysicsObject.prototype.initialize = function()
 {
-	console.log(this.mode);
-	
 	if(this.mode === PhysicsObject.WORLD)
 	{
 		this.body.position.copy(this.position);
@@ -159,12 +157,11 @@ PhysicsObject.prototype.update = function(delta)
 
 		//Get inverse of the world matrix
 		var inverse = new THREE.Matrix4();
-		inverse.getInverse(this.object.matrixWorld);
+		inverse.getInverse(this.matrixWorld);
 
 		//Get position, scale and quaternion
-		var scale = new THREE.Vector3();
 		inverse.multiply(transform);
-		inverse.decompose(this.position, this.quaternion, scale);
+		inverse.decompose(this.position, this.quaternion, this.scale);
 	}
  
 	THREE.Object3D.prototype.update.call(this, delta);
