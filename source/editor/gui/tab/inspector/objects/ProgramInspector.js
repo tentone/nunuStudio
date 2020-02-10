@@ -7,11 +7,11 @@ function ProgramInspector(parent, object)
 	var self = this;
 
 	//Program information
-	this.form.addText("Information");
+	this.form.addText(Locale.information);
 	this.form.nextRow();
 
 	//Author
-	this.form.addText("Author");
+	this.form.addText(Locale.author);
 	this.author = new TextBox(this.form);
 	this.author.position.set(50, 35);
 	this.author.size.set(190, 18);
@@ -24,7 +24,7 @@ function ProgramInspector(parent, object)
 	this.form.nextRow();
 	
 	//Version
-	this.form.addText("Version");
+	this.form.addText(Locale.version);
 	this.version = new TextBox(this.form);
 	this.version.size.set(100, 18);
 	this.version.setOnChange(function()
@@ -47,7 +47,7 @@ function ProgramInspector(parent, object)
 	
 	//Handle pixel ratio
 	this.handlePixelRatio = new CheckBox(this.form);
-	this.form.addText("Pixel Ratio");
+	this.form.addText(Locale.pixelRatio);
 	this.handlePixelRatio.size.set(18, 18);
 	this.handlePixelRatio.setOnChange(function()
 	{
@@ -57,7 +57,7 @@ function ProgramInspector(parent, object)
 	this.form.nextRow()
 
 	//VR
-	this.form.addText("Virtual Reality");
+	this.form.addText(Locale.virtualReality);
 	this.form.nextRow();
 
 	//VR Enabled
@@ -85,7 +85,7 @@ function ProgramInspector(parent, object)
 	this.form.nextRow();
 
 	//Rendering
-	this.form.addText("Rendering");
+	this.form.addText(Locale.rendering);
 	this.form.nextRow();
 	this.rendererConfig = new RendererConfigurationFormTemplate(this.form, object.rendererConfig);
 }

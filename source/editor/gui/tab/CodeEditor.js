@@ -8,7 +8,7 @@
  */
 function CodeEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Code", Global.FILE_PATH + "icons/misc/code.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.codeEditor, Global.FILE_PATH + "icons/misc/code.png");
 	
 	var self = this;
 
@@ -36,7 +36,7 @@ function CodeEditor(parent, closeable, container, index)
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
 		
-		var refactor = context.addMenu("Refactor");
+		var refactor = context.addMenu(Locale.refactor);
 		refactor.addOption(Locale.rename, function()
 		{
 			self.server.rename(self.code);
@@ -62,7 +62,7 @@ function CodeEditor(parent, closeable, container, index)
 			self.code.execCommand("replaceAll");
 		});
 
-		context.addOption("Documentation", function()
+		context.addOption(Locale.documentation, function()
 		{
 			self.server.jumpToDef(self.code);
 		});
@@ -88,7 +88,7 @@ function CodeEditor(parent, closeable, container, index)
 		{
 			self.code.replaceSelection(Editor.clipboard.get("text"));
 		});
-		context.addOption("Auto ident", function()
+		context.addOption(Locale.autoIndent, function()
 		{
 			self.code.execCommand("indentAuto");
 		});

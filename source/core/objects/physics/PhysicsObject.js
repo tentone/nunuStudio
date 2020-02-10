@@ -93,6 +93,8 @@ PhysicsObject.LOCAL = 101;
  */
 PhysicsObject.prototype.initialize = function()
 {
+	console.log(this.mode);
+	
 	if(this.mode === PhysicsObject.WORLD)
 	{
 		this.body.position.copy(this.position);
@@ -100,10 +102,12 @@ PhysicsObject.prototype.initialize = function()
 	}
 	else if(this.mode === PhysicsObject.LOCAL)
 	{
-		var position = this.getWorldPosition();
+		var position = new THREE.Vector3();
+		this.getWorldPosition(position);
 		this.body.position.copy(position);
 
-		var quaternion = this.getWorldQuaternion();
+		var quaternion = new THREE.Quaternion();
+		this.getWorldQuaternion(quaternion);
 		this.body.quaternion.copy(quaternion);
 	}
 
@@ -139,23 +143,30 @@ PhysicsObject.prototype.update = function(delta)
 	}
 	else if(this.mode === PhysicsObject.LOCAL)
 	{
-		//Physics transform matrix
+		//Physics ransform matrix
 		var transform = new THREE.Matrix4();
+		if(this.body.fixedRotation)
+		{
+			transform.setPosition(this.body.position.x, this.body.position.y, this.body.position.z);
+		}
+		else
+		{
+			var quaternion = new THREE.Quaternion();
+			quaternion.copy(this.body.quaternion);
+			transform.makeRotationFromQuaternion(quaternion);
+			transform.setPosition(this.body.position.x, this.body.position.y, this.body.position.z);
+		}
 
 		//Get inverse of the world matrix
 		var inverse = new THREE.Matrix4();
 		inverse.getInverse(this.object.matrixWorld);
 
-		//TODO <ADD CODE HERE>
-		//this.position.copy(this.body.position);
-
-		if(!this.body.fixedRotation)
-		{
-			//this.quaternion.copy(this.body.quaternion);
-		}
+		//Get position, scale and quaternion
+		var scale = new THREE.Vector3();
+		inverse.multiply(transform);
+		inverse.decompose(this.position, this.quaternion, scale);
 	}
-
-
+ 
 	THREE.Object3D.prototype.update.call(this, delta);
 };
 

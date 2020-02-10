@@ -7,7 +7,7 @@ function DrawableInspector(parent, object)
 	var self = this;
 
 	//Cast shadow
-	this.form.addText("Cast Shadow");
+	this.form.addText(Locale.castShadows);
 	this.castShadow = new CheckBox(this.form);
 	this.castShadow.size.set(18, 18);
 	this.castShadow.setOnChange(function()
@@ -18,7 +18,7 @@ function DrawableInspector(parent, object)
 	this.form.nextRow();
 
 	//Receive shadow
-	this.form.addText("React Shadow");
+	this.form.addText(Locale.receiveShadows);
 	this.receiveShadow = new CheckBox(this.form);
 	this.receiveShadow.size.set(18, 18);
 	this.receiveShadow.setOnChange(function()

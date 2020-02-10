@@ -4,6 +4,9 @@
 
 ## Unpublished
 ### V0.9.6 Beta
+ - Fixed canvas background.
+ - Physics object positioning mode.
+ - Terrain and shaders tutorials.
  - CSS 3D renderer support.
     - Perspective transformed HTML containers.
     - Billboarded HTML containers.

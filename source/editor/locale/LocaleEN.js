@@ -204,6 +204,7 @@ LocaleManager.register(
 	ambientOcclusion: "Ambient Occlusion",
 	sky: "Sky",
 	castShadows: "Cast Shadows",
+	receiveShadows: "Receive Shadows",
 	sunDistance: "Sun distance",
 	autoUpdate: "Auto update",
 	skyColor: "Sky color",
@@ -241,6 +242,10 @@ LocaleManager.register(
 	clearcoatNormalMap: "Clear Coat Normal Map",
 	clearcoatNormalScale: "Clear Coat Normal Scale",
 	refractionRatio: "Refraction Ratio",
+	version: "Version",
+	author: "Author",
+	virtualReality: "Virtual Reality",
+	pixelRatio: "Pixel Ratio",
 
 	//Values
 	tangentSpace: "Tangent Space",
@@ -299,6 +304,8 @@ LocaleManager.register(
 	simplify: "Simplify",
 
 	//Editor
+	information: "Information",
+	rendering: "Rendering",
 	project: "Project",
 	run: "Run",
 	stop: "Stop",
@@ -330,6 +337,10 @@ LocaleManager.register(
 	play: "Play",
 	selectObjects: "Select objects",
 	calculateProbe: "Calculate light",
+	codeEditor: "Code Editor",
+	refactor: "Refactor",
+	documentation: "Documentation",
+	autoIndent: "Auto Indent",
 
 	//Editor settings
 	reset: "Reset",

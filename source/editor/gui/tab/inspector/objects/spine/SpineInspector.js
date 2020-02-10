@@ -30,7 +30,7 @@ function SpineInspector(parent, object)
 
 	//Cast shadow
 	this.castShadow = new CheckBox(this.form);
-	this.form.addText("Cast Shadow");
+	this.form.addText(Locale.castShadows);
 	this.castShadow.size.set(18, 18);
 	this.castShadow.setOnChange(function()
 	{
@@ -41,7 +41,7 @@ function SpineInspector(parent, object)
 
 	//Receive shadow
 	this.receiveShadow = new CheckBox(this.form);
-	this.form.addText("React Shadow");
+	this.form.addText(Locale.receiveShadows);
 	this.receiveShadow.size.set(18, 18);
 	this.receiveShadow.setOnChange(function()
 	{
