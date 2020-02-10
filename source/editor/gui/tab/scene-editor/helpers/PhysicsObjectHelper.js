@@ -19,6 +19,12 @@ function PhysicsObjectHelper(object, color)
 	 */
 	this.object = object;
 
+	/**
+	 * Meshes used to represent the shapes attached to the body.
+	 *
+	 * @attribute meshes
+	 * @type {Array}
+	 */
 	this.meshes = [];
 
 	this.material = new THREE.MeshBasicMaterial(
@@ -49,49 +55,47 @@ PhysicsObjectHelper.prototype = Object.create(THREE.Object3D.prototype);
  */
 PhysicsObjectHelper.prototype.update = function()
 {
-	var meshes = this.meshes;
-	var shapeWorldPosition = this.tmpVec0;
-	var shapeWorldQuaternion = this.tmpQuat0;
-
-	var meshIndex = 0;
-
 	var body = this.object.body;
 	body.position.copy(this.object.position);
 	body.quaternion.copy(this.object.quaternion);
 
+	var index = 0;
+
+	// Iterate all the shapes in the physics body
 	for(var j = 0; j < body.shapes.length; j++)
 	{
 		var shape = body.shapes[j];
-		this.updateMesh(meshIndex, body, shape);
-		var mesh = meshes[meshIndex];
+		this.updateMesh(index, body, shape);
 
+		var mesh = this.meshes[index];
 		if(mesh)
 		{
+
 			//Get world position
-			body.quaternion.vmult(body.shapeOffsets[j], shapeWorldPosition);
-			body.position.vadd(shapeWorldPosition, shapeWorldPosition);
+			body.quaternion.vmult(body.shapeOffsets[j], this.tmpVec0);
+			body.position.vadd(this.tmpVec0, this.tmpVec0);
 
 			//Get world quaternion
-			body.quaternion.mult(body.shapeOrientations[j], shapeWorldQuaternion);
+			body.quaternion.mult(body.shapeOrientations[j], this.tmpQuat0);
 
 			//Copy to meshes
-			mesh.position.copy(shapeWorldPosition);
-			mesh.quaternion.copy(shapeWorldQuaternion);
+			mesh.position.copy(this.tmpVec0);
+			mesh.quaternion.copy(this.tmpQuat0);
 		}
 
-		meshIndex++;
+		index++;
 	}
 
-	for(var i = meshIndex; i < meshes.length; i++)
+	for(var i = index; i < this.meshes.length; i++)
 	{
-		var mesh = meshes[i];
+		var mesh = index[i];
 		if(mesh)
 		{
 			this.remove(mesh);
 		}
 	}
 
-	meshes.length = meshIndex;
+	this.meshes.length = meshIndex;
 };
 
 PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
