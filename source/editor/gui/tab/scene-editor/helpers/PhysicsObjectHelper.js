@@ -70,7 +70,6 @@ PhysicsObjectHelper.prototype.update = function()
 		var mesh = this.meshes[index];
 		if(mesh)
 		{
-
 			//Get world position
 			body.quaternion.vmult(body.shapeOffsets[j], this.tmpVec0);
 			body.position.vadd(this.tmpVec0, this.tmpVec0);
