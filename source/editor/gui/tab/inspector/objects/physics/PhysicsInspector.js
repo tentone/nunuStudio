@@ -168,6 +168,7 @@ PhysicsInspector.prototype.updateInspector = function()
 {
 	ObjectInspector.prototype.updateInspector.call(this);
 
+	this.mode.setValue(this.object.mode);
 	this.bodyType.setValue(this.object.body.type);
 	this.mass.setValue(this.object.body.mass);
 	this.linearDamping.setValue(this.object.body.linearDamping);

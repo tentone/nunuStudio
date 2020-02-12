@@ -53,15 +53,19 @@
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Physics</h2>
 			<p>In this tutorial we will experiment how physics work inside nunuStudio, physics are represented as objects in the editor, physics object dont have a visual representation they are just used for physics simulations.</p>
-			<p>Physics in nunuStudio are powered by cannon.js by schteppe, for more information about the physics engine please consult http://www.cannonjs.org/.</p>
+			<p>Physics in nunuStudio are powered by cannon.js developed by schteppe, for more information about the physics engine please consult http://www.cannonjs.org/.</p>
+			<p>nunuStudio encapsulates the physics bodies in objects, these bodies are managed and updated on a scene basis, physics configuration is managed by scene.</p>
 
 			<h3 class="black">Adding a physics object</h3>
-			<p>To add physics object simply select the desired physics object in the left toolbar and add it to the scene, after that add a mesh object as children of the newly created physics object to make it visible in the scene.</p>
-			<p>Dont forget to add a ground object so that other physics object don't fall out of the screen.</p>
+
+			<p>To add physics object select the desired physics object in the left toolbar and add it to the scene, after that add a mesh object as children of the newly created physics object to make it visible in the scene. Dont forget to add a ground object so that other physics object don't fall out of the screen.</p>
+
 			<video src="video.mp4" style="width:60%; margin-left:20%" controls></video>
-			<p>Physics object can be configured as dynamic, static or kinenamic objects. Dynamic objects are updated dinamically and detect collisions, kinematic objects are updated only based on their speed, and static objects are not updated at all.</p>
+
+			<p>Physics object can be configured as dynamic, static or kinenamic objects. Dynamic objects are updated dinamically and detect collisions, kinematic objects are updated only based on their speed, and static objects are not updated at all. Static objects behave likes walls or the floor.</p>
 
 			<h3 class="black">Controlling using the keyboard</h3>
+			
 			<p>To interact with physics objects using scrips we need to get the physics body attached to that object. After that we can directly apply forces, change the velocity, etc.</p>
 			<p>The following code gets an physics object body and using the keyboard WASD keys and the spacebar we add velocity to that body forcing the cube to move around.</p>
 			<pre><code class="javascript">var body;
