@@ -26,6 +26,7 @@ function PhysicsObjectHelper(object, color)
 	 * @type {Array}
 	 */
 	this.meshes = [];
+	this.matrixAutoUpdate = false;
 
 	this.material = new THREE.MeshBasicMaterial(
 	{
@@ -34,11 +35,6 @@ function PhysicsObjectHelper(object, color)
 		transparent: true,
 		opacity: 0.5
 	});
-
-	this.tmpVec0 = new CANNON.Vec3();
-	this.tmpVec1 = new CANNON.Vec3();
-	this.tmpVec2 = new CANNON.Vec3();
-	this.tmpQuat0 = new CANNON.Vec3();
 }
 
 PhysicsObjectHelper.SPHERE = new THREE.SphereBufferGeometry(1, 32, 32);
@@ -55,31 +51,34 @@ PhysicsObjectHelper.prototype = Object.create(THREE.Object3D.prototype);
  */
 PhysicsObjectHelper.prototype.update = function()
 {
-	var body = this.object.body;
-	body.position.copy(this.object.position);
-	body.quaternion.copy(this.object.quaternion);
+	this.matrix.copy(this.object.matrixWorld);
 
+	var body = this.object.body;
 	var index = 0;
 
 	// Iterate all the shapes in the physics body
 	for(var j = 0; j < body.shapes.length; j++)
 	{
 		var shape = body.shapes[j];
+
 		this.updateMesh(index, body, shape);
 
 		var mesh = this.meshes[index];
-		if(mesh)
+		if(mesh !== undefined)
 		{
+			var tmpVec = new CANNON.Vec3();
+			var tmpQuat = new CANNON.Vec3();
+
 			//Get world position
-			body.quaternion.vmult(body.shapeOffsets[j], this.tmpVec0);
-			body.position.vadd(this.tmpVec0, this.tmpVec0);
+			body.quaternion.vmult(body.shapeOffsets[j], tmpVec);
+			body.position.vadd(tmpVec, tmpVec);
 
 			//Get world quaternion
-			body.quaternion.mult(body.shapeOrientations[j], this.tmpQuat0);
+			body.quaternion.mult(body.shapeOrientations[j], tmpQuat);
 
 			//Copy to meshes
-			mesh.position.copy(this.tmpVec0);
-			mesh.quaternion.copy(this.tmpQuat0);
+			mesh.position.copy(tmpVec);
+			mesh.quaternion.copy(tmpQuat);
 		}
 
 		index++;
@@ -94,7 +93,7 @@ PhysicsObjectHelper.prototype.update = function()
 		}
 	}
 
-	this.meshes.length = meshIndex;
+	this.meshes.length = index;
 };
 
 PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
@@ -108,6 +107,7 @@ PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
 		}
 		mesh = this.meshes[index] = this.createMesh(shape);
 	}
+
 	this.scaleMesh(mesh, shape);
 };
 
@@ -195,9 +195,9 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 
 		case CANNON.Shape.types.TRIMESH:
 			var geometry = new THREE.Geometry();
-			var v0 = this.tmpVec0;
-			var v1 = this.tmpVec1;
-			var v2 = this.tmpVec2;
+			var v0 = new CANNON.Vec3();
+			var v1 = new CANNON.Vec3();
+			var v2 = new CANNON.Vec3();
 			for(var i = 0; i < shape.indices.length / 3; i++)
 			{
 				shape.getTriangleVertices(i, v0, v1, v2);
@@ -213,9 +213,9 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 
 		case CANNON.Shape.types.HEIGHTFIELD:
 			var geometry = new THREE.Geometry();
-			var v0 = this.tmpVec0;
-			var v1 = this.tmpVec1;
-			var v2 = this.tmpVec2;
+			var v0 = new CANNON.Vec3();
+			var v1 = new CANNON.Vec3();
+			var v2 = new CANNON.Vec3();
 
 			for(var xi = 0; xi < shape.data.length - 1; xi++)
 			{
