@@ -95,17 +95,11 @@ PhysicsObject.prototype.initialize = function()
 {
 	if(this.mode === PhysicsObject.WORLD)
 	{
-		console.log("nunuStudio: Physics World Mode", this);
-
 		this.body.position.copy(this.position);
 		this.body.quaternion.copy(this.quaternion);	
 	}
 	else if(this.mode === PhysicsObject.LOCAL)
 	{
-		console.log("nunuStudio: Physics Local mode", this);
-
-		this.updateMatrixWorld(true);
-
 		var position = new THREE.Vector3();
 		this.getWorldPosition(position);
 		this.body.position.copy(position);
@@ -147,9 +141,9 @@ PhysicsObject.prototype.update = function(delta)
 	}
 	else if(this.mode === PhysicsObject.LOCAL)
 	{
-		//Physics ransform matrix
-		var transform = new THREE.Matrix4();
 
+		//Physics transform matrix
+		var transform = new THREE.Matrix4();
 		if(this.body.fixedRotation)
 		{
 			transform.setPosition(this.body.position.x, this.body.position.y, this.body.position.z);
@@ -162,13 +156,15 @@ PhysicsObject.prototype.update = function(delta)
 			transform.setPosition(this.body.position.x, this.body.position.y, this.body.position.z);
 		}
 
+
 		//Get inverse of the world matrix
 		var inverse = new THREE.Matrix4();
-		inverse.getInverse(this.matrixWorld);
+		inverse.getInverse(this.parent.matrixWorld);
 
 		//Get position, scale and quaternion
-		transform.multiply(inverse);
-		transform.decompose(this.position, this.quaternion, this.scale);
+		var scale = new THREE.Vector3();
+		inverse.multiply(transform);
+		inverse.decompose(this.position, this.quaternion, scale);
 	}
  
 	THREE.Object3D.prototype.update.call(this, delta);

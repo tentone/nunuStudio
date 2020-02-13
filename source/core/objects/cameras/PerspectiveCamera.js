@@ -188,8 +188,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 	}
 
 	this.projectionMatrix.makePerspective(left, left + width, top, top - height, this.near, this.far);
-
-	this.projectionMatrixInverse.getInverse( this.projectionMatrix );
+	this.projectionMatrixInverse.getInverse(this.projectionMatrix);
 };
 
 PerspectiveCamera.prototype.toJSON = function(meta)
