@@ -273,7 +273,16 @@
 														<a href="#attr_body">body</a>
 													</li>
 													<li class="index-item attr">
+														<a href="#attr_LOCAL">LOCAL</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_mode">mode</a>
+													</li>
+													<li class="index-item attr">
 														<a href="#attr_world">world</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_WORLD">WORLD</a>
 													</li>
 											</ul>
 										</div>
@@ -478,7 +487,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Physics body contains the following attributes.</p>
+													<p>Physics body contains the following attributes:</p>
 											<ul>
 											<li>position Vec3</li>
 											<li>velocity Vec3</li>
@@ -498,6 +507,62 @@
 											<li>fixedRotation Boolean</li>
 											<li>shape Array</li>
 											</ul>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_LOCAL" class="attr item">
+												<a name="config_LOCAL"></a> 
+												<h3 class="name"><code>LOCAL</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>The position of the object is adjusted to follow the parent object transformation.</p>
+											<p>This mode should be used for objects placed inside others.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_mode" class="attr item">
+												<a name="config_mode"></a> 
+												<h3 class="name"><code>mode</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Physics object position mode, indicates how coordinates from the physics engine are transformed.</p>
 											
 												</div>
 											
@@ -525,6 +590,34 @@
 											
 												<div class="description">
 													<p>Physics world.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_WORLD" class="attr item">
+												<a name="config_WORLD"></a> 
+												<h3 class="name"><code>WORLD</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>The position of the object is copied directly from the body.</p>
 											
 												</div>
 											

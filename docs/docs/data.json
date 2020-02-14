@@ -9838,6 +9838,8 @@
             "file": "..\\source\\core\\objects\\lights\\LightProbe.js",
             "line": 25,
             "description": "Generate light probe data from cube camera render.",
+            "itemtype": "method",
+            "name": "generate",
             "class": "LightProbe",
             "module": "Lights"
         },
@@ -11878,7 +11880,7 @@
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
             "line": 23,
-            "description": "Physics body contains the following attributes.\n - position Vec3\n - velocity Vec3\n - torque Vec3\n - angularVelocity Vec3\n - quaternion Quaternion\n - mass Number\n - material Material\n - type Number\n - linearDamping Number\n - angularDamping Number\n - allowSleep Boolean\n - sleepSpeedLimit Number\n - sleepTimeLimit Number\n - collisionFilterGroup Number\n - collisionFilterMask Number\n - fixedRotation Boolean\n - shape Array",
+            "description": "Physics body contains the following attributes:\n - position Vec3\n - velocity Vec3\n - torque Vec3\n - angularVelocity Vec3\n - quaternion Quaternion\n - mass Number\n - material Material\n - type Number\n - linearDamping Number\n - angularDamping Number\n - allowSleep Boolean\n - sleepSpeedLimit Number\n - sleepTimeLimit Number\n - collisionFilterGroup Number\n - collisionFilterMask Number\n - fixedRotation Boolean\n - shape Array",
             "itemtype": "attribute",
             "name": "body",
             "type": "{CANNON.Body}",
@@ -11897,7 +11899,39 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 61,
+            "line": 58,
+            "description": "Physics object position mode, indicates how coordinates from the physics engine are transformed.",
+            "itemtype": "attribute",
+            "name": "mode",
+            "type": "{number}",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 69,
+            "description": "The position of the object is copied directly from the body.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "WORLD",
+            "type": "{number}",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 78,
+            "description": "The position of the object is adjusted to follow the parent object transformation.\n\nThis mode should be used for objects placed inside others.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "LOCAL",
+            "type": "{number}",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 89,
             "description": "Intialize physics object and add it to the scene physics world.",
             "itemtype": "method",
             "name": "initialize",
@@ -11906,7 +11940,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 93,
+            "line": 127,
             "description": "Update object position and rotation based on cannon.js body.",
             "itemtype": "method",
             "name": "update",
@@ -11915,7 +11949,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 109,
+            "line": 173,
             "description": "Add shape to physics object body.",
             "params": [
                 {
@@ -11931,7 +11965,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 123,
+            "line": 187,
             "description": "Create JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14815,12 +14849,15 @@
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
             "line": 12,
             "description": "Canvas background color, optional only used if specified.\n\nDifferent from the clear color used to clear the render target.",
+            "itemtype": "property",
+            "name": "backgroundColor",
+            "type": "{string}",
             "class": "RendererConfiguration",
             "module": "Postprocessing"
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 19,
+            "line": 22,
             "description": "Prefered redering backend API to use if available.\n\nIf the selected backend is not available it defaults to WebGL.\n\nShader code might not be cross compatible between rendering backends.",
             "itemtype": "property",
             "name": "backend",
@@ -14830,7 +14867,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 31,
+            "line": 34,
             "description": "Defines whether the renderer should automatically clear its output before rendering a frame.",
             "itemtype": "property",
             "name": "autoClear",
@@ -14840,7 +14877,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 39,
+            "line": 42,
             "description": "Defines whether the renderer should clear the color buffer.",
             "itemtype": "property",
             "name": "autoClearColor",
@@ -14850,7 +14887,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 47,
+            "line": 50,
             "description": "Defines whether the renderer should clear the depth buffer.",
             "itemtype": "property",
             "name": "autoClearDepth",
@@ -14860,7 +14897,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 55,
+            "line": 58,
             "description": "Defines whether the renderer should clear the stencil buffer.",
             "itemtype": "property",
             "name": "autoClearStencil",
@@ -14870,7 +14907,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 63,
+            "line": 66,
             "description": "Antialiasing flag.",
             "itemtype": "property",
             "name": "antialiasing",
@@ -14881,7 +14918,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 72,
+            "line": 75,
             "description": "If true the program is rendered with shadows.",
             "itemtype": "property",
             "name": "shadows",
@@ -14892,7 +14929,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 81,
+            "line": 84,
             "description": "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
             "itemtype": "property",
             "name": "@stencil",
@@ -14902,7 +14939,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 89,
+            "line": 92,
             "description": "Shadow map filtering type.",
             "itemtype": "property",
             "name": "shadowsType",
@@ -14913,7 +14950,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 98,
+            "line": 101,
             "description": "Enables automatic updates to the shadows in the scene.\n\nIf you do not require dynamic lighting / shadows, you may set this to false.\n\nUse renderer.shadowMap.needsUpdate to update the shadow map.",
             "itemtype": "property",
             "name": "shadowsAutoUpdate",
@@ -14923,7 +14960,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 110,
+            "line": 113,
             "description": "Tonemapping can be used to remap the color of the image to a diferent set giving the scene a different color mood and/or dynamic color based on global luminosity.",
             "itemtype": "property",
             "name": "toneMapping",
@@ -14934,7 +14971,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 119,
+            "line": 122,
             "description": "Exposure level of tone mapping.",
             "itemtype": "property",
             "name": "toneMappingExposure",
@@ -14944,7 +14981,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 127,
+            "line": 130,
             "description": "Tone mapping white point.",
             "itemtype": "property",
             "name": "toneMappingWhitePoint",
@@ -14954,7 +14991,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 135,
+            "line": 138,
             "description": "If true the renderer sorts the objects from back to front for rendering.\n\nImportant if using multiple transparent objects.",
             "itemtype": "property",
             "name": "sortObjects",
@@ -14964,7 +15001,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 145,
+            "line": 148,
             "description": "Gamma factor applied to the image.",
             "itemtype": "property",
             "name": "gammaFactor",
@@ -14974,7 +15011,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 153,
+            "line": 156,
             "description": "Shader precision. Can be \"highp\", \"mediump\" or \"lowp\". Defaults to \"highp\" if supported by the device.",
             "itemtype": "property",
             "name": "precision",
@@ -14984,7 +15021,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 161,
+            "line": 164,
             "description": "Whether the canvas contains an alpha (transparency) buffer or not.",
             "itemtype": "property",
             "name": "alpha",
@@ -14994,7 +15031,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 169,
+            "line": 172,
             "description": "Whether the renderer will assume that colors have premultiplied alpha.",
             "itemtype": "property",
             "name": "premultipliedAlpha",
@@ -15004,7 +15041,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 177,
+            "line": 180,
             "description": "Whether to preserve the buffers until manually cleared or overwritten.",
             "itemtype": "property",
             "name": "preserveDrawingBuffer",
@@ -15014,7 +15051,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 185,
+            "line": 188,
             "description": "Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be \"high-performance\", \"low-power\" or \"default\".",
             "itemtype": "property",
             "name": "powerPreference",
@@ -15024,7 +15061,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 193,
+            "line": 196,
             "description": "Whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene.",
             "itemtype": "property",
             "name": "logarithmicDepthBuffer",
@@ -15034,7 +15071,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 201,
+            "line": 204,
             "description": "Whether to use physically correct lighting mode.",
             "itemtype": "property",
             "name": "physicallyCorrectLights",
@@ -15044,7 +15081,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 209,
+            "line": 212,
             "description": "Defines whether material shader programs are checked for errors during compilation and linkage process.",
             "itemtype": "property",
             "name": "checkShaderErrors",
@@ -15054,7 +15091,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 230,
+            "line": 233,
             "description": "Use WebGL 1.0 to render data.\n\nMost devices fully support WebGL 1.0 at this point, should work for any type of device.",
             "static": 1,
             "itemtype": "attribute",
@@ -15065,7 +15102,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 241,
+            "line": 244,
             "description": "Use WebGL 2.0 to render data, should be faster for some types of data.\n\nAdditinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.",
             "static": 1,
             "itemtype": "attribute",
@@ -15076,7 +15113,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 252,
+            "line": 255,
             "description": "Create a THREE renderer object based on the renderer configuration.",
             "itemtype": "method",
             "name": "createRenderer",
@@ -19721,14 +19758,5 @@
             "module": "Runtime"
         }
     ],
-    "warnings": [
-        {
-            "message": "Missing item type\nGenerate light probe data from cube camera render.",
-            "line": " ..\\source\\core\\objects\\lights\\LightProbe.js:25"
-        },
-        {
-            "message": "Missing item type\nCanvas background color, optional only used if specified.\n\nDifferent from the clear color used to clear the render target.",
-            "line": " ..\\source\\core\\renderer\\RendererConfiguration.js:12"
-        }
-    ]
+    "warnings": []
 }
