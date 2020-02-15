@@ -31,6 +31,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 
 	THREE.Texture.call(this, document.createElement("img"), mapping, THREE.RepeatWrapping, THREE.RepeatWrapping, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
+	this.matrixAutoUpdate = true;
 	this.name = "animation";
 	this.category = "SpriteSheet";
 	this.disposed = false;
@@ -207,6 +208,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 
 		self.offset.x = (self.currentFrame % self.framesHorizontal) / self.framesHorizontal;
 		self.offset.y = (1 - self.repeat.y) - Math.floor(self.currentFrame / self.framesHorizontal) / self.framesVertical;
+		self.needsUpdate = true;
 
 		if(!self.disposed)
 		{
