@@ -31,7 +31,6 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 
 	THREE.Texture.call(this, document.createElement("img"), mapping, THREE.RepeatWrapping, THREE.RepeatWrapping, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
-	this.matrixAutoUpdate = true;
 	this.name = "animation";
 	this.category = "SpriteSheet";
 	this.disposed = false;
