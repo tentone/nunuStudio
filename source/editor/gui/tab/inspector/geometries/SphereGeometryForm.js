@@ -96,6 +96,6 @@ SphereGeometryForm.prototype.updateValues = function()
 	this.phiStart.setValue(this.object.geometry.parameters.phiStart || 0);
 	this.phiLength.setValue(this.object.geometry.parameters.phiLength || Math.PI * 2);
 	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
-	this.thetaLength.setValue(this.object.geometry.parameters.thetaStart || Math.PI);
+	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI);
 	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };
