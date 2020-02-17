@@ -33,7 +33,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 
 	this.name = "animation";
 	this.category = "SpriteSheet";
-	//this.disposed = false;
+	this.disposed = false;
 	this.format = this.img.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
 
@@ -59,24 +59,10 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	this._framesHorizontal = framesHorizontal;
 	this._framesVertical = framesVertical;
 
-	var _disposed = false;
-
 	var self = this;
+
 	Object.defineProperties(this,
 	{
-		disposed:
-		{
-			get: function()
-			{
-				return _disposed;
-			},
-			set: function(value)
-			{
-				console.log("nunuStudio: Set _disposed to ", value);
-				_disposed = value;
-			}
-		},
-
 		/**
 		 * Spritesheet number of frames horizontally.
 		 *
@@ -89,13 +75,13 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		{
 			get: function()
 			{
-				return self._framesHorizontal;
+				return this._framesHorizontal;
 			},
 			set: function(value)
 			{
-				self._framesHorizontal = value;
-				self.repeat.x = 1 / value;
-				self.totalFrames = self._framesHorizontal * self._framesVertical;
+				this._framesHorizontal = value;
+				this.repeat.x = 1 / value;
+				this.totalFrames = this._framesHorizontal * this._framesVertical;
 			}
 		},
 
@@ -111,13 +97,13 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		{
 			get: function()
 			{
-				return self._framesVertical;
+				return this._framesVertical;
 			},
 			set: function(value)
 			{
-				self._framesVertical = value;
-				self.repeat.y = 1 / value;
-				self.totalFrames = self._framesHorizontal * self._framesVertical;
+				this._framesVertical = value;
+				this.repeat.y = 1 / value;
+				this.totalFrames = this._framesHorizontal * this._framesVertical;
 			}
 		},
 
@@ -131,15 +117,15 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		{
 			get: function()
 			{
-				return self._endFrame;
+				return this._endFrame;
 			},
 			set: function(value)
 			{
-				if(value > self._totalFrames)
+				if(value > this._totalFrames)
 				{
-					value = self._totalFrames;
+					value = this._totalFrames;
 				}
-				self._endFrame = value;
+				this._endFrame = value;
 			}
 		},
 
@@ -154,7 +140,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		{
 			get: function()
 			{
-				return self._beginFrame;
+				return this._beginFrame;
 			},
 			set: function(value)
 			{
@@ -162,8 +148,8 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 				{
 					value = 0;
 				}
-				self.currentFrame = value;
-				self._beginFrame = value;
+				this.currentFrame = value;
+				this._beginFrame = value;
 			}
 		},
 
@@ -179,13 +165,13 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		{
 			get: function()
 			{
-				return self._totalFrames;
+				return this._totalFrames;
 			},
 			set: function(value)
 			{
-				self._beginFrame = 0;
-				self._endFrame = value;
-				self._totalFrames = value;
+				this._beginFrame = 0;
+				this._endFrame = value;
+				this._totalFrames = value;
 			}
 		}
 	});
@@ -219,12 +205,18 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 			setTimeout(update, self.animationSpeed * 1e3);
 		}
 	};
+
 	update();
 }
 
 SpriteSheetTexture.prototype = Object.create(THREE.Texture.prototype);
 SpriteSheetTexture.isTexture = true;
 
+/**
+ * Step the sprite sheet animation, move to next frame and recalculate the texture offset.
+ *
+ * @method step
+ */
 SpriteSheetTexture.prototype.step = function()
 {
 	this.currentFrame++;
@@ -288,7 +280,7 @@ SpriteSheetTexture.prototype.setAnimationFrames = function(beginFrame, endFrame)
  * @method dispose
  */
 SpriteSheetTexture.prototype.dispose = function()
-{	
+{
 	THREE.Texture.prototype.dispose.call(this);
 
 	this.disposed = true;

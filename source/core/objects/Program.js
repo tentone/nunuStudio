@@ -140,7 +140,17 @@ function Program(name)
 	this.defaultCamera = null;
 
 	/**
-	 * Keyboard input object.
+	 * Scene currently running in the program, runtime variable.
+	 *
+	 * Should never be manually defined, change it using the setScene(scene) method.
+	 *
+	 * @property scene
+	 * @type {Scene}
+	 */
+	this.scene = null;
+
+	/**
+	 * Keyboard input object, runtime variable.
 	 *
 	 * @property keyboard
 	 * @type {Keyboard}
@@ -148,7 +158,7 @@ function Program(name)
 	this.keyboard = null;
 
 	/**
-	 * Mouse input object.
+	 * Mouse input object, runtime variable.
 	 *
 	 * @property mouse
 	 * @type {Mouse}
@@ -164,15 +174,7 @@ function Program(name)
 	this.renderer = null;
 
 	/**
-	 * Scene currently running in the program.
-	 *
-	 * @property scene
-	 * @type {Scene}
-	 */
-	this.scene = null;
-
-	/**
-	 * Canvas being used to draw content.
+	 * Canvas being used to draw content by the renderer.
 	 *
 	 * This canvas is where the WebGL rendering context was created.
 	 *
@@ -192,7 +194,7 @@ function Program(name)
 	this.division = null;
 
 	/**
-	 * Event manager used to attach in program events.
+	 * Event manager used to attach and manage program events.
 	 *
 	 * @property manager
 	 * @type {EventManager}
@@ -201,6 +203,8 @@ function Program(name)
 
 	/**
 	 * Clock object used to measure times between frames.
+	 *
+	 * The time measured is passed down to the scene and its children elements.
 	 *
 	 * @property clock
 	 * @type {THREE.Clock}
@@ -262,6 +266,8 @@ Program.prototype.initialize = function()
 
 /**
  * Set program mouse and keyboard.
+ *
+ * Should be set before initialize() is called otherwise a keyboard and mouse are created by default.
  * 
  * @method setMouseKeyboard
  * @param {Mouse} mouse
@@ -269,8 +275,24 @@ Program.prototype.initialize = function()
  */
 Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 {
-	this.mouse = mouse;
-	this.keyboard = keyboard;
+	if(this.mouse !== mouse)
+	{
+		if(this.mouse !== null)
+		{
+			this.mouse.dispose();
+		}
+
+		this.mouse = mouse;
+	}
+
+	if(this.keyboard !== keyboard)
+	{
+		if(this.keyboard !== null)
+		{
+			this.keyboard.dispose();
+		}
+		this.keyboard = keyboard;	
+	}
 };
 
 /**
@@ -406,19 +428,20 @@ Program.prototype.exitVR = function()
  */
 Program.prototype.setScene = function(scene)
 {
+	//Try to get scene by UUID
+	if(typeof scene === "string")
+	{
+		scene = this.getObjectByName(scene);
+	}
+
+	//Dispose old scene to free up resources
 	if(this.scene !== null)
 	{
 		this.scene.dispose();
 	}
 
-	if(scene instanceof Scene)
-	{
-		this.scene = scene;
-	}
-	else if(typeof scene === "string")
-	{
-		this.scene = this.getObjectByName(scene);
-	}
+	//Set new scene and inialize its resources
+	this.scene = scene;
 
 	if(this.scene !== null)
 	{
@@ -428,6 +451,10 @@ Program.prototype.setScene = function(scene)
 		}
 
 		this.scene.initialize();
+	}
+	else
+	{
+		console.warn("nunuStudio: Program setScene scene is null.");
 	}
 };
 
@@ -482,12 +509,6 @@ Program.prototype.add = function(scene)
 	{
 		scene.parent = this;
 		this.children.push(scene);
-
-		//If first scene set as actual scene
-		if(this.children.length === 1)
-		{
-			this.scene = this.children[0];
-		}
 	}
 	else
 	{
