@@ -1,9 +1,11 @@
 "use strict";
 
 /**
- *
+ * Capsule like geometry, with configurable top and bottom sizes.
  *
  * @author maximequiblier
+ * @class CapsuleBufferGeometry
+ * @constructor
  */
 function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, capsTopSegments, capsBottomSegments, thetaStart, thetaLength) {
 
