@@ -33,7 +33,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 
 	this.name = "animation";
 	this.category = "SpriteSheet";
-	this.disposed = false;
+	//this.disposed = false;
 	this.format = this.img.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
 
@@ -59,9 +59,24 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	this._framesHorizontal = framesHorizontal;
 	this._framesVertical = framesVertical;
 
+	var _disposed = false;
+
 	var self = this;
 	Object.defineProperties(this,
 	{
+		disposed:
+		{
+			get: function()
+			{
+				return _disposed;
+			},
+			set: function(value)
+			{
+				console.log("nunuStudio: Set _disposed to ", value);
+				_disposed = value;
+			}
+		},
+
 		/**
 		 * Spritesheet number of frames horizontally.
 		 *
@@ -186,7 +201,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	this.image.onload = function()
 	{
 		self.needsUpdate = true;
-	}
+	};
 	
 	/**
 	 * Indicates the current frame of the animation.
@@ -198,26 +213,31 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 
 	function update()
 	{
-		self.currentFrame++;
-
-		if(self.currentFrame >= self._endFrame)
-		{
-			self.currentFrame = self._beginFrame;
-		}
-
-		self.offset.x = (self.currentFrame % self.framesHorizontal) / self.framesHorizontal;
-		self.offset.y = (1 - self.repeat.y) - Math.floor(self.currentFrame / self.framesHorizontal) / self.framesVertical;
-		self.needsUpdate = true;
-
 		if(!self.disposed)
 		{
-			setTimeout(update, self.animationSpeed * 1000);
+			self.step();
+			setTimeout(update, self.animationSpeed * 1e3);
 		}
 	};
 	update();
 }
 
 SpriteSheetTexture.prototype = Object.create(THREE.Texture.prototype);
+SpriteSheetTexture.isTexture = true;
+
+SpriteSheetTexture.prototype.step = function()
+{
+	this.currentFrame++;
+
+	if(this.currentFrame >= this._endFrame)
+	{
+		this.currentFrame = this._beginFrame;
+	}
+
+	this.offset.x = (this.currentFrame % this.framesHorizontal) / this.framesHorizontal;
+	this.offset.y = (1 - this.repeat.y) - Math.floor(this.currentFrame / this.framesHorizontal) / this.framesVertical;
+};
+
 
 /**
  * Set animation playback speed.

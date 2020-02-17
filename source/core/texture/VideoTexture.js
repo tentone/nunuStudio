@@ -27,6 +27,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 
 	/**
 	 * If true the video starts playing automatically.
+	 *
 	 * @property autoplay
 	 * @default true
 	 * @type {boolean}
@@ -35,6 +36,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 
 	/**
 	 * If true the video plays in loop.
+	 *
 	 * @property loop
 	 * @default true
 	 * @type {boolean}
@@ -43,6 +45,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 
 	/**
 	 * Start time in seconds.
+	 *
 	 * @property playbackRate
 	 * @default 1.0
 	 * @type {number}
@@ -50,7 +53,8 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.playbackRate = 1.0;
 
 	/**
-	 * Video audio volume, its a values between 1.0 and 0.0
+	 * Video audio volume, its a values between 1.0 and 0.0.
+	 *
 	 * @property volume
 	 * @default 1.0
 	 * @type {number}

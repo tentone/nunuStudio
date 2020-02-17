@@ -153,6 +153,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 }
 
 Texture.prototype = Object.create(THREE.Texture.prototype);
+Texture.isTexture = true;
 
 /**
  * Dispose texture.
