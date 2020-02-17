@@ -79,6 +79,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Program",
         "RectAreaLight",
         "RenderPass",
+        "RenderTargetTexture",
         "RendererConfiguration",
         "RendererState",
         "Resource",

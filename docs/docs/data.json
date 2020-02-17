@@ -902,6 +902,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\texture\\RenderTargetTexture.js": {
+            "name": "..\\source\\core\\texture\\RenderTargetTexture.js",
+            "modules": {},
+            "classes": {
+                "RenderTargetTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\texture\\SpriteSheetTexture.js": {
             "name": "..\\source\\core\\texture\\SpriteSheetTexture.js",
             "modules": {},
@@ -1364,6 +1373,7 @@
                 "CanvasSprite": 1,
                 "CompressedTexture": 1,
                 "CubeTexture": 1,
+                "RenderTargetTexture": 1,
                 "SpriteSheetTexture": 1,
                 "Texture": 1,
                 "VideoTexture": 1,
@@ -3933,6 +3943,21 @@
                     "type": "Number"
                 }
             ]
+        },
+        "RenderTargetTexture": {
+            "name": "RenderTargetTexture",
+            "shortname": "RenderTargetTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\texture\\RenderTargetTexture.js",
+            "line": 4,
+            "description": "Render target textures are used to store render results obtained from cameras.",
+            "is_constructor": 1
         },
         "SpriteSheetTexture": {
             "name": "SpriteSheetTexture",
@@ -13120,7 +13145,17 @@
         {
             "file": "..\\source\\core\\objects\\Program.js",
             "line": 142,
-            "description": "Keyboard input object.",
+            "description": "Scene currently running in the program, runtime variable.\n\nShould never be manually defined, change it using the setScene(scene) method.",
+            "itemtype": "property",
+            "name": "scene",
+            "type": "{Scene}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 152,
+            "description": "Keyboard input object, runtime variable.",
             "itemtype": "property",
             "name": "keyboard",
             "type": "{Keyboard}",
@@ -13129,8 +13164,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 150,
-            "description": "Mouse input object.",
+            "line": 160,
+            "description": "Mouse input object, runtime variable.",
             "itemtype": "property",
             "name": "mouse",
             "type": "{Mouse}",
@@ -13139,7 +13174,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 158,
+            "line": 168,
             "description": "Renderer being used during runtime.",
             "itemtype": "property",
             "name": "renderer",
@@ -13149,18 +13184,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 166,
-            "description": "Scene currently running in the program.",
-            "itemtype": "property",
-            "name": "scene",
-            "type": "{Scene}",
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "..\\source\\core\\objects\\Program.js",
-            "line": 174,
-            "description": "Canvas being used to draw content.\n\nThis canvas is where the WebGL rendering context was created.",
+            "line": 176,
+            "description": "Canvas being used to draw content by the renderer.\n\nThis canvas is where the WebGL rendering context was created.",
             "itemtype": "property",
             "name": "canvas",
             "type": "{Element}",
@@ -13169,7 +13194,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 184,
+            "line": 186,
             "description": "DOM Division element that can be used to add html content to the app.\n\nAll content added to this division should be manually removed before the app exits.",
             "itemtype": "property",
             "name": "division",
@@ -13179,8 +13204,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 194,
-            "description": "Event manager used to attach in program events.",
+            "line": 196,
+            "description": "Event manager used to attach and manage program events.",
             "itemtype": "property",
             "name": "manager",
             "type": "{EventManager}",
@@ -13189,8 +13214,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 202,
-            "description": "Clock object used to measure times between frames.",
+            "line": 204,
+            "description": "Clock object used to measure times between frames.\n\nThe time measured is passed down to the scene and its children elements.",
             "itemtype": "property",
             "name": "clock",
             "type": "{THREE.Clock}",
@@ -13199,7 +13224,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 210,
+            "line": 214,
             "description": "VR runtime control, true when the app is running in VR mode.",
             "itemtype": "property",
             "name": "vrRunning",
@@ -13209,7 +13234,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 221,
+            "line": 225,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -13218,8 +13243,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 263,
-            "description": "Set program mouse and keyboard.",
+            "line": 267,
+            "description": "Set program mouse and keyboard.\n\nShould be set before initialize() is called otherwise a keyboard and mouse are created by default.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
             "params": [
@@ -13239,7 +13264,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 276,
+            "line": 298,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -13260,7 +13285,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 297,
+            "line": 319,
             "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
@@ -13269,7 +13294,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 309,
+            "line": 331,
             "description": "Render current scene to canvas.\n\nWhen rendering in VR mode all effects and camera parameters are ignored.\n\nRenderer should be initialized and passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -13285,7 +13310,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 324,
+            "line": 346,
             "description": "Resize the current scene elements.",
             "itemtype": "method",
             "name": "resize",
@@ -13306,7 +13331,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 342,
+            "line": 364,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -13315,7 +13340,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 362,
+            "line": 380,
             "description": "Check if virtual reality is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -13324,7 +13349,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 372,
+            "line": 390,
             "description": "Enter virtual reality mode.",
             "itemtype": "method",
             "name": "enterVR",
@@ -13333,7 +13358,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 389,
+            "line": 407,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -13342,7 +13367,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 403,
+            "line": 421,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -13358,7 +13383,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 438,
+            "line": 461,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -13374,7 +13399,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 475,
+            "line": 498,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -13390,7 +13415,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 502,
+            "line": 519,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -13403,7 +13428,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 515,
+            "line": 532,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -13419,7 +13444,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 528,
+            "line": 545,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -13428,7 +13453,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 552,
+            "line": 569,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -13444,7 +13469,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 579,
+            "line": 596,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -13460,7 +13485,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 604,
+            "line": 621,
             "description": "Serialize the object to JSON format.",
             "itemtype": "method",
             "name": "toJSON",
@@ -16514,7 +16539,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 65,
+            "line": 66,
             "description": "Spritesheet number of frames horizontally.\n\nWhen this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.",
             "itemtype": "property",
             "name": "framesHorizontal",
@@ -16525,7 +16550,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 87,
+            "line": 88,
             "description": "Spritesheet number of frames vertically.\n\nWhen this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.",
             "itemtype": "property",
             "name": "framesVertical",
@@ -16536,7 +16561,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 109,
+            "line": 110,
             "description": "The offset frame can be ajusted to control in which frame the animation ends.",
             "itemtype": "property",
             "name": "endFrame",
@@ -16546,7 +16571,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 131,
+            "line": 132,
             "description": "The offset frame can be ajusted to control in which frame the animation starts.",
             "itemtype": "property",
             "name": "beginFrame",
@@ -16557,7 +16582,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 155,
+            "line": 156,
             "description": "Total number of frames present in the texture.\n\nSometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.",
             "itemtype": "property",
             "name": "totalFrames",
@@ -16568,7 +16593,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 178,
+            "line": 179,
             "description": "DOM element attached to the texture",
             "itemtype": "property",
             "name": "image",
@@ -16578,7 +16603,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 191,
+            "line": 192,
             "description": "Indicates the current frame of the animation.",
             "itemtype": "property",
             "name": "currentFrame",
@@ -16588,7 +16613,16 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 221,
+            "line": 215,
+            "description": "Step the sprite sheet animation, move to next frame and recalculate the texture offset.",
+            "itemtype": "method",
+            "name": "step",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 234,
             "description": "Set animation playback speed.",
             "itemtype": "method",
             "name": "setAnimationSpeed",
@@ -16604,7 +16638,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 232,
+            "line": 245,
             "description": "Set the sprite sheet grid dimension.\n\nAutomatically sets the totalFrame value to framesHorizontal * framesVertical.",
             "itemtype": "method",
             "name": "setFrameGrid",
@@ -16625,7 +16659,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 249,
+            "line": 262,
             "description": "Set frames to be used for this animation.\n\nFrame starts counting from 0.",
             "itemtype": "method",
             "name": "setAnimationFrames",
@@ -16646,7 +16680,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 264,
+            "line": 277,
             "description": "Dispose spritesheet texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -16655,7 +16689,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 276,
+            "line": 289,
             "description": "Create texture json description.",
             "itemtype": "method",
             "name": "toJSON",
@@ -16833,7 +16867,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 36,
+            "line": 37,
             "description": "If true the video plays in loop.",
             "itemtype": "property",
             "name": "loop",
@@ -16844,7 +16878,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 44,
+            "line": 46,
             "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "playbackRate",
@@ -16855,8 +16889,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 52,
-            "description": "Video audio volume, its a values between 1.0 and 0.0",
+            "line": 55,
+            "description": "Video audio volume, its a values between 1.0 and 0.0.",
             "itemtype": "property",
             "name": "volume",
             "default": "1.0",
@@ -16866,7 +16900,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 60,
+            "line": 64,
             "description": "Image is used to store a DOM video element.",
             "itemtype": "property",
             "name": "image",
@@ -16876,7 +16910,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 72,
+            "line": 76,
             "description": "Video source resource.",
             "itemtype": "property",
             "name": "video",
@@ -16886,7 +16920,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 99,
+            "line": 106,
             "description": "Set the video source to be used.\n\nCan be a Video, VideoStream or a URL String.",
             "params": [
                 {
@@ -16902,7 +16936,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 128,
+            "line": 135,
             "description": "Set video time in seconds.",
             "params": [
                 {
@@ -16918,7 +16952,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 139,
+            "line": 146,
             "description": "Set loop mode.",
             "params": [
                 {
@@ -16934,7 +16968,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 151,
+            "line": 158,
             "description": "Set video volume.",
             "params": [
                 {
@@ -16950,7 +16984,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 163,
+            "line": 170,
             "description": "Set autoplay value.\n\nIf the image is already playing it will not stop playing.",
             "itemtype": "method",
             "name": "setAutoPlay",
@@ -16966,7 +17000,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 177,
+            "line": 184,
             "description": "Set video playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -16982,7 +17016,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 189,
+            "line": 196,
             "description": "Pause video playback.",
             "itemtype": "method",
             "name": "pause",
@@ -16991,7 +17025,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 202,
+            "line": 209,
             "description": "Start playing video.",
             "itemtype": "method",
             "name": "play",
@@ -17000,7 +17034,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 215,
+            "line": 222,
             "description": "Dispose video texture.\n\nStops the video and cleans the DOM video element inside the VideoTexture.",
             "itemtype": "method",
             "name": "dispose",
@@ -17009,7 +17043,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 233,
+            "line": 240,
             "description": "Create Video texture json description.",
             "itemtype": "method",
             "name": "toJSON",
@@ -17071,7 +17105,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 84,
+            "line": 85,
             "description": "Connect to camera.",
             "itemtype": "method",
             "name": "connect",
@@ -17080,7 +17114,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 129,
+            "line": 130,
             "description": "Disconnect from camera.",
             "itemtype": "method",
             "name": "disconnect",
@@ -17089,7 +17123,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 146,
+            "line": 147,
             "description": "Dispose webcam texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -17098,7 +17132,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 164,
+            "line": 165,
             "description": "Serialize webcam texture to JSON.",
             "itemtype": "method",
             "name": "toJSON",

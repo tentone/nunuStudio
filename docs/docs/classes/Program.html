@@ -112,6 +112,7 @@
 								<li><a href="../classes/RendererConfiguration.html">RendererConfiguration</a></li>
 								<li><a href="../classes/RendererState.html">RendererState</a></li>
 								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
+								<li><a href="../classes/RenderTargetTexture.html">RenderTargetTexture</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
@@ -980,6 +981,7 @@
 											
 												<div class="description">
 													<p>Set program mouse and keyboard.</p>
+											<p>Should be set before initialize() is called otherwise a keyboard and mouse are created by default.</p>
 											
 												</div>
 											
@@ -1359,7 +1361,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Canvas being used to draw content.</p>
+													<p>Canvas being used to draw content by the renderer.</p>
 											<p>This canvas is where the WebGL rendering context was created.</p>
 											
 												</div>
@@ -1384,6 +1386,7 @@
 											
 												<div class="description">
 													<p>Clock object used to measure times between frames.</p>
+											<p>The time measured is passed down to the scene and its children elements.</p>
 											
 												</div>
 											
@@ -1525,7 +1528,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Keyboard input object.</p>
+													<p>Keyboard input object, runtime variable.</p>
 											
 												</div>
 											
@@ -1572,7 +1575,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Event manager used to attach in program events.</p>
+													<p>Event manager used to attach and manage program events.</p>
 											
 												</div>
 											
@@ -1595,7 +1598,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Mouse input object.</p>
+													<p>Mouse input object, runtime variable.</p>
 											
 												</div>
 											
@@ -1687,7 +1690,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Scene currently running in the program.</p>
+													<p>Scene currently running in the program, runtime variable.</p>
+											<p>Should never be manually defined, change it using the setScene(scene) method.</p>
 											
 												</div>
 											
