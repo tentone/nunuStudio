@@ -344,7 +344,7 @@ SideBar.prototype.createObject = function()
 	//Capsule
 	models.addOption(Global.FILE_PATH + "icons/models/capsule.png", function()
 	{
-		var geometry = new THREE.CapsuleBufferGeometry(0.5, 0.5, 1.0, 32, 1, 8, 8);
+		var geometry = new CapsuleBufferGeometry(0.5, 0.5, 1.0, 32, 1, 8, 8);
 		geometry.name = "capsule";
 		
 		var model = new Mesh(geometry, Editor.defaultMaterial);

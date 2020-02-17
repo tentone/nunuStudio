@@ -58,7 +58,7 @@ GeometryForm.create = function(form, object)
 	{
 		return new OctahedronGeometryForm(form, object);
 	}
-	else if(geometry instanceof THREE.CapsuleBufferGeometry)
+	else if(geometry instanceof CapsuleBufferGeometry)
 	{
 		return new CapsuleGeometryForm(form, object);
 	}

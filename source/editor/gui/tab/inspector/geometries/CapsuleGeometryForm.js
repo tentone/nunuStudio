@@ -89,7 +89,7 @@ CapsuleGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
 
-	var geometry = new THREE.CapsuleBufferGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(),
+	var geometry = new CapsuleBufferGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(),
 									this.radialSegments.getValue(), this.heightSegments.getValue(), this.capsTopSegments.getValue(),
 									this.capsBottomSegments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
 

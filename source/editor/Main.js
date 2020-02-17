@@ -57,7 +57,6 @@ include("lib/leap.min.js");
 include("lib/spine-threejs.js");
 include("lib/opentype.min.js");
 include("lib/chevrotain.min.js");
-include("lib/three-js-capsule-geometry.js");
 
 include("source/core/Nunu.js");
 include("source/core/Global.js");
@@ -142,6 +141,10 @@ include("source/core/loaders/TextureLoader.js");
 include("source/core/loaders/GeometryLoader.js");
 include("source/core/loaders/LegacyGeometryLoader.js");
 include("source/core/loaders/ObjectLoader.js");
+
+include("source/core/geometries/CapsuleBufferGeometry.js");
+
+include("source/core/objects/device/LeapMotion.js");
 
 include("source/core/objects/device/LeapMotion.js");
 include("source/core/objects/device/KinectDevice.js");

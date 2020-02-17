@@ -158,7 +158,7 @@ GeometryLoader.prototype.parse = function(data)
 			break;
 
 		case "CapsuleBufferGeometry":
-			geometry = new THREE.CapsuleBufferGeometry(data.radiusTop, data.radiusBottom, data.height, data.radialSegments, data.heightSegments, data.capsTopSegments, data.capsBottomSegments, data.thetaStart, data.thetaLength);
+			geometry = new CapsuleBufferGeometry(data.radiusTop, data.radiusBottom, data.height, data.radialSegments, data.heightSegments, data.capsTopSegments, data.capsBottomSegments, data.thetaStart, data.thetaLength);
 			break;
 
 		case "BufferGeometry":
