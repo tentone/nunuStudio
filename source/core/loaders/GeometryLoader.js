@@ -103,11 +103,6 @@ GeometryLoader.prototype.parse = function(data)
 			geometry = new THREE[data.type](data.radius, data.detail);
 			break;
 
-		case "PolyhedronGeometry":
-		case "PolyhedronBufferGeometry":
-			geometry = new THREE[data.type](data.radius, data.indices, data.radius, data.detail);
-			break;
-
 		case "RingGeometry":
 		case "RingBufferGeometry":
 			geometry = new THREE[data.type](data.innerRadius, data.outerRadius, data.thetaSegments, data.phiSegments, data.thetaStart, data.thetaLength);
@@ -128,6 +123,11 @@ GeometryLoader.prototype.parse = function(data)
 			geometry = new THREE[data.type](data.points, data.segments, data.phiStart, data.phiLength);
 			break;
 			
+		case "PolyhedronGeometry":
+		case "PolyhedronBufferGeometry":
+			geometry = new THREE[data.type](data.radius, data.indices, data.radius, data.detail);
+			break;
+
 		case "ShapeGeometry": 
 		case "ShapeBufferGeometry": 
 			var geometryShapes = [];
@@ -155,6 +155,10 @@ GeometryLoader.prototype.parse = function(data)
 			}
 
 			geometry = new Geometries[data.type](geometryShapes, data.options);
+			break;
+
+		case "CapsuleBufferGeometry":
+			geometry = new THREE.CapsuleBufferGeometry(data.radiusTop, data.radiusBottom, data.height, data.radialSegments, data.heightSegments, data.capsTopSegments, data.capsBottomSegments, data.thetaStart, data.thetaLength);
 			break;
 
 		case "BufferGeometry":

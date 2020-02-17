@@ -20,6 +20,8 @@
  - Fixed postprocessing pipeline bugs.
  - Adaptive luminance pass.
  - Improve search text box.
+ - Fixed scene disposing the first scene loaded before running.
+ - Added support for capsule geometry (library)
 
 
 

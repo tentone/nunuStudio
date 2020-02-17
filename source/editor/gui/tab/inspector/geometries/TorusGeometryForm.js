@@ -16,7 +16,7 @@ function TorusGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Radius
-	this.form.addText("Radius");
+	this.form.addText(Locale.radius);
 	this.radius = new NumberBox(this.form);
 	this.radius.size.set(40, 18);
 	this.radius.setStep(0.1);
@@ -34,7 +34,7 @@ function TorusGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Segments
-	this.form.addText("Segments");
+	this.form.addText(Locale.segments);
 	this.segmentsRow = new NumberRow(this.form);
 	this.segmentsRow.size.set(0, 18);
 
@@ -61,7 +61,7 @@ function TorusGeometryForm(form, object)
 
 	//Buffer
 	this.buffer = new CheckBox(this.form);
-	this.form.addText("Buffered");
+	this.form.addText(Locale.buffered);
 	this.buffer.size.set(18, 18);
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);

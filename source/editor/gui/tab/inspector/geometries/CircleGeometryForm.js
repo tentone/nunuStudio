@@ -14,9 +14,9 @@ function CircleGeometryForm(form, object)
 
 	this.form.addText("Circle Geometry");
 	this.form.nextRow();
-	
+
 	//Radius
-	this.form.addText("Radius");
+	this.form.addText(Locale.radius);
 	this.radius = new NumberBox(this.form);
 	this.radius.size.set(60, 18);
 	this.radius.setStep(0.1);
@@ -26,7 +26,7 @@ function CircleGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Segments
-	this.form.addText("Segments");
+	this.form.addText(Locale.segments);
 	this.segments = new NumberBox(this.form);
 	this.segments.size.set(60, 18);
 	this.segments.setStep(1.0);
@@ -55,7 +55,7 @@ function CircleGeometryForm(form, object)
 
 	//Buffer
 	this.buffer = new CheckBox(this.form);
-	this.form.addText("Buffered");
+	this.form.addText(Locale.buffered);
 	this.buffer.size.set(18, 18);
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);

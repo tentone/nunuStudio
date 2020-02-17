@@ -247,6 +247,10 @@ LocaleManager.register(
 	author: "Author",
 	virtualReality: "Virtual Reality",
 	pixelRatio: "Pixel Ratio",
+	radius: "Radius",
+	segments: "Segments",
+	radial: "Radial",
+	buffered: "Buffered",
 
 	//Values
 	evaluate: "Evaluate",

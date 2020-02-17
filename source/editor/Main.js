@@ -57,6 +57,7 @@ include("lib/leap.min.js");
 include("lib/spine-threejs.js");
 include("lib/opentype.min.js");
 include("lib/chevrotain.min.js");
+include("lib/three-js-capsule-geometry.js");
 
 include("source/core/Nunu.js");
 include("source/core/Global.js");
@@ -533,6 +534,7 @@ include("source/editor/gui/tab/inspector/geometries/TorusGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/TorusKnotGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/PlaneGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/ConeGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/CapsuleGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/CylinderGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/TetrahedronGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/DodecahedronGeometryForm.js");

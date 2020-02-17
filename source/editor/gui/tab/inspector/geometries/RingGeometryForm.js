@@ -75,7 +75,7 @@ function RingGeometryForm(form, object)
 
 	//Buffer
 	this.buffer = new CheckBox(this.form);
-	this.form.addText("Buffered");
+	this.form.addText(Locale.buffered);
 	this.buffer.size.set(18, 18);
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);

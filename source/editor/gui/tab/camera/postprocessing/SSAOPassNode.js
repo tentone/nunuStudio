@@ -16,7 +16,7 @@ function SSAOPassNode(parent)
 	this.add(this.onlyAO);
 	this.nextRow();
 
-	this.addText("Radius");
+	this.addText(Locale.radius);
 	this.radius = new NumberBox(this);
 	this.radius.size.set(60, 18);
 	this.radius.setOnChange(function()
