@@ -7370,25 +7370,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.x = k[0] * a + k[3] * c + k[6];
     this.y = k[1] * a + k[4] * c + k[7];
     return this;
-  }, min:function(k) {
-    this.x = Math.min(this.x, k.x);
-    this.y = Math.min(this.y, k.y);
+  }, min:function(a) {
+    this.x = Math.min(this.x, a.x);
+    this.y = Math.min(this.y, a.y);
     return this;
-  }, max:function(k) {
-    this.x = Math.max(this.x, k.x);
-    this.y = Math.max(this.y, k.y);
+  }, max:function(a) {
+    this.x = Math.max(this.x, a.x);
+    this.y = Math.max(this.y, a.y);
     return this;
-  }, clamp:function(k, a) {
-    this.x = Math.max(k.x, Math.min(a.x, this.x));
-    this.y = Math.max(k.y, Math.min(a.y, this.y));
+  }, clamp:function(a, c) {
+    this.x = Math.max(a.x, Math.min(c.x, this.x));
+    this.y = Math.max(a.y, Math.min(c.y, this.y));
     return this;
-  }, clampScalar:function(k, a) {
-    this.x = Math.max(k, Math.min(a, this.x));
-    this.y = Math.max(k, Math.min(a, this.y));
+  }, clampScalar:function(a, c) {
+    this.x = Math.max(a, Math.min(c, this.x));
+    this.y = Math.max(a, Math.min(c, this.y));
     return this;
-  }, clampLength:function(k, a) {
-    var c = this.length();
-    return this.divideScalar(c || 1).multiplyScalar(Math.max(k, Math.min(a, c)));
+  }, clampLength:function(a, c) {
+    var k = this.length();
+    return this.divideScalar(k || 1).multiplyScalar(Math.max(a, Math.min(c, k)));
   }, floor:function() {
     this.x = Math.floor(this.x);
     this.y = Math.floor(this.y);
@@ -16298,13 +16298,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return this;
   }, update:function(a) {
     a *= this.timeScale;
-    for (var c = this._actions, b = this._nActiveActions, e = this.time += a, k = Math.sign(a), f = this._accuIndex ^= 1, l = 0; l !== b; ++l) {
-      c[l]._update(e, a, k, f);
+    for (var c = this._actions, b = this._nActiveActions, e = this.time += a, f = Math.sign(a), k = this._accuIndex ^= 1, l = 0; l !== b; ++l) {
+      c[l]._update(e, a, f, k);
     }
     a = this._bindings;
     c = this._nActiveBindings;
     for (l = 0; l !== c; ++l) {
-      a[l].apply(f);
+      a[l].apply(k);
     }
     return this;
   }, setTime:function(a) {
@@ -48030,10 +48030,6 @@ GeometryLoader.prototype.parse = function(a) {
     case "TetrahedronBufferGeometry":
       d = new THREE[a.type](a.radius, a.detail);
       break;
-    case "PolyhedronGeometry":
-    case "PolyhedronBufferGeometry":
-      d = new THREE[a.type](a.radius, a.indices, a.radius, a.detail);
-      break;
     case "RingGeometry":
     case "RingBufferGeometry":
       d = new THREE[a.type](a.innerRadius, a.outerRadius, a.thetaSegments, a.phiSegments, a.thetaStart, a.thetaLength);
@@ -48049,6 +48045,10 @@ GeometryLoader.prototype.parse = function(a) {
     case "LatheGeometry":
     case "LatheBufferGeometry":
       d = new THREE[a.type](a.points, a.segments, a.phiStart, a.phiLength);
+      break;
+    case "PolyhedronGeometry":
+    case "PolyhedronBufferGeometry":
+      d = new THREE[a.type](a.radius, a.indices, a.radius, a.detail);
       break;
     case "ShapeGeometry":
     case "ShapeBufferGeometry":
@@ -48068,6 +48068,9 @@ GeometryLoader.prototype.parse = function(a) {
       h = a.options.extrudePath;
       void 0 !== h && (a.options.extrudePath = (new Curves[h.type]).fromJSON(h));
       d = new Geometries[a.type](d, a.options);
+      break;
+    case "CapsuleBufferGeometry":
+      d = new CapsuleBufferGeometry(a.radiusTop, a.radiusBottom, a.height, a.radialSegments, a.heightSegments, a.capsTopSegments, a.capsBottomSegments, a.thetaStart, a.thetaLength);
       break;
     case "BufferGeometry":
     case "InstancedBufferGeometry":

@@ -10,6 +10,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\geometries\\CapsuleBufferGeometry.js": {
+            "name": "..\\source\\core\\geometries\\CapsuleBufferGeometry.js",
+            "modules": {},
+            "classes": {
+                "CapsuleBufferGeometry": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\input\\Gamepad.js": {
             "name": "..\\source\\core\\input\\Gamepad.js",
             "modules": {
@@ -1129,7 +1138,8 @@
             "elements": {},
             "classes": {
                 "Skeleton": 1,
-                "AnimationMixer": 1
+                "AnimationMixer": 1,
+                "CapsuleBufferGeometry": 1
             },
             "fors": {},
             "namespaces": {},
@@ -1582,6 +1592,22 @@
                     "type": "Object3D"
                 }
             ]
+        },
+        "CapsuleBufferGeometry": {
+            "name": "CapsuleBufferGeometry",
+            "shortname": "CapsuleBufferGeometry",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Animation",
+            "namespace": "",
+            "file": "..\\source\\core\\geometries\\CapsuleBufferGeometry.js",
+            "line": 3,
+            "description": "Capsule like geometry, with configurable top and bottom sizes.",
+            "author": "maximequiblier",
+            "is_constructor": 1
         },
         "Gamepad": {
             "name": "Gamepad",

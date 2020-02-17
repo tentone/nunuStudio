@@ -19,6 +19,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "CSS3DSprite",
         "CanvasSprite",
         "CanvasTexture",
+        "CapsuleBufferGeometry",
         "ColorifyPass",
         "CompressedTexture",
         "Container",
