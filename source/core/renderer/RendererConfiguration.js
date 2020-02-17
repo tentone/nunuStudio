@@ -290,6 +290,13 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 		canvas.style.backgroundColor = this.backgroundColor;
 	}
 
+	this.apply(renderer);
+
+	return renderer;
+};
+
+RendererConfiguration.prototype.apply = function(renderer)
+{
 	renderer.autoClear = this.autoClear;
 	renderer.autoClearColor = this.autoClearColor;
 	renderer.autoClearDepth = this.autoClearDepth;
@@ -310,8 +317,6 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 	renderer.gammaFactor = this.gammaFactor;
 
 	renderer.physicallyCorrectLights = this.physicallyCorrectLights;
-
-	return renderer;
 };
 
 RendererConfiguration.prototype.toJSON = function()

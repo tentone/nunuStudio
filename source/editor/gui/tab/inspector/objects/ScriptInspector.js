@@ -6,16 +6,16 @@ function ScriptInspector(parent, object)
 
 	var self = this;
 
-	this.form.addText("Library Mode");
+	this.form.addText(Locale.libraryMode);
 	this.mode = new DropdownList(this.form);
 	this.mode.size.set(100, 18);
 	this.mode.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "mode", self.mode.getValue()));
 	});
-	this.mode.addValue("Evaluate", Script.EVALUATE);
-	this.mode.addValue("Append", Script.APPEND);
-	this.mode.addValue("Include", Script.INCLUDE);
+	this.mode.addValue(Locale.evaluate, Script.EVALUATE);
+	this.mode.addValue(Locale.append, Script.APPEND);
+	this.mode.addValue(Locale.include, Script.INCLUDE);
 	this.form.add(this.mode);
 	this.form.nextRow();
 }

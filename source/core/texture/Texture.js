@@ -148,7 +148,6 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 				requestAnimationFrame(update);
 			}
 		}
-		
 		update();
 	}
 }

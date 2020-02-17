@@ -88,6 +88,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 			{
 				self.needsUpdate = true;
 			}
+
 			requestAnimationFrame(update);
 		}
 	};
@@ -95,6 +96,8 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 }
 
 VideoTexture.prototype = Object.create(THREE.Texture.prototype);
+
+VideoTexture.isVideoTexture = true;
 
 /**
  * Set the video source to be used.

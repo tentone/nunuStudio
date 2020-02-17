@@ -83,6 +83,7 @@ LocaleManager.register(
 	cone: "Cone",
 
 	//Properties
+	libraryMode: "Library Mode",
 	min: "Min",
 	max: "Max",
 	spread: "Spread",
@@ -248,6 +249,9 @@ LocaleManager.register(
 	pixelRatio: "Pixel Ratio",
 
 	//Values
+	evaluate: "Evaluate",
+	append: "Append",
+	include: "Include",
 	tangentSpace: "Tangent Space",
 	objectSpace: "Object Space",
 	relative: "Relative",
@@ -398,7 +402,8 @@ LocaleManager.register(
 	unknownFileFormat: "Unknown file format.",
 	failedLoadSpine: "Failed to load Spine animation, make sure that .json and .atlas have the same name.",
 
-	//Hints renderer
+	//Hints
+	hintLibraryMode: "Indicates how libraries are imported into the script. They can be evaluated in the script context, appended at the beginning of the script or included globally.",
 	hintCheckShaderErrors: "Defines whether material shader programs are checked for errors during compilation and linkage process.",
 	hintStencil: "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
 	hintSortObjects: "If true the renderer sorts the objects from back to front for rendering. Important if using multiple transparent objects.",

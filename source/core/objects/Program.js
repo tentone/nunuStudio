@@ -287,9 +287,9 @@ Program.prototype.setRenderer = function(renderer, configure)
 
 	this.canvas = renderer.domElement;
 	this.division = this.canvas.parentElement;
-	
+
 	if(configure)
-	{	
+	{
 		this.updateRenderer();
 	}
 };
@@ -350,11 +350,7 @@ Program.prototype.updateRenderer = function()
 {
 	if(this.renderer !== null)
 	{
-		this.renderer.shadowMap.enabled = this.shadows;
-		this.renderer.shadowMap.type = this.shadowsType;
-		this.renderer.toneMapping = this.toneMapping;
-		this.renderer.toneMappingExposure = this.toneMappingExposure;
-		this.renderer.toneMappingWhitePoint = this.toneMappingWhitePoint;
+		this.rendererConfig.apply(this.renderer);
 	}
 };
 
