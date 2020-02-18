@@ -1225,7 +1225,6 @@ SceneEditor.prototype.updateSelection = function()
 		//Spine animation
 		else if(object instanceof SpineAnimation)
 		{
-			this.objectHelper.add(new WireframeHelper(object, 0xFFFFFF));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		//Container

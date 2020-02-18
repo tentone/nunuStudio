@@ -1,11 +1,11 @@
 "use strict";
 
 /**
- * Spine animation object, to used with animation produced inside Esoteric spine.
+ * Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.
  * 
  * Based on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.
  * 
- * More information abou spine available here www.esotericsoftware.com.
+ * More information about spine available at www.esotericsoftware.com.
  * 
  * @class SpineAnimation
  * @extends {spine.threejs.SkeletonMesh}
@@ -75,9 +75,6 @@ function SpineAnimation(json, atlas, path, textures)
 	this.name = "spine";
 	this.type = "SpineAnimation";
 
-	this.frustumCulled = false;
-	this.receiveShadow = true;
-	this.castShadow = true;
 	this.scale.set(0.01, 0.01, 0.01);
 
 	/**
@@ -147,7 +144,7 @@ SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
 
 SpineAnimation.prototype.update = function(delta)
 {
-	//spine.threejs.SkeletonMesh.prototype.update.call(this, delta);
+	spine.threejs.SkeletonMesh.prototype.update.call(this, delta);
 	THREE.Object3D.prototype.update.call(this);
 };
 
@@ -252,12 +249,6 @@ SpineAnimation.prototype.setSkin = function(name)
 
 SpineAnimation.prototype.toJSON = function(meta)
 {
-	//Avoid serializing geometry and material
-	var geometry = this.geometry;
-	var material = this.material;
-	this.geometry = undefined;
-	this.material = undefined;
-	
 	//Store textures
 	var textures = [];
 	var self = this;
@@ -286,10 +277,6 @@ SpineAnimation.prototype.toJSON = function(meta)
 	{
 		data.object.skin = this.skin;	
 	}
-
-	//Restore geometry and material
-	this.geometry = geometry;
-	this.material = material;
 
 	return data;
 };
