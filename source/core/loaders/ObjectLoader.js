@@ -1125,7 +1125,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	}
 	catch(e)
 	{
-		console.warn("nunuStudio: Error parsing and creating object " + data.uuid + ", object skiped.", data);
+		console.error("nunuStudio: Error parsing and creating object " + data.uuid + ", object skiped.", e, data);
 		object = new Container();
 	}
 
