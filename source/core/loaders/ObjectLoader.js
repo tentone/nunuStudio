@@ -511,615 +511,622 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		return audio[uuid];
 	}
 
-	switch(data.type)
+	try
 	{
-		case "SpineAnimation":
-			for(var i = 0; i < data.textures.length; i++)
-			{
-				data.textures[i].texture = getTexture(data.textures[i].texture);
-			}
+		switch(data.type)
+		{
+			case "SpineAnimation":
+				for(var i = 0; i < data.textures.length; i++)
+				{
+					data.textures[i].texture = getTexture(data.textures[i].texture);
+				}
 
-			object = new SpineAnimation(data.json, data.atlas, "", data.textures);
-			
-			if(data.animation !== undefined)
-			{
-				object.animation = data.animation;
-				object.track = data.track;
-				object.loop = data.loop;
-			}
-			if(data.skin !== undefined)
-			{
-				object.skin = data.skin;
-			}
-			break;
+				object = new SpineAnimation(data.json, data.atlas, "", data.textures);
+				
+				if(data.animation !== undefined)
+				{
+					object.animation = data.animation;
+					object.track = data.track;
+					object.loop = data.loop;
+				}
+				if(data.skin !== undefined)
+				{
+					object.skin = data.skin;
+				}
+				break;
 
-		case "Audio":
-			object = new AudioEmitter(getAudio(data.audio));
-			object.autoplay = data.autoplay;
-			object.startTime = data.startTime;
-			object.playbackRate = data.playbackRate;
-			object.loop = (data.source !== undefined) ? data.source.loop : data.loop;
-			if(data.volume !== undefined)
-			{
-				object.volume = data.volume;
-			}
-			break;
+			case "Audio":
+				object = new AudioEmitter(getAudio(data.audio));
+				object.autoplay = data.autoplay;
+				object.startTime = data.startTime;
+				object.playbackRate = data.playbackRate;
+				object.loop = (data.source !== undefined) ? data.source.loop : data.loop;
+				if(data.volume !== undefined)
+				{
+					object.volume = data.volume;
+				}
+				break;
 
-		case "PositionalAudio":
-			object = new PositionalAudio(getAudio(data.audio));
-			object.autoplay = data.autoplay;
-			object.startTime = data.startTime;
-			object.playbackRate = data.playbackRate;
-			object.loop = (data.source !== undefined) ? data.source.loop : data.loop;
-			if(data.volume !== undefined)
-			{
-				object.volume = data.volume;
-			}
-			object.distanceModel = data.distanceModel;
-			object.panningModel = data.panningModel;
-			break;
+			case "PositionalAudio":
+				object = new PositionalAudio(getAudio(data.audio));
+				object.autoplay = data.autoplay;
+				object.startTime = data.startTime;
+				object.playbackRate = data.playbackRate;
+				object.loop = (data.source !== undefined) ? data.source.loop : data.loop;
+				if(data.volume !== undefined)
+				{
+					object.volume = data.volume;
+				}
+				object.distanceModel = data.distanceModel;
+				object.panningModel = data.panningModel;
+				break;
 
-		case "Physics":
-			object = new PhysicsObject();
-			
-			if(data.mode !== undefined)
-			{
+			case "Physics":
+				object = new PhysicsObject();
+				
+				if(data.mode !== undefined)
+				{
+					object.mode = data.mode;
+				}
+
+				object.body.type = data.body.type;
+				object.body.mass = data.body.mass;
+				object.body.linearDamping = data.body.linearDamping;
+				object.body.angularDamping = data.body.angularDamping;
+				object.body.allowSleep = data.body.allowSleep;
+				object.body.sleepSpeedLimit = data.body.sleepSpeedLimit;
+				object.body.sleepTimeLimit = data.body.sleepTimeLimit;
+				object.body.collisionFilterGroup = data.body.collisionFilterGroup;
+				object.body.collisionFilterMask = data.body.collisionFilterMask;
+				object.body.fixedRotation = data.body.fixedRotation;
+				var shapes = data.body.shapes;
+				for(var i = 0; i < shapes.length; i++)
+				{
+					var shape = shapes[i];
+
+					if(shape.type === CANNON.Shape.types.SPHERE)
+					{
+						object.body.addShape(new CANNON.Sphere(shape.radius));
+					}
+					else if(shape.type === CANNON.Shape.types.BOX)
+					{
+						object.body.addShape(new CANNON.Box(new CANNON.Vec3(shape.halfExtents.x, shape.halfExtents.y, shape.halfExtents.z)));
+					}
+					else if(shape.type === CANNON.Shape.types.PARTICLE)
+					{
+						object.body.addShape(new CANNON.Particle());
+					}
+					else if(shape.type === CANNON.Shape.types.PLANE)
+					{
+						object.body.addShape(new CANNON.Plane());
+					}
+					else if(shape.type === CANNON.Shape.types.CONVEXPOLYHEDRON)
+					{
+						object.body.addShape(new CANNON.ConvexPolyhedron(shape.vertices, shape.faces));
+					}
+				}
+				break;
+
+			case "ParticleEmiter":
+				function loadVector3(data)
+				{
+					if(Array.isArray(data))
+					{
+						return new THREE.Vector3().fromArray(data);
+					}
+					else
+					{
+						return new THREE.Vector3(data.x, data.y, data.z);
+					}
+				}
+
+				if(data.group !== undefined)
+				{
+					var group = data.group;
+					group.texture.value = getTexture(group.texture.value);
+					group.texture.frames = new THREE.Vector2().fromArray(group.texture.frames || [1, 1]);
+				}
+				if(data.emitter !== undefined)
+				{
+					var emitter = data.emitter;
+					emitter.position.value = loadVector3(emitter.position.value);
+					emitter.position.spread = loadVector3(emitter.position.spread);
+					emitter.velocity.value = loadVector3(emitter.velocity.value);
+					emitter.velocity.spread = loadVector3(emitter.velocity.spread);
+					emitter.acceleration.value = loadVector3(emitter.acceleration.value);
+					emitter.acceleration.spread = loadVector3(emitter.acceleration.spread);
+					
+					for(var i = 0; i < emitter.color.value.length; i++)
+					{
+						emitter.color.value[i] = new THREE.Color(emitter.color.value[i]);
+						emitter.color.spread[i] = loadVector3(emitter.color.spread[i]);
+					}
+				}
+
+				object = new ParticleEmitter(data.group, data.emitter);
+
+				break;
+
+			case "LensFlare":
+				object = new LensFlare();
+				
+				if(data.lensFlares !== undefined)
+				{
+					data.elements = data.lensFlares;
+				}
+
+				for(var i = 0; i < data.elements.length; i++)
+				{
+					object.addFlare(getTexture(data.elements[i].texture), data.elements[i].size, data.elements[i].distance, new THREE.Color(data.elements[i].color));
+				}
+
+				break;
+
+			case "TextMesh":
+			case "Text3D":
+				object = new TextMesh(data.text, getMaterial(data.material), getFont(data.font), data.height, data.bevel, data.bevelThickness, data.bevelSize, data.size, data.curveSegments, data.extruded);
+				break;
+
+			case "Program":
+				object = new Program(data.name);
+				
+				object.description = data.description;
+				object.author = data.author;
+				object.version = data.version;
+
+				object.vr = data.vr;
+				object.vrScale = data.vrScale;
+
+				if(data.rendererConfig !== undefined)
+				{
+					object.rendererConfig.fromJSON(data.rendererConfig);
+				}
+				else
+				{
+					object.antialiasing = data.antialiasing;
+					object.shadows = data.shadows;
+					object.shadowsType = data.shadowsType;
+					object.toneMapping = data.toneMapping;
+					object.toneMappingWhitePoint = data.toneMappingWhitePoint;
+					object.toneMappingExposure = data.toneMappingExposure;
+				}
+
+				if(data.lockPointer !== undefined)
+				{
+					object.lockPointer = data.lockPointer;
+				}
+
+				if(data.defaultScene !== undefined)
+				{
+					object.defaultScene = data.defaultScene;
+				}
+				
+				if(data.handlePixelRatio !== undefined)
+				{
+					object.handlePixelRatio = data.handlePixelRatio;	
+				}
+
+				break;
+
+			case "LeapDevice":
+				object = new LeapMotion();
 				object.mode = data.mode;
-			}
+				object.useArm = data.useArm;
+				if(data.debugModel !== undefined)
+				{
+					object.debugModel = data.debugModel;
+				}
+				if(data.gesturesEnabled !== undefined)
+				{
+					object.gesturesEnabled = data.gesturesEnabled;
+				}
+				if(data.posesEnabled !== undefined)
+				{
+					object.posesEnabled = data.posesEnabled;
+				}
+				break;
 
-			object.body.type = data.body.type;
-			object.body.mass = data.body.mass;
-			object.body.linearDamping = data.body.linearDamping;
-			object.body.angularDamping = data.body.angularDamping;
-			object.body.allowSleep = data.body.allowSleep;
-			object.body.sleepSpeedLimit = data.body.sleepSpeedLimit;
-			object.body.sleepTimeLimit = data.body.sleepTimeLimit;
-			object.body.collisionFilterGroup = data.body.collisionFilterGroup;
-			object.body.collisionFilterMask = data.body.collisionFilterMask;
-			object.body.fixedRotation = data.body.fixedRotation;
-			var shapes = data.body.shapes;
-			for(var i = 0; i < shapes.length; i++)
-			{
-				var shape = shapes[i];
+			case "Kinect":
+				object = new KinectDevice();
+				if(data.debugModel !== undefined)
+				{
+					object.debugModel = data.debugModel;
+				}
+				break;
 
-				if(shape.type === CANNON.Shape.types.SPHERE)
-				{
-					object.body.addShape(new CANNON.Sphere(shape.radius));
-				}
-				else if(shape.type === CANNON.Shape.types.BOX)
-				{
-					object.body.addShape(new CANNON.Box(new CANNON.Vec3(shape.halfExtents.x, shape.halfExtents.y, shape.halfExtents.z)));
-				}
-				else if(shape.type === CANNON.Shape.types.PARTICLE)
-				{
-					object.body.addShape(new CANNON.Particle());
-				}
-				else if(shape.type === CANNON.Shape.types.PLANE)
-				{
-					object.body.addShape(new CANNON.Plane());
-				}
-				else if(shape.type === CANNON.Shape.types.CONVEXPOLYHEDRON)
-				{
-					object.body.addShape(new CANNON.ConvexPolyhedron(shape.vertices, shape.faces));
-				}
-			}
-			break;
-
-		case "ParticleEmiter":
-			function loadVector3(data)
-			{
-				if(Array.isArray(data))
-				{
-					return new THREE.Vector3().fromArray(data);
-				}
-				else
-				{
-					return new THREE.Vector3(data.x, data.y, data.z);
-				}
-			}
-
-			if(data.group !== undefined)
-			{
-				var group = data.group;
-				group.texture.value = getTexture(group.texture.value);
-				group.texture.frames = new THREE.Vector2().fromArray(group.texture.frames || [1, 1]);
-			}
-			if(data.emitter !== undefined)
-			{
-				var emitter = data.emitter;
-				emitter.position.value = loadVector3(emitter.position.value);
-				emitter.position.spread = loadVector3(emitter.position.spread);
-				emitter.velocity.value = loadVector3(emitter.velocity.value);
-				emitter.velocity.spread = loadVector3(emitter.velocity.spread);
-				emitter.acceleration.value = loadVector3(emitter.acceleration.value);
-				emitter.acceleration.spread = loadVector3(emitter.acceleration.spread);
+			case "Sky":
+				object = new Sky(data.autoUpdate, data.dayTime, data.sunDistance, data.time);
 				
-				for(var i = 0; i < emitter.color.value.length; i++)
+				if(data.sun !== undefined)
 				{
-					emitter.color.value[i] = new THREE.Color(emitter.color.value[i]);
-					emitter.color.spread[i] = loadVector3(emitter.color.spread[i]);
+					object.sun.shadow.fromJSON(data.sun.shadow);
+					
+					if(data.sun.castShadow !== undefined)
+					{
+						object.sun.castShadow = data.sun.castShadow;
+					}
 				}
-			}
 
-			object = new ParticleEmitter(data.group, data.emitter);
+				if(data.colorTop !== undefined)
+				{
+					object.colorTop = [];
+					for(var i = 0; i < data.colorTop.length; i++)
+					{
+						object.colorTop.push(new THREE.Color(data.colorTop[i])); 
+					}
+				}
+				if(data.colorBottom !== undefined)
+				{
+					object.colorBottom = [];
+					for(var i = 0; i < data.colorBottom.length; i++)
+					{
+						object.colorBottom.push(new THREE.Color(data.colorBottom[i])); 
+					}
+				}
+				if(data.sunColor !== undefined)
+				{
+					object.sunColor = data.sunColor;
+				}
+				if(data.moonColor !== undefined)
+				{
+					object.moonColor = data.moonColor;
+				}
+				if(data.intensity !== undefined)
+				{
+					object.intensity = data.intensity;
+				}
 
-			break;
+				break;
 
-		case "LensFlare":
-			object = new LensFlare();
-			
-			if(data.lensFlares !== undefined)
-			{
-				data.elements = data.lensFlares;
-			}
-
-			for(var i = 0; i < data.elements.length; i++)
-			{
-				object.addFlare(getTexture(data.elements[i].texture), data.elements[i].size, data.elements[i].distance, new THREE.Color(data.elements[i].color));
-			}
-
-			break;
-
-		case "TextMesh":
-		case "Text3D":
-			object = new TextMesh(data.text, getMaterial(data.material), getFont(data.font), data.height, data.bevel, data.bevelThickness, data.bevelSize, data.size, data.curveSegments, data.extruded);
-			break;
-
-		case "Program":
-			object = new Program(data.name);
-			
-			object.description = data.description;
-			object.author = data.author;
-			object.version = data.version;
-
-			object.vr = data.vr;
-			object.vrScale = data.vrScale;
-
-			if(data.rendererConfig !== undefined)
-			{
-				object.rendererConfig.fromJSON(data.rendererConfig);
-			}
-			else
-			{
-				object.antialiasing = data.antialiasing;
-				object.shadows = data.shadows;
-				object.shadowsType = data.shadowsType;
-				object.toneMapping = data.toneMapping;
-				object.toneMappingWhitePoint = data.toneMappingWhitePoint;
-				object.toneMappingExposure = data.toneMappingExposure;
-			}
-
-			if(data.lockPointer !== undefined)
-			{
-				object.lockPointer = data.lockPointer;
-			}
-
-			if(data.defaultScene !== undefined)
-			{
-				object.defaultScene = data.defaultScene;
-			}
-			
-			if(data.handlePixelRatio !== undefined)
-			{
-				object.handlePixelRatio = data.handlePixelRatio;	
-			}
-
-			break;
-
-		case "LeapDevice":
-			object = new LeapMotion();
-			object.mode = data.mode;
-			object.useArm = data.useArm;
-			if(data.debugModel !== undefined)
-			{
-				object.debugModel = data.debugModel;
-			}
-			if(data.gesturesEnabled !== undefined)
-			{
-				object.gesturesEnabled = data.gesturesEnabled;
-			}
-			if(data.posesEnabled !== undefined)
-			{
-				object.posesEnabled = data.posesEnabled;
-			}
-			break;
-
-		case "Kinect":
-			object = new KinectDevice();
-			if(data.debugModel !== undefined)
-			{
-				object.debugModel = data.debugModel;
-			}
-			break;
-
-		case "Sky":
-			object = new Sky(data.autoUpdate, data.dayTime, data.sunDistance, data.time);
-			
-			if(data.sun !== undefined)
-			{
-				object.sun.shadow.fromJSON(data.sun.shadow);
+			case "CubeCamera":
+				object = new CubeCamera(data.near, data.far, data.resolution, data.autoUpdate);
+				break;
 				
-				if(data.sun.castShadow !== undefined)
-				{
-					object.sun.castShadow = data.sun.castShadow;
-				}
-			}
+			case "FirstPersonControls":
+				object = new FirstPersonControls();
+				object.sensitivity = data.sensitivity;
+				object.needsButtonPressed = data.needsButtonPressed;
+				object.movementEnabled = data.movementEnabled;
+				object.moveSpeed = data.moveSpeed;
+				object.moveOnPlane = data.moveOnPlane;
+				object.moveKeys = data.moveKeys;
+				break;
 
-			if(data.colorTop !== undefined)
-			{
-				object.colorTop = [];
-				for(var i = 0; i < data.colorTop.length; i++)
-				{
-					object.colorTop.push(new THREE.Color(data.colorTop[i])); 
-				}
-			}
-			if(data.colorBottom !== undefined)
-			{
-				object.colorBottom = [];
-				for(var i = 0; i < data.colorBottom.length; i++)
-				{
-					object.colorBottom.push(new THREE.Color(data.colorBottom[i])); 
-				}
-			}
-			if(data.sunColor !== undefined)
-			{
-				object.sunColor = data.sunColor;
-			}
-			if(data.moonColor !== undefined)
-			{
-				object.moonColor = data.moonColor;
-			}
-			if(data.intensity !== undefined)
-			{
-				object.intensity = data.intensity;
-			}
-
-			break;
-
-		case "CubeCamera":
-			object = new CubeCamera(data.near, data.far, data.resolution, data.autoUpdate);
-			break;
-			
-		case "FirstPersonControls":
-			object = new FirstPersonControls();
-			object.sensitivity = data.sensitivity;
-			object.needsButtonPressed = data.needsButtonPressed;
-			object.movementEnabled = data.movementEnabled;
-			object.moveSpeed = data.moveSpeed;
-			object.moveOnPlane = data.moveOnPlane;
-			object.moveKeys = data.moveKeys;
-			break;
-
-		case "OrbitControls":
-			object = new OrbitControls();
-			object.distance = data.distance;
-			object.maxDistance = data.maxDistance;
-			object.minDistance = data.minDistance;
-			object.sensitivity = data.sensitivity;
-			object.limitUp = data.limitUp;
-			object.limitDown = data.limitDown;
-			object.needsButtonPressed = data.needsButtonPressed;
-			object.zoomEnabled = data.zoomEnabled;
-			object.movementEnabled = data.movementEnabled;
-			
-			if(data.smooth !== undefined)
-			{
-				object.smooth = data.smooth;
-				object.friction = data.friction;
-				object.speed = data.speed;
-				object.invertNavigation = data.invertNavigation;
-			}
-			if(data.center !== undefined)
-			{
-				object.center.fromArray(data.center);
-				object.vector.fromArray(data.vector);
-			}
-
-			break;
-			
-		case "Scene":
-			object = new Scene();
-
-			if(data.background !== undefined)
-			{
-				if(Number.isInteger(data.background))
-				{
-					object.background = new THREE.Color(data.background);
-				}
-				else
-				{
-					object.background = getTexture(data.background);
-				}
-			}
-
-			if(data.fog !== undefined)
-			{
-				if(data.fog.type === "Fog")
-				{
-					object.fog = new THREE.Fog(data.fog.color, data.fog.near, data.fog.far);
-				}
-				else if(data.fog.type === "FogExp2")
-				{
-					object.fog = new THREE.FogExp2(data.fog.color, data.fog.density);
-				}
-			}
-
-			if(data.defaultCamera !== undefined)
-			{
-				object.defaultCamera = this.parse(data.defaultCamera);
-			}
-
-			if(data.cameras !== undefined)
-			{
-				object.cameras = data.cameras;
-			}
-
-			if(data.usePhysics !== undefined)
-			{
-				object.usePhysics = data.usePhysics;
-			}
-
-			if(data.world !== undefined)
-			{
-				object.world.gravity.set(data.world.gravity.x, data.world.gravity.y, data.world.gravity.z);
-				object.world.quatNormalizeSkip = data.world.quatNormalizeSkip;
-				object.world.quatNormalizeFast = data.world.quatNormalizeFast;
+			case "OrbitControls":
+				object = new OrbitControls();
+				object.distance = data.distance;
+				object.maxDistance = data.maxDistance;
+				object.minDistance = data.minDistance;
+				object.sensitivity = data.sensitivity;
+				object.limitUp = data.limitUp;
+				object.limitDown = data.limitDown;
+				object.needsButtonPressed = data.needsButtonPressed;
+				object.zoomEnabled = data.zoomEnabled;
+				object.movementEnabled = data.movementEnabled;
 				
-				object.world.solver.tolerance = data.world.solver.tolerance;
-				object.world.solver.iterations = data.world.solver.iterations;
-			}
-			break;
-
-		case "PerspectiveCamera":
-			object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
-			
-			if(data.focus !== undefined) 
-			{
-				object.focus = data.focus;
-			}
-			if(data.zoom !== undefined)
-			{
-				object.zoom = data.zoom;
-			}
-			if(data.filmGauge !== undefined)
-			{
-				object.filmGauge = data.filmGauge;
-			}
-			if(data.filmOffset !== undefined)
-			{
-				object.filmOffset = data.filmOffset;
-			}
-			if(data.view !== undefined)
-			{
-				object.view = Object.assign({}, data.view);
-			}
-
-			if(data.viewport !== undefined)
-			{
-				if(data.viewport instanceof Array)
+				if(data.smooth !== undefined)
 				{
-					object.viewport.size.fromArray(data.viewport);
-					object.viewport.offset.fromArray(data.offset);
+					object.smooth = data.smooth;
+					object.friction = data.friction;
+					object.speed = data.speed;
+					object.invertNavigation = data.invertNavigation;
 				}
-				else
+				if(data.center !== undefined)
 				{
-					object.viewport.fromJSON(data.viewport);
+					object.center.fromArray(data.center);
+					object.vector.fromArray(data.vector);
 				}
-			}
 
-			if(data.clearColor !== undefined)
-			{
-				object.clearColor = data.clearColor;
-			}
-			if(data.clearDepth !== undefined)
-			{
-				object.clearDepth = data.clearDepth;
-			}
-			if(data.clearStencil !== undefined)
-			{
-				object.clearStencil = data.clearStencil;
-			}
-			if(data.order !== undefined)
-			{
-				object.order = data.order;
-			}
+				break;
+				
+			case "Scene":
+				object = new Scene();
 
-			if(data.composer !== undefined)
-			{
-				object.composer = EffectComposer.fromJSON(data.composer);
-			}
-			break;
-
-		case "OrthographicCamera":
-			object = new OrthographicCamera(data.size, data.aspect, data.mode, data.near, data.far);
-
-			if(data.viewport !== undefined)
-			{
-				if(data.viewport instanceof Array)
+				if(data.background !== undefined)
 				{
-					object.viewport.size.fromArray(data.viewport);
-					object.viewport.offset.fromArray(data.offset);
+					if(Number.isInteger(data.background))
+					{
+						object.background = new THREE.Color(data.background);
+					}
+					else
+					{
+						object.background = getTexture(data.background);
+					}
 				}
-				else
+
+				if(data.fog !== undefined)
 				{
-					object.viewport.fromJSON(data.viewport);
+					if(data.fog.type === "Fog")
+					{
+						object.fog = new THREE.Fog(data.fog.color, data.fog.near, data.fog.far);
+					}
+					else if(data.fog.type === "FogExp2")
+					{
+						object.fog = new THREE.FogExp2(data.fog.color, data.fog.density);
+					}
 				}
-			}
 
-			if(data.clearColor !== undefined)
-			{
-				object.clearColor = data.clearColor;
-			}
-			if(data.clearDepth !== undefined)
-			{
-				object.clearDepth = data.clearDepth;
-			}
-			if(data.clearStencil !== undefined)
-			{
-				object.clearStencil = data.clearStencil;
-			}
-			if(data.order !== undefined)
-			{
-				object.order = data.order;
-			}
-			if(data.composer !== undefined)
-			{
-				object.composer = EffectComposer.fromJSON(data.composer);
-			}
-			if(data.zoom !== undefined)
-			{
-				object.zoom = data.zoom;
-			}
-			if(data.view !== undefined)
-			{
-				object.view = Object.assign({}, data.view);
-			}
-			break;
+				if(data.defaultCamera !== undefined)
+				{
+					object.defaultCamera = this.parse(data.defaultCamera);
+				}
 
-		case "Script":
-			object = new Script(data.code, data.mode);
-			break;
+				if(data.cameras !== undefined)
+				{
+					object.cameras = data.cameras;
+				}
 
-		case "RectAreaLight":
-			object = new RectAreaLight(data.color, data.intensity, data.width, data.height);
-			break;
+				if(data.usePhysics !== undefined)
+				{
+					object.usePhysics = data.usePhysics;
+				}
 
-		case "AmbientLight":
-			object = new AmbientLight(data.color, data.intensity);
-			break;
+				if(data.world !== undefined)
+				{
+					object.world.gravity.set(data.world.gravity.x, data.world.gravity.y, data.world.gravity.z);
+					object.world.quatNormalizeSkip = data.world.quatNormalizeSkip;
+					object.world.quatNormalizeFast = data.world.quatNormalizeFast;
+					
+					object.world.solver.tolerance = data.world.solver.tolerance;
+					object.world.solver.iterations = data.world.solver.iterations;
+				}
+				break;
 
-		case "DirectionalLight":
-			object = new DirectionalLight(data.color, data.intensity);
-			break;
+			case "PerspectiveCamera":
+				object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
+				
+				if(data.focus !== undefined) 
+				{
+					object.focus = data.focus;
+				}
+				if(data.zoom !== undefined)
+				{
+					object.zoom = data.zoom;
+				}
+				if(data.filmGauge !== undefined)
+				{
+					object.filmGauge = data.filmGauge;
+				}
+				if(data.filmOffset !== undefined)
+				{
+					object.filmOffset = data.filmOffset;
+				}
+				if(data.view !== undefined)
+				{
+					object.view = Object.assign({}, data.view);
+				}
 
-		case "PointLight":
-			object = new PointLight(data.color, data.intensity, data.distance, data.decay);
-			break;
+				if(data.viewport !== undefined)
+				{
+					if(data.viewport instanceof Array)
+					{
+						object.viewport.size.fromArray(data.viewport);
+						object.viewport.offset.fromArray(data.offset);
+					}
+					else
+					{
+						object.viewport.fromJSON(data.viewport);
+					}
+				}
 
-		case "SpotLight":
-			object = new SpotLight(data.color, data.intensity, data.distance, data.angle, data.penumbra, data.decay);
-			break;
+				if(data.clearColor !== undefined)
+				{
+					object.clearColor = data.clearColor;
+				}
+				if(data.clearDepth !== undefined)
+				{
+					object.clearDepth = data.clearDepth;
+				}
+				if(data.clearStencil !== undefined)
+				{
+					object.clearStencil = data.clearStencil;
+				}
+				if(data.order !== undefined)
+				{
+					object.order = data.order;
+				}
 
-		case "HemisphereLight":
-			object = new HemisphereLight(data.color, data.groundColor, data.intensity);
-			break;
+				if(data.composer !== undefined)
+				{
+					object.composer = EffectComposer.fromJSON(data.composer);
+				}
+				break;
 
-		case "SkinnedMesh":
-			var geometry = getGeometry(data.geometry);
-			var material = getMaterial(data.material);
-			var tmpBones;
+			case "OrthographicCamera":
+				object = new OrthographicCamera(data.size, data.aspect, data.mode, data.near, data.far);
 
-			//If data has skeleton, assumes bones are already in scene graph. Then temporarily undefines geometry.bones not to create bones in SkinnedMesh constructor.
-			if(data.skeleton !== undefined && geometry.bones !== undefined)
-			{
-				tmpBones = geometry.bones;
-				geometry.bones = undefined;
-			}
+				if(data.viewport !== undefined)
+				{
+					if(data.viewport instanceof Array)
+					{
+						object.viewport.size.fromArray(data.viewport);
+						object.viewport.offset.fromArray(data.offset);
+					}
+					else
+					{
+						object.viewport.fromJSON(data.viewport);
+					}
+				}
 
-			object = new SkinnedMesh(geometry, material);
+				if(data.clearColor !== undefined)
+				{
+					object.clearColor = data.clearColor;
+				}
+				if(data.clearDepth !== undefined)
+				{
+					object.clearDepth = data.clearDepth;
+				}
+				if(data.clearStencil !== undefined)
+				{
+					object.clearStencil = data.clearStencil;
+				}
+				if(data.order !== undefined)
+				{
+					object.order = data.order;
+				}
+				if(data.composer !== undefined)
+				{
+					object.composer = EffectComposer.fromJSON(data.composer);
+				}
+				if(data.zoom !== undefined)
+				{
+					object.zoom = data.zoom;
+				}
+				if(data.view !== undefined)
+				{
+					object.view = Object.assign({}, data.view);
+				}
+				break;
 
-			//Rebinds with skeleton whose uuid is data.skeleton later.
-			if(data.skeleton !== undefined)
-			{
-				object.skeletonUUID = data.skeleton;
-			}
+			case "Script":
+				object = new Script(data.code, data.mode);
+				break;
 
-			if(data.bindMode !== undefined)
-			{
-				object.bindMode = data.bindMode;
-			}
+			case "RectAreaLight":
+				object = new RectAreaLight(data.color, data.intensity, data.width, data.height);
+				break;
 
-			if(data.bindMatrix !== undefined)
-			{
-				object.bindMatrix.fromArray(data.bindMatrix);
-			}
+			case "AmbientLight":
+				object = new AmbientLight(data.color, data.intensity);
+				break;
 
-			object.updateMatrixWorld(true);
+			case "DirectionalLight":
+				object = new DirectionalLight(data.color, data.intensity);
+				break;
 
-			if(tmpBones !== undefined)
-			{
-				geometry.bones = tmpBones;
-			}
+			case "PointLight":
+				object = new PointLight(data.color, data.intensity, data.distance, data.decay);
+				break;
 
-			break;
+			case "SpotLight":
+				object = new SpotLight(data.color, data.intensity, data.distance, data.angle, data.penumbra, data.decay);
+				break;
 
-		case "InstancedMesh":
-			var geometry = getGeometry(data.geometry);
-			var material = getMaterial(data.material);
-			console.log(data);
-			object = new InstancedMesh(geometry, material, data.count);
-			object.instanceMatrix = new THREE.BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
-			break;
+			case "HemisphereLight":
+				object = new HemisphereLight(data.color, data.groundColor, data.intensity);
+				break;
 
-		case "HTMLView":
-			object = new HTMLView();
-			object.height = data.height;
-			object.width = data.width;
-			object.url = data.url;
-			break;
+			case "SkinnedMesh":
+				var geometry = getGeometry(data.geometry);
+				var material = getMaterial(data.material);
+				var tmpBones;
 
-		case "LightProbe":
-			object = new LightProbe();
-			object.sh.fromArray(data.sh);
-			break;
+				//If data has skeleton, assumes bones are already in scene graph. Then temporarily undefines geometry.bones not to create bones in SkinnedMesh constructor.
+				if(data.skeleton !== undefined && geometry.bones !== undefined)
+				{
+					tmpBones = geometry.bones;
+					geometry.bones = undefined;
+				}
 
-		case "Mesh":
-			var geometry = getGeometry(data.geometry);
-			var material = getMaterial(data.material);
-
-			if(geometry.bones && geometry.bones.length > 0)
-			{
 				object = new SkinnedMesh(geometry, material);
-			}
-			else
-			{
-				object = new Mesh(geometry, material);
-			}
-			break;
 
-		case "TextBitmap":
-			object = TextBitmap.fromJSON(data, getTexture(data.texture));
-			break;
+				//Rebinds with skeleton whose uuid is data.skeleton later.
+				if(data.skeleton !== undefined)
+				{
+					object.skeletonUUID = data.skeleton;
+				}
 
-		case "TextSprite":
-			object = TextSprite.fromJSON(data);
-			break;
+				if(data.bindMode !== undefined)
+				{
+					object.bindMode = data.bindMode;
+				}
 
-		case "LOD":
-			object = new THREE.LOD();
-			break;
+				if(data.bindMatrix !== undefined)
+				{
+					object.bindMatrix.fromArray(data.bindMatrix);
+				}
 
-		case "Line":
-			object = new THREE.Line(getGeometry(data.geometry), getMaterial(data.material), data.mode);
-			break;
+				object.updateMatrixWorld(true);
 
-		case "LineLoop":
-			object = new THREE.LineLoop(getGeometry(data.geometry), getMaterial(data.material));
-			break;
+				if(tmpBones !== undefined)
+				{
+					geometry.bones = tmpBones;
+				}
 
-		case "LineSegments":
-			object = new THREE.LineSegments(getGeometry(data.geometry), getMaterial(data.material));
-			break;
+				break;
 
-		case "PointCloud":
-		case "Points":
-			object = new THREE.Points(getGeometry(data.geometry), getMaterial(data.material));
-			break;
+			case "InstancedMesh":
+				var geometry = getGeometry(data.geometry);
+				var material = getMaterial(data.material);
+				object = new InstancedMesh(geometry, material, data.count);
+				object.instanceMatrix = new THREE.BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
+				break;
 
-		case "Sprite":
-			object = new Sprite(getMaterial(data.material));
-			break;
+			case "HTMLView":
+				object = new HTMLView();
+				object.height = data.height;
+				object.width = data.width;
+				object.url = data.url;
+				break;
 
-		case "Group":
-			object = new Container();
-			break;
+			case "LightProbe":
+				object = new LightProbe();
+				object.sh.fromArray(data.sh);
+				break;
 
-		case "Bone":
-			object = new THREE.Bone();
-			break;
+			case "Mesh":
+				var geometry = getGeometry(data.geometry);
+				var material = getMaterial(data.material);
 
-		default:
-			object = new Container();
+				if(geometry.bones && geometry.bones.length > 0)
+				{
+					object = new SkinnedMesh(geometry, material);
+				}
+				else
+				{
+					object = new Mesh(geometry, material);
+				}
+				break;
+
+			case "TextBitmap":
+				object = TextBitmap.fromJSON(data, getTexture(data.texture));
+				break;
+
+			case "TextSprite":
+				object = TextSprite.fromJSON(data);
+				break;
+
+			case "LOD":
+				object = new THREE.LOD();
+				break;
+
+			case "Line":
+				object = new THREE.Line(getGeometry(data.geometry), getMaterial(data.material), data.mode);
+				break;
+
+			case "LineLoop":
+				object = new THREE.LineLoop(getGeometry(data.geometry), getMaterial(data.material));
+				break;
+
+			case "LineSegments":
+				object = new THREE.LineSegments(getGeometry(data.geometry), getMaterial(data.material));
+				break;
+
+			case "PointCloud":
+			case "Points":
+				object = new THREE.Points(getGeometry(data.geometry), getMaterial(data.material));
+				break;
+
+			case "Sprite":
+				object = new Sprite(getMaterial(data.material));
+				break;
+
+			case "Group":
+				object = new Container();
+				break;
+
+			case "Bone":
+				object = new THREE.Bone();
+				break;
+
+			default:
+				object = new Container();
+		}
+	}
+	catch(e)
+	{
+		console.warn("nunuStudio: Error parsing and creating object " + data.uuid + ", object skiped.", data);
+		object = new Container();
 	}
 
 	object.uuid = data.uuid;
