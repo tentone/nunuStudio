@@ -1371,7 +1371,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com."
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com."
         },
         "Textures": {
             "name": "Textures",
@@ -2861,7 +2861,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com.",
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com.",
             "extends": "{spine.threejs.SkeletonMesh}",
             "params": [
                 {
@@ -12269,7 +12269,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 83,
+            "line": 80,
             "description": "Spine animation data.",
             "itemtype": "property",
             "name": "json",
@@ -12279,7 +12279,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 91,
+            "line": 88,
             "description": "Texture atlas information.",
             "itemtype": "property",
             "name": "atlas",
@@ -12289,7 +12289,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 99,
+            "line": 96,
             "description": "Array of SpineTextures used by the animation.",
             "itemtype": "property",
             "name": "textures",
@@ -12299,7 +12299,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 107,
+            "line": 104,
             "description": "The animation can have multiple skins that define diferent sets of textures for the same animation.",
             "itemtype": "attribute",
             "name": "skin",
@@ -12309,7 +12309,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 115,
+            "line": 112,
             "description": "Animation currently playing, animations are split into tracks.\n\nAn animation (e.g. walk) can be composed of multiple tracks.",
             "itemtype": "attribute",
             "name": "animation",
@@ -12319,7 +12319,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 125,
+            "line": 122,
             "description": "Index of the animation track playing.",
             "itemtype": "attribute",
             "name": "track",
@@ -12329,7 +12329,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 133,
+            "line": 130,
             "description": "Indicates the loop mode of the animation if set true the animation starts again after it ends.",
             "itemtype": "attribute",
             "name": "loop",
@@ -12339,7 +12339,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 154,
+            "line": 151,
             "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -12348,7 +12348,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 167,
+            "line": 164,
             "description": "Play animation.",
             "itemtype": "method",
             "name": "play",
@@ -12357,7 +12357,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 185,
+            "line": 182,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -12370,7 +12370,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 196,
+            "line": 193,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -12396,7 +12396,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 222,
+            "line": 219,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -12409,7 +12409,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 233,
+            "line": 230,
             "description": "Set skin to be used by this animation",
             "itemtype": "method",
             "name": "setSkin",
