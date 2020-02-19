@@ -54,9 +54,18 @@ LocaleManager.register(
 	createScene: "Create scene",
 	toInstancedMesh: "To Instanced Mesh",
 
+	//Devices
+	leapMotion: "Leap Motion",
+ 	microsoftKinect: "Microsoft Kinect",
+
 	//Objects
 	ambientLight: "Ambient Light",
 	pointLight: "Point Light",
+	spotLight: "Spot Light",
+	directionalLight: "Directional Light",
+	hemisphereLight: "Hemisphere Light",
+	rectAreaLight: "Rectarea Light",
+	lighProbe: "Light Probe",
 	particleEmitter: "Particle Emitter",
 	cubeCamera: "Cube camera",
 	positionalAudio: "Positional Audio",
@@ -70,14 +79,21 @@ LocaleManager.register(
 	orbitControls: "Orbit Controls",
 	firstPersonControls: "First Person Controls",
 	particle: "Particle",
+	ground: "Ground",
 
 	//Geometries
+	parametric: "Parametric",
 	box: "Box",
 	capsule: "Capsule",
 	dodecahedron: "Dodecahedron",
-	
+	octahedron: "Octahedron",
+	tetrahedron: "Tetrahedron",
+	icosahedron: "Icosahedron",
 	sphere: "Sphere",
 	disc: "Disc",
+	plane: "Plane",
+	circle: "Circle",
+	ring: "Ring",
 	cylinder: "Cylinder",
 	convexHull: "ConvexHull",
 	cube: "Cube",

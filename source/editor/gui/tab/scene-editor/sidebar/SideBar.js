@@ -272,7 +272,7 @@ SideBar.prototype.createObject = function()
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "plane";
 		Editor.addObject(model, self.editor.scene);
-	}, "Plane");
+	}, Locale.plane);
 
 	//Circle
 	models.addOption(Global.FILE_PATH + "icons/models/circle.png", function()
@@ -283,7 +283,7 @@ SideBar.prototype.createObject = function()
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "circle";
 		Editor.addObject(model, self.editor.scene);
-	}, "Cicle");
+	}, Locale.circle);
 
 	//Ring
 	models.addOption(Global.FILE_PATH + "icons/models/ring.png", function()
@@ -295,7 +295,7 @@ SideBar.prototype.createObject = function()
 		model.name = "ring";
 
 		Editor.addObject(model, self.editor.scene);
-	}, "Ring");
+	}, Locale.ring);
 
 	//Icosahedron
 	models.addOption(Global.FILE_PATH + "icons/models/icosahedron.png", function()
@@ -306,7 +306,7 @@ SideBar.prototype.createObject = function()
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "icosahedron";
 		Editor.addObject(model, self.editor.scene);
-	}, "Icosahedron");
+	}, Locale.icosahedron);
 
 	//Tetrahedron
 	models.addOption(Global.FILE_PATH + "icons/models/pyramid.png", function()
@@ -317,7 +317,7 @@ SideBar.prototype.createObject = function()
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "tetrahedron";
 		Editor.addObject(model, self.editor.scene);
-	}, "Tetrahedron");
+	}, Locale.tetrahedron);
 
 	//Octahedron
 	models.addOption(Global.FILE_PATH + "icons/models/octahedron.png", function()
@@ -328,7 +328,7 @@ SideBar.prototype.createObject = function()
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "octahedron";
 		Editor.addObject(model, self.editor.scene);
-	}, "Octahedron");
+	}, Locale.octahedron);
 
 	//Dodecahedron
 	models.addOption(Global.FILE_PATH + "icons/models/dodecahedron.png", function()
@@ -339,7 +339,7 @@ SideBar.prototype.createObject = function()
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "dodecahedron";
 		Editor.addObject(model, self.editor.scene);
-	}, "Dodecahedron");
+	}, Locale.dodecahedron);
 
 	//Capsule
 	models.addOption(Global.FILE_PATH + "icons/models/capsule.png", function()
@@ -351,7 +351,7 @@ SideBar.prototype.createObject = function()
 		model.name = "capsule";
 
 		Editor.addObject(model, self.editor.scene);
-	}, "Capsule");
+	}, Locale.capsule);
 
 	//Parametric
 	/*models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
@@ -385,7 +385,7 @@ SideBar.prototype.createObject = function()
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.name = "parametric";
 		Editor.addObject(model, self.editor.scene);
-	}, "Parametric");*/
+	}, Locale.parametric);*/
 
 	models.updateOptions();
 
@@ -443,31 +443,31 @@ SideBar.prototype.createObject = function()
 	lights.addOption(Global.FILE_PATH + "icons/lights/spot.png", function()
 	{
 		Editor.addObject(new SpotLight(0x444444), self.editor.scene);
-	}, "Spot Light");
+	}, Locale.spotLight);
 
 	//Directional Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/directional.png", function()
 	{
 		Editor.addObject(new DirectionalLight(0x444444), self.editor.scene);
-	}, "Directional Light");
+	}, Locale.directionalLight);
 
 	//Hemisphere Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/hemisphere.png", function()
 	{
 		Editor.addObject(new HemisphereLight(0x444444), self.editor.scene);
-	}, "Hemisphere Light");
+	}, Locale.hemisphereLight);
 
 	//RectArea Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/rectarea.png", function()
 	{
 		Editor.addObject(new RectAreaLight(0x444444, 100, 1, 1), self.editor.scene);
-	}, "Rectarea Light");
+	}, Locale.rectAreaLight);
 
 	//Probe
 	lights.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()
 	{
 		Editor.addObject(new LightProbe(), self.editor.scene);
-	}, "Light Probe");
+	}, Locale.lighProbe);
 
 	//Sky
 	lights.addOption(Global.FILE_PATH + "icons/lights/sky.png", function()
@@ -621,7 +621,7 @@ SideBar.prototype.createObject = function()
 		object.body.type = CANNON.Body.KINEMATIC;
 		object.name = "ground";
 		Editor.addObject(object, self.editor.scene);
-	}, "Ground");
+	}, Locale.ground);
 
 	//Physics Particle
 	physics.addOption(Global.FILE_PATH + "icons/models/point.png", function()
@@ -655,13 +655,13 @@ SideBar.prototype.createObject = function()
 	controls.addOption(Global.FILE_PATH + "icons/hw/leap.png", function()
 	{
 		Editor.addObject(new LeapMotion(), self.editor.scene);
-	}, "Leap Motion");
+	}, Locale.leapMotion);
 
 	//Kinect Skeleton
 	controls.addOption(Global.FILE_PATH + "icons/hw/kinect.png", function()
 	{
 		Editor.addObject(new KinectDevice(), self.editor.scene);
-	}, "Microsoft Kinect");
+	}, Locale.microsoftKinect);
 
 	controls.updateOptions();
 };
