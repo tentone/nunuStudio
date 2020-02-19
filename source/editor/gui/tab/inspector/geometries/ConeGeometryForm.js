@@ -12,7 +12,7 @@ function ConeGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Cone Geometry");
+	this.form.addText(Locale.cone);
 	this.form.nextRow();
 
 	//Radius

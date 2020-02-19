@@ -12,7 +12,7 @@ function CircleGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Circle Geometry");
+	this.form.addText(Locale.circle);
 	this.form.nextRow();
 
 	//Radius

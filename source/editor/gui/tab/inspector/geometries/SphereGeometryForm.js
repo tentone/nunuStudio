@@ -12,7 +12,7 @@ function SphereGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Sphere Geometry");
+	this.form.addText(Locale.sphere);
 	this.form.nextRow();
 
 	//Radius

@@ -12,7 +12,7 @@ function TetrahedronGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Tetrahedron Geometry");
+	this.form.addText(Locale.tetrahedron);
 	this.form.nextRow();
 
 	//Radius

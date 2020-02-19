@@ -12,7 +12,7 @@ function BoxGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Box Geometry");
+	this.form.addText(Locale.box);
 	this.form.nextRow();
 	
 	//Size
@@ -68,7 +68,7 @@ BoxGeometryForm.prototype.updateGeometry = function()
 {
 	var GeometryConstructor = this.buffer.getValue() ? THREE.BoxBufferGeometry : THREE.BoxGeometry;
 	var geometry = new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.depth.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.depthSegments.getValue());
-	
+
 	this.object.geometry.dispose();
 	Editor.addAction(new ChangeAction(this.object, "geometry", geometry));
 };

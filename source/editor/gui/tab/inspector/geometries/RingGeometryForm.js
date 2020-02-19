@@ -12,7 +12,7 @@ function RingGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Ring Geometry");
+	this.form.addText(Locale.ring);
 	this.form.nextRow();
 	
 	//Inner radius

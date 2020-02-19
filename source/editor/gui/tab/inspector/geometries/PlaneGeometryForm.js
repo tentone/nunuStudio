@@ -12,7 +12,7 @@ function PlaneGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Plane Geometry");
+	this.form.addText(Locale.plane);
 	this.form.nextRow();
 	
 	//Size

@@ -12,7 +12,7 @@ function OctahedronGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Octahedron Geometry");
+	this.form.addText(Locale.octahedron);
 	this.form.nextRow();
 
 	//Radius

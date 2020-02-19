@@ -12,7 +12,7 @@ function CylinderGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Cylinder Geometry");
+	this.form.addText(Locale.cylinder);
 	this.form.nextRow();
 
 	//Radius

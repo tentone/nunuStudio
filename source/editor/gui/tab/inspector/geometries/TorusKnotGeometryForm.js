@@ -12,7 +12,7 @@ function TorusKnotGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Torus Geometry");
+	this.form.addText(Locale.torusKnot);
 	this.form.nextRow();
 
 	//Radius

@@ -12,7 +12,7 @@ function DodecahedronGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Dodecahedron Geometry");
+	this.form.addText(Locale.dodecahedron);
 	this.form.nextRow();
 
 	//Radius

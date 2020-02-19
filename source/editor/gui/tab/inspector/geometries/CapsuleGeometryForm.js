@@ -12,7 +12,7 @@ function CapsuleGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Capsule Geometry");
+	this.form.addText(Locale.capsule);
 	this.form.nextRow();
 
 	//Radius

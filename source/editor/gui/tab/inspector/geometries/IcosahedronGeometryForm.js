@@ -12,7 +12,7 @@ function IcosahedronGeometryForm(form, object)
 		self.updateGeometry();
 	};
 
-	this.form.addText("Icosahedron Geometry");
+	this.form.addText(Locale.icosahedron);
 	this.form.nextRow();
 
 	//Radius
