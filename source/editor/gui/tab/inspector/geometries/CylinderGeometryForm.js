@@ -35,7 +35,7 @@ function CylinderGeometryForm(form, object)
 	//Height
 	this.form.addText(Locale.height);
 	this.height = new NumberBox(this.form);
-	this.height.size.set(40, 18);
+	this.height.size.set(0, 18);
 	this.height.setStep(0.1);
 	this.height.setOnChange(updateGeometry);
 	this.form.add(this.height);
@@ -43,20 +43,24 @@ function CylinderGeometryForm(form, object)
 
 	//Segments
 	this.form.addText(Locale.segments);
-	this.segmentsRow = new NumberRow(this.form);
-	this.segmentsRow.size.set(0, 18);
+	this.form.nextRow();
 
-	this.radialSegments = this.segmentsRow.addValue(Locale.radial);
+	this.form.addText(Locale.radial);
+	this.radialSegments = new NumberRow(this.form);
+	this.radialSegments.size.set(0, 18);
 	this.radialSegments.setRange(3, Number.MAX_SAFE_INTEGER);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
+	this.form.add(this.radialSegments);
+	this.form.nextRow();
 
-	this.heightSegments = this.segmentsRow.addValue(Locale.height);
+	this.form.addText(Locale.height);
+	this.heightSegments = new NumberRow(this.form);
+	this.heightSegments.size.set(0, 18);
 	this.heightSegments.setRange(1, Number.MAX_SAFE_INTEGER);
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);
-
-	this.form.add(this.segmentsRow);
+	this.form.add(this.heightSegments);
 	this.form.nextRow();
 
 	//Buffer

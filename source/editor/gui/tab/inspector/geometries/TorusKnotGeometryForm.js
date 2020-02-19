@@ -18,7 +18,7 @@ function TorusKnotGeometryForm(form, object)
 	//Radius
 	this.form.addText(Locale.radius);
 	this.radius = new NumberBox(this.form);
-	this.radius.size.set(40, 18);
+	this.radius.size.set(0, 18);
 	this.radius.setStep(0.1);
 	this.radius.setOnChange(updateGeometry);
 	this.form.add(this.radius);
@@ -27,7 +27,7 @@ function TorusKnotGeometryForm(form, object)
 	//Tube
 	this.form.addText(Locale.tube);
 	this.tube = new NumberBox(this.form);
-	this.tube.size.set(40, 18);
+	this.tube.size.set(0, 18);
 	this.tube.setStep(0.1);
 	this.tube.setOnChange(updateGeometry);
 	this.form.add(this.tube);
@@ -35,25 +35,28 @@ function TorusKnotGeometryForm(form, object)
 
 	//Segments
 	this.form.addText(Locale.segments);
-	this.segmentsRow = new NumberRow(this.form);
-	this.segmentsRow.size.set(0, 18);
 	this.form.nextRow();
-
-	this.radialSegments = this.segmentsRow.addValue(Locale.radial);
+	
+	this.form.addText(Locale.radial);
+	this.radialSegments = new NumberBox(this.form);
+	this.radialSegments.size.set(0, 18);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
-
-	this.tubularSegments = this.segmentsRow.addValue(Locale.tubular);
+	this.form.add(this.radialSegments);
+	this.form.nextRow();
+	
+	this.form.addText(Locale.tubular);
+	this.tubularSegments = new NumberBox(this.form);
+	this.tubularSegments.size.set(0, 18);
 	this.tubularSegments.setStep(1);
 	this.tubularSegments.setOnChange(updateGeometry);
-
-	this.form.add(this.segmentsRow);
+	this.form.add(this.tubularSegments);
 	this.form.nextRow();
 
 	//Axis winds
 	this.form.addText(Locale.axisWinds);
 	this.p = new NumberBox(this.form);
-	this.p.size.set(40, 18);
+	this.p.size.set(0, 18);
 	this.p.setStep(0.1);
 	this.p.setOnChange(updateGeometry);
 	this.form.add(this.p);
@@ -62,7 +65,7 @@ function TorusKnotGeometryForm(form, object)
 	//Circle winds
 	this.form.addText(Locale.circleWinds);
 	this.q = new NumberBox(this.form);
-	this.q.size.set(40, 18);
+	this.q.size.set(0, 18);
 	this.q.setStep(0.1);
 	this.q.setOnChange(updateGeometry);
 	this.form.add(this.q);

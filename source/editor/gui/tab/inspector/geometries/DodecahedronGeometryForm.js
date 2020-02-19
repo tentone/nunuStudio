@@ -18,7 +18,7 @@ function DodecahedronGeometryForm(form, object)
 	//Radius
 	this.form.addText(Locale.radius);
 	this.radius = new NumberBox(this.form);
-	this.radius.size.set(40, 18);
+	this.radius.size.set(0, 18);
 	this.radius.setStep(0.1);
 	this.radius.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.radius.setOnChange(updateGeometry);

@@ -56,7 +56,7 @@ function RingGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Theta start
-	this.form.addText(Locale.tethaStart);
+	this.form.addText(Locale.thetaStart);
 	this.thetaStart = new NumberBox(this.form);
 	this.thetaStart.size.set(60, 18);
 	this.thetaStart.setStep(0.1);
@@ -65,7 +65,7 @@ function RingGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Theta length
-	this.form.addText(Locale.tethaLength);
+	this.form.addText(Locale.thetaLength);
 	this.thetaLength = new NumberBox(this.form);
 	this.thetaLength.size.set(60, 18);
 	this.thetaLength.setStep(0.1);

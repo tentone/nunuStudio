@@ -20,11 +20,11 @@ function PlaneGeometryForm(form, object)
 	this.sizeRow = new NumberRow(this.form);
 	this.sizeRow.size.set(0, 18);
 
-	this.width = this.sizeRow.addValue(Locale.width);
+	this.width = this.sizeRow.addValue("X");
 	this.width.setStep(0.1);
 	this.width.setOnChange(updateGeometry);
 
-	this.height = this.sizeRow.addValue(Locale.height);
+	this.height = this.sizeRow.addValue("Y");
 	this.height.setStep(0.1);
 	this.height.setOnChange(updateGeometry);
 
@@ -36,11 +36,11 @@ function PlaneGeometryForm(form, object)
 	this.segmentsRow = new NumberRow(this.form);
 	this.segmentsRow.size.set(0, 18);
 
-	this.widthSegments = this.segmentsRow.addValue(Locale.width);
+	this.widthSegments = this.segmentsRow.addValue("X");
 	this.widthSegments.setStep(1);
 	this.widthSegments.setOnChange(updateGeometry);
 
-	this.heightSegments = this.segmentsRow.addValue(Locale.height);
+	this.heightSegments = this.segmentsRow.addValue("Y");
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);
 
