@@ -28,19 +28,20 @@ function SphereGeometryForm(form, object)
 	this.form.addText(Locale.segments);
 	this.segmentsRow = new NumberRow(this.form);
 	this.segmentsRow.size.set(0, 18);
-
-	this.widthSegments = this.segmentsRow.addValue("W");
+	this.form.nextRow();
+		
+	this.widthSegments = this.segmentsRow.addValue(Locale.width);
 	this.widthSegments.setStep(1);
 	this.widthSegments.setOnChange(updateGeometry);
 
-	this.heightSegments = this.segmentsRow.addValue("H");
+	this.heightSegments = this.segmentsRow.addValue(Locale.height);
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);
 
 	this.form.add(this.segmentsRow);
 	this.form.nextRow();
 
-	this.form.addText("Phi Start");
+	this.form.addText(phiStart);
 	this.phiStart = new NumberBox(this.form);
 	this.phiStart.size.set(40, 18);
 	this.phiStart.setStep(0.01);
@@ -48,7 +49,7 @@ function SphereGeometryForm(form, object)
 	this.form.add(this.phiStart);
 	this.form.nextRow();
 	
-	this.form.addText("Phi Length");
+	this.form.addText(Locale.phiLength);
 	this.phiLength = new NumberBox(this.form);
 	this.phiLength.size.set(40, 18);
 	this.phiLength.setStep(0.01);
@@ -56,7 +57,7 @@ function SphereGeometryForm(form, object)
 	this.form.add(this.phiLength);
 	this.form.nextRow();
 
-	this.form.addText("Theta Start");
+	this.form.addText(Locale.thetaStart);
 	this.thetaStart = new NumberBox(this.form);
 	this.thetaStart.size.set(40, 18);
 	this.thetaStart.setStep(0.01);
@@ -64,7 +65,7 @@ function SphereGeometryForm(form, object)
 	this.form.add(this.thetaStart);
 	this.form.nextRow();
 
-	this.form.addText("Theta Length");
+	this.form.addText(Locale.thetaLength);
 	this.thetaLength = new NumberBox(this.form);
 	this.thetaLength.size.set(40, 18);
 	this.thetaLength.setStep(0.01);

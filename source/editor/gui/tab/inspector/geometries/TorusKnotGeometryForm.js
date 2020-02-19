@@ -25,7 +25,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.nextRow();
 	
 	//Tube
-	this.form.addText("Tube");
+	this.form.addText(Locale.tube);
 	this.tube = new NumberBox(this.form);
 	this.tube.size.set(40, 18);
 	this.tube.setStep(0.1);
@@ -37,12 +37,13 @@ function TorusKnotGeometryForm(form, object)
 	this.form.addText(Locale.segments);
 	this.segmentsRow = new NumberRow(this.form);
 	this.segmentsRow.size.set(0, 18);
+	this.form.nextRow();
 
-	this.radialSegments = this.segmentsRow.addValue("R");
+	this.radialSegments = this.segmentsRow.addValue(Locale.radial);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
 
-	this.tubularSegments = this.segmentsRow.addValue("T");
+	this.tubularSegments = this.segmentsRow.addValue(Locale.tubular);
 	this.tubularSegments.setStep(1);
 	this.tubularSegments.setOnChange(updateGeometry);
 
@@ -50,7 +51,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Axis winds
-	this.form.addText("Axis winds");
+	this.form.addText(Locale.axisWinds);
 	this.p = new NumberBox(this.form);
 	this.p.size.set(40, 18);
 	this.p.setStep(0.1);
@@ -59,7 +60,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Circle winds
-	this.form.addText("Circle winds");
+	this.form.addText(Locale.circleWinds);
 	this.q = new NumberBox(this.form);
 	this.q.size.set(40, 18);
 	this.q.setStep(0.1);

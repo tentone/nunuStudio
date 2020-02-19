@@ -73,13 +73,16 @@ LocaleManager.register(
 
 	//Geometries
 	box: "Box",
+	capsule: "Capsule",
+	dodecahedron: "Dodecahedron",
+	
 	sphere: "Sphere",
 	disc: "Disc",
 	cylinder: "Cylinder",
 	convexHull: "ConvexHull",
 	cube: "Cube",
 	torus: "Torus",
-	torusKnot: "Torus Knot",
+	torusKnot: "Torus-Knot",
 	cone: "Cone",
 
 	//Properties
@@ -249,8 +252,22 @@ LocaleManager.register(
 	pixelRatio: "Pixel Ratio",
 	radius: "Radius",
 	segments: "Segments",
+	detail: "Detail",
 	radial: "Radial",
+	tubular: "Tubular",
 	buffered: "Buffered",
+	thetaStart: "Theta Start",
+	thetaLength: "Theta Length",
+	thetaSegments: "Theta Segments",
+	phiStart: "Phi Start",
+	phiLength: "Phi Length",
+	phiSegments: "Phi Segments",
+	innerRadius: "Inner Radius",
+	outerRadius: "Outer Radius",
+	tube: "Tube",
+	arc: "Arc",
+	axisWinds: "Axis Winds",
+	circleWinds: "Circle Winds",
 
 	//Values
 	evaluate: "Evaluate",

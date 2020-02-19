@@ -16,7 +16,7 @@ function RingGeometryForm(form, object)
 	this.form.nextRow();
 	
 	//Inner radius
-	this.form.addText("Inner radius");
+	this.form.addText(Locale.innerRadius);
 	this.innerRadius = new NumberBox(this.form);
 	this.innerRadius.size.set(60, 18);
 	this.innerRadius.setStep(0.1);
@@ -26,7 +26,7 @@ function RingGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Outer radius
-	this.form.addText("Outer radius");
+	this.form.addText(Locale.outerRadius);
 	this.outerRadius = new NumberBox(this.form);
 	this.outerRadius.size.set(60, 18);
 	this.outerRadius.setStep(0.1);
@@ -36,7 +36,7 @@ function RingGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Theta segments
-	this.form.addText("Theta segments");
+	this.form.addText(Locale.thetaSegments);
 	this.thetaSegments = new NumberBox(this.form);
 	this.thetaSegments.size.set(60, 18);
 	this.thetaSegments.setStep(1.0);
@@ -46,7 +46,7 @@ function RingGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Phi segments
-	this.form.addText("Phi segments");
+	this.form.addText(Locale.phiSegments);
 	this.phiSegments = new NumberBox(this.form);
 	this.phiSegments.size.set(60, 18);
 	this.phiSegments.setStep(1.0);
@@ -56,7 +56,7 @@ function RingGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Theta start
-	this.form.addText("Theta start");
+	this.form.addText(Locale.tethaStart);
 	this.thetaStart = new NumberBox(this.form);
 	this.thetaStart.size.set(60, 18);
 	this.thetaStart.setStep(0.1);
@@ -65,7 +65,7 @@ function RingGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Theta length
-	this.form.addText("Theta length");
+	this.form.addText(Locale.tethaLength);
 	this.thetaLength = new NumberBox(this.form);
 	this.thetaLength.size.set(60, 18);
 	this.thetaLength.setStep(0.1);

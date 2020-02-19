@@ -25,7 +25,7 @@ function TorusGeometryForm(form, object)
 	this.form.nextRow();
 	
 	//Tube
-	this.form.addText("Tube");
+	this.form.addText(Locale.tube);
 	this.tube = new NumberBox(this.form);
 	this.tube.size.set(40, 18);
 	this.tube.setStep(0.1);
@@ -37,12 +37,13 @@ function TorusGeometryForm(form, object)
 	this.form.addText(Locale.segments);
 	this.segmentsRow = new NumberRow(this.form);
 	this.segmentsRow.size.set(0, 18);
-
-	this.radialSegments = this.segmentsRow.addValue("R");
+	this.form.nextRow();
+		
+	this.radialSegments = this.segmentsRow.addValue(Locale.radial);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
 
-	this.tubularSegments = this.segmentsRow.addValue("T");
+	this.tubularSegments = this.segmentsRow.addValue(Locale.tubular);
 	this.tubularSegments.setStep(1);
 	this.tubularSegments.setOnChange(updateGeometry);
 
@@ -50,7 +51,7 @@ function TorusGeometryForm(form, object)
 	this.form.nextRow();
 	
 	//Arc
-	this.form.addText("Arc");
+	this.form.addText(Locale.arc);
 	this.arc = new NumberBox(this.form);
 	this.arc.size.set(40, 18);
 	this.arc.setStep(0.1);

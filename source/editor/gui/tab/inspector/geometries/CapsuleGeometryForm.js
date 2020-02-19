@@ -65,7 +65,7 @@ function CapsuleGeometryForm(form, object)
 	this.capsBottomSegments.setStep(1);
 	this.capsBottomSegments.setOnChange(updateGeometry);
 
-	this.form.addText("Theta Start");
+	this.form.addText(Locale.thetaStart);
 	this.thetaStart = new NumberBox(this.form);
 	this.thetaStart.size.set(40, 18);
 	this.thetaStart.setStep(0.01);
@@ -73,7 +73,7 @@ function CapsuleGeometryForm(form, object)
 	this.form.add(this.thetaStart);
 	this.form.nextRow();
 
-	this.form.addText("Theta Length");
+	this.form.addText(Locale.thetaLength);
 	this.thetaLength = new NumberBox(this.form);
 	this.thetaLength.size.set(40, 18);
 	this.thetaLength.setStep(0.01);

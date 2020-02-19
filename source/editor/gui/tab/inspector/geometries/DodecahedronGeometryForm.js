@@ -26,7 +26,7 @@ function DodecahedronGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Detail
-	this.form.addText("Detail");
+	this.form.addText(Locale.detail);
 	this.detail = new Slider(this.form);
 	this.detail.size.set(90, 18);
 	this.detail.setRange(0, 8);

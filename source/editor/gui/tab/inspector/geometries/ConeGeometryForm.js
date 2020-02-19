@@ -37,13 +37,13 @@ function ConeGeometryForm(form, object)
 	this.segmentsRow = new NumberRow(this.form);
 	this.segmentsRow.size.set(0, 18);
 
-	this.radialSegments = this.segmentsRow.addValue("R");
+	this.radialSegments = this.segmentsRow.addValue(Locale.radial);
 	this.radialSegments.setRange(3, Number.MAX_SAFE_INTEGER);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
 	this.radialSegments.setOnChange(updateGeometry);
 
-	this.heightSegments = this.segmentsRow.addValue("H");
+	this.heightSegments = this.segmentsRow.addValue(Locale.height);
 	this.heightSegments.setRange(1, Number.MAX_SAFE_INTEGER);
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);

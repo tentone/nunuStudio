@@ -19,12 +19,13 @@ function CylinderGeometryForm(form, object)
 	this.form.addText(Locale.radius);
 	this.radiusRow = new NumberRow(this.form);
 	this.radiusRow.size.set(0, 18);
-
-	this.radiusTop = this.radiusRow.addValue("T");
+	this.form.nextRow();
+	
+	this.radiusTop = this.radiusRow.addValue(Locale.top);
 	this.radiusTop.setStep(0.1);
 	this.radiusTop.setOnChange(updateGeometry);
 
-	this.radiusBottom = this.radiusRow.addValue("B");
+	this.radiusBottom = this.radiusRow.addValue(Locale.bottom);
 	this.radiusBottom.setStep(0.1);
 	this.radiusBottom.setOnChange(updateGeometry);
 
@@ -45,12 +46,12 @@ function CylinderGeometryForm(form, object)
 	this.segmentsRow = new NumberRow(this.form);
 	this.segmentsRow.size.set(0, 18);
 
-	this.radialSegments = this.segmentsRow.addValue("R");
+	this.radialSegments = this.segmentsRow.addValue(Locale.radial);
 	this.radialSegments.setRange(3, Number.MAX_SAFE_INTEGER);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
 
-	this.heightSegments = this.segmentsRow.addValue("H");
+	this.heightSegments = this.segmentsRow.addValue(Locale.height);
 	this.heightSegments.setRange(1, Number.MAX_SAFE_INTEGER);
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);

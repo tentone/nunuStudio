@@ -36,7 +36,7 @@ function CircleGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Theta start
-	this.form.addText("Theta start");
+	this.form.addText(Locale.tethaStart);
 	this.thetaStart = new NumberBox(this.form);
 	this.thetaStart.size.set(60, 18);
 	this.thetaStart.setStep(0.1);
@@ -45,7 +45,7 @@ function CircleGeometryForm(form, object)
 	this.form.nextRow();
 
 	//Theta length
-	this.form.addText("Theta length");
+	this.form.addText(Locale.tethaLength);
 	this.thetaLength = new NumberBox(this.form);
 	this.thetaLength.size.set(60, 18);
 	this.thetaLength.setStep(0.1);
