@@ -93,6 +93,43 @@ function Scene()
 	 */
 	this.raycaster = new THREE.Raycaster();
 
+	// TODO <OCTREE CODE>
+	/**
+	 * Indicates if the scene is using octree indexation for raycasting.
+	 *
+	 * @property useOctree
+	 * @type {boolean}
+	 */
+ 	this.useOctree = false;
+
+	/**
+	 * Octree used to index all the unoObject in the scene being visualized.
+	 *
+	 * It is used to filter the visiblity of objects and raycast them.
+	 *
+	 * @attribute octree
+	 * @type {SPARSEOCTREE.PointOctree}
+	 */
+	this.octree = null;
+
+	/**
+	 * Flag indicating if the is a octree update scheduled.
+	 *
+	 * Avoids scheduling multiple octree updates from different objects.
+	 *
+	 * @attribute octreeUpdateScheduled
+	 * @type {Boolean}
+	 */
+	this.octreeUpdateScheduled = false;
+	
+	/** 
+	 * Stores the octree object matches, that are the objects currently visible.
+	 *
+	 * @attribute octreeMatches
+	 * @type {Array}
+	 */
+	this.octreeMatches = [];
+
 	/**
 	 * Program that contains this scene.
 	 *

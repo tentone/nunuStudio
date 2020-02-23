@@ -29,6 +29,8 @@ include("lib/three/postprocessing/RenderPass.js");
 include("lib/three/postprocessing/ShaderPass.js");
 include("lib/three/postprocessing/MaskPass.js");
 
+include("lib/three/lights/LightProbeGenerator.js");
+
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
@@ -40,6 +42,8 @@ include("lib/three/loaders/TTFLoader.js");
 include("lib/pson/bytebuffer.min.js");
 include("lib/pson/long.min.js");
 include("lib/pson/PSON.min.js");
+
+include("lib/octree/sparse-octree.min.js");
 
 include("lib/three-bmfont.js");
 include("lib/cannon.min.js");
@@ -132,6 +136,10 @@ include("source/core/loaders/GeometryLoader.js");
 include("source/core/loaders/LegacyGeometryLoader.js");
 include("source/core/loaders/ObjectLoader.js");
 
+include("source/core/geometries/CapsuleBufferGeometry.js");
+
+include("source/core/objects/device/LeapMotion.js");
+
 include("source/core/objects/device/LeapMotion.js");
 include("source/core/objects/device/KinectDevice.js");
 
@@ -152,6 +160,7 @@ include("source/core/objects/lights/AmbientLight.js");
 include("source/core/objects/lights/DirectionalLight.js");
 include("source/core/objects/lights/HemisphereLight.js");
 include("source/core/objects/lights/RectAreaLight.js");
+include("source/core/objects/lights/LightProbe.js");
 
 include("source/core/objects/cameras/Viewport.js");
 include("source/core/objects/cameras/PerspectiveCamera.js");

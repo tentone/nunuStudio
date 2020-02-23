@@ -51,6 +51,8 @@ include("lib/pson/bytebuffer.min.js");
 include("lib/pson/long.min.js");
 include("lib/pson/PSON.min.js");
 
+include("lib/octree/sparse-octree.min.js");
+
 include("lib/three-bmfont.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
@@ -307,6 +309,8 @@ include("lib/three/exporters/ColladaExporter.js");
 include("lib/three/exporters/PLYExporter.js");
 
 include("lib/draco/draco_encoder.js");
+
+include("lib/octree/octree-helper.min.js");
 
 include("lib/zlib.min.js");
 include("lib/stats.min.js");
