@@ -13596,7 +13596,47 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 96,
+            "line": 97,
+            "description": "Indicates if the scene is using octree indexation for raycasting.",
+            "itemtype": "property",
+            "name": "useOctree",
+            "type": "{boolean}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 105,
+            "description": "Octree used to index all the unoObject in the scene being visualized.\n\nIt is used to filter the visiblity of objects and raycast them.",
+            "itemtype": "attribute",
+            "name": "octree",
+            "type": "{SPARSEOCTREE.PointOctree}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 115,
+            "description": "Flag indicating if the is a octree update scheduled.\n\nAvoids scheduling multiple octree updates from different objects.",
+            "itemtype": "attribute",
+            "name": "octreeUpdateScheduled",
+            "type": "{Boolean}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 125,
+            "description": "Stores the octree object matches, that are the objects currently visible.",
+            "itemtype": "attribute",
+            "name": "octreeMatches",
+            "type": "{Array}",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 133,
             "description": "Program that contains this scene.",
             "itemtype": "property",
             "name": "program",
@@ -13606,7 +13646,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 104,
+            "line": 141,
             "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
@@ -13616,7 +13656,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 112,
+            "line": 149,
             "description": "Normalized mouse coordinates used by the scene internal raycaster.",
             "itemtype": "property",
             "name": "mouse",
@@ -13626,7 +13666,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 141,
+            "line": 178,
             "description": "Update scene objects and the physics world.\n\nAlso updates the global raycaster object used for object culling.",
             "itemtype": "method",
             "name": "update",
@@ -13642,7 +13682,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 207,
+            "line": 244,
             "description": "Render scene using all active cameras.",
             "itemtype": "method",
             "name": "render",
@@ -13658,7 +13698,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 235,
+            "line": 272,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -13678,7 +13718,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 267,
+            "line": 304,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -13694,7 +13734,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 282,
+            "line": 319,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -13703,7 +13743,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 297,
+            "line": 334,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -13719,7 +13759,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 312,
+            "line": 349,
             "description": "Check is camera is active.",
             "params": [
                 {
@@ -13735,7 +13775,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 324,
+            "line": 361,
             "description": "Set scene fog mode.\n\nIt recreates the fog object attached to the scene and set the same color.",
             "itemtype": "method",
             "name": "setFogMode",

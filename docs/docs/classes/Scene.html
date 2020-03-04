@@ -237,6 +237,7 @@
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -319,12 +320,31 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_useOctree">useOctree</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_world">world</a>
 						
 													</li>
 											</ul>
 										</div>
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs extends">
+													<li class="index-item attr">
+														<a href="#attr_octree">octree</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_octreeMatches">octreeMatches</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_octreeUpdateScheduled">octreeUpdateScheduled</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
@@ -922,6 +942,29 @@
 											
 											
 											</div>
+											<div id="property_useOctree" class="property item">
+												<h3 class="name"><code>useOctree</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Indicates if the scene is using octree indexation for raycasting.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_world" class="property item">
 												<h3 class="name"><code>world</code></h3>
 												<span class="type">CANNON.World</span>
@@ -949,6 +992,93 @@
 											</div>
 									</div>
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_octree" class="attr item">
+												<a name="config_octree"></a> 
+												<h3 class="name"><code>octree</code></h3>
+												<span class="type">SPARSEOCTREE.PointOctree</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Octree used to index all the unoObject in the scene being visualized.</p>
+											<p>It is used to filter the visiblity of objects and raycast them.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_octreeMatches" class="attr item">
+												<a name="config_octreeMatches"></a> 
+												<h3 class="name"><code>octreeMatches</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Stores the octree object matches, that are the objects currently visible.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_octreeUpdateScheduled" class="attr item">
+												<a name="config_octreeUpdateScheduled"></a> 
+												<h3 class="name"><code>octreeUpdateScheduled</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Flag indicating if the is a octree update scheduled.</p>
+											<p>Avoids scheduling multiple octree updates from different objects.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>
