@@ -20,7 +20,7 @@ function TabGroup(parent, placement)
 
 	this.preventDragEvents();
 	
-	//Buttons
+	// Buttons
 	this.buttons = new Division(this);
 	this.buttons.element.style.backgroundColor = Editor.theme.barColor;
 	this.buttons.element.ondrop = function(event)
@@ -37,7 +37,7 @@ function TabGroup(parent, placement)
 		}
 	};
 
-	//Tab
+	// Tab
 	this.tab = new Division(this);
 
 	/**
@@ -152,15 +152,15 @@ TabGroup.prototype.updateObjectsView = function()
  */
 TabGroup.prototype.attachTab = function(tab, insertIndex)
 {	
-	//Remove from old group
+	// Remove from old group
 	tab.container.removeTab(tab.index, true);
 	
-	//Attach to this group
+	// Attach to this group
 	tab.container = this;
 	tab.button.attachTo(this.buttons);
 	tab.attachTo(this.tab);
 	
-	//Add to options
+	// Add to options
 	if(insertIndex !== undefined)
 	{
 		tab.index = insertIndex;
@@ -172,7 +172,7 @@ TabGroup.prototype.attachTab = function(tab, insertIndex)
 		this.options.push(tab);
 	}
 
-	//Select the tab if none selected
+	// Select the tab if none selected
 	if(this.selected === null)
 	{
 		this.selectTab(tab);
@@ -262,13 +262,13 @@ TabGroup.prototype.selectTab = function(tab)
 		this.selected.deactivate();
 	}
 
-	//Tab as a TabElement object
+	// Tab as a TabElement object
 	if(tab instanceof TabElement)
 	{
 		this.selected = tab;
 		this.selected.activate();
 	}
-	//Tab as a index
+	// Tab as a index
 	else if(typeof tab === "number" && tab > -1 && tab < this.options.length)
 	{
 		this.selected = this.options[tab];
@@ -371,13 +371,13 @@ TabGroup.prototype.getTab = function(type, object)
  */
 TabGroup.prototype.removeTab = function(index, dontDestroy)
 {	
-	//If index is an object get the actual index
+	// If index is an object get the actual index
 	if(typeof index === "object")
 	{
 		index = this.options.indexOf(index);
 	}
 
-	//Check if the index is in range
+	// Check if the index is in range
 	if(index > -1 && index < this.options.length)
 	{
 		var tab = this.options[index];
@@ -390,7 +390,7 @@ TabGroup.prototype.removeTab = function(index, dontDestroy)
 		this.options.splice(index, 1);
 		this.updateOptionIndex();
 
-		//Select option
+		// Select option
 		if(this.selected === tab)
 		{
 			if(this.options.length > 0)
@@ -446,7 +446,7 @@ TabGroup.prototype.clear = function(forceAll)
 			}
 		}
 
-		//Check is selected tab is still available
+		// Check is selected tab is still available
 		var index = this.options.indexOf(this.selected);
 		if(index === -1 && this.options.length > 0)
 		{
@@ -487,7 +487,7 @@ TabGroup.prototype.updateSize = function()
 	var buttonSize = this.buttonSize.clone();
 	var offset = this.buttonSize.clone();
 
-	//Calculate size of the buttons and offset
+	// Calculate size of the buttons and offset
 	if(this.placement === TabGroup.TOP || this.placement === TabGroup.BOTTOM)
 	{
 		if(buttonSize.x * this.options.length > this.size.x)
@@ -509,7 +509,7 @@ TabGroup.prototype.updateSize = function()
 		offset.x = 0;
 	}
 	
-	//Update tab and buttons
+	// Update tab and buttons
 	for(var i = 0; i < this.options.length; i++)
 	{
 		var tab = this.options[i];
@@ -527,7 +527,7 @@ TabGroup.prototype.updateSize = function()
 	this.tab.size.copy(tabSize);
 	this.tab.updateSize();
 
-	//Position buttons and tab division
+	// Position buttons and tab division
 	if(this.placement === TabGroup.TOP)
 	{	
 		this.buttons.position.set(0, 0);

@@ -6,9 +6,9 @@
  * This variant of SSAO produces a halo like effect to simulate the effect.
  * 
  * More information about SSAO here
- *  - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
+ *  - http:// developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
  *
- * @author alteredq / http://alteredqualia.com/
+ * @author alteredq / http:// alteredqualia.com/
  * @class SSAOPass
  * @module Postprocessing
  */
@@ -18,19 +18,19 @@ function SSAOPass()
 
 	this.type = "SSAO";
 
-	//Depth material
+	// Depth material
 	this.depthMaterial = new THREE.MeshDepthMaterial();
 	this.depthMaterial.depthPacking = THREE.RGBADepthPacking;
 	this.depthMaterial.blending = THREE.NoBlending;
 
-	//Depth render target
+	// Depth render target
 	this.depthRenderTarget = new THREE.WebGLRenderTarget(2, 2, {minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter});
 
-	//Shader uniforms
+	// Shader uniforms
 	this.uniforms["tDepth"].value = this.depthRenderTarget.texture;
 	this.uniforms["size"].value.set(2, 2);
 
-	//Setters and getters for uniforms
+	// Setters and getters for uniforms
 	var self = this;
 	Object.defineProperties(this,
 	{
@@ -106,14 +106,14 @@ SSAOPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, m
 	this.uniforms["cameraNear"].value = camera.near;
 	this.uniforms["cameraFar"].value = camera.far;
 
-	//Render depth
+	// Render depth
 	scene.overrideMaterial = this.depthMaterial;
 	
 	renderer.setRenderTarget(this.depthRenderTarget);
 	renderer.clear(true, true, true);
 	renderer.render(scene, camera);
 
-	//Render shader
+	// Render shader
 	scene.overrideMaterial = null;
 
 	ShaderPass.prototype.render.call(this, renderer, writeBuffer, readBuffer, delta, maskActive);

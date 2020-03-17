@@ -6,11 +6,11 @@ function ProgramInspector(parent, object)
 
 	var self = this;
 
-	//Program information
+	// Program information
 	this.form.addText(Locale.information);
 	this.form.nextRow();
 
-	//Author
+	// Author
 	this.form.addText(Locale.author);
 	this.author = new TextBox(this.form);
 	this.author.position.set(50, 35);
@@ -23,7 +23,7 @@ function ProgramInspector(parent, object)
 	this.form.add(this.author);
 	this.form.nextRow();
 	
-	//Version
+	// Version
 	this.form.addText(Locale.version);
 	this.version = new TextBox(this.form);
 	this.version.size.set(100, 18);
@@ -34,7 +34,7 @@ function ProgramInspector(parent, object)
 	this.form.add(this.version);
 	this.form.nextRow();
 
-	//Mouse lock
+	// Mouse lock
 	this.lockPointer = new CheckBox(this.form);
 	this.form.addText("Lock pointer");
 	this.lockPointer.size.set(18, 18);
@@ -45,7 +45,7 @@ function ProgramInspector(parent, object)
 	this.form.add(this.lockPointer);
 	this.form.nextRow();
 	
-	//Handle pixel ratio
+	// Handle pixel ratio
 	this.handlePixelRatio = new CheckBox(this.form);
 	this.form.addText(Locale.pixelRatio);
 	this.handlePixelRatio.size.set(18, 18);
@@ -56,11 +56,11 @@ function ProgramInspector(parent, object)
 	this.form.add(this.handlePixelRatio);
 	this.form.nextRow()
 
-	//VR
+	// VR
 	this.form.addText(Locale.virtualReality);
 	this.form.nextRow();
 
-	//VR Enabled
+	// VR Enabled
 	this.vr = new CheckBox(this.form);
 	this.form.addText("VR Enabled");
 	this.vr.size.set(18, 18);
@@ -71,7 +71,7 @@ function ProgramInspector(parent, object)
 	this.form.add(this.vr);
 	this.form.nextRow();
 
-	//VR Movement Scale
+	// VR Movement Scale
 	this.form.addText("Room Scale");
 	this.vrScale = new NumberBox(this.form);
 	this.vrScale.size.set(50, 18);
@@ -84,7 +84,7 @@ function ProgramInspector(parent, object)
 	this.form.add(this.vrScale);
 	this.form.nextRow();
 
-	//Rendering
+	// Rendering
 	this.form.addText(Locale.rendering);
 	this.form.nextRow();
 	this.rendererConfig = new RendererConfigurationFormTemplate(this.form, object.rendererConfig);

@@ -3,7 +3,7 @@
 /**
  * Orthographic Camera is used for 2D like image projection.
  * 
- * Based on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera.
+ * Based on THREE.OrthographicCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera.
  * 
  * @class OrthographicCamera
  * @extends {OrthographicCamera}

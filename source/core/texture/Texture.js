@@ -3,7 +3,7 @@
 /**
  * Image texture constructor, with support for GIF animations.
  * 
- * It is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture
+ * It is based on THREE.Texture, original documentation can be found here https:// threejs.org/docs/index.html#Reference/Textures/Texture
  * 
  * @class Texture
  * @extends {Texture}
@@ -133,7 +133,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 		self.needsUpdate = true;
 	};
 
-	//Check if image is animated
+	// Check if image is animated
 	if(this.img.encoding === "gif")
 	{
 		this.generateMipmaps = false;

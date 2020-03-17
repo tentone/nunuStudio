@@ -187,11 +187,11 @@ Element.prototype.setAltText = function(altText)
 	element.style.height = "fit-content";
 	document.body.appendChild(element);
 
-	//Text
+	// Text
 	var text = document.createTextNode(altText);
 	element.appendChild(text);
 
-	//Destroy
+	// Destroy
 	var destroyFunction = this.destroy;
 	this.destroy = function()
 	{	
@@ -205,7 +205,7 @@ Element.prototype.setAltText = function(altText)
 	
 	this.element.style.pointerEvents = "auto"; 
 
-	//Mouse mouse move event
+	// Mouse mouse move event
 	this.element.onmousemove = function(event)
 	{
 		element.style.display = "flex";
@@ -213,7 +213,7 @@ Element.prototype.setAltText = function(altText)
 		element.style.top = (event.clientY - 20) + "px";
 	};
 
-	//Mouse out event
+	// Mouse out event
 	this.element.onmouseout = function()
 	{
 		element.style.display = "none";

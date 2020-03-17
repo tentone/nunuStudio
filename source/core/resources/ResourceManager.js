@@ -122,7 +122,7 @@ ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
  */
 ResourceManager.prototype.dispose = function()
 {
-	//var libraries = ["images", "videos", "audio", "fonts", "materials", "textures", "geometries", "resources", "shapes", "skeletons"];
+	// var libraries = ["images", "videos", "audio", "fonts", "materials", "textures", "geometries", "resources", "shapes", "skeletons"];
 
 	for(var i in this.geometries)
 	{

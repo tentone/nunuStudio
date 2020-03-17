@@ -68,7 +68,7 @@ MaterialLoader.prototype.parse = function(json)
 
 	var material = THREE.MaterialLoader.prototype.parse.call(this, json);
 
-	//Specular
+	// Specular
 	if(json.specular !== undefined)
 	{
 		if(material.specular === undefined)
@@ -79,10 +79,10 @@ MaterialLoader.prototype.parse = function(json)
 		material.specular.setHex(json.specular);
 	}
 
-	//Shading
+	// Shading
 	if(json.shading !== undefined)
 	{
-		material.flatShading = (json.shading === 1); //THREE.FlatShading
+		material.flatShading = (json.shading === 1); // THREE.FlatShading
 	}
 
 	// Normal scale
@@ -92,14 +92,14 @@ MaterialLoader.prototype.parse = function(json)
 
 		if(Array.isArray(normalScale) === false)
 		{
-			//Blender exporter used to export a scalar. See #7459
+			// Blender exporter used to export a scalar. See #7459
 			normalScale = [normalScale, normalScale];
 		}
 
 		material.normalScale = new Vector2().fromArray(normalScale);
 	}
 
-	//Multi material
+	// Multi material
 	if(json.materials !== undefined)
 	{
 		for (var i = 0, l = json.materials.length; i < l; i ++)

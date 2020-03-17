@@ -2,14 +2,14 @@
 
 var ParticleShaderChunks =
 {
-	//Register color-packing define statements.
+	// Register color-packing define statements.
 	defines:
 	[
 		"#define PACKED_COLOR_SIZE 256.0",
 		"#define PACKED_COLOR_DIVISOR 255.0"
 	].join("\n"),
 
-	//All uniforms used by vertex / fragment shaders
+	// All uniforms used by vertex / fragment shaders
 	uniforms:
 	[
 		"uniform float deltaTime;",
@@ -19,9 +19,9 @@ var ParticleShaderChunks =
 		"uniform float scale;",
 	].join("\n"),
 
-	//All attributes used by the vertex shader.
+	// All attributes used by the vertex shader.
 	//
-	//Note that some attributes are squashed into other ones:
+	// Note that some attributes are squashed into other ones:
 	//
 	//* Drag is acceleration.w
 	attributes:
@@ -51,8 +51,8 @@ var ParticleShaderChunks =
 	].join("\n"),
 
 
-	//Branch-avoiding comparison fns
-	//- http://theorangeduck.com/page/avoiding-shader-conditionals
+	// Branch-avoiding comparison fns
+	//- http:// theorangeduck.com/page/avoiding-shader-conditionals
 	branchAvoidanceFunctions:
 	[
 		"float when_gt(float x, float y) {",
@@ -75,7 +75,7 @@ var ParticleShaderChunks =
 		"  return 1.0 - when_gt(x, y);",
 		"}",
 
-		//Branch-avoiding logical operators (to be used with above comparison fns)
+		// Branch-avoiding logical operators (to be used with above comparison fns)
 		"float and(float a, float b) {",
 		"    return a * b;",
 		"}",
@@ -86,9 +86,9 @@ var ParticleShaderChunks =
 	].join("\n"),
 
 
-	//From:
-	//- http://stackoverflow.com/a/12553149
-	//- https://stackoverflow.com/questions/22895237/hexadecimal-to-rgb-values-in-webgl-shader
+	// From:
+	//- http:// stackoverflow.com/a/12553149
+	//- https:// stackoverflow.com/questions/22895237/hexadecimal-to-rgb-values-in-webgl-shader
 	unpackColor:
 	[
 		"vec3 unpackColor(in float hex) {",
@@ -134,11 +134,11 @@ var ParticleShaderChunks =
 		"    float fIndex = 0.0;",
 		"    float shouldApplyValue = 0.0;",
 
-		//This might look a little odd, but it's faster in the testing I"ve done than using branches. Uses basic maths to avoid branching.
+		// This might look a little odd, but it's faster in the testing I"ve done than using branches. Uses basic maths to avoid branching.
 		//
-		//Take a look at the branch-avoidance functions defined above, and be sure to check out The Orange Duck site where I got this from (link above).
+		// Take a look at the branch-avoidance functions defined above, and be sure to check out The Orange Duck site where I got this from (link above).
 		//
-		//Fix for static emitters (age is always zero).
+		// Fix for static emitters (age is always zero).
 		"    value += attr[0] * when_eq(deltaAge, 0.0);",
 		"",
 		"    for(int i = 0; i < VALUE_OVER_LIFETIME_LENGTH - 1; ++i) {",
@@ -199,8 +199,8 @@ var ParticleShaderChunks =
 
 	rotationFunctions:
 	[
-		//Huge thanks to:
-		//- http://www.neilmendoza.com/glsl-rotation-about-an-arbitrary-axis/
+		// Huge thanks to:
+		//- http:// www.neilmendoza.com/glsl-rotation-about-an-arbitrary-axis/
 		"#ifdef SHOULD_ROTATE_PARTICLES",
 		"   mat4 getRotationMatrix(in vec3 axis, in float angle) {",
 		"       axis = normalize(axis);",
@@ -235,7 +235,7 @@ var ParticleShaderChunks =
 	].join("\n"),
 
 
-	//Fragment chunks
+	// Fragment chunks
 	rotateTexture:
 	[
 		"    vec2 vUv = vec2(gl_PointCoord.x, 1.0 - gl_PointCoord.y);",
@@ -250,7 +250,7 @@ var ParticleShaderChunks =
 		"    #endif",
 		"",
 
-		//Spritesheets overwrite angle calculations.
+		// Spritesheets overwrite angle calculations.
 		"    #ifdef SHOULD_CALCULATE_SPRITE",
 		"        float framesX = vSpriteSheet.x;",
 		"        float framesY = vSpriteSheet.y;",

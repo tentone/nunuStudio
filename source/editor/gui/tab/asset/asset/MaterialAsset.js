@@ -8,11 +8,11 @@ function MaterialAsset(parent)
 	
 	var self = this;
 
-	//Use to store original material color on highlight
+	// Use to store original material color on highlight
 	this.materialColor = new THREE.Color(0, 0, 0);
 	this.materialHighlighted = false;
 
-	//Material Preview
+	// Material Preview
 	this.image = document.createElement("img");
 	this.image.style.position = "absolute";
 	this.image.style.top = "5%";
@@ -21,14 +21,14 @@ function MaterialAsset(parent)
 	this.image.style.height = "66%";
 	this.element.appendChild(this.image);
 
-	//Mouse over event
+	// Mouse over event
 	this.element.onmouseenter = function()
 	{
 		this.style.backgroundColor = Editor.theme.buttonOverColor;
 		self.highlightMaterial();
 	};
 
-	//Mouse leave event
+	// Mouse leave event
 	this.element.onmouseleave = function()
 	{
 		if(!Editor.isSelected(self.asset))
@@ -38,7 +38,7 @@ function MaterialAsset(parent)
 		self.restoreMaterial();
 	};
 
-	//Double click
+	// Double click
 	this.element.ondblclick = function()
 	{
 		if(self.asset instanceof THREE.Material)
@@ -105,7 +105,7 @@ function MaterialAsset(parent)
 		}
 	};
 
-	//Context menu event
+	// Context menu event
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
@@ -154,14 +154,14 @@ function MaterialAsset(parent)
 		{
 			try
 			{
-				//Serialize
+				// Serialize
 				var json = self.asset.toJSON();
 
-				//Loader
+				// Loader
 				var loader = new MaterialLoader();
 				loader.setTextures(Editor.program.textures);
 
-				//Load
+				// Load
 				var material = loader.parse(json); 
 				material.uuid = THREE.Math.generateUUID();
 				material.name += "*";
@@ -177,13 +177,13 @@ function MaterialAsset(parent)
 		context.updateInterface();
 	};
 
-	//Drag start
+	// Drag start
 	this.element.ondragstart = function(event)
 	{
-		//Restore material color
+		// Restore material color
 		self.restoreMaterial();
 
-		//Insert material into drag buffer
+		// Insert material into drag buffer
 		if(self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
@@ -191,17 +191,17 @@ function MaterialAsset(parent)
 		}
 	};
 
-	//Drag end (called after of ondrop)
+	// Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};
 }
 
-//Super prototypes
+// Super prototypes
 MaterialAsset.prototype = Object.create(Asset.prototype);
 
-//Destroy material file
+// Destroy material file
 MaterialAsset.prototype.destroy = function()
 {
 	Asset.prototype.destroy.call(this);
@@ -209,7 +209,7 @@ MaterialAsset.prototype.destroy = function()
 	this.restoreMaterial();
 };
 
-//Highlight material
+// Highlight material
 MaterialAsset.prototype.highlightMaterial = function()
 {
 	if(this.asset instanceof THREE.Material && this.asset.color !== undefined)
@@ -220,7 +220,7 @@ MaterialAsset.prototype.highlightMaterial = function()
 	}
 };
 
-//Restore material to normal color
+// Restore material to normal color
 MaterialAsset.prototype.restoreMaterial = function()
 {
 	if(this.materialHighlighted)

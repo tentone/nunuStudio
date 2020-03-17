@@ -87,7 +87,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.sun.locked = true;
 	this.add(this.sun);
 
-	//Uniforms
+	// Uniforms
 	var uniforms =
 	{
 		topColor: {type: "c", value: new THREE.Color(0.0, 0.46, 1.0)},
@@ -98,7 +98,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	
 	uniforms.topColor.value.copy(this.hemisphere.color);
 
-	//Sky
+	// Sky
 	var geometry = new THREE.SphereBufferGeometry(1500, 16, 16);
 	var material = new THREE.ShaderMaterial(
 	{
@@ -119,7 +119,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.sky.matrixAutoUpdate = false;
 	this.add(this.sky);
 
-	//Override sky raycast function
+	// Override sky raycast function
 	this.sky.raycast = function()
 	{
 		return null;
@@ -220,7 +220,7 @@ Sky.prototype.update = function(delta)
  */
 Sky.prototype.updateSky = function()
 {
-	//Time in % of day
+	// Time in % of day
 	var time = (this.time / this.dayTime);
 
 	//0H - 6H (night)
@@ -284,7 +284,7 @@ Sky.prototype.updateSky = function()
 		this.sky.material.uniforms.bottomColor.value.setRGB(this.colorBottom[3].r, this.colorBottom[3].g, this.colorBottom[3].b);
 	}
 
-	//Sun / moon color
+	// Sun / moon color
 	if(time < 0.20)
 	{
 		this.sun.intensity = this.intensity;
@@ -336,7 +336,7 @@ Sky.prototype.updateSky = function()
 		this.sun.color.setHex(this.moonColor);
 	}
 
-	//Update sun position
+	// Update sun position
 	var rotation = (MathUtils.PI2 * time) - MathUtils.PID2;
 	if(time > 0.25 && time < 0.75)
 	{

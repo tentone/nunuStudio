@@ -12,7 +12,7 @@ function ImageChooser(parent)
 {
 	Element.call(this, parent, "div");
 
-	//Image
+	// Image
 	this.img = document.createElement("img");
 	this.img.style.visibility = "inherit";
 	this.img.style.position = "absolute";
@@ -27,7 +27,7 @@ function ImageChooser(parent)
 	this.img.style.backgroundSize = "120px 120px";
 	this.element.appendChild(this.img);
 
-	//Value
+	// Value
 	this.value = null;
 
 	var self = this;
@@ -35,7 +35,7 @@ function ImageChooser(parent)
 	this.element.ondragover = Element.preventDefault;
 	this.element.ondragstart = Element.preventDefault;
 
-	//On drop get file dropped
+	// On drop get file dropped
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
@@ -66,7 +66,7 @@ function ImageChooser(parent)
 		}
 	};
 
-	//Onclick select image file
+	// Onclick select image file
 	this.element.onclick = function()
 	{
 		if(self.onChange !== null)

@@ -5,7 +5,7 @@
  *  
  * @class DotScreenPass
  * @module Postprocessing
- * @author alteredq / http://alteredqualia.com/
+ * @author alteredq / http:// alteredqualia.com/
  * @param {number} center Dot rotation center.
  * @param {number} angle Dot rotation angle.
  * @param {number} scale Dot scale.

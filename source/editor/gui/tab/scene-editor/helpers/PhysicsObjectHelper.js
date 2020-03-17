@@ -69,14 +69,14 @@ PhysicsObjectHelper.prototype.update = function()
 			var tmpVec = new CANNON.Vec3();
 			var tmpQuat = new CANNON.Vec3();
 
-			//Get world position
+			// Get world position
 			body.quaternion.vmult(body.shapeOffsets[j], tmpVec);
 			body.position.vadd(tmpVec, tmpVec);
 
-			//Get world quaternion
+			// Get world quaternion
 			body.quaternion.mult(body.shapeOrientations[j], tmpQuat);
 
-			//Copy to meshes
+			// Copy to meshes
 			mesh.position.copy(tmpVec);
 			mesh.quaternion.copy(tmpQuat);
 		}
@@ -163,22 +163,22 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 			break;
 
 		case CANNON.Shape.types.CONVEXPOLYHEDRON:
-			//Create mesh
+			// Create mesh
 			var geo = new THREE.Geometry();
 
-			//Add vertices
+			// Add vertices
 			for(var i = 0; i < shape.vertices.length; i++)
 			{
 				var v = shape.vertices[i];
 				geo.vertices.push(new THREE.Vector3(v.x, v.y, v.z));
 			}
 
-			//Add faces
+			// Add faces
 			for(var i = 0; i < shape.faces.length; i++)
 			{
 				var face = shape.faces[i];
 
-				//Add triangles
+				// Add triangles
 				var a = face[0];
 				for(var j = 1; j < face.length - 1; j++)
 				{

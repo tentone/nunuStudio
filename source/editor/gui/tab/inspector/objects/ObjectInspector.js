@@ -6,7 +6,7 @@ function ObjectInspector(parent, object)
 
 	var self = this;
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(0, 18);
@@ -18,7 +18,7 @@ function ObjectInspector(parent, object)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//UUID
+	// UUID
 	if(Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
@@ -26,7 +26,7 @@ function ObjectInspector(parent, object)
 		this.form.nextRow();
 	}
 	
-	//Type
+	// Type
 	if(Editor.settings.general.showType)
 	{
 		this.form.addText(Locale.type);
@@ -34,7 +34,7 @@ function ObjectInspector(parent, object)
 		this.form.nextRow();
 	}
 
-	//Position
+	// Position
 	this.form.addText(Locale.position);
 	this.position = new VectorBox(this.form);
 	this.position.size.set(0, 18);
@@ -56,14 +56,14 @@ function ObjectInspector(parent, object)
 
 	var text = this.form.addText(Locale.scale);
 
-	//Scale lock
+	// Scale lock
 	this.scaleRatioLock = new CheckBox(text);
 	this.scaleRatioLock.setAltText("Lock scale ratio");
 	this.scaleRatioLock.size.set(18, 18);
 	this.scaleRatioLock.setMode(Element.TOP_RIGHT);
 	this.scaleRatioLock.updateInterface();
 	
-	//Scale
+	// Scale
 	this.scale = new VectorBox(this.form);
 	this.scale.size.set(0, 18);
 	this.scale.setStep(0.01);
@@ -106,7 +106,7 @@ function ObjectInspector(parent, object)
 	this.form.add(this.scale);
 	this.form.nextRow();
 
-	//Rotation
+	// Rotation
 	this.form.addText(Locale.rotation);
 	this.rotation = new VectorBox(this.form);
 	this.rotation.size.set(0, 18);
@@ -126,7 +126,7 @@ function ObjectInspector(parent, object)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
-	//Visible
+	// Visible
 	this.form.addText("Visible");
 	this.visible = new CheckBox(this.form);
 	this.visible.size.set(18, 18);
@@ -137,7 +137,7 @@ function ObjectInspector(parent, object)
 	this.form.add(this.visible);
 	this.form.nextRow();
 
-	//Render order
+	// Render order
 	this.form.addText("Render order");
 	this.renderOrder = new NumberBox(this.form);
 	this.renderOrder.size.set(0, 18);
@@ -150,7 +150,7 @@ function ObjectInspector(parent, object)
 	this.form.add(this.renderOrder);
 	this.form.nextRow();
 
-	//Static
+	// Static
 	this.form.addText("Static Object");
 	this.static = new CheckBox(this.form);
 	this.static.size.set(18, 18);

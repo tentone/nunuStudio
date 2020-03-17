@@ -160,13 +160,13 @@ PhysicsGenerator.createConvexPolyhedron = function(object)
 	var faces = [];
 	var normals = [];
 
-	//Generate vertices and normals
+	// Generate vertices and normals
 	for(var i = 0; i < quickhull.faces.length; i++)
 	{
 		var face = quickhull.faces[i];
 		var edge = face.edge;
 		
-		//We move along a doubly-connected edge list to access all face points
+		// We move along a doubly-connected edge list to access all face points
 		do
 		{
 			var point = edge.head().point;
@@ -175,7 +175,7 @@ PhysicsGenerator.createConvexPolyhedron = function(object)
 		}
 		while(edge !== face.edge);
 
-		//The face always has 3 points
+		// The face always has 3 points
 		faces.push([vertices.length - 3, vertices.length - 2, vertices.length - 1]);
 		normals.push(new CANNON.Vec3(face.normal.x, face.normal.y, face.normal.z));
 	}
@@ -213,7 +213,7 @@ PhysicsGenerator.createBoundingCylinderShape = function(object)
 	var axes = ["x", "y", "z"];
 	var minorAxes = axes.splice(axes.indexOf("y"), 1) && axes;
 
-	//Compute cylinder dimensions
+	// Compute cylinder dimensions
 	var geometry = PhysicsGenerator.getGeometry(object);
 	geometry.computeBoundingBox();
 	geometry.computeBoundingSphere();
@@ -221,7 +221,7 @@ PhysicsGenerator.createBoundingCylinderShape = function(object)
 	var height = geometry.boundingBox.max.y - geometry.boundingBox.min.y;
 	var radius = 0.5 * Math.max(geometry.boundingBox.max[minorAxes[0]] - geometry.boundingBox.min[minorAxes[0]],geometry.boundingBox.max[minorAxes[1]] - geometry.boundingBox.min[minorAxes[1]]);
 
-	//Create shape
+	// Create shape
 	var shape = new CANNON.Cylinder(radius, radius, height, 12);
 	shape.orientation = new CANNON.Quaternion();
 	shape.orientation.setFromEuler(Math.PI / 2, 0, 0, "XYZ").normalize();
@@ -325,7 +325,7 @@ PhysicsGenerator.getGeometry = function(object)
 
 	var tmp = new THREE.Geometry();
 	
-	//Apply scale (it can't easily be applied to a Shape later)
+	// Apply scale (it can't easily be applied to a Shape later)
 	if(meshes.length === 1)
 	{
 		var position = new THREE.Vector3();
@@ -338,13 +338,13 @@ PhysicsGenerator.getGeometry = function(object)
 
 		return tmp.scale(scale.x, scale.y, scale.z);
 	}
-	//If more than one mesh found merge into single geometry
+	// If more than one mesh found merge into single geometry
 	else
 	{
 		var combined = new THREE.Geometry();
 		var mesh;
 
-		//Recursively merge geometry, preserving local transforms
+		// Recursively merge geometry, preserving local transforms
 		while((mesh = meshes.pop()))
 		{
 			mesh.updateMatrixWorld();

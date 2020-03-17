@@ -72,17 +72,17 @@ MoveAction.prototype.inverseTransform = function(oldParent, newParent)
 {
 	var matrix = this.object.matrix;
 
-	//Apply world matrix to object (calculate transform as if it was on the root)
+	// Apply world matrix to object (calculate transform as if it was on the root)
 	matrix.multiplyMatrices(oldParent.matrixWorld, matrix);
 
-	//Get inverse of the world matrix of the new parent
+	// Get inverse of the world matrix of the new parent
 	var inverse = new THREE.Matrix4();
 	inverse.getInverse(newParent.matrixWorld);
 
-	//Apply inverse transform to the object matrix
+	// Apply inverse transform to the object matrix
 	matrix.multiplyMatrices(inverse, matrix);
 
-	//Decompose matrix into components
+	// Decompose matrix into components
 	matrix.decompose(this.object.position, this.object.quaternion, this.object.scale);
 };
 

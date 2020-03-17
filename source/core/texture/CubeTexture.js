@@ -325,13 +325,13 @@ CubeTexture.renderEquirectFace = function(read, face, rotation, size)
 		{
 			var index = 4 * (y * size + x);
 
-			//Fill alpha channel
+			// Fill alpha channel
 			out.data[index + 3] = 255;
 
-			//Get position on cube face cube is centered at the origin with a side length of 2
+			// Get position on cube face cube is centered at the origin with a side length of 2
 			var cube = orientation(2 * (x + 0.5) / size - 1, 2 * (y + 0.5) / size - 1);
 
-			//Project cube face onto unit sphere by converting cartesian to spherical coordinates
+			// Project cube face onto unit sphere by converting cartesian to spherical coordinates
 			var r = Math.sqrt(cube.x * cube.x + cube.y * cube.y + cube.z * cube.z);
 			var lon = THREE.Math.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
 			var lat = Math.acos(cube.z / r);

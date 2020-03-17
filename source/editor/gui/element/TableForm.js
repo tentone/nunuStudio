@@ -191,7 +191,7 @@ TableForm.prototype.updateSize = function()
 			
 			if(element.visible)
 			{
-				//Resize last element
+				// Resize last element
 				if(this.fitElements && j === this.rows[i].length - 1)
 				{
 					element.size.x = this.size.x - x - 15;
@@ -200,7 +200,7 @@ TableForm.prototype.updateSize = function()
 				element.position.set(x, y);
 				element.updateInterface();
 
-				//Size tracker
+				// Size tracker
 				if(element.size.y > maxSizeY)
 				{
 					maxSizeY = element.size.y;
@@ -210,13 +210,13 @@ TableForm.prototype.updateSize = function()
 			}
 		}
 
-		//Form size x
+		// Form size x
 		if(sizeX < x)
 		{
 			sizeX = x;
 		}
 
-		//Update position tracker
+		// Update position tracker
 		if(x !== 0)
 		{
 			x = this.autoSize ? 0 : this.spacing.x;

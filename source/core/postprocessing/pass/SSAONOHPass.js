@@ -5,10 +5,10 @@
  *
  * Uses the normal-oriented hemisphere method produces a more realistic-looking than the basic Crysis method.
  *
- * Based on the article from http://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html
+ * Based on the article from http:// john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html
  *
  * More information about SSAO here
- *  - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
+ *  - http:// developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
  *
  * @class SSAONOHPass
  * @module Postprocessing
@@ -48,7 +48,7 @@ function SSAONOHPass()
 	this.normalMaterial = new THREE.MeshNormalMaterial();
 	this.normalMaterial.blending = THREE.NoBlending;
 
-	//Normal render target
+	// Normal render target
 	this.normalRenderTarget = new THREE.WebGLRenderTarget(1, 1,
 	{
 		minFilter: THREE.LinearFilter,
@@ -58,10 +58,10 @@ function SSAONOHPass()
 		depthBuffer: true
 	});
 
-	//SSAO render target
+	// SSAO render target
 	this.ssaoRenderTarget = new THREE.WebGLRenderTarget(1, 1, Pass.RGBALinear);
 
-	//Blur render target
+	// Blur render target
 	this.blurRenderTarget = new THREE.WebGLRenderTarget(1, 1, Pass.RGBALinear);
 
 	/**
@@ -253,12 +253,12 @@ SSAONOHPass.prototype.generateRandomKernelRotations = function()
  */
 SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Render configuration
+	// Render configuration
 	renderer.autoClear = false;
 	renderer.setClearColor(0x7777ff);
 	renderer.setClearAlpha(1.0);
 
-	//Render normals
+	// Render normals
 	scene.overrideMaterial = this.normalMaterial;
 	renderer.setRenderTarget(this.normalRenderTarget);
 	renderer.clear(true, true, true);
@@ -266,7 +266,7 @@ SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta
 
 	scene.overrideMaterial = null;
 
-	//Render SSAO
+	// Render SSAO
 	this.ssaoMaterial.uniforms["tDepth"].value = this.depthTexture;
 	this.ssaoMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
 	this.ssaoMaterial.uniforms["cameraNear"].value = camera.near;
@@ -275,31 +275,31 @@ SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta
 	this.ssaoMaterial.uniforms["cameraInverseProjectionMatrix"].value.getInverse(camera.projectionMatrix); 
 	this.renderPass(renderer, this.ssaoMaterial, this.ssaoRenderTarget);
 
-	//Render blur
+	// Render blur
 	this.renderPass(renderer, this.blurMaterial, this.blurRenderTarget);
 
-	//Output to screen
+	// Output to screen
 	if(this.renderToScreen)
 	{
-		//Copy SSAO result
+		// Copy SSAO result
 		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
 		this.copyMaterial.blending = THREE.NoBlending;
 		this.renderPass(renderer, this.copyMaterial, null , this.clear);
 
-		//Copy blur and blend it to output
+		// Copy blur and blend it to output
 		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
 		this.copyMaterial.blending = THREE.CustomBlending;
 		this.renderPass(renderer, this.copyMaterial, null, false);
 	}
-	//Output to writeBuffer
+	// Output to writeBuffer
 	else
 	{
-		//Copy SSAO result
+		// Copy SSAO result
 		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
 		this.copyMaterial.blending = THREE.NoBlending;
 		this.renderPass(renderer, this.copyMaterial, writeBuffer, this.clear);
 
-		//Copy blur and blend it to output
+		// Copy blur and blend it to output
 		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
 		this.copyMaterial.blending = THREE.CustomBlending;
 		this.renderPass(renderer, this.copyMaterial, writeBuffer, false);
@@ -328,15 +328,15 @@ SSAONOHPass.prototype.renderPass = function(renderer, passMaterial, renderTarget
 
 SSAONOHPass.prototype.dispose = function()
 {
-	//Render targets
+	// Render targets
 	this.normalRenderTarget.dispose();
 	this.ssaoRenderTarget.dispose();
 	this.blurRenderTarget.dispose();
 
-	//Geometry
+	// Geometry
 	this.quad.geometry.dispose();
 
-	//Materials
+	// Materials
 	this.normalMaterial.dispose();
 	this.blurMaterial.dispose();
 	this.copyMaterial.dispose();

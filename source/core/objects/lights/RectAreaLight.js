@@ -3,7 +3,7 @@
 /**
  * A RectAreLight emit light from a rectagular surface.
  * 
- * Based on THREE.RectAreaLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/RectAreaLight
+ * Based on THREE.RectAreaLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/RectAreaLight
  * 
  * @param {number} color Light color in hex RGB
  * @param {number} intensity Light intensity

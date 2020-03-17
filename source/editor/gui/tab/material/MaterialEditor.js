@@ -6,7 +6,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Canvas
+	// Canvas
 	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
@@ -14,38 +14,38 @@ function MaterialEditor(parent, closeable, container, index)
 		self.camera.updateProjectionMatrix();
 	});
 
-	//Mouse
+	// Mouse
 	this.mouse = new Mouse(window, true);
 	this.mouse.setCanvas(this.canvas.element);
 
-	//Material and corresponding asset
+	// Material and corresponding asset
 	this.material = null;
 	this.asset = null;
 
-	//Preview scene
+	// Preview scene
 	this.scene = new THREE.Scene();
 
-	//Camera
+	// Camera
 	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x / this.canvas.size.y);
 	this.camera.position.set(0, 0, 2.5);
 
-	//Interactive object
+	// Interactive object
 	this.interactive = new THREE.Object3D();
 	this.scene.add(this.interactive);
 
-	//Preview configuration
+	// Preview configuration
 	this.previewForm = new TableForm();
 	this.previewForm.setAutoSize(false);
 
-	//Configuration text
+	// Configuration text
 	this.previewForm.addText("Configuration");
 	this.previewForm.nextRow();
 
-	//Form
+	// Form
 	this.form = new TableForm();
 	this.form.setAutoSize(false);
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
@@ -56,7 +56,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//Side
+	// Side
 	this.form.addText(Locale.side);
 	this.side = new DropdownList(this.form);
 	this.side.size.set(100, 18);
@@ -71,7 +71,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.side);
 	this.form.nextRow();
 
-	//Tone mapping
+	// Tone mapping
 	this.form.addText(Locale.depthTest);
 	this.toneMapped = new CheckBox(this.form);
 	this.toneMapped.size.set(18, 18);
@@ -83,7 +83,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.toneMapped);
 	this.form.nextRow();
 	
-	//Test depth
+	// Test depth
 	this.form.addText(Locale.depthTest);
 	this.depthTest = new CheckBox(this.form);
 	this.depthTest.size.set(18, 18);
@@ -95,7 +95,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.depthTest);
 	this.form.nextRow();
 	
-	//Write depth
+	// Write depth
 	this.form.addText(Locale.depthWrite);
 	this.depthWrite = new CheckBox(this.form);
 	this.depthWrite.size.set(18, 18);
@@ -107,7 +107,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.depthWrite);
 	this.form.nextRow();
 
-	//Depth mode
+	// Depth mode
 	this.form.addText(Locale.depthMode);
 	this.depthFunc = new DropdownList(this.form);
 	this.depthFunc.size.set(100, 18);
@@ -126,7 +126,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.depthFunc);
 	this.form.nextRow();
 
-	//Transparent
+	// Transparent
 	this.form.addText(Locale.transparent);
 	this.transparent = new CheckBox(this.form);
 	this.transparent.size.set(18, 18);
@@ -138,7 +138,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.transparent);
 	this.form.nextRow();
 
-	//Opacity level
+	// Opacity level
 	this.form.addText(Locale.opacity);
 	this.opacity = new Slider(this.form);
 	this.opacity.size.set(160, 18);
@@ -152,7 +152,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.opacity);
 	this.form.nextRow();
 	
-	//Alpha test
+	// Alpha test
 	this.form.addText(Locale.alphaTest);
 	this.alphaTest = new Slider(this.form);
 	this.alphaTest.size.set(160, 18);
@@ -166,7 +166,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.alphaTest);
 	this.form.nextRow();
 	
-	//Blending mode
+	// Blending mode
 	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.size.set(100, 18);
@@ -183,7 +183,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.blending);
 	this.form.nextRow();
 
-	//Preview
+	// Preview
 	this.preview = new DualContainer();
 	this.preview.orientation = DualDivision.VERTICAL;
 	this.preview.tabPosition = 0.8;
@@ -192,7 +192,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.preview.attachA(this.canvas);
 	this.preview.attachB(this.previewForm);
 
-	//Main
+	// Main
 	this.main = new DualContainer(this);
 	this.main.tabPosition = 0.5;
 	this.main.tabPositionMin = 0.05;
@@ -211,22 +211,22 @@ MaterialEditor.geometries = [
 
 MaterialEditor.prototype = Object.create(TabElement.prototype);
 
-//Attach material to material editor
+// Attach material to material editor
 MaterialEditor.prototype.attach = function(material, asset)
 {
-	//Material asset
+	// Material asset
 	if(asset !== undefined)
 	{
 		this.asset = asset;
 	}
 	
-	//Store material
+	// Store material
 	this.material = material;
 	this.material.needsUpdate = true;
 
 	this.updateMetadata();
 
-	//Generic material elements
+	// Generic material elements
 	this.name.setText(material.name);
 	this.side.setValue(material.side);
 	this.depthTest.setValue(material.depthTest);
@@ -265,12 +265,12 @@ MaterialEditor.prototype.destroy = function()
 	this.canvas.destroy();
 };
 
-//Update object data
+// Update object data
 MaterialEditor.prototype.updateMetadata = function()
 {
 	if(this.material !== null)
 	{
-		//Set name
+		// Set name
 		if(this.material.name !== undefined)
 		{
 			this.setName(this.material.name);
@@ -279,7 +279,7 @@ MaterialEditor.prototype.updateMetadata = function()
 
 		this.scene.background = this.material.envMap !== null ? this.material.envMap : null;
 
-		//If not found close tab
+		// If not found close tab
 		if(Editor.program.materials[this.material.uuid] === undefined)
 		{
 			this.close();
@@ -287,15 +287,15 @@ MaterialEditor.prototype.updateMetadata = function()
 	}
 };
 
-//Update material editor
+// Update material editor
 MaterialEditor.prototype.update = function()
 {
 	this.mouse.update();
 
-	//Render Material
+	// Render Material
 	if(this.material !== null)
 	{
-		//If needs update file metadata
+		// If needs update file metadata
 		if(this.material.needsUpdate)
 		{
 			Editor.updateObjectsViewsGUI();
@@ -305,17 +305,17 @@ MaterialEditor.prototype.update = function()
 			this.material.needsUpdate = true;
 		}
 
-		//Render scene
+		// Render scene
 		this.canvas.renderer.render(this.scene, this.camera);
 	}
 
-	//Move material view
+	// Move material view
 	if(this.mouse.insideCanvas())
 	{
-		//Zoom
+		// Zoom
 		this.camera.position.z += this.camera.position.z * this.mouse.wheel * 0.001;
 
-		//Rotate object
+		// Rotate object
 		if(this.mouse.buttonPressed(Mouse.LEFT))
 		{
 			var delta = new THREE.Quaternion();
@@ -326,7 +326,7 @@ MaterialEditor.prototype.update = function()
 	}
 };
 
-//Update elements
+// Update elements
 MaterialEditor.prototype.updateSize = function()
 {	
 	TabElement.prototype.updateSize.call(this);

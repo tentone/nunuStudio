@@ -45,7 +45,7 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 
 	this.connect();
 
-	//Webcam video update loop
+	// Webcam video update loop
 	function update()
 	{
 		if(video.readyState >= video.HAVE_CURRENT_DATA)

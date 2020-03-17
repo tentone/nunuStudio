@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace KinectServer
 {
-    //Serializes a Kinect skeleton to JSON fromat.
+    // Serializes a Kinect skeleton to JSON fromat.
     public static class SkeletonSerializer
     {
         [DataContract]
@@ -44,7 +44,7 @@ namespace KinectServer
             public double Z { get; set; }
         }
 
-        //Serializes an array of Kinect skeletons into an array of JSON skeletons.The Kinect skeletons.The coordinate mapper.Mode (color or depth)
+        // Serializes an array of Kinect skeletons into an array of JSON skeletons.The Kinect skeletons.The coordinate mapper.Mode (color or depth)
         public static string Serialize(this List<Skeleton> skeletons, CoordinateMapper mapper, Mode mode)
         {
             JSONSkeletonCollection jsonSkeletons = new JSONSkeletonCollection { Skeletons = new List<JSONSkeleton>() };
@@ -92,7 +92,7 @@ namespace KinectServer
             return Serialize(jsonSkeletons);
         }
 
-        //Serializes an object to JSON.
+        // Serializes an object to JSON.
         private static string Serialize(object obj)
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());

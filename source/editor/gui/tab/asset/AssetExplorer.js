@@ -8,35 +8,35 @@ function AssetExplorer(parent, closeable, container, index)
 
 	this.element.ondragover = undefined;
 
-	//Assets
+	// Assets
 	this.assets = new Element(this, "div");
 	this.assets.element.style.overflow = "auto";
 
-	//Drop event
+	// Drop event
 	this.element.ondrop = function(event)
 	{
-		//Dragged file into explorer
+		// Dragged file into explorer
 		for(var i = 0; i < event.dataTransfer.files.length; i++)
 		{
 			var file = event.dataTransfer.files[i];
 			var name = file.name;
 
-			//Image
+			// Image
 			if(Image.fileIsImage(file))
 			{
 				Editor.loadTexture(file);
 			}
-			//Video
+			// Video
 			else if(Video.fileIsVideo(file))
 			{
 				Editor.loadVideoTexture(file);
 			}
-			//Audio
+			// Audio
 			else if(Audio.fileIsAudio(file))
 			{
 				Editor.loadAudio(file);
 			}
-			//Font
+			// Font
 			else if(Font.fileIsFont(file))
 			{
 				Editor.loadFont(file);
@@ -44,7 +44,7 @@ function AssetExplorer(parent, closeable, container, index)
 		}
 	};
 
-	//Bar
+	// Bar
 	this.bar = new AssetExplorerMenu(this);
 
 	/**
@@ -145,11 +145,11 @@ AssetExplorer.prototype.add = function(file)
  */
 AssetExplorer.prototype.updateObjectsView = function()
 {
-	//TODO <USE ONLY TO INITIALIZE THE EXPLORER>
+	// TODO <USE ONLY TO INITIALIZE THE EXPLORER>
 
 	this.clear();
 
-	//Materials
+	// Materials
 	var materials = this.manager.materials;
 	for(var i in materials)
 	{
@@ -158,7 +158,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 		this.add(file);
 	}
 
-	//Geometries
+	// Geometries
 	var geometries = this.manager.geometries;
 	for(var i in geometries)
 	{
@@ -167,7 +167,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 		this.add(file);
 	}
 
-	//Textures
+	// Textures
 	var textures = this.manager.textures;
 	for(var i in textures)
 	{
@@ -176,7 +176,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 		this.add(file);
 	}
 
-	//Fonts
+	// Fonts
 	var fonts = this.manager.fonts;
 	for(var i in fonts)
 	{
@@ -201,7 +201,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 		this.add(file);
 	}
 
-	//Audio
+	// Audio
 	var audio = this.manager.audio;
 	for(var i in audio)
 	{
@@ -210,7 +210,7 @@ AssetExplorer.prototype.updateObjectsView = function()
 		this.add(file);
 	}
 
-	//Resources
+	// Resources
 	var resources = this.manager.resources;
 	for(var i in resources)
 	{

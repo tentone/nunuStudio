@@ -32,7 +32,7 @@ function AudioEmitter(audio)
 	/** 
 	 * WebAudio gain node, used to control the volume.
 	 *
-	 * https://developer.mozilla.org/en-US/docs/Web/API/GainNode
+	 * https:// developer.mozilla.org/en-US/docs/Web/API/GainNode
 	 *
 	 * @property gain
 	 * @type {GainNode}

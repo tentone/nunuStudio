@@ -26,17 +26,17 @@ function SwapAction(originalObject, newObject, moveChildren)
 
 SwapAction.prototype.apply = function()
 {	
-	//Check the index
+	// Check the index
 	this.index = this.parent.children.indexOf(this.originalObject);
 
-	//Remove object
+	// Remove object
 	this.parent.remove(this.originalObject);
 
-	//Add new object to parent
+	// Add new object to parent
 	this.newObject.parent = this.parent;
 	this.parent.children.splice(this.index, 0, this.newObject);
 
-	//Move children from original to new
+	// Move children from original to new
 	if(this.moveChildren)
 	{
 		while(this.originalObject.children.length > 0)
@@ -55,11 +55,11 @@ SwapAction.prototype.revert = function()
 {
 	this.parent.remove(this.newObject);
 
-	//Add original object to parent
+	// Add original object to parent
 	this.originalObject.parent = this.parent;
 	this.parent.children.splice(this.index, 0, this.originalObject);
 
-	//Move children from new back to original
+	// Move children from new back to original
 	if(this.moveChildren)
 	{
 		while(this.newObject.children.length > 0)

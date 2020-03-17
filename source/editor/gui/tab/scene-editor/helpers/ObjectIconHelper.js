@@ -83,12 +83,12 @@ ObjectIconHelper.getMaterial = function(icon)
 
 ObjectIconHelper.prototype.update = function()
 {
-	//Position
+	// Position
 	this.matrix.elements[12] = this.object.matrixWorld.elements[12];
 	this.matrix.elements[13] = this.object.matrixWorld.elements[13];
 	this.matrix.elements[14] = this.object.matrixWorld.elements[14];
 
-	//Scale
+	// Scale
 	this.matrix.elements[0] = this.size;
 	this.matrix.elements[5] = this.size / this.material.ratio;
 	this.matrix.elements[10] = this.size;

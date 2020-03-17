@@ -7,7 +7,7 @@ function LightProbeInspector(parent, object)
 
 	var self = this;
 
-	//Intensity
+	// Intensity
 	this.form.addText(Locale.intensity);
 	this.intensity = new Slider(this.form);
 	this.intensity.size.set(160, 18);

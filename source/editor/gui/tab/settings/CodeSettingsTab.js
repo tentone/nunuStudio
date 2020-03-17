@@ -12,11 +12,11 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.defaultTextWidth = 125;
 	this.form.setAutoSize(false);
 
-	//Code editor text
+	// Code editor text
 	this.form.addText("Code Editor");
 	this.form.nextRow();
 
-	//Code Theme
+	// Code Theme
 	this.form.addText("Editor theme");
 	this.codeTheme = new DropdownList(this.form);
 	this.codeTheme.size.set(120, 18);
@@ -32,7 +32,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 		this.codeTheme.addValue(CodemirrorThemes[i], CodemirrorThemes[i]);
 	}
 
-	//Code keymap
+	// Code keymap
 	this.form.addText("Key bindings");
 	this.codeKeymap = new DropdownList(this.form);
 	this.codeKeymap.size.set(120, 18);
@@ -47,7 +47,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.codeKeymap);
 	this.form.nextRow();
 
-	//Code font size
+	// Code font size
 	this.form.addText("Font size");
 	this.codeFontSize = new NumberBox(this.form);
 	this.codeFontSize.size.set(60, 18);
@@ -60,7 +60,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.codeFontSize);
 	this.form.nextRow();
 
-	//Show line numbers
+	// Show line numbers
 	this.form.addText("Show line number");
 	this.codeLineNumbers = new CheckBox(this.form);
 	this.codeLineNumbers.size.set(18, 18);
@@ -71,7 +71,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.codeLineNumbers);
 	this.form.nextRow();
 
-	//Line wrapping
+	// Line wrapping
 	this.form.addText("Line wrap");
 	this.codeLineWrapping = new CheckBox(this.form);
 	this.codeLineWrapping.size.set(18, 18);
@@ -82,7 +82,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.codeLineWrapping);
 	this.form.nextRow();
 
-	//Auto close brackets
+	// Auto close brackets
 	this.form.addText("Auto close brackets");
 	this.codeAutoCloseBrackets = new CheckBox(this.form);
 	this.codeAutoCloseBrackets.size.set(18, 18);
@@ -93,7 +93,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.codeAutoCloseBrackets);
 	this.form.nextRow();
 
-	//Highlight active line
+	// Highlight active line
 	this.form.addText("Highlight line");
 	this.codeHighlightActiveLine = new CheckBox(this.form);
 	this.codeHighlightActiveLine.size.set(18, 18);
@@ -104,7 +104,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.codeHighlightActiveLine);
 	this.form.nextRow();
 
-	//Show search match on scrollback
+	// Show search match on scrollback
 	this.form.addText("Show match scrollbar");
 	this.showMatchesOnScrollbar = new CheckBox(this.form);
 	this.showMatchesOnScrollbar.size.set(18, 18);
@@ -115,7 +115,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.showMatchesOnScrollbar);
 	this.form.nextRow();
 	
-	//File drag
+	// File drag
 	this.form.addText("Drag files");
 	this.dragFiles = new CheckBox(this.form);
 	this.dragFiles.size.set(18, 18);
@@ -126,7 +126,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.dragFiles);
 	this.form.nextRow();
 
-	//Indent with tabs
+	// Indent with tabs
 	this.form.addText("Indent with tabs");
 	this.indentWithTabs = new CheckBox(this.form);
 	this.indentWithTabs.size.set(18, 18);
@@ -137,7 +137,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.indentWithTabs);
 	this.form.nextRow();
 
-	//Tab size
+	// Tab size
 	this.form.addText("Tab size");
 	this.tabSize = new NumberBox(this.form);
 	this.tabSize.size.set(60, 18);
@@ -150,7 +150,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.tabSize);
 	this.form.nextRow();
 
-	//Indent units
+	// Indent units
 	this.form.addText("Indent Unit");
 	this.indentUnit = new NumberBox(this.form);
 	this.indentUnit.size.set(60, 18);

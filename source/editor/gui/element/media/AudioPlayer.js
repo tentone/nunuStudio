@@ -8,10 +8,10 @@ function AudioPlayer(parent)
 
 	var self = this;
 
-	//WebAudio context
+	// WebAudio context
 	this.context = THREE.AudioContext.getContext();
 
-	//Timer
+	// Timer
 	this.timer = document.createElement("div");
 	this.timer.style.position = "absolute";
 	this.timer.style.display = "flex";
@@ -22,11 +22,11 @@ function AudioPlayer(parent)
 	this.timer.style.right = "0px";
 	this.element.appendChild(this.timer);
 
-	//Text
+	// Text
 	this.timerText = document.createTextNode("00:00");
 	this.timer.appendChild(this.timerText);
 
-	//Button
+	// Button
 	this.button = document.createElement("button");
 	this.button.style.position = "absolute";
 	this.button.style.cursor = "pointer";
@@ -39,7 +39,7 @@ function AudioPlayer(parent)
 		self.toggle();
 	};
 
-	//Icon
+	// Icon
 	this.icon = document.createElement("img");
 	this.icon.style.position = "absolute";
 	this.icon.style.left = "15%";
@@ -49,14 +49,14 @@ function AudioPlayer(parent)
 	this.icon.src = Global.FILE_PATH + "icons/misc/play.png";
 	this.button.appendChild(this.icon);
 
-	//Track
+	// Track
 	this.track = document.createElement("div");
 	this.track.style.position = "absolute";
 	this.track.style.backgroundColor = Editor.theme.audioTrack;
 	this.track.style.cursor = "pointer";
 	this.element.appendChild(this.track);
 
-	//Progress
+	// Progress
 	this.progress = document.createElement("div");
 	this.progress.style.pointerEvents = "none";
 	this.progress.style.position = "absolute";
@@ -64,7 +64,7 @@ function AudioPlayer(parent)
 	this.progress.style.height = "100%";
 	this.track.appendChild(this.progress);
 
-	//Scrubber
+	// Scrubber
 	this.scrubber = document.createElement("div");
 	this.scrubber.style.position = "absolute";
 	this.scrubber.style.backgroundColor = Editor.theme.audioScrubber;
@@ -72,23 +72,23 @@ function AudioPlayer(parent)
 	this.scrubber.style.width = "6px";
 	this.track.appendChild(this.scrubber);
 
-	//Audio source and buffer
+	// Audio source and buffer
 	this.buffer = null;
 	this.source = null;
 
-	//Playback control
+	// Playback control
 	this.time = 0;
 	this.startTime = 0;
 	this.playing = false;
 	this.loop = false;
 
-	//Drag control
+	// Drag control
 	this.seekStart = 0;
 	this.seekTime = 0;
 	this.seekProgress = 0;
 	this.dragging = false;
 
-	//Event manager
+	// Event manager
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
@@ -149,7 +149,7 @@ function AudioPlayer(parent)
 		self.scrubber.onmousedown(event);
 	};
 
-	//Update elements
+	// Update elements
 	function draw()
 	{
 		if(self.playing)
@@ -197,7 +197,7 @@ function AudioPlayer(parent)
 
 AudioPlayer.prototype = Object.create(Element.prototype);
 
-//Decode audio
+// Decode audio
 AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
 {
 	var self = this;
@@ -213,7 +213,7 @@ AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
 	}.bind(this));
 };
 
-//Connect audio source
+// Connect audio source
 AudioPlayer.prototype.connect = function()
 {
 	if(this.playing)
@@ -226,13 +226,13 @@ AudioPlayer.prototype.connect = function()
 	this.source.connect(this.context.destination);
 };
 
-//Disconnect source
+// Disconnect source
 AudioPlayer.prototype.disconnect = function()
 {
 	this.source.disconnect();
 };
 
-//Play audio
+// Play audio
 AudioPlayer.prototype.play = function(time)
 {
 	this.connect();
@@ -250,7 +250,7 @@ AudioPlayer.prototype.play = function(time)
 	this.icon.src = Global.FILE_PATH + "icons/misc/pause.png";
 };
 
-//Pause audio
+// Pause audio
 AudioPlayer.prototype.pause = function()
 {
 	if(this.playing)
@@ -263,7 +263,7 @@ AudioPlayer.prototype.pause = function()
 	}
 };
 
-//Stop audio playback
+// Stop audio playback
 AudioPlayer.prototype.stop = function()
 {	
 	if(this.playing)
@@ -276,7 +276,7 @@ AudioPlayer.prototype.stop = function()
 	}
 };
 
-//Seek time
+// Seek time
 AudioPlayer.prototype.seek = function(time)
 {
 	if(this.playing)
@@ -289,7 +289,7 @@ AudioPlayer.prototype.seek = function(time)
 	}
 };
 
-//Toggle play/pause
+// Toggle play/pause
 AudioPlayer.prototype.toggle = function()
 {
 	if(!this.playing)
@@ -318,17 +318,17 @@ AudioPlayer.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
-	//Button
+	// Button
 	this.button.style.width = this.element.style.height;
 	this.button.style.height = this.element.style.height;
 
-	//Track
+	// Track
 	this.track.style.top = (this.size.y * 0.25) + "px";
 	this.track.style.left = (this.size.y * 1.05) + "px";
 	this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
 	this.track.style.height = (this.size.y * 0.5) + "px";
 
-	//Scrubber
+	// Scrubber
 	this.scrubber.style.height = (this.size.y * 0.8) + "px";
 	this.scrubber.style.top = (-this.size.y * 0.15) + "px";
 };

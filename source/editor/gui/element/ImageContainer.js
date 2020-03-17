@@ -12,7 +12,7 @@ function ImageContainer(parent)
 	Element.call(this, parent, "img");
 
 	this.element.style.borderStyle = "none";
-	this.element.style.objectFit = "contain"; //contain | cover | fill
+	this.element.style.objectFit = "contain"; // contain | cover | fill
 }
 
 ImageContainer.prototype = Object.create(Element.prototype);

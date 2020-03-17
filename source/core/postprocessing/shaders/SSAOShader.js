@@ -2,14 +2,14 @@
 
 /**
  * Screen-space ambient occlusion shader
- *    - http://devlog-martinsh.blogspot.com (assembled by Martins Upitis)
- *    - http://www.gamedev.net/topic/550699-ssao-no-halo-artifacts/ (original technique is made by ArKano22)
+ *    - http:// devlog-martinsh.blogspot.com (assembled by Martins Upitis)
+ *    - http:// www.gamedev.net/topic/550699-ssao-no-halo-artifacts/ (original technique is made by ArKano22)
  *
  * Modified to use RGBA packed depth texture (use clear color 1,1,1,1 for depth pass)
  *
  * @static
  * @class SSAOShader
- * @author alteredq / http://alteredqualia.com/
+ * @author alteredq / http:// alteredqualia.com/
  */
 var SSAOShader =
 {
@@ -42,33 +42,33 @@ var SSAOShader =
 		uniform float logDepthBufFC;\n\
 	#endif\n\
 \n\
-	uniform float radius; //ao radius \n\
-	uniform bool onlyAO; //use only ambient occlusion pass?\n\
+	uniform float radius; // ao radius \n\
+	uniform bool onlyAO; // use only ambient occlusion pass?\n\
 \n\
-	uniform vec2 size; //texture width, height\n\
-	uniform float aoClamp; //depth clamp - reduces haloing at screen edges\n\
+	uniform vec2 size; // texture width, height\n\
+	uniform float aoClamp; // depth clamp - reduces haloing at screen edges\n\
 \n\
-	uniform float lumInfluence; //how much luminance affects occlusion\n\
+	uniform float lumInfluence; // how much luminance affects occlusion\n\
 \n\
 	uniform sampler2D tDiffuse;\n\
 	uniform sampler2D tDepth;\n\
 \n\
 	varying vec2 vUv;\n\
 \n\
-	#define DL 2.399963229728653 //PI *(3.0 - sqrt(5.0))\n\
+	#define DL 2.399963229728653 // PI *(3.0 - sqrt(5.0))\n\
 	#define EULER 2.718281828459045\n\
 \n\
-	//user variables\n\
-	const int samples = 64; //ao sample count\n\
-	const bool useNoise = true; //use noise instead of pattern for sample dithering\n\
-	const float noiseAmount = 0.0004; //dithering amount\n\
-	const float diffArea = 0.4; //self-shadowing reduction\n\
-	const float gDisplace = 0.4; //gauss bell center\n\
+	// user variables\n\
+	const int samples = 64; // ao sample count\n\
+	const bool useNoise = true; // use noise instead of pattern for sample dithering\n\
+	const float noiseAmount = 0.0004; // dithering amount\n\
+	const float diffArea = 0.4; // self-shadowing reduction\n\
+	const float gDisplace = 0.4; // gauss bell center\n\
 \n\
-	//RGBA depth\n\
+	// RGBA depth\n\
 	#include <packing>\n\
 \n\
-	//generating noise / pattern texture for dithering\n\
+	// generating noise / pattern texture for dithering\n\
 	vec2 rand(const vec2 coord)\n\
 	{\n\
 		vec2 noise;\n\
@@ -108,10 +108,10 @@ var SSAOShader =
 \n\
 	float compareDepths(const in float depth1, const in float depth2, inout int far)\n\
 	{\n\
-		float garea = 8.0; //gauss bell width\n\
-		float diff =(depth1 - depth2) * 100.0; //depth difference (0-100)\n\
+		float garea = 8.0; // gauss bell width\n\
+		float diff =(depth1 - depth2) * 100.0; // depth difference (0-100)\n\
 \n\
-		//reduce left bell width to avoid self-shadowing\n\
+		// reduce left bell width to avoid self-shadowing\n\
 		if(diff < gDisplace)\n\
 		{\n\
 			garea = diffArea;\n\
@@ -139,7 +139,7 @@ var SSAOShader =
 		int far = 0;\n\
 		temp1 = compareDepths(depth, readDepth(coord1), far);\n\
 \n\
-		//DEPTH EXTRAPOLATION\n\
+		// DEPTH EXTRAPOLATION\n\
 		if(far > 0)\n\
 		{\n\
 			temp2 = compareDepths(readDepth(coord2), depth, far);\n\
@@ -185,11 +185,11 @@ var SSAOShader =
 		float lum = dot(color.rgb, lumcoeff);\n\
 		vec3 luminance = vec3(lum);\n\
 \n\
-		vec3 final = vec3(color * mix(vec3(ao), vec3(1.0), luminance * lumInfluence)); //mix(color * ao, white, luminance)\n\
+		vec3 final = vec3(color * mix(vec3(ao), vec3(1.0), luminance * lumInfluence)); // mix(color * ao, white, luminance)\n\
 \n\
 		if(onlyAO)\n\
 		{\n\
-			final = vec3(mix(vec3(ao), vec3(1.0), luminance * lumInfluence)); //ambient occlusion only\n\
+			final = vec3(mix(vec3(ao), vec3(1.0), luminance * lumInfluence)); // ambient occlusion only\n\
 		}\n\
 \n\
 		gl_FragColor = vec4(final, 1.0);\n\

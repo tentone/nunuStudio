@@ -92,7 +92,7 @@ function ConsoleTab(parent, closeable, container, index)
 	this.console.style.width = "100%";
 	this.element.appendChild(this.console);
 
-	//Command input division
+	// Command input division
 	this.code = document.createElement("input");
 	this.code.type = "text";
 	this.code.style.position = "absolute";
@@ -198,7 +198,7 @@ ConsoleTab.prototype.useConsole = function(enabled)
 	}
 };
 
-//Normal log messsage
+// Normal log messsage
 ConsoleTab.prototype.log = function(args)
 {
 	if(this.filter(args))
@@ -215,7 +215,7 @@ ConsoleTab.prototype.log = function(args)
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
-//Warning message
+// Warning message
 ConsoleTab.prototype.warn = function(args)
 {
 	if(this.filter(args))
@@ -234,7 +234,7 @@ ConsoleTab.prototype.warn = function(args)
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
-//Error message
+// Error message
 ConsoleTab.prototype.error = function(args)
 {
 	if(this.filter(args))
@@ -253,7 +253,7 @@ ConsoleTab.prototype.error = function(args)
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
-//Clear commands
+// Clear commands
 ConsoleTab.prototype.clear = function(args)
 {
 	this.history = [];

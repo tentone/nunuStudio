@@ -6,7 +6,7 @@ function SceneInspector(parent, object)
 
 	var self = this;
 
-	//Select scene as default
+	// Select scene as default
 	this.default = new CheckBox(this.form);
 	this.form.addText(Locale.defaultScene);
 	this.default.size.set(18, 18);
@@ -29,7 +29,7 @@ function SceneInspector(parent, object)
 	this.form.add(this.default);
 	this.form.nextRow();
 
-	//Background color
+	// Background color
 	this.form.addText(Locale.background);
 	this.background = new ColorChooser(this.form);
 	this.background.size.set(100, 18);
@@ -41,7 +41,7 @@ function SceneInspector(parent, object)
 	this.form.add(this.background);
 	this.form.nextRow();
 
-	//Background texture
+	// Background texture
 	this.form.addText("");
 	this.backgroundTexture = new TextureChooser(this.form);
 	this.backgroundTexture.acceptAll = true;
@@ -64,7 +64,7 @@ function SceneInspector(parent, object)
 	this.form.add(this.backgroundTransparent);
 	this.form.nextRow();
 
-	//Fog
+	// Fog
 	this.form.addText(Locale.fog);
 	this.fog = new DropdownList(this.form);
 	this.fog.size.set(100, 18);
@@ -79,11 +79,11 @@ function SceneInspector(parent, object)
 	this.form.add(this.fog);
 	this.form.nextRow();
 
-	//Linear fog properties
+	// Linear fog properties
 	this.fogLinearForm = new TableForm(this.form);
 	this.fogLinearForm.spacing.set(5, 5);
 
-	//Linear fog color
+	// Linear fog color
 	this.fogLinearForm.addText(Locale.color);
 	this.fogLinearColor = new ColorChooser(this.fogLinearForm);
 	this.fogLinearColor.size.set(80, 18);
@@ -96,7 +96,7 @@ function SceneInspector(parent, object)
 	this.fogLinearForm.add(this.fogLinearColor);
 	this.fogLinearForm.nextRow();
 
-	//Linear fog near
+	// Linear fog near
 	this.fogLinearForm.addText(Locale.near);
 	this.fogNear = new NumberBox(this.fogLinearForm);
 	this.fogNear.size.set(60, 18);
@@ -107,7 +107,7 @@ function SceneInspector(parent, object)
 	this.fogLinearForm.add(this.fogNear);
 	this.fogLinearForm.nextRow();
 
-	//Linear fog far
+	// Linear fog far
 	this.fogLinearForm.addText(Locale.near);
 	this.fogFar = new NumberBox(this.fogLinearForm);
 	this.fogFar.size.set(60, 18);
@@ -118,15 +118,15 @@ function SceneInspector(parent, object)
 	this.fogLinearForm.add(this.fogFar);
 	this.fogLinearForm.updateInterface();
 
-	//Add linear fog form
+	// Add linear fog form
 	this.form.add(this.fogLinearForm);
 	this.form.nextRow();
 
-	//Exponential fog properties
+	// Exponential fog properties
 	this.fogExponentialForm = new TableForm(this.form);
 	this.fogExponentialForm.spacing.set(5, 5);
 
-	//Exponential fog color
+	// Exponential fog color
 	this.fogExponentialForm.addText(Locale.color);
 	this.fogExponentialColor = new ColorChooser(this.fogExponentialForm);
 	this.fogExponentialColor.size.set(80, 18);
@@ -139,7 +139,7 @@ function SceneInspector(parent, object)
 	this.fogExponentialForm.add(this.fogExponentialColor);
 	this.fogExponentialForm.nextRow();
 
-	//Exponential fog density
+	// Exponential fog density
 	this.fogExponentialForm.addText(Locale.density)
 	this.fogDensity = new NumberBox(this.fogExponentialForm);
 	this.fogDensity.size.set(100, 18);
@@ -151,15 +151,15 @@ function SceneInspector(parent, object)
 	this.fogExponentialForm.add(this.fogDensity);
 	this.fogExponentialForm.updateInterface();
 
-	//Add exponential fog form
+	// Add exponential fog form
 	this.form.add(this.fogExponentialForm);
 	this.form.nextRow();
 	
-	//Physics world
+	// Physics world
 	this.form.addText(Locale.physics);
 	this.form.nextRow();
 
-	//Use physics
+	// Use physics
 	this.form.addText(Locale.usePhysics);
 	this.usePhysics = new CheckBox(this.form);
 	this.usePhysics.size.set(18, 18);
@@ -170,7 +170,7 @@ function SceneInspector(parent, object)
 	this.form.add(this.usePhysics);
 	this.form.nextRow();
 
-	//Gravity
+	// Gravity
 	this.form.addText(Locale.gravity);
 	this.gravity = new VectorBox(this.form);
 	this.gravity.setOnChange(function()
@@ -206,10 +206,10 @@ function SceneInspector(parent, object)
 	this.form.nextRow();
 }
 
-//Super prototypes
+// Super prototypes
 SceneInspector.prototype = Object.create(ObjectInspector.prototype);
 
-//Update panel content from attached object
+// Update panel content from attached object
 SceneInspector.prototype.updateInspector = function()
 {
 	this.default.setValue(this.object.uuid === this.object.parent.defaultScene);
@@ -258,7 +258,7 @@ SceneInspector.prototype.updateInspector = function()
 	this.iterations.setValue(this.object.world.solver.iterations);
 };
 
-//Update wich forms should be visible in the panel
+// Update wich forms should be visible in the panel
 SceneInspector.prototype.updateForms = function()
 {
 	ObjectInspector.prototype.updateInspector.call(this);

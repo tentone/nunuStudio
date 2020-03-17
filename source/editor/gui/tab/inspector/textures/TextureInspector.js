@@ -6,7 +6,7 @@ function TextureInspector(parent, object)
 
 	var self = this;
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(190, 18);
@@ -18,7 +18,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//UUID
+	// UUID
 	if(Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
@@ -26,7 +26,7 @@ function TextureInspector(parent, object)
 		this.form.nextRow();
 	}
 
-	//WrapS
+	// WrapS
 	this.form.addText(Locale.wrapHor);
 	this.wrapS = new DropdownList(this.form);
 	this.wrapS.size.set(120, 18);
@@ -40,7 +40,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.wrapS);
 	this.form.nextRow();
 
-	//WrapT
+	// WrapT
 	this.form.addText(Locale.wrapVert);
 	this.wrapT = new DropdownList(this.form);
 	this.wrapT.size.set(120, 18);
@@ -54,7 +54,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.wrapT);
 	this.form.nextRow();
 
-	//Repeat
+	// Repeat
 	this.form.addText(Locale.repeat);
 	this.repeat = new VectorBox(this.form);
 	this.repeat.setType(VectorBox.VECTOR2);
@@ -68,7 +68,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.repeat);
 	this.form.nextRow();
 
-	//Offset
+	// Offset
 	this.form.addText(Locale.offset);
 	this.offset = new VectorBox(this.form);
 	this.offset.setType(VectorBox.VECTOR2);
@@ -82,7 +82,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.offset);
 	this.form.nextRow();
 
-	//Center
+	// Center
 	this.form.addText(Locale.center);
 	this.center = new VectorBox(this.form);
 	this.center.setType(VectorBox.VECTOR2);
@@ -96,7 +96,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.center);
 	this.form.nextRow();
 
-	//Rotation
+	// Rotation
 	this.form.addText(Locale.rotation);
 	this.rotation = new NumberBox(this.form);
 	this.rotation.size.set(60, 18);
@@ -108,7 +108,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
-	//Minification filter
+	// Minification filter
 	this.form.addText(Locale.minFilter);
 	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
@@ -125,7 +125,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.minFilter);
 	this.form.nextRow();
 
-	//Magnification filter
+	// Magnification filter
 	this.form.addText(Locale.magFilter);
 	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
@@ -138,7 +138,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.magFilter);
 	this.form.nextRow();
 
-	//Premultiply Alpha
+	// Premultiply Alpha
 	this.form.addText(Locale.premulAlpha);
 	this.premultiplyAlpha = new CheckBox(this.form);
 	this.premultiplyAlpha.size.set(18, 18);
@@ -149,7 +149,7 @@ function TextureInspector(parent, object)
 	this.form.add(this.premultiplyAlpha);
 	this.form.nextRow();
 
-	//Flip Y
+	// Flip Y
 	this.form.addText(Locale.flipY);
 	this.flipY = new CheckBox(this.form);
 	this.flipY.size.set(18, 18);

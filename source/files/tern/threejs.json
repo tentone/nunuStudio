@@ -1,7 +1,7 @@
 {
 	"!name": "threejs",
 	"Camera": {
-		"!url": "http://threejs.org/docs/#api/cameras/Camera",
+		"!url": "http:// threejs.org/docs/#api/cameras/Camera",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"matrixWorldInverse": {
@@ -21,7 +21,7 @@
 		"!type": "fn()"
 	},
 	"CubeCamera": {
-		"!url": "http://threejs.org/docs/#api/cameras/CubeCamera",
+		"!url": "http:// threejs.org/docs/#api/cameras/CubeCamera",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"renderTarget": {
@@ -37,7 +37,7 @@
 		"!type": "fn(near: number, far: number, cubeResolution: number)"
 	},
 	"OrthographicCamera": {
-		"!url": "http://threejs.org/docs/#api/cameras/OrthographicCamera",
+		"!url": "http:// threejs.org/docs/#api/cameras/OrthographicCamera",
 		"prototype": {
 			"!proto": "Camera.prototype",
 			"left": {
@@ -73,7 +73,7 @@
 		"!type": "fn(left: number, right: number, top: number, bottom: number, near: number, far: number)"
 	},
 	"PerspectiveCamera": {
-		"!url": "http://threejs.org/docs/#api/cameras/PerspectiveCamera",
+		"!url": "http:// threejs.org/docs/#api/cameras/PerspectiveCamera",
 		"prototype": {
 			"!proto": "Camera.prototype",
 			"fov": {
@@ -94,7 +94,7 @@
 			},
 			"setLens": {
 				"!type": "fn(focalLength: number, frameSize: number)",
-				"!doc": "Uses focal length (in mm) to estimate and set FOV 35mm (fullframe) camera is used if frame size is not specified.<br>\n\t\tFormula based on [link:http://www.bobatkins.com/photography/technical/field_of_view.html]"
+				"!doc": "Uses focal length (in mm) to estimate and set FOV 35mm (fullframe) camera is used if frame size is not specified.<br>\n\t\tFormula based on [link:http:// www.bobatkins.com/photography/technical/field_of_view.html]"
 			},
 			"setViewOffset": {
 				"!type": "fn(fullWidth: number, fullHeight: number, x: number, y: number, width: number, height: number)",
@@ -109,27 +109,27 @@
 		"!type": "fn(fov: number, aspect: number, near: number, far: number)"
 	},
 	"CustomBlendingEquations": {
-		"!url": "http://threejs.org/docs/#api/constants/CustomBlendingEquations",
+		"!url": "http:// threejs.org/docs/#api/constants/CustomBlendingEquations",
 		"prototype": {}
 	},
 	"GLState": {
-		"!url": "http://threejs.org/docs/#api/constants/GLState",
+		"!url": "http:// threejs.org/docs/#api/constants/GLState",
 		"prototype": {}
 	},
 	"Materials": {
-		"!url": "http://threejs.org/docs/#api/constants/Materials",
+		"!url": "http:// threejs.org/docs/#api/constants/Materials",
 		"prototype": {}
 	},
 	"ShadowingTypes": {
-		"!url": "http://threejs.org/docs/#api/constants/ShadowingTypes",
+		"!url": "http:// threejs.org/docs/#api/constants/ShadowingTypes",
 		"prototype": {}
 	},
 	"Textures": {
-		"!url": "http://threejs.org/docs/#api/constants/Textures",
+		"!url": "http:// threejs.org/docs/#api/constants/Textures",
 		"prototype": {}
 	},
 	"BufferAttribute": {
-		"!url": "http://threejs.org/docs/#api/core/BufferAttribute",
+		"!url": "http:// threejs.org/docs/#api/core/BufferAttribute",
 		"prototype": {
 			"array": {
 				"!type": "[]",
@@ -180,7 +180,7 @@
 		"!type": "fn(array: [], itemSize: number)"
 	},
 	"BufferGeometry": {
-		"!url": "http://threejs.org/docs/#api/core/BufferGeometry",
+		"!url": "http:// threejs.org/docs/#api/core/BufferGeometry",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -251,7 +251,7 @@
 		"!type": "fn()"
 	},
 	"Clock": {
-		"!url": "http://threejs.org/docs/#api/core/Clock",
+		"!url": "http:// threejs.org/docs/#api/core/Clock",
 		"prototype": {
 			"autoStart": {
 				"!type": "bool",
@@ -294,7 +294,7 @@
 		"!type": "fn(autoStart: bool)"
 	},
 	"EventDispatcher": {
-		"!url": "http://threejs.org/docs/#api/core/EventDispatcher",
+		"!url": "http:// threejs.org/docs/#api/core/EventDispatcher",
 		"prototype": {
 			"addEventListener": {
 				"!type": "fn(type: string, listener: function)",
@@ -313,11 +313,11 @@
 				"!doc": "Fire an event type."
 			}
 		},
-		"!doc": "JavaScript events for custom objects.<br>\n\t\t<a href=\"https://github.com/mrdoob/eventdispatcher.js\">https://github.com/mrdoob/eventdispatcher.js</a>",
+		"!doc": "JavaScript events for custom objects.<br>\n\t\t<a href=\"https:// github.com/mrdoob/eventdispatcher.js\">https:// github.com/mrdoob/eventdispatcher.js</a>",
 		"!type": "fn()"
 	},
 	"Face3": {
-		"!url": "http://threejs.org/docs/#api/core/Face3",
+		"!url": "http:// threejs.org/docs/#api/core/Face3",
 		"prototype": {
 			"a": {
 				"!type": "number",
@@ -360,7 +360,7 @@
 		"!type": "fn(a: number, b: number, c: number, normal: +Vector3, color: +Color, materialIndex: number)"
 	},
 	"Geometry": {
-		"!url": "http://threejs.org/docs/#api/core/Geometry",
+		"!url": "http:// threejs.org/docs/#api/core/Geometry",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -491,7 +491,7 @@
 		"!type": "fn()"
 	},
 	"Object3D": {
-		"!url": "http://threejs.org/docs/#api/core/Object3D",
+		"!url": "http:// threejs.org/docs/#api/core/Object3D",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -499,7 +499,7 @@
 			},
 			"uuid": {
 				"!type": "string",
-				"!doc": "[link:http://en.wikipedia.org/wiki/Universally_unique_identifier UUID] of this object instance.\n\t\tThis gets automatically assigned, so this shouldn't be edited."
+				"!doc": "[link:http:// en.wikipedia.org/wiki/Universally_unique_identifier UUID] of this object instance.\n\t\tThis gets automatically assigned, so this shouldn't be edited."
 			},
 			"name": {
 				"!type": "string",
@@ -519,7 +519,7 @@
 			},
 			"rotation": {
 				"!type": "+Euler",
-				"!doc": "Object's local rotation (<a href=\"https://en.wikipedia.org/wiki/Euler_angles\" target=\"_blank\">Euler angles</a>), in radians."
+				"!doc": "Object's local rotation (<a href=\"https:// en.wikipedia.org/wiki/Euler_angles\" target=\"_blank\">Euler angles</a>), in radians."
 			},
 			"scale": {
 				"!type": "+Vector3",
@@ -646,7 +646,7 @@
 		"!type": "fn()"
 	},
 	"Raycaster": {
-		"!url": "http://threejs.org/docs/#api/core/Raycaster",
+		"!url": "http:// threejs.org/docs/#api/core/Raycaster",
 		"prototype": {
 			"ray": {
 				"!type": "+Ray",
@@ -685,7 +685,7 @@
 		"!type": "fn(origin: +Vector3, direction: +Vector3, near: number, far: number)"
 	},
 	"Lut": {
-		"!url": "http://threejs.org/docs/#api/examples/Lut",
+		"!url": "http:// threejs.org/docs/#api/examples/Lut",
 		"prototype": {
 			"minV": {
 				"!type": "number",
@@ -728,7 +728,7 @@
 		"!type": "fn(colormap, numberOfColors)"
 	},
 	"CombinedCamera": {
-		"!url": "http://threejs.org/docs/#api/examples/cameras/CombinedCamera",
+		"!url": "http:// threejs.org/docs/#api/examples/cameras/CombinedCamera",
 		"prototype": {
 			"!proto": "Camera.prototype",
 			"fov": {
@@ -836,7 +836,7 @@
 		"!type": "fn(width: number, height: number, fov: number, near: number, far: number, orthoNear: number, orthoFar: number)"
 	},
 	"FontUtils": {
-		"!url": "http://threejs.org/docs/#api/extras/FontUtils",
+		"!url": "http:// threejs.org/docs/#api/extras/FontUtils",
 		"prototype": {
 			"divisions": {
 				"!type": "number",
@@ -890,12 +890,12 @@
 		"!doc": "A class for text operations in three.js (See [page:TextGeometry])"
 	},
 	"GeometryUtils": {
-		"!url": "http://threejs.org/docs/#api/extras/GeometryUtils",
+		"!url": "http:// threejs.org/docs/#api/extras/GeometryUtils",
 		"prototype": {},
 		"!doc": "Contains handy functions geometry manipulations."
 	},
 	"ImageUtils": {
-		"!url": "http://threejs.org/docs/#api/extras/ImageUtils",
+		"!url": "http:// threejs.org/docs/#api/extras/ImageUtils",
 		"prototype": {
 			"crossOrigin": {
 				"!type": "string",
@@ -933,7 +933,7 @@
 		"!doc": "A Helper class to ease the loading of images of different types."
 	},
 	"SceneUtils": {
-		"!url": "http://threejs.org/docs/#api/extras/SceneUtils",
+		"!url": "http:// threejs.org/docs/#api/extras/SceneUtils",
 		"prototype": {
 			"createMultiMaterialObject": {
 				"!type": "fn(geometry: +Geometry, materials: []) -> +Object3D",
@@ -951,7 +951,7 @@
 		"!doc": "A class containing useful utility functions for scene manipulation."
 	},
 	"Curve": {
-		"!url": "http://threejs.org/docs/#api/extras/core/Curve",
+		"!url": "http:// threejs.org/docs/#api/extras/core/Curve",
 		"prototype": {
 			"getPoint": {
 				"!type": "fn(t) -> Vector",
@@ -998,7 +998,7 @@
 		"!type": "fn()"
 	},
 	"CurvePath": {
-		"!url": "http://threejs.org/docs/#api/extras/core/CurvePath",
+		"!url": "http:// threejs.org/docs/#api/extras/core/CurvePath",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"curves": {
@@ -1066,7 +1066,7 @@
 		"!type": "fn()"
 	},
 	"Path": {
-		"!url": "http://threejs.org/docs/#api/extras/core/Path",
+		"!url": "http:// threejs.org/docs/#api/extras/core/Path",
 		"prototype": {
 			"!proto": "CurvePath.prototype",
 			"actions": {
@@ -1118,7 +1118,7 @@
 		"!type": "fn(points: todo)"
 	},
 	"Shape": {
-		"!url": "http://threejs.org/docs/#api/extras/core/Shape",
+		"!url": "http:// threejs.org/docs/#api/extras/core/Shape",
 		"prototype": {
 			"!proto": "Path.prototype",
 			"holes": {
@@ -1158,14 +1158,14 @@
 		"!type": "fn()"
 	},
 	"ArcCurve": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/ArcCurve",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/ArcCurve",
 		"prototype": {
 			"!proto": "EllipseCurve.prototype"
 		},
 		"!doc": "Alias for [page:EllipseCurve]"
 	},
 	"CubicBezierCurve": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/CubicBezierCurve",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/CubicBezierCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v0": "+Vector2",
@@ -1173,10 +1173,10 @@
 			"v2": "+Vector2",
 			"v3": "+Vector2"
 		},
-		"!doc": "Create a smooth 2d <a href=\"http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg\" target=\"_blank\">cubic bezier curve</a>."
+		"!doc": "Create a smooth 2d <a href=\"http:// en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg\" target=\"_blank\">cubic bezier curve</a>."
 	},
 	"CubicBezierCurve3": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/CubicBezierCurve3",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/CubicBezierCurve3",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v0": "+Vector3",
@@ -1184,11 +1184,11 @@
 			"v2": "+Vector3",
 			"v3": "+Vector3"
 		},
-		"!doc": "Create a smooth 3d <a href=\"http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg\" target=\"_blank\">cubic bezier curve</a>.",
+		"!doc": "Create a smooth 3d <a href=\"http:// en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg\" target=\"_blank\">cubic bezier curve</a>.",
 		"!type": "fn(v0: +Vector3, v1: +Vector3, v2: +Vector3, v3: +Vector3)"
 	},
 	"EllipseCurve": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/EllipseCurve",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/EllipseCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"aX": "number",
@@ -1203,7 +1203,7 @@
 		"!type": "fn(aX: number, aY: number, xRadius: number, yRadius: number, aStartAngle: Radians, aEndAngle: Radians, aClockwise: bool)"
 	},
 	"LineCurve": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/LineCurve",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/LineCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v1": "+Vector2",
@@ -1213,7 +1213,7 @@
 		"!type": "fn(v1: +Vector2, v2: +Vector2)"
 	},
 	"LineCurve3": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/LineCurve3",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/LineCurve3",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v1": "+Vector3",
@@ -1223,29 +1223,29 @@
 		"!type": "fn(v1: +Vector3, v2: +Vector3)"
 	},
 	"QuadraticBezierCurve": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/QuadraticBezierCurve",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/QuadraticBezierCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v0": "+Vector2",
 			"v1": "+Vector2",
 			"v2": "+Vector2"
 		},
-		"!doc": "Create a smooth 2d <a href=\"http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif\" target=\"_blank\">quadratic bezier curve</a>.",
+		"!doc": "Create a smooth 2d <a href=\"http:// en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif\" target=\"_blank\">quadratic bezier curve</a>.",
 		"!type": "fn(v0: +Vector2, v1: +Vector2, v2: +Vector2)"
 	},
 	"QuadraticBezierCurve3": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/QuadraticBezierCurve3",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/QuadraticBezierCurve3",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v0": "+Vector3",
 			"v1": "+Vector3",
 			"v2": "+Vector3"
 		},
-		"!doc": "Create a smooth 3d <a href=\"http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif\" target=\"_blank\">quadratic bezier curve</a>.",
+		"!doc": "Create a smooth 3d <a href=\"http:// en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif\" target=\"_blank\">quadratic bezier curve</a>.",
 		"!type": "fn(v0: +Vector3, v1: +Vector3, v2: +Vector3)"
 	},
 	"SplineCurve": {
-		"!url": "http://threejs.org/docs/#api/extras/curves/SplineCurve",
+		"!url": "http:// threejs.org/docs/#api/extras/curves/SplineCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"points": "[]"
@@ -1254,7 +1254,7 @@
 		"!type": "fn(points: [])"
 	},
 	"BoxGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/BoxGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/BoxGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1262,7 +1262,7 @@
 		"!type": "fn(width: number, height: number, depth: number, widthSegments: number, heightSegments: number, depthSegments: number)"
 	},
 	"CircleGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/CircleGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/CircleGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1270,14 +1270,14 @@
 		"!type": "fn(radius: number, segments: number, thetaStart: number, thetaLength: number)"
 	},
 	"CubeGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/CubeGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/CubeGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
 		"!doc": "Renamed CubeGeometry to BoxGeometry. see [page:BoxGeometry]."
 	},
 	"CylinderGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/CylinderGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/CylinderGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1285,7 +1285,7 @@
 		"!type": "fn(radiusTop: number, radiusBottom: number, height: number, radiusSegments: number, heightSegments: number, openEnded: bool, thetaStart: number, thetaLength: number)"
 	},
 	"DodecahedronGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/DodecahedronGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/DodecahedronGeometry",
 		"prototype": {
 			"!proto": "PolyhedronGeometry.prototype",
 			"parameters": {
@@ -1297,7 +1297,7 @@
 		"!type": "fn(radius: number, detail: number)"
 	},
 	"ExtrudeGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/ExtrudeGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/ExtrudeGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype",
 			"addShapeList": {
@@ -1313,7 +1313,7 @@
 		"!type": "fn(shapes: [], options: object)"
 	},
 	"IcosahedronGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/IcosahedronGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/IcosahedronGeometry",
 		"prototype": {
 			"!proto": "PolyhedronGeometry.prototype",
 			"parameters": {
@@ -1325,7 +1325,7 @@
 		"!type": "fn(radius: number, detail: number)"
 	},
 	"LatheGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/LatheGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/LatheGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1333,7 +1333,7 @@
 		"!type": "fn(points: [], segments: number, phiStart: number, phiLength: number)"
 	},
 	"OctahedronGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/OctahedronGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/OctahedronGeometry",
 		"prototype": {
 			"!proto": "PolyhedronGeometry.prototype",
 			"parameters": {
@@ -1345,7 +1345,7 @@
 		"!type": "fn(radius: number, detail: number)"
 	},
 	"ParametricGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/ParametricGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/ParametricGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1353,7 +1353,7 @@
 		"!type": "fn(func: function, slices: number, stacks: number)"
 	},
 	"PlaneGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/PlaneGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/PlaneGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1361,7 +1361,7 @@
 		"!type": "fn(width: number, height: number, widthSegments: number, heightSegments: number)"
 	},
 	"PolyhedronGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/PolyhedronGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/PolyhedronGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype",
 			"parameters": {
@@ -1373,7 +1373,7 @@
 		"!type": "fn(vertices: [], faces: [], radius: number, detail: number)"
 	},
 	"RingGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/RingGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/RingGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1381,7 +1381,7 @@
 		"!type": "fn(innerRadius: number, outerRadius: number, thetaSegments: number, phiSegments: number, thetaStart: number, thetaLength: number)"
 	},
 	"ShapeGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/ShapeGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/ShapeGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype",
 			"addShape": {
@@ -1393,7 +1393,7 @@
 		"!type": "fn(shapes: [], options: object)"
 	},
 	"SphereGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/SphereGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/SphereGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1401,7 +1401,7 @@
 		"!type": "fn(radius: number, widthSegments: number, heightSegments: number, phiStart: number, phiLength: number, thetaStart: number, thetaLength: number)"
 	},
 	"TetrahedronGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/TetrahedronGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/TetrahedronGeometry",
 		"prototype": {
 			"!proto": "PolyhedronGeometry.prototype",
 			"parameters": {
@@ -1413,7 +1413,7 @@
 		"!type": "fn(radius: number, detail: number)"
 	},
 	"TextGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/TextGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/TextGeometry",
 		"prototype": {
 			"!proto": "ExtrudeGeometry.prototype"
 		},
@@ -1421,7 +1421,7 @@
 		"!type": "fn(text: string, parameters: object)"
 	},
 	"TorusGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/TorusGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/TorusGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1429,7 +1429,7 @@
 		"!type": "fn(radius: number, tube: number, radialSegments: number, tubularSegments: number, arc: number)"
 	},
 	"TorusKnotGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/TorusKnotGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/TorusKnotGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1437,7 +1437,7 @@
 		"!type": "fn(radius: number, tube: number, radialSegments: number, tubularSegments: number, p: number, q: number, heightScale: number)"
 	},
 	"TubeGeometry": {
-		"!url": "http://threejs.org/docs/#api/geometries/TubeGeometry",
+		"!url": "http:// threejs.org/docs/#api/geometries/TubeGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype",
 			"parameters": {
@@ -1461,7 +1461,7 @@
 		"!type": "fn(path: +Curve, segments: number, radius: number, radiusSegments: number, closed: bool)"
 	},
 	"ArrowHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/ArrowHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/ArrowHelper",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"line": {
@@ -1489,7 +1489,7 @@
 		"!type": "fn(dir: +Vector3, origin: +Vector3, length: number, hex: number, headLength: number, headWidth: number)"
 	},
 	"AxisHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/AxisHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/AxisHelper",
 		"prototype": {
 			"!proto": "Line.prototype"
 		},
@@ -1497,7 +1497,7 @@
 		"!type": "fn(size: number)"
 	},
 	"BoundingBoxHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/BoundingBoxHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/BoundingBoxHelper",
 		"prototype": {
 			"!proto": "Mesh.prototype",
 			"object": {
@@ -1517,19 +1517,19 @@
 		"!type": "fn(object: +Object3D, hex: number)"
 	},
 	"BoxHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/BoxHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/BoxHelper",
 		"prototype": {
 			"!proto": "Line.prototype",
 			"update": {
 				"!type": "fn(object: +Object3D)",
-				"!doc": "Updates the helper's geometry to match the dimensions of the [page:Geometry.boundingBox bounding box] of the passed object's geometry.\n\n\t\t<h2>Source</h2>\n\n\t\t[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]"
+				"!doc": "Updates the helper's geometry to match the dimensions of the [page:Geometry.boundingBox bounding box] of the passed object's geometry.\n\n\t\t<h2>Source</h2>\n\n\t\t[link:https:// github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]"
 			}
 		},
 		"!doc": "Helper object to show a wireframe box (with no face diagonals) around an object",
 		"!type": "fn(object: +Object3D)"
 	},
 	"CameraHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/CameraHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/CameraHelper",
 		"prototype": {
 			"!proto": "Line.prototype",
 			"pointMap": {
@@ -1549,7 +1549,7 @@
 		"!type": "fn(camera: +Camera)"
 	},
 	"DirectionalLightHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/DirectionalLightHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/DirectionalLightHelper",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"lightPlane": {
@@ -1573,7 +1573,7 @@
 		"!type": "fn(light: +DirectionalLight, size: number)"
 	},
 	"EdgesHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/EdgesHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/EdgesHelper",
 		"prototype": {
 			"!proto": "Line.prototype"
 		},
@@ -1581,7 +1581,7 @@
 		"!type": "fn(object: +Object3D, color: +Color, thresholdAngle: number)"
 	},
 	"FaceNormalsHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/FaceNormalsHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/FaceNormalsHelper",
 		"prototype": {
 			"!proto": "Line.prototype",
 			"object": {
@@ -1597,7 +1597,7 @@
 		"!type": "fn(object: +Object3D, size: number, color: +Color, linewidth: number)"
 	},
 	"GridHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/GridHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/GridHelper",
 		"prototype": {
 			"!proto": "Line.prototype"
 		},
@@ -1605,7 +1605,7 @@
 		"!type": "fn(size: number, step: number)"
 	},
 	"HemisphereLightHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/HemisphereLightHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/HemisphereLightHelper",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"lightSphere": {
@@ -1625,7 +1625,7 @@
 		"!type": "fn(light: +HemisphereLight, sphereSize: number)"
 	},
 	"PointLightHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/PointLightHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/PointLightHelper",
 		"prototype": {
 			"!proto": "Mesh.prototype",
 			"lightSphere": {
@@ -1645,7 +1645,7 @@
 		"!type": "fn(light: todo, sphereSize: todo)"
 	},
 	"SpotLightHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/SpotLightHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/SpotLightHelper",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"lightSphere": {
@@ -1669,7 +1669,7 @@
 		"!type": "fn(light: todo, sphereSize: todo)"
 	},
 	"VertexNormalsHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/VertexNormalsHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/VertexNormalsHelper",
 		"prototype": {
 			"!proto": "Line.prototype",
 			"object": {
@@ -1685,7 +1685,7 @@
 		"!type": "fn(object: +Object3D, size: number, color: +Color, linewidth: number)"
 	},
 	"WireframeHelper": {
-		"!url": "http://threejs.org/docs/#api/extras/helpers/WireframeHelper",
+		"!url": "http:// threejs.org/docs/#api/extras/helpers/WireframeHelper",
 		"prototype": {
 			"!proto": "Line.prototype"
 		},
@@ -1693,7 +1693,7 @@
 		"!type": "fn(object: +Object3D, color: +Color)"
 	},
 	"ImmediateRenderObject": {
-		"!url": "http://threejs.org/docs/#api/extras/objects/ImmediateRenderObject",
+		"!url": "http:// threejs.org/docs/#api/extras/objects/ImmediateRenderObject",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"render": {
@@ -1705,7 +1705,7 @@
 		"!type": "fn()"
 	},
 	"MorphBlendMesh": {
-		"!url": "http://threejs.org/docs/#api/extras/objects/MorphBlendMesh",
+		"!url": "http:// threejs.org/docs/#api/extras/objects/MorphBlendMesh",
 		"prototype": {
 			"!proto": "Mesh.prototype",
 			"animationsMap": {
@@ -1773,7 +1773,7 @@
 		"!type": "fn(geometry: todo, material: todo)"
 	},
 	"AmbientLight": {
-		"!url": "http://threejs.org/docs/#api/lights/AmbientLight",
+		"!url": "http:// threejs.org/docs/#api/lights/AmbientLight",
 		"prototype": {
 			"!proto": "Light.prototype"
 		},
@@ -1781,7 +1781,7 @@
 		"!type": "fn(hex: number)"
 	},
 	"DirectionalLight": {
-		"!url": "http://threejs.org/docs/#api/lights/DirectionalLight",
+		"!url": "http:// threejs.org/docs/#api/lights/DirectionalLight",
 		"prototype": {
 			"!proto": "Light.prototype",
 			"target": {
@@ -1797,7 +1797,7 @@
 		"!type": "fn(hex: number, intensity: number)"
 	},
 	"HemisphereLight": {
-		"!url": "http://threejs.org/docs/#api/lights/HemisphereLight",
+		"!url": "http:// threejs.org/docs/#api/lights/HemisphereLight",
 		"prototype": {
 			"!proto": "Light.prototype",
 			"groundColor": {
@@ -1813,7 +1813,7 @@
 		"!type": "fn(skyColorHex: number, groundColorHex: number, intensity: number)"
 	},
 	"Light": {
-		"!url": "http://threejs.org/docs/#api/lights/Light",
+		"!url": "http:// threejs.org/docs/#api/lights/Light",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"color": {
@@ -1825,7 +1825,7 @@
 		"!type": "fn(hex: number)"
 	},
 	"PointLight": {
-		"!url": "http://threejs.org/docs/#api/lights/PointLight",
+		"!url": "http:// threejs.org/docs/#api/lights/PointLight",
 		"prototype": {
 			"!proto": "Light.prototype",
 			"intensity": {
@@ -1841,7 +1841,7 @@
 		"!type": "fn(hex: number, intensity: number, distance: number)"
 	},
 	"SpotLight": {
-		"!url": "http://threejs.org/docs/#api/lights/SpotLight",
+		"!url": "http:// threejs.org/docs/#api/lights/SpotLight",
 		"prototype": {
 			"!proto": "Light.prototype",
 			"target": {
@@ -1869,7 +1869,7 @@
 		"!type": "fn(hex: number, intensity: number, distance: todo, angle: todo, exponent: todo)"
 	},
 	"BabylonLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/BabylonLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/BabylonLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -1884,7 +1884,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"BufferGeometryLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/BufferGeometryLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/BufferGeometryLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -1899,7 +1899,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"Cache": {
-		"!url": "http://threejs.org/docs/#api/loaders/Cache",
+		"!url": "http:// threejs.org/docs/#api/loaders/Cache",
 		"prototype": {
 			"files": {
 				"!type": "object",
@@ -1926,7 +1926,7 @@
 		"!type": "fn()"
 	},
 	"ColladaLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/ColladaLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/ColladaLoader",
 		"prototype": {
 			"options": {
 				"!type": "[]",
@@ -1957,7 +1957,7 @@
 		"!type": "fn()"
 	},
 	"ImageLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/ImageLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/ImageLoader",
 		"prototype": {
 			"crossOrigin": {
 				"!type": "string",
@@ -1976,7 +1976,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"JSONLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/JSONLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/JSONLoader",
 		"prototype": {
 			"!proto": "Loader.prototype",
 			"withCredentials": {
@@ -2024,7 +2024,7 @@
 		"!type": "fn()"
 	},
 	"Loader": {
-		"!url": "http://threejs.org/docs/#api/loaders/Loader",
+		"!url": "http:// threejs.org/docs/#api/loaders/Loader",
 		"prototype": {
 			"onLoadStart": {
 				"!type": "function",
@@ -2063,7 +2063,7 @@
 		"!type": "fn()"
 	},
 	"LoadingManager": {
-		"!url": "http://threejs.org/docs/#api/loaders/LoadingManager",
+		"!url": "http:// threejs.org/docs/#api/loaders/LoadingManager",
 		"prototype": {
 			"onLoad": {
 				"!type": "function",
@@ -2090,7 +2090,7 @@
 		"!type": "fn(onLoad: function, onProgress: function, onError: function)"
 	},
 	"MTLLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/MTLLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/MTLLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2105,7 +2105,7 @@
 		"!type": "fn(baseUrl: string, options: object, crossOrigin: string)"
 	},
 	"MaterialLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/MaterialLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/MaterialLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2124,7 +2124,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"OBJLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/OBJLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/OBJLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2139,7 +2139,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"OBJMTLLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/OBJMTLLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/OBJMTLLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(objUrl: string, mtlUrl: string, onLoad: function, onProgress: function, onError: function)",
@@ -2154,7 +2154,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"ObjectLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/ObjectLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/ObjectLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2173,7 +2173,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"PDBLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/PDBLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/PDBLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2188,11 +2188,11 @@
 				"!doc": "Parse a <em>(JSON) pdb</em> structure and return two [page:Geometry]: one for atoms, one for bonds.<br>"
 			}
 		},
-		"!doc": "A loader for loading a <em>.pdb</em> resource.\n\t\t<br><br>\n\t\tThe <a href=\"http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)\">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.",
+		"!doc": "A loader for loading a <em>.pdb</em> resource.\n\t\t<br><br>\n\t\tThe <a href=\"http:// en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)\">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.",
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"SVGLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/SVGLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/SVGLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2203,7 +2203,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"TGALoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/TGALoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/TGALoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function) -> +DataTexture",
@@ -2214,7 +2214,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"TextureLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/TextureLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/TextureLoader",
 		"prototype": {
 			"crossOrigin": {
 				"!type": "string",
@@ -2229,7 +2229,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"FileLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/FileLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/FileLoader",
 		"prototype": {
 			"cache": {
 				"!type": "+Cache",
@@ -2260,7 +2260,7 @@
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"GLTFLoader": {
-		"!url": "http://threejs.org/docs/#api/loaders/GLTFLoader",
+		"!url": "http:// threejs.org/docs/#api/loaders/GLTFLoader",
 		"prototype": {
 			"!proto": "Loader.prototype",
 			"load": {
@@ -2268,11 +2268,11 @@
 				"!doc": "Begin loading from url and call the callback function with the parsed response content."
 			}
 		},
-		"!doc": "A loader for loading a <em>.gltf</em> resource in <em>JSON</em> format.\n\t\t<br><br>\n\t\tThe <a href=\"https://www.khronos.org/gltf\">glTF file format</a> is a JSON file format to enable rapid delivery and loading of 3D content.",
+		"!doc": "A loader for loading a <em>.gltf</em> resource in <em>JSON</em> format.\n\t\t<br><br>\n\t\tThe <a href=\"https:// www.khronos.org/gltf\">glTF file format</a> is a JSON file format to enable rapid delivery and loading of 3D content.",
 		"!type": "fn()"
 	},
 	"LineBasicMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/LineBasicMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/LineBasicMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2281,7 +2281,7 @@
 			},
 			"linewidth": {
 				"!type": "number",
-				"!doc": "Due to limitations in the <a href=\"https://code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
+				"!doc": "Due to limitations in the <a href=\"https:// code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
 			},
 			"linecap": {
 				"!type": "string",
@@ -2304,7 +2304,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"LineDashedMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/LineDashedMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/LineDashedMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2313,7 +2313,7 @@
 			},
 			"linewidth": {
 				"!type": "number",
-				"!doc": "Due to limitations in the <a href=\"https://code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
+				"!doc": "Due to limitations in the <a href=\"https:// code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
 			},
 			"scale": {
 				"!type": "number",
@@ -2340,7 +2340,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"Material": {
-		"!url": "http://threejs.org/docs/#api/materials/Material",
+		"!url": "http:// threejs.org/docs/#api/materials/Material",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -2423,7 +2423,7 @@
 		"!type": "fn()"
 	},
 	"MeshBasicMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/MeshBasicMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/MeshBasicMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2460,7 +2460,7 @@
 			},
 			"wireframeLinewidth": {
 				"!type": "number",
-				"!doc": "Due to limitations in the <a href=\"https://code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
+				"!doc": "Due to limitations in the <a href=\"https:// code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
 			},
 			"wireframeLinecap": {
 				"!type": "string",
@@ -2503,7 +2503,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"MeshDepthMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/MeshDepthMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/MeshDepthMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"morphTargets": {
@@ -2523,7 +2523,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"MultiMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/MultiMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/MultiMaterial",
 		"prototype": {
 			"materials": {
 				"!type": "[]",
@@ -2534,7 +2534,7 @@
 		"!type": "fn(materials: [])"
 	},
 	"MeshLambertMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/MeshLambertMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/MeshLambertMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2599,7 +2599,7 @@
 			},
 			"wireframeLinewidth": {
 				"!type": "number",
-				"!doc": "Due to limitations in the <a href=\"https://code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
+				"!doc": "Due to limitations in the <a href=\"https:// code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
 			},
 			"wireframeLinecap": {
 				"!type": "string",
@@ -2630,7 +2630,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"MeshNormalMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/MeshNormalMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/MeshNormalMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"wireframe": {
@@ -2650,7 +2650,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"MeshPhongMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/MeshPhongMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/MeshPhongMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2743,7 +2743,7 @@
 			},
 			"wireframeLinewidth": {
 				"!type": "number",
-				"!doc": "Due to limitations in the <a href=\"https://code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
+				"!doc": "Due to limitations in the <a href=\"https:// code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
 			},
 			"wireframeLinecap": {
 				"!type": "string",
@@ -2774,7 +2774,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"PointCloudMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/PointCloudMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/PointCloudMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2806,14 +2806,14 @@
 		"!type": "fn(parameters: object)"
 	},
 	"RawShaderMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/RawShaderMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/RawShaderMaterial",
 		"prototype": {
 			"!proto": "ShaderMaterial.prototype"
 		},
 		"!doc": "This class works just like [page:ShaderMaterial], except that definitions of built-in uniforms and attributes are not automatically prepended to the GLSL shader code."
 	},
 	"ShaderMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/ShaderMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/ShaderMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"uniforms": {
@@ -2842,7 +2842,7 @@
 			},
 			"linewidth": {
 				"!type": "number",
-				"!doc": "Due to limitations in the <a href=\"https://code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
+				"!doc": "Due to limitations in the <a href=\"https:// code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
 			},
 			"wireframe": {
 				"!type": "bool",
@@ -2850,7 +2850,7 @@
 			},
 			"wireframeLinewidth": {
 				"!type": "number",
-				"!doc": "Due to limitations in the <a href=\"https://code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
+				"!doc": "Due to limitations in the <a href=\"https:// code.google.com/p/angleproject/\" target=\"_blank\">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value."
 			},
 			"fog": {
 				"!type": "bool",
@@ -2885,11 +2885,11 @@
 				"!doc": "Generates a shallow copy of this material. Note that the vertexShader and fragmentShader are copied <emph>by reference</emph>, as are the definitions of the *attributes*; this means that clones of the material will share the same compiled [page:WebGLProgram]. However, the *uniforms* are copied <emph>by value</emph>, which allows you to have different sets of uniforms for different copies of the material."
 			}
 		},
-		"!doc": "Material rendered with custom shaders. A shader is a small program written in [link:https://www.opengl.org/documentation/glsl/ GLSL] to run on the GPU. You may want to use a custom shader if you need to:\n\t\t<ul>\n\t\t\t<li>implement an effect not included with any of the built-in [page:Material materials]</li>\n\t\t\t<li>combine many objects into a single [page:Geometry] or [page:BufferGeometry] in order to improve performance</li>\n\t\t\t<li>associate custom data with individual vertices (\"custom attributes\")</li>\n\t\t</ul>\n\t\tNote that a ShaderMaterial will only be rendered properly by [page:WebGLRenderer], since the GLSL code in the vertexShader and fragmentShader properties must be compiled and run on the GPU using WebGL.",
+		"!doc": "Material rendered with custom shaders. A shader is a small program written in [link:https:// www.opengl.org/documentation/glsl/ GLSL] to run on the GPU. You may want to use a custom shader if you need to:\n\t\t<ul>\n\t\t\t<li>implement an effect not included with any of the built-in [page:Material materials]</li>\n\t\t\t<li>combine many objects into a single [page:Geometry] or [page:BufferGeometry] in order to improve performance</li>\n\t\t\t<li>associate custom data with individual vertices (\"custom attributes\")</li>\n\t\t</ul>\n\t\tNote that a ShaderMaterial will only be rendered properly by [page:WebGLRenderer], since the GLSL code in the vertexShader and fragmentShader properties must be compiled and run on the GPU using WebGL.",
 		"!type": "fn(parameters: object)"
 	},
 	"SpriteCanvasMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/SpriteCanvasMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/SpriteCanvasMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2905,7 +2905,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"SpriteMaterial": {
-		"!url": "http://threejs.org/docs/#api/materials/SpriteMaterial",
+		"!url": "http:// threejs.org/docs/#api/materials/SpriteMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2929,7 +2929,7 @@
 		"!type": "fn(parameters: object)"
 	},
 	"Box2": {
-		"!url": "http://threejs.org/docs/#api/math/Box2",
+		"!url": "http:// threejs.org/docs/#api/math/Box2",
 		"prototype": {
 			"min": {
 				"!type": "+Vector2",
@@ -3032,7 +3032,7 @@
 		"!type": "fn(min: +Vector2, max: +Vector2)"
 	},
 	"Box3": {
-		"!url": "http://threejs.org/docs/#api/math/Box3",
+		"!url": "http:// threejs.org/docs/#api/math/Box3",
 		"prototype": {
 			"min": {
 				"!type": "+Vector3",
@@ -3147,7 +3147,7 @@
 		"!type": "fn(min: +Vector3, max: +Vector3)"
 	},
 	"Color": {
-		"!url": "http://threejs.org/docs/#api/math/Color",
+		"!url": "http:// threejs.org/docs/#api/math/Color",
 		"prototype": {
 			"r": {
 				"!type": "number",
@@ -3258,7 +3258,7 @@
 		"!type": "fn(value)"
 	},
 	"Euler": {
-		"!url": "http://threejs.org/docs/#api/math/Euler",
+		"!url": "http:// threejs.org/docs/#api/math/Euler",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -3309,11 +3309,11 @@
 				"!doc": "Returns a new euler created from this euler."
 			}
 		},
-		"!doc": "Euler Angles. <br><br>\n\n\t\tEuler angles describe a rotation transformation by rotating an object on its various axes in specified amounts per axis, and a specified axis order.\n\t\t(More information on <a href=\"http://en.wikipedia.org/wiki/Euler_angles\" target=\"blank\">Wikipedia</a>)",
+		"!doc": "Euler Angles. <br><br>\n\n\t\tEuler angles describe a rotation transformation by rotating an object on its various axes in specified amounts per axis, and a specified axis order.\n\t\t(More information on <a href=\"http:// en.wikipedia.org/wiki/Euler_angles\" target=\"blank\">Wikipedia</a>)",
 		"!type": "fn(x: number, y: number, z: number, order: string)"
 	},
 	"Frustum": {
-		"!url": "http://threejs.org/docs/#api/math/Frustum",
+		"!url": "http:// threejs.org/docs/#api/math/Frustum",
 		"prototype": {
 			"planes": {
 				"!type": "[]",
@@ -3348,11 +3348,11 @@
 				"!doc": "Check to see if the sphere intersects with the frustum."
 			}
 		},
-		"!doc": "<a href=\"http://en.wikipedia.org/wiki/Frustum\">Frustums</a> are used to determine what is inside the camera's field of view. They help speed up the rendering process.",
+		"!doc": "<a href=\"http:// en.wikipedia.org/wiki/Frustum\">Frustums</a> are used to determine what is inside the camera's field of view. They help speed up the rendering process.",
 		"!type": "fn(p0: +Plane, p1: +Plane, p2: +Plane, p3: +Plane, p4: +Plane, p5: +Plane)"
 	},
 	"Line3": {
-		"!url": "http://threejs.org/docs/#api/math/Line3",
+		"!url": "http:// threejs.org/docs/#api/math/Line3",
 		"prototype": {
 			"start": "+Vector3",
 			"end": "+Vector3",
@@ -3409,7 +3409,7 @@
 		"!type": "fn(start: +Vector3, end: +Vector3)"
 	},
 	"Math": {
-		"!url": "http://threejs.org/docs/#api/math/Math",
+		"!url": "http:// threejs.org/docs/#api/math/Math",
 		"prototype": {
 			"clamp": {
 				"!type": "fn(x: number, a: number, b: number) -> number",
@@ -3453,7 +3453,7 @@
 			},
 			"smoothstep": {
 				"!type": "fn(x: number, min: number, max: number) -> number",
-				"!doc": "Returns a value between 0-1 that represents the percentage that x has moved between min and max, but smoothed or slowed down the closer X is to the min and max.<br><br>\n\t\t\n\t\t[link:http://en.wikipedia.org/wiki/Smoothstep Wikipedia]"
+				"!doc": "Returns a value between 0-1 that represents the percentage that x has moved between min and max, but smoothed or slowed down the closer X is to the min and max.<br><br>\n\t\t\n\t\t[link:http:// en.wikipedia.org/wiki/Smoothstep Wikipedia]"
 			},
 			"smootherstep": {
 				"!type": "fn(x: number, min: number, max: number) -> number",
@@ -3463,7 +3463,7 @@
 		"!doc": "Math utility functions"
 	},
 	"Matrix3": {
-		"!url": "http://threejs.org/docs/#api/math/Matrix3",
+		"!url": "http:// threejs.org/docs/#api/math/Matrix3",
 		"prototype": {
 			"elements": {
 				"!type": "Float32Array",
@@ -3518,7 +3518,7 @@
 		"!type": "fn(n11: number, n12: number, n13: number, n21: number, n22: number, n23: number, n31: number, n32: number, n33: number)"
 	},
 	"Matrix4": {
-		"!url": "http://threejs.org/docs/#api/math/Matrix4",
+		"!url": "http:// threejs.org/docs/#api/math/Matrix4",
 		"prototype": {
 			"elements": {
 				"!type": "Float32Array",
@@ -3570,7 +3570,7 @@
 			},
 			"determinant": {
 				"!type": "fn() -> number",
-				"!doc": "Computes determinant of this matrix.<br>\n\t\tBased on [link:http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm]"
+				"!doc": "Computes determinant of this matrix.<br>\n\t\tBased on [link:http:// www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm]"
 			},
 			"transpose": {
 				"!type": "fn() -> +Matrix4",
@@ -3586,7 +3586,7 @@
 			},
 			"getInverse": {
 				"!type": "fn(m: +Matrix4) -> +Matrix4",
-				"!doc": "Sets this matrix to the inverse of matrix *m*.<br>\n\t\tBased on [link:http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm]."
+				"!doc": "Sets this matrix to the inverse of matrix *m*.<br>\n\t\tBased on [link:http:// www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm]."
 			},
 			"makeRotationFromEuler": {
 				"!type": "fn(euler: +Euler) -> +Matrix4",
@@ -3626,7 +3626,7 @@
 			},
 			"makeRotationAxis": {
 				"!type": "fn(axis: +Vector3, theta: number) -> +Matrix4",
-				"!doc": "Sets this matrix as rotation transform around *axis* by *angle* radians.<br>\n\t\tBased on [link:http://www.gamedev.net/reference/articles/article1199.asp]."
+				"!doc": "Sets this matrix as rotation transform around *axis* by *angle* radians.<br>\n\t\tBased on [link:http:// www.gamedev.net/reference/articles/article1199.asp]."
 			},
 			"makeScale": {
 				"!type": "fn(x: number, y: number, z: number) -> +Matrix4",
@@ -3657,7 +3657,7 @@
 		"!type": "fn(n11: number, n12: number, n13: number, n14: number, n21: number, n22: number, n23: number, n24: number, n31: number, n32: number, n33: number, n34: number, n41: number, n42: number, n43: number, n44: number)"
 	},
 	"Plane": {
-		"!url": "http://threejs.org/docs/#api/math/Plane",
+		"!url": "http:// threejs.org/docs/#api/math/Plane",
 		"prototype": {
 			"normal": "+Vector3",
 			"constant": "number",
@@ -3738,7 +3738,7 @@
 		"!type": "fn(normal: +Vector3, constant: number)"
 	},
 	"Quaternion": {
-		"!url": "http://threejs.org/docs/#api/math/Quaternion",
+		"!url": "http:// threejs.org/docs/#api/math/Quaternion",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -3758,15 +3758,15 @@
 			},
 			"setFromAxisAngle": {
 				"!type": "fn(axis: +Vector3, angle: number) -> +Quaternion",
-				"!doc": "Sets this quaternion from rotation specified by axis and angle.<br>\n\t\tAdapted from [link:http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm].<br>\n\t\t*Axis* is asumed to be normalized, *angle* is in radians."
+				"!doc": "Sets this quaternion from rotation specified by axis and angle.<br>\n\t\tAdapted from [link:http:// www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm].<br>\n\t\t*Axis* is asumed to be normalized, *angle* is in radians."
 			},
 			"setFromRotationMatrix": {
 				"!type": "fn(m: +Matrix4) -> +Quaternion",
-				"!doc": "Sets this quaternion from rotation component of *m*.<br>\n\t\tAdapted from [link:http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm]."
+				"!doc": "Sets this quaternion from rotation component of *m*.<br>\n\t\tAdapted from [link:http:// www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm]."
 			},
 			"setFromUnitVectors": {
 				"!type": "fn(vFrom: +Vector3, vTo: +Vector3) -> +Quaternion",
-				"!doc": "Sets this quaternion to the rotation required to rotate direction vector *vFrom* to direction vector *vTo*.<br>\n\t\tAdapted from [link:http://lolengine.net/blog/2013/09/18/beautiful-maths-quaternion-from-vectors].<br>\n\t\t*vFrom* and *vTo* are assumed to be normalized."
+				"!doc": "Sets this quaternion to the rotation required to rotate direction vector *vFrom* to direction vector *vTo*.<br>\n\t\tAdapted from [link:http:// lolengine.net/blog/2013/09/18/beautiful-maths-quaternion-from-vectors].<br>\n\t\t*vFrom* and *vTo* are assumed to be normalized."
 			},
 			"inverse": {
 				"!type": "fn() -> +Quaternion",
@@ -3786,7 +3786,7 @@
 			},
 			"multiplyQuaternions": {
 				"!type": "fn(a: +Quaternion, b: +Quaternion) -> +Quaternion",
-				"!doc": "Sets this quaternion to *a x b*<br>\n\t\tAdapted from [link:http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm]."
+				"!doc": "Sets this quaternion to *a x b*<br>\n\t\tAdapted from [link:http:// www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm]."
 			},
 			"multiplyVector3": {
 				"!type": "fn(vector: +Vector3, dest: +Vector3) -> +Quaternion",
@@ -3821,11 +3821,11 @@
 				"!doc": "Returns the rotational conjugate of this quaternion. The conjugate of a quaternion\n\t\trepresents the same rotation in the opposite direction about the rotational axis."
 			}
 		},
-		"!doc": "Implementation of a <a href=\"http://en.wikipedia.org/wiki/Quaternion\">quaternion</a>. This is used for rotating things without encountering the dreaded <a href=\"http://en.wikipedia.org/wiki/Gimbal_lock\">gimbal lock</a> issue, amongst other advantages.",
+		"!doc": "Implementation of a <a href=\"http:// en.wikipedia.org/wiki/Quaternion\">quaternion</a>. This is used for rotating things without encountering the dreaded <a href=\"http:// en.wikipedia.org/wiki/Gimbal_lock\">gimbal lock</a> issue, amongst other advantages.",
 		"!type": "fn(x: number, y: number, z: number, w: number)"
 	},
 	"Ray": {
-		"!url": "http://threejs.org/docs/#api/math/Ray",
+		"!url": "http:// threejs.org/docs/#api/math/Ray",
 		"prototype": {
 			"origin": {
 				"!type": "+Vector3",
@@ -3888,7 +3888,7 @@
 		"!type": "fn(origin: +Vector3, direction: +Vector3)"
 	},
 	"Sphere": {
-		"!url": "http://threejs.org/docs/#api/math/Sphere",
+		"!url": "http:// threejs.org/docs/#api/math/Sphere",
 		"prototype": {
 			"center": "+Vector3",
 			"radius": "number",
@@ -3945,7 +3945,7 @@
 		"!type": "fn(center: +Vector3, radius: number)"
 	},
 	"Triangle": {
-		"!url": "http://threejs.org/docs/#api/math/Triangle",
+		"!url": "http:// threejs.org/docs/#api/math/Triangle",
 		"prototype": {
 			"a": {
 				"!type": "+Vector3",
@@ -3973,7 +3973,7 @@
 			},
 			"barycoordFromPoint": {
 				"!type": "fn(point: +Vector3, optionalTarget: +Vector3) -> +Vector3",
-				"!doc": "Return a barycentric coordinate from the given vector. <br><br>\n\t\t[link:http://commons.wikimedia.org/wiki/File:Barycentric_coordinates_1.png](Picture of barycentric coordinates)"
+				"!doc": "Return a barycentric coordinate from the given vector. <br><br>\n\t\t[link:http:// commons.wikimedia.org/wiki/File:Barycentric_coordinates_1.png](Picture of barycentric coordinates)"
 			},
 			"clone": {
 				"!type": "fn() -> +Triangle",
@@ -4008,7 +4008,7 @@
 		"!type": "fn(a: +Vector3, b: +Vector3, c: +Vector3)"
 	},
 	"Vector2": {
-		"!url": "http://threejs.org/docs/#api/math/Vector2",
+		"!url": "http:// threejs.org/docs/#api/math/Vector2",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -4157,7 +4157,7 @@
 		"!type": "fn(x: number, y: number)"
 	},
 	"Vector3": {
-		"!url": "http://threejs.org/docs/#api/math/Vector3",
+		"!url": "http:// threejs.org/docs/#api/math/Vector3",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -4224,7 +4224,7 @@
 			},
 			"lengthManhattan": {
 				"!type": "fn() -> number",
-				"!doc": "Computes Manhattan length of this vector.<br>\n\t\t[link:http://en.wikipedia.org/wiki/Taxicab_geometry]"
+				"!doc": "Computes Manhattan length of this vector.<br>\n\t\t[link:http:// en.wikipedia.org/wiki/Taxicab_geometry]"
 			},
 			"normalize": {
 				"!type": "fn() -> +Vector3",
@@ -4399,7 +4399,7 @@
 		"!type": "fn(x: number, y: number, z: number)"
 	},
 	"Vector4": {
-		"!url": "http://threejs.org/docs/#api/math/Vector4",
+		"!url": "http:// threejs.org/docs/#api/math/Vector4",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -4519,11 +4519,11 @@
 			},
 			"setAxisAngleFromRotationMatrix": {
 				"!type": "fn(m: +Matrix4) -> +Vector4",
-				"!doc": "Sets this Vector4 to the computed <a href=\"http://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation\" target=\"_blank\">axis-angle representation</a> of the rotation defined by Matrix4 m. Assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled).<br><br>\n\n\t\tThe axis is stored in components (x, y, z) of the vector, and the rotation in radians is stored in component w"
+				"!doc": "Sets this Vector4 to the computed <a href=\"http:// en.wikipedia.org/wiki/Axis%E2%80%93angle_representation\" target=\"_blank\">axis-angle representation</a> of the rotation defined by Matrix4 m. Assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled).<br><br>\n\n\t\tThe axis is stored in components (x, y, z) of the vector, and the rotation in radians is stored in component w"
 			},
 			"setAxisAngleFromQuaternion": {
 				"!type": "fn(q: +Quaternion) -> +Vector4",
-				"!doc": "Sets this Vector4 to the computed <a href=\"http://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation\" target=\"_blank\">axis-angle representation</a> of the rotation defined by Quaternion q.<br><br>\n\n\t\tThe axis is stored in components (x, y, z) of the vector, and the rotation in radians is stored in component w"
+				"!doc": "Sets this Vector4 to the computed <a href=\"http:// en.wikipedia.org/wiki/Axis%E2%80%93angle_representation\" target=\"_blank\">axis-angle representation</a> of the rotation defined by Quaternion q.<br><br>\n\n\t\tThe axis is stored in components (x, y, z) of the vector, and the rotation in radians is stored in component w"
 			},
 			"getComponent": {
 				"!type": "fn(index: number) -> number",
@@ -4543,7 +4543,7 @@
 			},
 			"lengthManhattan": {
 				"!type": "fn() -> number",
-				"!doc": "Computes Manhattan length of this vector.<br>\n\t\t[link:http://en.wikipedia.org/wiki/Taxicab_geometry]"
+				"!doc": "Computes Manhattan length of this vector.<br>\n\t\t[link:http:// en.wikipedia.org/wiki/Taxicab_geometry]"
 			},
 			"setX": {
 				"!type": "fn(x: number) -> +Vector4",
@@ -4566,7 +4566,7 @@
 		"!type": "fn(x: number, y: number, z: number, w: number)"
 	},
 	"Bone": {
-		"!url": "http://threejs.org/docs/#api/objects/Bone",
+		"!url": "http:// threejs.org/docs/#api/objects/Bone",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"skinMatrix": {
@@ -4586,7 +4586,7 @@
 		"!type": "fn(belongsToSkin: +SkinnedMesh)"
 	},
 	"LOD": {
-		"!url": "http://threejs.org/docs/#api/objects/LOD",
+		"!url": "http:// threejs.org/docs/#api/objects/LOD",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"objects": {
@@ -4610,7 +4610,7 @@
 		"!type": "fn()"
 	},
 	"LensFlare": {
-		"!url": "http://threejs.org/docs/#api/objects/LensFlare",
+		"!url": "http:// threejs.org/docs/#api/objects/LensFlare",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"lensFlares": {
@@ -4634,7 +4634,7 @@
 		"!type": "fn(texture: todo, size: todo, distance: todo, blending: todo, color: todo)"
 	},
 	"Line": {
-		"!url": "http://threejs.org/docs/#api/objects/Line",
+		"!url": "http:// threejs.org/docs/#api/objects/Line",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"geometry": {
@@ -4658,7 +4658,7 @@
 		"!type": "fn(geometry: +Geometry, material: +Material, type: number)"
 	},
 	"Mesh": {
-		"!url": "http://threejs.org/docs/#api/objects/Mesh",
+		"!url": "http:// threejs.org/docs/#api/objects/Mesh",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"geometry": {
@@ -4686,7 +4686,7 @@
 		"!type": "fn(geometry: +Geometry, material: +Material)"
 	},
 	"MorphAnimMesh": {
-		"!url": "http://threejs.org/docs/#api/objects/MorphAnimMesh",
+		"!url": "http:// threejs.org/docs/#api/objects/MorphAnimMesh",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"directionBackwards": {
@@ -4762,7 +4762,7 @@
 		"!type": "fn(geometry: todo, material: todo)"
 	},
 	"PointCloud": {
-		"!url": "http://threejs.org/docs/#api/objects/PointCloud",
+		"!url": "http:// threejs.org/docs/#api/objects/PointCloud",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"geometry": {
@@ -4786,7 +4786,7 @@
 		"!type": "fn(geometry: +Geometry, material: +Material)"
 	},
 	"SkinnedMesh": {
-		"!url": "http://threejs.org/docs/#api/objects/SkinnedMesh",
+		"!url": "http:// threejs.org/docs/#api/objects/SkinnedMesh",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"bones": {
@@ -4818,7 +4818,7 @@
 		"!type": "fn(geometry: +Geometry, material: +Material, useVertexTexture: boolean)"
 	},
 	"Sprite": {
-		"!url": "http://threejs.org/docs/#api/objects/Sprite",
+		"!url": "http:// threejs.org/docs/#api/objects/Sprite",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"material": {
@@ -4834,7 +4834,7 @@
 		"!type": "fn(material: +Material)"
 	},
 	"CanvasRenderer": {
-		"!url": "http://threejs.org/docs/#api/renderers/CanvasRenderer",
+		"!url": "http:// threejs.org/docs/#api/renderers/CanvasRenderer",
 		"prototype": {
 			"info": {
 				"!type": "object",
@@ -4885,11 +4885,11 @@
 				"!doc": "Returns the alpha value."
 			}
 		},
-		"!doc": "The Canvas renderer displays your beautifully crafted scenes <em>not</em> using WebGL, but draws it using the (slower) <a href=\"http://www.w3.org/html/wg/drafts/2dcontext/html5_canvas/\">Canvas 2D Context</a> API.<br><br>\n\t\t\tThis renderer can be a nice fallback from [page:WebGLRenderer] for simple scenes:\n\n\t\t\t<code>\n\t\t\tfunction webglAvailable() {\n\t\t\t\ttry {\n\t\t\t\t\tvar canvas = document.createElement( 'canvas' );\n\t\t\t\t\treturn !!( window.WebGLRenderingContext &amp;&amp; (\n\t\t\t\t\t\tcanvas.getContext( 'webgl' ) ||\n\t\t\t\t\t\tcanvas.getContext( 'experimental-webgl' ) )\n\t\t\t\t\t);\n\t\t\t\t} catch ( e ) {\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tif ( webglAvailable() ) {\n\t\t\t\trenderer = new WebGLRenderer();\n\t\t\t} else {\n\t\t\t\trenderer = new CanvasRenderer();\n\t\t\t}\n\t\t\t</code>\n\n\t\t\tNote: both WebGLRenderer and CanvasRenderer are embedded in the web page using an HTML5 &lt;canvas&gt; tag.\n\t\t\tThe \"Canvas\" in CanvasRenderer means it uses Canvas 2D instead of WebGL.<br><br>\n\n\t\t\tDon't confuse either CanvasRenderer with the SoftwareRenderer example, which simulates a screen buffer in a Javascript array.",
+		"!doc": "The Canvas renderer displays your beautifully crafted scenes <em>not</em> using WebGL, but draws it using the (slower) <a href=\"http:// www.w3.org/html/wg/drafts/2dcontext/html5_canvas/\">Canvas 2D Context</a> API.<br><br>\n\t\t\tThis renderer can be a nice fallback from [page:WebGLRenderer] for simple scenes:\n\n\t\t\t<code>\n\t\t\tfunction webglAvailable() {\n\t\t\t\ttry {\n\t\t\t\t\tvar canvas = document.createElement( 'canvas' );\n\t\t\t\t\treturn !!( window.WebGLRenderingContext &amp;&amp; (\n\t\t\t\t\t\tcanvas.getContext( 'webgl' ) ||\n\t\t\t\t\t\tcanvas.getContext( 'experimental-webgl' ) )\n\t\t\t\t\t);\n\t\t\t\t} catch ( e ) {\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tif ( webglAvailable() ) {\n\t\t\t\trenderer = new WebGLRenderer();\n\t\t\t} else {\n\t\t\t\trenderer = new CanvasRenderer();\n\t\t\t}\n\t\t\t</code>\n\n\t\t\tNote: both WebGLRenderer and CanvasRenderer are embedded in the web page using an HTML5 &lt;canvas&gt; tag.\n\t\t\tThe \"Canvas\" in CanvasRenderer means it uses Canvas 2D instead of WebGL.<br><br>\n\n\t\t\tDon't confuse either CanvasRenderer with the SoftwareRenderer example, which simulates a screen buffer in a Javascript array.",
 		"!type": "fn(parameters: object)"
 	},
 	"WebGLRenderTarget": {
-		"!url": "http://threejs.org/docs/#api/renderers/WebGLRenderTarget",
+		"!url": "http:// threejs.org/docs/#api/renderers/WebGLRenderTarget",
 		"prototype": {
 			"wrapS": {
 				"!type": "number",
@@ -4956,7 +4956,7 @@
 		"!type": "fn(width: number, height: number, options: object)"
 	},
 	"WebGLRenderTargetCube": {
-		"!url": "http://threejs.org/docs/#api/renderers/WebGLRenderTargetCube",
+		"!url": "http:// threejs.org/docs/#api/renderers/WebGLRenderTargetCube",
 		"prototype": {
 			"!proto": "WebGLRenderTarget.prototype",
 			"activeCubeFace": {
@@ -4968,7 +4968,7 @@
 		"!type": "fn(width: number, height: number, options: object)"
 	},
 	"WebGLRenderer": {
-		"!url": "http://threejs.org/docs/#api/renderers/WebGLRenderer",
+		"!url": "http:// threejs.org/docs/#api/renderers/WebGLRenderer",
 		"prototype": {
 			"domElement": {
 				"!type": "DOMElement",
@@ -5024,7 +5024,7 @@
 			},
 			"shadowMapCascade": {
 				"!type": "bool",
-				"!doc": "Default is false. If Set, use cascaded shadowmaps. See [link:http://developer.download.nvidia.com/SDK/10.5/opengl/src/cascaded_shadow_maps/doc/cascaded_shadow_maps.pdf cascaded shadowmaps] for more information."
+				"!doc": "Default is false. If Set, use cascaded shadowmaps. See [link:http:// developer.download.nvidia.com/SDK/10.5/opengl/src/cascaded_shadow_maps/doc/cascaded_shadow_maps.pdf cascaded shadowmaps] for more information."
 			},
 			"maxMorphTargets": {
 				"!type": "number",
@@ -5163,27 +5163,27 @@
 		"!type": "fn(parameters: object)"
 	},
 	"ShaderChunk": {
-		"!url": "http://threejs.org/docs/#api/renderers/shaders/ShaderChunk",
+		"!url": "http:// threejs.org/docs/#api/renderers/shaders/ShaderChunk",
 		"prototype": {},
 		"!doc": "Shader chunks for WebLG Shader library"
 	},
 	"ShaderLib": {
-		"!url": "http://threejs.org/docs/#api/renderers/shaders/ShaderLib",
+		"!url": "http:// threejs.org/docs/#api/renderers/shaders/ShaderLib",
 		"prototype": {},
 		"!doc": "Webgl Shader Library for three.js"
 	},
 	"UniformsLib": {
-		"!url": "http://threejs.org/docs/#api/renderers/shaders/UniformsLib",
+		"!url": "http:// threejs.org/docs/#api/renderers/shaders/UniformsLib",
 		"prototype": {},
 		"!doc": "Uniforms library for shared webgl shaders"
 	},
 	"UniformsUtils": {
-		"!url": "http://threejs.org/docs/#api/renderers/shaders/UniformsUtils",
+		"!url": "http:// threejs.org/docs/#api/renderers/shaders/UniformsUtils",
 		"prototype": {},
 		"!doc": "Uniform Utilities. Support merging and cloning of uniform variables"
 	},
 	"WebGLProgram": {
-		"!url": "http://threejs.org/docs/#api/renderers/webgl/WebGLProgram",
+		"!url": "http:// threejs.org/docs/#api/renderers/webgl/WebGLProgram",
 		"prototype": {
 			"uniforms": "object",
 			"attributes": "object",
@@ -5198,12 +5198,12 @@
 		"!type": "fn(renderer: +WebGLRenderer, code: object, material: +Material, parameters: object)"
 	},
 	"WebGLShader": {
-		"!url": "http://threejs.org/docs/#api/renderers/webgl/WebGLShader",
+		"!url": "http:// threejs.org/docs/#api/renderers/webgl/WebGLShader",
 		"prototype": {},
 		"!doc": "todo"
 	},
 	"LensFlarePlugin": {
-		"!url": "http://threejs.org/docs/#api/renderers/webgl/plugins/LensFlarePlugin",
+		"!url": "http:// threejs.org/docs/#api/renderers/webgl/plugins/LensFlarePlugin",
 		"prototype": {
 			"render": {
 				"!type": "fn(scene: +Scene, camera: +Camera, viewportWidth: number, viewportHeight: number)",
@@ -5214,7 +5214,7 @@
 		"!type": "fn()"
 	},
 	"ShadowMapPlugin": {
-		"!url": "http://threejs.org/docs/#api/renderers/webgl/plugins/ShadowMapPlugin",
+		"!url": "http:// threejs.org/docs/#api/renderers/webgl/plugins/ShadowMapPlugin",
 		"prototype": {
 			"render": {
 				"!type": "fn(scene: +Scene, camera: +Camera)",
@@ -5225,7 +5225,7 @@
 		"!type": "fn()"
 	},
 	"SpritePlugin": {
-		"!url": "http://threejs.org/docs/#api/renderers/webgl/plugins/SpritePlugin",
+		"!url": "http:// threejs.org/docs/#api/renderers/webgl/plugins/SpritePlugin",
 		"prototype": {
 			"render": {
 				"!type": "fn(scene: +Scene, camera: +Camera)",
@@ -5236,7 +5236,7 @@
 		"!type": "fn()"
 	},
 	"Fog": {
-		"!url": "http://threejs.org/docs/#api/scenes/Fog",
+		"!url": "http:// threejs.org/docs/#api/scenes/Fog",
 		"prototype": {
 			"name": {
 				"!type": "string",
@@ -5263,7 +5263,7 @@
 		"!type": "fn(hex: number, near: number, far: number)"
 	},
 	"FogExp2": {
-		"!url": "http://threejs.org/docs/#api/scenes/FogExp2",
+		"!url": "http:// threejs.org/docs/#api/scenes/FogExp2",
 		"prototype": {
 			"name": {
 				"!type": "string",
@@ -5286,7 +5286,7 @@
 		"!type": "fn(hex: number, density: number)"
 	},
 	"Scene": {
-		"!url": "http://threejs.org/docs/#api/scenes/Scene",
+		"!url": "http:// threejs.org/docs/#api/scenes/Scene",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"fog": {
@@ -5306,7 +5306,7 @@
 		"!type": "fn()"
 	},
 	"CompressedTexture": {
-		"!url": "http://threejs.org/docs/#api/textures/CompressedTexture",
+		"!url": "http:// threejs.org/docs/#api/textures/CompressedTexture",
 		"prototype": {
 			"!proto": "Texture.prototype",
 			"flipY": {
@@ -5322,7 +5322,7 @@
 		"!type": "fn(mipmaps: [], width: number, height: number, format: number, type: number, mapping: number, wrapS: number, wrapT: number, magFilter: number, minFilter: number, anisotropy: number)"
 	},
 	"DataTexture": {
-		"!url": "http://threejs.org/docs/#api/textures/DataTexture",
+		"!url": "http:// threejs.org/docs/#api/textures/DataTexture",
 		"prototype": {
 			"!proto": "Texture.prototype"
 		},
@@ -5330,7 +5330,7 @@
 		"!type": "fn(data: ArraybufferView, width: number, height: number, format: number, type: number, mapping: number, wrapS: number, wrapT: number, magFilter: number, minFilter: number, anisotropy: number)"
 	},
 	"Texture": {
-		"!url": "http://threejs.org/docs/#api/textures/Texture",
+		"!url": "http:// threejs.org/docs/#api/textures/Texture",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -5402,7 +5402,7 @@
 			},
 			"unpackAlignment": {
 				"!type": "number",
-				"!doc": "4 by default. Specifies the alignment requirements for the start of each pixel row in memory. The allowable values are 1 (byte-alignment), 2 (rows aligned to even-numbered bytes), 4 (word-alignment), and 8 (rows start on double-word boundaries). See <a href=\"http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml\">glPixelStorei</a> for more information."
+				"!doc": "4 by default. Specifies the alignment requirements for the start of each pixel row in memory. The allowable values are 1 (byte-alignment), 2 (rows aligned to even-numbered bytes), 4 (word-alignment), and 8 (rows start on double-word boundaries). See <a href=\"http:// www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml\">glPixelStorei</a> for more information."
 			},
 			"premultiplyAlpha": {
 				"!type": "boolean",

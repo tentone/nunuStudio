@@ -288,12 +288,12 @@ RunProject.prototype.resetCanvas = function()
  */
 RunProject.prototype.getProgram = function()
 {
-	//Run the program directly all changed made with code are kept
+	// Run the program directly all changed made with code are kept
 	if(Editor.settings.general.immediateMode)
 	{
 		this.program = Editor.program;
 	}
-	//Run a copy of the program
+	// Run a copy of the program
 	else
 	{
 		this.program = Editor.program.clone();
@@ -311,7 +311,7 @@ RunProject.prototype.runProgram = function()
 {
 	try
 	{
-		//Create a default camera for program (same as runtime).
+		// Create a default camera for program (same as runtime).
 		this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
 		this.program.defaultCamera.position.set(0, 5, -5);
 		
@@ -328,13 +328,13 @@ RunProject.prototype.runProgram = function()
 		return;
 	}
 
-	//If program uses VR set button
+	// If program uses VR set button
 	if(this.program.vrAvailable())
 	{
-		//Show VR button
+		// Show VR button
 		this.vrButton.setVisibility(true);
 
-		//Create VR switch callback
+		// Create VR switch callback
 		var program = this.program;
 		this.vrButton.setOnClick(function()
 		{
@@ -349,7 +349,7 @@ RunProject.prototype.runProgram = function()
 		});
 	}
 
-	//Lock mouse pointer
+	// Lock mouse pointer
 	if(this.program.lockPointer)
 	{
 		this.mouse.setLock(true);

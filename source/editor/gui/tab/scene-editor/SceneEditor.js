@@ -45,7 +45,7 @@ function SceneEditor(parent, closeable, container, index)
 
 			var intersections = self.raycaster.intersectObjects(self.scene.children, true);
 
-			//Auxiliar method to copy details from a object to a destination
+			// Auxiliar method to copy details from a object to a destination
 			function copyDetails(destination, object)
 			{
 				destination.name = object.name;
@@ -60,7 +60,7 @@ function SceneEditor(parent, closeable, container, index)
 				destination.quaternion.copy(object.quaternion);
 			}
 
-			//Auxiliar method to attach textures to objects
+			// Auxiliar method to attach textures to objects
 			function attachTexture(texture, object)
 			{
 				var material = null;
@@ -89,7 +89,7 @@ function SceneEditor(parent, closeable, container, index)
 				Editor.addAction(new ChangeAction(object, "material", material));
 			}
 
-			//Dragged file
+			// Dragged file
 			if(event.dataTransfer.files.length > 0)
 			{
 				var files = event.dataTransfer.files;
@@ -98,13 +98,13 @@ function SceneEditor(parent, closeable, container, index)
 				{
 					var file = files[i];
 
-					//Check if mouse intersects and object
+					// Check if mouse intersects and object
 					if(intersections.length > 0)
 					{
 						var name = FileSystem.getFileName(file.name);
 						var object = intersections[0].object;
 
-						//Image
+						// Image
 						if(Image.fileIsImage(file))
 						{
 							Editor.loadTexture(file, function(texture)
@@ -112,7 +112,7 @@ function SceneEditor(parent, closeable, container, index)
 								attachTexture(texture ,object);
 							});
 						}
-						//Video
+						// Video
 						else if(Video.fileIsVideo(file))
 						{
 							Editor.loadVideoTexture(file, function(texture)
@@ -120,7 +120,7 @@ function SceneEditor(parent, closeable, container, index)
 								attachTexture(texture ,object);
 							});
 						}
-						//Font
+						// Font
 						else if(Font.fileIsFont(file))
 						{
 							if(object.font !== undefined)
@@ -133,25 +133,25 @@ function SceneEditor(parent, closeable, container, index)
 						}
 					}
 					
-					//Model
+					// Model
 					if(Model.fileIsModel(file))
 					{
 						Editor.loadModel(file);
 					}
 				}
 			}
-			//Dragged resource
+			// Dragged resource
 			else if(draggedObject !== null)
 			{
-				//Object intersected
+				// Object intersected
 				if(intersections.length > 0)
 				{
 					var object = intersections[0].object;
 
-					//Material
+					// Material
 					if(draggedObject instanceof THREE.Material)
 					{
-						//Sprite material
+						// Sprite material
 						if(draggedObject instanceof THREE.SpriteMaterial)
 						{
 							if(object instanceof THREE.Sprite)
@@ -159,7 +159,7 @@ function SceneEditor(parent, closeable, container, index)
 								Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							}
 						}
-						//Points material
+						// Points material
 						else if(draggedObject instanceof THREE.PointsMaterial)
 						{
 							if(object instanceof THREE.Points)
@@ -173,7 +173,7 @@ function SceneEditor(parent, closeable, container, index)
 								Editor.addAction(new SwapAction(object, newObject, true));
 							}
 						}
-						//Line material
+						// Line material
 						else if(draggedObject instanceof THREE.LineBasicMaterial)
 						{
 							if(object instanceof THREE.Line)
@@ -187,7 +187,7 @@ function SceneEditor(parent, closeable, container, index)
 								Editor.addAction(new SwapAction(object, newObject, true));
 							}
 						}
-						//Shader material
+						// Shader material
 						else if(draggedObject instanceof THREE.ShaderMaterial)
 						{
 							if(object.material !== undefined)
@@ -195,7 +195,7 @@ function SceneEditor(parent, closeable, container, index)
 								Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							}
 						}
-						//Mesh material
+						// Mesh material
 						else
 						{
 							if(object instanceof THREE.Mesh)
@@ -210,7 +210,7 @@ function SceneEditor(parent, closeable, container, index)
 							}
 						}
 					}
-					//Cubemap
+					// Cubemap
 					else if(draggedObject.isCubeTexture === true)
 					{
 						if(object.material instanceof THREE.Material)
@@ -219,22 +219,22 @@ function SceneEditor(parent, closeable, container, index)
 							self.canvas.reloadContext();
 						}
 					}
-					//Texture
+					// Texture
 					else if(draggedObject instanceof THREE.Texture)
 					{
 						attachTexture(draggedObject, object);
 					}
-					//Image
+					// Image
 					else if(draggedObject instanceof Image)
 					{
 						attachTexture(new Texture(draggedObject), object);
 					}
-					//Video
+					// Video
 					else if(draggedObject instanceof Video)
 					{
 						attachTexture(new VideoTexture(draggedObject), object);
 					}
-					//Font
+					// Font
 					else if(draggedObject instanceof Font)
 					{
 						if(object.font !== undefined)
@@ -243,7 +243,7 @@ function SceneEditor(parent, closeable, container, index)
 							Editor.updateObjectsViewsGUI();
 						}
 					}
-					//Geometry
+					// Geometry
 					else if(draggedObject instanceof THREE.Geometry || draggedObject instanceof THREE.BufferGeometry)
 					{
 						if(object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line)
@@ -253,7 +253,7 @@ function SceneEditor(parent, closeable, container, index)
 					}
 				}
 
-				//Create audio emitter
+				// Create audio emitter
 				if(draggedObject instanceof Audio)
 				{
 					var audio = new AudioEmitter(draggedObject);
@@ -605,14 +605,14 @@ SceneEditor.prototype.updateMetadata = function()
 	{
 		this.setName(this.scene.name);
 
-		//Check if object has a parent
+		// Check if object has a parent
 		if(this.scene.parent === null)
 		{
 			this.close();
 			return;
 		}
 
-		//Check if object exists in parent
+		// Check if object exists in parent
 		var children = this.scene.parent.children;
 		for(var i = 0; i < children.length; i++)
 		{
@@ -622,7 +622,7 @@ SceneEditor.prototype.updateMetadata = function()
 			}
 		}
 
-		//If not found close tab
+		// If not found close tab
 		if(i >= children.length)
 		{
 			this.close();
@@ -688,31 +688,31 @@ SceneEditor.prototype.updateCameraControls = function(mode)
 
 SceneEditor.prototype.updateSettings = function()
 {
-	//Grid
+	// Grid
 	this.gridHelper.visible = Editor.settings.editor.gridEnabled;
 	this.gridHelper.setSize(Editor.settings.editor.gridSize);
 	this.gridHelper.setSpacing(Editor.settings.editor.gridSpacing);
 	this.gridHelper.update();
 
-	//Axis
+	// Axis
 	this.axisHelper.visible = Editor.settings.editor.axisEnabled;
 
-	//Orientation
+	// Orientation
 	var size = Editor.settings.editor.cameraRotationCubeSize;
 	this.orientation.viewport.size.set(size, size);
 
-	//Controls
+	// Controls
 	this.navigation.setValue(Editor.settings.editor.navigation);
 	this.updateCameraControls(Editor.settings.editor.navigation);
 
-	//Tool
+	// Tool
 	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
 	this.transform.setSpace(Editor.settings.editor.transformationSpace);
 	this.transform.setSnap(Editor.settings.editor.snap);
 	this.transform.setTranslationSnap(Editor.settings.editor.gridSpacing);
 	this.transform.setRotationSnap(Editor.settings.editor.snapAngle);
 
-	//Stats
+	// Stats
 	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
 };
 
@@ -768,10 +768,10 @@ SceneEditor.prototype.update = function()
 
 	var isEditingObject = false;
 
-	//Check if mouse is inside canvas
+	// Check if mouse is inside canvas
 	if(this.mouse.insideCanvas())
 	{
-		//Update selection
+		// Update selection
 		if(this.mode === SceneEditor.SELECT)
 		{
 			if(this.mouse.buttonJustPressed(Mouse.LEFT))
@@ -792,7 +792,7 @@ SceneEditor.prototype.update = function()
 		}
 		else
 		{
-			//If mouse double clicked select object
+			// If mouse double clicked select object
 			if(this.mouse.buttonDoubleClicked(Mouse.LEFT))
 			{
 				this.selectObjectWithMouse();
@@ -801,7 +801,7 @@ SceneEditor.prototype.update = function()
 			isEditingObject = this.transform.update();
 		}
 
-		//Lock mouse when camera is moving
+		// Lock mouse when camera is moving
 		if(Editor.settings.editor.lockMouse && Nunu.runningOnDesktop())
 		{
 			if(!isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
@@ -820,19 +820,19 @@ SceneEditor.prototype.update = function()
 		}
 		else
 		{
-			//Update controls
+			// Update controls
 			this.controls.update(this.mouse, this.keyboard);
 
-			//Update grid helper position
+			// Update grid helper position
 			this.gridHelper.position.x = this.controls.position.x - (this.controls.position.x % Editor.settings.editor.gridSpacing);
 			this.gridHelper.position.z = this.controls.position.z - (this.controls.position.z % Editor.settings.editor.gridSpacing);
 		}
 	}
 
-	//If has objects selected
+	// If has objects selected
 	if(Editor.hasObjectSelected())
 	{
-		//Update object transformation matrix
+		// Update object transformation matrix
 		for(var i = 0; i < Editor.selection.length; i++)
 		{
 			if(Editor.selection[i].matrixAutoUpdate === false)
@@ -841,7 +841,7 @@ SceneEditor.prototype.update = function()
 			}
 		}
 		
-		//Update object helper
+		// Update object helper
 		this.objectHelper.traverse(function(children)
 		{
 			children.update();	
@@ -880,11 +880,11 @@ SceneEditor.prototype.render = function()
 	renderer.setViewport(0, 0, width, height);
 	renderer.setScissor(0, 0, width, height);
 
-	//Clear with scene background
+	// Clear with scene background
 	renderer.setClearColor(this.scene.background);
 	renderer.clear(true, true, true);
 
-	//Render scene
+	// Render scene
 	renderer.render(this.scene, this.camera);
 
 	if(this.canvas.cssRenderer !== null)
@@ -895,7 +895,7 @@ SceneEditor.prototype.render = function()
 	renderer.render(this.helperScene, this.camera);
 	renderer.render(this.toolScene, this.camera);
 
-	//Draw camera cube
+	// Draw camera cube
 	if(Editor.settings.editor.cameraRotationCube)
 	{
 		var code = this.orientation.raycast(this.mouse, canvas);
@@ -910,7 +910,7 @@ SceneEditor.prototype.render = function()
 		this.orientation.render(renderer, canvas);
 	}
 
-	//Camera preview
+	// Camera preview
 	if(Editor.settings.editor.cameraPreviewEnabled)
 	{
 		renderer.setScissorTest(true);
@@ -925,7 +925,7 @@ SceneEditor.prototype.render = function()
 		viewport.update();
 		viewport.enable(renderer);
 
-		//Preview selected camera
+		// Preview selected camera
 		if(Editor.selection[0] instanceof PerspectiveCamera || Editor.selection[0] instanceof OrthographicCamera)
 		{
 			renderer.clear(true, true, true);
@@ -935,7 +935,7 @@ SceneEditor.prototype.render = function()
 			camera.setupRenderer(renderer);
 			camera.render(renderer, this.scene);
 		}
-		//Cube camera
+		// Cube camera
 		else if(Editor.selection[0] instanceof CubeCamera)
 		{
 			var cameras = Editor.selection[0].cameras;
@@ -960,7 +960,7 @@ SceneEditor.prototype.render = function()
 			renderCamera(CubeTexture.TOP, x + size, y + size * 2, size, size);
 			renderCamera(CubeTexture.BOTTOM, x + size, y, size, size);
 		}
-		//Preview all cameras in use
+		// Preview all cameras in use
 		else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
 		{
 			renderer.clear(true, true, true);
@@ -1123,7 +1123,7 @@ SceneEditor.prototype.selectTool = function(tool)
  */
 SceneEditor.prototype.updateSelection = function()
 {
-	//Filter Object3D objects only (to exclude resources)
+	// Filter Object3D objects only (to exclude resources)
 	var selectedObjects = [];
 	for(var i = 0; i < Editor.selection.length; i++)
 	{
@@ -1140,100 +1140,100 @@ SceneEditor.prototype.updateSelection = function()
 	{
 		var object = selectedObjects[i];
 
-		//Camera
+		// Camera
 		if(object instanceof THREE.Camera)
 		{
 			this.objectHelper.add(new THREE.CameraHelper(object));
 			this.objectHelper.add(new ObjectIconHelper(object, Global.FILE_PATH + "icons/camera/camera.png"));
 		}
-		//Light
+		// Light
 		else if(object instanceof THREE.Light)
 		{
-			//Directional light
+			// Directional light
 			if(object instanceof THREE.DirectionalLight)
 			{
 				this.objectHelper.add(new THREE.DirectionalLightHelper(object, 1));
 			}
-			//Light probe
+			// Light probe
 			else if(object instanceof THREE.LightProbe)
 			{
 				this.objectHelper.add(new LightProbeHelper(object, 2));
 			}
-			//Point light
+			// Point light
 			else if(object instanceof THREE.PointLight)
 			{
 				this.objectHelper.add(new THREE.PointLightHelper(object, 1));
 			}
-			//RectArea light
+			// RectArea light
 			else if(object instanceof THREE.RectAreaLight)
 			{
 				this.objectHelper.add(new RectAreaLightHelper(object));
 			}
-			//Spot light
+			// Spot light
 			else if(object instanceof THREE.SpotLight)
 			{
 				this.objectHelper.add(new THREE.SpotLightHelper(object));
 			}
-			//Hemisphere light
+			// Hemisphere light
 			else if(object instanceof THREE.HemisphereLight)
 			{
 				this.objectHelper.add(new THREE.HemisphereLightHelper(object, 1));
 			}
-			//Ambient light
+			// Ambient light
 			else
 			{
 				this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 			}
 		}
-		//Physics
+		// Physics
 		else if(object instanceof PhysicsObject)
 		{
 			this.objectHelper.add(new PhysicsObjectHelper(object));
 		}
-		//LensFlare
+		// LensFlare
 		else if(object instanceof LensFlare)
 		{
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
-		//Skinned Mesh
+		// Skinned Mesh
 		else if(object instanceof THREE.SkinnedMesh)
 		{
 			this.objectHelper.add(new SkeletonHelper(object.parent));
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
-		//Bone
+		// Bone
 		else if(object instanceof THREE.Bone)
 		{
 			this.objectHelper.add(new SkeletonHelper(object.parent));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
-		//Mesh
+		// Mesh
 		else if(object instanceof THREE.Mesh)
 		{
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
-		//Line
+		// Line
 		else if(object instanceof THREE.Line)
 		{
 			this.objectHelper.add(new LineHelper(object, 0xFFFF00));
 		}
-		//Points
+		// Points
 		else if(object instanceof THREE.Points)
 		{
 			this.objectHelper.add(new PointsHelper(object, 0xFFFF00));
 		}
-		//Spine animation
+		// Spine animation
 		else if(object instanceof SpineAnimation)
 		{
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
-		//Container
+		// Container
 		else if(object instanceof Container)
 		{
 			this.objectHelper.add(new THREE.BoxHelper(object, 0xFFFF00));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
-		//Object 3D
+		// Object 3D
 		else
 		{
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));

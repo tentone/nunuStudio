@@ -11,7 +11,7 @@
  */
 Editor.loadTexture = function(file, onLoad)
 {
-	//Load compressed texture from data parsed by the texture loaders.
+	// Load compressed texture from data parsed by the texture loaders.
 	function loadCompressedTexture(data)
 	{
 		var texture = new CompressedTexture();
@@ -167,7 +167,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 	reader.readAsArrayBuffer(file);
 };
 
-//Load audio from file object
+// Load audio from file object
 Editor.loadAudio = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
@@ -189,7 +189,7 @@ Editor.loadAudio = function(file, onLoad)
 	reader.readAsArrayBuffer(file);
 };
 
-//Load font from file object
+// Load font from file object
 Editor.loadFont = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
@@ -313,7 +313,7 @@ Editor.loadModel = function(file, parent)
 
 	try
 	{
-		//GCode
+		// GCode
 		if(extension === "gcode")
 		{
 			var reader = new FileReader();
@@ -327,12 +327,12 @@ Editor.loadModel = function(file, parent)
 
 			reader.readAsText(file);
 		}
-		//Wavefront OBJ
+		// Wavefront OBJ
 		else if(extension === "obj")
 		{
 			var materials = null;
 			
-			//Look for MTL file
+			// Look for MTL file
 			if(Nunu.runningOnDesktop())
 			{
 				try
@@ -383,7 +383,7 @@ Editor.loadModel = function(file, parent)
 		//3MF
 		/*else if(extension === "3mf")
 		{
-			//TODO <Fix JSZip 2 Support or move to JSZip 3>
+			// TODO <Fix JSZip 2 Support or move to JSZip 3>
 			var reader = new FileReader();
 			reader.onload = function()
 			{
@@ -402,7 +402,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}*/
-		//AWD
+		// AWD
 		else if(extension === "awd")
 		{
 			var reader = new FileReader();
@@ -424,7 +424,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//AMF
+		// AMF
 		else if(extension === "amf")
 		{
 			var reader = new FileReader();
@@ -445,7 +445,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//Assimp
+		// Assimp
 		else if(extension === "assimp")
 		{
 			var reader = new FileReader();
@@ -466,7 +466,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//Assimp JSON
+		// Assimp JSON
 		else if(name.endsWith(".assimp.json"))
 		{
 			var reader = new FileReader();
@@ -488,7 +488,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsText(file);
 		}
-		//Babylon
+		// Babylon
 		else if(extension === "babylon")
 		{
 			var reader = new FileReader();
@@ -518,7 +518,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsText(file);
 		}
-		//Blender
+		// Blender
 		else if(extension === "blend")
 		{	
 			var reader = new FileReader();
@@ -565,7 +565,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//Collada
+		// Collada
 		else if(extension === "dae")
 		{
 			var reader = new FileReader();
@@ -601,7 +601,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsText(file);
 		}
-		//Draco
+		// Draco
 		else if(extension === "drc")
 		{
 			var reader = new FileReader();
@@ -638,7 +638,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//GLTF
+		// GLTF
 		else if(extension === "gltf" || extension === "glb")
 		{
 			var reader = new FileReader();
@@ -683,7 +683,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//PLY
+		// PLY
 		else if(extension === "ply")
 		{
 			var reader = new FileReader();
@@ -710,7 +710,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsText(file);
 		}
-		//VTK
+		// VTK
 		else if(extension === "vtk" || extension === "vtp")
 		{
 			var reader = new FileReader();
@@ -736,7 +736,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//PRWM
+		// PRWM
 		else if(extension === "prwm")
 		{
 			var reader = new FileReader();
@@ -764,7 +764,7 @@ Editor.loadModel = function(file, parent)
 			reader.readAsArrayBuffer(file);
 		}
 		
-		//VRML
+		// VRML
 		else if(extension === "wrl" || extension === "vrml")
 		{
 			var reader = new FileReader();
@@ -790,7 +790,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsText(file);
 		}
-		//FBX
+		// FBX
 		else if(extension === "fbx")
 		{
 			var reader = new FileReader();
@@ -823,7 +823,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//X
+		// X
 		else if(extension === "x")
 		{
 			function convertAnimation(baseAnime, name)
@@ -910,7 +910,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//PCD
+		// PCD
 		else if(extension === "pcd")
 		{
 			var reader = new FileReader();
@@ -933,7 +933,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//SVG
+		// SVG
 		else if(extension === "svg")
 		{
 			var reader = new FileReader();
@@ -974,7 +974,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsText(file);
 		}
-		//STL
+		// STL
 		else if(extension === "stl")
 		{
 			var reader = new FileReader();
@@ -999,7 +999,7 @@ Editor.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//threejs JSON
+		// threejs JSON
 		else if(extension === "json")
 		{
 			var reader = new FileReader();
@@ -1012,7 +1012,7 @@ Editor.loadModel = function(file, parent)
 					var materials = data.materials;
 					var geometry = data.geometry;
 
-					//Material
+					// Material
 					var material = null;
 					if(materials === undefined || materials.length === 0)
 					{
@@ -1027,7 +1027,7 @@ Editor.loadModel = function(file, parent)
 						material = materials;
 					}
 
-					//Mesh
+					// Mesh
 					var mesh = null;
 					if(geometry.bones.length > 0)
 					{

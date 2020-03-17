@@ -86,6 +86,6 @@ ArraybufferUtils.fromBuffer = function(buffer)
 
 	return array;
 
-	//Faster but the results is failing the "instanceof ArrayBuffer" test
-	//return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
+	// Faster but the results is failing the "instanceof ArrayBuffer" test
+	// return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
 };

@@ -90,7 +90,7 @@ HTMLView.prototype.constructor = HTMLView;
  */
 HTMLView.processURL = function(url)
 {	
-	//Replace youtube url to use embeded link
+	// Replace youtube url to use embeded link
 	return url.replace("watch?v=", "embed/");			
 };
 

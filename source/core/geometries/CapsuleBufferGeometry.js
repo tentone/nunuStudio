@@ -39,35 +39,35 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 	thetaStart = thetaStart !== undefined ? thetaStart : 0.0;
 	thetaLength = thetaLength !== undefined ? thetaLength : 2.0 * Math.PI;
 
-	//Alpha is the angle such that Math.PI/2 - alpha is the cone part angle.
+	// Alpha is the angle such that Math.PI/2 - alpha is the cone part angle.
 	var alpha = Math.acos((radiusBottom-radiusTop)/height);
 	var eqRadii = (radiusTop-radiusBottom === 0);
 
 	var vertexCount = calculateVertexCount();
 	var indexCount = calculateIndexCount();
 
-	//buffers
+	// buffers
 	var indices = new THREE.BufferAttribute(new (indexCount > 65535 ? Uint32Array : Uint16Array)(indexCount), 1);
 	var vertices = new THREE.BufferAttribute(new Float32Array(vertexCount * 3), 3);
 	var normals = new THREE.BufferAttribute(new Float32Array(vertexCount * 3), 3);
 	var uvs = new THREE.BufferAttribute(new Float32Array(vertexCount * 2), 2);
 
-	//Helper variables
+	// Helper variables
 	var index = 0,
 		indexOffset = 0,
 		indexArray = [],
 		halfHeight = height / 2;
 
-	//Generate geometry
+	// Generate geometry
 	generateTorso();
 
-	//Build geometry
+	// Build geometry
 	this.setIndex(indices);
 	this.addAttribute("position", vertices);
 	this.addAttribute("normal", normals);
 	this.addAttribute("uv", uvs);
 
-	//Helper functions
+	// Helper functions
 	function calculateVertexCount()
 	{
 		var count = (radialSegments + 1) * (heightSegments + 1 + capsBottomSegments + capsTopSegments);
@@ -91,12 +91,12 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 
 		var cone_length = new THREE.Vector2(radiusTop * sinAlpha, halfHeight + radiusTop * cosAlpha).sub(new THREE.Vector2(radiusBottom * sinAlpha, -halfHeight + radiusBottom * cosAlpha)).length();
 
-		//Total length forv texture coord
+		// Total length forv texture coord
 		var vl = radiusTop*alpha + cone_length + radiusBottom*(Math.PI/2-alpha);
 
 		var groupCount = 0;
 
-		//generate vertices, normals and uvs
+		// generate vertices, normals and uvs
 		var v = 0;
 		for(y = 0; y <= capsTopSegments; y++)
 		{
@@ -109,7 +109,7 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 			var cosA = Math.cos(a);
 			var sinA = Math.sin(a);
 
-			//calculate the radius of the current row
+			// calculate the radius of the current row
 			var radius = cosA*radiusTop;
 
 			for(x = 0; x <= radialSegments; x++)
@@ -121,28 +121,28 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 				var sinTheta = Math.sin(theta);
 				var cosTheta = Math.cos(theta);
 
-				//Vertex
+				// Vertex
 				vertex.x = radius * sinTheta;
 				vertex.y = halfHeight + sinA*radiusTop;
 				vertex.z = radius * cosTheta;
 				vertices.setXYZ(index, vertex.x, vertex.y, vertex.z);
 
-				//Normal
+				// Normal
 				normal.set(cosA*sinTheta, sinA, cosA*cosTheta);
 				normals.setXYZ(index, normal.x, normal.y, normal.z);
 
-				//uv
+				// uv
 				uvs.setXY(index, u, 1 - v/vl);
 
-				//Save index of vertex in respective row
+				// Save index of vertex in respective row
 				indexRow.push(index);
 
-				//Increase index
+				// Increase index
 				index++;
 
 			}
 
-			//Now save vertices of the row in our index array
+			// Now save vertices of the row in our index array
 			indexArray.push(indexRow);
 
 		}
@@ -155,7 +155,7 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 
 			v += cone_length/heightSegments;
 
-			//calculate the radius of the current row
+			// calculate the radius of the current row
 			var radius = sinAlpha * (y * (radiusBottom - radiusTop) / heightSegments + radiusTop);
 
 			for(x = 0; x <= radialSegments; x++) {
@@ -167,28 +167,28 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 				var sinTheta = Math.sin(theta);
 				var cosTheta = Math.cos(theta);
 
-				//Vertex
+				// Vertex
 				vertex.x = radius * sinTheta;
 				vertex.y = halfHeight + cosAlpha*radiusTop - y * cone_height / heightSegments;
 				vertex.z = radius * cosTheta;
 				vertices.setXYZ(index, vertex.x, vertex.y, vertex.z);
 
-				//Normal
+				// Normal
 				normal.set(sinTheta, slope, cosTheta).normalize();
 				normals.setXYZ(index, normal.x, normal.y, normal.z);
 
-				//uv
+				// uv
 				uvs.setXY(index, u, 1 - v/vl);
 
-				//Save index of vertex in respective row
+				// Save index of vertex in respective row
 				indexRow.push(index);
 
-				//Increase index
+				// Increase index
 				index++;
 
 			}
 
-			//Now save vertices of the row in our index array
+			// Now save vertices of the row in our index array
 			indexArray.push(indexRow);
 
 		}
@@ -204,7 +204,7 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 			var cosA = Math.cos(a);
 			var sinA = Math.sin(a);
 
-			//calculate the radius of the current row
+			// calculate the radius of the current row
 			var radius = cosA*radiusBottom;
 
 			for(x = 0; x <= radialSegments; x++)
@@ -216,48 +216,48 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 				var sinTheta = Math.sin(theta);
 				var cosTheta = Math.cos(theta);
 
-				//Vertex
+				// Vertex
 				vertex.x = radius * sinTheta;
 				vertex.y = -halfHeight + sinA*radiusBottom;;
 				vertex.z = radius * cosTheta;
 				vertices.setXYZ(index, vertex.x, vertex.y, vertex.z);
 
-				//Normal
+				// Normal
 				normal.set(cosA*sinTheta, sinA, cosA*cosTheta);
 				normals.setXYZ(index, normal.x, normal.y, normal.z);
 
-				//uv
+				// uv
 				uvs.setXY(index, u, 1 - v/vl);
 
-				//Save index of vertex in respective row
+				// Save index of vertex in respective row
 				indexRow.push(index);
 
-				//Increase index
+				// Increase index
 				index++;
 			}
 
-			//Now save vertices of the row in our index array
+			// Now save vertices of the row in our index array
 			indexArray.push(indexRow);
 		}
 
-		//Generate indices
+		// Generate indices
 		for(x = 0; x < radialSegments; x++)
 		{
 			for(y = 0; y < capsTopSegments + heightSegments + capsBottomSegments; y++)
 			{
 
-				//We use the index array to access the correct indices
+				// We use the index array to access the correct indices
 				var i1 = indexArray[ y ][ x ];
 				var i2 = indexArray[ y + 1 ][ x ];
 				var i3 = indexArray[ y + 1 ][ x + 1 ];
 				var i4 = indexArray[ y ][ x + 1 ];
 
-				//Face one
+				// Face one
 				indices.setX(indexOffset, i1); indexOffset++;
 				indices.setX(indexOffset, i2); indexOffset++;
 				indices.setX(indexOffset, i4); indexOffset++;
 
-				//Face two
+				// Face two
 				indices.setX(indexOffset, i2); indexOffset++;
 				indices.setX(indexOffset, i3); indexOffset++;
 				indices.setX(indexOffset, i4); indexOffset++;

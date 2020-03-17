@@ -16,12 +16,12 @@ function ButtonText(parent)
 	this.element.style.color = Editor.theme.textColor;
 	this.element.style.display = "flex";
 	
-	//Span
+	// Span
 	this.span = document.createElement("span");
 	this.span.style.overflow = "hidden";
 	this.element.appendChild(this.span);
 
-	//Text
+	// Text
 	this.text = document.createTextNode("");
 	this.span.appendChild(this.text);
 

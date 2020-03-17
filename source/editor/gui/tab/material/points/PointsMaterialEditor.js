@@ -4,11 +4,11 @@ function PointsMaterialEditor(parent, closeable, container, index)
 {
 	MaterialEditor.call(this, parent, closeable, container, index);
 
-	//Points
+	// Points
 	this.points = new THREE.Points(MaterialEditor.geometries[0][1], null);
 	this.interactive.add(this.points);
 	
-	//Test model
+	// Test model
 	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
@@ -26,7 +26,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
@@ -38,7 +38,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Size
+	// Size
 	this.form.addText(Locale.size);
 	this.pointSize = new NumberBox(this.form);
 	this.pointSize.size.set(60, 18);
@@ -51,7 +51,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.pointSize);
 	this.form.nextRow();
 
-	//Size atenuation
+	// Size atenuation
 	this.form.addText("Size atenuation");
 	this.sizeAttenuation = new CheckBox(this.form);
 	this.sizeAttenuation.size.set(18, 18);
@@ -63,7 +63,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.sizeAttenuation);
 	this.form.nextRow();
 
-	//Texture map
+	// Texture map
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.setOnChange(function(file)

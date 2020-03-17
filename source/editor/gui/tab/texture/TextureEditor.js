@@ -8,7 +8,7 @@ function TextureEditor(parent, closeable, container, index)
 
 	this.texture = null;
 
-	//Canvas
+	// Canvas
 	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
@@ -17,13 +17,13 @@ function TextureEditor(parent, closeable, container, index)
 		self.camera.updateProjectionMatrix();
 	});
 
-	//Camera
+	// Camera
 	this.camera = new OrthographicCamera(1.2, 1, OrthographicCamera.RESIZE_VERTICAL);
 
-	//Scene
+	// Scene
 	this.scene = new THREE.Scene();
 
-	//Background
+	// Background
 	var alpha = new Texture(Global.FILE_PATH + "alpha.png");
 	alpha.wrapS = THREE.RepeatWrapping;
 	alpha.wrapT = THREE.RepeatWrapping;
@@ -38,7 +38,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.background.scale.set(200, 200, 0);
 	this.scene.add(this.background);
 	
-	//Plane geometry
+	// Plane geometry
 	this.sprite = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({transparent: true}));
 	this.sprite.position.set(0, 0, -1);
 	this.scene.add(this.sprite);
@@ -48,7 +48,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.addText("Texture Editor");
 	this.form.nextRow();
 
-	//Dual division
+	// Dual division
 	this.division = new DualContainer(this);
 	this.division.tabPosition = 0.5;
 	this.division.tabPositionMin = 0.1;
@@ -56,7 +56,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.division.attachA(this.canvas);
 	this.division.attachB(this.form);
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
@@ -72,7 +72,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//WrapS
+	// WrapS
 	this.form.addText(Locale.wrapHor);
 	this.wrapS = new DropdownList(this.form);
 	this.wrapS.size.set(120, 18);
@@ -87,7 +87,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.wrapS);
 	this.form.nextRow();
 
-	//WrapT
+	// WrapT
 	this.form.addText(Locale.wrapVert);
 	this.wrapT = new DropdownList(this.form);
 	this.wrapT.size.set(120, 18);
@@ -102,7 +102,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.wrapT);
 	this.form.nextRow();
 
-	//Repeat
+	// Repeat
 	this.form.addText(Locale.repeat);
 	this.repeat = new VectorBox(this.form);
 	this.repeat.setType(VectorBox.VECTOR2);
@@ -117,7 +117,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.repeat);
 	this.form.nextRow();
 
-	//Offset
+	// Offset
 	this.form.addText(Locale.offset);
 	this.offset = new VectorBox(this.form);
 	this.offset.setType(VectorBox.VECTOR2);
@@ -132,7 +132,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.offset);
 	this.form.nextRow();
 
-	//Center
+	// Center
 	this.form.addText(Locale.center);
 	this.center = new VectorBox(this.form);
 	this.center.setType(VectorBox.VECTOR2);
@@ -147,7 +147,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.center);
 	this.form.nextRow();
 
-	//Rotation
+	// Rotation
 	this.form.addText(Locale.rotation);
 	this.rotation = new NumberBox(this.form);
 	this.rotation.size.set(60, 18);
@@ -160,7 +160,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
-	//Minification filter
+	// Minification filter
 	this.form.addText(Locale.minFilter);
 	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
@@ -178,7 +178,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.minFilter);
 	this.form.nextRow();
 
-	//Magnification filter
+	// Magnification filter
 	this.form.addText(Locale.magFilter);
 	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
@@ -192,7 +192,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.magFilter);
 	this.form.nextRow();
 
-	//Premultiply Alpha
+	// Premultiply Alpha
 	this.form.addText(Locale.premulAlpha);
 	this.premultiplyAlpha = new CheckBox(this.form);
 	this.premultiplyAlpha.size.set(18, 18);
@@ -204,7 +204,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.premultiplyAlpha);
 	this.form.nextRow();
 
-	//Flip Y
+	// Flip Y
 	this.form.addText(Locale.flipY);
 	this.flipY = new CheckBox(this.form);
 	this.flipY.size.set(18, 18);
@@ -219,7 +219,7 @@ function TextureEditor(parent, closeable, container, index)
 
 TextureEditor.prototype = Object.create(TabElement.prototype);
 
-//Activate
+// Activate
 TextureEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
@@ -240,7 +240,7 @@ TextureEditor.prototype.activate = function()
 	this.flipY.setValue(texture.flipY);
 };
 
-//Destroy
+// Destroy
 TextureEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
@@ -248,32 +248,32 @@ TextureEditor.prototype.destroy = function()
 	this.canvas.destroy();
 };
 
-//Update test material
+// Update test material
 TextureEditor.prototype.updatePreview = function()
 {
 	this.sprite.material.map.needsUpdate = true;
 	this.sprite.material.needsUpdate = true;
 }
 
-//Check if texture is attached to tab
+// Check if texture is attached to tab
 TextureEditor.prototype.isAttached = function(texture)
 {
 	return this.texture === texture;
 }
 
-//Update object data
+// Update object data
 TextureEditor.prototype.updateMetadata = function()
 {
 	if(this.texture !== null)
 	{
-		//Set name
+		// Set name
 		if(this.texture.name !== undefined)
 		{
 			this.setName(this.texture.name);
 			this.name.setText(this.texture.name);
 		}
 
-		//If not found close tab
+		// If not found close tab
 		if(Editor.program.textures[this.texture.uuid] === undefined)
 		{
 			this.close();
@@ -281,7 +281,7 @@ TextureEditor.prototype.updateMetadata = function()
 	}
 }
 
-//Attach texure
+// Attach texure
 TextureEditor.prototype.attach = function(texture)
 {
 	this.texture = texture;

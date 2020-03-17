@@ -28,7 +28,7 @@ function SideBar(parent)
 	text.updateInterface();
 	position += text.size.y;
 
-	//Select
+	// Select
 	this.select = new ButtonImageToggle(this);
 	this.select.setSelected(true);
 	this.select.setImage(Global.FILE_PATH + "icons/tools/select.png");
@@ -42,7 +42,7 @@ function SideBar(parent)
 	});
 	position += size;
 
-	//Move
+	// Move
 	this.move = new ButtonImageToggle(this);
 	this.move.setImage(Global.FILE_PATH + "icons/tools/move.png");
 	this.move.size.set(size, size);
@@ -55,7 +55,7 @@ function SideBar(parent)
 	});
 	position += size;
 
-	//Resize
+	// Resize
 	this.scale = new ButtonImageToggle(this);
 	this.scale.setImage(Global.FILE_PATH + "icons/tools/resize.png");
 	this.scale.size.set(size, size);
@@ -68,7 +68,7 @@ function SideBar(parent)
 	});
 	position += size;
 
-	//Rotate
+	// Rotate
 	this.rotate = new ButtonImageToggle(this);
 	this.rotate.setImage(Global.FILE_PATH + "icons/tools/rotate.png");
 	this.rotate.size.set(size, size);
@@ -187,12 +187,12 @@ SideBar.prototype.createObject = function()
 {
 	var self = this;
 
-	//Add Models
+	// Add Models
 	var models = new ButtonDrawer(this);
 	models.setImage(Global.FILE_PATH + "icons/models/models.png");
 	this.buttons.push(models);
 
-	//Cube
+	// Cube
 	models.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
@@ -204,7 +204,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.cube);
 
-	//Cylinder
+	// Cylinder
 	models.addOption(Global.FILE_PATH + "icons/models/cylinder.png", function()
 	{
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
@@ -216,7 +216,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.cylinder);
 
-	//Sphere
+	// Sphere
 	models.addOption(Global.FILE_PATH + "icons/models/sphere.png", function()
 	{
 		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
@@ -228,7 +228,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.sphere);
 
-	//Torus Knot
+	// Torus Knot
 	models.addOption(Global.FILE_PATH + "icons/models/torusknot.png", function()
 	{
 		var geometry = new THREE.TorusKnotBufferGeometry(1, 0.4, 128, 96, 2, 3);
@@ -240,7 +240,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.torusKnot);
 	
-	//Torus
+	// Torus
 	models.addOption(Global.FILE_PATH + "icons/models/torus.png", function()
 	{
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
@@ -251,7 +251,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.torus);
 
-	//Cone
+	// Cone
 	models.addOption(Global.FILE_PATH + "icons/models/cone.png", function()
 	{
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
@@ -263,7 +263,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.cone);
 	
-	//Plane
+	// Plane
 	models.addOption(Global.FILE_PATH + "icons/models/plane.png", function()
 	{
 		var geometry = new THREE.PlaneBufferGeometry(1, 1);
@@ -274,7 +274,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.plane);
 
-	//Circle
+	// Circle
 	models.addOption(Global.FILE_PATH + "icons/models/circle.png", function()
 	{
 		var geometry = new THREE.CircleBufferGeometry(1, 32);
@@ -285,7 +285,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.circle);
 
-	//Ring
+	// Ring
 	models.addOption(Global.FILE_PATH + "icons/models/ring.png", function()
 	{
 		var geometry = new THREE.RingBufferGeometry(1, 5, 32, 1);
@@ -297,7 +297,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.ring);
 
-	//Icosahedron
+	// Icosahedron
 	models.addOption(Global.FILE_PATH + "icons/models/icosahedron.png", function()
 	{
 		var geometry = new THREE.IcosahedronBufferGeometry(1, 0);
@@ -308,7 +308,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.icosahedron);
 
-	//Tetrahedron
+	// Tetrahedron
 	models.addOption(Global.FILE_PATH + "icons/models/pyramid.png", function()
 	{
 		var geometry = new THREE.TetrahedronBufferGeometry(1, 0);
@@ -319,7 +319,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.tetrahedron);
 
-	//Octahedron
+	// Octahedron
 	models.addOption(Global.FILE_PATH + "icons/models/octahedron.png", function()
 	{
 		var geometry = new THREE.OctahedronBufferGeometry(1, 0);
@@ -330,7 +330,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.octahedron);
 
-	//Dodecahedron
+	// Dodecahedron
 	models.addOption(Global.FILE_PATH + "icons/models/dodecahedron.png", function()
 	{
 		var geometry = new THREE.DodecahedronBufferGeometry(1, 0);
@@ -341,7 +341,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.dodecahedron);
 
-	//Capsule
+	// Capsule
 	models.addOption(Global.FILE_PATH + "icons/models/capsule.png", function()
 	{
 		var geometry = new CapsuleBufferGeometry(0.5, 0.5, 1.0, 32, 1, 8, 8);
@@ -353,7 +353,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.capsule);
 
-	//Parametric
+	// Parametric
 	/*models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
 	{
 		var klein = function (v, u, optionalTarget)
@@ -389,7 +389,7 @@ SideBar.prototype.createObject = function()
 
 	models.updateOptions();
 
-	//Text
+	// Text
 	var text = new ButtonDrawer(this);
 	text.setImage(Global.FILE_PATH + "icons/text/text.png");
 	this.buttons.push(text);
@@ -422,54 +422,54 @@ SideBar.prototype.createObject = function()
 
 	text.updateOptions();
 
-	//Add lights
+	// Add lights
 	var lights = new ButtonDrawer(this);
 	lights.setImage(Global.FILE_PATH + "icons/lights/point.png");
 	this.buttons.push(lights);
 
-	//Point Light
+	// Point Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/point.png", function()
 	{
 		Editor.addObject(new PointLight(0x444444), self.editor.scene);
 	}, Locale.pointLight);
 
-	//Ambient Light
+	// Ambient Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/ambient.png", function()
 	{
 		Editor.addObject(new AmbientLight(0x444444), self.editor.scene);
 	}, Locale.ambientLight);
 
-	//Spot Light
+	// Spot Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/spot.png", function()
 	{
 		Editor.addObject(new SpotLight(0x444444), self.editor.scene);
 	}, Locale.spotLight);
 
-	//Directional Light
+	// Directional Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/directional.png", function()
 	{
 		Editor.addObject(new DirectionalLight(0x444444), self.editor.scene);
 	}, Locale.directionalLight);
 
-	//Hemisphere Light
+	// Hemisphere Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/hemisphere.png", function()
 	{
 		Editor.addObject(new HemisphereLight(0x444444), self.editor.scene);
 	}, Locale.hemisphereLight);
 
-	//RectArea Light
+	// RectArea Light
 	lights.addOption(Global.FILE_PATH + "icons/lights/rectarea.png", function()
 	{
 		Editor.addObject(new RectAreaLight(0x444444, 100, 1, 1), self.editor.scene);
 	}, Locale.rectAreaLight);
 
-	//Probe
+	// Probe
 	lights.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()
 	{
 		Editor.addObject(new LightProbe(), self.editor.scene);
 	}, Locale.lighProbe);
 
-	//Sky
+	// Sky
 	lights.addOption(Global.FILE_PATH + "icons/lights/sky.png", function()
 	{
 		Editor.addObject(new Sky(), self.editor.scene);
@@ -477,18 +477,18 @@ SideBar.prototype.createObject = function()
 
 	lights.updateOptions();
 
-	//Add camera
+	// Add camera
 	var cameras = new ButtonDrawer(this);
 	cameras.setImage(Global.FILE_PATH + "icons/camera/camera.png");
 	this.buttons.push(cameras);
 
-	//Perspective camera
+	// Perspective camera
 	cameras.addOption(Global.FILE_PATH + "icons/camera/prespective.png", function()
 	{
 		Editor.addObject(new PerspectiveCamera(60, 1), self.editor.scene);
 	}, Locale.perspectiveCamera);
 
-	//Orthographic camera
+	// Orthographic camera
 	cameras.addOption(Global.FILE_PATH + "icons/camera/orthographic.png", function()
 	{
 		Editor.addObject(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL), self.editor.scene);
@@ -496,12 +496,12 @@ SideBar.prototype.createObject = function()
 
 	cameras.updateOptions();
 
-	//Add script
+	// Add script
 	var scripts = new ButtonDrawer(this);
 	scripts.setImage(Global.FILE_PATH + "icons/script/script.png");
 	this.buttons.push(scripts);
 
-	//Javascript script
+	// Javascript script
 	scripts.addOption(Global.FILE_PATH + "icons/script/script.png", function()
 	{
 		Editor.addObject(new Script(), self.editor.scene);
@@ -509,18 +509,18 @@ SideBar.prototype.createObject = function()
 
 	scripts.updateOptions();
 
-	//Effects
+	// Effects
 	var effects = new ButtonDrawer(this);
 	effects.setImage(Global.FILE_PATH + "icons/misc/particles.png");
 	this.buttons.push(effects);
 
-	//Sprite
+	// Sprite
 	effects.addOption(Global.FILE_PATH + "icons/misc/sprite.png", function()
 	{
 		Editor.addObject(new Sprite(Editor.defaultSpriteMaterial), self.editor.scene);
 	}, Locale.sprite);
 
-	//Particle emitter
+	// Particle emitter
 	effects.addOption(Global.FILE_PATH + "icons/misc/particles.png", function()
 	{
 		var particle = new ParticleEmitter()
@@ -529,31 +529,31 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(particle, self.editor.scene);
 	}, Locale.particleEmitter);
 
-	//Container
+	// Container
 	effects.addOption(Global.FILE_PATH + "icons/misc/container.png", function()
 	{
 		Editor.addObject(new Container(), self.editor.scene);
 	}, Locale.container);
 
-	//Cube Camera
+	// Cube Camera
 	effects.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()
 	{
 		Editor.addObject(new CubeCamera(), self.editor.scene);
 	}, Locale.cubeCamera)
 
-	//Audio
+	// Audio
 	effects.addOption(Global.FILE_PATH + "icons/misc/audio.png", function()
 	{
 		Editor.addObject(new AudioEmitter(Editor.defaultAudio), self.editor.scene);
 	}, Locale.audio);
 
-	//Positional Audio
+	// Positional Audio
 	effects.addOption(Global.FILE_PATH + "icons/misc/audio_positional.png", function()
 	{
 		Editor.addObject(new PositionalAudio(Editor.defaultAudio), self.editor.scene);
 	}, Locale.positionalAudio);
 
-	//Lens flare
+	// Lens flare
 	effects.addOption(Global.FILE_PATH + "icons/misc/flare.png", function()
 	{
 		var lensFlare = new LensFlare();
@@ -574,18 +574,18 @@ SideBar.prototype.createObject = function()
 	{
 		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
 		{
-			Editor.addObject(new HTMLView("https://www.techpowerup.com/"), self.editor.scene);
+			Editor.addObject(new HTMLView("https:// www.techpowerup.com/"), self.editor.scene);
 		}, Locale.htmlView);
 	}
 
 	effects.updateOptions();
 
-	//Physics
+	// Physics
 	var physics = new ButtonDrawer(this);
 	physics.setImage(Global.FILE_PATH + "icons/misc/physics.png");
 	this.buttons.push(physics);
 
-	//Physics box
+	// Physics box
 	physics.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
 	{
 		var object = new PhysicsObject();
@@ -594,7 +594,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(object, self.editor.scene);
 	}, Locale.box);
 
-	//Physics sphere
+	// Physics sphere
 	physics.addOption(Global.FILE_PATH + "icons/models/sphere.png", function()
 	{
 		var object = new PhysicsObject();
@@ -603,7 +603,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(object, self.editor.scene);
 	}, Locale.sphere);
 
-	//Physics Cylinder
+	// Physics Cylinder
 	physics.addOption(Global.FILE_PATH + "icons/models/cylinder.png", function()
 	{
 		var object = new PhysicsObject();
@@ -612,7 +612,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(object, self.editor.scene);
 	}, Locale.cylinder);
 
-	//Physics Plane
+	// Physics Plane
 	physics.addOption(Global.FILE_PATH + "icons/models/plane.png", function()
 	{
 		var object = new PhysicsObject();
@@ -623,7 +623,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(object, self.editor.scene);
 	}, Locale.ground);
 
-	//Physics Particle
+	// Physics Particle
 	physics.addOption(Global.FILE_PATH + "icons/models/point.png", function()
 	{
 		var object = new PhysicsObject();
@@ -634,30 +634,30 @@ SideBar.prototype.createObject = function()
 
 	physics.updateOptions();
 
-	//Add device
+	// Add device
 	var controls = new ButtonDrawer(this);
 	controls.setImage(Global.FILE_PATH + "icons/misc/controller.png");
 	this.buttons.push(controls);
 
-	//Orbit controls
+	// Orbit controls
 	controls.addOption(Global.FILE_PATH + "icons/misc/orbit.png", function()
 	{
 		Editor.addObject(new OrbitControls(), self.editor.scene);
 	}, Locale.orbitControls);
 
-	//FPS controls
+	// FPS controls
 	controls.addOption(Global.FILE_PATH + "icons/misc/crosshair.png", function()
 	{
 		Editor.addObject(new FirstPersonControls(), self.editor.scene);
 	}, Locale.firstPersonControls);
 
-	//Leap Hand
+	// Leap Hand
 	controls.addOption(Global.FILE_PATH + "icons/hw/leap.png", function()
 	{
 		Editor.addObject(new LeapMotion(), self.editor.scene);
 	}, Locale.leapMotion);
 
-	//Kinect Skeleton
+	// Kinect Skeleton
 	controls.addOption(Global.FILE_PATH + "icons/hw/kinect.png", function()
 	{
 		Editor.addObject(new KinectDevice(), self.editor.scene);

@@ -4,12 +4,12 @@ function LockedInspector(parent, object)
 {
 	Inspector.call(this, parent, object);
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = this.form.addText("");
 	this.form.nextRow();
 
-	//Type
+	// Type
 	if(Editor.settings.general.showType)
 	{
 		this.form.addText(Locale.type);
@@ -17,7 +17,7 @@ function LockedInspector(parent, object)
 		this.form.nextRow();
 	}
 
-	//UUID
+	// UUID
 	if(Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
@@ -28,7 +28,7 @@ function LockedInspector(parent, object)
 
 LockedInspector.prototype = Object.create(Inspector.prototype);
 
-//Update panel information
+// Update panel information
 LockedInspector.prototype.updateInspector = function()
 {
 	this.name.setText(this.object.name);

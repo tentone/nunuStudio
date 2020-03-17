@@ -6,7 +6,7 @@ function DirectionalLightInspector(parent, object)
 
 	var self = this;
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
@@ -17,11 +17,11 @@ function DirectionalLightInspector(parent, object)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Shadow map
+	// Shadow map
 	this.form.addText(Locale.shadows);
 	this.form.nextRow();
 
-	//Cast shadow
+	// Cast shadow
 	this.castShadow = new CheckBox(this.form);
 	this.form.addText(Locale.castShadows);
 	this.castShadow.size.set(18, 18);
@@ -34,7 +34,7 @@ function DirectionalLightInspector(parent, object)
 	this.form.add(this.castShadow);
 	this.form.nextRow();
 
-	//Shadow resolution
+	// Shadow resolution
 	this.form.addText(Locale.resolution);
 	this.shadowWidth = new DropdownList(this.form);
 	this.shadowWidth.size.set(60, 18);
@@ -62,7 +62,7 @@ function DirectionalLightInspector(parent, object)
 		this.shadowHeight.addValue(size.toString(), size);
 	}
 
-	//Shadowmap camera near
+	// Shadowmap camera near
 	this.form.addText(Locale.near);
 	this.shadowNear = new NumberBox(this.form);
 	this.shadowNear.size.set(60, 18);
@@ -75,7 +75,7 @@ function DirectionalLightInspector(parent, object)
 	this.form.add(this.shadowNear);
 	this.form.nextRow();
 	
-	//Shadowmap camera far
+	// Shadowmap camera far
 	this.form.addText(Locale.near);
 	this.shadowFar = new NumberBox(this.form);
 	this.shadowFar.size.set(60, 18);
@@ -88,7 +88,7 @@ function DirectionalLightInspector(parent, object)
 	this.form.add(this.shadowFar);
 	this.form.nextRow();
 
-	//Shadowmap camera left
+	// Shadowmap camera left
 	this.form.addText(Locale.left);
 	this.shadowLeft = new NumberBox(this.form);
 	this.shadowLeft.size.set(60, 18);
@@ -101,7 +101,7 @@ function DirectionalLightInspector(parent, object)
 	this.form.add(this.shadowLeft);
 	this.form.nextRow();
 
-	//Shadowmap camera right
+	// Shadowmap camera right
 	this.form.addText(Locale.right);
 	this.shadowRight = new NumberBox(this.form);
 	this.shadowRight.size.set(60, 18);
@@ -114,7 +114,7 @@ function DirectionalLightInspector(parent, object)
 	this.form.add(this.shadowRight);
 	this.form.nextRow();
 
-	//Shadowmap camera top
+	// Shadowmap camera top
 	this.form.addText(Locale.top);
 	this.shadowTop = new NumberBox(this.form);
 	this.shadowTop.size.set(60, 18);
@@ -127,7 +127,7 @@ function DirectionalLightInspector(parent, object)
 	this.form.add(this.shadowTop);
 	this.form.nextRow();
 
-	//Shadowmap camera bottom
+	// Shadowmap camera bottom
 	this.form.addText(Locale.bottom);
 	this.shadowBottom = new NumberBox(this.form);
 	this.shadowBottom.size.set(60, 18);

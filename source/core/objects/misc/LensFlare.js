@@ -12,8 +12,8 @@
  * @class LensFlare
  * @module Misc
  * @extends {Object3D}
- * @author mikael emtinger / http://gomo.se/
- * @author alteredq / http://alteredqualia.com/
+ * @author mikael emtinger / http:// gomo.se/
+ * @author alteredq / http:// alteredqualia.com/
  * @author tentone
  */
 function LensFlare()

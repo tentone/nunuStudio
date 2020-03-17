@@ -15,7 +15,7 @@ function CircleGeometryForm(form, object)
 	this.form.addText(Locale.circle);
 	this.form.nextRow();
 
-	//Radius
+	// Radius
 	this.form.addText(Locale.radius);
 	this.radius = new NumberBox(this.form);
 	this.radius.size.set(60, 18);
@@ -25,7 +25,7 @@ function CircleGeometryForm(form, object)
 	this.form.add(this.radius);
 	this.form.nextRow();
 
-	//Segments
+	// Segments
 	this.form.addText(Locale.segments);
 	this.segments = new NumberBox(this.form);
 	this.segments.size.set(60, 18);
@@ -35,7 +35,7 @@ function CircleGeometryForm(form, object)
 	this.form.add(this.segments);
 	this.form.nextRow();
 
-	//Theta start
+	// Theta start
 	this.form.addText(Locale.tethaStart);
 	this.thetaStart = new NumberBox(this.form);
 	this.thetaStart.size.set(60, 18);
@@ -44,7 +44,7 @@ function CircleGeometryForm(form, object)
 	this.form.add(this.thetaStart);
 	this.form.nextRow();
 
-	//Theta length
+	// Theta length
 	this.form.addText(Locale.tethaLength);
 	this.thetaLength = new NumberBox(this.form);
 	this.thetaLength.size.set(60, 18);
@@ -53,7 +53,7 @@ function CircleGeometryForm(form, object)
 	this.form.add(this.thetaLength);
 	this.form.nextRow();
 
-	//Buffer
+	// Buffer
 	this.buffer = new CheckBox(this.form);
 	this.form.addText(Locale.buffered);
 	this.buffer.size.set(18, 18);

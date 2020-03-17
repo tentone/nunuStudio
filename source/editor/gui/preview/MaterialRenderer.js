@@ -10,23 +10,23 @@ function MaterialRenderer()
 {
 	PreviewRenderer.call(this);
 
-	//Camera
+	// Camera
 	this.camera = new OrthographicCamera(2.15, 1);
 
-	//Sphere
+	// Sphere
 	this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16));
 	this.scene.add(this.sphere);
 
-	//Sprite
+	// Sprite
 	this.sprite = new THREE.Sprite();
 	this.sprite.scale.set(2, 2, 1);
 	this.scene.add(this.sprite);
 
-	//Ambient light
+	// Ambient light
 	var ambient = new THREE.AmbientLight(0x999999);
 	this.scene.add(ambient);
 
-	//Point light
+	// Point light
 	var point = new THREE.PointLight(0x999999);
 	point.position.set(-0.5, 1, 1.5);
 	this.scene.add(point);
@@ -57,7 +57,7 @@ MaterialRenderer.render = function(material, onRender)
 
 MaterialRenderer.prototype.render = function(material, onRender)
 {
-	//Set material
+	// Set material
 	if(material instanceof THREE.SpriteMaterial)
 	{
 		this.sphere.visible = false;
@@ -75,9 +75,9 @@ MaterialRenderer.prototype.render = function(material, onRender)
 		this.camera.position.set(0, 0, 1.5);
 	}
 
-	//Render
+	// Render
 	this.renderer.render(this.scene, this.camera);
 
-	//Callback
+	// Callback
 	onRender(this.canvas.toDataURL());
 };

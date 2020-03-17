@@ -56,7 +56,7 @@ function TabElement(parent, closeable, container, index, title, icon)
 	 */
 	this.button = null;
 
-	//Meta
+	// Meta
 	this.closeable = closeable;
 	this.title = title;
 	this.icon = icon;
@@ -141,7 +141,7 @@ TabElement.prototype.activate = function()
 		this.deactivate();
 	}
 	
-	//TODO <IF TAB NEEDS UPDATE IT SHOULD TAKE CARE OF IT>
+	// TODO <IF TAB NEEDS UPDATE IT SHOULD TAKE CARE OF IT>
 	if(this.update !== undefined)
 	{
 		var self = this;

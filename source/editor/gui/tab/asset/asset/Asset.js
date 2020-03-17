@@ -17,7 +17,7 @@ function Asset(parent)
 
 	this.scale = new THREE.Vector2(0.7, 0.7);
 
-	//Element
+	// Element
 	this.element.style.display = "block";
 	this.element.style.float = "left";
 	this.element.style.position = "relative";
@@ -25,7 +25,7 @@ function Asset(parent)
 	this.element.style.width = "70px";
 	this.element.style.height = "70px";
 
-	//Icon
+	// Icon
 	this.icon = document.createElement("img");
 	this.icon.draggable = false;
 	this.icon.style.display = "block";
@@ -39,7 +39,7 @@ function Asset(parent)
 	this.icon.style.zIndex = "1";
 	this.element.appendChild(this.icon);
 
-	//Text
+	// Text
 	this.text = document.createElement("div");
 	this.text.style.position = "absolute";
 	this.text.style.overflow = "hidden";
@@ -53,7 +53,7 @@ function Asset(parent)
 	this.text.style.bottom = "0px";
 	this.element.appendChild(this.text);
 
-	//Text
+	// Text
 	this.name = document.createTextNode("");
 	this.text.appendChild(this.name);
 
@@ -102,7 +102,7 @@ Asset.prototype = Object.create(Element.prototype);
  */
 Asset.prototype.setSelected = function(selected)
 {
-	//this.selected = selected;
+	// this.selected = selected;
 
 	this.element.style.backgroundColor = selected ? Editor.theme.buttonOverColor : null;
 };

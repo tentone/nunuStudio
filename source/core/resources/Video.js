@@ -17,19 +17,19 @@ function Video(url, encoding)
 
 	if(url !== undefined)
 	{	
-		//ArrayBuffer
+		// ArrayBuffer
 		if(url instanceof ArrayBuffer)
 		{
 			this.loadArrayBufferData(url, encoding);
 		}
-		//Base64
+		// Base64
 		else if(Base64Utils.isBase64(url))
 		{
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
 			this.data = url;
 		}
-		//URL
+		// URL
 		else
 		{
 			this.loadArrayBufferData(FileSystem.readFileArrayBuffer(url), FileSystem.getFileExtension(url));

@@ -12,11 +12,11 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.defaultTextWidth = 125;
 	this.form.setAutoSize(false);
 
-	//General text
+	// General text
 	this.form.addText(Locale.general);
 	this.form.nextRow();
 	
-	//Theme
+	// Theme
 	this.form.addText(Locale.theme);
 	this.theme = new DropdownList(this.form);
 	this.theme.size.set(150, 18);
@@ -28,7 +28,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.theme);
 	this.form.nextRow();
 
-	//Fill theme dropdown
+	// Fill theme dropdown
 	var list = ThemeManager.getList();
 	for(var i = 0; i < list.length; i++)
 	{
@@ -36,7 +36,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 		this.theme.addValue(theme, theme);
 	}
 
-	//History size
+	// History size
 	this.form.addText(Locale.historySize).setAltText(Locale.hintHistory);
 	this.historySize = new NumberBox(this.form);
 	this.historySize.size.set(60, 18);
@@ -65,7 +65,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.resetDefault);
 	this.form.nextRow();
 
-	//Auto update
+	// Auto update
 	if(Nunu.runningOnDesktop())
 	{
 		this.form.addText(Locale.autoUpdate).setAltText("If checked the editor will auto-update to the latest version.");
@@ -84,15 +84,15 @@ function GeneralSettingsTab(parent, closeable, container, index)
 		this.form.nextRow();	
 	}
 	
-	//Blank Space
+	// Blank Space
 	this.form.addText("");
 	this.form.nextRow();
 
-	//Scene editor
+	// Scene editor
 	this.form.addText("Testing");
 	this.form.nextRow();
 
-	//Immediate mode
+	// Immediate mode
 	this.form.addText("Use immediate mode").setAltText("If checked objects changed during runtime test will keep their state when the testing mode stops.");
 	this.immediateMode = new CheckBox(this.form);
 	this.immediateMode.size.set(18, 18);

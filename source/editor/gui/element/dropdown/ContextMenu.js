@@ -133,7 +133,7 @@ ContextMenu.prototype.updatePosition = function()
 	this.element.style.top = (this.position.y - this.offset.y) + "px";
 	this.element.style.left = (this.position.x - this.offset.x) + "px";
 
-	//Check if its inside window
+	// Check if its inside window
 	var out = DOMUtils.checkBorder(this.element);
 	if(out.x !== 0)
 	{

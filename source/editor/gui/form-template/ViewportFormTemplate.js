@@ -12,7 +12,7 @@ function ViewportFormTemplate(form, object)
 
 	var self = this;
 	
-	//Offset
+	// Offset
 	this.form.addText(Locale.position);
 	this.offset = new VectorBox(this.form);
 	this.offset.setType(VectorBox.VECTOR2);
@@ -30,7 +30,7 @@ function ViewportFormTemplate(form, object)
 	this.form.add(this.offset);
 	this.form.nextRow();
 
-	//Size
+	// Size
 	this.form.addText(Locale.size);
 	this.sizeBox = new VectorBox(this.form);
 	this.sizeBox.setType(VectorBox.VECTOR2);
@@ -48,7 +48,7 @@ function ViewportFormTemplate(form, object)
 	this.form.add(this.sizeBox);
 	this.form.nextRow();
 
-	//Mode
+	// Mode
 	this.form.addText(Locale.mode);
 	this.modeDrop = new DropdownList(this.form);
 	this.modeDrop.size.set(0, 18);
@@ -61,7 +61,7 @@ function ViewportFormTemplate(form, object)
 	this.form.add(this.modeDrop);
 	this.form.nextRow();
 
-	//Anchor
+	// Anchor
 	this.form.addText(Locale.anchor);
 	this.anchor = new DropdownList(this.form);
 	this.anchor.size.set(0, 18);

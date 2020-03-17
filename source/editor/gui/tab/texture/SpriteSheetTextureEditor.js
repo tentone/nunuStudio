@@ -6,7 +6,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Sheet format
+	// Sheet format
 	this.form.addText("Sheet format");
 	this.frames = new VectorBox(this.form);
 	this.frames.setType(VectorBox.VECTOR2);
@@ -26,7 +26,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.add(this.frames);
 	this.form.nextRow();
 
-	//Total frames
+	// Total frames
 	this.form.addText("Total frames");
 	this.totalFrames = new NumberBox(this.form);
 	this.totalFrames.size.set(60, 18);
@@ -41,7 +41,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.add(this.totalFrames);
 	this.form.nextRow();
 
-	//Begin frame
+	// Begin frame
 	this.form.addText("Begin frame");
 	this.beginFrame = new NumberBox(this.form);
 	this.beginFrame.size.set(60, 18);
@@ -54,7 +54,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.add(this.beginFrame);
 	this.form.nextRow();
 
-	//End frame
+	// End frame
 	this.form.addText("End frame");
 	this.endFrame = new NumberBox(this.form);
 	this.endFrame.size.set(60, 18);
@@ -67,7 +67,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.add(this.endFrame);
 	this.form.nextRow();
 
-	//Speed
+	// Speed
 	this.form.addText("Speed");
 	this.animationSpeed = new NumberBox(this.form);
 	this.animationSpeed.size.set(60, 18);

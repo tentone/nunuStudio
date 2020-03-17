@@ -8,7 +8,7 @@ function AudioAsset(parent)
 	
 	var self = this;
 
-	//Image
+	// Image
 	this.image = document.createElement("img");
 	this.image.style.position = "absolute";
 	this.image.style.top = "5%";
@@ -18,7 +18,7 @@ function AudioAsset(parent)
 	this.image.src = Global.FILE_PATH + "icons/misc/audio.png";
 	this.element.appendChild(this.image);
 
-	//Context menu event
+	// Context menu event
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
@@ -95,10 +95,10 @@ function AudioAsset(parent)
 		context.updateInterface();
 	};
 
-	//Drag start
+	// Drag start
 	this.element.ondragstart = function(event)
 	{
-		//Insert into drag buffer
+		// Insert into drag buffer
 		if(self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
@@ -106,7 +106,7 @@ function AudioAsset(parent)
 		}
 	};
 
-	//Drag end (called after of ondrop)
+	// Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
 		DragBuffer.pop(self.asset.uuid);

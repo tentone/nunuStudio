@@ -18,7 +18,7 @@ function GeometryInspector(parent, object)
 	this.form.add(this.preview);
 	this.form.nextRow();
 
-	//Mouse
+	// Mouse
 	this.mouse = new Mouse(window, false);
 	this.mouse.setCanvas(this.preview.canvas);
 
@@ -33,15 +33,15 @@ function GeometryInspector(parent, object)
 	this.scene.add(directional);
 	this.scene.add(new THREE.AmbientLight(0x888888));
 
-	//Camera
+	// Camera
 	this.camera = new PerspectiveCamera(90, this.preview.size.x / this.preview.size.y);
 
-	//Controls
+	// Controls
 	this.controls = new EditorOrbitControls();
 	this.controls.attach(this.camera);
 	this.scene.add(this.controls);
 
-	//Mesh
+	// Mesh
 	this.mesh = new THREE.Mesh(new THREE.Geometry(), new THREE.MeshPhongMaterial());
 	this.scene.add(this.mesh);
 

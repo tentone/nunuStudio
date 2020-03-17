@@ -7,7 +7,7 @@
  *
  * A program may contain multiple scenes, its possible to change between scene using scripts.
  *  
- * Scene three.js documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.
+ * Scene three.js documentation available here https:// threejs.org/docs/index.html#Reference/Scenes/Scene.
  * 
  * @class Scene
  * @module Core
@@ -27,7 +27,7 @@ function Scene()
 	 *
 	 * The world is configured by default with a NaiveBroadphase and a SplitSolver.
 	 *
-	 * Documentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.
+	 * Documentation for cannon.js physics World object can be found here http:// schteppe.github.io/cannon.js/docs/classes/World.html.
 	 *
 	 * @property world
 	 * @type {CANNON.World}
@@ -185,7 +185,7 @@ Scene.prototype.initialize = function()
  */
 Scene.prototype.update = function(delta)
 {
-	//TODO <USE THE VIEWPORT OBJECT>
+	// TODO <USE THE VIEWPORT OBJECT>
 
 	this.mouse.set(this.program.mouse.position.x / this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y / this.canvas.height + 1);
 	

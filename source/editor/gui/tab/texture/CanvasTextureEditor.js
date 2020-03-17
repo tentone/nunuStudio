@@ -6,7 +6,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Width
+	// Width
 	this.form.addText(Locale.width);
 	this.width = new DropdownList(this.form);
 	this.width.size.set(120, 18);
@@ -19,7 +19,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	this.form.add(this.width);
 	this.form.nextRow();
 
-	//Height
+	// Height
 	this.form.addText(Locale.height);
 	this.height = new DropdownList(this.form);
 	this.height.size.set(120, 18);
@@ -32,7 +32,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	this.form.add(this.height);
 	this.form.nextRow();
 
-	//Size options
+	// Size options
 	for(var i = 3; i < 13; i++)
 	{
 		var size = Math.pow(2, i);

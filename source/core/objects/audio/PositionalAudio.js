@@ -36,7 +36,7 @@ function PositionalAudio(audio)
 	/**
 	 * WebAudio panner effect.
 	 *
-	 * https://developer.mozilla.org/en-US/docs/Web/API/PannerNode
+	 * https:// developer.mozilla.org/en-US/docs/Web/API/PannerNode
 	 * 
 	 * @property panner
 	 * @type {PannerNode}

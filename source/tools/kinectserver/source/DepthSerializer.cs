@@ -8,28 +8,28 @@ using System.Windows.Media.Imaging;
 
 namespace KinectServer
 {
-    //Handles depth frame serialization.
+    // Handles depth frame serialization.
     public static class DepthSerializer
     {
-        //The depth bitmap source.
+        // The depth bitmap source.
         static WriteableBitmap _depthBitmap = null;
 
-        //The RGB depth values.
+        // The RGB depth values.
         static byte[] _depthPixels = null;
 
-        //Depth frame width.
+        // Depth frame width.
         static int _depthWidth;
 
-        //Depth frame height.
+        // Depth frame height.
         static int _depthHeight;
 
-        //Depth frame stride.
+        // Depth frame stride.
         static int _depthStride;
 
-        //The actual depth values.
+        // The actual depth values.
         static short[] _depthData = null;
 
-        //Serializes a depth frame.
+        // Serializes a depth frame.
         public static byte[] Serialize(this DepthImageFrame frame)
         {
             if (_depthBitmap == null)
@@ -46,10 +46,10 @@ namespace KinectServer
 
             for(int depthIndex = 0, colorIndex = 0; depthIndex < _depthData.Length && colorIndex < _depthPixels.Length; depthIndex++, colorIndex += 4)
             {
-                //Get the depth value.
+                // Get the depth value.
                 int depth = _depthData[depthIndex] >> DepthImageFrame.PlayerIndexBitmaskWidth;
 
-                //Equal coloring for monochromatic histogram.
+                // Equal coloring for monochromatic histogram.
                 byte intensity = (byte)(255 - (255 * Math.Max(depth - Constants.MIN_DEPTH_DISTANCE, 0) / (Constants.MAX_DEPTH_DISTANCE_OFFSET)));
 
                 _depthPixels[colorIndex + 0] = intensity;

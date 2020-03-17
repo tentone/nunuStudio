@@ -96,7 +96,7 @@ ShaderAttribute.prototype.splice = function(start, end)
 {
 	this.typedArray.splice(start, end);
 
-	//Reset the reference to the attribute"s typed array since it has probably changed.
+	// Reset the reference to the attribute"s typed array since it has probably changed.
 	this.forceUpdateAll();
 };
 
@@ -121,19 +121,19 @@ ShaderAttribute.prototype.forceUpdateAll = function()
  */
 ShaderAttribute.prototype._ensureTypedArray = function(size)
 {
-	//Condition that's most likely to be true at the top: no change.
+	// Condition that's most likely to be true at the top: no change.
 	if(this.typedArray !== null && this.typedArray.size === size * this.componentSize)
 	{
 		return;
 	}
 
-	//Resize the array if we need to, telling the TypedArrayHelper to ignore it's component size when evaluating size.
+	// Resize the array if we need to, telling the TypedArrayHelper to ignore it's component size when evaluating size.
 	else if(this.typedArray !== null && this.typedArray.size !== size)
 	{
 		this.typedArray.setSize(size);
 	}
 
-	//This condition should only occur once in an attribute"s lifecycle.
+	// This condition should only occur once in an attribute"s lifecycle.
 	else if(this.typedArray === null)
 	{
 		this.typedArray = new TypedArrayHelper(this.arrayType, size, this.componentSize);
@@ -153,10 +153,10 @@ ShaderAttribute.prototype._ensureTypedArray = function(size)
  */
 ShaderAttribute.prototype._createBufferAttribute = function(size)
 {
-	//Make sure the typedArray is present and correct.
+	// Make sure the typedArray is present and correct.
 	this._ensureTypedArray(size);
 
-	//Don't create it if it already exists, but do flag that it needs updating on the next render cycle.
+	// Don't create it if it already exists, but do flag that it needs updating on the next render cycle.
 	if(this.bufferAttribute !== null)
 	{
 		this.bufferAttribute.array = this.typedArray.array;

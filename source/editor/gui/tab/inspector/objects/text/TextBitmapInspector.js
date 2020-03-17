@@ -6,7 +6,7 @@ function TextBitmapInspector(parent, object)
 
 	var self = this;
 
-	//Text
+	// Text
 	this.form.addText(Locale.text);
 	this.text = new TextArea(this.form);
 	this.text.size.set(0, 55);
@@ -17,7 +17,7 @@ function TextBitmapInspector(parent, object)
 	this.form.add(this.text);
 	this.form.nextRow();
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
@@ -29,7 +29,7 @@ function TextBitmapInspector(parent, object)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Shader
+	// Shader
 	this.form.addText(Locale.shader);
 	this.shader = new DropdownList(this.form);
 	this.shader.size.set(0, 18);
@@ -43,7 +43,7 @@ function TextBitmapInspector(parent, object)
 	this.form.add(this.shader);
 	this.form.nextRow();
 
-	//Align
+	// Align
 	this.form.addText(Locale.align);
 	this.align = new DropdownList(this.form);
 	this.align.size.set(0, 18);
@@ -57,7 +57,7 @@ function TextBitmapInspector(parent, object)
 	this.form.add(this.align);
 	this.form.nextRow();
 
-	//Line Height
+	// Line Height
 	this.form.addText(Locale.lineHeight);
 	this.lineHeight = new NumberBox(this.form);
 	this.lineHeight.size.set(0, 18);
@@ -70,7 +70,7 @@ function TextBitmapInspector(parent, object)
 	this.form.add(this.lineHeight);
 	this.form.nextRow();
 
-	//Line Height
+	// Line Height
 	this.form.addText(Locale.letterSpacing);
 	this.letterSpacing = new NumberBox(this.form);
 	this.letterSpacing.size.set(0, 18);
@@ -83,7 +83,7 @@ function TextBitmapInspector(parent, object)
 	this.form.add(this.letterSpacing);
 	this.form.nextRow();
 
-	//Width
+	// Width
 	this.form.addText(Locale.width);
 	this.width = new NumberBox(this.form);
 	this.width.size.set(0, 18);
@@ -96,7 +96,7 @@ function TextBitmapInspector(parent, object)
 	this.form.add(this.width);
 	this.form.nextRow();
 
-	//Threshold
+	// Threshold
 	this.form.addText(Locale.threshold);
 	this.threshold = new Slider(this.form);
 	this.threshold.size.set(0, 18);
@@ -109,7 +109,7 @@ function TextBitmapInspector(parent, object)
 	this.form.add(this.threshold);
 	this.form.nextRow();
 
-	//Smoothing
+	// Smoothing
 	this.form.addText(Locale.smoothing);
 	this.smoothing = new Slider(this.form);
 	this.smoothing.size.set(0, 18);

@@ -3,7 +3,7 @@
 /**
  * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don"t have to rewrite materials if you decide to use a different renderer.
  * 
- * Original documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material
+ * Original documentation available here https:// threejs.org/docs/index.html#Reference/Materials/Material
  *
  * @class Material
  * @module THREE
@@ -61,25 +61,25 @@ THREE.Material.prototype.toJSON = function(meta)
 
 	var data = {};
 
-	//Material metadata
+	// Material metadata
 	data.uuid = this.uuid;
 	data.type = this.type;
 	data.name = this.name;
 
 	data.toneMapped = this.toneMapped;
 
-	//Depth
+	// Depth
 	data.depthFunc = this.depthFunc;
 	data.depthTest = this.depthTest;
 	data.depthWrite = this.depthWrite;
 	
-	//Color
+	// Color
 	if(this.color && this.color.isColor)
 	{
 		data.color = this.color.getHex();
 	}
 
-	//Roughness, metalness (Standard, PBR)
+	// Roughness, metalness (Standard, PBR)
 	if(this.roughness !== undefined)
 	{
 		data.roughness = this.roughness;
@@ -89,19 +89,19 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.metalness = this.metalness;
 	}
 
-	//Specular
+	// Specular
 	if(this.specular && this.specular.isColor)
 	{
 		data.specular = this.specular.getHex();
 	}
 	
-	//Shininess
+	// Shininess
 	if(this.shininess !== undefined)
 	{
 		data.shininess = this.shininess;
 	}
 
-	//Clear coat (PBR)
+	// Clear coat (PBR)
 	if(this.clearcoat !== undefined)
 	{
 		data.clearcoat = this.clearcoat;
@@ -115,32 +115,32 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.transparency = this.transparency;
 	}
 
-	//Color map
+	// Color map
 	if(this.map && this.map.isTexture)
 	{
 		data.map = this.map.toJSON(meta).uuid;
 	}
 	
-	//Alpha map
+	// Alpha map
 	if(this.alphaMap && this.alphaMap.isTexture)
 	{
 		data.alphaMap = this.alphaMap.toJSON(meta).uuid;
 	}
 	
-	//Light map
+	// Light map
 	if(this.lightMap && this.lightMap.isTexture)
 	{
 		data.lightMap = this.lightMap.toJSON(meta).uuid;
 	}
 	
-	//Bump map
+	// Bump map
 	if(this.bumpMap && this.bumpMap.isTexture)
 	{
 		data.bumpMap = this.bumpMap.toJSON(meta).uuid;
 		data.bumpScale = this.bumpScale;
 	}
 
-	//Normal map
+	// Normal map
 	if(this.normalMap && this.normalMap.isTexture)
 	{
 		data.normalMap = this.normalMap.toJSON(meta).uuid;
@@ -148,14 +148,14 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.normalScale = this.normalScale.toArray();
 	}
 
-	//Clear coat normal map (PBR)
+	// Clear coat normal map (PBR)
 	if(this.clearcoatNormalMap && this.clearcoatNormalMap.isTexture)
 	{
 		data.clearcoatNormalMap = this.clearcoatNormalMap.toJSON(meta).uuid;
 		data.clearcoatNormalScale = this.clearcoatNormalScale.toArray();
 	}
 
-	//Displacement map
+	// Displacement map
 	if(this.displacementMap && this.displacementMap.isTexture)
 	{
 		data.displacementMap = this.displacementMap.toJSON(meta).uuid;
@@ -163,7 +163,7 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.displacementBias = this.displacementBias;
 	}
 
-	//Roughness and metalness map (Stanard, PBR)
+	// Roughness and metalness map (Stanard, PBR)
 	if(this.roughnessMap && this.roughnessMap.isTexture)
 	{
 		data.roughnessMap = this.roughnessMap.toJSON(meta).uuid;
@@ -173,7 +173,7 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.metalnessMap = this.metalnessMap.toJSON(meta).uuid;
 	}
 
-	//Emissive
+	// Emissive
 	if(this.emissive && this.emissive.isColor)
 	{
 		data.emissive = this.emissive.getHex();
@@ -183,19 +183,19 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.emissiveIntensity = this.emissiveIntensity;
 	}
 
-	//Matcap map
+	// Matcap map
 	if(this.matcap && this.matcap.isTexture)
 	{
 		data.matcap = this.matcap.toJSON(meta).uuid;
 	}
 
-	//Emissive map
+	// Emissive map
 	if(this.emissiveMap && this.emissiveMap.isTexture)
 	{
 		data.emissiveMap = this.emissiveMap.toJSON(meta).uuid;
 	}
 
-	//Ambient occlusion
+	// Ambient occlusion
 	if(this.aoMap && this.aoMap.isTexture)
 	{
 		data.aoMap = this.aoMap.toJSON(meta).uuid;
@@ -205,17 +205,17 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.aoMapIntensity = this.aoMapIntensity;
 	}
 
-	//Specular map (Lambert, Phong)
+	// Specular map (Lambert, Phong)
 	if(this.specularMap && this.specularMap.isTexture)
 	{
 		data.specularMap = this.specularMap.toJSON(meta).uuid;
 	}
 
-	//Environment map (Lambert, Phong, Standard, PBR)
+	// Environment map (Lambert, Phong, Standard, PBR)
 	if(this.envMap && this.envMap.isTexture)
 	{
 		data.envMap = this.envMap.toJSON(meta).uuid;
-		data.reflectivity = this.reflectivity; //Scale behind envMap
+		data.reflectivity = this.reflectivity; // Scale behind envMap
 
 		if(this.combine)
 		{
@@ -231,13 +231,13 @@ THREE.Material.prototype.toJSON = function(meta)
 		}
 	}
 
-	//Gradient map
+	// Gradient map
 	if(this.gradientMap && this.gradientMap.isTexture)
 	{
 		data.gradientMap = this.gradientMap.toJSON(meta).uuid;
 	}
 
-	//Size (PointsMaterial)
+	// Size (PointsMaterial)
 	if(this.size !== undefined)
 	{
 		data.size = this.size;
@@ -247,13 +247,13 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.sizeAttenuation = this.sizeAttenuation;
 	}
 
-	//Rotation (SpriteMaterial)
+	// Rotation (SpriteMaterial)
 	if(this.rotation !== undefined)
 	{
 		data.rotation = this.rotation;
 	}
 
-	//Line (LineMaterial)
+	// Line (LineMaterial)
 	if(this.linewidth !== undefined)
 	{
 		data.linewidth = this.linewidth;
@@ -271,7 +271,7 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.scale = this.scale;
 	}
 
-	//Shading, blending
+	// Shading, blending
 	if(this.blending !== THREE.NormalBlending)
 	{
 		data.blending = this.blending;
@@ -287,13 +287,13 @@ THREE.Material.prototype.toJSON = function(meta)
 
 	data.flatShading = this.flatShading;
 
-	//Opacity
+	// Opacity
 	if(this.opacity < 1)
 	{
 		data.opacity = this.opacity;
 	}
 
-	//Transparent
+	// Transparent
 	if(this.transparent === true)
 	{
 		data.transparent = this.transparent;
@@ -304,7 +304,7 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.dithering = true;
 	}
 
-	//Alpha
+	// Alpha
 	if(this.alphaTest > 0)
 	{
 		data.alphaTest = this.alphaTest;
@@ -314,7 +314,7 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.premultipliedAlpha = this.premultipliedAlpha;
 	}
 	
-	//Wireframe
+	// Wireframe
 	if(this.wireframe === true)
 	{
 		data.wireframe = this.wireframe;
@@ -332,19 +332,19 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.wireframeLinejoin = this.wireframeLinejoin;
 	}
 
-	//Skinning
+	// Skinning
 	data.skinning = this.skinning;
 
-	//Morph targets
+	// Morph targets
 	data.morphTargets = this.morphTargets;
 
-	//Morph normals
+	// Morph normals
 	if(this.morphNormals !== undefined)
 	{
 		data.morphNormals = this.morphNormals;
 	}
 
-	//Copied from Object3D.toJSON
+	// Copied from Object3D.toJSON
 	function extractFromCache(cache)
 	{
 		var values = [];

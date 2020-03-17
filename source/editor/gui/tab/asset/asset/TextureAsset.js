@@ -40,7 +40,7 @@ function TextureAsset(parent)
 		tab.select();
 	}
 
-	//Context menu event
+	// Context menu event
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
@@ -93,17 +93,17 @@ function TextureAsset(parent)
 					textures: {}
 				};
 
-				//Serialize
+				// Serialize
 				var json = self.asset.toJSON(resources);
 				var images = ObjectLoader.prototype.parseImages.call(this, resources.images);
 				var videos = ObjectLoader.prototype.parseVideos.call(this, resources.videos);
 
-				//Loader
+				// Loader
 				var loader = new TextureLoader();
 				loader.setImages(images);
 				loader.setVideos(videos);
 
-				//Load
+				// Load
 				var texture = loader.parse(json); 
 				texture.uuid = THREE.Math.generateUUID();
 				texture.name += "*";
@@ -118,10 +118,10 @@ function TextureAsset(parent)
 		context.updateInterface();
 	};
 
-	//Drag start
+	// Drag start
 	this.element.ondragstart = function(event)
 	{
-		//Insert into drag buffer
+		// Insert into drag buffer
 		if(self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
@@ -129,7 +129,7 @@ function TextureAsset(parent)
 		}
 	};
 
-	//Drag end (called after of ondrop)
+	// Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
 		DragBuffer.pop(self.asset.uuid);

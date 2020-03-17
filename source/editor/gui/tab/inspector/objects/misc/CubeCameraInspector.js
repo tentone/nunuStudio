@@ -6,7 +6,7 @@ function CubeCameraInspector(parent, object)
 
 	var self = this;
 
-	//Auto update
+	// Auto update
 	this.form.addText(Locale.autoUpdate);
 	this.autoUpdate = new CheckBox(this.form);
 	this.autoUpdate.size.set(18, 18);
@@ -19,7 +19,7 @@ function CubeCameraInspector(parent, object)
 	this.form.add(this.autoUpdate);
 	this.form.nextRow();
 
-	//Resolution
+	// Resolution
 	this.form.addText(Locale.resolution);
 	this.resolution = new DropdownList(this.form);
 	this.resolution.size.set(60, 18);

@@ -7,7 +7,7 @@ function AssetExplorerMenu(parent)
 	this.element.style.backgroundColor = Editor.theme.barColor;
 	this.element.style.overflow = "visible";
 	
-	//Import
+	// Import
 	var menu = new DropdownMenu(this);
 	menu.setText(Locale.import);
 	menu.size.set(100, 25);
@@ -25,7 +25,7 @@ function AssetExplorerMenu(parent)
 		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
 	}, Global.FILE_PATH + "icons/models/models.png");
 
-	//Load Font
+	// Load Font
 	menu.addOption("Font", function()
 	{
 		FileSystem.chooseFile(function(files)
@@ -37,7 +37,7 @@ function AssetExplorerMenu(parent)
 		}, ".json, .ttf, .otf");
 	}, Global.FILE_PATH + "icons/misc/font.png");
 
-	//Load text
+	// Load text
 	menu.addOption(Locale.text, function()
 	{
 		FileSystem.chooseFile(function(files)
@@ -49,7 +49,7 @@ function AssetExplorerMenu(parent)
 		}, ".js, .txt, .glsl, .json, .xml, .yaml, .csv, .css, .html");
 	}, Global.FILE_PATH + "icons/misc/file.png");
 
-	//Audio file
+	// Audio file
 	menu.addOption(Locale.audio, function()
 	{
 		FileSystem.chooseFile(function(files)
@@ -61,7 +61,7 @@ function AssetExplorerMenu(parent)
 		}, "audio/*");
 	}, Global.FILE_PATH + "icons/misc/audio.png");
 	
-	//Spine Animation
+	// Spine Animation
 	if(Nunu.runningOnDesktop())
 	{
 		menu.addOption("Spine Animation", function()
@@ -78,13 +78,13 @@ function AssetExplorerMenu(parent)
 
 	menu.updateInterface();
 
-	//Textures
+	// Textures
 	var texture = new DropdownMenu(this);
 	texture.setText(Locale.texture);
 	texture.size.set(100, 25);
 	texture.position.set(100, 0);
 
-	//Image texture
+	// Image texture
 	texture.addOption(Locale.texture, function()
 	{
 		FileSystem.chooseFile(function(files)
@@ -96,7 +96,7 @@ function AssetExplorerMenu(parent)
 		}, "image/*");
 	}, Global.FILE_PATH + "icons/misc/image.png");
 
-	//Spritesheet texture
+	// Spritesheet texture
 	texture.addOption("SpriteSheet Texture", function()
 	{
 		FileSystem.chooseFile(function(files)
@@ -121,7 +121,7 @@ function AssetExplorerMenu(parent)
 		}, "image/*");
 	}, Global.FILE_PATH + "icons/misc/grid.png");
 
-	//Cube texture
+	// Cube texture
 	texture.addOption("Cube Texture", function()
 	{
 		var texture = new CubeTexture([Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage]);
@@ -129,7 +129,7 @@ function AssetExplorerMenu(parent)
 		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 	}, Global.FILE_PATH + "icons/misc/cube.png");
 
-	//Canvas texture
+	// Canvas texture
 	texture.addOption("Canvas Texture", function()
 	{
 		var texture = new CanvasTexture(512, 512);
@@ -138,7 +138,7 @@ function AssetExplorerMenu(parent)
 		Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 	}, Global.FILE_PATH + "icons/misc/canvas.png");
 
-	//Video texture
+	// Video texture
 	texture.addOption("Video Texture", function()
 	{
 		FileSystem.chooseFile(function(files)
@@ -150,7 +150,7 @@ function AssetExplorerMenu(parent)
 		}, "video/*");
 	}, Global.FILE_PATH + "icons/misc/video.png");
 
-	//Webcam texture
+	// Webcam texture
 	texture.addOption("Webcam Texture", function()
 	{
 		var texture = new WebcamTexture();
@@ -160,7 +160,7 @@ function AssetExplorerMenu(parent)
 
 	texture.updateInterface();
 
-	//Material
+	// Material
 	var material = new DropdownMenu(this);
 	material.setText(Locale.material);
 	material.size.set(100, 25);
@@ -294,7 +294,7 @@ function AssetExplorerMenu(parent)
 
 	material.updateInterface();
 
-	//Create menu
+	// Create menu
 	var create = new DropdownMenu(this);
 	create.setText("Create");
 	create.size.set(100, 25);

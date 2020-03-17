@@ -5,7 +5,7 @@
  * 
  * A skeleton contains bones that are used to animate the vertices of the geometry.
  * 
- * Based on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh
+ * Based on THREE.SkinnedMesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/SkinnedMesh
  * 
  * @class SkinnedMesh
  * @module Meshes
@@ -61,7 +61,7 @@ SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
  */
 SkinnedMesh.prototype.dispose = function()
 {
-	//Material and geometry
+	// Material and geometry
 	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
@@ -101,7 +101,7 @@ SkinnedMesh.prototype.toJSON = function(meta)
 		}
 	});
 
-	//Bind mode and matrix
+	// Bind mode and matrix
 	if(this.bindMode !== undefined)
 	{
 		data.object.bindMode = this.bindMode;

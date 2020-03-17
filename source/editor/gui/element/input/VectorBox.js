@@ -10,7 +10,7 @@ function VectorBox(parent)
 {
 	Element.call(this, parent, "div");
 
-	//X Text
+	// X Text
 	this.xText = document.createElement("div");
 	this.xText.style.position = "absolute";
 	this.xText.style.width = "15px";
@@ -37,12 +37,12 @@ function VectorBox(parent)
 		return input;
 	}
 
-	//X
+	// X
 	this.x = createInput();
 	this.x.style.left = "15px";
 	this.element.appendChild(this.x);
 
-	//Y Text
+	// Y Text
 	this.yText = document.createElement("div");
 	this.yText.style.position = "absolute";
 	this.yText.style.width = "15px";
@@ -51,11 +51,11 @@ function VectorBox(parent)
 	this.yText.appendChild(document.createTextNode("Y"));
 	this.element.appendChild(this.yText);
 
-	//Y
+	// Y
 	this.y = createInput();
 	this.element.appendChild(this.y);
 
-	//Z Text
+	// Z Text
 	this.zText = document.createElement("div");
 	this.zText.style.position = "absolute";
 	this.zText.style.width = "15px";
@@ -64,11 +64,11 @@ function VectorBox(parent)
 	this.zText.appendChild(document.createTextNode("Z"));
 	this.element.appendChild(this.zText);
 
-	//Z
+	// Z
 	this.z = createInput();
 	this.element.appendChild(this.z);
 
-	//W Text
+	// W Text
 	this.wText = document.createElement("div");
 	this.wText.style.position = "absolute";
 	this.wText.style.width = "15px";
@@ -77,11 +77,11 @@ function VectorBox(parent)
 	this.wText.appendChild(document.createTextNode("W"));
 	this.element.appendChild(this.wText);
 
-	//W
+	// W
 	this.w = createInput();
 	this.element.appendChild(this.w);
 
-	//Order
+	// Order
 	this.order = "XYZ";
 	this.type = VectorBox.VECTOR3;
 }

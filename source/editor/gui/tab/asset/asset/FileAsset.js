@@ -8,7 +8,7 @@ function FileAsset(parent)
 	
 	var self = this;
 
-	//Image
+	// Image
 	this.image = document.createElement("img");
 	this.image.style.position = "absolute";
 	this.image.style.top = "5%";
@@ -17,7 +17,7 @@ function FileAsset(parent)
 	this.image.style.height = "66%";
 	this.element.appendChild(this.image);
 
-	//Context menu event
+	// Context menu event
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
@@ -73,7 +73,7 @@ function FileAsset(parent)
 	};
 
 
-	//Open text editor
+	// Open text editor
 	this.element.ondblclick = function()
 	{
 		var tab = Editor.gui.tab.getTab(TextEditor, self.asset);

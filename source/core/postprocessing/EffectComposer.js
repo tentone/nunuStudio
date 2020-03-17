@@ -196,15 +196,15 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 	{
 		var pass = this.passes[i];
 
-		//Render pass if its enabled
+		// Render pass if its enabled
 		if(pass.enabled)
 		{
 			pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
 
-			//If rendered to screen stop here
+			// If rendered to screen stop here
 			if(pass.renderToScreen)
 			{
-				//Copy writeBuffer to screen
+				// Copy writeBuffer to screen
 				if(pass.copyToScreen)
 				{
 					this.copyPass.renderToScreen = true;
@@ -214,7 +214,7 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 				break;
 			}
 
-			//Swap read and write buffers
+			// Swap read and write buffers
 			if(pass.needsSwap)
 			{
 				if(maskActive)
@@ -228,7 +228,7 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 				this.swapBuffers();
 			}
 
-			//Check mask passes
+			// Check mask passes
 			if(THREE.MaskPass !== undefined)
 			{
 				if(pass instanceof THREE.MaskPass)

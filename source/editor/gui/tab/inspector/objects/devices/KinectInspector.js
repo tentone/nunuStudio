@@ -6,7 +6,7 @@ function KinectInspector(parent, object)
 
 	var self = this;
 
-	//Debug model
+	// Debug model
 	this.debugModel = new CheckBox(this.form);
 	this.form.addText("Debug model");
 	this.debugModel.size.set(18, 18);

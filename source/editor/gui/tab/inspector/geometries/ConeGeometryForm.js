@@ -15,7 +15,7 @@ function ConeGeometryForm(form, object)
 	this.form.addText(Locale.cone);
 	this.form.nextRow();
 
-	//Radius
+	// Radius
 	this.form.addText(Locale.radius);
 	this.radius = new NumberBox(this.form);
 	this.radius.size.set(0, 18);
@@ -32,7 +32,7 @@ function ConeGeometryForm(form, object)
 	this.form.add(this.height);
 	this.form.nextRow();
 
-	//Segments
+	// Segments
 	this.form.addText(Locale.segments);
 	this.form.nextRow();
 
@@ -56,7 +56,7 @@ function ConeGeometryForm(form, object)
 	this.form.add(this.heightSegments);
 	this.form.nextRow();
 
-	//Buffer
+	// Buffer
 	this.buffer = new CheckBox(this.form);
 	this.form.addText(Locale.buffered);
 	this.buffer.size.set(18, 18);

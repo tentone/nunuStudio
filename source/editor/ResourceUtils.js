@@ -99,7 +99,7 @@ ResourceUtils.removeDuplicated = function(object)
 	// Check if two resources are similar
 	function areEqual(a, b)
 	{
-		//TODO <ADD CODE HERE>
+		// TODO <ADD CODE HERE>
 	}
 
 	var textures = [];
@@ -231,7 +231,7 @@ ResourceUtils.searchObject = function(object, manager, target)
 			return;
 		}
 
-		//Fonts
+		// Fonts
 		if(child.font instanceof Font)
 		{
 			if(manager.fonts[child.font.uuid] === undefined)
@@ -240,7 +240,7 @@ ResourceUtils.searchObject = function(object, manager, target)
 			}
 		}
 
-		//Audio
+		// Audio
 		if(child.audio instanceof Audio)
 		{
 			if(manager.audio[child.audio.uuid] === undefined)
@@ -249,7 +249,7 @@ ResourceUtils.searchObject = function(object, manager, target)
 			}
 		}
 
-		//Material/textures
+		// Material/textures
 		if(child.material !== undefined && !(child instanceof TextBitmap || child instanceof TextSprite ||child instanceof LensFlare || child instanceof ParticleEmitter || child instanceof Sky || child instanceof SpineAnimation))
 		{
 			if(child.material instanceof THREE.Material)
@@ -280,7 +280,7 @@ ResourceUtils.searchObject = function(object, manager, target)
 			}
 		}
 
-		//Geometries
+		// Geometries
 		if((child instanceof THREE.Mesh || child instanceof THREE.SkinnedMesh) && !(child instanceof TextBitmap))
 		{
 			if(child.geometry instanceof THREE.BufferGeometry || child.geometry instanceof THREE.Geometry)
@@ -292,7 +292,7 @@ ResourceUtils.searchObject = function(object, manager, target)
 			}
 		}
 
-		//Textures
+		// Textures
 		if(child.texture !== undefined && !(child instanceof TextSprite))
 		{
 			addTexture(child.texture);
@@ -353,12 +353,12 @@ ResourceUtils.searchObject = function(object, manager, target)
 
 	function addResourcesTexture(texture)
 	{
-		//Image
+		// Image
 		if(texture.img instanceof Image)
 		{
 			addImage(texture.img);
 		}
-		//Video
+		// Video
 		if(texture.video instanceof Video)
 		{
 			if(manager.videos[texture.video.uuid] === undefined)
@@ -366,7 +366,7 @@ ResourceUtils.searchObject = function(object, manager, target)
 				resources.videos[texture.video.uuid] = texture.video;
 			}
 		}
-		//Images array
+		// Images array
 		if(texture.images !== undefined)
 		{
 			for(var i = 0; i < texture.images.length; i++)

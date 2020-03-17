@@ -23,22 +23,22 @@ function Interface()
 	var rightTop = right.elementA;
 	var rightBottom = right.elementB;
 
-	//Asset
+	// Asset
 	this.assetExplorer = leftBottom.addTab(AssetExplorer, false);
 
-	//Console
+	// Console
 	this.console = leftBottom.addTab(ConsoleTab, false);
 
-	//Animations
+	// Animations
 	this.animation = leftBottom.addTab(AnimationTab, false);
 
-	//Tree view
+	// Tree view
 	this.tree = rightTop.addTab(TreeView, false)
 	
-	//Inspector
+	// Inspector
 	this.inspector = rightBottom.addTab(InspectorContainer, false);
 
-	//Top Bar
+	// Top Bar
 	this.menuBar = new MainMenu(DocumentBody);
 }
 
@@ -52,7 +52,7 @@ Interface.prototype.updateInterface = function()
 	this.tab.updateInterface();
 };
 
-//Open to save program window
+// Open to save program window
 Interface.prototype.saveProgram = function()
 {
 	if(Nunu.runningOnDesktop())
@@ -71,7 +71,7 @@ Interface.prototype.saveProgram = function()
 	}
 };
 
-//Open to load program window
+// Open to load program window
 Interface.prototype.loadProgram = function()
 {
 	if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.loadProject))
@@ -86,7 +86,7 @@ Interface.prototype.loadProgram = function()
 	}
 };
 
-//Create new program
+// Create new program
 Interface.prototype.newProgram = function()
 {
 	if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.createProject))

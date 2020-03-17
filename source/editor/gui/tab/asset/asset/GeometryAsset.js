@@ -8,7 +8,7 @@ function GeometryAsset(parent)
 	
 	var self = this;
 
-	//Image
+	// Image
 	this.image = document.createElement("img");
 	this.image.style.position = "absolute";
 	this.image.style.top = "5%";
@@ -17,7 +17,7 @@ function GeometryAsset(parent)
 	this.image.style.height = "66%";
 	this.element.appendChild(this.image);
 
-	//Context menu event
+	// Context menu event
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
@@ -51,10 +51,10 @@ function GeometryAsset(parent)
 		context.updateInterface();
 	};
 
-	//Drag start
+	// Drag start
 	this.element.ondragstart = function(event)
 	{
-		//Insert into drag buffer
+		// Insert into drag buffer
 		if(self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
@@ -62,7 +62,7 @@ function GeometryAsset(parent)
 		}
 	};
 
-	//Drag end (called after of ondrop)
+	// Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
 		DragBuffer.pop(self.asset.uuid);

@@ -13,7 +13,7 @@ function Media(parent, type)
 {
 	Element.call(this, parent, "div");
 
-	//Media
+	// Media
 	this.media = document.createElement(type);
 	this.element.appendChild(this.media);
 }

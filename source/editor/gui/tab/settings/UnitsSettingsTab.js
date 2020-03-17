@@ -8,6 +8,7 @@ function UnitsSettingsTab(parent, closeable, container, index)
 
 	var self = this;
 
+	// Angle
 	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 125;
 	this.form.setAutoSize(false);
@@ -27,6 +28,7 @@ function UnitsSettingsTab(parent, closeable, container, index)
 	this.form.add(this.angle);
 	this.form.nextRow();
 
+	// Distance
 	this.form.addText(Locale.distance);
 	this.distance = new DropdownList(this.form);
 	this.distance.size.set(150, 18);

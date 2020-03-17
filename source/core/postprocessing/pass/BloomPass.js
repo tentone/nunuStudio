@@ -4,7 +4,7 @@
  * Simple bloom effect pass.
  *
  * @class BloomPass
- * @author alteredq / http://alteredqualia.com/
+ * @author alteredq / http:// alteredqualia.com/
  * @module Postprocessing
  * @param {number} strength  Bloom effect strength.
  * @param {number} kernelSize Bloom kernel size.
@@ -34,17 +34,17 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 	sigma = (sigma !== undefined) ? sigma : 4.0;
 	resolution = (resolution !== undefined) ? resolution : 256;
 
-	//Render targets
+	// Render targets
 	this.renderTargetX = new THREE.WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
 
-	//Render targets
+	// Render targets
 	this.renderTargetY = new THREE.WebGLRenderTarget(resolution, resolution, Pass.RGBALinear);
 
-	//Copy material
+	// Copy material
 	this.copyUniforms = THREE.UniformsUtils.clone(THREE.CopyShader.uniforms);
 	this.copyUniforms["opacity"].value = strength;
 
-	//Copy material
+	// Copy material
 	this.materialCopy = new THREE.ShaderMaterial(
 	{
 		uniforms: this.copyUniforms,
@@ -54,7 +54,7 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 		transparent: true
 	});
 
-	//Convolution material
+	// Convolution material
 	this.convolutionUniforms = THREE.UniformsUtils.clone(THREE.ConvolutionShader.uniforms);
 	this.convolutionUniforms["uImageIncrement"].value = BloomPass.blurX;
 	this.convolutionUniforms["cKernel"].value = THREE.ConvolutionShader.buildKernel(sigma);
@@ -84,7 +84,7 @@ BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 		renderer.context.disable(renderer.context.STENCIL_TEST);
 	}
 
-	//Render quad with blured scene into texture (convolution pass 1)
+	// Render quad with blured scene into texture (convolution pass 1)
 	this.quad.material = this.materialConvolution;
 	this.convolutionUniforms["tDiffuse"].value = readBuffer.texture;
 	this.convolutionUniforms["uImageIncrement"].value = BloomPass.blurX;
@@ -92,14 +92,14 @@ BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	renderer.clear(true, true, true);
 	renderer.render(this.scene, this.camera, this.renderTargetX, true);
 
-	//Render quad with blured scene into texture (convolution pass 2)
+	// Render quad with blured scene into texture (convolution pass 2)
 	this.convolutionUniforms["tDiffuse"].value = this.renderTargetX.texture;
 	this.convolutionUniforms["uImageIncrement"].value = BloomPass.blurY;
 	renderer.setRenderTarget(this.renderTargetY);
 	renderer.clear(true, true, true);
 	renderer.render(this.scene, this.camera);
 
-	//Render original scene with superimposed blur to texture
+	// Render original scene with superimposed blur to texture
 	this.quad.material = this.materialCopy;
 	this.copyUniforms["tDiffuse"].value = this.renderTargetY.texture;
 

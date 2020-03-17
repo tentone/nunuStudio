@@ -33,13 +33,13 @@ Base64Utils.isBase64 = function(data)
 		return false;
 	}
 
-	//Check if it has a base64 header
+	// Check if it has a base64 header
 	if(data.startsWith("data:"))
 	{
 		return true;
 	}
 
-	//Check string data
+	// Check string data
 	for(var i = 0; i < data.length; i++)
 	{
 		if(!Base64Utils.encoding.includes(data.charAt(i)))
@@ -98,7 +98,7 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 	var a, b, c, d;
 	var chunk;
 
-	//Chunks of 3 bytes for cycle
+	// Chunks of 3 bytes for cycle
 	for(var i = 0; i < length; i += 3)
 	{
 		chunk = (view[i] << 16) | (view[i + 1] << 8) | view[i + 2];
@@ -111,7 +111,7 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 		base64 += Base64Utils.encoding[a] + Base64Utils.encoding[b] + Base64Utils.encoding[c] + Base64Utils.encoding[d]
 	}
 
-	//Remaining bytes
+	// Remaining bytes
 	if(remainder === 1)
 	{
 		chunk = view[length];

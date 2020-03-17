@@ -32,17 +32,17 @@
  */
 function ParticleGroup(options)
 {
-	//Ensure we have a map of options to play with
+	// Ensure we have a map of options to play with
 	options = ShaderUtils.ensureTypedArg(options, ShaderUtils.types.OBJECT, {});
 	options.texture = ShaderUtils.ensureTypedArg(options.texture, ShaderUtils.types.OBJECT, {});
 
-	//Assign a UUID to this instance
+	// Assign a UUID to this instance
 	this.uuid = THREE.Math.generateUUID();
 
-	//If no deltaTime value is passed to the ParticleGroup.tick function, the value of this property will be used to advance the simulation.
+	// If no deltaTime value is passed to the ParticleGroup.tick function, the value of this property will be used to advance the simulation.
 	this.fixedTimeStep = ShaderUtils.ensureTypedArg(options.fixedTimeStep, ShaderUtils.types.NUMBER, 0.016);
 
-	//Set properties used in the uniforms map, starting with the texture stuff.
+	// Set properties used in the uniforms map, starting with the texture stuff.
 	this.texture = ShaderUtils.ensureInstanceOf(options.texture.value, THREE.Texture, null);
 	this.textureFrames = ShaderUtils.ensureInstanceOf(options.texture.frames, THREE.Vector2, new THREE.Vector2(1, 1));
 	this.textureFrameCount = ShaderUtils.ensureTypedArg(options.texture.frameCount, ShaderUtils.types.NUMBER, this.textureFrames.x * this.textureFrames.y);
@@ -53,7 +53,7 @@ function ParticleGroup(options)
 	this.colorize = ShaderUtils.ensureTypedArg(options.colorize, ShaderUtils.types.BOOLEAN, true);
 	this.maxParticleCount = ShaderUtils.ensureTypedArg(options.maxParticleCount, ShaderUtils.types.NUMBER, null);
 
-	//Set properties used to define the ShaderMaterial"s appearance.
+	// Set properties used to define the ShaderMaterial"s appearance.
 	this.blending = ShaderUtils.ensureTypedArg(options.blending, ShaderUtils.types.NUMBER, THREE.AdditiveBlending);
 	this.transparent = ShaderUtils.ensureTypedArg(options.transparent, ShaderUtils.types.BOOLEAN, true);
 	this.alphaTest = parseFloat(ShaderUtils.ensureTypedArg(options.alphaTest, ShaderUtils.types.NUMBER, 0.0));
@@ -65,14 +65,14 @@ function ParticleGroup(options)
 	this.emitters = [];
 	this.emitterIDs = [];
 
-	//Create properties for use by the emitter pooling functions.
+	// Create properties for use by the emitter pooling functions.
 	this.pool = [];
 	this.poolCreationSettings = null;
 	this._createNewWhenPoolEmpty = 0;
 
-	//Whether all attributes should be forced to updated their entire buffer contents on the next tick.
+	// Whether all attributes should be forced to updated their entire buffer contents on the next tick.
 	//
-	//Used when an emitter is removed.
+	// Used when an emitter is removed.
 	this._attributesNeedRefresh = false;
 	this._attributesNeedDynamicReset = false;
 
@@ -151,11 +151,11 @@ function ParticleGroup(options)
 	this.attributes =
 	{
 		position: new ShaderAttribute("v3", true),
-		acceleration: new ShaderAttribute("v4", true), //w component is drag
+		acceleration: new ShaderAttribute("v4", true), // w component is drag
 		velocity: new ShaderAttribute("v3", true),
 		rotation: new ShaderAttribute("v4", true),
 		rotationCenter: new ShaderAttribute("v3", true),
-		params: new ShaderAttribute("v4", true), //Holds (alive, age, delay, wiggle)
+		params: new ShaderAttribute("v4", true), // Holds (alive, age, delay, wiggle)
 		size: new ShaderAttribute("v4", true),
 		angle: new ShaderAttribute("v4", true),
 		color: new ShaderAttribute("v4", true),
@@ -199,9 +199,9 @@ ParticleGroup.prototype._updateDefines = function()
 	for(var i = emitters.length - 1; i >= 0; --i) {
 		emitter = emitters[i];
 
-		//Only do angle calculation if there"s no spritesheet defined.
+		// Only do angle calculation if there"s no spritesheet defined.
 		//
-		//Saves calculations being done and then overwritten in the shaders.
+		// Saves calculations being done and then overwritten in the shaders.
 		if(!defines.SHOULD_CALCULATE_SPRITE) {
 			defines.SHOULD_ROTATE_TEXTURE = defines.SHOULD_ROTATE_TEXTURE || !!Math.max(
 				Math.max.apply(null, emitter.angle.value),
@@ -231,7 +231,7 @@ ParticleGroup.prototype._applyAttributesToGeometry = function()
 	var attribute;
 	var geometryAttribute;
 
-	//Loop through all the shader attributes and assign (or re-assign) typed array buffers to each one.
+	// Loop through all the shader attributes and assign (or re-assign) typed array buffers to each one.
 	for(var attr in attributes)
 	{
 		if(attributes.hasOwnProperty(attr))
@@ -239,26 +239,26 @@ ParticleGroup.prototype._applyAttributesToGeometry = function()
 			attribute = attributes[attr];
 			geometryAttribute = geometryAttributes[attr];
 
-			//Update the array if this attribute exists on the geometry.
+			// Update the array if this attribute exists on the geometry.
 			//
-			//This needs to be done because the attribute"s typed array might have been resized and reinstantiated, and might now be looking at a different ArrayBuffer, so reference needs updating.
+			// This needs to be done because the attribute"s typed array might have been resized and reinstantiated, and might now be looking at a different ArrayBuffer, so reference needs updating.
 			if(geometryAttribute)
 			{
 				geometryAttribute.array = attribute.typedArray.array;
 			}
 
-			//Add the attribute to the geometry if it doesn't already exist.
+			// Add the attribute to the geometry if it doesn't already exist.
 			else
 			{
 				geometry.setAttribute(attr, attribute.bufferAttribute);
 			}
 
-			//Mark the attribute as needing an update the next time a frame is rendered.
+			// Mark the attribute as needing an update the next time a frame is rendered.
 			attribute.bufferAttribute.needsUpdate = true;
 		}
 	}
 
-	//Mark the draw range on the geometry. This will ensure only the values in the attribute buffers that are associated with a particle will be used in render cycle.
+	// Mark the draw range on the geometry. This will ensure only the values in the attribute buffers that are associated with a particle will be used in render cycle.
 	this.geometry.setDrawRange(0, this.particleCount);
 };
 
@@ -270,19 +270,19 @@ ParticleGroup.prototype._applyAttributesToGeometry = function()
  */
 ParticleGroup.prototype.addEmitter = function(emitter)
 {
-	//Ensure an actual emitter instance is passed here.
+	// Ensure an actual emitter instance is passed here.
 	if(emitter instanceof ParticleEmitterControl === false)
 	{
 		console.error("nunuStudio: emitter argument must be instance of ParticleEmitterControl.", emitter);
 		return;
 	}
-	//If the emitter already exists as a member of this group, then stop here, we don't want to add it again.
+	// If the emitter already exists as a member of this group, then stop here, we don't want to add it again.
 	else if(this.emitterIDs.indexOf(emitter.uuid) > -1)
 	{
 		console.error("nunuStudio: ParticleEmitterControl already exists in this group.");
 		return;
 	}
-	//And finally, if the emitter is a member of another group, don't add it to this group.
+	// And finally, if the emitter is a member of another group, don't add it to this group.
 	else if(emitter.group !== null)
 	{
 		console.error("nunuStudio: ParticleEmitterControl already belongs to another group.");
@@ -293,34 +293,34 @@ ParticleGroup.prototype.addEmitter = function(emitter)
 	var start = this.particleCount;
 	var end = start + emitter.particleCount;
 
-	//Update this group"s particle count.
+	// Update this group"s particle count.
 	this.particleCount = end;
 
-	//Emit a warning if the emitter being added will exceed the buffer sizes specified.
+	// Emit a warning if the emitter being added will exceed the buffer sizes specified.
 	if(this.maxParticleCount !== null && this.particleCount > this.maxParticleCount)
 	{
 		console.warn("nunuStudio: ParticleGroup maxParticleCount exceeded. Requesting", this.particleCount, "particles, can support only", this.maxParticleCount);
 	}
 
-	//Set the particlesPerSecond value (PPS) on the emitter. It's used to determine how many particles to release on a per-frame basis.
+	// Set the particlesPerSecond value (PPS) on the emitter. It's used to determine how many particles to release on a per-frame basis.
 	emitter._calculatePPSValue(emitter.maxAge._value + emitter.maxAge._spread);
 	emitter._setBufferUpdateRanges(this.attributeKeys);
 
-	//Store the offset value in the TypedArray attributes for this emitter.
+	// Store the offset value in the TypedArray attributes for this emitter.
 	emitter._setAttributeOffset(start);
 
-	//Save a reference to this group on the emitter so it knows where it belongs.
+	// Save a reference to this group on the emitter so it knows where it belongs.
 	emitter.group = this;
 
-	//Store reference to the attributes on the emitter for easier access during the emitter"s tick function.
+	// Store reference to the attributes on the emitter for easier access during the emitter"s tick function.
 	emitter.attributes = this.attributes;
 
-	//Ensure the attributes and their BufferAttributes exist, and their TypedArrays are of the correct size.
+	// Ensure the attributes and their BufferAttributes exist, and their TypedArrays are of the correct size.
 	for(var attr in attributes)
 	{
 		if(attributes.hasOwnProperty(attr))
 		{
-			//When creating a buffer, pass through the maxParticle count if one is specified.
+			// When creating a buffer, pass through the maxParticle count if one is specified.
 			attributes[attr]._createBufferAttribute(
 				this.maxParticleCount !== null ?
 				this.maxParticleCount :
@@ -329,7 +329,7 @@ ParticleGroup.prototype.addEmitter = function(emitter)
 		}
 	}
 
-	//Loop through each particle this emitter wants to have, and create the attributes values, storing them in the TypedArrays that each attribute holds.
+	// Loop through each particle this emitter wants to have, and create the attributes values, storing them in the TypedArrays that each attribute holds.
 	for(var i = start; i < end; ++i)
 	{
 		emitter._assignPositionValue(i);
@@ -343,22 +343,22 @@ ParticleGroup.prototype.addEmitter = function(emitter)
 		emitter._assignColorValue(i);
 	}
 
-	//Update the geometry and make sure the attributes are referencing the typed arrays properly.
+	// Update the geometry and make sure the attributes are referencing the typed arrays properly.
 	this._applyAttributesToGeometry();
 
-	//Store this emitter in this group"s emitter"s store.
+	// Store this emitter in this group"s emitter"s store.
 	this.emitters.push(emitter);
 	this.emitterIDs.push(emitter.uuid);
 
-	//Update certain flags to enable shader calculations only if they"re necessary.
+	// Update certain flags to enable shader calculations only if they"re necessary.
 	this._updateDefines(emitter);
 
-	//Update the material since defines might have changed
+	// Update the material since defines might have changed
 	this.material.needsUpdate = true;
 	this.geometry.needsUpdate = true;
 	this._attributesNeedRefresh = true;
 
-	//Return the group to enable chaining.
+	// Return the group to enable chaining.
 	return this;
 };
 
@@ -374,38 +374,38 @@ ParticleGroup.prototype.removeEmitter = function(emitter)
 {
 	var emitterIndex = this.emitterIDs.indexOf(emitter.uuid);
 
-	//Ensure an actual emitter instance is passed here.
+	// Ensure an actual emitter instance is passed here.
 	if(emitter instanceof ParticleEmitterControl === false)
 	{
 		console.error("nunuStudio: emitter argument must be instance of ParticleEmitterControl. Was provided with:", emitter);
 		return;
 	}
 
-	//Issue an error if the emitter isn't a member of this group.
+	// Issue an error if the emitter isn't a member of this group.
 	else if(emitterIndex === -1)
 	{
 		console.error("nunuStudio: ParticleEmitterControl does not exist in this group. Will not remove.");
 		return;
 	}
 
-	//Kill all particles by marking them as dead and their age as 0.
+	// Kill all particles by marking them as dead and their age as 0.
 	var start = emitter.attributeOffset;
 	var end = start + emitter.particleCount;
 	var params = this.attributes.params.typedArray;
 
-	//Set alive and age to zero.
+	// Set alive and age to zero.
 	for(var i = start; i < end; ++i)
 	{
 		params.array[i * 4] = 0.0;
 		params.array[i * 4 + 1] = 0.0;
 	}
 
-	//Remove the emitter from this group"s "store".
+	// Remove the emitter from this group"s "store".
 	this.emitters.splice(emitterIndex, 1);
 	this.emitterIDs.splice(emitterIndex, 1);
 
-	//Remove this emitter"s attribute values from all shader attributes.
-	//The .splice() call here also marks each attribute"s buffer as needing to update it's entire contents.
+	// Remove this emitter"s attribute values from all shader attributes.
+	// The .splice() call here also marks each attribute"s buffer as needing to update it's entire contents.
 	for(var attr in this.attributes)
 	{
 		if(this.attributes.hasOwnProperty(attr))
@@ -414,13 +414,13 @@ ParticleGroup.prototype.removeEmitter = function(emitter)
 		}
 	}
 
-	//Ensure this group"s particle count is correct.
+	// Ensure this group"s particle count is correct.
 	this.particleCount -= emitter.particleCount;
 
-	//Call the emitter"s remove method.
+	// Call the emitter"s remove method.
 	emitter._onRemove();
 
-	//Set a flag to indicate that the attribute buffers should be updated in their entirety on the next frame.
+	// Set a flag to indicate that the attribute buffers should be updated in their entirety on the next frame.
 	this._attributesNeedRefresh = true;
 };
 
@@ -498,11 +498,11 @@ ParticleGroup.prototype.addPool = function(numEmitters, emitterOptions, createNe
 {
 	var emitter;
 
-	//Save relevant settings and flags.
+	// Save relevant settings and flags.
 	this.poolCreationSettings = emitterOptions;
 	this._createNewWhenPoolEmpty = !!createNew;
 
-	//Create the emitters, add them to this group and the pool.
+	// Create the emitters, add them to this group and the pool.
 	for(var i = 0; i < numEmitters; ++i)
 	{
 		if(Array.isArray(emitterOptions))
@@ -625,19 +625,19 @@ ParticleGroup.prototype.tick = function(dt)
 	var i;
 	var attrs = this.attributes;
 
-	//Update uniform values.
+	// Update uniform values.
 	this._updateUniforms(deltaTime);
 
-	//Reset buffer update ranges on the shader attributes.
+	// Reset buffer update ranges on the shader attributes.
 	this._resetBufferRanges();
 
-	//If nothing needs updating, then stop here.
+	// If nothing needs updating, then stop here.
 	if(numEmitters === 0 && this._attributesNeedRefresh === false && this._attributesNeedDynamicReset === false)
 	{
 		return;
 	}
 
-	//Loop through each emitter in this group and simulate it, then update the shader attribute buffers.
+	// Loop through each emitter in this group and simulate it, then update the shader attribute buffers.
 	for(var i = 0, emitter; i < numEmitters; ++i)
 	{
 		emitter = emitters[i];
@@ -645,7 +645,7 @@ ParticleGroup.prototype.tick = function(dt)
 		this._updateBuffers(emitter);
 	}
 
-	//If the shader attributes have been refreshed, then the dynamic properties of each buffer attribute will need to be reset.
+	// If the shader attributes have been refreshed, then the dynamic properties of each buffer attribute will need to be reset.
 	if(this._attributesNeedDynamicReset === true)
 	{
 		i = this.attributeCount - 1;

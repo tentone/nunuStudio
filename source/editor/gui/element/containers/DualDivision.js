@@ -7,22 +7,22 @@ function DualDivision(parent)
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	//Division A
+	// Division A
 	this.divA = new Element(this, "div");
 	this.divA.element.style.backgroundColor = Editor.theme.panelColor;
 
-	//Division B
+	// Division B
 	this.divB = new Element(this, "div");
 	this.divB.element.style.backgroundColor = Editor.theme.panelColor;
 	
-	//Resize tab
+	// Resize tab
 	this.resizeTab = document.createElement("div");
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
 	this.element.appendChild(this.resizeTab);
 
-	//Resize Tab
+	// Resize Tab
 	this.tabPosition = 0.5;
 	this.tabPositionMax = 1;
 	this.tabPositionMin = 0;
@@ -31,13 +31,13 @@ function DualDivision(parent)
 
 	var self = this;
 
-	//Tab mouse down
+	// Tab mouse down
 	this.resizeTab.onmousedown = function(event)
 	{
 		self.manager.create();
 	};
 
-	//Tab resize event manager
+	// Tab resize event manager
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
@@ -50,7 +50,7 @@ function DualDivision(parent)
 			self.tabPosition += event.movementY / self.size.y;
 		}
 
-		//Limit tab position
+		// Limit tab position
 		if(self.tabPosition > self.tabPositionMax)
 		{
 			self.tabPosition = self.tabPositionMax;
@@ -69,7 +69,7 @@ function DualDivision(parent)
 		self.manager.destroy();
 	});
 
-	//onResize callback
+	// onResize callback
 	this.onResize = function()
 	{
 		Editor.gui.updateInterface();

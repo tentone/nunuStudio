@@ -3,7 +3,7 @@
 /**
  * Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.
  * 
- * Based on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.
+ * Based on the official three.js runtime code available at https:// github.com/EsotericSoftware/spine-runtimes.
  * 
  * More information about spine available at www.esotericsoftware.com.
  * 
@@ -249,7 +249,7 @@ SpineAnimation.prototype.setSkin = function(name)
 
 SpineAnimation.prototype.toJSON = function(meta)
 {
-	//Store textures
+	// Store textures
 	var textures = [];
 	var self = this;
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
@@ -261,12 +261,12 @@ SpineAnimation.prototype.toJSON = function(meta)
 		}
 	});
 
-	//Animation data
+	// Animation data
 	data.object.json = this.json;
 	data.object.atlas = this.atlas;
 	data.object.textures = textures;
 
-	//Default animation and skin
+	// Default animation and skin
 	if(this.animation !== null)
 	{
 		data.object.animation = this.animation;

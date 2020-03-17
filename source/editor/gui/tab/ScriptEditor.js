@@ -35,7 +35,7 @@ function ScriptEditor(parent, closeable, container, index)
 		"Ctrl-Space": function(cm){self.server.complete(cm);}
 	})
 
-	//Change
+	// Change
 	this.code.on("change", function(cm)
 	{
 		if(!cm.state.focused)
@@ -46,13 +46,13 @@ function ScriptEditor(parent, closeable, container, index)
 		self.updateCode();
 	});
 
-	//Cursor activity event
+	// Cursor activity event
 	this.code.on("cursorActivity", function(cm)
 	{
 		self.server.updateArgHints(cm);
 	});
 
-	//Key pressed event
+	// Key pressed event
 	this.code.on("keypress", function(cm, event)
 	{
 		var typed = String.fromCharCode(event.charCode);
@@ -61,7 +61,7 @@ function ScriptEditor(parent, closeable, container, index)
 		{
 			self.server.complete(cm);
 
-			//If there is no tern sugestion suggest known words
+			// If there is no tern sugestion suggest known words
 			if(cm.state.completionActive == null || cm.state.completionActive.widget === null)
 			{
 				CodeMirror.commands.autocomplete(cm, null);
@@ -90,17 +90,17 @@ ScriptEditor.prototype = Object.create(CodeEditor.prototype);
 
 ScriptEditor.prototype.updateMetadata = function()
 {
-	//Name
+	// Name
 	this.setName(this.script.name);
 
-	//Check if object has a parent
+	// Check if object has a parent
 	if(this.script.parent === null)
 	{
 		this.close();
 		return;
 	}
 
-	//Check if object exists in parent
+	// Check if object exists in parent
 	var children = this.script.parent.children;
 	for(var i = 0; i < children.length; i++)
 	{
@@ -110,7 +110,7 @@ ScriptEditor.prototype.updateMetadata = function()
 		}
 	}
 
-	//If not found close tab
+	// If not found close tab
 	if(i >= children.length)
 	{
 		this.close();

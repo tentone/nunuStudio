@@ -6,7 +6,7 @@ function MaterialInspector(parent, object)
 
 	var self = this;
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(190, 18);
@@ -18,7 +18,7 @@ function MaterialInspector(parent, object)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//UUID
+	// UUID
 	if(Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
@@ -26,7 +26,7 @@ function MaterialInspector(parent, object)
 		this.form.nextRow();
 	}
 	
-	//Type
+	// Type
 	if(Editor.settings.general.showType)
 	{
 		this.form.addText(Locale.type);
@@ -34,7 +34,7 @@ function MaterialInspector(parent, object)
 		this.form.nextRow();
 	}
 
-	//Side
+	// Side
 	this.form.addText(Locale.side);
 	this.side = new DropdownList(this.form);
 	this.side.position.set(100, 85);
@@ -50,7 +50,7 @@ function MaterialInspector(parent, object)
 	this.form.add(this.side);
 	this.form.nextRow();
 
-	//Test depth
+	// Test depth
 	this.form.addText(Locale.depthTest);
 	this.depthTest = new CheckBox(this.form);
 	this.depthTest.size.set(18, 18);
@@ -62,7 +62,7 @@ function MaterialInspector(parent, object)
 	this.form.add(this.depthTest);
 	this.form.nextRow();
 	
-	//Write depth
+	// Write depth
 	this.form.addText(Locale.depthWrite);
 	this.depthWrite = new CheckBox(this.form);
 	this.depthWrite.size.set(18, 18);
@@ -74,7 +74,7 @@ function MaterialInspector(parent, object)
 	this.form.add(this.depthWrite);
 	this.form.nextRow();
 
-	//Depth mode
+	// Depth mode
 	this.form.addText(Locale.depthMode);
 	this.depthFunc = new DropdownList(this.form);
 	this.depthFunc.position.set(100, 85);
@@ -94,7 +94,7 @@ function MaterialInspector(parent, object)
 	this.form.add(this.depthFunc);
 	this.form.nextRow();
 
-	//Transparent
+	// Transparent
 	this.form.addText(Locale.transparent);
 	this.transparent = new CheckBox(this.form);
 	this.transparent.size.set(18, 18);
@@ -106,7 +106,7 @@ function MaterialInspector(parent, object)
 	this.form.add(this.transparent);
 	this.form.nextRow();
 
-	//Opacity level
+	// Opacity level
 	this.form.addText(Locale.opacity);
 	this.opacity = new Slider(this.form);
 	this.opacity.size.set(160, 18);
@@ -120,7 +120,7 @@ function MaterialInspector(parent, object)
 	this.form.add(this.opacity);
 	this.form.nextRow();
 	
-	//Alpha test
+	// Alpha test
 	this.form.addText(Locale.alphaTest);
 	this.alphaTest = new Slider(this.form);
 	this.alphaTest.size.set(160, 18);
@@ -134,7 +134,7 @@ function MaterialInspector(parent, object)
 	this.form.add(this.alphaTest);
 	this.form.nextRow();
 	
-	//Blending mode
+	// Blending mode
 	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);

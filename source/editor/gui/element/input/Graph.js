@@ -189,7 +189,7 @@ Graph.prototype.setRange = function(min, max)
 	this.min = min;
 	this.max = max;
 
-	//Limit graphs values
+	// Limit graphs values
 	for(var i in this.graph)
 	{
 		var graph = this.graph[i];
@@ -219,7 +219,7 @@ Graph.prototype.setRange = function(min, max)
 
 	this.updateScale();
 
-	//Update grid to fit new scale
+	// Update grid to fit new scale
 	for(var i = 0; i < this.graph.length; i++)
 	{
 		this.updateGraph(this.graph[i]);
@@ -238,10 +238,10 @@ Graph.prototype.setValue = function(values, name)
 	var self = this;
 	var graph = this.getGraph(name);
 
-	//Set values
+	// Set values
 	graph.values = values;
 
-	//Add buttons if necessary
+	// Add buttons if necessary
 	while(graph.buttons.length < graph.values.length)
 	{
 		var button = document.createElement("div");
@@ -297,13 +297,13 @@ Graph.prototype.setValue = function(values, name)
 		graph.buttons.push(button);
 	}
 
-	//Remove buttons if necessary
+	// Remove buttons if necessary
 	while(graph.buttons.length > graph.values.length)
 	{
 		this.element.removeChild(graph.buttons.pop());
 	}
 
-	//Check if new values are in range
+	// Check if new values are in range
 	var update = false;
 	for(var i = 0; i < values.length; i++)
 	{
@@ -321,13 +321,13 @@ Graph.prototype.setValue = function(values, name)
 		}
 	}
 
-	//If some value not in range update range
+	// If some value not in range update range
 	if(update)
 	{
 		this.setRange(this.min, this.max);
 	}
 
-	//Update graph
+	// Update graph
 	this.updateGraph(graph);
 };
 
@@ -386,13 +386,13 @@ Graph.prototype.updateGraph = function(graph)
 {
 	var width = this.size.x - this.scaleMargin;
 
-	//Get canvas context
+	// Get canvas context
 	var context = graph.canvas.getContext("2d");
 	context.clearRect(0, 0, width, this.size.y);
 	context.strokeStyle = graph.color;
 	context.lineWidth = "2";
 
-	//Draw graph and set button positions
+	// Draw graph and set button positions
 	var step = width / (graph.values.length - 1);
 	var delta = this.max - this.min;
 
@@ -428,7 +428,7 @@ Graph.prototype.updateGrid = function()
 	context.strokeStyle = "#222222";
 	context.lineWidth = "1";
 
-	//Border
+	// Border
 	context.beginPath();
 	context.rect(0, 0, width, this.size.y);
 	context.stroke();
@@ -440,7 +440,7 @@ Graph.prototype.updateGrid = function()
 		return;
 	}
 
-	//Vertical lines	
+	// Vertical lines	
 	for(var i = 0; i < width; i += step)
 	{
 		context.beginPath();
@@ -449,7 +449,7 @@ Graph.prototype.updateGrid = function()
 		context.stroke();
 	}
 
-	//Horizontal lines
+	// Horizontal lines
 	for(var i = 0; i < this.size.y; i += step)
 	{
 		context.beginPath();
@@ -465,14 +465,14 @@ Graph.prototype.updateSize = function()
 
 	var width = this.size.x - this.scaleMargin;
 
-	//Grid
+	// Grid
 	this.grid.width = width;
 	this.grid.height = this.size.y;
 	this.grid.style.width = width + "px";
 	this.grid.style.height = this.size.y + "px";
 	this.updateGrid();
 
-	//Graph
+	// Graph
 	for(var i = 0; i < this.graph.length; i++)
 	{
 		var graph = this.graph[i];
@@ -483,7 +483,7 @@ Graph.prototype.updateSize = function()
 		this.updateGraph(graph);
 	}
 
-	//Scale
+	// Scale
 	var step = (this.size.y - 14) / (this.scale.length - 1);
 	for(var i = 0; i < this.scale.length; i++)
 	{

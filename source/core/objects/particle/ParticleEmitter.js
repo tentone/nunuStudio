@@ -5,7 +5,7 @@
  *
  * SPE is a threejs based particle emitter engine.
  * 
- * Documentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html
+ * Documentation for SPE particle engine can be found here https:// squarefeet.github.io/ShaderParticleEngine/docs/api/index.html
  * 
  * @class ParticleEmitter
  * @extends {Points}
@@ -258,10 +258,10 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	this.material = material;
 	this.geometry = geometry;
 
-	//Group 
+	// Group 
 	data.object.group = this.group.toJSON(meta);
 	
-	//Emitter
+	// Emitter
 	data.object.emitter = this.emitter.toJSON(meta);
 
 	return data;

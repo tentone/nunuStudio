@@ -6,7 +6,7 @@ function DrawableInspector(parent, object)
 
 	var self = this;
 
-	//Cast shadow
+	// Cast shadow
 	this.form.addText(Locale.castShadows);
 	this.castShadow = new CheckBox(this.form);
 	this.castShadow.size.set(18, 18);
@@ -17,7 +17,7 @@ function DrawableInspector(parent, object)
 	this.form.add(this.castShadow);
 	this.form.nextRow();
 
-	//Receive shadow
+	// Receive shadow
 	this.form.addText(Locale.receiveShadows);
 	this.receiveShadow = new CheckBox(this.form);
 	this.receiveShadow.size.set(18, 18);
@@ -28,7 +28,7 @@ function DrawableInspector(parent, object)
 	this.form.add(this.receiveShadow);
 	this.form.nextRow();
 
-	//Frustum culled
+	// Frustum culled
 	this.form.addText("Frustum Culled");
 	this.frustumCulled = new CheckBox(this.form);
 	this.frustumCulled.size.set(18, 18);

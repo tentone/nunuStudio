@@ -20,10 +20,10 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 		outputArray[3 * vIdx + 2] = vEnvLookup[2];
 	}
 
-	//Each vertex of a cube face has an associated envmap lookup vector. These vectors are interpolated for each fragment and used to lookup envmap pixels.
+	// Each vertex of a cube face has an associated envmap lookup vector. These vectors are interpolated for each fragment and used to lookup envmap pixels.
 	var geometryEnvLookupVectors =
 	[
-		//up left,  up right,   low left,    low right
+		// up left,  up right,   low left,    low right
 		[[1, 1, 1], [1, 1, -1], [1, -1, 1], [1, -1, -1]], // cube face 0
 		[[-1, 1, -1], [-1, 1, 1], [-1, -1, -1], [-1, -1, 1]], // face 1
 		[[-1, 1, -1], [1, 1, -1], [-1, 1, 1], [1, 1, 1]], // face 2

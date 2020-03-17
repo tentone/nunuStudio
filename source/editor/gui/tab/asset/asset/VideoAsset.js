@@ -18,7 +18,7 @@ function VideoAsset(parent)
 
 	var self = this;
 
-	//Context menu event
+	// Context menu event
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
@@ -73,10 +73,10 @@ function VideoAsset(parent)
 		context.updateInterface();
 	};
 
-	//Drag start
+	// Drag start
 	this.element.ondragstart = function(event)
 	{
-		//Insert into drag buffer
+		// Insert into drag buffer
 		if(self.asset !== null)
 		{
 			event.dataTransfer.setData("uuid", self.asset.uuid);
@@ -84,7 +84,7 @@ function VideoAsset(parent)
 		}
 	};
 
-	//Drag end (called after of ondrop)
+	// Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
 		DragBuffer.pop(self.asset.uuid);

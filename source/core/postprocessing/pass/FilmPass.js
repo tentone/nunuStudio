@@ -5,7 +5,7 @@
  *
  * @class FilmPass
  * @module Postprocessing
- * @author alteredq / http://alteredqualia.com/
+ * @author alteredq / http:// alteredqualia.com/
  */
 function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 {

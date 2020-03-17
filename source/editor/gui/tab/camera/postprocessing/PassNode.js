@@ -10,18 +10,18 @@ function PassNode(parent, name)
 	this.position.set(10, 5);
 	this.spacing.set(5, 5);
 
-	//Pass
+	// Pass
 	this.pass = null;
 	this.composer = null;
 	this.editor = null;
 
-	//Render pass
+	// Render pass
 	this.addText(name !== undefined ? name : "Pass Node");
 	this.nextRow();
 
 	var self = this;
 
-	//Enabled
+	// Enabled
 	this.addText(Locale.enabled);
 	this.enabled = new CheckBox(this);
 	this.enabled.size.set(18, 18);
@@ -32,7 +32,7 @@ function PassNode(parent, name)
 	this.add(this.enabled);
 	this.nextRow();
 
-	//Clear
+	// Clear
 	this.addText(Locale.clear);
 	this.clear = new CheckBox(this);
 	this.clear.size.set(18, 18);
@@ -43,7 +43,7 @@ function PassNode(parent, name)
 	this.add(this.clear);
 	this.nextRow();
 
-	//Render to screen
+	// Render to screen
 	this.addText("Output");
 	this.renderToScreen = new CheckBox(this);
 	this.renderToScreen.size.set(18, 18);
@@ -54,7 +54,7 @@ function PassNode(parent, name)
 	this.add(this.renderToScreen);
 	this.nextRow();
 
-	//Up
+	// Up
 	this.up = new ButtonText(this);
 	this.up.size.set(50, 18);
 	this.up.setText("Up");
@@ -64,7 +64,7 @@ function PassNode(parent, name)
 		self.editor.updatePostNodes();
 	});
 
-	//Down
+	// Down
 	this.down = new ButtonText(this);
 	this.down.size.set(50, 18);
 	this.down.setText("Down");
@@ -74,7 +74,7 @@ function PassNode(parent, name)
 		self.editor.updatePostNodes();
 	});
 
-	//Delete
+	// Delete
 	this.delete = new ButtonText(this);
 	this.delete.size.set(70, 18);
 	this.delete.setText(Locale.delete);

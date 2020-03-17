@@ -14,7 +14,7 @@ function TextEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Change
+	// Change
 	this.code.on("change", function(cm)
 	{
 		if(!cm.state.focused)
@@ -25,14 +25,14 @@ function TextEditor(parent, closeable, container, index)
 		self.updateCode();
 	});
 
-	//Key pressed event
+	// Key pressed event
 	this.code.on("keypress", function(cm, event)
 	{
 		var typed = String.fromCharCode(event.charCode);
 
 		if(/[\w\.]/.exec(typed))
 		{
-			//If there is no tern sugestion suggest known words
+			// If there is no tern sugestion suggest known words
 			if(cm.state.completionActive == null || cm.state.completionActive.widget === null)
 			{
 				CodeMirror.commands.autocomplete(cm, null);
@@ -49,7 +49,7 @@ TextEditor.prototype.updateMetadata = function()
 {
 	this.setName(this.resource.name);
 
-	//If not found close tab
+	// If not found close tab
 	if(Editor.program.resources[this.resource.uuid] === undefined)
 	{
 		this.close();
@@ -94,7 +94,7 @@ TextEditor.prototype.attach = function(resource)
 	this.updateSettings();
 };
 
-//Update attached script
+// Update attached script
 TextEditor.prototype.updateCode = function()
 {
 	if(this.resource !== null)

@@ -4,7 +4,7 @@ function TextureChooser(parent)
 {
 	Element.call(this, parent, "div");
 
-	//Preview
+	// Preview
 	this.preview = document.createElement("div");
 	this.preview.style.cursor = "pointer";
 	this.preview.style.visibility = "inherit";
@@ -16,7 +16,7 @@ function TextureChooser(parent)
 	this.preview.style.backgroundSize = "120px 120px";
 	this.element.appendChild(this.preview);
 
-	//Image
+	// Image
 	this.img = document.createElement("img");
 	this.img.style.pointerEvents = "none";
 	this.img.style.position = "absolute";
@@ -26,7 +26,7 @@ function TextureChooser(parent)
 	this.img.style.height = "100%";
 	this.preview.appendChild(this.img);
 
-	//Video
+	// Video
 	this.video = document.createElement("video");
 	this.video.autoplay = true;
 	this.video.loop = true;
@@ -41,31 +41,31 @@ function TextureChooser(parent)
 
 	var self = this;
 
-	//On drop get file dropped
+	// On drop get file dropped
 	this.preview.ondrop = function(event)
 	{
-		//File
+		// File
 		if(event.dataTransfer.files.length > 0)
 		{
 			self.loadTexture(event.dataTransfer.files[0]);
 		}
-		//Resource
+		// Resource
 		else
 		{
 			var uuid = event.dataTransfer.getData("uuid");
 			var value = DragBuffer.get(uuid);
 
-			//Texture
+			// Texture
 			if(value instanceof THREE.Texture && (self.acceptAll || !value.isCubeTexture))
 			{
 				self.setTexture(value);
 			}
-			//Image
+			// Image
 			else if(value instanceof Image)
 			{
 				self.setTexture(new Texture(value));
 			}
-			//Video
+			// Video
 			else if(value instanceof Video)
 			{
 				self.setTexture(new VideoTexture(value));
@@ -79,7 +79,7 @@ function TextureChooser(parent)
 		event.preventDefault();
 	};
 
-	//Onclick select image or video file
+	// Onclick select image or video file
 	this.preview.onclick = function()
 	{
 		if(self.onChange !== null)
@@ -126,7 +126,7 @@ TextureChooser.prototype.setOnChange = function(onChange)
 	this.onChange = onChange;
 };
 
-//Set texture value
+// Set texture value
 TextureChooser.prototype.setValue = function(texture)
 {
 	if(texture instanceof THREE.Texture)
@@ -151,7 +151,7 @@ TextureChooser.prototype.getValue = function()
 	return this.texture;
 };
 
-//Set Texture
+// Set Texture
 TextureChooser.prototype.setTexture = function(texture)
 {
 	this.setValue(texture);
@@ -162,7 +162,7 @@ TextureChooser.prototype.setTexture = function(texture)
 	}
 };
 
-//Load texture from file
+// Load texture from file
 TextureChooser.prototype.loadTexture = function(file)
 {
 	var self = this;
@@ -187,7 +187,7 @@ TextureChooser.prototype.loadTexture = function(file)
 	}
 };
 
-//Update texture preview
+// Update texture preview
 TextureChooser.prototype.updatePreview = function()
 {
 	var texture = this.texture;

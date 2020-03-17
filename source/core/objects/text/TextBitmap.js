@@ -5,11 +5,11 @@
  *
  * Input data should be composed of a BMFont file (can be a .fnt, .json. etc) file and a character atlas texture from an image.
  *
- * Font atlas can be generate using the tool http://www.angelcode.com/products/bmfont/
+ * Font atlas can be generate using the tool http:// www.angelcode.com/products/bmfont/
  *
  * Based on the three-bmfont-text library.
- *  - https://github.com/Jam3/three-bmfont-text
- *  - https://github.com/Jam3/load-bmfont
+ *  - https:// github.com/Jam3/three-bmfont-text
+ *  - https:// github.com/Jam3/load-bmfont
  *
  * @class TextBitmap
  * @extends {THREE.Mesh}
@@ -365,7 +365,7 @@ void main()\n\
  * Contains only the fragment shader code, the vertex is the same for every render mode.
  * 
  * Details about signed distance fields for vetorial shapes rendering.
- *    - https://steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf
+ *    - https:// steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf
  *
  * @static
  * @attribute SDF_SHADER
@@ -391,7 +391,7 @@ void main()\n\
  * Contains only the fragment shader code, the vertex is the same for every render mode.
  * 
  * Details about Multi‐Channel Signed Distance Fields for vetorial shapes rendering.
- *    - https://onlinelibrary.wiley.com/doi/full/10.1111/cgf.13265
+ *    - https:// onlinelibrary.wiley.com/doi/full/10.1111/cgf.13265
  *
  * @static
  * @attribute SDF_SHADER

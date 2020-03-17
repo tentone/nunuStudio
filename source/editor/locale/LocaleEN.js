@@ -15,7 +15,7 @@ LocaleManager.register(
 		version: 1
 	},
 
-	//Actions
+	// Actions
 	reverse: "Reverse",
 	delete: "Delete",
 	copy: "Copy",
@@ -38,7 +38,7 @@ LocaleManager.register(
 	multiply: "Multiply",
 	setTransparent: "Set transparent",
 
-	//Context menu
+	// Context menu
 	computeNormals: "Compute normals",
 	applyTransformation: "Apply transformation",
 	sceneEditor: "Scene editor",
@@ -54,11 +54,11 @@ LocaleManager.register(
 	createScene: "Create scene",
 	toInstancedMesh: "To Instanced Mesh",
 
-	//Devices
+	// Devices
 	leapMotion: "Leap Motion",
  	microsoftKinect: "Microsoft Kinect",
 
-	//Objects
+	// Objects
 	ambientLight: "Ambient Light",
 	pointLight: "Point Light",
 	spotLight: "Spot Light",
@@ -81,7 +81,7 @@ LocaleManager.register(
 	particle: "Particle",
 	ground: "Ground",
 
-	//Geometries
+	// Geometries
 	parametric: "Parametric",
 	box: "Box",
 	capsule: "Capsule",
@@ -101,7 +101,7 @@ LocaleManager.register(
 	torusKnot: "Torus-Knot",
 	cone: "Cone",
 
-	//Properties
+	// Properties
 	units: "Units",
 	libraryMode: "Library Mode",
 	min: "Min",
@@ -287,12 +287,12 @@ LocaleManager.register(
 	axisWinds: "Axis Winds",
 	circleWinds: "Circle Winds",
 
-	//Units
+	// Units
 	degrees: "Degrees",
 	radians: "Radians",
 	meters: "Meters",
 
-	//Values
+	// Values
 	evaluate: "Evaluate",
 	append: "Append",
 	include: "Include",
@@ -345,13 +345,13 @@ LocaleManager.register(
 	webgl2: "WebGL 2.0",
 	nearest: "Nearest",
 
-	//Operations
+	// Operations
 	union: "Union",
 	subtract: "Subtract",
 	intersect: "Intersect",
 	simplify: "Simplify",
 
-	//Editor
+	// Editor
 	editor: "Editor",
 	information: "Information",
 	rendering: "Rendering",
@@ -391,14 +391,14 @@ LocaleManager.register(
 	documentation: "Documentation",
 	autoIndent: "Auto Indent",
 
-	//Editor settings
+	// Editor settings
 	reset: "Reset",
 	general: "General",
 	theme: "Theme",
 	historySize: "History size",
 	hintHistory: "How many changes are stored in the history.",
 	
-	//Resources
+	// Resources
 	image: "Image",
 	video: "Video",
 	file: "File",
@@ -406,21 +406,21 @@ LocaleManager.register(
 	geometry: "Geometry",
 	font: "Font",
 
-	//Run tab
+	// Run tab
 	toggleVR: "Toggle Virtual Reality",
 	toggleFullscreen: "Toggle Fullscreen",
 
-	//Messages
+	// Messages
 	projectSaved: "Project saved.",
 	projectLoaded: "Project loaded",
 	projectExported: "Project exported",
 
-	//Confirm
+	// Confirm
 	loadProjectChangesLost: "All unsaved changes to the project will be lost.",
 	loadProject: "Load project?",
 	createProject: "Create new project?",
 
-	//Warnings
+	// Warnings
 	unsavedChangesExit: "All unsaved changes to the project will be lost. Do you really wanna exit?",
 	cannotAddItself: "Cannot add object into itself.",
 	cannotAddToChildren: "Cannot add object into is children.",
@@ -435,7 +435,7 @@ LocaleManager.register(
 	selectObjectEditAnimation: "Select an object to edit animation.",
 	nothingToShow: "Select an object to view its properties.",
 
-	//Errors
+	// Errors
 	errorExportingProject: "Error exporting project",
 	errorLoadingFile: "Error loading file",
 	errorSavingFile: "Error saving file",
@@ -447,7 +447,7 @@ LocaleManager.register(
 	unknownFileFormat: "Unknown file format.",
 	failedLoadSpine: "Failed to load Spine animation, make sure that .json and .atlas have the same name.",
 
-	//Hints
+	// Hints
 	hintLibraryMode: "Indicates how libraries are imported into the script. They can be evaluated in the script context, appended at the beginning of the script or included globally.",
 	hintCheckShaderErrors: "Defines whether material shader programs are checked for errors during compilation and linkage process.",
 	hintStencil: "Whether the drawing buffer has a stencil buffer of at least 8 bits.",
@@ -467,7 +467,7 @@ LocaleManager.register(
 	hintAutoClearStencil: "Defines whether the renderer should clear the stencil buffer.",
 	hintPhysicallyCorrectLights: "Whether to use physically correct lighting mode.",
 	
-	//Update
+	// Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",
 	alreadyUpdated: "nunuStudio already up to date.",
 	updateFailed: "Failed to download update files."

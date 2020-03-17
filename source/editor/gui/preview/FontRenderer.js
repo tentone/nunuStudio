@@ -10,10 +10,10 @@ function FontRenderer()
 {
 	PreviewRenderer.call(this);
 
-	//Camera
+	// Camera
 	this.camera = new OrthographicCamera(3, 1);
 
-	//Text
+	// Text
 	this.text = new TextMesh("Abc", new THREE.MeshBasicMaterial({color: 0xFFFFFF}), null);
 	this.text.position.z = -3;
 	this.scene.add(this.text);
@@ -46,6 +46,6 @@ FontRenderer.prototype.render = function(font, onRender)
 	
 	this.renderer.render(this.scene, this.camera);
 
-	//Callback
+	// Callback
 	onRender(this.canvas.toDataURL());
 };

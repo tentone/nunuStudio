@@ -21,17 +21,17 @@ function TabButtonSplit(parent, tab)
 	this.element.style.boxSizing = "border-box";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 
-	//Tab
+	// Tab
 	this.tab = tab;
 
-	//Icon
+	// Icon
 	this.icon = document.createElement("img");
 	this.icon.style.pointerEvents = "none";
 	this.icon.style.position = "absolute";
 	this.icon.src = tab.icon;
 	this.element.appendChild(this.icon);
 
-	//Text
+	// Text
 	this.text = document.createElement("div");
 	this.text.style.position = "absolute";
 	this.text.style.overflow = "hidden";
@@ -42,11 +42,11 @@ function TabButtonSplit(parent, tab)
 	this.text.style.color = Editor.theme.textColor;
 	this.element.appendChild(this.text);
 
-	//Title
+	// Title
 	this.title = document.createTextNode(tab.title);
 	this.text.appendChild(this.title);
 
-	//Close button
+	// Close button
 	this.close = document.createElement("img");
 	this.close.draggable = false;
 	this.close.style.position = "absolute";
@@ -70,10 +70,10 @@ function TabButtonSplit(parent, tab)
 		self.tab.close();
 	};
 	
-	//Drag state
+	// Drag state
 	var dragState = TabButtonSplit.NONE;
 
-	//Drag control
+	// Drag control
 	this.element.ondragstart = function(event)
 	{
 		event.dataTransfer.setData("uuid", self.tab.uuid);
@@ -83,7 +83,7 @@ function TabButtonSplit(parent, tab)
 		dragState = TabButtonSplit.NONE;
 	};
 
-	//Drag drop
+	// Drag drop
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
@@ -97,7 +97,7 @@ function TabButtonSplit(parent, tab)
 
 		if(tab instanceof TabElement)
 		{
-			//In the same container
+			// In the same container
 			if(tab.container === self.tab.container)
 			{
 				var index = event.dataTransfer.getData("tab");
@@ -105,12 +105,12 @@ function TabButtonSplit(parent, tab)
 
 				if(index !== self.tab.index)
 				{	
-					//Before
+					// Before
 					if(dragState === TabButtonSplit.PREVIOUS)
 					{
 						self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index - 1 : self.tab.index);
 					}
-					//After
+					// After
 					else if(dragState === TabButtonSplit.NEXT)
 					{
 						self.tab.container.moveTabIndex(index, index < self.tab.index ? self.tab.index : self.tab.index + 1);
@@ -119,15 +119,15 @@ function TabButtonSplit(parent, tab)
 					DragBuffer.pop(uuid);
 				}
 			}
-			//From another container
+			// From another container
 			else
 			{
-				//Before
+				// Before
 				if(dragState === TabButtonSplit.PREVIOUS)
 				{
 					self.tab.container.attachTab(tab, self.tab.index);
 				}
-				//After
+				// After
 				else if(dragState === TabButtonSplit.NEXT)
 				{
 					self.tab.container.attachTab(tab, self.tab.index + 1);
@@ -138,7 +138,7 @@ function TabButtonSplit(parent, tab)
 		}
 	};
 
-	//Drag over
+	// Drag over
 	this.element.ondragover = function(event)
 	{
 		if(self.tab.container.placement === TabGroup.TOP || self.tab.container.placement === TabGroup.BOTTOM)
@@ -203,7 +203,7 @@ function TabButtonSplit(parent, tab)
 		}
 	};
 
-	//Drag end
+	// Drag end
 	this.element.ondragend = function(event)
 	{
 		event.preventDefault();
@@ -217,7 +217,7 @@ function TabButtonSplit(parent, tab)
 		this.style.borderTop = null;
 	};
 
-	//Drag leave
+	// Drag leave
 	this.element.ondragleave = function(event)
 	{
 		event.preventDefault();
@@ -229,30 +229,30 @@ function TabButtonSplit(parent, tab)
 		this.style.borderTop = null;
 	};
 
-	//Mouse down
+	// Mouse down
 	this.element.onmousedown = function(event)
 	{
 		var button = event.which - 1;
 
-		//Select tab
+		// Select tab
 		if(button === Mouse.LEFT)
 		{
 			self.tab.container.selectTab(self.tab);
 		}
-		//Close tab
+		// Close tab
 		else if(tab.closeable && button === Mouse.MIDDLE)
 		{
 			self.tab.container.removeTab(self.tab);
 		}
 	};
 
-	//Mouse enter
+	// Mouse enter
 	this.element.onmouseenter = function()
 	{
 		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
-	//Mouse leave
+	// Mouse leave
 	this.element.onmouseleave = function()
 	{
 		if(tab.isSelected())
@@ -305,19 +305,19 @@ TabButtonSplit.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 	
-	//Icon
+	// Icon
 	this.icon.style.top = (this.size.y * 0.2) + "px";
 	this.icon.style.left = (this.size.y * 0.2) + "px"
 	this.icon.style.width = (this.size.y * 0.6) + "px";
 	this.icon.style.height = (this.size.y * 0.6) + "px";
 
-	//Text
+	// Text
 	this.text.style.left = this.size.y + "px";
 	this.text.style.top = ((this.size.y - 12) / 2) + "px";
 	this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
 	this.text.style.height = this.size.y + "px";
 
-	//Close
+	// Close
 	if(this.tab.closeable === true)
 	{
 		this.close.style.width = (this.size.y * 0.4) + "px";

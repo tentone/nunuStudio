@@ -86,23 +86,23 @@ DOMUtils.checkBorder = function(element)
 
 	var result = {x: 0, y: 0};
 
-	//Over the top of the window
+	// Over the top of the window
 	if(top < window.pageYOffset)
 	{
 		result.y = top - window.pageYOffset;
 	}
-	//Bellow the window
+	// Bellow the window
 	else if((top + height) > (window.pageYOffset + window.innerHeight))
 	{
 		result.y = (top + height) - (window.pageYOffset + window.innerHeight);
 	}
 
-	//Left to the window
+	// Left to the window
 	if(left < window.pageXOffset)
 	{
 		result.x = left - window.pageXOffset;
 	}
-	//Right to the window
+	// Right to the window
 	else if((left + width) > (window.pageXOffset + window.innerWidth))
 	{
 		result.x = (left + width) - (window.pageXOffset + window.innerWidth);

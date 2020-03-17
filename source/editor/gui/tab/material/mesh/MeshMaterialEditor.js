@@ -6,7 +6,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	
 	var self = this;
 
-	//Preview scene
+	// Preview scene
 	this.sky = new Sky();
 	this.scene.add(this.sky);
 
@@ -18,11 +18,11 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.ambientLight.visible = false;
 	this.scene.add(this.ambientLight);
 
-	//Mesh
+	// Mesh
 	this.mesh = new THREE.Mesh(MaterialEditor.geometries[0][1], null);
 	this.interactive.add(this.mesh);
 	
-	//Test model
+	// Test model
 	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
@@ -38,7 +38,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.testModel);
 	this.previewForm.nextRow();
 
-	//Sky
+	// Sky
 	this.previewForm.addText(Locale.sky);
 	this.skyEnabled = new CheckBox(this.previewForm);
 	this.skyEnabled.size.set(18, 18);
@@ -50,7 +50,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.skyEnabled);
 	this.previewForm.nextRow();
 
-	//Point Light
+	// Point Light
 	this.previewForm.addText(Locale.pointLight);
 	this.previewForm.nextRow();
 
@@ -75,7 +75,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.pointLightColor);
 	this.previewForm.nextRow();
 
-	//Ambient Light
+	// Ambient Light
 	this.previewForm.addText(Locale.ambientLight);
 	this.previewForm.nextRow();
 

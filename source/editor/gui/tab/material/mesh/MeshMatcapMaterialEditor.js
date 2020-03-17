@@ -6,7 +6,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Skinning
+	// Skinning
 	this.skinning = new CheckBox(this.form);
 	this.form.addText(Locale.skinning);
 	this.skinning.size.set(18, 18);
@@ -18,7 +18,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.skinning);
 	this.form.nextRow();
 
-	//Morph targets
+	// Morph targets
 	this.morphTargets = new CheckBox(this.form);
 	this.form.addText(Locale.morphTargets);
 	this.morphTargets.size.set(18, 18);
@@ -29,7 +29,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
 
-	//Wireframe
+	// Wireframe
 	this.wireframe = new CheckBox(this.form);
 	this.form.addText(Locale.wireframe);
 	this.wireframe.size.set(18, 18);
@@ -40,7 +40,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
@@ -52,7 +52,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Matcap map
+	// Matcap map
 	this.form.addText("Matcap map");
 	this.matcap = new TextureForm(this.form);
 	this.matcap.size.set(0, 100);
@@ -64,7 +64,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.matcap);
 	this.form.nextRow();
 
-	//Texture map
+	// Texture map
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
@@ -76,7 +76,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.map);
 	this.form.nextRow();
 
-	//Bump map
+	// Bump map
 	this.form.addText(Locale.bumpMap);
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.size.set(0, 100);
@@ -88,7 +88,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.bumpMap);
 	this.form.nextRow();
 
-	//Bump scale
+	// Bump scale
 	this.form.addText(Locale.scale);
 	this.bumpScale = new Slider(this.form);
 	this.bumpScale.size.set(160, 18);
@@ -102,7 +102,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.bumpScale);
 	this.form.nextRow();
 
-	//Normal map
+	// Normal map
 	this.form.addText(Locale.normalMap);
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.size.set(0, 100);
@@ -114,7 +114,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalMap);
 	this.form.nextRow();
 
-	//Normal map scale
+	// Normal map scale
 	this.form.addText(Locale.normalScale);
 	this.normalScale = new VectorBox(this.form);
 	this.normalScale.setType(VectorBox.VECTOR2);
@@ -128,7 +128,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalScale);
 	this.form.nextRow();
 
-	//Normal type
+	// Normal type
 	this.form.addText(Locale.normalType);
 	this.normalMapType = new DropdownList(this.form);
 	this.normalMapType.size.set(100, 18);
@@ -142,7 +142,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalMapType);
 	this.form.nextRow();
 
-	//Displacement map
+	// Displacement map
 	this.form.addText(Locale.displacementMap);
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(0, 100);
@@ -154,7 +154,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementMap);
 	this.form.nextRow();
 
-	//Displacement map scale
+	// Displacement map scale
 	this.form.addText(Locale.scale);
 	this.displacementScale = new NumberBox(this.form);
 	this.displacementScale.size.set(60, 18);
@@ -167,7 +167,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementScale);
 	this.form.nextRow();
 
-	//Displacement map bias
+	// Displacement map bias
 	this.form.addText(Locale.bias);
 	this.displacementBias = new NumberBox(this.form);
 	this.displacementBias.size.set(60, 18);
@@ -180,7 +180,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementBias);
 	this.form.nextRow();
 
-	//Alpha map
+	// Alpha map
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);

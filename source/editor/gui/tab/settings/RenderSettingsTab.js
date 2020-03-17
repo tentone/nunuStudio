@@ -12,11 +12,11 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.setAutoSize(false);
 	this.form.defaultTextWidth = 125;
 
-	//Renderer settings
+	// Renderer settings
 	this.form.addText("Renderer Quality");
 	this.form.nextRow();
 
-	//Use project settings
+	// Use project settings
 	this.form.addText("Follow project").setAltText("If checked the project rendering settings will be used, its better to preview the final result.");
 	this.followProject = new CheckBox(this.form);
 	this.followProject.size.set(18, 18);
@@ -27,11 +27,11 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.add(this.followProject);
 	this.form.nextRow();
 
-	//Space
+	// Space
 	this.form.addText("");
 	this.form.nextRow();
 
-	//Editor rendering quality
+	// Editor rendering quality
 	this.form.addText("Editor Rendering Quality");
 	this.form.nextRow();
 	this.rendererConfiguration = new RendererConfigurationFormTemplate(this.form, Editor.settings.render);

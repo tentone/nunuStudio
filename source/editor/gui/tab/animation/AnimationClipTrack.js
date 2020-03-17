@@ -67,7 +67,7 @@ function AnimationClipTrack(editor, animation)
 
 	var mouse = 0, initial = 0;
 
-	//Seekbar
+	// Seekbar
 	this.seek = document.createElement("div");
 	this.seek.style.position = "absolute";
 	this.seek.style.backgroundColor = "#FFFFFF";
@@ -87,7 +87,7 @@ function AnimationClipTrack(editor, animation)
 	};
 	this.timeline.appendChild(this.seek);
 
-	//Seekbar manager
+	// Seekbar manager
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
@@ -111,7 +111,7 @@ function AnimationClipTrack(editor, animation)
 		self.manager.destroy();
 	});
 
-	//Tracks
+	// Tracks
 	for(var j = 0; j < tracks.length; j++)
 	{
 		var track = new AnimationTrack(this.timeline, this.editor, tracks[j]);

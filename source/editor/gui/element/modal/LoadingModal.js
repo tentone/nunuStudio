@@ -51,20 +51,20 @@ function LoadingModal(parent)
 	this.message.setStyle("color", "#FFFFFF");
 	this.message.allowWordBreak(true);
 
-	//Icon
+	// Icon
 	this.icon = new ImageContainer(this);
 	this.icon.setImage("source/files/loading.png");
 	
 	var rotation = 0.0;
 	
-	//Animation
+	// Animation
 	this.timer = new AnimationTimer(function()
 	{
 		rotation += 0.05;
 		self.icon.setStyle("transform", "rotate(" + rotation + "rad)");
 	});
 	
-	//Event manager
+	// Event manager
 	this.manager = new EventManager();
 	this.manager.add(window, "resize", function(event)
 	{
@@ -128,21 +128,21 @@ LoadingModal.prototype.updateSize = function()
 
 	Element.prototype.updateSize.call(this);
 
-	//Text
+	// Text
 	this.text.setStyle("fontSize", "38px");
 	this.text.size.set(this.size.x, 100);
 	this.text.center();
 	this.text.position.y -= this.text.size.y;
 	this.text.updateInterface();
 	
-	//Message
+	// Message
 	this.message.setStyle("fontSize", "20px");
 	this.message.size.set(this.size.x, 100);
 	this.message.center();
 	this.message.position.y -= this.message.size.y / 2;
 	this.message.updateInterface();
 
-	//Icon
+	// Icon
 	this.icon.size.set(80, 80);
 	this.icon.center();
 	this.icon.position.y += 30;

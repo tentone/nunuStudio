@@ -4,8 +4,8 @@
  * Legacy geometry loader is used to load the old threejs JSON file format.
  * 
  * @class LegacyGeometryLoader
- * @author mrdoob / http://mrdoob.com/
- * @author alteredq / http://alteredqualia.com/
+ * @author mrdoob / http:// mrdoob.com/
+ * @author alteredq / http:// alteredqualia.com/
  */
 function LegacyGeometryLoader(manager)
 {
@@ -101,7 +101,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		if(json.uvs !== undefined)
 		{
-			//disregard empty arrays
+			// disregard empty arrays
 			for(i = 0; i < json.uvs.length; i++)
 			{
 				if(json.uvs[i].length) nUvLayers++;
@@ -162,7 +162,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 					faceB.materialIndex = materialIndex;
 				}
 
-				//to get face <=> uv index correspondence
+				// to get face <=> uv index correspondence
 				fi = geometry.faces.length;
 
 				if(hasFaceVertexUv)
@@ -263,7 +263,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 					face.materialIndex = materialIndex;
 				}
 
-				//to get face <=> uv index correspondence
+				// to get face <=> uv index correspondence
 				fi = geometry.faces.length;
 
 				if(hasFaceVertexUv)
@@ -416,7 +416,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		var outputAnimations = [];
 
-		//parse old style Bone/Hierarchy animations
+		// parse old style Bone/Hierarchy animations
 		var animations = [];
 		if(json.animation !== undefined)
 		{
@@ -444,7 +444,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 			}
 		}
 
-		//parse implicit morph animations
+		// parse implicit morph animations
 		if(geometry.morphTargets)
 		{
 			var morphAnimationClips = AnimationClip.CreateClipsFromMorphTargetSequences(geometry.morphTargets, 10);
@@ -461,7 +461,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 	{
 		if(json.data !== undefined)
 		{
-			//Geometry 4.0 spec
+			// Geometry 4.0 spec
 			json = json.data;
 		}
 

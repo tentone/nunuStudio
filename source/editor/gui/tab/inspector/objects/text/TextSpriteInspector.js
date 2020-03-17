@@ -6,7 +6,7 @@ function TextSpriteInspector(parent, object)
 
 	var self = this;
 
-	//Text
+	// Text
 	this.form.addText(Locale.text);
 	this.text = new TextArea(this.form);
 	this.text.size.set(0, 55);
@@ -17,7 +17,7 @@ function TextSpriteInspector(parent, object)
 	this.form.add(this.text);
 	this.form.nextRow();
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(0, 18);
@@ -29,7 +29,7 @@ function TextSpriteInspector(parent, object)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Align
+	// Align
 	this.form.addText(Locale.align);
 	this.align = new DropdownList(this.form);
 	this.align.size.set(0, 18);
@@ -43,7 +43,7 @@ function TextSpriteInspector(parent, object)
 	this.form.add(this.align);
 	this.form.nextRow();
 
-	//Resolution
+	// Resolution
 	this.form.addText(Locale.resolution);
 	this.resolution = new NumberBox(this.form);
 	this.resolution.size.set(0, 18);
@@ -61,7 +61,7 @@ function TextSpriteInspector(parent, object)
 	"Lucida Sans Unicode", "Marlett", "Minion Web", "Symbol", "Times New Roman", "Times New Roman Bold", "Times New Roman Italic", "Times New Roman Bold Italic", "Tahoma",
 	"Trebuchet MS", "Trebuchet MS Bold", "Trebuchet MS Italic", "Trebuchet MS Bold Italic", "Verdana", "Verdana Bold", "Verdana Italic", "Verdana Bold Italic", "Webdings"];
 
-	//Fonts
+	// Fonts
 	this.form.addText(Locale.font);
 	this.font = new DropdownList(this.form);
 	this.font.size.set(0, 18);
@@ -76,7 +76,7 @@ function TextSpriteInspector(parent, object)
 	this.form.add(this.font);
 	this.form.nextRow();
 
-	//Outline
+	// Outline
 	this.form.addText(Locale.outline);
 	this.outline = new CheckBox(this.form);
 	this.outline.size.set(18, 18);
@@ -87,7 +87,7 @@ function TextSpriteInspector(parent, object)
 	this.form.add(this.outline);
 	this.form.nextRow();
 
-	//Outline Width
+	// Outline Width
 	this.form.addText(Locale.outlineWidth);
 	this.outlineWidth = new NumberBox(this.form);
 	this.outlineWidth.size.set(0, 18);
@@ -100,7 +100,7 @@ function TextSpriteInspector(parent, object)
 	this.form.add(this.outlineWidth);
 	this.form.nextRow();
 
-	//Outline Color
+	// Outline Color
 	this.form.addText(Locale.outlineColor);
 	this.outlineColor = new ColorChooser(this.form);
 	this.outlineColor.size.set(0, 18);

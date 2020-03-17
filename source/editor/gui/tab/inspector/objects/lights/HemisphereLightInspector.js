@@ -6,7 +6,7 @@ function HemisphereLightInspector(parent, object)
 
 	var self = this;
 
-	//Sky color
+	// Sky color
 	this.form.addText(Locale.skyColor);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
@@ -17,7 +17,7 @@ function HemisphereLightInspector(parent, object)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Ground color
+	// Ground color
 	this.form.addText(Locale.groundColor);
 	this.groundColor = new ColorChooser(this.form);
 	this.groundColor.size.set(80, 18);

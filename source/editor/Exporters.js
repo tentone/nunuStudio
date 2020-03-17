@@ -43,48 +43,48 @@ Editor.exportAndroid = function(mode, outputPath)
 	var author = Editor.program.author !== "" ? Editor.program.author : "author";
 	var packageName = "com." + author + "." + name;
 
-	//Delete old project data
+	// Delete old project data
 	Editor.deleteTemp();
 
-	//Create cordova project
+	// Create cordova project
 	var output = system.execSync("cordova create temp " + packageName + " " + name).toString();
 	if(output.indexOf("Creating") === -1)
 	{
 		console.error("nunuStudio: Failed to create cordova project.");
 	}
 
-	//Export nunu project
+	// Export nunu project
 	Editor.exportCordovaProject(Editor.TEMP + "/www");
 
 
 	setTimeout(function()
 	{
-		//Android platform project
+		// Android platform project
 		var output = system.execSync("cordova platform add android", {cwd:Editor.TEMP}).toString();
 		if(output.indexOf("Android project created") === -1)
 		{
 			console.error("nunuStudio: Failed to create cordova android project.");
 		}
 
-		//Check requirements
+		// Check requirements
 		output = system.execSync("cordova requirements", {cwd:Editor.TEMP}).toString();
 
 		if(output.indexOf("Java JDK: installed") === -1)
 		{
-			Editor.alert("Missing java JDK (get it at http://www.oracle.com/technetwork/java/javase/downloads/index.html)");
-			console.error("nunuStudio: Missing java JDK (get it at http://www.oracle.com/technetwork/java/javase/downloads/index.html)");
+			Editor.alert("Missing java JDK (get it at http:// www.oracle.com/technetwork/java/javase/downloads/index.html)");
+			console.error("nunuStudio: Missing java JDK (get it at http:// www.oracle.com/technetwork/java/javase/downloads/index.html)");
 			Editor.deleteTemp();
 			return;
 		}
 		if(output.indexOf("Android SDK: installed true") === -1)
 		{
-			Editor.alert("Missing Android SDK (get it at https://developer.android.com/studio/)");
-			console.error("nunuStudio: Missing Android SDK (get it at https://developer.android.com/studio/)");
+			Editor.alert("Missing Android SDK (get it at https:// developer.android.com/studio/)");
+			console.error("nunuStudio: Missing Android SDK (get it at https:// developer.android.com/studio/)");
 			Editor.deleteTemp();
 			return;
 		}
 
-		//Supported Android SDK versions
+		// Supported Android SDK versions
 		/*
 		var versions = output.split("android-");
 		versions.shift();
@@ -94,10 +94,10 @@ Editor.exportAndroid = function(mode, outputPath)
 		}
 		*/
 
-		//Send code to device
+		// Send code to device
 		if(mode === Editor.ANDROID_RUN)
 		{
-			//Build code
+			// Build code
 			output = system.execSync("cordova build android", {cwd:Editor.TEMP}).toString();
 			if(output.indexOf("SUCCESSFUL") === -1)
 			{
@@ -106,7 +106,7 @@ Editor.exportAndroid = function(mode, outputPath)
 				return;
 			}
 
-			//Launch on device
+			// Launch on device
 			output = system.execSync("cordova run android", {cwd:Editor.TEMP}).toString();
 			if(output.indexOf("SUCCESS") === -1)
 			{
@@ -115,7 +115,7 @@ Editor.exportAndroid = function(mode, outputPath)
 				return;
 			}
 		}
-		//Export test version
+		// Export test version
 		else if(mode === Editor.ANDROID_EXPORT_UNSIGNED)
 		{
 			output = system.execSync("cordova build android", {cwd:Editor.TEMP}).toString();
@@ -128,7 +128,7 @@ Editor.exportAndroid = function(mode, outputPath)
 
 			FileSystem.copyFile(Editor.TEMP + "/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
 		}
-		//Export signed version
+		// Export signed version
 		else if(mode === Editor.ANDROID_EXPORT_SIGNED)
 		{
 			output = system.execSync("cordova build android --release -- --keystore=\"..\\android.keystore\" --storePassword=android --alias=mykey", {cwd:Editor.TEMP}).toString();
@@ -139,7 +139,7 @@ Editor.exportAndroid = function(mode, outputPath)
 				return;
 			}
 
-			//FileSystem.copyFile(Editor.TEMP + "/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
+			// FileSystem.copyFile(Editor.TEMP + "/platforms/android/app/build/outputs/apk/debug/app-debug.apk", outputPath);
 		}
 
 		Editor.deleteTemp();
@@ -258,7 +258,7 @@ Editor.exportNWJSProject = function(dir, target)
 			output: dir,
 			outputPattern: "${PLATFORM}-${ARCH}",
 			packed: true,
-			//targets: ["zip", "nsis7z"],
+			// targets: ["zip", "nsis7z"],
 			win:
 			{
 				productName: Editor.program.name,
@@ -269,7 +269,7 @@ Editor.exportNWJSProject = function(dir, target)
 
 	// Build application
 	var system = require("child_process");
-	var output = system.execSync("build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks " + target + " " + Editor.TEMP);
+	var output = system.execSync("build --mirror https:// dl.nwjs.io/ --with-ffmpeg --tasks " + target + " " + Editor.TEMP);
 
 	// Delete temporary folders
 	Editor.deleteTemp();

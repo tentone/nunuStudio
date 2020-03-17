@@ -4,7 +4,7 @@ function CubeTextureBox(parent)
 {
 	Element.call(this, parent, "div");
 
-	//Texture preview division
+	// Texture preview division
 	this.preview = document.createElement("div");
 	this.preview.style.cursor = "pointer";
 	this.preview.style.position = "absolute";
@@ -12,7 +12,7 @@ function CubeTextureBox(parent)
 	this.preview.style.left = "0px";
 	this.element.appendChild(this.preview);
 
-	//Alpha background
+	// Alpha background
 	this.alpha = document.createElement("img");
 	this.alpha.src = Global.FILE_PATH + "alpha.png";
 	this.alpha.style.pointerEvents = "none";
@@ -23,7 +23,7 @@ function CubeTextureBox(parent)
 	this.alpha.style.height = "100%";
 	this.preview.appendChild(this.alpha);
 
-	//Image
+	// Image
 	this.img = document.createElement("img");
 	this.img.style.pointerEvents = "none";
 	this.img.style.position = "absolute";
@@ -35,10 +35,10 @@ function CubeTextureBox(parent)
 
 	var self = this;
 
-	//On drop get file dropped
+	// On drop get file dropped
 	this.preview.ondrop = function(event)
 	{
-		//File
+		// File
 		if(event.dataTransfer.files.length > 0)
 		{
 			var file = event.dataTransfer.files[0];
@@ -53,18 +53,18 @@ function CubeTextureBox(parent)
 			};
 			reader.readAsDataURL(file);
 		}
-		//Resource
+		// Resource
 		else
 		{		
 			var uuid = event.dataTransfer.getData("uuid");
 			var texture = DragBuffer.get(uuid);
 
-			//Cube texture
+			// Cube texture
 			if(texture instanceof THREE.Texture && texture.isCubeTexture)
 			{
 				self.setTexture(texture);
 			}
-			//Image
+			// Image
 			else if(texture instanceof Image)
 			{
 				var texture = new CubeTexture([texture]);
@@ -81,14 +81,14 @@ function CubeTextureBox(parent)
 	this.form.defaultTextWidth = 60;
 	this.form.spacing.set(10, 5);
 
-	//Use texture
+	// Use texture
 	this.form.addText("Use texture");
 	this.useTexture = new CheckBox(this.form);
 	this.useTexture.size.set(30, 15);
 	this.form.add(this.useTexture);
 	this.form.nextRow();
 
-	//WrapS
+	// WrapS
 	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this);
 	this.mapping.size.set(120, 18);
@@ -102,10 +102,10 @@ function CubeTextureBox(parent)
 	this.form.add(this.mapping);
 	this.form.nextRow();
 
-	//onChange function
+	// onChange function
 	this.onChange = null;
 
-	//Texture
+	// Texture
 	this.texture = null;
 }
 
@@ -171,7 +171,7 @@ CubeTextureBox.prototype.getValue = function()
 	return null;
 };
 
-//Set Texture
+// Set Texture
 CubeTextureBox.prototype.setTexture = function(texture)
 {
 	this.setValue(texture);
@@ -182,7 +182,7 @@ CubeTextureBox.prototype.setTexture = function(texture)
 	}
 };
 
-//Update texture preview
+// Update texture preview
 CubeTextureBox.prototype.updatePreview = function()
 {
 	if(this.texture instanceof CubeTexture)
@@ -191,29 +191,29 @@ CubeTextureBox.prototype.updatePreview = function()
 	}
 	else if(this.texture instanceof CompressedTexture)
 	{
-		//TODO <ADD CODE HERE>
+		// TODO <ADD CODE HERE>
 		this.img.src = Global.FILE_PATH + "icon.png";
 	}
 };
 
-//Update Interface
+// Update Interface
 CubeTextureBox.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
 	
-		//Preview
+		// Preview
 		this.preview.style.width = this.size.y + "px";
 		this.preview.style.height = this.size.y + "px";
 
-		//Form
+		// Form
 		this.form.position.set(this.size.y + 5, 0);
 		this.form.size.set(this.size.x - this.form.position.x, this.size.y)
 		this.form.visible = this.visible;
 		this.form.updateInterface();
 
-		//Element
+		// Element
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

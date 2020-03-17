@@ -55,7 +55,7 @@ InstancedMesh.prototype = Object.create(THREE._InstancedMesh.prototype);
 
 InstancedMesh.prototype.dispose = function()
 {
-	//Material and geometry
+	// Material and geometry
 	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
@@ -65,7 +65,7 @@ InstancedMesh.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	//Children
+	// Children
 	THREE.Object3D.prototype.dispose.call(this);
 };
 

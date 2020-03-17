@@ -4,25 +4,25 @@ using System.Windows.Media.Imaging;
 
 namespace KinectServer
 {
-    //Handles color frame serialization.
+    // Handles color frame serialization.
     public static class ColorSerializer
     {
-        //The color bitmap source.
+        // The color bitmap source.
         static WriteableBitmap _colorBitmap = null;
 
-        //The RGB pixel values.
+        // The RGB pixel values.
         static byte[] _colorPixels = null;
 
-        //Color frame width.
+        // Color frame width.
         static int _colorWidth;
 
-        //Color frame height.
+        // Color frame height.
         static int _colorHeight;
 
-        //Color frame stride.
+        // Color frame stride.
         static int _colorStride;
 
-        //Serializes a color frame. The specified color frame returns a binary representation of the frame
+        // Serializes a color frame. The specified color frame returns a binary representation of the frame
         public static byte[] Serialize(this ColorImageFrame frame)
         {
             if(_colorBitmap == null)

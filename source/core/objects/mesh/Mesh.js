@@ -3,7 +3,7 @@
 /**
  * A Mesh combines a geometry and a material forming a complete rederizable object.
  * 
- * Based on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh.
+ * Based on THREE.Mesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Mesh.
  * 
  * @class Mesh
  * @module Meshes
@@ -53,7 +53,7 @@ Mesh.prototype = Object.create(THREE._Mesh.prototype);
  */
 Mesh.prototype.dispose = function()
 {
-	//Material and geometry
+	// Material and geometry
 	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
@@ -63,6 +63,6 @@ Mesh.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	//Children
+	// Children
 	THREE.Object3D.prototype.dispose.call(this);
 };

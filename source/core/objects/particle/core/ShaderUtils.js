@@ -59,7 +59,7 @@ var ShaderUtils =
 	 */
 	ensureArrayTypedArg: function(arg, type, defaultValue)
 	{
-		//If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
+		// If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
 		if(Array.isArray(arg))
 		{
 			for(var i = arg.length - 1; i >= 0; --i)
@@ -73,7 +73,7 @@ var ShaderUtils =
 			return arg;
 		}
 
-		//If the arg isn't an array then just fallback to checking the type.
+		// If the arg isn't an array then just fallback to checking the type.
 		return this.ensureTypedArg(arg, type, defaultValue);
 	},
 
@@ -112,7 +112,7 @@ var ShaderUtils =
 	 */
 	ensureArrayInstanceOf: function(arg, instance, defaultValue)
 	{
-		//If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
+		// If the argument being checked is an array, loop through it and ensure all the values are of the correct type, falling back to the defaultValue if any aren"t.
 		if(Array.isArray(arg))
 		{
 			for(var i = arg.length - 1; i >= 0; --i)
@@ -147,7 +147,7 @@ var ShaderUtils =
 		minLength = minLength || 3;
 		maxLength = maxLength || 3;
 
-		//First, ensure both properties are arrays.
+		// First, ensure both properties are arrays.
 		if(Array.isArray(property._value) === false)
 		{
 			property._value = [property._value];
@@ -513,22 +513,22 @@ var ShaderUtils =
 			rand = Math.round(rand / radiusSpreadClamp) * radiusSpreadClamp;
 		}
 
-		//Set position on sphere
+		// Set position on sphere
 		x = r * Math.cos(t) * rand;
 		y = r * Math.sin(t) * rand;
 		z = depth * rand;
 
-		//Apply radius scale to this position
+		// Apply radius scale to this position
 		x *= radiusScale.x;
 		y *= radiusScale.y;
 		z *= radiusScale.z;
 
-		//Translate to the base position.
+		// Translate to the base position.
 		x += base.x;
 		y += base.y;
 		z += base.z;
 
-		//Set the values in the typed array.
+		// Set the values in the typed array.
 		attribute.typedArray.setVec3Components(index, x, y, z);
 	},
 
@@ -564,20 +564,20 @@ var ShaderUtils =
 			rand = Math.round(rand / radiusSpreadClamp) * radiusSpreadClamp;
 		}
 
-		//Set position on sphere
+		// Set position on sphere
 		x = Math.cos(t) * rand;
 		y = Math.sin(t) * rand;
 
-		//Apply radius scale to this position
+		// Apply radius scale to this position
 		x *= radiusScale.x;
 		y *= radiusScale.y;
 
-		//Translate to the base position.
+		// Translate to the base position.
 		x += base.x;
 		y += base.y;
 		z += base.z;
 
-		//Set the values in the typed array.
+		// Set the values in the typed array.
 		attribute.typedArray.setVec3Components(index, x, y, z);
 	},
 

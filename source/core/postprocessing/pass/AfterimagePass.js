@@ -69,25 +69,25 @@ AfterimagePass.prototype = Object.create(Pass.prototype);
 
 AfterimagePass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Swap texture
+	// Swap texture
 	var temp = this.textureOld;
 	this.textureOld = this.textureComp;
 	this.textureComp = temp;
 
-	//Setup uniforms
+	// Setup uniforms
 	this.uniforms["tNew"].value = readBuffer.texture;
 	this.uniforms["tOld"].value = this.textureOld.texture;
 
-	//Render textureComp
+	// Render textureComp
 	this.quad.material = this.shaderMaterial;
 	renderer.autoClear = false;
 	renderer.setRenderTarget(this.textureComp);
 	renderer.render(this.scene, this.camera);
 
-	//Set copy from texture
+	// Set copy from texture
 	this.basicMaterial.map = this.textureComp.texture;
 
-	//Clear configuration
+	// Clear configuration
 	if(this.clear)
 	{
 		renderer.autoClear = true;

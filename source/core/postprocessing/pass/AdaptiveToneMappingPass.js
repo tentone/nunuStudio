@@ -3,7 +3,7 @@
  *
  * Based on a GDC2007 presentation by Wolfgang Engel titled "Post-Processing Pipeline"
  *
- * Full-screen tone-mapping shader based on http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf
+ * Full-screen tone-mapping shader based on http:// www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf
  *
  * class AdaptiveToneMappingPass
  * @module Postprocessing
@@ -134,13 +134,13 @@ AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readB
 
 	if(this._adaptive)
 	{
-		//Render the luminance of the current scene into a render target with mipmapping enabled
+		// Render the luminance of the current scene into a render target with mipmapping enabled
 		this.quad.material = this.materialLuminance;
 		this.materialLuminance.uniforms.tDiffuse.value = readBuffer.texture;
 		renderer.setRenderTarget(this.currentLuminanceRT);
 		renderer.render(this.scene, this.camera);
 
-		//Use the new luminance values, the previous luminance and the frame delta to adapt the luminance over time.
+		// Use the new luminance values, the previous luminance and the frame delta to adapt the luminance over time.
 		this.quad.material = this.materialAdaptiveLum;
 		this.materialAdaptiveLum.uniforms.delta.value = delta;
 		this.materialAdaptiveLum.uniforms.lastLum.value = this.previousLuminanceRT.texture;
@@ -148,7 +148,7 @@ AdaptiveToneMappingPass.prototype.render = function(renderer, writeBuffer, readB
 		renderer.setRenderTarget(this.luminanceRT);
 		renderer.render(this.scene, this.camera);
 
-		//Copy the new adapted luminance value so that it can be used by the next frame.
+		// Copy the new adapted luminance value so that it can be used by the next frame.
 		this.quad.material = this.materialCopy;
 		this.copyUniforms.tDiffuse.value = this.luminanceRT.texture;
 		renderer.setRenderTarget(this.previousLuminanceRT);
@@ -236,7 +236,7 @@ AdaptiveToneMappingPass.prototype.createShader = function()
 
 AdaptiveToneMappingPass.prototype.reset = function()
 {
-	//Render targets
+	// Render targets
 	if(this.luminanceRT)
 	{
 		this.luminanceRT.dispose();
@@ -256,7 +256,7 @@ AdaptiveToneMappingPass.prototype.reset = function()
 	this.previousLuminanceRT = new THREE.WebGLRenderTarget(this.resolution, this.resolution, Pass.RGBALinear);
 	this.previousLuminanceRT.texture.generateMipmaps = false;
 
-	//We only need mipmapping for the current luminosity because we want a down-sampled version to sample in our adaptive shader
+	// We only need mipmapping for the current luminosity because we want a down-sampled version to sample in our adaptive shader
 	this.currentLuminanceRT = new THREE.WebGLRenderTarget(this.resolution, this.resolution,
 	{
 		minFilter: THREE.LinearMipMapLinearFilter,
@@ -270,7 +270,7 @@ AdaptiveToneMappingPass.prototype.reset = function()
 		this.materialToneMap.uniforms.luminanceMap.value = this.luminanceRT.texture;
 	}
 
-	//Put something in the adaptive luminance texture so that the scene can render initially
+	// Put something in the adaptive luminance texture so that the scene can render initially
 	this.quad.material = new THREE.MeshBasicMaterial({color: 0x777777});
 	this.materialLuminance.needsUpdate = true;
 	this.materialAdaptiveLum.needsUpdate = true;

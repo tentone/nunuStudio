@@ -6,7 +6,7 @@ function RectAreaLightInspector(parent, object)
 
 	var self = this;
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
@@ -17,7 +17,7 @@ function RectAreaLightInspector(parent, object)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Intensity
+	// Intensity
 	this.form.addText(Locale.intensity);
 	this.intensity = new Slider(this.form);
 	this.intensity.size.set(160, 18);
@@ -30,7 +30,7 @@ function RectAreaLightInspector(parent, object)
 	this.form.add(this.intensity);
 	this.form.nextRow();
 
-	//Rect width
+	// Rect width
 	this.form.addText(Locale.width);
 	this.width = new NumberBox(this.form);
 	this.width.size.set(60, 18);
@@ -42,7 +42,7 @@ function RectAreaLightInspector(parent, object)
 	this.form.add(this.width);
 	this.form.nextRow();
 	
-	//Rect height
+	// Rect height
 	this.form.addText(Locale.height);
 	this.height = new NumberBox(this.form);
 	this.height.size.set(60, 18);

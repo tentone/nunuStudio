@@ -51,7 +51,7 @@ function TabGroupSplit(parent, placement)
 	this.tabArea.style.backgroundColor = "rgba(0.0, 0.0, 0.0, 0.2)";
 	this.tabArea.style.pointerEvents = "none";
 
-	//Drag drop
+	// Drag drop
 	this.tab.element.ondrop = function(event)
 	{
 		event.preventDefault();
@@ -65,22 +65,22 @@ function TabGroupSplit(parent, placement)
 			var x = event.clientX - position.x;
 			var y = event.clientY - position.y;
 
-			//Left
+			// Left
 			if(x < self.size.x * self.dragBorder)
 			{
 				self.split(TabGroup.LEFT).attachTab(tab);
 			}
-			//Right
+			// Right
 			else if(x > self.size.x * (1 - self.dragBorder))
 			{
 				self.split(TabGroup.RIGHT).attachTab(tab);
 			}
-			//Top
+			// Top
 			else if(y < self.size.y * self.dragBorder)
 			{
 				self.split(TabGroup.TOP).attachTab(tab);
 			}
-			//Bottom
+			// Bottom
 			else if(y > self.size.y * (1 - self.dragBorder))
 			{
 				self.split(TabGroup.BOTTOM).attachTab(tab);
@@ -99,7 +99,7 @@ function TabGroupSplit(parent, placement)
 		}
 	};
 
-	//Drag over
+	// Drag over
 	this.tab.element.ondragover = function(event)
 	{
 		event.preventDefault();
@@ -113,7 +113,7 @@ function TabGroupSplit(parent, placement)
 		var x = event.clientX - position.x;
 		var y = event.clientY - position.y;
 
-		//Left
+		// Left
 		if(x < self.size.x * self.dragBorder)
 		{
 			self.tabArea.style.right = null;
@@ -128,7 +128,7 @@ function TabGroupSplit(parent, placement)
 				self.tab.element.appendChild(self.tabArea);
 			}
 		}
-		//Right
+		// Right
 		else if(x > self.size.x * (1 - self.dragBorder))
 		{
 			self.tabArea.style.left = null;
@@ -143,7 +143,7 @@ function TabGroupSplit(parent, placement)
 				self.tab.element.appendChild(self.tabArea);
 			}
 		}
-		//Top
+		// Top
 		else if(y < self.size.y * self.dragBorder)
 		{
 			self.tabArea.style.right = null;
@@ -158,7 +158,7 @@ function TabGroupSplit(parent, placement)
 				self.tab.element.appendChild(self.tabArea);
 			}
 		}
-		//Bottom
+		// Bottom
 		else if(y > self.size.y * (1 - self.dragBorder))
 		{
 			self.tabArea.style.top = null;
@@ -182,7 +182,7 @@ function TabGroupSplit(parent, placement)
 		}
 	};
 
-	//Drag leave
+	// Drag leave
 	this.tab.element.ondragleave = function(event)
 	{
 		event.preventDefault();
@@ -282,7 +282,7 @@ TabGroupSplit.prototype.collapse = function()
 			var parent = this.parent.parent;
 			var group = this.parent.elementA === this ? this.parent.elementB : this.parent.elementA;
 
-			//Dual container
+			// Dual container
 			if(parent instanceof DualContainer)
 			{
 				if(parent.elementA === this.parent)
@@ -298,7 +298,7 @@ TabGroupSplit.prototype.collapse = function()
 					parent.attachB(group);
 				}
 			}
-			//Tab container
+			// Tab container
 			else
 			{
 				this.parent.destroy();

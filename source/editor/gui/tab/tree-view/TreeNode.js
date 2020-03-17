@@ -10,26 +10,26 @@
  */
 function TreeNode(container)
 {
-	//Container
+	// Container
 	this.container = container;
 
-	//Attributes
+	// Attributes
 	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
-	//Object attached
+	// Object attached
 	this.object = null;
 	this.uuid = null;
 	this.folded = false;
 	this.selected = false;
 
-	//Children and parent tree nodes
+	// Children and parent tree nodes
 	this.parent = null;
 	this.children = [];
 	this.level = 0;
 
-	//Element
+	// Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.draggable = true;
@@ -40,7 +40,7 @@ function TreeNode(container)
 	this.element.style.boxSizing = "border-box";
 	this.container.element.appendChild(this.element);
 
-	//Arrow
+	// Arrow
 	this.arrow = document.createElement("img");
 	this.arrow.draggable = false;
 	this.arrow.style.position = "absolute";
@@ -51,7 +51,7 @@ function TreeNode(container)
 	this.arrow.style.top = "3px";
 	this.element.appendChild(this.arrow);
 
-	//Icon
+	// Icon
 	this.icon = document.createElement("img");
 	this.icon.draggable = false;
 	this.icon.style.position = "absolute";
@@ -62,7 +62,7 @@ function TreeNode(container)
 	this.icon.style.top = "3px";
 	this.element.appendChild(this.icon);
 
-	//Label
+	// Label
 	this.label = document.createElement("span");
 	this.label.style.overflow = "hidden";
 	this.label.style.position = "absolute";
@@ -71,7 +71,7 @@ function TreeNode(container)
 	this.label.style.top = "4px";
 	this.element.appendChild(this.label);
 
-	//Label text
+	// Label text
 	this.labelText = document.createTextNode("");
 	this.label.appendChild(this.labelText);
 
@@ -145,16 +145,16 @@ function TreeNode(container)
 	{
 		if(!self.object.locked)
 		{
-			//Scene and program flags
+			// Scene and program flags
 			var isProgram = self.object instanceof Program;
 			var isScene = self.object instanceof Scene;
 
-			//Context menu
+			// Context menu
 			var context = new ContextMenu(DocumentBody);
 			context.size.set(150, 20);
 			context.position.set(event.clientX, event.clientY);
 			
-			//Open editor
+			// Open editor
 			if(isScene)
 			{
 				context.addOption(Locale.sceneEditor, openSceneTab);
@@ -188,19 +188,19 @@ function TreeNode(container)
 				});
 			}
 
-			//Recalculate Origin
+			// Recalculate Origin
 			context.addOption(Locale.recenterGeometries, function()
 			{
 				ObjectUtils.recalculateGeometryOrigin(self.object);
 			});
 
-			//Rename
+			// Rename
 			context.addOption(Locale.rename, function()
 			{
 				Editor.renameObject(self.object);
 			});
 
-			//Delete
+			// Delete
 			if(!isProgram)
 			{
 				context.addOption(Locale.delete, function()
@@ -209,13 +209,13 @@ function TreeNode(container)
 				});
 			}
 
-			//Mesh specific stuff
+			// Mesh specific stuff
 			if(self.object instanceof THREE.Mesh || self.object instanceof THREE.SkinnedMesh || self.object instanceof THREE.InstancedMesh)
 			{
-				//If mesh has a geometry attached
+				// If mesh has a geometry attached
 				if(self.object.geometry !== undefined)
 				{
-					//Generate normals for the attached geometry
+					// Generate normals for the attached geometry
 					context.addOption(Locale.computeNormals, function()
 					{
 						var geometry = self.object.geometry.clone();
@@ -223,7 +223,7 @@ function TreeNode(container)
 						Editor.addAction(new ChangeAction(self.object, "geometry", geometry));
 					});
 
-					//Apply transformation to geometry
+					// Apply transformation to geometry
 					context.addOption(Locale.applyTransformation, function()
 					{
 						var geometry = self.object.geometry.clone();
@@ -256,7 +256,7 @@ function TreeNode(container)
 			// Add physics to object
 			if(self.object instanceof THREE.Mesh || self.object instanceof THREE.SkinnedMesh)
 			{
-				//Add physics object
+				// Add physics object
 				function createPhysics(object, mode)
 				{
 					var physics = new PhysicsObject();
@@ -297,7 +297,7 @@ function TreeNode(container)
 				});
 			}
 
-			//Change attribute of an object and all its children
+			// Change attribute of an object and all its children
 			function setObjectAttribute(object, attribute, value)
 			{
 				var actions = [];
@@ -319,14 +319,14 @@ function TreeNode(container)
 			{
 				var autoUpdate = context.addMenu(Locale.static);
 
-				//Set object and children to static mode
+				// Set object and children to static mode
 				autoUpdate.addOption(Locale.static, function()
 				{
 					var actions = setObjectAttribute(self.object, "matrixAutoUpdate", false);
 					Editor.addAction(new ActionBundle(actions));
 				});
 
-				//Set object and children to dynamic mode
+				// Set object and children to dynamic mode
 				autoUpdate.addOption(Locale.dynamic, function()
 				{
 					var actions = setObjectAttribute(self.object, "matrixAutoUpdate", true);
@@ -335,7 +335,7 @@ function TreeNode(container)
 
 				var shadow = context.addMenu(Locale.shadows);
 
-				//Set object and children shadow casting mode
+				// Set object and children shadow casting mode
 				shadow.addOption(Locale.enable, function()
 				{
 					var cast = setObjectAttribute(self.object, "castShadow", true);
@@ -343,7 +343,7 @@ function TreeNode(container)
 					Editor.addAction(new ActionBundle(cast.concat(receive)));
 				});
 
-				//Set object and children shadow casting mode
+				// Set object and children shadow casting mode
 				shadow.addOption(Locale.disable, function()
 				{
 					var cast = setObjectAttribute(self.object, "castShadow", false);
@@ -351,7 +351,7 @@ function TreeNode(container)
 					Editor.addAction(new ActionBundle(cast.concat(receive)));
 				});
 
-				//Duplicate object
+				// Duplicate object
 				context.addOption(Locale.duplicate, function()
 				{
 					var object = new ObjectLoader().parse(self.object.toJSON());
@@ -362,13 +362,13 @@ function TreeNode(container)
 					Editor.addAction(new AddAction(object, self.object.parent));
 				});
 
-				//Copy object
+				// Copy object
 				context.addOption(Locale.copy, function()
 				{
 					Editor.copyObject(self.object);
 				});
 
-				//Cut object
+				// Cut object
 				context.addOption(Locale.cut, function()
 				{
 					Editor.cutObject(self.object);
@@ -377,7 +377,7 @@ function TreeNode(container)
 			
 			if(!isProgram)
 			{
-				//Paste object form clipboard
+				// Paste object form clipboard
 				context.addOption(Locale.paste, function()
 				{
 					Editor.pasteObject(self.object);
@@ -399,7 +399,7 @@ function TreeNode(container)
 
 		if(!self.object.locked)
 		{
-			//Object drag
+			// Object drag
 			if(DragBuffer.buffer[0] instanceof THREE.Object3D)
 			{
 				if(event.layerY < 5)
@@ -417,7 +417,7 @@ function TreeNode(container)
 
 				self.setBorder(dragState);
 			}
-			//Resources, files, etc
+			// Resources, files, etc
 			else
 			{
 				dragState = TreeNode.INSIDE;
@@ -426,7 +426,7 @@ function TreeNode(container)
 		}
 	};
 
-	//Drop event (fired on the drop target)
+	// Drop event (fired on the drop target)
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
@@ -437,11 +437,11 @@ function TreeNode(container)
 			return;
 		}
 
-		//Collect element from buffer
+		// Collect element from buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var object = DragBuffer.get(uuid);
 
-		//Object 3D
+		// Object 3D
 		if(object instanceof THREE.Object3D)
 		{
 			if(object === self.object)
@@ -461,7 +461,7 @@ function TreeNode(container)
 				var dragIsScene = object instanceof Scene;
 				var dragIsProgram = object instanceof Program;
 
-				//Above
+				// Above
 				if(dragState === TreeNode.ABOVE)
 				{
 					if((dragIsScene && selfIsScene) || (!dragIsScene && !selfIsProgram && !selfIsScene))
@@ -470,7 +470,7 @@ function TreeNode(container)
 						Editor.addAction(new MoveAction(object, self.object.parent, index));
 					}
 				}
-				//Bellow
+				// Bellow
 				else if(dragState === TreeNode.BELLOW)
 				{
 					if((dragIsScene && selfIsScene) || (!dragIsScene && !selfIsProgram && !selfIsScene))
@@ -479,8 +479,8 @@ function TreeNode(container)
 						Editor.addAction(new MoveAction(object, self.object.parent, index));
 					}
 				}
-				//Inside
-				else //if(dragState === TreeNode.INSIDE)
+				// Inside
+				else // if(dragState === TreeNode.INSIDE)
 				{	
 					if((selfIsScene && !dragIsScene) || (dragIsScene && selfIsProgram) || (!selfIsScene && !selfIsProgram && !dragIsScene))
 					{
@@ -489,7 +489,7 @@ function TreeNode(container)
 				}
 			}
 		}
-		//Material
+		// Material
 		else if(object instanceof THREE.Material)
 		{
 			var actions = [];
@@ -506,7 +506,7 @@ function TreeNode(container)
 				Editor.addAction(new ActionBundle(actions));
 			}
 		}
-		//Dragged file
+		// Dragged file
 		else if(event.dataTransfer.files.length > 0)
 		{
 			var files = event.dataTransfer.files;
@@ -758,7 +758,7 @@ TreeNode.prototype.setBorder = function(place)
 	{
 		this.element.style.borderBottom = "1px solid #999999";
 	}
-	else //if(place === TreeNode.INSIDE)
+	else // if(place === TreeNode.INSIDE)
 	{
 		this.element.style.border = "1px solid #999999";
 	}
@@ -897,7 +897,7 @@ TreeNode.prototype.updateInterface = function()
 	{
 		var offset = this.level * 20;
 
-		//Arrow
+		// Arrow
 		if(this.object.isEmpty())
 		{
 			this.arrow.style.display = "none";

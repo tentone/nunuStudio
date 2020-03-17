@@ -72,32 +72,32 @@ function KinectDevice()
 	
 	this.dataReceived = false;
 
-	//Self pointer
+	// Self pointer
 	var self = this;
 
-	//Connection established
+	// Connection established
 	this.socket.onopen = function()
 	{
 		self.connected = true;
 	};
 
-	//Connection closed
+	// Connection closed
 	this.socket.onclose = function()
 	{
 		self.connected = false;
 	};
 
-	//Receive data from the server
+	// Receive data from the server
 	this.socket.onmessage = function(event)
 	{
-		//Point data received
+		// Point data received
 		if(typeof event.data === "string")
 		{
 			self.data = JSON.parse(event.data);
 			self.dataReceived = true;
 			self.dataTimeout = KinectDevice.DATA_TIMEOUT;
 		}
-		//Camera feed can be collected using URL.createObjectURL(event.data)
+		// Camera feed can be collected using URL.createObjectURL(event.data)
 		else if(event.data instanceof Blob)
 		{
 			self.camera = event.data;
@@ -150,27 +150,27 @@ KinectDevice.prototype = Object.create(THREE.Group.prototype);
  */
 KinectDevice.prototype.update = function(delta)
 {
-	//Check if there is data to process
+	// Check if there is data to process
 	if(this.data !== null)
 	{
 		if(this.dataReceived)
 		{
-			//Clear data received flag
+			// Clear data received flag
 			this.dataReceived = false;
 
-			//Remove all children
+			// Remove all children
 			while(this.children.length > 0)
 			{
 				this.children.pop();
 			}
 
-			//Show debug model
+			// Show debug model
 			if(this.debugModel)
 			{
 				var geometry = new THREE.SphereGeometry(0.04, 6, 6);
 				var material = new THREE.MeshPhongMaterial(0xff0000);
 
-				//Fill with new data
+				// Fill with new data
 				for(var j = 0; j < this.data.skeletons.length; j++)
 				{
 					var joints = this.data.skeletons[j].joints;
@@ -188,7 +188,7 @@ KinectDevice.prototype.update = function(delta)
 		{
 			this.dataTimeout--;
 
-			//If timeout Remove all children
+			// If timeout Remove all children
 			if(this.dataTimeout === 0)
 			{
 				while(this.children.length > 0)
@@ -199,7 +199,7 @@ KinectDevice.prototype.update = function(delta)
 		}
 	}
 
-	//Update children
+	// Update children
 	THREE.Object3D.prototype.update.call(this, delta);
 };
 

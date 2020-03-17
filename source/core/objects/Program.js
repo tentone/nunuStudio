@@ -233,7 +233,7 @@ Program.prototype.initialize = function()
 {
 	this.manager.create();
 
-	//If input null create input object
+	// If input null create input object
 	if(this.mouse === null)
 	{
 		this.mouse = new Mouse();
@@ -244,7 +244,7 @@ Program.prototype.initialize = function()
 		this.keyboard = new keyboard();
 	}
 
-	//Get default scene
+	// Get default scene
 	if(this.defaultScene !== null)
 	{
 		for(var i = 0; i < this.children.length; i++)
@@ -352,7 +352,7 @@ Program.prototype.render = function(renderer)
  */
 Program.prototype.resize = function(x, y)
 {
-	//Resize the default camera
+	// Resize the default camera
 	if(this.defaultCamera !== null)
 	{
 		this.defaultCamera.resize(x, y);
@@ -428,19 +428,19 @@ Program.prototype.exitVR = function()
  */
 Program.prototype.setScene = function(scene)
 {
-	//Try to get scene by UUID
+	// Try to get scene by UUID
 	if(typeof scene === "string")
 	{
 		scene = this.getObjectByName(scene);
 	}
 
-	//Dispose old scene to free up resources
+	// Dispose old scene to free up resources
 	if(this.scene !== null)
 	{
 		this.scene.dispose();
 	}
 
-	//Set new scene and inialize its resources
+	// Set new scene and inialize its resources
 	this.scene = scene;
 
 	if(this.scene !== null)
@@ -468,7 +468,7 @@ Program.prototype.remove = function(scene)
 {
 	if(scene instanceof Scene)
 	{
-		//Remove scene from the children list
+		// Remove scene from the children list
 		var index = this.children.indexOf(scene);
 		if(index > -1)
 		{
@@ -476,14 +476,14 @@ Program.prototype.remove = function(scene)
 			scene.parent = null;
 		}
 
-		//If the scene remove was in use, dispose it
+		// If the scene remove was in use, dispose it
 		if(scene === this.scene)
 		{
 			this.scene.dispose();
 			this.scene = null;
 		}
 		
-		//If there are no scenes on program set actual scene to null
+		// If there are no scenes on program set actual scene to null
 		if(this.children.length === 0)
 		{
 			this.scene = null;
@@ -576,7 +576,7 @@ Program.prototype.receiveDataApp = function(data)
 {
 	var found = false;
 
-	//Check if there is a script with onAppData method available
+	// Check if there is a script with onAppData method available
 	this.traverse(function(child)
 	{
 		if(child instanceof Script)
@@ -586,7 +586,7 @@ Program.prototype.receiveDataApp = function(data)
 		}
 	});
 
-	//Show warning message
+	// Show warning message
 	if(!found)
 	{
 		console.warn("nunuStudio: No script with onAppData found", data);
@@ -634,7 +634,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 	{
 		if(exportResources !== false)
 		{
-			//Textures
+			// Textures
 			var textures = self.textures;
 			for(var i in textures)
 			{
@@ -645,7 +645,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 				}
 			}
 
-			//Materials
+			// Materials
 			var materials = self.materials;
 			for(var i in materials)
 			{
@@ -656,7 +656,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 				}
 			}
 
-			//Fonts
+			// Fonts
 			var fonts = self.fonts;
 			for(var i in fonts)
 			{
@@ -667,7 +667,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 				}
 			}
 
-			//Audio
+			// Audio
 			var audio = self.audio;
 			for(var i in audio)
 			{
@@ -678,7 +678,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 				}
 			}
 
-			//Resources
+			// Resources
 			var resources = self.resources;
 			for(var i in resources)
 			{
@@ -691,26 +691,26 @@ Program.prototype.toJSON = function(meta, exportResources)
 		}
 	});
 
-	//Initial scene
+	// Initial scene
 	if(this.defaultScene !== null)
 	{
 		data.object.defaultScene = this.defaultScene;
 	}
 
-	//Information
+	// Information
 	data.object.author = this.author;
 	data.object.description = this.description;
 	data.object.version = this.version;
 
-	//Pointer
+	// Pointer
 	data.object.lockPointer = this.lockPointer;
 	data.object.handlePixelRatio = this.handlePixelRatio;
 	
-	//VR
+	// VR
 	data.object.vr = this.vr;
 	data.object.vrScale = this.vrScale;
 
-	//Rendering
+	// Rendering
 	data.object.rendererConfig = this.rendererConfig.toJSON();
 
 	return data;

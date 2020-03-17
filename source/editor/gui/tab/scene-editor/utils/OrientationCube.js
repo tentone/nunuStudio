@@ -30,20 +30,20 @@ function OrientationCube()
 	this.camera = new THREE.PerspectiveCamera(60, 1, 0.1, 10);
 	this.camera.position.z = 2;
 
-	//Raycaster
+	// Raycaster
 	this.raycaster = new THREE.Raycaster();
 	this.normalized = new THREE.Vector2(0, 0);
 
-	//Scene
+	// Scene
 	this.scene = new THREE.Scene();
 	this.scene.matrixAutoUpdate = false;
 
-	//Selected face
+	// Selected face
 	this.selected = null;
 
 	var plane = new THREE.PlaneBufferGeometry(1, 1);
 
-	//Cube faces
+	// Cube faces
 	var texture = new Texture(Global.FILE_PATH + "camera/xPos.png");
 	texture.format = THREE.RGBFormat;
 	this.xPos = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
@@ -134,7 +134,7 @@ OrientationCube.prototype.raycast = function(mouse, canvas)
 	return null;
 };
 
-//Update cube position from camera
+// Update cube position from camera
 OrientationCube.prototype.updateRotation = function(camera)
 {
 	this.scene.quaternion.copy(camera.quaternion);

@@ -15,21 +15,21 @@ function Audio(url, encoding)
 	
 	if(url !== undefined)
 	{
-		//Arraybuffer
+		// Arraybuffer
 		if(url instanceof ArrayBuffer)
 		{
 			this.data = url;
 			this.encoding = (encoding !== undefined) ? encoding : "";
 			this.format = "arraybuffer";
 		}
-		//Base64
+		// Base64
 		else if(Base64Utils.isBase64(url))
 		{
 			this.encoding = (encoding !== undefined) ? encoding : "";
 			this.data = ArraybufferUtils.fromBase64(url);
 			this.format = "arraybuffer";
 		}
-		//URL
+		// URL
 		else
 		{
 			this.data = FileSystem.readFileArrayBuffer(url);

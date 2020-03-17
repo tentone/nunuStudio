@@ -7,11 +7,11 @@ ObjectIcons.default = ObjectIcons.path + "misc/question.png";
 ObjectIcons.locked = ObjectIcons.path + "misc/padlock.png";
 
 ObjectIcons.icons = new Map([
-	//Devices
+	// Devices
 	["Kinect", ObjectIcons.path + "hw/kinect.png"],
 	["LeapDevice", ObjectIcons.path + "hw/leap.png"],
 
-	//Ligths
+	// Ligths
 	["Sky", ObjectIcons.path + "lights/sky.png"],
 	["SpotLight", ObjectIcons.path + "lights/spot.png"],
 	["PointLight", ObjectIcons.path + "lights/point.png"],
@@ -21,11 +21,11 @@ ObjectIcons.icons = new Map([
 	["RectAreaLight", ObjectIcons.path + "lights/rectarea.png"],
 	["LightProbe", ObjectIcons.path + "misc/probe.png"],
 
-	//Cameras
+	// Cameras
 	["PerspectiveCamera", ObjectIcons.path + "camera/prespective.png"],
 	["OrthographicCamera", ObjectIcons.path + "camera/orthographic.png"],
 
-	//Objects
+	// Objects
 	["SpineAnimation", ObjectIcons.path + "misc/spine.png"],
 	["InstancedMesh", ObjectIcons.path + "models/cubes.png"],
 	["SkinnedMesh", ObjectIcons.path + "misc/skeleton.png"],
@@ -37,23 +37,23 @@ ObjectIcons.icons = new Map([
 	["Line", ObjectIcons.path + "misc/nodes.png"],
 	["LineSegments", ObjectIcons.path + "misc/nodes.png"],
 	
-	//Text
+	// Text
 	["TextMesh", ObjectIcons.path + "text/textmesh.png"],
 	["TextBitmap", ObjectIcons.path + "text/text.png"],
 	["TextSprite", ObjectIcons.path + "text/textcanvas.png"],
 
-	//Program
+	// Program
 	["Program", ObjectIcons.path + "script/script.png"],
 	["Scene", ObjectIcons.path + "models/models.png"],
 
-	//Audio
+	// Audio
 	["Audio", ObjectIcons.path + "misc/audio.png"],
 	["PositionalAudio", ObjectIcons.path + "misc/audio_positional.png"],
 
-	//Physics
+	// Physics
 	["Physics", ObjectIcons.path + "misc/physics.png"],
 
-	//Others
+	// Others
 	["Object3D", ObjectIcons.path + "misc/scene.png"],
 	["CubeCamera", ObjectIcons.path + "misc/probe.png"],
 	["Bone", ObjectIcons.path + "misc/bone.png"],
@@ -63,7 +63,7 @@ ObjectIcons.icons = new Map([
 	["FirstPersonControls", ObjectIcons.path + "misc/crosshair.png"]
 ]);
 
-//Get icon path from object type
+// Get icon path from object type
 ObjectIcons.get = function(type)
 {
 	if(ObjectIcons.icons.has(type))

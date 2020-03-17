@@ -25,7 +25,7 @@ function Text(parent)
 	this.span.style.overflow = "hidden";
 	this.element.appendChild(this.span);
 
-	//Text
+	// Text
 	this.text = document.createTextNode("");
 	this.span.appendChild(this.text);
 

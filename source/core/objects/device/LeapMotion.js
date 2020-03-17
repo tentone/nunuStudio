@@ -61,29 +61,29 @@ function LeapMotion()
 	 */
 	this.useArm = false;
 
-	//Hand and Arm meshes
+	// Hand and Arm meshes
 	this.boneMeshes = [];
 	this.armMeshes = [];
 
-	//Debug Hand Material and Geometry
+	// Debug Hand Material and Geometry
 	this.material = new THREE.MeshPhongMaterial();
 	this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 
-	//Gesture
+	// Gesture
 	this.gesture = []
 	for(var i = 0; i < 10; i++)
 	{
 		this.gesture[i] = false;
 	}
 
-	//Poses
+	// Poses
 	this.pose = [];
 	for(var i = 0; i < 3; i++)
 	{
 		this.pose[i] = false;
 	}
 
-	//Data storage
+	// Data storage
 	this.data = null;
 }
 
@@ -194,7 +194,7 @@ LeapMotion.prototype.initialize = function()
 {
 	var self = this;
 
-	//Start leap worker to collect data
+	// Start leap worker to collect data
 	Leap.loop({background: true}, function(data)
 	{
 		self.data = data;
@@ -283,7 +283,7 @@ LeapMotion.prototype.setMode = function(mode)
  */
 LeapMotion.prototype.updatePoses = function()
 {
-	//Clean all pose flags
+	// Clean all pose flags
 	for(var i = 0; i < this.pose.length; i++)
 	{
 		this.pose[i] = true;
@@ -296,18 +296,18 @@ LeapMotion.prototype.updatePoses = function()
 		var center = hand.sphereCenter;
 		center = new THREE.Vector3(center[0], center[1], center[2]);
 
-		//Fingers position 
+		// Fingers position 
 		var distance = [];
 		var indicatorDistance = 0;
 		var fingerJoint = [];
 
-		//Clear pose status list
+		// Clear pose status list
 		for(var i = 0; i < this.pose.length; i++)
 		{
 			this.pose[i] = true;
 		}
 
-		//Fingers direction array
+		// Fingers direction array
 		var fingerDirection = [];
 
 		for(var i = 0; i < hand.fingers.length; i++)
@@ -359,7 +359,7 @@ LeapMotion.prototype.updatePoses = function()
  */
 LeapMotion.prototype.updateGestures = function()
 {
-	//Clean all event flags
+	// Clean all event flags
 	for(var i = 0; i < this.gesture.length; i++)
 	{
 		this.gesture[i] = false;
@@ -367,17 +367,17 @@ LeapMotion.prototype.updateGestures = function()
 	
 	var self = this;
 
-	//Gesture detection
+	// Gesture detection
 	if(this.data.valid && this.data.gestures.length > 0)
 	{
 		this.data.gestures.forEach(function(gesture)
 		{
 			if(gesture.type === "swipe")
 			{
-				//var direction;
+				// var direction;
 				self.gesture[LeapMotion.SWIPE] = true;
 
-				//X Direction
+				// X Direction
 				if(gesture.direction[0] > 0)
 				{	
 					self.gesture[LeapMotion.SWIPE_RIGHT] = true;
@@ -387,7 +387,7 @@ LeapMotion.prototype.updateGestures = function()
 					self.gesture[LeapMotion.SWIPE_LEFT] = true;
 				}
 
-				//Y Direction
+				// Y Direction
 				if(gesture.direction[1] > 0)
 				{
 					self.gesture[LeapMotion.SWIPE_UP] = true;
@@ -397,7 +397,7 @@ LeapMotion.prototype.updateGestures = function()
 					self.gesture[LeapMotion.SWIPE_DOWN] = true;
 				}
 
-				//Z Direction
+				// Z Direction
 				if(gesture.direction[2] > 0)
 				{
 					self.gesture[LeapMotion.SWIPE_FRONT] = true;
@@ -432,10 +432,10 @@ LeapMotion.prototype.updateGestures = function()
  */
 LeapMotion.prototype.updateDebugModel = function()
 {
-	//Self pointer
+	// Self pointer
 	var self = this;
 
-	//Remove all children
+	// Remove all children
 	this.armMeshes.forEach(function(item)
 	{
 		self.remove(item);
@@ -446,11 +446,11 @@ LeapMotion.prototype.updateDebugModel = function()
 		self.remove(item);
 	});
 
-	//Update bones
+	// Update bones
 	var countBones = 0;
 	var countArms = 0;
 
-	//TODO <CHECK THIS CODE>
+	// TODO <CHECK THIS CODE>
 	for(var i = 0; i < this.data.hands.length; i++)
 	{
 		var hand = this.data.hands[i];
@@ -481,7 +481,7 @@ LeapMotion.prototype.updateDebugModel = function()
 	}
 };
 
-//Add mesh to hand instance
+// Add mesh to hand instance
 LeapMotion.prototype.addMesh = function(meshes)
 {
 	var mesh = new Mesh(this.geometry, this.material);
@@ -491,7 +491,7 @@ LeapMotion.prototype.addMesh = function(meshes)
 	return mesh;
 };
 
-//Update mesh position and size
+// Update mesh position and size
 LeapMotion.prototype.updateMesh = function(bone, mesh)
 {
 	mesh.position.fromArray(bone.center());

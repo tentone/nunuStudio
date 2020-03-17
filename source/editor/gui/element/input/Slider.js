@@ -15,7 +15,7 @@ function Slider(parent)
 
 	var self = this;
 
-	//Text
+	// Text
 	this.text = document.createElement("div");
 	this.text.style.position = "absolute";
 	this.text.style.display = "none";
@@ -29,11 +29,11 @@ function Slider(parent)
 	this.text.style.borderColor = Editor.theme.barColor;	
 	document.body.appendChild(this.text);
 
-	//Text value
+	// Text value
 	this.textValue = document.createTextNode("");
 	this.text.appendChild(this.textValue);
 
-	//Mouse mouse move event
+	// Mouse mouse move event
 	this.element.onmousemove = function(event)
 	{
 		self.text.style.display = "flex";
@@ -43,13 +43,13 @@ function Slider(parent)
 		self.text.style.top = (event.clientY - 30) + "px";
 	};
 
-	//Mouse out event
+	// Mouse out event
 	this.element.onmouseout = function()
 	{
 		self.text.style.display = "none";
 	};
 
-	//Track
+	// Track
 	this.track = document.createElement("div");
 	this.track.style.position = "absolute";
 	this.track.style.backgroundColor = Editor.theme.audioTrack;
@@ -60,7 +60,7 @@ function Slider(parent)
 	this.track.style.height = "50%";
 	this.element.appendChild(this.track);
 
-	//Progress
+	// Progress
 	this.progress = document.createElement("div");
 	this.progress.style.pointerEvents = "none";
 	this.progress.style.position = "absolute";
@@ -68,7 +68,7 @@ function Slider(parent)
 	this.progress.style.height = "100%";
 	this.track.appendChild(this.progress);
 
-	//Scrubber
+	// Scrubber
 	this.scrubber = document.createElement("div");
 	this.scrubber.style.position = "absolute";
 	this.scrubber.style.backgroundColor = Editor.theme.audioScrubber;
@@ -94,12 +94,12 @@ function Slider(parent)
 	 */
 	this.onChange = null;
 
-	//Range
+	// Range
 	this.min = 1.0;
 	this.max = 2.0;
 	this.step = null;
 
-	//Drag control
+	// Drag control
 	this.mouseStart = 0;
 	this.valueStart = 0;
 
@@ -161,10 +161,10 @@ Slider.prototype = Object.create(Element.prototype);
  */
 Slider.prototype.setDisabled = function(value)
 {
-	//TODO
+	// TODO
 };
 
-//Set slider min step
+// Set slider min step
 Slider.prototype.setStep = function(step)
 {
 	this.step = step;
@@ -222,7 +222,7 @@ Slider.prototype.setValue = function(value)
 			value += this.step;
 		}
 
-		//Check for precision problems
+		// Check for precision problems
 		var stepVal = String(this.step).split(".");
 		if(stepVal.length > 1)
 		{

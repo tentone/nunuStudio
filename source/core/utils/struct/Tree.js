@@ -1,6 +1,6 @@
 "use strict";
 
-//TODO <NOT USED ANYWERE>
+// TODO <NOT USED ANYWERE>
 
 /**
  * Tree structure used to represent Trees.

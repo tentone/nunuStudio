@@ -6,7 +6,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Skinning
+	// Skinning
 	this.skinning = new CheckBox(this.form);
 	this.form.addText(Locale.skinning);
 	this.skinning.size.set(18, 18);
@@ -18,7 +18,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.skinning);
 	this.form.nextRow();
 
-	//Morph targets
+	// Morph targets
 	this.morphTargets = new CheckBox(this.form);
 	this.form.addText(Locale.morphTargets);
 	this.morphTargets.size.set(18, 18);
@@ -30,7 +30,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
 
-	//Wireframe
+	// Wireframe
 	this.wireframe = new CheckBox(this.form);
 	this.form.addText(Locale.wireframe);
 	this.wireframe.size.set(18, 18);
@@ -42,7 +42,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
-	//Shading mode
+	// Shading mode
 	this.form.addText(Locale.shading);
 	this.flatShading = new DropdownList(this.form);
 	this.flatShading.size.set(100, 18);
@@ -56,7 +56,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.flatShading);
 	this.form.nextRow();
 	
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
@@ -68,7 +68,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Specular color
+	// Specular color
 	this.form.addText("Specular");
 	this.specular = new ColorChooser(this.form);
 	this.specular.size.set(100, 18);
@@ -80,7 +80,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.specular);
 	this.form.nextRow();
 
-	//Shininess
+	// Shininess
 	this.form.addText("Shininess");
 	this.shininess = new Slider(this.form);
 	this.shininess.size.set(160, 18);
@@ -94,7 +94,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.shininess);
 	this.form.nextRow();
 
-	//Texture map
+	// Texture map
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
@@ -106,7 +106,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.map);
 	this.form.nextRow();
 
-	//Bump map
+	// Bump map
 	this.form.addText(Locale.bumpMap);
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.size.set(0, 100);
@@ -118,7 +118,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.bumpMap);
 	this.form.nextRow();
 
-	//Bump scale
+	// Bump scale
 	this.form.addText(Locale.scale);
 	this.bumpScale = new Slider(this.form);
 	this.bumpScale.size.set(160, 18);
@@ -132,7 +132,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.bumpScale);
 	this.form.nextRow();
 
-	//Normal map
+	// Normal map
 	this.form.addText(Locale.normalMap);
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.size.set(0, 100);
@@ -144,7 +144,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalMap);
 	this.form.nextRow();
 
-	//Normal map scale
+	// Normal map scale
 	this.form.addText(Locale.normalScale);
 	this.normalScale = new VectorBox(this.form);
 	this.normalScale.size.set(0, 18);
@@ -158,7 +158,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalScale);
 	this.form.nextRow();
 
-	//Normal type
+	// Normal type
 	this.form.addText(Locale.normalType);
 	this.normalMapType = new DropdownList(this.form);
 	this.normalMapType.size.set(100, 18);
@@ -172,7 +172,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalMapType);
 	this.form.nextRow();
 
-	//Displacement map
+	// Displacement map
 	this.form.addText(Locale.displacementMap);
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(0, 100);
@@ -184,7 +184,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementMap);
 	this.form.nextRow();
 
-	//Displacement map scale
+	// Displacement map scale
 	this.form.addText(Locale.scale);
 	this.displacementScale = new NumberBox(this.form);
 	this.displacementScale.size.set(60, 18);
@@ -197,7 +197,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementScale);
 	this.form.nextRow();
 
-	//Displacement map bias
+	// Displacement map bias
 	this.form.addText(Locale.bias);
 	this.displacementBias = new NumberBox(this.form);
 	this.displacementBias.size.set(60, 18);
@@ -210,7 +210,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementBias);
 	this.form.nextRow();
 
-	//Specular map
+	// Specular map
 	this.form.addText(Locale.specularMap);
 	this.specularMap = new TextureForm(this.form);
 	this.specularMap.size.set(0, 100);
@@ -222,7 +222,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.specularMap);
 	this.form.nextRow();
 
-	//Emissive map
+	// Emissive map
 	this.form.addText(Locale.emissiveMap);
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(0, 100);
@@ -234,7 +234,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissiveMap);
 	this.form.nextRow();
 
-	//Emissive color
+	// Emissive color
 	this.form.addText(Locale.color);
 	this.emissive = new ColorChooser(this.form);
 	this.emissive.size.set(100, 18);
@@ -246,7 +246,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissive);
 	this.form.nextRow();
 
-	//Emissive intensity
+	// Emissive intensity
 	this.form.addText(Locale.intensity);
 	this.emissiveIntensity = new NumberBox(this.form);
 	this.emissiveIntensity.size.set(60, 18);
@@ -259,7 +259,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissiveIntensity);
 	this.form.nextRow();
 
-	//Alpha map
+	// Alpha map
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
@@ -271,7 +271,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
 
-	//Environment map
+	// Environment map
 	this.form.addText(Locale.environmentMap);
 	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(0, 100);
@@ -283,7 +283,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.envMap);
 	this.form.nextRow();
 
-	//Combine environment map
+	// Combine environment map
 	this.form.addText(Locale.mode);
 	this.combine = new DropdownList(this.form);
 	this.combine.size.set(0, 18);
@@ -298,7 +298,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.combine);
 	this.form.nextRow();
 
-	//Reflectivity
+	// Reflectivity
 	this.form.addText(Locale.reflectivity);
 	this.reflectivity = new NumberBox(this.form);
 	this.reflectivity.size.set(0, 18);
@@ -311,7 +311,7 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.reflectivity);
 	this.form.nextRow();
 
-	//Refraction
+	// Refraction
 	this.form.addText(Locale.refractionRatio);
 	this.refractionRatio = new NumberBox(this.form);
 	this.refractionRatio.size.set(0, 18);

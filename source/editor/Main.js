@@ -7,7 +7,7 @@
  */
 function Editor(){}
 
-//Runtime
+// Runtime
 include("lib/three/three.js");
 
 include("lib/three/QuickHull.js");
@@ -220,7 +220,7 @@ include("source/core/utils/MathUtils.js");
 include("source/core/utils/ObjectUtils.js");
 include("source/core/utils/PhysicsGenerator.js");
 
-//Editor
+// Editor
 include("source/editor/Editor.js");
 include("source/editor/Global.js");
 

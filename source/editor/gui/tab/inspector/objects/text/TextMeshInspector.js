@@ -11,7 +11,7 @@ function TextMeshInspector(parent, object)
 		self.object.updateGeometry();
 	}
 
-	//Text
+	// Text
 	this.form.addText(Locale.text);
 	this.text = new TextArea(this.form);
 	this.text.size.set(190, 55);
@@ -22,7 +22,7 @@ function TextMeshInspector(parent, object)
 	this.form.add(this.text);
 	this.form.nextRow();
 
-	//Size
+	// Size
 	this.form.addText(Locale.size);
 	this.textSize = new NumberBox(this.form);
 	this.textSize.size.set(0, 18);
@@ -35,7 +35,7 @@ function TextMeshInspector(parent, object)
 	this.form.add(this.textSize);
 	this.form.nextRow();
 
-	//Extruded
+	// Extruded
 	this.extruded = new CheckBox(this.form);
 	this.form.addText("Extruded");
 	this.extruded.size.set(18, 18);
@@ -46,7 +46,7 @@ function TextMeshInspector(parent, object)
 	this.form.add(this.extruded);
 	this.form.nextRow();
 
-	//Height
+	// Height
 	this.form.addText(Locale.thickness);
 	this.height = new NumberBox(this.form);
 	this.height.size.set(0, 18);
@@ -59,7 +59,7 @@ function TextMeshInspector(parent, object)
 	this.form.add(this.height);
 	this.form.nextRow();
 
-	//Curve segments
+	// Curve segments
 	this.form.addText("Curve Detail");
 	this.curveSegments = new NumberBox(this.form);
 	this.curveSegments.size.set(0, 18);
@@ -72,7 +72,7 @@ function TextMeshInspector(parent, object)
 	this.form.add(this.curveSegments);
 	this.form.nextRow();
 
-	//Bevel
+	// Bevel
 	this.bevel = new CheckBox(this.form);
 	this.form.addText(Locale.bevel);
 	this.bevel.size.set(18, 18);
@@ -83,7 +83,7 @@ function TextMeshInspector(parent, object)
 	this.form.add(this.bevel);
 	this.form.nextRow();
 
-	//Bevel thickness
+	// Bevel thickness
 	this.form.addText("Bevel Thickness");
 	this.bevelThickness = new NumberBox(this.form);
 	this.bevelThickness.size.set(0, 18);
@@ -96,7 +96,7 @@ function TextMeshInspector(parent, object)
 	this.form.add(this.bevelThickness);
 	this.form.nextRow();
 
-	//Bevel size
+	// Bevel size
 	this.form.addText("Bevel Size");
 	this.bevelSize = new NumberBox(this.form);
 	this.bevelSize.size.set(0, 18);

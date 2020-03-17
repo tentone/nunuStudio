@@ -4,11 +4,11 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 {
 	MaterialEditor.call(this, parent, closeable, container, index);
 	
-	//Line
+	// Line
 	this.line = new THREE.LineLoop(MaterialEditor.geometries[0][1], null);
 	this.interactive.add(this.line);
 	
-	//Test model
+	// Test model
 	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
@@ -26,7 +26,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
@@ -38,7 +38,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Line width
+	// Line width
 	this.form.addText(Locale.width);
 	this.linewidth = new NumberBox(this.form);
 	this.linewidth.size.set(60, 18);
@@ -71,6 +71,6 @@ LineBasicMaterialEditor.prototype.update = function()
 
 	if(this.mouse.insideCanvas() && this.mouse.buttonPressed(Mouse.LEFT))
 	{
-		//TODO <CHANGE LINE DRAW MODE>
+		// TODO <CHANGE LINE DRAW MODE>
 	}
 };

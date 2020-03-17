@@ -106,7 +106,7 @@ Keyboard.update = function()
  */
 Keyboard.reset = function()
 {
-	//Reset all keys
+	// Reset all keys
 	for(var i = 0; i < this.keys.length; i++)
 	{
 		if(this.keys[i] !== undefined)

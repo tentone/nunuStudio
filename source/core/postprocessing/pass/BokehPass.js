@@ -21,16 +21,16 @@ function BokehPass(focus, aperture, maxblur)
 
 	this.type = "Bokeh";
 
-	//Render targets
+	// Render targets
 	this.renderTargetColor = new THREE.WebGLRenderTarget(0, 0, Pass.RGBLinear);
 	this.renderTargetDepth = this.renderTargetColor.clone();
 
-	//Depth material
+	// Depth material
 	this.materialDepth = new THREE.MeshDepthMaterial();
 	this.materialDepth.depthPacking = THREE.RGBADepthPacking;
 	this.materialDepth.blending = THREE.NoBlending;
 
-	//Bokeh material
+	// Bokeh material
 	this.uniforms = THREE.UniformsUtils.clone(THREE.BokehShader.uniforms);
 	this.uniforms["tDepth"].value = this.renderTargetDepth.texture;
 
@@ -42,11 +42,11 @@ function BokehPass(focus, aperture, maxblur)
 		fragmentShader: THREE.BokehShader.fragmentShader
 	});
 
-	//Scene
+	// Scene
 	this.createQuadScene();
 	this.quad.material = this.materialBokeh;
 
-	//Setters and getters for uniforms
+	// Setters and getters for uniforms
 	var self = this;
 	Object.defineProperties(this,
 	{
@@ -96,7 +96,7 @@ BokehPass.prototype = Object.create(Pass.prototype);
 
 BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
-	//Render depth into texture
+	// Render depth into texture
 	scene.overrideMaterial = this.materialDepth;
 
 	renderer.autoClear = false;
@@ -106,7 +106,7 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	renderer.clear(true, true, true);
 	renderer.render(scene, camera);
 
-	//Update camera uniforms
+	// Update camera uniforms
 	this.uniforms["tColor"].value = readBuffer.texture;
 	this.uniforms["nearClip"].value = camera.near;
 	this.uniforms["farClip"].value = camera.far;
@@ -127,7 +127,7 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
 	renderer.render(this.scene, this.camera);
 
-	//Restore scene
+	// Restore scene
 	scene.overrideMaterial = null;
 };
 

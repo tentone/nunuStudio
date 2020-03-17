@@ -50,7 +50,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 		sync = true;
 	}
 
-	//NodeJS
+	// NodeJS
 	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
 	{
 		if(sync === true)
@@ -84,7 +84,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 			return null;
 		}
 	}
-	//Browser
+	// Browser
 	else
 	{
 		var file = new XMLHttpRequest();
@@ -134,7 +134,7 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 		sync = true;
 	}
 
-	//NodeJS
+	// NodeJS
 	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
 	{
 		if(sync === true)
@@ -162,7 +162,7 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 			return null;
 		}
 	}
-	//Browser
+	// Browser
 	else
 	{
 		var file = new XMLHttpRequest();
@@ -212,7 +212,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 		sync = true;
 	}
 	
-	//NodeJS
+	// NodeJS
 	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
 	{
 		if(sync === true)
@@ -240,7 +240,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 			return null;
 		}
 	}
-	//Browser
+	// Browser
 	else
 	{
 		var file = new XMLHttpRequest();
@@ -656,17 +656,17 @@ FileSystem.copyFolder = function(src, dst)
 			var destiny = dst + "\\" + files[i];
 			var current = FileSystem.fs.statSync(source);
 			
-			//Directory
+			// Directory
 			if(current.isDirectory())
 			{
 				FileSystem.copyFolder(source, destiny);
 			}
-			//Symbolic link
+			// Symbolic link
 			else if(current.isSymbolicLink())
 			{
 				FileSystem.fs.symlinkSync(FileSystem.fs.readlinkSync(source), destiny);
 			}
-			//File
+			// File
 			else
 			{
 				FileSystem.copyFile(source, destiny);

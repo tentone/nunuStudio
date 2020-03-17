@@ -6,7 +6,7 @@ function FirstPersonControlsInspector(parent, object)
 
 	var self = this;
 
-	//Needs button pressed
+	// Needs button pressed
 	this.form.addText("Require button");
 	this.needsButtonPressed = new CheckBox(this.form);
 	this.needsButtonPressed.size.set(18, 18);
@@ -17,7 +17,7 @@ function FirstPersonControlsInspector(parent, object)
 	this.form.add(this.needsButtonPressed);
 	this.form.nextRow();
 	
-	//Sensitivity
+	// Sensitivity
 	this.form.addText("Sensitivity");
 	this.sensitivity = new Slider(this.form);
 	this.sensitivity.size.set(140, 18);
@@ -30,7 +30,7 @@ function FirstPersonControlsInspector(parent, object)
 	this.form.add(this.sensitivity);
 	this.form.nextRow();
 
-	//Movement
+	// Movement
 	this.form.addText("Movement");
 	this.movementEnabled = new CheckBox(this.form);
 	this.movementEnabled.size.set(18, 18);
@@ -41,7 +41,7 @@ function FirstPersonControlsInspector(parent, object)
 	this.form.add(this.movementEnabled);
 	this.form.nextRow();
 
-	//Move speed
+	// Move speed
 	this.form.addText("Move speed");
 	this.moveSpeed = new Slider(this.form);
 	this.moveSpeed.size.set(140, 18);
@@ -54,7 +54,7 @@ function FirstPersonControlsInspector(parent, object)
 	this.form.add(this.moveSpeed);
 	this.form.nextRow();
 
-	//Move on plane
+	// Move on plane
 	this.form.addText("Move plane");
 	this.moveOnPlane = new CheckBox(this.form);
 	this.moveOnPlane.size.set(18, 18);

@@ -50,7 +50,7 @@ LightProbe.prototype.generate = function()
 	cubeCamera.matrix.copy(this.matrix);
 	cubeCamera.matrixWorld.copy(this.matrixWorld);
 
-	//Since gamma is applied during rendering, the cubeCamera renderTarget texture encoding must be sRGBEncoding
+	// Since gamma is applied during rendering, the cubeCamera renderTarget texture encoding must be sRGBEncoding
 	cubeCamera.renderTarget.texture.encoding = THREE.sRGBEncoding;
 	cubeCamera.update(renderer, scene);
 

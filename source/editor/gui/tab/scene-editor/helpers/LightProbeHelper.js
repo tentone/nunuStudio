@@ -29,7 +29,7 @@ function LightProbeHelper(lightProbe, size)
 			'	return normalize((vec4(normal, 0.0) * matrix).xyz);',
 			'}',
 
-			'// source: https://graphics.stanford.edu/papers/envmap/envmap.pdf',
+			'// source: https:// graphics.stanford.edu/papers/envmap/envmap.pdf',
 			'vec3 shGetIrradianceAt(in vec3 normal, in vec3 shCoefficients[9]) {',
 
 			'	// normal is assumed to have unit length',

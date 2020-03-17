@@ -7,20 +7,20 @@ function DualContainer(parent)
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	//Container A
+	// Container A
 	this.elementA = null
 
-	//Container B
+	// Container B
 	this.elementB = null
 
-	//Resize tab
+	// Resize tab
 	this.resizeTab = document.createElement("div");
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
 	this.element.appendChild(this.resizeTab);
 
-	//Resize Tab
+	// Resize Tab
 	this.tabPosition = 0.5;
 	this.tabPositionMax = 0.95;
 	this.tabPositionMin = 0.05;
@@ -29,13 +29,13 @@ function DualContainer(parent)
 
 	var self = this;
 
-	//Tab mouse down
+	// Tab mouse down
 	this.resizeTab.onmousedown = function(event)
 	{
 		self.manager.create();
 	};
 
-	//Tab resize event manager
+	// Tab resize event manager
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
 	{
@@ -48,7 +48,7 @@ function DualContainer(parent)
 			self.tabPosition += event.movementY / self.size.y;
 		}
 
-		//Limit tab position
+		// Limit tab position
 		if(self.tabPosition > self.tabPositionMax)
 		{
 			self.tabPosition = self.tabPositionMax;

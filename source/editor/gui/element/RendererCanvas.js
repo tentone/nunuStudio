@@ -171,10 +171,10 @@ RendererCanvas.prototype.resetCanvas = function()
  */
 RendererCanvas.prototype.createRenderer = function()
 {
-	//Create renderer
+	// Create renderer
 	this.renderer = this.options.createRenderer(this.canvas);
 
-	//CSS Renderer
+	// CSS Renderer
 	if(this.useCSSRenderer)
 	{
 		this.cssRenderer = new CSS3DRenderer(this.cssDivision);

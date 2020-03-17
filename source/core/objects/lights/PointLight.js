@@ -3,7 +3,7 @@
 /**
  * PointLights emit light from a single point in all directions.
  * 
- * Based on THREE.PointLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/PointLight
+ * Based on THREE.PointLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/PointLight
  * 
  * @param {number} hex Light color in hex RGB
  * @param {number} intensity Light intensity

@@ -82,7 +82,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.video = null;
 	this.setVideo(video);
 
-	//Video update loop
+	// Video update loop
 	var self = this;
 	function update()
 	{

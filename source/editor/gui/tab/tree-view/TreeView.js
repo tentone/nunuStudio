@@ -80,14 +80,14 @@ TreeView.prototype.attach = function(program)
 
 	this.program = program;
 
-	//Destroy old root object
+	// Destroy old root object
 	if(this.root !== null)
 	{
 		this.root.destroy();
 		this.root = null;
 	}
 
-	//Create program tree
+	// Create program tree
 	this.buildTree();
 	this.updateChildPosition();
 };
@@ -134,7 +134,7 @@ TreeView.prototype.addObject = function(object, parent, index)
 		}
 	});
 
-	//Create object and children
+	// Create object and children
 	var element = parentNode.insertObject(object, index);
 	for(var k = 0; k < object.children.length; k++)
 	{
@@ -143,7 +143,7 @@ TreeView.prototype.addObject = function(object, parent, index)
 
 	this.updateChildPosition();
 
-	//Auxiliar method to insert object recursivelly
+	// Auxiliar method to insert object recursivelly
 	function insertObject(parent, object)
 	{
 		var element = parent.addObject(object);
@@ -243,7 +243,7 @@ TreeView.prototype.buildTree = function()
  */
 TreeView.prototype.updateChildPosition = function()
 {
-	//Check if parent if folded (recursive)
+	// Check if parent if folded (recursive)
 	function checkParentFolded(element)
 	{
 		if(element.parent === null)
@@ -259,7 +259,7 @@ TreeView.prototype.updateChildPosition = function()
 		return checkParentFolded(element.parent);
 	}
 
-	//Update childs position (recursive)
+	// Update childs position (recursive)
 	function updateChildPosition(parent, position, level, folded)
 	{
 		var children = parent.children;

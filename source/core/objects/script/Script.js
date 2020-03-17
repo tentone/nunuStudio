@@ -104,7 +104,7 @@ Script.includeRegexEnd = /["'][ \n]*\);*/gi;
  * @attribute DEFAULT
  * @type {string}
  */
-Script.DEFAULT = "function initialize()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nfunction update(delta)\n{\n	//TODO <UPDATE CODE>\n}\n";
+Script.DEFAULT = "function initialize()\n{\n	// TODO <INITIALIZATION CODE>\n}\n\nfunction update(delta)\n{\n	// TODO <UPDATE CODE>\n}\n";
 
 /**
  * List of default methods that can be implemented by scripts.
@@ -331,7 +331,7 @@ Script.prototype.compileCode = function(code, onReady)
 
 	try
 	{
-		//Public method declaration
+		// Public method declaration
 		var code = this.code;
 		for(var i = 0; i < Script.METHODS.length; i++)
 		{
@@ -339,7 +339,7 @@ Script.prototype.compileCode = function(code, onReady)
 			code += "\nif(this." + method + " == undefined && typeof " + method + " !== 'undefined'){this." + method + " = " + method + ";}";
 		}
 
-		//Append libraries to code
+		// Append libraries to code
 		if(this.mode === Script.APPEND)
 		{
 			var libs = Script.getIncludes(code);	
@@ -355,7 +355,7 @@ Script.prototype.compileCode = function(code, onReady)
 				console.warn(\"nunuStudio: Script running in append mode \" + name);\
 			}";
 		}
-		//Declare include method
+		// Declare include method
 		else if(this.mode === Script.EVALUATE)
 		{
 			code += "\nfunction include(name)\
@@ -371,7 +371,7 @@ Script.prototype.compileCode = function(code, onReady)
 				}\
 			}";
 		}
-		//Include
+		// Include
 		else if(this.mode === Script.INCLUDE)
 		{
 			var libs = Script.getIncludes(code);	
@@ -402,10 +402,10 @@ Script.prototype.compileCode = function(code, onReady)
 			}
 		}
 
-		//Evaluate code and create constructor
+		// Evaluate code and create constructor
 		var Constructor = new Function("Keyboard, Mouse, self, program, scene", code);
 
-		//Create script object
+		// Create script object
 		try
 		{
 			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);

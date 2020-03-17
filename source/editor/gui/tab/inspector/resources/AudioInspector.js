@@ -6,7 +6,7 @@ function AudioInspector(parent, object)
 
 	var self = this;
 
-	//Audio player
+	// Audio player
 	this.form.addText(Locale.audio);
 	this.player = new AudioPlayer(this.form);
 	this.player.size.set(190, 18);

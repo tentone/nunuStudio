@@ -15,7 +15,7 @@ function CapsuleGeometryForm(form, object)
 	this.form.addText(Locale.capsule);
 	this.form.nextRow();
 
-	//Radius
+	// Radius
 	this.form.addText(Locale.radius);
 	this.form.nextRow();
 	
@@ -35,7 +35,7 @@ function CapsuleGeometryForm(form, object)
 	this.form.add(this.radiusBottom);
 	this.form.nextRow();
 
-	//Height
+	// Height
 	this.form.addText(Locale.height);
 	this.height = new NumberBox(this.form);
 	this.height.size.set(0, 18);
@@ -44,7 +44,7 @@ function CapsuleGeometryForm(form, object)
 	this.form.add(this.height);
 	this.form.nextRow();
 
-	//Theta start
+	// Theta start
 	this.form.addText(Locale.thetaStart);
 	this.thetaStart = new NumberBox(this.form);
 	this.thetaStart.size.set(0, 18);
@@ -53,7 +53,7 @@ function CapsuleGeometryForm(form, object)
 	this.form.add(this.thetaStart);
 	this.form.nextRow();
 
-	//Theta length
+	// Theta length
 	this.form.addText(Locale.thetaLength);
 	this.thetaLength = new NumberBox(this.form);
 	this.thetaLength.size.set(0, 18);
@@ -62,7 +62,7 @@ function CapsuleGeometryForm(form, object)
 	this.form.add(this.thetaLength);
 	this.form.nextRow();
 
-	//Segments
+	// Segments
 	this.form.addText(Locale.segments);
 	this.form.nextRow();
 

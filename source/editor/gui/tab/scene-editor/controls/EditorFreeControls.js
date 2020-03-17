@@ -102,13 +102,13 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 {
 	this.needsUpdate = false;
 
-	//Look camera
+	// Look camera
 	if(mouse.buttonPressed(Mouse.LEFT))
 	{
 		this.orientation.y -= Editor.settings.editor.mouseLookSensitivity * (Editor.settings.editor.invertNavigation ? mouse.delta.y : -mouse.delta.y);
 		this.orientation.x -= Editor.settings.editor.mouseLookSensitivity * mouse.delta.x;
 
-		//Limit Vertical Rotation to 90 degrees
+		// Limit Vertical Rotation to 90 degrees
 		if(this.orientation.y < -1.57)
 		{
 			this.orientation.y = -1.57;
@@ -121,23 +121,23 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		this.needsUpdate = true;
 	}
 
-	//Move Camera on X and Z
+	// Move Camera on X and Z
 	if(mouse.buttonPressed(Mouse.RIGHT))
 	{
-		//Move speed
+		// Move speed
 		var speed = this.position.distanceTo(EditorFreeControls.ZERO) * Editor.settings.editor.mouseMoveSpeed;
 		if(speed < 0.01)
 		{
 			speed = 0.01;
 		}
 
-		//Move Camera Front and Back
+		// Move Camera Front and Back
 		var angleCos = Math.cos(this.orientation.x);
 		var angleSin = Math.sin(this.orientation.x);
 		this.position.z -= mouse.delta.y * speed * angleCos;
 		this.position.x -= mouse.delta.y * speed * angleSin;
 
-		//Move Camera Lateral
+		// Move Camera Lateral
 		var angleCos = Math.cos(this.orientation.x + MathUtils.PID2);
 		var angleSin = Math.sin(this.orientation.x + MathUtils.PID2);
 		this.position.z -= mouse.delta.x * speed * angleCos;
@@ -146,7 +146,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		this.needsUpdate = true;
 	}
 	
-	//Move Camera on Y
+	// Move Camera on Y
 	if(mouse.buttonPressed(Mouse.MIDDLE))
 	{
 		this.position.y += mouse.delta.y * Editor.settings.editor.mouseMoveSpeed * 100;
@@ -154,13 +154,13 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		this.needsUpdate = true;
 	}
 
-	//Move in camera direction using mouse scroll
+	// Move in camera direction using mouse scroll
 	if(mouse.wheel !== 0)
 	{
-		//Move speed
+		// Move speed
 		var speed = mouse.wheel * this.position.distanceTo(EditorFreeControls.ZERO) * Editor.settings.editor.mouseWheelSensitivity;
 
-		//Limit zoom speed
+		// Limit zoom speed
 		if(speed < 0 && speed > -0.02)
 		{
 			speed = -0.02;
@@ -170,7 +170,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 			speed = 0.02;
 		}
 
-		//Move camera
+		// Move camera
 		var direction = this.getWorldDirection(this.temp);
 		direction.multiplyScalar(speed);
 		this.position.add(direction);
@@ -178,7 +178,7 @@ EditorFreeControls.prototype.update = function(mouse, keyboard)
 		this.needsUpdate = true;
 	}
 
-	//WASD movement
+	// WASD movement
 	if(Editor.settings.editor.keyboardNavigation)
 	{
 		if(keyboard.keyPressed(Keyboard.S))

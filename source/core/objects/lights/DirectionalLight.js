@@ -5,7 +5,7 @@
  * 
  * This light will behave as though it is infinitely far away and the rays produced from it are all parallel.
  * 
- * Based on THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight
+ * Based on THREE.DirectionalLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/DirectionalLight
  * 
  * @param {number} hex Light color in hex RGB
  * @param {number} intensity Light intensity

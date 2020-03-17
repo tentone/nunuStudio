@@ -15,7 +15,7 @@ function BoxGeometryForm(form, object)
 	this.form.addText(Locale.box);
 	this.form.nextRow();
 	
-	//Size
+	// Size
 	this.form.addText(Locale.size);
 	this.sizeRow = new NumberRow(this.form);
 	this.sizeRow.size.set(0, 18);
@@ -35,7 +35,7 @@ function BoxGeometryForm(form, object)
 	this.form.add(this.sizeRow);
 	this.form.nextRow();
 
-	//Segments
+	// Segments
 	this.form.addText(Locale.segments);
 	this.segmentsRow = new NumberRow(this.form);
 	this.segmentsRow.size.set(0, 18);
@@ -55,7 +55,7 @@ function BoxGeometryForm(form, object)
 	this.form.add(this.segmentsRow);
 	this.form.nextRow();
 
-	//Buffer
+	// Buffer
 	this.buffer = new CheckBox(this.form);
 	this.form.addText(Locale.buffered);
 	this.buffer.size.set(18, 18);

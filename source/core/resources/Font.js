@@ -34,14 +34,14 @@ function Font(url)
 
 	if(url !== undefined)
 	{	
-		//Arraybuffer
+		// Arraybuffer
 		if(url instanceof ArrayBuffer)
 		{
 			this.data = url;
 			this.format = "arraybuffer";
 			this.loadTTF();
 		}
-		//Opentype JSON
+		// Opentype JSON
 		else if(typeof url === "object")
 		{
 			this.data = url;
@@ -49,7 +49,7 @@ function Font(url)
 			this.format = "json";
 			this.encoding = "json";
 		}
-		//URL
+		// URL
 		else
 		{
 			this.encoding = FileSystem.getFileExtension(url);
@@ -197,7 +197,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 
 	return shapes;
 
-	//Create paths for text
+	// Create paths for text
 	function createPaths(text)
 	{
 		var chars = String(text).split("");
@@ -228,7 +228,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 		return paths;
 	}
 
-	//Create path for a character
+	// Create path for a character
 	function createPath(c, scale, offsetX, offsetY)
 	{
 		var glyph = data.glyphs[c] || data.glyphs["?"];
@@ -240,7 +240,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 
 		var path = new THREE.ShapePath();
 
-		//Temporary variables
+		// Temporary variables
 		var pts = [], b2 = THREE.ShapeUtils.b2, b3 = THREE.ShapeUtils.b3;
 		var x, y, cpx, cpy, cpx0, cpy0, cpx1, cpy1, cpx2, cpy2, laste;
 
@@ -252,21 +252,21 @@ Font.prototype.generateShapes = function(text, size, divisions)
 			{
 				var action = outline[i++];
 
-				//Move to
+				// Move to
 				if(action === "m")
 				{
 					x = outline[i++] * scale + offsetX;
 					y = outline[i++] * scale + offsetY;
 					path.moveTo(x, y);
 				}
-				//Line to
+				// Line to
 				if(action === "l")
 				{
 					x = outline[i++] * scale + offsetX;
 					y = outline[i++] * scale + offsetY;
 					path.lineTo(x, y);
 				}
-				//Quadratic curve to
+				// Quadratic curve to
 				else if(action === "q")
 				{
 					cpx = outline[i++] * scale + offsetX;
@@ -290,7 +290,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 						}
 					}
 				}
-				//Bezier curve to
+				// Bezier curve to
 				else if(action === "b")
 				{
 					cpx = outline[i++] * scale + offsetX;

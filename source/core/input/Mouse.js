@@ -12,7 +12,7 @@
  */
 function Mouse(domElement, dontInitialize)
 {
-	//Raw data
+	// Raw data
 	this._keys = new Array(5);
 	this._position = new THREE.Vector2(0, 0);
 	this._positionUpdated = false;
@@ -89,7 +89,7 @@ function Mouse(domElement, dontInitialize)
 	 */
 	this.events = new EventManager();
 
-	//Initialize key instances
+	// Initialize key instances
 	for(var i = 0; i < 5; i++)
 	{
 		this._doubleClicked[i] = false;
@@ -98,13 +98,13 @@ function Mouse(domElement, dontInitialize)
 		this.keys[i] = new Key();
 	}
 
-	//Self pointer
+	// Self pointer
 	var self = this;
 
-	//Scroll wheel
+	// Scroll wheel
 	if(window.onmousewheel !== undefined)
 	{
-		//Chrome, edge
+		// Chrome, edge
 		this.events.add(this.domElement, "mousewheel", function(event)
 		{
 			self._wheel = event.deltaY;
@@ -113,7 +113,7 @@ function Mouse(domElement, dontInitialize)
 	}
 	else if(window.addEventListener !== undefined)
 	{
-		//Firefox
+		// Firefox
 		this.events.add(this.domElement, "DOMMouseScroll", function(event)
 		{
 			self._wheel = event.detail * 30;
@@ -129,13 +129,13 @@ function Mouse(domElement, dontInitialize)
 		});
 	}
 
-	//Touchscreen input events
+	// Touchscreen input events
 	if(window.ontouchstart !== undefined || navigator.msMaxTouchPoints > 0)
 	{
-		//Auxiliar variables to calculate touch delta
+		// Auxiliar variables to calculate touch delta
 		var lastTouch = new Vector2(0, 0);
 
-		//Touch start event
+		// Touch start event
 		this.events.add(this.domElement, "touchstart", function(event)
 		{
 			var touch = event.touches[0];
@@ -146,19 +146,19 @@ function Mouse(domElement, dontInitialize)
 			lastTouch.set(touch.clientX, touch.clientY);
 		});
 
-		//Touch end event
+		// Touch end event
 		this.events.add(this.domElement, "touchend", function(event)
 		{
 			self.updateKey(Mouse.LEFT, Key.UP);
 		});
 
-		//Touch cancel event
+		// Touch cancel event
 		this.events.add(this.domElement, "touchcancel", function(event)
 		{
 			self.updateKey(Mouse.LEFT, Key.UP);
 		});
 
-		//Touch move event
+		// Touch move event
 		this.events.add(document.body, "touchmove", function(event)
 		{
 			var touch = event.touches[0];
@@ -167,31 +167,31 @@ function Mouse(domElement, dontInitialize)
 		});
 	}
 
-	//Move
+	// Move
 	this.events.add(this.domElement, "mousemove", function(event)
 	{
 		self.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
 	});
 
-	//Button pressed
+	// Button pressed
 	this.events.add(this.domElement, "mousedown", function(event)
 	{
 		self.updateKey(event.which - 1, Key.DOWN);
 	});
 
-	//Button released
+	// Button released
 	this.events.add(this.domElement, "mouseup", function(event)
 	{
 		self.updateKey(event.which - 1, Key.UP);
 	});
 
-	//Drag start
+	// Drag start
 	this.events.add(this.domElement, "dragstart", function(event)
 	{
 		self.updateKey(event.which - 1, Key.UP);
 	});
 
-	//Mouse double click
+	// Mouse double click
 	this.events.add(this.domElement, "dblclick", function(event)
 	{	
 		self._doubleClicked[event.which - 1] = true;
@@ -421,7 +421,7 @@ Mouse.updateKey = function(button, action)
  */
 Mouse.update = function()
 {
-	//Update mouse keys state
+	// Update mouse keys state
 	for(var i = 0; i < 5; i++)
 	{
 		if(this._keys[i].justPressed && this.keys[i].justPressed)
@@ -435,7 +435,7 @@ Mouse.update = function()
 
 		this.keys[i].set(this._keys[i].justPressed, this._keys[i].pressed, this._keys[i].justReleased);
 
-		//Update mouse double click
+		// Update mouse double click
 		if(this._doubleClicked[i] === true)
 		{
 			this.doubleClicked[i] = true;
@@ -447,7 +447,7 @@ Mouse.update = function()
 		}
 	}
 
-	//Update mouse wheel
+	// Update mouse wheel
 	if(this._wheelUpdated)
 	{
 		this.wheel = this._wheel;
@@ -458,7 +458,7 @@ Mouse.update = function()
 		this.wheel = 0;
 	}
 
-	//Update mouse Position if needed
+	// Update mouse Position if needed
 	if(this._positionUpdated)
 	{
 		this.delta.copy(this._delta);

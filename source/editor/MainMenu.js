@@ -15,7 +15,7 @@ function MainMenu(parent)
 
 	this.preventDragEvents();
 
-	//Editor Logo
+	// Editor Logo
 	var logo = document.createElement("img");
 	logo.style.display = "block";
 	logo.style.position = "absolute";
@@ -27,19 +27,19 @@ function MainMenu(parent)
 	logo.src = Global.FILE_PATH + "logo.png";
 	this.element.appendChild(logo);
 
-	//File
+	// File
 	var fileMenu = new DropdownMenu(this);
 	fileMenu.setText("File");
 	fileMenu.size.set(120, this.size.y);
 	fileMenu.position.set(0, 0);
 
-	//New project
+	// New project
 	fileMenu.addOption(Locale.new, function()
 	{
 		Editor.gui.newProgram();
 	}, Global.FILE_PATH + "icons/misc/new.png");
 
-	//Save project
+	// Save project
 	fileMenu.addOption(Locale.save, function()
 	{
 		if(Editor.openFile !== null)
@@ -52,13 +52,13 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/misc/save.png");
 
-	//Save project
+	// Save project
 	fileMenu.addOption(Locale.saveAs, function()
 	{
 		Editor.gui.saveProgram();
 	}, Global.FILE_PATH + "icons/misc/save.png").setAltText("CTRL+S");
 
-	//Save readable legacy format
+	// Save readable legacy format
 	if(Nunu.developmentMode() && Nunu.runningOnDesktop())
 	{
 		fileMenu.addOption("Save ISP", function()
@@ -70,13 +70,13 @@ function MainMenu(parent)
 		}, Global.FILE_PATH + "icons/misc/save.png");
 	}
 
-	//Load Project
+	// Load Project
 	fileMenu.addOption(Locale.load, function()
 	{
 		Editor.gui.loadProgram();
 	}, Global.FILE_PATH + "icons/misc/load.png").setAltText("CTRL+L");
 
-	//Settings
+	// Settings
 	fileMenu.addOption(Locale.settings, function()
 	{
 		var tab = Editor.gui.tab.getTab(SettingsTab);
@@ -87,12 +87,12 @@ function MainMenu(parent)
 		tab.select();
 	}, Global.FILE_PATH + "icons/misc/settings.png");
 
-	//Publish
+	// Publish
 	var publish = fileMenu.addMenu(Locale.publish, Global.FILE_PATH + "icons/misc/publish.png");
 
 	if(Nunu.runningOnDesktop())
 	{
-		//Publish web
+		// Publish web
 		publish.addOption("Web", function()
 		{
 			FileSystem.chooseFile(function(files)
@@ -109,7 +109,7 @@ function MainMenu(parent)
 			}, "", Editor.program.name);
 		}, Global.FILE_PATH + "icons/platform/web.png");
 
-		//Android
+		// Android
 		if(Nunu.developmentMode())
 		{
 			var android = publish.addMenu("Android", Global.FILE_PATH + "icons/platform/android.png");
@@ -146,7 +146,7 @@ function MainMenu(parent)
 
 		if(Nunu.runningOnDesktop())
 		{
-			//Publish windows
+			// Publish windows
 			publish.addOption("Windows", function()
 			{
 				FileSystem.chooseFile(function(files)
@@ -164,7 +164,7 @@ function MainMenu(parent)
 				}, "", Editor.program.name);
 			}, Global.FILE_PATH + "icons/platform/windows.png");
 
-			//Publish linux
+			// Publish linux
 			publish.addOption("Linux", function()
 			{
 				FileSystem.chooseFile(function(files)
@@ -183,7 +183,7 @@ function MainMenu(parent)
 			}, Global.FILE_PATH + "icons/platform/linux.png");
 	
 
-			//Publish macos
+			// Publish macos
 			publish.addOption("macOS", function()
 			{
 				FileSystem.chooseFile(function(files)
@@ -202,7 +202,7 @@ function MainMenu(parent)
 			}, Global.FILE_PATH + "icons/platform/osx.png");
 		}
 	}
-	//Running on web browser
+	// Running on web browser
 	else
 	{
 		publish.addOption("Web", function()
@@ -223,7 +223,7 @@ function MainMenu(parent)
 		}, Global.FILE_PATH + "icons/platform/web.png");
 	}
 
-	//Import
+	// Import
 	fileMenu.addOption(Locale.import, function()
 	{
 		FileSystem.chooseFile(function(files)
@@ -271,10 +271,10 @@ function MainMenu(parent)
 
 	}, Global.FILE_PATH + "icons/misc/import.png");
 
-	//Export menu
+	// Export menu
 	var exportMenu = fileMenu.addMenu(Locale.export, Global.FILE_PATH + "icons/misc/export.png");
 
-	//Export OBJ
+	// Export OBJ
 	exportMenu.addOption("OBJ", function()
 	{
 		if(Nunu.runningOnDesktop())
@@ -283,7 +283,7 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					//TODO <SELECT SCENE TO EXPORT>
+					// TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.OBJExporter();
 					var data = exporter.parse(Editor.getScene());
 					FileSystem.writeFile(files[0].path, data);
@@ -294,7 +294,7 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				//TODO <SELECT SCENE TO EXPORT>
+				// TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.OBJExporter();
 				var data = exporter.parse(Editor.getScene());
 				FileSystem.writeFile(fname, data);
@@ -302,7 +302,7 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
-	//Export GLTF
+	// Export GLTF
 	exportMenu.addOption("GLTF", function()
 	{
 		if(Nunu.runningOnDesktop())
@@ -311,7 +311,7 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					//TODO <SELECT SCENE TO EXPORT>
+					// TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.GLTFExporter();
 					exporter.parse(Editor.getScene(), function(result)
 					{
@@ -324,7 +324,7 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				//TODO <SELECT SCENE TO EXPORT>
+				// TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.GLTFExporter();
 				exporter.parse(Editor.getScene(), function(result)
 				{
@@ -334,7 +334,7 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/gltf.png");
 
-	//Export GLB
+	// Export GLB
 	exportMenu.addOption("GLB", function()
 	{
 		if(Nunu.runningOnDesktop())
@@ -343,7 +343,7 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					//TODO <SELECT SCENE TO EXPORT>
+					// TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.GLTFExporter();
 					exporter.parse(Editor.getScene(), function(result)
 					{
@@ -356,7 +356,7 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				//TODO <SELECT SCENE TO EXPORT>
+				// TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.GLTFExporter();
 				exporter.parse(Editor.getScene(), function(result)
 				{
@@ -366,7 +366,7 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/gltf.png");
 
-	//Export Google Draco
+	// Export Google Draco
 	exportMenu.addOption("Draco", function()
 	{
 		if(Editor.selection.length > 0 && Editor.selection[0].geometry !== undefined)
@@ -400,7 +400,7 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
-	//Export Collada
+	// Export Collada
 	exportMenu.addOption("Collada", function()
 	{
 		if(Nunu.runningOnDesktop())
@@ -409,11 +409,11 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					//TODO <SELECT SCENE TO EXPORT>
+					// TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.ColladaExporter();
 					exporter.parse(Editor.getScene(), function(result)
 					{
-						//TODO <PROCESS result.textures>
+						// TODO <PROCESS result.textures>
 						FileSystem.writeFile(files[0].path, result.data);
 					}, {binary: false});
 					
@@ -424,18 +424,18 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				//TODO <SELECT SCENE TO EXPORT>
+				// TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.ColladaExporter();
 				exporter.parse(Editor.getScene(), function(result)
 				{
-					//TODO <PROCESS result.textures>b
+					// TODO <PROCESS result.textures>b
 					FileSystem.writeFile(fname, result.data);
 				}, {binary: false});
 			}, ".dae");
 		}
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
-	//Export PLY
+	// Export PLY
 	exportMenu.addOption("PLY", function()
 	{
 		if(Nunu.runningOnDesktop())
@@ -444,7 +444,7 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					//TODO <SELECT SCENE TO EXPORT>
+					// TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.PLYExporter();
 					exporter.parse(Editor.getScene(), function(result)
 					{
@@ -458,7 +458,7 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				//TODO <SELECT SCENE TO EXPORT>
+				// TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.PLYExporter();
 				exporter.parse(Editor.getScene(), function(result)
 				{
@@ -477,7 +477,7 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					//TODO <SELECT SCENE TO EXPORT>
+					// TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.PLYExporter();
 					exporter.parse(Editor.getScene(), function(result)
 					{
@@ -491,7 +491,7 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				//TODO <SELECT SCENE TO EXPORT>
+				// TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.PLYExporter();
 				exporter.parse(Editor.getScene(), function(result)
 				{
@@ -502,7 +502,7 @@ function MainMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 
-	//Export STL
+	// Export STL
 	exportMenu.addOption("STL", function()
 	{
 		if(Nunu.runningOnDesktop())
@@ -511,7 +511,7 @@ function MainMenu(parent)
 			{
 				if(files.length > 0)
 				{
-					//TODO <SELECT SCENE TO EXPORT>
+					// TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.STLExporter();
 					var data = exporter.parse(Editor.getScene());
 					FileSystem.writeFile(files[0].path, data);
@@ -522,7 +522,7 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				//TODO <SELECT SCENE TO EXPORT>
+				// TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.STLExporter();
 				var data = exporter.parse(Editor.getScene());
 				FileSystem.writeFile(fname, data);
@@ -530,7 +530,7 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
-	//Export Binary STL
+	// Export Binary STL
 	exportMenu.addOption("STL (Binary)", function()
 	{
 		if(Nunu.runningOnDesktop())
@@ -556,7 +556,7 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
-	//Exit
+	// Exit
 	if(Nunu.runningOnDesktop())
 	{
 		fileMenu.addOption(Locale.exit, function()
@@ -570,7 +570,7 @@ function MainMenu(parent)
 
 	fileMenu.updateInterface();
 
-	//Editor
+	// Editor
 	var editMenu = new DropdownMenu(this); editMenu.setText("Edit");
 	editMenu.size.set(100, this.size.y);
 	editMenu.position.set(120,0);
@@ -614,7 +614,7 @@ function MainMenu(parent)
 
 	var csg = editMenu.addMenu("CSG", Global.FILE_PATH + "icons/models/figures.png");
 
-	//Create BSP for CSG operation
+	// Create BSP for CSG operation
 	function createBSP(object)
 	{
 		var geometry = object.geometry;
@@ -633,7 +633,7 @@ function MainMenu(parent)
 		return new ThreeBSP(geometry);
 	}
 
-	//Verify is CSG operation is possible
+	// Verify is CSG operation is possible
 	function verifyCSG()
 	{
 		if(Editor.selection.length < 2)
@@ -654,7 +654,7 @@ function MainMenu(parent)
 		return true;
 	}
 
-	//Create CSG action
+	// Create CSG action
 	function createCSGAction(mesh, a, b)
 	{
 		mesh.material = Editor.defaultMaterial;
@@ -754,7 +754,7 @@ function MainMenu(parent)
 		Editor.addObject(mesh);
 	}, Global.FILE_PATH + "icons/models/figures.png");
 
-	//Compute mesh normals
+	// Compute mesh normals
 	editMenu.addOption(Locale.computeNormals, function()
 	{
 		if(Editor.selection.length < 1)
@@ -767,7 +767,7 @@ function MainMenu(parent)
 
 	}, Global.FILE_PATH + "icons/misc/probe.png");
 
-	//Apply tranformation
+	// Apply tranformation
 	editMenu.addOption(Locale.applyTransformation, function()
 	{
 		if(Editor.selection.length < 1)
@@ -784,7 +784,7 @@ function MainMenu(parent)
 
 	}, Global.FILE_PATH + "icons/tools/move.png");
 
-	//Merge geometries
+	// Merge geometries
 	editMenu.addOption("Merge geometries", function()
 	{
 		if(Editor.selection.length < 2)
@@ -800,14 +800,14 @@ function MainMenu(parent)
 			var obj = Editor.selection[i];
 			if(obj.geometry !== undefined)
 			{
-				//Convert to geometry and merge
+				// Convert to geometry and merge
 				if(obj.geometry instanceof THREE.BufferGeometry)
 				{
 					var converted = new THREE.Geometry();
 					converted.fromBufferGeometry(obj.geometry);
 					geometry.merge(converted, obj.matrixWorld)
 				}
-				//Merge geometry
+				// Merge geometry
 				else
 				{
 					geometry.merge(obj.geometry, obj.matrixWorld)
@@ -823,7 +823,7 @@ function MainMenu(parent)
 
 	editMenu.updateInterface();
 
-	//Project
+	// Project
 	var projectMenu = new DropdownMenu(this);
 	projectMenu.setText(Locale.project);
 	projectMenu.size.set(100, this.size.y);
@@ -856,7 +856,7 @@ function MainMenu(parent)
 
 	projectMenu.updateInterface();
 
-	//About
+	// About
 	var about = new ButtonText(this);
 	about.setText(Locale.about);
 	about.size.set(100, this.size.y);
@@ -872,7 +872,7 @@ function MainMenu(parent)
 		tab.select();
 	});
 
-	//Run
+	// Run
 	this.run = new ButtonText(this);
 	this.run.setText(Locale.run);
 	this.run.size.set(100, this.size.y);

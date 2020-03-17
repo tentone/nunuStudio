@@ -6,7 +6,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Preview scene
+	// Preview scene
 	this.sky = new Sky();
 	this.sky.visible = false;
 	this.scene.add(this.sky);
@@ -16,7 +16,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.sprite = new THREE.Sprite(null);
 	this.interactive.add(this.sprite);
 
-	//Sky
+	// Sky
 	this.previewForm.addText(Locale.sky);
 	this.skyEnabled = new CheckBox(this.previewForm);
 	this.skyEnabled.size.set(18, 18);
@@ -28,7 +28,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.skyEnabled);
 	this.previewForm.nextRow();
 	
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
@@ -40,7 +40,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Rotation
+	// Rotation
 	this.form.addText(Locale.rotation);
 	this.rotation = new NumberBox(this.form);
 	this.rotation.size.set(60, 18);
@@ -53,7 +53,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
-	//Texture map
+	// Texture map
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(100, 100);

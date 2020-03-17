@@ -7,7 +7,7 @@
  *
  * nunuStudio includes tools to create cannon shapes from three geometry objects.
  * 
- * Documentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/
+ * Documentation for cannon.js physics available here http:// schteppe.github.io/cannon.js/docs/
  * 
  * @class PhysicsObject
  * @extends {Group}
@@ -109,7 +109,7 @@ PhysicsObject.prototype.initialize = function()
 		this.body.quaternion.copy(quaternion);
 	}
 
-	//Physics world
+	// Physics world
 	var node = this;
 	while(node.parent !== null)
 	{
@@ -142,7 +142,7 @@ PhysicsObject.prototype.update = function(delta)
 	else if(this.mode === PhysicsObject.LOCAL)
 	{
 
-		//Physics transform matrix
+		// Physics transform matrix
 		var transform = new THREE.Matrix4();
 		if(this.body.fixedRotation)
 		{
@@ -157,11 +157,11 @@ PhysicsObject.prototype.update = function(delta)
 		}
 
 
-		//Get inverse of the world matrix
+		// Get inverse of the world matrix
 		var inverse = new THREE.Matrix4();
 		inverse.getInverse(this.parent.matrixWorld);
 
-		//Get position, scale and quaternion
+		// Get position, scale and quaternion
 		var scale = new THREE.Vector3();
 		inverse.multiply(transform);
 		inverse.decompose(this.position, this.quaternion, scale);
@@ -199,7 +199,7 @@ PhysicsObject.prototype.toJSON = function(meta)
 
 	data.object.mode = this.mode;
 
-	//Body
+	// Body
 	data.object.body = {};
 	data.object.body.type = this.body.type;
 	data.object.body.mass = this.body.mass;
@@ -213,14 +213,14 @@ PhysicsObject.prototype.toJSON = function(meta)
 	data.object.body.fixedRotation = this.body.fixedRotation;
 	data.object.body.shapes = [];
 
-	//Shapes array
+	// Shapes array
 	var shapes = this.body.shapes;
 	for(var i = 0; i < shapes.length; i++)
 	{
 		var shape = shapes[i];
 		var values = {};
 
-		//Shape type
+		// Shape type
 		values.type = shape.type;
 
 		if(shape.type === CANNON.Shape.types.SPHERE)
@@ -247,7 +247,7 @@ PhysicsObject.prototype.toJSON = function(meta)
 			values.indices = shape.indices;
 		}
 
-		//Add shape
+		// Add shape
 		data.object.body.shapes[i] = values;
 	}
 

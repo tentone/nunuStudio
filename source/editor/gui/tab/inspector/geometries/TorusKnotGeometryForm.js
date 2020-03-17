@@ -15,7 +15,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.addText(Locale.torusKnot);
 	this.form.nextRow();
 
-	//Radius
+	// Radius
 	this.form.addText(Locale.radius);
 	this.radius = new NumberBox(this.form);
 	this.radius.size.set(0, 18);
@@ -24,7 +24,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.add(this.radius);
 	this.form.nextRow();
 	
-	//Tube
+	// Tube
 	this.form.addText(Locale.tube);
 	this.tube = new NumberBox(this.form);
 	this.tube.size.set(0, 18);
@@ -33,7 +33,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.add(this.tube);
 	this.form.nextRow();
 
-	//Segments
+	// Segments
 	this.form.addText(Locale.segments);
 	this.form.nextRow();
 	
@@ -53,7 +53,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.add(this.tubularSegments);
 	this.form.nextRow();
 
-	//Axis winds
+	// Axis winds
 	this.form.addText(Locale.axisWinds);
 	this.p = new NumberBox(this.form);
 	this.p.size.set(0, 18);
@@ -62,7 +62,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.add(this.p);
 	this.form.nextRow();
 
-	//Circle winds
+	// Circle winds
 	this.form.addText(Locale.circleWinds);
 	this.q = new NumberBox(this.form);
 	this.q.size.set(0, 18);
@@ -71,7 +71,7 @@ function TorusKnotGeometryForm(form, object)
 	this.form.add(this.q);
 	this.form.nextRow();
 	
-	//Buffer
+	// Buffer
 	this.buffer = new CheckBox(this.form);
 	this.form.addText(Locale.buffered);
 	this.buffer.size.set(18, 18);

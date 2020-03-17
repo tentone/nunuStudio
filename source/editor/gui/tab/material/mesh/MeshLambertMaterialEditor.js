@@ -6,7 +6,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 	
-	//Skinning
+	// Skinning
 	this.form.addText(Locale.skinning);
 	this.skinning = new CheckBox(this.form);
 	this.skinning.size.set(18, 18);
@@ -18,7 +18,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.skinning);
 	this.form.nextRow();
 
-	//Morph targets
+	// Morph targets
 	this.form.addText(Locale.morphTargets);
 	this.morphTargets = new CheckBox(this.form);
 	this.morphTargets.size.set(18, 18);
@@ -29,7 +29,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
 
-	//Wireframe
+	// Wireframe
 	this.form.addText(Locale.wireframe);
 	this.wireframe = new CheckBox(this.form);
 	this.wireframe.size.set(18, 18);
@@ -40,7 +40,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
-	//Shading mode
+	// Shading mode
 	this.form.addText(Locale.shading);
 	this.flatShading = new DropdownList(this.form);
 	this.flatShading.position.set(100, 85);
@@ -55,7 +55,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.flatShading);
 	this.form.nextRow();
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
@@ -67,7 +67,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Texture map
+	// Texture map
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
@@ -79,7 +79,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.map);
 	this.form.nextRow();
 
-	//Specular map
+	// Specular map
 	this.form.addText(Locale.specularMap);
 	this.specularMap = new TextureForm(this.form);
 	this.specularMap.size.set(0, 100);
@@ -91,7 +91,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.specularMap);
 	this.form.nextRow();
 
-	//Alpha map
+	// Alpha map
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
@@ -103,7 +103,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
 
-	//Emissive map
+	// Emissive map
 	this.form.addText(Locale.emissiveMap);
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(0, 100);
@@ -115,7 +115,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissiveMap);
 	this.form.nextRow();
 
-	//Emissive color
+	// Emissive color
 	this.form.addText(Locale.color);
 	this.emissive = new ColorChooser(this.form);
 	this.emissive.size.set(100, 18);
@@ -127,7 +127,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissive);
 	this.form.nextRow();
 
-	//Emissive intensity
+	// Emissive intensity
 	this.form.addText(Locale.intensity);
 	this.emissiveIntensity = new NumberBox(this.form);
 	this.emissiveIntensity.size.set(60, 18);
@@ -140,7 +140,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissiveIntensity);
 	this.form.nextRow();
 
-	//Environment map
+	// Environment map
 	this.form.addText(Locale.environmentMap);
 	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(0, 100);
@@ -152,7 +152,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.envMap);
 	this.form.nextRow();
 
-	//Combine environment map
+	// Combine environment map
 	this.form.addText(Locale.mode);
 	this.combine = new DropdownList(this.form);
 	this.combine.position.set(100, 85);
@@ -168,7 +168,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.combine);
 	this.form.nextRow();
 
-	//Reflectivity
+	// Reflectivity
 	this.form.addText(Locale.reflectivity);
 	this.reflectivity = new NumberBox(this.form);
 	this.reflectivity.size.set(0, 18);
@@ -181,7 +181,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.reflectivity);
 	this.form.nextRow();
 
-	//Refraction
+	// Refraction
 	this.form.addText(Locale.refractionRatio);
 	this.refractionRatio = new NumberBox(this.form);
 	this.refractionRatio.size.set(0, 18);

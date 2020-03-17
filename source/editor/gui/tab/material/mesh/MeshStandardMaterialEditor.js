@@ -6,7 +6,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Skinning
+	// Skinning
 	this.skinning = new CheckBox(this.form);
 	this.form.addText(Locale.skinning);
 	this.skinning.size.set(18, 18);
@@ -18,7 +18,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.skinning);
 	this.form.nextRow();
 
-	//Morph targets
+	// Morph targets
 	this.morphTargets = new CheckBox(this.form);
 	this.form.addText(Locale.morphTargets);
 	this.morphTargets.size.set(18, 18);
@@ -29,7 +29,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
 
-	//Wireframe
+	// Wireframe
 	this.wireframe = new CheckBox(this.form);
 	this.form.addText(Locale.wireframe);
 	this.wireframe.size.set(18, 18);
@@ -40,7 +40,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
-	//Shading mode
+	// Shading mode
 	this.form.addText(Locale.shading);
 	this.flatShading = new DropdownList(this.form);
 	this.flatShading.position.set(100, 85);
@@ -55,7 +55,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.flatShading);
 	this.form.nextRow();
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(100, 18);
@@ -67,7 +67,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Roughness
+	// Roughness
 	this.form.addText(Locale.roughness);
 	this.roughness = new Slider(this.form);
 	this.roughness.size.set(160, 18);
@@ -81,7 +81,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.roughness);
 	this.form.nextRow();
 
-	//Shininess
+	// Shininess
 	this.form.addText(Locale.metalness);
 	this.metalness = new Slider(this.form);
 	this.metalness.size.set(160, 18);
@@ -95,7 +95,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.metalness);
 	this.form.nextRow();
 
-	//Texture map
+	// Texture map
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
@@ -107,7 +107,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.map);
 	this.form.nextRow();
 
-	//Roughness map
+	// Roughness map
 	this.form.addText(Locale.roughnessMap);
 	this.roughnessMap = new TextureForm(this.form);
 	this.roughnessMap.size.set(0, 100);
@@ -119,7 +119,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.roughnessMap);
 	this.form.nextRow();
 
-	//Metalness map
+	// Metalness map
 	this.form.addText(Locale.metalnessMap);
 	this.metalnessMap = new TextureForm(this.form);
 	this.metalnessMap.size.set(0, 100);
@@ -131,7 +131,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.metalnessMap);
 	this.form.nextRow();
 
-	//Bump map
+	// Bump map
 	this.form.addText(Locale.bumpMap);
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.size.set(0, 100);
@@ -143,7 +143,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.bumpMap);
 	this.form.nextRow();
 
-	//Bump map scale
+	// Bump map scale
 	this.form.addText(Locale.bumpScale);
 	this.bumpScale = new Slider(this.form);
 	this.bumpScale.size.set(160, 18);
@@ -157,7 +157,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.bumpScale);
 	this.form.nextRow();
 
-	//Normal map
+	// Normal map
 	this.form.addText(Locale.normalMap);
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.size.set(0, 100);
@@ -169,7 +169,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalMap);
 	this.form.nextRow();
 
-	//Normal map scale
+	// Normal map scale
 	this.form.addText(Locale.normalScale);
 	this.normalScale = new VectorBox(this.form);
 	this.normalScale.size.set(0, 18);
@@ -183,7 +183,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalScale);
 	this.form.nextRow();
 
-	//Normal type
+	// Normal type
 	this.form.addText(Locale.normalType);
 	this.normalMapType = new DropdownList(this.form);
 	this.normalMapType.size.set(100, 18);
@@ -197,7 +197,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.normalMapType);
 	this.form.nextRow();
 
-	//Displacement map
+	// Displacement map
 	this.form.addText(Locale.displacementMap);
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(0, 100);
@@ -209,7 +209,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementMap);
 	this.form.nextRow();
 
-	//Displacement map scale
+	// Displacement map scale
 	this.form.addText(Locale.scale);
 	this.displacementScale = new NumberBox(this.form);
 	this.displacementScale.size.set(60, 18);
@@ -222,7 +222,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementScale);
 	this.form.nextRow();
 
-	//Displacement map bias
+	// Displacement map bias
 	this.form.addText(Locale.bias);
 	this.displacementBias = new NumberBox(this.form);
 	this.displacementBias.size.set(60, 18);
@@ -235,7 +235,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementBias);
 	this.form.nextRow();
 
-	//Emissive map
+	// Emissive map
 	this.form.addText(Locale.emissiveMap);
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(0, 100);
@@ -247,7 +247,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissiveMap);
 	this.form.nextRow();
 
-	//Emissive color
+	// Emissive color
 	this.form.addText(Locale.color);
 	this.emissive = new ColorChooser(this.form);
 	this.emissive.size.set(100, 18);
@@ -259,7 +259,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissive);
 	this.form.nextRow();
 
-	//Emissive intensity
+	// Emissive intensity
 	this.form.addText(Locale.intensity);
 	this.emissiveIntensity = new NumberBox(this.form);
 	this.emissiveIntensity.size.set(60, 18);
@@ -272,7 +272,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissiveIntensity);
 	this.form.nextRow();
 
-	//Alpha map
+	// Alpha map
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
@@ -284,7 +284,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
 	
-	//Environment map
+	// Environment map
 	this.form.addText(Locale.environmentMap);
 	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(0, 100);
@@ -296,7 +296,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.envMap);
 	this.form.nextRow();
 
-	//Reflectivity
+	// Reflectivity
 	this.form.addText(Locale.intensity);
 	this.envMapIntensity = new NumberBox(this.form);
 	this.envMapIntensity.size.set(60, 18);
@@ -309,7 +309,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.envMapIntensity);
 	this.form.nextRow();
 
-	//Reflectivity
+	// Reflectivity
 	this.form.addText(Locale.refraction);
 	this.refractionRatio = new NumberBox(this.form);
 	this.refractionRatio.size.set(60, 18);
@@ -322,7 +322,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.refractionRatio);
 	this.form.nextRow();
 	
-	//Ambient Occlusion map
+	// Ambient Occlusion map
 	this.form.addText(Locale.ambientOcclusion);
 	this.aoMap = new TextureForm(this.form);
 	this.aoMap.size.set(0, 100);
@@ -334,7 +334,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.aoMap);
 	this.form.nextRow();
 
-	//Ambient Occlusion
+	// Ambient Occlusion
 	this.form.addText(Locale.intensity);
 	this.aoMapIntensity = new NumberBox(this.form);
 	this.aoMapIntensity.size.set(60, 18);

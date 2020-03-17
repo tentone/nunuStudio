@@ -15,7 +15,7 @@ function CylinderGeometryForm(form, object)
 	this.form.addText(Locale.cylinder);
 	this.form.nextRow();
 
-	//Radius
+	// Radius
 	this.form.addText(Locale.radius);
 	this.radiusRow = new NumberRow(this.form);
 	this.radiusRow.size.set(0, 18);
@@ -32,7 +32,7 @@ function CylinderGeometryForm(form, object)
 	this.form.add(this.radiusRow);
 	this.form.nextRow();
 
-	//Height
+	// Height
 	this.form.addText(Locale.height);
 	this.height = new NumberBox(this.form);
 	this.height.size.set(0, 18);
@@ -41,7 +41,7 @@ function CylinderGeometryForm(form, object)
 	this.form.add(this.height);
 	this.form.nextRow();
 
-	//Segments
+	// Segments
 	this.form.addText(Locale.segments);
 	this.form.nextRow();
 
@@ -63,7 +63,7 @@ function CylinderGeometryForm(form, object)
 	this.form.add(this.heightSegments);
 	this.form.nextRow();
 
-	//Buffer
+	// Buffer
 	this.buffer = new CheckBox(this.form);
 	this.form.addText(Locale.buffered);
 	this.buffer.size.set(18, 18);

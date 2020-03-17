@@ -6,7 +6,7 @@ function SpineInspector(parent, object)
 
 	var self = this;
 
-	//Animation
+	// Animation
 	this.form.addText("Animation");
 	this.animation = new DropdownList(this.form);
 	this.animation.size.set(100, 18);
@@ -17,7 +17,7 @@ function SpineInspector(parent, object)
 	this.form.add(this.animation);
 	this.form.nextRow();
 
-	//Skin
+	// Skin
 	this.form.addText("Skin");
 	this.skin = new DropdownList(this.form);
 	this.skin.size.set(100, 18);
@@ -28,7 +28,7 @@ function SpineInspector(parent, object)
 	this.form.add(this.skin);
 	this.form.nextRow();
 
-	//Cast shadow
+	// Cast shadow
 	this.castShadow = new CheckBox(this.form);
 	this.form.addText(Locale.castShadows);
 	this.castShadow.size.set(18, 18);
@@ -39,7 +39,7 @@ function SpineInspector(parent, object)
 	this.form.add(this.castShadow);
 	this.form.nextRow();
 
-	//Receive shadow
+	// Receive shadow
 	this.receiveShadow = new CheckBox(this.form);
 	this.form.addText(Locale.receiveShadows);
 	this.receiveShadow.size.set(18, 18);
@@ -53,7 +53,7 @@ function SpineInspector(parent, object)
 
 SpineInspector.prototype = Object.create(ObjectInspector.prototype);
 
-//Update panel content from attached object
+// Update panel content from attached object
 SpineInspector.prototype.updateInspector = function()
 {
 	ObjectInspector.prototype.updateInspector.call(this);

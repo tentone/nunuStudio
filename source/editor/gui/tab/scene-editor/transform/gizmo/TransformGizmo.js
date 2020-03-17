@@ -12,7 +12,7 @@ function TransformGizmo()
 	this.add(this.pickers);
 	this.add(this.planes);
 
-	//Planes
+	// Planes
 	var planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 2, 2);
 	var planeMaterial = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide });
 	var planes =
@@ -35,7 +35,7 @@ function TransformGizmo()
 		this.planes[i] = planes[i];
 	}
 
-	//Handlers and pickers
+	// Handlers and pickers
 	function setupGizmos(gizmoMap, parent)
 	{
 		for(var name in gizmoMap)
@@ -66,19 +66,19 @@ function TransformGizmo()
 	setupGizmos(this.handleGizmos, this.handles);
 	setupGizmos(this.pickerGizmos, this.pickers);
 
-	//Reset transformations
+	// Reset transformations
 	this.traverse(function(child)
 	{
 		if(child.geometry !== undefined)
 		{
 			child.updateMatrix();
 
-			//Move geometry to origin
+			// Move geometry to origin
 			var tempGeometry = child.geometry.clone();
 			tempGeometry.applyMatrix4(child.matrix);
 			child.geometry = tempGeometry;
 
-			//Reset pose
+			// Reset pose
 			child.position.set(0, 0, 0);
 			child.rotation.set(0, 0, 0);
 			child.scale.set(1, 1, 1);

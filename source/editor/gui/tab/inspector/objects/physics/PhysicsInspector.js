@@ -6,7 +6,7 @@ function PhysicsInspector(parent, object)
 
 	var self = this;
 
-	//Scale
+	// Scale
 	this.scale.setOnChange(function()
 	{
 		if(self.object !== null)
@@ -14,7 +14,7 @@ function PhysicsInspector(parent, object)
 			var scale = self.scale.getValue();
 			self.object.scale.set(scale.x, scale.y, scale.z);
 
-			//Update physics objects
+			// Update physics objects
 			var shapes = self.object.body.shapes;
 			for(var i = 0; i < shapes.length; i++)
 			{
@@ -38,7 +38,7 @@ function PhysicsInspector(parent, object)
 	this.form.addText(Locale.physics);
 	this.form.nextRow();
 
-	//Mode
+	// Mode
 	this.form.addText(Locale.mode);
 	this.mode = new DropdownList(this.form);
 	this.mode.size.set(100, 18);
@@ -51,7 +51,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.mode);
 	this.form.nextRow();
 
-	//Body Type
+	// Body Type
 	this.form.addText(Locale.type);
 	this.bodyType = new DropdownList(this.form);
 	this.bodyType.size.set(100, 18);
@@ -65,7 +65,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.bodyType);
 	this.form.nextRow();
 
-	//Body mass
+	// Body mass
 	this.form.addText(Locale.mass);
 	this.mass = new NumberBox(this.form);
 	this.mass.size.set(50, 18);
@@ -77,7 +77,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.mass);
 	this.form.nextRow();
 
-	//Body linear damping
+	// Body linear damping
 	this.form.addText(Locale.linearDamping);
 	this.linearDamping = new NumberBox(this.form);
 	this.linearDamping.size.set(50, 18);
@@ -90,7 +90,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.linearDamping);
 	this.form.nextRow();
 
-	//Body angular damping
+	// Body angular damping
 	this.form.addText(Locale.angularDamping);
 	this.angularDamping = new NumberBox(this.form);
 	this.angularDamping.size.set(50, 18);
@@ -103,7 +103,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.angularDamping);
 	this.form.nextRow();
 
-	//Fixed rotation
+	// Fixed rotation
 	this.fixedRotation = new CheckBox(this.form);
 	this.form.addText(Locale.lockRotation);
 	this.fixedRotation.size.set(18, 18);
@@ -114,7 +114,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.fixedRotation);
 	this.form.nextRow();
 
-	//Collising group
+	// Collising group
 	this.form.addText(Locale.physicsGroup);
 	this.collisionFilterGroup = new NumberBox(this.form);
 	this.collisionFilterGroup.size.set(30, 18);
@@ -126,7 +126,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.collisionFilterGroup);
 	this.form.nextRow();
 
-	//Allow sleep
+	// Allow sleep
 	this.allowSleep = new CheckBox(this.form);
 	this.form.addText(Locale.allowSleep);
 	this.allowSleep.size.set(18, 18);
@@ -137,7 +137,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.allowSleep);
 	this.form.nextRow();
 
-	//Sleep speed limit
+	// Sleep speed limit
 	this.form.addText(Locale.sleepSpeedLimit);
 	this.sleepSpeedLimit = new NumberBox(this.form);
 	this.sleepSpeedLimit.size.set(50, 18);
@@ -149,7 +149,7 @@ function PhysicsInspector(parent, object)
 	this.form.add(this.sleepSpeedLimit);
 	this.form.nextRow();
 
-	//Sleep time limit
+	// Sleep time limit
 	this.form.addText(Locale.sleepTimeLimit);
 	this.sleepTimeLimit = new NumberBox(this.form);
 	this.sleepTimeLimit.size.set(50, 18);

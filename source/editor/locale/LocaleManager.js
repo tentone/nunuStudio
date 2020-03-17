@@ -58,7 +58,7 @@ LocaleManager.register = function(locale)
  */
 LocaleManager.setLocale = function(locale)
 {
-	//Set locale by id
+	// Set locale by id
 	if(typeof locale === "string")
 	{
 		for(var i = 0; i < LocaleManager.list.length; i++)
@@ -70,7 +70,7 @@ LocaleManager.setLocale = function(locale)
 			}
 		}
 	}
-	//Set locale object
+	// Set locale object
 	else
 	{
 		var index = LocaleManager.list.indexOf(locale);

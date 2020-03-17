@@ -7,7 +7,7 @@
  * 
  * Gamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.
  *
- * For more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/.
+ * For more information about the Gamepad API state take look at the W3C Gamepad API page https:// www.w3.org/TR/gamepad/.
  * 
  * @class Gamepad
  * @module Input
@@ -49,18 +49,18 @@ Gamepad.prototype.setGamepad = function(gamepad)
 {	
 	if(gamepad !== undefined && gamepad !== null)
 	{
-		//Store gamepad and its index
+		// Store gamepad and its index
 		this.index = gamepad.index;
 		this.gamepad = gamepad;
 
-		//Create and initialize buttons
+		// Create and initialize buttons
 		this.buttons = [];
 		for(var i = 0; i < gamepad.buttons.length; i++)
 		{
 			this.buttons.push(new Key());
 		}
 
-		//Try to get the device vendor and product id
+		// Try to get the device vendor and product id
 		this.setProductVendor(gamepad);
 		this.connected = true;
 	}
@@ -94,7 +94,7 @@ Gamepad.prototype.disconnect = function()
  */
 Gamepad.prototype.setProductVendor = function(gamepad)
 {
-	//Chrome
+	// Chrome
 	try
 	{
 		var temp = gamepad.id.split(":");
@@ -106,7 +106,7 @@ Gamepad.prototype.setProductVendor = function(gamepad)
 	}
 	catch(e){}
 
-	//Firefox
+	// Firefox
 	try
 	{
 		var temp = gamepad.id.split("-");

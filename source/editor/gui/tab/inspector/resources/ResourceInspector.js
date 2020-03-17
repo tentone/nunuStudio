@@ -6,7 +6,7 @@ function ResourceInspector(parent, object)
 
 	var self = this;
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(190, 18);
@@ -18,7 +18,7 @@ function ResourceInspector(parent, object)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//UUID
+	// UUID
 	if(Editor.settings.general.showUUID)
 	{
 		this.form.addText(Locale.uuid);
@@ -26,7 +26,7 @@ function ResourceInspector(parent, object)
 		this.form.nextRow();
 	}
 	
-	//Type
+	// Type
 	if(Editor.settings.general.showType)
 	{
 		this.form.addText(Locale.type);

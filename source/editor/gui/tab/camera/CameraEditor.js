@@ -8,23 +8,23 @@ function CameraEditor(parent, closeable, container, index)
 
 	this.camera = null;
 	
-	//Canvas
+	// Canvas
 	this.canvas = new RendererCanvas(undefined, Editor.getRendererConfig());
 
 	this.form = new TableForm();
 	this.form.setAutoSize(false);
 
-	//Main
+	// Main
 	this.main = new DualContainer(this);
 	this.main.tabPosition = 0.6;
 	this.main.attachA(this.canvas);
 	this.main.attachB(this.form);
 
-	//Camera
+	// Camera
 	this.form.addText("Camera");
 	this.form.nextRow();
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
@@ -95,7 +95,7 @@ function CameraEditor(parent, closeable, container, index)
 
 CameraEditor.prototype = Object.create(TabElement.prototype);
 
-//Activate
+// Activate
 CameraEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
@@ -104,7 +104,7 @@ CameraEditor.prototype.activate = function()
 	this.updatePostNodes();
 };
 
-//Update post processing nodes
+// Update post processing nodes
 CameraEditor.prototype.updatePostNodes = function()
 {
 	this.postNodes.removeAll();
@@ -125,7 +125,7 @@ CameraEditor.prototype.updatePostNodes = function()
 	this.form.updateInterface();
 };
 
-//Destroy
+// Destroy
 CameraEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
@@ -133,7 +133,7 @@ CameraEditor.prototype.destroy = function()
 	this.canvas.destroy();
 };
 
-//Update tab state
+// Update tab state
 CameraEditor.prototype.update = function()
 {
 	if(this.camera !== null)
@@ -145,7 +145,7 @@ CameraEditor.prototype.update = function()
 	}
 };
 
-//Update tab metadata
+// Update tab metadata
 CameraEditor.prototype.updateMetadata = function()
 {
 	if(this.camera !== null)
@@ -153,14 +153,14 @@ CameraEditor.prototype.updateMetadata = function()
 		this.setName(this.camera.name);
 		this.name.setText(this.camera.name);
 
-		//Check if object has a parent
+		// Check if object has a parent
 		if(this.camera.parent === null)
 		{
 			this.close();
 			return;
 		}
 
-		//Check if object exists in parent
+		// Check if object exists in parent
 		var children = this.camera.parent.children;
 		for(var i = 0; i < children.length; i++)
 		{
@@ -170,7 +170,7 @@ CameraEditor.prototype.updateMetadata = function()
 			}
 		}
 
-		//If not found close tab
+		// If not found close tab
 		if(i >= children.length)
 		{
 			this.close();

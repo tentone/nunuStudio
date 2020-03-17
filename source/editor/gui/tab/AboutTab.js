@@ -6,7 +6,7 @@ function AboutTab(parent, closeable, container, index)
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
-	//Logo
+	// Logo
 	this.logo = document.createElement("img");
 	this.logo.style.position = "absolute";
 	this.logo.style.pointerEvents = "none";
@@ -18,7 +18,7 @@ function AboutTab(parent, closeable, container, index)
 	this.logo.src = Global.FILE_PATH + "logo.png";
 	this.element.appendChild(this.logo);
 
-	//Version
+	// Version
 	this.name = new Text(this);
 	this.name.element.style.top = "30%";
 	this.name.element.style.left = "0%";
@@ -27,7 +27,7 @@ function AboutTab(parent, closeable, container, index)
 	this.name.setAlignment(Text.CENTER);
 	this.name.setText(Nunu.NAME + " " + Nunu.VERSION + "Build " + Nunu.TIMESTAMP);
 
-	//Libraries
+	// Libraries
 	var libs = [];
 	libs.push("three.js R" + THREE.REVISION);
 	libs.push("CodeMirror V" + CodeMirror.version);

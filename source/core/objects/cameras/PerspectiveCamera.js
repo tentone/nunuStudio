@@ -3,7 +3,7 @@
 /**
  * Perspective camera, used for 3D scenes with objects getting smaller as they get away from the camera.
  * 
- * Based on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.
+ * Based on THREE.PerspectiveCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.
  * 
  * @class PerspectiveCamera
  * @extends {PerspectiveCamera}

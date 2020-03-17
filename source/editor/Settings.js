@@ -14,14 +14,14 @@ function Settings()
 
 Settings.CONFIG_FILE = "config.json";
 
-//Angles
+// Angles
 Settings.RADIAN = 0;
 Settings.DEGREE = 1;
 
 // Distance
 Settings.METER = 0;
 
-//Navigation
+// Navigation
 Settings.FIRST_PERSON = 10;
 Settings.ORBIT = 11;
 Settings.PLANAR_LEFT = 12;
@@ -31,14 +31,14 @@ Settings.PLANAR_BACK = 15;
 Settings.PLANAR_TOP = 16;
 Settings.PLANAR_BOTTOM = 17;
 
-//Update channel
+// Update channel
 Settings.STABLE = 30;
 Settings.BETA = 31;
 
-//Load default settings
+// Load default settings
 Settings.prototype.loadDefault = function()
 {
-	//General
+	// General
 	this.general =
 	{		
 		autoUpdate: false,
@@ -51,14 +51,14 @@ Settings.prototype.loadDefault = function()
 		historySize: 20
 	};
 
-	//Units
+	// Units
 	this.units =
 	{
 		angle: Settings.RADIAN,
 		distance: Settings.METER
 	};
 
-	//Editor
+	// Editor
 	this.editor =
 	{
 		snap: false,
@@ -85,11 +85,11 @@ Settings.prototype.loadDefault = function()
 		cameraRotationCubeSize: 120
 	};
 
-	//Render
+	// Render
 	this.render = new RendererConfiguration();
 	this.render.followProject = true;
 
-	//Code
+	// Code
 	this.code =
 	{
 		theme: "monokai",
@@ -106,13 +106,13 @@ Settings.prototype.loadDefault = function()
 		indentUnit: 4
 	};
 
-	//JSLint
+	// JSLint
 	this.jslint =
 	{
-		//Error
+		// Error
 		maxerr: 50, // {int} Maximum error before stopping
 
-		//Enforcing
+		// Enforcing
 		bitwise: false, // true: Prohibit bitwise operators (&, |, ^, etc.)
 		curly: false, // true: Require {} for every new block or scope
 		eqeqeq: false, // true: Require triple equals (===) for comparison
@@ -135,7 +135,7 @@ Settings.prototype.loadDefault = function()
 		maxcomplexity: false, // {int} Max cyclomatic complexity per function
 		varstmt: false, // true: Disallow any var statements. Only `let` and `const` are allowed.
 
-		//Relaxing
+		// Relaxing
 		asi: true, // true: Tolerate Automatic Semicolon Insertion (no semicolons)
 		boss: true, // true: Tolerate assignments where comparisons would be expected
 		debug: true, // true: Allow debugger statements e.g. browser breakpoints.
@@ -158,7 +158,7 @@ Settings.prototype.loadDefault = function()
 		supernew: true, // true: Tolerate `new function () { ... };` and `new Object;`
 		validthis: true, // true: Tolerate using this in a non-constructor function
 
-		//Environment
+		// Environment
 		browser: true, // Web Browser (window, document, etc)
 		browserify: false, // Browserify (node.js code in the browser)
 		couch: false, // CouchDB
@@ -198,15 +198,15 @@ Settings.prototype.store = function()
 		jslint: this.jslint
 	}, null, "\t");
 
-	//Make json file human readable
+	// Make json file human readable
 	data.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 	
-	//Store file
+	// Store file
 	if(Nunu.runningOnDesktop())
 	{
 		FileSystem.writeFile(Settings.CONFIG_FILE, data);
 	}
-	//Cookie
+	// Cookie
 	else
 	{
 		LocalStorage.set("config", data);

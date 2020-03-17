@@ -6,13 +6,13 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Preview configuration
+	// Preview configuration
 	this.previewForm = new TableForm();
 	this.previewForm.setAutoSize(false);
 	this.previewForm.addText("Configuration");
 	this.previewForm.nextRow();
 	
-	//Canvas
+	// Canvas
 	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
@@ -20,11 +20,11 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 		self.camera.updateProjectionMatrix();
 	});
 
-	//Mouse
+	// Mouse
 	this.mouse = new Mouse(window, true);
 	this.mouse.setCanvas(this.canvas.element);
 
-	//Preview division
+	// Preview division
 	this.preview = new DualContainer();
 	this.preview.orientation = DualDivision.VERTICAL;
 	this.preview.tabPosition = 0.8;
@@ -33,12 +33,12 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.preview.attachA(this.canvas);
 	this.preview.attachB(this.previewForm);
 
-	//Tab container
+	// Tab container
 	this.tab = new TabGroup();
 	this.tab.element.style.backgroundColor = Editor.theme.barColor;
 	this.tab.buttonSize.set(150, 25);
 
-	//Main container
+	// Main container
 	this.main = new DualContainer(this);
 	this.main.tabPosition = 0.5;
 	this.main.tabPositionMin = 0.05;
@@ -46,24 +46,24 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.main.attachA(this.preview);
 	this.main.attachB(this.tab);
 
-	//Material UI File element
+	// Material UI File element
 	this.asset = null;
 
-	//Attached material
+	// Attached material
 	this.material = null;
 
-	//Material camera
+	// Material camera
 	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x/this.canvas.size.y);
 	this.camera.position.set(0, 0, 2.5);
 	
-	//Scene
+	// Scene
 	this.scene = new THREE.Scene();
 	
-	//Interactive object
+	// Interactive object
 	this.interactive = new THREE.Object3D();
 	this.scene.add(this.interactive);
 	
-	//Scene
+	// Scene
 	this.sky = new Sky();
 	this.sky.visible = false;
 	this.scene.add(this.sky);
@@ -77,11 +77,11 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.ambientLight.visible = false;
 	this.scene.add(this.ambientLight);
 
-	//Mesh
+	// Mesh
 	this.mesh = new THREE.Mesh(MaterialEditor.geometries[0][1], null);
 	this.interactive.add(this.mesh);
 	
-	//Test model
+	// Test model
 	this.previewForm.addText(Locale.geometry);
 	this.testModel = new DropdownList(this.previewForm);
 	this.testModel.size.set(100, 18);
@@ -97,7 +97,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.testModel);
 	this.previewForm.nextRow();
 
-	//Sky
+	// Sky
 	this.previewForm.addText(Locale.sky);
 	this.skyEnabled = new CheckBox(this.previewForm);
 	this.skyEnabled.size.set(18, 18);
@@ -109,7 +109,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.skyEnabled);
 	this.previewForm.nextRow();
 
-	//Point Light
+	// Point Light
 	this.previewForm.addText(Locale.pointLight);
 	this.lightEnabled = new CheckBox(this.previewForm);
 	this.lightEnabled.size.set(18, 18);
@@ -121,7 +121,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.lightEnabled);
 	this.previewForm.nextRow();
 
-	//Ambient Light
+	// Ambient Light
 	this.previewForm.addText(Locale.ambientLight);
 	this.ambientLightEnabled = new CheckBox(this.previewForm);
 	this.ambientLightEnabled.size.set(18, 18);
@@ -133,7 +133,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.ambientLightEnabled);
 	this.previewForm.nextRow();
 
-	//General
+	// General
 	this.general = this.tab.addTab(TabElement, false);
 	this.general.setIcon(Global.FILE_PATH + "icons/misc/material.png");
 	this.general.setName(Locale.material);
@@ -141,7 +141,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form = new TableForm(this.general);
 	this.form.setAutoSize(false);
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
@@ -153,7 +153,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//Side
+	// Side
 	this.form.addText(Locale.side);
 	this.side = new DropdownList(this.form);
 	this.side.position.set(100, 85);
@@ -169,7 +169,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.side);
 	this.form.nextRow();
 
-	//Test depth
+	// Test depth
 	this.form.addText(Locale.depthTest);
 	this.depthTest = new CheckBox(this.form);
 	this.depthTest.size.set(18, 18);
@@ -181,7 +181,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.depthTest);
 	this.form.nextRow();
 	
-	//Write depth
+	// Write depth
 	this.form.addText(Locale.depthWrite);
 	this.depthWrite = new CheckBox(this.form);
 	this.depthWrite.size.set(18, 18);
@@ -193,7 +193,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.depthWrite);
 	this.form.nextRow();
 
-	//Transparent
+	// Transparent
 	this.form.addText(Locale.transparent);
 	this.transparent = new CheckBox(this.form);
 	this.transparent.size.set(18, 18);
@@ -205,7 +205,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.transparent);
 	this.form.nextRow();
 	
-	//Blending mode
+	// Blending mode
 	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);
@@ -223,7 +223,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.blending);
 	this.form.nextRow();
 
-	//Wireframe
+	// Wireframe
 	this.form.addText(Locale.wireframe);
 	this.wireframe = new CheckBox(this.form);
 	this.wireframe.size.set(18, 18);
@@ -234,7 +234,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
-	//Fragment tab
+	// Fragment tab
 	this.fragmentShader = this.tab.addTab(CodeEditor, false);
 	this.fragmentShader.setName(Locale.fragment);
 	this.fragmentShader.setMode("glsl");
@@ -244,7 +244,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 		self.material.needsUpdate = true;
 	});
 
-	//Vertex tab
+	// Vertex tab
 	this.vertexShader = this.tab.addTab(CodeEditor, false);
 	this.vertexShader.setName(Locale.vertex);
 	this.vertexShader.setMode("glsl");
@@ -269,7 +269,7 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 	this.material = material;
 	this.updateMetadata();
 
-	//Base
+	// Base
 	this.name.setText(material.name);
 	this.side.setValue(material.side);
 	this.depthTest.setValue(material.depthTest);
@@ -278,7 +278,7 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 	this.blending.setValue(material.blending);	
 	this.wireframe.setValue(material.wireframe);
 
-	//Shader
+	// Shader
 	this.fragmentShader.setText(material.fragmentShader);
 	this.vertexShader.setText(material.vertexShader);
 };

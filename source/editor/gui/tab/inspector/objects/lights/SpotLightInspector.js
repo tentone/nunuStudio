@@ -6,7 +6,7 @@ function SpotLightInspector(parent, object)
 
 	var self = this;
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(80, 18);
@@ -17,7 +17,7 @@ function SpotLightInspector(parent, object)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Penumbra
+	// Penumbra
 	this.form.addText(Locale.penumbra);
 	this.penumbra = new Slider(this.form);
 	this.penumbra.size.set(160, 18);
@@ -32,7 +32,7 @@ function SpotLightInspector(parent, object)
 	this.form.add(this.penumbra);
 	this.form.nextRow();
 
-	//Angle
+	// Angle
 	this.form.addText(Locale.angle);
 	this.angle = new Slider(this.form);
 	this.angle.size.set(160, 18);
@@ -45,11 +45,11 @@ function SpotLightInspector(parent, object)
 	this.form.add(this.angle);
 	this.form.nextRow();
 
-	//Shadow map
+	// Shadow map
 	this.form.addText(Locale.shadows);
 	this.form.nextRow();
 
-	//Cast shadow
+	// Cast shadow
 	this.castShadow = new CheckBox(this.form);
 	this.form.addText(Locale.castShadows);
 	this.castShadow.size.set(18, 18);
@@ -62,7 +62,7 @@ function SpotLightInspector(parent, object)
 	this.form.add(this.castShadow);
 	this.form.nextRow();
 
-	//Shadow resolution
+	// Shadow resolution
 	this.form.addText(Locale.resolution);
 	this.shadowWidth = new DropdownList(this.form);
 	this.shadowWidth.size.set(60, 18);
@@ -89,7 +89,7 @@ function SpotLightInspector(parent, object)
 		this.shadowHeight.addValue(size.toString(), size);
 	}
 
-	//Shadowmap camera near
+	// Shadowmap camera near
 	this.form.addText(Locale.near);
 	this.shadowNear = new NumberBox(this.form);
 	this.shadowNear.size.set(60, 18);
@@ -102,7 +102,7 @@ function SpotLightInspector(parent, object)
 	this.form.add(this.shadowNear);
 	this.form.nextRow();
 	
-	//Shadowmap camera far
+	// Shadowmap camera far
 	this.form.addText(Locale.near);
 	this.shadowFar = new NumberBox(this.form);
 	this.shadowFar.size.set(60, 18);

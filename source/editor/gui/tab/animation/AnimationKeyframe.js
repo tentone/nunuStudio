@@ -29,7 +29,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 		self.editor.mixer.setTime(time);
 	};
 
-	//this.elementframe context menu
+	// this.elementframe context menu
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);

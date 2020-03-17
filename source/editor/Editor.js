@@ -2,27 +2,27 @@
 
 Editor.initialize = function()
 {
-	//Check WebGL Support
+	// Check WebGL Support
 	if(!Nunu.webGLAvailable())
 	{
 		Editor.alert(Locale.webglNotSupported);
 		Editor.exit();
 	}
 	
-	//Settings
+	// Settings
 	Editor.settings = new Settings();
 	Editor.settings.load();
 
-	//Register tern plugins
+	// Register tern plugins
 	Editor.ternDefinitions = [];
 	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Global.FILE_PATH + "tern/threejs.json")));
 	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Global.FILE_PATH + "tern/browser.json")));
 	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Global.FILE_PATH + "tern/ecmascript.json")));
 
-	//Disable body overflow
+	// Disable body overflow
 	document.body.style.overflow = "hidden";
 	
-	//Disable context menu
+	// Disable context menu
 	document.body.oncontextmenu = function(event)
 	{
 		return false;
@@ -34,7 +34,7 @@ Editor.initialize = function()
 		Editor.clipboard = gui.Clipboard.get();
 		Editor.args = gui.App.argv;
 
-		//Handle window close event
+		// Handle window close event
 		gui.Window.get().on("close", function()
 		{
 			if(confirm(Locale.unsavedChangesExit))
@@ -43,7 +43,7 @@ Editor.initialize = function()
 			}
 		});
 
-		//Try to update the editor
+		// Try to update the editor
 		if(Editor.settings.general.autoUpdate)
 		{
 			Editor.updateNunu();
@@ -51,10 +51,10 @@ Editor.initialize = function()
 	}
 	else
 	{
-		//Clipboard
+		// Clipboard
 		Editor.clipboard = new VirtualClipboard();
 		
-		//Arguments
+		// Arguments
 		Editor.args = [];
 
 		var parameters = Nunu.getQueryParameters();
@@ -63,18 +63,18 @@ Editor.initialize = function()
 			Editor.args.push(parameters[i]);
 		}
 		
-		//Prevent some key combinations
+		// Prevent some key combinations
 		var allowedKeys = [Keyboard.C, Keyboard.V, Keyboard.A, Keyboard.X];
 		document.onkeydown = function(event)
 		{
-			//If F1-F11 or CTRL+Key prevent default action
+			// If F1-F11 or CTRL+Key prevent default action
 			if((event.keyCode > Keyboard.F1 && event.keyCode < Keyboard.F11) || (!event.altKey && event.ctrlKey && allowedKeys.indexOf(event.keyCode) === -1))
 			{
 				event.preventDefault();
 			}
 		};
 
-		//Store settings when exiting the page
+		// Store settings when exiting the page
 		window.onbeforeunload = function(event)
 		{
 			Editor.settings.store();
@@ -85,7 +85,7 @@ Editor.initialize = function()
 		};
 	}
 
-	//Open ISP file if dragged to the window
+	// Open ISP file if dragged to the window
 	document.body.ondrop = function(event)
 	{
 		event.preventDefault();
@@ -95,7 +95,7 @@ Editor.initialize = function()
 			var file = event.dataTransfer.files[i];
 			var extension = FileSystem.getFileExtension(file.name);
 
-			//Project file
+			// Project file
 			if(extension === "isp" || extension === "nsp")
 			{
 				if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.loadProject))
@@ -105,7 +105,7 @@ Editor.initialize = function()
 				}
 				break;
 			}
-			//Text file
+			// Text file
 			else if(TextFile.fileIsText(file))
 			{
 				Editor.loadText(file);
@@ -113,26 +113,26 @@ Editor.initialize = function()
 		}
 	}
 
-	//Load theme
+	// Load theme
 	Editor.theme = ThemeManager.get(Editor.settings.general.theme);
 
-	//Open file
+	// Open file
 	Editor.openFile = null;
 
-	//Selected object
+	// Selected object
 	Editor.selection = [];
 
-	//Program
+	// Program
 	Editor.program = null;
 
-	//History
+	// History
 	Editor.history = null;
 
-	//Initialize User Interface
+	// Initialize User Interface
 	Editor.gui = new Interface();
 	Editor.gui.updateInterface();
 
-	//Check is some project file passed as argument
+	// Check is some project file passed as argument
 	for(var i = 0; i < Editor.args.length; i++)
 	{
 		if(Editor.args[i].endsWith(".isp"))
@@ -147,13 +147,13 @@ Editor.initialize = function()
 		}
 	}
 
-	//Create new program
+	// Create new program
 	if(Editor.program === null)
 	{	
 		Editor.createNewProgram();
 	}
 
-	//Event manager
+	// Event manager
 	Editor.manager = new EventManager();
 	Editor.manager.add(document.body, "keydown", function(event)
 	{
@@ -521,65 +521,65 @@ Editor.deleteObject = function(object)
 {
 	var selected = (object === undefined) ? Editor.selection : [object];
 	
-	//List of delete actions
+	// List of delete actions
 	var actions = [];
 
-	//Delect selection
+	// Delect selection
 	for(var i = 0; i < selected.length; i++)
 	{
-		//Object3D
+		// Object3D
 		if(selected[i].isObject3D && !selected[i].locked && !(selected[i] instanceof Program))
 		{
 			actions.push(new RemoveAction(selected[i]));
 		}
-		//Material
+		// Material
 		else if(selected[i] instanceof THREE.Material)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "materials"));
 		}
-		//Texture
+		// Texture
 		else if(selected[i] instanceof THREE.Texture)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "textures"));
 		}
-		//Font
+		// Font
 		else if(selected[i] instanceof Font)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "fonts"));
 		}
-		//Audio
+		// Audio
 		else if(selected[i] instanceof Audio)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "audio"));
 		}
-		//Video
+		// Video
 		else if(selected[i] instanceof Video)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "videos"));
 		}
-		//Geometries
+		// Geometries
 		else if(selected[i] instanceof THREE.Geometry || selected[i] instanceof THREE.BufferGeometry)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "geometries"));
 		}
-		//Shapes
+		// Shapes
 		else if(selected[i] instanceof THREE.Shape)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "shapes"));
 		}
-		//Resources
+		// Resources
 		else if(selected[i] instanceof Resource)
 		{
 			Editor.addAction(new RemoveResourceAction(selected[i], Editor.program, "resources"));
 		}
-		//Unknown
+		// Unknown
 		else
 		{
 			console.warn("nunuStudio: Cant delete type of object.");
 		}
 	}
 
-	//Check if any action was added
+	// Check if any action was added
 	if(actions.length > 0)
 	{
 		Editor.addAction(new ActionBundle(actions));
@@ -596,7 +596,7 @@ Editor.deleteObject = function(object)
  */
 Editor.copyObject = function(object)
 {
-	//If no object passed copy selected object
+	// If no object passed copy selected object
 	if(object === undefined)
 	{
 		if(Editor.hasObjectSelected())
@@ -642,7 +642,7 @@ Editor.cutObject = function(object)
 		}
 	}
 
-	//Avoid cutting program or scene objects
+	// Avoid cutting program or scene objects
 	if(object instanceof Program || object instanceof Scene)
 	{
 		return;
@@ -668,14 +668,14 @@ Editor.pasteObject = function(target)
 		var content = Editor.clipboard.get("text");
 		var data = JSON.parse(content);
 
-		//Create object
+		// Create object
 		var obj = new ObjectLoader().parse(data);
 		obj.traverse(function(child)
 		{
 			child.uuid = THREE.Math.generateUUID();
 		});
 
-		//Add object to target
+		// Add object to target
 		if(target !== undefined && !target.locked)
 		{
 			Editor.addObject(obj, target);
@@ -832,20 +832,20 @@ Editor.addDefaultScene = function(material)
 		material.name = "default";
 	}
 
-	//Create new scene
+	// Create new scene
 	var scene = new Scene();
 
-	//Sky
+	// Sky
 	var sky = new Sky();
 	sky.autoUpdate = false;
 	scene.add(sky);
 
-	//Box
+	// Box
 	var model = new Mesh(Editor.defaultGeometry, material);
 	model.name = "box";
 	scene.add(model);
 
-	//Floor
+	// Floor
 	var ground = new THREE.BoxBufferGeometry(20, 1, 20);
 	ground.name = "ground";
 	
@@ -854,10 +854,10 @@ Editor.addDefaultScene = function(material)
 	model.name = "ground";
 	scene.add(model);
 
-	//Add scene to program
+	// Add scene to program
 	Editor.addObject(scene, Editor.program);
 
-	//Open scene
+	// Open scene
 	var tab = Editor.gui.tab.addTab(SceneEditor, true);
 	tab.attach(scene);
 };
@@ -930,20 +930,20 @@ Editor.setProgram = function(program)
 
 		Editor.program = program;
 
-		//Tree view
+		// Tree view
 		Editor.gui.tree.attach(Editor.program);
 		Editor.gui.assetExplorer.attach(Editor.program);
 
-		//History
+		// History
 		Editor.history = new History(Editor.settings.general.historySize);
 		
-		//Clear tabs
+		// Clear tabs
 		Editor.gui.tab.clear();
 
-		//Reset editor
+		// Reset editor
 		Editor.resetEditor();
 
-		//Add new scene tab to interface
+		// Add new scene tab to interface
 		if(program.children.length > 0)
 		{
 			var scene = Editor.gui.tab.addTab(SceneEditor, true);
@@ -1116,7 +1116,7 @@ Editor.updateNunu = function(silent)
 
 	try
 	{
-		var url = "https://raw.githubusercontent.com/tentone/nunuStudio/master/build/nunu.editor.min.js";
+		var url = "https:// raw.githubusercontent.com/tentone/nunuStudio/master/build/nunu.editor.min.js";
 
 		FileSystem.readFile(url, false, function(data)
 		{

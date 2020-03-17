@@ -95,7 +95,7 @@ EditorPlanarControls.prototype.update = function(mouse, keyboard)
 	}
 	
 	/*
-	//WASD movement
+	// WASD movement
 	if(Editor.settings.editor.keyboardNavigation)
 	{
 		if(keyboard.keyPressed(Keyboard.W))

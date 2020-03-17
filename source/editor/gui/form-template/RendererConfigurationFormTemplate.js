@@ -41,7 +41,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.backend);
 	this.form.nextRow();
 
-	//Antialiasing
+	// Antialiasing
 	this.form.addText(Locale.antialiasing).setAltText(Locale.hintAntialiasing);
 	this.antialiasing = new CheckBox(this.form);
 	this.antialiasing.size.set(18, 18);
@@ -52,7 +52,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.antialiasing);
 	this.form.nextRow();
 
-	//Alpha
+	// Alpha
 	this.form.addText(Locale.alpha).setAltText(Locale.hintAlpha);
 	this.alpha = new CheckBox(this.form);
 	this.alpha.size.set(18, 18);
@@ -63,7 +63,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.alpha);
 	this.form.nextRow();
 
-	//Premultiplied Alpha
+	// Premultiplied Alpha
 	this.form.addText(Locale.premultipliedAlpha).setAltText(Locale.hintPremultipliedAlpha);
 	this.premultipliedAlpha = new CheckBox(this.form);
 	this.premultipliedAlpha.size.set(18, 18);
@@ -74,7 +74,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.premultipliedAlpha);
 	this.form.nextRow();
 
-	//Preserver drawing buffer
+	// Preserver drawing buffer
 	this.form.addText(Locale.preserveDrawingBuffer);
 	this.preserveDrawingBuffer = new CheckBox(this.form);
 	this.preserveDrawingBuffer.size.set(18, 18);
@@ -85,7 +85,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.preserveDrawingBuffer);
 	this.form.nextRow();
 
-	//Logaritmic depth
+	// Logaritmic depth
 	this.form.addText(Locale.physicallyCorrectLights).setAltText(Locale.hintPhysicallyCorrectLights);
 	this.physicallyCorrectLights = new CheckBox(this.form);
 	this.physicallyCorrectLights.size.set(18, 18);
@@ -96,7 +96,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.physicallyCorrectLights);
 	this.form.nextRow();
 
-	//Logaritmic depth
+	// Logaritmic depth
 	this.form.addText(Locale.logarithmicDepthBuffer).setAltText(Locale.hintLogarithmicDepthBuffer);
 	this.logarithmicDepthBuffer = new CheckBox(this.form);
 	this.logarithmicDepthBuffer.size.set(18, 18);
@@ -107,7 +107,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.logarithmicDepthBuffer);
 	this.form.nextRow();
 
-	//Auto clear
+	// Auto clear
 	this.form.addText(Locale.autoClear);
 	this.autoClear = new CheckBox(this.form);
 	this.autoClear.size.set(18, 18);
@@ -168,7 +168,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.sortObjects);
 	this.form.nextRow();
 
-	//Shadows
+	// Shadows
 	this.form.addText(Locale.shadows);
 	this.shadows = new CheckBox(this.form);
 	this.shadows.size.set(18, 18);
@@ -179,7 +179,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.shadows);
 	this.form.nextRow();
 
-	//Shadows settings
+	// Shadows settings
 	this.form.addText(Locale.shadowType);
 	this.shadowsType = new DropdownList(this.form);
 	this.shadowsType.size.set(150, 18);
@@ -204,7 +204,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.shadowsAutoUpdate);
 	this.form.nextRow();
 
-	//Gamma
+	// Gamma
 	this.form.addText(Locale.gammaFactor);
 	this.gammaFactor = new NumberBox(this.form);
 	this.gammaFactor.size.set(60, 18);
@@ -217,7 +217,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.gammaFactor);
 	this.form.nextRow()
 	
-	//Power preference
+	// Power preference
 	this.form.addText(Locale.powerPreference).setAltText(Locale.hintPowerPreference);
 	this.powerPreference = new DropdownList(this.form);
 	this.powerPreference.size.set(150, 18);
@@ -231,7 +231,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.powerPreference);
 	this.form.nextRow();
 
-	//Precision
+	// Precision
 	this.form.addText(Locale.precision).setAltText(Locale.hintPrecision);
 	this.precision = new DropdownList(this.form);
 	this.precision.size.set(150, 18);
@@ -245,7 +245,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.precision);
 	this.form.nextRow();
 
-	//Tonemapping
+	// Tonemapping
 	this.form.addText(Locale.tonemapping).setAltText(Locale.hintTonemapping);
 	this.toneMapping = new DropdownList(this.form);
 	this.toneMapping.size.set(150, 18);
@@ -262,7 +262,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.toneMapping);
 	this.form.nextRow();
 
-	//Tonemapping exposure
+	// Tonemapping exposure
 	this.form.addText(Locale.exposure);
 	this.toneMappingExposure = new NumberBox(this.form);
 	this.toneMappingExposure.size.set(60, 18);
@@ -275,7 +275,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.toneMappingExposure);
 	this.form.nextRow();
 
-	//Tonemapping whitepoint
+	// Tonemapping whitepoint
 	this.form.addText(Locale.whitepoint);
 	this.toneMappingWhitePoint = new NumberBox(this.form);
 	this.toneMappingWhitePoint.size.set(60, 18);
@@ -288,7 +288,7 @@ function RendererConfigurationFormTemplate(form, object)
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
 
-	//Check shader errors
+	// Check shader errors
 	this.form.addText(Locale.checkShaderErrors).setAltText(Locale.hintCheckShaderErrors);
 	this.checkShaderErrors = new CheckBox(this.form);
 	this.checkShaderErrors.size.set(18, 18);

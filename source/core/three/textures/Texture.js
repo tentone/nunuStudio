@@ -1,15 +1,15 @@
 "use strict";
 
-//Serialization does not serialize any image data.
+// Serialization does not serialize any image data.
 THREE.Texture.prototype.toJSON = function(meta)
 {
-	//Check if this texture was already serialized
+	// Check if this texture was already serialized
 	if(meta.textures[this.uuid] !== undefined)
 	{
 		return meta.textures[this.uuid];
 	}
 
-	//Serialize texture data
+	// Serialize texture data
 	var data =
 	{
 		metadata:

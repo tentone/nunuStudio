@@ -9,14 +9,14 @@ function TextureForm(parent)
 	this.form = new TableForm(this);
 	this.form.defaultTextWidth = 60;
 
-	//Use texture
+	// Use texture
 	this.form.addText("Use texture");
 	this.useTexture = new CheckBox(this.form);
 	this.useTexture.size.set(18, 18);
 	this.form.add(this.useTexture);
 	this.form.nextRow();
 
-	//WrapS
+	// WrapS
 	this.form.addText("Wrap Hor");
 	this.wrapS = new DropdownList(this);
 	this.wrapS.size.set(120, 18);
@@ -26,7 +26,7 @@ function TextureForm(parent)
 	this.form.add(this.wrapS);
 	this.form.nextRow();
 
-	//WrapT
+	// WrapT
 	this.form.addText("Wrap Vert");
 	this.wrapT = new DropdownList(this);
 	this.wrapT.size.set(120, 18);
@@ -36,7 +36,7 @@ function TextureForm(parent)
 	this.form.add(this.wrapT);
 	this.form.nextRow();
 
-	//Repeat
+	// Repeat
 	this.form.addText(Locale.repeat);
 	this.repeat = new VectorBox(this);
 	this.repeat.setType(VectorBox.VECTOR2);
@@ -112,7 +112,7 @@ TextureForm.prototype.getValue = function()
 	return null;
 };
 
-//Load texture from file
+// Load texture from file
 TextureForm.prototype.loadTexture = function(file)
 {
 	var self = this;

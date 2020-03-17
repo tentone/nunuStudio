@@ -1,15 +1,15 @@
 "use strict";
 
-//TODO <NOT BEING USED>
+// TODO <NOT BEING USED>
 
 function ProfilingTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Profiling", Global.FILE_PATH + "icons/misc/speedometer.png");
 
-	//Canvas
+	// Canvas
 	this.canvas = new Canvas();
 	
-	//Form
+	// Form
 	this.form = new TableForm();
 	this.form.setAutoSize(false);
 	this.form.addText("Renderer");
@@ -35,7 +35,7 @@ function ProfilingTab(parent, closeable, container, index)
 	this.vertices = this.form.addText("");
 	this.form.nextRow();
 
-	//Container
+	// Container
 	this.dual = new DualContainer(this);
 	this.dual.tabPosition = 0.2;
 	this.dual.attachA(this.canvas);

@@ -4,7 +4,7 @@ function DropdownList(parent)
 {
 	Element.call(this, parent, "div");
 
-	//Select
+	// Select
 	this.select = document.createElement("select");
 	this.select.style.backgroundColor = Editor.theme.boxColor;
 	this.select.style.color = Editor.theme.textColor;
@@ -21,7 +21,7 @@ function DropdownList(parent)
 	this.select.style.appearance = "textfield";
 	this.element.appendChild(this.select);
 
-	//Arrow
+	// Arrow
 	this.arrow = document.createElement("img");
 	this.arrow.style.display = "block";
 	this.arrow.style.position = "absolute";
@@ -32,7 +32,7 @@ function DropdownList(parent)
 	this.arrow.src = Global.FILE_PATH + "icons/misc/arrow_down.png";
 	this.element.appendChild(this.arrow);
 
-	//Attributes
+	// Attributes
 	this.values = [];
 }
 
@@ -112,7 +112,7 @@ DropdownList.prototype.getValue = function()
  */
 DropdownList.prototype.setValue = function(value)
 {
-	//Get value index
+	// Get value index
 	for(var i = 0; i < this.values.length; i++)
 	{
 		if(this.values[i] === value)
@@ -122,20 +122,20 @@ DropdownList.prototype.setValue = function(value)
 		}
 	}
 
-	//If value not found set selectedIndex to -1
+	// If value not found set selectedIndex to -1
 	if(i === this.values.length)
 	{
 		this.select.selectedIndex = -1;
 	}
 }
 
-//Get dropdownlist selected index
+// Get dropdownlist selected index
 DropdownList.prototype.getSelectedIndex = function()
 {
 	return this.select.selectedIndex;
 }
 
-//Set dropdownlist selected index
+// Set dropdownlist selected index
 DropdownList.prototype.setSelectedIndex = function(index)
 {
 	this.select.selectedIndex = index;

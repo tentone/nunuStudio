@@ -1011,7 +1011,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				var material = getMaterial(data.material);
 				var tmpBones;
 
-				//If data has skeleton, assumes bones are already in scene graph. Then temporarily undefines geometry.bones not to create bones in SkinnedMesh constructor.
+				// If data has skeleton, assumes bones are already in scene graph. Then temporarily undefines geometry.bones not to create bones in SkinnedMesh constructor.
 				if(data.skeleton !== undefined && geometry.bones !== undefined)
 				{
 					tmpBones = geometry.bones;
@@ -1020,7 +1020,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 				object = new SkinnedMesh(geometry, material);
 
-				//Rebinds with skeleton whose uuid is data.skeleton later.
+				// Rebinds with skeleton whose uuid is data.skeleton later.
 				if(data.skeleton !== undefined)
 				{
 					object.skeletonUUID = data.skeleton;
@@ -1145,7 +1145,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		object.renderOrder = data.renderOrder;
 	}
 	
-	//Animations
+	// Animations
 	if(data.animations !== undefined)
 	{
 		object.animations = [];
@@ -1156,14 +1156,14 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		}
 	}
 
-	//Get or generate tranformation matrix if necessary
+	// Get or generate tranformation matrix if necessary
 	if(data.matrix !== undefined)
 	{
 		object.matrix.fromArray(data.matrix);
 		object.matrix.decompose(object.position, object.quaternion, object.scale);
 	}
 
-	//If available use position rotation and quarternion stored in file
+	// If available use position rotation and quarternion stored in file
 	if(data.position !== undefined)
 	{
 		object.position.fromArray(data.position);
@@ -1181,26 +1181,26 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		object.scale.fromArray(data.scale);
 	}
 
-	//Shadow casting
+	// Shadow casting
 	object.castShadow = data.castShadow === true;
 	object.receiveShadow = data.receiveShadow === true;
 
-	//Shadowmap data
+	// Shadowmap data
 	if(data.shadow !== undefined)
 	{
 		object.shadow.fromJSON(data.shadow);
 	}
 
-	//Visibility
+	// Visibility
 	object.visible = data.visible === true;
 
-	//Aditional user data
+	// Aditional user data
 	if(data.userData !== undefined)
 	{
 		object.userData = data.userData;
 	}
 
-	//Add children
+	// Add children
 	if(data.children !== undefined)
 	{
 		for(var child in data.children)
@@ -1209,7 +1209,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		}
 	}
 
-	//Set static and update transformation matrix if necessary
+	// Set static and update transformation matrix if necessary
 	if(data.matrixAutoUpdate !== undefined)
 	{
 		object.matrixAutoUpdate = data.matrixAutoUpdate;
@@ -1221,7 +1221,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		}
 	}
 
-	//Attach resources to program
+	// Attach resources to program
 	if(data.type === "Program")
 	{
 		object.materials = materials;
@@ -1236,7 +1236,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		object.skeletons = skeletons;
 	}
 
-	//Get scene default cameras
+	// Get scene default cameras
 	else if(data.type === "Scene")
 	{
 		for(var i = 0; i < object.cameras.length; i++)
@@ -1252,7 +1252,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			}
 		}
 	}
-	//LOD objects
+	// LOD objects
 	else if(data.type === "LOD")
 	{
 		var levels = data.levels;

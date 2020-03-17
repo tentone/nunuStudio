@@ -336,29 +336,29 @@ NunuApp.prototype.run = function()
 		return;
 	}
 
-	//WebGL renderer
+	// WebGL renderer
 	this.renderer = this.program.rendererConfig.createRenderer(this.canvas);
 
-	//Mouse and Keyboard input
+	// Mouse and Keyboard input
 	this.keyboard = new Keyboard();
 	this.mouse = new Mouse();
 	this.mouse.setCanvas(this.canvas);
 
-	//Attach this runtime to program
+	// Attach this runtime to program
 	this.program.app = this;
 
-	//Create default camera
+	// Create default camera
 	this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
 	this.program.defaultCamera.position.set(0, 5, -5);
 
-	//Set renderer
+	// Set renderer
 	this.program.setRenderer(this.renderer);
 	this.program.setMouseKeyboard(this.mouse, this.keyboard);
 	
-	//Initialize program
+	// Initialize program
 	this.program.initialize();
 
-	//Lock mouse pointer
+	// Lock mouse pointer
 	if(this.program.lockPointer)
 	{
 		var canvas = this.canvas;
@@ -413,14 +413,14 @@ NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
  */
 NunuApp.prototype.loadProgram = function(fname)
 {
-	//JSON project
+	// JSON project
 	if(fname.endsWith(".isp"))
 	{
 		var loader = new ObjectLoader();
 		var data = FileSystem.readFile(fname);
 		this.program = loader.parse(JSON.parse(data));
 	}
-	//Binary project
+	// Binary project
 	else if(fname.endsWith(".nsp"))
 	{
 		var loader = new ObjectLoader();
@@ -442,7 +442,7 @@ NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 {
 	var self = this;
 
-	//JSON project
+	// JSON project
 	if(fname.endsWith(".isp"))
 	{
 		FileSystem.readFile(fname, false, function(data)
@@ -456,7 +456,7 @@ NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 			}
 		}, onProgress);
 	}
-	//Binary project
+	// Binary project
 	else if(fname.endsWith(".nsp"))
 	{
 		FileSystem.readFileArrayBuffer(fname, false, function(data)
@@ -502,38 +502,38 @@ NunuApp.prototype.update = function()
  */
 NunuApp.prototype.exit = function()
 {
-	//Destroy events
+	// Destroy events
 	this.events.destroy();
 
-	//Dispose program
+	// Dispose program
 	if(this.program !== null)
 	{
 		this.program.dispose();
 		this.program = null;
 	}
 
-	//Dispose renderer
+	// Dispose renderer
 	if(this.renderer !== null)
 	{
 		this.renderer.dispose();
 		this.renderer = null;
 	}
 
-	//Dispose mouse
+	// Dispose mouse
 	if(this.mouse !== null)
 	{
 		this.mouse.dispose();
 		this.mouse = null;
 	}
 
-	//Dispose keyboard
+	// Dispose keyboard
 	if(this.keyboard !== null)
 	{
 		this.keyboard.dispose();
 		this.keyboard = null;
 	}
 
-	//Run onExit callback if any
+	// Run onExit callback if any
 	if(this.onExit !== undefined)
 	{
 		this.onExit();
@@ -603,7 +603,7 @@ NunuApp.prototype.resize = function()
 		var width = 1;
 		var height = 1;
 
-		//Automatically fit window
+		// Automatically fit window
 		if(this.canvasFitWindow)
 		{
 			this.canvas.style.width = window.innerWidth + "px";
@@ -617,14 +617,14 @@ NunuApp.prototype.resize = function()
 			height = this.canvas.offsetHeight;
 		}
 
-		//Device pixel ratio
+		// Device pixel ratio
 		if(this.program.handlePixelRatio)
 		{
 			width *= window.devicePixelRatio;
 			height *= window.devicePixelRatio;
 		}
 
-		//Update size
+		// Update size
 		this.renderer.setSize(width, height, false);
 		this.program.resize(width, height);
 	}

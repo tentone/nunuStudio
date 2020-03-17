@@ -6,7 +6,7 @@ function LeapInspector(parent, object)
 
 	var self = this;
 
-	//Mode
+	// Mode
 	this.form.addText(Locale.mode);
 	this.mode = new DropdownList(this.form);
 	this.mode.size.set(80, 18);
@@ -19,7 +19,7 @@ function LeapInspector(parent, object)
 	this.form.add(this.mode);
 	this.form.nextRow();
 
-	//Debug model
+	// Debug model
 	this.debugModel = new CheckBox(this.form);
 	this.form.addText("Debug model");
 	this.debugModel.size.set(18, 18);
@@ -30,7 +30,7 @@ function LeapInspector(parent, object)
 	this.form.add(this.debugModel);
 	this.form.nextRow();
 
-	//Gestures Enabled
+	// Gestures Enabled
 	this.gesturesEnabled = new CheckBox(this.form);
 	this.form.addText("Gestures Enabled");
 	this.gesturesEnabled.size.set(18, 18);
@@ -41,7 +41,7 @@ function LeapInspector(parent, object)
 	this.form.add(this.gesturesEnabled);
 	this.form.nextRow();
 
-	//Poses Enabled
+	// Poses Enabled
 	this.posesEnabled = new CheckBox(this.form);
 	this.form.addText("Poses Enabled");
 	this.posesEnabled.size.set(18, 18);

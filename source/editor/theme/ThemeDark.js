@@ -4,7 +4,7 @@ function ThemeDark()
 {
 	this.font = "Arial";
 
-	//Color
+	// Color
 	this.barColor = "#222222";
 	this.sepColor = "#292929";
 	this.panelColor = "#333333";
@@ -13,17 +13,17 @@ function ThemeDark()
 	this.textColor = "#FFFFFF";
 	this.iconColor = "#FFFFFF";
 
-	//Button
+	// Button
 	this.buttonColor = "#222222";
 	this.buttonOverColor = "#555555";
 	this.buttonLightColor = "#333333";
 	
-	//Audio player
+	// Audio player
 	this.audioTrack = "#222222";
 	this.audioScrubber = "#FFFFFF";
 	this.audioProgress = "#555555";
 
-	//Body
+	// Body
 	document.body.style.fontFamily = this.font;
 	document.body.style.color = this.textColor;
 	document.body.style.fontSize = "12px";

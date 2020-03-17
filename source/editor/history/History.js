@@ -43,20 +43,20 @@ History.prototype.getAction = function(id)
  */
 History.prototype.add = function(action, editor)
 {	
-	//If there are more recent changes remove them
+	// If there are more recent changes remove them
 	while(this.actions.length > this.position + 1)
 	{
 		this.actions.pop();
 	}
 
-	//Add action to list
+	// Add action to list
 	this.actions.push(action);
 	this.position++;
 
-	//Apply action
+	// Apply action
 	action.apply(editor, true);
 
-	//Limit actions size
+	// Limit actions size
 	while(this.actions.length > this.limit)
 	{
 		this.actions.splice(0, 1)

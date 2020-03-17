@@ -279,7 +279,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	var isRootObject = (meta === undefined);
 	var output = {};
 
-	//If root object initialize base structure
+	// If root object initialize base structure
 	if(isRootObject)
 	{
 		meta = new ResourceManager.ResourceContainer();
@@ -317,12 +317,12 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		object.userData = this.userData;
 	}
 
-	//Geometry
+	// Geometry
 	if(this.geometry !== undefined)
 	{
 		object.geometry = serialize(meta.geometries, this.geometry);
 
-		//Serialize shapes
+		// Serialize shapes
 		var parameters = this.geometry.parameters;
 		if(parameters !== undefined && parameters.shapes !== undefined)
 		{
@@ -342,7 +342,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		}
 	}
 
-	//Material
+	// Material
 	if(this.material !== undefined)
 	{
 		if(this.material instanceof THREE.Material)
@@ -360,7 +360,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		}
 	}
 
-	//Animations
+	// Animations
 	if(this.animations !== undefined && this.animations.length > 0)
 	{
 		object.animations = [];
@@ -371,13 +371,13 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		}
 	}
 
-	//Resource access callback
+	// Resource access callback
 	if(resourceAccess !== undefined)
 	{
 		resourceAccess(meta, object);
 	}
 
-	//Serialize children
+	// Serialize children
 	if(recursive !== false && this.children.length > 0)
 	{
 		object.children = [];
@@ -391,7 +391,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		}
 	}
 
-	//If root object add assets
+	// If root object add assets
 	if(isRootObject)
 	{
 		output.geometries = extractFromCache(meta.geometries);
@@ -409,7 +409,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	output.object = object;
 	return output;
 
-	//Auxiliar function to add resource to respective library
+	// Auxiliar function to add resource to respective library
 	function serialize(library, element)
 	{
 		if(library[element.uuid] === undefined)
@@ -420,7 +420,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		return element.uuid;
 	}
 
-	//Extract data from the cache hash remove metadata on each item and return as array
+	// Extract data from the cache hash remove metadata on each item and return as array
 	function extractFromCache(cache)
 	{
 		var values = [];
@@ -439,7 +439,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 /**
  * This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.
  * 
- * This page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.
+ * This page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.
  * 
  * All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
  * 

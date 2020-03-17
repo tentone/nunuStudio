@@ -6,7 +6,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Clear coat
+	// Clear coat
 	this.form.addText(Locale.clearcoat);
 	this.clearcoat = new Slider(this.form);
 	this.clearcoat.size.set(160, 18);
@@ -20,7 +20,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.clearcoat);
 	this.form.nextRow();
 
-	//Clear coat roughness
+	// Clear coat roughness
 	this.form.addText(Locale.clearcoatRoughness);
 	this.clearcoatRoughness = new Slider(this.form);
 	this.clearcoatRoughness.size.set(160, 18);
@@ -34,7 +34,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.clearcoatRoughness);
 	this.form.nextRow();
 
-	//Reflectivity
+	// Reflectivity
 	this.form.addText(Locale.reflectivity);
 	this.reflectivity = new Slider(this.form);
 	this.reflectivity.size.set(160, 18);
@@ -48,7 +48,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.reflectivity);
 	this.form.nextRow();
 
-	//Transparency
+	// Transparency
 	this.form.addText(Locale.transparency);
 	this.transparency = new Slider(this.form);
 	this.transparency.size.set(160, 18);
@@ -62,7 +62,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.transparency);
 	this.form.nextRow();
 
-	//Clear coat normal map
+	// Clear coat normal map
 	this.form.addText(Locale.clearcoatNormalMap);
 	this.clearcoatNormalMap = new TextureForm(this.form);
 	this.clearcoatNormalMap.size.set(0, 100);
@@ -74,7 +74,7 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.clearcoatNormalMap);
 	this.form.nextRow();
 
-	//Clear coat normal map scale
+	// Clear coat normal map scale
 	this.form.addText(Locale.clearcoatNormalScale);
 	this.clearcoatNormalScale = new VectorBox(this.form);
 	this.clearcoatNormalScale.size.set(0, 18);

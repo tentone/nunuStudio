@@ -273,13 +273,13 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		this.needsUpdate = true;
 	}
 	
-	//Keyboard movement
+	// Keyboard movement
 	if(Editor.settings.editor.keyboardNavigation && this.keyboardMovement(keyboard))
 	{
 		this.needsUpdate = true;
 	}
 
-	//If smooth always update 
+	// If smooth always update 
 	if(this.smooth === true)
 	{
 		this.distance += this.speedDistance;

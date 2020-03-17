@@ -6,7 +6,7 @@ function OrthographicCameraInspector(parent, object)
 
 	var self = this;
 
-	//Size
+	// Size
 	this.form.addText(Locale.size);
 	this.sizeBox = new NumberBox(this.form);
 	this.sizeBox.size.set(80, 18);
@@ -18,7 +18,7 @@ function OrthographicCameraInspector(parent, object)
 	this.form.add(this.sizeBox);
 	this.form.nextRow();
 
-	//Camera resize Mode
+	// Camera resize Mode
 	this.form.addText("Resize Mode");
 	this.mode = new DropdownList(this.form);
 	this.mode.size.set(130, 18);
@@ -31,7 +31,7 @@ function OrthographicCameraInspector(parent, object)
 	this.form.add(this.mode);
 	this.form.nextRow();
 
-	//Camera used
+	// Camera used
 	this.use = new CheckBox(this.form);
 	this.form.addText(Locale.useCamera);
 	this.use.size.set(18, 18);
@@ -50,11 +50,11 @@ function OrthographicCameraInspector(parent, object)
 	this.form.add(this.use);
 	this.form.nextRow();
 	
-	//Distance
+	// Distance
 	this.form.addText(Locale.clippingPlanes);
 	this.form.nextRow();
 
-	//Near
+	// Near
 	this.form.addText(Locale.near);
 	this.near = new NumberBox(this.form);
 	this.near.size.set(60, 18);
@@ -67,7 +67,7 @@ function OrthographicCameraInspector(parent, object)
 	this.form.add(this.near);
 	this.form.nextRow();
 	
-	//Far
+	// Far
 	this.form.addText(Locale.near);
 	this.far = new NumberBox(this.form);
 	this.far.size.set(80, 18);
@@ -79,12 +79,12 @@ function OrthographicCameraInspector(parent, object)
 	this.form.add(this.far);
 	this.form.nextRow();
 
-	//Viewport
+	// Viewport
 	this.form.addText(Locale.viewport);
 	this.form.nextRow();
 	this.viewport = new ViewportFormTemplate(this.form, object);
 
-	//Order
+	// Order
 	this.form.addText(Locale.renderOrder).setAltText(Locale.hintRenderOrder);
 	this.order = new NumberBox(this.form);
 	this.order.size.set(80, 18);
@@ -100,7 +100,7 @@ function OrthographicCameraInspector(parent, object)
 	this.form.add(this.order);
 	this.form.nextRow();
 
-	//Clear color
+	// Clear color
 	this.form.addText(Locale.clearColor);
 	this.clearColor = new CheckBox(this.form);
 	this.clearColor.size.set(18, 18);
@@ -111,7 +111,7 @@ function OrthographicCameraInspector(parent, object)
 	this.form.add(this.clearColor);
 	this.form.nextRow();
 
-	//Clear depth
+	// Clear depth
 	this.clearDepth = new CheckBox(this.form);
 	this.form.addText(Locale.clearDepth);
 	this.clearDepth.size.set(18, 18);
@@ -122,7 +122,7 @@ function OrthographicCameraInspector(parent, object)
 	this.form.add(this.clearDepth);
 	this.form.nextRow();
 
-	//Clear stencil
+	// Clear stencil
 	this.clearStencil = new CheckBox(this.form);
 	this.form.addText(Locale.clearStencil);
 	this.clearStencil.size.set(18, 18);

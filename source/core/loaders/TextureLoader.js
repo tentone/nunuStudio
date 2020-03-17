@@ -152,7 +152,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	var texture = null;
 	var category = json.category;
 
-	//Video texture
+	// Video texture
 	if(category === "Video")
 	{
 		if(json.video === undefined)
@@ -171,7 +171,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		texture.setPlaybackRate(json.playbackRate);
 		texture.setVolume(json.volume);
 	}
-	//Webcam texture
+	// Webcam texture
 	else if(category === "Webcam")
 	{
 		texture = new WebcamTexture();
@@ -181,7 +181,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			texture.mode = json.mode;
 		}
 	}
-	//Compressed texture
+	// Compressed texture
 	else if(category === "Compressed")
 	{
 		if(json.isCubeTexture)
@@ -216,7 +216,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			texture = new CompressedTexture(json.mipmaps, json.width, json.height);
 		}
 	}
-	//Cube texture
+	// Cube texture
 	else if(category === "Cube")
 	{
 		var images = [];
@@ -236,12 +236,12 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		texture.setSize(json.size);
 		texture.updateImages();
 	}
-	//Canvas texture
+	// Canvas texture
 	else if(category === "Canvas")
 	{
 		texture = new CanvasTexture(json.width, json.height);
 	}
-	//Texture
+	// Texture
 	else
 	{
 		if(json.image === undefined)
@@ -254,7 +254,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			console.warn("nunuStudio: TextureLoader, undefined image", json.image);
 		}
 
-		//SpriteSheet texture
+		// SpriteSheet texture
 		if(category === "SpriteSheet")
 		{
 			texture = new SpriteSheetTexture(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
@@ -263,7 +263,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			texture.beginFrame = json.beginFrame;
 			texture.endFrame = json.endFrame;
 		}
-		//Texture
+		// Texture
 		else
 		{
 			texture = new Texture(this.images[json.image]);

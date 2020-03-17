@@ -77,7 +77,7 @@ function TransformControls(camera, canvas, mouse)
 	this.quaternionZ = new THREE.Quaternion();
 	this.quaternionE = new THREE.Quaternion();
 
-	//Object attributes (per object)
+	// Object attributes (per object)
 	this.parentRotationMatrix = [];
 	this.parentScale = [];
 	this.worldRotationMatrix = [];
@@ -143,7 +143,7 @@ TransformControls.prototype.attach = function(objects)
 		}
 	}
 
-	//Add more temporary attibutes if necessary
+	// Add more temporary attibutes if necessary
 	while(this.oldPosition.length < this.objects.length)
 	{
 		this.parentRotationMatrix.push(new THREE.Matrix4());
@@ -194,13 +194,13 @@ TransformControls.prototype.setMode = function(mode)
 	}
 	else
 	{
-		//If scale mode force local space
+		// If scale mode force local space
 		if(this.mode === TransformControls.SCALE)
 		{
 			this.space = TransformControls.LOCAL;
 		}
 
-		//Gizmo visibility
+		// Gizmo visibility
 		for(var type in this.gizmo)
 		{
 			this.gizmo[type].visible = type === this.mode;
@@ -485,7 +485,7 @@ TransformControls.prototype.onPointerMove = function()
 				}
 			}
 
-			//Update physics objects
+			// Update physics objects
 			if(this.objects[i] instanceof PhysicsObject)
 			{
 				var shapes = this.objects[i].body.shapes;
@@ -635,7 +635,7 @@ TransformControls.prototype.onPointerMove = function()
 
 TransformControls.prototype.onPointerUp = function()
 {	
-	//Add changes made to the editor history
+	// Add changes made to the editor history
 	if(this.editing)
 	{
 		if(this.mode === TransformControls.TRANSLATE)

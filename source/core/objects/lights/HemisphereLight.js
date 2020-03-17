@@ -3,7 +3,7 @@
 /**
  * A light source positioned directly above the scene, with color fading from the sky color to the ground color.
  * 
- * Based on THREE.HemisphereLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/HemisphereLight
+ * Based on THREE.HemisphereLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/HemisphereLight
  * 
  * @param {number} skyColor Sky light color in hex RGB
  * @param {number} groundColor Ground light color in hex RGB

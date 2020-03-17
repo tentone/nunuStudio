@@ -112,13 +112,13 @@ AnimationMixer.prototype.update = function(delta, forceUpdate)
 
 		var direction = Math.sign(delta);
 
-		//Run active actions
+		// Run active actions
 		for(var i = 0; i < this._actions.length; i++)
 		{
 			this._actions[i]._update(this.time, delta, direction, this._accuIndex);
 		}
 
-		//Update scene graph
+		// Update scene graph
 		for(var i = 0; i < this._bindings.length; i++)
 		{
 			this._bindings[i].apply(this._accuIndex);

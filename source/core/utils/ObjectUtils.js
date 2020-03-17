@@ -78,7 +78,7 @@ ObjectUtils.calculateBoundingBox = function(object)
 			{
 				box = boundingBox.clone();
 			}
-			//Ajust box size
+			// Ajust box size
 			else
 			{
 				if(boundingBox.min.x < box.min.x) {box.min.x = boundingBox.min.x;}

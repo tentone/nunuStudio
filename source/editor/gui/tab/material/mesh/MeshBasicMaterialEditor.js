@@ -6,7 +6,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Skinning
+	// Skinning
 	this.skinning = new CheckBox(this.form);
 	this.form.addText(Locale.skinning);
 	this.skinning.size.set(0, 18);
@@ -18,7 +18,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.skinning);
 	this.form.nextRow();
 
-	//Morph targets
+	// Morph targets
 	this.morphTargets = new CheckBox(this.form);
 	this.form.addText(Locale.morphTargets);
 	this.morphTargets.size.set(0, 18);
@@ -29,7 +29,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.morphTargets);
 	this.form.nextRow();
 
-	//Wireframe
+	// Wireframe
 	this.wireframe = new CheckBox(this.form);
 	this.form.addText(Locale.wireframe);
 	this.wireframe.size.set(0, 18);
@@ -40,7 +40,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.color = new ColorChooser(this.form);
 	this.color.size.set(0, 18);
@@ -52,7 +52,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Texture map
+	// Texture map
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
@@ -64,7 +64,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.map);
 	this.form.nextRow();
 
-	//Alpha map
+	// Alpha map
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);

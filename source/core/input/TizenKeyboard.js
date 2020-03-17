@@ -4,7 +4,7 @@
  * Tizen keyboard contains codes of multiple tizen specific key codes.
  *
  * These key codes are used in Samsung Tizen TV, more infomration available
- *  - https://developer.samsung.com/stream-code101/tv/using-the-remote-control
+ *  - https:// developer.samsung.com/stream-code101/tv/using-the-remote-control
  *
  * @static
  * @class TizenKeyboard

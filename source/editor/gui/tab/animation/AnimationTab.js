@@ -21,7 +21,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.object = null;
 	this.clock = new THREE.Clock();
 	
-	this.zoom = 120.0; //Pixels/sec
+	this.zoom = 120.0; // Pixels/sec
 	this.animations = [];
 
 	/**
@@ -58,7 +58,7 @@ function AnimationTab(parent, closeable, container, index)
 
 			var clip = new AnimationClip("Animation" + self.object.animations.length, 3, []);
 			
-			//Object 3D
+			// Object 3D
 			if(self.object.isObject3D)
 			{
 				var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
@@ -81,7 +81,7 @@ function AnimationTab(parent, closeable, container, index)
 				visible.setColor("#FFFF00");
 				clip.tracks.push(visible);
 			}
-			//Material
+			// Material
 			else if(self.object.isMaterial)
 			{
 				if(self.object.color !== undefined)
@@ -213,7 +213,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.emptyText.setTextColor("#FFFFFF");
 	this.emptyText.setText(Locale.selectObjectEditAnimation);
 
-	//Temporary variables for mouse movement
+	// Temporary variables for mouse movement
 	var mouse = 0, initial = 0;
 
 	/**
@@ -327,7 +327,7 @@ AnimationTab.prototype.createAnimationMixer = function(keepTime)
 {
 	var time = 0;
 
-	//Remove old mixer
+	// Remove old mixer
 	if(this.mixer !== null)
 	{
 		if(keepTime)
@@ -338,7 +338,7 @@ AnimationTab.prototype.createAnimationMixer = function(keepTime)
 		this.clearAnimationMixer();
 	}
 
-	//Check if the object has animations
+	// Check if the object has animations
 	if(this.object !== null && this.object.animations !== undefined)
 	{
 		this.mixer = new AnimationMixer(this.object);
@@ -358,7 +358,7 @@ AnimationTab.prototype.update = function()
 
 		this.mixer.update(this.clock.getDelta());
 
-		//Update object panel when playing
+		// Update object panel when playing
 		if(this.mixer.playing)
 		{
 			Editor.gui.inspector.updateValues();
@@ -426,7 +426,7 @@ AnimationTab.prototype.addKeyFrame = function(track, value)
 
 	value = (value.toArray !== undefined) ? value.toArray() : [value];
 
-	//Check if there is already a keyframe with same time
+	// Check if there is already a keyframe with same time
 	for(var i = 0; i < track.times.length; i++)
 	{
 		if(track.times[i] === this.mixer.time)
@@ -435,7 +435,7 @@ AnimationTab.prototype.addKeyFrame = function(track, value)
 		}
 	}
 
-	//If there is already a keyframe with time update values
+	// If there is already a keyframe with time update values
 	if(i < track.times.length)
 	{
 		var valueSize = track.getValueSize();
@@ -447,7 +447,7 @@ AnimationTab.prototype.addKeyFrame = function(track, value)
 			index++;
 		}
 	}
-	//Add new keyframe to track
+	// Add new keyframe to track
 	else
 	{
 		var times = [];
@@ -475,29 +475,29 @@ AnimationTab.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		//Timeline
+		// Timeline
 		this.timeline.position.set(0, 20);
 		this.timeline.size.set(this.size.x, this.size.y - 20);
 		this.timeline.updateInterface();
 
-		//Tab
+		// Tab
 		this.tab.style.left = this.tab.position + "px";
 
-		//Information
+		// Information
 		this.info.size.set(this.tab.position, this.size.y - 20);
 		this.info.updateInterface();
 		
-		//Tracks
+		// Tracks
 		this.tracks.position.set(this.tab.position + 5, 0);
 		this.tracks.size.set(this.size.x - this.tracks.position.x, this.size.y - 20);
 		this.tracks.updateInterface();
 		
-		//Empty text
+		// Empty text
 		this.emptyText.position.set(0, 0);
 		this.emptyText.size.set(this.size.x, this.size.y);
 		this.emptyText.updateInterface();
 
-		//Element
+		// Element
 		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";

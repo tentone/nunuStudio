@@ -11,7 +11,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	//Canvas
+	// Canvas
 	this.canvas = new RendererCanvas();
 	this.canvas.setOnResize(function(x, y)
 	{
@@ -19,20 +19,20 @@ function ParticleEditor(parent, closeable, container, index)
 		self.camera.updateProjectionMatrix();
 	});
 
-	//Mouse
+	// Mouse
 	this.mouse = new Mouse(window, true);
 	this.mouse.setCanvas(this.canvas.element);
 
-	//Particle preview
+	// Particle preview
 	this.scene = new THREE.Scene();
 	this.scene.matrixAutoUpdate = false;
 	this.scene.add(new THREE.GridHelper(50, 50, 0x888888));
 	this.scene.add(new THREE.AxesHelper(50));
 
-	//Particle
+	// Particle
 	this.particle = null;
 
-	//Camera
+	// Camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x / this.canvas.size.y);
 	this.cameraRotation = new THREE.Vector2(0, 0.5);
 	this.cameraDistance = 5;
@@ -42,7 +42,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form = new TableForm();
 	this.form.setAutoSize(false);
 
-	//Main
+	// Main
 	this.main = new DualContainer(this);
 	this.main.tabPosition = 0.6;
 	this.main.tabPositionMin = 0.05;
@@ -50,7 +50,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.main.attachA(this.canvas);
 	this.main.attachB(this.form);
 
-	//Name
+	// Name
 	this.form.addText(Locale.name);
 	this.name = new TextBox(this.form);
 	this.name.size.set(200, 18);
@@ -62,7 +62,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//Texture map
+	// Texture map
 	this.form.addText(Locale.texture);
 	this.texture = new TextureChooser(this.form);
 	this.texture.size.set(100, 100);
@@ -74,7 +74,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.texture);
 	this.form.nextRow();
 
-	//Max particle count
+	// Max particle count
 	this.form.addText("Particle Count");
 	this.maxParticleCount = new NumberBox(this.form);
 	this.maxParticleCount.setStep(1.0);
@@ -87,7 +87,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.maxParticleCount);
 	this.form.nextRow();
 
-	//Blending mode
+	// Blending mode
 	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.size.set(100, 18);
@@ -104,7 +104,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.blending);
 	this.form.nextRow();
 
-	//Direction (Time scale)
+	// Direction (Time scale)
 	this.form.addText(Locale.direction);
 	this.direction = new DropdownList(this.form);
 	this.direction.size.set(100, 18);
@@ -118,7 +118,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.direction);
 	this.form.nextRow();
 
-	//Particle Count
+	// Particle Count
 	this.form.addText("Particle Rate");
 	this.particleCount = new NumberBox(this.form);
 	this.particleCount.size.set(50, 18);
@@ -131,7 +131,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.particleCount);
 	this.form.nextRow();
 
-	//Particle Duration
+	// Particle Duration
 	this.form.addText(Locale.duration);
 	this.duration = new NumberBox(this.form);
 	this.duration.size.set(50, 18);
@@ -150,7 +150,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.duration);
 	this.form.nextRow();
 
-	//Emmitter type
+	// Emmitter type
 	this.form.addText(Locale.emitterType);
 	this.type = new DropdownList(this.form);
 	this.type.size.set(100, 18);
@@ -165,7 +165,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.type);
 	this.form.nextRow();
 
-	//Max age
+	// Max age
 	this.form.addText(Locale.age);
 	this.ageRow = new NumberRow(this.form);
 	this.ageRow.labelSize = 20;
@@ -190,7 +190,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.ageRow);
 	this.form.nextRow();
 
-	//Position
+	// Position
 	this.form.addText(Locale.position);
 	this.form.nextRow();
 
@@ -216,7 +216,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.positionSpread);
 	this.form.nextRow();
 
-	//Velocity
+	// Velocity
 	this.form.addText(Locale.velocity);
 	this.form.nextRow();
 
@@ -242,7 +242,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.velocitySpread);
 	this.form.nextRow();
 
-	//Acceleration
+	// Acceleration
 	this.form.addText(Locale.acceleration);
 	this.form.nextRow();
 
@@ -268,7 +268,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.accelerationSpread);
 	this.form.nextRow();
 
-	//Wiggle
+	// Wiggle
 	this.form.addText(Locale.wiggle);
 	this.wiggleRow = new NumberRow(this.form);
 	this.wiggleRow.labelSize = 20;
@@ -293,7 +293,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.wiggleRow);
 	this.form.nextRow();
 	
-	//Opacity graph
+	// Opacity graph
 	this.form.addText(Locale.opacity);
 	this.opacity = new Graph(this.form);
 	this.opacity.size.set(200, 120)
@@ -309,7 +309,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.opacity);
 	this.form.nextRow();
 
-	//Scale
+	// Scale
 	this.form.addText(Locale.scale);
 	this.sizeRow = new NumberRow(this.form);
 	this.sizeRow.labelSize = 35;
@@ -334,7 +334,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.sizeRow);
 	this.form.nextRow();
 
-	//Scale graph
+	// Scale graph
 	this.form.addText("");
 	this.scale = new Graph(this.form);
 	this.scale.size.set(200, 120)
@@ -350,7 +350,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.scale);
 	this.form.nextRow();
 
-	//Rotation
+	// Rotation
 	this.form.addText(Locale.rotation);
 	this.angleRow = new NumberRow(this.form);
 	this.angleRow.labelSize = 35;
@@ -375,7 +375,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.angleRow);
 	this.form.nextRow();
 
-	//Rotation graph
+	// Rotation graph
 	this.form.addText("");
 	this.angle = new Graph(this.form);
 	this.angle.size.set(200, 120)
@@ -391,7 +391,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.add(this.angle);
 	this.form.nextRow();
 
-	//Color
+	// Color
 	this.form.addText(Locale.color);
 	this.form.nextRow();
 
@@ -424,7 +424,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 ParticleEditor.prototype = Object.create(TabElement.prototype);
 
-//Update object data
+// Update object data
 ParticleEditor.prototype.updateMetadata = function()
 {
 	if(this.particle !== null)
@@ -432,14 +432,14 @@ ParticleEditor.prototype.updateMetadata = function()
 		this.setName(this.particle.name);
 		this.name.setText(this.particle.name);
 		
-		//Check if object has a parent
+		// Check if object has a parent
 		if(this.particle.parent === null)
 		{
 			this.close();
 			return;
 		}
 
-		//Check if object exists in parent
+		// Check if object exists in parent
 		var children = this.particle.parent.children;
 		for(var i = 0; i < children.length; i++)
 		{
@@ -449,7 +449,7 @@ ParticleEditor.prototype.updateMetadata = function()
 			}
 		}
 
-		//If not found close tab
+		// If not found close tab
 		if(i >= children.length)
 		{
 			this.close();
@@ -457,21 +457,21 @@ ParticleEditor.prototype.updateMetadata = function()
 	}
 };
 
-//Attach particle to particle editor
+// Attach particle to particle editor
 ParticleEditor.prototype.attach = function(particle)
 {
-	//Attach particle
+	// Attach particle
 	this.particle = particle;
 	this.updateMetadata();
 	
-	//Group attributes
+	// Group attributes
 	this.name.setText(particle.name);
 	this.texture.setValue(particle.group.texture);
 	this.maxParticleCount.setValue(particle.group.maxParticleCount);
 	this.blending.setValue(particle.group.blending);
 	this.direction.setValue(particle.emitter.direction);
 
-	//Emitter attributes
+	// Emitter attributes
 	this.particleCount.setValue(particle.emitter.particleCount);
 	if(particle.emitter.duration !== null)
 	{
@@ -516,14 +516,14 @@ ParticleEditor.prototype.attach = function(particle)
 	}
 	this.colorSpread.setValue(colorSpread);
 
-	//Create runtime particle to preview particle
+	// Create runtime particle to preview particle
 	this.particle.reload();
 };
 
-//Update camera position and rotation from variables
+// Update camera position and rotation from variables
 ParticleEditor.prototype.updateCamera = function()
 {
-	//Calculate direction vector
+	// Calculate direction vector
 	var cosAngleY = Math.cos(this.cameraRotation.y);
 	var position = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x) * cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
 	this.camera.position.copy(position);
@@ -557,20 +557,20 @@ ParticleEditor.prototype.destroy = function()
 	this.canvas.destroy();
 };
 
-//Update material editor
+// Update material editor
 ParticleEditor.prototype.update = function()
 {
 	this.mouse.update();
 
 	if(this.mouse.insideCanvas())
 	{
-		//Move camera
+		// Move camera
 		if(this.mouse.buttonPressed(Mouse.LEFT))
 		{
 			this.cameraRotation.x -= 0.003 * this.mouse.delta.x;
 			this.cameraRotation.y -= 0.003 * this.mouse.delta.y;
 
-			//Limit Vertical Rotation to 90 degrees
+			// Limit Vertical Rotation to 90 degrees
 			if(this.cameraRotation.y < -1.57)
 			{
 				this.cameraRotation.y = -1.57;
@@ -581,7 +581,7 @@ ParticleEditor.prototype.update = function()
 			}
 		}
 
-		//Camera zoom
+		// Camera zoom
 		this.cameraDistance += this.mouse.wheel * 0.005;
 		if(this.cameraDistance < 0.1)
 		{
@@ -593,7 +593,7 @@ ParticleEditor.prototype.update = function()
 	
 	this.particle.matrixWorld.getInverse(this.scene.matrixWorld);
 
-	//Render grid and axis
+	// Render grid and axis
 	this.canvas.renderer.clear(true, true, true);
 	this.canvas.renderer.render(this.scene, this.camera);
 	this.canvas.renderer.render(this.particle, this.camera);

@@ -18,14 +18,14 @@ function ButtonImageToggle(parent)
 
 	this.selected = false;
 
-	//Click event
+	// Click event
 	var self = this;
 	this.element.onclick = function()
 	{
 		self.selected = !self.selected;
 	};
 
-	//Mouse over and mouse out events
+	// Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
 		self.element.style.backgroundColor = Editor.theme.buttonOverColor;

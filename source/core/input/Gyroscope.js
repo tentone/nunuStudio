@@ -40,13 +40,13 @@ function Gyroscope()
 
 	var self = this;
 
-	//Orientation
+	// Orientation
 	this.events.add(window, "orientationchange", function(event)
 	{
 		self.orientation = THREE.Math.degToRad(window.orientation);
 	});
 
-	//Device orientation
+	// Device orientation
 	this.events.add(window, "deviceorientation", function(event)
 	{
 		self.alpha = THREE.Math.degToRad(event.alpha);
@@ -54,7 +54,7 @@ function Gyroscope()
 		self.gamma = THREE.Math.degToRad(event.gamma);
 	});
 
-	//Initialize events
+	// Initialize events
 	this.events.create();
 }
 
@@ -76,9 +76,9 @@ Gyroscope.prototype.setObjectQuaternion = function()
 	return function(object)
 	{
 		euler.set(this.beta, this.alpha, -this.gamma, "YXZ"); //"ZXY" for the device, but "YXZ" for us
-		object.quaternion.setFromEuler(euler); //Orient the device
-		object.quaternion.multiply(offset); //Camera looks out the back of the device, not the top
-		object.quaternion.multiply(quaternion.setFromAxisAngle(zee, -this.orientation)); //Adjust for screen orientation
+		object.quaternion.setFromEuler(euler); // Orient the device
+		object.quaternion.multiply(offset); // Camera looks out the back of the device, not the top
+		object.quaternion.multiply(quaternion.setFromAxisAngle(zee, -this.orientation)); // Adjust for screen orientation
 	};
 }();
 
