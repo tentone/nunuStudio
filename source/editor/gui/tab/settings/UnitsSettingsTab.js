@@ -2,7 +2,7 @@
 
 function UnitsSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.units, Global.FILE_PATH + "icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.units, Global.FILE_PATH + "icons/misc/ruler.png");
 
 	this.element.style.overflow = "auto";
 
