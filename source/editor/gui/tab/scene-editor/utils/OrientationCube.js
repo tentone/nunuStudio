@@ -139,7 +139,7 @@ OrientationCube.prototype.updateRotation = function(camera)
 {
 	this.scene.quaternion.copy(camera.quaternion);
 	this.scene.updateMatrix();
-	this.scene.matrix.getInverse(this.scene.matrix, false);
+	this.scene.matrix.getInverse(this.scene.matrix);
 };
 
 /**

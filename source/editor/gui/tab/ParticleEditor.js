@@ -591,7 +591,7 @@ ParticleEditor.prototype.update = function()
 		this.updateCamera();
 	}
 	
-	this.particle.matrixWorld.getInverse(this.scene.matrixWorld, false);
+	this.particle.matrixWorld.getInverse(this.scene.matrixWorld);
 
 	//Render grid and axis
 	this.canvas.renderer.clear(true, true, true);

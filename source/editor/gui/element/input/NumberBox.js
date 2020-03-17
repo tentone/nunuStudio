@@ -11,6 +11,8 @@ function NumberBox(parent)
 {
 	Element.call(this, parent, "input");
 
+	this.isAngle = false;
+
 	this.element.type = "number";
 	this.element.step = "0.1";
 	this.element.style.backgroundColor = Editor.theme.boxColor;
@@ -82,6 +84,14 @@ NumberBox.prototype.setOnChange = function(onChange)
  */
 NumberBox.prototype.setValue = function(value)
 {
+	if(this.isAngle)
+	{
+		if(Editor.settings.editor.angleFormat === Settings.DEGREES)
+		{
+			
+		}
+	}
+
 	this.element.value = value;
 };
 
