@@ -15,8 +15,11 @@ function Settings()
 Settings.CONFIG_FILE = "config.json";
 
 //Angles
-Settings.RADIANS = 0;
-Settings.DEGREES = 1;
+Settings.RADIAN = 0;
+Settings.DEGREE = 1;
+
+// Distance
+Settings.METER = 0;
 
 //Navigation
 Settings.FIRST_PERSON = 10;
@@ -48,10 +51,16 @@ Settings.prototype.loadDefault = function()
 		historySize: 20
 	};
 
+	//Units
+	this.units =
+	{
+		angle: Settings.RADIAN,
+		distance: Settings.METER
+	};
+
 	//Editor
 	this.editor =
 	{
-		angleFormat: Settings.RADIANS,
 		snap: false,
 		snapAngle: 0.1,
 		keepTransformMove: true,

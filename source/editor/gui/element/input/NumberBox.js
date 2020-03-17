@@ -11,6 +11,12 @@ function NumberBox(parent)
 {
 	Element.call(this, parent, "input");
 
+	/**
+	 * Indicates if the number box is storing a angle value.
+	 *
+	 * @attribute isAngle
+	 * @type {Boolean}
+	 */
 	this.isAngle = false;
 
 	this.element.type = "number";
@@ -84,12 +90,9 @@ NumberBox.prototype.setOnChange = function(onChange)
  */
 NumberBox.prototype.setValue = function(value)
 {
-	if(this.isAngle)
+	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
 	{
-		if(Editor.settings.editor.angleFormat === Settings.DEGREES)
-		{
-			
-		}
+		value *= (180 / Math.PI);
 	}
 
 	this.element.value = value;
@@ -102,8 +105,14 @@ NumberBox.prototype.setValue = function(value)
  * @return {Object} Value stored in the input element.
  */
 NumberBox.prototype.getValue = function()
-{
-	return Number.parseFloat(this.element.value);
+{	
+	var value = Number.parseFloat(this.element.value);
+	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+	{
+		value *= (Math.PI / 180);
+	}
+
+	return value;
 };
 
 NumberBox.prototype.updateVisibility = function()

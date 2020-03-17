@@ -2,7 +2,7 @@
 
 function EditorSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Editor", Global.FILE_PATH + "icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.editor, Global.FILE_PATH + "icons/misc/scene.png");
 
 	this.element.style.overflow = "auto";
 
@@ -13,7 +13,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.setAutoSize(false);
 
 	//Scene editor
-	this.form.addText("Editor");
+	this.form.addText(Locale.editor);
 	this.form.nextRow();
 
 	//Show stats

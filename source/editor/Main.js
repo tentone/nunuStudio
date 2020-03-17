@@ -464,6 +464,7 @@ include("source/editor/gui/tab/camera/postprocessing/AfterimagePassNode.js");
 
 include("source/editor/gui/tab/settings/SettingsTab.js");
 include("source/editor/gui/tab/settings/EditorSettingsTab.js");
+include("source/editor/gui/tab/settings/UnitsSettingsTab.js");
 include("source/editor/gui/tab/settings/CodeSettingsTab.js");
 include("source/editor/gui/tab/settings/GeneralSettingsTab.js");
 include("source/editor/gui/tab/settings/RenderSettingsTab.js");

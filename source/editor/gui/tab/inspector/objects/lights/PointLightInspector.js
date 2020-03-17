@@ -18,7 +18,7 @@ function PointLightInspector(parent, object)
 	this.form.nextRow();
 
 	//Distance
-	this.form.addText("Distance");
+	this.form.addText(Locale.distance);
 	this.distance = new NumberBox(this.form);
 	this.distance.size.set(60, 18);
 	this.distance.setStep(0.1);

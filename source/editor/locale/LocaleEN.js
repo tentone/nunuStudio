@@ -102,6 +102,7 @@ LocaleManager.register(
 	cone: "Cone",
 
 	//Properties
+	units: "Units",
 	libraryMode: "Library Mode",
 	min: "Min",
 	max: "Max",
@@ -114,6 +115,7 @@ LocaleManager.register(
 	velocity: "Velocity",
 	penumbra: "Penumbra",
 	angle: "Angle",
+	distance: "Distance",
 	emitterType: "Emitter Type",
 	dynamicEmitter: "Dynamic Emitter",
 	linearDamping: "Linear Damping",
@@ -285,6 +287,11 @@ LocaleManager.register(
 	axisWinds: "Axis Winds",
 	circleWinds: "Circle Winds",
 
+	//Units
+	degrees: "Degrees",
+	radians: "Radians",
+	meters: "Meters",
+
 	//Values
 	evaluate: "Evaluate",
 	append: "Append",
@@ -345,6 +352,7 @@ LocaleManager.register(
 	simplify: "Simplify",
 
 	//Editor
+	editor: "Editor",
 	information: "Information",
 	rendering: "Rendering",
 	project: "Project",

@@ -10,6 +10,7 @@ function SettingsTab(parent, closeable, container, index)
 
 	this.tab.addTab(GeneralSettingsTab, false).activate();
 	this.tab.addTab(EditorSettingsTab, false);
+	this.tab.addTab(UnitsSettingsTab, false);
 	this.tab.addTab(RenderSettingsTab, false);
 	this.tab.addTab(CodeSettingsTab, false);
 	this.tab.addTab(JSHintSettingsTab, false);
