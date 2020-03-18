@@ -10,6 +10,14 @@ function VectorBox(parent)
 {
 	Element.call(this, parent, "div");
 
+	/**
+	 * Indicates if the number box is storing a angle value.
+	 *
+	 * @attribute isAngle
+	 * @type {Boolean}
+	 */
+	this.isAngle = false;
+
 	// X Text
 	this.xText = document.createElement("div");
 	this.xText.style.position = "absolute";
@@ -154,7 +162,17 @@ VectorBox.prototype.setRange = function(min, max)
  */
 VectorBox.prototype.getValue = function()
 {
-	return {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
+	var value = {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
+
+	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+	{
+		value.x = UnitConverter.convert(value.x, "r", "d");
+		value.y = UnitConverter.convert(value.y, "r", "d");
+		value.z = UnitConverter.convert(value.z, "r", "d");
+		value.w = UnitConverter.convert(value.w, "r", "d");
+	}
+
+	return value;
 };
 
 /**
@@ -171,12 +189,25 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 {
 	if(x.isVector2)
 	{
+		if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+		{
+			x.x = UnitConverter.convert(x.x, "d", "r");
+			x.y = UnitConverter.convert(x.y, "d", "r");
+		}
+
 		this.x.value = x.x;
 		this.y.value = x.y;
 		this.setType(VectorBox.VECTOR2);
 	}
 	else if(x.isVector3)
 	{
+		if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+		{
+			x.x = UnitConverter.convert(x.x, "d", "r");
+			x.y = UnitConverter.convert(x.y, "d", "r");
+			x.z = UnitConverter.convert(x.z, "d", "r");
+		}
+
 		this.x.value = x.x;
 		this.y.value = x.y;
 		this.z.value = x.z;
@@ -184,6 +215,13 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 	}
 	else if(x.isEuler)
 	{
+		if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+		{
+			x.x = UnitConverter.convert(x.x, "d", "r");
+			x.y = UnitConverter.convert(x.y, "d", "r");
+			x.z = UnitConverter.convert(x.z, "d", "r");
+		}
+
 		this.x.value = x.x;
 		this.y.value = x.y;
 		this.z.value = x.z;
@@ -200,6 +238,14 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 	}
 	else
 	{
+		if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+		{
+			x = UnitConverter.convert(x, "d", "r");
+			y = UnitConverter.convert(y, "d", "r");
+			z = UnitConverter.convert(z, "d", "r");
+			z = UnitConverter.convert(w, "d", "r");
+		}
+
 		this.x.value = x;
 		this.y.value = y;
 		this.z.value = (z !== undefined) ? z : 0;

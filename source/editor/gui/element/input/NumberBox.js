@@ -92,7 +92,7 @@ NumberBox.prototype.setValue = function(value)
 {
 	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
 	{
-		value *= (180 / Math.PI);
+		value = UnitConverter.convert(value, "d", "r");
 	}
 
 	this.element.value = value;
@@ -109,7 +109,7 @@ NumberBox.prototype.getValue = function()
 	var value = Number.parseFloat(this.element.value);
 	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
 	{
-		value *= (Math.PI / 180);
+		value = UnitConverter.convert(value, "r", "d");
 	}
 
 	return value;
