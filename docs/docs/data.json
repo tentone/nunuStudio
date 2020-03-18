@@ -1108,6 +1108,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\utils\\UnitConverter.js": {
+            "name": "..\\source\\core\\utils\\UnitConverter.js",
+            "modules": {},
+            "classes": {
+                "UnitConverter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\FileSystem.js": {
             "name": "..\\source\\core\\FileSystem.js",
             "modules": {
@@ -1165,7 +1174,7 @@
             "tag": "module",
             "file": "..\\source\\core\\input\\TizenKeyboard.js",
             "line": 3,
-            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/."
+            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https:// www.w3.org/TR/gamepad/."
         },
         "Loaders": {
             "name": "Loaders",
@@ -1235,7 +1244,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\cameras\\Viewport.js",
             "line": 3,
-            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
+            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
         },
         "Controls": {
             "name": "Controls",
@@ -1326,7 +1335,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 69,
-            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
+            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https:// squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
         },
         "Physics": {
             "name": "Physics",
@@ -1336,12 +1345,13 @@
             "elements": {},
             "classes": {
                 "PhysicsGenerator": 1,
-                "PhysicsObject": 1
+                "PhysicsObject": 1,
+                "UnitConverter": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\utils\\PhysicsGenerator.js",
+            "file": "..\\source\\core\\utils\\UnitConverter.js",
             "line": 3,
             "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
@@ -1371,7 +1381,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com."
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https:// github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com."
         },
         "Textures": {
             "name": "Textures",
@@ -1409,7 +1419,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
             "line": 3,
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite."
+            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite."
         },
         "Core": {
             "name": "Core",
@@ -1462,7 +1472,7 @@
             "tag": "module",
             "file": "..\\source\\core\\renderer\\RendererState.js",
             "line": 3,
-            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
+            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https:// developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
             "author": "miibond"
         },
         "Resources": {
@@ -1501,7 +1511,7 @@
             "tag": "module",
             "file": "..\\source\\core\\three\\scenes\\Fog.js",
             "line": 3,
-            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
+            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
         },
         "BinaryUtils": {
             "name": "BinaryUtils",
@@ -1621,7 +1631,7 @@
             "namespace": "",
             "file": "..\\source\\core\\input\\Gamepad.js",
             "line": 3,
-            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/."
+            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https:// www.w3.org/TR/gamepad/."
         },
         "Gyroscope": {
             "name": "Gyroscope",
@@ -1710,7 +1720,7 @@
             "namespace": "",
             "file": "..\\source\\core\\input\\TizenKeyboard.js",
             "line": 3,
-            "description": "Tizen keyboard contains codes of multiple tizen specific key codes.\n\nThese key codes are used in Samsung Tizen TV, more infomration available\n - https://developer.samsung.com/stream-code101/tv/using-the-remote-control",
+            "description": "Tizen keyboard contains codes of multiple tizen specific key codes.\n\nThese key codes are used in Samsung Tizen TV, more infomration available\n - https:// developer.samsung.com/stream-code101/tv/using-the-remote-control",
             "static": 1
         },
         "AudioLoader": {
@@ -1810,7 +1820,7 @@
             "file": "..\\source\\core\\loaders\\LegacyGeometryLoader.js",
             "line": 3,
             "description": "Legacy geometry loader is used to load the old threejs JSON file format.",
-            "author": "alteredq / http://alteredqualia.com/"
+            "author": "alteredq / http:// alteredqualia.com/"
         },
         "MaterialLoader": {
             "name": "MaterialLoader",
@@ -1996,7 +2006,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
             "line": 3,
-            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera.",
+            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera.",
             "extends": "{OrthographicCamera}",
             "params": [
                 {
@@ -2038,7 +2048,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
             "line": 3,
-            "description": "Perspective camera, used for 3D scenes with objects getting smaller as they get away from the camera.\n\nBased on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.",
+            "description": "Perspective camera, used for 3D scenes with objects getting smaller as they get away from the camera.\n\nBased on THREE.PerspectiveCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.",
             "extends": "{PerspectiveCamera}",
             "params": [
                 {
@@ -2156,7 +2166,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\AmbientLight.js",
             "line": 3,
-            "description": "Ambient lights are used to create base ilumanition for the scene.\n\nThey are not influenced by position, scale or rotation.\n\nBased on THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight",
+            "description": "Ambient lights are used to create base ilumanition for the scene.\n\nThey are not influenced by position, scale or rotation.\n\nBased on THREE.AmbientLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/AmbientLight",
             "params": [
                 {
                     "name": "hex",
@@ -2178,7 +2188,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\DirectionalLight.js",
             "line": 3,
-            "description": "A light that gets emitted in a specific direction.\n\nThis light will behave as though it is infinitely far away and the rays produced from it are all parallel.\n\nBased on THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight",
+            "description": "A light that gets emitted in a specific direction.\n\nThis light will behave as though it is infinitely far away and the rays produced from it are all parallel.\n\nBased on THREE.DirectionalLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/DirectionalLight",
             "params": [
                 {
                     "name": "hex",
@@ -2205,7 +2215,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\HemisphereLight.js",
             "line": 3,
-            "description": "A light source positioned directly above the scene, with color fading from the sky color to the ground color.\n\nBased on THREE.HemisphereLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/HemisphereLight",
+            "description": "A light source positioned directly above the scene, with color fading from the sky color to the ground color.\n\nBased on THREE.HemisphereLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/HemisphereLight",
             "params": [
                 {
                     "name": "skyColor",
@@ -2264,7 +2274,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\PointLight.js",
             "line": 3,
-            "description": "PointLights emit light from a single point in all directions.\n\nBased on THREE.PointLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/PointLight",
+            "description": "PointLights emit light from a single point in all directions.\n\nBased on THREE.PointLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/PointLight",
             "params": [
                 {
                     "name": "hex",
@@ -2301,7 +2311,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\RectAreaLight.js",
             "line": 3,
-            "description": "A RectAreLight emit light from a rectagular surface.\n\nBased on THREE.RectAreaLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/RectAreaLight",
+            "description": "A RectAreLight emit light from a rectagular surface.\n\nBased on THREE.RectAreaLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/RectAreaLight",
             "params": [
                 {
                     "name": "color",
@@ -2338,7 +2348,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
             "line": 3,
-            "description": "A SpotLight emit light from a point in a specific direction in a cone volume.\n\nSpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.\n\nBased on THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight",
+            "description": "A SpotLight emit light from a point in a specific direction in a cone volume.\n\nSpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.\n\nBased on THREE.SpotLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/SpotLight",
             "params": [
                 {
                     "name": "color",
@@ -2412,7 +2422,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
             "line": 3,
-            "description": "A Mesh combines a geometry and a material forming a complete rederizable object.\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh.",
+            "description": "A Mesh combines a geometry and a material forming a complete rederizable object.\n\nBased on THREE.Mesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Mesh.",
             "params": [
                 {
                     "name": "geometry",
@@ -2439,7 +2449,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
             "line": 3,
-            "description": "SkinnedMesh is a Mesh that has a Skeleton attached.\n\nA skeleton contains bones that are used to animate the vertices of the geometry.\n\nBased on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh",
+            "description": "SkinnedMesh is a Mesh that has a Skeleton attached.\n\nA skeleton contains bones that are used to animate the vertices of the geometry.\n\nBased on THREE.SkinnedMesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/SkinnedMesh",
             "params": [
                 {
                     "name": "geometry",
@@ -2795,7 +2805,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 3,
-            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html",
+            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https:// squarefeet.github.io/ShaderParticleEngine/docs/api/index.html",
             "extends": "{Points}"
         },
         "ParticleDistributions": {
@@ -2824,7 +2834,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
             "line": 3,
-            "description": "Wrapper for cannon.js physics objects.\n\nPhysics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset.\n\nnunuStudio includes tools to create cannon shapes from three geometry objects.\n\nDocumentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/",
+            "description": "Wrapper for cannon.js physics objects.\n\nPhysics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset.\n\nnunuStudio includes tools to create cannon shapes from three geometry objects.\n\nDocumentation for cannon.js physics available here http:// schteppe.github.io/cannon.js/docs/",
             "extends": "{Group}"
         },
         "Script": {
@@ -2861,7 +2871,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com.",
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https:// github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com.",
             "extends": "{spine.threejs.SkeletonMesh}",
             "params": [
                 {
@@ -2934,7 +2944,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
             "line": 3,
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite.",
+            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite.",
             "params": [
                 {
                     "name": "material",
@@ -2956,7 +2966,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
             "line": 3,
-            "description": "Text bitmap atlas with support for signed distance field data.\n\nInput data should be composed of a BMFont file (can be a .fnt, .json. etc) file and a character atlas texture from an image.\n\nFont atlas can be generate using the tool http://www.angelcode.com/products/bmfont/\n\nBased on the three-bmfont-text library.\n - https://github.com/Jam3/three-bmfont-text\n - https://github.com/Jam3/load-bmfont",
+            "description": "Text bitmap atlas with support for signed distance field data.\n\nInput data should be composed of a BMFont file (can be a .fnt, .json. etc) file and a character atlas texture from an image.\n\nFont atlas can be generate using the tool http:// www.angelcode.com/products/bmfont/\n\nBased on the three-bmfont-text library.\n - https:// github.com/Jam3/three-bmfont-text\n - https:// github.com/Jam3/load-bmfont",
             "extends": "{THREE.Mesh}",
             "params": [
                 {
@@ -3087,7 +3097,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\Scene.js",
             "line": 3,
-            "description": "Scenes allow you to set up what and where is to be rendered by the engine.\n\nThis is where you place objects, lights and cameras.\n\nA program may contain multiple scenes, its possible to change between scene using scripts.\n \nScene three.js documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.",
+            "description": "Scenes allow you to set up what and where is to be rendered by the engine.\n\nThis is where you place objects, lights and cameras.\n\nA program may contain multiple scenes, its possible to change between scene using scripts.\n \nScene three.js documentation available here https:// threejs.org/docs/index.html#Reference/Scenes/Scene.",
             "extends": "{Scene}"
         },
         "TargetConfig": {
@@ -3116,7 +3126,7 @@
             "namespace": "",
             "file": "..\\source\\core\\postprocessing\\pass\\antialiasing\\FXAAPass.js",
             "line": 3,
-            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf"
+            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https:// developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf"
         },
         "AfterimagePass": {
             "name": "AfterimagePass",
@@ -3145,7 +3155,7 @@
             "file": "..\\source\\core\\postprocessing\\pass\\BloomPass.js",
             "line": 3,
             "description": "Simple bloom effect pass.",
-            "author": "alteredq / http://alteredqualia.com/",
+            "author": "alteredq / http:// alteredqualia.com/",
             "params": [
                 {
                     "name": "strength",
@@ -3241,7 +3251,7 @@
             "file": "..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
             "line": 3,
             "description": "DotScreen pass generates a poster like effect on top of the scene.",
-            "author": "alteredq / http://alteredqualia.com/",
+            "author": "alteredq / http:// alteredqualia.com/",
             "params": [
                 {
                     "name": "center",
@@ -3273,7 +3283,7 @@
             "file": "..\\source\\core\\postprocessing\\pass\\FilmPass.js",
             "line": 3,
             "description": "Film pass is used to simulate a film/TV like effect.",
-            "author": "alteredq / http://alteredqualia.com/"
+            "author": "alteredq / http:// alteredqualia.com/"
         },
         "HueSaturationPass": {
             "name": "HueSaturationPass",
@@ -3313,7 +3323,7 @@
             "namespace": "",
             "file": "..\\source\\core\\postprocessing\\pass\\SSAONOHPass.js",
             "line": 3,
-            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nUses the normal-oriented hemisphere method produces a more realistic-looking than the basic Crysis method.\n\nBased on the article from http://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html\n\nMore information about SSAO here\n - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf"
+            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nUses the normal-oriented hemisphere method produces a more realistic-looking than the basic Crysis method.\n\nBased on the article from http:// john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html\n\nMore information about SSAO here\n - http:// developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf"
         },
         "SSAOPass": {
             "name": "SSAOPass",
@@ -3327,8 +3337,8 @@
             "namespace": "",
             "file": "..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
             "line": 3,
-            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nThis variant of SSAO produces a halo like effect to simulate the effect.\n\nMore information about SSAO here\n - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf",
-            "author": "alteredq / http://alteredqualia.com/"
+            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nThis variant of SSAO produces a halo like effect to simulate the effect.\n\nMore information about SSAO here\n - http:// developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf",
+            "author": "alteredq / http:// alteredqualia.com/"
         },
         "SobelPass": {
             "name": "SobelPass",
@@ -3370,8 +3380,8 @@
             "namespace": "",
             "file": "..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
             "line": 3,
-            "description": "Unreal engine like bloom effect pass.\n\nMore information available here\n - https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/",
-            "author": "spidersharma / http://eduperiment.com/",
+            "description": "Unreal engine like bloom effect pass.\n\nMore information available here\n - https:// docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/",
+            "author": "spidersharma / http:// eduperiment.com/",
             "params": [
                 {
                     "name": "strength",
@@ -3402,9 +3412,9 @@
             "namespace": "",
             "file": "..\\source\\core\\postprocessing\\shaders\\SSAOShader.js",
             "line": 3,
-            "description": "Screen-space ambient occlusion shader\n   - http://devlog-martinsh.blogspot.com (assembled by Martins Upitis)\n   - http://www.gamedev.net/topic/550699-ssao-no-halo-artifacts/ (original technique is made by ArKano22)\n\nModified to use RGBA packed depth texture (use clear color 1,1,1,1 for depth pass)",
+            "description": "Screen-space ambient occlusion shader\n   - http:// devlog-martinsh.blogspot.com (assembled by Martins Upitis)\n   - http:// www.gamedev.net/topic/550699-ssao-no-halo-artifacts/ (original technique is made by ArKano22)\n\nModified to use RGBA packed depth texture (use clear color 1,1,1,1 for depth pass)",
             "static": 1,
-            "author": "alteredq / http://alteredqualia.com/"
+            "author": "alteredq / http:// alteredqualia.com/"
         },
         "EffectComposer": {
             "name": "EffectComposer",
@@ -3462,7 +3472,7 @@
             "file": "..\\source\\core\\postprocessing\\ShaderPass.js",
             "line": 3,
             "description": "Shader pass is used to apply a post processing effect over an already rendered scene.",
-            "author": "alteredq / http://alteredqualia.com/"
+            "author": "alteredq / http:// alteredqualia.com/"
         },
         "CSS3DObject": {
             "name": "CSS3DObject",
@@ -3498,7 +3508,7 @@
             "namespace": "",
             "file": "..\\source\\core\\renderer\\css\\CSS3DRenderer.js",
             "line": 3,
-            "description": "3D renderer using DOM elements.\n\nApplies the threejs transformation hierarchy to the DOM element using CSS3D.\n\nOnly renders CSS specific objects, the output of the renderer is not combined with the WebGL output. Everything is renderer of top.\n\nBased on the three.js adaptation (mrdoob, yomotsu) of http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs",
+            "description": "3D renderer using DOM elements.\n\nApplies the threejs transformation hierarchy to the DOM element using CSS3D.\n\nOnly renders CSS specific objects, the output of the renderer is not combined with the WebGL output. Everything is renderer of top.\n\nBased on the three.js adaptation (mrdoob, yomotsu) of http:// www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs",
             "params": [
                 {
                     "name": "domElement",
@@ -4049,7 +4059,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\Texture.js",
             "line": 3,
-            "description": "Image texture constructor, with support for GIF animations.\n\nIt is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture",
+            "description": "Image texture constructor, with support for GIF animations.\n\nIt is based on THREE.Texture, original documentation can be found here https:// threejs.org/docs/index.html#Reference/Textures/Texture",
             "extends": "{Texture}",
             "params": [
                 {
@@ -4205,7 +4215,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\core\\Object3D.js",
             "line": 439,
-            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
+            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
         },
         "Material": {
             "name": "Material",
@@ -4219,7 +4229,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\materials\\Material.js",
             "line": 3,
-            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
+            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https:// threejs.org/docs/index.html#Reference/Materials/Material"
         },
         "Fog": {
             "name": "Fog",
@@ -4233,7 +4243,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\scenes\\Fog.js",
             "line": 3,
-            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https:// threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https:// threejs.org/docs/index.html#Reference/Scenes/FogExp2"
         },
         "ArraybufferUtils": {
             "name": "ArraybufferUtils",
@@ -4444,6 +4454,21 @@
             "line": 3,
             "description": "Physics generator is used to create Cannon.js shapes from three.js geometries.\n\nCan be used with any object that contains a geometry.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
             "author": "tentone",
+            "static": 1
+        },
+        "UnitConverter": {
+            "name": "UnitConverter",
+            "shortname": "UnitConverter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Physics",
+            "namespace": "",
+            "file": "..\\source\\core\\utils\\UnitConverter.js",
+            "line": 3,
+            "description": "The unit convertor is responsible for performing unit conversion between values.\n\nUnits are represented by their natural texture unit representation (m/s, km/s, n/m, etc).",
             "static": 1
         },
         "FileSystem": {
@@ -7793,7 +7818,7 @@
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "line": 32,
-            "description": "WebAudio gain node, used to control the volume.\n\nhttps://developer.mozilla.org/en-US/docs/Web/API/GainNode",
+            "description": "WebAudio gain node, used to control the volume.\n\nhttps:// developer.mozilla.org/en-US/docs/Web/API/GainNode",
             "itemtype": "property",
             "name": "gain",
             "type": "{GainNode}",
@@ -8263,7 +8288,7 @@
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
             "line": 36,
-            "description": "WebAudio panner effect.\n\nhttps://developer.mozilla.org/en-US/docs/Web/API/PannerNode",
+            "description": "WebAudio panner effect.\n\nhttps:// developer.mozilla.org/en-US/docs/Web/API/PannerNode",
             "itemtype": "property",
             "name": "panner",
             "type": "{PannerNode}",
@@ -12694,7 +12719,7 @@
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
             "line": 362,
-            "description": "Shader object used to render single channel SDF data.\n\nContains only the fragment shader code, the vertex is the same for every render mode.\n\nDetails about signed distance fields for vetorial shapes rendering.\n   - https://steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf",
+            "description": "Shader object used to render single channel SDF data.\n\nContains only the fragment shader code, the vertex is the same for every render mode.\n\nDetails about signed distance fields for vetorial shapes rendering.\n   - https:// steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf",
             "static": 1,
             "itemtype": "attribute",
             "name": "SDF_SHADER",
@@ -12705,7 +12730,7 @@
         {
             "file": "..\\source\\core\\objects\\text\\TextBitmap.js",
             "line": 388,
-            "description": "Shader object used to render single channel MSDF data.\n\nContains only the fragment shader code, the vertex is the same for every render mode.\n\nDetails about Multi‐Channel Signed Distance Fields for vetorial shapes rendering.\n   - https://onlinelibrary.wiley.com/doi/full/10.1111/cgf.13265",
+            "description": "Shader object used to render single channel MSDF data.\n\nContains only the fragment shader code, the vertex is the same for every render mode.\n\nDetails about Multi‐Channel Signed Distance Fields for vetorial shapes rendering.\n   - https:// onlinelibrary.wiley.com/doi/full/10.1111/cgf.13265",
             "static": 1,
             "itemtype": "attribute",
             "name": "SDF_SHADER",
@@ -13537,7 +13562,7 @@
         {
             "file": "..\\source\\core\\objects\\Scene.js",
             "line": 25,
-            "description": "Cannon.js world used for physics simulation.\n\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\n\nDocumentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.",
+            "description": "Cannon.js world used for physics simulation.\n\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\n\nDocumentation for cannon.js physics World object can be found here http:// schteppe.github.io/cannon.js/docs/classes/World.html.",
             "itemtype": "property",
             "name": "world",
             "type": "{CANNON.World}",
@@ -18990,6 +19015,59 @@
                 "type": "Array"
             },
             "class": "PhysicsGenerator",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\utils\\UnitConverter.js",
+            "line": 13,
+            "description": "Scale levels.\n\nIs a map containing the scale symbol and its value.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "scales",
+            "type": "{Map}",
+            "class": "UnitConverter",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\utils\\UnitConverter.js",
+            "line": 42,
+            "description": "List of known units.\n\nIt a map containing sub maps that contains methods that allow getting to the unit refered.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "units",
+            "type": "{Map}",
+            "class": "UnitConverter",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\utils\\UnitConverter.js",
+            "line": 73,
+            "description": "Convert a unit form one input unit to another unit.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "convert",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Input value to be converted.",
+                    "type": "Number"
+                },
+                {
+                    "name": "inUnit",
+                    "description": "Input original unit.",
+                    "type": "Number"
+                },
+                {
+                    "name": "outUnit",
+                    "description": "Input output unit.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Retuns the value converted based on input and output units, if the value cannot be converted returns null.",
+                "type": "Number"
+            },
+            "class": "UnitConverter",
             "module": "Physics"
         },
         {

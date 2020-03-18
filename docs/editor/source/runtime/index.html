@@ -15,31 +15,31 @@
 		<script type="text/javascript">
 			var app;
 
-			//Initialize app
+			// Initialize app
 			function run()
 			{	
-				//Create app object
+				// Create app object
 				app = new NunuApp();
 
-				//Onload enable the vr and fullscreen buttons
+				// Onload enable the vr and fullscreen buttons
 				var logo = document.getElementById("logo");
 				var onLoad = function()
 				{
 					var button = document.getElementById("fullscreen");
 					button.style.visibility = "visible";
 
-					//Check if VR is available
+					// Check if VR is available
 					if(app.vrAvailable())
 					{
 						button = document.getElementById("vr");
 						button.style.visibility = "visible";
 					}
 
-					//Remove logo and loading bar
+					// Remove logo and loading bar
 					document.body.removeChild(logo);
 				};
 
-				//On progress callback
+				// On progress callback
 				var bar = document.getElementById("bar");
 				var onProgress = function(event)
 				{
@@ -50,23 +50,23 @@
 					}
 				};
 
-				//Load and run nunu app
+				// Load and run nunu app
 				app.loadRunProgram("app.nsp", onLoad, onProgress);
 			}
 
-			//Resize nunu app (must be called every time the window is resized)
+			// Resize nunu app (must be called every time the window is resized)
 			function resize()
 			{
 				app.resize();
 			}
 
-			//Toggle fullscreen mode
+			// Toggle fullscreen mode
 			function toggleFullscreen()
 			{
 				app.toggleFullscreen(document.body);
 			}
 
-			//Toggle VR mode
+			// Toggle VR mode
 			function toggleVR()
 			{
 				app.toggleVR();

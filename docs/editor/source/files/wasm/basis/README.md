@@ -1,11 +1,11 @@
 # Basis Universal GPU Texture Compression
 
-Basis Universal is a "[supercompressed](http://gamma.cs.unc.edu/GST/gst.pdf)"
+Basis Universal is a "[supercompressed](http:// gamma.cs.unc.edu/GST/gst.pdf)"
 GPU texture and texture video compression system that outputs a highly
 compressed intermediate file format (.basis) that can be quickly transcoded to
 a wide variety of GPU texture compression formats.
 
-[GitHub](https://github.com/BinomialLLC/basis_universal)
+[GitHub](https:// github.com/BinomialLLC/basis_universal)
 
 ## Contents
 
@@ -36,8 +36,8 @@ basisLoader.load( 'diffuse.basis', function ( texture ) {
 ```
 
 For further documentation about the Basis compressor and transcoder, refer to
-the [Basis GitHub repository](https://github.com/BinomialLLC/basis_universal). The JavaScript wrapper requires one modification from the version provided in the Basis repository – the declaration on the first line is changed from `var Module` to `Module`, to accomodate lazy initialization in a Web Worker ([details](https://github.com/mrdoob/three.js/issues/16524)).
+the [Basis GitHub repository](https:// github.com/BinomialLLC/basis_universal). The JavaScript wrapper requires one modification from the version provided in the Basis repository – the declaration on the first line is changed from `var Module` to `Module`, to accomodate lazy initialization in a Web Worker ([details](https:// github.com/mrdoob/three.js/issues/16524)).
 
 ## License
 
-[Apache License 2.0](https://github.com/BinomialLLC/basis_universal/blob/master/LICENSE)
+[Apache License 2.0](https:// github.com/BinomialLLC/basis_universal/blob/master/LICENSE)

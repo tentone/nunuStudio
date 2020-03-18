@@ -15,13 +15,13 @@
 		<script type="text/javascript">
 			var app;
 
-			//Initialize app
+			// Initialize app
 			function run()
 			{	
-				//Create app object
+				// Create app object
 				app = new NunuApp();
 
-				//Onload enable the vr and fullscreen buttons
+				// Onload enable the vr and fullscreen buttons
 				var logo = document.getElementById("logo");
 				var onLoad = function()
 				{
@@ -30,7 +30,7 @@
 					document.body.removeChild(logo);
 				};
 
-				//On progress callback
+				// On progress callback
 				var bar = document.getElementById("bar");
 				var onProgress = function(event)
 				{
@@ -41,11 +41,11 @@
 					}
 				};
 
-				//Load and run nunu app
+				// Load and run nunu app
 				app.loadRunProgram("app.nsp", onLoad, onProgress);
 			}
 
-			//Resize nunu app (must be called every time the window is resized)
+			// Resize nunu app (must be called every time the window is resized)
 			function resize()
 			{
 				app.resize();

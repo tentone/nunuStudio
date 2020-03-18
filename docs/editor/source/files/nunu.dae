@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<COLLADA xmlns="http://www.collada.org/2008/03/COLLADASchema" version="1.5.0">
+<COLLADA xmlns="http:// www.collada.org/2008/03/COLLADASchema" version="1.5.0">
 	<asset>
 		<contributor>
 			<authoring_tool>CINEMA4D 16.011 COLLADA Exporter</authoring_tool>

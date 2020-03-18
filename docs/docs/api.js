@@ -115,6 +115,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Tree",
         "TreeUtils",
         "TypedArrayHelper",
+        "UnitConverter",
         "UnrealBloomPass",
         "Video",
         "VideoLoader",
@@ -159,7 +160,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Animations",
             "name": "Animations",
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com."
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.\n\nBased on the official three.js runtime code available at https:// github.com/EsotericSoftware/spine-runtimes.\n\nMore information about spine available at www.esotericsoftware.com."
         },
         {
             "displayName": "Audio",
@@ -174,7 +175,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Cameras",
             "name": "Cameras",
-            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
+            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
         },
         {
             "displayName": "Controls",
@@ -199,7 +200,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Input",
             "name": "Input",
-            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/."
+            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https:// www.w3.org/TR/gamepad/."
         },
         {
             "displayName": "Lights",
@@ -224,7 +225,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Particles",
             "name": "Particles",
-            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
+            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https:// squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
         },
         {
             "displayName": "Physics",
@@ -234,7 +235,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Postprocessing",
             "name": "Postprocessing",
-            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf"
+            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https:// developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf"
         },
         {
             "displayName": "Resources",
@@ -254,7 +255,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Sprite",
             "name": "Sprite",
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite."
+            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite."
         },
         {
             "displayName": "Textures",
@@ -264,7 +265,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "THREE",
             "name": "THREE",
-            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
+            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
         },
         {
             "displayName": "Utils",

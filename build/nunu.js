@@ -724,7 +724,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     0 < arguments.length && console.error("THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.");
   }
   function g(k, a, c, e, d, l, f, m, p, n) {
-    Object.defineProperty(this, "id", {value:pj++});
+    Object.defineProperty(this, "id", {value:rj++});
     this.uuid = ma.generateUUID();
     this.name = "";
     this.image = void 0 !== k ? k : g.DEFAULT_IMAGE;
@@ -804,7 +804,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.mask = 1;
   }
   function t() {
-    Object.defineProperty(this, "id", {value:qj++});
+    Object.defineProperty(this, "id", {value:sj++});
     this.uuid = ma.generateUUID();
     this.name = "";
     this.type = "Object3D";
@@ -842,12 +842,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.max = void 0 !== a ? a : new m(-Infinity, -Infinity, -Infinity);
   }
   function z(k, a, c, b, e) {
-    var v;
+    var u;
     var d = 0;
-    for (v = k.length - 3; d <= v; d += 3) {
+    for (u = k.length - 3; d <= u; d += 3) {
       wc.fromArray(k, d);
-      var l = e.x * Math.abs(wc.x) + e.y * Math.abs(wc.y) + e.z * Math.abs(wc.z), f = a.dot(wc), L = c.dot(wc), g = b.dot(wc);
-      if (Math.max(-Math.max(f, L, g), Math.min(f, L, g)) > l) {
+      var l = e.x * Math.abs(wc.x) + e.y * Math.abs(wc.y) + e.z * Math.abs(wc.z), f = a.dot(wc), K = c.dot(wc), g = b.dot(wc);
+      if (Math.max(-Math.max(f, K, g), Math.min(f, K, g)) > l) {
         return !1;
       }
     }
@@ -857,7 +857,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.center = void 0 !== k ? k : new m;
     this.radius = void 0 !== a ? a : 0;
   }
-  function u(k, a) {
+  function v(k, a) {
     this.origin = void 0 !== k ? k : new m;
     this.direction = void 0 !== a ? a : new m(0, 0, -1);
   }
@@ -895,7 +895,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.materialIndex = void 0 !== d ? d : 0;
   }
   function H() {
-    Object.defineProperty(this, "id", {value:rj++});
+    Object.defineProperty(this, "id", {value:tj++});
     this.uuid = ma.generateUUID();
     this.name = "";
     this.type = "Material";
@@ -965,7 +965,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   function R(k, a, c) {
     I.call(this, new Int8Array(k), a, c);
   }
-  function K(k, a, c) {
+  function L(k, a, c) {
     I.call(this, new Uint8Array(k), a, c);
   }
   function G(k, a, c) {
@@ -1012,7 +1012,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return a;
   }
   function N() {
-    Object.defineProperty(this, "id", {value:sj += 2});
+    Object.defineProperty(this, "id", {value:uj += 2});
     this.uuid = ma.generateUUID();
     this.name = "";
     this.type = "BufferGeometry";
@@ -1050,8 +1050,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       bf.set(0, 0, 0);
       cf.set(0, 0, 0);
       df.set(0, 0, 0);
-      for (var v = 0, L = d.length; v < L; v++) {
-        var q = e[v], r = d[v];
+      for (var u = 0, K = d.length; u < K; u++) {
+        var q = e[u], r = d[u];
         0 !== q && (pg.fromBufferAttribute(r, m), qg.fromBufferAttribute(r, p), rg.fromBufferAttribute(r, n), l ? (bf.addScaledVector(pg, q), cf.addScaledVector(qg, q), df.addScaledVector(rg, q)) : (bf.addScaledVector(pg.sub(xc), q), cf.addScaledVector(qg.sub(yc), q), df.addScaledVector(rg.sub(zc), q)));
       }
       xc.add(bf);
@@ -1064,7 +1064,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return k;
   }
   function X() {
-    Object.defineProperty(this, "id", {value:uj += 2});
+    Object.defineProperty(this, "id", {value:wj += 2});
     this.uuid = ma.generateUUID();
     this.name = "";
     this.type = "Geometry";
@@ -1141,10 +1141,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   function ra(k, a, c, b) {
     t.call(this);
     this.type = "CubeCamera";
-    var v = new ha(90, 1, k, a);
-    v.up.set(0, -1, 0);
-    v.lookAt(new m(1, 0, 0));
-    this.add(v);
+    var u = new ha(90, 1, k, a);
+    u.up.set(0, -1, 0);
+    u.lookAt(new m(1, 0, 0));
+    this.add(u);
     var e = new ha(90, 1, k, a);
     e.up.set(0, -1, 0);
     e.lookAt(new m(-1, 0, 0));
@@ -1161,10 +1161,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     f.up.set(0, -1, 0);
     f.lookAt(new m(0, 0, 1));
     this.add(f);
-    var L = new ha(90, 1, k, a);
-    L.up.set(0, -1, 0);
-    L.lookAt(new m(0, 0, -1));
-    this.add(L);
+    var K = new ha(90, 1, k, a);
+    K.up.set(0, -1, 0);
+    K.lookAt(new m(0, 0, -1));
+    this.add(K);
     b = b || {format:1022, magFilter:1006, minFilter:1006};
     this.renderTarget = new wa(c, b);
     this.renderTarget.texture.name = "CubeCamera";
@@ -1173,7 +1173,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       var c = k.getRenderTarget(), b = this.renderTarget, g = b.texture.generateMipmaps;
       b.texture.generateMipmaps = !1;
       k.setRenderTarget(b, 0);
-      k.render(a, v);
+      k.render(a, u);
       k.setRenderTarget(b, 1);
       k.render(a, e);
       k.setRenderTarget(b, 2);
@@ -1184,12 +1184,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       k.render(a, f);
       b.texture.generateMipmaps = g;
       k.setRenderTarget(b, 5);
-      k.render(a, L);
+      k.render(a, K);
       k.setRenderTarget(c);
     };
-    this.clear = function(k, a, v, c) {
+    this.clear = function(k, a, u, c) {
       for (var b = k.getRenderTarget(), e = this.renderTarget, d = 0; 6 > d; d++) {
-        k.setRenderTarget(e, d), k.clear(a, v, c);
+        k.setRenderTarget(e, d), k.clear(a, u, c);
       }
       k.setRenderTarget(b);
     };
@@ -1211,8 +1211,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.planes = [void 0 !== k ? k : new w, void 0 !== a ? a : new w, void 0 !== c ? c : new w, void 0 !== b ? b : new w, void 0 !== e ? e : new w, void 0 !== d ? d : new w];
   }
   function ta() {
-    function k(v, e) {
-      !1 !== c && (b(v, e), a.requestAnimationFrame(k));
+    function k(u, e) {
+      !1 !== c && (b(u, e), a.requestAnimationFrame(k));
     }
     var a = null, c = !1, b = null;
     return {start:function() {
@@ -1226,14 +1226,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }};
   }
   function Qb(k, a) {
-    function v(a, v) {
+    function u(a, u) {
       var c = a.array, b = a.usage, e = k.createBuffer();
-      k.bindBuffer(v, e);
-      k.bufferData(v, c, b);
+      k.bindBuffer(u, e);
+      k.bufferData(u, c, b);
       a.onUploadCallback();
-      v = 5126;
-      c instanceof Float32Array ? v = 5126 : c instanceof Float64Array ? console.warn("THREE.WebGLAttributes: Unsupported data buffer format: Float64Array.") : c instanceof Uint16Array ? v = 5123 : c instanceof Int16Array ? v = 5122 : c instanceof Uint32Array ? v = 5125 : c instanceof Int32Array ? v = 5124 : c instanceof Int8Array ? v = 5120 : c instanceof Uint8Array && (v = 5121);
-      return {buffer:e, type:v, bytesPerElement:c.BYTES_PER_ELEMENT, version:a.version};
+      u = 5126;
+      c instanceof Float32Array ? u = 5126 : c instanceof Float64Array ? console.warn("THREE.WebGLAttributes: Unsupported data buffer format: Float64Array.") : c instanceof Uint16Array ? u = 5123 : c instanceof Int16Array ? u = 5122 : c instanceof Uint32Array ? u = 5125 : c instanceof Int32Array ? u = 5124 : c instanceof Int8Array ? u = 5120 : c instanceof Uint8Array && (u = 5121);
+      return {buffer:e, type:u, bytesPerElement:c.BYTES_PER_ELEMENT, version:a.version};
     }
     var c = a.isWebGL2, b = new WeakMap;
     return {get:function(k) {
@@ -1241,13 +1241,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return b.get(k);
     }, remove:function(a) {
       a.isInterleavedBufferAttribute && (a = a.data);
-      var v = b.get(a);
-      v && (k.deleteBuffer(v.buffer), b.delete(a));
+      var u = b.get(a);
+      u && (k.deleteBuffer(u.buffer), b.delete(a));
     }, update:function(a, e) {
       a.isInterleavedBufferAttribute && (a = a.data);
       var d = b.get(a);
       if (void 0 === d) {
-        b.set(a, v(a, e));
+        b.set(a, u(a, e));
       } else {
         if (d.version < a.version) {
           var l = a.array, f = a.updateRange;
@@ -1271,19 +1271,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.parameters = {width:k, height:a, widthSegments:c, heightSegments:b};
     k = k || 1;
     a = a || 1;
-    var v = k / 2, e = a / 2;
+    var u = k / 2, e = a / 2;
     c = Math.floor(c) || 1;
     b = Math.floor(b) || 1;
-    var d = c + 1, l = b + 1, f = k / c, L = a / b, g = [], m = [], p = [], n = [];
+    var d = c + 1, l = b + 1, f = k / c, K = a / b, g = [], m = [], p = [], n = [];
     for (k = 0; k < l; k++) {
-      var h = k * L - e;
+      var h = k * K - e;
       for (a = 0; a < d; a++) {
-        m.push(a * f - v, -h, 0), p.push(0, 0, 1), n.push(a / c), n.push(1 - k / b);
+        m.push(a * f - u, -h, 0), p.push(0, 0, 1), n.push(a / c), n.push(1 - k / b);
       }
     }
     for (k = 0; k < b; k++) {
       for (a = 0; a < c; a++) {
-        v = a + d * (k + 1), e = a + 1 + d * (k + 1), l = a + 1 + d * k, g.push(a + d * k, v, l), g.push(v, e, l);
+        u = a + d * (k + 1), e = a + 1 + d * (k + 1), l = a + 1 + d * k, g.push(a + d * k, u, l), g.push(u, e, l);
       }
     }
     this.setIndex(g);
@@ -1292,38 +1292,38 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.setAttribute("uv", new Q(n, 2));
   }
   function ec(k, a, c, b) {
-    function v(k, v) {
-      a.buffers.color.setClear(k.r, k.g, k.b, v, b);
+    function u(k, u) {
+      a.buffers.color.setClear(k.r, k.g, k.b, u, b);
     }
-    var e = new A(0), d = 0, l, f, L = null, g = 0, m = null;
+    var e = new A(0), d = 0, l, f, K = null, g = 0, m = null;
     return {getClearColor:function() {
       return e;
     }, setClearColor:function(k, a) {
       e.set(k);
       d = void 0 !== a ? a : 1;
-      v(e, d);
+      u(e, d);
     }, getClearAlpha:function() {
       return d;
     }, setClearAlpha:function(k) {
       d = k;
-      v(e, d);
+      u(e, d);
     }, render:function(a, b, p, n) {
       b = b.background;
       p = k.xr;
       (p = p.getSession && p.getSession()) && "additive" === p.environmentBlendMode && (b = null);
-      null === b ? v(e, d) : b && b.isColor && (v(b, 1), n = !0);
+      null === b ? u(e, d) : b && b.isColor && (u(b, 1), n = !0);
       (k.autoClear || n) && k.clear(k.autoClearColor, k.autoClearDepth, k.autoClearStencil);
       if (b && (b.isCubeTexture || b.isWebGLCubeRenderTarget || 306 === b.mapping)) {
-        void 0 === f && (f = new W(new Zd(1, 1, 1), new ja({type:"BackgroundCubeMaterial", uniforms:ka(Cb.cube.uniforms), vertexShader:Cb.cube.vertexShader, fragmentShader:Cb.cube.fragmentShader, side:1, depthTest:!1, depthWrite:!1, fog:!1})), f.geometry.deleteAttribute("normal"), f.geometry.deleteAttribute("uv"), f.onBeforeRender = function(k, a, v) {
-          this.matrixWorld.copyPosition(v.matrixWorld);
+        void 0 === f && (f = new W(new Zd(1, 1, 1), new ja({type:"BackgroundCubeMaterial", uniforms:ka(Cb.cube.uniforms), vertexShader:Cb.cube.vertexShader, fragmentShader:Cb.cube.fragmentShader, side:1, depthTest:!1, depthWrite:!1, fog:!1})), f.geometry.deleteAttribute("normal"), f.geometry.deleteAttribute("uv"), f.onBeforeRender = function(k, a, u) {
+          this.matrixWorld.copyPosition(u.matrixWorld);
         }, Object.defineProperty(f.material, "envMap", {get:function() {
           return this.uniforms.envMap.value;
         }}), c.update(f));
         n = b.isWebGLCubeRenderTarget ? b.texture : b;
         f.material.uniforms.envMap.value = n;
         f.material.uniforms.flipEnvMap.value = n.isCubeTexture ? -1 : 1;
-        if (L !== b || g !== n.version || m !== k.toneMapping) {
-          f.material.needsUpdate = !0, L = b, g = n.version, m = k.toneMapping;
+        if (K !== b || g !== n.version || m !== k.toneMapping) {
+          f.material.needsUpdate = !0, K = b, g = n.version, m = k.toneMapping;
         }
         a.unshift(f, f.geometry, f.material, 0, 0, null);
       } else {
@@ -1334,8 +1334,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           l.material.uniforms.t2D.value = b;
           !0 === b.matrixAutoUpdate && b.updateMatrix();
           l.material.uniforms.uvTransform.value.copy(b.matrix);
-          if (L !== b || g !== b.version || m !== k.toneMapping) {
-            l.material.needsUpdate = !0, L = b, g = b.version, m = k.toneMapping;
+          if (K !== b || g !== b.version || m !== k.toneMapping) {
+            l.material.needsUpdate = !0, K = b, g = b.version, m = k.toneMapping;
           }
           a.unshift(l, l.geometry, l.material, 0, 0, null);
         }
@@ -1343,32 +1343,32 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }};
   }
   function $d(k, a, c, b) {
-    var v = b.isWebGL2, e;
+    var u = b.isWebGL2, e;
     this.setMode = function(k) {
       e = k;
     };
-    this.render = function(a, v) {
-      k.drawArrays(e, a, v);
-      c.update(v, e);
+    this.render = function(a, u) {
+      k.drawArrays(e, a, u);
+      c.update(u, e);
     };
     this.renderInstances = function(b, d, l, f) {
       if (0 !== f) {
-        if (v) {
+        if (u) {
           b = k;
-          var L = "drawArraysInstanced";
+          var K = "drawArraysInstanced";
         } else {
-          if (b = a.get("ANGLE_instanced_arrays"), L = "drawArraysInstancedANGLE", null === b) {
+          if (b = a.get("ANGLE_instanced_arrays"), K = "drawArraysInstancedANGLE", null === b) {
             console.error("THREE.WebGLBufferRenderer: using THREE.InstancedBufferGeometry but hardware does not support extension ANGLE_instanced_arrays.");
             return;
           }
         }
-        b[L](e, d, l, f);
+        b[K](e, d, l, f);
         c.update(l, e, f);
       }
     };
   }
   function Ac(k, a, c) {
-    function v(a) {
+    function u(a) {
       if ("highp" === a) {
         if (0 < k.getShaderPrecisionFormat(35633, 36338).precision && 0 < k.getShaderPrecisionFormat(35632, 36338).precision) {
           return "highp";
@@ -1377,18 +1377,18 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       return "mediump" === a && 0 < k.getShaderPrecisionFormat(35633, 36337).precision && 0 < k.getShaderPrecisionFormat(35632, 36337).precision ? "mediump" : "lowp";
     }
-    var b, e = "undefined" !== typeof WebGL2RenderingContext && k instanceof WebGL2RenderingContext || "undefined" !== typeof WebGL2ComputeRenderingContext && k instanceof WebGL2ComputeRenderingContext, d = void 0 !== c.precision ? c.precision : "highp", l = v(d);
+    var b, e = "undefined" !== typeof WebGL2RenderingContext && k instanceof WebGL2RenderingContext || "undefined" !== typeof WebGL2ComputeRenderingContext && k instanceof WebGL2ComputeRenderingContext, d = void 0 !== c.precision ? c.precision : "highp", l = u(d);
     l !== d && (console.warn("THREE.WebGLRenderer:", d, "not supported, using", l, "instead."), d = l);
     c = !0 === c.logarithmicDepthBuffer;
     l = k.getParameter(34930);
-    var f = k.getParameter(35660), L = k.getParameter(3379), g = k.getParameter(34076), m = k.getParameter(34921), p = k.getParameter(36347), n = k.getParameter(36348), h = k.getParameter(36349), q = 0 < f, r = e || !!a.get("OES_texture_float"), t = q && r, u = e ? k.getParameter(36183) : 0;
+    var f = k.getParameter(35660), K = k.getParameter(3379), g = k.getParameter(34076), m = k.getParameter(34921), p = k.getParameter(36347), n = k.getParameter(36348), h = k.getParameter(36349), q = 0 < f, r = e || !!a.get("OES_texture_float"), t = q && r, v = e ? k.getParameter(36183) : 0;
     return {isWebGL2:e, getMaxAnisotropy:function() {
       if (void 0 !== b) {
         return b;
       }
-      var v = a.get("EXT_texture_filter_anisotropic");
-      return b = null !== v ? k.getParameter(v.MAX_TEXTURE_MAX_ANISOTROPY_EXT) : 0;
-    }, getMaxPrecision:v, precision:d, logarithmicDepthBuffer:c, maxTextures:l, maxVertexTextures:f, maxTextureSize:L, maxCubemapSize:g, maxAttributes:m, maxVertexUniforms:p, maxVaryings:n, maxFragmentUniforms:h, vertexTextures:q, floatFragmentTextures:r, floatVertexTextures:t, maxSamples:u};
+      var u = a.get("EXT_texture_filter_anisotropic");
+      return b = null !== u ? k.getParameter(u.MAX_TEXTURE_MAX_ANISOTROPY_EXT) : 0;
+    }, getMaxPrecision:u, precision:d, logarithmicDepthBuffer:c, maxTextures:l, maxVertexTextures:f, maxTextureSize:K, maxCubemapSize:g, maxAttributes:m, maxVertexUniforms:p, maxVaryings:n, maxFragmentUniforms:h, vertexTextures:q, floatFragmentTextures:r, floatVertexTextures:t, maxSamples:v};
   }
   function Za() {
     function k() {
@@ -1396,19 +1396,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       c.numPlanes = d;
       c.numIntersection = 0;
     }
-    function a(k, a, v, b) {
+    function a(k, a, u, b) {
       var e = null !== k ? k.length : 0, d = null;
       if (0 !== e) {
         d = p.value;
         if (!0 !== b || null === d) {
-          b = v + 4 * e;
+          b = u + 4 * e;
           a = a.matrixWorldInverse;
           m.getNormalMatrix(a);
           if (null === d || d.length < b) {
             d = new Float32Array(b);
           }
-          for (b = 0; b !== e; ++b, v += 4) {
-            g.copy(k[b]).applyMatrix4(a, m), g.normal.toArray(d, v), d[v + 3] = g.constant;
+          for (b = 0; b !== e; ++b, u += 4) {
+            g.copy(k[b]).applyMatrix4(a, m), g.normal.toArray(d, u), d[u + 3] = g.constant;
           }
         }
         p.value = d;
@@ -1421,9 +1421,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var c = this, e = null, d = 0, l = !1, f = !1, g = new w, m = new b, p = {value:null, needsUpdate:!1};
     this.uniform = p;
     this.numIntersection = this.numPlanes = 0;
-    this.init = function(k, v, c) {
-      var b = 0 !== k.length || v || 0 !== d || l;
-      l = v;
+    this.init = function(k, u, c) {
+      var b = 0 !== k.length || u || 0 !== d || l;
+      l = u;
       e = a(k, c, 0);
       d = k.length;
       return b;
@@ -1436,18 +1436,18 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       f = !1;
       k();
     };
-    this.setState = function(v, c, b, g, L, m) {
-      if (!l || null === v || 0 === v.length || f && !b) {
+    this.setState = function(u, c, b, K, g, m) {
+      if (!l || null === u || 0 === u.length || f && !b) {
         f ? a(null) : k();
       } else {
         b = f ? 0 : d;
-        var n = 4 * b, h = L.clippingState || null;
+        var n = 4 * b, h = g.clippingState || null;
         p.value = h;
-        h = a(v, g, n, m);
-        for (v = 0; v !== n; ++v) {
-          h[v] = e[v];
+        h = a(u, K, n, m);
+        for (u = 0; u !== n; ++u) {
+          h[u] = e[u];
         }
-        L.clippingState = h;
+        g.clippingState = h;
         this.numIntersection = c ? this.numPlanes : 0;
         this.numPlanes += b;
       }
@@ -1455,11 +1455,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }
   function pb(k) {
     var a = {};
-    return {get:function(v) {
-      if (void 0 !== a[v]) {
-        return a[v];
+    return {get:function(u) {
+      if (void 0 !== a[u]) {
+        return a[u];
       }
-      switch(v) {
+      switch(u) {
         case "WEBGL_depth_texture":
           var c = k.getExtension("WEBGL_depth_texture") || k.getExtension("MOZ_WEBGL_depth_texture") || k.getExtension("WEBKIT_WEBGL_depth_texture");
           break;
@@ -1473,21 +1473,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           c = k.getExtension("WEBGL_compressed_texture_pvrtc") || k.getExtension("WEBKIT_WEBGL_compressed_texture_pvrtc");
           break;
         default:
-          c = k.getExtension(v);
+          c = k.getExtension(u);
       }
-      null === c && console.warn("THREE.WebGLRenderer: " + v + " extension not supported.");
-      return a[v] = c;
+      null === c && console.warn("THREE.WebGLRenderer: " + u + " extension not supported.");
+      return a[u] = c;
     }};
   }
   function Bc(k, a, c) {
-    function v(k) {
+    function u(k) {
       var b = k.target;
       k = e.get(b);
       null !== k.index && a.remove(k.index);
       for (var l in k.attributes) {
         a.remove(k.attributes[l]);
       }
-      b.removeEventListener("dispose", v);
+      b.removeEventListener("dispose", u);
       e.delete(b);
       if (l = d.get(k)) {
         a.remove(l), d.delete(k);
@@ -1495,25 +1495,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       c.memory.geometries--;
     }
     function b(k) {
-      var v = [], c = k.index, b = k.attributes.position;
+      var u = [], c = k.index, b = k.attributes.position;
       if (null !== c) {
         var e = c.array;
         c = c.version;
         b = 0;
         for (var l = e.length; b < l; b += 3) {
-          var f = e[b + 0], g = e[b + 1], L = e[b + 2];
-          v.push(f, g, g, L, L, f);
+          var f = e[b + 0], K = e[b + 1], g = e[b + 2];
+          u.push(f, K, K, g, g, f);
         }
       } else {
         for (e = b.array, c = b.version, b = 0, l = e.length / 3 - 1; b < l; b += 3) {
-          f = b + 0, g = b + 1, L = b + 2, v.push(f, g, g, L, L, f);
+          f = b + 0, K = b + 1, g = b + 2, u.push(f, K, K, g, g, f);
         }
       }
-      v = new (65535 < ba(v) ? Z : S)(v, 1);
-      v.version = c;
-      a.update(v, 34963);
+      u = new (65535 < ba(u) ? Z : S)(u, 1);
+      u.version = c;
+      a.update(u, 34963);
       (e = d.get(k)) && a.remove(e);
-      d.set(k, v);
+      d.set(k, u);
     }
     var e = new WeakMap, d = new WeakMap;
     return {get:function(k, a) {
@@ -1521,30 +1521,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       if (b) {
         return b;
       }
-      a.addEventListener("dispose", v);
+      a.addEventListener("dispose", u);
       a.isBufferGeometry ? b = a : a.isGeometry && (void 0 === a._bufferGeometry && (a._bufferGeometry = (new N).setFromObject(k)), b = a._bufferGeometry);
       e.set(a, b);
       c.memory.geometries++;
       return b;
     }, update:function(k) {
-      var v = k.index, c = k.attributes;
-      null !== v && a.update(v, 34963);
+      var u = k.index, c = k.attributes;
+      null !== u && a.update(u, 34963);
       for (var b in c) {
         a.update(c[b], 34962);
       }
       k = k.morphAttributes;
       for (b in k) {
-        v = k[b];
+        u = k[b];
         c = 0;
-        for (var e = v.length; c < e; c++) {
-          a.update(v[c], 34962);
+        for (var e = u.length; c < e; c++) {
+          a.update(u[c], 34962);
         }
       }
     }, getWireframeAttribute:function(k) {
       var a = d.get(k);
       if (a) {
-        var v = k.index;
-        null !== v && a.version < v.version && b(k);
+        var u = k.index;
+        null !== u && a.version < u.version && b(k);
       } else {
         b(k);
       }
@@ -1552,7 +1552,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }};
   }
   function Db(k, a, c, b) {
-    var v = b.isWebGL2, e, d, l;
+    var u = b.isWebGL2, e, d, l;
     this.setMode = function(k) {
       e = k;
     };
@@ -1560,13 +1560,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       d = k.type;
       l = k.bytesPerElement;
     };
-    this.render = function(a, v) {
-      k.drawElements(e, v, d, a * l);
-      c.update(v, e);
+    this.render = function(a, u) {
+      k.drawElements(e, u, d, a * l);
+      c.update(u, e);
     };
-    this.renderInstances = function(b, f, g, L) {
-      if (0 !== L) {
-        if (v) {
+    this.renderInstances = function(b, f, K, g) {
+      if (0 !== g) {
+        if (u) {
           b = k;
           var m = "drawElementsInstanced";
         } else {
@@ -1575,8 +1575,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             return;
           }
         }
-        b[m](e, g, d, f * l, L);
-        c.update(g, e, L);
+        b[m](e, K, d, f * l, g);
+        c.update(K, e, g);
       }
     };
   }
@@ -1588,10 +1588,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a.triangles = 0;
       a.points = 0;
       a.lines = 0;
-    }, update:function(k, v, c) {
+    }, update:function(k, u, c) {
       c = c || 1;
       a.calls++;
-      switch(v) {
+      switch(u) {
         case 4:
           a.triangles += k / 3 * c;
           break;
@@ -1608,7 +1608,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           a.points += c * k;
           break;
         default:
-          console.error("THREE.WebGLInfo: Unknown draw mode:", v);
+          console.error("THREE.WebGLInfo: Unknown draw mode:", u);
       }
     }};
   }
@@ -1617,30 +1617,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }
   function jb(k) {
     var a = {}, c = new Float32Array(8);
-    return {update:function(v, b, e, d) {
-      var l = v.morphTargetInfluences, f = void 0 === l ? 0 : l.length;
-      v = a[b.id];
-      if (void 0 === v) {
-        v = [];
+    return {update:function(u, b, e, d) {
+      var l = u.morphTargetInfluences, f = void 0 === l ? 0 : l.length;
+      u = a[b.id];
+      if (void 0 === u) {
+        u = [];
         for (var g = 0; g < f; g++) {
-          v[g] = [g, 0];
+          u[g] = [g, 0];
         }
-        a[b.id] = v;
+        a[b.id] = u;
       }
-      var L = e.morphTargets && b.morphAttributes.position;
+      var K = e.morphTargets && b.morphAttributes.position;
       e = e.morphNormals && b.morphAttributes.normal;
       for (g = 0; g < f; g++) {
-        var m = v[g];
-        0 !== m[1] && (L && b.deleteAttribute("morphTarget" + g), e && b.deleteAttribute("morphNormal" + g));
+        var m = u[g];
+        0 !== m[1] && (K && b.deleteAttribute("morphTarget" + g), e && b.deleteAttribute("morphNormal" + g));
       }
       for (g = 0; g < f; g++) {
-        m = v[g], m[0] = g, m[1] = l[g];
+        m = u[g], m[0] = g, m[1] = l[g];
       }
-      v.sort(Eb);
+      u.sort(Eb);
       for (g = l = 0; 8 > g; g++) {
-        if (m = v[g]) {
+        if (m = u[g]) {
           if (f = m[0], m = m[1]) {
-            L && b.setAttribute("morphTarget" + g, L[f]);
+            K && b.setAttribute("morphTarget" + g, K[f]);
             e && b.setAttribute("morphNormal" + g, e[f]);
             c[g] = m;
             l += m;
@@ -1655,14 +1655,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }};
   }
   function Cc(k, a, c, b) {
-    var v = new WeakMap;
+    var u = new WeakMap;
     return {update:function(k) {
       var e = b.render.frame, d = k.geometry, l = a.get(k, d);
-      v.get(l) !== e && (d.isGeometry && l.updateFromObject(k), a.update(l), v.set(l, e));
+      u.get(l) !== e && (d.isGeometry && l.updateFromObject(k), a.update(l), u.set(l, e));
       k.isInstancedMesh && c.update(k.instanceMatrix, 34962);
       return l;
     }, dispose:function() {
-      v = new WeakMap;
+      u = new WeakMap;
     }};
   }
   function Wa(k, a, c, b, e, d, l, f, m, p) {
@@ -1687,15 +1687,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.needsUpdate = !0;
   }
   function Qa(k, a, c) {
-    var v = k[0];
-    if (0 >= v || 0 < v) {
+    var u = k[0];
+    if (0 >= u || 0 < u) {
       return k;
     }
-    var b = a * c, e = Eh[b];
-    void 0 === e && (e = new Float32Array(b), Eh[b] = e);
+    var b = a * c, e = Fh[b];
+    void 0 === e && (e = new Float32Array(b), Fh[b] = e);
     if (0 !== a) {
-      for (v.toArray(e, 0), v = 1, b = 0; v !== a; ++v) {
-        b += c, k[v].toArray(e, b);
+      for (u.toArray(e, 0), u = 1, b = 0; u !== a; ++u) {
+        b += c, k[u].toArray(e, b);
       }
     }
     return e;
@@ -1704,117 +1704,117 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (k.length !== a.length) {
       return !1;
     }
-    for (var v = 0, c = k.length; v < c; v++) {
-      if (k[v] !== a[v]) {
+    for (var u = 0, c = k.length; u < c; u++) {
+      if (k[u] !== a[u]) {
         return !1;
       }
     }
     return !0;
   }
   function Na(k, a) {
-    for (var v = 0, c = a.length; v < c; v++) {
-      k[v] = a[v];
+    for (var u = 0, c = a.length; u < c; u++) {
+      k[u] = a[u];
     }
   }
   function lb(k, a) {
-    var v = Fh[a];
-    void 0 === v && (v = new Int32Array(a), Fh[a] = v);
+    var u = Gh[a];
+    void 0 === u && (u = new Int32Array(a), Gh[a] = u);
     for (var c = 0; c !== a; ++c) {
-      v[c] = k.allocateTextureUnit();
+      u[c] = k.allocateTextureUnit();
     }
-    return v;
+    return u;
   }
   function qb(k, a) {
-    var v = this.cache;
-    v[0] !== a && (k.uniform1f(this.addr, a), v[0] = a);
+    var u = this.cache;
+    u[0] !== a && (k.uniform1f(this.addr, a), u[0] = a);
   }
   function eb(k, a) {
-    var v = this.cache;
+    var u = this.cache;
     if (void 0 !== a.x) {
-      if (v[0] !== a.x || v[1] !== a.y) {
-        k.uniform2f(this.addr, a.x, a.y), v[0] = a.x, v[1] = a.y;
+      if (u[0] !== a.x || u[1] !== a.y) {
+        k.uniform2f(this.addr, a.x, a.y), u[0] = a.x, u[1] = a.y;
       }
     } else {
-      Ma(v, a) || (k.uniform2fv(this.addr, a), Na(v, a));
+      Ma(u, a) || (k.uniform2fv(this.addr, a), Na(u, a));
     }
   }
   function Dc(k, a) {
-    var v = this.cache;
+    var u = this.cache;
     if (void 0 !== a.x) {
-      if (v[0] !== a.x || v[1] !== a.y || v[2] !== a.z) {
-        k.uniform3f(this.addr, a.x, a.y, a.z), v[0] = a.x, v[1] = a.y, v[2] = a.z;
+      if (u[0] !== a.x || u[1] !== a.y || u[2] !== a.z) {
+        k.uniform3f(this.addr, a.x, a.y, a.z), u[0] = a.x, u[1] = a.y, u[2] = a.z;
       }
     } else {
       if (void 0 !== a.r) {
-        if (v[0] !== a.r || v[1] !== a.g || v[2] !== a.b) {
-          k.uniform3f(this.addr, a.r, a.g, a.b), v[0] = a.r, v[1] = a.g, v[2] = a.b;
+        if (u[0] !== a.r || u[1] !== a.g || u[2] !== a.b) {
+          k.uniform3f(this.addr, a.r, a.g, a.b), u[0] = a.r, u[1] = a.g, u[2] = a.b;
         }
       } else {
-        Ma(v, a) || (k.uniform3fv(this.addr, a), Na(v, a));
+        Ma(u, a) || (k.uniform3fv(this.addr, a), Na(u, a));
       }
     }
   }
   function rb(k, a) {
-    var v = this.cache;
+    var u = this.cache;
     if (void 0 !== a.x) {
-      if (v[0] !== a.x || v[1] !== a.y || v[2] !== a.z || v[3] !== a.w) {
-        k.uniform4f(this.addr, a.x, a.y, a.z, a.w), v[0] = a.x, v[1] = a.y, v[2] = a.z, v[3] = a.w;
+      if (u[0] !== a.x || u[1] !== a.y || u[2] !== a.z || u[3] !== a.w) {
+        k.uniform4f(this.addr, a.x, a.y, a.z, a.w), u[0] = a.x, u[1] = a.y, u[2] = a.z, u[3] = a.w;
       }
     } else {
-      Ma(v, a) || (k.uniform4fv(this.addr, a), Na(v, a));
+      Ma(u, a) || (k.uniform4fv(this.addr, a), Na(u, a));
     }
   }
   function Fb(k, a) {
-    var v = this.cache, c = a.elements;
-    void 0 === c ? Ma(v, a) || (k.uniformMatrix2fv(this.addr, !1, a), Na(v, a)) : Ma(v, c) || (Gh.set(c), k.uniformMatrix2fv(this.addr, !1, Gh), Na(v, c));
+    var u = this.cache, c = a.elements;
+    void 0 === c ? Ma(u, a) || (k.uniformMatrix2fv(this.addr, !1, a), Na(u, a)) : Ma(u, c) || (Hh.set(c), k.uniformMatrix2fv(this.addr, !1, Hh), Na(u, c));
   }
   function Sb(k, a) {
-    var v = this.cache, c = a.elements;
-    void 0 === c ? Ma(v, a) || (k.uniformMatrix3fv(this.addr, !1, a), Na(v, a)) : Ma(v, c) || (Hh.set(c), k.uniformMatrix3fv(this.addr, !1, Hh), Na(v, c));
+    var u = this.cache, c = a.elements;
+    void 0 === c ? Ma(u, a) || (k.uniformMatrix3fv(this.addr, !1, a), Na(u, a)) : Ma(u, c) || (Ih.set(c), k.uniformMatrix3fv(this.addr, !1, Ih), Na(u, c));
   }
   function T(k, a) {
-    var v = this.cache, c = a.elements;
-    void 0 === c ? Ma(v, a) || (k.uniformMatrix4fv(this.addr, !1, a), Na(v, a)) : Ma(v, c) || (Ih.set(c), k.uniformMatrix4fv(this.addr, !1, Ih), Na(v, c));
+    var u = this.cache, c = a.elements;
+    void 0 === c ? Ma(u, a) || (k.uniformMatrix4fv(this.addr, !1, a), Na(u, a)) : Ma(u, c) || (Jh.set(c), k.uniformMatrix4fv(this.addr, !1, Jh), Na(u, c));
   }
   function oa(k, a, c) {
-    var v = this.cache, b = c.allocateTextureUnit();
-    v[0] !== b && (k.uniform1i(this.addr, b), v[0] = b);
-    c.safeSetTexture2D(a || Jh, b);
+    var u = this.cache, b = c.allocateTextureUnit();
+    u[0] !== b && (k.uniform1i(this.addr, b), u[0] = b);
+    c.safeSetTexture2D(a || Kh, b);
   }
   function Ha(k, a, c) {
-    var v = this.cache, b = c.allocateTextureUnit();
-    v[0] !== b && (k.uniform1i(this.addr, b), v[0] = b);
-    c.setTexture2DArray(a || vj, b);
+    var u = this.cache, b = c.allocateTextureUnit();
+    u[0] !== b && (k.uniform1i(this.addr, b), u[0] = b);
+    c.setTexture2DArray(a || xj, b);
   }
   function pa(k, a, c) {
-    var v = this.cache, b = c.allocateTextureUnit();
-    v[0] !== b && (k.uniform1i(this.addr, b), v[0] = b);
-    c.setTexture3D(a || wj, b);
+    var u = this.cache, b = c.allocateTextureUnit();
+    u[0] !== b && (k.uniform1i(this.addr, b), u[0] = b);
+    c.setTexture3D(a || yj, b);
   }
   function gd(k, a, c) {
-    var v = this.cache, b = c.allocateTextureUnit();
-    v[0] !== b && (k.uniform1i(this.addr, b), v[0] = b);
-    c.safeSetTextureCube(a || Kh, b);
+    var u = this.cache, b = c.allocateTextureUnit();
+    u[0] !== b && (k.uniform1i(this.addr, b), u[0] = b);
+    c.safeSetTextureCube(a || Lh, b);
   }
   function ae(k, a) {
-    var v = this.cache;
-    v[0] !== a && (k.uniform1i(this.addr, a), v[0] = a);
+    var u = this.cache;
+    u[0] !== a && (k.uniform1i(this.addr, a), u[0] = a);
   }
   function Pa(k, a) {
-    var v = this.cache;
-    Ma(v, a) || (k.uniform2iv(this.addr, a), Na(v, a));
+    var u = this.cache;
+    Ma(u, a) || (k.uniform2iv(this.addr, a), Na(u, a));
   }
   function fc(k, a) {
-    var v = this.cache;
-    Ma(v, a) || (k.uniform3iv(this.addr, a), Na(v, a));
+    var u = this.cache;
+    Ma(u, a) || (k.uniform3iv(this.addr, a), Na(u, a));
   }
   function gc(k, a) {
-    var v = this.cache;
-    Ma(v, a) || (k.uniform4iv(this.addr, a), Na(v, a));
+    var u = this.cache;
+    Ma(u, a) || (k.uniform4iv(this.addr, a), Na(u, a));
   }
   function ef(k, a) {
-    var v = this.cache;
-    v[0] !== a && (k.uniform1ui(this.addr, a), v[0] = a);
+    var u = this.cache;
+    u[0] !== a && (k.uniform1ui(this.addr, a), u[0] = a);
   }
   function be(k) {
     switch(k) {
@@ -1903,25 +1903,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = Qa(a, this.size, 9);
     k.uniformMatrix3fv(this.addr, !1, a);
   }
-  function xj(k, a) {
+  function zj(k, a) {
     a = Qa(a, this.size, 16);
     k.uniformMatrix4fv(this.addr, !1, a);
   }
-  function yj(k, a, c) {
-    var v = a.length, b = lb(c, v);
+  function Aj(k, a, c) {
+    var u = a.length, b = lb(c, u);
     k.uniform1iv(this.addr, b);
-    for (k = 0; k !== v; ++k) {
-      c.safeSetTexture2D(a[k] || Jh, b[k]);
+    for (k = 0; k !== u; ++k) {
+      c.safeSetTexture2D(a[k] || Kh, b[k]);
     }
   }
-  function zj(k, a, c) {
-    var v = a.length, b = lb(c, v);
+  function Bj(k, a, c) {
+    var u = a.length, b = lb(c, u);
     k.uniform1iv(this.addr, b);
-    for (k = 0; k !== v; ++k) {
-      c.safeSetTextureCube(a[k] || Kh, b[k]);
+    for (k = 0; k !== u; ++k) {
+      c.safeSetTextureCube(a[k] || Lh, b[k]);
     }
   }
-  function Aj(k) {
+  function Cj(k) {
     switch(k) {
       case 5126:
         return Ec;
@@ -1936,7 +1936,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       case 35675:
         return sb;
       case 35676:
-        return xj;
+        return zj;
       case 5124:
       case 35670:
         return Ba;
@@ -1954,28 +1954,28 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       case 36298:
       case 36306:
       case 35682:
-        return yj;
+        return Aj;
       case 35680:
       case 36300:
       case 36308:
       case 36293:
-        return zj;
+        return Bj;
     }
   }
-  function Bj(k, a, c) {
+  function Dj(k, a, c) {
     this.id = k;
     this.addr = c;
     this.cache = [];
     this.setValue = be(a.type);
   }
-  function Lh(k, a, c) {
+  function Mh(k, a, c) {
     this.id = k;
     this.addr = c;
     this.cache = [];
     this.size = a.size;
-    this.setValue = Aj(a.type);
+    this.setValue = Cj(a.type);
   }
-  function Mh(k) {
+  function Nh(k) {
     this.id = k;
     this.seq = [];
     this.map = {};
@@ -1983,30 +1983,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   function ic(k, a) {
     this.seq = [];
     this.map = {};
-    for (var c = k.getProgramParameter(a, 35718), v = 0; v < c; ++v) {
-      var b = k.getActiveUniform(a, v), e = k.getUniformLocation(a, b.name), d = this, l = b.name, f = l.length;
+    for (var c = k.getProgramParameter(a, 35718), u = 0; u < c; ++u) {
+      var b = k.getActiveUniform(a, u), e = k.getUniformLocation(a, b.name), d = this, l = b.name, f = l.length;
       for (sg.lastIndex = 0;;) {
         var g = sg.exec(l), m = sg.lastIndex, p = g[1], n = g[3];
         "]" === g[2] && (p |= 0);
         if (void 0 === n || "[" === n && m + 2 === f) {
           l = d;
-          b = void 0 === n ? new Bj(p, b, e) : new Lh(p, b, e);
+          b = void 0 === n ? new Dj(p, b, e) : new Mh(p, b, e);
           l.seq.push(b);
           l.map[b.id] = b;
           break;
         } else {
-          n = d.map[p], void 0 === n && (n = new Mh(p), p = d, d = n, p.seq.push(d), p.map[d.id] = d), d = n;
+          n = d.map[p], void 0 === n && (n = new Nh(p), p = d, d = n, p.seq.push(d), p.map[d.id] = d), d = n;
         }
       }
     }
   }
-  function Nh(k, a, c) {
+  function Oh(k, a, c) {
     a = k.createShader(a);
     k.shaderSource(a, c);
     k.compileShader(a);
     return a;
   }
-  function Oh(k) {
+  function Ph(k) {
     switch(k) {
       case 3E3:
         return ["Linear", "( value )"];
@@ -2028,9 +2028,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         throw Error("unsupported encoding: " + k);
     }
   }
-  function Ph(k, a, c) {
-    var v = k.getShaderParameter(a, 35713), b = k.getShaderInfoLog(a).trim();
-    if (v && "" === b) {
+  function Qh(k, a, c) {
+    var u = k.getShaderParameter(a, 35713), b = k.getShaderInfoLog(a).trim();
+    if (u && "" === b) {
       return "";
     }
     k = k.getShaderSource(a).split("\n");
@@ -2041,14 +2041,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return "THREE.WebGLShader: gl.getShaderInfoLog() " + c + "\n" + b + k;
   }
   function de(k, a) {
-    a = Oh(a);
+    a = Ph(a);
     return "vec4 " + k + "( vec4 value ) { return " + a[0] + "ToLinear" + a[1] + "; }";
   }
-  function Cj(k, a) {
-    a = Oh(a);
+  function Ej(k, a) {
+    a = Ph(a);
     return "vec4 " + k + "( vec4 value ) { return LinearTo" + a[0] + a[1] + "; }";
   }
-  function Dj(k, a) {
+  function Fj(k, a) {
     switch(a) {
       case 1:
         a = "Linear";
@@ -2070,7 +2070,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return "vec3 " + k + "( vec3 color ) { return " + a + "ToneMapping( color ); }";
   }
-  function Ej(k) {
+  function Gj(k) {
     var a = [], c;
     for (c in k) {
       var b = k[c];
@@ -2081,10 +2081,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   function ee(k) {
     return "" !== k;
   }
-  function Qh(k, a) {
+  function Rh(k, a) {
     return k.replace(/NUM_DIR_LIGHTS/g, a.numDirLights).replace(/NUM_SPOT_LIGHTS/g, a.numSpotLights).replace(/NUM_RECT_AREA_LIGHTS/g, a.numRectAreaLights).replace(/NUM_POINT_LIGHTS/g, a.numPointLights).replace(/NUM_HEMI_LIGHTS/g, a.numHemiLights).replace(/NUM_DIR_LIGHT_SHADOWS/g, a.numDirLightShadows).replace(/NUM_SPOT_LIGHT_SHADOWS/g, a.numSpotLightShadows).replace(/NUM_POINT_LIGHT_SHADOWS/g, a.numPointLightShadows);
   }
-  function Rh(k, a) {
+  function Sh(k, a) {
     return k.replace(/NUM_CLIPPING_PLANES/g, a.numClippingPlanes).replace(/UNION_CLIPPING_PLANES/g, a.numClippingPlanes - a.numClipIntersection);
   }
   function tg(k, a) {
@@ -2094,24 +2094,28 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return k.replace(ug, tg);
   }
-  function Sh(k, a, c, b) {
+  function Th(k, a, c, b) {
+    console.warn("WebGLProgram: #pragma unroll_loop shader syntax is deprecated. Please use #pragma unroll_loop_start syntax instead.");
+    return vg(k, a, c, b);
+  }
+  function vg(k, a, c, b) {
     k = "";
     for (a = parseInt(a); a < parseInt(c); a++) {
       k += b.replace(/\[ i \]/g, "[ " + a + " ]").replace(/UNROLLED_LOOP_INDEX/g, a);
     }
     return k;
   }
-  function Th(k) {
+  function Uh(k) {
     var a = "precision " + k.precision + " float;\nprecision " + k.precision + " int;";
     "highp" === k.precision ? a += "\n#define HIGH_PRECISION" : "mediump" === k.precision ? a += "\n#define MEDIUM_PRECISION" : "lowp" === k.precision && (a += "\n#define LOW_PRECISION");
     return a;
   }
-  function Fj(k) {
+  function Hj(k) {
     var a = "SHADOWMAP_TYPE_BASIC";
     1 === k.shadowMapType ? a = "SHADOWMAP_TYPE_PCF" : 2 === k.shadowMapType ? a = "SHADOWMAP_TYPE_PCF_SOFT" : 3 === k.shadowMapType && (a = "SHADOWMAP_TYPE_VSM");
     return a;
   }
-  function Gj(k) {
+  function Ij(k) {
     var a = "ENVMAP_TYPE_CUBE";
     if (k.envMap) {
       switch(k.envMapMode) {
@@ -2133,7 +2137,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return a;
   }
-  function Hj(k) {
+  function Jj(k) {
     var a = "ENVMAP_MODE_REFLECTION";
     if (k.envMap) {
       switch(k.envMapMode) {
@@ -2144,7 +2148,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return a;
   }
-  function Ij(k) {
+  function Kj(k) {
     var a = "ENVMAP_BLENDING_NONE";
     if (k.envMap) {
       switch(k.combine) {
@@ -2160,46 +2164,46 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return a;
   }
-  function Jj(k, a, c) {
-    var v = k.getContext(), b = c.defines, e = c.vertexShader, d = c.fragmentShader, l = Fj(c), f = Gj(c), g = Hj(c), m = Ij(c), p = 0 < k.gammaFactor ? k.gammaFactor : 1, L = c.isWebGL2 ? "" : [c.extensionDerivatives || c.envMapCubeUV || c.bumpMap || c.tangentSpaceNormalMap || c.clearcoatNormalMap || c.flatShading || "physical" === c.shaderID ? "#extension GL_OES_standard_derivatives : enable" : "", (c.extensionFragDepth || c.logarithmicDepthBuffer) && c.rendererExtensionFragDepth ? "#extension GL_EXT_frag_depth : enable" : 
-    "", c.extensionDrawBuffers && c.rendererExtensionDrawBuffers ? "#extension GL_EXT_draw_buffers : require" : "", (c.extensionShaderTextureLOD || c.envMap) && c.rendererExtensionShaderTextureLod ? "#extension GL_EXT_shader_texture_lod : enable" : ""].filter(ee).join("\n"), n = Ej(b), h = v.createProgram();
-    c.isRawShaderMaterial ? (b = [n].filter(ee).join("\n"), 0 < b.length && (b += "\n"), l = [L, n].filter(ee).join("\n"), 0 < l.length && (l += "\n")) : (b = [Th(c), "#define SHADER_NAME " + c.shaderName, n, c.instancing ? "#define USE_INSTANCING" : "", c.supportsVertexTextures ? "#define VERTEX_TEXTURES" : "", "#define GAMMA_FACTOR " + p, "#define MAX_BONES " + c.maxBones, c.useFog && c.fog ? "#define USE_FOG" : "", c.useFog && c.fogExp2 ? "#define FOG_EXP2" : "", c.map ? "#define USE_MAP" : "", 
-    c.envMap ? "#define USE_ENVMAP" : "", c.envMap ? "#define " + g : "", c.lightMap ? "#define USE_LIGHTMAP" : "", c.aoMap ? "#define USE_AOMAP" : "", c.emissiveMap ? "#define USE_EMISSIVEMAP" : "", c.bumpMap ? "#define USE_BUMPMAP" : "", c.normalMap ? "#define USE_NORMALMAP" : "", c.normalMap && c.objectSpaceNormalMap ? "#define OBJECTSPACE_NORMALMAP" : "", c.normalMap && c.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", c.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : 
-    "", c.displacementMap && c.supportsVertexTextures ? "#define USE_DISPLACEMENTMAP" : "", c.specularMap ? "#define USE_SPECULARMAP" : "", c.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", c.metalnessMap ? "#define USE_METALNESSMAP" : "", c.alphaMap ? "#define USE_ALPHAMAP" : "", c.vertexTangents ? "#define USE_TANGENT" : "", c.vertexColors ? "#define USE_COLOR" : "", c.vertexUvs ? "#define USE_UV" : "", c.uvsVertexOnly ? "#define UVS_VERTEX_ONLY" : "", c.flatShading ? "#define FLAT_SHADED" : "", 
-    c.skinning ? "#define USE_SKINNING" : "", c.useVertexTexture ? "#define BONE_TEXTURE" : "", c.morphTargets ? "#define USE_MORPHTARGETS" : "", c.morphNormals && !1 === c.flatShading ? "#define USE_MORPHNORMALS" : "", c.doubleSided ? "#define DOUBLE_SIDED" : "", c.flipSided ? "#define FLIP_SIDED" : "", c.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", c.shadowMapEnabled ? "#define " + l : "", c.sizeAttenuation ? "#define USE_SIZEATTENUATION" : "", c.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : 
-    "", c.logarithmicDepthBuffer && c.rendererExtensionFragDepth ? "#define USE_LOGDEPTHBUF_EXT" : "", "uniform mat4 modelMatrix;", "uniform mat4 modelViewMatrix;", "uniform mat4 projectionMatrix;", "uniform mat4 viewMatrix;", "uniform mat3 normalMatrix;", "uniform vec3 cameraPosition;", "uniform bool isOrthographic;", "#ifdef USE_INSTANCING", " attribute mat4 instanceMatrix;", "#endif", "attribute vec3 position;", "attribute vec3 normal;", "attribute vec2 uv;", "#ifdef USE_TANGENT", "\tattribute vec4 tangent;", 
-    "#endif", "#ifdef USE_COLOR", "\tattribute vec3 color;", "#endif", "#ifdef USE_MORPHTARGETS", "\tattribute vec3 morphTarget0;", "\tattribute vec3 morphTarget1;", "\tattribute vec3 morphTarget2;", "\tattribute vec3 morphTarget3;", "\t#ifdef USE_MORPHNORMALS", "\t\tattribute vec3 morphNormal0;", "\t\tattribute vec3 morphNormal1;", "\t\tattribute vec3 morphNormal2;", "\t\tattribute vec3 morphNormal3;", "\t#else", "\t\tattribute vec3 morphTarget4;", "\t\tattribute vec3 morphTarget5;", "\t\tattribute vec3 morphTarget6;", 
-    "\t\tattribute vec3 morphTarget7;", "\t#endif", "#endif", "#ifdef USE_SKINNING", "\tattribute vec4 skinIndex;", "\tattribute vec4 skinWeight;", "#endif", "\n"].filter(ee).join("\n"), l = [L, Th(c), "#define SHADER_NAME " + c.shaderName, n, c.alphaTest ? "#define ALPHATEST " + c.alphaTest + (c.alphaTest % 1 ? "" : ".0") : "", "#define GAMMA_FACTOR " + p, c.useFog && c.fog ? "#define USE_FOG" : "", c.useFog && c.fogExp2 ? "#define FOG_EXP2" : "", c.map ? "#define USE_MAP" : "", c.matcap ? "#define USE_MATCAP" : 
-    "", c.envMap ? "#define USE_ENVMAP" : "", c.envMap ? "#define " + f : "", c.envMap ? "#define " + g : "", c.envMap ? "#define " + m : "", c.lightMap ? "#define USE_LIGHTMAP" : "", c.aoMap ? "#define USE_AOMAP" : "", c.emissiveMap ? "#define USE_EMISSIVEMAP" : "", c.bumpMap ? "#define USE_BUMPMAP" : "", c.normalMap ? "#define USE_NORMALMAP" : "", c.normalMap && c.objectSpaceNormalMap ? "#define OBJECTSPACE_NORMALMAP" : "", c.normalMap && c.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : 
-    "", c.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", c.specularMap ? "#define USE_SPECULARMAP" : "", c.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", c.metalnessMap ? "#define USE_METALNESSMAP" : "", c.alphaMap ? "#define USE_ALPHAMAP" : "", c.sheen ? "#define USE_SHEEN" : "", c.vertexTangents ? "#define USE_TANGENT" : "", c.vertexColors ? "#define USE_COLOR" : "", c.vertexUvs ? "#define USE_UV" : "", c.uvsVertexOnly ? "#define UVS_VERTEX_ONLY" : "", c.gradientMap ? "#define USE_GRADIENTMAP" : 
-    "", c.flatShading ? "#define FLAT_SHADED" : "", c.doubleSided ? "#define DOUBLE_SIDED" : "", c.flipSided ? "#define FLIP_SIDED" : "", c.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", c.shadowMapEnabled ? "#define " + l : "", c.premultipliedAlpha ? "#define PREMULTIPLIED_ALPHA" : "", c.physicallyCorrectLights ? "#define PHYSICALLY_CORRECT_LIGHTS" : "", c.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", c.logarithmicDepthBuffer && c.rendererExtensionFragDepth ? "#define USE_LOGDEPTHBUF_EXT" : 
-    "", (c.extensionShaderTextureLOD || c.envMap) && c.rendererExtensionShaderTextureLod ? "#define TEXTURE_LOD_EXT" : "", "uniform mat4 viewMatrix;", "uniform vec3 cameraPosition;", "uniform bool isOrthographic;", 0 !== c.toneMapping ? "#define TONE_MAPPING" : "", 0 !== c.toneMapping ? na.tonemapping_pars_fragment : "", 0 !== c.toneMapping ? Dj("toneMapping", c.toneMapping) : "", c.dithering ? "#define DITHERING" : "", c.outputEncoding || c.mapEncoding || c.matcapEncoding || c.envMapEncoding || 
-    c.emissiveMapEncoding || c.lightMapEncoding ? na.encodings_pars_fragment : "", c.mapEncoding ? de("mapTexelToLinear", c.mapEncoding) : "", c.matcapEncoding ? de("matcapTexelToLinear", c.matcapEncoding) : "", c.envMapEncoding ? de("envMapTexelToLinear", c.envMapEncoding) : "", c.emissiveMapEncoding ? de("emissiveMapTexelToLinear", c.emissiveMapEncoding) : "", c.lightMapEncoding ? de("lightMapTexelToLinear", c.lightMapEncoding) : "", c.outputEncoding ? Cj("linearToOutputTexel", c.outputEncoding) : 
-    "", c.depthPacking ? "#define DEPTH_PACKING " + c.depthPacking : "", "\n"].filter(ee).join("\n"));
+  function Lj(k, a, c) {
+    var u = k.getContext(), b = c.defines, e = c.vertexShader, d = c.fragmentShader, l = Hj(c), f = Ij(c), g = Jj(c), m = Kj(c), p = 0 < k.gammaFactor ? k.gammaFactor : 1, K = c.isWebGL2 ? "" : [c.extensionDerivatives || c.envMapCubeUV || c.bumpMap || c.tangentSpaceNormalMap || c.clearcoatNormalMap || c.flatShading || "physical" === c.shaderID ? "#extension GL_OES_standard_derivatives : enable" : "", (c.extensionFragDepth || c.logarithmicDepthBuffer) && c.rendererExtensionFragDepth ? "#extension GL_EXT_frag_depth : enable" : 
+    "", c.extensionDrawBuffers && c.rendererExtensionDrawBuffers ? "#extension GL_EXT_draw_buffers : require" : "", (c.extensionShaderTextureLOD || c.envMap) && c.rendererExtensionShaderTextureLod ? "#extension GL_EXT_shader_texture_lod : enable" : ""].filter(ee).join("\n"), n = Gj(b), h = u.createProgram();
+    c.isRawShaderMaterial ? (b = [n].filter(ee).join("\n"), 0 < b.length && (b += "\n"), l = [K, n].filter(ee).join("\n"), 0 < l.length && (l += "\n")) : (b = [Uh(c), "#define SHADER_NAME " + c.shaderName, n, c.instancing ? "#define USE_INSTANCING" : "", c.supportsVertexTextures ? "#define VERTEX_TEXTURES" : "", "#define GAMMA_FACTOR " + p, "#define MAX_BONES " + c.maxBones, c.useFog && c.fog ? "#define USE_FOG" : "", c.useFog && c.fogExp2 ? "#define FOG_EXP2" : "", c.map ? "#define USE_MAP" : "", 
+    c.envMap ? "#define USE_ENVMAP" : "", c.envMap ? "#define " + g : "", c.lightMap ? "#define USE_LIGHTMAP" : "", c.aoMap ? "#define USE_AOMAP" : "", c.emissiveMap ? "#define USE_EMISSIVEMAP" : "", c.bumpMap ? "#define USE_BUMPMAP" : "", c.normalMap ? "#define USE_NORMALMAP" : "", c.normalMap && c.objectSpaceNormalMap ? "#define OBJECTSPACE_NORMALMAP" : "", c.normalMap && c.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", c.clearcoatMap ? "#define USE_CLEARCOATMAP" : "", c.clearcoatRoughnessMap ? 
+    "#define USE_CLEARCOAT_ROUGHNESSMAP" : "", c.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", c.displacementMap && c.supportsVertexTextures ? "#define USE_DISPLACEMENTMAP" : "", c.specularMap ? "#define USE_SPECULARMAP" : "", c.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", c.metalnessMap ? "#define USE_METALNESSMAP" : "", c.alphaMap ? "#define USE_ALPHAMAP" : "", c.vertexTangents ? "#define USE_TANGENT" : "", c.vertexColors ? "#define USE_COLOR" : "", c.vertexUvs ? "#define USE_UV" : 
+    "", c.uvsVertexOnly ? "#define UVS_VERTEX_ONLY" : "", c.flatShading ? "#define FLAT_SHADED" : "", c.skinning ? "#define USE_SKINNING" : "", c.useVertexTexture ? "#define BONE_TEXTURE" : "", c.morphTargets ? "#define USE_MORPHTARGETS" : "", c.morphNormals && !1 === c.flatShading ? "#define USE_MORPHNORMALS" : "", c.doubleSided ? "#define DOUBLE_SIDED" : "", c.flipSided ? "#define FLIP_SIDED" : "", c.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", c.shadowMapEnabled ? "#define " + l : "", c.sizeAttenuation ? 
+    "#define USE_SIZEATTENUATION" : "", c.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", c.logarithmicDepthBuffer && c.rendererExtensionFragDepth ? "#define USE_LOGDEPTHBUF_EXT" : "", "uniform mat4 modelMatrix;", "uniform mat4 modelViewMatrix;", "uniform mat4 projectionMatrix;", "uniform mat4 viewMatrix;", "uniform mat3 normalMatrix;", "uniform vec3 cameraPosition;", "uniform bool isOrthographic;", "#ifdef USE_INSTANCING", " attribute mat4 instanceMatrix;", "#endif", "attribute vec3 position;", 
+    "attribute vec3 normal;", "attribute vec2 uv;", "#ifdef USE_TANGENT", "\tattribute vec4 tangent;", "#endif", "#ifdef USE_COLOR", "\tattribute vec3 color;", "#endif", "#ifdef USE_MORPHTARGETS", "\tattribute vec3 morphTarget0;", "\tattribute vec3 morphTarget1;", "\tattribute vec3 morphTarget2;", "\tattribute vec3 morphTarget3;", "\t#ifdef USE_MORPHNORMALS", "\t\tattribute vec3 morphNormal0;", "\t\tattribute vec3 morphNormal1;", "\t\tattribute vec3 morphNormal2;", "\t\tattribute vec3 morphNormal3;", 
+    "\t#else", "\t\tattribute vec3 morphTarget4;", "\t\tattribute vec3 morphTarget5;", "\t\tattribute vec3 morphTarget6;", "\t\tattribute vec3 morphTarget7;", "\t#endif", "#endif", "#ifdef USE_SKINNING", "\tattribute vec4 skinIndex;", "\tattribute vec4 skinWeight;", "#endif", "\n"].filter(ee).join("\n"), l = [K, Uh(c), "#define SHADER_NAME " + c.shaderName, n, c.alphaTest ? "#define ALPHATEST " + c.alphaTest + (c.alphaTest % 1 ? "" : ".0") : "", "#define GAMMA_FACTOR " + p, c.useFog && c.fog ? "#define USE_FOG" : 
+    "", c.useFog && c.fogExp2 ? "#define FOG_EXP2" : "", c.map ? "#define USE_MAP" : "", c.matcap ? "#define USE_MATCAP" : "", c.envMap ? "#define USE_ENVMAP" : "", c.envMap ? "#define " + f : "", c.envMap ? "#define " + g : "", c.envMap ? "#define " + m : "", c.lightMap ? "#define USE_LIGHTMAP" : "", c.aoMap ? "#define USE_AOMAP" : "", c.emissiveMap ? "#define USE_EMISSIVEMAP" : "", c.bumpMap ? "#define USE_BUMPMAP" : "", c.normalMap ? "#define USE_NORMALMAP" : "", c.normalMap && c.objectSpaceNormalMap ? 
+    "#define OBJECTSPACE_NORMALMAP" : "", c.normalMap && c.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", c.clearcoatMap ? "#define USE_CLEARCOATMAP" : "", c.clearcoatRoughnessMap ? "#define USE_CLEARCOAT_ROUGHNESSMAP" : "", c.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", c.specularMap ? "#define USE_SPECULARMAP" : "", c.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", c.metalnessMap ? "#define USE_METALNESSMAP" : "", c.alphaMap ? "#define USE_ALPHAMAP" : "", c.sheen ? 
+    "#define USE_SHEEN" : "", c.vertexTangents ? "#define USE_TANGENT" : "", c.vertexColors ? "#define USE_COLOR" : "", c.vertexUvs ? "#define USE_UV" : "", c.uvsVertexOnly ? "#define UVS_VERTEX_ONLY" : "", c.gradientMap ? "#define USE_GRADIENTMAP" : "", c.flatShading ? "#define FLAT_SHADED" : "", c.doubleSided ? "#define DOUBLE_SIDED" : "", c.flipSided ? "#define FLIP_SIDED" : "", c.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", c.shadowMapEnabled ? "#define " + l : "", c.premultipliedAlpha ? 
+    "#define PREMULTIPLIED_ALPHA" : "", c.physicallyCorrectLights ? "#define PHYSICALLY_CORRECT_LIGHTS" : "", c.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", c.logarithmicDepthBuffer && c.rendererExtensionFragDepth ? "#define USE_LOGDEPTHBUF_EXT" : "", (c.extensionShaderTextureLOD || c.envMap) && c.rendererExtensionShaderTextureLod ? "#define TEXTURE_LOD_EXT" : "", "uniform mat4 viewMatrix;", "uniform vec3 cameraPosition;", "uniform bool isOrthographic;", 0 !== c.toneMapping ? "#define TONE_MAPPING" : 
+    "", 0 !== c.toneMapping ? na.tonemapping_pars_fragment : "", 0 !== c.toneMapping ? Fj("toneMapping", c.toneMapping) : "", c.dithering ? "#define DITHERING" : "", c.outputEncoding || c.mapEncoding || c.matcapEncoding || c.envMapEncoding || c.emissiveMapEncoding || c.lightMapEncoding ? na.encodings_pars_fragment : "", c.mapEncoding ? de("mapTexelToLinear", c.mapEncoding) : "", c.matcapEncoding ? de("matcapTexelToLinear", c.matcapEncoding) : "", c.envMapEncoding ? de("envMapTexelToLinear", c.envMapEncoding) : 
+    "", c.emissiveMapEncoding ? de("emissiveMapTexelToLinear", c.emissiveMapEncoding) : "", c.lightMapEncoding ? de("lightMapTexelToLinear", c.lightMapEncoding) : "", c.outputEncoding ? Ej("linearToOutputTexel", c.outputEncoding) : "", c.depthPacking ? "#define DEPTH_PACKING " + c.depthPacking : "", "\n"].filter(ee).join("\n"));
     e = e.replace(ug, tg);
-    e = Qh(e, c);
     e = Rh(e, c);
+    e = Sh(e, c);
     d = d.replace(ug, tg);
-    d = Qh(d, c);
     d = Rh(d, c);
-    e = e.replace(Uh, Sh);
-    d = d.replace(Uh, Sh);
+    d = Sh(d, c);
+    e = e.replace(Vh, vg).replace(Wh, Th);
+    d = d.replace(Vh, vg).replace(Wh, Th);
     c.isWebGL2 && !c.isRawShaderMaterial && (f = !1, g = /^\s*#version\s+300\s+es\s*\n/, c.isShaderMaterial && null !== e.match(g) && null !== d.match(g) && (f = !0, e = e.replace(g, ""), d = d.replace(g, "")), b = "#version 300 es\n\n#define attribute in\n#define varying out\n#define texture2D texture\n" + b, l = ["#version 300 es\n\n#define varying in", f ? "" : "out highp vec4 pc_fragColor;", f ? "" : "#define gl_FragColor pc_fragColor", "#define gl_FragDepthEXT gl_FragDepth\n#define texture2D texture\n#define textureCube texture\n#define texture2DProj textureProj\n#define texture2DLodEXT textureLod\n#define texture2DProjLodEXT textureProjLod\n#define textureCubeLodEXT textureLod\n#define texture2DGradEXT textureGrad\n#define texture2DProjGradEXT textureProjGrad\n#define textureCubeGradEXT textureGrad"].join("\n") + 
     "\n" + l);
     d = l + d;
-    e = Nh(v, 35633, b + e);
-    d = Nh(v, 35632, d);
-    v.attachShader(h, e);
-    v.attachShader(h, d);
-    void 0 !== c.index0AttributeName ? v.bindAttribLocation(h, 0, c.index0AttributeName) : !0 === c.morphTargets && v.bindAttribLocation(h, 0, "position");
-    v.linkProgram(h);
+    e = Oh(u, 35633, b + e);
+    d = Oh(u, 35632, d);
+    u.attachShader(h, e);
+    u.attachShader(h, d);
+    void 0 !== c.index0AttributeName ? u.bindAttribLocation(h, 0, c.index0AttributeName) : !0 === c.morphTargets && u.bindAttribLocation(h, 0, "position");
+    u.linkProgram(h);
     if (k.debug.checkShaderErrors) {
-      k = v.getProgramInfoLog(h).trim();
-      f = v.getShaderInfoLog(e).trim();
-      g = v.getShaderInfoLog(d).trim();
+      k = u.getProgramInfoLog(h).trim();
+      f = u.getShaderInfoLog(e).trim();
+      g = u.getShaderInfoLog(d).trim();
       p = m = !0;
-      if (!1 === v.getProgramParameter(h, 35714)) {
-        m = !1, L = Ph(v, e, "vertex"), n = Ph(v, d, "fragment"), console.error("THREE.WebGLProgram: shader error: ", v.getError(), "35715", v.getProgramParameter(h, 35715), "gl.getProgramInfoLog", k, L, n);
+      if (!1 === u.getProgramParameter(h, 35714)) {
+        m = !1, K = Qh(u, e, "vertex"), n = Qh(u, d, "fragment"), console.error("THREE.WebGLProgram: shader error: ", u.getError(), "35715", u.getProgramParameter(h, 35715), "gl.getProgramInfoLog", k, K, n);
       } else {
         if ("" !== k) {
           console.warn("THREE.WebGLProgram: gl.getProgramInfoLog()", k);
@@ -2211,32 +2215,32 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       p && (this.diagnostics = {runnable:m, programLog:k, vertexShader:{log:f, prefix:b}, fragmentShader:{log:g, prefix:l}});
     }
-    v.detachShader(h, e);
-    v.detachShader(h, d);
-    v.deleteShader(e);
-    v.deleteShader(d);
+    u.detachShader(h, e);
+    u.detachShader(h, d);
+    u.deleteShader(e);
+    u.deleteShader(d);
     var q;
     this.getUniforms = function() {
-      void 0 === q && (q = new ic(v, h));
+      void 0 === q && (q = new ic(u, h));
       return q;
     };
     var r;
     this.getAttributes = function() {
       if (void 0 === r) {
-        for (var k = {}, a = v.getProgramParameter(h, 35721), c = 0; c < a; c++) {
-          var b = v.getActiveAttrib(h, c).name;
-          k[b] = v.getAttribLocation(h, b);
+        for (var k = {}, a = u.getProgramParameter(h, 35721), c = 0; c < a; c++) {
+          var b = u.getActiveAttrib(h, c).name;
+          k[b] = u.getAttribLocation(h, b);
         }
         r = k;
       }
       return r;
     };
     this.destroy = function() {
-      v.deleteProgram(h);
+      u.deleteProgram(h);
       this.program = void 0;
     };
     this.name = c.shaderName;
-    this.id = Kj++;
+    this.id = Mj++;
     this.cacheKey = a;
     this.usedTimes = 1;
     this.program = h;
@@ -2244,8 +2248,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.fragmentShader = d;
     return this;
   }
-  function Lj(k, a, c) {
-    function v(k) {
+  function Nj(k, a, c) {
+    function u(k) {
       if (k) {
         k.isTexture ? a = k.encoding : k.isWebGLRenderTarget && (console.warn("THREE.WebGLPrograms.getTextureEncodingFromMap: don't use render targets as textures. Use their .texture property instead."), a = k.texture.encoding);
       } else {
@@ -2254,9 +2258,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return a;
     }
     var b = [], e = c.isWebGL2, d = c.logarithmicDepthBuffer, l = c.floatVertexTextures, f = c.precision, g = c.maxVertexUniforms, m = c.vertexTextures, p = {MeshDepthMaterial:"depth", MeshDistanceMaterial:"distanceRGBA", MeshNormalMaterial:"normal", MeshBasicMaterial:"basic", MeshLambertMaterial:"lambert", MeshPhongMaterial:"phong", MeshToonMaterial:"toon", MeshStandardMaterial:"physical", MeshPhysicalMaterial:"physical", MeshMatcapMaterial:"matcap", LineBasicMaterial:"basic", LineDashedMaterial:"dashed", 
-    PointsMaterial:"points", ShadowMaterial:"shadow", SpriteMaterial:"sprite"}, L = "precision isWebGL2 supportsVertexTextures outputEncoding instancing map mapEncoding matcap matcapEncoding envMap envMapMode envMapEncoding envMapCubeUV lightMap lightMapEncoding aoMap emissiveMap emissiveMapEncoding bumpMap normalMap objectSpaceNormalMap tangentSpaceNormalMap clearcoatNormalMap displacementMap specularMap roughnessMap metalnessMap gradientMap alphaMap combine vertexColors vertexTangents vertexUvs uvsVertexOnly fog useFog fogExp2 flatShading sizeAttenuation logarithmicDepthBuffer skinning maxBones useVertexTexture morphTargets morphNormals maxMorphTargets maxMorphNormals premultipliedAlpha numDirLights numPointLights numSpotLights numHemiLights numRectAreaLights numDirLightShadows numPointLightShadows numSpotLightShadows shadowMapEnabled shadowMapType toneMapping physicallyCorrectLights alphaTest doubleSided flipSided numClippingPlanes numClipIntersection depthPacking dithering sheen".split(" ");
-    this.getParameters = function(b, L, n, h, q, r, t) {
-      var u = h.fog;
+    PointsMaterial:"points", ShadowMaterial:"shadow", SpriteMaterial:"sprite"}, K = "precision isWebGL2 supportsVertexTextures outputEncoding instancing map mapEncoding matcap matcapEncoding envMap envMapMode envMapEncoding envMapCubeUV lightMap lightMapEncoding aoMap emissiveMap emissiveMapEncoding bumpMap normalMap objectSpaceNormalMap tangentSpaceNormalMap clearcoatMap clearcoatRoughnessMap clearcoatNormalMap displacementMap specularMap roughnessMap metalnessMap gradientMap alphaMap combine vertexColors vertexTangents vertexUvs uvsVertexOnly fog useFog fogExp2 flatShading sizeAttenuation logarithmicDepthBuffer skinning maxBones useVertexTexture morphTargets morphNormals maxMorphTargets maxMorphNormals premultipliedAlpha numDirLights numPointLights numSpotLights numHemiLights numRectAreaLights numDirLightShadows numPointLightShadows numSpotLightShadows shadowMapEnabled shadowMapType toneMapping physicallyCorrectLights alphaTest doubleSided flipSided numClippingPlanes numClipIntersection depthPacking dithering sheen".split(" ");
+    this.getParameters = function(b, K, n, h, q, r, t) {
+      var v = h.fog;
       h = b.isMeshStandardMaterial ? h.environment : null;
       h = b.envMap || h;
       var ca = p[b.type];
@@ -2272,28 +2276,28 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         y = 0;
       }
       null !== b.precision && (f = c.getMaxPrecision(b.precision), f !== b.precision && console.warn("THREE.WebGLProgram.getParameters:", b.precision, "not supported, using", f, "instead."));
-      ca ? (w = Cb[ca], w = {name:b.type, uniforms:Vh.clone(w.uniforms), vertexShader:w.vertexShader, fragmentShader:w.fragmentShader}) : w = {name:b.type, uniforms:b.uniforms, vertexShader:b.vertexShader, fragmentShader:b.fragmentShader};
+      ca ? (w = Cb[ca], w = {name:b.type, uniforms:Xh.clone(w.uniforms), vertexShader:w.vertexShader, fragmentShader:w.fragmentShader}) : w = {name:b.type, uniforms:b.uniforms, vertexShader:b.vertexShader, fragmentShader:b.fragmentShader};
       b.onBeforeCompile(w, k);
       var x = k.getRenderTarget();
-      return {isWebGL2:e, shaderID:ca, shaderName:w.name, uniforms:w.uniforms, vertexShader:w.vertexShader, fragmentShader:w.fragmentShader, defines:b.defines, isRawShaderMaterial:b.isRawShaderMaterial, isShaderMaterial:b.isShaderMaterial, precision:f, instancing:!0 === t.isInstancedMesh, supportsVertexTextures:m, outputEncoding:null !== x ? v(x.texture) : k.outputEncoding, map:!!b.map, mapEncoding:v(b.map), matcap:!!b.matcap, matcapEncoding:v(b.matcap), envMap:!!h, envMapMode:h && h.mapping, envMapEncoding:v(h), 
-      envMapCubeUV:!!h && (306 === h.mapping || 307 === h.mapping), lightMap:!!b.lightMap, lightMapEncoding:v(b.lightMap), aoMap:!!b.aoMap, emissiveMap:!!b.emissiveMap, emissiveMapEncoding:v(b.emissiveMap), bumpMap:!!b.bumpMap, normalMap:!!b.normalMap, objectSpaceNormalMap:1 === b.normalMapType, tangentSpaceNormalMap:0 === b.normalMapType, clearcoatNormalMap:!!b.clearcoatNormalMap, displacementMap:!!b.displacementMap, roughnessMap:!!b.roughnessMap, metalnessMap:!!b.metalnessMap, specularMap:!!b.specularMap, 
-      alphaMap:!!b.alphaMap, gradientMap:!!b.gradientMap, sheen:!!b.sheen, combine:b.combine, vertexTangents:b.normalMap && b.vertexTangents, vertexColors:b.vertexColors, vertexUvs:!!b.map || !!b.bumpMap || !!b.normalMap || !!b.specularMap || !!b.alphaMap || !!b.emissiveMap || !!b.roughnessMap || !!b.metalnessMap || !!b.clearcoatNormalMap || !!b.displacementMap, uvsVertexOnly:!(b.map || b.bumpMap || b.normalMap || b.specularMap || b.alphaMap || b.emissiveMap || b.roughnessMap || b.metalnessMap || 
-      b.clearcoatNormalMap) && !!b.displacementMap, fog:!!u, useFog:b.fog, fogExp2:u && u.isFogExp2, flatShading:b.flatShading, sizeAttenuation:b.sizeAttenuation, logarithmicDepthBuffer:d, skinning:b.skinning && 0 < y, maxBones:y, useVertexTexture:l, morphTargets:b.morphTargets, morphNormals:b.morphNormals, maxMorphTargets:k.maxMorphTargets, maxMorphNormals:k.maxMorphNormals, numDirLights:L.directional.length, numPointLights:L.point.length, numSpotLights:L.spot.length, numRectAreaLights:L.rectArea.length, 
-      numHemiLights:L.hemi.length, numDirLightShadows:L.directionalShadowMap.length, numPointLightShadows:L.pointShadowMap.length, numSpotLightShadows:L.spotShadowMap.length, numClippingPlanes:q, numClipIntersection:r, dithering:b.dithering, shadowMapEnabled:k.shadowMap.enabled && 0 < n.length, shadowMapType:k.shadowMap.type, toneMapping:b.toneMapped ? k.toneMapping : 0, physicallyCorrectLights:k.physicallyCorrectLights, premultipliedAlpha:b.premultipliedAlpha, alphaTest:b.alphaTest, doubleSided:2 === 
-      b.side, flipSided:1 === b.side, depthPacking:void 0 !== b.depthPacking ? b.depthPacking : !1, index0AttributeName:b.index0AttributeName, extensionDerivatives:b.extensions && b.extensions.derivatives, extensionFragDepth:b.extensions && b.extensions.fragDepth, extensionDrawbuffers:b.extensions && b.extensions.drawBuffers, extensionShaderTextureLOD:b.extensions && b.extensions.shaderTextureLOD, rendererExtensionFragDepth:e || null !== a.get("EXT_frag_depth"), rendererExtensionDrawBuffers:e || 
-      null !== a.get("WEBGL_draw_buffers"), rendererExtensionShaderTextureLod:e || null !== a.get("EXT_shader_texture_lod"), onBeforeCompile:b.onBeforeCompile};
+      return {isWebGL2:e, shaderID:ca, shaderName:w.name, uniforms:w.uniforms, vertexShader:w.vertexShader, fragmentShader:w.fragmentShader, defines:b.defines, isRawShaderMaterial:b.isRawShaderMaterial, isShaderMaterial:b.isShaderMaterial, precision:f, instancing:!0 === t.isInstancedMesh, supportsVertexTextures:m, outputEncoding:null !== x ? u(x.texture) : k.outputEncoding, map:!!b.map, mapEncoding:u(b.map), matcap:!!b.matcap, matcapEncoding:u(b.matcap), envMap:!!h, envMapMode:h && h.mapping, envMapEncoding:u(h), 
+      envMapCubeUV:!!h && (306 === h.mapping || 307 === h.mapping), lightMap:!!b.lightMap, lightMapEncoding:u(b.lightMap), aoMap:!!b.aoMap, emissiveMap:!!b.emissiveMap, emissiveMapEncoding:u(b.emissiveMap), bumpMap:!!b.bumpMap, normalMap:!!b.normalMap, objectSpaceNormalMap:1 === b.normalMapType, tangentSpaceNormalMap:0 === b.normalMapType, clearcoatMap:!!b.clearcoatMap, clearcoatRoughnessMap:!!b.clearcoatRoughnessMap, clearcoatNormalMap:!!b.clearcoatNormalMap, displacementMap:!!b.displacementMap, 
+      roughnessMap:!!b.roughnessMap, metalnessMap:!!b.metalnessMap, specularMap:!!b.specularMap, alphaMap:!!b.alphaMap, gradientMap:!!b.gradientMap, sheen:!!b.sheen, combine:b.combine, vertexTangents:b.normalMap && b.vertexTangents, vertexColors:b.vertexColors, vertexUvs:!!b.map || !!b.bumpMap || !!b.normalMap || !!b.specularMap || !!b.alphaMap || !!b.emissiveMap || !!b.roughnessMap || !!b.metalnessMap || !!b.clearcoatMap || !!b.clearcoatRoughnessMap || !!b.clearcoatNormalMap || !!b.displacementMap, 
+      uvsVertexOnly:!(b.map || b.bumpMap || b.normalMap || b.specularMap || b.alphaMap || b.emissiveMap || b.roughnessMap || b.metalnessMap || b.clearcoatNormalMap) && !!b.displacementMap, fog:!!v, useFog:b.fog, fogExp2:v && v.isFogExp2, flatShading:b.flatShading, sizeAttenuation:b.sizeAttenuation, logarithmicDepthBuffer:d, skinning:b.skinning && 0 < y, maxBones:y, useVertexTexture:l, morphTargets:b.morphTargets, morphNormals:b.morphNormals, maxMorphTargets:k.maxMorphTargets, maxMorphNormals:k.maxMorphNormals, 
+      numDirLights:K.directional.length, numPointLights:K.point.length, numSpotLights:K.spot.length, numRectAreaLights:K.rectArea.length, numHemiLights:K.hemi.length, numDirLightShadows:K.directionalShadowMap.length, numPointLightShadows:K.pointShadowMap.length, numSpotLightShadows:K.spotShadowMap.length, numClippingPlanes:q, numClipIntersection:r, dithering:b.dithering, shadowMapEnabled:k.shadowMap.enabled && 0 < n.length, shadowMapType:k.shadowMap.type, toneMapping:b.toneMapped ? k.toneMapping : 
+      0, physicallyCorrectLights:k.physicallyCorrectLights, premultipliedAlpha:b.premultipliedAlpha, alphaTest:b.alphaTest, doubleSided:2 === b.side, flipSided:1 === b.side, depthPacking:void 0 !== b.depthPacking ? b.depthPacking : !1, index0AttributeName:b.index0AttributeName, extensionDerivatives:b.extensions && b.extensions.derivatives, extensionFragDepth:b.extensions && b.extensions.fragDepth, extensionDrawbuffers:b.extensions && b.extensions.drawBuffers, extensionShaderTextureLOD:b.extensions && 
+      b.extensions.shaderTextureLOD, rendererExtensionFragDepth:e || null !== a.get("EXT_frag_depth"), rendererExtensionDrawBuffers:e || null !== a.get("WEBGL_draw_buffers"), rendererExtensionShaderTextureLod:e || null !== a.get("EXT_shader_texture_lod"), onBeforeCompile:b.onBeforeCompile};
     };
     this.getProgramCacheKey = function(a) {
       var c = [];
       a.shaderID ? c.push(a.shaderID) : (c.push(a.fragmentShader), c.push(a.vertexShader));
       if (void 0 !== a.defines) {
-        for (var v in a.defines) {
-          c.push(v), c.push(a.defines[v]);
+        for (var u in a.defines) {
+          c.push(u), c.push(a.defines[u]);
         }
       }
       if (void 0 === a.isRawShaderMaterial) {
-        for (v = 0; v < L.length; v++) {
-          c.push(a[L[v]]);
+        for (u = 0; u < K.length; u++) {
+          c.push(a[K[u]]);
         }
         c.push(k.outputEncoding);
         c.push(k.gammaFactor);
@@ -2302,16 +2306,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return c.join();
     };
     this.acquireProgram = function(a, c) {
-      for (var v, e = 0, d = b.length; e < d; e++) {
+      for (var u, e = 0, d = b.length; e < d; e++) {
         var l = b[e];
         if (l.cacheKey === c) {
-          v = l;
-          ++v.usedTimes;
+          u = l;
+          ++u.usedTimes;
           break;
         }
       }
-      void 0 === v && (v = new Jj(k, c, a), b.push(v));
-      return v;
+      void 0 === u && (u = new Lj(k, c, a), b.push(u));
+      return u;
     };
     this.releaseProgram = function(k) {
       if (0 === --k.usedTimes) {
@@ -2323,7 +2327,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     };
     this.programs = b;
   }
-  function Mj() {
+  function Oj() {
     var k = new WeakMap;
     return {get:function(a) {
       var c = k.get(a);
@@ -2337,16 +2341,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       k = new WeakMap;
     }};
   }
-  function Nj(k, a) {
+  function Pj(k, a) {
     return k.groupOrder !== a.groupOrder ? k.groupOrder - a.groupOrder : k.renderOrder !== a.renderOrder ? k.renderOrder - a.renderOrder : k.program !== a.program ? k.program.id - a.program.id : k.material.id !== a.material.id ? k.material.id - a.material.id : k.z !== a.z ? k.z - a.z : k.id - a.id;
   }
-  function Oj(k, a) {
+  function Qj(k, a) {
     return k.groupOrder !== a.groupOrder ? k.groupOrder - a.groupOrder : k.renderOrder !== a.renderOrder ? k.renderOrder - a.renderOrder : k.z !== a.z ? a.z - k.z : k.id - a.id;
   }
-  function Wh() {
-    function k(k, v, b, e, l, f) {
+  function Yh() {
+    function k(k, u, b, e, l, f) {
       var g = a[c];
-      void 0 === g ? (g = {id:k.id, object:k, geometry:v, material:b, program:b.program || d, groupOrder:e, renderOrder:k.renderOrder, z:l, group:f}, a[c] = g) : (g.id = k.id, g.object = k, g.geometry = v, g.material = b, g.program = b.program || d, g.groupOrder = e, g.renderOrder = k.renderOrder, g.z = l, g.group = f);
+      void 0 === g ? (g = {id:k.id, object:k, geometry:u, material:b, program:b.program || d, groupOrder:e, renderOrder:k.renderOrder, z:l, group:f}, a[c] = g) : (g.id = k.id, g.object = k, g.geometry = u, g.material = b, g.program = b.program || d, g.groupOrder = e, g.renderOrder = k.renderOrder, g.z = l, g.group = f);
       c++;
       return g;
     }
@@ -2355,14 +2359,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       c = 0;
       b.length = 0;
       e.length = 0;
-    }, push:function(a, c, v, d, l, f) {
-      a = k(a, c, v, d, l, f);
-      (!0 === v.transparent ? e : b).push(a);
-    }, unshift:function(a, c, v, d, l, f) {
-      a = k(a, c, v, d, l, f);
-      (!0 === v.transparent ? e : b).unshift(a);
+    }, push:function(a, c, u, d, l, f) {
+      a = k(a, c, u, d, l, f);
+      (!0 === u.transparent ? e : b).push(a);
+    }, unshift:function(a, c, u, d, l, f) {
+      a = k(a, c, u, d, l, f);
+      (!0 === u.transparent ? e : b).unshift(a);
     }, finish:function() {
-      for (var k = c, v = a.length; k < v; k++) {
+      for (var k = c, u = a.length; k < u; k++) {
         var b = a[k];
         if (null === b.id) {
           break;
@@ -2375,33 +2379,33 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         b.group = null;
       }
     }, sort:function(k, a) {
-      1 < b.length && b.sort(k || Nj);
-      1 < e.length && e.sort(a || Oj);
+      1 < b.length && b.sort(k || Pj);
+      1 < e.length && e.sort(a || Qj);
     }};
   }
-  function Pj() {
+  function Rj() {
     function k(c) {
       c = c.target;
       c.removeEventListener("dispose", k);
       a.delete(c);
     }
     var a = new WeakMap;
-    return {get:function(c, v) {
+    return {get:function(c, u) {
       var b = a.get(c);
       if (void 0 === b) {
-        var e = new Wh;
+        var e = new Yh;
         a.set(c, new WeakMap);
-        a.get(c).set(v, e);
+        a.get(c).set(u, e);
         c.addEventListener("dispose", k);
       } else {
-        e = b.get(v), void 0 === e && (e = new Wh, b.set(v, e));
+        e = b.get(u), void 0 === e && (e = new Yh, b.set(u, e));
       }
       return e;
     }, dispose:function() {
       a = new WeakMap;
     }};
   }
-  function Qj() {
+  function Sj() {
     var k = {};
     return {get:function(a) {
       if (void 0 !== k[a.id]) {
@@ -2426,7 +2430,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return k[a.id] = c;
     }};
   }
-  function Rj() {
+  function Tj() {
     var k = {};
     return {get:function(a) {
       if (void 0 !== k[a.id]) {
@@ -2445,24 +2449,24 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return k[a.id] = c;
     }};
   }
-  function Sj(k, a) {
+  function Uj(k, a) {
     return (a.castShadow ? 1 : 0) - (k.castShadow ? 1 : 0);
   }
-  function Tj() {
-    for (var k = new Qj, a = Rj(), c = {version:0, hash:{directionalLength:-1, pointLength:-1, spotLength:-1, rectAreaLength:-1, hemiLength:-1, numDirectionalShadows:-1, numPointShadows:-1, numSpotShadows:-1}, ambient:[0, 0, 0], probe:[], directional:[], directionalShadow:[], directionalShadowMap:[], directionalShadowMatrix:[], spot:[], spotShadow:[], spotShadowMap:[], spotShadowMatrix:[], rectArea:[], point:[], pointShadow:[], pointShadowMap:[], pointShadowMatrix:[], hemi:[]}, b = 0; 9 > b; b++) {
+  function Vj() {
+    for (var k = new Sj, a = Tj(), c = {version:0, hash:{directionalLength:-1, pointLength:-1, spotLength:-1, rectAreaLength:-1, hemiLength:-1, numDirectionalShadows:-1, numPointShadows:-1, numSpotShadows:-1}, ambient:[0, 0, 0], probe:[], directional:[], directionalShadow:[], directionalShadowMap:[], directionalShadowMatrix:[], spot:[], spotShadow:[], spotShadowMap:[], spotShadowMatrix:[], rectArea:[], point:[], pointShadow:[], pointShadowMap:[], pointShadowMatrix:[], hemi:[]}, b = 0; 9 > b; b++) {
       c.probe.push(new m);
     }
     var e = new m, d = new n, l = new n;
-    return {setup:function(v, b, f) {
+    return {setup:function(u, b, f) {
       for (var g = 0, m = 0, p = 0, n = 0; 9 > n; n++) {
         c.probe[n].set(0, 0, 0);
       }
-      var h = b = 0, L = 0, q = 0, r = 0, t = 0, u = 0, ca = 0;
+      var K = b = 0, h = 0, q = 0, r = 0, t = 0, v = 0, ca = 0;
       f = f.matrixWorldInverse;
-      v.sort(Sj);
+      u.sort(Uj);
       n = 0;
-      for (var y = v.length; n < y; n++) {
-        var w = v[n], x = w.color, T = w.intensity, z = w.distance, sa = w.shadow && w.shadow.map ? w.shadow.map.texture : null;
+      for (var y = u.length; n < y; n++) {
+        var w = u[n], x = w.color, T = w.intensity, z = w.distance, sa = w.shadow && w.shadow.map ? w.shadow.map.texture : null;
         if (w.isAmbientLight) {
           g += x.r * T, m += x.g * T, p += x.b * T;
         } else {
@@ -2483,9 +2487,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
               b++;
             } else {
               w.isSpotLight ? (ia = k.get(w), ia.position.setFromMatrixPosition(w.matrixWorld), ia.position.applyMatrix4(f), ia.color.copy(x).multiplyScalar(T), ia.distance = z, ia.direction.setFromMatrixPosition(w.matrixWorld), e.setFromMatrixPosition(w.target.matrixWorld), ia.direction.sub(e), ia.direction.transformDirection(f), ia.coneCos = Math.cos(w.angle), ia.penumbraCos = Math.cos(w.angle * (1 - w.penumbra)), ia.decay = w.decay, w.castShadow && (T = w.shadow, x = a.get(w), x.shadowBias = T.bias, 
-              x.shadowRadius = T.radius, x.shadowMapSize = T.mapSize, c.spotShadow[L] = x, c.spotShadowMap[L] = sa, c.spotShadowMatrix[L] = w.shadow.matrix, ca++), c.spot[L] = ia, L++) : w.isRectAreaLight ? (ia = k.get(w), ia.color.copy(x).multiplyScalar(T), ia.position.setFromMatrixPosition(w.matrixWorld), ia.position.applyMatrix4(f), l.identity(), d.copy(w.matrixWorld), d.premultiply(f), l.extractRotation(d), ia.halfWidth.set(.5 * w.width, 0, 0), ia.halfHeight.set(0, .5 * w.height, 0), ia.halfWidth.applyMatrix4(l), 
-              ia.halfHeight.applyMatrix4(l), c.rectArea[q] = ia, q++) : w.isPointLight ? (ia = k.get(w), ia.position.setFromMatrixPosition(w.matrixWorld), ia.position.applyMatrix4(f), ia.color.copy(w.color).multiplyScalar(w.intensity), ia.distance = w.distance, ia.decay = w.decay, w.castShadow && (T = w.shadow, x = a.get(w), x.shadowBias = T.bias, x.shadowRadius = T.radius, x.shadowMapSize = T.mapSize, x.shadowCameraNear = T.camera.near, x.shadowCameraFar = T.camera.far, c.pointShadow[h] = x, c.pointShadowMap[h] = 
-              sa, c.pointShadowMatrix[h] = w.shadow.matrix, u++), c.point[h] = ia, h++) : w.isHemisphereLight && (ia = k.get(w), ia.direction.setFromMatrixPosition(w.matrixWorld), ia.direction.transformDirection(f), ia.direction.normalize(), ia.skyColor.copy(w.color).multiplyScalar(T), ia.groundColor.copy(w.groundColor).multiplyScalar(T), c.hemi[r] = ia, r++);
+              x.shadowRadius = T.radius, x.shadowMapSize = T.mapSize, c.spotShadow[h] = x, c.spotShadowMap[h] = sa, c.spotShadowMatrix[h] = w.shadow.matrix, ca++), c.spot[h] = ia, h++) : w.isRectAreaLight ? (ia = k.get(w), ia.color.copy(x).multiplyScalar(T), ia.position.setFromMatrixPosition(w.matrixWorld), ia.position.applyMatrix4(f), l.identity(), d.copy(w.matrixWorld), d.premultiply(f), l.extractRotation(d), ia.halfWidth.set(.5 * w.width, 0, 0), ia.halfHeight.set(0, .5 * w.height, 0), ia.halfWidth.applyMatrix4(l), 
+              ia.halfHeight.applyMatrix4(l), c.rectArea[q] = ia, q++) : w.isPointLight ? (ia = k.get(w), ia.position.setFromMatrixPosition(w.matrixWorld), ia.position.applyMatrix4(f), ia.color.copy(w.color).multiplyScalar(w.intensity), ia.distance = w.distance, ia.decay = w.decay, w.castShadow && (T = w.shadow, x = a.get(w), x.shadowBias = T.bias, x.shadowRadius = T.radius, x.shadowMapSize = T.mapSize, x.shadowCameraNear = T.camera.near, x.shadowCameraFar = T.camera.far, c.pointShadow[K] = x, c.pointShadowMap[K] = 
+              sa, c.pointShadowMatrix[K] = w.shadow.matrix, v++), c.point[K] = ia, K++) : w.isHemisphereLight && (ia = k.get(w), ia.direction.setFromMatrixPosition(w.matrixWorld), ia.direction.transformDirection(f), ia.direction.normalize(), ia.skyColor.copy(w.color).multiplyScalar(T), ia.groundColor.copy(w.groundColor).multiplyScalar(T), c.hemi[r] = ia, r++);
             }
           }
         }
@@ -2493,41 +2497,41 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       c.ambient[0] = g;
       c.ambient[1] = m;
       c.ambient[2] = p;
-      v = c.hash;
-      if (v.directionalLength !== b || v.pointLength !== h || v.spotLength !== L || v.rectAreaLength !== q || v.hemiLength !== r || v.numDirectionalShadows !== t || v.numPointShadows !== u || v.numSpotShadows !== ca) {
-        c.directional.length = b, c.spot.length = L, c.rectArea.length = q, c.point.length = h, c.hemi.length = r, c.directionalShadow.length = t, c.directionalShadowMap.length = t, c.pointShadow.length = u, c.pointShadowMap.length = u, c.spotShadow.length = ca, c.spotShadowMap.length = ca, c.directionalShadowMatrix.length = t, c.pointShadowMatrix.length = u, c.spotShadowMatrix.length = ca, v.directionalLength = b, v.pointLength = h, v.spotLength = L, v.rectAreaLength = q, v.hemiLength = r, v.numDirectionalShadows = 
-        t, v.numPointShadows = u, v.numSpotShadows = ca, c.version = Uj++;
+      u = c.hash;
+      if (u.directionalLength !== b || u.pointLength !== K || u.spotLength !== h || u.rectAreaLength !== q || u.hemiLength !== r || u.numDirectionalShadows !== t || u.numPointShadows !== v || u.numSpotShadows !== ca) {
+        c.directional.length = b, c.spot.length = h, c.rectArea.length = q, c.point.length = K, c.hemi.length = r, c.directionalShadow.length = t, c.directionalShadowMap.length = t, c.pointShadow.length = v, c.pointShadowMap.length = v, c.spotShadow.length = ca, c.spotShadowMap.length = ca, c.directionalShadowMatrix.length = t, c.pointShadowMatrix.length = v, c.spotShadowMatrix.length = ca, u.directionalLength = b, u.pointLength = K, u.spotLength = h, u.rectAreaLength = q, u.hemiLength = r, u.numDirectionalShadows = 
+        t, u.numPointShadows = v, u.numSpotShadows = ca, c.version = Wj++;
       }
     }, state:c};
   }
-  function Xh() {
-    var k = new Tj, a = [], c = [];
+  function Zh() {
+    var k = new Vj, a = [], c = [];
     return {init:function() {
       a.length = 0;
       c.length = 0;
-    }, state:{lightsArray:a, shadowsArray:c, lights:k}, setupLights:function(v) {
-      k.setup(a, c, v);
+    }, state:{lightsArray:a, shadowsArray:c, lights:k}, setupLights:function(u) {
+      k.setup(a, c, u);
     }, pushLight:function(k) {
       a.push(k);
     }, pushShadow:function(k) {
       c.push(k);
     }};
   }
-  function Vj() {
+  function Xj() {
     function k(c) {
       c = c.target;
       c.removeEventListener("dispose", k);
       a.delete(c);
     }
     var a = new WeakMap;
-    return {get:function(c, v) {
+    return {get:function(c, u) {
       if (!1 === a.has(c)) {
-        var b = new Xh;
+        var b = new Zh;
         a.set(c, new WeakMap);
-        a.get(c).set(v, b);
+        a.get(c).set(u, b);
         c.addEventListener("dispose", k);
       } else {
-        !1 === a.get(c).has(v) ? (b = new Xh, a.get(c).set(v, b)) : b = a.get(c).get(v);
+        !1 === a.get(c).has(u) ? (b = new Zh, a.get(c).set(u, b)) : b = a.get(c).get(u);
       }
       return b;
     }, dispose:function() {
@@ -2560,21 +2564,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.fog = !1;
     this.setValues(k);
   }
-  function Yh(k, a, c) {
-    function v(k, a, c) {
+  function $h(k, a, c) {
+    function u(k, a, c) {
       c = k << 0 | a << 1 | c << 2;
-      var v = L[c];
-      void 0 === v && (v = new jc({depthPacking:3201, morphTargets:k, skinning:a}), L[c] = v);
-      return v;
+      var u = K[c];
+      void 0 === u && (u = new jc({depthPacking:3201, morphTargets:k, skinning:a}), K[c] = u);
+      return u;
     }
     function b(k, a, c) {
       c = k << 0 | a << 1 | c << 2;
-      var v = q[c];
-      void 0 === v && (v = new kc({morphTargets:k, skinning:a}), q[c] = v);
-      return v;
+      var u = q[c];
+      void 0 === u && (u = new kc({morphTargets:k, skinning:a}), q[c] = u);
+      return u;
     }
     function d(a, c, e, d, l, f) {
-      var g = a.geometry, m = v, p = a.customDepthMaterial;
+      var g = a.geometry, m = u, p = a.customDepthMaterial;
       !0 === e.isPointLight && (m = b, p = a.customDistanceMaterial);
       void 0 === p ? (p = !1, !0 === c.morphTargets && (!0 === g.isBufferGeometry ? p = g.morphAttributes && g.morphAttributes.position && 0 < g.morphAttributes.position.length : !0 === g.isGeometry && (p = g.morphTargets && 0 < g.morphTargets.length)), g = !1, !0 === a.isSkinnedMesh && (!0 === c.skinning ? g = !0 : console.warn("THREE.WebGLShadowMap: THREE.SkinnedMesh with material.skinning set to false:", a)), a = m(p, g, !0 === a.isInstancedMesh)) : a = p;
       k.localClippingEnabled && !0 === c.clipShadows && 0 !== c.clippingPlanes.length && (p = a.uuid, m = c.uuid, g = r[p], void 0 === g && (g = {}, r[p] = g), p = g[m], void 0 === p && (p = a.clone(), g[m] = p), a = p);
@@ -2589,13 +2593,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       !0 === e.isPointLight && !0 === a.isMeshDistanceMaterial && (a.referencePosition.setFromMatrixPosition(e.matrixWorld), a.nearDistance = d, a.farDistance = l);
       return a;
     }
-    function l(c, v, b, e, f) {
+    function l(c, u, b, e, f) {
       if (!1 !== c.visible) {
-        if (c.layers.test(v.layers) && (c.isMesh || c.isLine || c.isPoints) && (c.castShadow || c.receiveShadow && 3 === f) && (!c.frustumCulled || g.intersectsObject(c))) {
+        if (c.layers.test(u.layers) && (c.isMesh || c.isLine || c.isPoints) && (c.castShadow || c.receiveShadow && 3 === f) && (!c.frustumCulled || g.intersectsObject(c))) {
           c.modelViewMatrix.multiplyMatrices(b.matrixWorldInverse, c.matrixWorld);
           var m = a.update(c), p = c.material;
           if (Array.isArray(p)) {
-            for (var n = m.groups, h = 0, L = n.length; h < L; h++) {
+            for (var n = m.groups, h = 0, K = n.length; h < K; h++) {
               var q = n[h], r = p[q.materialIndex];
               r && r.visible && (r = d(c, r, e, b.near, b.far, f), k.renderBufferDirect(b, null, m, r, c, q));
             }
@@ -2606,29 +2610,29 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         c = c.children;
         m = 0;
         for (p = c.length; m < p; m++) {
-          l(c[m], v, b, e, f);
+          l(c[m], u, b, e, f);
         }
       }
     }
-    var g = new Ga, m = new h, p = new h, n = new f, L = [], q = [], r = {}, t = {0:1, 1:0, 2:2}, u = new ja({defines:{SAMPLE_RATE:.25, HALF_SAMPLE_RATE:.125}, uniforms:{shadow_pass:{value:null}, resolution:{value:new h}, radius:{value:4}}, vertexShader:"void main() {\n\tgl_Position = vec4( position, 1.0 );\n}", fragmentShader:"uniform sampler2D shadow_pass;\nuniform vec2 resolution;\nuniform float radius;\n#include <packing>\nvoid main() {\n  float mean = 0.0;\n  float squared_mean = 0.0;\n\tfloat depth = unpackRGBAToDepth( texture2D( shadow_pass, ( gl_FragCoord.xy  ) / resolution ) );\n  for ( float i = -1.0; i < 1.0 ; i += SAMPLE_RATE) {\n    #ifdef HORIZONAL_PASS\n      vec2 distribution = unpackRGBATo2Half( texture2D( shadow_pass, ( gl_FragCoord.xy + vec2( i, 0.0 ) * radius ) / resolution ) );\n      mean += distribution.x;\n      squared_mean += distribution.y * distribution.y + distribution.x * distribution.x;\n    #else\n      float depth = unpackRGBAToDepth( texture2D( shadow_pass, ( gl_FragCoord.xy + vec2( 0.0,  i )  * radius ) / resolution ) );\n      mean += depth;\n      squared_mean += depth * depth;\n    #endif\n  }\n  mean = mean * HALF_SAMPLE_RATE;\n  squared_mean = squared_mean * HALF_SAMPLE_RATE;\n  float std_dev = sqrt( squared_mean - mean * mean );\n  gl_FragColor = pack2HalfToRGBA( vec2( mean, std_dev ) );\n}"}), 
-    y = u.clone();
+    var g = new Ga, m = new h, p = new h, n = new f, K = [], q = [], r = {}, t = {0:1, 1:0, 2:2}, v = new ja({defines:{SAMPLE_RATE:.25, HALF_SAMPLE_RATE:.125}, uniforms:{shadow_pass:{value:null}, resolution:{value:new h}, radius:{value:4}}, vertexShader:"void main() {\n\tgl_Position = vec4( position, 1.0 );\n}", fragmentShader:"uniform sampler2D shadow_pass;\nuniform vec2 resolution;\nuniform float radius;\n#include <packing>\nvoid main() {\n  float mean = 0.0;\n  float squared_mean = 0.0;\n\tfloat depth = unpackRGBAToDepth( texture2D( shadow_pass, ( gl_FragCoord.xy  ) / resolution ) );\n  for ( float i = -1.0; i < 1.0 ; i += SAMPLE_RATE) {\n    #ifdef HORIZONAL_PASS\n      vec2 distribution = unpackRGBATo2Half( texture2D( shadow_pass, ( gl_FragCoord.xy + vec2( i, 0.0 ) * radius ) / resolution ) );\n      mean += distribution.x;\n      squared_mean += distribution.y * distribution.y + distribution.x * distribution.x;\n    #else\n      float depth = unpackRGBAToDepth( texture2D( shadow_pass, ( gl_FragCoord.xy + vec2( 0.0,  i )  * radius ) / resolution ) );\n      mean += depth;\n      squared_mean += depth * depth;\n    #endif\n  }\n  mean = mean * HALF_SAMPLE_RATE;\n  squared_mean = squared_mean * HALF_SAMPLE_RATE;\n  float std_dev = sqrt( squared_mean - mean * mean );\n  gl_FragColor = pack2HalfToRGBA( vec2( mean, std_dev ) );\n}"}), 
+    y = v.clone();
     y.defines.HORIZONAL_PASS = 1;
     var w = new N;
     w.setAttribute("position", new I(new Float32Array([-1, -1, .5, 3, -1, .5, -1, 3, .5]), 3));
-    var x = new W(w, u), T = this;
+    var x = new W(w, v), T = this;
     this.enabled = !1;
     this.autoUpdate = !0;
     this.needsUpdate = !1;
     this.type = 1;
-    this.render = function(v, b, d) {
-      if (!1 !== T.enabled && (!1 !== T.autoUpdate || !1 !== T.needsUpdate) && 0 !== v.length) {
-        var f = k.getRenderTarget(), h = k.getActiveCubeFace(), L = k.getActiveMipmapLevel(), q = k.state;
+    this.render = function(u, b, d) {
+      if (!1 !== T.enabled && (!1 !== T.autoUpdate || !1 !== T.needsUpdate) && 0 !== u.length) {
+        var f = k.getRenderTarget(), h = k.getActiveCubeFace(), K = k.getActiveMipmapLevel(), q = k.state;
         q.setBlending(0);
         q.buffers.color.setClear(1, 1, 1, 1);
         q.buffers.depth.setTest(!0);
         q.setScissorTest(!1);
-        for (var r = 0, t = v.length; r < t; r++) {
-          var ca = v[r], w = ca.shadow;
+        for (var r = 0, t = u.length; r < t; r++) {
+          var ca = u[r], w = ca.shadow;
           if (void 0 === w) {
             console.warn("THREE.WebGLShadowMap:", ca, "has no shadow.");
           } else {
@@ -2652,30 +2656,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
               g = w.getFrustum();
               l(b, d, w.camera, ca, this.type);
             }
-            w.isPointLightShadow || 3 !== this.type || (ca = w, w = d, z = a.update(x), u.uniforms.shadow_pass.value = ca.map.texture, u.uniforms.resolution.value = ca.mapSize, u.uniforms.radius.value = ca.radius, k.setRenderTarget(ca.mapPass), k.clear(), k.renderBufferDirect(w, null, z, u, x, null), y.uniforms.shadow_pass.value = ca.mapPass.texture, y.uniforms.resolution.value = ca.mapSize, y.uniforms.radius.value = ca.radius, k.setRenderTarget(ca.map), k.clear(), k.renderBufferDirect(w, null, z, 
+            w.isPointLightShadow || 3 !== this.type || (ca = w, w = d, z = a.update(x), v.uniforms.shadow_pass.value = ca.map.texture, v.uniforms.resolution.value = ca.mapSize, v.uniforms.radius.value = ca.radius, k.setRenderTarget(ca.mapPass), k.clear(), k.renderBufferDirect(w, null, z, v, x, null), y.uniforms.shadow_pass.value = ca.mapPass.texture, y.uniforms.resolution.value = ca.mapSize, y.uniforms.radius.value = ca.radius, k.setRenderTarget(ca.map), k.clear(), k.renderBufferDirect(w, null, z, 
             y, x, null));
           }
         }
         T.needsUpdate = !1;
-        k.setRenderTarget(f, h, L);
+        k.setRenderTarget(f, h, K);
       }
     };
   }
-  function Wj(k, a, c) {
-    function v(a, c, v) {
+  function Yj(k, a, c) {
+    function u(a, c, u) {
       var b = new Uint8Array(4), e = k.createTexture();
       k.bindTexture(a, e);
       k.texParameteri(a, 10241, 9728);
       k.texParameteri(a, 10240, 9728);
-      for (a = 0; a < v; a++) {
+      for (a = 0; a < u; a++) {
         k.texImage2D(c + a, 0, 6408, 1, 1, 0, 6408, 5121, b);
       }
       return e;
     }
-    function b(c, v) {
+    function b(c, u) {
       t[c] = 1;
-      0 === u[c] && (k.enableVertexAttribArray(c), u[c] = 1);
-      y[c] !== v && ((h ? k : a.get("ANGLE_instanced_arrays"))[h ? "vertexAttribDivisor" : "vertexAttribDivisorANGLE"](c, v), y[c] = v);
+      0 === v[c] && (k.enableVertexAttribArray(c), v[c] = 1);
+      y[c] !== u && ((h ? k : a.get("ANGLE_instanced_arrays"))[h ? "vertexAttribDivisor" : "vertexAttribDivisorANGLE"](c, u), y[c] = u);
     }
     function e(a) {
       !0 !== w[a] && (k.enable(a), w[a] = !0);
@@ -2683,7 +2687,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     function d(a) {
       !1 !== w[a] && (k.disable(a), w[a] = !1);
     }
-    function l(a, c, v, b, l, f, g, m) {
+    function l(a, c, u, b, l, f, g, m) {
       if (0 === a) {
         T && (d(3042), T = !1);
       } else {
@@ -2733,13 +2737,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           }
         } else {
           l = l || c;
-          f = f || v;
+          f = f || u;
           g = g || b;
           if (c !== C || l !== oa) {
             k.blendEquationSeparate(J[c], J[l]), C = c, oa = l;
           }
-          if (v !== A || b !== D || f !== B || g !== F) {
-            k.blendFuncSeparate(Q[v], Q[b], Q[f], Q[g]), A = v, D = b, B = f, F = g;
+          if (u !== A || b !== D || f !== B || g !== F) {
+            k.blendFuncSeparate(Q[u], Q[b], Q[f], Q[g]), A = u, D = b, B = f, F = g;
           }
           z = a;
           E = null;
@@ -2753,10 +2757,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       0 !== a ? (e(2884), a !== pa && (1 === a ? k.cullFace(1029) : 2 === a ? k.cullFace(1028) : k.cullFace(1032))) : d(2884);
       pa = a;
     }
-    function p(a, c, v) {
+    function p(a, c, u) {
       if (a) {
-        if (e(32823), H !== c || M !== v) {
-          k.polygonOffset(c, v), H = c, M = v;
+        if (e(32823), H !== c || M !== u) {
+          k.polygonOffset(c, u), H = c, M = u;
         }
       } else {
         d(32823);
@@ -2764,31 +2768,31 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     function n(a) {
       void 0 === a && (a = 33984 + P - 1);
-      K !== a && (k.activeTexture(a), K = a);
+      L !== a && (k.activeTexture(a), L = a);
     }
-    var h = c.isWebGL2, L = new function() {
-      var a = !1, c = new f, v = null, b = new f(0, 0, 0, 0);
+    var h = c.isWebGL2, K = new function() {
+      var a = !1, c = new f, u = null, b = new f(0, 0, 0, 0);
       return {setMask:function(c) {
-        v === c || a || (k.colorMask(c, c, c, c), v = c);
+        u === c || a || (k.colorMask(c, c, c, c), u = c);
       }, setLocked:function(k) {
         a = k;
-      }, setClear:function(a, v, e, d, l) {
-        !0 === l && (a *= d, v *= d, e *= d);
-        c.set(a, v, e, d);
-        !1 === b.equals(c) && (k.clearColor(a, v, e, d), b.copy(c));
+      }, setClear:function(a, u, e, d, l) {
+        !0 === l && (a *= d, u *= d, e *= d);
+        c.set(a, u, e, d);
+        !1 === b.equals(c) && (k.clearColor(a, u, e, d), b.copy(c));
       }, reset:function() {
         a = !1;
-        v = null;
+        u = null;
         b.set(-1, 0, 0, 0);
       }};
     }, q = new function() {
-      var a = !1, c = null, v = null, b = null;
+      var a = !1, c = null, u = null, b = null;
       return {setTest:function(k) {
         k ? e(2929) : d(2929);
-      }, setMask:function(v) {
-        c === v || a || (k.depthMask(v), c = v);
+      }, setMask:function(u) {
+        c === u || a || (k.depthMask(u), c = u);
       }, setFunc:function(a) {
-        if (v !== a) {
+        if (u !== a) {
           if (a) {
             switch(a) {
               case 0:
@@ -2821,7 +2825,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           } else {
             k.depthFunc(515);
           }
-          v = a;
+          u = a;
         }
       }, setLocked:function(k) {
         a = k;
@@ -2829,21 +2833,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         b !== a && (k.clearDepth(a), b = a);
       }, reset:function() {
         a = !1;
-        b = v = c = null;
+        b = u = c = null;
       }};
     }, r = new function() {
-      var a = !1, c = null, v = null, b = null, l = null, f = null, g = null, m = null, p = null;
+      var a = !1, c = null, u = null, b = null, l = null, f = null, g = null, m = null, p = null;
       return {setTest:function(k) {
         a || (k ? e(2960) : d(2960));
-      }, setMask:function(v) {
-        c === v || a || (k.stencilMask(v), c = v);
+      }, setMask:function(u) {
+        c === u || a || (k.stencilMask(u), c = u);
       }, setFunc:function(a, c, e) {
-        if (v !== a || b !== c || l !== e) {
-          k.stencilFunc(a, c, e), v = a, b = c, l = e;
+        if (u !== a || b !== c || l !== e) {
+          k.stencilFunc(a, c, e), u = a, b = c, l = e;
         }
-      }, setOp:function(a, c, v) {
-        if (f !== a || g !== c || m !== v) {
-          k.stencilOp(a, c, v), f = a, g = c, m = v;
+      }, setOp:function(a, c, u) {
+        if (f !== a || g !== c || m !== u) {
+          k.stencilOp(a, c, u), f = a, g = c, m = u;
         }
       }, setLocked:function(k) {
         a = k;
@@ -2851,18 +2855,18 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         p !== a && (k.clearStencil(a), p = a);
       }, reset:function() {
         a = !1;
-        p = m = g = f = l = b = v = c = null;
+        p = m = g = f = l = b = u = c = null;
       }};
     };
     c = k.getParameter(34921);
-    var t = new Uint8Array(c), u = new Uint8Array(c), y = new Uint8Array(c), w = {}, x = null, T = null, z = null, C = null, A = null, D = null, oa = null, B = null, F = null, E = !1, Ha = null, pa = null, G = null, H = null, M = null, P = k.getParameter(35661), O = !1;
+    var t = new Uint8Array(c), v = new Uint8Array(c), y = new Uint8Array(c), w = {}, x = null, T = null, z = null, C = null, A = null, D = null, oa = null, B = null, F = null, E = !1, Ha = null, pa = null, G = null, H = null, M = null, P = k.getParameter(35661), O = !1;
     c = 0;
     c = k.getParameter(7938);
     -1 !== c.indexOf("WebGL") ? (c = parseFloat(/^WebGL ([0-9])/.exec(c)[1]), O = 1 <= c) : -1 !== c.indexOf("OpenGL ES") && (c = parseFloat(/^OpenGL ES ([0-9])/.exec(c)[1]), O = 2 <= c);
-    var K = null, I = {}, N = new f, ba = new f, S = {};
-    S[3553] = v(3553, 3553, 1);
-    S[34067] = v(34067, 34069, 6);
-    L.setClear(0, 0, 0, 1);
+    var L = null, I = {}, N = new f, ba = new f, S = {};
+    S[3553] = u(3553, 3553, 1);
+    S[34067] = u(34067, 34069, 6);
+    K.setClear(0, 0, 0, 1);
     q.setClear(1);
     r.setClear(0);
     e(2929);
@@ -2874,15 +2878,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var J = {100:32774, 101:32778, 102:32779};
     h ? (J[103] = 32775, J[104] = 32776) : (c = a.get("EXT_blend_minmax"), null !== c && (J[103] = c.MIN_EXT, J[104] = c.MAX_EXT));
     var Q = {200:0, 201:1, 202:768, 204:770, 210:776, 208:774, 206:772, 203:769, 205:771, 209:775, 207:773};
-    return {buffers:{color:L, depth:q, stencil:r}, initAttributes:function() {
+    return {buffers:{color:K, depth:q, stencil:r}, initAttributes:function() {
       for (var k = 0, a = t.length; k < a; k++) {
         t[k] = 0;
       }
     }, enableAttribute:function(k) {
       b(k, 0);
     }, enableAttributeAndDivisor:b, disableUnusedAttributes:function() {
-      for (var a = 0, c = u.length; a !== c; ++a) {
-        u[a] !== t[a] && (k.disableVertexAttribArray(a), u[a] = 0);
+      for (var a = 0, c = v.length; a !== c; ++a) {
+        v[a] !== t[a] && (k.disableVertexAttribArray(a), v[a] = 0);
       }
     }, enable:e, disable:d, useProgram:function(a) {
       return x !== a ? (k.useProgram(a), x = a, !0) : !1;
@@ -2895,7 +2899,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       q.setFunc(k.depthFunc);
       q.setTest(k.depthTest);
       q.setMask(k.depthWrite);
-      L.setMask(k.colorWrite);
+      K.setMask(k.colorWrite);
       a = k.stencilWrite;
       r.setTest(a);
       a && (r.setMask(k.stencilWriteMask), r.setFunc(k.stencilFunc, k.stencilRef, k.stencilFuncMask), r.setOp(k.stencilFail, k.stencilZFail, k.stencilZPass));
@@ -2905,14 +2909,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }, setPolygonOffset:p, setScissorTest:function(k) {
       k ? e(3089) : d(3089);
     }, activeTexture:n, bindTexture:function(a, c) {
-      null === K && n();
-      var v = I[K];
-      void 0 === v && (v = {type:void 0, texture:void 0}, I[K] = v);
-      if (v.type !== a || v.texture !== c) {
-        k.bindTexture(a, c || S[a]), v.type = a, v.texture = c;
+      null === L && n();
+      var u = I[L];
+      void 0 === u && (u = {type:void 0, texture:void 0}, I[L] = u);
+      if (u.type !== a || u.texture !== c) {
+        k.bindTexture(a, c || S[a]), u.type = a, u.texture = c;
       }
     }, unbindTexture:function() {
-      var a = I[K];
+      var a = I[L];
       void 0 !== a && void 0 !== a.type && (k.bindTexture(a.type, null), a.type = void 0, a.texture = void 0);
     }, compressedTexImage2D:function() {
       try {
@@ -2937,20 +2941,20 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }, viewport:function(a) {
       !1 === ba.equals(a) && (k.viewport(a.x, a.y, a.z, a.w), ba.copy(a));
     }, reset:function() {
-      for (var a = 0; a < u.length; a++) {
-        1 === u[a] && (k.disableVertexAttribArray(a), u[a] = 0);
+      for (var a = 0; a < v.length; a++) {
+        1 === v[a] && (k.disableVertexAttribArray(a), v[a] = 0);
       }
       w = {};
-      K = null;
+      L = null;
       I = {};
       pa = Ha = z = x = null;
-      L.reset();
+      K.reset();
       q.reset();
       r.reset();
     }};
   }
-  function Xj(k, a, c, b, e, d, l) {
-    function v(k, a) {
+  function Zj(k, a, c, b, e, d, l) {
+    function u(k, a) {
       return B ? new OffscreenCanvas(k, a) : document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
     }
     function f(k, a, c, b) {
@@ -2960,7 +2964,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       if (1 > e || !0 === a) {
         if ("undefined" !== typeof HTMLImageElement && k instanceof HTMLImageElement || "undefined" !== typeof HTMLCanvasElement && k instanceof HTMLCanvasElement || "undefined" !== typeof ImageBitmap && k instanceof ImageBitmap) {
-          return b = a ? ma.floorPowerOfTwo : Math.floor, a = b(e * k.width), e = b(e * k.height), void 0 === Oa && (Oa = v(a, e)), c = c ? v(a, e) : Oa, c.width = a, c.height = e, c.getContext("2d").drawImage(k, 0, 0, a, e), console.warn("THREE.WebGLRenderer: Texture has been resized from (" + k.width + "x" + k.height + ") to (" + a + "x" + e + ")."), c;
+          return b = a ? ma.floorPowerOfTwo : Math.floor, a = b(e * k.width), e = b(e * k.height), void 0 === Oa && (Oa = u(a, e)), c = c ? u(a, e) : Oa, c.width = a, c.height = e, c.getContext("2d").drawImage(k, 0, 0, a, e), console.warn("THREE.WebGLRenderer: Texture has been resized from (" + k.width + "x" + k.height + ") to (" + a + "x" + e + ")."), c;
         }
         "data" in k && console.warn("THREE.WebGLRenderer: Image in DataTexture is too big (" + k.width + "x" + k.height + ").");
       }
@@ -2972,13 +2976,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     function m(k, a) {
       return k.generateMipmaps && a && 1003 !== k.minFilter && 1006 !== k.minFilter;
     }
-    function p(a, c, v, e) {
+    function p(a, c, u, e) {
       k.generateMipmap(a);
-      b.get(c).__maxMipLevel = Math.log(Math.max(v, e)) * Math.LOG2E;
+      b.get(c).__maxMipLevel = Math.log(Math.max(u, e)) * Math.LOG2E;
     }
-    function n(c, v, b) {
+    function n(c, u, b) {
       if (!1 === sa) {
-        return v;
+        return u;
       }
       if (null !== c) {
         if (void 0 !== k[c]) {
@@ -2986,19 +2990,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         }
         console.warn("THREE.WebGLRenderer: Attempt to use non-existing WebGL internal format '" + c + "'");
       }
-      c = v;
-      6403 === v && (5126 === b && (c = 33326), 5131 === b && (c = 33325), 5121 === b && (c = 33321));
-      6407 === v && (5126 === b && (c = 34837), 5131 === b && (c = 34843), 5121 === b && (c = 32849));
-      6408 === v && (5126 === b && (c = 34836), 5131 === b && (c = 34842), 5121 === b && (c = 32856));
-      33325 === c || 33326 === c || 34842 === c || 34836 === c ? a.get("EXT_color_buffer_float") : (34843 === c || 34837 === c) && console.warn("THREE.WebGLRenderer: Floating point textures with RGB format not supported. Please use RGBA instead.");
+      c = u;
+      6403 === u && (5126 === b && (c = 33326), 5131 === b && (c = 33325), 5121 === b && (c = 33321));
+      6407 === u && (5126 === b && (c = 34837), 5131 === b && (c = 34843), 5121 === b && (c = 32849));
+      6408 === u && (5126 === b && (c = 34836), 5131 === b && (c = 34842), 5121 === b && (c = 32856));
+      33325 !== c && 33326 !== c && 34842 !== c && 34836 !== c || a.get("EXT_color_buffer_float");
       return c;
     }
     function h(k) {
       return 1003 === k || 1004 === k || 1005 === k ? 9728 : 9729;
     }
-    function L(a) {
+    function K(a) {
       a = a.target;
-      a.removeEventListener("dispose", L);
+      a.removeEventListener("dispose", K);
       var c = b.get(a);
       void 0 !== c.__webglInit && (k.deleteTexture(c.__webglTexture), b.remove(a));
       a.isVideoTexture && oa.delete(a);
@@ -3007,13 +3011,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     function q(a) {
       a = a.target;
       a.removeEventListener("dispose", q);
-      var c = b.get(a), v = b.get(a.texture);
+      var c = b.get(a), u = b.get(a.texture);
       if (a) {
-        void 0 !== v.__webglTexture && k.deleteTexture(v.__webglTexture);
+        void 0 !== u.__webglTexture && k.deleteTexture(u.__webglTexture);
         a.depthTexture && a.depthTexture.dispose();
         if (a.isWebGLCubeRenderTarget) {
-          for (v = 0; 6 > v; v++) {
-            k.deleteFramebuffer(c.__webglFramebuffer[v]), c.__webglDepthbuffer && k.deleteRenderbuffer(c.__webglDepthbuffer[v]);
+          for (u = 0; 6 > u; u++) {
+            k.deleteFramebuffer(c.__webglFramebuffer[u]), c.__webglDepthbuffer && k.deleteRenderbuffer(c.__webglDepthbuffer[u]);
           }
         } else {
           k.deleteFramebuffer(c.__webglFramebuffer), c.__webglDepthbuffer && k.deleteRenderbuffer(c.__webglDepthbuffer);
@@ -3024,60 +3028,60 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       l.memory.textures--;
     }
     function r(k, a) {
-      var v = b.get(k);
+      var u = b.get(k);
       if (k.isVideoTexture) {
         var e = l.render.frame;
         oa.get(k) !== e && (oa.set(k, e), k.update());
       }
-      if (0 < k.version && v.__version !== k.version) {
+      if (0 < k.version && u.__version !== k.version) {
         if (e = k.image, void 0 === e) {
           console.warn("THREE.WebGLRenderer: Texture marked for update but image is undefined");
         } else {
           if (!1 === e.complete) {
             console.warn("THREE.WebGLRenderer: Texture marked for update but image is incomplete");
           } else {
-            w(v, k, a);
+            w(u, k, a);
             return;
           }
         }
       }
       c.activeTexture(33984 + a);
-      c.bindTexture(3553, v.__webglTexture);
+      c.bindTexture(3553, u.__webglTexture);
     }
-    function t(a, v) {
+    function t(a, u) {
       if (6 === a.image.length) {
         var e = b.get(a);
         if (0 < a.version && e.__version !== a.version) {
           y(e, a);
-          c.activeTexture(33984 + v);
+          c.activeTexture(33984 + u);
           c.bindTexture(34067, e.__webglTexture);
           k.pixelStorei(37440, a.flipY);
           var l = a && (a.isCompressedTexture || a.image[0].isCompressedTexture);
-          v = a.image[0] && a.image[0].isDataTexture;
-          for (var h = [], L = 0; 6 > L; L++) {
-            h[L] = l || v ? v ? a.image[L].image : a.image[L] : f(a.image[L], !1, !0, C);
+          u = a.image[0] && a.image[0].isDataTexture;
+          for (var h = [], K = 0; 6 > K; K++) {
+            h[K] = l || u ? u ? a.image[K].image : a.image[K] : f(a.image[K], !1, !0, C);
           }
-          var q = h[0], r = g(q) || sa, t = d.convert(a.format), u = d.convert(a.type), w = n(a.internalFormat, t, u);
+          var q = h[0], r = g(q) || sa, t = d.convert(a.format), v = d.convert(a.type), w = n(a.internalFormat, t, v);
           ca(34067, a, r);
           if (l) {
-            for (L = 0; 6 > L; L++) {
-              var x = h[L].mipmaps;
+            for (K = 0; 6 > K; K++) {
+              var x = h[K].mipmaps;
               for (l = 0; l < x.length; l++) {
                 var T = x[l];
-                1023 !== a.format && 1022 !== a.format ? null !== t ? c.compressedTexImage2D(34069 + L, l, w, T.width, T.height, 0, T.data) : console.warn("THREE.WebGLRenderer: Attempt to load unsupported compressed texture format in .setTextureCube()") : c.texImage2D(34069 + L, l, w, T.width, T.height, 0, t, u, T.data);
+                1023 !== a.format && 1022 !== a.format ? null !== t ? c.compressedTexImage2D(34069 + K, l, w, T.width, T.height, 0, T.data) : console.warn("THREE.WebGLRenderer: Attempt to load unsupported compressed texture format in .setTextureCube()") : c.texImage2D(34069 + K, l, w, T.width, T.height, 0, t, v, T.data);
               }
             }
             e.__maxMipLevel = x.length - 1;
           } else {
             x = a.mipmaps;
-            for (L = 0; 6 > L; L++) {
-              if (v) {
-                for (c.texImage2D(34069 + L, 0, w, h[L].width, h[L].height, 0, t, u, h[L].data), l = 0; l < x.length; l++) {
-                  T = x[l], T = T.image[L].image, c.texImage2D(34069 + L, l + 1, w, T.width, T.height, 0, t, u, T.data);
+            for (K = 0; 6 > K; K++) {
+              if (u) {
+                for (c.texImage2D(34069 + K, 0, w, h[K].width, h[K].height, 0, t, v, h[K].data), l = 0; l < x.length; l++) {
+                  T = x[l], T = T.image[K].image, c.texImage2D(34069 + K, l + 1, w, T.width, T.height, 0, t, v, T.data);
                 }
               } else {
-                for (c.texImage2D(34069 + L, 0, w, t, u, h[L]), l = 0; l < x.length; l++) {
-                  T = x[l], c.texImage2D(34069 + L, l + 1, w, t, u, T.image[L]);
+                for (c.texImage2D(34069 + K, 0, w, t, v, h[K]), l = 0; l < x.length; l++) {
+                  T = x[l], c.texImage2D(34069 + K, l + 1, w, t, v, T.image[K]);
                 }
               }
             }
@@ -3089,41 +3093,41 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             a.onUpdate(a);
           }
         } else {
-          c.activeTexture(33984 + v), c.bindTexture(34067, e.__webglTexture);
+          c.activeTexture(33984 + u), c.bindTexture(34067, e.__webglTexture);
         }
       }
     }
-    function u(k, a) {
+    function v(k, a) {
       c.activeTexture(33984 + a);
       c.bindTexture(34067, b.get(k).__webglTexture);
     }
-    function ca(c, v, d) {
-      d ? (k.texParameteri(c, 10242, E[v.wrapS]), k.texParameteri(c, 10243, E[v.wrapT]), 32879 !== c && 35866 !== c || k.texParameteri(c, 32882, E[v.wrapR]), k.texParameteri(c, 10240, Ha[v.magFilter]), k.texParameteri(c, 10241, Ha[v.minFilter])) : (k.texParameteri(c, 10242, 33071), k.texParameteri(c, 10243, 33071), 32879 !== c && 35866 !== c || k.texParameteri(c, 32882, 33071), 1001 === v.wrapS && 1001 === v.wrapT || console.warn("THREE.WebGLRenderer: Texture is not power of two. Texture.wrapS and Texture.wrapT should be set to THREE.ClampToEdgeWrapping."), 
-      k.texParameteri(c, 10240, h(v.magFilter)), k.texParameteri(c, 10241, h(v.minFilter)), 1003 !== v.minFilter && 1006 !== v.minFilter && console.warn("THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter should be set to THREE.NearestFilter or THREE.LinearFilter."));
-      !(d = a.get("EXT_texture_filter_anisotropic")) || 1015 === v.type && null === a.get("OES_texture_float_linear") || 1016 === v.type && null === (sa || a.get("OES_texture_half_float_linear")) || !(1 < v.anisotropy || b.get(v).__currentAnisotropy) || (k.texParameterf(c, d.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(v.anisotropy, e.getMaxAnisotropy())), b.get(v).__currentAnisotropy = v.anisotropy);
+    function ca(c, u, d) {
+      d ? (k.texParameteri(c, 10242, E[u.wrapS]), k.texParameteri(c, 10243, E[u.wrapT]), 32879 !== c && 35866 !== c || k.texParameteri(c, 32882, E[u.wrapR]), k.texParameteri(c, 10240, Ha[u.magFilter]), k.texParameteri(c, 10241, Ha[u.minFilter])) : (k.texParameteri(c, 10242, 33071), k.texParameteri(c, 10243, 33071), 32879 !== c && 35866 !== c || k.texParameteri(c, 32882, 33071), 1001 === u.wrapS && 1001 === u.wrapT || console.warn("THREE.WebGLRenderer: Texture is not power of two. Texture.wrapS and Texture.wrapT should be set to THREE.ClampToEdgeWrapping."), 
+      k.texParameteri(c, 10240, h(u.magFilter)), k.texParameteri(c, 10241, h(u.minFilter)), 1003 !== u.minFilter && 1006 !== u.minFilter && console.warn("THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter should be set to THREE.NearestFilter or THREE.LinearFilter."));
+      !(d = a.get("EXT_texture_filter_anisotropic")) || 1015 === u.type && null === a.get("OES_texture_float_linear") || 1016 === u.type && null === (sa || a.get("OES_texture_half_float_linear")) || !(1 < u.anisotropy || b.get(u).__currentAnisotropy) || (k.texParameterf(c, d.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(u.anisotropy, e.getMaxAnisotropy())), b.get(u).__currentAnisotropy = u.anisotropy);
     }
     function y(a, c) {
-      void 0 === a.__webglInit && (a.__webglInit = !0, c.addEventListener("dispose", L), a.__webglTexture = k.createTexture(), l.memory.textures++);
+      void 0 === a.__webglInit && (a.__webglInit = !0, c.addEventListener("dispose", K), a.__webglTexture = k.createTexture(), l.memory.textures++);
     }
-    function w(a, v, b) {
+    function w(a, u, b) {
       var e = 3553;
-      v.isDataTexture2DArray && (e = 35866);
-      v.isDataTexture3D && (e = 32879);
-      y(a, v);
+      u.isDataTexture2DArray && (e = 35866);
+      u.isDataTexture3D && (e = 32879);
+      y(a, u);
       c.activeTexture(33984 + b);
       c.bindTexture(e, a.__webglTexture);
-      k.pixelStorei(37440, v.flipY);
-      k.pixelStorei(37441, v.premultiplyAlpha);
-      k.pixelStorei(3317, v.unpackAlignment);
-      b = sa ? !1 : 1001 !== v.wrapS || 1001 !== v.wrapT || 1003 !== v.minFilter && 1006 !== v.minFilter;
-      b = b && !1 === g(v.image);
-      b = f(v.image, b, !1, A);
-      var l = g(b) || sa, h = d.convert(v.format), L = d.convert(v.type), q = n(v.internalFormat, h, L);
-      ca(e, v, l);
-      var r = v.mipmaps;
-      if (v.isDepthTexture) {
+      k.pixelStorei(37440, u.flipY);
+      k.pixelStorei(37441, u.premultiplyAlpha);
+      k.pixelStorei(3317, u.unpackAlignment);
+      b = sa ? !1 : 1001 !== u.wrapS || 1001 !== u.wrapT || 1003 !== u.minFilter && 1006 !== u.minFilter;
+      b = b && !1 === g(u.image);
+      b = f(u.image, b, !1, A);
+      var l = g(b) || sa, h = d.convert(u.format), K = d.convert(u.type), q = n(u.internalFormat, h, K);
+      ca(e, u, l);
+      var r = u.mipmaps;
+      if (u.isDepthTexture) {
         q = 6402;
-        if (1015 === v.type) {
+        if (1015 === u.type) {
           if (!1 === sa) {
             throw Error("Float Depth Texture only supported in WebGL2.0");
           }
@@ -3131,75 +3135,75 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         } else {
           sa && (q = 33189);
         }
-        1026 === v.format && 6402 === q && 1012 !== v.type && 1014 !== v.type && (console.warn("THREE.WebGLRenderer: Use UnsignedShortType or UnsignedIntType for DepthFormat DepthTexture."), v.type = 1012, L = d.convert(v.type));
-        1027 === v.format && (q = 34041, 1020 !== v.type && (console.warn("THREE.WebGLRenderer: Use UnsignedInt248Type for DepthStencilFormat DepthTexture."), v.type = 1020, L = d.convert(v.type)));
-        c.texImage2D(3553, 0, q, b.width, b.height, 0, h, L, null);
+        1026 === u.format && 6402 === q && 1012 !== u.type && 1014 !== u.type && (console.warn("THREE.WebGLRenderer: Use UnsignedShortType or UnsignedIntType for DepthFormat DepthTexture."), u.type = 1012, K = d.convert(u.type));
+        1027 === u.format && (q = 34041, 1020 !== u.type && (console.warn("THREE.WebGLRenderer: Use UnsignedInt248Type for DepthStencilFormat DepthTexture."), u.type = 1020, K = d.convert(u.type)));
+        c.texImage2D(3553, 0, q, b.width, b.height, 0, h, K, null);
       } else {
-        if (v.isDataTexture) {
+        if (u.isDataTexture) {
           if (0 < r.length && l) {
-            for (var t = 0, u = r.length; t < u; t++) {
+            for (var t = 0, v = r.length; t < v; t++) {
               var w = r[t];
-              c.texImage2D(3553, t, q, w.width, w.height, 0, h, L, w.data);
+              c.texImage2D(3553, t, q, w.width, w.height, 0, h, K, w.data);
             }
-            v.generateMipmaps = !1;
+            u.generateMipmaps = !1;
             a.__maxMipLevel = r.length - 1;
           } else {
-            c.texImage2D(3553, 0, q, b.width, b.height, 0, h, L, b.data), a.__maxMipLevel = 0;
+            c.texImage2D(3553, 0, q, b.width, b.height, 0, h, K, b.data), a.__maxMipLevel = 0;
           }
         } else {
-          if (v.isCompressedTexture) {
+          if (u.isCompressedTexture) {
             t = 0;
-            for (u = r.length; t < u; t++) {
-              w = r[t], 1023 !== v.format && 1022 !== v.format ? null !== h ? c.compressedTexImage2D(3553, t, q, w.width, w.height, 0, w.data) : console.warn("THREE.WebGLRenderer: Attempt to load unsupported compressed texture format in .uploadTexture()") : c.texImage2D(3553, t, q, w.width, w.height, 0, h, L, w.data);
+            for (v = r.length; t < v; t++) {
+              w = r[t], 1023 !== u.format && 1022 !== u.format ? null !== h ? c.compressedTexImage2D(3553, t, q, w.width, w.height, 0, w.data) : console.warn("THREE.WebGLRenderer: Attempt to load unsupported compressed texture format in .uploadTexture()") : c.texImage2D(3553, t, q, w.width, w.height, 0, h, K, w.data);
             }
             a.__maxMipLevel = r.length - 1;
           } else {
-            if (v.isDataTexture2DArray) {
-              c.texImage3D(35866, 0, q, b.width, b.height, b.depth, 0, h, L, b.data), a.__maxMipLevel = 0;
+            if (u.isDataTexture2DArray) {
+              c.texImage3D(35866, 0, q, b.width, b.height, b.depth, 0, h, K, b.data), a.__maxMipLevel = 0;
             } else {
-              if (v.isDataTexture3D) {
-                c.texImage3D(32879, 0, q, b.width, b.height, b.depth, 0, h, L, b.data), a.__maxMipLevel = 0;
+              if (u.isDataTexture3D) {
+                c.texImage3D(32879, 0, q, b.width, b.height, b.depth, 0, h, K, b.data), a.__maxMipLevel = 0;
               } else {
                 if (0 < r.length && l) {
                   t = 0;
-                  for (u = r.length; t < u; t++) {
-                    w = r[t], c.texImage2D(3553, t, q, h, L, w);
+                  for (v = r.length; t < v; t++) {
+                    w = r[t], c.texImage2D(3553, t, q, h, K, w);
                   }
-                  v.generateMipmaps = !1;
+                  u.generateMipmaps = !1;
                   a.__maxMipLevel = r.length - 1;
                 } else {
-                  c.texImage2D(3553, 0, q, h, L, b), a.__maxMipLevel = 0;
+                  c.texImage2D(3553, 0, q, h, K, b), a.__maxMipLevel = 0;
                 }
               }
             }
           }
         }
       }
-      m(v, l) && p(e, v, b.width, b.height);
-      a.__version = v.version;
-      if (v.onUpdate) {
-        v.onUpdate(v);
+      m(u, l) && p(e, u, b.width, b.height);
+      a.__version = u.version;
+      if (u.onUpdate) {
+        u.onUpdate(u);
       }
     }
-    function x(a, v, e, l) {
-      var f = d.convert(v.texture.format), g = d.convert(v.texture.type), m = n(v.texture.internalFormat, f, g);
-      c.texImage2D(l, 0, m, v.width, v.height, 0, f, g, null);
+    function x(a, u, e, l) {
+      var f = d.convert(u.texture.format), g = d.convert(u.texture.type), m = n(u.texture.internalFormat, f, g);
+      c.texImage2D(l, 0, m, u.width, u.height, 0, f, g, null);
       k.bindFramebuffer(36160, a);
-      k.framebufferTexture2D(36160, e, l, b.get(v.texture).__webglTexture, 0);
+      k.framebufferTexture2D(36160, e, l, b.get(u.texture).__webglTexture, 0);
       k.bindFramebuffer(36160, null);
     }
-    function T(a, c, v) {
+    function T(a, c, u) {
       k.bindRenderbuffer(36161, a);
       if (c.depthBuffer && !c.stencilBuffer) {
-        v ? (v = z(c), k.renderbufferStorageMultisample(36161, v, 33189, c.width, c.height)) : k.renderbufferStorage(36161, 33189, c.width, c.height), k.framebufferRenderbuffer(36160, 36096, 36161, a);
+        u ? (u = z(c), k.renderbufferStorageMultisample(36161, u, 33189, c.width, c.height)) : k.renderbufferStorage(36161, 33189, c.width, c.height), k.framebufferRenderbuffer(36160, 36096, 36161, a);
       } else {
         if (c.depthBuffer && c.stencilBuffer) {
-          v ? (v = z(c), k.renderbufferStorageMultisample(36161, v, 35056, c.width, c.height)) : k.renderbufferStorage(36161, 34041, c.width, c.height), k.framebufferRenderbuffer(36160, 33306, 36161, a);
+          u ? (u = z(c), k.renderbufferStorageMultisample(36161, u, 35056, c.width, c.height)) : k.renderbufferStorage(36161, 34041, c.width, c.height), k.framebufferRenderbuffer(36160, 33306, 36161, a);
         } else {
           a = d.convert(c.texture.format);
           var b = d.convert(c.texture.type);
           a = n(c.texture.internalFormat, a, b);
-          v ? (v = z(c), k.renderbufferStorageMultisample(36161, v, a, c.width, c.height)) : k.renderbufferStorage(36161, a, c.width, c.height);
+          u ? (u = z(c), k.renderbufferStorageMultisample(36161, u, a, c.width, c.height)) : k.renderbufferStorage(36161, a, c.width, c.height);
         }
       }
       k.bindRenderbuffer(36161, null);
@@ -3210,7 +3214,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var sa = e.isWebGL2, ia = e.maxTextures, C = e.maxCubemapSize, A = e.maxTextureSize, D = e.maxSamples, oa = new WeakMap, Oa, B = !1;
     try {
       B = "undefined" !== typeof OffscreenCanvas && null !== (new OffscreenCanvas(1, 1)).getContext("2d");
-    } catch (Dk) {
+    } catch (Fk) {
     }
     var F = 0, E = {1E3:10497, 1001:33071, 1002:33648}, Ha = {1003:9728, 1004:9984, 1005:9986, 1006:9729, 1007:9985, 1008:9987}, pa = !1, G = !1;
     this.allocateTextureUnit = function() {
@@ -3224,40 +3228,41 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     };
     this.setTexture2D = r;
     this.setTexture2DArray = function(k, a) {
-      var v = b.get(k);
-      0 < k.version && v.__version !== k.version ? w(v, k, a) : (c.activeTexture(33984 + a), c.bindTexture(35866, v.__webglTexture));
+      var u = b.get(k);
+      0 < k.version && u.__version !== k.version ? w(u, k, a) : (c.activeTexture(33984 + a), c.bindTexture(35866, u.__webglTexture));
     };
     this.setTexture3D = function(k, a) {
-      var v = b.get(k);
-      0 < k.version && v.__version !== k.version ? w(v, k, a) : (c.activeTexture(33984 + a), c.bindTexture(32879, v.__webglTexture));
+      var u = b.get(k);
+      0 < k.version && u.__version !== k.version ? w(u, k, a) : (c.activeTexture(33984 + a), c.bindTexture(32879, u.__webglTexture));
     };
     this.setTextureCube = t;
-    this.setTextureCubeDynamic = u;
+    this.setTextureCubeDynamic = v;
     this.setupRenderTarget = function(a) {
-      var v = b.get(a), e = b.get(a.texture);
+      var u = b.get(a), e = b.get(a.texture);
       a.addEventListener("dispose", q);
       e.__webglTexture = k.createTexture();
       l.memory.textures++;
-      var f = !0 === a.isWebGLCubeRenderTarget, h = !0 === a.isWebGLMultisampleRenderTarget, L = g(a) || sa;
+      var f = !0 === a.isWebGLCubeRenderTarget, h = !0 === a.isWebGLMultisampleRenderTarget, K = g(a) || sa;
+      !sa || 1022 !== a.texture.format || 1015 !== a.texture.type && 1016 !== a.texture.type || (a.texture.format = 1023, console.warn("THREE.WebGLRenderer: Rendering to textures with RGB format is not supported. Using RGBA format instead."));
       if (f) {
-        for (v.__webglFramebuffer = [], h = 0; 6 > h; h++) {
-          v.__webglFramebuffer[h] = k.createFramebuffer();
+        for (u.__webglFramebuffer = [], h = 0; 6 > h; h++) {
+          u.__webglFramebuffer[h] = k.createFramebuffer();
         }
       } else {
-        if (v.__webglFramebuffer = k.createFramebuffer(), h) {
+        if (u.__webglFramebuffer = k.createFramebuffer(), h) {
           if (sa) {
-            v.__webglMultisampledFramebuffer = k.createFramebuffer();
-            v.__webglColorRenderbuffer = k.createRenderbuffer();
-            k.bindRenderbuffer(36161, v.__webglColorRenderbuffer);
+            u.__webglMultisampledFramebuffer = k.createFramebuffer();
+            u.__webglColorRenderbuffer = k.createRenderbuffer();
+            k.bindRenderbuffer(36161, u.__webglColorRenderbuffer);
             h = d.convert(a.texture.format);
             var t = d.convert(a.texture.type);
             h = n(a.texture.internalFormat, h, t);
             t = z(a);
             k.renderbufferStorageMultisample(36161, t, h, a.width, a.height);
-            k.bindFramebuffer(36160, v.__webglMultisampledFramebuffer);
-            k.framebufferRenderbuffer(36160, 36064, 36161, v.__webglColorRenderbuffer);
+            k.bindFramebuffer(36160, u.__webglMultisampledFramebuffer);
+            k.framebufferRenderbuffer(36160, 36064, 36161, u.__webglColorRenderbuffer);
             k.bindRenderbuffer(36161, null);
-            a.depthBuffer && (v.__webglDepthRenderbuffer = k.createRenderbuffer(), T(v.__webglDepthRenderbuffer, a, !0));
+            a.depthBuffer && (u.__webglDepthRenderbuffer = k.createRenderbuffer(), T(u.__webglDepthRenderbuffer, a, !0));
             k.bindFramebuffer(36160, null);
           } else {
             console.warn("THREE.WebGLRenderer: WebGLMultisampleRenderTarget can only be used with WebGL2.");
@@ -3266,17 +3271,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       if (f) {
         c.bindTexture(34067, e.__webglTexture);
-        ca(34067, a.texture, L);
+        ca(34067, a.texture, K);
         for (h = 0; 6 > h; h++) {
-          x(v.__webglFramebuffer[h], a, 36064, 34069 + h);
+          x(u.__webglFramebuffer[h], a, 36064, 34069 + h);
         }
-        m(a.texture, L) && p(34067, a.texture, a.width, a.height);
+        m(a.texture, K) && p(34067, a.texture, a.width, a.height);
         c.bindTexture(34067, null);
       } else {
-        c.bindTexture(3553, e.__webglTexture), ca(3553, a.texture, L), x(v.__webglFramebuffer, a, 36064, 3553), m(a.texture, L) && p(3553, a.texture, a.width, a.height), c.bindTexture(3553, null);
+        c.bindTexture(3553, e.__webglTexture), ca(3553, a.texture, K), x(u.__webglFramebuffer, a, 36064, 3553), m(a.texture, K) && p(3553, a.texture, a.width, a.height), c.bindTexture(3553, null);
       }
       if (a.depthBuffer) {
-        v = b.get(a);
+        u = b.get(a);
         e = !0 === a.isWebGLCubeRenderTarget;
         if (a.depthTexture) {
           if (e) {
@@ -3285,42 +3290,42 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           if (a && a.isWebGLCubeRenderTarget) {
             throw Error("Depth Texture with cube render targets is not supported");
           }
-          k.bindFramebuffer(36160, v.__webglFramebuffer);
+          k.bindFramebuffer(36160, u.__webglFramebuffer);
           if (!a.depthTexture || !a.depthTexture.isDepthTexture) {
             throw Error("renderTarget.depthTexture must be an instance of THREE.DepthTexture");
           }
           b.get(a.depthTexture).__webglTexture && a.depthTexture.image.width === a.width && a.depthTexture.image.height === a.height || (a.depthTexture.image.width = a.width, a.depthTexture.image.height = a.height, a.depthTexture.needsUpdate = !0);
           r(a.depthTexture, 0);
-          v = b.get(a.depthTexture).__webglTexture;
+          u = b.get(a.depthTexture).__webglTexture;
           if (1026 === a.depthTexture.format) {
-            k.framebufferTexture2D(36160, 36096, 3553, v, 0);
+            k.framebufferTexture2D(36160, 36096, 3553, u, 0);
           } else {
             if (1027 === a.depthTexture.format) {
-              k.framebufferTexture2D(36160, 33306, 3553, v, 0);
+              k.framebufferTexture2D(36160, 33306, 3553, u, 0);
             } else {
               throw Error("Unknown depthTexture format");
             }
           }
         } else {
           if (e) {
-            for (v.__webglDepthbuffer = [], e = 0; 6 > e; e++) {
-              k.bindFramebuffer(36160, v.__webglFramebuffer[e]), v.__webglDepthbuffer[e] = k.createRenderbuffer(), T(v.__webglDepthbuffer[e], a);
+            for (u.__webglDepthbuffer = [], e = 0; 6 > e; e++) {
+              k.bindFramebuffer(36160, u.__webglFramebuffer[e]), u.__webglDepthbuffer[e] = k.createRenderbuffer(), T(u.__webglDepthbuffer[e], a);
             }
           } else {
-            k.bindFramebuffer(36160, v.__webglFramebuffer), v.__webglDepthbuffer = k.createRenderbuffer(), T(v.__webglDepthbuffer, a);
+            k.bindFramebuffer(36160, u.__webglFramebuffer), u.__webglDepthbuffer = k.createRenderbuffer(), T(u.__webglDepthbuffer, a);
           }
         }
         k.bindFramebuffer(36160, null);
       }
     };
     this.updateRenderTargetMipmap = function(k) {
-      var a = k.texture, v = g(k) || sa;
-      if (m(a, v)) {
-        v = k.isWebGLCubeRenderTarget ? 34067 : 3553;
+      var a = k.texture, u = g(k) || sa;
+      if (m(a, u)) {
+        u = k.isWebGLCubeRenderTarget ? 34067 : 3553;
         var e = b.get(a).__webglTexture;
-        c.bindTexture(v, e);
-        p(v, a, k.width, k.height);
-        c.bindTexture(v, null);
+        c.bindTexture(u, e);
+        p(u, a, k.width, k.height);
+        c.bindTexture(u, null);
       }
     };
     this.updateMultisampleRenderTarget = function(a) {
@@ -3330,10 +3335,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           k.bindFramebuffer(36008, c.__webglMultisampledFramebuffer);
           k.bindFramebuffer(36009, c.__webglFramebuffer);
           c = a.width;
-          var v = a.height, e = 16384;
+          var u = a.height, e = 16384;
           a.depthBuffer && (e |= 256);
           a.stencilBuffer && (e |= 1024);
-          k.blitFramebuffer(0, 0, c, v, 0, 0, c, v, e, 9728);
+          k.blitFramebuffer(0, 0, c, u, 0, 0, c, u, e, 9728);
         } else {
           console.warn("THREE.WebGLRenderer: WebGLMultisampleRenderTarget can only be used with WebGL2.");
         }
@@ -3345,11 +3350,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     };
     this.safeSetTextureCube = function(k, a) {
       k && k.isWebGLCubeRenderTarget && (!1 === G && (console.warn("THREE.WebGLTextures.safeSetTextureCube: don't use cube render targets as textures. Use their .texture property instead."), G = !0), k = k.texture);
-      k && k.isCubeTexture || Array.isArray(k.image) && 6 === k.image.length ? t(k, a) : u(k, a);
+      k && k.isCubeTexture || Array.isArray(k.image) && 6 === k.image.length ? t(k, a) : v(k, a);
     };
   }
-  function Zh(k, a, c) {
-    var v = c.isWebGL2;
+  function ai(k, a, c) {
+    var u = c.isWebGL2;
     return {convert:function(k) {
       if (1009 === k) {
         return 5121;
@@ -3382,7 +3387,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         return 5126;
       }
       if (1016 === k) {
-        if (v) {
+        if (u) {
           return 5131;
         }
         var c = a.get("OES_texture_half_float");
@@ -3480,7 +3485,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         return c = a.get("WEBGL_compressed_texture_astc"), null !== c ? k : null;
       }
       if (1020 === k) {
-        if (v) {
+        if (u) {
           return 34042;
         }
         c = a.get("WEBGL_depth_texture");
@@ -3496,12 +3501,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     t.call(this);
     this.type = "Group";
   }
-  function $h(k, a) {
+  function bi(k, a) {
     function c(k) {
       var a = t.get(k.inputSource);
       a && (a.targetRay && a.targetRay.dispatchEvent({type:k.type}), a.grip && a.grip.dispatchEvent({type:k.type}));
     }
-    function v() {
+    function u() {
       t.forEach(function(k, a) {
         k.targetRay && (k.targetRay.dispatchEvent({type:"disconnected", data:a}), k.targetRay.visible = !1);
         k.grip && (k.grip.dispatchEvent({type:"disconnected", data:a}), k.grip.visible = !1);
@@ -3526,12 +3531,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       for (c = 0; c < k.removed.length; c++) {
         a = k.removed[c];
-        var v = t.get(a);
-        v && (v.targetRay && v.targetRay.dispatchEvent({type:"disconnected", data:a}), v.grip && v.grip.dispatchEvent({type:"disconnected", data:a}), t.delete(a));
+        var u = t.get(a);
+        u && (u.targetRay && u.targetRay.dispatchEvent({type:"disconnected", data:a}), u.grip && u.grip.dispatchEvent({type:"disconnected", data:a}), t.delete(a));
       }
       for (c = 0; c < k.added.length; c++) {
-        if (a = k.added[c], v = t.get(a)) {
-          v.targetRay && v.targetRay.dispatchEvent({type:"connected", data:a}), v.grip && v.grip.dispatchEvent({type:"connected", data:a});
+        if (a = k.added[c], u = t.get(a)) {
+          u.targetRay && u.targetRay.dispatchEvent({type:"connected", data:a}), u.grip && u.grip.dispatchEvent({type:"connected", data:a});
         }
       }
     }
@@ -3539,13 +3544,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       null === a ? k.matrixWorld.copy(k.matrix) : k.matrixWorld.multiplyMatrices(a.matrixWorld, k.matrix);
       k.matrixWorldInverse.getInverse(k.matrixWorld);
     }
-    var l = this, g = null, p = 1, n = null, h = "local-floor", q = null, r = [], t = new Map, u = new ha;
-    u.layers.enable(1);
-    u.viewport = new f;
+    var l = this, g = null, p = 1, n = null, h = "local-floor", q = null, r = [], t = new Map, v = new ha;
+    v.layers.enable(1);
+    v.viewport = new f;
     var y = new ha;
     y.layers.enable(2);
     y.viewport = new f;
-    var w = new gf([u, y]);
+    var w = new gf([v, y]);
     w.layers.enable(1);
     w.layers.enable(2);
     var x = null, T = null;
@@ -3577,66 +3582,66 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     };
     this.setSession = function(k) {
       g = k;
-      null !== g && (g.addEventListener("select", c), g.addEventListener("selectstart", c), g.addEventListener("selectend", c), g.addEventListener("squeeze", c), g.addEventListener("squeezestart", c), g.addEventListener("squeezeend", c), g.addEventListener("end", v), k = a.getContextAttributes(), k = new XRWebGLLayer(g, a, {antialias:k.antialias, alpha:k.alpha, depth:k.depth, stencil:k.stencil, framebufferScaleFactor:p}), g.updateRenderState({baseLayer:k}), g.requestReferenceSpace(h).then(b), g.addEventListener("inputsourceschange", 
+      null !== g && (g.addEventListener("select", c), g.addEventListener("selectstart", c), g.addEventListener("selectend", c), g.addEventListener("squeeze", c), g.addEventListener("squeezestart", c), g.addEventListener("squeezeend", c), g.addEventListener("end", u), k = a.getContextAttributes(), k = new XRWebGLLayer(g, a, {antialias:k.antialias, alpha:k.alpha, depth:k.depth, stencil:k.stencil, framebufferScaleFactor:p}), g.updateRenderState({baseLayer:k}), g.requestReferenceSpace(h).then(b), g.addEventListener("inputsourceschange", 
       e));
     };
     var z = new m, C = new m;
     this.getCamera = function(k) {
-      w.near = y.near = u.near = k.near;
-      w.far = y.far = u.far = k.far;
+      w.near = y.near = v.near = k.near;
+      w.far = y.far = v.far = k.far;
       if (x !== w.near || T !== w.far) {
         g.updateRenderState({depthNear:w.near, depthFar:w.far}), x = w.near, T = w.far;
       }
       var a = k.parent, c = w.cameras;
       d(w, a);
-      for (var v = 0; v < c.length; v++) {
-        d(c[v], a);
+      for (var u = 0; u < c.length; u++) {
+        d(c[u], a);
       }
       k.matrixWorld.copy(w.matrixWorld);
       k = k.children;
-      v = 0;
-      for (a = k.length; v < a; v++) {
-        k[v].updateMatrixWorld(!0);
+      u = 0;
+      for (a = k.length; u < a; u++) {
+        k[u].updateMatrixWorld(!0);
       }
-      z.setFromMatrixPosition(u.matrixWorld);
+      z.setFromMatrixPosition(v.matrixWorld);
       C.setFromMatrixPosition(y.matrixWorld);
-      v = z.distanceTo(C);
-      var b = u.projectionMatrix.elements, e = y.projectionMatrix.elements, l = b[14] / (b[10] - 1);
+      u = z.distanceTo(C);
+      var b = v.projectionMatrix.elements, e = y.projectionMatrix.elements, l = b[14] / (b[10] - 1);
       k = b[14] / (b[10] + 1);
       a = (b[9] + 1) / b[5];
       c = (b[9] - 1) / b[5];
       var f = (b[8] - 1) / b[0], m = (e[8] + 1) / e[0];
       e = l * f;
       b = l * m;
-      m = v / (-f + m);
+      m = u / (-f + m);
       f = m * -f;
-      u.matrixWorld.decompose(w.position, w.quaternion, w.scale);
+      v.matrixWorld.decompose(w.position, w.quaternion, w.scale);
       w.translateX(f);
       w.translateZ(m);
       w.matrixWorld.compose(w.position, w.quaternion, w.scale);
       w.matrixWorldInverse.getInverse(w.matrixWorld);
       l += m;
       m = k + m;
-      w.projectionMatrix.makePerspective(e - f, b + (v - f), a * k / m * l, c * k / m * l, l, m);
+      w.projectionMatrix.makePerspective(e - f, b + (u - f), a * k / m * l, c * k / m * l, l, m);
       return w;
     };
     var A = null, D = new ta;
     D.setAnimationLoop(function(a, c) {
       q = c.getViewerPose(n);
       if (null !== q) {
-        var v = q.views, b = g.renderState.baseLayer;
+        var u = q.views, b = g.renderState.baseLayer;
         k.setFramebuffer(b.framebuffer);
-        for (var e = 0; e < v.length; e++) {
-          var d = v[e], l = b.getViewport(d), f = w.cameras[e];
+        for (var e = 0; e < u.length; e++) {
+          var d = u[e], l = b.getViewport(d), f = w.cameras[e];
           f.matrix.fromArray(d.transform.matrix);
           f.projectionMatrix.fromArray(d.projectionMatrix);
           f.viewport.set(l.x, l.y, l.width, l.height);
           0 === e && w.matrix.copy(f.matrix);
         }
       }
-      v = g.inputSources;
+      u = g.inputSources;
       for (e = 0; e < r.length; e++) {
-        b = r[e], d = v[e], f = l = null, d && (b.targetRay && (l = c.getPose(d.targetRaySpace, n), null !== l && (b.targetRay.matrix.fromArray(l.transform.matrix), b.targetRay.matrix.decompose(b.targetRay.position, b.targetRay.rotation, b.targetRay.scale))), b.grip && d.gripSpace && (f = c.getPose(d.gripSpace, n), null !== f && (b.grip.matrix.fromArray(f.transform.matrix), b.grip.matrix.decompose(b.grip.position, b.grip.rotation, b.grip.scale)))), b.targetRay && (b.targetRay.visible = null !== l), 
+        b = r[e], d = u[e], f = l = null, d && (b.targetRay && (l = c.getPose(d.targetRaySpace, n), null !== l && (b.targetRay.matrix.fromArray(l.transform.matrix), b.targetRay.matrix.decompose(b.targetRay.position, b.targetRay.rotation, b.targetRay.scale))), b.grip && d.gripSpace && (f = c.getPose(d.gripSpace, n), null !== f && (b.grip.matrix.fromArray(f.transform.matrix), b.grip.matrix.decompose(b.grip.position, b.grip.rotation, b.grip.scale)))), b.targetRay && (b.targetRay.visible = null !== l), 
         b.grip && (b.grip.visible = null !== f);
       }
       A && A(a, c);
@@ -3647,27 +3652,27 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.dispose = function() {
     };
   }
-  function vg(k) {
+  function wg(k) {
     var a;
     function c() {
       Ba = new pb(U);
       ha = new Ac(U, Ba, k);
       !1 === ha.isWebGL2 && (Ba.get("WEBGL_depth_texture"), Ba.get("OES_texture_float"), Ba.get("OES_texture_half_float"), Ba.get("OES_texture_half_float_linear"), Ba.get("OES_standard_derivatives"), Ba.get("OES_element_index_uint"), Ba.get("ANGLE_instanced_arrays"));
       Ba.get("OES_texture_float_linear");
-      sb = new Zh(U, Ba, ha);
-      la = new Wj(U, Ba, ha);
+      sb = new ai(U, Ba, ha);
+      la = new Yj(U, Ba, ha);
       la.scissor(R.copy(gc).multiplyScalar(Pa).floor());
       la.viewport(Z.copy(fc).multiplyScalar(Pa).floor());
       ja = new Rb(U);
-      Ra = new Mj;
-      ra = new Xj(U, Ba, la, Ra, ha, sb, ja);
+      Ra = new Oj;
+      ra = new Zj(U, Ba, la, Ra, ha, sb, ja);
       hc = new Qb(U, ha);
       ce = new Bc(U, hc, ja);
       wa = new Cc(U, ce, hc, ja);
       ea = new jb(U);
-      xa = new Lj(H, Ba, ha);
-      hd = new Pj;
-      za = new Vj;
+      xa = new Nj(H, Ba, ha);
+      hd = new Rj;
+      za = new Xj;
       Gb = new ec(H, la, wa, B);
       na = new $d(U, Ba, ja, ha);
       ff = new Db(U, Ba, ja, ha);
@@ -3705,7 +3710,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         H.renderBufferImmediate(k, a);
       });
     }
-    function p(k, a, c, v) {
+    function p(k, a, c, u) {
       if (!1 !== k.visible) {
         if (k.layers.test(a.layers)) {
           if (k.isGroup) {
@@ -3719,17 +3724,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
               } else {
                 if (k.isSprite) {
                   if (!k.frustumCulled || X.intersectsSprite(k)) {
-                    v && Y.setFromMatrixPosition(k.matrixWorld).applyMatrix4(Ec);
+                    u && Y.setFromMatrixPosition(k.matrixWorld).applyMatrix4(Ec);
                     var b = wa.update(k), e = k.material;
                     e.visible && pa.push(k, b, e, c, Y.z, null);
                   }
                 } else {
                   if (k.isImmediateRenderObject) {
-                    v && Y.setFromMatrixPosition(k.matrixWorld).applyMatrix4(Ec), pa.push(k, null, k.material, c, Y.z, null);
+                    u && Y.setFromMatrixPosition(k.matrixWorld).applyMatrix4(Ec), pa.push(k, null, k.material, c, Y.z, null);
                   } else {
                     if (k.isMesh || k.isLine || k.isPoints) {
                       if (k.isSkinnedMesh && k.skeleton.frame !== ja.render.frame && (k.skeleton.update(), k.skeleton.frame = ja.render.frame), !k.frustumCulled || X.intersectsObject(k)) {
-                        if (v && Y.setFromMatrixPosition(k.matrixWorld).applyMatrix4(Ec), b = wa.update(k), e = k.material, Array.isArray(e)) {
+                        if (u && Y.setFromMatrixPosition(k.matrixWorld).applyMatrix4(Ec), b = wa.update(k), e = k.material, Array.isArray(e)) {
                           for (var d = b.groups, l = 0, f = d.length; l < f; l++) {
                             var g = d[l], m = e[g.materialIndex];
                             m && m.visible && pa.push(k, b, m, c, Y.z, g);
@@ -3748,54 +3753,54 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         k = k.children;
         l = 0;
         for (f = k.length; l < f; l++) {
-          p(k[l], a, c, v);
+          p(k[l], a, c, u);
         }
       }
     }
-    function q(k, a, c, v) {
+    function q(k, a, c, u) {
       for (var b = 0, e = k.length; b < e; b++) {
-        var l = k[b], d = l.object, f = l.geometry, g = void 0 === v ? l.material : v;
-        l = l.group;
+        var d = k[b], l = d.object, f = d.geometry, g = void 0 === u ? d.material : u;
+        d = d.group;
         if (c.isArrayCamera) {
           gd = c;
           for (var m = c.cameras, p = 0, n = m.length; p < n; p++) {
             var h = m[p];
-            d.layers.test(h.layers) && (la.viewport(Z.copy(h.viewport)), G.setupLights(h), r(d, a, h, f, g, l));
+            l.layers.test(h.layers) && (la.viewport(Z.copy(h.viewport)), G.setupLights(h), r(l, a, h, f, g, d));
           }
         } else {
-          gd = null, r(d, a, c, f, g, l);
+          gd = null, r(l, a, c, f, g, d);
         }
       }
     }
-    function r(k, c, v, b, e, l) {
-      k.onBeforeRender(H, c, v, b, e, l);
-      G = za.get(c, gd || v);
-      k.modelViewMatrix.multiplyMatrices(v.matrixWorldInverse, k.matrixWorld);
+    function r(k, c, u, b, e, d) {
+      k.onBeforeRender(H, c, u, b, e, d);
+      G = za.get(c, gd || u);
+      k.modelViewMatrix.multiplyMatrices(u.matrixWorldInverse, k.matrixWorld);
       k.normalMatrix.getNormalMatrix(k.modelViewMatrix);
       if (k.isImmediateRenderObject) {
-        var d = u(v, c, e, k);
+        var l = v(u, c, e, k);
         la.setMaterial(e);
         ba = a = null;
         J = !1;
-        g(k, d);
+        g(k, l);
       } else {
-        H.renderBufferDirect(v, c, b, e, k, l);
+        H.renderBufferDirect(u, c, b, e, k, d);
       }
-      k.onAfterRender(H, c, v, b, e, l);
-      G = za.get(c, gd || v);
+      k.onAfterRender(H, c, u, b, e, d);
+      G = za.get(c, gd || u);
     }
     function t(k, a, c) {
-      var v = Ra.get(k), b = G.state.lights, e = b.state.version;
+      var u = Ra.get(k), b = G.state.lights, e = b.state.version;
       c = xa.getParameters(k, b.state, G.state.shadowsArray, a, fa.numPlanes, fa.numIntersection, c);
-      var f = xa.getProgramCacheKey(c), g = v.program, m = !0;
+      var f = xa.getProgramCacheKey(c), g = u.program, m = !0;
       if (void 0 === g) {
         k.addEventListener("dispose", d);
       } else {
         if (g.cacheKey !== f) {
           l(k);
         } else {
-          if (v.lightsStateVersion !== e) {
-            v.lightsStateVersion = e;
+          if (u.lightsStateVersion !== e) {
+            u.lightsStateVersion = e;
           } else {
             if (void 0 !== c.shaderID) {
               return;
@@ -3804,7 +3809,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           m = !1;
         }
       }
-      m && (g = xa.acquireProgram(c, f), v.program = g, v.uniforms = c.uniforms, v.environment = k.isMeshStandardMaterial ? a.environment : null, v.outputEncoding = H.outputEncoding, k.program = g);
+      m && (g = xa.acquireProgram(c, f), u.program = g, u.uniforms = c.uniforms, u.environment = k.isMeshStandardMaterial ? a.environment : null, u.outputEncoding = H.outputEncoding, k.program = g);
       c = g.getAttributes();
       if (k.morphTargets) {
         for (f = k.numSupportedMorphTargets = 0; f < H.maxMorphTargets; f++) {
@@ -3816,41 +3821,41 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           0 <= c["morphNormal" + f] && k.numSupportedMorphNormals++;
         }
       }
-      c = v.uniforms;
+      c = u.uniforms;
       if (!k.isShaderMaterial && !k.isRawShaderMaterial || !0 === k.clipping) {
-        v.numClippingPlanes = fa.numPlanes, v.numIntersection = fa.numIntersection, c.clippingPlanes = fa.uniform;
+        u.numClippingPlanes = fa.numPlanes, u.numIntersection = fa.numIntersection, c.clippingPlanes = fa.uniform;
       }
-      v.fog = a.fog;
-      v.needsLights = k.isMeshLambertMaterial || k.isMeshToonMaterial || k.isMeshPhongMaterial || k.isMeshStandardMaterial || k.isShadowMaterial || k.isShaderMaterial && !0 === k.lights;
-      v.lightsStateVersion = e;
-      v.needsLights && (c.ambientLightColor.value = b.state.ambient, c.lightProbe.value = b.state.probe, c.directionalLights.value = b.state.directional, c.directionalLightShadows.value = b.state.directionalShadow, c.spotLights.value = b.state.spot, c.spotLightShadows.value = b.state.spotShadow, c.rectAreaLights.value = b.state.rectArea, c.pointLights.value = b.state.point, c.pointLightShadows.value = b.state.pointShadow, c.hemisphereLights.value = b.state.hemi, c.directionalShadowMap.value = b.state.directionalShadowMap, 
+      u.fog = a.fog;
+      u.needsLights = k.isMeshLambertMaterial || k.isMeshToonMaterial || k.isMeshPhongMaterial || k.isMeshStandardMaterial || k.isShadowMaterial || k.isShaderMaterial && !0 === k.lights;
+      u.lightsStateVersion = e;
+      u.needsLights && (c.ambientLightColor.value = b.state.ambient, c.lightProbe.value = b.state.probe, c.directionalLights.value = b.state.directional, c.directionalLightShadows.value = b.state.directionalShadow, c.spotLights.value = b.state.spot, c.spotLightShadows.value = b.state.spotShadow, c.rectAreaLights.value = b.state.rectArea, c.pointLights.value = b.state.point, c.pointLightShadows.value = b.state.pointShadow, c.hemisphereLights.value = b.state.hemi, c.directionalShadowMap.value = b.state.directionalShadowMap, 
       c.directionalShadowMatrix.value = b.state.directionalShadowMatrix, c.spotShadowMap.value = b.state.spotShadowMap, c.spotShadowMatrix.value = b.state.spotShadowMatrix, c.pointShadowMap.value = b.state.pointShadowMap, c.pointShadowMatrix.value = b.state.pointShadowMatrix);
-      k = v.program.getUniforms();
+      k = u.program.getUniforms();
       k = ic.seqWithValue(k.seq, c);
-      v.uniformsList = k;
+      u.uniformsList = k;
     }
-    function u(k, a, c, v) {
+    function v(k, a, c, u) {
       ra.resetTextureUnits();
-      var b = a.fog, e = c.isMeshStandardMaterial ? a.environment : null, l = Ra.get(c), d = G.state.lights;
-      ka && (be || k !== Q) && fa.setState(c.clippingPlanes, c.clipIntersection, c.clipShadows, k, l, k === Q && c.id === S);
-      c.version === l.__version ? void 0 === l.program ? t(c, a, v) : c.fog && l.fog !== b ? t(c, a, v) : l.environment !== e ? t(c, a, v) : l.needsLights && l.lightsStateVersion !== d.state.version ? t(c, a, v) : void 0 === l.numClippingPlanes || l.numClippingPlanes === fa.numPlanes && l.numIntersection === fa.numIntersection ? l.outputEncoding !== H.outputEncoding && t(c, a, v) : t(c, a, v) : (t(c, a, v), l.__version = c.version);
+      var b = a.fog, e = c.isMeshStandardMaterial ? a.environment : null, d = Ra.get(c), l = G.state.lights;
+      ka && (be || k !== Q) && fa.setState(c.clippingPlanes, c.clipIntersection, c.clipShadows, k, d, k === Q && c.id === S);
+      c.version === d.__version ? void 0 === d.program ? t(c, a, u) : c.fog && d.fog !== b ? t(c, a, u) : d.environment !== e ? t(c, a, u) : d.needsLights && d.lightsStateVersion !== l.state.version ? t(c, a, u) : void 0 === d.numClippingPlanes || d.numClippingPlanes === fa.numPlanes && d.numIntersection === fa.numIntersection ? d.outputEncoding !== H.outputEncoding && t(c, a, u) : t(c, a, u) : (t(c, a, u), d.__version = c.version);
       var f = !1, g = !1, m = !1;
-      a = l.program;
-      d = a.getUniforms();
-      var p = l.uniforms;
+      a = d.program;
+      l = a.getUniforms();
+      var p = d.uniforms;
       la.useProgram(a.program) && (m = g = f = !0);
       c.id !== S && (S = c.id, g = !0);
       if (f || Q !== k) {
-        d.setValue(U, "projectionMatrix", k.projectionMatrix);
-        ha.logarithmicDepthBuffer && d.setValue(U, "logDepthBufFC", 2 / (Math.log(k.far + 1) / Math.LN2));
+        l.setValue(U, "projectionMatrix", k.projectionMatrix);
+        ha.logarithmicDepthBuffer && l.setValue(U, "logDepthBufFC", 2 / (Math.log(k.far + 1) / Math.LN2));
         Q !== k && (Q = k, m = g = !0);
         if (c.isShaderMaterial || c.isMeshPhongMaterial || c.isMeshToonMaterial || c.isMeshStandardMaterial || c.envMap) {
-          f = d.map.cameraPosition, void 0 !== f && f.setValue(U, Y.setFromMatrixPosition(k.matrixWorld));
+          f = l.map.cameraPosition, void 0 !== f && f.setValue(U, Y.setFromMatrixPosition(k.matrixWorld));
         }
-        (c.isMeshPhongMaterial || c.isMeshToonMaterial || c.isMeshLambertMaterial || c.isMeshBasicMaterial || c.isMeshStandardMaterial || c.isShaderMaterial) && d.setValue(U, "isOrthographic", !0 === k.isOrthographicCamera);
-        (c.isMeshPhongMaterial || c.isMeshToonMaterial || c.isMeshLambertMaterial || c.isMeshBasicMaterial || c.isMeshStandardMaterial || c.isShaderMaterial || c.skinning) && d.setValue(U, "viewMatrix", k.matrixWorldInverse);
+        (c.isMeshPhongMaterial || c.isMeshToonMaterial || c.isMeshLambertMaterial || c.isMeshBasicMaterial || c.isMeshStandardMaterial || c.isShaderMaterial) && l.setValue(U, "isOrthographic", !0 === k.isOrthographicCamera);
+        (c.isMeshPhongMaterial || c.isMeshToonMaterial || c.isMeshLambertMaterial || c.isMeshBasicMaterial || c.isMeshStandardMaterial || c.isShaderMaterial || c.skinning) && l.setValue(U, "viewMatrix", k.matrixWorldInverse);
       }
-      if (c.skinning && (d.setOptional(U, v, "bindMatrix"), d.setOptional(U, v, "bindMatrixInverse"), k = v.skeleton)) {
+      if (c.skinning && (l.setOptional(U, u, "bindMatrix"), l.setOptional(U, u, "bindMatrixInverse"), k = u.skeleton)) {
         if (f = k.bones, ha.floatVertexTextures) {
           if (void 0 === k.boneTexture) {
             f = Math.sqrt(4 * f.length);
@@ -3863,19 +3868,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             k.boneTexture = h;
             k.boneTextureSize = f;
           }
-          d.setValue(U, "boneTexture", k.boneTexture, ra);
-          d.setValue(U, "boneTextureSize", k.boneTextureSize);
+          l.setValue(U, "boneTexture", k.boneTexture, ra);
+          l.setValue(U, "boneTextureSize", k.boneTextureSize);
         } else {
-          d.setOptional(U, k, "boneMatrices");
+          l.setOptional(U, k, "boneMatrices");
         }
       }
-      if (g || l.receiveShadow !== v.receiveShadow) {
-        l.receiveShadow = v.receiveShadow, d.setValue(U, "receiveShadow", v.receiveShadow);
+      if (g || d.receiveShadow !== u.receiveShadow) {
+        d.receiveShadow = u.receiveShadow, l.setValue(U, "receiveShadow", u.receiveShadow);
       }
       if (g) {
-        d.setValue(U, "toneMappingExposure", H.toneMappingExposure);
-        d.setValue(U, "toneMappingWhitePoint", H.toneMappingWhitePoint);
-        l.needsLights && (g = m, p.ambientLightColor.needsUpdate = g, p.lightProbe.needsUpdate = g, p.directionalLights.needsUpdate = g, p.directionalLightShadows.needsUpdate = g, p.pointLights.needsUpdate = g, p.pointLightShadows.needsUpdate = g, p.spotLights.needsUpdate = g, p.spotLightShadows.needsUpdate = g, p.rectAreaLights.needsUpdate = g, p.hemisphereLights.needsUpdate = g);
+        l.setValue(U, "toneMappingExposure", H.toneMappingExposure);
+        l.setValue(U, "toneMappingWhitePoint", H.toneMappingWhitePoint);
+        d.needsLights && (g = m, p.ambientLightColor.needsUpdate = g, p.lightProbe.needsUpdate = g, p.directionalLights.needsUpdate = g, p.directionalLightShadows.needsUpdate = g, p.pointLights.needsUpdate = g, p.pointLightShadows.needsUpdate = g, p.spotLights.needsUpdate = g, p.spotLightShadows.needsUpdate = g, p.rectAreaLights.needsUpdate = g, p.hemisphereLights.needsUpdate = g);
         b && c.fog && (p.fogColor.value.copy(b.color), b.isFog ? (p.fogNear.value = b.near, p.fogFar.value = b.far) : b.isFogExp2 && (p.fogDensity.value = b.density));
         if (c.isMeshBasicMaterial) {
           w(p, c);
@@ -3892,7 +3897,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
                 c.displacementScale, p.displacementBias.value = c.displacementBias);
               } else {
                 if (c.isMeshStandardMaterial) {
-                  w(p, c, e), c.isMeshPhysicalMaterial ? (x(p, c, e), p.reflectivity.value = c.reflectivity, p.clearcoat.value = c.clearcoat, p.clearcoatRoughness.value = c.clearcoatRoughness, c.sheen && p.sheen.value.copy(c.sheen), c.clearcoatNormalMap && (p.clearcoatNormalScale.value.copy(c.clearcoatNormalScale), p.clearcoatNormalMap.value = c.clearcoatNormalMap, 1 === c.side && p.clearcoatNormalScale.value.negate()), p.transparency.value = c.transparency) : x(p, c, e);
+                  w(p, c, e), c.isMeshPhysicalMaterial ? (x(p, c, e), p.reflectivity.value = c.reflectivity, p.clearcoat.value = c.clearcoat, p.clearcoatRoughness.value = c.clearcoatRoughness, c.sheen && p.sheen.value.copy(c.sheen), c.clearcoatMap && (p.clearcoatMap.value = c.clearcoatMap), c.clearcoatRoughnessMap && (p.clearcoatRoughnessMap.value = c.clearcoatRoughnessMap), c.clearcoatNormalMap && (p.clearcoatNormalScale.value.copy(c.clearcoatNormalScale), p.clearcoatNormalMap.value = c.clearcoatNormalMap, 
+                  1 === c.side && p.clearcoatNormalScale.value.negate()), p.transparency.value = c.transparency) : x(p, c, e);
                 } else {
                   if (c.isMeshMatcapMaterial) {
                     w(p, c), c.matcap && (p.matcap.value = c.matcap), c.bumpMap && (p.bumpMap.value = c.bumpMap, p.bumpScale.value = c.bumpScale, 1 === c.side && (p.bumpScale.value *= -1)), c.normalMap && (p.normalMap.value = c.normalMap, p.normalScale.value.copy(c.normalScale), 1 === c.side && p.normalScale.value.negate()), c.displacementMap && (p.displacementMap.value = c.displacementMap, p.displacementScale.value = c.displacementScale, p.displacementBias.value = c.displacementBias);
@@ -3917,11 +3923,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
                               c.map && (p.map.value = c.map);
                               c.alphaMap && (p.alphaMap.value = c.alphaMap);
                               if (c.map) {
-                                var L = c.map;
+                                var K = c.map;
                               } else {
-                                c.alphaMap && (L = c.alphaMap);
+                                c.alphaMap && (K = c.alphaMap);
                               }
-                              void 0 !== L && (!0 === L.matrixAutoUpdate && L.updateMatrix(), p.uvTransform.value.copy(L.matrix));
+                              void 0 !== K && (!0 === K.matrixAutoUpdate && K.updateMatrix(), p.uvTransform.value.copy(K.matrix));
                             } else {
                               if (c.isSpriteMaterial) {
                                 p.diffuse.value.copy(c.color);
@@ -3951,14 +3957,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         }
         void 0 !== p.ltc_1 && (p.ltc_1.value = aa.LTC_1);
         void 0 !== p.ltc_2 && (p.ltc_2.value = aa.LTC_2);
-        ic.upload(U, l.uniformsList, p, ra);
+        ic.upload(U, d.uniformsList, p, ra);
         c.isShaderMaterial && (c.uniformsNeedUpdate = !1);
       }
-      c.isShaderMaterial && !0 === c.uniformsNeedUpdate && (ic.upload(U, l.uniformsList, p, ra), c.uniformsNeedUpdate = !1);
-      c.isSpriteMaterial && d.setValue(U, "center", v.center);
-      d.setValue(U, "modelViewMatrix", v.modelViewMatrix);
-      d.setValue(U, "normalMatrix", v.normalMatrix);
-      d.setValue(U, "modelMatrix", v.matrixWorld);
+      c.isShaderMaterial && !0 === c.uniformsNeedUpdate && (ic.upload(U, d.uniformsList, p, ra), c.uniformsNeedUpdate = !1);
+      c.isSpriteMaterial && l.setValue(U, "center", u.center);
+      l.setValue(U, "modelViewMatrix", u.modelViewMatrix);
+      l.setValue(U, "normalMatrix", u.normalMatrix);
+      l.setValue(U, "modelMatrix", u.matrixWorld);
       return a;
     }
     function w(k, a, c) {
@@ -3974,11 +3980,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a.lightMap && (k.lightMap.value = a.lightMap, k.lightMapIntensity.value = a.lightMapIntensity);
       a.aoMap && (k.aoMap.value = a.aoMap, k.aoMapIntensity.value = a.aoMapIntensity);
       if (a.map) {
-        var v = a.map;
+        var u = a.map;
       } else {
-        a.specularMap ? v = a.specularMap : a.displacementMap ? v = a.displacementMap : a.normalMap ? v = a.normalMap : a.bumpMap ? v = a.bumpMap : a.roughnessMap ? v = a.roughnessMap : a.metalnessMap ? v = a.metalnessMap : a.alphaMap ? v = a.alphaMap : a.emissiveMap && (v = a.emissiveMap);
+        a.specularMap ? u = a.specularMap : a.displacementMap ? u = a.displacementMap : a.normalMap ? u = a.normalMap : a.bumpMap ? u = a.bumpMap : a.roughnessMap ? u = a.roughnessMap : a.metalnessMap ? u = a.metalnessMap : a.alphaMap ? u = a.alphaMap : a.emissiveMap && (u = a.emissiveMap);
       }
-      void 0 !== v && (v.isWebGLRenderTarget && (v = v.texture), !0 === v.matrixAutoUpdate && v.updateMatrix(), k.uvTransform.value.copy(v.matrix));
+      void 0 !== u && (u.isWebGLRenderTarget && (u = u.texture), !0 === u.matrixAutoUpdate && u.updateMatrix(), k.uvTransform.value.copy(u.matrix));
       if (a.aoMap) {
         var b = a.aoMap;
       } else {
@@ -4013,7 +4019,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.toneMappingWhitePoint = this.toneMappingExposure = this.toneMapping = 1;
     this.maxMorphTargets = 8;
     this.maxMorphNormals = 4;
-    var H = this, M = !1, P = null, O = 0, K = 0, I = null, N = null, S = -1;
+    var H = this, M = !1, P = null, O = 0, L = 0, I = null, N = null, S = -1;
     var ba = a = null;
     var J = !1;
     var Q = null, gd = null, Z = new f, R = new f, ae = null, Sb = T.width, V = T.height, Pa = 1, W = null, ef = null, fc = new f(0, 0, Sb, V), gc = new f(0, 0, Sb, V), da = !1, X = new Ga, fa = new Za, ka = !1, be = !1, Ec = new n, Y = new m;
@@ -4031,14 +4037,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       void 0 === U.getShaderPrecisionFormat && (U.getShaderPrecisionFormat = function() {
         return {rangeMin:1, rangeMax:1, precision:1};
       });
-    } catch (ai) {
-      throw console.error("THREE.WebGLRenderer: " + ai.message), ai;
+    } catch (ci) {
+      throw console.error("THREE.WebGLRenderer: " + ci.message), ci;
     }
     var Ba, ha, la, ja, Ra, ra, hc, ce, wa, xa, hd, za, Gb, ea, na, ff, sb;
     c();
-    var qa = new $h(H, U);
+    var qa = new bi(H, U);
     this.xr = qa;
-    var va = new Yh(H, wa, ha.maxTextureSize);
+    var va = new $h(H, wa, ha.maxTextureSize);
     this.shadowMap = va;
     this.getContext = function() {
       return U;
@@ -4086,15 +4092,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.getViewport = function(k) {
       return k.copy(fc);
     };
-    this.setViewport = function(k, a, c, v) {
-      k.isVector4 ? fc.set(k.x, k.y, k.z, k.w) : fc.set(k, a, c, v);
+    this.setViewport = function(k, a, c, u) {
+      k.isVector4 ? fc.set(k.x, k.y, k.z, k.w) : fc.set(k, a, c, u);
       la.viewport(Z.copy(fc).multiplyScalar(Pa).floor());
     };
     this.getScissor = function(k) {
       return k.copy(gc);
     };
-    this.setScissor = function(k, a, c, v) {
-      k.isVector4 ? gc.set(k.x, k.y, k.z, k.w) : gc.set(k, a, c, v);
+    this.setScissor = function(k, a, c, u) {
+      k.isVector4 ? gc.set(k.x, k.y, k.z, k.w) : gc.set(k, a, c, u);
       la.scissor(R.copy(gc).multiplyScalar(Pa).floor());
     };
     this.getScissorTest = function() {
@@ -4122,17 +4128,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       Gb.setClearAlpha.apply(Gb, arguments);
     };
     this.clear = function(k, a, c) {
-      var v = 0;
+      var u = 0;
       if (void 0 === k || k) {
-        v |= 16384;
+        u |= 16384;
       }
       if (void 0 === a || a) {
-        v |= 256;
+        u |= 256;
       }
       if (void 0 === c || c) {
-        v |= 1024;
+        u |= 1024;
       }
-      U.clear(v);
+      U.clear(u);
     };
     this.clearColor = function() {
       this.clear(!0, !1, !1);
@@ -4152,6 +4158,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       wa.dispose();
       qa.dispose();
       ua.stop();
+      this.forceContextLoss();
     };
     this.renderBufferImmediate = function(k, a) {
       la.initAttributes();
@@ -4170,19 +4177,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       k.count = 0;
     };
     var Aa = new y;
-    this.renderBufferDirect = function(k, c, v, b, e, l) {
+    this.renderBufferDirect = function(k, c, u, b, e, d) {
       null === c && (c = Aa);
-      var d = e.isMesh && 0 > e.matrixWorld.determinant(), f = u(k, c, b, e);
-      la.setMaterial(b, d);
+      var l = e.isMesh && 0 > e.matrixWorld.determinant(), f = v(k, c, b, e);
+      la.setMaterial(b, l);
       var g = !1;
-      if (a !== v.id || ba !== f.id || J !== (!0 === b.wireframe)) {
-        a = v.id, ba = f.id, J = !0 === b.wireframe, g = !0;
+      if (a !== u.id || ba !== f.id || J !== (!0 === b.wireframe)) {
+        a = u.id, ba = f.id, J = !0 === b.wireframe, g = !0;
       }
       if (b.morphTargets || b.morphNormals) {
-        ea.update(e, v, b, f), g = !0;
+        ea.update(e, u, b, f), g = !0;
       }
-      k = v.index;
-      c = v.attributes.position;
+      k = u.index;
+      c = u.attributes.position;
       if (null === k) {
         if (void 0 === c || 0 === c.count) {
           return;
@@ -4193,36 +4200,36 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         }
       }
       var m = 1;
-      !0 === b.wireframe && (k = ce.getWireframeAttribute(v), m = 2);
-      d = na;
+      !0 === b.wireframe && (k = ce.getWireframeAttribute(u), m = 2);
+      l = na;
       if (null !== k) {
         var p = hc.get(k);
-        d = ff;
-        d.setIndex(p);
+        l = ff;
+        l.setIndex(p);
       }
       if (g) {
-        if (!1 !== ha.isWebGL2 || !e.isInstancedMesh && !v.isInstancedBufferGeometry || null !== Ba.get("ANGLE_instanced_arrays")) {
+        if (!1 !== ha.isWebGL2 || !e.isInstancedMesh && !u.isInstancedBufferGeometry || null !== Ba.get("ANGLE_instanced_arrays")) {
           la.initAttributes();
-          g = v.attributes;
+          g = u.attributes;
           f = f.getAttributes();
           var n = b.defaultAttributeValues;
           for (T in f) {
             var h = f[T];
             if (0 <= h) {
-              var L = g[T];
-              if (void 0 !== L) {
-                var q = L.normalized, r = L.itemSize, t = hc.get(L);
+              var K = g[T];
+              if (void 0 !== K) {
+                var q = K.normalized, r = K.itemSize, t = hc.get(K);
                 if (void 0 !== t) {
                   var ca = t.buffer, y = t.type;
                   t = t.bytesPerElement;
-                  if (L.isInterleavedBufferAttribute) {
-                    var w = L.data, x = w.stride;
-                    L = L.offset;
-                    w && w.isInstancedInterleavedBuffer ? (la.enableAttributeAndDivisor(h, w.meshPerAttribute), void 0 === v.maxInstancedCount && (v.maxInstancedCount = w.meshPerAttribute * w.count)) : la.enableAttribute(h);
+                  if (K.isInterleavedBufferAttribute) {
+                    var w = K.data, x = w.stride;
+                    K = K.offset;
+                    w && w.isInstancedInterleavedBuffer ? (la.enableAttributeAndDivisor(h, w.meshPerAttribute), void 0 === u.maxInstancedCount && (u.maxInstancedCount = w.meshPerAttribute * w.count)) : la.enableAttribute(h);
                     U.bindBuffer(34962, ca);
-                    U.vertexAttribPointer(h, r, y, q, x * t, L * t);
+                    U.vertexAttribPointer(h, r, y, q, x * t, K * t);
                   } else {
-                    L.isInstancedBufferAttribute ? (la.enableAttributeAndDivisor(h, L.meshPerAttribute), void 0 === v.maxInstancedCount && (v.maxInstancedCount = L.meshPerAttribute * L.count)) : la.enableAttribute(h), U.bindBuffer(34962, ca), U.vertexAttribPointer(h, r, y, q, 0, 0);
+                    K.isInstancedBufferAttribute ? (la.enableAttributeAndDivisor(h, K.meshPerAttribute), void 0 === u.maxInstancedCount && (u.maxInstancedCount = K.meshPerAttribute * K.count)) : la.enableAttribute(h), U.bindBuffer(34962, ca), U.vertexAttribPointer(h, r, y, q, 0, 0);
                   }
                 }
               } else {
@@ -4252,12 +4259,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         }
         null !== k && U.bindBuffer(34963, p.buffer);
       }
-      var T = v.drawRange.start * m;
-      g = null !== l ? l.start * m : 0;
+      var T = u.drawRange.start * m;
+      g = null !== d ? d.start * m : 0;
       p = Math.max(T, g);
-      l = Math.max(0, Math.min(null !== k ? k.count : c.count, T + v.drawRange.count * m, g + (null !== l ? l.count * m : Infinity)) - 1 - p + 1);
-      0 !== l && (e.isMesh ? !0 === b.wireframe ? (la.setLineWidth(b.wireframeLinewidth * (null === I ? Pa : 1)), d.setMode(1)) : d.setMode(4) : e.isLine ? (b = b.linewidth, void 0 === b && (b = 1), la.setLineWidth(b * (null === I ? Pa : 1)), e.isLineSegments ? d.setMode(1) : e.isLineLoop ? d.setMode(2) : d.setMode(3)) : e.isPoints ? d.setMode(0) : e.isSprite && d.setMode(4), e.isInstancedMesh ? d.renderInstances(v, p, l, e.count) : v.isInstancedBufferGeometry ? d.renderInstances(v, p, l, v.maxInstancedCount) : 
-      d.render(p, l));
+      d = Math.max(0, Math.min(null !== k ? k.count : c.count, T + u.drawRange.count * m, g + (null !== d ? d.count * m : Infinity)) - 1 - p + 1);
+      0 !== d && (e.isMesh ? !0 === b.wireframe ? (la.setLineWidth(b.wireframeLinewidth * (null === I ? Pa : 1)), l.setMode(1)) : l.setMode(4) : e.isLine ? (b = b.linewidth, void 0 === b && (b = 1), la.setLineWidth(b * (null === I ? Pa : 1)), e.isLineSegments ? l.setMode(1) : e.isLineLoop ? l.setMode(2) : l.setMode(3)) : e.isPoints ? l.setMode(0) : e.isSprite && l.setMode(4), e.isInstancedMesh ? l.renderInstances(u, p, d, e.count) : u.isInstancedBufferGeometry ? l.renderInstances(u, p, d, u.maxInstancedCount) : 
+      l.render(p, d));
     };
     this.compile = function(k, a) {
       G = za.get(k, a);
@@ -4270,8 +4277,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       k.traverse(function(a) {
         if (a.material) {
           if (Array.isArray(a.material)) {
-            for (var v = 0; v < a.material.length; v++) {
-              !1 === a.material[v].uuid in c && (t(a.material[v], k, a), c[a.material[v].uuid] = !0);
+            for (var u = 0; u < a.material.length; u++) {
+              !1 === a.material[u].uuid in c && (t(a.material[u], k, a), c[a.material[u].uuid] = !0);
             }
           } else {
             !1 === a.material.uuid in c && (t(a.material, k, a), c[a.material.uuid] = !0);
@@ -4289,17 +4296,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       qa.setAnimationLoop(k);
       ua.start();
     };
-    this.render = function(k, c, v, b) {
-      if (void 0 !== v) {
+    this.render = function(k, c, u, b) {
+      if (void 0 !== u) {
         console.warn("THREE.WebGLRenderer.render(): the renderTarget argument has been removed. Use .setRenderTarget() instead.");
-        var e = v;
+        var e = u;
       }
       if (void 0 !== b) {
         console.warn("THREE.WebGLRenderer.render(): the forceClear argument has been removed. Use .clear() instead.");
-        var l = b;
+        var d = b;
       }
       c && c.isCamera ? M || (ba = a = null, J = !1, S = -1, Q = null, !0 === k.autoUpdate && k.updateMatrixWorld(), null === c.parent && c.updateMatrixWorld(), qa.enabled && qa.isPresenting && (c = qa.getCamera(c)), G = za.get(k, c), G.init(), k.onBeforeRender(H, k, c, e || I), Ec.multiplyMatrices(c.projectionMatrix, c.matrixWorldInverse), X.setFromProjectionMatrix(Ec), be = this.localClippingEnabled, ka = fa.init(this.clippingPlanes, be, c), pa = hd.get(k, c), pa.init(), p(k, c, 0, H.sortObjects), 
-      pa.finish(), !0 === H.sortObjects && pa.sort(W, ef), ka && fa.beginShadows(), va.render(G.state.shadowsArray, k, c), G.setupLights(c), ka && fa.endShadows(), this.info.autoReset && this.info.reset(), void 0 !== e && this.setRenderTarget(e), Gb.render(pa, k, c, l), v = pa.opaque, b = pa.transparent, k.overrideMaterial ? (e = k.overrideMaterial, v.length && q(v, k, c, e), b.length && q(b, k, c, e)) : (v.length && q(v, k, c), b.length && q(b, k, c)), k.onAfterRender(H, k, c), null !== I && (ra.updateRenderTargetMipmap(I), 
+      pa.finish(), !0 === H.sortObjects && pa.sort(W, ef), ka && fa.beginShadows(), va.render(G.state.shadowsArray, k, c), G.setupLights(c), ka && fa.endShadows(), this.info.autoReset && this.info.reset(), void 0 !== e && this.setRenderTarget(e), Gb.render(pa, k, c, d), u = pa.opaque, b = pa.transparent, k.overrideMaterial ? (e = k.overrideMaterial, u.length && q(u, k, c, e), b.length && q(b, k, c, e)) : (u.length && q(u, k, c), b.length && q(b, k, c)), k.onAfterRender(H, k, c), null !== I && (ra.updateRenderTargetMipmap(I), 
       ra.updateMultisampleRenderTarget(I)), la.buffers.depth.setTest(!0), la.buffers.depth.setMask(!0), la.buffers.color.setMask(!0), la.setPolygonOffset(!1), G = pa = null) : console.error("THREE.WebGLRenderer.render: camera is not an instance of THREE.Camera.");
     };
     this.setFramebuffer = function(k) {
@@ -4310,7 +4317,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return O;
     };
     this.getActiveMipmapLevel = function() {
-      return K;
+      return L;
     };
     this.getRenderTarget = function() {
       return I;
@@ -4318,29 +4325,29 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.setRenderTarget = function(k, a, c) {
       I = k;
       O = a;
-      K = c;
+      L = c;
       k && void 0 === Ra.get(k).__webglFramebuffer && ra.setupRenderTarget(k);
-      var v = P, b = !1;
-      k ? (v = Ra.get(k).__webglFramebuffer, k.isWebGLCubeRenderTarget ? (v = v[a || 0], b = !0) : v = k.isWebGLMultisampleRenderTarget ? Ra.get(k).__webglMultisampledFramebuffer : v, Z.copy(k.viewport), R.copy(k.scissor), ae = k.scissorTest) : (Z.copy(fc).multiplyScalar(Pa).floor(), R.copy(gc).multiplyScalar(Pa).floor(), ae = da);
-      N !== v && (U.bindFramebuffer(36160, v), N = v);
+      var u = P, b = !1;
+      k ? (u = Ra.get(k).__webglFramebuffer, k.isWebGLCubeRenderTarget ? (u = u[a || 0], b = !0) : u = k.isWebGLMultisampleRenderTarget ? Ra.get(k).__webglMultisampledFramebuffer : u, Z.copy(k.viewport), R.copy(k.scissor), ae = k.scissorTest) : (Z.copy(fc).multiplyScalar(Pa).floor(), R.copy(gc).multiplyScalar(Pa).floor(), ae = da);
+      N !== u && (U.bindFramebuffer(36160, u), N = u);
       la.viewport(Z);
       la.scissor(R);
       la.setScissorTest(ae);
       b && (k = Ra.get(k.texture), U.framebufferTexture2D(36160, 36064, 34069 + (a || 0), k.__webglTexture, c || 0));
     };
-    this.readRenderTargetPixels = function(k, a, c, v, b, e, l) {
+    this.readRenderTargetPixels = function(k, a, c, u, b, e, d) {
       if (k && k.isWebGLRenderTarget) {
-        var d = Ra.get(k).__webglFramebuffer;
-        k.isWebGLCubeRenderTarget && void 0 !== l && (d = d[l]);
-        if (d) {
-          l = !1;
-          d !== N && (U.bindFramebuffer(36160, d), l = !0);
+        var l = Ra.get(k).__webglFramebuffer;
+        k.isWebGLCubeRenderTarget && void 0 !== d && (l = l[d]);
+        if (l) {
+          d = !1;
+          l !== N && (U.bindFramebuffer(36160, l), d = !0);
           try {
             var f = k.texture, g = f.format, m = f.type;
             1023 !== g && sb.convert(g) !== U.getParameter(35739) ? console.error("THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not in RGBA or implementation defined format.") : 1009 === m || sb.convert(m) === U.getParameter(35738) || 1015 === m && (ha.isWebGL2 || Ba.get("OES_texture_float") || Ba.get("WEBGL_color_buffer_float")) || 1016 === m && (ha.isWebGL2 ? Ba.get("EXT_color_buffer_float") : Ba.get("EXT_color_buffer_half_float")) ? 36053 === U.checkFramebufferStatus(36160) ? 0 <= 
-            a && a <= k.width - v && 0 <= c && c <= k.height - b && U.readPixels(a, c, v, b, sb.convert(g), sb.convert(m), e) : console.error("THREE.WebGLRenderer.readRenderTargetPixels: readPixels from renderTarget failed. Framebuffer not complete.") : console.error("THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not in UnsignedByteType or implementation defined type.");
+            a && a <= k.width - u && 0 <= c && c <= k.height - b && U.readPixels(a, c, u, b, sb.convert(g), sb.convert(m), e) : console.error("THREE.WebGLRenderer.readRenderTargetPixels: readPixels from renderTarget failed. Framebuffer not complete.") : console.error("THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not in UnsignedByteType or implementation defined type.");
           } finally {
-            l && U.bindFramebuffer(36160, N);
+            d && U.bindFramebuffer(36160, N);
           }
         }
       } else {
@@ -4349,17 +4356,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     };
     this.copyFramebufferToTexture = function(k, a, c) {
       void 0 === c && (c = 0);
-      var v = Math.pow(2, -c), b = Math.floor(a.image.width * v);
-      v = Math.floor(a.image.height * v);
+      var u = Math.pow(2, -c), b = Math.floor(a.image.width * u);
+      u = Math.floor(a.image.height * u);
       var e = sb.convert(a.format);
       ra.setTexture2D(a, 0);
-      U.copyTexImage2D(3553, c, e, k.x, k.y, b, v, 0);
+      U.copyTexImage2D(3553, c, e, k.x, k.y, b, u, 0);
       la.unbindTexture();
     };
-    this.copyTextureToTexture = function(k, a, c, v) {
-      var b = a.image.width, e = a.image.height, l = sb.convert(c.format), d = sb.convert(c.type);
+    this.copyTextureToTexture = function(k, a, c, u) {
+      var b = a.image.width, e = a.image.height, d = sb.convert(c.format), l = sb.convert(c.type);
       ra.setTexture2D(c, 0);
-      a.isDataTexture ? U.texSubImage2D(3553, v || 0, k.x, k.y, b, e, l, d, a.image.data) : U.texSubImage2D(3553, v || 0, k.x, k.y, l, d, a.image);
+      a.isDataTexture ? U.texSubImage2D(3553, u || 0, k.x, k.y, b, e, d, l, a.image.data) : U.texSubImage2D(3553, u || 0, k.x, k.y, d, l, a.image);
       la.unbindTexture();
     };
     this.initTexture = function(k) {
@@ -4417,13 +4424,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.material = void 0 !== k ? k : new lc;
     this.center = new h(.5, .5);
   }
-  function kf(k, a, c, b, e, l) {
+  function kf(k, a, c, b, e, d) {
     kd.subVectors(k, c).addScalar(.5).multiply(b);
-    void 0 !== e ? (ie.x = l * kd.x - e * kd.y, ie.y = e * kd.x + l * kd.y) : ie.copy(kd);
+    void 0 !== e ? (ie.x = d * kd.x - e * kd.y, ie.y = e * kd.x + d * kd.y) : ie.copy(kd);
     k.copy(a);
     k.x += ie.x;
     k.y += ie.y;
-    k.applyMatrix4(bi);
+    k.applyMatrix4(di);
   }
   function je() {
     t.call(this);
@@ -4457,7 +4464,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
     }
   }
-  function wg() {
+  function xg() {
     t.call(this);
     this.type = "Bone";
   }
@@ -4507,44 +4514,44 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.material = void 0 !== a ? a : new tb;
     this.updateMorphTargets();
   }
-  function xg(k, a, c, b, e, l, d) {
-    var v = yg.distanceSqToPoint(k);
-    v < c && (c = new m, yg.closestPointToPoint(k, c), c.applyMatrix4(b), k = e.ray.origin.distanceTo(c), k < e.near || k > e.far || l.push({distance:k, distanceToRay:Math.sqrt(v), point:c, index:a, face:null, object:d}));
+  function yg(k, a, c, b, e, d, l) {
+    var u = zg.distanceSqToPoint(k);
+    u < c && (c = new m, zg.closestPointToPoint(k, c), c.applyMatrix4(b), k = e.ray.origin.distanceTo(c), k < e.near || k > e.far || d.push({distance:k, distanceToRay:Math.sqrt(u), point:c, index:a, face:null, object:l}));
   }
-  function zg(k, a, c, b, e, l, d, f, m) {
-    g.call(this, k, a, c, b, e, l, d, f, m);
-    this.format = void 0 !== d ? d : 1022;
-    this.minFilter = void 0 !== l ? l : 1006;
+  function Ag(k, a, c, b, e, d, l, f, m) {
+    g.call(this, k, a, c, b, e, d, l, f, m);
+    this.format = void 0 !== l ? l : 1022;
+    this.minFilter = void 0 !== d ? d : 1006;
     this.magFilter = void 0 !== e ? e : 1006;
     this.generateMipmaps = !1;
   }
-  function md(k, a, c, b, e, l, d, f, m, p, h, n) {
-    g.call(this, null, l, d, f, m, p, b, e, h, n);
+  function md(k, a, c, b, e, d, l, f, m, p, h, n) {
+    g.call(this, null, d, l, f, m, p, b, e, h, n);
     this.image = {width:a, height:c};
     this.mipmaps = k;
     this.generateMipmaps = this.flipY = !1;
   }
-  function le(k, a, c, b, e, l, d, f, m) {
-    g.call(this, k, a, c, b, e, l, d, f, m);
+  function le(k, a, c, b, e, d, l, f, m) {
+    g.call(this, k, a, c, b, e, d, l, f, m);
     this.needsUpdate = !0;
   }
-  function me(k, a, c, b, e, l, d, f, m, p) {
+  function me(k, a, c, b, e, d, l, f, m, p) {
     p = void 0 !== p ? p : 1026;
     if (1026 !== p && 1027 !== p) {
       throw Error("DepthTexture format must be either THREE.DepthFormat or THREE.DepthStencilFormat");
     }
     void 0 === c && 1026 === p && (c = 1012);
     void 0 === c && 1027 === p && (c = 1020);
-    g.call(this, null, b, e, l, d, f, p, c, m);
+    g.call(this, null, b, e, d, l, f, p, c, m);
     this.image = {width:k, height:a};
-    this.magFilter = void 0 !== d ? d : 1003;
+    this.magFilter = void 0 !== l ? l : 1003;
     this.minFilter = void 0 !== f ? f : 1003;
     this.generateMipmaps = this.flipY = !1;
   }
   function nd(k) {
     N.call(this);
     this.type = "WireframeGeometry";
-    var a = [], c, b, e, l = [0, 0], d = {}, f = ["a", "b", "c"];
+    var a = [], c, b, e, d = [0, 0], l = {}, f = ["a", "b", "c"];
     if (k && k.isGeometry) {
       var g = k.faces;
       var p = 0;
@@ -4553,14 +4560,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         for (c = 0; 3 > c; c++) {
           var n = h[f[c]];
           var q = h[f[(c + 1) % 3]];
-          l[0] = Math.min(n, q);
-          l[1] = Math.max(n, q);
-          n = l[0] + "," + l[1];
-          void 0 === d[n] && (d[n] = {index1:l[0], index2:l[1]});
+          d[0] = Math.min(n, q);
+          d[1] = Math.max(n, q);
+          n = d[0] + "," + d[1];
+          void 0 === l[n] && (l[n] = {index1:d[0], index2:d[1]});
         }
       }
-      for (n in d) {
-        p = d[n], f = k.vertices[p.index1], a.push(f.x, f.y, f.z), f = k.vertices[p.index2], a.push(f.x, f.y, f.z);
+      for (n in l) {
+        p = l[n], f = k.vertices[p.index1], a.push(f.x, f.y, f.z), f = k.vertices[p.index2], a.push(f.x, f.y, f.z);
       }
     } else {
       if (k && k.isBufferGeometry) {
@@ -4573,17 +4580,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           for (e = r.length; k < e; ++k) {
             for (p = r[k], c = p.start, b = p.count, p = c, b = c + b; p < b; p += 3) {
               for (c = 0; 3 > c; c++) {
-                n = h.getX(p + c), q = h.getX(p + (c + 1) % 3), l[0] = Math.min(n, q), l[1] = Math.max(n, q), n = l[0] + "," + l[1], void 0 === d[n] && (d[n] = {index1:l[0], index2:l[1]});
+                n = h.getX(p + c), q = h.getX(p + (c + 1) % 3), d[0] = Math.min(n, q), d[1] = Math.max(n, q), n = d[0] + "," + d[1], void 0 === l[n] && (l[n] = {index1:d[0], index2:d[1]});
               }
             }
           }
-          for (n in d) {
-            p = d[n], f.fromBufferAttribute(g, p.index1), a.push(f.x, f.y, f.z), f.fromBufferAttribute(g, p.index2), a.push(f.x, f.y, f.z);
+          for (n in l) {
+            p = l[n], f.fromBufferAttribute(g, p.index1), a.push(f.x, f.y, f.z), f.fromBufferAttribute(g, p.index2), a.push(f.x, f.y, f.z);
           }
         } else {
           for (g = k.attributes.position, p = 0, b = g.count / 3; p < b; p++) {
             for (c = 0; 3 > c; c++) {
-              d = 3 * p + c, f.fromBufferAttribute(g, d), a.push(f.x, f.y, f.z), d = 3 * p + (c + 1) % 3, f.fromBufferAttribute(g, d), a.push(f.x, f.y, f.z);
+              l = 3 * p + c, f.fromBufferAttribute(g, l), a.push(f.x, f.y, f.z), l = 3 * p + (c + 1) % 3, f.fromBufferAttribute(g, l), a.push(f.x, f.y, f.z);
             }
           }
         }
@@ -4602,31 +4609,31 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     N.call(this);
     this.type = "ParametricBufferGeometry";
     this.parameters = {func:k, slices:a, stacks:c};
-    var v = [], b = [], e = [], l = [], d = new m, f = new m, g = new m, p = new m, n = new m, h, L;
+    var u = [], b = [], e = [], d = [], l = new m, f = new m, g = new m, p = new m, n = new m, h, K;
     3 > k.length && console.error("THREE.ParametricGeometry: Function must now modify a Vector3 as third parameter.");
     var q = a + 1;
     for (h = 0; h <= c; h++) {
       var r = h / c;
-      for (L = 0; L <= a; L++) {
-        var t = L / a;
+      for (K = 0; K <= a; K++) {
+        var t = K / a;
         k(t, r, f);
         b.push(f.x, f.y, f.z);
         0 <= t - 1E-5 ? (k(t - 1E-5, r, g), p.subVectors(f, g)) : (k(t + 1E-5, r, g), p.subVectors(g, f));
         0 <= r - 1E-5 ? (k(t, r - 1E-5, g), n.subVectors(f, g)) : (k(t, r + 1E-5, g), n.subVectors(g, f));
-        d.crossVectors(p, n).normalize();
-        e.push(d.x, d.y, d.z);
-        l.push(t, r);
+        l.crossVectors(p, n).normalize();
+        e.push(l.x, l.y, l.z);
+        d.push(t, r);
       }
     }
     for (h = 0; h < c; h++) {
-      for (L = 0; L < a; L++) {
-        k = h * q + L + 1, d = (h + 1) * q + L + 1, f = (h + 1) * q + L, v.push(h * q + L, k, f), v.push(k, d, f);
+      for (K = 0; K < a; K++) {
+        k = h * q + K + 1, l = (h + 1) * q + K + 1, f = (h + 1) * q + K, u.push(h * q + K, k, f), u.push(k, l, f);
       }
     }
-    this.setIndex(v);
+    this.setIndex(u);
     this.setAttribute("position", new Q(b, 3));
     this.setAttribute("normal", new Q(e, 3));
-    this.setAttribute("uv", new Q(l, 2));
+    this.setAttribute("uv", new Q(d, 2));
   }
   function oe(k, a, c, b) {
     X.call(this);
@@ -4636,8 +4643,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.mergeVertices();
   }
   function bb(k, a, c, b) {
-    function v(k) {
-      d.push(k.x, k.y, k.z);
+    function u(k) {
+      l.push(k.x, k.y, k.z);
     }
     function e(a, c) {
       a *= 3;
@@ -4645,66 +4652,66 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       c.y = k[a + 1];
       c.z = k[a + 2];
     }
-    function l(k, a, c, v) {
-      0 > v && 1 === k.x && (f[a] = k.x - 1);
-      0 === c.x && 0 === c.z && (f[a] = v / 2 / Math.PI + .5);
+    function d(k, a, c, u) {
+      0 > u && 1 === k.x && (f[a] = k.x - 1);
+      0 === c.x && 0 === c.z && (f[a] = u / 2 / Math.PI + .5);
     }
     N.call(this);
     this.type = "PolyhedronBufferGeometry";
     this.parameters = {vertices:k, indices:a, radius:c, detail:b};
     c = c || 1;
     b = b || 0;
-    var d = [], f = [];
+    var l = [], f = [];
     (function(k) {
-      for (var c = new m, b = new m, d = new m, l = 0; l < a.length; l += 3) {
-        e(a[l + 0], c);
-        e(a[l + 1], b);
-        e(a[l + 2], d);
-        var f, g, p = c, n = b, h = d, L = Math.pow(2, k), q = [];
-        for (g = 0; g <= L; g++) {
+      for (var c = new m, b = new m, l = new m, d = 0; d < a.length; d += 3) {
+        e(a[d + 0], c);
+        e(a[d + 1], b);
+        e(a[d + 2], l);
+        var f, g, p = c, h = b, n = l, K = Math.pow(2, k), q = [];
+        for (g = 0; g <= K; g++) {
           q[g] = [];
-          var r = p.clone().lerp(h, g / L), t = n.clone().lerp(h, g / L), u = L - g;
-          for (f = 0; f <= u; f++) {
-            q[g][f] = 0 === f && g === L ? r : r.clone().lerp(t, f / u);
+          var r = p.clone().lerp(n, g / K), t = h.clone().lerp(n, g / K), v = K - g;
+          for (f = 0; f <= v; f++) {
+            q[g][f] = 0 === f && g === K ? r : r.clone().lerp(t, f / v);
           }
         }
-        for (g = 0; g < L; g++) {
-          for (f = 0; f < 2 * (L - g) - 1; f++) {
-            p = Math.floor(f / 2), 0 === f % 2 ? (v(q[g][p + 1]), v(q[g + 1][p]), v(q[g][p])) : (v(q[g][p + 1]), v(q[g + 1][p + 1]), v(q[g + 1][p]));
+        for (g = 0; g < K; g++) {
+          for (f = 0; f < 2 * (K - g) - 1; f++) {
+            p = Math.floor(f / 2), 0 === f % 2 ? (u(q[g][p + 1]), u(q[g + 1][p]), u(q[g][p])) : (u(q[g][p + 1]), u(q[g + 1][p + 1]), u(q[g + 1][p]));
           }
         }
       }
     })(b);
     (function(k) {
-      for (var a = new m, c = 0; c < d.length; c += 3) {
-        a.x = d[c + 0], a.y = d[c + 1], a.z = d[c + 2], a.normalize().multiplyScalar(k), d[c + 0] = a.x, d[c + 1] = a.y, d[c + 2] = a.z;
+      for (var a = new m, c = 0; c < l.length; c += 3) {
+        a.x = l[c + 0], a.y = l[c + 1], a.z = l[c + 2], a.normalize().multiplyScalar(k), l[c + 0] = a.x, l[c + 1] = a.y, l[c + 2] = a.z;
       }
     })(c);
     (function() {
-      for (var k = new m, a = 0; a < d.length; a += 3) {
-        k.x = d[a + 0], k.y = d[a + 1], k.z = d[a + 2], f.push(Math.atan2(k.z, -k.x) / 2 / Math.PI + .5, 1 - (Math.atan2(-k.y, Math.sqrt(k.x * k.x + k.z * k.z)) / Math.PI + .5));
+      for (var k = new m, a = 0; a < l.length; a += 3) {
+        k.x = l[a + 0], k.y = l[a + 1], k.z = l[a + 2], f.push(Math.atan2(k.z, -k.x) / 2 / Math.PI + .5, 1 - (Math.atan2(-k.y, Math.sqrt(k.x * k.x + k.z * k.z)) / Math.PI + .5));
       }
       k = new m;
       a = new m;
-      for (var c = new m, v = new m, b = new h, e = new h, g = new h, p = 0, n = 0; p < d.length; p += 9, n += 6) {
-        k.set(d[p + 0], d[p + 1], d[p + 2]);
-        a.set(d[p + 3], d[p + 4], d[p + 5]);
-        c.set(d[p + 6], d[p + 7], d[p + 8]);
+      for (var c = new m, u = new m, b = new h, e = new h, g = new h, p = 0, n = 0; p < l.length; p += 9, n += 6) {
+        k.set(l[p + 0], l[p + 1], l[p + 2]);
+        a.set(l[p + 3], l[p + 4], l[p + 5]);
+        c.set(l[p + 6], l[p + 7], l[p + 8]);
         b.set(f[n + 0], f[n + 1]);
         e.set(f[n + 2], f[n + 3]);
         g.set(f[n + 4], f[n + 5]);
-        v.copy(k).add(a).add(c).divideScalar(3);
-        var L = Math.atan2(v.z, -v.x);
-        l(b, n + 0, k, L);
-        l(e, n + 2, a, L);
-        l(g, n + 4, c, L);
+        u.copy(k).add(a).add(c).divideScalar(3);
+        var K = Math.atan2(u.z, -u.x);
+        d(b, n + 0, k, K);
+        d(e, n + 2, a, K);
+        d(g, n + 4, c, K);
       }
       for (k = 0; k < f.length; k += 6) {
-        a = f[k + 0], c = f[k + 2], v = f[k + 4], b = Math.min(a, c, v), .9 < Math.max(a, c, v) && .1 > b && (.2 > a && (f[k + 0] += 1), .2 > c && (f[k + 2] += 1), .2 > v && (f[k + 4] += 1));
+        a = f[k + 0], c = f[k + 2], u = f[k + 4], b = Math.min(a, c, u), .9 < Math.max(a, c, u) && .1 > b && (.2 > a && (f[k + 0] += 1), .2 > c && (f[k + 2] += 1), .2 > u && (f[k + 4] += 1));
       }
     })();
-    this.setAttribute("position", new Q(d, 3));
-    this.setAttribute("normal", new Q(d.slice(), 3));
+    this.setAttribute("position", new Q(l, 3));
+    this.setAttribute("normal", new Q(l.slice(), 3));
     this.setAttribute("uv", new Q(f, 2));
     0 === b ? this.computeVertexNormals() : this.normalizeNormals();
   }
@@ -4753,17 +4760,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.mergeVertices();
   }
   function rd(k, a) {
-    var c = (1 + Math.sqrt(5)) / 2, v = 1 / c;
-    bb.call(this, [-1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 0, -v, -c, 0, -v, c, 0, v, -c, 0, v, c, -v, -c, 0, -v, c, 0, v, -c, 0, v, c, 0, -c, 0, -v, c, 0, -v, -c, 0, v, c, 0, v], [3, 11, 7, 3, 7, 15, 3, 15, 13, 7, 19, 17, 7, 17, 6, 7, 6, 15, 17, 4, 8, 17, 8, 10, 17, 10, 6, 8, 0, 16, 8, 16, 2, 8, 2, 10, 0, 12, 1, 0, 1, 18, 0, 18, 16, 6, 10, 2, 6, 2, 13, 6, 13, 15, 2, 16, 18, 2, 18, 3, 2, 3, 13, 18, 1, 9, 18, 9, 11, 18, 11, 3, 4, 14, 12, 4, 12, 0, 4, 0, 
+    var c = (1 + Math.sqrt(5)) / 2, u = 1 / c;
+    bb.call(this, [-1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 0, -u, -c, 0, -u, c, 0, u, -c, 0, u, c, -u, -c, 0, -u, c, 0, u, -c, 0, u, c, 0, -c, 0, -u, c, 0, -u, -c, 0, u, c, 0, u], [3, 11, 7, 3, 7, 15, 3, 15, 13, 7, 19, 17, 7, 17, 6, 7, 6, 15, 17, 4, 8, 17, 8, 10, 17, 10, 6, 8, 0, 16, 8, 16, 2, 8, 2, 10, 0, 12, 1, 0, 1, 18, 0, 18, 16, 6, 10, 2, 6, 2, 13, 6, 13, 15, 2, 16, 18, 2, 18, 3, 2, 3, 13, 18, 1, 9, 18, 9, 11, 18, 11, 3, 4, 14, 12, 4, 12, 0, 4, 0, 
     8, 11, 9, 5, 11, 5, 19, 11, 19, 7, 19, 5, 14, 19, 14, 4, 19, 4, 17, 1, 12, 14, 1, 14, 5, 1, 5, 9], k, a);
     this.type = "DodecahedronBufferGeometry";
     this.parameters = {radius:k, detail:a};
   }
-  function te(k, a, c, b, e, d) {
+  function te(k, a, c, b, e, l) {
     X.call(this);
     this.type = "TubeGeometry";
     this.parameters = {path:k, tubularSegments:a, radius:c, radialSegments:b, closed:e};
-    void 0 !== d && console.warn("THREE.TubeGeometry: taper has been removed.");
+    void 0 !== l && console.warn("THREE.TubeGeometry: taper has been removed.");
     k = new Gc(k, a, c, b, e);
     this.tangents = k.tangents;
     this.normals = k.normals;
@@ -4772,22 +4779,22 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.mergeVertices();
   }
   function Gc(k, a, c, b, e) {
-    function v(v) {
-      p = k.getPointAt(v / a, p);
-      var e = d.normals[v];
-      v = d.binormals[v];
+    function u(u) {
+      p = k.getPointAt(u / a, p);
+      var e = l.normals[u];
+      u = l.binormals[u];
       for (q = 0; q <= b; q++) {
         var g = q / b * Math.PI * 2, m = Math.sin(g);
         g = -Math.cos(g);
-        f.x = g * e.x + m * v.x;
-        f.y = g * e.y + m * v.y;
-        f.z = g * e.z + m * v.z;
+        f.x = g * e.x + m * u.x;
+        f.y = g * e.y + m * u.y;
+        f.z = g * e.z + m * u.z;
         f.normalize();
         r.push(f.x, f.y, f.z);
-        l.x = p.x + c * f.x;
-        l.y = p.y + c * f.y;
-        l.z = p.z + c * f.z;
-        L.push(l.x, l.y, l.z);
+        d.x = p.x + c * f.x;
+        d.y = p.y + c * f.y;
+        d.z = p.z + c * f.z;
+        K.push(d.x, d.y, d.z);
       }
     }
     N.call(this);
@@ -4797,15 +4804,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     c = c || 1;
     b = b || 8;
     e = e || !1;
-    var d = k.computeFrenetFrames(a, e);
-    this.tangents = d.tangents;
-    this.normals = d.normals;
-    this.binormals = d.binormals;
-    var l = new m, f = new m, g = new h, p = new m, n, q, L = [], r = [], t = [], u = [];
+    var l = k.computeFrenetFrames(a, e);
+    this.tangents = l.tangents;
+    this.normals = l.normals;
+    this.binormals = l.binormals;
+    var d = new m, f = new m, g = new h, p = new m, n, q, K = [], r = [], t = [], v = [];
     for (n = 0; n < a; n++) {
-      v(n);
+      u(n);
     }
-    v(!1 === e ? a : 0);
+    u(!1 === e ? a : 0);
     for (n = 0; n <= a; n++) {
       for (q = 0; q <= b; q++) {
         g.x = n / a, g.y = q / b, t.push(g.x, g.y);
@@ -4814,62 +4821,62 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     (function() {
       for (q = 1; q <= a; q++) {
         for (n = 1; n <= b; n++) {
-          var k = (b + 1) * q + (n - 1), c = (b + 1) * q + n, v = (b + 1) * (q - 1) + n;
-          u.push((b + 1) * (q - 1) + (n - 1), k, v);
-          u.push(k, c, v);
+          var k = (b + 1) * q + (n - 1), c = (b + 1) * q + n, u = (b + 1) * (q - 1) + n;
+          v.push((b + 1) * (q - 1) + (n - 1), k, u);
+          v.push(k, c, u);
         }
       }
     })();
-    this.setIndex(u);
-    this.setAttribute("position", new Q(L, 3));
+    this.setIndex(v);
+    this.setAttribute("position", new Q(K, 3));
     this.setAttribute("normal", new Q(r, 3));
     this.setAttribute("uv", new Q(t, 2));
   }
-  function ue(k, a, c, b, e, d, l) {
+  function ue(k, a, c, b, e, l, d) {
     X.call(this);
     this.type = "TorusKnotGeometry";
-    this.parameters = {radius:k, tube:a, tubularSegments:c, radialSegments:b, p:e, q:d};
-    void 0 !== l && console.warn("THREE.TorusKnotGeometry: heightScale has been deprecated. Use .scale( x, y, z ) instead.");
-    this.fromBufferGeometry(new sd(k, a, c, b, e, d));
+    this.parameters = {radius:k, tube:a, tubularSegments:c, radialSegments:b, p:e, q:l};
+    void 0 !== d && console.warn("THREE.TorusKnotGeometry: heightScale has been deprecated. Use .scale( x, y, z ) instead.");
+    this.fromBufferGeometry(new sd(k, a, c, b, e, l));
     this.mergeVertices();
   }
-  function sd(k, a, c, b, e, d) {
-    function v(k, a, c, v, b) {
+  function sd(k, a, c, b, e, l) {
+    function u(k, a, c, b, u) {
       var e = Math.sin(k);
       a = c / a * k;
       c = Math.cos(a);
-      b.x = v * (2 + c) * .5 * Math.cos(k);
-      b.y = v * (2 + c) * e * .5;
-      b.z = v * Math.sin(a) * .5;
+      u.x = b * (2 + c) * .5 * Math.cos(k);
+      u.y = b * (2 + c) * e * .5;
+      u.z = b * Math.sin(a) * .5;
     }
     N.call(this);
     this.type = "TorusKnotBufferGeometry";
-    this.parameters = {radius:k, tube:a, tubularSegments:c, radialSegments:b, p:e, q:d};
+    this.parameters = {radius:k, tube:a, tubularSegments:c, radialSegments:b, p:e, q:l};
     k = k || 1;
     a = a || .4;
     c = Math.floor(c) || 64;
     b = Math.floor(b) || 8;
     e = e || 2;
-    d = d || 3;
-    var l = [], f = [], g = [], p = [], n, h = new m, q = new m, r = new m, L = new m, t = new m, u = new m, y = new m;
+    l = l || 3;
+    var d = [], f = [], g = [], p = [], n, h = new m, q = new m, K = new m, r = new m, t = new m, v = new m, y = new m;
     for (n = 0; n <= c; ++n) {
       var w = n / c * e * Math.PI * 2;
-      v(w, e, d, k, r);
-      v(w + .01, e, d, k, L);
-      u.subVectors(L, r);
-      y.addVectors(L, r);
-      t.crossVectors(u, y);
-      y.crossVectors(t, u);
+      u(w, e, l, k, K);
+      u(w + .01, e, l, k, r);
+      v.subVectors(r, K);
+      y.addVectors(r, K);
+      t.crossVectors(v, y);
+      y.crossVectors(t, v);
       t.normalize();
       y.normalize();
       for (w = 0; w <= b; ++w) {
         var ca = w / b * Math.PI * 2, x = -a * Math.cos(ca);
         ca = a * Math.sin(ca);
-        h.x = r.x + (x * y.x + ca * t.x);
-        h.y = r.y + (x * y.y + ca * t.y);
-        h.z = r.z + (x * y.z + ca * t.z);
+        h.x = K.x + (x * y.x + ca * t.x);
+        h.y = K.y + (x * y.y + ca * t.y);
+        h.z = K.z + (x * y.z + ca * t.z);
         f.push(h.x, h.y, h.z);
-        q.subVectors(h, r).normalize();
+        q.subVectors(h, K).normalize();
         g.push(q.x, q.y, q.z);
         p.push(n / c);
         p.push(w / b);
@@ -4877,10 +4884,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     for (w = 1; w <= c; w++) {
       for (n = 1; n <= b; n++) {
-        k = (b + 1) * w + (n - 1), a = (b + 1) * w + n, e = (b + 1) * (w - 1) + n, l.push((b + 1) * (w - 1) + (n - 1), k, e), l.push(k, a, e);
+        k = (b + 1) * w + (n - 1), a = (b + 1) * w + n, e = (b + 1) * (w - 1) + n, d.push((b + 1) * (w - 1) + (n - 1), k, e), d.push(k, a, e);
       }
     }
-    this.setIndex(l);
+    this.setIndex(d);
     this.setAttribute("position", new Q(f, 3));
     this.setAttribute("normal", new Q(g, 3));
     this.setAttribute("uv", new Q(p, 2));
@@ -4901,47 +4908,47 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     c = Math.floor(c) || 8;
     b = Math.floor(b) || 6;
     e = e || 2 * Math.PI;
-    var v = [], d = [], l = [], f = [], g = new m, p = new m, n = new m, h, q;
+    var u = [], l = [], d = [], f = [], g = new m, p = new m, n = new m, h, q;
     for (h = 0; h <= c; h++) {
       for (q = 0; q <= b; q++) {
-        var r = q / b * e, L = h / c * Math.PI * 2;
-        p.x = (k + a * Math.cos(L)) * Math.cos(r);
-        p.y = (k + a * Math.cos(L)) * Math.sin(r);
-        p.z = a * Math.sin(L);
-        d.push(p.x, p.y, p.z);
-        g.x = k * Math.cos(r);
-        g.y = k * Math.sin(r);
+        var K = q / b * e, r = h / c * Math.PI * 2;
+        p.x = (k + a * Math.cos(r)) * Math.cos(K);
+        p.y = (k + a * Math.cos(r)) * Math.sin(K);
+        p.z = a * Math.sin(r);
+        l.push(p.x, p.y, p.z);
+        g.x = k * Math.cos(K);
+        g.y = k * Math.sin(K);
         n.subVectors(p, g).normalize();
-        l.push(n.x, n.y, n.z);
+        d.push(n.x, n.y, n.z);
         f.push(q / b);
         f.push(h / c);
       }
     }
     for (h = 1; h <= c; h++) {
       for (q = 1; q <= b; q++) {
-        k = (b + 1) * (h - 1) + q - 1, a = (b + 1) * (h - 1) + q, e = (b + 1) * h + q, v.push((b + 1) * h + q - 1, k, e), v.push(k, a, e);
+        k = (b + 1) * (h - 1) + q - 1, a = (b + 1) * (h - 1) + q, e = (b + 1) * h + q, u.push((b + 1) * h + q - 1, k, e), u.push(k, a, e);
       }
     }
-    this.setIndex(v);
-    this.setAttribute("position", new Q(d, 3));
-    this.setAttribute("normal", new Q(l, 3));
+    this.setIndex(u);
+    this.setAttribute("position", new Q(l, 3));
+    this.setAttribute("normal", new Q(d, 3));
     this.setAttribute("uv", new Q(f, 2));
   }
-  function ci(k, a, c, b, e) {
-    for (var v, d = 0, l = a, f = c - b; l < c; l += b) {
-      d += (k[f] - k[l]) * (k[l + 1] + k[f + 1]), f = l;
+  function ei(k, a, c, b, e) {
+    for (var u, l = 0, d = a, f = c - b; d < c; d += b) {
+      l += (k[f] - k[d]) * (k[d + 1] + k[f + 1]), f = d;
     }
-    if (e === 0 < d) {
+    if (e === 0 < l) {
       for (e = a; e < c; e += b) {
-        v = di(e, k[e], k[e + 1], v);
+        u = fi(e, k[e], k[e + 1], u);
       }
     } else {
       for (e = c - b; e >= a; e -= b) {
-        v = di(e, k[e], k[e + 1], v);
+        u = fi(e, k[e], k[e + 1], u);
       }
     }
-    v && Hc(v, v.next) && (we(v), v = v.next);
-    return v;
+    u && Hc(u, u.next) && (we(u), u = u.next);
+    return u;
   }
   function xe(k, a) {
     if (!k) {
@@ -4963,27 +4970,27 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     } while (c || k !== a);
     return a;
   }
-  function ye(k, a, c, b, e, d, l) {
+  function ye(k, a, c, b, e, l, d) {
     if (k) {
-      if (!l && d) {
-        var v = k, f = v;
+      if (!d && l) {
+        var u = k, f = u;
         do {
-          null === f.z && (f.z = Ag(f.x, f.y, b, e, d)), f.prevZ = f.prev, f = f.nextZ = f.next;
-        } while (f !== v);
+          null === f.z && (f.z = Bg(f.x, f.y, b, e, l)), f.prevZ = f.prev, f = f.nextZ = f.next;
+        } while (f !== u);
         f.prevZ.nextZ = null;
         f.prevZ = null;
-        v = f;
+        u = f;
         var g, p, m, n, h = 1;
         do {
-          f = v;
-          var q = v = null;
+          f = u;
+          var q = u = null;
           for (p = 0; f;) {
             p++;
             var r = f;
             for (g = m = 0; g < h && (m++, r = r.nextZ, r); g++) {
             }
             for (n = h; 0 < m || 0 < n && r;) {
-              0 !== m && (0 === n || !r || f.z <= r.z) ? (g = f, f = f.nextZ, m--) : (g = r, r = r.nextZ, n--), q ? q.nextZ = g : v = g, g.prevZ = q, q = g;
+              0 !== m && (0 === n || !r || f.z <= r.z) ? (g = f, f = f.nextZ, m--) : (g = r, r = r.nextZ, n--), q ? q.nextZ = g : u = g, g.prevZ = q, q = g;
             }
             f = r;
           }
@@ -4991,11 +4998,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           h *= 2;
         } while (1 < p);
       }
-      for (v = k; k.prev !== k.next;) {
+      for (u = k; k.prev !== k.next;) {
         f = k.prev;
         r = k.next;
-        if (d) {
-          q = Yj(k, b, e, d);
+        if (l) {
+          q = ak(k, b, e, l);
         } else {
           a: {
             if (q = k, p = q.prev, m = q, h = q.next, 0 <= Sa(p, m, h)) {
@@ -5013,35 +5020,35 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           }
         }
         if (q) {
-          a.push(f.i / c), a.push(k.i / c), a.push(r.i / c), we(k), v = k = r.next;
+          a.push(f.i / c), a.push(k.i / c), a.push(r.i / c), we(k), u = k = r.next;
         } else {
-          if (k = r, k === v) {
-            if (!l) {
-              ye(xe(k), a, c, b, e, d, 1);
+          if (k = r, k === u) {
+            if (!d) {
+              ye(xe(k), a, c, b, e, l, 1);
             } else {
-              if (1 === l) {
-                l = a;
-                v = c;
+              if (1 === d) {
+                d = a;
+                u = c;
                 f = k;
                 do {
-                  r = f.prev, q = f.next.next, !Hc(r, q) && ei(r, f, f.next, q) && ze(r, q) && ze(q, r) && (l.push(r.i / v), l.push(f.i / v), l.push(q.i / v), we(f), we(f.next), f = k = q), f = f.next;
+                  r = f.prev, q = f.next.next, !Hc(r, q) && gi(r, f, f.next, q) && ze(r, q) && ze(q, r) && (d.push(r.i / u), d.push(f.i / u), d.push(q.i / u), we(f), we(f.next), f = k = q), f = f.next;
                 } while (f !== k);
                 k = f;
-                ye(k, a, c, b, e, d, 2);
+                ye(k, a, c, b, e, l, 2);
               } else {
-                if (2 === l) {
+                if (2 === d) {
                   a: {
-                    l = k;
+                    d = k;
                     do {
-                      for (v = l.next.next; v !== l.prev;) {
-                        if (f = l.i !== v.i) {
-                          f = l;
-                          r = v;
+                      for (u = d.next.next; u !== d.prev;) {
+                        if (f = d.i !== u.i) {
+                          f = d;
+                          r = u;
                           if (q = f.next.i !== r.i && f.prev.i !== r.i) {
                             b: {
                               q = f;
                               do {
-                                if (q.i !== f.i && q.next.i !== f.i && q.i !== r.i && q.next.i !== r.i && ei(q, q.next, f, r)) {
+                                if (q.i !== f.i && q.next.i !== f.i && q.i !== r.i && q.next.i !== r.i && gi(q, q.next, f, r)) {
                                   q = !0;
                                   break b;
                                 }
@@ -5064,17 +5071,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
                           f = q;
                         }
                         if (f) {
-                          k = fi(l, v);
-                          l = xe(l, l.next);
+                          k = hi(d, u);
+                          d = xe(d, d.next);
                           k = xe(k, k.next);
-                          ye(l, a, c, b, e, d);
-                          ye(k, a, c, b, e, d);
+                          ye(d, a, c, b, e, l);
+                          ye(k, a, c, b, e, l);
                           break a;
                         }
-                        v = v.next;
+                        u = u.next;
                       }
-                      l = l.next;
-                    } while (l !== k);
+                      d = d.next;
+                    } while (d !== k);
                   }
                 }
               }
@@ -5085,80 +5092,80 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
     }
   }
-  function Yj(k, a, c, b) {
-    var v = k.prev, e = k.next;
-    if (0 <= Sa(v, k, e)) {
+  function ak(k, a, c, b) {
+    var u = k.prev, e = k.next;
+    if (0 <= Sa(u, k, e)) {
       return !1;
     }
-    var d = v.x > k.x ? v.x > e.x ? v.x : e.x : k.x > e.x ? k.x : e.x, l = v.y > k.y ? v.y > e.y ? v.y : e.y : k.y > e.y ? k.y : e.y, f = Ag(v.x < k.x ? v.x < e.x ? v.x : e.x : k.x < e.x ? k.x : e.x, v.y < k.y ? v.y < e.y ? v.y : e.y : k.y < e.y ? k.y : e.y, a, c, b);
-    a = Ag(d, l, a, c, b);
+    var l = u.x > k.x ? u.x > e.x ? u.x : e.x : k.x > e.x ? k.x : e.x, d = u.y > k.y ? u.y > e.y ? u.y : e.y : k.y > e.y ? k.y : e.y, f = Bg(u.x < k.x ? u.x < e.x ? u.x : e.x : k.x < e.x ? k.x : e.x, u.y < k.y ? u.y < e.y ? u.y : e.y : k.y < e.y ? k.y : e.y, a, c, b);
+    a = Bg(l, d, a, c, b);
     c = k.prevZ;
     for (b = k.nextZ; c && c.z >= f && b && b.z <= a;) {
-      if (c !== k.prev && c !== k.next && ud(v.x, v.y, k.x, k.y, e.x, e.y, c.x, c.y) && 0 <= Sa(c.prev, c, c.next)) {
+      if (c !== k.prev && c !== k.next && ud(u.x, u.y, k.x, k.y, e.x, e.y, c.x, c.y) && 0 <= Sa(c.prev, c, c.next)) {
         return !1;
       }
       c = c.prevZ;
-      if (b !== k.prev && b !== k.next && ud(v.x, v.y, k.x, k.y, e.x, e.y, b.x, b.y) && 0 <= Sa(b.prev, b, b.next)) {
+      if (b !== k.prev && b !== k.next && ud(u.x, u.y, k.x, k.y, e.x, e.y, b.x, b.y) && 0 <= Sa(b.prev, b, b.next)) {
         return !1;
       }
       b = b.nextZ;
     }
     for (; c && c.z >= f;) {
-      if (c !== k.prev && c !== k.next && ud(v.x, v.y, k.x, k.y, e.x, e.y, c.x, c.y) && 0 <= Sa(c.prev, c, c.next)) {
+      if (c !== k.prev && c !== k.next && ud(u.x, u.y, k.x, k.y, e.x, e.y, c.x, c.y) && 0 <= Sa(c.prev, c, c.next)) {
         return !1;
       }
       c = c.prevZ;
     }
     for (; b && b.z <= a;) {
-      if (b !== k.prev && b !== k.next && ud(v.x, v.y, k.x, k.y, e.x, e.y, b.x, b.y) && 0 <= Sa(b.prev, b, b.next)) {
+      if (b !== k.prev && b !== k.next && ud(u.x, u.y, k.x, k.y, e.x, e.y, b.x, b.y) && 0 <= Sa(b.prev, b, b.next)) {
         return !1;
       }
       b = b.nextZ;
     }
     return !0;
   }
-  function Zj(k, a) {
+  function bk(k, a) {
     return k.x - a.x;
   }
-  function ak(k, a) {
-    var c = a, b = k.x, v = k.y, e = -Infinity;
+  function ck(k, a) {
+    var c = a, b = k.x, u = k.y, e = -Infinity;
     do {
-      if (v <= c.y && v >= c.next.y && c.next.y !== c.y) {
-        var d = c.x + (v - c.y) * (c.next.x - c.x) / (c.next.y - c.y);
-        if (d <= b && d > e) {
-          e = d;
-          if (d === b) {
-            if (v === c.y) {
+      if (u <= c.y && u >= c.next.y && c.next.y !== c.y) {
+        var l = c.x + (u - c.y) * (c.next.x - c.x) / (c.next.y - c.y);
+        if (l <= b && l > e) {
+          e = l;
+          if (l === b) {
+            if (u === c.y) {
               return c;
             }
-            if (v === c.next.y) {
+            if (u === c.next.y) {
               return c.next;
             }
           }
-          var l = c.x < c.next.x ? c : c.next;
+          var d = c.x < c.next.x ? c : c.next;
         }
       }
       c = c.next;
     } while (c !== a);
-    if (!l) {
+    if (!d) {
       return null;
     }
     if (b === e) {
-      return l.prev;
+      return d.prev;
     }
-    a = l;
-    d = l.x;
-    var f = l.y, g = Infinity;
-    for (c = l.next; c !== a;) {
-      if (b >= c.x && c.x >= d && b !== c.x && ud(v < f ? b : e, v, d, f, v < f ? e : b, v, c.x, c.y)) {
-        var p = Math.abs(v - c.y) / (b - c.x);
-        (p < g || p === g && c.x > l.x) && ze(c, k) && (l = c, g = p);
+    a = d;
+    l = d.x;
+    var f = d.y, g = Infinity;
+    for (c = d.next; c !== a;) {
+      if (b >= c.x && c.x >= l && b !== c.x && ud(u < f ? b : e, u, l, f, u < f ? e : b, u, c.x, c.y)) {
+        var p = Math.abs(u - c.y) / (b - c.x);
+        (p < g || p === g && c.x > d.x) && ze(c, k) && (d = c, g = p);
       }
       c = c.next;
     }
-    return l;
+    return d;
   }
-  function Ag(k, a, c, b, e) {
+  function Bg(k, a, c, b, e) {
     k = 32767 * (k - c) * e;
     a = 32767 * (a - b) * e;
     k = (k | k << 8) & 16711935;
@@ -5169,7 +5176,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = (a | a << 2) & 858993459;
     return (k | k << 1) & 1431655765 | ((a | a << 1) & 1431655765) << 1;
   }
-  function bk(k) {
+  function dk(k) {
     var a = k, c = k;
     do {
       if (a.x < c.x || a.x === c.x && a.y < c.y) {
@@ -5188,26 +5195,26 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   function Hc(k, a) {
     return k.x === a.x && k.y === a.y;
   }
-  function ei(k, a, c, b) {
+  function gi(k, a, c, b) {
     return Hc(k, c) && Hc(a, b) || Hc(k, b) && Hc(c, a) ? !0 : 0 < Sa(k, a, c) !== 0 < Sa(k, a, b) && 0 < Sa(c, b, k) !== 0 < Sa(c, b, a);
   }
   function ze(k, a) {
     return 0 > Sa(k.prev, k, k.next) ? 0 <= Sa(k, a, k.next) && 0 <= Sa(k, k.prev, a) : 0 > Sa(k, a, k.prev) || 0 > Sa(k, k.next, a);
   }
-  function fi(k, a) {
-    var c = new Bg(k.i, k.x, k.y), b = new Bg(a.i, a.x, a.y), v = k.next, e = a.prev;
+  function hi(k, a) {
+    var c = new Cg(k.i, k.x, k.y), b = new Cg(a.i, a.x, a.y), u = k.next, e = a.prev;
     k.next = a;
     a.prev = k;
-    c.next = v;
-    v.prev = c;
+    c.next = u;
+    u.prev = c;
     b.next = c;
     c.prev = b;
     e.next = b;
     b.prev = e;
     return b;
   }
-  function di(k, a, c, b) {
-    k = new Bg(k, a, c);
+  function fi(k, a, c, b) {
+    k = new Cg(k, a, c);
     b ? (k.next = b.next, k.prev = b, b.next.prev = k, b.next = k) : (k.prev = k, k.next = k);
     return k;
   }
@@ -5217,18 +5224,18 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k.prevZ && (k.prevZ.nextZ = k.nextZ);
     k.nextZ && (k.nextZ.prevZ = k.prevZ);
   }
-  function Bg(k, a, c) {
+  function Cg(k, a, c) {
     this.i = k;
     this.x = a;
     this.y = c;
     this.nextZ = this.prevZ = this.z = this.next = this.prev = null;
     this.steiner = !1;
   }
-  function gi(k) {
+  function ii(k) {
     var a = k.length;
     2 < a && k[a - 1].equals(k[0]) && k.pop();
   }
-  function hi(k, a) {
+  function ji(k, a) {
     for (var c = 0; c < a.length; c++) {
       k.push(a[c].x), k.push(a[c].y);
     }
@@ -5248,25 +5255,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       function d(k, a, c) {
         var b = k.x - a.x;
-        var v = k.y - a.y;
+        var u = k.y - a.y;
         var e = c.x - k.x;
-        var d = c.y - k.y, l = b * b + v * v;
-        if (Math.abs(b * d - v * e) > Number.EPSILON) {
+        var d = c.y - k.y, l = b * b + u * u;
+        if (Math.abs(b * d - u * e) > Number.EPSILON) {
           var f = Math.sqrt(l), g = Math.sqrt(e * e + d * d);
-          l = a.x - v / f;
+          l = a.x - u / f;
           a = a.y + b / f;
-          d = ((c.x - d / g - l) * d - (c.y + e / g - a) * e) / (b * d - v * e);
+          d = ((c.x - d / g - l) * d - (c.y + e / g - a) * e) / (b * d - u * e);
           e = l + b * d - k.x;
-          b = a + v * d - k.y;
-          v = e * e + b * b;
-          if (2 >= v) {
+          b = a + u * d - k.y;
+          u = e * e + b * b;
+          if (2 >= u) {
             return new h(e, b);
           }
-          v = Math.sqrt(v / 2);
+          u = Math.sqrt(u / 2);
         } else {
-          k = !1, b > Number.EPSILON ? e > Number.EPSILON && (k = !0) : b < -Number.EPSILON ? e < -Number.EPSILON && (k = !0) : Math.sign(v) === Math.sign(d) && (k = !0), k ? (e = -v, v = Math.sqrt(l)) : (e = b, b = v, v = Math.sqrt(l / 2));
+          k = !1, b > Number.EPSILON ? e > Number.EPSILON && (k = !0) : b < -Number.EPSILON ? e < -Number.EPSILON && (k = !0) : Math.sign(u) === Math.sign(d) && (k = !0), k ? (e = -u, u = Math.sqrt(l)) : (e = b, b = u, u = Math.sqrt(l / 2));
         }
-        return new h(e / v, b / v);
+        return new h(e / u, b / u);
       }
       function l(k, a) {
         for (P = k.length; 0 <= --P;) {
@@ -5283,8 +5290,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             p(m);
             p(h);
             p(g);
-            f = v.length / 3;
-            f = z.generateSideWallUV(b, v, f - 6, f - 3, f - 2, f - 1);
+            f = u.length / 3;
+            f = z.generateSideWallUV(b, u, f - 6, f - 3, f - 2, f - 1);
             n(f[0]);
             n(f[1]);
             n(f[3]);
@@ -5303,34 +5310,34 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         p(k);
         p(a);
         p(c);
-        k = v.length / 3;
-        k = z.generateTopUV(b, v, k - 3, k - 2, k - 1);
+        k = u.length / 3;
+        k = z.generateTopUV(b, u, k - 3, k - 2, k - 1);
         n(k[0]);
         n(k[1]);
         n(k[2]);
       }
       function p(k) {
-        v.push(q[3 * k]);
-        v.push(q[3 * k + 1]);
-        v.push(q[3 * k + 2]);
+        u.push(q[3 * k]);
+        u.push(q[3 * k + 1]);
+        u.push(q[3 * k + 2]);
       }
       function n(k) {
         e.push(k.x);
         e.push(k.y);
       }
-      var q = [], r = void 0 !== a.curveSegments ? a.curveSegments : 12, t = void 0 !== a.steps ? a.steps : 1, L = void 0 !== a.depth ? a.depth : 100, u = void 0 !== a.bevelEnabled ? a.bevelEnabled : !0, y = void 0 !== a.bevelThickness ? a.bevelThickness : 6, w = void 0 !== a.bevelSize ? a.bevelSize : y - 2, ca = void 0 !== a.bevelOffset ? a.bevelOffset : 0, x = void 0 !== a.bevelSegments ? a.bevelSegments : 3, T = a.extrudePath, z = void 0 !== a.UVGenerator ? a.UVGenerator : ck;
-      void 0 !== a.amount && (console.warn("THREE.ExtrudeBufferGeometry: amount has been renamed to depth."), L = a.amount);
+      var q = [], r = void 0 !== a.curveSegments ? a.curveSegments : 12, t = void 0 !== a.steps ? a.steps : 1, K = void 0 !== a.depth ? a.depth : 100, v = void 0 !== a.bevelEnabled ? a.bevelEnabled : !0, y = void 0 !== a.bevelThickness ? a.bevelThickness : 6, w = void 0 !== a.bevelSize ? a.bevelSize : y - 2, ca = void 0 !== a.bevelOffset ? a.bevelOffset : 0, x = void 0 !== a.bevelSegments ? a.bevelSegments : 3, T = a.extrudePath, z = void 0 !== a.UVGenerator ? a.UVGenerator : ek;
+      void 0 !== a.amount && (console.warn("THREE.ExtrudeBufferGeometry: amount has been renamed to depth."), K = a.amount);
       var sa = !1;
       if (T) {
         var C = T.getSpacedPoints(t);
         sa = !0;
-        u = !1;
+        v = !1;
         var A = T.computeFrenetFrames(t, !1);
         var D = new m;
         var ia = new m;
         var oa = new m;
       }
-      u || (ca = w = y = x = 0);
+      v || (ca = w = y = x = 0);
       var B;
       r = k.extractPoints(r);
       k = r.shape;
@@ -5352,9 +5359,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       r = [];
       var P = 0;
       var O = pa.length;
-      var K = O - 1;
-      for (G = P + 1; P < O; P++, K++, G++) {
-        K === O && (K = 0), G === O && (G = 0), r[P] = d(pa[P], pa[K], pa[G]);
+      var L = O - 1;
+      for (G = P + 1; P < O; P++, L++, G++) {
+        L === O && (L = 0), G === O && (G = 0), r[P] = d(pa[P], pa[L], pa[G]);
       }
       T = [];
       var I = r.concat();
@@ -5364,15 +5371,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         var ob = [];
         P = 0;
         O = E.length;
-        K = O - 1;
-        for (G = P + 1; P < O; P++, K++, G++) {
-          K === O && (K = 0), G === O && (G = 0), ob[P] = d(E[P], E[K], E[G]);
+        L = O - 1;
+        for (G = P + 1; P < O; P++, L++, G++) {
+          L === O && (L = 0), G === O && (G = 0), ob[P] = d(E[P], E[L], E[G]);
         }
         T.push(ob);
         I = I.concat(ob);
       }
-      for (K = 0; K < x; K++) {
-        O = K / x;
+      for (L = 0; L < x; L++) {
+        O = L / x;
         var N = y * Math.cos(O * Math.PI / 2);
         G = w * Math.sin(O * Math.PI / 2) + ca;
         P = 0;
@@ -5389,31 +5396,31 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       G = w + ca;
       for (P = 0; P < H; P++) {
-        S = u ? c(k[P], I[P], G) : k[P], sa ? (ia.copy(A.normals[0]).multiplyScalar(S.x), D.copy(A.binormals[0]).multiplyScalar(S.y), oa.copy(C[0]).add(ia).add(D), f(oa.x, oa.y, oa.z)) : f(S.x, S.y, 0);
+        S = v ? c(k[P], I[P], G) : k[P], sa ? (ia.copy(A.normals[0]).multiplyScalar(S.x), D.copy(A.binormals[0]).multiplyScalar(S.y), oa.copy(C[0]).add(ia).add(D), f(oa.x, oa.y, oa.z)) : f(S.x, S.y, 0);
       }
       for (O = 1; O <= t; O++) {
         for (P = 0; P < H; P++) {
-          S = u ? c(k[P], I[P], G) : k[P], sa ? (ia.copy(A.normals[O]).multiplyScalar(S.x), D.copy(A.binormals[O]).multiplyScalar(S.y), oa.copy(C[O]).add(ia).add(D), f(oa.x, oa.y, oa.z)) : f(S.x, S.y, L / t * O);
+          S = v ? c(k[P], I[P], G) : k[P], sa ? (ia.copy(A.normals[O]).multiplyScalar(S.x), D.copy(A.binormals[O]).multiplyScalar(S.y), oa.copy(C[O]).add(ia).add(D), f(oa.x, oa.y, oa.z)) : f(S.x, S.y, K / t * O);
         }
       }
-      for (K = x - 1; 0 <= K; K--) {
-        O = K / x;
+      for (L = x - 1; 0 <= L; L--) {
+        O = L / x;
         N = y * Math.cos(O * Math.PI / 2);
         G = w * Math.sin(O * Math.PI / 2) + ca;
         P = 0;
         for (O = pa.length; P < O; P++) {
-          S = c(pa[P], r[P], G), f(S.x, S.y, L + N);
+          S = c(pa[P], r[P], G), f(S.x, S.y, K + N);
         }
         F = 0;
         for (B = Oa.length; F < B; F++) {
           for (E = Oa[F], ob = T[F], P = 0, O = E.length; P < O; P++) {
-            S = c(E[P], ob[P], G), sa ? f(S.x, S.y + C[t - 1].y, C[t - 1].x + N) : f(S.x, S.y, L + N);
+            S = c(E[P], ob[P], G), sa ? f(S.x, S.y + C[t - 1].y, C[t - 1].x + N) : f(S.x, S.y, K + N);
           }
         }
       }
       (function() {
-        var k = v.length / 3;
-        if (u) {
+        var k = u.length / 3;
+        if (v) {
           var a = 0 * H;
           for (P = 0; P < M; P++) {
             Va = Ha[P], g(Va[2] + a, Va[1] + a, Va[0] + a);
@@ -5430,34 +5437,34 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             Va = Ha[P], g(Va[0] + H * t, Va[1] + H * t, Va[2] + H * t);
           }
         }
-        b.addGroup(k, v.length / 3 - k, 0);
+        b.addGroup(k, u.length / 3 - k, 0);
       })();
       (function() {
-        var k = v.length / 3, a = 0;
+        var k = u.length / 3, a = 0;
         l(pa, a);
         a += pa.length;
         F = 0;
         for (B = Oa.length; F < B; F++) {
           E = Oa[F], l(E, a), a += E.length;
         }
-        b.addGroup(k, v.length / 3 - k, 1);
+        b.addGroup(k, u.length / 3 - k, 1);
       })();
     }
     N.call(this);
     this.type = "ExtrudeBufferGeometry";
     this.parameters = {shapes:k, options:a};
     k = Array.isArray(k) ? k : [k];
-    for (var b = this, v = [], e = [], d = 0, l = k.length; d < l; d++) {
+    for (var b = this, u = [], e = [], d = 0, l = k.length; d < l; d++) {
       c(k[d]);
     }
-    this.setAttribute("position", new Q(v, 3));
+    this.setAttribute("position", new Q(u, 3));
     this.setAttribute("uv", new Q(e, 2));
     this.computeVertexNormals();
   }
-  function ii(k, a, c) {
+  function ki(k, a, c) {
     c.shapes = [];
     if (Array.isArray(k)) {
-      for (var b = 0, v = k.length; b < v; b++) {
+      for (var b = 0, u = k.length; b < u; b++) {
         c.shapes.push(k[b].uuid);
       }
     } else {
@@ -5505,10 +5512,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     e = void 0 !== e ? e : 2 * Math.PI;
     d = void 0 !== d ? d : 0;
     l = void 0 !== l ? l : Math.PI;
-    var v = Math.min(d + l, Math.PI), f, g, p = 0, n = [], h = new m, q = new m, r = [], t = [], u = [], L = [];
+    var u = Math.min(d + l, Math.PI), f, g, p = 0, n = [], h = new m, q = new m, r = [], t = [], K = [], v = [];
     for (g = 0; g <= c; g++) {
       var y = [], w = g / c, ca = 0;
-      0 == g && 0 == d ? ca = .5 / a : g == c && v == Math.PI && (ca = -.5 / a);
+      0 == g && 0 == d ? ca = .5 / a : g == c && u == Math.PI && (ca = -.5 / a);
       for (f = 0; f <= a; f++) {
         var x = f / a;
         h.x = -k * Math.cos(b + x * e) * Math.sin(d + w * l);
@@ -5516,21 +5523,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         h.z = k * Math.sin(b + x * e) * Math.sin(d + w * l);
         t.push(h.x, h.y, h.z);
         q.copy(h).normalize();
-        u.push(q.x, q.y, q.z);
-        L.push(x + ca, 1 - w);
+        K.push(q.x, q.y, q.z);
+        v.push(x + ca, 1 - w);
         y.push(p++);
       }
       n.push(y);
     }
     for (g = 0; g < c; g++) {
       for (f = 0; f < a; f++) {
-        k = n[g][f + 1], b = n[g][f], e = n[g + 1][f], l = n[g + 1][f + 1], (0 !== g || 0 < d) && r.push(k, b, l), (g !== c - 1 || v < Math.PI) && r.push(b, e, l);
+        k = n[g][f + 1], b = n[g][f], e = n[g + 1][f], l = n[g + 1][f + 1], (0 !== g || 0 < d) && r.push(k, b, l), (g !== c - 1 || u < Math.PI) && r.push(b, e, l);
       }
     }
     this.setIndex(r);
     this.setAttribute("position", new Q(t, 3));
-    this.setAttribute("normal", new Q(u, 3));
-    this.setAttribute("uv", new Q(L, 2));
+    this.setAttribute("normal", new Q(K, 3));
+    this.setAttribute("uv", new Q(v, 2));
   }
   function Ce(k, a, c, b, e, d) {
     X.call(this);
@@ -5549,19 +5556,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     d = void 0 !== d ? d : 2 * Math.PI;
     c = void 0 !== c ? Math.max(3, c) : 8;
     b = void 0 !== b ? Math.max(1, b) : 1;
-    var v = [], l = [], f = [], g = [], p = k, n = (a - k) / b, q = new m, r = new h, t, u;
+    var u = [], l = [], f = [], g = [], p = k, n = (a - k) / b, q = new m, r = new h, t, v;
     for (t = 0; t <= b; t++) {
-      for (u = 0; u <= c; u++) {
-        k = e + u / c * d, q.x = p * Math.cos(k), q.y = p * Math.sin(k), l.push(q.x, q.y, q.z), f.push(0, 0, 1), r.x = (q.x / a + 1) / 2, r.y = (q.y / a + 1) / 2, g.push(r.x, r.y);
+      for (v = 0; v <= c; v++) {
+        k = e + v / c * d, q.x = p * Math.cos(k), q.y = p * Math.sin(k), l.push(q.x, q.y, q.z), f.push(0, 0, 1), r.x = (q.x / a + 1) / 2, r.y = (q.y / a + 1) / 2, g.push(r.x, r.y);
       }
       p += n;
     }
     for (t = 0; t < b; t++) {
-      for (a = t * (c + 1), u = 0; u < c; u++) {
-        k = u + a, e = k + c + 1, d = k + c + 2, p = k + 1, v.push(k, e, p), v.push(e, d, p);
+      for (a = t * (c + 1), v = 0; v < c; v++) {
+        k = v + a, e = k + c + 1, d = k + c + 2, p = k + 1, u.push(k, e, p), u.push(e, d, p);
       }
     }
-    this.setIndex(v);
+    this.setIndex(u);
     this.setAttribute("position", new Q(l, 3));
     this.setAttribute("normal", new Q(f, 3));
     this.setAttribute("uv", new Q(g, 2));
@@ -5581,7 +5588,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     c = c || 0;
     b = b || 2 * Math.PI;
     b = ma.clamp(b, 0, 2 * Math.PI);
-    var v = [], e = [], d = [], l = 1 / a, f = new m, g = new h, p;
+    var u = [], e = [], d = [], l = 1 / a, f = new m, g = new h, p;
     for (p = 0; p <= a; p++) {
       var n = c + p * l * b;
       var q = Math.sin(n), r = Math.cos(n);
@@ -5591,16 +5598,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     for (p = 0; p < a; p++) {
       for (n = 0; n < k.length - 1; n++) {
-        c = n + p * k.length, l = c + k.length, f = c + k.length + 1, g = c + 1, v.push(c, l, g), v.push(l, f, g);
+        c = n + p * k.length, l = c + k.length, f = c + k.length + 1, g = c + 1, u.push(c, l, g), u.push(l, f, g);
       }
     }
-    this.setIndex(v);
+    this.setIndex(u);
     this.setAttribute("position", new Q(e, 3));
     this.setAttribute("uv", new Q(d, 2));
     this.computeVertexNormals();
     if (b === 2 * Math.PI) {
-      for (b = this.attributes.normal.array, v = new m, e = new m, d = new m, c = a * k.length * 3, n = p = 0; p < k.length; p++, n += 3) {
-        v.x = b[n + 0], v.y = b[n + 1], v.z = b[n + 2], e.x = b[c + n + 0], e.y = b[c + n + 1], e.z = b[c + n + 2], d.addVectors(v, e).normalize(), b[n + 0] = b[c + n + 0] = d.x, b[n + 1] = b[c + n + 1] = d.y, b[n + 2] = b[c + n + 2] = d.z;
+      for (b = this.attributes.normal.array, u = new m, e = new m, d = new m, c = a * k.length * 3, n = p = 0; p < k.length; p++, n += 3) {
+        u.x = b[n + 0], u.y = b[n + 1], u.z = b[n + 2], e.x = b[c + n + 0], e.y = b[c + n + 1], e.z = b[c + n + 2], d.addVectors(u, e).normalize(), b[n + 0] = b[c + n + 0] = d.x, b[n + 1] = b[c + n + 1] = d.y, b[n + 2] = b[c + n + 2] = d.z;
       }
     }
   }
@@ -5614,7 +5621,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }
   function Lc(k, a) {
     function c(k) {
-      var c, l = v.length / 3;
+      var c, l = u.length / 3;
       k = k.extractPoints(a);
       var g = k.shape, p = k.holes;
       !1 === Ub.isClockWise(g) && (g = g.reverse());
@@ -5630,7 +5637,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       k = 0;
       for (c = g.length; k < c; k++) {
-        m = g[k], v.push(m.x, m.y, 0), e.push(0, 0, 1), d.push(m.x, m.y);
+        m = g[k], u.push(m.x, m.y, 0), e.push(0, 0, 1), d.push(m.x, m.y);
       }
       k = 0;
       for (c = n.length; k < c; k++) {
@@ -5641,7 +5648,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.type = "ShapeBufferGeometry";
     this.parameters = {shapes:k, curveSegments:a};
     a = a || 12;
-    var b = [], v = [], e = [], d = [], l = 0, f = 0;
+    var b = [], u = [], e = [], d = [], l = 0, f = 0;
     if (!1 === Array.isArray(k)) {
       c(k);
     } else {
@@ -5650,11 +5657,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
     }
     this.setIndex(b);
-    this.setAttribute("position", new Q(v, 3));
+    this.setAttribute("position", new Q(u, 3));
     this.setAttribute("normal", new Q(e, 3));
     this.setAttribute("uv", new Q(d, 2));
   }
-  function ji(k, a) {
+  function li(k, a) {
     a.shapes = [];
     if (Array.isArray(k)) {
       for (var c = 0, b = k.length; c < b; c++) {
@@ -5671,7 +5678,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.parameters = {thresholdAngle:a};
     var c = [];
     a = Math.cos(ma.DEG2RAD * (void 0 !== a ? a : 1));
-    var b = [0, 0], v = {}, e = ["a", "b", "c"];
+    var b = [0, 0], u = {}, e = ["a", "b", "c"];
     if (k.isBufferGeometry) {
       var d = new X;
       d.fromBufferGeometry(k);
@@ -5689,11 +5696,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         b[0] = Math.min(m, n);
         b[1] = Math.max(m, n);
         m = b[0] + "," + b[1];
-        void 0 === v[m] ? v[m] = {index1:b[0], index2:b[1], face1:l, face2:void 0} : v[m].face2 = l;
+        void 0 === u[m] ? u[m] = {index1:b[0], index2:b[1], face1:l, face2:void 0} : u[m].face2 = l;
       }
     }
-    for (m in v) {
-      if (b = v[m], void 0 === b.face2 || d[b.face1].normal.dot(d[b.face2].normal) <= a) {
+    for (m in u) {
+      if (b = u[m], void 0 === b.face2 || d[b.face1].normal.dot(d[b.face2].normal) <= a) {
         e = k[b.index1], c.push(e.x, e.y, e.z), e = k[b.index2], c.push(e.x, e.y, e.z);
       }
     }
@@ -5707,18 +5714,18 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.mergeVertices();
   }
   function Vb(k, a, c, b, e, d, l, f) {
-    function v(c) {
-      var v, e = new h, d = new m, u = 0, w = !0 === c ? k : a, ca = !0 === c ? 1 : -1;
+    function u(c) {
+      var u, e = new h, d = new m, v = 0, w = !0 === c ? k : a, ca = !0 === c ? 1 : -1;
       var x = t;
-      for (v = 1; v <= b; v++) {
-        n.push(0, L * ca, 0), q.push(0, ca, 0), r.push(.5, .5), t++;
+      for (u = 1; u <= b; u++) {
+        n.push(0, K * ca, 0), q.push(0, ca, 0), r.push(.5, .5), t++;
       }
       var T = t;
-      for (v = 0; v <= b; v++) {
-        var z = v / b * f + l, C = Math.cos(z);
+      for (u = 0; u <= b; u++) {
+        var z = u / b * f + l, C = Math.cos(z);
         z = Math.sin(z);
         d.x = w * z;
-        d.y = L * ca;
+        d.y = K * ca;
         d.z = w * C;
         n.push(d.x, d.y, d.z);
         q.push(0, ca, 0);
@@ -5727,11 +5734,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         r.push(e.x, e.y);
         t++;
       }
-      for (v = 0; v < b; v++) {
-        e = x + v, d = T + v, !0 === c ? p.push(d, d + 1, e) : p.push(d + 1, d, e), u += 3;
+      for (u = 0; u < b; u++) {
+        e = x + u, d = T + u, !0 === c ? p.push(d, d + 1, e) : p.push(d + 1, d, e), v += 3;
       }
-      g.addGroup(y, u, !0 === c ? 1 : 2);
-      y += u;
+      g.addGroup(y, v, !0 === c ? 1 : 2);
+      y += v;
     }
     N.call(this);
     this.type = "CylinderBufferGeometry";
@@ -5745,16 +5752,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     d = void 0 !== d ? d : !1;
     l = void 0 !== l ? l : 0;
     f = void 0 !== f ? f : 2 * Math.PI;
-    var p = [], n = [], q = [], r = [], t = 0, u = [], L = c / 2, y = 0;
+    var p = [], n = [], q = [], r = [], t = 0, v = [], K = c / 2, y = 0;
     (function() {
-      var v, d, h = new m, w = new m, ca = 0, x = (a - k) / c;
+      var u, d, h = new m, w = new m, ca = 0, x = (a - k) / c;
       for (d = 0; d <= e; d++) {
         var T = [], z = d / e, C = z * (a - k) + k;
-        for (v = 0; v <= b; v++) {
-          var sa = v / b, A = sa * f + l, D = Math.sin(A);
+        for (u = 0; u <= b; u++) {
+          var sa = u / b, A = sa * f + l, D = Math.sin(A);
           A = Math.cos(A);
           w.x = C * D;
-          w.y = -z * c + L;
+          w.y = -z * c + K;
           w.z = C * A;
           n.push(w.x, w.y, w.z);
           h.set(D, x, A).normalize();
@@ -5762,17 +5769,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           r.push(sa, 1 - z);
           T.push(t++);
         }
-        u.push(T);
+        v.push(T);
       }
-      for (v = 0; v < b; v++) {
+      for (u = 0; u < b; u++) {
         for (d = 0; d < e; d++) {
-          h = u[d + 1][v], w = u[d + 1][v + 1], x = u[d][v + 1], p.push(u[d][v], h, x), p.push(h, w, x), ca += 6;
+          h = v[d + 1][u], w = v[d + 1][u + 1], x = v[d][u + 1], p.push(v[d][u], h, x), p.push(h, w, x), ca += 6;
         }
       }
       g.addGroup(y, ca, 0);
       y += ca;
     })();
-    !1 === d && (0 < k && v(!0), 0 < a && v(!1));
+    !1 === d && (0 < k && u(!0), 0 < a && u(!1));
     this.setIndex(p);
     this.setAttribute("position", new Q(n, 3));
     this.setAttribute("normal", new Q(q, 3));
@@ -5803,7 +5810,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = void 0 !== a ? Math.max(3, a) : 8;
     c = void 0 !== c ? c : 0;
     b = void 0 !== b ? b : 2 * Math.PI;
-    var v = [], e = [], d = [], l = [], f, g = new m, p = new h;
+    var u = [], e = [], d = [], l = [], f, g = new m, p = new h;
     e.push(0, 0, 0);
     d.push(0, 0, 1);
     l.push(.5, .5);
@@ -5819,9 +5826,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       l.push(p.x, p.y);
     }
     for (f = 1; f <= a; f++) {
-      v.push(f, f + 1, 0);
+      u.push(f, f + 1, 0);
     }
-    this.setIndex(v);
+    this.setIndex(u);
     this.setAttribute("position", new Q(e, 3));
     this.setAttribute("normal", new Q(d, 3));
     this.setAttribute("uv", new Q(l, 2));
@@ -5871,11 +5878,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     Ib.call(this);
     this.defines = {STANDARD:"", PHYSICAL:""};
     this.type = "MeshPhysicalMaterial";
-    this.reflectivity = .5;
-    this.clearcoatRoughness = this.clearcoat = 0;
-    this.sheen = null;
+    this.clearcoat = 0;
+    this.clearcoatMap = null;
+    this.clearcoatRoughness = 0;
+    this.clearcoatRoughnessMap = null;
     this.clearcoatNormalScale = new h(1, 1);
     this.clearcoatNormalMap = null;
+    this.reflectivity = .5;
+    this.sheen = null;
     this.transparency = 0;
     this.setValues(k);
   }
@@ -6055,7 +6065,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.uuid = ma.generateUUID();
     0 > this.duration && this.resetDuration();
   }
-  function dk(k) {
+  function fk(k) {
     switch(k.toLowerCase()) {
       case "scalar":
       case "double":
@@ -6080,11 +6090,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     throw Error("THREE.KeyframeTrack: Unsupported typeName: " + k);
   }
-  function ek(k) {
+  function gk(k) {
     if (void 0 === k.type) {
       throw Error("THREE.KeyframeTrack: track type undefined, can not parse");
     }
-    var a = dk(k.type);
+    var a = fk(k.type);
     if (void 0 === k.times) {
       var c = [], b = [];
       Ea.flattenJSON(k.keys, c, b, "value");
@@ -6093,25 +6103,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return void 0 !== a.parse ? a.parse(k) : new a(k.name, k.times, k.values, k.interpolation);
   }
-  function Cg(k, a, c) {
-    var b = this, v = !1, e = 0, d = 0, l = void 0, f = [];
+  function Dg(k, a, c) {
+    var b = this, u = !1, e = 0, d = 0, l = void 0, f = [];
     this.onStart = void 0;
     this.onLoad = k;
     this.onProgress = a;
     this.onError = c;
     this.itemStart = function(k) {
       d++;
-      if (!1 === v && void 0 !== b.onStart) {
+      if (!1 === u && void 0 !== b.onStart) {
         b.onStart(k, e, d);
       }
-      v = !0;
+      u = !0;
     };
     this.itemEnd = function(k) {
       e++;
       if (void 0 !== b.onProgress) {
         b.onProgress(k, e, d);
       }
-      if (e === d && (v = !1, void 0 !== b.onLoad)) {
+      if (e === d && (u = !1, void 0 !== b.onLoad)) {
         b.onLoad();
       }
     };
@@ -6138,27 +6148,27 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     };
     this.getHandler = function(k) {
       for (var a = 0, c = f.length; a < c; a += 2) {
-        var b = f[a], v = f[a + 1];
+        var b = f[a], u = f[a + 1];
         b.global && (b.lastIndex = 0);
         if (b.test(k)) {
-          return v;
+          return u;
         }
       }
       return null;
     };
   }
   function qa(k) {
-    this.manager = void 0 !== k ? k : ki;
+    this.manager = void 0 !== k ? k : mi;
     this.crossOrigin = "anonymous";
     this.resourcePath = this.path = "";
   }
   function nb(k) {
     qa.call(this, k);
   }
-  function Dg(k) {
+  function Eg(k) {
     qa.call(this, k);
   }
-  function Eg(k) {
+  function Fg(k) {
     qa.call(this, k);
   }
   function uf(k) {
@@ -6193,25 +6203,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     hb.call(this, k, a, c, c, b, e, d);
     this.type = "ArcCurve";
   }
-  function Fg() {
+  function Gg() {
     var k = 0, a = 0, c = 0, b = 0;
-    return {initCatmullRom:function(v, e, d, l, f) {
-      v = f * (d - v);
+    return {initCatmullRom:function(u, e, d, l, f) {
+      u = f * (d - u);
       l = f * (l - e);
       k = e;
-      a = v;
-      c = -3 * e + 3 * d - 2 * v - l;
-      b = 2 * e - 2 * d + v + l;
-    }, initNonuniformCatmullRom:function(v, e, d, l, f, g, p) {
-      v = ((e - v) / f - (d - v) / (f + g) + (d - e) / g) * g;
+      a = u;
+      c = -3 * e + 3 * d - 2 * u - l;
+      b = 2 * e - 2 * d + u + l;
+    }, initNonuniformCatmullRom:function(u, e, d, l, f, g, p) {
+      u = ((e - u) / f - (d - u) / (f + g) + (d - e) / g) * g;
       l = ((d - e) / g - (l - e) / (g + p) + (l - d) / p) * g;
       k = e;
-      a = v;
-      c = -3 * e + 3 * d - 2 * v - l;
-      b = 2 * e - 2 * d + v + l;
-    }, calc:function(v) {
-      var e = v * v;
-      return k + a * v + c * e + b * e * v;
+      a = u;
+      c = -3 * e + 3 * d - 2 * u - l;
+      b = 2 * e - 2 * d + u + l;
+    }, calc:function(u) {
+      var e = u * u;
+      return k + a * u + c * e + b * e * u;
     }};
   }
   function Xa(k, a, c, b) {
@@ -6222,19 +6232,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.curveType = c || "centripetal";
     this.tension = b || .5;
   }
-  function li(k, a, c, b, e) {
+  function ni(k, a, c, b, e) {
     a = .5 * (b - a);
     e = .5 * (e - c);
-    var v = k * k;
-    return (2 * c - 2 * b + a + e) * k * v + (-3 * c + 3 * b - 2 * a - e) * v + a * k + c;
+    var u = k * k;
+    return (2 * c - 2 * b + a + e) * k * u + (-3 * c + 3 * b - 2 * a - e) * u + a * k + c;
   }
   function Je(k, a, c, b) {
-    var v = 1 - k;
-    return v * v * a + 2 * (1 - k) * k * c + k * k * b;
+    var u = 1 - k;
+    return u * u * a + 2 * (1 - k) * k * c + k * k * b;
   }
   function Ke(k, a, c, b, e) {
-    var v = 1 - k, d = 1 - k;
-    return v * v * v * a + 3 * d * d * k * c + 3 * (1 - k) * k * k * b + k * k * k * e;
+    var u = 1 - k, d = 1 - k;
+    return u * u * u * a + 3 * d * d * k * c + 3 * (1 - k) * k * k * b + k * k * k * e;
   }
   function ub(k, a, c, b) {
     ea.call(this);
@@ -6348,7 +6358,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.decay = void 0 !== d ? d : 1;
     this.shadow = new yf;
   }
-  function Gg() {
+  function Hg() {
     Lb.call(this, new ha(90, 1, .5, 500));
     this._frameExtents = new h(4, 2);
     this._viewportCount = 6;
@@ -6366,7 +6376,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }});
     this.distance = void 0 !== c ? c : 0;
     this.decay = void 0 !== b ? b : 1;
-    this.shadow = new Gg;
+    this.shadow = new Hg;
   }
   function Ed(k, a, c, b, e, d) {
     U.call(this);
@@ -6423,23 +6433,23 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   function Jf(k) {
     qa.call(this, k);
   }
-  function Hg(k) {
+  function Ig(k) {
     "undefined" === typeof createImageBitmap && console.warn("THREE.ImageBitmapLoader: createImageBitmap() not supported.");
     "undefined" === typeof fetch && console.warn("THREE.ImageBitmapLoader: fetch() not supported.");
     qa.call(this, k);
     this.options = void 0;
   }
-  function Ig() {
+  function Jg() {
     this.type = "ShapePath";
     this.color = new A;
     this.subPaths = [];
     this.currentPath = null;
   }
-  function Jg(k) {
+  function Kg(k) {
     this.type = "Font";
     this.data = k;
   }
-  function Kg(k) {
+  function Lg(k) {
     qa.call(this, k);
   }
   function Kf(k) {
@@ -6455,7 +6465,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     ua.call(this, void 0, a);
     this.sh = void 0 !== k ? k : new Lf;
   }
-  function Lg(k, a, c) {
+  function Mg(k, a, c) {
     zb.call(this, void 0, c);
     k = (new A).set(k);
     c = (new A).set(a);
@@ -6466,12 +6476,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.sh.coefficients[0].copy(a).add(k).multiplyScalar(c);
     this.sh.coefficients[1].copy(a).sub(k).multiplyScalar(b);
   }
-  function Mg(k, a) {
+  function Ng(k, a) {
     zb.call(this, void 0, a);
     k = (new A).set(k);
     this.sh.coefficients[0].set(k.r, k.g, k.b).multiplyScalar(2 * Math.sqrt(Math.PI));
   }
-  function mi() {
+  function oi() {
     this.type = "StereoCamera";
     this.aspect = 1;
     this.eyeSep = .064;
@@ -6483,20 +6493,20 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.cameraR.matrixAutoUpdate = !1;
     this._cache = {focus:null, fov:null, aspect:null, near:null, far:null, zoom:null, eyeSep:null};
   }
-  function Ng(k) {
+  function Og(k) {
     this.autoStart = void 0 !== k ? k : !0;
     this.elapsedTime = this.oldTime = this.startTime = 0;
     this.running = !1;
   }
-  function Og() {
+  function Pg() {
     t.call(this);
     this.type = "AudioListener";
-    this.context = Pg.getContext();
+    this.context = Qg.getContext();
     this.gain = this.context.createGain();
     this.gain.connect(this.context.destination);
     this.filter = null;
     this.timeDelta = 0;
-    this._clock = new Ng;
+    this._clock = new Og;
   }
   function Fd(k) {
     t.call(this);
@@ -6518,19 +6528,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this._pausedAt = this._startedAt = 0;
     this.filters = [];
   }
-  function Qg(k) {
+  function Rg(k) {
     Fd.call(this, k);
     this.panner = this.context.createPanner();
     this.panner.panningModel = "HRTF";
     this.panner.connect(this.gain);
   }
-  function Rg(k, a) {
+  function Sg(k, a) {
     this.analyser = k.context.createAnalyser();
     this.analyser.fftSize = void 0 !== a ? a : 2048;
     this.data = new Uint8Array(this.analyser.frequencyBinCount);
     k.getOutput().connect(this.analyser);
   }
-  function Sg(k, a, c) {
+  function Tg(k, a, c) {
     this.binding = k;
     this.valueSize = c;
     k = Float64Array;
@@ -6550,7 +6560,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this._mixBufferRegion = a;
     this.referenceCount = this.useCount = this.cumulativeWeight = 0;
   }
-  function ni(k, a, c) {
+  function pi(k, a, c) {
     c = c || Ya.parseTrackName(a);
     this._targetGroup = k;
     this._bindings = k.subscribe_(a, c);
@@ -6561,7 +6571,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.node = Ya.findNode(k, this.parsedPath.nodeName) || k;
     this.rootNode = k;
   }
-  function oi() {
+  function qi() {
     this.uuid = ma.generateUUID();
     this._objects = Array.prototype.slice.call(arguments);
     this.nCachedObjects_ = 0;
@@ -6583,7 +6593,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return b._bindings.length;
     }};
   }
-  function pi(k, a, c) {
+  function ri(k, a, c) {
     this._mixer = k;
     this._clip = a;
     this._localRoot = c || null;
@@ -6591,9 +6601,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = k.length;
     c = Array(a);
     for (var b = {endingStart:2400, endingEnd:2400}, e = 0; e !== a; ++e) {
-      var v = k[e].createInterpolant(null);
-      c[e] = v;
-      v.settings = b;
+      var u = k[e].createInterpolant(null);
+      c[e] = u;
+      u.settings = b;
     }
     this._interpolantSettings = b;
     this._interpolants = c;
@@ -6610,7 +6620,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.clampWhenFinished = !1;
     this.zeroSlopeAtEnd = this.zeroSlopeAtStart = !0;
   }
-  function Tg(k) {
+  function Ug(k) {
     this._root = k;
     this._initMemoryManager();
     this.time = this._accuIndex = 0;
@@ -6620,12 +6630,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     "string" === typeof k && (console.warn("THREE.Uniform: Type parameter is no longer needed."), k = a);
     this.value = k;
   }
-  function Ug(k, a, c) {
+  function Vg(k, a, c) {
     Tb.call(this, k, a);
     this.meshPerAttribute = c || 1;
   }
-  function Vg(k, a, c, b) {
-    this.ray = new u(k, a);
+  function Wg(k, a, c, b) {
+    this.ray = new v(k, a);
     this.near = c || 0;
     this.far = b || Infinity;
     this.camera = null;
@@ -6636,36 +6646,36 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return this.Points;
     }}});
   }
-  function qi(k, a) {
+  function si(k, a) {
     return k.distance - a.distance;
   }
-  function Wg(k, a, c, b) {
+  function Xg(k, a, c, b) {
     k.layers.test(a.layers) && k.raycast(a, c);
     if (!0 === b) {
       k = k.children;
       b = 0;
       for (var e = k.length; b < e; b++) {
-        Wg(k[b], a, c, !0);
+        Xg(k[b], a, c, !0);
       }
     }
   }
-  function ri(k, a, c) {
+  function ti(k, a, c) {
     this.radius = void 0 !== k ? k : 1;
     this.phi = void 0 !== a ? a : 0;
     this.theta = void 0 !== c ? c : 0;
     return this;
   }
-  function si(k, a, c) {
+  function ui(k, a, c) {
     this.radius = void 0 !== k ? k : 1;
     this.theta = void 0 !== a ? a : 0;
     this.y = void 0 !== c ? c : 0;
     return this;
   }
-  function Xg(k, a) {
+  function Yg(k, a) {
     this.min = void 0 !== k ? k : new h(Infinity, Infinity);
     this.max = void 0 !== a ? a : new h(-Infinity, -Infinity);
   }
-  function Yg(k, a) {
+  function Zg(k, a) {
     this.start = void 0 !== k ? k : new m;
     this.end = void 0 !== a ? a : new m;
   }
@@ -6685,8 +6695,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k = new N;
     a = [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, -1, 1];
     for (var c = 0, b = 1; 32 > c; c++, b++) {
-      var e = c / 32 * Math.PI * 2, v = b / 32 * Math.PI * 2;
-      a.push(Math.cos(e), Math.sin(e), 1, Math.cos(v), Math.sin(v), 1);
+      var e = c / 32 * Math.PI * 2, u = b / 32 * Math.PI * 2;
+      a.push(Math.cos(e), Math.sin(e), 1, Math.cos(u), Math.sin(u), 1);
     }
     k.setAttribute("position", new Q(a, 3));
     a = new Ca({fog:!1});
@@ -6694,16 +6704,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.add(this.cone);
     this.update();
   }
-  function ti(k) {
+  function vi(k) {
     var a = [];
     k && k.isBone && a.push(k);
     for (var c = 0; c < k.children.length; c++) {
-      a.push.apply(a, ti(k.children[c]));
+      a.push.apply(a, vi(k.children[c]));
     }
     return a;
   }
   function Uc(k) {
-    for (var a = ti(k), c = new N, b = [], e = [], d = new A(0, 0, 1), l = new A(0, 1, 0), f = 0; f < a.length; f++) {
+    for (var a = vi(k), c = new N, b = [], e = [], d = new A(0, 0, 1), l = new A(0, 1, 0), f = 0; f < a.length; f++) {
       var g = a[f];
       g.parent && g.parent.isBone && (b.push(0, 0, 0), b.push(0, 0, 0), e.push(d.r, d.g, d.b), e.push(l.r, l.g, l.b));
     }
@@ -6749,9 +6759,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = a || 10;
     c = new A(void 0 !== c ? c : 4473924);
     b = new A(void 0 !== b ? b : 8947848);
-    var e = a / 2, v = k / a, d = k / 2;
+    var e = a / 2, u = k / a, d = k / 2;
     k = [];
-    for (var l = [], f = 0, g = 0, p = -d; f <= a; f++, p += v) {
+    for (var l = [], f = 0, g = 0, p = -d; f <= a; f++, p += u) {
       k.push(-d, 0, p, d, 0, p);
       k.push(p, 0, -d, p, 0, d);
       var m = f === e ? c : b;
@@ -6777,13 +6787,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     b = b || 64;
     e = new A(void 0 !== e ? e : 4473924);
     d = new A(void 0 !== d ? d : 8947848);
-    var v = [], l = [], f;
+    var u = [], l = [], f;
     for (f = 0; f <= a; f++) {
       var g = f / a * 2 * Math.PI;
       var p = Math.sin(g) * k;
       g = Math.cos(g) * k;
-      v.push(0, 0, 0);
-      v.push(p, 0, g);
+      u.push(0, 0, 0);
+      u.push(p, 0, g);
       var m = f & 1 ? e : d;
       l.push(m.r, m.g, m.b);
       l.push(m.r, m.g, m.b);
@@ -6792,14 +6802,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       m = f & 1 ? e : d;
       var n = k - k / c * f;
       for (a = 0; a < b; a++) {
-        g = a / b * 2 * Math.PI, p = Math.sin(g) * n, g = Math.cos(g) * n, v.push(p, 0, g), l.push(m.r, m.g, m.b), g = (a + 1) / b * 2 * Math.PI, p = Math.sin(g) * n, g = Math.cos(g) * n, v.push(p, 0, g), l.push(m.r, m.g, m.b);
+        g = a / b * 2 * Math.PI, p = Math.sin(g) * n, g = Math.cos(g) * n, u.push(p, 0, g), l.push(m.r, m.g, m.b), g = (a + 1) / b * 2 * Math.PI, p = Math.sin(g) * n, g = Math.cos(g) * n, u.push(p, 0, g), l.push(m.r, m.g, m.b);
       }
     }
     k = new N;
-    k.setAttribute("position", new Q(v, 3));
+    k.setAttribute("position", new Q(u, 3));
     k.setAttribute("color", new Q(l, 3));
-    v = new Ca({vertexColors:!0});
-    Da.call(this, k, v);
+    u = new Ca({vertexColors:!0});
+    Da.call(this, k, u);
   }
   function Jd(k, a, c) {
     t.call(this);
@@ -6920,12 +6930,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 === b && (b = 16776960);
     void 0 === e && (e = .2 * c);
     void 0 === d && (d = .2 * e);
-    void 0 === Qf && (Qf = new N, Qf.setAttribute("position", new Q([0, 0, 0, 0, 1, 0], 3)), Zg = new Vb(0, .5, 1, 5, 1), Zg.translate(0, -.5, 0));
+    void 0 === Qf && (Qf = new N, Qf.setAttribute("position", new Q([0, 0, 0, 0, 1, 0], 3)), $g = new Vb(0, .5, 1, 5, 1), $g.translate(0, -.5, 0));
     this.position.copy(a);
     this.line = new fb(Qf, new Ca({color:b}));
     this.line.matrixAutoUpdate = !1;
     this.add(this.line);
-    this.cone = new W(Zg, new J({color:b}));
+    this.cone = new W($g, new J({color:b}));
     this.cone.matrixAutoUpdate = !1;
     this.add(this.cone);
     this.setDirection(k);
@@ -6940,155 +6950,155 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = new Ca({vertexColors:!0});
     Da.call(this, k, a);
   }
-  function $g(k) {
+  function ah(k) {
     Aa = k;
-    ah(Rf);
-  }
-  function ui(k) {
-    var a = {magFilter:1003, minFilter:1003, generateMipmaps:!1, type:k ? k.type : 1009, format:k ? k.format : 1023, encoding:k ? k.encoding : 3002, depthBuffer:!1, stencilBuffer:!1}, c = vi(a);
-    c.depthBuffer = k ? !1 : !0;
-    Sf = vi(a);
-    return c;
+    bh(Rf);
   }
   function wi(k) {
+    var a = {magFilter:1003, minFilter:1003, generateMipmaps:!1, type:k ? k.type : 1009, format:k ? k.format : 1023, encoding:k ? k.encoding : 3002, depthBuffer:!1, stencilBuffer:!1}, c = xi(a);
+    c.depthBuffer = k ? !1 : !0;
+    Sf = xi(a);
+    return c;
+  }
+  function yi(k) {
     Sf.dispose();
-    Aa.setRenderTarget(bh);
+    Aa.setRenderTarget(ch);
     k.scissorTest = !1;
     k.setSize(k.width, k.height);
   }
-  function ah(k) {
+  function bh(k) {
     var a = new y;
     a.add(new W(Qe[0], k));
-    Aa.compile(a, ch);
+    Aa.compile(a, dh);
   }
-  function vi(k) {
-    k = new e(3 * Mb, 3 * Mb, k);
-    k.texture.mapping = 306;
-    k.texture.name = "PMREM.cubeUv";
-    k.scissorTest = !0;
-    return k;
+  function xi(a) {
+    a = new e(3 * Mb, 3 * Mb, a);
+    a.texture.mapping = 306;
+    a.texture.name = "PMREM.cubeUv";
+    a.scissorTest = !0;
+    return a;
   }
-  function dh(k, a, c, b, e) {
-    k.viewport.set(a, c, b, e);
-    k.scissor.set(a, c, b, e);
+  function eh(a, c, b, e, d) {
+    a.viewport.set(c, b, e, d);
+    a.scissor.set(c, b, e, d);
   }
-  function xi(k) {
-    var a = Aa.autoClear;
+  function zi(a) {
+    var k = Aa.autoClear;
     Aa.autoClear = !1;
-    for (var c = 1; c < yi; c++) {
-      zi(k, c - 1, c, Math.sqrt(Tf[c] * Tf[c] - Tf[c - 1] * Tf[c - 1]), Ai[(c - 1) % Ai.length]);
+    for (var c = 1; c < Ai; c++) {
+      Bi(a, c - 1, c, Math.sqrt(Tf[c] * Tf[c] - Tf[c - 1] * Tf[c - 1]), Ci[(c - 1) % Ci.length]);
     }
-    Aa.autoClear = a;
+    Aa.autoClear = k;
   }
-  function zi(k, a, c, b, e) {
-    Bi(k, Sf, a, c, b, "latitudinal", e);
-    Bi(Sf, k, c, c, b, "longitudinal", e);
+  function Bi(a, c, b, e, d) {
+    Di(a, Sf, c, b, e, "latitudinal", d);
+    Di(Sf, a, b, b, e, "longitudinal", d);
   }
-  function Bi(k, a, c, b, e, d, l) {
-    "latitudinal" !== d && "longitudinal" !== d && console.error("blur direction must be either latitudinal or longitudinal!");
-    var v = new y;
-    v.add(new W(Qe[b], Rf));
-    var f = Rf.uniforms, g = Ci[c] - 1;
-    g = isFinite(e) ? Math.PI / (2 * g) : 2 * Math.PI / 39;
-    var p = e / g, m = isFinite(e) ? 1 + Math.floor(3 * p) : 20;
-    20 < m && console.warn("sigmaRadians, " + e + ", is too large and will clip, as it requested " + m + " samples when the maximum is set to 20");
-    e = [];
+  function Di(a, c, b, e, d, l, f) {
+    "latitudinal" !== l && "longitudinal" !== l && console.error("blur direction must be either latitudinal or longitudinal!");
+    var k = new y;
+    k.add(new W(Qe[e], Rf));
+    var u = Rf.uniforms, g = Ei[b] - 1;
+    g = isFinite(d) ? Math.PI / (2 * g) : 2 * Math.PI / 39;
+    var p = d / g, m = isFinite(d) ? 1 + Math.floor(3 * p) : 20;
+    20 < m && console.warn("sigmaRadians, " + d + ", is too large and will clip, as it requested " + m + " samples when the maximum is set to 20");
+    d = [];
     for (var n = 0, h = 0; 20 > h; ++h) {
       var q = h / p;
       q = Math.exp(-q * q / 2);
-      e.push(q);
+      d.push(q);
       0 == h ? n += q : h < m && (n += 2 * q);
     }
-    for (h = 0; h < e.length; h++) {
-      e[h] /= n;
+    for (h = 0; h < d.length; h++) {
+      d[h] /= n;
     }
-    f.envMap.value = k.texture;
-    f.samples.value = m;
-    f.weights.value = e;
-    f.latitudinal.value = "latitudinal" === d;
-    l && (f.poleAxis.value = l);
-    f.dTheta.value = g;
-    f.mipInt.value = 8 - c;
-    f.inputEncoding.value = Nb[k.texture.encoding];
-    f.outputEncoding.value = Nb[k.texture.encoding];
-    k = Ci[b];
-    q = 3 * Math.max(0, Mb - 2 * k);
-    dh(a, q, (0 === b ? 0 : 2 * Mb) + 2 * k * (4 < b ? b - 8 + 4 : 0), 3 * k, 2 * k);
-    Aa.setRenderTarget(a);
-    Aa.render(v, ch);
+    u.envMap.value = a.texture;
+    u.samples.value = m;
+    u.weights.value = d;
+    u.latitudinal.value = "latitudinal" === l;
+    f && (u.poleAxis.value = f);
+    u.dTheta.value = g;
+    u.mipInt.value = 8 - b;
+    u.inputEncoding.value = Nb[a.texture.encoding];
+    u.outputEncoding.value = Nb[a.texture.encoding];
+    a = Ei[e];
+    q = 3 * Math.max(0, Mb - 2 * a);
+    eh(c, q, (0 === e ? 0 : 2 * Mb) + 2 * a * (4 < e ? e - 8 + 4 : 0), 3 * a, 2 * a);
+    Aa.setRenderTarget(c);
+    Aa.render(k, dh);
   }
-  function Di() {
-    var k = new h(1, 1);
-    k = new Wb({uniforms:{envMap:{value:null}, texelSize:{value:k}, inputEncoding:{value:Nb[3E3]}, outputEncoding:{value:Nb[3E3]}}, vertexShader:eh(), fragmentShader:"\nprecision mediump float;\nprecision mediump int;\nvarying vec3 vOutputDirection;\nuniform sampler2D envMap;\nuniform vec2 texelSize;\n\n" + fh() + "\n\n#define RECIPROCAL_PI 0.31830988618\n#define RECIPROCAL_PI2 0.15915494\n\nvoid main() {\n\tgl_FragColor = vec4(0.0);\n\tvec3 outputDirection = normalize(vOutputDirection);\n\tvec2 uv;\n\tuv.y = asin(clamp(outputDirection.y, -1.0, 1.0)) * RECIPROCAL_PI + 0.5;\n\tuv.x = atan(outputDirection.z, outputDirection.x) * RECIPROCAL_PI2 + 0.5;\n\tvec2 f = fract(uv / texelSize - 0.5);\n\tuv -= f * texelSize;\n\tvec3 tl = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n\tuv.x += texelSize.x;\n\tvec3 tr = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n\tuv.y += texelSize.y;\n\tvec3 br = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n\tuv.x -= texelSize.x;\n\tvec3 bl = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n\tvec3 tm = mix(tl, tr, f.x);\n\tvec3 bm = mix(bl, br, f.x);\n\tgl_FragColor.rgb = mix(tm, bm, f.y);\n\tgl_FragColor = linearToOutputTexel(gl_FragColor);\n}\n\t\t", 
+  function Fi() {
+    var a = new h(1, 1);
+    a = new Wb({uniforms:{envMap:{value:null}, texelSize:{value:a}, inputEncoding:{value:Nb[3E3]}, outputEncoding:{value:Nb[3E3]}}, vertexShader:fh(), fragmentShader:"\nprecision mediump float;\nprecision mediump int;\nvarying vec3 vOutputDirection;\nuniform sampler2D envMap;\nuniform vec2 texelSize;\n\n" + gh() + "\n\n#define RECIPROCAL_PI 0.31830988618\n#define RECIPROCAL_PI2 0.15915494\n\nvoid main() {\n\tgl_FragColor = vec4(0.0);\n\tvec3 outputDirection = normalize(vOutputDirection);\n\tvec2 uv;\n\tuv.y = asin(clamp(outputDirection.y, -1.0, 1.0)) * RECIPROCAL_PI + 0.5;\n\tuv.x = atan(outputDirection.z, outputDirection.x) * RECIPROCAL_PI2 + 0.5;\n\tvec2 f = fract(uv / texelSize - 0.5);\n\tuv -= f * texelSize;\n\tvec3 tl = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n\tuv.x += texelSize.x;\n\tvec3 tr = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n\tuv.y += texelSize.y;\n\tvec3 br = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n\tuv.x -= texelSize.x;\n\tvec3 bl = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n\tvec3 tm = mix(tl, tr, f.x);\n\tvec3 bm = mix(bl, br, f.x);\n\tgl_FragColor.rgb = mix(tm, bm, f.y);\n\tgl_FragColor = linearToOutputTexel(gl_FragColor);\n}\n\t\t", 
     blending:0, depthTest:!1, depthWrite:!1});
-    k.type = "EquirectangularToCubeUV";
-    return k;
+    a.type = "EquirectangularToCubeUV";
+    return a;
   }
-  function Ei() {
-    var k = new Wb({uniforms:{envMap:{value:null}, inputEncoding:{value:Nb[3E3]}, outputEncoding:{value:Nb[3E3]}}, vertexShader:eh(), fragmentShader:"\nprecision mediump float;\nprecision mediump int;\nvarying vec3 vOutputDirection;\nuniform samplerCube envMap;\n\n" + fh() + "\n\nvoid main() {\n\tgl_FragColor = vec4(0.0);\n\tgl_FragColor.rgb = envMapTexelToLinear(textureCube(envMap, vec3( - vOutputDirection.x, vOutputDirection.yz ))).rgb;\n\tgl_FragColor = linearToOutputTexel(gl_FragColor);\n}\n\t\t", 
+  function Gi() {
+    var a = new Wb({uniforms:{envMap:{value:null}, inputEncoding:{value:Nb[3E3]}, outputEncoding:{value:Nb[3E3]}}, vertexShader:fh(), fragmentShader:"\nprecision mediump float;\nprecision mediump int;\nvarying vec3 vOutputDirection;\nuniform samplerCube envMap;\n\n" + gh() + "\n\nvoid main() {\n\tgl_FragColor = vec4(0.0);\n\tgl_FragColor.rgb = envMapTexelToLinear(textureCube(envMap, vec3( - vOutputDirection.x, vOutputDirection.yz ))).rgb;\n\tgl_FragColor = linearToOutputTexel(gl_FragColor);\n}\n\t\t", 
     blending:0, depthTest:!1, depthWrite:!1});
-    k.type = "CubemapToCubeUV";
-    return k;
-  }
-  function eh() {
-    return "\nprecision mediump float;\nprecision mediump int;\nattribute vec3 position;\nattribute vec2 uv;\nattribute float faceIndex;\nvarying vec3 vOutputDirection;\nvec3 getDirection(vec2 uv, float face) {\n\tuv = 2.0 * uv - 1.0;\n\tvec3 direction = vec3(uv, 1.0);\n\tif (face == 0.0) {\n\t\tdirection = direction.zyx;\n\t\tdirection.z *= -1.0;\n\t} else if (face == 1.0) {\n\t\tdirection = direction.xzy;\n\t\tdirection.z *= -1.0;\n\t} else if (face == 3.0) {\n\t\tdirection = direction.zyx;\n\t\tdirection.x *= -1.0;\n\t} else if (face == 4.0) {\n\t\tdirection = direction.xzy;\n\t\tdirection.y *= -1.0;\n\t} else if (face == 5.0) {\n\t\tdirection.xz *= -1.0;\n\t}\n\treturn direction;\n}\nvoid main() {\n\tvOutputDirection = getDirection(uv, faceIndex);\n\tgl_Position = vec4( position, 1.0 );\n}\n\t";
+    a.type = "CubemapToCubeUV";
+    return a;
   }
   function fh() {
+    return "\nprecision mediump float;\nprecision mediump int;\nattribute vec3 position;\nattribute vec2 uv;\nattribute float faceIndex;\nvarying vec3 vOutputDirection;\nvec3 getDirection(vec2 uv, float face) {\n\tuv = 2.0 * uv - 1.0;\n\tvec3 direction = vec3(uv, 1.0);\n\tif (face == 0.0) {\n\t\tdirection = direction.zyx;\n\t\tdirection.z *= -1.0;\n\t} else if (face == 1.0) {\n\t\tdirection = direction.xzy;\n\t\tdirection.z *= -1.0;\n\t} else if (face == 3.0) {\n\t\tdirection = direction.zyx;\n\t\tdirection.x *= -1.0;\n\t} else if (face == 4.0) {\n\t\tdirection = direction.xzy;\n\t\tdirection.y *= -1.0;\n\t} else if (face == 5.0) {\n\t\tdirection.xz *= -1.0;\n\t}\n\treturn direction;\n}\nvoid main() {\n\tvOutputDirection = getDirection(uv, faceIndex);\n\tgl_Position = vec4( position, 1.0 );\n}\n\t";
+  }
+  function gh() {
     return "\nuniform int inputEncoding;\nuniform int outputEncoding;\n\n#include <encodings_pars_fragment>\n\nvec4 inputTexelToLinear(vec4 value){\n\tif(inputEncoding == 0){\n\t\treturn value;\n\t}else if(inputEncoding == 1){\n\t\treturn sRGBToLinear(value);\n\t}else if(inputEncoding == 2){\n\t\treturn RGBEToLinear(value);\n\t}else if(inputEncoding == 3){\n\t\treturn RGBMToLinear(value, 7.0);\n\t}else if(inputEncoding == 4){\n\t\treturn RGBMToLinear(value, 16.0);\n\t}else if(inputEncoding == 5){\n\t\treturn RGBDToLinear(value, 256.0);\n\t}else{\n\t\treturn GammaToLinear(value, 2.2);\n\t}\n}\n\nvec4 linearToOutputTexel(vec4 value){\n\tif(outputEncoding == 0){\n\t\treturn value;\n\t}else if(outputEncoding == 1){\n\t\treturn LinearTosRGB(value);\n\t}else if(outputEncoding == 2){\n\t\treturn LinearToRGBE(value);\n\t}else if(outputEncoding == 3){\n\t\treturn LinearToRGBM(value, 7.0);\n\t}else if(outputEncoding == 4){\n\t\treturn LinearToRGBM(value, 16.0);\n\t}else if(outputEncoding == 5){\n\t\treturn LinearToRGBD(value, 256.0);\n\t}else{\n\t\treturn LinearToGamma(value, 2.2);\n\t}\n}\n\nvec4 envMapTexelToLinear(vec4 color) {\n\treturn inputTexelToLinear(color);\n}\n\t";
   }
-  function Fi(k) {
+  function Hi(a) {
     console.warn("THREE.ClosedSplineCurve3 has been deprecated. Use THREE.CatmullRomCurve3 instead.");
-    Xa.call(this, k);
+    Xa.call(this, a);
     this.type = "catmullrom";
     this.closed = !0;
   }
-  function Gi(k) {
+  function Ii(a) {
     console.warn("THREE.SplineCurve3 has been deprecated. Use THREE.CatmullRomCurve3 instead.");
-    Xa.call(this, k);
+    Xa.call(this, a);
     this.type = "catmullrom";
   }
-  function gh(k) {
+  function hh(a) {
     console.warn("THREE.Spline has been removed. Use THREE.CatmullRomCurve3 instead.");
-    Xa.call(this, k);
+    Xa.call(this, a);
     this.type = "catmullrom";
   }
   void 0 === Number.EPSILON && (Number.EPSILON = Math.pow(2, -52));
-  void 0 === Number.isInteger && (Number.isInteger = function(k) {
-    return "number" === typeof k && isFinite(k) && Math.floor(k) === k;
+  void 0 === Number.isInteger && (Number.isInteger = function(a) {
+    return "number" === typeof a && isFinite(a) && Math.floor(a) === a;
   });
-  void 0 === Math.sign && (Math.sign = function(k) {
-    return 0 > k ? -1 : 0 < k ? 1 : +k;
+  void 0 === Math.sign && (Math.sign = function(a) {
+    return 0 > a ? -1 : 0 < a ? 1 : +a;
   });
   !1 === "name" in Function.prototype && Object.defineProperty(Function.prototype, "name", {get:function() {
     return this.toString().match(/^\s*function\s*([^\(\s]*)/)[1];
   }});
-  void 0 === Object.assign && (Object.assign = function(k) {
-    if (void 0 === k || null === k) {
+  void 0 === Object.assign && (Object.assign = function(a) {
+    if (void 0 === a || null === a) {
       throw new TypeError("Cannot convert undefined or null to object");
     }
-    for (var a = Object(k), c = 1; c < arguments.length; c++) {
+    for (var k = Object(a), c = 1; c < arguments.length; c++) {
       var b = arguments[c];
       if (void 0 !== b && null !== b) {
         for (var e in b) {
-          Object.prototype.hasOwnProperty.call(b, e) && (a[e] = b[e]);
+          Object.prototype.hasOwnProperty.call(b, e) && (k[e] = b[e]);
         }
       }
     }
-    return a;
+    return k;
   });
-  Object.assign(d.prototype, {addEventListener:function(k, a) {
+  Object.assign(d.prototype, {addEventListener:function(a, c) {
     void 0 === this._listeners && (this._listeners = {});
-    var c = this._listeners;
-    void 0 === c[k] && (c[k] = []);
-    -1 === c[k].indexOf(a) && c[k].push(a);
-  }, hasEventListener:function(k, a) {
+    var k = this._listeners;
+    void 0 === k[a] && (k[a] = []);
+    -1 === k[a].indexOf(c) && k[a].push(c);
+  }, hasEventListener:function(a, c) {
     if (void 0 === this._listeners) {
       return !1;
     }
-    var c = this._listeners;
-    return void 0 !== c[k] && -1 !== c[k].indexOf(a);
-  }, removeEventListener:function(k, a) {
-    void 0 !== this._listeners && (k = this._listeners[k], void 0 !== k && (a = k.indexOf(a), -1 !== a && k.splice(a, 1)));
+    var k = this._listeners;
+    return void 0 !== k[a] && -1 !== k[a].indexOf(c);
+  }, removeEventListener:function(a, c) {
+    void 0 !== this._listeners && (a = this._listeners[a], void 0 !== a && (c = a.indexOf(c), -1 !== c && a.splice(c, 1)));
   }, dispatchEvent:function(a) {
     if (void 0 !== this._listeners) {
       var k = this._listeners[a.type];
@@ -7150,12 +7160,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, floorPowerOfTwo:function(a) {
     return Math.pow(2, Math.floor(Math.log(a) / Math.LN2));
   }, setQuaternionFromProperEuler:function(a, c, b, e, d) {
-    var k = Math.cos, v = Math.sin, f = k(b / 2);
-    b = v(b / 2);
-    var l = k((c + e) / 2), g = v((c + e) / 2), p = k((c - e) / 2), m = v((c - e) / 2);
+    var k = Math.cos, u = Math.sin, l = k(b / 2);
+    b = u(b / 2);
+    var f = k((c + e) / 2), g = u((c + e) / 2), p = k((c - e) / 2), m = u((c - e) / 2);
     k = k((e - c) / 2);
-    c = v((e - c) / 2);
-    "XYX" === d ? a.set(f * g, b * p, b * m, f * l) : "YZY" === d ? a.set(b * m, f * g, b * p, f * l) : "ZXZ" === d ? a.set(b * p, b * m, f * g, f * l) : "XZX" === d ? a.set(f * g, b * c, b * k, f * l) : "YXY" === d ? a.set(b * k, f * g, b * c, f * l) : "ZYZ" === d ? a.set(b * c, b * k, f * g, f * l) : console.warn("THREE.MathUtils: .setQuaternionFromProperEuler() encountered an unknown order.");
+    c = u((e - c) / 2);
+    "XYX" === d ? a.set(l * g, b * p, b * m, l * f) : "YZY" === d ? a.set(b * m, l * g, b * p, l * f) : "ZXZ" === d ? a.set(b * p, b * m, l * g, l * f) : "XZX" === d ? a.set(l * g, b * c, b * k, l * f) : "YXY" === d ? a.set(b * k, l * g, b * c, l * f) : "ZYZ" === d ? a.set(b * c, b * k, l * g, l * f) : console.warn("THREE.MathUtils: .setQuaternionFromProperEuler() encountered an unknown order.");
   }};
   Object.defineProperties(h.prototype, {width:{get:function() {
     return this.x;
@@ -7355,16 +7365,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.y = b * c + e * k + a.y;
     return this;
   }});
-  Object.assign(b.prototype, {isMatrix3:!0, set:function(a, c, b, e, d, f, l, g, p) {
+  Object.assign(b.prototype, {isMatrix3:!0, set:function(a, c, b, e, d, l, f, g, p) {
     var k = this.elements;
     k[0] = a;
     k[1] = e;
-    k[2] = l;
+    k[2] = f;
     k[3] = c;
     k[4] = d;
     k[5] = g;
     k[6] = b;
-    k[7] = f;
+    k[7] = l;
     k[8] = p;
     return this;
   }, identity:function() {
@@ -7402,17 +7412,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var k = a.elements, b = c.elements;
     c = this.elements;
     a = k[0];
-    var e = k[3], d = k[6], v = k[1], f = k[4], l = k[7], g = k[2], p = k[5];
+    var e = k[3], d = k[6], u = k[1], l = k[4], f = k[7], g = k[2], p = k[5];
     k = k[8];
-    var m = b[0], n = b[3], h = b[6], q = b[1], r = b[4], t = b[7], u = b[2], y = b[5];
+    var m = b[0], n = b[3], h = b[6], q = b[1], r = b[4], t = b[7], v = b[2], y = b[5];
     b = b[8];
-    c[0] = a * m + e * q + d * u;
+    c[0] = a * m + e * q + d * v;
     c[3] = a * n + e * r + d * y;
     c[6] = a * h + e * t + d * b;
-    c[1] = v * m + f * q + l * u;
-    c[4] = v * n + f * r + l * y;
-    c[7] = v * h + f * t + l * b;
-    c[2] = g * m + p * q + k * u;
+    c[1] = u * m + l * q + f * v;
+    c[4] = u * n + l * r + f * y;
+    c[7] = u * h + l * t + f * b;
+    c[2] = g * m + p * q + k * v;
     c[5] = g * n + p * r + k * y;
     c[8] = g * h + p * t + k * b;
     return this;
@@ -7429,33 +7439,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k[8] *= a;
     return this;
   }, determinant:function() {
-    var a = this.elements, c = a[0], b = a[1], e = a[2], d = a[3], f = a[4], l = a[5], g = a[6], p = a[7];
+    var a = this.elements, c = a[0], b = a[1], e = a[2], d = a[3], l = a[4], f = a[5], g = a[6], p = a[7];
     a = a[8];
-    return c * f * a - c * l * p - b * d * a + b * l * g + e * d * p - e * f * g;
+    return c * l * a - c * f * p - b * d * a + b * f * g + e * d * p - e * l * g;
   }, getInverse:function(a, c) {
-    a && a.isMatrix4 && console.error("THREE.Matrix3: .getInverse() no longer takes a Matrix4 argument.");
+    void 0 !== c && console.warn("THREE.Matrix3: .getInverse() can no longer be configured to throw on degenerate.");
     var k = a.elements;
     a = this.elements;
-    var b = k[0], e = k[1], d = k[2], f = k[3], l = k[4], v = k[5], g = k[6], p = k[7];
+    c = k[0];
+    var b = k[1], e = k[2], d = k[3], l = k[4], f = k[5], u = k[6], g = k[7];
     k = k[8];
-    var m = k * l - v * p, n = v * g - k * f, h = p * f - l * g, q = b * m + e * n + d * h;
-    if (0 === q) {
-      if (!0 === c) {
-        throw Error("THREE.Matrix3: .getInverse() can't invert matrix, determinant is 0");
-      }
-      console.warn("THREE.Matrix3: .getInverse() can't invert matrix, determinant is 0");
-      return this.identity();
+    var p = k * l - f * g, m = f * u - k * d, n = g * d - l * u, h = c * p + b * m + e * n;
+    if (0 === h) {
+      return this.set(0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    c = 1 / q;
-    a[0] = m * c;
-    a[1] = (d * p - k * e) * c;
-    a[2] = (v * e - d * l) * c;
-    a[3] = n * c;
-    a[4] = (k * b - d * g) * c;
-    a[5] = (d * f - v * b) * c;
-    a[6] = h * c;
-    a[7] = (e * g - p * b) * c;
-    a[8] = (l * b - e * f) * c;
+    h = 1 / h;
+    a[0] = p * h;
+    a[1] = (e * g - k * b) * h;
+    a[2] = (f * b - e * l) * h;
+    a[3] = m * h;
+    a[4] = (k * c - e * u) * h;
+    a[5] = (e * d - f * c) * h;
+    a[6] = n * h;
+    a[7] = (b * u - g * c) * h;
+    a[8] = (l * c - b * d) * h;
     return this;
   }, transpose:function() {
     var a = this.elements;
@@ -7483,10 +7490,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a[7] = k[5];
     a[8] = k[8];
     return this;
-  }, setUvTransform:function(a, c, b, e, d, f, l) {
+  }, setUvTransform:function(a, c, b, e, d, l, f) {
     var k = Math.cos(d);
     d = Math.sin(d);
-    this.set(b * k, b * d, -b * (k * f + d * l) + f + a, -e * d, e * k, -e * (-d * f + k * l) + l + c, 0, 0, 1);
+    this.set(b * k, b * d, -b * (k * l + d * f) + l + a, -e * d, e * k, -e * (-d * l + k * f) + f + c, 0, 0, 1);
   }, scale:function(a, c) {
     var k = this.elements;
     k[0] *= a;
@@ -7499,12 +7506,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, rotate:function(a) {
     var k = Math.cos(a);
     a = Math.sin(a);
-    var c = this.elements, b = c[0], e = c[3], d = c[6], f = c[1], l = c[4], g = c[7];
-    c[0] = k * b + a * f;
-    c[3] = k * e + a * l;
+    var c = this.elements, b = c[0], e = c[3], d = c[6], l = c[1], f = c[4], g = c[7];
+    c[0] = k * b + a * l;
+    c[3] = k * e + a * f;
     c[6] = k * d + a * g;
-    c[1] = -a * b + k * f;
-    c[4] = -a * e + k * l;
+    c[1] = -a * b + k * l;
+    c[4] = -a * e + k * f;
     c[7] = -a * d + k * g;
     return this;
   }, translate:function(a, c) {
@@ -7559,7 +7566,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a = Kd;
     }
     return 2048 < a.width || 2048 < a.height ? a.toDataURL("image/jpeg", .6) : a.toDataURL("image/png");
-  }}, pj = 0;
+  }}, rj = 0;
   g.DEFAULT_IMAGE = void 0;
   g.DEFAULT_MAPPING = 300;
   g.prototype = Object.assign(Object.create(d.prototype), {constructor:g, isTexture:!0, updateMatrix:function() {
@@ -7604,7 +7611,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       if (!k && void 0 === a.images[b.uuid]) {
         if (Array.isArray(b)) {
           var e = [];
-          for (var d = 0, f = b.length; d < f; d++) {
+          for (var d = 0, l = b.length; d < l; d++) {
             e.push(oc.getDataURL(b[d]));
           }
         } else {
@@ -7795,12 +7802,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = a.elements;
     var k = a[0];
     var c = a[4];
-    var b = a[8], e = a[1], d = a[5], f = a[9];
-    var l = a[2];
+    var b = a[8], e = a[1], d = a[5], l = a[9];
+    var f = a[2];
     var g = a[6];
     var p = a[10];
-    if (.01 > Math.abs(c - e) && .01 > Math.abs(b - l) && .01 > Math.abs(f - g)) {
-      if (.1 > Math.abs(c + e) && .1 > Math.abs(b + l) && .1 > Math.abs(f + g) && .1 > Math.abs(k + d + p - 3)) {
+    if (.01 > Math.abs(c - e) && .01 > Math.abs(b - f) && .01 > Math.abs(l - g)) {
+      if (.1 > Math.abs(c + e) && .1 > Math.abs(b + f) && .1 > Math.abs(l + g) && .1 > Math.abs(k + d + p - 3)) {
         return this.set(1, 0, 0, 0), this;
       }
       a = Math.PI;
@@ -7808,16 +7815,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       d = (d + 1) / 2;
       p = (p + 1) / 2;
       c = (c + e) / 4;
-      b = (b + l) / 4;
-      f = (f + g) / 4;
-      k > d && k > p ? .01 > k ? (g = 0, c = l = .707106781) : (g = Math.sqrt(k), l = c / g, c = b / g) : d > p ? .01 > d ? (g = .707106781, l = 0, c = .707106781) : (l = Math.sqrt(d), g = c / l, c = f / l) : .01 > p ? (l = g = .707106781, c = 0) : (c = Math.sqrt(p), g = b / c, l = f / c);
-      this.set(g, l, c, a);
+      b = (b + f) / 4;
+      l = (l + g) / 4;
+      k > d && k > p ? .01 > k ? (g = 0, c = f = .707106781) : (g = Math.sqrt(k), f = c / g, c = b / g) : d > p ? .01 > d ? (g = .707106781, f = 0, c = .707106781) : (f = Math.sqrt(d), g = c / f, c = l / f) : .01 > p ? (f = g = .707106781, c = 0) : (c = Math.sqrt(p), g = b / c, f = l / c);
+      this.set(g, f, c, a);
       return this;
     }
-    a = Math.sqrt((g - f) * (g - f) + (b - l) * (b - l) + (e - c) * (e - c));
+    a = Math.sqrt((g - l) * (g - l) + (b - f) * (b - f) + (e - c) * (e - c));
     .001 > Math.abs(a) && (a = 1);
-    this.x = (g - f) / a;
-    this.y = (b - l) / a;
+    this.x = (g - l) / a;
+    this.y = (b - f) / a;
     this.z = (e - c) / a;
     this.w = Math.acos((k + d + p - 1) / 2);
     return this;
@@ -7950,25 +7957,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }});
   Object.assign(r, {slerp:function(a, c, b, e) {
     return b.copy(a).slerp(c, e);
-  }, slerpFlat:function(a, c, b, e, d, f, l) {
-    var k = b[e + 0], v = b[e + 1], g = b[e + 2];
+  }, slerpFlat:function(a, c, b, e, d, l, f) {
+    var k = b[e + 0], u = b[e + 1], g = b[e + 2];
     b = b[e + 3];
-    e = d[f + 0];
-    var p = d[f + 1], m = d[f + 2];
-    d = d[f + 3];
-    if (b !== d || k !== e || v !== p || g !== m) {
-      f = 1 - l;
-      var n = k * e + v * p + g * m + b * d, h = 0 <= n ? 1 : -1, q = 1 - n * n;
-      q > Number.EPSILON && (q = Math.sqrt(q), n = Math.atan2(q, n * h), f = Math.sin(f * n) / q, l = Math.sin(l * n) / q);
-      h *= l;
-      k = k * f + e * h;
-      v = v * f + p * h;
-      g = g * f + m * h;
-      b = b * f + d * h;
-      f === 1 - l && (l = 1 / Math.sqrt(k * k + v * v + g * g + b * b), k *= l, v *= l, g *= l, b *= l);
+    e = d[l + 0];
+    var p = d[l + 1], m = d[l + 2];
+    d = d[l + 3];
+    if (b !== d || k !== e || u !== p || g !== m) {
+      l = 1 - f;
+      var n = k * e + u * p + g * m + b * d, h = 0 <= n ? 1 : -1, q = 1 - n * n;
+      q > Number.EPSILON && (q = Math.sqrt(q), n = Math.atan2(q, n * h), l = Math.sin(l * n) / q, f = Math.sin(f * n) / q);
+      h *= f;
+      k = k * l + e * h;
+      u = u * l + p * h;
+      g = g * l + m * h;
+      b = b * l + d * h;
+      l === 1 - f && (f = 1 / Math.sqrt(k * k + u * u + g * g + b * b), k *= f, u *= f, g *= f, b *= f);
     }
     a[c] = k;
-    a[c + 1] = v;
+    a[c + 1] = u;
     a[c + 2] = g;
     a[c + 3] = b;
   }});
@@ -8015,13 +8022,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     var k = a._x, b = a._y, e = a._z;
     a = a.order;
-    var d = Math.cos, f = Math.sin, l = d(k / 2), v = d(b / 2);
+    var d = Math.cos, l = Math.sin, f = d(k / 2), u = d(b / 2);
     d = d(e / 2);
-    k = f(k / 2);
-    b = f(b / 2);
-    e = f(e / 2);
-    "XYZ" === a ? (this._x = k * v * d + l * b * e, this._y = l * b * d - k * v * e, this._z = l * v * e + k * b * d, this._w = l * v * d - k * b * e) : "YXZ" === a ? (this._x = k * v * d + l * b * e, this._y = l * b * d - k * v * e, this._z = l * v * e - k * b * d, this._w = l * v * d + k * b * e) : "ZXY" === a ? (this._x = k * v * d - l * b * e, this._y = l * b * d + k * v * e, this._z = l * v * e + k * b * d, this._w = l * v * d - k * b * e) : "ZYX" === a ? (this._x = k * v * d - l * b * e, this._y = 
-    l * b * d + k * v * e, this._z = l * v * e - k * b * d, this._w = l * v * d + k * b * e) : "YZX" === a ? (this._x = k * v * d + l * b * e, this._y = l * b * d + k * v * e, this._z = l * v * e - k * b * d, this._w = l * v * d - k * b * e) : "XZY" === a && (this._x = k * v * d - l * b * e, this._y = l * b * d - k * v * e, this._z = l * v * e + k * b * d, this._w = l * v * d + k * b * e);
+    k = l(k / 2);
+    b = l(b / 2);
+    e = l(e / 2);
+    "XYZ" === a ? (this._x = k * u * d + f * b * e, this._y = f * b * d - k * u * e, this._z = f * u * e + k * b * d, this._w = f * u * d - k * b * e) : "YXZ" === a ? (this._x = k * u * d + f * b * e, this._y = f * b * d - k * u * e, this._z = f * u * e - k * b * d, this._w = f * u * d + k * b * e) : "ZXY" === a ? (this._x = k * u * d - f * b * e, this._y = f * b * d + k * u * e, this._z = f * u * e + k * b * d, this._w = f * u * d - k * b * e) : "ZYX" === a ? (this._x = k * u * d - f * b * e, this._y = 
+    f * b * d + k * u * e, this._z = f * u * e - k * b * d, this._w = f * u * d + k * b * e) : "YZX" === a ? (this._x = k * u * d + f * b * e, this._y = f * b * d + k * u * e, this._z = f * u * e - k * b * d, this._w = f * u * d - k * b * e) : "XZY" === a && (this._x = k * u * d - f * b * e, this._y = f * b * d - k * u * e, this._z = f * u * e + k * b * d, this._w = f * u * d + k * b * e);
     !1 !== c && this._onChangeCallback();
     return this;
   }, setFromAxisAngle:function(a, c) {
@@ -8036,10 +8043,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, setFromRotationMatrix:function(a) {
     var k = a.elements, c = k[0];
     a = k[4];
-    var b = k[8], e = k[1], d = k[5], l = k[9], f = k[2], g = k[6];
+    var b = k[8], e = k[1], d = k[5], f = k[9], l = k[2], g = k[6];
     k = k[10];
     var p = c + d + k;
-    0 < p ? (c = .5 / Math.sqrt(p + 1), this._w = .25 / c, this._x = (g - l) * c, this._y = (b - f) * c, this._z = (e - a) * c) : c > d && c > k ? (c = 2 * Math.sqrt(1 + c - d - k), this._w = (g - l) / c, this._x = .25 * c, this._y = (a + e) / c, this._z = (b + f) / c) : d > k ? (c = 2 * Math.sqrt(1 + d - c - k), this._w = (b - f) / c, this._x = (a + e) / c, this._y = .25 * c, this._z = (l + g) / c) : (c = 2 * Math.sqrt(1 + k - c - d), this._w = (e - a) / c, this._x = (b + f) / c, this._y = (l + 
+    0 < p ? (c = .5 / Math.sqrt(p + 1), this._w = .25 / c, this._x = (g - f) * c, this._y = (b - l) * c, this._z = (e - a) * c) : c > d && c > k ? (c = 2 * Math.sqrt(1 + c - d - k), this._w = (g - f) / c, this._x = .25 * c, this._y = (a + e) / c, this._z = (b + l) / c) : d > k ? (c = 2 * Math.sqrt(1 + d - c - k), this._w = (b - l) / c, this._x = (a + e) / c, this._y = .25 * c, this._z = (f + g) / c) : (c = 2 * Math.sqrt(1 + k - c - d), this._w = (e - a) / c, this._x = (b + l) / c, this._y = (f + 
     g) / c, this._z = .25 * c);
     this._onChangeCallback();
     return this;
@@ -8083,12 +8090,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, multiplyQuaternions:function(a, c) {
     var k = a._x, b = a._y, e = a._z;
     a = a._w;
-    var d = c._x, l = c._y, f = c._z;
+    var d = c._x, f = c._y, l = c._z;
     c = c._w;
-    this._x = k * c + a * d + b * f - e * l;
-    this._y = b * c + a * l + e * d - k * f;
-    this._z = e * c + a * f + k * l - b * d;
-    this._w = a * c - k * d - b * l - e * f;
+    this._x = k * c + a * d + b * l - e * f;
+    this._y = b * c + a * f + e * d - k * l;
+    this._z = e * c + a * l + k * f - b * d;
+    this._w = a * c - k * d - b * f - e * l;
     this._onChangeCallback();
     return this;
   }, slerp:function(a, c) {
@@ -8098,23 +8105,23 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (1 === c) {
       return this.copy(a);
     }
-    var k = this._x, b = this._y, e = this._z, d = this._w, l = d * a._w + k * a._x + b * a._y + e * a._z;
-    0 > l ? (this._w = -a._w, this._x = -a._x, this._y = -a._y, this._z = -a._z, l = -l) : this.copy(a);
-    if (1 <= l) {
+    var k = this._x, b = this._y, e = this._z, d = this._w, f = d * a._w + k * a._x + b * a._y + e * a._z;
+    0 > f ? (this._w = -a._w, this._x = -a._x, this._y = -a._y, this._z = -a._z, f = -f) : this.copy(a);
+    if (1 <= f) {
       return this._w = d, this._x = k, this._y = b, this._z = e, this;
     }
-    a = 1 - l * l;
+    a = 1 - f * f;
     if (a <= Number.EPSILON) {
-      return l = 1 - c, this._w = l * d + c * this._w, this._x = l * k + c * this._x, this._y = l * b + c * this._y, this._z = l * e + c * this._z, this.normalize(), this._onChangeCallback(), this;
+      return f = 1 - c, this._w = f * d + c * this._w, this._x = f * k + c * this._x, this._y = f * b + c * this._y, this._z = f * e + c * this._z, this.normalize(), this._onChangeCallback(), this;
     }
     a = Math.sqrt(a);
-    var f = Math.atan2(a, l);
-    l = Math.sin((1 - c) * f) / a;
-    c = Math.sin(c * f) / a;
-    this._w = d * l + this._w * c;
-    this._x = k * l + this._x * c;
-    this._y = b * l + this._y * c;
-    this._z = e * l + this._z * c;
+    var l = Math.atan2(a, f);
+    f = Math.sin((1 - c) * l) / a;
+    c = Math.sin(c * l) / a;
+    this._w = d * f + this._w * c;
+    this._x = k * f + this._x * c;
+    this._y = b * f + this._y * c;
+    this._z = e * f + this._z * c;
     this._onChangeCallback();
     return this;
   }, equals:function(a) {
@@ -8140,7 +8147,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return this;
   }, _onChangeCallback:function() {
   }});
-  var hh = new m, Hi = new r;
+  var ih = new m, Ji = new r;
   Object.assign(m.prototype, {isVector3:!0, set:function(a, c, b) {
     this.x = a;
     this.y = c;
@@ -8252,9 +8259,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return this;
   }, applyEuler:function(a) {
     a && a.isEuler || console.error("THREE.Vector3: .applyEuler() now expects an Euler rotation rather than a Vector3 and order.");
-    return this.applyQuaternion(Hi.setFromEuler(a));
+    return this.applyQuaternion(Ji.setFromEuler(a));
   }, applyAxisAngle:function(a, c) {
-    return this.applyQuaternion(Hi.setFromAxisAngle(a, c));
+    return this.applyQuaternion(Ji.setFromAxisAngle(a, c));
   }, applyMatrix3:function(a) {
     var k = this.x, c = this.y, b = this.z;
     a = a.elements;
@@ -8273,13 +8280,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.z = (a[2] * k + a[6] * c + a[10] * b + a[14]) * e;
     return this;
   }, applyQuaternion:function(a) {
-    var k = this.x, c = this.y, b = this.z, e = a.x, d = a.y, l = a.z;
+    var k = this.x, c = this.y, b = this.z, e = a.x, d = a.y, f = a.z;
     a = a.w;
-    var f = a * k + d * b - l * c, g = a * c + l * k - e * b, p = a * b + e * c - d * k;
-    k = -e * k - d * c - l * b;
-    this.x = f * a + k * -e + g * -l - p * -d;
-    this.y = g * a + k * -d + p * -e - f * -l;
-    this.z = p * a + k * -l + f * -d - g * -e;
+    var l = a * k + d * b - f * c, g = a * c + f * k - e * b, p = a * b + e * c - d * k;
+    k = -e * k - d * c - f * b;
+    this.x = l * a + k * -e + g * -f - p * -d;
+    this.y = g * a + k * -d + p * -e - l * -f;
+    this.z = p * a + k * -f + l * -d - g * -e;
     return this;
   }, project:function(a) {
     return this.applyMatrix4(a.matrixWorldInverse).applyMatrix4(a.projectionMatrix);
@@ -8385,10 +8392,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k = a.dot(this) / k;
     return this.copy(a).multiplyScalar(k);
   }, projectOnPlane:function(a) {
-    hh.copy(this).projectOnVector(a);
-    return this.sub(hh);
+    ih.copy(this).projectOnVector(a);
+    return this.sub(ih);
   }, reflect:function(a) {
-    return this.sub(hh.copy(a).multiplyScalar(2 * this.dot(a)));
+    return this.sub(ih.copy(a).multiplyScalar(2 * this.dot(a)));
   }, angleTo:function(a) {
     var k = Math.sqrt(this.lengthSq() * a.lengthSq());
     if (0 === k) {
@@ -8458,16 +8465,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.z = a.getZ(c);
     return this;
   }});
-  var Ld = new m, Ka = new n, fk = new m(0, 0, 0), gk = new m(1, 1, 1), pc = new m, Uf = new m, $a = new m;
-  Object.assign(n.prototype, {isMatrix4:!0, set:function(a, c, b, e, d, l, f, g, p, m, n, h, q, r, t, u) {
+  var Ld = new m, Ka = new n, hk = new m(0, 0, 0), ik = new m(1, 1, 1), pc = new m, Uf = new m, $a = new m;
+  Object.assign(n.prototype, {isMatrix4:!0, set:function(a, c, b, e, d, f, l, g, p, m, n, h, q, r, t, v) {
     var k = this.elements;
     k[0] = a;
     k[4] = c;
     k[8] = b;
     k[12] = e;
     k[1] = d;
-    k[5] = l;
-    k[9] = f;
+    k[5] = f;
+    k[9] = l;
     k[13] = g;
     k[2] = p;
     k[6] = m;
@@ -8476,7 +8483,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k[3] = q;
     k[7] = r;
     k[11] = t;
-    k[15] = u;
+    k[15] = v;
     return this;
   }, identity:function() {
     this.set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
@@ -8542,26 +8549,26 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a && a.isEuler || console.error("THREE.Matrix4: .makeRotationFromEuler() now expects a Euler rotation rather than a Vector3 and order.");
     var k = this.elements, c = a.x, b = a.y, e = a.z, d = Math.cos(c);
     c = Math.sin(c);
-    var l = Math.cos(b);
+    var f = Math.cos(b);
     b = Math.sin(b);
-    var f = Math.cos(e);
+    var l = Math.cos(e);
     e = Math.sin(e);
     if ("XYZ" === a.order) {
-      a = d * f;
-      var g = d * e, p = c * f, m = c * e;
-      k[0] = l * f;
-      k[4] = -l * e;
+      a = d * l;
+      var g = d * e, p = c * l, m = c * e;
+      k[0] = f * l;
+      k[4] = -f * e;
       k[8] = b;
       k[1] = g + p * b;
       k[5] = a - m * b;
-      k[9] = -c * l;
+      k[9] = -c * f;
       k[2] = m - a * b;
       k[6] = p + g * b;
-      k[10] = d * l;
+      k[10] = d * f;
     } else {
-      "YXZ" === a.order ? (a = l * f, g = l * e, p = b * f, m = b * e, k[0] = a + m * c, k[4] = p * c - g, k[8] = d * b, k[1] = d * e, k[5] = d * f, k[9] = -c, k[2] = g * c - p, k[6] = m + a * c, k[10] = d * l) : "ZXY" === a.order ? (a = l * f, g = l * e, p = b * f, m = b * e, k[0] = a - m * c, k[4] = -d * e, k[8] = p + g * c, k[1] = g + p * c, k[5] = d * f, k[9] = m - a * c, k[2] = -d * b, k[6] = c, k[10] = d * l) : "ZYX" === a.order ? (a = d * f, g = d * e, p = c * f, m = c * e, k[0] = l * f, k[4] = 
-      p * b - g, k[8] = a * b + m, k[1] = l * e, k[5] = m * b + a, k[9] = g * b - p, k[2] = -b, k[6] = c * l, k[10] = d * l) : "YZX" === a.order ? (a = d * l, g = d * b, p = c * l, m = c * b, k[0] = l * f, k[4] = m - a * e, k[8] = p * e + g, k[1] = e, k[5] = d * f, k[9] = -c * f, k[2] = -b * f, k[6] = g * e + p, k[10] = a - m * e) : "XZY" === a.order && (a = d * l, g = d * b, p = c * l, m = c * b, k[0] = l * f, k[4] = -e, k[8] = b * f, k[1] = a * e + m, k[5] = d * f, k[9] = g * e - p, k[2] = p * 
-      e - g, k[6] = c * f, k[10] = m * e + a);
+      "YXZ" === a.order ? (a = f * l, g = f * e, p = b * l, m = b * e, k[0] = a + m * c, k[4] = p * c - g, k[8] = d * b, k[1] = d * e, k[5] = d * l, k[9] = -c, k[2] = g * c - p, k[6] = m + a * c, k[10] = d * f) : "ZXY" === a.order ? (a = f * l, g = f * e, p = b * l, m = b * e, k[0] = a - m * c, k[4] = -d * e, k[8] = p + g * c, k[1] = g + p * c, k[5] = d * l, k[9] = m - a * c, k[2] = -d * b, k[6] = c, k[10] = d * f) : "ZYX" === a.order ? (a = d * l, g = d * e, p = c * l, m = c * e, k[0] = f * l, k[4] = 
+      p * b - g, k[8] = a * b + m, k[1] = f * e, k[5] = m * b + a, k[9] = g * b - p, k[2] = -b, k[6] = c * f, k[10] = d * f) : "YZX" === a.order ? (a = d * f, g = d * b, p = c * f, m = c * b, k[0] = f * l, k[4] = m - a * e, k[8] = p * e + g, k[1] = e, k[5] = d * l, k[9] = -c * l, k[2] = -b * l, k[6] = g * e + p, k[10] = a - m * e) : "XZY" === a.order && (a = d * f, g = d * b, p = c * f, m = c * b, k[0] = f * l, k[4] = -e, k[8] = b * l, k[1] = a * e + m, k[5] = d * l, k[9] = g * e - p, k[2] = p * 
+      e - g, k[6] = c * l, k[10] = m * e + a);
     }
     k[3] = 0;
     k[7] = 0;
@@ -8572,7 +8579,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k[15] = 1;
     return this;
   }, makeRotationFromQuaternion:function(a) {
-    return this.compose(fk, a, gk);
+    return this.compose(hk, a, ik);
   }, lookAt:function(a, c, b) {
     var k = this.elements;
     $a.subVectors(a, c);
@@ -8600,26 +8607,26 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var k = a.elements, b = c.elements;
     c = this.elements;
     a = k[0];
-    var e = k[4], d = k[8], l = k[12], f = k[1], g = k[5], p = k[9], v = k[13], m = k[2], n = k[6], h = k[10], q = k[14], r = k[3], t = k[7], u = k[11];
+    var e = k[4], d = k[8], f = k[12], l = k[1], g = k[5], p = k[9], u = k[13], m = k[2], n = k[6], h = k[10], q = k[14], r = k[3], t = k[7], v = k[11];
     k = k[15];
     var y = b[0], w = b[4], x = b[8], T = b[12], z = b[1], C = b[5], A = b[9], D = b[13], oa = b[2], B = b[6], F = b[10], E = b[14], Ha = b[3], pa = b[7], G = b[11];
     b = b[15];
-    c[0] = a * y + e * z + d * oa + l * Ha;
-    c[4] = a * w + e * C + d * B + l * pa;
-    c[8] = a * x + e * A + d * F + l * G;
-    c[12] = a * T + e * D + d * E + l * b;
-    c[1] = f * y + g * z + p * oa + v * Ha;
-    c[5] = f * w + g * C + p * B + v * pa;
-    c[9] = f * x + g * A + p * F + v * G;
-    c[13] = f * T + g * D + p * E + v * b;
+    c[0] = a * y + e * z + d * oa + f * Ha;
+    c[4] = a * w + e * C + d * B + f * pa;
+    c[8] = a * x + e * A + d * F + f * G;
+    c[12] = a * T + e * D + d * E + f * b;
+    c[1] = l * y + g * z + p * oa + u * Ha;
+    c[5] = l * w + g * C + p * B + u * pa;
+    c[9] = l * x + g * A + p * F + u * G;
+    c[13] = l * T + g * D + p * E + u * b;
     c[2] = m * y + n * z + h * oa + q * Ha;
     c[6] = m * w + n * C + h * B + q * pa;
     c[10] = m * x + n * A + h * F + q * G;
     c[14] = m * T + n * D + h * E + q * b;
-    c[3] = r * y + t * z + u * oa + k * Ha;
-    c[7] = r * w + t * C + u * B + k * pa;
-    c[11] = r * x + t * A + u * F + k * G;
-    c[15] = r * T + t * D + u * E + k * b;
+    c[3] = r * y + t * z + v * oa + k * Ha;
+    c[7] = r * w + t * C + v * B + k * pa;
+    c[11] = r * x + t * A + v * F + k * G;
+    c[15] = r * T + t * D + v * E + k * b;
     return this;
   }, multiplyScalar:function(a) {
     var k = this.elements;
@@ -8641,8 +8648,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k[15] *= a;
     return this;
   }, determinant:function() {
-    var a = this.elements, c = a[0], b = a[4], e = a[8], d = a[12], l = a[1], f = a[5], g = a[9], p = a[13], m = a[2], n = a[6], h = a[10], q = a[14];
-    return a[3] * (+d * g * n - e * p * n - d * f * h + b * p * h + e * f * q - b * g * q) + a[7] * (+c * g * q - c * p * h + d * l * h - e * l * q + e * p * m - d * g * m) + a[11] * (+c * p * n - c * f * q - d * l * n + b * l * q + d * f * m - b * p * m) + a[15] * (-e * f * m - c * g * n + c * f * h + e * l * n - b * l * h + b * g * m);
+    var a = this.elements, c = a[0], b = a[4], e = a[8], d = a[12], f = a[1], l = a[5], g = a[9], p = a[13], m = a[2], n = a[6], h = a[10], q = a[14];
+    return a[3] * (+d * g * n - e * p * n - d * l * h + b * p * h + e * l * q - b * g * q) + a[7] * (+c * g * q - c * p * h + d * f * h - e * f * q + e * p * m - d * g * m) + a[11] * (+c * p * n - c * l * q - d * f * n + b * f * q + d * l * m - b * p * m) + a[15] * (-e * l * m - c * g * n + c * l * h + e * f * n - b * f * h + b * g * m);
   }, transpose:function() {
     var a = this.elements;
     var c = a[1];
@@ -8669,35 +8676,33 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a.isVector3 ? (k[12] = a.x, k[13] = a.y, k[14] = a.z) : (k[12] = a, k[13] = c, k[14] = b);
     return this;
   }, getInverse:function(a, c) {
-    var k = this.elements, b = a.elements;
-    a = b[0];
-    var e = b[1], d = b[2], l = b[3], f = b[4], g = b[5], p = b[6], m = b[7], v = b[8], n = b[9], h = b[10], q = b[11], r = b[12], t = b[13], u = b[14];
-    b = b[15];
-    var y = n * u * m - t * h * m + t * p * q - g * u * q - n * p * b + g * h * b, w = r * h * m - v * u * m - r * p * q + f * u * q + v * p * b - f * h * b, x = v * t * m - r * n * m + r * g * q - f * t * q - v * g * b + f * n * b, T = r * n * p - v * t * p - r * g * h + f * t * h + v * g * u - f * n * u, z = a * y + e * w + d * x + l * T;
-    if (0 === z) {
-      if (!0 === c) {
-        throw Error("THREE.Matrix4: .getInverse() can't invert matrix, determinant is 0");
-      }
-      console.warn("THREE.Matrix4: .getInverse() can't invert matrix, determinant is 0");
-      return this.identity();
+    void 0 !== c && console.warn("THREE.Matrix4: .getInverse() can no longer be configured to throw on degenerate.");
+    c = this.elements;
+    var k = a.elements;
+    a = k[0];
+    var b = k[1], e = k[2], d = k[3], f = k[4], l = k[5], g = k[6], p = k[7], m = k[8], u = k[9], n = k[10], h = k[11], q = k[12], r = k[13], t = k[14];
+    k = k[15];
+    var v = u * t * p - r * n * p + r * g * h - l * t * h - u * g * k + l * n * k, y = q * n * p - m * t * p - q * g * h + f * t * h + m * g * k - f * n * k, w = m * r * p - q * u * p + q * l * h - f * r * h - m * l * k + f * u * k, x = q * u * g - m * r * g - q * l * n + f * r * n + m * l * t - f * u * t, T = a * v + b * y + e * w + d * x;
+    if (0 === T) {
+      return this.set(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    c = 1 / z;
-    k[0] = y * c;
-    k[1] = (t * h * l - n * u * l - t * d * q + e * u * q + n * d * b - e * h * b) * c;
-    k[2] = (g * u * l - t * p * l + t * d * m - e * u * m - g * d * b + e * p * b) * c;
-    k[3] = (n * p * l - g * h * l - n * d * m + e * h * m + g * d * q - e * p * q) * c;
-    k[4] = w * c;
-    k[5] = (v * u * l - r * h * l + r * d * q - a * u * q - v * d * b + a * h * b) * c;
-    k[6] = (r * p * l - f * u * l - r * d * m + a * u * m + f * d * b - a * p * b) * c;
-    k[7] = (f * h * l - v * p * l + v * d * m - a * h * m - f * d * q + a * p * q) * c;
-    k[8] = x * c;
-    k[9] = (r * n * l - v * t * l - r * e * q + a * t * q + v * e * b - a * n * b) * c;
-    k[10] = (f * t * l - r * g * l + r * e * m - a * t * m - f * e * b + a * g * b) * c;
-    k[11] = (v * g * l - f * n * l - v * e * m + a * n * m + f * e * q - a * g * q) * c;
-    k[12] = T * c;
-    k[13] = (v * t * d - r * n * d + r * e * h - a * t * h - v * e * u + a * n * u) * c;
-    k[14] = (r * g * d - f * t * d - r * e * p + a * t * p + f * e * u - a * g * u) * c;
-    k[15] = (f * n * d - v * g * d + v * e * p - a * n * p - f * e * h + a * g * h) * c;
+    T = 1 / T;
+    c[0] = v * T;
+    c[1] = (r * n * d - u * t * d - r * e * h + b * t * h + u * e * k - b * n * k) * T;
+    c[2] = (l * t * d - r * g * d + r * e * p - b * t * p - l * e * k + b * g * k) * T;
+    c[3] = (u * g * d - l * n * d - u * e * p + b * n * p + l * e * h - b * g * h) * T;
+    c[4] = y * T;
+    c[5] = (m * t * d - q * n * d + q * e * h - a * t * h - m * e * k + a * n * k) * T;
+    c[6] = (q * g * d - f * t * d - q * e * p + a * t * p + f * e * k - a * g * k) * T;
+    c[7] = (f * n * d - m * g * d + m * e * p - a * n * p - f * e * h + a * g * h) * T;
+    c[8] = w * T;
+    c[9] = (q * u * d - m * r * d - q * b * h + a * r * h + m * b * k - a * u * k) * T;
+    c[10] = (f * r * d - q * l * d + q * b * p - a * r * p - f * b * k + a * l * k) * T;
+    c[11] = (m * l * d - f * u * d - m * b * p + a * u * p + f * b * h - a * l * h) * T;
+    c[12] = x * T;
+    c[13] = (m * r * e - q * u * e + q * b * n - a * r * n - m * b * t + a * u * t) * T;
+    c[14] = (q * l * e - f * r * e - q * b * g + a * r * g + f * b * t - a * l * t) * T;
+    c[15] = (f * u * e - m * l * e + m * b * g - a * u * g - f * b * n + a * l * n) * T;
     return this;
   }, scale:function(a) {
     var k = this.elements, c = a.x, b = a.y;
@@ -8741,8 +8746,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     c = Math.sin(c);
     var b = 1 - k, e = a.x, d = a.y;
     a = a.z;
-    var l = b * e, f = b * d;
-    this.set(l * e + k, l * d - c * a, l * a + c * d, 0, l * d + c * a, f * d + k, f * a - c * e, 0, l * a - c * d, f * a + c * e, b * a * a + k, 0, 0, 0, 0, 1);
+    var f = b * e, l = b * d;
+    this.set(f * e + k, f * d - c * a, f * a + c * d, 0, f * d + c * a, l * d + k, l * a - c * e, 0, f * a - c * d, l * a + c * e, b * a * a + k, 0, 0, 0, 0, 1);
     return this;
   }, makeScale:function(a, c, b) {
     this.set(a, 0, 0, 0, 0, c, 0, 0, 0, 0, b, 0, 0, 0, 0, 1);
@@ -8751,25 +8756,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.set(1, c, b, 0, a, 1, b, 0, a, c, 1, 0, 0, 0, 0, 1);
     return this;
   }, compose:function(a, c, b) {
-    var k = this.elements, e = c._x, d = c._y, l = c._z, f = c._w, g = e + e, p = d + d, m = l + l;
+    var k = this.elements, e = c._x, d = c._y, f = c._z, l = c._w, g = e + e, p = d + d, m = f + f;
     c = e * g;
-    var v = e * p;
+    var u = e * p;
     e *= m;
     var n = d * p;
     d *= m;
-    l *= m;
-    g *= f;
-    p *= f;
     f *= m;
+    g *= l;
+    p *= l;
+    l *= m;
     m = b.x;
     var h = b.y;
     b = b.z;
-    k[0] = (1 - (n + l)) * m;
-    k[1] = (v + f) * m;
+    k[0] = (1 - (n + f)) * m;
+    k[1] = (u + l) * m;
     k[2] = (e - p) * m;
     k[3] = 0;
-    k[4] = (v - f) * h;
-    k[5] = (1 - (c + l)) * h;
+    k[4] = (u - l) * h;
+    k[5] = (1 - (c + f)) * h;
     k[6] = (d + g) * h;
     k[7] = 0;
     k[8] = (e + p) * b;
@@ -8782,7 +8787,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k[15] = 1;
     return this;
   }, decompose:function(a, c, b) {
-    var k = this.elements, e = Ld.set(k[0], k[1], k[2]).length(), d = Ld.set(k[4], k[5], k[6]).length(), l = Ld.set(k[8], k[9], k[10]).length();
+    var k = this.elements, e = Ld.set(k[0], k[1], k[2]).length(), d = Ld.set(k[4], k[5], k[6]).length(), f = Ld.set(k[8], k[9], k[10]).length();
     0 > this.determinant() && (e = -e);
     a.x = k[12];
     a.y = k[13];
@@ -8790,23 +8795,23 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     Ka.copy(this);
     a = 1 / e;
     k = 1 / d;
-    var f = 1 / l;
+    var l = 1 / f;
     Ka.elements[0] *= a;
     Ka.elements[1] *= a;
     Ka.elements[2] *= a;
     Ka.elements[4] *= k;
     Ka.elements[5] *= k;
     Ka.elements[6] *= k;
-    Ka.elements[8] *= f;
-    Ka.elements[9] *= f;
-    Ka.elements[10] *= f;
+    Ka.elements[8] *= l;
+    Ka.elements[9] *= l;
+    Ka.elements[10] *= l;
     c.setFromRotationMatrix(Ka);
     b.x = e;
     b.y = d;
-    b.z = l;
+    b.z = f;
     return this;
-  }, makePerspective:function(a, c, b, e, d, l) {
-    void 0 === l && console.warn("THREE.Matrix4: .makePerspective() has been redefined and has a new signature. Please check the docs.");
+  }, makePerspective:function(a, c, b, e, d, f) {
+    void 0 === f && console.warn("THREE.Matrix4: .makePerspective() has been redefined and has a new signature. Please check the docs.");
     var k = this.elements;
     k[0] = 2 * d / (c - a);
     k[4] = 0;
@@ -8818,19 +8823,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k[13] = 0;
     k[2] = 0;
     k[6] = 0;
-    k[10] = -(l + d) / (l - d);
-    k[14] = -2 * l * d / (l - d);
+    k[10] = -(f + d) / (f - d);
+    k[14] = -2 * f * d / (f - d);
     k[3] = 0;
     k[7] = 0;
     k[11] = -1;
     k[15] = 0;
     return this;
-  }, makeOrthographic:function(a, c, b, e, d, l) {
-    var k = this.elements, f = 1 / (c - a), g = 1 / (b - e), p = 1 / (l - d);
-    k[0] = 2 * f;
+  }, makeOrthographic:function(a, c, b, e, d, f) {
+    var k = this.elements, l = 1 / (c - a), g = 1 / (b - e), p = 1 / (f - d);
+    k[0] = 2 * l;
     k[4] = 0;
     k[8] = 0;
-    k[12] = -((c + a) * f);
+    k[12] = -((c + a) * l);
     k[1] = 0;
     k[5] = 2 * g;
     k[9] = 0;
@@ -8838,7 +8843,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k[2] = 0;
     k[6] = 0;
     k[10] = -2 * p;
-    k[14] = -((l + d) * p);
+    k[14] = -((f + d) * p);
     k[3] = 0;
     k[7] = 0;
     k[11] = 0;
@@ -8881,7 +8886,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a[c + 15] = k[15];
     return a;
   }});
-  var Ii = new n, Ji = new r;
+  var Ki = new n, Li = new r;
   c.RotationOrders = "XYZ YZX ZXY XZY YXZ ZYX".split(" ");
   c.DefaultOrder = "XYZ";
   Object.defineProperties(c.prototype, {x:{get:function() {
@@ -8924,23 +8929,23 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, setFromRotationMatrix:function(a, c, b) {
     var k = ma.clamp, e = a.elements;
     a = e[0];
-    var d = e[4], l = e[8], f = e[1], g = e[5], p = e[9], m = e[2], v = e[6];
+    var d = e[4], f = e[8], l = e[1], g = e[5], p = e[9], m = e[2], u = e[6];
     e = e[10];
     c = c || this._order;
-    "XYZ" === c ? (this._y = Math.asin(k(l, -1, 1)), .9999999 > Math.abs(l) ? (this._x = Math.atan2(-p, e), this._z = Math.atan2(-d, a)) : (this._x = Math.atan2(v, g), this._z = 0)) : "YXZ" === c ? (this._x = Math.asin(-k(p, -1, 1)), .9999999 > Math.abs(p) ? (this._y = Math.atan2(l, e), this._z = Math.atan2(f, g)) : (this._y = Math.atan2(-m, a), this._z = 0)) : "ZXY" === c ? (this._x = Math.asin(k(v, -1, 1)), .9999999 > Math.abs(v) ? (this._y = Math.atan2(-m, e), this._z = Math.atan2(-d, g)) : (this._y = 
-    0, this._z = Math.atan2(f, a))) : "ZYX" === c ? (this._y = Math.asin(-k(m, -1, 1)), .9999999 > Math.abs(m) ? (this._x = Math.atan2(v, e), this._z = Math.atan2(f, a)) : (this._x = 0, this._z = Math.atan2(-d, g))) : "YZX" === c ? (this._z = Math.asin(k(f, -1, 1)), .9999999 > Math.abs(f) ? (this._x = Math.atan2(-p, g), this._y = Math.atan2(-m, a)) : (this._x = 0, this._y = Math.atan2(l, e))) : "XZY" === c ? (this._z = Math.asin(-k(d, -1, 1)), .9999999 > Math.abs(d) ? (this._x = Math.atan2(v, g), 
-    this._y = Math.atan2(l, a)) : (this._x = Math.atan2(-p, e), this._y = 0)) : console.warn("THREE.Euler: .setFromRotationMatrix() given unsupported order: " + c);
+    "XYZ" === c ? (this._y = Math.asin(k(f, -1, 1)), .9999999 > Math.abs(f) ? (this._x = Math.atan2(-p, e), this._z = Math.atan2(-d, a)) : (this._x = Math.atan2(u, g), this._z = 0)) : "YXZ" === c ? (this._x = Math.asin(-k(p, -1, 1)), .9999999 > Math.abs(p) ? (this._y = Math.atan2(f, e), this._z = Math.atan2(l, g)) : (this._y = Math.atan2(-m, a), this._z = 0)) : "ZXY" === c ? (this._x = Math.asin(k(u, -1, 1)), .9999999 > Math.abs(u) ? (this._y = Math.atan2(-m, e), this._z = Math.atan2(-d, g)) : (this._y = 
+    0, this._z = Math.atan2(l, a))) : "ZYX" === c ? (this._y = Math.asin(-k(m, -1, 1)), .9999999 > Math.abs(m) ? (this._x = Math.atan2(u, e), this._z = Math.atan2(l, a)) : (this._x = 0, this._z = Math.atan2(-d, g))) : "YZX" === c ? (this._z = Math.asin(k(l, -1, 1)), .9999999 > Math.abs(l) ? (this._x = Math.atan2(-p, g), this._y = Math.atan2(-m, a)) : (this._x = 0, this._y = Math.atan2(f, e))) : "XZY" === c ? (this._z = Math.asin(-k(d, -1, 1)), .9999999 > Math.abs(d) ? (this._x = Math.atan2(u, g), 
+    this._y = Math.atan2(f, a)) : (this._x = Math.atan2(-p, e), this._y = 0)) : console.warn("THREE.Euler: .setFromRotationMatrix() given unsupported order: " + c);
     this._order = c;
     !1 !== b && this._onChangeCallback();
     return this;
   }, setFromQuaternion:function(a, c, b) {
-    Ii.makeRotationFromQuaternion(a);
-    return this.setFromRotationMatrix(Ii, c, b);
+    Ki.makeRotationFromQuaternion(a);
+    return this.setFromRotationMatrix(Ki, c, b);
   }, setFromVector3:function(a, c) {
     return this.set(a.x, a.y, a.z, c || this._order);
   }, reorder:function(a) {
-    Ji.setFromEuler(this);
-    return this.setFromQuaternion(Ji, a);
+    Li.setFromEuler(this);
+    return this.setFromQuaternion(Li, a);
   }, equals:function(a) {
     return a._x === this._x && a._y === this._y && a._z === this._z && a._order === this._order;
   }, fromArray:function(a) {
@@ -8980,7 +8985,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, test:function(a) {
     return 0 !== (this.mask & a.mask);
   }});
-  var qj = 0, Ki = new m, Md = new r, $b = new n, Vf = new m, Se = new m, hk = new m, ik = new r, Li = new m(1, 0, 0), Mi = new m(0, 1, 0), Ni = new m(0, 0, 1), jk = {type:"added"}, kk = {type:"removed"};
+  var sj = 0, Mi = new m, Md = new r, $b = new n, Vf = new m, Se = new m, jk = new m, kk = new r, Ni = new m(1, 0, 0), Oi = new m(0, 1, 0), Pi = new m(0, 0, 1), lk = {type:"added"}, mk = {type:"removed"};
   t.DefaultUp = new m(0, 1, 0);
   t.DefaultMatrixAutoUpdate = !0;
   t.prototype = Object.assign(Object.create(d.prototype), {constructor:t, isObject3D:!0, onBeforeRender:function() {
@@ -9009,21 +9014,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.quaternion.premultiply(Md);
     return this;
   }, rotateX:function(a) {
-    return this.rotateOnAxis(Li, a);
-  }, rotateY:function(a) {
-    return this.rotateOnAxis(Mi, a);
-  }, rotateZ:function(a) {
     return this.rotateOnAxis(Ni, a);
+  }, rotateY:function(a) {
+    return this.rotateOnAxis(Oi, a);
+  }, rotateZ:function(a) {
+    return this.rotateOnAxis(Pi, a);
   }, translateOnAxis:function(a, c) {
-    Ki.copy(a).applyQuaternion(this.quaternion);
-    this.position.add(Ki.multiplyScalar(c));
+    Mi.copy(a).applyQuaternion(this.quaternion);
+    this.position.add(Mi.multiplyScalar(c));
     return this;
   }, translateX:function(a) {
-    return this.translateOnAxis(Li, a);
-  }, translateY:function(a) {
-    return this.translateOnAxis(Mi, a);
-  }, translateZ:function(a) {
     return this.translateOnAxis(Ni, a);
+  }, translateY:function(a) {
+    return this.translateOnAxis(Oi, a);
+  }, translateZ:function(a) {
+    return this.translateOnAxis(Pi, a);
   }, localToWorld:function(a) {
     return a.applyMatrix4(this.matrixWorld);
   }, worldToLocal:function(a) {
@@ -9046,7 +9051,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (a === this) {
       return console.error("THREE.Object3D.add: object can't be added as a child of itself.", a), this;
     }
-    a && a.isObject3D ? (null !== a.parent && a.parent.remove(a), a.parent = this, this.children.push(a), a.dispatchEvent(jk)) : console.error("THREE.Object3D.add: object not an instance of THREE.Object3D.", a);
+    a && a.isObject3D ? (null !== a.parent && a.parent.remove(a), a.parent = this, this.children.push(a), a.dispatchEvent(lk)) : console.error("THREE.Object3D.add: object not an instance of THREE.Object3D.", a);
     return this;
   }, remove:function(a) {
     if (1 < arguments.length) {
@@ -9056,7 +9061,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return this;
     }
     k = this.children.indexOf(a);
-    -1 !== k && (a.parent = null, this.children.splice(k, 1), a.dispatchEvent(kk));
+    -1 !== k && (a.parent = null, this.children.splice(k, 1), a.dispatchEvent(mk));
     return this;
   }, attach:function(a) {
     this.updateWorldMatrix(!0, !1);
@@ -9087,12 +9092,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, getWorldQuaternion:function(a) {
     void 0 === a && (console.warn("THREE.Object3D: .getWorldQuaternion() target is now required"), a = new r);
     this.updateMatrixWorld(!0);
-    this.matrixWorld.decompose(Se, a, hk);
+    this.matrixWorld.decompose(Se, a, jk);
     return a;
   }, getWorldScale:function(a) {
     void 0 === a && (console.warn("THREE.Object3D: .getWorldScale() target is now required"), a = new m);
     this.updateMatrixWorld(!0);
-    this.matrixWorld.decompose(Se, ik, a);
+    this.matrixWorld.decompose(Se, kk, a);
     return a;
   }, getWorldDirection:function(a) {
     void 0 === a && (console.warn("THREE.Object3D: .getWorldDirection() target is now required"), a = new m);
@@ -9168,45 +9173,45 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.isInstancedMesh && (d.type = "InstancedMesh", d.count = this.count, d.instanceMatrix = this.instanceMatrix.toJSON());
     if (this.isMesh || this.isLine || this.isPoints) {
       d.geometry = k(a.geometries, this.geometry);
-      var l = this.geometry.parameters;
-      if (void 0 !== l && void 0 !== l.shapes) {
-        if (l = l.shapes, Array.isArray(l)) {
-          for (var f = 0, g = l.length; f < g; f++) {
-            k(a.shapes, l[f]);
+      var f = this.geometry.parameters;
+      if (void 0 !== f && void 0 !== f.shapes) {
+        if (f = f.shapes, Array.isArray(f)) {
+          for (var l = 0, g = f.length; l < g; l++) {
+            k(a.shapes, f[l]);
           }
         } else {
-          k(a.shapes, l);
+          k(a.shapes, f);
         }
       }
     }
     if (void 0 !== this.material) {
       if (Array.isArray(this.material)) {
-        l = [];
-        f = 0;
-        for (g = this.material.length; f < g; f++) {
-          l.push(k(a.materials, this.material[f]));
+        f = [];
+        l = 0;
+        for (g = this.material.length; l < g; l++) {
+          f.push(k(a.materials, this.material[l]));
         }
-        d.material = l;
+        d.material = f;
       } else {
         d.material = k(a.materials, this.material);
       }
     }
     if (0 < this.children.length) {
-      for (d.children = [], f = 0; f < this.children.length; f++) {
-        d.children.push(this.children[f].toJSON(a).object);
+      for (d.children = [], l = 0; l < this.children.length; l++) {
+        d.children.push(this.children[l].toJSON(a).object);
       }
     }
     if (b) {
       b = c(a.geometries);
-      f = c(a.materials);
+      l = c(a.materials);
       g = c(a.textures);
       var p = c(a.images);
-      l = c(a.shapes);
+      f = c(a.shapes);
       0 < b.length && (e.geometries = b);
-      0 < f.length && (e.materials = f);
+      0 < l.length && (e.materials = l);
       0 < g.length && (e.textures = g);
       0 < p.length && (e.images = p);
-      0 < l.length && (e.shapes = l);
+      0 < f.length && (e.shapes = f);
     }
     e.object = d;
     return e;
@@ -9255,36 +9260,36 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, dispose:function() {
     this.dispatchEvent({type:"dispose"});
   }});
-  var ac = [new m, new m, new m, new m, new m, new m, new m, new m], Te = new m, ih = new x, Nd = new m, Od = new m, Pd = new m, qc = new m, rc = new m, Vc = new m, Ue = new m, Wf = new m, Xf = new m, wc = new m;
+  var ac = [new m, new m, new m, new m, new m, new m, new m, new m], Te = new m, jh = new x, Nd = new m, Od = new m, Pd = new m, qc = new m, rc = new m, Vc = new m, Ue = new m, Wf = new m, Xf = new m, wc = new m;
   Object.assign(x.prototype, {isBox3:!0, set:function(a, c) {
     this.min.copy(a);
     this.max.copy(c);
     return this;
   }, setFromArray:function(a) {
-    for (var k = Infinity, c = Infinity, b = Infinity, e = -Infinity, d = -Infinity, l = -Infinity, f = 0, g = a.length; f < g; f += 3) {
-      var p = a[f], m = a[f + 1], n = a[f + 2];
+    for (var k = Infinity, c = Infinity, b = Infinity, e = -Infinity, d = -Infinity, f = -Infinity, l = 0, g = a.length; l < g; l += 3) {
+      var p = a[l], m = a[l + 1], n = a[l + 2];
       p < k && (k = p);
       m < c && (c = m);
       n < b && (b = n);
       p > e && (e = p);
       m > d && (d = m);
-      n > l && (l = n);
+      n > f && (f = n);
     }
     this.min.set(k, c, b);
-    this.max.set(e, d, l);
+    this.max.set(e, d, f);
     return this;
   }, setFromBufferAttribute:function(a) {
-    for (var k = Infinity, c = Infinity, b = Infinity, e = -Infinity, d = -Infinity, l = -Infinity, f = 0, g = a.count; f < g; f++) {
-      var p = a.getX(f), m = a.getY(f), n = a.getZ(f);
+    for (var k = Infinity, c = Infinity, b = Infinity, e = -Infinity, d = -Infinity, f = -Infinity, l = 0, g = a.count; l < g; l++) {
+      var p = a.getX(l), m = a.getY(l), n = a.getZ(l);
       p < k && (k = p);
       m < c && (c = m);
       n < b && (b = n);
       p > e && (e = p);
       m > d && (d = m);
-      n > l && (l = n);
+      n > f && (f = n);
     }
     this.min.set(k, c, b);
-    this.max.set(e, d, l);
+    this.max.set(e, d, f);
     return this;
   }, setFromPoints:function(a) {
     this.makeEmpty();
@@ -9333,7 +9338,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, expandByObject:function(a) {
     a.updateWorldMatrix(!1, !1);
     var k = a.geometry;
-    void 0 !== k && (null === k.boundingBox && k.computeBoundingBox(), ih.copy(k.boundingBox), ih.applyMatrix4(a.matrixWorld), this.union(ih));
+    void 0 !== k && (null === k.boundingBox && k.computeBoundingBox(), jh.copy(k.boundingBox), jh.applyMatrix4(a.matrixWorld), this.union(jh));
     a = a.children;
     k = 0;
     for (var c = a.length; k < c; k++) {
@@ -9425,14 +9430,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, equals:function(a) {
     return a.min.equals(this.min) && a.max.equals(this.max);
   }});
-  var lk = new x;
+  var nk = new x;
   Object.assign(p.prototype, {set:function(a, c) {
     this.center.copy(a);
     this.radius = c;
     return this;
   }, setFromPoints:function(a, c) {
     var k = this.center;
-    void 0 !== c ? k.copy(c) : lk.setFromPoints(a).getCenter(k);
+    void 0 !== c ? k.copy(c) : nk.setFromPoints(a).getCenter(k);
     for (var b = c = 0, e = a.length; b < e; b++) {
       c = Math.max(c, k.distanceToSquared(a[b]));
     }
@@ -9478,8 +9483,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, equals:function(a) {
     return a.center.equals(this.center) && a.radius === this.radius;
   }});
-  var bc = new m, jh = new m, Yf = new m, sc = new m, kh = new m, Zf = new m, lh = new m;
-  Object.assign(u.prototype, {set:function(a, c) {
+  var bc = new m, kh = new m, Yf = new m, sc = new m, lh = new m, Zf = new m, mh = new m;
+  Object.assign(v.prototype, {set:function(a, c) {
     this.origin.copy(a);
     this.direction.copy(c);
     return this;
@@ -9513,21 +9518,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     bc.copy(this.direction).multiplyScalar(k).add(this.origin);
     return bc.distanceToSquared(a);
   }, distanceSqToSegment:function(a, c, b, e) {
-    jh.copy(a).add(c).multiplyScalar(.5);
+    kh.copy(a).add(c).multiplyScalar(.5);
     Yf.copy(c).sub(a).normalize();
-    sc.copy(this.origin).sub(jh);
-    var k = .5 * a.distanceTo(c), d = -this.direction.dot(Yf), l = sc.dot(this.direction), f = -sc.dot(Yf), g = sc.lengthSq(), p = Math.abs(1 - d * d);
+    sc.copy(this.origin).sub(kh);
+    var k = .5 * a.distanceTo(c), d = -this.direction.dot(Yf), f = sc.dot(this.direction), l = -sc.dot(Yf), g = sc.lengthSq(), p = Math.abs(1 - d * d);
     if (0 < p) {
-      a = d * f - l;
-      c = d * l - f;
+      a = d * l - f;
+      c = d * f - l;
       var m = k * p;
-      0 <= a ? c >= -m ? c <= m ? (k = 1 / p, a *= k, c *= k, d = a * (a + d * c + 2 * l) + c * (d * a + c + 2 * f) + g) : (c = k, a = Math.max(0, -(d * c + l)), d = -a * a + c * (c + 2 * f) + g) : (c = -k, a = Math.max(0, -(d * c + l)), d = -a * a + c * (c + 2 * f) + g) : c <= -m ? (a = Math.max(0, -(-d * k + l)), c = 0 < a ? -k : Math.min(Math.max(-k, -f), k), d = -a * a + c * (c + 2 * f) + g) : c <= m ? (a = 0, c = Math.min(Math.max(-k, -f), k), d = c * (c + 2 * f) + g) : (a = Math.max(0, -(d * 
-      k + l)), c = 0 < a ? k : Math.min(Math.max(-k, -f), k), d = -a * a + c * (c + 2 * f) + g);
+      0 <= a ? c >= -m ? c <= m ? (k = 1 / p, a *= k, c *= k, d = a * (a + d * c + 2 * f) + c * (d * a + c + 2 * l) + g) : (c = k, a = Math.max(0, -(d * c + f)), d = -a * a + c * (c + 2 * l) + g) : (c = -k, a = Math.max(0, -(d * c + f)), d = -a * a + c * (c + 2 * l) + g) : c <= -m ? (a = Math.max(0, -(-d * k + f)), c = 0 < a ? -k : Math.min(Math.max(-k, -l), k), d = -a * a + c * (c + 2 * l) + g) : c <= m ? (a = 0, c = Math.min(Math.max(-k, -l), k), d = c * (c + 2 * l) + g) : (a = Math.max(0, -(d * 
+      k + f)), c = 0 < a ? k : Math.min(Math.max(-k, -l), k), d = -a * a + c * (c + 2 * l) + g);
     } else {
-      c = 0 < d ? -k : k, a = Math.max(0, -(d * c + l)), d = -a * a + c * (c + 2 * f) + g;
+      c = 0 < d ? -k : k, a = Math.max(0, -(d * c + f)), d = -a * a + c * (c + 2 * l) + g;
     }
     b && b.copy(this.direction).multiplyScalar(a).add(this.origin);
-    e && e.copy(Yf).multiplyScalar(c).add(jh);
+    e && e.copy(Yf).multiplyScalar(c).add(kh);
     return d;
   }, intersectSphere:function(a, c) {
     bc.subVectors(a.center, this.origin);
@@ -9560,44 +9565,44 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var b = 1 / this.direction.y;
     var e = 1 / this.direction.z, d = this.origin;
     if (0 <= k) {
-      var l = (a.min.x - d.x) * k;
+      var f = (a.min.x - d.x) * k;
       k *= a.max.x - d.x;
     } else {
-      l = (a.max.x - d.x) * k, k *= a.min.x - d.x;
+      f = (a.max.x - d.x) * k, k *= a.min.x - d.x;
     }
     if (0 <= b) {
-      var f = (a.min.y - d.y) * b;
+      var l = (a.min.y - d.y) * b;
       b *= a.max.y - d.y;
     } else {
-      f = (a.max.y - d.y) * b, b *= a.min.y - d.y;
+      l = (a.max.y - d.y) * b, b *= a.min.y - d.y;
     }
-    if (l > b || f > k) {
+    if (f > b || l > k) {
       return null;
     }
-    if (f > l || l !== l) {
-      l = f;
+    if (l > f || f !== f) {
+      f = l;
     }
     if (b < k || k !== k) {
       k = b;
     }
-    0 <= e ? (f = (a.min.z - d.z) * e, a = (a.max.z - d.z) * e) : (f = (a.max.z - d.z) * e, a = (a.min.z - d.z) * e);
-    if (l > a || f > k) {
+    0 <= e ? (l = (a.min.z - d.z) * e, a = (a.max.z - d.z) * e) : (l = (a.max.z - d.z) * e, a = (a.min.z - d.z) * e);
+    if (f > a || l > k) {
       return null;
     }
-    if (f > l || l !== l) {
-      l = f;
+    if (l > f || f !== f) {
+      f = l;
     }
     if (a < k || k !== k) {
       k = a;
     }
-    return 0 > k ? null : this.at(0 <= l ? l : k, c);
+    return 0 > k ? null : this.at(0 <= f ? f : k, c);
   }, intersectsBox:function(a) {
     return null !== this.intersectBox(a, bc);
   }, intersectTriangle:function(a, c, b, e, d) {
-    kh.subVectors(c, a);
+    lh.subVectors(c, a);
     Zf.subVectors(b, a);
-    lh.crossVectors(kh, Zf);
-    c = this.direction.dot(lh);
+    mh.crossVectors(lh, Zf);
+    c = this.direction.dot(mh);
     if (0 < c) {
       if (e) {
         return null;
@@ -9615,11 +9620,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (0 > a) {
       return null;
     }
-    b = e * this.direction.dot(kh.cross(sc));
+    b = e * this.direction.dot(lh.cross(sc));
     if (0 > b || a + b > c) {
       return null;
     }
-    a = -e * sc.dot(lh);
+    a = -e * sc.dot(mh);
     return 0 > a ? null : this.at(a / c, d);
   }, applyMatrix4:function(a) {
     this.origin.applyMatrix4(a);
@@ -9628,7 +9633,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, equals:function(a) {
     return a.origin.equals(this.origin) && a.direction.equals(this.direction);
   }});
-  var mh = new m, mk = new m, nk = new b;
+  var nh = new m, ok = new m, pk = new b;
   Object.assign(w.prototype, {isPlane:!0, set:function(a, c) {
     this.normal.copy(a);
     this.constant = c;
@@ -9642,7 +9647,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.constant = -c.dot(this.normal);
     return this;
   }, setFromCoplanarPoints:function(a, c, b) {
-    c = mh.subVectors(b, c).cross(mk.subVectors(a, c)).normalize();
+    c = nh.subVectors(b, c).cross(ok.subVectors(a, c)).normalize();
     this.setFromNormalAndCoplanarPoint(c, a);
     return this;
   }, clone:function() {
@@ -9669,7 +9674,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return c.copy(this.normal).multiplyScalar(-this.distanceToPoint(a)).add(a);
   }, intersectLine:function(a, c) {
     void 0 === c && (console.warn("THREE.Plane: .intersectLine() target is now required"), c = new m);
-    var k = a.delta(mh), b = this.normal.dot(k);
+    var k = a.delta(nh), b = this.normal.dot(k);
     if (0 === b) {
       if (0 === this.distanceToPoint(a.start)) {
         return c.copy(a.start);
@@ -9691,8 +9696,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 === a && (console.warn("THREE.Plane: .coplanarPoint() target is now required"), a = new m);
     return a.copy(this.normal).multiplyScalar(-this.constant);
   }, applyMatrix4:function(a, c) {
-    c = c || nk.getNormalMatrix(a);
-    a = this.coplanarPoint(mh).applyMatrix4(a);
+    c = c || pk.getNormalMatrix(a);
+    a = this.coplanarPoint(nh).applyMatrix4(a);
     c = this.normal.applyMatrix3(c).normalize();
     this.constant = -a.dot(c);
     return this;
@@ -9702,7 +9707,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, equals:function(a) {
     return a.normal.equals(this.normal) && a.constant === this.constant;
   }});
-  var Ab = new m, cc = new m, nh = new m, dc = new m, Qd = new m, Rd = new m, Oi = new m, oh = new m, ph = new m, qh = new m;
+  var Ab = new m, cc = new m, oh = new m, dc = new m, Qd = new m, Rd = new m, Qi = new m, ph = new m, qh = new m, rh = new m;
   Object.assign(C, {getNormal:function(a, c, b, e) {
     void 0 === e && (console.warn("THREE.Triangle: .getNormal() target is now required"), e = new m);
     e.subVectors(b, c);
@@ -9713,30 +9718,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, getBarycoord:function(a, c, b, e, d) {
     Ab.subVectors(e, c);
     cc.subVectors(b, c);
-    nh.subVectors(a, c);
+    oh.subVectors(a, c);
     a = Ab.dot(Ab);
     c = Ab.dot(cc);
-    b = Ab.dot(nh);
+    b = Ab.dot(oh);
     var k = cc.dot(cc);
-    e = cc.dot(nh);
-    var l = a * k - c * c;
+    e = cc.dot(oh);
+    var f = a * k - c * c;
     void 0 === d && (console.warn("THREE.Triangle: .getBarycoord() target is now required"), d = new m);
-    if (0 === l) {
+    if (0 === f) {
       return d.set(-2, -1, -1);
     }
-    l = 1 / l;
-    k = (k * b - c * e) * l;
-    a = (a * e - c * b) * l;
+    f = 1 / f;
+    k = (k * b - c * e) * f;
+    a = (a * e - c * b) * f;
     return d.set(1 - k - a, a, k);
   }, containsPoint:function(a, c, b, e) {
     C.getBarycoord(a, c, b, e, dc);
     return 0 <= dc.x && 0 <= dc.y && 1 >= dc.x + dc.y;
-  }, getUV:function(a, c, b, e, d, l, f, g) {
+  }, getUV:function(a, c, b, e, d, f, l, g) {
     this.getBarycoord(a, c, b, e, dc);
     g.set(0, 0);
     g.addScaledVector(d, dc.x);
-    g.addScaledVector(l, dc.y);
-    g.addScaledVector(f, dc.z);
+    g.addScaledVector(f, dc.y);
+    g.addScaledVector(l, dc.z);
     return g;
   }, isFrontFacing:function(a, c, b, e) {
     Ab.subVectors(b, c);
@@ -9787,42 +9792,42 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var k = this.a, b = this.b, e = this.c;
     Qd.subVectors(b, k);
     Rd.subVectors(e, k);
-    oh.subVectors(a, k);
-    var d = Qd.dot(oh), l = Rd.dot(oh);
-    if (0 >= d && 0 >= l) {
+    ph.subVectors(a, k);
+    var d = Qd.dot(ph), f = Rd.dot(ph);
+    if (0 >= d && 0 >= f) {
       return c.copy(k);
     }
-    ph.subVectors(a, b);
-    var f = Qd.dot(ph), g = Rd.dot(ph);
-    if (0 <= f && g <= f) {
+    qh.subVectors(a, b);
+    var l = Qd.dot(qh), g = Rd.dot(qh);
+    if (0 <= l && g <= l) {
       return c.copy(b);
     }
-    var p = d * g - f * l;
-    if (0 >= p && 0 <= d && 0 >= f) {
-      return b = d / (d - f), c.copy(k).addScaledVector(Qd, b);
+    var p = d * g - l * f;
+    if (0 >= p && 0 <= d && 0 >= l) {
+      return b = d / (d - l), c.copy(k).addScaledVector(Qd, b);
     }
-    qh.subVectors(a, e);
-    a = Qd.dot(qh);
-    var n = Rd.dot(qh);
+    rh.subVectors(a, e);
+    a = Qd.dot(rh);
+    var n = Rd.dot(rh);
     if (0 <= n && a <= n) {
       return c.copy(e);
     }
-    d = a * l - d * n;
-    if (0 >= d && 0 <= l && 0 >= n) {
-      return p = l / (l - n), c.copy(k).addScaledVector(Rd, p);
+    d = a * f - d * n;
+    if (0 >= d && 0 <= f && 0 >= n) {
+      return p = f / (f - n), c.copy(k).addScaledVector(Rd, p);
     }
-    l = f * n - a * g;
-    if (0 >= l && 0 <= g - f && 0 <= a - n) {
-      return Oi.subVectors(e, b), p = (g - f) / (g - f + (a - n)), c.copy(b).addScaledVector(Oi, p);
+    f = l * n - a * g;
+    if (0 >= f && 0 <= g - l && 0 <= a - n) {
+      return Qi.subVectors(e, b), p = (g - l) / (g - l + (a - n)), c.copy(b).addScaledVector(Qi, p);
     }
-    e = 1 / (l + d + p);
+    e = 1 / (f + d + p);
     b = d * e;
     p *= e;
     return c.copy(k).addScaledVector(Qd, b).addScaledVector(Rd, p);
   }, equals:function(a) {
     return a.a.equals(this.a) && a.b.equals(this.b) && a.c.equals(this.c);
   }});
-  var Pi = {aliceblue:15792383, antiquewhite:16444375, aqua:65535, aquamarine:8388564, azure:15794175, beige:16119260, bisque:16770244, black:0, blanchedalmond:16772045, blue:255, blueviolet:9055202, brown:10824234, burlywood:14596231, cadetblue:6266528, chartreuse:8388352, chocolate:13789470, coral:16744272, cornflowerblue:6591981, cornsilk:16775388, crimson:14423100, cyan:65535, darkblue:139, darkcyan:35723, darkgoldenrod:12092939, darkgray:11119017, darkgreen:25600, darkgrey:11119017, darkkhaki:12433259, 
+  var Ri = {aliceblue:15792383, antiquewhite:16444375, aqua:65535, aquamarine:8388564, azure:15794175, beige:16119260, bisque:16770244, black:0, blanchedalmond:16772045, blue:255, blueviolet:9055202, brown:10824234, burlywood:14596231, cadetblue:6266528, chartreuse:8388352, chocolate:13789470, coral:16744272, cornflowerblue:6591981, cornsilk:16775388, crimson:14423100, cyan:65535, darkblue:139, darkcyan:35723, darkgoldenrod:12092939, darkgray:11119017, darkgreen:25600, darkgrey:11119017, darkkhaki:12433259, 
   darkmagenta:9109643, darkolivegreen:5597999, darkorange:16747520, darkorchid:10040012, darkred:9109504, darksalmon:15308410, darkseagreen:9419919, darkslateblue:4734347, darkslategray:3100495, darkslategrey:3100495, darkturquoise:52945, darkviolet:9699539, deeppink:16716947, deepskyblue:49151, dimgray:6908265, dimgrey:6908265, dodgerblue:2003199, firebrick:11674146, floralwhite:16775920, forestgreen:2263842, fuchsia:16711935, gainsboro:14474460, ghostwhite:16316671, gold:16766720, goldenrod:14329120, 
   gray:8421504, green:32768, greenyellow:11403055, grey:8421504, honeydew:15794160, hotpink:16738740, indianred:13458524, indigo:4915330, ivory:16777200, khaki:15787660, lavender:15132410, lavenderblush:16773365, lawngreen:8190976, lemonchiffon:16775885, lightblue:11393254, lightcoral:15761536, lightcyan:14745599, lightgoldenrodyellow:16448210, lightgray:13882323, lightgreen:9498256, lightgrey:13882323, lightpink:16758465, lightsalmon:16752762, lightseagreen:2142890, lightskyblue:8900346, lightslategray:7833753, 
   lightslategrey:7833753, lightsteelblue:11584734, lightyellow:16777184, lime:65280, limegreen:3329330, linen:16445670, magenta:16711935, maroon:8388608, mediumaquamarine:6737322, mediumblue:205, mediumorchid:12211667, mediumpurple:9662683, mediumseagreen:3978097, mediumslateblue:8087790, mediumspringgreen:64154, mediumturquoise:4772300, mediumvioletred:13047173, midnightblue:1644912, mintcream:16121850, mistyrose:16770273, moccasin:16770229, navajowhite:16768685, navy:128, oldlace:16643558, olive:8421376, 
@@ -9891,7 +9896,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return a && 0 < a.length ? this.setColorName(a) : this;
   }, setColorName:function(a) {
-    var k = Pi[a];
+    var k = Ri[a];
     void 0 !== k ? this.setHex(k) : console.warn("THREE.Color: Unknown color " + a);
     return this;
   }, clone:function() {
@@ -9942,27 +9947,27 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return ("000000" + this.getHex().toString(16)).slice(-6);
   }, getHSL:function(a) {
     void 0 === a && (console.warn("THREE.Color: .getHSL() target is now required"), a = {h:0, s:0, l:0});
-    var k = this.r, c = this.g, b = this.b, e = Math.max(k, c, b), d = Math.min(k, c, b), l, f = (d + e) / 2;
+    var k = this.r, c = this.g, b = this.b, e = Math.max(k, c, b), d = Math.min(k, c, b), f, l = (d + e) / 2;
     if (d === e) {
-      d = l = 0;
+      d = f = 0;
     } else {
       var g = e - d;
-      d = .5 >= f ? g / (e + d) : g / (2 - e - d);
+      d = .5 >= l ? g / (e + d) : g / (2 - e - d);
       switch(e) {
         case k:
-          l = (c - b) / g + (c < b ? 6 : 0);
+          f = (c - b) / g + (c < b ? 6 : 0);
           break;
         case c:
-          l = (b - k) / g + 2;
+          f = (b - k) / g + 2;
           break;
         case b:
-          l = (k - c) / g + 4;
+          f = (k - c) / g + 4;
       }
-      l /= 6;
+      f /= 6;
     }
-    a.h = l;
+    a.h = f;
     a.s = d;
-    a.l = f;
+    a.l = l;
     return a;
   }, getStyle:function() {
     return "rgb(" + (255 * this.r | 0) + "," + (255 * this.g | 0) + "," + (255 * this.b | 0) + ")";
@@ -10034,7 +10039,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, toJSON:function() {
     return this.getHex();
   }});
-  A.NAMES = Pi;
+  A.NAMES = Ri;
   Object.assign(E.prototype, {clone:function() {
     return (new this.constructor).copy(this);
   }, copy:function(a) {
@@ -10044,42 +10049,42 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.normal.copy(a.normal);
     this.color.copy(a.color);
     this.materialIndex = a.materialIndex;
-    for (var k = 0, c = a.vertexNormals.length; k < c; k++) {
-      this.vertexNormals[k] = a.vertexNormals[k].clone();
+    for (var c = 0, k = a.vertexNormals.length; c < k; c++) {
+      this.vertexNormals[c] = a.vertexNormals[c].clone();
     }
-    k = 0;
-    for (c = a.vertexColors.length; k < c; k++) {
-      this.vertexColors[k] = a.vertexColors[k].clone();
+    c = 0;
+    for (k = a.vertexColors.length; c < k; c++) {
+      this.vertexColors[c] = a.vertexColors[c].clone();
     }
     return this;
   }});
-  var rj = 0;
+  var tj = 0;
   H.prototype = Object.assign(Object.create(d.prototype), {constructor:H, isMaterial:!0, onBeforeCompile:function() {
   }, setValues:function(a) {
     if (void 0 !== a) {
-      for (var k in a) {
-        var c = a[k];
-        if (void 0 === c) {
-          console.warn("THREE.Material: '" + k + "' parameter is undefined.");
+      for (var c in a) {
+        var k = a[c];
+        if (void 0 === k) {
+          console.warn("THREE.Material: '" + c + "' parameter is undefined.");
         } else {
-          if ("shading" === k) {
-            console.warn("THREE." + this.type + ": .shading has been removed. Use the boolean .flatShading instead."), this.flatShading = 1 === c ? !0 : !1;
+          if ("shading" === c) {
+            console.warn("THREE." + this.type + ": .shading has been removed. Use the boolean .flatShading instead."), this.flatShading = 1 === k ? !0 : !1;
           } else {
-            var b = this[k];
-            void 0 === b ? console.warn("THREE." + this.type + ": '" + k + "' is not a property of this material.") : b && b.isColor ? b.set(c) : b && b.isVector3 && c && c.isVector3 ? b.copy(c) : this[k] = c;
+            var b = this[c];
+            void 0 === b ? console.warn("THREE." + this.type + ": '" + c + "' is not a property of this material.") : b && b.isColor ? b.set(k) : b && b.isVector3 && k && k.isVector3 ? b.copy(k) : this[c] = k;
           }
         }
       }
     }
   }, toJSON:function(a) {
     function c(a) {
-      var k = [], c;
-      for (c in a) {
-        var b = a[c];
+      var c = [], k;
+      for (k in a) {
+        var b = a[k];
         delete b.metadata;
-        k.push(b);
+        c.push(b);
       }
-      return k;
+      return c;
     }
     var k = void 0 === a || "string" === typeof a;
     k && (a = {textures:{}, images:{}});
@@ -10097,6 +10102,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 !== this.shininess && (b.shininess = this.shininess);
     void 0 !== this.clearcoat && (b.clearcoat = this.clearcoat);
     void 0 !== this.clearcoatRoughness && (b.clearcoatRoughness = this.clearcoatRoughness);
+    this.clearcoatMap && this.clearcoatMap.isTexture && (b.clearcoatMap = this.clearcoatMap.toJSON(a).uuid);
+    this.clearcoatRoughnessMap && this.clearcoatRoughnessMap.isTexture && (b.clearcoatRoughnessMap = this.clearcoatRoughnessMap.toJSON(a).uuid);
     this.clearcoatNormalMap && this.clearcoatNormalMap.isTexture && (b.clearcoatNormalMap = this.clearcoatNormalMap.toJSON(a).uuid, b.clearcoatNormalScale = this.clearcoatNormalScale.toArray());
     this.map && this.map.isTexture && (b.map = this.map.toJSON(a).uuid);
     this.matcap && this.matcap.isTexture && (b.matcap = this.matcap.toJSON(a).uuid);
@@ -10371,8 +10378,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }});
   R.prototype = Object.create(I.prototype);
   R.prototype.constructor = R;
-  K.prototype = Object.create(I.prototype);
-  K.prototype.constructor = K;
+  L.prototype = Object.create(I.prototype);
+  L.prototype.constructor = L;
   G.prototype = Object.create(I.prototype);
   G.prototype.constructor = G;
   M.prototype = Object.create(I.prototype);
@@ -10401,11 +10408,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 !== d && (d.count = 3 * b - d.start, c.push(d));
     this.groups = c;
   }, fromGeometry:function(a) {
-    var c = a.faces, k = a.vertices, b = a.faceVertexUvs, e = b[0] && 0 < b[0].length, d = b[1] && 0 < b[1].length, l = a.morphTargets, f = l.length;
-    if (0 < f) {
+    var c = a.faces, k = a.vertices, b = a.faceVertexUvs, e = b[0] && 0 < b[0].length, d = b[1] && 0 < b[1].length, f = a.morphTargets, l = f.length;
+    if (0 < l) {
       var g = [];
-      for (var p = 0; p < f; p++) {
-        g[p] = {name:l[p].name, data:[]};
+      for (var p = 0; p < l; p++) {
+        g[p] = {name:f[p].name, data:[]};
       }
       this.morphTargets.position = g;
     }
@@ -10417,7 +10424,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       this.morphTargets.normal = q;
     }
-    var r = a.skinIndices, t = a.skinWeights, u = r.length === k.length, y = t.length === k.length;
+    var r = a.skinIndices, t = a.skinWeights, v = r.length === k.length, y = t.length === k.length;
     0 < k.length && 0 === c.length && console.error("THREE.DirectGeometry: Faceless geometries are not supported.");
     for (p = 0; p < c.length; p++) {
       var w = c[p];
@@ -10428,14 +10435,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       3 === x.length ? this.colors.push(x[0], x[1], x[2]) : (x = w.color, this.colors.push(x, x, x));
       !0 === e && (x = b[0][p], void 0 !== x ? this.uvs.push(x[0], x[1], x[2]) : (console.warn("THREE.DirectGeometry.fromGeometry(): Undefined vertexUv ", p), this.uvs.push(new h, new h, new h)));
       !0 === d && (x = b[1][p], void 0 !== x ? this.uvs2.push(x[0], x[1], x[2]) : (console.warn("THREE.DirectGeometry.fromGeometry(): Undefined vertexUv2 ", p), this.uvs2.push(new h, new h, new h)));
-      for (x = 0; x < f; x++) {
-        var T = l[x].vertices;
+      for (x = 0; x < l; x++) {
+        var T = f[x].vertices;
         g[x].data.push(T[w.a], T[w.b], T[w.c]);
       }
       for (x = 0; x < n; x++) {
         T = m[x].vertexNormals[p], q[x].data.push(T.a, T.b, T.c);
       }
-      u && this.skinIndices.push(r[w.a], r[w.b], r[w.c]);
+      v && this.skinIndices.push(r[w.a], r[w.b], r[w.c]);
       y && this.skinWeights.push(t[w.a], t[w.b], t[w.c]);
     }
     this.computeGroups(a);
@@ -10448,7 +10455,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     null !== a.boundingBox && (this.boundingBox = a.boundingBox.clone());
     return this;
   }});
-  var sj = 1, Ob = new n, rh = new t, Sd = new m, ib = new x, Ve = new x, La = new m;
+  var uj = 1, Ob = new n, sh = new t, Sd = new m, ib = new x, Ve = new x, La = new m;
   N.prototype = Object.assign(Object.create(d.prototype), {constructor:N, isBufferGeometry:!0, getIndex:function() {
     return this.index;
   }, setIndex:function(a) {
@@ -10503,9 +10510,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.applyMatrix4(Ob);
     return this;
   }, lookAt:function(a) {
-    rh.lookAt(a);
-    rh.updateMatrix();
-    this.applyMatrix4(rh.matrix);
+    sh.lookAt(a);
+    sh.updateMatrix();
+    this.applyMatrix4(sh.matrix);
     return this;
   }, center:function() {
     this.computeBoundingBox();
@@ -10574,9 +10581,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     for (var k in a.morphTargets) {
       c = [];
       for (var b = a.morphTargets[k], e = 0, d = b.length; e < d; e++) {
-        var l = b[e], f = new Q(3 * l.data.length, 3);
-        f.name = l.name;
-        c.push(f.copyVector3sArray(l.data));
+        var f = b[e], l = new Q(3 * f.data.length, 3);
+        l.name = f.name;
+        c.push(l.copyVector3sArray(f.data));
       }
       this.morphAttributes[k] = c;
     }
@@ -10607,26 +10614,26 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       ib.setFromBufferAttribute(a);
       if (c) {
         for (var e = 0, d = c.length; e < d; e++) {
-          var l = c[e];
-          Ve.setFromBufferAttribute(l);
+          var f = c[e];
+          Ve.setFromBufferAttribute(f);
           this.morphTargetsRelative ? (La.addVectors(ib.min, Ve.min), ib.expandByPoint(La), La.addVectors(ib.max, Ve.max), ib.expandByPoint(La)) : (ib.expandByPoint(Ve.min), ib.expandByPoint(Ve.max));
         }
       }
       ib.getCenter(b);
-      var f = 0;
+      var l = 0;
       e = 0;
       for (d = a.count; e < d; e++) {
-        La.fromBufferAttribute(a, e), f = Math.max(f, b.distanceToSquared(La));
+        La.fromBufferAttribute(a, e), l = Math.max(l, b.distanceToSquared(La));
       }
       if (c) {
         for (e = 0, d = c.length; e < d; e++) {
-          l = c[e];
-          for (var g = this.morphTargetsRelative, m = 0, n = l.count; m < n; m++) {
-            La.fromBufferAttribute(l, m), g && (Sd.fromBufferAttribute(a, m), La.add(Sd)), f = Math.max(f, b.distanceToSquared(La));
+          f = c[e];
+          for (var g = this.morphTargetsRelative, m = 0, n = f.count; m < n; m++) {
+            La.fromBufferAttribute(f, m), g && (Sd.fromBufferAttribute(a, m), La.add(Sd)), l = Math.max(l, b.distanceToSquared(La));
           }
         }
       }
-      this.boundingSphere.radius = Math.sqrt(f);
+      this.boundingSphere.radius = Math.sqrt(l);
       isNaN(this.boundingSphere.radius) && console.error('THREE.BufferGeometry.computeBoundingSphere(): Computed radius is NaN. The "position" attribute is likely to have NaN values.', this);
     }
   }, computeFaceNormals:function() {
@@ -10637,24 +10644,24 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       if (void 0 === c.normal) {
         this.setAttribute("normal", new I(new Float32Array(b.length), 3));
       } else {
-        for (var e = c.normal.array, d = 0, l = e.length; d < l; d++) {
+        for (var e = c.normal.array, d = 0, f = e.length; d < f; d++) {
           e[d] = 0;
         }
       }
       e = c.normal.array;
-      var f = new m, g = new m, p = new m, n = new m, h = new m;
+      var l = new m, g = new m, p = new m, n = new m, h = new m;
       if (a) {
         var q = a.array;
         d = 0;
-        for (l = a.count; d < l; d += 3) {
+        for (f = a.count; d < f; d += 3) {
           a = 3 * q[d + 0];
           var r = 3 * q[d + 1];
           var t = 3 * q[d + 2];
-          f.fromArray(b, a);
+          l.fromArray(b, a);
           g.fromArray(b, r);
           p.fromArray(b, t);
           n.subVectors(p, g);
-          h.subVectors(f, g);
+          h.subVectors(l, g);
           n.cross(h);
           e[a] += n.x;
           e[a + 1] += n.y;
@@ -10667,8 +10674,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           e[t + 2] += n.z;
         }
       } else {
-        for (d = 0, l = b.length; d < l; d += 9) {
-          f.fromArray(b, d), g.fromArray(b, d + 3), p.fromArray(b, d + 6), n.subVectors(p, g), h.subVectors(f, g), n.cross(h), e[d] = n.x, e[d + 1] = n.y, e[d + 2] = n.z, e[d + 3] = n.x, e[d + 4] = n.y, e[d + 5] = n.z, e[d + 6] = n.x, e[d + 7] = n.y, e[d + 8] = n.z;
+        for (d = 0, f = b.length; d < f; d += 9) {
+          l.fromArray(b, d), g.fromArray(b, d + 3), p.fromArray(b, d + 6), n.subVectors(p, g), h.subVectors(l, g), n.cross(h), e[d] = n.x, e[d + 1] = n.y, e[d + 2] = n.z, e[d + 3] = n.x, e[d + 4] = n.y, e[d + 5] = n.z, e[d + 6] = n.x, e[d + 7] = n.y, e[d + 8] = n.z;
         }
       }
       this.normalizeNormals();
@@ -10680,10 +10687,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       var k = this.attributes, b;
       for (b in k) {
         if (void 0 !== a.attributes[b]) {
-          var e = k[b].array, d = a.attributes[b], l = d.array, f = d.itemSize * c;
-          d = Math.min(l.length, e.length - f);
-          for (var g = 0; g < d; g++, f++) {
-            e[f] = l[g];
+          var e = k[b].array, d = a.attributes[b], f = d.array, l = d.itemSize * c;
+          d = Math.min(f.length, e.length - l);
+          for (var g = 0; g < d; g++, l++) {
+            e[l] = f[g];
           }
         }
       }
@@ -10698,8 +10705,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     function a(a, c) {
       var k = a.array;
       a = a.itemSize;
-      for (var b = new k.constructor(c.length * a), e, d = 0, l = 0, f = c.length; l < f; l++) {
-        e = c[l] * a;
+      for (var b = new k.constructor(c.length * a), e, d = 0, f = 0, l = c.length; f < l; f++) {
+        e = c[f] * a;
         for (var g = 0; g < a; g++) {
           b[d++] = k[e++];
         }
@@ -10711,16 +10718,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     var c = new N, b = this.index.array, e = this.attributes, d;
     for (d in e) {
-      var l = e[d];
-      l = a(l, b);
-      c.setAttribute(d, l);
+      var f = e[d];
+      f = a(f, b);
+      c.setAttribute(d, f);
     }
-    var f = this.morphAttributes;
-    for (d in f) {
-      var g = [], p = f[d];
+    var l = this.morphAttributes;
+    for (d in l) {
+      var g = [], p = l[d];
       e = 0;
       for (var m = p.length; e < m; e++) {
-        l = p[e], l = a(l, b), g.push(l);
+        f = p[e], f = a(f, b), g.push(f);
       }
       c.morphAttributes[d] = g;
     }
@@ -10728,7 +10735,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     b = this.groups;
     e = 0;
     for (d = b.length; e < d; e++) {
-      l = b[e], c.addGroup(l.start, l.count, l.materialIndex);
+      f = b[e], c.addGroup(f.start, f.count, f.materialIndex);
     }
     return c;
   }, toJSON:function() {
@@ -10757,10 +10764,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     b = {};
     var d = !1;
     for (m in this.morphAttributes) {
-      for (var l = this.morphAttributes[m], f = [], g = 0, p = l.length; g < p; g++) {
-        c = l[g], e = c.toJSON(), "" !== c.name && (e.name = c.name), f.push(e);
+      for (var f = this.morphAttributes[m], l = [], g = 0, p = f.length; g < p; g++) {
+        c = f[g], e = c.toJSON(), "" !== c.name && (e.name = c.name), l.push(e);
       }
-      0 < f.length && (b[m] = f, d = !0);
+      0 < l.length && (b[m] = l, d = !0);
     }
     d && (a.data.morphAttributes = b, a.data.morphTargetsRelative = this.morphTargetsRelative);
     var m = this.groups;
@@ -10781,28 +10788,28 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var k = a.index;
     null !== k && this.setIndex(k.clone());
     k = a.attributes;
-    for (l in k) {
-      this.setAttribute(l, k[l].clone());
+    for (f in k) {
+      this.setAttribute(f, k[f].clone());
     }
     var b = a.morphAttributes;
-    for (l in b) {
-      var e = [], d = b[l];
+    for (f in b) {
+      var e = [], d = b[f];
       k = 0;
       for (c = d.length; k < c; k++) {
         e.push(d[k].clone());
       }
-      this.morphAttributes[l] = e;
+      this.morphAttributes[f] = e;
     }
     this.morphTargetsRelative = a.morphTargetsRelative;
-    var l = a.groups;
+    var f = a.groups;
     k = 0;
-    for (c = l.length; k < c; k++) {
-      b = l[k], this.addGroup(b.start, b.count, b.materialIndex);
+    for (c = f.length; k < c; k++) {
+      b = f[k], this.addGroup(b.start, b.count, b.materialIndex);
     }
-    l = a.boundingBox;
-    null !== l && (this.boundingBox = l.clone());
-    l = a.boundingSphere;
-    null !== l && (this.boundingSphere = l.clone());
+    f = a.boundingBox;
+    null !== f && (this.boundingBox = f.clone());
+    f = a.boundingSphere;
+    null !== f && (this.boundingSphere = f.clone());
     this.drawRange.start = a.drawRange.start;
     this.drawRange.count = a.drawRange.count;
     this.userData = a.userData;
@@ -10810,7 +10817,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, dispose:function() {
     this.dispatchEvent({type:"dispose"});
   }});
-  var Qi = new n, Wc = new u, sh = new p, xc = new m, yc = new m, zc = new m, pg = new m, qg = new m, rg = new m, bf = new m, cf = new m, df = new m, dd = new h, ed = new h, fd = new h, Yd = new m, af = new m;
+  var Si = new n, Wc = new v, th = new p, xc = new m, yc = new m, zc = new m, pg = new m, qg = new m, rg = new m, bf = new m, cf = new m, df = new m, dd = new h, ed = new h, fd = new h, Yd = new m, af = new m;
   W.prototype = Object.assign(Object.create(t.prototype), {constructor:W, isMesh:!0, copy:function(a) {
     t.prototype.copy.call(this, a);
     void 0 !== a.morphTargetInfluences && (this.morphTargetInfluences = a.morphTargetInfluences.slice());
@@ -10836,11 +10843,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
   }, raycast:function(a, c) {
     var k = this.geometry, b = this.material, e = this.matrixWorld;
-    if (void 0 !== b && (null === k.boundingSphere && k.computeBoundingSphere(), sh.copy(k.boundingSphere), sh.applyMatrix4(e), !1 !== a.ray.intersectsSphere(sh) && (Qi.getInverse(e), Wc.copy(a.ray).applyMatrix4(Qi), null === k.boundingBox || !1 !== Wc.intersectsBox(k.boundingBox)))) {
+    if (void 0 !== b && (null === k.boundingSphere && k.computeBoundingSphere(), th.copy(k.boundingSphere), th.applyMatrix4(e), !1 !== a.ray.intersectsSphere(th) && (Si.getInverse(e), Wc.copy(a.ray).applyMatrix4(Si), null === k.boundingBox || !1 !== Wc.intersectsBox(k.boundingBox)))) {
       if (k.isBufferGeometry) {
         var d = k.index;
         e = k.attributes.position;
-        var l = k.morphAttributes.position, f = k.morphTargetsRelative, g = k.attributes.uv, p = k.attributes.uv2, m = k.groups, n = k.drawRange, q, r;
+        var f = k.morphAttributes.position, l = k.morphTargetsRelative, g = k.attributes.uv, p = k.attributes.uv2, m = k.groups, n = k.drawRange, q, r;
         if (null !== d) {
           if (Array.isArray(b)) {
             var t = 0;
@@ -10852,14 +10859,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
                 k = d.getX(y);
                 var w = d.getX(y + 1);
                 var x = d.getX(y + 2);
-                if (k = fa(this, v, a, Wc, e, l, f, g, p, k, w, x)) {
+                if (k = fa(this, v, a, Wc, e, f, l, g, p, k, w, x)) {
                   k.faceIndex = Math.floor(y / 3), k.face.materialIndex = u.materialIndex, c.push(k);
                 }
               }
             }
           } else {
             for (y = Math.max(0, n.start), k = Math.min(d.count, n.start + n.count), t = y, q = k; t < q; t += 3) {
-              if (k = d.getX(t), w = d.getX(t + 1), x = d.getX(t + 2), k = fa(this, b, a, Wc, e, l, f, g, p, k, w, x)) {
+              if (k = d.getX(t), w = d.getX(t + 1), x = d.getX(t + 2), k = fa(this, b, a, Wc, e, f, l, g, p, k, w, x)) {
                 k.faceIndex = Math.floor(t / 3), c.push(k);
               }
             }
@@ -10869,14 +10876,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             if (Array.isArray(b)) {
               for (t = 0, q = m.length; t < q; t++) {
                 for (u = m[t], v = b[u.materialIndex], y = Math.max(u.start, n.start), r = k = Math.min(u.start + u.count, n.start + n.count); y < r; y += 3) {
-                  if (k = y, w = y + 1, x = y + 2, k = fa(this, v, a, Wc, e, l, f, g, p, k, w, x)) {
+                  if (k = y, w = y + 1, x = y + 2, k = fa(this, v, a, Wc, e, f, l, g, p, k, w, x)) {
                     k.faceIndex = Math.floor(y / 3), k.face.materialIndex = u.materialIndex, c.push(k);
                   }
                 }
               }
             } else {
               for (y = Math.max(0, n.start), k = Math.min(e.count, n.start + n.count), t = y, q = k; t < q; t += 3) {
-                if (k = t, w = t + 1, x = t + 2, k = fa(this, b, a, Wc, e, l, f, g, p, k, w, x)) {
+                if (k = t, w = t + 1, x = t + 2, k = fa(this, b, a, Wc, e, f, l, g, p, k, w, x)) {
                   k.faceIndex = Math.floor(t / 3), c.push(k);
                 }
               }
@@ -10885,8 +10892,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         }
       } else {
         if (k.isGeometry) {
-          for (e = Array.isArray(b), l = k.vertices, f = k.faces, k = k.faceVertexUvs[0], 0 < k.length && (d = k), n = 0, t = f.length; n < t; n++) {
-            if (q = f[n], k = e ? b[q.materialIndex] : b, void 0 !== k && (g = l[q.a], p = l[q.b], m = l[q.c], k = da(this, k, a, Wc, g, p, m, Yd))) {
+          for (e = Array.isArray(b), f = k.vertices, l = k.faces, k = k.faceVertexUvs[0], 0 < k.length && (d = k), n = 0, t = l.length; n < t; n++) {
+            if (q = l[n], k = e ? b[q.materialIndex] : b, void 0 !== k && (g = f[q.a], p = f[q.b], m = f[q.c], k = da(this, k, a, Wc, g, p, m, Yd))) {
               d && d[n] && (u = d[n], dd.copy(u[0]), ed.copy(u[1]), fd.copy(u[2]), k.uv = C.getUV(Yd, g, p, m, dd, ed, fd, new h)), k.face = q, k.faceIndex = n, c.push(k);
             }
           }
@@ -10896,7 +10903,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, clone:function() {
     return (new this.constructor(this.geometry, this.material)).copy(this);
   }});
-  var uj = 0, Pb = new n, th = new t, ag = new m;
+  var wj = 0, Pb = new n, uh = new t, ag = new m;
   X.prototype = Object.assign(Object.create(d.prototype), {constructor:X, isGeometry:!0, applyMatrix4:function(a) {
     for (var c = (new b).getNormalMatrix(a), k = 0, e = this.vertices.length; k < e; k++) {
       this.vertices[k].applyMatrix4(a);
@@ -10905,7 +10912,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     for (e = this.faces.length; k < e; k++) {
       a = this.faces[k];
       a.normal.applyMatrix3(c).normalize();
-      for (var d = 0, l = a.vertexNormals.length; d < l; d++) {
+      for (var d = 0, f = a.vertexNormals.length; d < f; d++) {
         a.vertexNormals[d].applyMatrix3(c).normalize();
       }
     }
@@ -10934,13 +10941,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.applyMatrix4(Pb);
     return this;
   }, lookAt:function(a) {
-    th.lookAt(a);
-    th.updateMatrix();
-    this.applyMatrix4(th.matrix);
+    uh.lookAt(a);
+    uh.updateMatrix();
+    this.applyMatrix4(uh.matrix);
     return this;
   }, fromBufferGeometry:function(a) {
     function c(a, c, b, e) {
-      var d = void 0 === f ? [] : [k.colors[a].clone(), k.colors[c].clone(), k.colors[b].clone()], n = void 0 === l ? [] : [(new m).fromArray(l, 3 * a), (new m).fromArray(l, 3 * c), (new m).fromArray(l, 3 * b)];
+      var d = void 0 === l ? [] : [k.colors[a].clone(), k.colors[c].clone(), k.colors[b].clone()], n = void 0 === f ? [] : [(new m).fromArray(f, 3 * a), (new m).fromArray(f, 3 * c), (new m).fromArray(f, 3 * b)];
       e = new E(a, c, b, n, d, e);
       k.faces.push(e);
       void 0 !== g && k.faceVertexUvs[0].push([(new h).fromArray(g, 2 * a), (new h).fromArray(g, 2 * c), (new h).fromArray(g, 2 * b)]);
@@ -10950,10 +10957,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (void 0 === e.position) {
       return console.error("THREE.Geometry.fromBufferGeometry(): Position attribute required for conversion."), this;
     }
-    var d = e.position.array, l = void 0 !== e.normal ? e.normal.array : void 0, f = void 0 !== e.color ? e.color.array : void 0, g = void 0 !== e.uv ? e.uv.array : void 0, p = void 0 !== e.uv2 ? e.uv2.array : void 0;
+    var d = e.position.array, f = void 0 !== e.normal ? e.normal.array : void 0, l = void 0 !== e.color ? e.color.array : void 0, g = void 0 !== e.uv ? e.uv.array : void 0, p = void 0 !== e.uv2 ? e.uv2.array : void 0;
     void 0 !== p && (this.faceVertexUvs[1] = []);
     for (e = 0; e < d.length; e += 3) {
-      k.vertices.push((new m).fromArray(d, e)), void 0 !== f && k.colors.push((new A).fromArray(f, e));
+      k.vertices.push((new m).fromArray(d, e)), void 0 !== l && k.colors.push((new A).fromArray(l, e));
     }
     var n = a.groups;
     if (0 < n.length) {
@@ -10994,9 +11001,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return this;
   }, computeFaceNormals:function() {
     for (var a = new m, c = new m, b = 0, e = this.faces.length; b < e; b++) {
-      var d = this.faces[b], l = this.vertices[d.a], f = this.vertices[d.b];
-      a.subVectors(this.vertices[d.c], f);
-      c.subVectors(l, f);
+      var d = this.faces[b], f = this.vertices[d.a], l = this.vertices[d.b];
+      a.subVectors(this.vertices[d.c], l);
+      c.subVectors(f, l);
       a.cross(c);
       a.normalize();
       d.normal.copy(a);
@@ -11014,11 +11021,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a = 0;
       for (b = this.faces.length; a < b; a++) {
         c = this.faces[a];
-        var l = this.vertices[c.a];
-        var f = this.vertices[c.b];
+        var f = this.vertices[c.a];
+        var l = this.vertices[c.b];
         var g = this.vertices[c.c];
-        e.subVectors(g, f);
-        d.subVectors(l, f);
+        e.subVectors(g, l);
+        d.subVectors(f, l);
         e.cross(d);
         k[c.a].add(e);
         k[c.b].add(e);
@@ -11035,7 +11042,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     a = 0;
     for (b = this.faces.length; a < b; a++) {
-      c = this.faces[a], l = c.vertexNormals, 3 === l.length ? (l[0].copy(k[c.a]), l[1].copy(k[c.b]), l[2].copy(k[c.c])) : (l[0] = k[c.a].clone(), l[1] = k[c.b].clone(), l[2] = k[c.c].clone());
+      c = this.faces[a], f = c.vertexNormals, 3 === f.length ? (f[0].copy(k[c.a]), f[1].copy(k[c.b]), f[2].copy(k[c.c])) : (f[0] = k[c.a].clone(), f[1] = k[c.b].clone(), f[2] = k[c.c].clone());
     }
     0 < this.faces.length && (this.normalsNeedUpdate = !0);
   }, computeFlatVertexNormals:function() {
@@ -11060,8 +11067,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         e.__originalVertexNormals[d] ? e.__originalVertexNormals[d].copy(e.vertexNormals[d]) : e.__originalVertexNormals[d] = e.vertexNormals[d].clone();
       }
     }
-    var l = new X;
-    l.faces = this.faces;
+    var f = new X;
+    f.faces = this.faces;
     d = 0;
     for (a = this.morphTargets.length; d < a; d++) {
       if (!this.morphNormals[d]) {
@@ -11069,22 +11076,22 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         this.morphNormals[d].faceNormals = [];
         this.morphNormals[d].vertexNormals = [];
         e = this.morphNormals[d].faceNormals;
-        var f = this.morphNormals[d].vertexNormals;
+        var l = this.morphNormals[d].vertexNormals;
         b = 0;
         for (c = this.faces.length; b < c; b++) {
           var g = new m;
           var p = {a:new m, b:new m, c:new m};
           e.push(g);
-          f.push(p);
+          l.push(p);
         }
       }
-      f = this.morphNormals[d];
-      l.vertices = this.morphTargets[d].vertices;
-      l.computeFaceNormals();
-      l.computeVertexNormals();
+      l = this.morphNormals[d];
+      f.vertices = this.morphTargets[d].vertices;
+      f.computeFaceNormals();
+      f.computeVertexNormals();
       b = 0;
       for (c = this.faces.length; b < c; b++) {
-        e = this.faces[b], g = f.faceNormals[b], p = f.vertexNormals[b], g.copy(e.normal), p.a.copy(e.vertexNormals[0]), p.b.copy(e.vertexNormals[1]), p.c.copy(e.vertexNormals[2]);
+        e = this.faces[b], g = l.faceNormals[b], p = l.vertexNormals[b], g.copy(e.normal), p.a.copy(e.vertexNormals[0]), p.b.copy(e.vertexNormals[1]), p.c.copy(e.vertexNormals[2]);
       }
     }
     b = 0;
@@ -11099,13 +11106,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.boundingSphere.setFromPoints(this.vertices);
   }, merge:function(a, c, e) {
     if (a && a.isGeometry) {
-      var k, d = this.vertices.length, l = this.vertices, f = a.vertices, g = this.faces, p = a.faces, m = this.colors, n = a.colors;
+      var k, d = this.vertices.length, f = this.vertices, l = a.vertices, g = this.faces, p = a.faces, m = this.colors, n = a.colors;
       void 0 === e && (e = 0);
       void 0 !== c && (k = (new b).getNormalMatrix(c));
-      for (var h = 0, q = f.length; h < q; h++) {
-        var r = f[h].clone();
+      for (var h = 0, q = l.length; h < q; h++) {
+        var r = l[h].clone();
         void 0 !== c && r.applyMatrix4(c);
-        l.push(r);
+        f.push(r);
       }
       h = 0;
       for (q = n.length; h < q; h++) {
@@ -11113,27 +11120,27 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       h = 0;
       for (q = p.length; h < q; h++) {
-        f = p[h];
-        var t = f.vertexNormals;
-        n = f.vertexColors;
-        m = new E(f.a + d, f.b + d, f.c + d);
-        m.normal.copy(f.normal);
+        l = p[h];
+        var t = l.vertexNormals;
+        n = l.vertexColors;
+        m = new E(l.a + d, l.b + d, l.c + d);
+        m.normal.copy(l.normal);
         void 0 !== k && m.normal.applyMatrix3(k).normalize();
         c = 0;
-        for (l = t.length; c < l; c++) {
+        for (f = t.length; c < f; c++) {
           r = t[c].clone(), void 0 !== k && r.applyMatrix3(k).normalize(), m.vertexNormals.push(r);
         }
-        m.color.copy(f.color);
+        m.color.copy(l.color);
         c = 0;
-        for (l = n.length; c < l; c++) {
+        for (f = n.length; c < f; c++) {
           r = n[c], m.vertexColors.push(r.clone());
         }
-        m.materialIndex = f.materialIndex + e;
+        m.materialIndex = l.materialIndex + e;
         g.push(m);
       }
       h = 0;
       for (q = a.faceVertexUvs.length; h < q; h++) {
-        for (e = a.faceVertexUvs[h], void 0 === this.faceVertexUvs[h] && (this.faceVertexUvs[h] = []), c = 0, l = e.length; c < l; c++) {
+        for (e = a.faceVertexUvs[h], void 0 === this.faceVertexUvs[h] && (this.faceVertexUvs[h] = []), c = 0, f = e.length; c < f; c++) {
           k = e[c];
           d = [];
           g = 0;
@@ -11150,30 +11157,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a && a.isMesh ? (a.matrixAutoUpdate && a.updateMatrix(), this.merge(a.geometry, a.matrix)) : console.error("THREE.Geometry.mergeMesh(): mesh not an instance of THREE.Mesh.", a);
   }, mergeVertices:function() {
     var a = {}, c = [], b = [], e = Math.pow(10, 4), d;
-    var l = 0;
-    for (d = this.vertices.length; l < d; l++) {
-      var f = this.vertices[l];
-      f = Math.round(f.x * e) + "_" + Math.round(f.y * e) + "_" + Math.round(f.z * e);
-      void 0 === a[f] ? (a[f] = l, c.push(this.vertices[l]), b[l] = c.length - 1) : b[l] = b[a[f]];
+    var f = 0;
+    for (d = this.vertices.length; f < d; f++) {
+      var l = this.vertices[f];
+      l = Math.round(l.x * e) + "_" + Math.round(l.y * e) + "_" + Math.round(l.z * e);
+      void 0 === a[l] ? (a[l] = f, c.push(this.vertices[f]), b[f] = c.length - 1) : b[f] = b[a[l]];
     }
     a = [];
-    l = 0;
-    for (d = this.faces.length; l < d; l++) {
-      for (e = this.faces[l], e.a = b[e.a], e.b = b[e.b], e.c = b[e.c], e = [e.a, e.b, e.c], f = 0; 3 > f; f++) {
-        if (e[f] === e[(f + 1) % 3]) {
-          a.push(l);
+    f = 0;
+    for (d = this.faces.length; f < d; f++) {
+      for (e = this.faces[f], e.a = b[e.a], e.b = b[e.b], e.c = b[e.c], e = [e.a, e.b, e.c], l = 0; 3 > l; l++) {
+        if (e[l] === e[(l + 1) % 3]) {
+          a.push(f);
           break;
         }
       }
     }
-    for (l = a.length - 1; 0 <= l; l--) {
-      for (e = a[l], this.faces.splice(e, 1), b = 0, d = this.faceVertexUvs.length; b < d; b++) {
+    for (f = a.length - 1; 0 <= f; f--) {
+      for (e = a[f], this.faces.splice(e, 1), b = 0, d = this.faceVertexUvs.length; b < d; b++) {
         this.faceVertexUvs[b].splice(e, 1);
       }
     }
-    l = this.vertices.length - c.length;
+    f = this.vertices.length - c.length;
     this.vertices = c;
-    return l;
+    return f;
   }, setFromPoints:function(a) {
     this.vertices = [];
     for (var c = 0, k = a.length; c < k; c++) {
@@ -11188,16 +11195,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a.sort(function(a, c) {
       return a.materialIndex - c.materialIndex;
     });
-    var e = this.faceVertexUvs[0], d = this.faceVertexUvs[1], l, f;
-    e && e.length === c && (l = []);
-    d && d.length === c && (f = []);
+    var e = this.faceVertexUvs[0], d = this.faceVertexUvs[1], f, l;
+    e && e.length === c && (f = []);
+    d && d.length === c && (l = []);
     for (b = 0; b < c; b++) {
       var g = a[b]._id;
-      l && l.push(e[g]);
-      f && f.push(d[g]);
+      f && f.push(e[g]);
+      l && l.push(d[g]);
     }
-    l && (this.faceVertexUvs[0] = l);
-    f && (this.faceVertexUvs[1] = f);
+    f && (this.faceVertexUvs[0] = f);
+    l && (this.faceVertexUvs[1] = l);
   }, toJSON:function() {
     function a(a, c, k) {
       return k ? a | 1 << c : a & ~(1 << c);
@@ -11234,25 +11241,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     d.type = this.type;
     "" !== this.name && (d.name = this.name);
     if (void 0 !== this.parameters) {
-      var l = this.parameters, f;
-      for (f in l) {
-        void 0 !== l[f] && (d[f] = l[f]);
+      var f = this.parameters, l;
+      for (l in f) {
+        void 0 !== f[l] && (d[l] = f[l]);
       }
       return d;
     }
-    l = [];
-    for (f = 0; f < this.vertices.length; f++) {
-      var g = this.vertices[f];
-      l.push(g.x, g.y, g.z);
+    f = [];
+    for (l = 0; l < this.vertices.length; l++) {
+      var g = this.vertices[l];
+      f.push(g.x, g.y, g.z);
     }
     g = [];
     var p = [], m = {}, n = [], h = {}, q = [], r = {};
-    for (f = 0; f < this.faces.length; f++) {
-      var t = this.faces[f], u = void 0 !== this.faceVertexUvs[0][f], y = 0 < t.normal.length(), w = 0 < t.vertexNormals.length, x = 1 !== t.color.r || 1 !== t.color.g || 1 !== t.color.b, T = 0 < t.vertexColors.length, z = 0;
+    for (l = 0; l < this.faces.length; l++) {
+      var t = this.faces[l], v = void 0 !== this.faceVertexUvs[0][l], y = 0 < t.normal.length(), w = 0 < t.vertexNormals.length, x = 1 !== t.color.r || 1 !== t.color.g || 1 !== t.color.b, T = 0 < t.vertexColors.length, z = 0;
       z = a(z, 0, 0);
       z = a(z, 1, !0);
       z = a(z, 2, !1);
-      z = a(z, 3, u);
+      z = a(z, 3, v);
       z = a(z, 4, y);
       z = a(z, 5, w);
       z = a(z, 6, x);
@@ -11260,14 +11267,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       g.push(z);
       g.push(t.a, t.b, t.c);
       g.push(t.materialIndex);
-      u && (u = this.faceVertexUvs[0][f], g.push(e(u[0]), e(u[1]), e(u[2])));
+      v && (v = this.faceVertexUvs[0][l], g.push(e(v[0]), e(v[1]), e(v[2])));
       y && g.push(c(t.normal));
       w && (y = t.vertexNormals, g.push(c(y[0]), c(y[1]), c(y[2])));
       x && g.push(b(t.color));
       T && (t = t.vertexColors, g.push(b(t[0]), b(t[1]), b(t[2])));
     }
     d.data = {};
-    d.data.vertices = l;
+    d.data.vertices = f;
     d.data.normals = p;
     0 < n.length && (d.data.colors = n);
     0 < q.length && (d.data.uvs = [q]);
@@ -11305,14 +11312,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     d = 0;
     for (c = a.faceVertexUvs.length; d < c; d++) {
-      var l = a.faceVertexUvs[d];
+      var f = a.faceVertexUvs[d];
       void 0 === this.faceVertexUvs[d] && (this.faceVertexUvs[d] = []);
       e = 0;
-      for (k = l.length; e < k; e++) {
-        var f = l[e], g = [];
+      for (k = f.length; e < k; e++) {
+        var l = f[e], g = [];
         var p = 0;
-        for (b = f.length; p < b; p++) {
-          g.push(f[p].clone());
+        for (b = l.length; p < b; p++) {
+          g.push(l[p].clone());
         }
         this.faceVertexUvs[d].push(g);
       }
@@ -11340,7 +11347,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       b = {};
       if (void 0 !== p[d].vertexNormals) {
         for (b.vertexNormals = [], e = 0, k = p[d].vertexNormals.length; e < k; e++) {
-          l = p[d].vertexNormals[e], f = {}, f.a = l.a.clone(), f.b = l.b.clone(), f.c = l.c.clone(), b.vertexNormals.push(f);
+          f = p[d].vertexNormals[e], l = {}, l.a = f.a.clone(), l.b = f.b.clone(), l.c = f.c.clone(), b.vertexNormals.push(l);
         }
       }
       if (void 0 !== p[d].faceNormals) {
@@ -11380,32 +11387,32 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, dispose:function() {
     this.dispatchEvent({type:"dispose"});
   }});
-  var uh = function(a) {
-    function c(c, k, b, e, d, l) {
+  var vh = function(a) {
+    function c(c, k, b, e, d, f) {
       a.call(this);
       this.type = "BoxGeometry";
-      this.parameters = {width:c, height:k, depth:b, widthSegments:e, heightSegments:d, depthSegments:l};
-      this.fromBufferGeometry(new Zd(c, k, b, e, d, l));
+      this.parameters = {width:c, height:k, depth:b, widthSegments:e, heightSegments:d, depthSegments:f};
+      this.fromBufferGeometry(new Zd(c, k, b, e, d, f));
       this.mergeVertices();
     }
     a && (c.__proto__ = a);
     c.prototype = Object.create(a && a.prototype);
     return c.prototype.constructor = c;
   }(X), Zd = function(a) {
-    function c(c, k, b, e, d, l) {
-      function f(a, c, k, b, e, d, l, f, u, v, y) {
-        var w = d / u, x = l / v, T = d / 2, z = l / 2, C = f / 2;
-        l = u + 1;
-        var A = v + 1, D = d = 0, L, oa, B = new m;
+    function c(c, k, b, e, d, f) {
+      function l(a, c, k, b, e, d, f, l, v, u, y) {
+        var w = d / v, x = f / u, T = d / 2, z = f / 2, C = l / 2;
+        f = v + 1;
+        var A = u + 1, D = d = 0, K, oa, B = new m;
         for (oa = 0; oa < A; oa++) {
           var ca = oa * x - z;
-          for (L = 0; L < l; L++) {
-            B[a] = (L * w - T) * b, B[c] = ca * e, B[k] = C, n.push(B.x, B.y, B.z), B[a] = 0, B[c] = 0, B[k] = 0 < f ? 1 : -1, h.push(B.x, B.y, B.z), q.push(L / u), q.push(1 - oa / v), d += 1;
+          for (K = 0; K < f; K++) {
+            B[a] = (K * w - T) * b, B[c] = ca * e, B[k] = C, n.push(B.x, B.y, B.z), B[a] = 0, B[c] = 0, B[k] = 0 < l ? 1 : -1, h.push(B.x, B.y, B.z), q.push(K / v), q.push(1 - oa / u), d += 1;
           }
         }
-        for (oa = 0; oa < v; oa++) {
-          for (L = 0; L < u; L++) {
-            a = r + L + l * (oa + 1), c = r + (L + 1) + l * (oa + 1), k = r + (L + 1) + l * oa, p.push(r + L + l * oa, a, k), p.push(a, c, k), D += 6;
+        for (oa = 0; oa < u; oa++) {
+          for (K = 0; K < v; K++) {
+            a = r + K + f * (oa + 1), c = r + (K + 1) + f * (oa + 1), k = r + (K + 1) + f * oa, p.push(r + K + f * oa, a, k), p.push(a, c, k), D += 6;
           }
         }
         g.addGroup(t, D, y);
@@ -11414,21 +11421,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       a.call(this);
       this.type = "BoxBufferGeometry";
-      this.parameters = {width:c, height:k, depth:b, widthSegments:e, heightSegments:d, depthSegments:l};
+      this.parameters = {width:c, height:k, depth:b, widthSegments:e, heightSegments:d, depthSegments:f};
       var g = this;
       c = c || 1;
       k = k || 1;
       b = b || 1;
       e = Math.floor(e) || 1;
       d = Math.floor(d) || 1;
-      l = Math.floor(l) || 1;
+      f = Math.floor(f) || 1;
       var p = [], n = [], h = [], q = [], r = 0, t = 0;
-      f("z", "y", "x", -1, -1, b, k, c, l, d, 0);
-      f("z", "y", "x", 1, -1, b, k, -c, l, d, 1);
-      f("x", "z", "y", 1, 1, c, b, k, e, l, 2);
-      f("x", "z", "y", 1, -1, c, b, -k, e, l, 3);
-      f("x", "y", "z", 1, -1, c, k, b, e, d, 4);
-      f("x", "y", "z", -1, -1, c, k, -b, e, d, 5);
+      l("z", "y", "x", -1, -1, b, k, c, f, d, 0);
+      l("z", "y", "x", 1, -1, b, k, -c, f, d, 1);
+      l("x", "z", "y", 1, 1, c, b, k, e, f, 2);
+      l("x", "z", "y", 1, -1, c, b, -k, e, f, 3);
+      l("x", "y", "z", 1, -1, c, k, b, e, d, 4);
+      l("x", "y", "z", -1, -1, c, k, -b, e, d, 5);
       this.setIndex(p);
       this.setAttribute("position", new Q(n, 3));
       this.setAttribute("normal", new Q(h, 3));
@@ -11437,7 +11444,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a && (c.__proto__ = a);
     c.prototype = Object.create(a && a.prototype);
     return c.prototype.constructor = c;
-  }(N), Vh = {clone:ka, merge:Y};
+  }(N), Xh = {clone:ka, merge:Y};
   ja.prototype = Object.create(H.prototype);
   ja.prototype.constructor = ja;
   ja.prototype.isShaderMaterial = !0;
@@ -11519,7 +11526,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return this.filmGauge * Math.min(this.aspect, 1);
   }, getFilmHeight:function() {
     return this.filmGauge / Math.max(this.aspect, 1);
-  }, setViewOffset:function(a, c, b, e, d, l) {
+  }, setViewOffset:function(a, c, b, e, d, f) {
     this.aspect = a / c;
     null === this.view && (this.view = {enabled:!0, fullWidth:1, fullHeight:1, offsetX:0, offsetY:0, width:1, height:1});
     this.view.enabled = !0;
@@ -11528,22 +11535,22 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.view.offsetX = b;
     this.view.offsetY = e;
     this.view.width = d;
-    this.view.height = l;
+    this.view.height = f;
     this.updateProjectionMatrix();
   }, clearViewOffset:function() {
     null !== this.view && (this.view.enabled = !1);
     this.updateProjectionMatrix();
   }, updateProjectionMatrix:function() {
-    var a = this.near, c = a * Math.tan(.5 * ma.DEG2RAD * this.fov) / this.zoom, b = 2 * c, e = this.aspect * b, d = -.5 * e, l = this.view;
+    var a = this.near, c = a * Math.tan(.5 * ma.DEG2RAD * this.fov) / this.zoom, b = 2 * c, e = this.aspect * b, d = -.5 * e, f = this.view;
     if (null !== this.view && this.view.enabled) {
-      var f = l.fullWidth, g = l.fullHeight;
-      d += l.offsetX * e / f;
-      c -= l.offsetY * b / g;
-      e *= l.width / f;
-      b *= l.height / g;
+      var l = f.fullWidth, g = f.fullHeight;
+      d += f.offsetX * e / l;
+      c -= f.offsetY * b / g;
+      e *= f.width / l;
+      b *= f.height / g;
     }
-    l = this.filmOffset;
-    0 !== l && (d += a * l / this.getFilmWidth());
+    f = this.filmOffset;
+    0 !== f && (d += a * f / this.getFilmWidth());
     this.projectionMatrix.makePerspective(d, d + e, c, c - b, a, this.far);
     this.projectionMatrixInverse.getInverse(this.projectionMatrix);
   }, toJSON:function(a) {
@@ -11585,14 +11592,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Ja.prototype.constructor = Ja;
   Ja.prototype.isDataTexture = !0;
   var Td = new p, bg = new m;
-  Object.assign(Ga.prototype, {set:function(a, c, b, e, d, l) {
+  Object.assign(Ga.prototype, {set:function(a, c, b, e, d, f) {
     var k = this.planes;
     k[0].copy(a);
     k[1].copy(c);
     k[2].copy(b);
     k[3].copy(e);
     k[4].copy(d);
-    k[5].copy(l);
+    k[5].copy(f);
     return this;
   }, clone:function() {
     return (new this.constructor).copy(this);
@@ -11604,14 +11611,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, setFromProjectionMatrix:function(a) {
     var c = this.planes, k = a.elements;
     a = k[0];
-    var b = k[1], e = k[2], d = k[3], l = k[4], f = k[5], g = k[6], p = k[7], m = k[8], n = k[9], h = k[10], q = k[11], r = k[12], t = k[13], u = k[14];
+    var b = k[1], e = k[2], d = k[3], f = k[4], l = k[5], g = k[6], p = k[7], m = k[8], n = k[9], h = k[10], q = k[11], r = k[12], t = k[13], v = k[14];
     k = k[15];
-    c[0].setComponents(d - a, p - l, q - m, k - r).normalize();
-    c[1].setComponents(d + a, p + l, q + m, k + r).normalize();
-    c[2].setComponents(d + b, p + f, q + n, k + t).normalize();
-    c[3].setComponents(d - b, p - f, q - n, k - t).normalize();
-    c[4].setComponents(d - e, p - g, q - h, k - u).normalize();
-    c[5].setComponents(d + e, p + g, q + h, k + u).normalize();
+    c[0].setComponents(d - a, p - f, q - m, k - r).normalize();
+    c[1].setComponents(d + a, p + f, q + m, k + r).normalize();
+    c[2].setComponents(d + b, p + l, q + n, k + t).normalize();
+    c[3].setComponents(d - b, p - l, q - n, k - t).normalize();
+    c[4].setComponents(d - e, p - g, q - h, k - v).normalize();
+    c[5].setComponents(d + e, p + g, q + h, k + v).normalize();
     return this;
   }, intersectsObject:function(a) {
     var c = a.geometry;
@@ -11663,9 +11670,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   var na = {alphamap_fragment:"#ifdef USE_ALPHAMAP\n\tdiffuseColor.a *= texture2D( alphaMap, vUv ).g;\n#endif", alphamap_pars_fragment:"#ifdef USE_ALPHAMAP\n\tuniform sampler2D alphaMap;\n#endif", alphatest_fragment:"#ifdef ALPHATEST\n\tif ( diffuseColor.a < ALPHATEST ) discard;\n#endif", aomap_fragment:"#ifdef USE_AOMAP\n\tfloat ambientOcclusion = ( texture2D( aoMap, vUv2 ).r - 1.0 ) * aoMapIntensity + 1.0;\n\treflectedLight.indirectDiffuse *= ambientOcclusion;\n\t#if defined( USE_ENVMAP ) && defined( STANDARD )\n\t\tfloat dotNV = saturate( dot( geometry.normal, geometry.viewDir ) );\n\t\treflectedLight.indirectSpecular *= computeSpecularOcclusion( dotNV, ambientOcclusion, material.specularRoughness );\n\t#endif\n#endif", 
   aomap_pars_fragment:"#ifdef USE_AOMAP\n\tuniform sampler2D aoMap;\n\tuniform float aoMapIntensity;\n#endif", begin_vertex:"vec3 transformed = vec3( position );", beginnormal_vertex:"vec3 objectNormal = vec3( normal );\n#ifdef USE_TANGENT\n\tvec3 objectTangent = vec3( tangent.xyz );\n#endif", bsdfs:"vec2 integrateSpecularBRDF( const in float dotNV, const in float roughness ) {\n\tconst vec4 c0 = vec4( - 1, - 0.0275, - 0.572, 0.022 );\n\tconst vec4 c1 = vec4( 1, 0.0425, 1.04, - 0.04 );\n\tvec4 r = roughness * c0 + c1;\n\tfloat a004 = min( r.x * r.x, exp2( - 9.28 * dotNV ) ) * r.x + r.y;\n\treturn vec2( -1.04, 1.04 ) * a004 + r.zw;\n}\nfloat punctualLightIntensityToIrradianceFactor( const in float lightDistance, const in float cutoffDistance, const in float decayExponent ) {\n#if defined ( PHYSICALLY_CORRECT_LIGHTS )\n\tfloat distanceFalloff = 1.0 / max( pow( lightDistance, decayExponent ), 0.01 );\n\tif( cutoffDistance > 0.0 ) {\n\t\tdistanceFalloff *= pow2( saturate( 1.0 - pow4( lightDistance / cutoffDistance ) ) );\n\t}\n\treturn distanceFalloff;\n#else\n\tif( cutoffDistance > 0.0 && decayExponent > 0.0 ) {\n\t\treturn pow( saturate( -lightDistance / cutoffDistance + 1.0 ), decayExponent );\n\t}\n\treturn 1.0;\n#endif\n}\nvec3 BRDF_Diffuse_Lambert( const in vec3 diffuseColor ) {\n\treturn RECIPROCAL_PI * diffuseColor;\n}\nvec3 F_Schlick( const in vec3 specularColor, const in float dotLH ) {\n\tfloat fresnel = exp2( ( -5.55473 * dotLH - 6.98316 ) * dotLH );\n\treturn ( 1.0 - specularColor ) * fresnel + specularColor;\n}\nvec3 F_Schlick_RoughnessDependent( const in vec3 F0, const in float dotNV, const in float roughness ) {\n\tfloat fresnel = exp2( ( -5.55473 * dotNV - 6.98316 ) * dotNV );\n\tvec3 Fr = max( vec3( 1.0 - roughness ), F0 ) - F0;\n\treturn Fr * fresnel + F0;\n}\nfloat G_GGX_Smith( const in float alpha, const in float dotNL, const in float dotNV ) {\n\tfloat a2 = pow2( alpha );\n\tfloat gl = dotNL + sqrt( a2 + ( 1.0 - a2 ) * pow2( dotNL ) );\n\tfloat gv = dotNV + sqrt( a2 + ( 1.0 - a2 ) * pow2( dotNV ) );\n\treturn 1.0 / ( gl * gv );\n}\nfloat G_GGX_SmithCorrelated( const in float alpha, const in float dotNL, const in float dotNV ) {\n\tfloat a2 = pow2( alpha );\n\tfloat gv = dotNL * sqrt( a2 + ( 1.0 - a2 ) * pow2( dotNV ) );\n\tfloat gl = dotNV * sqrt( a2 + ( 1.0 - a2 ) * pow2( dotNL ) );\n\treturn 0.5 / max( gv + gl, EPSILON );\n}\nfloat D_GGX( const in float alpha, const in float dotNH ) {\n\tfloat a2 = pow2( alpha );\n\tfloat denom = pow2( dotNH ) * ( a2 - 1.0 ) + 1.0;\n\treturn RECIPROCAL_PI * a2 / pow2( denom );\n}\nvec3 BRDF_Specular_GGX( const in IncidentLight incidentLight, const in vec3 viewDir, const in vec3 normal, const in vec3 specularColor, const in float roughness ) {\n\tfloat alpha = pow2( roughness );\n\tvec3 halfDir = normalize( incidentLight.direction + viewDir );\n\tfloat dotNL = saturate( dot( normal, incidentLight.direction ) );\n\tfloat dotNV = saturate( dot( normal, viewDir ) );\n\tfloat dotNH = saturate( dot( normal, halfDir ) );\n\tfloat dotLH = saturate( dot( incidentLight.direction, halfDir ) );\n\tvec3 F = F_Schlick( specularColor, dotLH );\n\tfloat G = G_GGX_SmithCorrelated( alpha, dotNL, dotNV );\n\tfloat D = D_GGX( alpha, dotNH );\n\treturn F * ( G * D );\n}\nvec2 LTC_Uv( const in vec3 N, const in vec3 V, const in float roughness ) {\n\tconst float LUT_SIZE  = 64.0;\n\tconst float LUT_SCALE = ( LUT_SIZE - 1.0 ) / LUT_SIZE;\n\tconst float LUT_BIAS  = 0.5 / LUT_SIZE;\n\tfloat dotNV = saturate( dot( N, V ) );\n\tvec2 uv = vec2( roughness, sqrt( 1.0 - dotNV ) );\n\tuv = uv * LUT_SCALE + LUT_BIAS;\n\treturn uv;\n}\nfloat LTC_ClippedSphereFormFactor( const in vec3 f ) {\n\tfloat l = length( f );\n\treturn max( ( l * l + f.z ) / ( l + 1.0 ), 0.0 );\n}\nvec3 LTC_EdgeVectorFormFactor( const in vec3 v1, const in vec3 v2 ) {\n\tfloat x = dot( v1, v2 );\n\tfloat y = abs( x );\n\tfloat a = 0.8543985 + ( 0.4965155 + 0.0145206 * y ) * y;\n\tfloat b = 3.4175940 + ( 4.1616724 + y ) * y;\n\tfloat v = a / b;\n\tfloat theta_sintheta = ( x > 0.0 ) ? v : 0.5 * inversesqrt( max( 1.0 - x * x, 1e-7 ) ) - v;\n\treturn cross( v1, v2 ) * theta_sintheta;\n}\nvec3 LTC_Evaluate( const in vec3 N, const in vec3 V, const in vec3 P, const in mat3 mInv, const in vec3 rectCoords[ 4 ] ) {\n\tvec3 v1 = rectCoords[ 1 ] - rectCoords[ 0 ];\n\tvec3 v2 = rectCoords[ 3 ] - rectCoords[ 0 ];\n\tvec3 lightNormal = cross( v1, v2 );\n\tif( dot( lightNormal, P - rectCoords[ 0 ] ) < 0.0 ) return vec3( 0.0 );\n\tvec3 T1, T2;\n\tT1 = normalize( V - N * dot( V, N ) );\n\tT2 = - cross( N, T1 );\n\tmat3 mat = mInv * transposeMat3( mat3( T1, T2, N ) );\n\tvec3 coords[ 4 ];\n\tcoords[ 0 ] = mat * ( rectCoords[ 0 ] - P );\n\tcoords[ 1 ] = mat * ( rectCoords[ 1 ] - P );\n\tcoords[ 2 ] = mat * ( rectCoords[ 2 ] - P );\n\tcoords[ 3 ] = mat * ( rectCoords[ 3 ] - P );\n\tcoords[ 0 ] = normalize( coords[ 0 ] );\n\tcoords[ 1 ] = normalize( coords[ 1 ] );\n\tcoords[ 2 ] = normalize( coords[ 2 ] );\n\tcoords[ 3 ] = normalize( coords[ 3 ] );\n\tvec3 vectorFormFactor = vec3( 0.0 );\n\tvectorFormFactor += LTC_EdgeVectorFormFactor( coords[ 0 ], coords[ 1 ] );\n\tvectorFormFactor += LTC_EdgeVectorFormFactor( coords[ 1 ], coords[ 2 ] );\n\tvectorFormFactor += LTC_EdgeVectorFormFactor( coords[ 2 ], coords[ 3 ] );\n\tvectorFormFactor += LTC_EdgeVectorFormFactor( coords[ 3 ], coords[ 0 ] );\n\tfloat result = LTC_ClippedSphereFormFactor( vectorFormFactor );\n\treturn vec3( result );\n}\nvec3 BRDF_Specular_GGX_Environment( const in vec3 viewDir, const in vec3 normal, const in vec3 specularColor, const in float roughness ) {\n\tfloat dotNV = saturate( dot( normal, viewDir ) );\n\tvec2 brdf = integrateSpecularBRDF( dotNV, roughness );\n\treturn specularColor * brdf.x + brdf.y;\n}\nvoid BRDF_Specular_Multiscattering_Environment( const in GeometricContext geometry, const in vec3 specularColor, const in float roughness, inout vec3 singleScatter, inout vec3 multiScatter ) {\n\tfloat dotNV = saturate( dot( geometry.normal, geometry.viewDir ) );\n\tvec3 F = F_Schlick_RoughnessDependent( specularColor, dotNV, roughness );\n\tvec2 brdf = integrateSpecularBRDF( dotNV, roughness );\n\tvec3 FssEss = F * brdf.x + brdf.y;\n\tfloat Ess = brdf.x + brdf.y;\n\tfloat Ems = 1.0 - Ess;\n\tvec3 Favg = specularColor + ( 1.0 - specularColor ) * 0.047619;\tvec3 Fms = FssEss * Favg / ( 1.0 - Ems * Favg );\n\tsingleScatter += FssEss;\n\tmultiScatter += Fms * Ems;\n}\nfloat G_BlinnPhong_Implicit( ) {\n\treturn 0.25;\n}\nfloat D_BlinnPhong( const in float shininess, const in float dotNH ) {\n\treturn RECIPROCAL_PI * ( shininess * 0.5 + 1.0 ) * pow( dotNH, shininess );\n}\nvec3 BRDF_Specular_BlinnPhong( const in IncidentLight incidentLight, const in GeometricContext geometry, const in vec3 specularColor, const in float shininess ) {\n\tvec3 halfDir = normalize( incidentLight.direction + geometry.viewDir );\n\tfloat dotNH = saturate( dot( geometry.normal, halfDir ) );\n\tfloat dotLH = saturate( dot( incidentLight.direction, halfDir ) );\n\tvec3 F = F_Schlick( specularColor, dotLH );\n\tfloat G = G_BlinnPhong_Implicit( );\n\tfloat D = D_BlinnPhong( shininess, dotNH );\n\treturn F * ( G * D );\n}\nfloat GGXRoughnessToBlinnExponent( const in float ggxRoughness ) {\n\treturn ( 2.0 / pow2( ggxRoughness + 0.0001 ) - 2.0 );\n}\nfloat BlinnExponentToGGXRoughness( const in float blinnExponent ) {\n\treturn sqrt( 2.0 / ( blinnExponent + 2.0 ) );\n}\n#if defined( USE_SHEEN )\nfloat D_Charlie(float roughness, float NoH) {\n\tfloat invAlpha  = 1.0 / roughness;\n\tfloat cos2h = NoH * NoH;\n\tfloat sin2h = max(1.0 - cos2h, 0.0078125);\treturn (2.0 + invAlpha) * pow(sin2h, invAlpha * 0.5) / (2.0 * PI);\n}\nfloat V_Neubelt(float NoV, float NoL) {\n\treturn saturate(1.0 / (4.0 * (NoL + NoV - NoL * NoV)));\n}\nvec3 BRDF_Specular_Sheen( const in float roughness, const in vec3 L, const in GeometricContext geometry, vec3 specularColor ) {\n\tvec3 N = geometry.normal;\n\tvec3 V = geometry.viewDir;\n\tvec3 H = normalize( V + L );\n\tfloat dotNH = saturate( dot( N, H ) );\n\treturn specularColor * D_Charlie( roughness, dotNH ) * V_Neubelt( dot(N, V), dot(N, L) );\n}\n#endif", 
   bumpmap_pars_fragment:"#ifdef USE_BUMPMAP\n\tuniform sampler2D bumpMap;\n\tuniform float bumpScale;\n\tvec2 dHdxy_fwd() {\n\t\tvec2 dSTdx = dFdx( vUv );\n\t\tvec2 dSTdy = dFdy( vUv );\n\t\tfloat Hll = bumpScale * texture2D( bumpMap, vUv ).x;\n\t\tfloat dBx = bumpScale * texture2D( bumpMap, vUv + dSTdx ).x - Hll;\n\t\tfloat dBy = bumpScale * texture2D( bumpMap, vUv + dSTdy ).x - Hll;\n\t\treturn vec2( dBx, dBy );\n\t}\n\tvec3 perturbNormalArb( vec3 surf_pos, vec3 surf_norm, vec2 dHdxy ) {\n\t\tvec3 vSigmaX = vec3( dFdx( surf_pos.x ), dFdx( surf_pos.y ), dFdx( surf_pos.z ) );\n\t\tvec3 vSigmaY = vec3( dFdy( surf_pos.x ), dFdy( surf_pos.y ), dFdy( surf_pos.z ) );\n\t\tvec3 vN = surf_norm;\n\t\tvec3 R1 = cross( vSigmaY, vN );\n\t\tvec3 R2 = cross( vN, vSigmaX );\n\t\tfloat fDet = dot( vSigmaX, R1 );\n\t\tfDet *= ( float( gl_FrontFacing ) * 2.0 - 1.0 );\n\t\tvec3 vGrad = sign( fDet ) * ( dHdxy.x * R1 + dHdxy.y * R2 );\n\t\treturn normalize( abs( fDet ) * surf_norm - vGrad );\n\t}\n#endif", 
-  clipping_planes_fragment:"#if NUM_CLIPPING_PLANES > 0\n\tvec4 plane;\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < UNION_CLIPPING_PLANES; i ++ ) {\n\t\tplane = clippingPlanes[ i ];\n\t\tif ( dot( vViewPosition, plane.xyz ) > plane.w ) discard;\n\t}\n\t#if UNION_CLIPPING_PLANES < NUM_CLIPPING_PLANES\n\t\tbool clipped = true;\n\t\t#pragma unroll_loop\n\t\tfor ( int i = UNION_CLIPPING_PLANES; i < NUM_CLIPPING_PLANES; i ++ ) {\n\t\t\tplane = clippingPlanes[ i ];\n\t\t\tclipped = ( dot( vViewPosition, plane.xyz ) > plane.w ) && clipped;\n\t\t}\n\t\tif ( clipped ) discard;\n\t#endif\n#endif", 
-  clipping_planes_pars_fragment:"#if NUM_CLIPPING_PLANES > 0\n\t#if ! defined( STANDARD ) && ! defined( PHONG ) && ! defined( MATCAP ) && ! defined( TOON )\n\t\tvarying vec3 vViewPosition;\n\t#endif\n\tuniform vec4 clippingPlanes[ NUM_CLIPPING_PLANES ];\n#endif", clipping_planes_pars_vertex:"#if NUM_CLIPPING_PLANES > 0 && ! defined( STANDARD ) && ! defined( PHONG ) && ! defined( MATCAP ) && ! defined( TOON )\n\tvarying vec3 vViewPosition;\n#endif", clipping_planes_vertex:"#if NUM_CLIPPING_PLANES > 0 && ! defined( STANDARD ) && ! defined( PHONG ) && ! defined( MATCAP ) && ! defined( TOON )\n\tvViewPosition = - mvPosition.xyz;\n#endif", 
-  color_fragment:"#ifdef USE_COLOR\n\tdiffuseColor.rgb *= vColor;\n#endif", color_pars_fragment:"#ifdef USE_COLOR\n\tvarying vec3 vColor;\n#endif", color_pars_vertex:"#ifdef USE_COLOR\n\tvarying vec3 vColor;\n#endif", color_vertex:"#ifdef USE_COLOR\n\tvColor.xyz = color.xyz;\n#endif", common:"#define PI 3.14159265359\n#define PI2 6.28318530718\n#define PI_HALF 1.5707963267949\n#define RECIPROCAL_PI 0.31830988618\n#define RECIPROCAL_PI2 0.15915494\n#define LOG2 1.442695\n#define EPSILON 1e-6\n#ifndef saturate\n#define saturate(a) clamp( a, 0.0, 1.0 )\n#endif\n#define whiteComplement(a) ( 1.0 - saturate( a ) )\nfloat pow2( const in float x ) { return x*x; }\nfloat pow3( const in float x ) { return x*x*x; }\nfloat pow4( const in float x ) { float x2 = x*x; return x2*x2; }\nfloat average( const in vec3 color ) { return dot( color, vec3( 0.3333 ) ); }\nhighp float rand( const in vec2 uv ) {\n\tconst highp float a = 12.9898, b = 78.233, c = 43758.5453;\n\thighp float dt = dot( uv.xy, vec2( a,b ) ), sn = mod( dt, PI );\n\treturn fract(sin(sn) * c);\n}\n#ifdef HIGH_PRECISION\n\tfloat precisionSafeLength( vec3 v ) { return length( v ); }\n#else\n\tfloat max3( vec3 v ) { return max( max( v.x, v.y ), v.z ); }\n\tfloat precisionSafeLength( vec3 v ) {\n\t\tfloat maxComponent = max3( abs( v ) );\n\t\treturn length( v / maxComponent ) * maxComponent;\n\t}\n#endif\nstruct IncidentLight {\n\tvec3 color;\n\tvec3 direction;\n\tbool visible;\n};\nstruct ReflectedLight {\n\tvec3 directDiffuse;\n\tvec3 directSpecular;\n\tvec3 indirectDiffuse;\n\tvec3 indirectSpecular;\n};\nstruct GeometricContext {\n\tvec3 position;\n\tvec3 normal;\n\tvec3 viewDir;\n#ifdef CLEARCOAT\n\tvec3 clearcoatNormal;\n#endif\n};\nvec3 transformDirection( in vec3 dir, in mat4 matrix ) {\n\treturn normalize( ( matrix * vec4( dir, 0.0 ) ).xyz );\n}\nvec3 inverseTransformDirection( in vec3 dir, in mat4 matrix ) {\n\treturn normalize( ( vec4( dir, 0.0 ) * matrix ).xyz );\n}\nvec3 projectOnPlane(in vec3 point, in vec3 pointOnPlane, in vec3 planeNormal ) {\n\tfloat distance = dot( planeNormal, point - pointOnPlane );\n\treturn - distance * planeNormal + point;\n}\nfloat sideOfPlane( in vec3 point, in vec3 pointOnPlane, in vec3 planeNormal ) {\n\treturn sign( dot( point - pointOnPlane, planeNormal ) );\n}\nvec3 linePlaneIntersect( in vec3 pointOnLine, in vec3 lineDirection, in vec3 pointOnPlane, in vec3 planeNormal ) {\n\treturn lineDirection * ( dot( planeNormal, pointOnPlane - pointOnLine ) / dot( planeNormal, lineDirection ) ) + pointOnLine;\n}\nmat3 transposeMat3( const in mat3 m ) {\n\tmat3 tmp;\n\ttmp[ 0 ] = vec3( m[ 0 ].x, m[ 1 ].x, m[ 2 ].x );\n\ttmp[ 1 ] = vec3( m[ 0 ].y, m[ 1 ].y, m[ 2 ].y );\n\ttmp[ 2 ] = vec3( m[ 0 ].z, m[ 1 ].z, m[ 2 ].z );\n\treturn tmp;\n}\nfloat linearToRelativeLuminance( const in vec3 color ) {\n\tvec3 weights = vec3( 0.2126, 0.7152, 0.0722 );\n\treturn dot( weights, color.rgb );\n}\nbool isPerspectiveMatrix( mat4 m ) {\n  return m[ 2 ][ 3 ] == - 1.0;\n}", 
+  clipping_planes_fragment:"#if NUM_CLIPPING_PLANES > 0\n\tvec4 plane;\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < UNION_CLIPPING_PLANES; i ++ ) {\n\t\tplane = clippingPlanes[ i ];\n\t\tif ( dot( vClipPosition, plane.xyz ) > plane.w ) discard;\n\t}\n\t#pragma unroll_loop_end\n\t#if UNION_CLIPPING_PLANES < NUM_CLIPPING_PLANES\n\t\tbool clipped = true;\n\t\t#pragma unroll_loop_start\n\t\tfor ( int i = UNION_CLIPPING_PLANES; i < NUM_CLIPPING_PLANES; i ++ ) {\n\t\t\tplane = clippingPlanes[ i ];\n\t\t\tclipped = ( dot( vClipPosition, plane.xyz ) > plane.w ) && clipped;\n\t\t}\n\t\t#pragma unroll_loop_end\n\t\tif ( clipped ) discard;\n\t#endif\n#endif", 
+  clipping_planes_pars_fragment:"#if NUM_CLIPPING_PLANES > 0\n\tvarying vec3 vClipPosition;\n\tuniform vec4 clippingPlanes[ NUM_CLIPPING_PLANES ];\n#endif", clipping_planes_pars_vertex:"#if NUM_CLIPPING_PLANES > 0\n\tvarying vec3 vClipPosition;\n#endif", clipping_planes_vertex:"#if NUM_CLIPPING_PLANES > 0\n\tvClipPosition = - mvPosition.xyz;\n#endif", color_fragment:"#ifdef USE_COLOR\n\tdiffuseColor.rgb *= vColor;\n#endif", color_pars_fragment:"#ifdef USE_COLOR\n\tvarying vec3 vColor;\n#endif", color_pars_vertex:"#ifdef USE_COLOR\n\tvarying vec3 vColor;\n#endif", 
+  color_vertex:"#ifdef USE_COLOR\n\tvColor.xyz = color.xyz;\n#endif", common:"#define PI 3.14159265359\n#define PI2 6.28318530718\n#define PI_HALF 1.5707963267949\n#define RECIPROCAL_PI 0.31830988618\n#define RECIPROCAL_PI2 0.15915494\n#define LOG2 1.442695\n#define EPSILON 1e-6\n#ifndef saturate\n#define saturate(a) clamp( a, 0.0, 1.0 )\n#endif\n#define whiteComplement(a) ( 1.0 - saturate( a ) )\nfloat pow2( const in float x ) { return x*x; }\nfloat pow3( const in float x ) { return x*x*x; }\nfloat pow4( const in float x ) { float x2 = x*x; return x2*x2; }\nfloat average( const in vec3 color ) { return dot( color, vec3( 0.3333 ) ); }\nhighp float rand( const in vec2 uv ) {\n\tconst highp float a = 12.9898, b = 78.233, c = 43758.5453;\n\thighp float dt = dot( uv.xy, vec2( a,b ) ), sn = mod( dt, PI );\n\treturn fract(sin(sn) * c);\n}\n#ifdef HIGH_PRECISION\n\tfloat precisionSafeLength( vec3 v ) { return length( v ); }\n#else\n\tfloat max3( vec3 v ) { return max( max( v.x, v.y ), v.z ); }\n\tfloat precisionSafeLength( vec3 v ) {\n\t\tfloat maxComponent = max3( abs( v ) );\n\t\treturn length( v / maxComponent ) * maxComponent;\n\t}\n#endif\nstruct IncidentLight {\n\tvec3 color;\n\tvec3 direction;\n\tbool visible;\n};\nstruct ReflectedLight {\n\tvec3 directDiffuse;\n\tvec3 directSpecular;\n\tvec3 indirectDiffuse;\n\tvec3 indirectSpecular;\n};\nstruct GeometricContext {\n\tvec3 position;\n\tvec3 normal;\n\tvec3 viewDir;\n#ifdef CLEARCOAT\n\tvec3 clearcoatNormal;\n#endif\n};\nvec3 transformDirection( in vec3 dir, in mat4 matrix ) {\n\treturn normalize( ( matrix * vec4( dir, 0.0 ) ).xyz );\n}\nvec3 inverseTransformDirection( in vec3 dir, in mat4 matrix ) {\n\treturn normalize( ( vec4( dir, 0.0 ) * matrix ).xyz );\n}\nvec3 projectOnPlane(in vec3 point, in vec3 pointOnPlane, in vec3 planeNormal ) {\n\tfloat distance = dot( planeNormal, point - pointOnPlane );\n\treturn - distance * planeNormal + point;\n}\nfloat sideOfPlane( in vec3 point, in vec3 pointOnPlane, in vec3 planeNormal ) {\n\treturn sign( dot( point - pointOnPlane, planeNormal ) );\n}\nvec3 linePlaneIntersect( in vec3 pointOnLine, in vec3 lineDirection, in vec3 pointOnPlane, in vec3 planeNormal ) {\n\treturn lineDirection * ( dot( planeNormal, pointOnPlane - pointOnLine ) / dot( planeNormal, lineDirection ) ) + pointOnLine;\n}\nmat3 transposeMat3( const in mat3 m ) {\n\tmat3 tmp;\n\ttmp[ 0 ] = vec3( m[ 0 ].x, m[ 1 ].x, m[ 2 ].x );\n\ttmp[ 1 ] = vec3( m[ 0 ].y, m[ 1 ].y, m[ 2 ].y );\n\ttmp[ 2 ] = vec3( m[ 0 ].z, m[ 1 ].z, m[ 2 ].z );\n\treturn tmp;\n}\nfloat linearToRelativeLuminance( const in vec3 color ) {\n\tvec3 weights = vec3( 0.2126, 0.7152, 0.0722 );\n\treturn dot( weights, color.rgb );\n}\nbool isPerspectiveMatrix( mat4 m ) {\n  return m[ 2 ][ 3 ] == - 1.0;\n}", 
   cube_uv_reflection_fragment:"#ifdef ENVMAP_TYPE_CUBE_UV\n#define cubeUV_maxMipLevel 8.0\n#define cubeUV_minMipLevel 4.0\n#define cubeUV_maxTileSize 256.0\n#define cubeUV_minTileSize 16.0\nfloat getFace(vec3 direction) {\n    vec3 absDirection = abs(direction);\n    float face = -1.0;\n    if (absDirection.x > absDirection.z) {\n      if (absDirection.x > absDirection.y)\n        face = direction.x > 0.0 ? 0.0 : 3.0;\n      else\n        face = direction.y > 0.0 ? 1.0 : 4.0;\n    } else {\n      if (absDirection.z > absDirection.y)\n        face = direction.z > 0.0 ? 2.0 : 5.0;\n      else\n        face = direction.y > 0.0 ? 1.0 : 4.0;\n    }\n    return face;\n}\nvec2 getUV(vec3 direction, float face) {\n    vec2 uv;\n    if (face == 0.0) {\n      uv = vec2(-direction.z, direction.y) / abs(direction.x);\n    } else if (face == 1.0) {\n      uv = vec2(direction.x, -direction.z) / abs(direction.y);\n    } else if (face == 2.0) {\n      uv = direction.xy / abs(direction.z);\n    } else if (face == 3.0) {\n      uv = vec2(direction.z, direction.y) / abs(direction.x);\n    } else if (face == 4.0) {\n      uv = direction.xz / abs(direction.y);\n    } else {\n      uv = vec2(-direction.x, direction.y) / abs(direction.z);\n    }\n    return 0.5 * (uv + 1.0);\n}\nvec3 bilinearCubeUV(sampler2D envMap, vec3 direction, float mipInt) {\n  float face = getFace(direction);\n  float filterInt = max(cubeUV_minMipLevel - mipInt, 0.0);\n  mipInt = max(mipInt, cubeUV_minMipLevel);\n  float faceSize = exp2(mipInt);\n  float texelSize = 1.0 / (3.0 * cubeUV_maxTileSize);\n  vec2 uv = getUV(direction, face) * (faceSize - 1.0);\n  vec2 f = fract(uv);\n  uv += 0.5 - f;\n  if (face > 2.0) {\n    uv.y += faceSize;\n    face -= 3.0;\n  }\n  uv.x += face * faceSize;\n  if(mipInt < cubeUV_maxMipLevel){\n    uv.y += 2.0 * cubeUV_maxTileSize;\n  }\n  uv.y += filterInt * 2.0 * cubeUV_minTileSize;\n  uv.x += 3.0 * max(0.0, cubeUV_maxTileSize - 2.0 * faceSize);\n  uv *= texelSize;\n  vec3 tl = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n  uv.x += texelSize;\n  vec3 tr = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n  uv.y += texelSize;\n  vec3 br = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n  uv.x -= texelSize;\n  vec3 bl = envMapTexelToLinear(texture2D(envMap, uv)).rgb;\n  vec3 tm = mix(tl, tr, f.x);\n  vec3 bm = mix(bl, br, f.x);\n  return mix(tm, bm, f.y);\n}\n#define r0 1.0\n#define v0 0.339\n#define m0 -2.0\n#define r1 0.8\n#define v1 0.276\n#define m1 -1.0\n#define r4 0.4\n#define v4 0.046\n#define m4 2.0\n#define r5 0.305\n#define v5 0.016\n#define m5 3.0\n#define r6 0.21\n#define v6 0.0038\n#define m6 4.0\nfloat roughnessToMip(float roughness) {\n  float mip = 0.0;\n  if (roughness >= r1) {\n    mip = (r0 - roughness) * (m1 - m0) / (r0 - r1) + m0;\n  } else if (roughness >= r4) {\n    mip = (r1 - roughness) * (m4 - m1) / (r1 - r4) + m1;\n  } else if (roughness >= r5) {\n    mip = (r4 - roughness) * (m5 - m4) / (r4 - r5) + m4;\n  } else if (roughness >= r6) {\n    mip = (r5 - roughness) * (m6 - m5) / (r5 - r6) + m5;\n  } else {\n    mip = -2.0 * log2(1.16 * roughness);  }\n  return mip;\n}\nvec4 textureCubeUV(sampler2D envMap, vec3 sampleDir, float roughness) {\n  float mip = clamp(roughnessToMip(roughness), m0, cubeUV_maxMipLevel);\n  float mipF = fract(mip);\n  float mipInt = floor(mip);\n  vec3 color0 = bilinearCubeUV(envMap, sampleDir, mipInt);\n  if (mipF == 0.0) {\n    return vec4(color0, 1.0);\n  } else {\n    vec3 color1 = bilinearCubeUV(envMap, sampleDir, mipInt + 1.0);\n    return vec4(mix(color0, color1, mipF), 1.0);\n  }\n}\n#endif", 
   defaultnormal_vertex:"vec3 transformedNormal = objectNormal;\n#ifdef USE_INSTANCING\n\tmat3 m = mat3( instanceMatrix );\n\ttransformedNormal /= vec3( dot( m[ 0 ], m[ 0 ] ), dot( m[ 1 ], m[ 1 ] ), dot( m[ 2 ], m[ 2 ] ) );\n\ttransformedNormal = m * transformedNormal;\n#endif\ntransformedNormal = normalMatrix * transformedNormal;\n#ifdef FLIP_SIDED\n\ttransformedNormal = - transformedNormal;\n#endif\n#ifdef USE_TANGENT\n\tvec3 transformedTangent = ( modelViewMatrix * vec4( objectTangent, 0.0 ) ).xyz;\n\t#ifdef FLIP_SIDED\n\t\ttransformedTangent = - transformedTangent;\n\t#endif\n#endif", 
   displacementmap_pars_vertex:"#ifdef USE_DISPLACEMENTMAP\n\tuniform sampler2D displacementMap;\n\tuniform float displacementScale;\n\tuniform float displacementBias;\n#endif", displacementmap_vertex:"#ifdef USE_DISPLACEMENTMAP\n\ttransformed += normalize( objectNormal ) * ( texture2D( displacementMap, vUv ).x * displacementScale + displacementBias );\n#endif", emissivemap_fragment:"#ifdef USE_EMISSIVEMAP\n\tvec4 emissiveColor = texture2D( emissiveMap, vUv );\n\temissiveColor.rgb = emissiveMapTexelToLinear( emissiveColor ).rgb;\n\ttotalEmissiveRadiance *= emissiveColor.rgb;\n#endif", 
@@ -11676,13 +11683,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   envmap_vertex:"#ifdef USE_ENVMAP\n\t#ifdef ENV_WORLDPOS\n\t\tvWorldPosition = worldPosition.xyz;\n\t#else\n\t\tvec3 cameraToVertex;\n\t\tif ( isOrthographic ) { \n\t\t\tcameraToVertex = normalize( vec3( - viewMatrix[ 0 ][ 2 ], - viewMatrix[ 1 ][ 2 ], - viewMatrix[ 2 ][ 2 ] ) );\n\t\t} else {\n\t\t\tcameraToVertex = normalize( worldPosition.xyz - cameraPosition );\n\t\t}\n\t\tvec3 worldNormal = inverseTransformDirection( transformedNormal, viewMatrix );\n\t\t#ifdef ENVMAP_MODE_REFLECTION\n\t\t\tvReflect = reflect( cameraToVertex, worldNormal );\n\t\t#else\n\t\t\tvReflect = refract( cameraToVertex, worldNormal, refractionRatio );\n\t\t#endif\n\t#endif\n#endif", 
   fog_vertex:"#ifdef USE_FOG\n\tfogDepth = -mvPosition.z;\n#endif", fog_pars_vertex:"#ifdef USE_FOG\n\tvarying float fogDepth;\n#endif", fog_fragment:"#ifdef USE_FOG\n\t#ifdef FOG_EXP2\n\t\tfloat fogFactor = 1.0 - exp( - fogDensity * fogDensity * fogDepth * fogDepth );\n\t#else\n\t\tfloat fogFactor = smoothstep( fogNear, fogFar, fogDepth );\n\t#endif\n\tgl_FragColor.rgb = mix( gl_FragColor.rgb, fogColor, fogFactor );\n#endif", fog_pars_fragment:"#ifdef USE_FOG\n\tuniform vec3 fogColor;\n\tvarying float fogDepth;\n\t#ifdef FOG_EXP2\n\t\tuniform float fogDensity;\n\t#else\n\t\tuniform float fogNear;\n\t\tuniform float fogFar;\n\t#endif\n#endif", 
   gradientmap_pars_fragment:"#ifdef USE_GRADIENTMAP\n\tuniform sampler2D gradientMap;\n#endif\nvec3 getGradientIrradiance( vec3 normal, vec3 lightDirection ) {\n\tfloat dotNL = dot( normal, lightDirection );\n\tvec2 coord = vec2( dotNL * 0.5 + 0.5, 0.0 );\n\t#ifdef USE_GRADIENTMAP\n\t\treturn texture2D( gradientMap, coord ).rgb;\n\t#else\n\t\treturn ( coord.x < 0.7 ) ? vec3( 0.7 ) : vec3( 1.0 );\n\t#endif\n}", lightmap_fragment:"#ifdef USE_LIGHTMAP\n\tvec4 lightMapTexel= texture2D( lightMap, vUv2 );\n\treflectedLight.indirectDiffuse += PI * lightMapTexelToLinear( lightMapTexel ).rgb * lightMapIntensity;\n#endif", 
-  lightmap_pars_fragment:"#ifdef USE_LIGHTMAP\n\tuniform sampler2D lightMap;\n\tuniform float lightMapIntensity;\n#endif", lights_lambert_vertex:"vec3 diffuse = vec3( 1.0 );\nGeometricContext geometry;\ngeometry.position = mvPosition.xyz;\ngeometry.normal = normalize( transformedNormal );\ngeometry.viewDir = ( isOrthographic ) ? vec3( 0, 0, 1 ) : normalize( -mvPosition.xyz );\nGeometricContext backGeometry;\nbackGeometry.position = geometry.position;\nbackGeometry.normal = -geometry.normal;\nbackGeometry.viewDir = geometry.viewDir;\nvLightFront = vec3( 0.0 );\nvIndirectFront = vec3( 0.0 );\n#ifdef DOUBLE_SIDED\n\tvLightBack = vec3( 0.0 );\n\tvIndirectBack = vec3( 0.0 );\n#endif\nIncidentLight directLight;\nfloat dotNL;\nvec3 directLightColor_Diffuse;\n#if NUM_POINT_LIGHTS > 0\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_POINT_LIGHTS; i ++ ) {\n\t\tgetPointDirectLightIrradiance( pointLights[ i ], geometry, directLight );\n\t\tdotNL = dot( geometry.normal, directLight.direction );\n\t\tdirectLightColor_Diffuse = PI * directLight.color;\n\t\tvLightFront += saturate( dotNL ) * directLightColor_Diffuse;\n\t\t#ifdef DOUBLE_SIDED\n\t\t\tvLightBack += saturate( -dotNL ) * directLightColor_Diffuse;\n\t\t#endif\n\t}\n#endif\n#if NUM_SPOT_LIGHTS > 0\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_SPOT_LIGHTS; i ++ ) {\n\t\tgetSpotDirectLightIrradiance( spotLights[ i ], geometry, directLight );\n\t\tdotNL = dot( geometry.normal, directLight.direction );\n\t\tdirectLightColor_Diffuse = PI * directLight.color;\n\t\tvLightFront += saturate( dotNL ) * directLightColor_Diffuse;\n\t\t#ifdef DOUBLE_SIDED\n\t\t\tvLightBack += saturate( -dotNL ) * directLightColor_Diffuse;\n\t\t#endif\n\t}\n#endif\n#if NUM_DIR_LIGHTS > 0\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {\n\t\tgetDirectionalDirectLightIrradiance( directionalLights[ i ], geometry, directLight );\n\t\tdotNL = dot( geometry.normal, directLight.direction );\n\t\tdirectLightColor_Diffuse = PI * directLight.color;\n\t\tvLightFront += saturate( dotNL ) * directLightColor_Diffuse;\n\t\t#ifdef DOUBLE_SIDED\n\t\t\tvLightBack += saturate( -dotNL ) * directLightColor_Diffuse;\n\t\t#endif\n\t}\n#endif\n#if NUM_HEMI_LIGHTS > 0\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_HEMI_LIGHTS; i ++ ) {\n\t\tvIndirectFront += getHemisphereLightIrradiance( hemisphereLights[ i ], geometry );\n\t\t#ifdef DOUBLE_SIDED\n\t\t\tvIndirectBack += getHemisphereLightIrradiance( hemisphereLights[ i ], backGeometry );\n\t\t#endif\n\t}\n#endif", 
+  lightmap_pars_fragment:"#ifdef USE_LIGHTMAP\n\tuniform sampler2D lightMap;\n\tuniform float lightMapIntensity;\n#endif", lights_lambert_vertex:"vec3 diffuse = vec3( 1.0 );\nGeometricContext geometry;\ngeometry.position = mvPosition.xyz;\ngeometry.normal = normalize( transformedNormal );\ngeometry.viewDir = ( isOrthographic ) ? vec3( 0, 0, 1 ) : normalize( -mvPosition.xyz );\nGeometricContext backGeometry;\nbackGeometry.position = geometry.position;\nbackGeometry.normal = -geometry.normal;\nbackGeometry.viewDir = geometry.viewDir;\nvLightFront = vec3( 0.0 );\nvIndirectFront = vec3( 0.0 );\n#ifdef DOUBLE_SIDED\n\tvLightBack = vec3( 0.0 );\n\tvIndirectBack = vec3( 0.0 );\n#endif\nIncidentLight directLight;\nfloat dotNL;\nvec3 directLightColor_Diffuse;\n#if NUM_POINT_LIGHTS > 0\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_POINT_LIGHTS; i ++ ) {\n\t\tgetPointDirectLightIrradiance( pointLights[ i ], geometry, directLight );\n\t\tdotNL = dot( geometry.normal, directLight.direction );\n\t\tdirectLightColor_Diffuse = PI * directLight.color;\n\t\tvLightFront += saturate( dotNL ) * directLightColor_Diffuse;\n\t\t#ifdef DOUBLE_SIDED\n\t\t\tvLightBack += saturate( -dotNL ) * directLightColor_Diffuse;\n\t\t#endif\n\t}\n\t#pragma unroll_loop_end\n#endif\n#if NUM_SPOT_LIGHTS > 0\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_SPOT_LIGHTS; i ++ ) {\n\t\tgetSpotDirectLightIrradiance( spotLights[ i ], geometry, directLight );\n\t\tdotNL = dot( geometry.normal, directLight.direction );\n\t\tdirectLightColor_Diffuse = PI * directLight.color;\n\t\tvLightFront += saturate( dotNL ) * directLightColor_Diffuse;\n\t\t#ifdef DOUBLE_SIDED\n\t\t\tvLightBack += saturate( -dotNL ) * directLightColor_Diffuse;\n\t\t#endif\n\t}\n\t#pragma unroll_loop_end\n#endif\n#if NUM_DIR_LIGHTS > 0\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {\n\t\tgetDirectionalDirectLightIrradiance( directionalLights[ i ], geometry, directLight );\n\t\tdotNL = dot( geometry.normal, directLight.direction );\n\t\tdirectLightColor_Diffuse = PI * directLight.color;\n\t\tvLightFront += saturate( dotNL ) * directLightColor_Diffuse;\n\t\t#ifdef DOUBLE_SIDED\n\t\t\tvLightBack += saturate( -dotNL ) * directLightColor_Diffuse;\n\t\t#endif\n\t}\n\t#pragma unroll_loop_end\n#endif\n#if NUM_HEMI_LIGHTS > 0\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_HEMI_LIGHTS; i ++ ) {\n\t\tvIndirectFront += getHemisphereLightIrradiance( hemisphereLights[ i ], geometry );\n\t\t#ifdef DOUBLE_SIDED\n\t\t\tvIndirectBack += getHemisphereLightIrradiance( hemisphereLights[ i ], backGeometry );\n\t\t#endif\n\t}\n\t#pragma unroll_loop_end\n#endif", 
   lights_pars_begin:"uniform bool receiveShadow;\nuniform vec3 ambientLightColor;\nuniform vec3 lightProbe[ 9 ];\nvec3 shGetIrradianceAt( in vec3 normal, in vec3 shCoefficients[ 9 ] ) {\n\tfloat x = normal.x, y = normal.y, z = normal.z;\n\tvec3 result = shCoefficients[ 0 ] * 0.886227;\n\tresult += shCoefficients[ 1 ] * 2.0 * 0.511664 * y;\n\tresult += shCoefficients[ 2 ] * 2.0 * 0.511664 * z;\n\tresult += shCoefficients[ 3 ] * 2.0 * 0.511664 * x;\n\tresult += shCoefficients[ 4 ] * 2.0 * 0.429043 * x * y;\n\tresult += shCoefficients[ 5 ] * 2.0 * 0.429043 * y * z;\n\tresult += shCoefficients[ 6 ] * ( 0.743125 * z * z - 0.247708 );\n\tresult += shCoefficients[ 7 ] * 2.0 * 0.429043 * x * z;\n\tresult += shCoefficients[ 8 ] * 0.429043 * ( x * x - y * y );\n\treturn result;\n}\nvec3 getLightProbeIrradiance( const in vec3 lightProbe[ 9 ], const in GeometricContext geometry ) {\n\tvec3 worldNormal = inverseTransformDirection( geometry.normal, viewMatrix );\n\tvec3 irradiance = shGetIrradianceAt( worldNormal, lightProbe );\n\treturn irradiance;\n}\nvec3 getAmbientLightIrradiance( const in vec3 ambientLightColor ) {\n\tvec3 irradiance = ambientLightColor;\n\t#ifndef PHYSICALLY_CORRECT_LIGHTS\n\t\tirradiance *= PI;\n\t#endif\n\treturn irradiance;\n}\n#if NUM_DIR_LIGHTS > 0\n\tstruct DirectionalLight {\n\t\tvec3 direction;\n\t\tvec3 color;\n\t};\n\tuniform DirectionalLight directionalLights[ NUM_DIR_LIGHTS ];\n\t#if defined( USE_SHADOWMAP ) && NUM_DIR_LIGHT_SHADOWS > 0\n\t\tstruct DirectionalLightShadow {\n\t\t\tfloat shadowBias;\n\t\t\tfloat shadowRadius;\n\t\t\tvec2 shadowMapSize;\n\t\t};\n\t\tuniform DirectionalLightShadow directionalLightShadows[ NUM_DIR_LIGHT_SHADOWS ];\n\t#endif\n\tvoid getDirectionalDirectLightIrradiance( const in DirectionalLight directionalLight, const in GeometricContext geometry, out IncidentLight directLight ) {\n\t\tdirectLight.color = directionalLight.color;\n\t\tdirectLight.direction = directionalLight.direction;\n\t\tdirectLight.visible = true;\n\t}\n#endif\n#if NUM_POINT_LIGHTS > 0\n\tstruct PointLight {\n\t\tvec3 position;\n\t\tvec3 color;\n\t\tfloat distance;\n\t\tfloat decay;\n\t};\n\tuniform PointLight pointLights[ NUM_POINT_LIGHTS ];\n\t#if defined( USE_SHADOWMAP ) && NUM_POINT_LIGHT_SHADOWS > 0\n\t\tstruct PointLightShadow {\n\t\t\tfloat shadowBias;\n\t\t\tfloat shadowRadius;\n\t\t\tvec2 shadowMapSize;\n\t\t\tfloat shadowCameraNear;\n\t\t\tfloat shadowCameraFar;\n\t\t};\n\t\tuniform PointLightShadow pointLightShadows[ NUM_POINT_LIGHT_SHADOWS ];\n\t#endif\n\tvoid getPointDirectLightIrradiance( const in PointLight pointLight, const in GeometricContext geometry, out IncidentLight directLight ) {\n\t\tvec3 lVector = pointLight.position - geometry.position;\n\t\tdirectLight.direction = normalize( lVector );\n\t\tfloat lightDistance = length( lVector );\n\t\tdirectLight.color = pointLight.color;\n\t\tdirectLight.color *= punctualLightIntensityToIrradianceFactor( lightDistance, pointLight.distance, pointLight.decay );\n\t\tdirectLight.visible = ( directLight.color != vec3( 0.0 ) );\n\t}\n#endif\n#if NUM_SPOT_LIGHTS > 0\n\tstruct SpotLight {\n\t\tvec3 position;\n\t\tvec3 direction;\n\t\tvec3 color;\n\t\tfloat distance;\n\t\tfloat decay;\n\t\tfloat coneCos;\n\t\tfloat penumbraCos;\n\t};\n\tuniform SpotLight spotLights[ NUM_SPOT_LIGHTS ];\n\t#if defined( USE_SHADOWMAP ) && NUM_SPOT_LIGHT_SHADOWS > 0\n\t\tstruct SpotLightShadow {\n\t\t\tfloat shadowBias;\n\t\t\tfloat shadowRadius;\n\t\t\tvec2 shadowMapSize;\n\t\t};\n\t\tuniform SpotLightShadow spotLightShadows[ NUM_SPOT_LIGHT_SHADOWS ];\n\t#endif\n\tvoid getSpotDirectLightIrradiance( const in SpotLight spotLight, const in GeometricContext geometry, out IncidentLight directLight  ) {\n\t\tvec3 lVector = spotLight.position - geometry.position;\n\t\tdirectLight.direction = normalize( lVector );\n\t\tfloat lightDistance = length( lVector );\n\t\tfloat angleCos = dot( directLight.direction, spotLight.direction );\n\t\tif ( angleCos > spotLight.coneCos ) {\n\t\t\tfloat spotEffect = smoothstep( spotLight.coneCos, spotLight.penumbraCos, angleCos );\n\t\t\tdirectLight.color = spotLight.color;\n\t\t\tdirectLight.color *= spotEffect * punctualLightIntensityToIrradianceFactor( lightDistance, spotLight.distance, spotLight.decay );\n\t\t\tdirectLight.visible = true;\n\t\t} else {\n\t\t\tdirectLight.color = vec3( 0.0 );\n\t\t\tdirectLight.visible = false;\n\t\t}\n\t}\n#endif\n#if NUM_RECT_AREA_LIGHTS > 0\n\tstruct RectAreaLight {\n\t\tvec3 color;\n\t\tvec3 position;\n\t\tvec3 halfWidth;\n\t\tvec3 halfHeight;\n\t};\n\tuniform sampler2D ltc_1;\tuniform sampler2D ltc_2;\n\tuniform RectAreaLight rectAreaLights[ NUM_RECT_AREA_LIGHTS ];\n#endif\n#if NUM_HEMI_LIGHTS > 0\n\tstruct HemisphereLight {\n\t\tvec3 direction;\n\t\tvec3 skyColor;\n\t\tvec3 groundColor;\n\t};\n\tuniform HemisphereLight hemisphereLights[ NUM_HEMI_LIGHTS ];\n\tvec3 getHemisphereLightIrradiance( const in HemisphereLight hemiLight, const in GeometricContext geometry ) {\n\t\tfloat dotNL = dot( geometry.normal, hemiLight.direction );\n\t\tfloat hemiDiffuseWeight = 0.5 * dotNL + 0.5;\n\t\tvec3 irradiance = mix( hemiLight.groundColor, hemiLight.skyColor, hemiDiffuseWeight );\n\t\t#ifndef PHYSICALLY_CORRECT_LIGHTS\n\t\t\tirradiance *= PI;\n\t\t#endif\n\t\treturn irradiance;\n\t}\n#endif", 
   lights_toon_fragment:"ToonMaterial material;\nmaterial.diffuseColor = diffuseColor.rgb;\nmaterial.specularColor = specular;\nmaterial.specularShininess = shininess;\nmaterial.specularStrength = specularStrength;", lights_toon_pars_fragment:"varying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\nstruct ToonMaterial {\n\tvec3\tdiffuseColor;\n\tvec3\tspecularColor;\n\tfloat\tspecularShininess;\n\tfloat\tspecularStrength;\n};\nvoid RE_Direct_Toon( const in IncidentLight directLight, const in GeometricContext geometry, const in ToonMaterial material, inout ReflectedLight reflectedLight ) {\n\tvec3 irradiance = getGradientIrradiance( geometry.normal, directLight.direction ) * directLight.color;\n\t#ifndef PHYSICALLY_CORRECT_LIGHTS\n\t\tirradiance *= PI;\n\t#endif\n\treflectedLight.directDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );\n\treflectedLight.directSpecular += irradiance * BRDF_Specular_BlinnPhong( directLight, geometry, material.specularColor, material.specularShininess ) * material.specularStrength;\n}\nvoid RE_IndirectDiffuse_Toon( const in vec3 irradiance, const in GeometricContext geometry, const in ToonMaterial material, inout ReflectedLight reflectedLight ) {\n\treflectedLight.indirectDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );\n}\n#define RE_Direct\t\t\t\tRE_Direct_Toon\n#define RE_IndirectDiffuse\t\tRE_IndirectDiffuse_Toon\n#define Material_LightProbeLOD( material )\t(0)", 
   lights_phong_fragment:"BlinnPhongMaterial material;\nmaterial.diffuseColor = diffuseColor.rgb;\nmaterial.specularColor = specular;\nmaterial.specularShininess = shininess;\nmaterial.specularStrength = specularStrength;", lights_phong_pars_fragment:"varying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\nstruct BlinnPhongMaterial {\n\tvec3\tdiffuseColor;\n\tvec3\tspecularColor;\n\tfloat\tspecularShininess;\n\tfloat\tspecularStrength;\n};\nvoid RE_Direct_BlinnPhong( const in IncidentLight directLight, const in GeometricContext geometry, const in BlinnPhongMaterial material, inout ReflectedLight reflectedLight ) {\n\tfloat dotNL = saturate( dot( geometry.normal, directLight.direction ) );\n\tvec3 irradiance = dotNL * directLight.color;\n\t#ifndef PHYSICALLY_CORRECT_LIGHTS\n\t\tirradiance *= PI;\n\t#endif\n\treflectedLight.directDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );\n\treflectedLight.directSpecular += irradiance * BRDF_Specular_BlinnPhong( directLight, geometry, material.specularColor, material.specularShininess ) * material.specularStrength;\n}\nvoid RE_IndirectDiffuse_BlinnPhong( const in vec3 irradiance, const in GeometricContext geometry, const in BlinnPhongMaterial material, inout ReflectedLight reflectedLight ) {\n\treflectedLight.indirectDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );\n}\n#define RE_Direct\t\t\t\tRE_Direct_BlinnPhong\n#define RE_IndirectDiffuse\t\tRE_IndirectDiffuse_BlinnPhong\n#define Material_LightProbeLOD( material )\t(0)", 
-  lights_physical_fragment:"PhysicalMaterial material;\nmaterial.diffuseColor = diffuseColor.rgb * ( 1.0 - metalnessFactor );\nvec3 dxy = max( abs( dFdx( geometryNormal ) ), abs( dFdy( geometryNormal ) ) );\nfloat geometryRoughness = max( max( dxy.x, dxy.y ), dxy.z );\nmaterial.specularRoughness = max( roughnessFactor, 0.0525 );material.specularRoughness += geometryRoughness;\nmaterial.specularRoughness = min( material.specularRoughness, 1.0 );\n#ifdef REFLECTIVITY\n\tmaterial.specularColor = mix( vec3( MAXIMUM_SPECULAR_COEFFICIENT * pow2( reflectivity ) ), diffuseColor.rgb, metalnessFactor );\n#else\n\tmaterial.specularColor = mix( vec3( DEFAULT_SPECULAR_COEFFICIENT ), diffuseColor.rgb, metalnessFactor );\n#endif\n#ifdef CLEARCOAT\n\tmaterial.clearcoat = saturate( clearcoat );\tmaterial.clearcoatRoughness = max( clearcoatRoughness, 0.0525 );\n\tmaterial.clearcoatRoughness += geometryRoughness;\n\tmaterial.clearcoatRoughness = min( material.clearcoatRoughness, 1.0 );\n#endif\n#ifdef USE_SHEEN\n\tmaterial.sheenColor = sheen;\n#endif", 
+  lights_physical_fragment:"PhysicalMaterial material;\nmaterial.diffuseColor = diffuseColor.rgb * ( 1.0 - metalnessFactor );\nvec3 dxy = max( abs( dFdx( geometryNormal ) ), abs( dFdy( geometryNormal ) ) );\nfloat geometryRoughness = max( max( dxy.x, dxy.y ), dxy.z );\nmaterial.specularRoughness = max( roughnessFactor, 0.0525 );material.specularRoughness += geometryRoughness;\nmaterial.specularRoughness = min( material.specularRoughness, 1.0 );\n#ifdef REFLECTIVITY\n\tmaterial.specularColor = mix( vec3( MAXIMUM_SPECULAR_COEFFICIENT * pow2( reflectivity ) ), diffuseColor.rgb, metalnessFactor );\n#else\n\tmaterial.specularColor = mix( vec3( DEFAULT_SPECULAR_COEFFICIENT ), diffuseColor.rgb, metalnessFactor );\n#endif\n#ifdef CLEARCOAT\n\tmaterial.clearcoat = clearcoat;\n\tmaterial.clearcoatRoughness = clearcoatRoughness;\n\t#ifdef USE_CLEARCOATMAP\n\t\tmaterial.clearcoat *= texture2D( clearcoatMap, vUv ).x;\n\t#endif\n\t#ifdef USE_CLEARCOAT_ROUGHNESSMAP\n\t\tmaterial.clearcoatRoughness *= texture2D( clearcoatRoughnessMap, vUv ).y;\n\t#endif\n\tmaterial.clearcoat = saturate( material.clearcoat );\tmaterial.clearcoatRoughness = max( material.clearcoatRoughness, 0.0525 );\n\tmaterial.clearcoatRoughness += geometryRoughness;\n\tmaterial.clearcoatRoughness = min( material.clearcoatRoughness, 1.0 );\n#endif\n#ifdef USE_SHEEN\n\tmaterial.sheenColor = sheen;\n#endif", 
   lights_physical_pars_fragment:"struct PhysicalMaterial {\n\tvec3\tdiffuseColor;\n\tfloat\tspecularRoughness;\n\tvec3\tspecularColor;\n#ifdef CLEARCOAT\n\tfloat clearcoat;\n\tfloat clearcoatRoughness;\n#endif\n#ifdef USE_SHEEN\n\tvec3 sheenColor;\n#endif\n};\n#define MAXIMUM_SPECULAR_COEFFICIENT 0.16\n#define DEFAULT_SPECULAR_COEFFICIENT 0.04\nfloat clearcoatDHRApprox( const in float roughness, const in float dotNL ) {\n\treturn DEFAULT_SPECULAR_COEFFICIENT + ( 1.0 - DEFAULT_SPECULAR_COEFFICIENT ) * ( pow( 1.0 - dotNL, 5.0 ) * pow( 1.0 - roughness, 2.0 ) );\n}\n#if NUM_RECT_AREA_LIGHTS > 0\n\tvoid RE_Direct_RectArea_Physical( const in RectAreaLight rectAreaLight, const in GeometricContext geometry, const in PhysicalMaterial material, inout ReflectedLight reflectedLight ) {\n\t\tvec3 normal = geometry.normal;\n\t\tvec3 viewDir = geometry.viewDir;\n\t\tvec3 position = geometry.position;\n\t\tvec3 lightPos = rectAreaLight.position;\n\t\tvec3 halfWidth = rectAreaLight.halfWidth;\n\t\tvec3 halfHeight = rectAreaLight.halfHeight;\n\t\tvec3 lightColor = rectAreaLight.color;\n\t\tfloat roughness = material.specularRoughness;\n\t\tvec3 rectCoords[ 4 ];\n\t\trectCoords[ 0 ] = lightPos + halfWidth - halfHeight;\t\trectCoords[ 1 ] = lightPos - halfWidth - halfHeight;\n\t\trectCoords[ 2 ] = lightPos - halfWidth + halfHeight;\n\t\trectCoords[ 3 ] = lightPos + halfWidth + halfHeight;\n\t\tvec2 uv = LTC_Uv( normal, viewDir, roughness );\n\t\tvec4 t1 = texture2D( ltc_1, uv );\n\t\tvec4 t2 = texture2D( ltc_2, uv );\n\t\tmat3 mInv = mat3(\n\t\t\tvec3( t1.x, 0, t1.y ),\n\t\t\tvec3(    0, 1,    0 ),\n\t\t\tvec3( t1.z, 0, t1.w )\n\t\t);\n\t\tvec3 fresnel = ( material.specularColor * t2.x + ( vec3( 1.0 ) - material.specularColor ) * t2.y );\n\t\treflectedLight.directSpecular += lightColor * fresnel * LTC_Evaluate( normal, viewDir, position, mInv, rectCoords );\n\t\treflectedLight.directDiffuse += lightColor * material.diffuseColor * LTC_Evaluate( normal, viewDir, position, mat3( 1.0 ), rectCoords );\n\t}\n#endif\nvoid RE_Direct_Physical( const in IncidentLight directLight, const in GeometricContext geometry, const in PhysicalMaterial material, inout ReflectedLight reflectedLight ) {\n\tfloat dotNL = saturate( dot( geometry.normal, directLight.direction ) );\n\tvec3 irradiance = dotNL * directLight.color;\n\t#ifndef PHYSICALLY_CORRECT_LIGHTS\n\t\tirradiance *= PI;\n\t#endif\n\t#ifdef CLEARCOAT\n\t\tfloat ccDotNL = saturate( dot( geometry.clearcoatNormal, directLight.direction ) );\n\t\tvec3 ccIrradiance = ccDotNL * directLight.color;\n\t\t#ifndef PHYSICALLY_CORRECT_LIGHTS\n\t\t\tccIrradiance *= PI;\n\t\t#endif\n\t\tfloat clearcoatDHR = material.clearcoat * clearcoatDHRApprox( material.clearcoatRoughness, ccDotNL );\n\t\treflectedLight.directSpecular += ccIrradiance * material.clearcoat * BRDF_Specular_GGX( directLight, geometry.viewDir, geometry.clearcoatNormal, vec3( DEFAULT_SPECULAR_COEFFICIENT ), material.clearcoatRoughness );\n\t#else\n\t\tfloat clearcoatDHR = 0.0;\n\t#endif\n\t#ifdef USE_SHEEN\n\t\treflectedLight.directSpecular += ( 1.0 - clearcoatDHR ) * irradiance * BRDF_Specular_Sheen(\n\t\t\tmaterial.specularRoughness,\n\t\t\tdirectLight.direction,\n\t\t\tgeometry,\n\t\t\tmaterial.sheenColor\n\t\t);\n\t#else\n\t\treflectedLight.directSpecular += ( 1.0 - clearcoatDHR ) * irradiance * BRDF_Specular_GGX( directLight, geometry.viewDir, geometry.normal, material.specularColor, material.specularRoughness);\n\t#endif\n\treflectedLight.directDiffuse += ( 1.0 - clearcoatDHR ) * irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );\n}\nvoid RE_IndirectDiffuse_Physical( const in vec3 irradiance, const in GeometricContext geometry, const in PhysicalMaterial material, inout ReflectedLight reflectedLight ) {\n\treflectedLight.indirectDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );\n}\nvoid RE_IndirectSpecular_Physical( const in vec3 radiance, const in vec3 irradiance, const in vec3 clearcoatRadiance, const in GeometricContext geometry, const in PhysicalMaterial material, inout ReflectedLight reflectedLight) {\n\t#ifdef CLEARCOAT\n\t\tfloat ccDotNV = saturate( dot( geometry.clearcoatNormal, geometry.viewDir ) );\n\t\treflectedLight.indirectSpecular += clearcoatRadiance * material.clearcoat * BRDF_Specular_GGX_Environment( geometry.viewDir, geometry.clearcoatNormal, vec3( DEFAULT_SPECULAR_COEFFICIENT ), material.clearcoatRoughness );\n\t\tfloat ccDotNL = ccDotNV;\n\t\tfloat clearcoatDHR = material.clearcoat * clearcoatDHRApprox( material.clearcoatRoughness, ccDotNL );\n\t#else\n\t\tfloat clearcoatDHR = 0.0;\n\t#endif\n\tfloat clearcoatInv = 1.0 - clearcoatDHR;\n\tvec3 singleScattering = vec3( 0.0 );\n\tvec3 multiScattering = vec3( 0.0 );\n\tvec3 cosineWeightedIrradiance = irradiance * RECIPROCAL_PI;\n\tBRDF_Specular_Multiscattering_Environment( geometry, material.specularColor, material.specularRoughness, singleScattering, multiScattering );\n\tvec3 diffuse = material.diffuseColor * ( 1.0 - ( singleScattering + multiScattering ) );\n\treflectedLight.indirectSpecular += clearcoatInv * radiance * singleScattering;\n\treflectedLight.indirectSpecular += multiScattering * cosineWeightedIrradiance;\n\treflectedLight.indirectDiffuse += diffuse * cosineWeightedIrradiance;\n}\n#define RE_Direct\t\t\t\tRE_Direct_Physical\n#define RE_Direct_RectArea\t\tRE_Direct_RectArea_Physical\n#define RE_IndirectDiffuse\t\tRE_IndirectDiffuse_Physical\n#define RE_IndirectSpecular\t\tRE_IndirectSpecular_Physical\nfloat computeSpecularOcclusion( const in float dotNV, const in float ambientOcclusion, const in float roughness ) {\n\treturn saturate( pow( dotNV + ambientOcclusion, exp2( - 16.0 * roughness - 1.0 ) ) - 1.0 + ambientOcclusion );\n}", 
-  lights_fragment_begin:"\nGeometricContext geometry;\ngeometry.position = - vViewPosition;\ngeometry.normal = normal;\ngeometry.viewDir = ( isOrthographic ) ? vec3( 0, 0, 1 ) : normalize( vViewPosition );\n#ifdef CLEARCOAT\n\tgeometry.clearcoatNormal = clearcoatNormal;\n#endif\nIncidentLight directLight;\n#if ( NUM_POINT_LIGHTS > 0 ) && defined( RE_Direct )\n\tPointLight pointLight;\n\t#if defined( USE_SHADOWMAP ) && NUM_POINT_LIGHT_SHADOWS > 0\n\tPointLightShadow pointLightShadow;\n\t#endif\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_POINT_LIGHTS; i ++ ) {\n\t\tpointLight = pointLights[ i ];\n\t\tgetPointDirectLightIrradiance( pointLight, geometry, directLight );\n\t\t#if defined( USE_SHADOWMAP ) && ( UNROLLED_LOOP_INDEX < NUM_POINT_LIGHT_SHADOWS )\n\t\tpointLightShadow = pointLightShadows[ i ];\n\t\tdirectLight.color *= all( bvec2( directLight.visible, receiveShadow ) ) ? getPointShadow( pointShadowMap[ i ], pointLightShadow.shadowMapSize, pointLightShadow.shadowBias, pointLightShadow.shadowRadius, vPointShadowCoord[ i ], pointLightShadow.shadowCameraNear, pointLightShadow.shadowCameraFar ) : 1.0;\n\t\t#endif\n\t\tRE_Direct( directLight, geometry, material, reflectedLight );\n\t}\n#endif\n#if ( NUM_SPOT_LIGHTS > 0 ) && defined( RE_Direct )\n\tSpotLight spotLight;\n\t#if defined( USE_SHADOWMAP ) && NUM_SPOT_LIGHT_SHADOWS > 0\n\tSpotLightShadow spotLightShadow;\n\t#endif\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_SPOT_LIGHTS; i ++ ) {\n\t\tspotLight = spotLights[ i ];\n\t\tgetSpotDirectLightIrradiance( spotLight, geometry, directLight );\n\t\t#if defined( USE_SHADOWMAP ) && ( UNROLLED_LOOP_INDEX < NUM_SPOT_LIGHT_SHADOWS )\n\t\tspotLightShadow = spotLightShadows[ i ];\n\t\tdirectLight.color *= all( bvec2( directLight.visible, receiveShadow ) ) ? getShadow( spotShadowMap[ i ], spotLightShadow.shadowMapSize, spotLightShadow.shadowBias, spotLightShadow.shadowRadius, vSpotShadowCoord[ i ] ) : 1.0;\n\t\t#endif\n\t\tRE_Direct( directLight, geometry, material, reflectedLight );\n\t}\n#endif\n#if ( NUM_DIR_LIGHTS > 0 ) && defined( RE_Direct )\n\tDirectionalLight directionalLight;\n\t#if defined( USE_SHADOWMAP ) && NUM_DIR_LIGHT_SHADOWS > 0\n\tDirectionalLightShadow directionalLightShadow;\n\t#endif\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {\n\t\tdirectionalLight = directionalLights[ i ];\n\t\tgetDirectionalDirectLightIrradiance( directionalLight, geometry, directLight );\n\t\t#if defined( USE_SHADOWMAP ) && ( UNROLLED_LOOP_INDEX < NUM_DIR_LIGHT_SHADOWS )\n\t\tdirectionalLightShadow = directionalLightShadows[ i ];\n\t\tdirectLight.color *= all( bvec2( directLight.visible, receiveShadow ) ) ? getShadow( directionalShadowMap[ i ], directionalLightShadow.shadowMapSize, directionalLightShadow.shadowBias, directionalLightShadow.shadowRadius, vDirectionalShadowCoord[ i ] ) : 1.0;\n\t\t#endif\n\t\tRE_Direct( directLight, geometry, material, reflectedLight );\n\t}\n#endif\n#if ( NUM_RECT_AREA_LIGHTS > 0 ) && defined( RE_Direct_RectArea )\n\tRectAreaLight rectAreaLight;\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_RECT_AREA_LIGHTS; i ++ ) {\n\t\trectAreaLight = rectAreaLights[ i ];\n\t\tRE_Direct_RectArea( rectAreaLight, geometry, material, reflectedLight );\n\t}\n#endif\n#if defined( RE_IndirectDiffuse )\n\tvec3 iblIrradiance = vec3( 0.0 );\n\tvec3 irradiance = getAmbientLightIrradiance( ambientLightColor );\n\tirradiance += getLightProbeIrradiance( lightProbe, geometry );\n\t#if ( NUM_HEMI_LIGHTS > 0 )\n\t\t#pragma unroll_loop\n\t\tfor ( int i = 0; i < NUM_HEMI_LIGHTS; i ++ ) {\n\t\t\tirradiance += getHemisphereLightIrradiance( hemisphereLights[ i ], geometry );\n\t\t}\n\t#endif\n#endif\n#if defined( RE_IndirectSpecular )\n\tvec3 radiance = vec3( 0.0 );\n\tvec3 clearcoatRadiance = vec3( 0.0 );\n#endif", 
+  lights_fragment_begin:"\nGeometricContext geometry;\ngeometry.position = - vViewPosition;\ngeometry.normal = normal;\ngeometry.viewDir = ( isOrthographic ) ? vec3( 0, 0, 1 ) : normalize( vViewPosition );\n#ifdef CLEARCOAT\n\tgeometry.clearcoatNormal = clearcoatNormal;\n#endif\nIncidentLight directLight;\n#if ( NUM_POINT_LIGHTS > 0 ) && defined( RE_Direct )\n\tPointLight pointLight;\n\t#if defined( USE_SHADOWMAP ) && NUM_POINT_LIGHT_SHADOWS > 0\n\tPointLightShadow pointLightShadow;\n\t#endif\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_POINT_LIGHTS; i ++ ) {\n\t\tpointLight = pointLights[ i ];\n\t\tgetPointDirectLightIrradiance( pointLight, geometry, directLight );\n\t\t#if defined( USE_SHADOWMAP ) && ( UNROLLED_LOOP_INDEX < NUM_POINT_LIGHT_SHADOWS )\n\t\tpointLightShadow = pointLightShadows[ i ];\n\t\tdirectLight.color *= all( bvec2( directLight.visible, receiveShadow ) ) ? getPointShadow( pointShadowMap[ i ], pointLightShadow.shadowMapSize, pointLightShadow.shadowBias, pointLightShadow.shadowRadius, vPointShadowCoord[ i ], pointLightShadow.shadowCameraNear, pointLightShadow.shadowCameraFar ) : 1.0;\n\t\t#endif\n\t\tRE_Direct( directLight, geometry, material, reflectedLight );\n\t}\n\t#pragma unroll_loop_end\n#endif\n#if ( NUM_SPOT_LIGHTS > 0 ) && defined( RE_Direct )\n\tSpotLight spotLight;\n\t#if defined( USE_SHADOWMAP ) && NUM_SPOT_LIGHT_SHADOWS > 0\n\tSpotLightShadow spotLightShadow;\n\t#endif\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_SPOT_LIGHTS; i ++ ) {\n\t\tspotLight = spotLights[ i ];\n\t\tgetSpotDirectLightIrradiance( spotLight, geometry, directLight );\n\t\t#if defined( USE_SHADOWMAP ) && ( UNROLLED_LOOP_INDEX < NUM_SPOT_LIGHT_SHADOWS )\n\t\tspotLightShadow = spotLightShadows[ i ];\n\t\tdirectLight.color *= all( bvec2( directLight.visible, receiveShadow ) ) ? getShadow( spotShadowMap[ i ], spotLightShadow.shadowMapSize, spotLightShadow.shadowBias, spotLightShadow.shadowRadius, vSpotShadowCoord[ i ] ) : 1.0;\n\t\t#endif\n\t\tRE_Direct( directLight, geometry, material, reflectedLight );\n\t}\n\t#pragma unroll_loop_end\n#endif\n#if ( NUM_DIR_LIGHTS > 0 ) && defined( RE_Direct )\n\tDirectionalLight directionalLight;\n\t#if defined( USE_SHADOWMAP ) && NUM_DIR_LIGHT_SHADOWS > 0\n\tDirectionalLightShadow directionalLightShadow;\n\t#endif\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {\n\t\tdirectionalLight = directionalLights[ i ];\n\t\tgetDirectionalDirectLightIrradiance( directionalLight, geometry, directLight );\n\t\t#if defined( USE_SHADOWMAP ) && ( UNROLLED_LOOP_INDEX < NUM_DIR_LIGHT_SHADOWS )\n\t\tdirectionalLightShadow = directionalLightShadows[ i ];\n\t\tdirectLight.color *= all( bvec2( directLight.visible, receiveShadow ) ) ? getShadow( directionalShadowMap[ i ], directionalLightShadow.shadowMapSize, directionalLightShadow.shadowBias, directionalLightShadow.shadowRadius, vDirectionalShadowCoord[ i ] ) : 1.0;\n\t\t#endif\n\t\tRE_Direct( directLight, geometry, material, reflectedLight );\n\t}\n\t#pragma unroll_loop_end\n#endif\n#if ( NUM_RECT_AREA_LIGHTS > 0 ) && defined( RE_Direct_RectArea )\n\tRectAreaLight rectAreaLight;\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_RECT_AREA_LIGHTS; i ++ ) {\n\t\trectAreaLight = rectAreaLights[ i ];\n\t\tRE_Direct_RectArea( rectAreaLight, geometry, material, reflectedLight );\n\t}\n\t#pragma unroll_loop_end\n#endif\n#if defined( RE_IndirectDiffuse )\n\tvec3 iblIrradiance = vec3( 0.0 );\n\tvec3 irradiance = getAmbientLightIrradiance( ambientLightColor );\n\tirradiance += getLightProbeIrradiance( lightProbe, geometry );\n\t#if ( NUM_HEMI_LIGHTS > 0 )\n\t\t#pragma unroll_loop_start\n\t\tfor ( int i = 0; i < NUM_HEMI_LIGHTS; i ++ ) {\n\t\t\tirradiance += getHemisphereLightIrradiance( hemisphereLights[ i ], geometry );\n\t\t}\n\t\t#pragma unroll_loop_end\n\t#endif\n#endif\n#if defined( RE_IndirectSpecular )\n\tvec3 radiance = vec3( 0.0 );\n\tvec3 clearcoatRadiance = vec3( 0.0 );\n#endif", 
   lights_fragment_maps:"#if defined( RE_IndirectDiffuse )\n\t#ifdef USE_LIGHTMAP\n\t\tvec4 lightMapTexel= texture2D( lightMap, vUv2 );\n\t\tvec3 lightMapIrradiance = lightMapTexelToLinear( lightMapTexel ).rgb * lightMapIntensity;\n\t\t#ifndef PHYSICALLY_CORRECT_LIGHTS\n\t\t\tlightMapIrradiance *= PI;\n\t\t#endif\n\t\tirradiance += lightMapIrradiance;\n\t#endif\n\t#if defined( USE_ENVMAP ) && defined( STANDARD ) && defined( ENVMAP_TYPE_CUBE_UV )\n\t\tiblIrradiance += getLightProbeIndirectIrradiance( geometry, maxMipLevel );\n\t#endif\n#endif\n#if defined( USE_ENVMAP ) && defined( RE_IndirectSpecular )\n\tradiance += getLightProbeIndirectRadiance( geometry.viewDir, geometry.normal, material.specularRoughness, maxMipLevel );\n\t#ifdef CLEARCOAT\n\t\tclearcoatRadiance += getLightProbeIndirectRadiance( geometry.viewDir, geometry.clearcoatNormal, material.clearcoatRoughness, maxMipLevel );\n\t#endif\n#endif", 
   lights_fragment_end:"#if defined( RE_IndirectDiffuse )\n\tRE_IndirectDiffuse( irradiance, geometry, material, reflectedLight );\n#endif\n#if defined( RE_IndirectSpecular )\n\tRE_IndirectSpecular( radiance, iblIrradiance, clearcoatRadiance, geometry, material, reflectedLight );\n#endif", logdepthbuf_fragment:"#if defined( USE_LOGDEPTHBUF ) && defined( USE_LOGDEPTHBUF_EXT )\n\tgl_FragDepthEXT = vIsPerspective == 0.0 ? gl_FragCoord.z : log2( vFragDepth ) * logDepthBufFC * 0.5;\n#endif", logdepthbuf_pars_fragment:"#if defined( USE_LOGDEPTHBUF ) && defined( USE_LOGDEPTHBUF_EXT )\n\tuniform float logDepthBufFC;\n\tvarying float vFragDepth;\n\tvarying float vIsPerspective;\n#endif", 
   logdepthbuf_pars_vertex:"#ifdef USE_LOGDEPTHBUF\n\t#ifdef USE_LOGDEPTHBUF_EXT\n\t\tvarying float vFragDepth;\n\t\tvarying float vIsPerspective;\n\t#else\n\t\tuniform float logDepthBufFC;\n\t#endif\n#endif", logdepthbuf_vertex:"#ifdef USE_LOGDEPTHBUF\n\t#ifdef USE_LOGDEPTHBUF_EXT\n\t\tvFragDepth = 1.0 + gl_Position.w;\n\t\tvIsPerspective = float( isPerspectiveMatrix( projectionMatrix ) );\n\t#else\n\t\tif ( isPerspectiveMatrix( projectionMatrix ) ) {\n\t\t\tgl_Position.z = log2( max( EPSILON, gl_Position.w + 1.0 ) ) * logDepthBufFC - 1.0;\n\t\t\tgl_Position.z *= gl_Position.w;\n\t\t}\n\t#endif\n#endif", 
@@ -11693,13 +11700,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   normal_fragment_begin:"#ifdef FLAT_SHADED\n\tvec3 fdx = vec3( dFdx( vViewPosition.x ), dFdx( vViewPosition.y ), dFdx( vViewPosition.z ) );\n\tvec3 fdy = vec3( dFdy( vViewPosition.x ), dFdy( vViewPosition.y ), dFdy( vViewPosition.z ) );\n\tvec3 normal = normalize( cross( fdx, fdy ) );\n#else\n\tvec3 normal = normalize( vNormal );\n\t#ifdef DOUBLE_SIDED\n\t\tnormal = normal * ( float( gl_FrontFacing ) * 2.0 - 1.0 );\n\t#endif\n\t#ifdef USE_TANGENT\n\t\tvec3 tangent = normalize( vTangent );\n\t\tvec3 bitangent = normalize( vBitangent );\n\t\t#ifdef DOUBLE_SIDED\n\t\t\ttangent = tangent * ( float( gl_FrontFacing ) * 2.0 - 1.0 );\n\t\t\tbitangent = bitangent * ( float( gl_FrontFacing ) * 2.0 - 1.0 );\n\t\t#endif\n\t\t#if defined( TANGENTSPACE_NORMALMAP ) || defined( USE_CLEARCOAT_NORMALMAP )\n\t\t\tmat3 vTBN = mat3( tangent, bitangent, normal );\n\t\t#endif\n\t#endif\n#endif\nvec3 geometryNormal = normal;", 
   normal_fragment_maps:"#ifdef OBJECTSPACE_NORMALMAP\n\tnormal = texture2D( normalMap, vUv ).xyz * 2.0 - 1.0;\n\t#ifdef FLIP_SIDED\n\t\tnormal = - normal;\n\t#endif\n\t#ifdef DOUBLE_SIDED\n\t\tnormal = normal * ( float( gl_FrontFacing ) * 2.0 - 1.0 );\n\t#endif\n\tnormal = normalize( normalMatrix * normal );\n#elif defined( TANGENTSPACE_NORMALMAP )\n\tvec3 mapN = texture2D( normalMap, vUv ).xyz * 2.0 - 1.0;\n\tmapN.xy *= normalScale;\n\t#ifdef USE_TANGENT\n\t\tnormal = normalize( vTBN * mapN );\n\t#else\n\t\tnormal = perturbNormal2Arb( -vViewPosition, normal, mapN );\n\t#endif\n#elif defined( USE_BUMPMAP )\n\tnormal = perturbNormalArb( -vViewPosition, normal, dHdxy_fwd() );\n#endif", 
   normalmap_pars_fragment:"#ifdef USE_NORMALMAP\n\tuniform sampler2D normalMap;\n\tuniform vec2 normalScale;\n#endif\n#ifdef OBJECTSPACE_NORMALMAP\n\tuniform mat3 normalMatrix;\n#endif\n#if ! defined ( USE_TANGENT ) && ( defined ( TANGENTSPACE_NORMALMAP ) || defined ( USE_CLEARCOAT_NORMALMAP ) )\n\tvec3 perturbNormal2Arb( vec3 eye_pos, vec3 surf_norm, vec3 mapN ) {\n\t\tvec3 q0 = vec3( dFdx( eye_pos.x ), dFdx( eye_pos.y ), dFdx( eye_pos.z ) );\n\t\tvec3 q1 = vec3( dFdy( eye_pos.x ), dFdy( eye_pos.y ), dFdy( eye_pos.z ) );\n\t\tvec2 st0 = dFdx( vUv.st );\n\t\tvec2 st1 = dFdy( vUv.st );\n\t\tfloat scale = sign( st1.t * st0.s - st0.t * st1.s );\n\t\tvec3 S = normalize( ( q0 * st1.t - q1 * st0.t ) * scale );\n\t\tvec3 T = normalize( ( - q0 * st1.s + q1 * st0.s ) * scale );\n\t\tvec3 N = normalize( surf_norm );\n\t\tmat3 tsn = mat3( S, T, N );\n\t\tmapN.xy *= ( float( gl_FrontFacing ) * 2.0 - 1.0 );\n\t\treturn normalize( tsn * mapN );\n\t}\n#endif", 
-  clearcoat_normal_fragment_begin:"#ifdef CLEARCOAT\n\tvec3 clearcoatNormal = geometryNormal;\n#endif", clearcoat_normal_fragment_maps:"#ifdef USE_CLEARCOAT_NORMALMAP\n\tvec3 clearcoatMapN = texture2D( clearcoatNormalMap, vUv ).xyz * 2.0 - 1.0;\n\tclearcoatMapN.xy *= clearcoatNormalScale;\n\t#ifdef USE_TANGENT\n\t\tclearcoatNormal = normalize( vTBN * clearcoatMapN );\n\t#else\n\t\tclearcoatNormal = perturbNormal2Arb( - vViewPosition, clearcoatNormal, clearcoatMapN );\n\t#endif\n#endif", clearcoat_normalmap_pars_fragment:"#ifdef USE_CLEARCOAT_NORMALMAP\n\tuniform sampler2D clearcoatNormalMap;\n\tuniform vec2 clearcoatNormalScale;\n#endif", 
+  clearcoat_normal_fragment_begin:"#ifdef CLEARCOAT\n\tvec3 clearcoatNormal = geometryNormal;\n#endif", clearcoat_normal_fragment_maps:"#ifdef USE_CLEARCOAT_NORMALMAP\n\tvec3 clearcoatMapN = texture2D( clearcoatNormalMap, vUv ).xyz * 2.0 - 1.0;\n\tclearcoatMapN.xy *= clearcoatNormalScale;\n\t#ifdef USE_TANGENT\n\t\tclearcoatNormal = normalize( vTBN * clearcoatMapN );\n\t#else\n\t\tclearcoatNormal = perturbNormal2Arb( - vViewPosition, clearcoatNormal, clearcoatMapN );\n\t#endif\n#endif", clearcoat_pars_fragment:"#ifdef USE_CLEARCOATMAP\n\tuniform sampler2D clearcoatMap;\n#endif\n#ifdef USE_CLEARCOAT_ROUGHNESSMAP\n\tuniform sampler2D clearcoatRoughnessMap;\n#endif\n#ifdef USE_CLEARCOAT_NORMALMAP\n\tuniform sampler2D clearcoatNormalMap;\n\tuniform vec2 clearcoatNormalScale;\n#endif", 
   packing:"vec3 packNormalToRGB( const in vec3 normal ) {\n\treturn normalize( normal ) * 0.5 + 0.5;\n}\nvec3 unpackRGBToNormal( const in vec3 rgb ) {\n\treturn 2.0 * rgb.xyz - 1.0;\n}\nconst float PackUpscale = 256. / 255.;const float UnpackDownscale = 255. / 256.;\nconst vec3 PackFactors = vec3( 256. * 256. * 256., 256. * 256.,  256. );\nconst vec4 UnpackFactors = UnpackDownscale / vec4( PackFactors, 1. );\nconst float ShiftRight8 = 1. / 256.;\nvec4 packDepthToRGBA( const in float v ) {\n\tvec4 r = vec4( fract( v * PackFactors ), v );\n\tr.yzw -= r.xyz * ShiftRight8;\treturn r * PackUpscale;\n}\nfloat unpackRGBAToDepth( const in vec4 v ) {\n\treturn dot( v, UnpackFactors );\n}\nvec4 pack2HalfToRGBA( vec2 v ) {\n\tvec4 r = vec4( v.x, fract( v.x * 255.0 ), v.y, fract( v.y * 255.0 ));\n\treturn vec4( r.x - r.y / 255.0, r.y, r.z - r.w / 255.0, r.w);\n}\nvec2 unpackRGBATo2Half( vec4 v ) {\n\treturn vec2( v.x + ( v.y / 255.0 ), v.z + ( v.w / 255.0 ) );\n}\nfloat viewZToOrthographicDepth( const in float viewZ, const in float near, const in float far ) {\n\treturn ( viewZ + near ) / ( near - far );\n}\nfloat orthographicDepthToViewZ( const in float linearClipZ, const in float near, const in float far ) {\n\treturn linearClipZ * ( near - far ) - near;\n}\nfloat viewZToPerspectiveDepth( const in float viewZ, const in float near, const in float far ) {\n\treturn (( near + viewZ ) * far ) / (( far - near ) * viewZ );\n}\nfloat perspectiveDepthToViewZ( const in float invClipZ, const in float near, const in float far ) {\n\treturn ( near * far ) / ( ( far - near ) * invClipZ - far );\n}", 
   premultiplied_alpha_fragment:"#ifdef PREMULTIPLIED_ALPHA\n\tgl_FragColor.rgb *= gl_FragColor.a;\n#endif", project_vertex:"vec4 mvPosition = vec4( transformed, 1.0 );\n#ifdef USE_INSTANCING\n\tmvPosition = instanceMatrix * mvPosition;\n#endif\nmvPosition = modelViewMatrix * mvPosition;\ngl_Position = projectionMatrix * mvPosition;", dithering_fragment:"#ifdef DITHERING\n\tgl_FragColor.rgb = dithering( gl_FragColor.rgb );\n#endif", dithering_pars_fragment:"#ifdef DITHERING\n\tvec3 dithering( vec3 color ) {\n\t\tfloat grid_position = rand( gl_FragCoord.xy );\n\t\tvec3 dither_shift_RGB = vec3( 0.25 / 255.0, -0.25 / 255.0, 0.25 / 255.0 );\n\t\tdither_shift_RGB = mix( 2.0 * dither_shift_RGB, -2.0 * dither_shift_RGB, grid_position );\n\t\treturn color + dither_shift_RGB;\n\t}\n#endif", 
-  roughnessmap_fragment:"float roughnessFactor = roughness;\n#ifdef USE_ROUGHNESSMAP\n\tvec4 texelRoughness = texture2D( roughnessMap, vUv );\n\troughnessFactor *= texelRoughness.g;\n#endif", roughnessmap_pars_fragment:"#ifdef USE_ROUGHNESSMAP\n\tuniform sampler2D roughnessMap;\n#endif", shadowmap_pars_fragment:"#ifdef USE_SHADOWMAP\n\t#if NUM_DIR_LIGHT_SHADOWS > 0\n\t\tuniform sampler2D directionalShadowMap[ NUM_DIR_LIGHT_SHADOWS ];\n\t\tvarying vec4 vDirectionalShadowCoord[ NUM_DIR_LIGHT_SHADOWS ];\n\t#endif\n\t#if NUM_SPOT_LIGHT_SHADOWS > 0\n\t\tuniform sampler2D spotShadowMap[ NUM_SPOT_LIGHT_SHADOWS ];\n\t\tvarying vec4 vSpotShadowCoord[ NUM_SPOT_LIGHT_SHADOWS ];\n\t#endif\n\t#if NUM_POINT_LIGHT_SHADOWS > 0\n\t\tuniform sampler2D pointShadowMap[ NUM_POINT_LIGHT_SHADOWS ];\n\t\tvarying vec4 vPointShadowCoord[ NUM_POINT_LIGHT_SHADOWS ];\n\t#endif\n\tfloat texture2DCompare( sampler2D depths, vec2 uv, float compare ) {\n\t\treturn step( compare, unpackRGBAToDepth( texture2D( depths, uv ) ) );\n\t}\n\tvec2 texture2DDistribution( sampler2D shadow, vec2 uv ) {\n\t\treturn unpackRGBATo2Half( texture2D( shadow, uv ) );\n\t}\n\tfloat VSMShadow (sampler2D shadow, vec2 uv, float compare ){\n\t\tfloat occlusion = 1.0;\n\t\tvec2 distribution = texture2DDistribution( shadow, uv );\n\t\tfloat hard_shadow = step( compare , distribution.x );\n\t\tif (hard_shadow != 1.0 ) {\n\t\t\tfloat distance = compare - distribution.x ;\n\t\t\tfloat variance = max( 0.00000, distribution.y * distribution.y );\n\t\t\tfloat softness_probability = variance / (variance + distance * distance );\t\t\tsoftness_probability = clamp( ( softness_probability - 0.3 ) / ( 0.95 - 0.3 ), 0.0, 1.0 );\t\t\tocclusion = clamp( max( hard_shadow, softness_probability ), 0.0, 1.0 );\n\t\t}\n\t\treturn occlusion;\n\t}\n\tfloat getShadow( sampler2D shadowMap, vec2 shadowMapSize, float shadowBias, float shadowRadius, vec4 shadowCoord ) {\n\t\tfloat shadow = 1.0;\n\t\tshadowCoord.xyz /= shadowCoord.w;\n\t\tshadowCoord.z += shadowBias;\n\t\tbvec4 inFrustumVec = bvec4 ( shadowCoord.x >= 0.0, shadowCoord.x <= 1.0, shadowCoord.y >= 0.0, shadowCoord.y <= 1.0 );\n\t\tbool inFrustum = all( inFrustumVec );\n\t\tbvec2 frustumTestVec = bvec2( inFrustum, shadowCoord.z <= 1.0 );\n\t\tbool frustumTest = all( frustumTestVec );\n\t\tif ( frustumTest ) {\n\t\t#if defined( SHADOWMAP_TYPE_PCF )\n\t\t\tvec2 texelSize = vec2( 1.0 ) / shadowMapSize;\n\t\t\tfloat dx0 = - texelSize.x * shadowRadius;\n\t\t\tfloat dy0 = - texelSize.y * shadowRadius;\n\t\t\tfloat dx1 = + texelSize.x * shadowRadius;\n\t\t\tfloat dy1 = + texelSize.y * shadowRadius;\n\t\t\tfloat dx2 = dx0 / 2.0;\n\t\t\tfloat dy2 = dy0 / 2.0;\n\t\t\tfloat dx3 = dx1 / 2.0;\n\t\t\tfloat dy3 = dy1 / 2.0;\n\t\t\tshadow = (\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx0, dy0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( 0.0, dy0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx1, dy0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx2, dy2 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( 0.0, dy2 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx3, dy2 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx0, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx2, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy, shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx3, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx1, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx2, dy3 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( 0.0, dy3 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx3, dy3 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx0, dy1 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( 0.0, dy1 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx1, dy1 ), shadowCoord.z )\n\t\t\t) * ( 1.0 / 17.0 );\n\t\t#elif defined( SHADOWMAP_TYPE_PCF_SOFT )\n\t\t\tvec2 texelSize = vec2( 1.0 ) / shadowMapSize;\n\t\t\tfloat dx = texelSize.x;\n\t\t\tfloat dy = texelSize.y;\n\t\t\tvec2 uv = shadowCoord.xy;\n\t\t\tvec2 f = fract( uv * shadowMapSize + 0.5 );\n\t\t\tuv -= f * texelSize;\n\t\t\tshadow = (\n\t\t\t\ttexture2DCompare( shadowMap, uv, shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, uv + vec2( dx, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, uv + vec2( 0.0, dy ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, uv + texelSize, shadowCoord.z ) +\n\t\t\t\tmix( texture2DCompare( shadowMap, uv + vec2( -dx, 0.0 ), shadowCoord.z ), \n\t\t\t\t\t texture2DCompare( shadowMap, uv + vec2( 2.0 * dx, 0.0 ), shadowCoord.z ),\n\t\t\t\t\t f.x ) +\n\t\t\t\tmix( texture2DCompare( shadowMap, uv + vec2( -dx, dy ), shadowCoord.z ), \n\t\t\t\t\t texture2DCompare( shadowMap, uv + vec2( 2.0 * dx, dy ), shadowCoord.z ),\n\t\t\t\t\t f.x ) +\n\t\t\t\tmix( texture2DCompare( shadowMap, uv + vec2( 0.0, -dy ), shadowCoord.z ), \n\t\t\t\t\t texture2DCompare( shadowMap, uv + vec2( 0.0, 2.0 * dy ), shadowCoord.z ),\n\t\t\t\t\t f.y ) +\n\t\t\t\tmix( texture2DCompare( shadowMap, uv + vec2( dx, -dy ), shadowCoord.z ), \n\t\t\t\t\t texture2DCompare( shadowMap, uv + vec2( dx, 2.0 * dy ), shadowCoord.z ),\n\t\t\t\t\t f.y ) +\n\t\t\t\tmix( mix( texture2DCompare( shadowMap, uv + vec2( -dx, -dy ), shadowCoord.z ), \n\t\t\t\t\t\t  texture2DCompare( shadowMap, uv + vec2( 2.0 * dx, -dy ), shadowCoord.z ),\n\t\t\t\t\t\t  f.x ),\n\t\t\t\t\t mix( texture2DCompare( shadowMap, uv + vec2( -dx, 2.0 * dy ), shadowCoord.z ), \n\t\t\t\t\t\t  texture2DCompare( shadowMap, uv + + vec2( 2.0 * dx, 2.0 * dy ), shadowCoord.z ),\n\t\t\t\t\t\t  f.x ),\n\t\t\t\t\t f.y )\n\t\t\t) * ( 1.0 / 9.0 );\n\t\t#elif defined( SHADOWMAP_TYPE_VSM )\n\t\t\tshadow = VSMShadow( shadowMap, shadowCoord.xy, shadowCoord.z );\n\t\t#else\n\t\t\tshadow = texture2DCompare( shadowMap, shadowCoord.xy, shadowCoord.z );\n\t\t#endif\n\t\t}\n\t\treturn shadow;\n\t}\n\tvec2 cubeToUV( vec3 v, float texelSizeY ) {\n\t\tvec3 absV = abs( v );\n\t\tfloat scaleToCube = 1.0 / max( absV.x, max( absV.y, absV.z ) );\n\t\tabsV *= scaleToCube;\n\t\tv *= scaleToCube * ( 1.0 - 2.0 * texelSizeY );\n\t\tvec2 planar = v.xy;\n\t\tfloat almostATexel = 1.5 * texelSizeY;\n\t\tfloat almostOne = 1.0 - almostATexel;\n\t\tif ( absV.z >= almostOne ) {\n\t\t\tif ( v.z > 0.0 )\n\t\t\t\tplanar.x = 4.0 - v.x;\n\t\t} else if ( absV.x >= almostOne ) {\n\t\t\tfloat signX = sign( v.x );\n\t\t\tplanar.x = v.z * signX + 2.0 * signX;\n\t\t} else if ( absV.y >= almostOne ) {\n\t\t\tfloat signY = sign( v.y );\n\t\t\tplanar.x = v.x + 2.0 * signY + 2.0;\n\t\t\tplanar.y = v.z * signY - 2.0;\n\t\t}\n\t\treturn vec2( 0.125, 0.25 ) * planar + vec2( 0.375, 0.75 );\n\t}\n\tfloat getPointShadow( sampler2D shadowMap, vec2 shadowMapSize, float shadowBias, float shadowRadius, vec4 shadowCoord, float shadowCameraNear, float shadowCameraFar ) {\n\t\tvec2 texelSize = vec2( 1.0 ) / ( shadowMapSize * vec2( 4.0, 2.0 ) );\n\t\tvec3 lightToPosition = shadowCoord.xyz;\n\t\tfloat dp = ( length( lightToPosition ) - shadowCameraNear ) / ( shadowCameraFar - shadowCameraNear );\t\tdp += shadowBias;\n\t\tvec3 bd3D = normalize( lightToPosition );\n\t\t#if defined( SHADOWMAP_TYPE_PCF ) || defined( SHADOWMAP_TYPE_PCF_SOFT ) || defined( SHADOWMAP_TYPE_VSM )\n\t\t\tvec2 offset = vec2( - 1, 1 ) * shadowRadius * texelSize.y;\n\t\t\treturn (\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.xyy, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.yyy, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.xyx, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.yyx, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.xxy, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.yxy, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.xxx, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.yxx, texelSize.y ), dp )\n\t\t\t) * ( 1.0 / 9.0 );\n\t\t#else\n\t\t\treturn texture2DCompare( shadowMap, cubeToUV( bd3D, texelSize.y ), dp );\n\t\t#endif\n\t}\n#endif", 
+  roughnessmap_fragment:"float roughnessFactor = roughness;\n#ifdef USE_ROUGHNESSMAP\n\tvec4 texelRoughness = texture2D( roughnessMap, vUv );\n\troughnessFactor *= texelRoughness.g;\n#endif", roughnessmap_pars_fragment:"#ifdef USE_ROUGHNESSMAP\n\tuniform sampler2D roughnessMap;\n#endif", shadowmap_pars_fragment:"#ifdef USE_SHADOWMAP\n\t#if NUM_DIR_LIGHT_SHADOWS > 0\n\t\tuniform sampler2D directionalShadowMap[ NUM_DIR_LIGHT_SHADOWS ];\n\t\tvarying vec4 vDirectionalShadowCoord[ NUM_DIR_LIGHT_SHADOWS ];\n\t#endif\n\t#if NUM_SPOT_LIGHT_SHADOWS > 0\n\t\tuniform sampler2D spotShadowMap[ NUM_SPOT_LIGHT_SHADOWS ];\n\t\tvarying vec4 vSpotShadowCoord[ NUM_SPOT_LIGHT_SHADOWS ];\n\t#endif\n\t#if NUM_POINT_LIGHT_SHADOWS > 0\n\t\tuniform sampler2D pointShadowMap[ NUM_POINT_LIGHT_SHADOWS ];\n\t\tvarying vec4 vPointShadowCoord[ NUM_POINT_LIGHT_SHADOWS ];\n\t#endif\n\tfloat texture2DCompare( sampler2D depths, vec2 uv, float compare ) {\n\t\treturn step( compare, unpackRGBAToDepth( texture2D( depths, uv ) ) );\n\t}\n\tvec2 texture2DDistribution( sampler2D shadow, vec2 uv ) {\n\t\treturn unpackRGBATo2Half( texture2D( shadow, uv ) );\n\t}\n\tfloat VSMShadow (sampler2D shadow, vec2 uv, float compare ){\n\t\tfloat occlusion = 1.0;\n\t\tvec2 distribution = texture2DDistribution( shadow, uv );\n\t\tfloat hard_shadow = step( compare , distribution.x );\n\t\tif (hard_shadow != 1.0 ) {\n\t\t\tfloat distance = compare - distribution.x ;\n\t\t\tfloat variance = max( 0.00000, distribution.y * distribution.y );\n\t\t\tfloat softness_probability = variance / (variance + distance * distance );\t\t\tsoftness_probability = clamp( ( softness_probability - 0.3 ) / ( 0.95 - 0.3 ), 0.0, 1.0 );\t\t\tocclusion = clamp( max( hard_shadow, softness_probability ), 0.0, 1.0 );\n\t\t}\n\t\treturn occlusion;\n\t}\n\tfloat getShadow( sampler2D shadowMap, vec2 shadowMapSize, float shadowBias, float shadowRadius, vec4 shadowCoord ) {\n\t\tfloat shadow = 1.0;\n\t\tshadowCoord.xyz /= shadowCoord.w;\n\t\tshadowCoord.z += shadowBias;\n\t\tbvec4 inFrustumVec = bvec4 ( shadowCoord.x >= 0.0, shadowCoord.x <= 1.0, shadowCoord.y >= 0.0, shadowCoord.y <= 1.0 );\n\t\tbool inFrustum = all( inFrustumVec );\n\t\tbvec2 frustumTestVec = bvec2( inFrustum, shadowCoord.z <= 1.0 );\n\t\tbool frustumTest = all( frustumTestVec );\n\t\tif ( frustumTest ) {\n\t\t#if defined( SHADOWMAP_TYPE_PCF )\n\t\t\tvec2 texelSize = vec2( 1.0 ) / shadowMapSize;\n\t\t\tfloat dx0 = - texelSize.x * shadowRadius;\n\t\t\tfloat dy0 = - texelSize.y * shadowRadius;\n\t\t\tfloat dx1 = + texelSize.x * shadowRadius;\n\t\t\tfloat dy1 = + texelSize.y * shadowRadius;\n\t\t\tfloat dx2 = dx0 / 2.0;\n\t\t\tfloat dy2 = dy0 / 2.0;\n\t\t\tfloat dx3 = dx1 / 2.0;\n\t\t\tfloat dy3 = dy1 / 2.0;\n\t\t\tshadow = (\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx0, dy0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( 0.0, dy0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx1, dy0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx2, dy2 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( 0.0, dy2 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx3, dy2 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx0, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx2, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy, shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx3, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx1, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx2, dy3 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( 0.0, dy3 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx3, dy3 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx0, dy1 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( 0.0, dy1 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, shadowCoord.xy + vec2( dx1, dy1 ), shadowCoord.z )\n\t\t\t) * ( 1.0 / 17.0 );\n\t\t#elif defined( SHADOWMAP_TYPE_PCF_SOFT )\n\t\t\tvec2 texelSize = vec2( 1.0 ) / shadowMapSize;\n\t\t\tfloat dx = texelSize.x;\n\t\t\tfloat dy = texelSize.y;\n\t\t\tvec2 uv = shadowCoord.xy;\n\t\t\tvec2 f = fract( uv * shadowMapSize + 0.5 );\n\t\t\tuv -= f * texelSize;\n\t\t\tshadow = (\n\t\t\t\ttexture2DCompare( shadowMap, uv, shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, uv + vec2( dx, 0.0 ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, uv + vec2( 0.0, dy ), shadowCoord.z ) +\n\t\t\t\ttexture2DCompare( shadowMap, uv + texelSize, shadowCoord.z ) +\n\t\t\t\tmix( texture2DCompare( shadowMap, uv + vec2( -dx, 0.0 ), shadowCoord.z ), \n\t\t\t\t\t texture2DCompare( shadowMap, uv + vec2( 2.0 * dx, 0.0 ), shadowCoord.z ),\n\t\t\t\t\t f.x ) +\n\t\t\t\tmix( texture2DCompare( shadowMap, uv + vec2( -dx, dy ), shadowCoord.z ), \n\t\t\t\t\t texture2DCompare( shadowMap, uv + vec2( 2.0 * dx, dy ), shadowCoord.z ),\n\t\t\t\t\t f.x ) +\n\t\t\t\tmix( texture2DCompare( shadowMap, uv + vec2( 0.0, -dy ), shadowCoord.z ), \n\t\t\t\t\t texture2DCompare( shadowMap, uv + vec2( 0.0, 2.0 * dy ), shadowCoord.z ),\n\t\t\t\t\t f.y ) +\n\t\t\t\tmix( texture2DCompare( shadowMap, uv + vec2( dx, -dy ), shadowCoord.z ), \n\t\t\t\t\t texture2DCompare( shadowMap, uv + vec2( dx, 2.0 * dy ), shadowCoord.z ),\n\t\t\t\t\t f.y ) +\n\t\t\t\tmix( mix( texture2DCompare( shadowMap, uv + vec2( -dx, -dy ), shadowCoord.z ), \n\t\t\t\t\t\t  texture2DCompare( shadowMap, uv + vec2( 2.0 * dx, -dy ), shadowCoord.z ),\n\t\t\t\t\t\t  f.x ),\n\t\t\t\t\t mix( texture2DCompare( shadowMap, uv + vec2( -dx, 2.0 * dy ), shadowCoord.z ), \n\t\t\t\t\t\t  texture2DCompare( shadowMap, uv + vec2( 2.0 * dx, 2.0 * dy ), shadowCoord.z ),\n\t\t\t\t\t\t  f.x ),\n\t\t\t\t\t f.y )\n\t\t\t) * ( 1.0 / 9.0 );\n\t\t#elif defined( SHADOWMAP_TYPE_VSM )\n\t\t\tshadow = VSMShadow( shadowMap, shadowCoord.xy, shadowCoord.z );\n\t\t#else\n\t\t\tshadow = texture2DCompare( shadowMap, shadowCoord.xy, shadowCoord.z );\n\t\t#endif\n\t\t}\n\t\treturn shadow;\n\t}\n\tvec2 cubeToUV( vec3 v, float texelSizeY ) {\n\t\tvec3 absV = abs( v );\n\t\tfloat scaleToCube = 1.0 / max( absV.x, max( absV.y, absV.z ) );\n\t\tabsV *= scaleToCube;\n\t\tv *= scaleToCube * ( 1.0 - 2.0 * texelSizeY );\n\t\tvec2 planar = v.xy;\n\t\tfloat almostATexel = 1.5 * texelSizeY;\n\t\tfloat almostOne = 1.0 - almostATexel;\n\t\tif ( absV.z >= almostOne ) {\n\t\t\tif ( v.z > 0.0 )\n\t\t\t\tplanar.x = 4.0 - v.x;\n\t\t} else if ( absV.x >= almostOne ) {\n\t\t\tfloat signX = sign( v.x );\n\t\t\tplanar.x = v.z * signX + 2.0 * signX;\n\t\t} else if ( absV.y >= almostOne ) {\n\t\t\tfloat signY = sign( v.y );\n\t\t\tplanar.x = v.x + 2.0 * signY + 2.0;\n\t\t\tplanar.y = v.z * signY - 2.0;\n\t\t}\n\t\treturn vec2( 0.125, 0.25 ) * planar + vec2( 0.375, 0.75 );\n\t}\n\tfloat getPointShadow( sampler2D shadowMap, vec2 shadowMapSize, float shadowBias, float shadowRadius, vec4 shadowCoord, float shadowCameraNear, float shadowCameraFar ) {\n\t\tvec2 texelSize = vec2( 1.0 ) / ( shadowMapSize * vec2( 4.0, 2.0 ) );\n\t\tvec3 lightToPosition = shadowCoord.xyz;\n\t\tfloat dp = ( length( lightToPosition ) - shadowCameraNear ) / ( shadowCameraFar - shadowCameraNear );\t\tdp += shadowBias;\n\t\tvec3 bd3D = normalize( lightToPosition );\n\t\t#if defined( SHADOWMAP_TYPE_PCF ) || defined( SHADOWMAP_TYPE_PCF_SOFT ) || defined( SHADOWMAP_TYPE_VSM )\n\t\t\tvec2 offset = vec2( - 1, 1 ) * shadowRadius * texelSize.y;\n\t\t\treturn (\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.xyy, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.yyy, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.xyx, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.yyx, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.xxy, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.yxy, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.xxx, texelSize.y ), dp ) +\n\t\t\t\ttexture2DCompare( shadowMap, cubeToUV( bd3D + offset.yxx, texelSize.y ), dp )\n\t\t\t) * ( 1.0 / 9.0 );\n\t\t#else\n\t\t\treturn texture2DCompare( shadowMap, cubeToUV( bd3D, texelSize.y ), dp );\n\t\t#endif\n\t}\n#endif", 
   shadowmap_pars_vertex:"#ifdef USE_SHADOWMAP\n\t#if NUM_DIR_LIGHT_SHADOWS > 0\n\t\tuniform mat4 directionalShadowMatrix[ NUM_DIR_LIGHT_SHADOWS ];\n\t\tvarying vec4 vDirectionalShadowCoord[ NUM_DIR_LIGHT_SHADOWS ];\n\t#endif\n\t#if NUM_SPOT_LIGHT_SHADOWS > 0\n\t\tuniform mat4 spotShadowMatrix[ NUM_SPOT_LIGHT_SHADOWS ];\n\t\tvarying vec4 vSpotShadowCoord[ NUM_SPOT_LIGHT_SHADOWS ];\n\t#endif\n\t#if NUM_POINT_LIGHT_SHADOWS > 0\n\t\tuniform mat4 pointShadowMatrix[ NUM_POINT_LIGHT_SHADOWS ];\n\t\tvarying vec4 vPointShadowCoord[ NUM_POINT_LIGHT_SHADOWS ];\n\t#endif\n#endif", 
-  shadowmap_vertex:"#ifdef USE_SHADOWMAP\n\t#if NUM_DIR_LIGHT_SHADOWS > 0\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_DIR_LIGHT_SHADOWS; i ++ ) {\n\t\tvDirectionalShadowCoord[ i ] = directionalShadowMatrix[ i ] * worldPosition;\n\t}\n\t#endif\n\t#if NUM_SPOT_LIGHT_SHADOWS > 0\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_SPOT_LIGHT_SHADOWS; i ++ ) {\n\t\tvSpotShadowCoord[ i ] = spotShadowMatrix[ i ] * worldPosition;\n\t}\n\t#endif\n\t#if NUM_POINT_LIGHT_SHADOWS > 0\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_POINT_LIGHT_SHADOWS; i ++ ) {\n\t\tvPointShadowCoord[ i ] = pointShadowMatrix[ i ] * worldPosition;\n\t}\n\t#endif\n#endif", 
-  shadowmask_pars_fragment:"float getShadowMask() {\n\tfloat shadow = 1.0;\n\t#ifdef USE_SHADOWMAP\n\t#if NUM_DIR_LIGHT_SHADOWS > 0\n\tDirectionalLightShadow directionalLight;\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_DIR_LIGHT_SHADOWS; i ++ ) {\n\t\tdirectionalLight = directionalLightShadows[ i ];\n\t\tshadow *= receiveShadow ? getShadow( directionalShadowMap[ i ], directionalLight.shadowMapSize, directionalLight.shadowBias, directionalLight.shadowRadius, vDirectionalShadowCoord[ i ] ) : 1.0;\n\t}\n\t#endif\n\t#if NUM_SPOT_LIGHT_SHADOWS > 0\n\tSpotLightShadow spotLight;\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_SPOT_LIGHT_SHADOWS; i ++ ) {\n\t\tspotLight = spotLightShadows[ i ];\n\t\tshadow *= receiveShadow ? getShadow( spotShadowMap[ i ], spotLight.shadowMapSize, spotLight.shadowBias, spotLight.shadowRadius, vSpotShadowCoord[ i ] ) : 1.0;\n\t}\n\t#endif\n\t#if NUM_POINT_LIGHT_SHADOWS > 0\n\tPointLightShadow pointLight;\n\t#pragma unroll_loop\n\tfor ( int i = 0; i < NUM_POINT_LIGHT_SHADOWS; i ++ ) {\n\t\tpointLight = pointLightShadows[ i ];\n\t\tshadow *= receiveShadow ? getPointShadow( pointShadowMap[ i ], pointLight.shadowMapSize, pointLight.shadowBias, pointLight.shadowRadius, vPointShadowCoord[ i ], pointLight.shadowCameraNear, pointLight.shadowCameraFar ) : 1.0;\n\t}\n\t#endif\n\t#endif\n\treturn shadow;\n}", 
+  shadowmap_vertex:"#ifdef USE_SHADOWMAP\n\t#if NUM_DIR_LIGHT_SHADOWS > 0\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_DIR_LIGHT_SHADOWS; i ++ ) {\n\t\tvDirectionalShadowCoord[ i ] = directionalShadowMatrix[ i ] * worldPosition;\n\t}\n\t#pragma unroll_loop_end\n\t#endif\n\t#if NUM_SPOT_LIGHT_SHADOWS > 0\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_SPOT_LIGHT_SHADOWS; i ++ ) {\n\t\tvSpotShadowCoord[ i ] = spotShadowMatrix[ i ] * worldPosition;\n\t}\n\t#pragma unroll_loop_end\n\t#endif\n\t#if NUM_POINT_LIGHT_SHADOWS > 0\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_POINT_LIGHT_SHADOWS; i ++ ) {\n\t\tvPointShadowCoord[ i ] = pointShadowMatrix[ i ] * worldPosition;\n\t}\n\t#pragma unroll_loop_end\n\t#endif\n#endif", 
+  shadowmask_pars_fragment:"float getShadowMask() {\n\tfloat shadow = 1.0;\n\t#ifdef USE_SHADOWMAP\n\t#if NUM_DIR_LIGHT_SHADOWS > 0\n\tDirectionalLightShadow directionalLight;\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_DIR_LIGHT_SHADOWS; i ++ ) {\n\t\tdirectionalLight = directionalLightShadows[ i ];\n\t\tshadow *= receiveShadow ? getShadow( directionalShadowMap[ i ], directionalLight.shadowMapSize, directionalLight.shadowBias, directionalLight.shadowRadius, vDirectionalShadowCoord[ i ] ) : 1.0;\n\t}\n\t#pragma unroll_loop_end\n\t#endif\n\t#if NUM_SPOT_LIGHT_SHADOWS > 0\n\tSpotLightShadow spotLight;\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_SPOT_LIGHT_SHADOWS; i ++ ) {\n\t\tspotLight = spotLightShadows[ i ];\n\t\tshadow *= receiveShadow ? getShadow( spotShadowMap[ i ], spotLight.shadowMapSize, spotLight.shadowBias, spotLight.shadowRadius, vSpotShadowCoord[ i ] ) : 1.0;\n\t}\n\t#pragma unroll_loop_end\n\t#endif\n\t#if NUM_POINT_LIGHT_SHADOWS > 0\n\tPointLightShadow pointLight;\n\t#pragma unroll_loop_start\n\tfor ( int i = 0; i < NUM_POINT_LIGHT_SHADOWS; i ++ ) {\n\t\tpointLight = pointLightShadows[ i ];\n\t\tshadow *= receiveShadow ? getPointShadow( pointShadowMap[ i ], pointLight.shadowMapSize, pointLight.shadowBias, pointLight.shadowRadius, vPointShadowCoord[ i ], pointLight.shadowCameraNear, pointLight.shadowCameraFar ) : 1.0;\n\t}\n\t#pragma unroll_loop_end\n\t#endif\n\t#endif\n\treturn shadow;\n}", 
   skinbase_vertex:"#ifdef USE_SKINNING\n\tmat4 boneMatX = getBoneMatrix( skinIndex.x );\n\tmat4 boneMatY = getBoneMatrix( skinIndex.y );\n\tmat4 boneMatZ = getBoneMatrix( skinIndex.z );\n\tmat4 boneMatW = getBoneMatrix( skinIndex.w );\n#endif", skinning_pars_vertex:"#ifdef USE_SKINNING\n\tuniform mat4 bindMatrix;\n\tuniform mat4 bindMatrixInverse;\n\t#ifdef BONE_TEXTURE\n\t\tuniform highp sampler2D boneTexture;\n\t\tuniform int boneTextureSize;\n\t\tmat4 getBoneMatrix( const in float i ) {\n\t\t\tfloat j = i * 4.0;\n\t\t\tfloat x = mod( j, float( boneTextureSize ) );\n\t\t\tfloat y = floor( j / float( boneTextureSize ) );\n\t\t\tfloat dx = 1.0 / float( boneTextureSize );\n\t\t\tfloat dy = 1.0 / float( boneTextureSize );\n\t\t\ty = dy * ( y + 0.5 );\n\t\t\tvec4 v1 = texture2D( boneTexture, vec2( dx * ( x + 0.5 ), y ) );\n\t\t\tvec4 v2 = texture2D( boneTexture, vec2( dx * ( x + 1.5 ), y ) );\n\t\t\tvec4 v3 = texture2D( boneTexture, vec2( dx * ( x + 2.5 ), y ) );\n\t\t\tvec4 v4 = texture2D( boneTexture, vec2( dx * ( x + 3.5 ), y ) );\n\t\t\tmat4 bone = mat4( v1, v2, v3, v4 );\n\t\t\treturn bone;\n\t\t}\n\t#else\n\t\tuniform mat4 boneMatrices[ MAX_BONES ];\n\t\tmat4 getBoneMatrix( const in float i ) {\n\t\t\tmat4 bone = boneMatrices[ int(i) ];\n\t\t\treturn bone;\n\t\t}\n\t#endif\n#endif", 
   skinning_vertex:"#ifdef USE_SKINNING\n\tvec4 skinVertex = bindMatrix * vec4( transformed, 1.0 );\n\tvec4 skinned = vec4( 0.0 );\n\tskinned += boneMatX * skinVertex * skinWeight.x;\n\tskinned += boneMatY * skinVertex * skinWeight.y;\n\tskinned += boneMatZ * skinVertex * skinWeight.z;\n\tskinned += boneMatW * skinVertex * skinWeight.w;\n\ttransformed = ( bindMatrixInverse * skinned ).xyz;\n#endif", skinnormal_vertex:"#ifdef USE_SKINNING\n\tmat4 skinMatrix = mat4( 0.0 );\n\tskinMatrix += skinWeight.x * boneMatX;\n\tskinMatrix += skinWeight.y * boneMatY;\n\tskinMatrix += skinWeight.z * boneMatZ;\n\tskinMatrix += skinWeight.w * boneMatW;\n\tskinMatrix  = bindMatrixInverse * skinMatrix * bindMatrix;\n\tobjectNormal = vec4( skinMatrix * vec4( objectNormal, 0.0 ) ).xyz;\n\t#ifdef USE_TANGENT\n\t\tobjectTangent = vec4( skinMatrix * vec4( objectTangent, 0.0 ) ).xyz;\n\t#endif\n#endif", 
   specularmap_fragment:"float specularStrength;\n#ifdef USE_SPECULARMAP\n\tvec4 texelSpecular = texture2D( specularMap, vUv );\n\tspecularStrength = texelSpecular.r;\n#else\n\tspecularStrength = 1.0;\n#endif", specularmap_pars_fragment:"#ifdef USE_SPECULARMAP\n\tuniform sampler2D specularMap;\n#endif", tonemapping_fragment:"#if defined( TONE_MAPPING )\n\tgl_FragColor.rgb = toneMapping( gl_FragColor.rgb );\n#endif", tonemapping_pars_fragment:"#ifndef saturate\n#define saturate(a) clamp( a, 0.0, 1.0 )\n#endif\nuniform float toneMappingExposure;\nuniform float toneMappingWhitePoint;\nvec3 LinearToneMapping( vec3 color ) {\n\treturn toneMappingExposure * color;\n}\nvec3 ReinhardToneMapping( vec3 color ) {\n\tcolor *= toneMappingExposure;\n\treturn saturate( color / ( vec3( 1.0 ) + color ) );\n}\n#define Uncharted2Helper( x ) max( ( ( x * ( 0.15 * x + 0.10 * 0.50 ) + 0.20 * 0.02 ) / ( x * ( 0.15 * x + 0.50 ) + 0.20 * 0.30 ) ) - 0.02 / 0.30, vec3( 0.0 ) )\nvec3 Uncharted2ToneMapping( vec3 color ) {\n\tcolor *= toneMappingExposure;\n\treturn saturate( Uncharted2Helper( color ) / Uncharted2Helper( vec3( toneMappingWhitePoint ) ) );\n}\nvec3 OptimizedCineonToneMapping( vec3 color ) {\n\tcolor *= toneMappingExposure;\n\tcolor = max( vec3( 0.0 ), color - 0.004 );\n\treturn pow( ( color * ( 6.2 * color + 0.5 ) ) / ( color * ( 6.2 * color + 1.7 ) + 0.06 ), vec3( 2.2 ) );\n}\nvec3 ACESFilmicToneMapping( vec3 color ) {\n\tcolor *= toneMappingExposure;\n\treturn saturate( ( color * ( 2.51 * color + 0.03 ) ) / ( color * ( 2.43 * color + 0.59 ) + 0.14 ) );\n}", 
@@ -11712,18 +11719,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   distanceRGBA_vert:"#define DISTANCE\nvarying vec3 vWorldPosition;\n#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <skinbase_vertex>\n\t#ifdef USE_DISPLACEMENTMAP\n\t\t#include <beginnormal_vertex>\n\t\t#include <morphnormal_vertex>\n\t\t#include <skinnormal_vertex>\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <clipping_planes_vertex>\n\tvWorldPosition = worldPosition.xyz;\n}", 
   equirect_frag:"uniform sampler2D tEquirect;\nvarying vec3 vWorldDirection;\n#include <common>\nvoid main() {\n\tvec3 direction = normalize( vWorldDirection );\n\tvec2 sampleUV;\n\tsampleUV.y = asin( clamp( direction.y, - 1.0, 1.0 ) ) * RECIPROCAL_PI + 0.5;\n\tsampleUV.x = atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.5;\n\tvec4 texColor = texture2D( tEquirect, sampleUV );\n\tgl_FragColor = mapTexelToLinear( texColor );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n}", 
   equirect_vert:"varying vec3 vWorldDirection;\n#include <common>\nvoid main() {\n\tvWorldDirection = transformDirection( position, modelMatrix );\n\t#include <begin_vertex>\n\t#include <project_vertex>\n}", linedashed_frag:"uniform vec3 diffuse;\nuniform float opacity;\nuniform float dashSize;\nuniform float totalSize;\nvarying float vLineDistance;\n#include <common>\n#include <color_pars_fragment>\n#include <fog_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tif ( mod( vLineDistance, totalSize ) > dashSize ) {\n\t\tdiscard;\n\t}\n\tvec3 outgoingLight = vec3( 0.0 );\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\t#include <logdepthbuf_fragment>\n\t#include <color_fragment>\n\toutgoingLight = diffuseColor.rgb;\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n}", 
-  linedashed_vert:"uniform float scale;\nattribute float lineDistance;\nvarying float vLineDistance;\n#include <common>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <color_vertex>\n\tvLineDistance = scale * lineDistance;\n\tvec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n\tgl_Position = projectionMatrix * mvPosition;\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\t#include <fog_vertex>\n}", 
-  meshbasic_frag:"uniform vec3 diffuse;\nuniform float opacity;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <common>\n#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <uv2_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_pars_fragment>\n#include <cube_uv_reflection_fragment>\n#include <fog_pars_fragment>\n#include <specularmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <color_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <specularmap_fragment>\n\tReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );\n\t#ifdef USE_LIGHTMAP\n\t\n\t\tvec4 lightMapTexel= texture2D( lightMap, vUv2 );\n\t\treflectedLight.indirectDiffuse += lightMapTexelToLinear( lightMapTexel ).rgb * lightMapIntensity;\n\t#else\n\t\treflectedLight.indirectDiffuse += vec3( 1.0 );\n\t#endif\n\t#include <aomap_fragment>\n\treflectedLight.indirectDiffuse *= diffuseColor.rgb;\n\tvec3 outgoingLight = reflectedLight.indirectDiffuse;\n\t#include <envmap_fragment>\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n}", 
+  linedashed_vert:"uniform float scale;\nattribute float lineDistance;\nvarying float vLineDistance;\n#include <common>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\tvLineDistance = scale * lineDistance;\n\t#include <color_vertex>\n\t#include <begin_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\t#include <fog_vertex>\n}", meshbasic_frag:"uniform vec3 diffuse;\nuniform float opacity;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <common>\n#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <uv2_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_pars_fragment>\n#include <cube_uv_reflection_fragment>\n#include <fog_pars_fragment>\n#include <specularmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <color_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <specularmap_fragment>\n\tReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );\n\t#ifdef USE_LIGHTMAP\n\t\n\t\tvec4 lightMapTexel= texture2D( lightMap, vUv2 );\n\t\treflectedLight.indirectDiffuse += lightMapTexelToLinear( lightMapTexel ).rgb * lightMapIntensity;\n\t#else\n\t\treflectedLight.indirectDiffuse += vec3( 1.0 );\n\t#endif\n\t#include <aomap_fragment>\n\treflectedLight.indirectDiffuse *= diffuseColor.rgb;\n\tvec3 outgoingLight = reflectedLight.indirectDiffuse;\n\t#include <envmap_fragment>\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n}", 
   meshbasic_vert:"#include <common>\n#include <uv_pars_vertex>\n#include <uv2_pars_vertex>\n#include <envmap_pars_vertex>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <uv2_vertex>\n\t#include <color_vertex>\n\t#include <skinbase_vertex>\n\t#ifdef USE_ENVMAP\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <worldpos_vertex>\n\t#include <clipping_planes_vertex>\n\t#include <envmap_vertex>\n\t#include <fog_vertex>\n}", 
   meshlambert_frag:"uniform vec3 diffuse;\nuniform vec3 emissive;\nuniform float opacity;\nvarying vec3 vLightFront;\nvarying vec3 vIndirectFront;\n#ifdef DOUBLE_SIDED\n\tvarying vec3 vLightBack;\n\tvarying vec3 vIndirectBack;\n#endif\n#include <common>\n#include <packing>\n#include <dithering_pars_fragment>\n#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <uv2_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_pars_fragment>\n#include <cube_uv_reflection_fragment>\n#include <bsdfs>\n#include <lights_pars_begin>\n#include <fog_pars_fragment>\n#include <shadowmap_pars_fragment>\n#include <shadowmask_pars_fragment>\n#include <specularmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\tReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );\n\tvec3 totalEmissiveRadiance = emissive;\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <color_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <specularmap_fragment>\n\t#include <emissivemap_fragment>\n\treflectedLight.indirectDiffuse = getAmbientLightIrradiance( ambientLightColor );\n\t#ifdef DOUBLE_SIDED\n\t\treflectedLight.indirectDiffuse += ( gl_FrontFacing ) ? vIndirectFront : vIndirectBack;\n\t#else\n\t\treflectedLight.indirectDiffuse += vIndirectFront;\n\t#endif\n\t#include <lightmap_fragment>\n\treflectedLight.indirectDiffuse *= BRDF_Diffuse_Lambert( diffuseColor.rgb );\n\t#ifdef DOUBLE_SIDED\n\t\treflectedLight.directDiffuse = ( gl_FrontFacing ) ? vLightFront : vLightBack;\n\t#else\n\t\treflectedLight.directDiffuse = vLightFront;\n\t#endif\n\treflectedLight.directDiffuse *= BRDF_Diffuse_Lambert( diffuseColor.rgb ) * getShadowMask();\n\t#include <aomap_fragment>\n\tvec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + totalEmissiveRadiance;\n\t#include <envmap_fragment>\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n\t#include <dithering_fragment>\n}", 
   meshlambert_vert:"#define LAMBERT\nvarying vec3 vLightFront;\nvarying vec3 vIndirectFront;\n#ifdef DOUBLE_SIDED\n\tvarying vec3 vLightBack;\n\tvarying vec3 vIndirectBack;\n#endif\n#include <common>\n#include <uv_pars_vertex>\n#include <uv2_pars_vertex>\n#include <envmap_pars_vertex>\n#include <bsdfs>\n#include <lights_pars_begin>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <uv2_vertex>\n\t#include <color_vertex>\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinbase_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\t#include <worldpos_vertex>\n\t#include <envmap_vertex>\n\t#include <lights_lambert_vertex>\n\t#include <shadowmap_vertex>\n\t#include <fog_vertex>\n}", 
-  meshmatcap_frag:"#define MATCAP\nuniform vec3 diffuse;\nuniform float opacity;\nuniform sampler2D matcap;\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <common>\n#include <uv_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <fog_pars_fragment>\n#include <bumpmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <normal_fragment_begin>\n\t#include <normal_fragment_maps>\n\tvec3 viewDir = normalize( vViewPosition );\n\tvec3 x = normalize( vec3( viewDir.z, 0.0, - viewDir.x ) );\n\tvec3 y = cross( viewDir, x );\n\tvec2 uv = vec2( dot( x, normal ), dot( y, normal ) ) * 0.495 + 0.5;\n\t#ifdef USE_MATCAP\n\t\tvec4 matcapColor = texture2D( matcap, uv );\n\t\tmatcapColor = matcapTexelToLinear( matcapColor );\n\t#else\n\t\tvec4 matcapColor = vec4( 1.0 );\n\t#endif\n\tvec3 outgoingLight = diffuseColor.rgb * matcapColor.rgb;\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n}", 
-  meshmatcap_vert:"#define MATCAP\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <fog_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinbase_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n\t#ifndef FLAT_SHADED\n\t\tvNormal = normalize( transformedNormal );\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\t#include <fog_vertex>\n\tvViewPosition = - mvPosition.xyz;\n}", 
+  meshmatcap_frag:"#define MATCAP\nuniform vec3 diffuse;\nuniform float opacity;\nuniform sampler2D matcap;\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <common>\n#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <fog_pars_fragment>\n#include <bumpmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <color_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <normal_fragment_begin>\n\t#include <normal_fragment_maps>\n\tvec3 viewDir = normalize( vViewPosition );\n\tvec3 x = normalize( vec3( viewDir.z, 0.0, - viewDir.x ) );\n\tvec3 y = cross( viewDir, x );\n\tvec2 uv = vec2( dot( x, normal ), dot( y, normal ) ) * 0.495 + 0.5;\n\t#ifdef USE_MATCAP\n\t\tvec4 matcapColor = texture2D( matcap, uv );\n\t\tmatcapColor = matcapTexelToLinear( matcapColor );\n\t#else\n\t\tvec4 matcapColor = vec4( 1.0 );\n\t#endif\n\tvec3 outgoingLight = diffuseColor.rgb * matcapColor.rgb;\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n}", 
+  meshmatcap_vert:"#define MATCAP\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <common>\n#include <uv_pars_vertex>\n#include <color_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <fog_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <color_vertex>\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinbase_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n\t#ifndef FLAT_SHADED\n\t\tvNormal = normalize( transformedNormal );\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\t#include <fog_vertex>\n\tvViewPosition = - mvPosition.xyz;\n}", 
   meshtoon_frag:"#define TOON\nuniform vec3 diffuse;\nuniform vec3 emissive;\nuniform vec3 specular;\nuniform float shininess;\nuniform float opacity;\n#include <common>\n#include <packing>\n#include <dithering_pars_fragment>\n#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <uv2_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <gradientmap_pars_fragment>\n#include <fog_pars_fragment>\n#include <bsdfs>\n#include <lights_pars_begin>\n#include <lights_toon_pars_fragment>\n#include <shadowmap_pars_fragment>\n#include <bumpmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <specularmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\tReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );\n\tvec3 totalEmissiveRadiance = emissive;\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <color_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <specularmap_fragment>\n\t#include <normal_fragment_begin>\n\t#include <normal_fragment_maps>\n\t#include <emissivemap_fragment>\n\t#include <lights_toon_fragment>\n\t#include <lights_fragment_begin>\n\t#include <lights_fragment_maps>\n\t#include <lights_fragment_end>\n\t#include <aomap_fragment>\n\tvec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + reflectedLight.directSpecular + reflectedLight.indirectSpecular + totalEmissiveRadiance;\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n\t#include <dithering_fragment>\n}", 
   meshtoon_vert:"#define TOON\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <common>\n#include <uv_pars_vertex>\n#include <uv2_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <uv2_vertex>\n\t#include <color_vertex>\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinbase_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n#ifndef FLAT_SHADED\n\tvNormal = normalize( transformedNormal );\n#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\tvViewPosition = - mvPosition.xyz;\n\t#include <worldpos_vertex>\n\t#include <shadowmap_vertex>\n\t#include <fog_vertex>\n}", 
   meshphong_frag:"#define PHONG\nuniform vec3 diffuse;\nuniform vec3 emissive;\nuniform vec3 specular;\nuniform float shininess;\nuniform float opacity;\n#include <common>\n#include <packing>\n#include <dithering_pars_fragment>\n#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <uv2_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_pars_fragment>\n#include <cube_uv_reflection_fragment>\n#include <fog_pars_fragment>\n#include <bsdfs>\n#include <lights_pars_begin>\n#include <lights_phong_pars_fragment>\n#include <shadowmap_pars_fragment>\n#include <bumpmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <specularmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\tReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );\n\tvec3 totalEmissiveRadiance = emissive;\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <color_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <specularmap_fragment>\n\t#include <normal_fragment_begin>\n\t#include <normal_fragment_maps>\n\t#include <emissivemap_fragment>\n\t#include <lights_phong_fragment>\n\t#include <lights_fragment_begin>\n\t#include <lights_fragment_maps>\n\t#include <lights_fragment_end>\n\t#include <aomap_fragment>\n\tvec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + reflectedLight.directSpecular + reflectedLight.indirectSpecular + totalEmissiveRadiance;\n\t#include <envmap_fragment>\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n\t#include <dithering_fragment>\n}", 
   meshphong_vert:"#define PHONG\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <common>\n#include <uv_pars_vertex>\n#include <uv2_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <envmap_pars_vertex>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <uv2_vertex>\n\t#include <color_vertex>\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinbase_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n#ifndef FLAT_SHADED\n\tvNormal = normalize( transformedNormal );\n#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\tvViewPosition = - mvPosition.xyz;\n\t#include <worldpos_vertex>\n\t#include <envmap_vertex>\n\t#include <shadowmap_vertex>\n\t#include <fog_vertex>\n}", 
-  meshphysical_frag:"#define STANDARD\n#ifdef PHYSICAL\n\t#define REFLECTIVITY\n\t#define CLEARCOAT\n\t#define TRANSPARENCY\n#endif\nuniform vec3 diffuse;\nuniform vec3 emissive;\nuniform float roughness;\nuniform float metalness;\nuniform float opacity;\n#ifdef TRANSPARENCY\n\tuniform float transparency;\n#endif\n#ifdef REFLECTIVITY\n\tuniform float reflectivity;\n#endif\n#ifdef CLEARCOAT\n\tuniform float clearcoat;\n\tuniform float clearcoatRoughness;\n#endif\n#ifdef USE_SHEEN\n\tuniform vec3 sheen;\n#endif\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n\t#ifdef USE_TANGENT\n\t\tvarying vec3 vTangent;\n\t\tvarying vec3 vBitangent;\n\t#endif\n#endif\n#include <common>\n#include <packing>\n#include <dithering_pars_fragment>\n#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <uv2_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <bsdfs>\n#include <cube_uv_reflection_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_physical_pars_fragment>\n#include <fog_pars_fragment>\n#include <lights_pars_begin>\n#include <lights_physical_pars_fragment>\n#include <shadowmap_pars_fragment>\n#include <bumpmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <clearcoat_normalmap_pars_fragment>\n#include <roughnessmap_pars_fragment>\n#include <metalnessmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\tReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );\n\tvec3 totalEmissiveRadiance = emissive;\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <color_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <roughnessmap_fragment>\n\t#include <metalnessmap_fragment>\n\t#include <normal_fragment_begin>\n\t#include <normal_fragment_maps>\n\t#include <clearcoat_normal_fragment_begin>\n\t#include <clearcoat_normal_fragment_maps>\n\t#include <emissivemap_fragment>\n\t#include <lights_physical_fragment>\n\t#include <lights_fragment_begin>\n\t#include <lights_fragment_maps>\n\t#include <lights_fragment_end>\n\t#include <aomap_fragment>\n\tvec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + reflectedLight.directSpecular + reflectedLight.indirectSpecular + totalEmissiveRadiance;\n\t#ifdef TRANSPARENCY\n\t\tdiffuseColor.a *= saturate( 1. - transparency + linearToRelativeLuminance( reflectedLight.directSpecular + reflectedLight.indirectSpecular ) );\n\t#endif\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n\t#include <dithering_fragment>\n}", 
+  meshphysical_frag:"#define STANDARD\n#ifdef PHYSICAL\n\t#define REFLECTIVITY\n\t#define CLEARCOAT\n\t#define TRANSPARENCY\n#endif\nuniform vec3 diffuse;\nuniform vec3 emissive;\nuniform float roughness;\nuniform float metalness;\nuniform float opacity;\n#ifdef TRANSPARENCY\n\tuniform float transparency;\n#endif\n#ifdef REFLECTIVITY\n\tuniform float reflectivity;\n#endif\n#ifdef CLEARCOAT\n\tuniform float clearcoat;\n\tuniform float clearcoatRoughness;\n#endif\n#ifdef USE_SHEEN\n\tuniform vec3 sheen;\n#endif\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n\t#ifdef USE_TANGENT\n\t\tvarying vec3 vTangent;\n\t\tvarying vec3 vBitangent;\n\t#endif\n#endif\n#include <common>\n#include <packing>\n#include <dithering_pars_fragment>\n#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <uv2_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <bsdfs>\n#include <cube_uv_reflection_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_physical_pars_fragment>\n#include <fog_pars_fragment>\n#include <lights_pars_begin>\n#include <lights_physical_pars_fragment>\n#include <shadowmap_pars_fragment>\n#include <bumpmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <clearcoat_pars_fragment>\n#include <roughnessmap_pars_fragment>\n#include <metalnessmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\tReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );\n\tvec3 totalEmissiveRadiance = emissive;\n\t#include <logdepthbuf_fragment>\n\t#include <map_fragment>\n\t#include <color_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <roughnessmap_fragment>\n\t#include <metalnessmap_fragment>\n\t#include <normal_fragment_begin>\n\t#include <normal_fragment_maps>\n\t#include <clearcoat_normal_fragment_begin>\n\t#include <clearcoat_normal_fragment_maps>\n\t#include <emissivemap_fragment>\n\t#include <lights_physical_fragment>\n\t#include <lights_fragment_begin>\n\t#include <lights_fragment_maps>\n\t#include <lights_fragment_end>\n\t#include <aomap_fragment>\n\tvec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + reflectedLight.directSpecular + reflectedLight.indirectSpecular + totalEmissiveRadiance;\n\t#ifdef TRANSPARENCY\n\t\tdiffuseColor.a *= saturate( 1. - transparency + linearToRelativeLuminance( reflectedLight.directSpecular + reflectedLight.indirectSpecular ) );\n\t#endif\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n\t#include <premultiplied_alpha_fragment>\n\t#include <dithering_fragment>\n}", 
   meshphysical_vert:"#define STANDARD\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n\t#ifdef USE_TANGENT\n\t\tvarying vec3 vTangent;\n\t\tvarying vec3 vBitangent;\n\t#endif\n#endif\n#include <common>\n#include <uv_pars_vertex>\n#include <uv2_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <uv2_vertex>\n\t#include <color_vertex>\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinbase_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n#ifndef FLAT_SHADED\n\tvNormal = normalize( transformedNormal );\n\t#ifdef USE_TANGENT\n\t\tvTangent = normalize( transformedTangent );\n\t\tvBitangent = normalize( cross( vNormal, vTangent ) * tangent.w );\n\t#endif\n#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\tvViewPosition = - mvPosition.xyz;\n\t#include <worldpos_vertex>\n\t#include <shadowmap_vertex>\n\t#include <fog_vertex>\n}", 
   normal_frag:"#define NORMAL\nuniform float opacity;\n#if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( TANGENTSPACE_NORMALMAP )\n\tvarying vec3 vViewPosition;\n#endif\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n\t#ifdef USE_TANGENT\n\t\tvarying vec3 vTangent;\n\t\tvarying vec3 vBitangent;\n\t#endif\n#endif\n#include <packing>\n#include <uv_pars_fragment>\n#include <bumpmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\t#include <logdepthbuf_fragment>\n\t#include <normal_fragment_begin>\n\t#include <normal_fragment_maps>\n\tgl_FragColor = vec4( packNormalToRGB( normal ), opacity );\n}", 
   normal_vert:"#define NORMAL\n#if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( TANGENTSPACE_NORMALMAP )\n\tvarying vec3 vViewPosition;\n#endif\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n\t#ifdef USE_TANGENT\n\t\tvarying vec3 vTangent;\n\t\tvarying vec3 vBitangent;\n\t#endif\n#endif\n#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinbase_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n#ifndef FLAT_SHADED\n\tvNormal = normalize( transformedNormal );\n\t#ifdef USE_TANGENT\n\t\tvTangent = normalize( transformedTangent );\n\t\tvBitangent = normalize( cross( vNormal, vTangent ) * tangent.w );\n\t#endif\n#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n#if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( TANGENTSPACE_NORMALMAP )\n\tvViewPosition = - mvPosition.xyz;\n#endif\n}", 
@@ -11738,7 +11744,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   points:{uniforms:Y([aa.points, aa.fog]), vertexShader:na.points_vert, fragmentShader:na.points_frag}, dashed:{uniforms:Y([aa.common, aa.fog, {scale:{value:1}, dashSize:{value:1}, totalSize:{value:2}}]), vertexShader:na.linedashed_vert, fragmentShader:na.linedashed_frag}, depth:{uniforms:Y([aa.common, aa.displacementmap]), vertexShader:na.depth_vert, fragmentShader:na.depth_frag}, normal:{uniforms:Y([aa.common, aa.bumpmap, aa.normalmap, aa.displacementmap, {opacity:{value:1}}]), vertexShader:na.normal_vert, 
   fragmentShader:na.normal_frag}, sprite:{uniforms:Y([aa.sprite, aa.fog]), vertexShader:na.sprite_vert, fragmentShader:na.sprite_frag}, background:{uniforms:{uvTransform:{value:new b}, t2D:{value:null}}, vertexShader:na.background_vert, fragmentShader:na.background_frag}, cube:{uniforms:Y([aa.envmap, {opacity:{value:1}}]), vertexShader:na.cube_vert, fragmentShader:na.cube_frag}, equirect:{uniforms:{tEquirect:{value:null}}, vertexShader:na.equirect_vert, fragmentShader:na.equirect_frag}, distanceRGBA:{uniforms:Y([aa.common, 
   aa.displacementmap, {referencePosition:{value:new m}, nearDistance:{value:1}, farDistance:{value:1E3}}]), vertexShader:na.distanceRGBA_vert, fragmentShader:na.distanceRGBA_frag}, shadow:{uniforms:Y([aa.lights, aa.fog, {color:{value:new A(0)}, opacity:{value:1}}]), vertexShader:na.shadow_vert, fragmentShader:na.shadow_frag}};
-  Cb.physical = {uniforms:Y([Cb.standard.uniforms, {transparency:{value:0}, clearcoat:{value:0}, clearcoatRoughness:{value:0}, sheen:{value:new A(0)}, clearcoatNormalScale:{value:new h(1, 1)}, clearcoatNormalMap:{value:null}}]), vertexShader:na.meshphysical_vert, fragmentShader:na.meshphysical_frag};
+  Cb.physical = {uniforms:Y([Cb.standard.uniforms, {clearcoat:{value:0}, clearcoatMap:{value:null}, clearcoatRoughness:{value:0}, clearcoatRoughnessMap:{value:null}, clearcoatNormalScale:{value:new h(1, 1)}, clearcoatNormalMap:{value:null}, sheen:{value:new A(0)}, transparency:{value:0}}]), vertexShader:na.meshphysical_vert, fragmentShader:na.meshphysical_frag};
   Wa.prototype = Object.create(g.prototype);
   Wa.prototype.constructor = Wa;
   Wa.prototype.isCubeTexture = !0;
@@ -11753,16 +11759,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   kb.prototype = Object.create(g.prototype);
   kb.prototype.constructor = kb;
   kb.prototype.isDataTexture3D = !0;
-  var Jh = new g, vj = new ya, wj = new kb, Kh = new Wa, Eh = [], Fh = [], Ih = new Float32Array(16), Hh = new Float32Array(9), Gh = new Float32Array(4);
-  Lh.prototype.updateCache = function(a) {
+  var Kh = new g, xj = new ya, yj = new kb, Lh = new Wa, Fh = [], Gh = [], Jh = new Float32Array(16), Ih = new Float32Array(9), Hh = new Float32Array(4);
+  Mh.prototype.updateCache = function(a) {
     var c = this.cache;
     a instanceof Float32Array && c.length !== a.length && (this.cache = new Float32Array(a.length));
     Na(c, a);
   };
-  Mh.prototype.setValue = function(a, c, b) {
+  Nh.prototype.setValue = function(a, c, b) {
     for (var k = this.seq, e = 0, d = k.length; e !== d; ++e) {
-      var l = k[e];
-      l.setValue(a, c[l.id], b);
+      var f = k[e];
+      f.setValue(a, c[f.id], b);
     }
   };
   var sg = /([\w\d_]+)(\])?(\[|\.)?/g;
@@ -11776,8 +11782,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   };
   ic.upload = function(a, c, b, e) {
     for (var k = 0, d = c.length; k !== d; ++k) {
-      var l = c[k], f = b[l.id];
-      !1 !== f.needsUpdate && l.setValue(a, f.value, e);
+      var f = c[k], l = b[f.id];
+      !1 !== l.needsUpdate && f.setValue(a, l.value, e);
     }
   };
   ic.seqWithValue = function(a, c) {
@@ -11787,7 +11793,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return k;
   };
-  var Kj = 0, ug = /^[ \t]*#include +<([\w\d./]+)>/gm, Uh = /#pragma unroll_loop[\s]+?for \( int i = (\d+); i < (\d+); i \+\+ \) \{([\s\S]+?)(?=\})\}/g, Uj = 0;
+  var Mj = 0, ug = /^[ \t]*#include +<([\w\d./]+)>/gm, Wh = /#pragma unroll_loop[\s]+?for \( int i = (\d+); i < (\d+); i \+\+ \) \{([\s\S]+?)(?=\})\}/g, Vh = /#pragma unroll_loop_start[\s]+?for \( int i = (\d+); i < (\d+); i \+\+ \) \{([\s\S]+?)(?=\})\}[\s]+?#pragma unroll_loop_end/g, Wj = 0;
   jc.prototype = Object.create(H.prototype);
   jc.prototype.constructor = jc;
   jc.prototype.isMeshDepthMaterial = !0;
@@ -11824,7 +11830,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   };
   gf.prototype = Object.assign(Object.create(ha.prototype), {constructor:gf, isArrayCamera:!0});
   id.prototype = Object.assign(Object.create(t.prototype), {constructor:id, isGroup:!0});
-  Object.assign($h.prototype, d.prototype);
+  Object.assign(bi.prototype, d.prototype);
   Object.assign(hf.prototype, {isFogExp2:!0, clone:function() {
     return new hf(this.color, this.density);
   }, toJSON:function() {
@@ -11927,11 +11933,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.sizeAttenuation = a.sizeAttenuation;
     return this;
   };
-  var jd, We = new m, Ud = new m, Vd = new m, kd = new h, ie = new h, bi = new n, cg = new m, Xe = new m, dg = new m, Ri = new h, vh = new h, Si = new h;
+  var jd, We = new m, Ud = new m, Vd = new m, kd = new h, ie = new h, di = new n, cg = new m, Xe = new m, dg = new m, Ti = new h, wh = new h, Ui = new h;
   he.prototype = Object.assign(Object.create(t.prototype), {constructor:he, isSprite:!0, raycast:function(a, c) {
     null === a.camera && console.error('THREE.Sprite: "Raycaster.camera" needs to be set in order to raycast against sprites.');
     Ud.setFromMatrixScale(this.matrixWorld);
-    bi.copy(a.camera.matrixWorld);
+    di.copy(a.camera.matrixWorld);
     this.modelViewMatrix.multiplyMatrices(a.camera.matrixWorldInverse, this.matrixWorld);
     Vd.setFromMatrixPosition(this.modelViewMatrix);
     a.camera.isPerspectiveCamera && !1 === this.material.sizeAttenuation && Ud.multiplyScalar(-Vd.z);
@@ -11944,15 +11950,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     kf(cg.set(-.5, -.5, 0), Vd, k, Ud, e, b);
     kf(Xe.set(.5, -.5, 0), Vd, k, Ud, e, b);
     kf(dg.set(.5, .5, 0), Vd, k, Ud, e, b);
-    Ri.set(0, 0);
-    vh.set(1, 0);
-    Si.set(1, 1);
+    Ti.set(0, 0);
+    wh.set(1, 0);
+    Ui.set(1, 1);
     var d = a.ray.intersectTriangle(cg, Xe, dg, !1, We);
-    if (null === d && (kf(Xe.set(-.5, .5, 0), Vd, k, Ud, e, b), vh.set(0, 1), d = a.ray.intersectTriangle(cg, dg, Xe, !1, We), null === d)) {
+    if (null === d && (kf(Xe.set(-.5, .5, 0), Vd, k, Ud, e, b), wh.set(0, 1), d = a.ray.intersectTriangle(cg, dg, Xe, !1, We), null === d)) {
       return;
     }
     e = a.ray.origin.distanceTo(We);
-    e < a.near || e > a.far || c.push({distance:e, point:We.clone(), uv:C.getUV(We, cg, Xe, dg, Ri, vh, Si, new h), face:null, object:this});
+    e < a.near || e > a.far || c.push({distance:e, point:We.clone(), uv:C.getUV(We, cg, Xe, dg, Ti, wh, Ui, new h), face:null, object:this});
   }, clone:function() {
     return (new this.constructor(this.material)).copy(this);
   }, copy:function(a) {
@@ -11960,7 +11966,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 !== a.center && this.center.copy(a.center);
     return this;
   }});
-  var eg = new m, Ti = new m;
+  var eg = new m, Vi = new m;
   je.prototype = Object.assign(Object.create(t.prototype), {constructor:je, isLOD:!0, copy:function(a) {
     t.prototype.copy.call(this, a, !1);
     for (var c = a.levels, k = 0, b = c.length; k < b; k++) {
@@ -11997,8 +12003,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var c = this.levels;
     if (1 < c.length) {
       eg.setFromMatrixPosition(a.matrixWorld);
-      Ti.setFromMatrixPosition(this.matrixWorld);
-      a = eg.distanceTo(Ti) / a.zoom;
+      Vi.setFromMatrixPosition(this.matrixWorld);
+      a = eg.distanceTo(Vi) / a.zoom;
       c[0].object.visible = !0;
       for (var k = 1, b = c.length; k < b; k++) {
         if (a >= c[k].distance) {
@@ -12044,7 +12050,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, clone:function() {
     return (new this.constructor(this.geometry, this.material)).copy(this);
   }});
-  var Ui = new n, ok = new n;
+  var Wi = new n, qk = new n;
   Object.assign(lf.prototype, {calculateInverses:function() {
     this.boneInverses = [];
     for (var a = 0, c = this.bones.length; a < c; a++) {
@@ -12065,8 +12071,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
     }
   }, update:function() {
-    for (var a = this.bones, c = this.boneInverses, b = this.boneMatrices, e = this.boneTexture, d = 0, l = a.length; d < l; d++) {
-      Ui.multiplyMatrices(a[d] ? a[d].matrixWorld : ok, c[d]), Ui.toArray(b, 16 * d);
+    for (var a = this.bones, c = this.boneInverses, b = this.boneMatrices, e = this.boneTexture, d = 0, f = a.length; d < f; d++) {
+      Wi.multiplyMatrices(a[d] ? a[d].matrixWorld : qk, c[d]), Wi.toArray(b, 16 * d);
     }
     void 0 !== e && (e.needsUpdate = !0);
   }, clone:function() {
@@ -12078,9 +12084,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         return b;
       }
     }
+  }, dispose:function() {
+    this.boneTexture && (this.boneTexture.dispose(), this.boneTexture = void 0);
   }});
-  wg.prototype = Object.assign(Object.create(t.prototype), {constructor:wg, isBone:!0});
-  var Vi = new n, Wi = new n, Wd = [], Ye = new W;
+  xg.prototype = Object.assign(Object.create(t.prototype), {constructor:xg, isBone:!0});
+  var Xi = new n, Yi = new n, Wd = [], Ye = new W;
   mf.prototype = Object.assign(Object.create(W.prototype), {constructor:mf, isInstancedMesh:!0, getMatrixAt:function(a, c) {
     c.fromArray(this.instanceMatrix.array, 16 * a);
   }, raycast:function(a, c) {
@@ -12089,7 +12097,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     Ye.material = this.material;
     if (void 0 !== Ye.material) {
       for (var e = 0; e < b; e++) {
-        this.getMatrixAt(e, Vi), Wi.multiplyMatrices(k, Vi), Ye.matrixWorld = Wi, Ye.raycast(a, Wd), 0 < Wd.length && (Wd[0].instanceId = e, Wd[0].object = this, c.push(Wd[0]), Wd.length = 0);
+        this.getMatrixAt(e, Xi), Yi.multiplyMatrices(k, Xi), Ye.matrixWorld = Yi, Ye.raycast(a, Wd), 0 < Wd.length && (Wd[0].instanceId = e, Wd[0].object = this, c.push(Wd[0]), Wd.length = 0);
       }
     }
   }, setMatrixAt:function(a, c) {
@@ -12107,13 +12115,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.linejoin = a.linejoin;
     return this;
   };
-  var Xi = new m, Yi = new m, Zi = new n, fg = new u, Ze = new p;
+  var Zi = new m, $i = new m, aj = new n, fg = new v, Ze = new p;
   fb.prototype = Object.assign(Object.create(t.prototype), {constructor:fb, isLine:!0, computeLineDistances:function() {
     var a = this.geometry;
     if (a.isBufferGeometry) {
       if (null === a.index) {
         for (var c = a.attributes.position, b = [0], e = 1, d = c.count; e < d; e++) {
-          Xi.fromBufferAttribute(c, e - 1), Yi.fromBufferAttribute(c, e), b[e] = b[e - 1], b[e] += Xi.distanceTo(Yi);
+          Zi.fromBufferAttribute(c, e - 1), $i.fromBufferAttribute(c, e), b[e] = b[e - 1], b[e] += Zi.distanceTo($i);
         }
         a.setAttribute("lineDistance", new Q(b, 1));
       } else {
@@ -12134,13 +12142,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     Ze.applyMatrix4(b);
     Ze.radius += e;
     if (!1 !== a.ray.intersectsSphere(Ze)) {
-      Zi.getInverse(b);
-      fg.copy(a.ray).applyMatrix4(Zi);
+      aj.getInverse(b);
+      fg.copy(a.ray).applyMatrix4(aj);
       b = e / ((this.scale.x + this.scale.y + this.scale.z) / 3);
       b *= b;
-      var d = new m, l = new m;
+      var d = new m, f = new m;
       e = new m;
-      var f = new m, g = this && this.isLineSegments ? 2 : 1;
+      var l = new m, g = this && this.isLineSegments ? 2 : 1;
       if (k.isBufferGeometry) {
         var p = k.index, n = k.attributes.position.array;
         if (null !== p) {
@@ -12149,19 +12157,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           for (var h = p.length - 1; k < h; k += g) {
             var q = p[k + 1];
             d.fromArray(n, 3 * p[k]);
-            l.fromArray(n, 3 * q);
-            q = fg.distanceSqToSegment(d, l, f, e);
-            q > b || (f.applyMatrix4(this.matrixWorld), q = a.ray.origin.distanceTo(f), q < a.near || q > a.far || c.push({distance:q, point:e.clone().applyMatrix4(this.matrixWorld), index:k, face:null, faceIndex:null, object:this}));
+            f.fromArray(n, 3 * q);
+            q = fg.distanceSqToSegment(d, f, l, e);
+            q > b || (l.applyMatrix4(this.matrixWorld), q = a.ray.origin.distanceTo(l), q < a.near || q > a.far || c.push({distance:q, point:e.clone().applyMatrix4(this.matrixWorld), index:k, face:null, faceIndex:null, object:this}));
           }
         } else {
           for (k = 0, h = n.length / 3 - 1; k < h; k += g) {
-            d.fromArray(n, 3 * k), l.fromArray(n, 3 * k + 3), q = fg.distanceSqToSegment(d, l, f, e), q > b || (f.applyMatrix4(this.matrixWorld), q = a.ray.origin.distanceTo(f), q < a.near || q > a.far || c.push({distance:q, point:e.clone().applyMatrix4(this.matrixWorld), index:k, face:null, faceIndex:null, object:this}));
+            d.fromArray(n, 3 * k), f.fromArray(n, 3 * k + 3), q = fg.distanceSqToSegment(d, f, l, e), q > b || (l.applyMatrix4(this.matrixWorld), q = a.ray.origin.distanceTo(l), q < a.near || q > a.far || c.push({distance:q, point:e.clone().applyMatrix4(this.matrixWorld), index:k, face:null, faceIndex:null, object:this}));
           }
         }
       } else {
         if (k.isGeometry) {
-          for (d = k.vertices, l = d.length, k = 0; k < l - 1; k += g) {
-            q = fg.distanceSqToSegment(d[k], d[k + 1], f, e), q > b || (f.applyMatrix4(this.matrixWorld), q = a.ray.origin.distanceTo(f), q < a.near || q > a.far || c.push({distance:q, point:e.clone().applyMatrix4(this.matrixWorld), index:k, face:null, faceIndex:null, object:this}));
+          for (d = k.vertices, f = d.length, k = 0; k < f - 1; k += g) {
+            q = fg.distanceSqToSegment(d[k], d[k + 1], l, e), q > b || (l.applyMatrix4(this.matrixWorld), q = a.ray.origin.distanceTo(l), q < a.near || q > a.far || c.push({distance:q, point:e.clone().applyMatrix4(this.matrixWorld), index:k, face:null, faceIndex:null, object:this}));
           }
         }
       }
@@ -12204,7 +12212,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.morphTargets = a.morphTargets;
     return this;
   };
-  var $i = new n, yg = new u, $e = new p, ig = new m;
+  var bj = new n, zg = new v, $e = new p, ig = new m;
   ld.prototype = Object.assign(Object.create(t.prototype), {constructor:ld, isPoints:!0, raycast:function(a, c) {
     var k = this.geometry, b = this.matrixWorld, e = a.params.Points.threshold;
     null === k.boundingSphere && k.computeBoundingSphere();
@@ -12212,25 +12220,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     $e.applyMatrix4(b);
     $e.radius += e;
     if (!1 !== a.ray.intersectsSphere($e)) {
-      if ($i.getInverse(b), yg.copy(a.ray).applyMatrix4($i), e /= (this.scale.x + this.scale.y + this.scale.z) / 3, e *= e, k.isBufferGeometry) {
+      if (bj.getInverse(b), zg.copy(a.ray).applyMatrix4(bj), e /= (this.scale.x + this.scale.y + this.scale.z) / 3, e *= e, k.isBufferGeometry) {
         var d = k.index;
         k = k.attributes.position.array;
         if (null !== d) {
-          var l = d.array;
+          var f = d.array;
           d = 0;
-          for (var f = l.length; d < f; d++) {
-            var g = l[d];
+          for (var l = f.length; d < l; d++) {
+            var g = f[d];
             ig.fromArray(k, 3 * g);
-            xg(ig, g, e, b, a, c, this);
+            yg(ig, g, e, b, a, c, this);
           }
         } else {
-          for (d = 0, l = k.length / 3; d < l; d++) {
-            ig.fromArray(k, 3 * d), xg(ig, d, e, b, a, c, this);
+          for (d = 0, f = k.length / 3; d < f; d++) {
+            ig.fromArray(k, 3 * d), yg(ig, d, e, b, a, c, this);
           }
         }
       } else {
-        for (k = k.vertices, d = 0, l = k.length; d < l; d++) {
-          xg(k[d], d, e, b, a, c, this);
+        for (k = k.vertices, d = 0, f = k.length; d < f; d++) {
+          yg(k[d], d, e, b, a, c, this);
         }
       }
     }
@@ -12255,7 +12263,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, clone:function() {
     return (new this.constructor(this.geometry, this.material)).copy(this);
   }});
-  zg.prototype = Object.assign(Object.create(g.prototype), {constructor:zg, isVideoTexture:!0, update:function() {
+  Ag.prototype = Object.assign(Object.create(g.prototype), {constructor:Ag, isVideoTexture:!0, update:function() {
     var a = this.image;
     a.readyState >= a.HAVE_CURRENT_DATA && (this.needsUpdate = !0);
   }});
@@ -12311,13 +12319,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   ve.prototype.constructor = ve;
   td.prototype = Object.create(N.prototype);
   td.prototype.constructor = td;
-  var pk = {triangulate:function(a, c, b) {
+  var rk = {triangulate:function(a, c, b) {
     b = b || 2;
-    var k = c && c.length, e = k ? c[0] * b : a.length, d = ci(a, 0, e, b, !0), l = [];
+    var k = c && c.length, e = k ? c[0] * b : a.length, d = ei(a, 0, e, b, !0), f = [];
     if (!d || d.next === d.prev) {
-      return l;
+      return f;
     }
-    var f;
+    var l;
     if (k) {
       var g = b;
       k = [];
@@ -12326,31 +12334,31 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       for (p = c.length; m < p; m++) {
         var n = c[m] * g;
         var h = m < p - 1 ? c[m + 1] * g : a.length;
-        n = ci(a, n, h, g, !1);
+        n = ei(a, n, h, g, !1);
         n === n.next && (n.steiner = !0);
-        k.push(bk(n));
+        k.push(dk(n));
       }
-      k.sort(Zj);
+      k.sort(bk);
       for (m = 0; m < k.length; m++) {
         c = k[m];
         g = d;
-        if (g = ak(c, g)) {
-          c = fi(g, c), xe(c, c.next);
+        if (g = ck(c, g)) {
+          c = hi(g, c), xe(c, c.next);
         }
         d = xe(d, d.next);
       }
     }
     if (a.length > 80 * b) {
-      var q = f = a[0];
+      var q = l = a[0];
       var r = k = a[1];
       for (g = b; g < e; g += b) {
-        m = a[g], c = a[g + 1], m < q && (q = m), c < r && (r = c), m > f && (f = m), c > k && (k = c);
+        m = a[g], c = a[g + 1], m < q && (q = m), c < r && (r = c), m > l && (l = m), c > k && (k = c);
       }
-      f = Math.max(f - q, k - r);
-      f = 0 !== f ? 1 / f : 0;
+      l = Math.max(l - q, k - r);
+      l = 0 !== l ? 1 / l : 0;
     }
-    ye(d, l, b, q, r, f);
-    return l;
+    ye(d, f, b, q, r, l);
+    return f;
   }}, Ub = {area:function(a) {
     for (var c = a.length, k = 0, b = c - 1, e = 0; e < c; b = e++) {
       k += a[b].x * a[e].y - a[e].x * a[b].y;
@@ -12360,14 +12368,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return 0 > Ub.area(a);
   }, triangulateShape:function(a, c) {
     var k = [], b = [], e = [];
-    gi(a);
-    hi(k, a);
+    ii(a);
+    ji(k, a);
     var d = a.length;
-    c.forEach(gi);
+    c.forEach(ii);
     for (a = 0; a < c.length; a++) {
-      b.push(d), d += c[a].length, hi(k, c[a]);
+      b.push(d), d += c[a].length, ji(k, c[a]);
     }
-    c = pk.triangulate(k, b);
+    c = rk.triangulate(k, b);
     for (a = 0; a < c.length; a += 3) {
       e.push(c.slice(a, a + 3));
     }
@@ -12377,31 +12385,31 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Ic.prototype.constructor = Ic;
   Ic.prototype.toJSON = function() {
     var a = X.prototype.toJSON.call(this);
-    return ii(this.parameters.shapes, this.parameters.options, a);
+    return ki(this.parameters.shapes, this.parameters.options, a);
   };
   Hb.prototype = Object.create(N.prototype);
   Hb.prototype.constructor = Hb;
   Hb.prototype.toJSON = function() {
     var a = N.prototype.toJSON.call(this);
-    return ii(this.parameters.shapes, this.parameters.options, a);
+    return ki(this.parameters.shapes, this.parameters.options, a);
   };
-  var ck = {generateTopUV:function(a, c, b, e, d) {
+  var ek = {generateTopUV:function(a, c, b, e, d) {
     a = c[3 * e];
     e = c[3 * e + 1];
     var k = c[3 * d];
     d = c[3 * d + 1];
     return [new h(c[3 * b], c[3 * b + 1]), new h(a, e), new h(k, d)];
-  }, generateSideWallUV:function(a, c, b, e, d, l) {
+  }, generateSideWallUV:function(a, c, b, e, d, f) {
     a = c[3 * b];
     var k = c[3 * b + 1];
     b = c[3 * b + 2];
-    var f = c[3 * e], g = c[3 * e + 1];
+    var l = c[3 * e], g = c[3 * e + 1];
     e = c[3 * e + 2];
     var p = c[3 * d], m = c[3 * d + 1];
     d = c[3 * d + 2];
-    var n = c[3 * l], q = c[3 * l + 1];
-    c = c[3 * l + 2];
-    return .01 > Math.abs(k - g) ? [new h(a, 1 - b), new h(f, 1 - e), new h(p, 1 - d), new h(n, 1 - c)] : [new h(k, 1 - b), new h(g, 1 - e), new h(m, 1 - d), new h(q, 1 - c)];
+    var n = c[3 * f], q = c[3 * f + 1];
+    c = c[3 * f + 2];
+    return .01 > Math.abs(k - g) ? [new h(a, 1 - b), new h(l, 1 - e), new h(p, 1 - d), new h(n, 1 - c)] : [new h(k, 1 - b), new h(g, 1 - e), new h(m, 1 - d), new h(q, 1 - c)];
   }};
   Ae.prototype = Object.create(X.prototype);
   Ae.prototype.constructor = Ae;
@@ -12423,13 +12431,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Kc.prototype.constructor = Kc;
   Kc.prototype.toJSON = function() {
     var a = X.prototype.toJSON.call(this);
-    return ji(this.parameters.shapes, a);
+    return li(this.parameters.shapes, a);
   };
   Lc.prototype = Object.create(N.prototype);
   Lc.prototype.constructor = Lc;
   Lc.prototype.toJSON = function() {
     var a = N.prototype.toJSON.call(this);
-    return ji(this.parameters.shapes, a);
+    return li(this.parameters.shapes, a);
   };
   yd.prototype = Object.create(N.prototype);
   yd.prototype.constructor = yd;
@@ -12446,7 +12454,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   zd.prototype = Object.create(N.prototype);
   zd.prototype.constructor = zd;
   var ab = Object.freeze({__proto__:null, WireframeGeometry:nd, ParametricGeometry:ne, ParametricBufferGeometry:od, TetrahedronGeometry:pe, TetrahedronBufferGeometry:pd, OctahedronGeometry:qe, OctahedronBufferGeometry:Fc, IcosahedronGeometry:re, IcosahedronBufferGeometry:qd, DodecahedronGeometry:se, DodecahedronBufferGeometry:rd, PolyhedronGeometry:oe, PolyhedronBufferGeometry:bb, TubeGeometry:te, TubeBufferGeometry:Gc, TorusKnotGeometry:ue, TorusKnotBufferGeometry:sd, TorusGeometry:ve, TorusBufferGeometry:td, 
-  TextGeometry:Ae, TextBufferGeometry:vd, SphereGeometry:Be, SphereBufferGeometry:Jc, RingGeometry:Ce, RingBufferGeometry:wd, PlaneGeometry:xa, PlaneBufferGeometry:za, LatheGeometry:De, LatheBufferGeometry:xd, ShapeGeometry:Kc, ShapeBufferGeometry:Lc, ExtrudeGeometry:Ic, ExtrudeBufferGeometry:Hb, EdgesGeometry:yd, ConeGeometry:Ee, ConeBufferGeometry:Fe, CylinderGeometry:Mc, CylinderBufferGeometry:Vb, CircleGeometry:Ge, CircleBufferGeometry:zd, BoxGeometry:uh, BoxBufferGeometry:Zd});
+  TextGeometry:Ae, TextBufferGeometry:vd, SphereGeometry:Be, SphereBufferGeometry:Jc, RingGeometry:Ce, RingBufferGeometry:wd, PlaneGeometry:xa, PlaneBufferGeometry:za, LatheGeometry:De, LatheBufferGeometry:xd, ShapeGeometry:Kc, ShapeBufferGeometry:Lc, ExtrudeGeometry:Ic, ExtrudeBufferGeometry:Hb, EdgesGeometry:yd, ConeGeometry:Ee, ConeBufferGeometry:Fe, CylinderGeometry:Mc, CylinderBufferGeometry:Vb, CircleGeometry:Ge, CircleBufferGeometry:zd, BoxGeometry:vh, BoxBufferGeometry:Zd});
   Nc.prototype = Object.create(H.prototype);
   Nc.prototype.constructor = Nc;
   Nc.prototype.isShadowMaterial = !0;
@@ -12505,12 +12513,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Oc.prototype.copy = function(a) {
     Ib.prototype.copy.call(this, a);
     this.defines = {STANDARD:"", PHYSICAL:""};
-    this.reflectivity = a.reflectivity;
     this.clearcoat = a.clearcoat;
+    this.clearcoatMap = a.clearcoatMap;
     this.clearcoatRoughness = a.clearcoatRoughness;
-    this.sheen = a.sheen ? (this.sheen || new A).copy(a.sheen) : null;
+    this.clearcoatRoughnessMap = a.clearcoatRoughnessMap;
     this.clearcoatNormalMap = a.clearcoatNormalMap;
     this.clearcoatNormalScale.copy(a.clearcoatNormalScale);
+    this.reflectivity = a.reflectivity;
+    this.sheen = a.sheen ? (this.sheen || new A).copy(a.sheen) : null;
     this.transparency = a.transparency;
     return this;
   };
@@ -12671,7 +12681,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.gapSize = a.gapSize;
     return this;
   };
-  var qk = Object.freeze({__proto__:null, ShadowMaterial:Nc, SpriteMaterial:lc, RawShaderMaterial:Wb, ShaderMaterial:ja, PointsMaterial:tb, MeshPhysicalMaterial:Oc, MeshStandardMaterial:Ib, MeshPhongMaterial:mc, MeshToonMaterial:Pc, MeshNormalMaterial:Qc, MeshLambertMaterial:Rc, MeshDepthMaterial:jc, MeshDistanceMaterial:kc, MeshBasicMaterial:J, MeshMatcapMaterial:Sc, LineDashedMaterial:Tc, LineBasicMaterial:Ca, Material:H}), Ea = {arraySlice:function(a, c, b) {
+  var sk = Object.freeze({__proto__:null, ShadowMaterial:Nc, SpriteMaterial:lc, RawShaderMaterial:Wb, ShaderMaterial:ja, PointsMaterial:tb, MeshPhysicalMaterial:Oc, MeshStandardMaterial:Ib, MeshPhongMaterial:mc, MeshToonMaterial:Pc, MeshNormalMaterial:Qc, MeshLambertMaterial:Rc, MeshDepthMaterial:jc, MeshDistanceMaterial:kc, MeshBasicMaterial:J, MeshMatcapMaterial:Sc, LineDashedMaterial:Tc, LineBasicMaterial:Ca, Material:H}), Ea = {arraySlice:function(a, c, b) {
     return Ea.isTypedArray(a) ? new a.constructor(a.subarray(c, void 0 !== b ? b : a.length)) : a.slice(c, b);
   }, convertArray:function(a, c, b) {
     return !a || !b && a.constructor === c ? a : "number" === typeof c.BYTES_PER_ELEMENT ? new c(a) : Array.prototype.slice.call(a);
@@ -12686,9 +12696,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     });
     return k;
   }, sortedArray:function(a, c, b) {
-    for (var k = a.length, e = new a.constructor(k), d = 0, l = 0; l !== k; ++d) {
-      for (var f = b[d] * c, g = 0; g !== c; ++g) {
-        e[l++] = a[f + g];
+    for (var k = a.length, e = new a.constructor(k), d = 0, f = 0; f !== k; ++d) {
+      for (var l = b[d] * c, g = 0; g !== c; ++g) {
+        e[f++] = a[l + g];
       }
     }
     return e;
@@ -12697,20 +12707,20 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       d = a[k++];
     }
     if (void 0 !== d) {
-      var l = d[e];
-      if (void 0 !== l) {
-        if (Array.isArray(l)) {
+      var f = d[e];
+      if (void 0 !== f) {
+        if (Array.isArray(f)) {
           do {
-            l = d[e], void 0 !== l && (c.push(d.time), b.push.apply(b, l)), d = a[k++];
+            f = d[e], void 0 !== f && (c.push(d.time), b.push.apply(b, f)), d = a[k++];
           } while (void 0 !== d);
         } else {
-          if (void 0 !== l.toArray) {
+          if (void 0 !== f.toArray) {
             do {
-              l = d[e], void 0 !== l && (c.push(d.time), l.toArray(b, b.length)), d = a[k++];
+              f = d[e], void 0 !== f && (c.push(d.time), f.toArray(b, b.length)), d = a[k++];
             } while (void 0 !== d);
           } else {
             do {
-              l = d[e], void 0 !== l && (c.push(d.time), b.push(l)), d = a[k++];
+              f = d[e], void 0 !== f && (c.push(d.time), b.push(f)), d = a[k++];
             } while (void 0 !== d);
           }
         }
@@ -12722,15 +12732,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a.name = c;
     var k = [];
     for (c = 0; c < a.tracks.length; ++c) {
-      for (var l = a.tracks[c], f = l.getValueSize(), g = [], p = [], m = 0; m < l.times.length; ++m) {
-        var n = l.times[m] * d;
+      for (var f = a.tracks[c], l = f.getValueSize(), g = [], p = [], m = 0; m < f.times.length; ++m) {
+        var n = f.times[m] * d;
         if (!(n < b || n >= e)) {
-          for (g.push(l.times[m]), n = 0; n < f; ++n) {
-            p.push(l.values[m * f + n]);
+          for (g.push(f.times[m]), n = 0; n < l; ++n) {
+            p.push(f.values[m * l + n]);
           }
         }
       }
-      0 !== g.length && (l.times = Ea.convertArray(g, l.times.constructor), l.values = Ea.convertArray(p, l.values.constructor), k.push(l));
+      0 !== g.length && (f.times = Ea.convertArray(g, f.times.constructor), f.values = Ea.convertArray(p, f.values.constructor), k.push(f));
     }
     a.tracks = k;
     b = Infinity;
@@ -12824,64 +12834,64 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }});
   Object.assign(gb.prototype, {beforeStart_:gb.prototype.copySampleValue_, afterEnd_:gb.prototype.copySampleValue_});
   of.prototype = Object.assign(Object.create(gb.prototype), {constructor:of, DefaultSettings_:{endingStart:2400, endingEnd:2400}, intervalChanged_:function(a, c, b) {
-    var k = this.parameterPositions, e = a - 2, d = a + 1, l = k[e], f = k[d];
-    if (void 0 === l) {
+    var k = this.parameterPositions, e = a - 2, d = a + 1, f = k[e], l = k[d];
+    if (void 0 === f) {
       switch(this.getSettings_().endingStart) {
         case 2401:
           e = a;
-          l = 2 * c - b;
+          f = 2 * c - b;
           break;
         case 2402:
           e = k.length - 2;
-          l = c + k[e] - k[e + 1];
+          f = c + k[e] - k[e + 1];
           break;
         default:
-          e = a, l = b;
+          e = a, f = b;
       }
     }
-    if (void 0 === f) {
+    if (void 0 === l) {
       switch(this.getSettings_().endingEnd) {
         case 2401:
           d = a;
-          f = 2 * b - c;
+          l = 2 * b - c;
           break;
         case 2402:
           d = 1;
-          f = b + k[1] - k[0];
+          l = b + k[1] - k[0];
           break;
         default:
-          d = a - 1, f = c;
+          d = a - 1, l = c;
       }
     }
     a = .5 * (b - c);
     k = this.valueSize;
-    this._weightPrev = a / (c - l);
-    this._weightNext = a / (f - b);
+    this._weightPrev = a / (c - f);
+    this._weightNext = a / (l - b);
     this._offsetPrev = e * k;
     this._offsetNext = d * k;
   }, interpolate_:function(a, c, b, e) {
-    var k = this.resultBuffer, d = this.sampleValues, l = this.valueSize;
-    a *= l;
-    var f = a - l, g = this._offsetPrev, p = this._offsetNext, m = this._weightPrev, n = this._weightNext, h = (b - c) / (e - c);
+    var k = this.resultBuffer, d = this.sampleValues, f = this.valueSize;
+    a *= f;
+    var l = a - f, g = this._offsetPrev, p = this._offsetNext, m = this._weightPrev, n = this._weightNext, h = (b - c) / (e - c);
     b = h * h;
     e = b * h;
     c = -m * e + 2 * m * b - m * h;
     m = (1 + m) * e + (-1.5 - 2 * m) * b + (-.5 + m) * h + 1;
     h = (-1 - n) * e + (1.5 + n) * b + .5 * h;
     n = n * e - n * b;
-    for (b = 0; b !== l; ++b) {
-      k[b] = c * d[g + b] + m * d[f + b] + h * d[a + b] + n * d[p + b];
+    for (b = 0; b !== f; ++b) {
+      k[b] = c * d[g + b] + m * d[l + b] + h * d[a + b] + n * d[p + b];
     }
     return k;
   }});
   He.prototype = Object.assign(Object.create(gb.prototype), {constructor:He, interpolate_:function(a, c, b, e) {
-    var k = this.resultBuffer, d = this.sampleValues, l = this.valueSize;
-    a *= l;
-    var f = a - l;
+    var k = this.resultBuffer, d = this.sampleValues, f = this.valueSize;
+    a *= f;
+    var l = a - f;
     c = (b - c) / (e - c);
     b = 1 - c;
-    for (e = 0; e !== l; ++e) {
-      k[e] = d[f + e] * b + d[a + e] * c;
+    for (e = 0; e !== f; ++e) {
+      k[e] = d[l + e] * b + d[a + e] * c;
     }
     return k;
   }});
@@ -12975,24 +12985,24 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     c = this.values;
     var e = b.length;
     0 === e && (console.error("THREE.KeyframeTrack: Track is empty.", this), a = !1);
-    for (var d = null, l = 0; l !== e; l++) {
-      var f = b[l];
-      if ("number" === typeof f && isNaN(f)) {
-        console.error("THREE.KeyframeTrack: Time is not a valid number.", this, l, f);
+    for (var d = null, f = 0; f !== e; f++) {
+      var l = b[f];
+      if ("number" === typeof l && isNaN(l)) {
+        console.error("THREE.KeyframeTrack: Time is not a valid number.", this, f, l);
         a = !1;
         break;
       }
-      if (null !== d && d > f) {
-        console.error("THREE.KeyframeTrack: Out of order keys.", this, l, f, d);
+      if (null !== d && d > l) {
+        console.error("THREE.KeyframeTrack: Out of order keys.", this, f, l, d);
         a = !1;
         break;
       }
-      d = f;
+      d = l;
     }
     if (void 0 !== c && Ea.isTypedArray(c)) {
-      for (l = 0, b = c.length; l !== b; ++l) {
-        if (e = c[l], isNaN(e)) {
-          console.error("THREE.KeyframeTrack: Value is not a valid number.", this, l, e);
+      for (f = 0, b = c.length; f !== b; ++f) {
+        if (e = c[f], isNaN(e)) {
+          console.error("THREE.KeyframeTrack: Value is not a valid number.", this, f, e);
           a = !1;
           break;
         }
@@ -13000,13 +13010,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return a;
   }, optimize:function() {
-    for (var a = Ea.arraySlice(this.times), c = Ea.arraySlice(this.values), b = this.getValueSize(), e = 2302 === this.getInterpolation(), d = 1, l = a.length - 1, f = 1; f < l; ++f) {
-      var g = !1, p = a[f];
-      if (p !== a[f + 1] && (1 !== f || p !== p[0])) {
+    for (var a = Ea.arraySlice(this.times), c = Ea.arraySlice(this.values), b = this.getValueSize(), e = 2302 === this.getInterpolation(), d = 1, f = a.length - 1, l = 1; l < f; ++l) {
+      var g = !1, p = a[l];
+      if (p !== a[l + 1] && (1 !== l || p !== p[0])) {
         if (e) {
           g = !0;
         } else {
-          var m = f * b, n = m - b, h = m + b;
+          var m = l * b, n = m - b, h = m + b;
           for (p = 0; p !== b; ++p) {
             var q = c[m + p];
             if (q !== c[n + p] || q !== c[h + p]) {
@@ -13017,17 +13027,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         }
       }
       if (g) {
-        if (f !== d) {
-          for (a[d] = a[f], g = f * b, m = d * b, p = 0; p !== b; ++p) {
+        if (l !== d) {
+          for (a[d] = a[l], g = l * b, m = d * b, p = 0; p !== b; ++p) {
             c[m + p] = c[g + p];
           }
         }
         ++d;
       }
     }
-    if (0 < l) {
-      a[d] = a[l];
-      g = l * b;
+    if (0 < f) {
+      a[d] = a[f];
+      g = f * b;
       m = d * b;
       for (p = 0; p !== b; ++p) {
         c[m + p] = c[g + p];
@@ -13046,11 +13056,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   rf.prototype = Object.assign(Object.create(Ta.prototype), {constructor:rf, ValueTypeName:"color"});
   Ad.prototype = Object.assign(Object.create(Ta.prototype), {constructor:Ad, ValueTypeName:"number"});
   sf.prototype = Object.assign(Object.create(gb.prototype), {constructor:sf, interpolate_:function(a, c, b, e) {
-    var k = this.resultBuffer, d = this.sampleValues, l = this.valueSize;
-    a *= l;
+    var k = this.resultBuffer, d = this.sampleValues, f = this.valueSize;
+    a *= f;
     c = (b - c) / (e - c);
-    for (b = a + l; a !== b; a += 4) {
-      r.slerpFlat(k, 0, d, a - l, d, a, c);
+    for (b = a + f; a !== b; a += 4) {
+      r.slerpFlat(k, 0, d, a - f, d, a, c);
     }
     return k;
   }});
@@ -13061,7 +13071,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Bd.prototype = Object.assign(Object.create(Ta.prototype), {constructor:Bd, ValueTypeName:"vector"});
   Object.assign(mb, {parse:function(a) {
     for (var c = [], k = a.tracks, b = 1 / (a.fps || 1), e = 0, d = k.length; e !== d; ++e) {
-      c.push(ek(k[e]).scale(b));
+      c.push(gk(k[e]).scale(b));
     }
     return new mb(a.name, a.duration, c);
   }, toJSON:function(a) {
@@ -13072,15 +13082,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return a;
   }, CreateFromMorphTargetSequence:function(a, c, b, e) {
-    for (var k = c.length, d = [], l = 0; l < k; l++) {
-      var f = [], g = [];
-      f.push((l + k - 1) % k, l, (l + 1) % k);
+    for (var k = c.length, d = [], f = 0; f < k; f++) {
+      var l = [], g = [];
+      l.push((f + k - 1) % k, f, (f + 1) % k);
       g.push(0, 1, 0);
-      var p = Ea.getKeyframeOrder(f);
-      f = Ea.sortedArray(f, 1, p);
+      var p = Ea.getKeyframeOrder(l);
+      l = Ea.sortedArray(l, 1, p);
       g = Ea.sortedArray(g, 1, p);
-      e || 0 !== f[0] || (f.push(k), g.push(g[0]));
-      d.push((new Ad(".morphTargetInfluences[" + c[l].name + "]", f, g)).scale(1 / b));
+      e || 0 !== l[0] || (l.push(k), g.push(g[0]));
+      d.push((new Ad(".morphTargetInfluences[" + c[f].name + "]", l, g)).scale(1 / b));
     }
     return new mb(a, -1, d);
   }, findByName:function(a, c) {
@@ -13093,12 +13103,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return null;
   }, CreateClipsFromMorphTargetSequences:function(a, c, b) {
-    for (var k = {}, e = /^([\w-]*?)([\d]+)$/, d = 0, l = a.length; d < l; d++) {
-      var f = a[d], g = f.name.match(e);
+    for (var k = {}, e = /^([\w-]*?)([\d]+)$/, d = 0, f = a.length; d < f; d++) {
+      var l = a[d], g = l.name.match(e);
       if (g && 1 < g.length) {
         var p = g[1];
         (g = k[p]) || (k[p] = g = []);
-        g.push(f);
+        g.push(l);
       }
     }
     a = [];
@@ -13112,14 +13122,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     var k = function(a, c, k, b, e) {
       if (0 !== k.length) {
-        var d = [], l = [];
-        Ea.flattenJSON(k, d, l, b);
-        0 !== d.length && e.push(new a(c, d, l));
+        var d = [], f = [];
+        Ea.flattenJSON(k, d, f, b);
+        0 !== d.length && e.push(new a(c, d, f));
       }
-    }, b = [], e = a.name || "default", d = a.length || -1, l = a.fps || 30;
+    }, b = [], e = a.name || "default", d = a.length || -1, f = a.fps || 30;
     a = a.hierarchy || [];
-    for (var f = 0; f < a.length; f++) {
-      var g = a[f].keys;
+    for (var l = 0; l < a.length; l++) {
+      var g = a[l].keys;
       if (g && 0 !== g.length) {
         if (g[0].morphTargets) {
           d = {};
@@ -13139,9 +13149,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             }
             b.push(new Ad(".morphTargetInfluence[" + n + "]", h, q));
           }
-          d = d.length * (l || 1);
+          d = d.length * (f || 1);
         } else {
-          p = ".bones[" + c[f].name + "]", k(Bd, p + ".position", g, "pos", b), k(Ie, p + ".quaternion", g, "rot", b), k(Bd, p + ".scale", g, "scl", b);
+          p = ".bones[" + c[l].name + "]", k(Bd, p + ".position", g, "pos", b), k(Ie, p + ".quaternion", g, "rot", b), k(Bd, p + ".scale", g, "scl", b);
         }
       }
     }
@@ -13185,7 +13195,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     delete this.files[a];
   }, clear:function() {
     this.files = {};
-  }}, ki = new Cg;
+  }}, mi = new Dg;
   Object.assign(qa.prototype, {load:function() {
   }, parse:function() {
   }, setCrossOrigin:function(a) {
@@ -13213,40 +13223,40 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (void 0 !== Bb[a]) {
       Bb[a].push({onLoad:c, onProgress:b, onError:e});
     } else {
-      var l = a.match(/^data:(.*?)(;base64)?,(.*)$/);
-      if (l) {
-        b = l[1];
-        var f = !!l[2];
-        l = l[3];
-        l = decodeURIComponent(l);
-        f && (l = atob(l));
+      var f = a.match(/^data:(.*?)(;base64)?,(.*)$/);
+      if (f) {
+        b = f[1];
+        var l = !!f[2];
+        f = f[3];
+        f = decodeURIComponent(f);
+        l && (f = atob(f));
         try {
           var g = (this.responseType || "").toLowerCase();
           switch(g) {
             case "arraybuffer":
             case "blob":
-              var p = new Uint8Array(l.length);
-              for (f = 0; f < l.length; f++) {
-                p[f] = l.charCodeAt(f);
+              var p = new Uint8Array(f.length);
+              for (l = 0; l < f.length; l++) {
+                p[l] = f.charCodeAt(l);
               }
               var m = "blob" === g ? new Blob([p.buffer], {type:b}) : p.buffer;
               break;
             case "document":
-              m = (new DOMParser).parseFromString(l, b);
+              m = (new DOMParser).parseFromString(f, b);
               break;
             case "json":
-              m = JSON.parse(l);
+              m = JSON.parse(f);
               break;
             default:
-              m = l;
+              m = f;
           }
           setTimeout(function() {
             c && c(m);
             k.manager.itemEnd(a);
           }, 0);
-        } catch (tj) {
+        } catch (vj) {
           setTimeout(function() {
-            e && e(tj);
+            e && e(vj);
             k.manager.itemError(a);
             k.manager.itemEnd(a);
           }, 0);
@@ -13262,17 +13272,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           if (200 === this.status || 0 === this.status) {
             0 === this.status && console.warn("THREE.FileLoader: HTTP Status 0 received.");
             Yc.add(a, b);
-            for (var d = 0, l = e.length; d < l; d++) {
-              var f = e[d];
-              if (f.onLoad) {
-                f.onLoad(b);
+            for (var d = 0, f = e.length; d < f; d++) {
+              var l = e[d];
+              if (l.onLoad) {
+                l.onLoad(b);
               }
             }
           } else {
             d = 0;
-            for (l = e.length; d < l; d++) {
-              if (f = e[d], f.onError) {
-                f.onError(c);
+            for (f = e.length; d < f; d++) {
+              if (l = e[d], l.onError) {
+                l.onError(c);
               }
             }
             k.manager.itemError(a);
@@ -13291,9 +13301,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           var b = Bb[a];
           delete Bb[a];
           for (var e = 0, d = b.length; e < d; e++) {
-            var l = b[e];
-            if (l.onError) {
-              l.onError(c);
+            var f = b[e];
+            if (f.onError) {
+              f.onError(c);
             }
           }
           k.manager.itemError(a);
@@ -13303,9 +13313,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           var b = Bb[a];
           delete Bb[a];
           for (var e = 0, d = b.length; e < d; e++) {
-            var l = b[e];
-            if (l.onError) {
-              l.onError(c);
+            var f = b[e];
+            if (f.onError) {
+              f.onError(c);
             }
           }
           k.manager.itemError(a);
@@ -13314,8 +13324,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         void 0 !== this.responseType && (n.responseType = this.responseType);
         void 0 !== this.withCredentials && (n.withCredentials = this.withCredentials);
         n.overrideMimeType && n.overrideMimeType(void 0 !== this.mimeType ? this.mimeType : "text/plain");
-        for (f in this.requestHeader) {
-          n.setRequestHeader(f, this.requestHeader[f]);
+        for (l in this.requestHeader) {
+          n.setRequestHeader(l, this.requestHeader[l]);
         }
         n.send(null);
       }
@@ -13335,7 +13345,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.requestHeader = a;
     return this;
   }});
-  Dg.prototype = Object.assign(Object.create(qa.prototype), {constructor:Dg, load:function(a, c, b, e) {
+  Eg.prototype = Object.assign(Object.create(qa.prototype), {constructor:Eg, load:function(a, c, b, e) {
     var k = this, d = new nb(k.manager);
     d.setPath(k.path);
     d.load(a, function(a) {
@@ -13348,17 +13358,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return c;
   }});
-  Eg.prototype = Object.assign(Object.create(qa.prototype), {constructor:Eg, load:function(a, c, b, e) {
+  Fg.prototype = Object.assign(Object.create(qa.prototype), {constructor:Fg, load:function(a, c, b, e) {
     function k(k) {
       g.load(a[k], function(a) {
         a = d.parse(a, !0);
-        l[k] = {width:a.width, height:a.height, format:a.format, mipmaps:a.mipmaps};
+        f[k] = {width:a.width, height:a.height, format:a.format, mipmaps:a.mipmaps};
         p += 1;
-        6 === p && (1 === a.mipmapCount && (f.minFilter = 1006), f.format = a.format, f.needsUpdate = !0, c && c(f));
+        6 === p && (1 === a.mipmapCount && (l.minFilter = 1006), l.format = a.format, l.needsUpdate = !0, c && c(l));
       }, b, e);
     }
-    var d = this, l = [], f = new md;
-    f.image = l;
+    var d = this, f = [], l = new md;
+    l.image = f;
     var g = new nb(this.manager);
     g.setPath(this.path);
     g.setResponseType("arraybuffer");
@@ -13371,27 +13381,27 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         a = d.parse(a, !0);
         if (a.isCubemap) {
           for (var k = a.mipmaps.length / a.mipmapCount, b = 0; b < k; b++) {
-            l[b] = {mipmaps:[]};
+            f[b] = {mipmaps:[]};
             for (var e = 0; e < a.mipmapCount; e++) {
-              l[b].mipmaps.push(a.mipmaps[b * a.mipmapCount + e]), l[b].format = a.format, l[b].width = a.width, l[b].height = a.height;
+              f[b].mipmaps.push(a.mipmaps[b * a.mipmapCount + e]), f[b].format = a.format, f[b].width = a.width, f[b].height = a.height;
             }
           }
         } else {
-          f.image.width = a.width, f.image.height = a.height, f.mipmaps = a.mipmaps;
+          l.image.width = a.width, l.image.height = a.height, l.mipmaps = a.mipmaps;
         }
-        1 === a.mipmapCount && (f.minFilter = 1006);
-        f.format = a.format;
-        f.needsUpdate = !0;
-        c && c(f);
+        1 === a.mipmapCount && (l.minFilter = 1006);
+        l.format = a.format;
+        l.needsUpdate = !0;
+        c && c(l);
       }, b, e);
     }
-    return f;
+    return l;
   }});
   uf.prototype = Object.assign(Object.create(qa.prototype), {constructor:uf, load:function(a, c, b, e) {
-    var k = this, d = new Ja, l = new nb(this.manager);
-    l.setResponseType("arraybuffer");
-    l.setPath(this.path);
-    l.load(a, function(a) {
+    var k = this, d = new Ja, f = new nb(this.manager);
+    f.setResponseType("arraybuffer");
+    f.setPath(this.path);
+    f.load(a, function(a) {
       if (a = k.parse(a)) {
         void 0 !== a.image ? d.image = a.image : void 0 !== a.data && (d.image.width = a.width, d.image.height = a.height, d.image.data = a.data), d.wrapS = void 0 !== a.wrapS ? a.wrapS : 1001, d.wrapT = void 0 !== a.wrapT ? a.wrapT : 1001, d.magFilter = void 0 !== a.magFilter ? a.magFilter : 1006, d.minFilter = void 0 !== a.minFilter ? a.minFilter : 1006, d.anisotropy = void 0 !== a.anisotropy ? a.anisotropy : 1, void 0 !== a.format && (d.format = a.format), void 0 !== a.type && (d.type = a.type), 
         void 0 !== a.mipmaps && (d.mipmaps = a.mipmaps, d.minFilter = 1008), 1 === a.mipmapCount && (d.minFilter = 1006), d.needsUpdate = !0, c && c(d, a);
@@ -13405,44 +13415,44 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       g.removeEventListener("error", d, !1);
       Yc.add(a, this);
       c && c(this);
-      l.manager.itemEnd(a);
+      f.manager.itemEnd(a);
     }
     function d(c) {
       g.removeEventListener("load", k, !1);
       g.removeEventListener("error", d, !1);
       e && e(c);
-      l.manager.itemError(a);
-      l.manager.itemEnd(a);
+      f.manager.itemError(a);
+      f.manager.itemEnd(a);
     }
     void 0 !== this.path && (a = this.path + a);
     a = this.manager.resolveURL(a);
-    var l = this, f = Yc.get(a);
-    if (void 0 !== f) {
-      return l.manager.itemStart(a), setTimeout(function() {
-        c && c(f);
-        l.manager.itemEnd(a);
-      }, 0), f;
+    var f = this, l = Yc.get(a);
+    if (void 0 !== l) {
+      return f.manager.itemStart(a), setTimeout(function() {
+        c && c(l);
+        f.manager.itemEnd(a);
+      }, 0), l;
     }
     var g = document.createElementNS("http://www.w3.org/1999/xhtml", "img");
     g.addEventListener("load", k, !1);
     g.addEventListener("error", d, !1);
     "data:" !== a.substr(0, 5) && void 0 !== this.crossOrigin && (g.crossOrigin = this.crossOrigin);
-    l.manager.itemStart(a);
+    f.manager.itemStart(a);
     g.src = a;
     return g;
   }});
   vf.prototype = Object.assign(Object.create(qa.prototype), {constructor:vf, load:function(a, c, b, e) {
     function k(k) {
-      l.load(a[k], function(a) {
+      f.load(a[k], function(a) {
         d.images[k] = a;
-        f++;
-        6 === f && (d.needsUpdate = !0, c && c(d));
+        l++;
+        6 === l && (d.needsUpdate = !0, c && c(d));
       }, void 0, e);
     }
-    var d = new Wa, l = new Cd(this.manager);
-    l.setCrossOrigin(this.crossOrigin);
-    l.setPath(this.path);
-    var f = 0;
+    var d = new Wa, f = new Cd(this.manager);
+    f.setCrossOrigin(this.crossOrigin);
+    f.setPath(this.path);
+    var l = 0;
     for (b = 0; b < a.length; ++b) {
       k(b);
     }
@@ -13501,13 +13511,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.needsUpdate = !0;
     this.getLengths();
   }, getUtoTmapping:function(a, c) {
-    var k = this.getLengths(), b = k.length;
-    c = c ? c : a * k[b - 1];
-    for (var e = 0, d = b - 1, l; e <= d;) {
-      if (a = Math.floor(e + (d - e) / 2), l = k[a] - c, 0 > l) {
+    var b = this.getLengths(), k = b.length;
+    c = c ? c : a * b[k - 1];
+    for (var e = 0, d = k - 1, f; e <= d;) {
+      if (a = Math.floor(e + (d - e) / 2), f = b[a] - c, 0 > f) {
         e = a + 1;
       } else {
-        if (0 < l) {
+        if (0 < f) {
           d = a - 1;
         } else {
           d = a;
@@ -13516,11 +13526,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
     }
     a = d;
-    if (k[a] === c) {
-      return a / (b - 1);
+    if (b[a] === c) {
+      return a / (k - 1);
     }
-    e = k[a];
-    return (a + (c - e) / (k[a + 1] - e)) / (b - 1);
+    e = b[a];
+    return (a + (c - e) / (b[a + 1] - e)) / (k - 1);
   }, getTangent:function(a) {
     var c = a - 1E-4;
     a += 1E-4;
@@ -13532,7 +13542,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = this.getUtoTmapping(a);
     return this.getTangent(a);
   }, computeFrenetFrames:function(a, c) {
-    var b = new m, k = [], e = [], d = [], l = new m, f = new n, g;
+    var b = new m, k = [], e = [], d = [], f = new m, l = new n, g;
     for (g = 0; g <= a; g++) {
       var p = g / a;
       k[g] = this.getTangentAt(p);
@@ -13546,15 +13556,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     p <= g && (g = p, b.set(1, 0, 0));
     h <= g && (g = h, b.set(0, 1, 0));
     q <= g && b.set(0, 0, 1);
-    l.crossVectors(k[0], b).normalize();
-    e[0].crossVectors(k[0], l);
+    f.crossVectors(k[0], b).normalize();
+    e[0].crossVectors(k[0], f);
     d[0].crossVectors(k[0], e[0]);
     for (g = 1; g <= a; g++) {
-      e[g] = e[g - 1].clone(), d[g] = d[g - 1].clone(), l.crossVectors(k[g - 1], k[g]), l.length() > Number.EPSILON && (l.normalize(), b = Math.acos(ma.clamp(k[g - 1].dot(k[g]), -1, 1)), e[g].applyMatrix4(f.makeRotationAxis(l, b))), d[g].crossVectors(k[g], e[g]);
+      e[g] = e[g - 1].clone(), d[g] = d[g - 1].clone(), f.crossVectors(k[g - 1], k[g]), f.length() > Number.EPSILON && (f.normalize(), b = Math.acos(ma.clamp(k[g - 1].dot(k[g]), -1, 1)), e[g].applyMatrix4(l.makeRotationAxis(f, b))), d[g].crossVectors(k[g], e[g]);
     }
     if (!0 === c) {
-      for (b = Math.acos(ma.clamp(e[0].dot(e[a]), -1, 1)), b /= a, 0 < k[0].dot(l.crossVectors(e[0], e[a])) && (b = -b), g = 1; g <= a; g++) {
-        e[g].applyMatrix4(f.makeRotationAxis(k[g], b * g)), d[g].crossVectors(k[g], e[g]);
+      for (b = Math.acos(ma.clamp(e[0].dot(e[a]), -1, 1)), b /= a, 0 < k[0].dot(f.crossVectors(e[0], e[a])) && (b = -b), g = 1; g <= a; g++) {
+        e[g].applyMatrix4(l.makeRotationAxis(k[g], b * g)), d[g].crossVectors(k[g], e[g]);
       }
     }
     return {tangents:k, normals:e, binormals:d};
@@ -13630,7 +13640,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Dd.prototype = Object.create(hb.prototype);
   Dd.prototype.constructor = Dd;
   Dd.prototype.isArcCurve = !0;
-  var jg = new m, wh = new Fg, xh = new Fg, yh = new Fg;
+  var jg = new m, xh = new Gg, yh = new Gg, zh = new Gg;
   Xa.prototype = Object.create(ea.prototype);
   Xa.prototype.constructor = Xa;
   Xa.prototype.isCatmullRomCurve3 = !0;
@@ -13646,24 +13656,24 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     } else {
       jg.subVectors(b[0], b[1]).add(b[0]), d = jg;
     }
-    var l = b[e % k];
-    var f = b[(e + 1) % k];
+    var f = b[e % k];
+    var l = b[(e + 1) % k];
     this.closed || e + 2 < k ? b = b[(e + 2) % k] : (jg.subVectors(b[k - 1], b[k - 2]).add(b[k - 1]), b = jg);
     if ("centripetal" === this.curveType || "chordal" === this.curveType) {
       var g = "chordal" === this.curveType ? .5 : .25;
-      k = Math.pow(d.distanceToSquared(l), g);
-      e = Math.pow(l.distanceToSquared(f), g);
-      g = Math.pow(f.distanceToSquared(b), g);
+      k = Math.pow(d.distanceToSquared(f), g);
+      e = Math.pow(f.distanceToSquared(l), g);
+      g = Math.pow(l.distanceToSquared(b), g);
       1E-4 > e && (e = 1);
       1E-4 > k && (k = e);
       1E-4 > g && (g = e);
-      wh.initNonuniformCatmullRom(d.x, l.x, f.x, b.x, k, e, g);
-      xh.initNonuniformCatmullRom(d.y, l.y, f.y, b.y, k, e, g);
-      yh.initNonuniformCatmullRom(d.z, l.z, f.z, b.z, k, e, g);
+      xh.initNonuniformCatmullRom(d.x, f.x, l.x, b.x, k, e, g);
+      yh.initNonuniformCatmullRom(d.y, f.y, l.y, b.y, k, e, g);
+      zh.initNonuniformCatmullRom(d.z, f.z, l.z, b.z, k, e, g);
     } else {
-      "catmullrom" === this.curveType && (wh.initCatmullRom(d.x, l.x, f.x, b.x, this.tension), xh.initCatmullRom(d.y, l.y, f.y, b.y, this.tension), yh.initCatmullRom(d.z, l.z, f.z, b.z, this.tension));
+      "catmullrom" === this.curveType && (xh.initCatmullRom(d.x, f.x, l.x, b.x, this.tension), yh.initCatmullRom(d.y, f.y, l.y, b.y, this.tension), zh.initCatmullRom(d.z, f.z, l.z, b.z, this.tension));
     }
-    c.set(wh.calc(a), xh.calc(a), yh.calc(a));
+    c.set(xh.calc(a), yh.calc(a), zh.calc(a));
     return c;
   };
   Xa.prototype.copy = function(a) {
@@ -13895,9 +13905,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var b = this.points, k = (b.length - 1) * a;
     a = Math.floor(k);
     k -= a;
-    var e = b[0 === a ? a : a - 1], d = b[a], l = b[a > b.length - 2 ? b.length - 1 : a + 1];
+    var e = b[0 === a ? a : a - 1], d = b[a], f = b[a > b.length - 2 ? b.length - 1 : a + 1];
     b = b[a > b.length - 3 ? b.length - 1 : a + 2];
-    c.set(li(k, e.x, d.x, l.x, b.x), li(k, e.y, d.y, l.y, b.y));
+    c.set(ni(k, e.x, d.x, f.x, b.x), ni(k, e.y, d.y, f.y, b.y));
     return c;
   };
   xb.prototype.copy = function(a) {
@@ -13925,7 +13935,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return this;
   };
-  var zh = Object.freeze({__proto__:null, ArcCurve:Dd, CatmullRomCurve3:Xa, CubicBezierCurve:ub, CubicBezierCurve3:Jb, EllipseCurve:hb, LineCurve:cb, LineCurve3:vb, QuadraticBezierCurve:wb, QuadraticBezierCurve3:Kb, SplineCurve:xb});
+  var Ah = Object.freeze({__proto__:null, ArcCurve:Dd, CatmullRomCurve3:Xa, CubicBezierCurve:ub, CubicBezierCurve3:Jb, EllipseCurve:hb, LineCurve:cb, LineCurve3:vb, QuadraticBezierCurve:wb, QuadraticBezierCurve3:Kb, SplineCurve:xb});
   Xb.prototype = Object.assign(Object.create(ea.prototype), {constructor:Xb, add:function(a) {
     this.curves.push(a);
   }, closePath:function() {
@@ -13967,9 +13977,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     for (var c = [], b, k = 0, e = this.curves; k < e.length; k++) {
       var d = e[k];
       d = d.getPoints(d && d.isEllipseCurve ? 2 * a : d && (d.isLineCurve || d.isLineCurve3) ? 1 : d && d.isSplineCurve ? a * d.points.length : a);
-      for (var l = 0; l < d.length; l++) {
-        var f = d[l];
-        b && b.equals(f) || (c.push(f), b = f);
+      for (var f = 0; f < d.length; f++) {
+        var l = d[f];
+        b && b.equals(l) || (c.push(l), b = l);
       }
     }
     this.autoClose && 1 < c.length && !c[c.length - 1].equals(c[0]) && c.push(c[0]);
@@ -13996,7 +14006,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.curves = [];
     for (var c = 0, b = a.curves.length; c < b; c++) {
       var k = a.curves[c];
-      this.curves.push((new zh[k.type]).fromJSON(k));
+      this.curves.push((new Ah[k.type]).fromJSON(k));
     }
     return this;
   }});
@@ -14019,10 +14029,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.curves.push(a);
     this.currentPoint.set(b, e);
     return this;
-  }, bezierCurveTo:function(a, c, b, e, d, l) {
-    a = new ub(this.currentPoint.clone(), new h(a, c), new h(b, e), new h(d, l));
+  }, bezierCurveTo:function(a, c, b, e, d, f) {
+    a = new ub(this.currentPoint.clone(), new h(a, c), new h(b, e), new h(d, f));
     this.curves.push(a);
-    this.currentPoint.set(d, l);
+    this.currentPoint.set(d, f);
     return this;
   }, splineThru:function(a) {
     var c = [this.currentPoint.clone()].concat(a);
@@ -14030,17 +14040,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.curves.push(c);
     this.currentPoint.copy(a[a.length - 1]);
     return this;
-  }, arc:function(a, c, b, e, d, l) {
-    this.absarc(a + this.currentPoint.x, c + this.currentPoint.y, b, e, d, l);
+  }, arc:function(a, c, b, e, d, f) {
+    this.absarc(a + this.currentPoint.x, c + this.currentPoint.y, b, e, d, f);
     return this;
-  }, absarc:function(a, c, b, e, d, l) {
-    this.absellipse(a, c, b, b, e, d, l);
+  }, absarc:function(a, c, b, e, d, f) {
+    this.absellipse(a, c, b, b, e, d, f);
     return this;
-  }, ellipse:function(a, c, b, e, d, l, f, g) {
-    this.absellipse(a + this.currentPoint.x, c + this.currentPoint.y, b, e, d, l, f, g);
+  }, ellipse:function(a, c, b, e, d, f, l, g) {
+    this.absellipse(a + this.currentPoint.x, c + this.currentPoint.y, b, e, d, f, l, g);
     return this;
-  }, absellipse:function(a, c, b, e, d, l, f, g) {
-    a = new hb(a, c, b, e, d, l, f, g);
+  }, absellipse:function(a, c, b, e, d, f, l, g) {
+    a = new hb(a, c, b, e, d, f, l, g);
     0 < this.curves.length && (c = a.getPoint(0), c.equals(this.currentPoint) || this.lineTo(c.x, c.y));
     this.curves.push(a);
     a = a.getPoint(1);
@@ -14169,9 +14179,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.shadow = a.shadow.clone();
     return this;
   }});
-  Gg.prototype = Object.assign(Object.create(Lb.prototype), {constructor:Gg, isPointLightShadow:!0, updateMatrices:function(a, c) {
+  Hg.prototype = Object.assign(Object.create(Lb.prototype), {constructor:Hg, isPointLightShadow:!0, updateMatrices:function(a, c) {
     void 0 === c && (c = 0);
-    var b = this.camera, k = this.matrix, e = this._lightPositionWorld, d = this._lookTarget, l = this._projScreenMatrix;
+    var b = this.camera, k = this.matrix, e = this._lightPositionWorld, d = this._lookTarget, f = this._projScreenMatrix;
     e.setFromMatrixPosition(a.matrixWorld);
     b.position.copy(e);
     d.copy(b.position);
@@ -14180,8 +14190,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     b.lookAt(d);
     b.updateMatrixWorld();
     k.makeTranslation(-e.x, -e.y, -e.z);
-    l.multiplyMatrices(b.projectionMatrix, b.matrixWorldInverse);
-    this._frustum.setFromProjectionMatrix(l);
+    f.multiplyMatrices(b.projectionMatrix, b.matrixWorldInverse);
+    this._frustum.setFromProjectionMatrix(f);
   }});
   Af.prototype = Object.assign(Object.create(ua.prototype), {constructor:Af, isPointLight:!0, copy:function(a) {
     ua.prototype.copy.call(this, a);
@@ -14201,7 +14211,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.zoom = a.zoom;
     this.view = null === a.view ? null : Object.assign({}, a.view);
     return this;
-  }, setViewOffset:function(a, c, b, e, d, l) {
+  }, setViewOffset:function(a, c, b, e, d, f) {
     null === this.view && (this.view = {enabled:!0, fullWidth:1, fullHeight:1, offsetX:0, offsetY:0, width:1, height:1});
     this.view.enabled = !0;
     this.view.fullWidth = a;
@@ -14209,7 +14219,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.view.offsetX = b;
     this.view.offsetY = e;
     this.view.width = d;
-    this.view.height = l;
+    this.view.height = f;
     this.updateProjectionMatrix();
   }, clearViewOffset:function() {
     null !== this.view && (this.view.enabled = !1);
@@ -14266,7 +14276,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       void 0 === k[a] && console.warn("THREE.MaterialLoader: Undefined texture", a);
       return k[a];
     }
-    var k = this.textures, e = new qk[a.type];
+    var k = this.textures, e = new sk[a.type];
     void 0 !== a.uuid && (e.uuid = a.uuid);
     void 0 !== a.name && (e.name = a.name);
     void 0 !== a.color && e.color.setHex(a.color);
@@ -14384,6 +14394,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 !== a.aoMap && (e.aoMap = c(a.aoMap));
     void 0 !== a.aoMapIntensity && (e.aoMapIntensity = a.aoMapIntensity);
     void 0 !== a.gradientMap && (e.gradientMap = c(a.gradientMap));
+    void 0 !== a.clearcoatMap && (e.clearcoatMap = c(a.clearcoatMap));
+    void 0 !== a.clearcoatRoughnessMap && (e.clearcoatRoughnessMap = c(a.clearcoatRoughnessMap));
     void 0 !== a.clearcoatNormalMap && (e.clearcoatNormalMap = c(a.clearcoatNormalMap));
     void 0 !== a.clearcoatNormalScale && (e.clearcoatNormalScale = (new h).fromArray(a.clearcoatNormalScale));
     return e;
@@ -14391,11 +14403,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.textures = a;
     return this;
   }});
-  var Ah = {decodeText:function(a) {
+  var Bh = {decodeText:function(a) {
     if ("undefined" !== typeof TextDecoder) {
       return (new TextDecoder).decode(a);
     }
-    for (var c = "", b = 0, k = a.length; b < k; b++) {
+    for (var c = "", b = 0, e = a.length; b < e; b++) {
       c += String.fromCharCode(a[b]);
     }
     try {
@@ -14438,24 +14450,24 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, parse:function(a) {
     var c = a.isInstancedBufferGeometry ? new Gf : new N, b = a.data.index;
     if (void 0 !== b) {
-      var e = new Bh[b.type](b.array);
+      var e = new Ch[b.type](b.array);
       c.setIndex(new I(e, 1));
     }
     b = a.data.attributes;
     for (var k in b) {
       var d = b[k];
-      e = new Bh[d.type](d.array);
+      e = new Ch[d.type](d.array);
       e = new (d.isInstancedBufferAttribute ? Hf : I)(e, d.itemSize, d.normalized);
       void 0 !== d.name && (e.name = d.name);
       c.setAttribute(k, e);
     }
-    var l = a.data.morphAttributes;
-    if (l) {
-      for (k in l) {
-        var f = l[k], g = [];
+    var f = a.data.morphAttributes;
+    if (f) {
+      for (k in f) {
+        var l = f[k], g = [];
         b = 0;
-        for (var n = f.length; b < n; b++) {
-          d = f[b], e = new Bh[d.type](d.array), e = new I(e, d.itemSize, d.normalized), void 0 !== d.name && (e.name = d.name), g.push(e);
+        for (var n = l.length; b < n; b++) {
+          d = l[b], e = new Ch[d.type](d.array), e = new I(e, d.itemSize, d.normalized), void 0 !== d.name && (e.name = d.name), g.push(e);
         }
         c.morphAttributes[k] = g;
       }
@@ -14473,9 +14485,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a.userData && (c.userData = a.userData);
     return c;
   }});
-  var Bh = {Int8Array:Int8Array, Uint8Array:Uint8Array, Uint8ClampedArray:"undefined" !== typeof Uint8ClampedArray ? Uint8ClampedArray : Uint8Array, Int16Array:Int16Array, Uint16Array:Uint16Array, Int32Array:Int32Array, Uint32Array:Uint32Array, Float32Array:Float32Array, Float64Array:Float64Array};
+  var Ch = {Int8Array:Int8Array, Uint8Array:Uint8Array, Uint8ClampedArray:"undefined" !== typeof Uint8ClampedArray ? Uint8ClampedArray : Uint8Array, Int16Array:Int16Array, Uint16Array:Uint16Array, Int32Array:Int32Array, Uint32Array:Uint32Array, Float32Array:Float32Array, Float64Array:Float64Array};
   Jf.prototype = Object.assign(Object.create(qa.prototype), {constructor:Jf, load:function(a, c, b, e) {
-    var k = this, d = "" === this.path ? Ah.extractUrlBase(a) : this.path;
+    var k = this, d = "" === this.path ? Bh.extractUrlBase(a) : this.path;
     this.resourcePath = this.resourcePath || d;
     d = new nb(k.manager);
     d.setPath(this.path);
@@ -14516,32 +14528,32 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var b = {};
     if (void 0 !== a) {
       for (var e = new If, k = 0, d = a.length; k < d; k++) {
-        var l = a[k];
-        switch(l.type) {
+        var f = a[k];
+        switch(f.type) {
           case "PlaneGeometry":
           case "PlaneBufferGeometry":
-            var f = new ab[l.type](l.width, l.height, l.widthSegments, l.heightSegments);
+            var l = new ab[f.type](f.width, f.height, f.widthSegments, f.heightSegments);
             break;
           case "BoxGeometry":
           case "BoxBufferGeometry":
           case "CubeGeometry":
-            f = new ab[l.type](l.width, l.height, l.depth, l.widthSegments, l.heightSegments, l.depthSegments);
+            l = new ab[f.type](f.width, f.height, f.depth, f.widthSegments, f.heightSegments, f.depthSegments);
             break;
           case "CircleGeometry":
           case "CircleBufferGeometry":
-            f = new ab[l.type](l.radius, l.segments, l.thetaStart, l.thetaLength);
+            l = new ab[f.type](f.radius, f.segments, f.thetaStart, f.thetaLength);
             break;
           case "CylinderGeometry":
           case "CylinderBufferGeometry":
-            f = new ab[l.type](l.radiusTop, l.radiusBottom, l.height, l.radialSegments, l.heightSegments, l.openEnded, l.thetaStart, l.thetaLength);
+            l = new ab[f.type](f.radiusTop, f.radiusBottom, f.height, f.radialSegments, f.heightSegments, f.openEnded, f.thetaStart, f.thetaLength);
             break;
           case "ConeGeometry":
           case "ConeBufferGeometry":
-            f = new ab[l.type](l.radius, l.height, l.radialSegments, l.heightSegments, l.openEnded, l.thetaStart, l.thetaLength);
+            l = new ab[f.type](f.radius, f.height, f.radialSegments, f.heightSegments, f.openEnded, f.thetaStart, f.thetaLength);
             break;
           case "SphereGeometry":
           case "SphereBufferGeometry":
-            f = new ab[l.type](l.radius, l.widthSegments, l.heightSegments, l.phiStart, l.phiLength, l.thetaStart, l.thetaLength);
+            l = new ab[f.type](f.radius, f.widthSegments, f.heightSegments, f.phiStart, f.phiLength, f.thetaStart, f.thetaLength);
             break;
           case "DodecahedronGeometry":
           case "DodecahedronBufferGeometry":
@@ -14551,67 +14563,67 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           case "OctahedronBufferGeometry":
           case "TetrahedronGeometry":
           case "TetrahedronBufferGeometry":
-            f = new ab[l.type](l.radius, l.detail);
+            l = new ab[f.type](f.radius, f.detail);
             break;
           case "RingGeometry":
           case "RingBufferGeometry":
-            f = new ab[l.type](l.innerRadius, l.outerRadius, l.thetaSegments, l.phiSegments, l.thetaStart, l.thetaLength);
+            l = new ab[f.type](f.innerRadius, f.outerRadius, f.thetaSegments, f.phiSegments, f.thetaStart, f.thetaLength);
             break;
           case "TorusGeometry":
           case "TorusBufferGeometry":
-            f = new ab[l.type](l.radius, l.tube, l.radialSegments, l.tubularSegments, l.arc);
+            l = new ab[f.type](f.radius, f.tube, f.radialSegments, f.tubularSegments, f.arc);
             break;
           case "TorusKnotGeometry":
           case "TorusKnotBufferGeometry":
-            f = new ab[l.type](l.radius, l.tube, l.tubularSegments, l.radialSegments, l.p, l.q);
+            l = new ab[f.type](f.radius, f.tube, f.tubularSegments, f.radialSegments, f.p, f.q);
             break;
           case "TubeGeometry":
           case "TubeBufferGeometry":
-            f = new ab[l.type]((new zh[l.path.type]).fromJSON(l.path), l.tubularSegments, l.radius, l.radialSegments, l.closed);
+            l = new ab[f.type]((new Ah[f.path.type]).fromJSON(f.path), f.tubularSegments, f.radius, f.radialSegments, f.closed);
             break;
           case "LatheGeometry":
           case "LatheBufferGeometry":
-            f = new ab[l.type](l.points, l.segments, l.phiStart, l.phiLength);
+            l = new ab[f.type](f.points, f.segments, f.phiStart, f.phiLength);
             break;
           case "PolyhedronGeometry":
           case "PolyhedronBufferGeometry":
-            f = new ab[l.type](l.vertices, l.indices, l.radius, l.details);
+            l = new ab[f.type](f.vertices, f.indices, f.radius, f.details);
             break;
           case "ShapeGeometry":
           case "ShapeBufferGeometry":
-            f = [];
-            for (var g = 0, p = l.shapes.length; g < p; g++) {
-              var m = c[l.shapes[g]];
-              f.push(m);
+            l = [];
+            for (var g = 0, p = f.shapes.length; g < p; g++) {
+              var m = c[f.shapes[g]];
+              l.push(m);
             }
-            f = new ab[l.type](f, l.curveSegments);
+            l = new ab[f.type](l, f.curveSegments);
             break;
           case "ExtrudeGeometry":
           case "ExtrudeBufferGeometry":
-            f = [];
+            l = [];
             g = 0;
-            for (p = l.shapes.length; g < p; g++) {
-              m = c[l.shapes[g]], f.push(m);
+            for (p = f.shapes.length; g < p; g++) {
+              m = c[f.shapes[g]], l.push(m);
             }
-            g = l.options.extrudePath;
-            void 0 !== g && (l.options.extrudePath = (new zh[g.type]).fromJSON(g));
-            f = new ab[l.type](f, l.options);
+            g = f.options.extrudePath;
+            void 0 !== g && (f.options.extrudePath = (new Ah[g.type]).fromJSON(g));
+            l = new ab[f.type](l, f.options);
             break;
           case "BufferGeometry":
           case "InstancedBufferGeometry":
-            f = e.parse(l);
+            l = e.parse(f);
             break;
           case "Geometry":
             console.error('THREE.ObjectLoader: Loading "Geometry" is not supported anymore.');
             break;
           default:
-            console.warn('THREE.ObjectLoader: Unsupported geometry type "' + l.type + '"');
+            console.warn('THREE.ObjectLoader: Unsupported geometry type "' + f.type + '"');
             continue;
         }
-        f.uuid = l.uuid;
-        void 0 !== l.name && (f.name = l.name);
-        !0 === f.isBufferGeometry && void 0 !== l.userData && (f.userData = l.userData);
-        b[l.uuid] = f;
+        l.uuid = f.uuid;
+        void 0 !== f.name && (l.name = f.name);
+        !0 === l.isBufferGeometry && void 0 !== f.userData && (l.userData = f.userData);
+        b[f.uuid] = l;
       }
     }
     return b;
@@ -14622,16 +14634,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       k.setTextures(c);
       c = 0;
       for (var d = a.length; c < d; c++) {
-        var l = a[c];
-        if ("MultiMaterial" === l.type) {
-          for (var f = [], g = 0; g < l.materials.length; g++) {
-            var p = l.materials[g];
+        var f = a[c];
+        if ("MultiMaterial" === f.type) {
+          for (var l = [], g = 0; g < f.materials.length; g++) {
+            var p = f.materials[g];
             void 0 === b[p.uuid] && (b[p.uuid] = k.parse(p));
-            f.push(b[p.uuid]);
+            l.push(b[p.uuid]);
           }
-          e[l.uuid] = f;
+          e[f.uuid] = l;
         } else {
-          void 0 === b[l.uuid] && (b[l.uuid] = k.parse(l)), e[l.uuid] = b[l.uuid];
+          void 0 === b[f.uuid] && (b[f.uuid] = k.parse(f)), e[f.uuid] = b[f.uuid];
         }
       }
     }
@@ -14655,21 +14667,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     var e = this, k = {};
     if (void 0 !== a && 0 < a.length) {
-      c = new Cg(c);
+      c = new Dg(c);
       var d = new Cd(c);
       d.setCrossOrigin(this.crossOrigin);
       c = 0;
-      for (var l = a.length; c < l; c++) {
-        var f = a[c], g = f.url;
+      for (var f = a.length; c < f; c++) {
+        var l = a[c], g = l.url;
         if (Array.isArray(g)) {
-          k[f.uuid] = [];
+          k[l.uuid] = [];
           for (var p = 0, m = g.length; p < m; p++) {
             var n = g[p];
             n = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(n) ? n : e.resourcePath + n;
-            k[f.uuid].push(b(n));
+            k[l.uuid].push(b(n));
           }
         } else {
-          n = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(f.url) ? f.url : e.resourcePath + f.url, k[f.uuid] = b(n);
+          n = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(l.url) ? l.url : e.resourcePath + l.url, k[l.uuid] = b(n);
         }
       }
     }
@@ -14685,29 +14697,29 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var e = {};
     if (void 0 !== a) {
       for (var k = 0, d = a.length; k < d; k++) {
-        var l = a[k];
-        void 0 === l.image && console.warn('THREE.ObjectLoader: No "image" specified for', l.uuid);
-        void 0 === c[l.image] && console.warn("THREE.ObjectLoader: Undefined image", l.image);
-        var f = Array.isArray(c[l.image]) ? new Wa(c[l.image]) : new g(c[l.image]);
-        f.needsUpdate = !0;
-        f.uuid = l.uuid;
-        void 0 !== l.name && (f.name = l.name);
-        void 0 !== l.mapping && (f.mapping = b(l.mapping, rk));
-        void 0 !== l.offset && f.offset.fromArray(l.offset);
-        void 0 !== l.repeat && f.repeat.fromArray(l.repeat);
-        void 0 !== l.center && f.center.fromArray(l.center);
-        void 0 !== l.rotation && (f.rotation = l.rotation);
-        void 0 !== l.wrap && (f.wrapS = b(l.wrap[0], aj), f.wrapT = b(l.wrap[1], aj));
-        void 0 !== l.format && (f.format = l.format);
-        void 0 !== l.type && (f.type = l.type);
-        void 0 !== l.encoding && (f.encoding = l.encoding);
-        void 0 !== l.minFilter && (f.minFilter = b(l.minFilter, bj));
-        void 0 !== l.magFilter && (f.magFilter = b(l.magFilter, bj));
-        void 0 !== l.anisotropy && (f.anisotropy = l.anisotropy);
-        void 0 !== l.flipY && (f.flipY = l.flipY);
-        void 0 !== l.premultiplyAlpha && (f.premultiplyAlpha = l.premultiplyAlpha);
-        void 0 !== l.unpackAlignment && (f.unpackAlignment = l.unpackAlignment);
-        e[l.uuid] = f;
+        var f = a[k];
+        void 0 === f.image && console.warn('THREE.ObjectLoader: No "image" specified for', f.uuid);
+        void 0 === c[f.image] && console.warn("THREE.ObjectLoader: Undefined image", f.image);
+        var l = Array.isArray(c[f.image]) ? new Wa(c[f.image]) : new g(c[f.image]);
+        l.needsUpdate = !0;
+        l.uuid = f.uuid;
+        void 0 !== f.name && (l.name = f.name);
+        void 0 !== f.mapping && (l.mapping = b(f.mapping, tk));
+        void 0 !== f.offset && l.offset.fromArray(f.offset);
+        void 0 !== f.repeat && l.repeat.fromArray(f.repeat);
+        void 0 !== f.center && l.center.fromArray(f.center);
+        void 0 !== f.rotation && (l.rotation = f.rotation);
+        void 0 !== f.wrap && (l.wrapS = b(f.wrap[0], cj), l.wrapT = b(f.wrap[1], cj));
+        void 0 !== f.format && (l.format = f.format);
+        void 0 !== f.type && (l.type = f.type);
+        void 0 !== f.encoding && (l.encoding = f.encoding);
+        void 0 !== f.minFilter && (l.minFilter = b(f.minFilter, dj));
+        void 0 !== f.magFilter && (l.magFilter = b(f.magFilter, dj));
+        void 0 !== f.anisotropy && (l.anisotropy = f.anisotropy);
+        void 0 !== f.flipY && (l.flipY = f.flipY);
+        void 0 !== f.premultiplyAlpha && (l.premultiplyAlpha = f.premultiplyAlpha);
+        void 0 !== f.unpackAlignment && (l.unpackAlignment = f.unpackAlignment);
+        e[f.uuid] = l;
       }
     }
     return e;
@@ -14771,15 +14783,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         console.warn("THREE.ObjectLoader.parseObject() does not support SkinnedMesh yet.");
       case "Mesh":
         d = e(a.geometry);
-        var l = k(a.material);
-        d = d.bones && 0 < d.bones.length ? new ke(d, l) : new W(d, l);
+        var f = k(a.material);
+        d = d.bones && 0 < d.bones.length ? new ke(d, f) : new W(d, f);
         break;
       case "InstancedMesh":
         d = e(a.geometry);
-        l = k(a.material);
-        var f = a.instanceMatrix;
-        d = new mf(d, l, a.count);
-        d.instanceMatrix = new I(new Float32Array(f.array), 16);
+        f = k(a.material);
+        var l = a.instanceMatrix;
+        d = new mf(d, f, a.count);
+        d.instanceMatrix = new I(new Float32Array(l.array), 16);
         break;
       case "LOD":
         d = new je;
@@ -14818,21 +14830,21 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 !== a.userData && (d.userData = a.userData);
     void 0 !== a.layers && (d.layers.mask = a.layers);
     if (void 0 !== a.children) {
-      for (f = a.children, l = 0; l < f.length; l++) {
-        d.add(this.parseObject(f[l], c, b));
+      for (l = a.children, f = 0; f < l.length; f++) {
+        d.add(this.parseObject(l[f], c, b));
       }
     }
     if ("LOD" === a.type) {
-      for (void 0 !== a.autoUpdate && (d.autoUpdate = a.autoUpdate), a = a.levels, f = 0; f < a.length; f++) {
-        l = a[f];
-        var g = d.getObjectByProperty("uuid", l.object);
-        void 0 !== g && d.addLevel(g, l.distance);
+      for (void 0 !== a.autoUpdate && (d.autoUpdate = a.autoUpdate), a = a.levels, l = 0; l < a.length; l++) {
+        f = a[l];
+        var g = d.getObjectByProperty("uuid", f.object);
+        void 0 !== g && d.addLevel(g, f.distance);
       }
     }
     return d;
   }});
-  var rk = {UVMapping:300, CubeReflectionMapping:301, CubeRefractionMapping:302, EquirectangularReflectionMapping:303, EquirectangularRefractionMapping:304, SphericalReflectionMapping:305, CubeUVReflectionMapping:306, CubeUVRefractionMapping:307}, aj = {RepeatWrapping:1E3, ClampToEdgeWrapping:1001, MirroredRepeatWrapping:1002}, bj = {NearestFilter:1003, NearestMipmapNearestFilter:1004, NearestMipmapLinearFilter:1005, LinearFilter:1006, LinearMipmapNearestFilter:1007, LinearMipmapLinearFilter:1008};
-  Hg.prototype = Object.assign(Object.create(qa.prototype), {constructor:Hg, setOptions:function(a) {
+  var tk = {UVMapping:300, CubeReflectionMapping:301, CubeRefractionMapping:302, EquirectangularReflectionMapping:303, EquirectangularRefractionMapping:304, SphericalReflectionMapping:305, CubeUVReflectionMapping:306, CubeUVRefractionMapping:307}, cj = {RepeatWrapping:1E3, ClampToEdgeWrapping:1001, MirroredRepeatWrapping:1002}, dj = {NearestFilter:1003, NearestMipmapNearestFilter:1004, NearestMipmapLinearFilter:1005, LinearFilter:1006, LinearMipmapNearestFilter:1007, LinearMipmapLinearFilter:1008};
+  Ig.prototype = Object.assign(Object.create(qa.prototype), {constructor:Ig, setOptions:function(a) {
     this.options = a;
     return this;
   }, load:function(a, c, b, e) {
@@ -14861,7 +14873,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     });
     k.manager.itemStart(a);
   }});
-  Object.assign(Ig.prototype, {moveTo:function(a, c) {
+  Object.assign(Jg.prototype, {moveTo:function(a, c) {
     this.currentPath = new yb;
     this.subPaths.push(this.currentPath);
     this.currentPath.moveTo(a, c);
@@ -14872,8 +14884,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, quadraticCurveTo:function(a, c, b, e) {
     this.currentPath.quadraticCurveTo(a, c, b, e);
     return this;
-  }, bezierCurveTo:function(a, c, b, e, d, l) {
-    this.currentPath.bezierCurveTo(a, c, b, e, d, l);
+  }, bezierCurveTo:function(a, c, b, e, d, f) {
+    this.currentPath.bezierCurveTo(a, c, b, e, d, f);
     return this;
   }, splineThru:function(a) {
     this.currentPath.splineThru(a);
@@ -14889,15 +14901,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     function e(a, c) {
       for (var b = c.length, e = !1, k = b - 1, d = 0; d < b; k = d++) {
-        var l = c[k], f = c[d], g = f.x - l.x, p = f.y - l.y;
+        var f = c[k], l = c[d], g = l.x - f.x, p = l.y - f.y;
         if (Math.abs(p) > Number.EPSILON) {
-          if (0 > p && (l = c[d], g = -g, f = c[k], p = -p), !(a.y < l.y || a.y > f.y)) {
-            if (a.y === l.y) {
-              if (a.x === l.x) {
+          if (0 > p && (f = c[d], g = -g, l = c[k], p = -p), !(a.y < f.y || a.y > l.y)) {
+            if (a.y === f.y) {
+              if (a.x === f.x) {
                 return !0;
               }
             } else {
-              k = p * (a.x - l.x) - g * (a.y - l.y);
+              k = p * (a.x - f.x) - g * (a.y - f.y);
               if (0 === k) {
                 return !0;
               }
@@ -14905,7 +14917,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             }
           }
         } else {
-          if (a.y === l.y && (f.x <= a.x && a.x <= l.x || l.x <= a.x && a.x <= f.x)) {
+          if (a.y === f.y && (l.x <= a.x && a.x <= f.x || f.x <= a.x && a.x <= l.x)) {
             return !0;
           }
         }
@@ -14921,23 +14933,23 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     c = [];
     if (1 === d.length) {
-      var l = d[0];
-      var f = new nc;
-      f.curves = l.curves;
-      c.push(f);
+      var f = d[0];
+      var l = new nc;
+      l.curves = f.curves;
+      c.push(l);
       return c;
     }
     var g = !k(d[0].getPoints());
     g = a ? !g : g;
-    f = [];
+    l = [];
     var p = [], m = [], n = 0;
     p[n] = void 0;
     m[n] = [];
     for (var h = 0, q = d.length; h < q; h++) {
-      l = d[h];
-      var r = l.getPoints();
+      f = d[h];
+      var r = f.getPoints();
       var t = k(r);
-      (t = a ? !t : t) ? (!g && p[n] && n++, p[n] = {s:new nc, p:r}, p[n].s.curves = l.curves, g && n++, m[n] = []) : m[n].push({h:l, p:r[0]});
+      (t = a ? !t : t) ? (!g && p[n] && n++, p[n] = {s:new nc, p:r}, p[n].s.curves = f.curves, g && n++, m[n] = []) : m[n].push({h:f, p:r[0]});
     }
     if (!p[0]) {
       return b(d);
@@ -14947,30 +14959,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a = [];
       k = 0;
       for (d = p.length; k < d; k++) {
-        f[k] = [];
+        l[k] = [];
       }
       k = 0;
       for (d = p.length; k < d; k++) {
-        for (l = m[k], t = 0; t < l.length; t++) {
-          g = l[t];
+        for (f = m[k], t = 0; t < f.length; t++) {
+          g = f[t];
           n = !0;
           for (r = 0; r < p.length; r++) {
-            e(g.p, p[r].p) && (k !== r && a.push({froms:k, tos:r, hole:t}), n ? (n = !1, f[r].push(g)) : h = !0);
+            e(g.p, p[r].p) && (k !== r && a.push({froms:k, tos:r, hole:t}), n ? (n = !1, l[r].push(g)) : h = !0);
           }
-          n && f[k].push(g);
+          n && l[k].push(g);
         }
       }
-      0 < a.length && (h || (m = f));
+      0 < a.length && (h || (m = l));
     }
     h = 0;
     for (k = p.length; h < k; h++) {
-      for (f = p[h].s, c.push(f), a = m[h], d = 0, l = a.length; d < l; d++) {
-        f.holes.push(a[d].h);
+      for (l = p[h].s, c.push(l), a = m[h], d = 0, f = a.length; d < f; d++) {
+        l.holes.push(a[d].h);
       }
     }
     return c;
   }});
-  Object.assign(Jg.prototype, {isFont:!0, generateShapes:function(a, c) {
+  Object.assign(Kg.prototype, {isFont:!0, generateShapes:function(a, c) {
     void 0 === c && (c = 100);
     var b = [], e = c;
     c = this.data;
@@ -14978,19 +14990,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     e /= c.resolution;
     var d = (c.boundingBox.yMax - c.boundingBox.yMin + c.underlineThickness) * e;
     a = [];
-    for (var l = 0, f = 0, g = 0; g < k.length; g++) {
+    for (var f = 0, l = 0, g = 0; g < k.length; g++) {
       var p = k[g];
       if ("\n" === p) {
-        l = 0, f -= d;
+        f = 0, l -= d;
       } else {
         var m = p;
         p = e;
-        var n = l, h = f, q = c, r = q.glyphs[m] || q.glyphs["?"];
+        var n = f, h = l, q = c, r = q.glyphs[m] || q.glyphs["?"];
         if (r) {
-          m = new Ig;
+          m = new Jg;
           if (r.o) {
             q = r._cachedOutline || (r._cachedOutline = r.o.split(" "));
-            for (var t = 0, u = q.length; t < u;) {
+            for (var t = 0, v = q.length; t < v;) {
               switch(q[t++]) {
                 case "m":
                   var y = q[t++] * p + n;
@@ -15005,12 +15017,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
                 case "q":
                   var x = q[t++] * p + n;
                   var T = q[t++] * p + h;
-                  var v = q[t++] * p + n;
+                  var u = q[t++] * p + n;
                   var z = q[t++] * p + h;
-                  m.quadraticCurveTo(v, z, x, T);
+                  m.quadraticCurveTo(u, z, x, T);
                   break;
                 case "b":
-                  x = q[t++] * p + n, T = q[t++] * p + h, v = q[t++] * p + n, z = q[t++] * p + h, y = q[t++] * p + n, w = q[t++] * p + h, m.bezierCurveTo(v, z, y, w, x, T);
+                  x = q[t++] * p + n, T = q[t++] * p + h, u = q[t++] * p + n, z = q[t++] * p + h, y = q[t++] * p + n, w = q[t++] * p + h, m.bezierCurveTo(u, z, y, w, x, T);
               }
             }
           }
@@ -15018,7 +15030,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         } else {
           console.error('THREE.Font: character "' + m + '" does not exists in font family ' + q.familyName + "."), p = void 0;
         }
-        l += p.offsetX;
+        f += p.offsetX;
         a.push(p.path);
       }
     }
@@ -15028,7 +15040,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return b;
   }});
-  Kg.prototype = Object.assign(Object.create(qa.prototype), {constructor:Kg, load:function(a, c, b, e) {
+  Lg.prototype = Object.assign(Object.create(qa.prototype), {constructor:Lg, load:function(a, c, b, e) {
     var k = this, d = new nb(this.manager);
     d.setPath(this.path);
     d.load(a, function(a) {
@@ -15041,9 +15053,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       c && c(a);
     }, b, e);
   }, parse:function(a) {
-    return new Jg(a);
+    return new Kg(a);
   }});
-  var kg, Pg = {getContext:function() {
+  var kg, Qg = {getContext:function() {
     void 0 === kg && (kg = new (window.AudioContext || window.webkitAudioContext));
     return kg;
   }, setContext:function(a) {
@@ -15055,7 +15067,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k.setPath(this.path);
     k.load(a, function(a) {
       a = a.slice(0);
-      Pg.getContext().decodeAudioData(a, function(a) {
+      Qg.getContext().decodeAudioData(a, function(a) {
         c(a);
       });
     }, b, e);
@@ -15159,20 +15171,20 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, toJSON:function(a) {
     return ua.prototype.toJSON.call(this, a);
   }});
-  Lg.prototype = Object.assign(Object.create(zb.prototype), {constructor:Lg, isHemisphereLightProbe:!0, copy:function(a) {
+  Mg.prototype = Object.assign(Object.create(zb.prototype), {constructor:Mg, isHemisphereLightProbe:!0, copy:function(a) {
     zb.prototype.copy.call(this, a);
     return this;
   }, toJSON:function(a) {
     return zb.prototype.toJSON.call(this, a);
   }});
-  Mg.prototype = Object.assign(Object.create(zb.prototype), {constructor:Mg, isAmbientLightProbe:!0, copy:function(a) {
+  Ng.prototype = Object.assign(Object.create(zb.prototype), {constructor:Ng, isAmbientLightProbe:!0, copy:function(a) {
     zb.prototype.copy.call(this, a);
     return this;
   }, toJSON:function(a) {
     return zb.prototype.toJSON.call(this, a);
   }});
-  var cj = new n, dj = new n;
-  Object.assign(mi.prototype, {update:function(a) {
+  var ej = new n, fj = new n;
+  Object.assign(oi.prototype, {update:function(a) {
     var c = this._cache;
     if (c.focus !== a.focus || c.fov !== a.fov || c.aspect !== a.aspect * this.aspect || c.near !== a.near || c.far !== a.far || c.zoom !== a.zoom || c.eyeSep !== this.eyeSep) {
       c.focus = a.focus;
@@ -15183,23 +15195,23 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       c.zoom = a.zoom;
       c.eyeSep = this.eyeSep;
       var b = a.projectionMatrix.clone(), e = c.eyeSep / 2, k = e * c.near / c.focus, d = c.near * Math.tan(ma.DEG2RAD * c.fov * .5) / c.zoom;
-      dj.elements[12] = -e;
-      cj.elements[12] = e;
+      fj.elements[12] = -e;
+      ej.elements[12] = e;
       e = -d * c.aspect + k;
-      var l = d * c.aspect + k;
-      b.elements[0] = 2 * c.near / (l - e);
-      b.elements[8] = (l + e) / (l - e);
+      var f = d * c.aspect + k;
+      b.elements[0] = 2 * c.near / (f - e);
+      b.elements[8] = (f + e) / (f - e);
       this.cameraL.projectionMatrix.copy(b);
       e = -d * c.aspect - k;
-      l = d * c.aspect - k;
-      b.elements[0] = 2 * c.near / (l - e);
-      b.elements[8] = (l + e) / (l - e);
+      f = d * c.aspect - k;
+      b.elements[0] = 2 * c.near / (f - e);
+      b.elements[8] = (f + e) / (f - e);
       this.cameraR.projectionMatrix.copy(b);
     }
-    this.cameraL.matrixWorld.copy(a.matrixWorld).multiply(dj);
-    this.cameraR.matrixWorld.copy(a.matrixWorld).multiply(cj);
+    this.cameraL.matrixWorld.copy(a.matrixWorld).multiply(fj);
+    this.cameraR.matrixWorld.copy(a.matrixWorld).multiply(ej);
   }});
-  Object.assign(Ng.prototype, {start:function() {
+  Object.assign(Og.prototype, {start:function() {
     this.oldTime = this.startTime = ("undefined" === typeof performance ? Date : performance).now();
     this.elapsedTime = 0;
     this.running = !0;
@@ -15222,8 +15234,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return a;
   }});
-  var Zc = new m, ej = new r, sk = new m, $c = new m;
-  Og.prototype = Object.assign(Object.create(t.prototype), {constructor:Og, getInput:function() {
+  var Zc = new m, gj = new r, uk = new m, $c = new m;
+  Pg.prototype = Object.assign(Object.create(t.prototype), {constructor:Pg, getInput:function() {
     return this.gain;
   }, removeFilter:function() {
     null !== this.filter && (this.gain.disconnect(this.filter), this.filter.disconnect(this.context.destination), this.gain.connect(this.context.destination), this.filter = null);
@@ -15246,8 +15258,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a = this.context.listener;
     var c = this.up;
     this.timeDelta = this._clock.getDelta();
-    this.matrixWorld.decompose(Zc, ej, sk);
-    $c.set(0, 0, -1).applyQuaternion(ej);
+    this.matrixWorld.decompose(Zc, gj, uk);
+    $c.set(0, 0, -1).applyQuaternion(gj);
     if (a.positionX) {
       var b = this.context.currentTime + this.timeDelta;
       a.positionX.linearRampToValueAtTime(Zc.x, b);
@@ -15380,8 +15392,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.gain.gain.setTargetAtTime(a, this.context.currentTime, .01);
     return this;
   }});
-  var ad = new m, fj = new r, tk = new m, bd = new m;
-  Qg.prototype = Object.assign(Object.create(Fd.prototype), {constructor:Qg, getOutput:function() {
+  var ad = new m, hj = new r, vk = new m, bd = new m;
+  Rg.prototype = Object.assign(Object.create(Fd.prototype), {constructor:Rg, getOutput:function() {
     return this.panner;
   }, getRefDistance:function() {
     return this.panner.refDistance;
@@ -15411,7 +15423,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, updateMatrixWorld:function(a) {
     t.prototype.updateMatrixWorld.call(this, a);
     if (!0 !== this.hasPlaybackControl || !1 !== this.isPlaying) {
-      if (this.matrixWorld.decompose(ad, fj, tk), bd.set(0, 0, 1).applyQuaternion(fj), a = this.panner, a.positionX) {
+      if (this.matrixWorld.decompose(ad, hj, vk), bd.set(0, 0, 1).applyQuaternion(hj), a = this.panner, a.positionX) {
         var c = this.context.currentTime + this.listener.timeDelta;
         a.positionX.linearRampToValueAtTime(ad.x, c);
         a.positionY.linearRampToValueAtTime(ad.y, c);
@@ -15424,7 +15436,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
     }
   }});
-  Object.assign(Rg.prototype, {getFrequencyData:function() {
+  Object.assign(Sg.prototype, {getFrequencyData:function() {
     this.analyser.getByteFrequencyData(this.data);
     return this.data;
   }, getAverageFrequency:function() {
@@ -15433,7 +15445,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return a / c.length;
   }});
-  Object.assign(Sg.prototype, {accumulate:function(a, c) {
+  Object.assign(Tg.prototype, {accumulate:function(a, c) {
     var b = this.buffer, e = this.valueSize;
     a = a * e + e;
     var k = this.cumulativeWeight;
@@ -15477,13 +15489,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, _slerp:function(a, c, b, e) {
     r.slerpFlat(a, c, a, c, a, b, e);
   }, _lerp:function(a, c, b, e, d) {
-    for (var k = 1 - e, l = 0; l !== d; ++l) {
-      var f = c + l;
-      a[f] = a[f] * k + a[b + l] * e;
+    for (var k = 1 - e, f = 0; f !== d; ++f) {
+      var l = c + f;
+      a[l] = a[l] * k + a[b + f] * e;
     }
   }});
-  var uk = /[\[\]\.:\/]/g, vk = "[^" + "\\[\\]\\.:\\/".replace("\\.", "") + "]", wk = /((?:WC+[\/:])*)/.source.replace("WC", "[^\\[\\]\\.:\\/]"), xk = /(WCOD+)?/.source.replace("WCOD", vk), yk = /(?:\.(WC+)(?:\[(.+)\])?)?/.source.replace("WC", "[^\\[\\]\\.:\\/]"), zk = /\.(WC+)(?:\[(.+)\])?/.source.replace("WC", "[^\\[\\]\\.:\\/]"), Ak = new RegExp("^" + wk + xk + yk + zk + "$"), Bk = ["material", "materials", "bones"];
-  Object.assign(ni.prototype, {getValue:function(a, c) {
+  var wk = /[\[\]\.:\/]/g, xk = "[^" + "\\[\\]\\.:\\/".replace("\\.", "") + "]", yk = /((?:WC+[\/:])*)/.source.replace("WC", "[^\\[\\]\\.:\\/]"), zk = /(WCOD+)?/.source.replace("WCOD", xk), Ak = /(?:\.(WC+)(?:\[(.+)\])?)?/.source.replace("WC", "[^\\[\\]\\.:\\/]"), Bk = /\.(WC+)(?:\[(.+)\])?/.source.replace("WC", "[^\\[\\]\\.:\\/]"), Ck = new RegExp("^" + yk + zk + Ak + Bk + "$"), Dk = ["material", "materials", "bones"];
+  Object.assign(pi.prototype, {getValue:function(a, c) {
     this.bind();
     var b = this._bindings[this._targetGroup.nCachedObjects_];
     void 0 !== b && b.getValue(a, c);
@@ -15500,12 +15512,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a[c].unbind();
     }
   }});
-  Object.assign(Ya, {Composite:ni, create:function(a, c, b) {
+  Object.assign(Ya, {Composite:pi, create:function(a, c, b) {
     return a && a.isAnimationObjectGroup ? new Ya.Composite(a, c, b) : new Ya(a, c, b);
   }, sanitizeNodeName:function(a) {
-    return a.replace(/\s/g, "_").replace(uk, "");
+    return a.replace(/\s/g, "_").replace(wk, "");
   }, parseTrackName:function(a) {
-    var c = Ak.exec(a);
+    var c = Ck.exec(a);
     if (!c) {
       throw Error("PropertyBinding: Cannot parse trackName: " + a);
     }
@@ -15513,7 +15525,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var b = c.nodeName && c.nodeName.lastIndexOf(".");
     if (void 0 !== b && -1 !== b) {
       var e = c.nodeName.substring(b + 1);
-      -1 !== Bk.indexOf(e) && (c.nodeName = c.nodeName.substring(0, b), c.objectName = e);
+      -1 !== Dk.indexOf(e) && (c.nodeName = c.nodeName.substring(0, b), c.objectName = e);
     }
     if (null === c.propertyName || 0 === c.propertyName.length) {
       throw Error("PropertyBinding: can not parse propertyName from trackName: " + a);
@@ -15532,9 +15544,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (a.children) {
       var e = function(a) {
         for (var b = 0; b < a.length; b++) {
-          var k = a[b];
-          if (k.name === c || k.uuid === c || (k = e(k.children))) {
-            return k;
+          var d = a[b];
+          if (d.name === c || d.uuid === c || (d = e(d.children))) {
+            return d;
           }
         }
         return null;
@@ -15550,7 +15562,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, BindingType:{Direct:0, EntireArray:1, ArrayElement:2, HasFromToArray:3}, Versioning:{None:0, NeedsUpdate:1, MatrixWorldNeedsUpdate:2}, GetterByBindingType:[function(a, c) {
     a[c] = this.node[this.propertyName];
   }, function(a, c) {
-    for (var b = this.resolvedProperty, e = 0, k = b.length; e !== k; ++e) {
+    for (var b = this.resolvedProperty, e = 0, d = b.length; e !== d; ++e) {
       a[c++] = b[e];
     }
   }, function(a, c) {
@@ -15566,16 +15578,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.targetObject[this.propertyName] = a[c];
     this.targetObject.matrixWorldNeedsUpdate = !0;
   }], [function(a, c) {
-    for (var b = this.resolvedProperty, e = 0, k = b.length; e !== k; ++e) {
+    for (var b = this.resolvedProperty, e = 0, d = b.length; e !== d; ++e) {
       b[e] = a[c++];
     }
   }, function(a, c) {
-    for (var b = this.resolvedProperty, e = 0, k = b.length; e !== k; ++e) {
+    for (var b = this.resolvedProperty, e = 0, d = b.length; e !== d; ++e) {
       b[e] = a[c++];
     }
     this.targetObject.needsUpdate = !0;
   }, function(a, c) {
-    for (var b = this.resolvedProperty, e = 0, k = b.length; e !== k; ++e) {
+    for (var b = this.resolvedProperty, e = 0, d = b.length; e !== d; ++e) {
       b[e] = a[c++];
     }
     this.targetObject.matrixWorldNeedsUpdate = !0;
@@ -15608,7 +15620,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.setValue = this._setValue_unavailable;
     if (a) {
       if (b) {
-        var l = c.objectIndex;
+        var f = c.objectIndex;
         switch(b) {
           case "materials":
             if (!a.material) {
@@ -15628,8 +15640,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             }
             a = a.skeleton.bones;
             for (b = 0; b < a.length; b++) {
-              if (a[b].name === l) {
-                l = b;
+              if (a[b].name === f) {
+                f = b;
                 break;
               }
             }
@@ -15641,16 +15653,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             }
             a = a[b];
         }
-        if (void 0 !== l) {
-          if (void 0 === a[l]) {
+        if (void 0 !== f) {
+          if (void 0 === a[f]) {
             console.error("THREE.PropertyBinding: Trying to bind to objectIndex of objectName, but is undefined.", this, a);
             return;
           }
-          a = a[l];
+          a = a[f];
         }
       }
-      l = a[e];
-      if (void 0 === l) {
+      f = a[e];
+      if (void 0 === f) {
         console.error("THREE.PropertyBinding: Trying to update property for track: " + c.nodeName + "." + e + " but it wasn't found.", a);
       } else {
         c = this.Versioning.None;
@@ -15688,10 +15700,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
             }
           }
           b = this.BindingType.ArrayElement;
-          this.resolvedProperty = l;
+          this.resolvedProperty = f;
           this.propertyIndex = d;
         } else {
-          void 0 !== l.fromArray && void 0 !== l.toArray ? (b = this.BindingType.HasFromToArray, this.resolvedProperty = l) : Array.isArray(l) ? (b = this.BindingType.EntireArray, this.resolvedProperty = l) : this.propertyName = e;
+          void 0 !== f.fromArray && void 0 !== f.toArray ? (b = this.BindingType.HasFromToArray, this.resolvedProperty = f) : Array.isArray(f) ? (b = this.BindingType.EntireArray, this.resolvedProperty = f) : this.propertyName = e;
         }
         this.getValue = this.GetterByBindingType[b];
         this.setValue = this.SetterByBindingTypeAndVersioning[b][c];
@@ -15705,8 +15717,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.setValue = this._setValue_unbound;
   }});
   Object.assign(Ya.prototype, {_getValue_unbound:Ya.prototype.getValue, _setValue_unbound:Ya.prototype.setValue});
-  Object.assign(oi.prototype, {isAnimationObjectGroup:!0, add:function() {
-    for (var a = this._objects, c = a.length, b = this.nCachedObjects_, e = this._indicesByUUID, d = this._paths, l = this._parsedPaths, f = this._bindings, g = f.length, p = void 0, m = 0, n = arguments.length; m !== n; ++m) {
+  Object.assign(qi.prototype, {isAnimationObjectGroup:!0, add:function() {
+    for (var a = this._objects, c = a.length, b = this.nCachedObjects_, e = this._indicesByUUID, d = this._paths, f = this._parsedPaths, l = this._bindings, g = l.length, p = void 0, m = 0, n = arguments.length; m !== n; ++m) {
       var h = arguments[m], q = h.uuid, r = e[q];
       if (void 0 === r) {
         r = c++;
@@ -15714,23 +15726,23 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         a.push(h);
         q = 0;
         for (var t = g; q !== t; ++q) {
-          f[q].push(new Ya(h, d[q], l[q]));
+          l[q].push(new Ya(h, d[q], f[q]));
         }
       } else {
         if (r < b) {
           p = a[r];
-          var u = --b;
-          t = a[u];
+          var v = --b;
+          t = a[v];
           e[t.uuid] = r;
           a[r] = t;
-          e[q] = u;
-          a[u] = h;
+          e[q] = v;
+          a[v] = h;
           q = 0;
           for (t = g; q !== t; ++q) {
-            var y = f[q], w = y[r];
-            y[r] = y[u];
-            void 0 === w && (w = new Ya(h, d[q], l[q]));
-            y[u] = w;
+            var y = l[q], w = y[r];
+            y[r] = y[v];
+            void 0 === w && (w = new Ya(h, d[q], f[q]));
+            y[v] = w;
           }
         } else {
           a[r] !== p && console.error("THREE.AnimationObjectGroup: Different objects with the same UUID detected. Clean the caches or recreate your infrastructure when reloading scenes.");
@@ -15739,8 +15751,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     this.nCachedObjects_ = b;
   }, remove:function() {
-    for (var a = this._objects, c = this.nCachedObjects_, b = this._indicesByUUID, e = this._bindings, d = e.length, l = 0, f = arguments.length; l !== f; ++l) {
-      var g = arguments[l], p = g.uuid, m = b[p];
+    for (var a = this._objects, c = this.nCachedObjects_, b = this._indicesByUUID, e = this._bindings, d = e.length, f = 0, l = arguments.length; f !== l; ++f) {
+      var g = arguments[f], p = g.uuid, m = b[p];
       if (void 0 !== m && m >= c) {
         var n = c++, h = a[n];
         b[h.uuid] = m;
@@ -15758,8 +15770,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     this.nCachedObjects_ = c;
   }, uncache:function() {
-    for (var a = this._objects, c = a.length, b = this.nCachedObjects_, e = this._indicesByUUID, d = this._bindings, l = d.length, f = 0, g = arguments.length; f !== g; ++f) {
-      var p = arguments[f].uuid, m = e[p];
+    for (var a = this._objects, c = a.length, b = this.nCachedObjects_, e = this._indicesByUUID, d = this._bindings, f = d.length, l = 0, g = arguments.length; l !== g; ++l) {
+      var p = arguments[l].uuid, m = e[p];
       if (void 0 !== m) {
         if (delete e[p], m < b) {
           p = --b;
@@ -15770,14 +15782,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
           a[p] = q;
           a.pop();
           n = 0;
-          for (q = l; n !== q; ++n) {
+          for (q = f; n !== q; ++n) {
             var r = d[n], t = r[h];
             r[m] = r[p];
             r[p] = t;
             r.pop();
           }
         } else {
-          for (h = --c, q = a[h], e[q.uuid] = m, a[m] = q, a.pop(), n = 0, q = l; n !== q; ++n) {
+          for (h = --c, q = a[h], e[q.uuid] = m, a[m] = q, a.pop(), n = 0, q = f; n !== q; ++n) {
             r = d[n], r[m] = r[h], r.pop();
           }
         }
@@ -15789,31 +15801,31 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (void 0 !== e) {
       return d[e];
     }
-    var k = this._paths, l = this._parsedPaths, f = this._objects, g = this.nCachedObjects_, p = Array(f.length);
+    var k = this._paths, f = this._parsedPaths, l = this._objects, g = this.nCachedObjects_, p = Array(l.length);
     e = d.length;
     b[a] = e;
     k.push(a);
-    l.push(c);
+    f.push(c);
     d.push(p);
     b = g;
-    for (e = f.length; b !== e; ++b) {
-      p[b] = new Ya(f[b], a, c);
+    for (e = l.length; b !== e; ++b) {
+      p[b] = new Ya(l[b], a, c);
     }
     return p;
   }, unsubscribe_:function(a) {
     var c = this._bindingsIndicesByPath, b = c[a];
     if (void 0 !== b) {
-      var e = this._paths, d = this._parsedPaths, k = this._bindings, l = k.length - 1, f = k[l];
-      c[a[l]] = b;
-      k[b] = f;
+      var e = this._paths, d = this._parsedPaths, k = this._bindings, f = k.length - 1, l = k[f];
+      c[a[f]] = b;
+      k[b] = l;
       k.pop();
-      d[b] = d[l];
+      d[b] = d[f];
       d.pop();
-      e[b] = e[l];
+      e[b] = e[f];
       e.pop();
     }
   }});
-  Object.assign(pi.prototype, {play:function() {
+  Object.assign(ri.prototype, {play:function() {
     this._mixer._activateAction(this);
     return this;
   }, stop:function() {
@@ -15879,14 +15891,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, halt:function(a) {
     return this.warp(this._effectiveTimeScale, 0, a);
   }, warp:function(a, c, b) {
-    var e = this._mixer, d = e.time, k = this._timeScaleInterpolant, l = this.timeScale;
+    var e = this._mixer, d = e.time, k = this._timeScaleInterpolant, f = this.timeScale;
     null === k && (this._timeScaleInterpolant = k = e._lendControlInterpolant());
     e = k.parameterPositions;
     k = k.sampleValues;
     e[0] = d;
     e[1] = d + b;
-    k[0] = a / l;
-    k[1] = c / l;
+    k[0] = a / f;
+    k[1] = c / f;
     return this;
   }, stopWarping:function() {
     var a = this._timeScaleInterpolant;
@@ -15915,7 +15927,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       if (0 < a) {
         c = this._interpolants;
         d = this._propertyBindings;
-        for (var k = 0, l = c.length; k !== l; ++k) {
+        for (var k = 0, f = c.length; k !== f; ++k) {
           c[k].evaluate(b), d[k].accumulate(e, a);
         }
       }
@@ -15973,8 +15985,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
         e = Math.floor(c / b);
         c -= b * e;
         d += Math.abs(e);
-        var l = this.repetitions - d;
-        0 >= l ? (this.clampWhenFinished ? this.paused = !0 : this.enabled = !1, this.time = c = 0 < a ? b : 0, this._mixer.dispatchEvent({type:"finished", action:this, direction:0 < a ? 1 : -1})) : (1 === l ? (a = 0 > a, this._setEndings(a, !a, k)) : this._setEndings(!1, !1, k), this._loopCount = d, this.time = c, this._mixer.dispatchEvent({type:"loop", action:this, loopDelta:e}));
+        var f = this.repetitions - d;
+        0 >= f ? (this.clampWhenFinished ? this.paused = !0 : this.enabled = !1, this.time = c = 0 < a ? b : 0, this._mixer.dispatchEvent({type:"finished", action:this, direction:0 < a ? 1 : -1})) : (1 === f ? (a = 0 > a, this._setEndings(a, !a, k)) : this._setEndings(!1, !1, k), this._loopCount = d, this.time = c, this._mixer.dispatchEvent({type:"loop", action:this, loopDelta:e}));
       } else {
         this.time = c;
       }
@@ -15997,25 +16009,25 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     k[1] = b;
     return this;
   }});
-  Tg.prototype = Object.assign(Object.create(d.prototype), {constructor:Tg, _bindAction:function(a, c) {
+  Ug.prototype = Object.assign(Object.create(d.prototype), {constructor:Ug, _bindAction:function(a, c) {
     var b = a._localRoot || this._root, e = a._clip.tracks, d = e.length, k = a._propertyBindings;
     a = a._interpolants;
-    var l = b.uuid, f = this._bindingsByRootAndName, g = f[l];
-    void 0 === g && (g = {}, f[l] = g);
-    for (f = 0; f !== d; ++f) {
-      var p = e[f], m = p.name, n = g[m];
+    var f = b.uuid, l = this._bindingsByRootAndName, g = l[f];
+    void 0 === g && (g = {}, l[f] = g);
+    for (l = 0; l !== d; ++l) {
+      var p = e[l], m = p.name, n = g[m];
       if (void 0 === n) {
-        n = k[f];
+        n = k[l];
         if (void 0 !== n) {
-          null === n._cacheIndex && (++n.referenceCount, this._addInactiveBinding(n, l, m));
+          null === n._cacheIndex && (++n.referenceCount, this._addInactiveBinding(n, f, m));
           continue;
         }
-        n = new Sg(Ya.create(b, m, c && c._propertyBindings[f].binding.parsedPath), p.ValueTypeName, p.getValueSize());
+        n = new Tg(Ya.create(b, m, c && c._propertyBindings[l].binding.parsedPath), p.ValueTypeName, p.getValueSize());
         ++n.referenceCount;
-        this._addInactiveBinding(n, l, m);
+        this._addInactiveBinding(n, f, m);
       }
-      k[f] = n;
-      a[f].resultBuffer = n.buffer;
+      k[l] = n;
+      a[l].resultBuffer = n.buffer;
     }
   }, _activateAction:function(a) {
     if (!this._isActiveAction(a)) {
@@ -16081,9 +16093,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     c = a._clip.uuid;
     b = this._actionsByClip;
     e = b[c];
-    var d = e.knownActions, k = d[d.length - 1], l = a._byClipCacheIndex;
-    k._byClipCacheIndex = l;
-    d[l] = k;
+    var d = e.knownActions, k = d[d.length - 1], f = a._byClipCacheIndex;
+    k._byClipCacheIndex = f;
+    d[f] = k;
     d.pop();
     a._byClipCacheIndex = null;
     delete e.actionByRoot[(a._localRoot || this._root).uuid];
@@ -16116,10 +16128,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, _removeInactiveBinding:function(a) {
     var c = this._bindings, b = a.binding, e = b.rootNode.uuid;
     b = b.path;
-    var d = this._bindingsByRootAndName, k = d[e], l = c[c.length - 1];
+    var d = this._bindingsByRootAndName, k = d[e], f = c[c.length - 1];
     a = a._cacheIndex;
-    l._cacheIndex = a;
-    c[a] = l;
+    f._cacheIndex = a;
+    c[a] = f;
     c.pop();
     delete k[b];
     0 === Object.keys(k).length && delete d[e];
@@ -16161,7 +16173,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     if (null === b) {
       return null;
     }
-    c = new pi(this, b, c);
+    c = new ri(this, b, c);
     this._bindAction(c, k);
     this._addInactiveAction(c, a, e);
     return c;
@@ -16181,13 +16193,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return this;
   }, update:function(a) {
     a *= this.timeScale;
-    for (var c = this._actions, b = this._nActiveActions, e = this.time += a, d = Math.sign(a), k = this._accuIndex ^= 1, l = 0; l !== b; ++l) {
-      c[l]._update(e, a, d, k);
+    for (var c = this._actions, b = this._nActiveActions, e = this.time += a, d = Math.sign(a), k = this._accuIndex ^= 1, f = 0; f !== b; ++f) {
+      c[f]._update(e, a, d, k);
     }
     a = this._bindings;
     c = this._nActiveBindings;
-    for (l = 0; l !== c; ++l) {
-      a[l].apply(k);
+    for (f = 0; f !== c; ++f) {
+      a[f].apply(k);
     }
     return this;
   }, setTime:function(a) {
@@ -16203,16 +16215,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     var b = this._actionsByClip, e = b[a];
     if (void 0 !== e) {
       e = e.knownActions;
-      for (var d = 0, k = e.length; d !== k; ++d) {
-        var l = e[d];
-        this._deactivateAction(l);
-        var f = l._cacheIndex, g = c[c.length - 1];
-        l._cacheIndex = null;
-        l._byClipCacheIndex = null;
-        g._cacheIndex = f;
-        c[f] = g;
+      for (var d = 0, f = e.length; d !== f; ++d) {
+        var k = e[d];
+        this._deactivateAction(k);
+        var l = k._cacheIndex, g = c[c.length - 1];
+        k._cacheIndex = null;
+        k._byClipCacheIndex = null;
+        g._cacheIndex = l;
+        c[l] = g;
         c.pop();
-        this._removeInactiveBindingsForAction(l);
+        this._removeInactiveBindingsForAction(k);
       }
       delete b[a];
     }
@@ -16236,19 +16248,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Mf.prototype.clone = function() {
     return new Mf(void 0 === this.value.clone ? this.value : this.value.clone());
   };
-  Ug.prototype = Object.assign(Object.create(Tb.prototype), {constructor:Ug, isInstancedInterleavedBuffer:!0, copy:function(a) {
+  Vg.prototype = Object.assign(Object.create(Tb.prototype), {constructor:Vg, isInstancedInterleavedBuffer:!0, copy:function(a) {
     Tb.prototype.copy.call(this, a);
     this.meshPerAttribute = a.meshPerAttribute;
     return this;
   }});
-  Object.assign(Vg.prototype, {set:function(a, c) {
+  Object.assign(Wg.prototype, {set:function(a, c) {
     this.ray.set(a, c);
   }, setFromCamera:function(a, c) {
     c && c.isPerspectiveCamera ? (this.ray.origin.setFromMatrixPosition(c.matrixWorld), this.ray.direction.set(a.x, a.y, .5).unproject(c).sub(this.ray.origin).normalize(), this.camera = c) : c && c.isOrthographicCamera ? (this.ray.origin.set(a.x, a.y, (c.near + c.far) / (c.near - c.far)).unproject(c), this.ray.direction.set(0, 0, -1).transformDirection(c.matrixWorld), this.camera = c) : console.error("THREE.Raycaster: Unsupported camera type.");
   }, intersectObject:function(a, c, b) {
     b = b || [];
-    Wg(a, this, b, c);
-    b.sort(qi);
+    Xg(a, this, b, c);
+    b.sort(si);
     return b;
   }, intersectObjects:function(a, c, b) {
     b = b || [];
@@ -16256,12 +16268,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       return console.warn("THREE.Raycaster.intersectObjects: objects is not an Array."), b;
     }
     for (var e = 0, d = a.length; e < d; e++) {
-      Wg(a[e], this, b, c);
+      Xg(a[e], this, b, c);
     }
-    b.sort(qi);
+    b.sort(si);
     return b;
   }});
-  Object.assign(ri.prototype, {set:function(a, c, b) {
+  Object.assign(ti.prototype, {set:function(a, c, b) {
     this.radius = a;
     this.phi = c;
     this.theta = b;
@@ -16283,7 +16295,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     0 === this.radius ? this.phi = this.theta = 0 : (this.theta = Math.atan2(a, b), this.phi = Math.acos(ma.clamp(c / this.radius, -1, 1)));
     return this;
   }});
-  Object.assign(si.prototype, {set:function(a, c, b) {
+  Object.assign(ui.prototype, {set:function(a, c, b) {
     this.radius = a;
     this.theta = c;
     this.y = b;
@@ -16303,8 +16315,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.y = c;
     return this;
   }});
-  var gj = new h;
-  Object.assign(Xg.prototype, {set:function(a, c) {
+  var ij = new h;
+  Object.assign(Yg.prototype, {set:function(a, c) {
     this.min.copy(a);
     this.max.copy(c);
     return this;
@@ -16315,7 +16327,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     }
     return this;
   }, setFromCenterAndSize:function(a, c) {
-    c = gj.copy(c).multiplyScalar(.5);
+    c = ij.copy(c).multiplyScalar(.5);
     this.min.copy(a).sub(c);
     this.max.copy(a).add(c);
     return this;
@@ -16362,7 +16374,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 === c && (console.warn("THREE.Box2: .clampPoint() target is now required"), c = new h);
     return c.copy(a).clamp(this.min, this.max);
   }, distanceToPoint:function(a) {
-    return gj.copy(a).clamp(this.min, this.max).sub(a).length();
+    return ij.copy(a).clamp(this.min, this.max).sub(a).length();
   }, intersect:function(a) {
     this.min.max(a.min);
     this.max.min(a.max);
@@ -16378,8 +16390,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }, equals:function(a) {
     return a.min.equals(this.min) && a.max.equals(this.max);
   }});
-  var hj = new m, lg = new m;
-  Object.assign(Yg.prototype, {set:function(a, c) {
+  var jj = new m, lg = new m;
+  Object.assign(Zg.prototype, {set:function(a, c) {
     this.start.copy(a);
     this.end.copy(c);
     return this;
@@ -16403,10 +16415,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     void 0 === c && (console.warn("THREE.Line3: .at() target is now required"), c = new m);
     return this.delta(c).multiplyScalar(a).add(this.start);
   }, closestPointToPointParameter:function(a, c) {
-    hj.subVectors(a, this.start);
+    jj.subVectors(a, this.start);
     lg.subVectors(this.end, this.start);
     a = lg.dot(lg);
-    a = lg.dot(hj) / a;
+    a = lg.dot(jj) / a;
     c && (a = ma.clamp(a, 0, 1));
     return a;
   }, closestPointToPoint:function(a, c, b) {
@@ -16423,7 +16435,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Le.prototype = Object.create(t.prototype);
   Le.prototype.constructor = Le;
   Le.prototype.isImmediateRenderObject = !0;
-  var ij = new m;
+  var kj = new m;
   Gd.prototype = Object.create(t.prototype);
   Gd.prototype.constructor = Gd;
   Gd.prototype.dispose = function() {
@@ -16434,20 +16446,20 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.light.updateMatrixWorld();
     var a = this.light.distance ? this.light.distance : 1E3, c = a * Math.tan(this.light.angle);
     this.cone.scale.set(c, c, a);
-    ij.setFromMatrixPosition(this.light.target.matrixWorld);
-    this.cone.lookAt(ij);
+    kj.setFromMatrixPosition(this.light.target.matrixWorld);
+    this.cone.lookAt(kj);
     void 0 !== this.color ? this.cone.material.color.set(this.color) : this.cone.material.color.copy(this.light.color);
   };
-  var tc = new m, mg = new n, Ch = new n;
+  var tc = new m, mg = new n, Dh = new n;
   Uc.prototype = Object.create(Da.prototype);
   Uc.prototype.constructor = Uc;
   Uc.prototype.isSkeletonHelper = !0;
   Uc.prototype.updateMatrixWorld = function(a) {
     var c = this.bones, b = this.geometry, e = b.getAttribute("position");
-    Ch.getInverse(this.root.matrixWorld);
-    for (var d = 0, l = 0; d < c.length; d++) {
+    Dh.getInverse(this.root.matrixWorld);
+    for (var d = 0, f = 0; d < c.length; d++) {
       var k = c[d];
-      k.parent && k.parent.isBone && (mg.multiplyMatrices(Ch, k.matrixWorld), tc.setFromMatrixPosition(mg), e.setXYZ(l, tc.x, tc.y, tc.z), mg.multiplyMatrices(Ch, k.parent.matrixWorld), tc.setFromMatrixPosition(mg), e.setXYZ(l + 1, tc.x, tc.y, tc.z), l += 2);
+      k.parent && k.parent.isBone && (mg.multiplyMatrices(Dh, k.matrixWorld), tc.setFromMatrixPosition(mg), e.setXYZ(f, tc.x, tc.y, tc.z), mg.multiplyMatrices(Dh, k.parent.matrixWorld), tc.setFromMatrixPosition(mg), e.setXYZ(f + 1, tc.x, tc.y, tc.z), f += 2);
     }
     b.getAttribute("position").needsUpdate = !0;
     t.prototype.updateMatrixWorld.call(this, a);
@@ -16461,7 +16473,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   Hd.prototype.update = function() {
     void 0 !== this.color ? this.material.color.set(this.color) : this.material.color.copy(this.light.color);
   };
-  var Ck = new m, jj = new A, kj = new A;
+  var Ek = new m, lj = new A, mj = new A;
   Id.prototype = Object.create(t.prototype);
   Id.prototype.constructor = Id;
   Id.prototype.dispose = function() {
@@ -16474,15 +16486,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       this.material.color.set(this.color);
     } else {
       var c = a.geometry.getAttribute("color");
-      jj.copy(this.light.color);
-      kj.copy(this.light.groundColor);
+      lj.copy(this.light.color);
+      mj.copy(this.light.groundColor);
       for (var b = 0, e = c.count; b < e; b++) {
-        var d = b < e / 2 ? jj : kj;
+        var d = b < e / 2 ? lj : mj;
         c.setXYZ(b, d.r, d.g, d.b);
       }
       c.needsUpdate = !0;
     }
-    a.lookAt(Ck.setFromMatrixPosition(this.light.matrixWorld).negate());
+    a.lookAt(Ek.setFromMatrixPosition(this.light.matrixWorld).negate());
   };
   Nf.prototype = Object.assign(Object.create(Da.prototype), {constructor:Nf, copy:function(a) {
     Da.prototype.copy.call(this, a);
@@ -16494,7 +16506,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }});
   Of.prototype = Object.create(Da.prototype);
   Of.prototype.constructor = Of;
-  var lj = new m, ng = new m, mj = new m;
+  var nj = new m, ng = new m, oj = new m;
   Jd.prototype = Object.create(t.prototype);
   Jd.prototype.constructor = Jd;
   Jd.prototype.dispose = function() {
@@ -16504,13 +16516,13 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.targetLine.material.dispose();
   };
   Jd.prototype.update = function() {
-    lj.setFromMatrixPosition(this.light.matrixWorld);
+    nj.setFromMatrixPosition(this.light.matrixWorld);
     ng.setFromMatrixPosition(this.light.target.matrixWorld);
-    mj.subVectors(ng, lj);
+    oj.subVectors(ng, nj);
     this.lightPlane.lookAt(ng);
     void 0 !== this.color ? (this.lightPlane.material.color.set(this.color), this.targetLine.material.color.set(this.color)) : (this.lightPlane.material.color.copy(this.light.color), this.targetLine.material.color.copy(this.light.color));
     this.targetLine.lookAt(ng);
-    this.targetLine.scale.z = mj.length();
+    this.targetLine.scale.z = oj.length();
   };
   var Pf = new m, Fa = new U;
   Me.prototype = Object.create(Da.prototype);
@@ -16607,11 +16619,11 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     this.lookAt(this.plane.normal);
     t.prototype.updateMatrixWorld.call(this, a);
   };
-  var nj = new m, Qf, Zg;
+  var pj = new m, Qf, $g;
   Zb.prototype = Object.create(t.prototype);
   Zb.prototype.constructor = Zb;
   Zb.prototype.setDirection = function(a) {
-    .99999 < a.y ? this.quaternion.set(0, 0, 0, 1) : -.99999 > a.y ? this.quaternion.set(1, 0, 0, 0) : (nj.set(a.z, 0, -a.x).normalize(), this.quaternion.setFromAxisAngle(nj, Math.acos(a.y)));
+    .99999 < a.y ? this.quaternion.set(0, 0, 0, 1) : -.99999 > a.y ? this.quaternion.set(1, 0, 0, 0) : (pj.set(a.z, 0, -a.x).normalize(), this.quaternion.setFromAxisAngle(pj, Math.acos(a.y)));
   };
   Zb.prototype.setLength = function(a, c, b) {
     void 0 === c && (c = .2 * a);
@@ -16637,50 +16649,50 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   };
   Pe.prototype = Object.create(Da.prototype);
   Pe.prototype.constructor = Pe;
-  var Mb = Math.pow(2, 8), oj = [.125, .215, .35, .446, .526, .582], yi = 5 + oj.length, Nb = {3E3:0, 3001:1, 3002:2, 3004:3, 3005:4, 3006:5, 3007:6}, ch = new Ed, Rf = function(a) {
+  var Mb = Math.pow(2, 8), qj = [.125, .215, .35, .446, .526, .582], Ai = 5 + qj.length, Nb = {3E3:0, 3001:1, 3002:2, 3004:3, 3005:4, 3006:5, 3007:6}, dh = new Ed, Rf = function(a) {
     var c = new Float32Array(a), b = new m(0, 1, 0);
-    a = new Wb({defines:{n:a}, uniforms:{envMap:{value:null}, samples:{value:1}, weights:{value:c}, latitudinal:{value:!1}, dTheta:{value:0}, mipInt:{value:0}, poleAxis:{value:b}, inputEncoding:{value:Nb[3E3]}, outputEncoding:{value:Nb[3E3]}}, vertexShader:eh(), fragmentShader:"\nprecision mediump float;\nprecision mediump int;\nvarying vec3 vOutputDirection;\nuniform sampler2D envMap;\nuniform int samples;\nuniform float weights[n];\nuniform bool latitudinal;\nuniform float dTheta;\nuniform float mipInt;\nuniform vec3 poleAxis;\n\n" + 
-    fh() + "\n\n#define ENVMAP_TYPE_CUBE_UV\n#include <cube_uv_reflection_fragment>\n\nvoid main() {\n\tgl_FragColor = vec4(0.0);\n\tfor (int i = 0; i < n; i++) {\n\t\tif (i >= samples)\n\t\t\tbreak;\n\t\tfor (int dir = -1; dir < 2; dir += 2) {\n\t\t\tif (i == 0 && dir == 1)\n\t\t\t\tcontinue;\n\t\t\tvec3 axis = latitudinal ? poleAxis : cross(poleAxis, vOutputDirection);\n\t\t\tif (all(equal(axis, vec3(0.0))))\n\t\t\t\taxis = cross(vec3(0.0, 1.0, 0.0), vOutputDirection);\n\t\t\taxis = normalize(axis);\n\t\t\tfloat theta = dTheta * float(dir * i);\n\t\t\tfloat cosTheta = cos(theta);\n\t\t\t// Rodrigues' axis-angle rotation\n\t\t\tvec3 sampleDirection = vOutputDirection * cosTheta\n\t\t\t\t\t+ cross(axis, vOutputDirection) * sin(theta)\n\t\t\t\t\t+ axis * dot(axis, vOutputDirection) * (1.0 - cosTheta);\n\t\t\tgl_FragColor.rgb +=\n\t\t\t\t\tweights[i] * bilinearCubeUV(envMap, sampleDirection, mipInt);\n\t\t}\n\t}\n\tgl_FragColor = linearToOutputTexel(gl_FragColor);\n}\n\t\t", 
+    a = new Wb({defines:{n:a}, uniforms:{envMap:{value:null}, samples:{value:1}, weights:{value:c}, latitudinal:{value:!1}, dTheta:{value:0}, mipInt:{value:0}, poleAxis:{value:b}, inputEncoding:{value:Nb[3E3]}, outputEncoding:{value:Nb[3E3]}}, vertexShader:fh(), fragmentShader:"\nprecision mediump float;\nprecision mediump int;\nvarying vec3 vOutputDirection;\nuniform sampler2D envMap;\nuniform int samples;\nuniform float weights[n];\nuniform bool latitudinal;\nuniform float dTheta;\nuniform float mipInt;\nuniform vec3 poleAxis;\n\n" + 
+    gh() + "\n\n#define ENVMAP_TYPE_CUBE_UV\n#include <cube_uv_reflection_fragment>\n\nvoid main() {\n\tgl_FragColor = vec4(0.0);\n\tfor (int i = 0; i < n; i++) {\n\t\tif (i >= samples)\n\t\t\tbreak;\n\t\tfor (int dir = -1; dir < 2; dir += 2) {\n\t\t\tif (i == 0 && dir == 1)\n\t\t\t\tcontinue;\n\t\t\tvec3 axis = latitudinal ? poleAxis : cross(poleAxis, vOutputDirection);\n\t\t\tif (all(equal(axis, vec3(0.0))))\n\t\t\t\taxis = cross(vec3(0.0, 1.0, 0.0), vOutputDirection);\n\t\t\taxis = normalize(axis);\n\t\t\tfloat theta = dTheta * float(dir * i);\n\t\t\tfloat cosTheta = cos(theta);\n\t\t\t// Rodrigues' axis-angle rotation\n\t\t\tvec3 sampleDirection = vOutputDirection * cosTheta\n\t\t\t\t\t+ cross(axis, vOutputDirection) * sin(theta)\n\t\t\t\t\t+ axis * dot(axis, vOutputDirection) * (1.0 - cosTheta);\n\t\t\tgl_FragColor.rgb +=\n\t\t\t\t\tweights[i] * bilinearCubeUV(envMap, sampleDirection, mipInt);\n\t\t}\n\t}\n\tgl_FragColor = linearToOutputTexel(gl_FragColor);\n}\n\t\t", 
     blending:0, depthTest:!1, depthWrite:!1});
     a.type = "SphericalGaussianBlur";
     return a;
-  }(20), uc = null, vc = null, Dh = function() {
-    for (var a = [], c = [], b = [], e = 8, d = 0; d < yi; d++) {
-      var l = Math.pow(2, e);
-      c.push(l);
-      var f = 1 / l;
-      4 < d ? f = oj[d - 8 + 4 - 1] : 0 == d && (f = 0);
-      b.push(f);
-      f = 1 / (l - 1);
-      l = -f / 2;
-      f = 1 + f / 2;
-      var g = [l, l, f, l, f, f, l, l, f, f, l, f];
-      l = new Float32Array(108);
-      f = new Float32Array(72);
+  }(20), uc = null, vc = null, Eh = function() {
+    for (var a = [], c = [], b = [], e = 8, d = 0; d < Ai; d++) {
+      var f = Math.pow(2, e);
+      c.push(f);
+      var l = 1 / f;
+      4 < d ? l = qj[d - 8 + 4 - 1] : 0 == d && (l = 0);
+      b.push(l);
+      l = 1 / (f - 1);
+      f = -l / 2;
+      l = 1 + l / 2;
+      var g = [f, f, l, f, l, l, f, f, l, l, f, l];
+      f = new Float32Array(108);
+      l = new Float32Array(72);
       for (var p = new Float32Array(36), m = 0; 6 > m; m++) {
         var n = m % 3 * 2 / 3 - 1, h = 2 < m ? 0 : -1;
-        l.set([n, h, 0, n + 2 / 3, h, 0, n + 2 / 3, h + 1, 0, n, h, 0, n + 2 / 3, h + 1, 0, n, h + 1, 0], 18 * m);
-        f.set(g, 12 * m);
+        f.set([n, h, 0, n + 2 / 3, h, 0, n + 2 / 3, h + 1, 0, n, h, 0, n + 2 / 3, h + 1, 0, n, h + 1, 0], 18 * m);
+        l.set(g, 12 * m);
         p.set([m, m, m, m, m, m], 6 * m);
       }
       g = new N;
-      g.setAttribute("position", new I(l, 3));
-      g.setAttribute("uv", new I(f, 2));
+      g.setAttribute("position", new I(f, 3));
+      g.setAttribute("uv", new I(l, 2));
       g.setAttribute("faceIndex", new I(p, 1));
       a.push(g);
       4 < e && e--;
     }
     return {_lodPlanes:a, _sizeLods:c, _sigmas:b};
-  }(), Qe = Dh._lodPlanes, Ci = Dh._sizeLods, Tf = Dh._sigmas, Sf = null, Aa = null, bh = null, cd = (1 + Math.sqrt(5)) / 2, Xd = 1 / cd, Ai = [new m(1, 1, 1), new m(-1, 1, 1), new m(1, 1, -1), new m(-1, 1, -1), new m(0, cd, Xd), new m(0, cd, -Xd), new m(Xd, 0, cd), new m(-Xd, 0, cd), new m(cd, Xd, 0), new m(-cd, Xd, 0)];
-  $g.prototype = {constructor:$g, fromScene:function(a, c, b, e) {
+  }(), Qe = Eh._lodPlanes, Ei = Eh._sizeLods, Tf = Eh._sigmas, Sf = null, Aa = null, ch = null, cd = (1 + Math.sqrt(5)) / 2, Xd = 1 / cd, Ci = [new m(1, 1, 1), new m(-1, 1, 1), new m(1, 1, -1), new m(-1, 1, -1), new m(0, cd, Xd), new m(0, cd, -Xd), new m(Xd, 0, cd), new m(-Xd, 0, cd), new m(cd, Xd, 0), new m(-cd, Xd, 0)];
+  ah.prototype = {constructor:ah, fromScene:function(a, c, b, e) {
     void 0 === c && (c = 0);
     void 0 === b && (b = .1);
     void 0 === e && (e = 100);
-    bh = Aa.getRenderTarget();
-    var d = ui();
+    ch = Aa.getRenderTarget();
+    var d = wi();
     b = new ha(90, 1, b, e);
     e = [1, 1, 1, 1, -1, 1];
-    var l = [1, 1, -1, -1, -1, 1], k = Aa.outputEncoding, f = Aa.toneMapping, g = Aa.toneMappingExposure, p = Aa.getClearColor(), m = Aa.getClearAlpha();
+    var f = [1, 1, -1, -1, -1, 1], k = Aa.outputEncoding, l = Aa.toneMapping, g = Aa.toneMappingExposure, p = Aa.getClearColor(), m = Aa.getClearAlpha();
     Aa.toneMapping = 1;
     Aa.toneMappingExposure = 1;
     Aa.outputEncoding = 3E3;
@@ -16694,16 +16706,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       a.background = null;
     }
     for (n = 0; 6 > n; n++) {
-      h = n % 3, 0 == h ? (b.up.set(0, e[n], 0), b.lookAt(l[n], 0, 0)) : 1 == h ? (b.up.set(0, 0, e[n]), b.lookAt(0, l[n], 0)) : (b.up.set(0, e[n], 0), b.lookAt(0, 0, l[n])), dh(d, h * Mb, 2 < n ? Mb : 0, Mb, Mb), Aa.setRenderTarget(d), Aa.render(a, b);
+      h = n % 3, 0 == h ? (b.up.set(0, e[n], 0), b.lookAt(f[n], 0, 0)) : 1 == h ? (b.up.set(0, 0, e[n]), b.lookAt(0, f[n], 0)) : (b.up.set(0, e[n], 0), b.lookAt(0, 0, f[n])), eh(d, h * Mb, 2 < n ? Mb : 0, Mb, Mb), Aa.setRenderTarget(d), Aa.render(a, b);
     }
-    Aa.toneMapping = f;
+    Aa.toneMapping = l;
     Aa.toneMappingExposure = g;
     Aa.outputEncoding = k;
     Aa.setClearColor(p, m);
     a.scale.z *= -1;
-    0 < c && zi(d, 0, 0, c);
-    xi(d);
-    wi(d);
+    0 < c && Bi(d, 0, 0, c);
+    zi(d);
+    yi(d);
     return d;
   }, fromEquirectangular:function(a) {
     a.magFilter = 1003;
@@ -16711,9 +16723,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a.generateMipmaps = !1;
     return this.fromCubemap(a);
   }, fromCubemap:function(a) {
-    bh = Aa.getRenderTarget();
-    var c = ui(a), b = new y;
-    a.isCubeTexture ? null == vc && (vc = Ei()) : null == uc && (uc = Di());
+    ch = Aa.getRenderTarget();
+    var c = wi(a), b = new y;
+    a.isCubeTexture ? null == vc && (vc = Gi()) : null == uc && (uc = Fi());
     var e = a.isCubeTexture ? vc : uc;
     b.add(new W(Qe[0], e));
     e = e.uniforms;
@@ -16721,16 +16733,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a.isCubeTexture || e.texelSize.value.set(1 / a.image.width, 1 / a.image.height);
     e.inputEncoding.value = Nb[a.encoding];
     e.outputEncoding.value = Nb[a.encoding];
-    dh(c, 0, 0, 3 * Mb, 2 * Mb);
+    eh(c, 0, 0, 3 * Mb, 2 * Mb);
     Aa.setRenderTarget(c);
-    Aa.render(b, ch);
-    xi(c);
-    wi(c);
+    Aa.render(b, dh);
+    zi(c);
+    yi(c);
     return c;
   }, compileCubemapShader:function() {
-    null == vc && (vc = Ei(), ah(vc));
+    null == vc && (vc = Gi(), bh(vc));
   }, compileEquirectangularShader:function() {
-    null == uc && (uc = Di(), ah(uc));
+    null == uc && (uc = Fi(), bh(uc));
   }, dispose:function() {
     Rf.dispose();
     null != vc && vc.dispose();
@@ -16766,10 +16778,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.Path: .fromPoints() has been renamed to .setFromPoints().");
     return this.setFromPoints(a);
   }});
-  Fi.prototype = Object.create(Xa.prototype);
-  Gi.prototype = Object.create(Xa.prototype);
-  gh.prototype = Object.create(Xa.prototype);
-  Object.assign(gh.prototype, {initFromArray:function() {
+  Hi.prototype = Object.create(Xa.prototype);
+  Ii.prototype = Object.create(Xa.prototype);
+  hh.prototype = Object.create(Xa.prototype);
+  Object.assign(hh.prototype, {initFromArray:function() {
     console.error("THREE.Spline: .initFromArray() has been removed.");
   }, getControlPointsArray:function() {
     console.error("THREE.Spline: .getControlPointsArray() has been removed.");
@@ -16784,7 +16796,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   };
   Object.assign(qa.prototype, {extractUrlBase:function(a) {
     console.warn("THREE.Loader: .extractUrlBase() has been deprecated. Use THREE.LoaderUtils.extractUrlBase() instead.");
-    return Ah.extractUrlBase(a);
+    return Bh.extractUrlBase(a);
   }});
   qa.Handlers = {add:function() {
     console.error("THREE.Loader: Handlers.add() has been removed. Use LoadingManager.addHandler() instead.");
@@ -16795,7 +16807,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.ObjectLoader: .setTexturePath() has been renamed to .setResourcePath().");
     return this.setResourcePath(a);
   }});
-  Object.assign(Xg.prototype, {center:function(a) {
+  Object.assign(Yg.prototype, {center:function(a) {
     console.warn("THREE.Box2: .center() has been renamed to .getCenter().");
     return this.getCenter(a);
   }, empty:function() {
@@ -16828,7 +16840,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.Frustum: .setFromMatrix() has been renamed to .setFromProjectionMatrix().");
     return this.setFromProjectionMatrix(a);
   };
-  Yg.prototype.center = function(a) {
+  Zg.prototype.center = function(a) {
     console.warn("THREE.Line3: .center() has been renamed to .getCenter().");
     return this.getCenter(a);
   };
@@ -16899,9 +16911,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return a.applyMatrix4(this);
   }, applyToVector3Array:function() {
     console.error("THREE.Matrix4: .applyToVector3Array() has been removed.");
-  }, makeFrustum:function(a, c, b, e, d, l) {
+  }, makeFrustum:function(a, c, b, e, d, f) {
     console.warn("THREE.Matrix4: .makeFrustum() has been removed. Use .makePerspective( left, right, top, bottom, near, far ) instead.");
-    return this.makePerspective(a, c, e, b, d, l);
+    return this.makePerspective(a, c, e, b, d, f);
   }});
   w.prototype.isIntersectionLine = function(a) {
     console.warn("THREE.Plane: .isIntersectionLine() has been renamed to .intersectsLine().");
@@ -16911,7 +16923,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.Quaternion: .multiplyVector3() has been removed. Use is now vector.applyQuaternion( quaternion ) instead.");
     return a.applyQuaternion(this);
   };
-  Object.assign(u.prototype, {isIntersectionBox:function(a) {
+  Object.assign(v.prototype, {isIntersectionBox:function(a) {
     console.warn("THREE.Ray: .isIntersectionBox() has been renamed to .intersectsBox().");
     return this.intersectsBox(a);
   }, isIntersectionPlane:function(a) {
@@ -17150,7 +17162,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.BufferGeometry: .offsets has been renamed to .groups.");
     return this.groups;
   }}});
-  Object.defineProperties(Vg.prototype, {linePrecision:{get:function() {
+  Object.defineProperties(Wg.prototype, {linePrecision:{get:function() {
     console.warn("THREE.Raycaster: .linePrecision has been deprecated. Use .params.Line.threshold instead.");
     return this.params.Line.threshold;
   }, set:function(a) {
@@ -17220,7 +17232,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE. ShaderMaterial: .derivatives has been moved to .extensions.derivatives.");
     this.extensions.derivatives = a;
   }}});
-  Object.assign(vg.prototype, {clearTarget:function(a, c, b, e) {
+  Object.assign(wg.prototype, {clearTarget:function(a, c, b, e) {
     console.warn("THREE.WebGLRenderer: .clearTarget() has been deprecated. Use .setRenderTarget() and .clear() instead.");
     this.setRenderTarget(a);
     this.clear(c, b, e);
@@ -17288,7 +17300,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.WebGLRenderer: .getActiveMipMapLevel() is now .getActiveMipmapLevel().");
     return this.getActiveMipmapLevel();
   }});
-  Object.defineProperties(vg.prototype, {shadowMapEnabled:{get:function() {
+  Object.defineProperties(wg.prototype, {shadowMapEnabled:{get:function() {
     return this.shadowMap.enabled;
   }, set:function(a) {
     console.warn("THREE.WebGLRenderer: .shadowMapEnabled is now .shadowMap.enabled.");
@@ -17320,7 +17332,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.WebGLRenderer: .gammaOutput has been removed. Set WebGLRenderer.outputEncoding instead.");
     this.outputEncoding = !0 === a ? 3001 : 3E3;
   }}});
-  Object.defineProperties(Yh.prototype, {cullFace:{get:function() {
+  Object.defineProperties($h.prototype, {cullFace:{get:function() {
     console.warn("THREE.WebGLRenderer: .shadowMap.cullFace has been removed. Set Material.shadowSide instead.");
   }, set:function() {
     console.warn("THREE.WebGLRenderer: .shadowMap.cullFace has been removed. Set Material.shadowSide instead.");
@@ -17404,7 +17416,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   }}, startTime:{set:function() {
     console.warn("THREE.Audio: .startTime is now .play( delay ).");
   }}});
-  Rg.prototype.getData = function() {
+  Sg.prototype.getData = function() {
     console.warn("THREE.AudioAnalyser: .getData() is now .getFrequencyData().");
     return this.getFrequencyData();
   };
@@ -17435,7 +17447,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   oc.loadCompressedTextureCube = function() {
     console.error("THREE.ImageUtils.loadCompressedTextureCube has been removed. Use THREE.DDSLoader instead.");
   };
-  "undefined" !== typeof __THREE_DEVTOOLS__ && __THREE_DEVTOOLS__.dispatchEvent(new CustomEvent("register", {detail:{revision:"114"}}));
+  "undefined" !== typeof __THREE_DEVTOOLS__ && __THREE_DEVTOOLS__.dispatchEvent(new CustomEvent("register", {detail:{revision:"115dev"}}));
   a.ACESFilmicToneMapping = 5;
   a.AddEquation = 100;
   a.AddOperation = 2;
@@ -17444,19 +17456,19 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.AlwaysDepth = 1;
   a.AlwaysStencilFunc = 519;
   a.AmbientLight = Df;
-  a.AmbientLightProbe = Mg;
+  a.AmbientLightProbe = Ng;
   a.AnimationClip = mb;
-  a.AnimationLoader = Dg;
-  a.AnimationMixer = Tg;
-  a.AnimationObjectGroup = oi;
+  a.AnimationLoader = Eg;
+  a.AnimationMixer = Ug;
+  a.AnimationObjectGroup = qi;
   a.AnimationUtils = Ea;
   a.ArcCurve = Dd;
   a.ArrayCamera = gf;
   a.ArrowHelper = Zb;
   a.Audio = Fd;
-  a.AudioAnalyser = Rg;
-  a.AudioContext = Pg;
-  a.AudioListener = Og;
+  a.AudioAnalyser = Sg;
+  a.AudioContext = Qg;
+  a.AudioListener = Pg;
   a.AudioLoader = Kf;
   a.AxesHelper = Pe;
   a.AxisHelper = function(a) {
@@ -17470,17 +17482,17 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.BinaryTextureLoader has been renamed to THREE.DataTextureLoader.");
     return new uf(a);
   };
-  a.Bone = wg;
+  a.Bone = xg;
   a.BooleanKeyframeTrack = qf;
   a.BoundingBoxHelper = function(a, c) {
     console.warn("THREE.BoundingBoxHelper has been deprecated. Creating a THREE.BoxHelper instead.");
     return new Yb(a, c);
   };
-  a.Box2 = Xg;
+  a.Box2 = Yg;
   a.Box3 = x;
   a.Box3Helper = Ne;
   a.BoxBufferGeometry = Zd;
-  a.BoxGeometry = uh;
+  a.BoxGeometry = vh;
   a.BoxHelper = Yb;
   a.BufferAttribute = I;
   a.BufferGeometry = N;
@@ -17498,16 +17510,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.CircleBufferGeometry = zd;
   a.CircleGeometry = Ge;
   a.ClampToEdgeWrapping = 1001;
-  a.Clock = Ng;
-  a.ClosedSplineCurve3 = Fi;
+  a.Clock = Og;
+  a.ClosedSplineCurve3 = Hi;
   a.Color = A;
   a.ColorKeyframeTrack = rf;
   a.CompressedTexture = md;
-  a.CompressedTextureLoader = Eg;
+  a.CompressedTextureLoader = Fg;
   a.ConeBufferGeometry = Fe;
   a.ConeGeometry = Ee;
   a.CubeCamera = ra;
-  a.CubeGeometry = uh;
+  a.CubeGeometry = vh;
   a.CubeReflectionMapping = 301;
   a.CubeRefractionMapping = 302;
   a.CubeTexture = Wa;
@@ -17526,14 +17538,14 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.CustomBlending = 5;
   a.CylinderBufferGeometry = Vb;
   a.CylinderGeometry = Mc;
-  a.Cylindrical = si;
+  a.Cylindrical = ui;
   a.DataTexture = Ja;
   a.DataTexture2DArray = ya;
   a.DataTexture3D = kb;
   a.DataTextureLoader = uf;
   a.DecrementStencilOp = 7683;
   a.DecrementWrapStencilOp = 34056;
-  a.DefaultLoadingManager = ki;
+  a.DefaultLoadingManager = mi;
   a.DepthFormat = 1026;
   a.DepthStencilFormat = 1027;
   a.DepthTexture = me;
@@ -17568,9 +17580,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.ExtrudeBufferGeometry = Hb;
   a.ExtrudeGeometry = Ic;
   a.Face3 = E;
-  a.Face4 = function(a, c, b, e, d, l, f) {
+  a.Face4 = function(a, c, b, e, d, f, l) {
     console.warn("THREE.Face4 has been removed. A THREE.Face3 will be created instead.");
-    return new E(a, c, b, d, l, f);
+    return new E(a, c, b, d, f, l);
   };
   a.FaceColors = 1;
   a.FileLoader = nb;
@@ -17588,8 +17600,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.FloatType = 1015;
   a.Fog = jf;
   a.FogExp2 = hf;
-  a.Font = Jg;
-  a.FontLoader = Kg;
+  a.Font = Kg;
+  a.FontLoader = Lg;
   a.FrontFaceDirectionCCW = 1;
   a.FrontFaceDirectionCW = 0;
   a.FrontSide = 0;
@@ -17617,10 +17629,10 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.HalfFloatType = 1016;
   a.HemisphereLight = xf;
   a.HemisphereLightHelper = Id;
-  a.HemisphereLightProbe = Lg;
+  a.HemisphereLightProbe = Mg;
   a.IcosahedronBufferGeometry = qd;
   a.IcosahedronGeometry = re;
-  a.ImageBitmapLoader = Hg;
+  a.ImageBitmapLoader = Ig;
   a.ImageLoader = Cd;
   a.ImageUtils = oc;
   a.ImmediateRenderObject = Le;
@@ -17628,7 +17640,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.IncrementWrapStencilOp = 34055;
   a.InstancedBufferAttribute = Hf;
   a.InstancedBufferGeometry = Gf;
-  a.InstancedInterleavedBuffer = Ug;
+  a.InstancedInterleavedBuffer = Vg;
   a.InstancedMesh = mf;
   a.Int16Attribute = function(a, c) {
     console.warn("THREE.Int16Attribute has been removed. Use new THREE.Int16BufferAttribute() instead.");
@@ -17673,7 +17685,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.LightProbe = zb;
   a.LightShadow = Lb;
   a.Line = fb;
-  a.Line3 = Yg;
+  a.Line3 = Zg;
   a.LineBasicMaterial = Ca;
   a.LineCurve = cb;
   a.LineCurve3 = vb;
@@ -17691,8 +17703,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.LinearMipmapNearestFilter = 1007;
   a.LinearToneMapping = 1;
   a.Loader = qa;
-  a.LoaderUtils = Ah;
-  a.LoadingManager = Cg;
+  a.LoaderUtils = Bh;
+  a.LoadingManager = Dg;
   a.LogLuvEncoding = 3003;
   a.LoopOnce = 2200;
   a.LoopPingPong = 2202;
@@ -17764,7 +17776,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.OrthographicCamera = Ed;
   a.PCFShadowMap = 1;
   a.PCFSoftShadowMap = 2;
-  a.PMREMGenerator = $g;
+  a.PMREMGenerator = ah;
   a.ParametricBufferGeometry = od;
   a.ParametricGeometry = ne;
   a.Particle = function(a) {
@@ -17804,15 +17816,15 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.PolarGridHelper = Of;
   a.PolyhedronBufferGeometry = bb;
   a.PolyhedronGeometry = oe;
-  a.PositionalAudio = Qg;
+  a.PositionalAudio = Rg;
   a.PropertyBinding = Ya;
-  a.PropertyMixer = Sg;
+  a.PropertyMixer = Tg;
   a.QuadraticBezierCurve = wb;
   a.QuadraticBezierCurve3 = Kb;
   a.Quaternion = r;
   a.QuaternionKeyframeTrack = Ie;
   a.QuaternionLinearInterpolant = sf;
-  a.REVISION = "114";
+  a.REVISION = "115dev";
   a.RGBADepthPacking = 3201;
   a.RGBAFormat = 1023;
   a.RGBAIntegerFormat = 1033;
@@ -17851,8 +17863,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.RGFormat = 1030;
   a.RGIntegerFormat = 1031;
   a.RawShaderMaterial = Wb;
-  a.Ray = u;
-  a.Raycaster = Vg;
+  a.Ray = v;
+  a.Raycaster = Wg;
   a.RectAreaLight = Ef;
   a.RedFormat = 1028;
   a.RedIntegerFormat = 1029;
@@ -17891,7 +17903,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.Shape = nc;
   a.ShapeBufferGeometry = Lc;
   a.ShapeGeometry = Kc;
-  a.ShapePath = Ig;
+  a.ShapePath = Jg;
   a.ShapeUtils = Ub;
   a.ShortType = 1011;
   a.Skeleton = lf;
@@ -17901,12 +17913,12 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.Sphere = p;
   a.SphereBufferGeometry = Jc;
   a.SphereGeometry = Be;
-  a.Spherical = ri;
+  a.Spherical = ti;
   a.SphericalHarmonics3 = Lf;
   a.SphericalReflectionMapping = 305;
-  a.Spline = gh;
+  a.Spline = hh;
   a.SplineCurve = xb;
-  a.SplineCurve3 = Gi;
+  a.SplineCurve3 = Ii;
   a.SpotLight = zf;
   a.SpotLightHelper = Gd;
   a.SpotLightShadow = yf;
@@ -17918,7 +17930,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.StaticCopyUsage = 35046;
   a.StaticDrawUsage = 35044;
   a.StaticReadUsage = 35045;
-  a.StereoCamera = mi;
+  a.StereoCamera = oi;
   a.StreamCopyUsage = 35042;
   a.StreamDrawUsage = 35040;
   a.StreamReadUsage = 35041;
@@ -17956,9 +17968,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.Uint32BufferAttribute = Z;
   a.Uint8Attribute = function(a, c) {
     console.warn("THREE.Uint8Attribute has been removed. Use new THREE.Uint8BufferAttribute() instead.");
-    return new K(a, c);
+    return new L(a, c);
   };
-  a.Uint8BufferAttribute = K;
+  a.Uint8BufferAttribute = L;
   a.Uint8ClampedAttribute = function(a, c) {
     console.warn("THREE.Uint8ClampedAttribute has been removed. Use new THREE.Uint8ClampedBufferAttribute() instead.");
     return new G(a, c);
@@ -17967,7 +17979,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
   a.Uncharted2ToneMapping = 3;
   a.Uniform = Mf;
   a.UniformsLib = aa;
-  a.UniformsUtils = Vh;
+  a.UniformsUtils = Xh;
   a.UnsignedByteType = 1009;
   a.UnsignedInt248Type = 1020;
   a.UnsignedIntType = 1014;
@@ -17985,7 +17997,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     return new m(a, c, b);
   };
   a.VertexColors = 2;
-  a.VideoTexture = zg;
+  a.VideoTexture = Ag;
   a.WebGLCubeRenderTarget = wa;
   a.WebGLMultisampleRenderTarget = q;
   a.WebGLRenderTarget = e;
@@ -17993,8 +18005,8 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     console.warn("THREE.WebGLRenderTargetCube( width, height, options ) is now WebGLCubeRenderTarget( size, options ).");
     return new wa(a, b);
   };
-  a.WebGLRenderer = vg;
-  a.WebGLUtils = Zh;
+  a.WebGLRenderer = wg;
+  a.WebGLUtils = ai;
   a.WireframeGeometry = nd;
   a.WireframeHelper = function(a, c) {
     console.warn("THREE.WireframeHelper has been removed. Use THREE.WireframeGeometry instead.");
@@ -18177,16 +18189,16 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       for (l = this.vertices.length; f < l; f++) {
         if (z = e[f], z !== n && z !== c && z !== p && (x = Math.abs(b.distanceToPoint(z.point)), x > q)) {
           q = x;
-          var u = z;
+          var v = z;
         }
       }
       x = [];
-      if (0 > b.distanceToPoint(u.point)) {
-        for (x.push(d.create(n, c, p), d.create(u, c, n), d.create(u, p, c), d.create(u, n, p)), f = 0; 3 > f; f++) {
+      if (0 > b.distanceToPoint(v.point)) {
+        for (x.push(d.create(n, c, p), d.create(v, c, n), d.create(v, p, c), d.create(v, n, p)), f = 0; 3 > f; f++) {
           h = (f + 1) % 3, x[f + 1].getEdge(2).setTwin(x[0].getEdge(h)), x[f + 1].getEdge(1).setTwin(x[h + 1].getEdge(0));
         }
       } else {
-        for (x.push(d.create(n, p, c), d.create(u, n, c), d.create(u, c, p), d.create(u, p, n)), f = 0; 3 > f; f++) {
+        for (x.push(d.create(n, p, c), d.create(v, n, c), d.create(v, c, p), d.create(v, p, n)), f = 0; 3 > f; f++) {
           h = (f + 1) % 3, x[f + 1].getEdge(2).setTwin(x[0].getEdge((3 - f) % 3)), x[f + 1].getEdge(0).setTwin(x[h + 1].getEdge(1));
         }
       }
@@ -18195,7 +18207,7 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
       f = 0;
       for (l = e.length; f < l; f++) {
-        if (z = e[f], z !== n && z !== c && z !== p && z !== u) {
+        if (z = e[f], z !== n && z !== c && z !== p && z !== v) {
           q = this.tolerance;
           var w = null;
           for (h = 0; 4 > h; h++) {
@@ -18439,7 +18451,7 @@ SimplexNoise.prototype.noise3d = function(a, d, h) {
   } else {
     m < n ? (c = t = 0, y = 1, l = 0, z = x = 1) : r < n ? (t = 0, c = 1, l = y = 0, z = x = 1) : (t = 0, c = 1, y = 0, x = l = 1, z = 0);
   }
-  var p = r - t + b, u = m - c + b, w = n - y + b;
+  var p = r - t + b, v = m - c + b, w = n - y + b;
   q = r - l + 2 * b;
   a = m - x + 2 * b;
   var C = n - z + 2 * b;
@@ -18454,8 +18466,8 @@ SimplexNoise.prototype.noise3d = function(a, d, h) {
   g = this.perm[g + 1 + this.perm[A + 1 + this.perm[D + 1]]] % 12;
   x = .6 - r * r - m * m - n * n;
   0 > x ? r = 0 : (x *= x, r = x * x * this.dot3(this.grad3[f], r, m, n));
-  m = .6 - p * p - u * u - w * w;
-  0 > m ? m = 0 : (m *= m, m = m * m * this.dot3(this.grad3[e], p, u, w));
+  m = .6 - p * p - v * v - w * w;
+  0 > m ? m = 0 : (m *= m, m = m * m * this.dot3(this.grad3[e], p, v, w));
   p = .6 - q * q - a * a - C * C;
   0 > p ? q = 0 : (p *= p, q = p * p * this.dot3(this.grad3[l], q, a, C));
   a = .6 - h * h - d * d - b * b;
@@ -18474,7 +18486,7 @@ SimplexNoise.prototype.noise4d = function(a, d, h, b) {
   b = (a > t ? 32 : 0) + (a > y ? 16 : 0) + (t > y ? 8 : 0) + (a > x ? 4 : 0) + (t > x ? 2 : 0) + (y > x ? 1 : 0);
   var z = 3 <= f[b][0] ? 1 : 0;
   var p = 3 <= f[b][1] ? 1 : 0;
-  var u = 3 <= f[b][2] ? 1 : 0;
+  var v = 3 <= f[b][2] ? 1 : 0;
   var w = 3 <= f[b][3] ? 1 : 0;
   var C = 2 <= f[b][0] ? 1 : 0;
   var A = 2 <= f[b][1] ? 1 : 0;
@@ -18484,7 +18496,7 @@ SimplexNoise.prototype.noise4d = function(a, d, h, b) {
   var E = 1 <= f[b][1] ? 1 : 0;
   var H = 1 <= f[b][2] ? 1 : 0;
   var J = 1 <= f[b][3] ? 1 : 0;
-  var I = a - z + q, R = t - p + q, K = y - u + q, G = x - w + q, M = a - C + 2 * q, S = t - A + 2 * q, O = y - D + 2 * q, Z = x - F + 2 * q;
+  var I = a - z + q, R = t - p + q, L = y - v + q, G = x - w + q, M = a - C + 2 * q, S = t - A + 2 * q, O = y - D + 2 * q, Z = x - F + 2 * q;
   r = a - B + 3 * q;
   d = t - E + 3 * q;
   var Q = y - H + 3 * q, V = x - J + 3 * q;
@@ -18497,14 +18509,14 @@ SimplexNoise.prototype.noise4d = function(a, d, h, b) {
   var P = c & 255;
   l &= 255;
   c = e[m + e[n + e[P + e[l]]]] % 32;
-  z = e[m + z + e[n + p + e[P + u + e[l + w]]]] % 32;
+  z = e[m + z + e[n + p + e[P + v + e[l + w]]]] % 32;
   C = e[m + C + e[n + A + e[P + D + e[l + F]]]] % 32;
   B = e[m + B + e[n + E + e[P + H + e[l + J]]]] % 32;
   e = e[m + 1 + e[n + 1 + e[P + 1 + e[l + 1]]]] % 32;
   l = .6 - a * a - t * t - y * y - x * x;
   0 > l ? a = 0 : (l *= l, a = l * l * this.dot4(g[c], a, t, y, x));
-  t = .6 - I * I - R * R - K * K - G * G;
-  0 > t ? t = 0 : (t *= t, t = t * t * this.dot4(g[z], I, R, K, G));
+  t = .6 - I * I - R * R - L * L - G * G;
+  0 > t ? t = 0 : (t *= t, t = t * t * this.dot4(g[z], I, R, L, G));
   y = .6 - M * M - S * S - O * O - Z * Z;
   0 > y ? y = 0 : (y *= y, y = y * y * this.dot4(g[C], M, S, O, Z));
   M = .6 - r * r - d * d - Q * Q - V * V;
@@ -19110,29 +19122,29 @@ THREE.Lensflare = function() {
   this.onBeforeRender = function(r, z, p) {
     y.copy(r.getCurrentViewport());
     z = y.w / y.z;
-    var u = y.z / 2, w = y.w / 2, x = 16 / y.w;
+    var v = y.z / 2, w = y.w / 2, x = 16 / y.w;
     c.set(x * z, x);
     t.min.set(y.x, y.y);
     t.max.set(y.x + (y.z - 16), y.y + (y.w - 16));
     a.setFromMatrixPosition(this.matrixWorld);
     a.applyMatrix4(p.matrixWorldInverse);
     a.applyMatrix4(p.projectionMatrix);
-    l.x = y.x + a.x * u + u - 8;
+    l.x = y.x + a.x * v + v - 8;
     l.y = y.y + a.y * w + w - 8;
     if (t.containsPoint(l)) {
       r.copyFramebufferToTexture(l, d);
-      u = g.uniforms;
-      u.scale.value = c;
-      u.screenPosition.value = a;
+      v = g.uniforms;
+      v.scale.value = c;
+      v.screenPosition.value = a;
       r.renderBufferDirect(p, null, b, g, e, null);
       r.copyFramebufferToTexture(l, h);
-      u = f.uniforms;
-      u.scale.value = c;
-      u.screenPosition.value = a;
+      v = f.uniforms;
+      v.scale.value = c;
+      v.screenPosition.value = a;
       r.renderBufferDirect(p, null, b, f, e, null);
       w = 2 * -a.x;
       for (var A = 2 * -a.y, D = 0, F = q.length; D < F; D++) {
-        z = q[D], u = m.uniforms, u.color.value.copy(z.color), u.map.value = z.texture, u.screenPosition.value.x = a.x + w * z.distance, u.screenPosition.value.y = a.y + A * z.distance, x = z.size / y.w, z = y.w / y.z, u.scale.value.set(x * z, x), m.uniformsNeedUpdate = !0, r.renderBufferDirect(p, null, b, m, n, null);
+        z = q[D], v = m.uniforms, v.color.value.copy(z.color), v.map.value = z.texture, v.screenPosition.value.x = a.x + w * z.distance, v.screenPosition.value.y = a.y + A * z.distance, x = z.size / y.w, z = y.w / y.z, v.scale.value.set(x * z, x), m.uniformsNeedUpdate = !0, r.renderBufferDirect(p, null, b, m, n, null);
       }
     }
   };
@@ -19403,14 +19415,14 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
         throw RangeError("Illegal offset: 0 <= " + b + " (+0) <= " + this.buffer.byteLength);
       }
     }
-    var e = b, d = a.length, l = d >> 3, f = 0;
-    for (b += this.writeVarint32(d, b); l--;) {
-      var g = !!a[f++] & 1 | (!!a[f++] & 1) << 1 | (!!a[f++] & 1) << 2 | (!!a[f++] & 1) << 3 | (!!a[f++] & 1) << 4 | (!!a[f++] & 1) << 5 | (!!a[f++] & 1) << 6 | (!!a[f++] & 1) << 7;
+    var e = b, d = a.length, f = d >> 3, l = 0;
+    for (b += this.writeVarint32(d, b); f--;) {
+      var g = !!a[l++] & 1 | (!!a[l++] & 1) << 1 | (!!a[l++] & 1) << 2 | (!!a[l++] & 1) << 3 | (!!a[l++] & 1) << 4 | (!!a[l++] & 1) << 5 | (!!a[l++] & 1) << 6 | (!!a[l++] & 1) << 7;
       this.writeByte(g, b++);
     }
-    if (f < d) {
-      for (g = l = 0; f < d;) {
-        g |= (!!a[f++] & 1) << l++;
+    if (l < d) {
+      for (g = f = 0; l < d;) {
+        g |= (!!a[l++] & 1) << f++;
       }
       this.writeByte(g, b++);
     }
@@ -20123,8 +20135,8 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     var e = b;
     var f = n.calculateUTF16asUTF8(d(a), this.noAssert)[1];
     b += 4 + f;
-    var l = this.buffer.byteLength;
-    b > l && this.resize((l *= 2) > b ? l : b);
+    var g = this.buffer.byteLength;
+    b > g && this.resize((g *= 2) > b ? g : b);
     b -= 4 + f;
     this.littleEndian ? (this.view[b + 3] = f >>> 24 & 255, this.view[b + 2] = f >>> 16 & 255, this.view[b + 1] = f >>> 8 & 255, this.view[b] = f & 255) : (this.view[b] = f >>> 24 & 255, this.view[b + 1] = f >>> 16 & 255, this.view[b + 2] = f >>> 8 & 255, this.view[b + 3] = f & 255);
     b += 4;
@@ -20170,8 +20182,8 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     var e = b;
     var f = n.calculateUTF16asUTF8(d(a))[1];
     b += f;
-    var l = this.buffer.byteLength;
-    b > l && this.resize((l *= 2) > b ? l : b);
+    var g = this.buffer.byteLength;
+    b > g && this.resize((g *= 2) > b ? g : b);
     b -= f;
     n.encodeUTF16toUTF8(d(a), function(a) {
       this.view[b++] = a;
@@ -20204,19 +20216,19 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
         throw RangeError("Illegal offset: 0 <= " + e + " (+0) <= " + this.buffer.byteLength);
       }
     }
-    var d = 0, l = e;
+    var d = 0, g = e;
     if (b === f.METRICS_CHARS) {
-      var g = h();
+      var l = h();
       n.decodeUTF8(function() {
         return d < a && e < this.limit ? this.view[e++] : null;
       }.bind(this), function(a) {
         ++d;
-        n.UTF8toUTF16(a, g);
+        n.UTF8toUTF16(a, l);
       });
       if (d !== a) {
         throw RangeError("Illegal range: Truncated data, " + d + " == " + a);
       }
-      return c ? (this.offset = e, g()) : {string:g(), length:e - l};
+      return c ? (this.offset = e, l()) : {string:l(), length:e - g};
     }
     if (b === f.METRICS_BYTES) {
       if (!this.noAssert) {
@@ -20231,11 +20243,11 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
       var m = e + a;
       n.decodeUTF8toUTF16(function() {
         return e < m ? this.view[e++] : null;
-      }.bind(this), g = h(), this.noAssert);
+      }.bind(this), l = h(), this.noAssert);
       if (e !== m) {
         throw RangeError("Illegal range: Truncated data, " + e + " == " + m);
       }
-      return c ? (this.offset = e, g()) : {string:g(), length:e - l};
+      return c ? (this.offset = e, l()) : {string:l(), length:e - g};
     }
     throw TypeError("Unsupported metrics: " + b);
   };
@@ -20256,18 +20268,18 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
       }
     }
     var e = b;
-    var l = n.calculateUTF16asUTF8(d(a), this.noAssert)[1];
-    var g = f.calculateVarint32(l);
-    b += g + l;
+    var g = n.calculateUTF16asUTF8(d(a), this.noAssert)[1];
+    var l = f.calculateVarint32(g);
+    b += l + g;
     var p = this.buffer.byteLength;
     b > p && this.resize((p *= 2) > b ? p : b);
-    b -= g + l;
-    b += this.writeVarint32(l, b);
+    b -= l + g;
+    b += this.writeVarint32(g, b);
     n.encodeUTF16toUTF8(d(a), function(a) {
       this.view[b++] = a;
     }.bind(this));
-    if (b !== e + l + g) {
-      throw RangeError("Illegal range: Truncated data, " + b + " == " + (b + l + g));
+    if (b !== e + g + l) {
+      throw RangeError("Illegal range: Truncated data, " + b + " == " + (b + g + l));
     }
     return c ? (this.offset = b, this) : b - e;
   };
@@ -20401,11 +20413,11 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     return e;
   };
   e.copyTo = function(a, b, e, d) {
-    var c, l;
+    var c, g;
     if (!this.noAssert && !f.isByteBuffer(a)) {
       throw TypeError("Illegal target: Not a ByteBuffer");
     }
-    b = (l = "undefined" === typeof b) ? a.offset : b | 0;
+    b = (g = "undefined" === typeof b) ? a.offset : b | 0;
     e = (c = "undefined" === typeof e) ? this.offset : e | 0;
     d = "undefined" === typeof d ? this.limit : d | 0;
     if (0 > b || b > a.buffer.byteLength) {
@@ -20414,14 +20426,14 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     if (0 > e || d > this.buffer.byteLength) {
       throw RangeError("Illegal source range: 0 <= " + e + " <= " + this.buffer.byteLength);
     }
-    var g = d - e;
-    if (0 === g) {
+    var l = d - e;
+    if (0 === l) {
       return a;
     }
-    a.ensureCapacity(b + g);
+    a.ensureCapacity(b + l);
     a.view.set(this.view.subarray(e, d), b);
-    c && (this.offset += g);
-    l && (a.offset += g);
+    c && (this.offset += l);
+    g && (a.offset += l);
     return this;
   };
   e.ensureCapacity = function(a) {
@@ -20516,10 +20528,10 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     }
     var d = b - e;
     if (0 < d) {
-      var l = new ArrayBuffer(this.buffer.byteLength + d), g = new Uint8Array(l);
-      g.set(this.view.subarray(e, this.buffer.byteLength), b);
-      this.buffer = l;
-      this.view = g;
+      var g = new ArrayBuffer(this.buffer.byteLength + d), l = new Uint8Array(g);
+      l.set(this.view.subarray(e, this.buffer.byteLength), b);
+      this.buffer = g;
+      this.view = l;
       this.offset += d;
       0 <= this.markedOffset && (this.markedOffset += d);
       this.limit += d;
@@ -20684,8 +20696,8 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
       function b(a) {
         throw Error("Illegal character code: " + a);
       }
-      for (var d, f, l; null !== (d = a());) {
-        if (f = e[d], "undefined" === typeof f && b(d), null !== (d = a()) && (l = e[d], "undefined" === typeof l && b(d), c(f << 2 >>> 0 | (l & 48) >> 4), null !== (d = a()))) {
+      for (var d, f, g; null !== (d = a());) {
+        if (f = e[d], "undefined" === typeof f && b(d), null !== (d = a()) && (g = e[d], "undefined" === typeof g && b(d), c(f << 2 >>> 0 | (g & 48) >> 4), null !== (d = a()))) {
           f = e[d];
           if ("undefined" === typeof f) {
             if (61 === d) {
@@ -20694,17 +20706,17 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
               b(d);
             }
           }
-          c((l & 15) << 4 >>> 0 | (f & 60) >> 2);
+          c((g & 15) << 4 >>> 0 | (f & 60) >> 2);
           if (null !== (d = a())) {
-            l = e[d];
-            if ("undefined" === typeof l) {
+            g = e[d];
+            if ("undefined" === typeof g) {
               if (61 === d) {
                 break;
               } else {
                 b(d);
               }
             }
-            c((f & 3) << 6 >>> 0 | l);
+            c((f & 3) << 6 >>> 0 | g);
           }
         }
       }
@@ -20799,8 +20811,8 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
   f.fromDebug = function(a, b, e) {
     var c = a.length;
     b = new f((c + 1) / 3 | 0, b, e);
-    for (var d = 0, l = 0, g, m = !1, n = !1, h = !1, q = !1, r = !1; d < c;) {
-      switch(g = a.charAt(d++)) {
+    for (var d = 0, g = 0, l, m = !1, n = !1, h = !1, q = !1, r = !1; d < c;) {
+      switch(l = a.charAt(d++)) {
         case "!":
           if (!e) {
             if (n || h || q) {
@@ -20809,7 +20821,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
             }
             n = h = q = !0;
           }
-          b.offset = b.markedOffset = b.limit = l;
+          b.offset = b.markedOffset = b.limit = g;
           m = !1;
           break;
         case "|":
@@ -20820,7 +20832,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
             }
             n = q = !0;
           }
-          b.offset = b.limit = l;
+          b.offset = b.limit = g;
           m = !1;
           break;
         case "[":
@@ -20831,7 +20843,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
             }
             n = h = !0;
           }
-          b.offset = b.markedOffset = l;
+          b.offset = b.markedOffset = g;
           m = !1;
           break;
         case "<":
@@ -20842,7 +20854,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
             }
             n = !0;
           }
-          b.offset = l;
+          b.offset = g;
           m = !1;
           break;
         case "]":
@@ -20853,7 +20865,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
             }
             q = h = !0;
           }
-          b.limit = b.markedOffset = l;
+          b.limit = b.markedOffset = g;
           m = !1;
           break;
         case ">":
@@ -20864,7 +20876,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
             }
             q = !0;
           }
-          b.limit = l;
+          b.limit = g;
           m = !1;
           break;
         case "'":
@@ -20875,7 +20887,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
             }
             h = !0;
           }
-          b.markedOffset = l;
+          b.markedOffset = g;
           m = !1;
           break;
         case " ":
@@ -20885,11 +20897,11 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
           if (!e && m) {
             r = !0;
           } else {
-            g = parseInt(g + a.charAt(d++), 16);
-            if (!e && (isNaN(g) || 0 > g || 255 < g)) {
+            l = parseInt(l + a.charAt(d++), 16);
+            if (!e && (isNaN(l) || 0 > l || 255 < l)) {
               throw TypeError("Illegal str: Not a debug encoded string");
             }
-            b.view[l++] = g;
+            b.view[g++] = l;
             m = !0;
           }
       }
@@ -20901,8 +20913,8 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
       if (!n || !q) {
         throw TypeError("Illegal str: Missing offset or limit");
       }
-      if (l < b.buffer.byteLength) {
-        throw TypeError("Illegal str: Not a debug encoded string (is it hex?) " + l + " < " + c);
+      if (g < b.buffer.byteLength) {
+        throw TypeError("Illegal str: Not a debug encoded string (is it hex?) " + g + " < " + c);
       }
     }
     return b;
@@ -21111,7 +21123,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
         return C;
       }
       if (a + 1 >= c) {
-        return u;
+        return v;
       }
     }
     return 0 > a ? b(-a, e).neg() : g(a % 4294967296 | 0, a / 4294967296 | 0, e);
@@ -21168,8 +21180,8 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
   a.UONE = z;
   var p = h(-1);
   a.NEG_ONE = p;
-  var u = g(-1, 2147483647, !1);
-  a.MAX_VALUE = u;
+  var v = g(-1, 2147483647, !1);
+  a.MAX_VALUE = v;
   var w = g(-1, -1, !0);
   a.MAX_UNSIGNED_VALUE = w;
   var C = g(0, -2147483648, !1);
@@ -21324,16 +21336,16 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
     var c = this.high >>> 16, f = this.high & 65535, p = this.low >>> 16, m = this.low & 65535, n = a.high >>> 16, h = a.high & 65535, q = a.low >>> 16;
     a = a.low & 65535;
     var r = m * a;
-    var u = (r >>> 16) + p * a;
-    var w = u >>> 16;
-    u = (u & 65535) + m * q;
-    w += u >>> 16;
+    var v = (r >>> 16) + p * a;
+    var w = v >>> 16;
+    v = (v & 65535) + m * q;
+    w += v >>> 16;
     w += f * a;
     var y = w >>> 16;
     w = (w & 65535) + p * q;
     y += w >>> 16;
     w = (w & 65535) + m * h;
-    return g((u & 65535) << 16 | r & 65535, (y + (w >>> 16) + (c * a + f * q + p * h + m * n) & 65535) << 16 | w & 65535, this.unsigned);
+    return g((v & 65535) << 16 | r & 65535, (y + (w >>> 16) + (c * a + f * q + p * h + m * n) & 65535) << 16 | w & 65535, this.unsigned);
   };
   A.mul = A.multiply;
   A.divide = function(a) {
@@ -21751,12 +21763,12 @@ function _typeof(a) {
       } else {
         var q = .5 * (b + f);
         var r = .5 * (e + g);
-        var u = .5 * (d + l);
+        var v = .5 * (d + l);
         var t = 0;
-        a = (b > e && b > d ? (r < b && (t |= 2), u < b && (t |= 1)) : e > d ? (q < e && (t |= 4), u < e && (t |= 1)) : (q < d && (t |= 4), r < d && (t |= 2)), t);
+        a = (b > e && b > d ? (r < b && (t |= 2), v < b && (t |= 1)) : e > d ? (q < e && (t |= 4), v < e && (t |= 1)) : (q < d && (t |= 4), r < d && (t |= 2)), t);
         do {
-          0 === a ? (c(h[ya], b, e, d, q, r, u, p, m), a = n(a, q, r, u)) : 1 === a ? (c(h[1 ^ ya], b, e, u, q, r, l, p, m), a = n(a, q, r, l)) : 2 === a ? (c(h[2 ^ ya], b, r, d, q, g, u, p, m), a = n(a, q, g, u)) : 3 === a ? (c(h[3 ^ ya], b, r, u, q, g, l, p, m), a = n(a, q, g, l)) : 4 === a ? (c(h[4 ^ ya], q, e, d, f, r, u, p, m), a = n(a, f, r, u)) : 5 === a ? (c(h[5 ^ ya], q, e, u, f, r, l, p, m), a = n(a, f, r, l)) : 6 === a ? (c(h[6 ^ ya], q, r, d, f, g, u, p, m), a = n(a, f, g, u)) : 7 === 
-          a ? (c(h[7 ^ ya], q, r, u, f, g, l, p, m), a = 8) : void 0;
+          0 === a ? (c(h[ya], b, e, d, q, r, v, p, m), a = n(a, q, r, v)) : 1 === a ? (c(h[1 ^ ya], b, e, v, q, r, l, p, m), a = n(a, q, r, l)) : 2 === a ? (c(h[2 ^ ya], b, r, d, q, g, v, p, m), a = n(a, q, g, v)) : 3 === a ? (c(h[3 ^ ya], b, r, v, q, g, l, p, m), a = n(a, q, g, l)) : 4 === a ? (c(h[4 ^ ya], q, e, d, f, r, v, p, m), a = n(a, f, r, v)) : 5 === a ? (c(h[5 ^ ya], q, e, v, f, r, l, p, m), a = n(a, f, r, l)) : 6 === a ? (c(h[6 ^ ya], q, r, d, f, g, v, p, m), a = n(a, f, g, v)) : 7 === 
+          a ? (c(h[7 ^ ya], q, r, v, f, g, l, p, m), a = 8) : void 0;
         } while (8 > a);
       }
     }
@@ -21857,13 +21869,13 @@ function _typeof(a) {
     }
     return g;
   }
-  function u(a, c, b) {
+  function v(a, c, b) {
     var e, d = b.children, f = null;
     if (b.contains(a, c.bias)) {
       if (null !== d) {
         var g = 0;
         for (e = d.length; null === f && g < e; ++g) {
-          f = u(a, c, d[g]);
+          f = v(a, c, d[g]);
         }
       } else {
         if (null !== b.points) {
@@ -21950,7 +21962,7 @@ function _typeof(a) {
       }
     }
   }
-  var D = Math.PI, F = Math.atan2, B = Math.round, E = Math.ceil, H = Math.floor, J = Math.abs, I = Math.acos, R = Math.sqrt, K = Math.cos, G = Math.sin, M = Math.max, S = Math.min, O = function() {
+  var D = Math.PI, F = Math.atan2, B = Math.round, E = Math.ceil, H = Math.floor, J = Math.abs, I = Math.acos, R = Math.sqrt, L = Math.cos, G = Math.sin, M = Math.max, S = Math.min, O = function() {
     function a() {
       var c = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, b = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, e = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;
       d(this, a);
@@ -21974,11 +21986,11 @@ function _typeof(a) {
       this.setFromSphericalCoords(a.radius, a.phi, a.theta);
     }}, {key:"setFromSphericalCoords", value:function(a, c, b) {
       var e = G(c) * a;
-      return this.x = e * G(b), this.y = K(c) * a, this.z = e * K(b), this;
+      return this.x = e * G(b), this.y = L(c) * a, this.z = e * L(b), this;
     }}, {key:"setFromCylindrical", value:function(a) {
       this.setFromCylindricalCoords(a.radius, a.theta, a.y);
     }}, {key:"setFromCylindricalCoords", value:function(a, c, b) {
-      return this.x = a * G(c), this.y = b, this.z = a * K(c), this;
+      return this.x = a * G(c), this.y = b, this.z = a * L(c), this;
     }}, {key:"setFromMatrixColumn", value:function(a, c) {
       return this.fromArray(a.elements, 4 * c);
     }}, {key:"setFromMatrixPosition", value:function(a) {
@@ -22292,7 +22304,7 @@ function _typeof(a) {
     }}, {key:"lerpVectors", value:function(a, c, b) {
       return this.subVectors(c, a).multiplyScalar(b).add(a);
     }}, {key:"rotateAround", value:function(a, c) {
-      var b = K(c);
+      var b = L(c);
       c = G(c);
       var e = this.x - a.x, d = this.y - a.y;
       return this.x = e * b - d * c + a.x, this.y = e * c + d * b + a.y, this;
@@ -22431,9 +22443,9 @@ function _typeof(a) {
       a = b[0];
       var d = b[3], f = b[6], g = b[1], l = b[4], p = b[7], m = b[2], n = b[5];
       b = b[8];
-      var h = e[0], q = e[3], r = e[6], u = e[1], t = e[4], w = e[7], y = e[2], x = e[5];
+      var h = e[0], q = e[3], r = e[6], v = e[1], t = e[4], w = e[7], y = e[2], x = e[5];
       e = e[8];
-      return c[0] = a * h + d * u + f * y, c[3] = a * q + d * t + f * x, c[6] = a * r + d * w + f * e, c[1] = g * h + l * u + p * y, c[4] = g * q + l * t + p * x, c[7] = g * r + l * w + p * e, c[2] = m * h + n * u + b * y, c[5] = m * q + n * t + b * x, c[8] = m * r + n * w + b * e, this;
+      return c[0] = a * h + d * v + f * y, c[3] = a * q + d * t + f * x, c[6] = a * r + d * w + f * e, c[1] = g * h + l * v + p * y, c[4] = g * q + l * t + p * x, c[7] = g * r + l * w + p * e, c[2] = m * h + n * v + b * y, c[5] = m * q + n * t + b * x, c[8] = m * r + n * w + b * e, this;
     }}, {key:"multiply", value:function(a) {
       return this.multiplyMatrices(this, a);
     }}, {key:"premultiply", value:function(a) {
@@ -22448,8 +22460,8 @@ function _typeof(a) {
     }}, {key:"getInverse", value:function(a) {
       var c, b = a.elements, e = this.elements, d = b[0], f = b[1], g = b[2], l = b[3], p = b[4], m = b[5], n = b[6], h = b[7];
       b = b[8];
-      var q = b * p - m * h, r = m * n - b * l, u = h * l - p * n, t = d * q + f * r + g * u;
-      return 0 === t ? (console.error("Can't invert matrix, determinant is zero", a), this.identity()) : (c = 1 / t, e[0] = q * c, e[1] = (g * h - b * f) * c, e[2] = (m * f - g * p) * c, e[3] = r * c, e[4] = (b * d - g * n) * c, e[5] = (g * l - m * d) * c, e[6] = u * c, e[7] = (f * n - h * d) * c, e[8] = (p * d - f * l) * c), this;
+      var q = b * p - m * h, r = m * n - b * l, v = h * l - p * n, t = d * q + f * r + g * v;
+      return 0 === t ? (console.error("Can't invert matrix, determinant is zero", a), this.identity()) : (c = 1 / t, e[0] = q * c, e[1] = (g * h - b * f) * c, e[2] = (m * f - g * p) * c, e[3] = r * c, e[4] = (b * d - g * n) * c, e[5] = (g * l - m * d) * c, e[6] = v * c, e[7] = (f * n - h * d) * c, e[8] = (p * d - f * l) * c), this;
     }}, {key:"transpose", value:function() {
       var a, c = this.elements;
       return a = c[1], c[1] = c[3], c[3] = a, a = c[2], c[2] = c[6], c[6] = a, a = c[5], c[5] = c[7], c[7] = a, this;
@@ -22457,7 +22469,7 @@ function _typeof(a) {
       var b = this.elements;
       return b[0] *= a, b[3] *= a, b[6] *= a, b[1] *= c, b[4] *= c, b[7] *= c, this;
     }}, {key:"rotate", value:function(a) {
-      var c = K(a);
+      var c = L(a);
       a = G(a);
       var b = this.elements, e = b[0], d = b[3], f = b[6], g = b[1], l = b[4], p = b[7];
       return b[0] = c * e + a * g, b[3] = c * d + a * l, b[6] = c * f + a * p, b[1] = -a * e + c * g, b[4] = -a * d + c * l, b[7] = -a * f + c * p, this;
@@ -22494,7 +22506,7 @@ function _typeof(a) {
       var a = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : [], c = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0;
       return a[c] = this.x, a[c + 1] = this.y, a[c + 2] = this.z, a[c + 3] = this.w, a;
     }}, {key:"setFromEuler", value:function(a) {
-      var c = a.x, b = a.y, e = a.z, d = K(c / 2), f = K(b / 2), g = K(e / 2);
+      var c = a.x, b = a.y, e = a.z, d = L(c / 2), f = L(b / 2), g = L(e / 2);
       c = G(c / 2);
       b = G(b / 2);
       e = G(e / 2);
@@ -22536,7 +22548,7 @@ function _typeof(a) {
     }}, {key:"setFromAxisAngle", value:function(a, c) {
       c /= 2;
       var b = G(c);
-      return this.x = a.x * b, this.y = a.y * b, this.z = a.z * b, this.w = K(c), this;
+      return this.x = a.x * b, this.y = a.y * b, this.z = a.z * b, this.w = L(c), this;
     }}, {key:"setFromRotationMatrix", value:function(a) {
       var c, b = a.elements;
       a = b[0];
@@ -22584,12 +22596,12 @@ function _typeof(a) {
     }}], [{key:"slerp", value:function(a, c, b, e) {
       return b.copy(a).slerp(c, e);
     }}, {key:"slerpFlat", value:function(a, b, e, d, f, g, l) {
-      var p, m, n, h, q, r, u, t, w = f[g], y = f[g + 1], x = f[g + 2];
+      var p, m, n, h, q, r, v, t, w = f[g], y = f[g + 1], x = f[g + 2];
       f = f[g + 3];
       g = e[d];
       var z = e[d + 1], C = e[d + 2];
       e = e[d + 3];
-      (e !== f || g !== w || z !== y || C !== x) && (p = 1 - l, h = g * w + z * y + C * x + e * f, r = 0 <= h ? 1 : -1, q = 1 - h * h, q > c && (n = R(q), u = F(n, h * r), p = G(p * u) / n, l = G(l * u) / n), t = l * r, g = g * p + w * t, z = z * p + y * t, C = C * p + x * t, e = e * p + f * t, p === 1 - l && (m = 1 / R(g * g + z * z + C * C + e * e), g *= m, z *= m, C *= m, e *= m));
+      (e !== f || g !== w || z !== y || C !== x) && (p = 1 - l, h = g * w + z * y + C * x + e * f, r = 0 <= h ? 1 : -1, q = 1 - h * h, q > c && (n = R(q), v = F(n, h * r), p = G(p * v) / n, l = G(l * v) / n), t = l * r, g = g * p + w * t, z = z * p + y * t, C = C * p + x * t, e = e * p + f * t, p === 1 - l && (m = 1 / R(g * g + z * z + C * C + e * e), g *= m, z *= m, C *= m, e *= m));
       a[b] = g;
       a[b + 1] = z;
       a[b + 2] = C;
@@ -22730,9 +22742,9 @@ function _typeof(a) {
     }}, {key:"setFromMatrix", value:function(a) {
       var c = this.planes, b = a.elements;
       a = b[0];
-      var e = b[1], d = b[2], f = b[3], g = b[4], l = b[5], p = b[6], m = b[7], n = b[8], h = b[9], q = b[10], r = b[11], u = b[12], t = b[13], w = b[14];
+      var e = b[1], d = b[2], f = b[3], g = b[4], l = b[5], p = b[6], m = b[7], n = b[8], h = b[9], q = b[10], r = b[11], v = b[12], t = b[13], w = b[14];
       b = b[15];
-      return c[0].setComponents(f - a, m - g, r - n, b - u).normalize(), c[1].setComponents(f + a, m + g, r + n, b + u).normalize(), c[2].setComponents(f + e, m + l, r + h, b + t).normalize(), c[3].setComponents(f - e, m - l, r - h, b - t).normalize(), c[4].setComponents(f - d, m - p, r - q, b - w).normalize(), c[5].setComponents(f + d, m + p, r + q, b + w).normalize(), this;
+      return c[0].setComponents(f - a, m - g, r - n, b - v).normalize(), c[1].setComponents(f + a, m + g, r + n, b + v).normalize(), c[2].setComponents(f + e, m + l, r + h, b + t).normalize(), c[3].setComponents(f - e, m - l, r - h, b - t).normalize(), c[4].setComponents(f - d, m - p, r - q, b - w).normalize(), c[5].setComponents(f + d, m + p, r + q, b + w).normalize(), this;
     }}, {key:"intersectsSphere", value:function(a) {
       var c, b = this.planes, e = a.center, d = -a.radius, f = !0;
       for (a = 0; 6 > a; ++a) {
@@ -22805,9 +22817,9 @@ function _typeof(a) {
       d(this, a);
       this.elements = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
     }
-    return b(a, [{key:"set", value:function(a, c, b, e, d, f, g, l, p, m, n, h, q, r, u, t) {
+    return b(a, [{key:"set", value:function(a, c, b, e, d, f, g, l, p, m, n, h, q, r, v, t) {
       var w = this.elements;
-      return w[0] = a, w[4] = c, w[8] = b, w[12] = e, w[1] = d, w[5] = f, w[9] = g, w[13] = l, w[2] = p, w[6] = m, w[10] = n, w[14] = h, w[3] = q, w[7] = r, w[11] = u, w[15] = t, this;
+      return w[0] = a, w[4] = c, w[8] = b, w[12] = e, w[1] = d, w[5] = f, w[9] = g, w[13] = l, w[2] = p, w[6] = m, w[10] = n, w[14] = h, w[3] = q, w[7] = r, w[11] = v, w[15] = t, this;
     }}, {key:"identity", value:function() {
       return this.set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1), this;
     }}, {key:"copy", value:function(a) {
@@ -22847,11 +22859,11 @@ function _typeof(a) {
       a = 1 / ta.setFromMatrixColumn(a, 2).length();
       return c[0] = b[0] * e, c[1] = b[1] * e, c[2] = b[2] * e, c[3] = 0, c[4] = b[4] * d, c[5] = b[5] * d, c[6] = b[6] * d, c[7] = 0, c[8] = b[8] * a, c[9] = b[9] * a, c[10] = b[10] * a, c[11] = 0, c[12] = 0, c[13] = 0, c[14] = 0, c[15] = 1, this;
     }}, {key:"makeRotationFromEuler", value:function(a) {
-      var c = this.elements, b = a.x, e = a.y, d = a.z, f = K(b);
+      var c = this.elements, b = a.x, e = a.y, d = a.z, f = L(b);
       b = G(b);
-      var g = K(e);
+      var g = L(e);
       e = G(e);
-      var l = K(d);
+      var l = L(d);
       d = G(d);
       switch(a.order) {
         case "XYZ":
@@ -22942,12 +22954,12 @@ function _typeof(a) {
       var b = this.elements, e = a.elements, d = c.elements;
       c = e[0];
       a = e[4];
-      var f = e[8], g = e[12], l = e[1], p = e[5], m = e[9], n = e[13], h = e[2], q = e[6], r = e[10], u = e[14], t = e[3], w = e[7], y = e[11];
+      var f = e[8], g = e[12], l = e[1], p = e[5], m = e[9], n = e[13], h = e[2], q = e[6], r = e[10], v = e[14], t = e[3], w = e[7], y = e[11];
       e = e[15];
-      var x = d[0], z = d[4], C = d[8], A = d[12], B = d[1], D = d[5], F = d[9], E = d[13], T = d[2], G = d[6], P = d[10], H = d[14], O = d[3], M = d[7], K = d[11];
+      var x = d[0], z = d[4], C = d[8], A = d[12], B = d[1], D = d[5], F = d[9], E = d[13], T = d[2], G = d[6], P = d[10], H = d[14], O = d[3], M = d[7], L = d[11];
       d = d[15];
-      return b[0] = c * x + a * B + f * T + g * O, b[4] = c * z + a * D + f * G + g * M, b[8] = c * C + a * F + f * P + g * K, b[12] = c * A + a * E + f * H + g * d, b[1] = l * x + p * B + m * T + n * O, b[5] = l * z + p * D + m * G + n * M, b[9] = l * C + p * F + m * P + n * K, b[13] = l * A + p * E + m * H + n * d, b[2] = h * x + q * B + r * T + u * O, b[6] = h * z + q * D + r * G + u * M, b[10] = h * C + q * F + r * P + u * K, b[14] = h * A + q * E + r * H + u * d, b[3] = t * x + w * B + y * T + 
-      e * O, b[7] = t * z + w * D + y * G + e * M, b[11] = t * C + w * F + y * P + e * K, b[15] = t * A + w * E + y * H + e * d, this;
+      return b[0] = c * x + a * B + f * T + g * O, b[4] = c * z + a * D + f * G + g * M, b[8] = c * C + a * F + f * P + g * L, b[12] = c * A + a * E + f * H + g * d, b[1] = l * x + p * B + m * T + n * O, b[5] = l * z + p * D + m * G + n * M, b[9] = l * C + p * F + m * P + n * L, b[13] = l * A + p * E + m * H + n * d, b[2] = h * x + q * B + r * T + v * O, b[6] = h * z + q * D + r * G + v * M, b[10] = h * C + q * F + r * P + v * L, b[14] = h * A + q * E + r * H + v * d, b[3] = t * x + w * B + y * T + 
+      e * O, b[7] = t * z + w * D + y * G + e * M, b[11] = t * C + w * F + y * P + e * L, b[15] = t * A + w * E + y * H + e * d, this;
     }}, {key:"multiply", value:function(a) {
       return this.multiplyMatrices(this, a);
     }}, {key:"premultiply", value:function(a) {
@@ -22956,7 +22968,7 @@ function _typeof(a) {
       var c = this.elements;
       return c[0] *= a, c[4] *= a, c[8] *= a, c[12] *= a, c[1] *= a, c[5] *= a, c[9] *= a, c[13] *= a, c[2] *= a, c[6] *= a, c[10] *= a, c[14] *= a, c[3] *= a, c[7] *= a, c[11] *= a, c[15] *= a, this;
     }}, {key:"determinant", value:function() {
-      var a = this.elements, c = a[0], b = a[4], e = a[8], d = a[12], f = a[1], g = a[5], l = a[9], p = a[13], m = a[2], n = a[6], h = a[10], q = a[14], r = c * g, u = c * l;
+      var a = this.elements, c = a[0], b = a[4], e = a[8], d = a[12], f = a[1], g = a[5], l = a[9], p = a[13], m = a[2], n = a[6], h = a[10], q = a[14], r = c * g, v = c * l;
       c *= p;
       var t = b * f, w = b * l;
       b *= p;
@@ -22965,14 +22977,14 @@ function _typeof(a) {
       f *= d;
       g *= d;
       d *= l;
-      return a[3] * (d * n - e * n - g * h + b * h + x * q - w * q) + a[7] * (u * q - c * h + f * h - y * q + e * m - d * m) + a[11] * (c * n - r * q - f * n + t * q + g * m - b * m) + a[15] * (-x * m - u * n + r * h + y * n - t * h + w * m);
+      return a[3] * (d * n - e * n - g * h + b * h + x * q - w * q) + a[7] * (v * q - c * h + f * h - y * q + e * m - d * m) + a[11] * (c * n - r * q - f * n + t * q + g * m - b * m) + a[15] * (-x * m - v * n + r * h + y * n - t * h + w * m);
     }}, {key:"getInverse", value:function(a) {
-      var c, b = this.elements, e = a.elements, d = e[0], f = e[1], g = e[2], l = e[3], p = e[4], m = e[5], n = e[6], h = e[7], q = e[8], r = e[9], u = e[10], t = e[11], w = e[12], y = e[13], x = e[14];
+      var c, b = this.elements, e = a.elements, d = e[0], f = e[1], g = e[2], l = e[3], p = e[4], m = e[5], n = e[6], h = e[7], q = e[8], r = e[9], v = e[10], t = e[11], w = e[12], y = e[13], x = e[14];
       e = e[15];
-      var z = r * x * h - y * u * h + y * n * t - m * x * t - r * n * e + m * u * e, C = w * u * h - q * x * h - w * n * t + p * x * t + q * n * e - p * u * e, A = q * y * h - w * r * h + w * m * t - p * y * t - q * m * e + p * r * e, B = w * r * n - q * y * n - w * m * u + p * y * u + q * m * x - p * r * x, D = d * z + f * C + g * A + l * B;
-      return 0 === D ? (console.error("Can't invert matrix, determinant is zero", a), this.identity()) : (c = 1 / D, b[0] = z * c, b[1] = (y * u * l - r * x * l - y * g * t + f * x * t + r * g * e - f * u * e) * c, b[2] = (m * x * l - y * n * l + y * g * h - f * x * h - m * g * e + f * n * e) * c, b[3] = (r * n * l - m * u * l - r * g * h + f * u * h + m * g * t - f * n * t) * c, b[4] = C * c, b[5] = (q * x * l - w * u * l + w * g * t - d * x * t - q * g * e + d * u * e) * c, b[6] = (w * n * l - 
-      p * x * l - w * g * h + d * x * h + p * g * e - d * n * e) * c, b[7] = (p * u * l - q * n * l + q * g * h - d * u * h - p * g * t + d * n * t) * c, b[8] = A * c, b[9] = (w * r * l - q * y * l - w * f * t + d * y * t + q * f * e - d * r * e) * c, b[10] = (p * y * l - w * m * l + w * f * h - d * y * h - p * f * e + d * m * e) * c, b[11] = (q * m * l - p * r * l - q * f * h + d * r * h + p * f * t - d * m * t) * c, b[12] = B * c, b[13] = (q * y * g - w * r * g + w * f * u - d * y * u - q * f * 
-      x + d * r * x) * c, b[14] = (w * m * g - p * y * g - w * f * n + d * y * n + p * f * x - d * m * x) * c, b[15] = (p * r * g - q * m * g + q * f * n - d * r * n - p * f * u + d * m * u) * c), this;
+      var z = r * x * h - y * v * h + y * n * t - m * x * t - r * n * e + m * v * e, C = w * v * h - q * x * h - w * n * t + p * x * t + q * n * e - p * v * e, A = q * y * h - w * r * h + w * m * t - p * y * t - q * m * e + p * r * e, B = w * r * n - q * y * n - w * m * v + p * y * v + q * m * x - p * r * x, D = d * z + f * C + g * A + l * B;
+      return 0 === D ? (console.error("Can't invert matrix, determinant is zero", a), this.identity()) : (c = 1 / D, b[0] = z * c, b[1] = (y * v * l - r * x * l - y * g * t + f * x * t + r * g * e - f * v * e) * c, b[2] = (m * x * l - y * n * l + y * g * h - f * x * h - m * g * e + f * n * e) * c, b[3] = (r * n * l - m * v * l - r * g * h + f * v * h + m * g * t - f * n * t) * c, b[4] = C * c, b[5] = (q * x * l - w * v * l + w * g * t - d * x * t - q * g * e + d * v * e) * c, b[6] = (w * n * l - 
+      p * x * l - w * g * h + d * x * h + p * g * e - d * n * e) * c, b[7] = (p * v * l - q * n * l + q * g * h - d * v * h - p * g * t + d * n * t) * c, b[8] = A * c, b[9] = (w * r * l - q * y * l - w * f * t + d * y * t + q * f * e - d * r * e) * c, b[10] = (p * y * l - w * m * l + w * f * h - d * y * h - p * f * e + d * m * e) * c, b[11] = (q * m * l - p * r * l - q * f * h + d * r * h + p * f * t - d * m * t) * c, b[12] = B * c, b[13] = (q * y * g - w * r * g + w * f * v - d * y * v - q * f * 
+      x + d * r * x) * c, b[14] = (w * m * g - p * y * g - w * f * n + d * y * n + p * f * x - d * m * x) * c, b[15] = (p * r * g - q * m * g + q * f * n - d * r * n - p * f * v + d * m * v) * c), this;
     }}, {key:"transpose", value:function() {
       var a, c = this.elements;
       return a = c[1], c[1] = c[4], c[4] = a, a = c[2], c[2] = c[8], c[8] = a, a = c[6], c[6] = c[9], c[9] = a, a = c[3], c[3] = c[12], c[12] = a, a = c[7], c[7] = c[13], c[13] = a, a = c[11], c[11] = c[14], c[14] = a, this;
@@ -22984,19 +22996,19 @@ function _typeof(a) {
     }}, {key:"makeTranslation", value:function(a, c, b) {
       return this.set(1, 0, 0, a, 0, 1, 0, c, 0, 0, 1, b, 0, 0, 0, 1), this;
     }}, {key:"makeRotationX", value:function(a) {
-      var c = K(a);
+      var c = L(a);
       a = G(a);
       return this.set(1, 0, 0, 0, 0, c, -a, 0, 0, a, c, 0, 0, 0, 0, 1), this;
     }}, {key:"makeRotationY", value:function(a) {
-      var c = K(a);
+      var c = L(a);
       a = G(a);
       return this.set(c, 0, a, 0, 0, 1, 0, 0, -a, 0, c, 0, 0, 0, 0, 1), this;
     }}, {key:"makeRotationZ", value:function(a) {
-      var c = K(a);
+      var c = L(a);
       a = G(a);
       return this.set(c, -a, 0, 0, a, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1), this;
     }}, {key:"makeRotationAxis", value:function(a, c) {
-      var b = K(c);
+      var b = L(c);
       c = G(c);
       var e = 1 - b, d = a.x, f = a.y;
       a = a.z;
@@ -23022,8 +23034,8 @@ function _typeof(a) {
     }}, {key:"decompose", value:function(a, c, b) {
       var e = this.elements, d = e[0], f = e[1], g = e[2], l = e[4], p = e[5], m = e[6], n = e[8], h = e[9], q = e[10], r = this.determinant();
       r = ta.set(d, f, g).length() * (0 > r ? -1 : 1);
-      var u = ta.set(l, p, m).length(), t = ta.set(n, h, q).length(), w = 1 / r, y = 1 / u, x = 1 / t;
-      return a.x = e[12], a.y = e[13], a.z = e[14], e[0] *= w, e[1] *= w, e[2] *= w, e[4] *= y, e[5] *= y, e[6] *= y, e[8] *= x, e[9] *= x, e[10] *= x, c.setFromRotationMatrix(this), e[0] = d, e[1] = f, e[2] = g, e[4] = l, e[5] = p, e[6] = m, e[8] = n, e[9] = h, e[10] = q, b.x = r, b.y = u, b.z = t, this;
+      var v = ta.set(l, p, m).length(), t = ta.set(n, h, q).length(), w = 1 / r, y = 1 / v, x = 1 / t;
+      return a.x = e[12], a.y = e[13], a.z = e[14], e[0] *= w, e[1] *= w, e[2] *= w, e[4] *= y, e[5] *= y, e[6] *= y, e[8] *= x, e[9] *= x, e[10] *= x, c.setFromRotationMatrix(this), e[0] = d, e[1] = f, e[2] = g, e[4] = l, e[5] = p, e[6] = m, e[8] = n, e[9] = h, e[10] = q, b.x = r, b.y = v, b.z = t, this;
     }}, {key:"makePerspective", value:function(a, c, b, e, d, f) {
       var g = this.elements;
       return g[0] = 2 * d / (c - a), g[4] = 0, g[8] = (c + a) / (c - a), g[12] = 0, g[1] = 0, g[5] = 2 * d / (b - e), g[9] = (b + e) / (b - e), g[13] = 0, g[2] = 0, g[6] = 0, g[10] = -(f + d) / (f - d), g[14] = -2 * f * d / (f - d), g[3] = 0, g[7] = 0, g[11] = -1, g[15] = 0, this;
@@ -23075,8 +23087,8 @@ function _typeof(a) {
       c = -this.direction.dot(n);
       var q = h.dot(this.direction), r = -h.dot(n);
       h = h.lengthSq();
-      var u = J(1 - c * c);
-      return 0 < u ? (d = c * r - q, f = c * q - r, g = a * u, 0 <= d ? f >= -g ? f <= g ? (l = 1 / u, d *= l, f *= l, p = d * (d + c * f + 2 * q) + f * (c * d + f + 2 * r) + h) : (f = a, d = M(0, -(c * f + q)), p = -d * d + f * (f + 2 * r) + h) : (f = -a, d = M(0, -(c * f + q)), p = -d * d + f * (f + 2 * r) + h) : f <= -g ? (d = M(0, -(-c * a + q)), f = 0 < d ? -a : S(M(-a, -r), a), p = -d * d + f * (f + 2 * r) + h) : f <= g ? (d = 0, f = S(M(-a, -r), a), p = f * (f + 2 * r) + h) : (d = M(0, -(c * 
+      var v = J(1 - c * c);
+      return 0 < v ? (d = c * r - q, f = c * q - r, g = a * v, 0 <= d ? f >= -g ? f <= g ? (l = 1 / v, d *= l, f *= l, p = d * (d + c * f + 2 * q) + f * (c * d + f + 2 * r) + h) : (f = a, d = M(0, -(c * f + q)), p = -d * d + f * (f + 2 * r) + h) : (f = -a, d = M(0, -(c * f + q)), p = -d * d + f * (f + 2 * r) + h) : f <= -g ? (d = M(0, -(-c * a + q)), f = 0 < d ? -a : S(M(-a, -r), a), p = -d * d + f * (f + 2 * r) + h) : f <= g ? (d = 0, f = S(M(-a, -r), a), p = f * (f + 2 * r) + h) : (d = M(0, -(c * 
       a + q)), f = 0 < d ? a : S(M(-a, -r), a), p = -d * d + f * (f + 2 * r) + h)) : (f = 0 < c ? -a : a, d = M(0, -(c * f + q)), p = -d * d + f * (f + 2 * r) + h), void 0 !== b && b.copy(this.direction).multiplyScalar(d).add(this.origin), void 0 !== e && e.copy(n).multiplyScalar(f).add(m), p;
     }}, {key:"intersectSphere", value:function(a) {
       var c, b, e, d = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : new O, f = za[0].subVectors(a.center, this.origin), g = f.dot(this.direction);
@@ -23094,14 +23106,14 @@ function _typeof(a) {
     }}, {key:"intersectBox", value:function(a) {
       var c, b, e, d, f, g, l = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : new O, p = this.origin, m = this.direction, n = a.min, h = a.max, q = 1 / m.x, r = 1 / m.y;
       m = 1 / m.z;
-      var u = null;
-      return 0 <= q ? (c = (n.x - p.x) * q, b = (h.x - p.x) * q) : (c = (h.x - p.x) * q, b = (n.x - p.x) * q), 0 <= r ? (e = (n.y - p.y) * r, d = (h.y - p.y) * r) : (e = (h.y - p.y) * r, d = (n.y - p.y) * r), c <= d && e <= b && ((e > c || c !== c) && (c = e), (d < b || b !== b) && (b = d), 0 <= m ? (f = (n.z - p.z) * m, g = (h.z - p.z) * m) : (f = (h.z - p.z) * m, g = (n.z - p.z) * m), c <= g && f <= b && ((f > c || c !== c) && (c = f), (g < b || b !== b) && (b = g), 0 <= b && (u = this.at(0 <= 
-      c ? c : b, l)))), u;
+      var v = null;
+      return 0 <= q ? (c = (n.x - p.x) * q, b = (h.x - p.x) * q) : (c = (h.x - p.x) * q, b = (n.x - p.x) * q), 0 <= r ? (e = (n.y - p.y) * r, d = (h.y - p.y) * r) : (e = (h.y - p.y) * r, d = (n.y - p.y) * r), c <= d && e <= b && ((e > c || c !== c) && (c = e), (d < b || b !== b) && (b = d), 0 <= m ? (f = (n.z - p.z) * m, g = (h.z - p.z) * m) : (f = (h.z - p.z) * m, g = (n.z - p.z) * m), c <= g && f <= b && ((f > c || c !== c) && (c = f), (g < b || b !== b) && (b = g), 0 <= b && (v = this.at(0 <= 
+      c ? c : b, l)))), v;
     }}, {key:"intersectsBox", value:function(a) {
       return null !== this.intersectBox(a, za[0]);
     }}, {key:"intersectTriangle", value:function(a, c, b, e, d) {
-      var f, g, l, p, m, n = this.direction, h = za[0], q = za[1], r = za[2], u = za[3], t = null;
-      return q.subVectors(c, a), r.subVectors(b, a), u.crossVectors(q, r), f = n.dot(u), 0 === f || e && 0 < f || (0 < f ? g = 1 : (g = -1, f = -f), h.subVectors(this.origin, a), l = g * n.dot(r.crossVectors(h, r)), 0 <= l && (p = g * n.dot(q.cross(h)), 0 <= p && l + p <= f && (m = -g * h.dot(u), 0 <= m && (t = this.at(m / f, d))))), t;
+      var f, g, l, p, m, n = this.direction, h = za[0], q = za[1], r = za[2], v = za[3], t = null;
+      return q.subVectors(c, a), r.subVectors(b, a), v.crossVectors(q, r), f = n.dot(v), 0 === f || e && 0 < f || (0 < f ? g = 1 : (g = -1, f = -f), h.subVectors(this.origin, a), l = g * n.dot(r.crossVectors(h, r)), 0 <= l && (p = g * n.dot(q.cross(h)), 0 <= p && l + p <= f && (m = -g * h.dot(v), 0 <= m && (t = this.at(m / f, d))))), t;
     }}, {key:"applyMatrix4", value:function(a) {
       return this.origin.applyMatrix4(a), this.direction.transformDirection(a), this;
     }}, {key:"equals", value:function(a) {
@@ -23199,10 +23211,10 @@ function _typeof(a) {
     }}, {key:"setAxisAngleFromRotationMatrix", value:function(a) {
       var c, b, e, d, f, g, l, p, m, n, h = a.elements;
       a = h[0];
-      var q = h[4], r = h[8], u = h[1], t = h[5], w = h[9], y = h[2], x = h[6];
+      var q = h[4], r = h[8], v = h[1], t = h[5], w = h[9], y = h[2], x = h[6];
       h = h[10];
-      return .01 > J(q - u) && .01 > J(r - y) && .01 > J(w - x) ? .1 > J(q + u) && .1 > J(r + y) && .1 > J(w + x) && .1 > J(a + t + h - 3) ? this.set(1, 0, 0, 0) : (d = (a + 1) / 2, f = (t + 1) / 2, g = (h + 1) / 2, l = (q + u) / 4, p = (r + y) / 4, m = (w + x) / 4, d > f && d > g ? .01 > d ? (c = 0, b = .707106781, e = .707106781) : (c = R(d), b = l / c, e = p / c) : f > g ? .01 > f ? (c = .707106781, b = 0, e = .707106781) : (b = R(f), c = l / b, e = m / b) : .01 > g ? (c = .707106781, b = .707106781, 
-      e = 0) : (e = R(g), c = p / e, b = m / e), this.set(c, b, e, D)) : (n = R((x - w) * (x - w) + (r - y) * (r - y) + (u - q) * (u - q)), .001 > J(n) && (n = 1), this.x = (x - w) / n, this.y = (r - y) / n, this.z = (u - q) / n, this.w = I((a + t + h - 1) / 2)), this;
+      return .01 > J(q - v) && .01 > J(r - y) && .01 > J(w - x) ? .1 > J(q + v) && .1 > J(r + y) && .1 > J(w + x) && .1 > J(a + t + h - 3) ? this.set(1, 0, 0, 0) : (d = (a + 1) / 2, f = (t + 1) / 2, g = (h + 1) / 2, l = (q + v) / 4, p = (r + y) / 4, m = (w + x) / 4, d > f && d > g ? .01 > d ? (c = 0, b = .707106781, e = .707106781) : (c = R(d), b = l / c, e = p / c) : f > g ? .01 > f ? (c = .707106781, b = 0, e = .707106781) : (b = R(f), c = l / b, e = m / b) : .01 > g ? (c = .707106781, b = .707106781, 
+      e = 0) : (e = R(g), c = p / e, b = m / e), this.set(c, b, e, D)) : (n = R((x - w) * (x - w) + (r - y) * (r - y) + (v - q) * (v - q)), .001 > J(n) && (n = 1), this.x = (x - w) / n, this.y = (r - y) / n, this.z = (v - q) / n, this.w = I((a + t + h - 1) / 2)), this;
     }}, {key:"add", value:function(a) {
       return this.x += a.x, this.y += a.y, this.z += a.z, this.w += a.w, this;
     }}, {key:"addScalar", value:function(a) {
@@ -23494,7 +23506,7 @@ function _typeof(a) {
     }}, {key:"remove", value:function(a) {
       return p(a, this, this.root, null);
     }}, {key:"fetch", value:function(a) {
-      return u(a, this, this.root);
+      return v(a, this, this.root);
     }}, {key:"move", value:function(a, c) {
       return w(a, c, this, this.root, null, 0);
     }}, {key:"findNearestPoint", value:function(a) {
@@ -23514,8 +23526,8 @@ function _typeof(a) {
           var q = 0;
           for (l = m.length; q < l; ++q) {
             var r = m[q];
-            var u = c.ray.distanceSqToPoint(r);
-            u < n * n && (e = c.ray.closestPointToPoint(r, new O), d = c.ray.origin.distanceTo(e), d >= c.near && d <= c.far && (f = R(u), b.push(new lb(d, f, e, p.data[q]))));
+            var v = c.ray.distanceSqToPoint(r);
+            v < n * n && (e = c.ray.closestPointToPoint(r, new O), d = c.ray.origin.distanceTo(e), d >= c.near && d <= c.far && (f = R(v), b.push(new lb(d, f, e, p.data[q]))));
           }
         }
       }
@@ -23741,12 +23753,12 @@ function _typeof(a) {
     this._capHeight = e(d);
     this._lineHeight = z;
     this._ascender = z - J - this._xHeight;
-    var K = this;
+    var L = this;
     g.forEach(function(a, e) {
       var f = a.end, g = a.width;
       for (a = a.start; a < f; a++) {
         var l = b.charCodeAt(a);
-        if (l = K.getGlyph(d, l)) {
+        if (l = L.getGlyph(d, l)) {
           p && (y += q(d, p.id, l.id));
           var p = y;
           1 === R ? p += (t - g) / 2 : 2 === R && (p += t - g);
@@ -23795,7 +23807,7 @@ function _typeof(a) {
     for (var m = c; m < b; m++) {
       var n = a.charCodeAt(m);
       if (n = this.getGlyph(f, n)) {
-        var h = u ? q(f, u.id, n.id) : 0;
+        var h = v ? q(f, v.id, n.id) : 0;
         g += h;
         h = g + n.xadvance + d;
         var r = g + n.width;
@@ -23804,11 +23816,11 @@ function _typeof(a) {
         }
         g = h;
         l = r;
-        var u = n;
+        var v = n;
       }
       p++;
     }
-    u && (l += u.xoffset);
+    v && (l += v.xoffset);
     return {start:c, end:c + p, width:l};
   };
   "width height descender ascender xHeight baseline capHeight lineHeight".split(" ").forEach(function(a) {
@@ -24368,12 +24380,12 @@ function _typeof(a) {
         0 > d ? d = 0 : d >= h && (d = h - 1);
         0 > f ? f = 0 : f >= r && (f = r - 1);
         0 > g ? g = 0 : g >= p && (g = p - 1);
-        c *= u;
+        c *= v;
         b *= w;
         e *= C;
-        d *= u;
+        d *= v;
         f *= w;
-        for (g *= C; d >= c; c += u) {
+        for (g *= C; d >= c; c += v) {
           for (var m = b; f >= m; m += w) {
             for (var n = e; g >= n; n += C) {
               var q = c + m + n;
@@ -24384,11 +24396,11 @@ function _typeof(a) {
       }
       var g = b.numObjects();
       b = b.bodies;
-      var m = this.aabbMax, n = this.aabbMin, h = this.nx, r = this.ny, p = this.nz, u = r * p, w = p, C = 1, A = m.x, D = m.y, F = m.z, B = n.x, E = n.y, H = n.z, J = h / (A - B), I = r / (D - E), R = p / (F - H);
+      var m = this.aabbMax, n = this.aabbMin, h = this.nx, r = this.ny, p = this.nz, v = r * p, w = p, C = 1, A = m.x, D = m.y, F = m.z, B = n.x, E = n.y, H = n.z, J = h / (A - B), I = r / (D - E), R = p / (F - H);
       A = (A - B) / h;
-      var K = (D - E) / r;
+      var L = (D - E) / r;
       F = (F - H) / p;
-      var G = .5 * Math.sqrt(A * A + K * K + F * F);
+      var G = .5 * Math.sqrt(A * A + L * L + F * F);
       D = e.types;
       var M = D.SPHERE, S = D.PLANE, O = (D.BOX, D.COMPOUND, D.CONVEXPOLYHEDRON, this.bins), Z = this.binLengths;
       D = this.bins.length;
@@ -24410,11 +24422,11 @@ function _typeof(a) {
           case S:
             V.worldNormalNeedsUpdate && V.computeWorldNormal(m.quaternion);
             N = V.worldNormal;
-            V = E + .5 * K - m.position.y;
+            V = E + .5 * L - m.position.y;
             var W = H + .5 * F - m.position.z, da = q;
             da.set(B + .5 * A - m.position.x, V, W);
-            for (var fa = P = 0; P !== h; P++, fa += u, da.y = V, da.x += A) {
-              for (var X = ba = 0; ba !== r; ba++, X += w, da.z = W, da.y += K) {
+            for (var fa = P = 0; P !== h; P++, fa += v, da.y = V, da.x += A) {
+              for (var X = ba = 0; ba !== r; ba++, X += w, da.z = W, da.y += L) {
                 for (var ka = 0, Y = 0; ka !== p; ka++, Y += C, da.z += F) {
                   if (da.dot(N) < G) {
                     var ja = fa + X + Y;
@@ -24569,7 +24581,7 @@ function _typeof(a) {
       S.vadd(f, S);
       e.distanceTo(S) > c.boundingSphereRadius || (f = this[c.type]) && f.call(this, c, b, e, d);
     };
-    var x = (new f, new f, new f), z = new f, p = new f, u = new f;
+    var x = (new f, new f, new f), z = new f, p = new f, v = new f;
     new f;
     new q;
     b.prototype.intersectBox = function(c, b, e, d) {
@@ -24610,10 +24622,10 @@ function _typeof(a) {
       var p = (c.data, c.elementSize, new f), m = new b(this.from, this.to);
       e.pointToLocalFrame(g, d, m.from, m.from);
       e.pointToLocalFrame(g, d, m.to, m.to);
-      var n = [], h = null, q = null, r = null, u = null, t = c.getIndexOfPosition(m.from.x, m.from.y, n, !1);
-      if (t && (h = n[0], q = n[1], r = n[0], u = n[1]), t = c.getIndexOfPosition(m.to.x, m.to.y, n, !1), t && ((null === h || n[0] < h) && (h = n[0]), (null === r || n[0] > r) && (r = n[0]), (null === q || n[1] < q) && (q = n[1]), (null === u || n[1] > u) && (u = n[1])), null !== h) {
-        for (m = [], c.getRectMinMax(h, q, r, u, m), h = (m[0], m[1], h); r >= h; h++) {
-          for (m = q; u >= m; m++) {
+      var n = [], h = null, q = null, r = null, v = null, t = c.getIndexOfPosition(m.from.x, m.from.y, n, !1);
+      if (t && (h = n[0], q = n[1], r = n[0], v = n[1]), t = c.getIndexOfPosition(m.to.x, m.to.y, n, !1), t && ((null === h || n[0] < h) && (h = n[0]), (null === r || n[0] > r) && (r = n[0]), (null === q || n[1] < q) && (q = n[1]), (null === v || n[1] > v) && (v = n[1])), null !== h) {
+        for (m = [], c.getRectMinMax(h, q, r, v, m), h = (m[0], m[1], h); r >= h; h++) {
+          for (m = q; v >= m; m++) {
             if (this.result._shouldStop || (c.getConvexTrianglePillar(h, m, !1), e.pointToWorldFrame(g, d, c.pillarOffset, p), this.intersectConvex(c.pillarConvex, d, p, l, w), this.result._shouldStop)) {
               return;
             }
@@ -24654,19 +24666,19 @@ function _typeof(a) {
         if (!(Math.abs(B) < this.precision || (B = D.dot(F) / B, 0 > B))) {
           for (h.mult(B, x), x.vadd(q, x), z.copy(m[A[0]]), E.vmult(z, z), G.vadd(z, z), B = 1; !w._shouldStop && B < A.length - 1; B++) {
             p.copy(m[A[B]]);
-            u.copy(m[A[B + 1]]);
+            v.copy(m[A[B + 1]]);
             E.vmult(p, p);
-            E.vmult(u, u);
+            E.vmult(v, v);
             G.vadd(p, p);
-            G.vadd(u, u);
+            G.vadd(v, v);
             var H = x.distanceTo(q);
-            !g(x, z, p, u) && !g(x, p, z, u) || H > r || this.reportIntersection(D, x, c, d, C);
+            !g(x, z, p, v) && !g(x, p, z, v) || H > r || this.reportIntersection(D, x, c, d, C);
           }
         }
       }
     };
     b.prototype[r.types.CONVEXPOLYHEDRON] = b.prototype.intersectConvex;
-    var B = new f, E = new f, H = new f, J = new f, I = new f, R = new f, K = (new d, []), G = new e;
+    var B = new f, E = new f, H = new f, J = new f, I = new f, R = new f, L = (new d, []), G = new e;
     b.prototype.intersectTrimesh = function(c, b, d, f, l) {
       l = (l && l.faceList || null, c.indices);
       var m = (c.vertices, c.faceNormals, this.from), n = this.to, h = this._direction;
@@ -24676,18 +24688,18 @@ function _typeof(a) {
       e.pointToLocalFrame(d, b, m, H);
       e.pointToLocalFrame(d, b, n, J);
       m = H.distanceSquared(J);
-      c.tree.rayQuery(this, G, K);
+      c.tree.rayQuery(this, G, L);
       n = 0;
-      for (h = K.length; !this.result._shouldStop && n !== h; n++) {
-        var q = K[n];
+      for (h = L.length; !this.result._shouldStop && n !== h; n++) {
+        var q = L[n];
         c.getNormal(q, B);
         c.getVertex(l[3 * q], z);
         z.vsub(H, F);
         var r = E.dot(B);
         r = B.dot(F) / r;
-        0 > r || (E.scale(r, x), x.vadd(H, x), c.getVertex(l[3 * q + 1], p), c.getVertex(l[3 * q + 2], u), r = x.distanceSquared(H), !g(x, p, z, u) && !g(x, z, p, u) || r > m || (e.vectorToWorldFrame(b, B, I), e.pointToWorldFrame(d, b, x, R), this.reportIntersection(I, R, c, f, q)));
+        0 > r || (E.scale(r, x), x.vadd(H, x), c.getVertex(l[3 * q + 1], p), c.getVertex(l[3 * q + 2], v), r = x.distanceSquared(H), !g(x, p, z, v) && !g(x, z, p, v) || r > m || (e.vectorToWorldFrame(b, B, I), e.pointToWorldFrame(d, b, x, R), this.reportIntersection(I, R, c, f, q)));
       }
-      K.length = 0;
+      L.length = 0;
     };
     b.prototype[r.types.TRIMESH] = b.prototype.intersectTrimesh;
     b.prototype.reportIntersection = function(c, e, d, f, g) {
@@ -25918,9 +25930,9 @@ function _typeof(a) {
     b.prototype.applyForce = function(c, e) {
       this.type === b.DYNAMIC && (e.vsub(this.position, x), x.cross(c, z), this.force.vadd(c, this.force), this.torque.vadd(z, this.torque));
     };
-    var p = new f, u = new f;
+    var p = new f, v = new f;
     b.prototype.applyLocalForce = function(c, e) {
-      this.type === b.DYNAMIC && (this.vectorToWorldFrame(c, p), this.pointToWorldFrame(e, u), this.applyForce(p, u));
+      this.type === b.DYNAMIC && (this.vectorToWorldFrame(c, p), this.pointToWorldFrame(e, v), this.applyForce(p, v));
     };
     var w = new f, C = new f, A = new f;
     b.prototype.applyImpulse = function(c, e) {
@@ -26159,7 +26171,7 @@ function _typeof(a) {
           t = l;
           r = 0;
           F = q;
-          var I = u, X = w, ka = C;
+          var I = v, X = w, ka = C;
           D.getVelocityAtWorldPoint(F, I);
           A.getVelocityAtWorldPoint(F, X);
           I.vsub(X, ka);
@@ -26191,7 +26203,7 @@ function _typeof(a) {
         0 !== h.sideImpulse && (n = h.raycastResult.body, l = new f, l.copy(h.raycastResult.hitPointWorld), r = new f, z[m].scale(h.sideImpulse, r), d.pointToLocalFrame(c, c), c["xyz"[this.indexUpAxis]] *= h.rollInfluence, d.pointToWorldFrame(c, c), d.applyImpulse(r, c), r.scale(-1, r), n.applyImpulse(r, l));
       }
     };
-    var u = new f, w = new f, C = new f, A = new f, D = new f, F = new f, B = new f, E = new f, H = new f, J = new f;
+    var v = new f, w = new f, C = new f, A = new f, D = new f, F = new f, B = new f, E = new f, H = new f, J = new f;
   }, {"../collision/Ray":9, "../collision/RaycastResult":10, "../math/Quaternion":28, "../math/Vec3":30, "../objects/WheelInfo":36, "./Body":31}], 33:[function(d, h) {
     function b(c) {
       (this.wheelBodies = [], this.coordinateSystem = "undefined" == typeof c.coordinateSystem ? new q(1, 2, 3) : c.coordinateSystem.clone(), this.chassisBody = c.chassisBody, this.chassisBody) || (c = new e(new q(5, 2, .5)), this.chassisBody = new g(1, c));
@@ -26306,13 +26318,13 @@ function _typeof(a) {
         z.length = 0;
         this.getNeighbors(h, z);
         z.push(this.particles[g]);
-        for (var p = z.length, u = 0, w = 0; w !== p; w++) {
+        for (var p = z.length, v = 0, w = 0; w !== p; w++) {
           h.position.vsub(z[w].position, f);
           var C = f.norm();
           C = this.w(C);
-          u += z[w].mass * C;
+          v += z[w].mass * C;
         }
-        this.densities[g] = u;
+        this.densities[g] = v;
         this.pressures[g] = b * b * (this.densities[g] - this.density);
       }
       for (g = 0; g !== c; g++) {
@@ -26322,7 +26334,7 @@ function _typeof(a) {
         z = this.neighbors[g];
         p = z.length;
         for (w = 0; w !== p; w++) {
-          u = z[w], b.position.vsub(u.position, m), C = m.norm(), h = -u.mass * (this.pressures[g] / (this.densities[g] * this.densities[g] + d) + this.pressures[w] / (this.densities[w] * this.densities[w] + d)), this.gradw(m, r), r.mult(h, r), e.vadd(r, e), u.velocity.vsub(b.velocity, n), n.mult(1 / (1E-4 + this.densities[g] * this.densities[w]) * this.viscosity * u.mass, n), h = this.nablaw(C), n.mult(h, n), q.vadd(n, q);
+          v = z[w], b.position.vsub(v.position, m), C = m.norm(), h = -v.mass * (this.pressures[g] / (this.densities[g] * this.densities[g] + d) + this.pressures[w] / (this.densities[w] * this.densities[w] + d)), this.gradw(m, r), r.mult(h, r), e.vadd(r, e), v.velocity.vsub(b.velocity, n), n.mult(1 / (1E-4 + this.densities[g] * this.densities[w]) * this.viscosity * v.mass, n), h = this.nablaw(C), n.mult(h, n), q.vadd(n, q);
         }
         q.mult(b.mass, q);
         e.mult(b.mass, e);
@@ -26593,13 +26605,13 @@ function _typeof(a) {
     };
     var n = new f;
     b.prototype.clipAgainstHull = function(c, b, e, d, g, l, p, m, h) {
-      for (var q = -1, u = -Number.MAX_VALUE, r = 0; r < e.faces.length; r++) {
+      for (var q = -1, v = -Number.MAX_VALUE, r = 0; r < e.faces.length; r++) {
         n.copy(e.faceNormals[r]);
         g.vmult(n, n);
         var w = n.dot(l);
-        w > u && (u = w, q = r);
+        w > v && (v = w, q = r);
       }
-      u = [];
+      v = [];
       r = e.faces[q];
       w = r.length;
       for (var t = 0; w > t; t++) {
@@ -26607,16 +26619,16 @@ function _typeof(a) {
         x.copy(y);
         g.vmult(x, x);
         d.vadd(x, x);
-        u.push(x);
+        v.push(x);
       }
-      0 <= q && this.clipFaceAgainstHull(l, c, b, u, p, m, h);
+      0 <= q && this.clipFaceAgainstHull(l, c, b, v, p, m, h);
     };
     var c = new f, l = new f, t = new f, y = new f, x = new f, z = new f;
     b.prototype.findSeparatingAxis = function(b, e, d, f, g, p, m, h) {
       var n = Number.MAX_VALUE, q = 0;
       if (this.uniqueAxes) {
-        for (var u = 0; u !== this.uniqueAxes.length; u++) {
-          d.vmult(this.uniqueAxes[u], c);
+        for (var v = 0; v !== this.uniqueAxes.length; v++) {
+          d.vmult(this.uniqueAxes[v], c);
           var r = this.testSepAxis(c, b, e, d, f, g);
           if (!1 === r) {
             return !1;
@@ -26625,8 +26637,8 @@ function _typeof(a) {
         }
       } else {
         var w = m ? m.length : this.faces.length;
-        for (u = 0; w > u; u++) {
-          r = m ? m[u] : u;
+        for (v = 0; w > v; v++) {
+          r = m ? m[v] : v;
           c.copy(this.faceNormals[r]);
           d.vmult(c, c);
           r = this.testSepAxis(c, b, e, d, f, g);
@@ -26637,8 +26649,8 @@ function _typeof(a) {
         }
       }
       if (b.uniqueAxes) {
-        for (u = 0; u !== b.uniqueAxes.length; u++) {
-          g.vmult(b.uniqueAxes[u], l);
+        for (v = 0; v !== b.uniqueAxes.length; v++) {
+          g.vmult(b.uniqueAxes[v], l);
           q++;
           r = this.testSepAxis(l, b, e, d, f, g);
           if (!1 === r) {
@@ -26647,8 +26659,8 @@ function _typeof(a) {
           n > r && (n = r, p.copy(l));
         }
       } else {
-        for (m = h ? h.length : b.faces.length, u = 0; m > u; u++) {
-          r = h ? h[u] : u;
+        for (m = h ? h.length : b.faces.length, v = 0; m > v; v++) {
+          r = h ? h[v] : v;
           l.copy(b.faceNormals[r]);
           g.vmult(l, l);
           q++;
@@ -26663,24 +26675,24 @@ function _typeof(a) {
         for (d.vmult(this.uniqueEdges[h], y), q = 0; q !== b.uniqueEdges.length; q++) {
           if (g.vmult(b.uniqueEdges[q], x), y.cross(x, z), !z.almostZero()) {
             z.normalize();
-            u = this.testSepAxis(z, b, e, d, f, g);
-            if (!1 === u) {
+            v = this.testSepAxis(z, b, e, d, f, g);
+            if (!1 === v) {
               return !1;
             }
-            n > u && (n = u, p.copy(z));
+            n > v && (n = v, p.copy(z));
           }
         }
       }
       return f.vsub(e, t), 0 < t.dot(p) && p.negate(p), !0;
     };
-    var p = [], u = [];
+    var p = [], v = [];
     b.prototype.testSepAxis = function(c, e, d, f, g, l) {
       b.project(this, c, d, f, p);
-      b.project(e, c, g, l, u);
+      b.project(e, c, g, l, v);
       d = p[0];
       c = p[1];
-      e = u[0];
-      f = u[1];
+      e = v[0];
+      f = v[1];
       if (f > d || c > e) {
         return !1;
       }
@@ -26818,8 +26830,8 @@ function _typeof(a) {
     };
     var R = new f;
     b.prototype.calculateWorldAABB = function(c, b, e, d) {
-      for (var f, g, l, p, m, h, n = this.vertices.length, q = this.vertices, u = 0; n > u; u++) {
-        R.copy(q[u]);
+      for (var f, g, l, p, m, h, n = this.vertices.length, q = this.vertices, v = 0; n > v; v++) {
+        R.copy(q[v]);
         b.vmult(R, R);
         c.vadd(R, R);
         var r = R;
@@ -26857,17 +26869,17 @@ function _typeof(a) {
         }
       }
     };
-    var K = new f, G = new f, M = new f;
+    var L = new f, G = new f, M = new f;
     b.prototype.pointIsInside = function(c) {
       var b = this.vertices, e = this.faces, d = this.faceNormals, f = this.faces.length;
-      this.getAveragePointLocal(K);
+      this.getAveragePointLocal(L);
       for (var g = 0; f > g; g++) {
         var l = (this.faces[g].length, d[g]);
         var p = b[e[g][0]], m = G;
         c.vsub(p, m);
         m = l.dot(m);
         var h = M;
-        K.vsub(p, h);
+        L.vsub(p, h);
         l = l.dot(h);
         if (0 > m && 0 < l || 0 < m && 0 > l) {
           return !1;
@@ -26902,16 +26914,16 @@ function _typeof(a) {
       q.push(0);
       c.push(new f(b * z(0), b * p(0), .5 * m));
       r.push(1);
-      for (var u = 0; h > u; u++) {
-        var w = 2 * Math.PI / h * (u + 1), C = 2 * Math.PI / h * (u + .5);
-        h - 1 > u ? (c.push(new f(d * z(w), d * p(w), .5 * -m)), q.push(2 * u + 2), c.push(new f(b * z(w), b * p(w), .5 * m)), r.push(2 * u + 3), n.push([2 * u + 2, 2 * u + 3, 2 * u + 1, 2 * u])) : n.push([0, 1, 2 * u + 1, 2 * u]);
-        (1 === h % 2 || h / 2 > u) && l.push(new f(z(C), p(C), 0));
+      for (var v = 0; h > v; v++) {
+        var w = 2 * Math.PI / h * (v + 1), C = 2 * Math.PI / h * (v + .5);
+        h - 1 > v ? (c.push(new f(d * z(w), d * p(w), .5 * -m)), q.push(2 * v + 2), c.push(new f(b * z(w), b * p(w), .5 * m)), r.push(2 * v + 3), n.push([2 * v + 2, 2 * v + 3, 2 * v + 1, 2 * v])) : n.push([0, 1, 2 * v + 1, 2 * v]);
+        (1 === h % 2 || h / 2 > v) && l.push(new f(z(C), p(C), 0));
       }
       n.push(r);
       l.push(new f(0, 0, 1));
       b = [];
-      for (u = 0; u < q.length; u++) {
-        b.push(q[q.length - u - 1]);
+      for (v = 0; v < q.length; v++) {
+        b.push(q[q.length - v - 1]);
       }
       n.push(b);
       this.type = g.types.CONVEXPOLYHEDRON;
@@ -27006,17 +27018,17 @@ function _typeof(a) {
     b.prototype.getConvexTrianglePillar = function(b, d, g) {
       var c = this.pillarConvex, l = this.pillarOffset;
       if (this.cacheEnabled) {
-        var m = this.getCachedConvexTrianglePillar(b, d, g);
-        if (m) {
-          return this.pillarConvex = m.convex, void(this.pillarOffset = m.offset);
+        var h = this.getCachedConvexTrianglePillar(b, d, g);
+        if (h) {
+          return this.pillarConvex = h.convex, void(this.pillarOffset = h.offset);
         }
         c = new f;
         l = new e;
         this.pillarConvex = c;
         this.pillarOffset = l;
       }
-      m = this.data;
-      var h = this.elementSize, n = c.faces;
+      h = this.data;
+      var m = this.elementSize, n = c.faces;
       c.vertices.length = 6;
       for (var q = 0; 6 > q; q++) {
         c.vertices[q] || (c.vertices[q] = new e);
@@ -27026,9 +27038,9 @@ function _typeof(a) {
         n[q] || (n[q] = []);
       }
       q = c.vertices;
-      var p = (Math.min(m[b][d], m[b + 1][d], m[b][d + 1], m[b + 1][d + 1]) - this.minValue) / 2 + this.minValue;
-      g ? (l.set((b + .75) * h, (d + .75) * h, p), q[0].set(.25 * h, .25 * h, m[b + 1][d + 1] - p), q[1].set(-.75 * h, .25 * h, m[b][d + 1] - p), q[2].set(.25 * h, -.75 * h, m[b + 1][d] - p), q[3].set(.25 * h, .25 * h, -p - 1), q[4].set(-.75 * h, .25 * h, -p - 1), q[5].set(.25 * h, -.75 * h, -p - 1), n[0][0] = 0, n[0][1] = 1, n[0][2] = 2, n[1][0] = 5, n[1][1] = 4, n[1][2] = 3, n[2][0] = 2, n[2][1] = 5, n[2][2] = 3, n[2][3] = 0, n[3][0] = 3, n[3][1] = 4, n[3][2] = 1, n[3][3] = 0, n[4][0] = 1, n[4][1] = 
-      4, n[4][2] = 5, n[4][3] = 2) : (l.set((b + .25) * h, (d + .25) * h, p), q[0].set(-.25 * h, -.25 * h, m[b][d] - p), q[1].set(.75 * h, -.25 * h, m[b + 1][d] - p), q[2].set(-.25 * h, .75 * h, m[b][d + 1] - p), q[3].set(-.25 * h, -.25 * h, -p - 1), q[4].set(.75 * h, -.25 * h, -p - 1), q[5].set(-.25 * h, .75 * h, -p - 1), n[0][0] = 0, n[0][1] = 1, n[0][2] = 2, n[1][0] = 5, n[1][1] = 4, n[1][2] = 3, n[2][0] = 0, n[2][1] = 2, n[2][2] = 5, n[2][3] = 3, n[3][0] = 1, n[3][1] = 0, n[3][2] = 3, n[3][3] = 
+      var p = (Math.min(h[b][d], h[b + 1][d], h[b][d + 1], h[b + 1][d + 1]) - this.minValue) / 2 + this.minValue;
+      g ? (l.set((b + .75) * m, (d + .75) * m, p), q[0].set(.25 * m, .25 * m, h[b + 1][d + 1] - p), q[1].set(-.75 * m, .25 * m, h[b][d + 1] - p), q[2].set(.25 * m, -.75 * m, h[b + 1][d] - p), q[3].set(.25 * m, .25 * m, -p - 1), q[4].set(-.75 * m, .25 * m, -p - 1), q[5].set(.25 * m, -.75 * m, -p - 1), n[0][0] = 0, n[0][1] = 1, n[0][2] = 2, n[1][0] = 5, n[1][1] = 4, n[1][2] = 3, n[2][0] = 2, n[2][1] = 5, n[2][2] = 3, n[2][3] = 0, n[3][0] = 3, n[3][1] = 4, n[3][2] = 1, n[3][3] = 0, n[4][0] = 1, n[4][1] = 
+      4, n[4][2] = 5, n[4][3] = 2) : (l.set((b + .25) * m, (d + .25) * m, p), q[0].set(-.25 * m, -.25 * m, h[b][d] - p), q[1].set(.75 * m, -.25 * m, h[b + 1][d] - p), q[2].set(-.25 * m, .75 * m, h[b][d + 1] - p), q[3].set(-.25 * m, -.25 * m, -p - 1), q[4].set(.75 * m, -.25 * m, -p - 1), q[5].set(-.25 * m, .75 * m, -p - 1), n[0][0] = 0, n[0][1] = 1, n[0][2] = 2, n[1][0] = 5, n[1][1] = 4, n[1][2] = 3, n[2][0] = 0, n[2][1] = 2, n[2][2] = 5, n[2][3] = 3, n[3][0] = 1, n[3][1] = 0, n[3][2] = 3, n[3][3] = 
       4, n[4][0] = 4, n[4][1] = 5, n[4][2] = 2, n[4][3] = 1);
       c.computeNormals();
       c.computeEdges();
@@ -27294,10 +27306,10 @@ function _typeof(a) {
       c *= 3;
       return b.set(this.normals[c], this.normals[c + 1], this.normals[c + 2]);
     };
-    var u = new q;
+    var v = new q;
     b.prototype.calculateLocalInertia = function(c, b) {
-      this.computeLocalAABB(u);
-      var e = u.upperBound.x - u.lowerBound.x, d = u.upperBound.y - u.lowerBound.y, f = u.upperBound.z - u.lowerBound.z;
+      this.computeLocalAABB(v);
+      var e = v.upperBound.x - v.lowerBound.x, d = v.upperBound.y - v.lowerBound.y, f = v.upperBound.z - v.lowerBound.z;
       return b.set(1 / 12 * c * (4 * d * d + 4 * f * f), 1 / 12 * c * (4 * e * e + 4 * f * f), 1 / 12 * c * (4 * d * d + 4 * e * e));
     };
     var w = new f;
@@ -27387,15 +27399,15 @@ function _typeof(a) {
           p = d[g], c = p.wlambda, p.vlambda.set(0, 0, 0), c && c.set(0, 0, 0);
         }
         for (c = 0; c !== l; c++) {
-          for (var u = g = 0; u !== r; u++) {
-            p = m[u];
-            var w = q[u];
-            var C = e[u];
-            b = f[u];
+          for (var v = g = 0; v !== r; v++) {
+            p = m[v];
+            var w = q[v];
+            var C = e[v];
+            b = f[v];
             var A = p.computeGWlambda();
             w = C * (w - A - p.eps * b);
             b + w < p.minForce ? w = p.minForce - b : b + w > p.maxForce && (w = p.maxForce - b);
-            f[u] += w;
+            f[v] += w;
             g += 0 < w ? w : -w;
             p.addToWlambda(w);
           }
@@ -27716,26 +27728,26 @@ function _typeof(a) {
     h = d("../collision/AABB");
     var g = d("../shapes/Shape"), f = d("../collision/Ray"), e = d("../math/Vec3"), q = d("../math/Transform"), r = (d("../shapes/ConvexPolyhedron"), d("../math/Quaternion")), m = (d("../solver/Solver"), d("../utils/Vec3Pool")), n = d("../equations/ContactEquation"), c = d("../equations/FrictionEquation");
     b.prototype.createContactEquation = function(c, b, e, d, f, g) {
-      var l;
-      this.contactPointPool.length ? (l = this.contactPointPool.pop(), l.bi = c, l.bj = b) : l = new n(c, b);
-      l.enabled = c.collisionResponse && b.collisionResponse && e.collisionResponse && d.collisionResponse;
-      var p = this.currentContactMaterial;
-      l.restitution = p.restitution;
-      l.setSpookParams(p.contactEquationStiffness, p.contactEquationRelaxation, this.world.dt);
+      var p;
+      this.contactPointPool.length ? (p = this.contactPointPool.pop(), p.bi = c, p.bj = b) : p = new n(c, b);
+      p.enabled = c.collisionResponse && b.collisionResponse && e.collisionResponse && d.collisionResponse;
+      var l = this.currentContactMaterial;
+      p.restitution = l.restitution;
+      p.setSpookParams(l.contactEquationStiffness, l.contactEquationRelaxation, this.world.dt);
       c = e.material || c.material;
       b = d.material || b.material;
-      return c && b && 0 <= c.restitution && 0 <= b.restitution && (l.restitution = c.restitution * b.restitution), l.si = f || e, l.sj = g || d, l;
+      return c && b && 0 <= c.restitution && 0 <= b.restitution && (p.restitution = c.restitution * b.restitution), p.si = f || e, p.sj = g || d, p;
     };
     b.prototype.createFrictionEquationsFromContact = function(b, e) {
-      var d = b.bi, f = b.bj, g = this.world, l = this.currentContactMaterial, p = l.friction, h = b.si.material || d.material, m = b.sj.material || f.material;
-      if (h && m && 0 <= h.friction && 0 <= m.friction && (p = h.friction * m.friction), 0 < p) {
-        p *= g.gravity.length();
+      var d = b.bi, f = b.bj, g = this.world, p = this.currentContactMaterial, l = p.friction, h = b.si.material || d.material, m = b.sj.material || f.material;
+      if (h && m && 0 <= h.friction && 0 <= m.friction && (l = h.friction * m.friction), 0 < l) {
+        l *= g.gravity.length();
         h = d.invMass + f.invMass;
         0 < h && (h = 1 / h);
         var n = this.frictionEquationPool;
-        m = n.length ? n.pop() : new c(d, f, p * h);
-        n = n.length ? n.pop() : new c(d, f, p * h);
-        return m.bi = n.bi = d, m.bj = n.bj = f, m.minForce = n.minForce = -p * h, m.maxForce = n.maxForce = p * h, m.ri.copy(b.ri), m.rj.copy(b.rj), n.ri.copy(b.ri), n.rj.copy(b.rj), b.ni.tangents(m.t, n.t), m.setSpookParams(l.frictionEquationStiffness, l.frictionEquationRelaxation, g.dt), n.setSpookParams(l.frictionEquationStiffness, l.frictionEquationRelaxation, g.dt), m.enabled = n.enabled = b.enabled, e.push(m, n), !0;
+        m = n.length ? n.pop() : new c(d, f, l * h);
+        n = n.length ? n.pop() : new c(d, f, l * h);
+        return m.bi = n.bi = d, m.bj = n.bj = f, m.minForce = n.minForce = -l * h, m.maxForce = n.maxForce = l * h, m.ri.copy(b.ri), m.rj.copy(b.rj), n.ri.copy(b.ri), n.rj.copy(b.rj), b.ni.tangents(m.t, n.t), m.setSpookParams(p.frictionEquationStiffness, p.frictionEquationRelaxation, g.dt), n.setSpookParams(p.frictionEquationStiffness, p.frictionEquationRelaxation, g.dt), m.enabled = n.enabled = b.enabled, e.push(m, n), !0;
       }
       return !1;
     };
@@ -27759,7 +27771,7 @@ function _typeof(a) {
         l.tangents(e.t, d.t);
       }
     };
-    var x = new e, z = new e, p = new r, u = new r;
+    var x = new e, z = new e, p = new r, v = new r;
     b.prototype.getContacts = function(c, b, e, d, f, g, l) {
       this.contactPointPool = f;
       this.frictionEquationPool = l;
@@ -27776,7 +27788,7 @@ function _typeof(a) {
           g.quaternion.vmult(g.shapeOffsets[m], x);
           x.vadd(g.position, x);
           for (var n = g.shapes[m], q = 0; q < l.shapes.length; q++) {
-            l.quaternion.mult(l.shapeOrientations[q], u);
+            l.quaternion.mult(l.shapeOrientations[q], v);
             l.quaternion.vmult(l.shapeOffsets[q], z);
             z.vadd(l.position, z);
             var r = l.shapes[q];
@@ -27784,7 +27796,7 @@ function _typeof(a) {
               var w = null;
               n.material && r.material && (w = e.getContactMaterial(n.material, r.material) || null);
               this.currentContactMaterial = w || h || e.defaultContactMaterial;
-              (w = this[n.type | r.type]) && (n.type < r.type ? w.call(this, n, r, x, z, p, u, g, l, n, r) : w.call(this, r, n, z, x, u, p, l, g, n, r));
+              (w = this[n.type | r.type]) && (n.type < r.type ? w.call(this, n, r, x, z, p, v, g, l, n, r) : w.call(this, r, n, z, x, v, p, l, g, n, r));
             }
           }
         }
@@ -27835,58 +27847,58 @@ function _typeof(a) {
         n = C;
         m.vsub(d, n);
         if (0 >= w.dot(n)) {
-          var u = this.createContactEquation(p, h, c, b);
-          u.ni.copy(w);
+          var v = this.createContactEquation(p, h, c, b);
+          v.ni.copy(w);
           var r = A;
           w.scale(n.dot(w), r);
           m.vsub(r, r);
-          u.ri.copy(r);
-          u.ri.vsub(p.position, u.ri);
-          u.rj.copy(m);
-          u.rj.vsub(h.position, u.rj);
-          this.result.push(u);
-          this.createFrictionEquationsFromContact(u, this.frictionResult);
+          v.ri.copy(r);
+          v.ri.vsub(p.position, v.ri);
+          v.rj.copy(m);
+          v.rj.vsub(h.position, v.rj);
+          this.result.push(v);
+          this.createFrictionEquationsFromContact(v, this.frictionResult);
         }
       }
     };
-    var D = new e, F = new e, B = (new e, new e), E = new e, H = new e, J = new e, I = new e, R = new e, K = new e, G = new e, M = new e, S = new e, O = new e, Z = new h, Q = [];
+    var D = new e, F = new e, B = (new e, new e), E = new e, H = new e, J = new e, I = new e, R = new e, L = new e, G = new e, M = new e, S = new e, O = new e, Z = new h, Q = [];
     b.prototype[g.types.SPHERE | g.types.TRIMESH] = b.prototype.sphereTrimesh = function(c, b, e, d, g, l, p, h) {
-      q.pointToLocalFrame(d, l, e, K);
+      q.pointToLocalFrame(d, l, e, L);
       g = c.radius;
-      Z.lowerBound.set(K.x - g, K.y - g, K.z - g);
-      Z.upperBound.set(K.x + g, K.y + g, K.z + g);
+      Z.lowerBound.set(L.x - g, L.y - g, L.z - g);
+      Z.upperBound.set(L.x + g, L.y + g, L.z + g);
       b.getTrianglesInAABB(Z, Q);
       var m = c.radius * c.radius;
       for (g = 0; g < Q.length; g++) {
         for (var n = 0; 3 > n; n++) {
-          if (b.getVertex(b.indices[3 * Q[g] + n], B), B.vsub(K, F), F.norm2() <= m) {
+          if (b.getVertex(b.indices[3 * Q[g] + n], B), B.vsub(L, F), F.norm2() <= m) {
             E.copy(B);
             q.pointToWorldFrame(d, l, E, B);
             B.vsub(e, F);
-            var u = this.createContactEquation(p, h, c, b);
-            u.ni.copy(F);
-            u.ni.normalize();
-            u.ri.copy(u.ni);
-            u.ri.scale(c.radius, u.ri);
-            u.ri.vadd(e, u.ri);
-            u.ri.vsub(p.position, u.ri);
-            u.rj.copy(B);
-            u.rj.vsub(h.position, u.rj);
-            this.result.push(u);
-            this.createFrictionEquationsFromContact(u, this.frictionResult);
+            var v = this.createContactEquation(p, h, c, b);
+            v.ni.copy(F);
+            v.ni.normalize();
+            v.ri.copy(v.ni);
+            v.ri.scale(c.radius, v.ri);
+            v.ri.vadd(e, v.ri);
+            v.ri.vsub(p.position, v.ri);
+            v.rj.copy(B);
+            v.rj.vsub(h.position, v.rj);
+            this.result.push(v);
+            this.createFrictionEquationsFromContact(v, this.frictionResult);
           }
         }
       }
       for (g = 0; g < Q.length; g++) {
         for (n = 0; 3 > n; n++) {
-          b.getVertex(b.indices[3 * Q[g] + n], H), b.getVertex(b.indices[3 * Q[g] + (n + 1) % 3], J), J.vsub(H, I), K.vsub(J, G), e = G.dot(I), K.vsub(H, G), u = G.dot(I), 0 < u && 0 > e && (K.vsub(H, G), R.copy(I), R.normalize(), u = G.dot(R), R.scale(u, G), G.vadd(H, G), e = G.distanceTo(K), e < c.radius && (u = this.createContactEquation(p, h, c, b), G.vsub(K, u.ni), u.ni.normalize(), u.ni.scale(c.radius, u.ri), q.pointToWorldFrame(d, l, G, G), G.vsub(h.position, u.rj), q.vectorToWorldFrame(l, 
-          u.ni, u.ni), q.vectorToWorldFrame(l, u.ri, u.ri), this.result.push(u), this.createFrictionEquationsFromContact(u, this.frictionResult)));
+          b.getVertex(b.indices[3 * Q[g] + n], H), b.getVertex(b.indices[3 * Q[g] + (n + 1) % 3], J), J.vsub(H, I), L.vsub(J, G), e = G.dot(I), L.vsub(H, G), v = G.dot(I), 0 < v && 0 > e && (L.vsub(H, G), R.copy(I), R.normalize(), v = G.dot(R), R.scale(v, G), G.vadd(H, G), e = G.distanceTo(L), e < c.radius && (v = this.createContactEquation(p, h, c, b), G.vsub(L, v.ni), v.ni.normalize(), v.ni.scale(c.radius, v.ri), q.pointToWorldFrame(d, l, G, G), G.vsub(h.position, v.rj), q.vectorToWorldFrame(l, 
+          v.ni, v.ni), q.vectorToWorldFrame(l, v.ri, v.ri), this.result.push(v), this.createFrictionEquationsFromContact(v, this.frictionResult)));
         }
       }
       g = 0;
       for (n = Q.length; g !== n; g++) {
-        if (b.getTriangleVertices(Q[g], M, S, O), b.getNormal(Q[g], D), K.vsub(M, G), e = G.dot(D), D.scale(e, G), K.vsub(G, G), e = G.distanceTo(K), f.pointInTriangle(G, M, S, O) && e < c.radius) {
-          u = this.createContactEquation(p, h, c, b), G.vsub(K, u.ni), u.ni.normalize(), u.ni.scale(c.radius, u.ri), q.pointToWorldFrame(d, l, G, G), G.vsub(h.position, u.rj), q.vectorToWorldFrame(l, u.ni, u.ni), q.vectorToWorldFrame(l, u.ri, u.ri), this.result.push(u), this.createFrictionEquationsFromContact(u, this.frictionResult);
+        if (b.getTriangleVertices(Q[g], M, S, O), b.getNormal(Q[g], D), L.vsub(M, G), e = G.dot(D), D.scale(e, G), L.vsub(G, G), e = G.distanceTo(L), f.pointInTriangle(G, M, S, O) && e < c.radius) {
+          v = this.createContactEquation(p, h, c, b), G.vsub(L, v.ni), v.ni.normalize(), v.ni.scale(c.radius, v.ri), q.pointToWorldFrame(d, l, G, G), G.vsub(h.position, v.rj), q.vectorToWorldFrame(l, v.ni, v.ni), q.vectorToWorldFrame(l, v.ri, v.ri), this.result.push(v), this.createFrictionEquationsFromContact(v, this.frictionResult);
         }
       }
       Q.length = 0;
@@ -27904,7 +27916,7 @@ function _typeof(a) {
       e.vsub(d, da);
       b.getSideNormals(Y, g);
       g = c.radius;
-      for (var h = !1, m = null, n = 0, q = 0, u = 0, r = null, w = 0, t = Y.length; w !== t && !1 === h; w++) {
+      for (var h = !1, m = null, n = 0, q = 0, v = 0, r = null, w = 0, t = Y.length; w !== t && !1 === h; w++) {
         var y = fa;
         y.copy(Y[w]);
         var x = y.norm();
@@ -27918,15 +27930,15 @@ function _typeof(a) {
           z.normalize();
           A.normalize();
           var F = da.dot(z), E = da.dot(A);
-          B > F && F > -B && D > E && E > -D && (C = Math.abs(C - x - g), (null === r || r > C) && (r = C, q = F, u = E, m = x, U.copy(y), ha.copy(z), ra.copy(A), n++));
+          B > F && F > -B && D > E && E > -D && (C = Math.abs(C - x - g), (null === r || r > C) && (r = C, q = F, v = E, m = x, U.copy(y), ha.copy(z), ra.copy(A), n++));
         }
       }
-      n && (h = !0, n = this.createContactEquation(l, p, c, b), U.mult(-g, n.ri), n.ni.copy(U), n.ni.negate(n.ni), U.mult(m, U), ha.mult(q, ha), U.vadd(ha, U), ra.mult(u, ra), U.vadd(ra, n.rj), n.ri.vadd(e, n.ri), n.ri.vsub(l.position, n.ri), n.rj.vadd(d, n.rj), n.rj.vsub(p.position, n.rj), this.result.push(n), this.createFrictionEquationsFromContact(n, this.frictionResult));
+      n && (h = !0, n = this.createContactEquation(l, p, c, b), U.mult(-g, n.ri), n.ni.copy(U), n.ni.negate(n.ni), U.mult(m, U), ha.mult(q, ha), U.vadd(ha, U), ra.mult(v, ra), U.vadd(ra, n.rj), n.ri.vadd(e, n.ri), n.ri.vsub(l.position, n.ri), n.rj.vadd(d, n.rj), n.rj.vsub(p.position, n.rj), this.result.push(n), this.createFrictionEquationsFromContact(n, this.frictionResult));
       C = f.get();
       for (m = 0; 2 !== m && !h; m++) {
         for (q = 0; 2 !== q && !h; q++) {
-          for (u = 0; 2 !== u && !h; u++) {
-            if (C.set(0, 0, 0), m ? C.vadd(Y[0], C) : C.vsub(Y[0], C), q ? C.vadd(Y[1], C) : C.vsub(Y[1], C), u ? C.vadd(Y[2], C) : C.vsub(Y[2], C), d.vadd(C, ja), ja.vsub(e, ja), ja.norm2() < g * g) {
+          for (v = 0; 2 !== v && !h; v++) {
+            if (C.set(0, 0, 0), m ? C.vadd(Y[0], C) : C.vsub(Y[0], C), q ? C.vadd(Y[1], C) : C.vsub(Y[1], C), v ? C.vadd(Y[2], C) : C.vsub(Y[2], C), d.vadd(C, ja), ja.vsub(e, ja), ja.norm2() < g * g) {
               h = !0, n = this.createContactEquation(l, p, c, b), n.ri.copy(ja), n.ri.normalize(), n.ni.copy(n.ri), n.ri.mult(g, n.ri), n.rj.copy(C), n.ri.vadd(e, n.ri), n.ri.vsub(l.position, n.ri), n.rj.vadd(d, n.rj), n.rj.vsub(p.position, n.rj), this.result.push(n), this.createFrictionEquationsFromContact(n, this.frictionResult);
             }
           }
@@ -27950,8 +27962,8 @@ function _typeof(a) {
             n.vsub(d, n);
             x = n.dot(r);
             r.mult(x, t);
-            for (u = 0; u === m % 3 || u === q % 3;) {
-              u++;
+            for (v = 0; v === m % 3 || v === q % 3;) {
+              v++;
             }
             C.copy(e);
             C.vsub(t, C);
@@ -27959,7 +27971,7 @@ function _typeof(a) {
             C.vsub(d, C);
             x = Math.abs(x);
             z = C.norm();
-            x < Y[u].norm() && g > z && (h = !0, u = this.createContactEquation(l, p, c, b), w.vadd(t, u.rj), u.rj.copy(u.rj), C.negate(u.ni), u.ni.normalize(), u.ri.copy(u.rj), u.ri.vadd(d, u.ri), u.ri.vsub(e, u.ri), u.ri.normalize(), u.ri.mult(g, u.ri), u.ri.vadd(e, u.ri), u.ri.vsub(l.position, u.ri), u.rj.vadd(d, u.rj), u.rj.vsub(p.position, u.rj), this.result.push(u), this.createFrictionEquationsFromContact(u, this.frictionResult));
+            x < Y[v].norm() && g > z && (h = !0, v = this.createContactEquation(l, p, c, b), w.vadd(t, v.rj), v.rj.copy(v.rj), C.negate(v.ni), v.ni.normalize(), v.ri.copy(v.rj), v.ri.vadd(d, v.ri), v.ri.vsub(e, v.ri), v.ri.normalize(), v.ri.mult(g, v.ri), v.ri.vadd(e, v.ri), v.ri.vsub(l.position, v.ri), v.rj.vadd(d, v.rj), v.rj.vsub(p.position, v.rj), this.result.push(v), this.createFrictionEquationsFromContact(v, this.frictionResult));
           }
         }
       }
@@ -27969,20 +27981,20 @@ function _typeof(a) {
     b.prototype[g.types.SPHERE | g.types.CONVEXPOLYHEDRON] = b.prototype.sphereConvex = function(c, b, e, d, f, g, l, p) {
       f = this.v3pool;
       e.vsub(d, wa);
-      for (var h = b.faceNormals, m = b.faces, n = b.vertices, q = c.radius, u = 0; u !== n.length; u++) {
+      for (var h = b.faceNormals, m = b.faces, n = b.vertices, q = c.radius, v = 0; v !== n.length; v++) {
         var r = Qb;
-        g.vmult(n[u], r);
+        g.vmult(n[v], r);
         d.vadd(r, r);
         var w = ta;
         if (r.vsub(e, w), w.norm2() < q * q) {
           return c = this.createContactEquation(l, p, c, b), c.ri.copy(w), c.ri.normalize(), c.ni.copy(c.ri), c.ri.mult(q, c.ri), r.vsub(d, c.rj), c.ri.vadd(e, c.ri), c.ri.vsub(l.position, c.ri), c.rj.vadd(d, c.rj), c.rj.vsub(p.position, c.rj), this.result.push(c), void this.createFrictionEquationsFromContact(c, this.frictionResult);
         }
       }
-      u = 0;
-      for (r = m.length; u !== r; u++) {
-        w = m[u];
+      v = 0;
+      for (r = m.length; v !== r; v++) {
+        w = m[v];
         var t = xa;
-        g.vmult(h[u], t);
+        g.vmult(h[v], t);
         var y = za;
         g.vmult(n[w[0]], y);
         y.vadd(d, y);
@@ -28133,16 +28145,16 @@ function _typeof(a) {
         c.clipAgainstHull(e, f, b, d, g, Rb, -100, 100, n);
         for (g = f = 0; g !== n.length; g++) {
           q = this.createContactEquation(l, p, c, b, h, m);
-          var u = q.ri, r = q.rj;
+          var v = q.ri, r = q.rj;
           Rb.negate(q.ni);
           n[g].normal.negate(Eb);
           Eb.mult(n[g].depth, Eb);
-          n[g].point.vadd(Eb, u);
+          n[g].point.vadd(Eb, v);
           r.copy(n[g].point);
-          u.vsub(e, u);
+          v.vsub(e, v);
           r.vsub(d, r);
-          u.vadd(e, u);
-          u.vsub(l.position, u);
+          v.vadd(e, v);
+          v.vsub(l.position, v);
           r.vadd(d, r);
           r.vsub(p.position, r);
           this.result.push(q);
@@ -28177,8 +28189,8 @@ function _typeof(a) {
         for (var n = c.faces.length; f !== n; f++) {
           var q = c.worldFaceNormals[f];
           d.vsub(c.worldVertices[c.faces[f][0]], Na);
-          var u = -q.dot(Na);
-          (null === g || Math.abs(u) < Math.abs(g)) && (g = u, h = f, Ma.copy(q), m++);
+          var v = -q.dot(Na);
+          (null === g || Math.abs(v) < Math.abs(g)) && (g = v, h = f, Ma.copy(q), m++);
         }
         -1 !== h ? (c = this.createContactEquation(p, l, b, c), Ma.mult(g, lb), lb.vadd(d, lb), lb.vsub(e, lb), c.rj.copy(lb), Ma.negate(c.ni), c.ri.set(0, 0, 0), b = c.ri, g = c.rj, b.vadd(d, b), b.vsub(p.position, b), g.vadd(e, g), g.vsub(l.position, g), this.result.push(c), this.createFrictionEquationsFromContact(c, this.frictionResult)) : console.warn("Point found inside convex, but did not find penetrating face!");
       }
@@ -28192,24 +28204,24 @@ function _typeof(a) {
     b.prototype[g.types.CONVEXPOLYHEDRON | g.types.HEIGHTFIELD] = b.prototype.convexHeightfield = function(c, b, e, d, f, g, l, p) {
       var h = b.data, m = b.elementSize, n = c.boundingSphereRadius;
       q.pointToLocalFrame(d, g, e, qb);
-      var u = Math.floor((qb.x - n) / m) - 1, r = Math.ceil((qb.x + n) / m) + 1, w = Math.floor((qb.y - n) / m) - 1;
+      var v = Math.floor((qb.x - n) / m) - 1, r = Math.ceil((qb.x + n) / m) + 1, w = Math.floor((qb.y - n) / m) - 1;
       m = Math.ceil((qb.y + n) / m) + 1;
-      if (!(0 > r || 0 > m || u > h.length || w > h[0].length)) {
-        0 > u && (u = 0);
+      if (!(0 > r || 0 > m || v > h.length || w > h[0].length)) {
+        0 > v && (v = 0);
         0 > r && (r = 0);
         0 > w && (w = 0);
         0 > m && (m = 0);
-        u >= h.length && (u = h.length - 1);
+        v >= h.length && (v = h.length - 1);
         r >= h.length && (r = h.length - 1);
         m >= h[0].length && (m = h[0].length - 1);
         w >= h[0].length && (w = h[0].length - 1);
         h = [];
-        b.getRectMinMax(u, w, r, m, h);
+        b.getRectMinMax(v, w, r, m, h);
         var t = h[0];
         if (!(qb.z - n > h[1] || qb.z + n < t)) {
-          for (n = u; r > n; n++) {
-            for (u = w; m > u; u++) {
-              b.getConvexTrianglePillar(n, u, !1), q.pointToWorldFrame(d, g, b.pillarOffset, eb), e.distanceTo(eb) < b.pillarConvex.boundingSphereRadius + c.boundingSphereRadius && this.convexConvex(c, b.pillarConvex, e, eb, f, g, l, p, null, null, Dc, null), b.getConvexTrianglePillar(n, u, !0), q.pointToWorldFrame(d, g, b.pillarOffset, eb), e.distanceTo(eb) < b.pillarConvex.boundingSphereRadius + c.boundingSphereRadius && this.convexConvex(c, b.pillarConvex, e, eb, f, g, l, p, null, null, Dc, null);
+          for (n = v; r > n; n++) {
+            for (v = w; m > v; v++) {
+              b.getConvexTrianglePillar(n, v, !1), q.pointToWorldFrame(d, g, b.pillarOffset, eb), e.distanceTo(eb) < b.pillarConvex.boundingSphereRadius + c.boundingSphereRadius && this.convexConvex(c, b.pillarConvex, e, eb, f, g, l, p, null, null, Dc, null), b.getConvexTrianglePillar(n, v, !0), q.pointToWorldFrame(d, g, b.pillarOffset, eb), e.distanceTo(eb) < b.pillarConvex.boundingSphereRadius + c.boundingSphereRadius && this.convexConvex(c, b.pillarConvex, e, eb, f, g, l, p, null, null, Dc, null);
             }
           }
         }
@@ -28219,24 +28231,24 @@ function _typeof(a) {
     b.prototype[g.types.SPHERE | g.types.HEIGHTFIELD] = b.prototype.sphereHeightfield = function(c, b, e, d, f, g, l, p) {
       var h = b.data, m = c.radius, n = b.elementSize;
       q.pointToLocalFrame(d, g, e, rb);
-      var u = Math.floor((rb.x - m) / n) - 1, r = Math.ceil((rb.x + m) / n) + 1, w = Math.floor((rb.y - m) / n) - 1;
+      var v = Math.floor((rb.x - m) / n) - 1, r = Math.ceil((rb.x + m) / n) + 1, w = Math.floor((rb.y - m) / n) - 1;
       n = Math.ceil((rb.y + m) / n) + 1;
-      if (!(0 > r || 0 > n || u > h.length || n > h[0].length)) {
-        0 > u && (u = 0);
+      if (!(0 > r || 0 > n || v > h.length || n > h[0].length)) {
+        0 > v && (v = 0);
         0 > r && (r = 0);
         0 > w && (w = 0);
         0 > n && (n = 0);
-        u >= h.length && (u = h.length - 1);
+        v >= h.length && (v = h.length - 1);
         r >= h.length && (r = h.length - 1);
         n >= h[0].length && (n = h[0].length - 1);
         w >= h[0].length && (w = h[0].length - 1);
         h = [];
-        b.getRectMinMax(u, w, r, n, h);
+        b.getRectMinMax(v, w, r, n, h);
         var t = h[0];
         if (!(rb.z - m > h[1] || rb.z + m < t)) {
-          for (m = this.result; r > u; u++) {
+          for (m = this.result; r > v; v++) {
             for (h = w; n > h; h++) {
-              if (t = m.length, b.getConvexTrianglePillar(u, h, !1), q.pointToWorldFrame(d, g, b.pillarOffset, Fb), e.distanceTo(Fb) < b.pillarConvex.boundingSphereRadius + c.boundingSphereRadius && this.sphereConvex(c, b.pillarConvex, e, Fb, f, g, l, p), b.getConvexTrianglePillar(u, h, !0), q.pointToWorldFrame(d, g, b.pillarOffset, Fb), e.distanceTo(Fb) < b.pillarConvex.boundingSphereRadius + c.boundingSphereRadius && this.sphereConvex(c, b.pillarConvex, e, Fb, f, g, l, p), 2 < m.length - t) {
+              if (t = m.length, b.getConvexTrianglePillar(v, h, !1), q.pointToWorldFrame(d, g, b.pillarOffset, Fb), e.distanceTo(Fb) < b.pillarConvex.boundingSphereRadius + c.boundingSphereRadius && this.sphereConvex(c, b.pillarConvex, e, Fb, f, g, l, p), b.getConvexTrianglePillar(v, h, !0), q.pointToWorldFrame(d, g, b.pillarOffset, Fb), e.distanceTo(Fb) < b.pillarConvex.boundingSphereRadius + c.boundingSphereRadius && this.sphereConvex(c, b.pillarConvex, e, Fb, f, g, l, p), 2 < m.length - t) {
                 return;
               }
             }
@@ -28280,7 +28292,7 @@ function _typeof(a) {
     h = d("../math/Quaternion");
     var e = d("../solver/GSSolver"), q = (d("../utils/Vec3Pool"), d("../equations/ContactEquation"), d("../equations/FrictionEquation"), d("./Narrowphase")), r = d("../utils/EventTarget"), m = d("../collision/ArrayCollisionMatrix"), n = d("../material/Material"), c = d("../material/ContactMaterial"), l = d("../objects/Body"), t = d("../utils/TupleDictionary"), y = d("../collision/RaycastResult"), x = d("../collision/AABB"), z = d("../collision/Ray"), p = d("../collision/NaiveBroadphase");
     b.prototype = new r;
-    var u = (new x, new z);
+    var v = (new x, new z);
     if (b.prototype.getContactMaterial = function(c, b) {
       return this.contactMaterialTable.get(c.id, b.id);
     }, b.prototype.numObjects = function() {
@@ -28300,11 +28312,11 @@ function _typeof(a) {
     }, b.prototype.rayTest = function(c, b, e) {
       e instanceof y ? this.raycastClosest(c, b, {skipBackfaces:!0}, e) : this.raycastAll(c, b, {skipBackfaces:!0}, e);
     }, b.prototype.raycastAll = function(c, b, e, d) {
-      return e.mode = z.ALL, e.from = c, e.to = b, e.callback = d, u.intersectWorld(this, e);
+      return e.mode = z.ALL, e.from = c, e.to = b, e.callback = d, v.intersectWorld(this, e);
     }, b.prototype.raycastAny = function(c, b, e, d) {
-      return e.mode = z.ANY, e.from = c, e.to = b, e.result = d, u.intersectWorld(this, e);
+      return e.mode = z.ANY, e.from = c, e.to = b, e.result = d, v.intersectWorld(this, e);
     }, b.prototype.raycastClosest = function(c, b, e, d) {
-      return e.mode = z.CLOSEST, e.from = c, e.to = b, e.result = d, u.intersectWorld(this, e);
+      return e.mode = z.CLOSEST, e.from = c, e.to = b, e.result = d, v.intersectWorld(this, e);
     }, b.prototype.remove = function(c) {
       c.world = null;
       var b = this.bodies.length - 1, e = this.bodies, d = e.indexOf(c);
@@ -28347,10 +28359,10 @@ function _typeof(a) {
         }
       }
     };
-    var A = {type:"postStep"}, D = {type:"preStep"}, F = {type:"collide", body:null, contact:null}, B = [], E = [], H = [], J = [], I = (new f, new f, new f, new f, new f, new f, new f, new f, new f, new h, new h), R = new h, K = new f;
+    var A = {type:"postStep"}, D = {type:"preStep"}, F = {type:"collide", body:null, contact:null}, B = [], E = [], H = [], J = [], I = (new f, new f, new f, new f, new f, new f, new f, new f, new f, new h, new h), R = new h, L = new f;
     b.prototype.internalStep = function(c) {
       this.dt = c;
-      var b, e = this.contacts, d = this.numObjects(), f = this.bodies, p = this.solver, h = this.gravity, m = this.doProfiling, n = this.profile, q = l.DYNAMIC, u = this.constraints, r = (h.norm(), h.x), w = h.y, t = h.z;
+      var b, e = this.contacts, d = this.numObjects(), f = this.bodies, p = this.solver, h = this.gravity, m = this.doProfiling, n = this.profile, q = l.DYNAMIC, v = this.constraints, r = (h.norm(), h.x), w = h.y, t = h.z;
       m && (b = performance.now());
       for (h = 0; h !== d; h++) {
         var y = f[h];
@@ -28371,9 +28383,9 @@ function _typeof(a) {
       J.length = 0;
       this.broadphase.collisionPairs(this, H, J);
       m && (n.broadphase = performance.now() - b);
-      y = u.length;
+      y = v.length;
       for (h = 0; h !== y; h++) {
-        if (r = u[h], !r.collideConnected) {
+        if (r = v[h], !r.collideConnected) {
           for (w = H.length - 1; 0 <= w; --w) {
             (r.bodyA === H[w] && r.bodyB === J[w] || r.bodyB === H[w] && r.bodyA === J[w]) && (H.splice(w, 1), J.splice(w, 1));
           }
@@ -28406,9 +28418,9 @@ function _typeof(a) {
       for (h = 0; h !== d; h++) {
         y = f[h], y._wakeUpAfterNarrowphase && (y.wakeUp(), y._wakeUpAfterNarrowphase = !1);
       }
-      y = u.length;
+      y = v.length;
       for (h = 0; h !== y; h++) {
-        for (r = u[h], r.update(), w = 0, e = r.equations.length; w !== e; w++) {
+        for (r = v[h], r.update(), w = 0, e = r.equations.length; w !== e; w++) {
           p.addEquation(r.equations[w]);
         }
       }
@@ -28417,8 +28429,8 @@ function _typeof(a) {
       p.removeAllEquations();
       p = Math.pow;
       for (h = 0; h !== d; h++) {
-        if (y = f[h], y.type & q && (u = p(1 - y.linearDamping, c), e = y.velocity, e.mult(u, e), u = y.angularVelocity)) {
-          e = p(1 - y.angularDamping, c), u.mult(e, u);
+        if (y = f[h], y.type & q && (v = p(1 - y.linearDamping, c), e = y.velocity, e.mult(v, e), v = y.angularVelocity)) {
+          e = p(1 - y.angularDamping, c), v.mult(e, v);
         }
       }
       this.dispatchEvent(D);
@@ -28428,7 +28440,7 @@ function _typeof(a) {
       m && (b = performance.now());
       q = l.DYNAMIC | l.KINEMATIC;
       p = 0 === this.stepnumber % (this.quatNormalizeSkip + 1);
-      u = this.quatNormalizeFast;
+      v = this.quatNormalizeFast;
       e = .5 * c;
       g.types.PLANE;
       g.types.CONVEXPOLYHEDRON;
@@ -28440,11 +28452,11 @@ function _typeof(a) {
           t.x += r.x * G * c;
           t.y += r.y * G * c;
           t.z += r.z * G * c;
-          y.angularVelocity && (ra.vmult(w, K), K.mult(c, K), K.vadd(x, x));
+          y.angularVelocity && (ra.vmult(w, L), L.mult(c, L), L.vadd(x, x));
           C.x += t.x * c;
           C.y += t.y * c;
           C.z += t.z * c;
-          y.angularVelocity && (I.set(x.x, x.y, x.z, 0), I.mult(z, R), z.x += e * R.x, z.y += e * R.y, z.z += e * R.z, z.w += e * R.w, p && (u ? z.normalizeFast() : z.normalize()));
+          y.angularVelocity && (I.set(x.x, x.y, x.z, 0), I.mult(z, R), z.x += e * R.x, z.y += e * R.y, z.z += e * R.z, z.w += e * R.w, p && (v ? z.normalizeFast() : z.normalize()));
           y.aabb && (y.aabbNeedsUpdate = !0);
           y.updateInertiaWorld && y.updateInertiaWorld();
         }
@@ -29967,9 +29979,9 @@ function _typeof(a) {
         c = b[0];
         var g = b[1], l = b[2];
         b = b[3];
-        var h = b * e + g * f - l * d, p = b * d + l * e - c * f, m = b * f + c * d - g * e;
+        var h = b * e + g * f - l * d, m = b * d + l * e - c * f, p = b * f + c * d - g * e;
         e = -c * e - g * d - l * f;
-        return a[0] = h * b + e * -c + p * -l - m * -g, a[1] = p * b + e * -g + m * -c - h * -l, a[2] = m * b + e * -l + h * -g - p * -c, a;
+        return a[0] = h * b + e * -c + m * -l - p * -g, a[1] = m * b + e * -g + p * -c - h * -l, a[2] = p * b + e * -l + h * -g - m * -c, a;
       };
       l.rotateX = function(a, c, b, e) {
         var d = [], f = [];
@@ -30259,9 +30271,9 @@ function _typeof(a) {
       }, multiply:function(a, c, b) {
         var e = c[0], d = c[1], f = c[2], g = c[3], l = c[4], h = c[5], m = c[6], n = c[7];
         c = c[8];
-        var p = b[0], q = b[1], r = b[2], u = b[3], t = b[4], w = b[5], y = b[6], x = b[7];
+        var p = b[0], q = b[1], r = b[2], t = b[3], v = b[4], w = b[5], y = b[6], x = b[7];
         b = b[8];
-        return a[0] = p * e + q * g + r * m, a[1] = p * d + q * l + r * n, a[2] = p * f + q * h + r * c, a[3] = u * e + t * g + w * m, a[4] = u * d + t * l + w * n, a[5] = u * f + t * h + w * c, a[6] = y * e + x * g + b * m, a[7] = y * d + x * l + b * n, a[8] = y * f + x * h + b * c, a;
+        return a[0] = p * e + q * g + r * m, a[1] = p * d + q * l + r * n, a[2] = p * f + q * h + r * c, a[3] = t * e + v * g + w * m, a[4] = t * d + v * l + w * n, a[5] = t * f + v * h + w * c, a[6] = y * e + x * g + b * m, a[7] = y * d + x * l + b * n, a[8] = y * f + x * h + b * c, a;
       }};
       y.mul = y.multiply;
       y.translate = function(a, c, b) {
@@ -30301,14 +30313,14 @@ function _typeof(a) {
         return a[0] = 1 - e - d, a[3] = h - c, a[6] = m + g, a[1] = h + c, a[4] = 1 - b - d, a[7] = n - f, a[2] = m - g, a[5] = n + f, a[8] = 1 - b - e, a;
       };
       y.normalFromMat4 = function(a, c) {
-        var b = c[0], e = c[1], d = c[2], f = c[3], g = c[4], l = c[5], h = c[6], m = c[7], n = c[8], p = c[9], q = c[10], r = c[11], t = c[12], u = c[13], y = c[14];
+        var b = c[0], e = c[1], d = c[2], f = c[3], g = c[4], l = c[5], h = c[6], m = c[7], n = c[8], p = c[9], q = c[10], r = c[11], t = c[12], v = c[13], y = c[14];
         c = c[15];
-        var x = b * l - e * g, z = b * h - d * g, Q = b * m - f * g, V = e * h - d * l, P = e * m - f * l, ba = d * m - f * h, N = n * u - p * t, W = n * y - q * t;
+        var x = b * l - e * g, z = b * h - d * g, Q = b * m - f * g, V = e * h - d * l, P = e * m - f * l, ba = d * m - f * h, N = n * v - p * t, W = n * y - q * t;
         n = n * c - r * t;
-        var da = p * y - q * u;
-        p = p * c - r * u;
+        var da = p * y - q * v;
+        p = p * c - r * v;
         q = q * c - r * y;
-        return (r = x * q - z * p + Q * da + V * n - P * W + ba * N) ? (r = 1 / r, a[0] = (l * q - h * p + m * da) * r, a[1] = (h * n - g * q - m * W) * r, a[2] = (g * p - l * n + m * N) * r, a[3] = (d * p - e * q - f * da) * r, a[4] = (b * q - d * n + f * W) * r, a[5] = (e * n - b * p - f * N) * r, a[6] = (u * ba - y * P + c * V) * r, a[7] = (y * Q - t * ba - c * z) * r, a[8] = (t * P - u * Q + c * x) * r, a) : null;
+        return (r = x * q - z * p + Q * da + V * n - P * W + ba * N) ? (r = 1 / r, a[0] = (l * q - h * p + m * da) * r, a[1] = (h * n - g * q - m * W) * r, a[2] = (g * p - l * n + m * N) * r, a[3] = (d * p - e * q - f * da) * r, a[4] = (b * q - d * n + f * W) * r, a[5] = (e * n - b * p - f * N) * r, a[6] = (v * ba - y * P + c * V) * r, a[7] = (y * Q - t * ba - c * z) * r, a[8] = (t * P - v * Q + c * x) * r, a) : null;
       };
       y.str = function(a) {
         return "mat3(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ", " + a[6] + ", " + a[7] + ", " + a[8] + ")";
@@ -30347,34 +30359,34 @@ function _typeof(a) {
         }
         return a;
       }, invert:function(a, c) {
-        var b = c[0], e = c[1], d = c[2], f = c[3], g = c[4], l = c[5], h = c[6], m = c[7], n = c[8], p = c[9], q = c[10], r = c[11], t = c[12], u = c[13], y = c[14];
+        var b = c[0], e = c[1], d = c[2], f = c[3], g = c[4], l = c[5], h = c[6], m = c[7], n = c[8], p = c[9], q = c[10], r = c[11], t = c[12], v = c[13], y = c[14];
         c = c[15];
-        var x = b * l - e * g, z = b * h - d * g, Q = b * m - f * g, V = e * h - d * l, P = e * m - f * l, ba = d * m - f * h, N = n * u - p * t, W = n * y - q * t, da = n * c - r * t, fa = p * y - q * u, X = p * c - r * u, ka = q * c - r * y, Y = x * ka - z * X + Q * fa + V * da - P * W + ba * N;
-        return Y ? (Y = 1 / Y, a[0] = (l * ka - h * X + m * fa) * Y, a[1] = (d * X - e * ka - f * fa) * Y, a[2] = (u * ba - y * P + c * V) * Y, a[3] = (q * P - p * ba - r * V) * Y, a[4] = (h * da - g * ka - m * W) * Y, a[5] = (b * ka - d * da + f * W) * Y, a[6] = (y * Q - t * ba - c * z) * Y, a[7] = (n * ba - q * Q + r * z) * Y, a[8] = (g * X - l * da + m * N) * Y, a[9] = (e * da - b * X - f * N) * Y, a[10] = (t * P - u * Q + c * x) * Y, a[11] = (p * Q - n * P - r * x) * Y, a[12] = (l * W - g * fa - 
-        h * N) * Y, a[13] = (b * fa - e * W + d * N) * Y, a[14] = (u * z - t * V - y * x) * Y, a[15] = (n * V - p * z + q * x) * Y, a) : null;
+        var x = b * l - e * g, z = b * h - d * g, Q = b * m - f * g, V = e * h - d * l, P = e * m - f * l, ba = d * m - f * h, N = n * v - p * t, W = n * y - q * t, da = n * c - r * t, fa = p * y - q * v, X = p * c - r * v, ka = q * c - r * y, Y = x * ka - z * X + Q * fa + V * da - P * W + ba * N;
+        return Y ? (Y = 1 / Y, a[0] = (l * ka - h * X + m * fa) * Y, a[1] = (d * X - e * ka - f * fa) * Y, a[2] = (v * ba - y * P + c * V) * Y, a[3] = (q * P - p * ba - r * V) * Y, a[4] = (h * da - g * ka - m * W) * Y, a[5] = (b * ka - d * da + f * W) * Y, a[6] = (y * Q - t * ba - c * z) * Y, a[7] = (n * ba - q * Q + r * z) * Y, a[8] = (g * X - l * da + m * N) * Y, a[9] = (e * da - b * X - f * N) * Y, a[10] = (t * P - v * Q + c * x) * Y, a[11] = (p * Q - n * P - r * x) * Y, a[12] = (l * W - g * fa - 
+        h * N) * Y, a[13] = (b * fa - e * W + d * N) * Y, a[14] = (v * z - t * V - y * x) * Y, a[15] = (n * V - p * z + q * x) * Y, a) : null;
       }, adjoint:function(a, c) {
-        var b = c[0], e = c[1], d = c[2], f = c[3], g = c[4], l = c[5], h = c[6], m = c[7], n = c[8], p = c[9], q = c[10], r = c[11], t = c[12], u = c[13], y = c[14];
+        var b = c[0], e = c[1], d = c[2], f = c[3], g = c[4], l = c[5], h = c[6], m = c[7], n = c[8], p = c[9], q = c[10], r = c[11], t = c[12], v = c[13], y = c[14];
         c = c[15];
-        return a[0] = l * (q * c - r * y) - p * (h * c - m * y) + u * (h * r - m * q), a[1] = -(e * (q * c - r * y) - p * (d * c - f * y) + u * (d * r - f * q)), a[2] = e * (h * c - m * y) - l * (d * c - f * y) + u * (d * m - f * h), a[3] = -(e * (h * r - m * q) - l * (d * r - f * q) + p * (d * m - f * h)), a[4] = -(g * (q * c - r * y) - n * (h * c - m * y) + t * (h * r - m * q)), a[5] = b * (q * c - r * y) - n * (d * c - f * y) + t * (d * r - f * q), a[6] = -(b * (h * c - m * y) - g * (d * c - f * 
-        y) + t * (d * m - f * h)), a[7] = b * (h * r - m * q) - g * (d * r - f * q) + n * (d * m - f * h), a[8] = g * (p * c - r * u) - n * (l * c - m * u) + t * (l * r - m * p), a[9] = -(b * (p * c - r * u) - n * (e * c - f * u) + t * (e * r - f * p)), a[10] = b * (l * c - m * u) - g * (e * c - f * u) + t * (e * m - f * l), a[11] = -(b * (l * r - m * p) - g * (e * r - f * p) + n * (e * m - f * l)), a[12] = -(g * (p * y - q * u) - n * (l * y - h * u) + t * (l * q - h * p)), a[13] = b * (p * y - q * 
-        u) - n * (e * y - d * u) + t * (e * q - d * p), a[14] = -(b * (l * y - h * u) - g * (e * y - d * u) + t * (e * h - d * l)), a[15] = b * (l * q - h * p) - g * (e * q - d * p) + n * (e * h - d * l), a;
+        return a[0] = l * (q * c - r * y) - p * (h * c - m * y) + v * (h * r - m * q), a[1] = -(e * (q * c - r * y) - p * (d * c - f * y) + v * (d * r - f * q)), a[2] = e * (h * c - m * y) - l * (d * c - f * y) + v * (d * m - f * h), a[3] = -(e * (h * r - m * q) - l * (d * r - f * q) + p * (d * m - f * h)), a[4] = -(g * (q * c - r * y) - n * (h * c - m * y) + t * (h * r - m * q)), a[5] = b * (q * c - r * y) - n * (d * c - f * y) + t * (d * r - f * q), a[6] = -(b * (h * c - m * y) - g * (d * c - f * 
+        y) + t * (d * m - f * h)), a[7] = b * (h * r - m * q) - g * (d * r - f * q) + n * (d * m - f * h), a[8] = g * (p * c - r * v) - n * (l * c - m * v) + t * (l * r - m * p), a[9] = -(b * (p * c - r * v) - n * (e * c - f * v) + t * (e * r - f * p)), a[10] = b * (l * c - m * v) - g * (e * c - f * v) + t * (e * m - f * l), a[11] = -(b * (l * r - m * p) - g * (e * r - f * p) + n * (e * m - f * l)), a[12] = -(g * (p * y - q * v) - n * (l * y - h * v) + t * (l * q - h * p)), a[13] = b * (p * y - q * 
+        v) - n * (e * y - d * v) + t * (e * q - d * p), a[14] = -(b * (l * y - h * v) - g * (e * y - d * v) + t * (e * h - d * l)), a[15] = b * (l * q - h * p) - g * (e * q - d * p) + n * (e * h - d * l), a;
       }, determinant:function(a) {
         var c = a[0], b = a[1], e = a[2], d = a[3], f = a[4], g = a[5], l = a[6], h = a[7], m = a[8], n = a[9], p = a[10], q = a[11], r = a[12], t = a[13], y = a[14];
         a = a[15];
         return (c * g - b * f) * (p * a - q * y) - (c * l - e * f) * (n * a - q * t) + (c * h - d * f) * (n * y - p * t) + (b * l - e * g) * (m * a - q * r) - (b * h - d * g) * (m * y - p * r) + (e * h - d * l) * (m * t - n * r);
       }, multiply:function(a, c, b) {
-        var e = c[0], d = c[1], f = c[2], g = c[3], l = c[4], h = c[5], m = c[6], n = c[7], p = c[8], q = c[9], r = c[10], t = c[11], u = c[12], w = c[13], y = c[14];
+        var e = c[0], d = c[1], f = c[2], g = c[3], l = c[4], h = c[5], m = c[6], n = c[7], p = c[8], q = c[9], r = c[10], t = c[11], v = c[12], w = c[13], y = c[14];
         c = c[15];
         var x = b[0], z = b[1], V = b[2], P = b[3];
-        return a[0] = x * e + z * l + V * p + P * u, a[1] = x * d + z * h + V * q + P * w, a[2] = x * f + z * m + V * r + P * y, a[3] = x * g + z * n + V * t + P * c, x = b[4], z = b[5], V = b[6], P = b[7], a[4] = x * e + z * l + V * p + P * u, a[5] = x * d + z * h + V * q + P * w, a[6] = x * f + z * m + V * r + P * y, a[7] = x * g + z * n + V * t + P * c, x = b[8], z = b[9], V = b[10], P = b[11], a[8] = x * e + z * l + V * p + P * u, a[9] = x * d + z * h + V * q + P * w, a[10] = x * f + z * m + 
-        V * r + P * y, a[11] = x * g + z * n + V * t + P * c, x = b[12], z = b[13], V = b[14], P = b[15], a[12] = x * e + z * l + V * p + P * u, a[13] = x * d + z * h + V * q + P * w, a[14] = x * f + z * m + V * r + P * y, a[15] = x * g + z * n + V * t + P * c, a;
+        return a[0] = x * e + z * l + V * p + P * v, a[1] = x * d + z * h + V * q + P * w, a[2] = x * f + z * m + V * r + P * y, a[3] = x * g + z * n + V * t + P * c, x = b[4], z = b[5], V = b[6], P = b[7], a[4] = x * e + z * l + V * p + P * v, a[5] = x * d + z * h + V * q + P * w, a[6] = x * f + z * m + V * r + P * y, a[7] = x * g + z * n + V * t + P * c, x = b[8], z = b[9], V = b[10], P = b[11], a[8] = x * e + z * l + V * p + P * v, a[9] = x * d + z * h + V * q + P * w, a[10] = x * f + z * m + 
+        V * r + P * y, a[11] = x * g + z * n + V * t + P * c, x = b[12], z = b[13], V = b[14], P = b[15], a[12] = x * e + z * l + V * p + P * v, a[13] = x * d + z * h + V * q + P * w, a[14] = x * f + z * m + V * r + P * y, a[15] = x * g + z * n + V * t + P * c, a;
       }};
       x.mul = x.multiply;
       x.translate = function(a, c, b) {
-        var e, d, f, g, l, h, m, n, p, q, r, t, u = b[0], w = b[1];
+        var e, d, f, g, l, h, m, n, p, q, r, t, v = b[0], w = b[1];
         b = b[2];
-        return c === a ? (a[12] = c[0] * u + c[4] * w + c[8] * b + c[12], a[13] = c[1] * u + c[5] * w + c[9] * b + c[13], a[14] = c[2] * u + c[6] * w + c[10] * b + c[14], a[15] = c[3] * u + c[7] * w + c[11] * b + c[15]) : (e = c[0], d = c[1], f = c[2], g = c[3], l = c[4], h = c[5], m = c[6], n = c[7], p = c[8], q = c[9], r = c[10], t = c[11], a[0] = e, a[1] = d, a[2] = f, a[3] = g, a[4] = l, a[5] = h, a[6] = m, a[7] = n, a[8] = p, a[9] = q, a[10] = r, a[11] = t, a[12] = e * u + l * w + p * b + c[12], 
-        a[13] = d * u + h * w + q * b + c[13], a[14] = f * u + m * w + r * b + c[14], a[15] = g * u + n * w + t * b + c[15]), a;
+        return c === a ? (a[12] = c[0] * v + c[4] * w + c[8] * b + c[12], a[13] = c[1] * v + c[5] * w + c[9] * b + c[13], a[14] = c[2] * v + c[6] * w + c[10] * b + c[14], a[15] = c[3] * v + c[7] * w + c[11] * b + c[15]) : (e = c[0], d = c[1], f = c[2], g = c[3], l = c[4], h = c[5], m = c[6], n = c[7], p = c[8], q = c[9], r = c[10], t = c[11], a[0] = e, a[1] = d, a[2] = f, a[3] = g, a[4] = l, a[5] = h, a[6] = m, a[7] = n, a[8] = p, a[9] = q, a[10] = r, a[11] = t, a[12] = e * v + l * w + p * b + c[12], 
+        a[13] = d * v + h * w + q * b + c[13], a[14] = f * v + m * w + r * b + c[14], a[15] = g * v + n * w + t * b + c[15]), a;
       };
       x.scale = function(a, c, b) {
         var e = b[0], d = b[1];
@@ -30382,11 +30394,11 @@ function _typeof(a) {
         return a[0] = c[0] * e, a[1] = c[1] * e, a[2] = c[2] * e, a[3] = c[3] * e, a[4] = c[4] * d, a[5] = c[5] * d, a[6] = c[6] * d, a[7] = c[7] * d, a[8] = c[8] * b, a[9] = c[9] * b, a[10] = c[10] * b, a[11] = c[11] * b, a[12] = c[12], a[13] = c[13], a[14] = c[14], a[15] = c[15], a;
       };
       x.rotate = function(a, c, e, d) {
-        var f, g, l, h, m, n, p, q, r, t, u, w, y, x, z, C, V, P, ba, N, W, da, fa, X, ka = d[0], Y = d[1];
+        var f, g, l, h, m, n, p, q, r, t, v, w, y, x, z, C, V, P, ba, N, W, da, fa, X, ka = d[0], Y = d[1];
         d = d[2];
         var ja = Math.sqrt(ka * ka + Y * Y + d * d);
-        return Math.abs(ja) < b ? null : (ja = 1 / ja, ka *= ja, Y *= ja, d *= ja, f = Math.sin(e), g = Math.cos(e), l = 1 - g, h = c[0], m = c[1], n = c[2], p = c[3], q = c[4], r = c[5], t = c[6], u = c[7], w = c[8], y = c[9], x = c[10], z = c[11], C = ka * ka * l + g, V = Y * ka * l + d * f, P = d * ka * l - Y * f, ba = ka * Y * l - d * f, N = Y * Y * l + g, W = d * Y * l + ka * f, da = ka * d * l + Y * f, fa = Y * d * l - ka * f, X = d * d * l + g, a[0] = h * C + q * V + w * P, a[1] = m * C + 
-        r * V + y * P, a[2] = n * C + t * V + x * P, a[3] = p * C + u * V + z * P, a[4] = h * ba + q * N + w * W, a[5] = m * ba + r * N + y * W, a[6] = n * ba + t * N + x * W, a[7] = p * ba + u * N + z * W, a[8] = h * da + q * fa + w * X, a[9] = m * da + r * fa + y * X, a[10] = n * da + t * fa + x * X, a[11] = p * da + u * fa + z * X, c !== a && (a[12] = c[12], a[13] = c[13], a[14] = c[14], a[15] = c[15]), a);
+        return Math.abs(ja) < b ? null : (ja = 1 / ja, ka *= ja, Y *= ja, d *= ja, f = Math.sin(e), g = Math.cos(e), l = 1 - g, h = c[0], m = c[1], n = c[2], p = c[3], q = c[4], r = c[5], t = c[6], v = c[7], w = c[8], y = c[9], x = c[10], z = c[11], C = ka * ka * l + g, V = Y * ka * l + d * f, P = d * ka * l - Y * f, ba = ka * Y * l - d * f, N = Y * Y * l + g, W = d * Y * l + ka * f, da = ka * d * l + Y * f, fa = Y * d * l - ka * f, X = d * d * l + g, a[0] = h * C + q * V + w * P, a[1] = m * C + 
+        r * V + y * P, a[2] = n * C + t * V + x * P, a[3] = p * C + v * V + z * P, a[4] = h * ba + q * N + w * W, a[5] = m * ba + r * N + y * W, a[6] = n * ba + t * N + x * W, a[7] = p * ba + v * N + z * W, a[8] = h * da + q * fa + w * X, a[9] = m * da + r * fa + y * X, a[10] = n * da + t * fa + x * X, a[11] = p * da + v * fa + z * X, c !== a && (a[12] = c[12], a[13] = c[13], a[14] = c[14], a[15] = c[15]), a);
       };
       x.rotateX = function(a, c, b) {
         var e = Math.sin(b);
@@ -30447,14 +30459,14 @@ function _typeof(a) {
         return a[0] = -2 * l, a[1] = 0, a[2] = 0, a[3] = 0, a[4] = 0, a[5] = -2 * h, a[6] = 0, a[7] = 0, a[8] = 0, a[9] = 0, a[10] = 2 * m, a[11] = 0, a[12] = (c + b) * l, a[13] = (d + e) * h, a[14] = (g + f) * m, a[15] = 1, a;
       };
       x.lookAt = function(a, c, e, d) {
-        var f, g, l, h, m, n, q, p, r, t, u = c[0], w = c[1];
+        var f, g, l, h, m, n, q, p, r, t, v = c[0], w = c[1];
         c = c[2];
         var y = d[0], z = d[1];
         d = d[2];
         var C = e[0], Q = e[1];
         e = e[2];
-        return Math.abs(u - C) < b && Math.abs(w - Q) < b && Math.abs(c - e) < b ? x.identity(a) : (q = u - C, p = w - Q, r = c - e, t = 1 / Math.sqrt(q * q + p * p + r * r), q *= t, p *= t, r *= t, f = z * r - d * p, g = d * q - y * r, l = y * p - z * q, t = Math.sqrt(f * f + g * g + l * l), t ? (t = 1 / t, f *= t, g *= t, l *= t) : (f = 0, g = 0, l = 0), h = p * l - r * g, m = r * f - q * l, n = q * g - p * f, t = Math.sqrt(h * h + m * m + n * n), t ? (t = 1 / t, h *= t, m *= t, n *= t) : (h = 
-        0, m = 0, n = 0), a[0] = f, a[1] = h, a[2] = q, a[3] = 0, a[4] = g, a[5] = m, a[6] = p, a[7] = 0, a[8] = l, a[9] = n, a[10] = r, a[11] = 0, a[12] = -(f * u + g * w + l * c), a[13] = -(h * u + m * w + n * c), a[14] = -(q * u + p * w + r * c), a[15] = 1, a);
+        return Math.abs(v - C) < b && Math.abs(w - Q) < b && Math.abs(c - e) < b ? x.identity(a) : (q = v - C, p = w - Q, r = c - e, t = 1 / Math.sqrt(q * q + p * p + r * r), q *= t, p *= t, r *= t, f = z * r - d * p, g = d * q - y * r, l = y * p - z * q, t = Math.sqrt(f * f + g * g + l * l), t ? (t = 1 / t, f *= t, g *= t, l *= t) : (f = 0, g = 0, l = 0), h = p * l - r * g, m = r * f - q * l, n = q * g - p * f, t = Math.sqrt(h * h + m * m + n * n), t ? (t = 1 / t, h *= t, m *= t, n *= t) : (h = 
+        0, m = 0, n = 0), a[0] = f, a[1] = h, a[2] = q, a[3] = 0, a[4] = g, a[5] = m, a[6] = p, a[7] = 0, a[8] = l, a[9] = n, a[10] = r, a[11] = 0, a[12] = -(f * v + g * w + l * c), a[13] = -(h * v + m * w + n * c), a[14] = -(q * v + p * w + r * c), a[15] = 1, a);
       };
       x.str = function(a) {
         return "mat4(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ", " + a[6] + ", " + a[7] + ", " + a[8] + ", " + a[9] + ", " + a[10] + ", " + a[11] + ", " + a[12] + ", " + a[13] + ", " + a[14] + ", " + a[15] + ")";
@@ -30581,7 +30593,7 @@ function _typeof(a) {
   }(this);
 }, {}], 24:[function(a, d, h) {
   (function() {
-    var a = this, g = a._, f = {}, e = Array.prototype, q = Object.prototype, r = e.push, m = e.slice, n = e.concat, c = q.toString, l = q.hasOwnProperty, t = e.forEach, y = e.map, x = e.reduce, z = e.reduceRight, p = e.filter, u = e.every, w = e.some, C = e.indexOf, A = e.lastIndexOf;
+    var a = this, g = a._, f = {}, e = Array.prototype, q = Object.prototype, r = e.push, m = e.slice, n = e.concat, c = q.toString, l = q.hasOwnProperty, t = e.forEach, y = e.map, x = e.reduce, z = e.reduceRight, p = e.filter, v = e.every, w = e.some, C = e.indexOf, A = e.lastIndexOf;
     q = Array.isArray;
     var D = Object.keys, F = Function.prototype.bind, B = function(a) {
       return a instanceof B ? a : this instanceof B ? void(this._wrapped = a) : new B(a);
@@ -30662,7 +30674,7 @@ function _typeof(a) {
     B.every = B.all = function(a, c, b) {
       c || (c = B.identity);
       var e = !0;
-      return null == a ? e : u && a.every === u ? a.every(c, b) : (E(a, function(a, d, g) {
+      return null == a ? e : v && a.every === v ? a.every(c, b) : (E(a, function(a, d, g) {
         return (e = e && c.call(b, a, d, g)) ? void 0 : f;
       }), !!e);
     };
@@ -31060,7 +31072,7 @@ function _typeof(a) {
     B.tap = function(a, c) {
       return c(a), a;
     };
-    var K = function(a, b, e, d) {
+    var L = function(a, b, e, d) {
       if (a === b) {
         return 0 !== a || 1 / a == 1 / b;
       }
@@ -31098,7 +31110,7 @@ function _typeof(a) {
       var l = !0;
       if ("[object Array]" == f) {
         if (g = a.length, l = g == b.length) {
-          for (; g-- && (l = K(a[g], b[g], e, d));) {
+          for (; g-- && (l = L(a[g], b[g], e, d));) {
           }
         }
       } else {
@@ -31108,7 +31120,7 @@ function _typeof(a) {
           return !1;
         }
         for (var m in a) {
-          if (B.has(a, m) && (g++, !(l = B.has(b, m) && K(a[m], b[m], e, d)))) {
+          if (B.has(a, m) && (g++, !(l = B.has(b, m) && L(a[m], b[m], e, d)))) {
             break;
           }
         }
@@ -31124,7 +31136,7 @@ function _typeof(a) {
       return e.pop(), d.pop(), l;
     };
     B.isEqual = function(a, c) {
-      return K(a, c, [], []);
+      return L(a, c, [], []);
     };
     B.isEmpty = function(a) {
       if (null == a) {
@@ -32503,17 +32515,17 @@ var __extends = this && this.__extends || function() {
           g = !0;
           var t = 0 == h ? a.MixBlend.first : l.mixBlend, y = l.alpha;
           null != l.mixingFrom ? y *= this.applyMixingFrom(l, b, t) : l.trackTime >= l.trackEnd && null == l.next && (y = 0);
-          var x = l.animationLast, z = l.getAnimationTime(), p = l.animation.timelines.length, u = l.animation.timelines;
+          var x = l.animationLast, z = l.getAnimationTime(), p = l.animation.timelines.length, v = l.animation.timelines;
           if (0 == h && 1 == y || t == a.MixBlend.add) {
             for (var w = 0; w < p; w++) {
-              a.Utils.webkit602BugfixHelper(y, t), u[w].apply(b, x, z, e, y, t, a.MixDirection.mixIn);
+              a.Utils.webkit602BugfixHelper(y, t), v[w].apply(b, x, z, e, y, t, a.MixDirection.mixIn);
             }
           } else {
             var C = l.timelineMode, A = 0 == l.timelinesRotation.length;
             A && a.Utils.setArraySize(l.timelinesRotation, p << 1, null);
             var D = l.timelinesRotation;
             for (w = 0; w < p; w++) {
-              var F = u[w], B = (C[w] & d.NOT_LAST - 1) == d.SUBSEQUENT ? t : a.MixBlend.setup;
+              var F = v[w], B = (C[w] & d.NOT_LAST - 1) == d.SUBSEQUENT ? t : a.MixBlend.setup;
               F instanceof a.RotateTimeline ? this.applyRotateTimeline(F, b, z, y, B, D, w << 1, A) : (a.Utils.webkit602BugfixHelper(y, t), F.apply(b, x, z, e, y, B, a.MixDirection.mixIn));
             }
           }
@@ -32535,7 +32547,7 @@ var __extends = this && this.__extends || function() {
       } else {
         h = b.mixTime / b.mixDuration, 1 < h && (h = 1), g != a.MixBlend.first && (g = e.mixBlend);
       }
-      var c = h < e.eventThreshold ? this.events : null, l = h < e.attachmentThreshold, q = h < e.drawOrderThreshold, r = e.animationLast, x = e.getAnimationTime(), z = e.animation.timelines.length, p = e.animation.timelines, u = e.alpha * b.interruptAlpha, w = u * (1 - h);
+      var c = h < e.eventThreshold ? this.events : null, l = h < e.attachmentThreshold, q = h < e.drawOrderThreshold, r = e.animationLast, x = e.getAnimationTime(), z = e.animation.timelines.length, p = e.animation.timelines, v = e.alpha * b.interruptAlpha, w = v * (1 - h);
       if (g == a.MixBlend.add) {
         for (var C = 0; C < z; C++) {
           p[C].apply(f, r, x, c, w, g, a.MixDirection.mixOut);
@@ -32566,10 +32578,10 @@ var __extends = this && this.__extends || function() {
               break;
             case d.HOLD:
               J = a.MixBlend.setup;
-              I = u;
+              I = v;
               break;
             default:
-              J = a.MixBlend.setup, I = D[C], I = u * Math.max(0, 1 - I.mixTime / I.mixDuration);
+              J = a.MixBlend.setup, I = D[C], I = v * Math.max(0, 1 - I.mixTime / I.mixDuration);
           }
           e.totalAlpha += I;
           if (E instanceof a.RotateTimeline) {
@@ -33195,8 +33207,8 @@ var __extends = this && this.__extends || function() {
                   d && d(b, r);
                   e.toLoad--;
                   e.loaded++;
-                } catch (u) {
-                  c = u, e.errors[b] = "Couldn't load texture atlas " + b + ": " + c.message, f && f(b, "Couldn't load texture atlas " + b + ": " + c.message), e.toLoad--, e.loaded++;
+                } catch (v) {
+                  c = v, e.errors[b] = "Couldn't load texture atlas " + b + ": " + c.message, f && f(b, "Couldn't load texture atlas " + b + ": " + c.message), e.toLoad--, e.loaded++;
                 }
               }
             }
@@ -33631,11 +33643,11 @@ var __extends = this && this.__extends || function() {
         if (0 > q) {
           q = -q;
           var p = 180;
-          var u = -1;
+          var v = -1;
         } else {
-          p = 0, u = 1;
+          p = 0, v = 1;
         }
-        0 > x && (x = -x, u = -u);
+        0 > x && (x = -x, v = -v);
         if (0 > z) {
           z = -z;
           var w = 180;
@@ -33655,10 +33667,10 @@ var __extends = this && this.__extends || function() {
         D = R.b;
         F = R.c;
         B = R.d;
-        var K = 1 / (A * B - D * F), G = J - R.worldX;
+        var L = 1 / (A * B - D * F), G = J - R.worldX;
         J = I - R.worldY;
-        I = (G * B - J * D) * K - c;
-        J = (J * A - G * F) * K - g;
+        I = (G * B - J * D) * L - c;
+        J = (J * A - G * F) * L - g;
         I = Math.sqrt(I * I + J * J);
         var M = d.data.length * z;
         if (1E-4 > I) {
@@ -33666,25 +33678,25 @@ var __extends = this && this.__extends || function() {
         } else {
           G = f - R.worldX;
           J = e - R.worldY;
-          B = (G * B - J * D) * K - c;
-          F = (J * A - G * F) * K - g;
-          K = B * B + F * F;
-          0 != m && (m *= q * (z + 1) / 2, A = Math.sqrt(K), D = A - I - M * q + m, 0 < D && (K = Math.min(1, D / (2 * m)) - 1, K = (D - m * (1 - K * K)) / A, B -= K * B, F -= K * F, K = B * B + F * F));
+          B = (G * B - J * D) * L - c;
+          F = (J * A - G * F) * L - g;
+          L = B * B + F * F;
+          0 != m && (m *= q * (z + 1) / 2, A = Math.sqrt(L), D = A - I - M * q + m, 0 < D && (L = Math.min(1, D / (2 * m)) - 1, L = (D - m * (1 - L * L)) / A, B -= L * B, F -= L * F, L = B * B + F * F));
           a: {
             if (E) {
-              M *= q, A = (K - I * I - M * M) / (2 * I * M), -1 > A ? A = -1 : 1 < A && (A = 1, r && (y *= (Math.sqrt(K) / (I + M) - 1) * n + 1)), h *= Math.acos(A), A = I + M * A, D = M * Math.sin(h), A = Math.atan2(F * A - B * D, B * A + F * D);
+              M *= q, A = (L - I * I - M * M) / (2 * I * M), -1 > A ? A = -1 : 1 < A && (A = 1, r && (y *= (Math.sqrt(L) / (I + M) - 1) * n + 1)), h *= Math.acos(A), A = I + M * A, D = M * Math.sin(h), A = Math.atan2(F * A - B * D, B * A + F * D);
             } else {
               A = q * M;
               D = x * M;
               J = A * A;
               G = D * D;
               r = Math.atan2(F, B);
-              F = G * I * I + J * K - J * G;
+              F = G * I * I + J * L - J * G;
               m = -2 * G * I;
               E = G - J;
               B = m * m - 4 * E * F;
-              if (0 <= B && (B = Math.sqrt(B), 0 > m && (B = -B), B = -(m + B) / 2, m = B / E, F /= B, F = Math.abs(m) < Math.abs(F) ? m : F, F * F <= K)) {
-                J = Math.sqrt(K - F * F) * h;
+              if (0 <= B && (B = Math.sqrt(B), 0 > m && (B = -B), B = -(m + B) / 2, m = B / E, F /= B, F = Math.abs(m) < Math.abs(F) ? m : F, F * F <= L)) {
+                J = Math.sqrt(L - F * F) * h;
                 A = r - Math.atan2(J, F);
                 h = Math.atan2(J / x, (F - I) / q);
                 break a;
@@ -33698,16 +33710,16 @@ var __extends = this && this.__extends || function() {
               e = 0;
               F = -A * I / (J - G);
               -1 <= F && 1 >= F && (F = Math.acos(F), G = A * Math.cos(F) + I, J = D * Math.sin(F), B = G * G + J * J, B < E && (q = F, E = B, m = G, M = J), B > f && (x = F, f = B, z = G, e = J));
-              K <= (E + f) / 2 ? (A = r - Math.atan2(M * h, m), h *= q) : (A = r - Math.atan2(e * h, z), h *= x);
+              L <= (E + f) / 2 ? (A = r - Math.atan2(M * h, m), h *= q) : (A = r - Math.atan2(e * h, z), h *= x);
             }
           }
-          I = Math.atan2(H, C) * u;
+          I = Math.atan2(H, C) * v;
           D = b.arotation;
           A = (A - I) * a.MathUtils.radDeg + p - D;
           180 < A ? A -= 360 : -180 > A && (A += 360);
           b.updateWorldTransformWith(c, g, D + A * n, y, b.ascaleY, 0, 0);
           D = d.arotation;
-          h = ((h + I) * a.MathUtils.radDeg - d.ashearX) * u + w - D;
+          h = ((h + I) * a.MathUtils.radDeg - d.ashearX) * v + w - D;
           180 < h ? h -= 360 : -180 > h && (h += 360);
           d.updateWorldTransformWith(C, H, D + h * n, d.ascaleX, d.ascaleY, d.ashearX, d.ashearY);
         }
@@ -33777,7 +33789,7 @@ var __extends = this && this.__extends || function() {
           var h = this.data, r = h.spacingMode == a.SpacingMode.Percent, m = h.rotateMode, n = m == a.RotateMode.Tangent, c = m == a.RotateMode.ChainScale, l = this.bones.length, t = n ? l : l + 1, y = this.bones, x = a.Utils.setArraySize(this.spaces, t), z = null, p = this.spacing;
           if (c || !r) {
             c && (z = a.Utils.setArraySize(this.lengths, l));
-            for (var u = h.spacingMode == a.SpacingMode.Length, w = 0, C = t - 1; w < C;) {
+            for (var v = h.spacingMode == a.SpacingMode.Length, w = 0, C = t - 1; w < C;) {
               var A = y[w], D = A.data.length;
               if (D < d.epsilon) {
                 c && (z[w] = 0), x[++w] = 0;
@@ -33789,7 +33801,7 @@ var __extends = this && this.__extends || function() {
                   }
                   x[++w] = p;
                 } else {
-                  F = D * A.a, B = D * A.c, A = Math.sqrt(F * F + B * B), c && (z[w] = A), x[++w] = (u ? D + p : p) * A / D;
+                  F = D * A.a, B = D * A.c, A = Math.sqrt(F * F + B * B), c && (z[w] = A), x[++w] = (v ? D + p : p) * A / D;
                 }
               }
             }
@@ -33810,9 +33822,9 @@ var __extends = this && this.__extends || function() {
             A.worldY += (t - A.worldY) * f;
             F = b[p];
             B = b[p + 1];
-            u = F - r;
+            v = F - r;
             C = B - t;
-            c && (r = z[w], 0 != r && (r = (Math.sqrt(u * u + C * C) / r - 1) * g + 1, A.a *= r, A.c *= r));
+            c && (r = z[w], 0 != r && (r = (Math.sqrt(v * v + C * C) / r - 1) * g + 1, A.a *= r, A.c *= r));
             r = F;
             t = B;
             if (e) {
@@ -33820,13 +33832,13 @@ var __extends = this && this.__extends || function() {
               B = A.b;
               D = A.c;
               var E = A.d;
-              var H = n ? b[p - 1] : 0 == x[w + 1] ? b[p + 2] : Math.atan2(C, u);
+              var H = n ? b[p - 1] : 0 == x[w + 1] ? b[p + 2] : Math.atan2(C, v);
               H -= Math.atan2(D, F);
               if (m) {
                 var J = Math.cos(H);
                 var I = Math.sin(H);
                 var R = A.data.length;
-                r += (R * (J * F - I * D) - u) * g;
+                r += (R * (J * F - I * D) - v) * g;
                 t += (R * (I * F + J * D) - C) * g;
               } else {
                 H += h;
@@ -33853,13 +33865,13 @@ var __extends = this && this.__extends || function() {
         var p = z[y];
         e && (m *= p);
         if (h) {
-          for (var u = 1; u < g; u++) {
-            n[u] *= p;
+          for (var v = 1; v < g; v++) {
+            n[v] *= p;
           }
         }
         var w = a.Utils.setArraySize(this.world, 8);
-        for (h = e = u = 0; u < g; u++, e += 3) {
-          var C = n[u], A = m += C;
+        for (h = e = v = 0; v < g; v++, e += 3) {
+          var C = n[v], A = m += C;
           if (l) {
             A %= p, 0 > A && (A += p), h = 0;
           } else {
@@ -33888,7 +33900,7 @@ var __extends = this && this.__extends || function() {
             }
           }
           h != x && (x = h, l && h == y ? (b.computeWorldVertices(q, t - 4, 4, w, 0, 2), b.computeWorldVertices(q, 0, 4, w, 4, 2)) : b.computeWorldVertices(q, 6 * h + 2, 8, w, 0, 2));
-          this.addCurvePosition(A, w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], c, e, f || 0 < u && 0 == C);
+          this.addCurvePosition(A, w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], c, e, f || 0 < v && 0 == C);
         }
         return c;
       }
@@ -33898,47 +33910,47 @@ var __extends = this && this.__extends || function() {
       p = w[0];
       D = w[1];
       var B = 0, E = 0, H = 0, J = 0, I = 0, R = 0;
-      u = 0;
-      for (C = 2; u < y; u++, C += 6) {
+      v = 0;
+      for (C = 2; v < y; v++, C += 6) {
         B = w[C];
         E = w[C + 1];
         H = w[C + 2];
         J = w[C + 3];
         I = w[C + 4];
         R = w[C + 5];
-        var K = .1875 * (p - 2 * B + H);
+        var L = .1875 * (p - 2 * B + H);
         var G = .1875 * (D - 2 * E + J);
         F = .09375 * (3 * (B - H) - p + I);
         var M = .09375 * (3 * (E - J) - D + R);
-        var S = 2 * K + F;
+        var S = 2 * L + F;
         var O = 2 * G + M;
-        K = .75 * (B - p) + K + .16666667 * F;
+        L = .75 * (B - p) + L + .16666667 * F;
         G = .75 * (E - D) + G + .16666667 * M;
-        z += Math.sqrt(K * K + G * G);
-        K += S;
+        z += Math.sqrt(L * L + G * G);
+        L += S;
         G += O;
         S += F;
         O += M;
-        z += Math.sqrt(K * K + G * G);
-        K += S;
+        z += Math.sqrt(L * L + G * G);
+        L += S;
         G += O;
-        z += Math.sqrt(K * K + G * G);
-        K += S + F;
+        z += Math.sqrt(L * L + G * G);
+        L += S + F;
         G += O + M;
-        z += Math.sqrt(K * K + G * G);
-        q[u] = z;
+        z += Math.sqrt(L * L + G * G);
+        q[v] = z;
         p = I;
         D = R;
       }
       m = e ? m * z : z / b.lengths[y - 1] * m;
       if (h) {
-        for (u = 1; u < g; u++) {
-          n[u] *= z;
+        for (v = 1; v < g; v++) {
+          n[v] *= z;
         }
       }
       b = this.segments;
-      for (M = h = e = u = y = 0; u < g; u++, e += 3) {
-        C = n[u];
+      for (M = h = e = v = y = 0; v < g; v++, e += 3) {
+        C = n[v];
         A = m += C;
         if (l) {
           A %= z, 0 > A && (A += z), h = 0;
@@ -33970,26 +33982,26 @@ var __extends = this && this.__extends || function() {
           J = w[Z + 5];
           I = w[Z + 6];
           R = w[Z + 7];
-          K = .03 * (p - 2 * B + H);
+          L = .03 * (p - 2 * B + H);
           G = .03 * (D - 2 * E + J);
           F = .006 * (3 * (B - H) - p + I);
           M = .006 * (3 * (E - J) - D + R);
-          S = 2 * K + F;
+          S = 2 * L + F;
           O = 2 * G + M;
-          K = .3 * (B - p) + K + .16666667 * F;
+          L = .3 * (B - p) + L + .16666667 * F;
           G = .3 * (E - D) + G + .16666667 * M;
-          y = Math.sqrt(K * K + G * G);
+          y = Math.sqrt(L * L + G * G);
           b[0] = y;
           for (Z = 1; 8 > Z; Z++) {
-            K += S, G += O, S += F, O += M, y += Math.sqrt(K * K + G * G), b[Z] = y;
+            L += S, G += O, S += F, O += M, y += Math.sqrt(L * L + G * G), b[Z] = y;
           }
-          K += S;
+          L += S;
           G += O;
-          y += Math.sqrt(K * K + G * G);
+          y += Math.sqrt(L * L + G * G);
           b[8] = y;
-          K += S + F;
+          L += S + F;
           G += O + M;
-          y += Math.sqrt(K * K + G * G);
+          y += Math.sqrt(L * L + G * G);
           b[9] = y;
           M = 0;
         }
@@ -33999,7 +34011,7 @@ var __extends = this && this.__extends || function() {
             break;
           }
         }
-        this.addCurvePosition(.1 * A, p, D, B, E, H, J, I, R, c, e, f || 0 < u && 0 == C);
+        this.addCurvePosition(.1 * A, p, D, B, E, H, J, I, R, c, e, f || 0 < v && 0 == C);
       }
       return c;
     };
@@ -34021,14 +34033,14 @@ var __extends = this && this.__extends || function() {
       if (0 == a || isNaN(a)) {
         l[t] = d, l[t + 1] = f, l[t + 2] = Math.atan2(h - f, e - d);
       } else {
-        var b = a * a, g = b * a, q = 1 - a, u = q * q, w = u * q, C = q * a, A = 3 * C;
+        var b = a * a, g = b * a, q = 1 - a, v = q * q, w = v * q, C = q * a, A = 3 * C;
         q *= A;
         A *= a;
         n = d * w + e * q + r * A + n * g;
         c = f * w + h * q + m * A + c * g;
         l[t] = n;
         l[t + 1] = c;
-        y && (l[t + 2] = .001 > a ? Math.atan2(h - f, e - d) : Math.atan2(c - (f * u + h * C * 2 + m * b), n - (d * u + e * C * 2 + r * b)));
+        y && (l[t + 2] = .001 > a ? Math.atan2(h - f, e - d) : Math.atan2(c - (f * v + h * C * 2 + m * b), n - (d * v + e * C * 2 + r * b)));
       }
     };
     d.NONE = -1;
@@ -34774,9 +34786,9 @@ var __extends = this && this.__extends || function() {
         e = b.readInt(!0);
       }
       for (c = 0; c < e; c++) {
-        for (var l = b.readInt(!0), h = 0, m = b.readInt(!0); h < m; h++) {
-          var q = b.readStringRef(), r = this.readAttachment(b, d, f, l, q, g);
-          null != r && f.setAttachment(l, q, r);
+        for (var h = b.readInt(!0), m = 0, q = b.readInt(!0); m < q; m++) {
+          var r = b.readStringRef(), z = this.readAttachment(b, d, f, h, r, g);
+          null != z && f.setAttachment(h, r, z);
         }
       }
       return f;
@@ -34791,7 +34803,7 @@ var __extends = this && this.__extends || function() {
           h = e.readFloat();
           var q = e.readFloat(), r = e.readFloat();
           c = e.readFloat();
-          var z = e.readFloat(), p = e.readFloat(), u = e.readFloat();
+          var z = e.readFloat(), p = e.readFloat(), v = e.readFloat();
           n = e.readInt32();
           null == f && (f = m);
           e = this.attachmentLoader.newRegionAttachment(g, m, f);
@@ -34805,7 +34817,7 @@ var __extends = this && this.__extends || function() {
           e.scaleY = z;
           e.rotation = h;
           e.width = p * l;
-          e.height = u * l;
+          e.height = v * l;
           a.Color.rgba8888ToColor(e.color, n);
           e.updateOffset();
           return e;
@@ -34830,8 +34842,8 @@ var __extends = this && this.__extends || function() {
           z = this.readShortArray(e);
           q = this.readVertices(e, h);
           var w = e.readInt(!0), C = null;
-          u = p = 0;
-          c && (C = this.readShortArray(e), p = e.readFloat(), u = e.readFloat());
+          v = p = 0;
+          c && (C = this.readShortArray(e), p = e.readFloat(), v = e.readFloat());
           null == f && (f = m);
           e = this.attachmentLoader.newMeshAttachment(g, m, f);
           if (null == e) {
@@ -34846,7 +34858,7 @@ var __extends = this && this.__extends || function() {
           e.regionUVs = r;
           e.updateUVs();
           e.hullLength = w << 1;
-          c && (e.edges = C, e.width = p * l, e.height = u * l);
+          c && (e.edges = C, e.width = p * l, e.height = v * l);
           return e;
         case a.AttachmentType.LinkedMesh:
           f = e.readStringRef();
@@ -34854,8 +34866,8 @@ var __extends = this && this.__extends || function() {
           q = e.readStringRef();
           r = e.readStringRef();
           z = e.readBoolean();
-          u = p = 0;
-          c && (p = e.readFloat(), u = e.readFloat());
+          v = p = 0;
+          c && (p = e.readFloat(), v = e.readFloat());
           null == f && (f = m);
           e = this.attachmentLoader.newMeshAttachment(g, m, f);
           if (null == e) {
@@ -34863,12 +34875,12 @@ var __extends = this && this.__extends || function() {
           }
           e.path = f;
           a.Color.rgba8888ToColor(e.color, n);
-          c && (e.width = p * l, e.height = u * l);
+          c && (e.width = p * l, e.height = v * l);
           this.linkedMeshes.push(new b(e, q, h, r, z));
           return e;
         case a.AttachmentType.Path:
           p = e.readBoolean();
-          u = e.readBoolean();
+          v = e.readBoolean();
           h = e.readInt(!0);
           q = this.readVertices(e, h);
           r = a.Utils.newArray(h / 3, 0);
@@ -34882,7 +34894,7 @@ var __extends = this && this.__extends || function() {
             break;
           }
           f.closed = p;
-          f.constantSpeed = u;
+          f.constantSpeed = v;
           f.worldVerticesLength = h << 1;
           f.vertices = q.vertices;
           f.bones = q.bones;
@@ -34948,7 +34960,7 @@ var __extends = this && this.__extends || function() {
     };
     d.prototype.readAnimation = function(b, f, g) {
       for (var e = [], h = this.scale, c = 0, l = new a.Color, q = new a.Color, r = 0, x = b.readInt(!0); r < x; r++) {
-        for (var z = b.readInt(!0), p = 0, u = b.readInt(!0); p < u; p++) {
+        for (var z = b.readInt(!0), p = 0, v = b.readInt(!0); p < v; p++) {
           var w = b.readByte(), C = b.readInt(!0);
           switch(w) {
             case d.SLOT_ATTACHMENT:
@@ -34985,7 +34997,7 @@ var __extends = this && this.__extends || function() {
       }
       r = 0;
       for (x = b.readInt(!0); r < x; r++) {
-        for (D = b.readInt(!0), p = 0, u = b.readInt(!0); p < u; p++) {
+        for (D = b.readInt(!0), p = 0, v = b.readInt(!0); p < v; p++) {
           switch(w = b.readByte(), C = b.readInt(!0), w) {
             case d.BONE_ROTATE:
               w = new a.RotateTimeline(C);
@@ -35036,7 +35048,7 @@ var __extends = this && this.__extends || function() {
       }
       r = 0;
       for (x = b.readInt(!0); r < x; r++) {
-        for (D = b.readInt(!0), l = g.pathConstraints[D], p = 0, u = b.readInt(!0); p < u; p++) {
+        for (D = b.readInt(!0), l = g.pathConstraints[D], p = 0, v = b.readInt(!0); p < v; p++) {
           switch(w = b.readByte(), C = b.readInt(!0), w) {
             case d.PATH_POSITION:
             case d.PATH_SPACING:
@@ -35068,7 +35080,7 @@ var __extends = this && this.__extends || function() {
       }
       r = 0;
       for (x = b.readInt(!0); r < x; r++) {
-        for (l = g.skins[b.readInt(!0)], p = 0, u = b.readInt(!0); p < u; p++) {
+        for (l = g.skins[b.readInt(!0)], p = 0, v = b.readInt(!0); p < v; p++) {
           z = b.readInt(!0);
           q = 0;
           for (var F = b.readInt(!0); q < F; q++) {
@@ -35116,13 +35128,13 @@ var __extends = this && this.__extends || function() {
         x = g.slots.length;
         for (r = 0; r < h; r++) {
           D = b.readFloat();
-          u = b.readInt(!0);
+          v = b.readInt(!0);
           C = a.Utils.newArray(x, 0);
           for (p = x - 1; 0 <= p; p--) {
             C[p] = -1;
           }
-          A = a.Utils.newArray(x - u, 0);
-          for (p = q = l = 0; p < u; p++) {
+          A = a.Utils.newArray(x - v, 0);
+          for (p = q = l = 0; p < v; p++) {
             for (z = b.readInt(!0); l != z;) {
               A[q++] = l++;
             }
@@ -35374,9 +35386,9 @@ var __extends = this && this.__extends || function() {
     };
     d.prototype.intersectsSegmentPolygon = function(a, d, f, e, h) {
       for (var b = a.length, g = d - e, n = f - h, c = d * h - f * e, l = a[b - 2], q = a[b - 1], y = 0; y < b; y += 2) {
-        var x = a[y], z = a[y + 1], p = l * z - q * x, u = l - x, w = q - z, C = g * w - n * u;
-        u = (c * u - g * p) / C;
-        if ((u >= l && u <= x || u >= x && u <= l) && (u >= d && u <= e || u >= e && u <= d) && (l = (c * w - n * p) / C, (l >= q && l <= z || l >= z && l <= q) && (l >= f && l <= h || l >= h && l <= f))) {
+        var x = a[y], z = a[y + 1], p = l * z - q * x, v = l - x, w = q - z, C = g * w - n * v;
+        v = (c * v - g * p) / C;
+        if ((v >= l && v <= x || v >= x && v <= l) && (v >= d && v <= e || v >= e && v <= d) && (l = (c * w - n * p) / C, (l >= q && l <= z || l >= z && l <= q) && (l >= f && l <= h || l >= h && l <= f))) {
           return !0;
         }
         l = x;
@@ -35442,15 +35454,15 @@ var __extends = this && this.__extends || function() {
       c.length = 0;
       var p = g.length = 0;
       a: for (; p < e; p += 3) {
-        var u = f[p] << 1, w = b[u], C = b[u + 1], A = h[u], D = h[u + 1];
-        u = f[p + 1] << 1;
-        var F = b[u], B = b[u + 1], E = h[u], H = h[u + 1];
-        u = f[p + 2] << 1;
-        var J = b[u], I = b[u + 1], R = h[u];
-        u = h[u + 1];
-        for (var K = 0; K < y; K++) {
+        var v = f[p] << 1, w = b[v], C = b[v + 1], A = h[v], D = h[v + 1];
+        v = f[p + 1] << 1;
+        var F = b[v], B = b[v + 1], E = h[v], H = h[v + 1];
+        v = f[p + 2] << 1;
+        var J = b[v], I = b[v + 1], R = h[v];
+        v = h[v + 1];
+        for (var L = 0; L < y; L++) {
           var G = c.length;
-          if (this.clip(w, C, F, B, J, I, q[K], d)) {
+          if (this.clip(w, C, F, B, J, I, q[L], d)) {
             var M = d.length;
             if (0 != M) {
               for (var S = B - I, O = J - F, Z = w - J, Q = I - C, V = 1 / (S * Z + O * (C - I)), P = M >> 1, ba = this.clipOutput, N = a.Utils.setArraySize(c, G + P * x), W = 0; W < M; W += 2) {
@@ -35467,7 +35479,7 @@ var __extends = this && this.__extends || function() {
                 da = (Q * da + Z * X) * V;
                 X = 1 - fa - da;
                 N[G + 6] = A * fa + E * da + R * X;
-                N[G + 7] = D * fa + H * da + u * X;
+                N[G + 7] = D * fa + H * da + v * X;
                 n && (N[G + 8] = m.r, N[G + 9] = m.g, N[G + 10] = m.b, N[G + 11] = m.a);
                 G += x;
               }
@@ -35487,8 +35499,8 @@ var __extends = this && this.__extends || function() {
             N[G + 3] = r.g;
             N[G + 4] = r.b;
             N[G + 5] = r.a;
-            n ? (N[G + 6] = A, N[G + 7] = D, N[G + 8] = m.r, N[G + 9] = m.g, N[G + 10] = m.b, N[G + 11] = m.a, N[G + 12] = F, N[G + 13] = B, N[G + 14] = r.r, N[G + 15] = r.g, N[G + 16] = r.b, N[G + 17] = r.a, N[G + 18] = E, N[G + 19] = H, N[G + 20] = m.r, N[G + 21] = m.g, N[G + 22] = m.b, N[G + 23] = m.a, N[G + 24] = J, N[G + 25] = I, N[G + 26] = r.r, N[G + 27] = r.g, N[G + 28] = r.b, N[G + 29] = r.a, N[G + 30] = R, N[G + 31] = u, N[G + 32] = m.r, N[G + 33] = m.g, N[G + 34] = m.b, N[G + 35] = m.a) : 
-            (N[G + 6] = A, N[G + 7] = D, N[G + 8] = F, N[G + 9] = B, N[G + 10] = r.r, N[G + 11] = r.g, N[G + 12] = r.b, N[G + 13] = r.a, N[G + 14] = E, N[G + 15] = H, N[G + 16] = J, N[G + 17] = I, N[G + 18] = r.r, N[G + 19] = r.g, N[G + 20] = r.b, N[G + 21] = r.a, N[G + 22] = R, N[G + 23] = u);
+            n ? (N[G + 6] = A, N[G + 7] = D, N[G + 8] = m.r, N[G + 9] = m.g, N[G + 10] = m.b, N[G + 11] = m.a, N[G + 12] = F, N[G + 13] = B, N[G + 14] = r.r, N[G + 15] = r.g, N[G + 16] = r.b, N[G + 17] = r.a, N[G + 18] = E, N[G + 19] = H, N[G + 20] = m.r, N[G + 21] = m.g, N[G + 22] = m.b, N[G + 23] = m.a, N[G + 24] = J, N[G + 25] = I, N[G + 26] = r.r, N[G + 27] = r.g, N[G + 28] = r.b, N[G + 29] = r.a, N[G + 30] = R, N[G + 31] = v, N[G + 32] = m.r, N[G + 33] = m.g, N[G + 34] = m.b, N[G + 35] = m.a) : 
+            (N[G + 6] = A, N[G + 7] = D, N[G + 8] = F, N[G + 9] = B, N[G + 10] = r.r, N[G + 11] = r.g, N[G + 12] = r.b, N[G + 13] = r.a, N[G + 14] = E, N[G + 15] = H, N[G + 16] = J, N[G + 17] = I, N[G + 18] = r.r, N[G + 19] = r.g, N[G + 20] = r.b, N[G + 21] = r.a, N[G + 22] = R, N[G + 23] = v);
             G = g.length;
             M = a.Utils.setArraySize(g, G + 3);
             M[G] = z;
@@ -35524,7 +35536,7 @@ var __extends = this && this.__extends || function() {
         e = m[a + 1];
         h = m[a + 2];
         r = m[a + 3];
-        for (var q = f - h, x = e - r, z = g, p = g.length - 2, u = n.length, w = 0; w < p; w += 2) {
+        for (var q = f - h, x = e - r, z = g, p = g.length - 2, v = n.length, w = 0; w < p; w += 2) {
           var C = z[w], A = z[w + 1], D = z[w + 2], F = z[w + 3], B = 0 < q * (F - r) - x * (D - h);
           if (0 < q * (A - r) - x * (C - h)) {
             if (B) {
@@ -35541,7 +35553,7 @@ var __extends = this && this.__extends || function() {
           }
           b = !0;
         }
-        if (u == n.length) {
+        if (v == n.length) {
           return c.length = 0, !0;
         }
         n.push(n[0]);
@@ -36108,8 +36120,8 @@ var __extends = this && this.__extends || function() {
               var x = new a.AttachmentTimeline(y.length);
               x.slotIndex = l;
               for (var z = 0, p = 0; p < y.length; p++) {
-                var u = y[p];
-                x.setFrame(z++, this.getValue(u, "time", 0), u.name);
+                var v = y[p];
+                x.setFrame(z++, this.getValue(v, "time", 0), v.name);
               }
               g.push(x);
               h = Math.max(h, x.frames[x.getFrameCount() - 1]);
@@ -36118,11 +36130,11 @@ var __extends = this && this.__extends || function() {
                 x = new a.ColorTimeline(y.length);
                 x.slotIndex = l;
                 for (p = z = 0; p < y.length; p++) {
-                  u = y[p];
+                  v = y[p];
                   var w = new a.Color;
-                  w.setFromString(u.color);
-                  x.setFrame(z, this.getValue(u, "time", 0), w.r, w.g, w.b, w.a);
-                  this.readCurve(u, x, z);
+                  w.setFromString(v.color);
+                  x.setFrame(z, this.getValue(v, "time", 0), w.r, w.g, w.b, w.a);
+                  this.readCurve(v, x, z);
                   z++;
                 }
                 g.push(x);
@@ -36132,13 +36144,13 @@ var __extends = this && this.__extends || function() {
                   x = new a.TwoColorTimeline(y.length);
                   x.slotIndex = l;
                   for (p = z = 0; p < y.length; p++) {
-                    u = y[p];
+                    v = y[p];
                     w = new a.Color;
                     var C = new a.Color;
-                    w.setFromString(u.light);
-                    C.setFromString(u.dark);
-                    x.setFrame(z, this.getValue(u, "time", 0), w.r, w.g, w.b, w.a, C.r, C.g, C.b);
-                    this.readCurve(u, x, z);
+                    w.setFromString(v.light);
+                    C.setFromString(v.dark);
+                    x.setFrame(z, this.getValue(v, "time", 0), w.r, w.g, w.b, w.a, C.r, C.g, C.b);
+                    this.readCurve(v, x, z);
                     z++;
                   }
                   g.push(x);
@@ -36163,7 +36175,7 @@ var __extends = this && this.__extends || function() {
               x = new a.RotateTimeline(y.length);
               x.boneIndex = w;
               for (p = z = 0; p < y.length; p++) {
-                u = y[p], x.setFrame(z, this.getValue(u, "time", 0), this.getValue(u, "angle", 0)), this.readCurve(u, x, z), z++;
+                v = y[p], x.setFrame(z, this.getValue(v, "time", 0), this.getValue(v, "angle", 0)), this.readCurve(v, x, z), z++;
               }
               g.push(x);
               h = Math.max(h, x.frames[(x.getFrameCount() - 1) * a.RotateTimeline.ENTRIES]);
@@ -36174,10 +36186,10 @@ var __extends = this && this.__extends || function() {
                 "scale" === t ? (x = new a.ScaleTimeline(y.length), C = 1) : "shear" === t ? x = new a.ShearTimeline(y.length) : (x = new a.TranslateTimeline(y.length), l = f);
                 x.boneIndex = w;
                 for (p = z = 0; p < y.length; p++) {
-                  u = y[p];
-                  var D = this.getValue(u, "x", C), F = this.getValue(u, "y", C);
-                  x.setFrame(z, this.getValue(u, "time", 0), D * l, F * l);
-                  this.readCurve(u, x, z);
+                  v = y[p];
+                  var D = this.getValue(v, "x", C), F = this.getValue(v, "y", C);
+                  x.setFrame(z, this.getValue(v, "time", 0), D * l, F * l);
+                  this.readCurve(v, x, z);
                   z++;
                 }
                 g.push(x);
@@ -36196,7 +36208,7 @@ var __extends = this && this.__extends || function() {
           x = new a.IkConstraintTimeline(c.length);
           x.ikConstraintIndex = e.ikConstraints.indexOf(z);
           for (p = z = 0; p < c.length; p++) {
-            u = c[p], x.setFrame(z, this.getValue(u, "time", 0), this.getValue(u, "mix", 1), this.getValue(u, "softness", 0) * f, this.getValue(u, "bendPositive", !0) ? 1 : -1, this.getValue(u, "compress", !1), this.getValue(u, "stretch", !1)), this.readCurve(u, x, z), z++;
+            v = c[p], x.setFrame(z, this.getValue(v, "time", 0), this.getValue(v, "mix", 1), this.getValue(v, "softness", 0) * f, this.getValue(v, "bendPositive", !0) ? 1 : -1, this.getValue(v, "compress", !1), this.getValue(v, "stretch", !1)), this.readCurve(v, x, z), z++;
           }
           g.push(x);
           h = Math.max(h, x.frames[(x.getFrameCount() - 1) * a.IkConstraintTimeline.ENTRIES]);
@@ -36209,7 +36221,7 @@ var __extends = this && this.__extends || function() {
           x = new a.TransformConstraintTimeline(c.length);
           x.transformConstraintIndex = e.transformConstraints.indexOf(z);
           for (p = z = 0; p < c.length; p++) {
-            u = c[p], x.setFrame(z, this.getValue(u, "time", 0), this.getValue(u, "rotateMix", 1), this.getValue(u, "translateMix", 1), this.getValue(u, "scaleMix", 1), this.getValue(u, "shearMix", 1)), this.readCurve(u, x, z), z++;
+            v = c[p], x.setFrame(z, this.getValue(v, "time", 0), this.getValue(v, "rotateMix", 1), this.getValue(v, "translateMix", 1), this.getValue(v, "scaleMix", 1), this.getValue(v, "shearMix", 1)), this.readCurve(v, x, z), z++;
           }
           g.push(x);
           h = Math.max(h, x.frames[(x.getFrameCount() - 1) * a.TransformConstraintTimeline.ENTRIES]);
@@ -36235,7 +36247,7 @@ var __extends = this && this.__extends || function() {
               }
               x.pathConstraintIndex = A;
               for (p = z = 0; p < y.length; p++) {
-                u = y[p], x.setFrame(z, this.getValue(u, "time", 0), this.getValue(u, t, 0) * l), this.readCurve(u, x, z), z++;
+                v = y[p], x.setFrame(z, this.getValue(v, "time", 0), this.getValue(v, t, 0) * l), this.readCurve(v, x, z), z++;
               }
               g.push(x);
               h = Math.max(h, x.frames[(x.getFrameCount() - 1) * a.PathConstraintPositionTimeline.ENTRIES]);
@@ -36244,7 +36256,7 @@ var __extends = this && this.__extends || function() {
                 x = new a.PathConstraintMixTimeline(y.length);
                 x.pathConstraintIndex = A;
                 for (p = z = 0; p < y.length; p++) {
-                  u = y[p], x.setFrame(z, this.getValue(u, "time", 0), this.getValue(u, "rotateMix", 1), this.getValue(u, "translateMix", 1)), this.readCurve(u, x, z), z++;
+                  v = y[p], x.setFrame(z, this.getValue(v, "time", 0), this.getValue(v, "rotateMix", 1), this.getValue(v, "translateMix", 1)), this.readCurve(v, x, z), z++;
                 }
                 g.push(x);
                 h = Math.max(h, x.frames[(x.getFrameCount() - 1) * a.PathConstraintMixTimeline.ENTRIES]);
@@ -36279,13 +36291,13 @@ var __extends = this && this.__extends || function() {
               x.slotIndex = l;
               x.attachment = z;
               for (B = z = 0; B < y.length; B++) {
-                u = y[B];
-                var H = this.getValue(u, "vertices", null);
+                v = y[B];
+                var H = this.getValue(v, "vertices", null);
                 if (null == H) {
                   var J = C ? a.Utils.newFloatArray(F) : D;
                 } else {
                   J = a.Utils.newFloatArray(F);
-                  p = this.getValue(u, "offset", 0);
+                  p = this.getValue(v, "offset", 0);
                   a.Utils.arrayCopy(H, 0, J, p, H.length);
                   if (1 != f) {
                     for (H = p + H.length; p < H; p++) {
@@ -36298,8 +36310,8 @@ var __extends = this && this.__extends || function() {
                     }
                   }
                 }
-                x.setFrame(z, this.getValue(u, "time", 0), J);
-                this.readCurve(u, x, z);
+                x.setFrame(z, this.getValue(v, "time", 0), J);
+                this.readCurve(v, x, z);
                 z++;
               }
               g.push(x);
@@ -36319,7 +36331,7 @@ var __extends = this && this.__extends || function() {
           y = this.getValue(t, "offsets", null);
           if (null != y) {
             E = a.Utils.newArray(n, -1);
-            u = a.Utils.newArray(n - y.length, 0);
+            v = a.Utils.newArray(n - y.length, 0);
             for (p = A = c = 0; p < y.length; p++) {
               w = y[p];
               l = e.findSlotIndex(w.slot);
@@ -36327,15 +36339,15 @@ var __extends = this && this.__extends || function() {
                 throw Error("Slot not found: " + w.slot);
               }
               for (; c != l;) {
-                u[A++] = c++;
+                v[A++] = c++;
               }
               E[c + w.offset] = c++;
             }
             for (; c < n;) {
-              u[A++] = c++;
+              v[A++] = c++;
             }
             for (p = n - 1; 0 <= p; p--) {
-              -1 == E[p] && (E[p] = u[--A]);
+              -1 == E[p] && (E[p] = v[--A]);
             }
           }
           x.setFrame(z++, this.getValue(t, "time", 0), E);
@@ -36885,49 +36897,49 @@ var __extends = this && this.__extends || function() {
       var b = this.rotateMix, d = this.translateMix, f = this.scaleMix, e = this.shearMix, h = this.target, r = h.a, m = h.b, n = h.c, c = h.d, l = 0 < r * c - m * n ? a.MathUtils.degRad : -a.MathUtils.degRad, t = this.data.offsetRotation * l;
       l *= this.data.offsetShearY;
       for (var y = this.bones, x = 0, z = y.length; x < z; x++) {
-        var p = y[x], u = !1;
+        var p = y[x], v = !1;
         if (0 != b) {
           var w = p.a;
-          u = p.b;
+          v = p.b;
           var C = p.c, A = p.d, D = Math.atan2(n, r) - Math.atan2(C, w) + t;
           D > a.MathUtils.PI ? D -= a.MathUtils.PI2 : D < -a.MathUtils.PI && (D += a.MathUtils.PI2);
           D *= b;
           var F = Math.cos(D);
           D = Math.sin(D);
           p.a = F * w - D * C;
-          p.b = F * u - D * A;
+          p.b = F * v - D * A;
           p.c = D * w + F * C;
-          p.d = D * u + F * A;
-          u = !0;
+          p.d = D * v + F * A;
+          v = !0;
         }
-        0 != d && (u = this.temp, h.localToWorld(u.set(this.data.offsetX, this.data.offsetY)), p.worldX += (u.x - p.worldX) * d, p.worldY += (u.y - p.worldY) * d, u = !0);
-        0 < f && (u = Math.sqrt(p.a * p.a + p.c * p.c), A = Math.sqrt(r * r + n * n), 1E-5 < u && (u = (u + (A - u + this.data.offsetScaleX) * f) / u), p.a *= u, p.c *= u, u = Math.sqrt(p.b * p.b + p.d * p.d), A = Math.sqrt(m * m + c * c), 1E-5 < u && (u = (u + (A - u + this.data.offsetScaleY) * f) / u), p.b *= u, p.d *= u, u = !0);
-        0 < e && (u = p.b, A = p.d, w = Math.atan2(A, u), D = Math.atan2(c, m) - Math.atan2(n, r) - (w - Math.atan2(p.c, p.a)), D > a.MathUtils.PI ? D -= a.MathUtils.PI2 : D < -a.MathUtils.PI && (D += a.MathUtils.PI2), D = w + (D + l) * e, u = Math.sqrt(u * u + A * A), p.b = Math.cos(D) * u, p.d = Math.sin(D) * u, u = !0);
-        u && (p.appliedValid = !1);
+        0 != d && (v = this.temp, h.localToWorld(v.set(this.data.offsetX, this.data.offsetY)), p.worldX += (v.x - p.worldX) * d, p.worldY += (v.y - p.worldY) * d, v = !0);
+        0 < f && (v = Math.sqrt(p.a * p.a + p.c * p.c), A = Math.sqrt(r * r + n * n), 1E-5 < v && (v = (v + (A - v + this.data.offsetScaleX) * f) / v), p.a *= v, p.c *= v, v = Math.sqrt(p.b * p.b + p.d * p.d), A = Math.sqrt(m * m + c * c), 1E-5 < v && (v = (v + (A - v + this.data.offsetScaleY) * f) / v), p.b *= v, p.d *= v, v = !0);
+        0 < e && (v = p.b, A = p.d, w = Math.atan2(A, v), D = Math.atan2(c, m) - Math.atan2(n, r) - (w - Math.atan2(p.c, p.a)), D > a.MathUtils.PI ? D -= a.MathUtils.PI2 : D < -a.MathUtils.PI && (D += a.MathUtils.PI2), D = w + (D + l) * e, v = Math.sqrt(v * v + A * A), p.b = Math.cos(D) * v, p.d = Math.sin(D) * v, v = !0);
+        v && (p.appliedValid = !1);
       }
     };
     d.prototype.applyRelativeWorld = function() {
       var b = this.rotateMix, d = this.translateMix, f = this.scaleMix, e = this.shearMix, h = this.target, r = h.a, m = h.b, n = h.c, c = h.d, l = 0 < r * c - m * n ? a.MathUtils.degRad : -a.MathUtils.degRad, t = this.data.offsetRotation * l;
       l *= this.data.offsetShearY;
       for (var y = this.bones, x = 0, z = y.length; x < z; x++) {
-        var p = y[x], u = !1;
+        var p = y[x], v = !1;
         if (0 != b) {
-          u = p.a;
+          v = p.a;
           var w = p.b, C = p.c, A = p.d, D = Math.atan2(n, r) + t;
           D > a.MathUtils.PI ? D -= a.MathUtils.PI2 : D < -a.MathUtils.PI && (D += a.MathUtils.PI2);
           D *= b;
           var F = Math.cos(D);
           D = Math.sin(D);
-          p.a = F * u - D * C;
+          p.a = F * v - D * C;
           p.b = F * w - D * A;
-          p.c = D * u + F * C;
+          p.c = D * v + F * C;
           p.d = D * w + F * A;
-          u = !0;
+          v = !0;
         }
-        0 != d && (u = this.temp, h.localToWorld(u.set(this.data.offsetX, this.data.offsetY)), p.worldX += u.x * d, p.worldY += u.y * d, u = !0);
-        0 < f && (u = (Math.sqrt(r * r + n * n) - 1 + this.data.offsetScaleX) * f + 1, p.a *= u, p.c *= u, u = (Math.sqrt(m * m + c * c) - 1 + this.data.offsetScaleY) * f + 1, p.b *= u, p.d *= u, u = !0);
-        0 < e && (D = Math.atan2(c, m) - Math.atan2(n, r), D > a.MathUtils.PI ? D -= a.MathUtils.PI2 : D < -a.MathUtils.PI && (D += a.MathUtils.PI2), w = p.b, A = p.d, D = Math.atan2(A, w) + (D - a.MathUtils.PI / 2 + l) * e, u = Math.sqrt(w * w + A * A), p.b = Math.cos(D) * u, p.d = Math.sin(D) * u, u = !0);
-        u && (p.appliedValid = !1);
+        0 != d && (v = this.temp, h.localToWorld(v.set(this.data.offsetX, this.data.offsetY)), p.worldX += v.x * d, p.worldY += v.y * d, v = !0);
+        0 < f && (v = (Math.sqrt(r * r + n * n) - 1 + this.data.offsetScaleX) * f + 1, p.a *= v, p.c *= v, v = (Math.sqrt(m * m + c * c) - 1 + this.data.offsetScaleY) * f + 1, p.b *= v, p.d *= v, v = !0);
+        0 < e && (D = Math.atan2(c, m) - Math.atan2(n, r), D > a.MathUtils.PI ? D -= a.MathUtils.PI2 : D < -a.MathUtils.PI && (D += a.MathUtils.PI2), w = p.b, A = p.d, D = Math.atan2(A, w) + (D - a.MathUtils.PI / 2 + l) * e, v = Math.sqrt(w * w + A * A), p.b = Math.cos(D) * v, p.d = Math.sin(D) * v, v = !0);
+        v && (p.appliedValid = !1);
       }
     };
     d.prototype.applyAbsoluteLocal = function() {
@@ -36946,9 +36958,9 @@ var __extends = this && this.__extends || function() {
         0 != d && (y += (h.ax - y + this.data.offsetX) * d, x += (h.ay - x + this.data.offsetY) * d);
         var z = c.ascaleX, p = c.ascaleY;
         0 != f && (1E-5 < z && (z = (z + (h.ascaleX - z + this.data.offsetScaleX) * f) / z), 1E-5 < p && (p = (p + (h.ascaleY - p + this.data.offsetScaleY) * f) / p));
-        var u = c.ashearY;
-        0 != e && (t = h.ashearY - u + this.data.offsetShearY, t -= 360 * (16384 - (16384.499999999996 - t / 360 | 0)), c.shearY += t * e);
-        c.updateWorldTransformWith(y, x, l, z, p, c.ashearX, u);
+        var v = c.ashearY;
+        0 != e && (t = h.ashearY - v + this.data.offsetShearY, t -= 360 * (16384 - (16384.499999999996 - t / 360 | 0)), c.shearY += t * e);
+        c.updateWorldTransformWith(y, x, l, z, p, c.ashearX, v);
       }
     };
     d.prototype.applyRelativeLocal = function() {
@@ -37035,9 +37047,9 @@ var __extends = this && this.__extends || function() {
               t = a[t + 1];
               for (var p = (n + 1) % b; p != m; p = (p + 1) % b) {
                 if (h[p]) {
-                  var u = f[p] << 1, w = a[u];
-                  u = a[u + 1];
-                  if (d.positiveArea(z, t, y, c, w, u) && d.positiveArea(y, c, x, l, w, u) && d.positiveArea(x, l, z, t, w, u)) {
+                  var v = f[p] << 1, w = a[v];
+                  v = a[v + 1];
+                  if (d.positiveArea(z, t, y, c, w, v) && d.positiveArea(y, c, x, l, w, v) && d.positiveArea(x, l, z, t, w, v)) {
                     break a;
                   }
                 }
@@ -37084,20 +37096,20 @@ var __extends = this && this.__extends || function() {
       var r = this.polygonPool.obtain();
       r.length = 0;
       for (var m = -1, n = 0, c = 0, l = g.length; c < l; c += 3) {
-        var t = g[c] << 1, y = g[c + 1] << 1, x = g[c + 2] << 1, z = a[t], p = a[t + 1], u = a[y], w = a[y + 1], C = a[x], A = a[x + 1], D = !1;
+        var t = g[c] << 1, y = g[c + 1] << 1, x = g[c + 2] << 1, z = a[t], p = a[t + 1], v = a[y], w = a[y + 1], C = a[x], A = a[x + 1], D = !1;
         if (m == t) {
           var F = r.length - 4;
           F = d.winding(r[F], r[F + 1], r[F + 2], r[F + 3], C, A);
           var B = d.winding(C, A, r[0], r[1], r[2], r[3]);
           F == n && B == n && (r.push(C), r.push(A), h.push(x), D = !0);
         }
-        D || (0 < r.length ? (b.push(r), e.push(h)) : (this.polygonPool.free(r), this.polygonIndicesPool.free(h)), r = this.polygonPool.obtain(), r.length = 0, r.push(z), r.push(p), r.push(u), r.push(w), r.push(C), r.push(A), h = this.polygonIndicesPool.obtain(), h.length = 0, h.push(t), h.push(y), h.push(x), n = d.winding(z, p, u, w, C, A), m = t);
+        D || (0 < r.length ? (b.push(r), e.push(h)) : (this.polygonPool.free(r), this.polygonIndicesPool.free(h)), r = this.polygonPool.obtain(), r.length = 0, r.push(z), r.push(p), r.push(v), r.push(w), r.push(C), r.push(A), h = this.polygonIndicesPool.obtain(), h.length = 0, h.push(t), h.push(y), h.push(x), n = d.winding(z, p, v, w, C, A), m = t);
       }
       0 < r.length && (b.push(r), e.push(h));
       c = 0;
       for (l = b.length; c < l; c++) {
         if (h = e[c], 0 != h.length) {
-          for (a = h[0], g = h[h.length - 1], r = b[c], F = r.length - 4, m = r[F], n = r[F + 1], t = r[F + 2], y = r[F + 3], x = r[0], z = r[1], p = r[2], u = r[3], w = d.winding(m, n, t, y, x, z), D = 0; D < l; D++) {
+          for (a = h[0], g = h[h.length - 1], r = b[c], F = r.length - 4, m = r[F], n = r[F + 1], t = r[F + 2], y = r[F + 3], x = r[0], z = r[1], p = r[2], v = r[3], w = d.winding(m, n, t, y, x, z), D = 0; D < l; D++) {
             if (D != c) {
               var E = e[D];
               if (3 == E.length) {
@@ -37106,7 +37118,7 @@ var __extends = this && this.__extends || function() {
                 var H = E[2], J = b[D];
                 C = J[J.length - 2];
                 A = J[J.length - 1];
-                F == a && B == g && (F = d.winding(m, n, t, y, C, A), B = d.winding(C, A, x, z, p, u), F == w && B == w && (J.length = 0, E.length = 0, r.push(C), r.push(A), h.push(H), m = t, n = y, t = C, y = A, D = 0));
+                F == a && B == g && (F = d.winding(m, n, t, y, C, A), B = d.winding(C, A, x, z, p, v), F == w && B == w && (J.length = 0, E.length = 0, r.push(C), r.push(A), h.push(H), m = t, n = y, t = C, y = A, D = 0));
               }
             }
           }
@@ -37530,28 +37542,28 @@ var __extends = this && this.__extends || function() {
         z = e.bones;
         if (0 == c.length) {
           for (e = 3 * a; r < d; r += m) {
-            var u = 0, w = 0;
+            var v = 0, w = 0;
             x = g[q++];
             for (x += q; q < x; q++, e += 3) {
               a = z[g[q]];
               b = f[e];
               p = f[e + 1];
               var C = f[e + 2];
-              u += (b * a.a + p * a.b + a.worldX) * C;
+              v += (b * a.a + p * a.b + a.worldX) * C;
               w += (b * a.c + p * a.d + a.worldY) * C;
             }
-            h[r] = u;
+            h[r] = v;
             h[r + 1] = w;
           }
         } else {
           e = 3 * a;
           for (var A = a << 1; r < d; r += m) {
-            w = u = 0;
+            w = v = 0;
             x = g[q++];
             for (x += q; q < x; q++, e += 3, A += 2) {
-              a = z[g[q]], b = f[e] + c[A], p = f[e + 1] + c[A + 1], C = f[e + 2], u += (b * a.a + p * a.b + a.worldX) * C, w += (b * a.c + p * a.d + a.worldY) * C;
+              a = z[g[q]], b = f[e] + c[A], p = f[e + 1] + c[A + 1], C = f[e + 2], v += (b * a.a + p * a.b + a.worldX) * C, w += (b * a.c + p * a.d + a.worldY) * C;
             }
-            h[r] = u;
+            h[r] = v;
             h[r + 1] = w;
           }
         }
@@ -38112,24 +38124,24 @@ var __extends = this && this.__extends || function() {
         for (var l = 0, t = this.zOffset, y = 0, x = n.length; y < x; y++) {
           var z = m.isClipping() ? 2 : g.VERTEX_SIZE, p = n[y];
           if (p.bone.active) {
-            var u = p.getAttachment();
-            if (u instanceof a.RegionAttachment) {
-              var w = u.color;
+            var v = p.getAttachment();
+            if (v instanceof a.RegionAttachment) {
+              var w = v.color;
               var C = this.vertices;
               var A = 4 * z;
-              u.computeWorldVertices(p.bone, C, 0, z);
+              v.computeWorldVertices(p.bone, C, 0, z);
               var D = g.QUAD_TRIANGLES;
-              var F = u.uvs;
-              u = u.region.renderObject.texture;
+              var F = v.uvs;
+              v = v.region.renderObject.texture;
             } else {
-              if (u instanceof a.MeshAttachment) {
-                w = u.color, C = this.vertices, A = (u.worldVerticesLength >> 1) * z, A > C.length && (C = this.vertices = a.Utils.newFloatArray(A)), u.computeWorldVertices(p, 0, u.worldVerticesLength, C, 0, z), D = u.triangles, F = u.uvs, u = u.region.renderObject.texture;
+              if (v instanceof a.MeshAttachment) {
+                w = v.color, C = this.vertices, A = (v.worldVerticesLength >> 1) * z, A > C.length && (C = this.vertices = a.Utils.newFloatArray(A)), v.computeWorldVertices(p, 0, v.worldVerticesLength, C, 0, z), D = v.triangles, F = v.uvs, v = v.region.renderObject.texture;
               } else {
-                u instanceof a.ClippingAttachment && m.clipStart(p, u);
+                v instanceof a.ClippingAttachment && m.clipStart(p, v);
                 continue;
               }
             }
-            if (null != u) {
+            if (null != v) {
               var B = p.bone.skeleton.color, E = p.color, H = this.tempColor;
               H.set(B.r * E.r * w.r, B.g * E.g * w.g, B.b * E.b * w.b, B.a * E.a * w.a);
               if (m.isClipping()) {
@@ -38166,8 +38178,8 @@ var __extends = this && this.__extends || function() {
               }
               c.canBatch(A, D) || (c.end(), c = this.nextBatch(), c.begin());
               C = c.material;
-              null == C.uniforms.map.value && (C.uniforms.map.value = u.texture);
-              C.uniforms.map.value != u.texture && (c.end(), c = this.nextBatch(), c.begin(), C = c.material, C.uniforms.map.value = u.texture);
+              null == C.uniforms.map.value && (C.uniforms.map.value = v.texture);
+              C.uniforms.map.value != v.texture && (c.end(), c = this.nextBatch(), c.begin(), C = c.material, C.uniforms.map.value = v.texture);
               C.needsUpdate = !0;
               c.batch(z, A, H, D, l);
               l += t;
@@ -38354,7 +38366,7 @@ var __extends = this && this.__extends || function() {
         }
       }
     }
-    var c = 0, l = new g, t = new g, y = new Uint8Array(30), x = new Uint16Array(30), z = new Uint8Array(30), p = new Uint16Array(30), u = new Uint8Array([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]), w = new g, C = new Uint8Array(320), A = new Uint16Array(16);
+    var c = 0, l = new g, t = new g, y = new Uint8Array(30), x = new Uint16Array(30), z = new Uint8Array(30), p = new Uint16Array(30), v = new Uint8Array([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]), w = new g, C = new Uint8Array(320), A = new Uint16Array(16);
     (function(b, c) {
       var d;
       for (d = 0; 7 > d; ++d) {
@@ -38424,7 +38436,7 @@ var __extends = this && this.__extends || function() {
             }
             for (p = 0; z > p; ++p) {
               var A = r(h, 3, 0);
-              C[u[p]] = A;
+              C[v[p]] = A;
             }
             q(w, C, 0, 19);
             for (p = 0; g + e > p;) {
@@ -39051,7 +39063,7 @@ var __extends = this && this.__extends || function() {
             break;
           case "post":
             m = q(b, m);
-            d.tables.post = K.parse(m.data, m.offset);
+            d.tables.post = L.parse(m.data, m.offset);
             d.glyphNames = new n.GlyphNames(d.tables.post);
             break;
           case "glyf":
@@ -39078,7 +39090,7 @@ var __extends = this && this.__extends || function() {
       }
       ja = q(b, ja);
       if (d.tables.name = I.parse(ja.data, ja.offset, Y), d.names = d.tables.name, U && ha) {
-        X = 0 === X, ha = q(b, ha), ha = H.parse(ha.data, ha.offset, d.numGlyphs, X), U = q(b, U), d.glyphs = u.parse(U.data, U.offset, ha, d);
+        X = 0 === X, ha = q(b, ha), ha = H.parse(ha.data, ha.offset, d.numGlyphs, X), U = q(b, U), d.glyphs = v.parse(U.data, U.offset, ha, d);
       } else {
         if (!ra) {
           throw Error("Font doesn't contain TrueType or CFF outlines.");
@@ -39096,7 +39108,7 @@ var __extends = this && this.__extends || function() {
     }
     var m = d("tiny-inflate"), n = d("./encoding"), c = d("./font");
     h = d("./glyph");
-    var l = d("./parse"), t = d("./path"), y = d("./util"), x = d("./tables/cmap"), z = d("./tables/cff"), p = d("./tables/fvar"), u = d("./tables/glyf"), w = d("./tables/gpos"), C = d("./tables/gsub"), A = d("./tables/head"), D = d("./tables/hhea"), F = d("./tables/hmtx"), B = d("./tables/kern"), E = d("./tables/ltag"), H = d("./tables/loca"), J = d("./tables/maxp"), I = d("./tables/name"), R = d("./tables/os2"), K = d("./tables/post"), G = d("./tables/meta");
+    var l = d("./parse"), t = d("./path"), y = d("./util"), x = d("./tables/cmap"), z = d("./tables/cff"), p = d("./tables/fvar"), v = d("./tables/glyf"), w = d("./tables/gpos"), C = d("./tables/gsub"), A = d("./tables/head"), D = d("./tables/hhea"), F = d("./tables/hmtx"), B = d("./tables/kern"), E = d("./tables/ltag"), H = d("./tables/loca"), J = d("./tables/maxp"), I = d("./tables/name"), R = d("./tables/os2"), L = d("./tables/post"), G = d("./tables/meta");
     b._parse = l;
     b.Font = c.Font;
     b.Glyph = h.Glyph;
@@ -39663,20 +39675,20 @@ var __extends = this && this.__extends || function() {
     }
     function f(b, c, d) {
       var e, f = [], g = [];
-      var h = u.getCard16(b, c);
+      var h = v.getCard16(b, c);
       if (0 !== h) {
-        var l = u.getByte(b, c + 2);
+        var l = v.getByte(b, c + 2);
         var m = c + (h + 1) * l + 2;
         var n = c + 3;
         for (e = 0; h + 1 > e; e += 1) {
-          f.push(u.getOffset(b, n, l)), n += l;
+          f.push(v.getOffset(b, n, l)), n += l;
         }
         h = m + f[h];
       } else {
         h = c + 2;
       }
       for (e = 0; e < f.length - 1; e += 1) {
-        l = u.getBytes(b, m + f[e], m + f[e + 1]), d && (l = d(l)), g.push(l);
+        l = v.getBytes(b, m + f[e], m + f[e + 1]), d && (l = d(l)), g.push(l);
       }
       return {objects:g, startOffset:c, endOffset:h};
     }
@@ -39716,7 +39728,7 @@ var __extends = this && this.__extends || function() {
       throw Error("Invalid b0 " + c);
     }
     function q(b, c, d) {
-      var f = new u.Parser(b, void 0 !== c ? c : 0);
+      var f = new v.Parser(b, void 0 !== c ? c : 0);
       c = [];
       var g = [];
       for (d = void 0 !== d ? d : b.length; f.relativeOffset < d;) {
@@ -39752,13 +39764,13 @@ var __extends = this && this.__extends || function() {
         y = !0;
       }
       function f() {
-        0 !== q.length % 2 && !t && (u = q.shift() + b.nominalWidthX);
+        0 !== q.length % 2 && !t && (v = q.shift() + b.nominalWidthX);
         r += q.length >> 1;
         q.length = 0;
         t = !0;
       }
       function g(d) {
-        for (var w, A, C, B, D, F, G, E, K, M, H = 0; H < d.length;) {
+        for (var w, A, C, B, D, F, G, E, L, M, H = 0; H < d.length;) {
           switch(D = d[H], H += 1, D) {
             case 1:
               f();
@@ -39767,7 +39779,7 @@ var __extends = this && this.__extends || function() {
               f();
               break;
             case 4:
-              1 < q.length && !t && (u = q.shift() + b.nominalWidthX, t = !0);
+              1 < q.length && !t && (v = q.shift() + b.nominalWidthX, t = !0);
               z += q.pop();
               e(x, z);
               break;
@@ -39808,13 +39820,13 @@ var __extends = this && this.__extends || function() {
                   F = n + q.shift();
                   G = D + q.shift();
                   E = F + q.shift();
-                  K = G + q.shift();
+                  L = G + q.shift();
                   M = E + q.shift();
-                  x = K + q.shift();
+                  x = L + q.shift();
                   z = M + q.shift();
                   q.shift();
                   p.curveTo(h, l, m, n, D, F);
-                  p.curveTo(G, E, K, M, x, z);
+                  p.curveTo(G, E, L, M, x, z);
                   break;
                 case 34:
                   h = x + q.shift();
@@ -39825,11 +39837,11 @@ var __extends = this && this.__extends || function() {
                   F = n;
                   G = D + q.shift();
                   E = n;
-                  K = G + q.shift();
+                  L = G + q.shift();
                   M = z;
-                  x = K + q.shift();
+                  x = L + q.shift();
                   p.curveTo(h, l, m, n, D, F);
-                  p.curveTo(G, E, K, M, x, z);
+                  p.curveTo(G, E, L, M, x, z);
                   break;
                 case 36:
                   h = x + q.shift();
@@ -39840,11 +39852,11 @@ var __extends = this && this.__extends || function() {
                   F = n;
                   G = D + q.shift();
                   E = n;
-                  K = G + q.shift();
+                  L = G + q.shift();
                   M = E + q.shift();
-                  x = K + q.shift();
+                  x = L + q.shift();
                   p.curveTo(h, l, m, n, D, F);
-                  p.curveTo(G, E, K, M, x, z);
+                  p.curveTo(G, E, L, M, x, z);
                   break;
                 case 37:
                   h = x + q.shift();
@@ -39855,17 +39867,17 @@ var __extends = this && this.__extends || function() {
                   F = n + q.shift();
                   G = D + q.shift();
                   E = F + q.shift();
-                  K = G + q.shift();
+                  L = G + q.shift();
                   M = E + q.shift();
-                  Math.abs(K - x) > Math.abs(M - z) ? x = K + q.shift() : z = M + q.shift();
+                  Math.abs(L - x) > Math.abs(M - z) ? x = L + q.shift() : z = M + q.shift();
                   p.curveTo(h, l, m, n, D, F);
-                  p.curveTo(G, E, K, M, x, z);
+                  p.curveTo(G, E, L, M, x, z);
                   break;
                 default:
                   console.log("Glyph " + c.index + ": unknown operator 1200" + D), q.length = 0;
               }break;
             case 14:
-              0 < q.length && !t && (u = q.shift() + b.nominalWidthX, t = !0);
+              0 < q.length && !t && (v = q.shift() + b.nominalWidthX, t = !0);
               y && (p.closePath(), y = !1);
               break;
             case 18:
@@ -39877,13 +39889,13 @@ var __extends = this && this.__extends || function() {
               H += r + 7 >> 3;
               break;
             case 21:
-              2 < q.length && !t && (u = q.shift() + b.nominalWidthX, t = !0);
+              2 < q.length && !t && (v = q.shift() + b.nominalWidthX, t = !0);
               z += q.pop();
               x += q.pop();
               e(x, z);
               break;
             case 22:
-              1 < q.length && !t && (u = q.shift() + b.nominalWidthX, t = !0);
+              1 < q.length && !t && (v = q.shift() + b.nominalWidthX, t = !0);
               x += q.pop();
               e(x, z);
               break;
@@ -39945,8 +39957,8 @@ var __extends = this && this.__extends || function() {
           }
         }
       }
-      var h, l, m, n, p = new w.Path, q = [], r = 0, t = !1, u = b.defaultWidthX, y = !1, x = 0, z = 0;
-      return g(d), c.advanceWidth = u, p;
+      var h, l, m, n, p = new w.Path, q = [], r = 0, t = !1, v = b.defaultWidthX, y = !1, x = 0, z = 0;
+      return g(d), c.advanceWidth = v, p;
     }
     function c(b) {
       return 1240 > b.length ? 107 : 33900 > b.length ? 1131 : 32768;
@@ -39970,16 +39982,16 @@ var __extends = this && this.__extends || function() {
       var c = new C.Record("Top DICT INDEX", [{name:"topDicts", type:"INDEX", value:[]}]);
       return c.topDicts = [{name:"topDict_0", type:"TABLE", value:b}], c;
     }
-    var z = d("../encoding"), p = d("../glyphset"), u = d("../parse"), w = d("../path"), C = d("../table"), A = [{name:"version", op:0, type:"SID"}, {name:"notice", op:1, type:"SID"}, {name:"copyright", op:1200, type:"SID"}, {name:"fullName", op:2, type:"SID"}, {name:"familyName", op:3, type:"SID"}, {name:"weight", op:4, type:"SID"}, {name:"isFixedPitch", op:1201, type:"number", value:0}, {name:"italicAngle", op:1202, type:"number", value:0}, {name:"underlinePosition", op:1203, type:"number", value:-100}, 
+    var z = d("../encoding"), p = d("../glyphset"), v = d("../parse"), w = d("../path"), C = d("../table"), A = [{name:"version", op:0, type:"SID"}, {name:"notice", op:1, type:"SID"}, {name:"copyright", op:1200, type:"SID"}, {name:"fullName", op:2, type:"SID"}, {name:"familyName", op:3, type:"SID"}, {name:"weight", op:4, type:"SID"}, {name:"isFixedPitch", op:1201, type:"number", value:0}, {name:"italicAngle", op:1202, type:"number", value:0}, {name:"underlinePosition", op:1203, type:"number", value:-100}, 
     {name:"underlineThickness", op:1204, type:"number", value:50}, {name:"paintType", op:1205, type:"number", value:0}, {name:"charstringType", op:1206, type:"number", value:2}, {name:"fontMatrix", op:1207, type:"real real real real real real".split(" "), value:[.001, 0, 0, .001, 0, 0]}, {name:"uniqueId", op:13, type:"number"}, {name:"fontBBox", op:5, type:["number", "number", "number", "number"], value:[0, 0, 0, 0]}, {name:"strokeWidth", op:1208, type:"number", value:0}, {name:"xuid", op:14, type:[], 
     value:null}, {name:"charset", op:15, type:"offset", value:0}, {name:"encoding", op:16, type:"offset", value:0}, {name:"charStrings", op:17, type:"offset", value:0}, {name:"private", op:18, type:["number", "offset"], value:[0, 0]}], D = [{name:"subrs", op:19, type:"offset", value:0}, {name:"defaultWidthX", op:20, type:"number", value:0}, {name:"nominalWidthX", op:21, type:"number", value:0}];
     b.parse = function(b, d, e) {
       e.tables.cff = {};
       var g = {};
-      g = (g.formatMajor = u.getCard8(b, d), g.formatMinor = u.getCard8(b, d + 1), g.size = u.getCard8(b, d + 2), g.offsetSize = u.getCard8(b, d + 3), g.startOffset = d, g.endOffset = d + 4, g);
-      g = f(b, g.endOffset, u.bytesToString);
+      g = (g.formatMajor = v.getCard8(b, d), g.formatMinor = v.getCard8(b, d + 1), g.size = v.getCard8(b, d + 2), g.offsetSize = v.getCard8(b, d + 3), g.startOffset = d, g.endOffset = d + 4, g);
+      g = f(b, g.endOffset, v.bytesToString);
       g = f(b, g.endOffset);
-      var h = f(b, g.endOffset, u.bytesToString), l = f(b, h.endOffset);
+      var h = f(b, g.endOffset, v.bytesToString), l = f(b, h.endOffset);
       e.gsubrs = l.objects;
       e.gsubrsBias = c(e.gsubrs);
       l = new DataView((new Uint8Array(g.objects[0])).buffer);
@@ -39996,7 +40008,7 @@ var __extends = this && this.__extends || function() {
       e.nGlyphs = g.objects.length;
       t = e.nGlyphs;
       w = h.objects;
-      var y = new u.Parser(b, d + l.charset);
+      var y = new v.Parser(b, d + l.charset);
       --t;
       h = [".notdef"];
       var x = y.parseCard8();
@@ -40032,7 +40044,7 @@ var __extends = this && this.__extends || function() {
           b = new z.CffEncoding(z.cffExpertEncoding, h);
         } else {
           t = {};
-          b = new u.Parser(b, d + l.encoding);
+          b = new v.Parser(b, d + l.encoding);
           d = b.parseCard8();
           if (0 === d) {
             for (w = b.parseCard8(), d = 0; w > d; d += 1) {
@@ -40092,23 +40104,23 @@ var __extends = this && this.__extends || function() {
         var p = m.path;
         n.push({name:"width", type:"NUMBER", value:m.advanceWidth});
         for (var q = 0, r = 0, w = 0; w < p.commands.length; w += 1) {
-          var u = p.commands[w];
-          if ("Q" === u.type) {
+          var v = p.commands[w];
+          if ("Q" === v.type) {
             var z = 1 / 3, A = 2 / 3;
-            u = {type:"C", x:u.x, y:u.y, x1:z * q + A * u.x1, y1:z * r + A * u.y1, x2:z * u.x + A * u.x1, y2:z * u.y + A * u.y1};
+            v = {type:"C", x:v.x, y:v.y, x1:z * q + A * v.x1, y1:z * r + A * v.y1, x2:z * v.x + A * v.x1, y2:z * v.y + A * v.y1};
           }
-          if ("M" === u.type) {
-            q = Math.round(u.x - q), r = Math.round(u.y - r), n.push({name:"dx", type:"NUMBER", value:q}), n.push({name:"dy", type:"NUMBER", value:r}), n.push({name:"rmoveto", type:"OP", value:21}), q = Math.round(u.x), r = Math.round(u.y);
+          if ("M" === v.type) {
+            q = Math.round(v.x - q), r = Math.round(v.y - r), n.push({name:"dx", type:"NUMBER", value:q}), n.push({name:"dy", type:"NUMBER", value:r}), n.push({name:"rmoveto", type:"OP", value:21}), q = Math.round(v.x), r = Math.round(v.y);
           } else {
-            if ("L" === u.type) {
-              q = Math.round(u.x - q), r = Math.round(u.y - r), n.push({name:"dx", type:"NUMBER", value:q}), n.push({name:"dy", type:"NUMBER", value:r}), n.push({name:"rlineto", type:"OP", value:5}), q = Math.round(u.x), r = Math.round(u.y);
+            if ("L" === v.type) {
+              q = Math.round(v.x - q), r = Math.round(v.y - r), n.push({name:"dx", type:"NUMBER", value:q}), n.push({name:"dy", type:"NUMBER", value:r}), n.push({name:"rlineto", type:"OP", value:5}), q = Math.round(v.x), r = Math.round(v.y);
             } else {
-              if ("C" === u.type) {
-                z = Math.round(u.x1 - q);
-                A = Math.round(u.y1 - r);
-                var B = Math.round(u.x2 - u.x1), F = Math.round(u.y2 - u.y1);
-                q = Math.round(u.x - u.x2);
-                r = Math.round(u.y - u.y2);
+              if ("C" === v.type) {
+                z = Math.round(v.x1 - q);
+                A = Math.round(v.y1 - r);
+                var B = Math.round(v.x2 - v.x1), F = Math.round(v.y2 - v.y1);
+                q = Math.round(v.x - v.x2);
+                r = Math.round(v.y - v.y2);
                 n.push({name:"dx1", type:"NUMBER", value:z});
                 n.push({name:"dy1", type:"NUMBER", value:A});
                 n.push({name:"dx2", type:"NUMBER", value:B});
@@ -40116,8 +40128,8 @@ var __extends = this && this.__extends || function() {
                 n.push({name:"dx", type:"NUMBER", value:q});
                 n.push({name:"dy", type:"NUMBER", value:r});
                 n.push({name:"rrcurveto", type:"OP", value:8});
-                q = Math.round(u.x);
-                r = Math.round(u.y);
+                q = Math.round(v.x);
+                r = Math.round(v.y);
               }
             }
           }
@@ -40188,7 +40200,7 @@ var __extends = this && this.__extends || function() {
         var p = new e.Parser(b, d + z + 16 + 6 * h);
         z = d + z + 16 + 8 * h;
         for (d = 0; h - 1 > d; d += 1) {
-          for (var u = g.parseUShort(), w = m.parseUShort(), C = q.parseShort(), A = p.parseUShort(), D = w; u >= D; D += 1) {
+          for (var v = g.parseUShort(), w = m.parseUShort(), C = q.parseShort(), A = p.parseUShort(), D = w; v >= D; D += 1) {
             0 !== A ? (z = p.offset + p.relativeOffset - 2, z += A, z += 2 * (D - w), r = e.getUShort(b, z), 0 !== r && (r = r + C & 65535)) : r = D + C & 65535, c.glyphIndexMap[D] = r;
           }
         }
@@ -40805,7 +40817,7 @@ var __extends = this && this.__extends || function() {
         case 0:
           return z;
         case 1:
-          return u[d] || p[c];
+          return v[d] || p[c];
         case 3:
           if (1 === c || 10 === c) {
             return z;
@@ -40857,13 +40869,13 @@ var __extends = this && this.__extends || function() {
     1077:"zu", 1040:"it", 2064:"it-CH", 1041:"ja", 1099:"kn", 1087:"kk", 1107:"km", 1158:"quc", 1159:"rw", 1089:"sw", 1111:"kok", 1042:"ko", 1088:"ky", 1108:"lo", 1062:"lv", 1063:"lt", 2094:"dsb", 1134:"lb", 1071:"mk", 2110:"ms-BN", 1086:"ms", 1100:"ml", 1082:"mt", 1153:"mi", 1146:"arn", 1102:"mr", 1148:"moh", 1104:"mn", 2128:"mn-CN", 1121:"ne", 1044:"nb", 2068:"nn", 1154:"oc", 1096:"or", 1123:"ps", 1045:"pl", 1046:"pt", 2070:"pt-PT", 1094:"pa", 1131:"qu-BO", 2155:"qu-EC", 3179:"qu", 1048:"ro", 1047:"rm", 
     1049:"ru", 9275:"smn", 4155:"smj-NO", 5179:"smj", 3131:"se-FI", 1083:"se", 2107:"se-SE", 8251:"sms", 6203:"sma-NO", 7227:"sms", 1103:"sa", 7194:"sr-Cyrl-BA", 3098:"sr", 6170:"sr-Latn-BA", 2074:"sr-Latn", 1132:"nso", 1074:"tn", 1115:"si", 1051:"sk", 1060:"sl", 11274:"es-AR", 16394:"es-BO", 13322:"es-CL", 9226:"es-CO", 5130:"es-CR", 7178:"es-DO", 12298:"es-EC", 17418:"es-SV", 4106:"es-GT", 18442:"es-HN", 2058:"es-MX", 19466:"es-NI", 6154:"es-PA", 15370:"es-PY", 10250:"es-PE", 20490:"es-PR", 3082:"es", 
     1034:"es", 21514:"es-US", 14346:"es-UY", 8202:"es-VE", 2077:"sv-FI", 1053:"sv", 1114:"syr", 1064:"tg", 2143:"tzm", 1097:"ta", 1092:"tt", 1098:"te", 1054:"th", 1105:"bo", 1055:"tr", 1090:"tk", 1152:"ug", 1058:"uk", 1070:"hsb", 1056:"ur", 2115:"uz-Cyrl", 1091:"uz", 1066:"vi", 1106:"cy", 1160:"wo", 1157:"sah", 1144:"ii", 1130:"yo"}, z = "utf-16", p = {0:"macintosh", 1:"x-mac-japanese", 2:"x-mac-chinesetrad", 3:"x-mac-korean", 6:"x-mac-greek", 7:"x-mac-cyrillic", 9:"x-mac-devanagai", 10:"x-mac-gurmukhi", 
-    11:"x-mac-gujarati", 12:"x-mac-oriya", 13:"x-mac-bengali", 14:"x-mac-tamil", 15:"x-mac-telugu", 16:"x-mac-kannada", 17:"x-mac-malayalam", 18:"x-mac-sinhalese", 19:"x-mac-burmese", 20:"x-mac-khmer", 21:"x-mac-thai", 22:"x-mac-lao", 23:"x-mac-georgian", 24:"x-mac-armenian", 25:"x-mac-chinesesimp", 26:"x-mac-tibetan", 27:"x-mac-mongolian", 28:"x-mac-ethiopic", 29:"x-mac-ce", 30:"x-mac-vietnamese", 31:"x-mac-extarabic"}, u = {15:"x-mac-icelandic", 17:"x-mac-turkish", 18:"x-mac-croatian", 24:"x-mac-ce", 
+    11:"x-mac-gujarati", 12:"x-mac-oriya", 13:"x-mac-bengali", 14:"x-mac-tamil", 15:"x-mac-telugu", 16:"x-mac-kannada", 17:"x-mac-malayalam", 18:"x-mac-sinhalese", 19:"x-mac-burmese", 20:"x-mac-khmer", 21:"x-mac-thai", 22:"x-mac-lao", 23:"x-mac-georgian", 24:"x-mac-armenian", 25:"x-mac-chinesesimp", 26:"x-mac-tibetan", 27:"x-mac-mongolian", 28:"x-mac-ethiopic", 29:"x-mac-ce", 30:"x-mac-vietnamese", 31:"x-mac-extarabic"}, v = {15:"x-mac-icelandic", 17:"x-mac-turkish", 18:"x-mac-croatian", 24:"x-mac-ce", 
     25:"x-mac-ce", 26:"x-mac-ce", 27:"x-mac-ce", 28:"x-mac-ce", 30:"x-mac-icelandic", 37:"x-mac-romanian", 38:"x-mac-ce", 39:"x-mac-ce", 40:"x-mac-ce", 143:"x-mac-inuit", 146:"x-mac-gaelic"};
     b.parse = function(b, c, d) {
       var e = {};
       c = new n.Parser(b, c);
       for (var f = c.parseUShort(), h = c.parseUShort(), m = c.offset + c.parseUShort(), p = 0; h > p; p++) {
-        var q = c.parseUShort(), u = c.parseUShort(), w = c.parseUShort(), y = c.parseUShort();
+        var q = c.parseUShort(), v = c.parseUShort(), w = c.parseUShort(), y = c.parseUShort();
         y = l[y] || y;
         var A = c.parseUShort(), C = c.parseUShort();
         a: {
@@ -40887,36 +40899,36 @@ var __extends = this && this.__extends || function() {
           }
           S = void 0;
         }
-        q = g(q, u, w);
-        void 0 !== q && void 0 !== S && (q = q === z ? r.UTF16(b, m + C, A) : r.MACSTRING(b, m + C, A, q)) && (u = e[y], void 0 === u && (u = e[y] = {}), u[S] = q);
+        q = g(q, v, w);
+        void 0 !== q && void 0 !== S && (q = q === z ? r.UTF16(b, m + C, A) : r.MACSTRING(b, m + C, A, q)) && (v = e[y], void 0 === v && (v = e[y] = {}), v[S] = q);
       }
       return 1 === f && c.parseUShort(), e;
     };
     b.make = function(b, d) {
       var h, n = [], p = {}, r = f(l);
       for (w in b) {
-        var u = r[w];
-        if (void 0 === u && (u = w), h = parseInt(u), isNaN(h)) {
+        var v = r[w];
+        if (void 0 === v && (v = w), h = parseInt(v), isNaN(h)) {
           throw Error('Name table entry "' + w + '" does not exist, see nameTableNames for complete list.');
         }
         p[h] = b[w];
         n.push(h);
       }
       var w = f(t);
-      u = f(x);
+      v = f(x);
       b = [];
       r = [];
       for (var z = 0; z < n.length; z++) {
         h = n[z];
         var C = p[h], R;
         for (R in C) {
-          var K = C[R], G = 1, M = w[R], S = y[M], O = g(G, S, M);
-          O = m.MACSTRING(K, O);
-          void 0 === O && (G = 0, M = d.indexOf(R), 0 > M && (M = d.length, d.push(R)), S = 4, O = m.UTF16(K));
+          var L = C[R], G = 1, M = w[R], S = y[M], O = g(G, S, M);
+          O = m.MACSTRING(L, O);
+          void 0 === O && (G = 0, M = d.indexOf(R), 0 > M && (M = d.length, d.push(R)), S = 4, O = m.UTF16(L));
           var Z = q(O, r);
           b.push(e(G, S, M, h, O.length, Z));
-          G = u[R];
-          void 0 !== G && (K = m.UTF16(K), M = q(K, r), b.push(e(3, 1, G, h, K.length, M)));
+          G = v[R];
+          void 0 !== G && (L = m.UTF16(L), M = q(L, r), b.push(e(3, 1, G, h, L.length, M)));
         }
       }
       b.sort(function(b, c) {
@@ -41061,18 +41073,18 @@ var __extends = this && this.__extends || function() {
       }
       return d;
     }
-    var r = d("../check"), m = d("../table"), n = d("./cmap"), c = d("./cff"), l = d("./head"), t = d("./hhea"), y = d("./hmtx"), x = d("./ltag"), z = d("./maxp"), p = d("./name"), u = d("./os2"), w = d("./post"), C = d("./gsub"), A = d("./meta");
+    var r = d("../check"), m = d("../table"), n = d("./cmap"), c = d("./cff"), l = d("./head"), t = d("./hhea"), y = d("./hmtx"), x = d("./ltag"), z = d("./maxp"), p = d("./name"), v = d("./os2"), w = d("./post"), C = d("./gsub"), A = d("./meta");
     b.computeCheckSum = g;
     b.make = e;
     b.fontToTable = function(b) {
-      for (var d, f = [], h = [], m = [], r = [], D = [], R = [], K = [], G = 0, M = 0, S = 0, O = 0, Z = 0, Q = 0; Q < b.glyphs.length; Q += 1) {
+      for (var d, f = [], h = [], m = [], r = [], D = [], R = [], L = [], G = 0, M = 0, S = 0, O = 0, Z = 0, Q = 0; Q < b.glyphs.length; Q += 1) {
         var V = b.glyphs.get(Q), P = 0 | V.unicode;
         if (isNaN(V.advanceWidth)) {
           throw Error("Glyph " + V.name + " (" + Q + "): advanceWidth is not a number.");
         }
         (d > P || void 0 === d) && 0 < P && (d = P);
         P > G && (G = P);
-        P = u.getUnicodeRange(P);
+        P = v.getUnicodeRange(P);
         if (32 > P) {
           M |= 1 << P;
         } else {
@@ -41089,7 +41101,7 @@ var __extends = this && this.__extends || function() {
             }
           }
         }
-        ".notdef" !== V.name && (P = V.getMetrics(), f.push(P.xMin), h.push(P.yMin), m.push(P.xMax), r.push(P.yMax), R.push(P.leftSideBearing), K.push(P.rightSideBearing), D.push(V.advanceWidth));
+        ".notdef" !== V.name && (P = V.getMetrics(), f.push(P.xMin), h.push(P.yMin), m.push(P.xMax), r.push(P.yMax), R.push(P.leftSideBearing), L.push(P.rightSideBearing), D.push(V.advanceWidth));
       }
       Q = Math.min.apply(null, f);
       h = Math.min.apply(null, h);
@@ -41099,13 +41111,13 @@ var __extends = this && this.__extends || function() {
       for (P = V = 0; P < D.length; P += 1) {
         V += D[P];
       }
-      Q = {xMin:Q, yMin:h, xMax:m, yMax:r, advanceWidthMax:f, advanceWidthAvg:V / D.length, minLeftSideBearing:Math.min.apply(null, R), maxLeftSideBearing:Math.max.apply(null, R), minRightSideBearing:Math.min.apply(null, K)};
+      Q = {xMin:Q, yMin:h, xMax:m, yMax:r, advanceWidthMax:f, advanceWidthAvg:V / D.length, minLeftSideBearing:Math.min.apply(null, R), maxLeftSideBearing:Math.max.apply(null, R), minRightSideBearing:Math.min.apply(null, L)};
       Q.ascender = b.ascender;
       Q.descender = b.descender;
       D = l.make({flags:3, unitsPerEm:b.unitsPerEm, xMin:Q.xMin, yMin:Q.yMin, xMax:Q.xMax, yMax:Q.yMax, lowestRecPPEM:3, createdTimestamp:b.createdTimestamp});
       R = t.make({ascender:Q.ascender, descender:Q.descender, advanceWidthMax:Q.advanceWidthMax, minLeftSideBearing:Q.minLeftSideBearing, minRightSideBearing:Q.minRightSideBearing, xMaxExtent:Q.maxLeftSideBearing + (Q.xMax - Q.xMin), numberOfHMetrics:b.glyphs.length});
-      K = z.make(b.glyphs.length);
-      d = u.make({xAvgCharWidth:Math.round(Q.advanceWidthAvg), usWeightClass:b.tables.os2.usWeightClass, usWidthClass:b.tables.os2.usWidthClass, usFirstCharIndex:d, usLastCharIndex:G, ulUnicodeRange1:M, ulUnicodeRange2:S, ulUnicodeRange3:O, ulUnicodeRange4:Z, fsSelection:b.tables.os2.fsSelection, sTypoAscender:Q.ascender, sTypoDescender:Q.descender, sTypoLineGap:0, usWinAscent:Q.yMax, usWinDescent:Math.abs(Q.yMin), ulCodePageRange1:1, sxHeight:q(b, "xyvw", {yMax:Math.round(Q.ascender / 2)}).yMax, 
+      L = z.make(b.glyphs.length);
+      d = v.make({xAvgCharWidth:Math.round(Q.advanceWidthAvg), usWeightClass:b.tables.os2.usWeightClass, usWidthClass:b.tables.os2.usWidthClass, usFirstCharIndex:d, usLastCharIndex:G, ulUnicodeRange1:M, ulUnicodeRange2:S, ulUnicodeRange3:O, ulUnicodeRange4:Z, fsSelection:b.tables.os2.fsSelection, sTypoAscender:Q.ascender, sTypoDescender:Q.descender, sTypoLineGap:0, usWinAscent:Q.yMax, usWinDescent:Math.abs(Q.yMin), ulCodePageRange1:1, sxHeight:q(b, "xyvw", {yMax:Math.round(Q.ascender / 2)}).yMax, 
       sCapHeight:q(b, "HIKLEFJMNTZBDPRAGOQSUVWXY", Q).yMax, usDefaultChar:b.hasChar(" ") ? 32 : 0, usBreakChar:b.hasChar(" ") ? 32 : 0});
       G = y.make(b.glyphs);
       M = n.make(b.glyphs);
@@ -41127,7 +41139,7 @@ var __extends = this && this.__extends || function() {
       h = w.make();
       O = c.make(b.glyphs, {version:b.getEnglishName("version"), fullName:Z, familyName:S, weightName:O, postScriptName:r, unitsPerEm:b.unitsPerEm, fontBBox:[0, Q.yMin, Q.ascender, Q.advanceWidthMax]});
       S = b.metas && 0 < Object.keys(b.metas).length ? A.make(b.metas) : void 0;
-      ba = [D, R, K, d, ba, M, h, O, G];
+      ba = [D, R, L, d, ba, M, h, O, G];
       m && ba.push(m);
       b.tables.gsub && ba.push(C.make(b.tables.gsub));
       S && ba.push(S);
@@ -41637,7 +41649,7 @@ var __extends = this && this.__extends || function() {
     function p(a) {
       return a instanceof Object;
     }
-    function u(a) {
+    function v(a) {
       for (var b = [], d = 1; d < arguments.length; d++) {
         b[d - 1] = arguments[d];
       }
@@ -41798,12 +41810,12 @@ var __extends = this && this.__extends || function() {
       }
       return a;
     };
-    d.assignNoOverwrite = u;
+    d.assignNoOverwrite = v;
     d.defaults = function() {
       for (var a = [], b = 0; b < arguments.length; b++) {
         a[b] = arguments[b];
       }
-      return u.apply(null, [{}].concat(a));
+      return v.apply(null, [{}].concat(a));
     };
     d.groupBy = function(a, b) {
       var c = {};
@@ -42099,7 +42111,7 @@ var __extends = this && this.__extends || function() {
     Object.defineProperty(d, "__esModule", {value:!0});
     var f = h(4), e = h(0), q = h(26), r = h(2), m = h(23), n = h(16), c = h(10), l = h(24);
     a = h(25);
-    var t = h(31), y = h(32), x = h(34), z = h(35), p = h(36), u = h(37);
+    var t = h(31), y = h(32), x = h(34), z = h(35), p = h(36), v = h(37);
     h = h(38);
     d.END_OF_FILE = r.createTokenInstance(r.EOF, "", NaN, NaN, NaN, NaN, NaN, NaN);
     Object.freeze(d.END_OF_FILE);
@@ -42169,7 +42181,7 @@ var __extends = this && this.__extends || function() {
       }, a.DEFER_DEFINITION_ERRORS_HANDLING = !1, a;
     }();
     d.Parser = r;
-    e.applyMixins(r, [a.Recoverable, t.LooksAhead, y.TreeBuilder, x.LexerAdapter, p.RecognizerEngine, z.RecognizerApi, u.ErrorHandler, h.ContentAssist]);
+    e.applyMixins(r, [a.Recoverable, t.LooksAhead, y.TreeBuilder, x.LexerAdapter, p.RecognizerEngine, z.RecognizerApi, v.ErrorHandler, h.ContentAssist]);
     a = function(a) {
       function b(b, c) {
         void 0 === c && (c = d.DEFAULT_PARSER_CONFIG);
@@ -42633,24 +42645,24 @@ var __extends = this && this.__extends || function() {
       void 0 === d && (d = []);
       var e = [];
       b = n(b.definition);
-      if (u.isEmpty(b)) {
+      if (v.isEmpty(b)) {
         return [];
       }
       var f = a.name;
-      u.contains(b, a) && e.push({message:c.buildLeftRecursionError({topLevelRule:a, leftRecursionPath:d}), type:C.ParserDefinitionErrorType.LEFT_RECURSION, ruleName:f});
-      b = u.difference(b, d.concat([a]));
-      b = u.map(b, function(b) {
-        var e = u.cloneArr(d);
+      v.contains(b, a) && e.push({message:c.buildLeftRecursionError({topLevelRule:a, leftRecursionPath:d}), type:C.ParserDefinitionErrorType.LEFT_RECURSION, ruleName:f});
+      b = v.difference(b, d.concat([a]));
+      b = v.map(b, function(b) {
+        var e = v.cloneArr(d);
         return e.push(b), m(a, b, c, e);
       });
-      return e.concat(u.flatten(b));
+      return e.concat(v.flatten(b));
     }
     function n(a) {
       var b = [];
-      if (u.isEmpty(a)) {
+      if (v.isEmpty(a)) {
         return b;
       }
-      var c = u.first(a);
+      var c = v.first(a);
       if (c instanceof H.NonTerminal) {
         b.push(c.referencedRule);
       } else {
@@ -42658,7 +42670,7 @@ var __extends = this && this.__extends || function() {
           b = b.concat(n(c.definition));
         } else {
           if (c instanceof H.Alternation) {
-            b = u.flatten(u.map(c.definition, function(a) {
+            b = v.flatten(v.map(c.definition, function(a) {
               return n(a.definition);
             }));
           } else {
@@ -42670,18 +42682,18 @@ var __extends = this && this.__extends || function() {
       }
       c = A.isOptionalProd(c);
       var d = 1 < a.length;
-      return c && d ? (a = u.drop(a), b.concat(n(a))) : b;
+      return c && d ? (a = v.drop(a), b.concat(n(a))) : b;
     }
     function c(a, b) {
       var c = new I;
       a.accept(c);
-      return u.reduce(c.alternations, function(c, d) {
-        var e = u.dropRight(d.definition);
-        e = u.map(e, function(c, e) {
+      return v.reduce(c.alternations, function(c, d) {
+        var e = v.dropRight(d.definition);
+        e = v.map(e, function(c, e) {
           c = E.nextPossibleTokensAfter([c], [], null, 1);
-          return u.isEmpty(c) ? {message:b.buildEmptyAlternationError({topLevelRule:a, alternation:d, emptyChoiceIdx:e}), type:C.ParserDefinitionErrorType.NONE_LAST_EMPTY_ALT, ruleName:a.name, occurrence:d.idx, alternative:e + 1} : null;
+          return v.isEmpty(c) ? {message:b.buildEmptyAlternationError({topLevelRule:a, alternation:d, emptyChoiceIdx:e}), type:C.ParserDefinitionErrorType.NONE_LAST_EMPTY_ALT, ruleName:a.name, occurrence:d.idx, alternative:e + 1} : null;
         });
-        return c.concat(u.compact(e));
+        return c.concat(v.compact(e));
       }, []);
     }
     function l(a, b, c, d) {
@@ -42691,7 +42703,7 @@ var __extends = this && this.__extends || function() {
       var f = c[a.name];
       return f && (e = w.reject(e, function(a) {
         return f[A.getProductionDslName(a) + (0 === a.idx ? "" : a.idx)];
-      })), u.reduce(e, function(c, e) {
+      })), v.reduce(e, function(c, e) {
         var f = F.getLookaheadPathsForOr(e.idx, a, b), g = function(a, b, c, d) {
           var e = [], f = w.reduce(a, function(b, c, d) {
             return w.forEach(c, function(c) {
@@ -42702,7 +42714,7 @@ var __extends = this && this.__extends || function() {
               1 < f.length && !F.containsPath(e, c) && (e.push(c), b.push({alts:f, path:c}));
             }), b;
           }, []);
-          return u.map(f, function(a) {
+          return v.map(f, function(a) {
             var e = w.map(a.alts, function(a) {
               return a + 1;
             });
@@ -42716,7 +42728,7 @@ var __extends = this && this.__extends || function() {
     function t(a, b) {
       var c = new I;
       a.accept(c);
-      return u.reduce(c.alternations, function(c, d) {
+      return v.reduce(c.alternations, function(c, d) {
         return 255 < d.definition.length && c.push({message:b.buildTooManyAlternativesError({topLevelRule:a, alternation:d}), type:C.ParserDefinitionErrorType.TOO_MANY_ALTS, ruleName:a.name, occurrence:d.idx}), c;
       }, []);
     }
@@ -42767,19 +42779,19 @@ var __extends = this && this.__extends || function() {
       a.prototype = null === b ? Object.create(b) : (c.prototype = b.prototype, new c);
     });
     Object.defineProperty(d, "__esModule", {value:!0});
-    var u = h(0), w = h(0), C = h(3), A = h(8), D = h(2), F = h(12), B = h(16), E = h(13), H = h(1);
+    var v = h(0), w = h(0), C = h(3), A = h(8), D = h(2), F = h(12), B = h(16), E = h(13), H = h(1);
     a = h(5);
     d.validateGrammar = function(a, d, h, n, p, x) {
-      var z = u.map(a, function(a) {
+      var z = v.map(a, function(a) {
         return function(a, c) {
           var d = new J;
           a.accept(d);
-          d = u.groupBy(d.allProductions, b);
-          d = u.pick(d, function(a) {
+          d = v.groupBy(d.allProductions, b);
+          d = v.pick(d, function(a) {
             return 1 < a.length;
           });
-          return u.map(u.values(d), function(b) {
-            var d = u.first(b);
+          return v.map(v.values(d), function(b) {
+            var d = v.first(b);
             b = c.buildDuplicateFoundError(a, b);
             var e = A.getProductionDslName(d);
             b = {message:b, type:C.ParserDefinitionErrorType.DUPLICATE_PRODUCTIONS, ruleName:a.name, dslName:e, occurrence:d.idx};
@@ -42787,14 +42799,14 @@ var __extends = this && this.__extends || function() {
             return d && (b.parameter = d), b;
           });
         }(a, p);
-      }), G = u.map(a, function(a) {
+      }), G = v.map(a, function(a) {
         return m(a, a, p);
-      }), E = [], F = [], K = [];
+      }), E = [], F = [], L = [];
       w.every(G, w.isEmpty) && (E = w.map(a, function(a) {
         return c(a, p);
       }), F = w.map(a, function(a) {
         return l(a, d, n, p);
-      }), K = y(a, d, p));
+      }), L = y(a, d, p));
       var M = function(a, b, c) {
         var d = [], e = w.map(b, function(a) {
           return D.tokenName(a);
@@ -42804,7 +42816,7 @@ var __extends = this && this.__extends || function() {
           w.contains(e, b) && (a = c.buildNamespaceConflictError(a), d.push({message:a, type:C.ParserDefinitionErrorType.CONFLICT_TOKENS_RULES_NAMESPACE, ruleName:b}));
         }), d;
       }(a, h, p);
-      h = u.map(h, function(a) {
+      h = v.map(h, function(a) {
         return q(a, p);
       });
       var H = function(a, b) {
@@ -42845,7 +42857,7 @@ var __extends = this && this.__extends || function() {
       }), R = w.map(a, function(b) {
         return r(b, a, x, p);
       });
-      return u.flatten(z.concat(h, H, I, K, G, E, F, M, S, O, R));
+      return v.flatten(z.concat(h, H, I, L, G, E, F, M, S, O, R));
     };
     d.identifyProductionForDuplicates = b;
     var J = function(a) {
@@ -42880,7 +42892,7 @@ var __extends = this && this.__extends || function() {
     d.validateRuleDoesNotAlreadyExist = r;
     d.validateRuleIsOverridden = function(a, b, c) {
       var d, e = [];
-      return u.contains(b, a) || (d = "Invalid rule override, rule: ->" + a + "<- cannot be overridden in the grammar: ->" + c + "<-as it is not defined in any of the super grammars ", e.push({message:d, type:C.ParserDefinitionErrorType.INVALID_RULE_OVERRIDE, ruleName:a})), e;
+      return v.contains(b, a) || (d = "Invalid rule override, rule: ->" + a + "<- cannot be overridden in the grammar: ->" + c + "<-as it is not defined in any of the super grammars ", e.push({message:d, type:C.ParserDefinitionErrorType.INVALID_RULE_OVERRIDE, ruleName:a})), e;
     };
     d.validateNoLeftRecursion = m;
     d.getFirstNoneTerminal = n;
@@ -42946,8 +42958,8 @@ var __extends = this && this.__extends || function() {
         h = g(n.length);
         for (var p = 0; p < n.length; p++) {
           for (var q = n[p], r = d(n, p), t = 0; t < q.length; t++) {
-            var u = q[t].partialPath, y = q[t].suffixDef;
-            f(r, u) || c.isEmpty(y) || u.length === b ? (y = a[p], e(y, u) || y.push(u)) : (u = l.possiblePathsFrom(y, m + 1, u), h[p] = h[p].concat(u));
+            var v = q[t].partialPath, y = q[t].suffixDef;
+            f(r, v) || c.isEmpty(y) || v.length === b ? (y = a[p], e(y, v) || y.push(v)) : (v = l.possiblePathsFrom(y, m + 1, v), h[p] = h[p].concat(v));
           }
         }
       }
@@ -43584,7 +43596,7 @@ var __extends = this && this.__extends || function() {
           S.push(a);
           M = this.charCodeToPatternIdxToConfig[a];
           G = this.patternIdxToConfig[a];
-          K = K = G.length;
+          L = L = G.length;
           a = this.canModeBeOptimized[a] && !1 === this.config.safeMode;
           Q = M && a ? function(a) {
             a = M[a];
@@ -43593,14 +43605,14 @@ var __extends = this && this.__extends || function() {
             return G;
           };
         }
-        var c, f, h, m, q, r, p, u = this, w = a, C = w.length, A = 0, D = 0, F = Array(this.hasCustom ? 0 : Math.floor(a.length / 10)), B = [], E = this.trackStartLines ? 1 : void 0, H = this.trackStartLines ? 1 : void 0, J = b.cloneEmptyGroups(this.emptyGroups), I = this.trackStartLines, R = this.config.lineTerminatorsPattern, K = 0, G = [], M = [], S = [], O = [];
+        var c, f, h, m, q, r, p, v = this, w = a, C = w.length, A = 0, D = 0, F = Array(this.hasCustom ? 0 : Math.floor(a.length / 10)), B = [], E = this.trackStartLines ? 1 : void 0, H = this.trackStartLines ? 1 : void 0, J = b.cloneEmptyGroups(this.emptyGroups), I = this.trackStartLines, R = this.config.lineTerminatorsPattern, L = 0, G = [], M = [], S = [], O = [];
         Object.freeze(O);
         var Z, Q = void 0, V = function(a) {
           if (1 === S.length && void 0 === a.tokenType.PUSH_MODE) {
-            var b = u.config.errorMessageProvider.buildUnableToPopLexerModeMessage(a);
+            var b = v.config.errorMessageProvider.buildUnableToPopLexerModeMessage(a);
             B.push({offset:a.startOffset, line:void 0 !== a.startLine ? a.startLine : void 0, column:void 0 !== a.startColumn ? a.startColumn : void 0, length:a.image.length, message:b});
           } else {
-            S.pop(), a = g.last(S), G = u.patternIdxToConfig[a], M = u.charCodeToPatternIdxToConfig[a], K = G.length, a = u.canModeBeOptimized[a] && !1 === u.config.safeMode, Q = M && a ? function(a) {
+            S.pop(), a = g.last(S), G = v.patternIdxToConfig[a], M = v.charCodeToPatternIdxToConfig[a], L = G.length, a = v.canModeBeOptimized[a] && !1 === v.config.safeMode, Q = M && a ? function(a) {
               a = M[a];
               return void 0 === a ? O : a;
             } : function() {
@@ -43636,7 +43648,7 @@ var __extends = this && this.__extends || function() {
             c = E;
             P = H;
             for (N = !1; !N && A < C;) {
-              for (w.charCodeAt(A), a = this.chopInput(a, 1), A++, ba = 0; ba < K; ba++) {
+              for (w.charCodeAt(A), a = this.chopInput(a, 1), A++, ba = 0; ba < L; ba++) {
                 var da, fa = G[ba];
                 W = fa.pattern;
                 if (!1 !== (da = fa.short) ? w.charCodeAt(A) === da && (N = !0) : !0 === fa.isCustom ? N = null !== W.exec(w, A, F, J) : (this.updateLastIndex(W, A), N = null !== W.exec(a)), !0 === N) {
@@ -44519,7 +44531,7 @@ var __extends = this && this.__extends || function() {
           }(a);
         case H.TERMINAL:
           return function(a, b) {
-            var c = K.exec(a.text);
+            var c = L.exec(a.text);
             a = void 0 === c[1] ? 0 : parseInt(c[1], 10);
             c = c[2];
             var e = d.terminalNameToConstructor[c];
@@ -44578,7 +44590,7 @@ var __extends = this && this.__extends || function() {
       return a.replace(wa, m).replace(Ja, m);
     }
     function c(a) {
-      var b = l(a), c = t(a), d = y(a), e = x(a), f = z(a), g = p(a), h = u(a);
+      var b = l(a), c = t(a), d = y(a), e = x(a), f = z(a), g = p(a), h = v(a);
       a = w(a);
       return [].concat(b, c, d, e, f, g, h, a);
     }
@@ -44600,7 +44612,7 @@ var __extends = this && this.__extends || function() {
     function p(a) {
       return D(a, H.MANY_SEP, N, ta);
     }
-    function u(a) {
+    function v(a) {
       return D(a, H.OPTION, Q, ta);
     }
     function w(a) {
@@ -44692,7 +44704,7 @@ var __extends = this && this.__extends || function() {
     }(H = d.ProdType || (d.ProdType = {}));
     a = /(?:\s*{\s*NAME\s*:\s*["'`]([\w$]*)["'`])?/;
     h = new RegExp(a.source.replace("{", "").replace(")?", "\\s*,)?"));
-    var K = /\.\s*CONSUME(\d+)?\s*\(\s*(?:[a-zA-Z_$]\w*\s*\.\s*)*([a-zA-Z_$]\w*)/, G = new RegExp(K.source, "g"), M = /\.\s*SUBRULE(\d+)?\s*\(\s*(?:[a-zA-Z_$]\w*\s*\.\s*)*([a-zA-Z_$]\w*)/, S = new RegExp(M.source, "g"), O = /\.\s*OPTION(\d+)?\s*\(/, Z = new RegExp(O.source + a.source), Q = new RegExp(O.source, "g");
+    var L = /\.\s*CONSUME(\d+)?\s*\(\s*(?:[a-zA-Z_$]\w*\s*\.\s*)*([a-zA-Z_$]\w*)/, G = new RegExp(L.source, "g"), M = /\.\s*SUBRULE(\d+)?\s*\(\s*(?:[a-zA-Z_$]\w*\s*\.\s*)*([a-zA-Z_$]\w*)/, S = new RegExp(M.source, "g"), O = /\.\s*OPTION(\d+)?\s*\(/, Z = new RegExp(O.source + a.source), Q = new RegExp(O.source, "g");
     O = /\.\s*MANY(\d+)?\s*\(/;
     var V = new RegExp(O.source + a.source), P = new RegExp(O.source, "g");
     O = /\s*SEP\s*:\s*(?:[a-zA-Z_$]\w*\s*\.\s*)*([a-zA-Z_$]\w*)/;
@@ -44720,7 +44732,7 @@ var __extends = this && this.__extends || function() {
     d.createAtLeastOneSepRanges = x;
     d.createManyRanges = z;
     d.createManySepRanges = p;
-    d.createOptionRanges = u;
+    d.createOptionRanges = v;
     d.createOrRanges = w;
     var Ga = I.partial(F, "{", "}"), ta = I.partial(F, "(", ")");
     d.createOrPartRanges = C;
@@ -45120,7 +45132,7 @@ var __extends = this && this.__extends || function() {
       }
       throw Error("non exhaustive match");
     }
-    function u(a, b) {
+    function v(a, b) {
       if (b.issue === B.LexerDefinitionErrorType.IDENTIFY_TERMINATOR) {
         return "Warning: unable to identify line terminator usage in pattern.\n\tThe problem is in the <" + a.name + "> Token Type\n\t Root cause: " + b.errMsg + ".\n\tFor details See: https://sap.github.io/chevrotain/docs/guide/resolving_lexer_errors.html#IDENTIFY_TERMINATOR";
       }
@@ -45210,10 +45222,10 @@ var __extends = this && this.__extends || function() {
         return a.PUSH_MODE;
       }), q = E.map(e, function(a) {
         return E.has(a, "POP_MODE");
-      }), r = w(b.lineTerminatorCharacters), u = E.map(e, function(a) {
+      }), r = w(b.lineTerminatorCharacters), v = E.map(e, function(a) {
         return !1;
       });
-      "onlyOffset" !== b.positionTracking && (u = E.map(e, function(a) {
+      "onlyOffset" !== b.positionTracking && (v = E.map(e, function(a) {
         return E.has(a, "LINE_BREAKS") ? a.LINE_BREAKS : !1 === p(a, r) ? H.canMatchCharCode(r, a.PATTERN) : void 0;
       }));
       var A = E.map(e, x), C = E.map(g, z);
@@ -45222,7 +45234,7 @@ var __extends = this && this.__extends || function() {
         return E.isString(b) && b !== B.Lexer.SKIPPED && (a[b] = []), a;
       }, {});
       var D = E.map(g, function(a, b) {
-        return {pattern:g[b], longerAlt:m[b], canLineTerminator:u[b], isCustom:A[b], short:C[b], group:l[b], push:n[b], pop:q[b], tokenTypeIdx:h[b], tokenType:e[b]};
+        return {pattern:g[b], longerAlt:m[b], canLineTerminator:v[b], isCustom:A[b], short:C[b], group:l[b], push:n[b], pop:q[b], tokenTypeIdx:h[b], tokenType:e[b]};
       }), G = !0, J = [];
       return b.safeMode || (J = E.reduce(e, function(a, d, e) {
         "string" == typeof d.PATTERN ? (d = d.PATTERN.charCodeAt(0), c(a, d, D[e])) : E.isArray(d.START_CHARS_HINT) ? E.forEach(d.START_CHARS_HINT, function(b) {
@@ -45283,7 +45295,7 @@ var __extends = this && this.__extends || function() {
       var f = w(c);
       return b && E.forEach(a, function(a) {
         var b = p(a, f);
-        !1 !== b ? (a = {message:u(a, b), type:b.issue, tokenType:a}, d.push(a)) : E.has(a, "LINE_BREAKS") ? !0 === a.LINE_BREAKS && (e = !0) : H.canMatchCharCode(f, a.PATTERN) && (e = !0);
+        !1 !== b ? (a = {message:v(a, b), type:b.issue, tokenType:a}, d.push(a)) : E.has(a, "LINE_BREAKS") ? !0 === a.LINE_BREAKS && (e = !0) : H.canMatchCharCode(f, a.PATTERN) && (e = !0);
       }), b && !e && d.push({message:"Warning: No LINE_BREAKS Found.\n\tThis Lexer has been defined to track line and column information,\n\tBut none of the Token Types can be identified as matching a line terminator.\n\tSee https://sap.github.io/chevrotain/docs/guide/resolving_lexer_errors.html#LINE_BREAKS \n\tfor details.", type:B.LexerDefinitionErrorType.NO_LINE_BREAKS_FLAGS}), d;
     };
     d.cloneEmptyGroups = function(a) {
@@ -45309,7 +45321,7 @@ var __extends = this && this.__extends || function() {
       }
       return !1;
     }, lastIndex:0};
-    d.buildLineBreakIssueMessage = u;
+    d.buildLineBreakIssueMessage = v;
   }, function(a, d, h) {
     function b(a) {
       switch(a.type) {
@@ -46178,8 +46190,8 @@ var __extends = this && this.__extends || function() {
         var d;
         try {
           return d = a.call(this, b, void 0 !== c ? c.ARGS : void 0), this.cstPostNonTerminal(d, void 0 !== c && void 0 !== c.LABEL ? c.LABEL : a.ruleName), d;
-        } catch (u) {
-          throw f.isRecognitionException(u) && void 0 !== u.partialCstResult && (this.cstPostNonTerminal(u.partialCstResult, void 0 !== c && void 0 !== c.LABEL ? c.LABEL : a.ruleName), delete u.partialCstResult), u;
+        } catch (v) {
+          throw f.isRecognitionException(v) && void 0 !== v.partialCstResult && (this.cstPostNonTerminal(v.partialCstResult, void 0 !== c && void 0 !== c.LABEL ? c.LABEL : a.ruleName), delete v.partialCstResult), v;
         }
       }, a.prototype.consumeInternal = function(a, b, c) {
         try {
@@ -48728,7 +48740,7 @@ AdaptiveToneMappingPass.prototype.toJSON = function(a) {
   return a;
 };
 "use strict";
-var SSAOShader = {uniforms:{tDiffuse:{value:null}, tDepth:{value:null}, size:{value:new THREE.Vector2(512, 512)}, cameraNear:{value:1}, cameraFar:{value:100}, radius:{value:32}, onlyAO:{value:0}, aoClamp:{value:.25}, lumInfluence:{value:.7}}, vertexShader:"\n\tvarying vec2 vUv;\n\tvoid main()\n\t{\n\t\tvUv = uv;\n\t\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\t}", fragmentShader:"\n\tuniform float cameraNear;\n\tuniform float cameraFar;\n\n\t#ifdef USE_LOGDEPTHBUF\n\t\tuniform float logDepthBufFC;\n\t#endif\n\n\tuniform float radius; //ao radius \n\tuniform bool onlyAO; //use only ambient occlusion pass?\n\n\tuniform vec2 size; //texture width, height\n\tuniform float aoClamp; //depth clamp - reduces haloing at screen edges\n\n\tuniform float lumInfluence; //how much luminance affects occlusion\n\n\tuniform sampler2D tDiffuse;\n\tuniform sampler2D tDepth;\n\n\tvarying vec2 vUv;\n\n\t#define DL 2.399963229728653 //PI *(3.0 - sqrt(5.0))\n\t#define EULER 2.718281828459045\n\n\t//user variables\n\tconst int samples = 64; //ao sample count\n\tconst bool useNoise = true; //use noise instead of pattern for sample dithering\n\tconst float noiseAmount = 0.0004; //dithering amount\n\tconst float diffArea = 0.4; //self-shadowing reduction\n\tconst float gDisplace = 0.4; //gauss bell center\n\n\t//RGBA depth\n\t#include <packing>\n\n\t//generating noise / pattern texture for dithering\n\tvec2 rand(const vec2 coord)\n\t{\n\t\tvec2 noise;\n\n\t\tif(useNoise)\n\t\t{\n\t\t\tfloat nx = dot(coord, vec2(12.9898, 78.233));\n\t\t\tfloat ny = dot(coord, vec2(12.9898, 78.233) * 2.0);\n\t\t\tnoise = clamp(fract(43758.5453 * sin(vec2(nx, ny))), 0.0, 1.0);\n\t\t}\n\t\telse\n\t\t{\n\t\t\tfloat ff = fract(1.0 - coord.s *(size.x / 2.0));\n\t\t\tfloat gg = fract(coord.t *(size.y / 2.0));\n\t\t\tnoise = vec2(0.25, 0.75) * vec2(ff) + vec2(0.75, 0.25) * gg;\n\t\t}\n\n\t\treturn(noise * 2.0  - 1.0) * noiseAmount;\n\t}\n\n\tfloat readDepth(const in vec2 coord) {\n\n\t\tfloat cameraFarPlusNear = cameraFar + cameraNear;\n\t\tfloat cameraFarMinusNear = cameraFar - cameraNear;\n\t\tfloat cameraCoef = 2.0 * cameraNear;\n\n\t\t#ifdef USE_LOGDEPTHBUF\n\t\t\tfloat logz = unpackRGBAToDepth(texture2D(tDepth, coord));\n\t\t\tfloat w = pow(2.0, (logz / logDepthBufFC)) - 1.0;\n\t\t\tfloat z = (logz / w) + 1.0;\n\t\t#else\n\t\t\tfloat z = unpackRGBAToDepth(texture2D(tDepth, coord));\n\t\t#endif\n\n\t\treturn cameraCoef /(cameraFarPlusNear - z * cameraFarMinusNear);\n\t}\n\n\tfloat compareDepths(const in float depth1, const in float depth2, inout int far)\n\t{\n\t\tfloat garea = 8.0; //gauss bell width\n\t\tfloat diff =(depth1 - depth2) * 100.0; //depth difference (0-100)\n\n\t\t//reduce left bell width to avoid self-shadowing\n\t\tif(diff < gDisplace)\n\t\t{\n\t\t\tgarea = diffArea;\n\n\t\t}\n\t\telse\n\t\t{\n\t\t\tfar = 1;\n\t\t}\n\n\t\tfloat dd = diff - gDisplace;\n\t\tfloat gauss = pow(EULER, -2.0 *(dd * dd) /(garea * garea));\n\t\treturn gauss;\n\t}\n\n\tfloat calcAO(float depth, float dw, float dh)\n\t{\n\t\tvec2 vv = vec2(dw, dh);\n\t\tvec2 coord1 = vUv + radius * vv;\n\t\tvec2 coord2 = vUv - radius * vv;\n\n\t\tfloat temp1 = 0.0;\n\t\tfloat temp2 = 0.0;\n\n\t\tint far = 0;\n\t\ttemp1 = compareDepths(depth, readDepth(coord1), far);\n\n\t\t//DEPTH EXTRAPOLATION\n\t\tif(far > 0)\n\t\t{\n\t\t\ttemp2 = compareDepths(readDepth(coord2), depth, far);\n\t\t\ttemp1 +=(1.0 - temp1) * temp2;\n\t\t}\n\n\t\treturn temp1;\n\t}\n\n\tvoid main()\n\t{\n\t\tvec2 noise = rand(vUv);\n\t\tfloat depth = readDepth(vUv);\n\n\t\tfloat tt = clamp(depth, aoClamp, 1.0);\n\n\t\tfloat w =(1.0 / size.x) / tt +(noise.x *(1.0 - noise.x));\n\t\tfloat h =(1.0 / size.y) / tt +(noise.y *(1.0 - noise.y));\n\n\t\tfloat ao = 0.0;\n\n\t\tfloat dz = 1.0 / float(samples);\n\t\tfloat l = 0.0;\n\t\tfloat z = 1.0 - dz / 2.0;\n\n\t\tfor(int i = 0; i <= samples; i ++)\n\t\t{\n\t\t\tfloat r = sqrt(1.0 - z);\n\n\t\t\tfloat pw = cos(l) * r;\n\t\t\tfloat ph = sin(l) * r;\n\t\t\tao += calcAO(depth, pw * w, ph * h);\n\t\t\tz = z - dz;\n\t\t\tl = l + DL;\n\t\t}\n\n\t\tao /= float(samples);\n\t\tao = 1.0 - ao;\n\n\t\tvec3 color = texture2D(tDiffuse, vUv).rgb;\n\n\t\tvec3 lumcoeff = vec3(0.299, 0.587, 0.114);\n\t\tfloat lum = dot(color.rgb, lumcoeff);\n\t\tvec3 luminance = vec3(lum);\n\n\t\tvec3 final = vec3(color * mix(vec3(ao), vec3(1.0), luminance * lumInfluence)); //mix(color * ao, white, luminance)\n\n\t\tif(onlyAO)\n\t\t{\n\t\t\tfinal = vec3(mix(vec3(ao), vec3(1.0), luminance * lumInfluence)); //ambient occlusion only\n\t\t}\n\n\t\tgl_FragColor = vec4(final, 1.0);\n\t}"};
+var SSAOShader = {uniforms:{tDiffuse:{value:null}, tDepth:{value:null}, size:{value:new THREE.Vector2(512, 512)}, cameraNear:{value:1}, cameraFar:{value:100}, radius:{value:32}, onlyAO:{value:0}, aoClamp:{value:.25}, lumInfluence:{value:.7}}, vertexShader:"\n\tvarying vec2 vUv;\n\tvoid main()\n\t{\n\t\tvUv = uv;\n\t\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\t}", fragmentShader:"\n\tuniform float cameraNear;\n\tuniform float cameraFar;\n\n\t#ifdef USE_LOGDEPTHBUF\n\t\tuniform float logDepthBufFC;\n\t#endif\n\n\tuniform float radius; // ao radius \n\tuniform bool onlyAO; // use only ambient occlusion pass?\n\n\tuniform vec2 size; // texture width, height\n\tuniform float aoClamp; // depth clamp - reduces haloing at screen edges\n\n\tuniform float lumInfluence; // how much luminance affects occlusion\n\n\tuniform sampler2D tDiffuse;\n\tuniform sampler2D tDepth;\n\n\tvarying vec2 vUv;\n\n\t#define DL 2.399963229728653 // PI *(3.0 - sqrt(5.0))\n\t#define EULER 2.718281828459045\n\n\t// user variables\n\tconst int samples = 64; // ao sample count\n\tconst bool useNoise = true; // use noise instead of pattern for sample dithering\n\tconst float noiseAmount = 0.0004; // dithering amount\n\tconst float diffArea = 0.4; // self-shadowing reduction\n\tconst float gDisplace = 0.4; // gauss bell center\n\n\t// RGBA depth\n\t#include <packing>\n\n\t// generating noise / pattern texture for dithering\n\tvec2 rand(const vec2 coord)\n\t{\n\t\tvec2 noise;\n\n\t\tif(useNoise)\n\t\t{\n\t\t\tfloat nx = dot(coord, vec2(12.9898, 78.233));\n\t\t\tfloat ny = dot(coord, vec2(12.9898, 78.233) * 2.0);\n\t\t\tnoise = clamp(fract(43758.5453 * sin(vec2(nx, ny))), 0.0, 1.0);\n\t\t}\n\t\telse\n\t\t{\n\t\t\tfloat ff = fract(1.0 - coord.s *(size.x / 2.0));\n\t\t\tfloat gg = fract(coord.t *(size.y / 2.0));\n\t\t\tnoise = vec2(0.25, 0.75) * vec2(ff) + vec2(0.75, 0.25) * gg;\n\t\t}\n\n\t\treturn(noise * 2.0  - 1.0) * noiseAmount;\n\t}\n\n\tfloat readDepth(const in vec2 coord) {\n\n\t\tfloat cameraFarPlusNear = cameraFar + cameraNear;\n\t\tfloat cameraFarMinusNear = cameraFar - cameraNear;\n\t\tfloat cameraCoef = 2.0 * cameraNear;\n\n\t\t#ifdef USE_LOGDEPTHBUF\n\t\t\tfloat logz = unpackRGBAToDepth(texture2D(tDepth, coord));\n\t\t\tfloat w = pow(2.0, (logz / logDepthBufFC)) - 1.0;\n\t\t\tfloat z = (logz / w) + 1.0;\n\t\t#else\n\t\t\tfloat z = unpackRGBAToDepth(texture2D(tDepth, coord));\n\t\t#endif\n\n\t\treturn cameraCoef /(cameraFarPlusNear - z * cameraFarMinusNear);\n\t}\n\n\tfloat compareDepths(const in float depth1, const in float depth2, inout int far)\n\t{\n\t\tfloat garea = 8.0; // gauss bell width\n\t\tfloat diff =(depth1 - depth2) * 100.0; // depth difference (0-100)\n\n\t\t// reduce left bell width to avoid self-shadowing\n\t\tif(diff < gDisplace)\n\t\t{\n\t\t\tgarea = diffArea;\n\n\t\t}\n\t\telse\n\t\t{\n\t\t\tfar = 1;\n\t\t}\n\n\t\tfloat dd = diff - gDisplace;\n\t\tfloat gauss = pow(EULER, -2.0 *(dd * dd) /(garea * garea));\n\t\treturn gauss;\n\t}\n\n\tfloat calcAO(float depth, float dw, float dh)\n\t{\n\t\tvec2 vv = vec2(dw, dh);\n\t\tvec2 coord1 = vUv + radius * vv;\n\t\tvec2 coord2 = vUv - radius * vv;\n\n\t\tfloat temp1 = 0.0;\n\t\tfloat temp2 = 0.0;\n\n\t\tint far = 0;\n\t\ttemp1 = compareDepths(depth, readDepth(coord1), far);\n\n\t\t// DEPTH EXTRAPOLATION\n\t\tif(far > 0)\n\t\t{\n\t\t\ttemp2 = compareDepths(readDepth(coord2), depth, far);\n\t\t\ttemp1 +=(1.0 - temp1) * temp2;\n\t\t}\n\n\t\treturn temp1;\n\t}\n\n\tvoid main()\n\t{\n\t\tvec2 noise = rand(vUv);\n\t\tfloat depth = readDepth(vUv);\n\n\t\tfloat tt = clamp(depth, aoClamp, 1.0);\n\n\t\tfloat w =(1.0 / size.x) / tt +(noise.x *(1.0 - noise.x));\n\t\tfloat h =(1.0 / size.y) / tt +(noise.y *(1.0 - noise.y));\n\n\t\tfloat ao = 0.0;\n\n\t\tfloat dz = 1.0 / float(samples);\n\t\tfloat l = 0.0;\n\t\tfloat z = 1.0 - dz / 2.0;\n\n\t\tfor(int i = 0; i <= samples; i ++)\n\t\t{\n\t\t\tfloat r = sqrt(1.0 - z);\n\n\t\t\tfloat pw = cos(l) * r;\n\t\t\tfloat ph = sin(l) * r;\n\t\t\tao += calcAO(depth, pw * w, ph * h);\n\t\t\tz = z - dz;\n\t\t\tl = l + DL;\n\t\t}\n\n\t\tao /= float(samples);\n\t\tao = 1.0 - ao;\n\n\t\tvec3 color = texture2D(tDiffuse, vUv).rgb;\n\n\t\tvec3 lumcoeff = vec3(0.299, 0.587, 0.114);\n\t\tfloat lum = dot(color.rgb, lumcoeff);\n\t\tvec3 luminance = vec3(lum);\n\n\t\tvec3 final = vec3(color * mix(vec3(ao), vec3(1.0), luminance * lumInfluence)); // mix(color * ao, white, luminance)\n\n\t\tif(onlyAO)\n\t\t{\n\t\t\tfinal = vec3(mix(vec3(ao), vec3(1.0), luminance * lumInfluence)); // ambient occlusion only\n\t\t}\n\n\t\tgl_FragColor = vec4(final, 1.0);\n\t}"};
 "use strict";
 function Resource(a, d) {
   this.name = a;
@@ -48812,21 +48824,21 @@ Font.prototype.generateShapes = function(a, d, h) {
       if (m = b.glyphs[m] || b.glyphs["?"]) {
         var y = new THREE.ShapePath, x = [], z = THREE.ShapeUtils.b2, p = THREE.ShapeUtils.b3;
         if (m.o) {
-          for (var u = m._cachedOutline || (m._cachedOutline = m.o.split(" ")), w = 0, C = u.length; w < C;) {
-            var A = u[w++];
+          for (var v = m._cachedOutline || (m._cachedOutline = m.o.split(" ")), w = 0, C = v.length; w < C;) {
+            var A = v[w++];
             if ("m" === A) {
-              var D = u[w++] * c + l;
-              var F = u[w++] * c + t;
+              var D = v[w++] * c + l;
+              var F = v[w++] * c + t;
               y.moveTo(D, F);
             }
             if ("l" === A) {
-              D = u[w++] * c + l, F = u[w++] * c + t, y.lineTo(D, F);
+              D = v[w++] * c + l, F = v[w++] * c + t, y.lineTo(D, F);
             } else {
               if ("q" === A) {
-                var B = u[w++] * c + l;
-                var E = u[w++] * c + t;
-                var H = u[w++] * c + l;
-                A = u[w++] * c + t;
+                var B = v[w++] * c + l;
+                var E = v[w++] * c + t;
+                var H = v[w++] * c + l;
+                A = v[w++] * c + t;
                 y.quadraticCurveTo(H, A, B, E);
                 if (n = x[x.length - 1]) {
                   var J = n.x;
@@ -48838,7 +48850,7 @@ Font.prototype.generateShapes = function(a, d, h) {
                   }
                 }
               } else {
-                if ("b" === A && (B = u[w++] * c + l, E = u[w++] * c + t, H = u[w++] * c + l, A = u[w++] * c + t, D = u[w++] * c + l, F = u[w++] * c + t, y.bezierCurveTo(H, A, D, F, B, E), n = x[x.length - 1])) {
+                if ("b" === A && (B = v[w++] * c + l, E = v[w++] * c + t, H = v[w++] * c + l, A = v[w++] * c + t, D = v[w++] * c + l, F = v[w++] * c + t, y.bezierCurveTo(H, A, D, F, B, E), n = x[x.length - 1])) {
                   for (J = n.x, n = n.y, I = 1; I <= h; I++) {
                     R = I / h, p(R, J, H, D, B), p(R, n, A, F, E);
                   }
@@ -50048,12 +50060,12 @@ LegacyGeometryLoader.prototype.parse = function() {
         y.a = q[t];
         y.b = q[t + 1];
         y.c = q[t + 3];
-        var u = new THREE.Face3;
-        u.a = q[t + 1];
-        u.b = q[t + 2];
-        u.c = q[t + 3];
+        var v = new THREE.Face3;
+        v.a = q[t + 1];
+        v.b = q[t + 2];
+        v.c = q[t + 3];
         t += 4;
-        x && (x = q[t++], y.materialIndex = x, u.materialIndex = x);
+        x && (x = q[t++], y.materialIndex = x, v.materialIndex = x);
         x = h.faces.length;
         if (g) {
           for (g = 0; g < l; g++) {
@@ -50070,20 +50082,20 @@ LegacyGeometryLoader.prototype.parse = function() {
             }
           }
         }
-        z && (z = 3 * q[t++], y.normal.set(m[z++], m[z++], m[z]), u.normal.copy(y.normal));
+        z && (z = 3 * q[t++], y.normal.set(m[z++], m[z++], m[z]), v.normal.copy(y.normal));
         if (p) {
           for (g = 0; 4 > g; g++) {
-            z = 3 * q[t++], p = new THREE.Vector3(m[z++], m[z++], m[z]), 2 !== g && y.vertexNormals.push(p), 0 !== g && u.vertexNormals.push(p);
+            z = 3 * q[t++], p = new THREE.Vector3(m[z++], m[z++], m[z]), 2 !== g && y.vertexNormals.push(p), 0 !== g && v.vertexNormals.push(p);
           }
         }
-        c && (c = q[t++], c = n[c], y.color.setHex(c), u.color.setHex(c));
+        c && (c = q[t++], c = n[c], y.color.setHex(c), v.color.setHex(c));
         if (r) {
           for (g = 0; 4 > g; g++) {
-            c = q[t++], c = n[c], 2 !== g && y.vertexColors.push(new Color(c)), 0 !== g && u.vertexColors.push(new Color(c));
+            c = q[t++], c = n[c], 2 !== g && y.vertexColors.push(new Color(c)), 0 !== g && v.vertexColors.push(new Color(c));
           }
         }
         h.faces.push(y);
-        h.faces.push(u);
+        h.faces.push(v);
       } else {
         y = new THREE.Face3;
         y.a = q[t++];
@@ -50385,12 +50397,12 @@ ObjectLoader.prototype.parseObject = function(a, d, h, b, g, f, e, q, r, m, n) {
         p.body.fixedRotation = a.body.fixedRotation;
         m = a.body.shapes;
         for (z = 0; z < m.length; z++) {
-          var u = m[z];
-          u.type === CANNON.Shape.types.SPHERE ? p.body.addShape(new CANNON.Sphere(u.radius)) : u.type === CANNON.Shape.types.BOX ? p.body.addShape(new CANNON.Box(new CANNON.Vec3(u.halfExtents.x, u.halfExtents.y, u.halfExtents.z))) : u.type === CANNON.Shape.types.PARTICLE ? p.body.addShape(new CANNON.Particle) : u.type === CANNON.Shape.types.PLANE ? p.body.addShape(new CANNON.Plane) : u.type === CANNON.Shape.types.CONVEXPOLYHEDRON && p.body.addShape(new CANNON.ConvexPolyhedron(u.vertices, u.faces));
+          var v = m[z];
+          v.type === CANNON.Shape.types.SPHERE ? p.body.addShape(new CANNON.Sphere(v.radius)) : v.type === CANNON.Shape.types.BOX ? p.body.addShape(new CANNON.Box(new CANNON.Vec3(v.halfExtents.x, v.halfExtents.y, v.halfExtents.z))) : v.type === CANNON.Shape.types.PARTICLE ? p.body.addShape(new CANNON.Particle) : v.type === CANNON.Shape.types.PLANE ? p.body.addShape(new CANNON.Plane) : v.type === CANNON.Shape.types.CONVEXPOLYHEDRON && p.body.addShape(new CANNON.ConvexPolyhedron(v.vertices, v.faces));
         }
         break;
       case "ParticleEmiter":
-        u = function(a) {
+        v = function(a) {
           return Array.isArray(a) ? (new THREE.Vector3).fromArray(a) : new THREE.Vector3(a.x, a.y, a.z);
         };
         if (void 0 !== a.group) {
@@ -50400,14 +50412,14 @@ ObjectLoader.prototype.parseObject = function(a, d, h, b, g, f, e, q, r, m, n) {
         }
         if (void 0 !== a.emitter) {
           var C = a.emitter;
-          C.position.value = u(C.position.value);
-          C.position.spread = u(C.position.spread);
-          C.velocity.value = u(C.velocity.value);
-          C.velocity.spread = u(C.velocity.spread);
-          C.acceleration.value = u(C.acceleration.value);
-          C.acceleration.spread = u(C.acceleration.spread);
+          C.position.value = v(C.position.value);
+          C.position.spread = v(C.position.spread);
+          C.velocity.value = v(C.velocity.value);
+          C.velocity.spread = v(C.velocity.spread);
+          C.acceleration.value = v(C.acceleration.value);
+          C.acceleration.spread = v(C.acceleration.spread);
           for (z = 0; z < C.color.value.length; z++) {
-            C.color.value[z] = new THREE.Color(C.color.value[z]), C.color.spread[z] = u(C.color.spread[z]);
+            C.color.value[z] = new THREE.Color(C.color.value[z]), C.color.spread[z] = v(C.color.spread[z]);
           }
         }
         p = new ParticleEmitter(a.group, a.emitter);
@@ -50678,18 +50690,18 @@ function CapsuleBufferGeometry(a, d, h, b, g, f, e, q, r) {
   c = new THREE.BufferAttribute(new (65535 < c ? Uint32Array : Uint16Array)(c), 1);
   var l = new THREE.BufferAttribute(new Float32Array(3 * n), 3), t = new THREE.BufferAttribute(new Float32Array(3 * n), 3);
   n = new THREE.BufferAttribute(new Float32Array(2 * n), 2);
-  var y = 0, x = 0, z = [], p = h / 2, u, w = new THREE.Vector3, C = new THREE.Vector3, A = Math.cos(m), D = Math.sin(m), F = (new THREE.Vector2(a * D, p + a * A)).sub(new THREE.Vector2(d * D, -p + d * A)).length(), B = a * m + F + d * (Math.PI / 2 - m), E = 0;
-  for (u = 0; u <= f; u++) {
+  var y = 0, x = 0, z = [], p = h / 2, v, w = new THREE.Vector3, C = new THREE.Vector3, A = Math.cos(m), D = Math.sin(m), F = (new THREE.Vector2(a * D, p + a * A)).sub(new THREE.Vector2(d * D, -p + d * A)).length(), B = a * m + F + d * (Math.PI / 2 - m), E = 0;
+  for (v = 0; v <= f; v++) {
     var H = [];
-    var J = Math.PI / 2 - u / f * m;
+    var J = Math.PI / 2 - v / f * m;
     E += a * m / f;
-    var I = Math.cos(J), R = Math.sin(J), K = I * a;
+    var I = Math.cos(J), R = Math.sin(J), L = I * a;
     for (J = 0; J <= b; J++) {
       var G = J / b, M = G * r + q, S = Math.sin(M);
       M = Math.cos(M);
-      C.x = K * S;
+      C.x = L * S;
       C.y = p + R * a;
-      C.z = K * M;
+      C.z = L * M;
       l.setXYZ(y, C.x, C.y, C.z);
       w.set(I * S, R, I * M);
       t.setXYZ(y, w.x, w.y, w.z);
@@ -50701,30 +50713,30 @@ function CapsuleBufferGeometry(a, d, h, b, g, f, e, q, r) {
   }
   h = h + A * a - A * d;
   I = D * (d - a) / h;
-  for (u = 1; u <= g; u++) {
+  for (v = 1; v <= g; v++) {
     H = [];
     E += F / g;
-    K = D * (u * (d - a) / g + a);
+    L = D * (v * (d - a) / g + a);
     for (J = 0; J <= b; J++) {
-      G = J / b, M = G * r + q, S = Math.sin(M), M = Math.cos(M), C.x = K * S, C.y = p + A * a - u * h / g, C.z = K * M, l.setXYZ(y, C.x, C.y, C.z), w.set(S, I, M).normalize(), t.setXYZ(y, w.x, w.y, w.z), n.setXY(y, G, 1 - E / B), H.push(y), y++;
+      G = J / b, M = G * r + q, S = Math.sin(M), M = Math.cos(M), C.x = L * S, C.y = p + A * a - v * h / g, C.z = L * M, l.setXYZ(y, C.x, C.y, C.z), w.set(S, I, M).normalize(), t.setXYZ(y, w.x, w.y, w.z), n.setXY(y, G, 1 - E / B), H.push(y), y++;
     }
     z.push(H);
   }
-  for (u = 1; u <= e; u++) {
+  for (v = 1; v <= e; v++) {
     H = [];
-    J = Math.PI / 2 - m - u / e * (Math.PI - m);
+    J = Math.PI / 2 - m - v / e * (Math.PI - m);
     E += d * m / e;
     I = Math.cos(J);
     R = Math.sin(J);
-    K = I * d;
+    L = I * d;
     for (J = 0; J <= b; J++) {
-      G = J / b, M = G * r + q, S = Math.sin(M), M = Math.cos(M), C.x = K * S, C.y = -p + R * d, C.z = K * M, l.setXYZ(y, C.x, C.y, C.z), w.set(I * S, R, I * M), t.setXYZ(y, w.x, w.y, w.z), n.setXY(y, G, 1 - E / B), H.push(y), y++;
+      G = J / b, M = G * r + q, S = Math.sin(M), M = Math.cos(M), C.x = L * S, C.y = -p + R * d, C.z = L * M, l.setXYZ(y, C.x, C.y, C.z), w.set(I * S, R, I * M), t.setXYZ(y, w.x, w.y, w.z), n.setXY(y, G, 1 - E / B), H.push(y), y++;
     }
     z.push(H);
   }
   for (J = 0; J < b; J++) {
-    for (u = 0; u < f + g + e; u++) {
-      a = z[u + 1][J], d = z[u + 1][J + 1], q = z[u][J + 1], c.setX(x, z[u][J]), x++, c.setX(x, a), x++, c.setX(x, q), x++, c.setX(x, a), x++, c.setX(x, d), x++, c.setX(x, q), x++;
+    for (v = 0; v < f + g + e; v++) {
+      a = z[v + 1][J], d = z[v + 1][J + 1], q = z[v][J + 1], c.setX(x, z[v][J]), x++, c.setX(x, a), x++, c.setX(x, q), x++, c.setX(x, a), x++, c.setX(x, d), x++, c.setX(x, q), x++;
     }
   }
   this.setIndex(c);
@@ -52079,7 +52091,7 @@ Script.prototype = Object.create(THREE.Group.prototype);
 Script.includeRegex = /include[ ]*\([ \n]*["'].+?["'][ \n]*\);*/gi;
 Script.includeRegexStart = /include[ ]*\([ \n]*["']/gi;
 Script.includeRegexEnd = /["'][ \n]*\);*/gi;
-Script.DEFAULT = "function initialize()\n{\n\t//TODO <INITIALIZATION CODE>\n}\n\nfunction update(delta)\n{\n\t//TODO <UPDATE CODE>\n}\n";
+Script.DEFAULT = "function initialize()\n{\n\t// TODO <INITIALIZATION CODE>\n}\n\nfunction update(delta)\n{\n\t// TODO <UPDATE CODE>\n}\n";
 Script.METHODS = "initialize update dispose onMouseOver onResize onAppData".split(" ");
 Script.APPEND = 100;
 Script.EVALUATE = 101;
@@ -53411,7 +53423,7 @@ function LensFlare() {
   this.onBeforeRender = function(g, x, z) {
     g.getCurrentViewport(t);
     x = t.w / t.z;
-    var p = t.z / 2, u = t.w / 2, w = 16 / t.w;
+    var p = t.z / 2, v = t.w / 2, w = 16 / t.w;
     n.set(w * x, w);
     l.min.set(t.x, t.y);
     l.max.set(t.x + (t.z - 16), t.y + (t.w - 16));
@@ -53419,7 +53431,7 @@ function LensFlare() {
     a.applyMatrix4(z.matrixWorldInverse);
     a.applyMatrix4(z.projectionMatrix);
     c.x = t.x + a.x * p + p - 8;
-    c.y = t.y + a.y * u + u - 8;
+    c.y = t.y + a.y * v + v - 8;
     if (l.containsPoint(c)) {
       g.copyFramebufferToTexture(c, d);
       p = f.uniforms;
@@ -53431,9 +53443,9 @@ function LensFlare() {
       p.scale.value = n;
       p.screenPosition.value = a;
       g.renderBufferDirect(z, null, b, e, q, null);
-      u = 2 * -a.x;
+      v = 2 * -a.x;
       for (var y = 2 * -a.y, A = 0, D = this.elements.length; A < D; A++) {
-        x = this.elements[A], p = r.uniforms, p.color.value.copy(x.color), p.map.value = x.texture, p.screenPosition.value.x = a.x + u * x.distance, p.screenPosition.value.y = a.y + y * x.distance, w = x.size / t.w, x = t.w / t.z, p.scale.value.set(w * x, w), r.uniformsNeedUpdate = !0, g.renderBufferDirect(z, null, b, r, m, null);
+        x = this.elements[A], p = r.uniforms, p.color.value.copy(x.color), p.map.value = x.texture, p.screenPosition.value.x = a.x + v * x.distance, p.screenPosition.value.y = a.y + y * x.distance, w = x.size / t.w, x = t.w / t.z, p.scale.value.set(w * x, w), r.uniformsNeedUpdate = !0, g.renderBufferDirect(z, null, b, r, m, null);
       }
     }
   };
@@ -54379,5 +54391,36 @@ PhysicsGenerator.getMeshes = function(a) {
     a instanceof THREE.Mesh && d.push(a);
   });
   return d;
+};
+"use strict";
+function UnitConverter() {
+}
+UnitConverter.scales = new Map([["Y", 1E24], ["Z", 1E21], ["E", 1E18], ["P", 1E15], ["T", 1E12], ["G", 1E9], ["M", 1E6], ["k", 1E3], ["m", .001], ["u", 1E-6], ["n", 1E-9], ["p", 1E-12], ["f", 1E-15], ["a", 1E-18], ["z", 1E-21], ["y", 1E-24]]);
+UnitConverter.units = new Map([["m", new Map([["i", function(a) {
+  return a / 39.3701;
+}]])], ["i", new Map([["m", function(a) {
+  return 39.3701 * a;
+}]])], ["g", null], ["s", null], ["c", new Map([["k", function(a) {
+  return a - 273.15;
+}], ["f", function(a) {
+  return (a - 32) / 1.8;
+}]])], ["k", new Map([["c", function(a) {
+  return a + 273.15;
+}], ["f", function(a) {
+  return (a - 32) / 1.8 + 273.15;
+}]])], ["f", new Map([["c", function(a) {
+  return 1.8 * a + 32;
+}], ["k", function(a) {
+  return 1.8 * a - 459.67;
+}]])], ["d", new Map([["r", function(a) {
+  return 180 / Math.PI * a;
+}]])], ["r", new Map([["d", function(a) {
+  return a / (180 / Math.PI);
+}]])]]);
+UnitConverter.convert = function(a, d, h) {
+  1 < d.length && (a *= UnitConverter.scales.get(d.charAt(0)), d = d.slice(1));
+  var b = 1;
+  1 < h.length && (b = UnitConverter.scales.get(h.charAt(0)), h = h.slice(1));
+  return d === h ? a / b : UnitConverter.units.get(h).get(d)(a) / b;
 };
 
