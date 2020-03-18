@@ -111,6 +111,7 @@ function ObjectInspector(parent, object)
 	this.rotation = new VectorBox(this.form);
 	this.rotation.size.set(0, 18);
 	this.rotation.setStep(0.01);
+	this.rotation.isAngle = true;
 	this.rotation.setOnChange(function()
 	{
 		var rotation = self.rotation.getValue();

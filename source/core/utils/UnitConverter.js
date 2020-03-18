@@ -66,8 +66,8 @@ UnitConverter.units = new Map(
 	["f", new Map([["c", function(c){return c * 1.8 + 32;}], ["k", function(k){return k * 1.8 - 459.67;}]])], // Fahrenheit
 
 	// Angle
-	["d", new Map([["r", function(r){return r * 57.2957795131;}]])], // Degrees
-	["r", new Map([["d", function(d){return d / 57.2957795131;}]])] // Radians
+	["d", new Map([["r", function(r){return r * (180 / Math.PI);}]])], // Degrees
+	["r", new Map([["d", function(d){return d / (180 / Math.PI);}]])] // Radians
 ]);
 
 /**

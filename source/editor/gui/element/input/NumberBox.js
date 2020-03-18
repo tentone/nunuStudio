@@ -92,7 +92,7 @@ NumberBox.prototype.setValue = function(value)
 {
 	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
 	{
-		value = UnitConverter.convert(value, "d", "r");
+		value = UnitConverter.convert(value, "r", "d");
 	}
 
 	this.element.value = value;
@@ -109,7 +109,7 @@ NumberBox.prototype.getValue = function()
 	var value = Number.parseFloat(this.element.value);
 	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
 	{
-		value = UnitConverter.convert(value, "r", "d");
+		value = UnitConverter.convert(value, "d", "r");
 	}
 
 	return value;

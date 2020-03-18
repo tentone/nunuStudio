@@ -193,6 +193,7 @@ Settings.prototype.store = function()
 	{
 		general: this.general,
 		editor: this.editor,
+		units: this.units,
 		render: this.render,
 		code: this.code,
 		jslint: this.jslint
