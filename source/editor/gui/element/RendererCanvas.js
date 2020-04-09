@@ -239,7 +239,7 @@ RendererCanvas.prototype.forceContextLoss = function()
 }
 
 /**
- * Resize the canvas to match the parent size and conside the device pixel ratio.
+ * Resize the canvas to match the parent size and consider the device pixel ratio.
  *
  * @method resizeCanvas
  */
@@ -280,7 +280,7 @@ RendererCanvas.prototype.updateSize = function()
 
 	if(this.renderer !== null)
 	{
-		this.renderer.setSize(this.size.x, this.size.y, false);
+		this.renderer.setSize(this.resolution.x, this.resolution.y, false);
 	}
 
 	if(this.useCSSRenderer)

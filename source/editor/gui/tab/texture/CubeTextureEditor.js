@@ -21,7 +21,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.mouse.setCanvas(this.canvas.element);
 
 	// Camera
-	this.camera = new PerspectiveCamera(100, this.canvas.width/this.canvas.height);
+	this.camera = new PerspectiveCamera(100, this.canvas.width / this.canvas.height);
 
 	// Scene
 	this.scene = new THREE.Scene();

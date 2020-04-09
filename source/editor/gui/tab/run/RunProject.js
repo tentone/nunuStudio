@@ -315,6 +315,7 @@ RunProject.prototype.runProgram = function()
 		this.program.defaultCamera = new PerspectiveCamera(60, 1, 0.1, 1e5);
 		this.program.defaultCamera.position.set(0, 5, -5);
 		
+		// Set runtime variables
 		this.program.setRenderer(this.canvas.renderer);
 		this.program.setMouseKeyboard(this.mouse, this.keyboard);
 		this.program.initialize();

@@ -40,7 +40,7 @@ function SceneEditor(parent, closeable, container, index)
 			var rect = canvas.getBoundingClientRect();
 
 			var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-			var normalized = new THREE.Vector2(position.x / canvas.width * 2 - 1, -2 * position.y / canvas.height + 1);
+			var normalized = new THREE.Vector2(position.x / self.canvas.size.x * 2.0 - 1.0, -2.0 * position.y / self.canvas.size.y + 1.0);
 			self.raycaster.setFromCamera(normalized, self.camera);
 
 			var intersections = self.raycaster.intersectObjects(self.scene.children, true);
@@ -985,7 +985,7 @@ SceneEditor.prototype.render = function()
  */
 SceneEditor.prototype.updateRaycasterFromMouse = function()
 {
-	this.normalized.set((this.mouse.position.x / this.canvas.resolution.x) * 2 - 1, -(this.mouse.position.y / this.canvas.resolution.y) * 2 + 1);
+	this.normalized.set((this.mouse.position.x / this.canvas.size.x) * 2 - 1, -(this.mouse.position.y / this.canvas.size.y) * 2 + 1);
 	this.raycaster.setFromCamera(this.normalized, this.camera);
 };
 
@@ -1053,7 +1053,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	
 	this.cameraMode = mode;
 
-	var aspect = (this.canvas !== null) ? (this.canvas.resolution.x / this.canvas.resolution.y) : 1.0;
+	var aspect = (this.canvas !== null) ? (this.canvas.size.x / this.canvas.size.y) : 1.0;
 
 	if(this.cameraMode === SceneEditor.ORTHOGRAPHIC)
 	{
