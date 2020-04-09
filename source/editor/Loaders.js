@@ -381,7 +381,7 @@ Editor.loadModel = function(file, parent)
 			reader.readAsText(file);
 		}
 		//3MF
-		/*else if(extension === "3mf")
+		else if(extension === "3mf")
 		{
 			// TODO <Fix JSZip 2 Support or move to JSZip 3>
 			var reader = new FileReader();
@@ -401,7 +401,7 @@ Editor.loadModel = function(file, parent)
 				}
 			};
 			reader.readAsArrayBuffer(file);
-		}*/
+		}
 		// AWD
 		else if(extension === "awd")
 		{
