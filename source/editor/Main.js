@@ -297,6 +297,7 @@ include("lib/three/loaders/DDSLoader.js");
 include("lib/three/loaders/PVRLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/KTXLoader.js");
+//("lib/three/loaders/3MFLoader.js");
 
 include("lib/three/modifiers/SimplifyModifier.js");
 include("lib/three/modifiers/SubdivisionModifier.js");

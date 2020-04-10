@@ -189,7 +189,7 @@ function TreeNode(container)
 			}
 
 			// Recalculate Origin
-			context.addOption(Locale.recenterGeometries, function()
+			context.addOption(Locale.recalculateOrigin, function()
 			{
 				ObjectUtils.recalculateGeometryOrigin(self.object);
 			});

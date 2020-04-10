@@ -395,6 +395,9 @@ Editor.loadModel = function(file, parent)
 						modal.destroy();
 					});
 	
+					// TODO <REMOVE TEST CODE>
+					// Editor.addObject(loader.parse(reader.result), parent);
+					// modal.destroy();
 				}
 				catch(e)
 				{
