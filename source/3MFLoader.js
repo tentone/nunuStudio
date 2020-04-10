@@ -48,37 +48,60 @@ THREE.ThreeMFLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 		var scope = this;
 		var textureLoader = new THREE.TextureLoader( this.manager );
+		var version = 2;
 
 		function readZip( data, next ) {
 
 			if ( JSZip !== undefined ) {
-				var version = 2;
 
-				if(JSZip.version !== undefined) {
+				if ( JSZip.version !== undefined ) {
+
 					version = Number.parseInt( JSZip.version.split( "." ).shift() );
+
 				}
-				
-				if (version === 2) {
+
+				if ( version === 2 ) {
 
 					next( new JSZip( data ) ); // eslint-disable-line no-undef
 
-				} else if (version === 3) {
+				} else if ( version === 3 ) {
 
 					console.warn( 'THREE.3MFLoader: jszip version 3 parse(data, onLoad) return will be null.' );
 
 					JSZip.loadAsync( data ).then( next );
 
 				}
-				
+
 			} else {
+
 				console.error( 'THREE.3MFLoader: jszip missing and file is compressed.' );
+
 			}
 
 		}
 
+		function getUint8Array( zipFile, next ) {
+
+			if ( version === 2 ) {
+
+				next( new Uint8Array( zipFile.asArrayBuffer() ) );
+
+			} else if ( version === 3 ) {
+
+				zipFile.async( "arraybuffer" ).then( function ( arraybuffer ) {
+
+					next( new Uint8Array( arraybuffer ) );
+
+				} );
+
+			}
+
+		}
+
+
 		function loadDocument( data, next ) {
 
-			readZip(data, function( zip ) {
+			readZip( data, function ( zip ) {
 
 				var file = null;
 
@@ -126,84 +149,114 @@ THREE.ThreeMFLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 				}
 
-				// 
+				getUint8Array( zip.file( relsName ), function ( relsView ) {
 
-				var relsView = new Uint8Array( zip.file( relsName ).asArrayBuffer() );
-				var relsFileText = THREE.LoaderUtils.decodeText( relsView );
-				rels = parseRelsXml( relsFileText );
-
-				// 
-
-				if ( modelRelsName ) {
-
-					var relsView = new Uint8Array( zip.file( modelRelsName ).asArrayBuffer() );
 					var relsFileText = THREE.LoaderUtils.decodeText( relsView );
-					modelRels = parseRelsXml( relsFileText );
+					rels = parseRelsXml( relsFileText );
 
-				}
+					var waiting = modelPartNames.length + 1;
 
-				// 
+					//
 
-				for ( var i = 0; i < modelPartNames.length; i ++ ) {
+					if ( modelRelsName ) {
 
-					var modelPart = modelPartNames[ i ];
-					var view = new Uint8Array( zip.file( modelPart ).asArrayBuffer() );
+						waiting ++;
 
-					var fileText = THREE.LoaderUtils.decodeText( view );
-					var xmlData = new DOMParser().parseFromString( fileText, 'application/xml' );
+						getUint8Array( zip.file( modelRelsName ), function ( relsView ) {
 
-					if ( xmlData.documentElement.nodeName.toLowerCase() !== 'model' ) {
+							var relsFileText = THREE.LoaderUtils.decodeText( relsView );
+							modelRels = parseRelsXml( relsFileText );
 
-						console.error( 'THREE.3MFLoader: Error loading 3MF - no 3MF document found: ', modelPart );
+							finished();
+
+						} );
 
 					}
 
-					var modelNode = xmlData.querySelector( 'model' );
-					var extensions = {};
+					// Models
 
-					for ( var i = 0; i < modelNode.attributes.length; i ++ ) {
+					for ( var i = 0; i < modelPartNames.length; i ++ ) {
 
-						var attr = modelNode.attributes[ i ];
-						if ( attr.name.match( /^xmlns:(.+)$/ ) ) {
+						var modelPart = modelPartNames[ i ];
 
-							extensions[ attr.value ] = RegExp.$1;
+						getUint8Array( zip.file( modelPart ), function ( view ) {
+
+							var fileText = THREE.LoaderUtils.decodeText( view );
+							var xmlData = new DOMParser().parseFromString( fileText, 'application/xml' );
+
+							if ( xmlData.documentElement.nodeName.toLowerCase() !== 'model' ) {
+
+								console.error( 'THREE.3MFLoader: Error loading 3MF - no 3MF document found: ', modelPart );
+
+							}
+
+							var modelNode = xmlData.querySelector( 'model' );
+							var extensions = {};
+
+							for ( var i = 0; i < modelNode.attributes.length; i ++ ) {
+
+								var attr = modelNode.attributes[ i ];
+								if ( attr.name.match( /^xmlns:(.+)$/ ) ) {
+
+									extensions[ attr.value ] = RegExp.$1;
+
+								}
+
+							}
+
+							var modelData = parseModelNode( modelNode );
+							modelData[ 'xml' ] = modelNode;
+
+							if ( 0 < Object.keys( extensions ).length ) {
+
+								modelData[ 'extensions' ] = extensions;
+
+							}
+
+							modelParts[ modelPart ] = modelData;
+
+							finished();
+
+						} );
+
+					}
+
+					// Textures
+
+					for ( var i = 0; i < texturesPartNames.length; i ++ ) {
+
+						var texturesPartName = texturesPartNames[ i ];
+						texturesParts[ texturesPartName ] = zip.file( texturesPartName ).asArrayBuffer();
+
+					}
+
+					finished();
+
+
+					// Auxiliar method to check if everything was finished before moving up to next step
+
+					function finished() {
+
+						waiting --;
+
+						if ( waiting === 0 ) {
+
+							next( {
+								rels: rels,
+								modelRels: modelRels,
+								model: modelParts,
+								printTicket: printTicketParts,
+								texture: texturesParts,
+								other: otherParts
+							} );
 
 						}
 
 					}
 
-					var modelData = parseModelNode( modelNode );
-					modelData[ 'xml' ] = modelNode;
+				} );
 
-					if ( 0 < Object.keys( extensions ).length ) {
-
-						modelData[ 'extensions' ] = extensions;
-
-					}
-
-					modelParts[ modelPart ] = modelData;
-
-				}
-
-				// Textures
-
-				for ( var i = 0; i < texturesPartNames.length; i ++ ) {
-
-					var texturesPartName = texturesPartNames[ i ];
-					texturesParts[ texturesPartName ] = zip.file( texturesPartName ).asArrayBuffer();
-
-				}
-
-				next({
-					rels: rels,
-					modelRels: modelRels,
-					model: modelParts,
-					printTicket: printTicketParts,
-					texture: texturesParts,
-					other: otherParts
-				});
-
-			});
+			} );
 
 		}
 
@@ -1083,6 +1136,7 @@ THREE.ThreeMFLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 							meshes.push( newMeshes[ j ] );
 
 						}
+
 						break;
 
 					case 'texture':
@@ -1415,18 +1469,22 @@ THREE.ThreeMFLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 		var object = null;
 
-		loadDocument( data, function(data3mf) {
+		loadDocument( data, function ( data3mf ) {
 
 			var objects = buildObjects( data3mf );
 
 			object = build( objects, data3mf );
 
-			if (onLoad !== undefined) {
-				onLoad( object )
+			if ( onLoad !== undefined ) {
+
+				onLoad( object );
+
 			}
+
 		} );
 
 		return object;
+
 	},
 
 	addExtension: function ( extension ) {

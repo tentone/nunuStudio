@@ -271,7 +271,6 @@ include("lib/tern/infer.js");
 include("lib/tern/plugin/doc_comment.js");
 
 include("lib/three/loaders/LoaderSupport.js");
-include("lib/three/loaders/3MFLoader.js");
 include("lib/three/loaders/AMFLoader.js");
 include("lib/three/loaders/AssimpJSONLoader.js");
 include("lib/three/loaders/AssimpLoader.js");
