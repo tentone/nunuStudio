@@ -126,7 +126,7 @@ GeneralSettingsTab.prototype.activate = function()
 		this.autoUpdate.setValue(Editor.settings.general.autoUpdate);
 	}
 	this.historySize.setValue(Editor.settings.general.historySize);
-
+	this.ignorePixelRatio.setValue(Editor.settings.general.ignorePixelRatio);
 	this.immediateMode.setValue(Editor.settings.general.immediateMode);
 };
 

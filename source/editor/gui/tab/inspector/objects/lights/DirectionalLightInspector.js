@@ -76,7 +76,7 @@ function DirectionalLightInspector(parent, object)
 	this.form.nextRow();
 	
 	// Shadowmap camera far
-	this.form.addText(Locale.near);
+	this.form.addText(Locale.far);
 	this.shadowFar = new NumberBox(this.form);
 	this.shadowFar.size.set(60, 18);
 	this.shadowFar.setStep(0.1);
