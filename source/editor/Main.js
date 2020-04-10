@@ -385,6 +385,7 @@ include("source/editor/gui/element/tabs/splittable/TabContainer.js");
 include("source/editor/gui/element/tabs/splittable/TabDualContainer.js");
 
 include("source/editor/gui/form-template/FormTemplate.js");
+include("source/editor/gui/form-template/LightShadowFormTemplate.js");
 include("source/editor/gui/form-template/ViewportFormTemplate.js");
 include("source/editor/gui/form-template/RendererConfigurationFormTemplate.js");
 
