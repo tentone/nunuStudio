@@ -16,6 +16,18 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.addText(Locale.general);
 	this.form.nextRow();
 	
+	// Ignore device pixel ratio
+	this.form.addText(Locale.ignorePixelRatio).setAltText(Locale.hintIgnorePixelRatio);
+	this.ignorePixelRatio = new CheckBox(this.form);
+	this.ignorePixelRatio.size.set(18, 18);
+	this.ignorePixelRatio.setOnChange(function()
+	{
+		Editor.settings.general.ignorePixelRatio = self.ignorePixelRatio.getValue();
+		Editor.resize();
+	});
+	this.form.add(this.ignorePixelRatio);
+	this.form.nextRow();
+
 	// Theme
 	this.form.addText(Locale.theme);
 	this.theme = new DropdownList(this.form);

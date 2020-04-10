@@ -32,6 +32,8 @@ Canvas.prototype.updateSize = function()
 {
 	Element.prototype.updateSize.call(this);
 
-	this.element.width = this.size.x * window.devicePixelRatio;
-	this.element.height = this.size.y * window.devicePixelRatio;
+	var pixelRatio = Editor.getPixelRatio();
+	
+	this.element.width = this.size.x * pixelRatio;
+	this.element.height = this.size.y * pixelRatio;
 };

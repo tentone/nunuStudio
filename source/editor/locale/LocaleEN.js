@@ -102,6 +102,7 @@ LocaleManager.register(
 	cone: "Cone",
 
 	// Properties
+	ignorePixelRatio: "Ignore Device Pixel Ratio",
 	units: "Units",
 	libraryMode: "Library Mode",
 	min: "Min",
@@ -466,7 +467,8 @@ LocaleManager.register(
 	hintAutoClearDepth: "Defines whether the renderer should clear the depth buffer.",
 	hintAutoClearStencil: "Defines whether the renderer should clear the stencil buffer.",
 	hintPhysicallyCorrectLights: "Whether to use physically correct lighting mode.",
-	
+	hintIgnorePixelRatio: "Ignore the device pixel ratio rendering image. May be required in some devices for correct image display.",
+
 	// Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",
 	alreadyUpdated: "nunuStudio already up to date.",

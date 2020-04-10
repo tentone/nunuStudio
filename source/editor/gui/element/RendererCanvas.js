@@ -246,7 +246,7 @@ RendererCanvas.prototype.forceContextLoss = function()
 RendererCanvas.prototype.resizeCanvas = function()
 {
 	this.resolution.copy(this.size);
-	this.resolution.multiplyScalar(window.devicePixelRatio);
+	this.resolution.multiplyScalar(Editor.getPixelRatio());
 
 	this.canvas.width = this.resolution.x;
 	this.canvas.height = this.resolution.y;

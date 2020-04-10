@@ -48,7 +48,8 @@ Settings.prototype.loadDefault = function()
 		showUUID: false,
 		showType: true,
 		immediateMode: false,
-		historySize: 20
+		historySize: 20,
+		ignorePixelRatio: false,
 	};
 
 	// Units

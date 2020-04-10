@@ -364,6 +364,17 @@ Editor.unselectObject = function(object)
 };
 
 /**
+ * Get device pixel ratio based on the editor configuration.
+ *
+ * @method getPixelRatio
+ * @return {number} Device pixel ratio.
+ */
+Editor.getPixelRatio = function()
+{
+	return Editor.settings.general.ignorePixelRatio ? 1.0 : window.devicePixelRatio;
+};
+
+/**
  * Check if a object is selected.
  * 
  * @method isSelected
