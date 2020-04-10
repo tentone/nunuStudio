@@ -85,8 +85,11 @@ function SceneEditor(parent, closeable, container, index)
 					material.name = texture.name;
 				}
 
-				
-				Editor.addAction(new ChangeAction(object, "material", material));
+				Editor.addAction(new ActionBundle(
+				[
+					new AddResourceAction(material, Editor.program, "materials"), 
+					new ChangeAction(object, "material", material)
+				]));
 			}
 
 			// Dragged file
