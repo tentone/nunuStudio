@@ -194,7 +194,7 @@ Editor.exportWebProject = function(dir)
  */
 Editor.exportWebProjectZip = function(fname)
 {
-	var zip = new JSZip3();
+	var zip = new JSZip();
 	zip.file("index.html", FileSystem.readFile(Global.RUNTIME_PATH + "index.html"));
 	zip.file("nunu.min.js", FileSystem.readFile("nunu.min.js"));
 	

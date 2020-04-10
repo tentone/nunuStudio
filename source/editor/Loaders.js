@@ -383,16 +383,18 @@ Editor.loadModel = function(file, parent)
 		//3MF
 		else if(extension === "3mf")
 		{
-			// TODO <Fix JSZip 2 Support or move to JSZip 3>
 			var reader = new FileReader();
 			reader.onload = function()
 			{
 				try
 				{
 					var loader = new THREE.ThreeMFLoader();
-					var obj = loader.parse(reader.result);
-					Editor.addObject(obj, parent);
-					modal.destroy();
+					loader.parse(reader.result, function(obj)
+					{
+						Editor.addObject(obj, parent);
+						modal.destroy();
+					});
+	
 				}
 				catch(e)
 				{

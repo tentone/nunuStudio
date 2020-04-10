@@ -319,7 +319,6 @@ include("lib/jsblend.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/jszip3.min.js");
-include("lib/jszip2.min.js");
 include("lib/ThreeCSG.js");
 include("lib/tween.js");
 
@@ -587,3 +586,6 @@ include("source/editor/Interface.js");
 include("source/editor/MainMenu.js");
 include("source/editor/Exporters.js");
 include("source/editor/Loaders.js");
+
+// TODO <REMOVE AFTER ITS DONE>
+include("source/3MFLoader.js");
