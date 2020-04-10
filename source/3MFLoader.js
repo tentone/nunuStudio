@@ -154,6 +154,8 @@ THREE.ThreeMFLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 					var relsFileText = THREE.LoaderUtils.decodeText( relsView );
 					rels = parseRelsXml( relsFileText );
 
+					// Amount of async calls that we have to wait for 
+
 					var waiting = modelPartNames.length + 1;
 
 					//

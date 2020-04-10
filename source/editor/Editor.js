@@ -28,6 +28,12 @@ Editor.initialize = function()
 		return false;
 	};
 
+	// Watch for changes in the screen pixel ratio (drag between screens)
+	window.matchMedia("screen and (min-resolution: 2dppx)").addListener(function(e)
+	{
+		Editor.resize();
+	});
+
 	if(Nunu.runningOnDesktop())
 	{
 		var gui = require("nw.gui");
