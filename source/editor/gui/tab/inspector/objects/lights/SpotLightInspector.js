@@ -63,7 +63,7 @@ function SpotLightInspector(parent, object)
 	this.form.nextRow();
 
 	// Shadow
-	this.shadow = new LightShadowFormTemplate(this.form, object.shadow);
+	this.shadow = new LightShadowFormTemplate(this.form, object);
 }
 
 SpotLightInspector.prototype = Object.create(ObjectInspector.prototype);
@@ -76,6 +76,6 @@ SpotLightInspector.prototype.updateInspector = function()
 	this.angle.setValue(this.object.angle);
 	this.penumbra.setValue(this.object.penumbra);
 	this.castShadow.setValue(this.object.castShadow);
-	
-	this.shadow.attach(this.object.shadow);
+
+	this.shadow.attach(this.object);
 };

@@ -18,7 +18,7 @@ function LightShadowFormTemplate(form, object)
 	this.width.size.set(60, 18);
 	this.width.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.mapSize, "width", self.width.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.mapSize, "width", self.width.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.width);
@@ -27,7 +27,7 @@ function LightShadowFormTemplate(form, object)
 	this.height.size.set(60, 18);
 	this.height.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.mapSize, "height", self.height.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.mapSize, "height", self.height.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.height);
@@ -41,13 +41,13 @@ function LightShadowFormTemplate(form, object)
 	}
 
 	// Bias
-	this.form.addText(Locale.bias);
+	this.form.addText(Locale.bias).setAltText(Locale.hintShadowBias);
 	this.bias = new NumberBox(this.form);
 	this.bias.size.set(60, 18);
 	this.bias.setStep(0.0001);
 	this.bias.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "bias", self.bias.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow, "bias", self.bias.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.bias);
@@ -60,7 +60,7 @@ function LightShadowFormTemplate(form, object)
 	this.radius.setStep(0.1);
 	this.radius.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "radius", self.radius.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow, "radius", self.radius.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.radius);
@@ -74,7 +74,7 @@ function LightShadowFormTemplate(form, object)
 	this.cameraNear.setStep(0.1);
 	this.cameraNear.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.camera, "near", self.shadowNear.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "near", self.shadowNear.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraNear);
@@ -87,7 +87,7 @@ function LightShadowFormTemplate(form, object)
 	this.cameraFar.setStep(0.1);
 	this.cameraFar.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.camera, "far", self.shadowFar.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "far", self.shadowFar.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraFar);
@@ -100,7 +100,7 @@ function LightShadowFormTemplate(form, object)
 	this.cameraLeft.setStep(0.1);
 	this.cameraLeft.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.camera, "left", self.shadowLeft.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "left", self.shadowLeft.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraLeft);
@@ -113,7 +113,7 @@ function LightShadowFormTemplate(form, object)
 	this.cameraRight.setStep(0.1);
 	this.cameraRight.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.camera, "right", self.shadowRight.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "right", self.shadowRight.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraRight);
@@ -126,7 +126,7 @@ function LightShadowFormTemplate(form, object)
 	this.cameraTop.setStep(0.1);
 	this.cameraTop.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.camera, "top", self.shadowTop.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "top", self.shadowTop.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraTop);
@@ -139,7 +139,7 @@ function LightShadowFormTemplate(form, object)
 	this.cameraBottom.setStep(0.1);
 	this.cameraBottom.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object.camera, "bottom", self.shadowBottom.getValue()));
+		Editor.addAction(new ChangeAction(self.object.shadow.camera, "bottom", self.shadowBottom.getValue()));
 		self.object.updateShadowMap();
 	});
 	this.form.add(this.cameraBottom);
@@ -150,14 +150,14 @@ LightShadowFormTemplate.prototype = Object.create(FormTemplate.prototype);
 
 LightShadowFormTemplate.prototype.updateValues = function()
 {
-	this.bias.setValue(this.object.bias);
-	this.radius.setValue(this.object.radius);
-	this.width.setValue(this.object.mapSize.width);
-	this.height.setValue(this.object.mapSize.height);
-	this.cameraNear.setValue(this.object.camera.near);
-	this.cameraFar.setValue(this.object.camera.far);
-	this.cameraLeft.setValue(this.object.camera.left);
-	this.cameraRight.setValue(this.object.camera.right);
-	this.cameraTop.setValue(this.object.camera.top);
-	this.cameraBottom.setValue(this.object.camera.bottom);
+	this.bias.setValue(this.object.shadow.bias);
+	this.radius.setValue(this.object.shadow.radius);
+	this.width.setValue(this.object.shadow.mapSize.width);
+	this.height.setValue(this.object.shadow.mapSize.height);
+	this.cameraNear.setValue(this.object.shadow.camera.near);
+	this.cameraFar.setValue(this.object.shadow.camera.far);
+	this.cameraLeft.setValue(this.object.shadow.camera.left);
+	this.cameraRight.setValue(this.object.shadow.camera.right);
+	this.cameraTop.setValue(this.object.shadow.camera.top);
+	this.cameraBottom.setValue(this.object.shadow.camera.bottom);
 };

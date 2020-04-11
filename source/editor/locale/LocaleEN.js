@@ -469,6 +469,7 @@ LocaleManager.register(
 	hintAutoClearStencil: "Defines whether the renderer should clear the stencil buffer.",
 	hintPhysicallyCorrectLights: "Whether to use physically correct lighting mode.",
 	hintIgnorePixelRatio: "Ignore the device pixel ratio rendering image. May be required in some devices for correct image display.",
+	hintShadowBias: "How much to add or subtract from the normalized shadow depth. May help reduce artefacts",
 
 	// Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",
