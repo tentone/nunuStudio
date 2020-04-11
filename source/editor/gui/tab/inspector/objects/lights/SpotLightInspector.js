@@ -62,58 +62,8 @@ function SpotLightInspector(parent, object)
 	this.form.add(this.castShadow);
 	this.form.nextRow();
 
-	// Shadow resolution
-	this.form.addText(Locale.resolution);
-	this.shadowWidth = new DropdownList(this.form);
-	this.shadowWidth.size.set(60, 18);
-	this.shadowWidth.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object.shadow.mapSize, "width", self.shadowWidth.getValue()));
-		self.object.updateShadowMap();
-	});
-	this.form.add(this.shadowWidth);
-	this.form.addText("x", true);
-	this.shadowHeight = new DropdownList(this.form);
-	this.shadowHeight.size.set(60, 18);
-	this.shadowHeight.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object.shadow.mapSize, "height", self.shadowHeight.getValue()));
-		self.object.updateShadowMap();
-	});
-	this.form.add(this.shadowHeight);
-	this.form.nextRow();
-	for(var i = 5; i < 13; i++)
-	{
-		var size = Math.pow(2, i);
-		this.shadowWidth.addValue(size.toString(), size);
-		this.shadowHeight.addValue(size.toString(), size);
-	}
-
-	// Shadowmap camera near
-	this.form.addText(Locale.near);
-	this.shadowNear = new NumberBox(this.form);
-	this.shadowNear.size.set(60, 18);
-	this.shadowNear.setStep(0.1);
-	this.shadowNear.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object.shadow.camera, "near", self.shadowNear.getValue()));
-		self.object.updateShadowMap();
-	});
-	this.form.add(this.shadowNear);
-	this.form.nextRow();
-	
-	// Shadowmap camera far
-	this.form.addText(Locale.far);
-	this.shadowFar = new NumberBox(this.form);
-	this.shadowFar.size.set(60, 18);
-	this.shadowFar.setStep(0.1);
-	this.shadowFar.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object.shadow.camera, "far", self.shadowFar.getValue()));
-		self.object.updateShadowMap();
-	});
-	this.form.add(this.shadowFar);
-	this.form.nextRow();
+	// Shadow
+	this.shadow = new LightShadowFormTemplate(this.form, object.shadow);
 }
 
 SpotLightInspector.prototype = Object.create(ObjectInspector.prototype);
@@ -125,10 +75,7 @@ SpotLightInspector.prototype.updateInspector = function()
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 	this.angle.setValue(this.object.angle);
 	this.penumbra.setValue(this.object.penumbra);
-	
 	this.castShadow.setValue(this.object.castShadow);
-	this.shadowWidth.setValue(this.object.shadow.mapSize.width);
-	this.shadowHeight.setValue(this.object.shadow.mapSize.height);
-	this.shadowNear.setValue(this.object.shadow.camera.near);
-	this.shadowFar.setValue(this.object.shadow.camera.far);
+	
+	this.shadow.attach(this.object.shadow);
 };
