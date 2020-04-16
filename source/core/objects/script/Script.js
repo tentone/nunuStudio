@@ -1,33 +1,9 @@
 /**
  * Script objects are used to control other objects present in the scene.
- * 
- * It can access and change every object in the program and supports some events
- *  - initialize
- *    - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.
- *  - update(delta)
- *    - Called on every frame after rendering
- *  - dispose
- *    - Called when disposing the program
- *  - onMouseOver(intersections)
- *    - Called on every frame if mouse is on top of one of the script children
- *    - Receives an intersections array as argument.
- *  - onResize(x, y)
- *    - Called every time the window is resized
- *    - Receives width and height as parameters
- *  - onAppData(data)
- *    - Called when receiving data sent by the host website
- * 
- * Code written inside scripts have access to the following attributes:
- *  - scene
- *  - program
- *  - self
- *    - Same as this reference but global in the script scope
- *  - Keyboard
- *  - Mouse
  *
- * There is also access to the following functions
- *  - include
- *    - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations
+ * These scripts can access everything inside of the program where they are running they should be used to control logic aspect of the application.
+ *
+ * Its possible to extend these scripts by using libraries that can be imported using the include() function provided. Libraries can be stored locally on the project or loaded from remote sources.
  * 
  * @class Script
  * @extends {Object}
@@ -44,6 +20,34 @@ function Script(code, mode)
 	/**
 	 * Javascript code attached to the script.
 	 *
+	 * It can access and change every object in the program and supports some events
+	 *  - initialize
+	 *    - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.
+	 *  - update(delta)
+	 *    - Called on every frame after rendering
+	 *  - dispose
+	 *    - Called when disposing the program
+	 *  - onMouseOver(intersections)
+	 *    - Called on every frame if mouse is on top of one of the script children
+	 *    - Receives an intersections array as argument.
+	 *  - onResize(x, y)
+	 *    - Called every time the window is resized
+	 *    - Receives width and height as parameters
+	 *  - onAppData(data)
+	 *    - Called when receiving data sent by the host website
+	 * 
+	 * Code written inside scripts have access to the following attributes:
+	 *  - scene
+	 *  - program
+	 *  - self
+	 *    - Same as this reference but global in the script scope
+	 *  - Keyboard
+	 *  - Mouse
+	 *
+	 * There is also access to the following functions
+	 *  - include
+	 *    - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations. The access to this method may be restricted depeding on the include mode 
+	 * 
 	 * @property code
 	 * @type {string}
 	 */
@@ -52,7 +56,13 @@ function Script(code, mode)
 	/**
 	 * Mode indicates how to include external javascripts files into the script.
 	 *
-	 * Can be Script.APPEND, Script.EVALUATE or Script.INCLUDE.
+	 * Can be APPEND, EVALUATE or INCLUDE.
+	 *
+	 * APPEND mode with append the library code to the script code, when running in this mode the include method cannot be used during runtime
+	 *
+	 * EVALUATE node with evaluate the library code during runtime, include method may still be used.
+	 *
+	 * INCLUDE mode will include the file as a global script, these libraries are not unloaded after the script or application is terminated.
 	 *
 	 * @property mode
 	 * @type {number}
@@ -62,15 +72,17 @@ function Script(code, mode)
 	/**
 	 * Compiled function used during runtime.
 	 *
+	 * This varible gets created using the compileCode() function called automatically on initalization.
+	 *
 	 * @attribute script
 	 * @type {Function}
 	 */
 	this.script = {};
 
 	/**
-	 * Pointer to the parent program.
+	 * Reference to the program object.
 	 *
-	 * Used access program resources easier.
+	 * Can be used to access other scenes, get resources and objects.
 	 *
 	 * @property program
 	 * @type {Program}
@@ -78,7 +90,9 @@ function Script(code, mode)
 	this.program = null;
 
 	/**
-	 * Pointer to the parent scene.
+	 * Reference to the scene where the script is placed.
+	 *
+	 * Can be used to interact with other objects.
 	 *
 	 * @property scene
 	 * @type {Scene}
@@ -314,10 +328,10 @@ Script.prototype.appData = function(data)
 };
 
 /**
- * Set script code.
+ * Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.
  * 
  * Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.
- * 
+ *
  * @method compileCode
  * @param {string} code
  * @param {Function} onReady Funtion called when the code is ready.
@@ -347,12 +361,28 @@ Script.prototype.compileCode = function(code, onReady)
 
 			for(var i = 0; i < libs.length; i++)
 			{
-				code = this.program.getResourceByName(libs[i]).data + "\n" + code;
+				var libCode = this.program.getResourceByName(libs[i]);
+				if(libCode === null)
+				{
+					libCode = FileSystem.readFile(libs[i], true);
+					if(libCode !== null)
+					{
+						code = libCode + "\n" + code;
+					}
+					else
+					{
+						throw new Error("Script include() library " + libs[i] + " not found.");
+					}
+				}
+				else
+				{
+					code = libCode.data + "\n" + code;
+				}
 			}
 
 			code += "\nfunction include(name)\
 			{\
-				console.warn(\"nunuStudio: Script running in append mode \" + name);\
+				console.warn(\"nunuStudio: Script running in append mode, \" + name + \" cannot be included in runtime.\");\
 			}";
 		}
 		// Declare include method
@@ -361,13 +391,21 @@ Script.prototype.compileCode = function(code, onReady)
 			code += "\nfunction include(name)\
 			{\
 				var text = program.getResourceByName(name);\
-				if(text !== null)\
+				if(text === null)\
 				{\
-					new Function(text.data).call(this);\
+					text = FileSystem.readFile(name, true);\
+					if(text !== null)\
+					{\
+						new Function(text).call(this);\
+					}\
+					else\
+					{\
+						console.warn(\"nunuStudio: Javascript file \" + name + \" not found.\");\
+					}\
 				}\
 				else\
 				{\
-					console.warn(\"nunuStudio: Javascript file \" + name + \" not found in resources\");\
+					new Function(text.data).call(this);\
 				}\
 			}";
 		}
@@ -377,28 +415,53 @@ Script.prototype.compileCode = function(code, onReady)
 			var libs = Script.getIncludes(code);	
 			code = Script.removeIncludes(code);
 
-			var fileCounter = 0;
+			var libsLoaded = 0;
+			var urls = [];
 
 			for(var i = 0; i < libs.length; i++)
 			{
-				var blob = new Blob([this.program.getResourceByName(libs[i]).data], {type:"text/plain"});
-				var url = URL.createObjectURL(blob);
-
-				var js = document.createElement("script");
-				js.type = "text/javascript";
-				js.async = false;
-				js.src = url;
-				js.onload = function()
+				var resource = this.program.getResourceByName(libs[i]);
+				if(resource !== null)
 				{
-					fileCounter++;
-
-					if(fileCounter === libs.length)
+					var blob = new Blob([resource.data], {type:"text/plain"});
+					urls.push(URL.createObjectURL(blob));
+				}
+				else
+				{
+					// Read file content and loade locally to overcome CORS JS script issues.
+					var text = FileSystem.readFile(libs[i], true);
+					if(text !== null)
 					{
-						onReady();
+						var blob = new Blob([text], {type:"text/plain"});
+						urls.push(URL.createObjectURL(blob));
 					}
-				};
-				js.onerror = js.onload;
-				document.body.appendChild(js);
+				}
+			}
+
+			if(urls.length > 0)
+			{
+				for(var i = 0; i < urls.length; i++)
+				{
+					var js = document.createElement("script");
+					js.type = "text/javascript";
+					js.async = true;
+					js.src = url;
+					js.onload = function()
+					{
+						libsLoaded++;
+
+						if(libsLoaded === urls.length)
+						{
+							onReady();
+						}
+					};
+					js.onerror = js.onload;
+					document.body.appendChild(js);
+				}
+			}
+			else
+			{
+				onReady();
 			}
 		}
 
