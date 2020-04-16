@@ -20,6 +20,18 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.clearcoat);
 	this.form.nextRow();
 
+	// Clear coat map
+	this.form.addText(Locale.clearcoatMap);
+	this.clearcoatMap = new TextureForm(this.form);
+	this.clearcoatMap.size.set(0, 100);
+	this.clearcoatMap.setOnChange(function(file)
+	{
+		Editor.addAction(new ChangeAction(self.material, "clearcoatMap", self.clearcoatMap.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.clearcoatMap);
+	this.form.nextRow();
+
 	// Clear coat roughness
 	this.form.addText(Locale.clearcoatRoughness);
 	this.clearcoatRoughness = new Slider(this.form);
@@ -32,6 +44,18 @@ function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.clearcoatRoughness);
+	this.form.nextRow();
+
+	// Clear coat roughness map
+	this.form.addText(Locale.clearcoatRoughnessMap);
+	this.clearcoatRoughnessMap = new TextureForm(this.form);
+	this.clearcoatRoughnessMap.size.set(0, 100);
+	this.clearcoatRoughnessMap.setOnChange(function(file)
+	{
+		Editor.addAction(new ChangeAction(self.material, "clearcoatRoughnessMap", self.clearcoatRoughnessMap.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.clearcoatRoughnessMap);
 	this.form.nextRow();
 
 	// Reflectivity
@@ -98,4 +122,9 @@ MeshPhysicalMaterialEditor.prototype.attach = function(material, asset)
 	this.clearcoat.setValue(material.clearcoat);
 	this.clearcoatRoughness.setValue(material.clearcoatRoughness);
 	this.reflectivity.setValue(material.reflectivity);
+	this.transparency.setValue(material.transparency);
+	this.clearcoatNormalMap.setValue(material.clearcoatNormalMap);
+	this.clearcoatNormalScale.setValue(material.clearcoatNormalScale);
+	this.clearcoatMap.setValue(material.clearcoatMap);
+	this.clearcoatRoughnessMap.setValue(material.clearcoatRoughnessMap);
 };

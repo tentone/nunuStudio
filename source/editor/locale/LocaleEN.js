@@ -215,6 +215,8 @@ LocaleManager.register(
 	bias: "Bias",
 	refraction: "Refraction",
 	morphTargets: "Morph Targets",
+	clearcoatMap: "Clear Coat Map",
+	clearcoatRoughnessMap:  "Clear Coat Roughness Map",
 	textureMap: "Texture Map",
 	specularMap: "Specular Map",
 	bumpMap: "Bump Map",
