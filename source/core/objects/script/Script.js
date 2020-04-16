@@ -435,6 +435,10 @@ Script.prototype.compileCode = function(code, onReady)
 						var blob = new Blob([text], {type:"text/plain"});
 						urls.push(URL.createObjectURL(blob));
 					}
+					else
+					{
+						throw new Error("Script include() library " + libs[i] + " not found.");
+					}
 				}
 			}
 
