@@ -1367,7 +1367,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update(delta)\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations"
+            "description": "Script objects are used to control other objects present in the scene.\n\nThese scripts can access everything inside of the program where they are running they should be used to control logic aspect of the application.\n\nIts possible to extend these scripts by using libraries that can be imported using the include() function provided. Libraries can be stored locally on the project or loaded from remote sources."
         },
         "Animations": {
             "name": "Animations",
@@ -2849,7 +2849,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update(delta)\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations",
+            "description": "Script objects are used to control other objects present in the scene.\n\nThese scripts can access everything inside of the program where they are running they should be used to control logic aspect of the application.\n\nIts possible to extend these scripts by using libraries that can be imported using the include() function provided. Libraries can be stored locally on the project or loaded from remote sources.",
             "extends": "{Object}",
             "params": [
                 {
@@ -12061,8 +12061,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 44,
-            "description": "Javascript code attached to the script.",
+            "line": 20,
+            "description": "Javascript code attached to the script.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update(delta)\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations. The access to this method may be restricted depeding on the include mode",
             "itemtype": "property",
             "name": "code",
             "type": "{string}",
@@ -12071,8 +12071,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 52,
-            "description": "Mode indicates how to include external javascripts files into the script.\n\nCan be Script.APPEND, Script.EVALUATE or Script.INCLUDE.",
+            "line": 56,
+            "description": "Mode indicates how to include external javascripts files into the script.\n\nCan be APPEND, EVALUATE or INCLUDE.\n\nAPPEND mode with append the library code to the script code, when running in this mode the include method cannot be used during runtime\n\nEVALUATE node with evaluate the library code during runtime, include method may still be used.\n\nINCLUDE mode will include the file as a global script, these libraries are not unloaded after the script or application is terminated.",
             "itemtype": "property",
             "name": "mode",
             "type": "{number}",
@@ -12081,8 +12081,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 62,
-            "description": "Compiled function used during runtime.",
+            "line": 72,
+            "description": "Compiled function used during runtime.\n\nThis varible gets created using the compileCode() function called automatically on initalization.",
             "itemtype": "attribute",
             "name": "script",
             "type": "{Function}",
@@ -12091,8 +12091,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 70,
-            "description": "Pointer to the parent program.\n\nUsed access program resources easier.",
+            "line": 82,
+            "description": "Reference to the program object.\n\nCan be used to access other scenes, get resources and objects.",
             "itemtype": "property",
             "name": "program",
             "type": "{Program}",
@@ -12101,8 +12101,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 80,
-            "description": "Pointer to the parent scene.",
+            "line": 92,
+            "description": "Reference to the scene where the script is placed.\n\nCan be used to interact with other objects.",
             "itemtype": "property",
             "name": "scene",
             "type": "{Scene}",
@@ -12111,7 +12111,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 91,
+            "line": 105,
             "description": "Regular expression to obtain all the include calls placed inside of scripts.",
             "itemtype": "attribute",
             "name": "includeRegex",
@@ -12121,7 +12121,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 101,
+            "line": 115,
             "description": "Default script code used when creating a new Script.",
             "itemtype": "attribute",
             "name": "DEFAULT",
@@ -12131,7 +12131,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 109,
+            "line": 123,
             "description": "List of default methods that can be implemented by scripts.",
             "itemtype": "attribute",
             "name": "METHODS",
@@ -12141,7 +12141,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 117,
+            "line": 131,
             "description": "Append libraries on initialization.\n\nLibraries are appended to the script code on initialization.",
             "itemtype": "attribute",
             "name": "APPEND",
@@ -12151,7 +12151,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 127,
+            "line": 141,
             "description": "Evaluate libs during runtime.\n\nThis allows to load new libs during runtime, but its not possible to access private statements.",
             "itemtype": "attribute",
             "name": "EVALUATE",
@@ -12161,7 +12161,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 137,
+            "line": 151,
             "description": "Include file into the document.body.\n\nThis imports the JS file as any other file included into a <script> tag.",
             "itemtype": "attribute",
             "name": "INCLUDE",
@@ -12171,7 +12171,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 147,
+            "line": 161,
             "description": "Auxiliar function to include javascript source file from resource into the script.\n\nThe imported source is evaluated and loaded in the context of the script.\n\nGlobal declarations need to be cleaned using the dipose method.",
             "itemtype": "method",
             "name": "include",
@@ -12187,7 +12187,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 158,
+            "line": 172,
             "description": "Get includes from the code.\n\nUsed to extract includes from code when loading libraries in APPEND mode.",
             "static": 1,
             "itemtype": "method",
@@ -12204,7 +12204,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 192,
+            "line": 206,
             "description": "Remove includes from code.\n\nUsed to remove include statements when initializing code in APPEND mode.",
             "static": 1,
             "itemtype": "method",
@@ -12221,7 +12221,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 206,
+            "line": 220,
             "description": "Initialize script. Automatically called by the runtime.\n\nCompiles the script code and calls the script initialize method if it exists after the code is compiled.",
             "itemtype": "method",
             "name": "initialize",
@@ -12230,7 +12230,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 242,
+            "line": 256,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -12239,7 +12239,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 268,
+            "line": 282,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -12248,7 +12248,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 285,
+            "line": 299,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -12257,7 +12257,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 300,
+            "line": 314,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -12273,8 +12273,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 316,
-            "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
+            "line": 330,
+            "description": "Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "compileCode",
             "params": [

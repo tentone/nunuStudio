@@ -225,61 +225,8 @@
 						
 						<div class="box intro">
 							<p>Script objects are used to control other objects present in the scene.</p>
-						<p>It can access and change every object in the program and supports some events</p>
-						<ul>
-						<li>initialize
-						<ul>
-						<li>Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.</li>
-						</ul>
-						</li>
-						<li>update(delta)
-						<ul>
-						<li>Called on every frame after rendering</li>
-						</ul>
-						</li>
-						<li>dispose
-						<ul>
-						<li>Called when disposing the program</li>
-						</ul>
-						</li>
-						<li>onMouseOver(intersections)
-						<ul>
-						<li>Called on every frame if mouse is on top of one of the script children</li>
-						<li>Receives an intersections array as argument.</li>
-						</ul>
-						</li>
-						<li>onResize(x, y)
-						<ul>
-						<li>Called every time the window is resized</li>
-						<li>Receives width and height as parameters</li>
-						</ul>
-						</li>
-						<li>onAppData(data)
-						<ul>
-						<li>Called when receiving data sent by the host website</li>
-						</ul>
-						</li>
-						</ul>
-						<p>Code written inside scripts have access to the following attributes:</p>
-						<ul>
-						<li>scene</li>
-						<li>program</li>
-						<li>self
-						<ul>
-						<li>Same as this reference but global in the script scope</li>
-						</ul>
-						</li>
-						<li>Keyboard</li>
-						<li>Mouse</li>
-						</ul>
-						<p>There is also access to the following functions</p>
-						<ul>
-						<li>include
-						<ul>
-						<li>Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations</li>
-						</ul>
-						</li>
-						</ul>
+						<p>These scripts can access everything inside of the program where they are running they should be used to control logic aspect of the application.</p>
+						<p>Its possible to extend these scripts by using libraries that can be imported using the include() function provided. Libraries can be stored locally on the project or loaded from remote sources.</p>
 						
 						</div>
 						
@@ -479,7 +426,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Set script code.</p>
+													<p>Prepare the script code to be run. The script can be prepared using different methods depending on the include mode defined.</p>
 											<p>Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.</p>
 											
 												</div>
@@ -811,6 +758,61 @@
 											
 												<div class="description">
 													<p>Javascript code attached to the script.</p>
+											<p>It can access and change every object in the program and supports some events</p>
+											<ul>
+											<li>initialize
+											<ul>
+											<li>Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.</li>
+											</ul>
+											</li>
+											<li>update(delta)
+											<ul>
+											<li>Called on every frame after rendering</li>
+											</ul>
+											</li>
+											<li>dispose
+											<ul>
+											<li>Called when disposing the program</li>
+											</ul>
+											</li>
+											<li>onMouseOver(intersections)
+											<ul>
+											<li>Called on every frame if mouse is on top of one of the script children</li>
+											<li>Receives an intersections array as argument.</li>
+											</ul>
+											</li>
+											<li>onResize(x, y)
+											<ul>
+											<li>Called every time the window is resized</li>
+											<li>Receives width and height as parameters</li>
+											</ul>
+											</li>
+											<li>onAppData(data)
+											<ul>
+											<li>Called when receiving data sent by the host website</li>
+											</ul>
+											</li>
+											</ul>
+											<p>Code written inside scripts have access to the following attributes:</p>
+											<ul>
+											<li>scene</li>
+											<li>program</li>
+											<li>self
+											<ul>
+											<li>Same as this reference but global in the script scope</li>
+											</ul>
+											</li>
+											<li>Keyboard</li>
+											<li>Mouse</li>
+											</ul>
+											<p>There is also access to the following functions</p>
+											<ul>
+											<li>include
+											<ul>
+											<li>Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations. The access to this method may be restricted depeding on the include mode</li>
+											</ul>
+											</li>
+											</ul>
 											
 												</div>
 											
@@ -834,7 +836,10 @@
 											
 												<div class="description">
 													<p>Mode indicates how to include external javascripts files into the script.</p>
-											<p>Can be Script.APPEND, Script.EVALUATE or Script.INCLUDE.</p>
+											<p>Can be APPEND, EVALUATE or INCLUDE.</p>
+											<p>APPEND mode with append the library code to the script code, when running in this mode the include method cannot be used during runtime</p>
+											<p>EVALUATE node with evaluate the library code during runtime, include method may still be used.</p>
+											<p>INCLUDE mode will include the file as a global script, these libraries are not unloaded after the script or application is terminated.</p>
 											
 												</div>
 											
@@ -857,8 +862,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Pointer to the parent program.</p>
-											<p>Used access program resources easier.</p>
+													<p>Reference to the program object.</p>
+											<p>Can be used to access other scenes, get resources and objects.</p>
 											
 												</div>
 											
@@ -881,7 +886,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Pointer to the parent scene.</p>
+													<p>Reference to the scene where the script is placed.</p>
+											<p>Can be used to interact with other objects.</p>
 											
 												</div>
 											
@@ -1079,6 +1085,7 @@
 											
 												<div class="description">
 													<p>Compiled function used during runtime.</p>
+											<p>This varible gets created using the compileCode() function called automatically on initalization.</p>
 											
 												</div>
 											

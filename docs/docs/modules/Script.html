@@ -220,61 +220,8 @@
 						
 						<div class="box intro">
 							<p>Script objects are used to control other objects present in the scene.</p>
-						<p>It can access and change every object in the program and supports some events</p>
-						<ul>
-						<li>initialize
-						<ul>
-						<li>Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.</li>
-						</ul>
-						</li>
-						<li>update(delta)
-						<ul>
-						<li>Called on every frame after rendering</li>
-						</ul>
-						</li>
-						<li>dispose
-						<ul>
-						<li>Called when disposing the program</li>
-						</ul>
-						</li>
-						<li>onMouseOver(intersections)
-						<ul>
-						<li>Called on every frame if mouse is on top of one of the script children</li>
-						<li>Receives an intersections array as argument.</li>
-						</ul>
-						</li>
-						<li>onResize(x, y)
-						<ul>
-						<li>Called every time the window is resized</li>
-						<li>Receives width and height as parameters</li>
-						</ul>
-						</li>
-						<li>onAppData(data)
-						<ul>
-						<li>Called when receiving data sent by the host website</li>
-						</ul>
-						</li>
-						</ul>
-						<p>Code written inside scripts have access to the following attributes:</p>
-						<ul>
-						<li>scene</li>
-						<li>program</li>
-						<li>self
-						<ul>
-						<li>Same as this reference but global in the script scope</li>
-						</ul>
-						</li>
-						<li>Keyboard</li>
-						<li>Mouse</li>
-						</ul>
-						<p>There is also access to the following functions</p>
-						<ul>
-						<li>include
-						<ul>
-						<li>Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations</li>
-						</ul>
-						</li>
-						</ul>
+						<p>These scripts can access everything inside of the program where they are running they should be used to control logic aspect of the application.</p>
+						<p>Its possible to extend these scripts by using libraries that can be imported using the include() function provided. Libraries can be stored locally on the project or loaded from remote sources.</p>
 						
 						</div>
 						

@@ -36,10 +36,10 @@
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
 	"dependencies": {
-		"cordova": "~9.0.0",
-		"nwjs-builder-phoenix": "~1.15.0"
+		"cordova": "~9.0.0"
 	},
 	"devDependencies": {
+		"nwjs-builder-phoenix": "~1.15.0",
 		"http-server": "0.11.1",
 		"yuidocjs": "~0.10.2",
 		"google-closure-compiler": "^20190301.0.0"
@@ -62,7 +62,7 @@
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"ffmpegIntegration": false,
 		"packed": false,
-		"nwVersion": "0.44.0",
+		"nwVersion": "0.45.2",
 		"nwFlavor": "sdk",
 		"targets": [
 			"zip",
