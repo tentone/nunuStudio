@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Static class that contains a listage of the CodeMirror themes.
+ * Static class that contains a listage of the CodeMirror themes available in the platform.
  * 
  * @static
  * @class CodemirrorThemes

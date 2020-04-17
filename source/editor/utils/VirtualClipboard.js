@@ -5,7 +5,7 @@
  *
  * When copying data also copies data to the system clipboard.
  *
- * @class virtualClipboard
+ * @class VirtualClipboard
  */
 function VirtualClipboard()
 {

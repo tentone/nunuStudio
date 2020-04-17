@@ -3,7 +3,7 @@
 /**
  * The intepolator is used to interpolate values between ranges for a period of time.
  *
- * The animation is self contained using async callbacks.
+ * The animation is self contained using async callbacks. Internally uses the TWEEN animation library.
  *
  * @class TweenAnimation
  * @param {Object} object Object that contains the attribute.
@@ -15,7 +15,6 @@
 function TweenAnimation(object, attribute, target, time, onUpdate)
 {
 	var isVectorial = TweenAnimation.isVetorial(object[attribute]);
-
 	var self = this;
 
 	/**

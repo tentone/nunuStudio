@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Initialize the editor code, creates all GUI elements, loads configuration data, starts all the event lsiteners required.
+ *
+ * Called when the application starts.
+ *
+ * @static
+ * @method initialize
+ */
 Editor.initialize = function()
 {
 	// Check WebGL Support
@@ -1164,6 +1172,14 @@ Editor.updateNunu = function(silent)
 	}
 };
 
+/**
+ * Get the renderer configuration used for the editor elements.
+ *
+ * Is defined in the settings tab and can be overrided by the project settings.
+ *
+ * @static
+ * @method getRendererConfig
+ */
 Editor.getRendererConfig = function()
 {
 	return Editor.settings.render.followProject ? Editor.program.rendererConfig : Editor.settings.render;
@@ -1172,6 +1188,7 @@ Editor.getRendererConfig = function()
 /**
  * Exit the editor and close all windows.
  *
+ * @static
  * @method exit.
  */
 Editor.exit = function()

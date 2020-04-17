@@ -1,8 +1,22 @@
 "use strict";
 
+/**
+ * Stores and manages icons of the object types available in the platform.
+ *
+ * @static
+ * @class ObjectIcons
+ */
 var ObjectIcons = {};
 
+/**
+ * Path of to the base icon files directory.
+ *
+ * @static
+ * @attribute path
+ * @type {string}
+ */
 ObjectIcons.path = "source/files/icons/";
+
 ObjectIcons.default = ObjectIcons.path + "misc/question.png";
 ObjectIcons.locked = ObjectIcons.path + "misc/padlock.png";
 
@@ -63,7 +77,13 @@ ObjectIcons.icons = new Map([
 	["FirstPersonControls", ObjectIcons.path + "misc/crosshair.png"]
 ]);
 
-// Get icon path from object type
+/**
+ * Get icon path from object type, if no icon available a default icon is returned.
+ * 
+ * @static
+ * @method get
+ * @param {string} Object type.
+ */
 ObjectIcons.get = function(type)
 {
 	if(ObjectIcons.icons.has(type))
