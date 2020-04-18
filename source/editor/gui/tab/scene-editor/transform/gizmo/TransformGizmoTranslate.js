@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Gizmo used to change position of an object. Can be used with Object3D objects.
+ *
+ * @class TransformGizmoTranslate
+ * @extends {TransformGizmo}
+ */
 function TransformGizmoTranslate()
 {
 	var arrowGeometry = new THREE.Geometry();

@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * A transform gizmo is a object used to transform a property of an entity.
+ *
+ * Should be used as basis for other transform gizmos.
+ *
+ * @class TransformGizmo
+ */
 function TransformGizmo()
 {
 	THREE.Object3D.call(this);

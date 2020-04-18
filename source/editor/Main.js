@@ -406,8 +406,8 @@ include("source/editor/gui/tab/scene-editor/SceneEditor.js");
 include("source/editor/gui/tab/scene-editor/sidebar/SideBar.js");
 
 include("source/editor/gui/tab/scene-editor/transform/TransformControls.js");
-include("source/editor/gui/tab/scene-editor/transform/material/GizmoMaterial.js");
-include("source/editor/gui/tab/scene-editor/transform/material/GizmoLineMaterial.js");
+include("source/editor/gui/tab/scene-editor/transform/GizmoMaterial.js");
+include("source/editor/gui/tab/scene-editor/transform/GizmoLineMaterial.js");
 include("source/editor/gui/tab/scene-editor/transform/gizmo/TransformGizmo.js");
 include("source/editor/gui/tab/scene-editor/transform/gizmo/TransformGizmoRotate.js");
 include("source/editor/gui/tab/scene-editor/transform/gizmo/TransformGizmoScale.js");

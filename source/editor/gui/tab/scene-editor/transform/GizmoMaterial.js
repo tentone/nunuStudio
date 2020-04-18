@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Basic material to represent the solid portion of a gizmo.
+ *
+ * @class GizmoMaterial
+ * @extends {THREE.MeshBasicMaterial}
+ */
 function GizmoMaterial(parameters)
 {
 	THREE.MeshBasicMaterial.call(this);
@@ -17,6 +23,12 @@ function GizmoMaterial(parameters)
 
 GizmoMaterial.prototype = Object.create(THREE.MeshBasicMaterial.prototype);
 
+/**
+ * Toggle the highlight state of a gizmo material.
+ *
+ * @method highlight
+ * @param {boolean} highlighted
+ */
 GizmoMaterial.prototype.highlight = function(highlighted)
 {
 	if(highlighted)

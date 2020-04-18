@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Basic material to represent the line portions of a gizmo.
+ *
+ * @class GizmoMaterial
+ * @extends {THREE.LineBasicMaterial}
+ */
 function GizmoLineMaterial(parameters)
 {
 	THREE.LineBasicMaterial.call(this);
@@ -17,6 +23,12 @@ function GizmoLineMaterial(parameters)
 
 GizmoLineMaterial.prototype = Object.create(THREE.LineBasicMaterial.prototype);
 
+/**
+ * Toggle the highlight state of a gizmo material.
+ *
+ * @method highlight
+ * @param {boolean} highlighted
+ */
 GizmoLineMaterial.prototype.highlight = function(highlighted)
 {
 	if(highlighted)

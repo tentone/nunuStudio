@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Gizmo used to change rotation of an object. Can be used with Object3D objects.
+ *
+ * @class TransformGizmoRotate
+ * @extends {TransformGizmo}
+ */
 function TransformGizmoRotate()
 {
 	var CircleGeometry = function(radius, facing, arc)

@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Gizmo used to change scale of an object. Can be used with Object3D objects.
+ *
+ * @class TransformGizmoScale
+ * @extends {TransformGizmo}
+ */
 function TransformGizmoScale()
 {
 	var arrowGeometry = new THREE.Geometry();

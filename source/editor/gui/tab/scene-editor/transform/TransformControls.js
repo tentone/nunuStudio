@@ -1,9 +1,9 @@
 "use strict";
 
 /*
- * TranformControls is used to manipulate object in 3D space.
+ * TranformControls is used to manipulate object in 3D space. It can be used to manipulate multiple Object3D instances simultaneously.
  *
- * Can be used to manipulate multiple Object3D instances simultaneously.
+ * The objects are transformed by Gizmos managed by the transform controls object, gizmos may be compatible with multiple types of objects (Object3D, Vector3, etc).
  *
  * @class TransformControls
  * @author arodic (github.com/arodic)
@@ -25,8 +25,30 @@ function TransformControls(camera, canvas, mouse)
 	this.size = 1;
 	this.axis = null;
 
+	/**
+	 * If set true the value set by the transform is always multiple of the snap ratio.
+	 *
+	 * Snap ratios are different for each transform gizmo.
+	 *
+	 * @attribute snap
+	 * @type {boolean}
+	 */
 	this.snap = false;
-	this.translationSnap = 1;
+
+	/**
+	 * Snap ratio applies to translation transform.
+	 *
+	 * @attribute translationSnap
+	 * @type {number}
+	 */
+	this.translationSnap = 1.0;
+
+	/**
+	 * Snap ratio applies to rotation transform.
+	 *
+	 * @attribute rotationSnap
+	 * @type {number}
+	 */
 	this.rotationSnap = 0.1;
 
 	this.mode = TransformControls.TRANSLATE;
@@ -61,9 +83,23 @@ function TransformControls(camera, canvas, mouse)
 	this.lookAtMatrix = new THREE.Matrix4();
 	this.eye = new THREE.Vector3();
 	
+	/**
+	 * View camera position.
+	 *
+	 * @attribute camPosition
+	 * @type {THREE.Vector3}
+	 */
 	this.camPosition = new THREE.Vector3();
+
+	/**
+	 * View camera rotation.
+	 *
+	 * @attribute camRotation
+	 * @type {THREE.Vector3}
+	 */
 	this.camRotation = new THREE.Euler();
 
+	// Temporary variables used for runtime calcs
 	this.tempMatrix = new THREE.Matrix4();
 	this.tempVector = new THREE.Vector3();
 	this.tempQuaternion = new THREE.Quaternion();
@@ -99,38 +135,12 @@ TransformControls.WORLD = "world";
 
 TransformControls.prototype = Object.create(THREE.Object3D.prototype);
 
-TransformControls.prototype.setCanvas = function(canvas)
-{
-	this.canvas = canvas;
-};
-
-TransformControls.prototype.setSize = function(size)
-{
-	this.size = size;
-	this.updatePose();
-};
-
-TransformControls.prototype.setSpace = function(space)
-{
-	this.space = space;
-	this.updatePose();
-};
-
-TransformControls.prototype.setSnap = function(snap)
-{
-	this.snap = snap;
-};
-
-TransformControls.prototype.setTranslationSnap = function(translationSnap)
-{
-	this.translationSnap = translationSnap;
-};
-
-TransformControls.prototype.setRotationSnap = function(rotationSnap)
-{
-	this.rotationSnap = rotationSnap;
-};
-
+/**
+ * Attach a list of objects to the transform controls.
+ *
+ * @method attach
+ * @param {Array} objects Array of objects to be attached.
+ */
 TransformControls.prototype.attach = function(objects)
 {
 	this.objects = [];
@@ -167,12 +177,56 @@ TransformControls.prototype.attach = function(objects)
 	}
 };
 
+/**
+ * Detach/clear all objects attached to the transform controls.
+ * 
+ * @method detach
+ */
 TransformControls.prototype.detach = function()
 {
 	this.objects = [];
 	this.visible = false;
 	this.axis = null;
 };
+
+/**
+ * Set canvas where the scene is being rendered.
+ *
+ * @method setCanvas
+ * @param {DOM} canvas Canvas element.
+ */
+TransformControls.prototype.setCanvas = function(canvas)
+{
+	this.canvas = canvas;
+};
+
+TransformControls.prototype.setSize = function(size)
+{
+	this.size = size;
+	this.updatePose();
+};
+
+TransformControls.prototype.setSpace = function(space)
+{
+	this.space = space;
+	this.updatePose();
+};
+
+TransformControls.prototype.setSnap = function(snap)
+{
+	this.snap = snap;
+};
+
+TransformControls.prototype.setTranslationSnap = function(translationSnap)
+{
+	this.translationSnap = translationSnap;
+};
+
+TransformControls.prototype.setRotationSnap = function(rotationSnap)
+{
+	this.rotationSnap = rotationSnap;
+};
+
 
 TransformControls.prototype.getMode = function()
 {
@@ -633,6 +687,11 @@ TransformControls.prototype.onPointerMove = function()
 	this.updatePose();
 };
 
+/**
+ * Method called when user input button is released.
+ * 
+ * @method onPointerUp
+ */
 TransformControls.prototype.onPointerUp = function()
 {	
 	// Add changes made to the editor history
@@ -688,6 +747,9 @@ TransformControls.prototype.onPointerUp = function()
 	this.onPointerHover();
 };
 
+/**
+ *
+ */
 TransformControls.prototype.intersectObjects = function(objects)
 {
 	var rect = this.canvas.getBoundingClientRect();
