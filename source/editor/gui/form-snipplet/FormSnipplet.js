@@ -3,11 +3,11 @@
 /**
  * A form template can be used to describe a small group of properties of a form that are common to multiple objects.
  *
- * @class FormTemplate
+ * @class FormSnipplet
  * @param {Form} form Base form object to place the template fields.
  * @param {Object} object Object that contains the attributes being edited.
  */
-function FormTemplate(form, object)
+function FormSnipplet(form, object)
 {
 	/**
 	 * Form object to place the GUI elements.
@@ -32,7 +32,7 @@ function FormTemplate(form, object)
  * @method attach
  * @param {Object} object
  */
-FormTemplate.prototype.attach = function(object)
+FormSnipplet.prototype.attach = function(object)
 {
 	this.object = object;
 	this.updateValues();
@@ -43,4 +43,4 @@ FormTemplate.prototype.attach = function(object)
  *
  * @method updateValues
  */
-FormTemplate.prototype.updateValues = function(){};
+FormSnipplet.prototype.updateValues = function(){};

@@ -61,7 +61,7 @@ function PointLightInspector(parent, object)
 	this.form.nextRow();
 
 	// Shadow
-	this.shadow = new LightShadowFormTemplate(this.form, object);
+	this.shadow = new LightShadowFormSnipplet(this.form, object);
 
 }
 

@@ -82,7 +82,7 @@ function OrthographicCameraInspector(parent, object)
 	// Viewport
 	this.form.addText(Locale.viewport);
 	this.form.nextRow();
-	this.viewport = new ViewportFormTemplate(this.form, object);
+	this.viewport = new ViewportFormSnipplet(this.form, object);
 
 	// Order
 	this.form.addText(Locale.renderOrder).setAltText(Locale.hintRenderOrder);

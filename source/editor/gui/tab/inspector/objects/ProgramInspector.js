@@ -87,7 +87,7 @@ function ProgramInspector(parent, object)
 	// Rendering
 	this.form.addText(Locale.rendering);
 	this.form.nextRow();
-	this.rendererConfig = new RendererConfigurationFormTemplate(this.form, object.rendererConfig);
+	this.rendererConfig = new RendererConfigurationFormSnipplet(this.form, object.rendererConfig);
 }
 
 ProgramInspector.prototype = Object.create(ObjectInspector.prototype);

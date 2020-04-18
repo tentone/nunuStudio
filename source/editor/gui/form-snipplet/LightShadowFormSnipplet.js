@@ -3,12 +3,12 @@
 /** 
  * Shadow map configuration form for light objects that emitt shadows.
  *
- * @class LightShadowFormTemplate
- * @extends {FormTemplate}
+ * @class LightShadowFormSnipplet
+ * @extends {FormSnipplet}
  */
-function LightShadowFormTemplate(form, object)
+function LightShadowFormSnipplet(form, object)
 {
-	FormTemplate.call(this, form, object);
+	FormSnipplet.call(this, form, object);
 
 	var self = this;
 	
@@ -146,9 +146,9 @@ function LightShadowFormTemplate(form, object)
 	this.form.nextRow();
 }
 
-LightShadowFormTemplate.prototype = Object.create(FormTemplate.prototype);
+LightShadowFormSnipplet.prototype = Object.create(FormSnipplet.prototype);
 
-LightShadowFormTemplate.prototype.updateValues = function()
+LightShadowFormSnipplet.prototype.updateValues = function()
 {
 	this.bias.setValue(this.object.shadow.bias);
 	this.radius.setValue(this.object.shadow.radius);

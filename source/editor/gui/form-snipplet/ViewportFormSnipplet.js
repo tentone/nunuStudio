@@ -1,14 +1,14 @@
 "use strict";
 
 /** 
- * Viewport object form template.
+ * Viewport object form snipplet, used to edit camera/renderer viewport.
  *
- * @class ViewportFormTemplate
- * @extends {FormTemplate}
+ * @class ViewportFormSnipplet
+ * @extends {FormSnipplet}
  */
-function ViewportFormTemplate(form, object)
+function ViewportFormSnipplet(form, object)
 {
-	FormTemplate.call(this, form, object);
+	FormSnipplet.call(this, form, object);
 
 	var self = this;
 	
@@ -77,9 +77,9 @@ function ViewportFormTemplate(form, object)
 	this.form.nextRow();
 }
 
-ViewportFormTemplate.prototype = Object.create(FormTemplate.prototype);
+ViewportFormSnipplet.prototype = Object.create(FormSnipplet.prototype);
 
-ViewportFormTemplate.prototype.updateValues = function()
+ViewportFormSnipplet.prototype.updateValues = function()
 {
 	this.offset.setValue(this.object.offset);
 	this.sizeBox.setValue(this.object.size);
