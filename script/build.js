@@ -40,6 +40,9 @@ console.log("-------------------------------------------------------------------
 console.log("                                Editor");
 console.log("----------------------------------------------------------------------");
 
+console.log(" Updating version in package.json");
+updateVersion();
+
 console.log(" Reading package.json");
 var packageData = JSON.parse(readFile(SOURCE_PATH + "package.json"));
 
@@ -153,6 +156,19 @@ else
 	console.log("----------------------------------------------------------------------");
 	console.log("                                 Done!");
 	console.log("----------------------------------------------------------------------");
+}
+
+// Update the version of the library in the package.json (update last digit)
+function updateVersion()
+{
+	var data = JSON.parse(readFile(SOURCE_PATH + "package.json"));
+
+	var subversions = data.version.split('.');
+	subversions[1] = (Number.parseInt(subversions[1]) + 1).toString();
+
+	data.version = subversions.join('.');
+
+	writeFile(SOURCE_PATH + "package.json", JSON.stringify(data, null, "\t"));
 }
 
 function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
