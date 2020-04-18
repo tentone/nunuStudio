@@ -13,9 +13,20 @@ function MaterialRenderer()
 	// Camera
 	this.camera = new OrthographicCamera(2.15, 1);
 
-	// Sphere
-	this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16));
-	this.scene.add(this.sphere);
+	// Geometry
+	this.geometry = new THREE.SphereGeometry(1, 16, 16);
+
+	// Mesh
+	this.mesh = new THREE.Mesh(this.geometry);
+	this.scene.add(this.mesh);
+
+	// Points
+	this.points = new THREE.Points(this.geometry);
+	this.scene.add(this.points);
+
+	// Line
+	this.line = new THREE.Line(this.geometry);
+	this.scene.add(this.line);
 
 	// Sprite
 	this.sprite = new THREE.Sprite();
@@ -34,6 +45,13 @@ function MaterialRenderer()
 
 MaterialRenderer.prototype = Object.create(PreviewRenderer.prototype);
 
+/**
+ * Create a DOM element with the material preview render.
+ *
+ * @static
+ * @method generateElement
+ * @param {THREE.Material} material Material to preview.
+ */
 MaterialRenderer.generateElement = function(material)
 {
 	var preview = document.createElement("img");
@@ -57,21 +75,44 @@ MaterialRenderer.render = function(material, onRender)
 
 MaterialRenderer.prototype.render = function(material, onRender)
 {
-	// Set material
 	if(material instanceof THREE.SpriteMaterial)
 	{
-		this.sphere.visible = false;
+		this.mesh.visible = false;
 		this.sprite.visible = true;
+		this.points.visible = false;
+		this.line.visible = false;
 
 		this.sprite.material = material;
+		this.camera.position.set(0, 0, 0.5);
+	}
+	else if(material instanceof THREE.LineBasicMaterial)
+	{
+		this.mesh.visible = false;
+		this.sprite.visible = false;
+		this.points.visible = false;
+		this.line.visible = true;
+
+		this.line.material = material;
+		this.camera.position.set(0, 0, 0.5);
+	}
+	else if(material instanceof THREE.PointsMaterial)
+	{
+		this.mesh.visible = false;
+		this.sprite.visible = false;
+		this.points.visible = true;
+		this.line.visible = false;
+
+		this.points.material = material;
 		this.camera.position.set(0, 0, 0.5);
 	}
 	else
 	{
 		this.sprite.visible = false;
-		this.sphere.visible = true;
+		this.mesh.visible = true;
+		this.points.visible = false;
+		this.line.visible = false;
 
-		this.sphere.material = material;
+		this.mesh.material = material;
 		this.camera.position.set(0, 0, 1.5);
 	}
 

@@ -24,6 +24,13 @@ function TextureRenderer()
 
 TextureRenderer.prototype = Object.create(PreviewRenderer.prototype);
 
+/**
+ * Create a DOM element with the texture preview render.
+ *
+ * @static
+ * @method generateElement
+ * @param {THREE.Texture} texture Texture to preview.
+ */
 TextureRenderer.generateElement = function(texture)
 {
 	var preview = document.createElement("img");
