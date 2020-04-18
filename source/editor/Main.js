@@ -384,10 +384,10 @@ include("source/editor/gui/element/tabs/splittable/TabButtonSplit.js");
 include("source/editor/gui/element/tabs/splittable/TabContainer.js");
 include("source/editor/gui/element/tabs/splittable/TabDualContainer.js");
 
-include("source/editor/gui/form-snipplet/FormSnipplet.js");
-include("source/editor/gui/form-snipplet/LightShadowFormSnipplet.js");
-include("source/editor/gui/form-snipplet/ViewportFormSnipplet.js");
-include("source/editor/gui/form-snipplet/RendererConfigurationFormSnipplet.js");
+include("source/editor/gui/form-snippet/FormSnippet.js");
+include("source/editor/gui/form-snippet/LightShadowFormSnippet.js");
+include("source/editor/gui/form-snippet/ViewportFormSnippet.js");
+include("source/editor/gui/form-snippet/RendererConfigurationFormSnippet.js");
 
 include("source/editor/gui/tab/ConsoleTab.js");
 include("source/editor/gui/tab/CodeEditor.js");

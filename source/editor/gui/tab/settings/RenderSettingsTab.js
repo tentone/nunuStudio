@@ -34,7 +34,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	// Editor rendering quality
 	this.form.addText("Editor Rendering Quality");
 	this.form.nextRow();
-	this.rendererConfiguration = new RendererConfigurationFormSnipplet(this.form, Editor.settings.render);
+	this.rendererConfiguration = new RendererConfigurationFormSnippet(this.form, Editor.settings.render);
 }
 
 RenderSettingsTab.prototype = Object.create(TabElement.prototype);

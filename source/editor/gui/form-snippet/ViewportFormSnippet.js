@@ -1,14 +1,14 @@
 "use strict";
 
 /** 
- * Viewport object form snipplet, used to edit camera/renderer viewport.
+ * Viewport object form snippet, used to edit camera/renderer viewport.
  *
- * @class ViewportFormSnipplet
- * @extends {FormSnipplet}
+ * @class ViewportFormSnippet
+ * @extends {FormSnippet}
  */
-function ViewportFormSnipplet(form, object)
+function ViewportFormSnippet(form, object)
 {
-	FormSnipplet.call(this, form, object);
+	FormSnippet.call(this, form, object);
 
 	var self = this;
 	
@@ -77,9 +77,9 @@ function ViewportFormSnipplet(form, object)
 	this.form.nextRow();
 }
 
-ViewportFormSnipplet.prototype = Object.create(FormSnipplet.prototype);
+ViewportFormSnippet.prototype = Object.create(FormSnippet.prototype);
 
-ViewportFormSnipplet.prototype.updateValues = function()
+ViewportFormSnippet.prototype.updateValues = function()
 {
 	this.offset.setValue(this.object.offset);
 	this.sizeBox.setValue(this.object.size);

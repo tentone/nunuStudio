@@ -5,12 +5,12 @@
  *
  * Contains all rendering related configurations, to be used booth for editor settings and the program object.
  * 
- * @class RendererConfigurationFormSnipplet
- * @extends {FormSnipplet}
+ * @class RendererConfigurationFormSnippet
+ * @extends {FormSnippet}
  */
-function RendererConfigurationFormSnipplet(form, object)
+function RendererConfigurationFormSnippet(form, object)
 {
-	FormSnipplet.call(this, form, object);
+	FormSnippet.call(this, form, object);
 
 	var self = this;
 
@@ -300,9 +300,9 @@ function RendererConfigurationFormSnipplet(form, object)
 	this.form.nextRow();
 }
 
-RendererConfigurationFormSnipplet.prototype = Object.create(FormSnipplet.prototype);
+RendererConfigurationFormSnippet.prototype = Object.create(FormSnippet.prototype);
 
-RendererConfigurationFormSnipplet.prototype.updateValues = function()
+RendererConfigurationFormSnippet.prototype.updateValues = function()
 {
 	this.backend.setValue(this.object.backend);
 	this.autoClear.setValue(this.object.autoClear);

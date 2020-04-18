@@ -70,7 +70,7 @@ function PerspectiveCameraInspector(parent, object)
 	// Viewport
 	this.form.addText(Locale.viewport);
 	this.form.nextRow();
-	this.viewport = new ViewportFormSnipplet(this.form, object);
+	this.viewport = new ViewportFormSnippet(this.form, object);
 	
 	// Order
 	this.form.addText(Locale.renderOrder).setAltText(Locale.hintRenderOrder);

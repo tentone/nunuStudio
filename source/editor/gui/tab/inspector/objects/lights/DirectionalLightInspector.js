@@ -35,7 +35,7 @@ function DirectionalLightInspector(parent, object)
 	this.form.nextRow();
 
 	// Shadow
-	this.shadow = new LightShadowFormSnipplet(this.form, object);
+	this.shadow = new LightShadowFormSnippet(this.form, object);
 }
 
 DirectionalLightInspector.prototype = Object.create(ObjectInspector.prototype);
