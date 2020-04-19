@@ -19,8 +19,15 @@ function TransformControls(camera, canvas, mouse)
 	this.canvas = canvas;
 	this.mouse = mouse;
 
-	this.objects = [];
 	this.visible = false;
+
+	/**
+	 * Object currently attached to the transform controls.
+	 *
+	 * @attribute objects
+	 * @type {Array}
+	 */
+	this.objects = [];
 
 	/**
 	 * Transformation space defines how the transformations are applied.
@@ -98,21 +105,17 @@ function TransformControls(camera, canvas, mouse)
 	 */
 	this.editing = false;
 
-	this.gizmo =
-	{
-		translate: new TransformGizmoTranslate(),
-		rotate: new TransformGizmoRotate(),
-		scale: new TransformGizmoScale()
-	};
+	/**
+	 * Gizmo tools currenctly in use to edit the object.
+	 *
+	 * Defines what and how the attribute of the object is manipulated.
+	 *
+	 * @attribute gizmo
+	 * @type {TransformGizmo}
+	 */
+	this.gizmo = null;
 
-	for(var type in this.gizmo)
-	{
-		var obj = this.gizmo[type];
-		obj.visible = (type === this.mode);
-		this.add(obj);
-	}
-
-	this.ray = new THREE.Raycaster();
+	this.raycaster = new THREE.Raycaster();
 	this.pointerVector = new THREE.Vector2();
 
 	this.point = new THREE.Vector3();
@@ -120,7 +123,6 @@ function TransformControls(camera, canvas, mouse)
 
 	this.toolRotation = new THREE.Vector3();
 	this.toolScale = 1;
-
 	this.offsetRotation = new THREE.Vector3();
 
 	this.lookAtMatrix = new THREE.Matrix4();
@@ -197,6 +199,21 @@ TransformControls.LOCAL = "local";
 TransformControls.WORLD = "world";
 
 TransformControls.prototype = Object.create(THREE.Object3D.prototype);
+
+/**
+ * Gizmo constructors from the control mode.
+ *
+ * @static
+ * @attribute gizmoConstructors
+ * @type {Object}
+ */
+TransformControls.GizmoConstructors =
+{
+	"none": TransformGizmo,
+	"translate": TransformGizmoTranslate,
+	"rotate": TransformGizmoRotate,
+	"scale": TransformGizmoScale
+};
 
 /**
  * Attach a list of objects to the transform controls.
@@ -290,12 +307,13 @@ TransformControls.prototype.setMode = function(mode)
 			this.space = TransformControls.LOCAL;
 		}
 
-		// Gizmo visibility
-		for(var type in this.gizmo)
+		// Craete gizmo for the mode
+		if(this.gizmo !== null)
 		{
-			this.gizmo[type].visible = type === this.mode;
+			this.gizmo.dismiss();
 		}
 
+		this.gizmo = new TransformControls.GizmoConstructors[mode]();
 		this.visible = this.objects.length > 0;
 		this.updatePose();
 	}
@@ -378,14 +396,14 @@ TransformControls.prototype.updatePose = function()
 	{	
 		if(this.space === TransformControls.LOCAL || this.mode === TransformControls.SCALE)
 		{
-			this.gizmo[this.mode].update(this.worldRotation[0], this.eye);
+			this.gizmo.update(this.worldRotation[0], this.eye);
 		}
 		else if(this.space === TransformControls.WORLD)
 		{
-			this.gizmo[this.mode].update(new THREE.Euler(), this.eye);
+			this.gizmo.update(new THREE.Euler(), this.eye);
 		}
 
-		this.gizmo[this.mode].highlight(this.axis);
+		this.gizmo.highlight(this.axis);
 	}
 };
 
@@ -396,7 +414,7 @@ TransformControls.prototype.onPointerHover = function()
 		return;
 	}
 
-	var intersect = this.intersectObjects(this.gizmo[this.mode].pickers.children);
+	var intersect = this.intersectObjects(this.gizmo.pickers.children);
 	var axis = null;
 
 	if(intersect)
@@ -418,7 +436,7 @@ TransformControls.prototype.onPointerDown = function()
 		return;
 	}
 
-	var intersect = this.intersectObjects(this.gizmo[this.mode].pickers.children);
+	var intersect = this.intersectObjects(this.gizmo.pickers.children);
 
 	if(intersect)
 	{
@@ -427,9 +445,9 @@ TransformControls.prototype.onPointerDown = function()
 		this.updatePose();
 
 		this.eye.copy(this.camPosition).sub(this.position).normalize();
-		this.gizmo[this.mode].setActivePlane(this.axis, this.eye);
+		this.gizmo.setActivePlane(this.axis, this.eye);
 
-		var planeIntersect = this.intersectObjects([this.gizmo[this.mode].activePlane]);
+		var planeIntersect = this.intersectObjects([this.gizmo.activePlane]);
 		if(planeIntersect)
 		{
 			for(var i = 0; i < this.objects.length; i++)
@@ -465,7 +483,7 @@ TransformControls.prototype.onPointerMove = function()
 		return;
 	}
 
-	var planeIntersect = this.intersectObjects([this.gizmo[this.mode].activePlane]);
+	var planeIntersect = this.intersectObjects([this.gizmo.activePlane]);
 	if(planeIntersect === false) 
 	{
 		return;
@@ -804,9 +822,9 @@ TransformControls.prototype.intersectObjects = function(objects)
 	var y = this.mouse.position.y / rect.height;
 
 	this.pointerVector.set((x * 2) - 1, - (y * 2) + 1);
-	this.ray.setFromCamera(this.pointerVector, this.camera);
+	this.raycaster.setFromCamera(this.pointerVector, this.camera);
 
-	var intersections = this.ray.intersectObjects(objects, true);
+	var intersections = this.raycaster.intersectObjects(objects, true);
 
 	return intersections.length > 0 ? intersections[0] : false;
 };
