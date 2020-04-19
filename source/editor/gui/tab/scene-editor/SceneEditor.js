@@ -452,8 +452,9 @@ function SceneEditor(parent, closeable, container, index)
 	this.transformationSpace.element.style.opacity = 0.5;
 	this.transformationSpace.setOnChange(function()
 	{
-		Editor.settings.editor.transformationSpace = self.transformationSpace.getValue();
-		self.transform.setSpace(Editor.settings.editor.transformationSpace);
+		var space = self.transformationSpace.getValue();
+		Editor.settings.editor.transformationSpace = space;
+		self.transform.space = space;
 	});
 	this.transformationSpace.element.onmouseenter = function()
 	{
@@ -710,10 +711,10 @@ SceneEditor.prototype.updateSettings = function()
 
 	// Tool
 	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
-	this.transform.setSpace(Editor.settings.editor.transformationSpace);
-	this.transform.setSnap(Editor.settings.editor.snap);
-	this.transform.setTranslationSnap(Editor.settings.editor.gridSpacing);
-	this.transform.setRotationSnap(Editor.settings.editor.snapAngle);
+	this.transform.space = Editor.settings.editor.transformationSpace;
+	this.transform.snap = Editor.settings.editor.snap;
+	this.transform.translationSnap = Editor.settings.editor.gridSpacing;
+	this.transform.rotationSnap = Editor.settings.editor.snapAngle;
 
 	// Stats
 	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
@@ -1100,7 +1101,7 @@ SceneEditor.prototype.selectTool = function(tool)
 	if(this.mode === SceneEditor.MOVE)
 	{
 		this.transform.setMode(TransformControls.TRANSLATE);
-		this.transform.setSpace(Editor.settings.editor.transformationSpace);
+		this.transform.space = Editor.settings.editor.transformationSpace;
 	}
 	else if(this.mode === SceneEditor.SCALE)
 	{
@@ -1109,7 +1110,7 @@ SceneEditor.prototype.selectTool = function(tool)
 	else if(this.mode === SceneEditor.ROTATE)
 	{
 		this.transform.setMode(TransformControls.ROTATE);
-		this.transform.setSpace(Editor.settings.editor.transformationSpace);
+		this.transform.space = Editor.settings.editor.transformationSpace;
 	}
 	else if(this.mode === SceneEditor.SELECT)
 	{

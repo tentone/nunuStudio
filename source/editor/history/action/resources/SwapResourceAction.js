@@ -23,7 +23,7 @@ function SwapResourceAction(oldResource, newResource, manager, category)
 
 SwapResourceAction.prototype.apply = function()
 {
-	ResourceUtils.swapResource(this.manager, this.category, this.oldResource, this.newResource);
+	ResourceCrawler.swapResource(this.manager, this.category, this.oldResource, this.newResource);
 	
 	if(this.oldResource.dispose !== undefined)
 	{
@@ -35,7 +35,7 @@ SwapResourceAction.prototype.apply = function()
 
 SwapResourceAction.prototype.revert = function()
 {
-	ResourceUtils.swapResource(this.manager, this.category, this.newResource, this.oldResource);
+	ResourceCrawler.swapResource(this.manager, this.category, this.newResource, this.oldResource);
 
 	if(this.newResource.dispose !== undefined)
 	{

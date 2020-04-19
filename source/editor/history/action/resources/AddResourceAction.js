@@ -19,14 +19,14 @@ function AddResourceAction(resource, manager, category)
 
 AddResourceAction.prototype.apply = function()
 {
-	ResourceUtils.addResource(this.manager, this.resource, this.category);
+	ResourceCrawler.addResource(this.manager, this.resource, this.category);
 	
 	AddResourceAction.updateGUI();
 };
 
 AddResourceAction.prototype.revert = function()
 {
-	ResourceUtils.removeResource(this.manager, this.resource, this.category);
+	ResourceCrawler.removeResource(this.manager, this.resource, this.category);
 
 	if(this.resource.dispose !== undefined)
 	{

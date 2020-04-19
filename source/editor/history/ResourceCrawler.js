@@ -4,9 +4,9 @@
  * Resource utils contains multiple tools to manipulate data in the resource manager on the editor.
  *
  * @static
- * @class ResourceUtils
+ * @class ResourceCrawler
  */
-function ResourceUtils(){}
+function ResourceCrawler(){}
 
 /**
  * Auxiliar method to traverse any type of JS object in depth.
@@ -20,7 +20,7 @@ function ResourceUtils(){}
  * @param {Object} object Object to be traversed.
  * @param {Function} callback Callback to process every attribute from the object.
  */
-ResourceUtils.traverseDeep = function(object, callback)
+ResourceCrawler.traverseDeep = function(object, callback)
 {
 	// TODO <REMOVE DEBUG CODE>
 	// console.log("nunuStudio: traverseDeep", object);
@@ -38,7 +38,7 @@ ResourceUtils.traverseDeep = function(object, callback)
 		{
 			if(callback(value, object, i) !== false)
 			{
-				ResourceUtils.traverseDeep(value, callback);
+				ResourceCrawler.traverseDeep(value, callback);
 			}
 		}
 		else
@@ -60,7 +60,7 @@ ResourceUtils.traverseDeep = function(object, callback)
  * @param {Resource} oldResource Old resource being replaced.
  * @param {Resource} newResource New resource used to replace the old one.
  */
-ResourceUtils.swapResource = function(manager, category, oldResource, newResource)
+ResourceCrawler.swapResource = function(manager, category, oldResource, newResource)
 {	
 	if(manager[category][oldResource.uuid] === undefined)
 	{
@@ -71,7 +71,7 @@ ResourceUtils.swapResource = function(manager, category, oldResource, newResourc
 	delete manager[category][oldResource.uuid];
 
 	// Replace all instances found
-	ResourceUtils.traverseDeep(manager, function(value, object, attribute)
+	ResourceCrawler.traverseDeep(manager, function(value, object, attribute)
 	{
 		if(value === oldResource)
 		{
@@ -94,7 +94,7 @@ ResourceUtils.swapResource = function(manager, category, oldResource, newResourc
  * @static
  * @method removeDuplicated
  */
-ResourceUtils.removeDuplicated = function(object)
+ResourceCrawler.removeDuplicated = function(object)
 {
 	// Check if two resources are similar
 	function areEqual(a, b)
@@ -106,7 +106,7 @@ ResourceUtils.removeDuplicated = function(object)
 	var materials = [];
 
 	// Fetch resources to be optimized
-	ResourceUtils.traverseDeep(object, function(value)
+	ResourceCrawler.traverseDeep(object, function(value)
 	{
 		if(value instanceof THREE.Texture)
 		{
@@ -129,7 +129,7 @@ ResourceUtils.removeDuplicated = function(object)
  * @param {Resource} resource
  * @param {string} category
  */
-ResourceUtils.addResource = function(manager, resource, category)
+ResourceCrawler.addResource = function(manager, resource, category)
 {
 	manager[category][resource.uuid] = resource;
 };
@@ -145,7 +145,7 @@ ResourceUtils.addResource = function(manager, resource, category)
  * @param {Resource} resource
  * @param {string} category
  */ 
-ResourceUtils.removeResource = function(manager, resource, category)
+ResourceCrawler.removeResource = function(manager, resource, category)
 {
 	if(category === "materials")
 	{
@@ -183,7 +183,7 @@ ResourceUtils.removeResource = function(manager, resource, category)
  * @param {ResourceManager} manager
  * @param {string} name
  */
-ResourceUtils.getResourceByName = function(manager, name)
+ResourceCrawler.getResourceByName = function(manager, name)
 {
 	for(var category in manager)
 	{
@@ -211,7 +211,7 @@ ResourceUtils.getResourceByName = function(manager, name)
  * @param {ResourceContainer} target Optional resource container object that can be used to store the found resources.
  * @return {ResourceContainer} Object with the new resources found in the object.
  */
-ResourceUtils.searchObject = function(object, manager, target)
+ResourceCrawler.searchObject = function(object, manager, target)
 {
 	var resources;
 

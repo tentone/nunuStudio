@@ -21,8 +21,31 @@ function TransformControls(camera, canvas, mouse)
 
 	this.objects = [];
 	this.visible = false;
+
+	/**
+	 * Transformation space defines how the transformations are applied.
+	 *
+	 * If set to WORLD the transformations are applied on the world referential.
+	 *
+	 * If set to LOCAL the transformations are applied relative to the object current transform
+	 *
+	 * After chaging 
+	 *
+	 * @attribute space
+	 * @type {number}
+	 */
 	this.space = TransformControls.WORLD;
+
+	/**
+	 * Scale of the transform gizmo.
+	 *
+	 * Size of the gizmos is adjusted relative to the view camera distance.*
+	 *
+	 * @attribute size
+	 * @type {number}
+	 */
 	this.size = 1;
+
 	this.axis = null;
 
 	/**
@@ -200,39 +223,12 @@ TransformControls.prototype.setCanvas = function(canvas)
 	this.canvas = canvas;
 };
 
-TransformControls.prototype.setSize = function(size)
-{
-	this.size = size;
-	this.updatePose();
-};
-
-TransformControls.prototype.setSpace = function(space)
-{
-	this.space = space;
-	this.updatePose();
-};
-
-TransformControls.prototype.setSnap = function(snap)
-{
-	this.snap = snap;
-};
-
-TransformControls.prototype.setTranslationSnap = function(translationSnap)
-{
-	this.translationSnap = translationSnap;
-};
-
-TransformControls.prototype.setRotationSnap = function(rotationSnap)
-{
-	this.rotationSnap = rotationSnap;
-};
-
-
-TransformControls.prototype.getMode = function()
-{
-	return this.mode;
-};
-
+/**
+ * Set the transform gizmo to be used by the transform controls.
+ *
+ * @method setMode
+ * @param {string} mode Name of the gizmo to be activated.
+ */
 TransformControls.prototype.setMode = function(mode)
 {
 	if(this.mode === mode)
@@ -415,6 +411,13 @@ TransformControls.prototype.onPointerDown = function()
 	this.dragging = true;
 };
 
+/**
+ * Called whenever the mouse is moved inside of the canvas.
+ *
+ * Constantly recaulculates the transforms being applied.
+ *
+ * @method onPointerMove
+ */
 TransformControls.prototype.onPointerMove = function()
 {
 	if(this.objects.length === 0 || this.axis === null || this.dragging === false || this.mode === TransformControls.NONE)
@@ -689,12 +692,13 @@ TransformControls.prototype.onPointerMove = function()
 
 /**
  * Method called when user input button is released.
+ *
+ * Changes made to the object are added to the editor action history.
  * 
  * @method onPointerUp
  */
 TransformControls.prototype.onPointerUp = function()
-{	
-	// Add changes made to the editor history
+{
 	if(this.editing)
 	{
 		if(this.mode === TransformControls.TRANSLATE)
@@ -748,7 +752,11 @@ TransformControls.prototype.onPointerUp = function()
 };
 
 /**
+ * Check if the mouse is currently intersecting objects inside of the canvas.
  *
+ * @method intersectObjects
+ * @param {Array} objects Object to be tested.
+ * @return {boolean} True if any object is intersected.
  */
 TransformControls.prototype.intersectObjects = function(objects)
 {

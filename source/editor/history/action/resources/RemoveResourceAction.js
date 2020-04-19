@@ -21,7 +21,7 @@ function RemoveResourceAction(resource, manager, category)
 
 RemoveResourceAction.prototype.apply = function()
 {
-	ResourceUtils.removeResource(this.manager, this.resource, this.category);
+	ResourceCrawler.removeResource(this.manager, this.resource, this.category);
 
 	if(this.resource.dispose !== undefined)
 	{
@@ -33,7 +33,7 @@ RemoveResourceAction.prototype.apply = function()
 
 RemoveResourceAction.prototype.revert = function()
 {
-	ResourceUtils.addResource(this.manager, this.resource, this.category);
+	ResourceCrawler.addResource(this.manager, this.resource, this.category);
 
 	AddResourceAction.updateGUI();
 };

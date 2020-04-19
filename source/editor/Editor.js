@@ -492,7 +492,7 @@ Editor.addObject = function(object, parent)
 	}
 
 	var actions = [new AddAction(object, parent)];
-	var resources = ResourceUtils.searchObject(object, Editor.program);
+	var resources = ResourceCrawler.searchObject(object, Editor.program);
 
 	for(var category in resources)
 	{

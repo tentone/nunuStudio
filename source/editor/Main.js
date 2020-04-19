@@ -561,6 +561,8 @@ include("source/editor/gui/preview/GeometryRenderer.js");
 include("source/editor/gui/preview/CubemapFlatRenderer.js");
 
 include("source/editor/gui/DragBuffer.js");
+include("source/editor/gui/MainMenu.js");
+include("source/editor/gui/Interface.js");
 
 include("source/editor/utils/DOMUtils.js");
 include("source/editor/utils/ObjectIcons.js");
@@ -569,6 +571,7 @@ include("source/editor/utils/VirtualClipboard.js");
 include("source/editor/utils/animation/TweenAnimation.js");
 
 include("source/editor/history/History.js");
+include("source/editor/history/ResourceCrawler.js");
 include("source/editor/history/action/Action.js");
 include("source/editor/history/action/ChangeAction.js");
 include("source/editor/history/action/ActionBundle.js");
@@ -581,10 +584,7 @@ include("source/editor/history/action/resources/AddResourceAction.js");
 include("source/editor/history/action/resources/RemoveResourceAction.js");
 include("source/editor/history/action/resources/SwapResourceAction.js");
 
-include("source/editor/ResourceUtils.js");
 include("source/editor/Settings.js");
-include("source/editor/Interface.js");
-include("source/editor/MainMenu.js");
 include("source/editor/Exporters.js");
 include("source/editor/Loaders.js");
 
