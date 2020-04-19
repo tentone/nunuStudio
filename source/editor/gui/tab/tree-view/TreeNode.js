@@ -227,7 +227,7 @@ function TreeNode(container)
 					context.addOption(Locale.applyTransformation, function()
 					{
 						var geometry = self.object.geometry.clone();
-						geometry.applyMatrix(self.object.matrixWorld);
+						geometry.applyMatrix4(self.object.matrixWorld);
 
 						var actions = [];
 						actions.push(new ChangeAction(self.object, "geometry", geometry));

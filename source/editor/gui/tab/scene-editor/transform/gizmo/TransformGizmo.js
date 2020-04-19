@@ -99,12 +99,44 @@ TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: 
 
 /**
  * Set the currently active plane in the gizmo object.
- * 
+ *
  * @method setActivePlane
  * @param {string} axis Axis stored as text. (e.g X, Y, XY, XZ).
  * @param {THREE.Matrix4} eye Eye view camera combined (projection and pose) matrix.
  */
 TransformGizmo.prototype.setActivePlane = function(axis, eye){}
+
+/**
+ * Update transform of the gizmo, called everytime on update to calculate size of the gizmo on screen.
+ *
+ * @method updatePose
+ * @param {TransformControls} controls Transform controls object that contain this gizmo.
+ */
+TransformGizmo.prototype.updatePose = function(controls){}
+
+/**
+ * Called everytime that the controls attached pointer button is released.
+ *
+ * @method onPointerUp
+ * @param {TransformControls} controls Transform controls object that contain this gizmo.
+ */
+TransformGizmo.prototype.onPointerUp = function(controls){}
+
+/**
+ * Called while the pointer is moving around the canvas.
+ *
+ * @method onPointerMove
+ * @param {TransformControls} controls Transform controls object that contain this gizmo.
+ */
+TransformGizmo.prototype.onPointerMove = function(controls){}
+
+/**
+ * Called everytime that the controls attached pointer button is pressed down.
+ *
+ * @method onPointerDown
+ * @param {TransformControls} controls Transform controls object that contain this gizmo.
+ */
+TransformGizmo.prototype.onPointerDown = function(controls){}
 
 /**
  * Update the transformation of the gizmo from rotation and combined view matrix.

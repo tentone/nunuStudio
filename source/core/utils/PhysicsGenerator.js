@@ -362,7 +362,7 @@ PhysicsGenerator.getGeometry = function(object)
 
 		var matrix = new THREE.Matrix4();
 		matrix.scale(object.scale);
-		combined.applyMatrix(matrix);
+		combined.applyMatrix4(matrix);
 		return combined;
 	}
 };

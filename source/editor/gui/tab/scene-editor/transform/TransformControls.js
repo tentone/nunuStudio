@@ -275,16 +275,16 @@ TransformControls.prototype.attach = function(objects)
 	}
 	else
 	{
-		this.detach();
+		this.clear();
 	}
 };
 
 /**
  * Detach/clear all objects attached to the transform controls.
  * 
- * @method detach
+ * @method clear
  */
-TransformControls.prototype.detach = function()
+TransformControls.prototype.clear = function()
 {
 	this.objects = [];
 	this.visible = false;
@@ -394,7 +394,7 @@ TransformControls.prototype.updatePose = function()
 {
 	if(this.objects.length === 0)
 	{
-		this.detach();
+		this.clear();
 		return;
 	}
 
@@ -847,7 +847,6 @@ TransformControls.prototype.onPointerUp = function()
 
 	this.editing = false;
 	this.dragging = false;
-	this.onPointerHover();
 };
 
 /**

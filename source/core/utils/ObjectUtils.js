@@ -115,7 +115,7 @@ ObjectUtils.recalculateGeometryOrigin = function(object)
 
 			var matrix = new THREE.Matrix4();
 			matrix.makeTranslation(-center.x, -center.y, -center.z);
-			children.geometry.applyMatrix(matrix);
+			children.geometry.applyMatrix4(matrix);
 		}
 	});
 };
