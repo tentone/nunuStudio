@@ -168,6 +168,26 @@ function TransformControls(camera, canvas, mouse)
 	this.oldRotationMatrix = [];
 }
 
+/**
+ * Attributes that need to be stored for each object to keep their transform state.
+ *
+ * Each selected object has one state.
+ *
+ * @class TransformControlAtttributes
+ */
+function TransformControlAtttributes()
+{
+	this.parentRotationMatrix = new THREE.Matrix4();
+	this.parentScale = new THREE.Vector3();
+	this.worldRotationMatrix = new THREE.Matrix4();
+	this.worldPosition = new THREE.Vector3();
+	this.worldRotation = new THREE.Euler();
+	this.oldPosition = new THREE.Vector3();
+	this.oldScale = new THREE.Vector3();
+	this.oldQuaternion = new THREE.Quaternion();
+	this.oldRotationMatrix = new THREE.Matrix4();
+}
+
 TransformControls.NONE = "none";
 TransformControls.TRANSLATE = "translate";
 TransformControls.ROTATE = "rotate";
