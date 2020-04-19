@@ -90,7 +90,9 @@ function TransformControls(camera, canvas, mouse)
 	this.size = 1;
 
 	/**
-	 * Axis of movement stored as text. (e.g X, Y, XY, XZ).
+	 * Axis of transformation selected stored as text. (e.g X, Y, Z).
+	 *
+	 * Can be a combination of multiple axis (e.g XYZ, XZ, etc)
 	 *
 	 * @attribute axis
 	 * @type {string}

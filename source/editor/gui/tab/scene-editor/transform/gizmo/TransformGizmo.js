@@ -3,7 +3,7 @@
 /**
  * A transform gizmo is a object used to transform a property of an entity.
  *
- * Should be used as basis for other transform gizmos.
+ * Should be used as basis for other transform gizmos. This base implementation does not apply any trasnforms to objects.
  *
  * @class TransformGizmo
  */
@@ -21,7 +21,7 @@ function TransformGizmo()
 
 	// Planes
 	var planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 2, 2);
-	var planeMaterial = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide });
+	var planeMaterial = new THREE.MeshBasicMaterial({visible: false, side: THREE.DoubleSide});
 	var planes =
 	{
 		"XY": new THREE.Mesh(planeGeometry, planeMaterial),
@@ -97,6 +97,23 @@ TransformGizmo.prototype = Object.create(THREE.Object3D.prototype);
 
 TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: false});
 
+/**
+ * Set the currently active plane in the gizmo object.
+ * 
+ * @method setActivePlane
+ * @param {string} axis Axis stored as text. (e.g X, Y, XY, XZ).
+ * @param {THREE.Matrix4} eye Eye view camera combined (projection and pose) matrix.
+ */
+TransformGizmo.prototype.setActivePlane = function(axis, eye){}
+
+/**
+ * Update the transformation of the gizmo from rotation and combined view matrix.
+ *
+ *
+ * @method update
+ * @param {THREE.Eurler} rotation Euler rotation.
+ * @param {THREE.Matrix4} eye Eye view camera combined (projection and pose) matrix.
+ */
 TransformGizmo.prototype.update = function(rotation, eye)
 {
 	var vec1 = new THREE.Vector3(0, 0, 0);
@@ -116,6 +133,12 @@ TransformGizmo.prototype.update = function(rotation, eye)
 	});
 }
 
+/**
+ * Hightlight axis in the gizmo object.
+ *
+ * @method highlight
+ * @param {string} axis Exact name of the axis to be highlighted (assumes that the material uses the same name as the axis).
+ */
 TransformGizmo.prototype.highlight = function(axis)
 {
 	this.traverse(function(child)

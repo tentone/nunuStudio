@@ -26,30 +26,35 @@ function TransformGizmoTranslate()
 
 	this.handleGizmos =
 	{
-		X: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({color: 0xff0000})), [0.5, 0, 0], [0, 0, - Math.PI / 2]],[new THREE.Line(lineXGeometry, new GizmoLineMaterial({color: 0xff0000}))]],
-		Y: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({color: 0x00ff00})), [0, 0.5, 0]],[new THREE.Line(lineYGeometry, new GizmoLineMaterial({color: 0x00ff00}))]],
-		Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({color: 0x0000ff})), [0, 0, 0.5], [Math.PI / 2, 0, 0]],[new THREE.Line(lineZGeometry, new GizmoLineMaterial({color: 0x0000ff}))]],
-		XYZ: [[new THREE.Mesh(new THREE.BoxBufferGeometry(0.1, 0.1, 0.1), new GizmoMaterial({color: 0xffffff, opacity: 0.25})), [0, 0, 0], [0, 0, 0]]],
-		XY: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({color: 0xffff00, opacity: 0.25})), [0.15, 0.15, 0]]],
-		YZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({color: 0x00ffff, opacity: 0.25})), [0, 0.15, 0.15], [0, Math.PI / 2, 0]]],
-		XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({color: 0xff00ff, opacity: 0.25})), [0.15, 0, 0.15], [- Math.PI / 2, 0, 0]]]
+		X: [[new THREE.Mesh(arrowGeometry, GizmoMaterial.red), [0.5, 0, 0], [0, 0, - Math.PI / 2]],[new THREE.Line(lineXGeometry, GizmoLineMaterial.red)]],
+		Y: [[new THREE.Mesh(arrowGeometry, GizmoMaterial.green), [0, 0.5, 0]],[new THREE.Line(lineYGeometry, GizmoLineMaterial.green)]],
+		Z: [[new THREE.Mesh(arrowGeometry, GizmoMaterial.blue), [0, 0, 0.5], [Math.PI / 2, 0, 0]],[new THREE.Line(lineZGeometry, GizmoLineMaterial.blue)]],
+		XY: [[new THREE.Mesh(TransformGizmoTranslate.plane, GizmoMaterial.yellowAlpha), [0.15, 0.15, 0]]],
+		YZ: [[new THREE.Mesh(TransformGizmoTranslate.plane, GizmoMaterial.cyanAlpha), [0, 0.15, 0.15], [0, Math.PI / 2, 0]]],
+		XZ: [[new THREE.Mesh(TransformGizmoTranslate.plane, GizmoMaterial.magentaAlpha), [0.15, 0, 0.15], [- Math.PI / 2, 0, 0]]],
+		XYZ: [[new THREE.Mesh(TransformGizmoTranslate.box, GizmoMaterial.whiteAlpha), [0, 0, 0], [0, 0, 0]]]
 	};
 
 	this.pickerGizmos =
 	{
-		X: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0.6, 0, 0], [0, 0, - Math.PI / 2]]],
-		Y: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0.6, 0]]],
-		Z: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
-		XYZ: [[new THREE.Mesh(new THREE.BoxBufferGeometry(0.1, 0.1, 0.1), TransformGizmo.pickerMaterial)]],
-		XY: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), TransformGizmo.pickerMaterial), [0.2, 0.2, 0]]],
-		YZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), TransformGizmo.pickerMaterial), [0, 0.2, 0.2], [0, Math.PI / 2, 0]]],
-		XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), TransformGizmo.pickerMaterial), [0.2, 0, 0.2], [- Math.PI / 2, 0, 0]]]
+		X: [[new THREE.Mesh(TransformGizmoTranslate.cylinder, TransformGizmo.pickerMaterial), [0.6, 0, 0], [0, 0, - Math.PI / 2]]],
+		Y: [[new THREE.Mesh(TransformGizmoTranslate.cylinder, TransformGizmo.pickerMaterial), [0, 0.6, 0]]],
+		Z: [[new THREE.Mesh(TransformGizmoTranslate.cylinder, TransformGizmo.pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
+		XY: [[new THREE.Mesh(TransformGizmoTranslate.planeBig, TransformGizmo.pickerMaterial), [0.2, 0.2, 0]]],
+		YZ: [[new THREE.Mesh(TransformGizmoTranslate.planeBig, TransformGizmo.pickerMaterial), [0, 0.2, 0.2], [0, Math.PI / 2, 0]]],
+		XZ: [[new THREE.Mesh(TransformGizmoTranslate.planeBig, TransformGizmo.pickerMaterial), [0.2, 0, 0.2], [- Math.PI / 2, 0, 0]]],
+		XYZ: [[new THREE.Mesh(TransformGizmoTranslate.box, TransformGizmo.pickerMaterial)]]
 	};
 
 	TransformGizmo.call(this);
 }
 
 TransformGizmoTranslate.prototype = Object.create(TransformGizmo.prototype);
+
+TransformGizmoTranslate.cylinder = new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false);
+TransformGizmoTranslate.box = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
+TransformGizmoTranslate.plane = new THREE.PlaneBufferGeometry(0.29, 0.29);
+TransformGizmoTranslate.planeBig = new THREE.PlaneBufferGeometry(0.4, 0.4);
 
 TransformGizmoTranslate.prototype.setActivePlane = function(axis, eye)
 {
