@@ -15,11 +15,37 @@ function TransformControls(camera, canvas, mouse)
 {
 	THREE.Object3D.call(this);
 
-	this.camera = camera;
-	this.canvas = canvas;
-	this.mouse = mouse;
-
 	this.visible = false;
+
+	/**
+	 * View camera, the controls scale and behavior is calculated relative to the camera.
+	 *
+	 * The rotation and direction of the camera affects the appearence of the gizmos and the vectors applied to transform objects.
+	 *
+	 * Booth perspective or orthographic cameras are supported.
+	 * 
+	 * @attribute camera
+	 * @type {THREE.Camera}
+	 */
+	this.camera = camera;
+
+	/**
+	 * DOM canvas where the scene is rendererd.
+	 *
+	 * Mouse input is calculated relative to this canvas position on screen.
+	 *
+	 * @attribute canvas
+	 * @type {DOM} 
+	 */
+	this.canvas = canvas;
+	
+	/**
+	 * Mouse to get user input from. Should be updated before updating the controls.
+	 *
+	 * @attribute mouse
+	 * @type {Mouse}
+	 */
+	this.mouse = mouse;
 
 	/**
 	 * Object currently attached to the transform controls.
@@ -28,6 +54,16 @@ function TransformControls(camera, canvas, mouse)
 	 * @type {Array}
 	 */
 	this.objects = [];
+
+	/**
+	 * Object transform attributes for each selected object.
+	 *
+	 * Can be reused between selected objects.
+	 *
+	 * @attribute attributes
+	 * @type {Array} 
+	 */
+	this.attributes = [];
 
 	/**
 	 * Transformation space defines how the transformations are applied.
@@ -53,6 +89,12 @@ function TransformControls(camera, canvas, mouse)
 	 */
 	this.size = 1;
 
+	/**
+	 * Axis of movement stored as text. (e.g X, Y, XY, XZ).
+	 *
+	 * @attribute axis
+	 * @type {string}
+	 */
 	this.axis = null;
 
 	/**
@@ -115,7 +157,20 @@ function TransformControls(camera, canvas, mouse)
 	 */
 	this.gizmo = null;
 
+	/**
+	 * Raycaster object used to pick the gizmo sections.
+	 *
+	 * @attribute raycaster
+	 * @type {THREE.Raycaster}
+	 */
 	this.raycaster = new THREE.Raycaster();
+
+	/**
+	 * Normalized vector containing the pointer coordinates used with the raycaster.
+	 *
+	 * @attribute pointerVector
+	 * @type {THREE.Vector2}
+	 */
 	this.pointerVector = new THREE.Vector2();
 
 	this.point = new THREE.Vector3();
@@ -151,23 +206,11 @@ function TransformControls(camera, canvas, mouse)
 	this.unitX = new THREE.Vector3(1, 0, 0);
 	this.unitY = new THREE.Vector3(0, 1, 0);
 	this.unitZ = new THREE.Vector3(0, 0, 1);
-
 	this.quaternionXYZ = new THREE.Quaternion();
 	this.quaternionX = new THREE.Quaternion();
 	this.quaternionY = new THREE.Quaternion();
 	this.quaternionZ = new THREE.Quaternion();
 	this.quaternionE = new THREE.Quaternion();
-
-	// Object attributes (per object)
-	this.parentRotationMatrix = [];
-	this.parentScale = [];
-	this.worldRotationMatrix = [];
-	this.worldPosition = [];
-	this.worldRotation = [];
-	this.oldPosition = [];
-	this.oldScale = [];
-	this.oldQuaternion = [];
-	this.oldRotationMatrix = [];
 }
 
 /**
@@ -201,21 +244,6 @@ TransformControls.WORLD = "world";
 TransformControls.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
- * Gizmo constructors from the control mode.
- *
- * @static
- * @attribute gizmoConstructors
- * @type {Object}
- */
-TransformControls.GizmoConstructors =
-{
-	"none": TransformGizmo,
-	"translate": TransformGizmoTranslate,
-	"rotate": TransformGizmoRotate,
-	"scale": TransformGizmoScale
-};
-
-/**
  * Attach a list of objects to the transform controls.
  *
  * @method attach
@@ -233,18 +261,10 @@ TransformControls.prototype.attach = function(objects)
 		}
 	}
 
-	// Add more temporary attibutes if necessary
-	while(this.oldPosition.length < this.objects.length)
+	// Add more temporary attributes if necessary
+	while(this.attributes.length < this.objects.length)
 	{
-		this.parentRotationMatrix.push(new THREE.Matrix4());
-		this.parentScale.push(new THREE.Vector3());
-		this.worldRotationMatrix.push(new THREE.Matrix4());
-		this.worldPosition.push(new THREE.Vector3());
-		this.worldRotation.push(new THREE.Euler());
-		this.oldPosition.push(new THREE.Vector3());
-		this.oldScale.push(new THREE.Vector3());
-		this.oldQuaternion.push(new THREE.Quaternion());
-		this.oldRotationMatrix.push(new THREE.Matrix4());
+		this.attributes.push(new TransformControlAtttributes());
 	}
 
 	if(this.objects.length > 0)
@@ -295,36 +315,51 @@ TransformControls.prototype.setMode = function(mode)
 
 	this.mode = mode;
 
-	if(this.mode === TransformControls.NONE)
+	// Remove old gizmo
+	if(this.gizmo !== null)
 	{
-		this.visible = false;
-	}
-	else
-	{
-		// If scale mode force local space
-		if(this.mode === TransformControls.SCALE)
-		{
-			this.space = TransformControls.LOCAL;
-		}
-
-		// Craete gizmo for the mode
-		if(this.gizmo !== null)
+		if(this.gizmo.dismiss !== undefined)
 		{
 			this.gizmo.dismiss();
 		}
 
-		this.gizmo = new TransformControls.GizmoConstructors[mode]();
-		this.visible = this.objects.length > 0;
-		this.updatePose();
+		this.remove(gizmo);
+		this.gizmo = null;
 	}
-};
 
-TransformControls.prototype.setCamera = function(camera)
-{
-	this.camera = camera;
+	// Create gizmo for the mode selected
+	if(this.mode === TransformControls.TRANSLATE)
+	{
+		this.gizmo = new TransformGizmoTranslate();
+	}
+	else if(this.mode === TransformControls.ROTATE)
+	{
+		this.gizmo = new TransformGizmoRotate();
+	}
+	else if(this.mode === TransformControls.SCALE)
+	{
+		// If scale mode force local space
+		this.space = TransformControls.LOCAL;
+		this.gizmo = new TransformGizmoScale();
+	}
+
+	if(this.gizmo !== null)
+	{
+		this.add(this.gizmo);
+	}
+
+
+	this.visible = this.objects.length > 0;
 	this.updatePose();
 };
 
+/**
+ * Update the controls using mouse input provided takes camera of all the functionality of the controls.
+ *
+ * Should be called every frame to update the controls state.
+ *
+ * @method update
+ */
 TransformControls.prototype.update = function()
 {
 	if(this.mouse.buttonJustPressed(Mouse.LEFT))
@@ -348,6 +383,11 @@ TransformControls.prototype.update = function()
 	return this.editing;
 };
 
+/**
+ * Update the pose and transform of the controls and gizmos based on the selected objects and view camera.
+ *
+ * @method updatePose
+ */
 TransformControls.prototype.updatePose = function()
 {
 	if(this.objects.length === 0)
@@ -366,9 +406,9 @@ TransformControls.prototype.updatePose = function()
 
 	for(var i = 0; i < this.objects.length; i++)
 	{
-		this.worldPosition[i].setFromMatrixPosition(this.objects[i].matrixWorld);
-		this.worldRotation[i].setFromRotationMatrix(this.tempMatrix.extractRotation(this.objects[i].matrixWorld));
-		this.position.add(this.worldPosition[i]);
+		this.attributes[i].worldPosition.setFromMatrixPosition(this.objects[i].matrixWorld);
+		this.attributes[i].worldRotation.setFromRotationMatrix(this.tempMatrix.extractRotation(this.objects[i].matrixWorld));
+		this.position.add(this.attributes[i].worldPosition);
 	}
 
 	if(this.objects.length > 0)
@@ -396,7 +436,7 @@ TransformControls.prototype.updatePose = function()
 	{	
 		if(this.space === TransformControls.LOCAL || this.mode === TransformControls.SCALE)
 		{
-			this.gizmo.update(this.worldRotation[0], this.eye);
+			this.gizmo.update(this.attributes[0].worldRotation, this.eye);
 		}
 		else if(this.space === TransformControls.WORLD)
 		{
@@ -452,14 +492,14 @@ TransformControls.prototype.onPointerDown = function()
 		{
 			for(var i = 0; i < this.objects.length; i++)
 			{
-				this.oldPosition[i].copy(this.objects[i].position);
-				this.oldScale[i].copy(this.objects[i].scale);
-				this.oldQuaternion[i].copy(this.objects[i].quaternion);
-				this.oldRotationMatrix[i].extractRotation(this.objects[i].matrix);
+				this.attributes[i].oldPosition.copy(this.objects[i].position);
+				this.attributes[i].oldScale.copy(this.objects[i].scale);
+				this.attributes[i].oldQuaternion.copy(this.objects[i].quaternion);
+				this.attributes[i].oldRotationMatrix.extractRotation(this.objects[i].matrix);
 
-				this.worldRotationMatrix[i].extractRotation(this.objects[i].matrixWorld);
-				this.parentRotationMatrix[i].extractRotation(this.objects[i].parent.matrixWorld);
-				this.parentScale[i].setFromMatrixScale(this.tempMatrix.getInverse(this.objects[i].parent.matrixWorld));
+				this.attributes[i].worldRotationMatrix.extractRotation(this.objects[i].matrixWorld);
+				this.attributes[i].parentRotationMatrix.extractRotation(this.objects[i].parent.matrixWorld);
+				this.attributes[i].parentScale.setFromMatrixScale(this.tempMatrix.getInverse(this.objects[i].parent.matrixWorld));
 			}
 
 			this.offset.copy(planeIntersect.point);
@@ -495,7 +535,7 @@ TransformControls.prototype.onPointerMove = function()
 		{
 			this.point.copy(planeIntersect.point);
 			this.point.sub(this.offset);
-			this.point.multiply(this.parentScale[i]);
+			this.point.multiply(this.attributes[i].parentScale);
 
 			if(this.axis.search("X") === -1)
 			{
@@ -512,11 +552,11 @@ TransformControls.prototype.onPointerMove = function()
 					
 			if(this.space === TransformControls.WORLD || this.axis.search("XYZ") !== -1)
 			{
-				this.point.applyMatrix4(this.tempMatrix.getInverse(this.parentRotationMatrix[i]));
+				this.point.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].parentRotationMatrix));
 
 				for(var j = 0; j < this.objects.length; j++)
 				{
-					this.objects[j].position.copy(this.oldPosition[j]);
+					this.objects[j].position.copy(this.attributes[j].oldPosition);
 					this.objects[j].position.add(this.point);
 				}
 			}
@@ -524,17 +564,17 @@ TransformControls.prototype.onPointerMove = function()
 			{
 				if(this.axis.length > 1)
 				{
-					this.point.applyMatrix4(this.tempMatrix.getInverse(this.worldRotationMatrix[i]));
-					this.point.applyMatrix4(this.oldRotationMatrix[i]);
+					this.point.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
+					this.point.applyMatrix4(this.attributes[i].oldRotationMatrix);
 				}
 				else
 				{
-					this.point.applyMatrix4(this.oldRotationMatrix[i]);
+					this.point.applyMatrix4(this.attributes[i].oldRotationMatrix);
 				}
 
 				for(var j = 0; j < this.objects.length; j++)
 				{
-					this.objects[j].position.copy(this.oldPosition[j]);
+					this.objects[j].position.copy(this.attributes[j].oldPosition);
 					this.objects[j].position.add(this.point);
 				}
 			}
@@ -543,7 +583,7 @@ TransformControls.prototype.onPointerMove = function()
 			{
 				if(this.space === TransformControls.LOCAL)
 				{
-					this.objects[i].position.applyMatrix4(this.tempMatrix.getInverse(this.worldRotationMatrix[i]));
+					this.objects[i].position.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
 				}
 
 				if(this.axis.search("X") !== -1)
@@ -561,7 +601,7 @@ TransformControls.prototype.onPointerMove = function()
 
 				if(this.space === TransformControls.LOCAL)
 				{
-					this.objects[i].position.applyMatrix4(this.worldRotationMatrix[i]);
+					this.objects[i].position.applyMatrix4(this.attributes[i].worldRotationMatrix);
 				}
 			}
 		}
@@ -572,30 +612,30 @@ TransformControls.prototype.onPointerMove = function()
 		{
 			this.point.copy(planeIntersect.point);
 			this.point.sub(this.offset);
-			this.point.multiply(this.parentScale[i]);
+			this.point.multiply(this.attributes[i].parentScale);
 
 			if(this.axis === "XYZ")
 			{
 				this.toolScale = 1 + this.point.y;
 
-				this.objects[i].scale.copy(this.oldScale[i]);
+				this.objects[i].scale.copy(this.attributes[i].oldScale);
 				this.objects[i].scale.multiplyScalar(this.toolScale);
 			}
 			else
 			{
-				this.point.applyMatrix4(this.tempMatrix.getInverse(this.worldRotationMatrix[i]));
+				this.point.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
 
 				if(this.axis === "X")
 				{
-					this.objects[i].scale.x = this.oldScale[i].x * (1 + this.point.x);
+					this.objects[i].scale.x = this.attributes[i].oldScale.x * (1 + this.point.x);
 				}
 				else if(this.axis === "Y")
 				{
-					this.objects[i].scale.y = this.oldScale[i].y * (1 + this.point.y);
+					this.objects[i].scale.y = this.attributes[i].oldScale.y * (1 + this.point.y);
 				}
 				else if(this.axis === "Z")
 				{
-					this.objects[i].scale.z = this.oldScale[i].z * (1 + this.point.z);
+					this.objects[i].scale.z = this.attributes[i].oldScale.z * (1 + this.point.z);
 				}
 			}
 
@@ -628,10 +668,10 @@ TransformControls.prototype.onPointerMove = function()
 		for(var i = 0; i < this.objects.length; i++)
 		{
 			this.point.copy(planeIntersect.point);
-			this.point.sub(this.worldPosition[i]);
-			this.point.multiply(this.parentScale[i]);
-			this.tempVector.copy(this.offset).sub(this.worldPosition[i]);
-			this.tempVector.multiply(this.parentScale[i]);
+			this.point.sub(this.attributes[i].worldPosition);
+			this.point.multiply(this.attributes[i].parentScale);
+			this.tempVector.copy(this.offset).sub(this.attributes[i].worldPosition);
+			this.tempVector.multiply(this.attributes[i].parentScale);
 
 			if(this.axis === "E")
 			{
@@ -641,10 +681,10 @@ TransformControls.prototype.onPointerMove = function()
 				this.toolRotation.set(Math.atan2(this.point.z, this.point.y), Math.atan2(this.point.x, this.point.z), Math.atan2(this.point.y, this.point.x));
 				this.offsetRotation.set(Math.atan2(this.tempVector.z, this.tempVector.y), Math.atan2(this.tempVector.x, this.tempVector.z), Math.atan2(this.tempVector.y, this.tempVector.x));
 
-				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.parentRotationMatrix[i]));
+				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.attributes[i].parentRotationMatrix));
 
 				this.quaternionE.setFromAxisAngle(this.eye, this.toolRotation.z - this.offsetRotation.z);
-				this.quaternionXYZ.setFromRotationMatrix(this.worldRotationMatrix[i]);
+				this.quaternionXYZ.setFromRotationMatrix(this.attributes[i].worldRotationMatrix);
 
 				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionE);
 				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionXYZ);
@@ -655,9 +695,9 @@ TransformControls.prototype.onPointerMove = function()
 			{
 				this.quaternionE.setFromEuler(this.point.clone().cross(this.tempVector).normalize()); // rotation axis
 
-				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.parentRotationMatrix[i]));
+				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.attributes[i].parentRotationMatrix));
 				this.quaternionX.setFromAxisAngle(this.quaternionE, - this.point.clone().angleTo(this.tempVector));
-				this.quaternionXYZ.setFromRotationMatrix(this.worldRotationMatrix[i]);
+				this.quaternionXYZ.setFromRotationMatrix(this.attributes[i].worldRotationMatrix);
 
 				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionX);
 				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionXYZ);
@@ -666,14 +706,14 @@ TransformControls.prototype.onPointerMove = function()
 			}
 			else if(this.space === TransformControls.LOCAL)
 			{
-				this.point.applyMatrix4(this.tempMatrix.getInverse(this.worldRotationMatrix[i]));
+				this.point.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
 
-				this.tempVector.applyMatrix4(this.tempMatrix.getInverse(this.worldRotationMatrix[i]));
+				this.tempVector.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
 
 				this.toolRotation.set(Math.atan2(this.point.z, this.point.y), Math.atan2(this.point.x, this.point.z), Math.atan2(this.point.y, this.point.x));
 				this.offsetRotation.set(Math.atan2(this.tempVector.z, this.tempVector.y), Math.atan2(this.tempVector.x, this.tempVector.z), Math.atan2(this.tempVector.y, this.tempVector.x));
 
-				this.quaternionXYZ.setFromRotationMatrix(this.oldRotationMatrix[i]);
+				this.quaternionXYZ.setFromRotationMatrix(this.attributes[i].oldRotationMatrix);
 
 				if(this.snap)
 				{
@@ -707,7 +747,7 @@ TransformControls.prototype.onPointerMove = function()
 			{
 				this.toolRotation.set(Math.atan2(this.point.z, this.point.y), Math.atan2(this.point.x, this.point.z), Math.atan2(this.point.y, this.point.x));
 				this.offsetRotation.set(Math.atan2(this.tempVector.z, this.tempVector.y), Math.atan2(this.tempVector.x, this.tempVector.z), Math.atan2(this.tempVector.y, this.tempVector.x));
-				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.parentRotationMatrix[i]));
+				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.attributes[i].parentRotationMatrix));
 
 				if(this.snap)
 				{
@@ -722,7 +762,7 @@ TransformControls.prototype.onPointerMove = function()
 					this.quaternionZ.setFromAxisAngle(this.unitZ, this.toolRotation.z - this.offsetRotation.z);
 				}
 
-				this.quaternionXYZ.setFromRotationMatrix(this.worldRotationMatrix[i]);
+				this.quaternionXYZ.setFromRotationMatrix(this.attributes[i].worldRotationMatrix);
 
 				if(this.axis === "X")
 				{
@@ -765,9 +805,9 @@ TransformControls.prototype.onPointerUp = function()
 			for(var i = 0; i < this.objects.length; i++)
 			{
 				var object = this.objects[i].position;
-				actions.push(new ChangeAction(object, "x", object.x, this.oldPosition[i].x));
-				actions.push(new ChangeAction(object, "y", object.y, this.oldPosition[i].y));
-				actions.push(new ChangeAction(object, "z", object.z, this.oldPosition[i].z));
+				actions.push(new ChangeAction(object, "x", object.x, this.attributes[i].oldPosition.x));
+				actions.push(new ChangeAction(object, "y", object.y, this.attributes[i].oldPosition.y));
+				actions.push(new ChangeAction(object, "z", object.z, this.attributes[i].oldPosition.z));
 			}
 
 			Editor.addAction(new ActionBundle(actions));
@@ -779,9 +819,9 @@ TransformControls.prototype.onPointerUp = function()
 			for(var i = 0; i < this.objects.length; i++)
 			{
 				var object = this.objects[i].scale;
-				actions.push(new ChangeAction(object, "x", object.x, this.oldScale[i].x));
-				actions.push(new ChangeAction(object, "y", object.y, this.oldScale[i].y));
-				actions.push(new ChangeAction(object, "z", object.z, this.oldScale[i].z));
+				actions.push(new ChangeAction(object, "x", object.x, this.attributes[i].oldScale.x));
+				actions.push(new ChangeAction(object, "y", object.y, this.attributes[i].oldScale.y));
+				actions.push(new ChangeAction(object, "z", object.z, this.attributes[i].oldScale.z));
 			}
 			
 			Editor.addAction(new ActionBundle(actions));
@@ -793,10 +833,10 @@ TransformControls.prototype.onPointerUp = function()
 			for(var i = 0; i < this.objects.length; i++)
 			{
 				var object = this.objects[i].quaternion;
-				actions.push(new ChangeAction(object, "x", object.x, this.oldQuaternion[i].x));
-				actions.push(new ChangeAction(object, "y", object.y, this.oldQuaternion[i].y));
-				actions.push(new ChangeAction(object, "z", object.z, this.oldQuaternion[i].z));
-				actions.push(new ChangeAction(object, "w", object.w, this.oldQuaternion[i].w));
+				actions.push(new ChangeAction(object, "x", object.x, this.attributes[i].oldQuaternion.x));
+				actions.push(new ChangeAction(object, "y", object.y, this.attributes[i].oldQuaternion.y));
+				actions.push(new ChangeAction(object, "z", object.z, this.attributes[i].oldQuaternion.z));
+				actions.push(new ChangeAction(object, "w", object.w, this.attributes[i].oldQuaternion.w));
 			}
 			
 			Editor.addAction(new ActionBundle(actions));
@@ -813,7 +853,7 @@ TransformControls.prototype.onPointerUp = function()
  *
  * @method intersectObjects
  * @param {Array} objects Object to be tested.
- * @return {boolean} True if any object is intersected.
+ * @return {Object} Object intersected is any, false otherwise.
  */
 TransformControls.prototype.intersectObjects = function(objects)
 {

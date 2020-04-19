@@ -1073,7 +1073,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 		this.scene.defaultCamera = this.camera;
 	}
 
-	this.transform.setCamera(this.camera);
+	this.transform.camera = this.camera;
 
 	if(this.controls !== null)
 	{
