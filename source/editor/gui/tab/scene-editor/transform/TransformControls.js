@@ -74,8 +74,28 @@ function TransformControls(camera, canvas, mouse)
 	 */
 	this.rotationSnap = 0.1;
 
+	/**
+	 * Mode indicates the gizmo currently being used.
+	 *
+	 * @attribute mode
+	 * @type {string}
+	 */
 	this.mode = TransformControls.TRANSLATE;
+
+	/**
+	 * If set true the pointer is currently being dragged around.
+	 *
+	 * @attribute dragging
+	 * @type {boolean}
+	 */
 	this.dragging = false;
+
+	/**
+	 * If set true a object is currently being edited.
+	 *
+	 * @attribute editing
+	 * @type {boolean}
+	 */
 	this.editing = false;
 
 	this.gizmo =
@@ -456,10 +476,10 @@ TransformControls.prototype.onPointerMove = function()
 			{
 				this.point.applyMatrix4(this.tempMatrix.getInverse(this.parentRotationMatrix[i]));
 
-				for(var i = 0; i < this.objects.length; i++)
+				for(var j = 0; j < this.objects.length; j++)
 				{
-					this.objects[i].position.copy(this.oldPosition[i]);
-					this.objects[i].position.add(this.point);
+					this.objects[j].position.copy(this.oldPosition[j]);
+					this.objects[j].position.add(this.point);
 				}
 			}
 			else if(this.space === TransformControls.LOCAL)
@@ -474,16 +494,15 @@ TransformControls.prototype.onPointerMove = function()
 					this.point.applyMatrix4(this.oldRotationMatrix[i]);
 				}
 
-				for(var i = 0; i < this.objects.length; i++)
+				for(var j = 0; j < this.objects.length; j++)
 				{
-					this.objects[i].position.copy(this.oldPosition[i]);
-					this.objects[i].position.add(this.point);
+					this.objects[j].position.copy(this.oldPosition[j]);
+					this.objects[j].position.add(this.point);
 				}
 			}
 
 			if(this.snap)
 			{
-
 				if(this.space === TransformControls.LOCAL)
 				{
 					this.objects[i].position.applyMatrix4(this.tempMatrix.getInverse(this.worldRotationMatrix[i]));
@@ -502,7 +521,7 @@ TransformControls.prototype.onPointerMove = function()
 					this.objects[i].position.z = Math.round(this.objects[i].position.z / this.translationSnap) * this.translationSnap;
 				}
 
-				if(this.space === TransformControls.LOCAL )
+				if(this.space === TransformControls.LOCAL)
 				{
 					this.objects[i].position.applyMatrix4(this.worldRotationMatrix[i]);
 				}
