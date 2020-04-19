@@ -17,19 +17,22 @@ function CylinderGeometryForm(form, object)
 
 	// Radius
 	this.form.addText(Locale.radius);
-	this.radiusRow = new NumberRow(this.form);
-	this.radiusRow.size.set(0, 18);
 	this.form.nextRow();
-	
-	this.radiusTop = this.radiusRow.addValue(Locale.top);
-	this.radiusTop.setStep(0.1);
+
+	this.form.addText(Locale.top);
+	this.radiusTop = new NumberBox(this.form);
+	this.radiusTop.size.set(0, 18);
+	this.radiusTop.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.radiusTop.setOnChange(updateGeometry);
+	this.form.add(this.radiusTop);
+	this.form.nextRow();
 
-	this.radiusBottom = this.radiusRow.addValue(Locale.bottom);
-	this.radiusBottom.setStep(0.1);
+	this.form.addText(Locale.bottom);
+	this.radiusBottom = new NumberBox(this.form);
+	this.radiusBottom.size.set(0, 18);
+	this.radiusBottom.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.radiusBottom.setOnChange(updateGeometry);
-
-	this.form.add(this.radiusRow);
+	this.form.add(this.radiusBottom);
 	this.form.nextRow();
 
 	// Height
@@ -46,7 +49,7 @@ function CylinderGeometryForm(form, object)
 	this.form.nextRow();
 
 	this.form.addText(Locale.radial);
-	this.radialSegments = new NumberRow(this.form);
+	this.radialSegments = new NumberBox(this.form);
 	this.radialSegments.size.set(0, 18);
 	this.radialSegments.setRange(3, Number.MAX_SAFE_INTEGER);
 	this.radialSegments.setStep(1);
@@ -55,7 +58,7 @@ function CylinderGeometryForm(form, object)
 	this.form.nextRow();
 
 	this.form.addText(Locale.height);
-	this.heightSegments = new NumberRow(this.form);
+	this.heightSegments = new NumberBox(this.form);
 	this.heightSegments.size.set(0, 18);
 	this.heightSegments.setRange(1, Number.MAX_SAFE_INTEGER);
 	this.heightSegments.setStep(1);
