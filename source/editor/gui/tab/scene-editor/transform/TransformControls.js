@@ -323,7 +323,7 @@ TransformControls.prototype.setMode = function(mode)
 			this.gizmo.dismiss();
 		}
 
-		this.remove(gizmo);
+		this.remove(this.gizmo);
 		this.gizmo = null;
 	}
 
