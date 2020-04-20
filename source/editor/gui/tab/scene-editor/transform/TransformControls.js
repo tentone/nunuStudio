@@ -157,7 +157,7 @@ function TransformControls(camera, canvas, mouse)
 	 * @attribute gizmo
 	 * @type {TransformGizmo}
 	 */
-	this.gizmo = null;
+	this.gizmo = new TransformGizmo();
 
 	/**
 	 * Raycaster object used to pick the gizmo sections.
@@ -182,7 +182,20 @@ function TransformControls(camera, canvas, mouse)
 	this.toolScale = 1;
 	this.offsetRotation = new THREE.Vector3();
 
+	/**
+	 * View and projection matrix combined.
+	 *
+	 * @attribute lookAtMatrix
+	 * @type {THREE.Matrix4}
+	 */
 	this.lookAtMatrix = new THREE.Matrix4();
+
+	/**
+	 * Camera direction vector.
+	 *
+	 * @attribute eye
+	 * @type {THREE.Vector3}
+	 */
 	this.eye = new THREE.Vector3();
 	
 	/**
@@ -343,6 +356,10 @@ TransformControls.prototype.setMode = function(mode)
 		// If scale mode force local space
 		this.space = TransformControls.LOCAL;
 		this.gizmo = new TransformGizmoScale();
+	}
+	else
+	{
+		this.gizmo = new TransformGizmo();
 	}
 
 	if(this.gizmo !== null)

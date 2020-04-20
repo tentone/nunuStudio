@@ -141,7 +141,6 @@ TransformGizmo.prototype.onPointerDown = function(controls){}
 /**
  * Update the transformation of the gizmo from rotation and combined view matrix.
  *
- *
  * @method update
  * @param {THREE.Eurler} rotation Euler rotation.
  * @param {THREE.Matrix4} eye Eye view camera combined (projection and pose) matrix.
