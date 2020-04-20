@@ -612,7 +612,7 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/misc/delete.png");
 
-	var csg = editMenu.addMenu("CSG", Global.FILE_PATH + "icons/models/figures.png");
+	var csg = editMenu.addMenu(Locale.csg, Global.FILE_PATH + "icons/models/figures.png");
 
 	// Create BSP for CSG operation
 	function createBSP(object)
@@ -740,7 +740,7 @@ function MainMenu(parent)
 
 	}, Global.FILE_PATH + "icons/models/figures.png");
 
-	modifiers.addOption("Subdivide", function()
+	modifiers.addOption(Locale.subdivide, function()
 	{
 		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
 		{

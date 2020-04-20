@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * ObjectUtils is a collection of methods to apply operations to Object3D objects
+ * Object utils is a collection of methods to apply operations to Object3D instances.
  *
  * @class ObjectUtils
  * @module Utils
@@ -97,10 +97,10 @@ ObjectUtils.calculateBoundingBox = function(object)
 /**
  * Recalculate all children origins, to be centered with their geometry.
  *
- * @method recalculateGeometryOrigin
+ * @method centerGeometryOrigin
  * @param {Object3D} object Object to recalculate origin of.
  */
-ObjectUtils.recalculateGeometryOrigin = function(object)
+ObjectUtils.centerGeometryOrigin = function(object)
 {
 	object.traverse(function(children)
 	{
@@ -109,13 +109,15 @@ ObjectUtils.recalculateGeometryOrigin = function(object)
 			children.geometry.computeBoundingBox();
 
 			var box = children.geometry.boundingBox.clone();
-
 			var center = box.getCenter(new THREE.Vector3());
-			children.position.add(center);
 
+			// Recenter geometry
 			var matrix = new THREE.Matrix4();
 			matrix.makeTranslation(-center.x, -center.y, -center.z);
 			children.geometry.applyMatrix4(matrix);
+
+			// Recenter children
+			children.position.add(center);
 		}
 	});
 };

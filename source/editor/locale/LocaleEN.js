@@ -45,8 +45,7 @@ LocaleManager.register(
 	objectEditor: "Object Editor",
 	scriptEditor: "Script Editor",
 	particleEditor: "Particle Editor",
-	recalculateOrigin: "Recalculate Origin",
-	recenterGeometries: "Recenter Geometries",
+	centerOrigin: "Center Origin",
 	enable: "Enable",
 	disable: "Disable",
 	static: "Static",
@@ -354,8 +353,10 @@ LocaleManager.register(
 	subtract: "Subtract",
 	intersect: "Intersect",
 	simplify: "Simplify",
+	subdivide: "Subdivide",
 
 	// Editor
+	csg: "CSG",
 	editor: "Editor",
 	information: "Information",
 	rendering: "Rendering",

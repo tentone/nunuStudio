@@ -189,9 +189,9 @@ function TreeNode(container)
 			}
 
 			// Recalculate Origin
-			context.addOption(Locale.recalculateOrigin, function()
+			context.addOption(Locale.centerOrigin, function()
 			{
-				ObjectUtils.recalculateGeometryOrigin(self.object);
+				ObjectUtils.centerGeometryOrigin(self.object);
 			});
 
 			// Rename
