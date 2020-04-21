@@ -44,6 +44,7 @@
 		"yuidocjs": "~0.10.2",
 		"google-closure-compiler": "^20190301.0.0"
 	},
+	"js-flags": "--stack-size 65500",
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
 	"window": {
 		"icon": "source/files/icon.png",
@@ -51,10 +52,12 @@
 		"width": 1280,
 		"height": 720,
 		"min_width": 800,
-		"min_height": 600
+		"min_height": 600,
+		"show_in_taskbar": true
 	},
 	"webkit": {
-		"plugin": false
+		"plugin": false,
+		"double_tap_to_zoom_enabled": false
 	},
 	"build": {
 		"appId": "io.tentone.nunustudio",
