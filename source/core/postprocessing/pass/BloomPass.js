@@ -90,7 +90,7 @@ BloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	this.convolutionUniforms["uImageIncrement"].value = BloomPass.blurX;
 	renderer.setRenderTarget(this.renderTargetX);
 	renderer.clear(true, true, true);
-	renderer.render(this.scene, this.camera, this.renderTargetX, true);
+	renderer.render(this.scene, this.camera);
 
 	// Render quad with blured scene into texture (convolution pass 2)
 	this.convolutionUniforms["tDiffuse"].value = this.renderTargetX.texture;
