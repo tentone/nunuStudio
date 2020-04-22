@@ -770,7 +770,7 @@ SceneEditor.prototype.update = function()
 		this.stats.begin();
 	}
 
-	var isEditingObject = false;
+	var isEditingObject = this.transform.update();
 
 	// Check if mouse is inside canvas
 	if(this.mouse.insideCanvas())
@@ -800,9 +800,7 @@ SceneEditor.prototype.update = function()
 			if(this.mouse.buttonDoubleClicked(Mouse.LEFT))
 			{
 				this.selectObjectWithMouse();
-			}
-
-			isEditingObject = this.transform.update();
+			}	
 		}
 
 		// Lock mouse when camera is moving

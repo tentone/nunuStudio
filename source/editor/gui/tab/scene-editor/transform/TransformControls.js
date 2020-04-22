@@ -191,7 +191,7 @@ function TransformControls(camera, canvas, mouse)
 	this.lookAtMatrix = new THREE.Matrix4();
 
 	/**
-	 * Camera direction vector.
+	 * Camera normalized direction vector relative to the selected object.
 	 *
 	 * @attribute eye
 	 * @type {THREE.Vector3}
@@ -357,10 +357,6 @@ TransformControls.prototype.setMode = function(mode)
 		this.space = TransformControls.LOCAL;
 		this.gizmo = new TransformGizmoScale();
 	}
-	else
-	{
-		this.gizmo = new TransformGizmo();
-	}
 
 	if(this.gizmo !== null)
 	{
@@ -369,7 +365,6 @@ TransformControls.prototype.setMode = function(mode)
 
 
 	this.visible = this.objects.length > 0;
-	this.updatePose();
 };
 
 /**
@@ -409,20 +404,15 @@ TransformControls.prototype.update = function()
  */
 TransformControls.prototype.updatePose = function()
 {
-	if(this.objects.length === 0)
+	if(this.objects.length === 0 || this.gizmo === null)
 	{
-		this.clear();
 		return;
 	}
 
-	if(this.mode === TransformControls.NONE)
-	{
-		return;
-	}
-	
 	this.visible = true;
-	this.position.set(0, 0, 0);
 
+	// Calculate position from the avegare of all selected objects.
+	this.position.set(0, 0, 0);
 	for(var i = 0; i < this.objects.length; i++)
 	{
 		this.attributes[i].worldPosition.setFromMatrixPosition(this.objects[i].matrixWorld);
@@ -435,9 +425,11 @@ TransformControls.prototype.updatePose = function()
 		this.position.divideScalar(this.objects.length);
 	}
 
+	// Get camera rotation and position
 	this.camPosition.setFromMatrixPosition(this.camera.matrixWorld);
 	this.camRotation.setFromRotationMatrix(this.tempMatrix.extractRotation(this.camera.matrixWorld));
 
+	// Set controls scale based of camera dsitance to object
 	if(this.camera instanceof THREE.PerspectiveCamera)
 	{
 		this.toolScale = this.position.distanceTo(this.camPosition) / 6 * this.size;
@@ -448,59 +440,56 @@ TransformControls.prototype.updatePose = function()
 		this.toolScale = this.camera.size / 6 * this.size;
 		this.scale.set(this.toolScale, this.toolScale, this.toolScale);
 	}
-	
+		
+	// Camera direction vector
 	this.eye.copy(this.camPosition).sub(this.position).normalize();
 
-	if(this.mode !== TransformControls.NONE)
-	{	
-		if(this.space === TransformControls.LOCAL || this.mode === TransformControls.SCALE)
-		{
-			this.gizmo.update(this.attributes[0].worldRotation, this.eye);
-		}
-		else if(this.space === TransformControls.WORLD)
-		{
-			this.gizmo.update(new THREE.Euler(), this.eye);
-		}
-
-		this.gizmo.highlight(this.axis);
-	}
+	// Update gizmo specific pose
+	this.gizmo.updatePose(this);
 };
 
+/**
+ * Check if the pointer if over any of the picker objects.
+ *
+ * If it is set the axis to the picker object detected.
+ *
+ * @method onPointerHover
+ */
 TransformControls.prototype.onPointerHover = function()
 {
-	if(this.objects.length === 0 || this.dragging === true || this.mode === TransformControls.NONE)
+	if(this.objects.length === 0 || this.dragging === true || this.gizmo === null)
 	{
 		return;
 	}
 
 	var intersect = this.intersectObjects(this.gizmo.pickers.children);
-	var axis = null;
-
 	if(intersect)
 	{
-		axis = intersect.object.name;
+		var axis = intersect.object.name;
+		if(this.axis !== axis)
+		{
+			this.axis = axis;
+		}
 	}
-
-	if(this.axis !== axis)
+	else
 	{
-		this.axis = axis;
-		this.updatePose();
+		this.axis = null;
 	}
 };
 
 TransformControls.prototype.onPointerDown = function()
 {
-	if(this.objects.length === 0 || this.dragging === true || this.mode === TransformControls.NONE)
+	if(this.objects.length === 0 || this.dragging === true || this.gizmo === null)
 	{
 		return;
 	}
 
 	var intersect = this.intersectObjects(this.gizmo.pickers.children);
-
 	if(intersect)
 	{
 		this.editing = true;
 		this.axis = intersect.object.name;
+
 		this.updatePose();
 
 		this.eye.copy(this.camPosition).sub(this.position).normalize();
@@ -515,7 +504,6 @@ TransformControls.prototype.onPointerDown = function()
 				this.attributes[i].oldScale.copy(this.objects[i].scale);
 				this.attributes[i].oldQuaternion.copy(this.objects[i].quaternion);
 				this.attributes[i].oldRotationMatrix.extractRotation(this.objects[i].matrix);
-
 				this.attributes[i].worldRotationMatrix.extractRotation(this.objects[i].matrixWorld);
 				this.attributes[i].parentRotationMatrix.extractRotation(this.objects[i].parent.matrixWorld);
 				this.attributes[i].parentScale.setFromMatrixScale(this.tempMatrix.getInverse(this.objects[i].parent.matrixWorld));
@@ -523,6 +511,8 @@ TransformControls.prototype.onPointerDown = function()
 
 			this.offset.copy(planeIntersect.point);
 		}
+
+		this.gizmo.startTransform(this);
 	}
 
 	this.dragging = true;
@@ -537,273 +527,12 @@ TransformControls.prototype.onPointerDown = function()
  */
 TransformControls.prototype.onPointerMove = function()
 {
-	if(this.objects.length === 0 || this.axis === null || this.dragging === false || this.mode === TransformControls.NONE)
+	if(this.objects.length === 0 || this.axis === null || this.dragging === false || this.gizmo === null)
 	{
 		return;
 	}
 
-	var planeIntersect = this.intersectObjects([this.gizmo.activePlane]);
-	if(planeIntersect === false) 
-	{
-		return;
-	}
-	
-	if(this.mode === TransformControls.TRANSLATE)
-	{
-		for(var i = 0; i < this.objects.length; i++)
-		{
-			this.point.copy(planeIntersect.point);
-			this.point.sub(this.offset);
-			this.point.multiply(this.attributes[i].parentScale);
-
-			if(this.axis.search("X") === -1)
-			{
-				this.point.x = 0;
-			}
-			if(this.axis.search("Y") === -1) 
-			{
-				this.point.y = 0;
-			}
-			if(this.axis.search("Z") === -1)
-			{
-				this.point.z = 0;
-			}
-					
-			if(this.space === TransformControls.WORLD || this.axis.search("XYZ") !== -1)
-			{
-				this.point.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].parentRotationMatrix));
-
-				for(var j = 0; j < this.objects.length; j++)
-				{
-					this.objects[j].position.copy(this.attributes[j].oldPosition);
-					this.objects[j].position.add(this.point);
-				}
-			}
-			else if(this.space === TransformControls.LOCAL)
-			{
-				if(this.axis.length > 1)
-				{
-					this.point.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
-					this.point.applyMatrix4(this.attributes[i].oldRotationMatrix);
-				}
-				else
-				{
-					this.point.applyMatrix4(this.attributes[i].oldRotationMatrix);
-				}
-
-				for(var j = 0; j < this.objects.length; j++)
-				{
-					this.objects[j].position.copy(this.attributes[j].oldPosition);
-					this.objects[j].position.add(this.point);
-				}
-			}
-
-			if(this.snap)
-			{
-				if(this.space === TransformControls.LOCAL)
-				{
-					this.objects[i].position.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
-				}
-
-				if(this.axis.search("X") !== -1)
-				{
-					this.objects[i].position.x = Math.round(this.objects[i].position.x / this.translationSnap) * this.translationSnap;
-				}
-				if(this.axis.search("Y") !== -1)
-				{
-					this.objects[i].position.y = Math.round(this.objects[i].position.y / this.translationSnap) * this.translationSnap;
-				}
-				if(this.axis.search("Z") !== -1)
-				{
-					this.objects[i].position.z = Math.round(this.objects[i].position.z / this.translationSnap) * this.translationSnap;
-				}
-
-				if(this.space === TransformControls.LOCAL)
-				{
-					this.objects[i].position.applyMatrix4(this.attributes[i].worldRotationMatrix);
-				}
-			}
-		}
-	}
-	else if(this.mode === TransformControls.SCALE)
-	{
-		for(var i = 0; i < this.objects.length; i++)
-		{
-			this.point.copy(planeIntersect.point);
-			this.point.sub(this.offset);
-			this.point.multiply(this.attributes[i].parentScale);
-
-			if(this.axis === "XYZ")
-			{
-				this.toolScale = 1 + this.point.y;
-
-				this.objects[i].scale.copy(this.attributes[i].oldScale);
-				this.objects[i].scale.multiplyScalar(this.toolScale);
-			}
-			else
-			{
-				this.point.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
-
-				if(this.axis === "X")
-				{
-					this.objects[i].scale.x = this.attributes[i].oldScale.x * (1 + this.point.x);
-				}
-				else if(this.axis === "Y")
-				{
-					this.objects[i].scale.y = this.attributes[i].oldScale.y * (1 + this.point.y);
-				}
-				else if(this.axis === "Z")
-				{
-					this.objects[i].scale.z = this.attributes[i].oldScale.z * (1 + this.point.z);
-				}
-			}
-
-			// Update physics objects
-			if(this.objects[i] instanceof PhysicsObject)
-			{
-				var shapes = this.objects[i].body.shapes;
-				var scale = this.objects[i].scale;
-
-				for(var i = 0; i < shapes.length; i++)
-				{
-					var shape = shapes[i];
-					
-					if(shape.type === CANNON.Shape.types.BOX)
-					{
-						shape.halfExtents.x = scale.x / 2.0;
-						shape.halfExtents.y = scale.y / 2.0;
-						shape.halfExtents.z = scale.z / 2.0;
-					}
-					else if(shape.type === CANNON.Shape.types.SPHERE)
-					{
-						shape.radius = scale.x;
-					}
-				}
-			}
-		}
-	}
-	else if(this.mode === TransformControls.ROTATE)
-	{
-		for(var i = 0; i < this.objects.length; i++)
-		{
-			this.point.copy(planeIntersect.point);
-			this.point.sub(this.attributes[i].worldPosition);
-			this.point.multiply(this.attributes[i].parentScale);
-			this.tempVector.copy(this.offset).sub(this.attributes[i].worldPosition);
-			this.tempVector.multiply(this.attributes[i].parentScale);
-
-			if(this.axis === "E")
-			{
-				this.point.applyMatrix4(this.tempMatrix.getInverse(this.lookAtMatrix));
-				this.tempVector.applyMatrix4(this.tempMatrix.getInverse(this.lookAtMatrix));
-
-				this.toolRotation.set(Math.atan2(this.point.z, this.point.y), Math.atan2(this.point.x, this.point.z), Math.atan2(this.point.y, this.point.x));
-				this.offsetRotation.set(Math.atan2(this.tempVector.z, this.tempVector.y), Math.atan2(this.tempVector.x, this.tempVector.z), Math.atan2(this.tempVector.y, this.tempVector.x));
-
-				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.attributes[i].parentRotationMatrix));
-
-				this.quaternionE.setFromAxisAngle(this.eye, this.toolRotation.z - this.offsetRotation.z);
-				this.quaternionXYZ.setFromRotationMatrix(this.attributes[i].worldRotationMatrix);
-
-				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionE);
-				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionXYZ);
-
-				this.objects[i].quaternion.copy(this.tempQuaternion);
-			}
-			else if(this.axis === "XYZE")
-			{
-				this.quaternionE.setFromEuler(this.point.clone().cross(this.tempVector).normalize()); // rotation axis
-
-				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.attributes[i].parentRotationMatrix));
-				this.quaternionX.setFromAxisAngle(this.quaternionE, - this.point.clone().angleTo(this.tempVector));
-				this.quaternionXYZ.setFromRotationMatrix(this.attributes[i].worldRotationMatrix);
-
-				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionX);
-				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionXYZ);
-
-				this.objects[i].quaternion.copy(this.tempQuaternion);
-			}
-			else if(this.space === TransformControls.LOCAL)
-			{
-				this.point.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
-
-				this.tempVector.applyMatrix4(this.tempMatrix.getInverse(this.attributes[i].worldRotationMatrix));
-
-				this.toolRotation.set(Math.atan2(this.point.z, this.point.y), Math.atan2(this.point.x, this.point.z), Math.atan2(this.point.y, this.point.x));
-				this.offsetRotation.set(Math.atan2(this.tempVector.z, this.tempVector.y), Math.atan2(this.tempVector.x, this.tempVector.z), Math.atan2(this.tempVector.y, this.tempVector.x));
-
-				this.quaternionXYZ.setFromRotationMatrix(this.attributes[i].oldRotationMatrix);
-
-				if(this.snap)
-				{
-					this.quaternionX.setFromAxisAngle(this.unitX, Math.round((this.toolRotation.x - this.offsetRotation.x) / this.rotationSnap) * this.rotationSnap);
-					this.quaternionY.setFromAxisAngle(this.unitY, Math.round((this.toolRotation.y - this.offsetRotation.y) / this.rotationSnap) * this.rotationSnap);
-					this.quaternionZ.setFromAxisAngle(this.unitZ, Math.round((this.toolRotation.z - this.offsetRotation.z) / this.rotationSnap) * this.rotationSnap);
-				}
-				else
-				{
-					this.quaternionX.setFromAxisAngle(this.unitX, this.toolRotation.x - this.offsetRotation.x);
-					this.quaternionY.setFromAxisAngle(this.unitY, this.toolRotation.y - this.offsetRotation.y);
-					this.quaternionZ.setFromAxisAngle(this.unitZ, this.toolRotation.z - this.offsetRotation.z);
-				}
-
-				if(this.axis === "X")
-				{
-					this.quaternionXYZ.multiplyQuaternions(this.quaternionXYZ, this.quaternionX);
-				}
-				else if(this.axis === "Y")
-				{
-					this.quaternionXYZ.multiplyQuaternions(this.quaternionXYZ, this.quaternionY);
-				}
-				else if(this.axis === "Z")
-				{
-					this.quaternionXYZ.multiplyQuaternions(this.quaternionXYZ, this.quaternionZ);
-				}
-
-				this.objects[i].quaternion.copy(this.quaternionXYZ);
-			}
-			else if(this.space === TransformControls.WORLD)
-			{
-				this.toolRotation.set(Math.atan2(this.point.z, this.point.y), Math.atan2(this.point.x, this.point.z), Math.atan2(this.point.y, this.point.x));
-				this.offsetRotation.set(Math.atan2(this.tempVector.z, this.tempVector.y), Math.atan2(this.tempVector.x, this.tempVector.z), Math.atan2(this.tempVector.y, this.tempVector.x));
-				this.tempQuaternion.setFromRotationMatrix(this.tempMatrix.getInverse(this.attributes[i].parentRotationMatrix));
-
-				if(this.snap)
-				{
-					this.quaternionX.setFromAxisAngle(this.unitX, Math.round((this.toolRotation.x - this.offsetRotation.x) / this.rotationSnap) * this.rotationSnap);
-					this.quaternionY.setFromAxisAngle(this.unitY, Math.round((this.toolRotation.y - this.offsetRotation.y) / this.rotationSnap) * this.rotationSnap);
-					this.quaternionZ.setFromAxisAngle(this.unitZ, Math.round((this.toolRotation.z - this.offsetRotation.z) / this.rotationSnap) * this.rotationSnap);
-				}
-				else
-				{
-					this.quaternionX.setFromAxisAngle(this.unitX, this.toolRotation.x - this.offsetRotation.x);
-					this.quaternionY.setFromAxisAngle(this.unitY, this.toolRotation.y - this.offsetRotation.y);
-					this.quaternionZ.setFromAxisAngle(this.unitZ, this.toolRotation.z - this.offsetRotation.z);
-				}
-
-				this.quaternionXYZ.setFromRotationMatrix(this.attributes[i].worldRotationMatrix);
-
-				if(this.axis === "X")
-				{
-					this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionX);
-				}
-				else if(this.axis === "Y")
-				{
-					this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionY);
-				}
-				else if(this.axis === "Z")
-				{
-					this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionZ);
-				}
-
-				this.tempQuaternion.multiplyQuaternions(this.tempQuaternion, this.quaternionXYZ);
-
-				this.objects[i].quaternion.copy(this.tempQuaternion);
-			}
-		}
-	}
-
-	this.updatePose();
+	this.gizmo.transformObject(this)
 };
 
 /**
@@ -817,49 +546,7 @@ TransformControls.prototype.onPointerUp = function()
 {
 	if(this.editing)
 	{
-		if(this.mode === TransformControls.TRANSLATE)
-		{
-			var actions = [];
-
-			for(var i = 0; i < this.objects.length; i++)
-			{
-				var object = this.objects[i].position;
-				actions.push(new ChangeAction(object, "x", object.x, this.attributes[i].oldPosition.x));
-				actions.push(new ChangeAction(object, "y", object.y, this.attributes[i].oldPosition.y));
-				actions.push(new ChangeAction(object, "z", object.z, this.attributes[i].oldPosition.z));
-			}
-
-			Editor.addAction(new ActionBundle(actions));
-		}
-		else if(this.mode === TransformControls.SCALE)
-		{
-			var actions = [];
-
-			for(var i = 0; i < this.objects.length; i++)
-			{
-				var object = this.objects[i].scale;
-				actions.push(new ChangeAction(object, "x", object.x, this.attributes[i].oldScale.x));
-				actions.push(new ChangeAction(object, "y", object.y, this.attributes[i].oldScale.y));
-				actions.push(new ChangeAction(object, "z", object.z, this.attributes[i].oldScale.z));
-			}
-			
-			Editor.addAction(new ActionBundle(actions));
-		}
-		else if(this.mode === TransformControls.ROTATE)
-		{
-			var actions = [];
-
-			for(var i = 0; i < this.objects.length; i++)
-			{
-				var object = this.objects[i].quaternion;
-				actions.push(new ChangeAction(object, "x", object.x, this.attributes[i].oldQuaternion.x));
-				actions.push(new ChangeAction(object, "y", object.y, this.attributes[i].oldQuaternion.y));
-				actions.push(new ChangeAction(object, "z", object.z, this.attributes[i].oldQuaternion.z));
-				actions.push(new ChangeAction(object, "w", object.w, this.attributes[i].oldQuaternion.w));
-			}
-			
-			Editor.addAction(new ActionBundle(actions));
-		}
+		this.gizmo.applyChanges(this);
 	}
 
 	this.editing = false;

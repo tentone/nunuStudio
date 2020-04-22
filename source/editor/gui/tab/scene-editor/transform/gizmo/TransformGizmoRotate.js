@@ -138,3 +138,146 @@ TransformGizmoRotate.prototype.update = function(rotation, eye2)
 		}
 	});
 };
+
+TransformGizmoRotate.prototype.applyChanges = function(controls)
+{
+	var actions = [];
+
+	for(var i = 0; i < controls.objects.length; i++)
+	{
+		var object = controls.objects[i].quaternion;
+		actions.push(new ChangeAction(object, "x", object.x, controls.attributes[i].oldQuaternion.x));
+		actions.push(new ChangeAction(object, "y", object.y, controls.attributes[i].oldQuaternion.y));
+		actions.push(new ChangeAction(object, "z", object.z, controls.attributes[i].oldQuaternion.z));
+		actions.push(new ChangeAction(object, "w", object.w, controls.attributes[i].oldQuaternion.w));
+	}
+	
+	Editor.addAction(new ActionBundle(actions));
+};
+
+TransformGizmoRotate.prototype.transformObject = function(controls)
+{
+	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
+	if(planeIntersect === false) 
+	{
+		return;
+	}
+	
+	for(var i = 0; i < controls.objects.length; i++)
+	{
+		controls.point.copy(planeIntersect.point);
+		controls.point.sub(controls.attributes[i].worldPosition);
+		controls.point.multiply(controls.attributes[i].parentScale);
+		controls.tempVector.copy(controls.offset).sub(controls.attributes[i].worldPosition);
+		controls.tempVector.multiply(controls.attributes[i].parentScale);
+
+		if(controls.axis === "E")
+		{
+			controls.point.applyMatrix4(controls.tempMatrix.getInverse(controls.lookAtMatrix));
+			controls.tempVector.applyMatrix4(controls.tempMatrix.getInverse(controls.lookAtMatrix));
+
+			controls.toolRotation.set(Math.atan2(controls.point.z, controls.point.y), Math.atan2(controls.point.x, controls.point.z), Math.atan2(controls.point.y, controls.point.x));
+			controls.offsetRotation.set(Math.atan2(controls.tempVector.z, controls.tempVector.y), Math.atan2(controls.tempVector.x, controls.tempVector.z), Math.atan2(controls.tempVector.y, controls.tempVector.x));
+
+			controls.tempQuaternion.setFromRotationMatrix(controls.tempMatrix.getInverse(controls.attributes[i].parentRotationMatrix));
+
+			controls.quaternionE.setFromAxisAngle(controls.eye, controls.toolRotation.z - controls.offsetRotation.z);
+			controls.quaternionXYZ.setFromRotationMatrix(controls.attributes[i].worldRotationMatrix);
+
+			controls.tempQuaternion.multiplyQuaternions(controls.tempQuaternion, controls.quaternionE);
+			controls.tempQuaternion.multiplyQuaternions(controls.tempQuaternion, controls.quaternionXYZ);
+
+			controls.objects[i].quaternion.copy(controls.tempQuaternion);
+		}
+		else if(controls.axis === "XYZE")
+		{
+			controls.quaternionE.setFromEuler(controls.point.clone().cross(controls.tempVector).normalize()); // rotation axis
+
+			controls.tempQuaternion.setFromRotationMatrix(controls.tempMatrix.getInverse(controls.attributes[i].parentRotationMatrix));
+			controls.quaternionX.setFromAxisAngle(controls.quaternionE, - controls.point.clone().angleTo(controls.tempVector));
+			controls.quaternionXYZ.setFromRotationMatrix(controls.attributes[i].worldRotationMatrix);
+
+			controls.tempQuaternion.multiplyQuaternions(controls.tempQuaternion, controls.quaternionX);
+			controls.tempQuaternion.multiplyQuaternions(controls.tempQuaternion, controls.quaternionXYZ);
+
+			controls.objects[i].quaternion.copy(controls.tempQuaternion);
+		}
+		else if(controls.space === TransformControls.LOCAL)
+		{
+			controls.point.applyMatrix4(controls.tempMatrix.getInverse(controls.attributes[i].worldRotationMatrix));
+
+			controls.tempVector.applyMatrix4(controls.tempMatrix.getInverse(controls.attributes[i].worldRotationMatrix));
+
+			controls.toolRotation.set(Math.atan2(controls.point.z, controls.point.y), Math.atan2(controls.point.x, controls.point.z), Math.atan2(controls.point.y, controls.point.x));
+			controls.offsetRotation.set(Math.atan2(controls.tempVector.z, controls.tempVector.y), Math.atan2(controls.tempVector.x, controls.tempVector.z), Math.atan2(controls.tempVector.y, controls.tempVector.x));
+
+			controls.quaternionXYZ.setFromRotationMatrix(controls.attributes[i].oldRotationMatrix);
+
+			if(controls.snap)
+			{
+				controls.quaternionX.setFromAxisAngle(controls.unitX, Math.round((controls.toolRotation.x - controls.offsetRotation.x) / controls.rotationSnap) * controls.rotationSnap);
+				controls.quaternionY.setFromAxisAngle(controls.unitY, Math.round((controls.toolRotation.y - controls.offsetRotation.y) / controls.rotationSnap) * controls.rotationSnap);
+				controls.quaternionZ.setFromAxisAngle(controls.unitZ, Math.round((controls.toolRotation.z - controls.offsetRotation.z) / controls.rotationSnap) * controls.rotationSnap);
+			}
+			else
+			{
+				controls.quaternionX.setFromAxisAngle(controls.unitX, controls.toolRotation.x - controls.offsetRotation.x);
+				controls.quaternionY.setFromAxisAngle(controls.unitY, controls.toolRotation.y - controls.offsetRotation.y);
+				controls.quaternionZ.setFromAxisAngle(controls.unitZ, controls.toolRotation.z - controls.offsetRotation.z);
+			}
+
+			if(controls.axis === "X")
+			{
+				controls.quaternionXYZ.multiplyQuaternions(controls.quaternionXYZ, controls.quaternionX);
+			}
+			else if(controls.axis === "Y")
+			{
+				controls.quaternionXYZ.multiplyQuaternions(controls.quaternionXYZ, controls.quaternionY);
+			}
+			else if(controls.axis === "Z")
+			{
+				controls.quaternionXYZ.multiplyQuaternions(controls.quaternionXYZ, controls.quaternionZ);
+			}
+
+			controls.objects[i].quaternion.copy(controls.quaternionXYZ);
+		}
+		else if(controls.space === TransformControls.WORLD)
+		{
+			controls.toolRotation.set(Math.atan2(controls.point.z, controls.point.y), Math.atan2(controls.point.x, controls.point.z), Math.atan2(controls.point.y, controls.point.x));
+			controls.offsetRotation.set(Math.atan2(controls.tempVector.z, controls.tempVector.y), Math.atan2(controls.tempVector.x, controls.tempVector.z), Math.atan2(controls.tempVector.y, controls.tempVector.x));
+			controls.tempQuaternion.setFromRotationMatrix(controls.tempMatrix.getInverse(controls.attributes[i].parentRotationMatrix));
+
+			if(controls.snap)
+			{
+				controls.quaternionX.setFromAxisAngle(controls.unitX, Math.round((controls.toolRotation.x - controls.offsetRotation.x) / controls.rotationSnap) * controls.rotationSnap);
+				controls.quaternionY.setFromAxisAngle(controls.unitY, Math.round((controls.toolRotation.y - controls.offsetRotation.y) / controls.rotationSnap) * controls.rotationSnap);
+				controls.quaternionZ.setFromAxisAngle(controls.unitZ, Math.round((controls.toolRotation.z - controls.offsetRotation.z) / controls.rotationSnap) * controls.rotationSnap);
+			}
+			else
+			{
+				controls.quaternionX.setFromAxisAngle(controls.unitX, controls.toolRotation.x - controls.offsetRotation.x);
+				controls.quaternionY.setFromAxisAngle(controls.unitY, controls.toolRotation.y - controls.offsetRotation.y);
+				controls.quaternionZ.setFromAxisAngle(controls.unitZ, controls.toolRotation.z - controls.offsetRotation.z);
+			}
+
+			controls.quaternionXYZ.setFromRotationMatrix(controls.attributes[i].worldRotationMatrix);
+
+			if(controls.axis === "X")
+			{
+				controls.tempQuaternion.multiplyQuaternions(controls.tempQuaternion, controls.quaternionX);
+			}
+			else if(controls.axis === "Y")
+			{
+				controls.tempQuaternion.multiplyQuaternions(controls.tempQuaternion, controls.quaternionY);
+			}
+			else if(controls.axis === "Z")
+			{
+				controls.tempQuaternion.multiplyQuaternions(controls.tempQuaternion, controls.quaternionZ);
+			}
+
+			controls.tempQuaternion.multiplyQuaternions(controls.tempQuaternion, controls.quaternionXYZ);
+
+			controls.objects[i].quaternion.copy(controls.tempQuaternion);
+		}
+	}
+};

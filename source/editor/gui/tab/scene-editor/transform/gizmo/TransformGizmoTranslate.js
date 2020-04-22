@@ -85,8 +85,7 @@ TransformGizmoTranslate.prototype.setActivePlane = function(axis, eye)
 			this.activePlane = this.planes["YZ"];
 		}
 	}
-
-	if(axis === "XYZ")
+	else if(axis === "XYZ")
 	{
 		this.activePlane = this.planes["XYZE"];
 	}
@@ -101,5 +100,105 @@ TransformGizmoTranslate.prototype.setActivePlane = function(axis, eye)
 	else if(axis === "XZ")
 	{
 		this.activePlane = this.planes["XZ"];
+	}
+};
+
+TransformGizmoTranslate.prototype.applyChanges = function(controls)
+{
+	var actions = [];
+
+	for(var i = 0; i < controls.objects.length; i++)
+	{
+		var object = controls.objects[i].position;
+		actions.push(new ChangeAction(object, "x", object.x, controls.attributes[i].oldPosition.x));
+		actions.push(new ChangeAction(object, "y", object.y, controls.attributes[i].oldPosition.y));
+		actions.push(new ChangeAction(object, "z", object.z, controls.attributes[i].oldPosition.z));
+	}
+
+	Editor.addAction(new ActionBundle(actions));
+};
+
+
+TransformGizmoTranslate.prototype.transformObject = function(controls)
+{
+	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
+	if(planeIntersect === false) 
+	{
+		return;
+	}
+
+	for(var i = 0; i < controls.objects.length; i++)
+	{
+		controls.point.copy(planeIntersect.point);
+		controls.point.sub(controls.offset);
+		controls.point.multiply(controls.attributes[i].parentScale);
+
+		if(controls.axis.search("X") === -1)
+		{
+			controls.point.x = 0;
+		}
+		if(controls.axis.search("Y") === -1) 
+		{
+			controls.point.y = 0;
+		}
+		if(controls.axis.search("Z") === -1)
+		{
+			controls.point.z = 0;
+		}
+				
+		if(controls.space === TransformControls.WORLD || controls.axis.search("XYZ") !== -1)
+		{
+			controls.point.applyMatrix4(controls.tempMatrix.getInverse(controls.attributes[i].parentRotationMatrix));
+
+			for(var j = 0; j < controls.objects.length; j++)
+			{
+				controls.objects[j].position.copy(controls.attributes[j].oldPosition);
+				controls.objects[j].position.add(controls.point);
+			}
+		}
+		else if(controls.space === TransformControls.LOCAL)
+		{
+			if(controls.axis.length > 1)
+			{
+				controls.point.applyMatrix4(controls.tempMatrix.getInverse(controls.attributes[i].worldRotationMatrix));
+				controls.point.applyMatrix4(controls.attributes[i].oldRotationMatrix);
+			}
+			else
+			{
+				controls.point.applyMatrix4(controls.attributes[i].oldRotationMatrix);
+			}
+
+			for(var j = 0; j < controls.objects.length; j++)
+			{
+				controls.objects[j].position.copy(controls.attributes[j].oldPosition);
+				controls.objects[j].position.add(controls.point);
+			}
+		}
+
+		if(controls.snap)
+		{
+			if(controls.space === TransformControls.LOCAL)
+			{
+				controls.objects[i].position.applyMatrix4(controls.tempMatrix.getInverse(controls.attributes[i].worldRotationMatrix));
+			}
+
+			if(controls.axis.search("X") !== -1)
+			{
+				controls.objects[i].position.x = Math.round(controls.objects[i].position.x / controls.translationSnap) * controls.translationSnap;
+			}
+			if(controls.axis.search("Y") !== -1)
+			{
+				controls.objects[i].position.y = Math.round(controls.objects[i].position.y / controls.translationSnap) * controls.translationSnap;
+			}
+			if(controls.axis.search("Z") !== -1)
+			{
+				controls.objects[i].position.z = Math.round(controls.objects[i].position.z / controls.translationSnap) * controls.translationSnap;
+			}
+
+			if(controls.space === TransformControls.LOCAL)
+			{
+				controls.objects[i].position.applyMatrix4(controls.attributes[i].worldRotationMatrix);
+			}
+		}
 	}
 };
