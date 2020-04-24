@@ -321,7 +321,7 @@ include("lib/jszip.min.js");
 include("lib/ThreeCSG.js");
 include("lib/tween.js");
 
-include("source/core/three/3MFLoader.js");
+include("source/core/three/loaders/3MFLoader.js");
 
 include("source/editor/style.css");
 
