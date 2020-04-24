@@ -2,6 +2,8 @@
 
 function SkeletonHelper(object) 
 {
+	this.object = object;
+
 	var bones = SkeletonHelper.getBoneList(object);
 	var geometry = new THREE.BufferGeometry();
 
@@ -37,7 +39,6 @@ function SkeletonHelper(object)
 
 	this.root = object;
 	this.bones = bones;
-	
 	this.matrixAutoUpdate = false;
 
 	this.update();
@@ -64,36 +65,32 @@ SkeletonHelper.getBoneList = function(object)
 
 SkeletonHelper.prototype.update = function ()
 {
-	var vector = new THREE.Vector3();
-	var boneMatrix = new THREE.Matrix4();
+	var bones = this.bones;
+	var geometry = this.geometry;
+	var position = geometry.getAttribute("position");
+
 	var matrixWorldInv = new THREE.Matrix4();
+	matrixWorldInv.getInverse(this.root.matrixWorld);
 
-	return function update()
+	var boneMatrix = new THREE.Matrix4();
+	var vector = new THREE.Vector3();
+
+	for(var i = 0, j = 0; i < bones.length; i++)
 	{
-		var bones = this.bones;
-		var geometry = this.geometry;
-		var position = geometry.getAttribute("position");
+		var bone = bones[i];
+		if(bone.parent && bone.parent.isBone)
+		{	
+			boneMatrix.multiplyMatrices(matrixWorldInv, bone.matrixWorld);
+			vector.setFromMatrixPosition(boneMatrix);
+			position.setXYZ(j, vector.x, vector.y, vector.z);
 
-		matrixWorldInv.getInverse(this.root.matrixWorld);
+			boneMatrix.multiplyMatrices(matrixWorldInv, bone.parent.matrixWorld);
+			vector.setFromMatrixPosition(boneMatrix);
+			position.setXYZ(j + 1, vector.x, vector.y, vector.z);
 
-		for(var i = 0, j = 0; i < bones.length; i++)
-		{
-			var bone = bones[i];
-
-			if(bone.parent && bone.parent.isBone)
-			{
-				boneMatrix.multiplyMatrices(matrixWorldInv, bone.matrixWorld);
-				vector.setFromMatrixPosition(boneMatrix);
-				position.setXYZ(j, vector.x, vector.y, vector.z);
-
-				boneMatrix.multiplyMatrices(matrixWorldInv, bone.parent.matrixWorld);
-				vector.setFromMatrixPosition(boneMatrix);
-				position.setXYZ(j + 1, vector.x, vector.y, vector.z);
-
-				j += 2;
-			}
+			j += 2;
 		}
+	}
 
-		geometry.getAttribute("position").needsUpdate = true;
-	};
-}();
+	geometry.getAttribute("position").needsUpdate = true;
+};

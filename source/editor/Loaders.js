@@ -610,12 +610,12 @@ Editor.loadModel = function(file, parent)
 			{
 				try
 				{
-					THREE.DRACOLoader.setDecoderPath(Global.FILE_PATH + "wasm/draco/");
-					THREE.DRACOLoader.setDecoderConfig({type: "wasm"});
 					var loader = new THREE.DRACOLoader();
+					loader.setDecoderPath(Global.FILE_PATH + "wasm/draco/");
+					loader.setDecoderConfig({type: "wasm"});
 					loader.decodeDracoFile(reader.result, function(geometry)
 					{
-						THREE.DRACOLoader.releaseDecoderModule();
+						loader.releaseDecoderModule();
 
 						if(geometry.isBufferGeometry === true)
 						{
@@ -647,20 +647,21 @@ Editor.loadModel = function(file, parent)
 			{
 				try
 				{
+					var dracoLoader = new THREE.DRACOLoader();
+					dracoLoader.setDecoderPath(Global.FILE_PATH + "wasm/draco/");
+					dracoLoader.setDecoderConfig({type: "wasm"});
+
 					var loader = new THREE.GLTFLoader();
-					THREE.DRACOLoader.setDecoderPath(Global.FILE_PATH + "wasm/draco/");
-					THREE.DRACOLoader.setDecoderConfig({type: "wasm"});
-					loader.dracoLoader = new THREE.DRACOLoader();
+					loader.dracoLoader = dracoLoader;
 					loader.parse(reader.result, path, function(gltf)
 					{
-						THREE.DRACOLoader.releaseDecoderModule();
+						dracoLoader.dispose();
 
 						var scene = gltf.scene;
 						scene.type = "Group";
 						scene.name = FileSystem.getNameWithoutExtension(name);
 
 						var animations = gltf.animations;
-						
 						if(animations.length > 0)
 						{
 							scene.traverse(function(child)

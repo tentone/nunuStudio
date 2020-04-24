@@ -22,12 +22,12 @@ catch(e){}
 /**
  * Check if a file corresponds to a remote location.
  *
- * @method isRemote
+ * @method isLocalFile
  * @return {boolean} If the file is remote returns true, false otherwise.
  */
-FileSystem.isRemote = function(fname)
+FileSystem.isLocalFile = function(fname)
 {
-	return fname.startsWith("http");
+	return !(fname.startsWith("http") || fname.startsWith("blob"));
 };
 
 /**
@@ -51,7 +51,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 	}
 
 	// NodeJS
-	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
+	if(FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
 	{
 		if(sync === true)
 		{
@@ -135,7 +135,7 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
 	}
 
 	// NodeJS
-	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
+	if(FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
 	{
 		if(sync === true)
 		{
@@ -213,7 +213,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 	}
 	
 	// NodeJS
-	if(FileSystem.fs !== undefined && !FileSystem.isRemote(fname))
+	if(FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
 	{
 		if(sync === true)
 		{
