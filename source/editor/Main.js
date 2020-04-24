@@ -297,7 +297,6 @@ include("lib/three/loaders/DDSLoader.js");
 include("lib/three/loaders/PVRLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/KTXLoader.js");
-//("lib/three/loaders/3MFLoader.js");
 
 include("lib/three/modifiers/SimplifyModifier.js");
 include("lib/three/modifiers/SubdivisionModifier.js");
@@ -321,6 +320,8 @@ include("lib/jscolor.min.js");
 include("lib/jszip.min.js");
 include("lib/ThreeCSG.js");
 include("lib/tween.js");
+
+include("source/core/three/3MFLoader.js");
 
 include("source/editor/style.css");
 
@@ -587,6 +588,3 @@ include("source/editor/history/action/resources/SwapResourceAction.js");
 include("source/editor/Settings.js");
 include("source/editor/Exporters.js");
 include("source/editor/Loaders.js");
-
-// TODO <REMOVE AFTER ITS DONE>
-include("source/3MFLoader.js");
