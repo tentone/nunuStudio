@@ -11,9 +11,6 @@ function GeometryLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 
-	this.geometryLoader = new LegacyGeometryLoader();
-	this.bufferGeometryLoader = new THREE.BufferGeometryLoader();
-
 	this.shapes = {};
 }
 
@@ -65,7 +62,8 @@ GeometryLoader.prototype.parse = function(data)
 	}
 	else if(data.type === "Geometry")
 	{
-		geometry = this.geometryLoader.parse(data.data).geometry;
+		var loader = new LegacyGeometryLoader();
+		geometry = loader.parse(data.data).geometry;
 	}
 	else
 	{
