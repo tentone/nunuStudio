@@ -66,7 +66,7 @@ THREE.BufferGeometry.prototype.toJSON = function()
 		{
 			attributeData =
 			{
-				name: attribute.name;
+				name: attribute.name,
 				itemSize: attribute.itemSize,
 				type: attribute.array.constructor.name,
 				array: Array.prototype.slice.call(attribute.array),
