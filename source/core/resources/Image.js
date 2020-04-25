@@ -120,7 +120,7 @@ Image.prototype.loadArrayBufferData = function(data, encoding)
 
 	this.data = URL.createObjectURL(blob);
 	this.arraybuffer = data;
-	this.encoding = encoding;
+	this.encoding = encoding !== undefined ? encoding : "";
 	this.format = "arraybuffer";
 };
 

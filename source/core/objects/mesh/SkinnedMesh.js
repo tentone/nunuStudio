@@ -13,40 +13,16 @@
  * @param {Material} material Material used to shade the superficie of the geometry
  * @extends {THREE.SkinnedMesh}
  */
-/**
- * Geometry defined the object structure.
- *
- * @property geometry
- * @type {Geometry}
- */
-/**
- * Material is used to define how the geometry surface is shaded.
- *
- * @property material
- * @type {Material}
-*/
-/**
- * Determines how the mesh triangles are constructed from the vertices.
- *
- * Only works when the geometry is a BufferGeometry.
- *
- * @property drawMode
- * @default TrianglesDrawMode
- */
-/**
- * Array with the bones attached to this mesh.
- *
- * @property bones
- * @type {Array}
-*/
-function SkinnedMesh(geometry, material, useVertexTexture)
+function SkinnedMesh(geometry, material)
 {
-	THREE._SkinnedMesh.call(this, geometry, material, useVertexTexture);
+	THREE._SkinnedMesh.call(this, geometry, material);
 
 	this.name = "skinned";
 	
 	this.receiveShadow = true;
 	this.castShadow = true;
+
+	this.skeleton = null;
 }
 
 THREE._SkinnedMesh = THREE.SkinnedMesh;
@@ -61,13 +37,12 @@ SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
  */
 SkinnedMesh.prototype.dispose = function()
 {
-	// Material and geometry
 	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
 
-	if(this.geometry !== null)
+	if(this.geometry !== null && this.geometry.dispose !== undefined)
 	{
 		this.geometry.dispose();
 	}
@@ -75,15 +50,6 @@ SkinnedMesh.prototype.dispose = function()
 	THREE.Object3D.prototype.dispose.call(this);
 };
 
-/**
- * Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
- * 
- * This is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.
- * 
- * @method bind
- * @param {Skeleton} skeleton
- * @param {Matrix4} bindMatrix
- */
 SkinnedMesh.prototype.toJSON = function(meta)
 {
 	var self = this;
@@ -113,3 +79,36 @@ SkinnedMesh.prototype.toJSON = function(meta)
 	
 	return data;
 };
+
+/**
+ * Geometry defined the object structure.
+ *
+ * @property geometry
+ * @type {Geometry}
+ */
+
+/**
+ * Material is used to define how the geometry surface is shaded.
+ *
+ * @property material
+ * @type {Material}
+*/
+
+/**
+ * Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
+ * 
+ * This is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.
+ * 
+ * @method bind
+ * @param {Skeleton} skeleton
+ * @param {Matrix4} bindMatrix
+ */
+ 
+/**
+ * Determines how the mesh triangles are constructed from the vertices.
+ *
+ * Only works when the geometry is a BufferGeometry.
+ *
+ * @property drawMode
+ * @default TrianglesDrawMode
+ */

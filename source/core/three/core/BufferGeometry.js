@@ -1,47 +1,5 @@
 "use strict";
 
-THREE.BufferGeometry.prototype.computeBoundingSphere = function()
-{
-	var box = new THREE.Box3();
-	var vector = new THREE.Vector3();
-
-	return function()
-	{
-		if(this.boundingSphere === null)
-		{
-			this.boundingSphere = new THREE.Sphere();
-		}
-
-		var position = this.attributes.position;
-		if(position)
-		{
-			var center = this.boundingSphere.center;
-
-			box.setFromBufferAttribute(position);
-			box.getCenter(center);
-
-			var maxRadiusSq = 0;
-
-			var array = position.array;
-			var count = array.length;
-
-			for(var i = 0; i < count; i += 3)
-			{
-				vector.set(array[i], array[i + 1], array[i + 2]);
-
-				var distance = center.distanceToSquared(vector);
-
-				if(distance > maxRadiusSq)
-				{
-					maxRadiusSq = distance;
-				}
-			}
-
-			this.boundingSphere.radius = Math.sqrt(maxRadiusSq);
-		}
-	};
-}();
-
 THREE.BufferGeometry.prototype.toJSON = function()
 {
 	var data =
@@ -89,12 +47,9 @@ THREE.BufferGeometry.prototype.toJSON = function()
 	}
 
 	var attributes = this.attributes;
-
 	for(var key in attributes)
 	{
-
 		var attribute = attributes[key];
-
 		var array = Array.prototype.slice.call(attribute.array);
 
 		data.data.attributes[key] =
@@ -107,14 +62,11 @@ THREE.BufferGeometry.prototype.toJSON = function()
 	}
 
 	var morphAttributes = this.morphAttributes;
-
 	for(var key in morphAttributes)
 	{
 		var attributeArray = this.morphAttributes[key];
-
 		var array = [];
-
-		for(var i = 0, il = attributeArray.length; i < il; i ++)
+		for(var i = 0; i < attributeArray.length; i ++)
 		{
 			var attribute = attributeArray[i];
 
@@ -131,14 +83,12 @@ THREE.BufferGeometry.prototype.toJSON = function()
 	}
 
 	var groups = this.groups;
-
 	if(groups.length > 0)
 	{
 		data.data.groups = JSON.parse(JSON.stringify(groups));
 	}
 
 	var boundingSphere = this.boundingSphere;
-
 	if(boundingSphere !== null)
 	{
 		data.data.boundingSphere =

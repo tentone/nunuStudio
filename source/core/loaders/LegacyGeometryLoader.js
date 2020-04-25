@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Legacy geometry loader is used to load the old threejs JSON file format.
+ * Legacy geometry loader is used to load the old geometry file format.
+ * 
+ * May be necessary to load old project files.
  * 
  * @class LegacyGeometryLoader
  * @author mrdoob / http:// mrdoob.com/
@@ -18,7 +20,7 @@ LegacyGeometryLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	var self = this;
 	var path = (this.path === undefined) ? LoaderUtils.extractUrlBase(url) : this.path;
 
-	var loader = new FileLoader(this.manager);
+	var loader = new THREE.FileLoader(this.manager);
 	loader.setPath(this.path);
 	loader.setWithCredentials(this.withCredentials);
 	loader.load(url, function (text)
@@ -461,7 +463,6 @@ LegacyGeometryLoader.prototype.parse = (function()
 	{
 		if(json.data !== undefined)
 		{
-			// Geometry 4.0 spec
 			json = json.data;
 		}
 
@@ -475,7 +476,6 @@ LegacyGeometryLoader.prototype.parse = (function()
 		}
 
 		var geometry = new THREE.Geometry();
-
 		parseModel(json, geometry);
 		parseSkin(json, geometry);
 		parseMorphing(json, geometry);
