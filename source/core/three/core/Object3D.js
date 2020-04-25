@@ -286,8 +286,8 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 		output.metadata =
 		{
-			version: Nunu.VERSION,
-			type: "NunuProgram"
+			version:  Nunu.VERSION,
+			type: "Object3D"
 		};
 	}
 

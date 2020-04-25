@@ -78,5 +78,8 @@ GeometryLoader.prototype.parse = function(data)
 	geometry.uuid = data.uuid;
 	geometry.name = data.name !== undefined ? data.name : "geometry";
 
+	// TODO <REMOVE THIS>
+	console.log("Geometry loader debug", geometry);
+
 	return geometry;
 };

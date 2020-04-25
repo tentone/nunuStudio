@@ -6,15 +6,19 @@ THREE.BufferGeometry.prototype.toJSON = function()
 	{
 		metadata:
 		{
-			version: 4.5,
-			type: "BufferGeometry",
-			generator: "BufferGeometry.toJSON"
+			version:  Nunu.VERSION,
+			type: "BufferGeometry"
 		}
 	};
 	
 	data.uuid = this.uuid;
 	data.type = this.type;
 	data.name = this.name;
+
+	if(this.userData !== undefined)
+	{
+		data.userData = this.userData;
+	}
 
 	if(this.parameters !== undefined)
 	{
@@ -31,18 +35,16 @@ THREE.BufferGeometry.prototype.toJSON = function()
 		return data;
 	}
 
-	data.data = {attributes: {}, morphAttributes: {}};
+	data.data = {attributes: {}};
 
 	var index = this.index;
 
 	if(index !== null)
 	{
-		var array = Array.prototype.slice.call(index.array);
-
 		data.data.index =
 		{
 			type: index.array.constructor.name,
-			array: array
+			array: Array.prototype.slice.call(index.array)
 		};
 	}
 
@@ -50,36 +52,80 @@ THREE.BufferGeometry.prototype.toJSON = function()
 	for(var key in attributes)
 	{
 		var attribute = attributes[key];
-		var array = Array.prototype.slice.call(attribute.array);
+		var attributeData = null;
 
-		data.data.attributes[key] =
+		if(attribute.toJSON !== undefined)
 		{
-			itemSize: attribute.itemSize,
-			type: attribute.array.constructor.name,
-			array: array,
-			normalized: attribute.normalized
-		};
-	}
-
-	var morphAttributes = this.morphAttributes;
-	for(var key in morphAttributes)
-	{
-		var attributeArray = this.morphAttributes[key];
-		var array = [];
-		for(var i = 0; i < attributeArray.length; i ++)
+			attributeData = attribute.toJSON();
+			if(attribute.name !== "")
+			{
+				attributeData.name = attribute.name;
+			}
+		}
+		else
 		{
-			var attribute = attributeArray[i];
-
-			array.push({
-				name: attribute.name,
+			attributeData =
+			{
+				name: attribute.name;
 				itemSize: attribute.itemSize,
 				type: attribute.array.constructor.name,
 				array: Array.prototype.slice.call(attribute.array),
 				normalized: attribute.normalized
-			});
+			};
+		}
+		
+
+		data.data.attributes[key] = attributeData;
+		
+	}
+
+	var morphAttributes = {};
+	var hasMorphAttributes = false;
+
+	for(var key in morphAttributes)
+	{
+		var attributeArray = this.morphAttributes[key];
+		var array = [];
+
+		for(var i = 0; i < attributeArray.length; i ++)
+		{
+			var attribute = attributeArray[i];
+			var attributeData = null;
+
+			if(attribute.toJSON !== undefined)
+			{
+				attributeData = attribute.toJSON();
+				if(attribute.name !== "")
+				{
+					attributeData.name = attribute.name;
+				}
+			}
+			else
+			{
+				attributeData =
+				{
+					name: attribute.name,
+					itemSize: attribute.itemSize,
+					type: attribute.array.constructor.name,
+					array: Array.prototype.slice.call(attribute.array),
+					normalized: attribute.normalized
+				};
+			}
+
+			array.push(attributeData);
 		}
 
-		data.data.morphAttributes[key] = array;
+		if(array.length > 0)
+		{
+			morphAttributes[key] = array;
+			hasMorphAttributes = true;
+		}
+	}
+
+	if(hasMorphAttributes)
+	{
+		data.data.morphAttributes = morphAttributes;
+		data.data.morphTargetsRelative = this.morphTargetsRelative;
 	}
 
 	var groups = this.groups;
