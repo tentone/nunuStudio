@@ -96,6 +96,11 @@ Resource.prototype.export = function(fname)
 };
 
 /**
+ * Dispose resource, should be called to free memory after its no longer required.
+ */
+Resource.prototype.dispose = function(){};
+
+/**
  * Serialize resource to json.
  *
  * Only serializes name, uuid and type.

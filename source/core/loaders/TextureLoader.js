@@ -12,7 +12,7 @@ function TextureLoader(manager)
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 	
 	this.path = "";
-	this.crossOrigin = "Anonymous";
+	this.crossOrigin = "anonymous";
 
 	this.images = [];
 	this.videos = [];
@@ -296,7 +296,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	texture.flipY = json.flipY;
 	if(json.premultiplyAlpha !== undefined) {texture.premultiplyAlpha = json.premultiplyAlpha;}
 	if(json.unpackAlignment !== undefined) {texture.unpackAlignment = json.unpackAlignment;}
-	
+
 	if(onLoad !== undefined)
 	{
 		onLoad(texture);

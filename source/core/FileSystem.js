@@ -25,9 +25,9 @@ catch(e){}
  * @method isLocalFile
  * @return {boolean} If the file is remote returns true, false otherwise.
  */
-FileSystem.isLocalFile = function(fname)
+FileSystem.isLocalFile = function(url)
 {
-	return !(fname.startsWith("http") || fname.startsWith("blob"));
+	return !(url.startsWith("http") || url.startsWith("blob") || url.startsWith("data"));
 };
 
 /**

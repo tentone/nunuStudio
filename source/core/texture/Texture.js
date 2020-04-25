@@ -119,7 +119,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	 * @property image
 	 * @type {Element}
 	 */
-	this.image.crossOrigin = "anonymous";
+	// this.image.crossOrigin = "Anonymous";
 	this.image.src = this.source.data;
 	this.image.onload = function()
 	{

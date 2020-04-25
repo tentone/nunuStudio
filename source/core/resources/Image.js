@@ -34,6 +34,12 @@ function Image(url, encoding)
 			this.format = "base64";
 			this.data = url;
 		}
+		// Blob (Need to be read immediatly might be revoked to clean space).
+		else if(url.startsWith("blob"))
+		{
+			var arraybuffer = FileSystem.readFileArrayBuffer(url, true);
+			this.loadArrayBufferData(arraybuffer);
+		}
 		// URL
 		else
 		{
@@ -124,32 +130,38 @@ Image.prototype.loadArrayBufferData = function(data, encoding)
  * This checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.
  *
  * @method hasTransparency
+ * @param {boolean} perPixel Check every individual pixel to see if the image actually has tranparency data, default is false.
  * @return {boolean} True if the image is encoded as PNG or GIF
  */
-Image.prototype.hasTransparency = function()
+Image.prototype.hasTransparency = function(perPixel)
 {
-	return this.encoding === "png" || this.encoding === "gif";
-	
-	/*var image = document.createElement("img");
-	image.src = this.data;
-
-	var canvas = document.createElement("canvas");
-	canvas.width = image.width;
-	canvas.height = image.height;
-
-	var context = canvas.getContext("2d");
-	context.drawImage(image, 0, 0, image.width, image.height);
-	
-	var data = context.getImageData(0, 0, image.width, image.height).data;
-	for(var i = 3; i < data.length; i += 4)
+	if(perPixel === true)
 	{
-		if(data[i] !== 255)
-		{
-			return true;
-		}
-	}
+		var image = document.createElement("img");
+		image.src = this.data;
 
-	return false;*/
+		var canvas = document.createElement("canvas");
+		canvas.width = image.width;
+		canvas.height = image.height;
+
+		var context = canvas.getContext("2d");
+		context.drawImage(image, 0, 0, image.width, image.height);
+
+		var data = context.getImageData(0, 0, image.width, image.height).data;
+		for(var i = 3; i < data.length; i += 4)
+		{
+			if(data[i] !== 255)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+	else
+	{
+		return this.encoding === "png" || this.encoding === "gif";
+	}
 };
 
 /**
@@ -188,6 +200,14 @@ Image.prototype.compressJPEG = function(quality)
 		reader.readAsArrayBuffer(blob);
 
 	}, "image/jpeg", quality !== undefined ? quality : 0.7);
+};
+
+Image.prototype.dispose = function()
+{
+	if(this.format === "arraybuffer")
+	{
+		URL.revokeObjectURL(this.data);
+	}
 };
 
 /**
