@@ -74,6 +74,7 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 }
 
 CanvasTexture.prototype = Object.create(THREE.Texture.prototype);
+CanvasTexture.prototype.constructor = CanvasTexture;
 CanvasTexture.prototype.isCanvasTexture = true;
 
 /**

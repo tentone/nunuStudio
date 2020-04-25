@@ -354,9 +354,9 @@ ResourceCrawler.searchObject = function(object, manager, target)
 	function addResourcesTexture(texture)
 	{
 		// Image
-		if(texture.img instanceof Image)
+		if(texture.source instanceof Image)
 		{
-			addImage(texture.img);
+			addImage(texture.source);
 		}
 		// Video
 		if(texture.video instanceof Video)

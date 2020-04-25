@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * The full GUI of the application.
+ *
+ * All objects are GUI objects are initialized in this object.
+ *
+ * @class Interface
+ */
 function Interface()
 {
 	/**
@@ -42,17 +49,13 @@ function Interface()
 	this.menuBar = new MainMenu(DocumentBody);
 }
 
-Interface.prototype.updateInterface = function()
-{
-	var width = window.innerWidth;
-	var height = window.innerHeight;
-
-	this.tab.position.set(0, this.menuBar.size.y);
-	this.tab.size.set(width, height - this.menuBar.size.y);
-	this.tab.updateInterface();
-};
-
-// Open to save program window
+/**
+ * Save program into file.
+ *
+ * Dpending on the plaftorm created the required GUI elements to select save file.
+ *
+ * @method saveProgram
+ */
 Interface.prototype.saveProgram = function()
 {
 	if(Nunu.runningOnDesktop())
@@ -71,7 +74,13 @@ Interface.prototype.saveProgram = function()
 	}
 };
 
-// Open to load program window
+/** 
+ * Load new project from file.
+ *
+ * Creates the necessary GUI elements to select the file.
+ *
+ * @method loadProgram
+ */
 Interface.prototype.loadProgram = function()
 {
 	if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.loadProject))
@@ -86,11 +95,25 @@ Interface.prototype.loadProgram = function()
 	}
 };
 
-// Create new program
+/**
+ * Create new program.
+ *
+ * @method newProgram
+ */
 Interface.prototype.newProgram = function()
 {
 	if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.createProject))
 	{
 		Editor.createNewProgram();
 	}
+};
+
+Interface.prototype.updateInterface = function()
+{
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+
+	this.tab.position.set(0, this.menuBar.size.y);
+	this.tab.size.set(width, height - this.menuBar.size.y);
+	this.tab.updateInterface();
 };

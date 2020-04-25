@@ -77,15 +77,15 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	 */
 	if(typeof image === "string")
 	{
-		this.img = new Image(image);
+		this.source = new Image(image);
 	}
 	else if(image === undefined)
 	{
-		this.img = new Image();
+		this.source = new Image();
 	}
 	else
 	{
-		this.img = image;
+		this.source = image;
 	}
 
 	THREE.Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
@@ -111,7 +111,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	 */
 	this.disposed = false;
 
-	this.format = this.img.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
+	this.format = this.source.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 
 	/**
 	 * DOM element attached to the texture
@@ -120,21 +120,21 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	 * @type {Element}
 	 */
 	this.image.crossOrigin = "anonymous";
-	this.image.src = this.img.data;
+	this.image.src = this.source.data;
 	this.image.onload = function()
 	{
 		self.needsUpdate = true;
 	};
 	this.image.onerror = function()
 	{
-		console.log("nunuStudio: Failed to load image " + self.img.uuid + " data.");
-		self.img.createSolidColor();
-		self.image.src = self.img.data;
+		console.log("nunuStudio: Failed to load image " + self.source.uuid + " data.");
+		self.source.createSolidColor();
+		self.image.src = self.source.data;
 		self.needsUpdate = true;
 	};
 
 	// Check if image is animated
-	if(this.img.encoding === "gif")
+	if(this.source.encoding === "gif")
 	{
 		this.generateMipmaps = false;
 		this.magFilter = THREE.LinearFilter;
@@ -177,7 +177,7 @@ Texture.prototype.dispose = function()
 Texture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
-	var image = this.img.toJSON(meta);
+	var image = this.source.toJSON(meta);
 
 	data.image = image.uuid;
 

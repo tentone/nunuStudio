@@ -22,11 +22,11 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 {
 	if(typeof image === "string")
 	{
-		this.img = new Image(image);
+		this.source = new Image(image);
 	}
 	else if(image instanceof Image)
 	{
-		this.img = image;
+		this.source = image;
 	}
 
 	THREE.Texture.call(this, document.createElement("img"), mapping, THREE.RepeatWrapping, THREE.RepeatWrapping, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
@@ -34,7 +34,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	this.name = "animation";
 	this.category = "SpriteSheet";
 	this.disposed = false;
-	this.format = this.img.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
+	this.format = this.source.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
 
 	/**
@@ -183,7 +183,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	 * @type {Element}
 	 */
 	this.image.crossOrigin = "anonymous";
-	this.image.src = this.img.data;
+	this.image.src = this.source.data;
 	this.image.onload = function()
 	{
 		self.needsUpdate = true;
@@ -296,7 +296,7 @@ SpriteSheetTexture.prototype.dispose = function()
 SpriteSheetTexture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
-	var image = this.img.toJSON(meta);
+	var image = this.source.toJSON(meta);
 
 	data.image = image.uuid;
 	data.loop = this.loop;

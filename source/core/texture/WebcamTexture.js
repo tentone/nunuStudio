@@ -80,6 +80,7 @@ WebcamTexture.USER = 21;
 WebcamTexture.ENVIRONMENT = 22;
 
 WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
+WebcamTexture.prototype.constructor = WebcamTexture;
 WebcamTexture.isTexture = true;
 
 /**

@@ -1,5 +1,15 @@
 "use strict";
 
+/**
+ * Grid helper is used to visualize a grid in the editor.
+ *
+ * Size, spacing and color of the grid can be costumized.
+ *
+ * @class GridHelper
+ * @param size {number} Total size of the grid.
+ * @param spacing {number} Spacing between lines.
+ * @param color {number} Hex color of the grid lines.
+ */
 function GridHelper(size, spacing, color)
 {
 	this.size = (size !== undefined) ? size : 100;
@@ -28,6 +38,11 @@ GridHelper.prototype.setSpacing = function(spacing)
 	this.spacing = spacing;
 };
 
+/**
+ * Update the geometry of the grid.
+ *
+ * @method update
+ */
 GridHelper.prototype.update = function()
 {
 	var geometry = this.geometry;

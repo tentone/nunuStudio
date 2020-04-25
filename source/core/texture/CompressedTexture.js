@@ -42,6 +42,7 @@ function CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS,
 }
 
 CompressedTexture.prototype = Object.create(Texture.prototype);
+CompressedTexture.prototype.constructor = CompressedTexture;
 CompressedTexture.prototype.isCompressedTexture = true;
 
 CompressedTexture.prototype.toJSON = function(meta)

@@ -22,7 +22,6 @@ THREE.Texture.prototype.toJSON = function(meta)
 		name: this.name,
 		category: this.category,
 		
-		format: this.format,
 		mapping: this.mapping,
 
 		repeat: [this.repeat.x, this.repeat.y],
@@ -32,11 +31,17 @@ THREE.Texture.prototype.toJSON = function(meta)
 
 		wrap: [this.wrapS, this.wrapT],
 
+		format: this.format,
+		type: this.type,
+		encoding: this.encoding,
+
 		minFilter: this.minFilter,
 		magFilter: this.magFilter,
 		anisotropy: this.anisotropy,
 
-		flipY: this.flipY
+		flipY: this.flipY,
+		premultiplyAlpha: this.premultiplyAlpha,
+		unpackAlignment: this.unpackAlignment
 	};
 
 	meta.textures[this.uuid] = data;

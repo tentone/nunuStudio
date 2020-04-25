@@ -274,35 +274,29 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	
 	texture.uuid = json.uuid;
 	texture.name = json.name;
+
 	texture.mapping = json.mapping;
 
-	texture.offset.set(json.offset[0], json.offset[1]);
 	texture.repeat.set(json.repeat[0], json.repeat[1]);
-
-	if(json.center !== undefined)
-	{
-		texture.center.set(json.center[0], json.center[1]);
-	}
-
-	if(json.rotation !== undefined)
-	{
-		texture.rotation = json.rotation;
-	}
-	
-	if(json.format !== undefined)
-	{
-		texture.format = json.format;
-	}
+	texture.offset.set(json.offset[0], json.offset[1]);
+	if(json.center !== undefined) {texture.center.set(json.center[0], json.center[1]);}
+	if(json.rotation !== undefined) {texture.rotation = json.rotation;}
 
 	texture.wrapS = json.wrap[0];
 	texture.wrapT = json.wrap[1];
 
+	if(json.format !== undefined) {texture.format = json.format;}
+	if(json.type !== undefined) {texture.type = json.type;}
+	if(json.encoding !== undefined) {texture.encoding = json.encoding;}
+
 	texture.minFilter = json.minFilter;
 	texture.magFilter = json.magFilter;
-
 	texture.anisotropy = json.anisotropy;
-	texture.flipY = json.flipY;
 
+	texture.flipY = json.flipY;
+	if(json.premultiplyAlpha !== undefined) {texture.premultiplyAlpha = json.premultiplyAlpha;}
+	if(json.unpackAlignment !== undefined) {texture.unpackAlignment = json.unpackAlignment;}
+	
 	if(onLoad !== undefined)
 	{
 		onLoad(texture);

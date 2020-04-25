@@ -40,7 +40,7 @@ function SpineAnimation(json, atlas, path, textures)
 		}
 
 		var element = texture.texture.image;
-		var image = texture.texture.img;
+		var image = texture.texture.source;
 
 		if(image.width > 0 && image.height > 0)
 		{
