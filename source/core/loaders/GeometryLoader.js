@@ -75,9 +75,6 @@ GeometryLoader.prototype.parse = function(data)
 		}
 	}
 
-	// TODO <REMOVE THIS>
-	console.log("GeometryLoader.prototype.parse", data, geometry);
-
 	geometry.uuid = data.uuid;
 	geometry.name = data.name !== undefined ? data.name : "geometry";
 
