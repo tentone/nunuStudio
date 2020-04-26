@@ -1164,22 +1164,12 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	}
 
 	// If available use position rotation and quarternion stored in file
-	if(data.position !== undefined)
-	{
-		object.position.fromArray(data.position);
-	}
-	if(data.rotation !== undefined)
-	{
-		object.rotation.fromArray(data.rotation);
-	}
-	if(data.quaternion !== undefined)
-	{
-		object.quaternion.fromArray(data.quaternion);
-	}
-	if(data.scale !== undefined)
-	{
-		object.scale.fromArray(data.scale);
-	}
+	if(data.position !== undefined) {object.position.fromArray(data.position);}
+	if(data.rotation !== undefined) {object.rotation.fromArray(data.rotation);}
+	if(data.quaternion !== undefined) {object.quaternion.fromArray(data.quaternion);}
+	if(data.scale !== undefined) {object.scale.fromArray(data.scale);}
+
+
 
 	// Shadow casting
 	object.castShadow = data.castShadow === true;
@@ -1195,11 +1185,9 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	object.visible = data.visible === true;
 
 	// Aditional user data
-	if(data.userData !== undefined)
-	{
-		object.userData = data.userData;
-	}
-
+	if(data.userData !== undefined) {object.userData = data.userData;}
+	if(data.layers !== undefined) {object.layers.mask = data.layers;}
+	
 	// Add children
 	if(data.children !== undefined)
 	{

@@ -312,13 +312,13 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	object.quaternion = this.quaternion.toArray();
 	object.scale = this.scale.toArray();
 
-	if(JSON.stringify(this.userData) !== "{}")
-	{
-		object.userData = this.userData;
-	}
+	object.layers = this.layers.mask;
+	// object.matrix = this.matrix.toArray();
 
-	// Geometry
-	if(this.geometry !== undefined)
+	object.userData = this.userData;
+
+	// Geometry data for meshes lines and points
+	if(this.isMesh || this.isLine || this.isPoints)
 	{
 		object.geometry = serialize(meta.geometries, this.geometry);
 
