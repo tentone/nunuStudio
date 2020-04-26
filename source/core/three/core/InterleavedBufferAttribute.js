@@ -10,3 +10,5 @@ THREE.InterleavedBufferAttribute.prototype.toJSON = function()
 		normalized: this.normalized
 	};
 };
+
+var typedArray = new TYPED_ARRAYS[json.type](json.array);

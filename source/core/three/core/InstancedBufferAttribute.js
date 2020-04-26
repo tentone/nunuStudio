@@ -6,7 +6,6 @@ THREE.InstancedBufferAttribute.prototype.toJSON = function()
 
 	data.bufferType = "InstancedBufferAttribute";
 	data.meshPerAttribute = this.meshPerAttribute;
-	data.isInstancedBufferAttribute = true;
 
 	return data;
 }
