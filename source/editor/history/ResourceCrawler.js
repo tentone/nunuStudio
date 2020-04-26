@@ -22,9 +22,6 @@ function ResourceCrawler(){}
  */
 ResourceCrawler.traverseDeep = function(object, callback)
 {
-	// TODO <REMOVE DEBUG CODE>
-	// console.log("nunuStudio: traverseDeep", object);
-
 	if(callback === undefined)
 	{
 		return;
@@ -75,9 +72,6 @@ ResourceCrawler.swapResource = function(manager, category, oldResource, newResou
 	{
 		if(value === oldResource)
 		{
-			// TODO <REMOVE DEBUG CODE>
-			// console.log("nunuStudio: Found resource to swap.", value, object, attribute);
-			
 			object[attribute] = newResource;
 			return false;
 		}
