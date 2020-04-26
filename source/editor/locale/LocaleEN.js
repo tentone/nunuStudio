@@ -131,8 +131,9 @@ LocaleManager.register(
 	shadowMaterial: "Shadow Material",
 
 	// Properties
+	postProcessing: "Post-Processing",
 	html: "HTML",
-	javascript: "JavaScript"
+	javascript: "JavaScript",
 	ignorePixelRatio: "Ignore Device Pixel Ratio",
 	units: "Units",
 	libraryMode: "Library Mode",

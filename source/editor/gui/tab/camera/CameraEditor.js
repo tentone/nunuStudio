@@ -39,7 +39,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	this.form.addText("Post-Processing");
+	this.form.addText(Locale.postProcessing);
 	this.form.nextRow();
 
 	var addRenderPassButton = function(name, PassConstructor)

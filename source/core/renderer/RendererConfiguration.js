@@ -216,6 +216,22 @@ function RendererConfiguration(options)
  	 * @type {boolean}
 	 */
 	this.checkShaderErrors = true;
+	
+	/**
+	 * The maximum number of MorphTargets allowed in a shader.
+	 *
+	 * @property maxMorphTargets
+	 * @type {number}
+	 */
+	this.maxMorphTargets = 8;
+
+	/**
+	 * The maximum number of MorphNormals allowed in a shader.
+	 *
+	 * @property maxMorphNormals
+	 * @type {number}
+	 */
+	this.maxMorphNormals = 4;
 
 	// Copy values received from the options parameter
 	if(options !== undefined)
@@ -285,12 +301,14 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 		logarithmicDepthBuffer: this.logarithmicDepthBuffer
 	});
 
+	this.apply(renderer);
+
 	if(this.backgroundColor !== null)
 	{
 		canvas.style.backgroundColor = this.backgroundColor;
 	}
 
-	this.apply(renderer);
+
 
 	return renderer;
 };
@@ -315,8 +333,10 @@ RendererConfiguration.prototype.apply = function(renderer)
 	renderer.sortObjects = this.sortObjects;
 
 	renderer.gammaFactor = this.gammaFactor;
-
 	renderer.physicallyCorrectLights = this.physicallyCorrectLights;
+
+	renderer.maxMorphTargets = this.maxMorphTargets;
+	renderer.maxMorphNormals = this.maxMorphNormals;
 };
 
 RendererConfiguration.prototype.toJSON = function()
@@ -345,7 +365,9 @@ RendererConfiguration.prototype.toJSON = function()
 		preserveDrawingBuffer: this.preserveDrawingBuffer,
 		powerPreference: this.powerPreference,
 		logarithmicDepthBuffer: this.logarithmicDepthBuffer,
-		physicallyCorrectLights: this.physicallyCorrectLights
+		physicallyCorrectLights: this.physicallyCorrectLights,
+		maxMorphTargets: this.maxMorphTargets,
+		maxMorphNormals: this.maxMorphNormals
 	};
 };
 
@@ -375,4 +397,6 @@ RendererConfiguration.prototype.fromJSON = function(data)
 	this.powerPreference = data.powerPreference;
 	this.logarithmicDepthBuffer = data.logarithmicDepthBuffer;
 	this.physicallyCorrectLights = data.physicallyCorrectLights;
+	this.maxMorphTargets = data.maxMorphTargets;
+	this.maxMorphNormals = data.maxMorphNormals;
 };
