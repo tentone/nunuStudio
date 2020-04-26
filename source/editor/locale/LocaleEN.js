@@ -1,13 +1,14 @@
 "use strict";
 
 /**
- * LocaleEN defines text of the GUI for the English language.
+ * Locale EN defines text of the GUI for the English language.
  * 
  * @static
  * @class LocaleEN
  */
 LocaleManager.register(
 {
+	// Metadata
 	meta:
 	{
 		language: "EN",
@@ -80,6 +81,8 @@ LocaleManager.register(
 	firstPersonControls: "First Person Controls",
 	particle: "Particle",
 	ground: "Ground",
+	spineAnimation: "Spine Animation",
+	camera: "Camera",
 
 	// Geometries
 	parametric: "Parametric",
@@ -101,7 +104,35 @@ LocaleManager.register(
 	torusKnot: "Torus-Knot",
 	cone: "Cone",
 
+	// Textures
+	spriteSheetTexture: "SpriteSheet Texture",
+	cubeTexture: "Cube Texture",
+	canvasTexture: "Canvas Texture",
+	videoTexture: "Video Texture",
+	webcamTexture: "Webcam Texture",
+
+	// Materials
+	standardMaterial: "Standard Material",
+	physicalMaterial: "Physical Material",
+	phongMaterial: "Phong Material",
+	basicMaterial: "Basic Material",
+	toonMaterial: "Toon Material",
+	lambertMaterial: "Lambert Material",
+	matcapMaterial: "Matcap Material",
+	spriteMaterial: "Sprite Material",
+	pointsMaterial: "Points Material",
+	lineMaterial: "Line Material",
+	lineDashedMaterial: "Line Dashed Material",
+	shaderMaterial: "Shader Material",
+	rawShaderMaterial: "Raw Shader Material",
+	normalMaterial: "Normal Material",
+	depthMaterial: "Depth Material",
+	distanceMaterial: "Distance Material",
+	shadowMaterial: "Shadow Material",
+
 	// Properties
+	html: "HTML",
+	javascript: "JavaScript"
 	ignorePixelRatio: "Ignore Device Pixel Ratio",
 	units: "Units",
 	libraryMode: "Library Mode",
@@ -356,6 +387,9 @@ LocaleManager.register(
 	subdivide: "Subdivide",
 
 	// Editor
+	create: "Create",
+	code: "Code",
+	more: "More",
 	csg: "CSG",
 	editor: "Editor",
 	information: "Information",
@@ -410,6 +444,7 @@ LocaleManager.register(
 	material: "Material",
 	geometry: "Geometry",
 	font: "Font",
+	models3D: "3D Models",
 
 	// Run tab
 	toggleVR: "Toggle Virtual Reality",

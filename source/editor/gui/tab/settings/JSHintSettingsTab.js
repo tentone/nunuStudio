@@ -2,7 +2,7 @@
 
 function JSHintSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Javascript", Global.FILE_PATH + "icons/misc/js.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.javascript, Global.FILE_PATH + "icons/misc/js.png");
 
 	this.element.style.overflow = "auto";
 
@@ -13,7 +13,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.form.setAutoSize(false);
 	
 	// Javascript
-	this.form.addText("Javascript");
+	this.form.addText(Locale.javascript);
 	this.form.nextRow();
 
 	// Bitwise

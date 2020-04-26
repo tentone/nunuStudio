@@ -21,7 +21,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.main.attachB(this.form);
 
 	// Camera
-	this.form.addText("Camera");
+	this.form.addText(Locale.camera);
 	this.form.nextRow();
 
 	// Name

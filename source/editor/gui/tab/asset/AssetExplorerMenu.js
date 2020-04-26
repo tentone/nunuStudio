@@ -14,7 +14,7 @@ function AssetExplorerMenu(parent)
 	menu.position.set(0, 0);
 
 	//3D Models Loader
-	menu.addOption("3D Models", function()
+	menu.addOption(Locale.models3D, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{	
@@ -26,7 +26,7 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/models/models.png");
 
 	// Load Font
-	menu.addOption("Font", function()
+	menu.addOption(Locale.font, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -64,7 +64,7 @@ function AssetExplorerMenu(parent)
 	// Spine Animation
 	if(Nunu.runningOnDesktop())
 	{
-		menu.addOption("Spine Animation", function()
+		menu.addOption(Locale.spineAnimation, function()
 		{
 			FileSystem.chooseFile(function(files)
 			{
@@ -97,7 +97,7 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/image.png");
 
 	// Spritesheet texture
-	texture.addOption("SpriteSheet Texture", function()
+	texture.addOption(Locale.spriteSheetTexture, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -122,7 +122,7 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/grid.png");
 
 	// Cube texture
-	texture.addOption("Cube Texture", function()
+	texture.addOption(Locale.cubeTexture, function()
 	{
 		var texture = new CubeTexture([Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage]);
 		texture.name = "cube";
@@ -130,7 +130,7 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/cube.png");
 
 	// Canvas texture
-	texture.addOption("Canvas Texture", function()
+	texture.addOption(Locale.canvasTexture, function()
 	{
 		var texture = new CanvasTexture(512, 512);
 		texture.placeholder();
@@ -139,7 +139,7 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/canvas.png");
 
 	// Video texture
-	texture.addOption("Video Texture", function()
+	texture.addOption(Locale.videoTexture, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -151,7 +151,7 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/video.png");
 
 	// Webcam texture
-	texture.addOption("Webcam Texture", function()
+	texture.addOption(Locale.webcamTexture, function()
 	{
 		var texture = new WebcamTexture();
 		texture.name = "webcam";
@@ -166,84 +166,84 @@ function AssetExplorerMenu(parent)
 	material.size.set(100, 25);
 	material.position.set(200, 0);
 	
-	material.addOption("Standard material", function()
+	material.addOption(Locale.standardMaterial, function()
 	{
 		var material = new THREE.MeshStandardMaterial();
 		material.name = "standard";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
-	material.addOption("Physical material", function()
+	material.addOption(Locale.physicalMaterial, function()
 	{
 		var material = new THREE.MeshPhysicalMaterial();
 		material.name = "physical";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
-	material.addOption("Phong material", function()
+	material.addOption(Locale.phongMaterial, function()
 	{
 		var material = new THREE.MeshPhongMaterial();
 		material.name = "phong";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 	
-	material.addOption("Basic material", function()
+	material.addOption(Locale.basicMaterial, function()
 	{
 		var material = new THREE.MeshBasicMaterial();
 		material.name = "basic";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
-	material.addOption("Toon material", function()
+	material.addOption(Locale.toonMaterial, function()
 	{
 		var material = new THREE.MeshToonMaterial();
 		material.name = "toon";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
-	material.addOption("Lambert material", function()
+	material.addOption(Locale.lambertMaterial, function()
 	{
 		var material = new THREE.MeshLambertMaterial();
 		material.name = "lambert";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
-	material.addOption("Matcap material", function()
+	material.addOption(Locale.matcapMaterial, function()
 	{
 		var material = new THREE.MeshMatcapMaterial();
 		material.name = "matcap";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
-	material.addOption("Sprite material", function()
+	material.addOption(Locale.spriteMaterial, function()
 	{
 		var material = new THREE.SpriteMaterial({color: 0xffffff});
 		material.name = "sprite";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/image.png");
 
-	material.addOption("Points material", function()
+	material.addOption(Locale.pointsMaterial, function()
 	{
 		var material = new THREE.PointsMaterial();
 		material.name = "points";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/models/points.png");
 
-	material.addOption("Line material", function()
+	material.addOption(Locale.lineMaterial, function()
 	{
 		var material = new THREE.LineBasicMaterial();
 		material.name = "line";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/nodes.png");
 
-	material.addOption("Line Dashed material", function()
+	material.addOption(Locale.lineDashedMaterial, function()
 	{
 		var material = new THREE.LineDashedMaterial();
 		material.name = "line";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/nodes.png");
 
-	material.addOption("Shader material", function()
+	material.addOption(Locale.shaderMaterial, function()
 	{
 		var material = new THREE.ShaderMaterial(
 		{
@@ -254,7 +254,7 @@ function AssetExplorerMenu(parent)
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/script/script.png");
 
-	material.addOption("Raw Shader material", function()
+	material.addOption(Locale.rawShaderMaterial, function()
 	{
 		var material = new THREE.RawShaderMaterial();
 		material.name = "rawshader";
@@ -262,30 +262,30 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/script/script.png");
 
 
-	var others = material.addMenu("Others");
+	var others = material.addMenu(Locale.more);
 
-	others.addOption("Normal material", function()
+	others.addOption(Locale.normalMaterial, function()
 	{
 		var material = new THREE.MeshNormalMaterial();
 		material.name = "normal";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 	
-	others.addOption("Depth material", function()
+	others.addOption(Locale.depthMaterial, function()
 	{
 		var material = new THREE.MeshDepthMaterial();
 		material.name = "depth";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
-	others.addOption("Distance material", function()
+	others.addOption(Locale.distanceMaterial, function()
 	{
 		var material = new THREE.MeshDistanceMaterial();
 		material.name = "distance";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
-	others.addOption("Shadow material", function()
+	others.addOption(Locale.shadowMaterial, function()
 	{
 		var material = new THREE.ShadowMaterial();
 		material.name = "shadow";
@@ -296,18 +296,18 @@ function AssetExplorerMenu(parent)
 
 	// Create menu
 	var create = new DropdownMenu(this);
-	create.setText("Create");
+	create.setText(Locale.code);
 	create.size.set(100, 25);
 	create.position.set(300, 0);
 	
-	create.addOption("HTML", function()
+	create.addOption(Locale.html, function()
 	{
 		var resource = new TextFile("<!DOCTYPE html>\n<html>\n<head>\n\t<title></title>\n</head>\n<body>\n\n</body>\n</html>", "html");
 		resource.name = "html";
 		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
 	}, Global.FILE_PATH + "icons/script/script.png");
 
-	create.addOption("Javascript", function()
+	create.addOption(Locale.javascript, function()
 	{
 		var resource = new TextFile("", "js");
 		resource.name = "js";
