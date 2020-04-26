@@ -97,6 +97,8 @@ Resource.prototype.export = function(fname)
 
 /**
  * Dispose resource, should be called to free memory after its no longer required.
+ *
+ * @method dispose
  */
 Resource.prototype.dispose = function(){};
 

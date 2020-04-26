@@ -1,4 +1,4 @@
-/**
+/*
  * @author technohippy / https://github.com/technohippy
  * @author Mugen87 / https://github.com/Mugen87
  *
@@ -37,90 +37,62 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 		loader.setResponseType("arraybuffer");
 		loader.load(url, function (buffer)
 		{
-
 			scope.parse(buffer, onLoad);
-
 		}, onProgress, onError);
-
 	},
 
 	parse: function (data, onLoad)
 	{
-
 		var scope = this;
 		var textureLoader = new THREE.TextureLoader(this.manager);
 		var version = 2;
 
 		function readZip(data, next)
 		{
-
 			if(JSZip !== undefined)
 			{
-
 				if(JSZip.version !== undefined)
 				{
-
 					version = Number.parseInt(JSZip.version.split(".").shift());
-
 				}
 
 				if(version === 2)
 				{
-
 					next(new JSZip(data)); // eslint-disable-line no-undef
-
 				}
 				else if(version === 3)
 				{
-
 					console.warn("THREE.3MFLoader: jszip version 3 found, parse() will return null.");
-
 					JSZip.loadAsync(data).then(next);
-
 				}
-
 			}
 			else
 			{
-
 				console.error("THREE.3MFLoader: jszip missing and file is compressed.");
-
 			}
-
 		}
 
 		// Get zip file data as uint8 array depending on the JSZip version used.
-
 		function getUint8Array(zipFile, next, data)
 		{
-
 			if(version === 2)
 			{
-
 				next(new Uint8Array(zipFile.asArrayBuffer()), data);
-
 			}
 			else if(version === 3)
 			{
-
 				zipFile.async("arraybuffer").then(function (arraybuffer)
 				{
-
 					next(new Uint8Array(arraybuffer), data);
-
 				});
-
 			}
-
 		}
 
 
 		function loadDocument(data, next)
 		{
-
 			readZip(data, function (zip)
 			{
-
 				var file = null;
 
 				var relsName;
@@ -166,64 +138,47 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 					}
 					else if(file.match(/^3D\/Textures?\/.*/))
 					{
-
 						texturesPartNames.push(file);
-
 					}
 					else if(file.match(/^3D\/Other\/.*/))
 					{
-
 						otherPartNames.push(file);
-
 					}
 
 				}
 
 				getUint8Array(zip.file(relsName), function (relsView)
 				{
-
 					var relsFileText = THREE.LoaderUtils.decodeText(relsView);
 					rels = parseRelsXml(relsFileText);
 
 					// Amount of async calls that we have to wait for
-
 					var waiting = modelPartNames.length + texturesPartNames.length + 1;
 
 					// Scene structure
-
 					if(modelRelsName)
 					{
-
 						waiting++;
 
 						getUint8Array(zip.file(modelRelsName), function (relsView)
 						{
-
 							var relsFileText = THREE.LoaderUtils.decodeText(relsView);
 							modelRels = parseRelsXml(relsFileText);
-
 							finished();
-
 						});
-
 					}
 
 					// Models
-
 					for(var i = 0; i < modelPartNames.length; i++)
 					{
-
 						getUint8Array(zip.file(modelPartNames[i]), function (view, modelPart)
 						{
-
 							var fileText = THREE.LoaderUtils.decodeText(view);
 							var xmlData = new DOMParser().parseFromString(fileText, "application/xml");
 
 							if(xmlData.documentElement.nodeName.toLowerCase() !== "model")
 							{
-
 								console.error("THREE.3MFLoader: Error loading 3MF - no 3MF document found: ", modelPart);
-
 							}
 
 							var modelNode = xmlData.querySelector("model");
@@ -231,47 +186,34 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 							for(var i = 0; i < modelNode.attributes.length; i++)
 							{
-
 								var attr = modelNode.attributes[i];
 								if(attr.name.match(/^xmlns:(.+)$/))
 								{
-
 									extensions[attr.value] = RegExp.$1;
-
 								}
-
 							}
 
 							var modelData = parseModelNode(modelNode);
 							modelData["xml"] = modelNode;
-
 							if(Object.keys(extensions).length > 0)
 							{
-
 								modelData["extensions"] = extensions;
-
 							}
 
 							modelParts[modelPart] = modelData;
 
 							finished();
-
 						}, modelPartNames[i]);
 
 					}
 
 					// Textures
-
 					for(var i = 0; i < texturesPartNames.length; i++)
 					{
-
 						getUint8Array(zip.file(texturesPartNames[i]), function (texturesPart, texturesPartName)
 						{
-
 							texturesParts[texturesPartName] = texturesPart;
-
 							finished();
-
 						}, texturesPartNames[i]);
 
 					}
@@ -279,10 +221,8 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 					finished();
 
 					// Auxiliar method to check ifeverything was finished before moving up to next step
-
 					function finished()
 					{
-
 						waiting--;
 
 						if(waiting === 0)
@@ -310,16 +250,12 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 		function parseRelsXml(relsFileText)
 		{
-
 			var relationships = [];
-
 			var relsXmlData = new DOMParser().parseFromString(relsFileText, "application/xml");
-
 			var relsNodes = relsXmlData.querySelectorAll("Relationship");
 
 			for(var i = 0; i < relsNodes.length; i++)
 			{
-
 				var relsNode = relsNodes[i];
 
 				var relationship = {
@@ -329,16 +265,13 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 				};
 
 				relationships.push(relationship);
-
 			}
 
 			return relationships;
-
 		}
 
 		function parseMetadataNodes(metadataNodes)
 		{
-
 			var metadataData = {};
 
 			for(var i = 0; i < metadataNodes.length; i++)
@@ -359,44 +292,34 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 				if(0 <= validNames.indexOf(name))
 				{
-
 					metadataData[name] = metadataNode.textContent;
-
 				}
-
 			}
 
 			return metadataData;
-
 		}
 
 		function parseBasematerialsNode(basematerialsNode)
 		{
-
 			var basematerialsData = {
 				id: basematerialsNode.getAttribute("id"), // required
 				basematerials: []
 			};
 
 			var basematerialNodes = basematerialsNode.querySelectorAll("base");
-
 			for(var i = 0; i < basematerialNodes.length; i++)
 			{
-
 				var basematerialNode = basematerialNodes[i];
 				var basematerialData = parseBasematerialNode(basematerialNode);
 				basematerialData.index = i; // the order and count of the material nodes form an implicit 0-based index
 				basematerialsData.basematerials.push(basematerialData);
-
 			}
 
 			return basematerialsData;
-
 		}
 
 		function parseTexture2DNode(texture2DNode)
 		{
-
 			var texture2dData = {
 				id: texture2DNode.getAttribute("id"), // required
 				path: texture2DNode.getAttribute("path"), // required
@@ -407,12 +330,10 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 			};
 
 			return texture2dData;
-
 		}
 
 		function parseTextures2DGroupNode(texture2DGroupNode)
 		{
-
 			var texture2DGroupData = {
 				id: texture2DGroupNode.getAttribute("id"), // required
 				texid: texture2DGroupNode.getAttribute("texid"), // required
@@ -420,50 +341,41 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 			};
 
 			var tex2coordNodes = texture2DGroupNode.querySelectorAll("tex2coord");
-
 			var uvs = [];
 
 			for(var i = 0; i < tex2coordNodes.length; i++)
 			{
-
 				var tex2coordNode = tex2coordNodes[i];
 				var u = tex2coordNode.getAttribute("u");
 				var v = tex2coordNode.getAttribute("v");
 
 				uvs.push(parseFloat(u), parseFloat(v));
-
 			}
 
 			texture2DGroupData["uvs"] = new Float32Array(uvs);
 
 			return texture2DGroupData;
-
 		}
 
 		function parseColorGroupNode(colorGroupNode)
 		{
-
 			var colorGroupData = {
 				id: colorGroupNode.getAttribute("id"), // required
 				displaypropertiesid: colorGroupNode.getAttribute("displaypropertiesid")
 			};
 
 			var colorNodes = colorGroupNode.querySelectorAll("color");
-
 			var colors = [];
 			var colorObject = new THREE.Color();
 
 			for(var i = 0; i < colorNodes.length; i++)
 			{
-
 				var colorNode = colorNodes[i];
 				var color = colorNode.getAttribute("color");
 
 				colorObject.setStyle(color.substring(0, 7));
 				colorObject.convertSRGBToLinear(); // color is in sRGB
-
 				colors.push(colorObject.r, colorObject.g, colorObject.b);
-
 			}
 
 			colorGroupData["colors"] = new Float32Array(colors);
@@ -474,7 +386,6 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 		function parseMetallicDisplaypropertiesNode(metallicDisplaypropetiesNode)
 		{
-
 			var metallicDisplaypropertiesData = {
 				id: metallicDisplaypropetiesNode.getAttribute("id") // required
 			};
