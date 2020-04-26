@@ -911,15 +911,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\texture\\RenderTargetTexture.js": {
-            "name": "..\\source\\core\\texture\\RenderTargetTexture.js",
-            "modules": {},
-            "classes": {
-                "RenderTargetTexture": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\texture\\SpriteSheetTexture.js": {
             "name": "..\\source\\core\\texture\\SpriteSheetTexture.js",
             "modules": {},
@@ -964,6 +955,13 @@
             "classes": {
                 "Object3D": 1
             },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\three\\loaders\\3MFLoader.js": {
+            "name": "..\\source\\core\\three\\loaders\\3MFLoader.js",
+            "modules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -1393,7 +1391,6 @@
                 "CanvasSprite": 1,
                 "CompressedTexture": 1,
                 "CubeTexture": 1,
-                "RenderTargetTexture": 1,
                 "SpriteSheetTexture": 1,
                 "Texture": 1,
                 "VideoTexture": 1,
@@ -1819,7 +1816,7 @@
             "namespace": "",
             "file": "..\\source\\core\\loaders\\LegacyGeometryLoader.js",
             "line": 3,
-            "description": "Legacy geometry loader is used to load the old threejs JSON file format.",
+            "description": "Legacy geometry loader is used to load the old geometry file format.\n\nMay be necessary to load old project files.",
             "author": "alteredq / http:// alteredqualia.com/"
         },
         "MaterialLoader": {
@@ -3980,21 +3977,6 @@
                 }
             ]
         },
-        "RenderTargetTexture": {
-            "name": "RenderTargetTexture",
-            "shortname": "RenderTargetTexture",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Textures",
-            "namespace": "",
-            "file": "..\\source\\core\\texture\\RenderTargetTexture.js",
-            "line": 4,
-            "description": "Render target textures are used to store render results obtained from cameras.",
-            "is_constructor": 1
-        },
         "SpriteSheetTexture": {
             "name": "SpriteSheetTexture",
             "shortname": "SpriteSheetTexture",
@@ -4437,7 +4419,7 @@
             "namespace": "",
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
             "line": 3,
-            "description": "ObjectUtils is a collection of methods to apply operations to Object3D objects",
+            "description": "Object utils is a collection of methods to apply operations to Object3D instances.",
             "static": 1
         },
         "PhysicsGenerator": {
@@ -6920,7 +6902,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\GeometryLoader.js",
-            "line": 20,
+            "line": 17,
             "description": "Set list of shapes to be used by this loader.",
             "itemtype": "method",
             "name": "setShapes",
@@ -6936,7 +6918,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\GeometryLoader.js",
-            "line": 33,
+            "line": 30,
             "description": "Load geometry json file from URL.",
             "itemtype": "method",
             "name": "load",
@@ -6967,7 +6949,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\GeometryLoader.js",
-            "line": 51,
+            "line": 48,
             "description": "Parse geometry json.",
             "itemtype": "method",
             "name": "parse",
@@ -9965,7 +9947,16 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 14,
+            "line": 29,
+            "description": "Dispose mesh along with its material and geometry.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Mesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
+            "line": 49,
             "description": "Geometry defines the object structure.",
             "itemtype": "property",
             "name": "geometry",
@@ -9975,7 +9966,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 20,
+            "line": 56,
             "description": "Material is used to define how the geometry surface is shaded.",
             "itemtype": "property",
             "name": "material",
@@ -9985,7 +9976,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 26,
+            "line": 63,
             "description": "Determines how the mesh triangles are constructed from the vertices.\n\nOnly works when the geometry is a BufferGeometry.",
             "itemtype": "property",
             "name": "drawMode",
@@ -9994,17 +9985,17 @@
             "module": "Meshes"
         },
         {
-            "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 49,
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 33,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
-            "class": "Mesh",
+            "class": "SkinnedMesh",
             "module": "Meshes"
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 16,
+            "line": 83,
             "description": "Geometry defined the object structure.",
             "itemtype": "property",
             "name": "geometry",
@@ -10014,7 +10005,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 22,
+            "line": 90,
             "description": "Material is used to define how the geometry surface is shaded.",
             "itemtype": "property",
             "name": "material",
@@ -10024,36 +10015,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 28,
-            "description": "Determines how the mesh triangles are constructed from the vertices.\n\nOnly works when the geometry is a BufferGeometry.",
-            "itemtype": "property",
-            "name": "drawMode",
-            "default": "TrianglesDrawMode",
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 36,
-            "description": "Array with the bones attached to this mesh.",
-            "itemtype": "property",
-            "name": "bones",
-            "type": "{Array}",
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 57,
-            "description": "Dispose mesh along with its material and geometry.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 78,
+            "line": 97,
             "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -10069,6 +10031,16 @@
                     "type": "Matrix4"
                 }
             ],
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 107,
+            "description": "Determines how the mesh triangles are constructed from the vertices.\n\nOnly works when the geometry is a BufferGeometry.",
+            "itemtype": "property",
+            "name": "drawMode",
+            "default": "TrianglesDrawMode",
             "class": "SkinnedMesh",
             "module": "Meshes"
         },
@@ -15207,7 +15179,27 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 233,
+            "line": 220,
+            "description": "The maximum number of MorphTargets allowed in a shader.",
+            "itemtype": "property",
+            "name": "maxMorphTargets",
+            "type": "{number}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 228,
+            "description": "The maximum number of MorphNormals allowed in a shader.",
+            "itemtype": "property",
+            "name": "maxMorphNormals",
+            "type": "{number}",
+            "class": "RendererConfiguration",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
+            "line": 249,
             "description": "Use WebGL 1.0 to render data.\n\nMost devices fully support WebGL 1.0 at this point, should work for any type of device.",
             "static": 1,
             "itemtype": "attribute",
@@ -15218,7 +15210,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 244,
+            "line": 260,
             "description": "Use WebGL 2.0 to render data, should be faster for some types of data.\n\nAdditinal features of GLSL can be used in WebGL 2.0. Most mobile device still dont support WebGL 2.0.",
             "static": 1,
             "itemtype": "attribute",
@@ -15229,7 +15221,7 @@
         },
         {
             "file": "..\\source\\core\\renderer\\RendererConfiguration.js",
-            "line": 255,
+            "line": 271,
             "description": "Create a THREE renderer object based on the renderer configuration.",
             "itemtype": "method",
             "name": "createRenderer",
@@ -15447,7 +15439,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\Image.js",
-            "line": 53,
+            "line": 59,
             "description": "Check if a file name refers to a supported binary image file.",
             "itemtype": "method",
             "name": "fileIsImage",
@@ -15468,7 +15460,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\Image.js",
-            "line": 78,
+            "line": 84,
             "description": "Create a new image with 1x1 resolution with solid color.\n\nCan be called externally on data load error to load dummy data.",
             "itemtype": "method",
             "name": "createSolidColor",
@@ -15484,7 +15476,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\Image.js",
-            "line": 101,
+            "line": 107,
             "description": "Load arraybuffer data to this image.\n\nCreates a blob with data to be stored on data atribute and used by external objects.",
             "itemtype": "method",
             "name": "loadArrayBufferData",
@@ -15505,10 +15497,17 @@
         },
         {
             "file": "..\\source\\core\\resources\\Image.js",
-            "line": 121,
+            "line": 127,
             "description": "Check if this image has alpha channel.\n\nThis checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.",
             "itemtype": "method",
             "name": "hasTransparency",
+            "params": [
+                {
+                    "name": "perPixel",
+                    "description": "Check every individual pixel to see if the image actually has tranparency data, default is false.",
+                    "type": "Boolean"
+                }
+            ],
             "return": {
                 "description": "True if the image is encoded as PNG or GIF",
                 "type": "Boolean"
@@ -15518,7 +15517,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\Image.js",
-            "line": 155,
+            "line": 167,
             "description": "Compresses image data to JPEG.\n\nCan be used to compress data and save some space.",
             "itemtype": "method",
             "name": "compressJPEG",
@@ -15534,7 +15533,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\Image.js",
-            "line": 193,
+            "line": 213,
             "description": "Serialize Image resource to json.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
@@ -15662,6 +15661,13 @@
         {
             "file": "..\\source\\core\\resources\\Resource.js",
             "line": 98,
+            "description": "Dispose resource, should be called to free memory after its no longer required.",
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 103,
             "description": "Serialize resource to json.\n\nOnly serializes name, uuid and type.",
             "itemtype": "method",
             "name": "toJSON",
@@ -16319,7 +16325,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 79,
+            "line": 80,
             "description": "Draw a placeholder figure into the canvas texture.",
             "itemtype": "method",
             "name": "placeholder",
@@ -16328,7 +16334,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 95,
+            "line": 96,
             "description": "Clear canvas texture with a background color.\n\nUses the internal context to draw a rect to fill the canvas.",
             "itemtype": "method",
             "name": "clear",
@@ -16344,7 +16350,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 116,
+            "line": 117,
             "description": "Create JSON description for canvas texture, canvas image is not serialized.",
             "params": [
                 {
@@ -16381,7 +16387,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 72,
+            "line": 73,
             "description": "Cubemap right image index",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -16391,7 +16397,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 80,
+            "line": 81,
             "description": "Cubemap left image index",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -16401,7 +16407,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 88,
+            "line": 89,
             "description": "Cubemap top image index",
             "itemtype": "attribute",
             "name": "TOP",
@@ -16411,7 +16417,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 96,
+            "line": 97,
             "description": "Cubemap bottom image index",
             "itemtype": "attribute",
             "name": "BOTTOM",
@@ -16421,7 +16427,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 104,
+            "line": 105,
             "description": "Cubemap front image index",
             "itemtype": "attribute",
             "name": "FRONT",
@@ -16431,7 +16437,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 112,
+            "line": 113,
             "description": "Cubemap back image index",
             "itemtype": "attribute",
             "name": "BACK",
@@ -16441,7 +16447,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 120,
+            "line": 121,
             "description": "CubeMap mode, 6 images used as source for the texture.",
             "itemtype": "attribute",
             "name": "CUBE",
@@ -16451,7 +16457,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 128,
+            "line": 129,
             "description": "CubeMap mode, single image used as source.",
             "itemtype": "attribute",
             "name": "CROSS",
@@ -16461,7 +16467,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 136,
+            "line": 137,
             "description": "Equirectangular projection mode, 1 single image used as source.\n\nSource image should have a 2:1 aspect ratio.",
             "itemtype": "attribute",
             "name": "EQUIRECTANGULAR",
@@ -16471,7 +16477,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 147,
+            "line": 148,
             "description": "Set resolution of each face of the cubemap.\n\nThe size has to be a power of 2.",
             "itemtype": "method",
             "name": "setSize",
@@ -16487,7 +16493,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 166,
+            "line": 167,
             "description": "Set new images for this cube texture.",
             "itemtype": "method",
             "name": "setImages",
@@ -16508,7 +16514,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 179,
+            "line": 180,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -16517,7 +16523,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 269,
+            "line": 270,
             "description": "Resample an image pixel from ImageData to ImageData, using bilinear interpolation.",
             "itemtype": "method",
             "name": "resampleBilinear",
@@ -16553,7 +16559,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 307,
+            "line": 308,
             "description": "Render a cube face from equirectangular projection.",
             "itemtype": "method",
             "name": "renderEquirectFace",
@@ -16588,7 +16594,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 377,
+            "line": 378,
             "description": "Serialize cube texture to JSON.\n\nAll images of the cube texture are stored individually.",
             "itemtype": "method",
             "name": "toJSON",
@@ -17196,7 +17202,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 85,
+            "line": 86,
             "description": "Connect to camera.",
             "itemtype": "method",
             "name": "connect",
@@ -17205,7 +17211,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 130,
+            "line": 131,
             "description": "Disconnect from camera.",
             "itemtype": "method",
             "name": "disconnect",
@@ -17214,7 +17220,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 147,
+            "line": 148,
             "description": "Dispose webcam texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -17223,7 +17229,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 165,
+            "line": 166,
             "description": "Serialize webcam texture to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -17969,6 +17975,13 @@
             "module": "THREE"
         },
         {
+            "file": "..\\source\\core\\three\\loaders\\3MFLoader.js",
+            "line": 1,
+            "author": "Mugen87 / https://github.com/Mugen87\n\n3D Manufacturing Format (3MF) specification: https://3mf.io/specification/\n\nThe following features from the core specification are supported:\n\n- 3D Models\n- Object Resources (Meshes and Components)\n- Material Resources (Base Materials)\n\n3MF Materials and Properties Extension are only partially supported.\n\n- Texture 2D\n- Texture 2D Groups\n- Color Groups (Vertex Colors)\n- Metallic Display Properties (PBR)",
+            "class": "Material",
+            "module": "THREE"
+        },
+        {
             "file": "..\\source\\core\\three\\materials\\Material.js",
             "line": 12,
             "description": "Dispose material.\n\nAlso disposes all the textures attached to the material.",
@@ -18695,7 +18708,7 @@
             "line": 97,
             "description": "Recalculate all children origins, to be centered with their geometry.",
             "itemtype": "method",
-            "name": "recalculateGeometryOrigin",
+            "name": "centerGeometryOrigin",
             "params": [
                 {
                     "name": "object",
@@ -18708,7 +18721,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 123,
+            "line": 125,
             "description": "Covert all the geometries found in the object to BufferGeometry format.",
             "itemtype": "method",
             "name": "convertToBufferGeometry",
@@ -19075,7 +19088,7 @@
             "line": 22,
             "description": "Check if a file corresponds to a remote location.",
             "itemtype": "method",
-            "name": "isRemote",
+            "name": "isLocalFile",
             "return": {
                 "description": "If the file is remote returns true, false otherwise.",
                 "type": "Boolean"
@@ -19936,5 +19949,14 @@
             "module": "Runtime"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type\nDispose resource, should be called to free memory after its no longer required.",
+            "line": " ..\\source\\core\\resources\\Resource.js:98"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\source\\core\\three\\loaders\\3MFLoader.js:1"
+        }
+    ]
 }

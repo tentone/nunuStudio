@@ -12,36 +12,8 @@ var TYPED_ARRAYS = {
 
 var parseBufferAttribute = function(json)
 {
-	if (json.bufferType !== undefined)
-	{
-		var bufferAttribute;
-
-		if(json.bufferType === "BufferAttribute")
-		{
-			var typedArray = new TYPED_ARRAYS[json.type](json.array);
-			bufferAttribute = new THREE.BufferAttribute(typedArray, json.itemSize, json.normalized);
-		}
-		else if(json.bufferType === "InstancedBufferAttribute")
-		{
-			var typedArray = new TYPED_ARRAYS[json.type](json.array);
-			bufferAttribute = new THREE.InstancedBufferAttribute(typedArray, json.itemSize, json.normalized, json.meshPerAttribute);
-		}
-		else if(json.bufferType === "InterleavedBufferAttribute")
-		{
-			// Interleaved buffer
-			var typedArray = new TYPED_ARRAYS[json.data.type](json.data.array);
-			var interleavedBuffer = new THREE.InterleavedBuffer(typedArray, json.data.stride);
-			interleavedBuffer.setUsage(json.data.usage);
-			interleavedBuffer.count = json.data.count;
-
-			bufferAttribute = new THREE.InterleavedBufferAttribute(interleavedBuffer, json.itemSize, json.offset, json.normalized);
-		}
-
-		if (json.name !== undefined) bufferAttribute.name = json.name;
-
-		return bufferAttribute;
-	}
-	else
+	// Legacy format
+	if (json.array !== undefined)
 	{
 		var typedArray = new TYPED_ARRAYS[json.type](json.array);
 		var contructor = json.isInstancedBufferAttribute ? THREE.InstancedBufferAttribute : THREE.BufferAttribute;
@@ -51,6 +23,33 @@ var parseBufferAttribute = function(json)
 
 		return bufferAttribute;
 	}
+
+	var bufferAttribute;
+
+	if(json.type === "BufferAttribute")
+	{
+		var typedArray = new TYPED_ARRAYS[json.typedArray.type](json.typedArray.array);
+		bufferAttribute = new THREE.BufferAttribute(typedArray, json.itemSize, json.normalized);
+	}
+	else if(json.type === "InstancedBufferAttribute")
+	{
+		var typedArray = new TYPED_ARRAYS[json.typedArray.type](json.typedArray.array);
+		bufferAttribute = new THREE.InstancedBufferAttribute(typedArray, json.itemSize, json.normalized, json.meshPerAttribute);
+	}
+	else if(json.type === "InterleavedBufferAttribute")
+	{
+		// Interleaved buffer
+		var typedArray = new TYPED_ARRAYS[json.data.typedArray.type](json.data.typedArray.array);
+		var interleavedBuffer = new THREE.InterleavedBuffer(typedArray, json.data.stride);
+		interleavedBuffer.setUsage(json.data.usage);
+		interleavedBuffer.count = json.data.count;
+		
+		bufferAttribute = new THREE.InterleavedBufferAttribute(interleavedBuffer, json.itemSize, json.offset, json.normalized);
+	}
+
+	if (json.name !== undefined) bufferAttribute.name = json.name;
+
+	return bufferAttribute;
 };
 
 THREE.BufferGeometryLoader.prototype.parse = function(json)

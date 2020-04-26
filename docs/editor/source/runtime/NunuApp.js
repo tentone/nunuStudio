@@ -1,5 +1,6 @@
 "use strict";
 
+// Runtime libs
 include("lib/three/three.js");
 
 include("lib/three/QuickHull.js");
@@ -52,23 +53,33 @@ include("lib/spine-threejs.js");
 include("lib/opentype.min.js");
 include("lib/chevrotain.min.js");
 
+// Threejs Overrides
+include("source/core/three/animation/KeyframeTrack.js");
+include("source/core/three/animation/AnimationClip.js");
+
+include("source/core/three/core/Object3D.js");
+include("source/core/three/core/BufferGeometry.js");
+
+include("source/core/three/core/BufferAttribute.js");
+include("source/core/three/core/InterleavedBufferAttribute.js");
+include("source/core/three/core/InterleavedBuffer.js");
+include("source/core/three/core/InstancedBufferAttribute.js");
+
+include("source/core/three/loaders/BufferGeometryLoader.js");
+
+include("source/core/three/cameras/Camera.js");
+include("source/core/three/materials/Material.js");
+include("source/core/three/textures/Texture.js");
+include("source/core/three/lights/LightShadow.js");
+include("source/core/three/scenes/Fog.js");
+include("source/core/three/objects/Points.js");
+
+// Runtime core
 include("source/core/Nunu.js");
 include("source/core/Global.js");
 
 include("source/core/FileSystem.js");
 include("source/core/platform/TargetConfig.js");
-
-include("source/core/three/animation/KeyframeTrack.js");
-include("source/core/three/animation/AnimationClip.js");
-include("source/core/three/core/Object3D.js");
-include("source/core/three/core/BufferGeometry.js");
-include("source/core/three/cameras/Camera.js");
-include("source/core/three/materials/Material.js");
-include("source/core/three/loaders/BufferGeometryLoader.js");
-include("source/core/three/textures/Texture.js");
-include("source/core/three/lights/LightShadow.js");
-include("source/core/three/scenes/Fog.js");
-include("source/core/three/objects/Points.js");
 
 include("source/core/animation/AnimationMixer.js");
 

@@ -3,7 +3,7 @@
 THREE.InterleavedBufferAttribute.prototype.toJSON = function()
 {
 	return {
-		bufferType: "InterleavedBufferAttribute",
+		type: "InterleavedBufferAttribute",
 		data: this.data.toJSON(),
 		itemSize: this.itemSize,
 		offset: this.offset,
