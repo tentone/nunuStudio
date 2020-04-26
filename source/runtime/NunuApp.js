@@ -64,7 +64,6 @@ include("source/core/three/core/Object3D.js");
 include("source/core/three/core/BufferGeometry.js");
 include("source/core/three/cameras/Camera.js");
 include("source/core/three/materials/Material.js");
-include("source/core/three/loaders/BufferGeometryLoader.js");
 include("source/core/three/textures/Texture.js");
 include("source/core/three/lights/LightShadow.js");
 include("source/core/three/scenes/Fog.js");
@@ -212,6 +211,7 @@ include("source/core/utils/MathUtils.js");
 include("source/core/utils/ObjectUtils.js");
 include("source/core/utils/PhysicsGenerator.js");
 include("source/core/utils/UnitConverter.js");
+
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.

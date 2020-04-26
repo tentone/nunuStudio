@@ -72,7 +72,6 @@ include("source/core/three/core/Object3D.js");
 include("source/core/three/core/BufferGeometry.js");
 include("source/core/three/cameras/Camera.js");
 include("source/core/three/materials/Material.js");
-include("source/core/three/loaders/BufferGeometryLoader.js");
 include("source/core/three/textures/Texture.js");
 include("source/core/three/lights/LightShadow.js");
 include("source/core/three/scenes/Fog.js");
