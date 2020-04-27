@@ -58,8 +58,6 @@ include("source/core/three/animation/KeyframeTrack.js");
 include("source/core/three/animation/AnimationClip.js");
 
 include("source/core/three/core/Object3D.js");
-include("source/core/three/core/BufferGeometry.js");
-
 include("source/core/three/core/BufferAttribute.js");
 include("source/core/three/core/InterleavedBufferAttribute.js");
 include("source/core/three/core/InterleavedBuffer.js");

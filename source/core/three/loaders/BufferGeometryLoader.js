@@ -1,7 +1,7 @@
 var TYPED_ARRAYS = {
 	Int8Array: Int8Array,
 	Uint8Array: Uint8Array,
-	Uint8ClampedArray: typeof Uint8ClampedArray !== 'undefined' ? Uint8ClampedArray : Uint8Array,
+	Uint8ClampedArray: Uint8ClampedArray,
 	Int16Array: Int16Array,
 	Uint16Array: Uint16Array,
 	Int32Array: Int32Array,
@@ -71,9 +71,9 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 	}
 
 	var morphAttributes = json.data.morphAttributes;
-	if (morphAttributes)
+	if(morphAttributes)
 	{
-		for (var key in morphAttributes)
+		for(var key in morphAttributes)
 		{
 			var attributeArray = morphAttributes[key];
 			var array = [];
@@ -90,7 +90,7 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 	}
 
 	var morphTargetsRelative = json.data.morphTargetsRelative;
-	if (morphTargetsRelative)
+	if(morphTargetsRelative)
 	{
 		geometry.morphTargetsRelative = true;
 	}
@@ -103,11 +103,10 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 			var group = groups[i];
 			geometry.addGroup(group.start, group.count, group.materialIndex);
 		}
-
 	}
 
 	var boundingSphere = json.data.boundingSphere;
-	if (boundingSphere !== undefined)
+	if(boundingSphere !== undefined)
 	{
 		var center = new THREE.Vector3();
 		if (boundingSphere.center !== undefined)
@@ -116,7 +115,6 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 		}
 
 		geometry.boundingSphere = new THREE.Sphere(center, boundingSphere.radius);
-
 	}
 
 	if (json.name) geometry.name = json.name;

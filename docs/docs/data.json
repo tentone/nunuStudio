@@ -958,13 +958,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\three\\loaders\\3MFLoader.js": {
-            "name": "..\\source\\core\\three\\loaders\\3MFLoader.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\three\\materials\\Material.js": {
             "name": "..\\source\\core\\three\\materials\\Material.js",
             "modules": {},
@@ -15662,12 +15655,14 @@
             "file": "..\\source\\core\\resources\\Resource.js",
             "line": 98,
             "description": "Dispose resource, should be called to free memory after its no longer required.",
+            "itemtype": "method",
+            "name": "dispose",
             "class": "Resource",
             "module": "Resources"
         },
         {
             "file": "..\\source\\core\\resources\\Resource.js",
-            "line": 103,
+            "line": 105,
             "description": "Serialize resource to json.\n\nOnly serializes name, uuid and type.",
             "itemtype": "method",
             "name": "toJSON",
@@ -17975,13 +17970,6 @@
             "module": "THREE"
         },
         {
-            "file": "..\\source\\core\\three\\loaders\\3MFLoader.js",
-            "line": 1,
-            "author": "Mugen87 / https://github.com/Mugen87\n\n3D Manufacturing Format (3MF) specification: https://3mf.io/specification/\n\nThe following features from the core specification are supported:\n\n- 3D Models\n- Object Resources (Meshes and Components)\n- Material Resources (Base Materials)\n\n3MF Materials and Properties Extension are only partially supported.\n\n- Texture 2D\n- Texture 2D Groups\n- Color Groups (Vertex Colors)\n- Metallic Display Properties (PBR)",
-            "class": "Material",
-            "module": "THREE"
-        },
-        {
             "file": "..\\source\\core\\three\\materials\\Material.js",
             "line": 12,
             "description": "Dispose material.\n\nAlso disposes all the textures attached to the material.",
@@ -19949,14 +19937,5 @@
             "module": "Runtime"
         }
     ],
-    "warnings": [
-        {
-            "message": "Missing item type\nDispose resource, should be called to free memory after its no longer required.",
-            "line": " ..\\source\\core\\resources\\Resource.js:98"
-        },
-        {
-            "message": "Missing item type",
-            "line": " ..\\source\\core\\three\\loaders\\3MFLoader.js:1"
-        }
-    ]
+    "warnings": []
 }
