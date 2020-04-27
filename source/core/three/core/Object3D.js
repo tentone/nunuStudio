@@ -267,12 +267,19 @@ THREE.Object3D.prototype.destroy = function()
 };
 
 /**
- * Serialize object to JSON.
+ * Serialize the object data to JSON. Should serialize all attributes and resources used by the object.
+ *
+ * Parsing of the data serialized is performed using the ObjectLoader class.
+ *
+ * The objects being serialized share a "meta" object where the resources can be stored to avoid repetition in the serialized data.
+ *
+ * On the root object the meta object does not need to be initialized manually it is automatically created, to access resource the resourceAccess callback should be used.
+ *
  * @method toJSON
- * @param {Object} meta
- * @param {Function} resourceAccess
- * @param {boolean} recursive
- * @return {Object} json
+ * @param {Object} meta Resource storage passed to all resources toJSON for self storage.
+ * @param {Function} resourceAccess Callback method used to access the resources receives (meta, object) as parameters, meta is the resource storage and object is the current serialized status of the object new attributes can be added here.
+ * @param {boolean} recursive If true the method will call toJSON for all available children and store the result in children attribute.
+ * @return {Object} json Output JSON will all data serialized, this can be stores in file or transfered to later be loaded using the ObjectLoader.
  */
 THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 {
@@ -371,10 +378,13 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		}
 	}
 
+	// Store object in the output.
+	output.object = object;
+
 	// Resource access callback
 	if(resourceAccess !== undefined)
 	{
-		resourceAccess(meta, object);
+		resourceAccess(meta, object, output);
 	}
 
 	// Serialize children
@@ -406,7 +416,6 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		output.shapes = extractFromCache(meta.shapes);
 	}
 
-	output.object = object;
 	return output;
 
 	// Auxiliar function to add resource to respective library

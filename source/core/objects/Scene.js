@@ -394,23 +394,26 @@ Scene.prototype.toJSON = function(meta)
 		return THREE.Object3D.prototype.toJSON.call(this, meta);
 	}
 
-	var background = this.background;
+	var self = this;
+
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
-		if(background instanceof THREE.Color)
+		// Background
+		if(self.background instanceof THREE.Color)
 		{
-			background = background.toJSON(meta);
+			object.background = self.background.toJSON(meta);
 		}
-		else if(background instanceof THREE.Texture)
+		else if(self.background instanceof THREE.Texture)
 		{
-			background = background.toJSON(meta).uuid;
+			object.background = self.background.toJSON(meta).uuid;
+		}
+
+		// Environment
+		if(self.environment instanceof THREE.Texture)
+		{
+			object.environment = self.environment.toJSON(meta).uuid;
 		}
 	});
-
-	if(background !== null)
-	{
-		data.object.background = background;
-	}
 
 	if(this.defaultCamera !== null)
 	{
