@@ -834,6 +834,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 					}
 				}
 
+				if(data.environment !== undefined)
+				{
+					object.environment = getTexture(data.environment);
+				}
+
 				if(data.fog !== undefined)
 				{
 					if(data.fog.type === "Fog")
