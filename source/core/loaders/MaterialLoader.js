@@ -53,53 +53,9 @@ MaterialLoader.prototype.setTextures = function(value)
  */
 MaterialLoader.prototype.parse = function(json)
 {
-	var textures = this.textures;
-
-	function getTexture(name)
-	{
-		if(textures[name] === undefined)
-		{
-			console.warn("THREE.MaterialLoader: Undefined texture", name);
-		}
-
-		return textures[name];
-	}
-
-
 	var material = THREE.MaterialLoader.prototype.parse.call(this, json);
 
-	// Specular
-	if(json.specular !== undefined)
-	{
-		if(material.specular === undefined)
-		{
-			material.specular = new THREE.Color();
-		}
-
-		material.specular.setHex(json.specular);
-	}
-
-	// Shading
-	if(json.shading !== undefined)
-	{
-		material.flatShading = (json.shading === 1); // THREE.FlatShading
-	}
-
-	// Normal scale
-	if(json.normalScale !== undefined)
-	{
-		var normalScale = json.normalScale;
-
-		if(Array.isArray(normalScale) === false)
-		{
-			// Blender exporter used to export a scalar. See #7459
-			normalScale = [normalScale, normalScale];
-		}
-
-		material.normalScale = new Vector2().fromArray(normalScale);
-	}
-
-	// Multi material
+	// Legacy multi-material
 	if(json.materials !== undefined)
 	{
 		for (var i = 0, l = json.materials.length; i < l; i ++)
