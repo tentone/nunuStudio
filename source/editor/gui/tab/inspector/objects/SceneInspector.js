@@ -64,6 +64,17 @@ function SceneInspector(parent, object)
 	this.form.add(this.backgroundTransparent);
 	this.form.nextRow();
 
+	// Environment map
+	this.form.addText(Locale.environmentMap);
+	this.environment = new CubeTextureBox(this.form);
+	this.environment.size.set(0, 100);
+	this.environment.setOnChange(function(file)
+	{
+		Editor.addAction(new ChangeAction(self.object, "environment", self.environment.getValue()));
+	});
+	this.form.add(this.environment);
+	this.form.nextRow();
+
 	// Fog
 	this.form.addText(Locale.fog);
 	this.fog = new DropdownList(this.form);
@@ -252,6 +263,7 @@ SceneInspector.prototype.updateInspector = function()
 		this.backgroundTexture.setValue(null);
 	}
 
+	this.environment.setValue(this.object.environment);
 	this.usePhysics.setValue(this.object.usePhysics);
 	this.gravity.setValue(this.object.world.gravity.x, this.object.world.gravity.y, this.object.world.gravity.z);
 	this.tolerance.setValue(this.object.world.solver.tolerance);
