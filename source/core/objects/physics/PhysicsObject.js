@@ -2,10 +2,8 @@
 
 /**
  * Wrapper for cannon.js physics objects.
- * 
- * Physics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset.
  *
- * nunuStudio includes tools to create cannon shapes from three geometry objects.
+ * The editor includes tools to create cannon shapes from three.js geometry objects.
  * 
  * Documentation for cannon.js physics available here http:// schteppe.github.io/cannon.js/docs/
  * 
@@ -48,20 +46,20 @@ function PhysicsObject()
 	this.body.mass = 1.0;
 
 	/**
-	 * Physics world.
+	 * Physics object position mode, indicates how coordinates from the physics engine are transformed into object coordinates.
+	 *
+	 * @attribute mode
+	 * @type {number}
+	 */
+	this.mode = PhysicsObject.LOCAL;
+
+	/**
+	 * Refenrece to the physics world.
 	 * 
 	 * @attribute world
 	 * @type {CANNON.World}
 	 */
 	this.world = null;
-
-	/**
-	 * Physics object position mode, indicates how coordinates from the physics engine are transformed.
-	 *
-	 * @attribute mode
-	 * @type {number}
-	 */
-	this.mode = PhysicsObject.WORLD;
 }
 
 PhysicsObject.prototype = Object.create(THREE.Group.prototype);
@@ -69,11 +67,15 @@ PhysicsObject.prototype = Object.create(THREE.Group.prototype);
 /**
  * The position of the object is copied directly from the body.
  *
+ * Ignores the world tranforms inherited from parent objects.
+ * 
+ * Faster but the physics object should not carry any world transformations.
+ *
  * @static
- * @attribute WORLD
+ * @attribute LOCAL
  * @type {number}
  */
-PhysicsObject.WORLD = 100;
+PhysicsObject.LOCAL = 100;
 
 /**
  * The position of the object is adjusted to follow the parent object transformation.
@@ -81,10 +83,10 @@ PhysicsObject.WORLD = 100;
  * This mode should be used for objects placed inside others.
  *
  * @static
- * @attribute LOCAL
+ * @attribute WORLD
  * @type {number}
  */
-PhysicsObject.LOCAL = 101;
+PhysicsObject.WORLD = 101;
 
 /**
  * Intialize physics object and add it to the scene physics world.
@@ -93,12 +95,12 @@ PhysicsObject.LOCAL = 101;
  */
 PhysicsObject.prototype.initialize = function()
 {
-	if(this.mode === PhysicsObject.WORLD)
+	if(this.mode === PhysicsObject.LOCAL)
 	{
 		this.body.position.copy(this.position);
 		this.body.quaternion.copy(this.quaternion);	
 	}
-	else if(this.mode === PhysicsObject.LOCAL)
+	else if(this.mode === PhysicsObject.WORLD)
 	{
 		var position = new THREE.Vector3();
 		this.getWorldPosition(position);
@@ -131,7 +133,7 @@ PhysicsObject.prototype.initialize = function()
  */
 PhysicsObject.prototype.update = function(delta)
 {
-	if(this.mode === PhysicsObject.WORLD)
+	if(this.mode === PhysicsObject.LOCAL)
 	{
 		this.position.copy(this.body.position);
 		if(!this.body.fixedRotation)
@@ -139,7 +141,7 @@ PhysicsObject.prototype.update = function(delta)
 			this.quaternion.copy(this.body.quaternion);
 		}
 	}
-	else if(this.mode === PhysicsObject.LOCAL)
+	else if(this.mode === PhysicsObject.WORLD)
 	{
 
 		// Physics transform matrix

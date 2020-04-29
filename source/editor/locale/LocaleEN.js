@@ -510,6 +510,8 @@ LocaleManager.register(
 	hintPhysicallyCorrectLights: "Whether to use physically correct lighting mode.",
 	hintIgnorePixelRatio: "Ignore the device pixel ratio rendering image. May be required in some devices for correct image display.",
 	hintShadowBias: "How much to add or subtract from the normalized shadow depth. May help reduce artefacts",
+	hintPhysicsMode: "Indicates how coordinates from the physics engine are transformed into object coordinates.",
+	hintPhysicsType: "Defines how the physics object is update, static do not move, kinematic have constant velocity and dynamic are fully updated.",
 
 	// Update
 	updatedRestart: "nunuStudio updated\nRestart the editor",

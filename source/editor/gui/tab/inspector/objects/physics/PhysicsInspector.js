@@ -41,9 +41,10 @@ function PhysicsInspector(parent, object)
 	// Mode
 	this.form.addText(Locale.mode);
 	this.mode = new DropdownList(this.form);
+	this.mode.setAltText(Locale.hintPhysicsMode);
 	this.mode.size.set(100, 18);
-	this.mode.addValue(Locale.world, PhysicsObject.WORLD);
 	this.mode.addValue(Locale.local, PhysicsObject.LOCAL);
+	this.mode.addValue(Locale.world, PhysicsObject.WORLD);
 	this.mode.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "mode", self.mode.getValue()));
@@ -54,6 +55,7 @@ function PhysicsInspector(parent, object)
 	// Body Type
 	this.form.addText(Locale.type);
 	this.bodyType = new DropdownList(this.form);
+	this.bodyType.setAltText(Locale.hintPhysicsType)
 	this.bodyType.size.set(100, 18);
 	this.bodyType.addValue(Locale.static, CANNON.Body.STATIC);
 	this.bodyType.addValue(Locale.dynamic, CANNON.Body.DYNAMIC);
@@ -104,8 +106,8 @@ function PhysicsInspector(parent, object)
 	this.form.nextRow();
 
 	// Fixed rotation
-	this.fixedRotation = new CheckBox(this.form);
 	this.form.addText(Locale.lockRotation);
+	this.fixedRotation = new CheckBox(this.form);
 	this.fixedRotation.size.set(18, 18);
 	this.fixedRotation.setOnChange(function()
 	{
