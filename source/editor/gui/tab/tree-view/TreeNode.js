@@ -191,6 +191,8 @@ function TreeNode(container)
 			// Group objects
 			context.addOption(Locale.groupObjects, function()
 			{
+				// TODO <USE THE MOVE ACTIONS INSTEAD TO KEEP EVERYTHING ON THE SAME POSITION>
+				
 				var actions = [];
 				var group = new Container();
 				var parent = self.object.parent;
