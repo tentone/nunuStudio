@@ -68,7 +68,7 @@ function TreeNode(container)
 	this.label.style.position = "absolute";
 	this.label.style.pointerEvents = "none";
 	this.label.style.whiteSpace = "nowrap";
-	this.label.style.top = "4px";
+	this.label.style.top = "3px";
 	this.element.appendChild(this.label);
 
 	// Label text
@@ -187,6 +187,38 @@ function TreeNode(container)
 					self.object.generate();
 				});
 			}
+
+			// Group objects
+			context.addOption(Locale.groupObjects, function()
+			{
+				var actions = [];
+				var group = new Container();
+				var parent = self.object.parent;
+				var found = false;
+
+				for(var i = 0; i < Editor.selection.length; i++)
+				{
+					if(Editor.selection[i] instanceof THREE.Object3D)
+					{
+						actions.push(new RemoveAction(Editor.selection[i]));
+						group.add(Editor.selection[i]);
+
+						if(Editor.selection[i] === self.object)
+						{
+							found = true;
+						}
+					}
+				}
+
+				if(!found)
+				{
+					actions.push(new RemoveAction(self.object));
+					group.add(self.object);
+				}
+
+				actions.push(new AddAction(group, parent));
+				Editor.addAction(new ActionBundle(actions));
+			});
 
 			// Recalculate Origin
 			context.addOption(Locale.centerOrigin, function()

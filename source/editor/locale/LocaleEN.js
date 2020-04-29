@@ -388,6 +388,7 @@ LocaleManager.register(
 	subdivide: "Subdivide",
 
 	// Editor
+	groupObjects: "Group Objects",
 	create: "Create",
 	code: "Code",
 	more: "More",

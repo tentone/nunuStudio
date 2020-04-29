@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Main menu of the application is displayed on top of the window, contains all global operations that can be applied to the project.
+ *
+ * Its also used to load, save project, and access editor related features.
+ *
+ * @class MainMenu
+ * @extends {Element}
+ */
 function MainMenu(parent)
 {
 	Element.call(this, parent, "div");
