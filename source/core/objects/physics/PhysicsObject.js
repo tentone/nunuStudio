@@ -257,6 +257,7 @@ PhysicsObject.fromJSON = function(data)
 		object.mode = data.mode;
 	}
 
+	// Body
 	object.body.type = data.body.type;
 	object.body.mass = data.body.mass;
 	object.body.linearDamping = data.body.linearDamping;
@@ -268,6 +269,7 @@ PhysicsObject.fromJSON = function(data)
 	object.body.collisionFilterMask = data.body.collisionFilterMask;
 	object.body.fixedRotation = data.body.fixedRotation;
 
+	// Shapes
 	var shapes = data.body.shapes;
 	for(var i = 0; i < shapes.length; i++)
 	{
@@ -291,14 +293,10 @@ PhysicsObject.fromJSON = function(data)
 		}
 		else if(shape.type === CANNON.Shape.types.CONVEXPOLYHEDRON)
 		{
-
-			/*if(json.mipmaps[i].data.toArrayBuffer !== undefined)
+			for(var k = 0; k < shape.vertices.length; k++)
 			{
-			json.mipmaps[i].data = new Uint8Array(json.mipmaps[i].data.toArrayBuffer());
-			}*/
-
-			// TODO <REMOVE THIS>
-			console.log("CONVEXPOLYHEDRON shape cannon", shape, data);
+				shape.vertices[k] = new CANNON.Vec3(shape.vertices[k].x, shape.vertices[k].y, shape.vertices[k].z);
+			}
 			
 			object.body.addShape(new CANNON.ConvexPolyhedron(shape.vertices, shape.faces));
 		}

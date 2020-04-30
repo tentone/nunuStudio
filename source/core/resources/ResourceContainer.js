@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Constructor method for a resource container object of multiple types.
+ * Resource container contains resource of multiple types.
  *
  * @method ResourceContainer
  */
@@ -16,7 +16,7 @@ function ResourceContainer()
 	this.images = [];
 
 	/**
-	 * Videos.
+	 * Video resources.
 	 * 
 	 * @property videos
 	 * @type {Array}
@@ -24,7 +24,7 @@ function ResourceContainer()
 	this.videos = [];
 
 	/**
-	 * Audio.
+	 * Audio resources.
 	 * 
 	 * @property audio
 	 * @type {Array}
@@ -32,7 +32,7 @@ function ResourceContainer()
 	this.audio = [];
 
 	/**
-	 * Fonts.
+	 * Fonts resources.
 	 * 
 	 * @property fonts
 	 * @type {Array}
@@ -40,7 +40,7 @@ function ResourceContainer()
 	this.fonts = [];
 
 	/**
-	 * Materials.
+	 * Materials resources.
 	 * 
 	 * @property materials
 	 * @type {Array}
@@ -48,7 +48,7 @@ function ResourceContainer()
 	this.materials = [];
 
 	/**
-	 * Textures.
+	 * Textures resources.
 	 * 
 	 * @property textures
 	 * @type {Array}
@@ -56,7 +56,7 @@ function ResourceContainer()
 	this.textures = [];
 
 	/**
-	 * Geometries.
+	 * Geometries resources.
 	 * 
 	 * @property geometries
 	 * @type {Array}
@@ -72,7 +72,7 @@ function ResourceContainer()
 	this.resources = [];
 
 	/**
-	 * Shapes.
+	 * Shapes resources.
 	 * 
 	 * @property shapes
 	 * @type {Array}
@@ -80,7 +80,7 @@ function ResourceContainer()
 	this.shapes = [];
 
 	/**
-	 * Skeletons.
+	 * Skeletons resources.
 	 * 
 	 * @property skeletons
 	 * @type {Array}
@@ -90,6 +90,24 @@ function ResourceContainer()
 
 ResourceContainer.libraries = ["images", "videos", "audio", "fonts", "materials", "textures", "geometries", "resources", "shapes", "skeletons"];
 
+/**
+ * Copy resources from another resource container into this one.
+ *
+ * @method copyResources
+ */
+ResourceContainer.prototype.copyResources = function(container)
+{
+	this.materials = container.materials;
+	this.textures = container.textures;
+	this.resources = container.resources;
+	this.fonts = container.fonts;
+	this.audio = container.audio;
+	this.geometries = container.geometries;
+	this.images = container.images;
+	this.videos = container.videos;
+	this.shapes = container.shapes;
+	this.skeletons = container.skeletons;
+};
 
 ResourceContainer.prototype.getTexture = function(uuid)
 {
@@ -103,9 +121,6 @@ ResourceContainer.prototype.getTexture = function(uuid)
 
 ResourceContainer.prototype.getGeometry = function(uuid)
 {
-	// TODO <REMOVE THIS>
-	console.log("ResourceContainer.prototype.getGeometry", this.geometries);
-
 	if(this.geometries[uuid] === undefined)
 	{
 		console.warn("ResourceContainer: Undefined geometry", uuid);

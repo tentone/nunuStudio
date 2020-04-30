@@ -18,6 +18,7 @@ function ResourceManager()
 }
 
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
+Object.assign(ResourceManager.prototype, ResourceContainer.prototype);
 
 /**
  * Dispose all the resources present in the resource manager.

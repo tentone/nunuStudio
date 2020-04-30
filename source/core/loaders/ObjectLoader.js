@@ -5,10 +5,10 @@
  *
  * Also loads all resources attached to the objects being loaded.
  * 
- * Can parse be used to load on runtime resources and objects from external isp project files.
+ * Can parse be used to load on runtime resources and objects from external project files.
  * 
- * @class ObjectLoader
  * @module Loaders
+ * @class ObjectLoader
  * @param {Object} manager
  */
 function ObjectLoader(manager)
@@ -38,7 +38,6 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}
 
 	var self = this;
-	
 	var loader = new THREE.FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
@@ -48,9 +47,9 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 
 
 /**
- * Parse JSON object.
+ * Parse JSON object and create the correct Object structure. 
  * 
- * Data can be loaded from a file using the FileSystem methods and parsed to an Object using JSON.parse() method.
+ * Data can be loaded from a file and should be parsed into Object.
  *
  * @method parse
  * @param {Object} json JSON data to be loaded.
@@ -59,31 +58,17 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
  */
 ObjectLoader.prototype.parse = function(json, onLoad)
 {
-	// TODO <REMOVE THIS>
-	console.log("ObjectLoader.prototype.parse", json.geometries);
-
-	this.resources = this.parseResources(json.resources);
-	this.shapes = this.parseShape(json.shapes);
-	this.geometries = this.parseGeometries(json.geometries);
-	this.images = this.parseImages(json.images);
-	this.videos = this.parseVideos(json.videos);
-	this.audio = this.parseAudio(json.audio);
-	this.fonts = this.parseFonts(json.fonts);
-	this.textures = this.parseTextures(json.textures);
-	this.materials = this.parseMaterials(json.materials);
+	this.parseResources(json.resources);
+	this.parseShape(json.shapes);
+	this.parseGeometries(json.geometries);
+	this.parseImages(json.images);
+	this.parseVideos(json.videos);
+	this.parseAudio(json.audio);
+	this.parseFonts(json.fonts);
+	this.parseTextures(json.textures);
+	this.parseMaterials(json.materials);
 
 	var object = this.parseObject(json.object);
-
-	if(json.skeletons)
-	{
-		var skeletons = this.parseSkeletons(json.skeletons, object);
-		this.bindSkeletons(object, skeletons);
-	}
-
-	if(json.animations)
-	{
-		object.animations = this.parseAnimations(json.animations);
-	}
 
 	if(json.images === undefined || json.images.length === 0)
 	{
@@ -127,8 +112,6 @@ ObjectLoader.prototype.setCrossOrigin = function(origin)
  */
 ObjectLoader.prototype.parseResources = function(json)
 {
-	var resources = [];
-
 	if(json !== undefined)
 	{
 		for(var i in json)
@@ -138,11 +121,11 @@ ObjectLoader.prototype.parseResources = function(json)
 			resource.name = json[i].name;
 			resource.uuid = json[i].uuid;
 
-			resources[resource.uuid] = resource;
+			this.resources[resource.uuid] = resource;
 		}
 	}
 
-	return resources;
+	return this.resources;
 };
 
 /**
@@ -154,19 +137,16 @@ ObjectLoader.prototype.parseResources = function(json)
  */
 ObjectLoader.prototype.parseShape = function(json)
 {
-	var shapes = {};
-
 	if(json !== undefined)
 	{
 		for(var i = 0, l = json.length; i < l; i ++)
 		{
 			var shape = new Shape().fromJSON(json[i]);
-
-			shapes[shape.uuid] = shape;
+			this.shapes[shape.uuid] = shape;
 		}
 	}
 
-	return shapes;
+	return this.shapes;
 };
 
 /**
@@ -178,19 +158,18 @@ ObjectLoader.prototype.parseShape = function(json)
  */
 ObjectLoader.prototype.parseGeometries = function(array)
 {
-	var loader = new GeometryLoader();
-	loader.setShapes(this.shapes);
-
-	var geometries = [];
 	if(array !== undefined)
 	{
+		var loader = new GeometryLoader();
+		loader.setShapes(this.shapes);
+
 		for(var i = 0; i < array.length; i++)
-		{
-			geometries[array[i].uuid] = loader.parse(array[i]);
+		{	
+			this.geometries[array[i].uuid] = loader.parse(array[i]);
 		}
 	}
 
-	return geometries;
+	return this.geometries;
 };
 
 /**
@@ -202,19 +181,126 @@ ObjectLoader.prototype.parseGeometries = function(array)
  */
 ObjectLoader.prototype.parseMaterials = function(json)
 {
-	var materials = [];
-	var loader = new MaterialLoader();
-	loader.setTextures(this.textures);
-
 	if(json !== undefined)
 	{
+		var loader = new MaterialLoader();
+		loader.setTextures(this.textures);
+
 		for(var i in json)
 		{
-			materials[json[i].uuid] = loader.parse(json[i]);
+			this.materials[json[i].uuid] = loader.parse(json[i]);
 		}
 	}
 
-	return materials;
+	return this.materials;
+};
+
+/**
+ * Parse images on json.
+ *
+ * @method parseImages
+ * @param {Object} json
+ * @return {Array} images
+ */
+ObjectLoader.prototype.parseImages = function(json)
+{
+	if(json !== undefined)
+	{
+		var loader = new ImageLoader();
+		for(var i in json)
+		{
+			this.images[json[i].uuid] = loader.parse(json[i]);
+		}
+	}
+
+	return this.images;
+};
+
+/**
+ * Parse videos on json.
+ *
+ * @method parseVideos
+ * @param {Object} json
+ * @return {Array} videos
+ */
+ObjectLoader.prototype.parseVideos = function(json)
+{
+	if(json !== undefined)
+	{
+		var loader = new VideoLoader();
+		for(var i in json)
+		{
+			this.videos[json[i].uuid] = loader.parse(json[i]);
+		}
+	}
+
+	return this.videos;
+};
+
+/**
+ * Parse audio on json.
+ *
+ * @method parseAudio
+ * @param {Object} json
+ * @return {Array} audio
+ */
+ObjectLoader.prototype.parseAudio = function(json)
+{
+	if(json !== undefined)
+	{
+		var loader = new AudioLoader();
+		for(var i in json)
+		{
+			this.audio[json[i].uuid] = loader.parse(json[i]);
+		}
+	}
+
+	return this.audio;
+};
+
+/**
+ * Parse fonts on json.
+ *
+ * @method parseFonts
+ * @param {Object} json
+ * @return {Array} fonts
+ */
+ObjectLoader.prototype.parseFonts = function(json)
+{
+	if(json !== undefined)
+	{
+		var loader = new FontLoader();
+		for(var i in json)
+		{
+			this.fonts[json[i].uuid] = loader.parse(json[i]);
+		}
+	}
+
+	return this.fonts;
+};
+
+/**
+ * Parse textures on json.
+ *
+ * @method parseTextures
+ * @param {Object} json
+ * @return {Array} textures
+ */
+ObjectLoader.prototype.parseTextures = function(json)
+{
+	if(json !== undefined)
+	{
+		var loader = new TextureLoader();
+		loader.setImages(this.images);
+		loader.setVideos(this.videos);
+
+		for(var i in json)
+		{
+			this.textures[json[i].uuid] = loader.parse(json[i]);
+		}
+	}
+	
+	return this.textures;
 };
 
 /**
@@ -241,123 +327,6 @@ ObjectLoader.prototype.parseAnimations = function(array)
 	}
 
 	return animations;
-};
-
-/**
- * Parse images on json.
- *
- * @method parseImages
- * @param {Object} json
- * @return {Array} images
- */
-ObjectLoader.prototype.parseImages = function(json)
-{
-	var loader = new ImageLoader();
-	var images = [];
-
-	if(json !== undefined)
-	{
-		for(var i in json)
-		{
-			images[json[i].uuid] = loader.parse(json[i]);
-		}
-	}
-
-	return images;
-};
-
-/**
- * Parse videos on json.
- *
- * @method parseVideos
- * @param {Object} json
- * @return {Array} videos
- */
-ObjectLoader.prototype.parseVideos = function(json)
-{
-	var loader = new VideoLoader();
-	var videos = [];
-
-	if(json !== undefined)
-	{
-		for(var i in json)
-		{
-			videos[json[i].uuid] = loader.parse(json[i]);
-		}
-	}
-
-	return videos;
-};
-
-/**
- * Parse audio on json.
- *
- * @method parseAudio
- * @param {Object} json
- * @return {Array} audio
- */
-ObjectLoader.prototype.parseAudio = function(json)
-{
-	var loader = new AudioLoader();
-	var audio = [];
-
-	if(json !== undefined)
-	{
-		for(var i in json)
-		{
-			audio[json[i].uuid] = loader.parse(json[i]);
-		}
-	}
-
-	return audio;
-};
-
-/**
- * Parse fonts on json.
- *
- * @method parseFonts
- * @param {Object} json
- * @return {Array} fonts
- */
-ObjectLoader.prototype.parseFonts = function(json)
-{
-	var loader = new FontLoader();
-	var fonts = [];
-
-	if(json !== undefined)
-	{
-		for(var i in json)
-		{
-			fonts[json[i].uuid] = loader.parse(json[i]);
-		}
-	}
-
-	return fonts;
-};
-
-/**
- * Parse textures on json.
- *
- * @method parseTextures
- * @param {Object} json
- * @return {Array} textures
- */
-ObjectLoader.prototype.parseTextures = function(json)
-{
-	var textures = [];
-	var loader = new TextureLoader();
-	loader.setImages(this.images);
-	loader.setVideos(this.videos);
-
-	if(json !== undefined)
-	{
-		for(var i in json)
-		{
-			textures[json[i].uuid] = loader.parse(json[i]);
-		}
-	}
-	
-	return textures;
 };
 
 /**
@@ -429,7 +398,7 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
 
 			if(skeleton === undefined)
 			{
-				console.warn( 'THREE.ObjectLoader: Not found Skeleton whose uuid is ' + obj.skeletonUUID);
+				console.warn("THREE.ObjectLoader: Not found Skeleton whose uuid is " + obj.skeletonUUID);
 			}
 			else
 			{
@@ -447,7 +416,7 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
  *
  * @method parseObjects
  */
-ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts, resources, images, videos, shapes, skeletons)
+ObjectLoader.prototype.parseObject = function(data)
 {
 	var object;
 
@@ -1072,19 +1041,22 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		}
 	}
 
+	if(data.skeletons)
+	{
+		var skeletons = this.parseSkeletons(data.skeletons, object);
+		this.bindSkeletons(object, skeletons);
+	}
+
+	if(data.animations)
+	{
+		object.animations = this.parseAnimations(data.animations);
+	}
+
+
 	// Attach resources to program
 	if(data.type === "Program")
 	{
-		object.materials = materials;
-		object.textures = textures;
-		object.resources = resources;
-		object.fonts = fonts;
-		object.audio = audio;
-		object.geometries = geometries;
-		object.images = images;
-		object.videos = videos;
-		object.shapes = shapes;
-		object.skeletons = skeletons;
+		object.copyResources(this);
 	}
 
 	// Get scene default cameras
