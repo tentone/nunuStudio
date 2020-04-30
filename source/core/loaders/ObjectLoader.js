@@ -13,9 +13,13 @@
  */
 function ObjectLoader(manager)
 {
+	ResourceContainer.call(this);
+
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 	this.texturePath = "";
 }
+
+ObjectLoader.prototype = Object.create(ResourceContainer.prototype);
 
 /**
  * Load object file from URL.
@@ -55,16 +59,20 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
  */
 ObjectLoader.prototype.parse = function(json, onLoad)
 {
-	var resources = this.parseResources(json.resources);
-	var shapes = this.parseShape(json.shapes);
-	var geometries = this.parseGeometries(json.geometries, shapes);
-	var images = this.parseImages(json.images);
-	var videos = this.parseVideos(json.videos);
-	var audio = this.parseAudio(json.audio);
-	var fonts = this.parseFonts(json.fonts);
-	var textures = this.parseTextures(json.textures, images, videos);
-	var materials = this.parseMaterials(json.materials, textures);
-	var object = this.parseObject(json.object, geometries, materials, textures, audio, fonts, resources, images, videos, shapes, skeletons);
+	// TODO <REMOVE THIS>
+	console.log("ObjectLoader.prototype.parse", json.geometries);
+
+	this.resources = this.parseResources(json.resources);
+	this.shapes = this.parseShape(json.shapes);
+	this.geometries = this.parseGeometries(json.geometries);
+	this.images = this.parseImages(json.images);
+	this.videos = this.parseVideos(json.videos);
+	this.audio = this.parseAudio(json.audio);
+	this.fonts = this.parseFonts(json.fonts);
+	this.textures = this.parseTextures(json.textures);
+	this.materials = this.parseMaterials(json.materials);
+
+	var object = this.parseObject(json.object);
 
 	if(json.skeletons)
 	{
@@ -165,13 +173,13 @@ ObjectLoader.prototype.parseShape = function(json)
  * Parse geometries on JSON.
  *
  * @method parseGeometries
- * @param {Object} json
+ * @param {Object} array
  * @return {Array} geometries
  */
-ObjectLoader.prototype.parseGeometries = function(array, shapes)
+ObjectLoader.prototype.parseGeometries = function(array)
 {
 	var loader = new GeometryLoader();
-	loader.setShapes(shapes);
+	loader.setShapes(this.shapes);
 
 	var geometries = [];
 	if(array !== undefined)
@@ -192,11 +200,11 @@ ObjectLoader.prototype.parseGeometries = function(array, shapes)
  * @param {Object} json
  * @return {Array} materials
  */
-ObjectLoader.prototype.parseMaterials = function(json, textures)
+ObjectLoader.prototype.parseMaterials = function(json)
 {
 	var materials = [];
 	var loader = new MaterialLoader();
-	loader.setTextures(textures);
+	loader.setTextures(this.textures);
 
 	if(json !== undefined)
 	{
@@ -332,16 +340,14 @@ ObjectLoader.prototype.parseFonts = function(json)
  *
  * @method parseTextures
  * @param {Object} json
- * @param {Array} images
- * @param {Array} videos
  * @return {Array} textures
  */
-ObjectLoader.prototype.parseTextures = function(json, images, videos)
+ObjectLoader.prototype.parseTextures = function(json)
 {
 	var textures = [];
 	var loader = new TextureLoader();
-	loader.setImages(images);
-	loader.setVideos(videos);
+	loader.setImages(this.images);
+	loader.setVideos(this.videos);
 
 	if(json !== undefined)
 	{
@@ -434,82 +440,16 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
 		}
 	});
 };
+
+
 /**
- * Parse objects from json.
+ * Parse objects from json data,
  *
  * @method parseObjects
- * @param {Object} json
- * @param {Array} geometries
- * @param {Array} materials
- * @param {Array} textures
- * @param {Array} audio
- * @param {Array} fonts
- * @return {Array} objects
- * @param {Array} images
- * @param {Array} videos
- * @param {Array} shapes
- * @return {Array} skeletons
  */
 ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts, resources, images, videos, shapes, skeletons)
 {
 	var object;
-
-	function getTexture(uuid)
-	{
-		if(textures[uuid] === undefined)
-		{
-			console.warn("ObjectLoader: Undefined texture", uuid);
-		}
-		return textures[uuid];
-	}
-
-	function getGeometry(uuid)
-	{
-		if(geometries[uuid] === undefined)
-		{
-			console.warn("ObjectLoader: Undefined geometry", uuid);
-		}
-		return geometries[uuid];
-	}
-
-	function getMaterial(uuid)
-	{
-		if(uuid instanceof Array)
-		{
-			var array = [];
-			for(var i = 0; i < uuid.length; i++)
-			{
-				array.push(materials[uuid[i]]);
-			}
-			
-			return array;
-		}
-
-		if(materials[uuid] === undefined)
-		{
-			console.warn("ObjectLoader: Undefined material", uuid);
-		}
-
-		return materials[uuid];
-	}
-
-	function getFont(uuid)
-	{
-		if(fonts[uuid] === undefined)
-		{
-			console.warn("ObjectLoader: Undefined font", uuid);
-		}
-		return fonts[uuid];
-	}
-
-	function getAudio(uuid)
-	{
-		if(audio[uuid] === undefined)
-		{
-			console.warn("ObjectLoader: Undefined audio", uuid);
-		}
-		return audio[uuid];
-	}
 
 	try
 	{
@@ -518,7 +458,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			case "SpineAnimation":
 				for(var i = 0; i < data.textures.length; i++)
 				{
-					data.textures[i].texture = getTexture(data.textures[i].texture);
+					data.textures[i].texture = this.getTexture(data.textures[i].texture);
 				}
 
 				object = new SpineAnimation(data.json, data.atlas, "", data.textures);
@@ -536,7 +476,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				break;
 
 			case "Audio":
-				object = new AudioEmitter(getAudio(data.audio));
+				object = new AudioEmitter(this.getAudio(data.audio));
 				object.autoplay = data.autoplay;
 				object.startTime = data.startTime;
 				object.playbackRate = data.playbackRate;
@@ -548,7 +488,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				break;
 
 			case "PositionalAudio":
-				object = new PositionalAudio(getAudio(data.audio));
+				object = new PositionalAudio(this.getAudio(data.audio));
 				object.autoplay = data.autoplay;
 				object.startTime = data.startTime;
 				object.playbackRate = data.playbackRate;
@@ -566,43 +506,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				break;
 
 			case "ParticleEmiter":
-				function loadVector3(data)
-				{
-					if(Array.isArray(data))
-					{
-						return new THREE.Vector3().fromArray(data);
-					}
-					else
-					{
-						return new THREE.Vector3(data.x, data.y, data.z);
-					}
-				}
-
-				if(data.group !== undefined)
-				{
-					var group = data.group;
-					group.texture.value = getTexture(group.texture.value);
-					group.texture.frames = new THREE.Vector2().fromArray(group.texture.frames || [1, 1]);
-				}
-				if(data.emitter !== undefined)
-				{
-					var emitter = data.emitter;
-					emitter.position.value = loadVector3(emitter.position.value);
-					emitter.position.spread = loadVector3(emitter.position.spread);
-					emitter.velocity.value = loadVector3(emitter.velocity.value);
-					emitter.velocity.spread = loadVector3(emitter.velocity.spread);
-					emitter.acceleration.value = loadVector3(emitter.acceleration.value);
-					emitter.acceleration.spread = loadVector3(emitter.acceleration.spread);
-					
-					for(var i = 0; i < emitter.color.value.length; i++)
-					{
-						emitter.color.value[i] = new THREE.Color(emitter.color.value[i]);
-						emitter.color.spread[i] = loadVector3(emitter.color.spread[i]);
-					}
-				}
-
-				object = new ParticleEmitter(data.group, data.emitter);
-
+				object = ParticleEmitter.fromJSON(data, this); 
 				break;
 
 			case "LensFlare":
@@ -615,14 +519,14 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 				for(var i = 0; i < data.elements.length; i++)
 				{
-					object.addFlare(getTexture(data.elements[i].texture), data.elements[i].size, data.elements[i].distance, new THREE.Color(data.elements[i].color));
+					object.addFlare(this.getTexture(data.elements[i].texture), data.elements[i].size, data.elements[i].distance, new THREE.Color(data.elements[i].color));
 				}
 
 				break;
 
 			case "TextMesh":
 			case "Text3D":
-				object = new TextMesh(data.text, getMaterial(data.material), getFont(data.font), data.height, data.bevel, data.bevelThickness, data.bevelSize, data.size, data.curveSegments, data.extruded);
+				object = new TextMesh(data.text, this.getMaterial(data.material), this.getFont(data.font), data.height, data.bevel, data.bevelThickness, data.bevelSize, data.size, data.curveSegments, data.extruded);
 				break;
 
 			case "Program":
@@ -788,13 +692,13 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 					}
 					else
 					{
-						object.background = getTexture(data.background);
+						object.background = this.getTexture(data.background);
 					}
 				}
 
 				if(data.environment !== undefined)
 				{
-					object.environment = getTexture(data.environment);
+					object.environment = this.getTexture(data.environment);
 				}
 
 				if(data.fog !== undefined)
@@ -970,8 +874,8 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				break;
 
 			case "SkinnedMesh":
-				var geometry = getGeometry(data.geometry);
-				var material = getMaterial(data.material);
+				var geometry = this.getGeometry(data.geometry);
+				var material = this.getMaterial(data.material);
 				var tmpBones;
 
 				// If data has skeleton, assumes bones are already in scene graph. Then temporarily undefines geometry.bones not to create bones in SkinnedMesh constructor.
@@ -1009,9 +913,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				break;
 
 			case "InstancedMesh":
-				var geometry = getGeometry(data.geometry);
-				var material = getMaterial(data.material);
-				object = new InstancedMesh(geometry, material, data.count);
+				object = new InstancedMesh(this.getGeometry(data.geometry), this.getMaterial(data.material), data.count);
 				object.instanceMatrix = new THREE.BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
 				break;
 
@@ -1028,21 +930,20 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				break;
 
 			case "Mesh":
-				var geometry = getGeometry(data.geometry);
-				var material = getMaterial(data.material);
+				var geometry = this.getGeometry(data.geometry);
 
 				if(geometry.bones && geometry.bones.length > 0)
 				{
-					object = new SkinnedMesh(geometry, material);
+					object = new SkinnedMesh(geometry, this.getMaterial(data.material));
 				}
 				else
 				{
-					object = new Mesh(geometry, material);
+					object = new Mesh(geometry, this.getMaterial(data.material));
 				}
 				break;
 
 			case "TextBitmap":
-				object = TextBitmap.fromJSON(data, getTexture(data.texture));
+				object = TextBitmap.fromJSON(data, this.getTexture(data.texture));
 				break;
 
 			case "TextSprite":
@@ -1054,24 +955,24 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				break;
 
 			case "Line":
-				object = new THREE.Line(getGeometry(data.geometry), getMaterial(data.material), data.mode);
+				object = new THREE.Line(this.getGeometry(data.geometry), this.getMaterial(data.material), data.mode);
 				break;
 
 			case "LineLoop":
-				object = new THREE.LineLoop(getGeometry(data.geometry), getMaterial(data.material));
+				object = new THREE.LineLoop(this.getGeometry(data.geometry), this.getMaterial(data.material));
 				break;
 
 			case "LineSegments":
-				object = new THREE.LineSegments(getGeometry(data.geometry), getMaterial(data.material));
+				object = new THREE.LineSegments(this.getGeometry(data.geometry), this.getMaterial(data.material));
 				break;
 
 			case "PointCloud":
 			case "Points":
-				object = new THREE.Points(getGeometry(data.geometry), getMaterial(data.material));
+				object = new THREE.Points(this.getGeometry(data.geometry), this.getMaterial(data.material));
 				break;
 
 			case "Sprite":
-				object = new Sprite(getMaterial(data.material));
+				object = new Sprite(this.getMaterial(data.material));
 				break;
 
 			case "Group":
@@ -1133,7 +1034,6 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	if(data.scale !== undefined) {object.scale.fromArray(data.scale);}
 
 
-
 	// Shadow casting
 	object.castShadow = data.castShadow === true;
 	object.receiveShadow = data.receiveShadow === true;
@@ -1156,7 +1056,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	{
 		for(var child in data.children)
 		{
-			object.add(this.parseObject(data.children[child], geometries, materials, textures, audio, fonts, images, videos, shapes, skeletons));
+			object.add(this.parseObject(data.children[child]));
 		}
 	}
 

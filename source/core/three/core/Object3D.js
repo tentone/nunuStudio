@@ -289,8 +289,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	// If root object initialize base structure
 	if(isRootObject)
 	{
-		meta = new ResourceManager.ResourceContainer();
-
+		meta = new ResourceContainer();
 		output.metadata =
 		{
 			version:  Nunu.VERSION,

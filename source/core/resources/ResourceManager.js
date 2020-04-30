@@ -3,8 +3,10 @@
 /**
  * Resource manager is used to manage available resources used by objects
  * 
- * The resource manager is used to extend the Program object and is not meant to be used as a standalone.
+ * The resource manager is used to extend Object3D elements and is not meant to be used as a standalone.
  *
+ * For standalone resource management use the resource container.
+ * 
  * @class ResourceManager
  * @module Resources
  * @extends {Object3D}
@@ -12,106 +14,8 @@
 function ResourceManager()
 {
 	THREE.Object3D.call(this);
-	ResourceManager.ResourceContainer.call(this);
+	ResourceContainer.call(this);
 }
-
-/**
- * Constructor method for a resource container object.
- *
- * The container is used to store the following types of resources:
- *  - Images
- *  - Videos
- *  - Audio
- *  - Fonts
- *  - Textures
- *  - Materials
- *  - Geometries
- *  - Shapes
- * 
- * @method ResourceContainer
- */
-ResourceManager.ResourceContainer = function()
-{
-	/**
-	 * Image resources.
-	 * 
-	 * @property images
-	 * @type {Array}
-	 */
-	this.images = [];
-
-	/**
-	 * Videos.
-	 * 
-	 * @property videos
-	 * @type {Array}
-	 */
-	this.videos = [];
-
-	/**
-	 * Audio.
-	 * 
-	 * @property audio
-	 * @type {Array}
-	 */
-	this.audio = [];
-
-	/**
-	 * Fonts.
-	 * 
-	 * @property fonts
-	 * @type {Array}
-	 */
-	this.fonts = [];
-
-	/**
-	 * Materials.
-	 * 
-	 * @property materials
-	 * @type {Array}
-	 */
-	this.materials = [];
-
-	/**
-	 * Textures.
-	 * 
-	 * @property textures
-	 * @type {Array}
-	 */
-	this.textures = [];
-
-	/**
-	 * Geometries.
-	 * 
-	 * @property geometries
-	 * @type {Array}
-	 */
-	this.geometries = [];
-
-	/**
-	 * Resources.
-	 * 
-	 * @property resources
-	 * @type {Array}
-	 */
-	this.resources = [];
-
-	/**
-	 * Shapes.
-	 * 
-	 * @property shapes
-	 * @type {Array}
-	 */
-	this.shapes = [];
-
-	/**
-	 * Skeletons.
-	 * 
-	 * @property skeletons
-	 * @type {Array}
-	 */
-	this.skeletons = [];
-};
 
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
 
@@ -122,21 +26,17 @@ ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
  */
 ResourceManager.prototype.dispose = function()
 {
-	// var libraries = ["images", "videos", "audio", "fonts", "materials", "textures", "geometries", "resources", "shapes", "skeletons"];
-
-	for(var i in this.geometries)
+	for(var i = 0; i < ResourceContainer.libraries.length; i++)
 	{
-		this.geometries[i].dispose();
-	}
+		var library = ResourceContainer.libraries[i];
 
-	for(var i in this.textures)
-	{
-		this.textures[i].dispose();
-	}
-
-	for(var i in this.materials)
-	{
-		this.materials[i].dispose();
+		for(var a in this[library])
+		{
+			if(this[library][a].dispose instanceof Function)
+			{
+				this[library][a].dispose();
+			}
+		}
 	}
 };
 

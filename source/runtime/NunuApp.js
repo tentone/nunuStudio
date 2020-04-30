@@ -123,6 +123,7 @@ include("source/core/resources/Audio.js");
 include("source/core/resources/Image.js");
 include("source/core/resources/Model.js");
 include("source/core/resources/TextFile.js");
+include("source/core/resources/ResourceContainer.js");
 include("source/core/resources/ResourceManager.js");
 include("source/core/resources/stream/VideoStream.js");
 

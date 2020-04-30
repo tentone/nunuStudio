@@ -215,7 +215,7 @@ ResourceCrawler.searchObject = function(object, manager, target)
 	}
 	else
 	{
-		resources = new ResourceManager.ResourceContainer();
+		resources = new ResourceContainer();
 	}
 	
 	object.traverse(function(child)

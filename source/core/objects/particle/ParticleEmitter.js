@@ -260,7 +260,7 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	return data;
 };
 
-ParticleEmitter.fromJSON = function(data)
+ParticleEmitter.fromJSON = function(data, resources)
 {
 	function loadVector3(data)
 	{
@@ -270,7 +270,7 @@ ParticleEmitter.fromJSON = function(data)
 	if(data.group !== undefined)
 	{
 		var group = data.group;
-		group.texture.value = getTexture(group.texture.value);
+		group.texture.value = resources.getTexture(group.texture.value);
 		group.texture.frames = new THREE.Vector2().fromArray(group.texture.frames || [1, 1]);
 	}
 
