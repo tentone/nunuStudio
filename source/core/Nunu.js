@@ -1,8 +1,5 @@
 "use strict";
 
-importFrom(THREE);
-importFrom(CANNON);
-
 /**
  * nunuStudio core main file.
  *   
@@ -82,6 +79,33 @@ Nunu.BROWSER = 201;
  * @type {number}
  */
 Nunu.CORDOVA = 202;
+
+/**
+ * Import stuff from a namespace to another target namespace.
+ *
+ * If not target is specified window is used.
+ *
+ * @static
+ * @method importFrom
+ */
+Nunu.importFrom = function(namespace, target)
+{
+	if(target === undefined)
+	{
+		target = window;
+	}
+
+	for(var i in namespace)
+	{
+		if(!(i in target))
+		{
+			target[i] = namespace[i];
+		}
+	}
+};
+
+Nunu.importFrom(THREE);
+Nunu.importFrom(CANNON);
 
 /**
  * Check if nunu if running in development mode.

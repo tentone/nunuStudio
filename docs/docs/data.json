@@ -855,6 +855,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\resources\\ResourceContainer.js": {
+            "name": "..\\source\\core\\resources\\ResourceContainer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\resources\\ResourceManager.js": {
             "name": "..\\source\\core\\resources\\ResourceManager.js",
             "modules": {},
@@ -1187,7 +1194,14 @@
             "tag": "module",
             "file": "..\\source\\core\\loaders\\VideoLoader.js",
             "line": 3,
-            "description": "Audio loader can be used to load external audio resources."
+            "description": "Audio loader can be used to load external audio resources.",
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
         },
         "Audio": {
             "name": "Audio",
@@ -1845,14 +1859,7 @@
             "namespace": "",
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
             "line": 3,
-            "description": "Objectloader can be used to load external objects from files.\n\nAlso loads all resources attached to the objects being loaded.\n\nCan parse be used to load on runtime resources and objects from external isp project files.",
-            "params": [
-                {
-                    "name": "manager",
-                    "description": "",
-                    "type": "Object"
-                }
-            ]
+            "description": "Objectloader can be used to load external objects from files.\n\nAlso loads all resources attached to the objects being loaded.\n\nCan parse be used to load on runtime resources and objects from external project files."
         },
         "TextureLoader": {
             "name": "TextureLoader",
@@ -2824,7 +2831,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
             "line": 3,
-            "description": "Wrapper for cannon.js physics objects.\n\nPhysics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset.\n\nnunuStudio includes tools to create cannon shapes from three geometry objects.\n\nDocumentation for cannon.js physics available here http:// schteppe.github.io/cannon.js/docs/",
+            "description": "Wrapper for cannon.js physics objects.\n\nThe editor includes tools to create cannon shapes from three.js geometry objects.\n\nDocumentation for cannon.js physics available here http:// schteppe.github.io/cannon.js/docs/",
             "extends": "{Group}"
         },
         "Script": {
@@ -3709,7 +3716,7 @@
             "namespace": "",
             "file": "..\\source\\core\\resources\\ResourceManager.js",
             "line": 3,
-            "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not meant to be used as a standalone.",
+            "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend Object3D elements and is not meant to be used as a standalone.\n\nFor standalone resource management use the resource container.",
             "extends": "{Object3D}"
         },
         "TextFile": {
@@ -4189,7 +4196,7 @@
             "module": "THREE",
             "namespace": "",
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 439,
+            "line": 447,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
         },
         "Material": {
@@ -7120,7 +7127,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 20,
+            "line": 24,
             "description": "Load object file from URL.",
             "itemtype": "method",
             "name": "load",
@@ -7151,8 +7158,8 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 46,
-            "description": "Parse JSON object.\n\nData can be loaded from a file using the FileSystem methods and parsed to an Object using JSON.parse() method.",
+            "line": 49,
+            "description": "Parse JSON object and create the correct Object structure. \n\nData can be loaded from a file and should be parsed into Object.",
             "itemtype": "method",
             "name": "parse",
             "params": [
@@ -7176,7 +7183,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 91,
+            "line": 84,
             "description": "Define base path for external texture loading.",
             "itemtype": "method",
             "name": "setTexturePath",
@@ -7192,7 +7199,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 102,
+            "line": 95,
             "description": "Set cross origin.",
             "itemtype": "method",
             "name": "setCrossOrigin",
@@ -7208,7 +7215,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 113,
+            "line": 106,
             "description": "Parse resources on JSON.",
             "itemtype": "method",
             "name": "parseResources",
@@ -7228,7 +7235,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 140,
+            "line": 131,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseShape",
@@ -7248,13 +7255,13 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 164,
+            "line": 152,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseGeometries",
             "params": [
                 {
-                    "name": "json",
+                    "name": "array",
                     "description": "",
                     "type": "Object"
                 }
@@ -7268,7 +7275,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 188,
+            "line": 175,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -7288,27 +7295,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 212,
-            "description": "Parse animations on json.",
-            "itemtype": "method",
-            "name": "parseAnimations",
-            "params": [
-                {
-                    "name": "json",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "animations",
-                "type": "Array"
-            },
-            "class": "ObjectLoader",
-            "module": "Loaders"
-        },
-        {
-            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 238,
+            "line": 198,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -7328,7 +7315,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 261,
+            "line": 219,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -7348,7 +7335,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 284,
+            "line": 240,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -7368,7 +7355,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 307,
+            "line": 261,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -7388,7 +7375,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 330,
+            "line": 282,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -7397,16 +7384,6 @@
                     "name": "json",
                     "description": "",
                     "type": "Object"
-                },
-                {
-                    "name": "images",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "videos",
-                    "description": "",
-                    "type": "Array"
                 }
             ],
             "return": {
@@ -7418,7 +7395,27 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 357,
+            "line": 306,
+            "description": "Parse animations on json.",
+            "itemtype": "method",
+            "name": "parseAnimations",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "animations",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 332,
             "description": "Parse skeletons from json.",
             "itemtype": "method",
             "name": "parseSkeletons",
@@ -7439,7 +7436,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 404,
+            "line": 379,
             "description": "Auxiliar method to bind skeletons to loaded objects.",
             "itemtype": "method",
             "name": "bindSkeletons",
@@ -7460,61 +7457,10 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 437,
-            "description": "Parse objects from json.",
+            "line": 414,
+            "description": "Parse objects from json data,",
             "itemtype": "method",
             "name": "parseObjects",
-            "params": [
-                {
-                    "name": "json",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "geometries",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "materials",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "textures",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "audio",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "fonts",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "images",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "videos",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "shapes",
-                    "description": "",
-                    "type": "Array"
-                }
-            ],
-            "return": {
-                "description": "skeletons",
-                "type": "Array"
-            },
             "class": "ObjectLoader",
             "module": "Loaders"
         },
@@ -11899,28 +11845,8 @@
             "module": "Particles"
         },
         {
-            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 238,
-            "description": "Serialize object to JSON.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
-            "class": "ParticleDistributions",
-            "module": "Particles"
-        },
-        {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 23,
+            "line": 21,
             "description": "Physics body contains the following attributes:\n - position Vec3\n - velocity Vec3\n - torque Vec3\n - angularVelocity Vec3\n - quaternion Quaternion\n - mass Number\n - material Material\n - type Number\n - linearDamping Number\n - angularDamping Number\n - allowSleep Boolean\n - sleepSpeedLimit Number\n - sleepTimeLimit Number\n - collisionFilterGroup Number\n - collisionFilterMask Number\n - fixedRotation Boolean\n - shape Array",
             "itemtype": "attribute",
             "name": "body",
@@ -11930,18 +11856,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 50,
-            "description": "Physics world.",
-            "itemtype": "attribute",
-            "name": "world",
-            "type": "{CANNON.World}",
-            "class": "PhysicsObject",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 58,
-            "description": "Physics object position mode, indicates how coordinates from the physics engine are transformed.",
+            "line": 48,
+            "description": "Physics object position mode, indicates how coordinates from the physics engine are transformed into object coordinates.",
             "itemtype": "attribute",
             "name": "mode",
             "type": "{number}",
@@ -11950,19 +11866,18 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 69,
-            "description": "The position of the object is copied directly from the body.",
-            "static": 1,
+            "line": 56,
+            "description": "Refenrece to the physics world.",
             "itemtype": "attribute",
-            "name": "WORLD",
-            "type": "{number}",
+            "name": "world",
+            "type": "{CANNON.World}",
             "class": "PhysicsObject",
             "module": "Physics"
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 78,
-            "description": "The position of the object is adjusted to follow the parent object transformation.\n\nThis mode should be used for objects placed inside others.",
+            "line": 67,
+            "description": "The position of the object is copied directly from the body.\n\nIgnores the world tranforms inherited from parent objects.\n\nFaster but the physics object should not carry any world transformations.",
             "static": 1,
             "itemtype": "attribute",
             "name": "LOCAL",
@@ -11972,7 +11887,18 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 89,
+            "line": 80,
+            "description": "The position of the object is adjusted to follow the parent object transformation.\n\nThis mode should be used for objects placed inside others.",
+            "static": 1,
+            "itemtype": "attribute",
+            "name": "WORLD",
+            "type": "{number}",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 91,
             "description": "Intialize physics object and add it to the scene physics world.",
             "itemtype": "method",
             "name": "initialize",
@@ -11981,7 +11907,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 127,
+            "line": 129,
             "description": "Update object position and rotation based on cannon.js body.",
             "itemtype": "method",
             "name": "update",
@@ -11990,7 +11916,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 173,
+            "line": 175,
             "description": "Add shape to physics object body.",
             "params": [
                 {
@@ -12001,26 +11927,6 @@
             ],
             "itemtype": "method",
             "name": "addShape",
-            "class": "PhysicsObject",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 187,
-            "description": "Create JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
             "class": "PhysicsObject",
             "module": "Physics"
         },
@@ -15681,17 +15587,17 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 18,
-            "description": "Constructor method for a resource container object.\n\nThe container is used to store the following types of resources:\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries\n - Shapes",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 3,
+            "description": "Resource container contains resource of multiple types.",
             "itemtype": "method",
             "name": "ResourceContainer",
             "class": "ResourceManager",
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 35,
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 10,
             "description": "Image resources.",
             "itemtype": "property",
             "name": "images",
@@ -15700,9 +15606,9 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 43,
-            "description": "Videos.",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 18,
+            "description": "Video resources.",
             "itemtype": "property",
             "name": "videos",
             "type": "{Array}",
@@ -15710,9 +15616,9 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 51,
-            "description": "Audio.",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 26,
+            "description": "Audio resources.",
             "itemtype": "property",
             "name": "audio",
             "type": "{Array}",
@@ -15720,9 +15626,9 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 59,
-            "description": "Fonts.",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 34,
+            "description": "Fonts resources.",
             "itemtype": "property",
             "name": "fonts",
             "type": "{Array}",
@@ -15730,9 +15636,9 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 67,
-            "description": "Materials.",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 42,
+            "description": "Materials resources.",
             "itemtype": "property",
             "name": "materials",
             "type": "{Array}",
@@ -15740,9 +15646,9 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 75,
-            "description": "Textures.",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 50,
+            "description": "Textures resources.",
             "itemtype": "property",
             "name": "textures",
             "type": "{Array}",
@@ -15750,9 +15656,9 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 83,
-            "description": "Geometries.",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 58,
+            "description": "Geometries resources.",
             "itemtype": "property",
             "name": "geometries",
             "type": "{Array}",
@@ -15760,8 +15666,8 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 91,
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 66,
             "description": "Resources.",
             "itemtype": "property",
             "name": "resources",
@@ -15770,9 +15676,9 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 99,
-            "description": "Shapes.",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 74,
+            "description": "Shapes resources.",
             "itemtype": "property",
             "name": "shapes",
             "type": "{Array}",
@@ -15780,9 +15686,9 @@
             "module": "Resources"
         },
         {
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 107,
-            "description": "Skeletons.",
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 82,
+            "description": "Skeletons resources.",
             "itemtype": "property",
             "name": "skeletons",
             "type": "{Array}",
@@ -15790,8 +15696,17 @@
             "module": "Resources"
         },
         {
+            "file": "..\\source\\core\\resources\\ResourceContainer.js",
+            "line": 93,
+            "description": "Copy resources from another resource container into this one.",
+            "itemtype": "method",
+            "name": "copyResources",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 118,
+            "line": 23,
             "description": "Dispose all the resources present in the resource manager.",
             "itemtype": "method",
             "name": "dispose",
@@ -15800,7 +15715,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 143,
+            "line": 44,
             "description": "Remove geometry from the list and replace by other.",
             "itemtype": "method",
             "name": "removeGeometry",
@@ -15816,7 +15731,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 162,
+            "line": 63,
             "description": "Get resource by name.",
             "itemtype": "method",
             "name": "getResourceByName",
@@ -15836,7 +15751,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 183,
+            "line": 84,
             "description": "Add resource to resources manager.",
             "itemtype": "method",
             "name": "addResource",
@@ -15852,7 +15767,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 197,
+            "line": 98,
             "description": "Remove resource from font list.",
             "itemtype": "method",
             "name": "removeResource",
@@ -15868,7 +15783,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 208,
+            "line": 109,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -15888,7 +15803,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 229,
+            "line": 130,
             "description": "Remove image.",
             "params": [
                 {
@@ -15904,7 +15819,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 244,
+            "line": 145,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -15924,7 +15839,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 265,
+            "line": 166,
             "description": "Remove video.",
             "params": [
                 {
@@ -15940,7 +15855,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 279,
+            "line": 180,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -15960,7 +15875,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 300,
+            "line": 201,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -15976,7 +15891,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 314,
+            "line": 215,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -16002,7 +15917,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 355,
+            "line": 256,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -16022,7 +15937,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 376,
+            "line": 277,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -16038,7 +15953,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 390,
+            "line": 291,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -16063,7 +15978,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 477,
+            "line": 378,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -16083,7 +15998,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 498,
+            "line": 399,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -16099,7 +16014,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 512,
+            "line": 413,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -16120,7 +16035,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 540,
+            "line": 441,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -16140,7 +16055,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 561,
+            "line": 462,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -16156,7 +16071,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 575,
+            "line": 476,
             "description": "Remove audio resource from the manager, replace on objects that are using it with another resource.",
             "params": [
                 {
@@ -17440,28 +17355,28 @@
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
             "line": 269,
-            "description": "Serialize object to JSON.",
+            "description": "Serialize the object data to JSON. Should serialize all attributes and resources used by the object.\n\nParsing of the data serialized is performed using the ObjectLoader class.\n\nThe objects being serialized share a \"meta\" object where the resources can be stored to avoid repetition in the serialized data.\n\nOn the root object the meta object does not need to be initialized manually it is automatically created, to access resource the resourceAccess callback should be used.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
                 {
                     "name": "meta",
-                    "description": "",
+                    "description": "Resource storage passed to all resources toJSON for self storage.",
                     "type": "Object"
                 },
                 {
                     "name": "resourceAccess",
-                    "description": "",
+                    "description": "Callback method used to access the resources receives (meta, object) as parameters, meta is the resource storage and object is the current serialized status of the object new attributes can be added here.",
                     "type": "Function"
                 },
                 {
                     "name": "recursive",
-                    "description": "",
+                    "description": "If true the method will call toJSON for all available children and store the result in children attribute.",
                     "type": "Boolean"
                 }
             ],
             "return": {
-                "description": "json",
+                "description": "json Output JSON will all data serialized, this can be stores in file or transfered to later be loaded using the ObjectLoader.",
                 "type": "Object"
             },
             "class": "Object3D",
@@ -17469,7 +17384,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 450,
+            "line": 458,
             "description": "Array with object's children.",
             "itemtype": "property",
             "name": "children",
@@ -17479,7 +17394,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 455,
+            "line": 463,
             "description": "When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.",
             "itemtype": "property",
             "name": "frustumCulled",
@@ -17490,7 +17405,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 461,
+            "line": 469,
             "description": "The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.",
             "itemtype": "property",
             "name": "layers",
@@ -17500,7 +17415,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 466,
+            "line": 474,
             "description": "The local transform matrix",
             "itemtype": "property",
             "name": "matrix",
@@ -17510,7 +17425,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 471,
+            "line": 479,
             "description": "When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.",
             "itemtype": "property",
             "name": "matrixAutoUpdate",
@@ -17521,7 +17436,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 477,
+            "line": 485,
             "description": "The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.",
             "itemtype": "property",
             "name": "matrixWorld",
@@ -17531,7 +17446,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 482,
+            "line": 490,
             "description": "Name of the object (doesn't need to be unique).",
             "itemtype": "property",
             "name": "name",
@@ -17541,7 +17456,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 487,
+            "line": 495,
             "description": "The object's local position.",
             "itemtype": "property",
             "name": "position",
@@ -17551,7 +17466,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 492,
+            "line": 500,
             "description": "Object's local rotation as a Quaternion.",
             "itemtype": "property",
             "name": "quaternion",
@@ -17561,7 +17476,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 497,
+            "line": 505,
             "description": "Object's local rotation (see Euler angles), in radians.",
             "itemtype": "property",
             "name": "rotation",
@@ -17571,7 +17486,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 502,
+            "line": 510,
             "description": "The object's local scale.",
             "itemtype": "property",
             "name": "scale",
@@ -17581,7 +17496,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 507,
+            "line": 515,
             "description": "This is used by the lookAt method, for example, to determine the orientation of the result.",
             "itemtype": "property",
             "name": "up",
@@ -17591,7 +17506,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 512,
+            "line": 520,
             "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
             "itemtype": "property",
             "name": "uuid",
@@ -17601,7 +17516,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 517,
+            "line": 525,
             "description": "Object gets rendered if true.",
             "itemtype": "property",
             "name": "visible",
@@ -17612,7 +17527,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 523,
+            "line": 531,
             "description": "This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.",
             "itemtype": "property",
             "name": "renderOrder",
@@ -17623,7 +17538,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 529,
+            "line": 537,
             "description": "Whether the object gets rendered into shadow map.",
             "itemtype": "property",
             "name": "castShadow",
@@ -17634,7 +17549,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 535,
+            "line": 543,
             "description": "Whether the material receives shadows.",
             "itemtype": "property",
             "name": "receiveShadow",
@@ -17645,7 +17560,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 541,
+            "line": 549,
             "description": "Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.",
             "itemtype": "property",
             "name": "userData",
@@ -17655,7 +17570,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 546,
+            "line": 554,
             "description": "Array with the animations available in this object.\n\nEach position contains an AnimationClip that has name, tracks, duration and uuid.",
             "itemtype": "property",
             "name": "animations",
@@ -17665,7 +17580,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 555,
+            "line": 563,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -17681,7 +17596,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 561,
+            "line": 569,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -17697,7 +17612,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 567,
+            "line": 575,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -17713,7 +17628,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 573,
+            "line": 581,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -17729,7 +17644,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 579,
+            "line": 587,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -17745,7 +17660,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 585,
+            "line": 593,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -17761,7 +17676,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 591,
+            "line": 599,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -17777,7 +17692,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 597,
+            "line": 605,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -17798,7 +17713,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 604,
+            "line": 612,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -17814,7 +17729,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 610,
+            "line": 618,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -17835,7 +17750,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 617,
+            "line": 625,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -17854,7 +17769,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 623,
+            "line": 631,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -17870,7 +17785,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 629,
+            "line": 637,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -17886,7 +17801,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 635,
+            "line": 643,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -17902,7 +17817,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 641,
+            "line": 649,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -17923,7 +17838,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 648,
+            "line": 656,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -17939,7 +17854,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 654,
+            "line": 662,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -17955,7 +17870,7 @@
         },
         {
             "file": "..\\source\\core\\three\\core\\Object3D.js",
-            "line": 660,
+            "line": 668,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -19645,6 +19560,16 @@
         {
             "file": "..\\source\\core\\Nunu.js",
             "line": 83,
+            "description": "Import stuff from a namespace to another target namespace.\n\nIf not target is specified window is used.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "importFrom",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\core\\Nunu.js",
+            "line": 110,
             "description": "Check if nunu if running in development mode.",
             "itemtype": "method",
             "name": "developmentMode",
@@ -19657,7 +19582,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 94,
+            "line": 121,
             "description": "Check if there is any VR API available, on the device.\n\nChecks if there is support for WebVR or WebXR.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -19670,7 +19595,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 107,
+            "line": 134,
             "description": "Enter virtual reality mode using WebXR or WebVR depending on the API available.\n\nIf booth API are available the WebXR API is used.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "enterVR",
@@ -19691,7 +19616,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 156,
+            "line": 183,
             "description": "Enter virtual reality mode, if the application is not running on VR mode does not do anything.",
             "itemtype": "method",
             "name": "exitVR",
@@ -19707,7 +19632,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 186,
+            "line": 213,
             "description": "WebXR session created.",
             "itemtype": "attribute",
             "name": "webXRSession",
@@ -19717,7 +19642,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 194,
+            "line": 221,
             "description": "Flag checking if there is support for XR immersive VR mode.\n\nChecked on the library startup if XR is supported, while the check does not finish it is set to null.",
             "itemtype": "attribute",
             "name": "webXRSupported",
@@ -19727,7 +19652,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 212,
+            "line": 239,
             "description": "Check if host supports WebXR.",
             "itemtype": "method",
             "name": "webXRAvailable",
@@ -19740,7 +19665,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 223,
+            "line": 250,
             "description": "Get WebXR session.",
             "itemtype": "method",
             "name": "getXRSession",
@@ -19756,7 +19681,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 251,
+            "line": 278,
             "description": "Web VR display obtained.",
             "itemtype": "attribute",
             "name": "webVRDisplay",
@@ -19766,7 +19691,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 259,
+            "line": 286,
             "description": "Flag indicating if there are any VR displays available.\n\nChecked on the library bootup if WebVR is available, while the check does not finish it is set to null.",
             "itemtype": "attribute",
             "name": "webVRHasDisplay",
@@ -19776,7 +19701,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 277,
+            "line": 304,
             "description": "Check if host supports WebVR.",
             "itemtype": "method",
             "name": "webVRAvailable",
@@ -19789,7 +19714,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 288,
+            "line": 315,
             "description": "Used to get the first VR display available, the display is returned as argument of the onDisplay function.",
             "itemtype": "method",
             "name": "getVRDisplays",
@@ -19805,7 +19730,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 323,
+            "line": 350,
             "description": "Get the query parameter from the browser URL.",
             "itemtype": "method",
             "name": "getQueryParameters",
@@ -19818,7 +19743,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 348,
+            "line": 375,
             "description": "Create a web worker from code written in a string.\n\nUses a blob to inject the code and loads it from and URL object.",
             "itemtype": "method",
             "name": "createWorker",
@@ -19843,7 +19768,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 371,
+            "line": 398,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -19856,7 +19781,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 382,
+            "line": 409,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -19869,7 +19794,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 405,
+            "line": 432,
             "description": "Check in wich platform the enviroment is running.\n\nPossible return values are:\n   - Nunu.NWJS\n   - Nunu.BROWSER\n   - Nunu.CORDOVA",
             "itemtype": "method",
             "name": "getPlatform",
@@ -19882,7 +19807,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 430,
+            "line": 457,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
@@ -19895,7 +19820,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 442,
+            "line": 469,
             "description": "Open a webpage on a new window.\n\nOn desktop and mobile it will open the default browser.\n\nOn the web it will open as a popup.",
             "itemtype": "method",
             "name": "openWebpage",
@@ -19904,7 +19829,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 463,
+            "line": 490,
             "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
             "itemtype": "method",
             "name": "isFullscreen",
@@ -19917,7 +19842,7 @@
         },
         {
             "file": "..\\source\\core\\Nunu.js",
-            "line": 477,
+            "line": 504,
             "description": "Set an element into fullscreen mode or exit out of fullscreen mode.\n\nUses isFullscreen to check if the application is running in fullscreen mode already.",
             "itemtype": "method",
             "name": "setFullscreen",

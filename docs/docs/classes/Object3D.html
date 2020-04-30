@@ -1942,7 +1942,10 @@
 												</div>
 											
 												<div class="description">
-													<p>Serialize object to JSON.</p>
+													<p>Serialize the object data to JSON. Should serialize all attributes and resources used by the object.</p>
+											<p>Parsing of the data serialized is performed using the ObjectLoader class.</p>
+											<p>The objects being serialized share a &quot;meta&quot; object where the resources can be stored to avoid repetition in the serialized data.</p>
+											<p>On the root object the meta object does not need to be initialized manually it is automatically created, to access resource the resourceAccess callback should be used.</p>
 											
 												</div>
 											
@@ -1956,7 +1959,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Resource storage passed to all resources toJSON for self storage.</p>
+											
 																</div>
 											
 															</li>
@@ -1966,7 +1970,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Callback method used to access the resources receives (meta, object) as parameters, meta is the resource storage and object is the current serialized status of the object new attributes can be added here.</p>
+											
 																</div>
 											
 															</li>
@@ -1976,7 +1981,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>If true the method will call toJSON for all available children and store the result in children attribute.</p>
+											
 																</div>
 											
 															</li>
@@ -1988,7 +1994,7 @@
 											
 														<div class="returns-description">
 																	<span class="type">Object</span>:
-																<p>json</p>
+																<p>json Output JSON will all data serialized, this can be stores in file or transfered to later be loaded using the ObjectLoader.</p>
 											
 														</div>
 													</div>

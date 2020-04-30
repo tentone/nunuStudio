@@ -47,7 +47,7 @@ include("lib/pson/PSON.min.js");
 include("lib/octree/sparse-octree.min.js");
 
 include("lib/three-bmfont.js");
-include("lib/cannon.min.js");
+include("lib/cannon.js");
 include("lib/leap.min.js");
 include("lib/spine-threejs.js");
 include("lib/opentype.min.js");
@@ -74,7 +74,6 @@ include("source/core/three/objects/Points.js");
 
 // Runtime core
 include("source/core/Nunu.js");
-include("source/core/Global.js");
 
 include("source/core/FileSystem.js");
 include("source/core/platform/TargetConfig.js");
@@ -124,6 +123,7 @@ include("source/core/resources/Audio.js");
 include("source/core/resources/Image.js");
 include("source/core/resources/Model.js");
 include("source/core/resources/TextFile.js");
+include("source/core/resources/ResourceContainer.js");
 include("source/core/resources/ResourceManager.js");
 include("source/core/resources/stream/VideoStream.js");
 

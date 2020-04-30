@@ -224,7 +224,8 @@
 						
 						<div class="box intro">
 							<p>Resource manager is used to manage available resources used by objects</p>
-						<p>The resource manager is used to extend the Program object and is not meant to be used as a standalone.</p>
+						<p>The resource manager is used to extend Object3D elements and is not meant to be used as a standalone.</p>
+						<p>For standalone resource management use the resource container.</p>
 						
 						</div>
 						
@@ -263,6 +264,10 @@
 													</li>
 													<li class="index-item method">
 														<a href="#method_addTexture">addTexture</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_copyResources">copyResources</a>
 						
 													</li>
 													<li class="index-item method">
@@ -638,6 +643,34 @@
 															</li>
 														</ul>
 													</div>
+											
+											
+											</div>
+											<div id="method_copyResources" class="method item">
+												<h3 class="name"><code>copyResources</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Copy resources from another resource container into this one.</p>
+											
+												</div>
+											
 											
 											
 											</div>
@@ -1609,18 +1642,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Constructor method for a resource container object.</p>
-											<p>The container is used to store the following types of resources:</p>
-											<ul>
-											<li>Images</li>
-											<li>Videos</li>
-											<li>Audio</li>
-											<li>Fonts</li>
-											<li>Textures</li>
-											<li>Materials</li>
-											<li>Geometries</li>
-											<li>Shapes</li>
-											</ul>
+													<p>Resource container contains resource of multiple types.</p>
 											
 												</div>
 											
@@ -1648,7 +1670,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Audio.</p>
+													<p>Audio resources.</p>
 											
 												</div>
 											
@@ -1671,7 +1693,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Fonts.</p>
+													<p>Fonts resources.</p>
 											
 												</div>
 											
@@ -1694,7 +1716,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Geometries.</p>
+													<p>Geometries resources.</p>
 											
 												</div>
 											
@@ -1740,7 +1762,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Materials.</p>
+													<p>Materials resources.</p>
 											
 												</div>
 											
@@ -1786,7 +1808,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Shapes.</p>
+													<p>Shapes resources.</p>
 											
 												</div>
 											
@@ -1809,7 +1831,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Skeletons.</p>
+													<p>Skeletons resources.</p>
 											
 												</div>
 											
@@ -1832,7 +1854,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Textures.</p>
+													<p>Textures resources.</p>
 											
 												</div>
 											
@@ -1855,7 +1877,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Videos.</p>
+													<p>Video resources.</p>
 											
 												</div>
 											

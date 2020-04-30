@@ -164,7 +164,7 @@ function updateVersion()
 	var data = JSON.parse(readFile(SOURCE_PATH + "package.json"));
 
 	var subversions = data.version.split('.');
-	subversions[1] = (Number.parseInt(subversions[1]) + 1).toString();
+	subversions[2] = (Number.parseInt(subversions[2]) + 1).toString();
 
 	data.version = subversions.join('.');
 

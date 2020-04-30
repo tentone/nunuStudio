@@ -224,8 +224,7 @@
 						
 						<div class="box intro">
 							<p>Wrapper for cannon.js physics objects.</p>
-						<p>Physics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset.</p>
-						<p>nunuStudio includes tools to create cannon shapes from three geometry objects.</p>
+						<p>The editor includes tools to create cannon shapes from three.js geometry objects.</p>
 						<p>Documentation for cannon.js physics available here http:// <a href="http://schteppe.github.io/cannon.js/docs/">schteppe.github.io/cannon.js/docs/</a></p>
 						
 						</div>
@@ -253,10 +252,6 @@
 													</li>
 													<li class="index-item method">
 														<a href="#method_initialize">initialize</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
 													<li class="index-item method">
@@ -372,69 +367,6 @@
 											
 											
 											</div>
-											<div id="method_toJSON" class="method item">
-												<h3 class="name"><code>toJSON</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>meta</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Object</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Create JSON for object.</p>
-											<p>Need to backup material and geometry and set to undefined to avoid it being stored.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">meta</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Object</span>:
-																<p>json</p>
-											
-														</div>
-													</div>
-											
-											</div>
 											<div id="method_update" class="method item">
 												<h3 class="name"><code>update</code></h3>
 											
@@ -536,8 +468,9 @@
 												</div>
 											
 												<div class="description">
-													<p>The position of the object is adjusted to follow the parent object transformation.</p>
-											<p>This mode should be used for objects placed inside others.</p>
+													<p>The position of the object is copied directly from the body.</p>
+											<p>Ignores the world tranforms inherited from parent objects.</p>
+											<p>Faster but the physics object should not carry any world transformations.</p>
 											
 												</div>
 											
@@ -564,7 +497,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Physics object position mode, indicates how coordinates from the physics engine are transformed.</p>
+													<p>Physics object position mode, indicates how coordinates from the physics engine are transformed into object coordinates.</p>
 											
 												</div>
 											
@@ -591,7 +524,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Physics world.</p>
+													<p>Refenrece to the physics world.</p>
 											
 												</div>
 											
@@ -619,7 +552,8 @@
 												</div>
 											
 												<div class="description">
-													<p>The position of the object is copied directly from the body.</p>
+													<p>The position of the object is adjusted to follow the parent object transformation.</p>
+											<p>This mode should be used for objects placed inside others.</p>
 											
 												</div>
 											
