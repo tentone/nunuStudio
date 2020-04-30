@@ -77,7 +77,10 @@ include("source/core/three/materials/Material.js");
 include("source/core/three/textures/Texture.js");
 include("source/core/three/lights/LightShadow.js");
 include("source/core/three/scenes/Fog.js");
+
 include("source/core/three/objects/Points.js");
+include("source/core/three/objects/Skeleton.js");
+
 
 // Runtime core
 include("source/core/Nunu.js");
@@ -206,8 +209,6 @@ include("source/core/objects/misc/Sky.js");
 include("source/core/objects/misc/Container.js");
 include("source/core/objects/misc/LensFlare.js");
 include("source/core/objects/misc/HTMLView.js");
-
-include("source/core/objects/animation/Skeleton.js");
 
 include("source/core/objects/controls/OrbitControls.js");
 include("source/core/objects/controls/FirstPersonControls.js");

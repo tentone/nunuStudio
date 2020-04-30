@@ -132,7 +132,7 @@ THREE.Object3D.prototype.addAbove = function(object, children)
 {
 	if(object === this)
 	{
-		console.error("THREE.Object3D.add: object can't be added as a child of itself.", object );
+		console.error("Object3D.add: object can't be added as a child of itself.", object );
 		return this;
 	}
 
@@ -152,7 +152,7 @@ THREE.Object3D.prototype.addAbove = function(object, children)
 	}
 	else
 	{
-		console.error("THREE.Object3D.add: object not an instance of THREE.Object3D.", object);
+		console.error("Object3D.add: object not an instance of THREE.Object3D.", object);
 	}
 
 	return this;
@@ -169,7 +169,7 @@ THREE.Object3D.prototype.addBellow = function(object, children)
 {
 	if(object === this)
 	{
-		console.error("THREE.Object3D.add: object can't be added as a child of itself.", object );
+		console.error("Object3D.add: object can't be added as a child of itself.", object );
 		return this;
 	}
 
@@ -189,7 +189,7 @@ THREE.Object3D.prototype.addBellow = function(object, children)
 	}
 	else
 	{
-		console.error("THREE.Object3D.add: object not an instance of THREE.Object3D.", object);
+		console.error("Object3D.add: object not an instance of THREE.Object3D.", object);
 	}
 
 	return this;

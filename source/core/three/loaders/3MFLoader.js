@@ -62,13 +62,13 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 				}
 				else if(version === 3)
 				{
-					console.warn("THREE.3MFLoader: jszip version 3 found, parse() will return null.");
+					console.warn("3MFLoader: jszip version 3 found, parse() will return null.");
 					JSZip.loadAsync(data).then(next);
 				}
 			}
 			else
 			{
-				console.error("THREE.3MFLoader: jszip missing and file is compressed.");
+				console.error("3MFLoader: jszip missing and file is compressed.");
 			}
 		}
 
@@ -178,7 +178,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 							if(xmlData.documentElement.nodeName.toLowerCase() !== "model")
 							{
-								console.error("THREE.3MFLoader: Error loading 3MF - no 3MF document found: ", modelPart);
+								console.error("3MFLoader: Error loading 3MF - no 3MF document found: ", modelPart);
 							}
 
 							var modelNode = xmlData.querySelector("model");
@@ -1204,7 +1204,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 					break;
 
 				default:
-					console.error("THREE.3MFLoader: Unsupported resource type.");
+					console.error("3MFLoader: Unsupported resource type.");
 
 				}
 
@@ -1333,7 +1333,6 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 			}
 			else
 			{
-
 				// otherwise use PhongMaterial
 				material = new THREE.MeshPhongMaterial(
 				{

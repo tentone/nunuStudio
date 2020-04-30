@@ -330,7 +330,7 @@ ObjectLoader.prototype.parseAnimations = function(array)
 };
 
 /**
- * Parse skeletons from json.
+ * Parse skeletons from json from a specific object
  *
  * @method parseSkeletons
  * @param {Object} json
@@ -340,37 +340,12 @@ ObjectLoader.prototype.parseSkeletons = function(json, object)
 {
 	var skeletons = {};
 
-	if(json === undefined)
+	if(json !== undefined)
 	{
-		return skeletons;
-	}
-
-	for(var i = 0; i < json.length; i++)
-	{
-		var skeletonParams = json[i];
-
-		var uuid = skeletonParams.uuid;
-		var boneParams = skeletonParams.bones;
-		var boneInverseParams = skeletonParams.boneInverses;
-
-		var bones = [];
-		var boneInverses = [];
-
-		for(var j = 0, jl = boneParams.length; j < jl; j++)
+		for(var i = 0; i < json.length; i++)
 		{
-			var bone = object.getObjectByProperty("uuid", boneParams[j]);
-
-			if(bone === undefined)
-			{
-				console.warn("THREE.ObjectLoader: Not found Bone whose uuid is " + boneParams[j]);
-				bone = new THREE.Bone();
-			}
-
-			bones.push(bone);
-			boneInverses.push(new THREE.Matrix4().fromArray(boneInverseParams[j]));
+			skeletons[data.uuid] = THREE.Skeleton.fromJSON(json[i], object, this);
 		}
-
-		skeletons[uuid] = new Skeleton(bones, boneInverses);
 	}
 
 	return skeletons;
@@ -390,22 +365,22 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
 		return;
 	}
 	
-	object.traverse(function(obj)
+	object.traverse(function(child)
 	{
-		if(obj.isSkinnedMesh === true && obj.skeletonUUID !== undefined)
+		if(child.isSkinnedMesh === true && child.skeletonUUID !== undefined)
 		{
-			var skeleton = skeletons[obj.skeletonUUID];
+			var skeleton = skeletons[child.skeletonUUID];
 
 			if(skeleton === undefined)
 			{
-				console.warn("THREE.ObjectLoader: Not found Skeleton whose uuid is " + obj.skeletonUUID);
+				console.warn("ObjectLoader: Not found Skeleton with uuid " + child.skeletonUUID);
 			}
 			else
 			{
-				obj.bind(skeleton, obj.bindMatrix);
+				child.bind(skeleton, child.bindMatrix);
 			}
 
-			delete obj.skeletonUUID;
+			delete child.skeletonUUID;
 		}
 	});
 };
