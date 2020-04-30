@@ -1,5 +1,8 @@
 "use strict";
 
+importFrom(THREE);
+importFrom(CANNON);
+
 /**
  * nunuStudio core main file.
  *   

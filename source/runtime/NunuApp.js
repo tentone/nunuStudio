@@ -74,7 +74,6 @@ include("source/core/three/objects/Points.js");
 
 // Runtime core
 include("source/core/Nunu.js");
-include("source/core/Global.js");
 
 include("source/core/FileSystem.js");
 include("source/core/platform/TargetConfig.js");

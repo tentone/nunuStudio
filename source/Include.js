@@ -5,7 +5,7 @@
  * 
  * Projects can be minified using the build tools.
  * 
- * @author tentone
+ * @method include
  */
 window.include = function(file, onload)
 {
@@ -58,6 +58,29 @@ window.include = function(file, onload)
 				catch(e){}
 			}
 			
+		}
+	}
+};
+
+/**
+ * Import stuff from a namespace to another target namespace.
+ *
+ * If not target is specified window is used.
+ *
+ * @method importFrom
+ */
+window.importFrom = function(namespace, target)
+{
+	if(target === undefined)
+	{
+		target = window;
+	}
+
+	for(var i in namespace)
+	{
+		if(!(i in target))
+		{
+			target[i] = namespace[i];
 		}
 	}
 };
