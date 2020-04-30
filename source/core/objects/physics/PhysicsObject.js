@@ -186,15 +186,6 @@ PhysicsObject.prototype.addShape = function(shape)
 	}
 };
 
-/**
- * Create JSON for object.
- *
- * Need to backup material and geometry and set to undefined to avoid it being stored.
- *
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
 PhysicsObject.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
@@ -254,4 +245,64 @@ PhysicsObject.prototype.toJSON = function(meta)
 	}
 
 	return data;
+};
+
+
+PhysicsObject.fromJSON = function(data)
+{
+	var object = new PhysicsObject();
+	
+	if(data.mode !== undefined)
+	{
+		object.mode = data.mode;
+	}
+
+	object.body.type = data.body.type;
+	object.body.mass = data.body.mass;
+	object.body.linearDamping = data.body.linearDamping;
+	object.body.angularDamping = data.body.angularDamping;
+	object.body.allowSleep = data.body.allowSleep;
+	object.body.sleepSpeedLimit = data.body.sleepSpeedLimit;
+	object.body.sleepTimeLimit = data.body.sleepTimeLimit;
+	object.body.collisionFilterGroup = data.body.collisionFilterGroup;
+	object.body.collisionFilterMask = data.body.collisionFilterMask;
+	object.body.fixedRotation = data.body.fixedRotation;
+
+	var shapes = data.body.shapes;
+	for(var i = 0; i < shapes.length; i++)
+	{
+		var shape = shapes[i];
+
+		if(shape.type === CANNON.Shape.types.SPHERE)
+		{
+			object.body.addShape(new CANNON.Sphere(shape.radius));
+		}
+		else if(shape.type === CANNON.Shape.types.BOX)
+		{
+			object.body.addShape(new CANNON.Box(new CANNON.Vec3(shape.halfExtents.x, shape.halfExtents.y, shape.halfExtents.z)));
+		}
+		else if(shape.type === CANNON.Shape.types.PARTICLE)
+		{
+			object.body.addShape(new CANNON.Particle());
+		}
+		else if(shape.type === CANNON.Shape.types.PLANE)
+		{
+			object.body.addShape(new CANNON.Plane());
+		}
+		else if(shape.type === CANNON.Shape.types.CONVEXPOLYHEDRON)
+		{
+
+			/*if(json.mipmaps[i].data.toArrayBuffer !== undefined)
+			{
+			json.mipmaps[i].data = new Uint8Array(json.mipmaps[i].data.toArrayBuffer());
+			}*/
+
+			// TODO <REMOVE THIS>
+			console.log("CONVEXPOLYHEDRON shape cannon", shape, data);
+			
+			object.body.addShape(new CANNON.ConvexPolyhedron(shape.vertices, shape.faces));
+		}
+	}
+
+	return object;
 };

@@ -235,13 +235,6 @@ ParticleEmitter.prototype.dispose = function()
 	THREE.Object3D.prototype.dispose.call(this);
 };
 
-/**
- * Serialize object to JSON.
- *
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
 ParticleEmitter.prototype.toJSON = function(meta)
 {
 	var material = this.material;
@@ -267,5 +260,36 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	return data;
 };
 
+ParticleEmitter.fromJSON = function(data)
+{
+	function loadVector3(data)
+	{
+		return Array.isArray(data) ? new THREE.Vector3().fromArray(data) : new THREE.Vector3(data.x, data.y, data.z);
+	}
 
+	if(data.group !== undefined)
+	{
+		var group = data.group;
+		group.texture.value = getTexture(group.texture.value);
+		group.texture.frames = new THREE.Vector2().fromArray(group.texture.frames || [1, 1]);
+	}
 
+	if(data.emitter !== undefined)
+	{
+		var emitter = data.emitter;
+		emitter.position.value = loadVector3(emitter.position.value);
+		emitter.position.spread = loadVector3(emitter.position.spread);
+		emitter.velocity.value = loadVector3(emitter.velocity.value);
+		emitter.velocity.spread = loadVector3(emitter.velocity.spread);
+		emitter.acceleration.value = loadVector3(emitter.acceleration.value);
+		emitter.acceleration.spread = loadVector3(emitter.acceleration.spread);
+		
+		for(var i = 0; i < emitter.color.value.length; i++)
+		{
+			emitter.color.value[i] = new THREE.Color(emitter.color.value[i]);
+			emitter.color.spread[i] = loadVector3(emitter.color.spread[i]);
+		}
+	}
+
+	return new ParticleEmitter(data.group, data.emitter);
+};

@@ -325,7 +325,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	object.userData = this.userData;
 
 	// Geometry data for meshes lines and points
-	if(this.isMesh || this.isLine || this.isPoints)
+	if(this.geometry !== undefined)
 	{
 		object.geometry = serialize(meta.geometries, this.geometry);
 
