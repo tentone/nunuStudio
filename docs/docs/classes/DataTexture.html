@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio MathUtils</title>  
+	<title>nunuStudio DataTexture</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -210,18 +210,22 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>MathUtils Class</h1>
+						<h1>DataTexture Class</h1>
 						<div class="box meta">
 						
+								<div class="extends">
+									Extends THREE.Texture
+								</div>
 						
 						
-									Module: <a href="../modules/Utils.html">Utils</a>
+									Module: <a href="../modules/Textures.html">Textures</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>MathUtils contains auxiliar values and function to help with mathematical operations.</p>
+							<p>Data texture stored binary RAW texture data values.</p>
+						<p>Can be used to store render target result or to load custom image formats. Pixels can be manipulated individually in the data array.</p>
 						
 						</div>
 						
@@ -230,176 +234,19 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
 								<div id="index" class="api-class-tabpanel index">
 									<h2 class="off-left">Item Index</h2>
 						
-										<div class="index-section methods">
-											<h3>Methods</h3>
-						
-											<ul class="index-list methods">
-													<li class="index-item method">
-														<a href="#method_randomColor">randomColor</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 						
-										<div class="index-section attrs">
-											<h3>Attributes</h3>
-						
-											<ul class="index-list attrs">
-													<li class="index-item attr">
-														<a href="#attr_pi2">pi2</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_pid2">pid2</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_pid3">pid3</a>
-													</li>
-											</ul>
-										</div>
 						
 								</div>
 						
-									<div id="methods" class="api-class-tabpanel">
-										<h2 class="off-left">Methods</h2>
-						
-											<div id="method_randomColor" class="method item">
-												<h3 class="name"><code>randomColor</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">String</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Generates a random color code.</p>
-											<p>Uses the #RRGGBB format.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">String</span>:
-																<p>Generated color code.</p>
-											
-														</div>
-													</div>
-											
-											</div>
-									</div>
 						
 						
-									<div id="attrs" class="api-class-tabpanel">
-										<h2 class="off-left">Attributes</h2>
-						
-											<div id="attr_pi2" class="attr item">
-												<a name="config_pi2"></a> 
-												<h3 class="name"><code>pi2</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Value of PI*2. 360 degrees.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_pid2" class="attr item">
-												<a name="config_pid2"></a> 
-												<h3 class="name"><code>pid2</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Value of PI/2. 45 degrees.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_pid3" class="attr item">
-												<a name="config_pid3"></a> 
-												<h3 class="name"><code>pid3</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Value of PI/3. 60 degrees.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
 						
 							</div>
 						</div>

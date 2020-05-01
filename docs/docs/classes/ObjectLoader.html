@@ -57,6 +57,7 @@
 								<li><a href="../classes/CSS3DSprite.html">CSS3DSprite</a></li>
 								<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
 								<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
+								<li><a href="../classes/DataTexture.html">DataTexture</a></li>
 								<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
 								<li><a href="../classes/DotScreenPass.html">DotScreenPass</a></li>
 								<li><a href="../classes/EffectComposer.html">EffectComposer</a></li>
@@ -255,10 +256,6 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseAnimations">parseAnimations</a>
-						
-													</li>
-													<li class="index-item method">
 														<a href="#method_parseAudio">parseAudio</a>
 						
 													</li>
@@ -328,9 +325,6 @@
 															<li class="arg">
 																	<code>object</code>
 															</li>
-															<li class="arg">
-																	<code>skeletons</code>
-															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
@@ -351,6 +345,7 @@
 											
 												<div class="description">
 													<p>Auxiliar method to bind skeletons to loaded objects.</p>
+											<p>Look for skeletonUUID property, wich is a placeholder with the skeleton UUID and replace it with the skeleton object.</p>
 											
 												</div>
 											
@@ -365,17 +360,6 @@
 											
 																<div class="param-description">
 																	<p>Object3D that contains objects</p>
-											
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">skeletons</code>
-																	<span class="type">Array</span>
-											
-											
-																<div class="param-description">
-																	<p>Array of skeletons to be binded.</p>
 											
 																</div>
 											
@@ -547,68 +531,6 @@
 														<div class="returns-description">
 																	<span class="type">Object</span>:
 																<p>Program loaded from json data.</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_parseAnimations" class="method item">
-												<h3 class="name"><code>parseAnimations</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>json</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-													<span class="returns-inline">
-														<span class="type">Array</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Parse animations on json.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>animations</p>
 											
 														</div>
 													</div>
@@ -1106,7 +1028,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse skeletons from json.</p>
+													<p>Parse array of skeletons from JSON object.</p>
 											
 												</div>
 											

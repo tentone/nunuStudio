@@ -57,6 +57,7 @@
 								<li><a href="../classes/CSS3DSprite.html">CSS3DSprite</a></li>
 								<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
 								<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
+								<li><a href="../classes/DataTexture.html">DataTexture</a></li>
 								<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
 								<li><a href="../classes/DotScreenPass.html">DotScreenPass</a></li>
 								<li><a href="../classes/EffectComposer.html">EffectComposer</a></li>
@@ -223,8 +224,8 @@
 						
 						
 						<div class="box intro">
-							<p>Image texture constructor, with support for GIF animations.</p>
-						<p>It is based on THREE.Texture, original documentation can be found here https:// <a href="http://threejs.org/docs/index.html#Reference/Textures/Texture">threejs.org/docs/index.html#Reference/Textures/Texture</a></p>
+							<p>Basic image texture object wraps a texture from a img DOM element</p>
+						<p>Support for GIF animations without playback controls.</p>
 						
 						</div>
 						
@@ -277,10 +278,6 @@
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_img">img</a>
-						
-													</li>
-													<li class="index-item property">
 														<a href="#property_mipmaps">mipmaps</a>
 						
 													</li>
@@ -302,6 +299,10 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_rotation">rotation</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_source">source</a>
 						
 													</li>
 													<li class="index-item property">
@@ -495,29 +496,6 @@
 											
 											
 											</div>
-											<div id="property_img" class="property item">
-												<h3 class="name"><code>img</code></h3>
-												<span class="type"><a href="../classes/Image.html" class="crosslink">Image</a></span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Image attached to the texture</p>
-											
-												</div>
-											
-											
-											
-											</div>
 											<div id="property_mipmaps" class="property item">
 												<h3 class="name"><code>mipmaps</code></h3>
 												<span class="type">Array</span>
@@ -654,6 +632,29 @@
 												</div>
 											
 													<p><strong>Default:</strong> 0</p>
+											
+											
+											</div>
+											<div id="property_source" class="property item">
+												<h3 class="name"><code>source</code></h3>
+												<span class="type"><a href="../classes/Image.html" class="crosslink">Image</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Image attached to the texture</p>
+											
+												</div>
+											
 											
 											
 											</div>

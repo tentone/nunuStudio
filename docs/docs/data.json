@@ -158,17 +158,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\objects\\animation\\Skeleton.js": {
-            "name": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "modules": {
-                "Animation": 1
-            },
-            "classes": {
-                "Skeleton": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\objects\\audio\\AudioEmitter.js": {
             "name": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "modules": {
@@ -918,6 +907,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\texture\\DataTexture.js": {
+            "name": "..\\source\\core\\texture\\DataTexture.js",
+            "modules": {},
+            "classes": {
+                "DataTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\texture\\SpriteSheetTexture.js": {
             "name": "..\\source\\core\\texture\\SpriteSheetTexture.js",
             "modules": {},
@@ -956,9 +954,7 @@
         },
         "..\\source\\core\\three\\core\\Object3D.js": {
             "name": "..\\source\\core\\three\\core\\Object3D.js",
-            "modules": {
-                "THREE": 1
-            },
+            "modules": {},
             "classes": {
                 "Object3D": 1
             },
@@ -974,9 +970,22 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\three\\objects\\Skeleton.js": {
+            "name": "..\\source\\core\\three\\objects\\Skeleton.js",
+            "modules": {
+                "Animation": 1
+            },
+            "classes": {
+                "Skeleton": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\three\\scenes\\Fog.js": {
             "name": "..\\source\\core\\three\\scenes\\Fog.js",
-            "modules": {},
+            "modules": {
+                "THREE": 1
+            },
             "classes": {
                 "Fog": 1
             },
@@ -1151,7 +1160,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
+            "file": "..\\source\\core\\three\\objects\\Skeleton.js",
             "line": 3,
             "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh."
         },
@@ -1398,6 +1407,7 @@
                 "CanvasSprite": 1,
                 "CompressedTexture": 1,
                 "CubeTexture": 1,
+                "DataTexture": 1,
                 "SpriteSheetTexture": 1,
                 "Texture": 1,
                 "VideoTexture": 1,
@@ -1506,16 +1516,16 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "Fog": 1,
                 "Object3D": 1,
-                "Material": 1,
-                "Fog": 1
+                "Material": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "..\\source\\core\\three\\scenes\\Fog.js",
             "line": 3,
-            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
+            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https:// threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https:// threejs.org/docs/index.html#Reference/Scenes/FogExp2"
         },
         "BinaryUtils": {
             "name": "BinaryUtils",
@@ -1900,33 +1910,6 @@
                     "name": "manager",
                     "description": "",
                     "type": "Object"
-                }
-            ]
-        },
-        "Skeleton": {
-            "name": "Skeleton",
-            "shortname": "Skeleton",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Animation",
-            "namespace": "",
-            "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 3,
-            "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh.",
-            "author": "takahirox",
-            "params": [
-                {
-                    "name": "bones",
-                    "description": "Bone array.",
-                    "type": "Array"
-                },
-                {
-                    "name": "boneInverses",
-                    "description": "An array of Matrix4.",
-                    "type": "Array"
                 }
             ]
         },
@@ -3977,6 +3960,93 @@
                 }
             ]
         },
+        "DataTexture": {
+            "name": "DataTexture",
+            "shortname": "DataTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\texture\\DataTexture.js",
+            "line": 3,
+            "description": "Data texture stored binary RAW texture data values.\n\nCan be used to store render target result or to load custom image formats. Pixels can be manipulated individually in the data array.",
+            "extends": "{THREE.Texture}",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Image data array",
+                    "type": "Array"
+                },
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "format",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "mapping",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapS",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapT",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "magFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "minFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "format",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "anisotropy",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "encoding",
+                    "description": "",
+                    "type": "Number"
+                }
+            ]
+        },
         "SpriteSheetTexture": {
             "name": "SpriteSheetTexture",
             "shortname": "SpriteSheetTexture",
@@ -4041,7 +4111,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\Texture.js",
             "line": 3,
-            "description": "Image texture constructor, with support for GIF animations.\n\nIt is based on THREE.Texture, original documentation can be found here https:// threejs.org/docs/index.html#Reference/Textures/Texture",
+            "description": "Basic image texture object wraps a texture from a img DOM element\n\nSupport for GIF animations without playback controls.",
             "extends": "{Texture}",
             "params": [
                 {
@@ -4212,6 +4282,32 @@
             "file": "..\\source\\core\\three\\materials\\Material.js",
             "line": 3,
             "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https:// threejs.org/docs/index.html#Reference/Materials/Material"
+        },
+        "Skeleton": {
+            "name": "Skeleton",
+            "shortname": "Skeleton",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Animation",
+            "namespace": "",
+            "file": "..\\source\\core\\three\\objects\\Skeleton.js",
+            "line": 3,
+            "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh.",
+            "params": [
+                {
+                    "name": "bones",
+                    "description": "Bone array.",
+                    "type": "Array"
+                },
+                {
+                    "name": "boneInverses",
+                    "description": "An array of Matrix4.",
+                    "type": "Array"
+                }
+            ]
         },
         "Fog": {
             "name": "Fog",
@@ -7158,7 +7254,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 49,
+            "line": 48,
             "description": "Parse JSON object and create the correct Object structure. \n\nData can be loaded from a file and should be parsed into Object.",
             "itemtype": "method",
             "name": "parse",
@@ -7183,7 +7279,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 84,
+            "line": 91,
             "description": "Define base path for external texture loading.",
             "itemtype": "method",
             "name": "setTexturePath",
@@ -7199,7 +7295,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 95,
+            "line": 102,
             "description": "Set cross origin.",
             "itemtype": "method",
             "name": "setCrossOrigin",
@@ -7215,7 +7311,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 106,
+            "line": 113,
             "description": "Parse resources on JSON.",
             "itemtype": "method",
             "name": "parseResources",
@@ -7235,7 +7331,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 131,
+            "line": 138,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseShape",
@@ -7255,7 +7351,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 152,
+            "line": 159,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseGeometries",
@@ -7275,7 +7371,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 175,
+            "line": 182,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -7295,7 +7391,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 198,
+            "line": 205,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -7315,7 +7411,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 219,
+            "line": 226,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -7335,7 +7431,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 240,
+            "line": 247,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -7355,7 +7451,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 261,
+            "line": 268,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -7375,7 +7471,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 282,
+            "line": 289,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -7395,28 +7491,8 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 306,
-            "description": "Parse animations on json.",
-            "itemtype": "method",
-            "name": "parseAnimations",
-            "params": [
-                {
-                    "name": "json",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "animations",
-                "type": "Array"
-            },
-            "class": "ObjectLoader",
-            "module": "Loaders"
-        },
-        {
-            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 332,
-            "description": "Parse skeletons from json.",
+            "line": 313,
+            "description": "Parse array of skeletons from JSON object.",
             "itemtype": "method",
             "name": "parseSkeletons",
             "params": [
@@ -7436,8 +7512,8 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 379,
-            "description": "Auxiliar method to bind skeletons to loaded objects.",
+            "line": 333,
+            "description": "Auxiliar method to bind skeletons to loaded objects.\n\nLook for skeletonUUID property, wich is a placeholder with the skeleton UUID and replace it with the skeleton object.",
             "itemtype": "method",
             "name": "bindSkeletons",
             "params": [
@@ -7445,11 +7521,6 @@
                     "name": "object",
                     "description": "Object3D that contains objects",
                     "type": "Object3D"
-                },
-                {
-                    "name": "skeletons",
-                    "description": "Array of skeletons to be binded.",
-                    "type": "Array"
                 }
             ],
             "class": "ObjectLoader",
@@ -7457,7 +7528,7 @@
         },
         {
             "file": "..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 414,
+            "line": 363,
             "description": "Parse objects from json data,",
             "itemtype": "method",
             "name": "parseObjects",
@@ -7685,46 +7756,6 @@
             },
             "class": "VideoLoader",
             "module": "Loaders"
-        },
-        {
-            "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 21,
-            "description": "The array of bones. Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.",
-            "itemtype": "property",
-            "name": "bones",
-            "type": "{Array}",
-            "class": "Skeleton",
-            "module": "Animation"
-        },
-        {
-            "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 29,
-            "description": "The array buffer holding the bone data when using a vertex texture.",
-            "itemtype": "property",
-            "name": "boneMatrices",
-            "type": "{ArrayBuffer}",
-            "class": "Skeleton",
-            "module": "Animation"
-        },
-        {
-            "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 37,
-            "description": "An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.\n\nUse the supplied bone inverses or calculate the inverses.",
-            "itemtype": "property",
-            "name": "boneInverses",
-            "type": "{Array}",
-            "class": "Skeleton",
-            "module": "Animation"
-        },
-        {
-            "file": "..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 68,
-            "description": "The DataTexture holding the bone data when using a vertex texture.",
-            "itemtype": "property",
-            "name": "boneTexture",
-            "type": "{DataTexture}",
-            "class": "Skeleton",
-            "module": "Animation"
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
@@ -9895,7 +9926,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 49,
+            "line": 48,
             "description": "Geometry defines the object structure.",
             "itemtype": "property",
             "name": "geometry",
@@ -9905,7 +9936,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 56,
+            "line": 55,
             "description": "Material is used to define how the geometry surface is shaded.",
             "itemtype": "property",
             "name": "material",
@@ -9915,7 +9946,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 63,
+            "line": 62,
             "description": "Determines how the mesh triangles are constructed from the vertices.\n\nOnly works when the geometry is a BufferGeometry.",
             "itemtype": "property",
             "name": "drawMode",
@@ -15668,7 +15699,7 @@
         {
             "file": "..\\source\\core\\resources\\ResourceContainer.js",
             "line": 66,
-            "description": "Resources.",
+            "description": "Generic resources, can be program data, code files etc.",
             "itemtype": "property",
             "name": "resources",
             "type": "{Array}",
@@ -15678,7 +15709,7 @@
         {
             "file": "..\\source\\core\\resources\\ResourceContainer.js",
             "line": 74,
-            "description": "Shapes resources.",
+            "description": "Shapes resources, may be used to generate geometry data.",
             "itemtype": "property",
             "name": "shapes",
             "type": "{Array}",
@@ -15688,7 +15719,7 @@
         {
             "file": "..\\source\\core\\resources\\ResourceContainer.js",
             "line": 82,
-            "description": "Skeletons resources.",
+            "description": "Skeletons resources, use for the meshes to store their skeleton data.\n\nSkeletons can be shared between meshes.",
             "itemtype": "property",
             "name": "skeletons",
             "type": "{Array}",
@@ -15697,7 +15728,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceContainer.js",
-            "line": 93,
+            "line": 95,
             "description": "Copy resources from another resource container into this one.",
             "itemtype": "method",
             "name": "copyResources",
@@ -16716,98 +16747,17 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 22,
-            "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
-            "itemtype": "property",
-            "name": "uuid",
-            "type": "{string}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 27,
-            "description": "How much a single repetition of the texture is offset from the beginning, in each direction U and V.",
-            "itemtype": "property",
-            "name": "offset",
-            "type": "{Vector2}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 33,
-            "description": "How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to .",
-            "itemtype": "property",
-            "name": "repeat",
-            "type": "{Vector2}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 39,
-            "description": "Indicates where the center of rotation is. To rotate around the center point set this value to (0.5, 0.5).",
-            "itemtype": "property",
-            "name": "center",
-            "type": "{Vector2}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 45,
-            "description": "How much the texture is rotated around the center point, in radians. Postive values are counter-clockwise.",
-            "itemtype": "property",
-            "name": "rotation",
-            "type": "{number}",
-            "default": "0",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 52,
-            "description": "False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.",
-            "itemtype": "property",
-            "name": "premultiplyAlpha",
-            "type": "{boolean}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 58,
-            "description": "Flips the image's Y axis to match the WebGL texture coordinate space.",
-            "itemtype": "property",
-            "name": "flipY",
-            "type": "{boolean}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 64,
-            "description": "Array of user-specified mipmaps (optional).",
-            "itemtype": "property",
-            "name": "mipmaps",
-            "type": "{Array}",
-            "class": "Texture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 72,
+            "line": 24,
             "description": "Image attached to the texture",
             "itemtype": "property",
-            "name": "img",
+            "name": "source",
             "type": "{Image}",
             "class": "Texture",
             "module": "Textures"
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 95,
+            "line": 47,
             "description": "Name of the texture (doesn't need to be unique).",
             "itemtype": "property",
             "name": "name",
@@ -16817,7 +16767,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 103,
+            "line": 55,
             "description": "Flag used to know is the texture has been disposed.\n\nIs used to control animation when using a gif as a texture.",
             "itemtype": "property",
             "name": "disposed",
@@ -16828,7 +16778,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 116,
+            "line": 68,
             "description": "DOM element attached to the texture",
             "itemtype": "property",
             "name": "image",
@@ -16838,7 +16788,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 158,
+            "line": 110,
             "description": "Dispose texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -16847,7 +16797,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 170,
+            "line": 122,
             "description": "Create JSON description for texture, serializes image used in the texture\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "params": [
                 {
@@ -16858,6 +16808,87 @@
             ],
             "itemtype": "method",
             "name": "toJSON",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 139,
+            "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
+            "itemtype": "property",
+            "name": "uuid",
+            "type": "{string}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 144,
+            "description": "How much a single repetition of the texture is offset from the beginning, in each direction U and V.",
+            "itemtype": "property",
+            "name": "offset",
+            "type": "{Vector2}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 150,
+            "description": "How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to .",
+            "itemtype": "property",
+            "name": "repeat",
+            "type": "{Vector2}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 156,
+            "description": "Indicates where the center of rotation is. To rotate around the center point set this value to (0.5, 0.5).",
+            "itemtype": "property",
+            "name": "center",
+            "type": "{Vector2}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 162,
+            "description": "How much the texture is rotated around the center point, in radians. Postive values are counter-clockwise.",
+            "itemtype": "property",
+            "name": "rotation",
+            "type": "{number}",
+            "default": "0",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 169,
+            "description": "False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.",
+            "itemtype": "property",
+            "name": "premultiplyAlpha",
+            "type": "{boolean}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 175,
+            "description": "Flips the image's Y axis to match the WebGL texture coordinate space.",
+            "itemtype": "property",
+            "name": "flipY",
+            "type": "{boolean}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 181,
+            "description": "Array of user-specified mipmaps (optional).",
+            "itemtype": "property",
+            "name": "mipmaps",
+            "type": "{Array}",
             "class": "Texture",
             "module": "Textures"
         },
@@ -17912,6 +17943,73 @@
             },
             "class": "Material",
             "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\objects\\Skeleton.js",
+            "line": 39,
+            "description": "Parse skeleton from JSON data, for a specific object.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "fromJSON",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "JSON encoded data.",
+                    "type": "Object"
+                },
+                {
+                    "name": "object",
+                    "description": "Target object that has this skeleton.",
+                    "type": "THREE.Object3D"
+                },
+                {
+                    "name": "resources",
+                    "description": "Resource container to read resouce data.",
+                    "type": "ResourceContainer"
+                }
+            ],
+            "class": "Skeleton",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\source\\core\\three\\objects\\Skeleton.js",
+            "line": 72,
+            "description": "The array of bones. Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.",
+            "itemtype": "property",
+            "name": "bones",
+            "type": "{Array}",
+            "class": "Skeleton",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\source\\core\\three\\objects\\Skeleton.js",
+            "line": 79,
+            "description": "The array buffer holding the bone data when using a vertex texture.",
+            "itemtype": "property",
+            "name": "boneMatrices",
+            "type": "{ArrayBuffer}",
+            "class": "Skeleton",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\source\\core\\three\\objects\\Skeleton.js",
+            "line": 86,
+            "description": "An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.\n\nUse the supplied bone inverses or calculate the inverses.",
+            "itemtype": "property",
+            "name": "boneInverses",
+            "type": "{Array}",
+            "class": "Skeleton",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\source\\core\\three\\objects\\Skeleton.js",
+            "line": 95,
+            "description": "The DataTexture holding the bone data when using a vertex texture.",
+            "itemtype": "property",
+            "name": "boneTexture",
+            "type": "{DataTexture}",
+            "class": "Skeleton",
+            "module": "Animation"
         },
         {
             "file": "..\\source\\core\\three\\scenes\\Fog.js",
