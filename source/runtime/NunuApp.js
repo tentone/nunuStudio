@@ -132,6 +132,7 @@ include("source/core/texture/CanvasTexture.js");
 include("source/core/texture/VideoTexture.js");
 include("source/core/texture/WebcamTexture.js");
 include("source/core/texture/CubeTexture.js");
+include("source/core/texture/DataTexture.js");
 include("source/core/texture/CompressedTexture.js");
 include("source/core/texture/SpriteSheetTexture.js");
 

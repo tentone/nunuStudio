@@ -70,6 +70,20 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 
 	var object = this.parseObject(json.object);
 
+	// Get skeletons if any
+	if(data.skeletons !== undefined)
+	{
+		var skeletons = this.parseSkeletons(data.skeletons, object);
+		this.bindSkeletons(object, skeletons);
+	}
+
+	// Parse animations
+	if(data.animations !== undefined)
+	{
+		object.animations = this.parseAnimations(data.animations);
+	}
+
+	// Load images and process callback
 	if(json.images === undefined || json.images.length === 0)
 	{
 		if(onLoad !== undefined)
@@ -1014,18 +1028,6 @@ ObjectLoader.prototype.parseObject = function(data)
 			object.updateMatrixWorld(true);
 		}
 	}
-
-	if(data.skeletons)
-	{
-		var skeletons = this.parseSkeletons(data.skeletons, object);
-		this.bindSkeletons(object, skeletons);
-	}
-
-	if(data.animations)
-	{
-		object.animations = this.parseAnimations(data.animations);
-	}
-
 
 	// Attach resources to program
 	if(data.type === "Program")

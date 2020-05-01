@@ -67,7 +67,7 @@ THREE.Skeleton.prototype.toJSON = function(meta)
 
 	if(this.boneTexture !== undefined)
 	{
-
+		data.boneTexture = this.boneTexture.toJSON(meta).uuid;
 	}
 
 	if(this.boneTextureSize !== undefined)
@@ -75,10 +75,8 @@ THREE.Skeleton.prototype.toJSON = function(meta)
 		data.boneTextureSize = this.boneTextureSize;
 	}
 	
-
 	return data;
 };
-
 
 /**
  * Parse skeleton from JSON data, for a specific object.
@@ -111,19 +109,21 @@ THREE.Skeleton.fromJSON = function(data, object, resources)
 
 	if(data.boneMatrices !== undefined)
 	{
-		this.boneMatrices = new Float32Array(data.boneMatrices);
+		skeleton.boneMatrices = new Float32Array(data.boneMatrices);
 	}
 
 	if(data.boneTextureSize !== undefined)
 	{
-		this.boneTextureSize = data.boneTextureSize;
+		skeleton.boneTextureSize = data.boneTextureSize;
 	}
 	
 	if(data.boneTexture !== undefined)
 	{
-		
+		skeleton.boneTexture = resources.getTexture(data.boneTexture);
 	}
 
+	// TODO <REMOVE THIS>
+	console.log("THREE.Skeleton.fromJSON", skeleton);	
 
 	return skeleton;
 };

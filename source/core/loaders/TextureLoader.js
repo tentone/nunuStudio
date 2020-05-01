@@ -241,6 +241,12 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	{
 		texture = new CanvasTexture(json.width, json.height);
 	}
+		// Data texture
+	else if(category === "DataTexture")
+	{
+		var data = new Float32Array(json.image.data);
+		texture = new DataTexture(data, json.image.width, json.image.height);
+	}
 	// Texture
 	else
 	{
@@ -279,6 +285,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 
 	texture.repeat.set(json.repeat[0], json.repeat[1]);
 	texture.offset.set(json.offset[0], json.offset[1]);
+
 	if(json.center !== undefined) {texture.center.set(json.center[0], json.center[1]);}
 	if(json.rotation !== undefined) {texture.rotation = json.rotation;}
 

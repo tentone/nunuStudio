@@ -26,7 +26,9 @@ function DataTexture(data, width, height, format, type, mapping, wrapS, wrapT, m
 {
 	THREE.Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
-	this.image = { data: data || null, width: width || 1, height: height || 1 };
+	this.category = "DataTexture";
+
+	this.image = {data: data || null, width: width || 1, height: height || 1};
 
 	this.magFilter = magFilter !== undefined ? magFilter : NearestFilter;
 	this.minFilter = minFilter !== undefined ? minFilter : NearestFilter;
@@ -34,10 +36,24 @@ function DataTexture(data, width, height, format, type, mapping, wrapS, wrapT, m
 	this.generateMipmaps = false;
 	this.flipY = false;
 	this.unpackAlignment = 1;
-
 	this.needsUpdate = true;
 }
+
+THREE.DataTexture = DataTexture;
 
 DataTexture.prototype = Object.create(THREE.Texture.prototype);
 DataTexture.prototype.constructor = DataTexture;
 DataTexture.prototype.isDataTexture = true;
+
+DataTexture.prototype.toJSON = function(meta)
+{
+	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+
+	data.image = {
+		height: this.image.height,
+		width: this.image.width,
+		data: Array.from(this.image.data)
+	}
+
+	return data;
+};
