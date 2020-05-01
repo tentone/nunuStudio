@@ -71,16 +71,16 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 	var object = this.parseObject(json.object);
 
 	// Get skeletons if any
-	if(data.skeletons !== undefined)
+	if(json.skeletons !== undefined)
 	{
-		var skeletons = this.parseSkeletons(data.skeletons, object);
+		var skeletons = this.parseSkeletons(json.skeletons, object);
 		this.bindSkeletons(object, skeletons);
 	}
 
 	// Parse animations
-	if(data.animations !== undefined)
+	if(json.animations !== undefined)
 	{
-		object.animations = this.parseAnimations(data.animations);
+		object.animations = this.parseAnimations(json.animations);
 	}
 
 	// Load images and process callback
@@ -344,7 +344,7 @@ ObjectLoader.prototype.parseAnimations = function(array)
 };
 
 /**
- * Parse skeletons from json from a specific object
+ * Parse array of skeletons from JSON object.
  *
  * @method parseSkeletons
  * @param {Object} json
@@ -358,7 +358,7 @@ ObjectLoader.prototype.parseSkeletons = function(json, object)
 	{
 		for(var i = 0; i < json.length; i++)
 		{
-			skeletons[data.uuid] = THREE.Skeleton.fromJSON(json[i], object, this);
+			skeletons[json[i].uuid] = THREE.Skeleton.fromJSON(json[i], object, this);
 		}
 	}
 
@@ -381,19 +381,20 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
 	
 	object.traverse(function(child)
 	{
-		if(child.isSkinnedMesh === true && child.skeleton !== null)
+		if(child.isSkinnedMesh === true && child.skeletonUUID !== null)
 		{
-			var skeleton = skeletons[child.skeleton];
-
+			var skeleton = skeletons[child.skeletonUUID];
 			if(skeleton === undefined)
 			{
-				console.warn("ObjectLoader: Not found Skeleton with uuid " + child.skeleton);
+				console.warn("ObjectLoader: Not found Skeleton with uuid " + child.skeletonUUID);
 				child.skeleton = null;
 			}
 			else
 			{
 				child.bind(skeleton, child.bindMatrix);
 			}
+
+			delete child.skeletonUUID;
 		}
 	});
 };
@@ -830,50 +831,6 @@ ObjectLoader.prototype.parseObject = function(data)
 				object = new HemisphereLight(data.color, data.groundColor, data.intensity);
 				break;
 
-			case "SkinnedMesh":
-				var geometry = this.getGeometry(data.geometry);
-				var material = this.getMaterial(data.material);
-				var tmpBones;
-
-				// If data has skeleton, assumes bones are already in scene graph. Then temporarily undefines geometry.bones not to create bones in SkinnedMesh constructor.
-				if(data.skeleton !== undefined && geometry.bones !== undefined)
-				{
-					tmpBones = geometry.bones;
-					geometry.bones = undefined;
-				}
-
-				object = new SkinnedMesh(geometry, material);
-
-				// Rebinds with skeleton whose uuid is data.skeleton later.
-				if(data.skeleton !== undefined)
-				{
-					object.skeleton = data.skeleton;
-				}
-
-				if(data.bindMode !== undefined)
-				{
-					object.bindMode = data.bindMode;
-				}
-
-				if(data.bindMatrix !== undefined)
-				{
-					object.bindMatrix.fromArray(data.bindMatrix);
-				}
-
-				object.updateMatrixWorld(true);
-
-				if(tmpBones !== undefined)
-				{
-					geometry.bones = tmpBones;
-				}
-
-				break;
-
-			case "InstancedMesh":
-				object = new InstancedMesh(this.getGeometry(data.geometry), this.getMaterial(data.material), data.count);
-				object.instanceMatrix = new THREE.BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
-				break;
-
 			case "HTMLView":
 				object = new HTMLView();
 				object.height = data.height;
@@ -886,17 +843,23 @@ ObjectLoader.prototype.parseObject = function(data)
 				object.sh.fromArray(data.sh);
 				break;
 
-			case "Mesh":
-				var geometry = this.getGeometry(data.geometry);
+			case "InstancedMesh":
+				object = new InstancedMesh(this.getGeometry(data.geometry), this.getMaterial(data.material), data.count);
+				object.instanceMatrix = new THREE.BufferAttribute(new Float32Array(data.instanceMatrix.array), 16);
+				break;
 
-				if(geometry.bones && geometry.bones.length > 0)
-				{
-					object = new SkinnedMesh(geometry, this.getMaterial(data.material));
-				}
-				else
-				{
-					object = new Mesh(geometry, this.getMaterial(data.material));
-				}
+			case "SkinnedMesh":
+				object = new SkinnedMesh(this.getGeometry(data.geometry), this.getMaterial(data.material));
+				
+				// Rebinds with skeleton whose uuid is data.skeleton later.
+				if(data.skeleton !== undefined) {object.skeletonUUID = data.skeleton;}
+				if(data.bindMode !== undefined) {object.bindMode = data.bindMode;}
+				if(data.bindMatrix !== undefined) {object.bindMatrix.fromArray(data.bindMatrix);}
+
+				break;
+
+			case "Mesh":
+				object = new Mesh(this.getGeometry(data.geometry), this.getMaterial(data.material));
 				break;
 
 			case "TextBitmap":

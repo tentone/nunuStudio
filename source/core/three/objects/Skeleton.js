@@ -59,7 +59,7 @@ THREE.Skeleton.prototype.toJSON = function(meta)
 		data.boneInverses.push(this.boneInverses[i].toArray());
 	}
 
-
+	/*
 	if(this.boneMatrices !== undefined)
 	{
 		data.boneMatrices = Array.from(this.boneMatrices);
@@ -74,6 +74,7 @@ THREE.Skeleton.prototype.toJSON = function(meta)
 	{
 		data.boneTextureSize = this.boneTextureSize;
 	}
+	*/
 	
 	return data;
 };
@@ -106,8 +107,8 @@ THREE.Skeleton.fromJSON = function(data, object, resources)
 	}
 
 	var skeleton = new THREE.Skeleton(bones, boneInverses);
-
-	if(data.boneMatrices !== undefined)
+	
+	/*if(data.boneMatrices !== undefined)
 	{
 		skeleton.boneMatrices = new Float32Array(data.boneMatrices);
 	}
@@ -120,10 +121,7 @@ THREE.Skeleton.fromJSON = function(data, object, resources)
 	if(data.boneTexture !== undefined)
 	{
 		skeleton.boneTexture = resources.getTexture(data.boneTexture);
-	}
-
-	// TODO <REMOVE THIS>
-	console.log("THREE.Skeleton.fromJSON", skeleton);	
+	}*/
 
 	return skeleton;
 };

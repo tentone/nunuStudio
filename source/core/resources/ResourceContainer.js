@@ -64,7 +64,7 @@ function ResourceContainer()
 	this.geometries = [];
 
 	/**
-	 * Resources.
+	 * Generic resources, can be program data, code files etc.
 	 * 
 	 * @property resources
 	 * @type {Array}
@@ -72,7 +72,7 @@ function ResourceContainer()
 	this.resources = [];
 
 	/**
-	 * Shapes resources.
+	 * Shapes resources, may be used to generate geometry data.
 	 * 
 	 * @property shapes
 	 * @type {Array}
@@ -80,7 +80,9 @@ function ResourceContainer()
 	this.shapes = [];
 
 	/**
-	 * Skeletons resources.
+	 * Skeletons resources, use for the meshes to store their skeleton data.
+	 *
+	 * Skeletons can be shared between meshes.
 	 * 
 	 * @property skeletons
 	 * @type {Array}
