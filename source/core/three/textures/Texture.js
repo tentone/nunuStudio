@@ -40,6 +40,7 @@ THREE.Texture.prototype.toJSON = function(meta)
 		anisotropy: this.anisotropy,
 
 		flipY: this.flipY,
+		
 		premultiplyAlpha: this.premultiplyAlpha,
 		unpackAlignment: this.unpackAlignment
 	};

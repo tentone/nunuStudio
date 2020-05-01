@@ -367,20 +367,19 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
 	
 	object.traverse(function(child)
 	{
-		if(child.isSkinnedMesh === true && child.skeletonUUID !== undefined)
+		if(child.isSkinnedMesh === true && child.skeleton !== null)
 		{
-			var skeleton = skeletons[child.skeletonUUID];
+			var skeleton = skeletons[child.skeleton];
 
 			if(skeleton === undefined)
 			{
-				console.warn("ObjectLoader: Not found Skeleton with uuid " + child.skeletonUUID);
+				console.warn("ObjectLoader: Not found Skeleton with uuid " + child.skeleton);
+				child.skeleton = null;
 			}
 			else
 			{
 				child.bind(skeleton, child.bindMatrix);
 			}
-
-			delete child.skeletonUUID;
 		}
 	});
 };
@@ -834,7 +833,7 @@ ObjectLoader.prototype.parseObject = function(data)
 				// Rebinds with skeleton whose uuid is data.skeleton later.
 				if(data.skeleton !== undefined)
 				{
-					object.skeletonUUID = data.skeleton;
+					object.skeleton = data.skeleton;
 				}
 
 				if(data.bindMode !== undefined)

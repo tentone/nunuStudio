@@ -62,11 +62,18 @@ THREE.Skeleton.prototype.toJSON = function(meta)
 
 	if(this.boneMatrices !== undefined)
 	{
-		data.boneMatrices = this.boneMatrices;
+		data.boneMatrices = Array.from(this.boneMatrices);
 	}
 
-	if(this.boneTexture !== undefined) {}
-	if(this.boneTextureSize !== undefined) {data.boneTextureSize = this.boneTextureSize;}
+	if(this.boneTexture !== undefined)
+	{
+
+	}
+
+	if(this.boneTextureSize !== undefined)
+	{
+		data.boneTextureSize = this.boneTextureSize;
+	}
 	
 
 	return data;
@@ -102,16 +109,21 @@ THREE.Skeleton.fromJSON = function(data, object, resources)
 
 	var skeleton = new THREE.Skeleton(bones, boneInverses);
 
-	/*
 	if(data.boneMatrices !== undefined)
 	{
-		var boneMatrices = [];
-		for(var i = 0; i < this.boneMatrices.length; i++)
-		{
-			data.boneMatrices.push(this.boneMatrices[i].toArray());
-		}
+		this.boneMatrices = new Float32Array(data.boneMatrices);
 	}
-	*/
+
+	if(data.boneTextureSize !== undefined)
+	{
+		this.boneTextureSize = data.boneTextureSize;
+	}
+	
+	if(data.boneTexture !== undefined)
+	{
+		
+	}
+
 
 	return skeleton;
 };

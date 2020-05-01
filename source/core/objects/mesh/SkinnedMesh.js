@@ -56,7 +56,7 @@ SkinnedMesh.prototype.toJSON = function(meta)
 
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{	
-		if(self.skeleton !== undefined)
+		if(self.skeleton !== null)
 		{
 			if(meta.skeletons[self.skeleton.uuid] === undefined)
 			{
@@ -72,6 +72,7 @@ SkinnedMesh.prototype.toJSON = function(meta)
 	{
 		data.object.bindMode = this.bindMode;
 	}
+
 	if(this.bindMatrix !== undefined)
 	{
 		data.object.bindMatrix = this.bindMatrix.toArray();
