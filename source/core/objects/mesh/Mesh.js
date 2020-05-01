@@ -42,7 +42,6 @@ Mesh.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	// Children
 	THREE.Object3D.prototype.dispose.call(this);
 };
 

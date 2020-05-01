@@ -45,7 +45,6 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 };
 
-
 /**
  * Parse JSON object and create the correct Object structure. 
  * 
@@ -70,17 +69,11 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 
 	var object = this.parseObject(json.object);
 
-	// Get skeletons if any
+	// Bind sekeletons
 	if(json.skeletons !== undefined)
 	{
-		var skeletons = this.parseSkeletons(json.skeletons, object);
-		this.bindSkeletons(object, skeletons);
-	}
-
-	// Parse animations
-	if(json.animations !== undefined)
-	{
-		object.animations = this.parseAnimations(json.animations);
+		this.parseSkeletons(json.skeletons, object);
+		this.bindSkeletons(object);
 	}
 
 	// Load images and process callback
@@ -318,32 +311,6 @@ ObjectLoader.prototype.parseTextures = function(json)
 };
 
 /**
- * Parse animations on json.
- *
- * @method parseAnimations
- * @param {Object} json
- * @return {Array} animations
- */
-ObjectLoader.prototype.parseAnimations = function(array)
-{
-	var animations = [];
-
-	for(var i = 0; i < array.length; i++)
-	{	
-		var clip = THREE.AnimationClip.parse(array[i]);
-
-		if(array[i].uuid !== undefined)
-		{
-			clip.uuid = array[i].uuid;
-		}
-		
-		animations.push();
-	}
-
-	return animations;
-};
-
-/**
  * Parse array of skeletons from JSON object.
  *
  * @method parseSkeletons
@@ -352,49 +319,42 @@ ObjectLoader.prototype.parseAnimations = function(array)
  */
 ObjectLoader.prototype.parseSkeletons = function(json, object)
 {
-	var skeletons = {};
-
 	if(json !== undefined)
 	{
 		for(var i = 0; i < json.length; i++)
 		{
-			skeletons[json[i].uuid] = THREE.Skeleton.fromJSON(json[i], object, this);
+			this.skeletons[json[i].uuid] = THREE.Skeleton.fromJSON(json[i], object, this);
 		}
 	}
 
-	return skeletons;
+	return this.skeletons;
 };
 
 /**
  * Auxiliar method to bind skeletons to loaded objects.
  *
+ * Look for skeletonUUID property, wich is a placeholder with the skeleton UUID and replace it with the skeleton object.
+ *
  * @method bindSkeletons
  * @param {Object3D} object Object3D that contains objects
- * @param {Array} skeletons Array of skeletons to be binded.
  */
-ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
+ObjectLoader.prototype.bindSkeletons = function(object)
 {
-	if(Object.keys(skeletons).length === 0)
-	{
-		return;
-	}
-	
+	var self = this;
+
 	object.traverse(function(child)
 	{
-		if(child.isSkinnedMesh === true && child.skeletonUUID !== null)
+		if(child.isSkinnedMesh && child.skeletonUUID !== undefined)
 		{
-			var skeleton = skeletons[child.skeletonUUID];
+			var skeleton = self.skeletons[child.skeletonUUID];
 			if(skeleton === undefined)
 			{
-				console.warn("ObjectLoader: Not found Skeleton with uuid " + child.skeletonUUID);
-				child.skeleton = null;
-			}
-			else
-			{
-				child.bind(skeleton, child.bindMatrix);
+				console.warn("ObjectLoader: Skeleton not found.", child.skeletonUUID);
+				return
 			}
 
 			delete child.skeletonUUID;
+			child.bind(skeleton, child.bindMatrix);
 		}
 	});
 };
@@ -850,7 +810,7 @@ ObjectLoader.prototype.parseObject = function(data)
 
 			case "SkinnedMesh":
 				object = new SkinnedMesh(this.getGeometry(data.geometry), this.getMaterial(data.material));
-				
+
 				// Rebinds with skeleton whose uuid is data.skeleton later.
 				if(data.skeleton !== undefined) {object.skeletonUUID = data.skeleton;}
 				if(data.bindMode !== undefined) {object.bindMode = data.bindMode;}
@@ -933,10 +893,17 @@ ObjectLoader.prototype.parseObject = function(data)
 	if(data.animations !== undefined)
 	{
 		object.animations = [];
-		
+
 		for(var i = 0; i < data.animations.length; i++)
 		{
-			object.animations.push(THREE.AnimationClip.parse(data.animations[i]));
+			var clip = THREE.AnimationClip.parse(data.animations[i]);
+
+			if(data.animations[i].uuid !== undefined)
+			{
+				clip.uuid = data.animations[i].uuid;
+			}
+
+			object.animations.push(clip);
 		}
 	}
 
@@ -953,16 +920,12 @@ ObjectLoader.prototype.parseObject = function(data)
 	if(data.quaternion !== undefined) {object.quaternion.fromArray(data.quaternion);}
 	if(data.scale !== undefined) {object.scale.fromArray(data.scale);}
 
-
 	// Shadow casting
 	object.castShadow = data.castShadow === true;
 	object.receiveShadow = data.receiveShadow === true;
 
 	// Shadowmap data
-	if(data.shadow !== undefined)
-	{
-		object.shadow.fromJSON(data.shadow);
-	}
+	if(data.shadow !== undefined) {object.shadow.fromJSON(data.shadow);}
 
 	// Visibility
 	object.visible = data.visible === true;
@@ -997,7 +960,6 @@ ObjectLoader.prototype.parseObject = function(data)
 	{
 		object.copyResources(this);
 	}
-
 	// Get scene default cameras
 	else if(data.type === "Scene")
 	{

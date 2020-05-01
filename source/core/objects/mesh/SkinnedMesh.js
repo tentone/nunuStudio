@@ -67,7 +67,6 @@ SkinnedMesh.prototype.toJSON = function(meta)
 		}
 	});
 
-	// Bind mode and matrix
 	if(this.bindMode !== undefined)
 	{
 		data.object.bindMode = this.bindMode;

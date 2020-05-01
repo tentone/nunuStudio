@@ -9,41 +9,15 @@
  * @param {Array} boneInverses An array of Matrix4.
  */
 
-/**
- * The array of bones. Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.
- * 
- * @property bones
- * @type {Array}
- */
-
-/**
- * The array buffer holding the bone data when using a vertex texture.
- * 
- * @property boneMatrices
- * @type {ArrayBuffer}
- */
-
-/**
- * An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.
- * 
- * Use the supplied bone inverses or calculate the inverses.
- *
- * @property boneInverses
- * @type {Array}
- */
-
-/**
- * The DataTexture holding the bone data when using a vertex texture.
- * 
- * @property boneTexture
- * @type {DataTexture}
- */
-
-THREE.Skeleton.prototype.uuid = THREE.Math.generateUUID();
-
 THREE.Skeleton.prototype.toJSON = function(meta)
 {
 	var data = {};
+
+	// Generate a new UUID of there is none.
+	if(this.uuid === undefined)
+	{
+		this.uuid = THREE.Math.generateUUID();
+	}
 
 	data.uuid = this.uuid;
 
@@ -58,23 +32,6 @@ THREE.Skeleton.prototype.toJSON = function(meta)
 	{
 		data.boneInverses.push(this.boneInverses[i].toArray());
 	}
-
-	/*
-	if(this.boneMatrices !== undefined)
-	{
-		data.boneMatrices = Array.from(this.boneMatrices);
-	}
-
-	if(this.boneTexture !== undefined)
-	{
-		data.boneTexture = this.boneTexture.toJSON(meta).uuid;
-	}
-
-	if(this.boneTextureSize !== undefined)
-	{
-		data.boneTextureSize = this.boneTextureSize;
-	}
-	*/
 	
 	return data;
 };
@@ -107,21 +64,37 @@ THREE.Skeleton.fromJSON = function(data, object, resources)
 	}
 
 	var skeleton = new THREE.Skeleton(bones, boneInverses);
-	
-	/*if(data.boneMatrices !== undefined)
-	{
-		skeleton.boneMatrices = new Float32Array(data.boneMatrices);
-	}
-
-	if(data.boneTextureSize !== undefined)
-	{
-		skeleton.boneTextureSize = data.boneTextureSize;
-	}
-	
-	if(data.boneTexture !== undefined)
-	{
-		skeleton.boneTexture = resources.getTexture(data.boneTexture);
-	}*/
+	skeleton.uuid = data.uuid;
 
 	return skeleton;
 };
+
+/**
+ * The array of bones. Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.
+ * 
+ * @property bones
+ * @type {Array}
+ */
+
+/**
+ * The array buffer holding the bone data when using a vertex texture.
+ * 
+ * @property boneMatrices
+ * @type {ArrayBuffer}
+ */
+
+/**
+ * An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.
+ * 
+ * Use the supplied bone inverses or calculate the inverses.
+ *
+ * @property boneInverses
+ * @type {Array}
+ */
+
+/**
+ * The DataTexture holding the bone data when using a vertex texture.
+ * 
+ * @property boneTexture
+ * @type {DataTexture}
+ */

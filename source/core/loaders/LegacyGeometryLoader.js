@@ -415,7 +415,6 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 	function parseAnimations(json, geometry)
 	{
-
 		var outputAnimations = [];
 
 		// parse old style Bone/Hierarchy animations
@@ -439,7 +438,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		for(var i = 0; i < animations.length; i++)
 		{
-			var clip = AnimationClip.parseAnimation(animations[i], geometry.bones);
+			var clip = THREE.AnimationClip.parseAnimation(animations[i], geometry.bones);
 			if(clip)
 			{
 				outputAnimations.push(clip);
@@ -449,7 +448,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 		// parse implicit morph animations
 		if(geometry.morphTargets)
 		{
-			var morphAnimationClips = AnimationClip.CreateClipsFromMorphTargetSequences(geometry.morphTargets, 10);
+			var morphAnimationClips = THREE.AnimationClip.CreateClipsFromMorphTargetSequences(geometry.morphTargets, 10);
 			outputAnimations = outputAnimations.concat(morphAnimationClips);
 		}
 
