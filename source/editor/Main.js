@@ -320,7 +320,6 @@ include("lib/draco/draco_encoder.js");
 include("lib/octree/octree-helper.min.js");
 
 include("lib/zlib.min.js");
-include("lib/stats.min.js");
 include("lib/jsblend.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");

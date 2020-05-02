@@ -311,20 +311,6 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.scene = null;
 
-	/**
-	 * Performance meter GUI.
-	 *
-	 * @attribute stats
-	 * @type {Stats}
-	 */
-	this.stats = new Stats();
-	this.stats.dom.style.position = "absolute";
-	this.stats.dom.style.display = "none";
-	this.stats.dom.style.left = "45px";
-	this.stats.dom.style.top = "5px";
-	this.stats.dom.style.zIndex = "0";
-	this.element.appendChild(this.stats.dom);
-
 	/** 
 	 * The tool bar contains the selector for the transform tools and object placing icons.
 	 *
@@ -715,9 +701,6 @@ SceneEditor.prototype.updateSettings = function()
 	this.transform.snap = Editor.settings.editor.snap;
 	this.transform.translationSnap = Editor.settings.editor.gridSpacing;
 	this.transform.rotationSnap = Editor.settings.editor.snapAngle;
-
-	// Stats
-	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
 };
 
 SceneEditor.prototype.destroy = function()
@@ -764,11 +747,6 @@ SceneEditor.prototype.update = function()
 {
 	this.mouse.update();
 	this.keyboard.update();
-
-	if(this.stats !== null)
-	{
-		this.stats.begin();
-	}
 
 	var isEditingObject = this.transform.update();
 
@@ -852,10 +830,6 @@ SceneEditor.prototype.update = function()
 
 	this.render();
 
-	if(this.stats !== null)
-	{
-		this.stats.end();
-	}
 };
 
 /**
@@ -1246,8 +1220,6 @@ SceneEditor.prototype.updateSelection = function()
 SceneEditor.prototype.updateVisibility = function()
 {
 	TabElement.prototype.updateVisibility.call(this);
-
-	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
 };
 
 SceneEditor.prototype.updateSize = function()
