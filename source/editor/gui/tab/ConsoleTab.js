@@ -37,7 +37,7 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @attribute enable
 	 * @type {boolean} 
 	 */
-	this.enabled = !Nunu.developmentMode();
+	this.enabled = true;
 
 	/**
 	 * Top menu bar displayed on top of the console.
@@ -181,6 +181,9 @@ ConsoleTab.prototype.useConsole = function(enabled)
 		{
 			self.error(arguments);
 			self.handlers.error.apply(null, arguments);
+
+			// Print stack trace to console for easier debug
+			console.trace();
 		};
 
 		window.console.clear = function()

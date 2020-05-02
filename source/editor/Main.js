@@ -400,6 +400,7 @@ include("source/editor/gui/form-snippet/LightShadowFormSnippet.js");
 include("source/editor/gui/form-snippet/ViewportFormSnippet.js");
 include("source/editor/gui/form-snippet/RendererConfigurationFormSnippet.js");
 
+include("source/editor/gui/tab/ProfilingTab.js");
 include("source/editor/gui/tab/ConsoleTab.js");
 include("source/editor/gui/tab/CodeEditor.js");
 include("source/editor/gui/tab/AboutTab.js");

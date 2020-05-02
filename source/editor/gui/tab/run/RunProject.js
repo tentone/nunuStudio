@@ -49,20 +49,6 @@ function RunProject(parent, closeable, container, index)
 	this.program = null;
 
 	/**
-	 * Performance meter GUI.
-	 *
-	 * @attribute stats
-	 * @type {Stats}
-	 */
-	this.stats = new Stats();
-	this.stats.dom.style.position = "absolute";
-	this.stats.dom.style.display = "none";
-	this.stats.dom.style.left = "0px";
-	this.stats.dom.style.top = "0px";
-	this.stats.dom.style.zIndex = "0";
-	this.element.appendChild(this.stats.dom);
-
-	/**
 	 * Fullscreen button used to toggle fullscreen mode.
 	 *
 	 * @attribute fullscreenButton
@@ -165,12 +151,6 @@ RunProject.prototype.isAttached = function(program)
 	return program === Editor.program;
 };
 
-
-RunProject.prototype.updateSettings = function()
-{
-	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
-};
-
 RunProject.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
@@ -238,11 +218,6 @@ RunProject.prototype.update = function()
 	this.mouse.update();
 	this.keyboard.update();
 
-	if(this.stats !== null)
-	{
-		this.stats.begin();
-	}
-
 	try
 	{
 		this.program.update();
@@ -265,11 +240,6 @@ RunProject.prototype.update = function()
 		console.warn("nunuStudio: Error while rendering program.", error);
 		this.close();
 		return;
-	}
-
-	if(this.stats !== null)
-	{
-		this.stats.end();
 	}
 };
 
@@ -367,13 +337,6 @@ RunProject.prototype.restartProgram = function()
 	this.stopProgram();
 	this.getProgram();
 	this.runProgram();
-};
-
-RunProject.prototype.updateVisibility = function()
-{
-	TabElement.prototype.updateVisibility.call(this);
-
-	this.stats.dom.style.display = (Editor.settings.general.showStats && this.visible) ? "block" : "none";
 };
 
 RunProject.prototype.updateSize = function()

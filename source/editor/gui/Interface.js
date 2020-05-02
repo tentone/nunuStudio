@@ -10,7 +10,7 @@
 function Interface()
 {
 	/**
-	 * Tab container.
+	 * Main tab container that has all the interface tabs.
 	 * 
 	 * @attribute tab
 	 * @type {TabContainer}
@@ -30,22 +30,18 @@ function Interface()
 	var rightTop = right.elementA;
 	var rightBottom = right.elementB;
 
-	// Asset
 	this.assetExplorer = leftBottom.addTab(AssetExplorer, false);
 
-	// Console
 	this.console = leftBottom.addTab(ConsoleTab, false);
 
-	// Animations
 	this.animation = leftBottom.addTab(AnimationTab, false);
 
-	// Tree view
-	this.tree = rightTop.addTab(TreeView, false)
-	
-	// Inspector
+	this.profiling = leftBottom.addTab(ProfilingTab, false);
+
+	this.tree = rightTop.addTab(TreeView, false);
+
 	this.inspector = rightBottom.addTab(InspectorContainer, false);
 
-	// Top Bar
 	this.menuBar = new MainMenu(DocumentBody);
 }
 

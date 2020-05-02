@@ -37,7 +37,7 @@ function MainMenu(parent)
 
 	// File
 	var fileMenu = new DropdownMenu(this);
-	fileMenu.setText("File");
+	fileMenu.setText(Locale.file);
 	fileMenu.size.set(120, this.size.y);
 	fileMenu.position.set(0, 0);
 

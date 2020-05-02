@@ -1,74 +1,50 @@
 "use strict";
 
-// TODO <NOT BEING USED>
-
+/**
+ * Profiling tab is used to measure the performance of the application booth in the editor and while it is running.
+ *
+ * Can measure FPS, CPU usage, memory etc, some metrics may only be available when the editor is running in desktop.
+ *
+ * @constructor
+ * @class ProfilingTab
+ * @extends {TabElement}
+ * @param parent
+ * @param closeable
+ * @param container
+ * @param index
+ */
 function ProfilingTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Profiling", Global.FILE_PATH + "icons/misc/speedometer.png");
+	TabElement.call(this, parent, closeable, container, index, Locale.profiling, Global.FILE_PATH + "icons/misc/speedometer.png");
 
 	// Canvas
 	this.canvas = new Canvas();
-	
-	// Form
-	this.form = new TableForm();
-	this.form.setAutoSize(false);
-	this.form.addText("Renderer");
-	this.form.nextRow();
-
-	this.form.addText("Draw Calls");
-	this.calls = this.form.addText("");
-	this.form.nextRow();
-
-	this.form.addText("Faces");
-	this.faces = this.form.addText("");
-	this.form.nextRow();
-
-	this.form.addText("Frame");
-	this.frame = this.form.addText("");
-	this.form.nextRow();
-
-	this.form.addText("Points");
-	this.points = this.form.addText("");
-	this.form.nextRow();
-
-	this.form.addText("Vertices");
-	this.vertices = this.form.addText("");
-	this.form.nextRow();
-
-	// Container
-	this.dual = new DualContainer(this);
-	this.dual.tabPosition = 0.2;
-	this.dual.attachA(this.canvas);
-	this.dual.attachA(this.form);
 }
 
 ProfilingTab.prototype = Object.create(TabElement.prototype);
 
 ProfilingTab.prototype.update = function()
 {
+	// Renderer info
 	var tabs = Editor.gui.tab.getActiveTab();
-	
 	for(var i = 0; i < tabs.length; i++)
 	{
 		var tab = tabs[i];
-
-		if(tab.renderer !== undefined)
+		var renderer = tab.renderer || (tab.canvas ? tab.canvas.renderer : undefined);
+		if(renderer !== undefined)
 		{
-			var info = tab.renderer.info;
-
-			this.calls.setText(info.render.calls);
-			this.faces.setText(info.render.faces);
-			this.frame.setText(info.render.frame);
-			this.points.setText(info.render.points);
-			this.vertices.setText(info.render.vertices);
+			var info = renderer.info;
+			// TODO <CHANGE THIS>
+			//console.log(info);
 		}
 	}
+
+	// System metrics
+	// TODO <ADD CODE HERE>
 };
 
 ProfilingTab.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
-	
-	this.dual.size.copy(this.size);
-	this.dual.updateInterface();
+
 };
