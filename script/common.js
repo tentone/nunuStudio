@@ -26,12 +26,9 @@ module.exports = {
 
 const CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar";
 
-
-// Update the version of the library in the package.json (update last digit)
-function updateVersion(major, minor, revision)
+// Update the version of the library in the package.json and return updated data
+function updateVersion(data, major, minor, revision)
 {
-	const data = JSON.parse(readFile(SOURCE_PATH + "package.json"));
-
 	const subversions = data.version.split('.');
 	subversions[0] = (Number.parseInt(subversions[0]) + major).toString();
 	subversions[1] = (Number.parseInt(subversions[1]) + minor).toString();
@@ -39,7 +36,7 @@ function updateVersion(major, minor, revision)
 
 	data.version = subversions.join('.');
 
-	writeFile(SOURCE_PATH + "package.json", JSON.stringify(data, null, "\t"));
+	return data;
 }
 
 // Minify and optimize using closure
