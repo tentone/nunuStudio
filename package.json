@@ -2,7 +2,7 @@
 	"name": "nunu-studio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "index.html",
-	"version": "0.97.3",
+	"version": "0.97.4",
 	"author": "Tentone",
 	"license": "MIT",
 	"homepage": "https://www.nunustudio.org",
@@ -13,11 +13,11 @@
 		"serve": "http-server . -p 8080 --cors -o http://localhost:8080/index.html",
 		"serve-page": "http-server ./docs -p 8081 --cors -o http://localhost:8081/index.html",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
-		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
 		"update": "cd script && node update.js",
 		"build": "cd script && node build.js",
-		"release": "cd script && node release.js",
-		"build-win": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
+		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
+		"release": "cd script && node build.js && node release.js",
+		"build-win": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
 		"build-macos": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks mac-x64 ./docs/editor",
 		"build-linux": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks linux-x64 ./docs/editor",
 		"publish-npm": "npm run build && npm run docs && npm publish --access public ."
@@ -36,11 +36,9 @@
 	"bugs": {
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
-	"dependencies": {
-		"cordova": "~9.0.0",
-		"request": "^2.88.0"
-	},
+	"dependencies": {},
 	"devDependencies": {
+		"cordova": "~9.0.0",
 		"nwjs-builder-phoenix": "^1.15.0",
 		"http-server": "0.12.3",
 		"yuidocjs": "^0.10.2",
