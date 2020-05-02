@@ -3,14 +3,14 @@
 /**
  * Object utils is a collection of methods to apply operations to Object3D instances.
  *
+ * @static
  * @class ObjectUtils
  * @module Utils
- * @static
  */
 function ObjectUtils(){}
 
 /**
- * Get object tree root.
+ * Get object tree root by traversing the tree upwards.
  *
  * For a object placed inside a running scene the root is always the program.
  *
@@ -31,12 +31,14 @@ ObjectUtils.getRoot = function(obj)
 };
 
 /**
- * Scale and center object into a unitary box, using its geometry.
+ * Scale and center object into a unitary box.
+ *
+ * Useful to scale objects to fit into a known size box.
  * 
- * @method scaleAndCenterObject
+ * @method centerUnitary
  * @param {Object3D} object Object to be positioned and scaled.
  */
-ObjectUtils.scaleAndCenterObject = function(object)
+ObjectUtils.centerUnitary = function(object)
 {
 	var box = ObjectUtils.calculateBoundingBox(object);
 	
@@ -59,9 +61,11 @@ ObjectUtils.scaleAndCenterObject = function(object)
 /**
  * Calculates a bouding box for an object considering all its children.
  *
+ * Includes booth the object and all of its children, the box is ajusted to world space coordinates.
+ *
  * @method calculateBoudingBox
- * @param {Object3D} object
- * @return {Box3} Bouding box calculated.
+ * @param {THREE.Object3D} object Root object to be traversed.
+ * @return {THREE.Box3} Bouding box of the object considering all of its children.
  */
 ObjectUtils.calculateBoundingBox = function(object)
 {
@@ -69,16 +73,35 @@ ObjectUtils.calculateBoundingBox = function(object)
 
 	object.traverse(function(children)
 	{
-		if(children.geometry !== undefined)
+		var boundingBox = null;
+
+		// Sprites
+		if(children.isSprite === true)
+		{
+			var position = new THREE.Vector3();
+			children.getWorldPosition(position);
+			boundingBox = new THREE.Box3(position.clone().subScalar(0.5), position.clone().addScalar(0.5));
+		}
+		// Mesh, Points, Lines
+		else if(children.geometry !== undefined)
 		{
 			children.geometry.computeBoundingBox();
-			var boundingBox = children.geometry.boundingBox;
+			boundingBox = children.geometry.boundingBox.clone();
+			boundingBox.applyMatrix4(children.matrixWorld);
 
+			children.geometry.computeBoundingBox();
+			var boundingBox = children.geometry.boundingBox;
+		}
+
+		// Update bouding box size
+		if(boundingBox !== null)
+		{
+			// First box
 			if(box === null)
 			{
-				box = boundingBox.clone();
+				box = boundingBox;
 			}
-			// Ajust box size
+			// Ajust box size to contain new box
 			else
 			{
 				if(boundingBox.min.x < box.min.x) {box.min.x = boundingBox.min.x;}
@@ -109,15 +132,14 @@ ObjectUtils.centerGeometryOrigin = function(object)
 			children.geometry.computeBoundingBox();
 
 			var box = children.geometry.boundingBox.clone();
+
 			var center = box.getCenter(new THREE.Vector3());
+			children.position.add(center);
 
 			// Recenter geometry
 			var matrix = new THREE.Matrix4();
 			matrix.makeTranslation(-center.x, -center.y, -center.z);
 			children.geometry.applyMatrix4(matrix);
-
-			// Recenter children
-			children.position.add(center);
 		}
 	});
 };
