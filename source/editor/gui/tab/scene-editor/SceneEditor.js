@@ -487,6 +487,39 @@ function SceneEditor(parent, closeable, container, index)
 	};
 
 	/**
+	 * Button to toggle snap to grid functionality
+	 *
+	 * @method snapGridButton
+	 * @type {ButtonImage}
+	 */
+	this.snapGridButton = new ButtonImage(this);
+	this.snapGridButton.position.set(5, 40);
+	this.snapGridButton.size.set(30, 30);
+	this.snapGridButton.setImage(Global.FILE_PATH + "icons/misc/" + (Editor.settings.editor.snap ? "grid" : "freemove") + ".png");
+	this.snapGridButton.setAltText(Locale.toggleSnapToGrid);
+	this.snapGridButton.setImageScale(0.8, 0.8);
+	this.snapGridButton.updateSize();
+	this.snapGridButton.updatePosition(Element.BOTTOM_RIGHT);
+	this.snapGridButton.element.style.backgroundColor = "#333333";
+	this.snapGridButton.element.style.borderRadius = "5px";
+	this.snapGridButton.element.style.opacity = 0.5;
+	this.snapGridButton.element.onmouseenter = function()
+	{
+		this.style.opacity = 1.0;
+	};
+	this.snapGridButton.element.onmouseleave = function()
+	{
+		this.style.opacity = 0.5;
+	};
+	this.snapGridButton.setOnClick(function()
+	{
+		Editor.settings.editor.snap = !Editor.settings.editor.snap;
+		self.transform.snap = Editor.settings.editor.snap;
+
+		self.snapGridButton.setImage(Global.FILE_PATH + "icons/misc/" + (Editor.settings.editor.snap ? "grid" : "freemove") + ".png");
+	});
+
+	/**
 	 * Button to toggle the camera mode between ORTHOGRAPHIC and PERSPECTIVE.
 	 *
 	 * @method cameraButton
