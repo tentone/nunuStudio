@@ -934,7 +934,7 @@ SceneEditor.prototype.render = function()
 		viewport.update();
 		viewport.enable(renderer);
 
-		// Preview selected camera
+		// Preview camera
 		if(Editor.selection[0] instanceof PerspectiveCamera || Editor.selection[0] instanceof OrthographicCamera)
 		{
 			renderer.clear(true, true, true);
@@ -944,10 +944,11 @@ SceneEditor.prototype.render = function()
 			camera.setupRenderer(renderer);
 			camera.render(renderer, this.scene);
 		}
-		// Cube camera
+		// Preview cube camera
 		else if(Editor.selection[0] instanceof CubeCamera)
 		{
 			var cameras = Editor.selection[0].cameras;
+			var self = this;
 
 			function renderCamera(index, x, y, w, h)
 			{
@@ -956,18 +957,19 @@ SceneEditor.prototype.render = function()
 				renderer.clear(true, true, true);
 
 				cameras[index].updateMatrixWorld();
-				cameras[index].render(renderer, this.scene);
+				cameras[index].render(renderer, self.scene);
 			}
 
-			var size = height / 3;
-			x += width - size * 4;
-			
+			var size = viewport.viewport.w / 3;
+			var x = viewport.viewport.x;
+			var y = viewport.viewport.y;
+
 			renderCamera(CubeTexture.LEFT, x, y + size, size, size);
 			renderCamera(CubeTexture.FRONT, x + size, y + size, size, size);
 			renderCamera(CubeTexture.RIGHT, x + size * 2, y + size, size, size);
 			renderCamera(CubeTexture.BACK, x + size * 3, y + size, size, size);
-			renderCamera(CubeTexture.TOP, x + size, y + size * 2, size, size);
-			renderCamera(CubeTexture.BOTTOM, x + size, y, size, size);
+			renderCamera(CubeTexture.TOP, x + size, y, size, size);
+			renderCamera(CubeTexture.BOTTOM, x + size, y + size * 2, size, size);
 		}
 		// Preview all cameras in use
 		else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
