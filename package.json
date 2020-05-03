@@ -10,17 +10,19 @@
 		"doc": "docs"
 	},
 	"scripts": {
+		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"serve": "http-server . -p 8080 --cors -o http://localhost:8080/index.html",
 		"serve-page": "http-server ./docs -p 8081 --cors -o http://localhost:8081/index.html",
-		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"update": "cd script && node update.js",
 		"build": "cd script && node build.js",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
-		"release": "cd script && node build.js && node release.js",
+		"npm": "npm run build && npm run docs && npm publish --access public .",
+		"release-web": "cd script && node build.js && node release.js",
+		"release-desktop": "cd script && node build.js && npm run package-desktop",
+		"package-desktop": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./docs/editor",
 		"build-win": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
-		"build-macos": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks mac-x64 ./docs/editor",
-		"build-linux": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks linux-x64 ./docs/editor",
-		"npm": "npm run build && npm run docs && npm publish --access public ."
+		"build-macos": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks mac-x64 ./docs/editor",
+		"build-linux": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks linux-x64 ./docs/editor"
 	},
 	"repository": {
 		"type": "git",
