@@ -2,7 +2,7 @@
 	"name": "nunu-studio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "index.html",
-	"version": "0.97.4",
+	"version": "0.97.5",
 	"author": "Tentone",
 	"license": "MIT",
 	"homepage": "https://www.nunustudio.org",
@@ -20,7 +20,7 @@
 		"build-win": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
 		"build-macos": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks mac-x64 ./docs/editor",
 		"build-linux": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks linux-x64 ./docs/editor",
-		"publish-npm": "npm run build && npm run docs && npm publish --access public ."
+		"npm": "npm run build && npm run docs && npm publish --access public ."
 	},
 	"repository": {
 		"type": "git",
