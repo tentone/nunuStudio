@@ -313,15 +313,15 @@ function EditorSettingsTab(parent, closeable, container, index)
 
 	// Enable camera preview
 	this.form.addText("Preview size");
-	this.cameraPreviewPercentage = new Slider(this.form);
-	this.cameraPreviewPercentage.size.set(120, 18);
-	this.cameraPreviewPercentage.setRange(0.05, 0.7);
-	this.cameraPreviewPercentage.setStep(0.05);
-	this.cameraPreviewPercentage.setOnChange(function()
+	this.cameraPreviewSize = new Slider(this.form);
+	this.cameraPreviewSize.size.set(120, 18);
+	this.cameraPreviewSize.setRange(1, 600);
+	this.cameraPreviewSize.setStep(0.05);
+	this.cameraPreviewSize.setOnChange(function()
 	{
-		Editor.settings.editor.cameraPreviewPercentage = self.cameraPreviewPercentage.getValue();
+		Editor.settings.editor.cameraPreviewSize = self.cameraPreviewSize.getValue();
 	});
-	this.form.add(this.cameraPreviewPercentage);
+	this.form.add(this.cameraPreviewSize);
 	this.form.nextRow();
 
 	// Navigation
@@ -396,7 +396,7 @@ EditorSettingsTab.prototype.activate = function()
 
 	// Camera preview
 	this.cameraPreviewEnabled.setValue(Editor.settings.editor.cameraPreviewEnabled);
-	this.cameraPreviewPercentage.setValue(Editor.settings.editor.cameraPreviewPercentage);
+	this.cameraPreviewSize.setValue(Editor.settings.editor.cameraPreviewSize);
 	this.cameraPreviewPosition.setValue(Editor.settings.editor.cameraPreviewPosition);
 
 	// Transformations

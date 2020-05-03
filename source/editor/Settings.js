@@ -71,7 +71,7 @@ Settings.prototype.loadDefault = function()
 		gridFixed: false,
 		axisEnabled: true,
 		cameraPreviewEnabled: true,
-		cameraPreviewPercentage: 0.35,
+		cameraPreviewSize: 200,
 		cameraPreviewPosition: Viewport.BOTTOM_RIGHT,
 		lockMouse: true,
 		transformationSpace: "world",

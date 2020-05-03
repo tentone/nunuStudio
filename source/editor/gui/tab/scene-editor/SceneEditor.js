@@ -924,11 +924,13 @@ SceneEditor.prototype.render = function()
 	{
 		renderer.setScissorTest(true);
 
+		var previewRatio = 16.0 / 9.0;
+
 		var viewport = new Viewport();
 		viewport.width = width;
 		viewport.height = height;
 		viewport.offset = new THREE.Vector2(10, 10);
-		viewport.size = new THREE.Vector2(Editor.settings.editor.cameraPreviewPercentage * width, Editor.settings.editor.cameraPreviewPercentage * height);
+		viewport.size = new THREE.Vector2(Editor.settings.editor.cameraPreviewSize * previewRatio, Editor.settings.editor.cameraPreviewSize);
 		viewport.anchor = Editor.settings.editor.cameraPreviewPosition;
 		viewport.mode = Viewport.ABSOLUTE;
 		viewport.update();
@@ -959,6 +961,10 @@ SceneEditor.prototype.render = function()
 				cameras[index].updateMatrixWorld();
 				cameras[index].render(renderer, self.scene);
 			}
+
+			// Change viewport to 4:3 ratio
+			viewport.size = new THREE.Vector2(Editor.settings.editor.cameraPreviewSize * (4.0 / 3.0), Editor.settings.editor.cameraPreviewSize);;
+			viewport.update();
 
 			var size = viewport.viewport.w / 3;
 			var x = viewport.viewport.x;
