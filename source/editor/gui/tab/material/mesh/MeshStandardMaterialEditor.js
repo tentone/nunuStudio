@@ -6,110 +6,6 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	// Skinning
-	this.skinning = new CheckBox(this.form);
-	this.form.addText(Locale.skinning);
-	this.skinning.size.set(18, 18);
-	this.skinning.updateInterface();
-	this.skinning.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
-	});
-	this.form.add(this.skinning);
-	this.form.nextRow();
-
-	// Morph targets
-	this.morphTargets = new CheckBox(this.form);
-	this.form.addText(Locale.morphTargets);
-	this.morphTargets.size.set(18, 18);
-	this.morphTargets.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
-	});
-	this.form.add(this.morphTargets);
-	this.form.nextRow();
-
-	// Wireframe
-	this.wireframe = new CheckBox(this.form);
-	this.form.addText(Locale.wireframe);
-	this.wireframe.size.set(18, 18);
-	this.wireframe.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
-	});
-	this.form.add(this.wireframe);
-	this.form.nextRow();
-
-	// Wireframe line cap
-	this.form.addText(Locale.wireframeLinecap);
-	this.wireframeLinecap = new DropdownList(this.form);
-	this.wireframeLinecap.size.set(100, 18);
-	this.wireframeLinecap.addValue("Butt", "butt");
-	this.wireframeLinecap.addValue("Round", "round");
-	this.wireframeLinecap.addValue("Square", "square");
-	this.wireframeLinecap.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.material, "wireframeLinecap", self.wireframeLinecap.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.wireframeLinecap);
-	this.form.nextRow();
-
-	// Wireframe line cap
-	this.form.addText(Locale.wireframeLinejoin);
-	this.wireframeLinejoin = new DropdownList(this.form);
-	this.wireframeLinejoin.size.set(100, 18);
-	this.wireframeLinejoin.addValue("Bevel", "bevel");
-	this.wireframeLinejoin.addValue("Round", "round");
-	this.wireframeLinejoin.addValue("Miter", "miter");
-	this.wireframeLinejoin.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.material, "wireframeLinejoin", self.wireframeLinejoin.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.wireframeLinejoin);
-	this.form.nextRow();
-
-	// Wireframe line width
-	this.form.addText(Locale.scale);
-	this.wireframeLinewidth = new NumberBox(this.form);
-	this.wireframeLinewidth.size.set(60, 18);
-	this.wireframeLinewidth.setStep(0.1);
-	this.wireframeLinewidth.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.material, "wireframeLinewidth", self.wireframeLinewidth.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.wireframeLinewidth);
-	this.form.nextRow();
-
-	// Shading mode
-	this.form.addText(Locale.shading);
-	this.flatShading = new DropdownList(this.form);
-	this.flatShading.position.set(100, 85);
-	this.flatShading.size.set(100, 18);
-	this.flatShading.addValue(Locale.smooth, false);
-	this.flatShading.addValue(Locale.flat, true);
-	this.flatShading.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.flatShading);
-	this.form.nextRow();
-
-	// Color
-	this.form.addText(Locale.color);
-	this.color = new ColorChooser(this.form);
-	this.color.size.set(100, 18);
-	this.color.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.color);
-	this.form.nextRow();
-
 	// Roughness
 	this.form.addText(Locale.roughness);
 	this.roughness = new Slider(this.form);
@@ -397,14 +293,6 @@ MeshStandardMaterialEditor.prototype.attach = function(material, asset)
 {
 	MeshMaterialEditor.prototype.attach.call(this, material, asset);
 
-	this.skinning.setValue(material.skinning);
-	this.morphTargets.setValue(material.morphTargets);
-	this.wireframe.setValue(material.wireframe);
-	this.wireframeLinecap.setValue(material.wireframeLinecap);
-	this.wireframeLinejoin.setValue(material.wireframeLinejoin);
-	this.wireframeLinewidth.setValue(material.wireframeLinewidth);
-	this.flatShading.setValue(material.flatShading);
-	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.roughness.setValue(material.roughness);
 	this.metalness.setValue(material.metalness);
 	this.map.setValue(material.map);
