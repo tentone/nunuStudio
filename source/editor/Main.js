@@ -217,6 +217,9 @@ include("source/core/objects/controls/FirstPersonControls.js");
 include("source/core/objects/Program.js");
 include("source/core/objects/Scene.js");
 
+include("source/core/utils/worker/WorkerTask.js");
+include("source/core/utils/worker/WorkerPool.js");
+
 include("source/core/utils/binary/Base64Utils.js");
 include("source/core/utils/binary/ArraybufferUtils.js");
 include("source/core/utils/binary/BufferUtils.js");

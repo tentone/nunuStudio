@@ -38,7 +38,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.previewForm.setAutoSize(false);
 
 	// Configuration text
-	this.previewForm.addText("Configuration");
+	this.previewForm.addText(Locale.configuration);
 	this.previewForm.nextRow();
 
 	// Form
@@ -72,7 +72,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Tone mapping
-	this.form.addText(Locale.depthTest);
+	this.form.addText(Locale.toneMapped);
 	this.toneMapped = new CheckBox(this.form);
 	this.toneMapped.size.set(18, 18);
 	this.toneMapped.setOnChange(function()
@@ -82,7 +82,7 @@ function MaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.toneMapped);
 	this.form.nextRow();
-	
+
 	// Test depth
 	this.form.addText(Locale.depthTest);
 	this.depthTest = new CheckBox(this.form);
@@ -107,7 +107,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.depthWrite);
 	this.form.nextRow();
 
-	// Depth mode
+	// Depth func
 	this.form.addText(Locale.depthMode);
 	this.depthFunc = new DropdownList(this.form);
 	this.depthFunc.size.set(100, 18);
@@ -136,6 +136,30 @@ function MaterialEditor(parent, closeable, container, index)
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.transparent);
+	this.form.nextRow();
+
+	// Dithering
+	this.form.addText(Locale.dithering);
+	this.dithering = new CheckBox(this.form);
+	this.dithering.size.set(18, 18);
+	this.dithering.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "dithering", self.dithering.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.dithering);
+	this.form.nextRow();
+
+	// Premultiplied Alpha
+	this.form.addText(Locale.premultipliedAlpha);
+	this.premultipliedAlpha = new CheckBox(this.form);
+	this.premultipliedAlpha.size.set(18, 18);
+	this.premultipliedAlpha.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "premultipliedAlpha", self.premultipliedAlpha.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.premultipliedAlpha);
 	this.form.nextRow();
 
 	// Opacity level
@@ -181,6 +205,68 @@ function MaterialEditor(parent, closeable, container, index)
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.blending);
+	this.form.nextRow();
+
+	// Premultiplied Alpha
+	this.form.addText(Locale.premultipliedAlpha);
+	this.premultipliedAlpha = new CheckBox(this.form);
+	this.premultipliedAlpha.size.set(18, 18);
+	this.premultipliedAlpha.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "premultipliedAlpha", self.premultipliedAlpha.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.premultipliedAlpha);
+	this.form.nextRow();
+
+	// Vertex Colors
+	this.form.addText(Locale.vertexColors);
+	this.vertexColors = new CheckBox(this.form);
+	this.vertexColors.size.set(18, 18);
+	this.vertexColors.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "vertexColors", self.vertexColors.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.vertexColors);
+	this.form.nextRow();
+
+	// Polygon Offset
+	this.form.addText(Locale.polygonOffset);
+	this.polygonOffset = new CheckBox(this.form);
+	this.polygonOffset.size.set(18, 18);
+	this.polygonOffset.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "polygonOffset", self.polygonOffset.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.polygonOffset);
+	this.form.nextRow();
+
+	// Polygon Offset Factor
+	this.form.addText(Locale.polygonOffsetFactor);
+	this.polygonOffsetFactor = new NumberBox(this.form);
+	this.polygonOffsetFactor.size.set(60, 18);
+	this.polygonOffsetFactor.setStep(0.001);
+	this.polygonOffsetFactor.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "polygonOffsetFactor", self.polygonOffsetFactor.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.polygonOffsetFactor);
+	this.form.nextRow();
+
+	// Polygon Offset Units
+	this.form.addText(Locale.polygonOffsetUnits);
+	this.polygonOffsetUnits = new NumberBox(this.form);
+	this.polygonOffsetUnits.size.set(60, 18);
+	this.polygonOffsetUnits.setStep(0.001);
+	this.polygonOffsetUnits.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "polygonOffsetUnits", self.polygonOffsetUnits.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.polygonOffsetUnits);
 	this.form.nextRow();
 
 	// Preview
@@ -236,6 +322,13 @@ MaterialEditor.prototype.attach = function(material, asset)
 	this.opacity.setValue(material.opacity);
 	this.alphaTest.setValue(material.alphaTest);
 	this.blending.setValue(material.blending);
+	this.premultipliedAlpha.setValue(material.premultipliedAlpha);
+	this.dithering.setValue(material.dithering);
+	this.toneMapped.setValue(material.toneMapped);
+	this.vertexColors.setValue(material.vertexColors);
+	this.polygonOffset.setValue(material.polygonOffset);
+	this.polygonOffsetFactor.setValue(material.polygonOffsetFactor);
+	this.polygonOffsetUnits.setValue(material.polygonOffsetUnits);
 };
 
 MaterialEditor.prototype.isAttached = function(material)

@@ -9,7 +9,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	// Preview configuration
 	this.previewForm = new TableForm();
 	this.previewForm.setAutoSize(false);
-	this.previewForm.addText("Configuration");
+	this.previewForm.addText(Locale.configuration);
 	this.previewForm.nextRow();
 	
 	// Canvas

@@ -106,8 +106,7 @@ MeshMaterialEditor.prototype = Object.create(MaterialEditor.prototype)
 MeshMaterialEditor.prototype.attach = function(material, asset)
 {
 	MaterialEditor.prototype.attach.call(this, material, asset);
-	
-	this.sky.visible = material.envMap === null;
 
+	this.sky.visible = material.envMap === null;
 	this.mesh.material = material;
 };

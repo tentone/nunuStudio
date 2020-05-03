@@ -40,6 +40,49 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
+	// Wireframe line cap
+	this.form.addText(Locale.wireframeLinecap);
+	this.wireframeLinecap = new DropdownList(this.form);
+	this.wireframeLinecap.size.set(100, 18);
+	this.wireframeLinecap.addValue("Butt", "butt");
+	this.wireframeLinecap.addValue("Round", "round");
+	this.wireframeLinecap.addValue("Square", "square");
+	this.wireframeLinecap.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "wireframeLinecap", self.wireframeLinecap.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.wireframeLinecap);
+	this.form.nextRow();
+
+	// Wireframe line cap
+	this.form.addText(Locale.wireframeLinejoin);
+	this.wireframeLinejoin = new DropdownList(this.form);
+	this.wireframeLinejoin.size.set(100, 18);
+	this.wireframeLinejoin.addValue("Bevel", "bevel");
+	this.wireframeLinejoin.addValue("Round", "round");
+	this.wireframeLinejoin.addValue("Miter", "miter");
+	this.wireframeLinejoin.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "wireframeLinejoin", self.wireframeLinejoin.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.wireframeLinejoin);
+	this.form.nextRow();
+
+	// Wireframe line width
+	this.form.addText(Locale.scale);
+	this.wireframeLinewidth = new NumberBox(this.form);
+	this.wireframeLinewidth.size.set(60, 18);
+	this.wireframeLinewidth.setStep(0.1);
+	this.wireframeLinewidth.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "wireframeLinewidth", self.wireframeLinewidth.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.wireframeLinewidth);
+	this.form.nextRow();
+
 	// Shading mode
 	this.form.addText(Locale.shading);
 	this.flatShading = new DropdownList(this.form);
@@ -203,6 +246,9 @@ MeshLambertMaterialEditor.prototype.attach = function(material, asset)
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);
 	this.wireframe.setValue(material.wireframe);
+	this.wireframeLinecap.setValue(material.wireframeLinecap);
+	this.wireframeLinejoin.setValue(material.wireframeLinejoin);
+	this.wireframeLinewidth.setValue(material.wireframeLinewidth);
 	this.flatShading.setValue(material.flatShading);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.map.setValue(material.map);
