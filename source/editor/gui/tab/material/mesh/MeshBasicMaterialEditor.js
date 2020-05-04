@@ -67,6 +67,31 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.aoMapIntensity);
 	this.form.nextRow();
 
+	// Ligh map
+	this.form.addText(Locale.lightMap);
+	this.lightMap = new TextureForm(this.form);
+	this.lightMap.size.set(0, 100);
+	this.lightMap.setOnChange(function(file)
+	{
+		Editor.addAction(new ChangeAction(self.material, "lightMap", self.lightMap.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.lightMap);
+	this.form.nextRow();
+
+	// Ligh map intensity
+	this.form.addText(Locale.intensity);
+	this.lightMapIntensity = new NumberBox(this.form);
+	this.lightMapIntensity.size.set(60, 18);
+	this.lightMapIntensity.setStep(0.1);
+	this.lightMapIntensity.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "lightMapIntensity", self.lightMapIntensity.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.lightMapIntensity);
+	this.form.nextRow();
+
 	// Environment map
 	this.form.addText(Locale.environmentMap);
 	this.envMap = new CubeTextureBox(this.form);
@@ -118,6 +143,31 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.refractionRatio);
+
+	// Ambient Occlusion map
+	this.form.addText(Locale.ambientOcclusion);
+	this.aoMap = new TextureForm(this.form);
+	this.aoMap.size.set(0, 100);
+	this.aoMap.setOnChange(function(file)
+	{
+		Editor.addAction(new ChangeAction(self.material, "aoMap", self.aoMap.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.aoMap);
+	this.form.nextRow();
+
+	// Ambient Occlusion
+	this.form.addText(Locale.intensity);
+	this.aoMapIntensity = new NumberBox(this.form);
+	this.aoMapIntensity.size.set(60, 18);
+	this.aoMapIntensity.setStep(0.05);
+	this.aoMapIntensity.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "aoMapIntensity", self.aoMapIntensity.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.aoMapIntensity);
+	this.form.nextRow();
 }
 
 MeshBasicMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
@@ -131,8 +181,12 @@ MeshBasicMaterialEditor.prototype.attach = function(material, asset)
 	this.specularMap.setValue(material.specularMap);
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
+	this.lightMap.setValue(material.lightMap);
+	this.lightMapIntensity.setValue(material.lightMapIntensity);
 	this.envMap.setValue(material.envMap);
 	this.combine.setValue(material.combine);
 	this.reflectivity.setValue(material.reflectivity || 0);
 	this.refractionRatio.setValue(material.refractionRatio || 0);
+	this.aoMap.setValue(material.aoMap);
+	this.aoMapIntensity.setValue(material.aoMapIntensity);
 };

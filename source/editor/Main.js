@@ -500,6 +500,7 @@ include("source/editor/gui/tab/material/mesh/MeshBasicMaterialEditor.js");
 include("source/editor/gui/tab/material/mesh/MeshMatcapMaterialEditor.js");
 include("source/editor/gui/tab/material/mesh/MeshStandardMaterialEditor.js");
 include("source/editor/gui/tab/material/mesh/MeshPhysicalMaterialEditor.js");
+include("source/editor/gui/tab/material/mesh/MeshToonMaterialEditor.js");
 
 include("source/editor/gui/tab/texture/CubeTextureEditor.js");
 include("source/editor/gui/tab/texture/TextureEditor.js");

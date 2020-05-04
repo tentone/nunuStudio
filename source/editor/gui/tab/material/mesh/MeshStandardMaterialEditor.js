@@ -211,6 +211,31 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.emissiveIntensity);
 	this.form.nextRow();
 
+	// Ligh map
+	this.form.addText(Locale.lightMap);
+	this.lightMap = new TextureForm(this.form);
+	this.lightMap.size.set(0, 100);
+	this.lightMap.setOnChange(function(file)
+	{
+		Editor.addAction(new ChangeAction(self.material, "lightMap", self.lightMap.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.lightMap);
+	this.form.nextRow();
+
+	// Ligh map intensity
+	this.form.addText(Locale.intensity);
+	this.lightMapIntensity = new NumberBox(this.form);
+	this.lightMapIntensity.size.set(60, 18);
+	this.lightMapIntensity.setStep(0.1);
+	this.lightMapIntensity.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.material, "lightMapIntensity", self.lightMapIntensity.getValue()));
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.lightMapIntensity);
+	this.form.nextRow();
+
 	// Alpha map
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
@@ -309,6 +334,8 @@ MeshStandardMaterialEditor.prototype.attach = function(material, asset)
 	this.emissive.setValue(material.emissive.r, material.emissive.g, material.emissive.b);
 	this.emissiveIntensity.setValue(material.emissiveIntensity);
 	this.emissiveMap.setValue(material.emissiveMap);
+	this.lightMap.setValue(material.lightMap);
+	this.lightMapIntensity.setValue(material.lightMapIntensity);
 	this.alphaMap.setValue(material.alphaMap);
 	this.envMap.setValue(material.envMap);
 	this.envMapIntensity.setValue(material.envMapIntensity);
