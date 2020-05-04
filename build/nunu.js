@@ -857,20 +857,15 @@ NunuApp.prototype.run = function() {
     console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
   } else {
     this.renderer = this.program.rendererConfig.createRenderer(this.canvas);
-    this.keyboard = new Keyboard;
-    this.mouse = new Mouse;
-    this.mouse.setCanvas(this.canvas);
     this.program.app = this;
     this.program.defaultCamera = new PerspectiveCamera(60, 1, .1, 1E5);
     this.program.defaultCamera.position.set(0, 5, -5);
     this.program.setRenderer(this.renderer);
-    this.program.setMouseKeyboard(this.mouse, this.keyboard);
     this.program.initialize();
     if (this.program.lockPointer) {
-      var a = this.canvas;
-      a.requestPointerLock = a.requestPointerLock || a.mozRequestPointerLock || a.webkitRequestPointerLock;
-      this.events.add(a, "click", function() {
-        a.requestPointerLock && a.requestPointerLock();
+      var a = this.mouse;
+      this.events.add(this.canvas, "click", function() {
+        a.setLock(!0);
       });
     }
     var d = this;
@@ -915,8 +910,6 @@ NunuApp.prototype.loadProgramAsync = function(a, d, h) {
   }, h);
 };
 NunuApp.prototype.update = function() {
-  this.mouse.update();
-  this.keyboard.update();
   this.program.update();
   this.program.render(this.renderer);
 };
@@ -924,8 +917,6 @@ NunuApp.prototype.exit = function() {
   this.events.destroy();
   null !== this.program && (this.program.dispose(), this.program = null);
   null !== this.renderer && (this.renderer.dispose(), this.renderer = null);
-  null !== this.mouse && (this.mouse.dispose(), this.mouse = null);
-  null !== this.keyboard && (this.keyboard.dispose(), this.keyboard = null);
   if (void 0 !== this.onExit) {
     this.onExit();
   }
@@ -7189,27 +7180,27 @@ NunuApp.prototype.toggleFullscreen = function(a) {
       }
     }
   }
-  function Xb(a, b) {
-    this.object = a;
-    void 0 === b && (b = 16776960);
-    a = new Uint16Array([0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7]);
-    var k = new Float32Array(24), c = new M;
-    c.setIndex(new K(a, 1));
-    c.setAttribute("position", new K(k, 3));
-    Da.call(this, c, new ya({color:b, toneMapped:!1}));
+  function Xb(k, a) {
+    this.object = k;
+    void 0 === a && (a = 16776960);
+    k = new Uint16Array([0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7]);
+    var b = new Float32Array(24), c = new M;
+    c.setIndex(new K(k, 1));
+    c.setAttribute("position", new K(b, 3));
+    Da.call(this, c, new ya({color:a, toneMapped:!1}));
     this.type = "BoxHelper";
     this.matrixAutoUpdate = !1;
     this.update();
   }
-  function He(a, b) {
+  function He(k, a) {
     this.type = "Box3Helper";
-    this.box = a;
-    b = b || 16776960;
-    a = new Uint16Array([0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7]);
-    var k = new M;
-    k.setIndex(new K(a, 1));
-    k.setAttribute("position", new R([1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1], 3));
-    Da.call(this, k, new ya({color:b, toneMapped:!1}));
+    this.box = k;
+    a = a || 16776960;
+    k = new Uint16Array([0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7]);
+    var b = new M;
+    b.setIndex(new K(k, 1));
+    b.setAttribute("position", new R([1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1], 3));
+    Da.call(this, b, new ya({color:a, toneMapped:!1}));
     this.type = "Box3Helper";
     this.geometry.computeBoundingSphere();
   }
@@ -21407,7 +21398,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
         case "|":
           if (!e) {
             if (h || p) {
-              q = ! 0;
+              q = !0;
               break;
             }
             h = p = !0;
@@ -21432,7 +21423,7 @@ THREE.TTFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
               q = !0;
               break;
             }
-            h = ! 0;
+            h = !0;
           }
           c.offset = f;
           g = !1;
@@ -48455,7 +48446,7 @@ Mouse.insideCanvas = function() {
   return null !== this.canvas && this.canvas.mouseInside;
 };
 Mouse.setLock = function(a) {
-  null !== this.canvas && (a ? this.canvas.requestPointerLock ? this.canvas.requestPointerLock() : this.canvas.mozRequestPointerLock ? this.canvas.mozRequestPointerLock() : this.canvas.webkitRequestPointerLock && this.canvas.webkitRequestPointerLock() : document.exitPointerLock ? document.exitPointerLock() : document.mozExitPointerLock ? document.mozExitPointerLock() : document.webkitExitPointerLock && document.webkitExitPointerLock());
+  null !== this.canvas && (a ? (this.canvas.requestPointerLock = this.canvas.requestPointerLock || this.canvas.mozRequestPointerLock || this.canvas.webkitRequestPointerLock, void 0 !== this.canvas.requestPointerLock && this.canvas.requestPointerLock()) : void 0 !== document.exitPointerLock ? document.exitPointerLock() : void 0 !== document.mozExitPointerLock ? document.mozExitPointerLock() : void 0 !== document.webkitExitPointerLock && document.webkitExitPointerLock());
 };
 Mouse.buttonPressed = function(a) {
   return this.keys[a].pressed;
@@ -52685,10 +52676,12 @@ function CubeCamera(a, d, h, g) {
   this.cameras[4].lookAt(new THREE.Vector3(0, 0, 1));
   this.cameras[5].up.set(0, -1, 0);
   this.cameras[5].lookAt(new THREE.Vector3(0, 0, -1));
-  this.renderTarget = new THREE.WebGLCubeRenderTarget(new THREE.Vector2(this.resolution, this.resolution), {format:THREE.RGBFormat, magFilter:THREE.LinearFilter, minFilter:THREE.LinearFilter});
-  this.cube = this.renderTarget.texture;
-  this.cube.generateMipmaps = !1;
-  this.cube.name = "cube";
+  this.renderTarget = new THREE.WebGLCubeRenderTarget(new THREE.Vector2(this.resolution, this.resolution), {format:THREE.RGBFormat, magFilter:THREE.LinearFilter, minFilter:THREE.LinearFilter, generateMipmaps:!1});
+  var e = this;
+  Object.defineProperties(this, {cube:{get:function() {
+    return e.renderTarget.texture;
+  }, set:function(a) {
+  }}});
   this.renderer = this.scene = null;
 }
 THREE._CubeCamera = THREE.CubeCamera;
@@ -54696,9 +54689,9 @@ function Program(a) {
 }
 Program.prototype = Object.create(ResourceManager.prototype);
 Program.prototype.initialize = function() {
+  null === this.mouse && (this.mouse = new Mouse, this.mouse.setCanvas(this.canvas), this.mouse.create());
+  null === this.keyboard && (this.keyboard = new Keyboard, this.keyboard.create());
   this.manager.create();
-  null === this.mouse && (this.mouse = new Mouse);
-  null === this.keyboard && (this.keyboard = new keyboard);
   if (null !== this.defaultScene) {
     for (var a = 0; a < this.children.length; a++) {
       if (this.children[a].uuid === this.defaultScene) {
@@ -54709,6 +54702,7 @@ Program.prototype.initialize = function() {
   } else {
     0 < this.children.length && this.setScene(this.children[0]);
   }
+  this.lockPointer && this.mouse.setLock(!0);
   this.clock.start();
 };
 Program.prototype.setMouseKeyboard = function(a, d) {
@@ -54724,6 +54718,8 @@ Program.prototype.setRenderer = function(a, d) {
 };
 Program.prototype.update = function() {
   var a = this.clock.getDelta();
+  this.mouse.update();
+  this.keyboard.update();
   this.scene.update(a);
 };
 Program.prototype.render = function(a) {
@@ -54776,6 +54772,9 @@ Program.prototype.setInitialScene = function(a) {
   this.defaultScene = a.uuid;
 };
 Program.prototype.dispose = function() {
+  this.lockPointer && this.mouse.setLock(!1);
+  null !== this.mouse && this.mouse.dispose();
+  null !== this.keyboard && this.keyboard.dispose();
   this.manager.destroy();
   null !== this.scene ? this.scene.dispose() : console.warn("nunuStudio: Program dispose() scene is null.", this);
   ResourceManager.prototype.dispose.call(this);

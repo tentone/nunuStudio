@@ -123,6 +123,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "VideoTexture",
         "Viewport",
         "WebcamTexture",
+        "WorkerPool",
+        "WorkerTask",
         "{Object} ParticleGroupOptions"
     ],
     "modules": [

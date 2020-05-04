@@ -2,7 +2,7 @@
 	"name": "nunu-studio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "index.html",
-	"version": "0.97.5",
+	"version": "0.97.6",
 	"author": "Tentone",
 	"license": "MIT",
 	"homepage": "https://www.nunustudio.org",
@@ -16,13 +16,12 @@
 		"update": "cd script && node update.js",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
 		"npm": "npm run build && npm run docs && npm publish --access public .",
-		"release-web": "cd script && node build.js && node release.js",
-		"release-desktop": "cd script && node build.js && npm run package-desktop",
-		"package-desktop": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./docs/editor",
 		"build": "cd script && node build.js",
-		"build-win": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
-		"build-macos": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks mac-x64 ./docs/editor",
-		"build-linux": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks linux-x64 ./docs/editor"
+		"release-web": "cd script && node release.js",
+		"package-desktop": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./docs/editor",
+		"package-win": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
+		"package-macos": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks mac-x64 ./docs/editor",
+		"package-linux": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks linux-x64 ./docs/editor"
 	},
 	"repository": {
 		"type": "git",

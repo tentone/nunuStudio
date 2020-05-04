@@ -74,7 +74,6 @@ include("source/core/three/scenes/Fog.js");
 include("source/core/three/objects/Points.js");
 include("source/core/three/objects/Skeleton.js");
 
-
 // Runtime core
 include("source/core/Nunu.js");
 
@@ -351,11 +350,6 @@ NunuApp.prototype.run = function()
 	// WebGL renderer
 	this.renderer = this.program.rendererConfig.createRenderer(this.canvas);
 
-	// Mouse and Keyboard input
-	this.keyboard = new Keyboard();
-	this.mouse = new Mouse();
-	this.mouse.setCanvas(this.canvas);
-
 	// Attach this runtime to program
 	this.program.app = this;
 
@@ -365,7 +359,6 @@ NunuApp.prototype.run = function()
 
 	// Set renderer
 	this.program.setRenderer(this.renderer);
-	this.program.setMouseKeyboard(this.mouse, this.keyboard);
 	
 	// Initialize program
 	this.program.initialize();
@@ -374,14 +367,11 @@ NunuApp.prototype.run = function()
 	if(this.program.lockPointer)
 	{
 		var canvas = this.canvas;
-		canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
+		var mouse = this.mouse;
 
 		this.events.add(canvas, "click", function()
 		{
-			if(canvas.requestPointerLock)
-			{
-				canvas.requestPointerLock();
-			}
+			mouse.setLock(true);
 		});
 	}
 
@@ -494,9 +484,6 @@ NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
  */
 NunuApp.prototype.update = function()
 {
-	this.mouse.update();
-	this.keyboard.update();
-
 	this.program.update();
 	this.program.render(this.renderer);
 };
@@ -529,20 +516,6 @@ NunuApp.prototype.exit = function()
 	{
 		this.renderer.dispose();
 		this.renderer = null;
-	}
-
-	// Dispose mouse
-	if(this.mouse !== null)
-	{
-		this.mouse.dispose();
-		this.mouse = null;
-	}
-
-	// Dispose keyboard
-	if(this.keyboard !== null)
-	{
-		this.keyboard.dispose();
-		this.keyboard = null;
 	}
 
 	// Run onExit callback if any

@@ -1,8 +1,8 @@
 {
-	"name": "nunuStudio",
+	"name": "nunu-studio",
 	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
 	"main": "index.html",
-	"version": "0.96.11",
+	"version": "0.97.6",
 	"author": "Tentone",
 	"license": "MIT",
 	"homepage": "https://www.nunustudio.org",
@@ -10,39 +10,40 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"serve": "http-server . -p 8080 --cors -o http://localhost:8080/index.html",
-		"serve-page": "http-server ./docs -p 8081 --cors -o http://localhost:8081/index.html",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
-		"cordova-requirements": "cd ./temp && cordova requirements",
-		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
-		"build": "cd script && node build.js",
+		"serve": "http-server . -p 8080 --cors -o",
+		"serve-page": "http-server ./docs -p 8081 --cors -o",
 		"update": "cd script && node update.js",
-		"dist": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
-		"dist-all": "npm run build && build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64,linux-x64,mac-x64 ./docs/editor"
+		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
+		"npm": "npm run build && npm run docs && npm publish --access public .",
+		"build": "cd script && node build.js",
+		"release-web": "cd script && node release.js",
+		"package-desktop": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./docs/editor",
+		"package-win": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
+		"package-macos": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks mac-x64 ./docs/editor",
+		"package-linux": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks linux-x64 ./docs/editor"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/tentone/nunuStudio.git"
 	},
 	"keywords": [
-		"three.js",
-		"editor",
 		"webgl",
-		"engine",
+		"3d",
 		"gamedev",
-		"cannonjs"
+		"webvr",
+		"webxr"
 	],
 	"bugs": {
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
-	"dependencies": {
-		"cordova": "~9.0.0"
-	},
+	"dependencies": {},
 	"devDependencies": {
-		"nwjs-builder-phoenix": "~1.15.0",
-		"http-server": "0.11.1",
-		"yuidocjs": "~0.10.2",
-		"google-closure-compiler": "^20190301.0.0"
+		"cordova": "~9.0.0",
+		"nwjs-builder-phoenix": "^1.15.0",
+		"http-server": "0.12.3",
+		"yuidocjs": "^0.10.2",
+		"google-closure-compiler": "^20200426.0.0"
 	},
 	"js-flags": "--stack-size 65500",
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
@@ -60,12 +61,12 @@
 		"double_tap_to_zoom_enabled": false
 	},
 	"build": {
+		"nwVersion": "0.45.4",
 		"appId": "io.tentone.nunustudio",
 		"output": "../../build/desktop/",
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"ffmpegIntegration": false,
 		"packed": false,
-		"nwVersion": "0.45.2",
 		"nwFlavor": "sdk",
 		"targets": [
 			"zip",
