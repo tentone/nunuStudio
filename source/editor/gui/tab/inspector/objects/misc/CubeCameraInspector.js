@@ -26,15 +26,40 @@ function CubeCameraInspector(parent, object)
 	this.resolution.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "resolution", self.resolution.getValue()));
-		self.object.updateShadowMap();
 	});
 	this.form.add(this.resolution);
-
+	this.form.nextRow();
+	
 	for(var i = 4; i < 13; i++)
 	{
 		var size = Math.pow(2, i);
 		this.resolution.addValue(size.toString(), size);
 	}
+
+	// Near
+	this.form.addText(Locale.near);
+	this.near = new NumberBox(this.form);
+	this.near.size.set(60, 18);
+	this.near.setStep(0.1);
+	this.near.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.near.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "near", self.near.getValue()));
+	});
+	this.form.add(this.near);
+	this.form.nextRow();
+	
+	// Far
+	this.form.addText(Locale.near);
+	this.far = new NumberBox(this.form);
+	this.far.size.set(80, 18);
+	this.far.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.far.setOnChange(function()
+	{
+		Editor.addAction(new ChangeAction(self.object, "far", self.far.getValue()));
+	});
+	this.form.add(this.far);
+	this.form.nextRow();
 }
 
 CubeCameraInspector.prototype = Object.create(ObjectInspector.prototype);
@@ -45,4 +70,6 @@ CubeCameraInspector.prototype.updateInspector = function()
 	
 	this.autoUpdate.setValue(this.object.autoUpdate);
 	this.resolution.setValue(this.object.resolution);
+	this.near.setValue(this.object.near);
+	this.far.setValue(this.object.far);
 };
