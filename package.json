@@ -11,8 +11,8 @@
 	},
 	"scripts": {
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
-		"serve": "http-server . -p 8080 --cors -o http://localhost:8080/index.html",
-		"serve-page": "http-server ./docs -p 8081 --cors -o http://localhost:8081/index.html",
+		"serve": "http-server . -p 8080 --cors -o",
+		"serve-page": "http-server ./docs -p 8081 --cors -o",
 		"update": "cd script && node update.js",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
 		"npm": "npm run build && npm run docs && npm publish --access public .",
