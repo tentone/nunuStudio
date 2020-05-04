@@ -54,7 +54,6 @@ function CubemapFlatRenderer(envMap, faceSize, paddingLeft, paddingRight)
 	});
 	
 	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
 	this.scene  = new THREE.Scene();
 
 	this.faces = [];

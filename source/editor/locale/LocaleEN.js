@@ -131,6 +131,7 @@ LocaleManager.register(
 	shadowMaterial: "Shadow Material",
 
 	// Properties
+	focus: "Focus",
 	postProcessing: "Post-Processing",
 	html: "HTML",
 	javascript: "JavaScript",
@@ -401,6 +402,7 @@ LocaleManager.register(
 	subdivide: "Subdivide",
 
 	// Editor
+	useTexture: "Use Texture",
 	configuration: "Configuration",
 	profiling: "Profiling",
 	groupObjects: "Group Objects",

@@ -196,6 +196,8 @@ function Program(name)
 	/**
 	 * Event manager used to attach and manage program events.
 	 *
+	 * Its created on initialization and destroys on disposal, scripts can attach events to the manager safely during runtime.
+	 * 
 	 * @property manager
 	 * @type {EventManager}
 	 */
@@ -231,20 +233,23 @@ Program.prototype = Object.create(ResourceManager.prototype);
  */
 Program.prototype.initialize = function()
 {
-	this.manager.create();
-
-	// If input null create input object
 	if(this.mouse === null)
 	{
 		this.mouse = new Mouse();
+		this.mouse.setCanvas(this.canvas);
+		this.mouse.create();
 	}
 
 	if(this.keyboard === null)
 	{
-		this.keyboard = new keyboard();
+		this.keyboard = new Keyboard();
+		this.keyboard.create();
 	}
 
-	// Get default scene
+	// Create manager events
+	this.manager.create();
+
+	// Get default scene from children
 	if(this.defaultScene !== null)
 	{
 		for(var i = 0; i < this.children.length; i++)
@@ -261,6 +266,12 @@ Program.prototype.initialize = function()
 		this.setScene(this.children[0]);
 	}
 	
+	// Lock mouse pointer
+	if(this.lockPointer)
+	{
+		this.mouse.setLock(true);
+	}
+
 	this.clock.start();
 };
 
@@ -291,12 +302,15 @@ Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 		{
 			this.keyboard.dispose();
 		}
+
 		this.keyboard = keyboard;	
 	}
 };
 
 /**
  * Set program renderer to be used by this program.
+ *
+ * Gets the renderer canvas and uses the parent DOM element of the canvas for DOM division property.
  *
  * @method setRenderer
  * @param {WebGLRenderer} renderer Three.js renderer to be used by this program
@@ -324,6 +338,9 @@ Program.prototype.setRenderer = function(renderer, configure)
 Program.prototype.update = function()
 {
 	var delta = this.clock.getDelta();
+
+	this.mouse.update();
+	this.keyboard.update();
 
 	this.scene.update(delta);
 };
@@ -551,6 +568,21 @@ Program.prototype.setInitialScene = function(scene)
  */
 Program.prototype.dispose = function()
 {
+	if(this.lockPointer)
+	{
+		this.mouse.setLock(false);
+	}
+
+	if(this.mouse !== null)
+	{
+		this.mouse.dispose();
+	}
+
+	if(this.keyboard !== null)
+	{
+		this.keyboard.dispose();
+	}
+
 	this.manager.destroy();
 
 	if(this.scene !== null)

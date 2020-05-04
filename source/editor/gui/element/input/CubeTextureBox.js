@@ -82,7 +82,7 @@ function CubeTextureBox(parent)
 	this.form.spacing.set(10, 5);
 
 	// Use texture
-	this.form.addText("Use texture");
+	this.form.addText(Locale.useTexture);
 	this.useTexture = new CheckBox(this.form);
 	this.useTexture.size.set(30, 15);
 	this.form.add(this.useTexture);

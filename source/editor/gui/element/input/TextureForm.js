@@ -10,7 +10,7 @@ function TextureForm(parent)
 	this.form.defaultTextWidth = 60;
 
 	// Use texture
-	this.form.addText("Use texture");
+	this.form.addText(Locale.useTexture);
 	this.useTexture = new CheckBox(this.form);
 	this.useTexture.size.set(18, 18);
 	this.form.add(this.useTexture);

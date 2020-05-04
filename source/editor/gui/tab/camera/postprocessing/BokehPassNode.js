@@ -18,7 +18,7 @@ function BokehPassNode(parent)
 	this.add(this.aperture);
 	this.nextRow();
 
-	this.addText("Focus");
+	this.addText(Locale.focus);
 	this.focus = new NumberBox(this);
 	this.focus.size.set(0, 18);
 	this.focus.setStep(1e-4);

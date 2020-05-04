@@ -281,7 +281,7 @@ Mouse.insideCanvas = function()
 };
 
 /**
- * Set mouse lock state.
+ * Set mouse lock, if true mouse lock will be request, if false the mouse will be released.
  * 
  * @method setLock
  * @param {boolean} value If true pointer lock will be requested for the canvas attached to the Mouse instance
@@ -292,30 +292,23 @@ Mouse.setLock = function(value)
 	{
 		if(value)
 		{
-			if(this.canvas.requestPointerLock)
+			this.canvas.requestPointerLock = this.canvas.requestPointerLock || this.canvas.mozRequestPointerLock || this.canvas.webkitRequestPointerLock;
+			if(this.canvas.requestPointerLock !== undefined)
 			{
 				this.canvas.requestPointerLock();
-			}
-			else if(this.canvas.mozRequestPointerLock)
-			{
-				this.canvas.mozRequestPointerLock();
-			}
-			else if(this.canvas.webkitRequestPointerLock)
-			{
-				this.canvas.webkitRequestPointerLock();
 			}
 		}
 		else
 		{
-			if(document.exitPointerLock)
+			if(document.exitPointerLock !== undefined)
 			{
 				document.exitPointerLock();
 			}
-			else if(document.mozExitPointerLock)
+			else if(document.mozExitPointerLock !== undefined)
 			{
 				document.mozExitPointerLock();
 			}
-			else if(document.webkitExitPointerLock)
+			else if(document.webkitExitPointerLock !== undefined)
 			{
 				document.webkitExitPointerLock();
 			}

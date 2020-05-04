@@ -21,24 +21,6 @@ function RunProject(parent, closeable, container, index)
 	 * @type {RendererCanvas}
 	 */
 	this.canvas = new RendererCanvas(this, Editor.program.rendererConfig);
-	
-	/**
-	 * Keyboard input object.
-	 *
-	 * @attribute keyboard
-	 * @type {Keyboard}
-	 */
-	this.keyboard = new Keyboard(true);
-
-	/** 
-	 * Mouse input object
-	 *
-	 * It is attached to the window object to capture movement outside of the tab division.
-	 *
-	 * @attribute mouse
-	 * @type {Mouse}
-	 */
-	this.mouse = new Mouse(window, true);
 
 	/**
 	 * Program being run on this tab.
@@ -122,9 +104,6 @@ RunProject.prototype.activate = function()
 	this.canvas.createRenderer();
 	this.updateSettings();
 
-	this.mouse.create();
-	this.keyboard.create();
-
 	if(this.program === null)
 	{
 		this.getProgram();
@@ -140,9 +119,6 @@ RunProject.prototype.deactivate = function()
 {
 	TabElement.prototype.deactivate.call(this);
 
-	this.mouse.dispose();
-	this.keyboard.dispose();
-
 	Editor.gui.menuBar.run.setText(Locale.run);
 };
 
@@ -156,9 +132,6 @@ RunProject.prototype.destroy = function()
 	TabElement.prototype.destroy.call(this);
 
 	this.stopProgram();
-	
-	this.mouse.dispose();
-	this.keyboard.dispose();
 
 	this.canvas.forceContextLoss();
 };
@@ -194,7 +167,6 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 RunProject.prototype.stopProgram = function()
 {
 	this.setFullscreen(false);
-	this.mouse.setLock(false);
 
 	if(this.program !== null)
 	{
@@ -214,9 +186,6 @@ RunProject.prototype.update = function()
 	{
 		return;
 	}
-
-	this.mouse.update();
-	this.keyboard.update();
 
 	try
 	{
@@ -248,7 +217,10 @@ RunProject.prototype.resetCanvas = function()
 {
 	RendererCanvas.prototype.resetCanvas.call(this);
 
-	this.mouse.setCanvas(this.canvas.canvas);
+	if(this.program !== null && this.program.mouse !== null)
+	{
+		this.program.mouse.setCanvas(this.canvas.canvas);
+	}
 };
 
 /** 
@@ -287,7 +259,6 @@ RunProject.prototype.runProgram = function()
 		
 		// Set runtime variables
 		this.program.setRenderer(this.canvas.renderer);
-		this.program.setMouseKeyboard(this.mouse, this.keyboard);
 		this.program.initialize();
 		this.program.resize(this.canvas.canvas.width, this.canvas.canvas.height);
 	}
@@ -318,12 +289,6 @@ RunProject.prototype.runProgram = function()
 				program.enterVR();
 			}
 		});
-	}
-
-	// Lock mouse pointer
-	if(this.program.lockPointer)
-	{
-		this.mouse.setLock(true);
 	}
 };
 
