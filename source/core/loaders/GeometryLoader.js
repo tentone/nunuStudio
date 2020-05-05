@@ -60,6 +60,10 @@ GeometryLoader.prototype.parse = function(data)
 	{
 		geometry = new CapsuleBufferGeometry(data.radiusTop, data.radiusBottom, data.height, data.radialSegments, data.heightSegments, data.capsTopSegments, data.capsBottomSegments, data.thetaStart, data.thetaLength);
 	}
+	else if(data.type === "RoundedBoxBufferGeometry")
+	{
+		geometry = new RoundedBoxBufferGeometry(data.width, data.height, data.depth, data.radius, data.radiusSegments);
+	}
 	else if(data.type === "Geometry")
 	{
 		var loader = new LegacyGeometryLoader();

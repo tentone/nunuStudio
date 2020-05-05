@@ -157,6 +157,7 @@ include("source/core/loaders/LegacyGeometryLoader.js");
 include("source/core/loaders/ObjectLoader.js");
 
 include("source/core/geometries/CapsuleBufferGeometry.js");
+include("source/core/geometries/RoundedBoxBufferGeometry.js");
 
 include("source/core/objects/device/LeapMotion.js");
 
@@ -568,6 +569,7 @@ include("source/editor/gui/tab/inspector/geometries/CircleGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/RingGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/IcosahedronGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/OctahedronGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/RoundedBoxGeometryForm.js");
 
 include("source/editor/gui/preview/PreviewRenderer.js");
 include("source/editor/gui/preview/FontRenderer.js");

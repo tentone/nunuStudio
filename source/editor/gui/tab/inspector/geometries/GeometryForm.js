@@ -62,6 +62,10 @@ GeometryForm.create = function(form, object)
 	{
 		return new CapsuleGeometryForm(form, object);
 	}
+	else if(geometry instanceof RoundedBoxBufferGeometry)
+	{
+		return new RoundedBoxGeometryForm(form, object);
+	}
 
 	return null;
 };

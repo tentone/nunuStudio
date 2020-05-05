@@ -353,6 +353,18 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.capsule);
 
+	// Rounded box
+	models.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
+	{
+		var geometry = new RoundedBoxBufferGeometry(1, 1, 1, 0.1, 8);
+		geometry.name = "box";
+		
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "box";
+
+		Editor.addObject(model, self.editor.scene);
+	}, Locale.roundedBox);
+
 	// Parametric
 	/*models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
 	{

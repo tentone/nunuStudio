@@ -149,6 +149,7 @@ include("source/core/loaders/LegacyGeometryLoader.js");
 include("source/core/loaders/ObjectLoader.js");
 
 include("source/core/geometries/CapsuleBufferGeometry.js");
+include("source/core/geometries/RoundedBoxBufferGeometry.js");
 
 include("source/core/objects/device/LeapMotion.js");
 

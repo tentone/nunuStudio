@@ -103,6 +103,7 @@ LocaleManager.register(
 	torus: "Torus",
 	torusKnot: "Torus-Knot",
 	cone: "Cone",
+	roundedBox: "Rounded Box",
 
 	// Textures
 	spriteSheetTexture: "SpriteSheet Texture",
@@ -319,6 +320,7 @@ LocaleManager.register(
 	pixelRatio: "Pixel Ratio",
 	radius: "Radius",
 	segments: "Segments",
+	radiusSegments: "Radius Segments",
 	detail: "Detail",
 	radial: "Radial",
 	tubular: "Tubular",
@@ -389,6 +391,7 @@ LocaleManager.register(
 	flat: "Flat",
 	width: "Width",
 	height: "Height",
+	depth: "Depth",
 	resolution: "Resolution",
 	webgl: "WebGL 1.0",
 	webgl2: "WebGL 2.0",
