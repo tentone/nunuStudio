@@ -42,10 +42,9 @@ function RoundedBoxGeometryForm(form, object)
 
 	// Radius
 	this.form.addText(Locale.radius);
-	this.radius = new Slider(this.form);
+	this.radius = new NumberBox(this.form);
 	this.radius.size.set(0, 18);
 	this.radius.setStep(0.01);
-	this.radius.setRange(0, 0.5);
 	this.radius.setOnChange(updateGeometry);
 	this.form.add(this.radius);
 	this.form.nextRow();
