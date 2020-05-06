@@ -404,13 +404,13 @@ include("source/editor/gui/form-snippet/LightShadowFormSnippet.js");
 include("source/editor/gui/form-snippet/ViewportFormSnippet.js");
 include("source/editor/gui/form-snippet/RendererConfigurationFormSnippet.js");
 
-include("source/editor/gui/tab/ProfilingTab.js");
-include("source/editor/gui/tab/ConsoleTab.js");
-include("source/editor/gui/tab/CodeEditor.js");
+include("source/editor/gui/tab/profiling/ProfilingTab.js");
+include("source/editor/gui/tab/console/ConsoleTab.js");
+include("source/editor/gui/tab/code/CodeEditor.js");
+include("source/editor/gui/tab/code/TextEditor.js");
+include("source/editor/gui/tab/code/ScriptEditor.js");
+include("source/editor/gui/tab/particle-editor/ParticleEditor.js");
 include("source/editor/gui/tab/AboutTab.js");
-include("source/editor/gui/tab/TextEditor.js");
-include("source/editor/gui/tab/ScriptEditor.js");
-include("source/editor/gui/tab/ParticleEditor.js");
 
 include("source/editor/gui/tab/tree-view/TreeView.js");
 include("source/editor/gui/tab/tree-view/TreeNode.js");
