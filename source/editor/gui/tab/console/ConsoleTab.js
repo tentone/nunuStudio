@@ -4,10 +4,21 @@ function ConsoleTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Console", Global.FILE_PATH + "icons/misc/console.png");
 
-	this.history = [];
+	var self = this;
 
 	/**
-	 * List of filter keywords. If the log message starts with one of these words it is ommited.
+	 * History of the last commands written into the console.
+	 *
+	 * Can be navigate to view previously used commands.
+	 * 
+	 * @attribute history
+	 * @type {Array}
+	 */
+	this.history = [];
+
+	// TODO <TODO ADD CODE HERE>
+	/**
+	 * List of filter keywords, composed of regex rules used to filter out console entries.
 	 *
 	 * @attribute filters
 	 * @type {Array}
@@ -39,49 +50,11 @@ function ConsoleTab(parent, closeable, container, index)
 	 */
 	this.enabled = true;
 
-	/**
-	 * Top menu bar displayed on top of the console.
-	 *
-	 * @attribute bar
-	 * @type {Division}
-	 */
-	/*this.bar = new Division(this);
-	this.bar.element.style.top = "0px";
-	this.bar.element.style.left = "0px";
-	this.bar.element.style.width = "100%";
-	this.bar.element.style.height = "20px";
-	this.bar.element.style.backgroundColor = Editor.theme.barColor;
-
-	var menu = new ButtonText(this.bar);
-	menu.setText(Locale.clear);
-	menu.size.set(100, 20);
-	menu.position.set(0, 0);
-	menu.setOnClick(function()
-	{
-		console.clear();
-	});
-	menu.updateInterface();*/
-
-	/**
-	 * Button to toggle the console.
-	 *
-	 * @property enableButton
-	 * @type {ButtonText}
-	 */
-	/*this.enableButton = new ButtonText(this.bar);
-	this.enableButton.setText(Locale.disable);
-	this.enableButton.size.set(100, 20);
-	this.enableButton.position.set(100, 0);
-	this.enableButton.setOnClick(function()
-	{
-		self.useConsole(!self.enabled);
-	});
-	this.enableButton.updateInterface();*/
 
 	/**
 	 * Console content division, where the messages are displayed.
 	 *
-	 * @property console
+	 * @attribute console
 	 * @type {Element}
 	 */
 	this.console = document.createElement("div");
@@ -91,10 +64,29 @@ function ConsoleTab(parent, closeable, container, index)
 	this.console.style.left = "0px";
 	this.element.appendChild(this.console);
 
+	this.element.oncontextmenu = function(event)
+	{
+		var context = new ContextMenu(DocumentBody);
+		context.size.set(150, 20);
+		context.position.set(event.clientX, event.clientY);
+		
+		context.addOption(Locale.clear, function()
+		{
+			console.clear();
+		});
+
+		context.addOption(self.enabled ? Locale.disable : Locale.enable, function()
+		{
+			self.useConsole(!self.enabled);
+		});
+
+		context.updateInterface();
+	};
+
 	/**
 	 * Command input division, shown as a codemirror code editor division for docs and hint access.
 	 *
-	 * @property code
+	 * @attribute code
 	 * @type {Element}
 	 */
 	this.code = document.createElement("input");
@@ -115,8 +107,6 @@ function ConsoleTab(parent, closeable, container, index)
 	this.code.style.left = "0px";
 	this.code.style.height = "30px";
 	this.element.appendChild(this.code);
-
-	var self = this;
 
 	this.code.onkeydown = function(event)
 	{
@@ -191,7 +181,6 @@ ConsoleTab.prototype.useConsole = function(enabled)
 	var self = this;
 
 	this.enabled = enabled;
-	//this.enableButton.setText(this.enabled ? Locale.disable : Locale.enable);
 
 	if(this.enabled)
 	{
@@ -199,7 +188,9 @@ ConsoleTab.prototype.useConsole = function(enabled)
 		{
 			self.log(arguments);
 			self.handlers.log.apply(null, arguments);
-			self.handlers.log(getStackTrace());
+
+			// TODO <REMOVE THIS>
+			self.handlers.log(ConsoleTab.getStackTrace());
 		};
 
 		window.console.warn = function()
