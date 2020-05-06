@@ -6,8 +6,7 @@
  * These CubeTextures can be attributed to materials programatically.
  * 
  * @class CubeCamera
- * @author alteredq
- * @extends {Object3D}
+ * @extends {THREE.Object3D}
  * @module Misc
  */
 function CubeCamera(near, far, resolution, autoUpdate)
@@ -77,7 +76,7 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	 * @property target
 	 * @type {WebGLCubeRenderTarget}
 	 */
-	this.renderTarget = new THREE.WebGLCubeRenderTarget(new THREE.Vector2(this.resolution, this.resolution),
+	this.renderTarget = new THREE.WebGLCubeRenderTarget(this.resolution,
 	{
 		format: THREE.RGBFormat,
 		magFilter: THREE.LinearFilter,
@@ -200,16 +199,30 @@ CubeCamera.prototype.clear = function(renderer, color, depth, stencil)
 CubeCamera.prototype.updateCubeMap = function(renderer, scene)
 {
 	var autoClear = renderer.autoClear;
-	renderer.autoClear = true;
+	renderer.autoClear = false;
+
+	// Backup current render target
+	var currentRenderTarget = renderer.getRenderTarget();
+
+	// Disable to render the cube faces
+	var generateMipmaps = this.renderTarget.texture.generateMipmaps;
+	this.renderTarget.texture.generateMipmaps = false;
 
 	for(var i = 0; i < 6; i++)
 	{
+		if(i === 5)
+		{
+			this.renderTarget.texture.generateMipmaps = generateMipmaps;
+		}
 		this.cameras[i].updateMatrixWorld();
 		renderer.setRenderTarget(this.renderTarget, i);
+		renderer.clear(true, true, true);
 		renderer.render(scene, this.cameras[i]);
 	}
 
+	// Restore renderer
 	renderer.autoClear = autoClear;
+	renderer.setRenderTarget(currentRenderTarget);
 };
 
 CubeCamera.prototype.toJSON = function(meta)
