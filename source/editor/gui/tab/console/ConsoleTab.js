@@ -45,7 +45,7 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @attribute bar
 	 * @type {Division}
 	 */
-	this.bar = new Division(this);
+	/*this.bar = new Division(this);
 	this.bar.element.style.top = "0px";
 	this.bar.element.style.left = "0px";
 	this.bar.element.style.width = "100%";
@@ -60,7 +60,7 @@ function ConsoleTab(parent, closeable, container, index)
 	{
 		console.clear();
 	});
-	menu.updateInterface();
+	menu.updateInterface();*/
 
 	/**
 	 * Button to toggle the console.
@@ -68,7 +68,7 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @property enableButton
 	 * @type {ButtonText}
 	 */
-	this.enableButton = new ButtonText(this.bar);
+	/*this.enableButton = new ButtonText(this.bar);
 	this.enableButton.setText(Locale.disable);
 	this.enableButton.size.set(100, 20);
 	this.enableButton.position.set(100, 0);
@@ -76,10 +76,10 @@ function ConsoleTab(parent, closeable, container, index)
 	{
 		self.useConsole(!self.enabled);
 	});
-	this.enableButton.updateInterface();	
+	this.enableButton.updateInterface();*/
 
 	/**
-	 * Console messages division
+	 * Console content division, where the messages are displayed.
 	 *
 	 * @property console
 	 * @type {Element}
@@ -87,12 +87,16 @@ function ConsoleTab(parent, closeable, container, index)
 	this.console = document.createElement("div");
 	this.console.style.position = "absolute";
 	this.console.style.overflow = "auto";
-	this.console.style.top = "20px";
+	this.console.style.top = "0px";
 	this.console.style.left = "0px";
-	this.console.style.width = "100%";
 	this.element.appendChild(this.console);
 
-	// Command input division
+	/**
+	 * Command input division, shown as a codemirror code editor division for docs and hint access.
+	 *
+	 * @property code
+	 * @type {Element}
+	 */
 	this.code = document.createElement("input");
 	this.code.type = "text";
 	this.code.style.position = "absolute";
@@ -109,8 +113,7 @@ function ConsoleTab(parent, closeable, container, index)
 	this.code.style.backgroundColor = Editor.theme.panelColor;
 	this.code.style.bottom = "0px";
 	this.code.style.left = "0px";
-	this.code.style.width = "100%";
-	this.code.style.height = "25px";
+	this.code.style.height = "30px";
 	this.element.appendChild(this.code);
 
 	var self = this;
@@ -149,6 +152,33 @@ function ConsoleTab(parent, closeable, container, index)
 ConsoleTab.prototype = Object.create(TabElement.prototype);
 
 /**
+ * Get stack trace up until the point that this method was called.
+ *
+ * Includes the place were this method was called.
+ *
+ * Result is returned as a array of strings and may be different from browser to browser.
+ *
+ * @static
+ * @method getStackTrace
+ */
+ConsoleTab.getStackTrace = function()
+{
+	var stack;
+
+	try
+	{
+		throw new Error("");
+	}
+	catch (error)
+	{
+		stack = error.stack || "";
+	}
+
+	stack = stack.split("\n").map(function (line){return line.trim();});
+	return stack.splice(stack[0] == "Error" ? 2 : 1);
+};
+
+/**
  * Use this console as the predefined console.
  *
  * Overrides the browser provided window.console methods and displays the logs in this tab.
@@ -161,7 +191,7 @@ ConsoleTab.prototype.useConsole = function(enabled)
 	var self = this;
 
 	this.enabled = enabled;
-	this.enableButton.setText(this.enabled ? Locale.disable : Locale.enable);
+	//this.enableButton.setText(this.enabled ? Locale.disable : Locale.enable);
 
 	if(this.enabled)
 	{
@@ -169,6 +199,7 @@ ConsoleTab.prototype.useConsole = function(enabled)
 		{
 			self.log(arguments);
 			self.handlers.log.apply(null, arguments);
+			self.handlers.log(getStackTrace());
 		};
 
 		window.console.warn = function()
@@ -183,7 +214,7 @@ ConsoleTab.prototype.useConsole = function(enabled)
 			self.handlers.error.apply(null, arguments);
 
 			// Print stack trace to console for easier debug
-			console.trace();
+			// console.trace();
 		};
 
 		window.console.clear = function()
@@ -292,7 +323,9 @@ ConsoleTab.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	this.console.style.height = (this.size.y - 45) + "px";
+	this.console.style.height = (this.size.y - 30) + "px";
+	this.console.style.width = this.size.x + "px";
+	this.code.style.width = this.size.x + "px";
 };
 
 /**
@@ -323,7 +356,7 @@ ConsoleTab.createMessage = function(object)
 	{
 		var preview = document.createElement("img");
 		preview.src = object.data;
-		preview.height = 60;
+		preview.height = 70;
 		log.appendChild(preview);
 
 		var table = document.createElement("table");
@@ -350,29 +383,29 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	/*else if(object instanceof THREE.Texture)
+	else if(object instanceof THREE.Texture)
 	{
 		var preview = TextureRenderer.generateElement(object);
-		preview.height = 60;
+		preview.height = 70;
 		log.appendChild(preview);
 
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
 
 		var type = table.insertRow(0);
-		type.insertCell(0).appendChild(document.createTextNode(Locale.type;
-		type.insertCell(1).appendChild(document.createTextNode(object.type;
+		type.insertCell(0).appendChild(document.createTextNode(Locale.type));
+		type.insertCell(1).appendChild(document.createTextNode(object.type));
 
 		var name = table.insertRow(1);
-		name.insertCell(0).appendChild(document.createTextNode(Locale.name;
-		name.insertCell(1).appendChild(document.createTextNode(object.name;
+		name.insertCell(0).appendChild(document.createTextNode(Locale.name));
+		name.insertCell(1).appendChild(document.createTextNode(object.name));
 
 		var uuid = table.insertRow(2);
-		uuid.insertCell(0).appendChild(document.createTextNode(Locale.uuid;
-		uuid.insertCell(1).appendChild(document.createTextNode(object.uuid;
+		uuid.insertCell(0).appendChild(document.createTextNode(Locale.uuid));
+		uuid.insertCell(1).appendChild(document.createTextNode(object.uuid));
 
 		log.appendChild(table);
-	}*/
+	}
 	else if(object instanceof THREE.Material)
 	{
 		var preview = MaterialRenderer.generateElement(object);
