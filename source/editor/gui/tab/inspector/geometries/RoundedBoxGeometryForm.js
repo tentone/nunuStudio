@@ -57,7 +57,6 @@ function RoundedBoxGeometryForm(form, object)
 	this.radiusSegments.setOnChange(updateGeometry);
 	this.form.add(this.radiusSegments);
 	this.form.nextRow();
-
 }
 
 RoundedBoxGeometryForm.prototype.updateGeometry = function()

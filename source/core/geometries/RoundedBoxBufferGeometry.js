@@ -42,16 +42,16 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 	var normals = new THREE.BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
 
 	// Some vars
-	var cornerVerts = [],
-		cornerNormals = [],
-		normal = new THREE.Vector3(),
-		vertex = new THREE.Vector3(),
-		vertexPool = [],
-		normalPool = [],
-		indices = [];
+	var cornerVerts = [];
+	var cornerNormals = [];
+	var normal = new THREE.Vector3();
+	var vertex = new THREE.Vector3();
+	var vertexPool = [];
+	var normalPool = [];
+	var indices = [];
 
-	var lastVertex = rs1 * radiusSegments,
-		cornerVertNumber = rs1 * radiusSegments + 1;
+	var lastVertex = rs1 * radiusSegments;
+	var cornerVertNumber = lastVertex + 1;
 
 	doVertices();
 	doFaces();
@@ -189,9 +189,12 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 				var b = cornerOffset + lastRowOffset + u + 1;
 				var c = cornerOffset + lastVertex;
 
-				if(!flips[i]) {
+				if(!flips[i])
+				{
 					indices.push(a, b, c);
-				} else {
+				}
+				else
+				{
 					indices.push(a, c, b);
 				}
 			}
@@ -246,7 +249,8 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 	}
 
 	// Weave edges
-	function doHeightEdges() {
+	function doHeightEdges()
+	{
 		for(var i = 0; i < 4; i++)
 		{
 			var cOffset = i * cornerVertNumber;
