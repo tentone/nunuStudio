@@ -16,15 +16,6 @@ function ConsoleTab(parent, closeable, container, index)
 	 */
 	this.history = [];
 
-	// TODO <TODO ADD CODE HERE>
-	/**
-	 * List of filter keywords, composed of regex rules used to filter out console entries.
-	 *
-	 * @attribute filters
-	 * @type {Array}
-	 */
-	this.filters = []; //["THREE"];
-
 	/**
 	 * Stores a pointer to the original console functions.
 	 *
@@ -226,11 +217,6 @@ ConsoleTab.prototype.useConsole = function(enabled)
 // Normal log messsage
 ConsoleTab.prototype.log = function(args)
 {
-	if(this.filter(args))
-	{
-		return;
-	}
-
 	for(var i = 0; i < args.length; i++)
 	{
 		this.console.appendChild(ConsoleTab.createMessage(args[i]));
@@ -243,15 +229,11 @@ ConsoleTab.prototype.log = function(args)
 // Warning message
 ConsoleTab.prototype.warn = function(args)
 {
-	if(this.filter(args))
-	{
-		return;
-	}
-
 	for(var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
 		log.style.color = "#FFFF00";
+		log.style.backgroundColor = "#FFFF0022";
 		this.console.appendChild(log);
 	}
 
@@ -262,15 +244,11 @@ ConsoleTab.prototype.warn = function(args)
 // Error message
 ConsoleTab.prototype.error = function(args)
 {
-	if(this.filter(args))
-	{
-		return;
-	}
-
 	for(var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
 		log.style.color = "#FF0000";
+		log.style.backgroundColor = "#FF000022";
 		this.console.appendChild(log);
 	}
 
@@ -289,25 +267,6 @@ ConsoleTab.prototype.clear = function(args)
 	}
 
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
-};
-
-/**
- * Apply filters to messages.
- *
- * @method filter
- * @param {Array} Values to filter.
- */
-ConsoleTab.prototype.filter = function(args)
-{
-	for(var i = 0; i < this.filters.length; i++)
-	{
-		if(args.length > 0 && (args[0] + "").startsWith(this.filters[i]))
-		{
-			return true;
-		}
-	}
-
-	return false;
 };
 
 ConsoleTab.prototype.updateSize = function()
@@ -337,11 +296,21 @@ ConsoleTab.createMessage = function(object)
 
 	if(object === undefined)
 	{
-		log.appendChild(document.createTextNode("undefined"));
+		var container = document.createElement("div");
+		container.style.paddingLeft = "5px";
+		container.style.paddingTop = "5px";
+		container.style.paddingBottom = "5px";
+		container.appendChild(document.createTextNode("undefined"));
+		log.appendChild(container);
 	}
 	else if(object === null)
 	{
-		log.appendChild(document.createTextNode("null"));
+		var container = document.createElement("div");
+		container.style.paddingLeft = "5px";
+		container.style.paddingTop = "5px";
+		container.style.paddingBottom = "5px";
+		container.appendChild(document.createTextNode("null"));
+		log.appendChild(container);
 	}
 	else if(object instanceof Image)
 	{
@@ -504,18 +473,29 @@ ConsoleTab.createMessage = function(object)
 	}
 	else if(object instanceof Object)
 	{
+		var container = document.createElement("div");
+		container.style.paddingLeft = "5px";
+		container.style.paddingTop = "5px";
+		container.style.paddingBottom = "5px";
 		try
 		{
-			log.appendChild(document.createTextNode(JSON.stringify(object, null, "\t")));
+			container.appendChild(document.createTextNode(JSON.stringify(object, null, "\t")));
 		}
 		catch(e)
 		{
-			log.appendChild(document.createTextNode(object));
+			container.appendChild(document.createTextNode(object));
 		}
+
+		log.appendChild(container);
 	}
 	else
 	{
-		log.appendChild(document.createTextNode(object));
+		var container = document.createElement("div");
+		container.style.paddingLeft = "5px";
+		container.style.paddingTop = "5px";
+		container.style.paddingBottom = "5px";
+		container.appendChild(document.createTextNode(object));
+		log.appendChild(container);
 	}
 
 	return log;
@@ -533,8 +513,6 @@ ConsoleTab.createBar = function()
 	var bar = document.createElement("div");
 	bar.style.width = "100%";
 	bar.style.height = "1px";
-	bar.style.marginTop = "4px";
-	bar.style.marginBottom = "4px";
 	bar.style.backgroundColor = Editor.theme.barColor;
 	return bar;
 };
