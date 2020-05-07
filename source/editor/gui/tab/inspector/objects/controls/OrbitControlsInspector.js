@@ -105,7 +105,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Zoom
-	this.form.addText("Zoom");
+	this.form.addText(Locale.zoom);
 	this.zoomEnabled = new CheckBox(this.form);
 	this.zoomEnabled.size.set(18, 18);
 	this.zoomEnabled.setOnChange(function()
@@ -129,7 +129,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Smooth
-	this.form.addText("Zoom");
+	this.form.addText(Locale.zoom);
 	this.smooth = new CheckBox(this.form);
 	this.smooth.size.set(18, 18);
 	this.smooth.setOnChange(function()

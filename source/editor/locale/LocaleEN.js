@@ -226,6 +226,7 @@ LocaleManager.register(
 	density: "Density",
 	near: "Near",
 	far: "Far",
+	zoom: "Zoom",
 	wireframe: "Wireframe",
 	wireframeLinewidth: "Wireframe Line Width",
 	wireframeLinecap: "Wireframe Line Cap",

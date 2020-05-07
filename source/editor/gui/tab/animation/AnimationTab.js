@@ -31,8 +31,9 @@ function AnimationTab(parent, closeable, container, index)
 	 * @type {Element}
 	 */
 	this.bar = new Element(this, "div");
+	this.bar.size.set(0, 25);
 	this.bar.element.style.position = "absolute";
-	this.bar.element.style.height = "20px";
+	this.bar.element.style.height = "25px";
 	this.bar.element.style.width = "100%";
 	this.bar.element.style.backgroundColor = Editor.theme.barColor;
 
@@ -44,7 +45,7 @@ function AnimationTab(parent, closeable, container, index)
 	 */
 	this.add = new ButtonText(this.bar);
 	this.add.position.set(0, 0);
-	this.add.size.set(100, 20);
+	this.add.size.set(100, this.bar.size.y);
 	this.add.setText(Locale.add)
 	this.add.updateInterface();
 	this.add.setOnClick(function()
@@ -111,7 +112,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.play = new ButtonText(this.bar);
 	this.play.position.set(100, 0);
-	this.play.size.set(100, 20);
+	this.play.size.set(100, this.bar.size.y);
 	this.play.setText(Locale.play)
 	this.play.updateInterface();
 	this.play.setOnClick(function()
@@ -136,7 +137,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.stop = new ButtonText(this.bar);
 	this.stop.position.set(200, 0);
-	this.stop.size.set(100, 20);
+	this.stop.size.set(100, this.bar.size.y);
 	this.stop.setText("Stop");
 	this.stop.updateInterface();
 	this.stop.setOnClick(function()
@@ -167,7 +168,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomSlider.text.style.right = "5px";
 
 	this.zoomText = new Text(this.bar);
-	this.zoomText.setText("Zoom");
+	this.zoomText.setText(Locale.zoom);
 	this.zoomText.size.set(90, 15);
 	this.zoomText.position.set(110, 0);
 	this.zoomText.updatePosition(Element.TOP_RIGHT);
@@ -476,20 +477,20 @@ AnimationTab.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		// Timeline
-		this.timeline.position.set(0, 20);
-		this.timeline.size.set(this.size.x, this.size.y - 20);
+		this.timeline.position.set(0, this.bar.size.y);
+		this.timeline.size.set(this.size.x, this.size.y - this.bar.size.y);
 		this.timeline.updateInterface();
 
 		// Tab
 		this.tab.style.left = this.tab.position + "px";
 
 		// Information
-		this.info.size.set(this.tab.position, this.size.y - 20);
+		this.info.size.set(this.tab.position, this.size.y - this.bar.size.y);
 		this.info.updateInterface();
 		
 		// Tracks
 		this.tracks.position.set(this.tab.position + 5, 0);
-		this.tracks.size.set(this.size.x - this.tracks.position.x, this.size.y - 20);
+		this.tracks.size.set(this.size.x - this.tracks.position.x, this.size.y - this.bar.size.y);
 		this.tracks.updateInterface();
 		
 		// Empty text

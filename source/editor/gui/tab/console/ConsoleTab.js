@@ -41,6 +41,22 @@ function ConsoleTab(parent, closeable, container, index)
 	 */
 	this.enabled = true;
 
+	/**
+	 * Search box to filter console content.
+	 *
+	 * @property search
+	 * @type {SearchBox}
+	 */
+	this.search = new SearchBox(this.bar);
+	this.search.setMode(Element.TOP_RIGHT);
+	this.search.size.set(200, 25);
+	this.search.position.set(1, 0);
+	this.search.updateInterface();
+	this.search.setOnChange(function()
+	{
+		self.filterByName(self.search.search.getText());
+	});
+
 
 	/**
 	 * Console content division, where the messages are displayed.
@@ -214,7 +230,15 @@ ConsoleTab.prototype.useConsole = function(enabled)
 	}
 };
 
-// Normal log messsage
+/**
+ * Show a log messsage in the console.
+ *
+ * The content is display using different element depending on its type.
+ *
+ * Multiple objects are shown in different lines.
+ *
+ * @method warn
+ */
 ConsoleTab.prototype.log = function(args)
 {
 	for(var i = 0; i < args.length; i++)
@@ -226,7 +250,11 @@ ConsoleTab.prototype.log = function(args)
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
-// Warning message
+/**
+ * Show an warning message from a console.warn() call.
+ *
+ * @method warn
+ */
 ConsoleTab.prototype.warn = function(args)
 {
 	for(var i = 0; i < args.length; i++)
@@ -241,7 +269,11 @@ ConsoleTab.prototype.warn = function(args)
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
-// Error message
+/**
+ * Show an error message from a console.error() call.
+ *
+ * @method error
+ */
 ConsoleTab.prototype.error = function(args)
 {
 	for(var i = 0; i < args.length; i++)
@@ -256,7 +288,11 @@ ConsoleTab.prototype.error = function(args)
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
-// Clear commands
+/**
+ * Clear content from the console, remove all nodes created and reset GUI.
+ *
+ * @method clear 
+ */
 ConsoleTab.prototype.clear = function(args)
 {
 	this.history = [];
