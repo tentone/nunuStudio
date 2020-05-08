@@ -57,7 +57,6 @@ function ConsoleTab(parent, closeable, container, index)
 		self.filterByName(self.search.search.getText());
 	});
 
-
 	/**
 	 * Console content division, where the messages are displayed.
 	 *
