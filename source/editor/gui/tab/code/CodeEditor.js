@@ -4,7 +4,7 @@
  * Code editor tab element based on the codemirror code editor library.
  *
  * @class CodeEditor
- * @extends TabElement
+ * @extends {TabElement, CodeBox}
  */
 function CodeEditor(parent, closeable, container, index)
 {
