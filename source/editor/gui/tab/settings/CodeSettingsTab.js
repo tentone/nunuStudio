@@ -72,7 +72,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Line wrapping
-	this.form.addText("Line wrap");
+	this.form.addText("Line Wrap");
 	this.codeLineWrapping = new CheckBox(this.form);
 	this.codeLineWrapping.size.set(18, 18);
 	this.codeLineWrapping.setOnChange(function()
@@ -83,7 +83,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Auto close brackets
-	this.form.addText("Auto close brackets");
+	this.form.addText("Auto Close Brackets");
 	this.codeAutoCloseBrackets = new CheckBox(this.form);
 	this.codeAutoCloseBrackets.size.set(18, 18);
 	this.codeAutoCloseBrackets.setOnChange(function()
@@ -127,7 +127,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Indent with tabs
-	this.form.addText("Indent with tabs");
+	this.form.addText("Indent with Tabs");
 	this.indentWithTabs = new CheckBox(this.form);
 	this.indentWithTabs.size.set(18, 18);
 	this.indentWithTabs.setOnChange(function()
@@ -162,6 +162,39 @@ function CodeSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.indentUnit);
 	this.form.nextRow();
+
+	// Match Brackets
+	this.form.addText("Match Brackets");
+	this.matchBrackets = new CheckBox(this.form);
+	this.matchBrackets.size.set(18, 18);
+	this.matchBrackets.setOnChange(function()
+	{
+		Editor.settings.code.matchBrackets = self.matchBrackets.getValue();
+	});
+	this.form.add(this.matchBrackets);
+	this.form.nextRow();
+
+	// Smart Indent
+	this.form.addText("Smart Indent");
+	this.smartIndent = new CheckBox(this.form);
+	this.smartIndent.size.set(18, 18);
+	this.smartIndent.setOnChange(function()
+	{
+		Editor.settings.code.smartIndent = self.smartIndent.getValue();
+	});
+	this.form.add(this.smartIndent);
+	this.form.nextRow();
+
+	// VIM Mode
+	this.form.addText("Vim Mode");
+	this.vimMode = new CheckBox(this.form);
+	this.vimMode.size.set(18, 18);
+	this.vimMode.setOnChange(function()
+	{
+		Editor.settings.code.vimMode = self.vimMode.getValue();
+	});
+	this.form.add(this.vimMode);
+	this.form.nextRow();
 }
 
 CodeSettingsTab.prototype = Object.create(TabElement.prototype);
@@ -180,7 +213,10 @@ CodeSettingsTab.prototype.activate = function()
 	this.indentWithTabs.setValue(Editor.settings.code.indentWithTabs);
 	this.tabSize.setValue(Editor.settings.code.tabSize);
 	this.indentUnit.setValue(Editor.settings.code.indentUnit);
-}; 
+	this.matchBrackets.setValue(Editor.settings.code.matchBrackets);
+	this.smartIndent.setValue(Editor.settings.code.smartIndent);
+	this.vimMode.setValue(Editor.settings.code.vimMode);
+};
 
 CodeSettingsTab.prototype.updateSize = function()
 {

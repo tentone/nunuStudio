@@ -79,13 +79,12 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @attribute console
 	 * @type {Element}
 	 */
-	this.console = document.createElement("div");
-	this.console.style.position = "absolute";
-	this.console.style.overflow = "auto";
-	this.console.style.top = "0px";
-	this.console.style.left = "0px";
-	this.element.appendChild(this.console);
-	this.element.oncontextmenu = function(event)
+	this.content = document.createElement("div");
+	this.content.style.position = "absolute";
+	this.content.style.overflow = "auto";
+	this.content.style.top = "0px";
+	this.content.style.left = "0px";
+	this.content.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
 		context.size.set(150, 20);
@@ -103,51 +102,128 @@ function ConsoleTab(parent, closeable, container, index)
 
 		context.updateInterface();
 	};
+	this.element.appendChild(this.content);
+
+	/**
+	 * Console input code division, where the user inserts JS code.
+	 *
+	 * @attribute input
+	 * @type {DOM} 
+	 */
+	this.input = document.createElement("div");
+	this.input.style.position = "absolute";
+	this.input.style.overflow = "auto";
+	this.input.style.bottom = "0px";
+	this.input.style.left = "0px";
+	this.element.appendChild(this.input);
 
 	/**
 	 * Command input division, shown as a codemirror code editor division for docs and hint access.
 	 *
 	 * @attribute code
-	 * @type {Element}
+	 * @type {CodeMirror}
 	 */
-	this.code = new CodeBox(this);
-	this.code.position.set(0, 0);
-	this.code.setMode(Element.BOTTOM_LEFT);
-	this.code.setLanguage("javascript");
-	this.code.updateInterface();
-
+	this.code = new CodeMirror(this.input, {
+		dragDrop: false,
+		firstLineNumber: 1,
+		indentUnit: 0,
+		indentWithTabs: false,
+		keyMap: Editor.settings.code.keymap,
+		lineNumbers: false,
+		lineWrapping: false,
+		matchBrackets: true,
+		mode: "javascript",
+		styleActiveLine: false,
+		styleSelectedText: false,
+		tabSize: Editor.settings.code.tabSize,
+		theme: Editor.settings.code.theme,
+		undoDepth: 0,
+		value: "",
+		viewportMargin: 1,
+		wholeLineUpdateBefore: false,
+		showMatchesOnScrollbar: false,
+		lint: false,
+		hintOptions:
+		{
+			hint: CodeMirror.hint.anyword,
+			completeSingle: false
+		}
+ 	});
 
 	/**
-	 * Event manager to for the resize scroll event.
+	 * Tern server used to provide code analysis.
 	 *
-	 * @property manager
-	 * @type {EventManager}
+	 * @attribute server
+	 * @type {CodeMirror.TernServer}
 	 */
-	this.manager = new EventManager();
-	this.manager.addScrollEvent(this.code.element, function(event)
+	this.server = new CodeMirror.TernServer(
 	{
-		if(event.ctrlKey && event.deltaY !== 0)
+		caseInsensitive: false,
+		defs: Editor.ternDefinitions
+	});
+
+	this.code.on("keypress", function(cm, event)
+	{
+		var typed = String.fromCharCode(event.charCode);
+
+		if(/[\w\.]/.exec(typed))
 		{
-			event.preventDefault();
-			self.setFontSize(Editor.settings.code.fontSize - event.deltaY / 100);
+			self.server.complete(cm);
+
+			// If there is no tern sugestion suggest known words
+			if(cm.state.completionActive == null || cm.state.completionActive.widget === null)
+			{
+				CodeMirror.commands.autocomplete(cm, null);
+			}
 		}
 	});
-	this.manager.add(this.code.element, "keydown", function(event)
+
+	this.code.setOption("extraKeys",
 	{
-		if(event.keyCode === Keyboard.ENTER)
+		"Enter": function(cm)
 		{
-			self.runCommand(self.getText());
-			self.setText("");
-		}
-		else if(event.keyCode === Keyboard.UP)
+			self.runCommand(self.code.getValue());
+			self.code.setValue("");
+		},
+		"Up": function(cm)
 		{
 			if(self.history.length > 0 && self.historyPointer > 0)
 			{
 				self.setText(self.history[self.historyPointer--]);
 			}
 		}
-	});
-	this.manager.create();
+	})
+
+	this.input.oncontextmenu = function(event)
+	{
+		var context = new ContextMenu(DocumentBody);
+		context.size.set(130, 20);
+		context.position.set(event.clientX, event.clientY);
+		
+		context.addOption(Locale.copy, function()
+		{
+			var text = self.code.getSelection();
+			if(text !== "")
+			{
+				Editor.clipboard.set(text, "text");
+			}
+		});
+		context.addOption(Locale.cut, function()
+		{
+			var text = self.code.getSelection();
+			if(text !== "")
+			{
+				Editor.clipboard.set(text, "text");
+				self.code.replaceSelection("");
+			}
+		});
+		context.addOption(Locale.paste, function()
+		{
+			self.code.replaceSelection(Editor.clipboard.get("text"));
+		});
+		
+		context.updateInterface();
+	};
 
 	this.useConsole(this.enabled);
 }
@@ -175,13 +251,6 @@ ConsoleTab.prototype.runCommand = function(code)
 
 	this.history.push(code);
 	this.historyPointer = this.history.length - 1;
-};
-
-ConsoleTab.prototype.updateSettings = function()
-{
-	TabElement.prototype.updateSettings.call(this);
-
-	// this.code.updateSettings();
 };
 
 /**
@@ -273,11 +342,11 @@ ConsoleTab.prototype.log = function(args)
 {
 	for(var i = 0; i < args.length; i++)
 	{
-		this.console.appendChild(ConsoleTab.createMessage(args[i]));
+		this.content.appendChild(ConsoleTab.createMessage(args[i]));
 	}
 
-	this.console.appendChild(ConsoleTab.createBar());
-	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+	this.content.appendChild(ConsoleTab.createBar());
+	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
 /**
@@ -292,11 +361,11 @@ ConsoleTab.prototype.warn = function(args)
 		var log = ConsoleTab.createMessage(args[i]);
 		log.style.color = "#FFFF00";
 		log.style.backgroundColor = "#FFFF0022";
-		this.console.appendChild(log);
+		this.content.appendChild(log);
 	}
 
-	this.console.appendChild(ConsoleTab.createBar());
-	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+	this.content.appendChild(ConsoleTab.createBar());
+	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
 /**
@@ -311,11 +380,11 @@ ConsoleTab.prototype.error = function(args)
 		var log = ConsoleTab.createMessage(args[i]);
 		log.style.color = "#FF0000";
 		log.style.backgroundColor = "#FF000022";
-		this.console.appendChild(log);
+		this.content.appendChild(log);
 	}
 
-	this.console.appendChild(ConsoleTab.createBar());
-	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+	this.content.appendChild(ConsoleTab.createBar());
+	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
 /**
@@ -327,23 +396,24 @@ ConsoleTab.prototype.clear = function(args)
 {
 	this.history = [];
 
-	while(this.console.hasChildNodes())
+	while(this.content.hasChildNodes())
 	{
-    	this.console.removeChild(this.console.lastChild);
+    	this.content.removeChild(this.content.lastChild);
 	}
 
-	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
 ConsoleTab.prototype.updateSize = function()
 {
 	TabElement.prototype.updateSize.call(this);
 
-	this.console.style.height = (this.size.y - 30) + "px";
-	this.console.style.width = this.size.x + "px";
+	this.content.style.height = (this.size.y - 30) + "px";
+	this.content.style.width = this.size.x + "px";
 
-	this.code.size.set(this.size.x, 30);
-	this.code.updateSize();
+	this.input.style.height = "30px";
+	this.input.style.width = this.size.x + "px";
+	this.code.setSize(this.size.x, 30);
 };
 
 /**

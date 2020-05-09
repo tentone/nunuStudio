@@ -24,11 +24,7 @@ function ScriptEditor(parent, closeable, container, index)
 	this.server = new CodeMirror.TernServer(
 	{
 		caseInsensitive: false,
-		defs: Editor.ternDefinitions,
-		plugins:
-		{
-			threejs: null
-		}
+		defs: Editor.ternDefinitions
 	});
 
 	this.code.setOption("extraKeys",

@@ -354,7 +354,6 @@ include("source/editor/gui/element/RendererCanvas.js");
 include("source/editor/gui/element/TableForm.js");
 include("source/editor/gui/element/ImageContainer.js");
 include("source/editor/gui/element/SearchBox.js");
-include("source/editor/gui/element/CodeBox.js");
 
 include("source/editor/gui/element/dropdown/ContextMenu.js");
 include("source/editor/gui/element/dropdown/DropdownMenu.js");

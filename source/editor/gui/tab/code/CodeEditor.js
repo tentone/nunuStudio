@@ -21,7 +21,6 @@ function CodeEditor(parent, closeable, container, index)
 	this.code = new CodeMirror(this.element,
 	{
 		value: "",
-		matchBrackets: true,
 		hintOptions:
 		{
 			hint: CodeMirror.hint.anyword,
@@ -150,6 +149,9 @@ CodeEditor.prototype.updateSettings = function()
 	this.code.setOption("indentWithTabs", Editor.settings.code.indentWithTabs);
 	this.code.setOption("tabSize", Editor.settings.code.tabSize);
 	this.code.setOption("indentUnit", Editor.settings.code.indentUnit);
+	this.code.setOption("smartIndent", Editor.settings.code.smartIndent);
+	this.code.setOption("matchBrackets", Editor.settings.code.matchBrackets);
+	this.code.setOption("vimMode", Editor.settings.code.vimMode);
 };
 
 /**

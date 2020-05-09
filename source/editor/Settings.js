@@ -104,7 +104,10 @@ Settings.prototype.loadDefault = function()
 		dragFiles: true,
 		indentWithTabs: true,
 		tabSize: 4,
-		indentUnit: 4
+		indentUnit: 4,
+		vimMode: false,
+		smartIndent: false,
+		matchBrackets: true
 	};
 
 	// JSLint
