@@ -273,12 +273,12 @@ ConsoleTab.getStackTrace = function()
 	{
 		throw new Error("");
 	}
-	catch (error)
+	catch(error)
 	{
 		stack = error.stack || "";
 	}
 
-	stack = stack.split("\n").map(function (line){return line.trim();});
+	stack = stack.split("\n").map(function(line){return line.trim();});
 	return stack.splice(stack[0] == "Error" ? 2 : 1);
 };
 
@@ -613,10 +613,16 @@ ConsoleTab.createMessage = function(object)
 	}
 	else if(object instanceof Object)
 	{
+		if(object instanceof Error)
+		{
+			object = object.message;
+		}
+
 		var container = document.createElement("div");
 		container.style.paddingLeft = "5px";
 		container.style.paddingTop = "5px";
 		container.style.paddingBottom = "5px";
+
 		try
 		{
 			container.appendChild(document.createTextNode(JSON.stringify(object, null, "\t")));
