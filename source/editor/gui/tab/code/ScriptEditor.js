@@ -4,6 +4,7 @@
  * The script editor is used to view and edit code of script objects.
  *
  * @class ScriptEditor
+ * @extends {CodeEditor}
  */
 function ScriptEditor(parent, closeable, container, index)
 {
@@ -11,7 +12,7 @@ function ScriptEditor(parent, closeable, container, index)
 
 	var self = this;
 
-	this.setMode("javascript");
+	this.setLanguage("javascript");
 	this.updateSettings();
 
 	/**

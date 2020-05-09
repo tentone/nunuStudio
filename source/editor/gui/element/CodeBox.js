@@ -3,17 +3,53 @@
 /**
  * Code box can be used as an input element for any type of code of highlighted text input.
  *
- * Wraps a codemirror input element.
+ * Wraps a codemirror input element that can be access to integrate more advanced code mirror functionality.
  *
  * @class CodeBox
  * @extends {Element}
  * @param {Element} parent Parent element.
+ * @param {Object} options Options for the codemirror object.
  */
-function CodeBox(parent)
+function CodeBox(parent, options)
 {
 	Element.call(this, parent, "div");
 	
 	var self = this;
+ 
+ 	options = options !== undefined ? options : {
+		dragDrop: false,
+		firstLineNumber: 1,
+		indentUnit: Editor.settings.code.indentUnit,
+		indentWithTabs: false,
+		inputStyle: "textarea",
+		keyMap: Editor.settings.code.keymap,
+		lineNumbers: false,
+		lineWiseCopyCut: false,
+		lineWrapping: false,
+		lint: false,
+		matchBrackets: true,
+		mode: "javascript",
+		pollInterval: 100,
+		readOnly: false,
+		smartIndent: false,
+		spellcheck: false,
+		styleActiveLine: false,
+		styleSelectedText: false,
+		tabSize: Editor.settings.code.tabSize,
+		theme: Editor.settings.code.theme,
+		undoDepth: 0,
+		value: "",
+		viewportMargin: 1,
+		vimMode: false,
+		wholeLineUpdateBefore: true,
+		showMatchesOnScrollbar: false,
+		hintOptions:
+		{
+			hint: CodeMirror.hint.anyword,
+			completeSingle: false
+		},
+		gutters: ["CodeMirror-lint-markers"]
+ 	};
 
 	/**
 	 * CodeMirror editor instance should be used to access any codemirror functionality.
@@ -21,55 +57,15 @@ function CodeBox(parent)
 	 * @property code
 	 * @type {CodeMirror}
 	 */
-	this.code = new CodeMirror(this.element,
-	{
-		value: "",
-		matchBrackets: true,
-		hintOptions:
-		{
-			hint: CodeMirror.hint.anyword,
-			completeSingle: false
-		},
-		gutters: ["CodeMirror-lint-markers"]
-	});
+	this.code = new CodeMirror(this.element, options);
 	
+	// Create a context menu for basic text copy/paste actions
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
 		context.size.set(130, 20);
 		context.position.set(event.clientX, event.clientY);
 		
-		var refactor = context.addMenu(Locale.refactor);
-		refactor.addOption(Locale.rename, function()
-		{
-			self.server.rename(self.code);
-		});
-
-		refactor.addOption(Locale.select, function()
-		{
-			self.server.selectName(self.code);
-		});
-
-		context.addOption(Locale.search, function()
-		{
-			self.code.execCommand("find");
-		});
-
-		context.addOption(Locale.replace, function()
-		{
-			self.code.execCommand("replace");
-		});
-
-		context.addOption(Locale.replaceAll, function()
-		{
-			self.code.execCommand("replaceAll");
-		});
-
-		context.addOption(Locale.documentation, function()
-		{
-			self.server.jumpToDef(self.code);
-		});
-
 		context.addOption(Locale.copy, function()
 		{
 			var text = self.code.getSelection();
@@ -91,62 +87,12 @@ function CodeBox(parent)
 		{
 			self.code.replaceSelection(Editor.clipboard.get("text"));
 		});
-		context.addOption(Locale.autoIndent, function()
-		{
-			self.code.execCommand("indentAuto");
-		});
-		context.addOption(Locale.selectAll, function()
-		{
-			self.code.execCommand("selectAll");
-		});
-		context.addOption(Locale.undo, function()
-		{
-			self.code.execCommand("undo");
-		});
-		context.addOption(Locale.redo, function()
-		{
-			self.code.execCommand("redo");
-		});
+		
 		context.updateInterface();
 	};
-
-	/**
-	 * Event manager to for the resize scroll event.
-	 *
-	 * @property manager
-	 * @type {EventManager}
-	 */
-	this.manager = new EventManager();
-	this.manager.addScrollEvent(this.element, function(event)
-	{
-		if(event.ctrlKey && event.deltaY !== 0)
-		{
-			event.preventDefault();
-			self.setFontSize(Editor.settings.code.fontSize - event.deltaY / 100);
-		}
-	});
-	this.manager.create();
 }
 
 CodeBox.prototype = Object.create(Element.prototype);
-
-CodeBox.prototype.updateSettings = function()
-{
-	this.setFontSize(Editor.settings.code.fontSize);
-
-	this.code.setOption("lint", {options: Editor.settings.jslint});
-	this.code.setOption("theme", Editor.settings.code.theme);
-	this.code.setOption("lineNumbers", Editor.settings.code.lineNumbers);
-	this.code.setOption("lineWrapping", Editor.settings.code.lineWrapping);
-	this.code.setOption("keyMap", Editor.settings.code.keymap);
-	this.code.setOption("autoCloseBrackets", Editor.settings.code.autoCloseBrackets);
-	this.code.setOption("styleActiveLine", Editor.settings.code.highlightActiveLine);
-	this.code.setOption("showMatchesOnScrollbar", Editor.settings.code.showMatchesOnScrollbar);
-	this.code.setOption("dragDrop", Editor.settings.code.dragFiles);
-	this.code.setOption("indentWithTabs", Editor.settings.code.indentWithTabs);
-	this.code.setOption("tabSize", Editor.settings.code.tabSize);
-	this.code.setOption("indentUnit", Editor.settings.code.indentUnit);
-};
 
 /**
  * Set code editor font size.
@@ -190,10 +136,10 @@ CodeBox.prototype.setText = function(text)
 /**
  * Set language mode (javascript, glsl, etc).
  *
- * @method setMode
+ * @method setLanguage
  * @param {string} mode Language mode.
  */
-CodeBox.prototype.setMode = function(mode)
+CodeBox.prototype.setLanguage = function(mode)
 {
 	this.code.setOption("mode", mode);
 };

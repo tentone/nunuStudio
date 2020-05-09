@@ -75,19 +75,19 @@ TextEditor.prototype.attach = function(resource)
 
 	if(resource.encoding == "js")
 	{
-		this.setMode("javascript");
+		this.setLanguage("javascript");
 	}
 	else if(resource.encoding == "html")
 	{
-		this.setMode("htmlmixed");
+		this.setLanguage("htmlmixed");
 	}
 	else if(resource.encoding == "css")
 	{
-		this.setMode("css");
+		this.setLanguage("css");
 	}
 	else
 	{
-		this.setMode("");
+		this.setLanguage("");
 	}
 	
 	this.updateMetadata();

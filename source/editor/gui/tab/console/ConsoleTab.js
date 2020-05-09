@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Console tab is used for the user to access the system console output (that can be also accessed from the dev tools console).
+ *
+ * It is also possible to test some JS code directly on the console and navigate the project resources here.
+ *
+ * @class ConsoleTab
+ * @extends {TabElement}
+ */
 function ConsoleTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Console", Global.FILE_PATH + "icons/misc/console.png");
@@ -15,6 +23,14 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @type {Array}
 	 */
 	this.history = [];
+
+	/**
+	 * History pointer for navigation of the history using the up arrow in the console input box.
+	 * 
+	 * @attribute historyPointer
+	 * @type {number}
+	 */
+	this.historyPointer = -1;
 
 	/**
 	 * Stores a pointer to the original console functions.
@@ -69,7 +85,6 @@ function ConsoleTab(parent, closeable, container, index)
 	this.console.style.top = "0px";
 	this.console.style.left = "0px";
 	this.element.appendChild(this.console);
-
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu(DocumentBody);
@@ -95,57 +110,79 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @attribute code
 	 * @type {Element}
 	 */
-	this.code = document.createElement("input");
-	this.code.type = "text";
-	this.code.style.position = "absolute";
-	this.code.style.margin = "0";
-	this.code.style.boxSizing = "border-box";
-	this.code.style.textIndent = "4px";
-	this.code.style.color = "#FFFFFF";
-	this.code.style.borderStyle = "solid";
-	this.code.style.borderRightStyle = "none";
-	this.code.style.borderLeftStyle = "none";
-	this.code.style.borderBottomStyle = "none";
-	this.code.style.borderWidth = "2px";
-	this.code.style.borderColor = Editor.theme.barColor;
-	this.code.style.backgroundColor = Editor.theme.panelColor;
-	this.code.style.bottom = "0px";
-	this.code.style.left = "0px";
-	this.code.style.height = "30px";
-	this.element.appendChild(this.code);
+	this.code = new CodeBox(this);
+	this.code.position.set(0, 0);
+	this.code.setMode(Element.BOTTOM_LEFT);
+	this.code.setLanguage("javascript");
+	this.code.updateInterface();
 
-	this.code.onkeydown = function(event)
+
+	/**
+	 * Event manager to for the resize scroll event.
+	 *
+	 * @property manager
+	 * @type {EventManager}
+	 */
+	this.manager = new EventManager();
+	this.manager.addScrollEvent(this.code.element, function(event)
+	{
+		if(event.ctrlKey && event.deltaY !== 0)
+		{
+			event.preventDefault();
+			self.setFontSize(Editor.settings.code.fontSize - event.deltaY / 100);
+		}
+	});
+	this.manager.add(this.code.element, "keydown", function(event)
 	{
 		if(event.keyCode === Keyboard.ENTER)
 		{
-			try
-			{
-				var result = eval.call(window, this.value);
-				console.log(" >> " + this.value);
-				console.log(result);
-			}
-			catch(e)
-			{
-				console.error(" >> " + this.value);
-				console.error(e);
-			}
-
-			self.history.push(this.value);
-			this.value = "";
+			self.runCommand(self.getText());
+			self.setText("");
 		}
 		else if(event.keyCode === Keyboard.UP)
 		{
-			if(self.history.length > 0)
+			if(self.history.length > 0 && self.historyPointer > 0)
 			{
-				this.value = self.history.pop();
+				self.setText(self.history[self.historyPointer--]);
 			}
 		}
-	};
+	});
+	this.manager.create();
 
 	this.useConsole(this.enabled);
 }
 
 ConsoleTab.prototype = Object.create(TabElement.prototype);
+
+/**
+ * Run a user command from the console.
+ *
+ * @method runCommand
+ */
+ConsoleTab.prototype.runCommand = function(code)
+{
+	try
+	{
+		var result = eval.call(window, code);
+		console.log(" >> " + code);
+		console.log(result);
+	}
+	catch(e)
+	{
+		console.error(" >> " + code);
+		console.error(e);
+	}
+
+	this.history.push(code);
+	this.historyPointer = this.history.length - 1;
+};
+
+ConsoleTab.prototype.updateSettings = function()
+{
+	TabElement.prototype.updateSettings.call(this);
+
+	// this.code.updateSettings();
+};
 
 /**
  * Get stack trace up until the point that this method was called.
@@ -194,9 +231,6 @@ ConsoleTab.prototype.useConsole = function(enabled)
 		{
 			self.log(arguments);
 			self.handlers.log.apply(null, arguments);
-
-			// TODO <REMOVE THIS>
-			self.handlers.log(ConsoleTab.getStackTrace());
 		};
 
 		window.console.warn = function()
@@ -209,9 +243,6 @@ ConsoleTab.prototype.useConsole = function(enabled)
 		{
 			self.error(arguments);
 			self.handlers.error.apply(null, arguments);
-
-			// Print stack trace to console for easier debug
-			// console.trace();
 		};
 
 		window.console.clear = function()
@@ -310,7 +341,9 @@ ConsoleTab.prototype.updateSize = function()
 
 	this.console.style.height = (this.size.y - 30) + "px";
 	this.console.style.width = this.size.x + "px";
-	this.code.style.width = this.size.x + "px";
+
+	this.code.size.set(this.size.x, 30);
+	this.code.updateSize();
 };
 
 /**

@@ -237,7 +237,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	// Fragment tab
 	this.fragmentShader = this.tab.addTab(CodeEditor, false);
 	this.fragmentShader.setName(Locale.fragment);
-	this.fragmentShader.setMode("glsl");
+	this.fragmentShader.setLanguage("glsl");
 	this.fragmentShader.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "fragmentShader", self.fragmentShader.getText()));
@@ -247,7 +247,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	// Vertex tab
 	this.vertexShader = this.tab.addTab(CodeEditor, false);
 	this.vertexShader.setName(Locale.vertex);
-	this.vertexShader.setMode("glsl");
+	this.vertexShader.setLanguage("glsl");
 	this.vertexShader.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "vertexShader", self.vertexShader.getText()));
