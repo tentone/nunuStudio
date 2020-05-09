@@ -237,15 +237,17 @@ ConsoleTab.prototype = Object.create(TabElement.prototype);
  */
 ConsoleTab.prototype.runCommand = function(code)
 {
+	console.log(" >> " + code);
+	
 	try
 	{
 		var result = eval.call(window, code);
-		console.log(" >> " + code);
-		console.log(result);
+		if(result !== undefined) {
+			console.log(result);
+		}
 	}
 	catch(e)
 	{
-		console.error(" >> " + code);
 		console.error(e);
 	}
 
