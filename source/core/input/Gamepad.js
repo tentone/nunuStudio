@@ -14,11 +14,40 @@
  */
 function Gamepad()
 {
+	/**
+	 * Vendor code of the gamepad device.
+	 *
+	 * @attribute vendor
+	 * @type {number}
+	 */
 	this.vendor = -1;
+
+	/**
+	 * Product code of the gamepad device.
+	 *
+	 * @attribute product
+	 * @type {number}
+	 */
 	this.product = -1;
+
+	/**
+	 * Connected state of the gamepad.
+	 *
+	 * @attribute connected
+	 * @type {boolean}
+	 */
 	this.connected = false;
 	
 	this.gamepad = null;
+
+	/**
+	 * Gamepad buttons with their associated state.
+	 *
+	 * Should be different for every gamepad.
+	 *
+	 * @attribute buttons
+	 * @type {Array}
+	 */
 	this.buttons = [];
 
 	var gamepads = navigator.getGamepads();
