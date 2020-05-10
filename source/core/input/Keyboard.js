@@ -1,8 +1,10 @@
 "use strict";
 
 /**
- * Keyboard instance for input in sync with the running 3D application.
+ * Keyboard instance for input in sync with the running application, internally stores the key transitions provided by the browser.
  * 
+ * Allow to detect every key press, release event in sync with the app frame update.
+ *
  * The keyboard object provided by scripts is automatically updated by the runtime handler.
  * 
  * @class Keyboard

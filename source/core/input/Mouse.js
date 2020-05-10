@@ -1,8 +1,10 @@
 "use strict";
 
 /**
- * Mouse instance for input in sync with the running 3D application.
+ * Mouse instance for sync input the mouse should be updated everytime before.
  *
+ * Automatically calculates the diff of position between frames.
+ * 
  * The mouse object provided by scripts is automatically updated by the runtime handler.
  * 
  * @class Mouse
@@ -366,8 +368,6 @@ Mouse.buttonJustReleased = function(button)
 
 /**
  * Update mouse position.
- *
- * Automatically called by the runtime.
  * 
  * @method updatePosition
  * @param {number} x
@@ -392,8 +392,6 @@ Mouse.updatePosition = function(x, y, xDiff, yDiff)
 
 /**
  * Update a mouse button.
- * 
- * Automatically called by the runtime.
  *
  * @method updateKey
  * @param {number} button

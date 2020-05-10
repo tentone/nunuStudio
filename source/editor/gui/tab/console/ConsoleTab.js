@@ -611,13 +611,17 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
+	else if(object instanceof Error)
+	{
+		var container = document.createElement("div");
+		container.style.paddingLeft = "5px";
+		container.style.paddingTop = "5px";
+		container.style.paddingBottom = "5px";
+		container.appendChild(document.createTextNode(object = object.message));
+		log.appendChild(container);
+	}
 	else if(object instanceof Object)
 	{
-		if(object instanceof Error)
-		{
-			object = object.message;
-		}
-
 		var container = document.createElement("div");
 		container.style.paddingLeft = "5px";
 		container.style.paddingTop = "5px";
