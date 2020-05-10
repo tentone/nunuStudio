@@ -1,35 +1,34 @@
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/logo.png">
 
-[![GitHub version](https://badge.fury.io/gh/tentone%2FnunuStudio.svg)](https://badge.fury.io/gh/tentone%2FnunuStudio)
-[![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues) [![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers)
+[![GitHub version](https://badge.fury.io/gh/tentone%2FnunuStudio.svg)](https://badge.fury.io/gh/tentone%2FnunuStudio)[![npm version](https://badge.fury.io/js/nunu-studio.svg)](https://badge.fury.io/js/nunu-studio)[![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues) [![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers)
 
- - nunustudio is an open source 3D VR game engine for the web it allows designers and web developers to easily develop 3D experiences that can run directly in a web page or be exported as Desktop applications.
- - It has a fully featured visual editor, supports a wide range of file formats, the tools are open source and completely free to use for both personal and commercial usage, it is powered by open web APIs like WebGL, WebVR and WebAudio.
- - Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters, etc and a powerful scripting API that allows the creation of complex applications.
-
+ - nunuStudio is an open source 3D VR game engine for the web it allows designers and web developers to easily develop 3D experiences that can run directly in a web page or be exported as Desktop applications.
+ - It has a fully featured visual editor, supports a wide range of file formats, the tools are open source and completely free to use for both personal and commercial usage, it is powered by open web APIs like WebGL, WebXR and Web Audio.
+ - Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters and a powerful scripting API that allows the creation of complex applications.
 
 
-## Web Editor
+
+### Web Editor
  - There is a fully featured web version of the editor available at https://nunustudio.org/editor
  - The web version was tested with Firefox, Chrome and Microsoft Edge, mobile browsers are not supported.
 
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/web.png">
 
-## Documentation
+### Documentation
  - Documentation for the scripting API is available on the nunu webpage https://nunustudio.org/docs
     - nunuStudio was documented using YUIDocs
  - Tutorials available on the project page at <https://nunustudio.org/learn.html>
 
 
 
-## Screenshots
+### Screenshots
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/2.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/3.png">
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/4.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/1.png">
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/5.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/6.png">
 
 
 
-## Features
+### Features
 
 - Visual application editor
   - Drag and drop files directly into the project
@@ -45,7 +44,7 @@
 
 
 
-## Installation
+### Installation
 
 - nunuStudio is intended to run with NWJS on the desktop (Linux and Windows are supported)
   - Download last version from releases in the github page
@@ -55,7 +54,7 @@
 
 
 
-## Building
+### Building
 - nunuStudio uses a custom solution for code management based of an include function
 - To build nunuStudio Java and NodeJS are required
   - Javascript is optimized and minified using Google closure
@@ -66,7 +65,7 @@
 
 
 
-## Libraries
+### Libraries
 - nunuStudio is built on top of a number of open source projects
   - NWJS ([nwjs.io](https://nwjs.io))
   - three.js ([github.com/mrdoob/three.js](https://github.com/mrdoob/three.js))
@@ -82,7 +81,7 @@
 
 
 
-## Runtime
+#### Runtime
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in HTML pages the following code can be used
 
@@ -99,7 +98,7 @@
 
 
 
-## License
+### License
 
 - nunuStudio uses a MIT license that allow for comercial usage of the platform without any cost.
 - The license is available on the project GitHub page

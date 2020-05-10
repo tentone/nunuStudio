@@ -66,6 +66,9 @@ function Gamepad()
 	}
 }
 
+Gamepad.prototype = Gamepad;
+Gamepad.prototype.constructor = Gamepad;
+
 /**
  * Set which gamepad should be used by this Gamepad instance.
  *
