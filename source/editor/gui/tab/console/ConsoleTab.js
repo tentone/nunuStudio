@@ -148,7 +148,7 @@ function ConsoleTab(parent, closeable, container, index)
 			hint: CodeMirror.hint.anyword,
 			completeSingle: false
 		}
- 	});
+	});
 
 	/**
 	 * Tern server used to provide code analysis.
@@ -237,10 +237,20 @@ ConsoleTab.prototype = Object.create(TabElement.prototype);
  */
 ConsoleTab.prototype.runCommand = function(code)
 {
-	console.log(" >> " + code);
+	var container = document.createElement("div");
+	container.style.paddingLeft = "5px";
+	container.style.paddingTop = "5px";
+	container.style.paddingBottom = "5px";
+	CodeMirror.runMode(code, "javascript", container, {
+		mode: "javascript",
+		tabSize: Editor.settings.code.tabSize,
+		theme: Editor.settings.code.theme,
+	});
+	this.content.appendChild(container);
 	
 	try
 	{
+		window.program = Editor.program;
 		var result = eval.call(window, code);
 		if(result !== undefined) {
 			console.log(result);

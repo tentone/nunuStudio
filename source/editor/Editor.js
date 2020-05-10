@@ -266,6 +266,7 @@ Editor.initialize = function()
  *
  * Opens a new tab, and sets the run button text.
  *
+ * @static
  * @method runProject
  */
 Editor.runProject = function()
@@ -374,6 +375,7 @@ Editor.unselectObject = function(object)
 /**
  * Get device pixel ratio based on the editor configuration.
  *
+ * @static
  * @method getPixelRatio
  * @return {number} Device pixel ratio.
  */
@@ -404,6 +406,7 @@ Editor.isSelected = function(object)
 /** 
  * Resize the editor to fit the document body.
  *
+ * @static
  * @method resize
  */
 Editor.resize = function()
@@ -417,6 +420,7 @@ Editor.resize = function()
 /**
  * Check if there is some object selected.
  *
+ * @static
  * @method hasObjectSelected
  * @return {boolean} True if there is an object selected.
  */
@@ -462,6 +466,7 @@ Editor.addAction = function(action)
 /**
  * Get currently active scene in the editor.
  *
+ * @static
  * @method getScene
  * @return {Scene} The scene currently active in the editor, null if none available.
  */
@@ -480,6 +485,7 @@ Editor.getScene = function()
  * 
  * If no parent is specified it adds to object to the current scene. 
  *
+ * @static
  * @method addObject
  * @param {Object3D} object Object to be added.
  * @param {Object3D} parent Parent object, if undefined the program scene is used.
@@ -508,6 +514,7 @@ Editor.addObject = function(object, parent)
 /**
  * Rename object, if none passed as argument selected object is used.
  *
+ * @static
  * @method renameObject
  * @param {Object3D} object Object to be renamed.
  */
@@ -616,6 +623,7 @@ Editor.deleteObject = function(object)
  *
  * Uses the JSON serialization of the object.
  *
+ * @static
  * @method copyObject
  * @param {Object3D} object Object to copy.
  */
@@ -650,6 +658,7 @@ Editor.copyObject = function(object)
  *
  * Uses the JSON serialization of the object.
  *
+ * @static
  * @method copyObject
  * @param {Object3D} object Object to copy.
  */
@@ -683,6 +692,7 @@ Editor.cutObject = function(object)
 /**
  * Paste object as children of target object.
  *
+ * @static
  * @method pasteObject
  * @param {Object3D} parent
  */
@@ -753,6 +763,7 @@ Editor.undo = function()
 /**
  * Create default resouces to be used when creating new objects.
  *
+ * @static
  * @method createDefaultResouces
  */
 Editor.createDefaultResouces = function()
@@ -793,6 +804,7 @@ Editor.updateSettings = function()
 /**
  * Update all object views
  *
+ * @static
  * @method updateObjectsViewsGUI
  */
 Editor.updateObjectsViewsGUI = function()
@@ -804,6 +816,7 @@ Editor.updateObjectsViewsGUI = function()
 /**
  * Update tabs after changing selection.
  *
+ * @static
  * @method updateSelectionGUI
  */
 Editor.updateSelectionGUI = function()
@@ -815,6 +828,7 @@ Editor.updateSelectionGUI = function()
 /**
  * Reset the editor state.
  *
+ * @static
  * @method resetEditor
  */
 Editor.resetEditor = function()
@@ -890,6 +904,7 @@ Editor.addDefaultScene = function(material)
 /**
  * Save program to file.
  *
+ * @static
  * @method saveProgram
  * @param {string} fname
  * @param {boolean} binary If true the file is saved as nsp.
@@ -941,6 +956,7 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 /**
  * Set a program to be edited, create new history object and clear editor windows.
  *
+ * @static
  * @method setProgram
  * @param {Program} program
  */
@@ -982,6 +998,7 @@ Editor.setProgram = function(program)
  *
  * Programs can be stored as textual json files, or PSON files (binary).
  *
+ * @static
  * @method loadProgram
  * @param {File} file
  * @param {boolean} binary Indicates if the file is binary.
@@ -1057,6 +1074,7 @@ Editor.loadProgram = function(file, binary)
  *
  * Used for the editor to remember the file location that it is currently working on.
  *
+ * @static
  * @method setOpenFile
  * @param {string} file Path of file currently open.
  */
@@ -1092,6 +1110,7 @@ Editor.setOpenFile = function(file)
 /**
  * Show a confirm dialog with a message.
  *
+ * @static
  * @method confirm
  * @param {string} message
  * @return {boolean} True or false depending on the confirm result.
@@ -1104,6 +1123,7 @@ Editor.confirm = function(message)
 /**
  * Show a alert dialog with a message.
  *
+ * @static
  * @method confirm
  * @param {string} message
  */
@@ -1115,6 +1135,7 @@ Editor.alert = function(message)
 /**
  * Prompt the user for a value.
  *
+ * @static
  * @method confirm
  * @param {string} message
  * @param {string} defaultValue
@@ -1130,6 +1151,7 @@ Editor.prompt = function(message, defaultValue)
  *
  * The version timestamp (Nunu.TIMESTAMP) is parsed compared to the local timestamp.
  *
+ * @static
  * @method updateNunu
  */
 Editor.updateNunu = function(silent)

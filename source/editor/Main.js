@@ -81,7 +81,6 @@ include("source/core/three/scenes/Fog.js");
 include("source/core/three/objects/Points.js");
 include("source/core/three/objects/Skeleton.js");
 
-
 // Runtime core
 include("source/core/Nunu.js");
 
@@ -268,6 +267,7 @@ include("lib/codemirror/addon/lint/lint.js");
 include("lib/codemirror/addon/lint/javascript-lint.js");
 include("lib/codemirror/addon/tern/tern.js");
 include("lib/codemirror/addon/tern/tern.css");
+include("lib/codemirror/addon/runmode/runmode.js");
 include("lib/codemirror/theme/*");
 
 include("lib/acorn/acorn.js");

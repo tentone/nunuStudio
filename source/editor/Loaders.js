@@ -5,6 +5,7 @@
  *
  * Supports browser supported format (png, jpeg, bmp, gif, etc), and GPU compressed formats (pvr, dds, ktx, etc).
  *
+ * @static
  * @method loadTexture
  * @param {File} file
  * @param {Function} onLoad
@@ -137,6 +138,7 @@ Editor.loadTexture = function(file, onLoad)
 /**
  * Load video file as texture from file object.
  *
+ * @static
  * @method loadVideoTexture
  * @param {File} file
  * @param {Function} onLoad Callback function called after the resource is loaded.
@@ -232,6 +234,7 @@ Editor.loadFont = function(file, onLoad)
  *
  * Also searches for the .atlas file on the file path.
  *
+ * @static
  * @method loadSpineAnimation
  * @param {File} file File to load.
  */
@@ -275,6 +278,7 @@ Editor.loadSpineAnimation = function(file)
 /**
  * Load text from file and add it as a resource to the program.
  *
+ * @static
  * @method loadText
  * @param {File} file File to load.
  */

@@ -107,7 +107,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Editor.exportWebProject(files[0].path);
+					Exporters.exportWebProject(files[0].path);
 					Editor.alert(Locale.projectExported);
 				}
 				catch(e)
@@ -126,7 +126,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Editor.exportAndroid(Editor.ANDROID_RUN);
+					Exporters.exportAndroid(Exporters.ANDROID_RUN);
 				}
 				catch(e)
 				{
@@ -141,7 +141,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Editor.exportAndroid(Editor.ANDROID_EXPORT_UNSIGNED, files[0].path);
+						Exporters.exportAndroid(Exporters.ANDROID_EXPORT_UNSIGNED, files[0].path);
 					}
 					catch(e)
 					{
@@ -161,7 +161,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Editor.exportWindows(files[0].path);
+						Exporters.exportWindows(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -179,7 +179,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Editor.exportLinux(files[0].path);
+						Exporters.exportLinux(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -198,7 +198,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Editor.exportMacOS(files[0].path);
+						Exporters.exportMacOS(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -219,7 +219,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Editor.exportWebProjectZip(fname);
+					Exporters.exportWebProjectZip(fname);
 					Editor.alert(Locale.projectExported);
 				}
 				catch(e)
