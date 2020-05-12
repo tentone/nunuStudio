@@ -2,19 +2,45 @@
 
 /**
  * Time is user to call functions in loop at a defined rate.
- * 
- * Loop time can be changed dinamically.
+ *
+ * Loop time can be changed dynamically, it is readjusted on the next timer call.
  *
  * @class Timer
- * @param {Function} callback Timer callback function.
- * @param {number} time Timer period.
+ * @param {Function} callback Callback task method called at the rate of the time.
+ * @param {number} Time in ms to run the timer task.
  */
 function Timer(callback, time)
 {
+	/**
+	 * Task of the timer, executed at the timer defined rate.
+	 * 
+	 * @attribute callback
+	 * @type {Function}
+	 */
 	this.callback = callback;
+
+	/**
+	 * Period of the timer in milliseconds.
+	 * 
+	 * @attribute time
+	 * @type {number}
+	 */
 	this.time = time;
 
+	/**
+	 * Indicates if the timer is currently running, it is set to true on start and reset to false on stop.
+	 * 
+	 * @attribute running
+	 * @type {boolean}
+	 */
 	this.running = false;
+
+	/**
+	 * ID of the currently waiting timeout clock. Used to cancel the already request execution of the next clock tick.
+	 * 
+	 * @attribute running
+	 * @type {number}
+	 */
 	this.id = -1;
 }
 

@@ -1,20 +1,36 @@
 "use strict";
 
 /**
- * Animation timer is a special type of timer that uses the requestAnimationFrame method.
+ * Animation timer is a special type of timer that uses the requestAnimationFrame() method.
  *
  * This timer calls the method with the same rate as the screen refesh rate.
- * 
- * Loop time can be changed dinamically.
  *
  * @class AnimationTimer
  * @param {Function} callback Timer callback function.
  */
 function AnimationTimer(callback)
 {
+	/**
+	 * Task of the timer, executed at the timer defined rate.
+	 * 
+	 * @attribute callback
+	 * @type {Function}
+	 */
 	this.callback = callback;
-
+	/**
+	 * Indicates if the timer is currently running, it is set to true on start and reset to false on stop.
+	 * 
+	 * @attribute running
+	 * @type {boolean}
+	 */
 	this.running = false;
+
+	/**
+	 * ID of the currently waiting timeout clock. Used to cancel the already request execution of the next clock tick.
+	 * 
+	 * @attribute running
+	 * @type {number}
+	 */
 	this.id = -1;
 }
 
