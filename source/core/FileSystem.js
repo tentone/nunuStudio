@@ -3,7 +3,7 @@
 /**
  * FileSystem is used to read and write files using nunuStudio.
  * 
- * Its implements muitple solutions for each method depending on the platform (NodeJS, brower or cordova).
+ * Its implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).
  *
  * Some operations are platform specific and might not work everywhere.
  *
@@ -454,15 +454,13 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
 };
 
 /**
- * Open file chooser dialog receives onLoad callback, file filter, saveas.
+ * Open file chooser dialog window for the user to select files stored in the system.
  *
- * Save mode does not work inside the browser.
- *
- * The onLoad callback receives an array of files as parameter.
+ * The files selected are retrieved using the onLoad callback that receives a array of File objects.
  *
  * @method chooseFile
- * @param {Function} onLoad onLoad callback that receives array of files choosen as parameter.
- * @param {string} filter File type filter.
+ * @param {Function} onLoad onLoad callback that receives array of files as parameter.
+ * @param {string} filter File type filter (e.g. ".zip,.rar, etc)
  * @param {string} saveas File format or name to be used, optinonally it can be a boolean value indicating savemode.
  * @param {boolean} multiFile If true the chooser will accept multiple files.
  */
