@@ -3,7 +3,7 @@
 /**
  * Animation timer is a special type of timer that uses the requestAnimationFrame() method.
  *
- * This timer calls the method with the same rate as the screen refesh rate.
+ * This timer calls the method with the same rate as the screen refresh rate.
  *
  * @class AnimationTimer
  * @param {Function} callback Timer callback function.
