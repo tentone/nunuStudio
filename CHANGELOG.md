@@ -5,8 +5,7 @@
 
 ### V0.9.7
 
-- Published the project to NPM
-- 
+- Published the project to NPM.
 
 
 
