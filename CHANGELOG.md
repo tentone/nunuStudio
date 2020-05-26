@@ -2,18 +2,26 @@
  - All notable changes to this project will be documented in this file, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## Unpublished
-### V0.9.6 Beta
+
+### V0.9.7
+
+- Published the project to NPM
+- 
+
+
+
+### V0.9.6
+
  - Fixed canvas background.
  - Physics object positioning mode.
  - Terrain and shaders tutorials.
  - CSS 3D renderer support.
-    - Perspective transformed HTML containers.
-    - Billboarded HTML containers.
+   - Perspective transformed HTML containers.
+   - Billboarded HTML containers.
  - Added bitmap text with support for SDF and MSDF text rendering.
  - Added canvas based text with support for CSS styling.
  - Support for extruded or planar Text Mesh.
- - Fixed bug with tree overlaping other tabs.
+ - Fixed bug with tree overlapping other tabs.
  - Select multiple tree objects using SHIFT.
  - Export draco compressed geometries.
  - Scene editor toolbar is now attached to the scene editor tab. 
@@ -25,9 +33,9 @@
 
 
 
-## Published
-### V0.9.5 Beta
- - Splitabble tabs in the UI
+### V0.9.5
+
+ - Split able tabs in the UI
  - Improved form GUI
  - Support for mesh-cap materials
  - Loading data screen
@@ -42,12 +50,12 @@
  - Using NWJS-builder now
  - Fixed shader editor layout
  - Support for Tizen key codes (TizenKeyboard)
- - VideoStream object
+ - Video Stream object
  - Mouse back and forward buttons support (Chrome and desktop only).
 
 
 
-### V0.9.4 Beta
+### V0.9.4
  - Multi object edit (position, rotation and scale)
  - Support for SVG file loading
  - Improved camera controls
@@ -60,7 +68,7 @@
 
 
 
-### V0.9.3 Beta
+### V0.9.3
  - Shadow material
  - Support for .blend files (@Galactrax)
  - Fixed support for spine animations
@@ -73,12 +81,12 @@
  - Animation timeline editor
  - Support for external libs in scripts
  - Support for text and code resources
- - Fixed particle scalling issues
+ - Fixed particle scaling issues
  - File export API
 
 
 
-### V0.9.2 Beta
+### V0.9.2
  - Support for multi selection
  - Geometry binary operations (CSG)
     - Subtract
@@ -95,11 +103,11 @@
 
 
 
-### V0.9.1 Beta
+### V0.9.1
  - Internal debug console
     - Preview materials and textures in console
     - Visualize math structures
- - Desktop auto update mechanism (auto download build from github master branch)
+ - Desktop auto update mechanism (auto download build from git hub master branch)
  - Load 3D file drag and drop with texture support
  - Skeleton serialization (@takahirox)
  - ES6 lint support
@@ -108,15 +116,15 @@
 
 
 
-### V0.9.0 Beta
+### V0.9.0
  - Division property for HTML elements
  - Camera preview positioning
- - Cubemaps from equirectangular projection
+ - Cube maps from equirectangular projection
  - Binary project files (.nsp)
 
 
 
-### V0.8.9.26 Alpha
+### V0.8.9.26
  - Improved audio implementation
  - Control sky colors on UI
  - Keyboard navigation in orbit mode
@@ -124,19 +132,19 @@
  - Calculate texture offset and repeat to fit aspect ratio in square
  - Code autocomplete from documentation
  - Keep file name on web version
- - Force webgl context loss when tabs closed
+ - Force WebGL context loss when tabs closed
 
 
 
-### V0.8.9.25 Alpha
- - Added CubeCamera
- - Added SpriteSheet texture animation support
+### V0.8.9.25
+ - Added Cube Camera
+ - Added Sprite Sheet texture animation support
  - Gamepad support
  - Improved UI elements
 
 
 
-### V0.8.9.24 Alpha
+### V0.8.9.24
  - Added snap to grid
  - First version of NodeJS build system (@GGAlanSmithee)
  - Open ISP as url argument on web version
@@ -144,46 +152,46 @@
 
 
 
-### V0.8.9.23 Alpha
+### V0.8.9.23
  - Added support for STL files
  - Fixed locked keys in Keyboard after alerts, prompts, etc
- - Added support for nested menu in ContextMenus
+ - Added support for nested menu in Context Menus
  - Support for 3DS files
- - CircleGeometry
+ - Circle Geometry
 
 
 
-### V0.8.9.22 Alpha
+### V0.8.9.22
  - Removed editor state, tabs are self updated
 
 
 
-### V0.8.9.21 Alpha
+### V0.8.9.21
  - Editor standalone version (@Seagat2011)
  - Support for File API loading
  - Added reverse glyphs option to Font asset
  - Improved font preview
  - Added support for Textures as scene background
- - Drag and drop CubeTextures
+ - Drag and drop Cube Textures
  - Drag and drop tabs in editor
 
 
 
-### V0.8.9.20 Alpha
- - Cubetexture support
+### V0.8.9.20
+ - Cube texture support
  - Improved material serialization
  - Sort objects in the explorer
 
 
 
-### V0.8.9.19 Alpha
+### V0.8.9.19
  - Renamed variables variable_name to variableName
  - Added Texture Editor
  - Documentation page
 
 
 
-### V0.8.9.18 Alpha
+### V0.8.9.18
  - Added geometry properties to geometry panels
  - Camera draw order
  - Fixed OBJ and MTL loading
@@ -192,7 +200,7 @@
 
 
 
-### V0.8.9.17 Alpha
+### V0.8.9.17
  - Particle editor position, velocity and acceleration delta now shows in different a row
  - Fixed program resources dispose
  - Added support for mouse lock on runtime
@@ -203,7 +211,7 @@
 
 
 
-### V0.8.9.16 Alpha
+### V0.8.9.16
  - Fixed file path changing after project export
  - Program rendering settings (Antialiasing, Shadows)
  - Text3D now supports line break with '\n'
@@ -215,7 +223,7 @@
 
 
 
-### V0.8.9.15 Alpha
+### V0.8.9.15
  - Added font preview in asset explorer
  - Fixed material preview projection
  - Projects can be loaded when dragged anywhere
