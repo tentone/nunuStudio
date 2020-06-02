@@ -83,6 +83,9 @@ LocaleManager.register(
 	ground: "Ground",
 	spineAnimation: "Spine Animation",
 	camera: "Camera",
+	textMesh: "Text Mesh",
+	textBitmap: "Text Bitmap",
+	textSprite: "Text Sprite",
 
 	// Geometries
 	parametric: "Parametric",

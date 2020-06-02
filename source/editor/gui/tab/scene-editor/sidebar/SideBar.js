@@ -409,7 +409,7 @@ SideBar.prototype.createObject = function()
 	text.addOption(Global.FILE_PATH + "icons/text/textmesh.png", function()
 	{
 		Editor.addObject(new TextMesh("text", Editor.defaultMaterial, Editor.defaultFont), self.editor.scene);
-	}, "Text Mesh");
+	}, Locale.textMesh);
 
 	text.addOption(Global.FILE_PATH + "icons/text/text.png", function()
 	{
@@ -425,12 +425,12 @@ SideBar.prototype.createObject = function()
 		}, texture, TextBitmap.SDF);
 
 		Editor.addObject(object, self.editor.scene);
-	}, "Text Bitmap");
+	}, Locale.textBitmap);
 
 	text.addOption(Global.FILE_PATH + "icons/text/textcanvas.png", function()
 	{
 		Editor.addObject(new TextSprite("text"), self.editor.scene);
-	}, "Text Sprite");
+	}, Locale.textSprite);
 
 	text.updateOptions();
 
