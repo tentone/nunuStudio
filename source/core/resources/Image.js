@@ -17,7 +17,22 @@ function Image(url, encoding)
 {
 	Resource.call(this, "image", "Image");
 
+	/**
+	 * Image width (in pixels), if not available should be set -1.
+	 *
+	 * Stores the real size of the image not the used to represent it, its obtained from the naturalWidth attribute of the image element.
+	 *
+	 * @param {number}
+	 */
 	this.width = -1;
+
+	/**
+	 * Image height (in pixels), if not available should be set -1.
+	 *
+	 * Stores the real size of the image not the used to represent it, its obtained from the naturalHeight attribute of the image element.
+	 *
+	 * @param {number}
+	 */
 	this.height = -1;
 
 	if(url !== undefined)
@@ -82,23 +97,60 @@ Image.fileIsImage = function(file)
 };
 
 /**
+ * Get the image size if its available, if the image size its not available it has to be loaded first.
+ *
+ * @param {Function} onLoad Callack method to get the image size, receives (width, height) as parameters.
+ */
+Image.prototype.getImageSize = function(onLoad)
+{
+	if(this.width > -1 && this.height > -1)
+	{
+		onLoad(this.width, this.height);
+	}
+	else
+	{
+		var self = this;
+
+		var image = document.createElement("img");
+		image.src = this.data;
+		image.onload = function()
+		{
+			self.width = image.naturalWidth;
+			self.height = image.naturalHeight;
+
+			onLoad(self.width, self.height);
+		};
+	}
+
+};
+
+/**
  * Read the image data and return the raw pixel data of the image as a ImageData object.
  *
+ * @param {Function} onLoad Callback method to retrieve the image data, receives (data, width, height) as parameters.
  * @return {ImageData} Image data object with the content of the image object.
  */
-Image.prototype.getImageData = function()
+Image.prototype.getImageData = function(onLoad)
 {
+	var self = this;
+
 	var image = document.createElement("img");
 	image.src = this.data;
+	image.onload = function()
+	{	
+		self.width = image.naturalWidth;
+		self.height = image.naturalHeight;
 
-	var canvas = document.createElement("canvas");
-	canvas.width = image.width;
-	canvas.height = image.height;
+		var canvas = document.createElement("canvas");
+		canvas.width = image.naturalWidth;
+		canvas.height = image.naturalWidth;
 
-	var context = canvas.getContext("2d");
-	context.drawImage(image, 0, 0, image.width, image.height);
+		var context = canvas.getContext("2d");
+		context.drawImage(image, 0, 0, image.width, image.height);
 
-	return context.getImageData(0, 0, image.width, image.height);
+		onLoad(context.getImageData(0, 0, image.width, image.height),self.width, self.height);
+	};
+
 };
 
 /**
@@ -107,7 +159,7 @@ Image.prototype.getImageData = function()
  * Can be called externally on data load error to load dummy data.
  *
  * @method createSolidColor
- * @param {string} color Color code
+ * @param {string} color CSS Color string.
  */
 Image.prototype.createSolidColor = function(color)
 {
@@ -155,9 +207,18 @@ Image.prototype.loadArrayBufferData = function(data, encoding)
  */
 Image.prototype.hasTransparency = function(perPixel)
 {
-	if(perPixel === true)
+	if(perPixel === true && this.width > -1 && this.height > -1)
 	{
-		var data = this.getImageData().data;
+		var image = document.createElement("img");
+
+		var canvas = document.createElement("canvas");
+		canvas.width = image.width;
+		canvas.height = image.height;
+
+		var context = canvas.getContext("2d");
+		context.drawImage(image, 0, 0, image.width, image.height);
+
+		var data = context.getImageData(0, 0, image.width, image.height).data;
 
 		for(var i = 3; i < data.length; i += 4)
 		{

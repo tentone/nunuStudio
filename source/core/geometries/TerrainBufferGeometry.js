@@ -38,6 +38,10 @@ TerrainBufferGeometry.prototype.generate = function()
 	var widthSegments = this.parameters.widthSegments;
 	var heightSegments = this.parameters.heightSegments;
 
+	var data = this.image.getImageData();
+	// TODO <REMOVE THIS>
+	console.log(data);
+
 	var widthHalf = width / 2;
 	var heightHalf = height / 2;
 
