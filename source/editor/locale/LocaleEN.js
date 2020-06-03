@@ -107,6 +107,7 @@ LocaleManager.register(
 	torusKnot: "Torus-Knot",
 	cone: "Cone",
 	roundedBox: "Rounded Box",
+	terrain: "Terrain",
 
 	// Textures
 	spriteSheetTexture: "SpriteSheet Texture",

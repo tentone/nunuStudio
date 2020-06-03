@@ -4,6 +4,8 @@
  * Rounded corners box buffer geometry.
  *
  * @author pailhead / http://dusanbosnjak.com
+ * @class RoundedBoxBufferGeometry
+ * @constructor
  */
 function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 {

@@ -365,6 +365,20 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(model, self.editor.scene);
 	}, Locale.roundedBox);
 
+	// Terrain
+	models.addOption(Global.FILE_PATH + "icons/models/terrain.png", function()
+	{
+		var image = new Image(Global.FILE_PATH + "terrain.png");
+
+		var geometry = new TerrainBufferGeometry(10, 10, 100, 100, image);
+		geometry.name = "terrain";
+		
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "terrain";
+
+		Editor.addObject(model, self.editor.scene);
+	}, Locale.terrain);
+
 	// Parametric
 	/*models.addOption(Global.FILE_PATH + "icons/models/spline.png", function()
 	{
