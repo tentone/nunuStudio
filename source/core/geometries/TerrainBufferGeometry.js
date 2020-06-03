@@ -20,6 +20,7 @@ function TerrainBufferGeometry(width, height, widthSegments, heightSegments, ima
 		height: height || 1,
 		widthSegments: widthSegments || 10,
 		heightSegments: heightSegments || 10,
+		scale: 10
 	};
 
 	this.image = image;
@@ -38,12 +39,13 @@ TerrainBufferGeometry.prototype.generate = function()
 	var widthSegments = this.parameters.widthSegments;
 	var heightSegments = this.parameters.heightSegments;
 
+	var scale = this.parameters.scale;
+
 	var self = this;
 	
-	this.image.getImageData(function(data, w, h)
+	this.image.getImageData(function(data, imgWidth, imgHeight)
 	{
-		// TODO <REMOVE THIS>
-		console.log(data);
+		var imgChannels = 4;
 
 		var widthHalf = width / 2;
 		var heightHalf = height / 2;
@@ -53,8 +55,9 @@ TerrainBufferGeometry.prototype.generate = function()
 		var gridX1 = gridX + 1;
 		var gridY1 = gridY + 1;
 
-		var segment_width = width / gridX;
-		var segment_height = height / gridY;
+		// Size of each individual segment
+		var segWidth = width / gridX;
+		var segHeight = height / gridY;
 
 		// Buffers
 		var indices = [];
@@ -63,31 +66,39 @@ TerrainBufferGeometry.prototype.generate = function()
 		var uvs = [];
 
 		// Generate vertices, normals and uvs
-		for(var iy = 0; iy < gridY1; iy ++)
+		for(var iz = 0; iz < gridY1; iz ++)
 		{
-			var y = iy * segment_height - heightHalf;
+			var z = iz * segHeight - heightHalf;
 
 			for(var ix = 0; ix < gridX1; ix ++)
 			{
-				var x = ix * segment_width - widthHalf;
+				var x = ix * segWidth - widthHalf;
 
-				vertices.push(x, 0, y);
+				// Read height from the image data
+				var imgX = Math.round((x + widthHalf) * (imgWidth / width));
+				var imgY = Math.round((z + heightHalf) * (imgHeight / height));
+				var iy = (imgY * (imgWidth * imgChannels) + imgX * imgChannels);
+				var y = (data.data[iy] * scale) / 255;
+
+				vertices.push(x, y, z);
+
+				// Calculate normal properly
 				normals.push(0, 1, 0);
 
 				uvs.push(ix / gridX);
-				uvs.push(1 - (iy / gridY));
+				uvs.push(1 - (iz / gridY));
 			}
 		}
 
 		// Indices
-		for(var iy = 0; iy < gridY; iy ++)
+		for(var iz = 0; iz < gridY; iz ++)
 		{
 			for(var ix = 0; ix < gridX; ix ++)
 			{
-				var a = ix + gridX1 * iy;
-				var b = ix + gridX1 * (iy + 1);
-				var c = (ix + 1) + gridX1 * (iy + 1);
-				var d = (ix + 1) + gridX1 * iy;
+				var a = ix + gridX1 * iz;
+				var b = ix + gridX1 * (iz + 1);
+				var c = (ix + 1) + gridX1 * (iz + 1);
+				var d = (ix + 1) + gridX1 * iz;
 
 				indices.push(a, b, d);
 				indices.push(b, c, d);
