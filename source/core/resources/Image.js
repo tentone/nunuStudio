@@ -82,6 +82,26 @@ Image.fileIsImage = function(file)
 };
 
 /**
+ * Read the image data and return the raw pixel data of the image as a ImageData object.
+ *
+ * @return {ImageData} Image data object with the content of the image object.
+ */
+Image.prototype.getImageData = function()
+{
+	var image = document.createElement("img");
+	image.src = this.data;
+
+	var canvas = document.createElement("canvas");
+	canvas.width = image.width;
+	canvas.height = image.height;
+
+	var context = canvas.getContext("2d");
+	context.drawImage(image, 0, 0, image.width, image.height);
+
+	return context.getImageData(0, 0, image.width, image.height);
+};
+
+/**
  * Create a new image with 1x1 resolution with solid color.
  *
  * Can be called externally on data load error to load dummy data.
@@ -137,17 +157,8 @@ Image.prototype.hasTransparency = function(perPixel)
 {
 	if(perPixel === true)
 	{
-		var image = document.createElement("img");
-		image.src = this.data;
+		var data = this.getImageData().data;
 
-		var canvas = document.createElement("canvas");
-		canvas.width = image.width;
-		canvas.height = image.height;
-
-		var context = canvas.getContext("2d");
-		context.drawImage(image, 0, 0, image.width, image.height);
-
-		var data = context.getImageData(0, 0, image.width, image.height).data;
 		for(var i = 3; i < data.length; i += 4)
 		{
 			if(data[i] !== 255)

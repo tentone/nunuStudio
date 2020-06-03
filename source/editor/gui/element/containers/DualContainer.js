@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Dual container is used to place two components.
+ *
+ * The component can be resized, using a resizable bar that can be vertical or horizontal.
+ *
+ * @class DualContainer
+ */
 function DualContainer(parent)
 {
 	Element.call(this, parent, "div");

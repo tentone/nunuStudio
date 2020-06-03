@@ -778,6 +778,9 @@ Editor.createDefaultResouces = function()
 	Editor.defaultTextureParticle = new Texture(new Image(Global.FILE_PATH + "particle.png"));
 	Editor.defaultTextureParticle.name = "particle";
 
+	Editor.defaultImageTerrain = new Image(Global.FILE_PATH + "terrain.png");
+	Editor.defaultImageTerrain.name = "terrain";
+
 	Editor.defaultGeometry = new THREE.BoxBufferGeometry(1, 1, 1);
 	Editor.defaultGeometry.name = "box";
 

@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Dual division component is a box with two divisions that can be used to place other content.
+ *
+ * The component can be resized, using a resizable bar that can be vertical or horizontal.
+ *
+ * @class DualDivision
+ */
 function DualDivision(parent)
 {
 	Element.call(this, parent, "div");

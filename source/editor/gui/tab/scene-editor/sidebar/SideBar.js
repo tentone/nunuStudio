@@ -368,9 +368,7 @@ SideBar.prototype.createObject = function()
 	// Terrain
 	models.addOption(Global.FILE_PATH + "icons/models/terrain.png", function()
 	{
-		var image = new Image(Global.FILE_PATH + "terrain.png");
-
-		var geometry = new TerrainBufferGeometry(10, 10, 100, 100, image);
+		var geometry = new TerrainBufferGeometry(10, 10, 100, 100, Editor.defaultImageTerrain);
 		geometry.name = "terrain";
 		
 		var model = new Mesh(geometry, Editor.defaultMaterial);

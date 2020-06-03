@@ -19,8 +19,10 @@ function TerrainBufferGeometry(width, height, widthSegments, heightSegments, ima
 		width: width || 1,
 		height: height || 1,
 		widthSegments: widthSegments || 10,
-		heightSegments: heightSegments || 10
+		heightSegments: heightSegments || 10,
 	};
+
+	this.image = image;
 
 
 	this.generate();
