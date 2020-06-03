@@ -20,7 +20,7 @@ function TerrainBufferGeometry(width, height, widthSegments, heightSegments, ima
 		height: height || 1,
 		widthSegments: widthSegments || 10,
 		heightSegments: heightSegments || 10,
-		scale: 10
+		scale: 3
 	};
 
 	this.image = image;
@@ -65,6 +65,15 @@ TerrainBufferGeometry.prototype.generate = function()
 		var normals = [];
 		var uvs = [];
 
+		// Get image pixel from x, y coordinates in the geometry space
+		function getPixel(x, z)
+		{
+			var imgX = Math.round((x + widthHalf) * (imgWidth / width));
+			var imgY = Math.round((z + heightHalf) * (imgHeight / height));
+			var iy = (imgY * (imgWidth * imgChannels) + imgX * imgChannels);
+			return data.data[iy];
+		}
+
 		// Generate vertices, normals and uvs
 		for(var iz = 0; iz < gridY1; iz ++)
 		{
@@ -75,14 +84,13 @@ TerrainBufferGeometry.prototype.generate = function()
 				var x = ix * segWidth - widthHalf;
 
 				// Read height from the image data
-				var imgX = Math.round((x + widthHalf) * (imgWidth / width));
-				var imgY = Math.round((z + heightHalf) * (imgHeight / height));
-				var iy = (imgY * (imgWidth * imgChannels) + imgX * imgChannels);
-				var y = (data.data[iy] * scale) / 255;
-
+				var y = (getPixel(x, z) * scale) / 255;
 				vertices.push(x, y, z);
 
 				// Calculate normal properly
+				var dx = getPixel(x, z) - getPixel(x - 1, z);
+				var dz = getPixel(x, z) - getPixel(x, z - 1);
+				
 				// TODO <ADD CODE HERE>
 				normals.push(0, 1, 0);
 
@@ -107,13 +115,8 @@ TerrainBufferGeometry.prototype.generate = function()
 		}
 
 		self.setIndex(indices);
-
 		self.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
 		self.setAttribute("normal", new THREE.Float32BufferAttribute(normals, 3));
 		self.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
-
-		self.attributes.position.needsUpdate = true;
-		self.attributes.normal.needsUpdate = true;
-		self.attributes.uv.needsUpdate = true;
 	});
 };
