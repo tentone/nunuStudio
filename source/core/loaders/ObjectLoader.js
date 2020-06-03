@@ -59,8 +59,8 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 {
 	this.parseResources(json.resources);
 	this.parseShape(json.shapes);
-	this.parseGeometries(json.geometries);
 	this.parseImages(json.images);
+	this.parseGeometries(json.geometries);
 	this.parseVideos(json.videos);
 	this.parseAudio(json.audio);
 	this.parseFonts(json.fonts);
@@ -169,6 +169,7 @@ ObjectLoader.prototype.parseGeometries = function(array)
 	{
 		var loader = new GeometryLoader();
 		loader.setShapes(this.shapes);
+		loader.setImages(this.images);
 
 		for(var i = 0; i < array.length; i++)
 		{	

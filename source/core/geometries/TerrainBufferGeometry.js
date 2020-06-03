@@ -8,7 +8,7 @@
  * @class TerrainBufferGeometry
  * @constructor
  */
-function TerrainBufferGeometry(width, height, widthSegments, heightSegments, image)
+function TerrainBufferGeometry(width, height, widthSegments, heightSegments, scale, image)
 {
 	THREE.BufferGeometry.call(this);
 
@@ -20,7 +20,7 @@ function TerrainBufferGeometry(width, height, widthSegments, heightSegments, ima
 		height: height || 1,
 		widthSegments: widthSegments || 10,
 		heightSegments: heightSegments || 10,
-		scale: 3
+		scale: scale || 1
 	};
 
 	this.image = image;
@@ -38,7 +38,6 @@ TerrainBufferGeometry.prototype.generate = function()
 	var height = this.parameters.height;
 	var widthSegments = this.parameters.widthSegments;
 	var heightSegments = this.parameters.heightSegments;
-
 	var scale = this.parameters.scale;
 
 	var self = this;
@@ -88,10 +87,6 @@ TerrainBufferGeometry.prototype.generate = function()
 				vertices.push(x, y, z);
 
 				// Calculate normal properly
-				var dx = getPixel(x, z) - getPixel(x - 1, z);
-				var dz = getPixel(x, z) - getPixel(x, z - 1);
-				
-				// TODO <ADD CODE HERE>
 				normals.push(0, 1, 0);
 
 				uvs.push(ix / gridX);
@@ -118,5 +113,19 @@ TerrainBufferGeometry.prototype.generate = function()
 		self.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
 		self.setAttribute("normal", new THREE.Float32BufferAttribute(normals, 3));
 		self.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
+
+		self.computeVertexNormals();
+		
+		self.boundingBox = null;
+		self.boundingSphere = null;
 	});
+};
+
+TerrainBufferGeometry.prototype.toJSON = function()
+{
+	var data = THREE.BufferGeometry.prototype.toJSON.call(this);
+	
+	data.image = this.image.uuid;
+
+	return data;
 };

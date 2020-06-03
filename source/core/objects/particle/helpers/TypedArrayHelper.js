@@ -3,7 +3,7 @@
 /**
  * A helper class for TypedArrays.
  *
- * Allows for easy resizing, assignment of various component-based types (Vector2s, Vector3s, Vector4s, Mat3s, Mat4s), as well as Colors (where components are r, g, b), Numbers, and setting from other TypedArrays.
+ * Allows for easy resizing, assignment of various component-based types (e.g. Vector2, Vector3, Mat3, Color, ...) Numbers, and setting from other TypedArrays.
  *
  * @constructor
  * @author Luke Moody
@@ -16,7 +16,7 @@
 function TypedArrayHelper(TypedArrayConstructor, size, componentSize, indexOffset)
 {
 	this.componentSize = componentSize || 1;
-	this.size = (size || 1);
+	this.size = size || 1;
 	this.TypedArrayConstructor = TypedArrayConstructor || Float32Array;
 	this.array = new TypedArrayConstructor(size * this.componentSize);
 	this.indexOffset = indexOffset || 0;

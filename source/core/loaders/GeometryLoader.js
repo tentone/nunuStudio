@@ -12,7 +12,21 @@ function GeometryLoader(manager)
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 
 	this.shapes = {};
+
+	this.images = {};
 }
+
+/**
+ * Set list of images to be used by the loader.
+ *
+ * @method setImages
+ * @param {Array} images
+ */
+GeometryLoader.prototype.setImages = function(images)
+{
+	this.images = images;
+	return this;
+};
 
 /**
  * Set list of shapes to be used by this loader.
@@ -64,11 +78,17 @@ GeometryLoader.prototype.parse = function(data)
 	{
 		geometry = new RoundedBoxBufferGeometry(data.width, data.height, data.depth, data.radius, data.radiusSegments);
 	}
+	else if(data.type === "TerrainBufferGeometry")
+	{
+		geometry = new TerrainBufferGeometry(data.width, data.height, data.widthSegments, data.heightSegments, data.scale, this.images[data.image]);
+	}
+
 	else if(data.type === "Geometry")
 	{
 		var loader = new LegacyGeometryLoader();
 		geometry = loader.parse(data.data).geometry;
 	}
+
 	else
 	{
 		var geometries = THREE.ObjectLoader.prototype.parseGeometries([data], this.shapes);
