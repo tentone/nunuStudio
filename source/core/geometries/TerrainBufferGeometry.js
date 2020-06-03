@@ -83,6 +83,7 @@ TerrainBufferGeometry.prototype.generate = function()
 				vertices.push(x, y, z);
 
 				// Calculate normal properly
+				// TODO <ADD CODE HERE>
 				normals.push(0, 1, 0);
 
 				uvs.push(ix / gridX);
