@@ -74,11 +74,11 @@ TerrainBufferGeometry.prototype.generate = function()
 		}
 
 		// Generate vertices, normals and uvs
-		for(var iz = 0; iz < gridY1; iz ++)
+		for(var iz = 0; iz < gridY1; iz++)
 		{
 			var z = iz * segHeight - heightHalf;
 
-			for(var ix = 0; ix < gridX1; ix ++)
+			for(var ix = 0; ix < gridX1; ix++)
 			{
 				var x = ix * segWidth - widthHalf;
 
@@ -115,7 +115,7 @@ TerrainBufferGeometry.prototype.generate = function()
 		self.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
 
 		self.computeVertexNormals();
-		
+
 		self.boundingBox = null;
 		self.boundingSphere = null;
 	});
