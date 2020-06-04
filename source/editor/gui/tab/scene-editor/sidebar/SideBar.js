@@ -368,6 +368,8 @@ SideBar.prototype.createObject = function()
 	// Terrain
 	models.addOption(Global.FILE_PATH + "icons/models/terrain.png", function()
 	{
+		Editor.addAction(new AddResourceAction(Editor.defaultImageTerrain, Editor.program, "images"));
+
 		var geometry = new TerrainBufferGeometry(10, 10, 100, 100, 5, Editor.defaultImageTerrain);
 		geometry.name = "terrain";
 		
