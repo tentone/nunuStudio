@@ -572,6 +572,7 @@ include("source/editor/gui/tab/inspector/geometries/RingGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/IcosahedronGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/OctahedronGeometryForm.js");
 include("source/editor/gui/tab/inspector/geometries/RoundedBoxGeometryForm.js");
+include("source/editor/gui/tab/inspector/geometries/TerrainGeometryForm.js");
 
 include("source/editor/gui/preview/PreviewRenderer.js");
 include("source/editor/gui/preview/FontRenderer.js");

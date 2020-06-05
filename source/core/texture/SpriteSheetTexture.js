@@ -18,18 +18,9 @@
  * @param {number} type
  * @param {number} anisotropy
  */
-function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames, mapping, type, anisotropy)
+function SpriteSheetTexture(source, framesHorizontal, framesVertical, totalFrames, mapping, type, anisotropy)
 {
-	if(typeof image === "string")
-	{
-		this.source = new Image(image);
-	}
-	else if(image instanceof Image)
-	{
-		this.source = image;
-	}
-
-	THREE.Texture.call(this, document.createElement("img"), mapping, THREE.RepeatWrapping, THREE.RepeatWrapping, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
+	Texture.call(this, source, mapping, THREE.RepeatWrapping, THREE.RepeatWrapping, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
 	this.name = "animation";
 	this.category = "SpriteSheet";
@@ -177,19 +168,6 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	});
 
 	/**
-	 * DOM element attached to the texture
-	 * 
-	 * @property image
-	 * @type {Element}
-	 */
-	this.image.crossOrigin = "anonymous";
-	this.image.src = this.source.data;
-	this.image.onload = function()
-	{
-		self.needsUpdate = true;
-	};
-	
-	/**
 	 * Indicates the current frame of the animation.
 	 *
 	 * @property currentFrame
@@ -209,7 +187,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	update();
 }
 
-SpriteSheetTexture.prototype = Object.create(THREE.Texture.prototype);
+SpriteSheetTexture.prototype = Object.create(Texture.prototype);
 SpriteSheetTexture.isTexture = true;
 
 /**

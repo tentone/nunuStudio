@@ -140,7 +140,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Speed
-	this.form.addText("Speed");
+	this.form.addText(Locale.speed);
 	this.speed = new Slider(this.form);
 	this.speed.size.set(18, 18);
 	this.speed.setStep(0.01);

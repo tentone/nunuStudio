@@ -6,6 +6,20 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 
 	var self = this;
 
+	// Image
+	this.form.addText(Locale.image);
+	this.source = new ImageChooser(this.form);
+	this.source.size.set(0, 100);
+	this.source.setOnChange(function()
+	{
+		Editor.addAction(new CallbackAction(new ChangeAction(self.texture, "source", self.source.getValue()), function()
+		{
+			self.texture.updateSource();
+		}));
+	});
+	this.form.add(this.source);
+	this.form.nextRow();
+
 	// Sheet format
 	this.form.addText("Sheet format");
 	this.frames = new VectorBox(this.form);
@@ -27,7 +41,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Total frames
-	this.form.addText("Total frames");
+	this.form.addText("Total Frames");
 	this.totalFrames = new NumberBox(this.form);
 	this.totalFrames.size.set(60, 18);
 	this.totalFrames.setStep(1.0);
@@ -42,7 +56,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Begin frame
-	this.form.addText("Begin frame");
+	this.form.addText("Begin Frame");
 	this.beginFrame = new NumberBox(this.form);
 	this.beginFrame.size.set(60, 18);
 	this.beginFrame.setStep(1.0);
@@ -55,7 +69,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// End frame
-	this.form.addText("End frame");
+	this.form.addText("End Frame");
 	this.endFrame = new NumberBox(this.form);
 	this.endFrame.size.set(60, 18);
 	this.endFrame.setStep(1.0);
@@ -68,7 +82,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Speed
-	this.form.addText("Speed");
+	this.form.addText(Locale.speed);
 	this.animationSpeed = new NumberBox(this.form);
 	this.animationSpeed.size.set(60, 18);
 	this.animationSpeed.setStep(0.01);
@@ -87,6 +101,7 @@ SpriteSheetTextureEditor.prototype.attach = function(texture)
 {
 	TextureEditor.prototype.attach.call(this, texture);
 
+	this.source.setValue(this.texture.source);
 	this.frames.setValue(this.texture.framesHorizontal, this.texture.framesVertical);
 	this.totalFrames.setValue(this.texture.totalFrames);
 	this.beginFrame.setValue(this.texture.beginFrame);

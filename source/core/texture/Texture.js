@@ -8,7 +8,7 @@
  * @class Texture
  * @extends {Texture}
  * @module Textures
- * @param {Image} image
+ * @param {Image | String} source
  * @param {number} mapping
  * @param {number} wrapS
  * @param {number} wrapT
@@ -19,25 +19,25 @@
  * @param {number} anisotropy
  * @param {number} encoding
  */
-function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
+function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
 	/**
-	 * Image attached to the texture
+	 * Source image of the texture.
 	 * 
 	 * @property source
 	 * @type {Image}
 	 */
-	if(typeof image === "string")
+	if(typeof source === "string")
 	{
-		this.source = new Image(image);
+		this.source = new Image(source);
 	}
-	else if(image === undefined)
+	else if(source === undefined)
 	{
 		this.source = new Image();
 	}
 	else
 	{
-		this.source = image;
+		this.source = source;
 	}
 
 	THREE.Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
@@ -48,7 +48,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	 * Name of the texture (doesn't need to be unique).
 	 * @property name
 	 * @type {string}
-	*/
+	 */
 	this.name = "texture";
 	this.category = "Image";
 
@@ -65,27 +65,9 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 
 	this.format = this.source.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 
-	/**
-	 * DOM element attached to the texture
-	 * 
-	 * @property image
-	 * @type {Element}
-	 */
-	// this.image.crossOrigin = "Anonymous";
-	this.image.src = this.source.data;
-	this.image.onload = function()
-	{
-		self.needsUpdate = true;
-	};
-	this.image.onerror = function()
-	{
-		console.log("nunuStudio: Failed to load image " + self.source.uuid + " data.");
-		self.source.createSolidColor();
-		self.image.src = self.source.data;
-		self.needsUpdate = true;
-	};
+	this.updateSource();
 
-	// Check if image is animated
+	// Check if image is animated format and start an update cycle
 	if(this.source.encoding === "gif")
 	{
 		this.generateMipmaps = false;
@@ -106,6 +88,43 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 
 Texture.prototype = Object.create(THREE.Texture.prototype);
 Texture.isTexture = true;
+
+/**
+ * Should be called after updating the source of the texture.
+ *
+ * Will copy the source data to the texture for upload to the GPU.
+ *
+ * @method updateSource
+ */
+Texture.prototype.updateSource = function()
+{
+	if(this.source !== null)
+	{
+		var self = this;
+
+		this.image.crossOrigin = "anonymous";
+		this.image.src = this.source.data;
+		this.image.onload = function()
+		{
+			self.needsUpdate = true;
+		};
+		this.image.onerror = function()
+		{
+			console.log("nunuStudio: Failed to load image " + self.source.uuid + " data.");
+			self.source.createSolidColor();
+			self.image.src = self.source.data;
+			self.needsUpdate = true;
+		};
+	}
+	else
+	{
+		console.warn("nunuStudio: Texture source is null.");
+
+		this.source.createSolidColor();
+		this.image.src = self.source.data;
+		this.needsUpdate = true;
+	}
+};
 
 /**
  * Dispose texture.
@@ -183,4 +202,10 @@ Texture.prototype.toJSON = function(meta)
  *
  * @property mipmaps
  * @type {Array}
+ */
+/**
+ * DOM element attached to the texture
+ * 
+ * @property image
+ * @type {Element}
  */

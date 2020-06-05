@@ -136,6 +136,7 @@ LocaleManager.register(
 	shadowMaterial: "Shadow Material",
 
 	// Properties
+	speed: "Speed",
 	focus: "Focus",
 	postProcessing: "Post-Processing",
 	html: "HTML",

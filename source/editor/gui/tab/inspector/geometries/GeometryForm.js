@@ -66,6 +66,10 @@ GeometryForm.create = function(form, object)
 	{
 		return new RoundedBoxGeometryForm(form, object);
 	}
+	else if(geometry instanceof TerrainBufferGeometry)
+	{
+		return new TerrainGeometryForm(form, object);
+	}
 
 	return null;
 };

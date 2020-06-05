@@ -75,7 +75,7 @@ function AnimationClipMenuBar(parent, editor, animation)
 	var text = new Text(this);
 	text.position.set(335, 5);
 	text.size.set(100, 20);
-	text.setText("Speed");
+	text.setText(Locale.speed);
 	text.updateInterface();
 
 	this.timeScale = new NumberBox(this);
