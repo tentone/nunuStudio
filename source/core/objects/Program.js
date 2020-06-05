@@ -655,7 +655,7 @@ Program.prototype.sendDataApp = function(data)
  * 
  * @method toJSON
  * @param {Object} meta Metadata object passed to the objects and resources toJSON method to store data.
- * @param {boolean} exportResources If true all resouces in the program are exported, else only resources attached to objects are exported
+ * @param {boolean} exportResources If true all resouces in the program are exported, else only resources attached to objects are exported.
  * @return {Object} json Serialized JSON data containing the program, all scenes and resources stored.
  */
 Program.prototype.toJSON = function(meta, exportResources)
