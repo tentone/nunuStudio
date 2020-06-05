@@ -300,7 +300,8 @@ PhysicsObject.fromJSON = function(data)
 		}
 		else if(shape.type === CANNON.Shape.types.HEIGHTFIELD)
 		{
-			object.body.addShape(new CANNON.Heightfield(shape.data, {
+			object.body.addShape(new CANNON.Heightfield(shape.data,
+			{
 				maxValue : shape.maxValue,
 				minValue : shape.minValue,
 				elementSize : shape.elementSize
