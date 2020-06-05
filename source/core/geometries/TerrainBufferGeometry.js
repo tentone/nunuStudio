@@ -50,9 +50,8 @@ TerrainBufferGeometry.prototype.generate = function()
 		var heightHalf = height / 2;
 
 		var gridX = Math.floor(widthSegments) || 1;
-		var gridY = Math.floor(heightSegments) || 1;
 		var gridX1 = gridX + 1;
-		var gridY1 = gridY + 1;
+		var gridY = Math.floor(heightSegments) || 1;
 
 		// Size of each individual segment
 		var segWidth = width / gridX;
@@ -64,26 +63,29 @@ TerrainBufferGeometry.prototype.generate = function()
 		var normals = [];
 		var uvs = [];
 
-		// Get image pixel from x, y coordinates in the geometry space
+		var widthRatio = imgWidth / (width + 1);
+		var heightRatio = imgHeight / (height + 1);
+
+		// Get image pixel from x, y coordinates in the geometry space, value is normalized
 		function getPixel(x, z)
 		{
-			var imgX = Math.round((x + widthHalf) * (imgWidth / width));
-			var imgY = Math.round((z + heightHalf) * (imgHeight / height));
+			var imgX = Math.round((x + widthHalf) * widthRatio);
+			var imgY = Math.round((z + heightHalf) * heightRatio);
 			var iy = (imgY * (imgWidth * imgChannels) + imgX * imgChannels);
-			return data.data[iy];
+			return data.data[iy] / 255;
 		}
 
 		// Generate vertices, normals and uvs
-		for(var iz = 0; iz < gridY1; iz++)
+		for(var iz = 0; iz <= gridY; iz++)
 		{
 			var z = iz * segHeight - heightHalf;
 
-			for(var ix = 0; ix < gridX1; ix++)
+			for(var ix = 0; ix <= gridX; ix++)
 			{
 				var x = ix * segWidth - widthHalf;
 
 				// Read height from the image data
-				var y = (getPixel(x, z) * scale) / 255;
+				var y = (getPixel(x, z) * scale);
 				vertices.push(x, y, z);
 
 				// Calculate normal properly
