@@ -666,58 +666,16 @@ Program.prototype.toJSON = function(meta, exportResources)
 	{
 		if(exportResources !== false)
 		{
-			// Textures
-			var textures = self.textures;
-			for(var i in textures)
+			for(var k = 0; k < ResourceContainer.libraries.length; k++)
 			{
-				var texture = textures[i];
-				if(meta.textures[texture.uuid] === undefined)
+				var lib = self[ResourceContainer.libraries[k]];
+				for(var i in lib)
 				{
-					meta.textures[texture.uuid] = texture.toJSON(meta);
-				}
-			}
-
-			// Materials
-			var materials = self.materials;
-			for(var i in materials)
-			{
-				var material = materials[i];
-				if(meta.materials[material.uuid] === undefined)
-				{
-					meta.materials[material.uuid] = material.toJSON(meta);
-				}
-			}
-
-			// Fonts
-			var fonts = self.fonts;
-			for(var i in fonts)
-			{
-				var font = fonts[i];
-				if(meta.fonts[font.uuid] === undefined)
-				{
-					meta.fonts[font.uuid] = font.toJSON(meta);
-				}
-			}
-
-			// Audio
-			var audio = self.audio;
-			for(var i in audio)
-			{
-				var aud = audio[i];
-				if(meta.audio[aud.uuid] === undefined)
-				{
-					meta.audio[aud.uuid] = aud.toJSON(meta);
-				}
-			}
-
-			// Resources
-			var resources = self.resources;
-			for(var i in resources)
-			{
-				var resource = resources[i];
-				if(meta.resources[resource.uuid] === undefined)
-				{
-					meta.resources[resource.uuid] = resource.toJSON(meta);
+					var resource = lib[i];
+					if(meta[ResourceContainer.libraries[k]][resource.uuid] === undefined)
+					{
+						meta[ResourceContainer.libraries[k]][resource.uuid] = resource.toJSON(meta);
+					}
 				}
 			}
 		}
