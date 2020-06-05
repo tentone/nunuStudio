@@ -232,6 +232,13 @@ PhysicsObject.prototype.toJSON = function(meta)
 			values.vertices = shape.vertices;
 			values.faces = shape.faces;
 		}
+		else if(shape.type === CANNON.Shape.types.HEIGHTFIELD)
+		{
+			values.data = shape.data;
+			values.maxValue = shape.maxValue;
+			values.minValue = shape.minValue;
+			values.elementSize = shape.elementSize;
+		}
 		else if(shape.type === CANNON.Shape.types.TRIMESH)
 		{
 			values.vertices = shape.vertices;
@@ -290,6 +297,14 @@ PhysicsObject.fromJSON = function(data)
 		else if(shape.type === CANNON.Shape.types.PLANE)
 		{
 			object.body.addShape(new CANNON.Plane());
+		}
+		else if(shape.type === CANNON.Shape.types.HEIGHTFIELD)
+		{
+			object.body.addShape(new CANNON.Heightfield(shape.data, {
+				maxValue : shape.maxValue,
+				minValue : shape.minValue,
+				elementSize : shape.elementSize
+			}));
 		}
 		else if(shape.type === CANNON.Shape.types.CONVEXPOLYHEDRON)
 		{
