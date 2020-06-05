@@ -87,8 +87,6 @@ TerrainBufferGeometry.prototype.generate = function()
 				// Read height from the image data
 				var y = (getPixel(x, z) * scale);
 				vertices.push(x, y, z);
-
-				// Calculate normal properly
 				normals.push(0, 1, 0);
 
 				uvs.push(ix / gridX);
