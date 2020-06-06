@@ -2,7 +2,7 @@
 
 function RenderSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.render, Global.FILE_PATH + "icons/misc/particles.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.render, Global.FILE_PATH + "icons/misc/particles.png");
 
 	this.element.style.overflow = "auto";
 
@@ -37,7 +37,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.rendererConfiguration = new RendererConfigurationFormSnippet(this.form, Editor.settings.render);
 }
 
-RenderSettingsTab.prototype = Object.create(TabElement.prototype);
+RenderSettingsTab.prototype = Object.create(TabComponent.prototype);
 
 RenderSettingsTab.prototype.activate = function()
 {
@@ -47,7 +47,7 @@ RenderSettingsTab.prototype.activate = function()
 
 RenderSettingsTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();

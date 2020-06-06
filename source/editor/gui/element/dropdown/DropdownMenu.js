@@ -5,7 +5,7 @@
  * 
  * @class DropdownMenu
  * @extends {Text}
- * @param {Element} parent Parent element.
+ * @param {Component} parent Parent element.
  */
 function DropdownMenu(parent)
 {
@@ -23,9 +23,9 @@ function DropdownMenu(parent)
 	 * This DOM element is added directly to the parent DOM element.
 	 *
 	 * @attribute panel
-	 * @type {Element}
+	 * @type {Component}
 	 */
-	this.panel = new Element(parent, "div");
+	this.panel = new Component(parent, "div");
 	this.panel.element.style.overflow = "visible";
 	this.panel.element.style.display = "none";
 	this.panel.element.style.zIndex = "300";
@@ -34,7 +34,7 @@ function DropdownMenu(parent)
 	 * Option icon image, the element is only created when a icon is set.
 	 *
 	 * @attribute icon
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.icon = null;
 
@@ -42,7 +42,7 @@ function DropdownMenu(parent)
 	 * Decorative arrow.
 	 *
 	 * @attribute arrow
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.arrow = document.createElement("img");
 	this.arrow.style.display = "none";

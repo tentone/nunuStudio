@@ -4,13 +4,13 @@
  * Tab button is used to navigate trough tabs.
  *
  * @class TabButton
- * @extends {Element}
- * @param {Element} parent
- * @param {TabElement} tab
+ * @extends {Component}
+ * @param {Component} parent
+ * @param {TabComponent} tab
  */
 function TabButton(parent, tab)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	var self = this;
 
@@ -23,7 +23,7 @@ function TabButton(parent, tab)
 	 * Pointer to the tab element related with this button.
 	 *
 	 * @property tab
-	 * @type {TabElement}
+	 * @type {TabComponent}
 	 */
 	this.tab = tab;
 
@@ -237,7 +237,7 @@ function TabButton(parent, tab)
 	};
 }
 
-TabButton.prototype = Object.create(Element.prototype);
+TabButton.prototype = Object.create(Component.prototype);
 
 TabButton.NONE = 0;
 TabButton.PREVIOUS = 1;
@@ -275,7 +275,7 @@ TabButton.prototype.updateSelection = function()
 
 TabButton.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 	
 	// Icon
 	this.icon.style.top = (this.size.y * 0.2) + "px";

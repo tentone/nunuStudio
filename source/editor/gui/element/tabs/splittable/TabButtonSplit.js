@@ -6,13 +6,13 @@
  * The split version of the tab button is intended to be used alongside splitable tab groups.
  * 
  * @class TabButtonSplit
- * @extends {Element}
- * @param {Element} parent
- * @param {TabElement} tab
+ * @extends {Component}
+ * @param {Component} parent
+ * @param {TabComponent} tab
  */
 function TabButtonSplit(parent, tab)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	var self = this;
 
@@ -95,7 +95,7 @@ function TabButtonSplit(parent, tab)
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
 
-		if(tab instanceof TabElement)
+		if(tab instanceof TabComponent)
 		{
 			// In the same container
 			if(tab.container === self.tab.container)
@@ -266,7 +266,7 @@ function TabButtonSplit(parent, tab)
 	};
 }
 
-TabButtonSplit.prototype = Object.create(Element.prototype);
+TabButtonSplit.prototype = Object.create(Component.prototype);
 
 TabButtonSplit.NONE = 0;
 TabButtonSplit.PREVIOUS = 1;
@@ -303,7 +303,7 @@ TabButtonSplit.prototype.updateSelection = function()
 
 TabButtonSplit.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 	
 	// Icon
 	this.icon.style.top = (this.size.y * 0.2) + "px";

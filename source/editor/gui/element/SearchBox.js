@@ -4,12 +4,12 @@
  * Search box input element.
  * 
  * @class SearchBox
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function SearchBox(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	/**
 	 * Input text box of the search box.
@@ -18,20 +18,20 @@ function SearchBox(parent)
 	 * @type {TextBox}
 	 */
 	this.search = new TextBox(this);
-	this.search.setMode(Element.TOP_RIGHT);
+	this.search.setMode(Component.TOP_RIGHT);
 	this.search.element.placeholder = Locale.search;
 
 	/**
 	 * Search icon.
 	 *
 	 * @property searchIcon
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.searchIcon = new ImageContainer(this);
 	this.searchIcon.setImage(Global.FILE_PATH + "icons/misc/search.png");
 }
 
-SearchBox.prototype = Object.create(Element.prototype);
+SearchBox.prototype = Object.create(Component.prototype);
 
 SearchBox.prototype.setOnChange = function(callback)
 {
@@ -40,7 +40,7 @@ SearchBox.prototype.setOnChange = function(callback)
 
 SearchBox.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	this.searchIcon.size.set(this.size.y * 0.6, this.size.y * 0.6);
 	this.searchIcon.position.set(this.size.y * 0.2, this.size.y * 0.2);

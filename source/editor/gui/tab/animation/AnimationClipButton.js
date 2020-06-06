@@ -6,11 +6,11 @@
  * Each animation has multiple attribute tracks.
  *
  * @class AnimationClipButton
- * @extends {Element}
+ * @extends {Component}
  */
 function AnimationClipButton(parent, editor, animation)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.position = "relative";
 	this.element.style.backgroundColor = Editor.theme.barColor;
@@ -155,7 +155,7 @@ function AnimationClipButton(parent, editor, animation)
 	this.updateAnimation();
 }
 
-AnimationClipButton.prototype = Object.create(Element.prototype);
+AnimationClipButton.prototype = Object.create(Component.prototype);
 
 AnimationClipButton.prototype.updateAnimation = function()
 {

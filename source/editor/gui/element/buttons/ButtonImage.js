@@ -5,7 +5,7 @@
  *
  * @class ButtonImageToggle
  * @extends {Button}
- * @param {Element} parent Parent element.
+ * @param {Component} parent Parent element.
  */
 function ButtonImage(parent)
 {
@@ -15,7 +15,7 @@ function ButtonImage(parent)
 	 * Button icon.
 	 * 
 	 * @attribute icon
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.icon = document.createElement("img");
 	this.icon.style.pointerEvents = "none";

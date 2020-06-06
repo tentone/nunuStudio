@@ -6,11 +6,11 @@
  * Keyframes can be added moved or deleted in the animation timeline.
  *
  * @class AnimationKeyframe
- * @extends {Element}
+ * @extends {Component}
  */
 function AnimationKeyframe(parent, editor, trackEditor, track, index)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.cursor = "pointer";
@@ -99,4 +99,4 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 	};
 }
 
-AnimationKeyframe.prototype = Object.create(Element.prototype);
+AnimationKeyframe.prototype = Object.create(Component.prototype);

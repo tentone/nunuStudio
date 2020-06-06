@@ -4,12 +4,12 @@
  * Text element without background.
  * 
  * @class Text
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function Text(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.pointerEvents = "none";
 	this.element.style.color = Editor.theme.textColor;
@@ -19,7 +19,7 @@ function Text(parent)
 	 * Span DOM element used to represent the text.
 	 *
 	 * @attribute span
-	 * @type {Element}
+	 * @type {Component}
  	 */
 	this.span = document.createElement("span");
 	this.span.style.overflow = "hidden";
@@ -51,7 +51,7 @@ Text.BOTTOM = 4;
 Text.CLIP = 10;
 Text.ELLIPSIS = 11;
 
-Text.prototype = Object.create(Element.prototype);
+Text.prototype = Object.create(Component.prototype);
 
 /**
  * Set font to use for the text.
@@ -249,5 +249,5 @@ Text.prototype.updateSize = function()
 		this.size.y = this.span.clientHeight;
 	}
 	
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 };

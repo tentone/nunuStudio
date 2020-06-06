@@ -6,11 +6,11 @@
  * It is used to edit the scenes and apply changes to the objects using helper objects.
  *
  * @class SceneEditor
- * @extends {TabElement}
+ * @extends {TabComponent}
  */
 function SceneEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.scene, Global.FILE_PATH + "icons/misc/scene.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.scene, Global.FILE_PATH + "icons/misc/scene.png");
 
 	var self = this;
 
@@ -28,7 +28,7 @@ function SceneEditor(parent, closeable, container, index)
 		self.transform.setCanvas(this.canvas);
 		self.mouse.setCanvas(this.canvas);
 
-		this.canvas.ondragover = Element.preventDefault;
+		this.canvas.ondragover = Component.preventDefault;
 		this.canvas.ondrop = function(event)
 		{
 			event.preventDefault();
@@ -431,7 +431,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.transformationSpace = new DropdownList(this);
 	this.transformationSpace.size.set(60, 30);
 	this.transformationSpace.position.set(145, 5);
-	this.transformationSpace.updatePosition(Element.BOTTOM_RIGHT);
+	this.transformationSpace.updatePosition(Component.BOTTOM_RIGHT);
 	this.transformationSpace.updateSize();
 	this.transformationSpace.addValue(Locale.local, TransformControls.LOCAL);
 	this.transformationSpace.addValue(Locale.world, TransformControls.WORLD);
@@ -461,7 +461,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.navigation.setAltText(Locale.cameraNavigation);
 	this.navigation.size.set(100, 30);
 	this.navigation.position.set(40, 5);
-	this.navigation.updatePosition(Element.BOTTOM_RIGHT);
+	this.navigation.updatePosition(Component.BOTTOM_RIGHT);
 	this.navigation.updateSize();
 	this.navigation.addValue(Locale.firstPerson, Settings.FIRST_PERSON);
 	this.navigation.addValue(Locale.orbit, Settings.ORBIT);
@@ -499,7 +499,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.snapGridButton.setAltText(Locale.toggleSnapToGrid);
 	this.snapGridButton.setImageScale(0.8, 0.8);
 	this.snapGridButton.updateSize();
-	this.snapGridButton.updatePosition(Element.BOTTOM_RIGHT);
+	this.snapGridButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.snapGridButton.element.style.backgroundColor = "#333333";
 	this.snapGridButton.element.style.borderRadius = "5px";
 	this.snapGridButton.element.style.opacity = 0.5;
@@ -532,7 +532,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton.setAltText(Locale.cameraMode);
 	this.cameraButton.setImageScale(0.8, 0.8);
 	this.cameraButton.updateSize();
-	this.cameraButton.updatePosition(Element.BOTTOM_RIGHT);
+	this.cameraButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.cameraButton.element.style.backgroundColor = "#333333";
 	this.cameraButton.element.style.borderRadius = "5px";
 	this.cameraButton.element.style.opacity = 0.5;
@@ -616,7 +616,7 @@ SceneEditor.MOVE = 100;
 SceneEditor.SCALE = 101;
 SceneEditor.ROTATE = 102;
 
-SceneEditor.prototype = Object.create(TabElement.prototype);
+SceneEditor.prototype = Object.create(TabComponent.prototype);
 
 SceneEditor.prototype.createRenderer = RendererCanvas.prototype.createRenderer;
 SceneEditor.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
@@ -655,7 +655,7 @@ SceneEditor.prototype.updateMetadata = function()
 
 SceneEditor.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 
 	this.canvas.createRenderer();
 	this.updateSettings();
@@ -670,7 +670,7 @@ SceneEditor.prototype.activate = function()
 
 SceneEditor.prototype.deactivate = function()
 {
-	TabElement.prototype.deactivate.call(this);
+	TabComponent.prototype.deactivate.call(this);
 
 	this.mouse.dispose();
 	this.manager.destroy();
@@ -738,7 +738,7 @@ SceneEditor.prototype.updateSettings = function()
 
 SceneEditor.prototype.destroy = function()
 {
-	TabElement.prototype.destroy.call(this);
+	TabComponent.prototype.destroy.call(this);
 
 	this.mouse.dispose();
 	this.keyboard.dispose();
@@ -1260,12 +1260,12 @@ SceneEditor.prototype.updateSelection = function()
 
 SceneEditor.prototype.updateVisibility = function()
 {
-	TabElement.prototype.updateVisibility.call(this);
+	TabComponent.prototype.updateVisibility.call(this);
 };
 
 SceneEditor.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.sideBar.position.set(0, 0);
 	this.sideBar.size.set(40, this.size.y);

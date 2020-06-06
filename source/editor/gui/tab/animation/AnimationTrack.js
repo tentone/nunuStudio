@@ -2,7 +2,7 @@
 
 function AnimationTrack(parent, editor, track)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.editor = editor;
 	this.track = track;
@@ -10,7 +10,7 @@ function AnimationTrack(parent, editor, track)
 	this.createKeyframes();
 }
 
-AnimationTrack.prototype = Object.create(Element.prototype);
+AnimationTrack.prototype = Object.create(Component.prototype);
 
 AnimationTrack.prototype.updateKeyframes = function()
 {

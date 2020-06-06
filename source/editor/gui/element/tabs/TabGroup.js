@@ -6,12 +6,12 @@
  * The group is also responsible for creating and managing the lifecycle of its tab elements.
  * 
  * @class TabGroup
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function TabGroup(parent, placement)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	var self = this;
 
@@ -30,7 +30,7 @@ function TabGroup(parent, placement)
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
 
-		if(tab instanceof TabElement)
+		if(tab instanceof TabComponent)
 		{
 			self.attachTab(tab);
 			DragBuffer.pop(uuid);
@@ -44,7 +44,7 @@ function TabGroup(parent, placement)
 	 * Division used to display a message indicating that the tab is empty.
 	 *
 	 * @property empty
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.empty = document.createElement("div");
 	this.empty.style.position = "absolute";
@@ -62,7 +62,7 @@ function TabGroup(parent, placement)
 	 * Tab that is currently selected.
 	 *
 	 * @property selected
-	 * @type {TabElement}
+	 * @type {TabComponent}
 	 */
 	this.selected = null;
 	
@@ -115,7 +115,7 @@ TabGroup.BOTTOM = 1;
 TabGroup.LEFT = 2;
 TabGroup.RIGHT = 3;
 
-TabGroup.prototype = Object.create(Element.prototype);
+TabGroup.prototype = Object.create(Component.prototype);
 
 /**
  * Update all tabs object data.
@@ -147,7 +147,7 @@ TabGroup.prototype.updateObjectsView = function()
  * Attach tab to this group and remove it from the original group.
  *
  * @method attachTab
- * @param {TabElement} tab Tab to be moved.
+ * @param {TabComponent} tab Tab to be moved.
  * @param {number} insertIndex Index where to place the tab.
  */
 TabGroup.prototype.attachTab = function(tab, insertIndex)
@@ -253,7 +253,7 @@ TabGroup.prototype.closeActual = function()
  * If not valid tab is selected the actual selection will be cleared.
  *
  * @method selectTab
- * @param {TabElement} tab TabElement to be selected or index in the tab array.
+ * @param {TabComponent} tab TabComponent to be selected or index in the tab array.
  */
 TabGroup.prototype.selectTab = function(tab)
 {
@@ -262,8 +262,8 @@ TabGroup.prototype.selectTab = function(tab)
 		this.selected.deactivate();
 	}
 
-	// Tab as a TabElement object
-	if(tab instanceof TabElement)
+	// Tab as a TabComponent object
+	if(tab instanceof TabComponent)
 	{
 		this.selected = tab;
 		this.selected.activate();
@@ -481,7 +481,7 @@ TabGroup.prototype.setPlacement = function(placement)
 
 TabGroup.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	var tabSize = this.size.clone();
 	var buttonSize = this.buttonSize.clone();

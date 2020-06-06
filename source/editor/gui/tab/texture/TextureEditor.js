@@ -2,7 +2,7 @@
 
 function TextureEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/image.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/image.png");
 
 	var self = this;
 
@@ -217,12 +217,12 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-TextureEditor.prototype = Object.create(TabElement.prototype);
+TextureEditor.prototype = Object.create(TabComponent.prototype);
 
 // Activate
 TextureEditor.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 	
 	this.updatePreview();
 
@@ -243,7 +243,7 @@ TextureEditor.prototype.activate = function()
 // Destroy
 TextureEditor.prototype.destroy = function()
 {
-	TabElement.prototype.destroy.call(this);
+	TabComponent.prototype.destroy.call(this);
 
 	this.canvas.destroy();
 };
@@ -298,7 +298,7 @@ TextureEditor.prototype.update = function()
 
 TextureEditor.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.division.size.copy(this.size);
 	this.division.updateInterface();

@@ -9,7 +9,7 @@
  * 
  * @class Mouse
  * @module Input
- * @param {Element} domElement DOM element to craete the mouse events.
+ * @param {Component} domElement DOM element to craete the mouse events.
  * @param {boolean} dontInitialize If true the mouse events are not created.
  */
 function Mouse(domElement, dontInitialize)
@@ -252,7 +252,7 @@ Mouse.FORWARD = 4;
  * Element to be used for coordinates calculation relative to that canvas.
  * 
  * @method setCanvas
- * @param {Element} canvas Canvas to be attached to the Mouse instance
+ * @param {Component} canvas Canvas to be attached to the Mouse instance
  */
 Mouse.setCanvas = function(element)
 {

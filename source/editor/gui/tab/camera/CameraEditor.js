@@ -2,7 +2,7 @@
 
 function CameraEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "camera", Global.FILE_PATH + "icons/camera/camera.png");
+	TabComponent.call(this, parent, closeable, container, index, "camera", Global.FILE_PATH + "icons/camera/camera.png");
 
 	var self = this;
 
@@ -93,12 +93,12 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-CameraEditor.prototype = Object.create(TabElement.prototype);
+CameraEditor.prototype = Object.create(TabComponent.prototype);
 
 // Activate
 CameraEditor.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 
 	this.name.setText(this.camera.name);
 	this.updatePostNodes();
@@ -128,7 +128,7 @@ CameraEditor.prototype.updatePostNodes = function()
 // Destroy
 CameraEditor.prototype.destroy = function()
 {
-	TabElement.prototype.destroy.call(this);
+	TabComponent.prototype.destroy.call(this);
 
 	this.canvas.destroy();
 };
@@ -192,7 +192,7 @@ CameraEditor.prototype.isAttached = function(camera)
 
 CameraEditor.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.main.size.copy(this.size);
 	this.main.updateInterface();

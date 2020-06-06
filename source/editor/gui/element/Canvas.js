@@ -4,17 +4,17 @@
  * DOM canvas element.
  * 
  * @class Canvas
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function Canvas(parent)
 {
-	Element.call(this, parent, "canvas");
+	Component.call(this, parent, "canvas");
 
 	this.preventDragEvents();
 }
 
-Canvas.prototype = Object.create(Element.prototype);
+Canvas.prototype = Object.create(Component.prototype);
 
 /**
  * Get a context from this canvas.
@@ -30,7 +30,7 @@ Canvas.prototype.getContext = function(type)
 
 Canvas.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	var pixelRatio = Editor.getPixelRatio();
 	

@@ -2,7 +2,7 @@
 
 function AboutTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.about, Global.FILE_PATH + "icons/misc/about.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.about, Global.FILE_PATH + "icons/misc/about.png");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
@@ -54,4 +54,4 @@ function AboutTab(parent, closeable, container, index)
 	}
 }
 
-AboutTab.prototype = Object.create(TabElement.prototype);
+AboutTab.prototype = Object.create(TabComponent.prototype);

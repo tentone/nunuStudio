@@ -2,7 +2,7 @@
 
 function ColorChooser(parent)
 {
-	Element.call(this, parent, "input");
+	Component.call(this, parent, "input");
 
 	this.element.type = "text";
 	this.element.style.outline = "none";
@@ -38,7 +38,7 @@ function ColorChooser(parent)
 	this.onChange = null;
 }
 
-ColorChooser.prototype = Object.create(Element.prototype);
+ColorChooser.prototype = Object.create(Component.prototype);
 
 /**
  * Set onchange callback, called after changes.

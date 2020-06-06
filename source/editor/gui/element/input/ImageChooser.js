@@ -6,11 +6,11 @@
  * Images can be selected by opening a file explorer or by drag and drop.
  *
  * @class ImageChooser
- * @extends {Element}
+ * @extends {Component}
  */
 function ImageChooser(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	// Image
 	this.img = document.createElement("img");
@@ -32,8 +32,8 @@ function ImageChooser(parent)
 
 	var self = this;
 
-	this.element.ondragover = Element.preventDefault;
-	this.element.ondragstart = Element.preventDefault;
+	this.element.ondragover = Component.preventDefault;
+	this.element.ondragstart = Component.preventDefault;
 
 	// On drop get file dropped
 	this.element.ondrop = function(event)
@@ -101,7 +101,7 @@ function ImageChooser(parent)
 	this.onChange = null;
 }
 
-ImageChooser.prototype = Object.create(Element.prototype);
+ImageChooser.prototype = Object.create(Component.prototype);
 
 /**
  * Set onchange callback, called after changes.

@@ -5,7 +5,7 @@
  * 
  * @class PasswordBox
  * @extends {TextBox}
- * @param {Element} parent Parent element.
+ * @param {Component} parent Parent element.
  */
 function PasswordBox(parent)
 {

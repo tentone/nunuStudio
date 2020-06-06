@@ -2,7 +2,7 @@
 
 function CubeTextureEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/cube.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.texture, Global.FILE_PATH + "icons/misc/cube.png");
 
 	var self = this;
 
@@ -270,7 +270,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.cube.push(this.bottom);
 }
 
-CubeTextureEditor.prototype = Object.create(TabElement.prototype);
+CubeTextureEditor.prototype = Object.create(TabComponent.prototype);
 
 CubeTextureEditor.prototype.updateMaterial = function()
 {
@@ -322,21 +322,21 @@ CubeTextureEditor.prototype.isAttached = function(texture)
 
 CubeTextureEditor.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 
 	this.mouse.create();
 };
 
 CubeTextureEditor.prototype.deactivate = function()
 {
-	TabElement.prototype.deactivate.call(this);
+	TabComponent.prototype.deactivate.call(this);
 	
 	this.mouse.dispose();
 };
 
 CubeTextureEditor.prototype.destroy = function()
 {
-	TabElement.prototype.destroy.call(this);
+	TabComponent.prototype.destroy.call(this);
 
 	this.mouse.dispose();
 	this.canvas.destroy();
@@ -407,7 +407,7 @@ CubeTextureEditor.prototype.update = function()
 
 CubeTextureEditor.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.division.size.copy(this.size);
 	this.division.updateInterface();

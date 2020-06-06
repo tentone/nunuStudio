@@ -2,7 +2,7 @@
 
 function AssetExplorerMenu(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 	this.element.style.overflow = "visible";
@@ -317,4 +317,4 @@ function AssetExplorerMenu(parent)
 	create.updateInterface();
 }
 
-AssetExplorerMenu.prototype = Object.create(Element.prototype);
+AssetExplorerMenu.prototype = Object.create(Component.prototype);

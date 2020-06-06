@@ -2,7 +2,7 @@
 
 function CodeSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Code Editor", Global.FILE_PATH + "icons/script/script.png");
+	TabComponent.call(this, parent, closeable, container, index, "Code Editor", Global.FILE_PATH + "icons/script/script.png");
 	
 	this.element.style.overflow = "auto";
 
@@ -197,7 +197,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-CodeSettingsTab.prototype = Object.create(TabElement.prototype);
+CodeSettingsTab.prototype = Object.create(TabComponent.prototype);
 
 CodeSettingsTab.prototype.activate = function()
 {
@@ -220,7 +220,7 @@ CodeSettingsTab.prototype.activate = function()
 
 CodeSettingsTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.form.size.copy(this.size);
 	this.form.updateInterface();

@@ -9,7 +9,7 @@
  */
 function NumberBox(parent)
 {
-	Element.call(this, parent, "input");
+	Component.call(this, parent, "input");
 
 	/**
 	 * Indicates if the number box is storing a angle value.
@@ -34,7 +34,7 @@ function NumberBox(parent)
 	this.element.style.appearance = "textfield";
 }
 
-NumberBox.prototype = Object.create(Element.prototype);
+NumberBox.prototype = Object.create(Component.prototype);
 
 /**
  * Set the disabled state of the element.

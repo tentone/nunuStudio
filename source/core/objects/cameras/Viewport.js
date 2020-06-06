@@ -174,7 +174,7 @@ Viewport.prototype.getAspectRatio = function()
  * Check if the mouse is inside this viewport.
  * 
  * @method isInside
- * @param {Element} canvas Canvas for offset calculation.
+ * @param {Component} canvas Canvas for offset calculation.
  * @param {Mouse} mouse Mouse object with coordinates inside of the canvas.
  */
 Viewport.prototype.isInside = function(canvas, mouse)
@@ -191,7 +191,7 @@ Viewport.prototype.isInside = function(canvas, mouse)
  * Usefull to use raycasting for object picking in a viewport.
  *
  * @method getNormalized
- * @param {Element} canvas Canvas for offset calculation.
+ * @param {Component} canvas Canvas for offset calculation.
  * @param {Mouse} mouse Mouse object with coordinates inside of the canvas.
  * @return {THREE.Vector2} Normalized coordinated of the mouse.
  */

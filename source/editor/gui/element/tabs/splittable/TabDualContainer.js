@@ -125,7 +125,7 @@ TabDualContainer.prototype.closeActual = function()
  * Select a specific tab from the container tab tree.
  *
  * @method selectTab
- * @param {TabElement} tab Tab to select.
+ * @param {TabComponent} tab Tab to select.
  */
 TabDualContainer.prototype.selectTab = function(tab)
 {
@@ -175,7 +175,7 @@ TabDualContainer.prototype.selectPreviousTab = function()
  * Prefer the tab group stored on the elementA.
  *
  * @method addTab
- * @param {Constructor} TabConstructor Constructor if the TabElement to be added to the container.
+ * @param {Constructor} TabConstructor Constructor if the TabComponent to be added to the container.
  * @param {boolean} closeable Indicates if the tab can be closed.
  */
 TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
@@ -194,7 +194,7 @@ TabDualContainer.prototype.addTab = function(TabConstructor, closeable)
  *
  * @param {Constructor} type Type of the tab to look for.
  * @param {Object} object Object attached to the tab.
- * @return TabElement The tab from the type specified that has the object attached to it.
+ * @return TabComponent The tab from the type specified that has the object attached to it.
  */
 TabDualContainer.prototype.getTab = function(type, object)
 {

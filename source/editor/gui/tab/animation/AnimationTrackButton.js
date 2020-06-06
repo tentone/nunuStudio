@@ -4,11 +4,11 @@
  * Button displyed on the left side that shows the attribute track being edited.
  *
  * @class AnimationTrackButton
- * @extends {Element}
+ * @extends {Component}
  */
 function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.position = "relative";
 	this.element.style.backgroundColor = Editor.theme.barColor;
@@ -144,7 +144,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	this.interpolation = new DropdownList(this);
 	this.interpolation.size.set(30, 18);
 	this.interpolation.position.set(22, 5);
-	this.interpolation.updatePosition(Element.TOP_RIGHT);
+	this.interpolation.updatePosition(Component.TOP_RIGHT);
 	this.interpolation.updateSize();
 	this.interpolation.addValue(Locale.linear, THREE.InterpolateLinear);
 	this.interpolation.addValue(Locale.smooth, THREE.Smooth);
@@ -158,7 +158,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	this.color = new ColorChooser(this);
 	this.color.size.set(20, 18);
 	this.color.position.set(57, 5);
-	this.color.updatePosition(Element.TOP_RIGHT);
+	this.color.updatePosition(Component.TOP_RIGHT);
 	this.color.updateSize();
 	this.color.setOnChange(function()
 	{
@@ -169,7 +169,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	this.updateTrack();
 }
 
-AnimationTrackButton.prototype = Object.create(Element.prototype);
+AnimationTrackButton.prototype = Object.create(Component.prototype);
 
 AnimationTrackButton.prototype.updateTrack = function()
 {

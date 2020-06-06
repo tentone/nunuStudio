@@ -4,11 +4,11 @@
  * Animation tab menu bar with options to set the properties of the animation clip.
  *
  * @class AnimationClipMenuBar
- * @extends {Element}
+ * @extends {Component}
  */
 function AnimationClipMenuBar(parent, editor, animation)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.backgroundColor = Editor.theme.barColor;
 	this.element.style.position = "relative";
@@ -91,7 +91,7 @@ function AnimationClipMenuBar(parent, editor, animation)
 	this.updateAnimation();
 }
 
-AnimationClipMenuBar.prototype = Object.create(Element.prototype);
+AnimationClipMenuBar.prototype = Object.create(Component.prototype);
 
 AnimationClipMenuBar.prototype.updateAnimation = function()
 {

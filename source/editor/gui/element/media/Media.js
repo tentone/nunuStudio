@@ -6,19 +6,19 @@
  * Should be used as a base for other multimedia elements like audio and video.
  *
  * @class Media
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function Media(parent, type)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	// Media
 	this.media = document.createElement(type);
 	this.element.appendChild(this.media);
 }
 
-Media.prototype = Object.create(Element.prototype);
+Media.prototype = Object.create(Component.prototype);
 
 Media.prototype.constructor = Media;
 
@@ -143,7 +143,7 @@ Media.prototype.pause = function()
 
 Media.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	this.media.style.width = this.size.x + "px";
 	this.media.style.height = this.size.y + "px";

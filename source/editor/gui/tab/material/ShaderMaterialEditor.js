@@ -2,7 +2,7 @@
 
 function ShaderMaterialEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.material, Global.FILE_PATH + "icons/misc/material.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.material, Global.FILE_PATH + "icons/misc/material.png");
 
 	var self = this;
 
@@ -134,7 +134,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	// General
-	this.general = this.tab.addTab(TabElement, false);
+	this.general = this.tab.addTab(TabComponent, false);
 	this.general.setIcon(Global.FILE_PATH + "icons/misc/material.png");
 	this.general.setName(Locale.material);
 
@@ -285,7 +285,7 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 
 ShaderMaterialEditor.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.main.size.copy(this.size);
 	this.main.updateInterface();

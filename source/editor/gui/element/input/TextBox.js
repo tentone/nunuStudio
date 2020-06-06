@@ -9,7 +9,7 @@
  */
 function TextBox(parent)
 {
-	Element.call(this, parent, "input");
+	Component.call(this, parent, "input");
 
 	this.element.type = "text";
 	this.element.style.backgroundColor = Editor.theme.boxColor;
@@ -57,7 +57,7 @@ function TextBox(parent)
 	};
 }
 
-TextBox.prototype = Object.create(Element.prototype);
+TextBox.prototype = Object.create(Component.prototype);
 
 /**
  * Set font configuration to use for the text presented in this component.

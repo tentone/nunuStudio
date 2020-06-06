@@ -2,7 +2,7 @@
 
 function GeneralSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.general, Global.FILE_PATH + "icons/misc/tool.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.general, Global.FILE_PATH + "icons/misc/tool.png");
 
 	this.element.style.overflow = "auto";
 
@@ -116,7 +116,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-GeneralSettingsTab.prototype = Object.create(TabElement.prototype);
+GeneralSettingsTab.prototype = Object.create(TabComponent.prototype);
 
 GeneralSettingsTab.prototype.activate = function()
 {
@@ -132,7 +132,7 @@ GeneralSettingsTab.prototype.activate = function()
 
 GeneralSettingsTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();

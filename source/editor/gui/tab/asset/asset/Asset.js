@@ -6,12 +6,12 @@
  * There are multiple types of assets this class should be used as base for other types.
  *
  * @class Asset
- * @param {Element} parent
- * @extends {Element}
+ * @param {Component} parent
+ * @extends {Component}
  */
 function Asset(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.asset = null;
 
@@ -92,7 +92,7 @@ function Asset(parent)
 	};
 }
 
-Asset.prototype = Object.create(Element.prototype);
+Asset.prototype = Object.create(Component.prototype);
 
 /**
  * Update selection state and the matching visual elements.

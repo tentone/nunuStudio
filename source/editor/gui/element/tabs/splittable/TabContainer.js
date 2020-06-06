@@ -6,16 +6,16 @@
  * The container keeps track of all groups that may be splited into multiple groups.
  *
  * @class TabContainer
- * @extends {Element}
+ * @extends {Component}
  */
 function TabContainer(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 	
 	this.group = null;
 }
 
-TabContainer.prototype = Object.create(Element.prototype);
+TabContainer.prototype = Object.create(Component.prototype);
 
 /**
  * Split this tab group into two new tab groups.
@@ -37,7 +37,7 @@ TabContainer.prototype.attach = function(element)
 
 TabContainer.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	if(this.group !== null)
 	{
@@ -131,7 +131,7 @@ TabContainer.prototype.closeActual = function()
  * Select a specific tab from the container tab tree.
  *
  * @method selectTab
- * @param {TabElement} tab Tab to select.
+ * @param {TabComponent} tab Tab to select.
  */
 TabContainer.prototype.selectTab = function(tab)
 {
@@ -162,7 +162,7 @@ TabContainer.prototype.selectPreviousTab = function()
  * Add new tab to the tab container.
  * 
  * @method addTab
- * @param {Constructor} TabConstructor Constructor if the TabElement to be added to the container.
+ * @param {Constructor} TabConstructor Constructor if the TabComponent to be added to the container.
  * @param {boolean} closeable Indicates if the tab can be closed.
  */
 TabContainer.prototype.addTab = function(TabConstructor, closeable)
@@ -175,7 +175,7 @@ TabContainer.prototype.addTab = function(TabConstructor, closeable)
  *
  * @param {Constructor} type Type of the tab to look for.
  * @param {Object} object Object attached to the tab.
- * @return TabElement The tab from the type specified that has the object attached to it.
+ * @return TabComponent The tab from the type specified that has the object attached to it.
  */
 TabContainer.prototype.getTab = function(type, object)
 {

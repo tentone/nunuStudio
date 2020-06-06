@@ -6,12 +6,12 @@
  * Blocks every input event (cancels propagation).
  * 
  * @class LoadingModal
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function LoadingModal(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 	
 	var self = this;
 
@@ -72,7 +72,7 @@ function LoadingModal(parent)
 	});
 }
 
-LoadingModal.prototype = Object.create(Element.prototype);
+LoadingModal.prototype = Object.create(Component.prototype);
 
 /**
  * Show the loading box.
@@ -115,7 +115,7 @@ LoadingModal.prototype.hide = function(force)
 
 LoadingModal.prototype.destroy = function()
 {
-	Element.prototype.destroy.call(this);
+	Component.prototype.destroy.call(this);
 
 	this.counter = 0;
 	this.timer.stop();
@@ -126,7 +126,7 @@ LoadingModal.prototype.updateSize = function()
 {
 	this.size.copy(this.parent.size);
 
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	// Text
 	this.text.setStyle("fontSize", "38px");

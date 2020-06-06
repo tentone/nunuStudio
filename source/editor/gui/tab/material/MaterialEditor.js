@@ -2,7 +2,7 @@
 
 function MaterialEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.material, Global.FILE_PATH + "icons/misc/material.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.material, Global.FILE_PATH + "icons/misc/material.png");
 
 	var self = this;
 
@@ -295,7 +295,7 @@ MaterialEditor.geometries = [
 	[Locale.cone, new THREE.ConeBufferGeometry(1, 2, 32)]
 ];
 
-MaterialEditor.prototype = Object.create(TabElement.prototype);
+MaterialEditor.prototype = Object.create(TabComponent.prototype);
 
 // Attach material to material editor
 MaterialEditor.prototype.attach = function(material, asset)
@@ -338,21 +338,21 @@ MaterialEditor.prototype.isAttached = function(material)
 
 MaterialEditor.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 	
 	this.mouse.create();
 };
 
 MaterialEditor.prototype.deactivate = function()
 {
-	TabElement.prototype.deactivate.call(this);
+	TabComponent.prototype.deactivate.call(this);
 	
 	this.mouse.dispose();
 };
 
 MaterialEditor.prototype.destroy = function()
 {
-	TabElement.prototype.destroy.call(this);
+	TabComponent.prototype.destroy.call(this);
 
 	this.mouse.dispose();
 	this.canvas.destroy();
@@ -422,7 +422,7 @@ MaterialEditor.prototype.update = function()
 // Update elements
 MaterialEditor.prototype.updateSize = function()
 {	
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.main.size.copy(this.size);
 	this.main.updateInterface();

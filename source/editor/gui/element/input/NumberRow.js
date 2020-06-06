@@ -4,11 +4,11 @@
  * The vector array box represents multiple numeric variables as a vector.
  *
  * @class NumberRow
- * @extends {Element}
+ * @extends {Component}
  */
 function NumberRow(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	/**
 	 * Array with the values objects.
@@ -29,7 +29,7 @@ function NumberRow(parent)
 	this.labelSize = 15;
 }
 
-NumberRow.prototype = Object.create(Element.prototype);
+NumberRow.prototype = Object.create(Component.prototype);
 
 /**
  * Set the values step.
@@ -90,7 +90,7 @@ NumberRow.prototype.addValue = function(label)
 
 NumberRow.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 	
 	var width = Math.round((this.size.x - this.values.length * this.labelSize) / this.values.length);
 	var x = 0;

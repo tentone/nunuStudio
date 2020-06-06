@@ -7,13 +7,13 @@
  *
  * @constructor
  * @class Inspector
- * @extends {Element}
- * @param {Element} parent
+ * @extends {Component}
+ * @param {Component} parent
  * @param {Object} object Object to be edited by this inspector panel.
  */
 function Inspector(parent, object)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "auto";
 	this.preventDragEvents();
@@ -37,7 +37,7 @@ function Inspector(parent, object)
 	this.form.setAutoSize(false);
 }
 
-Inspector.prototype = Object.create(Element.prototype);
+Inspector.prototype = Object.create(Component.prototype);
 
 /** 
  * Attach object to panel.
@@ -59,7 +59,7 @@ Inspector.prototype.updateInspector = function(){};
 
 Inspector.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	this.form.size.copy(this.size);
 	this.form.updateInterface();

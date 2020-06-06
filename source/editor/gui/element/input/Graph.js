@@ -8,14 +8,14 @@
  * Multiple graph lines can be displayed, each graph line has a name that can be used to access its properties.
  * 
  * @class Graph
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  * @param {string} name Name of the default graph.
  * @param {string} color CSS hex color code of the default graph.
  */
 function Graph(parent, name, color)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	var self = this;
 
@@ -57,7 +57,7 @@ function Graph(parent, name, color)
 	 * Grid canvas element.
 	 *
 	 * @property grid
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.grid = document.createElement("canvas");
 	this.grid.style.position = "absolute";
@@ -83,7 +83,7 @@ function Graph(parent, name, color)
 	this.createScale(3);
 }
 
-Graph.prototype = Object.create(Element.prototype);
+Graph.prototype = Object.create(Component.prototype);
 
 Graph.GaphLine = function(canvas, name, color)
 {
@@ -461,7 +461,7 @@ Graph.prototype.updateGrid = function()
 
 Graph.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	var width = this.size.x - this.scaleMargin;
 

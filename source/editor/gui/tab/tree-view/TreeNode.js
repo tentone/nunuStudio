@@ -426,7 +426,7 @@ function TreeNode(container)
 	{
 		event.preventDefault();
 
-		if(DragBuffer.buffer[0] instanceof TabElement)
+		if(DragBuffer.buffer[0] instanceof TabComponent)
 		{
 			return;
 		}
@@ -709,7 +709,7 @@ TreeNode.ABOVE = 1;
  */
 TreeNode.BELLOW = 2;
 
-TreeNode.prototype = Object.create(Element.prototype);
+TreeNode.prototype = Object.create(Component.prototype);
 
 /**
  * Clear node element border.

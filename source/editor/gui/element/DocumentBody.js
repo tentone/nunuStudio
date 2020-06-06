@@ -12,8 +12,8 @@ var DocumentBody =
 {
 	parent: null,
 	element: document.body,
-	mode: Element.TOP_LEFT,
-	isElement: true,
+	mode: Component.TOP_LEFT,
+	isComponent: true,
 	visible: true,
 	position: new THREE.Vector2(0, 0),
 	_size: new THREE.Vector2(0, 0)

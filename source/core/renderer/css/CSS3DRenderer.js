@@ -10,7 +10,7 @@
  * Based on the three.js adaptation (mrdoob, yomotsu) of http:// www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
  * 
  * @class CSS3DRenderer
- * @param {Element} domElement DOM division to place rendered objects.
+ * @param {Component} domElement DOM division to place rendered objects.
  */
 function CSS3DRenderer(domElement)
 {

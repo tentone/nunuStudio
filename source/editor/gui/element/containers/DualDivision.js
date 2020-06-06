@@ -9,17 +9,17 @@
  */
 function DualDivision(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	// Division A
-	this.divA = new Element(this, "div");
+	this.divA = new Component(this, "div");
 	this.divA.element.style.backgroundColor = Editor.theme.panelColor;
 
 	// Division B
-	this.divB = new Element(this, "div");
+	this.divB = new Component(this, "div");
 	this.divB.element.style.backgroundColor = Editor.theme.panelColor;
 	
 	// Resize tab
@@ -86,7 +86,7 @@ function DualDivision(parent)
 DualDivision.HORIZONTAL = 0;
 DualDivision.VERTICAL = 1;
 
-DualDivision.prototype = Object.create(Element.prototype);
+DualDivision.prototype = Object.create(Component.prototype);
 
 DualDivision.prototype.setOnResize = function(callback)
 {
@@ -95,7 +95,7 @@ DualDivision.prototype.setOnResize = function(callback)
 
 DualDivision.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	if(this.orientation === DualDivision.HORIZONTAL)
 	{

@@ -6,13 +6,13 @@
  * The renderer is automatically updated to match the canvas size, it also handles the device pixel ratio.
  *
  * @class RendererCanvas
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  * @param {boolean} alpha If true the background is transparent.
  */
 function RendererCanvas(parent, options, useCSSRenderer)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.backgroundColor = "#000000";
 	
@@ -52,7 +52,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 * Overlay division used to place the css rendered DOM objects.
 	 *
 	 * @attribute cssDivision
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.cssDivision = null;
 
@@ -78,7 +78,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 * Canvas DOM element.
 	 * 
 	 * @attribute canvas
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.canvas = null;
 	this.resetCanvas();
@@ -93,7 +93,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	this.createRenderer();
 }
 
-RendererCanvas.prototype = Object.create(Element.prototype);
+RendererCanvas.prototype = Object.create(Component.prototype);
 
 /**
  * Set on resize callback, can be usefull to update cameras and other screen space dependent objects.
@@ -267,14 +267,14 @@ RendererCanvas.prototype.resizeCanvas = function()
 
 RendererCanvas.prototype.destroy = function()
 {
-	Element.prototype.destroy.call(this);
+	Component.prototype.destroy.call(this);
 
 	this.forceContextLoss();
 };
 
 RendererCanvas.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	this.resizeCanvas();
 

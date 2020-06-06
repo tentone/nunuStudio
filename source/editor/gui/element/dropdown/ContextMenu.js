@@ -9,7 +9,7 @@
  */
 function ContextMenu(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	var self = this;
 
@@ -31,7 +31,7 @@ function ContextMenu(parent)
 	this.options = [];
 }
 
-ContextMenu.prototype = Object.create(Element.prototype);
+ContextMenu.prototype = Object.create(Component.prototype);
 
 /**
  * Set the text of this context menu.

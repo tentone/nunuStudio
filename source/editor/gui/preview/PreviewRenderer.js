@@ -20,7 +20,7 @@ function PreviewRenderer()
 	 * DOM canvas where the result is rendered to.
 	 *
 	 * @attribute canvas
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.canvas = this.renderer.domElement;
 	

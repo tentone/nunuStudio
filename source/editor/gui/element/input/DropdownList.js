@@ -2,7 +2,7 @@
 
 function DropdownList(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	// Select
 	this.select = document.createElement("select");
@@ -36,7 +36,7 @@ function DropdownList(parent)
 	this.values = [];
 }
 
-DropdownList.prototype = Object.create(Element.prototype);
+DropdownList.prototype = Object.create(Component.prototype);
 
 /**
  * Set the disabled state of the element.
@@ -148,7 +148,7 @@ DropdownList.prototype.updateVisibility = function()
 
 DropdownList.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	this.select.style.width = this.size.x + "px";
 	this.select.style.height = this.size.y + "px";

@@ -4,11 +4,11 @@
  * Code editor tab element based on the codemirror code editor library.
  *
  * @class CodeEditor
- * @extends {TabElement}
+ * @extends {TabComponent}
  */
 function CodeEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.codeEditor, Global.FILE_PATH + "icons/misc/code.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.codeEditor, Global.FILE_PATH + "icons/misc/code.png");
 
 	var self = this;
 
@@ -124,11 +124,11 @@ function CodeEditor(parent, closeable, container, index)
 	this.manager.create();
 }
 
-CodeEditor.prototype = Object.create(TabElement.prototype);
+CodeEditor.prototype = Object.create(TabComponent.prototype);
 
 CodeEditor.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 
 	this.updateSettings();
 };
@@ -217,7 +217,7 @@ CodeEditor.prototype.setOnChange = function(callback)
 
 CodeEditor.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.code.setSize(this.size.x, this.size.y);
 };

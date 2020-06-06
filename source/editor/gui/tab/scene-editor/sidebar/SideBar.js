@@ -2,7 +2,7 @@
 
 function SideBar(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.preventDragEvents();
 
@@ -102,7 +102,7 @@ function SideBar(parent)
 	this.more.optionsPerLine = 1;
 }
 
-SideBar.prototype = Object.create(Element.prototype);
+SideBar.prototype = Object.create(Component.prototype);
 
 /**
  * Select object manipulation tool.
@@ -122,7 +122,7 @@ SideBar.prototype.selectTool = function(tool)
 
 SideBar.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	var size = this.size.x;
 	var position = 210, i = 0;

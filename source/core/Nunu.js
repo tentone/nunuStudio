@@ -508,7 +508,7 @@ Nunu.isFullscreen = function()
  * 
  * @method setFullscreen
  * @param {boolean} fullscreen If true the application will enter fullscreen mode, if false it will exit, if undefine it will toggle the value.
- * @param {Element} element DOM element to put into fullscreen.
+ * @param {Component} element DOM element to put into fullscreen.
  */
 Nunu.setFullscreen = function(fullscreen, element)
 {

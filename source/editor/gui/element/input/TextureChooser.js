@@ -2,7 +2,7 @@
 
 function TextureChooser(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	// Preview
 	this.preview = document.createElement("div");
@@ -113,7 +113,7 @@ function TextureChooser(parent)
 	this.texture = null;
 }
 
-TextureChooser.prototype = Object.create(Element.prototype);
+TextureChooser.prototype = Object.create(Component.prototype);
 
 /**
  * Set onchange callback, called after changes.
@@ -233,5 +233,5 @@ TextureChooser.prototype.updateSize = function()
 	this.preview.style.width = this.size.y + "px";
 	this.preview.style.height = this.size.y + "px";
 
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 };

@@ -6,11 +6,11 @@
  * It is also possible to test some JS code directly on the console and navigate the project resources here.
  *
  * @class ConsoleTab
- * @extends {TabElement}
+ * @extends {TabComponent}
  */
 function ConsoleTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Console", Global.FILE_PATH + "icons/misc/console.png");
+	TabComponent.call(this, parent, closeable, container, index, "Console", Global.FILE_PATH + "icons/misc/console.png");
 
 	var self = this;
 
@@ -64,7 +64,7 @@ function ConsoleTab(parent, closeable, container, index)
 	 * @type {SearchBox}
 	 */
 	this.search = new SearchBox(this.bar);
-	this.search.setMode(Element.TOP_RIGHT);
+	this.search.setMode(Component.TOP_RIGHT);
 	this.search.size.set(200, 25);
 	this.search.position.set(1, 0);
 	this.search.updateInterface();
@@ -77,7 +77,7 @@ function ConsoleTab(parent, closeable, container, index)
 	 * Console content division, where the messages are displayed.
 	 *
 	 * @attribute console
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.content = document.createElement("div");
 	this.content.style.position = "absolute";
@@ -228,7 +228,7 @@ function ConsoleTab(parent, closeable, container, index)
 	this.useConsole(this.enabled);
 }
 
-ConsoleTab.prototype = Object.create(TabElement.prototype);
+ConsoleTab.prototype = Object.create(TabComponent.prototype);
 
 /**
  * Run a user command from the console.
@@ -418,7 +418,7 @@ ConsoleTab.prototype.clear = function(args)
 
 ConsoleTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.content.style.height = (this.size.y - 30) + "px";
 	this.content.style.width = this.size.x + "px";

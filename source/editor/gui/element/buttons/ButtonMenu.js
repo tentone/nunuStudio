@@ -7,7 +7,7 @@
  *
  * @class ButtonMenu
  * @extends {ButtonText}
- * @param {Element} parent Parent element.
+ * @param {Component} parent Parent element.
  */
 function ButtonMenu(parent)
 {
@@ -19,7 +19,7 @@ function ButtonMenu(parent)
 	 * Icon element.
 	 *
 	 * @attribute icon
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.icon = null;
 

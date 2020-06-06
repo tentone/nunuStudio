@@ -2,7 +2,7 @@
 
 function CubeTextureBox(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	// Texture preview division
 	this.preview = document.createElement("div");
@@ -109,7 +109,7 @@ function CubeTextureBox(parent)
 	this.texture = null;
 }
 
-CubeTextureBox.prototype = Object.create(Element.prototype);
+CubeTextureBox.prototype = Object.create(Component.prototype);
 
 /**
  * Set onchange callback, called after changes.

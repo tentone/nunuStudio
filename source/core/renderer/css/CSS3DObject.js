@@ -9,7 +9,7 @@
  *
  * @class CSS3DObject
  * @extends {THREE.Object3D}
- * @param {Element} element DOM element encapsulated in the object container.
+ * @param {Component} element DOM element encapsulated in the object container.
  */
 function CSS3DObject(element)
 {

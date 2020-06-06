@@ -4,12 +4,12 @@
  * Table form element automatically organizes element into a grid like form.
  * 
  * @class TableForm
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function TableForm(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	
@@ -55,7 +55,7 @@ function TableForm(parent)
 	this.rows.push([]);
 }
 
-TableForm.prototype = Object.create(Element.prototype);
+TableForm.prototype = Object.create(Component.prototype);
 
 /**
  * Set if the form should be automatically resized, and ajust overflow value.
@@ -229,5 +229,5 @@ TableForm.prototype.updateSize = function()
 		this.size.set(sizeX, y);
 	}
 
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 };

@@ -6,11 +6,11 @@
  * Clones the project instance and run it. Changes appplied in other tabs are not applied to the running instance.
  *
  * @class RunProject
- * @extends {TabElement}
+ * @extends {TabComponent}
  */
 function RunProject(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.run, Global.FILE_PATH + "icons/misc/play.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.run, Global.FILE_PATH + "icons/misc/play.png");
 
 	var self = this;
 
@@ -43,7 +43,7 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.setAltText(Locale.toggleFullscreen);
 	this.fullscreenButton.setImageScale(0.8, 0.8);
 	this.fullscreenButton.updateSize();
-	this.fullscreenButton.updatePosition(Element.BOTTOM_RIGHT);
+	this.fullscreenButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.fullscreenButton.visible = false;
 	this.fullscreenButton.element.style.backgroundColor = "#333333";
 	this.fullscreenButton.element.style.borderRadius = "5px";
@@ -79,7 +79,7 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton.setAltText(Locale.toggleVR);
 	this.vrButton.setImageScale(0.8, 0.8);
 	this.vrButton.updateSize();
-	this.vrButton.updatePosition(Element.BOTTOM_RIGHT);
+	this.vrButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.vrButton.setVisibility(false);
 	this.vrButton.element.style.backgroundColor = "#333333";
 	this.vrButton.element.style.borderRadius = "5px";
@@ -94,7 +94,7 @@ function RunProject(parent, closeable, container, index)
 	};
 }
 
-RunProject.prototype = Object.create(TabElement.prototype);
+RunProject.prototype = Object.create(TabComponent.prototype);
 
 RunProject.prototype.reloadContext = RendererCanvas.prototype.reloadContext;
 RunProject.prototype.forceContextLoss = RendererCanvas.prototype.forceContextLoss;
@@ -112,12 +112,12 @@ RunProject.prototype.activate = function()
 
 	Editor.gui.menuBar.run.setText(Locale.stop);
 
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 };
 
 RunProject.prototype.deactivate = function()
 {
-	TabElement.prototype.deactivate.call(this);
+	TabComponent.prototype.deactivate.call(this);
 
 	Editor.gui.menuBar.run.setText(Locale.run);
 };
@@ -129,7 +129,7 @@ RunProject.prototype.isAttached = function(program)
 
 RunProject.prototype.destroy = function()
 {
-	TabElement.prototype.destroy.call(this);
+	TabComponent.prototype.destroy.call(this);
 
 	this.stopProgram();
 
@@ -306,7 +306,7 @@ RunProject.prototype.restartProgram = function()
 
 RunProject.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.canvas.size.copy(this.size);
 	this.canvas.updateSize();

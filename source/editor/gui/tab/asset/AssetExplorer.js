@@ -2,14 +2,14 @@
 
 function AssetExplorer(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Assets", Global.FILE_PATH + "icons/misc/new.png");
+	TabComponent.call(this, parent, closeable, container, index, "Assets", Global.FILE_PATH + "icons/misc/new.png");
 
 	var self = this;
 
 	this.element.ondragover = undefined;
 
 	// Assets
-	this.assets = new Element(this, "div");
+	this.assets = new Component(this, "div");
 	this.assets.element.style.overflow = "auto";
 
 	// Drop event
@@ -54,7 +54,7 @@ function AssetExplorer(parent, closeable, container, index)
 	 * @type {SearchBox}
 	 */
 	this.search = new SearchBox(this.bar);
-	this.search.setMode(Element.TOP_RIGHT);
+	this.search.setMode(Component.TOP_RIGHT);
 	this.search.size.set(200, 25);
 	this.search.position.set(1, 0);
 	this.search.updateInterface();
@@ -80,7 +80,7 @@ function AssetExplorer(parent, closeable, container, index)
 	this.manager = null;
 }
 
-AssetExplorer.prototype = Object.create(TabElement.prototype);
+AssetExplorer.prototype = Object.create(TabComponent.prototype);
 
 /**
  * Filter assets by their name.
@@ -237,7 +237,7 @@ AssetExplorer.prototype.clear = function()
 
 AssetExplorer.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	this.bar.size.set(this.size.x, 25);
 	this.bar.updateSize();

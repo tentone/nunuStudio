@@ -2,7 +2,7 @@
 
 function AudioPlayer(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 
@@ -195,7 +195,7 @@ function AudioPlayer(parent)
 	draw();
 }
 
-AudioPlayer.prototype = Object.create(Element.prototype);
+AudioPlayer.prototype = Object.create(Component.prototype);
 
 // Decode audio
 AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
@@ -311,12 +311,12 @@ AudioPlayer.prototype.destroy = function()
 	}
 	catch(e){}
 
-	Element.prototype.destroy.call(this);
+	Component.prototype.destroy.call(this);
 };
 
 AudioPlayer.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	// Button
 	this.button.style.width = this.element.style.height;

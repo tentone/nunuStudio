@@ -7,7 +7,7 @@
  *
  * @class ButtonText
  * @extends {Button, Text}
- * @param {Element} parent Parent element.
+ * @param {Component} parent Parent element.
  */
 function ButtonText(parent)
 {

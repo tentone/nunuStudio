@@ -2,7 +2,7 @@
 
 function JSHintSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.javascript, Global.FILE_PATH + "icons/misc/js.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.javascript, Global.FILE_PATH + "icons/misc/js.png");
 
 	this.element.style.overflow = "auto";
 
@@ -218,7 +218,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-JSHintSettingsTab.prototype = Object.create(TabElement.prototype);
+JSHintSettingsTab.prototype = Object.create(TabComponent.prototype);
 
 JSHintSettingsTab.prototype.activate = function()
 {
@@ -245,7 +245,7 @@ JSHintSettingsTab.prototype.activate = function()
 
 JSHintSettingsTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();

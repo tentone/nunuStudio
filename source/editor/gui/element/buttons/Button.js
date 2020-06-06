@@ -4,19 +4,19 @@
  * Base button class.
  * 
  * @class Button
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function Button(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.cursor = "pointer";
 
 	this.preventDragEvents();
 }
 
-Button.prototype = Object.create(Element.prototype);
+Button.prototype = Object.create(Component.prototype);
 
 /**
  * Set button color.

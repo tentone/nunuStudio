@@ -8,7 +8,7 @@
  */
 function TextArea(parent)
 {
-	Element.call(this, parent, "textarea");
+	Component.call(this, parent, "textarea");
 
 	this.element.style.overflow = "auto";
 	this.element.style.resize = "none";
@@ -55,7 +55,7 @@ function TextArea(parent)
 	};
 }
 
-TextArea.prototype = Object.create(Element.prototype);
+TextArea.prototype = Object.create(Component.prototype);
 
 /**
  * The text in the textarea is not wrapped. This is default.

@@ -6,11 +6,11 @@
  * It is responsible for selection the appropiate panel for the type of object selected.
  *
  * @class InspectorContainer
- * @extends {TabElement}
+ * @extends {TabComponent}
  */
 function InspectorContainer(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Inspector", Global.FILE_PATH + "icons/misc/magnifier.png");
+	TabComponent.call(this, parent, closeable, container, index, "Inspector", Global.FILE_PATH + "icons/misc/magnifier.png");
 
 	this.element.style.overflow = "auto";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
@@ -30,7 +30,7 @@ function InspectorContainer(parent, closeable, container, index)
 	this.panel = null;
 }
 
-InspectorContainer.prototype = Object.create(TabElement.prototype);
+InspectorContainer.prototype = Object.create(TabComponent.prototype);
 
 InspectorContainer.prototype.destroyInspector = function()
 {
@@ -267,7 +267,7 @@ InspectorContainer.prototype.updateValues = function()
 
 InspectorContainer.prototype.updateSize = function()
 {	
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.emptyText.position.x = (this.size.x * 0.1);
 	this.emptyText.size.set(this.size.x * 0.8, this.size.y);

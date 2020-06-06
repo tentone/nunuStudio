@@ -9,7 +9,7 @@
  */
 function DualContainer(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
@@ -77,7 +77,7 @@ function DualContainer(parent)
 DualContainer.HORIZONTAL = 0;
 DualContainer.VERTICAL = 1;
 
-DualContainer.prototype = Object.create(Element.prototype);
+DualContainer.prototype = Object.create(Component.prototype);
 
 DualContainer.prototype.attach = function(element)
 {
@@ -110,7 +110,7 @@ DualContainer.prototype.attachB = function(element)
 
 DualContainer.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 
 	if(this.elementA === null || this.elementB === null)
 	{

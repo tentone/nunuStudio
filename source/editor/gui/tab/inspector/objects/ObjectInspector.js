@@ -60,7 +60,7 @@ function ObjectInspector(parent, object)
 	this.scaleRatioLock = new CheckBox(text);
 	this.scaleRatioLock.setAltText("Lock scale ratio");
 	this.scaleRatioLock.size.set(18, 18);
-	this.scaleRatioLock.setMode(Element.TOP_RIGHT);
+	this.scaleRatioLock.setMode(Component.TOP_RIGHT);
 	this.scaleRatioLock.updateInterface();
 	
 	// Scale

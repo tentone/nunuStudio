@@ -6,11 +6,11 @@
  * Its also used to load, save project, and access editor related features.
  *
  * @class MainMenu
- * @extends {Element}
+ * @extends {Component}
  */
 function MainMenu(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.barColor;
@@ -892,7 +892,7 @@ function MainMenu(parent)
 	});
 }
 
-MainMenu.prototype = Object.create(Element.prototype);
+MainMenu.prototype = Object.create(Component.prototype);
 
 MainMenu.prototype.updateInterface = function()
 {

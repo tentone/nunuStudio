@@ -6,12 +6,12 @@
  * This element should be used to encapsulate input elements that require autocompletion.
  * 
  * @class Form
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function Form(parent)
 {
-	Element.call(this, parent, "form");
+	Component.call(this, parent, "form");
 
 	this.element.autocomplete = true;
 	this.element.noValidate = true;
@@ -23,7 +23,7 @@ function Form(parent)
 	});
 }
 
-Form.prototype = Object.create(Element.prototype);
+Form.prototype = Object.create(Component.prototype);
 
 /**
  * Simulate the form submission.

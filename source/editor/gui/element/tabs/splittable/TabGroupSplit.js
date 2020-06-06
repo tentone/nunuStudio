@@ -7,7 +7,7 @@
  * 
  * @class TabGroupSplit
  * @extends {TabGroup}
- * @param {Element} parent Parent element.
+ * @param {Component} parent Parent element.
  */
 function TabGroupSplit(parent, placement)
 {
@@ -43,7 +43,7 @@ function TabGroupSplit(parent, placement)
 	 * DOM element to be displayed when a tab is dragged over.
 	 *
 	 * @property tabArea
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.tabArea = document.createElement("div");
 	this.tabArea.style.zIndex = "1000";
@@ -59,7 +59,7 @@ function TabGroupSplit(parent, placement)
 		var uuid = event.dataTransfer.getData("uuid");
 		var tab = DragBuffer.get(uuid);
 
-		if(tab instanceof TabElement)
+		if(tab instanceof TabComponent)
 		{
 			var position = DOMUtils.getPosition(self.element);
 			var x = event.clientX - position.x;
@@ -104,7 +104,7 @@ function TabGroupSplit(parent, placement)
 	{
 		event.preventDefault();
 
-		if(!(DragBuffer.buffer[0] instanceof TabElement))
+		if(!(DragBuffer.buffer[0] instanceof TabComponent))
 		{
 			return;
 		}
@@ -323,7 +323,7 @@ TabGroupSplit.prototype.collapse = function()
  * Attach tab to this group and remove it from the original group.
  *
  * @method attachTab
- * @param {TabElement} tab Tab to be moved.
+ * @param {TabComponent} tab Tab to be moved.
  * @param {number} insertIndex Index where to place the tab.
  */
 TabGroupSplit.prototype.attachTab = function(tab, insertIndex)

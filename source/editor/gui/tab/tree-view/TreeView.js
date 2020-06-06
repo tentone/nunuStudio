@@ -6,15 +6,15 @@
  * Each tree entry represents direclty a Object3D object present in the editor.
  * 
  * @class TreeView
- * @extends {TabElement}
- * @param {Element} parent Parent element.
+ * @extends {TabComponent}
+ * @param {Component} parent Parent element.
  * @param {boolean} closeable If the tab is closeable.
  * @param {TabGroup} container The container where this tab is inserted.
  * @param {number} index Index inside the container button array.
  */
 function TreeView(parent, closeable, container, index)
 {	
-	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Global.FILE_PATH + "icons/misc/menu.png");
+	TabComponent.call(this, parent, closeable, container, index, "Project Explorer", Global.FILE_PATH + "icons/misc/menu.png");
 
 	var self = this;
 
@@ -32,7 +32,7 @@ function TreeView(parent, closeable, container, index)
 	this.root = null;
 }
 
-TreeView.prototype = Object.create(TabElement.prototype);
+TreeView.prototype = Object.create(TabComponent.prototype);
 
 /**
  * Select tree nodes by their name.
@@ -305,7 +305,7 @@ TreeView.prototype.updateChildPosition = function()
 
 TreeView.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.search.size.set(this.size.x, 25);
 	this.search.updateInterface();

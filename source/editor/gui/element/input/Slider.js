@@ -4,12 +4,12 @@
  * Slider element is used to select a numeric value using a visual slider bar.
  * 
  * @class Slider
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function Slider(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
 
@@ -151,7 +151,7 @@ function Slider(parent)
 	};
 }
 
-Slider.prototype = Object.create(Element.prototype);
+Slider.prototype = Object.create(Component.prototype);
 
 /**
  * Set if element is disabled.
@@ -266,7 +266,7 @@ Slider.prototype.updateValue = function()
 
 Slider.prototype.destroy = function()
 {
-	Element.prototype.destroy.call(this);
+	Component.prototype.destroy.call(this);
 	
 	if(document.body.contains(this.text))
 	{

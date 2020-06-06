@@ -2,7 +2,7 @@
 
 function EditorSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.editor, Global.FILE_PATH + "icons/misc/scene.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.editor, Global.FILE_PATH + "icons/misc/scene.png");
 
 	this.element.style.overflow = "auto";
 
@@ -364,7 +364,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.updateInterface();
 }
 
-EditorSettingsTab.prototype = Object.create(TabElement.prototype);
+EditorSettingsTab.prototype = Object.create(TabComponent.prototype);
 
 EditorSettingsTab.prototype.activate = function()
 {
@@ -406,7 +406,7 @@ EditorSettingsTab.prototype.activate = function()
 
 EditorSettingsTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();

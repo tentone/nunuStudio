@@ -4,8 +4,8 @@
  * Video player element, based on the video tag.
  *
  * @class VideoPlayer
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function VideoPlayer(parent)
 {

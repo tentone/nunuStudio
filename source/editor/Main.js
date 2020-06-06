@@ -347,7 +347,7 @@ include("source/editor/locale/LocaleEN.js");
 include("source/editor/theme/ThemeManager.js");
 include("source/editor/theme/ThemeDark.js");
 
-include("source/editor/gui/element/Element.js");
+include("source/editor/gui/element/Component.js");
 include("source/editor/gui/element/DocumentBody.js");
 include("source/editor/gui/element/Division.js");
 include("source/editor/gui/element/Text.js");
@@ -393,7 +393,7 @@ include("source/editor/gui/element/input/TextureForm.js");
 include("source/editor/gui/element/input/CubeTextureBox.js");
 
 include("source/editor/gui/element/tabs/TabGroup.js");
-include("source/editor/gui/element/tabs/TabElement.js");
+include("source/editor/gui/element/tabs/TabComponent.js");
 include("source/editor/gui/element/tabs/TabButton.js");
 
 include("source/editor/gui/element/tabs/splittable/TabGroupSplit.js");

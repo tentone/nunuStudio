@@ -7,7 +7,7 @@
  *
  * @class ButtonDrawer
  * @extends {ButtonImage}
- * @param {Element} parent Parent element.
+ * @param {Component} parent Parent element.
  */
 function ButtonDrawer(parent)
 {
@@ -17,7 +17,7 @@ function ButtonDrawer(parent)
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.style.overflow = "visible";
 
-	this.panel = new Element(this, "div");
+	this.panel = new Component(this, "div");
 	this.panel.element.style.overflow = "visible";
 	this.panel.element.style.backgroundColor = Editor.theme.barColor;
 	this.panel.element.style.zIndex = "250";
@@ -114,7 +114,7 @@ ButtonDrawer.prototype.setExpanded = function(expanded)
  * Insert new option from already created element.
  *
  * @method insertOption
- * @param {Element} Element of the option to be inserted in the drawer
+ * @param {Component} Element of the option to be inserted in the drawer
  */
 ButtonDrawer.prototype.insertOption = function(element)
 {

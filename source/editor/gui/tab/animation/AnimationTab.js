@@ -9,11 +9,11 @@
  *
  * @class AnimationTab
  * @extends {AnimationTab}
- * @param {Element} parent
+ * @param {Component} parent
  */
 function AnimationTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Animation", Global.FILE_PATH + "icons/misc/animation.png");
+	TabComponent.call(this, parent, closeable, container, index, "Animation", Global.FILE_PATH + "icons/misc/animation.png");
 
 	var self = this;
 
@@ -28,9 +28,9 @@ function AnimationTab(parent, closeable, container, index)
 	 * Menu bar where the options to create animation clip, and play the animation controls are located.
 	 *
 	 * @attribute bar
-	 * @type {Element}
+	 * @type {Component}
 	 */
-	this.bar = new Element(this, "div");
+	this.bar = new Component(this, "div");
 	this.bar.size.set(0, 25);
 	this.bar.element.style.position = "absolute";
 	this.bar.element.style.height = "25px";
@@ -157,7 +157,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomSlider.position.set(30, 0);
 	this.zoomSlider.setStep(10);
 	this.zoomSlider.setRange(20, 1000);
-	this.zoomSlider.updatePosition(Element.TOP_RIGHT);
+	this.zoomSlider.updatePosition(Component.TOP_RIGHT);
 	this.zoomSlider.updateSize();
 	this.zoomSlider.setValue(this.zoom);
 	this.zoomSlider.setOnChange(function()
@@ -171,7 +171,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomText.setText(Locale.zoom);
 	this.zoomText.size.set(90, 15);
 	this.zoomText.position.set(110, 0);
-	this.zoomText.updatePosition(Element.TOP_RIGHT);
+	this.zoomText.updatePosition(Component.TOP_RIGHT);
 	this.zoomText.updateSize();
 
 	/**
@@ -180,9 +180,9 @@ function AnimationTab(parent, closeable, container, index)
 	 * Contains the info on the left and tracks on right side.
 	 *
 	 * @property timeline
-	 * @type {Element}
+	 * @type {Component}
 	 */
-	this.timeline = new Element(this, "div");
+	this.timeline = new Component(this, "div");
 	this.timeline.element.style.overflowY = "auto";
 
 	/**
@@ -221,7 +221,7 @@ function AnimationTab(parent, closeable, container, index)
 	 * Resize tab placed between the info and tracks divisions
 	 *
 	 * @property tab
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.tab = document.createElement("div");
 	this.tab.style.backgroundColor = Editor.theme.barColor;
@@ -258,7 +258,7 @@ function AnimationTab(parent, closeable, container, index)
 	});
 }
 
-AnimationTab.prototype = Object.create(TabElement.prototype);
+AnimationTab.prototype = Object.create(TabComponent.prototype);
 
 AnimationTab.prototype.attach = function(object)
 {
@@ -280,14 +280,14 @@ AnimationTab.prototype.attach = function(object)
 
 AnimationTab.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 
 	this.updateSelection();
 };
 
 AnimationTab.prototype.deactivate = function()
 {
-	TabElement.prototype.deactivate.call(this);
+	TabComponent.prototype.deactivate.call(this);
 
 	if(this.mixer !== null && this.mixer.playing)
 	{

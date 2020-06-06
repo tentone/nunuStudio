@@ -7,7 +7,7 @@
  *
  * @constructor
  * @class ProfilingTab
- * @extends {TabElement}
+ * @extends {TabComponent}
  * @param parent
  * @param closeable
  * @param container
@@ -15,13 +15,13 @@
  */
 function ProfilingTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.profiling, Global.FILE_PATH + "icons/misc/speedometer.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.profiling, Global.FILE_PATH + "icons/misc/speedometer.png");
 
 	// Canvas
 	this.canvas = new Canvas();
 }
 
-ProfilingTab.prototype = Object.create(TabElement.prototype);
+ProfilingTab.prototype = Object.create(TabComponent.prototype);
 
 ProfilingTab.prototype.update = function()
 {
@@ -45,6 +45,6 @@ ProfilingTab.prototype.update = function()
 
 ProfilingTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 };

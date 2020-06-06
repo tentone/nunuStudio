@@ -1,15 +1,15 @@
 "use strict";
 
 /**
- * Element is the base object for all GUI elements.
+ * Component is the base object for all GUI elements.
  * 
- * All GUI elements are based on the Element class, components can be inserted into other componens or into DOM elements.
+ * All GUI elements are based on the Component class, components can be inserted into other componens or into DOM elements.
  * 
- * @class Element
- * @param {Element} parent Parent element.
+ * @class Component
+ * @param {Component} parent Parent element.
  * @param {string} type Type of the based DOM element.
  */
-function Element(parent, type)
+function Component(parent, type)
 {
 	/** 
 	 * Base DOM element for this component.
@@ -17,19 +17,19 @@ function Element(parent, type)
 	 * Different components may use diferent base element types.
 	 * 
 	 * @attribute element
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.element = document.createElement(type !== undefined ? type : "div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
 
 	/** 
-	 * The parent element that contains this Element.
+	 * The parent element that contains this Component.
 	 *
-	 * Can be a DOM element or another Element.
+	 * Can be a DOM element or another Component.
 	 * 
 	 * @attribute parent
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.parent = null;
 	if(parent !== undefined)
@@ -67,12 +67,12 @@ function Element(parent, type)
 	 * @attribute mode
 	 * @type {number}
 	 */
-	this._mode = Element.TOP_LEFT;
+	this._mode = Component.TOP_LEFT;
 }
 
-Element.prototype.constructor = Element;
+Component.prototype.constructor = Component;
 
-Element.prototype.isElement = true;
+Component.prototype.isComponent = true;
 
 /**
  * Top-left positioning.
@@ -81,7 +81,7 @@ Element.prototype.isElement = true;
  * @attribute TOP_LEFT
  * @type {number}
  */
-Element.TOP_LEFT = 0;
+Component.TOP_LEFT = 0;
 
 /**
  * Top-right positioning.
@@ -90,7 +90,7 @@ Element.TOP_LEFT = 0;
  * @attribute TOP_RIGHT
  * @type {number}
  */
-Element.TOP_RIGHT = 1;
+Component.TOP_RIGHT = 1;
 
 /**
  * Bottom-left positioning.
@@ -99,7 +99,7 @@ Element.TOP_RIGHT = 1;
  * @attribute BOTTOM_LEFT
  * @type {number}
  */
-Element.BOTTOM_LEFT = 2;
+Component.BOTTOM_LEFT = 2;
 
 /**
  * Bottom-right positioning.
@@ -108,32 +108,32 @@ Element.BOTTOM_LEFT = 2;
  * @attribute BOTTOM_RIGHT
  * @type {number}
  */
-Element.BOTTOM_RIGHT = 3;
+Component.BOTTOM_RIGHT = 3;
 
 
-Element.preventDefault = function(event)
+Component.preventDefault = function(event)
 {
 	event.preventDefault();
 };
 
 /** 
- * Add a CSS class to the base DOM element of this Element.
+ * Add a CSS class to the base DOM element of this Component.
  * 
  * @method addClass
  * @param {string} name Name of the class to be added.
  */
-Element.prototype.addClass = function(name)
+Component.prototype.addClass = function(name)
 {
 	this.element.classList.add(name);
 };
 
 /** 
- * Remove a CSS class from the base DOM element of this Element.
+ * Remove a CSS class from the base DOM element of this Component.
  * 
  * @method removeClass
  * @param {string} name Name of the class to be removed.
  */
-Element.prototype.removeClass = function(name)
+Component.prototype.removeClass = function(name)
 {
 	if(this.element.classList.contains(name))
 	{
@@ -148,7 +148,7 @@ Element.prototype.removeClass = function(name)
  * @param {string} attribute Name of the style attribute.
  * @param {string} value Value of the style.
  */
-Element.prototype.setStyle = function(attribute, value)
+Component.prototype.setStyle = function(attribute, value)
 {
 	this.element.style[attribute] = value;
 };
@@ -160,10 +160,10 @@ Element.prototype.setStyle = function(attribute, value)
  *
  * @method preventDragEvents
  */
-Element.prototype.preventDragEvents = function()
+Component.prototype.preventDragEvents = function()
 {
-	this.element.ondrop = Element.preventDefault;
-	this.element.ondragover = Element.preventDefault;
+	this.element.ondrop = Component.preventDefault;
+	this.element.ondragover = Component.preventDefault;
 };
 
 /**
@@ -172,7 +172,7 @@ Element.prototype.preventDragEvents = function()
  * @method setAltText
  * @param {string} altText Alt text.
  */
-Element.prototype.setAltText = function(altText)
+Component.prototype.setAltText = function(altText)
 {
 	var element = document.createElement("div");
 	element.style.position = "absolute";
@@ -228,7 +228,7 @@ Element.prototype.setAltText = function(altText)
  * @method setOnClick
  * @param {Function} callback Function called when the component is clicked.
  */
-Element.prototype.setOnClick = function(callback)
+Component.prototype.setOnClick = function(callback)
 {
 	this.element.onclick = callback;
 };
@@ -238,7 +238,7 @@ Element.prototype.setOnClick = function(callback)
  * 
  * @method removeAllChildren
  */
-Element.prototype.removeAllChildren = function()
+Component.prototype.removeAllChildren = function()
 {
 	while(this.element.firstChild)
 	{
@@ -254,7 +254,7 @@ Element.prototype.removeAllChildren = function()
  * @method attachTo
  * @param {Container} parent Parent container.
  */
-Element.prototype.attachTo = function(parent)
+Component.prototype.attachTo = function(parent)
 {
 	if(this.parent === parent || parent === undefined)
 	{
@@ -263,18 +263,18 @@ Element.prototype.attachTo = function(parent)
 
 	if(this.parent !== null)
 	{
-		Element.prototype.destroy.call(this);
+		Component.prototype.destroy.call(this);
 	}
 
 	this.parent = parent;
 
-	if(parent.isElement === true)
+	if(parent.isComponent === true)
 	{
 		parent.element.appendChild(this.element);
 	}
 	else
 	{
-		console.warn("nunuStudio: Parent is not a Element." , this);
+		console.warn("nunuStudio: Parent is not a Component." , this);
 		this.parent.appendChild(this.element);
 	}
 };
@@ -286,11 +286,11 @@ Element.prototype.attachTo = function(parent)
  * 
  * @method destroy
  */
-Element.prototype.destroy = function()
+Component.prototype.destroy = function()
 {
 	if(this.parent !== null)
 	{
-		if(this.parent.isElement === true)
+		if(this.parent.isComponent === true)
 		{
 			if(this.parent.element.contains(this.element))
 			{
@@ -300,7 +300,7 @@ Element.prototype.destroy = function()
 		}
 		else
 		{
-			console.warn("nunuStudio: Parent is not a Element.", this);
+			console.warn("nunuStudio: Parent is not a Component.", this);
 			if(this.parent.contains(this.element))
 			{
 				this.parent.removeChild(this.element);
@@ -316,7 +316,7 @@ Element.prototype.destroy = function()
  * @method setMode
  * @param {number} setMode
  */
-Element.prototype.setMode = function(mode)
+Component.prototype.setMode = function(mode)
 {
 	this._mode = mode;
 	this.element.style.bottom = null;
@@ -339,7 +339,7 @@ Element.prototype.setMode = function(mode)
  * @method setStyleList
  * @param {Object} styleList Object describing the style to be applied to the object.
  */
-Element.prototype.setStyleList = function(styleList)
+Component.prototype.setStyleList = function(styleList)
 {
 	for(var i in styleList)
 	{
@@ -354,7 +354,7 @@ Element.prototype.setStyleList = function(styleList)
  * 
  * @method center
  */
-Element.prototype.center = function()
+Component.prototype.center = function()
 {
 	this.position.set((this.parent.size.x - this.size.x) / 2, (this.parent.size.y - this.size.y) / 2);
 };
@@ -364,7 +364,7 @@ Element.prototype.center = function()
  *
  * @method setVisibility
  */
-Element.prototype.setVisibility = function(visible)
+Component.prototype.setVisibility = function(visible)
 {
 	this.visible = visible;
 	this.updateVisibility();
@@ -375,7 +375,7 @@ Element.prototype.setVisibility = function(visible)
  *
  * @method updateVisibility
  */
-Element.prototype.updateVisibility = function()
+Component.prototype.updateVisibility = function()
 {
 	this.element.style.display = this.visible ? "block" : "none";
 };
@@ -385,14 +385,14 @@ Element.prototype.updateVisibility = function()
  * 
  * @method updatePosition
  */
-Element.prototype.updatePosition = function(mode)
+Component.prototype.updatePosition = function(mode)
 {
 	if(mode !== undefined)
 	{
 		this._mode = mode;
 	}
 
-	if(this._mode === Element.TOP_LEFT || this._mode === Element.TOP_RIGHT)
+	if(this._mode === Component.TOP_LEFT || this._mode === Component.TOP_RIGHT)
 	{
 		this.element.style.top = this.position.y + "px";
 	}
@@ -401,7 +401,7 @@ Element.prototype.updatePosition = function(mode)
 		this.element.style.bottom = this.position.y + "px";
 	}
 
-	if(this._mode === Element.TOP_LEFT || this._mode === Element.BOTTOM_LEFT)
+	if(this._mode === Component.TOP_LEFT || this._mode === Component.BOTTOM_LEFT)
 	{
 		this.element.style.left = this.position.x + "px";
 	}
@@ -416,7 +416,7 @@ Element.prototype.updatePosition = function(mode)
  * 
  * @method updateSize
  */
-Element.prototype.updateSize = function()
+Component.prototype.updateSize = function()
 {
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
@@ -431,7 +431,7 @@ Element.prototype.updateSize = function()
  * 
  * @method update
  */
-Element.prototype.updateInterface = function()
+Component.prototype.updateInterface = function()
 {
 	this.updateVisibility();
 

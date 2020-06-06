@@ -225,14 +225,14 @@ include("source/core/utils/PhysicsGenerator.js");
 include("source/core/utils/UnitConverter.js");
 
 /**
- * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.
+ * Nunu app is the main class of the runtime system, is used to embed projects into external webpages and applications.
  *
- * .isp files can be loaded directly into webpages.
+ * Project files can be loaded directly from their project files into any kind of project. The app class handles all the runtime and control of the application lifecycle.
  * 
  * @class NunuApp
  * @module Runtime
  * @constructor
- * @param {Element} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
+ * @param {Component} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
  */
 function NunuApp(canvas)
 {
@@ -567,7 +567,7 @@ NunuApp.prototype.pause = function()
  * Should be set before starting the program.
  *
  * @method setCanvas
- * @param {Element} canvas Canvas
+ * @param {Component} canvas Canvas
  */
 NunuApp.prototype.setCanvas = function(canvas)
 {
@@ -697,7 +697,7 @@ NunuApp.prototype.toggleVR = function()
  * Set a element to fullscreen mode, if none is passed the rendering canvas is used.
  *
  * @method toggleFullscreen
- * @param {Element} element DOM element to go fullscren by default the rendering canvas is used
+ * @param {Component} element DOM element to go fullscren by default the rendering canvas is used
  */
 NunuApp.prototype.toggleFullscreen = function(element)
 {

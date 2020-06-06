@@ -2,7 +2,7 @@
 
 function SettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.settings, Global.FILE_PATH + "icons/misc/settings.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.settings, Global.FILE_PATH + "icons/misc/settings.png");
 
 	this.tab = new TabGroup(this, TabGroup.LEFT);
 	this.tab.element.style.backgroundColor = Editor.theme.barColor;
@@ -16,11 +16,11 @@ function SettingsTab(parent, closeable, container, index)
 	this.tab.addTab(JSHintSettingsTab, false);
 }
 
-SettingsTab.prototype = Object.create(TabElement.prototype);
+SettingsTab.prototype = Object.create(TabComponent.prototype);
 
 SettingsTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.tab.size.copy(this.size);
 	this.tab.updateInterface();

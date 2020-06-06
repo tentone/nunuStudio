@@ -7,7 +7,7 @@
  */
 function ParticleEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.particle, Global.FILE_PATH + "icons/misc/particles.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.particle, Global.FILE_PATH + "icons/misc/particles.png");
 
 	var self = this;
 
@@ -422,7 +422,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-ParticleEditor.prototype = Object.create(TabElement.prototype);
+ParticleEditor.prototype = Object.create(TabComponent.prototype);
 
 // Update object data
 ParticleEditor.prototype.updateMetadata = function()
@@ -537,21 +537,21 @@ ParticleEditor.prototype.isAttached = function(particle)
 
 ParticleEditor.prototype.activate = function()
 {
-	TabElement.prototype.activate.call(this);
+	TabComponent.prototype.activate.call(this);
 
 	this.mouse.create();
 };
 
 ParticleEditor.prototype.deactivate = function()
 {
-	TabElement.prototype.deactivate.call(this);
+	TabComponent.prototype.deactivate.call(this);
 
 	this.mouse.dispose();
 };
 
 ParticleEditor.prototype.destroy = function()
 {
-	TabElement.prototype.destroy.call(this);
+	TabComponent.prototype.destroy.call(this);
 	
 	this.mouse.dispose();
 	this.canvas.destroy();
@@ -601,7 +601,7 @@ ParticleEditor.prototype.update = function()
 
 ParticleEditor.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 
 	this.main.size.copy(this.size);
 	this.main.updateInterface();

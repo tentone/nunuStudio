@@ -4,12 +4,12 @@
  * Color gradient chooser is used to select and preview a gradient of colors store in an array.
  *
  * @class ColorGradientChooser
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function ColorGradientChooser(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	/**
 	 * On change callback function.
@@ -46,7 +46,7 @@ function ColorGradientChooser(parent)
 	 * Canvas DOM element used to draw the gradient.
 	 *
 	 * @property canvas
-	 * @type {Element}
+	 * @type {Component}
 	 */
 	this.canvas = document.createElement("canvas");
 	this.canvas.style.position = "absolute";
@@ -57,7 +57,7 @@ function ColorGradientChooser(parent)
 	this.element.appendChild(this.canvas);
 }
 
-ColorGradientChooser.prototype = Object.create(Element.prototype);
+ColorGradientChooser.prototype = Object.create(Component.prototype);
 
 /**
  * Update the buttos to match new values.
@@ -199,7 +199,7 @@ ColorGradientChooser.prototype.getValue = function()
 
 ColorGradientChooser.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 	
 	this.canvas.width = this.size.x;
 	this.canvas.height = this.size.y;

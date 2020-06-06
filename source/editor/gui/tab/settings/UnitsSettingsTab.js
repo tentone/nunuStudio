@@ -2,7 +2,7 @@
 
 function UnitsSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, Locale.units, Global.FILE_PATH + "icons/misc/ruler.png");
+	TabComponent.call(this, parent, closeable, container, index, Locale.units, Global.FILE_PATH + "icons/misc/ruler.png");
 
 	this.element.style.overflow = "auto";
 
@@ -41,7 +41,7 @@ function UnitsSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-UnitsSettingsTab.prototype = Object.create(TabElement.prototype);
+UnitsSettingsTab.prototype = Object.create(TabComponent.prototype);
 
 UnitsSettingsTab.prototype.activate = function()
 {
@@ -51,7 +51,7 @@ UnitsSettingsTab.prototype.activate = function()
 
 UnitsSettingsTab.prototype.updateSize = function()
 {
-	TabElement.prototype.updateSize.call(this);
+	TabComponent.prototype.updateSize.call(this);
 	
 	this.form.size.copy(this.size);
 	this.form.updateInterface();

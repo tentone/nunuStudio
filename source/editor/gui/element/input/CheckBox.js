@@ -4,12 +4,12 @@
  * Check box input element.
  * 
  * @class CheckBox
- * @extends {Element}
- * @param {Element} parent Parent element.
+ * @extends {Component}
+ * @param {Component} parent Parent element.
  */
 function CheckBox(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	var self = this;
 
@@ -64,7 +64,7 @@ function CheckBox(parent)
 	this.disabled = false;
 };
 
-CheckBox.prototype = Object.create(Element.prototype);
+CheckBox.prototype = Object.create(Component.prototype);
 
 /**
  * Set if element is disabled.

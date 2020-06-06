@@ -4,11 +4,11 @@
  * The vector box is used to represent Vector2, Vector3, Vector4 and Euler values.
  *
  * @class VectorBox
- * @extends {Element}
+ * @extends {Component}
  */
 function VectorBox(parent)
 {
-	Element.call(this, parent, "div");
+	Component.call(this, parent, "div");
 
 	/**
 	 * Indicates if the number box is storing a angle value.
@@ -98,7 +98,7 @@ VectorBox.VECTOR2 = 2;
 VectorBox.VECTOR3 = 3;
 VectorBox.QUATERNION = 4;
 
-VectorBox.prototype = Object.create(Element.prototype);
+VectorBox.prototype = Object.create(Component.prototype);
 
 /**
  * Set the type of box, (type of data to use).
@@ -278,7 +278,7 @@ VectorBox.prototype.setOnChange = function(onChange)
 
 VectorBox.prototype.updateSize = function()
 {
-	Element.prototype.updateSize.call(this);
+	Component.prototype.updateSize.call(this);
 	
 	var sizeX = Math.round((this.size.x - this.type * 15) / this.type);
 	var sizeY = this.size.y + "px";
