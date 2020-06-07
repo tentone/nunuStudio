@@ -95,7 +95,7 @@ Graph.GaphLine = function(canvas, name, color)
 
 	this.canvas = canvas;
 	this.name = (name !== undefined) ? name : "default";
-	this.color = (color !== undefined) ? color : "#FFFFFF";
+	this.color = (color !== undefined) ? color : "var(--color-light)";
 	this.values = [];
 	this.buttons = [];
 	this.onchange = null;

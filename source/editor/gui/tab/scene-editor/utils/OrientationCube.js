@@ -20,7 +20,6 @@ function OrientationCube()
 	this.viewport.offset.set(10, 10);
 	this.viewport.anchor = Viewport.TOP_RIGHT;
 	
-
 	/**
 	 * Cube visualization camera
 	 *

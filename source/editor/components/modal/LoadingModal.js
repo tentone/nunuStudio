@@ -38,7 +38,7 @@ function LoadingModal(parent)
 	 */
 	this.text = new Text(this);
 	this.text.setText("Loading data");
-	this.text.setStyle("color", "#FFFFFF");
+	this.text.setStyle("color", "var(--color-light)");
 
 	/**
 	 * Message presented in the loading box.
@@ -48,7 +48,7 @@ function LoadingModal(parent)
 	 */
 	this.message = new Text(this);
 	this.message.setText("Please wait");
-	this.message.setStyle("color", "#FFFFFF");
+	this.message.setStyle("color", "var(--color-light)");
 	this.message.allowWordBreak(true);
 
 	// Icon

@@ -120,7 +120,7 @@ function LensFlare()
 		{
 			map: {value: null},
 			occlusionMap: {value: occlusionMap},
-			color: {value: new THREE.Color(0xffffff)},
+			color: {value: new THREE.Color(0xFFFFFF)},
 			scale: {value: new THREE.Vector2()},
 			screenPosition: {value: new THREE.Vector3()}
 		},
@@ -249,7 +249,7 @@ LensFlare.prototype.addFlare = function(texture, size, distance, color)
 	}
 	if(color === undefined)
 	{
-		color = new Color(0xffffff)
+		color = new Color(0xFFFFFF)
 	}
 
 	distance = Math.min(distance, Math.max(0, distance));

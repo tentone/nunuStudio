@@ -70,7 +70,7 @@ function AnimationClipTrack(editor, animation)
 	// Seekbar
 	this.seek = document.createElement("div");
 	this.seek.style.position = "absolute";
-	this.seek.style.backgroundColor = "#FFFFFF";
+	this.seek.style.backgroundColor = "var(--color-light)";
 	this.seek.style.zIndex = "100";
 	this.seek.style.top = "0px";
 	this.seek.style.left = "0px";

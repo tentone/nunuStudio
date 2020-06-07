@@ -12,7 +12,7 @@ function ToolBarGroup(parent)
 	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
-	this.element.style.backgroundColor = "#000000BB";
+	this.element.style.backgroundColor = "";
 
 	this.buttons = [];
 }

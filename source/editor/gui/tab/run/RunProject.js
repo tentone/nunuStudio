@@ -45,7 +45,7 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.updateSize();
 	this.fullscreenButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.fullscreenButton.visible = false;
-	this.fullscreenButton.element.style.backgroundColor = "#333333";
+	this.fullscreenButton.element.style.backgroundColor = "var(--panel-color)";
 	this.fullscreenButton.element.style.borderRadius = "5px";
 	this.fullscreenButton.element.style.opacity = 0.5;
 	this.fullscreenButton.element.onmouseenter = function()
@@ -81,7 +81,7 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton.updateSize();
 	this.vrButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.vrButton.setVisibility(false);
-	this.vrButton.element.style.backgroundColor = "#333333";
+	this.vrButton.element.style.backgroundColor = "var(--panel-color)";
 	this.vrButton.element.style.borderRadius = "5px";
 	this.vrButton.element.style.opacity = 0.5;
 	this.vrButton.element.onmouseenter = function()

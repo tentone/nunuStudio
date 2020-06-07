@@ -24,7 +24,7 @@ function InspectorContainer(parent, closeable, container, index)
 	this.emptyText = new Text(this);
 	this.emptyText.allowWordBreak(true);
 	this.emptyText.setTextSize(12);
-	this.emptyText.setTextColor("#FFFFFF");
+	this.emptyText.setTextColor("var(--color-light)");
 	this.emptyText.setText(Locale.nothingToShow);
 
 	this.panel = null;

@@ -37,7 +37,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * @property colorBottom
 	 * @type {Array}
 	 */
-	this.colorBottom = [new THREE.Color(0xebece6), new THREE.Color(0xffffff), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
+	this.colorBottom = [new THREE.Color(0xebece6), new THREE.Color(0xFFFFFF), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
 
 	/**
 	 * Sun color in hex RGB.

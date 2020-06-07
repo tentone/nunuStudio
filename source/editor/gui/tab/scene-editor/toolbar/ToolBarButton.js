@@ -28,10 +28,10 @@ function ToolBarButton(parent)
 	 */
 	this.text = new Text(this);
 	this.text.setMode(Component.BOTTOM_LEFT);
-	this.text.setStyle("backgroundColor", "#000000");
+	this.text.setStyle("backgroundColor", "var(--color-black)");
 	this.text.setStyle("borderRadius", "5px");
 	this.text.setStyle("opacity", "0.8");
-	this.text.setTextColor("#FFFFFF");
+	this.text.setTextColor("var(--color-light)");
 	this.text.setVisibility(false);
 	
 	this.element.onmouseenter = function()

@@ -66,22 +66,22 @@ function SceneEditor(parent, closeable, container, index)
 				var material = null;
 				if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 				{
-					material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+					material = new THREE.MeshStandardMaterial({map:texture, color:0xFFFFFF, roughness: 0.6, metalness: 0.2});
 					material.name = texture.name;
 				}
 				else if(object instanceof THREE.Line)
 				{
-					material = new THREE.LineBasicMaterial({color:0xffffff});
+					material = new THREE.LineBasicMaterial({color:0xFFFFFF});
 					material.name = texture.name;
 				}
 				else if(object instanceof THREE.Points)
 				{
-					material = new THREE.PointsMaterial({map:texture, color:0xffffff});
+					material = new THREE.PointsMaterial({map:texture, color:0xFFFFFF});
 					material.name = texture.name;
 				}
 				else if(object instanceof THREE.Sprite)
 				{
-					material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
+					material = new THREE.SpriteMaterial({map:texture, color:0xFFFFFF});
 					material.name = texture.name;
 				}
 
@@ -500,7 +500,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.snapGridButton.setImageScale(0.8, 0.8);
 	this.snapGridButton.updateSize();
 	this.snapGridButton.updatePosition(Component.BOTTOM_RIGHT);
-	this.snapGridButton.element.style.backgroundColor = "#333333";
+	this.snapGridButton.element.style.backgroundColor = "var(--panel-color)";
 	this.snapGridButton.element.style.borderRadius = "5px";
 	this.snapGridButton.element.style.opacity = 0.5;
 	this.snapGridButton.element.onmouseenter = function()
@@ -533,7 +533,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton.setImageScale(0.8, 0.8);
 	this.cameraButton.updateSize();
 	this.cameraButton.updatePosition(Component.BOTTOM_RIGHT);
-	this.cameraButton.element.style.backgroundColor = "#333333";
+	this.cameraButton.element.style.backgroundColor = "var(--panel-color)";
 	this.cameraButton.element.style.borderRadius = "5px";
 	this.cameraButton.element.style.opacity = 0.5;
 	this.cameraButton.element.onmouseenter = function()

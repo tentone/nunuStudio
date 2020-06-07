@@ -4,8 +4,15 @@
 	--font-main-size: 12px;
 
 	--color-light: #FFFFFF;
+	--color-graph: #AAAAAA;
 	--button-over-color: #555555;
 	--box-color: #444444;
 	--panel-color: #333333;
 	--bar-color: #222222;
+	--color-black: #000000;
+
+	--color-console-error: "#FF0000";
+	--color-console-error-background: "#FF000022";
+	--color-console-warn: "#FFFF00";
+	--color-console-warn-background: "#FFFF0022";
 }

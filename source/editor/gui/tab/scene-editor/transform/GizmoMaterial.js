@@ -33,7 +33,7 @@ GizmoMaterial.cyanAlpha = new GizmoMaterial({color: 0x00ffff, opacity: 0.25});
 GizmoMaterial.magenta = new GizmoMaterial({color: 0xff00ff});
 GizmoMaterial.magentaAlpha = new GizmoMaterial({color: 0xff00ff, opacity: 0.25});
 GizmoMaterial.grey = new GizmoMaterial({color: 0x787878});
-GizmoMaterial.whiteAlpha = new GizmoMaterial({color: 0xffffff, opacity: 0.25});
+GizmoMaterial.whiteAlpha = new GizmoMaterial({color: 0xFFFFFF, opacity: 0.25});
 
 /**
  * Toggle the highlight state of a gizmo material.

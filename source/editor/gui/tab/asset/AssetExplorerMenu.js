@@ -217,7 +217,7 @@ function AssetExplorerMenu(parent)
 
 	material.addOption(Locale.spriteMaterial, function()
 	{
-		var material = new THREE.SpriteMaterial({color: 0xffffff});
+		var material = new THREE.SpriteMaterial({color: 0xFFFFFF});
 		material.name = "sprite";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/image.png");

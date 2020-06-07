@@ -371,8 +371,8 @@ ConsoleTab.prototype.warn = function(args)
 	for(var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
-		log.style.color = "#FFFF00";
-		log.style.backgroundColor = "#FFFF0022";
+		log.style.color = "var(--color-console-warn)";
+		log.style.backgroundColor = "var(--color-console-warn-background)";
 		this.content.appendChild(log);
 	}
 
@@ -390,8 +390,8 @@ ConsoleTab.prototype.error = function(args)
 	for(var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
-		log.style.color = "#FF0000";
-		log.style.backgroundColor = "#FF000022";
+		log.style.color = "var(--color-console-error)";
+		log.style.backgroundColor = "var(--color-console-error-background)";
 		this.content.appendChild(log);
 	}
 
@@ -442,7 +442,7 @@ ConsoleTab.createMessage = function(object)
 {
 	var log = document.createElement("div");
 	log.style.width = "100%";
-	log.style.color = "#FFFFFF";
+	log.style.color = "var(--color-light)";
 
 	if(object === undefined)
 	{

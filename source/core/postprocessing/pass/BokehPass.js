@@ -100,7 +100,7 @@ BokehPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, 
 	scene.overrideMaterial = this.materialDepth;
 
 	renderer.autoClear = false;
-	renderer.setClearColor(0xffffff);
+	renderer.setClearColor(0xFFFFFF);
 	renderer.setClearAlpha(1.0);
 	renderer.setRenderTarget(this.renderTargetDepth);
 	renderer.clear(true, true, true);

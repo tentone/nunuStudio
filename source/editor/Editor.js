@@ -787,7 +787,7 @@ Editor.createDefaultResouces = function()
 	Editor.defaultMaterial = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 	Editor.defaultMaterial.name = "standard";
 	
-	Editor.defaultSpriteMaterial = new THREE.SpriteMaterial({map: Editor.defaultTexture, color: 0xffffff});
+	Editor.defaultSpriteMaterial = new THREE.SpriteMaterial({map: Editor.defaultTexture, color: 0xFFFFFF});
 	Editor.defaultSpriteMaterial.name = "sprite";
 
 	Editor.defaultTextureLensFlare = [];

@@ -219,10 +219,10 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 			{
 				if(maskActive)
 				{
-					renderer.context.stencilFunc(renderer.context.NOTEQUAL, 1, 0xffffffff);
+					renderer.context.stencilFunc(renderer.context.NOTEQUAL, 1, 0xFFFFFFff);
 					this.copyPass.renderToScreen = false;
 					this.copyPass.render(renderer, this.writeBuffer, this.readBuffer, delta);
-					renderer.context.stencilFunc(renderer.context.EQUAL, 1, 0xffffffff);
+					renderer.context.stencilFunc(renderer.context.EQUAL, 1, 0xFFFFFFff);
 				}
 
 				this.swapBuffers();
