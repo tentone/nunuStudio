@@ -1,24 +1,44 @@
 "use strict";
 
+/**
+ * Theme manager is where the GUI themes are registered and accessed.
+ *
+ * Themes are loaded from CSS files using variables.
+ *
+ * @static
+ * @class ThemeManager
+ */
 function ThemeManager(){}
 
-ThemeManager.list = [];
+/**
+ * Map of themes registered in the manager by their name.
+ *
+ * Associates the theme name and its CSS selector.
+ *
+ * @static
+ * @property themes
+ * @type {Map<string, string>}
+ */
 ThemeManager.themes = [];
 
-// Add theme to list
+/**
+ * Add theme to list to associate the theme name with its CSS selector.
+ *
+ * @static
+ * @method register
+ */
 ThemeManager.register = function(theme, name)
 {
-	ThemeManager.list.push(name);
 	ThemeManager.themes[name] = theme;
 };
 
-// Get a theme instance
-ThemeManager.get = function(name)
-{
-	return new ThemeManager.themes[name]();
-};
-
+/**
+ * Get the list of themes available by their name.
+ *
+ * @static
+ * @method getList
+ */
 ThemeManager.getList = function()
 {
-	return ThemeManager.list;
+	return Object.keys(ThemeManager.themes);
 }

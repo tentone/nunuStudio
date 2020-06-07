@@ -127,9 +127,6 @@ Editor.initialize = function()
 		}
 	}
 
-	// Load theme
-	Editor.theme = ThemeManager.get(Editor.settings.general.theme);
-
 	// Open file
 	Editor.openFile = null;
 
