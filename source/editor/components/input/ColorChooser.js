@@ -22,8 +22,8 @@ function ColorChooser(parent)
 	 * @type {jscolor}
 	 */
 	this.color = new jscolor(this.element);
-	this.color.backgroundColor = Editor.theme.boxColor;
-	this.color.insetColor = Editor.theme.boxColor;
+	this.color.backgroundColor = "var(--box-color)";
+	this.color.insetColor = "var(--box-color)";
 	this.color.shadow = false;
 	this.color.borderWidth = 0;
 	this.color.borderRadius = 0;

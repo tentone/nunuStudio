@@ -121,7 +121,7 @@ Graph.prototype.createScale = function(size)
 		var scale = document.createElement("div");
 		scale.style.position = "absolute";
 		scale.style.pointerEvents = "none";
-		scale.style.color = Editor.theme.textColor;
+		scale.style.color = "var(--color-light)";
 
 		var text = document.createTextNode(this.max - (step * i));
 		scale.text = text;

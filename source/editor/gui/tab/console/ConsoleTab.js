@@ -673,6 +673,6 @@ ConsoleTab.createBar = function()
 	var bar = document.createElement("div");
 	bar.style.width = "100%";
 	bar.style.height = "1px";
-	bar.style.backgroundColor = Editor.theme.barColor;
+	bar.style.backgroundColor = "var(--bar-color)";
 	return bar;
 };

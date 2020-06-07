@@ -31,8 +31,8 @@ function VectorBox(parent)
 	{
 		var input = document.createElement("input");
 		input.type = "number";
-		input.style.backgroundColor = Editor.theme.boxColor;
-		input.style.color = Editor.theme.textColor;
+		input.style.backgroundColor = "var(--box-color)";
+		input.style.color = "var(--color-light)";
 		input.style.borderStyle = "none";
 		input.style.position = "absolute";
 		input.style.boxSizing = "border-box";

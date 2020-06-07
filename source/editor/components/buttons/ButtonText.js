@@ -13,7 +13,7 @@ function ButtonText(parent)
 {
 	Button.call(this, parent);
 
-	this.element.style.color = Editor.theme.textColor;
+	this.element.style.color = "var(--color-light)";
 	this.element.style.display = "flex";
 	
 	// Span
@@ -25,7 +25,7 @@ function ButtonText(parent)
 	this.text = document.createTextNode("");
 	this.span.appendChild(this.text);
 
-	this.setColor(Editor.theme.buttonColor, Editor.theme.buttonOverColor);
+	this.setColor("var(--bar-color)", "var(--button-over-color)");
 	this.allowWordBreak(false);
 	this.setVerticalAlignment(Text.CENTER);
 	this.setAlignment(Text.CENTER);

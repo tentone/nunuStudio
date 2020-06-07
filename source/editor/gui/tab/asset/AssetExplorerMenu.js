@@ -4,7 +4,7 @@ function AssetExplorerMenu(parent)
 {
 	Component.call(this, parent, "div");
 
-	this.element.style.backgroundColor = Editor.theme.barColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.overflow = "visible";
 	
 	// Import

@@ -13,7 +13,7 @@ function MainMenu(parent)
 	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
-	this.element.style.backgroundColor = Editor.theme.barColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
 	this.element.style.width = "100%";

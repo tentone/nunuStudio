@@ -12,8 +12,8 @@ function TextBox(parent)
 	Component.call(this, parent, "input");
 
 	this.element.type = "text";
-	this.element.style.backgroundColor = Editor.theme.boxColor;
-	this.element.style.color = Editor.theme.textColor;
+	this.element.style.backgroundColor = "var(--box-color)";
+	this.element.style.color = "var(--color-light)";
 	this.element.style.margin = "0";
 	this.element.style.outline = "none";
 	this.element.style.borderStyle = "none";

@@ -16,13 +16,13 @@ function TabGroup(parent, placement)
 	var self = this;
 
 	this.element.style.overflow = "visible";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.element.style.backgroundColor = "var(--panel-color)";
 
 	this.preventDragEvents();
 	
 	// Buttons
 	this.buttons = new Division(this);
-	this.buttons.element.style.backgroundColor = Editor.theme.barColor;
+	this.buttons.element.style.backgroundColor = "var(--bar-color)";
 	this.buttons.element.ondrop = function(event)
 	{
 		event.preventDefault();

@@ -5,7 +5,7 @@ function ProjectSettings(parent, closeable, container, index)
 	TabComponent.call(this, parent, closeable, container, index, Locale.settings, Global.FILE_PATH + "icons/misc/settings.png");
 
 	this.tab = new TabGroup(this, TabGroup.LEFT);
-	this.tab.element.style.backgroundColor = Editor.theme.barColor;
+	this.tab.element.style.backgroundColor = "var(--bar-color)";
 	this.tab.buttonSize.set(200, 25);
 }
 

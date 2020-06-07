@@ -35,7 +35,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	// Tab container
 	this.tab = new TabGroup();
-	this.tab.element.style.backgroundColor = Editor.theme.barColor;
+	this.tab.element.style.backgroundColor = "var(--bar-color)";
 	this.tab.buttonSize.set(150, 25);
 
 	// Main container

@@ -52,7 +52,7 @@ function AudioPlayer(parent)
 	// Track
 	this.track = document.createElement("div");
 	this.track.style.position = "absolute";
-	this.track.style.backgroundColor = Editor.theme.audioTrack;
+	this.track.style.backgroundColor = "var(--bar-color)";
 	this.track.style.cursor = "pointer";
 	this.element.appendChild(this.track);
 
@@ -60,14 +60,14 @@ function AudioPlayer(parent)
 	this.progress = document.createElement("div");
 	this.progress.style.pointerEvents = "none";
 	this.progress.style.position = "absolute";
-	this.progress.style.backgroundColor = Editor.theme.audioProgress;
+	this.progress.style.backgroundColor = "var(--button-over-color)";
 	this.progress.style.height = "100%";
 	this.track.appendChild(this.progress);
 
 	// Scrubber
 	this.scrubber = document.createElement("div");
 	this.scrubber.style.position = "absolute";
-	this.scrubber.style.backgroundColor = Editor.theme.audioScrubber;
+	this.scrubber.style.backgroundColor = "var(--color-light)";
 	this.scrubber.style.cursor = "pointer";
 	this.scrubber.style.width = "6px";
 	this.track.appendChild(this.scrubber);

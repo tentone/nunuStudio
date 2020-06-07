@@ -23,7 +23,7 @@ function ButtonMenu(parent)
 	 */
 	this.icon = null;
 
-	this.setColor(Editor.theme.buttonColor, Editor.theme.buttonOverColor);
+	this.setColor("var(--bar-color)", "var(--button-over-color)");
 }
 
 ButtonMenu.prototype = Object.create(ButtonText.prototype);

@@ -12,7 +12,7 @@ function Text(parent)
 	Component.call(this, parent, "div");
 
 	this.element.style.pointerEvents = "none";
-	this.element.style.color = Editor.theme.textColor;
+	this.element.style.color = "var(--color-light)";
 	this.element.style.display = "flex";
 
 	/** 

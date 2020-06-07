@@ -24,9 +24,9 @@ function Slider(parent)
 	this.text.style.zIndex = "10000";
 	this.text.style.border = "3px solid";
 	this.text.style.borderRadius = "5px";
-	this.text.style.color = Editor.theme.textColor;
-	this.text.style.backgroundColor = Editor.theme.barColor;
-	this.text.style.borderColor = Editor.theme.barColor;	
+	this.text.style.color = "var(--color-light)";
+	this.text.style.backgroundColor = "var(--bar-color)";
+	this.text.style.borderColor = "var(--bar-color)";	
 	document.body.appendChild(this.text);
 
 	// Text value
@@ -52,7 +52,7 @@ function Slider(parent)
 	// Track
 	this.track = document.createElement("div");
 	this.track.style.position = "absolute";
-	this.track.style.backgroundColor = Editor.theme.audioTrack;
+	this.track.style.backgroundColor = "var(--bar-color)";
 	this.track.style.cursor = "pointer";
 	this.track.style.left = "0px";
 	this.track.style.width = "100%";
@@ -64,14 +64,14 @@ function Slider(parent)
 	this.progress = document.createElement("div");
 	this.progress.style.pointerEvents = "none";
 	this.progress.style.position = "absolute";
-	this.progress.style.backgroundColor = Editor.theme.audioProgress;
+	this.progress.style.backgroundColor = "var(--button-over-color)";
 	this.progress.style.height = "100%";
 	this.track.appendChild(this.progress);
 
 	// Scrubber
 	this.scrubber = document.createElement("div");
 	this.scrubber.style.position = "absolute";
-	this.scrubber.style.backgroundColor = Editor.theme.audioScrubber;
+	this.scrubber.style.backgroundColor = "var(--color-light)";
 	this.scrubber.style.cursor = "pointer";
 	this.scrubber.style.height = "160%";
 	this.scrubber.style.top = "-25%";

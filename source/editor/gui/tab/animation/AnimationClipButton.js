@@ -13,7 +13,7 @@ function AnimationClipButton(parent, editor, animation)
 	Component.call(this, parent, "div");
 
 	this.element.style.position = "relative";
-	this.element.style.backgroundColor = Editor.theme.barColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.width = "100%";
 	this.element.style.height = "30px";
 
@@ -135,12 +135,12 @@ function AnimationClipButton(parent, editor, animation)
 
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
+		this.style.backgroundColor = "var(--button-over-color)";
 	};
 
 	this.element.onmouseleave = function()
 	{
-		this.style.backgroundColor = Editor.theme.buttonColor;
+		this.style.backgroundColor = "var(--bar-color)";
 	};
 	
 	this.name = document.createElement("div");

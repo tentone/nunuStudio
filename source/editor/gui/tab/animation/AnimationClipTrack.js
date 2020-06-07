@@ -55,7 +55,7 @@ function AnimationClipTrack(editor, animation)
 	this.timeline.appendChild(this.timegrid);
 
 	var context = this.timegrid.getContext("2d");
-	context.fillStyle = Editor.theme.barColor;
+	context.fillStyle = "var(--bar-color)";
 	for(var l = 0; l <= height; l += 30)
 	{
 		context.fillRect(0, l, width, 1);

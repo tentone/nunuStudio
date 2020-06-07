@@ -47,7 +47,7 @@ function Asset(parent)
 	this.text.style.pointerEvents = "none";
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
-	this.text.style.color = Editor.theme.textColor;
+	this.text.style.color = "var(--color-light)";
 	this.text.style.height = "20px";
 	this.text.style.width = "100%";
 	this.text.style.bottom = "0px";
@@ -61,7 +61,7 @@ function Asset(parent)
 
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
+		this.style.backgroundColor = "var(--button-over-color)";
 	};
 
 	this.element.onmouseleave = function()
@@ -104,7 +104,7 @@ Asset.prototype.setSelected = function(selected)
 {
 	// this.selected = selected;
 
-	this.element.style.backgroundColor = selected ? Editor.theme.buttonOverColor : null;
+	this.element.style.backgroundColor = selected ? "var(--button-over-color)" : null;
 };
 
 /**

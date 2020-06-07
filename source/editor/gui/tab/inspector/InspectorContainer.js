@@ -13,7 +13,7 @@ function InspectorContainer(parent, closeable, container, index)
 	TabComponent.call(this, parent, closeable, container, index, "Inspector", Global.FILE_PATH + "icons/misc/magnifier.png");
 
 	this.element.style.overflow = "auto";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.element.style.backgroundColor = "var(--panel-color)";
 
 	/**
 	 * Text shown when there is no object select to show on the inspector.

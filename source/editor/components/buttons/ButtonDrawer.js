@@ -14,12 +14,12 @@ function ButtonDrawer(parent)
 	ButtonIcon.call(this, parent);
 
 	this.element.style.zIndex = "200";
-	this.element.style.backgroundColor = Editor.theme.buttonColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.overflow = "visible";
 
 	this.panel = new Component(this, "div");
 	this.panel.element.style.overflow = "visible";
-	this.panel.element.style.backgroundColor = Editor.theme.barColor;
+	this.panel.element.style.backgroundColor = "var(--bar-color)";
 	this.panel.element.style.zIndex = "250";
 
 	/** 
@@ -67,12 +67,12 @@ function ButtonDrawer(parent)
 
 	this.element.onmouseenter = function()
 	{
-		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
+		self.element.style.backgroundColor = "var(--button-over-color)";
 		self.setExpanded(true);
 	};
 	this.element.onmouseleave = function()
 	{
-		self.element.style.backgroundColor = Editor.theme.buttonColor;
+		self.element.style.backgroundColor = "var(--bar-color)";
 		self.setExpanded(false);
 	};
 

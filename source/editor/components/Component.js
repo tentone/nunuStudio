@@ -203,9 +203,9 @@ Component.prototype.setAltText = function(altText)
 	element.style.zIndex = "10000";
 	element.style.border = "3px solid";
 	element.style.borderRadius = "5px";
-	element.style.color = Editor.theme.textColor;
-	element.style.backgroundColor = Editor.theme.barColor;
-	element.style.borderColor = Editor.theme.barColor;
+	element.style.color = "var(--color-light)";
+	element.style.backgroundColor = "var(--bar-color)";
+	element.style.borderColor = "var(--bar-color)";
 	element.style.height = "fit-content";
 	document.body.appendChild(element);
 

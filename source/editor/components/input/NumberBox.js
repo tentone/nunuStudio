@@ -21,8 +21,8 @@ function NumberBox(parent)
 
 	this.element.type = "number";
 	this.element.step = "0.1";
-	this.element.style.backgroundColor = Editor.theme.boxColor;
-	this.element.style.color = Editor.theme.textColor;
+	this.element.style.backgroundColor = "var(--box-color)";
+	this.element.style.color = "var(--color-light)";
 	this.element.style.outline = "none";
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";

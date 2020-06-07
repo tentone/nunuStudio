@@ -29,6 +29,9 @@ Editor.initialize = function()
 
 	// Disable body overflow
 	document.body.style.overflow = "hidden";
+	document.body.style.fontFamily = "var(--font-main-family)";
+	document.body.style.color = "var(--font-main-color)";
+	document.body.style.fontSize = "var(--font-main-size)";
 	
 	// Disable context menu
 	document.body.oncontextmenu = function(event)

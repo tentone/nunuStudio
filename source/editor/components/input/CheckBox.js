@@ -16,7 +16,7 @@ function CheckBox(parent)
 	this.element.style.display = "block";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.cursor = "pointer";
-	this.element.style.backgroundColor = Editor.theme.boxColor;
+	this.element.style.backgroundColor = "var(--box-color)";
 	this.element.style.borderRadius = "4px";
 	this.element.onclick = function()
 	{

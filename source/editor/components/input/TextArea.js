@@ -12,9 +12,9 @@ function TextArea(parent)
 
 	this.element.style.overflow = "auto";
 	this.element.style.resize = "none";
-	this.element.style.backgroundColor = Editor.theme.boxColor;
-	this.element.style.fontFamily = Editor.theme.font;
-	this.element.style.color = Editor.theme.textColor;
+	this.element.style.backgroundColor = "var(--box-color)";
+	this.element.style.fontFamily = "var(--font-main-family);";
+	this.element.style.color = "var(--color-light)";
 	this.element.style.outline = "none";
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";

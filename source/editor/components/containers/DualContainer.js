@@ -12,7 +12,7 @@ function DualContainer(parent)
 	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "hidden";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.element.style.backgroundColor = "var(--panel-color)";
 
 	// Container A
 	this.elementA = null
@@ -24,7 +24,7 @@ function DualContainer(parent)
 	this.resizeTab = document.createElement("div");
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
-	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
+	this.resizeTab.style.backgroundColor = "var(--bar-color)";
 	this.element.appendChild(this.resizeTab);
 
 	// Resize Tab

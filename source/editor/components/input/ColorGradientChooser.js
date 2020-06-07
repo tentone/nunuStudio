@@ -36,7 +36,7 @@ function ColorGradientChooser(parent)
 	this.buttons = [];
 
 	this.element.style.overflow = "hidden";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.element.style.backgroundColor = "var(--panel-color)";
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.borderRadius = "4px";
@@ -103,8 +103,8 @@ ColorGradientChooser.prototype.updateButtons = function()
 		this.element.appendChild(button);
 
 		var color = new jscolor(button);
-		color.backgroundColor = Editor.theme.boxColor;
-		color.insetColor = Editor.theme.boxColor;
+		color.backgroundColor = "var(--box-color)";
+		color.insetColor = "var(--box-color)";
 		color.shadow = false;
 		color.borderWidth = 0;
 		color.borderRadius = 0;

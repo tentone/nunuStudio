@@ -24,7 +24,7 @@ function MaterialAsset(parent)
 	// Mouse over event
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
+		this.style.backgroundColor = "var(--button-over-color)";
 		self.highlightMaterial();
 	};
 

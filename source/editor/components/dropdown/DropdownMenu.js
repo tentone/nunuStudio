@@ -11,7 +11,7 @@ function DropdownMenu(parent)
 {
 	Text.call(this, parent);
 
-	this.element.style.backgroundColor = Editor.theme.buttonColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.cursor = "pointer";
 	this.element.style.pointerEvents = "auto";
 
@@ -86,13 +86,13 @@ function DropdownMenu(parent)
 	this.element.onmouseenter = function()
 	{
 		self.setExpanded(true);
-		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
+		self.element.style.backgroundColor = "var(--button-over-color)";
 	};
 
 	this.element.onmouseleave = function()
 	{
 		self.setExpanded(false);
-		self.element.style.backgroundColor = Editor.theme.buttonColor;
+		self.element.style.backgroundColor = "var(--bar-color)";
 	};
 	
 	this.panel.element.onmouseenter = function()

@@ -21,7 +21,7 @@ function TabComponent(parent, closeable, container, index, title, icon)
 	var self = this;
 
 	this.element.style.overflow = "visible";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.element.style.backgroundColor = "var(--panel-color)";
 	this.preventDragEvents();
 
 	/**

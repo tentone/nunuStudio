@@ -6,8 +6,8 @@ function DropdownList(parent)
 
 	// Select
 	this.select = document.createElement("select");
-	this.select.style.backgroundColor = Editor.theme.boxColor;
-	this.select.style.color = Editor.theme.textColor;
+	this.select.style.backgroundColor = "var(--box-color)";
+	this.select.style.color = "var(--color-light)";
 	this.select.style.left = "0px";
 	this.select.style.top = "0px";
 	this.select.style.textIndent = "5px";

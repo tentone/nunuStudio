@@ -345,7 +345,7 @@ include("source/editor/locale/LocaleManager.js");
 include("source/editor/locale/LocaleEN.js");
 
 include("source/editor/theme/ThemeManager.js");
-include("source/editor/theme/ThemeDark.js");
+include("source/editor/theme/dark.css");
 
 include("source/editor/components/Component.js");
 include("source/editor/components/DocumentBody.js");

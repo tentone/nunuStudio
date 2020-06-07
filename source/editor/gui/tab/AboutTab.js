@@ -4,7 +4,7 @@ function AboutTab(parent, closeable, container, index)
 {
 	TabComponent.call(this, parent, closeable, container, index, Locale.about, Global.FILE_PATH + "icons/misc/about.png");
 
-	this.element.style.backgroundColor = Editor.theme.barColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 
 	// Logo
 	this.logo = document.createElement("img");

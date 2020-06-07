@@ -17,7 +17,7 @@ function TabButton(parent, tab)
 	this.element.draggable = true;
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
-	this.element.style.backgroundColor = Editor.theme.buttonColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 
 	/**
 	 * Pointer to the tab element related with this button.
@@ -42,7 +42,7 @@ function TabButton(parent, tab)
 	this.text.style.pointerEvents = "none";
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
-	this.text.style.color = Editor.theme.textColor;
+	this.text.style.color = "var(--color-light)";
 	this.element.appendChild(this.text);
 
 	// Title
@@ -221,18 +221,18 @@ function TabButton(parent, tab)
 
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
+		this.style.backgroundColor = "var(--button-over-color)";
 	};
 
 	this.element.onmouseleave = function()
 	{
 		if(tab.isSelected())
 		{
-			this.style.backgroundColor = Editor.theme.buttonOverColor;
+			this.style.backgroundColor = "var(--button-over-color)";
 		}
 		else
 		{
-			this.style.backgroundColor = Editor.theme.buttonColor;
+			this.style.backgroundColor = "var(--bar-color)";
 		}
 	};
 }
@@ -270,7 +270,7 @@ TabButton.prototype.setName = function(text)
 // Update selected state of the button
 TabButton.prototype.updateSelection = function()
 {
-	this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
+	this.element.style.backgroundColor = this.tab.isSelected() ? "var(--button-over-color)" : "var(--bar-color)";
 };
 
 TabButton.prototype.updateSize = function()

@@ -741,7 +741,7 @@ TreeNode.prototype.styleNormal = function()
  */
 TreeNode.prototype.styleSelected = function()
 {
-	this.element.style.backgroundColor = Editor.theme.buttonOverColor;
+	this.element.style.backgroundColor = "var(--button-over-color)";
 };
 
 /**
@@ -751,7 +751,7 @@ TreeNode.prototype.styleSelected = function()
  */
 TreeNode.prototype.styleMouseOver = function()
 {
-	this.element.style.backgroundColor = Editor.theme.buttonColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 };
 
 /**

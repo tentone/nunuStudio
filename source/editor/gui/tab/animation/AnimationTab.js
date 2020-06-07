@@ -35,7 +35,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.bar.element.style.position = "absolute";
 	this.bar.element.style.height = "25px";
 	this.bar.element.style.width = "100%";
-	this.bar.element.style.backgroundColor = Editor.theme.barColor;
+	this.bar.element.style.backgroundColor = "var(--bar-color)";
 
 	/**
 	 * Add animation clip button.
@@ -192,7 +192,7 @@ function AnimationTab(parent, closeable, container, index)
 	 * @type {Division}
 	 */
 	this.info = new Division(this.timeline);
-	this.info.element.style.backgroundColor = Editor.theme.barColor;
+	this.info.element.style.backgroundColor = "var(--bar-color)";
 
 	/**
 	 * Tracks section.
@@ -224,7 +224,7 @@ function AnimationTab(parent, closeable, container, index)
 	 * @type {Component}
 	 */
 	this.tab = document.createElement("div");
-	this.tab.style.backgroundColor = Editor.theme.barColor;
+	this.tab.style.backgroundColor = "var(--bar-color)";
 	this.tab.style.position = "absolute";
 	this.tab.style.cursor = "e-resize";
 	this.tab.style.width = "5px";

@@ -13,7 +13,7 @@ function SideBar(parent)
 	this.preventDragEvents();
 
 	this.element.style.overflow = "visible";
-	this.element.style.backgroundColor = Editor.theme.barColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 
 	/**
 	 * Scene editor to where this sidebar is attached.

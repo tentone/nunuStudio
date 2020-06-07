@@ -19,7 +19,7 @@ function TabButtonSplit(parent, tab)
 	this.element.draggable = true;
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
-	this.element.style.backgroundColor = Editor.theme.buttonColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 
 	// Tab
 	this.tab = tab;
@@ -39,7 +39,7 @@ function TabButtonSplit(parent, tab)
 	this.text.style.pointerEvents = "none";
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
-	this.text.style.color = Editor.theme.textColor;
+	this.text.style.color = "var(--color-light)";
 	this.element.appendChild(this.text);
 
 	// Title
@@ -249,7 +249,7 @@ function TabButtonSplit(parent, tab)
 	// Mouse enter
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
+		this.style.backgroundColor = "var(--button-over-color)";
 	};
 
 	// Mouse leave
@@ -257,11 +257,11 @@ function TabButtonSplit(parent, tab)
 	{
 		if(tab.isSelected())
 		{
-			this.style.backgroundColor = Editor.theme.buttonOverColor;
+			this.style.backgroundColor = "var(--button-over-color)";
 		}
 		else
 		{
-			this.style.backgroundColor = Editor.theme.buttonColor;
+			this.style.backgroundColor = "var(--bar-color)";
 		}
 	};
 }
@@ -298,7 +298,7 @@ TabButtonSplit.prototype.setName = function(text)
 
 TabButtonSplit.prototype.updateSelection = function()
 {
-	this.element.style.backgroundColor = this.tab.isSelected() ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
+	this.element.style.backgroundColor = this.tab.isSelected() ? "var(--button-over-color)" : "var(--bar-color)";
 };
 
 TabButtonSplit.prototype.updateSize = function()

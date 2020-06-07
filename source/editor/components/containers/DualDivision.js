@@ -12,21 +12,21 @@ function DualDivision(parent)
 	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "hidden";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.element.style.backgroundColor = "var(--panel-color)";
 
 	// Division A
 	this.divA = new Component(this, "div");
-	this.divA.element.style.backgroundColor = Editor.theme.panelColor;
+	this.divA.element.style.backgroundColor = "var(--panel-color)";
 
 	// Division B
 	this.divB = new Component(this, "div");
-	this.divB.element.style.backgroundColor = Editor.theme.panelColor;
+	this.divB.element.style.backgroundColor = "var(--panel-color)";
 	
 	// Resize tab
 	this.resizeTab = document.createElement("div");
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
-	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
+	this.resizeTab.style.backgroundColor = "var(--bar-color)";
 	this.element.appendChild(this.resizeTab);
 
 	// Resize Tab

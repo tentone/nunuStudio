@@ -14,7 +14,7 @@ function ButtonIconToggle(parent)
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
-	this.element.style.backgroundColor = Editor.theme.buttonColor;
+	this.element.style.backgroundColor = "var(--bar-color)";
 
 	this.selected = false;
 
@@ -28,14 +28,14 @@ function ButtonIconToggle(parent)
 	// Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
-		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
+		self.element.style.backgroundColor = "var(--button-over-color)";
 	};
 
 	this.element.onmouseleave = function()
 	{
 		if(!self.selected)
 		{
-			self.element.style.backgroundColor = Editor.theme.buttonColor;
+			self.element.style.backgroundColor = "var(--bar-color)";
 		}
 	};
 }
@@ -51,7 +51,7 @@ ButtonIconToggle.prototype = Object.create(ButtonIcon.prototype);
 ButtonIconToggle.prototype.setSelected = function(selected)
 {
 	this.selected = selected;
-	this.element.style.backgroundColor = this.selected ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
+	this.element.style.backgroundColor = this.selected ? "var(--button-over-color)" : "var(--bar-color)";
 };
 
 /**
