@@ -3,13 +3,13 @@
 /**
  * Editor tool bar button.
  * 
- * @class ToolBarButton
- * @extends {ButtonIcon}
+ * @class ToolBarToogleButton
+ * @extends {ButtonIconToggle}
  * @param {Component} parent Parent element.
  */
-function ToolBarButton(parent)
+function ToolBarToogleButton(parent)
 {
-	ButtonIcon.call(this, parent);
+	ButtonIconToggle.call(this, parent);
 
 	var self = this;
 
@@ -43,7 +43,7 @@ function ToolBarButton(parent)
 	};
 }
 
-ToolBarButton.prototype = Object.create(ButtonIcon.prototype);
+ToolBarToogleButton.prototype = Object.create(ButtonIconToggle.prototype);
 
 /**
  * Set button text, the text is displayed when mouse passes over the button.
@@ -51,12 +51,12 @@ ToolBarButton.prototype = Object.create(ButtonIcon.prototype);
  * @method setText
  * @param {String} text Text to display on mouse over.
  */
-ToolBarButton.prototype.setText = function(text)
+ToolBarToogleButton.prototype.setText = function(text)
 {
 	this.text.setText(text);
 };
 
-ToolBarButton.prototype.updateSize = function()
+ToolBarToogleButton.prototype.updateSize = function()
 {
 	ButtonIcon.prototype.updateSize.call(this);
 

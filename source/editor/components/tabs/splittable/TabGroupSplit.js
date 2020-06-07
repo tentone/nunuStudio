@@ -48,7 +48,7 @@ function TabGroupSplit(parent, placement)
 	this.tabArea = document.createElement("div");
 	this.tabArea.style.zIndex = "1000";
 	this.tabArea.style.position = "absolute";
-	this.tabArea.style.backgroundColor = "rgba(0.0, 0.0, 0.0, 0.2)";
+	this.tabArea.style.backgroundColor = "var(--color-black-alpha-20)";
 	this.tabArea.style.pointerEvents = "none";
 
 	// Drag drop

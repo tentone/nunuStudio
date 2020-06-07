@@ -584,19 +584,19 @@ function SceneEditor(parent, closeable, container, index)
 			{
 				if(key === Keyboard.NUM1)
 				{
-					self.sideBar.selectTool(SceneEditor.SELECT);
+					self.selectTool(SceneEditor.SELECT);
 				}
 				else if(key === Keyboard.NUM2)
 				{
-					self.sideBar.selectTool(SceneEditor.MOVE);
+					self.selectTool(SceneEditor.MOVE);
 				}
 				else if(key === Keyboard.NUM3)
 				{
-					self.sideBar.selectTool(SceneEditor.SCALE);
+					self.selectTool(SceneEditor.SCALE);
 				}
 				else if(key === Keyboard.NUM4)
 				{
-					self.sideBar.selectTool(SceneEditor.ROTATE);
+					self.selectTool(SceneEditor.ROTATE);
 				}
 				else if(key === Keyboard.C)
 				{
@@ -674,7 +674,7 @@ SceneEditor.prototype.activate = function()
 	this.mouse.create();
 	this.manager.create();
 
-	this.sideBar.selectTool(SceneEditor.SELECT);
+	this.selectTool(SceneEditor.SELECT);
 };
 
 SceneEditor.prototype.deactivate = function()
@@ -1138,6 +1138,12 @@ SceneEditor.prototype.selectTool = function(tool)
 	{
 		this.transform.setMode(TransformControls.NONE);
 	}
+
+	// Update the GUI tool
+	/*this.select.setSelected(tool === SceneEditor.SELECT);
+	this.move.setSelected(tool === SceneEditor.MOVE);
+	this.scale.setSelected(tool === SceneEditor.SCALE);
+	this.rotate.setSelected(tool === SceneEditor.ROTATE);*/
 };
 
 /**
@@ -1280,7 +1286,7 @@ SceneEditor.prototype.updateSize = function()
 	this.sideBar.size.set(40, this.size.y);
 	this.sideBar.updateInterface();
 
-	this.toolBar.position.set(this.size.x / 2 - this.toolBar.size.x / 2, 25);
+	this.toolBar.position.set(this.size.x / 2 - this.toolBar.size.x / 2, 5);
 	this.toolBar.updateInterface();
 
 	var width = this.size.x - this.sideBar.size.x;

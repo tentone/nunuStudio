@@ -425,6 +425,7 @@ include("source/editor/gui/tab/scene-editor/sidebar/SideBar.js");
 
 include("source/editor/gui/tab/scene-editor/toolbar/ToolBar.js");
 include("source/editor/gui/tab/scene-editor/toolbar/ToolBarButton.js");
+include("source/editor/gui/tab/scene-editor/toolbar/ToolBarToogleButton.js");
 include("source/editor/gui/tab/scene-editor/toolbar/ToolBarGroup.js");
 
 include("source/editor/gui/tab/scene-editor/transform/TransformControls.js");

@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Group of tools contained inside a ToolBar object.
+ * Group of tools contained inside of the ToolBar object.
  * 
  * @class ToolBarGroup
  * @extends {Component}
@@ -11,8 +11,8 @@ function ToolBarGroup(parent)
 {
 	Component.call(this, parent, "div");
 
+	// this.element.style.
 	this.element.style.overflow = "visible";
-	this.element.style.backgroundColor = "";
 
 	this.buttons = [];
 }
@@ -20,7 +20,29 @@ function ToolBarGroup(parent)
 ToolBarGroup.prototype = Object.create(Component.prototype);
 
 /**
- * Add new group to this tool bar.
+ * Add new toggle button to this tool bar group.
+ *
+ * @method addOption
+ * @return {ButtonIcon} The button created for the new option
+ */
+ToolBarGroup.prototype.addToggleOption = function(text, icon, callback)
+{
+	var button = new ToolBarToogleButton(this);
+	button.setText(text);
+	button.setImage(icon);
+	button.size.set(this.size.y, this.size.y);
+	button.position.set(this.buttons.length * this.size.y, 0);
+	button.updateInterface();
+	button.element.onclick = callback;
+	this.buttons.push(button);
+
+	this.size.x = this.buttons.length * this.size.y;
+
+	return button;
+};
+
+/**
+ * Add new button to this tool bar group.
  *
  * @method addOption
  * @return {ButtonIcon} The button created for the new option

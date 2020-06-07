@@ -15,7 +15,7 @@ function LoadingModal(parent)
 	
 	var self = this;
 
-	this.element.style.backgroundColor = "rgba(0.0, 0.0, 0.0, 0.3)"
+	this.element.style.backgroundColor = "var(--color-black-alpha-20)";
 	this.element.style.zIndex = "200";
 
 	/**

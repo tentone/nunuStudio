@@ -31,43 +31,40 @@ function ToolBar(parent)
 	 */
 	this.groups = [];
 	
-	this.size.y = 52;
+	this.size.y = 45;
 
-	var editor = this.parent.parent;
+	var self = this;
 
-	// Auxiliar method to select tool
-	function selectTool(tool)
+	var tool = this.addGroup();
+	this.select = tool.addToggleOption(Locale.selectShortcut, Global.FILE_PATH + "icons/tools/select.png", function()
 	{
-		/* self.select.setSelected(tool === SceneEditor.SELECT);
-		self.move.setSelected(tool === SceneEditor.MOVE);
-		self.scale.setSelected(tool === SceneEditor.SCALE);
-		self.rotate.setSelected(tool === SceneEditor.ROTATE); */
-		
-		self.parent.selectTool(tool);
-	};
-
-	var transform = this.addGroup();
-	transform.addOption(Locale.selectShortcut, Global.FILE_PATH + "icons/tools/select.png", function()
-	{
-		selectTool(SceneEditor.SELECT);
+		self.selectTool(SceneEditor.SELECT);
 	});
-	transform.addOption(Locale.moveShortcut, Global.FILE_PATH + "icons/tools/move.png", function()
+	this.move = tool.addToggleOption(Locale.moveShortcut, Global.FILE_PATH + "icons/tools/move.png", function()
 	{
-		selectTool(SceneEditor.MOVE);
+		self.selectTool(SceneEditor.MOVE);
 	});
-	transform.addOption(Locale.scaleShortcut, Global.FILE_PATH + "icons/tools/resize.png", function()
+	this.scale = tool.addToggleOption(Locale.scaleShortcut, Global.FILE_PATH + "icons/tools/resize.png", function()
 	{
-		selectTool(SceneEditor.SCALE);
+		self.selectTool(SceneEditor.SCALE);
 	});
-	transform.addOption(Locale.selectShortcut, Global.FILE_PATH + "icons/tools/rotate.png", function()
+	this.rotate = tool.addToggleOption(Locale.selectShortcut, Global.FILE_PATH + "icons/tools/rotate.png", function()
 	{
-		selectTool(SceneEditor.ROTATE);
+		self.selectTool(SceneEditor.ROTATE);
 	});
 
 	this.updateGroups();
 }
 
 ToolBar.prototype = Object.create(Component.prototype);
+
+ToolBar.prototype.selectTool = function(tool)
+{
+	this.select.setSelected(tool === SceneEditor.SELECT);
+	this.move.setSelected(tool === SceneEditor.MOVE);
+	this.scale.setSelected(tool === SceneEditor.SCALE);
+	this.rotate.setSelected(tool === SceneEditor.ROTATE);
+};
 
 /**
  * Add new group to this tool bar.

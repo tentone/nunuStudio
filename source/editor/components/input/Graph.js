@@ -5,7 +5,7 @@
  *
  * It is meant to be used as input in forms to controls values in arrays.
  *
- * Multiple graph lines can be displayed, each graph line has a name that can be used to access its properties.
+ * Multiple sub graphs can be displayed, each graph has a name that can be used to access its properties.
  * 
  * @class Graph
  * @extends {Component}
@@ -54,10 +54,10 @@ function Graph(parent, name, color)
 	this.min = 0.0;
 
 	/**
-	 * Grid canvas element.
+	 * Grid drawing canvas element.
 	 *
 	 * @property grid
-	 * @type {Component}
+	 * @type {Element}
 	 */
 	this.grid = document.createElement("canvas");
 	this.grid.style.position = "absolute";
@@ -85,7 +85,16 @@ function Graph(parent, name, color)
 
 Graph.prototype = Object.create(Component.prototype);
 
-Graph.GaphLine = function(canvas, name, color)
+/**
+ * Graph lines represents a subgraph in the graph GUI object.
+ *
+ * @constructor
+ * @class SubGraph
+ * @param {Element} canvas Drawing canvas.
+ * @param {string} name Name of the graph used to acces its data.
+ * @param {string} color Color of this subgraph.
+ */
+function SubGraph(canvas, name, color)
 {
 	if(canvas === undefined)
 	{
@@ -161,7 +170,7 @@ Graph.prototype.addGraph = function(name, color)
 	canvas.style.marginLeft = this.scaleMargin + "px";
 	this.element.appendChild(canvas);
 
-	this.graph.push(new Graph.GaphLine(canvas, name, color));
+	this.graph.push(new SubGraph(canvas, name, color));
 };
 
 /** 
@@ -425,7 +434,7 @@ Graph.prototype.updateGrid = function()
 
 	var context = this.grid.getContext("2d");
 	context.clearRect(0, 0, width, this.size.y);
-	context.strokeStyle = "#222222";
+	context.strokeStyle = "#333333";
 	context.lineWidth = "1";
 
 	// Border

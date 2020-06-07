@@ -19,13 +19,18 @@ function Text(parent)
 	 * Span DOM element used to represent the text.
 	 *
 	 * @attribute span
-	 * @type {Component}
+	 * @type {Element}
  	 */
 	this.span = document.createElement("span");
 	this.span.style.overflow = "hidden";
 	this.element.appendChild(this.span);
 
-	// Text
+	/**
+	 * Text DOM node where the text is stored.
+	 *
+	 * @attribute text
+	 * @type {Element}
+	 */
 	this.text = document.createTextNode("");
 	this.span.appendChild(this.text);
 

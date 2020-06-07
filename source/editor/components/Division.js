@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * DOM division element.
+ * DOM division element container.
  * 
  * @class Division
  * @extends {Component}

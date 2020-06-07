@@ -23,76 +23,6 @@ function SideBar(parent)
 	 */
 	this.editor = parent;
 
-	var position = 5;
-	var size = 40;
-	var self = this;
-
-	var text = new Text(this);
-	text.setText(Locale.tools);
-	text.size.set(size, 20);
-	text.position.set(0, position);
-	text.updateInterface();
-	position += text.size.y;
-
-	// Select
-	this.select = new ButtonIconToggle(this);
-	this.select.setSelected(true);
-	this.select.setImage(Global.FILE_PATH + "icons/tools/select.png");
-	this.select.size.set(size, size);
-	this.select.position.set(0, position);
-	this.select.setAltText(Locale.selectShortcut);
-	this.select.updateInterface();
-	this.select.setOnClick(function()
-	{
-		self.selectTool(SceneEditor.SELECT);
-	});
-	position += size;
-
-	// Move
-	this.move = new ButtonIconToggle(this);
-	this.move.setImage(Global.FILE_PATH + "icons/tools/move.png");
-	this.move.size.set(size, size);
-	this.move.position.set(0, position);
-	this.move.setAltText(Locale.moveShortcut);
-	this.move.updateInterface();
-	this.move.setOnClick(function()
-	{
-		self.selectTool(SceneEditor.MOVE);
-	});
-	position += size;
-
-	// Resize
-	this.scale = new ButtonIconToggle(this);
-	this.scale.setImage(Global.FILE_PATH + "icons/tools/resize.png");
-	this.scale.size.set(size, size);
-	this.scale.position.set(0, position);
-	this.scale.setAltText(Locale.scaleShortcut);
-	this.scale.updateInterface();
-	this.scale.setOnClick(function()
-	{
-		self.selectTool(SceneEditor.SCALE);
-	});
-	position += size;
-
-	// Rotate
-	this.rotate = new ButtonIconToggle(this);
-	this.rotate.setImage(Global.FILE_PATH + "icons/tools/rotate.png");
-	this.rotate.size.set(size, size);
-	this.rotate.position.set(0, position);
-	this.rotate.setAltText(Locale.rotateShortcut);
-	this.rotate.updateInterface();
-	this.rotate.setOnClick(function()
-	{
-		self.selectTool(SceneEditor.ROTATE);
-	});
-	position += size;
-	
-	this.addText = new Text(this);
-	this.addText.setText(Locale.add);
-	this.addText.size.set(40, 20);
-	this.addText.position.set(0, 190);
-	this.addText.updateInterface();
-
 	/**
 	 * List of object placing buttons.
 	 *
@@ -103,6 +33,18 @@ function SideBar(parent)
 
 	this.createObject();
 
+	this.addText = new Text(this);
+	this.addText.setText(Locale.add);
+	this.addText.size.set(40, 20);
+	this.addText.position.set(0, 5);
+	this.addText.updateInterface();
+
+	/**
+	 * More button is displayed when there is no space for the buttons placed in the side bar.
+	 *
+	 * @attribute more
+	 * @type {ButtonDrawer}
+	 */
 	this.more = new ButtonDrawer(this);
 	this.more.setImage(Global.FILE_PATH + "icons/misc/more.png");
 	this.more.optionsPerLine = 1;
@@ -110,50 +52,29 @@ function SideBar(parent)
 
 SideBar.prototype = Object.create(Component.prototype);
 
-/**
- * Select object manipulation tool.
- *
- * @method selectTool
- * @param {number} tool
- */
-SideBar.prototype.selectTool = function(tool)
-{
-	this.select.setSelected(tool === SceneEditor.SELECT);
-	this.move.setSelected(tool === SceneEditor.MOVE);
-	this.scale.setSelected(tool === SceneEditor.SCALE);
-	this.rotate.setSelected(tool === SceneEditor.ROTATE);
-	
-	this.editor.selectTool(tool);
-};
-
 SideBar.prototype.updateSize = function()
 {
 	Component.prototype.updateSize.call(this);
 
 	var size = this.size.x;
-	var position = 210, i = 0;
+	var y = 30, i = 0;
 
-	while(position < this.size.y - 2 * size && i < this.buttons.length)
+	// Update buttons size
+	while(y < this.size.y - 2 * size && i < this.buttons.length)
 	{
 		this.buttons[i].attachTo(this);
 		this.buttons[i].size.set(size, size);
-		this.buttons[i].position.set(0, position);
+		this.buttons[i].position.set(0, y);
 		this.buttons[i].optionsSize.set(size, size);
 		this.buttons[i].visible = true;
 		this.buttons[i].updateInterface();
 
 		i++;
-		position += size;
+		y += size;
 	}
-
-	this.select.setVisibility(this.size.y > this.select.position.y + this.select.size.y);
-	this.move.setVisibility(this.size.y > this.move.position.y + this.move.size.y);
-	this.scale.setVisibility(this.size.y > this.scale.position.y + this.scale.size.y);
-	this.rotate.setVisibility(this.size.y > this.rotate.position.y + this.rotate.size.y);
 
 	if(this.size.y < 250)
 	{
-		this.addText.setVisibility(false);
 		this.more.setVisibility(false);
 	}
 	else
@@ -163,7 +84,7 @@ SideBar.prototype.updateSize = function()
 			this.more.clear();
 			this.more.optionsSize.set(size, size);
 			this.more.size.set(size, size);
-			this.more.position.set(0, position);
+			this.more.position.set(0, y);
 			this.more.visible = true;
 
 			while(i < this.buttons.length)
@@ -179,8 +100,6 @@ SideBar.prototype.updateSize = function()
 		{
 			this.more.setVisibility(false);
 		}
-
-		this.addText.setVisibility(true);
 	}
 };
 

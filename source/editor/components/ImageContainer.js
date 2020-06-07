@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * DOM image element.
+ * Container for DOM image element.
  * 
  * @class ImageContainer
  * @extends {Component}
@@ -18,7 +18,7 @@ function ImageContainer(parent)
 ImageContainer.prototype = Object.create(Component.prototype);
 
 /**
- * Set image from URL.
+ * Set image from URL or source content.
  * 
  * @method setImage
  * @param {string} source Image URL.

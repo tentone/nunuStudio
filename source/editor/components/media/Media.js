@@ -8,12 +8,18 @@
  * @class Media
  * @extends {Component}
  * @param {Component} parent Parent element.
+ * @param {string} type Type of the media element (e.g audio, video)
  */
 function Media(parent, type)
 {
 	Component.call(this, parent, "div");
 
-	// Media
+	/**
+	 * Media DOM element that compatible with media controls.
+	 *
+	 * @attribute media
+	 * @type {Element}
+	 */
 	this.media = document.createElement(type);
 	this.element.appendChild(this.media);
 }
