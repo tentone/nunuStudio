@@ -11,7 +11,6 @@ function ToolBarGroup(parent)
 {
 	Component.call(this, parent, "div");
 
-	// this.element.style.
 	this.element.style.overflow = "visible";
 
 	this.buttons = [];

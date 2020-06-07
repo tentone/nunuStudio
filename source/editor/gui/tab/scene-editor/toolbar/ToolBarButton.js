@@ -13,7 +13,8 @@ function ToolBarButton(parent)
 
 	var self = this;
 
-	this.element.style.overflow = "visible";
+	this.setStyle("borderRadius", "5px");
+	this.setStyle("overflow", "visible");
 	
 	this.icon.style.left = "25%";
 	this.icon.style.top = "25%";

@@ -1139,11 +1139,7 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.transform.setMode(TransformControls.NONE);
 	}
 
-	// Update the GUI tool
-	/*this.select.setSelected(tool === SceneEditor.SELECT);
-	this.move.setSelected(tool === SceneEditor.MOVE);
-	this.scale.setSelected(tool === SceneEditor.SCALE);
-	this.rotate.setSelected(tool === SceneEditor.ROTATE);*/
+	this.toolBar.selectTool(tool);
 };
 
 /**

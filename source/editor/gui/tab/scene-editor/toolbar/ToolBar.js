@@ -38,19 +38,19 @@ function ToolBar(parent)
 	var tool = this.addGroup();
 	this.select = tool.addToggleOption(Locale.selectShortcut, Global.FILE_PATH + "icons/tools/select.png", function()
 	{
-		self.selectTool(SceneEditor.SELECT);
+		self.parent.selectTool(SceneEditor.SELECT);
 	});
 	this.move = tool.addToggleOption(Locale.moveShortcut, Global.FILE_PATH + "icons/tools/move.png", function()
 	{
-		self.selectTool(SceneEditor.MOVE);
+		self.parent.selectTool(SceneEditor.MOVE);
 	});
 	this.scale = tool.addToggleOption(Locale.scaleShortcut, Global.FILE_PATH + "icons/tools/resize.png", function()
 	{
-		self.selectTool(SceneEditor.SCALE);
+		self.parent.selectTool(SceneEditor.SCALE);
 	});
 	this.rotate = tool.addToggleOption(Locale.selectShortcut, Global.FILE_PATH + "icons/tools/rotate.png", function()
 	{
-		self.selectTool(SceneEditor.ROTATE);
+		self.parent.selectTool(SceneEditor.ROTATE);
 	});
 
 	this.updateGroups();
