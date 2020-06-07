@@ -13,7 +13,7 @@ function ToolBar(parent)
 {
 	Component.call(this, parent, "div");
 
-	this.element.style.overflow = "visible";
+	this.setStyle("overflow", "visible");
 
 	/**
 	 * Spacing in px between the tool groups.
