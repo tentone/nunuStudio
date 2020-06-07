@@ -73,11 +73,11 @@ ToolBar.prototype = Object.create(Component.prototype);
  * Add new group to this tool bar.
  *
  * @method addGroup
- * @return {ToolGroup} The new group created.
+ * @return {ToolBarGroup} The new group created.
  */
 ToolBar.prototype.addGroup = function()
 {
-	var group = new ToolGroup(this);
+	var group = new ToolBarGroup(this);
 	group.size.y = this.size.y;
 	this.groups.push(group);
 	return group;

@@ -3,21 +3,21 @@
 /**
  * Group of tools contained inside a ToolBar object.
  * 
- * @class ToolGroup
+ * @class ToolBarGroup
  * @extends {Component}
  * @param {Component} parent Parent element.
  */
-function ToolGroup(parent)
+function ToolBarGroup(parent)
 {
 	Component.call(this, parent, "div");
 
 	this.element.style.overflow = "visible";
-	this.element.style.backgroundColor = Palette.getColorAlpha("black", 0.7);
+	this.element.style.backgroundColor = "#000000BB";
 
 	this.buttons = [];
 }
 
-ToolGroup.prototype = Object.create(Component.prototype);
+ToolBarGroup.prototype = Object.create(Component.prototype);
 
 /**
  * Add new group to this tool bar.
@@ -25,11 +25,11 @@ ToolGroup.prototype = Object.create(Component.prototype);
  * @method addOption
  * @return {ButtonIcon} The button created for the new option
  */
-ToolGroup.prototype.addOption = function(text, icon, callback)
+ToolBarGroup.prototype.addOption = function(text, icon, callback)
 {
 	var button = new ToolBarButton(this);
 	button.setText(text);
-	button.setIcon(icon);
+	button.setImage(icon);
 	button.size.set(this.size.y, this.size.y);
 	button.position.set(this.buttons.length * this.size.y, 0);
 	button.updateInterface();
@@ -41,7 +41,7 @@ ToolGroup.prototype.addOption = function(text, icon, callback)
 	return button;
 };
 
-ToolGroup.prototype.updateInterface = function()
+ToolBarGroup.prototype.updateInterface = function()
 {
 	Component.prototype.updateInterface.call(this);
 

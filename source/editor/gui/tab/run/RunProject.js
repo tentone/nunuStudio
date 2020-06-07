@@ -34,9 +34,9 @@ function RunProject(parent, closeable, container, index)
 	 * Fullscreen button used to toggle fullscreen mode.
 	 *
 	 * @attribute fullscreenButton
-	 * @type {ButtonImage}
+	 * @type {ButtonIcon}
 	 */
-	this.fullscreenButton = new ButtonImage(this);
+	this.fullscreenButton = new ButtonIcon(this);
 	this.fullscreenButton.position.set(5, 5);
 	this.fullscreenButton.size.set(30, 30);
 	this.fullscreenButton.setImage(Global.FILE_PATH + "icons/misc/fullscreen.png");
@@ -70,9 +70,9 @@ function RunProject(parent, closeable, container, index)
 	 * It is only displayed when VR is available.
 	 *
 	 * @attribute vrButton
-	 * @type {ButtonImage}
+	 * @type {ButtonIcon}
 	 */
-	this.vrButton = new ButtonImage(this);
+	this.vrButton = new ButtonIcon(this);
 	this.vrButton.size.set(30, 30);
 	this.vrButton.position.set(40, 5);
 	this.vrButton.setImage(Global.FILE_PATH + "icons/misc/vr.png");

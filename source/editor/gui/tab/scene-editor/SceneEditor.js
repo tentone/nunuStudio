@@ -490,9 +490,9 @@ function SceneEditor(parent, closeable, container, index)
 	 * Button to toggle snap to grid functionality
 	 *
 	 * @method snapGridButton
-	 * @type {ButtonImage}
+	 * @type {ButtonIcon}
 	 */
-	this.snapGridButton = new ButtonImage(this);
+	this.snapGridButton = new ButtonIcon(this);
 	this.snapGridButton.position.set(5, 40);
 	this.snapGridButton.size.set(30, 30);
 	this.snapGridButton.setImage(Global.FILE_PATH + "icons/misc/" + (Editor.settings.editor.snap ? "grid" : "freemove") + ".png");
@@ -523,9 +523,9 @@ function SceneEditor(parent, closeable, container, index)
 	 * Button to toggle the camera mode between ORTHOGRAPHIC and PERSPECTIVE.
 	 *
 	 * @method cameraButton
-	 * @type {ButtonImage}
+	 * @type {ButtonIcon}
 	 */
-	this.cameraButton = new ButtonImage(this);
+	this.cameraButton = new ButtonIcon(this);
 	this.cameraButton.position.set(5, 5);
 	this.cameraButton.size.set(30, 30);
 	this.cameraButton.setImage(Global.FILE_PATH + "icons/misc/3d.png");
@@ -557,6 +557,15 @@ function SceneEditor(parent, closeable, container, index)
 			self.cameraButton.setImage(Global.FILE_PATH + "icons/misc/3d.png");
 		}
 	});
+
+	/**
+	 * The editor tool bar is used to select tool used to manipulate objects.
+	 *
+	 * @attribute toolBar
+	 * @type {ToolBar}
+	 */
+	this.toolBar = new ToolBar(this);
+	this.toolBar.setMode(Component.BOTTOM_LEFT);
 
 	/**
 	 * Event manager to handley keyboard shortcuts.
@@ -1270,6 +1279,9 @@ SceneEditor.prototype.updateSize = function()
 	this.sideBar.position.set(0, 0);
 	this.sideBar.size.set(40, this.size.y);
 	this.sideBar.updateInterface();
+
+	this.toolBar.position.set(this.size.x / 2 - this.toolBar.size.x / 2, 25);
+	this.toolBar.updateInterface();
 
 	var width = this.size.x - this.sideBar.size.x;
 	var height = this.size.y;

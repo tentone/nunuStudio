@@ -369,9 +369,9 @@ include("source/editor/components/modal/LoadingModal.js");
 include("source/editor/components/buttons/Button.js");
 include("source/editor/components/buttons/ButtonText.js");
 include("source/editor/components/buttons/ButtonMenu.js");
-include("source/editor/components/buttons/ButtonImage.js");
+include("source/editor/components/buttons/ButtonIcon.js");
 include("source/editor/components/buttons/ButtonDrawer.js");
-include("source/editor/components/buttons/ButtonImageToggle.js");
+include("source/editor/components/buttons/ButtonIconToggle.js");
 
 include("source/editor/components/containers/DualDivision.js");
 include("source/editor/components/containers/DualContainer.js");
@@ -422,6 +422,10 @@ include("source/editor/gui/tab/run/RunProject.js");
 include("source/editor/gui/tab/scene-editor/SceneEditor.js");
 
 include("source/editor/gui/tab/scene-editor/sidebar/SideBar.js");
+
+include("source/editor/gui/tab/scene-editor/toolbar/ToolBar.js");
+include("source/editor/gui/tab/scene-editor/toolbar/ToolBarButton.js");
+include("source/editor/gui/tab/scene-editor/toolbar/ToolBarGroup.js");
 
 include("source/editor/gui/tab/scene-editor/transform/TransformControls.js");
 include("source/editor/gui/tab/scene-editor/transform/GizmoMaterial.js");

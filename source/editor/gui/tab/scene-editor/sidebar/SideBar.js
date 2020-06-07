@@ -35,7 +35,7 @@ function SideBar(parent)
 	position += text.size.y;
 
 	// Select
-	this.select = new ButtonImageToggle(this);
+	this.select = new ButtonIconToggle(this);
 	this.select.setSelected(true);
 	this.select.setImage(Global.FILE_PATH + "icons/tools/select.png");
 	this.select.size.set(size, size);
@@ -49,7 +49,7 @@ function SideBar(parent)
 	position += size;
 
 	// Move
-	this.move = new ButtonImageToggle(this);
+	this.move = new ButtonIconToggle(this);
 	this.move.setImage(Global.FILE_PATH + "icons/tools/move.png");
 	this.move.size.set(size, size);
 	this.move.position.set(0, position);
@@ -62,7 +62,7 @@ function SideBar(parent)
 	position += size;
 
 	// Resize
-	this.scale = new ButtonImageToggle(this);
+	this.scale = new ButtonIconToggle(this);
 	this.scale.setImage(Global.FILE_PATH + "icons/tools/resize.png");
 	this.scale.size.set(size, size);
 	this.scale.position.set(0, position);
@@ -75,7 +75,7 @@ function SideBar(parent)
 	position += size;
 
 	// Rotate
-	this.rotate = new ButtonImageToggle(this);
+	this.rotate = new ButtonIconToggle(this);
 	this.rotate.setImage(Global.FILE_PATH + "icons/tools/rotate.png");
 	this.rotate.size.set(size, size);
 	this.rotate.position.set(0, position);

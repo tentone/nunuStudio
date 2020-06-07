@@ -3,16 +3,16 @@
 /**
  * Button with a centered icon.
  *
- * @class ButtonImageToggle
+ * @class ButtonIconToggle
  * @extends {Button}
  * @param {Component} parent Parent element.
  */
-function ButtonImage(parent)
+function ButtonIcon(parent)
 {
 	Button.call(this, parent);
 
 	/**
-	 * Button icon.
+	 * Icon of the button displayed in the middle.
 	 * 
 	 * @attribute icon
 	 * @type {Component}
@@ -29,7 +29,7 @@ function ButtonImage(parent)
 	this.setColor(null, Editor.theme.buttonOverColor);
 }
 
-ButtonImage.prototype = Object.create(Button.prototype);
+ButtonIcon.prototype = Object.create(Button.prototype);
 
 /**
  * Set button drawer icon.
@@ -37,7 +37,7 @@ ButtonImage.prototype = Object.create(Button.prototype);
  * @method setImage
  * @param {string} image Image URL.
  */
-ButtonImage.prototype.setImage = function(image)
+ButtonIcon.prototype.setImage = function(image)
 {
 	this.icon.src = image;
 };
@@ -47,7 +47,7 @@ ButtonImage.prototype.setImage = function(image)
  *
  * @method setImageScale
  */
-ButtonImage.prototype.setImageScale = function(x, y)
+ButtonIcon.prototype.setImageScale = function(x, y)
 {
 	this.icon.style.top = ((1 - y) / 2 * 100) + "%";
 	this.icon.style.left = ((1 - x) / 2 * 100) + "%";

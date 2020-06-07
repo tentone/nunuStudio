@@ -15,10 +15,10 @@ function ToolBarButton(parent)
 
 	this.element.style.overflow = "visible";
 
-	this.icon.setStyle("left", "25%");
-	this.icon.setStyle("top", "25%");
-	this.icon.setStyle("width","50%");
-	this.icon.setStyle("height", "50%");
+	this.icon.style.left = "25%";
+	this.icon.style.top = "25%";
+	this.icon.style.width = "50%";
+	this.icon.style.height = "50%";
 
 	/** 
 	 * Component to display the text on mouse over.
@@ -28,10 +28,10 @@ function ToolBarButton(parent)
 	 */
 	this.text = new Text(this);
 	this.text.setMode(Component.BOTTOM_LEFT);
-	this.text.setStyle("backgroundColor", Palette.getColor("dark"));
+	this.text.setStyle("backgroundColor", "#000000");
 	this.text.setStyle("borderRadius", "5px");
 	this.text.setStyle("opacity", "0.8");
-	this.text.setTextColor(Palette.getColor("white"));
+	this.text.setTextColor("#FFFFFF");
 	this.text.setVisibility(false);
 	
 	this.element.onmouseenter = function()

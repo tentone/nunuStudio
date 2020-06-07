@@ -3,13 +3,13 @@
 /**
  * A image button that can be toggled.
  * 
- * @class ButtonImageToggle
- * @extends {ButtonImage}
+ * @class ButtonIconToggle
+ * @extends {ButtonIcon}
  * @param {Component} parent Parent element.
  */
-function ButtonImageToggle(parent)
+function ButtonIconToggle(parent)
 {
-	ButtonImage.call(this, parent);
+	ButtonIcon.call(this, parent);
 
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
@@ -40,7 +40,7 @@ function ButtonImageToggle(parent)
 	};
 }
 
-ButtonImageToggle.prototype = Object.create(ButtonImage.prototype);
+ButtonIconToggle.prototype = Object.create(ButtonIcon.prototype);
 
 /**
  * Set the seleted state of the toggle button.
@@ -48,7 +48,7 @@ ButtonImageToggle.prototype = Object.create(ButtonImage.prototype);
  * @method setSelected
  * @param {boolean} selected
  */
-ButtonImageToggle.prototype.setSelected = function(selected)
+ButtonIconToggle.prototype.setSelected = function(selected)
 {
 	this.selected = selected;
 	this.element.style.backgroundColor = this.selected ? Editor.theme.buttonOverColor : Editor.theme.buttonColor;
@@ -59,7 +59,7 @@ ButtonImageToggle.prototype.setSelected = function(selected)
  *
  * @method setOnClick
  */
-ButtonImageToggle.prototype.setOnClick = function(callback)
+ButtonIconToggle.prototype.setOnClick = function(callback)
 {
 	var self = this;
 	this.element.onclick = function()

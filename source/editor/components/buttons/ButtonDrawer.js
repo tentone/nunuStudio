@@ -6,12 +6,12 @@
  * Used in menu bars, panels, etc.
  *
  * @class ButtonDrawer
- * @extends {ButtonImage}
+ * @extends {ButtonIcon}
  * @param {Component} parent Parent element.
  */
 function ButtonDrawer(parent)
 {
-	ButtonImage.call(this, parent);
+	ButtonIcon.call(this, parent);
 
 	this.element.style.zIndex = "200";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
@@ -86,7 +86,7 @@ function ButtonDrawer(parent)
 	};
 }
 
-ButtonDrawer.prototype = Object.create(ButtonImage.prototype);
+ButtonDrawer.prototype = Object.create(ButtonIcon.prototype);
 
 ButtonDrawer.prototype.clear = function()
 {
@@ -135,7 +135,7 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
 {
 	var self = this;
 
-	var button = new ButtonImage(this.panel);
+	var button = new ButtonIcon(this.panel);
 	button.setImage(image);
 	button.setOnClick(function()
 	{
