@@ -347,59 +347,59 @@ include("source/editor/locale/LocaleEN.js");
 include("source/editor/theme/ThemeManager.js");
 include("source/editor/theme/ThemeDark.js");
 
-include("source/editor/gui/components/Component.js");
-include("source/editor/gui/components/DocumentBody.js");
-include("source/editor/gui/components/Division.js");
-include("source/editor/gui/components/Text.js");
-include("source/editor/gui/components/Canvas.js");
-include("source/editor/gui/components/RendererCanvas.js");
-include("source/editor/gui/components/TableForm.js");
-include("source/editor/gui/components/ImageContainer.js");
-include("source/editor/gui/components/SearchBox.js");
+include("source/editor/components/Component.js");
+include("source/editor/components/DocumentBody.js");
+include("source/editor/components/Division.js");
+include("source/editor/components/Text.js");
+include("source/editor/components/Canvas.js");
+include("source/editor/components/RendererCanvas.js");
+include("source/editor/components/TableForm.js");
+include("source/editor/components/ImageContainer.js");
+include("source/editor/components/SearchBox.js");
 
-include("source/editor/gui/components/dropdown/ContextMenu.js");
-include("source/editor/gui/components/dropdown/DropdownMenu.js");
+include("source/editor/components/dropdown/ContextMenu.js");
+include("source/editor/components/dropdown/DropdownMenu.js");
 
-include("source/editor/gui/components/media/Media.js");
-include("source/editor/gui/components/media/AudioPlayer.js");
-include("source/editor/gui/components/media/VideoPlayer.js");
+include("source/editor/components/media/Media.js");
+include("source/editor/components/media/AudioPlayer.js");
+include("source/editor/components/media/VideoPlayer.js");
 
-include("source/editor/gui/components/modal/LoadingModal.js");
+include("source/editor/components/modal/LoadingModal.js");
 
-include("source/editor/gui/components/buttons/Button.js");
-include("source/editor/gui/components/buttons/ButtonText.js");
-include("source/editor/gui/components/buttons/ButtonMenu.js");
-include("source/editor/gui/components/buttons/ButtonImage.js");
-include("source/editor/gui/components/buttons/ButtonDrawer.js");
-include("source/editor/gui/components/buttons/ButtonImageToggle.js");
+include("source/editor/components/buttons/Button.js");
+include("source/editor/components/buttons/ButtonText.js");
+include("source/editor/components/buttons/ButtonMenu.js");
+include("source/editor/components/buttons/ButtonImage.js");
+include("source/editor/components/buttons/ButtonDrawer.js");
+include("source/editor/components/buttons/ButtonImageToggle.js");
 
-include("source/editor/gui/components/containers/DualDivision.js");
-include("source/editor/gui/components/containers/DualContainer.js");
+include("source/editor/components/containers/DualDivision.js");
+include("source/editor/components/containers/DualContainer.js");
 
-include("source/editor/gui/components/input/Graph.js");
-include("source/editor/gui/components/input/CheckBox.js");
-include("source/editor/gui/components/input/TextBox.js");
-include("source/editor/gui/components/input/TextArea.js");
-include("source/editor/gui/components/input/ColorChooser.js");
-include("source/editor/gui/components/input/ColorGradientChooser.js");
-include("source/editor/gui/components/input/Slider.js");
-include("source/editor/gui/components/input/DropdownList.js");
-include("source/editor/gui/components/input/NumberBox.js");
-include("source/editor/gui/components/input/NumberRow.js");
-include("source/editor/gui/components/input/VectorBox.js");
-include("source/editor/gui/components/input/ImageChooser.js");
-include("source/editor/gui/components/input/TextureChooser.js");
-include("source/editor/gui/components/input/TextureForm.js");
-include("source/editor/gui/components/input/CubeTextureBox.js");
+include("source/editor/components/input/Graph.js");
+include("source/editor/components/input/CheckBox.js");
+include("source/editor/components/input/TextBox.js");
+include("source/editor/components/input/TextArea.js");
+include("source/editor/components/input/ColorChooser.js");
+include("source/editor/components/input/ColorGradientChooser.js");
+include("source/editor/components/input/Slider.js");
+include("source/editor/components/input/DropdownList.js");
+include("source/editor/components/input/NumberBox.js");
+include("source/editor/components/input/NumberRow.js");
+include("source/editor/components/input/VectorBox.js");
+include("source/editor/components/input/ImageChooser.js");
+include("source/editor/components/input/TextureChooser.js");
+include("source/editor/components/input/TextureForm.js");
+include("source/editor/components/input/CubeTextureBox.js");
 
-include("source/editor/gui/components/tabs/TabGroup.js");
-include("source/editor/gui/components/tabs/TabComponent.js");
-include("source/editor/gui/components/tabs/TabButton.js");
+include("source/editor/components/tabs/TabGroup.js");
+include("source/editor/components/tabs/TabComponent.js");
+include("source/editor/components/tabs/TabButton.js");
 
-include("source/editor/gui/components/tabs/splittable/TabGroupSplit.js");
-include("source/editor/gui/components/tabs/splittable/TabButtonSplit.js");
-include("source/editor/gui/components/tabs/splittable/TabContainer.js");
-include("source/editor/gui/components/tabs/splittable/TabDualContainer.js");
+include("source/editor/components/tabs/splittable/TabGroupSplit.js");
+include("source/editor/components/tabs/splittable/TabButtonSplit.js");
+include("source/editor/components/tabs/splittable/TabContainer.js");
+include("source/editor/components/tabs/splittable/TabDualContainer.js");
 
 include("source/editor/gui/form-snippet/FormSnippet.js");
 include("source/editor/gui/form-snippet/LightShadowFormSnippet.js");

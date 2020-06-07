@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Side bar is presented in the editor to add more objects to the scene.
+ *
+ * @class SideBar
+ * @extends {Component}
+ */
 function SideBar(parent)
 {
 	Component.call(this, parent, "div");
