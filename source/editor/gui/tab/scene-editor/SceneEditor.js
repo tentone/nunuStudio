@@ -598,6 +598,10 @@ function SceneEditor(parent, closeable, container, index)
 				{
 					self.selectTool(SceneEditor.ROTATE);
 				}
+				else if(key === Keyboard.F)
+				{
+					self.focusObject();
+				}
 				else if(key === Keyboard.C)
 				{
 					Editor.copyObject();
@@ -781,6 +785,23 @@ SceneEditor.prototype.isAttached = function(scene)
 };
 
 /**
+ * Focus the first currently selected object, if there is one.
+ *
+ * @method focusObject
+ */
+SceneEditor.prototype.focusObject = function()
+{
+	if(Editor.selection.length > 0 && Editor.selection[0].isObject3D === true)
+	{
+		this.controls.focusObject(Editor.selection[0]);
+	}
+	else
+	{
+		Editor.alert(Locale.selectObjectFirst);
+	}
+};
+
+/**
  * Update scene editor logic.
  *
  * @method update
@@ -801,17 +822,6 @@ SceneEditor.prototype.update = function()
 			if(this.mouse.buttonJustPressed(Mouse.LEFT))
 			{
 				this.selectObjectWithMouse();
-			}
-			
-			if(Editor.selection.length > 0)
-			{
-				if(this.mouse.buttonDoubleClicked(Mouse.LEFT) || this.keyboard.keyJustPressed(Keyboard.F))
-				{
-					if(Editor.selection[0].isObject3D === true)
-					{
-						this.controls.focusObject(Editor.selection[0]);
-					}
-				}
 			}
 		}
 		else

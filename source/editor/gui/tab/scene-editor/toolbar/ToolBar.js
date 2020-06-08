@@ -36,21 +36,27 @@ function ToolBar(parent)
 	var self = this;
 
 	var tool = this.addGroup();
-	this.select = tool.addToggleOption(Locale.selectShortcut, Global.FILE_PATH + "icons/tools/select.png", function()
+	this.select = tool.addToggleOption(Locale.select + " (CTRL+1)", Global.FILE_PATH + "icons/tools/select.png", function()
 	{
 		self.parent.selectTool(SceneEditor.SELECT);
 	});
-	this.move = tool.addToggleOption(Locale.moveShortcut, Global.FILE_PATH + "icons/tools/move.png", function()
+	this.move = tool.addToggleOption(Locale.move + " (CTRL+2)", Global.FILE_PATH + "icons/tools/move.png", function()
 	{
 		self.parent.selectTool(SceneEditor.MOVE);
 	});
-	this.scale = tool.addToggleOption(Locale.scaleShortcut, Global.FILE_PATH + "icons/tools/resize.png", function()
+	this.scale = tool.addToggleOption(Locale.scale + " (CTRL+3)", Global.FILE_PATH + "icons/tools/resize.png", function()
 	{
 		self.parent.selectTool(SceneEditor.SCALE);
 	});
-	this.rotate = tool.addToggleOption(Locale.selectShortcut, Global.FILE_PATH + "icons/tools/rotate.png", function()
+	this.rotate = tool.addToggleOption(Locale.rotate + " (CTRL+4)", Global.FILE_PATH + "icons/tools/rotate.png", function()
 	{
 		self.parent.selectTool(SceneEditor.ROTATE);
+	});
+
+	var zoom = this.addGroup();
+	this.zoom = zoom.addOption(Locale.focusObject + " (CTRL+F)", Global.FILE_PATH + "icons/misc/focus.png", function()
+	{
+		self.parent.focusObject();
 	});
 
 	this.updateGroups();

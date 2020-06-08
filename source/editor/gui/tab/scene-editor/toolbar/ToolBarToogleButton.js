@@ -15,7 +15,7 @@ function ToolBarToogleButton(parent)
 
 	this.setStyle("borderRadius", "5px");
 	this.setStyle("overflow", "visible");
-	
+
 	this.icon.style.left = "25%";
 	this.icon.style.top = "25%";
 	this.icon.style.width = "50%";
@@ -31,7 +31,6 @@ function ToolBarToogleButton(parent)
 	this.text.setMode(Component.BOTTOM_LEFT);
 	this.text.setStyle("backgroundColor", "var(--panel-color)");
 	this.text.setStyle("borderRadius", "5px");
-	this.text.setStyle("opacity", "0.8");
 	this.text.setTextColor("var(--color-light)");
 	this.text.setVisibility(false);
 	this.element.onmouseenter = function()

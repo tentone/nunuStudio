@@ -12,6 +12,8 @@ function ToolBarGroup(parent)
 	Component.call(this, parent, "div");
 
 	this.setStyle("overflow", "visible");
+	this.setStyle("backgroundColor", "var(--bar-color)");
+	this.setStyle("borderRadius", "5px");
 
 	this.buttons = [];
 }
@@ -60,11 +62,4 @@ ToolBarGroup.prototype.addOption = function(text, icon, callback)
 	this.size.x = this.buttons.length * this.size.y;
 
 	return button;
-};
-
-ToolBarGroup.prototype.updateInterface = function()
-{
-	Component.prototype.updateInterface.call(this);
-
-	this.element.style.borderRadius =  this.size.y * 0.07 + "px";
 };

@@ -44,10 +44,10 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.setImageScale(0.8, 0.8);
 	this.fullscreenButton.updateSize();
 	this.fullscreenButton.updatePosition(Component.BOTTOM_RIGHT);
-	this.fullscreenButton.visible = false;
-	this.fullscreenButton.element.style.backgroundColor = "var(--panel-color)";
-	this.fullscreenButton.element.style.borderRadius = "5px";
-	this.fullscreenButton.element.style.opacity = 0.5;
+	this.fullscreenButton.setStyle("backgroundColor", "var(--panel-color)");
+	this.fullscreenButton.setStyle("borderRadius", "5px");
+	this.fullscreenButton.setStyle("opacity", 0.5);
+	this.fullscreenButton.setVisibility(true);
 	this.fullscreenButton.element.onmouseenter = function()
 	{
 		this.style.opacity = 1.0;
@@ -81,9 +81,9 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton.updateSize();
 	this.vrButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.vrButton.setVisibility(false);
-	this.vrButton.element.style.backgroundColor = "var(--panel-color)";
-	this.vrButton.element.style.borderRadius = "5px";
-	this.vrButton.element.style.opacity = 0.5;
+	this.vrButton.setStyle("backgroundColor", "var(--panel-color)");
+	this.vrButton.setStyle("borderRadius", "5px");
+	this.vrButton.setStyle("opacity", 0.5);
 	this.vrButton.element.onmouseenter = function()
 	{
 		this.style.opacity = 1.0;
