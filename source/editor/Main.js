@@ -357,21 +357,21 @@ include("source/editor/components/TableForm.js");
 include("source/editor/components/ImageContainer.js");
 include("source/editor/components/SearchBox.js");
 
+include("source/editor/components/buttons/Button.js");
+include("source/editor/components/buttons/ButtonText.js");
+include("source/editor/components/buttons/ButtonIcon.js");
+include("source/editor/components/buttons/ButtonDrawer.js");
+include("source/editor/components/buttons/ButtonIconToggle.js");
+
 include("source/editor/components/dropdown/ContextMenu.js");
 include("source/editor/components/dropdown/DropdownMenu.js");
+include("source/editor/components/dropdown/ButtonMenu.js");
 
 include("source/editor/components/media/Media.js");
 include("source/editor/components/media/AudioPlayer.js");
 include("source/editor/components/media/VideoPlayer.js");
 
 include("source/editor/components/modal/LoadingModal.js");
-
-include("source/editor/components/buttons/Button.js");
-include("source/editor/components/buttons/ButtonText.js");
-include("source/editor/components/buttons/ButtonMenu.js");
-include("source/editor/components/buttons/ButtonIcon.js");
-include("source/editor/components/buttons/ButtonDrawer.js");
-include("source/editor/components/buttons/ButtonIconToggle.js");
 
 include("source/editor/components/containers/DualDivision.js");
 include("source/editor/components/containers/DualContainer.js");

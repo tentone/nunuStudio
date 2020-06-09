@@ -16,14 +16,12 @@ function ButtonMenu(parent)
 	this.span.style.textIndent = "25px";
 
 	/**
-	 * Icon element.
+	 * Icon DOM element displayed on the left side of the button.
 	 *
 	 * @attribute icon
-	 * @type {Component}
+	 * @type {Element}
 	 */
 	this.icon = null;
-
-	this.setColor("var(--bar-color)", "var(--button-over-color)");
 }
 
 ButtonMenu.prototype = Object.create(ButtonText.prototype);

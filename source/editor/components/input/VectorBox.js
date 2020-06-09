@@ -14,7 +14,7 @@ function VectorBox(parent)
 	 * Indicates if the number box is storing a angle value.
 	 *
 	 * @attribute isAngle
-	 * @type {Boolean}
+	 * @type {boolean}
 	 */
 	this.isAngle = false;
 

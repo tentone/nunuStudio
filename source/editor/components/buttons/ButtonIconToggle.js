@@ -16,26 +16,26 @@ function ButtonIconToggle(parent)
 	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = "var(--bar-color)";
 
+	/**
+	 * Indicates if the toggle button is currently selected.
+	 *
+	 * @attribute selected
+	 * @type {boolean}
+	 */
 	this.selected = false;
 
-	// Click event
 	var self = this;
+
 	this.element.onclick = function()
 	{
 		self.selected = !self.selected;
-	};
-
-	// Mouse over and mouse out events
-	this.element.onmouseenter = function()
-	{
-		self.element.style.backgroundColor = "var(--button-over-color)";
 	};
 
 	this.element.onmouseleave = function()
 	{
 		if(!self.selected)
 		{
-			self.element.style.backgroundColor = "var(--bar-color)";
+			self.setStyleList(self.baseStyle);
 		}
 	};
 }

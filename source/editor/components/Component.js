@@ -154,6 +154,28 @@ Component.prototype.setStyle = function(attribute, value)
 };
 
 /**
+ * Set the multiple styles to the DOM element.
+ *
+ * Style are described in a object that uses the same attribute names as the normal DOM access.
+ *
+ * Here is an exaple of a style object:
+ * {
+ * backgroundColor: "#FF0000",
+ * color: "#FFFFFF"
+ * }
+ *
+ * @method setStyleList
+ * @param {Object} styleList Object describing the style to be applied to the object.
+ */
+Component.prototype.setStyleList = function(styleList)
+{
+	for(var i in styleList)
+	{
+		this.element.style[i] = styleList[i];
+	}
+};
+
+/**
  * Add and drag and drop default event prevention to this component.
  *
  * Usefull to avoid unwanted actions on draggable components. 
@@ -323,28 +345,6 @@ Component.prototype.setMode = function(mode)
 	this.element.style.top = null;
 	this.element.style.right = null;
 	this.element.style.left = null;
-};
-
-/**
- * Set the multiple styles to the DOM element.
- *
- * Style are described in a object that uses the same attribute names as the normal DOM access.
- *
- * Here is an exaple of a style object:
- * {
- * backgroundColor: "#FF0000",
- * color: "#FFFFFF"
- * }
- *
- * @method setStyleList
- * @param {Object} styleList Object describing the style to be applied to the object.
- */
-Component.prototype.setStyleList = function(styleList)
-{
-	for(var i in styleList)
-	{
-		this.element.style[i] = styleList[i];
-	}
 };
 
 /**

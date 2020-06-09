@@ -25,8 +25,6 @@ function ButtonIcon(parent)
 	this.icon.style.width = "70%";
 	this.icon.style.height = "70%";
 	this.element.appendChild(this.icon);
-
-	this.setColor(null, "var(--button-over-color)");
 }
 
 ButtonIcon.prototype = Object.create(Button.prototype);

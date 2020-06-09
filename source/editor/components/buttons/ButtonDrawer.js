@@ -67,19 +67,26 @@ function ButtonDrawer(parent)
 
 	this.element.onmouseenter = function()
 	{
-		self.element.style.backgroundColor = "var(--button-over-color)";
-		self.setExpanded(true);
+		if(self.disabled === false)
+		{
+			self.setExpanded(true);
+			self.setStyleList(self.overStyle);
+		}
 	};
 	this.element.onmouseleave = function()
 	{
-		self.element.style.backgroundColor = "var(--bar-color)";
 		self.setExpanded(false);
+		if(self.disabled === false)
+		{
+			self.setStyleList(self.baseStyle);
+		}
 	};
 
 	this.panel.element.onmouseenter = function()
 	{
 		self.setExpanded(true);
 	};
+
 	this.panel.element.onmouseleave = function()
 	{
 		self.setExpanded(false);
@@ -121,7 +128,6 @@ ButtonDrawer.prototype.insertOption = function(element)
 	element.attachTo(this.panel);
 	this.options.push(element);
 };
-
 
 /**
  * Add new option to the menu.
