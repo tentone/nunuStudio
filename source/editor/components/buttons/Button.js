@@ -11,6 +11,8 @@ function Button(parent)
 {
 	Component.call(this, parent, "div");
 
+	this.element.style.cursor = "pointer";
+
 	/**
 	 * If the button is disabled, it cannot be clicked.
 	 *
@@ -41,11 +43,11 @@ function Button(parent)
 	 * @attribute disabledStyle
 	 * @type {Object}
 	 */
-	this.disabledStyle = {};
+	this.disabledStyle = {backgroundColor: "var(--color-graph)"};
 
+	this.setStyleList(this.baseStyle);
 	this.preventDragEvents();
 
-	this.setStyle("cursor", "pointer");
 	this.element.onmouseenter = function()
 	{
 		if(self.disabled === false)
@@ -60,6 +62,8 @@ function Button(parent)
 			self.setStyleList(self.baseStyle);
 		}
 	};
+
+
 }
 
 Button.prototype = Object.create(Component.prototype);
@@ -105,8 +109,12 @@ Button.prototype.setDisabled = function(disabled)
 Button.prototype.setStyles = function(baseStyle, overStyle, disabledStyle)
 {
 	this.baseStyle = baseStyle;
-	this.overStyle = overStyle;
-	
+
+	if(overStyle !== undefined)
+	{
+		this.overStyle = overStyle;
+	}
+
 	if(disabledStyle !== undefined)
 	{
 		this.disabledStyle = disabledStyle;

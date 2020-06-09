@@ -709,7 +709,7 @@ function MainMenu(parent)
 		}
 	}, Global.FILE_PATH + "icons/misc/union.png");
 
-	var modifiers = editMenu.addMenu("Modifiers", Global.FILE_PATH + "icons/models/figures.png");
+	var modifiers = editMenu.addMenu(Locale.modifiers, Global.FILE_PATH + "icons/models/figures.png");
 
 	modifiers.addOption(Locale.simplify, function()
 	{
@@ -722,7 +722,6 @@ function MainMenu(parent)
 		var simplifier = new THREE.SimplifyModifier();
 
 		var level = parseFloat(Editor.prompt("Simplification level in %")) / 100;
-
 		if(isNaN(level) || level > 100 || level < 0)
 		{
 			Editor.alert("Level has to be a numeric value");
@@ -760,6 +759,62 @@ function MainMenu(parent)
 		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);
+	}, Global.FILE_PATH + "icons/models/figures.png");
+
+	modifiers.addOption(Locale.twist, function()
+	{
+		if(Editor.selection.length < 1 || Editor.selection[0].geometry === undefined)
+		{
+			Editor.alert(Locale.needsObjectGeometry);
+			return;
+		}
+
+		// Auxiliar method to twist the geometry
+		function twist(geometry, amountAngle, upVec)
+		{
+			if(upVec === undefined)
+			{
+				upVec = new THREE.Vector3(0, 1, 0);
+			}
+
+			var quaternion = new THREE.Quaternion();
+
+			for(var i = 0; i < geometry.vertices.length; i++)
+			{
+				var yPos = geometry.vertices[i].y;
+				quaternion.setFromAxisAngle(upVec, amountAngle * yPos);
+				geometry.vertices[i].applyQuaternion(quaternion);
+			}
+
+			geometry.verticesNeedUpdate = true;
+		}
+
+		var angle = parseFloat(Editor.prompt("Twist angle in radians", Math.PI / 2));
+		if(isNaN(angle) || angle < 0)
+		{
+			Editor.alert("Twist amount has to be a numeric value");
+			return;
+		}
+
+		var geometry;
+
+		if(Editor.selection[0].geometry instanceof THREE.BufferGeometry)
+		{
+			geometry = new THREE.Geometry();
+			geometry.fromBufferGeometry(Editor.selection[0].geometry);
+			geometry.mergeVertices();
+		}
+		else
+		{
+			geometry = Editor.selection[0].geometry.clone();
+		}
+		 
+
+		twist(geometry, angle);
+
+		var mesh = new Mesh(geometry, Editor.defaultMaterial);
+		Editor.addObject(mesh);
+
 	}, Global.FILE_PATH + "icons/models/figures.png");
 
 	// Compute mesh normals

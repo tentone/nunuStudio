@@ -14,7 +14,6 @@ function ButtonIconToggle(parent)
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
-	this.element.style.backgroundColor = "var(--bar-color)";
 
 	/**
 	 * Indicates if the toggle button is currently selected.
@@ -51,7 +50,11 @@ ButtonIconToggle.prototype = Object.create(ButtonIcon.prototype);
 ButtonIconToggle.prototype.setSelected = function(selected)
 {
 	this.selected = selected;
-	this.element.style.backgroundColor = this.selected ? "var(--button-over-color)" : "var(--bar-color)";
+
+	if(this.selected)
+	{
+		
+	}
 };
 
 /**

@@ -409,8 +409,10 @@ LocaleManager.register(
 	intersect: "Intersect",
 	simplify: "Simplify",
 	subdivide: "Subdivide",
+	twist: "Twist",
 
 	// Editor
+	modifiers: "Modifiers",
 	useTexture: "Use Texture",
 	configuration: "Configuration",
 	profiling: "Profiling",

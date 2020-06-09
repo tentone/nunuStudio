@@ -14,7 +14,6 @@ function ButtonDrawer(parent)
 	ButtonIcon.call(this, parent);
 
 	this.element.style.zIndex = "200";
-	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.overflow = "visible";
 
 	this.panel = new Component(this, "div");
