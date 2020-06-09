@@ -62,19 +62,51 @@ function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 	});
 }
 
-function formatNumber(number)
+/**
+ * Format a integer number to occupy at least n decimal places in a string.
+ *
+ * @param {number} number Input value.
+ * @param {number} places Count of decimal places.
+ * @param {string} The output number with decimal places added.
+ */
+function formatNumber(number, places)
 {
-	return ("0" + number).slice(-2);
+	if(places === undefined)
+	{
+		places = 2;
+	}
+
+	let str = number.toString();
+	while(str.length < places)
+	{
+		str = "0" + str;
+	}
+	return str;
 }
 
-function addTimestamp(keyword, code)
+/**
+ * Insert a timestamp into a file (replace a bit of text for the timestamp).
+ *
+ * @param keyword Keyword to be replaced by the timestamp.
+ * @param data Input text data to search the keyword and replace with the timestamp.
+ * @returns {string} Returns the data with the timescale placed.
+ */
+function addTimestamp(keyword, data)
 {
 	const date = new Date();
 	const timestamp = date.getFullYear() + formatNumber(date.getMonth() + 1) + formatNumber(date.getDate()) + formatNumber(date.getHours()) + formatNumber(date.getMinutes());
 
-	return code.replace(keyword, timestamp);
+	return data.replace(keyword, timestamp);
 }
 
+/**
+ * Compress/simplify CSS styles code using regex transforms.
+ *
+ * Removes comments spaces etc.
+ *
+ * @param {string} code Content of the CSS file.
+ * @return {string} The processed/simplified CSS code. 
+ */
 function compressCSS(code)
 {
 	code = code.replace(/\/\*(?:(?!\*\/)[\s\S])*\*\/|[\r\n\t]+/g, '');
@@ -86,16 +118,37 @@ function compressCSS(code)
 	return code;
 }
 
+/**
+ * Remove comments from javascript code using regex.
+ *
+ * @param {string} code Input javascript code.
+ * @return {string} The processed javascript code. 
+ */
 function removeJSComments(code)
 {
 	return code.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, "");
 }
 
+/**
+ * Remove console logs from javascript code using regex.
+ *
+ * @param {string} code Input javascript code.
+ * @return {string} The processed javascript code. 
+ */
 function removeLogs(code)
 {
 	return code.replace(/console\.(error|log|warn|info)(.*)\;/gi, "");
 }
 
+/**
+ * Join multiple source files from a source code path. Parses and loads the file recursive looking for include() calls.
+ *
+ * The files are joined in the same order as they are declared its does not parse any kind of JS, CSS, etc parsing.
+ *
+ * @param {string} path Path to the source code folder.
+ * @param {string} main Name of the main JS file.
+ * @return {Object} Object containing the final js and css code.
+ */
 function join(path, main)
 {
 	const code = readFile(main);
@@ -129,6 +182,13 @@ function join(path, main)
 	return {js: js, css: css};
 }
 
+/**
+ * Get includes from a javascript source code file, seraches for the include() method call.
+ *
+ * @param {string} code Javascript code to extract includes from.
+ * @param {Regex} regex Alternative regex to search for includes in the file.
+ * @return {string[]} List of includes found in the code.
+ */
 function getIncludes(code, regex)
 {
 	if(regex === undefined)
