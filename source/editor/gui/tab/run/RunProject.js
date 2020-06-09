@@ -44,10 +44,13 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.setImageScale(0.8, 0.8);
 	this.fullscreenButton.updateSize();
 	this.fullscreenButton.updatePosition(Component.BOTTOM_RIGHT);
-	this.fullscreenButton.setStyle("backgroundColor", "var(--panel-color)");
 	this.fullscreenButton.setStyle("borderRadius", "5px");
-	this.fullscreenButton.setStyle("opacity", 0.5);
 	this.fullscreenButton.setVisibility(true);
+
+	// TODO <USE BUTTON STYLES>
+	/*
+	this.fullscreenButton.setStyle("opacity", 0.5);
+	this.fullscreenButton.setStyle("backgroundColor", "var(--panel-color)");
 	this.fullscreenButton.element.onmouseenter = function()
 	{
 		this.style.opacity = 1.0;
@@ -56,6 +59,7 @@ function RunProject(parent, closeable, container, index)
 	{
 		this.style.opacity = 0.5;
 	};
+	*/
 
 	var fullscreen = true;
 	this.fullscreenButton.setOnClick(function()

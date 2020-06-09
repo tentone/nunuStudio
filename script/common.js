@@ -3,7 +3,6 @@ const path = require("path");
 
 module.exports = {
 	updateVersion: updateVersion,
-	writeFile: writeFile,
 	closure: closure,
 	addTimestamp: addTimestamp,
 	compressCSS: compressCSS,
@@ -26,7 +25,15 @@ module.exports = {
 
 const CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar";
 
-// Update the version of the library in the package.json and return updated data
+/**
+ * Update the version of the library by adding to the current version.
+ *
+ * @param {string} data The object with the current version of the application.
+ * @param {number} major How many to add to the major version.
+ * @param {number} minor How many to add to the minor version.
+ * @param {number} revision How many to add to the revision version.
+ * @return {string} Updated version data.
+ */
 function updateVersion(data, major, minor, revision)
 {
 	const subversions = data.version.split('.');
@@ -39,7 +46,9 @@ function updateVersion(data, major, minor, revision)
 	return data;
 }
 
-// Minify and optimize using closure
+/**
+ * Minify and optimize using the closure compiler. The compiler is fetched from the node_modules folder these need to be installed first.
+ */
 function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 {
 	const command = "java -jar " + CLOSURE_PATH + " --compilation_level " + level + " --warning_level QUIET --formatting " + formatting + " --language_in " + languageIn + " --language_out " + languageOut + " --js " + fileIn + " --js_output_file " + fileOut;
@@ -148,11 +157,23 @@ function getIncludes(code, regex)
 	return results;
 }
 
+/**
+ * Read file from path as text.
+ *
+ * @param fname Path of the file.
+ * @returns {string} Content of the file.
+ */
 function readFile(fname)
 {
 	return fs.readFileSync(fname, "utf8");
 }
 
+/**
+ * Write text file into the path, automatically creates the directories.
+ *
+ * @param fname Path to write the file.
+ * @param text File content
+ */
 function writeFile(fname, text)
 {
 	function checkDirectory(pathName)
