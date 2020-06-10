@@ -69,7 +69,7 @@ function ButtonDrawer(parent)
 		if(self.disabled === false)
 		{
 			self.setExpanded(true);
-			self.setStyleList(self.overStyle);
+			self.setStyles(self.overStyle);
 		}
 	};
 	this.element.onmouseleave = function()
@@ -77,7 +77,7 @@ function ButtonDrawer(parent)
 		self.setExpanded(false);
 		if(self.disabled === false)
 		{
-			self.setStyleList(self.baseStyle);
+			self.setStyles(self.baseStyle);
 		}
 	};
 

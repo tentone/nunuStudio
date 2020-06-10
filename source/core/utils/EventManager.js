@@ -3,8 +3,9 @@
 /**
  * EventManager is used to manager DOM events creationg and destruction in a single function call.
  *
- * It is used by objects to make it easier to add and remove events from global DOM objects.
+ * It is used by objects to make it easier to add, manager and remove events from DOM elements.
  *
+ * @constructor
  * @class EventManager
  * @module Utils
  */
@@ -22,7 +23,25 @@ function EventManager()
 }
 
 /**
- * Add new event to the manager.
+ * Add and create and event to the event manager.
+ *
+ * Creates the event and attaches it to the DOM element immediatly.
+ *
+ * @method addCreate
+ * @param {Component} target Event target element.
+ * @param {string} event Event name.
+ * @param {Function} callback Callback function.
+ */
+EventManager.prototype.addCreate = function(target, event, callback)
+{
+	var data = [target, event, callback, true];
+	data[0].addEventListener(data[1], data[2]);
+	data[3] = true;
+	this.events.push(data);
+};
+
+/**
+ * Add new event to the manager, the event is not created immediatly the create() method had to be called to create the event.
  *
  * @method add
  * @param {Component} target Event target element.
@@ -35,7 +54,7 @@ EventManager.prototype.add = function(target, event, callback)
 };
 
 /**
- * Destroys this manager and remove all events.
+ * Destroys this manager by stopping all event handlers and remove them from the manager.
  *
  * @method clear
  */
@@ -46,7 +65,9 @@ EventManager.prototype.clear = function()
 };
 
 /**
- * Creates all events in this manager.
+ * Creates the events in this manager by attaching them to the DOM elements.
+ *
+ * Uses the element.addEventListener() method to attach the event handlers.
  * 
  * @method create
  */
@@ -61,7 +82,11 @@ EventManager.prototype.create = function()
 };
 
 /**
- * Removes all events in this manager.
+ * Destroy all events in this manager, stop the events.
+ *
+ * Uses the element.removeEventListener() method to destroy the event handlers.
+ *
+ * Does not remove the events from the manager.
  * 
  * @method destroy
  */

@@ -25,16 +25,16 @@ function ButtonIconToggle(parent)
 
 	var self = this;
 
-	this.element.onclick = function()
+	this.event.addCreate(this.element, "click", function()
 	{
 		self.selected = !self.selected;
-	};
+	});
 
 	this.element.onmouseleave = function()
 	{
 		if(!self.selected)
 		{
-			self.setStyleList(self.baseStyle);
+			self.setStyles(self.baseStyle);
 		}
 	};
 }

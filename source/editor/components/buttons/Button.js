@@ -13,13 +13,21 @@ function Button(parent)
 
 	this.element.style.cursor = "pointer";
 
-	/**
-	 * If the button is disabled, it cannot be clicked.
-	 *
-	 * @attribute disabled
-	 * @type {boolean}
-	 */
-	this.disabled = false;
+	var disabled = false;
+	Object.defineProperties(this,
+	{
+		/**
+		 * If the button is disabled, it cannot be clicked.
+		 *
+		 * @attribute disabled
+		 * @type {boolean}
+		 */
+		disabled:
+		{
+			get: function(){return disabled;},
+			set: function(value){this.setDisabled(value);}
+		}
+	});
 
 	/**
 	 * Base style of the button shown normally.
@@ -45,25 +53,26 @@ function Button(parent)
 	 */
 	this.disabledStyle = {backgroundColor: "var(--color-graph)"};
 
-	this.setStyleList(this.baseStyle);
+	this.setStyles(this.baseStyle);
 	this.preventDragEvents();
 
-	this.element.onmouseenter = function()
-	{
-		if(self.disabled === false)
-		{
-			self.setStyleList(self.overStyle);
-		}
-	};
-	this.element.onmouseleave = function()
-	{
-		if(self.disabled === false)
-		{
-			self.setStyleList(self.baseStyle);
-		}
-	};
+	var self = this;
 
+	this.event.addCreate(this.element, "mouseenter", function()
+	{
+		if(!self.disabled)
+		{
+			self.setStyles(self.overStyle);
+		}
+	});
 
+	this.event.addCreate(this.element, "mouseleave", function()
+	{
+		if(!self.disabled)
+		{
+			self.setStyles(self.baseStyle);
+		}
+	});
 }
 
 Button.prototype = Object.create(Component.prototype);
@@ -82,19 +91,11 @@ Button.prototype.setDisabled = function(disabled)
 
 	if(this.disabled === true)
 	{
-		this.element.onclick = null;
-		for(var i in this.disabledStyle)
-		{
-			this.element.style[i] = this.disabledStyle[i];
-		}
+		this.setStyles(this.disabledStyle);
 	}
 	else
 	{
-		this.element.onclick = this.callback;
-		for(var i in this.baseStyle)
-		{
-			this.element.style[i] = this.baseStyle[i];
-		}
+		this.setStyles(this.baseStyle);
 	}
 };
 
@@ -119,6 +120,4 @@ Button.prototype.setStyles = function(baseStyle, overStyle, disabledStyle)
 	{
 		this.disabledStyle = disabledStyle;
 	}
-
-	this.setDisabled(this.disabled);
 };

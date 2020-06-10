@@ -23,6 +23,16 @@ function Component(parent, type)
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
 
+	/**
+	 * Event manager responsible for handling all events attached to this component.
+	 *
+	 * Allows children object types to expand the events of the object without overlap.
+	 *
+	 * @attribute event
+	 * @type {EventManager}
+	 */
+	this.event = new EventManager();
+
 	/** 
 	 * The parent element that contains this Component.
 	 *
@@ -110,7 +120,6 @@ Component.BOTTOM_LEFT = 2;
  */
 Component.BOTTOM_RIGHT = 3;
 
-
 Component.preventDefault = function(event)
 {
 	event.preventDefault();
@@ -164,10 +173,10 @@ Component.prototype.setStyle = function(attribute, value)
  * color: "#FFFFFF"
  * }
  *
- * @method setStyleList
+ * @method setStyles
  * @param {Object} styleList Object describing the style to be applied to the object.
  */
-Component.prototype.setStyleList = function(styleList)
+Component.prototype.setStyles = function(styleList)
 {
 	for(var i in styleList)
 	{
@@ -227,19 +236,17 @@ Component.prototype.setAltText = function(altText)
 	
 	this.element.style.pointerEvents = "auto"; 
 
-	// Mouse mouse move event
-	this.element.onmousemove = function(event)
+	this.event.addCreate(this.element, "mousemove", function(event)
 	{
 		element.style.display = "flex";
 		element.style.left = (event.clientX + 8) + "px";
 		element.style.top = (event.clientY - 20) + "px";
-	};
+	});
 
-	// Mouse out event
-	this.element.onmouseout = function()
+	this.event.addCreate(this.element, "mouseout", function()
 	{
 		element.style.display = "none";
-	};
+	});
 
 	return element;
 };

@@ -13,7 +13,6 @@ function AnimationClipButton(parent, editor, animation)
 	Component.call(this, parent, "div");
 
 	this.element.style.position = "relative";
-	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.width = "100%";
 	this.element.style.height = "30px";
 
