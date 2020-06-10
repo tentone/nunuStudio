@@ -13,7 +13,7 @@ function ButtonMenu(parent)
 {
 	ButtonText.call(this, parent);
 
-	this.span.style.textIndent = "25px";
+	this.text.span.style.textIndent = "25px";
 
 	/**
 	 * Icon DOM element displayed on the left side of the button.

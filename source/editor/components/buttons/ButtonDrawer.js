@@ -64,32 +64,31 @@ function ButtonDrawer(parent)
 
 	var self = this;
 
-	this.element.onmouseenter = function()
+	this.addEvent("mouseenter", function()
 	{
+		// TODO <REMOVE THIS>
+		console.log("Mouse enter, expand");
+
 		if(self.disabled === false)
 		{
 			self.setExpanded(true);
-			self.setStyles(self.overStyle);
 		}
-	};
-	this.element.onmouseleave = function()
+	});
+
+	this.addEvent("mouseleave", function()
 	{
 		self.setExpanded(false);
-		if(self.disabled === false)
-		{
-			self.setStyles(self.baseStyle);
-		}
-	};
+	});
 
-	this.panel.element.onmouseenter = function()
+	this.panel.addEvent("mouseenter", function()
 	{
 		self.setExpanded(true);
-	};
+	});
 
-	this.panel.element.onmouseleave = function()
+	this.panel.addEvent("mouseleave", function()
 	{
 		self.setExpanded(false);
-	};
+	});
 }
 
 ButtonDrawer.prototype = Object.create(ButtonIcon.prototype);

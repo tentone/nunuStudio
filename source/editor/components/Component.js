@@ -125,6 +125,18 @@ Component.preventDefault = function(event)
 	event.preventDefault();
 };
 
+/**
+ * Add a event to the component base element. The event is registered in the component event manager.
+ *
+ * @method addEvent
+ * @param {string} event Event name.
+ * @param {Function} callback Callback function passed to the event handler.
+ */
+Component.prototype.addEvent = function(event, callback)
+{
+	this.event.addCreate(this.element, event, callback);
+};
+
 /** 
  * Add a CSS class to the base DOM element of this Component.
  * 
@@ -174,13 +186,13 @@ Component.prototype.setStyle = function(attribute, value)
  * }
  *
  * @method setStyles
- * @param {Object} styleList Object describing the style to be applied to the object.
+ * @param {Object} styles Object describing the style to be applied to the object.
  */
-Component.prototype.setStyles = function(styleList)
+Component.prototype.setStyles = function(styles)
 {
-	for(var i in styleList)
+	for(var i in styles)
 	{
-		this.element.style[i] = styleList[i];
+		this.element.style[i] = styles[i];
 	}
 };
 
@@ -236,14 +248,14 @@ Component.prototype.setAltText = function(altText)
 	
 	this.element.style.pointerEvents = "auto"; 
 
-	this.event.addCreate(this.element, "mousemove", function(event)
+	this.addEvent("mousemove", function(event)
 	{
 		element.style.display = "flex";
 		element.style.left = (event.clientX + 8) + "px";
 		element.style.top = (event.clientY - 20) + "px";
 	});
 
-	this.event.addCreate(this.element, "mouseout", function()
+	this.addEvent("mouseout", function()
 	{
 		element.style.display = "none";
 	});
@@ -253,13 +265,15 @@ Component.prototype.setAltText = function(altText)
 
 /**
  * Set method to be called on component click.
+ *
+ * A "click" event is added to the component event manager. Multiple click events can coexist.
  * 
  * @method setOnClick
  * @param {Function} callback Function called when the component is clicked.
  */
 Component.prototype.setOnClick = function(callback)
 {
-	this.element.onclick = callback;
+	this.addEvent("click", callback);
 };
 
 /**

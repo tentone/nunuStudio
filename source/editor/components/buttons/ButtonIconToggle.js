@@ -25,18 +25,18 @@ function ButtonIconToggle(parent)
 
 	var self = this;
 
-	this.event.addCreate(this.element, "click", function()
+	this.addEvent("click", function()
 	{
 		self.selected = !self.selected;
 	});
 
-	this.element.onmouseleave = function()
+	this.addEvent("mouseleave", function()
 	{
-		if(!self.selected)
+		if(!self.selected && !self.disabled)
 		{
 			self.setStyles(self.baseStyle);
 		}
-	};
+	});
 }
 
 ButtonIconToggle.prototype = Object.create(ButtonIcon.prototype);

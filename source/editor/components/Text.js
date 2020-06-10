@@ -101,7 +101,7 @@ Text.prototype.allowWordBreak = function(value)
 };
 
 /**
- * Set text.
+ * Set text displayed in the component.
  *
  * @method setText
  * @param {string} text Text. 
@@ -112,7 +112,7 @@ Text.prototype.setText = function(text)
 };
 
 /**
- * Set text border.
+ * Set text border size in px. The border is set as a solid centered shadow with a defined color.
  *
  * @method setTextBorder
  * @param {number} size Border size in pixels.

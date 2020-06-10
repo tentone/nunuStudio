@@ -29,7 +29,7 @@ ToolBarGroup.prototype = Object.create(Component.prototype);
 ToolBarGroup.prototype.addToggleOption = function(text, icon, callback)
 {
 	var button = new ToolBarToogleButton(this);
-	button.setText(text);
+	button.text.setText(text);
 	button.setImage(icon);
 	button.size.set(this.size.y, this.size.y);
 	button.position.set(this.buttons.length * this.size.y, 0);
@@ -51,7 +51,7 @@ ToolBarGroup.prototype.addToggleOption = function(text, icon, callback)
 ToolBarGroup.prototype.addOption = function(text, icon, callback)
 {
 	var button = new ToolBarButton(this);
-	button.setText(text);
+	button.text.setText(text);
 	button.setImage(icon);
 	button.size.set(this.size.y, this.size.y);
 	button.position.set(this.buttons.length * this.size.y, 0);

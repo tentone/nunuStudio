@@ -46,7 +46,7 @@ function CameraEditor(parent, closeable, container, index)
 	{
 		var button = new ButtonText(self.form);
 		button.size.set(100, 18);
-		button.setText(name);
+		button.text.setText(name);
 		button.setOnClick(function()
 		{
 			var pass = new PassConstructor();

@@ -70,8 +70,8 @@ ContextMenu.prototype.addOption = function(name, callback)
 {
 	var button = new ButtonMenu(this);
 	button.element.style.zIndex = "10000";
-	button.setText(name);
-	button.setAlignment(Text.LEFT);
+	button.text.setText(name);
+	button.text.setAlignment(Text.LEFT);
 	button.position.x = 25;
 
 	var self = this;

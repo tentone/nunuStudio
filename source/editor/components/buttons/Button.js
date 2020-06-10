@@ -58,15 +58,18 @@ function Button(parent)
 
 	var self = this;
 
-	this.event.addCreate(this.element, "mouseenter", function()
+	this.addEvent("mouseenter", function()
 	{
+		// TODO <REMOVE THIS>
+		console.log("Mouse enter, set style");
+
 		if(!self.disabled)
 		{
 			self.setStyles(self.overStyle);
 		}
 	});
 
-	this.event.addCreate(this.element, "mouseleave", function()
+	this.addEvent("mouseleave", function()
 	{
 		if(!self.disabled)
 		{

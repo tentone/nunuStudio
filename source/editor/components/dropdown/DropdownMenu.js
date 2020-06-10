@@ -83,27 +83,27 @@ function DropdownMenu(parent)
 
 	var self = this;
 
-	this.element.onmouseenter = function()
+	this.addEvent("mouseenter", function()
 	{
 		self.setExpanded(true);
 		self.element.style.backgroundColor = "var(--button-over-color)";
-	};
+	});
 
-	this.element.onmouseleave = function()
+	this.addEvent("mouseleave", function()
 	{
 		self.setExpanded(false);
 		self.element.style.backgroundColor = "var(--bar-color)";
-	};
+	});
 	
-	this.panel.element.onmouseenter = function()
+	this.panel.addEvent("mouseenter", function()
 	{
 		self.setExpanded(true);
-	};
+	});
 
-	this.panel.element.onmouseleave = function()
+	this.panel.addEvent("mouseleave", function()
 	{
 		self.setExpanded(false);
-	};
+	});
 }
 
 DropdownMenu.DOWN = 0;
@@ -184,8 +184,8 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 {
 	var button = new ButtonMenu(this.panel);
 	button.element.style.zIndex = "200";
-	button.setText(name);
-	button.setAlignment(Text.LEFT);
+	button.text.setText(name);
+	button.text.setAlignment(Text.LEFT);
 	button.position.set(25, 0);
 
 	var self = this;
