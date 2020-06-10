@@ -69,6 +69,13 @@ function DropdownMenu(parent)
 	 * @type {boolean}
 	 */
 	this.expanded = false;
+
+	/**
+	 * Size of each dropdown menu option.
+	 *
+	 * @attribute optionsSize
+	 * @type {THREE.Vector2}
+	 */
 	this.optionsSize = new THREE.Vector2(150, 20);
 
 	/**

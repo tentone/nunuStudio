@@ -26,7 +26,9 @@ function Component(parent, type)
 	/**
 	 * Event manager responsible for handling all events attached to this component.
 	 *
-	 * Allows children object types to expand the events of the object without overlap.
+	 * Allows children object types to expand the events of the object without overlapping event names.
+	 *
+	 * Only the events of this component should be put here. Avoid mixing events of different components across event handlers.
 	 *
 	 * @attribute event
 	 * @type {EventManager}
@@ -134,7 +136,31 @@ Component.preventDefault = function(event)
  */
 Component.prototype.addEvent = function(event, callback)
 {
-	this.event.addCreate(this.element, event, callback);
+	this.event.addAndCreate(this.element, event, callback);
+};
+
+/**
+ * Remove all ocurrences of a event from the component. 
+ *
+ * @method removeEvent
+ * @param {string} event Event name.
+ */
+Component.prototype.removeEvent = function(event)
+{
+	this.event.remove(this.element, event);
+};
+
+/**
+ * Replace all instance of a specific event with a new event.
+ *
+ * @method replaceEvent
+ * @param {string} event Event name.
+ * @param {Function} callback Callback function passed to the event handler.
+ */
+Component.prototype.replaceEvent = function(event, callback)
+{
+	this.event.remove(this.element, event);
+	this.event.addAndCreate(this.element, event, callback);
 };
 
 /** 

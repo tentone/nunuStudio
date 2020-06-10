@@ -69,8 +69,8 @@ ContextMenu.prototype.removeOption = function(index)
 ContextMenu.prototype.addOption = function(name, callback)
 {
 	var button = new ButtonMenu(this);
-	button.element.style.zIndex = "10000";
-	button.text.setText(name);
+	button.setStyle("zIndex", "10000");
+	button.setText(name);
 	button.text.setAlignment(Text.LEFT);
 	button.position.x = 25;
 
@@ -80,7 +80,7 @@ ContextMenu.prototype.addOption = function(name, callback)
 		callback();
 		self.destroy();
 	});
-
+	
 	this.options.push(button);
 };
 

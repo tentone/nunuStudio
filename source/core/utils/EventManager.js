@@ -28,11 +28,11 @@ function EventManager()
  * Creates the event and attaches it to the DOM element immediatly.
  *
  * @method addCreate
- * @param {Component} target Event target element.
+ * @param {Element} target Event target element.
  * @param {string} event Event name.
  * @param {Function} callback Callback function.
  */
-EventManager.prototype.addCreate = function(target, event, callback)
+EventManager.prototype.addAndCreate = function(target, event, callback)
 {
 	var data = [target, event, callback, true];
 	data[0].addEventListener(data[1], data[2]);
@@ -40,11 +40,38 @@ EventManager.prototype.addCreate = function(target, event, callback)
 	this.events.push(data);
 };
 
+
+/**
+ * Remove and destroy event(s) from a DOM element and from the manager.
+ *
+ * @method remove
+ * @param {Element} target Event target element to remove elements from.
+ * @param {string} event Event name to be removed.
+ */
+EventManager.prototype.remove = function(target, event)
+{
+	for(var i = this.events.length - 1; i >= 0; i--)
+	{
+		// Check if the target and event matches
+		if(this.events[i][1] === target && this.events[i][2] === event)
+		{
+			// Destroy event if it is active
+			if(this.events[i][3])
+			{
+				this.events[i][0].removeEventListener(this.events[i][1], this.events[i][2]);
+			}
+
+			this.events.splice(i, 1);
+		}
+	}
+};
+
+
 /**
  * Add new event to the manager, the event is not created immediatly the create() method had to be called to create the event.
  *
  * @method add
- * @param {Component} target Event target element.
+ * @param {Element} target Event target element.
  * @param {string} event Event name.
  * @param {Function} callback Callback function.
  */
@@ -104,7 +131,7 @@ EventManager.prototype.destroy = function()
  * Add a scroll event to a target element.
  *
  * @method addScrollEvent
- * @param {Component} target Event target element.
+ * @param {Element} target Event target element.
  * @param {Function} callback Callback function.
  */
 EventManager.prototype.addScrollEvent = function(target, callback)

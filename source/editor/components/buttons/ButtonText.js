@@ -12,9 +12,6 @@
 function ButtonText(parent)
 {
 	Button.call(this, parent);
-	
-	this.element.style.display = "flex";
-	this.element.style.pointerEvents = "auto";
 
 	this.text = new Text(this);
 }

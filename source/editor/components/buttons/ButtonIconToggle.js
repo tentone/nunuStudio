@@ -30,7 +30,7 @@ function ButtonIconToggle(parent)
 		self.selected = !self.selected;
 	});
 
-	this.addEvent("mouseleave", function()
+	this.replaceEvent("mouseleave", function()
 	{
 		if(!self.selected && !self.disabled)
 		{
