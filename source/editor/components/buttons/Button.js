@@ -60,9 +60,6 @@ function Button(parent)
 
 	this.addEvent("mouseenter", function()
 	{
-		// TODO <REMOVE THIS>
-		console.log("Mouse enter, set style", self, self.overStyle);
-
 		if(!self.disabled)
 		{
 			self.setStyles(self.overStyle);
@@ -103,16 +100,19 @@ Button.prototype.setDisabled = function(disabled)
 };
 
 /**
- * Set button styles, the style can be descriped in a object.
+ * Updates the buttons styles can also change them providing new ones as parameters.
  *
- * @method setColor
+ * @method updateSyles
  * @param {Object} baseStyle Style to be applied as base.
  * @param {Object} overStyle Style to be applied when mouse is over.
- * @param {Object} overStyle Style to be applied when the button is disabled.
+ * @param {Object} disabledStyle Style to be applied when the button is disabled.
  */
-Button.prototype.setStyles = function(baseStyle, overStyle, disabledStyle)
+Button.prototype.updateSyles = function(baseStyle, overStyle, disabledStyle)
 {
-	this.baseStyle = baseStyle;
+	if(baseStyle !== undefined)
+	{
+		this.baseStyle = baseStyle;
+	}
 
 	if(overStyle !== undefined)
 	{
