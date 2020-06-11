@@ -793,8 +793,10 @@ function MainMenu(parent)
 			return;
 		}
 
-		Editor.selection[0].geometry.computeVertexNormals();
 
+		var geometry = Editor.selection[0].geometry.clone();
+		geometry.computeVertexNormals();
+		Editor.addAction(new ChangeAction(Editor.selection[0], "geometry", geometry));
 	}, Global.FILE_PATH + "icons/misc/probe.png");
 
 	// Apply tranformation

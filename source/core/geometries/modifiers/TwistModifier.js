@@ -7,10 +7,10 @@
  *
  * @class TwistModifier
  */
-function TwistModifier()
+function TwistModifier(angle, start, end)
 {
 	/**
-	 * Twist direction vector.
+	 * Twist direction vector, the twist is performed around this vector in its direction.
 	 *
 	 * @attribute direction
 	 * @type {THREE.Vector3}
@@ -18,12 +18,32 @@ function TwistModifier()
 	this.direction = new THREE.Vector3(0, 1, 0);
 
 	/**
-	 * Twist angle of rotation.
+	 * Twist angle of rotation, applied from the start to the end of rotation.
 	 *
 	 * @attribute angle
 	 * @type {number}
 	 */
-	this.angle = Math.PI;
+	this.angle = angle !== undefined ? angle : Math.PI;
+
+	/**
+	 * Start height of the twist rotation.
+	 *
+	 * This values is in geometry coordinate space.
+	 *
+	 * @attribute start
+	 * @type {number}
+	 */
+	this.start = start !== undefined ? start : 0;
+
+	/*
+	 * End height of the twist rotation.
+	 *
+	 * This values is in geometry coordinate space.
+	 *
+	 * @attribute end
+	 * @type {number}
+	 */
+	this.end = end !== undefined ? end : 1;
 }
 
 /**
@@ -52,9 +72,12 @@ TwistModifier.prototype.modify = function(geometry)
 
 	for(var i = 0; i < geometry.vertices.length; i++)
 	{
-		var yPos = geometry.vertices[i].y;
-		quaternion.setFromAxisAngle(this.direction, this.angle * yPos);
-		geometry.vertices[i].applyQuaternion(quaternion);
+		var y = geometry.vertices[i].y;
+		if(y >= this.start && y <= this.end)
+		{
+			quaternion.setFromAxisAngle(this.direction, this.angle * y);
+			geometry.vertices[i].applyQuaternion(quaternion);
+		}
 	}
 
 	geometry.verticesNeedUpdate = true;
