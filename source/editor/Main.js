@@ -159,6 +159,8 @@ include("source/core/geometries/CapsuleBufferGeometry.js");
 include("source/core/geometries/RoundedBoxBufferGeometry.js");
 include("source/core/geometries/TerrainBufferGeometry.js");
 
+include("source/core/geometries/modifiers/TwistModifier.js");
+
 include("source/core/objects/device/LeapMotion.js");
 
 include("source/core/objects/device/LeapMotion.js");

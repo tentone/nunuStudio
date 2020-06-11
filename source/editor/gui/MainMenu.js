@@ -769,25 +769,6 @@ function MainMenu(parent)
 			return;
 		}
 
-		// Auxiliar method to twist the geometry
-		function twist(geometry, amountAngle, upVec)
-		{
-			if(upVec === undefined)
-			{
-				upVec = new THREE.Vector3(0, 1, 0);
-			}
-
-			var quaternion = new THREE.Quaternion();
-
-			for(var i = 0; i < geometry.vertices.length; i++)
-			{
-				var yPos = geometry.vertices[i].y;
-				quaternion.setFromAxisAngle(upVec, amountAngle * yPos);
-				geometry.vertices[i].applyQuaternion(quaternion);
-			}
-
-			geometry.verticesNeedUpdate = true;
-		}
 
 		var angle = parseFloat(Editor.prompt("Twist angle in radians", Math.PI / 2));
 		if(isNaN(angle) || angle < 0)
@@ -796,26 +777,12 @@ function MainMenu(parent)
 			return;
 		}
 
-		var geometry;
-
-		if(Editor.selection[0].geometry instanceof THREE.BufferGeometry)
-		{
-			geometry = new THREE.Geometry();
-			geometry.fromBufferGeometry(Editor.selection[0].geometry);
-			geometry.mergeVertices();
-		}
-		else
-		{
-			geometry = Editor.selection[0].geometry.clone();
-		}
-		 
-
-		twist(geometry, angle);
-
+		var modifier = new TwistModifier();
+		modifier.angle = angle;
+		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);
-
-	}, Global.FILE_PATH + "icons/models/figures.png");
+	}, Global.FILE_PATH + "icons/models/twist.png");
 
 	// Compute mesh normals
 	editMenu.addOption(Locale.computeNormals, function()
