@@ -3,10 +3,16 @@
 /**
  * Terrrain geometry is a plane like geometry deformed by a height map texture.
  *
- * This geometry type can be used to create large terrains.
+ * This geometry type can be used to create large terrains. Its possible to generate the height data using scripts and create terrain dynamically.
  *
  * @class TerrainBufferGeometry
  * @constructor
+ * @param {number} width Width of the terrain.
+ * @param {number} height Height of the terrain.
+ * @param {number} widthSegments How many segments compose the terrain width.
+ * @param {number} heightSegments How many segments compose the terrain height.
+ * @param {number} scale Scale of the terrain in height (maximum altitude of the terrain).
+ * @param {Image} image Image containing the height data of the terrain.
  */
 function TerrainBufferGeometry(width, height, widthSegments, heightSegments, scale, image)
 {

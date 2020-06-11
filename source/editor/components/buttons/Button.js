@@ -13,47 +13,44 @@ function Button(parent)
 
 	this.element.style.cursor = "pointer";
 
+	/**
+	 * If the button is disabled, it cannot be clicked.
+	 *
+	 * @attribute disabled
+	 * @type {boolean}
+	 */
 	var disabled = false;
-	Object.defineProperties(this,
+	Object.defineProperty(this, "disabled",
 	{
-		/**
-		 * If the button is disabled, it cannot be clicked.
-		 *
-		 * @attribute disabled
-		 * @type {boolean}
-		 */
-		disabled:
-		{
-			get: function(){return disabled;},
-			set: function(value){this.setDisabled(value);}
-		}
+		get: function(){return disabled;},
+		set: function(value){this.setDisabled(value);}
 	});
 
 	/**
 	 * Base style of the button shown normally.
 	 *
-	 * @attribute baseStyle
+	 * @attribute styleBase
 	 * @type {Object}
 	 */
-	this.baseStyle = {backgroundColor: "var(--bar-color)"};
+	this.styleBase = {backgroundColor: "var(--bar-color)"};
 
 	/**
 	 * Base style of the button shown when the mouse is over the button.
 	 *
-	 * @attribute overStyle
+	 * @attribute stylePointerOver
 	 * @type {Object}
 	 */
-	this.overStyle = {backgroundColor: "var(--button-over-color)"};
+	this.stylePointerOver = {backgroundColor: "var(--button-over-color)"};
 
 	/**
 	 * Disabled style shown when the button is disabled.
 	 *
-	 * @attribute disabledStyle
+	 * @attribute styleDisabled
 	 * @type {Object}
 	 */
-	this.disabledStyle = {backgroundColor: "var(--color-graph)"};
+	this.styleDisabled = {backgroundColor: "var(--color-graph)"};
 
-	this.setStyles(this.baseStyle);
+	this.setStyles(this.styleBase);
 	this.preventDragEvents();
 
 	var self = this;
@@ -62,15 +59,18 @@ function Button(parent)
 	{
 		if(!self.disabled)
 		{
-			self.setStyles(self.overStyle);
+			self.setStyles(self.stylePointerOver);
 		}
 	});
 
 	this.addEvent("mouseleave", function()
 	{
+		// TODO <REMOVE THIS>
+		console.log("mouse leave");
+
 		if(!self.disabled)
 		{
-			self.setStyles(self.baseStyle);
+			self.setStyles(self.styleBase);
 		}
 	});
 }
@@ -91,11 +91,11 @@ Button.prototype.setDisabled = function(disabled)
 
 	if(this.disabled === true)
 	{
-		this.setStyles(this.disabledStyle);
+		this.setStyles(this.styleDisabled);
 	}
 	else
 	{
-		this.setStyles(this.baseStyle);
+		this.setStyles(this.styleBase);
 	}
 };
 
@@ -103,24 +103,24 @@ Button.prototype.setDisabled = function(disabled)
  * Updates the buttons styles can also change them providing new ones as parameters.
  *
  * @method updateSyles
- * @param {Object} baseStyle Style to be applied as base.
- * @param {Object} overStyle Style to be applied when mouse is over.
- * @param {Object} disabledStyle Style to be applied when the button is disabled.
+ * @param {Object} styleBase Style to be applied as base.
+ * @param {Object} stylePointerOver Style to be applied when mouse is over.
+ * @param {Object} styleDisabled Style to be applied when the button is disabled.
  */
-Button.prototype.updateSyles = function(baseStyle, overStyle, disabledStyle)
+Button.prototype.updateSyles = function(styleBase, stylePointerOver, styleDisabled)
 {
-	if(baseStyle !== undefined)
+	if(styleBase !== undefined)
 	{
-		this.baseStyle = baseStyle;
+		this.styleBase = styleBase;
 	}
 
-	if(overStyle !== undefined)
+	if(stylePointerOver !== undefined)
 	{
-		this.overStyle = overStyle;
+		this.stylePointerOver = stylePointerOver;
 	}
 
-	if(disabledStyle !== undefined)
+	if(styleDisabled !== undefined)
 	{
-		this.disabledStyle = disabledStyle;
+		this.styleDisabled = styleDisabled;
 	}
 };

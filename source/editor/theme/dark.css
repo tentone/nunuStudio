@@ -1,8 +1,10 @@
 :root {
+	/* Fonts */
 	--font-main-family: "Arial";
 	--font-main-color: #FFFFFF;
 	--font-main-size: 12px;
 
+	/* GUI Color Palette */
 	--color-light: #FFFFFF;
 	--color-graph: #AAAAAA;
 	--button-over-color: #555555;
@@ -13,11 +15,13 @@
 	--color-black: #000000;
 	--color-black-alpha-20: #00000033;
 
-	--color--red: "#FF0000";
-	--color--green: "#00FF00";
-	--color--blue: "#0000FF";
-	--color--yellow: "#FFFF00";
+	/* Solid Colors */
+	--color-red: "#FF0000";
+	--color-green: "#00FF00";
+	--color-blue: "#0000FF";
+	--color-yellow: "#FFFF00";
 
+	/* Console Colors */
 	--color-console-error: "#FF0000";
 	--color-console-error-background: "#FF000022";
 	--color-console-warn: "#FFFF00";

@@ -4,70 +4,55 @@
  * A image button that can be toggled.
  * 
  * @class ButtonIconToggle
- * @extends {ButtonIcon}
+ * @extends {ButtonToggle}
  * @param {Component} parent Parent element.
  */
 function ButtonIconToggle(parent)
 {
-	ButtonIcon.call(this, parent);
+	ButtonToggle.call(this, parent);
 
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
 
 	/**
-	 * Indicates if the toggle button is currently selected.
-	 *
-	 * @attribute selected
-	 * @type {boolean}
+	 * Icon of the button displayed in the middle.
+	 * 
+	 * @attribute icon
+	 * @type {Component}
 	 */
-	this.selected = false;
-
-	var self = this;
-
-	this.addEvent("click", function()
-	{
-		self.selected = !self.selected;
-	});
-
-	this.replaceEvent("mouseleave", function()
-	{
-		if(!self.selected && !self.disabled)
-		{
-			self.setStyles(self.baseStyle);
-		}
-	});
+	this.icon = document.createElement("img");
+	this.icon.style.pointerEvents = "none";
+	this.icon.style.position = "absolute";
+	this.icon.style.top = "15%";
+	this.icon.style.left = "15%";
+	this.icon.style.width = "70%";
+	this.icon.style.height = "70%";
+	this.element.appendChild(this.icon);
 }
 
-ButtonIconToggle.prototype = Object.create(ButtonIcon.prototype);
+ButtonIconToggle.prototype = Object.create(ButtonToggle.prototype);
 
 /**
- * Set the seleted state of the toggle button.
- * 
- * @method setSelected
- * @param {boolean} selected
+ * Set button drawer icon.
+ *
+ * @method setImage
+ * @param {string} image Image URL.
  */
-ButtonIconToggle.prototype.setSelected = function(selected)
+ButtonIconToggle.prototype.setImage = function(image)
 {
-	this.selected = selected;
-
-	if(this.selected)
-	{
-		
-	}
+	this.icon.src = image;
 };
 
 /**
- * Set button callback function.
+ * Set icon scale, the icon will be centered.
  *
- * @method setOnClick
+ * @method setImageScale
  */
-ButtonIconToggle.prototype.setOnClick = function(callback)
+ButtonIconToggle.prototype.setImageScale = function(x, y)
 {
-	var self = this;
-	this.element.onclick = function()
-	{
-		self.selected = !self.selected;
-		callback();	
-	};
+	this.icon.style.top = ((1 - y) / 2 * 100) + "%";
+	this.icon.style.left = ((1 - x) / 2 * 100) + "%";
+	this.icon.style.width = (x * 100) + "%";
+	this.icon.style.height = (y * 100) + "%";
 };

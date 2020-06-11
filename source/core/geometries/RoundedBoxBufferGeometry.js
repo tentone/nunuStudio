@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Rounded corners box buffer geometry.
+ * Rounded corners box buffer geometry, composed of a box with spherical corners and cylindrical edges.
+ *
+ * The rounded parts of the geometry can be configured in detail level.
  *
  * @author pailhead / http://dusanbosnjak.com
  * @class RoundedBoxBufferGeometry

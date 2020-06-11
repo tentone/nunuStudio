@@ -358,10 +358,11 @@ include("source/editor/components/ImageContainer.js");
 include("source/editor/components/SearchBox.js");
 
 include("source/editor/components/buttons/Button.js");
+include("source/editor/components/buttons/ButtonToggle.js");
 include("source/editor/components/buttons/ButtonText.js");
 include("source/editor/components/buttons/ButtonIcon.js");
-include("source/editor/components/buttons/ButtonDrawer.js");
 include("source/editor/components/buttons/ButtonIconToggle.js");
+include("source/editor/components/buttons/ButtonDrawer.js");
 
 include("source/editor/components/dropdown/ContextMenu.js");
 include("source/editor/components/dropdown/DropdownMenu.js");

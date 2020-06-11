@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Capsule like geometry, with configurable top and bottom sizes.
+ * Capsule like geometry shape consisting of a cylinder with hemispherical ends.
+ *
+ * The geometry is fully configurable booth in size and details, and can also be used to generate sections of capsule.
  *
  * @author maximequiblier
  * @class CapsuleBufferGeometry
