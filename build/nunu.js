@@ -7751,30 +7751,30 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     a[8] *= h;
     return this;
   }, determinant:function() {
-    var h = this.elements, a = h[0], b = h[1], c = h[2], e = h[3], d = h[4], m = h[5], g = h[6], l = h[7];
+    var a = this.elements, b = a[0], c = a[1], e = a[2], d = a[3], m = a[4], g = a[5], l = a[6], k = a[7];
+    a = a[8];
+    return b * m * a - b * g * k - c * d * a + c * g * l + e * d * k - e * m * l;
+  }, getInverse:function(a, b) {
+    void 0 !== b && console.warn("THREE.Matrix3: .getInverse() can no longer be configured to throw on degenerate.");
+    var h = a.elements;
+    a = this.elements;
+    b = h[0];
+    var c = h[1], e = h[2], d = h[3], u = h[4], m = h[5], g = h[6], l = h[7];
     h = h[8];
-    return a * d * h - a * m * l - b * e * h + b * m * g + c * e * l - c * d * g;
-  }, getInverse:function(h, a) {
-    void 0 !== a && console.warn("THREE.Matrix3: .getInverse() can no longer be configured to throw on degenerate.");
-    var b = h.elements;
-    h = this.elements;
-    a = b[0];
-    var c = b[1], e = b[2], d = b[3], u = b[4], m = b[5], g = b[6], l = b[7];
-    b = b[8];
-    var k = b * u - m * l, f = m * g - b * d, r = l * d - u * g, n = a * k + c * f + e * r;
+    var k = h * u - m * l, f = m * g - h * d, r = l * d - u * g, n = b * k + c * f + e * r;
     if (0 === n) {
       return this.set(0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
     n = 1 / n;
-    h[0] = k * n;
-    h[1] = (e * l - b * c) * n;
-    h[2] = (m * c - e * u) * n;
-    h[3] = f * n;
-    h[4] = (b * a - e * g) * n;
-    h[5] = (e * d - m * a) * n;
-    h[6] = r * n;
-    h[7] = (c * g - l * a) * n;
-    h[8] = (u * a - c * d) * n;
+    a[0] = k * n;
+    a[1] = (e * l - h * c) * n;
+    a[2] = (m * c - e * u) * n;
+    a[3] = f * n;
+    a[4] = (h * b - e * g) * n;
+    a[5] = (e * d - m * b) * n;
+    a[6] = r * n;
+    a[7] = (c * g - l * b) * n;
+    a[8] = (u * b - c * d) * n;
     return this;
   }, transpose:function() {
     var a = this.elements;
@@ -14560,9 +14560,9 @@ NunuApp.prototype.toggleFullscreen = function(a) {
     ja.prototype.fromJSON.call(this, a);
     this.autoClose = a.autoClose;
     this.curves = [];
-    for (var b = 0, h = a.curves.length; b < h; b++) {
-      var c = a.curves[b];
-      this.curves.push((new wh[c.type]).fromJSON(c));
+    for (var b = 0, c = a.curves.length; b < c; b++) {
+      var h = a.curves[b];
+      this.curves.push((new wh[h.type]).fromJSON(h));
     }
     return this;
   }});
@@ -36500,20 +36500,20 @@ var __extends = this && this.__extends || function() {
       return null;
     };
     d.prototype.containsPointPolygon = function(a, e, d) {
-      for (var c = a.length, l = c - 2, k = !1, g = 0; g < c; g += 2) {
-        var f = a[g + 1], b = a[l + 1];
-        if (f < d && b >= d || b < d && f >= d) {
+      for (var c = a.length, l = c - 2, f = !1, g = 0; g < c; g += 2) {
+        var k = a[g + 1], b = a[l + 1];
+        if (k < d && b >= d || b < d && k >= d) {
           var m = a[g];
-          m + (d - f) / (b - f) * (a[l] - m) < e && (k = !k);
+          m + (d - k) / (b - k) * (a[l] - m) < e && (f = !f);
         }
         l = g;
       }
-      return k;
+      return f;
     };
     d.prototype.intersectsSegment = function(a, e, d, c) {
-      for (var l = this.polygons, k = 0, g = l.length; k < g; k++) {
-        if (this.intersectsSegmentPolygon(l[k], a, e, d, c)) {
-          return this.boundingBoxes[k];
+      for (var l = this.polygons, f = 0, g = l.length; f < g; f++) {
+        if (this.intersectsSegmentPolygon(l[f], a, e, d, c)) {
+          return this.boundingBoxes[f];
         }
       }
       return null;
@@ -36557,21 +36557,21 @@ var __extends = this && this.__extends || function() {
       this.clippedTriangles = [];
       this.scratch = [];
     }
-    d.prototype.clipStart = function(k, e) {
+    d.prototype.clipStart = function(f, e) {
       if (null != this.clipAttachment) {
         return 0;
       }
       this.clipAttachment = e;
       var l = e.worldVerticesLength, c = a.Utils.setArraySize(this.clippingPolygon, l);
-      e.computeWorldVertices(k, 0, l, c, 0, 2);
-      k = this.clippingPolygon;
-      d.makeClockwise(k);
-      k = this.clippingPolygons = this.triangulator.decompose(k, this.triangulator.triangulate(k));
+      e.computeWorldVertices(f, 0, l, c, 0, 2);
+      f = this.clippingPolygon;
+      d.makeClockwise(f);
+      f = this.clippingPolygons = this.triangulator.decompose(f, this.triangulator.triangulate(f));
       e = 0;
-      for (l = k.length; e < l; e++) {
-        c = k[e], d.makeClockwise(c), c.push(c[0]), c.push(c[1]);
+      for (l = f.length; e < l; e++) {
+        c = f[e], d.makeClockwise(c), c.push(c[0]), c.push(c[1]);
       }
-      return k.length;
+      return f.length;
     };
     d.prototype.clipEndWithSlot = function(a) {
       null != this.clipAttachment && this.clipAttachment.endSlot == a.data && this.clipEnd();
@@ -41580,11 +41580,11 @@ var __extends = this && this.__extends || function() {
       return n;
     }
     var t = d("../check"), g = d("../glyphset"), n = d("../parse"), b = d("../path");
-    k.parse = function(b, c, e, d) {
-      var f, k = new g.GlyphSet(d);
-      for (f = 0; f < e.length - 1; f += 1) {
-        var m = e[f];
-        m !== e[f + 1] ? k.push(f, g.ttfGlyphLoader(d, f, l, b, c + m, p)) : k.push(f, g.glyphLoader(d, f));
+    k.parse = function(b, c, d, e) {
+      var f, k = new g.GlyphSet(e);
+      for (f = 0; f < d.length - 1; f += 1) {
+        var m = d[f];
+        m !== d[f + 1] ? k.push(f, g.ttfGlyphLoader(e, f, l, b, c + m, p)) : k.push(f, g.glyphLoader(e, f));
       }
       return k;
     };
@@ -41592,36 +41592,36 @@ var __extends = this && this.__extends || function() {
     function e(b, c) {
       b = new n.Parser(b, c);
       c = b.parseUShort();
-      for (var e = [], d = 0; c > d; d++) {
-        e[b.parseTag()] = {offset:b.parseUShort()};
+      for (var d = [], e = 0; c > e; e++) {
+        d[b.parseTag()] = {offset:b.parseUShort()};
       }
-      return e;
+      return d;
     }
     function l(b, c) {
       b = new n.Parser(b, c);
-      var e = b.parseUShort();
+      var d = b.parseUShort();
       c = b.parseUShort();
-      if (1 === e) {
+      if (1 === d) {
         return b.parseUShortList(c);
       }
-      if (2 === e) {
-        for (e = []; c--;) {
-          for (var d = b.parseUShort(), g = b.parseUShort(), f = b.parseUShort(); g >= d; d++) {
-            e[f++] = d;
+      if (2 === d) {
+        for (d = []; c--;) {
+          for (var e = b.parseUShort(), g = b.parseUShort(), f = b.parseUShort(); g >= e; e++) {
+            d[f++] = e;
           }
         }
-        return e;
+        return d;
       }
     }
     function c(b, c) {
       b = new n.Parser(b, c);
       c = b.parseUShort();
       if (1 === c) {
-        var e = b.parseUShort();
+        var d = b.parseUShort();
         c = b.parseUShort();
-        var d = b.parseUShortList(c);
+        var e = b.parseUShortList(c);
         return function(b) {
-          return d[b - e] || 0;
+          return e[b - d] || 0;
         };
       }
       if (2 === c) {
@@ -41630,32 +41630,32 @@ var __extends = this && this.__extends || function() {
           g[k] = b.parseUShort(), f[k] = b.parseUShort(), l[k] = b.parseUShort();
         }
         return function(b) {
-          for (var c = 0, e = g.length - 1; e > c;) {
-            var d = c + e + 1 >> 1;
-            b < g[d] ? e = d - 1 : c = d;
+          for (var c = 0, d = g.length - 1; d > c;) {
+            var e = c + d + 1 >> 1;
+            b < g[e] ? d = e - 1 : c = e;
           }
           return g[c] <= b && b <= f[c] ? l[c] || 0 : 0;
         };
       }
     }
-    function p(b, e) {
-      var d, g = new n.Parser(b, e), f = g.parseUShort(), k = g.parseUShort();
-      k = l(b, e + k);
+    function p(b, d) {
+      var e, g = new n.Parser(b, d), f = g.parseUShort(), k = g.parseUShort();
+      k = l(b, d + k);
       var m = g.parseUShort(), p = g.parseUShort();
       if (4 === m && 0 === p) {
         var t = {};
         if (1 === f) {
           b = g.parseUShort();
           var C = [];
-          e = g.parseOffset16List(b);
+          d = g.parseOffset16List(b);
           for (f = 0; b > f; f++) {
-            var A = e[f], D = t[A];
+            var A = d[f], D = t[A];
             if (!D) {
               for (D = {}, g.relativeOffset = A, A = g.parseUShort(); A--;) {
                 var F = g.parseUShort();
-                m && (d = g.parseShort());
+                m && (e = g.parseShort());
                 p && g.parseShort();
-                D[F] = d;
+                D[F] = e;
               }
             }
             C[k[f]] = D;
@@ -41669,10 +41669,10 @@ var __extends = this && this.__extends || function() {
           A = g.parseUShort();
           t = g.parseUShort();
           f = g.parseUShort();
-          var B = c(b, e + D), E = c(b, e + A), H = [];
+          var B = c(b, d + D), E = c(b, d + A), H = [];
           for (b = 0; t > b; b++) {
-            for (e = H[b] = [], D = 0; f > D; D++) {
-              m && (d = g.parseShort()), p && g.parseShort(), e[D] = d;
+            for (d = H[b] = [], D = 0; f > D; D++) {
+              m && (e = g.parseShort()), p && g.parseShort(), d[D] = e;
             }
           }
           var K = {};
@@ -41688,24 +41688,24 @@ var __extends = this && this.__extends || function() {
       }
     }
     function t(b, c) {
-      var e = new n.Parser(b, c), d = e.parseUShort(), g = e.parseUShort(), f = 16 & g, l = e.parseUShort(), k = e.parseOffset16List(l);
-      e = {lookupType:d, lookupFlag:g, markFilteringSet:f ? e.parseUShort() : -1};
-      if (2 === d) {
+      var d = new n.Parser(b, c), e = d.parseUShort(), g = d.parseUShort(), f = 16 & g, l = d.parseUShort(), k = d.parseOffset16List(l);
+      d = {lookupType:e, lookupFlag:g, markFilteringSet:f ? d.parseUShort() : -1};
+      if (2 === e) {
         var m = [];
-        for (d = 0; l > d; d++) {
-          m.push(p(b, c + k[d]));
+        for (e = 0; l > e; e++) {
+          m.push(p(b, c + k[e]));
         }
-        e.getKerningValue = function(b, c) {
-          for (var e = m.length; e--;) {
-            var d = m[e](b, c);
-            if (void 0 !== d) {
-              return d;
+        d.getKerningValue = function(b, c) {
+          for (var d = m.length; d--;) {
+            var e = m[d](b, c);
+            if (void 0 !== e) {
+              return e;
             }
           }
           return 0;
         };
       }
-      return e;
+      return d;
     }
     var g = d("../check"), n = d("../parse");
     k.parse = function(b, c, d) {
@@ -45253,14 +45253,14 @@ var __extends = this && this.__extends || function() {
           var e = this.classAtom();
           if ("Character" === e.type && this.isRangeDash()) {
             this.consumeChar("-");
-            var g = this.classAtom();
-            if ("Character" === g.type) {
-              if (g.value < e.value) {
+            var f = this.classAtom();
+            if ("Character" === f.type) {
+              if (f.value < e.value) {
                 throw Error("Range out of order in character class");
               }
-              a.push({from:e.value, to:g.value});
+              a.push({from:e.value, to:f.value});
             } else {
-              d(e.value, a), a.push(c("-")), d(g.value, a);
+              d(e.value, a), a.push(c("-")), d(f.value, a);
             }
           } else {
             d(e.value, a);
@@ -45686,11 +45686,11 @@ var __extends = this && this.__extends || function() {
     }
     function l(a, b, e, f, g) {
       f = f.exec(a.text);
-      var k = void 0 === f[1] ? 0 : parseInt(f[1], 10), l = f[3], m = d.terminalNameToConstructor[l];
+      var l = void 0 === f[1] ? 0 : parseInt(f[1], 10), k = f[3], m = d.terminalNameToConstructor[k];
       if (!m) {
-        throw Error("Separator Terminal Token name: " + l + " not found");
+        throw Error("Separator Terminal Token name: " + k + " not found");
       }
-      e = new e({definition:[], separator:m, idx:k});
+      e = new e({definition:[], separator:m, idx:l});
       f = f[2];
       return J.isUndefined(f) || (e.name = f), c(e, a.range, b, g);
     }
@@ -45724,9 +45724,9 @@ var __extends = this && this.__extends || function() {
       return a.replace(za, g).replace(Ia, g);
     }
     function b(a) {
-      var b = m(a), c = q(a), d = y(a), e = x(a), f = z(a), g = r(a), k = v(a);
+      var b = m(a), c = q(a), d = y(a), e = x(a), f = z(a), g = r(a), l = v(a);
       a = w(a);
-      return [].concat(b, c, d, e, f, g, k, a);
+      return [].concat(b, c, d, e, f, g, l, a);
     }
     function m(a) {
       return A(a, H.TERMINAL, I);
@@ -45776,9 +45776,9 @@ var __extends = this && this.__extends || function() {
     }
     function D(a, b, c, d) {
       for (var e, f = []; e = c.exec(a);) {
-        var g = e.index, k = d(g + e[0].length, a);
-        e = new K.Range(g, k);
-        g = a.substr(g, k - g + 1);
+        var g = e.index, l = d(g + e[0].length, a);
+        e = new K.Range(g, l);
+        g = a.substr(g, l - g + 1);
         f.push({range:e, text:g, type:b});
       }
       return f;
@@ -45931,11 +45931,11 @@ var __extends = this && this.__extends || function() {
       }, a.prototype.canTokenTypeBeInsertedInRecovery = function(a) {
         return !0;
       }, a.prototype.tryInRepetitionRecovery = function(a, b, d, e) {
-        for (var f = this, g = this.findReSyncTokenType(), k = this.exportLexerState(), l = [], m = !1, n = this.LA(1), q = this.LA(1), t = function() {
+        for (var f = this, g = this.findReSyncTokenType(), l = this.exportLexerState(), k = [], m = !1, n = this.LA(1), q = this.LA(1), t = function() {
           var a = f.LA(0);
           a = f.errorMessageProvider.buildMismatchTokenMessage({expected:e, actual:n, previous:a, ruleName:f.getCurrRuleFullName()});
           a = new p.MismatchedTokenException(a, n, f.LA(0));
-          a.resyncedTokens = c.dropRight(l);
+          a.resyncedTokens = c.dropRight(k);
           f.SAVE_ERROR(a);
         }; !m;) {
           if (this.tokenMatcher(q, e)) {
@@ -45944,9 +45944,9 @@ var __extends = this && this.__extends || function() {
           if (d.call(this)) {
             return t(), void a.apply(this, b);
           }
-          this.tokenMatcher(q, g) ? m = !0 : (q = this.SKIP_TOKEN(), this.addToResyncTokens(q, l));
+          this.tokenMatcher(q, g) ? m = !0 : (q = this.SKIP_TOKEN(), this.addToResyncTokens(q, k));
         }
-        this.importLexerState(k);
+        this.importLexerState(l);
       }, a.prototype.shouldInRepetitionRecoveryBeTried = function(a, b) {
         return void 0 !== a && void 0 !== b && !this.tokenMatcher(this.LA(1), a) && !this.isBackTracking() && !this.canPerformInRuleRecovery(a, this.getFollowsForInRuleRecovery(a, b));
       }, a.prototype.getFollowsForInRuleRecovery = function(a, b) {
@@ -46335,9 +46335,9 @@ var __extends = this && this.__extends || function() {
           return b.useSticky ? y(a) : q(a);
         }
         throw Error("non exhaustive match");
-      }), k = E.map(e, function(a) {
-        return a.tokenTypeIdx;
       }), l = E.map(e, function(a) {
+        return a.tokenTypeIdx;
+      }), k = E.map(e, function(a) {
         a = a.GROUP;
         if (a !== B.Lexer.SKIPPED) {
           if (E.isString(a)) {
@@ -46368,7 +46368,7 @@ var __extends = this && this.__extends || function() {
         return E.isString(b) && b !== B.Lexer.SKIPPED && (a[b] = []), a;
       }, {});
       var D = E.map(g, function(a, b) {
-        return {pattern:g[b], longerAlt:m[b], canLineTerminator:v[b], isCustom:A[b], short:C[b], group:l[b], push:n[b], pop:p[b], tokenTypeIdx:k[b], tokenType:e[b]};
+        return {pattern:g[b], longerAlt:m[b], canLineTerminator:v[b], isCustom:A[b], short:C[b], group:k[b], push:n[b], pop:p[b], tokenTypeIdx:l[b], tokenType:e[b]};
       }), I = !0, J = [];
       return b.safeMode || (J = E.reduce(e, function(a, d, e) {
         "string" == typeof d.PATTERN ? (d = d.PATTERN.charCodeAt(0), c(a, d, D[e])) : E.isArray(d.START_CHARS_HINT) ? E.forEach(d.START_CHARS_HINT, function(b) {
@@ -55520,6 +55520,17 @@ LocalStorage.delete = function(a) {
 function EventManager() {
   this.events = [];
 }
+EventManager.prototype.addAndCreate = function(a, d, f) {
+  a = [a, d, f, !0];
+  a[0].addEventListener(a[1], a[2]);
+  a[3] = !0;
+  this.events.push(a);
+};
+EventManager.prototype.remove = function(a, d) {
+  for (var f = this.events.length - 1; 0 <= f; f--) {
+    this.events[f][1] === a && this.events[f][2] === d && (this.events[f][3] && this.events[f][0].removeEventListener(this.events[f][1], this.events[f][2]), this.events.splice(f, 1));
+  }
+};
 EventManager.prototype.add = function(a, d, f) {
   this.events.push([a, d, f, !1]);
 };
