@@ -769,12 +769,16 @@ function MainMenu(parent)
 			return;
 		}
 
-		var angle = parseFloat(Editor.prompt("Twist angle in radians", Math.PI / 2));
+		var angle = parseFloat(Editor.prompt("Twist angle", UnitConverter.convert(Math.PI / 2, "r", Editor.settings.units.angle)));
 		if(isNaN(angle) || angle < 0)
 		{
 			Editor.alert("Twist amount has to be a numeric value");
 			return;
 		}
+
+		// Convert back to radians if necessary
+		angle = UnitConverter.convert(angle, Editor.settings.units.angle, "r");
+
 
 		var start = parseFloat(Editor.prompt("Start Point", 0));
 		var end = parseFloat(Editor.prompt("End Point", 1));

@@ -5,6 +5,7 @@
  *
  * Everything regarding editor, code analysis, rendering etc is stored in this object.
  *
+ * @constructor
  * @class Settings
  */
 function Settings()
@@ -12,14 +13,35 @@ function Settings()
 	this.loadDefault();
 }
 
+/**
+ * Path to the configuration file if running ouside of the browser.
+ *
+ * @static
+ * @attribute CONFIG_FILE
+ * @type {string}
+ */
 Settings.CONFIG_FILE = "config.json";
 
-// Angles
-Settings.RADIAN = 0;
-Settings.DEGREE = 1;
+/**
+ * Angle in radians, stores the radian symbol as used in the UnitConverter.
+ *
+ * @static
+ * @attribute RADIAN
+ * @type {string}
+ */
+Settings.RADIAN = "r";
+
+/**
+ * Angle in degrees, stores the degree symbol as used in the UnitConverter.
+ *
+ * @static
+ * @attribute RADIAN
+ * @type {string}
+ */
+Settings.DEGREE = "d";
 
 // Distance
-Settings.METER = 0;
+Settings.METER = "m";
 
 // Navigation
 Settings.FIRST_PERSON = 10;
@@ -55,7 +77,16 @@ Settings.prototype.loadDefault = function()
 	// Units
 	this.units =
 	{
+		/**
+		 * The units to use for angle in the editor, for most object the base units are radians. Use the UnitConvert to ensure the correct format.
+		 *
+		 * For example if the object data is natively in radians call UnitConverter.convert(angle, "r", Editor.settings.units.angle);
+		 *
+		 * @type {string}
+		 * @attribute angle
+		 */
 		angle: Settings.RADIAN,
+
 		distance: Settings.METER
 	};
 
