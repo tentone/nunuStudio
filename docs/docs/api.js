@@ -85,6 +85,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "RendererState",
         "Resource",
         "ResourceManager",
+        "RoundedBoxBufferGeometry",
         "SSAONOHPass",
         "SSAOPass",
         "SSAOShader",
@@ -104,6 +105,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "SpriteSheetTexture",
         "TargetConfig",
         "TechnicolorPass",
+        "TerrainBufferGeometry",
         "TextBitmap",
         "TextFile",
         "TextMesh",
@@ -114,6 +116,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "TizenKeyboard",
         "Tree",
         "TreeUtils",
+        "TwistModifier",
         "TypedArrayHelper",
         "UnitConverter",
         "UnrealBloomPass",
@@ -197,7 +200,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Files",
             "name": "Files",
-            "description": "FileSystem is used to read and write files using nunuStudio.\n\nIts implements muitple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere."
+            "description": "FileSystem is used to read and write files using nunuStudio.\n\nIts implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere."
         },
         {
             "displayName": "Input",
@@ -272,7 +275,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Utils",
             "name": "Utils",
-            "description": "EventManager is used to manager DOM events creationg and destruction in a single function call.\n\nIt is used by objects to make it easier to add and remove events from global DOM objects."
+            "description": "EventManager is used to manager DOM events creationg and destruction in a single function call.\n\nIt is used by objects to make it easier to add, manager and remove events from DOM elements."
         }
     ],
     "elements": []

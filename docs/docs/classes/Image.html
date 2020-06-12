@@ -116,6 +116,7 @@
 								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
+								<li><a href="../classes/RoundedBoxBufferGeometry.html">RoundedBoxBufferGeometry</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
 								<li><a href="../classes/Script.html">Script</a></li>
 								<li><a href="../classes/ShaderAttribute.html">ShaderAttribute</a></li>
@@ -135,6 +136,7 @@
 								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
 								<li><a href="../classes/TargetConfig.html">TargetConfig</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
+								<li><a href="../classes/TerrainBufferGeometry.html">TerrainBufferGeometry</a></li>
 								<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
 								<li><a href="../classes/TextMesh.html">TextMesh</a></li>
@@ -145,6 +147,7 @@
 								<li><a href="../classes/TizenKeyboard.html">TizenKeyboard</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
 								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
+								<li><a href="../classes/TwistModifier.html">TwistModifier</a></li>
 								<li><a href="../classes/TypedArrayHelper.html">TypedArrayHelper</a></li>
 								<li><a href="../classes/UnitConverter.html">UnitConverter</a></li>
 								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
@@ -238,6 +241,7 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -262,6 +266,14 @@
 															<span class="flag static">static</span>
 													</li>
 													<li class="index-item method">
+														<a href="#method_getImageData">getImageData</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_getImageSize">getImageSize</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_hasTransparency">hasTransparency</a>
 						
 													</li>
@@ -277,6 +289,18 @@
 										</div>
 						
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs extends">
+													<li class="index-item attr">
+														<a href="#attr_height">height</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_width">width</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
@@ -377,7 +401,7 @@
 											
 											
 																<div class="param-description">
-																	<p>Color code</p>
+																	<p>CSS Color string.</p>
 											
 																</div>
 											
@@ -432,7 +456,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>File to check format of.</p>
+											
 																</div>
 											
 															</li>
@@ -448,6 +473,120 @@
 											
 														</div>
 													</div>
+											
+											</div>
+											<div id="method_getImageData" class="method item">
+												<h3 class="name"><code>getImageData</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>onLoad</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">ImageData</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read the image data and return the raw pixel data of the image as a ImageData object.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">onLoad</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	<p>Callback method to retrieve the image data, receives (data, width, height) as parameters.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">ImageData</span>:
+																<p>Image data object with the content of the image object.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_getImageSize" class="method item">
+												<h3 class="name"><code>getImageSize</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>onLoad</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get the image size if its available, if the image size its not available it has to be loaded first.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">onLoad</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	<p>Callack method to get the image size, receives (width, height) as parameters.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
 											
 											</div>
 											<div id="method_hasTransparency" class="method item">
@@ -646,6 +785,66 @@
 									</div>
 						
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_height" class="attr item">
+												<a name="config_height"></a> 
+												<h3 class="name"><code>height</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Image height (in pixels), if not available should be set -1.</p>
+											<p>Stores the real size of the image not the used to represent it, its obtained from the naturalHeight attribute of the image element.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_width" class="attr item">
+												<a name="config_width"></a> 
+												<h3 class="name"><code>width</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Image width (in pixels), if not available should be set -1.</p>
+											<p>Stores the real size of the image not the used to represent it, its obtained from the naturalWidth attribute of the image element.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>

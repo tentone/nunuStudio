@@ -116,6 +116,7 @@
 								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
+								<li><a href="../classes/RoundedBoxBufferGeometry.html">RoundedBoxBufferGeometry</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
 								<li><a href="../classes/Script.html">Script</a></li>
 								<li><a href="../classes/ShaderAttribute.html">ShaderAttribute</a></li>
@@ -135,6 +136,7 @@
 								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
 								<li><a href="../classes/TargetConfig.html">TargetConfig</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
+								<li><a href="../classes/TerrainBufferGeometry.html">TerrainBufferGeometry</a></li>
 								<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
 								<li><a href="../classes/TextMesh.html">TextMesh</a></li>
@@ -145,6 +147,7 @@
 								<li><a href="../classes/TizenKeyboard.html">TizenKeyboard</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
 								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
+								<li><a href="../classes/TwistModifier.html">TwistModifier</a></li>
 								<li><a href="../classes/TypedArrayHelper.html">TypedArrayHelper</a></li>
 								<li><a href="../classes/UnitConverter.html">UnitConverter</a></li>
 								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
@@ -224,7 +227,7 @@
 						
 						<div class="box intro">
 							<p>Time is user to call functions in loop at a defined rate.</p>
-						<p>Loop time can be changed dinamically.</p>
+						<p>Loop time can be changed dynamically, it is readjusted on the next timer call.</p>
 						
 						</div>
 						
@@ -234,6 +237,7 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -256,6 +260,24 @@
 										</div>
 						
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs">
+													<li class="index-item attr">
+														<a href="#attr_callback">callback</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_running">running</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_running">running</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_time">time</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
@@ -322,6 +344,118 @@
 									</div>
 						
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_callback" class="attr item">
+												<a name="config_callback"></a> 
+												<h3 class="name"><code>callback</code></h3>
+												<span class="type">Function</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Task of the timer, executed at the timer defined rate.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_running" class="attr item">
+												<a name="config_running"></a> 
+												<h3 class="name"><code>running</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Indicates if the timer is currently running, it is set to true on start and reset to false on stop.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_running" class="attr item">
+												<a name="config_running"></a> 
+												<h3 class="name"><code>running</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>ID of the currently waiting timeout clock. Used to cancel the already request execution of the next clock tick.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_time" class="attr item">
+												<a name="config_time"></a> 
+												<h3 class="name"><code>time</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Period of the timer in milliseconds.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>

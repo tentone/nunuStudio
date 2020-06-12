@@ -116,6 +116,7 @@
 								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
+								<li><a href="../classes/RoundedBoxBufferGeometry.html">RoundedBoxBufferGeometry</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
 								<li><a href="../classes/Script.html">Script</a></li>
 								<li><a href="../classes/ShaderAttribute.html">ShaderAttribute</a></li>
@@ -135,6 +136,7 @@
 								<li><a href="../classes/SSAOShader.html">SSAOShader</a></li>
 								<li><a href="../classes/TargetConfig.html">TargetConfig</a></li>
 								<li><a href="../classes/TechnicolorPass.html">TechnicolorPass</a></li>
+								<li><a href="../classes/TerrainBufferGeometry.html">TerrainBufferGeometry</a></li>
 								<li><a href="../classes/TextBitmap.html">TextBitmap</a></li>
 								<li><a href="../classes/TextFile.html">TextFile</a></li>
 								<li><a href="../classes/TextMesh.html">TextMesh</a></li>
@@ -145,6 +147,7 @@
 								<li><a href="../classes/TizenKeyboard.html">TizenKeyboard</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
 								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
+								<li><a href="../classes/TwistModifier.html">TwistModifier</a></li>
 								<li><a href="../classes/TypedArrayHelper.html">TypedArrayHelper</a></li>
 								<li><a href="../classes/UnitConverter.html">UnitConverter</a></li>
 								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
@@ -224,7 +227,7 @@
 						
 						<div class="box intro">
 							<p>FileSystem is used to read and write files using nunuStudio.</p>
-						<p>Its implements muitple solutions for each method depending on the platform (NodeJS, brower or cordova).</p>
+						<p>Its implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).</p>
 						<p>Some operations are platform specific and might not work everywhere.</p>
 						
 						</div>
@@ -371,9 +374,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Open file chooser dialog receives onLoad callback, file filter, saveas.</p>
-											<p>Save mode does not work inside the browser.</p>
-											<p>The onLoad callback receives an array of files as parameter.</p>
+													<p>Open file chooser dialog window for the user to select files stored in the system.</p>
+											<p>The files selected are retrieved using the onLoad callback that receives a array of File objects.</p>
 											
 												</div>
 											
@@ -387,7 +389,7 @@
 											
 											
 																<div class="param-description">
-																	<p>onLoad callback that receives array of files choosen as parameter.</p>
+																	<p>onLoad callback that receives array of files as parameter.</p>
 											
 																</div>
 											
@@ -398,7 +400,7 @@
 											
 											
 																<div class="param-description">
-																	<p>File type filter.</p>
+																	<p>File type filter (e.g. &quot;.zip,.rar, etc)</p>
 											
 																</div>
 											

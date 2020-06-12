@@ -22,7 +22,8 @@ function Image(url, encoding)
 	 *
 	 * Stores the real size of the image not the used to represent it, its obtained from the naturalWidth attribute of the image element.
 	 *
-	 * @param {number}
+	 * @attribute width
+	 * @type {number}
 	 */
 	this.width = -1;
 
@@ -31,7 +32,8 @@ function Image(url, encoding)
 	 *
 	 * Stores the real size of the image not the used to represent it, its obtained from the naturalHeight attribute of the image element.
 	 *
-	 * @param {number}
+	 * @attribute height
+	 * @type {number}
 	 */
 	this.height = -1;
 
@@ -74,9 +76,9 @@ Image.prototype = Object.create(Resource.prototype);
 /**
  * Check if a file name refers to a supported binary image file.
  *
- * @method fileIsImage
  * @static
- * @param {File} file
+ * @method fileIsImage
+ * @param {File} file File to check format of.
  * @return {boolean} True if the file refers to a supported image format.
  */
 Image.fileIsImage = function(file)
@@ -99,6 +101,7 @@ Image.fileIsImage = function(file)
 /**
  * Get the image size if its available, if the image size its not available it has to be loaded first.
  *
+ * @method getImageSize
  * @param {Function} onLoad Callack method to get the image size, receives (width, height) as parameters.
  */
 Image.prototype.getImageSize = function(onLoad)
@@ -127,6 +130,7 @@ Image.prototype.getImageSize = function(onLoad)
 /**
  * Read the image data and return the raw pixel data of the image as a ImageData object.
  *
+ * @method getImageData
  * @param {Function} onLoad Callback method to retrieve the image data, receives (data, width, height) as parameters.
  * @return {ImageData} Image data object with the content of the image object.
  */
