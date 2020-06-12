@@ -55528,7 +55528,7 @@ EventManager.prototype.addAndCreate = function(a, d, f) {
 };
 EventManager.prototype.remove = function(a, d) {
   for (var f = this.events.length - 1; 0 <= f; f--) {
-    this.events[f][1] === a && this.events[f][2] === d && (this.events[f][3] && this.events[f][0].removeEventListener(this.events[f][1], this.events[f][2]), this.events.splice(f, 1));
+    this.events[f][0] === a && this.events[f][1] === d && (this.events[f][3] && (this.events[f][0].removeEventListener(this.events[f][1], this.events[f][2]), this.events[f][3] = !1), this.events.splice(f, 1));
   }
 };
 EventManager.prototype.add = function(a, d, f) {
