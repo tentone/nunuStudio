@@ -285,13 +285,14 @@ function MainMenu(parent)
 	// Export OBJ
 	exportMenu.addOption("OBJ", function()
 	{
+		// TODO <EXPORT ONLY VISIBLE>
+		
 		if(Nunu.runningOnDesktop())
 		{
 			FileSystem.chooseFile(function(files)
 			{
 				if(files.length > 0)
 				{
-					// TODO <SELECT SCENE TO EXPORT>
 					var exporter = new THREE.OBJExporter();
 					var data = exporter.parse(Editor.getScene());
 					FileSystem.writeFile(files[0].path, data);
@@ -302,7 +303,6 @@ function MainMenu(parent)
 		{
 			FileSystem.chooseFileName(function(fname)
 			{
-				// TODO <SELECT SCENE TO EXPORT>
 				var exporter = new THREE.OBJExporter();
 				var data = exporter.parse(Editor.getScene());
 				FileSystem.writeFile(fname, data);

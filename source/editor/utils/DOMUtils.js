@@ -8,6 +8,20 @@
 function DOMUtils(){}
 
 /**
+ * Get CSS variable value from the DOM tree.
+ *
+ * The value is obtained from the document body.
+ *
+ * @method getCSSVariable
+ * @param {string} variable Variable name to retrieve.
+ * @return {string} Calculated value associated with the CSS variable.
+ */
+DOMUtils.getCSSVariable = function(variable)
+{
+	return getComputedStyle(document.body).getPropertyValue(variable);
+};
+
+/**
  * Check if a DOM element in completely visible in the viewport
  *
  * @method isVisible
