@@ -79,7 +79,7 @@ Interface.prototype.saveProgram = function()
  */
 Interface.prototype.loadProgram = function()
 {
-	if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.loadProject))
+	if(Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -98,7 +98,7 @@ Interface.prototype.loadProgram = function()
  */
 Interface.prototype.newProgram = function()
 {
-	if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.createProject))
+	if(Editor.confirm(Locale.changesWillBeLost + " " + Locale.createProject))
 	{
 		Editor.createNewProgram();
 	}

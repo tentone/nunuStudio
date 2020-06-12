@@ -487,10 +487,11 @@ LocaleManager.register(
 	projectExported: "Project exported",
 
 	// Confirm
-	loadProjectChangesLost: "All unsaved changes to the project will be lost.",
-	loadProject: "Load project?",
+	changesWillBeLost: "All unsaved changes to the project will be lost!",
+	loadProject: "Load project from file?",
 	createProject: "Create new project?",
-
+	exportOnlyVisibleObjects: "Export only the visible objects from the project?",
+	
 	// Warnings
 	unsavedChangesExit: "All unsaved changes to the project will be lost. Do you really wanna exit?",
 	cannotAddItself: "Cannot add object into itself.",

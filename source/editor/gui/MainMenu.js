@@ -313,6 +313,9 @@ function MainMenu(parent)
 	// Export GLTF
 	exportMenu.addOption("GLTF", function()
 	{
+
+		// TODO <Only visible>-
+
 		if(Nunu.runningOnDesktop())
 		{
 			FileSystem.chooseFile(function(files)
@@ -436,7 +439,7 @@ function MainMenu(parent)
 				var exporter = new THREE.ColladaExporter();
 				exporter.parse(Editor.getScene(), function(result)
 				{
-					// TODO <PROCESS result.textures>b
+					// TODO <PROCESS result.textures>
 					FileSystem.writeFile(fname, result.data);
 				}, {binary: false});
 			}, ".dae");

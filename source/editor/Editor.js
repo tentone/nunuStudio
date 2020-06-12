@@ -115,7 +115,7 @@ Editor.initialize = function()
 			// Project file
 			if(extension === "isp" || extension === "nsp")
 			{
-				if(Editor.confirm(Locale.loadProjectChangesLost + " " + Locale.loadProject))
+				if(Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
 				{
 					Editor.loadProgram(file, extension === "nsp");
 					Editor.resetEditor();
