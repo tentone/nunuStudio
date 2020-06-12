@@ -10,6 +10,14 @@
 function TwistModifier(angle, start, end)
 {
 	/**
+	 * Indicates if the output should be a buffer geometry or a regular geometry.
+	 *
+	 * @attribute bufferGeometry
+	 * @type {boolean}
+	 */
+	this.bufferGeometry = false;
+
+	/**
 	 * Twist direction vector, the twist is performed around this vector in its direction.
 	 *
 	 * @attribute direction
@@ -89,7 +97,16 @@ TwistModifier.prototype.modify = function(geometry)
 		}
 	}
 
+	geometry.computeVertexNormals();
 	geometry.verticesNeedUpdate = true;
-	
+
+	// Convert to buffer geometry if necessary
+	if(this.bufferGeometry)
+	{
+		var bufferGeometry = new THREE.BufferGeometry();
+		bufferGeometry.fromGeometry(geometry);
+		return bufferGeometry;
+	}
+
 	return geometry;	 
 };
