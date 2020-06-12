@@ -799,7 +799,6 @@ function MainMenu(parent)
 			return;
 		}
 
-
 		var geometry = Editor.selection[0].geometry.clone();
 		geometry.computeVertexNormals();
 		Editor.addAction(new ChangeAction(Editor.selection[0], "geometry", geometry));
@@ -823,7 +822,7 @@ function MainMenu(parent)
 	}, Global.FILE_PATH + "icons/tools/move.png");
 
 	// Merge geometries
-	editMenu.addOption("Merge geometries", function()
+	editMenu.addOption(Locale.mergeGeometries, function()
 	{
 		if(Editor.selection.length < 2)
 		{
@@ -872,7 +871,7 @@ function MainMenu(parent)
 		Editor.addDefaultScene();
 	}, Global.FILE_PATH + "icons/misc/add.png");
 
-	projectMenu.addOption("Execute script", function()
+	projectMenu.addOption(Locale.executeScript, function()
 	{
 		FileSystem.chooseFile(function(files)
 		{

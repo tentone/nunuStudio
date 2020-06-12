@@ -26,7 +26,7 @@ function ButtonToggle(parent)
 	 *
 	 * @attribute styleSelected
 	 */
-	this.styleSelected = {backgroundColor: "var(--color-red)"};
+	this.styleSelected = {backgroundColor: "var(--button-over-color)"};
 
 	var self = this;
 
@@ -53,6 +53,11 @@ function ButtonToggle(parent)
 
 ButtonToggle.prototype = Object.create(Button.prototype);
 
+/**
+ * Set the selected state of the toggle button.
+ *
+ * @param {boolean} value Selected state of the button.
+ */
 ButtonToggle.prototype.setSelected = function(value)
 {
 	this.selected = value;
@@ -60,5 +65,9 @@ ButtonToggle.prototype.setSelected = function(value)
 	if(this.selected)
 	{
 		this.setStyles(this.styleSelected !== null ? this.styleSelected : this.stylePointerOver);	
+	}
+	else
+	{
+		this.setStyles(this.styleBase);
 	}
 };

@@ -38,7 +38,9 @@ LocaleManager.register(
 	mix: "Mix",
 	multiply: "Multiply",
 	setTransparent: "Set transparent",
-
+	mergeGeometries: "Merge Geometries",
+	executeScript: "Execute Script",
+	
 	// Context menu
 	computeNormals: "Compute Normals",
 	applyTransformation: "Apply Transformation",

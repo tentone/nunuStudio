@@ -65,9 +65,6 @@ function Button(parent)
 
 	this.addEvent("mouseleave", function()
 	{
-		// TODO <REMOVE THIS>
-		console.log("mouse leave");
-
 		if(!self.disabled)
 		{
 			self.setStyles(self.styleBase);

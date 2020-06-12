@@ -53,12 +53,13 @@ EventManager.prototype.remove = function(target, event)
 	for(var i = this.events.length - 1; i >= 0; i--)
 	{
 		// Check if the target and event matches
-		if(this.events[i][1] === target && this.events[i][2] === event)
+		if(this.events[i][0] === target && this.events[i][1] === event)
 		{
 			// Destroy event if it is active
 			if(this.events[i][3])
 			{
 				this.events[i][0].removeEventListener(this.events[i][1], this.events[i][2]);
+				this.events[i][3] = false;
 			}
 
 			this.events.splice(i, 1);
