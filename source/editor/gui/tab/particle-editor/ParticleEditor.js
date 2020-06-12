@@ -301,7 +301,7 @@ function ParticleEditor(parent, closeable, container, index)
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.opacity, "value", value));
 	});
-	this.opacity.addGraph("spread", "var(--color-graph)");
+	this.opacity.addGraph("spread", DOMUtils.getCSSVariable("--color-graph"));
 	this.opacity.setOnChange(function(value)
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.opacity, "spread", value));
@@ -342,7 +342,7 @@ function ParticleEditor(parent, closeable, container, index)
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.size, "value", value));
 	});
-	this.scale.addGraph("spread", "var(--color-graph)");
+	this.scale.addGraph("spread", DOMUtils.getCSSVariable("--color-graph"));
 	this.scale.setOnChange(function(value)
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.size, "spread", value));
@@ -383,7 +383,7 @@ function ParticleEditor(parent, closeable, container, index)
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.angle, "value", value));
 	});
-	this.angle.addGraph("spread", "var(--color-graph)");
+	this.angle.addGraph("spread", DOMUtils.getCSSVariable("--color-graph"));
 	this.angle.setOnChange(function(value)
 	{
 		Editor.addAction(new ChangeAction(self.particle.emitter.angle, "spread", value));

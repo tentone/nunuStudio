@@ -104,7 +104,7 @@ function SubGraph(canvas, name, color)
 
 	this.canvas = canvas;
 	this.name = (name !== undefined) ? name : "default";
-	this.color = (color !== undefined) ? color : "var(--color-light)";
+	this.color = (color !== undefined) ? color : DOMUtils.getCSSVariable("--color-light");
 	this.values = [];
 	this.buttons = [];
 	this.onchange = null;
@@ -130,7 +130,7 @@ Graph.prototype.createScale = function(size)
 		var scale = document.createElement("div");
 		scale.style.position = "absolute";
 		scale.style.pointerEvents = "none";
-		scale.style.color = "var(--color-light)";
+		scale.style.color = DOMUtils.getCSSVariable("--color-light");
 
 		var text = document.createTextNode(this.max - (step * i));
 		scale.text = text;
@@ -434,12 +434,12 @@ Graph.prototype.updateGrid = function()
 
 	var context = this.grid.getContext("2d");
 	context.clearRect(0, 0, width, this.size.y);
-	context.strokeStyle = "#333333";
+	context.strokeStyle = DOMUtils.getCSSVariable("--bar-color");
 	context.lineWidth = "1";
 
 	// Border
 	context.beginPath();
-	context.rect(0, 0, width, this.size.y);
+	context.rect(0, 0, width - 1, this.size.y);
 	context.stroke();
 	context.moveTo(0, 0);
 
@@ -450,7 +450,7 @@ Graph.prototype.updateGrid = function()
 	}
 
 	// Vertical lines	
-	for(var i = 0; i < width; i += step)
+	for(var i = 0; i < width - 1; i += step)
 	{
 		context.beginPath();
 		context.moveTo(i, 0);

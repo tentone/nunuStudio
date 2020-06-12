@@ -1,29 +1,29 @@
 :root {
 	/* Fonts */
-	--font-main-family: "Arial";
-	--font-main-color: #FFFFFF;
-	--font-main-size: 12px;
+	--font-main-family:"Arial";
+	--font-main-color:#FFFFFF;
+	--font-main-size:12px;
 
 	/* GUI Color Palette */
-	--color-light: #FFFFFF;
-	--color-graph: #AAAAAA;
-	--button-over-color: #555555;
-	--box-color: #444444;
-	--panel-color: #333333;
-	--bar-color: #222222;
+	--color-light:#FFFFFF;
+	--color-graph:#AAAAAA;
+	--button-over-color:#555555;
+	--box-color:#444444;
+	--panel-color:#333333;
+	--bar-color:#222222;
 
-	--color-black: #000000;
-	--color-black-alpha-20: #00000033;
+	--color-black:#000000;
+	--color-black-alpha-20:#00000033;
 
 	/* Solid Colors */
-	--color-red: #FF0000;
-	--color-green: #00FF00;
-	--color-blue: #0000FF;
-	--color-yellow: #FFFF00;
+	--color-red:#FF0000;
+	--color-green:#00FF00;
+	--color-blue:#0000FF;
+	--color-yellow:#FFFF00;
 
 	/* Console Colors */
-	--color-console-error: #FF0000;
-	--color-console-error-background: #FF000022;
-	--color-console-warn: #FFFF00;
-	--color-console-warn-background: #FFFF0022;
+	--color-console-error:#FF0000;
+	--color-console-error-background:#FF000022;
+	--color-console-warn:#FFFF00;
+	--color-console-warn-background:#FFFF0022;
 }
