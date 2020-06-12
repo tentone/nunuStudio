@@ -73,9 +73,18 @@ TwistModifier.prototype.modify = function(geometry)
 	for(var i = 0; i < geometry.vertices.length; i++)
 	{
 		var y = geometry.vertices[i].y;
+
 		if(y >= this.start && y <= this.end)
 		{
-			quaternion.setFromAxisAngle(this.direction, this.angle * y);
+			// Calculate angle to apply interpolated from start to end
+			var interpolate = (y - this.start) / (this.end - this.start);
+
+			quaternion.setFromAxisAngle(this.direction, this.angle * interpolate);
+			geometry.vertices[i].applyQuaternion(quaternion);
+		}
+		else if(y > this.end)
+		{
+			quaternion.setFromAxisAngle(this.direction, this.angle);
 			geometry.vertices[i].applyQuaternion(quaternion);
 		}
 	}

@@ -769,7 +769,6 @@ function MainMenu(parent)
 			return;
 		}
 
-
 		var angle = parseFloat(Editor.prompt("Twist angle in radians", Math.PI / 2));
 		if(isNaN(angle) || angle < 0)
 		{
@@ -777,8 +776,15 @@ function MainMenu(parent)
 			return;
 		}
 
-		var modifier = new TwistModifier();
-		modifier.angle = angle;
+		var start = parseFloat(Editor.prompt("Start Point", 0));
+		var end = parseFloat(Editor.prompt("End Point", 1));
+		if(isNaN(start) || isNaN(end))
+		{
+			Editor.alert("Start and end has to be a numeric value");
+			return;
+		}
+
+		var modifier = new TwistModifier(angle, start, end);
 		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);
