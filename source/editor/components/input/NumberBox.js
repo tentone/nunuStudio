@@ -14,6 +14,8 @@ function NumberBox(parent)
 	/**
 	 * Indicates if the number box is storing a angle value.
 	 *
+	 * If the value is an angle is has to be converted to editor coordinates.
+	 *
 	 * @attribute isAngle
 	 * @type {boolean}
 	 */
@@ -90,9 +92,9 @@ NumberBox.prototype.setOnChange = function(onChange)
  */
 NumberBox.prototype.setValue = function(value)
 {
-	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+	if(this.isAngle)
 	{
-		value = UnitConverter.convert(value, "r", "d");
+		value = UnitConverter.convert(value, "r", Editor.settings.units.angle);
 	}
 
 	this.element.value = value;
@@ -107,9 +109,9 @@ NumberBox.prototype.setValue = function(value)
 NumberBox.prototype.getValue = function()
 {	
 	var value = Number.parseFloat(this.element.value);
-	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+	if(this.isAngle)
 	{
-		value = UnitConverter.convert(value, "d", "r");
+		value = UnitConverter.convert(value, Editor.settings.units.angle, "r");
 	}
 
 	return value;

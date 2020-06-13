@@ -164,12 +164,12 @@ VectorBox.prototype.getValue = function()
 {
 	var value = {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
 
-	if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+	if(this.isAngle)
 	{
-		value.x = UnitConverter.convert(value.x, "d", "r");
-		value.y = UnitConverter.convert(value.y, "d", "r");
-		value.z = UnitConverter.convert(value.z, "d", "r");
-		value.w = UnitConverter.convert(value.w, "d", "r");
+		value.x = UnitConverter.convert(value.x, Editor.settings.units.angle, "r");
+		value.y = UnitConverter.convert(value.y, Editor.settings.units.angle, "r");
+		value.z = UnitConverter.convert(value.z, Editor.settings.units.angle, "r");
+		value.w = UnitConverter.convert(value.w, Editor.settings.units.angle, "r");
 	}
 
 	return value;
@@ -189,10 +189,10 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 {
 	if(x.isVector2)
 	{
-		if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+		if(this.isAngle)
 		{
-			this.x.value = UnitConverter.convert(x.x, "r", "d");
-			this.y.value = UnitConverter.convert(x.y, "r", "d");
+			this.x.value = UnitConverter.convert(x.x, "r", Editor.settings.units.angle);
+			this.y.value = UnitConverter.convert(x.y, "r", Editor.settings.units.angle);
 		}
 		else
 		{
@@ -204,11 +204,11 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 	}
 	else if(x.isVector3)
 	{
-		if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+		if(this.isAngle)
 		{
-			this.x.value = UnitConverter.convert(x.x, "r", "d");
-			this.y.value = UnitConverter.convert(x.y, "r", "d");
-			this.z.value = UnitConverter.convert(x.z, "r", "d");
+			this.x.value = UnitConverter.convert(x.x, "r", Editor.settings.units.angle);
+			this.y.value = UnitConverter.convert(x.y, "r", Editor.settings.units.angle);
+			this.z.value = UnitConverter.convert(x.z, "r", Editor.settings.units.angle);
 		}
 		else
 		{
@@ -221,11 +221,11 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 	}
 	else if(x.isEuler)
 	{
-		if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+		if(this.isAngle)
 		{
-			this.x.value = UnitConverter.convert(x.x, "r", "d");
-			this.y.value = UnitConverter.convert(x.y, "r", "d");
-			this.z.value = UnitConverter.convert(x.z, "r", "d");
+			this.x.value = UnitConverter.convert(x.x, "r", Editor.settings.units.angle);
+			this.y.value = UnitConverter.convert(x.y, "r", Editor.settings.units.angle);
+			this.z.value = UnitConverter.convert(x.z, "r", Editor.settings.units.angle);
 		}
 		else
 		{
@@ -247,12 +247,12 @@ VectorBox.prototype.setValue = function(x, y, z, w)
 	}
 	else
 	{
-		if(this.isAngle && Editor.settings.units.angle === Settings.DEGREE)
+		if(this.isAngle)
 		{
-			x = UnitConverter.convert(x.x, "r", "d");
-			y = UnitConverter.convert(x.y, "r", "d");
-			z = UnitConverter.convert(x.z, "r", "d");
-			z = UnitConverter.convert(x.w, "r", "d");
+			x = UnitConverter.convert(x.x, "r", Editor.settings.units.angle);
+			y = UnitConverter.convert(x.y, "r", Editor.settings.units.angle);
+			z = UnitConverter.convert(x.z, "r", Editor.settings.units.angle);
+			z = UnitConverter.convert(x.w, "r", Editor.settings.units.angle);
 		}
 
 		this.x.value = x;

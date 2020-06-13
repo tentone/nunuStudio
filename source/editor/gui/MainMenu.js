@@ -748,7 +748,7 @@ function MainMenu(parent)
 
 		Editor.alert("Reduced from " + vertices + " to " + Math.ceil(vertices * level) + " vertex.");
 
-	}, Global.FILE_PATH + "icons/models/figures.png");
+	}, Global.FILE_PATH + "icons/models/triangle.png");
 
 	modifiers.addOption(Locale.subdivide, function()
 	{
@@ -762,7 +762,7 @@ function MainMenu(parent)
 		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);
-	}, Global.FILE_PATH + "icons/models/figures.png");
+	}, Global.FILE_PATH + "icons/misc/subdivide.png");
 
 	modifiers.addOption(Locale.twist, function()
 	{
