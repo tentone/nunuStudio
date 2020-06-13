@@ -454,6 +454,36 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
 };
 
 /**
+ * Choose a file path/name to create a new file and write it to the system.
+ *
+ * Depending on the platform opens a file path selection windows of a box to select the name of the file.
+ *
+ * @method chooseFileWrite
+ * @param {Function} onLoad onLoad callback that receives the path select to write the file.
+ * @param {string} filter File type filter (e.g. ".zip,.rar, etc).
+ */
+FileSystem.chooseFileWrite = function(onLoad, filter)
+{
+	if(Nunu.runningOnDesktop())
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				onLoad(files[0].path);
+			}
+		}, filter, true);
+	}
+	else
+	{
+		FileSystem.chooseFileName(function(fname)
+		{
+			onLoad(fname);
+		}, filter);
+	}
+};
+
+/**
  * Open file chooser dialog window for the user to select files stored in the system.
  *
  * The files selected are retrieved using the onLoad callback that receives a array of File objects.
@@ -758,7 +788,7 @@ FileSystem.getNameWithoutExtension = function(file)
 };
 
 /**
- * Get file directoty.
+ * Get directory where the file is placed.
  * 
  * If input is a/b/c/abc.d output is a/b/c/
  *

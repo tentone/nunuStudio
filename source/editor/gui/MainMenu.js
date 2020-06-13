@@ -245,7 +245,7 @@ function MainMenu(parent)
 				var reader = new FileReader();
 				reader.onload = function()
 				{
-					if(binary)
+					if(" + Locale.binary + ")
 					{
 						var pson = new dcodeIO.PSON.StaticPair();
 						var data = pson.decode(reader.result);
@@ -266,7 +266,7 @@ function MainMenu(parent)
 					Editor.addAction(new ActionBundle(actions));
 				};
 
-				if(binary)
+				if(" + Locale.binary + ")
 				{
 					reader.readAsArrayBuffer(file);
 				}
@@ -284,287 +284,189 @@ function MainMenu(parent)
 
 	// Export OBJ
 	exportMenu.addOption("OBJ", function()
-	{
-		// TODO <EXPORT ONLY VISIBLE>
-		
-		if(Nunu.runningOnDesktop())
+	{	
+		FileSystem.chooseFileWrite(function(fname)
 		{
-			FileSystem.chooseFile(function(files)
-			{
-				if(files.length > 0)
-				{
-					var exporter = new THREE.OBJExporter();
-					var data = exporter.parse(Editor.getScene());
-					FileSystem.writeFile(files[0].path, data);
-				}
-			}, ".obj", true);
-		}
-		else
-		{
-			FileSystem.chooseFileName(function(fname)
-			{
-				var exporter = new THREE.OBJExporter();
-				var data = exporter.parse(Editor.getScene());
-				FileSystem.writeFile(fname, data);
-			}, ".obj");
-		}
+			var exporter = new THREE.OBJExporter();
+			var data = exporter.parse(Editor.getScene());
+			FileSystem.writeFile(fname, data);
+		}, ".obj");
+
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Export GLTF
 	exportMenu.addOption("GLTF", function()
 	{
+		var onlyVisible = Editor.confirm(Locale.exportOnlyVisibleObjects);
 
-		// TODO <Only visible>-
+		var config = 
+		{
+			onlyVisible: onlyVisible,
+			binary: false,
+			forceIndices: true,
+			embedImages: true,
+			forcePowerOfTwoTextures: false
+		};
 
-		if(Nunu.runningOnDesktop())
+		FileSystem.chooseFileWrite(function(fname)
 		{
-			FileSystem.chooseFile(function(files)
+			var exporter = new THREE.GLTFExporter();
+			exporter.parse(Editor.getScene(), function(result)
 			{
-				if(files.length > 0)
-				{
-					// TODO <SELECT SCENE TO EXPORT>
-					var exporter = new THREE.GLTFExporter();
-					exporter.parse(Editor.getScene(), function(result)
-					{
-						FileSystem.writeFile(files[0].path, JSON.stringify(result, null, "\t"));
-					});
-				}
-			}, ".gltf", true);
-		}
-		else
-		{
-			FileSystem.chooseFileName(function(fname)
-			{
-				// TODO <SELECT SCENE TO EXPORT>
-				var exporter = new THREE.GLTFExporter();
-				exporter.parse(Editor.getScene(), function(result)
-				{
-					FileSystem.writeFile(fname, JSON.stringify(result, null, "\t"));
-				})
-			}, ".gltf");
-		}
+				FileSystem.writeFile(fname, JSON.stringify(result, null, "\t"));
+			}, config);
+		}, ".gltf");
 	}, Global.FILE_PATH + "icons/gltf.png");
 
 	// Export GLB
 	exportMenu.addOption("GLB", function()
-	{
-		if(Nunu.runningOnDesktop())
+	{	
+		var onlyVisible = Editor.confirm(Locale.exportOnlyVisibleObjects);
+
+		var config = 
 		{
-			FileSystem.chooseFile(function(files)
-			{
-				if(files.length > 0)
-				{
-					// TODO <SELECT SCENE TO EXPORT>
-					var exporter = new THREE.GLTFExporter();
-					exporter.parse(Editor.getScene(), function(result)
-					{
-						FileSystem.writeFileArrayBuffer(files[0].path, result);
-					}, {binary: true, forceIndices: true, forcePowerOfTwoTextures: true});
-				}
-			}, ".glb", true);
-		}
-		else
+			onlyVisible: onlyVisible,
+			binary: true,
+			forceIndices: true,
+			embedImages: true,
+			forcePowerOfTwoTextures: false
+		};
+
+		FileSystem.chooseFileWrite(function(fname)
 		{
-			FileSystem.chooseFileName(function(fname)
+			var exporter = new THREE.GLTFExporter();
+			exporter.parse(Editor.getScene(), function(result)
 			{
-				// TODO <SELECT SCENE TO EXPORT>
-				var exporter = new THREE.GLTFExporter();
-				exporter.parse(Editor.getScene(), function(result)
-				{
-					FileSystem.writeFileArrayBuffer(fname, result);
-				}, {binary: true, forceIndices: true, forcePowerOfTwoTextures: true});
-			}, ".glb");
-		}
+				FileSystem.writeFileArrayBuffer(fname, result);
+			}, config);
+		}, ".glb");
 	}, Global.FILE_PATH + "icons/gltf.png");
 
 	// Export Google Draco
 	exportMenu.addOption("Draco", function()
 	{
-		if(Editor.selection.length > 0 && Editor.selection[0].geometry !== undefined)
-		{
-			var geometry = Editor.selection[0].geometry;
-			var exporter = new THREE.DRACOExporter();
-
-			if(Nunu.runningOnDesktop())
-			{
-				FileSystem.chooseFile(function(files)
-				{
-					if(files.length > 0)
-					{
-						var arraybuffer = exporter.parse(geometry);
-						FileSystem.writeFileArrayBuffer(files[0].path, arraybuffer);
-					}
-				}, ".drc", true);
-			}
-			else
-			{
-				FileSystem.chooseFileName(function(fname)
-				{
-					var arraybuffer = exporter.parse(geometry);
-					FileSystem.writeFileArrayBuffer(fname, arraybuffer);
-				}, ".drc");
-			}
-		}
-		else
+		if(Editor.selection.length === 0 || Editor.selection[0].geometry === undefined)
 		{
 			Editor.alert(Locale.needsObjectGeometry);
+			return;
 		}
+
+		var geometry = Editor.selection[0].geometry;
+		var exporter = new THREE.DRACOExporter();
+
+		FileSystem.chooseFileWrite(function(fname)
+		{
+			var arraybuffer = exporter.parse(geometry);
+			FileSystem.writeFileArrayBuffer(fname, arraybuffer);
+		}, ".drc");
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
-	// Export Collada
-	exportMenu.addOption("Collada", function()
+	// Auxiliar method to export collada files
+	function exportCollada(fname, config)
 	{
-		if(Nunu.runningOnDesktop())
+		var path = FileSystem.getFilePath(fname);
+
+		var exporter = new THREE.ColladaExporter();
+		exporter.parse(Editor.program, function(result)
 		{
-			FileSystem.chooseFile(function(files)
+			for(var i = 0; i < result.textures.length; i++)
 			{
-				if(files.length > 0)
-				{
-					// TODO <SELECT SCENE TO EXPORT>
-					var exporter = new THREE.ColladaExporter();
-					exporter.parse(Editor.getScene(), function(result)
-					{
-						// TODO <PROCESS result.textures>
-						FileSystem.writeFile(files[0].path, result.data);
-					}, {binary: false});
-					
-				}
-			}, ".dae", true);
-		}
-		else
+				var texture = result.textures[i];
+				FileSystem.writeFileArrayBuffer(path + texture.name + "." + texture.ext, texture.data.buffer);
+			}
+
+			FileSystem.writeFile(fname, result.data);
+		}, config);
+	}
+
+	// Export Collada
+	exportMenu.addOption("Collada V1.4.1", function()
+	{
+		var config =
 		{
-			FileSystem.chooseFileName(function(fname)
-			{
-				// TODO <SELECT SCENE TO EXPORT>
-				var exporter = new THREE.ColladaExporter();
-				exporter.parse(Editor.getScene(), function(result)
-				{
-					// TODO <PROCESS result.textures>
-					FileSystem.writeFile(fname, result.data);
-				}, {binary: false});
-			}, ".dae");
-		}
+			version: "1.4.1",
+			binary: true,
+			textureDirectory: ""
+		};
+
+		FileSystem.chooseFileWrite(function(fname)
+		{
+			exportCollada(fname, config);
+		}, ".dae");
+
+	}, Global.FILE_PATH + "icons/misc/scene.png");
+
+	exportMenu.addOption("Collada V1.5", function()
+	{
+		var config =
+		{
+			version: "1.5.0",
+			binary: true,
+			textureDirectory: ""
+		};
+
+		FileSystem.chooseFileWrite(function(fname)
+		{
+			exportCollada(fname, config);
+		}, ".dae");
+
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Export PLY
 	exportMenu.addOption("PLY", function()
 	{
-		if(Nunu.runningOnDesktop())
+		var config = {binary: false};
+		
+		FileSystem.chooseFileWrite(function(fname)
 		{
-			FileSystem.chooseFile(function(files)
+			var exporter = new THREE.PLYExporter();
+			exporter.parse(Editor.getScene(), function(result)
 			{
-				if(files.length > 0)
-				{
-					// TODO <SELECT SCENE TO EXPORT>
-					var exporter = new THREE.PLYExporter();
-					exporter.parse(Editor.getScene(), function(result)
-					{
-						FileSystem.writeFile(files[0].path, result);
-					}, {binary: false});
-					
-				}
-			}, ".ply", true);
-		}
-		else
-		{
-			FileSystem.chooseFileName(function(fname)
-			{
-				// TODO <SELECT SCENE TO EXPORT>
-				var exporter = new THREE.PLYExporter();
-				exporter.parse(Editor.getScene(), function(result)
-				{
-					FileSystem.writeFile(fname, result);
-				}, {binary: false});
-			}, ".ply");
-		}
+				FileSystem.writeFile(fname, result);
+			}, config);
+		}, ".ply");
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 
-	exportMenu.addOption("PLY (Binary)", function()
+	exportMenu.addOption("PLY (" + Locale.binary + ")", function()
 	{
-		if(Nunu.runningOnDesktop())
+		var config = {binary: true};
+
+		FileSystem.chooseFileWrite(function(fname)
 		{
-			FileSystem.chooseFile(function(files)
+			var exporter = new THREE.PLYExporter();
+			exporter.parse(Editor.getScene(), function(result)
 			{
-				if(files.length > 0)
-				{
-					// TODO <SELECT SCENE TO EXPORT>
-					var exporter = new THREE.PLYExporter();
-					exporter.parse(Editor.getScene(), function(result)
-					{
-						FileSystem.writeFileArrayBuffer(files[0].path, result);
-					}, {binary: true});
-					
-				}
-			}, ".ply", true);
-		}
-		else
-		{
-			FileSystem.chooseFileName(function(fname)
-			{
-				// TODO <SELECT SCENE TO EXPORT>
-				var exporter = new THREE.PLYExporter();
-				exporter.parse(Editor.getScene(), function(result)
-				{
-					FileSystem.writeFileArrayBuffer(fname, result);
-				}, {binary: true});
-			}, ".ply");
-		}
+				FileSystem.writeFileArrayBuffer(fname, result);
+			}, config);
+		}, ".ply");
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 
 	// Export STL
 	exportMenu.addOption("STL", function()
 	{
-		if(Nunu.runningOnDesktop())
+		var config = {binary: false};
+
+		FileSystem.chooseFileWrite(function(fname)
 		{
-			FileSystem.chooseFile(function(files)
-			{
-				if(files.length > 0)
-				{
-					// TODO <SELECT SCENE TO EXPORT>
-					var exporter = new THREE.STLExporter();
-					var data = exporter.parse(Editor.getScene());
-					FileSystem.writeFile(files[0].path, data);
-				}
-			}, ".stl", true);
-		}
-		else
-		{
-			FileSystem.chooseFileName(function(fname)
-			{
-				// TODO <SELECT SCENE TO EXPORT>
-				var exporter = new THREE.STLExporter();
-				var data = exporter.parse(Editor.getScene());
-				FileSystem.writeFile(fname, data);
-			}, ".stl");
-		}
+			var exporter = new THREE.STLExporter();
+			var data = exporter.parse(Editor.program, config);
+			FileSystem.writeFile(fname, data);
+		}, ".stl");
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Export Binary STL
-	exportMenu.addOption("STL (Binary)", function()
-	{
-		if(Nunu.runningOnDesktop())
+	exportMenu.addOption("STL (" + Locale.binary + ")", function()
+	{	
+		var config = {binary: true};
+
+		FileSystem.chooseFileWrite(function(fname)
 		{
-			FileSystem.chooseFile(function(files)
-			{
-				if(files.length > 0)
-				{
-					var exporter = new THREE.STLExporter();
-					var data = exporter.parse(Editor.program, {binary: true});
-					FileSystem.writeFileArrayBuffer(files[0].path, data.buffer);
-				}
-			}, ".stl", true);
-		}
-		else
-		{
-			FileSystem.chooseFileName(function(fname)
-			{
-				var exporter = new THREE.STLExporter();
-				var data = exporter.parse(Editor.program, {binary: true});
-				FileSystem.writeFileArrayBuffer(fname, data.buffer);
-			}, ".stl");
-		}
+			var exporter = new THREE.STLExporter();
+			var data = exporter.parse(Editor.program, config);
+			FileSystem.writeFileArrayBuffer(fname, data.buffer);
+		}, ".stl");
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Exit

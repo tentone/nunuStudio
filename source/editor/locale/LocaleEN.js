@@ -414,6 +414,7 @@ LocaleManager.register(
 	twist: "Twist",
 
 	// Editor
+	binary: "Binary",
 	modifiers: "Modifiers",
 	useTexture: "Use Texture",
 	configuration: "Configuration",

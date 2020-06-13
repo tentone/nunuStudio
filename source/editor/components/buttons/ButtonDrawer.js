@@ -66,9 +66,6 @@ function ButtonDrawer(parent)
 
 	this.addEvent("mouseenter", function()
 	{
-		// TODO <REMOVE THIS>
-		console.log("Mouse enter, expand");
-
 		if(self.disabled === false)
 		{
 			self.setExpanded(true);
