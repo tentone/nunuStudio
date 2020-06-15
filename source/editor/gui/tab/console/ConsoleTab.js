@@ -231,7 +231,9 @@ function ConsoleTab(parent, closeable, container, index)
 ConsoleTab.prototype = Object.create(TabComponent.prototype);
 
 /**
- * Run a user command from the console.
+ * Run a user command from the console, commands are regular code, they have access to the global application space.
+ *
+ * Its possible to create global variables and access enviroments varibles for the program loaded into the platform.
  *
  * @method runCommand
  */
@@ -286,10 +288,14 @@ ConsoleTab.getStackTrace = function()
 	catch(error)
 	{
 		stack = error.stack || "";
+		stack = stack.split("\n").map(function(line)
+		{
+			return line.trim();
+		});
+		return stack.splice(stack[0] == "Error" ? 2 : 1);
 	}
 
-	stack = stack.split("\n").map(function(line){return line.trim();});
-	return stack.splice(stack[0] == "Error" ? 2 : 1);
+	return "";
 };
 
 /**
@@ -356,6 +362,10 @@ ConsoleTab.prototype.log = function(args)
 	{
 		this.content.appendChild(ConsoleTab.createMessage(args[i]));
 	}
+
+	// TODO <REMOVE CODE>
+	// var stack = ConsoleTab.getStackTrace();
+	// this.handlers.log(stack, stack[2]);
 
 	this.content.appendChild(ConsoleTab.createBar());
 	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
