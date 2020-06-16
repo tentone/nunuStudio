@@ -366,6 +366,7 @@ ConsoleTab.prototype.log = function(args)
 	// TODO <REMOVE CODE>
 	// var stack = ConsoleTab.getStackTrace();
 	// this.handlers.log(stack, stack[2]);
+	// TODO <CHECK IF THIS Class is a part of the call stack to detect recursion>
 
 	this.content.appendChild(ConsoleTab.createBar());
 	this.content.scrollTop = Number.MAX_SAFE_INTEGER;
