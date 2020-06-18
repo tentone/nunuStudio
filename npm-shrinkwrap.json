@@ -1,6 +1,6 @@
 {
 	"name": "nunu-studio",
-	"version": "0.97.10",
+	"version": "0.97.14",
 	"lockfileVersion": 1,
 	"requires": true,
 	"dependencies": {
@@ -572,6 +572,11 @@
 			"resolved": "https://registry.npmjs.org/camelcase/-/camelcase-3.0.0.tgz",
 			"integrity": "sha1-MvxLn82vhF/N9+c7uXysImHwqwo=",
 			"dev": true
+		},
+		"cannon": {
+			"version": "0.6.2",
+			"resolved": "https://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz",
+			"integrity": "sha1-HnvHLdWEGYLzwQTCvFeL+k+xxXI="
 		},
 		"capture-stack-trace": {
 			"version": "1.0.1",

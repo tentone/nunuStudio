@@ -37,7 +37,9 @@
 	"bugs": {
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"cannon": "^0.6.2"
+	},
 	"devDependencies": {
 		"cordova": "~9.0.0",
 		"nwjs-builder-phoenix": "^1.15.0",

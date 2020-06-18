@@ -1,14 +1,19 @@
 "use strict";
 
 /*
- * Include JS or CSS file in project.
+ * Include JS or CSS file in project, files can be obtained from node_packages.
  * 
- * Projects can be minified using the build tools.
+ * The project can be built and minified using the build tools.
  * 
+ * All files are included relative to the root of the project.
+ *
  * @method include
+ * @param {string} file File to include into the project.
+ * @param {Function} onload Code to execute after the file is imported into the project.
  */
 window.include = function(file, onload)
 {
+	// Code
 	if(file.endsWith(".js"))
 	{
 		var js = document.createElement("script");
@@ -22,6 +27,7 @@ window.include = function(file, onload)
 
 		document.body.appendChild(js);
 	}
+	// CSS
 	else if(file.endsWith(".css"))
 	{
 		var css = document.createElement("link");
@@ -30,6 +36,7 @@ window.include = function(file, onload)
 
 		document.body.appendChild(css);
 	}
+	// Folder
 	else if(window.require !== undefined)
 	{
 		var fs = require("fs");
