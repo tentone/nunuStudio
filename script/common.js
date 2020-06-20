@@ -21,6 +21,7 @@ module.exports = {
 	downloadFolder: downloadFolder,
 	listFiles: listFiles,
 	getFileName: getFileName,
+	getFileNameNoExt: getFileNameNoExt,
 	download: download
 };
 
@@ -403,7 +404,7 @@ function getFileName(file)
  * @param {string} file File path
  * @return {string} File name without path and extension
  */
-function getFileNameWithoutExtension(file)
+function getFileNameNoExt(file)
 {
 	if(file !== undefined)
 	{

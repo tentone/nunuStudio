@@ -38,6 +38,7 @@
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
 	"dependencies": {
+		"three.js": "^0.117.1",
 		"cannon": "^0.6.2"
 	},
 	"devDependencies": {
