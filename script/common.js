@@ -20,9 +20,15 @@ module.exports = {
 	deleteFile: deleteFile,
 	downloadFolder: downloadFolder,
 	listFiles: listFiles,
+	getFileName: getFileName,
 	download: download
 };
 
+/**
+ * Path to the closure compiler in node modules.
+ *
+ * @type {string}
+ */
 const CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar";
 
 /**
@@ -320,6 +326,11 @@ function deleteFolder(path)
 	}
 }
 
+/**
+ * Delete a file.
+ *
+ * @param {string} fname Path to the file.
+ */
 function deleteFile(fname)
 {
 	fs.unlinkSync(fname);
@@ -334,6 +345,13 @@ function downloadFolder(basePath, baseURL, ignoreRootFiles)
 	}
 }
 
+/**
+ * List all files in a path (recursively), returns a list with the path of all files found.
+ *
+ * @param {string} path Path to list files.
+ * @param {boolean} ignoreRootFiles Ignore the files in the root.
+ * @param {string} virtualPath Virtual path inside of the main path.
+ */
 function listFiles(path, ignoreRootFiles, virtualPath)
 {
 	let files = [];
@@ -354,6 +372,27 @@ function listFiles(path, ignoreRootFiles, virtualPath)
 	});
 
 	return files;
+}
+
+/**
+ * Get file name with extension from file path string.
+ * 
+ * If input is a/b/c/abc.d output is abc.d.
+ * 
+ * @param {string} file File path
+ * @return {string} File name without path with extension
+ */
+function getFileName(file)
+{
+	if(file !== undefined)
+	{
+		var a = file.lastIndexOf("\\");
+		var b = file.lastIndexOf("/");
+
+		return file.substring((a > b) ? (a + 1) : (b + 1), file.length);
+	}
+	
+	return "";
 }
 
 function download(fname, url)
