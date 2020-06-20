@@ -6,7 +6,6 @@ console.log("                          Modularize Codebase");
 console.log("----------------------------------------------------------------------");
 
 var files = common.listFiles("../source/editor", false, "");
-console.log(files);
 
 for(var i = 0; i < files.length; i++)
 {
@@ -15,8 +14,13 @@ for(var i = 0; i < files.length; i++)
 	// Remove the "use strict" file
 	data = data.replace("\"use strict\";", "");
 
+	var fname = common.getFileName(files[i]);
+
+	// Check if there is a class with name of the file
+	// "function " + fname
+
 	// Export the class of the file
-	data += "\n export {" + + "};"
+	// data += "\n export {" + + "};"
 
 	// Remove all duplicated lines
 	data = data.replace("\n\n", "\n");

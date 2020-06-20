@@ -395,6 +395,27 @@ function getFileName(file)
 	return "";
 }
 
+/**
+ * Get file name without extension from file path string.
+ * 
+ * If input is a/b/c/abc.d output is abc.
+ * 
+ * @param {string} file File path
+ * @return {string} File name without path and extension
+ */
+function getFileNameWithoutExtension(file)
+{
+	if(file !== undefined)
+	{
+		var a = file.lastIndexOf("\\");
+		var b = file.lastIndexOf("/");
+
+		return file.substring((a > b) ? (a + 1) : (b + 1), file.lastIndexOf("."));
+	}
+	
+	return "";
+}
+
 function download(fname, url)
 {
 	const http = require("https");
