@@ -28,7 +28,7 @@ function SSAONOHPassNode(parent)
 	this.add(this.kernelSize);
 	this.nextRow();
 
-	this.addText("Min Distance");
+	this.addText(Locale.minDistance);
 	this.minDistance = new NumberBox(this);
 	this.minDistance.size.set(0, 18);
 	this.minDistance.setOnChange(function()
@@ -38,7 +38,7 @@ function SSAONOHPassNode(parent)
 	this.add(this.minDistance);
 	this.nextRow();
 
-	this.addText("Max Distance");
+	this.addText(Locale.maxDistance);
 	this.maxDistance = new NumberBox(this);
 	this.maxDistance.size.set(0, 18);
 	this.maxDistance.setOnChange(function()

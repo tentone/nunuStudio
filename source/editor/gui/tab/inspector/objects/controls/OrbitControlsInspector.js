@@ -19,7 +19,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.add(this.distance);
 	this.form.nextRow();
 
-	this.form.addText("Max Distance");
+	this.form.addText(Locale.maxDistance);
 	this.maxDistance = new NumberBox(this.form);
 	this.maxDistance.size.set(60, 18);
 	this.maxDistance.setStep(0.1);
@@ -31,7 +31,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.add(this.maxDistance);
 	this.form.nextRow();
 
-	this.form.addText("Min Distance");
+	this.form.addText(Locale.minDistance);
 	this.minDistance = new NumberBox(this.form);
 	this.minDistance.size.set(60, 18);
 	this.minDistance.setStep(0.1);
@@ -44,7 +44,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Needs button pressed
-	this.form.addText("Require button");
+	this.form.addText(Locale.requireButton);
 	this.needsButtonPressed = new CheckBox(this.form);
 	this.needsButtonPressed.size.set(18, 18);
 	this.needsButtonPressed.setOnChange(function()
@@ -55,7 +55,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Movement
-	this.form.addText("Movement");
+	this.form.addText(Locale.movement);
 	this.movementEnabled = new CheckBox(this.form);
 	this.movementEnabled.size.set(18, 18);
 	this.movementEnabled.setOnChange(function()
@@ -66,7 +66,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Sensitivity
-	this.form.addText("Sensitivity");
+	this.form.addText(Locale.sensitivity);
 	this.sensitivity = new Slider(this.form);
 	this.sensitivity.size.set(140, 18);
 	this.sensitivity.setStep(0.0001);
@@ -79,7 +79,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Limit up
-	this.form.addText("Limit up");
+	this.form.addText(Locale.limitUp);
 	this.limitUp = new NumberBox(this.form);
 	this.limitUp.size.set(60, 18);
 	this.limitUp.setStep(0.001);
@@ -92,7 +92,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Limit down
-	this.form.addText("Limit down");
+	this.form.addText(Locale.limitDown);
 	this.limitDown = new NumberBox(this.form);
 	this.limitDown.size.set(60, 18);
 	this.limitDown.setStep(0.001);
@@ -116,7 +116,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Zoom sensitivity
-	this.form.addText("Zoom speed");
+	this.form.addText(Locale.zoomSpeed);
 	this.zoomSensitivity = new Slider(this.form);
 	this.zoomSensitivity.size.set(140, 18);
 	this.zoomSensitivity.setStep(0.0001);
@@ -153,7 +153,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Friction
-	this.form.addText("Friction");
+	this.form.addText(Locale.damping);
 	this.friction = new Slider(this.form);
 	this.friction.size.set(18, 18);
 	this.friction.setStep(0.01);
@@ -166,7 +166,7 @@ function OrbitControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Invert Navigation
-	this.form.addText("Invert Navigation");
+	this.form.addText(Locale.invertNavigation);
 	this.invertNavigation = new CheckBox(this.form);
 	this.invertNavigation.size.set(18, 18);
 	this.invertNavigation.setOnChange(function()

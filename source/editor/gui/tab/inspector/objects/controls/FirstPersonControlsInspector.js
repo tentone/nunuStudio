@@ -7,7 +7,7 @@ function FirstPersonControlsInspector(parent, object)
 	var self = this;
 
 	// Needs button pressed
-	this.form.addText("Require button");
+	this.form.addText(Locale.requireButton);
 	this.needsButtonPressed = new CheckBox(this.form);
 	this.needsButtonPressed.size.set(18, 18);
 	this.needsButtonPressed.setOnChange(function()
@@ -18,7 +18,7 @@ function FirstPersonControlsInspector(parent, object)
 	this.form.nextRow();
 	
 	// Sensitivity
-	this.form.addText("Sensitivity");
+	this.form.addText(Locale.sensitivity);
 	this.sensitivity = new Slider(this.form);
 	this.sensitivity.size.set(140, 18);
 	this.sensitivity.setStep(0.0001);
@@ -31,7 +31,7 @@ function FirstPersonControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Movement
-	this.form.addText("Movement");
+	this.form.addText(Locale.movement);
 	this.movementEnabled = new CheckBox(this.form);
 	this.movementEnabled.size.set(18, 18);
 	this.movementEnabled.setOnChange(function()
