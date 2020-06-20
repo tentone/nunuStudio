@@ -42,7 +42,7 @@ function FirstPersonControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Move speed
-	this.form.addText("Move speed");
+	this.form.addText(Locale.moveSpeed);
 	this.moveSpeed = new Slider(this.form);
 	this.moveSpeed.size.set(140, 18);
 	this.moveSpeed.setStep(0.01);
@@ -55,7 +55,7 @@ function FirstPersonControlsInspector(parent, object)
 	this.form.nextRow();
 
 	// Move on plane
-	this.form.addText("Move plane");
+	this.form.addText(Locale.movePlane);
 	this.moveOnPlane = new CheckBox(this.form);
 	this.moveOnPlane.size.set(18, 18);
 	this.moveOnPlane.setOnChange(function()

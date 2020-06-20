@@ -138,6 +138,10 @@ LocaleManager.register(
 	shadowMaterial: "Shadow Material",
 
 	// Properties
+	moveSpeed: "Move Speed",
+	movePlane: "Move Plane",
+	kernelRadius: "Kernel Radius",
+	kernelSize: "Kernel Size",
 	speed: "Speed",
 	focus: "Focus",
 	postProcessing: "Post-Processing",

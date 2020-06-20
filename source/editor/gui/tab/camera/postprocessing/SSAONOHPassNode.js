@@ -6,7 +6,7 @@ function SSAONOHPassNode(parent)
 
 	var self = this;
 
-	this.addText("Kernel Radius");
+	this.addText(Locale.kernelRadius);
 	this.kernelRadius = new NumberBox(this);
 	this.kernelRadius.size.set(0, 18);
 	this.kernelRadius.setStep(1.0);
@@ -17,7 +17,7 @@ function SSAONOHPassNode(parent)
 	this.add(this.kernelRadius);
 	this.nextRow();
 
-	this.addText("Kernel Size");
+	this.addText(Locale.kernelSize);
 	this.kernelSize = new NumberBox(this);
 	this.kernelSize.size.set(0, 18);
 	this.kernelSize.setStep(1.0);
