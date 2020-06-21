@@ -49,6 +49,8 @@ for(var i = 0; i < paths.length; i++)
 	}
 }
 
+var external = ["THREE", "CANNON"];
+
 // Iterate all the files to be modularized.
 for(var i = 0; i < files.length; i++)
 {
@@ -56,6 +58,15 @@ for(var i = 0; i < files.length; i++)
 
 	// Remove the "use strict" declaration file
 	data = data.replace("\"use strict\";", "");
+
+	// Import modules user in this file
+	for(var j = 0; j < files.length; j++)
+	{
+		if(j !== i && data.search(files[i].className) >= 0)
+		{
+			// TODO <CALCULATE RELATIVE PATH BETWEEN FILES>
+		}
+	}
 
 	// Look for other modules and import them
 	// TODO <ADD CODE HERE>
