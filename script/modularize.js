@@ -6,9 +6,22 @@ console.log("                          Modularize Codebase");
 console.log("----------------------------------------------------------------------");
 
 
-// Represents a file to be modularized and some of its details
-//
-// These are used to connect the different files being modularized.
+/** 
+ * Compare two paths and return th
+ *
+ */
+function comparePaths(a, b)
+{
+
+}
+
+return;
+
+/**
+ * Represents a file to be modularized and some of its details
+ * 
+ * These are used to connect the different files being modularized.
+ */
 function CodeFile(fullPath, className, isModule)
 {
 	// Full path of the file
