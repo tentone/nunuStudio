@@ -22,7 +22,8 @@ module.exports = {
 	listFiles: listFiles,
 	getFileName: getFileName,
 	getFileNameNoExt: getFileNameNoExt,
-	download: download
+	download: download,
+	calculateRelativePath: calculateRelativePath
 };
 
 /**
@@ -31,6 +32,20 @@ module.exports = {
  * @type {string}
  */
 const CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar";
+
+/**
+ * Compare two paths and calcule the relative path from a to be from their absolute paths.
+ *
+ * e.g if a is /a/b/c/d/e and b is /a/b/f/h the calculated path will be ../../../f/h
+ * 
+ * @param {string} a Absolute path to the file/dir a
+ * @param {string} b Absolute path to the file/dir b
+ * @return {string} Absolute path from a to b.
+ */
+function calculateRelativePath(a, b)
+{
+	return "";
+}
 
 /**
  * Update the version of the library by adding to the current version.

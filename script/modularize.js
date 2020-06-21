@@ -5,14 +5,15 @@ console.log("                              nunuStudio");
 console.log("                          Modularize Codebase");
 console.log("----------------------------------------------------------------------");
 
+var tests = [
+	["/a/b/c/d/e", "/a/b/f/h", "../../../f/h"],
+	["/a/b/c", "a/b/c/d", "d"]
+];
 
-/** 
- * Compare two paths and return th
- *
- */
-function comparePaths(a, b)
+for(var i = 0; i < tests.length; i++)
 {
-
+	var a = common.calculateRelativePath(tests[i][0], tests[i][1]);
+	console.log(a ===  tests[i][2], a);
 }
 
 return;
