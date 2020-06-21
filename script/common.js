@@ -44,32 +44,43 @@ const CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar"
  */
 function calculateRelativePath(a, b)
 {
+	// TODO <ADD CODE HERE>
+
 	return "";
 }
 
 /**
  * Update the version of the library by adding to the current version.
  *
- * @param {string} data The object with the current version of the application.
+ * @param {string} version The object with the current version of the application.
  * @param {number} major How many to add to the major version.
  * @param {number} minor How many to add to the minor version.
  * @param {number} revision How many to add to the revision version.
  * @return {string} Updated version data.
  */
-function updateVersion(data, major, minor, revision)
+function updateVersion(version, major, minor, revision)
 {
-	const subversions = data.version.split('.');
+	const subversions = version.split('.');
 	subversions[0] = (Number.parseInt(subversions[0]) + major).toString();
 	subversions[1] = (Number.parseInt(subversions[1]) + minor).toString();
 	subversions[2] = (Number.parseInt(subversions[2]) + revision).toString();
 
-	data.version = subversions.join('.');
-
-	return data;
+	return subversions.join('.');
 }
 
 /**
- * Minify and optimize using the closure compiler. The compiler is fetched from the node_modules folder these need to be installed first.
+ * Minify and optimize using the closure compiler. (Required java JDK to be installed)
+ *
+ * The compiler is fetched from the node_modules folder these need to be installed first.
+ *
+ * It is recommended to annotate javascript code passed trough the closure compiler (https://developers.google.com/closure/compiler/docs/js-for-compiler).
+ * 
+ * @param {string} level Level of optimization applied can be ADVANCED_OPTIMIZATIONS, SIMPLE_OPTIMIZATIONS or WHITESPACE_ONLY.
+ * @param {string} formatting Formatting configuration (e.g. PRETTY_PRINT, SINGLE_QUOTES)
+ * @param {string} languageIn Script language from input (e.g. ES5, ES6)
+ * @param {string} languageOut Script language to output (e.g. ES5, ES6)
+ * @param {string} fileIn Input file to be processed.
+ * @param {string} fileOut Output file path automatically written by the compiler.
  */
 function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 {
@@ -109,8 +120,8 @@ function formatNumber(number, places)
 /**
  * Insert a timestamp into a file (replace a bit of text for the timestamp).
  *
- * @param keyword Keyword to be replaced by the timestamp.
- * @param data Input text data to search the keyword and replace with the timestamp.
+ * @param {string} keyword Keyword to be replaced by the timestamp.
+ * @param {string} data Input text data to search the keyword and replace with the timestamp.
  * @returns {string} Returns the data with the timescale placed.
  */
 function addTimestamp(keyword, data)
@@ -242,7 +253,7 @@ function getIncludes(code, regex)
 /**
  * Read file from path as text.
  *
- * @param fname Path of the file.
+ * @param {string} fname Path of the file.
  * @returns {string} Content of the file.
  */
 function readFile(fname)
@@ -253,8 +264,8 @@ function readFile(fname)
 /**
  * Write text file into the path, automatically creates the directories.
  *
- * @param fname Path to write the file.
- * @param text File content
+ * @param {string} fname Path to write the file.
+ * @param {string} text File content
  */
 function writeFile(fname, text)
 {
@@ -273,6 +284,12 @@ function writeFile(fname, text)
 	fs.writeFileSync(fname, text, "utf8");
 }
 
+/**
+ * Copy a folder from a path to another path. Copies all files, folders and symlinks (shortcuts).
+ *
+ * @param {string} src Source folder path.
+ * @param {string} dst Destination folder path.
+ */
 function copyFolder(src, dst)
 {
 	makeDirectory(dst);
@@ -320,6 +337,11 @@ function makeDirectory(dir)
 	}
 }
 
+/**
+ * Delete a folder from the system.
+ * 
+ * @param {string} path Path to delete.
+ */
 function deleteFolder(path)
 {
 	if(fs.existsSync(path))
@@ -352,6 +374,9 @@ function deleteFile(fname)
 	fs.unlinkSync(fname);
 }
 
+/**
+ * Download a folder from the internet (from URL), into a local path.
+ */
 function downloadFolder(basePath, baseURL, ignoreRootFiles)
 {
 	const files = listFiles(basePath + "/", ignoreRootFiles, "");
@@ -432,6 +457,12 @@ function getFileNameNoExt(file)
 	return "";
 }
 
+/**
+ * Download a file from the internet and store into a directory.
+ *
+ * @param {string} fname File name to store the file.
+ * @param {string} url URL to download the file from.
+ */
 function download(fname, url)
 {
 	const http = require("https");

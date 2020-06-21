@@ -17,7 +17,7 @@ console.log(" Reading package.json");
 let packageData = JSON.parse(common.readFile(SOURCE_PATH + "package.json"));
 
 console.log(" Updating version in package.json");
-packageData = common.updateVersion(packageData, 0, 0, 1);
+packageData.version = common.updateVersion(packageData.version, 0, 0, 1);
 
 console.log(" Write package.json");
 common.writeFile(SOURCE_PATH + "package.json", JSON.stringify(packageData, null, "\t"));
