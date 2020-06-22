@@ -44,9 +44,32 @@ const CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar"
  */
 function calculateRelativePath(a, b)
 {
+	a = a.split("/");
+	b = b.split("/");
+
+	// Remove the portions of the path that are equal
+	for(var i = 0; i < a.length && i < b.length; i++)
+	{
+		if(a[i] === b[i])
+		{
+			a.shift();
+			b.shift();
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	var c = [];
+
+	// Check steps to take backwards
+
+	// Check steps to take forward
+
 	// TODO <ADD CODE HERE>
 
-	return "";
+	return c.join("/");
 }
 
 /**
