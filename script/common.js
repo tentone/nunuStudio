@@ -33,6 +33,22 @@ module.exports = {
  */
 const CLOSURE_PATH = "../node_modules/google-closure-compiler-java/compiler.jar";
 
+function testCalculateRelativePath()
+{
+	var tests = [
+		["/c/d/e", "/f/h", "../../../f/h"],
+		["/a/b/c/d/e", "/a/b/f/h", "../../../f/h"],
+		["/a/b/c", "a/b/c/d", "d"],
+		["/c", "/c/d", "d"]
+	];
+
+	for(var i = 0; i < tests.length; i++)
+	{
+		var a = common.calculateRelativePath(tests[i][0], tests[i][1]);
+		console.log(a ===  tests[i][2], a);
+	}
+}
+
 /**
  * Compare two paths and calcule the relative path from a to be from their absolute paths.
  *
@@ -47,10 +63,20 @@ function calculateRelativePath(a, b)
 	a = a.split("/");
 	b = b.split("/");
 
-	// Remove the portions of the path that are equal
-	for(var i = 0; i < a.length && i < b.length; i++)
+	if(a.length > 0 && a[0].length === 0)
 	{
-		if(a[i] === b[i])
+		a.shift();
+	}
+
+	if(b.length > 0 && b[0].length === 0)
+	{
+		b.shift();
+	}
+
+	// Remove the portions of the path that are equal
+	while(a.length > 0 && b.length > 0)
+	{
+		if(a[0] === b[0])
 		{
 			a.shift();
 			b.shift();
@@ -64,12 +90,13 @@ function calculateRelativePath(a, b)
 	var c = [];
 
 	// Check steps to take backwards
+	while(a.length > 0)
+	{
+		a.shift();
+		b.unshift("..")
+	}
 
-	// Check steps to take forward
-
-	// TODO <ADD CODE HERE>
-
-	return c.join("/");
+	return b.join("/");
 }
 
 /**

@@ -5,21 +5,6 @@ console.log("                              nunuStudio");
 console.log("                          Modularize Codebase");
 console.log("----------------------------------------------------------------------");
 
-var tests = [
-	["/c/d/e", "/f/h", "../../../f/h"],
-	["/a/b/c/d/e", "/a/b/f/h", "../../../f/h"],
-	["/a/b/c", "a/b/c/d", "d"]
-	["/c", "/c/d", "d"]
-];
-
-for(var i = 0; i < tests.length; i++)
-{
-	var a = common.calculateRelativePath(tests[i][0], tests[i][1]);
-	console.log(a ===  tests[i][2], a);
-}
-
-return;
-
 /**
  * Represents a file to be modularized and some of its details
  * 
@@ -65,7 +50,7 @@ for(var i = 0; i < paths.length; i++)
 	}
 }
 
-var external = ["THREE", "CANNON"];
+var external = [{namespace: "THREE"}, {namespace: "CANNON"}];
 
 // Iterate all the files to be modularized.
 for(var i = 0; i < files.length; i++)
@@ -75,23 +60,24 @@ for(var i = 0; i < files.length; i++)
 	// Remove the "use strict" declaration file
 	data = data.replace("\"use strict\";", "");
 
-	// Import modules user in this file
+	// Import internal modules used in this file
 	for(var j = 0; j < files.length; j++)
 	{
-		if(j !== i && data.search(files[i].className) >= 0)
+		if(j !== i && data.search(files[j].className) >= 0)
 		{
-			// TODO <CALCULATE RELATIVE PATH BETWEEN FILES>
+			data = "import {files[i].className} from \"" + common.calculateRelativePath(files[i].fullPath, files[j].fullPath) + "\";\n" + data;
 		}
 	}
 
 	// Look for other modules and import them
-	// TODO <ADD CODE HERE>
-
-	// Look for CANNON usage/modules and import them
-	// TODO <ADD CODE HERE>
-
-	// Look for THREE usage/modules and import them
-	// TODO <ADD CODE HERE>
+	for(var k = 0; j < external.length; j++)
+	{
+		var regex = new RegExp(external.namespace + "\.([A-Z][A-Za-z0-9]+)");
+		if(data.search(regex) >= 0)
+		{
+			// TODO <ADD CODE HERE>
+		}
+	}
 
 	// Check if there is a class with name of the file
 	if(files[i].isModule)
