@@ -50,7 +50,11 @@ for(var i = 0; i < paths.length; i++)
 	}
 }
 
-var external = [{namespace: "THREE"}, {namespace: "CANNON"}];
+var external =
+[
+	{namespace: "THREE", package: "three"},
+	{namespace: "CANNON", package: "cannon"}
+];
 
 // Iterate all the files to be modularized.
 for(var i = 0; i < files.length; i++)
@@ -60,22 +64,24 @@ for(var i = 0; i < files.length; i++)
 	// Remove the "use strict" declaration file
 	data = data.replace("\"use strict\";", "");
 
+	// Look for other modules and import them
+	for(var k = 0; j < external.length; j++)
+	{
+		var regex = new RegExp(external.namespace + "\.([A-Z][A-Za-z0-9]+)", "g");
+
+		// Check whick where found in the namespace
+		/*if(data.search(regex) >= 0)
+		{
+			data = data.replace(regex, "$1")
+		}*/
+	}
+
 	// Import internal modules used in this file
 	for(var j = 0; j < files.length; j++)
 	{
 		if(j !== i && files[j].isModule && data.search(files[j].className) >= 0)
 		{
 			data = "import {" + files[j].className + "} from \"" + common.calculateRelativePath(files[i].fullPath, files[j].fullPath) + "\";\n" + data;
-		}
-	}
-
-	// Look for other modules and import them
-	for(var k = 0; j < external.length; j++)
-	{
-		var regex = new RegExp(external.namespace + "\.([A-Z][A-Za-z0-9]+)");
-		if(data.search(regex) >= 0)
-		{
-			// TODO <ADD CODE HERE>
 		}
 	}
 
@@ -93,7 +99,7 @@ for(var i = 0; i < files.length; i++)
 	// common.writeFile(files[i], data);
 
 	// TODO <DEBUG CODE>
-	if(files[i].className === "Mouse")
+	if(files[i].className === "LensFlare")
 	{
 		console.log(data, files[i]);
 	}
