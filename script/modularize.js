@@ -63,9 +63,9 @@ for(var i = 0; i < files.length; i++)
 	// Import internal modules used in this file
 	for(var j = 0; j < files.length; j++)
 	{
-		if(j !== i && data.search(files[j].className) >= 0)
+		if(j !== i && files[j].isModule && data.search(files[j].className) >= 0)
 		{
-			data = "import {files[i].className} from \"" + common.calculateRelativePath(files[i].fullPath, files[j].fullPath) + "\";\n" + data;
+			data = "import {" + files[j].className + "} from \"" + common.calculateRelativePath(files[i].fullPath, files[j].fullPath) + "\";\n" + data;
 		}
 	}
 
@@ -93,7 +93,7 @@ for(var i = 0; i < files.length; i++)
 	// common.writeFile(files[i], data);
 
 	// TODO <DEBUG CODE>
-	if(files[i].className === "EffectComposer")
+	if(files[i].className === "Mouse")
 	{
 		console.log(data, files[i]);
 	}
