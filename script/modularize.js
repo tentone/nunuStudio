@@ -88,7 +88,7 @@ for(var i = 0; i < files.length; i++)
 		if(found.length > 0)
 		{
 			data = data.replace(external[j].regex, "$1");
-			data = "import {" + found.join(", ") + "} from {\"" + external[j].package + "\"};\n" + data;			
+			data = "import {" + found.join(", ") + "} from \"" + external[j].package + "\";\n" + data;			
 		}
 	}
 
