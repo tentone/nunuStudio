@@ -53,7 +53,9 @@ for(var i = 0; i < paths.length; i++)
 var external =
 [
 	{namespace: "THREE", package: "three"},
-	{namespace: "CANNON", package: "cannon"}
+	{namespace: "CANNON", package: "cannon"},
+	{namespace: "dcodeIO.PSON", package: "pson"},
+	
 ];
 
 // Iterate all the files to be modularized.
@@ -79,6 +81,8 @@ for(var i = 0; i < files.length; i++)
 	// Import internal modules used in this file
 	for(var j = 0; j < files.length; j++)
 	{
+		// TODO <AVOID COLLISIONS WITH OTHER NAMESPACES>
+
 		if(j !== i && files[j].isModule && data.search(files[j].className) >= 0)
 		{
 			data = "import {" + files[j].className + "} from \"" + common.calculateRelativePath(files[i].fullPath, files[j].fullPath) + "\";\n" + data;

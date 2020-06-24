@@ -39,7 +39,10 @@
 	},
 	"dependencies": {
 		"three.js": "^0.117.1",
-		"cannon": "^0.6.2"
+		"cannon": "^0.6.2",
+		"codemirror": "^5.55.0",
+		"pson": "2.0.0",
+		
 	},
 	"devDependencies": {
 		"cordova": "~9.0.0",
