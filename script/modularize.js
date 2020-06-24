@@ -113,11 +113,11 @@ for(var i = 0; i < files.length; i++)
 	data = data.replace("\n\n", "\n");
 
 	// Write back
-	// common.writeFile(files[i], data);
+	common.writeFile(files[i].fullPath, data);
 
 	// TODO <DEBUG CODE>
-	if(files[i].className === "LensFlare")
+	/*if(files[i].className === "LensFlare")
 	{
 		console.log(data, files[i]);
-	}
+	}*/
 }
