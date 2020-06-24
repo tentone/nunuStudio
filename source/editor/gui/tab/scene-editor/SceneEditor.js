@@ -110,7 +110,7 @@ function SceneEditor(parent, closeable, container, index)
 						// Image
 						if(Image.fileIsImage(file))
 						{
-							Editor.loadTexture(file, function(texture)
+							Loaders.loadTexture(file, function(texture)
 							{
 								attachTexture(texture ,object);
 							});
@@ -118,7 +118,7 @@ function SceneEditor(parent, closeable, container, index)
 						// Video
 						else if(Video.fileIsVideo(file))
 						{
-							Editor.loadVideoTexture(file, function(texture)
+							Loaders.loadVideoTexture(file, function(texture)
 							{
 								attachTexture(texture ,object);
 							});
@@ -128,7 +128,7 @@ function SceneEditor(parent, closeable, container, index)
 						{
 							if(object.font !== undefined)
 							{
-								Editor.loadFont(file, function(font)
+								Loaders.loadFont(file, function(font)
 								{
 									object.setFont(font);
 								});
@@ -139,7 +139,7 @@ function SceneEditor(parent, closeable, container, index)
 					// Model
 					if(Model.fileIsModel(file))
 					{
-						Editor.loadModel(file);
+						Loaders.loadModel(file);
 					}
 				}
 			}

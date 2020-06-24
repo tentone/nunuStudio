@@ -84,6 +84,9 @@ for(var i = 0; i < files.length; i++)
 			}
 		} while(result !== null);
 
+		// Check if name is colliding with the name of the file module itself
+		// TODO <ADD CODE>
+		
 		// Replace by modules
 		if(found.length > 0)
 		{

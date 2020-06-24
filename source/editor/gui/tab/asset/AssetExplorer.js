@@ -24,22 +24,22 @@ function AssetExplorer(parent, closeable, container, index)
 			// Image
 			if(Image.fileIsImage(file))
 			{
-				Editor.loadTexture(file);
+				Loaders.loadTexture(file);
 			}
 			// Video
 			else if(Video.fileIsVideo(file))
 			{
-				Editor.loadVideoTexture(file);
+				Loaders.loadVideoTexture(file);
 			}
 			// Audio
 			else if(Audio.fileIsAudio(file))
 			{
-				Editor.loadAudio(file);
+				Loaders.loadAudio(file);
 			}
 			// Font
 			else if(Font.fileIsFont(file))
 			{
-				Editor.loadFont(file);
+				Loaders.loadFont(file);
 			}
 		}
 	};

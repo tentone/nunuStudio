@@ -1,11 +1,6 @@
 "use strict";
 
-/**
- * nunuStudio main editor entry point. 
- *
- * @class Editor 
- */
-function Editor(){}
+
 
 // Runtime libs
 include("lib/three/three.js");

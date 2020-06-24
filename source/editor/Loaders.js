@@ -1,5 +1,7 @@
 "use strict";
 
+function Loaders() {}
+
 /**
  * Load texture from file object, checks the type of the file, can be used to load all types of textures
  *
@@ -10,7 +12,7 @@
  * @param {File} file
  * @param {Function} onLoad
  */
-Editor.loadTexture = function(file, onLoad)
+Loaders.loadTexture = function(file, onLoad)
 {
 	// Load compressed texture from data parsed by the texture loaders.
 	function loadCompressedTexture(data)
@@ -143,7 +145,7 @@ Editor.loadTexture = function(file, onLoad)
  * @param {File} file
  * @param {Function} onLoad Callback function called after the resource is loaded.
  */
-Editor.loadVideoTexture = function(file, onLoad)
+Loaders.loadVideoTexture = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
 	var extension = FileSystem.getFileExtension(file.name);
@@ -170,7 +172,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 };
 
 // Load audio from file object
-Editor.loadAudio = function(file, onLoad)
+Loaders.loadAudio = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
 	var reader = new FileReader();
@@ -192,7 +194,7 @@ Editor.loadAudio = function(file, onLoad)
 };
 
 // Load font from file object
-Editor.loadFont = function(file, onLoad)
+Loaders.loadFont = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
 	var extension = FileSystem.getFileExtension(file.name);
@@ -238,7 +240,7 @@ Editor.loadFont = function(file, onLoad)
  * @method loadSpineAnimation
  * @param {File} file File to load.
  */
-Editor.loadSpineAnimation = function(file)
+Loaders.loadSpineAnimation = function(file)
 {
 	try
 	{
@@ -282,7 +284,7 @@ Editor.loadSpineAnimation = function(file)
  * @method loadText
  * @param {File} file File to load.
  */
-Editor.loadText = function(file)
+Loaders.loadText = function(file)
 {
 	var reader = new FileReader();
 	var name = FileSystem.getFileNameWithExtension(file.name);
@@ -307,7 +309,7 @@ Editor.loadText = function(file)
  * @param {File} file File to be read and parsed.
  * @param {THREE.Object3D} parent Object to add the objects.
  */
-Editor.loadModel = function(file, parent)
+Loaders.loadModel = function(file, parent)
 {
 	var name = file.name;
 	var extension = FileSystem.getFileExtension(name);

@@ -550,7 +550,7 @@ function TreeNode(container)
 
 				if(Model.fileIsModel(file))
 				{
-					Editor.loadModel(file, self.object);
+					Loaders.loadModel(file, self.object);
 				}
 			}
 		}

@@ -1,6 +1,13 @@
 "use strict";
 
 /**
+ * nunuStudio main editor entry point. 
+ *
+ * @class Editor 
+ */
+function Editor(){}
+
+/**
  * Initialize the editor code, creates all GUI elements, loads configuration data, starts all the event lsiteners required.
  *
  * Called when the application starts.
@@ -125,7 +132,7 @@ Editor.initialize = function()
 			// Text file
 			else if(TextFile.fileIsText(file))
 			{
-				Editor.loadText(file);
+				Loaders.loadText(file);
 			}
 		}
 	}

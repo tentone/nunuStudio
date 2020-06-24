@@ -130,11 +130,11 @@ TextureForm.prototype.loadTexture = function(file)
 
 	if(Image.fileIsImage(file))
 	{
-		Editor.loadTexture(file, onLoad);
+		Loaders.loadTexture(file, onLoad);
 	}
 	else if(Video.fileIsVideo(file))
 	{
-		Editor.loadVideoTexture(file, onLoad);
+		Loaders.loadVideoTexture(file, onLoad);
 	}
 };
 

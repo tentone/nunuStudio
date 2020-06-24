@@ -20,7 +20,7 @@ function AssetExplorerMenu(parent)
 		{	
 			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadModel(files[i]);
+				Loaders.loadModel(files[i]);
 			}
 		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
 	}, Global.FILE_PATH + "icons/models/models.png");
@@ -32,7 +32,7 @@ function AssetExplorerMenu(parent)
 		{
 			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadFont(files[i]);
+				Loaders.loadFont(files[i]);
 			}
 		}, ".json, .ttf, .otf");
 	}, Global.FILE_PATH + "icons/misc/font.png");
@@ -44,7 +44,7 @@ function AssetExplorerMenu(parent)
 		{
 			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadText(files[i]);
+				Loaders.loadText(files[i]);
 			}
 		}, ".js, .txt, .glsl, .json, .xml, .yaml, .csv, .css, .html");
 	}, Global.FILE_PATH + "icons/misc/file.png");
@@ -56,7 +56,7 @@ function AssetExplorerMenu(parent)
 		{
 			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadAudio(files[i]);
+				Loaders.loadAudio(files[i]);
 			}
 		}, "audio/*");
 	}, Global.FILE_PATH + "icons/misc/audio.png");
@@ -70,7 +70,7 @@ function AssetExplorerMenu(parent)
 			{
 				for(var i = 0; i < files.length; i++)
 				{
-					Editor.loadSpineAnimation(files[i]);
+					Loaders.loadSpineAnimation(files[i]);
 				}
 			}, ".json, .spine");
 		}, Global.FILE_PATH + "icons/misc/spine.png");
@@ -91,7 +91,7 @@ function AssetExplorerMenu(parent)
 		{
 			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadTexture(files[i]);
+				Loaders.loadTexture(files[i]);
 			}
 		}, "image/*");
 	}, Global.FILE_PATH + "icons/misc/image.png");
@@ -145,7 +145,7 @@ function AssetExplorerMenu(parent)
 		{
 			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadVideoTexture(files[i]);
+				Loaders.loadVideoTexture(files[i]);
 			}
 		}, "video/*");
 	}, Global.FILE_PATH + "icons/misc/video.png");
