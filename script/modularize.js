@@ -52,9 +52,9 @@ for(var i = 0; i < paths.length; i++)
 
 var external =
 [
-	{namespace: "THREE", package: "three"},
-	{namespace: "CANNON", package: "cannon"},
-	{namespace: "dcodeIO.PSON", package: "pson"},
+	{namespace: "THREE", package: "three", regex: new RegExp("THREE\.([A-Z][A-Za-z0-9]+)", "g")},
+	{namespace: "CANNON", package: "cannon", regex: new RegExp("CANNON\.([A-Z][A-Za-z0-9]+)", "g")},
+	{namespace: "dcodeIO.PSON", package: "pson", regex: new RegExp("dcodeIO\.PSON\.([A-Z][A-Za-z0-9]+)", "g")},
 	
 ];
 
@@ -66,26 +66,39 @@ for(var i = 0; i < files.length; i++)
 	// Remove the "use strict" declaration file
 	data = data.replace("\"use strict\";", "");
 
-	// Look for other modules and import them
-	for(var k = 0; j < external.length; j++)
-	{
-		var regex = new RegExp(external.namespace + "\.([A-Z][A-Za-z0-9]+)", "g");
+	// List of imported modules
+	var modulesImported = [];
 
-		// Check whick where found in the namespace
-		/*if(data.search(regex) >= 0)
+	// Look for other modules and import them
+	for(var j = 0; j < external.length; j++)
+	{
+		// Find all usages of the library
+		var found = [];
+		do
 		{
-			data = data.replace(regex, "$1")
-		}*/
+			var result = external[j].regex.exec(data);
+			if(result !== null && found.indexOf(result[1]) === -1)
+			{
+				found.push(result[1]);
+				modulesImported.push(result[1]);
+			}
+		} while(result !== null);
+
+		// Replace by modules
+		if(found.length > 0)
+		{
+			data = data.replace(external[j].regex, "$1");
+			data = "import {" + found.join(", ") + "} from {\"" + external[j].package + "\"};\n" + data;			
+		}
 	}
 
 	// Import internal modules used in this file
 	for(var j = 0; j < files.length; j++)
 	{
-		// TODO <AVOID COLLISIONS WITH OTHER NAMESPACES>
-
-		if(j !== i && files[j].isModule && data.search(files[j].className) >= 0)
+		if(j !== i && files[j].isModule && data.search(files[j].className) >= 0 && modulesImported.indexOf(files[j].className) === -1)
 		{
 			data = "import {" + files[j].className + "} from \"" + common.calculateRelativePath(files[i].fullPath, files[j].fullPath) + "\";\n" + data;
+			modulesImported.push(files[j].className);
 		}
 	}
 

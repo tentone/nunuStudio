@@ -520,6 +520,11 @@
 			"integrity": "sha1-WWFrSYME1Var1GaWayLu2j7KX74=",
 			"dev": true
 		},
+		"bufferview": {
+			"version": "1.0.1",
+			"resolved": "https://registry.npmjs.org/bufferview/-/bufferview-1.0.1.tgz",
+			"integrity": "sha1-ev10pF+Tf6QiodM4wIu/3HbNcl0="
+		},
 		"builtin-modules": {
 			"version": "1.1.1",
 			"resolved": "https://registry.npmjs.org/builtin-modules/-/builtin-modules-1.1.1.tgz",
@@ -531,6 +536,15 @@
 			"resolved": "https://registry.npmjs.org/builtins/-/builtins-1.0.3.tgz",
 			"integrity": "sha1-y5T662HIaWRR2zZTThQi+U8K7og=",
 			"dev": true
+		},
+		"bytebuffer": {
+			"version": "3.5.5",
+			"resolved": "https://registry.npmjs.org/bytebuffer/-/bytebuffer-3.5.5.tgz",
+			"integrity": "sha1-em+vGhNRSwg/H8+VQcTJv75+f9M=",
+			"requires": {
+				"bufferview": "~1",
+				"long": "~2 >=2.2.3"
+			}
 		},
 		"bytes": {
 			"version": "3.0.0",
@@ -702,6 +716,11 @@
 			"resolved": "https://registry.npmjs.org/code-point-at/-/code-point-at-1.1.0.tgz",
 			"integrity": "sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=",
 			"dev": true
+		},
+		"codemirror": {
+			"version": "5.55.0",
+			"resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.55.0.tgz",
+			"integrity": "sha512-TumikSANlwiGkdF/Blnu/rqovZ0Y3Jh8yy9TqrPbSM0xxSucq3RgnpVDQ+mD9q6JERJEIT2FMuF/fBGfkhIR/g=="
 		},
 		"collection-visit": {
 			"version": "1.0.0",
@@ -2946,6 +2965,11 @@
 			"integrity": "sha1-gteb/zCmfEAF/9XiUVMArZyk168=",
 			"dev": true
 		},
+		"long": {
+			"version": "2.4.0",
+			"resolved": "https://registry.npmjs.org/long/-/long-2.4.0.tgz",
+			"integrity": "sha1-n6GAux2VAM3CnEFWdmoZleH0Uk8="
+		},
 		"loud-rejection": {
 			"version": "2.1.0",
 			"resolved": "https://registry.npmjs.org/loud-rejection/-/loud-rejection-2.1.0.tgz",
@@ -3749,6 +3773,14 @@
 			"resolved": "https://registry.npmjs.org/psl/-/psl-1.1.29.tgz",
 			"integrity": "sha512-AeUmQ0oLN02flVHXWh9sSJF7mcdFq0ppid/JkErufc3hGIV/AMa8Fo9VgDo/cT2jFdOWoFvHp90qqBH54W+gjQ==",
 			"dev": true
+		},
+		"pson": {
+			"version": "2.0.0",
+			"resolved": "https://registry.npmjs.org/pson/-/pson-2.0.0.tgz",
+			"integrity": "sha1-kgCot5VKU/B3PjZo2wNBJkWVOHo=",
+			"requires": {
+				"bytebuffer": "~3"
+			}
 		},
 		"pump": {
 			"version": "3.0.0",
@@ -4604,6 +4636,11 @@
 					"dev": true
 				}
 			}
+		},
+		"three": {
+			"version": "0.117.1",
+			"resolved": "https://registry.npmjs.org/three/-/three-0.117.1.tgz",
+			"integrity": "sha512-t4zeJhlNzUIj9+ub0l6nICVimSuRTZJOqvk3Rmlu+YGdTOJ49Wna8p7aumpkXJakJfITiybfpYE1XN1o1Z34UQ=="
 		},
 		"throttleit": {
 			"version": "1.0.0",
