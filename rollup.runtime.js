@@ -1,7 +1,7 @@
 import strip from "rollup-plugin-strip";
 
 export default {
-	input: "source/Escher.js",
+	input: "source/core/NunuApp.js",
 	plugins: [
 		strip(
 		{

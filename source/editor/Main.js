@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 // Runtime libs
 include("lib/three/three.js");
 
