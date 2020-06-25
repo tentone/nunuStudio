@@ -1,6 +1,5 @@
 import {Object3D, AudioListener, Audio} from "three";
 
-
 /**
  * AudioEmitter is a Object3D used to play audio inside the scene.
  *
@@ -123,8 +122,6 @@ function AudioEmitter(audio)
 
 	this.filters = [];
 }
-
-Audio = AudioEmitter;
 
 AudioEmitter.prototype = Object.create(Object3D.prototype);
 

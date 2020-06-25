@@ -21,8 +21,5 @@ function HemisphereLight(skyColor, groundColor, intensity)
 	this.name = "hemisphere";
 }
 
-THemisphereLight = HemisphereLight;
-HemisphereLight = HemisphereLight;
-
 HemisphereLight.prototype = Object.create(THemisphereLight.prototype);
 export {HemisphereLight};

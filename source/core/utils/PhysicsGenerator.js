@@ -1,5 +1,5 @@
-import {Shape, Box, Vec3, ConvexPolyhedron, Cylinder, Quaternion, Sphere, Trimesh} from "cannon";
-import {Vector3, QuickHull, BufferGeometry, Geometry, Quaternion, Matrix4, Mesh} from "three";
+import {Shape, Box, Vec3, ConvexPolyhedron, Cylinder, Quaternion as CQuaternion, Sphere, Trimesh} from "cannon";
+import {Vector3, QuickHull, BufferGeometry, Geometry, Quaternion as TQuaternion, Matrix4, Mesh} from "three";
 
 /**
  * Physics generator is used to create Cannon.js shapes from three.js geometries.
@@ -196,7 +196,7 @@ PhysicsGenerator.createCylinderShape = function(geometry)
 	var params = geometry.parameters;
 
 	var shape = new Cylinder(params.radiusTop, params.radiusBottom, params.height, params.radialSegments);
-	shape.orientation = new Quaternion();
+	shape.orientation = new CQuaternion();
 	shape.orientation.setFromEuler(0, 0, 0, "XYZ").normalize();
 
 	return shape;
@@ -224,7 +224,7 @@ PhysicsGenerator.createBoundingCylinderShape = function(object)
 
 	// Create shape
 	var shape = new Cylinder(radius, radius, height, 12);
-	shape.orientation = new Quaternion();
+	shape.orientation = new CQuaternion();
 	shape.orientation.setFromEuler(Math.PI / 2, 0, 0, "XYZ").normalize();
 	
 	return shape;
@@ -330,7 +330,7 @@ PhysicsGenerator.getGeometry = function(object)
 	if(meshes.length === 1)
 	{
 		var position = new Vector3();
-		var quaternion = new Quaternion();
+		var quaternion = new TQuaternion();
 		var scale = new Vector3(1, 1, 1);
 
 		tmp = meshes[0].geometry.clone();

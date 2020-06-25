@@ -1,5 +1,4 @@
 import {Video} from "../resources/Video.js";
-
 import {DefaultLoadingManager, FileLoader} from "three";
 
 /**

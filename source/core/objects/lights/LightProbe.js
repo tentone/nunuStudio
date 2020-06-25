@@ -21,9 +21,6 @@ function LightProbe(sh, intensity)
 	this.name = "probe";
 }
 
-TLightProbe = LightProbe;
-LightProbe = LightProbe;
-
 LightProbe.prototype = Object.create(TLightProbe.prototype);
 
 /**

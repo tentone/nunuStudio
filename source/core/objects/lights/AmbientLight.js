@@ -22,8 +22,5 @@ function AmbientLight(hex)
 	this.matrixAutoUpdate = false;
 }
 
-TAmbientLight = AmbientLight;
-AmbientLight = AmbientLight;
-
 AmbientLight.prototype = Object.create(TAmbientLight.prototype);
 export {AmbientLight};

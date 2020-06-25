@@ -1,7 +1,5 @@
 import {Texture} from "../texture/Texture.js";
-
-
-import {DefaultLoadingManager, MaterialLoader} from "three";
+import {DefaultLoadingManager, MaterialLoader as TMaterialLoader} from "three";
 
 /**
  * MaterialLoader can be used to load external materials.
@@ -56,7 +54,7 @@ MaterialLoader.prototype.setTextures = function(value)
  */
 MaterialLoader.prototype.parse = function(json)
 {
-	var material = MaterialLoader.prototype.parse.call(this, json);
+	var material = TMaterialLoader.prototype.parse.call(this, json);
 
 	// Legacy multi-material
 	if(json.materials !== undefined)

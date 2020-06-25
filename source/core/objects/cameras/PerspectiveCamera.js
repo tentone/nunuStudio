@@ -3,8 +3,7 @@ import {Pass} from "../../postprocessing/Pass.js";
 import {EffectComposer} from "../../postprocessing/EffectComposer.js";
 import {Scene} from "../Scene.js";
 import {Viewport} from "./Viewport.js";
-import {PerspectiveCamera, Object3D, Math} from "three";
-
+import {PerspectiveCamera as TPerspectiveCamera, Object3D, Math} from "three";
 
 /**
  * Perspective camera, used for 3D scenes with objects getting smaller as they get away from the camera.
@@ -50,7 +49,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	*/
 	this.viewport = new Viewport();
 	
-	PerspectiveCamera.call(this, fov, aspect, near, far);
+	TPerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
 
@@ -107,7 +106,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.composer.addPass(renderPass);
 }
 
-PerspectiveCamera.prototype = Object.create(PerspectiveCamera.prototype);
+PerspectiveCamera.prototype = Object.create(TPerspectiveCamera.prototype);
 
 /**
  * Resize this camera, should be called every time after resizing the screen.
@@ -199,7 +198,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 
 PerspectiveCamera.prototype.toJSON = function(meta)
 {
-	var data = PerspectiveCamera.prototype.toJSON.call(this, meta);
+	var data = TPerspectiveCamera.prototype.toJSON.call(this, meta);
 
 	data.object.clearColor = this.clearColor;
 	data.object.clearDepth = this.clearDepth;

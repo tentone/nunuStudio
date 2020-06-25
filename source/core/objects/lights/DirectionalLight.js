@@ -26,9 +26,6 @@ function DirectionalLight(hex, intensity)
 	this.shadow.camera.far = 10000;
 }
 
-TDirectionalLight = DirectionalLight;
-DirectionalLight = DirectionalLight;
-
 DirectionalLight.prototype = Object.create(TDirectionalLight.prototype);
 
 /**

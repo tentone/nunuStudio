@@ -3,7 +3,7 @@ import {Pass} from "../../postprocessing/Pass.js";
 import {EffectComposer} from "../../postprocessing/EffectComposer.js";
 import {Scene} from "../Scene.js";
 import {Viewport} from "./Viewport.js";
-import {OrthographicCamera, Object3D} from "three";
+import {OrthographicCamera as TOrthographicCamera, Object3D} from "three";
 
 
 /**
@@ -22,7 +22,7 @@ import {OrthographicCamera, Object3D} from "three";
  */
 function OrthographicCamera(size, aspect, mode, near, far)
 {
-	OrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
+	TOrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
 
 	this.name = "camera";
 
@@ -116,7 +116,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.composer.addPass(renderPass);
 }
 
-OrthographicCamera.prototype = Object.create(OrthographicCamera.prototype);
+OrthographicCamera.prototype = Object.create(TOrthographicCamera.prototype);
 
 /**
  * Used to set camera to resize horizontally 
@@ -223,12 +223,12 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 		this.bottom = -this.top;
 	}
 
-	OrthographicCamera.prototype.updateProjectionMatrix.call(this);
+	TOrthographicCamera.prototype.updateProjectionMatrix.call(this);
 };
 
 OrthographicCamera.prototype.toJSON = function(meta)
 {
-	var data = OrthographicCamera.prototype.toJSON.call(this, meta);
+	var data = TOrthographicCamera.prototype.toJSON.call(this, meta);
 
 	data.object.size = this.size;
 	data.object.aspect = this.aspect;

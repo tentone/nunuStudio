@@ -10,10 +10,7 @@ import {Video} from "../resources/Video.js";
 import {Image} from "../resources/Image.js";
 import {Font} from "../resources/Font.js";
 import {Sprite} from "../objects/sprite/Sprite.js";
-
-
-
-import {DefaultLoadingManager, TextureLoader, FileLoader} from "three";
+import {DefaultLoadingManager, FileLoader} from "three";
 
 /**
  * TextureLoader can be used to load external textures.
@@ -33,9 +30,6 @@ function TextureLoader(manager)
 	this.videos = [];
 	this.fonts = [];
 }
-
-THREE._TextureLoader = TextureLoader;
-TextureLoader = TextureLoader;
 
 /**
  * Set cross origin path for the loader.

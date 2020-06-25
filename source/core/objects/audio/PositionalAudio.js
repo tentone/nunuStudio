@@ -2,7 +2,7 @@ import {Model} from "../../resources/Model.js";
 import {Audio} from "../../resources/Audio.js";
 import {Scene} from "../Scene.js";
 import {AudioEmitter} from "./AudioEmitter.js";
-import {Vector3, Quaternion, PositionalAudio, Object3D} from "three";
+import {Vector3, Quaternion, Object3D} from "three";
 
 
 /**
@@ -69,8 +69,6 @@ function PositionalAudio(audio)
 	this.tempPositionCamera = new Vector3();
 	this.tempQuaternionCamera = new Quaternion();
 }
-
-PositionalAudio = PositionalAudio;
 
 PositionalAudio.prototype = Object.create(AudioEmitter.prototype);
 

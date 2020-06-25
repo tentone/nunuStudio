@@ -27,9 +27,6 @@ function PointLight(hex, intensity, distance, decay)
 	this.shadow.bias = 0.0;
 }
 
-TPointLight = PointLight;
-PointLight = PointLight;
-
 PointLight.prototype = Object.create(TPointLight.prototype);
 
 /**

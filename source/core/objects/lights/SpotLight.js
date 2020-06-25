@@ -66,4 +66,5 @@ SpotLight.prototype.toJSON = function(meta)
 
 	return data;
 };
+
 export {SpotLight};

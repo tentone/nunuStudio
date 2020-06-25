@@ -1,5 +1,4 @@
-
-import {AnimationMixer} from "three";
+import {AnimationMixer as TAnimationMixer} from "three";
 
 /**
  * The AnimationMixer is a player for animations on a particular object in the scene.
@@ -15,12 +14,12 @@ import {AnimationMixer} from "three";
  */
 function AnimationMixer(root)
 {
-	AnimationMixer.call(this, root);
+	TAnimationMixer.call(this, root);
 
 	this.playing = false;
 }
 
-AnimationMixer.prototype = Object.create(AnimationMixer.prototype);
+AnimationMixer.prototype = Object.create(TAnimationMixer.prototype);
 
 /**
  * Create actions from array of animations.

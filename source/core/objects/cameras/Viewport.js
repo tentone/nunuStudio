@@ -1,6 +1,4 @@
 import {Mouse} from "../../input/Mouse.js";
-
-
 import {Vector2, Vector4, WebGLRenderer} from "three";
 
 /**

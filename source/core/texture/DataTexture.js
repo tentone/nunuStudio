@@ -1,6 +1,5 @@
 import {Image} from "../resources/Image.js";
-
-import {Texture, DataTexture} from "three";
+import {Texture} from "three";
 
 /**
  * Data texture stored binary RAW texture data values.
@@ -40,8 +39,6 @@ function DataTexture(data, width, height, format, type, mapping, wrapS, wrapT, m
 	this.unpackAlignment = 1;
 	this.needsUpdate = true;
 }
-
-DataTexture = DataTexture;
 
 DataTexture.prototype = Object.create(Texture.prototype);
 DataTexture.prototype.constructor = DataTexture;

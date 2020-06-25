@@ -2,8 +2,6 @@ import {Texture} from "../../texture/Texture.js";
 import {CubeTexture} from "../../texture/CubeTexture.js";
 import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
-
-
 import {Object3D, PerspectiveCamera, Vector3, WebGLCubeRenderTarget, RGBFormat, LinearFilter, CubeCamera as TCubeCamera} from "three";
 
 /**
