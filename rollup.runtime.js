@@ -2,14 +2,7 @@ import strip from "rollup-plugin-strip";
 
 export default {
 	input: "source/core/NunuApp.js",
-	plugins: [
-		strip(
-		{
-			functions: ["assert.*", "debug", "alert"],
-			debugger: false,
-			sourceMap: false
-		})
-	],
+	plugins: [],
 	output: [
 		{
 			format: "umd",
