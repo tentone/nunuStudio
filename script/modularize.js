@@ -1,5 +1,8 @@
 const common = require("./common");
 
+common.testCalculateRelativePath();
+return;
+
 console.log("----------------------------------------------------------------------");
 console.log("                              nunuStudio");
 console.log("                          Modularize Codebase");

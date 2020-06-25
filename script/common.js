@@ -39,8 +39,8 @@ function testCalculateRelativePath()
 	var tests = [
 		["/c/d/e", "/f/h", "../../f/h"],
 		["/a/b/c/d/e", "/a/b/f/h", "../../f/h"],
-		["/a/b/c", "a/b/c/d", "d"],
-		["/c", "/c/d", "d"]
+		["/a/b/c", "a/b/c/d", "./d"],
+		["/c", "/c/d", "./d"]
 	];
 
 	for(var i = 0; i < tests.length; i++)
@@ -97,7 +97,14 @@ function calculateRelativePath(a, b)
 		b.unshift("..")
 	}
 
-	return b.join("/");
+	var res = b.join("/");
+
+	if(!res.startsWith(".."))
+	{
+		res = "./" + res;
+	}
+
+	return res;
 }
 
 /**
