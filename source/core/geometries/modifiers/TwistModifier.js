@@ -1,4 +1,4 @@
-import {Editor} from "../../../editor/Editor.js";
+
 import {Vector3, Geometry, BufferGeometry, Quaternion} from "three";
 
 /**

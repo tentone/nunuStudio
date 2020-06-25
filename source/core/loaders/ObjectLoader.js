@@ -49,9 +49,9 @@ import {GeometryLoader} from "./GeometryLoader.js";
 import {FontLoader} from "./FontLoader.js";
 import {AudioLoader} from "./AudioLoader.js";
 import {Key} from "../input/Key.js";
-import {Loaders} from "../../editor/Loaders.js";
-import {Text} from "../../editor/components/Text.js";
-import {Button} from "../../editor/components/buttons/Button.js";
+
+
+
 import {DefaultLoadingManager, FileLoader, Skeleton, Color, Fog, FogExp2, BufferAttribute, LOD, Line, LineLoop, LineSegments, Points, Bone, AnimationClip} from "three";
 
 

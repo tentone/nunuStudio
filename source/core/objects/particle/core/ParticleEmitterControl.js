@@ -1,7 +1,7 @@
 import {ParticleEmitter} from "../ParticleEmitter.js";
 import {ShaderUtils} from "./ShaderUtils.js";
 import {Key} from "../../../input/Key.js";
-import {Component} from "../../../../editor/components/Component.js";
+
 import {Vector3, Color, Math} from "three";
 
 /**

@@ -5,7 +5,7 @@ import {Image} from "./Image.js";
 import {Font} from "./Font.js";
 import {Audio} from "./Audio.js";
 import {Container} from "../objects/misc/Container.js";
-import {Text} from "../../editor/components/Text.js";
+
 
 /**
  * Resource container contains resource of multiple types.

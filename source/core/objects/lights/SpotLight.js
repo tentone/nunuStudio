@@ -1,5 +1,4 @@
-import {SpotLight, Light} from "three";
-
+import {SpotLight as TSpotLight, Light} from "three";
 
 /**
  * A SpotLight emit light from a point in a specific direction in a cone volume.
@@ -20,7 +19,7 @@ import {SpotLight, Light} from "three";
  */
 function SpotLight(hex, intensity, distance, angle, exponent, decay)
 {
-	THREE._SpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
+	TSpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
 
 	this.name = "spotlight";
 	
@@ -32,10 +31,7 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 	this.shadow.mapSize.height = 512;
 }
 
-THREE._SpotLight = SpotLight;
-SpotLight = SpotLight;
-
-SpotLight.prototype = Object.create(THREE._SpotLight.prototype);
+SpotLight.prototype = Object.create(TSpotLight.prototype);
 
 /**
  * SpotLight looks to the target object coordinates.

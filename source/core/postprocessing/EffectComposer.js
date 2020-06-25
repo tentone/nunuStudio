@@ -18,7 +18,7 @@ import {FXAAPass} from "./pass/antialiasing/FXAAPass.js";
 import {AfterimagePass} from "./pass/AfterimagePass.js";
 import {AdaptiveToneMappingPass} from "./pass/AdaptiveToneMappingPass.js";
 import {Scene} from "../objects/Scene.js";
-import {Form} from "../../editor/components/Form.js";
+
 import {CopyShader, Math, WebGLRenderTarget, LinearFilter, RGBAFormat, MaskPass, ClearMaskPass} from "three";
 
 /**

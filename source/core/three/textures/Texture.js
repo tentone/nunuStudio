@@ -1,5 +1,5 @@
 import {Nunu} from "../../Nunu.js";
-import {Text} from "../../../editor/components/Text.js";
+
 import {Texture} from "three";
 
 

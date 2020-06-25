@@ -1,6 +1,6 @@
 import {Image} from "../resources/Image.js";
 import {CubeCamera} from "../objects/cameras/CubeCamera.js";
-import {Text} from "../../editor/components/Text.js";
+
 import {CubeReflectionMapping, Texture, Math, Vector3} from "three";
 
 

@@ -2,8 +2,8 @@ import {Texture} from "../../texture/Texture.js";
 import {Pass} from "../Pass.js";
 import {Scene} from "../../objects/Scene.js";
 import {Mesh} from "../../objects/mesh/Mesh.js";
-import {Text} from "../../../editor/components/Text.js";
-import {Form} from "../../../editor/components/Form.js";
+
+
 import {SSAOShader, DepthTexture, UnsignedShortType, NearestFilter, MeshNormalMaterial, NoBlending, WebGLRenderTarget, LinearFilter, RGBAFormat, ShaderMaterial, SSAOBlurShader, UniformsUtils, CopyShader, DstColorFactor, ZeroFactor, AddEquation, DstAlphaFactor, Vector3, Math, DataTexture, LuminanceFormat, FloatType, RepeatWrapping, CustomBlending} from "three";
 
 /**

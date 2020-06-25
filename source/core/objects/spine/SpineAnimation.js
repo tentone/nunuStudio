@@ -2,7 +2,7 @@ import {Texture} from "../../texture/Texture.js";
 import {Image} from "../../resources/Image.js";
 import {SpineTexture} from "./SpineTexture.js";
 import {Mesh} from "../mesh/Mesh.js";
-import {Text} from "../../../editor/components/Text.js";
+
 import {Clock, Object3D} from "three";
 
 

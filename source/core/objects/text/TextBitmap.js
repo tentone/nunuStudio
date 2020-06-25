@@ -1,6 +1,6 @@
 import {Font} from "../../resources/Font.js";
 import {Pass} from "../../postprocessing/Pass.js";
-import {Text} from "../../../editor/components/Text.js";
+
 import {Mesh, Texture, Color, ShaderMaterial, DoubleSide, Object3D} from "three";
 
 /**

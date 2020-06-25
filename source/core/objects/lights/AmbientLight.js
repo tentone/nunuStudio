@@ -1,4 +1,4 @@
-import {AmbientLight} from "three";
+import {AmbientLight as TAmbientLight} from "three";
 
 
 /**
@@ -15,15 +15,15 @@ import {AmbientLight} from "three";
  */
 function AmbientLight(hex)
 {
-	THREE._AmbientLight.call(this, hex);
+	TAmbientLight.call(this, hex);
 	
 	this.name = "ambient";
 
 	this.matrixAutoUpdate = false;
 }
 
-THREE._AmbientLight = AmbientLight;
+TAmbientLight = AmbientLight;
 AmbientLight = AmbientLight;
 
-AmbientLight.prototype = Object.create(THREE._AmbientLight.prototype);
+AmbientLight.prototype = Object.create(TAmbientLight.prototype);
 export {AmbientLight};

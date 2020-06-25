@@ -1,5 +1,5 @@
 import {Mesh} from "./Mesh.js";
-import {SkinnedMesh, Object3D} from "three";
+import {SkinnedMesh as TSkinnedMesh, Object3D} from "three";
 
 
 /**
@@ -17,7 +17,7 @@ import {SkinnedMesh, Object3D} from "three";
  */
 function SkinnedMesh(geometry, material)
 {
-	THREE._SkinnedMesh.call(this, geometry, material);
+	TSkinnedMesh.call(this, geometry, material);
 
 	this.name = "skinned";
 	
@@ -27,10 +27,7 @@ function SkinnedMesh(geometry, material)
 	this.skeleton = null;
 }
 
-THREE._SkinnedMesh = SkinnedMesh;
-SkinnedMesh = SkinnedMesh;
-
-SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
+SkinnedMesh.prototype = Object.create(TSkinnedMesh.prototype);
 
 /**
  * Dispose mesh along with its material and geometry.

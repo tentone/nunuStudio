@@ -1,8 +1,8 @@
 import {EventManager} from "../utils/EventManager.js";
 import {Key} from "./Key.js";
-import {Component} from "../../editor/components/Component.js";
-import {Canvas} from "../../editor/components/Canvas.js";
-import {Button} from "../../editor/components/buttons/Button.js";
+
+
+
 import {Vector2} from "three";
 
 

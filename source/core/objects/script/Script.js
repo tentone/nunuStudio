@@ -5,7 +5,7 @@ import {Mouse} from "../../input/Mouse.js";
 import {Keyboard} from "../../input/Keyboard.js";
 import {Key} from "../../input/Key.js";
 import {FileSystem} from "../../FileSystem.js";
-import {Global} from "../../../editor/Global.js";
+
 import {Group, Object3D} from "three";
 /**
  * Script objects are used to control other objects present in the scene.

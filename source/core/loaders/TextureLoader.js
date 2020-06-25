@@ -10,9 +10,9 @@ import {Video} from "../resources/Video.js";
 import {Image} from "../resources/Image.js";
 import {Font} from "../resources/Font.js";
 import {Sprite} from "../objects/sprite/Sprite.js";
-import {Loaders} from "../../editor/Loaders.js";
-import {Text} from "../../editor/components/Text.js";
-import {Canvas} from "../../editor/components/Canvas.js";
+
+
+
 import {DefaultLoadingManager, TextureLoader, FileLoader} from "three";
 
 /**

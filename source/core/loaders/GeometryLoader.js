@@ -3,7 +3,7 @@ import {LegacyGeometryLoader} from "./LegacyGeometryLoader.js";
 import {TerrainBufferGeometry} from "../geometries/TerrainBufferGeometry.js";
 import {RoundedBoxBufferGeometry} from "../geometries/RoundedBoxBufferGeometry.js";
 import {CapsuleBufferGeometry} from "../geometries/CapsuleBufferGeometry.js";
-import {Loaders} from "../../editor/Loaders.js";
+
 import {DefaultLoadingManager, FileLoader, ObjectLoader} from "three";
 
 /**

@@ -1,5 +1,5 @@
 import {Image} from "../resources/Image.js";
-import {Loaders} from "../../editor/Loaders.js";
+
 import {DefaultLoadingManager, FileLoader} from "three";
 
 /**

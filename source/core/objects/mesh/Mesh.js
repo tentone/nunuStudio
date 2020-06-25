@@ -1,4 +1,4 @@
-import {Mesh, Object3D} from "three";
+import {Mesh as TMesh, Object3D} from "three";
 
 
 /**
@@ -14,7 +14,7 @@ import {Mesh, Object3D} from "three";
  */
 function Mesh(geometry, material)
 {
-	THREE._Mesh.call(this, geometry, material);
+	TMesh.call(this, geometry, material);
 
 	this.name = "model";
 
@@ -22,10 +22,7 @@ function Mesh(geometry, material)
 	this.castShadow = true;
 }
 
-THREE._Mesh = Mesh;
-Mesh = Mesh;
-
-Mesh.prototype = Object.create(THREE._Mesh.prototype);
+Mesh.prototype = Object.create(TMesh.prototype);
 
 /**
  * Dispose mesh along with its material and geometry.

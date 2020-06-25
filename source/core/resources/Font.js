@@ -3,7 +3,7 @@ import {Resource} from "./Resource.js";
 import {TextMesh} from "../objects/text/TextMesh.js";
 import {Mesh} from "../objects/mesh/Mesh.js";
 import {FileSystem} from "../FileSystem.js";
-import {Text} from "../../editor/components/Text.js";
+
 import {TTFLoader, ShapePath, ShapeUtils} from "three";
 
 /**

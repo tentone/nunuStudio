@@ -1,4 +1,4 @@
-import {PointLight} from "three";
+import {PointLight as TPointLight} from "three";
 
 
 /**
@@ -16,7 +16,7 @@ import {PointLight} from "three";
  */
 function PointLight(hex, intensity, distance, decay)
 {
-	THREE._PointLight.call(this, hex, intensity, distance, decay);
+	TPointLight.call(this, hex, intensity, distance, decay);
 
 	this.name = "point";
 	
@@ -27,10 +27,10 @@ function PointLight(hex, intensity, distance, decay)
 	this.shadow.bias = 0.0;
 }
 
-THREE._PointLight = PointLight;
+TPointLight = PointLight;
 PointLight = PointLight;
 
-PointLight.prototype = Object.create(THREE._PointLight.prototype);
+PointLight.prototype = Object.create(TPointLight.prototype);
 
 /**
  * Update light shadow map atributtes at runtime

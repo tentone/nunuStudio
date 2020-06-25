@@ -5,7 +5,7 @@ import {Container} from "../../objects/misc/Container.js";
 import {Nunu} from "../../Nunu.js";
 import {ObjectLoader} from "../../loaders/ObjectLoader.js";
 import {AnimationMixer} from "../../animation/AnimationMixer.js";
-import {Action} from "../../../editor/history/action/Action.js";
+
 import {Object3D, Material, AnimationClip} from "three";
 
 /**

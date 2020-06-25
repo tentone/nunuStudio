@@ -3,9 +3,9 @@ import {Resource} from "../../resources/Resource.js";
 import {Model} from "../../resources/Model.js";
 import {Scene} from "../../objects/Scene.js";
 import {Key} from "../../input/Key.js";
-import {Text} from "../../../editor/components/Text.js";
-import {Form} from "../../../editor/components/Form.js";
-import {Component} from "../../../editor/components/Component.js";
+
+
+
 import {ThreeMFLoader, Loader, FileLoader, TextureLoader, LoaderUtils, Color, Matrix4, RepeatWrapping, MirroredRepeatWrapping, ClampToEdgeWrapping, LinearFilter, LinearMipmapLinearFilter, NearestFilter, BufferGeometry, Float32BufferAttribute, Mesh, MeshPhongMaterial, BufferAttribute, Group, MeshStandardMaterial} from "three";
 /*
  * @author technohippy / https://github.com/technohippy

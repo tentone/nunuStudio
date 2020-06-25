@@ -1,4 +1,4 @@
-import {Form} from "../../editor/components/Form.js";
+
 import {Math, LinearFilter, RGBAFormat, RGBFormat, NearestFilter, OthographicCamera, OrthographicCamera, Scene, Mesh, PlaneBufferGeometry} from "three";
 
 /**

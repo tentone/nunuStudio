@@ -1,8 +1,8 @@
 import {Program} from "./Program.js";
-import {Text} from "../../editor/components/Text.js";
-import {Canvas} from "../../editor/components/Canvas.js";
+
+
 import {World, NaiveBroadphase, SplitSolver, GSSolver} from "cannon";
-import {Color, Texture, Camera, Raycaster, Vector2, Scene, Object3D, Fog, FogExp2, Vector3, Quaternion} from "three";
+import {Color, Texture, Camera, Raycaster, Vector2, Scene as TScene, Object3D, Fog, FogExp2, Vector3, Quaternion} from "three";
 
 
 /**
@@ -20,7 +20,7 @@ import {Color, Texture, Camera, Raycaster, Vector2, Scene, Object3D, Fog, FogExp
  */
 function Scene()
 {
-	THREE._Scene.call(this);
+	TScene.call(this);
 
 	this.name = "scene";
 	this.matrixAutoUpdate = false;
@@ -160,9 +160,7 @@ function Scene()
 	this.mouse = new Vector2(0, 0);
 }
 
-THREE._Scene = Scene;
-
-Scene.prototype = Object.create(THREE._Scene.prototype);
+Scene.prototype = Object.create(TScene.prototype);
 
 Scene.prototype.initialize = function()
 {

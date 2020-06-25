@@ -1,6 +1,6 @@
 import {Texture} from "../texture/Texture.js";
-import {Loaders} from "../../editor/Loaders.js";
-import {Text} from "../../editor/components/Text.js";
+
+
 import {DefaultLoadingManager, MaterialLoader} from "three";
 
 /**

@@ -1,5 +1,5 @@
 import {Key} from "./Key.js";
-import {Button} from "../../editor/components/buttons/Button.js";
+
 
 /**
  * Gamepad provides basic support for gamepads.

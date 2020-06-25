@@ -1,4 +1,4 @@
-import {Canvas} from "../../editor/components/Canvas.js";
+
 import {PCFSoftShadowMap, NoToneMapping, WebGLRenderer} from "three";
 
 /** 

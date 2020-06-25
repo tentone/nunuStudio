@@ -2,9 +2,9 @@ import {Texture} from "../../texture/Texture.js";
 import {CubeTexture} from "../../texture/CubeTexture.js";
 import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
-import {Text} from "../../../editor/components/Text.js";
-import {Form} from "../../../editor/components/Form.js";
-import {Object3D, PerspectiveCamera, Vector3, WebGLCubeRenderTarget, RGBFormat, LinearFilter, CubeCamera} from "three";
+
+
+import {Object3D, PerspectiveCamera, Vector3, WebGLCubeRenderTarget, RGBFormat, LinearFilter, CubeCamera as TCubeCamera} from "three";
 
 /**
  * Reflection probes are used to create CubeTextures dinamically.
@@ -113,7 +113,7 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	this.renderer = null;
 }
 
-THREE._CubeCamera = CubeCamera;
+TCubeCamera = CubeCamera;
 CubeCamera = CubeCamera;
 
 CubeCamera.prototype = Object.create(Object3D.prototype);

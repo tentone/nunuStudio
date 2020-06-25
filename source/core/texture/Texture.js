@@ -1,7 +1,7 @@
 import {Image} from "../resources/Image.js";
-import {Text} from "../../editor/components/Text.js";
-import {Form} from "../../editor/components/Form.js";
-import {Texture, RGBAFormat, RGBFormat, LinearFilter} from "three";
+
+
+import {Texture as TTexture, RGBAFormat, RGBFormat, LinearFilter} from "three";
 
 
 /**
@@ -44,7 +44,7 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 		this.source = source;
 	}
 
-	Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+	TTexture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 	
 	var self = this;
 
@@ -90,7 +90,7 @@ function Texture(source, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 	}
 }
 
-Texture.prototype = Object.create(Texture.prototype);
+Texture.prototype = Object.create(TTexture.prototype);
 Texture.isTexture = true;
 
 /**
@@ -137,7 +137,7 @@ Texture.prototype.updateSource = function()
  */
 Texture.prototype.dispose = function()
 {	
-	Texture.prototype.dispose.call(this);
+	TTexture.prototype.dispose.call(this);
 
 	this.disposed = true;
 };
@@ -151,7 +151,7 @@ Texture.prototype.dispose = function()
  */
 Texture.prototype.toJSON = function(meta)
 {
-	var data = Texture.prototype.toJSON.call(this, meta);
+	var data = TTexture.prototype.toJSON.call(this, meta);
 	var image = this.source.toJSON(meta);
 
 	data.image = image.uuid;

@@ -1,8 +1,8 @@
 import {Scene} from "../Scene.js";
 import {CubeCamera} from "../cameras/CubeCamera.js";
-import {Form} from "../../../editor/components/Form.js";
-import {Canvas} from "../../../editor/components/Canvas.js";
-import {LightProbe, WebGLRenderer, RGBAFormat, LinearFilter, Light} from "three";
+
+
+import {LightProbe as TLightProbe, WebGLRenderer, RGBAFormat, LinearFilter, Light} from "three";
 
 /**
  * A LightProbe is a source of indirect-diffuse light.
@@ -15,16 +15,16 @@ import {LightProbe, WebGLRenderer, RGBAFormat, LinearFilter, Light} from "three"
  */
 function LightProbe(sh, intensity)
 {
-	THREE._LightProbe.call(this, sh, intensity);
+	TLightProbe.call(this, sh, intensity);
 
 	this.type = "LightProbe";
 	this.name = "probe";
 }
 
-THREE._LightProbe = LightProbe;
+TLightProbe = LightProbe;
 LightProbe = LightProbe;
 
-LightProbe.prototype = Object.create(THREE._LightProbe.prototype);
+LightProbe.prototype = Object.create(TLightProbe.prototype);
 
 /**
  * Generate light probe data from cube camera render.
@@ -44,7 +44,7 @@ LightProbe.prototype.generate = function()
 
 	var renderer = new WebGLRenderer({canvas: canvas, alpha: true});
 	
-	var cubeCamera = new THREE._CubeCamera(1, 1000, 256,
+	var cubeCamera = new TCubeCamera(1, 1000, 256,
 	{	
 		format: RGBAFormat,
 		magFilter: LinearFilter,

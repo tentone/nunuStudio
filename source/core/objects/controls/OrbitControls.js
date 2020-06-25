@@ -1,6 +1,6 @@
 import {Program} from "../Program.js";
 import {Mouse} from "../../input/Mouse.js";
-import {Button} from "../../../editor/components/buttons/Button.js";
+
 import {Group, Vector3, Vector2, Object3D, Matrix4} from "three";
 
 /**

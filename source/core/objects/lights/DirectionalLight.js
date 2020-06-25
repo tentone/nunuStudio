@@ -1,4 +1,4 @@
-import {DirectionalLight} from "three";
+import {DirectionalLight as TDirectionalLight} from "three";
 
 
 /**
@@ -16,7 +16,7 @@ import {DirectionalLight} from "three";
  */
 function DirectionalLight(hex, intensity)
 {
-	THREE._DirectionalLight.call(this, hex, intensity);
+	TDirectionalLight.call(this, hex, intensity);
 
 	this.name = "directional";
 	
@@ -26,10 +26,10 @@ function DirectionalLight(hex, intensity)
 	this.shadow.camera.far = 10000;
 }
 
-THREE._DirectionalLight = DirectionalLight;
+TDirectionalLight = DirectionalLight;
 DirectionalLight = DirectionalLight;
 
-DirectionalLight.prototype = Object.create(THREE._DirectionalLight.prototype);
+DirectionalLight.prototype = Object.create(TDirectionalLight.prototype);
 
 /**
  * Update light shadow map atributtes at runtime

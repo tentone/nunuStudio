@@ -1,5 +1,5 @@
 import {Sky} from "../misc/Sky.js";
-import {HemisphereLight} from "three";
+import {HemisphereLight as THemisphereLight} from "three";
 
 
 /**
@@ -16,13 +16,13 @@ import {HemisphereLight} from "three";
  */
 function HemisphereLight(skyColor, groundColor, intensity)
 {
-	THREE._HemisphereLight.call(this, skyColor, groundColor, intensity);
+	THemisphereLight.call(this, skyColor, groundColor, intensity);
 
 	this.name = "hemisphere";
 }
 
-THREE._HemisphereLight = HemisphereLight;
+THemisphereLight = HemisphereLight;
 HemisphereLight = HemisphereLight;
 
-HemisphereLight.prototype = Object.create(THREE._HemisphereLight.prototype);
+HemisphereLight.prototype = Object.create(THemisphereLight.prototype);
 export {HemisphereLight};

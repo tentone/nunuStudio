@@ -1,6 +1,6 @@
 import {CSS3DObject} from "./CSS3DObject.js";
 import {Sprite} from "../../objects/sprite/Sprite.js";
-import {Component} from "../../../editor/components/Component.js";
+
 
 /**
  * CSS 3D element drawn as a billboard.

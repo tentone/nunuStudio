@@ -1,4 +1,4 @@
-import {Component} from "../../../editor/components/Component.js";
+
 import {Object3D} from "three";
 
 /**

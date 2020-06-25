@@ -4,8 +4,8 @@ import {ShaderAttribute} from "../helpers/ShaderAttribute.js";
 import {ShaderUtils} from "./ShaderUtils.js";
 import {ParticleEmitterControl} from "./ParticleEmitterControl.js";
 import {Key} from "../../../input/Key.js";
-import {Settings} from "../../../../editor/Settings.js";
-import {Text} from "../../../../editor/components/Text.js";
+
+
 import {Texture, Vector2, Math, AdditiveBlending, Vector4, ShaderMaterial, BufferGeometry, Points, Vector3} from "three";
 
 /**

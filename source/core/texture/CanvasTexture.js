@@ -1,7 +1,7 @@
 import {Image} from "../resources/Image.js";
-import {Text} from "../../editor/components/Text.js";
-import {Form} from "../../editor/components/Form.js";
-import {Canvas} from "../../editor/components/Canvas.js";
+
+
+
 import {Texture, RGBAFormat} from "three";
 
 

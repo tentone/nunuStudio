@@ -4,8 +4,8 @@ import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
 import {Texture} from "../texture/Texture.js";
 import {Resource} from "./Resource.js";
 import {FileSystem} from "../FileSystem.js";
-import {Text} from "../../editor/components/Text.js";
-import {Form} from "../../editor/components/Form.js";
+
+
 
 
 /**

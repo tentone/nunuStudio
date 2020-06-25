@@ -1,5 +1,5 @@
 import {Mesh} from "./Mesh.js";
-import {InstancedMesh, BufferAttribute, Object3D} from "three";
+import {InstancedMesh as TInstancedMesh, BufferAttribute, Object3D} from "three";
 
 /**
  * A instanced mesh is a mesh that can be drawn multiple times at once, it can be used to optimize the draw of large amount of the same geometry material combination.
@@ -14,7 +14,7 @@ import {InstancedMesh, BufferAttribute, Object3D} from "three";
  */
 function InstancedMesh(geometry, material, count)
 {
-	THREE._InstancedMesh.call(this, geometry, material, count);
+	TInstancedMesh.call(this, geometry, material, count);
 
 	this.name = "instanced";
 	this.type = "InstancedMesh";
@@ -49,10 +49,7 @@ function InstancedMesh(geometry, material, count)
 	});
 }
 
-THREE._InstancedMesh = InstancedMesh;
-InstancedMesh = InstancedMesh;
-
-InstancedMesh.prototype = Object.create(THREE._InstancedMesh.prototype);
+InstancedMesh.prototype = Object.create(TInstancedMesh.prototype);
 
 InstancedMesh.prototype.dispose = function()
 {

@@ -7,7 +7,7 @@ import {Audio} from "./Audio.js";
 import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
 import {Container} from "../objects/misc/Container.js";
 import {Mesh} from "../objects/mesh/Mesh.js";
-import {Text} from "../../editor/components/Text.js";
+
 import {Object3D, Material, MeshBasicMaterial, SpriteMaterial, Sprite, Texture} from "three";
 
 

@@ -3,7 +3,7 @@ import {ParticleGroup} from "./core/ParticleGroup.js";
 import {ParticleEmitterControl} from "./core/ParticleEmitterControl.js";
 import {Viewport} from "../cameras/Viewport.js";
 import {ObjectLoader} from "../../loaders/ObjectLoader.js";
-import {Text} from "../../../editor/components/Text.js";
+
 import {Points, Clock, Vector4, Vector3, AdditiveBlending, Object3D, Vector2, Color} from "three";
 
 

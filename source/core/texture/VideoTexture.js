@@ -1,10 +1,9 @@
 import {Video} from "../resources/Video.js";
 import {VideoStream} from "../resources/stream/VideoStream.js";
 import {Image} from "../resources/Image.js";
-import {Text} from "../../editor/components/Text.js";
-import {Form} from "../../editor/components/Form.js";
-import {Texture, LinearFilter, RGBFormat} from "three";
 
+
+import {Texture, LinearFilter, RGBFormat} from "three";
 
 /**
  * Video texture, uses a video DOM element instead of a img element.

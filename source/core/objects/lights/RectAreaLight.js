@@ -1,4 +1,4 @@
-import {RectAreaLight, Light} from "three";
+import {RectAreaLight as TRectAreaLight, Light} from "three";
 
 
 /**
@@ -16,15 +16,12 @@ import {RectAreaLight, Light} from "three";
  */
 function RectAreaLight(color, intensity, width, height)
 {
-	THREE._RectAreaLight.call(this, color, intensity, width, height);
+	TRectAreaLight.call(this, color, intensity, width, height);
 
 	this.name = "rectarea";
 }
 
-THREE._RectAreaLight = RectAreaLight;
-RectAreaLight = RectAreaLight;
-
-RectAreaLight.prototype = Object.create(THREE._RectAreaLight.prototype);
+RectAreaLight.prototype = Object.create(TRectAreaLight.prototype);
 
 RectAreaLight.prototype.toJSON = function(meta)
 {

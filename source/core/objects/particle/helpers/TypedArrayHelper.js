@@ -1,4 +1,4 @@
-import {Component} from "../../../../editor/components/Component.js";
+
 
 /**
  * A helper class for TypedArrays.

@@ -1,5 +1,5 @@
 import {Video} from "../resources/Video.js";
-import {Loaders} from "../../editor/Loaders.js";
+
 import {DefaultLoadingManager, FileLoader} from "three";
 
 /**

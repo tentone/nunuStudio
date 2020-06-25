@@ -1,6 +1,5 @@
 import {Script} from "../script/Script.js";
-import {Sprite, Object3D} from "three";
-
+import {Sprite as TSprite, Object3D} from "three";
 
 /**
  * Sprites allways face the screen are used for 2D elements.
@@ -20,15 +19,12 @@ import {Sprite, Object3D} from "three";
 */
 function Sprite(material)
 {
-	THREE._Sprite.call(this, material);
+	TSprite.call(this, material);
 
 	this.name = "sprite";
 }
 
-THREE._Sprite = Sprite;
-Sprite = Sprite;
-
-Sprite.prototype = Object.create(THREE._Sprite.prototype);
+Sprite.prototype = Object.create(TSprite.prototype);
 
 Sprite.prototype.dispose = function()
 {

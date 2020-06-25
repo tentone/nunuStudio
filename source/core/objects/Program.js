@@ -12,8 +12,8 @@ import {ObjectLoader} from "../loaders/ObjectLoader.js";
 import {Mouse} from "../input/Mouse.js";
 import {Keyboard} from "../input/Keyboard.js";
 import {Key} from "../input/Key.js";
-import {Division} from "../../editor/components/Division.js";
-import {Canvas} from "../../editor/components/Canvas.js";
+
+
 import {Scene, Camera, Clock, Object3D} from "three";
 
 

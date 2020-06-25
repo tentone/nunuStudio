@@ -1,7 +1,7 @@
 import {Pass} from "../Pass.js";
 import {Scene} from "../../objects/Scene.js";
 import {Mesh} from "../../objects/mesh/Mesh.js";
-import {Form} from "../../../editor/components/Form.js";
+
 import {UniformsUtils, CopyShader, ShaderMaterial, NoBlending, LuminosityShader, ToneMapShader, WebGLRenderTarget, LinearMipMapLinearFilter, LinearFilter, RGBAFormat, MeshBasicMaterial} from "three";
 /**
  * Generate a texture that represents the luminosity of the current scene, adapted over time to simulate the optic nerve responding to the amount of light it is receiving.

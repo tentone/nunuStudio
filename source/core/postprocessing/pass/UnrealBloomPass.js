@@ -3,7 +3,7 @@ import {Pass} from "../Pass.js";
 import {BloomPass} from "./BloomPass.js";
 import {Scene} from "../../objects/Scene.js";
 import {Mesh} from "../../objects/mesh/Mesh.js";
-import {Text} from "../../../editor/components/Text.js";
+
 import {LuminosityHighPassShader, CopyShader, WebGLRenderTarget, UniformsUtils, ShaderMaterial, Vector2, Vector3, AdditiveBlending, MeshBasicMaterial, Color} from "three";
 
 /**

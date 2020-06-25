@@ -1,5 +1,5 @@
 import {Resource} from "./Resource.js";
-import {Text} from "../../editor/components/Text.js";
+
 
 /**
  * Text file resource can be used to store data or code.

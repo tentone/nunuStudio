@@ -1,7 +1,7 @@
 import {Texture} from "../../texture/Texture.js";
 import {Viewport} from "../cameras/Viewport.js";
-import {Text} from "../../../editor/components/Text.js";
-import {Form} from "../../../editor/components/Form.js";
+
+
 import {Mesh, Lensflare, MeshBasicMaterial, Vector3, DataTexture, RGBFormat, NearestFilter, ClampToEdgeWrapping, RawShaderMaterial, LensflareElement, Color, Vector2, AdditiveBlending, Box2, Vector4, Object3D} from "three";
 
 /**

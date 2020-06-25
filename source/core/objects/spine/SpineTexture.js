@@ -1,5 +1,5 @@
 import {Texture} from "../../texture/Texture.js";
-import {Text} from "../../../editor/components/Text.js";
+
 
 
 /**

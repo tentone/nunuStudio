@@ -1,6 +1,6 @@
 import {Mouse} from "../../input/Mouse.js";
-import {Component} from "../../../editor/components/Component.js";
-import {Canvas} from "../../../editor/components/Canvas.js";
+
+
 import {Vector2, Vector4, WebGLRenderer} from "three";
 
 /**

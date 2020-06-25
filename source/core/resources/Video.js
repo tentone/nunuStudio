@@ -3,7 +3,7 @@ import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
 import {Resource} from "./Resource.js";
 import {Image} from "./Image.js";
 import {FileSystem} from "../FileSystem.js";
-import {Form} from "../../editor/components/Form.js";
+
 
 
 /**

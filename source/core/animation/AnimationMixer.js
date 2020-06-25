@@ -1,4 +1,4 @@
-import {Action} from "../../editor/history/action/Action.js";
+
 import {AnimationMixer} from "three";
 
 /**

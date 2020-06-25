@@ -1,9 +1,8 @@
 import {Image} from "../resources/Image.js";
-import {Text} from "../../editor/components/Text.js";
-import {Media} from "../../editor/components/media/Media.js";
-import {Form} from "../../editor/components/Form.js";
-import {Texture, LinearFilter, RGBFormat} from "three";
 
+
+
+import {Texture, LinearFilter, RGBFormat} from "three";
 
 /**
  * Webcam texture is used to capture and display video from a webcam in real-time.

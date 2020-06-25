@@ -1,5 +1,5 @@
 import {Image} from "../resources/Image.js";
-import {Text} from "../../editor/components/Text.js";
+
 import {Texture, DataTexture} from "three";
 
 /**
