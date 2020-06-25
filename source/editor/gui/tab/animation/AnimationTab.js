@@ -1,18 +1,4 @@
-import {EventManager} from "../../../../../core/utils/EventManager.js";
-import {Key} from "../../../../../core/input/Key.js";
-import {AnimationMixer} from "../../../../../core/animation/AnimationMixer.js";
-import {Action} from "../../../../history/action/Action.js";
-import {AnimationClipTrack} from "../AnimationClipTrack.js";
-import {Interface} from "../../../Interface.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
-import {TabComponent} from "../../../../components/tabs/TabComponent.js";
-import {Slider} from "../../../../components/input/Slider.js";
-import {Division} from "../../../../components/Division.js";
-import {Component} from "../../../../components/Component.js";
-import {ButtonText} from "../../../../components/buttons/ButtonText.js";
-import {Button} from "../../../../components/buttons/Button.js";
-import {Clock, VectorKeyframeTrack, InterpolateLinear, QuaternionKeyframeTrack, BooleanKeyframeTrack, InterpolateDiscrete, ColorKeyframeTrack, NumberKeyframeTrack} from "three";
+"use strict";
 
 /**
  * The animation tab is used to display and edit object animations timelines.
@@ -33,7 +19,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.mixer = null;
 	this.object = null;
-	this.clock = new Clock();
+	this.clock = new THREE.Clock();
 	
 	this.zoom = 120.0; // Pixels/sec
 	this.animations = [];
@@ -76,23 +62,23 @@ function AnimationTab(parent, closeable, container, index)
 			// Object 3D
 			if(self.object.isObject3D)
 			{
-				var position = new VectorKeyframeTrack(".position", [0], self.object.position.toArray());
-				position.setInterpolation(InterpolateLinear);
+				var position = new THREE.VectorKeyframeTrack(".position", [0], self.object.position.toArray());
+				position.setInterpolation(THREE.InterpolateLinear);
 				position.setColor("#FF0000");
 				clip.tracks.push(position);
 
-				var scale = new VectorKeyframeTrack(".scale", [0], self.object.scale.toArray());
-				scale.setInterpolation(InterpolateLinear);
+				var scale = new THREE.VectorKeyframeTrack(".scale", [0], self.object.scale.toArray());
+				scale.setInterpolation(THREE.InterpolateLinear);
 				scale.setColor("#00FF00");
 				clip.tracks.push(scale);
 
-				var quaternion = new QuaternionKeyframeTrack(".quaternion", [0], self.object.quaternion.toArray());
-				quaternion.setInterpolation(InterpolateLinear);
+				var quaternion = new THREE.QuaternionKeyframeTrack(".quaternion", [0], self.object.quaternion.toArray());
+				quaternion.setInterpolation(THREE.InterpolateLinear);
 				quaternion.setColor("#0000FF");
 				clip.tracks.push(quaternion);
 				
-				var visible = new BooleanKeyframeTrack(".visible", [0], [self.object.visible]);
-				visible.setInterpolation(InterpolateDiscrete);
+				var visible = new THREE.BooleanKeyframeTrack(".visible", [0], [self.object.visible]);
+				visible.setInterpolation(THREE.InterpolateDiscrete);
 				visible.setColor("#FFFF00");
 				clip.tracks.push(visible);
 			}
@@ -103,14 +89,14 @@ function AnimationTab(parent, closeable, container, index)
 				{
 					console.log(self.object.color);
 
-					var color = new ColorKeyframeTrack(".color", [0], [self.object.color]);
-					color.setInterpolation(InterpolateLinear);
+					var color = new THREE.ColorKeyframeTrack(".color", [0], [self.object.color]);
+					color.setInterpolation(THREE.InterpolateLinear);
 					color.setColor("#00FF00");
 					clip.tracks.push(color);
 				}
 
-				var opacity = new NumberKeyframeTrack(".opacity", [0], [self.object.opacity]);
-				opacity.setInterpolation(InterpolateLinear);
+				var opacity = new THREE.NumberKeyframeTrack(".opacity", [0], [self.object.opacity]);
+				opacity.setInterpolation(THREE.InterpolateLinear);
 				opacity.setColor("#FF0000");
 				clip.tracks.push(opacity);
 			}
@@ -524,5 +510,3 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.display = "none";
 	}
 };
-
-export {AnimationTab};

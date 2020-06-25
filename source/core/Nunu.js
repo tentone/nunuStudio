@@ -1,7 +1,4 @@
-import {Audio} from "../resources/Audio.js";
-import {Component} from "../../editor/components/Component.js";
-import {WebGLRenderer} from "three";
-
+"use strict";
 
 /**
  * nunuStudio core main file.
@@ -142,7 +139,7 @@ Nunu.vrAvailable = function()
  * When displaying VR content the display.requestAnimationFrame should be used to call the render method.
  *
  * @method enterVR
- * @param {WebGLRenderer} renderer Renderer used to draw the scene.
+ * @param {THREE.WebGLRenderer} renderer Renderer used to draw the scene.
  * @param {Function} onSuccess Method called if the application entered VR successfully.
  */
 Nunu.enterVR = function(renderer, onSuccess)
@@ -187,7 +184,7 @@ Nunu.enterVR = function(renderer, onSuccess)
  * Enter virtual reality mode, if the application is not running on VR mode does not do anything.
  *
  * @method exitVR
- * @param {WebGLRenderer} renderer Renderer used to draw the scene.
+ * @param {THREE.WebGLRenderer} renderer Renderer used to draw the scene.
  */
 Nunu.exitVR = function(renderer)
 {
@@ -552,4 +549,3 @@ Nunu.setFullscreen = function(fullscreen, element)
 		}
 	}
 };
-export {Nunu};

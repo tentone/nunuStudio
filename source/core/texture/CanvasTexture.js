@@ -1,9 +1,4 @@
-import {Image} from "../../resources/Image.js";
-import {Text} from "../../../editor/components/Text.js";
-import {Form} from "../../../editor/components/Form.js";
-import {Canvas} from "../../../editor/components/Canvas.js";
-import {Texture, RGBAFormat} from "three";
-
+"use strict";
 
 /**
  * Canvas textures can be used to draw content to the texture during runtime, using the context property.
@@ -33,11 +28,11 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 	 * @property image
 	 * @type {Element}
 	 */
-	Texture.call(this, document.createElement("canvas"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+	THREE.Texture.call(this, document.createElement("canvas"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
 	this.name = "canvas";
 	this.category = "Canvas";
-	this.format = RGBAFormat;
+	this.format = THREE.RGBAFormat;
 
 	Object.defineProperties(this,
 	{
@@ -78,7 +73,7 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 	this.context = this.image.getContext("2d");
 }
 
-CanvasTexture.prototype = Object.create(Texture.prototype);
+CanvasTexture.prototype = Object.create(THREE.Texture.prototype);
 CanvasTexture.prototype.constructor = CanvasTexture;
 CanvasTexture.prototype.isCanvasTexture = true;
 
@@ -127,11 +122,10 @@ CanvasTexture.prototype.clear = function(color)
  */
 CanvasTexture.prototype.toJSON = function(meta)
 {
-	var data = Texture.prototype.toJSON.call(this, meta);
+	var data = THREE.Texture.prototype.toJSON.call(this, meta);
 
 	data.width = this.width;
 	data.height = this.height;
 
 	return data;
 };
-export {CanvasTexture};

@@ -1,12 +1,4 @@
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {GeometryForm} from "../GeometryForm.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {NumberBox} from "../../../../../components/input/NumberBox.js";
-import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {Form} from "../../../../../components/Form.js";
-import {CylinderBufferGeometry, CylinderGeometry, BufferGeometry} from "three";
+"use strict";
 
 function CylinderGeometryForm(form, object)
 {
@@ -86,7 +78,7 @@ function CylinderGeometryForm(form, object)
 CylinderGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? CylinderBufferGeometry : CylinderGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? THREE.CylinderBufferGeometry : THREE.CylinderGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue())));
 };
 
@@ -97,6 +89,5 @@ CylinderGeometryForm.prototype.updateValues = function()
 	this.height.setValue(this.object.geometry.parameters.height || 100);
 	this.radialSegments.setValue(this.object.geometry.parameters.radialSegments || 8);
 	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
-	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };
-export {CylinderGeometryForm};

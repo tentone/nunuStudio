@@ -1,11 +1,4 @@
-import {Texture} from "../../../texture/Texture.js";
-import {ParticleGroup} from "../core/ParticleGroup.js";
-import {ParticleEmitterControl} from "../core/ParticleEmitterControl.js";
-import {Viewport} from "../../cameras/Viewport.js";
-import {ObjectLoader} from "../../../loaders/ObjectLoader.js";
-import {Text} from "../../../../editor/components/Text.js";
-import {Points, Clock, Vector4, Vector3, AdditiveBlending, Object3D, Vector2, Color} from "three";
-
+"use strict";
 
 /**
  * Particle emitter is a wrapper for SPE particle system.
@@ -39,7 +32,7 @@ function ParticleEmitter(group, emitter)
 	this.emitter = new ParticleEmitterControl(emitter !== undefined ? emitter : ParticleEmitter.defaultEmitter);
 	this.group.addEmitter(this.emitter);
 
-	Points.call(this, this.group.geometry, this.group.material);
+	THREE.Points.call(this, this.group.geometry, this.group.material);
 
 	this.type = "ParticleEmiter";
 	this.name = "particle";
@@ -53,8 +46,8 @@ function ParticleEmitter(group, emitter)
 	 */
 	this.dynamicEmitter = false;
 
-	this.clock = new Clock();
-	this.temp = new Vector4();
+	this.clock = new THREE.Clock();
+	this.temp = new THREE.Vector4();
 
 	/**
 	 * Texture attached to the group of this particle emitter.
@@ -122,7 +115,7 @@ var ParticleDistributions = {
  */
 ParticleEmitter.valueOverLifetimeLength = 4;
 
-ParticleEmitter.prototype = Object.create(Points.prototype);
+ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
 
 /**
  * Default particle emitter configuration.
@@ -135,13 +128,13 @@ ParticleEmitter.defaultEmitter =
 	particleCount: 200,
 	velocity:
 	{
-		value: new Vector3(0, 0, 0),
-		spread: new Vector3(3, 3, 3)
+		value: new THREE.Vector3(0, 0, 0),
+		spread: new THREE.Vector3(3, 3, 3)
 	},
 	acceleration:
 	{
-		value: new Vector3(0, 0, 0),
-		spread: new Vector3(0, 0, 0)
+		value: new THREE.Vector3(0, 0, 0),
+		spread: new THREE.Vector3(0, 0, 0)
 	}
 };
 
@@ -158,7 +151,7 @@ ParticleEmitter.defaultGroup =
 		value: null
 	},
 	maxParticleCount: 200,
-	blending: AdditiveBlending,
+	blending: THREE.AdditiveBlending,
 	fog: false,
 	depthWrite: false,
 	depthTest: true,
@@ -239,7 +232,7 @@ ParticleEmitter.prototype.dispose = function()
 {
 	this.group.dispose();
 
-	Object3D.prototype.dispose.call(this);
+	THREE.Object3D.prototype.dispose.call(this);
 };
 
 ParticleEmitter.prototype.toJSON = function(meta)
@@ -250,7 +243,7 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	this.geometry = undefined;
 
 	var texture = this.group.texture;
-	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{	
 		texture = texture.toJSON(meta);
 	});
@@ -271,14 +264,14 @@ ParticleEmitter.fromJSON = function(data, resources)
 {
 	function loadVector3(data)
 	{
-		return Array.isArray(data) ? new Vector3().fromArray(data) : new Vector3(data.x, data.y, data.z);
+		return Array.isArray(data) ? new THREE.Vector3().fromArray(data) : new THREE.Vector3(data.x, data.y, data.z);
 	}
 
 	if(data.group !== undefined)
 	{
 		var group = data.group;
 		group.texture.value = resources.getTexture(group.texture.value);
-		group.texture.frames = new Vector2().fromArray(group.texture.frames || [1, 1]);
+		group.texture.frames = new THREE.Vector2().fromArray(group.texture.frames || [1, 1]);
 	}
 
 	if(data.emitter !== undefined)
@@ -293,11 +286,10 @@ ParticleEmitter.fromJSON = function(data, resources)
 		
 		for(var i = 0; i < emitter.color.value.length; i++)
 		{
-			emitter.color.value[i] = new Color(emitter.color.value[i]);
+			emitter.color.value[i] = new THREE.Color(emitter.color.value[i]);
 			emitter.color.spread[i] = loadVector3(emitter.color.spread[i]);
 		}
 	}
 
 	return new ParticleEmitter(data.group, data.emitter);
 };
-export {ParticleEmitter};

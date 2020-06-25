@@ -1,7 +1,4 @@
-import {Resource} from "../../../../core/resources/Resource.js";
-import {Image} from "../../../../core/resources/Image.js";
-import {Component} from "../../../components/Component.js";
-import {WebGLRenderer, Scene} from "three";
+"use strict";
 
 /** 
  * The preview renderer is used to generate preview thumbnails to preview resources in the editor.
@@ -14,9 +11,9 @@ function PreviewRenderer()
 	 * WebGL renderer used to generate the preview.
 	 *
 	 * @attribute renderer
-	 * @type {WebGLRenderer}
+	 * @type {THREE.WebGLRenderer}
 	 */
-	this.renderer = new WebGLRenderer({alpha: true});
+	this.renderer = new THREE.WebGLRenderer({alpha: true});
 	this.renderer.setSize(128, 128);
 	
 	/**
@@ -31,9 +28,9 @@ function PreviewRenderer()
 	 * Scene to compose the render
 	 *
 	 * @attribute scene
-	 * @type {Scene}
+	 * @type {THREE.Scene}
 	 */
-	this.scene = new Scene();
+	this.scene = new THREE.Scene();
 }
 
 /**
@@ -70,5 +67,3 @@ PreviewRenderer.prototype.setSize = function(x, y)
  * @param {Function} onRender Callback method that receives Base64 encoded data with the thumbnail produced.
  */
 PreviewRenderer.prototype.render = function(resource, onRender){};
-
-export {PreviewRenderer};

@@ -1,5 +1,4 @@
-import {Tree} from "../Tree.js";
-
+"use strict";
 
 // TODO <NOT USED ANYWERE>
 
@@ -234,4 +233,3 @@ TreeUtils.print = function(tree, level)
 		TreeUtils.print(tree.children[i], level + 1);
 	}
 };
-export {TreeUtils};

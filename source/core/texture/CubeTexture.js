@@ -1,8 +1,4 @@
-import {Image} from "../../resources/Image.js";
-import {CubeCamera} from "../../objects/cameras/CubeCamera.js";
-import {Text} from "../../../editor/components/Text.js";
-import {CubeReflectionMapping, Texture, Math, Vector3} from "three";
-
+"use strict";
 
 /**
  * CubeTextures represent 360 view using six images, these images correspond to the faces of a cube.
@@ -28,7 +24,7 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 {
 	if(mapping === undefined)
 	{
-		mapping = CubeReflectionMapping;
+		mapping = THREE.CubeReflectionMapping;
 	}
 
 	var array = [];
@@ -37,7 +33,7 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 		array.push(document.createElement("canvas"));
 	}	
 
-	Texture.call(this, array, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+	THREE.Texture.call(this, array, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
 	this.images = (images !== undefined) ? images : [];
 
@@ -70,7 +66,7 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 	this.category = "Cube";
 }
 
-CubeTexture.prototype = Object.create(Texture.prototype);
+CubeTexture.prototype = Object.create(THREE.Texture.prototype);
 CubeTexture.prototype.constructor = CubeTexture;
 CubeTexture.prototype.isCubeTexture = true;
 
@@ -287,12 +283,12 @@ CubeTexture.resampleBilinear = function(read, write, x, y, index)
 	var height = read.height;
 	var data = read.data;
 
-	var xl = Math.clamp(Math.floor(x), 0, width - 1);
-	var xr = Math.clamp(Math.ceil(x), 0, width - 1);
+	var xl = THREE.Math.clamp(Math.floor(x), 0, width - 1);
+	var xr = THREE.Math.clamp(Math.ceil(x), 0, width - 1);
 	var xf = x - xl;
 
-	var yl = Math.clamp(Math.floor(y), 0, height - 1);
-	var yr = Math.clamp(Math.ceil(y), 0, height - 1);
+	var yl = THREE.Math.clamp(Math.floor(y), 0, height - 1);
+	var yr = THREE.Math.clamp(Math.ceil(y), 0, height - 1);
 	var yf = y - yl;
 
 	var ll = 4 * (yl * width + xl);
@@ -338,7 +334,7 @@ CubeTexture.renderEquirectFace = function(read, face, rotation, size)
 
 			// Project cube face onto unit sphere by converting cartesian to spherical coordinates
 			var r = Math.sqrt(cube.x * cube.x + cube.y * cube.y + cube.z * cube.z);
-			var lon = Math.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
+			var lon = THREE.Math.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
 			var lat = Math.acos(cube.z / r);
 
 			var px = read.width * lon / Math.PI / 2 - 0.5;
@@ -355,27 +351,27 @@ CubeTexture.faces =
 [
 	function(x, y)
 	{
-		return new Vector3(x, -1, -y);
+		return new THREE.Vector3(x, -1, -y);
 	},
 	function(x, y)
 	{
-		return new Vector3(-x, 1, -y);
+		return new THREE.Vector3(-x, 1, -y);
 	},
 	function(x, y)
 	{
-		return new Vector3(-y, -x, 1);
+		return new THREE.Vector3(-y, -x, 1);
 	},
 	function(x, y)
 	{
-		return new Vector3(y, -x, -1);
+		return new THREE.Vector3(y, -x, -1);
 	},
 	function(x, y)
 	{
-		return new Vector3(-1, -x, -y);
+		return new THREE.Vector3(-1, -x, -y);
 	},
 	function(x, y)
 	{
-		return new Vector3(1, x, -y);
+		return new THREE.Vector3(1, x, -y);
 	}
 ];
 
@@ -390,7 +386,7 @@ CubeTexture.faces =
  */
 CubeTexture.prototype.toJSON = function(meta)
 {
-	var data = Texture.prototype.toJSON.call(this, meta);
+	var data = THREE.Texture.prototype.toJSON.call(this, meta);
 
 	data.size = this.size;
 	data.mode = this.mode;
@@ -413,4 +409,3 @@ CubeTexture.prototype.toJSON = function(meta)
 
 	return data;
 };
-export {CubeTexture};

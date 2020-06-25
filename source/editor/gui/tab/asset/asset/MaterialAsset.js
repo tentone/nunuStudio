@@ -1,35 +1,4 @@
-import {Texture} from "../../../../../../core/texture/Texture.js";
-import {Resource} from "../../../../../../core/resources/Resource.js";
-import {Sprite} from "../../../../../../core/objects/sprite/Sprite.js";
-import {Mesh} from "../../../../../../core/objects/mesh/Mesh.js";
-import {MaterialLoader} from "../../../../../../core/loaders/MaterialLoader.js";
-import {Mouse} from "../../../../../../core/input/Mouse.js";
-import {RemoveResourceAction} from "../../../../../history/action/resources/RemoveResourceAction.js";
-import {AddResourceAction} from "../../../../../history/action/resources/AddResourceAction.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {SpriteMaterialEditor} from "../../../material/sprite/SpriteMaterialEditor.js";
-import {ShaderMaterialEditor} from "../../../material/ShaderMaterialEditor.js";
-import {PointsMaterialEditor} from "../../../material/points/PointsMaterialEditor.js";
-import {MeshToonMaterialEditor} from "../../../material/mesh/MeshToonMaterialEditor.js";
-import {MeshStandardMaterialEditor} from "../../../material/mesh/MeshStandardMaterialEditor.js";
-import {MeshPhysicalMaterialEditor} from "../../../material/mesh/MeshPhysicalMaterialEditor.js";
-import {MeshPhongMaterialEditor} from "../../../material/mesh/MeshPhongMaterialEditor.js";
-import {MeshMaterialEditor} from "../../../material/mesh/MeshMaterialEditor.js";
-import {MeshMatcapMaterialEditor} from "../../../material/mesh/MeshMatcapMaterialEditor.js";
-import {MeshLambertMaterialEditor} from "../../../material/mesh/MeshLambertMaterialEditor.js";
-import {MeshBasicMaterialEditor} from "../../../material/mesh/MeshBasicMaterialEditor.js";
-import {MaterialEditor} from "../../../material/MaterialEditor.js";
-import {LineDashedMaterialEditor} from "../../../material/line/LineDashedMaterialEditor.js";
-import {LineBasicMaterialEditor} from "../../../material/line/LineBasicMaterialEditor.js";
-import {Asset} from "../Asset.js";
-import {MaterialRenderer} from "../../../../preview/MaterialRenderer.js";
-import {Interface} from "../../../../Interface.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {ContextMenu} from "../../../../../components/dropdown/ContextMenu.js";
-import {Color, Material, MeshPhongMaterial, MeshToonMaterial, MeshLambertMaterial, MeshMatcapMaterial, MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, SpriteMaterial, ShaderMaterial, LineDashedMaterial, LineBasicMaterial, PointsMaterial, Math} from "three";
-
+"use strict";
 
 function MaterialAsset(parent)
 {
@@ -40,7 +9,7 @@ function MaterialAsset(parent)
 	var self = this;
 
 	// Use to store original material color on highlight
-	this.materialColor = new Color(0, 0, 0);
+	this.materialColor = new THREE.Color(0, 0, 0);
 	this.materialHighlighted = false;
 
 	// Material Preview
@@ -72,7 +41,7 @@ function MaterialAsset(parent)
 	// Double click
 	this.element.ondblclick = function()
 	{
-		if(self.asset instanceof Material)
+		if(self.asset instanceof THREE.Material)
 		{
 			var tab = Editor.gui.tab.getTab(MaterialEditor, self.asset);
 
@@ -80,51 +49,51 @@ function MaterialAsset(parent)
 			{
 				self.restoreMaterial();
 
-				if(self.asset instanceof MeshPhongMaterial)
+				if(self.asset instanceof THREE.MeshPhongMaterial)
 				{
 					tab = Editor.gui.tab.addTab(MeshPhongMaterialEditor, true);
 				}
-				else if(self.asset instanceof MeshToonMaterial)
+				else if(self.asset instanceof THREE.MeshToonMaterial)
 				{
 					tab = Editor.gui.tab.addTab(MeshToonMaterialEditor, true);
 				}
-				else if(self.asset instanceof MeshLambertMaterial)
+				else if(self.asset instanceof THREE.MeshLambertMaterial)
 				{
 					tab = Editor.gui.tab.addTab(MeshLambertMaterialEditor, true);
 				}
-				else if(self.asset instanceof MeshMatcapMaterial)
+				else if(self.asset instanceof THREE.MeshMatcapMaterial)
 				{
 					tab = Editor.gui.tab.addTab(MeshMatcapMaterialEditor, true);
 				}
-				else if(self.asset instanceof MeshBasicMaterial)
+				else if(self.asset instanceof THREE.MeshBasicMaterial)
 				{
 					tab = Editor.gui.tab.addTab(MeshBasicMaterialEditor, true);
 				}
-				else if(self.asset instanceof MeshPhysicalMaterial)
+				else if(self.asset instanceof THREE.MeshPhysicalMaterial)
 				{
 					tab = Editor.gui.tab.addTab(MeshPhysicalMaterialEditor, true);
 				}
-				else if(self.asset instanceof MeshStandardMaterial)
+				else if(self.asset instanceof THREE.MeshStandardMaterial)
 				{
 					tab = Editor.gui.tab.addTab(MeshStandardMaterialEditor, true);
 				}
-				else if(self.asset instanceof SpriteMaterial)
+				else if(self.asset instanceof THREE.SpriteMaterial)
 				{
 					tab = Editor.gui.tab.addTab(SpriteMaterialEditor, true);
 				}
-				else if(self.asset instanceof ShaderMaterial)
+				else if(self.asset instanceof THREE.ShaderMaterial)
 				{
 					tab = Editor.gui.tab.addTab(ShaderMaterialEditor, true);
 				}
-				else if(self.asset instanceof LineDashedMaterial)
+				else if(self.asset instanceof THREE.LineDashedMaterial)
 				{
 					tab = Editor.gui.tab.addTab(LineDashedMaterialEditor, true);
 				}
-				else if(self.asset instanceof LineBasicMaterial)
+				else if(self.asset instanceof THREE.LineBasicMaterial)
 				{
 					tab = Editor.gui.tab.addTab(LineBasicMaterialEditor, true);
 				}
-				else if(self.asset instanceof PointsMaterial)
+				else if(self.asset instanceof THREE.PointsMaterial)
 				{
 					tab = Editor.gui.tab.addTab(PointsMaterialEditor, true);
 				}
@@ -198,7 +167,7 @@ function MaterialAsset(parent)
 
 				// Load
 				var material = loader.parse(json); 
-				material.uuid = Math.generateUUID();
+				material.uuid = THREE.Math.generateUUID();
 				material.name += "*";
 				
 				Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
@@ -247,7 +216,7 @@ MaterialAsset.prototype.destroy = function()
 // Highlight material
 MaterialAsset.prototype.highlightMaterial = function()
 {
-	if(this.asset instanceof Material && this.asset.color !== undefined)
+	if(this.asset instanceof THREE.Material && this.asset.color !== undefined)
 	{
 		this.materialColor.copy(this.asset.color);
 		this.asset.color.setRGB(1, 1, 0);
@@ -260,7 +229,7 @@ MaterialAsset.prototype.restoreMaterial = function()
 {
 	if(this.materialHighlighted)
 	{
-		if(this.asset instanceof Material && this.asset.color !== undefined)
+		if(this.asset instanceof THREE.Material && this.asset.color !== undefined)
 		{
 			this.asset.color.copy(this.materialColor);
 			this.materialHighlighted = false;
@@ -282,4 +251,3 @@ MaterialAsset.prototype.updateMetadata = function()
 		this.setText(this.asset.name);
 	}
 };
-export {MaterialAsset};

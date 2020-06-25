@@ -1,5 +1,4 @@
-import {Component} from "../../Component.js";
-import {Button} from "../Button.js";
+"use strict";
 
 /**
  * A button that can be toggled on and off and keeps its state stored internally.
@@ -72,4 +71,3 @@ ButtonToggle.prototype.setSelected = function(value)
 		this.setStyles(this.styleBase);
 	}
 };
-export {ButtonToggle};

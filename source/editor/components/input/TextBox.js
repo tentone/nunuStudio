@@ -1,9 +1,4 @@
-import {Font} from "../../../../core/resources/Font.js";
-import {Interface} from "../../../gui/Interface.js";
-import {Editor} from "../../../Editor.js";
-import {Text} from "../../Text.js";
-import {ContextMenu} from "../../dropdown/ContextMenu.js";
-import {Component} from "../../Component.js";
+"use strict";
 
 /**
  * DOM text input element.
@@ -169,5 +164,3 @@ TextBox.prototype.getText = function()
 {
 	return this.element.value;
 };
-
-export {TextBox};

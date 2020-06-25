@@ -1,7 +1,4 @@
-import {Video} from "../../Video.js";
-import {Resource} from "../../Resource.js";
-import {Image} from "../../Image.js";
-import {FileSystem} from "../../../FileSystem.js";
+"use strict";
 
 /**
  * Video stream resource, used to load streamable video files.
@@ -22,4 +19,3 @@ function VideoStream(url)
 }
 
 VideoStream.prototype = Object.create(Video.prototype);
-export {VideoStream};

@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * Utils to access the browser local storage.
@@ -73,5 +74,3 @@ LocalStorage.delete = function(key)
 {
 	return window.localStorage.removeItem(key);
 };
-
-export {LocalStorage};

@@ -1,6 +1,6 @@
-import {Camera} from "three";
+"use strict";
 
-Camera.prototype.render = function(renderer, scene)
+THREE.Camera.prototype.render = function(renderer, scene)
 {
 	renderer.render(scene, this);
 };

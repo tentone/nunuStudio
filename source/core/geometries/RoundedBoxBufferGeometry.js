@@ -1,4 +1,4 @@
-import {BufferGeometry, BufferAttribute, Vector3} from "three";
+"use strict";
 
 /**
  * Rounded corners box buffer geometry, composed of a box with spherical corners and cylindrical edges.
@@ -11,7 +11,7 @@ import {BufferGeometry, BufferAttribute, Vector3} from "three";
  */
 function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 {
-	BufferGeometry.call(this);
+	THREE.BufferGeometry.call(this);
 
 	this.type = "RoundedBoxBufferGeometry";
 
@@ -42,14 +42,14 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 	var totalVertexCount = (rs1 * radiusSegments + 1) << 3;
 
 	// Make buffers
-	var positions = new BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
-	var normals = new BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
+	var positions = new THREE.BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
+	var normals = new THREE.BufferAttribute(new Float32Array(totalVertexCount * 3), 3);
 
 	// Some vars
 	var cornerVerts = [];
 	var cornerNormals = [];
-	var normal = new Vector3();
-	var vertex = new Vector3();
+	var normal = new THREE.Vector3();
+	var vertex = new THREE.Vector3();
 	var vertexPool = [];
 	var normalPool = [];
 	var indices = [];
@@ -69,14 +69,14 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 
 		// Corner offsets
 		var cornerLayout = [
-			new Vector3(1, 1, 1),
-			new Vector3(1, 1, -1),
-			new Vector3(-1, 1, -1),
-			new Vector3(-1, 1, 1),
-			new Vector3(1, -1, 1),
-			new Vector3(1, -1, -1),
-			new Vector3(-1, -1, -1),
-			new Vector3(-1, -1, 1)
+			new THREE.Vector3(1, 1, 1),
+			new THREE.Vector3(1, 1, -1),
+			new THREE.Vector3(-1, 1, -1),
+			new THREE.Vector3(-1, 1, 1),
+			new THREE.Vector3(1, -1, 1),
+			new THREE.Vector3(1, -1, -1),
+			new THREE.Vector3(-1, -1, -1),
+			new THREE.Vector3(-1, -1, 1)
 		];
 
 		// Corner holder 
@@ -88,7 +88,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 
 		// Construct 1/8 sphere
 		var PIhalf = Math.PI / 2;
-		var cornerOffset = new Vector3(edgeHalfWidth, edgeHalfHeight, edgeHalfDepth);
+		var cornerOffset = new THREE.Vector3(edgeHalfWidth, edgeHalfHeight, edgeHalfDepth);
 
 		for(var y = 0; y <= radiusSegments; y++)
 		{
@@ -355,12 +355,10 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 		index++;
 	}
 
-	this.setIndex(new BufferAttribute(new Uint16Array(indices), 1));
+	this.setIndex(new THREE.BufferAttribute(new Uint16Array(indices), 1));
 	this.addAttribute("position", positions);
 	this.addAttribute("normal", normals);
 };
 
-RoundedBoxBufferGeometry.prototype = Object.create(BufferGeometry.prototype);
+RoundedBoxBufferGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
 RoundedBoxBufferGeometry.constructor = RoundedBoxBufferGeometry;
-
-export {RoundedBoxBufferGeometry};

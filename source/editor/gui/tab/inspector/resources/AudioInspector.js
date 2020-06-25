@@ -1,9 +1,4 @@
-import {Resource} from "../../../../../../core/resources/Resource.js";
-import {Audio} from "../../../../../../core/resources/Audio.js";
-import {ResourceInspector} from "../ResourceInspector.js";
-import {Inspector} from "../../Inspector.js";
-import {Text} from "../../../../../components/Text.js";
-import {AudioPlayer} from "../../../../../components/media/AudioPlayer.js";
+"use strict";
 
 function AudioInspector(parent, object)
 {
@@ -34,4 +29,3 @@ AudioInspector.prototype.updateInspector = function()
 
 	this.player.setAudioBuffer(this.object.data);
 };
-export {AudioInspector};

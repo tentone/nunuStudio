@@ -1,7 +1,4 @@
-import {Key} from "../../../../../core/input/Key.js";
-import {AnimationKeyframe} from "../AnimationKeyframe.js";
-import {Interface} from "../../../Interface.js";
-import {Component} from "../../../../components/Component.js";
+"use strict";
 
 function AnimationTrack(parent, editor, track)
 {
@@ -33,5 +30,3 @@ AnimationTrack.prototype.createKeyframes = function()
 		key.updateInterface();
 	}
 };
-
-export {AnimationTrack};

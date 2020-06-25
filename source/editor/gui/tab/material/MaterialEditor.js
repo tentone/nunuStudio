@@ -1,26 +1,4 @@
-import {Container} from "../../../../../core/objects/misc/Container.js";
-import {Mouse} from "../../../../../core/input/Mouse.js";
-import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
-import {Interface} from "../../../Interface.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
-import {TabComponent} from "../../../../components/tabs/TabComponent.js";
-import {TableForm} from "../../../../components/TableForm.js";
-import {RendererCanvas} from "../../../../components/RendererCanvas.js";
-import {TextBox} from "../../../../components/input/TextBox.js";
-import {Slider} from "../../../../components/input/Slider.js";
-import {NumberBox} from "../../../../components/input/NumberBox.js";
-import {DropdownList} from "../../../../components/input/DropdownList.js";
-import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Form} from "../../../../components/Form.js";
-import {Division} from "../../../../components/Division.js";
-import {DualDivision} from "../../../../components/containers/DualDivision.js";
-import {DualContainer} from "../../../../components/containers/DualContainer.js";
-import {Component} from "../../../../components/Component.js";
-import {Canvas} from "../../../../components/Canvas.js";
-import {Scene, PerspectiveCamera, Object3D, FrontSide, BackSide, DoubleSide, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, SphereBufferGeometry, TorusBufferGeometry, BoxBufferGeometry, TorusKnotBufferGeometry, ConeBufferGeometry, Quaternion, Euler} from "three";
-
+"use strict";
 
 function MaterialEditor(parent, closeable, container, index)
 {
@@ -45,14 +23,14 @@ function MaterialEditor(parent, closeable, container, index)
 	this.asset = null;
 
 	// Preview scene
-	this.scene = new Scene();
+	this.scene = new THREE.Scene();
 
 	// Camera
-	this.camera = new PerspectiveCamera(80, this.canvas.size.x / this.canvas.size.y);
+	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x / this.canvas.size.y);
 	this.camera.position.set(0, 0, 2.5);
 
 	// Interactive object
-	this.interactive = new Object3D();
+	this.interactive = new THREE.Object3D();
 	this.scene.add(this.interactive);
 
 	// Preview configuration
@@ -82,9 +60,9 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.side);
 	this.side = new DropdownList(this.form);
 	this.side.size.set(100, 18);
-	this.side.addValue(Locale.front, FrontSide);
-	this.side.addValue(Locale.back, BackSide);
-	this.side.addValue(Locale.double, DoubleSide);
+	this.side.addValue(Locale.front, THREE.FrontSide);
+	this.side.addValue(Locale.back, THREE.BackSide);
+	this.side.addValue(Locale.double, THREE.DoubleSide);
 	this.side.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "side", self.side.getValue()));
@@ -133,13 +111,13 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.depthMode);
 	this.depthFunc = new DropdownList(this.form);
 	this.depthFunc.size.set(100, 18);
-	this.depthFunc.addValue(Locale.never, NeverDepth);
-	this.depthFunc.addValue(Locale.always, AlwaysDepth);
-	this.depthFunc.addValue(Locale.less, LessDepth);
-	this.depthFunc.addValue(Locale.lessOrEqual, LessEqualDepth);
-	this.depthFunc.addValue(Locale.greaterOrEqual, GreaterEqualDepth);
-	this.depthFunc.addValue(Locale.greater, GreaterDepth);
-	this.depthFunc.addValue(Locale.notEqual, NotEqualDepth);
+	this.depthFunc.addValue(Locale.never, THREE.NeverDepth);
+	this.depthFunc.addValue(Locale.always, THREE.AlwaysDepth);
+	this.depthFunc.addValue(Locale.less, THREE.LessDepth);
+	this.depthFunc.addValue(Locale.lessOrEqual, THREE.LessEqualDepth);
+	this.depthFunc.addValue(Locale.greaterOrEqual, THREE.GreaterEqualDepth);
+	this.depthFunc.addValue(Locale.greater, THREE.GreaterDepth);
+	this.depthFunc.addValue(Locale.notEqual, THREE.NotEqualDepth);
 	this.depthFunc.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "depthFunc", self.depthFunc.getValue()));
@@ -216,11 +194,11 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.size.set(100, 18);
-	this.blending.addValue(Locale.none, NoBlending);
-	this.blending.addValue(Locale.normal, NormalBlending);
-	this.blending.addValue(Locale.additive, AdditiveBlending);
-	this.blending.addValue(Locale.subtractive, SubtractiveBlending);
-	this.blending.addValue(Locale.multiply, MultiplyBlending);
+	this.blending.addValue(Locale.none, THREE.NoBlending);
+	this.blending.addValue(Locale.normal, THREE.NormalBlending);
+	this.blending.addValue(Locale.additive, THREE.AdditiveBlending);
+	this.blending.addValue(Locale.subtractive, THREE.SubtractiveBlending);
+	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "blending", self.blending.getValue()));
@@ -310,11 +288,11 @@ function MaterialEditor(parent, closeable, container, index)
 }
 
 MaterialEditor.geometries = [
-	[Locale.sphere, new SphereBufferGeometry(1, 40, 40)],
-	[Locale.torus, new TorusBufferGeometry(0.8, 0.4, 32, 64)],
-	[Locale.cube, new BoxBufferGeometry(1, 1, 1, 1, 1, 1)],
-	[Locale.torusKnot, new TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],
-	[Locale.cone, new ConeBufferGeometry(1, 2, 32)]
+	[Locale.sphere, new THREE.SphereBufferGeometry(1, 40, 40)],
+	[Locale.torus, new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64)],
+	[Locale.cube, new THREE.BoxBufferGeometry(1, 1, 1, 1, 1, 1)],
+	[Locale.torusKnot, new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],
+	[Locale.cone, new THREE.ConeBufferGeometry(1, 2, 32)]
 ];
 
 MaterialEditor.prototype = Object.create(TabComponent.prototype);
@@ -433,8 +411,8 @@ MaterialEditor.prototype.update = function()
 		// Rotate object
 		if(this.mouse.buttonPressed(Mouse.LEFT))
 		{
-			var delta = new Quaternion();
-			delta.setFromEuler(new Euler(this.mouse.delta.y * 0.005, this.mouse.delta.x * 0.005, 0, 'XYZ'));
+			var delta = new THREE.Quaternion();
+			delta.setFromEuler(new THREE.Euler(this.mouse.delta.y * 0.005, this.mouse.delta.x * 0.005, 0, 'XYZ'));
 			
 			this.interactive.quaternion.multiplyQuaternions(delta, this.interactive.quaternion);
 		}
@@ -452,4 +430,3 @@ MaterialEditor.prototype.updateSize = function()
 	this.previewForm.updateInterface();
 	this.form.updateInterface();
 };
-export {MaterialEditor};

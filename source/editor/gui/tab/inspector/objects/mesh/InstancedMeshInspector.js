@@ -1,12 +1,4 @@
-import {Mesh} from "../../../../../../../core/objects/mesh/Mesh.js";
-import {InstancedMesh} from "../../../../../../../core/objects/mesh/InstancedMesh.js";
-import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../../history/action/Action.js";
-import {MeshInspector} from "../MeshInspector.js";
-import {Inspector} from "../../../Inspector.js";
-import {Editor} from "../../../../../../Editor.js";
-import {Text} from "../../../../../../components/Text.js";
-import {NumberBox} from "../../../../../../components/input/NumberBox.js";
+"use strict";
 
 function InstancedMeshInspector(parent, object)
 {
@@ -36,5 +28,3 @@ InstancedMeshInspector.prototype.updateInspector = function()
 
 	this.count.setValue(this.object.count);
 };
-
-export {InstancedMeshInspector};

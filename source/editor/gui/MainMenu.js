@@ -1,32 +1,4 @@
-import {UnitConverter} from "../../../core/utils/UnitConverter.js";
-import {Texture} from "../../../core/texture/Texture.js";
-import {Image} from "../../../core/resources/Image.js";
-import {Script} from "../../../core/objects/script/Script.js";
-import {Scene} from "../../../core/objects/Scene.js";
-import {Program} from "../../../core/objects/Program.js";
-import {Mesh} from "../../../core/objects/mesh/Mesh.js";
-import {Nunu} from "../../../core/Nunu.js";
-import {ObjectLoader} from "../../../core/loaders/ObjectLoader.js";
-import {TwistModifier} from "../../../core/geometries/modifiers/TwistModifier.js";
-import {FileSystem} from "../../../core/FileSystem.js";
-import {Settings} from "../../Settings.js";
-import {RemoveAction} from "../../history/action/objects/RemoveAction.js";
-import {AddAction} from "../../history/action/objects/AddAction.js";
-import {ChangeAction} from "../../history/action/ChangeAction.js";
-import {ActionBundle} from "../../history/action/ActionBundle.js";
-import {Action} from "../../history/action/Action.js";
-import {SettingsTab} from "../tab/settings/SettingsTab.js";
-import {AboutTab} from "../tab/AboutTab.js";
-import {Interface} from "../Interface.js";
-import {Exporters} from "../../Exporters.js";
-import {Editor} from "../../Editor.js";
-import {Text} from "../../components/Text.js";
-import {DropdownMenu} from "../../components/dropdown/DropdownMenu.js";
-import {Component} from "../../components/Component.js";
-import {ButtonText} from "../../components/buttons/ButtonText.js";
-import {Button} from "../../components/buttons/Button.js";
-import {StaticPair} from "pson";
-import {OBJExporter, GLTFExporter, DRACOExporter, ColladaExporter, PLYExporter, STLExporter, BufferGeometry, Geometry, SimplifyModifier, SubdivisionModifier} from "three";
+"use strict";
 
 /**
  * Main menu of the application is displayed on top of the window, contains all global operations that can be applied to the project.
@@ -275,7 +247,7 @@ function MainMenu(parent)
 				{
 					if(" + Locale.binary + ")
 					{
-						var pson = new StaticPair();
+						var pson = new dcodeIO.PSON.StaticPair();
 						var data = pson.decode(reader.result);
 						var program = loader.parse(data);
 					}
@@ -315,7 +287,7 @@ function MainMenu(parent)
 	{	
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new OBJExporter();
+			var exporter = new THREE.OBJExporter();
 			var data = exporter.parse(Editor.getScene());
 			FileSystem.writeFile(fname, data);
 		}, ".obj");
@@ -338,7 +310,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new GLTFExporter();
+			var exporter = new THREE.GLTFExporter();
 			exporter.parse(Editor.getScene(), function(result)
 			{
 				FileSystem.writeFile(fname, JSON.stringify(result, null, "\t"));
@@ -362,7 +334,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new GLTFExporter();
+			var exporter = new THREE.GLTFExporter();
 			exporter.parse(Editor.getScene(), function(result)
 			{
 				FileSystem.writeFileArrayBuffer(fname, result);
@@ -380,7 +352,7 @@ function MainMenu(parent)
 		}
 
 		var geometry = Editor.selection[0].geometry;
-		var exporter = new DRACOExporter();
+		var exporter = new THREE.DRACOExporter();
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
@@ -394,7 +366,7 @@ function MainMenu(parent)
 	{
 		var path = FileSystem.getFilePath(fname);
 
-		var exporter = new ColladaExporter();
+		var exporter = new THREE.ColladaExporter();
 		exporter.parse(Editor.program, function(result)
 		{
 			for(var i = 0; i < result.textures.length; i++)
@@ -447,7 +419,7 @@ function MainMenu(parent)
 		
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new PLYExporter();
+			var exporter = new THREE.PLYExporter();
 			exporter.parse(Editor.getScene(), function(result)
 			{
 				FileSystem.writeFile(fname, result);
@@ -462,7 +434,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new PLYExporter();
+			var exporter = new THREE.PLYExporter();
 			exporter.parse(Editor.getScene(), function(result)
 			{
 				FileSystem.writeFileArrayBuffer(fname, result);
@@ -478,7 +450,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new STLExporter();
+			var exporter = new THREE.STLExporter();
 			var data = exporter.parse(Editor.program, config);
 			FileSystem.writeFile(fname, data);
 		}, ".stl");
@@ -491,7 +463,7 @@ function MainMenu(parent)
 
 		FileSystem.chooseFileWrite(function(fname)
 		{
-			var exporter = new STLExporter();
+			var exporter = new THREE.STLExporter();
 			var data = exporter.parse(Editor.program, config);
 			FileSystem.writeFileArrayBuffer(fname, data.buffer);
 		}, ".stl");
@@ -560,9 +532,9 @@ function MainMenu(parent)
 	{
 		var geometry = object.geometry;
 
-		if(geometry instanceof BufferGeometry)
+		if(geometry instanceof THREE.BufferGeometry)
 		{
-			geometry = new Geometry().fromBufferGeometry(geometry);
+			geometry = new THREE.Geometry().fromBufferGeometry(geometry);
 		}
 		else
 		{
@@ -652,7 +624,7 @@ function MainMenu(parent)
 			return;
 		}
 
-		var simplifier = new SimplifyModifier();
+		var simplifier = new THREE.SimplifyModifier();
 
 		var level = parseFloat(Editor.prompt("Simplification level in %")) / 100;
 		if(isNaN(level) || level > 100 || level < 0)
@@ -663,7 +635,7 @@ function MainMenu(parent)
 
 		var original = Editor.selection[0].geometry;
 
-		if(original instanceof BufferGeometry)
+		if(original instanceof THREE.BufferGeometry)
 		{
 			var vertices = original.getAttribute("position").array.length / 3;
 		}
@@ -688,7 +660,7 @@ function MainMenu(parent)
 			return;
 		}
 
-		var modifier = new SubdivisionModifier();
+		var modifier = new THREE.SubdivisionModifier();
 		var geometry = modifier.modify(Editor.selection[0].geometry);
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addObject(mesh);
@@ -767,7 +739,7 @@ function MainMenu(parent)
 			return;
 		}
 
-		var geometry = new Geometry();
+		var geometry = new THREE.Geometry();
 
 		for(var i = 0; i < Editor.selection.length; i++)
 		{	
@@ -775,9 +747,9 @@ function MainMenu(parent)
 			if(obj.geometry !== undefined)
 			{
 				// Convert to geometry and merge
-				if(obj.geometry instanceof BufferGeometry)
+				if(obj.geometry instanceof THREE.BufferGeometry)
 				{
-					var converted = new Geometry();
+					var converted = new THREE.Geometry();
 					converted.fromBufferGeometry(obj.geometry);
 					geometry.merge(converted, obj.matrixWorld)
 				}
@@ -864,5 +836,3 @@ MainMenu.prototype.updateInterface = function()
 {
 	this.updateVisibility();
 };
-
-export {MainMenu};

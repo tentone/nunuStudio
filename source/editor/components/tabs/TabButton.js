@@ -1,9 +1,4 @@
-import {Mouse} from "../../../../core/input/Mouse.js";
-import {Text} from "../../Text.js";
-import {TabGroup} from "../TabGroup.js";
-import {TabComponent} from "../TabComponent.js";
-import {Component} from "../../Component.js";
-import {Button} from "../../buttons/Button.js";
+"use strict";
 
 /**
  * Tab button is used to navigate trough tabs.
@@ -310,5 +305,3 @@ TabButton.prototype.updateSize = function()
 
 	this.updateSelection();
 };
-
-export {TabButton};

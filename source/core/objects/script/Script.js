@@ -1,11 +1,3 @@
-import {Resource} from "../../../resources/Resource.js";
-import {Scene} from "../../Scene.js";
-import {Program} from "../../Program.js";
-import {Mouse} from "../../../input/Mouse.js";
-import {Keyboard} from "../../../input/Keyboard.js";
-import {Key} from "../../../input/Key.js";
-import {FileSystem} from "../../../FileSystem.js";
-import {Group, Object3D} from "three";
 /**
  * Script objects are used to control other objects present in the scene.
  *
@@ -20,7 +12,7 @@ import {Group, Object3D} from "three";
  */
 function Script(code, mode)
 {
-	Group.call(this);
+	THREE.Group.call(this);
 	
 	this.type = "Script";
 	this.name = "script";
@@ -108,7 +100,7 @@ function Script(code, mode)
 	this.scene = null;
 }
 
-Script.prototype = Object.create(Group.prototype);
+Script.prototype = Object.create(THREE.Group.prototype);
 
 /**
  * Regular expression to obtain all the include calls placed inside of scripts.
@@ -248,7 +240,7 @@ Script.prototype.initialize = function()
 		}
 	}
 
-	Object3D.prototype.initialize.call(this);
+	THREE.Object3D.prototype.initialize.call(this);
 
 	var self = this;
 
@@ -284,7 +276,7 @@ Script.prototype.update = function(delta)
 		this.script.update.call(this, delta);
 	}
 
-	Object3D.prototype.update.call(this, delta);
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**
@@ -301,7 +293,7 @@ Script.prototype.dispose = function()
 		this.script.dispose.call(this);
 	}
 
-	Object3D.prototype.dispose.call(this);
+	THREE.Object3D.prototype.dispose.call(this);
 }
 
 /**
@@ -507,11 +499,10 @@ Script.prototype.compileCode = function(code, onReady)
 
 Script.prototype.toJSON = function(meta)
 {
-	var data = Object3D.prototype.toJSON.call(this, meta);
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.code = this.code;
 	data.object.mode = this.mode;
 
 	return data;
 };
-export {Script};

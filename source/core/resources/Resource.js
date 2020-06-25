@@ -1,6 +1,4 @@
-import {FileSystem} from "../../FileSystem.js";
-import {Math} from "three";
-
+"use strict";
 
 /**
  * Resource class is used to represent resources.
@@ -28,7 +26,7 @@ function Resource(name, type)
 	 * @property uuid
 	 * @type {string}
 	 */
-	this.uuid = Math.generateUUID();
+	this.uuid = THREE.Math.generateUUID();
 
 	/**
 	 * Resource type. Used to identify the type of the resource, usefull for serialization.
@@ -123,4 +121,3 @@ Resource.prototype.toJSON = function(meta)
 
 	return data;
 };
-export {Resource};

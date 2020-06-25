@@ -1,15 +1,9 @@
-import {RenderPass} from "../../../postprocessing/RenderPass.js";
-import {Pass} from "../../../postprocessing/Pass.js";
-import {EffectComposer} from "../../../postprocessing/EffectComposer.js";
-import {Scene} from "../../Scene.js";
-import {Viewport} from "../Viewport.js";
-import {OrthographicCamera, Object3D} from "three";
-
+"use strict";
 
 /**
  * Orthographic Camera is used for 2D like image projection.
  * 
- * Based on OrthographicCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera.
+ * Based on THREE.OrthographicCamera, original documentation available at https:// threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera.
  * 
  * @class OrthographicCamera
  * @extends {OrthographicCamera}
@@ -22,7 +16,7 @@ import {OrthographicCamera, Object3D} from "three";
  */
 function OrthographicCamera(size, aspect, mode, near, far)
 {
-	OrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
+	THREE.OrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
 
 	this.name = "camera";
 
@@ -116,7 +110,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.composer.addPass(renderPass);
 }
 
-OrthographicCamera.prototype = Object.create(OrthographicCamera.prototype);
+OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
 
 /**
  * Used to set camera to resize horizontally 
@@ -194,7 +188,7 @@ OrthographicCamera.prototype.destroy = function()
 		scene.removeCamera(this);
 	}
 	
-	Object3D.prototype.destroy.call(this);
+	THREE.Object3D.prototype.destroy.call(this);
 };
 
 /**
@@ -223,12 +217,12 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 		this.bottom = -this.top;
 	}
 
-	OrthographicCamera.prototype.updateProjectionMatrix.call(this);
+	THREE.OrthographicCamera.prototype.updateProjectionMatrix.call(this);
 };
 
 OrthographicCamera.prototype.toJSON = function(meta)
 {
-	var data = OrthographicCamera.prototype.toJSON.call(this, meta);
+	var data = THREE.OrthographicCamera.prototype.toJSON.call(this, meta);
 
 	data.object.size = this.size;
 	data.object.aspect = this.aspect;
@@ -245,4 +239,3 @@ OrthographicCamera.prototype.toJSON = function(meta)
 
 	return data;
 };
-export {OrthographicCamera};

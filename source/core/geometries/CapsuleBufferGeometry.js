@@ -1,4 +1,4 @@
-import {BufferGeometry, BufferAttribute, Vector3, Vector2} from "three";
+"use strict";
 
 /**
  * Capsule like geometry shape consisting of a cylinder with hemispherical ends.
@@ -11,7 +11,7 @@ import {BufferGeometry, BufferAttribute, Vector3, Vector2} from "three";
  */
 function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, capsTopSegments, capsBottomSegments, thetaStart, thetaLength) {
 
-	BufferGeometry.call(this);
+	THREE.BufferGeometry.call(this);
 
 	this.type = "CapsuleBufferGeometry";
 
@@ -49,10 +49,10 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 	var indexCount = calculateIndexCount();
 
 	// buffers
-	var indices = new BufferAttribute(new (indexCount > 65535 ? Uint32Array : Uint16Array)(indexCount), 1);
-	var vertices = new BufferAttribute(new Float32Array(vertexCount * 3), 3);
-	var normals = new BufferAttribute(new Float32Array(vertexCount * 3), 3);
-	var uvs = new BufferAttribute(new Float32Array(vertexCount * 2), 2);
+	var indices = new THREE.BufferAttribute(new (indexCount > 65535 ? Uint32Array : Uint16Array)(indexCount), 1);
+	var vertices = new THREE.BufferAttribute(new Float32Array(vertexCount * 3), 3);
+	var normals = new THREE.BufferAttribute(new Float32Array(vertexCount * 3), 3);
+	var uvs = new THREE.BufferAttribute(new Float32Array(vertexCount * 2), 2);
 
 	// Helper variables
 	var index = 0,
@@ -85,13 +85,13 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 	function generateTorso()
 	{
 		var x, y;
-		var normal = new Vector3();
-		var vertex = new Vector3();
+		var normal = new THREE.Vector3();
+		var vertex = new THREE.Vector3();
 
 		var cosAlpha = Math.cos(alpha);
 		var sinAlpha = Math.sin(alpha);
 
-		var cone_length = new Vector2(radiusTop * sinAlpha, halfHeight + radiusTop * cosAlpha).sub(new Vector2(radiusBottom * sinAlpha, -halfHeight + radiusBottom * cosAlpha)).length();
+		var cone_length = new THREE.Vector2(radiusTop * sinAlpha, halfHeight + radiusTop * cosAlpha).sub(new THREE.Vector2(radiusBottom * sinAlpha, -halfHeight + radiusBottom * cosAlpha)).length();
 
 		// Total length forv texture coord
 		var vl = radiusTop*alpha + cone_length + radiusBottom*(Math.PI/2-alpha);
@@ -268,7 +268,5 @@ function CapsuleBufferGeometry(radiusTop, radiusBottom, height, radialSegments, 
 	}
 }
 
-CapsuleBufferGeometry.prototype = Object.create(BufferGeometry.prototype);
+CapsuleBufferGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
 CapsuleBufferGeometry.prototype.constructor = CapsuleBufferGeometry;
-
-export {CapsuleBufferGeometry};

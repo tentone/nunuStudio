@@ -1,9 +1,4 @@
-import {Image} from "../../resources/Image.js";
-import {Sprite} from "../../objects/sprite/Sprite.js";
-import {Text} from "../../../editor/components/Text.js";
-import {Form} from "../../../editor/components/Form.js";
-import {RepeatWrapping, LinearFilter, RGBFormat, RGBAFormat, Texture} from "three";
-
+"use strict";
 
 /**
  * SpriteSheet texture, can be used load spritesheet animations as textures.
@@ -25,12 +20,12 @@ import {RepeatWrapping, LinearFilter, RGBFormat, RGBAFormat, Texture} from "thre
  */
 function SpriteSheetTexture(source, framesHorizontal, framesVertical, totalFrames, mapping, type, anisotropy)
 {
-	Texture.call(this, source, mapping, RepeatWrapping, RepeatWrapping, LinearFilter, LinearFilter, RGBFormat, type, anisotropy);
+	Texture.call(this, source, mapping, THREE.RepeatWrapping, THREE.RepeatWrapping, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
 	this.name = "animation";
 	this.category = "SpriteSheet";
 	this.disposed = false;
-	this.format = this.source.hasTransparency() ? RGBAFormat : RGBFormat;
+	this.format = this.source.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
 
 	/**
@@ -264,7 +259,7 @@ SpriteSheetTexture.prototype.setAnimationFrames = function(beginFrame, endFrame)
  */
 SpriteSheetTexture.prototype.dispose = function()
 {
-	Texture.prototype.dispose.call(this);
+	THREE.Texture.prototype.dispose.call(this);
 
 	this.disposed = true;
 };
@@ -278,7 +273,7 @@ SpriteSheetTexture.prototype.dispose = function()
  */
 SpriteSheetTexture.prototype.toJSON = function(meta)
 {
-	var data = Texture.prototype.toJSON.call(this, meta);
+	var data = THREE.Texture.prototype.toJSON.call(this, meta);
 	var image = this.source.toJSON(meta);
 
 	data.image = image.uuid;
@@ -292,4 +287,3 @@ SpriteSheetTexture.prototype.toJSON = function(meta)
 
 	return data;
 };
-export {SpriteSheetTexture};

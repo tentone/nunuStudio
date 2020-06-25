@@ -1,5 +1,4 @@
-import {RectAreaLight} from "../../../../../../core/objects/lights/RectAreaLight.js";
-import {Mesh, PlaneBufferGeometry, MeshBasicMaterial, DoubleSide} from "three";
+"use strict";
 
 /**
  * Helper to visualizer rect aread lights.
@@ -8,7 +7,7 @@ import {Mesh, PlaneBufferGeometry, MeshBasicMaterial, DoubleSide} from "three";
  */
 function RectAreaLightHelper(object) 
 {
-	Mesh.call(this, new PlaneBufferGeometry(1, 1), new MeshBasicMaterial({side: DoubleSide}));
+	THREE.Mesh.call(this, new THREE.PlaneBufferGeometry(1, 1), new THREE.MeshBasicMaterial({side: THREE.DoubleSide}));
 
 	/**
 	 * Object attached to the helper
@@ -21,7 +20,7 @@ function RectAreaLightHelper(object)
 	this.update();
 }
 
-RectAreaLightHelper.prototype = Object.create(Mesh.prototype);
+RectAreaLightHelper.prototype = Object.create(THREE.Mesh.prototype);
 
 RectAreaLightHelper.prototype.update = function()
 {
@@ -32,4 +31,3 @@ RectAreaLightHelper.prototype.update = function()
 
 	this.scale.set(this.object.width, this.object.height, 1);
 };
-export {RectAreaLightHelper};

@@ -1,4 +1,4 @@
-import {WorkerTask} from "../WorkerTask.js";
+"use strict";
 
 /**
  * Worker pool is used to manage and execute mutiple task of the same type using a predefined number of workers.
@@ -129,5 +129,3 @@ WorkerPool.prototype.runTask = function(data, callback)
 		this.next = 0;
 	}
 };
-
-export {WorkerPool};

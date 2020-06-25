@@ -1,10 +1,4 @@
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {MaterialEditor} from "../../MaterialEditor.js";
-import {LineBasicMaterialEditor} from "../LineBasicMaterialEditor.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {NumberBox} from "../../../../../components/input/NumberBox.js";
+"use strict";
 
 function LineDashedMaterialEditor(parent, closeable, container, index)
 {
@@ -65,5 +59,3 @@ LineDashedMaterialEditor.prototype.attach = function(material, asset)
 	this.gapSize.setValue(material.gapSize);
 	this.dashScale.setValue(material.scale);
 };
-
-export {LineDashedMaterialEditor};

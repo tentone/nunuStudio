@@ -1,11 +1,4 @@
-import {Pass} from "../../../../../../core/postprocessing/Pass.js";
-import {ColorifyPass} from "../../../../../../core/postprocessing/pass/ColorifyPass.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {PassNode} from "../PassNode.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
+"use strict";
 
 function ColorifyPassNode(parent)
 {
@@ -39,4 +32,3 @@ ColorifyPassNode.prototype.setPass = function(pass)
 
 	this.color.setValue(this.pass.color.r, this.pass.color.g, this.pass.color.b);
 };
-export {ColorifyPassNode};

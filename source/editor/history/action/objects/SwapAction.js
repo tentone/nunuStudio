@@ -1,8 +1,4 @@
-import {RemoveAction} from "../RemoveAction.js";
-import {AddAction} from "../AddAction.js";
-import {Action} from "../../Action.js";
-import {Object3D} from "three";
-
+"use strict";
 
 /**
  * Swap an object for another one.
@@ -11,8 +7,8 @@ import {Object3D} from "three";
  *
  * @class SwapAction
  * @extends {Action}
- * @param {Object3D} originalObject Object originally in place, to be replaced.
- * @param {Object3D} newObject Object to take place of the old one.
+ * @param {THREE.Object3D} originalObject Object originally in place, to be replaced.
+ * @param {THREE.Object3D} newObject Object to take place of the old one.
  * @param {boolean} moveChildren If true move the children from the original object to the new.
  */
 function SwapAction(originalObject, newObject, moveChildren)
@@ -77,4 +73,3 @@ SwapAction.prototype.revert = function()
 	RemoveAction.updateGUI(this.newObject, this.parent);
 	AddAction.updateGUI(this.originalObject, this.parent, this.index);
 };
-export {SwapAction};

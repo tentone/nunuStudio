@@ -1,18 +1,4 @@
-import {Resource} from "../../../../../../core/resources/Resource.js";
-import {Image} from "../../../../../../core/resources/Image.js";
-import {Audio} from "../../../../../../core/resources/Audio.js";
-import {PositionalAudio} from "../../../../../../core/objects/audio/PositionalAudio.js";
-import {AudioEmitter} from "../../../../../../core/objects/audio/AudioEmitter.js";
-import {Nunu} from "../../../../../../core/Nunu.js";
-import {FileSystem} from "../../../../../../core/FileSystem.js";
-import {RemoveResourceAction} from "../../../../../history/action/resources/RemoveResourceAction.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {Asset} from "../Asset.js";
-import {Interface} from "../../../../Interface.js";
-import {Editor} from "../../../../../Editor.js";
-import {ContextMenu} from "../../../../../components/dropdown/ContextMenu.js";
-
+"use strict";
 
 function AudioAsset(parent)
 {
@@ -128,4 +114,3 @@ function AudioAsset(parent)
 }
 
 AudioAsset.prototype = Object.create(Asset.prototype);
-export {AudioAsset};

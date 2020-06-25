@@ -1,8 +1,4 @@
-import {Texture} from "../../../../../../core/texture/Texture.js";
-import {Viewport} from "../../../../../../core/objects/cameras/Viewport.js";
-import {Text} from "../../../../../components/Text.js";
-import {Form} from "../../../../../components/Form.js";
-import {PerspectiveCamera, Raycaster, Vector2, Scene, PlaneBufferGeometry, RGBFormat, Mesh, MeshBasicMaterial} from "three";
+"use strict";
 
 /** 
  * Orietantion cube can be used to preview and change the rotation of an object.
@@ -28,28 +24,28 @@ function OrientationCube()
 	 * Cube visualization camera
 	 *
 	 * @attribute camera
-	 * @type {PerspectiveCamera}
+	 * @type {THREE.PerspectiveCamera}
 	 */
-	this.camera = new PerspectiveCamera(60, 1, 0.1, 10);
+	this.camera = new THREE.PerspectiveCamera(60, 1, 0.1, 10);
 	this.camera.position.z = 2;
 
 	// Raycaster
-	this.raycaster = new Raycaster();
-	this.normalized = new Vector2(0, 0);
+	this.raycaster = new THREE.Raycaster();
+	this.normalized = new THREE.Vector2(0, 0);
 
 	// Scene
-	this.scene = new Scene();
+	this.scene = new THREE.Scene();
 	this.scene.matrixAutoUpdate = false;
 
 	// Selected face
 	this.selected = null;
 
-	var plane = new PlaneBufferGeometry(1, 1);
+	var plane = new THREE.PlaneBufferGeometry(1, 1);
 
 	// Cube faces
 	var texture = new Texture(Global.FILE_PATH + "camera/xPos.png");
-	texture.format = RGBFormat;
-	this.xPos = new Mesh(plane, new MeshBasicMaterial({map: texture}));
+	texture.format = THREE.RGBFormat;
+	this.xPos = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.xPos.code = OrientationCube.X_POS;
 	this.xPos.position.set(0.5, 0, 0);
 	this.xPos.rotation.set(0, Math.PI / 2, 0);
@@ -58,8 +54,8 @@ function OrientationCube()
 	this.scene.add(this.xPos);
 
 	var texture = new Texture(Global.FILE_PATH + "camera/xNeg.png");
-	texture.format = RGBFormat;
-	this.xNeg = new Mesh(plane, new MeshBasicMaterial({map: texture}));
+	texture.format = THREE.RGBFormat;
+	this.xNeg = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.xNeg.code = OrientationCube.X_NEG;
 	this.xNeg.position.set(-0.5, 0, 0);
 	this.xNeg.rotation.set(0, -Math.PI / 2, 0);
@@ -68,8 +64,8 @@ function OrientationCube()
 	this.scene.add(this.xNeg);
 
 	var texture = new Texture(Global.FILE_PATH + "camera/yPos.png");
-	texture.format = RGBFormat;
-	this.yPos = new Mesh(plane, new MeshBasicMaterial({map: texture}));
+	texture.format = THREE.RGBFormat;
+	this.yPos = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.yPos.code = OrientationCube.Y_POS;
 	this.yPos.position.set(0, 0.5, 0);
 	this.yPos.rotation.set(-Math.PI / 2, 0, 0);
@@ -78,8 +74,8 @@ function OrientationCube()
 	this.scene.add(this.yPos);
 
 	var texture = new Texture(Global.FILE_PATH + "camera/yNeg.png");
-	texture.format = RGBFormat;
-	this.yNeg = new Mesh(plane, new MeshBasicMaterial({map: texture}));
+	texture.format = THREE.RGBFormat;
+	this.yNeg = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.yNeg.code = OrientationCube.Y_NEG;
 	this.yNeg.position.set(0, -0.5, 0);
 	this.yNeg.rotation.set(Math.PI / 2, 0, 0);
@@ -88,8 +84,8 @@ function OrientationCube()
 	this.scene.add(this.yNeg);
 
 	var texture = new Texture(Global.FILE_PATH + "camera/zPos.png");
-	texture.format = RGBFormat;
-	this.zPos = new Mesh(plane, new MeshBasicMaterial({map: texture}));
+	texture.format = THREE.RGBFormat;
+	this.zPos = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.zPos.code = OrientationCube.Z_POS;
 	this.zPos.position.set(0, 0, 0.5);
 	this.zPos.matrixAutoUpdate = false;
@@ -97,8 +93,8 @@ function OrientationCube()
 	this.scene.add(this.zPos);
 
 	var texture = new Texture(Global.FILE_PATH + "camera/zNeg.png");
-	texture.format = RGBFormat;
-	this.zNeg = new Mesh(plane, new MeshBasicMaterial({map: texture}));
+	texture.format = THREE.RGBFormat;
+	this.zNeg = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: texture}));
 	this.zNeg.code = OrientationCube.Z_NEG;
 	this.zNeg.position.set(0, 0, -0.5);
 	this.zNeg.rotation.set(0, Math.PI, 0);
@@ -165,5 +161,3 @@ OrientationCube.prototype.render = function(renderer, canvas)
 		this.selected = null;
 	}
 };
-
-export {OrientationCube};

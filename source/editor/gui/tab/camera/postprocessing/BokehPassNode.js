@@ -1,12 +1,4 @@
-import {Pass} from "../../../../../../core/postprocessing/Pass.js";
-import {BokehPass} from "../../../../../../core/postprocessing/pass/BokehPass.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {PassNode} from "../PassNode.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {Slider} from "../../../../../components/input/Slider.js";
-import {NumberBox} from "../../../../../components/input/NumberBox.js";
+"use strict";
 
 function BokehPassNode(parent)
 {
@@ -62,4 +54,3 @@ BokehPassNode.prototype.setPass = function(pass)
 	this.focus.setValue(pass.focus);
 	this.maxblur.setValue(pass.maxblur);
 };
-export {BokehPassNode};

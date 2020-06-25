@@ -1,15 +1,4 @@
-import {VideoTexture} from "../../../../../core/texture/VideoTexture.js";
-import {Texture} from "../../../../../core/texture/Texture.js";
-import {Video} from "../../../../../core/resources/Video.js";
-import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
-import {TextureEditor} from "../TextureEditor.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
-import {Slider} from "../../../../components/input/Slider.js";
-import {NumberBox} from "../../../../components/input/NumberBox.js";
-import {CheckBox} from "../../../../components/input/CheckBox.js";
-
+"use strict";
 
 function VideoTextureEditor(parent, closeable, container, index)
 {
@@ -77,4 +66,3 @@ VideoTextureEditor.prototype.attach = function(texture)
 	this.loop.setValue(this.texture.loop);
 	this.playbackRate.setValue(this.texture.playbackRate);
 };
-export {VideoTextureEditor};

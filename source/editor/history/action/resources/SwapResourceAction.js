@@ -1,8 +1,4 @@
-import {ResourceManager} from "../../../../../core/resources/ResourceManager.js";
-import {Resource} from "../../../../../core/resources/Resource.js";
-import {ResourceCrawler} from "../../../ResourceCrawler.js";
-import {Action} from "../../Action.js";
-import {Editor} from "../../../../Editor.js";
+"use strict";
 
 /**
  * Swap resource in the resource manager. The new resource is used to replace the old one.
@@ -53,4 +49,3 @@ SwapResourceAction.updateGUI = function()
 {
 	Editor.updateObjectsViewsGUI();
 };
-export {SwapResourceAction};

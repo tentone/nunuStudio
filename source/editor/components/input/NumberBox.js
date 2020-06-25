@@ -1,6 +1,4 @@
-import {UnitConverter} from "../../../../core/utils/UnitConverter.js";
-import {Editor} from "../../../Editor.js";
-import {Component} from "../../Component.js";
+"use strict";
 
 /**
  * Number input element.
@@ -123,4 +121,3 @@ NumberBox.prototype.updateVisibility = function()
 {
 	this.element.style.visibility = this.visible ? "visible" : "hidden";
 };
-export {NumberBox};

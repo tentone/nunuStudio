@@ -1,6 +1,4 @@
-import {ShaderPass} from "../../ShaderPass.js";
-import {Pass} from "../../Pass.js";
-import {SobelOperatorShader, LuminosityShader} from "three";
+"use strict";
 
 /**
  * Sobel pass is used to create a edge highlight effect with a sobel operator.
@@ -10,16 +8,16 @@ import {SobelOperatorShader, LuminosityShader} from "three";
  */
 function SobelPass(center, angle, scale)
 {
-	if(SobelOperatorShader === undefined)
+	if(THREE.SobelOperatorShader === undefined)
 	{
-		console.error("SobelPass relies on SobelOperatorShader");
+		console.error("SobelPass relies on THREE.SobelOperatorShader");
 	}
-	if(LuminosityShader === undefined)
+	if(THREE.LuminosityShader === undefined)
 	{
-		console.error("SobelPass relies on LuminosityShader");
+		console.error("SobelPass relies on THREE.LuminosityShader");
 	}
 
-	ShaderPass.call(this, SobelOperatorShader);
+	ShaderPass.call(this, THREE.SobelOperatorShader);
 
 	this.type = "Sobel";
 };
@@ -30,5 +28,3 @@ SobelPass.prototype.setSize = function(width, height)
 {
 	this.uniforms.resolution.value.set(width, height);
 };
-
-export {SobelPass};

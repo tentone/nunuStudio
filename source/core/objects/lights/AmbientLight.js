@@ -1,12 +1,11 @@
-import {AmbientLight} from "three";
-
+"use strict";
 
 /**
  * Ambient lights are used to create base ilumanition for the scene.
  *
  * They are not influenced by position, scale or rotation.
  * 
- * Based on AmbientLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/AmbientLight
+ * Based on THREE.AmbientLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/AmbientLight
  * 
  * @param {number} hex Light color in hex RGB
  * @class AmbientLight
@@ -22,8 +21,7 @@ function AmbientLight(hex)
 	this.matrixAutoUpdate = false;
 }
 
-THREE._AmbientLight = AmbientLight;
-AmbientLight = AmbientLight;
+THREE._AmbientLight = THREE.AmbientLight;
+THREE.AmbientLight = AmbientLight;
 
 AmbientLight.prototype = Object.create(THREE._AmbientLight.prototype);
-export {AmbientLight};

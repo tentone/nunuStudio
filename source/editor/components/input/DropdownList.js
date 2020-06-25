@@ -1,5 +1,4 @@
-import {Text} from "../../Text.js";
-import {Component} from "../../Component.js";
+"use strict";
 
 function DropdownList(parent)
 {
@@ -156,5 +155,3 @@ DropdownList.prototype.updateSize = function()
 
 	this.arrow.style.top = ((this.size.y - 10) / 2) + "px";
 };
-
-export {DropdownList};

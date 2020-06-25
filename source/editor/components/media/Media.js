@@ -1,5 +1,4 @@
-import {Video} from "../../../../core/resources/Video.js";
-import {Component} from "../../Component.js";
+"use strict";
 
 /**
  * Media element can be used to play media content.
@@ -155,5 +154,3 @@ Media.prototype.updateSize = function()
 	this.media.style.width = this.size.x + "px";
 	this.media.style.height = this.size.y + "px";
 };
-
-export {Media};

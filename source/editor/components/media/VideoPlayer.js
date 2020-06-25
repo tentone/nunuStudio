@@ -1,6 +1,4 @@
-import {Video} from "../../../../core/resources/Video.js";
-import {Media} from "../Media.js";
-import {Component} from "../../Component.js";
+"use strict";
 
 /**
  * Video player element, based on the video tag.
@@ -20,5 +18,3 @@ function VideoPlayer(parent)
 }
 
 VideoPlayer.prototype = Object.create(Media.prototype);
-
-export {VideoPlayer};

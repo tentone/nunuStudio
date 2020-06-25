@@ -1,19 +1,4 @@
-import {WebcamTexture} from "../../../../core/texture/WebcamTexture.js";
-import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
-import {SpriteSheetTexture} from "../../../../core/texture/SpriteSheetTexture.js";
-import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
-import {CanvasTexture} from "../../../../core/texture/CanvasTexture.js";
-import {Video} from "../../../../core/resources/Video.js";
-import {Resource} from "../../../../core/resources/Resource.js";
-import {Image} from "../../../../core/resources/Image.js";
-import {Sprite} from "../../../../core/objects/sprite/Sprite.js";
-import {FileSystem} from "../../../../core/FileSystem.js";
-import {Loaders} from "../../../Loaders.js";
-import {Editor} from "../../../Editor.js";
-import {Text} from "../../Text.js";
-import {Component} from "../../Component.js";
-import {Canvas} from "../../Canvas.js";
-import {Texture} from "three";
+"use strict";
 
 function TextureChooser(parent)
 {
@@ -71,7 +56,7 @@ function TextureChooser(parent)
 			var value = DragBuffer.get(uuid);
 
 			// Texture
-			if(value instanceof Texture && (self.acceptAll || !value.isCubeTexture))
+			if(value instanceof THREE.Texture && (self.acceptAll || !value.isCubeTexture))
 			{
 				self.setTexture(value);
 			}
@@ -123,7 +108,7 @@ function TextureChooser(parent)
 	 * Texture stored in chooser.
 	 *
 	 * @property texture
-	 * @type {Texture}
+	 * @type {THREE.Texture}
 	 */
 	this.texture = null;
 }
@@ -144,7 +129,7 @@ TextureChooser.prototype.setOnChange = function(onChange)
 // Set texture value
 TextureChooser.prototype.setValue = function(texture)
 {
-	if(texture instanceof Texture)
+	if(texture instanceof THREE.Texture)
 	{
 		this.texture = texture;
 		this.updatePreview();
@@ -250,5 +235,3 @@ TextureChooser.prototype.updateSize = function()
 
 	Component.prototype.updateSize.call(this);
 };
-
-export {TextureChooser};

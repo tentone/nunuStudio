@@ -1,4 +1,4 @@
-
+"use strict";
 
 /**
  * Static class that contains a listage of the code mirror themes (CSS) available in the platform.

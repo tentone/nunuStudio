@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * The unit convertor is responsible for performing unit conversion between values.
@@ -101,5 +102,3 @@ UnitConverter.convert = function(value, inUnit, outUnit)
 
 	return UnitConverter.units.get(outUnit).get(inUnit)(value) / outScale;
 };
-
-export {UnitConverter};

@@ -1,6 +1,4 @@
-import {Font} from "../../../core/resources/Font.js";
-import {Component} from "../Component.js";
-import {Vector2} from "three";
+"use strict";
 
 /**
  * Text element without background.
@@ -224,11 +222,11 @@ Text.prototype.setVerticalAlignment = function(align)
  * Get size of the text inside of this component in px.
  * 
  * @method measure
- * @return {Vector2} A vector with the size of the text. 
+ * @return {THREE.Vector2} A vector with the size of the text. 
  */
 Text.prototype.measure = function()
 {
- 	return new Vector2(this.span.offsetWidth, this.span.offsetHeight);
+ 	return new THREE.Vector2(this.span.offsetWidth, this.span.offsetHeight);
 };
 
 /**
@@ -257,4 +255,3 @@ Text.prototype.updateSize = function()
 	
 	Component.prototype.updateSize.call(this);
 };
-export {Text};

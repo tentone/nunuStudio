@@ -1,8 +1,4 @@
-import {Pass} from "../../Pass.js";
-import {Scene} from "../../../objects/Scene.js";
-import {Mesh} from "../../../objects/mesh/Mesh.js";
-import {Form} from "../../../../editor/components/Form.js";
-import {AfterimageShader, UniformsUtils, WebGLRenderTarget, LinearFilter, NearestFilter, RGBAFormat, ShaderMaterial, MeshBasicMaterial} from "three";
+"use strict";
 
 /**
  * After image render pass blends the current frame with the previous frame.
@@ -14,39 +10,39 @@ import {AfterimageShader, UniformsUtils, WebGLRenderTarget, LinearFilter, Neares
  */
 function AfterimagePass(damp)
 {
-	if(AfterimageShader === undefined)
+	if(THREE.AfterimageShader === undefined)
 	{
-		console.error("AfterimagePass relies on AfterimageShader");
+		console.error("AfterimagePass relies on THREE.AfterimageShader");
 	}
 
 	Pass.call(this);
 
 	this.type = "Afterimage";
 
-	this.uniforms = UniformsUtils.clone(AfterimageShader.uniforms);
+	this.uniforms = THREE.UniformsUtils.clone(THREE.AfterimageShader.uniforms);
 
-	this.textureComp = new WebGLRenderTarget(1, 1,
+	this.textureComp = new THREE.WebGLRenderTarget(1, 1,
 	{
-		minFilter: LinearFilter,
-		magFilter: NearestFilter,
-		format: RGBAFormat
+		minFilter: THREE.LinearFilter,
+		magFilter: THREE.NearestFilter,
+		format: THREE.RGBAFormat
 	});
 
-	this.textureOld = new WebGLRenderTarget(1, 1,
+	this.textureOld = new THREE.WebGLRenderTarget(1, 1,
 	{
-		minFilter: LinearFilter,
-		magFilter: NearestFilter,
-		format: RGBAFormat
+		minFilter: THREE.LinearFilter,
+		magFilter: THREE.NearestFilter,
+		format: THREE.RGBAFormat
 	});
 
-	this.shaderMaterial = new ShaderMaterial(
+	this.shaderMaterial = new THREE.ShaderMaterial(
 	{
 		uniforms: this.uniforms,
-		vertexShader: AfterimageShader.vertexShader,
-		fragmentShader: AfterimageShader.fragmentShader
+		vertexShader: THREE.AfterimageShader.vertexShader,
+		fragmentShader: THREE.AfterimageShader.fragmentShader
 	});
 
-	this.basicMaterial = new MeshBasicMaterial();
+	this.basicMaterial = new THREE.MeshBasicMaterial();
 
 	this.createQuadScene();
 
@@ -125,5 +121,3 @@ AfterimagePass.prototype.toJSON = function(meta)
 	return data;
 };
 
-
-export {AfterimagePass};

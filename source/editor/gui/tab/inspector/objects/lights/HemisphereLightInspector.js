@@ -1,13 +1,4 @@
-import {Sky} from "../../../../../../../core/objects/misc/Sky.js";
-import {HemisphereLight} from "../../../../../../../core/objects/lights/HemisphereLight.js";
-import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../../history/action/Action.js";
-import {ObjectInspector} from "../../ObjectInspector.js";
-import {Inspector} from "../../../Inspector.js";
-import {Editor} from "../../../../../../Editor.js";
-import {Text} from "../../../../../../components/Text.js";
-import {ColorChooser} from "../../../../../../components/input/ColorChooser.js";
-import {Color} from "three";
+"use strict";
 
 function HemisphereLightInspector(parent, object)
 {
@@ -21,7 +12,7 @@ function HemisphereLightInspector(parent, object)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "color", new Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -32,7 +23,7 @@ function HemisphereLightInspector(parent, object)
 	this.groundColor.size.set(80, 18);
 	this.groundColor.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "groundColor", new Color(self.groundColor.getValueHex())));
+		Editor.addAction(new ChangeAction(self.object, "groundColor", new THREE.Color(self.groundColor.getValueHex())));
 	});
 	this.form.add(this.groundColor);
 	this.form.nextRow();
@@ -47,5 +38,3 @@ HemisphereLightInspector.prototype.updateInspector = function()
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 	this.groundColor.setValue(this.object.groundColor.r, this.object.groundColor.g, this.object.groundColor.b);
 };
-
-export {HemisphereLightInspector};

@@ -1,16 +1,12 @@
-import {Scene} from "../../../../../core/objects/Scene.js";
-import {AddAction} from "../AddAction.js";
-import {Action} from "../../Action.js";
-import {Editor} from "../../../../Editor.js";
-import {Object3D, Camera} from "three";
+"use strict";
 
 /**
  * Remove object from the scene.
  *
  * @class RemoveAction
  * @extends {Action}
- * @param {Object3D} object
- * @param {Object3D} parent Optional.
+ * @param {THREE.Object3D} object
+ * @param {THREE.Object3D} parent Optional.
  */
 function RemoveAction(object, parent)
 {
@@ -24,7 +20,7 @@ function RemoveAction(object, parent)
 
 RemoveAction.prototype.apply = function()
 {
-	if(this.object instanceof Camera)
+	if(this.object instanceof THREE.Camera)
 	{
 		var scene = this.object.getScene();
 		if(scene !== null)
@@ -63,5 +59,3 @@ RemoveAction.updateGUI = function(object, parent)
 
 	Editor.gui.tree.removeObject(object, parent);
 };
-
-export {RemoveAction};

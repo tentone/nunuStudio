@@ -1,28 +1,4 @@
-import {Texture} from "../../../core/texture/Texture.js";
-import {Video} from "../../../core/resources/Video.js";
-import {Resource} from "../../../core/resources/Resource.js";
-import {Model} from "../../../core/resources/Model.js";
-import {Image} from "../../../core/resources/Image.js";
-import {Font} from "../../../core/resources/Font.js";
-import {Audio} from "../../../core/resources/Audio.js";
-import {Sprite} from "../../../core/objects/sprite/Sprite.js";
-import {Script} from "../../../core/objects/script/Script.js";
-import {Scene} from "../../../core/objects/Scene.js";
-import {Sky} from "../../../core/objects/misc/Sky.js";
-import {Container} from "../../../core/objects/misc/Container.js";
-import {Mesh} from "../../../core/objects/mesh/Mesh.js";
-import {InstancedMesh} from "../../../core/objects/mesh/InstancedMesh.js";
-import {Viewport} from "../../../core/objects/cameras/Viewport.js";
-import {Settings} from "../../Settings.js";
-import {LocaleManager} from "../LocaleManager.js";
-import {History} from "../../history/History.js";
-import {Action} from "../../history/action/Action.js";
-import {Editor} from "../../Editor.js";
-import {Text} from "../../components/Text.js";
-import {Form} from "../../components/Form.js";
-import {Canvas} from "../../components/Canvas.js";
-import {Button} from "../../components/buttons/Button.js";
-
+"use strict";
 
 /**
  * Locale EN defines text of the GUI for the English language.

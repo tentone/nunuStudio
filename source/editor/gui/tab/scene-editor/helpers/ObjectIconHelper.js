@@ -1,16 +1,15 @@
-import {Text} from "../../../../../components/Text.js";
-import {Object3D, Sprite, Texture, SpriteMaterial} from "three";
+"use strict";
 
 /** 
  * Object icon helper is used to display the icon of an object.
  * 
  * @class ObjectIconHelper
- * @param {Object3D} object
+ * @param {THREE.Object3D} object
  * @param {String) icon Icon URL.
  */
 function ObjectIconHelper(object, icon)
 {
-	Sprite.call(this, ObjectIconHelper.getMaterial(icon));
+	THREE.Sprite.call(this, ObjectIconHelper.getMaterial(icon));
 
 	/**
 	 * Object attached to the helper
@@ -31,7 +30,7 @@ function ObjectIconHelper(object, icon)
 	this.matrixAutoUpdate = false;
 }
 
-ObjectIconHelper.prototype = Object.create(Sprite.prototype);
+ObjectIconHelper.prototype = Object.create(THREE.Sprite.prototype);
 
 /**
  * Cache of icon helper materials.
@@ -57,8 +56,8 @@ ObjectIconHelper.getMaterial = function(icon)
 	}
 
 	var element = document.createElement("img");
-	var texture = new Texture(element);
-	var material = new SpriteMaterial(
+	var texture = new THREE.Texture(element);
+	var material = new THREE.SpriteMaterial(
 	{
 		map: texture,
 		transparent: true,
@@ -95,5 +94,3 @@ ObjectIconHelper.prototype.update = function()
 	this.matrix.elements[10] = this.size;
 
 };
-
-export {ObjectIconHelper};

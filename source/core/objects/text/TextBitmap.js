@@ -1,7 +1,4 @@
-import {Font} from "../../../resources/Font.js";
-import {Pass} from "../../../postprocessing/Pass.js";
-import {Text} from "../../../../editor/components/Text.js";
-import {Mesh, Texture, Color, ShaderMaterial, DoubleSide, Object3D} from "three";
+"use strict";
 
 /**
  * Text bitmap atlas with support for signed distance field data.
@@ -15,9 +12,9 @@ import {Mesh, Texture, Color, ShaderMaterial, DoubleSide, Object3D} from "three"
  *  - https:// github.com/Jam3/load-bmfont
  *
  * @class TextBitmap
- * @extends {Mesh}
+ * @extends {THREE.Mesh}
  * @param {Object} config Configuration object with all parameters for bmfont.
- * @param {Texture} texture Texture with the image character atlas to be used.
+ * @param {THREE.Texture} texture Texture with the image character atlas to be used.
  * @param {number} shader The text rendering shader to be used (Bitmap, SDF, MSDF).
  * @param {number} color Color of the text.
  */
@@ -66,12 +63,12 @@ function TextBitmap(config, texture, shader, color)
 	this.uniforms =
 	{
 		map: {type: "t", value: texture},
-		color: {type: "v3", value: new Color(color !== undefined ? color : 0xFFFFFF)},
+		color: {type: "v3", value: new THREE.Color(color !== undefined ? color : 0xFFFFFF)},
 		smoothing: {type: "f", value: 0.0},
 		threshold: {type: "f", value: 0.4}
 	};
 
-	Mesh.call(this, createGeometry(this.config), null);
+	THREE.Mesh.call(this, createGeometry(this.config), null);
 
 	this.name = "text";
 	this.type = "TextBitmap";
@@ -114,7 +111,7 @@ function TextBitmap(config, texture, shader, color)
 		 * Data specifiyng the position of each character in the texture should be placed in the font.
 		 *
 		 * @attribute texture
-		 * @type {Texture}
+		 * @type {THREE.Texture}
 		 */
 		texture:
 		{
@@ -212,7 +209,7 @@ function TextBitmap(config, texture, shader, color)
 		 * Color of the text, only applied for SDF and MSDF modes.
 		 *
 		 * @attribute color
-		 * @type {Color}
+		 * @type {THREE.Color}
 		 */
 		color:
 		{
@@ -249,7 +246,7 @@ function TextBitmap(config, texture, shader, color)
 	this.updateShader(texture);
 }
 
-TextBitmap.prototype = Object.create(Mesh.prototype);
+TextBitmap.prototype = Object.create(THREE.Mesh.prototype);
 TextBitmap.prototype.constructor = TextBitmap;
 
 /**
@@ -455,12 +452,12 @@ TextBitmap.prototype.updateShader = function()
 		fragmentShader = TextBitmap.BITMAP_SHADER;
 	}
 
-	this.material = new ShaderMaterial(
+	this.material = new THREE.ShaderMaterial(
 	{
 		uniforms: this.uniforms,
 		fragmentShader: fragmentShader,
 		vertexShader: TextBitmap.VERTEX_SHADER,
-		side: DoubleSide,
+		side: THREE.DoubleSide,
 		transparent: true,
 		depthTest: true
 	});
@@ -490,7 +487,7 @@ TextBitmap.prototype.updateGeometry = function()
 
 TextBitmap.prototype.toJSON = function(meta)
 {
-	var data = Object3D.prototype.toJSON.call(this, meta);
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.texture = this.texture.toJSON(meta).uuid;
 	data.object.fontScale = this.fontScale;
@@ -519,5 +516,3 @@ TextBitmap.fromJSON = function(data, texture)
 	return object;
 };
 
-
-export {TextBitmap};

@@ -1,12 +1,4 @@
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {GeometryForm} from "../GeometryForm.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {NumberRow} from "../../../../../components/input/NumberRow.js";
-import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {Form} from "../../../../../components/Form.js";
-import {PlaneBufferGeometry, PlaneGeometry, BufferGeometry} from "three";
+"use strict";
 
 function PlaneGeometryForm(form, object)
 {
@@ -67,7 +59,7 @@ function PlaneGeometryForm(form, object)
 PlaneGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? PlaneBufferGeometry : PlaneGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? THREE.PlaneBufferGeometry : THREE.PlaneGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue())));
 };
 
@@ -77,6 +69,5 @@ PlaneGeometryForm.prototype.updateValues = function()
 	this.height.setValue(this.object.geometry.parameters.height || 1);
 	this.widthSegments.setValue(this.object.geometry.parameters.widthSegments || 1);
 	this.heightSegments.setValue(this.object.geometry.parameters.heightSegments || 1);
-	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };
-export {PlaneGeometryForm};

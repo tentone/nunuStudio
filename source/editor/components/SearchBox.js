@@ -1,10 +1,4 @@
-import {Image} from "../../../core/resources/Image.js";
-import {Container} from "../../../core/objects/misc/Container.js";
-import {Interface} from "../../gui/Interface.js";
-import {Text} from "../Text.js";
-import {TextBox} from "../input/TextBox.js";
-import {ImageContainer} from "../ImageContainer.js";
-import {Component} from "../Component.js";
+"use strict";
 
 /**
  * Search box input element.
@@ -56,4 +50,3 @@ SearchBox.prototype.updateSize = function()
 	this.search.position.set(this.size.y * 0.2, this.size.y * 0.1);
 	this.search.updateInterface();
 };
-export {SearchBox};

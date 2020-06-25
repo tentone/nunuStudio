@@ -1,8 +1,4 @@
-import {ArraybufferUtils} from "../../utils/binary/ArraybufferUtils.js";
-import {Font} from "../../resources/Font.js";
-import {Loaders} from "../../../editor/Loaders.js";
-import {DefaultLoadingManager, FileLoader} from "three";
-
+"use strict";
 
 /**
  * FontLoader can be used to load external font resources.
@@ -13,7 +9,7 @@ import {DefaultLoadingManager, FileLoader} from "three";
  */
 function FontLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 }
 
 /**
@@ -27,7 +23,7 @@ function FontLoader(manager)
  */
 FontLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
-	var loader = new FileLoader(this.manager);
+	var loader = new THREE.FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		onLoad(new Font(JSON.parse(text)));
@@ -82,4 +78,3 @@ FontLoader.prototype.parse = function(json)
 		return new Font(json);
 	}
 };
-export {FontLoader};

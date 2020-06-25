@@ -1,15 +1,15 @@
-import {Object3D, Sprite, SpriteMaterial, Mesh} from "three";
+"use strict";
 
 /** 
  * Sprite helper is used to preview sprite objects.
  *
  * @class SpriteHelper
- * @param {Object3D} object
+ * @param {THREE.Object3D} object
  * @param {number} hex Helper color in hexadecimal.
  */
 function SpriteHelper(object, hex) 
 {
-	Sprite.call(this, new SpriteMaterial(
+	THREE.Sprite.call(this, new THREE.SpriteMaterial(
 	{
 		color: hex !== undefined ? hex : 0xFFFFFF
 	}));
@@ -26,10 +26,9 @@ function SpriteHelper(object, hex)
 	this.update();
 }
 
-SpriteHelper.prototype = Object.create(Mesh.prototype);
+SpriteHelper.prototype = Object.create(THREE.Mesh.prototype);
 
 SpriteHelper.prototype.update = function()
 {
 	this.matrixWorld.copy(this.object.matrixWorld);
 };
-export {SpriteHelper};

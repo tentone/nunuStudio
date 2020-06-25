@@ -1,10 +1,4 @@
-import {Image} from "../../../../core/resources/Image.js";
-import {Interface} from "../../../gui/Interface.js";
-import {Text} from "../../Text.js";
-import {Component} from "../../Component.js";
-import {ButtonIcon} from "../ButtonIcon.js";
-import {Button} from "../Button.js";
-import {Vector2} from "three";
+"use strict";
 
 /**
  * Button with text, inherits all methods available on the Text class.
@@ -47,17 +41,17 @@ function ButtonDrawer(parent)
 	 * Size of each option, also affects the size of the panel.
 	 *
 	 * @attribute optionsSize
-	 * @type {Vector2}
+	 * @type {THREE.Vector2}
 	 */
-	this.optionsSize = new Vector2(40, 40);
+	this.optionsSize = new THREE.Vector2(40, 40);
 
 	/**
 	 * Scale of the inner icon of the options created from the addOption() method.
 	 *
 	 * @attribute optionsScale
-	 * @type {Vector2}
+	 * @type {THREE.Vector2}
 	 */
-	this.optionsScale = new Vector2(0.7, 0.7);
+	this.optionsScale = new THREE.Vector2(0.7, 0.7);
 
 	/**
 	 * Indicates if the button drawer panel is visible.
@@ -217,5 +211,3 @@ ButtonDrawer.prototype.updateVisibility = function()
 {
 	this.element.style.display = this.visible ? "block" : "none";
 };
-
-export {ButtonDrawer};

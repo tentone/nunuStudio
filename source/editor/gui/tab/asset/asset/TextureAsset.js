@@ -1,32 +1,4 @@
-import {VideoTexture} from "../../../../../../core/texture/VideoTexture.js";
-import {Texture} from "../../../../../../core/texture/Texture.js";
-import {SpriteSheetTexture} from "../../../../../../core/texture/SpriteSheetTexture.js";
-import {CubeTexture} from "../../../../../../core/texture/CubeTexture.js";
-import {CanvasTexture} from "../../../../../../core/texture/CanvasTexture.js";
-import {Video} from "../../../../../../core/resources/Video.js";
-import {Resource} from "../../../../../../core/resources/Resource.js";
-import {Image} from "../../../../../../core/resources/Image.js";
-import {Sprite} from "../../../../../../core/objects/sprite/Sprite.js";
-import {TextureLoader} from "../../../../../../core/loaders/TextureLoader.js";
-import {ObjectLoader} from "../../../../../../core/loaders/ObjectLoader.js";
-import {RemoveResourceAction} from "../../../../../history/action/resources/RemoveResourceAction.js";
-import {AddResourceAction} from "../../../../../history/action/resources/AddResourceAction.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {VideoTextureEditor} from "../../../texture/VideoTextureEditor.js";
-import {TextureEditor} from "../../../texture/TextureEditor.js";
-import {SpriteSheetTextureEditor} from "../../../texture/SpriteSheetTextureEditor.js";
-import {CubeTextureEditor} from "../../../texture/CubeTextureEditor.js";
-import {CanvasTextureEditor} from "../../../texture/CanvasTextureEditor.js";
-import {Asset} from "../Asset.js";
-import {TextureRenderer} from "../../../../preview/TextureRenderer.js";
-import {Interface} from "../../../../Interface.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {ContextMenu} from "../../../../../components/dropdown/ContextMenu.js";
-import {Canvas} from "../../../../../components/Canvas.js";
-import {Math} from "three";
-
+"use strict";
 
 function TextureAsset(parent)
 {
@@ -133,7 +105,7 @@ function TextureAsset(parent)
 
 				// Load
 				var texture = loader.parse(json); 
-				texture.uuid = Math.generateUUID();
+				texture.uuid = THREE.Math.generateUUID();
 				texture.name += "*";
 				
 				Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
@@ -183,4 +155,3 @@ TextureAsset.prototype.attach = function(asset)
 		this.element.appendChild(this.preview);	
 	}
 };
-export {TextureAsset};

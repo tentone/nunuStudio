@@ -1,4 +1,4 @@
-import {Action} from "../Action.js";
+"use strict";
 
 /**
  * Contains an action and a callback function called when the action is applied or reverted.
@@ -28,5 +28,3 @@ CallbackAction.prototype.revert = function()
 	this.action.revert();
 	this.callback();
 };
-
-export {CallbackAction};

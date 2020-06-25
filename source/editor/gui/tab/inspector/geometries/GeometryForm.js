@@ -1,24 +1,4 @@
-import {TerrainBufferGeometry} from "../../../../../../core/geometries/TerrainBufferGeometry.js";
-import {RoundedBoxBufferGeometry} from "../../../../../../core/geometries/RoundedBoxBufferGeometry.js";
-import {CapsuleBufferGeometry} from "../../../../../../core/geometries/CapsuleBufferGeometry.js";
-import {TorusKnotGeometryForm} from "../TorusKnotGeometryForm.js";
-import {TorusGeometryForm} from "../TorusGeometryForm.js";
-import {TetrahedronGeometryForm} from "../TetrahedronGeometryForm.js";
-import {TerrainGeometryForm} from "../TerrainGeometryForm.js";
-import {SphereGeometryForm} from "../SphereGeometryForm.js";
-import {RoundedBoxGeometryForm} from "../RoundedBoxGeometryForm.js";
-import {RingGeometryForm} from "../RingGeometryForm.js";
-import {PlaneGeometryForm} from "../PlaneGeometryForm.js";
-import {OctahedronGeometryForm} from "../OctahedronGeometryForm.js";
-import {IcosahedronGeometryForm} from "../IcosahedronGeometryForm.js";
-import {DodecahedronGeometryForm} from "../DodecahedronGeometryForm.js";
-import {CylinderGeometryForm} from "../CylinderGeometryForm.js";
-import {ConeGeometryForm} from "../ConeGeometryForm.js";
-import {CircleGeometryForm} from "../CircleGeometryForm.js";
-import {CapsuleGeometryForm} from "../CapsuleGeometryForm.js";
-import {BoxGeometryForm} from "../BoxGeometryForm.js";
-import {Form} from "../../../../../components/Form.js";
-import {BoxGeometry, BoxBufferGeometry, SphereGeometry, SphereBufferGeometry, TorusGeometry, TorusBufferGeometry, PlaneGeometry, PlaneBufferGeometry, ConeGeometry, ConeBufferGeometry, CylinderGeometry, CylinderBufferGeometry, TetrahedronGeometry, TetrahedronBufferGeometry, DodecahedronGeometry, DodecahedronBufferGeometry, CircleGeometry, CircleBufferGeometry, TorusKnotGeometry, TorusKnotBufferGeometry, RingGeometry, RingBufferGeometry, IcosahedronGeometry, IcosahedronBufferGeometry, OctahedronGeometry, OctahedronBufferGeometry} from "three";
+"use strict";
 
 function GeometryForm(){}
 
@@ -26,55 +6,55 @@ GeometryForm.create = function(form, object)
 {
 	var geometry = object.geometry;
 	
-	if(geometry instanceof BoxGeometry || geometry instanceof BoxBufferGeometry)
+	if(geometry instanceof THREE.BoxGeometry || geometry instanceof THREE.BoxBufferGeometry)
 	{
 		return new BoxGeometryForm(form, object);
 	}
-	else if(geometry instanceof SphereGeometry || geometry instanceof SphereBufferGeometry)
+	else if(geometry instanceof THREE.SphereGeometry || geometry instanceof THREE.SphereBufferGeometry)
 	{
 		return new SphereGeometryForm(form, object);
 	}
-	else if(geometry instanceof TorusGeometry || geometry instanceof TorusBufferGeometry)
+	else if(geometry instanceof THREE.TorusGeometry || geometry instanceof THREE.TorusBufferGeometry)
 	{
 		return new TorusGeometryForm(form, object);
 	}
-	else if(geometry instanceof PlaneGeometry || geometry instanceof PlaneBufferGeometry)
+	else if(geometry instanceof THREE.PlaneGeometry || geometry instanceof THREE.PlaneBufferGeometry)
 	{
 		return new PlaneGeometryForm(form, object);
 	}
-	else if(geometry instanceof ConeGeometry || geometry instanceof ConeBufferGeometry)
+	else if(geometry instanceof THREE.ConeGeometry || geometry instanceof THREE.ConeBufferGeometry)
 	{
 		return new ConeGeometryForm(form, object);
 	}
-	else if(geometry instanceof CylinderGeometry || geometry instanceof CylinderBufferGeometry)
+	else if(geometry instanceof THREE.CylinderGeometry || geometry instanceof THREE.CylinderBufferGeometry)
 	{
 		return new CylinderGeometryForm(form, object);
 	}
-	else if(geometry instanceof TetrahedronGeometry || geometry instanceof TetrahedronBufferGeometry)
+	else if(geometry instanceof THREE.TetrahedronGeometry || geometry instanceof THREE.TetrahedronBufferGeometry)
 	{
 		return new TetrahedronGeometryForm(form, object);
 	}
-	else if(geometry instanceof DodecahedronGeometry || geometry instanceof DodecahedronBufferGeometry)
+	else if(geometry instanceof THREE.DodecahedronGeometry || geometry instanceof THREE.DodecahedronBufferGeometry)
 	{
 		return new DodecahedronGeometryForm(form, object);
 	}
-	else if(geometry instanceof CircleGeometry || geometry instanceof CircleBufferGeometry)
+	else if(geometry instanceof THREE.CircleGeometry || geometry instanceof THREE.CircleBufferGeometry)
 	{
 		return new CircleGeometryForm(form, object);
 	}
-	else if(geometry instanceof TorusKnotGeometry || geometry instanceof TorusKnotBufferGeometry)
+	else if(geometry instanceof THREE.TorusKnotGeometry || geometry instanceof THREE.TorusKnotBufferGeometry)
 	{
 		return new TorusKnotGeometryForm(form, object);
 	}
-	else if(geometry instanceof RingGeometry || geometry instanceof RingBufferGeometry)
+	else if(geometry instanceof THREE.RingGeometry || geometry instanceof THREE.RingBufferGeometry)
 	{
 		return new RingGeometryForm(form, object);
 	}
-	else if(geometry instanceof IcosahedronGeometry || geometry instanceof IcosahedronBufferGeometry)
+	else if(geometry instanceof THREE.IcosahedronGeometry || geometry instanceof THREE.IcosahedronBufferGeometry)
 	{
 		return new IcosahedronGeometryForm(form, object);
 	}
-	else if(geometry instanceof OctahedronGeometry || geometry instanceof OctahedronBufferGeometry)
+	else if(geometry instanceof THREE.OctahedronGeometry || geometry instanceof THREE.OctahedronBufferGeometry)
 	{
 		return new OctahedronGeometryForm(form, object);
 	}
@@ -93,4 +73,3 @@ GeometryForm.create = function(form, object)
 
 	return null;
 };
-export {GeometryForm};

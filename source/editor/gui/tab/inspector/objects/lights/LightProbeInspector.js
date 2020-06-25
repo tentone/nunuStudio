@@ -1,12 +1,5 @@
-import {LightProbe} from "../../../../../../../core/objects/lights/LightProbe.js";
-import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../../history/action/Action.js";
-import {ObjectInspector} from "../../ObjectInspector.js";
-import {Inspector} from "../../../Inspector.js";
-import {Editor} from "../../../../../../Editor.js";
-import {Text} from "../../../../../../components/Text.js";
-import {Slider} from "../../../../../../components/input/Slider.js";
 
+"use strict";
 
 function LightProbeInspector(parent, object)
 {
@@ -36,5 +29,3 @@ LightProbeInspector.prototype.updateInspector = function()
 
 	this.intensity.setValue(this.object.intensity);
 };
-
-export {LightProbeInspector};

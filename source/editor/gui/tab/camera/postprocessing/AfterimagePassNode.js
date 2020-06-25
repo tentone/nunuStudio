@@ -1,11 +1,4 @@
-import {Pass} from "../../../../../../core/postprocessing/Pass.js";
-import {AfterimagePass} from "../../../../../../core/postprocessing/pass/AfterimagePass.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {PassNode} from "../PassNode.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {Slider} from "../../../../../components/input/Slider.js";
+"use strict";
 
 function AfterimagePassNode(parent)
 {
@@ -36,4 +29,3 @@ AfterimagePassNode.prototype.setPass = function(pass)
 
 	this.damp.setValue(this.pass.damp);
 };
-export {AfterimagePassNode};

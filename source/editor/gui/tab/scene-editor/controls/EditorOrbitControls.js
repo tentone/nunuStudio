@@ -1,13 +1,4 @@
-import {ObjectUtils} from "../../../../../../core/utils/ObjectUtils.js";
-import {OrbitControls} from "../../../../../../core/objects/controls/OrbitControls.js";
-import {OrthographicCamera} from "../../../../../../core/objects/cameras/OrthographicCamera.js";
-import {Mouse} from "../../../../../../core/input/Mouse.js";
-import {Keyboard} from "../../../../../../core/input/Keyboard.js";
-import {Key} from "../../../../../../core/input/Key.js";
-import {OrientationCube} from "../../utils/OrientationCube.js";
-import {EditorControls} from "../EditorControls.js";
-import {Editor} from "../../../../../Editor.js";
-import {Vector3, Vector2, Matrix4, PerspectiveCamera, Math} from "three";
+"use strict";
 
 /**
  * Orbit controls can be used to navigate the world using a imaginary central point as reference.
@@ -35,7 +26,7 @@ function EditorOrbitControls()
 	 * @property center
 	 * @type {Vector3}
 	 */
-	this.center = new Vector3();
+	this.center = new THREE.Vector3();
 
 	/**
 	 * Orientation of the camera.
@@ -45,7 +36,7 @@ function EditorOrbitControls()
 	 * @property orientation
 	 * @type {Vector2}
 	 */	 
-	this.orientation = new Vector2();
+	this.orientation = new THREE.Vector2();
 
 	/**
 	 * Maximum Distance allowed.
@@ -117,17 +108,17 @@ function EditorOrbitControls()
 	 */	
 	this.speed = 0.3;
 	this.speedDistance = 0;
-	this.speedCenter = new Vector3(0, 0, 0);
-	this.speedOrientation = new Vector2(0, 0);
+	this.speedCenter = new THREE.Vector3(0, 0, 0);
+	this.speedOrientation = new THREE.Vector2(0, 0);
 
-	this.tempVector = new Vector3(0, 0, 0);
-	this.tempMatrix = new Matrix4();
+	this.tempVector = new THREE.Vector3(0, 0, 0);
+	this.tempMatrix = new THREE.Matrix4();
 
 	this.reset();
 	this.updateControls();
 }
 
-EditorOrbitControls.UP = new Vector3(0, 1, 0);
+EditorOrbitControls.UP = new THREE.Vector3(0, 1, 0);
 
 EditorOrbitControls.prototype = Object.create(EditorControls.prototype);
 
@@ -150,9 +141,9 @@ EditorOrbitControls.prototype.focusObject = function(object)
 
 		var size = box.getSize(this.tempVector).length();
 
-		if(this.camera instanceof PerspectiveCamera)
+		if(this.camera instanceof THREE.PerspectiveCamera)
 		{
-			this.distance = (size / 2) / Math.tan(Math.DEG2RAD * 0.5 * this.camera.fov);
+			this.distance = (size / 2) / Math.tan(THREE.Math.DEG2RAD * 0.5 * this.camera.fov);
 		}
 		else
 		{
@@ -406,5 +397,3 @@ EditorOrbitControls.prototype.updateControls = function()
 		this.camera.updateProjectionMatrix();
 	}
 };
-
-export {EditorOrbitControls};

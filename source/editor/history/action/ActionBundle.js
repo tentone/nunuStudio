@@ -1,4 +1,4 @@
-import {Action} from "../Action.js";
+"use strict";
 
 /**
  * Stores a bundle of ordered actions.
@@ -31,5 +31,3 @@ ActionBundle.prototype.revert = function()
 		this.actions[i].revert();
 	}
 };
-
-export {ActionBundle};

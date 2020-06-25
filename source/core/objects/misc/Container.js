@@ -1,5 +1,4 @@
-import {Group} from "three";
-
+"use strict";
 
 /**
  * Containers are used to group objects together.
@@ -12,11 +11,10 @@ import {Group} from "three";
  */
 function Container()
 {
-	Group.call(this);
+	THREE.Group.call(this);
 
 	this.name = "container";
 	this.type = "Group";
 }
 
-Container.prototype = Object.create(Group.prototype);
-export {Container};
+Container.prototype = Object.create(THREE.Group.prototype);

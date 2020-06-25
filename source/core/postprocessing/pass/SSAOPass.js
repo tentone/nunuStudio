@@ -1,7 +1,4 @@
-import {ShaderPass} from "../../ShaderPass.js";
-import {Pass} from "../../Pass.js";
-import {Mesh} from "../../../objects/mesh/Mesh.js";
-import {MeshDepthMaterial, RGBADepthPacking, NoBlending, WebGLRenderTarget, LinearFilter} from "three";
+"use strict";
 
 /**
  * Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.
@@ -22,12 +19,12 @@ function SSAOPass()
 	this.type = "SSAO";
 
 	// Depth material
-	this.depthMaterial = new MeshDepthMaterial();
-	this.depthMaterial.depthPacking = RGBADepthPacking;
-	this.depthMaterial.blending = NoBlending;
+	this.depthMaterial = new THREE.MeshDepthMaterial();
+	this.depthMaterial.depthPacking = THREE.RGBADepthPacking;
+	this.depthMaterial.blending = THREE.NoBlending;
 
 	// Depth render target
-	this.depthRenderTarget = new WebGLRenderTarget(2, 2, {minFilter: LinearFilter, magFilter: LinearFilter});
+	this.depthRenderTarget = new THREE.WebGLRenderTarget(2, 2, {minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter});
 
 	// Shader uniforms
 	this.uniforms["tDepth"].value = this.depthRenderTarget.texture;
@@ -153,5 +150,3 @@ SSAOPass.prototype.toJSON = function(meta)
 
 	return data;
 };
-
-export {SSAOPass};

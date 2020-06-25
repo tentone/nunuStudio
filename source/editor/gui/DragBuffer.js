@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * The drag buffer is a global object used to store and get object being dragged.

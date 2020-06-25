@@ -1,17 +1,17 @@
-import {Points, Color} from "three";
+"use strict";
 
 /** 
- * Point helper is used to preview Points objects.
+ * Point helper is used to preview THREE.Points objects.
  * 
  * @class PointsHelper
- * @param {Points} object
+ * @param {THREE.Points} object
  * @param {number} hex Helper color in hexadecimal.
  */
 function PointsHelper(object, hex)
 {
-	Points.call(this, object.geometry, object.material.clone());
+	THREE.Points.call(this, object.geometry, object.material.clone());
 
-	this.material.color = new Color((hex !== undefined) ? hex : 0xFFFF00);
+	this.material.color = new THREE.Color((hex !== undefined) ? hex : 0xFFFF00);
 	this.material.size = object.material.size * 1.2;
 
 	/**
@@ -26,12 +26,10 @@ function PointsHelper(object, hex)
 	this.update();
 }
 
-PointsHelper.prototype = Object.create(Points.prototype);
+PointsHelper.prototype = Object.create(THREE.Points.prototype);
 
 PointsHelper.prototype.update = function()
 {
 	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
 };
-
-export {PointsHelper};

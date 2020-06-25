@@ -1,10 +1,7 @@
-import {Nunu} from "../../../Nunu.js";
-import {Text} from "../../../../editor/components/Text.js";
-import {Texture} from "three";
-
+"use strict";
 
 // Serialization does not serialize any image data.
-Texture.prototype.toJSON = function(meta)
+THREE.Texture.prototype.toJSON = function(meta)
 {
 	// Check if this texture was already serialized
 	if(meta.textures[this.uuid] !== undefined)

@@ -1,5 +1,4 @@
-import {Component} from "../../../../editor/components/Component.js";
-import {Object3D} from "three";
+"use strict";
 
 /**
  * CSS 3D element projected in the 3D scene.
@@ -9,12 +8,12 @@ import {Object3D} from "three";
  * CSS3D object always stay above everything elese in the 3D scene.
  *
  * @class CSS3DObject
- * @extends {Object3D}
+ * @extends {THREE.Object3D}
  * @param {Component} element DOM element encapsulated in the object container.
  */
 function CSS3DObject(element)
 {
-	Object3D.call(this);
+	THREE.Object3D.call(this);
 
 	/**
 	 * The DOM element to be projected in 3D space.
@@ -55,8 +54,6 @@ function CSS3DObject(element)
 	});
 };
 
-CSS3DObject.prototype = Object.create(Object3D.prototype);
+CSS3DObject.prototype = Object.create(THREE.Object3D.prototype);
 CSS3DObject.prototype.constructor = CSS3DObject;
 CSS3DObject.prototype.isCSS3DObject = true;
-
-export {CSS3DObject};

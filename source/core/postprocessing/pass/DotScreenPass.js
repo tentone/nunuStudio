@@ -1,6 +1,4 @@
-import {Pass} from "../../Pass.js";
-import {Scene} from "../../../objects/Scene.js";
-import {DotScreenShader, UniformsUtils, ShaderMaterial} from "three";
+"use strict";
 
 /**
  * DotScreen pass generates a poster like effect on top of the scene.
@@ -14,9 +12,9 @@ import {DotScreenShader, UniformsUtils, ShaderMaterial} from "three";
  */
 function DotScreenPass(center, angle, scale)
 {
-	if(DotScreenShader === undefined)
+	if(THREE.DotScreenShader === undefined)
 	{
-		console.error("DotScreenPass relies on DotScreenShader");
+		console.error("DotScreenPass relies on THREE.DotScreenShader");
 	}
 
 	Pass.call(this);
@@ -24,13 +22,13 @@ function DotScreenPass(center, angle, scale)
 	this.type = "DotScreen";
 	this.createQuadScene();
 
-	this.uniforms = UniformsUtils.clone(DotScreenShader.uniforms);
+	this.uniforms = THREE.UniformsUtils.clone(THREE.DotScreenShader.uniforms);
 
-	this.material = new ShaderMaterial(
+	this.material = new THREE.ShaderMaterial(
 	{
 		uniforms: this.uniforms,
-		vertexShader: DotScreenShader.vertexShader,
-		fragmentShader: DotScreenShader.fragmentShader
+		vertexShader: THREE.DotScreenShader.vertexShader,
+		fragmentShader: THREE.DotScreenShader.fragmentShader
 	});
 
 	var self = this;
@@ -118,5 +116,3 @@ DotScreenPass.prototype.toJSON = function(meta)
 	return data;
 };
 
-
-export {DotScreenPass};

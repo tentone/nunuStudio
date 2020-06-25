@@ -1,16 +1,4 @@
-import {TextMesh} from "../../../../../../../core/objects/text/TextMesh.js";
-import {Mesh} from "../../../../../../../core/objects/mesh/Mesh.js";
-import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
-import {CallbackAction} from "../../../../../../history/action/CallbackAction.js";
-import {Action} from "../../../../../../history/action/Action.js";
-import {MeshInspector} from "../../mesh/MeshInspector.js";
-import {DrawableInspector} from "../../DrawableInspector.js";
-import {Inspector} from "../../../Inspector.js";
-import {Editor} from "../../../../../../Editor.js";
-import {Text} from "../../../../../../components/Text.js";
-import {TextArea} from "../../../../../../components/input/TextArea.js";
-import {NumberBox} from "../../../../../../components/input/NumberBox.js";
-import {CheckBox} from "../../../../../../components/input/CheckBox.js";
+"use strict";
 
 function TextMeshInspector(parent, object)
 {
@@ -137,5 +125,3 @@ TextMeshInspector.prototype.updateInspector = function()
 	this.bevelThickness.setValue(this.object.bevelThickness);
 	this.bevelSize.setValue(this.object.bevelSize);
 };
-
-export {TextMeshInspector};

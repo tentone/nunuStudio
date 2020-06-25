@@ -1,16 +1,4 @@
-import {Texture} from "../../../../../../core/texture/Texture.js";
-import {Mesh} from "../../../../../../core/objects/mesh/Mesh.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {MeshStandardMaterialEditor} from "../MeshStandardMaterialEditor.js";
-import {MaterialEditor} from "../../MaterialEditor.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {VectorBox} from "../../../../../components/input/VectorBox.js";
-import {TextureForm} from "../../../../../components/input/TextureForm.js";
-import {Slider} from "../../../../../components/input/Slider.js";
-import {Form} from "../../../../../components/Form.js";
-
+"use strict";
 
 function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 {
@@ -140,4 +128,3 @@ MeshPhysicalMaterialEditor.prototype.attach = function(material, asset)
 	this.clearcoatMap.setValue(material.clearcoatMap);
 	this.clearcoatRoughnessMap.setValue(material.clearcoatRoughnessMap);
 };
-export {MeshPhysicalMaterialEditor};

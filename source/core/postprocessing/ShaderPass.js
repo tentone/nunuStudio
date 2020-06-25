@@ -1,6 +1,4 @@
-import {Pass} from "../Pass.js";
-import {Scene} from "../../objects/Scene.js";
-import {ShaderMaterial, UniformsUtils} from "three";
+"use strict";
 
 /**
  * Shader pass is used to apply a post processing effect over an already rendered scene.
@@ -16,15 +14,15 @@ function ShaderPass(shader, textureID)
 	this.type = "Shader";
 	this.textureID = (textureID !== undefined ) ? textureID : "tDiffuse";
 
-	if(shader instanceof ShaderMaterial)
+	if(shader instanceof THREE.ShaderMaterial)
 	{
 		this.uniforms = shader.uniforms;
 		this.material = shader;
 	}
 	else if(shader)
 	{
-		this.uniforms = UniformsUtils.clone(shader.uniforms);
-		this.material = new ShaderMaterial(
+		this.uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+		this.material = new THREE.ShaderMaterial(
 		{
 			defines: Object.assign({}, shader.defines),
 			uniforms: this.uniforms,
@@ -56,5 +54,3 @@ ShaderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 
 	renderer.render(this.scene, this.camera);
 };
-
-export {ShaderPass};

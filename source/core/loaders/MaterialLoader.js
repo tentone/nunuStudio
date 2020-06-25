@@ -1,7 +1,4 @@
-import {Texture} from "../../texture/Texture.js";
-import {Loaders} from "../../../editor/Loaders.js";
-import {Text} from "../../../editor/components/Text.js";
-import {DefaultLoadingManager, MaterialLoader} from "three";
+"use strict";
 
 /**
  * MaterialLoader can be used to load external materials.
@@ -12,7 +9,7 @@ import {DefaultLoadingManager, MaterialLoader} from "three";
  */
 function MaterialLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 	this.textures = {};
 }
 
@@ -56,7 +53,7 @@ MaterialLoader.prototype.setTextures = function(value)
  */
 MaterialLoader.prototype.parse = function(json)
 {
-	var material = MaterialLoader.prototype.parse.call(this, json);
+	var material = THREE.MaterialLoader.prototype.parse.call(this, json);
 
 	// Legacy multi-material
 	if(json.materials !== undefined)
@@ -69,4 +66,3 @@ MaterialLoader.prototype.parse = function(json)
 
 	return material;
 };
-export {MaterialLoader};

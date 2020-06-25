@@ -1,12 +1,4 @@
-import {Pass} from "../../../../../../core/postprocessing/Pass.js";
-import {AdaptiveToneMappingPass} from "../../../../../../core/postprocessing/pass/AdaptiveToneMappingPass.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {PassNode} from "../PassNode.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {NumberBox} from "../../../../../components/input/NumberBox.js";
-import {CheckBox} from "../../../../../components/input/CheckBox.js";
+"use strict";
 
 function AdaptiveToneMappingPassNode(parent)
 {
@@ -56,4 +48,3 @@ AdaptiveToneMappingPassNode.prototype.setPass = function(pass)
 	this.minLuminance.setValue(pass.minLuminance);
 	this.tau.setValue(pass.tau);
 };
-export {AdaptiveToneMappingPassNode};

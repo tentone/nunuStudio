@@ -1,13 +1,4 @@
-import {Pass} from "../../../../../../core/postprocessing/Pass.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {TableForm} from "../../../../../components/TableForm.js";
-import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {Form} from "../../../../../components/Form.js";
-import {ButtonText} from "../../../../../components/buttons/ButtonText.js";
-import {Button} from "../../../../../components/buttons/Button.js";
+"use strict";
 
 function PassNode(parent, name)
 {
@@ -135,5 +126,3 @@ PassNode.prototype.setEditor = function(editor)
 	this.add(this.down);
 	this.add(this.delete);
 };
-
-export {PassNode};

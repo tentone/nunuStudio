@@ -1,4 +1,4 @@
-
+"use strict";
 
 /**
  * MathUtils contains auxiliar values and function to help with mathematical operations.
@@ -53,4 +53,3 @@ MathUtils.randomColor = function()
 
 	return color;
 };
-export {MathUtils};

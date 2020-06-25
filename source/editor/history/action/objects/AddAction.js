@@ -1,7 +1,4 @@
-import {RemoveAction} from "../RemoveAction.js";
-import {Action} from "../../Action.js";
-import {Editor} from "../../../../Editor.js";
-import {Object3D} from "three";
+"use strict";
 
 /**
  * Add an object to the scene.
@@ -10,8 +7,8 @@ import {Object3D} from "three";
  *
  * @class AddAction
  * @extends {Action}
- * @param {Object3D} object Object to be added.
- * @param {Object3D} parent Parent to add the object.
+ * @param {THREE.Object3D} object Object to be added.
+ * @param {THREE.Object3D} parent Parent to add the object.
  * @param {number} index Index to add the object to.
  */
 function AddAction(object, parent, index)
@@ -51,5 +48,3 @@ AddAction.updateGUI = function(object, parent, index)
 {
 	Editor.gui.tree.addObject(object, parent, index);
 };
-
-export {AddAction};

@@ -1,11 +1,4 @@
-import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
-import {ActionBundle} from "../../../../../../history/action/ActionBundle.js";
-import {Action} from "../../../../../../history/action/Action.js";
-import {TransformControls} from "../../TransformControls.js";
-import {GizmoLineMaterial} from "../../GizmoLineMaterial.js";
-import {TransformGizmo} from "../TransformGizmo.js";
-import {Editor} from "../../../../../../Editor.js";
-import {Line, Mesh, Geometry, TorusBufferGeometry, BufferGeometry, Float32BufferAttribute, Matrix4, Euler, Quaternion, Vector3} from "three";
+"use strict";
 
 /**
  * Gizmo used to change rotation of an object. Can be used with Object3D objects.
@@ -17,27 +10,27 @@ function TransformGizmoRotate()
 {
 	this.handleGizmos =
 	{
-		X: [[new Line(new CircleGeometry(1, "x", 0.5), GizmoLineMaterial.red)]],
-		Y: [[new Line(new CircleGeometry(1, "y", 0.5), GizmoLineMaterial.green)]],
-		Z: [[new Line(new CircleGeometry(1, "z", 0.5), GizmoLineMaterial.blue)]],
-		E: [[new Line(new CircleGeometry(1.25, "z", 1), GizmoLineMaterial.yellow)]],
-		XYZE: [[new Line(new CircleGeometry(1, "z", 1), GizmoLineMaterial.grey)]]
+		X: [[new THREE.Line(new CircleGeometry(1, "x", 0.5), GizmoLineMaterial.red)]],
+		Y: [[new THREE.Line(new CircleGeometry(1, "y", 0.5), GizmoLineMaterial.green)]],
+		Z: [[new THREE.Line(new CircleGeometry(1, "z", 0.5), GizmoLineMaterial.blue)]],
+		E: [[new THREE.Line(new CircleGeometry(1.25, "z", 1), GizmoLineMaterial.yellow)]],
+		XYZE: [[new THREE.Line(new CircleGeometry(1, "z", 1), GizmoLineMaterial.grey)]]
 	};
 
 	this.pickerGizmos =
 	{
-		X: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [0, - Math.PI / 2, - Math.PI / 2]]],
-		Y: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [Math.PI / 2, 0, 0]]],
-		Z: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [0, 0, - Math.PI / 2]]],
-		E: [[new Mesh(TransformGizmoRotate.torusBig, TransformGizmo.pickerMaterial)]],
-		XYZE: [[new Mesh(new Geometry())]]
+		X: [[new THREE.Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [0, - Math.PI / 2, - Math.PI / 2]]],
+		Y: [[new THREE.Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [Math.PI / 2, 0, 0]]],
+		Z: [[new THREE.Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [0, 0, - Math.PI / 2]]],
+		E: [[new THREE.Mesh(TransformGizmoRotate.torusBig, TransformGizmo.pickerMaterial)]],
+		XYZE: [[new THREE.Mesh(new THREE.Geometry())]]
 	};
 
 	TransformGizmo.call(this);
 }
 
-TransformGizmoRotate.torus = new TorusBufferGeometry(1, 0.12, 4, 12, Math.PI);
-TransformGizmoRotate.torusBig = new TorusBufferGeometry(1.25, 0.12, 2, 24);
+TransformGizmoRotate.torus = new THREE.TorusBufferGeometry(1, 0.12, 4, 12, Math.PI);
+TransformGizmoRotate.torusBig = new THREE.TorusBufferGeometry(1.25, 0.12, 2, 24);
 
 /**
  * Circle geometry used for the rotation gizmo rings.
@@ -46,7 +39,7 @@ TransformGizmoRotate.torusBig = new TorusBufferGeometry(1.25, 0.12, 2, 24);
  */
 function CircleGeometry(radius, facing, arc)
 {
-	BufferGeometry.call(this);
+	THREE.BufferGeometry.call(this);
 	var vertices = [];
 
 	var arcLen = (arc !== undefined) ? (arc * 64) : 64;
@@ -67,10 +60,10 @@ function CircleGeometry(radius, facing, arc)
 		}
 	}
 
-	this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+	this.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
 };
 
-CircleGeometry.prototype = Object.create(BufferGeometry.prototype);
+CircleGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
 
 TransformGizmoRotate.prototype = Object.create(TransformGizmo.prototype);
 
@@ -104,15 +97,15 @@ TransformGizmoRotate.prototype.update = function(rotation, eye2)
 		pickers: this.pickers
 	};
 
-	var tempMatrix = new Matrix4();
-	var worldRotation = new Euler(0, 0, 1);
-	var tempQuaternion = new Quaternion();
-	var unitX = new Vector3(1, 0, 0);
-	var unitY = new Vector3(0, 1, 0);
-	var unitZ = new Vector3(0, 0, 1);
-	var quaternionX = new Quaternion();
-	var quaternionY = new Quaternion();
-	var quaternionZ = new Quaternion();
+	var tempMatrix = new THREE.Matrix4();
+	var worldRotation = new THREE.Euler(0, 0, 1);
+	var tempQuaternion = new THREE.Quaternion();
+	var unitX = new THREE.Vector3(1, 0, 0);
+	var unitY = new THREE.Vector3(0, 1, 0);
+	var unitZ = new THREE.Vector3(0, 0, 1);
+	var quaternionX = new THREE.Quaternion();
+	var quaternionY = new THREE.Quaternion();
+	var quaternionZ = new THREE.Quaternion();
 	var eye = eye2.clone();
 
 	worldRotation.copy(this.planes["XY"].rotation);
@@ -288,4 +281,3 @@ TransformGizmoRotate.prototype.transformObject = function(controls)
 		}
 	}
 };
-export {TransformGizmoRotate};

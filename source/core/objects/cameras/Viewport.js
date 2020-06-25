@@ -1,7 +1,4 @@
-import {Mouse} from "../../../input/Mouse.js";
-import {Component} from "../../../../editor/components/Component.js";
-import {Canvas} from "../../../../editor/components/Canvas.js";
-import {Vector2, Vector4, WebGLRenderer} from "three";
+"use strict";
 
 /**
  * The viewport object is used to handle virtual visualization windows for the WebGL renderer.
@@ -19,9 +16,9 @@ function Viewport(mode)
 	 * Values range from 0.0 to 1.0 in screen space when in RELATIVE mode.
 	 * 
 	 * @property offset
-	 * @type {Vector2}
+	 * @type {THREE.Vector2}
 	*/
-	this.offset = new Vector2(0.0, 0.0);
+	this.offset = new THREE.Vector2(0.0, 0.0);
 
 	/**
 	 * Camera viewport size.
@@ -29,9 +26,9 @@ function Viewport(mode)
 	 * Values range from 0.0 to 1.0 in screen space when in RELATIVE mode.
 	 * 
 	 * @property size
-	 * @type {Vector2}
+	 * @type {THREE.Vector2}
 	 */
-	this.size = new Vector2(1.0, 1.0);
+	this.size = new THREE.Vector2(1.0, 1.0);
 
 	/** 
 	 * Viewport sizing mode.
@@ -77,9 +74,9 @@ function Viewport(mode)
 	 * It is calculated using the update() method that should be called after applying changes.
 	 *
 	 * @property viewport
-	 * @type {Vector4}
+	 * @type {THREE.Vector4}
 	 */
-	this.viewport = new Vector4(0, 0, 1, 1);
+	this.viewport = new THREE.Vector4(0, 0, 1, 1);
 }
 
 /** 
@@ -135,8 +132,8 @@ Viewport.prototype.update = function(container)
 
 	if(this.mode === Viewport.RELATIVE)
 	{
-		offset = new Vector2(this.offset.x * width, this.offset.y * height);
-		viewport = new Vector2(this.size.x * width, this.size.y * height);
+		offset = new THREE.Vector2(this.offset.x * width, this.offset.y * height);
+		viewport = new THREE.Vector2(this.size.x * width, this.size.y * height);
 	}
 	else if(this.mode === Viewport.ABSOLUTE)
 	{
@@ -196,11 +193,11 @@ Viewport.prototype.isInside = function(canvas, mouse)
  * @method getNormalized
  * @param {Component} canvas Canvas for offset calculation.
  * @param {Mouse} mouse Mouse object with coordinates inside of the canvas.
- * @return {Vector2} Normalized coordinated of the mouse.
+ * @return {THREE.Vector2} Normalized coordinated of the mouse.
  */
 Viewport.prototype.getNormalized = function()
 {
-	var normalized = new Vector2();
+	var normalized = new THREE.Vector2();
 
 	return function(canvas, mouse)
 	{
@@ -219,7 +216,7 @@ Viewport.prototype.getNormalized = function()
  * After rendering the WebGL renderer has to manually reset to the original values.
  *
  * @method enable
- * @param {WebGLRenderer} renderer
+ * @param {THREE.WebGLRenderer} renderer
  */
 Viewport.prototype.enable = function(renderer)
 {
@@ -256,5 +253,3 @@ Viewport.prototype.fromJSON = function(data)
 	this.mode = data.mode;
 	this.anchor = data.anchor;
 };
-
-export {Viewport};

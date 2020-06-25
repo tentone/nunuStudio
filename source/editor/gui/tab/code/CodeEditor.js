@@ -1,13 +1,4 @@
-import {EventManager} from "../../../../../core/utils/EventManager.js";
-import {Font} from "../../../../../core/resources/Font.js";
-import {Key} from "../../../../../core/input/Key.js";
-import {Settings} from "../../../../Settings.js";
-import {Interface} from "../../../Interface.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
-import {TabComponent} from "../../../../components/tabs/TabComponent.js";
-import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
-import {Component} from "../../../../components/Component.js";
+"use strict";
 
 /**
  * Code editor tab element based on the codemirror code editor library.
@@ -230,5 +221,3 @@ CodeEditor.prototype.updateSize = function()
 
 	this.code.setSize(this.size.x, this.size.y);
 };
-
-export {CodeEditor};

@@ -1,13 +1,4 @@
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {Inspector} from "../../Inspector.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {TextBox} from "../../../../../components/input/TextBox.js";
-import {Slider} from "../../../../../components/input/Slider.js";
-import {DropdownList} from "../../../../../components/input/DropdownList.js";
-import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {FrontSide, BackSide, DoubleSide, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending} from "three";
+"use strict";
 
 function MaterialInspector(parent, object)
 {
@@ -48,9 +39,9 @@ function MaterialInspector(parent, object)
 	this.side = new DropdownList(this.form);
 	this.side.position.set(100, 85);
 	this.side.size.set(100, 18);
-	this.side.addValue(Locale.front, FrontSide);
-	this.side.addValue(Locale.back, BackSide);
-	this.side.addValue(Locale.double, DoubleSide);
+	this.side.addValue(Locale.front, THREE.FrontSide);
+	this.side.addValue(Locale.back, THREE.BackSide);
+	this.side.addValue(Locale.double, THREE.DoubleSide);
 	this.side.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "side", self.side.getValue()));
@@ -88,13 +79,13 @@ function MaterialInspector(parent, object)
 	this.depthFunc = new DropdownList(this.form);
 	this.depthFunc.position.set(100, 85);
 	this.depthFunc.size.set(100, 18);
-	this.depthFunc.addValue(Locale.never, NeverDepth);
-	this.depthFunc.addValue(Locale.always, AlwaysDepth);
-	this.depthFunc.addValue(Locale.less, LessDepth);
-	this.depthFunc.addValue(Locale.lessOrEqual, LessEqualDepth);
-	this.depthFunc.addValue(Locale.greaterOrEqual, GreaterEqualDepth);
-	this.depthFunc.addValue(Locale.greater, GreaterDepth);
-	this.depthFunc.addValue(Locale.notEqual, NotEqualDepth);
+	this.depthFunc.addValue(Locale.never, THREE.NeverDepth);
+	this.depthFunc.addValue(Locale.always, THREE.AlwaysDepth);
+	this.depthFunc.addValue(Locale.less, THREE.LessDepth);
+	this.depthFunc.addValue(Locale.lessOrEqual, THREE.LessEqualDepth);
+	this.depthFunc.addValue(Locale.greaterOrEqual, THREE.GreaterEqualDepth);
+	this.depthFunc.addValue(Locale.greater, THREE.GreaterDepth);
+	this.depthFunc.addValue(Locale.notEqual, THREE.NotEqualDepth);
 	this.depthFunc.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "depthFunc", self.depthFunc.getValue()));
@@ -148,11 +139,11 @@ function MaterialInspector(parent, object)
 	this.blending = new DropdownList(this.form);
 	this.blending.position.set(100, 85);
 	this.blending.size.set(100, 18);
-	this.blending.addValue(Locale.none, NoBlending);
-	this.blending.addValue(Locale.normal, NormalBlending);
-	this.blending.addValue(Locale.additive, AdditiveBlending);
-	this.blending.addValue(Locale.subtractive, SubtractiveBlending);
-	this.blending.addValue(Locale.multiply, MultiplyBlending);
+	this.blending.addValue(Locale.none, THREE.NoBlending);
+	this.blending.addValue(Locale.normal, THREE.NormalBlending);
+	this.blending.addValue(Locale.additive, THREE.AdditiveBlending);
+	this.blending.addValue(Locale.subtractive, THREE.SubtractiveBlending);
+	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "blending", self.blending.getValue()));
@@ -188,4 +179,3 @@ MaterialInspector.prototype.updateInspector = function()
 	this.alphaTest.setValue(this.object.alphaTest);
 	this.blending.setValue(this.object.blending);
 };
-export {MaterialInspector};

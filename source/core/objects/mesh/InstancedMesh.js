@@ -1,5 +1,4 @@
-import {Mesh} from "../Mesh.js";
-import {InstancedMesh, BufferAttribute, Object3D} from "three";
+"use strict";
 
 /**
  * A instanced mesh is a mesh that can be drawn multiple times at once, it can be used to optimize the draw of large amount of the same geometry material combination.
@@ -10,7 +9,7 @@ import {InstancedMesh, BufferAttribute, Object3D} from "three";
  * @module Meshes
  * @param {Geometry} geometry Geometry used by this mesh
  * @param {Material} material Material used to shade the superficie of the geometry
- * @extends {InstancedMesh}
+ * @extends {THREE.InstancedMesh}
  */
 function InstancedMesh(geometry, material, count)
 {
@@ -40,7 +39,7 @@ function InstancedMesh(geometry, material, count)
 				// Resize the instanceMatrix to fit the number of instances
 				if(value > count)
 				{
-					this.instanceMatrix = new BufferAttribute(new Float32Array(value * 16), 16);
+					this.instanceMatrix = new THREE.BufferAttribute(new Float32Array(value * 16), 16);
 				}
 				
 				count = value;
@@ -49,8 +48,8 @@ function InstancedMesh(geometry, material, count)
 	});
 }
 
-THREE._InstancedMesh = InstancedMesh;
-InstancedMesh = InstancedMesh;
+THREE._InstancedMesh = THREE.InstancedMesh;
+THREE.InstancedMesh = InstancedMesh;
 
 InstancedMesh.prototype = Object.create(THREE._InstancedMesh.prototype);
 
@@ -67,16 +66,15 @@ InstancedMesh.prototype.dispose = function()
 	}
 
 	// Children
-	Object3D.prototype.dispose.call(this);
+	THREE.Object3D.prototype.dispose.call(this);
 };
 
 InstancedMesh.prototype.toJSON = function(meta)
 {
-	var data = Object3D.prototype.toJSON.call(this, meta);
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.instanceMatrix = this.instanceMatrix.toJSON();
 	data.object.count = this.count;
 
 	return data;
 };
-export {InstancedMesh};

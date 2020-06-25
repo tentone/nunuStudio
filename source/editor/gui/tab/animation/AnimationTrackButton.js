@@ -1,15 +1,4 @@
-import {Key} from "../../../../../core/input/Key.js";
-import {AnimationMixer} from "../../../../../core/animation/AnimationMixer.js";
-import {AnimationTrack} from "../AnimationTrack.js";
-import {Interface} from "../../../Interface.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
-import {DropdownList} from "../../../../components/input/DropdownList.js";
-import {ColorChooser} from "../../../../components/input/ColorChooser.js";
-import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
-import {Component} from "../../../../components/Component.js";
-import {Button} from "../../../../components/buttons/Button.js";
-import {InterpolateLinear, Smooth, InterpolateDiscrete} from "three";
+"use strict";
 
 /**
  * Button displyed on the left side that shows the attribute track being edited.
@@ -157,9 +146,9 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	this.interpolation.position.set(22, 5);
 	this.interpolation.updatePosition(Component.TOP_RIGHT);
 	this.interpolation.updateSize();
-	this.interpolation.addValue(Locale.linear, InterpolateLinear);
-	this.interpolation.addValue(Locale.smooth, Smooth);
-	this.interpolation.addValue("Discrete", InterpolateDiscrete);
+	this.interpolation.addValue(Locale.linear, THREE.InterpolateLinear);
+	this.interpolation.addValue(Locale.smooth, THREE.Smooth);
+	this.interpolation.addValue("Discrete", THREE.InterpolateDiscrete);
 	this.interpolation.setOnChange(function()
 	{
 		self.track.setInterpolation(self.interpolation.getValue());
@@ -191,4 +180,3 @@ AnimationTrackButton.prototype.updateTrack = function()
 
 AnimationTrackButton.prototype.updateInterface = function()
 {};
-export {AnimationTrackButton};

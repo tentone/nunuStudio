@@ -1,8 +1,4 @@
-import {Texture} from "../../../texture/Texture.js";
-import {CanvasTexture} from "../../../texture/CanvasTexture.js";
-import {Text} from "../../../../editor/components/Text.js";
-import {Canvas} from "../../../../editor/components/Canvas.js";
-import {Sprite, SpriteMaterial} from "three";
+"use strict";
 
 /**
  * Canvas sprite is used to render canvas based elements in a 2D canvas.
@@ -10,7 +6,7 @@ import {Sprite, SpriteMaterial} from "three";
  * The sprite can be configured to keep a relative size to the screen of an absolute size.
  * 
  * @class CanvasSprite
- * @extends {Sprite}
+ * @extends {THREE.Sprite}
  */
 function CanvasSprite()
 {
@@ -30,7 +26,7 @@ function CanvasSprite()
 	 */
 	this.canvas = this.texture.image;
 
-	var material = new SpriteMaterial(
+	var material = new THREE.SpriteMaterial(
 	{
 		map: this.texture,
 		color: 0xFFFFFF,
@@ -41,7 +37,7 @@ function CanvasSprite()
 		sizeAttenuation: true
 	});
 
-	Sprite.call(this, material);
+	THREE.Sprite.call(this, material);
 
 	this.name = "sprite";
 	this.type = "CanvasSprite";
@@ -66,6 +62,4 @@ function CanvasSprite()
 	});
 }	
 
-CanvasSprite.prototype = Object.create(Sprite.prototype);
-
-export {CanvasSprite};
+CanvasSprite.prototype = Object.create(THREE.Sprite.prototype);

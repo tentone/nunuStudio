@@ -1,9 +1,4 @@
-import {Base64Utils} from "../../core/utils/binary/Base64Utils.js";
-import {Pass} from "../../core/postprocessing/Pass.js";
-import {Program} from "../../core/objects/Program.js";
-import {FileSystem} from "../../core/FileSystem.js";
-import {Editor} from "../Editor.js";
-import {StaticPair} from "pson";
+"use strict";
 
 /**
  * Responsable for package and export of project data to different platforms.
@@ -80,7 +75,7 @@ Exporters.exportWebProjectZip = function(fname)
 	zip.file("index.html", FileSystem.readFile(Global.RUNTIME_PATH + "index.html"));
 	zip.file("nunu.min.js", FileSystem.readFile("nunu.min.js"));
 	
-	var pson = new StaticPair();
+	var pson = new dcodeIO.PSON.StaticPair();
 	var data = pson.toArrayBuffer(Editor.program.toJSON());
 
 	zip.file("app.nsp", Base64Utils.fromArraybuffer(data), {base64: true});
@@ -327,4 +322,3 @@ Exporters.exportAndroid = function(mode, outputPath)
 		Editor.alert("Android project exported!");
 	}, 500);
 };
-export {Exporters};

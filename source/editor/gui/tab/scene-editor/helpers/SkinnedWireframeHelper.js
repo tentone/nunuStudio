@@ -1,10 +1,8 @@
-import {Mesh} from "../../../../../../core/objects/mesh/Mesh.js";
-import {WireframeHelper} from "../WireframeHelper.js";
-import {SkinnedMesh, MeshBasicMaterial} from "three";
+"use strict";
 
 function SkinnedWireframeHelper(object, hex) 
 {
-	SkinnedMesh.call(this, object.geometry, new MeshBasicMaterial(
+	THREE.SkinnedMesh.call(this, object.geometry, new THREE.MeshBasicMaterial(
 	{
 		color: (hex !== undefined) ? hex : 0xFFFFFF,
 		wireframe: true,
@@ -17,12 +15,10 @@ function SkinnedWireframeHelper(object, hex)
 	this.update();
 }
 
-SkinnedWireframeHelper.prototype = Object.create(SkinnedMesh.prototype);
+SkinnedWireframeHelper.prototype = Object.create(THREE.SkinnedMesh.prototype);
 
 SkinnedWireframeHelper.prototype.update = function()
 {
 	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
 };
-
-export {SkinnedWireframeHelper};

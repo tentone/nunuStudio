@@ -1,9 +1,9 @@
-import {Font} from "../../../core/resources/Font.js";
 :root {
 	/* Fonts */
 	--font-main-family:"Arial";
 	--font-main-color:#FFFFFF;
 	--font-main-size:12px;
+
 	/* GUI Color Palette */
 	--color-light:#FFFFFF;
 	--color-graph:#AAAAAA;

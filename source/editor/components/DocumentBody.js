@@ -1,5 +1,4 @@
-import {Component} from "../Component.js";
-import {Vector2} from "three";
+"use strict";
 
 /**
  * Body to represent the document.body 
@@ -16,8 +15,8 @@ var DocumentBody =
 	mode: Component.TOP_LEFT,
 	isComponent: true,
 	visible: true,
-	position: new Vector2(0, 0),
-	_size: new Vector2(0, 0)
+	position: new THREE.Vector2(0, 0),
+	_size: new THREE.Vector2(0, 0)
 }
 
 Object.defineProperties(DocumentBody,

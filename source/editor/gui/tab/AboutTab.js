@@ -1,9 +1,4 @@
-import {Nunu} from "../../../../core/Nunu.js";
-import {Text} from "../../../components/Text.js";
-import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {Component} from "../../../components/Component.js";
-import {REVISION} from "three";
-
+"use strict";
 
 function AboutTab(parent, closeable, container, index)
 {
@@ -34,7 +29,7 @@ function AboutTab(parent, closeable, container, index)
 
 	// Libraries
 	var libs = [];
-	libs.push("three.js R" + REVISION);
+	libs.push("three.js R" + THREE.REVISION);
 	libs.push("CodeMirror V" + CodeMirror.version);
 	libs.push("CannonJS V" + CANNON.version);
 	libs.push("TernJS V" + tern.version);
@@ -60,4 +55,3 @@ function AboutTab(parent, closeable, container, index)
 }
 
 AboutTab.prototype = Object.create(TabComponent.prototype);
-export {AboutTab};

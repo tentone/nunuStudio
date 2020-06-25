@@ -1,5 +1,4 @@
-import {Editor} from "../../../../editor/Editor.js";
-import {Vector3, Geometry, BufferGeometry, Quaternion} from "three";
+"use strict";
 
 /**
  * The twist modifier applies a tornado twist like deformation to the geometry.
@@ -22,9 +21,9 @@ function TwistModifier(angle, start, end)
 	 * Twist direction vector, the twist is performed around this vector in its direction.
 	 *
 	 * @attribute direction
-	 * @type {Vector3}
+	 * @type {THREE.Vector3}
 	 */
-	this.direction = new Vector3(0, 1, 0);
+	this.direction = new THREE.Vector3(0, 1, 0);
 
 	/**
 	 * Twist angle of rotation, applied from the start to the end of rotation.
@@ -59,15 +58,15 @@ function TwistModifier(angle, start, end)
  * Apply the modifier to a geometry object, creates a new geometry with the result.
  *
  * @method modify
- * @param {Geometry | BufferGeometry} geometry Geometry to be transformed.
- * @return {Geometry | BufferGeometry} Result geometry after applying the modifier.
+ * @param {THREE.Geometry | THREE.BufferGeometry} geometry Geometry to be transformed.
+ * @return {THREE.Geometry | THREE.BufferGeometry} Result geometry after applying the modifier.
  */
 TwistModifier.prototype.modify = function(geometry)
 {
 	// Convert the geometry from buffer geometry to regular geometry
-	if(geometry instanceof BufferGeometry)
+	if(geometry instanceof THREE.BufferGeometry)
 	{
-		geometry = new Geometry();
+		geometry = new THREE.Geometry();
 		geometry.fromBufferGeometry(Editor.selection[0].geometry);
 		geometry.mergeVertices();
 	}
@@ -77,7 +76,7 @@ TwistModifier.prototype.modify = function(geometry)
 	}
 
 	// Apply transformation to all vertices in the geometry.
-	var quaternion = new Quaternion();
+	var quaternion = new THREE.Quaternion();
 
 	for(var i = 0; i < geometry.vertices.length; i++)
 	{
@@ -104,11 +103,10 @@ TwistModifier.prototype.modify = function(geometry)
 	// Convert to buffer geometry if necessary
 	if(this.bufferGeometry)
 	{
-		var bufferGeometry = new BufferGeometry();
+		var bufferGeometry = new THREE.BufferGeometry();
 		bufferGeometry.fromGeometry(geometry);
 		return bufferGeometry;
 	}
 
 	return geometry;	 
 };
-export {TwistModifier};

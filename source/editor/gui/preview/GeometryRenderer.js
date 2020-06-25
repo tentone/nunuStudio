@@ -1,9 +1,4 @@
-import {Texture} from "../../../../core/texture/Texture.js";
-import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
-import {TextureRenderer} from "../TextureRenderer.js";
-import {PreviewRenderer} from "../PreviewRenderer.js";
-import {Text} from "../../../components/Text.js";
-import {DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3} from "three";
+"use strict";
 
 /** 
  * The geometry renderer is used to generate preview thumbnails.
@@ -19,12 +14,12 @@ function GeometryRenderer()
 	
 	this.camera = new OrthographicCamera(3, 1);
 
-	var directional = new DirectionalLight(0x777777, 1.0);
+	var directional = new THREE.DirectionalLight(0x777777, 1.0);
 	directional.position.set(3000, 10000, 400);
 	this.scene.add(directional);
-	this.scene.add(new AmbientLight(0x888888));
+	this.scene.add(new THREE.AmbientLight(0x888888));
 
-	this.mesh = new Mesh(new Geometry(), new MeshPhongMaterial({color: 0xFFFFFF}));
+	this.mesh = new THREE.Mesh(new THREE.Geometry(), new THREE.MeshPhongMaterial({color: 0xFFFFFF}));
 	this.scene.add(this.mesh);
 }
 
@@ -45,7 +40,7 @@ GeometryRenderer.prototype.render = function(geometry, onRender)
 	geometry.computeBoundingBox();
 	
 	var box = geometry.boundingBox;
-	var center = new Vector3();
+	var center = new THREE.Vector3();
 	center.addVectors(box.min, box.max);
 	center.multiplyScalar(-0.5);
 
@@ -62,5 +57,3 @@ GeometryRenderer.prototype.render = function(geometry, onRender)
 
 	onRender(this.canvas.toDataURL());
 };
-
-export {GeometryRenderer};

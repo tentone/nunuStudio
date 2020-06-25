@@ -1,8 +1,4 @@
-import {Image} from "../../../../core/resources/Image.js";
-import {Text} from "../../Text.js";
-import {Component} from "../../Component.js";
-import {ButtonText} from "../../buttons/ButtonText.js";
-import {Button} from "../../buttons/Button.js";
+"use strict";
 
 /**
  * Button used in dropdown menus, context menus, etc.
@@ -54,5 +50,3 @@ ButtonMenu.prototype.setIcon = function(icon)
 	
 	this.icon.src = icon;
 };
-
-export {ButtonMenu};

@@ -1,6 +1,4 @@
-import {Action} from "../../Action.js";
-import {Editor} from "../../../../Editor.js";
-import {Object3D, Matrix4} from "three";
+"use strict";
 
 /**
  * Action to represent a object move in the children tree.
@@ -11,8 +9,8 @@ import {Object3D, Matrix4} from "three";
  *
  * @class MoveAction
  * @extends {Action}
- * @param {Object3D} object Object to be moved.
- * @param {Object3D} newParent New parent of the object.
+ * @param {THREE.Object3D} object Object to be moved.
+ * @param {THREE.Object3D} newParent New parent of the object.
  * @param {number} newIndex Index to insert the object.
  */
 function MoveAction(object, newParent, newIndex, keepGlobalPose)
@@ -78,7 +76,7 @@ MoveAction.prototype.inverseTransform = function(oldParent, newParent)
 	matrix.multiplyMatrices(oldParent.matrixWorld, matrix);
 
 	// Get inverse of the world matrix of the new parent
-	var inverse = new Matrix4();
+	var inverse = new THREE.Matrix4();
 	inverse.getInverse(newParent.matrixWorld);
 
 	// Apply inverse transform to the object matrix
@@ -99,5 +97,3 @@ MoveAction.updateGUI = function(object, oldParent, newParent, newIndex)
 };
 
 
-
-export {MoveAction};

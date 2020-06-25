@@ -1,5 +1,4 @@
-import {Object3D, AudioListener, Audio} from "three";
-
+"use strict";
 
 /**
  * AudioEmitter is a Object3D used to play audio inside the scene.
@@ -13,7 +12,7 @@ import {Object3D, AudioListener, Audio} from "three";
  */
 function AudioEmitter(audio)
 {
-	Object3D.call(this);
+	THREE.Object3D.call(this);
 
 	this.name = "audio";
 	this.type = "Audio";
@@ -26,7 +25,7 @@ function AudioEmitter(audio)
 	 * @property listener
 	 * @type {AudioListener}
 	 */
-	this.listener = new AudioListener();
+	this.listener = new THREE.AudioListener();
 	this.context = this.listener.context;
 	this.matrixAutoUpdate = false;
 
@@ -124,9 +123,9 @@ function AudioEmitter(audio)
 	this.filters = [];
 }
 
-Audio = AudioEmitter;
+THREE.Audio = AudioEmitter;
 
-AudioEmitter.prototype = Object.create(Object3D.prototype);
+AudioEmitter.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
  * Possible source types for the audio emitter.
@@ -232,7 +231,7 @@ AudioEmitter.prototype.initialize = function()
 	this.setVolume(this.volume);
 	this.setPlaybackRate(this.playbackRate);
 
-	Object3D.prototype.initialize.call(this);
+	THREE.Object3D.prototype.initialize.call(this);
 };
 
 /**
@@ -556,13 +555,13 @@ AudioEmitter.prototype.dispose = function()
 		this.disconnect();
 	}
 
-	Object3D.prototype.dispose.call(this);
+	THREE.Object3D.prototype.dispose.call(this);
 };
 
 AudioEmitter.prototype.toJSON = function(meta)
 {
 	var audio = this.audio;
-	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		audio = audio.toJSON(meta);
 	});
@@ -576,4 +575,3 @@ AudioEmitter.prototype.toJSON = function(meta)
 
 	return data;
 };
-export {AudioEmitter};

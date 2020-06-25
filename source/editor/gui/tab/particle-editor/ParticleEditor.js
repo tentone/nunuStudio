@@ -1,30 +1,4 @@
-import {Texture} from "../../../../../core/texture/Texture.js";
-import {Container} from "../../../../../core/objects/misc/Container.js";
-import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
-import {Mouse} from "../../../../../core/input/Mouse.js";
-import {DOMUtils} from "../../../../utils/DOMUtils.js";
-import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {CallbackAction} from "../../../../history/action/CallbackAction.js";
-import {Action} from "../../../../history/action/Action.js";
-import {Interface} from "../../../Interface.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
-import {TabComponent} from "../../../../components/tabs/TabComponent.js";
-import {TableForm} from "../../../../components/TableForm.js";
-import {RendererCanvas} from "../../../../components/RendererCanvas.js";
-import {VectorBox} from "../../../../components/input/VectorBox.js";
-import {TextureChooser} from "../../../../components/input/TextureChooser.js";
-import {TextBox} from "../../../../components/input/TextBox.js";
-import {NumberRow} from "../../../../components/input/NumberRow.js";
-import {NumberBox} from "../../../../components/input/NumberBox.js";
-import {Graph} from "../../../../components/input/Graph.js";
-import {DropdownList} from "../../../../components/input/DropdownList.js";
-import {ColorGradientChooser} from "../../../../components/input/ColorGradientChooser.js";
-import {Form} from "../../../../components/Form.js";
-import {DualContainer} from "../../../../components/containers/DualContainer.js";
-import {Component} from "../../../../components/Component.js";
-import {Canvas} from "../../../../components/Canvas.js";
-import {Scene, GridHelper, AxesHelper, Vector2, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, Vector3, Color} from "three";
+"use strict";
 
 /**
  * Particle editor is used to edit particle emitter objects visually.
@@ -50,17 +24,17 @@ function ParticleEditor(parent, closeable, container, index)
 	this.mouse.setCanvas(this.canvas.element);
 
 	// Particle preview
-	this.scene = new Scene();
+	this.scene = new THREE.Scene();
 	this.scene.matrixAutoUpdate = false;
-	this.scene.add(new GridHelper(50, 50, 0x888888));
-	this.scene.add(new AxesHelper(50));
+	this.scene.add(new THREE.GridHelper(50, 50, 0x888888));
+	this.scene.add(new THREE.AxesHelper(50));
 
 	// Particle
 	this.particle = null;
 
 	// Camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x / this.canvas.size.y);
-	this.cameraRotation = new Vector2(0, 0.5);
+	this.cameraRotation = new THREE.Vector2(0, 0.5);
 	this.cameraDistance = 5;
 	this.updateCamera();
 	this.scene.add(this.camera);
@@ -117,11 +91,11 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.addText(Locale.blendingMode);
 	this.blending = new DropdownList(this.form);
 	this.blending.size.set(100, 18);
-	this.blending.addValue(Locale.none, NoBlending);
-	this.blending.addValue(Locale.normal, NormalBlending);
-	this.blending.addValue(Locale.additive, AdditiveBlending);
-	this.blending.addValue(Locale.subtractive, SubtractiveBlending);
-	this.blending.addValue(Locale.multiply, MultiplyBlending);
+	this.blending.addValue(Locale.none, THREE.NoBlending);
+	this.blending.addValue(Locale.normal, THREE.NormalBlending);
+	this.blending.addValue(Locale.additive, THREE.AdditiveBlending);
+	this.blending.addValue(Locale.subtractive, THREE.SubtractiveBlending);
+	this.blending.addValue(Locale.multiply, THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.group, "blending", self.blending.getValue()));
@@ -439,7 +413,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.colorSpread.size.set(190, 18);
 	this.colorSpread.setOnChange(function(color, index)
 	{
-		Editor.addAction(new CallbackAction(new ChangeAction(self.particle.emitter.color.spread, index, new Vector3(color.r, color.g, color.b)), function()
+		Editor.addAction(new CallbackAction(new ChangeAction(self.particle.emitter.color.spread, index, new THREE.Vector3(color.r, color.g, color.b)), function()
 		{
 			self.particle.reload();
 		}));
@@ -538,7 +512,7 @@ ParticleEditor.prototype.attach = function(particle)
 	for(var i = 0; i < 4; i++)
 	{
 		var color = particle.emitter.color.spread[i];
-		colorSpread.push(new Color(color.x, color.y, color.z));
+		colorSpread.push(new THREE.Color(color.x, color.y, color.z));
 	}
 	this.colorSpread.setValue(colorSpread);
 
@@ -551,9 +525,9 @@ ParticleEditor.prototype.updateCamera = function()
 {
 	// Calculate direction vector
 	var cosAngleY = Math.cos(this.cameraRotation.y);
-	var position = new Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x) * cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
+	var position = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x) * cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
 	this.camera.position.copy(position);
-	this.camera.lookAt(new Vector3(0, 0, 0));
+	this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 };
 
 ParticleEditor.prototype.isAttached = function(particle)
@@ -632,5 +606,3 @@ ParticleEditor.prototype.updateSize = function()
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
 };
-
-export {ParticleEditor};

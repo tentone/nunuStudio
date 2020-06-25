@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * ByteArrayUtils contains methods to convert from and to ByteArray binary format
@@ -45,4 +46,3 @@ ByteArrayUtils.fromBase64 = function(str)
 
 	return array;
 };
-export {ByteArrayUtils};

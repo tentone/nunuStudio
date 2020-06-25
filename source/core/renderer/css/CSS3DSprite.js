@@ -1,6 +1,4 @@
-import {CSS3DObject} from "../CSS3DObject.js";
-import {Sprite} from "../../../objects/sprite/Sprite.js";
-import {Component} from "../../../../editor/components/Component.js";
+"use strict";
 
 /**
  * CSS 3D element drawn as a billboard.
@@ -19,5 +17,3 @@ function CSS3DSprite(element)
 CSS3DSprite.prototype = Object.create(CSS3DObject.prototype);
 CSS3DSprite.prototype.constructor = CSS3DSprite;
 CSS3DSprite.prototype.isCSS3DSprite = true;
-
-export {CSS3DSprite};

@@ -1,18 +1,4 @@
-import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
-import {CompressedTexture} from "../../../../core/texture/CompressedTexture.js";
-import {Resource} from "../../../../core/resources/Resource.js";
-import {Image} from "../../../../core/resources/Image.js";
-import {AddResourceAction} from "../../../history/action/resources/AddResourceAction.js";
-import {Action} from "../../../history/action/Action.js";
-import {Interface} from "../../../gui/Interface.js";
-import {Editor} from "../../../Editor.js";
-import {Text} from "../../Text.js";
-import {TableForm} from "../../TableForm.js";
-import {DropdownList} from "../DropdownList.js";
-import {CheckBox} from "../CheckBox.js";
-import {Form} from "../../Form.js";
-import {Component} from "../../Component.js";
-import {Texture, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
+"use strict";
 
 function CubeTextureBox(parent)
 {
@@ -74,7 +60,7 @@ function CubeTextureBox(parent)
 			var texture = DragBuffer.get(uuid);
 
 			// Cube texture
-			if(texture instanceof Texture && texture.isCubeTexture)
+			if(texture instanceof THREE.Texture && texture.isCubeTexture)
 			{
 				self.setTexture(texture);
 			}
@@ -106,13 +92,13 @@ function CubeTextureBox(parent)
 	this.form.addText(Locale.mapping);
 	this.mapping = new DropdownList(this);
 	this.mapping.size.set(120, 18);
-	this.mapping.addValue("Cube Reflection", CubeReflectionMapping);
-	this.mapping.addValue("Cube Refraction", CubeRefractionMapping);
-	this.mapping.addValue("Equirectangular Reflection", EquirectangularReflectionMapping);
-	this.mapping.addValue("Equirectangular Reflection", EquirectangularRefractionMapping);
-	this.mapping.addValue("Spherical Reflection", SphericalReflectionMapping);
-	this.mapping.addValue("Cube UV Reflection", CubeUVReflectionMapping);
-	this.mapping.addValue("Cube UV Reflection", CubeUVRefractionMapping);
+	this.mapping.addValue("Cube Reflection", THREE.CubeReflectionMapping);
+	this.mapping.addValue("Cube Refraction", THREE.CubeRefractionMapping);
+	this.mapping.addValue("Equirectangular Reflection", THREE.EquirectangularReflectionMapping);
+	this.mapping.addValue("Equirectangular Reflection", THREE.EquirectangularRefractionMapping);
+	this.mapping.addValue("Spherical Reflection", THREE.SphericalReflectionMapping);
+	this.mapping.addValue("Cube UV Reflection", THREE.CubeUVReflectionMapping);
+	this.mapping.addValue("Cube UV Reflection", THREE.CubeUVRefractionMapping);
 	this.form.add(this.mapping);
 	this.form.nextRow();
 
@@ -239,5 +225,3 @@ CubeTextureBox.prototype.updateInterface = function()
 	}
 
 };
-
-export {CubeTextureBox};

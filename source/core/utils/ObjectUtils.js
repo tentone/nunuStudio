@@ -1,7 +1,4 @@
-import {Sprite} from "../../objects/sprite/Sprite.js";
-import {Mesh} from "../../objects/mesh/Mesh.js";
-import {Vector3, Object3D, Box3, Matrix4, BufferGeometry} from "three";
-
+"use strict";
 
 /**
  * Object utils is a collection of methods to apply operations to Object3D instances.
@@ -47,12 +44,12 @@ ObjectUtils.centerUnitary = function(object)
 	
 	if(box !== null)
 	{
-		var size = new Vector3();
+		var size = new THREE.Vector3();
 		box.getSize(size);
 
 		var scale = 1 / (size.x > size.y ? size.x > size.z ? size.x : size.z : size.y > size.z ? size.y : size.z);
 		
-		var center = new Vector3();
+		var center = new THREE.Vector3();
 		box.getCenter(center);
 		center.multiplyScalar(scale);
 
@@ -67,8 +64,8 @@ ObjectUtils.centerUnitary = function(object)
  * Includes booth the object and all of its children, the box is ajusted to world space coordinates.
  *
  * @method calculateBoudingBox
- * @param {Object3D} object Root object to be traversed.
- * @return {Box3} Bouding box of the object considering all of its children.
+ * @param {THREE.Object3D} object Root object to be traversed.
+ * @return {THREE.Box3} Bouding box of the object considering all of its children.
  */
 ObjectUtils.calculateBoundingBox = function(object)
 {
@@ -81,9 +78,9 @@ ObjectUtils.calculateBoundingBox = function(object)
 		// Sprites
 		if(children.isSprite === true)
 		{
-			var position = new Vector3();
+			var position = new THREE.Vector3();
 			children.getWorldPosition(position);
-			boundingBox = new Box3(position.clone().subScalar(0.5), position.clone().addScalar(0.5));
+			boundingBox = new THREE.Box3(position.clone().subScalar(0.5), position.clone().addScalar(0.5));
 		}
 		// Mesh, Points, Lines
 		else if(children.geometry !== undefined)
@@ -136,11 +133,11 @@ ObjectUtils.centerGeometryOrigin = function(object)
 
 			var box = children.geometry.boundingBox.clone();
 
-			var center = box.getCenter(new Vector3());
+			var center = box.getCenter(new THREE.Vector3());
 			children.position.add(center);
 
 			// Recenter geometry
-			var matrix = new Matrix4();
+			var matrix = new THREE.Matrix4();
 			matrix.makeTranslation(-center.x, -center.y, -center.z);
 			children.geometry.applyMatrix4(matrix);
 		}
@@ -159,8 +156,7 @@ ObjectUtils.convertToBufferGeometry = function(object)
 	{
 		if(children.geometry !== undefined && children.geometry.isGeometry === true)
 		{
-			children.geometry = new BufferGeometry().fromGeometry(children.geometry);
+			children.geometry = new THREE.BufferGeometry().fromGeometry(children.geometry);
 		}
 	});
 };
-export {ObjectUtils};

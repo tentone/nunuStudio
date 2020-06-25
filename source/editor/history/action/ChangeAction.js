@@ -1,7 +1,4 @@
-import {Action} from "../Action.js";
-import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
-import {Material, Texture, Quaternion} from "three";
+"use strict";
 
 /**
  * Stores change to one object attribute.
@@ -53,11 +50,11 @@ ChangeAction.prototype.revert = function()
 
 ChangeAction.updateGUI = function(object, attribute, newValue)
 {
-	if(object instanceof Material)
+	if(object instanceof THREE.Material)
 	{
 		object.needsUpdate = true;
 	}
-	else if(object instanceof Texture)
+	else if(object instanceof THREE.Texture)
 	{
 		object.needsUpdate = true;
 	}
@@ -88,7 +85,5 @@ ChangeAction.isVetorial = function(object)
 		return false;
 	}
 
-	return object.isVector3 === true || object.isEuler === true || (object instanceof Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
+	return object.isVector3 === true || object.isEuler === true || (object instanceof THREE.Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
 };
-
-export {ChangeAction};

@@ -1,10 +1,4 @@
-import {EventManager} from "../../utils/EventManager.js";
-import {Key} from "../Key.js";
-import {Component} from "../../../editor/components/Component.js";
-import {Canvas} from "../../../editor/components/Canvas.js";
-import {Button} from "../../../editor/components/buttons/Button.js";
-import {Vector2} from "three";
-
+"use strict";
 
 /**
  * Mouse instance for sync input the mouse should be updated everytime before.
@@ -22,9 +16,9 @@ function Mouse(domElement, dontInitialize)
 {
 	// Raw data
 	this._keys = new Array(5);
-	this._position = new Vector2(0, 0);
+	this._position = new THREE.Vector2(0, 0);
 	this._positionUpdated = false;
-	this._delta = new Vector2(0, 0);
+	this._delta = new THREE.Vector2(0, 0);
 	this._wheel = 0;
 	this._wheelUpdated = false;
 	this._doubleClicked = new Array(5);
@@ -43,7 +37,7 @@ function Mouse(domElement, dontInitialize)
 	 * @type {Vector2}
 	 * @property position
 	 */
-	this.position = new Vector2(0, 0);
+	this.position = new THREE.Vector2(0, 0);
 
 	/**
 	 * Mouse movement (coordinates in window space).
@@ -51,7 +45,7 @@ function Mouse(domElement, dontInitialize)
 	 * @type {Vector2}
 	 * @property delta
 	 */
-	this.delta = new Vector2(0, 0);
+	this.delta = new THREE.Vector2(0, 0);
 
 	/**
 	 * Mouse scroll wheel movement.
@@ -490,4 +484,3 @@ Mouse.dispose = function()
 {
 	this.events.destroy();
 };
-export {Mouse};

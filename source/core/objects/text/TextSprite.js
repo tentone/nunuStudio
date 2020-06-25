@@ -1,9 +1,4 @@
-import {Font} from "../../../resources/Font.js";
-import {Sprite} from "../../sprite/Sprite.js";
-import {CanvasSprite} from "../../sprite/CanvasSprite.js";
-import {Text} from "../../../../editor/components/Text.js";
-import {Canvas} from "../../../../editor/components/Canvas.js";
-import {Math, Object3D} from "three";
+"use strict";
 
 /**
  * Text sprite is used to represent text as a sprite.
@@ -188,7 +183,7 @@ TextSprite.prototype.drawText = function()
 	context.font = fontSize + "px " + this.font;
 
 	var size = context.measureText(this.text).width;
-	var width = Math.ceilPowerOfTwo(size);
+	var width = THREE.Math.ceilPowerOfTwo(size);
 	var ratio = width / height;
 
 	this.texture.width = width;
@@ -220,7 +215,7 @@ TextSprite.prototype.drawText = function()
 
 TextSprite.prototype.toJSON = function(meta)
 {
-	var data = Object3D.prototype.toJSON.call(this, meta);
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.text = this.text;
 	data.object.color = this.color;
@@ -250,5 +245,3 @@ TextSprite.fromJSON = function(data)
 	return object;
 };
 
-
-export {TextSprite};

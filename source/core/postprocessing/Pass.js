@@ -1,5 +1,4 @@
-import {Form} from "../../../editor/components/Form.js";
-import {Math, LinearFilter, RGBAFormat, RGBFormat, NearestFilter, OthographicCamera, OrthographicCamera, Scene, Mesh, PlaneBufferGeometry} from "three";
+"use strict";
 
 /**
  * A render Pass is used to render something in the graphics pipeline.
@@ -11,7 +10,7 @@ import {Math, LinearFilter, RGBAFormat, RGBFormat, NearestFilter, OthographicCam
  */
 function Pass()
 {
-	this.uuid = Math.generateUUID();
+	this.uuid = THREE.Math.generateUUID();
 	this.type = "Pass";
 
 	/**
@@ -64,9 +63,9 @@ function Pass()
  */
 Pass.RGBALinear =
 {
-	minFilter: LinearFilter,
-	magFilter: LinearFilter,
-	format: RGBAFormat
+	minFilter: THREE.LinearFilter,
+	magFilter: THREE.LinearFilter,
+	format: THREE.RGBAFormat
 };
 
 /** 
@@ -78,9 +77,9 @@ Pass.RGBALinear =
  */
 Pass.RGBLinear =
 {
-	minFilter: LinearFilter,
-	magFilter: LinearFilter,
-	format: RGBFormat
+	minFilter: THREE.LinearFilter,
+	magFilter: THREE.LinearFilter,
+	format: THREE.RGBFormat
 };
 
 /** 
@@ -92,9 +91,9 @@ Pass.RGBLinear =
  */
 Pass.RGBANearest =
 {
-	minFilter: NearestFilter,
-	magFilter: NearestFilter,
-	format: RGBAFormat
+	minFilter: THREE.NearestFilter,
+	magFilter: THREE.NearestFilter,
+	format: THREE.RGBAFormat
 };
 
 /**
@@ -110,25 +109,25 @@ Pass.prototype.createQuadScene = function()
 	 * Quad rendering camera.
 	 *
 	 * @attribute camera
-	 * @type {OthographicCamera}
+	 * @type {THREE.OthographicCamera}
 	 */
-	this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
+	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
 	/**
 	 * Quad scene, that contains a single quad children.
 	 *
 	 * @attribute scene
-	 * @type {Scene}
+	 * @type {THREE.Scene}
 	 */
-	this.scene = new Scene();
+	this.scene = new THREE.Scene();
 
 	/**
 	 * Quad mesh, composed of a 2 by 2 plane geometry.
 	 *
 	 * @attribute quad
-	 * @type {Mesh}
+	 * @type {THREE.Mesh}
 	 */
-	this.quad = new Mesh(new PlaneBufferGeometry(2, 2), null);
+	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
 	this.quad.frustumCulled = false;
 	this.scene.add(this.quad);
 };
@@ -183,5 +182,3 @@ Pass.prototype.toJSON = function(meta)
 
 	return data;
 };
-
-export {Pass};

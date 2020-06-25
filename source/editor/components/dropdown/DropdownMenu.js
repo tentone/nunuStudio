@@ -1,11 +1,4 @@
-import {Image} from "../../../../core/resources/Image.js";
-import {DOMUtils} from "../../../utils/DOMUtils.js";
-import {Interface} from "../../../gui/Interface.js";
-import {Text} from "../../Text.js";
-import {ButtonMenu} from "../ButtonMenu.js";
-import {Component} from "../../Component.js";
-import {Button} from "../../buttons/Button.js";
-import {Vector2} from "three";
+"use strict";
 
 /**
  * Dropdown menu element, used to create dropdowns in menu bars and in context menus.
@@ -81,9 +74,9 @@ function DropdownMenu(parent)
 	 * Size of each dropdown menu option.
 	 *
 	 * @attribute optionsSize
-	 * @type {Vector2}
+	 * @type {THREE.Vector2}
 	 */
-	this.optionsSize = new Vector2(150, 20);
+	this.optionsSize = new THREE.Vector2(150, 20);
 
 	/**
 	 * Options available in the dropdown.
@@ -361,5 +354,3 @@ DropdownMenu.prototype.updateSize = function()
 
 	this.updateOptions();
 };
-
-export {DropdownMenu};

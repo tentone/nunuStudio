@@ -1,14 +1,4 @@
-import {RectAreaLight} from "../../../../../../../core/objects/lights/RectAreaLight.js";
-import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../../history/action/Action.js";
-import {ObjectInspector} from "../../ObjectInspector.js";
-import {Inspector} from "../../../Inspector.js";
-import {Editor} from "../../../../../../Editor.js";
-import {Text} from "../../../../../../components/Text.js";
-import {Slider} from "../../../../../../components/input/Slider.js";
-import {NumberBox} from "../../../../../../components/input/NumberBox.js";
-import {ColorChooser} from "../../../../../../components/input/ColorChooser.js";
-import {Color} from "three";
+"use strict";
 
 function RectAreaLightInspector(parent, object)
 {
@@ -22,7 +12,7 @@ function RectAreaLightInspector(parent, object)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "color", new Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -76,5 +66,3 @@ RectAreaLightInspector.prototype.updateInspector = function()
 	this.width.setValue(this.object.width);
 	this.height.setValue(this.object.height);
 };
-
-export {RectAreaLightInspector};

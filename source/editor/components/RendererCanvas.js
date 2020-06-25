@@ -1,12 +1,4 @@
-import {Image} from "../../../core/resources/Image.js";
-import {RendererConfiguration} from "../../../core/renderer/RendererConfiguration.js";
-import {CSS3DRenderer} from "../../../core/renderer/css/CSS3DRenderer.js";
-import {CSS3DObject} from "../../../core/renderer/css/CSS3DObject.js";
-import {Editor} from "../../Editor.js";
-import {Division} from "../Division.js";
-import {Component} from "../Component.js";
-import {Canvas} from "../Canvas.js";
-import {Vector2, WebGlRenderer} from "three";
+"use strict";
 
 /**
  * A canvas element that also contains a thee.js webgl renderer object.
@@ -68,9 +60,9 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 * Rendering resolution accouting for the device pixel ratio.
 	 *
 	 * @attribute resolution
-	 * @type {Vector2}
+	 * @type {THREE.Vector2}
 	 */
-	this.resolution = new Vector2();
+	this.resolution = new THREE.Vector2();
 
 	/**
 	 * Method called when the canvas is reset, might need to be used to replace canvas related events.
@@ -95,7 +87,7 @@ function RendererCanvas(parent, options, useCSSRenderer)
 	 * three.js WebGl renderer.
 	 *
 	 * @attribute renderer
-	 * @type {WebGlRenderer}
+	 * @type {THREE.WebGlRenderer}
 	 */
 	this.renderer = null;
 	this.createRenderer();
@@ -296,5 +288,3 @@ RendererCanvas.prototype.updateSize = function()
 		this.cssRenderer.setSize(this.size.x, this.size.y);
 	}
 };
-
-export {RendererCanvas};

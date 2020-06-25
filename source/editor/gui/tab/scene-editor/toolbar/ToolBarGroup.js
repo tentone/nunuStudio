@@ -1,12 +1,4 @@
-import {Image} from "../../../../../../core/resources/Image.js";
-import {ToolBarToogleButton} from "../ToolBarToogleButton.js";
-import {ToolBarButton} from "../ToolBarButton.js";
-import {ToolBar} from "../ToolBar.js";
-import {Interface} from "../../../../Interface.js";
-import {Text} from "../../../../../components/Text.js";
-import {Component} from "../../../../../components/Component.js";
-import {ButtonIcon} from "../../../../../components/buttons/ButtonIcon.js";
-import {Button} from "../../../../../components/buttons/Button.js";
+"use strict";
 
 /**
  * Group of tools contained inside of the ToolBar object.
@@ -71,5 +63,3 @@ ToolBarGroup.prototype.addOption = function(text, icon, callback)
 
 	return button;
 };
-
-export {ToolBarGroup};

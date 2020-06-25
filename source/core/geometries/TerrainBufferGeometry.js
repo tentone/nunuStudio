@@ -1,5 +1,4 @@
-import {Image} from "../../resources/Image.js";
-import {BufferGeometry, Float32BufferAttribute} from "three";
+"use strict";
 
 /**
  * Terrrain geometry is a plane like geometry deformed by a height map texture.
@@ -17,7 +16,7 @@ import {BufferGeometry, Float32BufferAttribute} from "three";
  */
 function TerrainBufferGeometry(width, height, widthSegments, heightSegments, scale, image)
 {
-	BufferGeometry.call(this);
+	THREE.BufferGeometry.call(this);
 
 	this.type = "TerrainBufferGeometry";
 
@@ -36,7 +35,7 @@ function TerrainBufferGeometry(width, height, widthSegments, heightSegments, sca
 	this.generate();
 };
 
-TerrainBufferGeometry.prototype = Object.create(BufferGeometry.prototype);
+TerrainBufferGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
 TerrainBufferGeometry.constructor = TerrainBufferGeometry;
 
 TerrainBufferGeometry.prototype.generate = function()
@@ -117,9 +116,9 @@ TerrainBufferGeometry.prototype.generate = function()
 		}
 
 		self.setIndex(indices);
-		self.setAttribute("position", new Float32BufferAttribute(vertices, 3));
-		self.setAttribute("normal", new Float32BufferAttribute(normals, 3));
-		self.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+		self.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+		self.setAttribute("normal", new THREE.Float32BufferAttribute(normals, 3));
+		self.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
 
 		self.computeVertexNormals();
 
@@ -130,10 +129,9 @@ TerrainBufferGeometry.prototype.generate = function()
 
 TerrainBufferGeometry.prototype.toJSON = function()
 {
-	var data = BufferGeometry.prototype.toJSON.call(this);
+	var data = THREE.BufferGeometry.prototype.toJSON.call(this);
 	
 	data.image = this.image.uuid;
 
 	return data;
 };
-export {TerrainBufferGeometry};

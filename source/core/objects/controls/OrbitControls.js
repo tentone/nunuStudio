@@ -1,7 +1,4 @@
-import {Program} from "../../Program.js";
-import {Mouse} from "../../../input/Mouse.js";
-import {Button} from "../../../../editor/components/buttons/Button.js";
-import {Group, Vector3, Vector2, Object3D, Matrix4} from "three";
+"use strict";
 
 /**
  * Orbit controls object can be controlled using the mouse.
@@ -14,7 +11,7 @@ import {Group, Vector3, Vector2, Object3D, Matrix4} from "three";
  */
 function OrbitControls()
 {
-	Group.call(this);
+	THREE.Group.call(this);
 
 	this.name = "orbit";
 	this.type = "OrbitControls";
@@ -111,7 +108,7 @@ function OrbitControls()
 	 * @property center
 	 * @type {Vector3}
 	 */
-	this.center = new Vector3(0, 0, 0);
+	this.center = new THREE.Vector3(0, 0, 0);
 
 	/**
 	 * Orientation of the camera.
@@ -121,7 +118,7 @@ function OrbitControls()
 	 * @property vector
 	 * @type {Vector2}
 	 */	
-	this.vector = new Vector2(Math.PI / 2, 0);
+	this.vector = new THREE.Vector2(Math.PI / 2, 0);
 
 	/**
 	 * Enables smooth orbit movement.
@@ -163,15 +160,15 @@ function OrbitControls()
 	this.keyboard = null;
 
 	this.speedDistance = 0;
-	this.speedCenter = new Vector3(0, 0, 0);
-	this.speedOrientation = new Vector2(0, 0);
-	this.tempVector = new Vector3();
+	this.speedCenter = new THREE.Vector3(0, 0, 0);
+	this.speedOrientation = new THREE.Vector2(0, 0);
+	this.tempVector = new THREE.Vector3();
 }
 
-OrbitControls.UP = new Vector3(0, 1, 0);
-OrbitControls.ZERO = new Vector3(0, 0, 0);
+OrbitControls.UP = new THREE.Vector3(0, 1, 0);
+OrbitControls.ZERO = new THREE.Vector3(0, 0, 0);
 
-OrbitControls.prototype = Object.create(Group.prototype);
+OrbitControls.prototype = Object.create(THREE.Group.prototype);
 
 OrbitControls.prototype.initialize = function()
 {
@@ -190,7 +187,7 @@ OrbitControls.prototype.initialize = function()
 	this.center.copy(this.position);
 	this.updateControls();
 
-	Group.prototype.initialize.call(this);
+	THREE.Group.prototype.initialize.call(this);
 };
 
 OrbitControls.prototype.update = function(delta)
@@ -298,7 +295,7 @@ OrbitControls.prototype.update = function(delta)
 		this.updateControls();
 	}
 
-	Object3D.prototype.update.call(this, delta);
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**
@@ -332,14 +329,14 @@ OrbitControls.prototype.updateControls = function()
 	this.position.set(Math.cos(this.vector.x) * cos, this.distance * Math.sin(this.vector.y), Math.sin(this.vector.x) * cos);
 	this.position.add(this.center);
 
-	var matrix = new Matrix4();
+	var matrix = new THREE.Matrix4();
 	matrix.lookAt(this.position, this.center, OrbitControls.UP);
 	this.quaternion.setFromRotationMatrix(matrix);	
 };
 
 OrbitControls.prototype.toJSON = function(meta)
 {
-	var data = Object3D.prototype.toJSON.call(this, meta);
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.distance = this.distance;
 	data.object.maxDistance = this.maxDistance;
@@ -362,4 +359,3 @@ OrbitControls.prototype.toJSON = function(meta)
 
 	return data;
 };
-export {OrbitControls};

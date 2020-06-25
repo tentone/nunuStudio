@@ -1,12 +1,4 @@
-import {AmbientLight} from "../../../../../../../core/objects/lights/AmbientLight.js";
-import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../../history/action/Action.js";
-import {ObjectInspector} from "../../ObjectInspector.js";
-import {Inspector} from "../../../Inspector.js";
-import {Editor} from "../../../../../../Editor.js";
-import {Text} from "../../../../../../components/Text.js";
-import {ColorChooser} from "../../../../../../components/input/ColorChooser.js";
-import {Color} from "three";
+"use strict";
 
 function AmbientLightInspector(parent, object)
 {
@@ -20,7 +12,7 @@ function AmbientLightInspector(parent, object)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "color", new Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.object, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -34,5 +26,3 @@ AmbientLightInspector.prototype.updateInspector = function()
 	
 	this.color.setValue(this.object.color.r, this.object.color.g, this.object.color.b);
 };
-
-export {AmbientLightInspector};

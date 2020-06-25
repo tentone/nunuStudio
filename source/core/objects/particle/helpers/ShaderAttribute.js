@@ -1,8 +1,7 @@
-import {TypedArrayHelper} from "../TypedArrayHelper.js";
-import {BufferAttribute, DynamicDrawUsage, StaticDrawUsage} from "three";
+"use strict";
 
 /**
- * A helper to handle creating and updating a BufferAttribute instance.
+ * A helper to handle creating and updating a THREE.BufferAttribute instance.
  *
  * @constructor
  * @class ShaderAttribute
@@ -83,7 +82,7 @@ ShaderAttribute.prototype.resetUpdateRange = function()
 
 ShaderAttribute.prototype.resetDynamic = function()
 {
-	this.bufferAttribute.usage = this.dynamicBuffer ? DynamicDrawUsage : StaticDrawUsage;
+	this.bufferAttribute.usage = this.dynamicBuffer ? THREE.DynamicDrawUsage : THREE.StaticDrawUsage;
 };
 
 /**
@@ -106,7 +105,7 @@ ShaderAttribute.prototype.forceUpdateAll = function()
 	this.bufferAttribute.array = this.typedArray.array;
 	this.bufferAttribute.updateRange.offset = 0;
 	this.bufferAttribute.updateRange.count = -1;
-	this.bufferAttribute.usage = StaticDrawUsage;
+	this.bufferAttribute.usage = THREE.StaticDrawUsage;
 	this.bufferAttribute.needsUpdate = true;
 };
 
@@ -143,7 +142,7 @@ ShaderAttribute.prototype._ensureTypedArray = function(size)
 
 
 /**
- * Creates a BufferAttribute instance if one doesn't exist already.
+ * Creates a THREE.BufferAttribute instance if one doesn't exist already.
  *
  * Ensures a typed array is present by calling _ensureTypedArray() first.
  *
@@ -166,8 +165,8 @@ ShaderAttribute.prototype._createBufferAttribute = function(size)
 		return;
 	}
 
-	this.bufferAttribute = new BufferAttribute(this.typedArray.array, this.componentSize);
-	this.bufferAttribute.usage = this.dynamicBuffer ? DynamicDrawUsage : StaticDrawUsage;
+	this.bufferAttribute = new THREE.BufferAttribute(this.typedArray.array, this.componentSize);
+	this.bufferAttribute.usage = this.dynamicBuffer ? THREE.DynamicDrawUsage : THREE.StaticDrawUsage;
 };
 
 /**
@@ -185,5 +184,3 @@ ShaderAttribute.prototype.getLength = function()
 
 	return this.typedArray.array.length;
 };
-
-export {ShaderAttribute};

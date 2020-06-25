@@ -1,13 +1,4 @@
-import {EventManager} from "../../../../../core/utils/EventManager.js";
-import {AnimationTrackButton} from "../AnimationTrackButton.js";
-import {AnimationTrack} from "../AnimationTrack.js";
-import {AnimationClipMenuBar} from "../AnimationClipMenuBar.js";
-import {AnimationClipButton} from "../AnimationClipButton.js";
-import {Interface} from "../../../Interface.js";
-import {Editor} from "../../../../Editor.js";
-import {Component} from "../../../../components/Component.js";
-import {Button} from "../../../../components/buttons/Button.js";
-
+"use strict";
 
 /**
  * Animation clip track contains all the elements of an animation track.
@@ -134,4 +125,3 @@ function AnimationClipTrack(editor, animation)
 		button.updateInterface();
 	}
 }
-export {AnimationClipTrack};

@@ -1,5 +1,4 @@
-import {Editor} from "../../Editor.js";
-import {Component} from "../Component.js";
+"use strict";
 
 /**
  * DOM canvas element.
@@ -38,4 +37,3 @@ Canvas.prototype.updateSize = function()
 	this.element.width = this.size.x * pixelRatio;
 	this.element.height = this.size.y * pixelRatio;
 };
-export {Canvas};

@@ -1,61 +1,4 @@
-import {EventManager} from "../../../../../core/utils/EventManager.js";
-import {VideoTexture} from "../../../../../core/texture/VideoTexture.js";
-import {CubeTexture} from "../../../../../core/texture/CubeTexture.js";
-import {Video} from "../../../../../core/resources/Video.js";
-import {Resource} from "../../../../../core/resources/Resource.js";
-import {Model} from "../../../../../core/resources/Model.js";
-import {Image} from "../../../../../core/resources/Image.js";
-import {Font} from "../../../../../core/resources/Font.js";
-import {Audio} from "../../../../../core/resources/Audio.js";
-import {SpineAnimation} from "../../../../../core/objects/spine/SpineAnimation.js";
-import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
-import {LensFlare} from "../../../../../core/objects/misc/LensFlare.js";
-import {Container} from "../../../../../core/objects/misc/Container.js";
-import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
-import {Viewport} from "../../../../../core/objects/cameras/Viewport.js";
-import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
-import {OrthographicCamera} from "../../../../../core/objects/cameras/OrthographicCamera.js";
-import {CubeCamera} from "../../../../../core/objects/cameras/CubeCamera.js";
-import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
-import {Nunu} from "../../../../../core/Nunu.js";
-import {Mouse} from "../../../../../core/input/Mouse.js";
-import {Keyboard} from "../../../../../core/input/Keyboard.js";
-import {Key} from "../../../../../core/input/Key.js";
-import {FileSystem} from "../../../../../core/FileSystem.js";
-import {Settings} from "../../../../Settings.js";
-import {Loaders} from "../../../../Loaders.js";
-import {AddResourceAction} from "../../../../history/action/resources/AddResourceAction.js";
-import {SwapAction} from "../../../../history/action/objects/SwapAction.js";
-import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {ActionBundle} from "../../../../history/action/ActionBundle.js";
-import {Action} from "../../../../history/action/Action.js";
-import {OrientationCube} from "../utils/OrientationCube.js";
-import {TransformControls} from "../transform/TransformControls.js";
-import {ToolBar} from "../toolbar/ToolBar.js";
-import {SideBar} from "../sidebar/SideBar.js";
-import {WireframeHelper} from "../helpers/WireframeHelper.js";
-import {SkeletonHelper} from "../helpers/SkeletonHelper.js";
-import {RectAreaLightHelper} from "../helpers/RectAreaLightHelper.js";
-import {PointsHelper} from "../helpers/PointsHelper.js";
-import {PhysicsObjectHelper} from "../helpers/PhysicsObjectHelper.js";
-import {ObjectIconHelper} from "../helpers/ObjectIconHelper.js";
-import {LineHelper} from "../helpers/LineHelper.js";
-import {LightProbeHelper} from "../helpers/LightProbeHelper.js";
-import {GridHelper} from "../helpers/GridHelper.js";
-import {EditorPlanarControls} from "../controls/EditorPlanarControls.js";
-import {EditorOrbitControls} from "../controls/EditorOrbitControls.js";
-import {EditorFreeControls} from "../controls/EditorFreeControls.js";
-import {Interface} from "../../../Interface.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
-import {TabComponent} from "../../../../components/tabs/TabComponent.js";
-import {RendererCanvas} from "../../../../components/RendererCanvas.js";
-import {DropdownList} from "../../../../components/input/DropdownList.js";
-import {Component} from "../../../../components/Component.js";
-import {Canvas} from "../../../../components/Canvas.js";
-import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
-import {Button} from "../../../../components/buttons/Button.js";
-import {Vector2, Mesh, SkinnedMesh, MeshStandardMaterial, Line, LineBasicMaterial, Points, PointsMaterial, Sprite, SpriteMaterial, Material, ShaderMaterial, Texture, Geometry, BufferGeometry, Raycaster, Object3D, Scene, AxesHelper, Group, Camera, CameraHelper, Light, DirectionalLight, DirectionalLightHelper, LightProbe, PointLight, PointLightHelper, RectAreaLight, SpotLight, SpotLightHelper, HemisphereLight, HemisphereLightHelper, Bone, BoxHelper} from "three";
+"use strict";
 
 /** 
  * The scene editor is the core of the nunuStudio editor.
@@ -96,8 +39,8 @@ function SceneEditor(parent, closeable, container, index)
 			var canvas = this;
 			var rect = canvas.getBoundingClientRect();
 
-			var position = new Vector2(event.clientX - rect.left, event.clientY - rect.top);
-			var normalized = new Vector2(position.x / self.canvas.size.x * 2.0 - 1.0, -2.0 * position.y / self.canvas.size.y + 1.0);
+			var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
+			var normalized = new THREE.Vector2(position.x / self.canvas.size.x * 2.0 - 1.0, -2.0 * position.y / self.canvas.size.y + 1.0);
 			self.raycaster.setFromCamera(normalized, self.camera);
 
 			var intersections = self.raycaster.intersectObjects(self.scene.children, true);
@@ -121,24 +64,24 @@ function SceneEditor(parent, closeable, container, index)
 			function attachTexture(texture, object)
 			{
 				var material = null;
-				if(object instanceof Mesh || object instanceof SkinnedMesh)
+				if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 				{
-					material = new MeshStandardMaterial({map:texture, color:0xFFFFFF, roughness: 0.6, metalness: 0.2});
+					material = new THREE.MeshStandardMaterial({map:texture, color:0xFFFFFF, roughness: 0.6, metalness: 0.2});
 					material.name = texture.name;
 				}
-				else if(object instanceof Line)
+				else if(object instanceof THREE.Line)
 				{
-					material = new LineBasicMaterial({color:0xFFFFFF});
+					material = new THREE.LineBasicMaterial({color:0xFFFFFF});
 					material.name = texture.name;
 				}
-				else if(object instanceof Points)
+				else if(object instanceof THREE.Points)
 				{
-					material = new PointsMaterial({map:texture, color:0xFFFFFF});
+					material = new THREE.PointsMaterial({map:texture, color:0xFFFFFF});
 					material.name = texture.name;
 				}
-				else if(object instanceof Sprite)
+				else if(object instanceof THREE.Sprite)
 				{
-					material = new SpriteMaterial({map:texture, color:0xFFFFFF});
+					material = new THREE.SpriteMaterial({map:texture, color:0xFFFFFF});
 					material.name = texture.name;
 				}
 
@@ -209,46 +152,46 @@ function SceneEditor(parent, closeable, container, index)
 					var object = intersections[0].object;
 
 					// Material
-					if(draggedObject instanceof Material)
+					if(draggedObject instanceof THREE.Material)
 					{
 						// Sprite material
-						if(draggedObject instanceof SpriteMaterial)
+						if(draggedObject instanceof THREE.SpriteMaterial)
 						{
-							if(object instanceof Sprite)
+							if(object instanceof THREE.Sprite)
 							{
 								Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							}
 						}
 						// Points material
-						else if(draggedObject instanceof PointsMaterial)
+						else if(draggedObject instanceof THREE.PointsMaterial)
 						{
-							if(object instanceof Points)
+							if(object instanceof THREE.Points)
 							{
 								Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							}
 							else if(object.geometry !== undefined)
 							{
-								var newObject = new Points(object.geometry, draggedObject);
+								var newObject = new THREE.Points(object.geometry, draggedObject);
 								copyDetails(newObject, object);
 								Editor.addAction(new SwapAction(object, newObject, true));
 							}
 						}
 						// Line material
-						else if(draggedObject instanceof LineBasicMaterial)
+						else if(draggedObject instanceof THREE.LineBasicMaterial)
 						{
-							if(object instanceof Line)
+							if(object instanceof THREE.Line)
 							{
 								Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							}
 							else if(object.geometry !== undefined)
 							{
-								var newObject = new Line(object.geometry, draggedObject);
+								var newObject = new THREE.Line(object.geometry, draggedObject);
 								copyDetails(newObject, object);
 								Editor.addAction(new SwapAction(object, newObject, true));
 							}
 						}
 						// Shader material
-						else if(draggedObject instanceof ShaderMaterial)
+						else if(draggedObject instanceof THREE.ShaderMaterial)
 						{
 							if(object.material !== undefined)
 							{
@@ -258,13 +201,13 @@ function SceneEditor(parent, closeable, container, index)
 						// Mesh material
 						else
 						{
-							if(object instanceof Mesh)
+							if(object instanceof THREE.Mesh)
 							{
 								Editor.addAction(new ChangeAction(object, "material", draggedObject));
 							}
 							else if(object.geometry !== undefined)
 							{
-								var newObject = new Mesh(object.geometry, draggedObject);
+								var newObject = new THREE.Mesh(object.geometry, draggedObject);
 								copyDetails(newObject, object);
 								Editor.addAction(new SwapAction(object, newObject, true));
 							}
@@ -273,14 +216,14 @@ function SceneEditor(parent, closeable, container, index)
 					// Cubemap
 					else if(draggedObject.isCubeTexture === true)
 					{
-						if(object.material instanceof Material)
+						if(object.material instanceof THREE.Material)
 						{
 							Editor.addAction(new ChangeAction(object.material, "envMap", draggedObject));
 							self.canvas.reloadContext();
 						}
 					}
 					// Texture
-					else if(draggedObject instanceof Texture)
+					else if(draggedObject instanceof THREE.Texture)
 					{
 						attachTexture(draggedObject, object);
 					}
@@ -304,9 +247,9 @@ function SceneEditor(parent, closeable, container, index)
 						}
 					}
 					// Geometry
-					else if(draggedObject instanceof Geometry || draggedObject instanceof BufferGeometry)
+					else if(draggedObject instanceof THREE.Geometry || draggedObject instanceof THREE.BufferGeometry)
 					{
-						if(object instanceof Mesh || object instanceof Points || object instanceof Line)
+						if(object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line)
 						{
 							Editor.addAction(new ChangeAction(object, "geometry", draggedObject));
 						}
@@ -346,17 +289,17 @@ function SceneEditor(parent, closeable, container, index)
 	 * Raycaster object used for object picking.
 	 *
 	 * @attribute raycaster
-	 * @type {Raycaster}
+	 * @type {THREE.Raycaster}
 	 */
-	this.raycaster = new Raycaster();
+	this.raycaster = new THREE.Raycaster();
 
 	/**
 	 * Normalized mouse coordinates for raycasting.
 	 *
 	 * @attribute normalized
-	 * @type {Vector2}
+	 * @type {THREE.Vector2}
 	 */
-	this.normalized = new Vector2();
+	this.normalized = new THREE.Vector2();
 
 	/**
 	 * Scene being edited in this tab.
@@ -364,7 +307,7 @@ function SceneEditor(parent, closeable, container, index)
 	 * Can also be a regular 3D object.
 	 *
 	 * @attribute scene
-	 * @type {Object3D}
+	 * @type {THREE.Object3D}
 	 */
 	this.scene = null;
 
@@ -390,9 +333,9 @@ function SceneEditor(parent, closeable, container, index)
 	 * Helper scene stored the object and editor preview objects.
 	 *
 	 * @attribute helperScene
-	 * @type {Scene}
+	 * @type {THREE.Scene}
 	 */
-	this.helperScene = new Scene();
+	this.helperScene = new THREE.Scene();
 	this.helperScene.matrixAutoUpdate = false;
 
 	/**
@@ -409,9 +352,9 @@ function SceneEditor(parent, closeable, container, index)
 	 * Axes helper configured to match editor settings.
 	 *
 	 * @attribute axisHelper
-	 * @type {AxesHelper}
+	 * @type {THREE.AxesHelper}
 	 */
-	this.axisHelper = new AxesHelper(Editor.settings.editor.gridSize);
+	this.axisHelper = new THREE.AxesHelper(Editor.settings.editor.gridSize);
 	this.axisHelper.material.depthWrite = false;
 	this.axisHelper.material.transparent = true;
 	this.axisHelper.material.opacity = 1.0;
@@ -422,9 +365,9 @@ function SceneEditor(parent, closeable, container, index)
 	 * Object helper container.
 	 *
 	 * @attribute objectHelper
-	 * @type {Group}
+	 * @type {THREE.Group}
 	 */
-	this.objectHelper = new Group();
+	this.objectHelper = new THREE.Group();
 	this.objectHelper.matrixAutoUpdate = true;
 	this.helperScene.add(this.objectHelper);
 
@@ -432,9 +375,9 @@ function SceneEditor(parent, closeable, container, index)
 	 * Group where the object manipulation tools are drawn
 	 *
 	 * @attribute toolScene
-	 * @type {Scene}
+	 * @type {THREE.Scene}
 	 */
-	this.toolScene = new Scene();
+	this.toolScene = new THREE.Scene();
 	this.toolScene.matrixAutoUpdate = false;
 
 	/**
@@ -463,7 +406,7 @@ function SceneEditor(parent, closeable, container, index)
 	 * Can be a an OrthographicCamera or PerspectiveCamera dependeing on the cameraMode value.
 	 *
 	 * @attribute camera
-	 * @type {Camera}
+	 * @type {THREE.Camera}
 	 */
 	this.camera = null;
 	
@@ -473,7 +416,7 @@ function SceneEditor(parent, closeable, container, index)
 	 * Can be EditorFreeControls, EditorOrbitControls or EditorPlanarControls.
 	 *
 	 * @attribute controls
-	 * @type {Group}
+	 * @type {THREE.Group}
 	 */
 	this.controls = null;
 	this.controlsMode = -1;
@@ -834,7 +777,7 @@ SceneEditor.prototype.attach = function(scene)
  * Check if a scene or object is attached to the editor.
  *
  * @method isAttached
- * @param {Object3D} scene
+ * @param {THREE.Object3D} scene
  */
 SceneEditor.prototype.isAttached = function(scene)
 {
@@ -1005,8 +948,8 @@ SceneEditor.prototype.render = function()
 		var viewport = new Viewport();
 		viewport.width = width;
 		viewport.height = height;
-		viewport.offset = new Vector2(10, 10);
-		viewport.size = new Vector2(Editor.settings.editor.cameraPreviewSize * previewRatio, Editor.settings.editor.cameraPreviewSize);
+		viewport.offset = new THREE.Vector2(10, 10);
+		viewport.size = new THREE.Vector2(Editor.settings.editor.cameraPreviewSize * previewRatio, Editor.settings.editor.cameraPreviewSize);
 		viewport.anchor = Editor.settings.editor.cameraPreviewPosition;
 		viewport.mode = Viewport.ABSOLUTE;
 		viewport.update();
@@ -1039,7 +982,7 @@ SceneEditor.prototype.render = function()
 			}
 
 			// Change viewport to 4:3 ratio
-			viewport.size = new Vector2(Editor.settings.editor.cameraPreviewSize * (4.0 / 3.0), Editor.settings.editor.cameraPreviewSize);;
+			viewport.size = new THREE.Vector2(Editor.settings.editor.cameraPreviewSize * (4.0 / 3.0), Editor.settings.editor.cameraPreviewSize);;
 			viewport.update();
 
 			var size = viewport.viewport.w / 3;
@@ -1236,43 +1179,43 @@ SceneEditor.prototype.updateSelection = function()
 		var object = selectedObjects[i];
 
 		// Camera
-		if(object instanceof Camera)
+		if(object instanceof THREE.Camera)
 		{
-			this.objectHelper.add(new CameraHelper(object));
+			this.objectHelper.add(new THREE.CameraHelper(object));
 			this.objectHelper.add(new ObjectIconHelper(object, Global.FILE_PATH + "icons/camera/camera.png"));
 		}
 		// Light
-		else if(object instanceof Light)
+		else if(object instanceof THREE.Light)
 		{
 			// Directional light
-			if(object instanceof DirectionalLight)
+			if(object instanceof THREE.DirectionalLight)
 			{
-				this.objectHelper.add(new DirectionalLightHelper(object, 1));
+				this.objectHelper.add(new THREE.DirectionalLightHelper(object, 1));
 			}
 			// Light probe
-			else if(object instanceof LightProbe)
+			else if(object instanceof THREE.LightProbe)
 			{
 				this.objectHelper.add(new LightProbeHelper(object, 2));
 			}
 			// Point light
-			else if(object instanceof PointLight)
+			else if(object instanceof THREE.PointLight)
 			{
-				this.objectHelper.add(new PointLightHelper(object, 1));
+				this.objectHelper.add(new THREE.PointLightHelper(object, 1));
 			}
 			// RectArea light
-			else if(object instanceof RectAreaLight)
+			else if(object instanceof THREE.RectAreaLight)
 			{
 				this.objectHelper.add(new RectAreaLightHelper(object));
 			}
 			// Spot light
-			else if(object instanceof SpotLight)
+			else if(object instanceof THREE.SpotLight)
 			{
-				this.objectHelper.add(new SpotLightHelper(object));
+				this.objectHelper.add(new THREE.SpotLightHelper(object));
 			}
 			// Hemisphere light
-			else if(object instanceof HemisphereLight)
+			else if(object instanceof THREE.HemisphereLight)
 			{
-				this.objectHelper.add(new HemisphereLightHelper(object, 1));
+				this.objectHelper.add(new THREE.HemisphereLightHelper(object, 1));
 			}
 			// Ambient light
 			else
@@ -1291,29 +1234,29 @@ SceneEditor.prototype.updateSelection = function()
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		// Skinned Mesh
-		else if(object instanceof SkinnedMesh)
+		else if(object instanceof THREE.SkinnedMesh)
 		{
 			this.objectHelper.add(new SkeletonHelper(object.parent));
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
 		// Bone
-		else if(object instanceof Bone)
+		else if(object instanceof THREE.Bone)
 		{
 			this.objectHelper.add(new SkeletonHelper(object.parent));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		// Mesh
-		else if(object instanceof Mesh)
+		else if(object instanceof THREE.Mesh)
 		{
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
 		// Line
-		else if(object instanceof Line)
+		else if(object instanceof THREE.Line)
 		{
 			this.objectHelper.add(new LineHelper(object, 0xFFFF00));
 		}
 		// Points
-		else if(object instanceof Points)
+		else if(object instanceof THREE.Points)
 		{
 			this.objectHelper.add(new PointsHelper(object, 0xFFFF00));
 		}
@@ -1325,7 +1268,7 @@ SceneEditor.prototype.updateSelection = function()
 		// Container
 		else if(object instanceof Container)
 		{
-			this.objectHelper.add(new BoxHelper(object, 0xFFFF00));
+			this.objectHelper.add(new THREE.BoxHelper(object, 0xFFFF00));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		// Object 3D
@@ -1365,5 +1308,3 @@ SceneEditor.prototype.updateSize = function()
 		this.camera.updateProjectionMatrix();
 	}
 };
-
-export {SceneEditor};

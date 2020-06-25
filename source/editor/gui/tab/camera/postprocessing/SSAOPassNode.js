@@ -1,12 +1,4 @@
-import {Pass} from "../../../../../../core/postprocessing/Pass.js";
-import {SSAOPass} from "../../../../../../core/postprocessing/pass/SSAOPass.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {PassNode} from "../PassNode.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {NumberBox} from "../../../../../components/input/NumberBox.js";
-import {CheckBox} from "../../../../../components/input/CheckBox.js";
+"use strict";
 
 function SSAOPassNode(parent)
 {
@@ -68,4 +60,3 @@ SSAOPassNode.prototype.setPass = function(pass)
 	this.aoClamp.setValue(pass.aoClamp);
 	this.lumInfluence.setValue(pass.lumInfluence);
 };
-export {SSAOPassNode};

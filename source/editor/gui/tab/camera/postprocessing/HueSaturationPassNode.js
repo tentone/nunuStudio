@@ -1,11 +1,4 @@
-import {Pass} from "../../../../../../core/postprocessing/Pass.js";
-import {HueSaturationPass} from "../../../../../../core/postprocessing/pass/HueSaturationPass.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {PassNode} from "../PassNode.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {Slider} from "../../../../../components/input/Slider.js";
+"use strict";
 
 function HueSaturationPassNode(parent)
 {
@@ -49,4 +42,3 @@ HueSaturationPassNode.prototype.setPass = function(pass)
 	this.hue.setValue(this.pass.hue);
 	this.saturation.setValue(this.pass.saturation);
 };
-export {HueSaturationPassNode};

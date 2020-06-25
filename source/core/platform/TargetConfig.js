@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * Target configuration stores platform specific configurations used when exporting the application to a platform.
@@ -19,4 +20,3 @@ function TargetConfig()
 		resizable: true
 	};
 }
-export {TargetConfig};

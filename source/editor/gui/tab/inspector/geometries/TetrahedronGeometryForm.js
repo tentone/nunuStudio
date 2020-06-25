@@ -1,13 +1,4 @@
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {GeometryForm} from "../GeometryForm.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {Slider} from "../../../../../components/input/Slider.js";
-import {NumberBox} from "../../../../../components/input/NumberBox.js";
-import {CheckBox} from "../../../../../components/input/CheckBox.js";
-import {Form} from "../../../../../components/Form.js";
-import {TetrahedronBufferGeometry, TetrahedronGeometry, BufferGeometry} from "three";
+"use strict";
 
 function TetrahedronGeometryForm(form, object)
 {
@@ -56,7 +47,7 @@ function TetrahedronGeometryForm(form, object)
 TetrahedronGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? TetrahedronBufferGeometry : TetrahedronGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? THREE.TetrahedronBufferGeometry : THREE.TetrahedronGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.detail.getValue())));
 };
 
@@ -64,6 +55,5 @@ TetrahedronGeometryForm.prototype.updateValues = function()
 {
 	this.radius.setValue(this.object.geometry.parameters.radius || 2);
 	this.detail.setValue(this.object.geometry.parameters.detail || 0);
-	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
+	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
 };
-export {TetrahedronGeometryForm};

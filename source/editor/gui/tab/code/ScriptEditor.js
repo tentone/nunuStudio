@@ -1,9 +1,4 @@
-import {Script} from "../../../../../core/objects/script/Script.js";
-import {Key} from "../../../../../core/input/Key.js";
-import {Settings} from "../../../../Settings.js";
-import {CodeEditor} from "../CodeEditor.js";
-import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
+"use strict";
 
 /**
  * The script editor is used to view and edit code of script objects.
@@ -150,5 +145,3 @@ ScriptEditor.prototype.updateCode = function()
 		this.script.code = this.code.getValue();
 	}
 };
-
-export {ScriptEditor};

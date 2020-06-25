@@ -1,19 +1,4 @@
-import {WebcamTexture} from "../../texture/WebcamTexture.js";
-import {VideoTexture} from "../../texture/VideoTexture.js";
-import {Texture} from "../../texture/Texture.js";
-import {SpriteSheetTexture} from "../../texture/SpriteSheetTexture.js";
-import {DataTexture} from "../../texture/DataTexture.js";
-import {CubeTexture} from "../../texture/CubeTexture.js";
-import {CompressedTexture} from "../../texture/CompressedTexture.js";
-import {CanvasTexture} from "../../texture/CanvasTexture.js";
-import {Video} from "../../resources/Video.js";
-import {Image} from "../../resources/Image.js";
-import {Font} from "../../resources/Font.js";
-import {Sprite} from "../../objects/sprite/Sprite.js";
-import {Loaders} from "../../../editor/Loaders.js";
-import {Text} from "../../../editor/components/Text.js";
-import {Canvas} from "../../../editor/components/Canvas.js";
-import {DefaultLoadingManager, TextureLoader, FileLoader} from "three";
+"use strict";
 
 /**
  * TextureLoader can be used to load external textures.
@@ -24,7 +9,7 @@ import {DefaultLoadingManager, TextureLoader, FileLoader} from "three";
  */
 function TextureLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 	
 	this.path = "";
 	this.crossOrigin = "anonymous";
@@ -34,8 +19,8 @@ function TextureLoader(manager)
 	this.fonts = [];
 }
 
-THREE._TextureLoader = TextureLoader;
-TextureLoader = TextureLoader;
+THREE._TextureLoader = THREE.TextureLoader;
+THREE.TextureLoader = TextureLoader;
 
 /**
  * Set cross origin path for the loader.
@@ -148,7 +133,7 @@ TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
 	
-	var loader = new FileLoader(this.manager);
+	var loader = new THREE.FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		self.parse(JSON.parse(text), onLoad);
@@ -326,5 +311,3 @@ TextureLoader.prototype.parse = function(json, onLoad)
 
 	return texture;
 };
-
-export {TextureLoader};

@@ -1,6 +1,4 @@
-import {PhysicsObject} from "../../../../../../core/objects/physics/PhysicsObject.js";
-import {Vec3, Sphere, Box, Plane, ConvexPolyhedron, Trimesh, Heightfield, Shape} from "cannon";
-import {Object3D, MeshBasicMaterial, SphereBufferGeometry, BoxBufferGeometry, PlaneBufferGeometry, CylinderBufferGeometry, SphereGeometry, BoxGeometry, PlaneGeometry, Mesh, Geometry, Vector3, Face3} from "three";
+"use strict";
 
 /**
  * Helper to preview physics objects on the editor.
@@ -11,7 +9,7 @@ import {Object3D, MeshBasicMaterial, SphereBufferGeometry, BoxBufferGeometry, Pl
  */
 function PhysicsObjectHelper(object, color)
 {
-	Object3D.call(this);
+	THREE.Object3D.call(this);
 
 	/**
 	 * Object attached to the helper.
@@ -30,7 +28,7 @@ function PhysicsObjectHelper(object, color)
 	this.meshes = [];
 	this.matrixAutoUpdate = false;
 
-	this.material = new MeshBasicMaterial(
+	this.material = new THREE.MeshBasicMaterial(
 	{
 		color: (color !== undefined) ? color : 0x00FF00,
 		wireframe: false,
@@ -39,12 +37,12 @@ function PhysicsObjectHelper(object, color)
 	});
 }
 
-PhysicsObjectHelper.SPHERE = new SphereBufferGeometry(1, 32, 32);
-PhysicsObjectHelper.BOX = new BoxBufferGeometry(1, 1, 1);
-PhysicsObjectHelper.PLANE = new PlaneBufferGeometry(100, 100);
-PhysicsObjectHelper.CYLINDER = new CylinderBufferGeometry(1, 1, 10, 32);
+PhysicsObjectHelper.SPHERE = new THREE.SphereBufferGeometry(1, 32, 32);
+PhysicsObjectHelper.BOX = new THREE.BoxBufferGeometry(1, 1, 1);
+PhysicsObjectHelper.PLANE = new THREE.PlaneBufferGeometry(100, 100);
+PhysicsObjectHelper.CYLINDER = new THREE.CylinderBufferGeometry(1, 1, 10, 32);
 
-PhysicsObjectHelper.prototype = Object.create(Object3D.prototype);
+PhysicsObjectHelper.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
  * Update the helper from the physics body.
@@ -68,8 +66,8 @@ PhysicsObjectHelper.prototype.update = function()
 		var mesh = this.meshes[index];
 		if(mesh !== undefined)
 		{
-			var tmpVec = new Vec3();
-			var tmpQuat = new Vec3();
+			var tmpVec = new CANNON.Vec3();
+			var tmpQuat = new CANNON.Vec3();
 
 			// Get world position
 			body.quaternion.vmult(body.shapeOffsets[j], tmpVec);
@@ -128,17 +126,17 @@ PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 
 	var geometry = mesh.geometry;
 
-	return (geometry instanceof SphereGeometry && shape instanceof Sphere) ||
-	(geometry instanceof BoxGeometry && shape instanceof Box) ||
-	(geometry instanceof PlaneGeometry && shape instanceof Plane) ||
-	(geometry.id === shape.geometryId && (shape instanceof ConvexPolyhedron || shape instanceof Trimesh) || shape instanceof Heightfield);
+	return (geometry instanceof THREE.SphereGeometry && shape instanceof CANNON.Sphere) ||
+	(geometry instanceof THREE.BoxGeometry && shape instanceof CANNON.Box) ||
+	(geometry instanceof THREE.PlaneGeometry && shape instanceof CANNON.Plane) ||
+	(geometry.id === shape.geometryId && (shape instanceof CANNON.ConvexPolyhedron || shape instanceof CANNON.Trimesh) || shape instanceof CANNON.Heightfield);
 };
 
 /**
  * Create a mesh to represent a CANNON physics shape and attach it to this helper object.
  *
  * @method createMesh
- * @return {Mesh} Mesh created to represent the shape.
+ * @return {THREE.Mesh} Mesh created to represent the shape.
  */
 PhysicsObjectHelper.prototype.createMesh = function(shape)
 {
@@ -147,32 +145,32 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 
 	switch(shape.type)
 	{
-		case Shape.types.SPHERE:
-			mesh = new Mesh(PhysicsObjectHelper.SPHERE, material);
+		case CANNON.Shape.types.SPHERE:
+			mesh = new THREE.Mesh(PhysicsObjectHelper.SPHERE, material);
 			break;
 
-		case Shape.types.PARTICLE:
-			mesh = new Mesh(PhysicsObjectHelper.SPHERE, material);
+		case CANNON.Shape.types.PARTICLE:
+			mesh = new THREE.Mesh(PhysicsObjectHelper.SPHERE, material);
 			break;
 
-		case Shape.types.BOX:
-			mesh = new Mesh(PhysicsObjectHelper.BOX, material);
+		case CANNON.Shape.types.BOX:
+			mesh = new THREE.Mesh(PhysicsObjectHelper.BOX, material);
 			break;
 
-		case Shape.types.PLANE:
-			mesh = new Mesh(PhysicsObjectHelper.PLANE, material);
+		case CANNON.Shape.types.PLANE:
+			mesh = new THREE.Mesh(PhysicsObjectHelper.PLANE, material);
 			mesh.scale.set(1000, 1000, 1);
 			break;
 
-		case Shape.types.CONVEXPOLYHEDRON:
+		case CANNON.Shape.types.CONVEXPOLYHEDRON:
 			// Create mesh
-			var geo = new Geometry();
+			var geo = new THREE.Geometry();
 
 			// Add vertices
 			for(var i = 0; i < shape.vertices.length; i++)
 			{
 				var v = shape.vertices[i];
-				geo.vertices.push(new Vector3(v.x, v.y, v.z));
+				geo.vertices.push(new THREE.Vector3(v.x, v.y, v.z));
 			}
 
 			// Add faces
@@ -186,38 +184,38 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 				{
 					var b = face[j];
 					var c = face[j + 1];
-					geo.faces.push(new Face3(a, b, c));
+					geo.faces.push(new THREE.Face3(a, b, c));
 				}
 			}
 			geo.computeBoundingSphere();
 			geo.computeFaceNormals();
-			mesh = new Mesh(geo, material);
+			mesh = new THREE.Mesh(geo, material);
 			shape.geometryId = geo.id;
 			break;
 
-		case Shape.types.TRIMESH:
-			var geometry = new Geometry();
-			var v0 = new Vec3();
-			var v1 = new Vec3();
-			var v2 = new Vec3();
+		case CANNON.Shape.types.TRIMESH:
+			var geometry = new THREE.Geometry();
+			var v0 = new CANNON.Vec3();
+			var v1 = new CANNON.Vec3();
+			var v2 = new CANNON.Vec3();
 			for(var i = 0; i < shape.indices.length / 3; i++)
 			{
 				shape.getTriangleVertices(i, v0, v1, v2);
-				geometry.vertices.push(new Vector3(v0.x, v0.y, v0.z), new Vector3(v1.x, v1.y, v1.z), new Vector3(v2.x, v2.y, v2.z));
+				geometry.vertices.push(new THREE.Vector3(v0.x, v0.y, v0.z), new THREE.Vector3(v1.x, v1.y, v1.z), new THREE.Vector3(v2.x, v2.y, v2.z));
 				var j = geometry.vertices.length - 3;
-				geometry.faces.push(new Face3(j, j+1, j+2));
+				geometry.faces.push(new THREE.Face3(j, j+1, j+2));
 			}
 			geometry.computeBoundingSphere();
 			geometry.computeFaceNormals();
-			mesh = new Mesh(geometry, material);
+			mesh = new THREE.Mesh(geometry, material);
 			shape.geometryId = geometry.id;
 			break;
 
-		case Shape.types.HEIGHTFIELD:
-			var geometry = new Geometry();
-			var v0 = new Vec3();
-			var v1 = new Vec3();
-			var v2 = new Vec3();
+		case CANNON.Shape.types.HEIGHTFIELD:
+			var geometry = new THREE.Geometry();
+			var v0 = new CANNON.Vec3();
+			var v1 = new CANNON.Vec3();
+			var v2 = new CANNON.Vec3();
 
 			for(var xi = 0; xi < shape.data.length - 1; xi++)
 			{
@@ -232,16 +230,16 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 						v0.vadd(shape.pillarOffset, v0);
 						v1.vadd(shape.pillarOffset, v1);
 						v2.vadd(shape.pillarOffset, v2);
-						geometry.vertices.push(new Vector3(v0.x, v0.y, v0.z), new Vector3(v1.x, v1.y, v1.z), new Vector3(v2.x, v2.y, v2.z));
+						geometry.vertices.push(new THREE.Vector3(v0.x, v0.y, v0.z), new THREE.Vector3(v1.x, v1.y, v1.z), new THREE.Vector3(v2.x, v2.y, v2.z));
 						var i = geometry.vertices.length - 3;
-						geometry.faces.push(new Face3(i, i + 1, i + 2));
+						geometry.faces.push(new THREE.Face3(i, i + 1, i + 2));
 					}
 				}
 			}
 
 			geometry.computeBoundingSphere();
 			geometry.computeFaceNormals();
-			mesh = new Mesh(geometry, material);
+			mesh = new THREE.Mesh(geometry, material);
 			shape.geometryId = geometry.id;
 			break;
 	}
@@ -258,39 +256,37 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
  * Set to correct scale of the helper mesh based on the shape type and size configuration.
  *
  * @method scaleMesh
- * @param {Mesh} mesh Mesh to be changed.
- * @param {Shape} shape Shape to analyse and extract scale from.
+ * @param {THREE.Mesh} mesh Mesh to be changed.
+ * @param {CANNON.Shape} shape Shape to analyse and extract scale from.
  */
 PhysicsObjectHelper.prototype.scaleMesh = function(mesh, shape)
 {
 	var type = shape.type;
 
-	if(type === Shape.types.SPHERE)
+	if(type === CANNON.Shape.types.SPHERE)
 	{
 		var radius = shape.radius;
 		mesh.scale.set(radius, radius, radius);
 	}
-	else if(type === Shape.types.PARTICLE)
+	else if(type === CANNON.Shape.types.PARTICLE)
 	{
 		mesh.scale.set(0.1, 0.1, 0.1);
 	}
-	else if(type === Shape.types.BOX)
+	else if(type === CANNON.Shape.types.BOX)
 	{
 		mesh.scale.copy(shape.halfExtents);
 		mesh.scale.multiplyScalar(2);
 	}
-	else if(type === Shape.types.CONVEXPOLYHEDRON)
+	else if(type === CANNON.Shape.types.CONVEXPOLYHEDRON)
 	{
 		mesh.scale.set(1, 1, 1);
 	}
-	else if(type === Shape.types.TRIMESH)
+	else if(type === CANNON.Shape.types.TRIMESH)
 	{
 		mesh.scale.copy(shape.scale);
 	}
-	else if(type === Shape.types.HEIGHTFIELD)
+	else if(type === CANNON.Shape.types.HEIGHTFIELD)
 	{
 		mesh.scale.set(1, 1, 1);
 	}
 };
-
-export {PhysicsObjectHelper};

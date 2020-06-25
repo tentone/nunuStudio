@@ -1,4 +1,4 @@
-import {Quaternion} from "three";
+"use strict";
 
 /**
  * The intepolator is used to interpolate values between ranges for a period of time.
@@ -110,7 +110,7 @@ TweenAnimation.isVetorial = function(object)
 		return false;
 	}
 	
-	return object.isVector3 === true || object.isEuler === true || (object instanceof Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
+	return object.isVector3 === true || object.isEuler === true || (object instanceof THREE.Quaternion) || object.isVector2 === true || object.isVector4 === true || object.isMatrix3 === true || object.isMatrix4 === true;
 };
 
 
@@ -134,4 +134,3 @@ TweenAnimation.prototype.start = function()
 {
 	this.tween.start();
 };
-export {TweenAnimation};

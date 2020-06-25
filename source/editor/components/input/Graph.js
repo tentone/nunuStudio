@@ -1,7 +1,4 @@
-import {EventManager} from "../../../../core/utils/EventManager.js";
-import {DOMUtils} from "../../../utils/DOMUtils.js";
-import {Text} from "../../Text.js";
-import {Component} from "../../Component.js";
+"use strict";
 
 /**
  * Graph element is used to draw interactive line graphs.
@@ -502,5 +499,3 @@ Graph.prototype.updateSize = function()
 		this.scale[i].style.top = (i * step) + "px";
 	}
 };
-
-export {Graph};

@@ -1,12 +1,11 @@
-import {LightProbe} from "../../../../../../core/objects/lights/LightProbe.js";
-import {ShaderMaterial, SphereBufferGeometry, Mesh} from "three";
+"use strict";
 
 function LightProbeHelper(lightProbe, size)
 {
 	this.lightProbe = lightProbe;
 	this.size = size;
 
-	var material = new ShaderMaterial({
+	var material = new THREE.ShaderMaterial({
 
 		type: 'LightProbeHelperMaterial',
 
@@ -69,15 +68,15 @@ function LightProbeHelper(lightProbe, size)
 		].join('\n')
 	});
 
-	var geometry = new SphereBufferGeometry(1, 32, 16);
+	var geometry = new THREE.SphereBufferGeometry(1, 32, 16);
 
-	Mesh.call(this, geometry, material);
+	THREE.Mesh.call(this, geometry, material);
 
 	this.onBeforeRender();
 
 }
 
-LightProbeHelper.prototype = Object.create(Mesh.prototype);
+LightProbeHelper.prototype = Object.create(THREE.Mesh.prototype);
 LightProbeHelper.prototype.constructor = LightProbeHelper;
 
 LightProbeHelper.prototype.dispose = function ()
@@ -92,5 +91,3 @@ LightProbeHelper.prototype.onBeforeRender = function()
 	this.scale.set(1, 1, 1).multiplyScalar(this.size);
 	this.material.uniforms.intensity.value = this.lightProbe.intensity;
 };
-
-export {LightProbeHelper};

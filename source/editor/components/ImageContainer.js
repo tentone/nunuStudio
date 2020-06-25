@@ -1,6 +1,4 @@
-import {Image} from "../../../core/resources/Image.js";
-import {Container} from "../../../core/objects/misc/Container.js";
-import {Component} from "../Component.js";
+"use strict";
 
 /**
  * Container for DOM image element.
@@ -29,5 +27,3 @@ ImageContainer.prototype.setImage = function(source)
 {
 	this.element.src = source;
 };
-
-export {ImageContainer};

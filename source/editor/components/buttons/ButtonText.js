@@ -1,6 +1,4 @@
-import {Text} from "../../Text.js";
-import {Component} from "../../Component.js";
-import {Button} from "../Button.js";
+"use strict";
 
 /**
  * Button with text, inherits all methods available on the Text class.
@@ -32,4 +30,3 @@ ButtonText.prototype.updateSize = function()
 	this.text.size.copy(this.size);
 	this.text.updateSize();
 };
-export {ButtonText};

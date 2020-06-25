@@ -1,8 +1,4 @@
-import {Model} from "../../../resources/Model.js";
-import {Image} from "../../../resources/Image.js";
-import {Mesh} from "../../mesh/Mesh.js";
-import {Group, SphereGeometry, MeshPhongMaterial, Object3D} from "three";
-
+"use strict";
 
 /**
  * Kinect device object.
@@ -19,7 +15,7 @@ import {Group, SphereGeometry, MeshPhongMaterial, Object3D} from "three";
  */
 function KinectDevice()
 {
-	Group.call(this);
+	THREE.Group.call(this);
 
 	this.type = "Kinect";
 	this.name = "kinect";
@@ -145,7 +141,7 @@ KinectDevice.JOINTS_NAME = [["head","shouldercenter"],["shouldercenter","shoulde
 							["shouldercenter","spine"],["spine","hipcenter"],["hipcenter","hipright"],["hipcenter","hipleft"],["hipright","kneeright"],
 							["hipleft","kneeleft"],["kneeright","ankleright"],["kneeleft","ankleleft"],["ankleright","footright"],["ankleleft","footleft"]];
 
-KinectDevice.prototype = Object.create(Group.prototype);
+KinectDevice.prototype = Object.create(THREE.Group.prototype);
 
 /**
  * Update kinect device state.
@@ -171,8 +167,8 @@ KinectDevice.prototype.update = function(delta)
 			// Show debug model
 			if(this.debugModel)
 			{
-				var geometry = new SphereGeometry(0.04, 6, 6);
-				var material = new MeshPhongMaterial(0xff0000);
+				var geometry = new THREE.SphereGeometry(0.04, 6, 6);
+				var material = new THREE.MeshPhongMaterial(0xff0000);
 
 				// Fill with new data
 				for(var j = 0; j < this.data.skeletons.length; j++)
@@ -204,7 +200,7 @@ KinectDevice.prototype.update = function(delta)
 	}
 
 	// Update children
-	Object3D.prototype.update.call(this, delta);
+	THREE.Object3D.prototype.update.call(this, delta);
 };
 
 /**
@@ -238,10 +234,9 @@ KinectDevice.prototype.setCameraMode = function(mode)
 
 KinectDevice.prototype.toJSON = function(meta)
 {
-	var data = Group.prototype.toJSON.call(this, meta);
+	var data = THREE.Group.prototype.toJSON.call(this, meta);
 
 	data.object.debugModel = this.debugModel;
 
 	return data;
 };
-export {KinectDevice};

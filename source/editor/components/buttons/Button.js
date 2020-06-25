@@ -1,4 +1,4 @@
-import {Component} from "../../Component.js";
+"use strict";
 
 /**
  * Base button class.
@@ -121,5 +121,3 @@ Button.prototype.updateSyles = function(styleBase, stylePointerOver, styleDisabl
 		this.styleDisabled = styleDisabled;
 	}
 };
-
-export {Button};

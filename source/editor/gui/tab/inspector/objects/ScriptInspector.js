@@ -1,11 +1,4 @@
-import {Script} from "../../../../../../core/objects/script/Script.js";
-import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../../history/action/Action.js";
-import {ObjectInspector} from "../ObjectInspector.js";
-import {Inspector} from "../../Inspector.js";
-import {Editor} from "../../../../../Editor.js";
-import {Text} from "../../../../../components/Text.js";
-import {DropdownList} from "../../../../../components/input/DropdownList.js";
+"use strict";
 
 function ScriptInspector(parent, object)
 {
@@ -35,5 +28,3 @@ ScriptInspector.prototype.updateInspector = function()
 	
 	this.mode.setValue(this.object.mode);
 };
-
-export {ScriptInspector};

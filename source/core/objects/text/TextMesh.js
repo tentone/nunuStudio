@@ -1,6 +1,4 @@
-import {Mesh} from "../../mesh/Mesh.js";
-import {Text} from "../../../../editor/components/Text.js";
-import {Geometry, Font, ExtrudeBufferGeometry, ShapeBufferGeometry, Object3D} from "three";
+"use strict";
 
 /**
  * Special mesh type used to draw 3D text.
@@ -117,7 +115,7 @@ function TextMesh(text, material, font, height, bevel, bevelThickness, bevelSize
 
 TextMesh.prototype = Object.create(Mesh.prototype);
 
-TextMesh.EMPTY_GEOMETRY = new Geometry();
+TextMesh.EMPTY_GEOMETRY = new THREE.Geometry();
 
 /**
  * Set font used by this text 3D instance.
@@ -163,7 +161,7 @@ TextMesh.prototype.updateGeometry = function()
 
 		if(this.font.isFont !== true)
 		{
-			console.warn("nunuStudio: Font parameter is not an instance of Font.");
+			console.warn("nunuStudio: Font parameter is not an instance of THREE.Font.");
 			this.geometry = TextMesh.EMPTY_GEOMETRY;
 			return;
 		}
@@ -172,7 +170,7 @@ TextMesh.prototype.updateGeometry = function()
 
 		if(this.extruded)
 		{		
-			this.geometry = new ExtrudeBufferGeometry(shapes,
+			this.geometry = new THREE.ExtrudeBufferGeometry(shapes,
 			{
 				curveSegments: this.curveSegments,
 				depth: this.height,
@@ -184,7 +182,7 @@ TextMesh.prototype.updateGeometry = function()
 		}
 		else
 		{
-			this.geometry = new ShapeBufferGeometry(shapes, this.curveSegments);
+			this.geometry = new THREE.ShapeBufferGeometry(shapes, this.curveSegments);
 		}
 	}
 };
@@ -215,7 +213,7 @@ TextMesh.prototype.toJSON = function(meta)
 	this.geometry = undefined;
 
 	var font = this.font;
-	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		font = font.toJSON(meta);
 	});
@@ -234,5 +232,3 @@ TextMesh.prototype.toJSON = function(meta)
 
 	return data;
 };
-
-export {TextMesh};

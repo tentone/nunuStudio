@@ -1,6 +1,4 @@
-import {Texture} from "../../../texture/Texture.js";
-import {Text} from "../../../../editor/components/Text.js";
-
+"use strict";
 
 /**
  * Spine animation textures adapted to work with nunuStudio textures.
@@ -20,4 +18,3 @@ function SpineTexture(texture)
 };
 
 SpineTexture.prototype = Object.create(spine.threejs.ThreeJsTexture.prototype);
-export {SpineTexture};

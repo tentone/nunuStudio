@@ -1,4 +1,4 @@
-import {Component} from "../Component.js";
+"use strict";
 
 /**
  * DOM division element container.
@@ -15,5 +15,3 @@ function Division(parent)
 }
 
 Division.prototype = Object.create(Component.prototype);
-
-export {Division};

@@ -1,9 +1,4 @@
-import {Program} from "../Program.js";
-import {Text} from "../../../editor/components/Text.js";
-import {Canvas} from "../../../editor/components/Canvas.js";
-import {World, NaiveBroadphase, SplitSolver, GSSolver} from "cannon";
-import {Color, Texture, Camera, Raycaster, Vector2, Scene, Object3D, Fog, FogExp2, Vector3, Quaternion} from "three";
-
+"use strict";
 
 /**
  * Scenes allow you to set up what and where is to be rendered by the engine.
@@ -35,16 +30,16 @@ function Scene()
 	 * Documentation for cannon.js physics World object can be found here http:// schteppe.github.io/cannon.js/docs/classes/World.html.
 	 *
 	 * @property world
-	 * @type {World}
+	 * @type {CANNON.World}
 	 */
-	this.world = new World();
+	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
 	this.world.defaultContactMaterial.contactEquationRelaxation = 4;
 	this.world.quatNormalizeSkip = 0;
 	this.world.quatNormalizeFast = false;
 	this.world.gravity.set(0, -9.8, 0);
-	this.world.broadphase = new NaiveBroadphase();
-	this.world.solver = new SplitSolver(new GSSolver());
+	this.world.broadphase = new CANNON.NaiveBroadphase();
+	this.world.solver = new CANNON.SplitSolver(new CANNON.GSSolver());
 	this.world.solver.tolerance = 0.05;
 	this.world.solver.iterations = 7;
 
@@ -56,9 +51,9 @@ function Scene()
 	 * It can be a color, a texture or a cubemap.
 	 *
 	 * @property background
-	 * @type {Color|Texture}
+	 * @type {THREE.Color|THREE.Texture}
 	 */
-	this.background = new Color(0x000000);
+	this.background = new THREE.Color(0x000000);
 
 	/** 
 	 * List of active cameras currently being displayed.
@@ -76,7 +71,7 @@ function Scene()
 	 * While using the editor the scene default camera gets set as the last camera configuration used.
 	 * 
 	 * @property defaultCamera
-	 * @type {Camera}
+	 * @type {THREE.Camera}
 	 */
 	this.defaultCamera = null;
 
@@ -94,9 +89,9 @@ function Scene()
 	 * This raycaster is automatically updated using the first camera being drawn.
 	 *
 	 * @property raycaster
-	 * @type {Raycaster}
+	 * @type {THREE.Raycaster}
 	 */
-	this.raycaster = new Raycaster();
+	this.raycaster = new THREE.Raycaster();
 
 	// TODO <OCTREE CODE>
 	/**
@@ -155,12 +150,12 @@ function Scene()
 	 * Normalized mouse coordinates used by the scene internal raycaster.
 	 *
 	 * @property mouse
-	 * @type {Vector2}
+	 * @type {THREE.Vector2}
 	 */
-	this.mouse = new Vector2(0, 0);
+	this.mouse = new THREE.Vector2(0, 0);
 }
 
-THREE._Scene = Scene;
+THREE._Scene = THREE.Scene;
 
 Scene.prototype = Object.create(THREE._Scene.prototype);
 
@@ -169,7 +164,7 @@ Scene.prototype.initialize = function()
 	this.program = this.parent;
 	this.canvas = this.parent.canvas;
 
-	Object3D.prototype.initialize.call(this);
+	THREE.Object3D.prototype.initialize.call(this);
 
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -375,15 +370,15 @@ Scene.prototype.setFogMode = function(mode)
 {	
 	var color = (this.fog !== null) ? this.fog.color.getHex() : "#FFFFFF";
 
-	if(mode === Fog.LINEAR)
+	if(mode === THREE.Fog.LINEAR)
 	{	
-		this.fog = new Fog(color, 5, 20);
+		this.fog = new THREE.Fog(color, 5, 20);
 	}
-	else if(mode === Fog.EXPONENTIAL)
+	else if(mode === THREE.Fog.EXPONENTIAL)
 	{
-		this.fog = new FogExp2(color, 0.01);
+		this.fog = new THREE.FogExp2(color, 0.01);
 	}
-	else if(mode === Fog.NONE)
+	else if(mode === THREE.Fog.NONE)
 	{
 		this.fog = null;
 	}
@@ -396,25 +391,25 @@ Scene.prototype.toJSON = function(meta)
 		console.warn("nunuStudio: Scene is not on top level serializing as Group.");
 
 		this.type = "Group";
-		return Object3D.prototype.toJSON.call(this, meta);
+		return THREE.Object3D.prototype.toJSON.call(this, meta);
 	}
 
 	var self = this;
 
-	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		// Background
-		if(self.background instanceof Color)
+		if(self.background instanceof THREE.Color)
 		{
 			object.background = self.background.toJSON(meta);
 		}
-		else if(self.background instanceof Texture)
+		else if(self.background instanceof THREE.Texture)
 		{
 			object.background = self.background.toJSON(meta).uuid;
 		}
 
 		// Environment
-		if(self.environment instanceof Texture)
+		if(self.environment instanceof THREE.Texture)
 		{
 			object.environment = self.environment.toJSON(meta).uuid;
 		}
@@ -422,9 +417,9 @@ Scene.prototype.toJSON = function(meta)
 
 	if(this.defaultCamera !== null)
 	{
-		var position = new Vector3();
-		var quaternion = new Quaternion();
-		var scale = new Vector3();
+		var position = new THREE.Vector3();
+		var quaternion = new THREE.Quaternion();
+		var scale = new THREE.Vector3();
 
 		this.defaultCamera.matrixWorld.decompose(position, quaternion, scale);
 
@@ -458,4 +453,3 @@ Scene.prototype.toJSON = function(meta)
 
 	return data;
 };
-export {Scene};

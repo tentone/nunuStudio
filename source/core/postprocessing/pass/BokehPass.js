@@ -1,7 +1,4 @@
-import {Pass} from "../../Pass.js";
-import {Scene} from "../../../objects/Scene.js";
-import {Mesh} from "../../../objects/mesh/Mesh.js";
-import {BokehShader, WebGLRenderTarget, MeshDepthMaterial, RGBADepthPacking, NoBlending, UniformsUtils, ShaderMaterial} from "three";
+"use strict";
 
 /**
  * Depth-of-field post-process with bokeh shader.
@@ -15,9 +12,9 @@ import {BokehShader, WebGLRenderTarget, MeshDepthMaterial, RGBADepthPacking, NoB
 
 function BokehPass(focus, aperture, maxblur)
 {
-	if(BokehShader === undefined)
+	if(THREE.BokehShader === undefined)
 	{
-		console.error("BokehPass relies on BokehShader");
+		console.error("BokehPass relies on THREE.BokehShader");
 	}
 
 	Pass.call(this);
@@ -25,24 +22,24 @@ function BokehPass(focus, aperture, maxblur)
 	this.type = "Bokeh";
 
 	// Render targets
-	this.renderTargetColor = new WebGLRenderTarget(0, 0, Pass.RGBLinear);
+	this.renderTargetColor = new THREE.WebGLRenderTarget(0, 0, Pass.RGBLinear);
 	this.renderTargetDepth = this.renderTargetColor.clone();
 
 	// Depth material
-	this.materialDepth = new MeshDepthMaterial();
-	this.materialDepth.depthPacking = RGBADepthPacking;
-	this.materialDepth.blending = NoBlending;
+	this.materialDepth = new THREE.MeshDepthMaterial();
+	this.materialDepth.depthPacking = THREE.RGBADepthPacking;
+	this.materialDepth.blending = THREE.NoBlending;
 
 	// Bokeh material
-	this.uniforms = UniformsUtils.clone(BokehShader.uniforms);
+	this.uniforms = THREE.UniformsUtils.clone(THREE.BokehShader.uniforms);
 	this.uniforms["tDepth"].value = this.renderTargetDepth.texture;
 
-	this.materialBokeh = new ShaderMaterial(
+	this.materialBokeh = new THREE.ShaderMaterial(
 	{
-		defines: BokehShader.defines,
+		defines: THREE.BokehShader.defines,
 		uniforms: this.uniforms,
-		vertexShader: BokehShader.vertexShader,
-		fragmentShader: BokehShader.fragmentShader
+		vertexShader: THREE.BokehShader.vertexShader,
+		fragmentShader: THREE.BokehShader.fragmentShader
 	});
 
 	// Scene
@@ -156,4 +153,3 @@ BokehPass.prototype.toJSON = function(meta)
 	
 	return data;
 };
-export {BokehPass};
