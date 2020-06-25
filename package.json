@@ -10,8 +10,8 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"rollup-dev": "rollup -c rollup.dev.js",
-		"rollup-build": "rollup -c",
+		"rollup-editor": "rollup -c rollup.editor.js",
+		"rollup-runtime": "rollup -c rollup.runtime.js",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"serve": "http-server . -p 8080 --cors -o",
 		"serve-page": "http-server ./docs -p 8081 --cors -o",
