@@ -40,7 +40,7 @@ for(var i = 0; i < paths.length; i++)
 		// Check if there is a class declared with the same name of the file
 		var className = common.getFileNameNoExt(fullPath);
 		var data = common.readFile(fullPath);
-		var isModule = data.search("function " + className) >= 0;
+		var isModule = data.search("function " + className) >= 0 || data.search("var " + className + " =") >= 0;
 		if(!isModule)
 		{
 			className = null;
