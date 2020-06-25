@@ -114,10 +114,4 @@ for(var i = 0; i < files.length; i++)
 
 	// Write back
 	common.writeFile(files[i].fullPath, data);
-
-	// TODO <DEBUG CODE>
-	/*if(files[i].className === "LensFlare")
-	{
-		console.log(data, files[i]);
-	}*/
 }
