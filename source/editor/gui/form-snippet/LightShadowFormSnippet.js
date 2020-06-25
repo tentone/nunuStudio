@@ -1,4 +1,11 @@
-"use strict";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {Action} from "../../../history/action/Action.js";
+import {FormSnippet} from "../FormSnippet.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {NumberBox} from "../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {Form} from "../../../components/Form.js";
 
 /** 
  * Shadow map configuration form for light objects that emitt shadows.
@@ -161,3 +168,5 @@ LightShadowFormSnippet.prototype.updateValues = function()
 	this.cameraTop.setValue(this.object.shadow.camera.top);
 	this.cameraBottom.setValue(this.object.shadow.camera.bottom);
 };
+
+export {LightShadowFormSnippet};

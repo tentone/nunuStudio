@@ -1,4 +1,16 @@
-"use strict";
+import {Resource} from "../../../../../../core/resources/Resource.js";
+import {Image} from "../../../../../../core/resources/Image.js";
+import {Font} from "../../../../../../core/resources/Font.js";
+import {RemoveResourceAction} from "../../../../../history/action/resources/RemoveResourceAction.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {Asset} from "../Asset.js";
+import {FontRenderer} from "../../../../preview/FontRenderer.js";
+import {Interface} from "../../../../Interface.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {ContextMenu} from "../../../../../components/dropdown/ContextMenu.js";
+
 
 function FontAsset(parent)
 {
@@ -91,3 +103,4 @@ FontAsset.prototype.updateMetadata = function()
 
 	this.setText(this.asset.name);
 };
+export {FontAsset};

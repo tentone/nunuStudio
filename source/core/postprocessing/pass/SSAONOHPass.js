@@ -1,4 +1,10 @@
-"use strict";
+import {Texture} from "../../../texture/Texture.js";
+import {Pass} from "../../Pass.js";
+import {Scene} from "../../../objects/Scene.js";
+import {Mesh} from "../../../objects/mesh/Mesh.js";
+import {Text} from "../../../../editor/components/Text.js";
+import {Form} from "../../../../editor/components/Form.js";
+import {SSAOShader, DepthTexture, UnsignedShortType, NearestFilter, MeshNormalMaterial, NoBlending, WebGLRenderTarget, LinearFilter, RGBAFormat, ShaderMaterial, SSAOBlurShader, UniformsUtils, CopyShader, DstColorFactor, ZeroFactor, AddEquation, DstAlphaFactor, Vector3, Math, DataTexture, LuminanceFormat, FloatType, RepeatWrapping, CustomBlending} from "three";
 
 /**
  * Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.
@@ -15,9 +21,9 @@
  */
 function SSAONOHPass()
 {
-	if(THREE.SSAOShader === undefined)
+	if(SSAOShader === undefined)
 	{
-		console.warn("SSAONOHPass depends on THREE.SSAOShader");
+		console.warn("SSAONOHPass depends on SSAOShader");
 	}
 
 	Pass.call(this);
@@ -32,50 +38,50 @@ function SSAONOHPass()
 	 * Depth texture attached to the normal material
 	 *
 	 * @attribute depthTexture
-	 * @type {THREE.DepthTexture}
+	 * @type {DepthTexture}
 	 */
-	this.depthTexture = new THREE.DepthTexture();
-	this.depthTexture.type = THREE.UnsignedShortType;
-	this.depthTexture.minFilter = THREE.NearestFilter;
-	this.depthTexture.maxFilter = THREE.NearestFilter;
+	this.depthTexture = new DepthTexture();
+	this.depthTexture.type = UnsignedShortType;
+	this.depthTexture.minFilter = NearestFilter;
+	this.depthTexture.maxFilter = NearestFilter;
 
 	/**
 	 * Normal rendering material.
 	 *
 	 * @attribute normalMaterial
-	 * @type {THREE.MeshNormalMaterial}
+	 * @type {MeshNormalMaterial}
 	 */
-	this.normalMaterial = new THREE.MeshNormalMaterial();
-	this.normalMaterial.blending = THREE.NoBlending;
+	this.normalMaterial = new MeshNormalMaterial();
+	this.normalMaterial.blending = NoBlending;
 
 	// Normal render target
-	this.normalRenderTarget = new THREE.WebGLRenderTarget(1, 1,
+	this.normalRenderTarget = new WebGLRenderTarget(1, 1,
 	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.LinearFilter,
-		format: THREE.RGBAFormat,
+		minFilter: LinearFilter,
+		magFilter: LinearFilter,
+		format: RGBAFormat,
 		depthTexture: this.depthTexture,
 		depthBuffer: true
 	});
 
 	// SSAO render target
-	this.ssaoRenderTarget = new THREE.WebGLRenderTarget(1, 1, Pass.RGBALinear);
+	this.ssaoRenderTarget = new WebGLRenderTarget(1, 1, Pass.RGBALinear);
 
 	// Blur render target
-	this.blurRenderTarget = new THREE.WebGLRenderTarget(1, 1, Pass.RGBALinear);
+	this.blurRenderTarget = new WebGLRenderTarget(1, 1, Pass.RGBALinear);
 
 	/**
 	 * Blur pass render material.
 	 *
 	 * @attribute blurMaterial
-	 * @type {THREE.ShaderMaterial}
+	 * @type {ShaderMaterial}
 	 */
-	this.blurMaterial = new THREE.ShaderMaterial(
+	this.blurMaterial = new ShaderMaterial(
 	{
-		defines: Object.assign({}, THREE.SSAOBlurShader.defines),
-		uniforms: THREE.UniformsUtils.clone(THREE.SSAOBlurShader.uniforms),
-		vertexShader: THREE.SSAOBlurShader.vertexShader,
-		fragmentShader: THREE.SSAOBlurShader.fragmentShader
+		defines: Object.assign({}, SSAOBlurShader.defines),
+		uniforms: UniformsUtils.clone(SSAOBlurShader.uniforms),
+		vertexShader: SSAOBlurShader.vertexShader,
+		fragmentShader: SSAOBlurShader.fragmentShader
 	});
 	this.blurMaterial.uniforms["tDiffuse"].value = this.ssaoRenderTarget.texture;
 
@@ -83,15 +89,15 @@ function SSAONOHPass()
 	 * Shader material for the SSAO render pass.
 	 *
 	 * @attribute ssaoMaterial
-	 * @type {THREE.ShaderMaterial}
+	 * @type {ShaderMaterial}
 	 */
-	this.ssaoMaterial = new THREE.ShaderMaterial(
+	this.ssaoMaterial = new ShaderMaterial(
 	{
-		defines: Object.assign({}, THREE.SSAOShader.defines),
-		uniforms: THREE.UniformsUtils.clone(THREE.SSAOShader.uniforms),
-		vertexShader: THREE.SSAOShader.vertexShader,
-		fragmentShader: THREE.SSAOShader.fragmentShader,
-		blending: THREE.NoBlending
+		defines: Object.assign({}, SSAOShader.defines),
+		uniforms: UniformsUtils.clone(SSAOShader.uniforms),
+		vertexShader: SSAOShader.vertexShader,
+		fragmentShader: SSAOShader.fragmentShader,
+		blending: NoBlending
 	});
 	this.ssaoMaterial.uniforms["tNormal"].value = this.normalRenderTarget.texture;
 	
@@ -99,22 +105,22 @@ function SSAONOHPass()
 	 * Material used to copy data between buffers.
 	 *
 	 * @attribute copyMaterial
-	 * @type {THREE.ShaderMaterial}
+	 * @type {ShaderMaterial}
 	 */
-	this.copyMaterial = new THREE.ShaderMaterial(
+	this.copyMaterial = new ShaderMaterial(
 	{
-		uniforms: THREE.UniformsUtils.clone(THREE.CopyShader.uniforms),
-		vertexShader: THREE.CopyShader.vertexShader,
-		fragmentShader: THREE.CopyShader.fragmentShader,
+		uniforms: UniformsUtils.clone(CopyShader.uniforms),
+		vertexShader: CopyShader.vertexShader,
+		fragmentShader: CopyShader.fragmentShader,
 		transparent: true,
 		depthTest: false,
 		depthWrite: false,
-		blendSrc: THREE.DstColorFactor,
-		blendDst: THREE.ZeroFactor,
-		blendEquation: THREE.AddEquation,
-		blendSrcAlpha: THREE.DstAlphaFactor,
-		blendDstAlpha: THREE.ZeroFactor,
-		blendEquationAlpha: THREE.AddEquation
+		blendSrc: DstColorFactor,
+		blendDst: ZeroFactor,
+		blendEquation: AddEquation,
+		blendSrcAlpha: DstAlphaFactor,
+		blendDstAlpha: ZeroFactor,
+		blendEquationAlpha: AddEquation
 	});
 
 	this._kernelSize = 0;
@@ -196,14 +202,14 @@ SSAONOHPass.prototype.generateSampleKernel = function()
 {
 	for(var i = 0; i < this._kernelSize; i++)
 	{
-		var sample = new THREE.Vector3();
+		var sample = new Vector3();
 		sample.x = (Math.random() * 2) - 1;
 		sample.y = (Math.random() * 2) - 1;
 		sample.z = Math.random();
 		sample.normalize();
 
 		var scale = i / this._kernelSize;
-		scale = THREE.Math.lerp(0.1, 1, scale * scale);
+		scale = Math.lerp(0.1, 1, scale * scale);
 		sample.multiplyScalar(scale);
 		this.kernel.push(sample);
 	}
@@ -235,9 +241,9 @@ SSAONOHPass.prototype.generateRandomKernelRotations = function()
 		data[i] = simplex.noise3d(x, y, z);
 	}
 
-	this.noiseTexture = new THREE.DataTexture(data, width, height, THREE.LuminanceFormat, THREE.FloatType);
-	this.noiseTexture.wrapS = THREE.RepeatWrapping;
-	this.noiseTexture.wrapT = THREE.RepeatWrapping;
+	this.noiseTexture = new DataTexture(data, width, height, LuminanceFormat, FloatType);
+	this.noiseTexture.wrapS = RepeatWrapping;
+	this.noiseTexture.wrapT = RepeatWrapping;
 	this.noiseTexture.needsUpdate = true;
 };
 
@@ -283,12 +289,12 @@ SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta
 	{
 		// Copy SSAO result
 		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
-		this.copyMaterial.blending = THREE.NoBlending;
+		this.copyMaterial.blending = NoBlending;
 		this.renderPass(renderer, this.copyMaterial, null , this.clear);
 
 		// Copy blur and blend it to output
 		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
-		this.copyMaterial.blending = THREE.CustomBlending;
+		this.copyMaterial.blending = CustomBlending;
 		this.renderPass(renderer, this.copyMaterial, null, false);
 	}
 	// Output to writeBuffer
@@ -296,12 +302,12 @@ SSAONOHPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta
 	{
 		// Copy SSAO result
 		this.copyMaterial.uniforms["tDiffuse"].value = readBuffer.texture;
-		this.copyMaterial.blending = THREE.NoBlending;
+		this.copyMaterial.blending = NoBlending;
 		this.renderPass(renderer, this.copyMaterial, writeBuffer, this.clear);
 
 		// Copy blur and blend it to output
 		this.copyMaterial.uniforms["tDiffuse"].value = this.blurRenderTarget.texture;
-		this.copyMaterial.blending = THREE.CustomBlending;
+		this.copyMaterial.blending = CustomBlending;
 		this.renderPass(renderer, this.copyMaterial, writeBuffer, false);
 	}	
 };
@@ -376,3 +382,5 @@ SSAONOHPass.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+export {SSAONOHPass};

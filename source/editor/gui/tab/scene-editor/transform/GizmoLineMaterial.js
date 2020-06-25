@@ -1,14 +1,15 @@
-"use strict";
+import {GizmoMaterial} from "../GizmoMaterial.js";
+import {LineBasicMaterial} from "three";
 
 /**
  * Basic material to represent the line portions of a gizmo.
  *
  * @class GizmoMaterial
- * @extends {THREE.LineBasicMaterial}
+ * @extends {LineBasicMaterial}
  */
 function GizmoLineMaterial(parameters)
 {
-	THREE.LineBasicMaterial.call(this);
+	LineBasicMaterial.call(this);
 
 	this.depthTest = false;
 	this.depthWrite = false;
@@ -21,7 +22,7 @@ function GizmoLineMaterial(parameters)
 	this.baseOpacity = this.opacity;
 }
 
-GizmoLineMaterial.prototype = Object.create(THREE.LineBasicMaterial.prototype);
+GizmoLineMaterial.prototype = Object.create(LineBasicMaterial.prototype);
 
 GizmoLineMaterial.red = new GizmoLineMaterial({color: 0xff0000});
 GizmoLineMaterial.green = new GizmoLineMaterial({color: 0x00ff00});
@@ -48,3 +49,4 @@ GizmoLineMaterial.prototype.highlight = function(highlighted)
 		this.opacity = this.baseOpacity;
 	}
 };
+export {GizmoLineMaterial};

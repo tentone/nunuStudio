@@ -1,3 +1,12 @@
+import {Texture} from "../../../texture/Texture.js";
+import {Resource} from "../../../resources/Resource.js";
+import {Model} from "../../../resources/Model.js";
+import {Scene} from "../../../objects/Scene.js";
+import {Key} from "../../../input/Key.js";
+import {Text} from "../../../../editor/components/Text.js";
+import {Form} from "../../../../editor/components/Form.js";
+import {Component} from "../../../../editor/components/Component.js";
+import {ThreeMFLoader, Loader, FileLoader, TextureLoader, LoaderUtils, Color, Matrix4, RepeatWrapping, MirroredRepeatWrapping, ClampToEdgeWrapping, LinearFilter, LinearMipmapLinearFilter, NearestFilter, BufferGeometry, Float32BufferAttribute, Mesh, MeshPhongMaterial, BufferAttribute, Group, MeshStandardMaterial} from "three";
 /*
  * @author technohippy / https://github.com/technohippy
  * @author Mugen87 / https://github.com/Mugen87
@@ -17,22 +26,21 @@
  * - Color Groups (Vertex Colors)
  * - Metallic Display Properties (PBR)
  */
-THREE.ThreeMFLoader = function (manager)
+ThreeMFLoader = function (manager)
 {
-	THREE.Loader.call(this, manager);
-
+	Loader.call(this, manager);
 	this.availableExtensions = [];
 };
 
-THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype),
+ThreeMFLoader.prototype = Object.assign(Object.create(Loader.prototype),
 {
-	constructor: THREE.ThreeMFLoader,
+	constructor: ThreeMFLoader,
 
 	load: function (url, onLoad, onProgress, onError)
 	{
 
 		var scope = this;
-		var loader = new THREE.FileLoader(scope.manager);
+		var loader = new FileLoader(scope.manager);
 		loader.setPath(scope.path);
 		loader.setResponseType("arraybuffer");
 		loader.load(url, function (buffer)
@@ -44,7 +52,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 	parse: function (data, onLoad)
 	{
 		var scope = this;
-		var textureLoader = new THREE.TextureLoader(this.manager);
+		var textureLoader = new TextureLoader(this.manager);
 		var version = 2;
 
 		function readZip(data, next)
@@ -149,7 +157,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 				getUint8Array(zip.file(relsName), function (relsView)
 				{
-					var relsFileText = THREE.LoaderUtils.decodeText(relsView);
+					var relsFileText = LoaderUtils.decodeText(relsView);
 					rels = parseRelsXml(relsFileText);
 
 					// Amount of async calls that we have to wait for
@@ -162,7 +170,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 						getUint8Array(zip.file(modelRelsName), function (relsView)
 						{
-							var relsFileText = THREE.LoaderUtils.decodeText(relsView);
+							var relsFileText = LoaderUtils.decodeText(relsView);
 							modelRels = parseRelsXml(relsFileText);
 							finished();
 						});
@@ -173,7 +181,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 					{
 						getUint8Array(zip.file(modelPartNames[i]), function (view, modelPart)
 						{
-							var fileText = THREE.LoaderUtils.decodeText(view);
+							var fileText = LoaderUtils.decodeText(view);
 							var xmlData = new DOMParser().parseFromString(fileText, "application/xml");
 
 							if(xmlData.documentElement.nodeName.toLowerCase() !== "model")
@@ -366,7 +374,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 			var colorNodes = colorGroupNode.querySelectorAll("color");
 			var colors = [];
-			var colorObject = new THREE.Color();
+			var colorObject = new Color();
 
 			for(var i = 0; i < colorNodes.length; i++)
 			{
@@ -570,7 +578,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 			});
 
-			var matrix = new THREE.Matrix4();
+			var matrix = new Matrix4();
 			matrix.set(
 				t[0], t[3], t[6], t[9],
 				t[1], t[4], t[7], t[10],
@@ -857,20 +865,20 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 				{
 
 				case "wrap":
-					texture.wrapS = THREE.RepeatWrapping;
+					texture.wrapS = RepeatWrapping;
 					break;
 
 				case "mirror":
-					texture.wrapS = THREE.MirroredRepeatWrapping;
+					texture.wrapS = MirroredRepeatWrapping;
 					break;
 
 				case "none":
 				case "clamp":
-					texture.wrapS = THREE.ClampToEdgeWrapping;
+					texture.wrapS = ClampToEdgeWrapping;
 					break;
 
 				default:
-					texture.wrapS = THREE.RepeatWrapping;
+					texture.wrapS = RepeatWrapping;
 
 				}
 
@@ -878,20 +886,20 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 				{
 
 				case "wrap":
-					texture.wrapT = THREE.RepeatWrapping;
+					texture.wrapT = RepeatWrapping;
 					break;
 
 				case "mirror":
-					texture.wrapT = THREE.MirroredRepeatWrapping;
+					texture.wrapT = MirroredRepeatWrapping;
 					break;
 
 				case "none":
 				case "clamp":
-					texture.wrapT = THREE.ClampToEdgeWrapping;
+					texture.wrapT = ClampToEdgeWrapping;
 					break;
 
 				default:
-					texture.wrapT = THREE.RepeatWrapping;
+					texture.wrapT = RepeatWrapping;
 
 				}
 
@@ -899,23 +907,23 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 				{
 
 				case "auto":
-					texture.magFilter = THREE.LinearFilter;
-					texture.minFilter = THREE.LinearMipmapLinearFilter;
+					texture.magFilter = LinearFilter;
+					texture.minFilter = LinearMipmapLinearFilter;
 					break;
 
 				case "linear":
-					texture.magFilter = THREE.LinearFilter;
-					texture.minFilter = THREE.LinearFilter;
+					texture.magFilter = LinearFilter;
+					texture.minFilter = LinearFilter;
 					break;
 
 				case "nearest":
-					texture.magFilter = THREE.NearestFilter;
-					texture.minFilter = THREE.NearestFilter;
+					texture.magFilter = NearestFilter;
+					texture.minFilter = NearestFilter;
 					break;
 
 				default:
-					texture.magFilter = THREE.LinearFilter;
-					texture.minFilter = THREE.LinearMipmapLinearFilter;
+					texture.magFilter = LinearFilter;
+					texture.minFilter = LinearMipmapLinearFilter;
 
 				}
 
@@ -965,7 +973,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 				//
 
-				var geometry = new THREE.BufferGeometry();
+				var geometry = new BufferGeometry();
 
 				var positionData = [];
 
@@ -991,11 +999,11 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 				}
 
-				geometry.setAttribute("position", new THREE.Float32BufferAttribute(positionData, 3));
+				geometry.setAttribute("position", new Float32BufferAttribute(positionData, 3));
 
 				//
 
-				var mesh = new THREE.Mesh(geometry, material);
+				var mesh = new Mesh(geometry, material);
 				meshes.push(mesh);
 
 			}
@@ -1009,7 +1017,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 			// geometry
 
-			var geometry = new THREE.BufferGeometry();
+			var geometry = new BufferGeometry();
 
 			var positionData = [];
 			var uvData = [];
@@ -1047,14 +1055,14 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 			}
 
-			geometry.setAttribute("position", new THREE.Float32BufferAttribute(positionData, 3));
-			geometry.setAttribute("uv", new THREE.Float32BufferAttribute(uvData, 2));
+			geometry.setAttribute("position", new Float32BufferAttribute(positionData, 3));
+			geometry.setAttribute("uv", new Float32BufferAttribute(uvData, 2));
 
 			// material
 
 			var texture = getBuild(texture2dgroup, objects, modelData, textureData, objectData, buildTexture);
 
-			var material = new THREE.MeshPhongMaterial(
+			var material = new MeshPhongMaterial(
 			{
 				map: texture,
 				flatShading: true
@@ -1062,7 +1070,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 			// mesh
 
-			var mesh = new THREE.Mesh(geometry, material);
+			var mesh = new Mesh(geometry, material);
 
 			return mesh;
 
@@ -1073,7 +1081,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 			// geometry
 
-			var geometry = new THREE.BufferGeometry();
+			var geometry = new BufferGeometry();
 
 			var positionData = [];
 			var colorData = [];
@@ -1122,12 +1130,12 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 			}
 
-			geometry.setAttribute("position", new THREE.Float32BufferAttribute(positionData, 3));
-			geometry.setAttribute("color", new THREE.Float32BufferAttribute(colorData, 3));
+			geometry.setAttribute("position", new Float32BufferAttribute(positionData, 3));
+			geometry.setAttribute("color", new Float32BufferAttribute(colorData, 3));
 
 			// material
 
-			var material = new THREE.MeshPhongMaterial(
+			var material = new MeshPhongMaterial(
 			{
 				vertexColors: true,
 				flatShading: true
@@ -1135,7 +1143,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 			// mesh
 
-			var mesh = new THREE.Mesh(geometry, material);
+			var mesh = new Mesh(geometry, material);
 
 			return mesh;
 
@@ -1144,17 +1152,17 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 		function buildDefaultMesh(meshData)
 		{
 
-			var geometry = new THREE.BufferGeometry();
-			geometry.setIndex(new THREE.BufferAttribute(meshData["triangles"], 1));
-			geometry.setAttribute("position", new THREE.BufferAttribute(meshData["vertices"], 3));
+			var geometry = new BufferGeometry();
+			geometry.setIndex(new BufferAttribute(meshData["triangles"], 1));
+			geometry.setAttribute("position", new BufferAttribute(meshData["vertices"], 3));
 
-			var material = new THREE.MeshPhongMaterial(
+			var material = new MeshPhongMaterial(
 			{
 				color: 0xaaaaff,
 				flatShading: true
 			});
 
-			var mesh = new THREE.Mesh(geometry, material);
+			var mesh = new Mesh(geometry, material);
 
 			return mesh;
 
@@ -1259,7 +1267,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 		function buildGroup(meshData, objects, modelData, textureData, objectData)
 		{
-			var group = new THREE.Group();
+			var group = new Group();
 			var resourceMap = analyzeObject(modelData, meshData, objectData);
 			var meshes = buildMeshes(resourceMap, modelData, meshData, textureData, objectData);
 
@@ -1324,7 +1332,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 				var pbmetallicdisplayproperty = pbmetallicdisplayproperties[displaypropertiesid];
 				var metallicData = pbmetallicdisplayproperty.data[materialData.index];
 
-				material = new THREE.MeshStandardMaterial(
+				material = new MeshStandardMaterial(
 				{
 					flatShading: true,
 					roughness: metallicData.roughness,
@@ -1334,7 +1342,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 			else
 			{
 				// otherwise use PhongMaterial
-				material = new THREE.MeshPhongMaterial(
+				material = new MeshPhongMaterial(
 				{
 					flatShading: true
 				});
@@ -1359,7 +1367,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 		function buildComposite(compositeData, objects, modelData, textureData)
 		{
-			var composite = new THREE.Group();
+			var composite = new Group();
 
 			for(var j = 0; j < compositeData.length; j++)
 			{
@@ -1450,7 +1458,7 @@ THREE.ThreeMFLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 		function build(objects, data3mf)
 		{
-			var group = new THREE.Group();
+			var group = new Group();
 			var relationship = data3mf["rels"][0];
 			var buildData = data3mf.model[relationship["target"].substring(1)]["build"];
 

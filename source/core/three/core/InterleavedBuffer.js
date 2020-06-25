@@ -1,6 +1,6 @@
-"use strict";
+import {InterleavedBuffer} from "three";
 
-THREE.InterleavedBuffer.prototype.toJSON = function()
+InterleavedBuffer.prototype.toJSON = function()
 {
 	return {
 		typedArray: {

@@ -1,4 +1,18 @@
-"use strict";
+import {Font} from "../../../../../core/resources/Font.js";
+import {Key} from "../../../../../core/input/Key.js";
+import {Settings} from "../../../../Settings.js";
+import {SettingsTab} from "../SettingsTab.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TabComponent} from "../../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../../components/TableForm.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Form} from "../../../../components/Form.js";
+import {Component} from "../../../../components/Component.js";
+
 
 function CodeSettingsTab(parent, closeable, container, index)
 {
@@ -225,3 +239,4 @@ CodeSettingsTab.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+export {CodeSettingsTab};

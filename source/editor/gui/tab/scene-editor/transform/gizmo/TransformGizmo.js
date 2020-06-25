@@ -1,4 +1,6 @@
-"use strict";
+import {TransformControls} from "../../TransformControls.js";
+import {GizmoMaterial} from "../../GizmoMaterial.js";
+import {Object3D, PlaneBufferGeometry, MeshBasicMaterial, DoubleSide, Mesh, Matrix4, Euler, Eurler, Vector3} from "three";
 
 /**
  * A transform gizmo is a object used to transform a property of an entity.
@@ -9,25 +11,25 @@
  */
 function TransformGizmo()
 {
-	THREE.Object3D.call(this);
+	Object3D.call(this);
 
-	this.handles = new THREE.Object3D();
-	this.pickers = new THREE.Object3D();
-	this.planes = new THREE.Object3D();
+	this.handles = new Object3D();
+	this.pickers = new Object3D();
+	this.planes = new Object3D();
 
 	this.add(this.handles);
 	this.add(this.pickers);
 	this.add(this.planes);
 
 	// Planes
-	var planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 2, 2);
-	var planeMaterial = new THREE.MeshBasicMaterial({visible: false, side: THREE.DoubleSide});
+	var planeGeometry = new PlaneBufferGeometry(50, 50, 2, 2);
+	var planeMaterial = new MeshBasicMaterial({visible: false, side: DoubleSide});
 	var planes =
 	{
-		"XY": new THREE.Mesh(planeGeometry, planeMaterial),
-		"YZ": new THREE.Mesh(planeGeometry, planeMaterial),
-		"XZ": new THREE.Mesh(planeGeometry, planeMaterial),
-		"XYZE": new THREE.Mesh(planeGeometry, planeMaterial)
+		"XY": new Mesh(planeGeometry, planeMaterial),
+		"YZ": new Mesh(planeGeometry, planeMaterial),
+		"XZ": new Mesh(planeGeometry, planeMaterial),
+		"XYZE": new Mesh(planeGeometry, planeMaterial)
 	};
 
 	this.activePlane = planes["XYZE"];
@@ -93,7 +95,7 @@ function TransformGizmo()
 	});
 }
 
-TransformGizmo.prototype = Object.create(THREE.Object3D.prototype);
+TransformGizmo.prototype = Object.create(Object3D.prototype);
 
 /**
  * Invisible material used for the picking regions.
@@ -113,7 +115,7 @@ TransformGizmo.pickerMaterial = new GizmoMaterial({visible: false, transparent: 
  *
  * @method setActivePlane
  * @param {string} axis Axis stored as text. (e.g X, Y, XY, XZ).
- * @param {THREE.Matrix4} eye Eye view camera combined (projection and pose) matrix.
+ * @param {Matrix4} eye Eye view camera combined (projection and pose) matrix.
  */
 TransformGizmo.prototype.setActivePlane = function(axis, eye){};
 
@@ -159,7 +161,7 @@ TransformGizmo.prototype.updatePose = function(controls)
 	}
 	else if(controls.space === TransformControls.WORLD)
 	{
-		controls.gizmo.update(new THREE.Euler(), controls.eye);
+		controls.gizmo.update(new Euler(), controls.eye);
 	}
 
 	controls.gizmo.highlight(controls.axis);
@@ -170,14 +172,14 @@ TransformGizmo.prototype.updatePose = function(controls)
  * Update the transformation of the gizmo from rotation and combined view matrix.
  *
  * @method update
- * @param {THREE.Eurler} rotation Euler rotation.
- * @param {THREE.Matrix4} eye Eye view camera combined (projection and pose) matrix.
+ * @param {Eurler} rotation Euler rotation.
+ * @param {Matrix4} eye Eye view camera combined (projection and pose) matrix.
  */
 TransformGizmo.prototype.update = function(rotation, eye)
 {
-	var vec1 = new THREE.Vector3(0, 0, 0);
-	var vec2 = new THREE.Vector3(0, 1, 0);
-	var lookAtMatrix = new THREE.Matrix4();
+	var vec1 = new Vector3(0, 0, 0);
+	var vec2 = new Vector3(0, 1, 0);
+	var lookAtMatrix = new Matrix4();
 
 	this.traverse(function(child)
 	{
@@ -208,3 +210,4 @@ TransformGizmo.prototype.highlight = function(axis)
 		}
 	});
 };
+export {TransformGizmo};

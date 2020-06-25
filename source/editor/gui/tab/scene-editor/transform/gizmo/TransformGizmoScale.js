@@ -1,4 +1,13 @@
-"use strict";
+import {PhysicsObject} from "../../../../../../../core/objects/physics/PhysicsObject.js";
+import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
+import {ActionBundle} from "../../../../../../history/action/ActionBundle.js";
+import {Action} from "../../../../../../history/action/Action.js";
+import {GizmoMaterial} from "../../GizmoMaterial.js";
+import {GizmoLineMaterial} from "../../GizmoLineMaterial.js";
+import {TransformGizmo} from "../TransformGizmo.js";
+import {Editor} from "../../../../../../Editor.js";
+import {Shape} from "cannon";
+import {Geometry, Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxBufferGeometry, CylinderBufferGeometry, Matrix4} from "three";
 
 /**
  * Gizmo used to change scale of an object. Can be used with Object3D objects.
@@ -8,36 +17,36 @@
  */
 function TransformGizmoScale()
 {
-	var arrowGeometry = new THREE.Geometry();
-	var mesh = new THREE.Mesh(new THREE.BoxGeometry(0.125, 0.125, 0.125));
+	var arrowGeometry = new Geometry();
+	var mesh = new Mesh(new BoxGeometry(0.125, 0.125, 0.125));
 	mesh.position.y = 0.5;
 	mesh.updateMatrix();
 
 	arrowGeometry.merge(mesh.geometry, mesh.matrix);
 
-	var x = new THREE.BufferGeometry();
-	x.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  1, 0, 0], 3));
+	var x = new BufferGeometry();
+	x.setAttribute("position", new Float32BufferAttribute([0, 0, 0,  1, 0, 0], 3));
 
-	var y = new THREE.BufferGeometry();
-	y.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  0, 1, 0], 3));
+	var y = new BufferGeometry();
+	y.setAttribute("position", new Float32BufferAttribute([0, 0, 0,  0, 1, 0], 3));
 
-	var z = new THREE.BufferGeometry();
-	z.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  0, 0, 1], 3));
+	var z = new BufferGeometry();
+	z.setAttribute("position", new Float32BufferAttribute([0, 0, 0,  0, 0, 1], 3));
 
 	this.handleGizmos =
 	{
-		X: [[new THREE.Mesh(arrowGeometry, GizmoMaterial.red), [0.5, 0, 0], [0, 0, - Math.PI / 2]],[new THREE.Line(x, GizmoLineMaterial.red)]],
-		Y: [[new THREE.Mesh(arrowGeometry, GizmoMaterial.green), [0, 0.5, 0]],[new THREE.Line(y, GizmoLineMaterial.green)]],
-		Z: [[new THREE.Mesh(arrowGeometry, GizmoMaterial.blue), [0, 0, 0.5], [Math.PI / 2, 0, 0]],[new THREE.Line(z, GizmoLineMaterial.blue)]],
-		XYZ: [[new THREE.Mesh(new THREE.BoxBufferGeometry(0.125, 0.125, 0.125), GizmoMaterial.whiteAlpha)]]
+		X: [[new Mesh(arrowGeometry, GizmoMaterial.red), [0.5, 0, 0], [0, 0, - Math.PI / 2]],[new Line(x, GizmoLineMaterial.red)]],
+		Y: [[new Mesh(arrowGeometry, GizmoMaterial.green), [0, 0.5, 0]],[new Line(y, GizmoLineMaterial.green)]],
+		Z: [[new Mesh(arrowGeometry, GizmoMaterial.blue), [0, 0, 0.5], [Math.PI / 2, 0, 0]],[new Line(z, GizmoLineMaterial.blue)]],
+		XYZ: [[new Mesh(new BoxBufferGeometry(0.125, 0.125, 0.125), GizmoMaterial.whiteAlpha)]]
 	};
 
 	this.pickerGizmos =
 	{
-		X: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0.6, 0, 0], [0, 0, - Math.PI / 2]]],
-		Y: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0.6, 0]]],
-		Z: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
-		XYZ: [[new THREE.Mesh(new THREE.BoxBufferGeometry(0.4, 0.4, 0.4), TransformGizmo.pickerMaterial)]]
+		X: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0.6, 0, 0], [0, 0, - Math.PI / 2]]],
+		Y: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0.6, 0]]],
+		Z: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
+		XYZ: [[new Mesh(new BoxBufferGeometry(0.4, 0.4, 0.4), TransformGizmo.pickerMaterial)]]
 	};
 
 	TransformGizmo.call(this);
@@ -47,7 +56,7 @@ TransformGizmoScale.prototype = Object.create(TransformGizmo.prototype);
 
 TransformGizmoScale.prototype.setActivePlane = function(axis, eye)
 {
-	var tempMatrix = new THREE.Matrix4();
+	var tempMatrix = new Matrix4();
 	eye.applyMatrix4(tempMatrix.getInverse(tempMatrix.extractRotation(this.planes["XY"].matrixWorld)));
 
 	if(axis === "X")
@@ -150,13 +159,13 @@ TransformGizmoScale.prototype.transformObject = function(controls)
 			{
 				var shape = shapes[i];
 				
-				if(shape.type === CANNON.Shape.types.BOX)
+				if(shape.type === Shape.types.BOX)
 				{
 					shape.halfExtents.x = scale.x / 2.0;
 					shape.halfExtents.y = scale.y / 2.0;
 					shape.halfExtents.z = scale.z / 2.0;
 				}
-				else if(shape.type === CANNON.Shape.types.SPHERE)
+				else if(shape.type === Shape.types.SPHERE)
 				{
 					shape.radius = scale.x;
 				}
@@ -164,3 +173,4 @@ TransformGizmoScale.prototype.transformObject = function(controls)
 		}
 	}
 };
+export {TransformGizmoScale};

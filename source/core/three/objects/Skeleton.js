@@ -1,4 +1,12 @@
-"use strict";
+import {Texture} from "../../../texture/Texture.js";
+import {DataTexture} from "../../../texture/DataTexture.js";
+import {ResourceContainer} from "../../../resources/ResourceContainer.js";
+import {Resource} from "../../../resources/Resource.js";
+import {Container} from "../../../objects/misc/Container.js";
+import {SkinnedMesh} from "../../../objects/mesh/SkinnedMesh.js";
+import {Mesh} from "../../../objects/mesh/Mesh.js";
+import {Text} from "../../../../editor/components/Text.js";
+import {Skeleton, Math, Object3D, Bone, Matrix4} from "three";
 
 /**
  * Use an array of bones to create a skeleton that can be used by a SkinnedMesh.
@@ -9,14 +17,14 @@
  * @param {Array} boneInverses An array of Matrix4.
  */
 
-THREE.Skeleton.prototype.toJSON = function(meta)
+Skeleton.prototype.toJSON = function(meta)
 {
 	var data = {};
 
 	// Generate a new UUID of there is none.
 	if(this.uuid === undefined)
 	{
-		this.uuid = THREE.Math.generateUUID();
+		this.uuid = Math.generateUUID();
 	}
 
 	data.uuid = this.uuid;
@@ -42,10 +50,10 @@ THREE.Skeleton.prototype.toJSON = function(meta)
  * @static
  * @method fromJSON
  * @param {Object} data JSON encoded data.
- * @param {THREE.Object3D} object Target object that has this skeleton.
+ * @param {Object3D} object Target object that has this skeleton.
  * @param {ResourceContainer} resources Resource container to read resouce data.
  */
-THREE.Skeleton.fromJSON = function(data, object, resources)
+Skeleton.fromJSON = function(data, object, resources)
 {
 	var bones = [];
 	var boneInverses = [];
@@ -56,14 +64,14 @@ THREE.Skeleton.fromJSON = function(data, object, resources)
 		if(bone === undefined)
 		{
 			console.warn("Skeleton.fromJSON: Not found Bone with uuid " + data.bones[j]);
-			bone = new THREE.Bone();
+			bone = new Bone();
 		}
 
 		bones.push(bone);
-		boneInverses.push(new THREE.Matrix4().fromArray(data.boneInverses[j]));
+		boneInverses.push(new Matrix4().fromArray(data.boneInverses[j]));
 	}
 
-	var skeleton = new THREE.Skeleton(bones, boneInverses);
+	var skeleton = new Skeleton(bones, boneInverses);
 	skeleton.uuid = data.uuid;
 
 	return skeleton;

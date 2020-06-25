@@ -1,4 +1,11 @@
-"use strict";
+import {Pass} from "../../../../../../core/postprocessing/Pass.js";
+import {SSAONOHPass} from "../../../../../../core/postprocessing/pass/SSAONOHPass.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {PassNode} from "../PassNode.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
 
 function SSAONOHPassNode(parent)
 {
@@ -62,3 +69,4 @@ SSAONOHPassNode.prototype.setPass = function(pass)
 	this.maxDistance.setValue(pass.maxDistance);
 	this.kernelSize.setValue(pass.kernelSize);
 };
+export {SSAONOHPassNode};

@@ -1,4 +1,8 @@
-"use strict";
+import {UnitConverter} from "../../../../core/utils/UnitConverter.js";
+import {Interface} from "../../../gui/Interface.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../Text.js";
+import {Component} from "../../Component.js";
 
 /**
  * The vector box is used to represent Vector2, Vector3, Vector4 and Euler values.
@@ -330,3 +334,5 @@ VectorBox.prototype.updateSize = function()
 		this.wText.style.visibility = "hidden";
 	}
 };
+
+export {VectorBox};

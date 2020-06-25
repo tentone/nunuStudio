@@ -1,4 +1,17 @@
-"use strict";
+import {RendererConfiguration} from "../../../../../core/renderer/RendererConfiguration.js";
+import {Settings} from "../../../../Settings.js";
+import {SettingsTab} from "../SettingsTab.js";
+import {Interface} from "../../../Interface.js";
+import {RendererConfigurationFormSnippet} from "../../../form-snippet/RendererConfigurationFormSnippet.js";
+import {FormSnippet} from "../../../form-snippet/FormSnippet.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TabComponent} from "../../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../../components/TableForm.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Form} from "../../../../components/Form.js";
+import {Component} from "../../../../components/Component.js";
+
 
 function RenderSettingsTab(parent, closeable, container, index)
 {
@@ -52,3 +65,4 @@ RenderSettingsTab.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+export {RenderSettingsTab};

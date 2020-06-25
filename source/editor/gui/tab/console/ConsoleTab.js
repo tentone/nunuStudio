@@ -1,4 +1,17 @@
-"use strict";
+import {Image} from "../../../../../core/resources/Image.js";
+import {Key} from "../../../../../core/input/Key.js";
+import {History} from "../../../../history/History.js";
+import {TextureRenderer} from "../../../preview/TextureRenderer.js";
+import {MaterialRenderer} from "../../../preview/MaterialRenderer.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TabComponent} from "../../../../components/tabs/TabComponent.js";
+import {SearchBox} from "../../../../components/SearchBox.js";
+import {Form} from "../../../../components/Form.js";
+import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
+import {Component} from "../../../../components/Component.js";
+import {Texture, Material, Matrix4, Matrix3} from "three";
 
 /**
  * Console tab is used for the user to access the system console output (that can be also accessed from the dev tools console).
@@ -504,7 +517,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Texture)
+	else if(object instanceof Texture)
 	{
 		var preview = TextureRenderer.generateElement(object);
 		preview.height = 70;
@@ -527,7 +540,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Material)
+	else if(object instanceof Material)
 	{
 		var preview = MaterialRenderer.generateElement(object);
 		preview.height = 60;
@@ -601,7 +614,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Matrix4)
+	else if(object instanceof Matrix4)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
@@ -617,7 +630,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Matrix3)
+	else if(object instanceof Matrix3)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
@@ -687,3 +700,5 @@ ConsoleTab.createBar = function()
 	bar.style.backgroundColor = "var(--bar-color)";
 	return bar;
 };
+
+export {ConsoleTab};

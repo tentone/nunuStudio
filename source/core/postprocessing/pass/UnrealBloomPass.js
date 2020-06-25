@@ -1,4 +1,10 @@
-"use strict";
+import {Texture} from "../../../texture/Texture.js";
+import {Pass} from "../../Pass.js";
+import {BloomPass} from "../BloomPass.js";
+import {Scene} from "../../../objects/Scene.js";
+import {Mesh} from "../../../objects/mesh/Mesh.js";
+import {Text} from "../../../../editor/components/Text.js";
+import {LuminosityHighPassShader, CopyShader, WebGLRenderTarget, UniformsUtils, ShaderMaterial, Vector2, Vector3, AdditiveBlending, MeshBasicMaterial, Color} from "three";
 
 /**
  * Unreal engine like bloom effect pass.
@@ -15,13 +21,13 @@
  */
 function UnrealBloomPass(strength, radius, threshold)
 {
-	if(THREE.LuminosityHighPassShader === undefined)
+	if(LuminosityHighPassShader === undefined)
 	{
-		console.error("UnrealBloomPass relies on THREE.LuminosityHighPassShader");
+		console.error("UnrealBloomPass relies on LuminosityHighPassShader");
 	}
-	if(THREE.CopyShader === undefined)
+	if(CopyShader === undefined)
 	{
-		console.error("UnrealBloomPass relies on THREE.CopyShader");
+		console.error("UnrealBloomPass relies on CopyShader");
 	}
 
 	Pass.call(this);
@@ -35,23 +41,23 @@ function UnrealBloomPass(strength, radius, threshold)
 
 	for(var i = 0; i < this.nMips; i++)
 	{
-		var renderTarget = new THREE.WebGLRenderTarget(0, 0, Pass.RGBALinear);
+		var renderTarget = new WebGLRenderTarget(0, 0, Pass.RGBALinear);
 		renderTarget.texture.generateMipmaps = false;
 		this.renderTargetsHorizontal.push(renderTarget);
 
-		var renderTarget = new THREE.WebGLRenderTarget(0, 0, Pass.RGBALinear);
+		var renderTarget = new WebGLRenderTarget(0, 0, Pass.RGBALinear);
 		renderTarget.texture.generateMipmaps = false;
 		this.renderTargetsVertical.push(renderTarget);
 	}
 
 	// Render target for final pass
-	this.renderTargetBright = new THREE.WebGLRenderTarget(0, 0, Pass.RGBALinear);
+	this.renderTargetBright = new WebGLRenderTarget(0, 0, Pass.RGBALinear);
 	this.renderTargetBright.texture.generateMipmaps = false;
 
 	// Luminosity high pass material
-	var highPassShader = THREE.LuminosityHighPassShader;
-	this.highPassUniforms = THREE.UniformsUtils.clone(highPassShader.uniforms);
-	this.materialHighPassFilter = new THREE.ShaderMaterial(
+	var highPassShader = LuminosityHighPassShader;
+	this.highPassUniforms = UniformsUtils.clone(highPassShader.uniforms);
+	this.materialHighPassFilter = new ShaderMaterial(
 	{
 		uniforms: this.highPassUniforms,
 		vertexShader: highPassShader.vertexShader,
@@ -65,7 +71,7 @@ function UnrealBloomPass(strength, radius, threshold)
 	for(var i = 0; i < this.nMips; i++)
 	{
 		this.separableBlurMaterials.push(UnrealBloomPass.getSeperableBlurMaterial(kernelSizeArray[i]));
-		this.separableBlurMaterials[i].uniforms["texSize"].value = new THREE.Vector2(0, 0);
+		this.separableBlurMaterials[i].uniforms["texSize"].value = new Vector2(0, 0);
 	}
 
 	// Composite material
@@ -82,18 +88,18 @@ function UnrealBloomPass(strength, radius, threshold)
 	this.compositeMaterial.uniforms["bloomStrength"].value = (strength !== undefined) ? strength : 0.8;
 	this.compositeMaterial.uniforms["bloomRadius"].value = (radius !== undefined) ? radius : 0.3;
 	this.compositeMaterial.uniforms["bloomFactors"].value = [1.0, 0.8, 0.6, 0.4, 0.2];
-	this.compositeMaterial.uniforms["bloomTintColors"].value = [new THREE.Vector3(1, 1, 1), new THREE.Vector3(1, 1, 1), new THREE.Vector3(1, 1, 1), new THREE.Vector3(1, 1, 1), new THREE.Vector3(1, 1, 1)];
+	this.compositeMaterial.uniforms["bloomTintColors"].value = [new Vector3(1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, 1, 1)];
 	this.compositeMaterial.needsUpdate = true;
 
 	// Copy material
-	this.copyUniforms = THREE.UniformsUtils.clone(THREE.CopyShader.uniforms);
+	this.copyUniforms = UniformsUtils.clone(CopyShader.uniforms);
 	this.copyUniforms["opacity"].value = 1.0;
-	this.materialCopy = new THREE.ShaderMaterial(
+	this.materialCopy = new ShaderMaterial(
 	{
 		uniforms: this.copyUniforms,
-		vertexShader: THREE.CopyShader.vertexShader,
-		fragmentShader: THREE.CopyShader.fragmentShader,
-		blending: THREE.AdditiveBlending,
+		vertexShader: CopyShader.vertexShader,
+		fragmentShader: CopyShader.fragmentShader,
+		blending: AdditiveBlending,
 		depthTest: false,
 		depthWrite: false,
 		transparent: true
@@ -101,7 +107,7 @@ function UnrealBloomPass(strength, radius, threshold)
 
 	// Quad scene
 	this.createQuadScene();
-	this.basic = new THREE.MeshBasicMaterial();
+	this.basic = new MeshBasicMaterial();
 
 	// Setters and getters for uniforms
 	var self = this;
@@ -185,8 +191,8 @@ function UnrealBloomPass(strength, radius, threshold)
 
 UnrealBloomPass.prototype = Object.create(Pass.prototype);
 
-UnrealBloomPass.BlurDirectionX = new THREE.Vector2(1.0, 0.0);
-UnrealBloomPass.BlurDirectionY = new THREE.Vector2(0.0, 1.0);
+UnrealBloomPass.BlurDirectionX = new Vector2(1.0, 0.0);
+UnrealBloomPass.BlurDirectionY = new Vector2(0.0, 1.0);
 
 UnrealBloomPass.prototype.dispose = function()
 {
@@ -222,7 +228,7 @@ UnrealBloomPass.prototype.setSize = function(width, height)
 UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
 	renderer.autoClear = false;
-	renderer.setClearColor(new THREE.Color(0, 0, 0), 0);
+	renderer.setClearColor(new Color(0, 0, 0), 0);
 	
 	if(maskActive)
 	{
@@ -313,7 +319,7 @@ UnrealBloomPass.prototype.toJSON = function(meta)
 
 UnrealBloomPass.getSeperableBlurMaterial = function(kernelRadius)
 {
-	return new THREE.ShaderMaterial(
+	return new ShaderMaterial(
 	{
 		defines:
 		{
@@ -323,8 +329,8 @@ UnrealBloomPass.getSeperableBlurMaterial = function(kernelRadius)
 		uniforms:
 		{
 			colorTexture: {value: null},
-			texSize: {value: new THREE.Vector2(0.5, 0.5)},
-			direction: {value: new THREE.Vector2(0.5, 0.5)}
+			texSize: {value: new Vector2(0.5, 0.5)},
+			direction: {value: new Vector2(0.5, 0.5)}
 		},
 		vertexShader: "\n\
 			varying vec2 vUv;\n\
@@ -368,7 +374,7 @@ UnrealBloomPass.getSeperableBlurMaterial = function(kernelRadius)
 
 UnrealBloomPass.getCompositeMaterial = function(nMips)
 {
-	return new THREE.ShaderMaterial(
+	return new ShaderMaterial(
 	{
 		defines:
 		{
@@ -423,3 +429,5 @@ UnrealBloomPass.getCompositeMaterial = function(nMips)
 			}"
 	});
 };
+
+export {UnrealBloomPass};

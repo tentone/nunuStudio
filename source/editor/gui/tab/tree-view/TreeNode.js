@@ -1,4 +1,37 @@
-"use strict";
+import {Tree} from "../../../../../core/utils/struct/Tree.js";
+import {PhysicsGenerator} from "../../../../../core/utils/PhysicsGenerator.js";
+import {ObjectUtils} from "../../../../../core/utils/ObjectUtils.js";
+import {Resource} from "../../../../../core/resources/Resource.js";
+import {Model} from "../../../../../core/resources/Model.js";
+import {Script} from "../../../../../core/objects/script/Script.js";
+import {Scene} from "../../../../../core/objects/Scene.js";
+import {Program} from "../../../../../core/objects/Program.js";
+import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
+import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
+import {Container} from "../../../../../core/objects/misc/Container.js";
+import {LightProbe} from "../../../../../core/objects/lights/LightProbe.js";
+import {ObjectLoader} from "../../../../../core/loaders/ObjectLoader.js";
+import {Mouse} from "../../../../../core/input/Mouse.js";
+import {Key} from "../../../../../core/input/Key.js";
+import {Loaders} from "../../../../Loaders.js";
+import {SwapAction} from "../../../../history/action/objects/SwapAction.js";
+import {RemoveAction} from "../../../../history/action/objects/RemoveAction.js";
+import {MoveAction} from "../../../../history/action/objects/MoveAction.js";
+import {AddAction} from "../../../../history/action/objects/AddAction.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {ActionBundle} from "../../../../history/action/ActionBundle.js";
+import {Action} from "../../../../history/action/Action.js";
+import {SceneEditor} from "../../scene-editor/SceneEditor.js";
+import {ParticleEditor} from "../../particle-editor/ParticleEditor.js";
+import {ScriptEditor} from "../../code/ScriptEditor.js";
+import {CameraEditor} from "../../camera/CameraEditor.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TabComponent} from "../../../../components/tabs/TabComponent.js";
+import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
+import {Component} from "../../../../components/Component.js";
+import {Vector2, Object3D, Mesh, SkinnedMesh, InstancedMesh, Vector3, Quaternion, Math, Material, Camera} from "three";
 
 /**
  * Represents a tree node element.
@@ -14,8 +47,8 @@ function TreeNode(container)
 	this.container = container;
 
 	// Attributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
+	this.size = new Vector2(0, 0);
+	this.position = new Vector2(0, 0);
 	this.visible = true;
 
 	// Object attached
@@ -200,7 +233,7 @@ function TreeNode(container)
 
 				for(var i = 0; i < Editor.selection.length; i++)
 				{
-					if(Editor.selection[i] instanceof THREE.Object3D)
+					if(Editor.selection[i] instanceof Object3D)
 					{
 						actions.push(new RemoveAction(Editor.selection[i]));
 						group.add(Editor.selection[i]);
@@ -244,7 +277,7 @@ function TreeNode(container)
 			}
 
 			// Mesh specific stuff
-			if(self.object instanceof THREE.Mesh || self.object instanceof THREE.SkinnedMesh || self.object instanceof THREE.InstancedMesh)
+			if(self.object instanceof Mesh || self.object instanceof SkinnedMesh || self.object instanceof InstancedMesh)
 			{
 				// If mesh has a geometry attached
 				if(self.object.geometry !== undefined)
@@ -265,16 +298,16 @@ function TreeNode(container)
 
 						var actions = [];
 						actions.push(new ChangeAction(self.object, "geometry", geometry));
-						actions.push(new ChangeAction(self.object, "position", new THREE.Vector3(0, 0, 0)));
-						actions.push(new ChangeAction(self.object, "scale", new THREE.Vector3(1, 1, 1)));
-						actions.push(new ChangeAction(self.object, "quaternion", new THREE.Quaternion(0, 0, 0, 1)));
+						actions.push(new ChangeAction(self.object, "position", new Vector3(0, 0, 0)));
+						actions.push(new ChangeAction(self.object, "scale", new Vector3(1, 1, 1)));
+						actions.push(new ChangeAction(self.object, "quaternion", new Quaternion(0, 0, 0, 1)));
 						Editor.addAction(new ActionBundle(actions));
 					});
 				}
 			}
 
 			// Convert mesh to instanced mesh
-			if(self.object instanceof THREE.Mesh && self.object.geometry !== undefined)
+			if(self.object instanceof Mesh && self.object.geometry !== undefined)
 			{
 				context.addOption(Locale.toInstancedMesh, function()
 				{
@@ -288,7 +321,7 @@ function TreeNode(container)
 			}
 
 			// Add physics to object
-			if(self.object instanceof THREE.Mesh || self.object instanceof THREE.SkinnedMesh)
+			if(self.object instanceof Mesh || self.object instanceof SkinnedMesh)
 			{
 				// Add physics object
 				function createPhysics(object, mode)
@@ -391,7 +424,7 @@ function TreeNode(container)
 					var object = new ObjectLoader().parse(self.object.toJSON());
 					object.traverse(function(child)
 					{
-						child.uuid = THREE.Math.generateUUID();
+						child.uuid = Math.generateUUID();
 					});
 					Editor.addAction(new AddAction(object, self.object.parent));
 				});
@@ -434,7 +467,7 @@ function TreeNode(container)
 		if(!self.object.locked)
 		{
 			// Object drag
-			if(DragBuffer.buffer[0] instanceof THREE.Object3D)
+			if(DragBuffer.buffer[0] instanceof Object3D)
 			{
 				if(event.layerY < 5)
 				{
@@ -476,7 +509,7 @@ function TreeNode(container)
 		var object = DragBuffer.get(uuid);
 
 		// Object 3D
-		if(object instanceof THREE.Object3D)
+		if(object instanceof Object3D)
 		{
 			if(object === self.object)
 			{
@@ -524,7 +557,7 @@ function TreeNode(container)
 			}
 		}
 		// Material
-		else if(object instanceof THREE.Material)
+		else if(object instanceof Material)
 		{
 			var actions = [];
 			self.object.traverse(function(children)
@@ -636,7 +669,7 @@ function TreeNode(container)
 			{
 				openTab(ParticleEditor, self.object);
 			}
-			else if(self.object instanceof THREE.Camera)
+			else if(self.object instanceof Camera)
 			{
 				openTab(CameraEditor, self.object);
 			}
@@ -802,7 +835,7 @@ TreeNode.prototype.setBorder = function(place)
  * Attach a object to this tree element, the icon and name of the node is set automatically.
  * 
  * @method attach
- * @param {THREE.Object3D} object
+ * @param {Object3D} object
  */
 TreeNode.prototype.attach = function(object)
 {
@@ -959,3 +992,5 @@ TreeNode.prototype.updateInterface = function()
 		this.element.style.display = "none";
 	}
 };
+
+export {TreeNode};

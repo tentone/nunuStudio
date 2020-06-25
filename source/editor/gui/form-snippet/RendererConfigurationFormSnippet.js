@@ -1,4 +1,17 @@
-"use strict";
+import {RendererConfiguration} from "../../../../core/renderer/RendererConfiguration.js";
+import {Scene} from "../../../../core/objects/Scene.js";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {CallbackAction} from "../../../history/action/CallbackAction.js";
+import {Action} from "../../../history/action/Action.js";
+import {SceneEditor} from "../../tab/scene-editor/SceneEditor.js";
+import {FormSnippet} from "../FormSnippet.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {NumberBox} from "../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+import {Form} from "../../../components/Form.js";
+import {BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping, ACESFilmicToneMapping} from "three";
 
 /** 
  * Renderer configuration object form template.
@@ -183,9 +196,9 @@ function RendererConfigurationFormSnippet(form, object)
 	this.form.addText(Locale.shadowType);
 	this.shadowsType = new DropdownList(this.form);
 	this.shadowsType.size.set(150, 18);
-	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
-	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
-	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
+	this.shadowsType.addValue("Basic", BasicShadowMap);
+	this.shadowsType.addValue("PCF", PCFShadowMap);
+	this.shadowsType.addValue("PCF Soft", PCFSoftShadowMap);
 	this.shadowsType.addValue("VSM", VSMShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
@@ -249,12 +262,12 @@ function RendererConfigurationFormSnippet(form, object)
 	this.form.addText(Locale.tonemapping).setAltText(Locale.hintTonemapping);
 	this.toneMapping = new DropdownList(this.form);
 	this.toneMapping.size.set(150, 18);
-	this.toneMapping.addValue(Locale.none, THREE.NoToneMapping);
-	this.toneMapping.addValue(Locale.linear, THREE.LinearToneMapping);
-	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);
-	this.toneMapping.addValue("Uncharted", THREE.Uncharted2ToneMapping);
-	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
-	this.toneMapping.addValue("ACES Filmic", THREE.ACESFilmicToneMapping);
+	this.toneMapping.addValue(Locale.none, NoToneMapping);
+	this.toneMapping.addValue(Locale.linear, LinearToneMapping);
+	this.toneMapping.addValue("Reinhard", ReinhardToneMapping);
+	this.toneMapping.addValue("Uncharted", Uncharted2ToneMapping);
+	this.toneMapping.addValue("Cineon", CineonToneMapping);
+	this.toneMapping.addValue("ACES Filmic", ACESFilmicToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
 		Editor.addAction(new CallbackAction(new ChangeAction(self.object, "toneMapping", self.toneMapping.getValue()), updateRenderers));
@@ -328,3 +341,5 @@ RendererConfigurationFormSnippet.prototype.updateValues = function()
 	this.physicallyCorrectLights.setValue(this.object.physicallyCorrectLights);
 	this.checkShaderErrors.setValue(this.object.checkShaderErrors);
 };
+
+export {RendererConfigurationFormSnippet};

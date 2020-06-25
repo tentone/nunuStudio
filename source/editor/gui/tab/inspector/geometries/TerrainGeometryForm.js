@@ -1,4 +1,14 @@
-"use strict";
+import {Image} from "../../../../../../core/resources/Image.js";
+import {TerrainBufferGeometry} from "../../../../../../core/geometries/TerrainBufferGeometry.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {GeometryForm} from "../GeometryForm.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {NumberRow} from "../../../../../components/input/NumberRow.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {ImageChooser} from "../../../../../components/input/ImageChooser.js";
+import {Form} from "../../../../../components/Form.js";
 
 function TerrainGeometryForm(form, object)
 {
@@ -82,3 +92,4 @@ TerrainGeometryForm.prototype.updateValues = function()
 	this.scale.setValue(this.object.geometry.parameters.scale);
 	this.image.setValue(this.object.geometry.image);
 };
+export {TerrainGeometryForm};

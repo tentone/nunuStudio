@@ -1,17 +1,17 @@
-"use strict";
+import {Line, Color} from "three";
 
 /** 
- * Line helper is used to preview THREE.Line objects.
+ * Line helper is used to preview Line objects.
  * 
  * @class LineHelper
- * @param {THREE.Line} object
+ * @param {Line} object
  * @param {number} hex Helper color in hexadecimal.
  */
 function LineHelper(object, hex)
 {
-	THREE.Line.call(this, object.geometry, object.material.clone());
+	Line.call(this, object.geometry, object.material.clone());
 
-	this.material.color = new THREE.Color((hex !== undefined) ? hex : 0xFFFF00);
+	this.material.color = new Color((hex !== undefined) ? hex : 0xFFFF00);
 	
 	/**
 	 * Object attached to the helper
@@ -25,10 +25,11 @@ function LineHelper(object, hex)
 	this.update();
 }
 
-LineHelper.prototype = Object.create(THREE.Line.prototype);
+LineHelper.prototype = Object.create(Line.prototype);
 
 LineHelper.prototype.update = function()
 {
 	this.geometry = this.object.geometry;
 	this.matrix.copy(this.object.matrixWorld);
 };
+export {LineHelper};

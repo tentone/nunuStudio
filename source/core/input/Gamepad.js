@@ -1,4 +1,5 @@
-"use strict";
+import {Key} from "../Key.js";
+import {Button} from "../../../editor/components/buttons/Button.js";
 
 /**
  * Gamepad provides basic support for gamepads.
@@ -447,3 +448,5 @@ Gamepad.RIGHT_ANALOGUE_HOR = 2;
  * @attribute RIGHT_ANALOGUE_VERT
  */
 Gamepad.RIGHT_ANALOGUE_VERT = 3;
+
+export {Gamepad};

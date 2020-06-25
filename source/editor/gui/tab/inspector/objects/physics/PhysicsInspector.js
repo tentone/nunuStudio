@@ -1,4 +1,14 @@
-"use strict";
+import {PhysicsObject} from "../../../../../../../core/objects/physics/PhysicsObject.js";
+import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../../history/action/Action.js";
+import {ObjectInspector} from "../../ObjectInspector.js";
+import {Inspector} from "../../../Inspector.js";
+import {Editor} from "../../../../../../Editor.js";
+import {Text} from "../../../../../../components/Text.js";
+import {NumberBox} from "../../../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../../../../components/input/CheckBox.js";
+import {Shape, Body} from "cannon";
 
 function PhysicsInspector(parent, object)
 {
@@ -20,13 +30,13 @@ function PhysicsInspector(parent, object)
 			{
 				var shape = shapes[i];
 				
-				if(shape.type === CANNON.Shape.types.BOX)
+				if(shape.type === Shape.types.BOX)
 				{
 					shape.halfExtents.x = scale.x / 2.0;
 					shape.halfExtents.y = scale.y / 2.0;
 					shape.halfExtents.z = scale.z / 2.0;
 				}
-				else if(shape.type === CANNON.Shape.types.SPHERE)
+				else if(shape.type === Shape.types.SPHERE)
 				{
 					shape.radius = scale.x;
 				}
@@ -57,9 +67,9 @@ function PhysicsInspector(parent, object)
 	this.bodyType = new DropdownList(this.form);
 	this.bodyType.setAltText(Locale.hintPhysicsType)
 	this.bodyType.size.set(100, 18);
-	this.bodyType.addValue(Locale.static, CANNON.Body.STATIC);
-	this.bodyType.addValue(Locale.dynamic, CANNON.Body.DYNAMIC);
-	this.bodyType.addValue(Locale.kinematic, CANNON.Body.KINEMATIC);
+	this.bodyType.addValue(Locale.static, Body.STATIC);
+	this.bodyType.addValue(Locale.dynamic, Body.DYNAMIC);
+	this.bodyType.addValue(Locale.kinematic, Body.KINEMATIC);
 	this.bodyType.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object.body, "type", self.bodyType.getValue()));
@@ -181,3 +191,5 @@ PhysicsInspector.prototype.updateInspector = function()
 	this.fixedRotation.setValue(this.object.body.fixedRotation);
 	this.collisionFilterGroup.setValue(this.object.body.collisionFilterGroup);
 };
+
+export {PhysicsInspector};

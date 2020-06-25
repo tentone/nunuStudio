@@ -1,4 +1,5 @@
-"use strict";
+import {Resource} from "../Resource.js";
+import {Text} from "../../../editor/components/Text.js";
 
 /**
  * Text file resource can be used to store data or code.
@@ -69,3 +70,5 @@ TextFile.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+export {TextFile};

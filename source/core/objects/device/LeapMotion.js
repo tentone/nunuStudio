@@ -1,4 +1,7 @@
-"use strict";
+import {Model} from "../../../resources/Model.js";
+import {Mesh} from "../../mesh/Mesh.js";
+import {Group, MeshPhongMaterial, BoxBufferGeometry, Object3D, Vector3, Matrix4} from "three";
+
 
 /**
  * Leap device object based on the official LeapJS runtime.
@@ -11,7 +14,7 @@
  */
 function LeapMotion()
 {
-	THREE.Group.call(this);
+	Group.call(this);
 
 	this.type = "LeapDevice";
 	this.name = "leap";
@@ -66,8 +69,8 @@ function LeapMotion()
 	this.armMeshes = [];
 
 	// Debug Hand Material and Geometry
-	this.material = new THREE.MeshPhongMaterial();
-	this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+	this.material = new MeshPhongMaterial();
+	this.geometry = new BoxBufferGeometry(1, 1, 1);
 
 	// Gesture
 	this.gesture = []
@@ -87,7 +90,7 @@ function LeapMotion()
 	this.data = null;
 }
 
-LeapMotion.prototype = Object.create(THREE.Group.prototype);
+LeapMotion.prototype = Object.create(Group.prototype);
 
 /**
  * Leap tracking desktop mode
@@ -200,7 +203,7 @@ LeapMotion.prototype.initialize = function()
 		self.data = data;
 	}).connect();
 
-	THREE.Object3D.prototype.initialize.call(this);
+	Object3D.prototype.initialize.call(this);
 };
 
 /**
@@ -226,7 +229,7 @@ LeapMotion.prototype.update = function(delta)
 		}
 	}
 
-	THREE.Object3D.prototype.update.call(this, delta);
+	Object3D.prototype.update.call(this, delta);
 };
 
 /**
@@ -294,7 +297,7 @@ LeapMotion.prototype.updatePoses = function()
 		var hand = this.data.hands[j];
 
 		var center = hand.sphereCenter;
-		center = new THREE.Vector3(center[0], center[1], center[2]);
+		center = new Vector3(center[0], center[1], center[2]);
 
 		// Fingers position 
 		var distance = [];
@@ -317,7 +320,7 @@ LeapMotion.prototype.updatePoses = function()
 			fingerDirection.push(finger.direction);
 			fingerJoint = finger.distal.nextJoint;
 
-			var joint = new THREE.Vector3(fingerJoint[0], fingerJoint[1], fingerJoint[2]);
+			var joint = new Vector3(fingerJoint[0], fingerJoint[1], fingerJoint[2]);
 			distance.push((center.distanceTo(joint))/hand._scaleFactor);
 
 			if(i !== 0)
@@ -497,7 +500,7 @@ LeapMotion.prototype.updateMesh = function(bone, mesh)
 	mesh.position.fromArray(bone.center());
 	mesh.position.divideScalar(150);
 
-	mesh.setRotationFromMatrix((new THREE.Matrix4()).fromArray(bone.matrix()));
+	mesh.setRotationFromMatrix((new Matrix4()).fromArray(bone.matrix()));
 	mesh.scale.set(bone.width/150, bone.width/150, bone.length/150);
 
 	this.add(mesh);
@@ -514,7 +517,7 @@ LeapMotion.prototype.getMovement = function()
 	var actual = this.data.gestures[0].position;
 	var previous = this.data.gestures[0].startPosition;
 
-	var speed = new THREE.Vector3(actual[0] - previous[0], actual[1] - previous[1], actual[2] - previous[2]);
+	var speed = new Vector3(actual[0] - previous[0], actual[1] - previous[1], actual[2] - previous[2]);
 	speed.divideScalar(this.data.currentFrameRate);
 
 	return speed;
@@ -522,7 +525,7 @@ LeapMotion.prototype.getMovement = function()
 
 LeapMotion.prototype.toJSON = function(meta)
 {
-	var data = THREE.Group.prototype.toJSON.call(this, meta);
+	var data = Group.prototype.toJSON.call(this, meta);
 
 	data.object.type = this.type;
 	data.object.debugModel = this.debugModel;
@@ -533,3 +536,4 @@ LeapMotion.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {LeapMotion};

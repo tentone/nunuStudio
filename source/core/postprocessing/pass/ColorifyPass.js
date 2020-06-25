@@ -1,4 +1,6 @@
-"use strict";
+import {ShaderPass} from "../../ShaderPass.js";
+import {Pass} from "../../Pass.js";
+import {ColorifyShader} from "three";
 
 /**
  * Colorify pass can be used to colorify the scene.
@@ -8,7 +10,7 @@
  */
 function ColorifyPass()
 {
-	ShaderPass.call(this, THREE.ColorifyShader);
+	ShaderPass.call(this, ColorifyShader);
 
 	this.type = "Colorify";
 
@@ -39,3 +41,4 @@ ColorifyPass.prototype.toJSON = function(meta)
 	
 	return data;
 };
+export {ColorifyPass};

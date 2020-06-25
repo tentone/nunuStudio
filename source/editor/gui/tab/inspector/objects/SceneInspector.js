@@ -1,4 +1,24 @@
-"use strict";
+import {CubeTexture} from "../../../../../../core/texture/CubeTexture.js";
+import {Scene} from "../../../../../../core/objects/Scene.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {ObjectInspector} from "../ObjectInspector.js";
+import {Inspector} from "../../Inspector.js";
+import {Interface} from "../../../../Interface.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {TableForm} from "../../../../../components/TableForm.js";
+import {VectorBox} from "../../../../../components/input/VectorBox.js";
+import {TextureChooser} from "../../../../../components/input/TextureChooser.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../../components/input/DropdownList.js";
+import {CubeTextureBox} from "../../../../../components/input/CubeTextureBox.js";
+import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
+import {CheckBox} from "../../../../../components/input/CheckBox.js";
+import {Form} from "../../../../../components/Form.js";
+import {ButtonText} from "../../../../../components/buttons/ButtonText.js";
+import {Button} from "../../../../../components/buttons/Button.js";
+import {Color, Fog, FogExp2, Texture} from "three";
 
 function SceneInspector(parent, object)
 {
@@ -36,7 +56,7 @@ function SceneInspector(parent, object)
 	this.background.setValue(0, 0, 0);
 	this.background.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.object, "background", new THREE.Color(self.background.getValueHex())));
+		Editor.addAction(new ChangeAction(self.object, "background", new Color(self.background.getValueHex())));
 	});
 	this.form.add(this.background);
 	this.form.nextRow();
@@ -79,9 +99,9 @@ function SceneInspector(parent, object)
 	this.form.addText(Locale.fog);
 	this.fog = new DropdownList(this.form);
 	this.fog.size.set(100, 18);
-	this.fog.addValue(Locale.none, THREE.Fog.NONE);
-	this.fog.addValue(Locale.linear, THREE.Fog.LINEAR);
-	this.fog.addValue(Locale.exponential, THREE.Fog.EXPONENTIAL);
+	this.fog.addValue(Locale.none, Fog.NONE);
+	this.fog.addValue(Locale.linear, Fog.LINEAR);
+	this.fog.addValue(Locale.exponential, Fog.EXPONENTIAL);
 	this.fog.setOnChange(function()
 	{
 		self.object.setFogMode(self.fog.getSelectedIndex());
@@ -225,34 +245,34 @@ SceneInspector.prototype.updateInspector = function()
 {
 	this.default.setValue(this.object.uuid === this.object.parent.defaultScene);
 	
-	if(this.object.fog instanceof THREE.Fog)
+	if(this.object.fog instanceof Fog)
 	{
-		this.fog.setValue(THREE.Fog.LINEAR);
+		this.fog.setValue(Fog.LINEAR);
 		this.fogLinearColor.setValueHex(this.object.fog.color.getHex());
 		this.fogNear.setValue(this.object.fog.near);
 		this.fogFar.setValue(this.object.fog.far);
 		this.updateForms();
 	}
-	else if(this.object.fog instanceof THREE.FogExp2)
+	else if(this.object.fog instanceof FogExp2)
 	{
-		this.fog.setValue(THREE.Fog.EXPONENTIAL);
+		this.fog.setValue(Fog.EXPONENTIAL);
 		this.fogExponentialColor.setValueHex(this.object.fog.color.getHex());
 		this.fogDensity.setValue(this.object.fog.density);
 		this.updateForms();
 	}
 	else
 	{
-		this.fog.setValue(THREE.Fog.NONE);
+		this.fog.setValue(Fog.NONE);
 		this.updateForms();
 	}
 
 	if(this.object.background !== null)
 	{
-		if(this.object.background instanceof THREE.Color)
+		if(this.object.background instanceof Color)
 		{
 			this.background.setValue(this.object.background.r, this.object.background.g, this.object.background.b);
 		}
-		else if(this.object.background instanceof THREE.Texture)
+		else if(this.object.background instanceof Texture)
 		{
 			this.backgroundTexture.setValue(this.object.background);
 		}
@@ -275,11 +295,13 @@ SceneInspector.prototype.updateForms = function()
 {
 	ObjectInspector.prototype.updateInspector.call(this);
 	
-	this.fogLinearForm.visible = (this.object.fog instanceof THREE.Fog) ? true : false;
+	this.fogLinearForm.visible = (this.object.fog instanceof Fog) ? true : false;
 	this.fogLinearForm.updateInterface();
 
-	this.fogExponentialForm.visible = (this.object.fog instanceof THREE.FogExp2) ? true : false;
+	this.fogExponentialForm.visible = (this.object.fog instanceof FogExp2) ? true : false;
 	this.fogExponentialForm.updateInterface();
 
 	this.form.updateInterface();
 };
+
+export {SceneInspector};

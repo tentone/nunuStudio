@@ -1,4 +1,5 @@
-"use strict";
+import {Component} from "../../Component.js";
+import {Color} from "three";
 
 function ColorChooser(parent)
 {
@@ -55,13 +56,13 @@ ColorChooser.prototype.setOnChange = function(onChange)
  * Set value stored in the input element.
  *
  * @method setValue
- * @param {number} r Red color channel, if a THREE.Color value is received it is used instead.
+ * @param {number} r Red color channel, if a Color value is received it is used instead.
  * @param {number} g Green color channel.
  * @param {number} b Blue color channel.
  */
 ColorChooser.prototype.setValue = function(r, g, b)
 {
-	if(r instanceof THREE.Color)
+	if(r instanceof Color)
 	{
 		this.color.fromRGB(r.r * 255, r.g * 255, r.b * 255)
 	}
@@ -126,3 +127,5 @@ ColorChooser.prototype.getValueHex = function()
 {
 	return (this.color.rgb[0] << 16 ^ this.color.rgb[1] << 8 ^ this.color.rgb[2] << 0);
 };
+
+export {ColorChooser};

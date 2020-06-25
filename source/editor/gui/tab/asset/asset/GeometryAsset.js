@@ -1,4 +1,15 @@
-"use strict";
+import {Resource} from "../../../../../../core/resources/Resource.js";
+import {Image} from "../../../../../../core/resources/Image.js";
+import {RemoveResourceAction} from "../../../../../history/action/resources/RemoveResourceAction.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {Asset} from "../Asset.js";
+import {GeometryRenderer} from "../../../../preview/GeometryRenderer.js";
+import {Interface} from "../../../../Interface.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {ContextMenu} from "../../../../../components/dropdown/ContextMenu.js";
+
 
 function GeometryAsset(parent)
 {
@@ -85,3 +96,4 @@ GeometryAsset.prototype.updateMetadata = function()
 		});
 	}
 };
+export {GeometryAsset};

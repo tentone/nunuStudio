@@ -1,4 +1,5 @@
-"use strict";
+import {History} from "../../History.js";
+
 
 /**
  * Action defines the interface to apply and revert a history state.
@@ -31,3 +32,4 @@ Action.prototype.apply = function(){};
  * @method revert
  */
 Action.prototype.revert = function(){};
+export {Action};

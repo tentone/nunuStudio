@@ -1,4 +1,7 @@
-"use strict";
+import {Texture} from "../../../texture/Texture.js";
+import {Sprite} from "../../../objects/sprite/Sprite.js";
+import {Text} from "../../../../editor/components/Text.js";
+import {Material, NormalBlending, FrontSide, NoColors} from "three";
 
 /**
  * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don"t have to rewrite materials if you decide to use a different renderer.
@@ -16,7 +19,7 @@
  * 
  * @method dispose
  */
-THREE.Material.prototype.dispose = function()
+Material.prototype.dispose = function()
 {
 	function disposeTexture(texture)
 	{
@@ -47,7 +50,7 @@ THREE.Material.prototype.dispose = function()
  * @param {Object} meta Metadata.
  * @return {Object} JSON data.
  */
-THREE.Material.prototype.toJSON = function(meta)
+Material.prototype.toJSON = function(meta)
 {
 	if(meta === undefined)
 	{
@@ -272,15 +275,15 @@ THREE.Material.prototype.toJSON = function(meta)
 	}
 
 	// Shading, blending
-	if(this.blending !== THREE.NormalBlending)
+	if(this.blending !== NormalBlending)
 	{
 		data.blending = this.blending;
 	}
-	if(this.side !== THREE.FrontSide)
+	if(this.side !== FrontSide)
 	{
 		data.side = this.side;
 	}
-	if(this.vertexColors !== THREE.NoColors)
+	if(this.vertexColors !== NoColors)
 	{
 		data.vertexColors = this.vertexColors;
 	}

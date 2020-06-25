@@ -1,4 +1,9 @@
-"use strict";
+import {Container} from "../../../../../core/objects/misc/Container.js";
+import {Settings} from "../../../../Settings.js";
+import {TabGroup} from "../../TabGroup.js";
+import {TabComponent} from "../../TabComponent.js";
+import {DualContainer} from "../../../containers/DualContainer.js";
+import {Component} from "../../../Component.js";
 
 /**
  * Tab dual container is a dual container with tabgroups.
@@ -218,3 +223,5 @@ TabDualContainer.prototype.clear = function(forceAll)
 	this.elementA.clear(forceAll);
 	this.elementB.clear(forceAll);
 };
+
+export {TabDualContainer};

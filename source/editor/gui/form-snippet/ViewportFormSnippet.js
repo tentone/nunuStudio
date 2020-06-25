@@ -1,4 +1,13 @@
-"use strict";
+import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {ActionBundle} from "../../../history/action/ActionBundle.js";
+import {Action} from "../../../history/action/Action.js";
+import {FormSnippet} from "../FormSnippet.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {VectorBox} from "../../../components/input/VectorBox.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {Form} from "../../../components/Form.js";
 
 /** 
  * Viewport object form snippet, used to edit camera/renderer viewport.
@@ -86,3 +95,5 @@ ViewportFormSnippet.prototype.updateValues = function()
 	this.modeDrop.setValue(this.object.mode);
 	this.anchor.setValue(this.object.anchor);
 };
+
+export {ViewportFormSnippet};

@@ -1,4 +1,7 @@
-"use strict";
+import {Scene} from "../../Scene.js";
+import {Body, World, Shape, Sphere, Box, Vec3, Particle, Plane, Heightfield, ConvexPolyhedron} from "cannon";
+import {Group, Vector3, Quaternion, Object3D, Matrix4} from "three";
+
 
 /**
  * Wrapper for cannon.js physics objects.
@@ -13,7 +16,7 @@
  */
 function PhysicsObject()
 {
-	THREE.Group.call(this);
+	Group.call(this);
 
 	this.name = "physics";
 	this.type = "Physics";
@@ -39,10 +42,10 @@ function PhysicsObject()
 	 *  - shape Array
 	 *  
 	 * @attribute body
-	 * @type {CANNON.Body}
+	 * @type {Body}
 	 */
-	this.body = new CANNON.Body();
-	this.body.type = CANNON.Body.DYNAMIC;
+	this.body = new Body();
+	this.body.type = Body.DYNAMIC;
 	this.body.mass = 1.0;
 
 	/**
@@ -57,12 +60,12 @@ function PhysicsObject()
 	 * Refenrece to the physics world.
 	 * 
 	 * @attribute world
-	 * @type {CANNON.World}
+	 * @type {World}
 	 */
 	this.world = null;
 }
 
-PhysicsObject.prototype = Object.create(THREE.Group.prototype);
+PhysicsObject.prototype = Object.create(Group.prototype);
 
 /**
  * The position of the object is copied directly from the body.
@@ -102,11 +105,11 @@ PhysicsObject.prototype.initialize = function()
 	}
 	else if(this.mode === PhysicsObject.WORLD)
 	{
-		var position = new THREE.Vector3();
+		var position = new Vector3();
 		this.getWorldPosition(position);
 		this.body.position.copy(position);
 
-		var quaternion = new THREE.Quaternion();
+		var quaternion = new Quaternion();
 		this.getWorldQuaternion(quaternion);
 		this.body.quaternion.copy(quaternion);
 	}
@@ -123,7 +126,7 @@ PhysicsObject.prototype.initialize = function()
 		}
 	}
 
-	THREE.Object3D.prototype.initialize.call(this);
+	Object3D.prototype.initialize.call(this);
 };
 
 /**
@@ -145,14 +148,14 @@ PhysicsObject.prototype.update = function(delta)
 	{
 
 		// Physics transform matrix
-		var transform = new THREE.Matrix4();
+		var transform = new Matrix4();
 		if(this.body.fixedRotation)
 		{
 			transform.setPosition(this.body.position.x, this.body.position.y, this.body.position.z);
 		}
 		else
 		{
-			var quaternion = new THREE.Quaternion();
+			var quaternion = new Quaternion();
 			quaternion.copy(this.body.quaternion);
 			transform.makeRotationFromQuaternion(quaternion);
 			transform.setPosition(this.body.position.x, this.body.position.y, this.body.position.z);
@@ -160,27 +163,27 @@ PhysicsObject.prototype.update = function(delta)
 
 
 		// Get inverse of the world matrix
-		var inverse = new THREE.Matrix4();
+		var inverse = new Matrix4();
 		inverse.getInverse(this.parent.matrixWorld);
 
 		// Get position, scale and quaternion
-		var scale = new THREE.Vector3();
+		var scale = new Vector3();
 		inverse.multiply(transform);
 		inverse.decompose(this.position, this.quaternion, scale);
 	}
  
-	THREE.Object3D.prototype.update.call(this, delta);
+	Object3D.prototype.update.call(this, delta);
 };
 
 /**
  * Add shape to physics object body.
  * 
- * @param {CANNON.Shape} shape
+ * @param {Shape} shape
  * @method addShape
  */
 PhysicsObject.prototype.addShape = function(shape)
 {
-	if(shape instanceof CANNON.Shape)
+	if(shape instanceof Shape)
 	{
 		this.body.addShape(shape);
 	}
@@ -188,7 +191,7 @@ PhysicsObject.prototype.addShape = function(shape)
 
 PhysicsObject.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var data = Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.mode = this.mode;
 
@@ -216,30 +219,30 @@ PhysicsObject.prototype.toJSON = function(meta)
 		// Shape type
 		values.type = shape.type;
 
-		if(shape.type === CANNON.Shape.types.SPHERE)
+		if(shape.type === Shape.types.SPHERE)
 		{
 			values.radius = shape.radius;
 		}
-		else if(shape.type === CANNON.Shape.types.BOX)
+		else if(shape.type === Shape.types.BOX)
 		{
 			values.halfExtents = {}
 			values.halfExtents.x = shape.halfExtents.x;
 			values.halfExtents.y = shape.halfExtents.y;
 			values.halfExtents.z = shape.halfExtents.z;
 		}
-		else if(shape.type === CANNON.Shape.types.CONVEXPOLYHEDRON)
+		else if(shape.type === Shape.types.CONVEXPOLYHEDRON)
 		{
 			values.vertices = shape.vertices;
 			values.faces = shape.faces;
 		}
-		else if(shape.type === CANNON.Shape.types.HEIGHTFIELD)
+		else if(shape.type === Shape.types.HEIGHTFIELD)
 		{
 			values.data = shape.data;
 			values.maxValue = shape.maxValue;
 			values.minValue = shape.minValue;
 			values.elementSize = shape.elementSize;
 		}
-		else if(shape.type === CANNON.Shape.types.TRIMESH)
+		else if(shape.type === Shape.types.TRIMESH)
 		{
 			values.vertices = shape.vertices;
 			values.normals = shape.normals;
@@ -282,41 +285,42 @@ PhysicsObject.fromJSON = function(data)
 	{
 		var shape = shapes[i];
 
-		if(shape.type === CANNON.Shape.types.SPHERE)
+		if(shape.type === Shape.types.SPHERE)
 		{
-			object.body.addShape(new CANNON.Sphere(shape.radius));
+			object.body.addShape(new Sphere(shape.radius));
 		}
-		else if(shape.type === CANNON.Shape.types.BOX)
+		else if(shape.type === Shape.types.BOX)
 		{
-			object.body.addShape(new CANNON.Box(new CANNON.Vec3(shape.halfExtents.x, shape.halfExtents.y, shape.halfExtents.z)));
+			object.body.addShape(new Box(new Vec3(shape.halfExtents.x, shape.halfExtents.y, shape.halfExtents.z)));
 		}
-		else if(shape.type === CANNON.Shape.types.PARTICLE)
+		else if(shape.type === Shape.types.PARTICLE)
 		{
-			object.body.addShape(new CANNON.Particle());
+			object.body.addShape(new Particle());
 		}
-		else if(shape.type === CANNON.Shape.types.PLANE)
+		else if(shape.type === Shape.types.PLANE)
 		{
-			object.body.addShape(new CANNON.Plane());
+			object.body.addShape(new Plane());
 		}
-		else if(shape.type === CANNON.Shape.types.HEIGHTFIELD)
+		else if(shape.type === Shape.types.HEIGHTFIELD)
 		{
-			object.body.addShape(new CANNON.Heightfield(shape.data,
+			object.body.addShape(new Heightfield(shape.data,
 			{
 				maxValue : shape.maxValue,
 				minValue : shape.minValue,
 				elementSize : shape.elementSize
 			}));
 		}
-		else if(shape.type === CANNON.Shape.types.CONVEXPOLYHEDRON)
+		else if(shape.type === Shape.types.CONVEXPOLYHEDRON)
 		{
 			for(var k = 0; k < shape.vertices.length; k++)
 			{
-				shape.vertices[k] = new CANNON.Vec3(shape.vertices[k].x, shape.vertices[k].y, shape.vertices[k].z);
+				shape.vertices[k] = new Vec3(shape.vertices[k].x, shape.vertices[k].y, shape.vertices[k].z);
 			}
 			
-			object.body.addShape(new CANNON.ConvexPolyhedron(shape.vertices, shape.faces));
+			object.body.addShape(new ConvexPolyhedron(shape.vertices, shape.faces));
 		}
 	}
 
 	return object;
 };
+export {PhysicsObject};

@@ -1,4 +1,8 @@
-"use strict";
+import {EventManager} from "../../../core/utils/EventManager.js";
+import {Container} from "../../../core/objects/misc/Container.js";
+import {Interface} from "../../gui/Interface.js";
+import {Text} from "../Text.js";
+import {Vector2} from "three";
 
 /**
  * Component is the base object for all GUI elements.
@@ -61,17 +65,17 @@ function Component(parent, type)
 	 * Size of this component in px.
 	 *
 	 * @attribute size
-	 * @type {THREE.Vector2}
+	 * @type {Vector2}
 	 */
-	this.size = new THREE.Vector2(0, 0);
+	this.size = new Vector2(0, 0);
 	
 	/**
 	 * Position of this component relatively to its parent in px.
 	 *
 	 * @attribute position
-	 * @type {THREE.Vector2}
+	 * @type {Vector2}
 	 */
-	this.position = new THREE.Vector2(0, 0);
+	this.position = new Vector2(0, 0);
 
 	/**
 	 * Positioning mode, indicates how to anchor the component.
@@ -488,3 +492,5 @@ Component.prototype.updateInterface = function()
 		this.updatePosition();
 	}
 };
+
+export {Component};

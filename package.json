@@ -42,8 +42,9 @@
 	"dependencies": {
 		"three": "^0.117.1",
 		"cannon": "^0.6.2",
+		"pson": "2.0.0",
 		"codemirror": "^5.55.0",
-		"pson": "2.0.0"
+		"leapjs": "^0.6.4"
 	},
 	"devDependencies": {
 		"cordova": "~9.0.0",

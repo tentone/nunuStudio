@@ -1,4 +1,5 @@
-"use strict";
+import {Keyboard} from "../Keyboard.js";
+import {Key} from "../Key.js";
 
 /**
  * Tizen keyboard contains codes of multiple tizen specific key codes.
@@ -375,3 +376,5 @@ TizenKeyboard.MEDIA_TRACK_NEXT = 10233;
  * @type {number}
  */
 TizenKeyboard.MEDIA_3D = 10199;
+
+export {TizenKeyboard};

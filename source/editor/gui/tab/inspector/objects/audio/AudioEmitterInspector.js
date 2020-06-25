@@ -1,4 +1,15 @@
-"use strict";
+import {Audio} from "../../../../../../../core/resources/Audio.js";
+import {AudioEmitter} from "../../../../../../../core/objects/audio/AudioEmitter.js";
+import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../../history/action/Action.js";
+import {ObjectInspector} from "../../ObjectInspector.js";
+import {Inspector} from "../../../Inspector.js";
+import {Editor} from "../../../../../../Editor.js";
+import {Text} from "../../../../../../components/Text.js";
+import {AudioPlayer} from "../../../../../../components/media/AudioPlayer.js";
+import {Slider} from "../../../../../../components/input/Slider.js";
+import {NumberBox} from "../../../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../../../components/input/CheckBox.js";
 
 function AudioEmitterInspector(parent, object)
 {
@@ -82,3 +93,5 @@ AudioEmitterInspector.prototype.updateInspector = function()
 	this.loop.setValue(this.object.loop);
 	this.playbackRate.setValue(this.object.playbackRate);
 };
+
+export {AudioEmitterInspector};

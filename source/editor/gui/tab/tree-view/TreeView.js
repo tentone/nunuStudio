@@ -1,4 +1,13 @@
-"use strict";
+import {Tree} from "../../../../../core/utils/struct/Tree.js";
+import {TreeNode} from "../TreeNode.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TabGroup} from "../../../../components/tabs/TabGroup.js";
+import {TabComponent} from "../../../../components/tabs/TabComponent.js";
+import {SearchBox} from "../../../../components/SearchBox.js";
+import {Component} from "../../../../components/Component.js";
+import {Object3D} from "three";
 
 /**
  * TreeView component is used to represent a object tree.
@@ -119,8 +128,8 @@ TreeView.prototype.traverse = function(callback)
  * Add new object to a parent in a specific position.
  * 
  * @method addObject
- * @param {THREE.Object3D} object New object to add to the tree.
- * @param {THREE.Object3D} parent Parent to insert the object.
+ * @param {Object3D} object New object to add to the tree.
+ * @param {Object3D} parent Parent to insert the object.
  * @param {number} index Index to insert the object.
  */
 TreeView.prototype.addObject = function(object, parent, index)
@@ -159,8 +168,8 @@ TreeView.prototype.addObject = function(object, parent, index)
  * Remove a object from the treeview.
  * 
  * @method removeObject
- * @param {THREE.Object3D} object Object to be removed from the tree.
- * @param {THREE.Object3D} parent Parent object.
+ * @param {Object3D} object Object to be removed from the tree.
+ * @param {Object3D} parent Parent object.
  */
 TreeView.prototype.removeObject = function(object, parent)
 {
@@ -191,9 +200,9 @@ TreeView.prototype.removeObject = function(object, parent)
  * Move object in the tree, from a position to another position and parent.
  * 
  * @method addObject
- * @param {THREE.Object3D} object New object to add to the tree.
- * @param {THREE.Object3D} oldParent Old parent to remove the object from.
- * @param {THREE.Object3D} newParent New parent to insert the object into.
+ * @param {Object3D} object New object to add to the tree.
+ * @param {Object3D} oldParent Old parent to remove the object from.
+ * @param {Object3D} newParent New parent to insert the object into.
  * @param {number} index New index to insert the object.
  */
 TreeView.prototype.moveObject = function(object, oldParent, newParent, index)
@@ -310,3 +319,5 @@ TreeView.prototype.updateSize = function()
 	this.search.size.set(this.size.x, 25);
 	this.search.updateInterface();
 };
+
+export {TreeView};

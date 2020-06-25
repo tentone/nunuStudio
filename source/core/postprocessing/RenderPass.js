@@ -1,4 +1,4 @@
-"use strict";
+import {Pass} from "../Pass.js";
 
 /**
  * Render pass is used to render the scene the same way as if were using the renderer directly.
@@ -35,3 +35,5 @@ RenderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 	renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
 	renderer.render(scene, camera);
 };
+
+export {RenderPass};

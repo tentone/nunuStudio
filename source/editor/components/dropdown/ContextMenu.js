@@ -1,4 +1,11 @@
-"use strict";
+import {DOMUtils} from "../../../utils/DOMUtils.js";
+import {Interface} from "../../../gui/Interface.js";
+import {Text} from "../../Text.js";
+import {DropdownMenu} from "../DropdownMenu.js";
+import {ButtonMenu} from "../ButtonMenu.js";
+import {Component} from "../../Component.js";
+import {Button} from "../../buttons/Button.js";
+import {Vector2} from "three";
 
 /**
  * Context menu element.
@@ -20,7 +27,7 @@ function ContextMenu(parent)
 		self.destroy();
 	};
 
-	this.offset = new THREE.Vector2(20, 10);
+	this.offset = new Vector2(20, 10);
 	
 	/**
 	 * Options in this menu.
@@ -144,3 +151,5 @@ ContextMenu.prototype.updatePosition = function()
 		this.element.style.top = (this.position.y - this.offset.y - out.y) + "px";
 	}
 };
+
+export {ContextMenu};

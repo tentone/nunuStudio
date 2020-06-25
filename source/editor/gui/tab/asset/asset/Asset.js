@@ -1,4 +1,12 @@
-"use strict";
+import {Resource} from "../../../../../../core/resources/Resource.js";
+import {Image} from "../../../../../../core/resources/Image.js";
+import {Key} from "../../../../../../core/input/Key.js";
+import {Interface} from "../../../../Interface.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {Component} from "../../../../../components/Component.js";
+import {Vector2} from "three";
+
 
 /**
  * Asset represents an resource in the asset explorer.
@@ -15,7 +23,7 @@ function Asset(parent)
 
 	this.asset = null;
 
-	this.scale = new THREE.Vector2(0.7, 0.7);
+	this.scale = new Vector2(0.7, 0.7);
 
 	// Element
 	this.element.style.display = "block";
@@ -161,3 +169,4 @@ Asset.prototype.updateMetadata = function()
 };
 
 Asset.prototype.updateInterface = function(){};
+export {Asset};

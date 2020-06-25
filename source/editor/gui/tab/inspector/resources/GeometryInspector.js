@@ -1,4 +1,17 @@
-"use strict";
+import {Timer} from "../../../../../../core/utils/timer/Timer.js";
+import {AnimationTimer} from "../../../../../../core/utils/timer/AnimationTimer.js";
+import {Resource} from "../../../../../../core/resources/Resource.js";
+import {OrbitControls} from "../../../../../../core/objects/controls/OrbitControls.js";
+import {PerspectiveCamera} from "../../../../../../core/objects/cameras/PerspectiveCamera.js";
+import {Mouse} from "../../../../../../core/input/Mouse.js";
+import {EditorOrbitControls} from "../../../scene-editor/controls/EditorOrbitControls.js";
+import {ResourceInspector} from "../ResourceInspector.js";
+import {Inspector} from "../../Inspector.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {RendererCanvas} from "../../../../../components/RendererCanvas.js";
+import {Canvas} from "../../../../../components/Canvas.js";
+import {Scene, DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3, GridHelper} from "three";
 
 function GeometryInspector(parent, object)
 {
@@ -23,15 +36,15 @@ function GeometryInspector(parent, object)
 	this.mouse.setCanvas(this.preview.canvas);
 
 	// Scene
-	this.scene = new THREE.Scene();
+	this.scene = new Scene();
 
 	// Grid
 	this.grid = null;
 
-	var directional = new THREE.DirectionalLight(0x777777, 1.0);
+	var directional = new DirectionalLight(0x777777, 1.0);
 	directional.position.set(3e3, 1e4, 4e2);
 	this.scene.add(directional);
-	this.scene.add(new THREE.AmbientLight(0x888888));
+	this.scene.add(new AmbientLight(0x888888));
 
 	// Camera
 	this.camera = new PerspectiveCamera(90, this.preview.size.x / this.preview.size.y);
@@ -42,7 +55,7 @@ function GeometryInspector(parent, object)
 	this.scene.add(this.controls);
 
 	// Mesh
-	this.mesh = new THREE.Mesh(new THREE.Geometry(), new THREE.MeshPhongMaterial());
+	this.mesh = new Mesh(new Geometry(), new MeshPhongMaterial());
 	this.scene.add(this.mesh);
 
 	// Render loop timer
@@ -77,11 +90,11 @@ GeometryInspector.prototype.updateInspector = function()
 	geometry.computeBoundingBox();
 	
 	var box = geometry.boundingBox;
-	var center = new THREE.Vector3();
+	var center = new Vector3();
 	center.addVectors(box.min, box.max);
 	center.multiplyScalar(-0.5);
 
-	var size = new THREE.Vector3();
+	var size = new Vector3();
 	box.getSize(size);
 
 	var max = size.toArray().reduce(function(a, b)
@@ -94,7 +107,7 @@ GeometryInspector.prototype.updateInspector = function()
 		this.scene.remove(this.grid);
 	}
 
-	this.grid = new THREE.GridHelper(max * 2, 50, 0x888888);
+	this.grid = new GridHelper(max * 2, 50, 0x888888);
 	this.scene.add(this.grid);
 
 	this.mesh.geometry = geometry;
@@ -102,3 +115,5 @@ GeometryInspector.prototype.updateInspector = function()
 
 	this.controls.focusObject(this.mesh);
 };
+
+export {GeometryInspector};

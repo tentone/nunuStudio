@@ -1,4 +1,6 @@
-"use strict";
+import {Scene} from "../../../objects/Scene.js";
+import {Fog} from "three";
+
 
 /**
  * Fog class is used to store fog attributes attached to a Scene
@@ -15,7 +17,7 @@
  * @attribute NONE
  * @type {number}
  */
-THREE.Fog.NONE = 0;
+Fog.NONE = 0;
 
 /**
  * Linear fog
@@ -23,7 +25,7 @@ THREE.Fog.NONE = 0;
  * @attribute LINEAR
  * @type {number}
  */
-THREE.Fog.LINEAR = 1;
+Fog.LINEAR = 1;
 
 /**
  * Exponential fog
@@ -31,4 +33,4 @@ THREE.Fog.LINEAR = 1;
  * @attribute EXPONENTIAL
  * @type {number}
  */
-THREE.Fog.EXPONENTIAL = 2;
+Fog.EXPONENTIAL = 2;

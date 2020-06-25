@@ -1,4 +1,9 @@
-"use strict";
+import {Program} from "../../Program.js";
+import {Mouse} from "../../../input/Mouse.js";
+import {Keyboard} from "../../../input/Keyboard.js";
+import {Key} from "../../../input/Key.js";
+import {Button} from "../../../../editor/components/buttons/Button.js";
+import {Group, Vector2, Vector3, Object3D, Matrix4} from "three";
 
 /**
  * First person controls can be controlled using the mouse and keyboard.
@@ -13,7 +18,7 @@
  */
 function FirstPersonControls()
 {
-	THREE.Group.call(this);
+	Group.call(this);
 
 	this.name = "controls";
 	this.type = "FirstPersonControls";
@@ -82,17 +87,17 @@ function FirstPersonControls()
 	 * @property vector
 	 * @type {Vector2}
 	 */	
-	this.vector = new THREE.Vector2(0, 0);
+	this.vector = new Vector2(0, 0);
 
 	this.mouse = null;
 	this.keyboard = null;
 
-	this.tempVector = new THREE.Vector3();
+	this.tempVector = new Vector3();
 }
 
-FirstPersonControls.UP = new THREE.Vector3(0, 1, 0);
+FirstPersonControls.UP = new Vector3(0, 1, 0);
 
-FirstPersonControls.prototype = Object.create(THREE.Group.prototype);
+FirstPersonControls.prototype = Object.create(Group.prototype);
 
 FirstPersonControls.prototype.initialize = function()
 {
@@ -110,7 +115,7 @@ FirstPersonControls.prototype.initialize = function()
 
 	this.updateControls();
 	
-	THREE.Group.prototype.initialize.call(this);
+	Group.prototype.initialize.call(this);
 };
 
 FirstPersonControls.prototype.update = function(delta)
@@ -158,21 +163,21 @@ FirstPersonControls.prototype.update = function(delta)
 		}
 		if(this.keyboard.keyPressed(this.moveKeys[2]))
 		{
-			var direction = new THREE.Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
+			var direction = new Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
 			direction.normalize();
 			direction.multiplyScalar(this.moveSpeed);
 			this.position.sub(direction);
 		}
 		if(this.keyboard.keyPressed(this.moveKeys[3]))
 		{
-			var direction = new THREE.Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
+			var direction = new Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
 			direction.normalize();
 			direction.multiplyScalar(this.moveSpeed);
 			this.position.sub(direction);
 		}
 	}
 	
-	THREE.Object3D.prototype.update.call(this, delta);
+	Object3D.prototype.update.call(this, delta);
 };
 
 /**
@@ -185,10 +190,10 @@ FirstPersonControls.prototype.update = function(delta)
 FirstPersonControls.prototype.updateControls = function()
 {
 	var cos = Math.cos(this.vector.y);
-	var direction = new THREE.Vector3(Math.sin(this.vector.x) * cos, Math.sin(this.vector.y), Math.cos(this.vector.x) * cos);
+	var direction = new Vector3(Math.sin(this.vector.x) * cos, Math.sin(this.vector.y), Math.cos(this.vector.x) * cos);
 	direction.add(this.position);
 
-	var matrix = new THREE.Matrix4();
+	var matrix = new Matrix4();
 	matrix.lookAt(this.position, direction, FirstPersonControls.UP);
 	this.quaternion.setFromRotationMatrix(matrix);
 };
@@ -210,7 +215,7 @@ FirstPersonControls.prototype.getDirection = function()
 
 FirstPersonControls.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var data = Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.moveSpeed = this.moveSpeed;
 	data.object.sensitivity = this.sensitivity;
@@ -221,3 +226,4 @@ FirstPersonControls.prototype.toJSON = function(meta)
 	
 	return data;
 };
+export {FirstPersonControls};

@@ -1,4 +1,4 @@
-"use strict";
+import {Vector2} from "three";
 
 /**
  * Utils to maanipulate DOM elements. 
@@ -77,7 +77,7 @@ DOMUtils.getPosition = function(element)
  *
  * @method checkBorder
  * @param {Element} element DOM element to test.
- * @return {THREE.Vector2} Distance outside of the viewport.
+ * @return {Vector2} Distance outside of the viewport.
  */
 DOMUtils.checkBorder = function(element)
 {
@@ -124,3 +124,5 @@ DOMUtils.checkBorder = function(element)
 
 	return result;
 };
+
+export {DOMUtils};

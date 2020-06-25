@@ -1,4 +1,9 @@
-"use strict";
+import {Key} from "../../../../../core/input/Key.js";
+import {AnimationMixer} from "../../../../../core/animation/AnimationMixer.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
+import {Component} from "../../../../components/Component.js";
 
 /**
  * Animation keyframe is a point the the animation track relative to a specific object.
@@ -100,3 +105,5 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 }
 
 AnimationKeyframe.prototype = Object.create(Component.prototype);
+
+export {AnimationKeyframe};

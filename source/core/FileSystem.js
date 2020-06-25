@@ -1,4 +1,9 @@
-"use strict";
+import {BufferUtils} from "../utils/binary/BufferUtils.js";
+import {Base64Utils} from "../utils/binary/Base64Utils.js";
+import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
+import {Nunu} from "../Nunu.js";
+import {Text} from "../../editor/components/Text.js";
+
 
 /**
  * FileSystem is used to read and write files using nunuStudio.
@@ -827,3 +832,4 @@ FileSystem.getFileExtension = function(file)
 	
 	return "";
 };
+export {FileSystem};

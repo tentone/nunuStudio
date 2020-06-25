@@ -52,9 +52,9 @@ for(var i = 0; i < paths.length; i++)
 
 var external =
 [
-	{namespace: "THREE", package: "three", regex: new RegExp("THREE\.([A-Z][A-Za-z0-9]+)", "g")},
-	{namespace: "CANNON", package: "cannon", regex: new RegExp("CANNON\.([A-Z][A-Za-z0-9]+)", "g")},
-	{namespace: "dcodeIO.PSON", package: "pson", regex: new RegExp("dcodeIO\.PSON\.([A-Z][A-Za-z0-9]+)", "g")},
+	{namespace: "THREE", package: "three", regex: new RegExp("THREE\.([A-Z][A-Za-z0-9]+)", "g"), replace: "$1"},
+	{namespace: "CANNON", package: "cannon", regex: new RegExp("CANNON\.([A-Z][A-Za-z0-9]+)", "g"), replace: "$1"},
+	{namespace: "dcodeIO.PSON", package: "pson", regex: new RegExp("dcodeIO\.PSON\.([A-Z][A-Za-z0-9]+)", "g"), replace: "$1"},
 	
 ];
 
@@ -90,7 +90,7 @@ for(var i = 0; i < files.length; i++)
 		// Replace by modules
 		if(found.length > 0)
 		{
-			data = data.replace(external[j].regex, "$1");
+			data = data.replace(external[j].regex, external[j].replace);
 			data = "import {" + found.join(", ") + "} from \"" + external[j].package + "\";\n" + data;			
 		}
 	}

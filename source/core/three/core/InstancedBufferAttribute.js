@@ -1,8 +1,8 @@
-"use strict";
+import {InstancedBufferAttribute, BufferAttribute} from "three";
 
-THREE.InstancedBufferAttribute.prototype.toJSON = function()
+InstancedBufferAttribute.prototype.toJSON = function()
 {
-	var data = THREE.BufferAttribute.prototype.toJSON.call(this);
+	var data = BufferAttribute.prototype.toJSON.call(this);
 
 	data.type = "InstancedBufferAttribute";
 	data.meshPerAttribute = this.meshPerAttribute;

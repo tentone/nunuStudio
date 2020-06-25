@@ -1,4 +1,21 @@
-"use strict";
+import {Tree} from "../../../core/utils/struct/Tree.js";
+import {Program} from "../../../core/objects/Program.js";
+import {Container} from "../../../core/objects/misc/Container.js";
+import {Nunu} from "../../../core/Nunu.js";
+import {FileSystem} from "../../../core/FileSystem.js";
+import {TreeView} from "../tab/tree-view/TreeView.js";
+import {ProfilingTab} from "../tab/profiling/ProfilingTab.js";
+import {InspectorContainer} from "../tab/inspector/InspectorContainer.js";
+import {Inspector} from "../tab/inspector/Inspector.js";
+import {ConsoleTab} from "../tab/console/ConsoleTab.js";
+import {AssetExplorer} from "../tab/asset/AssetExplorer.js";
+import {Asset} from "../tab/asset/asset/Asset.js";
+import {AnimationTab} from "../tab/animation/AnimationTab.js";
+import {MainMenu} from "../MainMenu.js";
+import {Editor} from "../../Editor.js";
+import {TabGroup} from "../../components/tabs/TabGroup.js";
+import {TabGroupSplit} from "../../components/tabs/splittable/TabGroupSplit.js";
+import {TabContainer} from "../../components/tabs/splittable/TabContainer.js";
 
 /**
  * The full GUI of the application.
@@ -113,3 +130,5 @@ Interface.prototype.updateInterface = function()
 	this.tab.size.set(width, height - this.menuBar.size.y);
 	this.tab.updateInterface();
 };
+
+export {Interface};

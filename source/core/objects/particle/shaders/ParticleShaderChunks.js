@@ -1,4 +1,6 @@
-"use strict";
+import {Texture} from "../../../../texture/Texture.js";
+import {Sprite} from "../../../sprite/Sprite.js";
+import {Text} from "../../../../../editor/components/Text.js";
 
 var ParticleShaderChunks =
 {

@@ -1,4 +1,12 @@
-"use strict";
+import {Settings} from "../../../Settings.js";
+import {Interface} from "../../../gui/Interface.js";
+import {Text} from "../../Text.js";
+import {TabComponent} from "../TabComponent.js";
+import {TabButton} from "../TabButton.js";
+import {Division} from "../../Division.js";
+import {Component} from "../../Component.js";
+import {Button} from "../../buttons/Button.js";
+import {Vector2} from "three";
 
 /**
  * A tab group contains and manages tab elements.
@@ -72,9 +80,9 @@ function TabGroup(parent, placement)
 	 * Size may be ajusted to fit the available space.
 	 *
 	 * @property buttonSize
-	 * @type {THREE.Vector2}
+	 * @type {Vector2}
 	 */
-	this.buttonSize = new THREE.Vector2(150, 22);
+	this.buttonSize = new Vector2(150, 22);
 
 	/**
 	 * Tab buttons placement.
@@ -569,3 +577,5 @@ TabGroup.prototype.updateSize = function()
 		this.tab.updatePosition();
 	}
 };
+
+export {TabGroup};

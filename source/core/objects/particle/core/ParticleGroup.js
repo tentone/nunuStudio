@@ -1,12 +1,18 @@
-"use strict";
+import {ParticleEmitter} from "../../ParticleEmitter.js";
+import {ShaderAttribute} from "../../helpers/ShaderAttribute.js";
+import {ParticleEmitterControl} from "../ParticleEmitterControl.js";
+import {Key} from "../../../../input/Key.js";
+import {Settings} from "../../../../../editor/Settings.js";
+import {Text} from "../../../../../editor/components/Text.js";
+import {Texture, Vector2, Math, AdditiveBlending, Vector4, ShaderMaterial, BufferGeometry, Points, Vector3} from "three";
 
 /**
  * A map of options to configure an ParticleGroup instance.
  *
  * @class {Object} ParticleGroupOptions
  * @property {Object} texture An object describing the texture used by the group.
- * @property {Object} texture.value An instance of THREE.Texture.
- * @property {Object=} texture.frames A THREE.Vector2 instance describing the number of frames on the x- and y-axis of the given texture. If not provided, the texture will NOT be treated as a sprite-sheet and as such will NOT be animated.
+ * @property {Object} texture.value An instance of Texture.
+ * @property {Object=} texture.frames A Vector2 instance describing the number of frames on the x- and y-axis of the given texture. If not provided, the texture will NOT be treated as a sprite-sheet and as such will NOT be animated.
  * @property {number} [texture.frameCount=texture.frames.x * texture.frames.y] The total number of frames in the sprite-sheet.                                Allows for sprite-sheets that don't fill the entire                                texture.
  * @property {number} texture.loop The number of loops through the sprite-sheet that should   be performed over the course of a single particle"s lifetime.
  * @property {number} fixedTimeStep If no dt (or deltaTime) value is passed to this group"s    tick() function, this number will be used to move the particle    simulation forward. Value in SECONDS.
@@ -37,24 +43,24 @@ function ParticleGroup(options)
 	options.texture = ShaderUtils.ensureTypedArg(options.texture, ShaderUtils.types.OBJECT, {});
 
 	// Assign a UUID to this instance
-	this.uuid = THREE.Math.generateUUID();
+	this.uuid = Math.generateUUID();
 
 	// If no deltaTime value is passed to the ParticleGroup.tick function, the value of this property will be used to advance the simulation.
 	this.fixedTimeStep = ShaderUtils.ensureTypedArg(options.fixedTimeStep, ShaderUtils.types.NUMBER, 0.016);
 
 	// Set properties used in the uniforms map, starting with the texture stuff.
-	this.texture = ShaderUtils.ensureInstanceOf(options.texture.value, THREE.Texture, null);
-	this.textureFrames = ShaderUtils.ensureInstanceOf(options.texture.frames, THREE.Vector2, new THREE.Vector2(1, 1));
+	this.texture = ShaderUtils.ensureInstanceOf(options.texture.value, Texture, null);
+	this.textureFrames = ShaderUtils.ensureInstanceOf(options.texture.frames, Vector2, new Vector2(1, 1));
 	this.textureFrameCount = ShaderUtils.ensureTypedArg(options.texture.frameCount, ShaderUtils.types.NUMBER, this.textureFrames.x * this.textureFrames.y);
 	this.textureLoop = ShaderUtils.ensureTypedArg(options.texture.loop, ShaderUtils.types.NUMBER, 1);
-	this.textureFrames.max(new THREE.Vector2(1, 1));
+	this.textureFrames.max(new Vector2(1, 1));
 
 	this.hasPerspective = ShaderUtils.ensureTypedArg(options.hasPerspective, ShaderUtils.types.BOOLEAN, true);
 	this.colorize = ShaderUtils.ensureTypedArg(options.colorize, ShaderUtils.types.BOOLEAN, true);
 	this.maxParticleCount = ShaderUtils.ensureTypedArg(options.maxParticleCount, ShaderUtils.types.NUMBER, null);
 
 	// Set properties used to define the ShaderMaterial"s appearance.
-	this.blending = ShaderUtils.ensureTypedArg(options.blending, ShaderUtils.types.NUMBER, THREE.AdditiveBlending);
+	this.blending = ShaderUtils.ensureTypedArg(options.blending, ShaderUtils.types.NUMBER, AdditiveBlending);
 	this.transparent = ShaderUtils.ensureTypedArg(options.transparent, ShaderUtils.types.BOOLEAN, true);
 	this.alphaTest = parseFloat(ShaderUtils.ensureTypedArg(options.alphaTest, ShaderUtils.types.NUMBER, 0.0));
 	this.depthWrite = ShaderUtils.ensureTypedArg(options.depthWrite, ShaderUtils.types.BOOLEAN, false);
@@ -92,7 +98,7 @@ function ParticleGroup(options)
 		},
 		textureAnimation: {
 			type: "v4",
-			value: new THREE.Vector4(
+			value: new Vector4(
 				this.textureFrames.x,
 				this.textureFrames.y,
 				this.textureFrameCount,
@@ -165,7 +171,7 @@ function ParticleGroup(options)
 	this.attributeKeys = Object.keys(this.attributes);
 	this.attributeCount = this.attributeKeys.length;
 
-	this.material = new THREE.ShaderMaterial(
+	this.material = new ShaderMaterial(
 	{
 		uniforms: this.uniforms,
 		vertexShader: ParticleShaders.vertex,
@@ -179,8 +185,8 @@ function ParticleGroup(options)
 		fog: this.fog
 	});
 
-	this.geometry = new THREE.BufferGeometry();
-	this.mesh = new THREE.Points(this.geometry, this.material);
+	this.geometry = new BufferGeometry();
+	this.mesh = new Points(this.geometry, this.material);
 
 	if(this.maxParticleCount === null)
 	{
@@ -531,7 +537,7 @@ ParticleGroup.prototype._triggerSingleEmitter = function(pos)
 		return;
 	}
 
-	if(pos instanceof THREE.Vector3)
+	if(pos instanceof Vector3)
 	{
 		emitter.position.value.copy(pos);
 		emitter.position.value = emitter.position.value;
@@ -553,7 +559,7 @@ ParticleGroup.prototype._triggerSingleEmitter = function(pos)
  *
  * @method triggerEmitter
  * @param {number} numEmitters The number of emitters to activate
- * @param {Object} [position=undefined] A THREE.Vector3 instance describing the position to activate the emitter(s) at.
+ * @param {Object} [position=undefined] A Vector3 instance describing the position to activate the emitter(s) at.
  * @return {ParticleGroup} This group instance.
  */
 ParticleGroup.prototype.triggerEmitter = function(numEmitters, position)
@@ -709,3 +715,5 @@ ParticleGroup.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+export {ParticleGroup};

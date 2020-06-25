@@ -1,11 +1,12 @@
-"use strict";
+import {SpotLight, Light} from "three";
+
 
 /**
  * A SpotLight emit light from a point in a specific direction in a cone volume.
  * 
  * SpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.
  * 
- * Based on THREE.SpotLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/SpotLight
+ * Based on SpotLight documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Lights/SpotLight
  *
  * @param {number} color Light color in hex RGB
  * @param {number} intensity Light intensity
@@ -31,8 +32,8 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 	this.shadow.mapSize.height = 512;
 }
 
-THREE._SpotLight = THREE.SpotLight;
-THREE.SpotLight = SpotLight;
+THREE._SpotLight = SpotLight;
+SpotLight = SpotLight;
 
 SpotLight.prototype = Object.create(THREE._SpotLight.prototype);
 
@@ -63,9 +64,10 @@ SpotLight.prototype.updateShadowMap = function()
 
 SpotLight.prototype.toJSON = function(meta)
 {
-	var data = THREE.Light.prototype.toJSON.call(this, meta);
+	var data = Light.prototype.toJSON.call(this, meta);
 
 	data.object.target = this.target.uuid;
 
 	return data;
 };
+export {SpotLight};

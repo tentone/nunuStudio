@@ -1,4 +1,12 @@
-"use strict";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {GeometryForm} from "../GeometryForm.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../../components/input/CheckBox.js";
+import {Form} from "../../../../../components/Form.js";
+import {CircleBufferGeometry, CircleGeometry, BufferGeometry} from "three";
 
 function CircleGeometryForm(form, object)
 {
@@ -65,7 +73,7 @@ function CircleGeometryForm(form, object)
 CircleGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? THREE.CircleBufferGeometry : THREE.CircleGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? CircleBufferGeometry : CircleGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
 };
 
@@ -75,5 +83,6 @@ CircleGeometryForm.prototype.updateValues = function()
 	this.segments.setValue(this.object.geometry.parameters.segments || 32);
 	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
 	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI * 2);
-	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
+	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
 };
+export {CircleGeometryForm};

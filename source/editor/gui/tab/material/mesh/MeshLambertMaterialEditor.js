@@ -1,4 +1,20 @@
-"use strict";
+import {Texture} from "../../../../../../core/texture/Texture.js";
+import {CubeTexture} from "../../../../../../core/texture/CubeTexture.js";
+import {Mesh} from "../../../../../../core/objects/mesh/Mesh.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {MeshMaterialEditor} from "../MeshMaterialEditor.js";
+import {MaterialEditor} from "../../MaterialEditor.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {TextureForm} from "../../../../../components/input/TextureForm.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../../components/input/DropdownList.js";
+import {CubeTextureBox} from "../../../../../components/input/CubeTextureBox.js";
+import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
+import {Form} from "../../../../../components/Form.js";
+import {MultiplyOperation, MixOperation, AddOperation} from "three";
+
 
 function MeshLambertMaterialEditor(parent, closeable, container, index)
 {
@@ -121,9 +137,9 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.combine = new DropdownList(this.form);
 	this.combine.position.set(100, 85);
 	this.combine.size.set(0, 18);
-	this.combine.addValue(Locale.multiply, THREE.MultiplyOperation);
-	this.combine.addValue(Locale.mix, THREE.MixOperation);
-	this.combine.addValue(Locale.add, THREE.AddOperation);
+	this.combine.addValue(Locale.multiply, MultiplyOperation);
+	this.combine.addValue(Locale.mix, MixOperation);
+	this.combine.addValue(Locale.add, AddOperation);
 	this.combine.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "combine", self.combine.getValue()));
@@ -205,3 +221,4 @@ MeshLambertMaterialEditor.prototype.attach = function(material, asset)
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
 };
+export {MeshLambertMaterialEditor};

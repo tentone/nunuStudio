@@ -1,4 +1,16 @@
-"use strict";
+import {OrbitControls} from "../../../../../../../core/objects/controls/OrbitControls.js";
+import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
+import {ActionBundle} from "../../../../../../history/action/ActionBundle.js";
+import {Action} from "../../../../../../history/action/Action.js";
+import {ObjectInspector} from "../../ObjectInspector.js";
+import {Inspector} from "../../../Inspector.js";
+import {Editor} from "../../../../../../Editor.js";
+import {Text} from "../../../../../../components/Text.js";
+import {VectorBox} from "../../../../../../components/input/VectorBox.js";
+import {Slider} from "../../../../../../components/input/Slider.js";
+import {NumberBox} from "../../../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../../../components/input/CheckBox.js";
+import {Button} from "../../../../../../components/buttons/Button.js";
 
 function OrbitControlsInspector(parent, object)
 {
@@ -239,3 +251,5 @@ OrbitControlsInspector.prototype.updateInspector = function()
 	this.center.setValue(this.object.center);
 	this.vector.setValue(this.object.vector);
 };
+
+export {OrbitControlsInspector};

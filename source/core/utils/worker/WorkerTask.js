@@ -1,4 +1,4 @@
-"use strict";
+import {Math} from "three";
 
 /**
  * A worker task is processed by a worker pool.
@@ -15,7 +15,7 @@ function WorkerTask(data, callback)
 	 * @attribute uuid
 	 * @type {String}
 	 */
-	this.uuid = THREE.Math.generateUUID();
+	this.uuid = Math.generateUUID();
 
 	/**
 	 * Data to be sent to the worker.
@@ -33,3 +33,5 @@ function WorkerTask(data, callback)
 	 */
 	this.callback = callback;
 }
+
+export {WorkerTask};

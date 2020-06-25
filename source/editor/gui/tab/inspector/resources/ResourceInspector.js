@@ -1,4 +1,10 @@
-"use strict";
+import {Resource} from "../../../../../../core/resources/Resource.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {Inspector} from "../../Inspector.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {TextBox} from "../../../../../components/input/TextBox.js";
 
 function ResourceInspector(parent, object)
 {
@@ -51,3 +57,4 @@ ResourceInspector.prototype.updateInspector = function()
 		this.type.setText(this.object.type);
 	}
 };
+export {ResourceInspector};

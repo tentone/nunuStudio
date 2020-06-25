@@ -1,4 +1,8 @@
-"use strict";
+import {EventManager} from "../../../../core/utils/EventManager.js";
+import {Mouse} from "../../../../core/input/Mouse.js";
+import {Text} from "../../Text.js";
+import {Graph} from "../Graph.js";
+import {Component} from "../../Component.js";
 
 /**
  * Slider element is used to select a numeric value using a visual slider bar.
@@ -273,3 +277,4 @@ Slider.prototype.destroy = function()
 		document.body.removeChild(this.text);
 	}
 };
+export {Slider};

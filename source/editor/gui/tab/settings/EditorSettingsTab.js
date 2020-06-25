@@ -1,4 +1,24 @@
-"use strict";
+import {Scene} from "../../../../../core/objects/Scene.js";
+import {Viewport} from "../../../../../core/objects/cameras/Viewport.js";
+import {Mouse} from "../../../../../core/input/Mouse.js";
+import {Keyboard} from "../../../../../core/input/Keyboard.js";
+import {Key} from "../../../../../core/input/Key.js";
+import {Settings} from "../../../../Settings.js";
+import {SettingsTab} from "../SettingsTab.js";
+import {Inspector} from "../../inspector/Inspector.js";
+import {Asset} from "../../asset/asset/Asset.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TabComponent} from "../../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../../components/TableForm.js";
+import {Slider} from "../../../../components/input/Slider.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Form} from "../../../../components/Form.js";
+import {Component} from "../../../../components/Component.js";
+
 
 function EditorSettingsTab(parent, closeable, container, index)
 {
@@ -411,3 +431,4 @@ EditorSettingsTab.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+export {EditorSettingsTab};

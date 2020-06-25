@@ -1,4 +1,4 @@
-"use strict";
+import {Form} from "../../../components/Form.js";
 
 /**
  * A form template can be used to describe a small group of properties of a form that are common to multiple objects.
@@ -44,3 +44,5 @@ FormSnippet.prototype.attach = function(object)
  * @method updateValues
  */
 FormSnippet.prototype.updateValues = function(){};
+
+export {FormSnippet};

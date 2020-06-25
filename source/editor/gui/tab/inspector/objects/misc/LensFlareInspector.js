@@ -1,4 +1,6 @@
-"use strict";
+import {LensFlare} from "../../../../../../../core/objects/misc/LensFlare.js";
+import {ObjectInspector} from "../../ObjectInspector.js";
+import {Inspector} from "../../../Inspector.js";
 
 function LensFlareInspector(parent, object)
 {
@@ -8,3 +10,5 @@ function LensFlareInspector(parent, object)
 }
 
 LensFlareInspector.prototype = Object.create(ObjectInspector.prototype);
+
+export {LensFlareInspector};

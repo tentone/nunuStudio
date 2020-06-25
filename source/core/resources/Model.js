@@ -1,4 +1,5 @@
-"use strict";
+import {Resource} from "../Resource.js";
+import {Font} from "../Font.js";
 
 /**
  * Model is used to load and check file type for external 3D models, animations, scenes etc.
@@ -49,3 +50,5 @@ Model.fileIsModel = function(file)
 
 	return false;
 };
+
+export {Model};

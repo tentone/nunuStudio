@@ -1,4 +1,10 @@
-"use strict";
+import {Timer} from "../../../../core/utils/timer/Timer.js";
+import {EventManager} from "../../../../core/utils/EventManager.js";
+import {Audio} from "../../../../core/resources/Audio.js";
+import {Text} from "../../Text.js";
+import {Component} from "../../Component.js";
+import {Button} from "../../buttons/Button.js";
+import {AudioContext} from "three";
 
 function AudioPlayer(parent)
 {
@@ -9,7 +15,7 @@ function AudioPlayer(parent)
 	var self = this;
 
 	// WebAudio context
-	this.context = THREE.AudioContext.getContext();
+	this.context = AudioContext.getContext();
 
 	// Timer
 	this.timer = document.createElement("div");
@@ -332,3 +338,5 @@ AudioPlayer.prototype.updateSize = function()
 	this.scrubber.style.height = (this.size.y * 0.8) + "px";
 	this.scrubber.style.top = (-this.size.y * 0.15) + "px";
 };
+
+export {AudioPlayer};

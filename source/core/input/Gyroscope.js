@@ -1,4 +1,6 @@
-"use strict";
+import {EventManager} from "../../utils/EventManager.js";
+import {Math, Euler, Quaternion, Vector3} from "three";
+
 
 /**
  * Gyroscope object can be used to get the orientation from the device.
@@ -43,15 +45,15 @@ function Gyroscope()
 	// Orientation
 	this.events.add(window, "orientationchange", function(event)
 	{
-		self.orientation = THREE.Math.degToRad(window.orientation);
+		self.orientation = Math.degToRad(window.orientation);
 	});
 
 	// Device orientation
 	this.events.add(window, "deviceorientation", function(event)
 	{
-		self.alpha = THREE.Math.degToRad(event.alpha);
-		self.beta = THREE.Math.degToRad(event.beta);
-		self.gamma = THREE.Math.degToRad(event.gamma);
+		self.alpha = Math.degToRad(event.alpha);
+		self.beta = Math.degToRad(event.beta);
+		self.gamma = Math.degToRad(event.gamma);
 	});
 
 	// Initialize events
@@ -68,10 +70,10 @@ function Gyroscope()
  */
 Gyroscope.prototype.setObjectQuaternion = function()
 {
-	var euler = new THREE.Euler();
-	var quaternion = new THREE.Quaternion();
-	var zee = new THREE.Vector3(0, 0, 1);
-	var offset = new THREE.Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)); //-PI/2 around the x-axis
+	var euler = new Euler();
+	var quaternion = new Quaternion();
+	var zee = new Vector3(0, 0, 1);
+	var offset = new Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)); //-PI/2 around the x-axis
 
 	return function(object)
 	{
@@ -93,3 +95,4 @@ Gyroscope.prototype.dispose = function()
 {
 	this.events.destroy();
 };
+export {Gyroscope};

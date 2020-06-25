@@ -1,4 +1,15 @@
-"use strict";
+import {Resource} from "../../../../../../core/resources/Resource.js";
+import {Image} from "../../../../../../core/resources/Image.js";
+import {Nunu} from "../../../../../../core/Nunu.js";
+import {FileSystem} from "../../../../../../core/FileSystem.js";
+import {RemoveResourceAction} from "../../../../../history/action/resources/RemoveResourceAction.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {Asset} from "../Asset.js";
+import {Interface} from "../../../../Interface.js";
+import {Editor} from "../../../../../Editor.js";
+import {ContextMenu} from "../../../../../components/dropdown/ContextMenu.js";
+
 
 function ImageAsset(parent)
 {
@@ -102,3 +113,4 @@ ImageAsset.prototype.attach = function(asset)
 
 	this.preview.src = asset.data;
 };
+export {ImageAsset};

@@ -1,4 +1,5 @@
-"use strict";
+import {Form} from "../../../editor/components/Form.js";
+import {Math, LinearFilter, RGBAFormat, RGBFormat, NearestFilter, OthographicCamera, OrthographicCamera, Scene, Mesh, PlaneBufferGeometry} from "three";
 
 /**
  * A render Pass is used to render something in the graphics pipeline.
@@ -10,7 +11,7 @@
  */
 function Pass()
 {
-	this.uuid = THREE.Math.generateUUID();
+	this.uuid = Math.generateUUID();
 	this.type = "Pass";
 
 	/**
@@ -63,9 +64,9 @@ function Pass()
  */
 Pass.RGBALinear =
 {
-	minFilter: THREE.LinearFilter,
-	magFilter: THREE.LinearFilter,
-	format: THREE.RGBAFormat
+	minFilter: LinearFilter,
+	magFilter: LinearFilter,
+	format: RGBAFormat
 };
 
 /** 
@@ -77,9 +78,9 @@ Pass.RGBALinear =
  */
 Pass.RGBLinear =
 {
-	minFilter: THREE.LinearFilter,
-	magFilter: THREE.LinearFilter,
-	format: THREE.RGBFormat
+	minFilter: LinearFilter,
+	magFilter: LinearFilter,
+	format: RGBFormat
 };
 
 /** 
@@ -91,9 +92,9 @@ Pass.RGBLinear =
  */
 Pass.RGBANearest =
 {
-	minFilter: THREE.NearestFilter,
-	magFilter: THREE.NearestFilter,
-	format: THREE.RGBAFormat
+	minFilter: NearestFilter,
+	magFilter: NearestFilter,
+	format: RGBAFormat
 };
 
 /**
@@ -109,25 +110,25 @@ Pass.prototype.createQuadScene = function()
 	 * Quad rendering camera.
 	 *
 	 * @attribute camera
-	 * @type {THREE.OthographicCamera}
+	 * @type {OthographicCamera}
 	 */
-	this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+	this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
 	/**
 	 * Quad scene, that contains a single quad children.
 	 *
 	 * @attribute scene
-	 * @type {THREE.Scene}
+	 * @type {Scene}
 	 */
-	this.scene = new THREE.Scene();
+	this.scene = new Scene();
 
 	/**
 	 * Quad mesh, composed of a 2 by 2 plane geometry.
 	 *
 	 * @attribute quad
-	 * @type {THREE.Mesh}
+	 * @type {Mesh}
 	 */
-	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
+	this.quad = new Mesh(new PlaneBufferGeometry(2, 2), null);
 	this.quad.frustumCulled = false;
 	this.scene.add(this.quad);
 };
@@ -182,3 +183,5 @@ Pass.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+export {Pass};

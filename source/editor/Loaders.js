@@ -1,4 +1,28 @@
-"use strict";
+import {VideoTexture} from "../../core/texture/VideoTexture.js";
+import {Texture} from "../../core/texture/Texture.js";
+import {CubeTexture} from "../../core/texture/CubeTexture.js";
+import {CompressedTexture} from "../../core/texture/CompressedTexture.js";
+import {Video} from "../../core/resources/Video.js";
+import {TextFile} from "../../core/resources/TextFile.js";
+import {Resource} from "../../core/resources/Resource.js";
+import {Model} from "../../core/resources/Model.js";
+import {Image} from "../../core/resources/Image.js";
+import {Font} from "../../core/resources/Font.js";
+import {Audio} from "../../core/resources/Audio.js";
+import {SpineAnimation} from "../../core/objects/spine/SpineAnimation.js";
+import {Scene} from "../../core/objects/Scene.js";
+import {Container} from "../../core/objects/misc/Container.js";
+import {Nunu} from "../../core/Nunu.js";
+import {TextureLoader} from "../../core/loaders/TextureLoader.js";
+import {Key} from "../../core/input/Key.js";
+import {FileSystem} from "../../core/FileSystem.js";
+import {AddResourceAction} from "../history/action/resources/AddResourceAction.js";
+import {Action} from "../history/action/Action.js";
+import {Editor} from "../Editor.js";
+import {Text} from "../components/Text.js";
+import {LoadingModal} from "../components/modal/LoadingModal.js";
+import {Form} from "../components/Form.js";
+import {LinearFilter, CubeReflectionMapping, DDSLoader, PVRLoader, KTXLoader, TGALoader, WebGLRenderer, BasisTextureLoader, Object3D, GCodeLoader, MTLLoader, OBJLoader, ThreeMFLoader, AWDLoader, AMFLoader, AssimpLoader, AssimpJSONLoader, BabylonLoader, Mesh, MeshPhongMaterial, TDSLoader, ColladaLoader, SkinnedMesh, DRACOLoader, GLTFLoader, PLYLoader, VTKLoader, PRWMLoader, VRMLLoader, FBXLoader, XLoader, AnimationClip, PCDLoader, SVGLoader, MeshBasicMaterial, ShapeBufferGeometry, STLLoader, JSONLoader} from "three";
 
 function Loaders() {}
 
@@ -39,9 +63,9 @@ Loaders.loadTexture = function(file, onLoad)
 				}
 			}
 
-			texture.magFilter = THREE.LinearFilter;
-			texture.minFilter = THREE.LinearFilter;
-			texture.mapping = THREE.CubeReflectionMapping;
+			texture.magFilter = LinearFilter;
+			texture.minFilter = LinearFilter;
+			texture.mapping = CubeReflectionMapping;
 		}
 		else
 		{
@@ -52,7 +76,7 @@ Loaders.loadTexture = function(file, onLoad)
 
 		if(data.mipmapCount === 1)
 		{
-			texture.minFilter = THREE.LinearFilter;
+			texture.minFilter = LinearFilter;
 		}
 
 		texture.format = data.format;
@@ -69,28 +93,28 @@ Loaders.loadTexture = function(file, onLoad)
 	{
 		if(extension === "dds")
 		{
-			var loader = new THREE.DDSLoader();
+			var loader = new DDSLoader();
 			var texture = loadCompressedTexture(loader.parse(reader.result));
 			texture.name = name;
 			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 		}
 		else if(extension === "pvr")
 		{
-			var loader = new THREE.PVRLoader();
+			var loader = new PVRLoader();
 			var texture = loadCompressedTexture(loader.parse(reader.result));
 			texture.name = name;
 			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 		}
 		else if(extension === "ktx")
 		{
-			var loader = new THREE.KTXLoader();
+			var loader = new KTXLoader();
 			var texture = loadCompressedTexture(loader.parse(reader.result));
 			texture.name = name;
 			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
 		}
 		else if(extension === "tga")
 		{
-			var loader = new THREE.TGALoader();
+			var loader = new TGALoader();
 			var jpeg = loader.parse(reader.result).toDataURL("image/jpeg", 1.0);
 
 			var image = new Image(jpeg, "jpeg");
@@ -102,9 +126,9 @@ Loaders.loadTexture = function(file, onLoad)
 		}
 		else if(extension === "basis")
 		{
-			var renderer = new THREE.WebGLRenderer({alpha: true});
+			var renderer = new WebGLRenderer({alpha: true});
 
-			var loader = new THREE.BasisTextureLoader();
+			var loader = new BasisTextureLoader();
 			loader.setTranscoderPath(Global.FILE_PATH + "wasm/basis/");
 			loader.detectSupport(renderer);
 			loader._createTexture(reader.result).then(function(texture)
@@ -307,7 +331,7 @@ Loaders.loadText = function(file)
  * 
  * @method loadModel
  * @param {File} file File to be read and parsed.
- * @param {THREE.Object3D} parent Object to add the objects.
+ * @param {Object3D} parent Object to add the objects.
  */
 Loaders.loadModel = function(file, parent)
 {
@@ -325,7 +349,7 @@ Loaders.loadModel = function(file, parent)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.GCodeLoader();
+				var loader = new GCodeLoader();
 				var obj = loader.parse(reader.result);
 				Editor.addObject(obj, parent);
 				modal.destroy();
@@ -348,7 +372,7 @@ Loaders.loadModel = function(file, parent)
 					if(FileSystem.fileExists(mtl))
 					{
 						console.log("nunuStudio: MTL file found.", path);
-						var mtlLoader = new THREE.MTLLoader()
+						var mtlLoader = new MTLLoader()
 						mtlLoader.setPath(path);
 						materials = mtlLoader.parse(FileSystem.readFile(mtl), path);
 					}
@@ -365,7 +389,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.OBJLoader();
+					var loader = new OBJLoader();
 
 					if(materials !== null)
 					{
@@ -394,7 +418,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.ThreeMFLoader();
+					var loader = new ThreeMFLoader();
 					loader.parse(reader.result, function(obj)
 					{
 						Editor.addObject(obj, parent);
@@ -417,7 +441,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.AWDLoader();
+					var loader = new AWDLoader();
 					loader._baseDir = path;
 					var awd = loader.parse(reader.result);
 					Editor.addObject(awd, parent);
@@ -439,7 +463,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.AMFLoader();
+					var loader = new AMFLoader();
 					var amf = loader.parse(reader.result);
 					Editor.addObject(amf, parent);
 					modal.destroy();
@@ -460,7 +484,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.AssimpLoader();
+					var loader = new AssimpLoader();
 					var assimp = loader.parse(reader.result, path);
 					Editor.addObject(assimp.object, parent);
 					modal.destroy();
@@ -481,7 +505,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.AssimpJSONLoader();
+					var loader = new AssimpJSONLoader();
 					var json = JSON.parse(reader.result);
 					var assimp = loader.parse(json, path);
 					Editor.addObject(assimp, parent);
@@ -503,15 +527,15 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.BabylonLoader();
+					var loader = new BabylonLoader();
 					var json = JSON.parse(reader.result);
 					var babylon = loader.parse(json, path);
 					babylon.type = "Group";
 					babylon.traverse(function(object)
 					{
-						if(object instanceof THREE.Mesh)
+						if(object instanceof Mesh)
 						{
-							object.material = new THREE.MeshPhongMaterial();
+							object.material = new MeshPhongMaterial();
 						}
 					});
 					Editor.addObject(babylon, parent);
@@ -558,7 +582,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.TDSLoader();
+					var loader = new TDSLoader();
 					loader.setPath(path);
 					var group = loader.parse(reader.result);
 					Editor.addObject(group, parent);
@@ -580,7 +604,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.ColladaLoader();
+					var loader = new ColladaLoader();
 					var collada = loader.parse(reader.result, path);
 					
 					var scene = collada.scene;
@@ -590,7 +614,7 @@ Loaders.loadModel = function(file, parent)
 					{
 						scene.traverse(function(child)
 						{
-							if(child instanceof THREE.SkinnedMesh)
+							if(child instanceof SkinnedMesh)
 							{
 								child.animations = animations;
 							}
@@ -616,7 +640,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.DRACOLoader();
+					var loader = new DRACOLoader();
 					loader.setDecoderPath(Global.FILE_PATH + "wasm/draco/");
 					loader.setDecoderConfig({type: "wasm"});
 					loader.decodeDracoFile(reader.result, function(geometry)
@@ -653,11 +677,11 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var dracoLoader = new THREE.DRACOLoader();
+					var dracoLoader = new DRACOLoader();
 					dracoLoader.setDecoderPath(Global.FILE_PATH + "wasm/draco/");
 					dracoLoader.setDecoderConfig({type: "wasm"});
 
-					var loader = new THREE.GLTFLoader();
+					var loader = new GLTFLoader();
 					loader.dracoLoader = dracoLoader;
 					loader.parse(reader.result, path, function(gltf)
 					{
@@ -672,7 +696,7 @@ Loaders.loadModel = function(file, parent)
 						{
 							scene.traverse(function(child)
 							{
-								if(child instanceof THREE.SkinnedMesh)
+								if(child instanceof SkinnedMesh)
 								{
 									child.animations = animations;
 								}
@@ -699,7 +723,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.PLYLoader();
+					var loader = new PLYLoader();
 					var modelName = FileSystem.getNameWithoutExtension(name);
 
 					var geometry = loader.parse(reader.result);
@@ -726,7 +750,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.VTKLoader();
+					var loader = new VTKLoader();
 					var modelName = FileSystem.getNameWithoutExtension(name);
 					var geometry = loader.parse(reader.result);
 					geometry.name = modelName;
@@ -752,7 +776,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.PRWMLoader();
+					var loader = new PRWMLoader();
 					var modelName = FileSystem.getNameWithoutExtension(name);
 
 					var geometry = loader.parse(reader.result);
@@ -780,7 +804,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.VRMLLoader();
+					var loader = new VRMLLoader();
 					var scene = loader.parse(reader.result);
 
 					for(var i = 0; i < scene.children.length; i++)
@@ -806,14 +830,14 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.FBXLoader();
+					var loader = new FBXLoader();
 					var object = loader.parse(reader.result, path);
 					
 					if(object.animations !== undefined && object.animations.length > 0)
 					{					
 						object.traverse(function(child)
 						{
-							if(child instanceof THREE.SkinnedMesh)
+							if(child instanceof SkinnedMesh)
 							{
 								child.animations = object.animations;
 							}
@@ -884,7 +908,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.XLoader();
+					var loader = new XLoader();
 					loader.baseDir = path;
 					loader.parse(reader.result, function(object)
 					{
@@ -892,7 +916,7 @@ Loaders.loadModel = function(file, parent)
 						{
 							var model = object.FrameInfo[i];
 
-							if(model instanceof THREE.SkinnedMesh)
+							if(model instanceof SkinnedMesh)
 							{
 								if(object.XAnimationObj !== undefined && object.XAnimationObj.length > 0)
 								{
@@ -900,7 +924,7 @@ Loaders.loadModel = function(file, parent)
 									for(var j = 0; j < animations.length; j++)
 									{
 										model.animationSpeed = 1000;
-										model.animations.push(THREE.AnimationClip.parseAnimation(convertAnimation(animations[j], animations[j].name), model.skeleton.bones));
+										model.animations.push(AnimationClip.parseAnimation(convertAnimation(animations[j], animations[j].name), model.skeleton.bones));
 									}
 								}
 							}
@@ -926,7 +950,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.PCDLoader();
+					var loader = new PCDLoader();
 					var pcd = loader.parse(reader.result, file.name);
 					pcd.material.name = "points";
 
@@ -949,7 +973,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.SVGLoader();
+					var loader = new SVGLoader();
 					var paths = loader.parse(reader.result);
 
 					var group = new Container();
@@ -957,14 +981,14 @@ Loaders.loadModel = function(file, parent)
 
 					for(var i = 0; i < paths.length; i ++)
 					{
-						var material = new THREE.MeshBasicMaterial({color: paths[i].color});
+						var material = new MeshBasicMaterial({color: paths[i].color});
 						var shapes = paths[i].toShapes(true);
 
 						for(var j = 0; j < shapes.length; j++)
 						{
 							var shape = shapes[j];
-							var geometry = new THREE.ShapeBufferGeometry(shape);
-							var mesh = new THREE.Mesh(geometry, material);
+							var geometry = new ShapeBufferGeometry(shape);
+							var mesh = new Mesh(geometry, material);
 							mesh.position.z = position;
 							position += 0.1;
 							group.add(mesh);
@@ -990,7 +1014,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.STLLoader();
+					var loader = new STLLoader();
 
 					var modelName = FileSystem.getNameWithoutExtension(name);
 					var geometry = loader.parse(reader.result);
@@ -1015,7 +1039,7 @@ Loaders.loadModel = function(file, parent)
 			{
 				try
 				{
-					var loader = new THREE.JSONLoader();
+					var loader = new JSONLoader();
 					var data = loader.parse(JSON.parse(reader.result));
 					var materials = data.materials;
 					var geometry = data.geometry;
@@ -1071,3 +1095,5 @@ Loaders.loadModel = function(file, parent)
 		console.error("nunuStudio: Error loading file", e);
 	}
 };
+
+export {Loaders};

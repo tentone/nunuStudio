@@ -1,4 +1,7 @@
-"use strict";
+import {Image} from "../../../../core/resources/Image.js";
+import {Component} from "../../Component.js";
+import {ButtonIconToggle} from "../ButtonIconToggle.js";
+import {Button} from "../Button.js";
 
 /**
  * Button with a centered icon.
@@ -52,3 +55,5 @@ ButtonIcon.prototype.setImageScale = function(x, y)
 	this.icon.style.width = (x * 100) + "%";
 	this.icon.style.height = (y * 100) + "%";
 };
+
+export {ButtonIcon};

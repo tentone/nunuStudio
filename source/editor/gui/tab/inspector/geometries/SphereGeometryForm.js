@@ -1,4 +1,12 @@
-"use strict";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {GeometryForm} from "../GeometryForm.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../../components/input/CheckBox.js";
+import {Form} from "../../../../../components/Form.js";
+import {SphereBufferGeometry, SphereGeometry, BufferGeometry} from "three";
 
 function SphereGeometryForm(form, object)
 {
@@ -88,7 +96,7 @@ function SphereGeometryForm(form, object)
 SphereGeometryForm.prototype.updateGeometry = function()
 {
 	this.object.geometry.dispose();
-	var GeometryConstructor = this.buffer.getValue() ? THREE.SphereBufferGeometry : THREE.SphereGeometry;
+	var GeometryConstructor = this.buffer.getValue() ? SphereBufferGeometry : SphereGeometry;
 	Editor.addAction(new ChangeAction(this.object, "geometry", new GeometryConstructor(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue(), this.phiStart.getValue(), this.phiLength.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue())));
 };
 
@@ -101,5 +109,6 @@ SphereGeometryForm.prototype.updateValues = function()
 	this.phiLength.setValue(this.object.geometry.parameters.phiLength || Math.PI * 2);
 	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
 	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI);
-	this.buffer.setValue(this.object.geometry instanceof THREE.BufferGeometry);
+	this.buffer.setValue(this.object.geometry instanceof BufferGeometry);
 };
+export {SphereGeometryForm};

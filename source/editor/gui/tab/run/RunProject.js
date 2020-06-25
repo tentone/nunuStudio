@@ -1,4 +1,17 @@
-"use strict";
+import {Image} from "../../../../../core/resources/Image.js";
+import {Program} from "../../../../../core/objects/Program.js";
+import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
+import {Nunu} from "../../../../../core/Nunu.js";
+import {Settings} from "../../../../Settings.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TabComponent} from "../../../../components/tabs/TabComponent.js";
+import {RendererCanvas} from "../../../../components/RendererCanvas.js";
+import {Component} from "../../../../components/Component.js";
+import {Canvas} from "../../../../components/Canvas.js";
+import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
+import {Button} from "../../../../components/buttons/Button.js";
 
 /** 
  * Tab used to preview a project running.
@@ -320,3 +333,5 @@ RunProject.prototype.updateSize = function()
 		this.program.resize(this.canvas.size.x, this.canvas.size.y);
 	}
 };
+
+export {RunProject};

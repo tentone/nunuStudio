@@ -1,4 +1,7 @@
-"use strict";
+import {MathUtils} from "../../../utils/MathUtils.js";
+import {DirectionalLight} from "../../lights/DirectionalLight.js";
+import {Group, Color, HemisphereLight, SphereBufferGeometry, ShaderMaterial, BackSide, Mesh, Object3D} from "three";
+
 
 /**
  * Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.
@@ -18,7 +21,7 @@
  */
 function Sky(autoUpdate, dayTime, sunDistance, time)
 {	
-	THREE.Group.call(this);
+	Group.call(this);
 
 	this.name = "sky";
 	this.type = "Sky";
@@ -29,7 +32,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * @property colorTop
 	 * @type {Array}
 	 */
-	this.colorTop = [new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)];
+	this.colorTop = [new Color(0x77b3fb), new Color(0x0076ff), new Color(0x035bb6), new Color(0x002439)];
 
 	/**
 	 * Array with bottom sky colors.
@@ -37,7 +40,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * @property colorBottom
 	 * @type {Array}
 	 */
-	this.colorBottom = [new THREE.Color(0xebece6), new THREE.Color(0xFFFFFF), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
+	this.colorBottom = [new Color(0xebece6), new Color(0xFFFFFF), new Color(0xfee7d7), new Color(0x0065a7)];
 
 	/**
 	 * Sun color in hex RGB.
@@ -71,7 +74,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * @property hemisphere
 	 * @type {HemisphereLight}
 	 */
-	this.hemisphere = new THREE.HemisphereLight(0x3284ff, 0xffcc7f, 0.5);
+	this.hemisphere = new HemisphereLight(0x3284ff, 0xffcc7f, 0.5);
 	this.hemisphere.locked = true;
 	this.hemisphere.matrixAutoUpdate = false;
 	this.add(this.hemisphere);
@@ -90,8 +93,8 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	// Uniforms
 	var uniforms =
 	{
-		topColor: {type: "c", value: new THREE.Color(0.0, 0.46, 1.0)},
-		bottomColor: {type: "c", value: new THREE.Color(1.0, 1.0, 1.0)},
+		topColor: {type: "c", value: new Color(0.0, 0.46, 1.0)},
+		bottomColor: {type: "c", value: new Color(1.0, 1.0, 1.0)},
 		offset:	{type: "f", value: 20},
 		exponent: {type: "f", value: 0.2}
 	};
@@ -99,13 +102,13 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	uniforms.topColor.value.copy(this.hemisphere.color);
 
 	// Sky
-	var geometry = new THREE.SphereBufferGeometry(1500, 16, 16);
-	var material = new THREE.ShaderMaterial(
+	var geometry = new SphereBufferGeometry(1500, 16, 16);
+	var material = new ShaderMaterial(
 	{
 		vertexShader: Sky.VERTEX,
 		fragmentShader: Sky.FRAGMENT,
 		uniforms: uniforms,
-		side: THREE.BackSide
+		side: BackSide
 	});
 
 	/**
@@ -114,7 +117,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * @property sky
 	 * @type {Mesh}
 	 */
-	this.sky = new THREE.Mesh(geometry, material);
+	this.sky = new Mesh(geometry, material);
 	this.sky.locked = true;
 	this.sky.matrixAutoUpdate = false;
 	this.add(this.sky);
@@ -161,7 +164,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.updateSky();
 }
 
-Sky.prototype = Object.create(THREE.Group.prototype);
+Sky.prototype = Object.create(Group.prototype);
 
 Sky.VERTEX = "varying vec3 vWorldPosition;\n\
 void main()\n\
@@ -186,7 +189,7 @@ Sky.prototype.initialize = function()
 {
 	this.updateSky();
 	
-	THREE.Object3D.prototype.initialize.call(this);
+	Object3D.prototype.initialize.call(this);
 };
 
 /**
@@ -208,7 +211,7 @@ Sky.prototype.update = function(delta)
 		this.updateSky();
 	}
 
-	THREE.Object3D.prototype.update.call(this, delta);
+	Object3D.prototype.update.call(this, delta);
 };
 
 /**
@@ -352,7 +355,7 @@ Sky.prototype.updateSky = function()
 
 Sky.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var data = Object3D.prototype.toJSON.call(this, meta);
 	
 	data.object.colorTop = [];
 	for(var i = 0; i < this.colorTop.length; i++)
@@ -381,3 +384,4 @@ Sky.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {Sky};

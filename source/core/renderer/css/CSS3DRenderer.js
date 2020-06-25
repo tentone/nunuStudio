@@ -1,4 +1,10 @@
-"use strict";
+import {CSS3DSprite} from "../CSS3DSprite.js";
+import {CSS3DObject} from "../CSS3DObject.js";
+import {Sprite} from "../../../objects/sprite/Sprite.js";
+import {PerspectiveCamera} from "../../../objects/cameras/PerspectiveCamera.js";
+import {OrthographicCamera} from "../../../objects/cameras/OrthographicCamera.js";
+import {Component} from "../../../../editor/components/Component.js";
+import {Vector2, Matrix4, Scene, Camera} from "three";
 
 /**
  * 3D renderer using DOM elements.
@@ -18,25 +24,25 @@ function CSS3DRenderer(domElement)
 	 * Size of the renderer viewport.
 	 *
 	 * @attribute size
-	 * @type {THREE.Vector2}
+	 * @type {Vector2}
 	 */
-	this.size = new THREE.Vector2(2, 2);
+	this.size = new Vector2(2, 2);
 
 	/**
 	 * Size of the renderer viewport.
 	 *
 	 * @attribute size
-	 * @type {THREE.Vector2}
+	 * @type {Vector2}
 	 */
-	this.halfSize = new THREE.Vector2(1, 1);
+	this.halfSize = new Vector2(1, 1);
 
 	/**
 	 * Temporary matrix object.
 	 *
 	 * @attribute matrix
-	 * @type {THREE.Matrix4}
+	 * @type {Matrix4}
 	 */
-	this.matrix = new THREE.Matrix4();
+	this.matrix = new Matrix4();
 
 	/**
 	 * Object cache, used to store the rendered objects state.
@@ -106,8 +112,8 @@ CSS3DRenderer.prototype.setSize = function(width, height)
  * Render the CSS object of a scene using a camera.
  *
  * @method render
- * @param {THREE.Scene} scene Scene to be rendered.
- * @param {THREE.Camera} camera Camera used to render the scene.
+ * @param {Scene} scene Scene to be rendered.
+ * @param {Camera} camera Camera used to render the scene.
  */
 CSS3DRenderer.prototype.render = function(scene, camera)
 {
@@ -270,3 +276,5 @@ CSS3DRenderer.prototype.render = function(scene, camera)
 	// Render scene recursively
 	renderObject(scene, camera, cameraCSSMatrix);
 };
+
+export {CSS3DRenderer};

@@ -1,4 +1,8 @@
-"use strict";
+import {Texture} from "../../../texture/Texture.js";
+import {Viewport} from "../../cameras/Viewport.js";
+import {Text} from "../../../../editor/components/Text.js";
+import {Form} from "../../../../editor/components/Form.js";
+import {Mesh, Lensflare, MeshBasicMaterial, Vector3, DataTexture, RGBFormat, NearestFilter, ClampToEdgeWrapping, RawShaderMaterial, LensflareElement, Color, Vector2, AdditiveBlending, Box2, Vector4, Object3D} from "three";
 
 /**
  * LensFlare object can be used to simulate lens flare from lights.
@@ -18,7 +22,7 @@
  */
 function LensFlare()
 {
-	THREE.Mesh.call(this, THREE.Lensflare.Geometry, new THREE.MeshBasicMaterial({opacity: 0, transparent: true}));
+	Mesh.call(this, Lensflare.Geometry, new MeshBasicMaterial({opacity: 0, transparent: true}));
 
 	this.name = "lensflare";
 	this.type = "LensFlare";
@@ -31,27 +35,27 @@ function LensFlare()
 	
 	this.elements = [];
 
-	var positionScreen = new THREE.Vector3();
+	var positionScreen = new Vector3();
 
 	// textures
-	var tempMap = new THREE.DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, THREE.RGBFormat);
-	tempMap.minFilter = THREE.NearestFilter;
-	tempMap.magFilter = THREE.NearestFilter;
-	tempMap.wrapS = THREE.ClampToEdgeWrapping;
-	tempMap.wrapT = THREE.ClampToEdgeWrapping;
+	var tempMap = new DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, RGBFormat);
+	tempMap.minFilter = NearestFilter;
+	tempMap.magFilter = NearestFilter;
+	tempMap.wrapS = ClampToEdgeWrapping;
+	tempMap.wrapT = ClampToEdgeWrapping;
 	tempMap.needsUpdate = true;
 
-	var occlusionMap = new THREE.DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, THREE.RGBFormat);
-	occlusionMap.minFilter = THREE.NearestFilter;
-	occlusionMap.magFilter = THREE.NearestFilter;
-	occlusionMap.wrapS = THREE.ClampToEdgeWrapping;
-	occlusionMap.wrapT = THREE.ClampToEdgeWrapping;
+	var occlusionMap = new DataTexture(new Uint8Array(16 * 16 * 3), 16, 16, RGBFormat);
+	occlusionMap.minFilter = NearestFilter;
+	occlusionMap.magFilter = NearestFilter;
+	occlusionMap.wrapS = ClampToEdgeWrapping;
+	occlusionMap.wrapT = ClampToEdgeWrapping;
 	occlusionMap.needsUpdate = true;
 
 	// material
-	var geometry = THREE.Lensflare.Geometry;
-	var shader = THREE.Lensflare.Shader;
-	var material1a = new THREE.RawShaderMaterial(
+	var geometry = Lensflare.Geometry;
+	var shader = Lensflare.Shader;
+	var material1a = new RawShaderMaterial(
 	{
 		uniforms:
 		{
@@ -78,7 +82,7 @@ function LensFlare()
 		transparent: false
 	});
 
-	var material1b = new THREE.RawShaderMaterial(
+	var material1b = new RawShaderMaterial(
 	{
 		uniforms:
 		{
@@ -112,30 +116,30 @@ function LensFlare()
 	});
 
 	// The following object is used for occlusionMap generation
-	var mesh1 = new THREE.Mesh(geometry, material1a);
-	var shader = THREE.LensflareElement.Shader;
-	var material2 = new THREE.RawShaderMaterial(
+	var mesh1 = new Mesh(geometry, material1a);
+	var shader = LensflareElement.Shader;
+	var material2 = new RawShaderMaterial(
 	{
 		uniforms:
 		{
 			map: {value: null},
 			occlusionMap: {value: occlusionMap},
-			color: {value: new THREE.Color(0xFFFFFF)},
-			scale: {value: new THREE.Vector2()},
-			screenPosition: {value: new THREE.Vector3()}
+			color: {value: new Color(0xFFFFFF)},
+			scale: {value: new Vector2()},
+			screenPosition: {value: new Vector3()}
 		},
 		vertexShader: shader.vertexShader,
 		fragmentShader: shader.fragmentShader,
-		blending: THREE.AdditiveBlending,
+		blending: AdditiveBlending,
 		transparent: true,
 		depthWrite: false
 	});
 
-	var mesh2 = new THREE.Mesh(geometry, material2);
-	var scale = new THREE.Vector2();
-	var screenPositionPixels = new THREE.Vector2();
-	var validArea = new THREE.Box2();
-	var viewport = new THREE.Vector4();
+	var mesh2 = new Mesh(geometry, material2);
+	var scale = new Vector2();
+	var screenPositionPixels = new Vector2();
+	var validArea = new Box2();
+	var viewport = new Vector4();
 
 	this.onBeforeRender = function(renderer, scene, camera)
 	{
@@ -226,7 +230,7 @@ function LensFlare()
 	};
 }
 
-LensFlare.prototype = Object.create(THREE.Mesh.prototype);
+LensFlare.prototype = Object.create(Mesh.prototype);
 
 /**
  * Add texture to the lensFlare object.
@@ -254,7 +258,7 @@ LensFlare.prototype.addFlare = function(texture, size, distance, color)
 
 	distance = Math.min(distance, Math.max(0, distance));
 	
-	this.addElement(new THREE.LensflareElement(texture, size, distance, color));
+	this.addElement(new LensflareElement(texture, size, distance, color));
 };
 
 LensFlare.prototype.addElement = function(element)
@@ -267,7 +271,7 @@ LensFlare.prototype.toJSON = function(meta)
 	var self = this;
 	var elements = [];
 
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		for(var i = 0; i < self.elements.length; i++)
 		{
@@ -284,3 +288,5 @@ LensFlare.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+export {LensFlare};

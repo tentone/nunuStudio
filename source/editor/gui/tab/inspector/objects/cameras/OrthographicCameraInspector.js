@@ -1,4 +1,18 @@
-"use strict";
+import {Scene} from "../../../../../../../core/objects/Scene.js";
+import {Viewport} from "../../../../../../../core/objects/cameras/Viewport.js";
+import {OrthographicCamera} from "../../../../../../../core/objects/cameras/OrthographicCamera.js";
+import {ChangeAction} from "../../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../../history/action/Action.js";
+import {ObjectInspector} from "../../ObjectInspector.js";
+import {Inspector} from "../../../Inspector.js";
+import {ViewportFormSnippet} from "../../../../../form-snippet/ViewportFormSnippet.js";
+import {FormSnippet} from "../../../../../form-snippet/FormSnippet.js";
+import {Editor} from "../../../../../../Editor.js";
+import {Text} from "../../../../../../components/Text.js";
+import {NumberBox} from "../../../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../../../../components/input/CheckBox.js";
+import {Form} from "../../../../../../components/Form.js";
 
 function OrthographicCameraInspector(parent, object)
 {
@@ -151,3 +165,5 @@ OrthographicCameraInspector.prototype.updateInspector = function()
 	this.clearStencil.setValue(this.object.clearStencil);
 	this.viewport.attach(this.object.viewport);
 };
+
+export {OrthographicCameraInspector};

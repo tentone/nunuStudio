@@ -1,4 +1,3 @@
-"use strict";
 
 /**
  * Theme manager is where the GUI themes are registered and accessed.
@@ -42,3 +41,4 @@ ThemeManager.getList = function()
 {
 	return Object.keys(ThemeManager.themes);
 }
+export {ThemeManager};

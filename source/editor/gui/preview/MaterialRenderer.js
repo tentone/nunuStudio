@@ -1,4 +1,6 @@
-"use strict";
+import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
+import {PreviewRenderer} from "../PreviewRenderer.js";
+import {SphereGeometry, Mesh, Points, Line, Sprite, AmbientLight, PointLight, Material, SpriteMaterial, LineBasicMaterial, PointsMaterial} from "three";
 
 /** 
  * The material renderer is used to generate preview thumbnails.
@@ -14,31 +16,31 @@ function MaterialRenderer()
 	this.camera = new OrthographicCamera(2.15, 1);
 
 	// Geometry
-	this.geometry = new THREE.SphereGeometry(1, 16, 16);
+	this.geometry = new SphereGeometry(1, 16, 16);
 
 	// Mesh
-	this.mesh = new THREE.Mesh(this.geometry);
+	this.mesh = new Mesh(this.geometry);
 	this.scene.add(this.mesh);
 
 	// Points
-	this.points = new THREE.Points(this.geometry);
+	this.points = new Points(this.geometry);
 	this.scene.add(this.points);
 
 	// Line
-	this.line = new THREE.Line(this.geometry);
+	this.line = new Line(this.geometry);
 	this.scene.add(this.line);
 
 	// Sprite
-	this.sprite = new THREE.Sprite();
+	this.sprite = new Sprite();
 	this.sprite.scale.set(2, 2, 1);
 	this.scene.add(this.sprite);
 
 	// Ambient light
-	var ambient = new THREE.AmbientLight(0x999999);
+	var ambient = new AmbientLight(0x999999);
 	this.scene.add(ambient);
 
 	// Point light
-	var point = new THREE.PointLight(0x999999);
+	var point = new PointLight(0x999999);
 	point.position.set(-0.5, 1, 1.5);
 	this.scene.add(point);
 }
@@ -50,7 +52,7 @@ MaterialRenderer.prototype = Object.create(PreviewRenderer.prototype);
  *
  * @static
  * @method generateElement
- * @param {THREE.Material} material Material to preview.
+ * @param {Material} material Material to preview.
  */
 MaterialRenderer.generateElement = function(material)
 {
@@ -75,7 +77,7 @@ MaterialRenderer.render = function(material, onRender)
 
 MaterialRenderer.prototype.render = function(material, onRender)
 {
-	if(material instanceof THREE.SpriteMaterial)
+	if(material instanceof SpriteMaterial)
 	{
 		this.mesh.visible = false;
 		this.sprite.visible = true;
@@ -85,7 +87,7 @@ MaterialRenderer.prototype.render = function(material, onRender)
 		this.sprite.material = material;
 		this.camera.position.set(0, 0, 0.5);
 	}
-	else if(material instanceof THREE.LineBasicMaterial)
+	else if(material instanceof LineBasicMaterial)
 	{
 		this.mesh.visible = false;
 		this.sprite.visible = false;
@@ -95,7 +97,7 @@ MaterialRenderer.prototype.render = function(material, onRender)
 		this.line.material = material;
 		this.camera.position.set(0, 0, 0.5);
 	}
-	else if(material instanceof THREE.PointsMaterial)
+	else if(material instanceof PointsMaterial)
 	{
 		this.mesh.visible = false;
 		this.sprite.visible = false;
@@ -122,3 +124,4 @@ MaterialRenderer.prototype.render = function(material, onRender)
 	// Callback
 	onRender(this.canvas.toDataURL());
 };
+export {MaterialRenderer};

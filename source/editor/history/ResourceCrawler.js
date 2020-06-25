@@ -1,4 +1,21 @@
-"use strict";
+import {Video} from "../../../core/resources/Video.js";
+import {ResourceManager} from "../../../core/resources/ResourceManager.js";
+import {ResourceContainer} from "../../../core/resources/ResourceContainer.js";
+import {Resource} from "../../../core/resources/Resource.js";
+import {Image} from "../../../core/resources/Image.js";
+import {Font} from "../../../core/resources/Font.js";
+import {Audio} from "../../../core/resources/Audio.js";
+import {TextSprite} from "../../../core/objects/text/TextSprite.js";
+import {TextBitmap} from "../../../core/objects/text/TextBitmap.js";
+import {Sprite} from "../../../core/objects/sprite/Sprite.js";
+import {SpineAnimation} from "../../../core/objects/spine/SpineAnimation.js";
+import {ParticleEmitter} from "../../../core/objects/particle/ParticleEmitter.js";
+import {Sky} from "../../../core/objects/misc/Sky.js";
+import {LensFlare} from "../../../core/objects/misc/LensFlare.js";
+import {Container} from "../../../core/objects/misc/Container.js";
+import {Editor} from "../../Editor.js";
+import {Text} from "../../components/Text.js";
+import {Texture, Materials, Object3D, Material, MultiMaterial, Mesh, SkinnedMesh, BufferGeometry, Geometry} from "three";
 
 /**
  * Resource utils contains multiple tools to manipulate data in the resource manager on the editor.
@@ -102,11 +119,11 @@ ResourceCrawler.removeDuplicated = function(object)
 	// Fetch resources to be optimized
 	ResourceCrawler.traverseDeep(object, function(value)
 	{
-		if(value instanceof THREE.Texture)
+		if(value instanceof Texture)
 		{
 
 		}
-		else if(value instanceof THREE.Materials)
+		else if(value instanceof Materials)
 		{
 
 		}
@@ -200,7 +217,7 @@ ResourceCrawler.getResourceByName = function(manager, name)
  *
  * @static
  * @method searchObject
- * @param {THREE.Object3D} object Object to search for resources.
+ * @param {Object3D} object Object to search for resources.
  * @param {ResourceManager} manager Resource manager object.
  * @param {ResourceContainer} target Optional resource container object that can be used to store the found resources.
  * @return {ResourceContainer} Object with the new resources found in the object.
@@ -246,7 +263,7 @@ ResourceCrawler.searchObject = function(object, manager, target)
 		// Material/textures
 		if(child.material !== undefined && !(child instanceof TextBitmap || child instanceof TextSprite ||child instanceof LensFlare || child instanceof ParticleEmitter || child instanceof Sky || child instanceof SpineAnimation))
 		{
-			if(child.material instanceof THREE.Material)
+			if(child.material instanceof Material)
 			{
 				addMaterial(child.material);
 			}
@@ -264,7 +281,7 @@ ResourceCrawler.searchObject = function(object, manager, target)
 					addMaterial(child.materials[j]);
 				}
 			}
-			else if(child.material instanceof THREE.MultiMaterial)
+			else if(child.material instanceof MultiMaterial)
 			{
 				var materials = child.material.materials;
 				for(var j = 0; j < materials.length; j++)
@@ -275,9 +292,9 @@ ResourceCrawler.searchObject = function(object, manager, target)
 		}
 
 		// Geometries
-		if((child instanceof THREE.Mesh || child instanceof THREE.SkinnedMesh) && !(child instanceof TextBitmap))
+		if((child instanceof Mesh || child instanceof SkinnedMesh) && !(child instanceof TextBitmap))
 		{
-			if(child.geometry instanceof THREE.BufferGeometry || child.geometry instanceof THREE.Geometry)
+			if(child.geometry instanceof BufferGeometry || child.geometry instanceof Geometry)
 			{
 				if(manager.geometries[child.geometry.uuid] === undefined)
 				{
@@ -382,3 +399,4 @@ ResourceCrawler.searchObject = function(object, manager, target)
 
 	return resources;
 };
+export {ResourceCrawler};

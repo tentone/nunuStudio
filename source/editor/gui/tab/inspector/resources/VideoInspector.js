@@ -1,4 +1,9 @@
-"use strict";
+import {Video} from "../../../../../../core/resources/Video.js";
+import {Resource} from "../../../../../../core/resources/Resource.js";
+import {ResourceInspector} from "../ResourceInspector.js";
+import {Inspector} from "../../Inspector.js";
+import {Text} from "../../../../../components/Text.js";
+import {VideoPlayer} from "../../../../../components/media/VideoPlayer.js";
 
 function VideoInspector(parent, object)
 {
@@ -21,3 +26,4 @@ VideoInspector.prototype.updateInspector = function()
 
 	this.video.setValue(this.object);
 };
+export {VideoInspector};

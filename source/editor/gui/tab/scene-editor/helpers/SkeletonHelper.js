@@ -1,17 +1,17 @@
-"use strict";
+import {BufferGeometry, Color, Float32BufferAttribute, LineSegments, LineBasicMaterial, VertexColors, Matrix4, Vector3} from "three";
 
 function SkeletonHelper(object) 
 {
 	this.object = object;
 
 	var bones = SkeletonHelper.getBoneList(object);
-	var geometry = new THREE.BufferGeometry();
+	var geometry = new BufferGeometry();
 
 	var vertices = [];
 	var colors = [];
 
-	var color1 = new THREE.Color(0, 0, 1);
-	var color2 = new THREE.Color(0, 1, 0);
+	var color1 = new Color(0, 0, 1);
+	var color2 = new Color(0, 1, 0);
 
 	for(var i = 0; i < bones.length; i++)
 	{
@@ -26,12 +26,12 @@ function SkeletonHelper(object)
 		}
 	}
 
-	geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
-	geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+	geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+	geometry.setAttribute("color", new Float32BufferAttribute(colors, 3));
 
-	THREE.LineSegments.call(this, geometry, new THREE.LineBasicMaterial(
+	LineSegments.call(this, geometry, new LineBasicMaterial(
 	{
-		vertexColors: THREE.VertexColors,
+		vertexColors: VertexColors,
 		depthTest: false,
 		depthWrite: false,
 		transparent: false
@@ -44,7 +44,7 @@ function SkeletonHelper(object)
 	this.update();
 }
 
-SkeletonHelper.prototype = Object.create(THREE.LineSegments.prototype);
+SkeletonHelper.prototype = Object.create(LineSegments.prototype);
 
 SkeletonHelper.getBoneList = function(object)
 {
@@ -69,11 +69,11 @@ SkeletonHelper.prototype.update = function ()
 	var geometry = this.geometry;
 	var position = geometry.getAttribute("position");
 
-	var matrixWorldInv = new THREE.Matrix4();
+	var matrixWorldInv = new Matrix4();
 	matrixWorldInv.getInverse(this.root.matrixWorld);
 
-	var boneMatrix = new THREE.Matrix4();
-	var vector = new THREE.Vector3();
+	var boneMatrix = new Matrix4();
+	var vector = new Vector3();
 
 	for(var i = 0, j = 0; i < bones.length; i++)
 	{
@@ -94,3 +94,4 @@ SkeletonHelper.prototype.update = function ()
 
 	geometry.getAttribute("position").needsUpdate = true;
 };
+export {SkeletonHelper};

@@ -1,4 +1,4 @@
-"use strict";
+
 
 /**
  * LocaleManager is used to manager multime locale configuration available.
@@ -82,3 +82,4 @@ LocaleManager.setLocale = function(locale)
 		Locale = locale;
 	}
 };
+export {LocaleManager};

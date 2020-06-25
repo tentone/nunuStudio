@@ -1,9 +1,11 @@
-"use strict";
+import {Script} from "../../script/Script.js";
+import {Sprite, Object3D} from "three";
+
 
 /**
  * Sprites allways face the screen are used for 2D elements.
  * 
- * Based on THREE.Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite.
+ * Based on Sprite documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Sprite.
  * 
  * @class Sprite
  * @module Sprite
@@ -23,8 +25,8 @@ function Sprite(material)
 	this.name = "sprite";
 }
 
-THREE._Sprite = THREE.Sprite;
-THREE.Sprite = Sprite;
+THREE._Sprite = Sprite;
+Sprite = Sprite;
 
 Sprite.prototype = Object.create(THREE._Sprite.prototype);
 
@@ -35,5 +37,6 @@ Sprite.prototype.dispose = function()
 		this.material.dispose();
 	}
 	
-	THREE.Object3D.prototype.dispose.call(this);
+	Object3D.prototype.dispose.call(this);
 };
+export {Sprite};

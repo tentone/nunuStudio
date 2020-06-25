@@ -1,4 +1,7 @@
-"use strict";
+import {Editor} from "../../../../Editor.js";
+import {TabComponent} from "../../../../components/tabs/TabComponent.js";
+import {Component} from "../../../../components/Component.js";
+import {Canvas} from "../../../../components/Canvas.js";
 
 /**
  * Profiling tab is used to measure the performance of the application booth in the editor and while it is running.
@@ -48,3 +51,5 @@ ProfilingTab.prototype.updateSize = function()
 	TabComponent.prototype.updateSize.call(this);
 
 };
+
+export {ProfilingTab};

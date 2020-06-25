@@ -1,4 +1,11 @@
-"use strict";
+import {Texture} from "../../texture/Texture.js";
+import {Video} from "../Video.js";
+import {Resource} from "../Resource.js";
+import {Image} from "../Image.js";
+import {Font} from "../Font.js";
+import {Audio} from "../Audio.js";
+import {Container} from "../../objects/misc/Container.js";
+import {Text} from "../../../editor/components/Text.js";
 
 /**
  * Resource container contains resource of multiple types.
@@ -174,3 +181,5 @@ ResourceContainer.prototype.getAudio = function(uuid)
 	}
 	return this.audio[uuid];
 };
+
+export {ResourceContainer};

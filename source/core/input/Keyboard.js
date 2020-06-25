@@ -1,4 +1,6 @@
-"use strict";
+import {EventManager} from "../../utils/EventManager.js";
+import {Key} from "../Key.js";
+
 
 /**
  * Keyboard instance for input in sync with the running application, internally stores the key transitions provided by the browser.
@@ -632,3 +634,4 @@ Keyboard.F11 = 122;
  * @type {number}
  */
 Keyboard.F12 = 123;
+export {Keyboard};

@@ -1,4 +1,32 @@
-"use strict";
+import {Audio} from "../../../core/resources/Audio.js";
+import {TextSprite} from "../../../core/objects/text/TextSprite.js";
+import {TextMesh} from "../../../core/objects/text/TextMesh.js";
+import {TextBitmap} from "../../../core/objects/text/TextBitmap.js";
+import {Sprite} from "../../../core/objects/sprite/Sprite.js";
+import {SpineAnimation} from "../../../core/objects/spine/SpineAnimation.js";
+import {Script} from "../../../core/objects/script/Script.js";
+import {Scene} from "../../../core/objects/Scene.js";
+import {Program} from "../../../core/objects/Program.js";
+import {Sky} from "../../../core/objects/misc/Sky.js";
+import {LensFlare} from "../../../core/objects/misc/LensFlare.js";
+import {SkinnedMesh} from "../../../core/objects/mesh/SkinnedMesh.js";
+import {Mesh} from "../../../core/objects/mesh/Mesh.js";
+import {InstancedMesh} from "../../../core/objects/mesh/InstancedMesh.js";
+import {SpotLight} from "../../../core/objects/lights/SpotLight.js";
+import {RectAreaLight} from "../../../core/objects/lights/RectAreaLight.js";
+import {PointLight} from "../../../core/objects/lights/PointLight.js";
+import {LightProbe} from "../../../core/objects/lights/LightProbe.js";
+import {HemisphereLight} from "../../../core/objects/lights/HemisphereLight.js";
+import {DirectionalLight} from "../../../core/objects/lights/DirectionalLight.js";
+import {AmbientLight} from "../../../core/objects/lights/AmbientLight.js";
+import {OrbitControls} from "../../../core/objects/controls/OrbitControls.js";
+import {FirstPersonControls} from "../../../core/objects/controls/FirstPersonControls.js";
+import {PerspectiveCamera} from "../../../core/objects/cameras/PerspectiveCamera.js";
+import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
+import {CubeCamera} from "../../../core/objects/cameras/CubeCamera.js";
+import {PositionalAudio} from "../../../core/objects/audio/PositionalAudio.js";
+import {Text} from "../../components/Text.js";
+
 
 /**
  * Stores and manages icons of the object types available in the platform.
