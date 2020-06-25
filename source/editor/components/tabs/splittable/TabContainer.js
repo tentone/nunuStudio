@@ -1,4 +1,10 @@
-"use strict";
+import {Container} from "../../../../core/objects/misc/Container.js";
+import {Settings} from "../../../Settings.js";
+import {Interface} from "../../../gui/Interface.js";
+import {TabGroup} from "../TabGroup.js";
+import {TabComponent} from "../TabComponent.js";
+import {TabGroupSplit} from "./TabGroupSplit.js";
+import {Component} from "../../Component.js";
 
 /**
  * Tab container is the root for a tree of tab groups.
@@ -191,3 +197,5 @@ TabContainer.prototype.clear = function(forceAll)
 {
 	this.group.clear();
 };
+
+export {TabContainer};

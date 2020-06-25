@@ -1,4 +1,11 @@
-"use strict";
+import {Container} from "../../../core/objects/misc/Container.js";
+import {Settings} from "../../Settings.js";
+import {TabGroup} from "./TabGroup.js";
+import {TabButton} from "./TabButton.js";
+import {TabContainer} from "./splittable/TabContainer.js";
+import {Component} from "../Component.js";
+import {Button} from "../buttons/Button.js";
+import {Math} from "three";
 
 /**
  * Tab element is used to create tabbed elements.
@@ -38,7 +45,7 @@ function TabComponent(parent, closeable, container, index, title, icon)
 	 * @property uuid
 	 * @type {string}
 	 */
-	this.uuid = THREE.Math.generateUUID();
+	this.uuid = Math.generateUUID();
 
 	/**
 	 * Index of the tab inside of the container
@@ -264,3 +271,5 @@ TabComponent.prototype.destroy = function()
 		this.button.destroy();
 	}
 };
+
+export {TabComponent};

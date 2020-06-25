@@ -1,4 +1,5 @@
-"use strict";
+import {Math} from "three";
+
 
 // TODO <NOT USED ANYWERE>
 
@@ -15,7 +16,7 @@ function Tree(value)
 {
 	this.value = (value !== undefined) ? value : null;
 	
-	this.uuid = THREE.Math.generateUUID();
+	this.uuid = Math.generateUUID();
 	this.parent = null;
 	this.children = [];
 }
@@ -111,3 +112,4 @@ Tree.prototype.print = function(level)
 		this.children[i].print(level + 1);
 	}
 };
+export {Tree};

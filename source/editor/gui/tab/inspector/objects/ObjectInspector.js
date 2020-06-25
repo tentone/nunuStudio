@@ -1,4 +1,15 @@
-"use strict";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {ActionBundle} from "../../../../history/action/ActionBundle.js";
+import {Action} from "../../../../history/action/Action.js";
+import {Inspector} from "../Inspector.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {VectorBox} from "../../../../components/input/VectorBox.js";
+import {TextBox} from "../../../../components/input/TextBox.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Component} from "../../../../components/Component.js";
 
 function ObjectInspector(parent, object)
 {
@@ -186,3 +197,4 @@ ObjectInspector.prototype.updateInspector = function()
 	this.renderOrder.setValue(this.object.renderOrder);
 	this.static.setValue(!this.object.matrixAutoUpdate);
 };
+export {ObjectInspector};

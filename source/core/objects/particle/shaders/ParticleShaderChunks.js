@@ -1,4 +1,6 @@
-"use strict";
+import {Texture} from "../../../texture/Texture.js";
+import {Sprite} from "../../sprite/Sprite.js";
+import {Text} from "../../../../editor/components/Text.js";
 
 var ParticleShaderChunks =
 {
@@ -265,3 +267,4 @@ var ParticleShaderChunks =
 		"    vec4 rotatedTexture = texture2D(textureSampler, vUv);",
 	].join("\n")
 };
+export {ParticleShaderChunks};

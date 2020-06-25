@@ -1,4 +1,21 @@
-"use strict";
+import {EventManager} from "../utils/EventManager.js";
+import {ResourceManager} from "../resources/ResourceManager.js";
+import {ResourceContainer} from "../resources/ResourceContainer.js";
+import {Resource} from "../resources/Resource.js";
+import {RendererConfiguration} from "../renderer/RendererConfiguration.js";
+import {TargetConfig} from "../platform/TargetConfig.js";
+import {Script} from "./script/Script.js";
+import {Container} from "./misc/Container.js";
+import {NunuApp} from "../NunuApp.js";
+import {Nunu} from "../Nunu.js";
+import {ObjectLoader} from "../loaders/ObjectLoader.js";
+import {Mouse} from "../input/Mouse.js";
+import {Keyboard} from "../input/Keyboard.js";
+import {Key} from "../input/Key.js";
+import {Division} from "../../editor/components/Division.js";
+import {Canvas} from "../../editor/components/Canvas.js";
+import {Scene, Camera, Clock, Object3D} from "three";
+
 
 /**
  * Program class contains all the data of a nunuStudio program.
@@ -125,7 +142,7 @@ function Program(name)
 	 * Scene loaded as default on startup.
 	 *
 	 * @property defaultScene
-	 * @type {THREE.Scene}
+	 * @type {Scene}
 	 */
 	this.defaultScene = null;
 
@@ -135,7 +152,7 @@ function Program(name)
 	 * On the editor this value is automatically set to the last editor camera point used
 	 *
 	 * @property defaultCamera
-	 * @type {THREE.Camera}
+	 * @type {Camera}
 	 */
 	this.defaultCamera = null;
 
@@ -209,9 +226,9 @@ function Program(name)
 	 * The time measured is passed down to the scene and its children elements.
 	 *
 	 * @property clock
-	 * @type {THREE.Clock}
+	 * @type {Clock}
 	 */
-	this.clock = new THREE.Clock();
+	this.clock = new Clock();
 
 	/**
 	 * VR runtime control, true when the app is running in VR mode.
@@ -595,7 +612,7 @@ Program.prototype.dispose = function()
 	}
 	
 	ResourceManager.prototype.dispose.call(this);
-	THREE.Object3D.prototype.dispose.call(this);
+	Object3D.prototype.dispose.call(this);
 };
 
 /**
@@ -662,7 +679,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 {
 	var self = this;
 
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		if(exportResources !== false)
 		{
@@ -705,3 +722,4 @@ Program.prototype.toJSON = function(meta, exportResources)
 
 	return data;
 };
+export {Program};

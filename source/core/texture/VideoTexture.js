@@ -1,4 +1,10 @@
-"use strict";
+import {Video} from "../resources/Video.js";
+import {VideoStream} from "../resources/stream/VideoStream.js";
+import {Image} from "../resources/Image.js";
+import {Text} from "../../editor/components/Text.js";
+import {Form} from "../../editor/components/Form.js";
+import {Texture, LinearFilter, RGBFormat} from "three";
+
 
 /**
  * Video texture, uses a video DOM element instead of a img element.
@@ -17,7 +23,7 @@
  */
 function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 {
-	THREE.Texture.call(this, document.createElement("video"), mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
+	Texture.call(this, document.createElement("video"), mapping, wrapS, wrapT, LinearFilter, LinearFilter, RGBFormat, type, anisotropy);
 
 	this.disposed = false;
 	this.generateMipmaps = false;
@@ -99,7 +105,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	update();
 }
 
-VideoTexture.prototype = Object.create(THREE.Texture.prototype);
+VideoTexture.prototype = Object.create(Texture.prototype);
 
 VideoTexture.isVideoTexture = true;
 
@@ -228,7 +234,7 @@ VideoTexture.prototype.play = function()
  */
 VideoTexture.prototype.dispose = function()
 {	
-	THREE.Texture.prototype.dispose.call(this);
+	Texture.prototype.dispose.call(this);
 
 	this.disposed = true;
 	
@@ -246,7 +252,7 @@ VideoTexture.prototype.dispose = function()
  */
 VideoTexture.prototype.toJSON = function(meta)
 {
-	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+	var data = Texture.prototype.toJSON.call(this, meta);
 	var video = this.video.toJSON(meta);
 
 	data.video = video.uuid;
@@ -257,3 +263,4 @@ VideoTexture.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {VideoTexture};

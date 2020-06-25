@@ -1,4 +1,16 @@
-"use strict";
+import {Texture} from "../../../../../core/texture/Texture.js";
+import {Sky} from "../../../../../core/objects/misc/Sky.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {MaterialEditor} from "../MaterialEditor.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {TextureForm} from "../../../../components/input/TextureForm.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {ColorChooser} from "../../../../components/input/ColorChooser.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Form} from "../../../../components/Form.js";
+import {Sprite, Color} from "three";
 
 function SpriteMaterialEditor(parent, closeable, container, index)
 {
@@ -13,7 +25,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 	this.camera.position.set(0, 0, 1.5);
 	
-	this.sprite = new THREE.Sprite(null);
+	this.sprite = new Sprite(null);
 	this.interactive.add(this.sprite);
 
 	// Sky
@@ -34,7 +46,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new Color(self.color.getValueHex())));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -78,3 +90,5 @@ SpriteMaterialEditor.prototype.attach = function(material, asset)
 	this.rotation.setValue(material.rotation);
 	this.map.setValue(material.map);
 };
+
+export {SpriteMaterialEditor};

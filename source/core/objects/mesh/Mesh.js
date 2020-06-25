@@ -1,15 +1,16 @@
-"use strict";
+import {Mesh, Object3D} from "three";
+
 
 /**
  * A Mesh combines a geometry and a material forming a complete rederizable object.
  * 
- * Based on THREE.Mesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Mesh.
+ * Based on Mesh documentation for the object can be found at https:// threejs.org/docs/index.html#Reference/Objects/Mesh.
  * 
  * @class Mesh
  * @module Meshes
  * @param {Geometry} geometry Geometry used by this mesh
  * @param {Material} material Material used to shade the superficie of the geometry
- * @extends {THREE.Mesh}
+ * @extends {Mesh}
  */
 function Mesh(geometry, material)
 {
@@ -21,8 +22,8 @@ function Mesh(geometry, material)
 	this.castShadow = true;
 }
 
-THREE._Mesh = THREE.Mesh;
-THREE.Mesh = Mesh;
+THREE._Mesh = Mesh;
+Mesh = Mesh;
 
 Mesh.prototype = Object.create(THREE._Mesh.prototype);
 
@@ -42,7 +43,7 @@ Mesh.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	THREE.Object3D.prototype.dispose.call(this);
+	Object3D.prototype.dispose.call(this);
 };
 
 /**
@@ -67,3 +68,4 @@ Mesh.prototype.dispose = function()
  * @property drawMode
  * @default TrianglesDrawMode
  */
+export {Mesh};

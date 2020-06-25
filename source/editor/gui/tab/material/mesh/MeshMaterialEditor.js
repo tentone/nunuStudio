@@ -1,4 +1,17 @@
-"use strict";
+import {Model} from "../../../../../core/resources/Model.js";
+import {Sky} from "../../../../../core/objects/misc/Sky.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {MaterialEditor} from "../MaterialEditor.js";
+import {Interface} from "../../../Interface.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../components/input/DropdownList.js";
+import {ColorChooser} from "../../../../components/input/ColorChooser.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {Form} from "../../../../components/Form.js";
+import {Color, PointLight, AmbientLight, Mesh} from "three";
 
 function MeshMaterialEditor(parent, closeable, container, index)
 {
@@ -105,7 +118,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.color.size.set(100, 18);
 	this.color.setOnChange(function()
 	{
-		Editor.addAction(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
+		Editor.addAction(new ChangeAction(self.material, "color", new Color(self.color.getValueHex())));
 			self.material.needsUpdate = true;
 	});
 	this.form.add(this.color);
@@ -116,16 +129,16 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.sky = new Sky();
 	this.scene.add(this.sky);
 
-	this.pointLight = new THREE.PointLight(0x666666);
+	this.pointLight = new PointLight(0x666666);
 	this.pointLight.position.set(-1, 0, 3);
 	this.scene.add(this.pointLight);
 	
-	this.ambientLight = new THREE.AmbientLight(0x555555);
+	this.ambientLight = new AmbientLight(0x555555);
 	this.ambientLight.visible = false;
 	this.scene.add(this.ambientLight);
 
 	// Mesh
-	this.mesh = new THREE.Mesh(MaterialEditor.geometries[0][1], null);
+	this.mesh = new Mesh(MaterialEditor.geometries[0][1], null);
 	this.interactive.add(this.mesh);
 	
 	// Test model
@@ -225,3 +238,5 @@ MeshMaterialEditor.prototype.attach = function(material, asset)
 	this.wireframeLinewidth.setValue(material.wireframeLinewidth);
 	this.flatShading.setValue(material.flatShading);
 };
+
+export {MeshMaterialEditor};

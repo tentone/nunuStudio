@@ -1,3 +1,14 @@
+import {EventManager} from "./utils/EventManager.js";
+import {Program} from "./objects/Program.js";
+import {PerspectiveCamera} from "./objects/cameras/PerspectiveCamera.js";
+import {Nunu} from "./Nunu.js";
+import {ObjectLoader} from "./loaders/ObjectLoader.js";
+import {FileSystem} from "./FileSystem.js";
+import {Graph} from "../editor/components/input/Graph.js";
+import {Component} from "../editor/components/Component.js";
+import {Canvas} from "../editor/components/Canvas.js";
+import {StaticPair} from "pson";
+
 /**
  * Nunu app is the main class of the runtime system, is used to embed projects into external webpages and applications.
  *
@@ -16,7 +27,6 @@ function NunuApp(canvas)
 	 * @type {Program}
 	 */
 	this.program = null;
-
 	/**
 	 * Graphics renderer in use by this NunuApp instance
 	 * @property renderer
@@ -202,7 +212,7 @@ NunuApp.prototype.loadProgram = function(fname)
 	{
 		var loader = new ObjectLoader();
 		var data = FileSystem.readFileArrayBuffer(fname);
-		var pson = new dcodeIO.PSON.StaticPair();
+		var pson = new StaticPair();
 		this.program = loader.parse(pson.decode(data));
 	}
 };
@@ -239,7 +249,7 @@ NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 		FileSystem.readFileArrayBuffer(fname, false, function(data)
 		{
 			var loader = new ObjectLoader();
-			var pson = new dcodeIO.PSON.StaticPair();
+			var pson = new StaticPair();
 			self.program = loader.parse(pson.decode(data));
 
 			if(onLoad !== undefined)
@@ -484,3 +494,5 @@ NunuApp.prototype.toggleFullscreen = function(element)
 
 	Nunu.setFullscreen(!fullscreen, element);
 };
+
+export {NunuApp};

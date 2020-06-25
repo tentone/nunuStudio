@@ -1,4 +1,3 @@
-"use strict";
 
 var Global =
 {
@@ -6,3 +5,5 @@ var Global =
 	RUNTIME_PATH: "./source/runtime/",
 	BUILD_PATH: "./build/nunu.min.js"
 };
+
+export {Global};

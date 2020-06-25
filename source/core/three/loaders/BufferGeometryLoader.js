@@ -1,3 +1,5 @@
+import {GeometryLoader} from "../../loaders/GeometryLoader.js";
+import {InstancedBufferAttribute, BufferAttribute, InterleavedBuffer, InterleavedBufferAttribute, BufferGeometryLoader, Vector3, Sphere} from "three";
 var TYPED_ARRAYS = {
 	Int8Array: Int8Array,
 	Uint8Array: Uint8Array,
@@ -9,14 +11,13 @@ var TYPED_ARRAYS = {
 	Float32Array: Float32Array,
 	Float64Array: Float64Array
 };
-
 var parseBufferAttribute = function(json)
 {
 	// Legacy format
 	if (json.array !== undefined)
 	{
 		var typedArray = new TYPED_ARRAYS[json.type](json.array);
-		var contructor = json.isInstancedBufferAttribute ? THREE.InstancedBufferAttribute : THREE.BufferAttribute;
+		var contructor = json.isInstancedBufferAttribute ? InstancedBufferAttribute : BufferAttribute;
 		var bufferAttribute = new contructor(typedArray, json.itemSize, json.normalized);
 
 		if (json.name !== undefined) bufferAttribute.name = json.name;
@@ -29,22 +30,22 @@ var parseBufferAttribute = function(json)
 	if(json.type === "BufferAttribute")
 	{
 		var typedArray = new TYPED_ARRAYS[json.typedArray.type](json.typedArray.array);
-		bufferAttribute = new THREE.BufferAttribute(typedArray, json.itemSize, json.normalized);
+		bufferAttribute = new BufferAttribute(typedArray, json.itemSize, json.normalized);
 	}
 	else if(json.type === "InstancedBufferAttribute")
 	{
 		var typedArray = new TYPED_ARRAYS[json.typedArray.type](json.typedArray.array);
-		bufferAttribute = new THREE.InstancedBufferAttribute(typedArray, json.itemSize, json.normalized, json.meshPerAttribute);
+		bufferAttribute = new InstancedBufferAttribute(typedArray, json.itemSize, json.normalized, json.meshPerAttribute);
 	}
 	else if(json.type === "InterleavedBufferAttribute")
 	{
 		// Interleaved buffer
 		var typedArray = new TYPED_ARRAYS[json.data.typedArray.type](json.data.typedArray.array);
-		var interleavedBuffer = new THREE.InterleavedBuffer(typedArray, json.data.stride);
+		var interleavedBuffer = new InterleavedBuffer(typedArray, json.data.stride);
 		interleavedBuffer.setUsage(json.data.usage);
 		interleavedBuffer.count = json.data.count;
 		
-		bufferAttribute = new THREE.InterleavedBufferAttribute(interleavedBuffer, json.itemSize, json.offset, json.normalized);
+		bufferAttribute = new InterleavedBufferAttribute(interleavedBuffer, json.itemSize, json.offset, json.normalized);
 	}
 
 	if (json.name !== undefined) bufferAttribute.name = json.name;
@@ -52,7 +53,7 @@ var parseBufferAttribute = function(json)
 	return bufferAttribute;
 };
 
-THREE.BufferGeometryLoader.prototype.parse = function(json)
+BufferGeometryLoader.prototype.parse = function(json)
 {
 	var geometry = json.isInstancedBufferGeometry ? new InstancedBufferGeometry() : new BufferGeometry();
 	var index = json.data.index;
@@ -60,7 +61,7 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 	if (index !== undefined)
 	{
 		var typedArray = new TYPED_ARRAYS[index.type](index.array);
-		geometry.setIndex(new THREE.BufferAttribute(typedArray, 1));
+		geometry.setIndex(new BufferAttribute(typedArray, 1));
 	}
 
 	var attributes = json.data.attributes;
@@ -108,13 +109,13 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 	var boundingSphere = json.data.boundingSphere;
 	if(boundingSphere !== undefined)
 	{
-		var center = new THREE.Vector3();
+		var center = new Vector3();
 		if (boundingSphere.center !== undefined)
 		{
 			center.fromArray(boundingSphere.center);
 		}
 
-		geometry.boundingSphere = new THREE.Sphere(center, boundingSphere.radius);
+		geometry.boundingSphere = new Sphere(center, boundingSphere.radius);
 	}
 
 	if (json.name) geometry.name = json.name;

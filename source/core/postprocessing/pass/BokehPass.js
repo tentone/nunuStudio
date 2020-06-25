@@ -1,4 +1,7 @@
-"use strict";
+import {Pass} from "../Pass.js";
+import {Scene} from "../../objects/Scene.js";
+import {Mesh} from "../../objects/mesh/Mesh.js";
+import {BokehShader, WebGLRenderTarget, MeshDepthMaterial, RGBADepthPacking, NoBlending, UniformsUtils, ShaderMaterial} from "three";
 
 /**
  * Depth-of-field post-process with bokeh shader.
@@ -12,9 +15,9 @@
 
 function BokehPass(focus, aperture, maxblur)
 {
-	if(THREE.BokehShader === undefined)
+	if(BokehShader === undefined)
 	{
-		console.error("BokehPass relies on THREE.BokehShader");
+		console.error("BokehPass relies on BokehShader");
 	}
 
 	Pass.call(this);
@@ -22,24 +25,24 @@ function BokehPass(focus, aperture, maxblur)
 	this.type = "Bokeh";
 
 	// Render targets
-	this.renderTargetColor = new THREE.WebGLRenderTarget(0, 0, Pass.RGBLinear);
+	this.renderTargetColor = new WebGLRenderTarget(0, 0, Pass.RGBLinear);
 	this.renderTargetDepth = this.renderTargetColor.clone();
 
 	// Depth material
-	this.materialDepth = new THREE.MeshDepthMaterial();
-	this.materialDepth.depthPacking = THREE.RGBADepthPacking;
-	this.materialDepth.blending = THREE.NoBlending;
+	this.materialDepth = new MeshDepthMaterial();
+	this.materialDepth.depthPacking = RGBADepthPacking;
+	this.materialDepth.blending = NoBlending;
 
 	// Bokeh material
-	this.uniforms = THREE.UniformsUtils.clone(THREE.BokehShader.uniforms);
+	this.uniforms = UniformsUtils.clone(BokehShader.uniforms);
 	this.uniforms["tDepth"].value = this.renderTargetDepth.texture;
 
-	this.materialBokeh = new THREE.ShaderMaterial(
+	this.materialBokeh = new ShaderMaterial(
 	{
-		defines: THREE.BokehShader.defines,
+		defines: BokehShader.defines,
 		uniforms: this.uniforms,
-		vertexShader: THREE.BokehShader.vertexShader,
-		fragmentShader: THREE.BokehShader.fragmentShader
+		vertexShader: BokehShader.vertexShader,
+		fragmentShader: BokehShader.fragmentShader
 	});
 
 	// Scene
@@ -153,3 +156,4 @@ BokehPass.prototype.toJSON = function(meta)
 	
 	return data;
 };
+export {BokehPass};

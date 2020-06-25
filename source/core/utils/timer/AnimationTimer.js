@@ -1,4 +1,4 @@
-"use strict";
+import {Timer} from "./Timer.js";
 
 /**
  * Animation timer is a special type of timer that uses the requestAnimationFrame() method.
@@ -72,3 +72,5 @@ AnimationTimer.prototype.stop = function()
 	this.running = false;
 	cancelAnimationFrame(this.id);
 };
+
+export {AnimationTimer};

@@ -1,4 +1,15 @@
-"use strict";
+import {Texture} from "../../../../../core/texture/Texture.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {Inspector} from "../Inspector.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {VectorBox} from "../../../../components/input/VectorBox.js";
+import {TextBox} from "../../../../components/input/TextBox.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../../components/input/CheckBox.js";
+import {ClampToEdgeWrapping, RepeatWrapping, MirroredRepeatWrapping, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
 
 function TextureInspector(parent, object)
 {
@@ -30,9 +41,9 @@ function TextureInspector(parent, object)
 	this.form.addText(Locale.wrapHor);
 	this.wrapS = new DropdownList(this.form);
 	this.wrapS.size.set(120, 18);
-	this.wrapS.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
-	this.wrapS.addValue(Locale.repeat, THREE.RepeatWrapping);
-	this.wrapS.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
+	this.wrapS.addValue(Locale.clampEdge, ClampToEdgeWrapping);
+	this.wrapS.addValue(Locale.repeat, RepeatWrapping);
+	this.wrapS.addValue(Locale.repeatMirror, MirroredRepeatWrapping);
 	this.wrapS.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "wrapS", self.wrapS.getValue()));
@@ -44,9 +55,9 @@ function TextureInspector(parent, object)
 	this.form.addText(Locale.wrapVert);
 	this.wrapT = new DropdownList(this.form);
 	this.wrapT.size.set(120, 18);
-	this.wrapT.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
-	this.wrapT.addValue(Locale.repeat, THREE.RepeatWrapping);
-	this.wrapT.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
+	this.wrapT.addValue(Locale.clampEdge, ClampToEdgeWrapping);
+	this.wrapT.addValue(Locale.repeat, RepeatWrapping);
+	this.wrapT.addValue(Locale.repeatMirror, MirroredRepeatWrapping);
 	this.wrapT.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "wrapT", self.wrapT.getValue()));
@@ -112,12 +123,12 @@ function TextureInspector(parent, object)
 	this.form.addText(Locale.minFilter);
 	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
-	this.minFilter.addValue(Locale.nearest, THREE.NearestFilter);
-	this.minFilter.addValue(Locale.linear, THREE.LinearFilter);
-	this.minFilter.addValue("MIP Nearest Nearest", THREE.NearestMipMapNearestFilter);
-	this.minFilter.addValue("MIP Nearest Linear", THREE.NearestMipMapLinearFilter);
-	this.minFilter.addValue("MIP Linear Nearest", THREE.LinearMipMapNearestFilter);
-	this.minFilter.addValue("MIP Linear Linear", THREE.LinearMipMapLinearFilter);
+	this.minFilter.addValue(Locale.nearest, NearestFilter);
+	this.minFilter.addValue(Locale.linear, LinearFilter);
+	this.minFilter.addValue("MIP Nearest Nearest", NearestMipMapNearestFilter);
+	this.minFilter.addValue("MIP Nearest Linear", NearestMipMapLinearFilter);
+	this.minFilter.addValue("MIP Linear Nearest", LinearMipMapNearestFilter);
+	this.minFilter.addValue("MIP Linear Linear", LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "minFilter", self.minFilter.getValue()));
@@ -129,8 +140,8 @@ function TextureInspector(parent, object)
 	this.form.addText(Locale.magFilter);
 	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
-	this.magFilter.addValue(Locale.nearest, THREE.NearestFilter);
-	this.magFilter.addValue(Locale.linear, THREE.LinearFilter);
+	this.magFilter.addValue(Locale.nearest, NearestFilter);
+	this.magFilter.addValue(Locale.linear, LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.object, "magFilter", self.magFilter.getValue()));
@@ -183,3 +194,5 @@ TextureInspector.prototype.updateInspector = function()
 	this.premultiplyAlpha.setValue(this.object.premultiplyAlpha);
 	this.flipY.setValue(this.object.flipY);
 };
+
+export {TextureInspector};

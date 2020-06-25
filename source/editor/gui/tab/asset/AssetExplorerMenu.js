@@ -1,4 +1,35 @@
-"use strict";
+import {WebcamTexture} from "../../../../core/texture/WebcamTexture.js";
+import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
+import {Texture} from "../../../../core/texture/Texture.js";
+import {SpriteSheetTexture} from "../../../../core/texture/SpriteSheetTexture.js";
+import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
+import {CanvasTexture} from "../../../../core/texture/CanvasTexture.js";
+import {Video} from "../../../../core/resources/Video.js";
+import {TextFile} from "../../../../core/resources/TextFile.js";
+import {Resource} from "../../../../core/resources/Resource.js";
+import {Model} from "../../../../core/resources/Model.js";
+import {Image} from "../../../../core/resources/Image.js";
+import {Font} from "../../../../core/resources/Font.js";
+import {Audio} from "../../../../core/resources/Audio.js";
+import {Sprite} from "../../../../core/objects/sprite/Sprite.js";
+import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
+import {Mesh} from "../../../../core/objects/mesh/Mesh.js";
+import {Nunu} from "../../../../core/Nunu.js";
+import {FileSystem} from "../../../../core/FileSystem.js";
+import {Loaders} from "../../../Loaders.js";
+import {AddResourceAction} from "../../../history/action/resources/AddResourceAction.js";
+import {Action} from "../../../history/action/Action.js";
+import {AssetExplorer} from "./AssetExplorer.js";
+import {Asset} from "./asset/Asset.js";
+import {Interface} from "../../Interface.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {DropdownMenu} from "../../../components/dropdown/DropdownMenu.js";
+import {Component} from "../../../components/Component.js";
+import {Canvas} from "../../../components/Canvas.js";
+import {MeshStandardMaterial, MeshPhysicalMaterial, MeshPhongMaterial, MeshBasicMaterial, MeshToonMaterial, MeshLambertMaterial, MeshMatcapMaterial, SpriteMaterial, PointsMaterial, LineBasicMaterial, LineDashedMaterial, ShaderMaterial, RawShaderMaterial, MeshNormalMaterial, MeshDepthMaterial, MeshDistanceMaterial, ShadowMaterial} from "three";
+
 
 function AssetExplorerMenu(parent)
 {
@@ -168,84 +199,84 @@ function AssetExplorerMenu(parent)
 	
 	material.addOption(Locale.standardMaterial, function()
 	{
-		var material = new THREE.MeshStandardMaterial();
+		var material = new MeshStandardMaterial();
 		material.name = "standard";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption(Locale.physicalMaterial, function()
 	{
-		var material = new THREE.MeshPhysicalMaterial();
+		var material = new MeshPhysicalMaterial();
 		material.name = "physical";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption(Locale.phongMaterial, function()
 	{
-		var material = new THREE.MeshPhongMaterial();
+		var material = new MeshPhongMaterial();
 		material.name = "phong";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 	
 	material.addOption(Locale.basicMaterial, function()
 	{
-		var material = new THREE.MeshBasicMaterial();
+		var material = new MeshBasicMaterial();
 		material.name = "basic";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption(Locale.toonMaterial, function()
 	{
-		var material = new THREE.MeshToonMaterial();
+		var material = new MeshToonMaterial();
 		material.name = "toon";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption(Locale.lambertMaterial, function()
 	{
-		var material = new THREE.MeshLambertMaterial();
+		var material = new MeshLambertMaterial();
 		material.name = "lambert";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption(Locale.matcapMaterial, function()
 	{
-		var material = new THREE.MeshMatcapMaterial();
+		var material = new MeshMatcapMaterial();
 		material.name = "matcap";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.addOption(Locale.spriteMaterial, function()
 	{
-		var material = new THREE.SpriteMaterial({color: 0xFFFFFF});
+		var material = new SpriteMaterial({color: 0xFFFFFF});
 		material.name = "sprite";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/image.png");
 
 	material.addOption(Locale.pointsMaterial, function()
 	{
-		var material = new THREE.PointsMaterial();
+		var material = new PointsMaterial();
 		material.name = "points";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/models/points.png");
 
 	material.addOption(Locale.lineMaterial, function()
 	{
-		var material = new THREE.LineBasicMaterial();
+		var material = new LineBasicMaterial();
 		material.name = "line";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/nodes.png");
 
 	material.addOption(Locale.lineDashedMaterial, function()
 	{
-		var material = new THREE.LineDashedMaterial();
+		var material = new LineDashedMaterial();
 		material.name = "line";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/nodes.png");
 
 	material.addOption(Locale.shaderMaterial, function()
 	{
-		var material = new THREE.ShaderMaterial(
+		var material = new ShaderMaterial(
 		{
 			vertexShader: "void main()\n{\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}",
 			fragmentShader: "void main()\n{\n\tgl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n}"
@@ -256,7 +287,7 @@ function AssetExplorerMenu(parent)
 
 	material.addOption(Locale.rawShaderMaterial, function()
 	{
-		var material = new THREE.RawShaderMaterial();
+		var material = new RawShaderMaterial();
 		material.name = "rawshader";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/script/script.png");
@@ -266,28 +297,28 @@ function AssetExplorerMenu(parent)
 
 	others.addOption(Locale.normalMaterial, function()
 	{
-		var material = new THREE.MeshNormalMaterial();
+		var material = new MeshNormalMaterial();
 		material.name = "normal";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 	
 	others.addOption(Locale.depthMaterial, function()
 	{
-		var material = new THREE.MeshDepthMaterial();
+		var material = new MeshDepthMaterial();
 		material.name = "depth";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	others.addOption(Locale.distanceMaterial, function()
 	{
-		var material = new THREE.MeshDistanceMaterial();
+		var material = new MeshDistanceMaterial();
 		material.name = "distance";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	others.addOption(Locale.shadowMaterial, function()
 	{
-		var material = new THREE.ShadowMaterial();
+		var material = new ShadowMaterial();
 		material.name = "shadow";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
@@ -318,3 +349,4 @@ function AssetExplorerMenu(parent)
 }
 
 AssetExplorerMenu.prototype = Object.create(Component.prototype);
+export {AssetExplorerMenu};

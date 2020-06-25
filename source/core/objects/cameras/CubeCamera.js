@@ -1,4 +1,10 @@
-"use strict";
+import {Texture} from "../../texture/Texture.js";
+import {CubeTexture} from "../../texture/CubeTexture.js";
+import {Scene} from "../Scene.js";
+import {Program} from "../Program.js";
+import {Text} from "../../../editor/components/Text.js";
+import {Form} from "../../../editor/components/Form.js";
+import {Object3D, PerspectiveCamera, Vector3, WebGLCubeRenderTarget, RGBFormat, LinearFilter, CubeCamera} from "three";
 
 /**
  * Reflection probes are used to create CubeTextures dinamically.
@@ -6,12 +12,12 @@
  * These CubeTextures can be attributed to materials programatically.
  * 
  * @class CubeCamera
- * @extends {THREE.Object3D}
+ * @extends {Object3D}
  * @module Misc
  */
 function CubeCamera(near, far, resolution, autoUpdate)
 {
-	THREE.Object3D.call(this);
+	Object3D.call(this);
 
 	this.name = "cubecamera";
 	this.type = "CubeCamera";
@@ -53,34 +59,34 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	this.cameras = [];
 	for(var i = 0; i < 6; i++)
 	{
-		var camera = new THREE.PerspectiveCamera(90, 1, this.near, this.far);
+		var camera = new PerspectiveCamera(90, 1, this.near, this.far);
 		camera.parent = this;
 		this.cameras.push(camera);
 	}
 
 	this.cameras[0].up.set(0, -1, 0);
-	this.cameras[0].lookAt(new THREE.Vector3(1, 0, 0));
+	this.cameras[0].lookAt(new Vector3(1, 0, 0));
 	this.cameras[1].up.set(0, -1, 0);
-	this.cameras[1].lookAt(new THREE.Vector3(-1, 0, 0));
+	this.cameras[1].lookAt(new Vector3(-1, 0, 0));
 	this.cameras[2].up.set(0, 0, 1);
-	this.cameras[2].lookAt(new THREE.Vector3(0, 1, 0));
+	this.cameras[2].lookAt(new Vector3(0, 1, 0));
 	this.cameras[3].up.set(0, 0, -1);
-	this.cameras[3].lookAt(new THREE.Vector3(0, -1, 0));
+	this.cameras[3].lookAt(new Vector3(0, -1, 0));
 	this.cameras[4].up.set(0, -1, 0);
-	this.cameras[4].lookAt(new THREE.Vector3(0, 0, 1));
+	this.cameras[4].lookAt(new Vector3(0, 0, 1));
 	this.cameras[5].up.set(0, -1, 0);
-	this.cameras[5].lookAt(new THREE.Vector3(0, 0, -1));
+	this.cameras[5].lookAt(new Vector3(0, 0, -1));
 
 	/**
 	 * WebGL cube render target to where the scene is rendered.
 	 * @property target
 	 * @type {WebGLCubeRenderTarget}
 	 */
-	this.renderTarget = new THREE.WebGLCubeRenderTarget(this.resolution,
+	this.renderTarget = new WebGLCubeRenderTarget(this.resolution,
 	{
-		format: THREE.RGBFormat,
-		magFilter: THREE.LinearFilter,
-		minFilter: THREE.LinearFilter,
+		format: RGBFormat,
+		magFilter: LinearFilter,
+		minFilter: LinearFilter,
 		generateMipmaps: false
 	});
 
@@ -107,10 +113,10 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	this.renderer = null;
 }
 
-THREE._CubeCamera = THREE.CubeCamera;
-THREE.CubeCamera = CubeCamera;
+THREE._CubeCamera = CubeCamera;
+CubeCamera = CubeCamera;
 
-CubeCamera.prototype = Object.create(THREE.Object3D.prototype);
+CubeCamera.prototype = Object.create(Object3D.prototype);
 
 /**
  * Initialize CubeCamera object.
@@ -135,7 +141,7 @@ CubeCamera.prototype.initialize = function()
 		}
 	}
 
-	THREE.Object3D.prototype.initialize.call(this);
+	Object3D.prototype.initialize.call(this);
 };
 
 
@@ -153,7 +159,7 @@ CubeCamera.prototype.update = function(delta)
 		this.updateCubeMap(this.renderer, this.scene);
 	}
 
-	THREE.Object3D.prototype.update.call(this, delta);
+	Object3D.prototype.update.call(this, delta);
 };
 
 
@@ -227,7 +233,7 @@ CubeCamera.prototype.updateCubeMap = function(renderer, scene)
 
 CubeCamera.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var data = Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.near = this.near;
 	data.object.far = this.far;
@@ -236,3 +242,4 @@ CubeCamera.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {CubeCamera};

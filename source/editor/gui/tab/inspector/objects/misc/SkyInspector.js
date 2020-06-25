@@ -1,4 +1,18 @@
-"use strict";
+import {Sky} from "../../../../../../core/objects/misc/Sky.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {CallbackAction} from "../../../../../history/action/CallbackAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {ObjectInspector} from "../ObjectInspector.js";
+import {Inspector} from "../../Inspector.js";
+import {Interface} from "../../../../Interface.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {Slider} from "../../../../../components/input/Slider.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../../components/input/DropdownList.js";
+import {ColorGradientChooser} from "../../../../../components/input/ColorGradientChooser.js";
+import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
+import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
 function SkyInspector(parent, object)
 {
@@ -308,3 +322,5 @@ SkyInspector.prototype.updateInspector = function()
 	this.shadowTop.setValue(this.object.sun.shadow.camera.top);
 	this.shadowBottom.setValue(this.object.sun.shadow.camera.bottom);
 };
+
+export {SkyInspector};

@@ -1,4 +1,22 @@
-"use strict";
+import {Texture} from "../../../../../core/texture/Texture.js";
+import {CubeTexture} from "../../../../../core/texture/CubeTexture.js";
+import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
+import {MaterialEditor} from "../MaterialEditor.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {VectorBox} from "../../../../components/input/VectorBox.js";
+import {TextureForm} from "../../../../components/input/TextureForm.js";
+import {Slider} from "../../../../components/input/Slider.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../components/input/DropdownList.js";
+import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
+import {ColorChooser} from "../../../../components/input/ColorChooser.js";
+import {Form} from "../../../../components/Form.js";
+import {TangentSpaceNormalMap, ObjectSpaceNormalMap, MultiplyOperation, MixOperation, AddOperation} from "three";
+
 
 function MeshPhongMaterialEditor(parent, closeable, container, index)
 {
@@ -100,8 +118,8 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.normalType);
 	this.normalMapType = new DropdownList(this.form);
 	this.normalMapType.size.set(100, 18);
-	this.normalMapType.addValue(Locale.tangentSpace, THREE.TangentSpaceNormalMap);
-	this.normalMapType.addValue(Locale.objectSpace, THREE.ObjectSpaceNormalMap);
+	this.normalMapType.addValue(Locale.tangentSpace, TangentSpaceNormalMap);
+	this.normalMapType.addValue(Locale.objectSpace, ObjectSpaceNormalMap);
 	this.normalMapType.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
@@ -250,9 +268,9 @@ function MeshPhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.mode);
 	this.combine = new DropdownList(this.form);
 	this.combine.size.set(0, 18);
-	this.combine.addValue(Locale.multiply, THREE.MultiplyOperation);
-	this.combine.addValue(Locale.mix, THREE.MixOperation);
-	this.combine.addValue(Locale.add, THREE.AddOperation);
+	this.combine.addValue(Locale.multiply, MultiplyOperation);
+	this.combine.addValue(Locale.mix, MixOperation);
+	this.combine.addValue(Locale.add, AddOperation);
 	this.combine.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "combine", self.combine.getValue()));
@@ -343,3 +361,4 @@ MeshPhongMaterialEditor.prototype.attach = function(material, asset)
 	this.aoMap.setValue(material.aoMap);
 	this.aoMapIntensity.setValue(material.aoMapIntensity);
 };
+export {MeshPhongMaterialEditor};

@@ -1,4 +1,30 @@
-"use strict";
+import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
+import {Texture} from "../../../../core/texture/Texture.js";
+import {Video} from "../../../../core/resources/Video.js";
+import {ResourceManager} from "../../../../core/resources/ResourceManager.js";
+import {Resource} from "../../../../core/resources/Resource.js";
+import {Image} from "../../../../core/resources/Image.js";
+import {Font} from "../../../../core/resources/Font.js";
+import {Audio} from "../../../../core/resources/Audio.js";
+import {Settings} from "../../../Settings.js";
+import {Loaders} from "../../../Loaders.js";
+import {AssetExplorerMenu} from "./AssetExplorerMenu.js";
+import {VideoAsset} from "./asset/VideoAsset.js";
+import {TextureAsset} from "./asset/TextureAsset.js";
+import {MaterialAsset} from "./asset/MaterialAsset.js";
+import {ImageAsset} from "./asset/ImageAsset.js";
+import {GeometryAsset} from "./asset/GeometryAsset.js";
+import {FontAsset} from "./asset/FontAsset.js";
+import {FileAsset} from "./asset/FileAsset.js";
+import {AudioAsset} from "./asset/AudioAsset.js";
+import {Asset} from "./asset/Asset.js";
+import {Interface} from "../../Interface.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {SearchBox} from "../../../components/SearchBox.js";
+import {Component} from "../../../components/Component.js";
 
 function AssetExplorer(parent, closeable, container, index)
 {
@@ -246,3 +272,4 @@ AssetExplorer.prototype.updateSize = function()
 	this.assets.size.set(this.size.x, this.size.y - 20);
 	this.assets.updateInterface();
 };
+export {AssetExplorer};

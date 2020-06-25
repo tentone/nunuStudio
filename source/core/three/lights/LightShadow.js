@@ -1,6 +1,7 @@
-"use strict";
+import {LightShadow} from "three";
 
-THREE.LightShadow.prototype.toJSON = function()
+
+LightShadow.prototype.toJSON = function()
 {
 	var data = {};
 
@@ -26,7 +27,7 @@ THREE.LightShadow.prototype.toJSON = function()
 	return data;
 };
 
-THREE.LightShadow.prototype.fromJSON = function(data)
+LightShadow.prototype.fromJSON = function(data)
 {
 	if(data.bias !== undefined)
 	{

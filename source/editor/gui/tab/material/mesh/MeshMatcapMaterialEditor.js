@@ -1,4 +1,19 @@
-"use strict";
+import {Texture} from "../../../../../core/texture/Texture.js";
+import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
+import {MaterialEditor} from "../MaterialEditor.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {VectorBox} from "../../../../components/input/VectorBox.js";
+import {TextureForm} from "../../../../components/input/TextureForm.js";
+import {Slider} from "../../../../components/input/Slider.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../components/input/DropdownList.js";
+import {Form} from "../../../../components/Form.js";
+import {TangentSpaceNormalMap, ObjectSpaceNormalMap} from "three";
+
 
 function MeshMatcapMaterialEditor(parent, closeable, container, index)
 {
@@ -86,8 +101,8 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.normalType);
 	this.normalMapType = new DropdownList(this.form);
 	this.normalMapType.size.set(100, 18);
-	this.normalMapType.addValue(Locale.tangentSpace, THREE.TangentSpaceNormalMap);
-	this.normalMapType.addValue(Locale.objectSpace, THREE.ObjectSpaceNormalMap);
+	this.normalMapType.addValue(Locale.tangentSpace, TangentSpaceNormalMap);
+	this.normalMapType.addValue(Locale.objectSpace, ObjectSpaceNormalMap);
 	this.normalMapType.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMapType", self.normalMapType.getValue()));
@@ -165,3 +180,4 @@ MeshMatcapMaterialEditor.prototype.attach = function(material, asset)
 	this.displacementBias.setValue(material.displacementBias);
 	this.alphaMap.setValue(material.alphaMap);
 };
+export {MeshMatcapMaterialEditor};

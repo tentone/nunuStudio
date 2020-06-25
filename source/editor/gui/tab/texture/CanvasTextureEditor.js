@@ -1,4 +1,13 @@
-"use strict";
+import {Texture} from "../../../../core/texture/Texture.js";
+import {CanvasTexture} from "../../../../core/texture/CanvasTexture.js";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {Action} from "../../../history/action/Action.js";
+import {TextureEditor} from "./TextureEditor.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {Canvas} from "../../../components/Canvas.js";
+
 
 function CanvasTextureEditor(parent, closeable, container, index)
 {
@@ -50,3 +59,4 @@ CanvasTextureEditor.prototype.attach = function(texture)
 	this.width.setValue(this.texture.width);
 	this.height.setValue(this.texture.height);
 };
+export {CanvasTextureEditor};

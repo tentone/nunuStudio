@@ -1,4 +1,6 @@
-"use strict";
+import {Global} from "../../Global.js";
+import {Text} from "../Text.js";
+import {Component} from "../Component.js";
 
 function DropdownList(parent)
 {
@@ -155,3 +157,5 @@ DropdownList.prototype.updateSize = function()
 
 	this.arrow.style.top = ((this.size.y - 10) / 2) + "px";
 };
+
+export {DropdownList};

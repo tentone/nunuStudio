@@ -1,4 +1,8 @@
-"use strict";
+import {ParticleEmitter} from "../ParticleEmitter.js";
+import {ShaderAttribute} from "../helpers/ShaderAttribute.js";
+import {ParticleEmitterControl} from "./ParticleEmitterControl.js";
+import {Component} from "../../../../editor/components/Component.js";
+import {Vector2, Vector3, Vector4, Color} from "three";
 
 /**
  * A bunch of utility functions used throughout the library.
@@ -272,14 +276,14 @@ var ShaderUtils =
 		{
 			return start + ((end - start) * delta);
 		}
-		else if(start instanceof THREE.Vector2 && end instanceof THREE.Vector2)
+		else if(start instanceof Vector2 && end instanceof Vector2)
 		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
 			out.y = this.lerp(start.y, end.y, delta);
 			return out;
 		}
-		else if(start instanceof THREE.Vector3 && end instanceof THREE.Vector3)
+		else if(start instanceof Vector3 && end instanceof Vector3)
 		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
@@ -287,7 +291,7 @@ var ShaderUtils =
 			out.z = this.lerp(start.z, end.z, delta);
 			return out;
 		}
-		else if(start instanceof THREE.Vector4 && end instanceof THREE.Vector4)
+		else if(start instanceof Vector4 && end instanceof Vector4)
 		{
 			out = start.clone();
 			out.x = this.lerp(start.x, end.x, delta);
@@ -296,7 +300,7 @@ var ShaderUtils =
 			out.w = this.lerp(start.w, end.w, delta);
 			return out;
 		}
-		else if(start instanceof THREE.Color && end instanceof THREE.Color)
+		else if(start instanceof Color && end instanceof Color)
 		{
 			out = start.clone();
 			out.r = this.lerp(start.r, end.r, delta);
@@ -400,9 +404,9 @@ var ShaderUtils =
 	 * @attribute randomVector3
 	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
 	 * @param {number} index The offset in the attribute"s TypedArray to save the result from.
-	 * @param {Object} base THREE.Vector3 instance describing the start value.
-	 * @param {Object} spread THREE.Vector3 instance describing the random variance to apply to the start value.
-	 * @param {Object} spreadClamp THREE.Vector3 instance describing the multiples to clamp the randomness to.
+	 * @param {Object} base Vector3 instance describing the start value.
+	 * @param {Object} spread Vector3 instance describing the random variance to apply to the start value.
+	 * @param {Object} spreadClamp Vector3 instance describing the multiples to clamp the randomness to.
 	 */
 	randomVector3: function(attribute, index, base, spread, spreadClamp)
 	{
@@ -427,8 +431,8 @@ var ShaderUtils =
 	 * @attribute randomColor
 	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
 	 * @param {number} index The offset in the attribute"s TypedArray to save the result from.
-	 * @param {Object} base THREE.Color instance describing the start color.
-	 * @param {Object} spread THREE.Vector3 instance describing the random variance to apply to the start color.
+	 * @param {Object} base Color instance describing the start color.
+	 * @param {Object} spread Vector3 instance describing the random variance to apply to the start color.
 	 */
 	randomColor: function(attribute, index, base, spread)
 	{
@@ -452,12 +456,12 @@ var ShaderUtils =
 	 * @attribute randomColorAsHex
 	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
 	 * @param {number} index The offset in the attribute"s TypedArray to save the result from.
-	 * @param {Object} base THREE.Color instance describing the start color.
-	 * @param {Object} spread THREE.Vector3 instance describing the random variance to apply to the start color.
+	 * @param {Object} base Color instance describing the start color.
+	 * @param {Object} spread Vector3 instance describing the random variance to apply to the start color.
 	 */
 	randomColorAsHex: (function()
 	{
-		var workingColor = new THREE.Color();
+		var workingColor = new Color();
 
 		return function(attribute, index, base, spread)
 		{
@@ -491,10 +495,10 @@ var ShaderUtils =
 	 * @attribute randomVector3OnSphere
 	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
 	 * @param {number} index     The offset in the attribute"s TypedArray to save the result from.
-	 * @param {Object} base              THREE.Vector3 instance describing the origin of the transform.
+	 * @param {Object} base              Vector3 instance describing the origin of the transform.
 	 * @param {number} radius            The radius of the sphere to project onto.
 	 * @param {number} radiusSpread      The amount of randomness to apply to the projection result
-	 * @param {Object} radiusScale       THREE.Vector3 instance describing the scale of each axis of the sphere.
+	 * @param {Object} radiusScale       Vector3 instance describing the scale of each axis of the sphere.
 	 * @param {number} radiusSpreadClamp What numeric multiple the projected value should be clamped to.
 	 */
 	randomVector3OnSphere: function(attribute, index, base, radius, radiusSpread, radiusScale, radiusSpreadClamp, distributionClamp)
@@ -545,10 +549,10 @@ var ShaderUtils =
 	 * @attribute randomVector3OnDisc
 	 * @param {Object} attribute The instance of ShaderAttribute to save the result to.
 	 * @param {number} index The offset in the attribute"s TypedArray to save the result from.
-	 * @param {Object} base THREE.Vector3 instance describing the origin of the transform.
+	 * @param {Object} base Vector3 instance describing the origin of the transform.
 	 * @param {number} radius The radius of the sphere to project onto.
 	 * @param {number} radiusSpread The amount of randomness to apply to the projection result
-	 * @param {Object} radiusScale THREE.Vector3 instance describing the scale of each axis of the disc. The z-component is ignored.
+	 * @param {Object} radiusScale Vector3 instance describing the scale of each axis of the disc. The z-component is ignored.
 	 * @param {number} radiusSpreadClamp What numeric multiple the projected value should be clamped to.
 	 */
 	randomVector3OnDisc: function(attribute, index, base, radius, radiusSpread, radiusScale, radiusSpreadClamp)
@@ -592,13 +596,13 @@ var ShaderUtils =
 	 * @param {number} posX            The particle"s x coordinate.
 	 * @param {number} posY            The particle"s y coordinate.
 	 * @param {number} posZ            The particle"s z coordinate.
-	 * @param {Object} emitterPosition THREE.Vector3 instance describing the emitter"s base position.
+	 * @param {Object} emitterPosition Vector3 instance describing the emitter"s base position.
 	 * @param {number} speed           The magnitude to apply to the vector.
 	 * @param {number} speedSpread     The amount of randomness to apply to the magnitude.
 	 */
 	randomDirectionVector3OnSphere: (function()
 	{
-		var v = new THREE.Vector3();
+		var v = new Vector3();
 
 		return function(attribute, index, posX, posY, posZ, emitterPosition, speed, speedSpread)
 		{
@@ -625,13 +629,13 @@ var ShaderUtils =
 	 * @param {number} posX The particle"s x coordinate.
 	 * @param {number} posY The particle"s y coordinate.
 	 * @param {number} posZ The particle"s z coordinate.
-	 * @param {Object} emitterPosition THREE.Vector3 instance describing the emitter"s base position.
+	 * @param {Object} emitterPosition Vector3 instance describing the emitter"s base position.
 	 * @param {number} speed The magnitude to apply to the vector.
 	 * @param {number} speedSpread The amount of randomness to apply to the magnitude.
 	 */
 	randomDirectionVector3OnDisc: (function()
 	{
-		var v = new THREE.Vector3();
+		var v = new Vector3();
 
 		return function(attribute, index, posX, posY, posZ, emitterPosition, speed, speedSpread)
 		{
@@ -652,16 +656,16 @@ var ShaderUtils =
 	 *
 	 * @static
 	 * @attribute getPackedRotationAxis
-	 * @param {Object} axis THREE.Vector3 instance describing the rotation axis.
-	 * @param {Object} axisSpread THREE.Vector3 instance describing the amount of randomness to apply to the rotation axis.
+	 * @param {Object} axis Vector3 instance describing the rotation axis.
+	 * @param {Object} axisSpread Vector3 instance describing the amount of randomness to apply to the rotation axis.
 	 * @return {number} The packed rotation axis, with randomness.
 	 */
 	getPackedRotationAxis: (function()
 	{
-		var v = new THREE.Vector3(),
-			vSpread = new THREE.Vector3(),
-			c = new THREE.Color(),
-			addOne = new THREE.Vector3(1, 1, 1);
+		var v = new Vector3(),
+			vSpread = new Vector3(),
+			c = new Color(),
+			addOne = new Vector3(1, 1, 1);
 
 		return function(axis, axisSpread)
 		{
@@ -680,3 +684,4 @@ var ShaderUtils =
 		};
 	}())
 };
+export {ShaderUtils};

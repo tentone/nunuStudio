@@ -1,4 +1,6 @@
-"use strict";
+import {Video} from "../resources/Video.js";
+import {Loaders} from "../../editor/Loaders.js";
+import {DefaultLoadingManager, FileLoader} from "three";
 
 /**
  * VideoLoader can be used to load external video resources.
@@ -9,7 +11,7 @@
  */
 function VideoLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
 }
 
 /**
@@ -25,7 +27,7 @@ VideoLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
 	
-	var loader = new THREE.FileLoader(this.manager);
+	var loader = new FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		onLoad(self.parse(JSON.parse(text)));
@@ -48,3 +50,5 @@ VideoLoader.prototype.parse = function(json)
 	
 	return video;
 };
+
+export {VideoLoader};

@@ -1,4 +1,9 @@
-"use strict";
+import {CubeTexture} from "../../../core/texture/CubeTexture.js";
+import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
+import {PreviewRenderer} from "./PreviewRenderer.js";
+import {CubemapFlatRenderer} from "./CubemapFlatRenderer.js";
+import {Text} from "../../components/Text.js";
+import {MeshBasicMaterial, Mesh, PlaneBufferGeometry, Texture} from "three";
 
 /** 
  * The texture renderer is used to generate preview thumbnails.
@@ -14,10 +19,10 @@ function TextureRenderer()
 	this.camera = new OrthographicCamera(1, 1, OrthographicCamera.RESIZE_VERTICAL);
 
 	// Material
-	this.material = new THREE.MeshBasicMaterial({transparent: true});
+	this.material = new MeshBasicMaterial({transparent: true});
 
 	// Plane
-	this.plane = new THREE.Mesh(new THREE.PlaneBufferGeometry(1, 1), this.material);
+	this.plane = new Mesh(new PlaneBufferGeometry(1, 1), this.material);
 	this.plane.position.set(0, 0, -1);
 	this.scene.add(this.plane);
 }
@@ -29,7 +34,7 @@ TextureRenderer.prototype = Object.create(PreviewRenderer.prototype);
  *
  * @static
  * @method generateElement
- * @param {THREE.Texture} texture Texture to preview.
+ * @param {Texture} texture Texture to preview.
  */
 TextureRenderer.generateElement = function(texture)
 {
@@ -69,3 +74,5 @@ TextureRenderer.prototype.render = function(texture, onRender)
 		onRender(this.canvas.toDataURL());
 	}
 };
+
+export {TextureRenderer};

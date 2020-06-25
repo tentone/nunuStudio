@@ -1,4 +1,11 @@
-"use strict";
+import {CapsuleBufferGeometry} from "../../../../../core/geometries/CapsuleBufferGeometry.js";
+import {ChangeAction} from "../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../history/action/Action.js";
+import {GeometryForm} from "./GeometryForm.js";
+import {Editor} from "../../../../Editor.js";
+import {Text} from "../../../../components/Text.js";
+import {NumberBox} from "../../../../components/input/NumberBox.js";
+import {Form} from "../../../../components/Form.js";
 
 function CapsuleGeometryForm(form, object)
 {
@@ -128,3 +135,4 @@ CapsuleGeometryForm.prototype.updateValues = function()
 	this.thetaStart.setValue(this.object.geometry.parameters.thetaStart || 0);
 	this.thetaLength.setValue(this.object.geometry.parameters.thetaLength || Math.PI * 2);
 };
+export {CapsuleGeometryForm};

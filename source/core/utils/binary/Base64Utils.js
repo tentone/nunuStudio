@@ -1,4 +1,5 @@
-"use strict";
+import {Form} from "../../../editor/components/Form.js";
+
 
 /**
  * Base64Utils contains methods to convert from and to Base64 binary format.
@@ -183,3 +184,4 @@ Base64Utils.fromBinaryString = function(str)
 
 	return base64;
 };
+export {Base64Utils};

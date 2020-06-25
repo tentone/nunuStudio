@@ -1,4 +1,6 @@
-"use strict";
+import {Image} from "../resources/Image.js";
+import {Loaders} from "../../editor/Loaders.js";
+import {DefaultLoadingManager, FileLoader} from "three";
 
 /**
  * ImageLoader can be used to load external image resources.
@@ -9,7 +11,7 @@
  */
 function ImageLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
 
 	this.path = "";
 	this.crossOrigin = "Anonymous";
@@ -54,7 +56,7 @@ ImageLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
 	
-	var loader = new THREE.FileLoader(this.manager);
+	var loader = new FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		onLoad(self.parse(JSON.parse(text)));
@@ -83,3 +85,5 @@ ImageLoader.prototype.parse = function(json)
 
 	return image;
 };
+
+export {ImageLoader};

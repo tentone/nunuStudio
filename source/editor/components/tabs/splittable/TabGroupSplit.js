@@ -1,4 +1,16 @@
-"use strict";
+import {Container} from "../../../../core/objects/misc/Container.js";
+import {DOMUtils} from "../../../utils/DOMUtils.js";
+import {Interface} from "../../../gui/Interface.js";
+import {DragBuffer} from "../../../gui/DragBuffer.js";
+import {TabGroup} from "../TabGroup.js";
+import {TabComponent} from "../TabComponent.js";
+import {TabButton} from "../TabButton.js";
+import {TabDualContainer} from "./TabDualContainer.js";
+import {TabContainer} from "./TabContainer.js";
+import {TabButtonSplit} from "./TabButtonSplit.js";
+import {DualContainer} from "../../containers/DualContainer.js";
+import {Component} from "../../Component.js";
+import {Button} from "../../buttons/Button.js";
 
 /**
  * A tab group contains and manages tab elements.
@@ -368,3 +380,5 @@ TabGroupSplit.prototype.addTab = function(TabConstructor, closeable)
 	
 	return tab;
 };
+
+export {TabGroupSplit};

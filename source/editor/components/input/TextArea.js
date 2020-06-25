@@ -1,4 +1,10 @@
-"use strict";
+import {Font} from "../../../core/resources/Font.js";
+import {Interface} from "../../gui/Interface.js";
+import {Editor} from "../../Editor.js";
+import {Text} from "../Text.js";
+import {ContextMenu} from "../dropdown/ContextMenu.js";
+import {DocumentBody} from "../DocumentBody.js";
+import {Component} from "../Component.js";
 
 /**
  * Text area input is used to handle multi line string values.
@@ -211,3 +217,5 @@ TextArea.prototype.setValue = TextArea.prototype.setText;
  * @return {string} Text stored in the input element.
  */
 TextArea.prototype.getValue = TextArea.prototype.getText;
+
+export {TextArea};

@@ -1,4 +1,6 @@
-"use strict";
+import {Pass} from "../Pass.js";
+import {Scene} from "../../objects/Scene.js";
+import {FilmShader, UniformsUtils, ShaderMaterial} from "three";
 
 /**
  * Film pass is used to simulate a film/TV like effect.
@@ -9,9 +11,9 @@
  */
 function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 {
-	if(THREE.FilmShader === undefined)
+	if(FilmShader === undefined)
 	{
-		console.error("FilmPass relies on THREE.FilmShader");
+		console.error("FilmPass relies on FilmShader");
 	}
 
 	Pass.call(this);
@@ -19,12 +21,12 @@ function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 	this.type = "Film";
 	this.createQuadScene();
 
-	this.uniforms = THREE.UniformsUtils.clone(THREE.FilmShader.uniforms);
-	this.material = new THREE.ShaderMaterial(
+	this.uniforms = UniformsUtils.clone(FilmShader.uniforms);
+	this.material = new ShaderMaterial(
 	{
 		uniforms: this.uniforms,
-		vertexShader: THREE.FilmShader.vertexShader,
-		fragmentShader: THREE.FilmShader.fragmentShader
+		vertexShader: FilmShader.vertexShader,
+		fragmentShader: FilmShader.fragmentShader
 	});
 
 	var self = this;
@@ -123,3 +125,5 @@ FilmPass.prototype.toJSON = function(meta)
 	return data;
 };
 
+
+export {FilmPass};

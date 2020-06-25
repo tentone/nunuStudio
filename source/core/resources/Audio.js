@@ -1,4 +1,8 @@
-"use strict";
+import {Base64Utils} from "../utils/binary/Base64Utils.js";
+import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
+import {Resource} from "./Resource.js";
+import {FileSystem} from "../FileSystem.js";
+
 
 /**
  * Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API.
@@ -106,3 +110,4 @@ Audio.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {Audio};

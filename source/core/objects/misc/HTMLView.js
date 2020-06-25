@@ -1,4 +1,4 @@
-"use strict";
+import {CSS3DObject} from "../../renderer/css/CSS3DObject.js";
 
 /**
  * HTMLView object is used to navigate webpages inside of the 3D scene.
@@ -104,3 +104,5 @@ HTMLView.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+export {HTMLView};

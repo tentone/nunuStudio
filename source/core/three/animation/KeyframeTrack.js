@@ -1,13 +1,15 @@
-"use strict";
+import {Key} from "../../input/Key.js";
+import {KeyframeTrack} from "three";
 
-THREE.KeyframeTrack.prototype.color = "#FF0000";
 
-THREE.KeyframeTrack.prototype.setColor = function(color)
+KeyframeTrack.prototype.color = "#FF0000";
+
+KeyframeTrack.prototype.setColor = function(color)
 {
 	this.color = color;
 };
 
-THREE.KeyframeTrack.prototype.sort = function()
+KeyframeTrack.prototype.sort = function()
 {
 	for(var i = 0; i < this.times.length; i++)
 	{
@@ -34,20 +36,20 @@ THREE.KeyframeTrack.prototype.sort = function()
 	}
 };
 
-THREE.KeyframeTrack._toJSON = THREE.KeyframeTrack.toJSON;
-THREE.KeyframeTrack.toJSON = function(track)
+KeyframeTrack._toJSON = KeyframeTrack.toJSON;
+KeyframeTrack.toJSON = function(track)
 {
-	var data = THREE.KeyframeTrack._toJSON.call(this, track);
+	var data = KeyframeTrack._toJSON.call(this, track);
 
 	data.color = track.color;
 
 	return data;
 };
 
-THREE.KeyframeTrack._parse = THREE.KeyframeTrack.parse;
-THREE.KeyframeTrack.parse = function(json)
+KeyframeTrack._parse = KeyframeTrack.parse;
+KeyframeTrack.parse = function(json)
 {
-	var track = THREE.KeyframeTrack._parse.call(this, json);
+	var track = KeyframeTrack._parse.call(this, json);
 
 	if(json.color !== undefined)
 	{

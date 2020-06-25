@@ -1,4 +1,17 @@
-"use strict";
+import {Font} from "../../../../../../core/resources/Font.js";
+import {TextSprite} from "../../../../../../core/objects/text/TextSprite.js";
+import {Sprite} from "../../../../../../core/objects/sprite/Sprite.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {DrawableInspector} from "../DrawableInspector.js";
+import {Inspector} from "../../Inspector.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {TextArea} from "../../../../../components/input/TextArea.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../../../components/input/DropdownList.js";
+import {ColorChooser} from "../../../../../components/input/ColorChooser.js";
+import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
 function TextSpriteInspector(parent, object)
 {
@@ -128,3 +141,5 @@ TextSpriteInspector.prototype.updateInspector = function()
 	this.outlineWidth.setValue(this.object.outlineWidth);
 	this.outlineColor.setValueString(this.object.outlineColor);
 };
+
+export {TextSpriteInspector};

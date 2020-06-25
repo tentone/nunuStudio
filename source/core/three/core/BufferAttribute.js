@@ -1,6 +1,6 @@
-"use strict";
+import {BufferAttribute} from "three";
 
-THREE.BufferAttribute.prototype.toJSON = function()
+BufferAttribute.prototype.toJSON = function()
 {
 	return {
 		type: "BufferAttribute",

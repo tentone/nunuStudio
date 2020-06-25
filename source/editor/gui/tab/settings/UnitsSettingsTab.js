@@ -1,4 +1,14 @@
-"use strict";
+import {Settings} from "../../../Settings.js";
+import {SettingsTab} from "./SettingsTab.js";
+import {Interface} from "../../Interface.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../components/TableForm.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {Form} from "../../../components/Form.js";
+import {Component} from "../../../components/Component.js";
 
 function UnitsSettingsTab(parent, closeable, container, index)
 {
@@ -56,3 +66,5 @@ UnitsSettingsTab.prototype.updateSize = function()
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };
+
+export {UnitsSettingsTab};

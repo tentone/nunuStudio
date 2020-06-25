@@ -1,4 +1,26 @@
-"use strict";
+import {Texture} from "../../../../core/texture/Texture.js";
+import {Container} from "../../../../core/objects/misc/Container.js";
+import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {Action} from "../../../history/action/Action.js";
+import {Interface} from "../../Interface.js";
+import {Global} from "../../../Global.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {TabComponent} from "../../../components/tabs/TabComponent.js";
+import {TableForm} from "../../../components/TableForm.js";
+import {RendererCanvas} from "../../../components/RendererCanvas.js";
+import {VectorBox} from "../../../components/input/VectorBox.js";
+import {TextBox} from "../../../components/input/TextBox.js";
+import {NumberBox} from "../../../components/input/NumberBox.js";
+import {DropdownList} from "../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../components/input/CheckBox.js";
+import {Form} from "../../../components/Form.js";
+import {DualContainer} from "../../../components/containers/DualContainer.js";
+import {Component} from "../../../components/Component.js";
+import {Canvas} from "../../../components/Canvas.js";
+import {Scene, RepeatWrapping, Nearest, PlaneBufferGeometry, Mesh, MeshBasicMaterial, ClampToEdgeWrapping, MirroredRepeatWrapping, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
+
 
 function TextureEditor(parent, closeable, container, index)
 {
@@ -21,25 +43,25 @@ function TextureEditor(parent, closeable, container, index)
 	this.camera = new OrthographicCamera(1.2, 1, OrthographicCamera.RESIZE_VERTICAL);
 
 	// Scene
-	this.scene = new THREE.Scene();
+	this.scene = new Scene();
 
 	// Background
 	var alpha = new Texture(Global.FILE_PATH + "alpha.png");
-	alpha.wrapS = THREE.RepeatWrapping;
-	alpha.wrapT = THREE.RepeatWrapping;
-	alpha.magFilter = THREE.Nearest;
-	alpha.minFilter = THREE.Nearest;
+	alpha.wrapS = RepeatWrapping;
+	alpha.wrapT = RepeatWrapping;
+	alpha.magFilter = Nearest;
+	alpha.minFilter = Nearest;
 	alpha.repeat.set(400, 400);
 	
-	var geometry = new THREE.PlaneBufferGeometry(1, 1);
+	var geometry = new PlaneBufferGeometry(1, 1);
 
-	this.background = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({map: alpha}));
+	this.background = new Mesh(geometry, new MeshBasicMaterial({map: alpha}));
 	this.background.position.set(0, 0, -2);
 	this.background.scale.set(200, 200, 0);
 	this.scene.add(this.background);
 	
 	// Plane geometry
-	this.sprite = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({transparent: true}));
+	this.sprite = new Mesh(geometry, new MeshBasicMaterial({transparent: true}));
 	this.sprite.position.set(0, 0, -1);
 	this.scene.add(this.sprite);
 
@@ -76,9 +98,9 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.wrapHor);
 	this.wrapS = new DropdownList(this.form);
 	this.wrapS.size.set(120, 18);
-	this.wrapS.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
-	this.wrapS.addValue(Locale.repeat, THREE.RepeatWrapping);
-	this.wrapS.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
+	this.wrapS.addValue(Locale.clampEdge, ClampToEdgeWrapping);
+	this.wrapS.addValue(Locale.repeat, RepeatWrapping);
+	this.wrapS.addValue(Locale.repeatMirror, MirroredRepeatWrapping);
 	this.wrapS.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.texture, "wrapS", self.wrapS.getValue()));
@@ -91,9 +113,9 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.wrapVert);
 	this.wrapT = new DropdownList(this.form);
 	this.wrapT.size.set(120, 18);
-	this.wrapT.addValue(Locale.clampEdge, THREE.ClampToEdgeWrapping);
-	this.wrapT.addValue(Locale.repeat, THREE.RepeatWrapping);
-	this.wrapT.addValue(Locale.repeatMirror, THREE.MirroredRepeatWrapping);
+	this.wrapT.addValue(Locale.clampEdge, ClampToEdgeWrapping);
+	this.wrapT.addValue(Locale.repeat, RepeatWrapping);
+	this.wrapT.addValue(Locale.repeatMirror, MirroredRepeatWrapping);
 	this.wrapT.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.texture, "wrapT", self.wrapT.getValue()));
@@ -164,12 +186,12 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.minFilter);
 	this.minFilter = new DropdownList(this.form);
 	this.minFilter.size.set(150, 18);
-	this.minFilter.addValue(Locale.nearest, THREE.NearestFilter);
-	this.minFilter.addValue(Locale.linear, THREE.LinearFilter);
-	this.minFilter.addValue("MIP Nearest Nearest", THREE.NearestMipMapNearestFilter);
-	this.minFilter.addValue("MIP Nearest Linear", THREE.NearestMipMapLinearFilter);
-	this.minFilter.addValue("MIP Linear Nearest", THREE.LinearMipMapNearestFilter);
-	this.minFilter.addValue("MIP Linear Linear", THREE.LinearMipMapLinearFilter);
+	this.minFilter.addValue(Locale.nearest, NearestFilter);
+	this.minFilter.addValue(Locale.linear, LinearFilter);
+	this.minFilter.addValue("MIP Nearest Nearest", NearestMipMapNearestFilter);
+	this.minFilter.addValue("MIP Nearest Linear", NearestMipMapLinearFilter);
+	this.minFilter.addValue("MIP Linear Nearest", LinearMipMapNearestFilter);
+	this.minFilter.addValue("MIP Linear Linear", LinearMipMapLinearFilter);
 	this.minFilter.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.texture, "minFilter", self.minFilter.getValue()));
@@ -182,8 +204,8 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.addText(Locale.magFilter);
 	this.magFilter = new DropdownList(this.form);
 	this.magFilter.size.set(150, 18);
-	this.magFilter.addValue(Locale.nearest, THREE.NearestFilter);
-	this.magFilter.addValue(Locale.linear, THREE.LinearFilter);
+	this.magFilter.addValue(Locale.nearest, NearestFilter);
+	this.magFilter.addValue(Locale.linear, LinearFilter);
 	this.magFilter.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.texture, "magFilter", self.magFilter.getValue()));
@@ -303,3 +325,4 @@ TextureEditor.prototype.updateSize = function()
 	this.division.size.copy(this.size);
 	this.division.updateInterface();
 };
+export {TextureEditor};

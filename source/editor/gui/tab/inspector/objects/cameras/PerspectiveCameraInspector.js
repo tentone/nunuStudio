@@ -1,4 +1,18 @@
-"use strict";
+import {Scene} from "../../../../../../core/objects/Scene.js";
+import {Viewport} from "../../../../../../core/objects/cameras/Viewport.js";
+import {PerspectiveCamera} from "../../../../../../core/objects/cameras/PerspectiveCamera.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {ObjectInspector} from "../ObjectInspector.js";
+import {Inspector} from "../../Inspector.js";
+import {ViewportFormSnippet} from "../../../../form-snippet/ViewportFormSnippet.js";
+import {FormSnippet} from "../../../../form-snippet/FormSnippet.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {Slider} from "../../../../../components/input/Slider.js";
+import {NumberBox} from "../../../../../components/input/NumberBox.js";
+import {CheckBox} from "../../../../../components/input/CheckBox.js";
+import {Form} from "../../../../../components/Form.js";
 
 function PerspectiveCameraInspector(parent, object)
 {
@@ -137,3 +151,5 @@ PerspectiveCameraInspector.prototype.updateInspector = function()
 	this.clearStencil.setValue(this.object.clearStencil);
 	this.viewport.attach(this.object.viewport);
 };
+
+export {PerspectiveCameraInspector};

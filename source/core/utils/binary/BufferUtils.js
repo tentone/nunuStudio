@@ -1,4 +1,4 @@
-"use strict";
+
 
 /**
  * BufferUtils contains methods to convert from and to Node.js Buffer binary format
@@ -28,3 +28,4 @@ BufferUtils.fromArrayBuffer = function(array)
 
 	return buffer;
 };
+export {BufferUtils};

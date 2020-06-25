@@ -1,4 +1,10 @@
-"use strict";
+import {Mouse} from "../../../../../core/input/Mouse.js";
+import {TransformGizmoTranslate} from "./gizmo/TransformGizmoTranslate.js";
+import {TransformGizmoScale} from "./gizmo/TransformGizmoScale.js";
+import {TransformGizmoRotate} from "./gizmo/TransformGizmoRotate.js";
+import {TransformGizmo} from "./gizmo/TransformGizmo.js";
+import {Canvas} from "../../../../components/Canvas.js";
+import {Camera, Object3D, Raycaster, Vector2, Vector3, Matrix4, Euler, Quaternion, PerspectiveCamera} from "three";
 
 /*
  * TranformControls is used to manipulate object in 3D space. It can be used to manipulate multiple Object3D instances simultaneously.
@@ -7,13 +13,13 @@
  *
  * @class TransformControls
  * @author arodic (github.com/arodic)
- * @param {THREE.Camera} camera
+ * @param {Camera} camera
  * @param {Canvas} canvas
  * @param {Mouse} mouse
  */
 function TransformControls(camera, canvas, mouse)
 {
-	THREE.Object3D.call(this);
+	Object3D.call(this);
 
 	this.visible = false;
 
@@ -25,7 +31,7 @@ function TransformControls(camera, canvas, mouse)
 	 * Booth perspective or orthographic cameras are supported.
 	 * 
 	 * @attribute camera
-	 * @type {THREE.Camera}
+	 * @type {Camera}
 	 */
 	this.camera = camera;
 
@@ -163,69 +169,69 @@ function TransformControls(camera, canvas, mouse)
 	 * Raycaster object used to pick the gizmo sections.
 	 *
 	 * @attribute raycaster
-	 * @type {THREE.Raycaster}
+	 * @type {Raycaster}
 	 */
-	this.raycaster = new THREE.Raycaster();
+	this.raycaster = new Raycaster();
 
 	/**
 	 * Normalized vector containing the pointer coordinates used with the raycaster.
 	 *
 	 * @attribute pointerVector
-	 * @type {THREE.Vector2}
+	 * @type {Vector2}
 	 */
-	this.pointerVector = new THREE.Vector2();
+	this.pointerVector = new Vector2();
 
-	this.point = new THREE.Vector3();
-	this.offset = new THREE.Vector3();
+	this.point = new Vector3();
+	this.offset = new Vector3();
 
-	this.toolRotation = new THREE.Vector3();
+	this.toolRotation = new Vector3();
 	this.toolScale = 1;
-	this.offsetRotation = new THREE.Vector3();
+	this.offsetRotation = new Vector3();
 
 	/**
 	 * View and projection matrix combined.
 	 *
 	 * @attribute lookAtMatrix
-	 * @type {THREE.Matrix4}
+	 * @type {Matrix4}
 	 */
-	this.lookAtMatrix = new THREE.Matrix4();
+	this.lookAtMatrix = new Matrix4();
 
 	/**
 	 * Camera normalized direction vector relative to the selected object.
 	 *
 	 * @attribute eye
-	 * @type {THREE.Vector3}
+	 * @type {Vector3}
 	 */
-	this.eye = new THREE.Vector3();
+	this.eye = new Vector3();
 	
 	/**
 	 * View camera position.
 	 *
 	 * @attribute camPosition
-	 * @type {THREE.Vector3}
+	 * @type {Vector3}
 	 */
-	this.camPosition = new THREE.Vector3();
+	this.camPosition = new Vector3();
 
 	/**
 	 * View camera rotation.
 	 *
 	 * @attribute camRotation
-	 * @type {THREE.Vector3}
+	 * @type {Vector3}
 	 */
-	this.camRotation = new THREE.Euler();
+	this.camRotation = new Euler();
 
 	// Temporary variables used for runtime calcs
-	this.tempMatrix = new THREE.Matrix4();
-	this.tempVector = new THREE.Vector3();
-	this.tempQuaternion = new THREE.Quaternion();
-	this.unitX = new THREE.Vector3(1, 0, 0);
-	this.unitY = new THREE.Vector3(0, 1, 0);
-	this.unitZ = new THREE.Vector3(0, 0, 1);
-	this.quaternionXYZ = new THREE.Quaternion();
-	this.quaternionX = new THREE.Quaternion();
-	this.quaternionY = new THREE.Quaternion();
-	this.quaternionZ = new THREE.Quaternion();
-	this.quaternionE = new THREE.Quaternion();
+	this.tempMatrix = new Matrix4();
+	this.tempVector = new Vector3();
+	this.tempQuaternion = new Quaternion();
+	this.unitX = new Vector3(1, 0, 0);
+	this.unitY = new Vector3(0, 1, 0);
+	this.unitZ = new Vector3(0, 0, 1);
+	this.quaternionXYZ = new Quaternion();
+	this.quaternionX = new Quaternion();
+	this.quaternionY = new Quaternion();
+	this.quaternionZ = new Quaternion();
+	this.quaternionE = new Quaternion();
 }
 
 /**
@@ -237,15 +243,15 @@ function TransformControls(camera, canvas, mouse)
  */
 function TransformControlAtttributes()
 {
-	this.parentRotationMatrix = new THREE.Matrix4();
-	this.parentScale = new THREE.Vector3();
-	this.worldRotationMatrix = new THREE.Matrix4();
-	this.worldPosition = new THREE.Vector3();
-	this.worldRotation = new THREE.Euler();
-	this.oldPosition = new THREE.Vector3();
-	this.oldScale = new THREE.Vector3();
-	this.oldQuaternion = new THREE.Quaternion();
-	this.oldRotationMatrix = new THREE.Matrix4();
+	this.parentRotationMatrix = new Matrix4();
+	this.parentScale = new Vector3();
+	this.worldRotationMatrix = new Matrix4();
+	this.worldPosition = new Vector3();
+	this.worldRotation = new Euler();
+	this.oldPosition = new Vector3();
+	this.oldScale = new Vector3();
+	this.oldQuaternion = new Quaternion();
+	this.oldRotationMatrix = new Matrix4();
 }
 
 TransformControls.NONE = "none";
@@ -256,7 +262,7 @@ TransformControls.SCALE = "scale";
 TransformControls.LOCAL = "local";
 TransformControls.WORLD = "world";
 
-TransformControls.prototype = Object.create(THREE.Object3D.prototype);
+TransformControls.prototype = Object.create(Object3D.prototype);
 
 /**
  * Attach a list of objects to the transform controls.
@@ -430,7 +436,7 @@ TransformControls.prototype.updatePose = function()
 	this.camRotation.setFromRotationMatrix(this.tempMatrix.extractRotation(this.camera.matrixWorld));
 
 	// Set controls scale based of camera dsitance to object
-	if(this.camera instanceof THREE.PerspectiveCamera)
+	if(this.camera instanceof PerspectiveCamera)
 	{
 		this.toolScale = this.position.distanceTo(this.camPosition) / 6 * this.size;
 		this.scale.set(this.toolScale, this.toolScale, this.toolScale);
@@ -573,3 +579,5 @@ TransformControls.prototype.intersectObjects = function(objects)
 
 	return intersections.length > 0 ? intersections[0] : false;
 };
+
+export {TransformControls};

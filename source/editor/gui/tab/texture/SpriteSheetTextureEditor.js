@@ -1,4 +1,17 @@
-"use strict";
+import {Texture} from "../../../../core/texture/Texture.js";
+import {SpriteSheetTexture} from "../../../../core/texture/SpriteSheetTexture.js";
+import {Image} from "../../../../core/resources/Image.js";
+import {Sprite} from "../../../../core/objects/sprite/Sprite.js";
+import {ChangeAction} from "../../../history/action/ChangeAction.js";
+import {CallbackAction} from "../../../history/action/CallbackAction.js";
+import {Action} from "../../../history/action/Action.js";
+import {TextureEditor} from "./TextureEditor.js";
+import {Editor} from "../../../Editor.js";
+import {Text} from "../../../components/Text.js";
+import {VectorBox} from "../../../components/input/VectorBox.js";
+import {NumberBox} from "../../../components/input/NumberBox.js";
+import {ImageChooser} from "../../../components/input/ImageChooser.js";
+
 
 function SpriteSheetTextureEditor(parent, closeable, container, index)
 {
@@ -108,3 +121,4 @@ SpriteSheetTextureEditor.prototype.attach = function(texture)
 	this.endFrame.setValue(this.texture.endFrame);
 	this.animationSpeed.setValue(this.texture.animationSpeed);
 };
+export {SpriteSheetTextureEditor};

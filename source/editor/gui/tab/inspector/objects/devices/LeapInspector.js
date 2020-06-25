@@ -1,4 +1,13 @@
-"use strict";
+import {Model} from "../../../../../../core/resources/Model.js";
+import {Script} from "../../../../../../core/objects/script/Script.js";
+import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
+import {Action} from "../../../../../history/action/Action.js";
+import {ObjectInspector} from "../ObjectInspector.js";
+import {Inspector} from "../../Inspector.js";
+import {Editor} from "../../../../../Editor.js";
+import {Text} from "../../../../../components/Text.js";
+import {DropdownList} from "../../../../../components/input/DropdownList.js";
+import {CheckBox} from "../../../../../components/input/CheckBox.js";
 
 function LeapInspector(parent, object)
 {
@@ -63,3 +72,5 @@ LeapInspector.prototype.updateInspector = function()
 	this.gesturesEnabled.setValue(this.object.gesturesEnabled);
 	this.posesEnabled.setValue(this.object.posesEnabled);
 };
+
+export {LeapInspector};

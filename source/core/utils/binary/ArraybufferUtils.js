@@ -1,4 +1,4 @@
-"use strict";
+
 
 /**
  * ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format
@@ -89,3 +89,4 @@ ArraybufferUtils.fromBuffer = function(buffer)
 	// Faster but the results is failing the "instanceof ArrayBuffer" test
 	// return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
 };
+export {ArraybufferUtils};

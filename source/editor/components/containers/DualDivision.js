@@ -1,4 +1,8 @@
-"use strict";
+import {EventManager} from "../../../core/utils/EventManager.js";
+import {Interface} from "../../gui/Interface.js";
+import {Editor} from "../../Editor.js";
+import {Division} from "../Division.js";
+import {Component} from "../Component.js";
 
 /**
  * Dual division component is a box with two divisions that can be used to place other content.
@@ -134,3 +138,5 @@ DualDivision.prototype.updateSize = function()
 		this.resizeTab.style.height = this.tabSize + "px";
 	}
 };
+
+export {DualDivision};

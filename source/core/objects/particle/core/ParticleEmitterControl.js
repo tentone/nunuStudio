@@ -1,4 +1,8 @@
-"use strict";
+import {ParticleEmitter} from "../ParticleEmitter.js";
+import {ShaderUtils} from "./ShaderUtils.js";
+import {Key} from "../../../input/Key.js";
+import {Component} from "../../../../editor/components/Component.js";
+import {Vector3, Color, Math} from "three";
 
 /**
  * A map of options to configure an ParticleEmitterControl instance.
@@ -14,21 +18,21 @@
  * @property {number} [maxAge.value=2] A number between 0 and 1 describing the amount of maxAge to apply to all particles.
  * @property {number} [maxAge.spread=0] A number describing the maxAge variance on a per-particle basis.
  * @property {Object} [position={}] An object describing this emitter"s position.
- * @property {Object} [position.value=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter"s base position.
- * @property {Object} [position.spread=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter"s position variance on a per-particle basis. Note that when using a SPHERE or DISC distribution, only the x-component                of this vector is used.
- * @property {Object} [position.spreadClamp=new THREE.Vector3()] A THREE.Vector3 instance describing the numeric multiples the particle"s should be spread out over. Note that when using a SPHERE or DISC distribution, only the x-component                   of this vector is used.
+ * @property {Object} [position.value=new Vector3()] A Vector3 instance describing this emitter"s base position.
+ * @property {Object} [position.spread=new Vector3()] A Vector3 instance describing this emitter"s position variance on a per-particle basis. Note that when using a SPHERE or DISC distribution, only the x-component                of this vector is used.
+ * @property {Object} [position.spreadClamp=new Vector3()] A Vector3 instance describing the numeric multiples the particle"s should be spread out over. Note that when using a SPHERE or DISC distribution, only the x-component                   of this vector is used.
  * @property {number} [position.radius=10] This emitter"s base radius.
- * @property {Object} [position.radiusScale=new THREE.Vector3()] A THREE.Vector3 instance describing the radius"s scale in all three axes. Allows a SPHERE or DISC to be squashed or stretched.
+ * @property {Object} [position.radiusScale=new Vector3()] A Vector3 instance describing the radius"s scale in all three axes. Allows a SPHERE or DISC to be squashed or stretched.
  * @property {distribution} [position.distribution=value of the type option.] A specific distribution to use when radiusing particles. Overrides the type option.
  * @property {boolean} [position.randomise=false] When a particle is re-spawned, whether it's position should be re-randomised or not. Can incur a performance hit.
  * @property {Object} [velocity={}] An object describing this particle velocity.
- * @property {Object} [velocity.value=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter"s base velocity.
- * @property {Object} [velocity.spread=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter"s velocity variance on a per-particle basis. Note that when using a SPHERE or DISC distribution, only the x-component                of this vector is used.
+ * @property {Object} [velocity.value=new Vector3()] A Vector3 instance describing this emitter"s base velocity.
+ * @property {Object} [velocity.spread=new Vector3()] A Vector3 instance describing this emitter"s velocity variance on a per-particle basis. Note that when using a SPHERE or DISC distribution, only the x-component                of this vector is used.
  * @property {distribution} [velocity.distribution=value of the type option.] A specific distribution to use when calculating a particle"s velocity. Overrides the type option.
  * @property {boolean} [velocity.randomise=false] When a particle is re-spawned, whether it's velocity should be re-randomised or not. Can incur a performance hit.
  * @property {Object} [acceleration={}] An object describing this particle"s acceleration.
- * @property {Object} [acceleration.value=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter"s base acceleration.
- * @property {Object} [acceleration.spread=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter"s acceleration variance on a per-particle basis.               Note that when using a SPHERE or DISC distribution, only the x-component               of this vector is used.
+ * @property {Object} [acceleration.value=new Vector3()] A Vector3 instance describing this emitter"s base acceleration.
+ * @property {Object} [acceleration.spread=new Vector3()] A Vector3 instance describing this emitter"s acceleration variance on a per-particle basis.               Note that when using a SPHERE or DISC distribution, only the x-component               of this vector is used.
  * @property {distribution} [acceleration.distribution=value of the type option.] A specific distribution to use when calculating a particle"s acceleration. Overrides the type option.
  * @property {boolean} [acceleration.randomise=false] When a particle is re-spawned, whether it's acceleration should be re-randomised or not. Can incur a performance hit.
  * @property {Object} [drag={}] An object describing this particle drag. Drag is applied to both velocity and acceleration values.
@@ -39,16 +43,16 @@
  * @property {number} [wiggle.value=0] A number describing the amount of wiggle to apply to all particles. It's measured in distance.
  * @property {number} [wiggle.spread=0] A number describing the wiggle variance on a per-particle basis.
  * @property {Object} [rotation={}] An object describing this emitter"s rotation. It can either be static, or set to rotate from 0radians to the value of rotation.value   over a particle"s lifetime. Rotation values affect both a particle"s position and the forces applied to it.
- * @property {Object} [rotation.axis=new THREE.Vector3(0, 1, 0)] A THREE.Vector3 instance describing this emitter"s axis of rotation.
- * @property {Object} [rotation.axisSpread=new THREE.Vector3()] A THREE.Vector3 instance describing the amount of variance to apply to the axis of rotation on                  a per-particle basis.
+ * @property {Object} [rotation.axis=new Vector3(0, 1, 0)] A Vector3 instance describing this emitter"s axis of rotation.
+ * @property {Object} [rotation.axisSpread=new Vector3()] A Vector3 instance describing the amount of variance to apply to the axis of rotation on                  a per-particle basis.
  * @property {number} [rotation.angle=0] The angle of rotation, given in radians. If rotation.static is true, the emitter will start off rotated at this angle, and stay as such.   Otherwise, the particles will rotate from 0radians to this value over their lifetimes.
  * @property {number} [rotation.angleSpread=0] The amount of variance in each particle"s rotation angle.
  * @property {boolean} [rotation.static=false] Whether the rotation should be static or not.
- * @property {Object} [rotation.center=The value of position.value] A THREE.Vector3 instance describing the center point of rotation.
+ * @property {Object} [rotation.center=The value of position.value] A Vector3 instance describing the center point of rotation.
  * @property {boolean} [rotation.randomise=false] When a particle is re-spawned, whether it's rotation should be re-randomised or not. Can incur a performance hit.
- * @property {Object} [color={}] An object describing a particle"s color. This property is a "value-over-lifetime" property, meaning an array of values and spreads can be given to describe specific value changes over a particle"s lifetime. Depending on the value of valueOverLifetimeLength, if arrays of THREE.Color instances are given, then the array will be interpolated to have a length matching the value of valueOverLifetimeLength.
- * @property {Object} [color.value=new THREE.Color()] Either a single THREE.Color instance, or an array of THREE.Color instances to describe the color of a particle over it's lifetime.
- * @property {Object} [color.spread=new THREE.Vector3()] Either a single THREE.Vector3 instance, or an array of THREE.Vector3 instances to describe the color variance of a particle over it's lifetime.
+ * @property {Object} [color={}] An object describing a particle"s color. This property is a "value-over-lifetime" property, meaning an array of values and spreads can be given to describe specific value changes over a particle"s lifetime. Depending on the value of valueOverLifetimeLength, if arrays of Color instances are given, then the array will be interpolated to have a length matching the value of valueOverLifetimeLength.
+ * @property {Object} [color.value=new Color()] Either a single Color instance, or an array of Color instances to describe the color of a particle over it's lifetime.
+ * @property {Object} [color.spread=new Vector3()] Either a single Vector3 instance, or an array of Vector3 instances to describe the color variance of a particle over it's lifetime.
  * @property {boolean} [color.randomise=false] When a particle is re-spawned, whether it's color should be re-randomised or not. Can incur a performance hit.
  * @property {Object} [opacity={}] An object describing a particle"s opacity. This property is a "value-over-lifetime" property, meaning an array of values and spreads can be given to describe specific value changes over a particle"s lifetime. Depending on the value of valueOverLifetimeLength, if arrays of numbers are given, then the array will be interpolated to have a length matching the value of valueOverLifetimeLength.
  * @property {number} [opacity.value=1] Either a single number, or an array of numbers to describe the opacity of a particle over it's lifetime.
@@ -94,34 +98,34 @@ function ParticleEmitterControl(options)
 		console.warn("nunuStudio: onParticleSpawn has been removed. Please set properties directly to alter values at runtime.");
 	}
 
-	this.uuid = THREE.Math.generateUUID();
+	this.uuid = Math.generateUUID();
 
 	this.type = ShaderUtils.ensureTypedArg(options.type, ShaderUtils.types.NUMBER, ParticleDistributions.BOX);
 
 	this.position =
 	{
-		_value: ShaderUtils.ensureInstanceOf(options.position.value, THREE.Vector3, new THREE.Vector3()),
-		_spread: ShaderUtils.ensureInstanceOf(options.position.spread, THREE.Vector3, new THREE.Vector3()),
-		_spreadClamp: ShaderUtils.ensureInstanceOf(options.position.spreadClamp, THREE.Vector3, new THREE.Vector3()),
+		_value: ShaderUtils.ensureInstanceOf(options.position.value, Vector3, new Vector3()),
+		_spread: ShaderUtils.ensureInstanceOf(options.position.spread, Vector3, new Vector3()),
+		_spreadClamp: ShaderUtils.ensureInstanceOf(options.position.spreadClamp, Vector3, new Vector3()),
 		_distribution: ShaderUtils.ensureTypedArg(options.position.distribution, ShaderUtils.types.NUMBER, this.type),
 		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false),
 		_radius: ShaderUtils.ensureTypedArg(options.position.radius, ShaderUtils.types.NUMBER, 10),
-		_radiusScale: ShaderUtils.ensureInstanceOf(options.position.radiusScale, THREE.Vector3, new THREE.Vector3(1, 1, 1)),
+		_radiusScale: ShaderUtils.ensureInstanceOf(options.position.radiusScale, Vector3, new Vector3(1, 1, 1)),
 		_distributionClamp: ShaderUtils.ensureTypedArg(options.position.distributionClamp, ShaderUtils.types.NUMBER, 0),
 	};
 
 	this.velocity =
 	{
-		_value: ShaderUtils.ensureInstanceOf(options.velocity.value, THREE.Vector3, new THREE.Vector3()),
-		_spread: ShaderUtils.ensureInstanceOf(options.velocity.spread, THREE.Vector3, new THREE.Vector3()),
+		_value: ShaderUtils.ensureInstanceOf(options.velocity.value, Vector3, new Vector3()),
+		_spread: ShaderUtils.ensureInstanceOf(options.velocity.spread, Vector3, new Vector3()),
 		_distribution: ShaderUtils.ensureTypedArg(options.velocity.distribution, ShaderUtils.types.NUMBER, this.type),
 		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
 	this.acceleration =
 	{
-		_value: ShaderUtils.ensureInstanceOf(options.acceleration.value, THREE.Vector3, new THREE.Vector3()),
-		_spread: ShaderUtils.ensureInstanceOf(options.acceleration.spread, THREE.Vector3, new THREE.Vector3()),
+		_value: ShaderUtils.ensureInstanceOf(options.acceleration.value, Vector3, new Vector3()),
+		_spread: ShaderUtils.ensureInstanceOf(options.acceleration.spread, Vector3, new Vector3()),
 		_distribution: ShaderUtils.ensureTypedArg(options.acceleration.distribution, ShaderUtils.types.NUMBER, this.type),
 		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
@@ -141,12 +145,12 @@ function ParticleEmitterControl(options)
 
 	this.rotation =
 	{
-		_axis: ShaderUtils.ensureInstanceOf(options.rotation.axis, THREE.Vector3, new THREE.Vector3(0.0, 1.0, 0.0)),
-		_axisSpread: ShaderUtils.ensureInstanceOf(options.rotation.axisSpread, THREE.Vector3, new THREE.Vector3()),
+		_axis: ShaderUtils.ensureInstanceOf(options.rotation.axis, Vector3, new Vector3(0.0, 1.0, 0.0)),
+		_axisSpread: ShaderUtils.ensureInstanceOf(options.rotation.axisSpread, Vector3, new Vector3()),
 		_angle: ShaderUtils.ensureTypedArg(options.rotation.angle, ShaderUtils.types.NUMBER, 0),
 		_angleSpread: ShaderUtils.ensureTypedArg(options.rotation.angleSpread, ShaderUtils.types.NUMBER, 0),
 		_static: ShaderUtils.ensureTypedArg(options.rotation.static, ShaderUtils.types.BOOLEAN, false),
-		_center: ShaderUtils.ensureInstanceOf(options.rotation.center, THREE.Vector3, this.position._value.clone()),
+		_center: ShaderUtils.ensureInstanceOf(options.rotation.center, Vector3, this.position._value.clone()),
 		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
@@ -159,8 +163,8 @@ function ParticleEmitterControl(options)
 	// The following properties can support either single values, or an array of values that change the property over a particle"s lifetime (value over lifetime).
 	this.color =
 	{
-		_value: ShaderUtils.ensureArrayInstanceOf(options.color.value, THREE.Color, new THREE.Color()),
-		_spread: ShaderUtils.ensureArrayInstanceOf(options.color.spread, THREE.Vector3, new THREE.Vector3()),
+		_value: ShaderUtils.ensureArrayInstanceOf(options.color.value, Color, new Color()),
+		_spread: ShaderUtils.ensureArrayInstanceOf(options.color.spread, Vector3, new Vector3()),
 		_randomise: ShaderUtils.ensureTypedArg(options.position.randomise, ShaderUtils.types.BOOLEAN, false)
 	};
 
@@ -953,3 +957,4 @@ ParticleEmitterControl.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {ParticleEmitterControl};

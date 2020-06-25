@@ -1,4 +1,12 @@
-"use strict";
+import {Timer} from "../../../core/utils/timer/Timer.js";
+import {AnimationTimer} from "../../../core/utils/timer/AnimationTimer.js";
+import {EventManager} from "../../../core/utils/EventManager.js";
+import {Image} from "../../../core/resources/Image.js";
+import {Container} from "../../../core/objects/misc/Container.js";
+import {Interface} from "../../gui/Interface.js";
+import {Text} from "../Text.js";
+import {ImageContainer} from "../ImageContainer.js";
+import {Component} from "../Component.js";
 
 /**
  * Loading box, used to force the user to wait for data from a request.
@@ -148,3 +156,5 @@ LoadingModal.prototype.updateSize = function()
 	this.icon.position.y += 30;
 	this.icon.updateInterface();
 };
+
+export {LoadingModal};

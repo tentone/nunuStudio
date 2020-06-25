@@ -1,14 +1,19 @@
-"use strict";
+import {Mouse} from "../../../../../core/input/Mouse.js";
+import {Keyboard} from "../../../../../core/input/Keyboard.js";
+import {Key} from "../../../../../core/input/Key.js";
+import {OrientationCube} from "../utils/OrientationCube.js";
+import {Editor} from "../../../../Editor.js";
+import {Group, Object3D} from "three";
 
 /**
  * A editor controls objects is used to control the camera inside of the editor.
  *
  * @class EditorControls
- * @extends {THREE.Group}
+ * @extends {Group}
  */
 function EditorControls()
 {
-	THREE.Group.call(this);
+	Group.call(this);
 
 	/**
 	 * Camera object attached to this controls.
@@ -19,7 +24,7 @@ function EditorControls()
 	this.camera = null;
 }
 
-EditorControls.prototype = Object.create(THREE.Group.prototype);
+EditorControls.prototype = Object.create(Group.prototype);
 
 /**
  * Attach a camera to this controls object.
@@ -50,7 +55,7 @@ EditorControls.prototype.reset = function(){};
  * Focus camera on a object.
  * 
  * @method focusObject
- * @param {THREE.Object3D} object Object to point camera at.
+ * @param {Object3D} object Object to point camera at.
  */
 EditorControls.prototype.focusObject = function(object){};
 
@@ -79,3 +84,5 @@ EditorControls.prototype.update = function(mouse, keyboard, delta){};
  * @method updateControls
  */
 EditorControls.prototype.updateControls = function(){};
+
+export {EditorControls};

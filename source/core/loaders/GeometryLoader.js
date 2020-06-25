@@ -1,4 +1,10 @@
-"use strict";
+import {Image} from "../resources/Image.js";
+import {LegacyGeometryLoader} from "./LegacyGeometryLoader.js";
+import {TerrainBufferGeometry} from "../geometries/TerrainBufferGeometry.js";
+import {RoundedBoxBufferGeometry} from "../geometries/RoundedBoxBufferGeometry.js";
+import {CapsuleBufferGeometry} from "../geometries/CapsuleBufferGeometry.js";
+import {Loaders} from "../../editor/Loaders.js";
+import {DefaultLoadingManager, FileLoader, ObjectLoader} from "three";
 
 /**
  * Geometry loader can be used to load geometry files.
@@ -9,7 +15,7 @@
  */
 function GeometryLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
 
 	this.shapes = {};
 
@@ -52,7 +58,7 @@ GeometryLoader.prototype.setShapes = function(shapes)
  */
 GeometryLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
-	var loader = new THREE.FileLoader(this.manager);
+	var loader = new FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		onLoad(self.parse(JSON.parse(text)));
@@ -91,7 +97,7 @@ GeometryLoader.prototype.parse = function(data)
 
 	else
 	{
-		var geometries = THREE.ObjectLoader.prototype.parseGeometries([data], this.shapes);
+		var geometries = ObjectLoader.prototype.parseGeometries([data], this.shapes);
 		for(var i in geometries)
 		{
 			geometry = geometries[i];
@@ -104,3 +110,5 @@ GeometryLoader.prototype.parse = function(data)
 
 	return geometry;
 };
+
+export {GeometryLoader};

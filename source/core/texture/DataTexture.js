@@ -1,4 +1,6 @@
-"use strict";
+import {Image} from "../resources/Image.js";
+import {Text} from "../../editor/components/Text.js";
+import {Texture, DataTexture} from "three";
 
 /**
  * Data texture stored binary RAW texture data values.
@@ -6,7 +8,7 @@
  * Can be used to store render target result or to load custom image formats. Pixels can be manipulated individually in the data array.
  *
  * @class DataTexture
- * @extends {THREE.Texture}
+ * @extends {Texture}
  * @param {Array} data Image data array
  * @param {number} width
  * @param {number} height
@@ -24,7 +26,7 @@
  */
 function DataTexture(data, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, encoding)
 {
-	THREE.Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+	Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
 	this.category = "DataTexture";
 
@@ -39,15 +41,15 @@ function DataTexture(data, width, height, format, type, mapping, wrapS, wrapT, m
 	this.needsUpdate = true;
 }
 
-THREE.DataTexture = DataTexture;
+DataTexture = DataTexture;
 
-DataTexture.prototype = Object.create(THREE.Texture.prototype);
+DataTexture.prototype = Object.create(Texture.prototype);
 DataTexture.prototype.constructor = DataTexture;
 DataTexture.prototype.isDataTexture = true;
 
 DataTexture.prototype.toJSON = function(meta)
 {
-	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+	var data = Texture.prototype.toJSON.call(this, meta);
 
 	data.image = {
 		height: this.image.height,
@@ -57,3 +59,4 @@ DataTexture.prototype.toJSON = function(meta)
 
 	return data;
 };
+export {DataTexture};
