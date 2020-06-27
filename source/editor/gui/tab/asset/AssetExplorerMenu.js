@@ -1,33 +1,17 @@
 import {WebcamTexture} from "../../../../core/texture/WebcamTexture.js";
-import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
-import {Texture} from "../../../../core/texture/Texture.js";
 import {SpriteSheetTexture} from "../../../../core/texture/SpriteSheetTexture.js";
 import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
 import {CanvasTexture} from "../../../../core/texture/CanvasTexture.js";
-import {Video} from "../../../../core/resources/Video.js";
 import {TextFile} from "../../../../core/resources/TextFile.js";
-import {Resource} from "../../../../core/resources/Resource.js";
-import {Model} from "../../../../core/resources/Model.js";
 import {Image} from "../../../../core/resources/Image.js";
-import {Font} from "../../../../core/resources/Font.js";
-import {Audio} from "../../../../core/resources/Audio.js";
-import {Sprite} from "../../../../core/objects/sprite/Sprite.js";
-import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
-import {Mesh} from "../../../../core/objects/mesh/Mesh.js";
 import {Nunu} from "../../../../core/Nunu.js";
 import {FileSystem} from "../../../../core/FileSystem.js";
 import {Loaders} from "../../../Loaders.js";
 import {AddResourceAction} from "../../../history/action/resources/AddResourceAction.js";
-import {Action} from "../../../history/action/Action.js";
-import {AssetExplorer} from "./AssetExplorer.js";
-import {Asset} from "./asset/Asset.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {DropdownMenu} from "../../../components/dropdown/DropdownMenu.js";
 import {Component} from "../../../components/Component.js";
-import {Canvas} from "../../../components/Canvas.js";
 import {MeshStandardMaterial, MeshPhysicalMaterial, MeshPhongMaterial, MeshBasicMaterial, MeshToonMaterial, MeshLambertMaterial, MeshMatcapMaterial, SpriteMaterial, PointsMaterial, LineBasicMaterial, LineDashedMaterial, ShaderMaterial, RawShaderMaterial, MeshNormalMaterial, MeshDepthMaterial, MeshDistanceMaterial, ShadowMaterial} from "three";
 
 

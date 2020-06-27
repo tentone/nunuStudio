@@ -3,10 +3,8 @@ import {AnimationTrackButton} from "./AnimationTrackButton.js";
 import {AnimationTrack} from "./AnimationTrack.js";
 import {AnimationClipMenuBar} from "./AnimationClipMenuBar.js";
 import {AnimationClipButton} from "./AnimationClipButton.js";
-import {Interface} from "../../Interface.js";
 import {Editor} from "../../../Editor.js";
 import {Component} from "../../../components/Component.js";
-import {Button} from "../../../components/buttons/Button.js";
 
 
 /**
@@ -115,7 +113,7 @@ function AnimationClipTrack(editor, animation)
 
 		Editor.gui.inspector.updateValues();
 	});
-	this.manager.add(window, "mouseup", function(event)
+	this.manager.add(window, "mouseup", function()
 	{
 		self.manager.destroy();
 	});

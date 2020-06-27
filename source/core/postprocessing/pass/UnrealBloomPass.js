@@ -1,10 +1,7 @@
-import {Texture} from "../../texture/Texture.js";
 import {Pass} from "../Pass.js";
-import {BloomPass} from "./BloomPass.js";
-import {Scene} from "../../objects/Scene.js";
-import {Mesh} from "../../objects/mesh/Mesh.js";
-
-import {LuminosityHighPassShader, CopyShader, WebGLRenderTarget, UniformsUtils, ShaderMaterial, Vector2, Vector3, AdditiveBlending, MeshBasicMaterial, Color} from "three";
+import {WebGLRenderTarget, UniformsUtils, ShaderMaterial, Vector2, Vector3, AdditiveBlending, MeshBasicMaterial, Color} from "three";
+import {LuminosityHighPassShader} from "three/examples/jsm/shaders/LuminosityHighPassShader";
+import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
 
 /**
  * Unreal engine like bloom effect pass.

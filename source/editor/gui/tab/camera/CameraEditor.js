@@ -1,5 +1,4 @@
 import {RenderPass} from "../../../../core/postprocessing/RenderPass.js";
-import {Pass} from "../../../../core/postprocessing/Pass.js";
 import {UnrealBloomPass} from "../../../../core/postprocessing/pass/UnrealBloomPass.js";
 import {TechnicolorPass} from "../../../../core/postprocessing/pass/TechnicolorPass.js";
 import {SSAOPass} from "../../../../core/postprocessing/pass/SSAOPass.js";
@@ -15,26 +14,16 @@ import {BloomPass} from "../../../../core/postprocessing/pass/BloomPass.js";
 import {FXAAPass} from "../../../../core/postprocessing/pass/antialiasing/FXAAPass.js";
 import {AfterimagePass} from "../../../../core/postprocessing/pass/AfterimagePass.js";
 import {AdaptiveToneMappingPass} from "../../../../core/postprocessing/pass/AdaptiveToneMappingPass.js";
-import {Scene} from "../../../../core/objects/Scene.js";
-import {Container} from "../../../../core/objects/misc/Container.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
-import {Action} from "../../../history/action/Action.js";
 import {PassNode} from "./postprocessing/PassNode.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {TextBox} from "../../../components/input/TextBox.js";
-import {Form} from "../../../components/Form.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Component} from "../../../components/Component.js";
-import {Canvas} from "../../../components/Canvas.js";
 import {ButtonText} from "../../../components/buttons/ButtonText.js";
-import {Button} from "../../../components/buttons/Button.js";
-
 
 function CameraEditor(parent, closeable, container, index)
 {

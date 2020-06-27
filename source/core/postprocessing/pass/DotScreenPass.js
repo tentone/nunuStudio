@@ -1,6 +1,6 @@
 import {Pass} from "../Pass.js";
-import {Scene} from "../../objects/Scene.js";
-import {DotScreenShader, UniformsUtils, ShaderMaterial} from "three";
+import {UniformsUtils, ShaderMaterial} from "three";
+import {DotScreenShader} from "three/examples/jsm/shaders/DotScreenShader";
 
 /**
  * DotScreen pass generates a poster like effect on top of the scene.

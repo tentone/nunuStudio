@@ -1,15 +1,9 @@
 import {EventManager} from "../../../../core/utils/EventManager.js";
-import {Font} from "../../../../core/resources/Font.js";
-import {Key} from "../../../../core/input/Key.js";
-import {Settings} from "../../../Settings.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
-import {Component} from "../../../components/Component.js";
 
 /**
  * Code editor tab element based on the codemirror code editor library.

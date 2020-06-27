@@ -1,6 +1,6 @@
 import {ShaderPass} from "../ShaderPass.js";
 import {Pass} from "../Pass.js";
-import {HueSaturationShader} from "three";
+import {HueSaturationShader} from "three/examples/jsm/shaders/HueSaturationShader";
 
 /**
  * Hue and saturation pass.

@@ -1,6 +1,6 @@
 import {Pass} from "../Pass.js";
-import {Scene} from "../../objects/Scene.js";
-import {FilmShader, UniformsUtils, ShaderMaterial} from "three";
+import {UniformsUtils, ShaderMaterial} from "three";
+import {FilmShader} from "three/examples/jsm/shaders/FilmShader";
 
 /**
  * Film pass is used to simulate a film/TV like effect.

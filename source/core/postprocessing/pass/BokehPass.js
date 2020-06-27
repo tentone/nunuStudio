@@ -1,7 +1,6 @@
 import {Pass} from "../Pass.js";
-import {Scene} from "../../objects/Scene.js";
-import {Mesh} from "../../objects/mesh/Mesh.js";
-import {BokehShader, WebGLRenderTarget, MeshDepthMaterial, RGBADepthPacking, NoBlending, UniformsUtils, ShaderMaterial} from "three";
+import {WebGLRenderTarget, MeshDepthMaterial, RGBADepthPacking, NoBlending, UniformsUtils, ShaderMaterial} from "three";
+import {BokehShader} from "three/examples/jsm/shaders/BokehShader";
 
 /**
  * Depth-of-field post-process with bokeh shader.

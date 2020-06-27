@@ -1,7 +1,6 @@
 import {SSAOShader} from "../shaders/SSAOShader.js";
 import {ShaderPass} from "../ShaderPass.js";
 import {Pass} from "../Pass.js";
-import {Mesh} from "../../objects/mesh/Mesh.js";
 import {MeshDepthMaterial, RGBADepthPacking, NoBlending, WebGLRenderTarget, LinearFilter} from "three";
 
 /**

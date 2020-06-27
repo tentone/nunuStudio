@@ -1,6 +1,3 @@
-import {Key} from "../../../../core/input/Key.js";
-import {AnimationMixer} from "../../../../core/animation/AnimationMixer.js";
-import {Interface} from "../../Interface.js";
 import {Editor} from "../../../Editor.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
@@ -29,7 +26,7 @@ function AnimationKeyframe(parent, editor, trackEditor, track, index)
 
 	var self = this;
 
-	this.element.ondblclick = function(event)
+	this.element.ondblclick = function()
 	{
 		var time = self.track.times[self.index];
 		self.editor.mixer.setTime(time);

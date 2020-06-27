@@ -1,15 +1,10 @@
 import {Image} from "../../../../core/resources/Image.js";
-import {Key} from "../../../../core/input/Key.js";
-import {History} from "../../../history/History.js";
 import {TextureRenderer} from "../../preview/TextureRenderer.js";
 import {MaterialRenderer} from "../../preview/MaterialRenderer.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {SearchBox} from "../../../components/SearchBox.js";
-import {Form} from "../../../components/Form.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
 import {Component} from "../../../components/Component.js";
@@ -195,12 +190,12 @@ function ConsoleTab(parent, closeable, container, index)
 
 	this.code.setOption("extraKeys",
 	{
-		"Enter": function(cm)
+		"Enter": function()
 		{
 			self.runCommand(self.code.getValue());
 			self.code.setValue("");
 		},
-		"Up": function(cm)
+		"Up": function()
 		{
 			if(self.history.length > 0 && self.historyPointer > 0)
 			{
@@ -430,7 +425,7 @@ ConsoleTab.prototype.error = function(args)
  *
  * @method clear 
  */
-ConsoleTab.prototype.clear = function(args)
+ConsoleTab.prototype.clear = function()
 {
 	this.history = [];
 

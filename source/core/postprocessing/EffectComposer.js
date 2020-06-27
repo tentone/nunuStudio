@@ -18,8 +18,9 @@ import {FXAAPass} from "./pass/antialiasing/FXAAPass.js";
 import {AfterimagePass} from "./pass/AfterimagePass.js";
 import {AdaptiveToneMappingPass} from "./pass/AdaptiveToneMappingPass.js";
 import {Scene} from "../objects/Scene.js";
-
-import {CopyShader, Math, WebGLRenderTarget, LinearFilter, RGBAFormat, MaskPass, ClearMaskPass} from "three";
+import {Math, WebGLRenderTarget, LinearFilter, RGBAFormat} from "three";
+import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
+import {ClearMaskPass, MaskPass} from "three/examples/jsm/postprocessing/MaskPass";
 
 /**
  * The effect composer is used to organize multiple post-processing passes.

@@ -1,9 +1,5 @@
 import {Resource} from "../../../../../core/resources/Resource.js";
-import {Image} from "../../../../../core/resources/Image.js";
-import {Key} from "../../../../../core/input/Key.js";
-import {Interface} from "../../../Interface.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {Component} from "../../../../components/Component.js";
 import {Vector2} from "three";
 

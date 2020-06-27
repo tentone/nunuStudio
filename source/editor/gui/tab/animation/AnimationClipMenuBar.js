@@ -1,5 +1,3 @@
-import {AnimationMixer} from "../../../../core/animation/AnimationMixer.js";
-import {Interface} from "../../Interface.js";
 import {Text} from "../../../components/Text.js";
 import {NumberBox} from "../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";

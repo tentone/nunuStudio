@@ -1,8 +1,6 @@
 import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
 import {Font} from "../resources/Font.js";
-
 import {DefaultLoadingManager, FileLoader} from "three";
-
 
 /**
  * FontLoader can be used to load external font resources.

@@ -1,13 +1,7 @@
-import {Texture} from "../../../../../core/texture/Texture.js";
-import {Resource} from "../../../../../core/resources/Resource.js";
-import {Sprite} from "../../../../../core/objects/sprite/Sprite.js";
-import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
 import {MaterialLoader} from "../../../../../core/loaders/MaterialLoader.js";
-import {Mouse} from "../../../../../core/input/Mouse.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {AddResourceAction} from "../../../../history/action/resources/AddResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {SpriteMaterialEditor} from "../../material/sprite/SpriteMaterialEditor.js";
 import {ShaderMaterialEditor} from "../../material/ShaderMaterialEditor.js";
 import {PointsMaterialEditor} from "../../material/points/PointsMaterialEditor.js";
@@ -24,15 +18,12 @@ import {LineDashedMaterialEditor} from "../../material/line/LineDashedMaterialEd
 import {LineBasicMaterialEditor} from "../../material/line/LineBasicMaterialEditor.js";
 import {Asset} from "./Asset.js";
 import {MaterialRenderer} from "../../../preview/MaterialRenderer.js";
-import {Interface} from "../../../Interface.js";
 import {DragBuffer} from "../../../DragBuffer.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 import {Color, Material, MeshPhongMaterial, MeshToonMaterial, MeshLambertMaterial, MeshMatcapMaterial, MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, SpriteMaterial, ShaderMaterial, LineDashedMaterial, LineBasicMaterial, PointsMaterial, Math} from "three";
-
 
 function MaterialAsset(parent)
 {
@@ -230,7 +221,7 @@ function MaterialAsset(parent)
 	};
 
 	// Drag end (called after of ondrop)
-	this.element.ondragend = function(event)
+	this.element.ondragend = function()
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};

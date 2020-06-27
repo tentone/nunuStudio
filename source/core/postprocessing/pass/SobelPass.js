@@ -1,6 +1,6 @@
 import {ShaderPass} from "../ShaderPass.js";
-import {Pass} from "../Pass.js";
-import {SobelOperatorShader, LuminosityShader} from "three";
+import {SobelOperatorShader} from "three/examples/jsm/shaders/SobelOperatorShader";
+import {LuminosityShader} from "three/examples/jsm/shaders/LuminosityShader";
 
 /**
  * Sobel pass is used to create a edge highlight effect with a sobel operator.

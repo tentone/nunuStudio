@@ -1,9 +1,6 @@
 import {EventManager} from "../../../../core/utils/EventManager.js";
-import {Key} from "../../../../core/input/Key.js";
 import {AnimationMixer} from "../../../../core/animation/AnimationMixer.js";
-import {Action} from "../../../history/action/Action.js";
 import {AnimationClipTrack} from "./AnimationClipTrack.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {Text} from "../../../components/Text.js";
@@ -12,7 +9,6 @@ import {Slider} from "../../../components/input/Slider.js";
 import {Division} from "../../../components/Division.js";
 import {Component} from "../../../components/Component.js";
 import {ButtonText} from "../../../components/buttons/ButtonText.js";
-import {Button} from "../../../components/buttons/Button.js";
 import {Clock, VectorKeyframeTrack, InterpolateLinear, QuaternionKeyframeTrack, BooleanKeyframeTrack, InterpolateDiscrete, ColorKeyframeTrack, NumberKeyframeTrack} from "three";
 
 /**
@@ -267,7 +263,7 @@ function AnimationTab(parent, closeable, container, index)
 		self.tab.position = initial + (event.clientX - mouse);
 		self.updateInterface();
 	});
-	this.tabManager.add(window, "mouseup", function(event)
+	this.tabManager.add(window, "mouseup", function()
 	{
 		self.tabManager.destroy();
 	});
@@ -321,7 +317,7 @@ AnimationTab.prototype.updateSelection = function()
  *
  * @method clearAnimationMixer
  */
-AnimationTab.prototype.clearAnimationMixer = function(keepTime)
+AnimationTab.prototype.clearAnimationMixer = function()
 {
 	if(this.mixer !== null)
 	{

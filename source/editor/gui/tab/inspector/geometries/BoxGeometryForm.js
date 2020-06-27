@@ -1,11 +1,7 @@
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
-import {GeometryForm} from "./GeometryForm.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {NumberRow} from "../../../../components/input/NumberRow.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Form} from "../../../../components/Form.js";
 import {BoxBufferGeometry, BoxGeometry, BufferGeometry} from "three";
 
 function BoxGeometryForm(form, object)

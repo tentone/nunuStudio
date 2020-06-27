@@ -1,15 +1,9 @@
 import {MathUtils} from "../../../../core/utils/MathUtils.js";
-import {Key} from "../../../../core/input/Key.js";
-import {AnimationMixer} from "../../../../core/animation/AnimationMixer.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
-import {Action} from "../../../history/action/Action.js";
-import {Interface} from "../../Interface.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
 import {Component} from "../../../components/Component.js";
-import {Button} from "../../../components/buttons/Button.js";
 import {VectorKeyframeTrack, InterpolateLinear, Color, ColorKeyframeTrack, QuaternionKeyframeTrack, StringKeyframeTrack, InterpolateDiscrete, BooleanKeyframeTrack, NumberKeyframeTrack} from "three";
 
 /**

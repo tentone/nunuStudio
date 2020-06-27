@@ -4,7 +4,6 @@ import {Image} from "../../../../core/resources/Image.js";
 import {TextSprite} from "../../../../core/objects/text/TextSprite.js";
 import {TextMesh} from "../../../../core/objects/text/TextMesh.js";
 import {TextBitmap} from "../../../../core/objects/text/TextBitmap.js";
-import {Sprite} from "../../../../core/objects/sprite/Sprite.js";
 import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
 import {Script} from "../../../../core/objects/script/Script.js";
 import {Scene} from "../../../../core/objects/Scene.js";
@@ -12,9 +11,7 @@ import {Program} from "../../../../core/objects/Program.js";
 import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../core/objects/misc/Sky.js";
-import {Container} from "../../../../core/objects/misc/Container.js";
 import {InstancedMesh} from "../../../../core/objects/mesh/InstancedMesh.js";
-import {AmbientLight} from "../../../../core/objects/lights/AmbientLight.js";
 import {LeapMotion} from "../../../../core/objects/device/LeapMotion.js";
 import {KinectDevice} from "../../../../core/objects/device/KinectDevice.js";
 import {OrbitControls} from "../../../../core/objects/controls/OrbitControls.js";
@@ -22,7 +19,6 @@ import {FirstPersonControls} from "../../../../core/objects/controls/FirstPerson
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
 import {CubeCamera} from "../../../../core/objects/cameras/CubeCamera.js";
-import {AudioEmitter} from "../../../../core/objects/audio/AudioEmitter.js";
 import {TextureInspector} from "./textures/TextureInspector.js";
 import {VideoInspector} from "./resources/VideoInspector.js";
 import {ResourceInspector} from "./resources/ResourceInspector.js";
@@ -59,13 +55,10 @@ import {PerspectiveCameraInspector} from "./objects/cameras/PerspectiveCameraIns
 import {OrthographicCameraInspector} from "./objects/cameras/OrthographicCameraInspector.js";
 import {AudioEmitterInspector} from "./objects/audio/AudioEmitterInspector.js";
 import {MaterialInspector} from "./materials/MaterialInspector.js";
-import {Inspector} from "./Inspector.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {Component} from "../../../components/Component.js";
 import {Object3D, SkinnedMesh, Mesh, Points, Line, Light, PointLight, RectAreaLight, SpotLight, DirectionalLight, HemisphereLight, LightProbe, Audio, Geometry, BufferGeometry, Material, Texture} from "three";
 
 /**

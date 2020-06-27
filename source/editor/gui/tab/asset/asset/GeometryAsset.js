@@ -1,15 +1,10 @@
-import {Resource} from "../../../../../core/resources/Resource.js";
-import {Image} from "../../../../../core/resources/Image.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {Asset} from "./Asset.js";
 import {GeometryRenderer} from "../../../preview/GeometryRenderer.js";
-import {Interface} from "../../../Interface.js";
 import {DragBuffer} from "../../../DragBuffer.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {ContextMenu} from "../../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../../components/DocumentBody.js";
 
@@ -77,7 +72,7 @@ function GeometryAsset(parent)
 	};
 
 	// Drag end (called after of ondrop)
-	this.element.ondragend = function(event)
+	this.element.ondragend = function()
 	{
 		DragBuffer.pop(self.asset.uuid);
 	};

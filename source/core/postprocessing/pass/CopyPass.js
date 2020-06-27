@@ -1,6 +1,5 @@
 import {ShaderPass} from "../ShaderPass.js";
-import {Pass} from "../Pass.js";
-import {CopyShader} from "three";
+import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
 
 /**
  * Copy pass can be used to copy the actual content on the composer to the screen.

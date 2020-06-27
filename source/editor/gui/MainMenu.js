@@ -1,31 +1,21 @@
 import {UnitConverter} from "../../core/utils/UnitConverter.js";
-import {Texture} from "../../core/texture/Texture.js";
-import {Image} from "../../core/resources/Image.js";
-import {Script} from "../../core/objects/script/Script.js";
-import {Scene} from "../../core/objects/Scene.js";
-import {Program} from "../../core/objects/Program.js";
 import {Mesh} from "../../core/objects/mesh/Mesh.js";
 import {Nunu} from "../../core/Nunu.js";
 import {ObjectLoader} from "../../core/loaders/ObjectLoader.js";
 import {TwistModifier} from "../../core/geometries/modifiers/TwistModifier.js";
 import {FileSystem} from "../../core/FileSystem.js";
-import {Settings} from "../Settings.js";
 import {RemoveAction} from "../history/action/objects/RemoveAction.js";
 import {AddAction} from "../history/action/objects/AddAction.js";
 import {ChangeAction} from "../history/action/ChangeAction.js";
 import {ActionBundle} from "../history/action/ActionBundle.js";
-import {Action} from "../history/action/Action.js";
 import {SettingsTab} from "./tab/settings/SettingsTab.js";
 import {AboutTab} from "./tab/AboutTab.js";
-import {Interface} from "./Interface.js";
 import {Global} from "../Global.js";
 import {Exporters} from "../Exporters.js";
 import {Editor} from "../Editor.js";
-import {Text} from "../components/Text.js";
 import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
-import {Button} from "../components/buttons/Button.js";
 import {StaticPair} from "pson";
 import {OBJExporter, GLTFExporter, DRACOExporter, ColladaExporter, PLYExporter, STLExporter, BufferGeometry, Geometry, SimplifyModifier, SubdivisionModifier} from "three";
 
@@ -268,7 +258,6 @@ function MainMenu(parent)
 			if(files.length > 0)
 			{
 				var file = files[0];
-				var binary = file.name.endsWith(".nsp");
 
 				var loader = new ObjectLoader();
 				var reader = new FileReader();

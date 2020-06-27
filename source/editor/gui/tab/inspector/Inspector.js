@@ -1,6 +1,4 @@
-import {Interface} from "../../Interface.js";
 import {TableForm} from "../../../components/TableForm.js";
-import {Form} from "../../../components/Form.js";
 import {Component} from "../../../components/Component.js";
 
 /**

@@ -1,6 +1,6 @@
 import {ShaderPass} from "../ShaderPass.js";
 import {Pass} from "../Pass.js";
-import {ColorifyShader} from "three";
+import {ColorifyShader} from "three/examples/jsm/shaders/ColorifyShader";
 
 /**
  * Colorify pass can be used to colorify the scene.

@@ -1,15 +1,10 @@
-import {Tree} from "../../core/utils/struct/Tree.js";
-import {Program} from "../../core/objects/Program.js";
-import {Container} from "../../core/objects/misc/Container.js";
 import {Nunu} from "../../core/Nunu.js";
 import {FileSystem} from "../../core/FileSystem.js";
 import {TreeView} from "./tab/tree-view/TreeView.js";
 import {ProfilingTab} from "./tab/profiling/ProfilingTab.js";
 import {InspectorContainer} from "./tab/inspector/InspectorContainer.js";
-import {Inspector} from "./tab/inspector/Inspector.js";
 import {ConsoleTab} from "./tab/console/ConsoleTab.js";
 import {AssetExplorer} from "./tab/asset/AssetExplorer.js";
-import {Asset} from "./tab/asset/asset/Asset.js";
 import {AnimationTab} from "./tab/animation/AnimationTab.js";
 import {MainMenu} from "./MainMenu.js";
 import {Editor} from "../Editor.js";
@@ -41,7 +36,6 @@ function Interface()
 
 	var left = main.elementA.split(TabGroup.BOTTOM).parent;
 	left.tabPosition = 0.7;
-	var leftTop = left.elementA;
 	var leftBottom = left.elementB;
 
 	var right = main.elementB.split(TabGroup.BOTTOM).parent;

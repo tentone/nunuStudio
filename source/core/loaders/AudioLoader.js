@@ -1,8 +1,6 @@
 import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
 import {Audio} from "../resources/Audio.js";
-
 import {DefaultLoadingManager, FileLoader} from "three";
-
 
 /**
  * Audio loader can be used to load external audio resources.
