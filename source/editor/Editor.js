@@ -34,10 +34,6 @@ import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
 import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
 
-import PSON from "../../lib/pson/PSON.min.js";
-import "../../lib/pson/bytebuffer.min.js";
-import "../../lib/pson/long.min.js";
-
 /**
  * nunuStudio main editor entry point. 
  *

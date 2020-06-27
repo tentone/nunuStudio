@@ -41,8 +41,8 @@
 	},
 	"dependencies": {
 		"three": "^0.117.1",
-		"cannon": "^0.6.2",
-		"pson": "^2.0.0"
+		"cannon": "0.6.2",
+		"@as-com/pson": "3.0.1"
 	},
 	"devDependencies": {
 		"cordova": "~9.0.0",
