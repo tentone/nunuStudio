@@ -20,7 +20,7 @@ function FileSystem(){}
 
 try
 {
-	FileSystem.fs = require("fs");
+	FileSystem.fs = window.require("fs");
 }
 catch(e){}
 

@@ -96,7 +96,7 @@ Editor.initialize = function()
 
 	if(Nunu.runningOnDesktop())
 	{
-		var gui = require("nw.gui");
+		var gui = window.require("nw.gui");
 		Editor.clipboard = gui.Clipboard.get();
 		Editor.args = gui.App.argv;
 
@@ -1271,7 +1271,7 @@ Editor.exit = function()
 	{
 		Editor.settings.store();
 		
-		var gui = require("nw.gui");
+		var gui = window.require("nw.gui");
 		var win = gui.Window.get();
 
 		gui.App.closeAllWindows();

@@ -39,7 +39,7 @@ window.include = function(file, onload)
 	// Folder
 	else if(window.require !== undefined)
 	{
-		var fs = require("fs");
+		var fs = window.require("fs");
 		if(fs !== undefined)
 		{
 			if(file.endsWith("*"))

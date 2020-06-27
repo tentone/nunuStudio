@@ -152,7 +152,7 @@ Exporters.exportNWJSProject = function(dir, target)
 	}));
 
 	// Build application
-	var system = require("child_process");
+	var system = window.require("child_process");
 	var output = system.execSync("build --mirror https:// dl.nwjs.io/ --with-ffmpeg --tasks " + target + " " + Exporters.TEMP);
 
 	// Delete temporary folders
@@ -219,7 +219,7 @@ Exporters.exportAndroid = function(mode, outputPath)
 		}
 	}
 
-	var system = require("child_process");
+	var system = window.require("child_process");
 	var name = Editor.program.name !== "" ? Editor.program.name : "program";
 	var author = Editor.program.author !== "" ? Editor.program.author : "author";
 	var packageName = "com." + author + "." + name;

@@ -8,12 +8,12 @@ const output = context + "/dist";
 
 module.exports = {
 	context: source,
-	entry: [source + "/Main.js"],
+	entry: [source + "/editor/Main.js"],
 	target: "web",
 	devtool: "inline-source-map",
 	mode: "development",
 	plugins: [
-		new HtmlWebpackPlugin({template: source + "/index.html", filename: "index.html"}),
+		new HtmlWebpackPlugin({template: source + "/editor/index.html", filename: "index.html"}),
 		new Webpack.ProgressPlugin(),
 		// new Webpack.NamedModulesPlugin(),
 		// new Webpack.HotModuleReplacementPlugin()

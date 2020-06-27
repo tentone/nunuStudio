@@ -1,7 +1,4 @@
-import {Audio} from "./resources/Audio.js";
-import {Component} from "../editor/components/Component.js";
 import {WebGLRenderer} from "three";
-
 
 /**
  * nunuStudio core main file.
@@ -482,7 +479,7 @@ Nunu.openWebpage = function(url)
 {
 	if(Nunu.runningOnDesktop())
 	{
-		require("nw.gui").Shell.openExternal(url);
+		window.require("nw.gui").Shell.openExternal(url);
 	}
 	else
 	{
