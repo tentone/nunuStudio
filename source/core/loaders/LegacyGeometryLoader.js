@@ -1,7 +1,3 @@
-import {Resource} from "../resources/Resource.js";
-import {Model} from "../resources/Model.js";
-import {ObjectLoader} from "./ObjectLoader.js";
-import {GeometryLoader} from "./GeometryLoader.js";
 import {FileLoader, Vector3, Face3, Vector2, AnimationClip, Geometry} from "three";
 
 /**

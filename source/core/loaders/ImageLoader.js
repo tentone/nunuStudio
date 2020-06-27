@@ -1,5 +1,4 @@
 import {Image} from "../resources/Image.js";
-
 import {DefaultLoadingManager, FileLoader} from "three";
 
 /**

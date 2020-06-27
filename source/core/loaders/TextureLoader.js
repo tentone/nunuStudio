@@ -6,10 +6,6 @@ import {DataTexture} from "../texture/DataTexture.js";
 import {CubeTexture} from "../texture/CubeTexture.js";
 import {CompressedTexture} from "../texture/CompressedTexture.js";
 import {CanvasTexture} from "../texture/CanvasTexture.js";
-import {Video} from "../resources/Video.js";
-import {Image} from "../resources/Image.js";
-import {Font} from "../resources/Font.js";
-import {Sprite} from "../objects/sprite/Sprite.js";
 import {DefaultLoadingManager, FileLoader} from "three";
 
 /**

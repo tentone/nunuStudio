@@ -122,7 +122,7 @@ import {AnimationMixer} from "./animation/AnimationMixer.js";
 import {Text} from "../editor/components/Text.js";
 import {Canvas} from "../editor/components/Canvas.js";
 
-
+/*
 // Runtime libs
 include("lib/three/three.js");
 
@@ -350,3 +350,4 @@ include("source/core/utils/MathUtils.js");
 include("source/core/utils/ObjectUtils.js");
 include("source/core/utils/PhysicsGenerator.js");
 include("source/core/utils/UnitConverter.js");
+*/

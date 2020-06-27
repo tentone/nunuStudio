@@ -1,30 +1,47 @@
 import {VideoTexture} from "../core/texture/VideoTexture.js";
 import {Texture} from "../core/texture/Texture.js";
-import {CubeTexture} from "../core/texture/CubeTexture.js";
 import {CompressedTexture} from "../core/texture/CompressedTexture.js";
 import {Video} from "../core/resources/Video.js";
 import {TextFile} from "../core/resources/TextFile.js";
-import {Resource} from "../core/resources/Resource.js";
-import {Model} from "../core/resources/Model.js";
 import {Image} from "../core/resources/Image.js";
 import {Font} from "../core/resources/Font.js";
 import {Audio} from "../core/resources/Audio.js";
 import {SpineAnimation} from "../core/objects/spine/SpineAnimation.js";
-import {Scene} from "../core/objects/Scene.js";
 import {Container} from "../core/objects/misc/Container.js";
 import {Nunu} from "../core/Nunu.js";
-import {TextureLoader} from "../core/loaders/TextureLoader.js";
-import {Key} from "../core/input/Key.js";
 import {FileSystem} from "../core/FileSystem.js";
 import {AddResourceAction} from "./history/action/resources/AddResourceAction.js";
-import {Action} from "./history/action/Action.js";
 import {Global} from "./Global.js";
 import {Editor} from "./Editor.js";
-import {Text} from "./components/Text.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
-import {Form} from "./components/Form.js";
 import {DocumentBody} from "./components/DocumentBody.js";
-import {LinearFilter, CubeReflectionMapping, DDSLoader, PVRLoader, KTXLoader, TGALoader, WebGLRenderer, BasisTextureLoader, Object3D, GCodeLoader, MTLLoader, OBJLoader, ThreeMFLoader, AWDLoader, AMFLoader, AssimpLoader, AssimpJSONLoader, BabylonLoader, Mesh, MeshPhongMaterial, TDSLoader, ColladaLoader, SkinnedMesh, DRACOLoader, GLTFLoader, PLYLoader, VTKLoader, PRWMLoader, VRMLLoader, FBXLoader, XLoader, AnimationClip, PCDLoader, SVGLoader, MeshBasicMaterial, ShapeBufferGeometry, STLLoader, JSONLoader} from "three";
+import {LinearFilter, CubeReflectionMapping, WebGLRenderer, BasisTextureLoader, Object3D, Mesh, MeshPhongMaterial,  SkinnedMesh, AnimationClip,  MeshBasicMaterial, ShapeBufferGeometry, JSONLoader} from "three";
+import {AMFLoader} from "three/examples/jsm/loaders/AMFLoader";
+import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
+import {PVRLoader} from "three/examples/jsm/loaders/PVRLoader";
+import {KTXLoader} from "three/examples/jsm/loaders/KTXLoader";
+import {TGALoader} from "three/examples/jsm/loaders/TGALoader";
+import {GCodeLoader} from "three/examples/jsm/loaders/GCodeLoader";
+import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
+import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
+import {ThreeMFLoader} from "three/examples/jsm/loaders/3MFLoader";
+import {AssimpLoader} from "three/examples/jsm/loaders/AssimpLoader";
+import {TDSLoader} from "three/examples/jsm/loaders/TDSLoader";
+import {ColladaLoader} from "three/examples/jsm/loaders/ColladaLoader";
+import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import {PLYLoader} from "three/examples/jsm/loaders/PLYLoader";
+import {VTKLoader} from "three/examples/jsm/loaders/VTKLoader";
+import {PRWMLoader} from "three/examples/jsm/loaders/PRWMLoader";
+import {VRMLLoader} from "three/examples/jsm/loaders/VRMLLoader";
+import {FBXLoader} from "three/examples/jsm/loaders/FBXLoader";
+import {XLoader} from "three/examples/jsm/loaders/XLoader";
+import {STLLoader} from "three/examples/jsm/loaders/STLLoader";
+import {PCDLoader} from "three/examples/jsm/loaders/PCDLoader";
+import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
+// import {AWDLoader} from "three/examples/jsm/loaders/AWDLoader";
+// import {AssimpJSONLoader} from "three/examples/jsm/loaders/AssimpJSONLoader";
+// import {BabylonLoader} from "three/examples/jsm/loaders/BabylonLoader";
 
 function Loaders() {}
 
@@ -436,7 +453,7 @@ Loaders.loadModel = function(file, parent)
 			reader.readAsArrayBuffer(file);
 		}
 		// AWD
-		else if(extension === "awd")
+		/* else if(extension === "awd")
 		{
 			var reader = new FileReader();
 			reader.onload = function()
@@ -456,7 +473,7 @@ Loaders.loadModel = function(file, parent)
 				}
 			};
 			reader.readAsArrayBuffer(file);
-		}
+		} */
 		// AMF
 		else if(extension === "amf")
 		{
@@ -500,7 +517,7 @@ Loaders.loadModel = function(file, parent)
 			reader.readAsArrayBuffer(file);
 		}
 		// Assimp JSON
-		else if(name.endsWith(".assimp.json"))
+		/*else if(name.endsWith(".assimp.json"))
 		{
 			var reader = new FileReader();
 			reader.onload = function()
@@ -520,9 +537,9 @@ Loaders.loadModel = function(file, parent)
 				}
 			};
 			reader.readAsText(file);
-		}
+		}*/
 		// Babylon
-		else if(extension === "babylon")
+		/*else if(extension === "babylon")
 		{
 			var reader = new FileReader();
 			reader.onload = function()
@@ -550,7 +567,7 @@ Loaders.loadModel = function(file, parent)
 				}
 			};
 			reader.readAsText(file);
-		}
+		}*/
 		// Blender
 		else if(extension === "blend")
 		{	

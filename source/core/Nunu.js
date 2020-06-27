@@ -465,7 +465,6 @@ Nunu.runningOnDesktop = function()
 	return window.nw !== undefined;
 };
 
-
 /**
  * Open a webpage on a new window.
  *

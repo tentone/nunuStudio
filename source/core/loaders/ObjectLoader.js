@@ -1,12 +1,5 @@
-import {Texture} from "../texture/Texture.js";
-import {Video} from "../resources/Video.js";
 import {TextFile} from "../resources/TextFile.js";
 import {ResourceContainer} from "../resources/ResourceContainer.js";
-import {Resource} from "../resources/Resource.js";
-import {Model} from "../resources/Model.js";
-import {Image} from "../resources/Image.js";
-import {Font} from "../resources/Font.js";
-import {Audio} from "../resources/Audio.js";
 import {EffectComposer} from "../postprocessing/EffectComposer.js";
 import {TextSprite} from "../objects/text/TextSprite.js";
 import {TextMesh} from "../objects/text/TextMesh.js";
@@ -48,12 +41,7 @@ import {ImageLoader} from "./ImageLoader.js";
 import {GeometryLoader} from "./GeometryLoader.js";
 import {FontLoader} from "./FontLoader.js";
 import {AudioLoader} from "./AudioLoader.js";
-import {Key} from "../input/Key.js";
-
-
-
 import {DefaultLoadingManager, FileLoader, Skeleton, Color, Fog, FogExp2, BufferAttribute, LOD, Line, LineLoop, LineSegments, Points, Bone, AnimationClip} from "three";
-
 
 /**
  * Objectloader can be used to load external objects from files.

@@ -1,4 +1,3 @@
-import {Texture} from "../texture/Texture.js";
 import {DefaultLoadingManager, MaterialLoader as TMaterialLoader} from "three";
 
 /**
