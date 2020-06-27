@@ -16,7 +16,7 @@ import {Editor} from "../Editor.js";
 import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
-import {StaticPair} from "pson";
+import {StaticPair} from "@as-com/pson";
 import {BufferGeometry, Geometry} from "three";
 import {SimplifyModifier} from "three/examples/jsm/modifiers/SimplifyModifier";
 import {SubdivisionModifier} from "three/examples/jsm/modifiers/SubdivisionModifier";

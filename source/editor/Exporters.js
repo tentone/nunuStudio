@@ -2,7 +2,7 @@ import {Base64Utils} from "../core/utils/binary/Base64Utils.js";
 import {FileSystem} from "../core/FileSystem.js";
 import {Global} from "./Global.js";
 import {Editor} from "./Editor.js";
-import {StaticPair} from "pson";
+import {StaticPair} from "@as-com/pson";
 
 /**
  * Responsable for package and export of project data to different platforms.

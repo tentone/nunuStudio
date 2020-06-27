@@ -1,4 +1,3 @@
-
 /**
  * ByteArrayUtils contains methods to convert from and to ByteArray binary format
  * 

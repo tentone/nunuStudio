@@ -1,6 +1,4 @@
 
-
-
 /**
  * Base64Utils contains methods to convert from and to Base64 binary format.
  *

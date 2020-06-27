@@ -86,9 +86,9 @@ Nunu.CORDOVA = 202;
  * If not target is specified window is used.
  *
  * @static
- * @method importFrom
+ * @method copyNamespace
  */
-Nunu.importFrom = function(namespace, target)
+Nunu.copyNamespace = function(namespace, target)
 {
 	if(target === undefined)
 	{
@@ -103,9 +103,6 @@ Nunu.importFrom = function(namespace, target)
 		}
 	}
 };
-
-Nunu.importFrom(THREE);
-Nunu.importFrom(CANNON);
 
 /**
  * Check if nunu if running in development mode.

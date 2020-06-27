@@ -1,5 +1,3 @@
-
-
 /**
  * ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format
  * 

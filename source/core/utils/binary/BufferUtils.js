@@ -1,5 +1,3 @@
-
-
 /**
  * BufferUtils contains methods to convert from and to Node.js Buffer binary format
  * 
