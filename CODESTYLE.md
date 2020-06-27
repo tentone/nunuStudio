@@ -10,14 +10,12 @@
 
 
 
-## JavaScript
+# JavaScript
 
 ### Formatting
 
 - Code should be indented using tabs (don't use spaces for indentation).
   - Allows each development to configure its IDE to display spacing as preferred.
-
-
 
 ### Naming
 
@@ -113,7 +111,7 @@ That does not represent documentation.
 
 ### Documentation
 
-- Documentation is done using JSDoc format.
+- Documentation is done using `JSDoc` format.
 - JSDoc supports many HTML tags, like `<code>, <pre>, <tt>, <strong>, <ul>, <ol>, <li>, <a>`,  this means that plaintext formatting is not respected. So, don't rely on whitespace to format JSDoc.
 - Every methods, properties and attributes of Classes, Types, Enums, Interfaces, etc. public or private needs to be documented.
 - The only exception is for getters, setters that don't have any code logic associated and inherited properties.
@@ -589,7 +587,7 @@ if (error === null || error === undefined)
 
 
 
-## GLSL
+# GLSL
 
 - Declare all the GLSL code inline on your JavaScript code. Use multiline strings to write the code. Keep the GLSL at the same block level as your JavaScript code.
 - Be careful when writing your strings. Always place line breaks between statements they are necessary for pre-processing code and may lead to compile errors if not placed properly.
@@ -649,12 +647,12 @@ v0 = (v1 * f0) * f1;
 v0 = v1 * (f0 * f1);
 ```
 
-- Avoid Computing Array Indices in Shaders
+- Avoid Computing Array Indices in shaders
   - Using indices computed in the shader is more expensive than a constant or uniform array index.
 
 
 
-## HTML
+# HTML
 
 - All HTML code must be valid and well formed.
 - You must validate it against the HTML specification pertaining to the project you are working on.
@@ -748,12 +746,12 @@ v0 = v1 * (f0 * f1);
 
 
 
-## References
+# References
 
 - Here are a couple of references that may be useful. Some of them were used as base for the style described in this document.
-- Couple of articles regarding javascript ES5 patterns
-  - http://bguiz.github.io/js-standards/intro/
-  - https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
+- Couple of articles regarding JavaScript ES5 patterns
+  - [ECMAScript 5.1 and ECMAScript 6](http://bguiz.github.io/js-standards/intro/)
+  - [Classical inheritance in JavaScript ES5](https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5)
 - [Google Javascript Guide](https://google.github.io/styleguide/javascriptguide.xml)
 - [Khronos OpenGL GLSL recommendations](https://www.khronos.org/opengl/wiki/GLSL_:_recommendations)
 - [Apple OpenGL ES Best Practices for Shaders](https://developer.apple.com/library/archive/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/BestPracticesforShaders/BestPracticesforShaders.html)
