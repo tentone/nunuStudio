@@ -1,44 +1,25 @@
 const Path = require("path");
 const Webpack = require('webpack');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const context = Path.resolve(__dirname, ".");
-const src = context + "/src";
-const dist = context + "/docs";
+const source = context + "/source";
+const output = context + "/dist";
 
 module.exports = {
-	context: src,
+	context: source,
+	entry: ["./index.js"],
+	target: "web",
+	resolve: {
+		modules: [source, "node_modules"]
+	},
 	output: {
 		filename: "bundle.js",
-		path: dist
-	},
-	resolve: {
-		modules: [src, "node_modules"]
+		path: output
 	},
 	plugins: [
+		new HtmlWebpackPlugin({template: Path.resolve(__dirname, '../../src', 'index.html'), filename: "index.html"}),
 		new Webpack.ProgressPlugin(),
 	],
-	module: {
-		rules: [
-			// JS Code
-			{
-				test: /\.(js)$/,
-				exclude: /(node_modules)/,
-				loader: "babel-loader"
-			},
-			// HTML Files
-			{
-				test: /\.html$/,
-				loader: "html-loader"
-			},
-			// Images
-			{
-				test: /\.(png|svg|jpg|gif|jpeg|css)$/,
-				loader: "file-loader",
-				options: {
-					emitFile: true,
-					esModule: false,
-					name: '[name].[ext]',
-				},
-			}
-		],
-	}
+	module: {}
 };

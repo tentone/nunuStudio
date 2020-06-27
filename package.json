@@ -10,8 +10,8 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"rollup-editor": "rollup -c rollup.editor.js",
-		"rollup-runtime": "rollup -c rollup.runtime.js",
+		"webpack-editor-build": "webpack --config webpack.prod.js",
+		"webpack-editor-start": "webpack-dev-server --open --config webpack.dev.js",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"serve": "http-server . -p 8080 --cors -o",
 		"serve-page": "http-server ./docs -p 8081 --cors -o",
@@ -47,11 +47,9 @@
 	"devDependencies": {
 		"cordova": "~9.0.0",
 		"nwjs-builder-phoenix": "^1.15.0",
-		"http-server": "0.12.3",
 		"yuidocjs": "^0.10.2",
-		"google-closure-compiler": "^20200426.0.0",
 		"uglify-js": "^3.9.2",
-		"rollup": "^2.9.1",
+		"uglifyjs-webpack-plugin": "^2.2.0",
 		"html-loader": "^1.1.0",
 		"html-webpack-plugin": "latest",
 		"webpack": "^4.42.1",
