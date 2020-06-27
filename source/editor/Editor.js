@@ -32,9 +32,11 @@ import {Interface} from "./gui/Interface.js";
 import {Global} from "./Global.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
-import {StaticPair} from "pson";
 import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
 
+import PSON from "../../lib/pson/PSON.min.js";
+import "../../lib/pson/bytebuffer.min.js";
+import "../../lib/pson/long.min.js";
 
 /**
  * nunuStudio main editor entry point. 
@@ -970,7 +972,7 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		{
 			fname = fname.replace(".isp", ".nsp");
 
-			var pson = new StaticPair();
+			var pson = new PSON.StaticPair();
 			var data = pson.toArrayBuffer(Editor.program.toJSON());
 			FileSystem.writeFileArrayBuffer(fname, data);
 		}
