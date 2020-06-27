@@ -1,3 +1,4 @@
+/*
 import {WorkerTask} from "../core/utils/worker/WorkerTask.js";
 import {WorkerPool} from "../core/utils/worker/WorkerPool.js";
 import {UnitConverter} from "../core/utils/UnitConverter.js";
@@ -967,3 +968,5 @@ include("source/editor/history/action/resources/SwapResourceAction.js");
 include("source/editor/Settings.js");
 include("source/editor/Exporters.js");
 include("source/editor/Loaders.js");
+
+*/

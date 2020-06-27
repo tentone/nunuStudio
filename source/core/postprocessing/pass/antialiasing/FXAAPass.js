@@ -1,6 +1,5 @@
 import {ShaderPass} from "../../ShaderPass.js";
-import {Pass} from "../../Pass.js";
-import {FXAAShader} from "three";
+import {FXAAShader} from "three/examples/jsm/shaders/FXAAShader";
 
 /**
  * Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.

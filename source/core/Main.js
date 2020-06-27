@@ -1,3 +1,4 @@
+/*
 import {WorkerTask} from "./utils/worker/WorkerTask.js";
 import {WorkerPool} from "./utils/worker/WorkerPool.js";
 import {UnitConverter} from "./utils/UnitConverter.js";
@@ -122,7 +123,7 @@ import {AnimationMixer} from "./animation/AnimationMixer.js";
 import {Text} from "../editor/components/Text.js";
 import {Canvas} from "../editor/components/Canvas.js";
 
-/*
+
 // Runtime libs
 include("lib/three/three.js");
 

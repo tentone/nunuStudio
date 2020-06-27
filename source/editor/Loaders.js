@@ -15,7 +15,8 @@ import {Global} from "./Global.js";
 import {Editor} from "./Editor.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
-import {LinearFilter, CubeReflectionMapping, WebGLRenderer, BasisTextureLoader, Object3D, Mesh, MeshPhongMaterial,  SkinnedMesh, AnimationClip,  MeshBasicMaterial, ShapeBufferGeometry, JSONLoader} from "three";
+import {LinearFilter, CubeReflectionMapping, WebGLRenderer, Object3D, Mesh, SkinnedMesh, AnimationClip,  MeshBasicMaterial, ShapeBufferGeometry, JSONLoader} from "three";
+import {BasisTextureLoader} from "three/examples/jsm/loaders/BasisTextureLoader";
 import {AMFLoader} from "three/examples/jsm/loaders/AMFLoader";
 import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
 import {PVRLoader} from "three/examples/jsm/loaders/PVRLoader";
@@ -887,7 +888,6 @@ Loaders.loadModel = function(file, parent)
 				for(var i = 0; i < baseAnime.hierarchy.length; i++)
 				{
 					var firstKey = -1;
-					var lastKey = -1;
 
 					var frame = {};
 					frame.name = baseAnime.hierarchy[i].name;

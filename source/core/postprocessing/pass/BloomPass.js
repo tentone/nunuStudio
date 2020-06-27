@@ -1,7 +1,7 @@
-import {Image} from "../../resources/Image.js";
 import {Pass} from "../Pass.js";
-import {Scene} from "../../objects/Scene.js";
-import {ConvolutionShader, CopyShader, WebGLRenderTarget, UniformsUtils, ShaderMaterial, AdditiveBlending, Vector2} from "three";
+import {WebGLRenderTarget, UniformsUtils, ShaderMaterial, AdditiveBlending, Vector2} from "three";
+import {ConvolutionShader} from "three/examples/jsm/shaders/ConvolutionShader";
+import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
 
 /**
  * Simple bloom effect pass.

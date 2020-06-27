@@ -1,8 +1,6 @@
 import {Pass} from "../Pass.js";
-import {Scene} from "../../objects/Scene.js";
-import {Mesh} from "../../objects/mesh/Mesh.js";
-
-import {AfterimageShader, UniformsUtils, WebGLRenderTarget, LinearFilter, NearestFilter, RGBAFormat, ShaderMaterial, MeshBasicMaterial} from "three";
+import {UniformsUtils, WebGLRenderTarget, LinearFilter, NearestFilter, RGBAFormat, ShaderMaterial, MeshBasicMaterial} from "three";
+import {AfterimageShader} from "three/examples/jsm/shaders/AfterimageShader";
 
 /**
  * After image render pass blends the current frame with the previous frame.

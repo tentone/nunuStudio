@@ -1,5 +1,3 @@
-import {Scene} from "../Scene.js";
-import {CubeCamera} from "../cameras/CubeCamera.js";
 import {LightProbe as TLightProbe, WebGLRenderer, RGBAFormat, LinearFilter, Light} from "three";
 import {LightProbeGenerator} from "three/examples/jsm/lights/LightProbeGenerator";
 
