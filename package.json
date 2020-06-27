@@ -10,7 +10,7 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"webpack-editor-build": "webpack --config webpack.prod.js",
+		"webpack": "webpack --config webpack.config.js",
 		"webpack-editor-start": "webpack-dev-server --open --config webpack.dev.js",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"serve": "http-server . -p 8080 --cors -o",

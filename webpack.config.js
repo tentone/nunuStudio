@@ -8,8 +8,27 @@ const output = context + "/dist";
 
 module.exports = {
 	context: source,
-	entry: ["./index.js"],
+	entry: [source + "/Main.js"],
 	target: "web",
+	devtool: "inline-source-map",
+	mode: "development",
+	plugins: [
+		new HtmlWebpackPlugin({template: source + "/index.html", filename: "index.html"}),
+		new Webpack.ProgressPlugin(),
+		// new Webpack.NamedModulesPlugin(),
+		// new Webpack.HotModuleReplacementPlugin()
+	],
+    optimization: {
+        minimize: false
+	},
+	/*devServer: {
+        contentBase: Path.join(__dirname, "dist"),
+        compress: false,
+        historyApiFallback: true,
+        hot: true,
+        https: false,
+        noInfo: false
+    },*/
 	resolve: {
 		modules: [source, "node_modules"]
 	},
@@ -17,9 +36,5 @@ module.exports = {
 		filename: "bundle.js",
 		path: output
 	},
-	plugins: [
-		new HtmlWebpackPlugin({template: Path.resolve(__dirname, '../../src', 'index.html'), filename: "index.html"}),
-		new Webpack.ProgressPlugin(),
-	],
 	module: {}
 };
