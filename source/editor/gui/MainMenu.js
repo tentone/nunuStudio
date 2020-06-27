@@ -17,7 +17,15 @@ import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
 import {StaticPair} from "pson";
-import {OBJExporter, GLTFExporter, DRACOExporter, ColladaExporter, PLYExporter, STLExporter, BufferGeometry, Geometry, SimplifyModifier, SubdivisionModifier} from "three";
+import {BufferGeometry, Geometry} from "three";
+import {SimplifyModifier} from "three/examples/jsm/modifiers/SimplifyModifier";
+import {SubdivisionModifier} from "three/examples/jsm/modifiers/SubdivisionModifier";
+import {OBJExporter} from "three/examples/jsm/exporters/OBJExporter";
+import {GLTFExporter} from "three/examples/jsm/exporters/GLTFExporter";
+import {DRACOExporter} from "three/examples/jsm/exporters/DRACOExporter";
+import {ColladaExporter} from "three/examples/jsm/exporters/ColladaExporter";
+import {PLYExporter} from "three/examples/jsm/exporters/PLYExporter";
+import {STLExporter} from "three/examples/jsm/exporters/STLExporter";
 
 /**
  * Main menu of the application is displayed on top of the window, contains all global operations that can be applied to the project.
