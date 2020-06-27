@@ -7,15 +7,12 @@ import {Font} from "../../core/resources/Font.js";
 import {Audio} from "../../core/resources/Audio.js";
 import {TextSprite} from "../../core/objects/text/TextSprite.js";
 import {TextBitmap} from "../../core/objects/text/TextBitmap.js";
-import {Sprite} from "../../core/objects/sprite/Sprite.js";
 import {SpineAnimation} from "../../core/objects/spine/SpineAnimation.js";
 import {ParticleEmitter} from "../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../core/objects/misc/LensFlare.js";
-import {Container} from "../../core/objects/misc/Container.js";
 import {Editor} from "../Editor.js";
-import {Text} from "../components/Text.js";
-import {Texture, Materials, Object3D, Material, MultiMaterial, Mesh, SkinnedMesh, BufferGeometry, Geometry} from "three";
+import {Texture, Object3D, Material, MultiMaterial, Mesh, SkinnedMesh, BufferGeometry, Geometry} from "three";
 
 /**
  * Resource utils contains multiple tools to manipulate data in the resource manager on the editor.
@@ -108,13 +105,7 @@ ResourceCrawler.swapResource = function(manager, category, oldResource, newResou
 ResourceCrawler.removeDuplicated = function(object)
 {
 	// Check if two resources are similar
-	function areEqual(a, b)
-	{
-		// TODO <ADD CODE HERE>
-	}
 
-	var textures = [];
-	var materials = [];
 
 	// Fetch resources to be optimized
 	ResourceCrawler.traverseDeep(object, function(value)
@@ -123,7 +114,7 @@ ResourceCrawler.removeDuplicated = function(object)
 		{
 
 		}
-		else if(value instanceof Materials)
+		else if(value instanceof Material)
 		{
 
 		}

@@ -1,16 +1,12 @@
-import {Settings} from "../../../Settings.js";
 import {UnitsSettingsTab} from "./UnitsSettingsTab.js";
 import {RenderSettingsTab} from "./RenderSettingsTab.js";
 import {JSHintSettingsTab} from "./JSHintSettingsTab.js";
 import {GeneralSettingsTab} from "./GeneralSettingsTab.js";
 import {EditorSettingsTab} from "./EditorSettingsTab.js";
 import {CodeSettingsTab} from "./CodeSettingsTab.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
-import {Editor} from "../../../Editor.js";
 import {TabGroup} from "../../../components/tabs/TabGroup.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {Component} from "../../../components/Component.js";
 
 
 function SettingsTab(parent, closeable, container, index)

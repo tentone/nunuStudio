@@ -1,4 +1,3 @@
-import {Scene} from "../../../../core/objects/Scene.js";
 import {AddAction} from "./AddAction.js";
 import {Action} from "../Action.js";
 import {Editor} from "../../../Editor.js";

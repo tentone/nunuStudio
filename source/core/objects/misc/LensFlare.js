@@ -1,8 +1,6 @@
 import {Texture} from "../../texture/Texture.js";
-import {Viewport} from "../cameras/Viewport.js";
-
-
-import {Mesh, Lensflare, MeshBasicMaterial, Vector3, DataTexture, RGBFormat, NearestFilter, ClampToEdgeWrapping, RawShaderMaterial, LensflareElement, Color, Vector2, AdditiveBlending, Box2, Vector4, Object3D} from "three";
+import {Mesh, MeshBasicMaterial, Vector3, DataTexture, RGBFormat, NearestFilter, ClampToEdgeWrapping, RawShaderMaterial, Color, Vector2, AdditiveBlending, Box2, Vector4, Object3D} from "three";
+import {Lensflare as TLensflare, LensflareElement} from "three/examples/jsm/objects/Lensflare";
 
 /**
  * LensFlare object can be used to simulate lens flare from lights.
@@ -22,7 +20,7 @@ import {Mesh, Lensflare, MeshBasicMaterial, Vector3, DataTexture, RGBFormat, Nea
  */
 function LensFlare()
 {
-	Mesh.call(this, Lensflare.Geometry, new MeshBasicMaterial({opacity: 0, transparent: true}));
+	Mesh.call(this, TLensflare.Geometry, new MeshBasicMaterial({opacity: 0, transparent: true}));
 
 	this.name = "lensflare";
 	this.type = "LensFlare";
@@ -53,8 +51,8 @@ function LensFlare()
 	occlusionMap.needsUpdate = true;
 
 	// material
-	var geometry = Lensflare.Geometry;
-	var shader = Lensflare.Shader;
+	var geometry = TLensflare.Geometry;
+	var shader = TLensflare.Shader;
 	var material1a = new RawShaderMaterial(
 	{
 		uniforms:

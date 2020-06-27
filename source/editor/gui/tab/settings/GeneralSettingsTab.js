@@ -1,22 +1,13 @@
-import {Scene} from "../../../../core/objects/Scene.js";
 import {Nunu} from "../../../../core/Nunu.js";
 import {ThemeManager} from "../../../theme/ThemeManager.js";
-import {Settings} from "../../../Settings.js";
-import {History} from "../../../history/History.js";
-import {SettingsTab} from "./SettingsTab.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {NumberBox} from "../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
-import {Form} from "../../../components/Form.js";
-import {Component} from "../../../components/Component.js";
 import {ButtonText} from "../../../components/buttons/ButtonText.js";
-import {Button} from "../../../components/buttons/Button.js";
 
 
 function GeneralSettingsTab(parent, closeable, container, index)

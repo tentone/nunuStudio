@@ -1,5 +1,4 @@
 import {Action} from "../Action.js";
-import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {Object3D, Matrix4} from "three";
 

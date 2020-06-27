@@ -1,10 +1,8 @@
 import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
 import {Resource} from "./Resource.js";
-import {TextMesh} from "../objects/text/TextMesh.js";
-import {Mesh} from "../objects/mesh/Mesh.js";
 import {FileSystem} from "../FileSystem.js";
-
-import {TTFLoader, ShapePath, ShapeUtils} from "three";
+import {ShapePath, ShapeUtils} from "three";
+import {TTFLoader} from "three/examples/jsm/loaders/TTFLoader";
 
 /**
  * Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64).

@@ -1,5 +1,6 @@
 import {Shape, Box, Vec3, ConvexPolyhedron, Cylinder, Quaternion as CQuaternion, Sphere, Trimesh} from "cannon";
-import {Vector3, QuickHull, BufferGeometry, Geometry, Quaternion as TQuaternion, Matrix4, Mesh} from "three";
+import {Vector3, BufferGeometry, Geometry, Quaternion as TQuaternion, Matrix4, Mesh} from "three";
+import {ConvexHull} from "three/examples/jsm/math/ConvexHull"
 
 /**
  * Physics generator is used to create Cannon.js shapes from three.js geometries.
@@ -154,7 +155,7 @@ PhysicsGenerator.createBoundingBoxShape = function(object)
  */
 PhysicsGenerator.createConvexPolyhedron = function(object)
 {
-	var quickhull = new QuickHull();
+	var quickhull = new ConvexHull();
 	quickhull.setFromObject(object);
 
 	var vertices = [];

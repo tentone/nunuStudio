@@ -1,14 +1,8 @@
-import {Texture} from "../../../../core/texture/Texture.js";
 import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
-import {Image} from "../../../../core/resources/Image.js";
-import {Container} from "../../../../core/objects/misc/Container.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
-import {TextureEditor} from "./TextureEditor.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
@@ -16,13 +10,9 @@ import {TextBox} from "../../../components/input/TextBox.js";
 import {ImageChooser} from "../../../components/input/ImageChooser.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
-import {Form} from "../../../components/Form.js";
 import {Division} from "../../../components/Division.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Component} from "../../../components/Component.js";
-import {Canvas} from "../../../components/Canvas.js";
 import {Scene, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
-
 
 function CubeTextureEditor(parent, closeable, container, index)
 {

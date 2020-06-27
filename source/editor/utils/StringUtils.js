@@ -1,4 +1,3 @@
-
 /**
  * String utils contains auxiliar methods for string manipulation.
  *

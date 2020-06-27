@@ -1,6 +1,4 @@
 import {Base64Utils} from "../core/utils/binary/Base64Utils.js";
-import {Pass} from "../core/postprocessing/Pass.js";
-import {Program} from "../core/objects/Program.js";
 import {FileSystem} from "../core/FileSystem.js";
 import {Global} from "./Global.js";
 import {Editor} from "./Editor.js";
@@ -153,7 +151,6 @@ Exporters.exportNWJSProject = function(dir, target)
 
 	// Build application
 	var system = window.require("child_process");
-	var output = system.execSync("build --mirror https:// dl.nwjs.io/ --with-ffmpeg --tasks " + target + " " + Exporters.TEMP);
 
 	// Delete temporary folders
 	if(FileSystem.fileExists(Exporters.TEMP))

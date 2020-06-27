@@ -1,16 +1,8 @@
-import {UnitConverter} from "../core/utils/UnitConverter.js";
 import {LocalStorage} from "../core/utils/LocalStorage.js";
 import {RendererConfiguration} from "../core/renderer/RendererConfiguration.js";
-import {Script} from "../core/objects/script/Script.js";
-import {Program} from "../core/objects/Program.js";
 import {Viewport} from "../core/objects/cameras/Viewport.js";
 import {Nunu} from "../core/Nunu.js";
-import {Mouse} from "../core/input/Mouse.js";
 import {FileSystem} from "../core/FileSystem.js";
-import {Interface} from "./gui/Interface.js";
-import {Global} from "./Global.js";
-import {Editor} from "./Editor.js";
-
 
 /** 
  * Settings store all user configurable settings of the editor.

@@ -1,12 +1,8 @@
 import {Texture} from "../../../../core/texture/Texture.js";
-import {Container} from "../../../../core/objects/misc/Container.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
-import {Action} from "../../../history/action/Action.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
@@ -15,12 +11,8 @@ import {TextBox} from "../../../components/input/TextBox.js";
 import {NumberBox} from "../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
-import {Form} from "../../../components/Form.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Component} from "../../../components/Component.js";
-import {Canvas} from "../../../components/Canvas.js";
-import {Scene, RepeatWrapping, Nearest, PlaneBufferGeometry, Mesh, MeshBasicMaterial, ClampToEdgeWrapping, MirroredRepeatWrapping, NearestFilter, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
-
+import {Scene, RepeatWrapping, NearestFilter, PlaneBufferGeometry, Mesh, MeshBasicMaterial, ClampToEdgeWrapping, MirroredRepeatWrapping, LinearFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter} from "three";
 
 function TextureEditor(parent, closeable, container, index)
 {
@@ -49,8 +41,8 @@ function TextureEditor(parent, closeable, container, index)
 	var alpha = new Texture(Global.FILE_PATH + "alpha.png");
 	alpha.wrapS = RepeatWrapping;
 	alpha.wrapT = RepeatWrapping;
-	alpha.magFilter = Nearest;
-	alpha.minFilter = Nearest;
+	alpha.magFilter = NearestFilter;
+	alpha.minFilter = NearestFilter;
 	alpha.repeat.set(400, 400);
 	
 	var geometry = new PlaneBufferGeometry(1, 1);

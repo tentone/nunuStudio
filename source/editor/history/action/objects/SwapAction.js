@@ -3,7 +3,6 @@ import {AddAction} from "./AddAction.js";
 import {Action} from "../Action.js";
 import {Object3D} from "three";
 
-
 /**
  * Swap an object for another one.
  *

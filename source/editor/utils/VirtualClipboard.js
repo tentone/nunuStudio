@@ -1,5 +1,3 @@
-
-
 /**
  * Alternative to node clipboard to enable simple copy paste inside the editor web version.
  *

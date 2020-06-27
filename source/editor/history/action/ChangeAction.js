@@ -1,6 +1,5 @@
 import {Action} from "./Action.js";
 import {Editor} from "../../Editor.js";
-import {Text} from "../../components/Text.js";
 import {Material, Texture, Quaternion} from "three";
 
 /**

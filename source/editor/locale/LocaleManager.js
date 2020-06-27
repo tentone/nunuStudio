@@ -1,5 +1,3 @@
-
-
 /**
  * LocaleManager is used to manager multime locale configuration available.
  *

@@ -5,7 +5,7 @@ import {ColorChooser} from "../../../components/input/ColorChooser.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
 import {Component} from "../../../components/Component.js";
-import {InterpolateLinear, Smooth, InterpolateDiscrete} from "three";
+import {InterpolateLinear, InterpolateSmooth, InterpolateDiscrete} from "three";
 
 /**
  * Button displyed on the left side that shows the attribute track being edited.
@@ -154,7 +154,7 @@ function AnimationTrackButton(parent, editor, animation, track, trackTimeline)
 	this.interpolation.updatePosition(Component.TOP_RIGHT);
 	this.interpolation.updateSize();
 	this.interpolation.addValue(Locale.linear, InterpolateLinear);
-	this.interpolation.addValue(Locale.smooth, Smooth);
+	this.interpolation.addValue(Locale.smooth, InterpolateSmooth);
 	this.interpolation.addValue("Discrete", InterpolateDiscrete);
 	this.interpolation.setOnChange(function()
 	{

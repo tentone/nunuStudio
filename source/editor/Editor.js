@@ -1,4 +1,3 @@
-import {Tree} from "../core/utils/struct/Tree.js";
 import {EventManager} from "../core/utils/EventManager.js";
 import {Video} from "../core/resources/Video.js";
 import {TextFile} from "../core/resources/TextFile.js";
@@ -6,16 +5,13 @@ import {Resource} from "../core/resources/Resource.js";
 import {Image} from "../core/resources/Image.js";
 import {Font} from "../core/resources/Font.js";
 import {Audio} from "../core/resources/Audio.js";
-import {Sprite} from "../core/objects/sprite/Sprite.js";
 import {Scene} from "../core/objects/Scene.js";
 import {Program} from "../core/objects/Program.js";
 import {Sky} from "../core/objects/misc/Sky.js";
-import {LensFlare} from "../core/objects/misc/LensFlare.js";
 import {Mesh} from "../core/objects/mesh/Mesh.js";
 import {Nunu} from "../core/Nunu.js";
 import {ObjectLoader} from "../core/loaders/ObjectLoader.js";
 import {Keyboard} from "../core/input/Keyboard.js";
-import {Key} from "../core/input/Key.js";
 import {FileSystem} from "../core/FileSystem.js";
 import {VirtualClipboard} from "./utils/VirtualClipboard.js";
 import {Settings} from "./Settings.js";
@@ -34,9 +30,7 @@ import {RunProject} from "./gui/tab/run/RunProject.js";
 import {CodeEditor} from "./gui/tab/code/CodeEditor.js";
 import {Interface} from "./gui/Interface.js";
 import {Global} from "./Global.js";
-import {Text} from "./components/Text.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
-import {Media} from "./components/media/Media.js";
 import {DocumentBody} from "./components/DocumentBody.js";
 import {StaticPair} from "pson";
 import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
@@ -83,13 +77,13 @@ Editor.initialize = function()
 	document.body.style.fontSize = "var(--font-main-size)";
 	
 	// Disable context menu
-	document.body.oncontextmenu = function(event)
+	document.body.oncontextmenu = function()
 	{
 		return false;
 	};
 
 	// Watch for changes in the screen pixel ratio (drag between screens)
-	window.matchMedia("screen and (min-resolution: 2dppx)").addListener(function(e)
+	window.matchMedia("screen and (min-resolution: 2dppx)").addListener(function()
 	{
 		Editor.resize();
 	});

@@ -6,7 +6,6 @@ import {AnimationClipButton} from "./AnimationClipButton.js";
 import {Editor} from "../../../Editor.js";
 import {Component} from "../../../components/Component.js";
 
-
 /**
  * Animation clip track contains all the elements of an animation track.
  *
