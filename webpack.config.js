@@ -13,7 +13,11 @@ module.exports = {
 	devtool: "inline-source-map",
 	plugins: [
 		new HtmlWebpackPlugin({template: source + "/editor/index.html", filename: "index.html"}),
-		new Webpack.ProgressPlugin()
+		new Webpack.ProgressPlugin(),
+		new Webpack.ProvidePlugin({
+			THREE: "three",
+			"window.THREE": "three"
+		})
 	],
 	resolve: {
 		modules: [source, "node_modules"]

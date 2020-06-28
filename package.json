@@ -50,15 +50,16 @@
 		"cordova": "~9.0.0",
 		"html-loader": "^1.1.0",
 		"html-webpack-plugin": "latest",
+		"imports-loader": "^1.1.0",
 		"nwjs-builder-phoenix": "^1.15.0",
-		"yuidocjs": "^0.10.2",
 		"uglifyjs-webpack-plugin": "^2.2.0",
 		"webpack": "^4.42.1",
 		"webpack-cleanup-plugin": "^0.5.1",
 		"webpack-cli": "^3.3.11",
 		"webpack-dev-server": "^3.10.3",
 		"webpack-merge": "^4.2.2",
-		"webpack-node-externals": "^1.7.2"
+		"webpack-node-externals": "^1.7.2",
+		"yuidocjs": "^0.10.2"
 	},
 	"js-flags": "--stack-size 65500",
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
