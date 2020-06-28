@@ -1,4 +1,5 @@
 import {Texture} from "../../texture/Texture.js";
+import {spine} from "spine-runtimes/spine-ts/build/spine-threejs"
 
 /**
  * Spine animation textures adapted to work with nunuStudio textures.
