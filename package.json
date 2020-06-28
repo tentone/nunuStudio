@@ -44,7 +44,8 @@
 		"@tweenjs/tween.js": "^18.6.0",
 		"cannon": "0.6.2",
 		"three": "^0.117.1",
-		"spine-runtimes": "github:EsotericSoftware/spine-runtimes"
+		"spine-runtimes": "github:EsotericSoftware/spine-runtimes",
+		"js.blend": "github:acweathersby/js.blend"
 	},
 	"devDependencies": {
 		"cordova": "~9.0.0",
