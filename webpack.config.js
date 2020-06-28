@@ -8,7 +8,7 @@ const output = context + "/dist";
 
 module.exports = {
 	context: source,
-	entry: [source + "/editor/Editor.js"],
+	entry: [source + "/editor/Main.js"],
 	target: "web",
 	devtool: "inline-source-map",
 	plugins: [
