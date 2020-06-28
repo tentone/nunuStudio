@@ -8,7 +8,12 @@ module.exports = Merge(common, {
 	devtool: "inline-source-map",
 	mode: "development",
 	optimization: {
-		minimize: false
+		minimize: false,
+		mangleWasmImports: false,
+		namedModules: false,
+		splitChunks: false,
+		runtimeChunk: false,
+		noEmitOnErrors: false,
 	},
 	devServer: {
 		contentBase: Path.join(__dirname, "dist"),

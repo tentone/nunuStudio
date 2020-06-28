@@ -15,9 +15,6 @@ module.exports = {
 		new HtmlWebpackPlugin({template: source + "/editor/index.html", filename: "index.html"}),
 		new Webpack.ProgressPlugin()
 	],
-	optimization: {
-		minimize: false
-	},
 	resolve: {
 		modules: [source, "node_modules"]
 	},
