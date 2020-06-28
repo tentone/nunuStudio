@@ -1,10 +1,8 @@
 import {Texture} from "../../texture/Texture.js";
 import {Image} from "../../resources/Image.js";
 import {SpineTexture} from "./SpineTexture.js";
-import {Mesh} from "../mesh/Mesh.js";
-
 import {Clock, Object3D} from "three";
-
+import * as spine from "../../../../lib/spine-threejs.js";
 
 /**
  * Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.
@@ -258,7 +256,7 @@ SpineAnimation.prototype.toJSON = function(meta)
 	// Store textures
 	var textures = [];
 	var self = this;
-	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta)
 	{
 		for(var i = 0; i < self.textures.length; i++)
 		{
@@ -286,4 +284,5 @@ SpineAnimation.prototype.toJSON = function(meta)
 
 	return data;
 };
+
 export {SpineAnimation};

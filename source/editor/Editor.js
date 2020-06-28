@@ -1,4 +1,4 @@
-import "../../lib/codemirror/codemirror.js"
+/*import "../../lib/codemirror/codemirror.js"
 import "../../lib/codemirror/codemirror.css"
 import "../../lib/codemirror/keymap/sublime.js"
 import "../../lib/codemirror/keymap/emacs.js"
@@ -55,7 +55,7 @@ import "../../lib/jshint.min.js"
 import "../../lib/jscolor.min.js"
 import "../../lib/jszip.min.js"
 import "../../lib/ThreeCSG.js"
-import "../../lib/tween.js"
+import "../../lib/tween.js"*/
 
 import {EventManager} from "../core/utils/EventManager.js";
 import {Video} from "../core/resources/Video.js";

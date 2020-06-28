@@ -43,6 +43,7 @@ import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
 // import {AWDLoader} from "three/examples/jsm/loaders/AWDLoader";
 // import {AssimpJSONLoader} from "three/examples/jsm/loaders/AssimpJSONLoader";
 // import {BabylonLoader} from "three/examples/jsm/loaders/BabylonLoader";
+import JSBLEND from "../../lib/jsblend.js";
 
 function Loaders() {}
 

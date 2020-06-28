@@ -1,4 +1,5 @@
 import {Quaternion} from "three";
+import {TWEEN} from "@tweenjs/tween.js";
 
 /**
  * The intepolator is used to interpolate values between ranges for a period of time.

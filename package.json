@@ -40,9 +40,10 @@
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
 	"dependencies": {
-		"three": "^0.117.1",
+		"@as-com/pson": "3.0.1",
+		"@tweenjs/tween.js": "^18.6.0",
 		"cannon": "0.6.2",
-		"@as-com/pson": "3.0.1"
+		"three": "^0.117.1"
 	},
 	"devDependencies": {
 		"cordova": "~9.0.0",
