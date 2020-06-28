@@ -11,24 +11,13 @@ module.exports = {
 	entry: [source + "/editor/Editor.js"],
 	target: "web",
 	devtool: "inline-source-map",
-	mode: "development",
 	plugins: [
 		new HtmlWebpackPlugin({template: source + "/editor/index.html", filename: "index.html"}),
-		new Webpack.ProgressPlugin(),
-		// new Webpack.NamedModulesPlugin(),
-		// new Webpack.HotModuleReplacementPlugin()
+		new Webpack.ProgressPlugin()
 	],
-    optimization: {
-        minimize: false
+	optimization: {
+		minimize: false
 	},
-	/*devServer: {
-        contentBase: Path.join(__dirname, "dist"),
-        compress: false,
-        historyApiFallback: true,
-        hot: true,
-        https: false,
-        noInfo: false
-    },*/
 	resolve: {
 		modules: [source, "node_modules"]
 	},

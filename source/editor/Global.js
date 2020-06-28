@@ -1,4 +1,3 @@
-
 var Global =
 {
 	FILE_PATH: "./source/files/",
