@@ -2,6 +2,7 @@ import {Pass} from "../Pass.js";
 import {DepthTexture, UnsignedShortType, NearestFilter, MeshNormalMaterial, NoBlending, WebGLRenderTarget, LinearFilter, RGBAFormat, ShaderMaterial, UniformsUtils, DstColorFactor, ZeroFactor, AddEquation, DstAlphaFactor, Vector3, Math, DataTexture, LuminanceFormat, FloatType, RepeatWrapping, CustomBlending} from "three";
 import {SSAOShader, SSAOBlurShader} from "three/examples/jsm/shaders/SSAOShader";
 import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
+import {SimplexNoise} from "../../utils/SimplexNoise.js";
 
 /**
  * Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.

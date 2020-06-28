@@ -26,6 +26,7 @@ import {DRACOExporter} from "three/examples/jsm/exporters/DRACOExporter";
 import {ColladaExporter} from "three/examples/jsm/exporters/ColladaExporter";
 import {PLYExporter} from "three/examples/jsm/exporters/PLYExporter";
 import {STLExporter} from "three/examples/jsm/exporters/STLExporter";
+import {ThreeBSP} from "../../core/utils/ThreeBSP.js";
 
 /**
  * Main menu of the application is displayed on top of the window, contains all global operations that can be applied to the project.

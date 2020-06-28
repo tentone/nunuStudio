@@ -1,17 +1,7 @@
-var __extends = (this && this.__extends) || (function () {
-	var extendStatics = function (d, b) {
-		extendStatics = Object.setPrototypeOf ||
-			({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-			function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-		return extendStatics(d, b);
-	};
-	return function (d, b) {
-		extendStatics(d, b);
-		function __() { this.constructor = d; }
-		d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-})();
+import {BufferGeometry, InterleavedBuffer, InterleavedBufferAttribute, BufferAttribute, Material, Mesh, DoubleSide, ShaderMaterial, Object3D, Texture, LinearFilter, LinearMipMapLinearFilter, LinearMipMapNearestFilter, NearestMipMapLinearFilter, NearestMipMapNearestFilter, NearestFilter, ClampToEdgeWrapping, MirroredRepeatWrapping, RepeatWrapping} from "three";
+
 var spine;
+
 (function (spine) {
 	var Animation = (function () {
 		function Animation(name, timelines, duration) {
@@ -8184,13 +8174,13 @@ var spine;
 					throw new Error("Can't have more than 10920 triangles per batch: " + maxVertices);
 				var vertices = _this.vertices = new Float32Array(maxVertices * MeshBatcher.VERTEX_SIZE);
 				var indices = _this.indices = new Uint16Array(maxVertices * 3);
-				var geo = new THREE.BufferGeometry();
-				var vertexBuffer = _this.vertexBuffer = new THREE.InterleavedBuffer(vertices, MeshBatcher.VERTEX_SIZE);
+				var geo = new BufferGeometry();
+				var vertexBuffer = _this.vertexBuffer = new InterleavedBuffer(vertices, MeshBatcher.VERTEX_SIZE);
 				vertexBuffer.usage = WebGLRenderingContext.DYNAMIC_DRAW;
-				geo.setAttribute("position", new THREE.InterleavedBufferAttribute(vertexBuffer, 3, 0, false));
-				geo.setAttribute("color", new THREE.InterleavedBufferAttribute(vertexBuffer, 4, 3, false));
-				geo.setAttribute("uv", new THREE.InterleavedBufferAttribute(vertexBuffer, 2, 7, false));
-				geo.setIndex(new THREE.BufferAttribute(indices, 1));
+				geo.setAttribute("position", new InterleavedBufferAttribute(vertexBuffer, 3, 0, false));
+				geo.setAttribute("color", new InterleavedBufferAttribute(vertexBuffer, 4, 3, false));
+				geo.setAttribute("uv", new InterleavedBufferAttribute(vertexBuffer, 2, 7, false));
+				geo.setIndex(new BufferAttribute(indices, 1));
 				geo.getIndex().usage = WebGLRenderingContext.DYNAMIC_DRAW;
 				;
 				geo.drawRange.start = 0;
@@ -8201,12 +8191,12 @@ var spine;
 			}
 			MeshBatcher.prototype.dispose = function () {
 				this.geometry.dispose();
-				if (this.material instanceof THREE.Material)
+				if (this.material instanceof Material)
 					this.material.dispose();
 				else if (this.material) {
 					for (var i = 0; i < this.material.length; i++) {
 						var material = this.material[i];
-						if (material instanceof THREE.Material)
+						if (material instanceof Material)
 							material.dispose();
 					}
 				}
@@ -8264,7 +8254,7 @@ var spine;
 			};
 			MeshBatcher.VERTEX_SIZE = 9;
 			return MeshBatcher;
-		}(THREE.Mesh));
+		}(Mesh));
 		threejs.MeshBatcher = MeshBatcher;
 	})(threejs = spine.threejs || (spine.threejs = {}));
 })(spine || (spine = {}));
@@ -8284,7 +8274,7 @@ var spine;
 					},
 					vertexShader: vertexShader,
 					fragmentShader: fragmentShader,
-					side: THREE.DoubleSide,
+					side: DoubleSide,
 					transparent: true,
 					alphaTest: 0.5
 				};
@@ -8294,7 +8284,7 @@ var spine;
 			}
 			;
 			return SkeletonMeshMaterial;
-		}(THREE.ShaderMaterial));
+		}(ShaderMaterial));
 		threejs.SkeletonMeshMaterial = SkeletonMeshMaterial;
 		var SkeletonMesh = (function (_super) {
 			__extends(SkeletonMesh, _super);
@@ -8513,7 +8503,7 @@ var spine;
 			SkeletonMesh.QUAD_TRIANGLES = [0, 1, 2, 2, 3, 0];
 			SkeletonMesh.VERTEX_SIZE = 2 + 2 + 4;
 			return SkeletonMesh;
-		}(THREE.Object3D));
+		}(Object3D));
 		threejs.SkeletonMesh = SkeletonMesh;
 	})(threejs = spine.threejs || (spine.threejs = {}));
 })(spine || (spine = {}));
@@ -8525,7 +8515,7 @@ var spine;
 			__extends(ThreeJsTexture, _super);
 			function ThreeJsTexture(image) {
 				var _this = _super.call(this, image) || this;
-				_this.texture = new THREE.Texture(image);
+				_this.texture = new Texture(image);
 				_this.texture.flipY = false;
 				_this.texture.needsUpdate = true;
 				return _this;
@@ -8543,27 +8533,27 @@ var spine;
 			};
 			ThreeJsTexture.toThreeJsTextureFilter = function (filter) {
 				if (filter === spine.TextureFilter.Linear)
-					return THREE.LinearFilter;
+					return LinearFilter;
 				else if (filter === spine.TextureFilter.MipMap)
-					return THREE.LinearMipMapLinearFilter;
+					return LinearMipMapLinearFilter;
 				else if (filter === spine.TextureFilter.MipMapLinearNearest)
-					return THREE.LinearMipMapNearestFilter;
+					return LinearMipMapNearestFilter;
 				else if (filter === spine.TextureFilter.MipMapNearestLinear)
-					return THREE.NearestMipMapLinearFilter;
+					return NearestMipMapLinearFilter;
 				else if (filter === spine.TextureFilter.MipMapNearestNearest)
-					return THREE.NearestMipMapNearestFilter;
+					return NearestMipMapNearestFilter;
 				else if (filter === spine.TextureFilter.Nearest)
-					return THREE.NearestFilter;
+					return NearestFilter;
 				else
 					throw new Error("Unknown texture filter: " + filter);
 			};
 			ThreeJsTexture.toThreeJsTextureWrap = function (wrap) {
 				if (wrap === spine.TextureWrap.ClampToEdge)
-					return THREE.ClampToEdgeWrapping;
+					return ClampToEdgeWrapping;
 				else if (wrap === spine.TextureWrap.MirroredRepeat)
-					return THREE.MirroredRepeatWrapping;
+					return MirroredRepeatWrapping;
 				else if (wrap === spine.TextureWrap.Repeat)
-					return THREE.RepeatWrapping;
+					return RepeatWrapping;
 				else
 					throw new Error("Unknown texture wrap: " + wrap);
 			};
@@ -8572,4 +8562,5 @@ var spine;
 		threejs.ThreeJsTexture = ThreeJsTexture;
 	})(threejs = spine.threejs || (spine.threejs = {}));
 })(spine || (spine = {}));
-//# sourceMappingURL=spine-threejs.js.map
+
+export {spine};

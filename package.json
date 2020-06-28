@@ -43,22 +43,23 @@
 		"@as-com/pson": "3.0.1",
 		"@tweenjs/tween.js": "^18.6.0",
 		"cannon": "0.6.2",
-		"three": "^0.117.1"
+		"three": "^0.117.1",
+		"spine-runtimes": "github:EsotericSoftware/spine-runtimes"
 	},
 	"devDependencies": {
 		"cordova": "~9.0.0",
-		"nwjs-builder-phoenix": "^1.15.0",
-		"yuidocjs": "^0.10.2",
-		"uglify-js": "^3.9.2",
-		"uglifyjs-webpack-plugin": "^2.2.0",
 		"html-loader": "^1.1.0",
 		"html-webpack-plugin": "latest",
+		"nwjs-builder-phoenix": "^1.15.0",
+		"uglify-js": "^3.9.2",
+		"uglifyjs-webpack-plugin": "^2.2.0",
 		"webpack": "^4.42.1",
 		"webpack-cleanup-plugin": "^0.5.1",
 		"webpack-cli": "^3.3.11",
 		"webpack-dev-server": "^3.10.3",
 		"webpack-merge": "^4.2.2",
-		"webpack-node-externals": "^1.7.2"
+		"webpack-node-externals": "^1.7.2",
+		"yuidocjs": "^0.10.2"
 	},
 	"js-flags": "--stack-size 65500",
 	"chromium-args": "--ignore-gpu-blacklist --disable-raf-throttling --enable-gpu-async-worker-context",
