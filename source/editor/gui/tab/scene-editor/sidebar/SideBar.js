@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Texture} from "../../../../../core/texture/Texture.js";
 import {Resource} from "../../../../../core/resources/Resource.js";
 import {Model} from "../../../../../core/resources/Model.js";

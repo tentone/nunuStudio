@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Texture} from "../../../../../core/texture/Texture.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";

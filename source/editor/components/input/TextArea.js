@@ -1,3 +1,4 @@
+import {Locale} from "../../locale/LocaleManager.js";
 import {Font} from "../../../core/resources/Font.js";
 import {Interface} from "../../gui/Interface.js";
 import {Editor} from "../../Editor.js";

@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio.js";
 import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
 import {Nunu} from "../../../../../core/Nunu.js";

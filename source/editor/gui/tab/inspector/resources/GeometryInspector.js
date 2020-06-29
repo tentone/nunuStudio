@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Timer} from "../../../../../core/utils/timer/Timer.js";
 import {AnimationTimer} from "../../../../../core/utils/timer/AnimationTimer.js";
 import {Resource} from "../../../../../core/resources/Resource.js";

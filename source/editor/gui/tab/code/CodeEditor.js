@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {EventManager} from "../../../../core/utils/EventManager.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";

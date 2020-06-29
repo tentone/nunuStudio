@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";

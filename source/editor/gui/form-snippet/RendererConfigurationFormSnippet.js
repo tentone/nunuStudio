@@ -1,3 +1,4 @@
+import {Locale} from "../../locale/LocaleManager.js";
 import {RendererConfiguration} from "../../../core/renderer/RendererConfiguration.js";
 import {Scene} from "../../../core/objects/Scene.js";
 import {ChangeAction} from "../../history/action/ChangeAction.js";

@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Pass} from "../../../../../core/postprocessing/Pass.js";
 import {ColorifyPass} from "../../../../../core/postprocessing/pass/ColorifyPass.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";

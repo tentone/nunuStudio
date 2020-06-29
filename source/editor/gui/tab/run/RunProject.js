@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {Image} from "../../../../core/resources/Image.js";
 import {Program} from "../../../../core/objects/Program.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";

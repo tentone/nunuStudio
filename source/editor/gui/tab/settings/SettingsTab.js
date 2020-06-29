@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {UnitsSettingsTab} from "./UnitsSettingsTab.js";
 import {RenderSettingsTab} from "./RenderSettingsTab.js";
 import {JSHintSettingsTab} from "./JSHintSettingsTab.js";

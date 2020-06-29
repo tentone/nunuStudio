@@ -1,3 +1,4 @@
+import {Locale} from "./locale/LocaleManager.js";
 import {EventManager} from "../core/utils/EventManager.js";
 import {Video} from "../core/resources/Video.js";
 import {TextFile} from "../core/resources/TextFile.js";

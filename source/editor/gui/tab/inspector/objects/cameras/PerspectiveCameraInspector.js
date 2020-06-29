@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {Scene} from "../../../../../../core/objects/Scene.js";
 import {Viewport} from "../../../../../../core/objects/cameras/Viewport.js";
 import {PerspectiveCamera} from "../../../../../../core/objects/cameras/PerspectiveCamera.js";

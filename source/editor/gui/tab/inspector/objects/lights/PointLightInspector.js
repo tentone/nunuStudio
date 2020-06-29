@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {PointLight} from "../../../../../../core/objects/lights/PointLight.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {Action} from "../../../../../history/action/Action.js";

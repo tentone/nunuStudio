@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {Model} from "../../../../../../core/resources/Model.js";
 import {Script} from "../../../../../../core/objects/script/Script.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";

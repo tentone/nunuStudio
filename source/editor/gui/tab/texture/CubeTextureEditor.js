@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {Mouse} from "../../../../core/input/Mouse.js";

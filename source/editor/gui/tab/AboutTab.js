@@ -1,3 +1,4 @@
+import {Locale} from "../../locale/LocaleManager.js";
 import {Nunu} from "../../../core/Nunu.js";
 import {Global} from "../../Global.js";
 import {Text} from "../../components/Text.js";

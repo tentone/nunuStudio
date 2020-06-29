@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {WebcamTexture} from "../../../../core/texture/WebcamTexture.js";
 import {SpriteSheetTexture} from "../../../../core/texture/SpriteSheetTexture.js";
 import {CubeTexture} from "../../../../core/texture/CubeTexture.js";

@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Pass} from "../../../../../core/postprocessing/Pass.js";
 import {BokehPass} from "../../../../../core/postprocessing/pass/BokehPass.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";

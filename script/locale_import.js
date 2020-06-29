@@ -19,17 +19,16 @@ var localePath = "../source/editor/locale/LocaleManager.js";
 
 for(var i = 0; i < files.length; i++)
 {
-	if(files[i].fullPath.search("Locale") >= 0)
+	if(files[i].search("Locale") >= 0)
 	{
 		continue;
 	}
 
 	var data = common.readFile(files[i]);
 
-	if(files[j].endsWith("js") && data.search("Locale") >= 0)
+	if(files[i].endsWith("js") && data.search("Locale") >= 0)
 	{
 		data = "import {Locale} from \"" + common.calculateRelativePath(files[i], localePath) + "\";\n" + data;
-		modulesImported.push(files[j].className);
 	}
 
 	common.writeFile(files[i], data);

@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {Sky} from "../../../../../../core/objects/misc/Sky.js";
 import {HemisphereLight} from "../../../../../../core/objects/lights/HemisphereLight.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";

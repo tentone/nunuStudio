@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {Font} from "../../../../../../core/resources/Font.js";
 import {TextSprite} from "../../../../../../core/objects/text/TextSprite.js";
 import {Sprite} from "../../../../../../core/objects/sprite/Sprite.js";

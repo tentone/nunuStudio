@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Pass} from "../../../../../core/postprocessing/Pass.js";
 import {DotScreenPass} from "../../../../../core/postprocessing/pass/DotScreenPass.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";

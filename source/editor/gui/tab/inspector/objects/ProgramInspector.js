@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {RendererConfiguration} from "../../../../../core/renderer/RendererConfiguration.js";
 import {Program} from "../../../../../core/objects/Program.js";
 import {Mouse} from "../../../../../core/input/Mouse.js";

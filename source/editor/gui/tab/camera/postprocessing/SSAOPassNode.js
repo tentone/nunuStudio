@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Pass} from "../../../../../core/postprocessing/Pass.js";
 import {SSAOPass} from "../../../../../core/postprocessing/pass/SSAOPass.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";

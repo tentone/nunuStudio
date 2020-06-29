@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Pass} from "../../../../../core/postprocessing/Pass.js";
 import {UnrealBloomPass} from "../../../../../core/postprocessing/pass/UnrealBloomPass.js";
 import {BloomPass} from "../../../../../core/postprocessing/pass/BloomPass.js";

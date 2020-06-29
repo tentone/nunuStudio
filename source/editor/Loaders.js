@@ -1,3 +1,4 @@
+import {Locale} from "./locale/LocaleManager.js";
 import {VideoTexture} from "../core/texture/VideoTexture.js";
 import {Texture} from "../core/texture/Texture.js";
 import {CompressedTexture} from "../core/texture/CompressedTexture.js";

@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {DirectionalLight} from "../../../../../../core/objects/lights/DirectionalLight.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {Action} from "../../../../../history/action/Action.js";

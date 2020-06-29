@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Texture} from "../../../../../core/texture/Texture.js";
 import {CubeTexture} from "../../../../../core/texture/CubeTexture.js";
 import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";

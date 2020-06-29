@@ -1,3 +1,4 @@
+import {Locale} from "../../locale/LocaleManager.js";
 import {CubeTexture} from "../../../core/texture/CubeTexture.js";
 import {CompressedTexture} from "../../../core/texture/CompressedTexture.js";
 import {Resource} from "../../../core/resources/Resource.js";

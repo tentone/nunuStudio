@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
 import {CallbackAction} from "../../../history/action/CallbackAction.js";
 import {TextureEditor} from "./TextureEditor.js";

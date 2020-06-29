@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Image} from "../../../../../core/resources/Image.js";
 import {TerrainBufferGeometry} from "../../../../../core/geometries/TerrainBufferGeometry.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";

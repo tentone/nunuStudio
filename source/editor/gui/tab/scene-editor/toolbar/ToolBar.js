@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Scene} from "../../../../../core/objects/Scene.js";
 import {ToolBarGroup} from "./ToolBarGroup.js";
 import {SceneEditor} from "../SceneEditor.js";

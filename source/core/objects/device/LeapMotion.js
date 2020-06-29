@@ -1,7 +1,5 @@
-import {Model} from "../../resources/Model.js";
 import {Mesh} from "../mesh/Mesh.js";
 import {Group, MeshPhongMaterial, BoxBufferGeometry, Object3D, Vector3, Matrix4} from "three";
-
 
 /**
  * Leap device object based on the official LeapJS runtime.

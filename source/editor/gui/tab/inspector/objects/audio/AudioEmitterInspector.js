@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {Audio} from "../../../../../../core/resources/Audio.js";
 import {AudioEmitter} from "../../../../../../core/objects/audio/AudioEmitter.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";

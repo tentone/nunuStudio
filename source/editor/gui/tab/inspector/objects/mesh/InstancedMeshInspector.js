@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {Mesh} from "../../../../../../core/objects/mesh/Mesh.js";
 import {InstancedMesh} from "../../../../../../core/objects/mesh/InstancedMesh.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";

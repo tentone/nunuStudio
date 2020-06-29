@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {RenderPass} from "../../../../core/postprocessing/RenderPass.js";
 import {UnrealBloomPass} from "../../../../core/postprocessing/pass/UnrealBloomPass.js";
 import {TechnicolorPass} from "../../../../core/postprocessing/pass/TechnicolorPass.js";

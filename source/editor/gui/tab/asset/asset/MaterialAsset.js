@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {MaterialLoader} from "../../../../../core/loaders/MaterialLoader.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {AddResourceAction} from "../../../../history/action/resources/AddResourceAction.js";

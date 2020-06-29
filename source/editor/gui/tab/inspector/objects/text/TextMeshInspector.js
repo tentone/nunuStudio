@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {TextMesh} from "../../../../../../core/objects/text/TextMesh.js";
 import {Mesh} from "../../../../../../core/objects/mesh/Mesh.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";

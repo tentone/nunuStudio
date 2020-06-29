@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Action} from "../../../../history/action/Action.js";

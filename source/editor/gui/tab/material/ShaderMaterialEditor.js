@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {Model} from "../../../../core/resources/Model.js";
 import {Sky} from "../../../../core/objects/misc/Sky.js";
 import {Container} from "../../../../core/objects/misc/Container.js";

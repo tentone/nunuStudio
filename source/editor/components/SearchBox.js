@@ -1,3 +1,4 @@
+import {Locale} from "../locale/LocaleManager.js";
 import {Image} from "../../core/resources/Image.js";
 import {Container} from "../../core/objects/misc/Container.js";
 import {Interface} from "../gui/Interface.js";

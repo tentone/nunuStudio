@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
 import {Settings} from "../../../Settings.js";
 import {Global} from "../../../Global.js";

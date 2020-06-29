@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {CubeTexture} from "../../../../../core/texture/CubeTexture.js";
 import {Scene} from "../../../../../core/objects/Scene.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";

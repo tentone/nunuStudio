@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {Texture} from "../../../../core/texture/Texture.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";

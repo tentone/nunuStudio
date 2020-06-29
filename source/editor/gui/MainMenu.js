@@ -1,3 +1,4 @@
+import {Locale} from "../locale/LocaleManager.js";
 import {UnitConverter} from "../../core/utils/UnitConverter.js";
 import {Mesh} from "../../core/objects/mesh/Mesh.js";
 import {Nunu} from "../../core/Nunu.js";

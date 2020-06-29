@@ -1,3 +1,4 @@
+import {Locale} from "../../../../locale/LocaleManager.js";
 import {Resource} from "../../../../../core/resources/Resource.js";
 import {Audio} from "../../../../../core/resources/Audio.js";
 import {ResourceInspector} from "./ResourceInspector.js";

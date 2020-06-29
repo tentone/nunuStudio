@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {Image} from "../../../../core/resources/Image.js";
 import {TextureRenderer} from "../../preview/TextureRenderer.js";
 import {MaterialRenderer} from "../../preview/MaterialRenderer.js";

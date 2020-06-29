@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {FirstPersonControls} from "../../../../../../core/objects/controls/FirstPersonControls.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {Action} from "../../../../../history/action/Action.js";

@@ -1,3 +1,4 @@
+import {Locale} from "../../locale/LocaleManager.js";
 import {Viewport} from "../../../core/objects/cameras/Viewport.js";
 import {ChangeAction} from "../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../history/action/ActionBundle.js";

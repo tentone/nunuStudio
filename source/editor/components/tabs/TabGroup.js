@@ -1,3 +1,4 @@
+import {Locale} from "../../locale/LocaleManager.js";
 import {Settings} from "../../Settings.js";
 import {Interface} from "../../gui/Interface.js";
 import {DragBuffer} from "../../gui/DragBuffer.js";

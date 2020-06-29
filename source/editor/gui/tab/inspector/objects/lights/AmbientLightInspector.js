@@ -1,3 +1,4 @@
+import {Locale} from "../../../../../locale/LocaleManager.js";
 import {AmbientLight} from "../../../../../../core/objects/lights/AmbientLight.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {Action} from "../../../../../history/action/Action.js";

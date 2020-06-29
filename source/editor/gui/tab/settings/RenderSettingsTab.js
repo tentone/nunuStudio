@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {RendererConfigurationFormSnippet} from "../../form-snippet/RendererConfigurationFormSnippet.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";

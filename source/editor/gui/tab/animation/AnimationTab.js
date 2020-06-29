@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {EventManager} from "../../../../core/utils/EventManager.js";
 import {AnimationMixer} from "../../../../core/animation/AnimationMixer.js";
 import {AnimationClipTrack} from "./AnimationClipTrack.js";

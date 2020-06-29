@@ -1,3 +1,4 @@
+import {Locale} from "../../../locale/LocaleManager.js";
 import {Settings} from "../../../Settings.js";
 import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
