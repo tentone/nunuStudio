@@ -20,7 +20,16 @@ module.exports = {
 		})
 	],
 	resolve: {
-		modules: [source, "node_modules"]
+		modules: [source, "node_modules"],
+		extensions: [".ts", ".tsx", ".js"]
+	},
+	module: {
+		rules: [
+			{
+				test: /\.tsx?$/,
+				use: 'ts-loader'
+			  },
+		]
 	},
 	output: {
 		filename: "bundle.js",
