@@ -1,8 +1,6 @@
 import {Program} from "../Program.js";
 import {Mouse} from "../../input/Mouse.js";
 import {Keyboard} from "../../input/Keyboard.js";
-import {Key} from "../../input/Key.js";
-
 import {Group, Vector2, Vector3, Object3D, Matrix4} from "three";
 
 /**

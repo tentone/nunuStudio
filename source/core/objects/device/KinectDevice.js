@@ -1,5 +1,3 @@
-import {Model} from "../../resources/Model.js";
-import {Image} from "../../resources/Image.js";
 import {Mesh} from "../mesh/Mesh.js";
 import {Group, SphereGeometry, MeshPhongMaterial, Object3D} from "three";
 

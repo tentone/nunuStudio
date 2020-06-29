@@ -1,9 +1,4 @@
-import {Image} from "../resources/Image.js";
-
-
-
 import {Texture, RGBAFormat} from "three";
-
 
 /**
  * Canvas textures can be used to draw content to the texture during runtime, using the context property.

@@ -6,8 +6,7 @@ import {LocaleManager} from "./LocaleManager.js";
  * @static
  * @class LocaleEN
  */
-LocaleManager.register(
-{
+var LocaleEN = {
 	// Metadata
 	meta:
 	{
@@ -564,4 +563,6 @@ LocaleManager.register(
 	updatedRestart: "nunuStudio updated\nRestart the editor",
 	alreadyUpdated: "nunuStudio already up to date.",
 	updateFailed: "Failed to download update files."
-});
+};
+
+export {LocaleEN};

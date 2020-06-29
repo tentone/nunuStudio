@@ -1,11 +1,7 @@
-import {Container} from "../../../../core/objects/misc/Container.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
-import {Action} from "../../../history/action/Action.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
@@ -14,14 +10,10 @@ import {Slider} from "../../../components/input/Slider.js";
 import {NumberBox} from "../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
-import {Form} from "../../../components/Form.js";
-import {Division} from "../../../components/Division.js";
 import {DualDivision} from "../../../components/containers/DualDivision.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Component} from "../../../components/Component.js";
-import {Canvas} from "../../../components/Canvas.js";
 import {Scene, PerspectiveCamera, Object3D, FrontSide, BackSide, DoubleSide, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, SphereBufferGeometry, TorusBufferGeometry, BoxBufferGeometry, TorusKnotBufferGeometry, ConeBufferGeometry, Quaternion, Euler} from "three";
-
+import {Locale} from "../../../locale/LocaleManager.js";
 
 function MaterialEditor(parent, closeable, container, index)
 {

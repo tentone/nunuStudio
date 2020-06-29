@@ -1,5 +1,4 @@
 import {RenderPass} from "../../postprocessing/RenderPass.js";
-import {Pass} from "../../postprocessing/Pass.js";
 import {EffectComposer} from "../../postprocessing/EffectComposer.js";
 import {Scene} from "../Scene.js";
 import {Viewport} from "./Viewport.js";
