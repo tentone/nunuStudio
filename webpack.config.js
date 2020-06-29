@@ -28,7 +28,17 @@ module.exports = {
 			{
 				test: /\.tsx?$/,
 				use: 'ts-loader'
-			  },
+			}
+		],
+		loaders: [
+			{
+				test: /.*spine-threejs.*/,
+				loader: '@shoutem/webpack-prepend-append',
+				query: {
+					prepend: '',
+					append: '\n\nexport { spine };'
+				}
+			}
 		]
 	},
 	output: {
