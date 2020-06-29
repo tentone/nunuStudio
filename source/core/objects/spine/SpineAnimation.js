@@ -4,8 +4,6 @@ import {SpineTexture} from "./SpineTexture.js";
 import {Clock, Object3D} from "three";
 import spine from "spine-runtimes/spine-ts/build/spine-threejs"
 
-console.log(spine);
-
 /**
  * Spine animation object, to used with animation produced inside Esoteric spine. These animations are created using the Spine animation studio software.
  * 

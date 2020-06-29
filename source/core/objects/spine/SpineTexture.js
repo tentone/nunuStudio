@@ -1,5 +1,5 @@
 import {Texture} from "../../texture/Texture.js";
-import {ThreeJsTexture} from "spine-runtimes/spine-ts/threejs/src/ThreeJsTexture"
+import {spine} from "spine-runtimes/spine-ts/build/spine-threejs"
 
 /**
  * Spine animation textures adapted to work with nunuStudio textures.
@@ -12,12 +12,12 @@ import {ThreeJsTexture} from "spine-runtimes/spine-ts/threejs/src/ThreeJsTexture
  */
 function SpineTexture(texture)
 {
-	ThreeJsTexture.call(this, texture.image);
+	spine.threejs.TreeJsTexture.call(this, texture.image);
 	
 	this.texture = texture;
 	this.texture.flipY = false;	
 };
 
-SpineTexture.prototype = Object.create(ThreeJsTexture.prototype);
+SpineTexture.prototype = Object.create(spine.threejs.ThreeJsTexture.prototype);
 
 export {SpineTexture};
