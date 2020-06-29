@@ -1,11 +1,11 @@
 import {Editor} from "./Editor.js";
 
-document.onload = function()
+document.body.onload = function()
 {
 	Editor.initialize();
 };
 
-document.onresize = function()
+document.body.onresize = function()
 {
 	Editor.resize();
 };
