@@ -48,7 +48,9 @@
 		"sparse-octree": "^6.0.2",
 		"spine-runtimes": "github:EsotericSoftware/spine-runtimes",
 		"tern": "^0.24.3",
-		"three": "^0.117.1"
+		"three": "^0.117.1",
+		"iterator-result": "^1.0.0",
+		"math-ds": "1.2.1"
 	},
 	"devDependencies": {
 		"@shoutem/webpack-prepend-append": "^1.0.1",
