@@ -13,7 +13,6 @@ import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../core/objects/misc/Sky.js";
 import {InstancedMesh} from "../../../../core/objects/mesh/InstancedMesh.js";
-import {LeapMotion} from "../../../../core/objects/device/LeapMotion.js";
 import {KinectDevice} from "../../../../core/objects/device/KinectDevice.js";
 import {OrbitControls} from "../../../../core/objects/controls/OrbitControls.js";
 import {FirstPersonControls} from "../../../../core/objects/controls/FirstPersonControls.js";
@@ -48,8 +47,6 @@ import {LightProbeInspector} from "./objects/lights/LightProbeInspector.js";
 import {HemisphereLightInspector} from "./objects/lights/HemisphereLightInspector.js";
 import {DirectionalLightInspector} from "./objects/lights/DirectionalLightInspector.js";
 import {AmbientLightInspector} from "./objects/lights/AmbientLightInspector.js";
-import {LeapInspector} from "./objects/devices/LeapInspector.js";
-import {KinectInspector} from "./objects/devices/KinectInspector.js";
 import {OrbitControlsInspector} from "./objects/controls/OrbitControlsInspector.js";
 import {FirstPersonControlsInspector} from "./objects/controls/FirstPersonControlsInspector.js";
 import {PerspectiveCameraInspector} from "./objects/cameras/PerspectiveCameraInspector.js";
@@ -223,14 +220,6 @@ InspectorContainer.prototype.updateSelection = function()
 		else if(object instanceof Sky)
 		{
 			this.panel = new SkyInspector(this, object);
-		}
-		else if(object instanceof LeapMotion)
-		{
-			this.panel = new LeapInspector(this, object);
-		}
-		else if(object instanceof KinectDevice)
-		{
-			this.panel = new KinectInspector(this, object);
 		}
 		else if(object instanceof PerspectiveCamera)
 		{

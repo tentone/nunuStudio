@@ -25,8 +25,6 @@ import {LightProbe} from "../objects/lights/LightProbe.js";
 import {HemisphereLight} from "../objects/lights/HemisphereLight.js";
 import {DirectionalLight} from "../objects/lights/DirectionalLight.js";
 import {AmbientLight} from "../objects/lights/AmbientLight.js";
-import {LeapMotion} from "../objects/device/LeapMotion.js";
-import {KinectDevice} from "../objects/device/KinectDevice.js";
 import {OrbitControls} from "../objects/controls/OrbitControls.js";
 import {FirstPersonControls} from "../objects/controls/FirstPersonControls.js";
 import {PerspectiveCamera} from "../objects/cameras/PerspectiveCamera.js";
@@ -530,32 +528,6 @@ ObjectLoader.prototype.parseObject = function(data)
 					object.handlePixelRatio = data.handlePixelRatio;	
 				}
 
-				break;
-
-			case "LeapDevice":
-				object = new LeapMotion();
-				object.mode = data.mode;
-				object.useArm = data.useArm;
-				if(data.debugModel !== undefined)
-				{
-					object.debugModel = data.debugModel;
-				}
-				if(data.gesturesEnabled !== undefined)
-				{
-					object.gesturesEnabled = data.gesturesEnabled;
-				}
-				if(data.posesEnabled !== undefined)
-				{
-					object.posesEnabled = data.posesEnabled;
-				}
-				break;
-
-			case "Kinect":
-				object = new KinectDevice();
-				if(data.debugModel !== undefined)
-				{
-					object.debugModel = data.debugModel;
-				}
 				break;
 
 			case "Sky":

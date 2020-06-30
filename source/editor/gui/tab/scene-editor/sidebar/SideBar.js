@@ -25,8 +25,6 @@ import {LightProbe} from "../../../../../core/objects/lights/LightProbe.js";
 import {HemisphereLight} from "../../../../../core/objects/lights/HemisphereLight.js";
 import {DirectionalLight} from "../../../../../core/objects/lights/DirectionalLight.js";
 import {AmbientLight} from "../../../../../core/objects/lights/AmbientLight.js";
-import {LeapMotion} from "../../../../../core/objects/device/LeapMotion.js";
-import {KinectDevice} from "../../../../../core/objects/device/KinectDevice.js";
 import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
 import {FirstPersonControls} from "../../../../../core/objects/controls/FirstPersonControls.js";
 import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
@@ -653,18 +651,6 @@ SideBar.prototype.createObject = function()
 	{
 		Editor.addObject(new FirstPersonControls(), self.editor.scene);
 	}, Locale.firstPersonControls);
-
-	// Leap Hand
-	controls.addOption(Global.FILE_PATH + "icons/hw/leap.png", function()
-	{
-		Editor.addObject(new LeapMotion(), self.editor.scene);
-	}, Locale.leapMotion);
-
-	// Kinect Skeleton
-	controls.addOption(Global.FILE_PATH + "icons/hw/kinect.png", function()
-	{
-		Editor.addObject(new KinectDevice(), self.editor.scene);
-	}, Locale.microsoftKinect);
 
 	controls.updateOptions();
 };

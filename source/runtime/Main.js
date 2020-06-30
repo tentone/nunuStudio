@@ -21,7 +21,6 @@ include("lib/three-bmfont.js");
 include("lib/cannon.js");
 include("lib/leap.min.js");
 include("lib/spine-threejs.js");
-include("lib/opentype.min.js");
 include("lib/chevrotain.min.js");
 
 // Threejs Overrides
@@ -124,11 +123,6 @@ include("source/core/geometries/RoundedBoxBufferGeometry.js");
 include("source/core/geometries/TerrainBufferGeometry.js");
 
 include("source/core/geometries/modifiers/TwistModifier.js");
-
-include("source/core/objects/device/LeapMotion.js");
-
-include("source/core/objects/device/LeapMotion.js");
-include("source/core/objects/device/KinectDevice.js");
 
 include("source/core/objects/mesh/Mesh.js");
 include("source/core/objects/mesh/SkinnedMesh.js");
