@@ -3,6 +3,7 @@ import {FileSystem} from "../core/FileSystem.js";
 import {Global} from "./Global.js";
 import {Editor} from "./Editor.js";
 import {StaticPair} from "@as-com/pson";
+import JSZip from "jszip";
 
 /**
  * Responsable for package and export of project data to different platforms.

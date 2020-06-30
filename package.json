@@ -50,7 +50,8 @@
 		"tern": "^0.24.3",
 		"three": "^0.117.1",
 		"iterator-result": "^1.0.0",
-		"math-ds": "1.2.1"
+		"math-ds": "1.2.1",
+		"jszip": "^3.5.0"
 	},
 	"devDependencies": {
 		"@shoutem/webpack-prepend-append": "^1.0.1",
