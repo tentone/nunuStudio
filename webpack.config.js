@@ -33,15 +33,10 @@ module.exports = {
 		})
 	],
 	resolve: {
-		modules: [source, "node_modules"],
-		extensions: [".ts", ".tsx", ".js"]
+		modules: [source, "node_modules"]
 	},
 	module: {
 		rules: [
-			{
-				test: /\.tsx?$/,
-				use: 'ts-loader'
-			},
 			{
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader'],
@@ -49,7 +44,7 @@ module.exports = {
 		],
 		loaders: [
 			{
-				test: /.*spine-threejs.*/,
+				test: /spine-threejs/,
 				loader: '@shoutem/webpack-prepend-append',
 				query: {
 					prepend: '',
