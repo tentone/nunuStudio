@@ -1,9 +1,7 @@
 import {Program} from "./Program.js";
-
-
 import {World, NaiveBroadphase, SplitSolver, GSSolver} from "cannon";
 import {Color, Texture, Camera, Raycaster, Vector2, Scene as TScene, Object3D, Fog, FogExp2, Vector3, Quaternion} from "three";
-
+import {PointOctree} from "sparse-octree";
 
 /**
  * Scenes allow you to set up what and where is to be rendered by the engine.
@@ -113,7 +111,7 @@ function Scene()
 	 * It is used to filter the visiblity of objects and raycast them.
 	 *
 	 * @attribute octree
-	 * @type {SPARSEOCTREE.PointOctree}
+	 * @type {PointOctree}
 	 */
 	this.octree = null;
 

@@ -3,9 +3,8 @@ import {Nunu} from "../../../core/Nunu.js";
 import {Global} from "../../Global.js";
 import {Text} from "../../components/Text.js";
 import {TabComponent} from "../../components/tabs/TabComponent.js";
-import {Component} from "../../components/Component.js";
 import {REVISION} from "three";
-
+import CodeMirror from "codemirror/lib/codemirror.js";
 
 function AboutTab(parent, closeable, container, index)
 {

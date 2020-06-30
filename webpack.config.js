@@ -34,7 +34,7 @@ module.exports = {
 	],
 	resolve: {
 		modules: [source, "node_modules"],
-		extensions: [".ts", ".tsx", ".js"]
+		extensions: [".ts", ".tsx", ".js", ".css"]
 	},
 	module: {
 		rules: [
@@ -44,6 +44,10 @@ module.exports = {
 			}
 		],
 		loaders: [
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
+			},
 			{
 				test: /.*spine-threejs.*/,
 				loader: '@shoutem/webpack-prepend-append',
