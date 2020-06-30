@@ -1,18 +1,12 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Texture} from "../../../../../core/texture/Texture.js";
-import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
-import {MaterialEditor} from "../MaterialEditor.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {VectorBox} from "../../../../components/input/VectorBox.js";
 import {TextureForm} from "../../../../components/input/TextureForm.js";
 import {Slider} from "../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
-import {Form} from "../../../../components/Form.js";
 import {TangentSpaceNormalMap, ObjectSpaceNormalMap} from "three";
 
 
@@ -26,7 +20,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Matcap map");
 	this.matcap = new TextureForm(this.form);
 	this.matcap.size.set(0, 100);
-	this.matcap.setOnChange(function(file)
+	this.matcap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "matcap", self.matcap.getValue()));
 		self.material.needsUpdate = true;
@@ -38,7 +32,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
-	this.map.setOnChange(function(file)
+	this.map.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
@@ -50,7 +44,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.bumpMap);
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.size.set(0, 100);
-	this.bumpMap.setOnChange(function(file)
+	this.bumpMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
 		self.material.needsUpdate = true;
@@ -76,7 +70,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.normalMap);
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.size.set(0, 100);
-	this.normalMap.setOnChange(function(file)
+	this.normalMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
 		self.material.needsUpdate = true;
@@ -116,7 +110,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.displacementMap);
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(0, 100);
-	this.displacementMap.setOnChange(function(file)
+	this.displacementMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
 		self.material.needsUpdate = true;
@@ -154,7 +148,7 @@ function MeshMatcapMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
-	this.alphaMap.setOnChange(function(file)
+	this.alphaMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 		self.material.needsUpdate = true;

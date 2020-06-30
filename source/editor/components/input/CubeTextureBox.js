@@ -1,19 +1,14 @@
 import {Locale} from "../../locale/LocaleManager.js";
 import {CubeTexture} from "../../../core/texture/CubeTexture.js";
 import {CompressedTexture} from "../../../core/texture/CompressedTexture.js";
-import {Resource} from "../../../core/resources/Resource.js";
 import {Image} from "../../../core/resources/Image.js";
 import {AddResourceAction} from "../../history/action/resources/AddResourceAction.js";
-import {Action} from "../../history/action/Action.js";
-import {Interface} from "../../gui/Interface.js";
 import {DragBuffer} from "../../gui/DragBuffer.js";
 import {Global} from "../../Global.js";
 import {Editor} from "../../Editor.js";
-import {Text} from "../Text.js";
 import {TableForm} from "../TableForm.js";
 import {DropdownList} from "./DropdownList.js";
 import {CheckBox} from "./CheckBox.js";
-import {Form} from "../Form.js";
 import {Component} from "../Component.js";
 import {Texture, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping} from "three";
 

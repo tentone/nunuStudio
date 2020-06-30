@@ -1,9 +1,6 @@
-import {Font} from "../../../core/resources/Font.js";
 import {TextMesh} from "../../../core/objects/text/TextMesh.js";
-import {Mesh} from "../../../core/objects/mesh/Mesh.js";
 import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
 import {PreviewRenderer} from "./PreviewRenderer.js";
-import {Text} from "../../components/Text.js";
 import {MeshBasicMaterial} from "three";
 
 /** 

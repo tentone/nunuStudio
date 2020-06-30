@@ -1,11 +1,7 @@
 import {Locale} from "../../../locale/LocaleManager.js";
-import {Settings} from "../../../Settings.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {TabGroup} from "../../../components/tabs/TabGroup.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
-import {Component} from "../../../components/Component.js";
-
 
 function ProjectSettings(parent, closeable, container, index)
 {

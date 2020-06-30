@@ -1,5 +1,3 @@
-import {Resource} from "../../../core/resources/Resource.js";
-import {Image} from "../../../core/resources/Image.js";
 import {Component} from "../../components/Component.js";
 import {WebGLRenderer, Scene} from "three";
 
@@ -46,7 +44,7 @@ function PreviewRenderer()
  * @param {Object} resource Resource to generate the preview.
  * @param {Function} onRender Callback method that receives Base64 encoded data with the thumbnail produced.
  */
-PreviewRenderer.prototype.render = function(resource, onRender){};
+PreviewRenderer.prototype.render = function(){};
 
 /**
  * Set thumbnail renderer size.
@@ -69,6 +67,6 @@ PreviewRenderer.prototype.setSize = function(x, y)
  * @param {Object} resource Resource to generate the preview.
  * @param {Function} onRender Callback method that receives Base64 encoded data with the thumbnail produced.
  */
-PreviewRenderer.prototype.render = function(resource, onRender){};
+PreviewRenderer.prototype.render = function(){};
 
 export {PreviewRenderer};

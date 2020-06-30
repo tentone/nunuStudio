@@ -1,6 +1,3 @@
-import {Texture} from "../../texture/Texture.js";
-import {Sprite} from "../../objects/sprite/Sprite.js";
-
 import {Material, NormalBlending, FrontSide, NoColors} from "three";
 
 /**

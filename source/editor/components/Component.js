@@ -1,7 +1,5 @@
 import {EventManager} from "../../core/utils/EventManager.js";
 import {Container} from "../../core/objects/misc/Container.js";
-import {Interface} from "../gui/Interface.js";
-import {Text} from "./Text.js";
 import {Vector2} from "three";
 
 /**

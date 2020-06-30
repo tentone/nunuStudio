@@ -1,8 +1,6 @@
 import {Locale} from "../../../locale/LocaleManager.js";
-import {Tree} from "../../../../core/utils/struct/Tree.js";
 import {PhysicsGenerator} from "../../../../core/utils/PhysicsGenerator.js";
 import {ObjectUtils} from "../../../../core/utils/ObjectUtils.js";
-import {Resource} from "../../../../core/resources/Resource.js";
 import {Model} from "../../../../core/resources/Model.js";
 import {Script} from "../../../../core/objects/script/Script.js";
 import {Scene} from "../../../../core/objects/Scene.js";
@@ -12,8 +10,6 @@ import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter
 import {Container} from "../../../../core/objects/misc/Container.js";
 import {LightProbe} from "../../../../core/objects/lights/LightProbe.js";
 import {ObjectLoader} from "../../../../core/loaders/ObjectLoader.js";
-import {Mouse} from "../../../../core/input/Mouse.js";
-import {Key} from "../../../../core/input/Key.js";
 import {ObjectIcons} from "../../../utils/ObjectIcons.js";
 import {Loaders} from "../../../Loaders.js";
 import {SwapAction} from "../../../history/action/objects/SwapAction.js";
@@ -22,15 +18,12 @@ import {MoveAction} from "../../../history/action/objects/MoveAction.js";
 import {AddAction} from "../../../history/action/objects/AddAction.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../history/action/ActionBundle.js";
-import {Action} from "../../../history/action/Action.js";
 import {SceneEditor} from "../scene-editor/SceneEditor.js";
 import {ParticleEditor} from "../particle-editor/ParticleEditor.js";
 import {ScriptEditor} from "../code/ScriptEditor.js";
 import {CameraEditor} from "../camera/CameraEditor.js";
-import {Interface} from "../../Interface.js";
 import {DragBuffer} from "../../DragBuffer.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {ContextMenu} from "../../../components/dropdown/ContextMenu.js";
 import {DocumentBody} from "../../../components/DocumentBody.js";
@@ -530,7 +523,6 @@ function TreeNode(container)
 				var selfIsScene = self.object instanceof Scene;
 				var selfIsProgram = self.object instanceof Program;
 				var dragIsScene = object instanceof Scene;
-				var dragIsProgram = object instanceof Program;
 
 				// Above
 				if(dragState === TreeNode.ABOVE)
@@ -598,7 +590,6 @@ function TreeNode(container)
 		if(event.shiftKey && Editor.selection.length > 0 && Editor.selection[Editor.selection.length - 1].isObject3D === true)
 		{
 			var object = Editor.selection[Editor.selection.length - 1];
-			var node = object.gui.node;
 
 			var selecting = false;
 			var done = false;

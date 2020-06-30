@@ -1,8 +1,5 @@
-import {Image} from "../../../core/resources/Image.js";
-import {Text} from "../Text.js";
 import {Component} from "../Component.js";
 import {ButtonText} from "../buttons/ButtonText.js";
-import {Button} from "../buttons/Button.js";
 
 /**
  * Button used in dropdown menus, context menus, etc.

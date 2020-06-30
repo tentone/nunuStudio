@@ -1,17 +1,12 @@
 import {Locale} from "../../locale/LocaleManager.js";
-import {VideoTexture} from "../../../core/texture/VideoTexture.js";
-import {CubeTexture} from "../../../core/texture/CubeTexture.js";
 import {Video} from "../../../core/resources/Video.js";
 import {Image} from "../../../core/resources/Image.js";
 import {Loaders} from "../../Loaders.js";
-import {Interface} from "../../gui/Interface.js";
-import {Text} from "../Text.js";
 import {TableForm} from "../TableForm.js";
 import {VectorBox} from "./VectorBox.js";
 import {TextureChooser} from "./TextureChooser.js";
 import {DropdownList} from "./DropdownList.js";
 import {CheckBox} from "./CheckBox.js";
-import {Form} from "../Form.js";
 import {ClampToEdgeWrapping, RepeatWrapping, MirroredRepeatWrapping, Texture} from "three";
 
 function TextureForm(parent)

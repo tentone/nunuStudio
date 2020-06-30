@@ -1,9 +1,5 @@
-import {Image} from "../../../core/resources/Image.js";
-import {Interface} from "../../gui/Interface.js";
-import {Text} from "../Text.js";
 import {Component} from "../Component.js";
 import {ButtonIcon} from "./ButtonIcon.js";
-import {Button} from "./Button.js";
 import {Vector2} from "three";
 
 /**

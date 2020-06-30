@@ -1,7 +1,4 @@
 import {EventManager} from "../../../core/utils/EventManager.js";
-import {Mouse} from "../../../core/input/Mouse.js";
-import {Text} from "../Text.js";
-import {Graph} from "./Graph.js";
 import {Component} from "../Component.js";
 
 /**
@@ -126,7 +123,7 @@ function Slider(parent)
 		}
 	});
 
-	this.manager.add(window, "mouseup", function(event)
+	this.manager.add(window, "mouseup", function()
 	{	
 		self.manager.destroy();
 	});
@@ -163,7 +160,7 @@ Slider.prototype = Object.create(Component.prototype);
  * @method setDisabled
  * @param {boolean} value.
  */
-Slider.prototype.setDisabled = function(value)
+Slider.prototype.setDisabled = function()
 {
 	// TODO
 };

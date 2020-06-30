@@ -1,7 +1,5 @@
 import {UnitConverter} from "../../../core/utils/UnitConverter.js";
-import {Interface} from "../../gui/Interface.js";
 import {Editor} from "../../Editor.js";
-import {Text} from "../Text.js";
 import {Component} from "../Component.js";
 
 /**

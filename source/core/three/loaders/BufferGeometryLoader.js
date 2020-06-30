@@ -1,5 +1,5 @@
-import {GeometryLoader} from "../../loaders/GeometryLoader.js";
 import {InstancedBufferAttribute, BufferAttribute, InterleavedBuffer, InterleavedBufferAttribute, BufferGeometryLoader, Vector3, Sphere} from "three";
+
 var TYPED_ARRAYS = {
 	Int8Array: Int8Array,
 	Uint8Array: Uint8Array,
@@ -11,6 +11,7 @@ var TYPED_ARRAYS = {
 	Float32Array: Float32Array,
 	Float64Array: Float64Array
 };
+
 var parseBufferAttribute = function(json)
 {
 	// Legacy format
@@ -122,5 +123,4 @@ BufferGeometryLoader.prototype.parse = function(json)
 	if (json.userData) geometry.userData = json.userData;
 
 	return geometry;
-
 };

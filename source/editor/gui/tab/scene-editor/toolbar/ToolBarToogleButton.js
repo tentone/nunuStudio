@@ -1,10 +1,7 @@
-import {ToolBar} from "./ToolBar.js";
-import {Editor} from "../../../../Editor.js";
 import {Text} from "../../../../components/Text.js";
 import {Component} from "../../../../components/Component.js";
 import {ButtonIconToggle} from "../../../../components/buttons/ButtonIconToggle.js";
 import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
-import {Button} from "../../../../components/buttons/Button.js";
 
 /**
  * Editor tool bar button.

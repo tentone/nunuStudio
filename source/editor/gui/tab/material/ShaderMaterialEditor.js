@@ -1,16 +1,11 @@
 import {Locale} from "../../../locale/LocaleManager.js";
-import {Model} from "../../../../core/resources/Model.js";
 import {Sky} from "../../../../core/objects/misc/Sky.js";
-import {Container} from "../../../../core/objects/misc/Container.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
-import {Action} from "../../../history/action/Action.js";
 import {MaterialEditor} from "./MaterialEditor.js";
 import {CodeEditor} from "../code/CodeEditor.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabGroup} from "../../../components/tabs/TabGroup.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
@@ -18,12 +13,8 @@ import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {TextBox} from "../../../components/input/TextBox.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {CheckBox} from "../../../components/input/CheckBox.js";
-import {Form} from "../../../components/Form.js";
-import {Division} from "../../../components/Division.js";
 import {DualDivision} from "../../../components/containers/DualDivision.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Component} from "../../../components/Component.js";
-import {Canvas} from "../../../components/Canvas.js";
 import {PerspectiveCamera, Scene, Object3D, PointLight, AmbientLight, Mesh, FrontSide, BackSide, DoubleSide, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending} from "three";
 
 

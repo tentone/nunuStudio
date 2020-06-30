@@ -1,8 +1,5 @@
 import {Locale} from "../../locale/LocaleManager.js";
-import {Font} from "../../../core/resources/Font.js";
-import {Interface} from "../../gui/Interface.js";
 import {Editor} from "../../Editor.js";
-import {Text} from "../Text.js";
 import {ContextMenu} from "../dropdown/ContextMenu.js";
 import {DocumentBody} from "../DocumentBody.js";
 import {Component} from "../Component.js";
@@ -147,9 +144,8 @@ TextArea.prototype.setOnInput = function(onInput, timeout)
 	if(timeout !== undefined)
 	{
 		var timer = null;
-		var self = this;
 
-		this.element.oninput = function(event)
+		this.element.oninput = function()
 		{
 			if(timer !== null)
 			{

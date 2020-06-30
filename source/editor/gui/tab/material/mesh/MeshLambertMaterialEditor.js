@@ -1,19 +1,12 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Texture} from "../../../../../core/texture/Texture.js";
-import {CubeTexture} from "../../../../../core/texture/CubeTexture.js";
-import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
-import {MaterialEditor} from "../MaterialEditor.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {TextureForm} from "../../../../components/input/TextureForm.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
-import {Form} from "../../../../components/Form.js";
 import {MultiplyOperation, MixOperation, AddOperation} from "three";
 
 
@@ -27,7 +20,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
-	this.map.setOnChange(function(file)
+	this.map.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
@@ -39,7 +32,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.specularMap);
 	this.specularMap = new TextureForm(this.form);
 	this.specularMap.size.set(0, 100);
-	this.specularMap.setOnChange(function(file)
+	this.specularMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
 		self.material.needsUpdate = true;
@@ -51,7 +44,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
-	this.alphaMap.setOnChange(function(file)
+	this.alphaMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 		self.material.needsUpdate = true;
@@ -63,7 +56,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.emissiveMap);
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(0, 100);
-	this.emissiveMap.setOnChange(function(file)
+	this.emissiveMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
 		self.material.needsUpdate = true;
@@ -100,7 +93,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.lightMap);
 	this.lightMap = new TextureForm(this.form);
 	this.lightMap.size.set(0, 100);
-	this.lightMap.setOnChange(function(file)
+	this.lightMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "lightMap", self.lightMap.getValue()));
 		self.material.needsUpdate = true;
@@ -125,7 +118,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.environmentMap);
 	this.envMap = new CubeTextureBox(this.form);
 	this.envMap.size.set(0, 100);
-	this.envMap.setOnChange(function(file)
+	this.envMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
 		self.material.needsUpdate = true;
@@ -178,7 +171,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.ambientOcclusion);
 	this.aoMap = new TextureForm(this.form);
 	this.aoMap.size.set(0, 100);
-	this.aoMap.setOnChange(function(file)
+	this.aoMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "aoMap", self.aoMap.getValue()));
 		self.material.needsUpdate = true;

@@ -2,13 +2,10 @@ import {Locale} from "../../locale/LocaleManager.js";
 import {Viewport} from "../../../core/objects/cameras/Viewport.js";
 import {ChangeAction} from "../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../history/action/ActionBundle.js";
-import {Action} from "../../history/action/Action.js";
 import {FormSnippet} from "./FormSnippet.js";
 import {Editor} from "../../Editor.js";
-import {Text} from "../../components/Text.js";
 import {VectorBox} from "../../components/input/VectorBox.js";
 import {DropdownList} from "../../components/input/DropdownList.js";
-import {Form} from "../../components/Form.js";
 
 /** 
  * Viewport object form snippet, used to edit camera/renderer viewport.

@@ -1,11 +1,8 @@
-import {Image} from "../../../core/resources/Image.js";
 import {DOMUtils} from "../../utils/DOMUtils.js";
-import {Interface} from "../../gui/Interface.js";
 import {Global} from "../../Global.js";
 import {Text} from "../Text.js";
 import {ButtonMenu} from "./ButtonMenu.js";
 import {Component} from "../Component.js";
-import {Button} from "../buttons/Button.js";
 import {Vector2} from "three";
 
 /**

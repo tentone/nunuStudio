@@ -1,7 +1,5 @@
 import {EventManager} from "../../../core/utils/EventManager.js";
-import {Interface} from "../../gui/Interface.js";
 import {Editor} from "../../Editor.js";
-import {Division} from "../Division.js";
 import {Component} from "../Component.js";
 
 /**

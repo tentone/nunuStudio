@@ -1,16 +1,10 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Texture} from "../../../../../core/texture/Texture.js";
-import {Resource} from "../../../../../core/resources/Resource.js";
-import {Model} from "../../../../../core/resources/Model.js";
-import {Image} from "../../../../../core/resources/Image.js";
-import {Font} from "../../../../../core/resources/Font.js";
-import {Audio} from "../../../../../core/resources/Audio.js";
 import {TextSprite} from "../../../../../core/objects/text/TextSprite.js";
 import {TextMesh} from "../../../../../core/objects/text/TextMesh.js";
 import {TextBitmap} from "../../../../../core/objects/text/TextBitmap.js";
 import {Sprite} from "../../../../../core/objects/sprite/Sprite.js";
 import {Script} from "../../../../../core/objects/script/Script.js";
-import {Scene} from "../../../../../core/objects/Scene.js";
 import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
@@ -38,17 +32,14 @@ import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBo
 import {CapsuleBufferGeometry} from "../../../../../core/geometries/CapsuleBufferGeometry.js";
 import {FileSystem} from "../../../../../core/FileSystem.js";
 import {AddResourceAction} from "../../../../history/action/resources/AddResourceAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {SceneEditor} from "../SceneEditor.js";
-import {Interface} from "../../../Interface.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
 import {Text} from "../../../../components/Text.js";
 import {Component} from "../../../../components/Component.js";
 import {ButtonDrawer} from "../../../../components/buttons/ButtonDrawer.js";
-import {Button} from "../../../../components/buttons/Button.js";
 import {Box, Vec3, Sphere, Cylinder, Plane, Body, Particle} from "cannon";
-import {BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, TorusKnotBufferGeometry, TorusBufferGeometry, ConeBufferGeometry, PlaneBufferGeometry, CircleBufferGeometry, RingBufferGeometry, IcosahedronBufferGeometry, TetrahedronBufferGeometry, OctahedronBufferGeometry, DodecahedronBufferGeometry, Vector3, ParametricGeometry} from "three";
+import {BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, TorusKnotBufferGeometry, TorusBufferGeometry, ConeBufferGeometry, PlaneBufferGeometry, CircleBufferGeometry, RingBufferGeometry, IcosahedronBufferGeometry, TetrahedronBufferGeometry, OctahedronBufferGeometry, DodecahedronBufferGeometry} from "three";
 
 /**
  * Side bar is presented in the editor to add more objects to the scene.

@@ -1,16 +1,12 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Texture} from "../../../../../core/texture/Texture.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {MaterialEditor} from "../MaterialEditor.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {TextureForm} from "../../../../components/input/TextureForm.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Form} from "../../../../components/Form.js";
 import {Sprite, Color} from "three";
 
 function SpriteMaterialEditor(parent, closeable, container, index)
@@ -70,7 +66,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(100, 100);
-	this.map.setOnChange(function(file)
+	this.map.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;

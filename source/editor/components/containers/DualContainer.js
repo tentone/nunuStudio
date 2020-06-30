@@ -1,6 +1,4 @@
 import {EventManager} from "../../../core/utils/EventManager.js";
-import {Container} from "../../../core/objects/misc/Container.js";
-import {Interface} from "../../gui/Interface.js";
 import {Component} from "../Component.js";
 
 /**

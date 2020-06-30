@@ -1,5 +1,3 @@
-import {Pass} from "../../core/postprocessing/Pass.js";
-import {Text} from "./Text.js";
 import {TextBox} from "./input/TextBox.js";
 import {Component} from "./Component.js";
 

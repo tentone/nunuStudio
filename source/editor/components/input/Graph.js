@@ -1,6 +1,5 @@
 import {EventManager} from "../../../core/utils/EventManager.js";
 import {DOMUtils} from "../../utils/DOMUtils.js";
-import {Text} from "../Text.js";
 import {Component} from "../Component.js";
 
 /**

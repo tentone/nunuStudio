@@ -1,4 +1,3 @@
-import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
 import {MeshBasicMaterial, FrontSide} from "three";
 
 /**

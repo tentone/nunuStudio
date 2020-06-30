@@ -1,17 +1,13 @@
 import {Locale} from "../../locale/LocaleManager.js";
 import {RendererConfiguration} from "../../../core/renderer/RendererConfiguration.js";
-import {Scene} from "../../../core/objects/Scene.js";
 import {ChangeAction} from "../../history/action/ChangeAction.js";
 import {CallbackAction} from "../../history/action/CallbackAction.js";
-import {Action} from "../../history/action/Action.js";
 import {SceneEditor} from "../tab/scene-editor/SceneEditor.js";
 import {FormSnippet} from "./FormSnippet.js";
 import {Editor} from "../../Editor.js";
-import {Text} from "../../components/Text.js";
 import {NumberBox} from "../../components/input/NumberBox.js";
 import {DropdownList} from "../../components/input/DropdownList.js";
 import {CheckBox} from "../../components/input/CheckBox.js";
-import {Form} from "../../components/Form.js";
 import {BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping, ACESFilmicToneMapping} from "three";
 
 /** 

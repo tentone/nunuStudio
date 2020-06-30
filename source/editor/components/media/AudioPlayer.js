@@ -1,10 +1,6 @@
-import {Timer} from "../../../core/utils/timer/Timer.js";
 import {EventManager} from "../../../core/utils/EventManager.js";
-import {Audio} from "../../../core/resources/Audio.js";
 import {Global} from "../../Global.js";
-import {Text} from "../Text.js";
 import {Component} from "../Component.js";
-import {Button} from "../buttons/Button.js";
 import {AudioContext} from "three";
 
 function AudioPlayer(parent)
@@ -115,7 +111,7 @@ function AudioPlayer(parent)
 		self.scrubber.style.left = self.progress.style.width;
 	});
 
-	this.manager.add(window, "mouseup", function(event)
+	this.manager.add(window, "mouseup", function()
 	{	
 		self.dragging = false;
 		self.time = self.seekProgress * self.buffer.duration;

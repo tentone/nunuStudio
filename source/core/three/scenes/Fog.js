@@ -1,6 +1,4 @@
-import {Scene} from "../../objects/Scene.js";
 import {Fog} from "three";
-
 
 /**
  * Fog class is used to store fog attributes attached to a Scene

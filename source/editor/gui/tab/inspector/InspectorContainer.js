@@ -13,7 +13,6 @@ import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../core/objects/misc/Sky.js";
 import {InstancedMesh} from "../../../../core/objects/mesh/InstancedMesh.js";
-import {KinectDevice} from "../../../../core/objects/device/KinectDevice.js";
 import {OrbitControls} from "../../../../core/objects/controls/OrbitControls.js";
 import {FirstPersonControls} from "../../../../core/objects/controls/FirstPersonControls.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";

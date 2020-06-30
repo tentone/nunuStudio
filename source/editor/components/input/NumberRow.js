@@ -1,4 +1,3 @@
-import {Interface} from "../../gui/Interface.js";
 import {Text} from "../Text.js";
 import {NumberBox} from "./NumberBox.js";
 import {Component} from "../Component.js";

@@ -1,4 +1,3 @@
-import {Video} from "../../../core/resources/Video.js";
 import {Media} from "./Media.js";
 import {Component} from "../Component.js";
 

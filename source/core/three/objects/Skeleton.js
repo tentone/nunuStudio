@@ -5,7 +5,6 @@ import {Resource} from "../../resources/Resource.js";
 import {Container} from "../../objects/misc/Container.js";
 import {SkinnedMesh} from "../../objects/mesh/SkinnedMesh.js";
 import {Mesh} from "../../objects/mesh/Mesh.js";
-
 import {Skeleton, Math, Object3D, Bone, Matrix4} from "three";
 
 /**

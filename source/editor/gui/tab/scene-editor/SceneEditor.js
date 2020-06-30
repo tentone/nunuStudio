@@ -3,7 +3,6 @@ import {EventManager} from "../../../../core/utils/EventManager.js";
 import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
 import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
 import {Video} from "../../../../core/resources/Video.js";
-import {Resource} from "../../../../core/resources/Resource.js";
 import {Model} from "../../../../core/resources/Model.js";
 import {Image} from "../../../../core/resources/Image.js";
 import {Font} from "../../../../core/resources/Font.js";
@@ -12,7 +11,6 @@ import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
 import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {LensFlare} from "../../../../core/objects/misc/LensFlare.js";
 import {Container} from "../../../../core/objects/misc/Container.js";
-import {OrbitControls} from "../../../../core/objects/controls/OrbitControls.js";
 import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
@@ -21,7 +19,6 @@ import {AudioEmitter} from "../../../../core/objects/audio/AudioEmitter.js";
 import {Nunu} from "../../../../core/Nunu.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {Keyboard} from "../../../../core/input/Keyboard.js";
-import {Key} from "../../../../core/input/Key.js";
 import {FileSystem} from "../../../../core/FileSystem.js";
 import {ObjectIcons} from "../../../utils/ObjectIcons.js";
 import {Settings} from "../../../Settings.js";
@@ -30,7 +27,6 @@ import {AddResourceAction} from "../../../history/action/resources/AddResourceAc
 import {SwapAction} from "../../../history/action/objects/SwapAction.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../history/action/ActionBundle.js";
-import {Action} from "../../../history/action/Action.js";
 import {OrientationCube} from "./utils/OrientationCube.js";
 import {TransformControls} from "./transform/TransformControls.js";
 import {ToolBar} from "./toolbar/ToolBar.js";
@@ -47,18 +43,14 @@ import {GridHelper} from "./helpers/GridHelper.js";
 import {EditorPlanarControls} from "./controls/EditorPlanarControls.js";
 import {EditorOrbitControls} from "./controls/EditorOrbitControls.js";
 import {EditorFreeControls} from "./controls/EditorFreeControls.js";
-import {Interface} from "../../Interface.js";
 import {DragBuffer} from "../../DragBuffer.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {Component} from "../../../components/Component.js";
-import {Canvas} from "../../../components/Canvas.js";
 import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
-import {Button} from "../../../components/buttons/Button.js";
 import {Vector2, Mesh, SkinnedMesh, MeshStandardMaterial, Line, LineBasicMaterial, Points, PointsMaterial, Sprite, SpriteMaterial, Material, ShaderMaterial, Texture, Geometry, BufferGeometry, Raycaster, Object3D, Scene, AxesHelper, Group, Camera, CameraHelper, Light, DirectionalLight, DirectionalLightHelper, LightProbe, PointLight, PointLightHelper, RectAreaLight, SpotLight, SpotLightHelper, HemisphereLight, HemisphereLightHelper, Bone, BoxHelper} from "three";
 
 /** 
@@ -165,7 +157,6 @@ function SceneEditor(parent, closeable, container, index)
 					// Check if mouse intersects and object
 					if(intersections.length > 0)
 					{
-						var name = FileSystem.getFileName(file.name);
 						var object = intersections[0].object;
 
 						// Image

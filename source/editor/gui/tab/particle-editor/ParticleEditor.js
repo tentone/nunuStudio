@@ -1,16 +1,11 @@
 import {Locale} from "../../../locale/LocaleManager.js";
-import {Texture} from "../../../../core/texture/Texture.js";
-import {Container} from "../../../../core/objects/misc/Container.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {DOMUtils} from "../../../utils/DOMUtils.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
 import {CallbackAction} from "../../../history/action/CallbackAction.js";
-import {Action} from "../../../history/action/Action.js";
-import {Interface} from "../../Interface.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
-import {Text} from "../../../components/Text.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
@@ -22,10 +17,7 @@ import {NumberBox} from "../../../components/input/NumberBox.js";
 import {Graph} from "../../../components/input/Graph.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {ColorGradientChooser} from "../../../components/input/ColorGradientChooser.js";
-import {Form} from "../../../components/Form.js";
 import {DualContainer} from "../../../components/containers/DualContainer.js";
-import {Component} from "../../../components/Component.js";
-import {Canvas} from "../../../components/Canvas.js";
 import {Scene, GridHelper, AxesHelper, Vector2, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, Vector3, Color} from "three";
 
 /**
@@ -94,7 +86,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.addText(Locale.texture);
 	this.texture = new TextureChooser(this.form);
 	this.texture.size.set(100, 100);
-	this.texture.setOnChange(function(file)
+	this.texture.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.particle.group, "texture", self.texture.getValue()));
 		self.particle.reload();

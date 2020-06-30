@@ -1,7 +1,5 @@
 import {Nunu} from "../../Nunu.js";
-
 import {Texture} from "three";
-
 
 // Serialization does not serialize any image data.
 Texture.prototype.toJSON = function(meta)

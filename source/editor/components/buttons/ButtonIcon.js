@@ -1,6 +1,4 @@
-import {Image} from "../../../core/resources/Image.js";
 import {Component} from "../Component.js";
-import {ButtonIconToggle} from "./ButtonIconToggle.js";
 import {Button} from "./Button.js";
 
 /**

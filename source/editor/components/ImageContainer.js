@@ -1,5 +1,3 @@
-import {Image} from "../../core/resources/Image.js";
-import {Container} from "../../core/objects/misc/Container.js";
 import {Component} from "./Component.js";
 
 /**

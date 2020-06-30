@@ -1,5 +1,3 @@
-import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
-import {WireframeHelper} from "./WireframeHelper.js";
 import {SkinnedMesh, MeshBasicMaterial} from "three";
 
 function SkinnedWireframeHelper(object, hex) 

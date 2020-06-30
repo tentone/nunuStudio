@@ -1,10 +1,7 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Scene} from "../../../../../core/objects/Scene.js";
 import {ToolBarGroup} from "./ToolBarGroup.js";
 import {SceneEditor} from "../SceneEditor.js";
-import {Interface} from "../../../Interface.js";
 import {Global} from "../../../../Global.js";
-import {Editor} from "../../../../Editor.js";
 import {Component} from "../../../../components/Component.js";
 
 /**

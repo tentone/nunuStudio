@@ -1,10 +1,8 @@
 import {DOMUtils} from "../../utils/DOMUtils.js";
-import {Interface} from "../../gui/Interface.js";
 import {Text} from "../Text.js";
 import {DropdownMenu} from "./DropdownMenu.js";
 import {ButtonMenu} from "./ButtonMenu.js";
 import {Component} from "../Component.js";
-import {Button} from "../buttons/Button.js";
 import {Vector2} from "three";
 
 /**

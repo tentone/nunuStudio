@@ -1,17 +1,12 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Model} from "../../../../../core/resources/Model.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {MaterialEditor} from "../MaterialEditor.js";
-import {Interface} from "../../../Interface.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
-import {Form} from "../../../../components/Form.js";
 import {Color, PointLight, AmbientLight, Mesh} from "three";
 
 function MeshMaterialEditor(parent, closeable, container, index)

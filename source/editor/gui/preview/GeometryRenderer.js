@@ -1,8 +1,5 @@
-import {Texture} from "../../../core/texture/Texture.js";
 import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
-import {TextureRenderer} from "./TextureRenderer.js";
 import {PreviewRenderer} from "./PreviewRenderer.js";
-import {Text} from "../../components/Text.js";
 import {DirectionalLight, AmbientLight, Mesh, Geometry, MeshPhongMaterial, Vector3} from "three";
 
 /** 

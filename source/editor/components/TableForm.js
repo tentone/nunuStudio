@@ -1,6 +1,4 @@
-import {Interface} from "../gui/Interface.js";
 import {Text} from "./Text.js";
-import {Form} from "./Form.js";
 import {Division} from "./Division.js";
 import {Component} from "./Component.js";
 import {Vector2} from "three";

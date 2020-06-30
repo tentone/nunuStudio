@@ -1,4 +1,3 @@
-import {LightProbe} from "../../../../../core/objects/lights/LightProbe.js";
 import {ShaderMaterial, SphereBufferGeometry, Mesh} from "three";
 
 function LightProbeHelper(lightProbe, size)

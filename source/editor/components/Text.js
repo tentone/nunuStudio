@@ -1,4 +1,3 @@
-import {Font} from "../../core/resources/Font.js";
 import {Component} from "./Component.js";
 import {Vector2} from "three";
 

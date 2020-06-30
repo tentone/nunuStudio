@@ -1,8 +1,6 @@
-import {CubeTexture} from "../../../core/texture/CubeTexture.js";
 import {OrthographicCamera} from "../../../core/objects/cameras/OrthographicCamera.js";
 import {PreviewRenderer} from "./PreviewRenderer.js";
 import {CubemapFlatRenderer} from "./CubemapFlatRenderer.js";
-import {Text} from "../../components/Text.js";
 import {MeshBasicMaterial, Mesh, PlaneBufferGeometry, Texture} from "three";
 
 /** 

@@ -1,4 +1,3 @@
-import {RectAreaLight} from "../../../../../core/objects/lights/RectAreaLight.js";
 import {Mesh, PlaneBufferGeometry, MeshBasicMaterial, DoubleSide} from "three";
 
 /**

@@ -1,4 +1,3 @@
-import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
 import {Vec3, Sphere, Box, Plane, ConvexPolyhedron, Trimesh, Heightfield, Shape} from "cannon";
 import {Object3D, MeshBasicMaterial, SphereBufferGeometry, BoxBufferGeometry, PlaneBufferGeometry, CylinderBufferGeometry, SphereGeometry, BoxGeometry, PlaneGeometry, Mesh, Geometry, Vector3, Face3} from "three";
 

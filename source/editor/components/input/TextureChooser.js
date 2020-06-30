@@ -4,17 +4,13 @@ import {SpriteSheetTexture} from "../../../core/texture/SpriteSheetTexture.js";
 import {CubeTexture} from "../../../core/texture/CubeTexture.js";
 import {CanvasTexture} from "../../../core/texture/CanvasTexture.js";
 import {Video} from "../../../core/resources/Video.js";
-import {Resource} from "../../../core/resources/Resource.js";
 import {Image} from "../../../core/resources/Image.js";
-import {Sprite} from "../../../core/objects/sprite/Sprite.js";
 import {FileSystem} from "../../../core/FileSystem.js";
 import {Loaders} from "../../Loaders.js";
 import {DragBuffer} from "../../gui/DragBuffer.js";
 import {Global} from "../../Global.js";
 import {Editor} from "../../Editor.js";
-import {Text} from "../Text.js";
 import {Component} from "../Component.js";
-import {Canvas} from "../Canvas.js";
 import {Texture} from "three";
 
 function TextureChooser(parent)

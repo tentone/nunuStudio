@@ -1,4 +1,3 @@
-import {Text} from "../../../../components/Text.js";
 import {Object3D, Sprite, Texture, SpriteMaterial} from "three";
 
 /** 

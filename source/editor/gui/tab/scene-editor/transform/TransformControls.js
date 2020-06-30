@@ -3,7 +3,6 @@ import {TransformGizmoTranslate} from "./gizmo/TransformGizmoTranslate.js";
 import {TransformGizmoScale} from "./gizmo/TransformGizmoScale.js";
 import {TransformGizmoRotate} from "./gizmo/TransformGizmoRotate.js";
 import {TransformGizmo} from "./gizmo/TransformGizmo.js";
-import {Canvas} from "../../../../components/Canvas.js";
 import {Camera, Object3D, Raycaster, Vector2, Vector3, Matrix4, Euler, Quaternion, PerspectiveCamera} from "three";
 
 /*

@@ -1,4 +1,3 @@
-import {GizmoMaterial} from "./GizmoMaterial.js";
 import {LineBasicMaterial} from "three";
 
 /**

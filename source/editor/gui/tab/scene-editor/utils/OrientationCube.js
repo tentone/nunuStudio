@@ -1,8 +1,6 @@
 import {Texture} from "../../../../../core/texture/Texture.js";
 import {Viewport} from "../../../../../core/objects/cameras/Viewport.js";
 import {Global} from "../../../../Global.js";
-import {Text} from "../../../../components/Text.js";
-import {Form} from "../../../../components/Form.js";
 import {PerspectiveCamera, Raycaster, Vector2, Scene, PlaneBufferGeometry, RGBFormat, Mesh, MeshBasicMaterial} from "three";
 
 /** 

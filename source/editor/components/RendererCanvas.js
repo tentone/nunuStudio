@@ -1,11 +1,8 @@
-import {Image} from "../../core/resources/Image.js";
 import {RendererConfiguration} from "../../core/renderer/RendererConfiguration.js";
 import {CSS3DRenderer} from "../../core/renderer/css/CSS3DRenderer.js";
 import {CSS3DObject} from "../../core/renderer/css/CSS3DObject.js";
 import {Editor} from "../Editor.js";
-import {Division} from "./Division.js";
 import {Component} from "./Component.js";
-import {Canvas} from "./Canvas.js";
 import {Vector2, WebGlRenderer} from "three";
 
 /**

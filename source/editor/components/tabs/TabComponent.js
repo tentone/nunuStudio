@@ -1,10 +1,7 @@
-import {Container} from "../../../core/objects/misc/Container.js";
-import {Settings} from "../../Settings.js";
 import {TabGroup} from "./TabGroup.js";
 import {TabButton} from "./TabButton.js";
 import {TabContainer} from "./splittable/TabContainer.js";
 import {Component} from "../Component.js";
-import {Button} from "../buttons/Button.js";
 import {Math} from "three";
 
 /**
@@ -25,7 +22,6 @@ function TabComponent(parent, closeable, container, index, title, icon)
 {
 	Component.call(this, parent, "div");
 
-	var self = this;
 
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = "var(--panel-color)";
@@ -189,7 +185,7 @@ TabComponent.prototype.deactivate = function()
  * @method attach
  * @param {Object} object
  */
-TabComponent.prototype.attach = function(object){};
+TabComponent.prototype.attach = function(){};
 
 /**
  * Check if an object or resource is attached to the tab.
@@ -198,7 +194,7 @@ TabComponent.prototype.attach = function(object){};
  *
  * @method isAttached
  */
-TabComponent.prototype.isAttached = function(object)
+TabComponent.prototype.isAttached = function()
 {
 	return false;
 };

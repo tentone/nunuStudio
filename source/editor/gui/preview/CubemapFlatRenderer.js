@@ -1,7 +1,6 @@
 import {ShaderMaterial, OrthographicCamera, Scene, PlaneBufferGeometry, BufferAttribute, Mesh} from "three";
 
-
-/** 
+/**
  * The cube map flat renderer generates preview for cube map textures.
  *
  * Is draws the faces of the cube map into a flat surface.

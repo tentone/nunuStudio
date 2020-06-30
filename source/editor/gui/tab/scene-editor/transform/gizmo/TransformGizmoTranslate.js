@@ -1,6 +1,5 @@
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../../../history/action/ActionBundle.js";
-import {Action} from "../../../../../history/action/Action.js";
 import {TransformControls} from "../TransformControls.js";
 import {GizmoMaterial} from "../GizmoMaterial.js";
 import {GizmoLineMaterial} from "../GizmoLineMaterial.js";

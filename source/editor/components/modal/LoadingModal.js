@@ -1,9 +1,5 @@
-import {Timer} from "../../../core/utils/timer/Timer.js";
 import {AnimationTimer} from "../../../core/utils/timer/AnimationTimer.js";
 import {EventManager} from "../../../core/utils/EventManager.js";
-import {Image} from "../../../core/resources/Image.js";
-import {Container} from "../../../core/objects/misc/Container.js";
-import {Interface} from "../../gui/Interface.js";
 import {Text} from "../Text.js";
 import {ImageContainer} from "../ImageContainer.js";
 import {Component} from "../Component.js";
@@ -74,7 +70,7 @@ function LoadingModal(parent)
 	
 	// Event manager
 	this.manager = new EventManager();
-	this.manager.add(window, "resize", function(event)
+	this.manager.add(window, "resize", function()
 	{
 		self.updateInterface();
 	});

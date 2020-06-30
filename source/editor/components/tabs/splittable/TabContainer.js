@@ -1,6 +1,3 @@
-import {Container} from "../../../../core/objects/misc/Container.js";
-import {Settings} from "../../../Settings.js";
-import {Interface} from "../../../gui/Interface.js";
 import {TabGroup} from "../TabGroup.js";
 import {TabComponent} from "../TabComponent.js";
 import {TabGroupSplit} from "./TabGroupSplit.js";
@@ -193,7 +190,7 @@ TabContainer.prototype.getTab = function(type, object)
  * 
  * @method clear
  */
-TabContainer.prototype.clear = function(forceAll)
+TabContainer.prototype.clear = function()
 {
 	this.group.clear();
 };

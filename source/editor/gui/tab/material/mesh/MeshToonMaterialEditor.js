@@ -1,19 +1,13 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Texture} from "../../../../../core/texture/Texture.js";
-import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
-import {Action} from "../../../../history/action/Action.js";
 import {MeshMaterialEditor} from "./MeshMaterialEditor.js";
-import {MaterialEditor} from "../MaterialEditor.js";
 import {Editor} from "../../../../Editor.js";
-import {Text} from "../../../../components/Text.js";
 import {VectorBox} from "../../../../components/input/VectorBox.js";
 import {TextureForm} from "../../../../components/input/TextureForm.js";
 import {Slider} from "../../../../components/input/Slider.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
-import {Form} from "../../../../components/Form.js";
 import {TangentSpaceNormalMap, ObjectSpaceNormalMap} from "three";
 
 function MeshToonMaterialEditor(parent, closeable, container, index)
@@ -52,7 +46,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.textureMap);
 	this.map = new TextureForm(this.form);
 	this.map.size.set(0, 100);
-	this.map.setOnChange(function(file)
+	this.map.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
@@ -64,7 +58,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.gradientMap);
 	this.gradientMap = new TextureForm(this.form);
 	this.gradientMap.size.set(0, 100);
-	this.gradientMap.setOnChange(function(file)
+	this.gradientMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "gradientMap", self.gradientMap.getValue()));
 		self.material.needsUpdate = true;
@@ -76,7 +70,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.bumpMap);
 	this.bumpMap = new TextureForm(this.form);
 	this.bumpMap.size.set(0, 100);
-	this.bumpMap.setOnChange(function(file)
+	this.bumpMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
 		self.material.needsUpdate = true;
@@ -102,7 +96,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.normalMap);
 	this.normalMap = new TextureForm(this.form);
 	this.normalMap.size.set(0, 100);
-	this.normalMap.setOnChange(function(file)
+	this.normalMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
 		self.material.needsUpdate = true;
@@ -142,7 +136,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.displacementMap);
 	this.displacementMap = new TextureForm(this.form);
 	this.displacementMap.size.set(0, 100);
-	this.displacementMap.setOnChange(function(file)
+	this.displacementMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
 		self.material.needsUpdate = true;
@@ -180,7 +174,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.specularMap);
 	this.specularMap = new TextureForm(this.form);
 	this.specularMap.size.set(0, 100);
-	this.specularMap.setOnChange(function(file)
+	this.specularMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
 		self.material.needsUpdate = true;
@@ -192,7 +186,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.emissiveMap);
 	this.emissiveMap = new TextureForm(this.form);
 	this.emissiveMap.size.set(0, 100);
-	this.emissiveMap.setOnChange(function(file)
+	this.emissiveMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
 		self.material.needsUpdate = true;
@@ -229,7 +223,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.lightMap);
 	this.lightMap = new TextureForm(this.form);
 	this.lightMap.size.set(0, 100);
-	this.lightMap.setOnChange(function(file)
+	this.lightMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "lightMap", self.lightMap.getValue()));
 		self.material.needsUpdate = true;
@@ -254,7 +248,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.alphaMap);
 	this.alphaMap = new TextureForm(this.form);
 	this.alphaMap.size.set(0, 100);
-	this.alphaMap.setOnChange(function(file)
+	this.alphaMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 		self.material.needsUpdate = true;
@@ -266,7 +260,7 @@ function MeshToonMaterialEditor(parent, closeable, container, index)
 	this.form.addText(Locale.ambientOcclusion);
 	this.aoMap = new TextureForm(this.form);
 	this.aoMap.size.set(0, 100);
-	this.aoMap.setOnChange(function(file)
+	this.aoMap.setOnChange(function()
 	{
 		Editor.addAction(new ChangeAction(self.material, "aoMap", self.aoMap.getValue()));
 		self.material.needsUpdate = true;

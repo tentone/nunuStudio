@@ -1,6 +1,5 @@
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../../../history/action/ActionBundle.js";
-import {Action} from "../../../../../history/action/Action.js";
 import {TransformControls} from "../TransformControls.js";
 import {GizmoLineMaterial} from "../GizmoLineMaterial.js";
 import {TransformGizmo} from "./TransformGizmo.js";
@@ -98,11 +97,6 @@ TransformGizmoRotate.prototype.update = function(rotation, eye2)
 {
 	TransformGizmo.prototype.update.apply(this, arguments);
 
-	var group =
-	{
-		handles: this.handles,
-		pickers: this.pickers
-	};
 
 	var tempMatrix = new Matrix4();
 	var worldRotation = new Euler(0, 0, 1);
