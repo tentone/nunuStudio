@@ -1,7 +1,7 @@
 var Global =
 {
-	FILE_PATH: "./source/files/",
-	RUNTIME_PATH: "./source/runtime/",
+	FILE_PATH: "./files/",
+	RUNTIME_PATH: "./runtime/",
 	BUILD_PATH: "./build/nunu.min.js"
 };
 
