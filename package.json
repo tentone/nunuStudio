@@ -10,7 +10,7 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"webpack": "webpack --config webpack.config.js",
+		"webpack": "webpack --config webpack.prod.js",
 		"dev": "webpack-dev-server --open --config webpack.dev.js",
 		"start": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"serve": "http-server . -p 8080 --cors -o",
@@ -54,20 +54,20 @@
 		"jszip": "^3.5.0"
 	},
 	"devDependencies": {
+		"nwjs-webpack-plugin": "0.5.0",
 		"@shoutem/webpack-prepend-append": "^1.0.1",
 		"@types/node": "^14.0.14",
 		"@types/webpack": "^4.41.18",
 		"copy-webpack-plugin": "^6.0.2",
 		"cordova": "~9.0.0",
-		"css-loader": "^3.6.0",
 		"exports-loader": "^1.1.0",
 		"html-loader": "^1.1.0",
 		"html-webpack-plugin": "^4.3.0",
 		"imports-loader": "^1.1.0",
 		"nwjs-builder-phoenix": "^1.15.0",
-		"style-loader": "^1.2.1",
 		"uglifyjs-webpack-plugin": "^2.2.0",
 		"webpack": "^4.42.1",
+		"webpack-bundle-analyzer": "^3.8.0",
 		"webpack-cleanup-plugin": "^0.5.1",
 		"webpack-cli": "^3.3.11",
 		"webpack-dev-server": "^3.10.3",
