@@ -36,17 +36,6 @@ module.exports = {
 		modules: [source, "node_modules"],
 		extensions: [".js"]
 	},
-	module: {
-		rules: [
-			{
-				test: /.*spine-threejs.*/g,
-				loader: "@shoutem/webpack-prepend-append",
-				query: {
-					append: "export { spine };"
-				}
-			}
-		]
-	},
 	output: {
 		filename: "bundle.js",
 		path: output

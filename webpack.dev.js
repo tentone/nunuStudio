@@ -1,7 +1,6 @@
 const Path = require("path");
 const Webpack = require("webpack");
 const Merge = require("webpack-merge");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
  
 const common = require("./webpack.config.js");
 
@@ -25,7 +24,6 @@ module.exports = Merge(common, {
 		noInfo: false
 	},
 	plugins: [
-		// new BundleAnalyzerPlugin(),
 		new Webpack.NamedModulesPlugin(),
 		new Webpack.HotModuleReplacementPlugin()
 	]
