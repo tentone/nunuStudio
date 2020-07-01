@@ -37,13 +37,12 @@ module.exports = {
 		extensions: [".js"]
 	},
 	module: {
-		loaders: [
+		rules: [
 			{
-				test: /.*spine-threejs.*/,
+				test: /.*spine-threejs.*/g,
 				loader: "@shoutem/webpack-prepend-append",
 				query: {
-					prepend: "",
-					append: "\n\nexport { spine };"
+					append: "export { spine };"
 				}
 			}
 		]
