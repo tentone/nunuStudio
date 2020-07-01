@@ -1,7 +1,7 @@
 const Path = require("path");
-const Webpack = require('webpack');
+const Webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const context = Path.resolve(__dirname, ".");
 const source = context + "/source";
@@ -16,8 +16,8 @@ module.exports = {
 		new CopyPlugin({
 			patterns: [
 				{
-					from: source + '/files',
-					to: output + '/files',
+					from: source + "/files",
+					to: output + "/files",
 					force: true
 				}
 			],
@@ -33,22 +33,21 @@ module.exports = {
 		})
 	],
 	resolve: {
-		modules: [source, "node_modules"]
+		modules: [source, "node_modules"],
+		extensions: [".js"]
 	},
 	module: {
-		rules: [
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader'],
-			}
-		],
+		/*rules: [
+			{test: /\.css$/, use: "css-loader"},
+			{test: /\.ts$/, use: "ts-loader"}
+		], */
 		loaders: [
 			{
-				test: /spine-threejs/,
-				loader: '@shoutem/webpack-prepend-append',
+				test: /.*spine-threejs.*/,
+				loader: "@shoutem/webpack-prepend-append",
 				query: {
-					prepend: '',
-					append: '\n\nexport { spine };'
+					prepend: "",
+					append: "\n\nexport { spine };"
 				}
 			}
 		]
