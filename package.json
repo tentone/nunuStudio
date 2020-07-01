@@ -45,10 +45,10 @@
 		"cannon": "0.6.2",
 		"codemirror": "^5.55.0",
 		"js.blend": "github:acweathersby/js.blend",
-		"sparse-octree": "^6.0.2",
 		"spine-runtimes": "github:EsotericSoftware/spine-runtimes",
 		"tern": "^0.24.3",
 		"three": "^0.117.1",
+		"sparse-octree": "^6.0.2",
 		"iterator-result": "^1.0.0",
 		"math-ds": "1.2.1",
 		"jszip": "^3.5.0"

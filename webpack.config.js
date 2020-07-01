@@ -37,10 +37,6 @@ module.exports = {
 		extensions: [".js"]
 	},
 	module: {
-		/*rules: [
-			{test: /\.css$/, use: "css-loader"},
-			{test: /\.ts$/, use: "ts-loader"}
-		], */
 		loaders: [
 			{
 				test: /.*spine-threejs.*/,
