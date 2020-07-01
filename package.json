@@ -54,19 +54,22 @@
 		"jszip": "^3.5.0"
 	},
 	"devDependencies": {
-		"nwjs-webpack-plugin": "0.5.0",
+		"@shoutem/webpack-prepend-append": "^1.0.1",
 		"@types/node": "^14.0.14",
 		"@types/webpack": "^4.41.18",
 		"copy-webpack-plugin": "^6.0.2",
 		"cordova": "~9.0.0",
 		"html-webpack-plugin": "^4.3.0",
+		"exports-loader": "^1.1.0",
 		"nwjs-builder-phoenix": "^1.15.0",
+		"nwjs-webpack-plugin": "0.5.0",
 		"uglifyjs-webpack-plugin": "^2.2.0",
 		"webpack": "^4.42.1",
 		"webpack-cleanup-plugin": "^0.5.1",
 		"webpack-cli": "^3.3.11",
 		"webpack-dev-server": "^3.10.3",
 		"webpack-merge": "^4.2.2",
+		"webpack-merge-and-include-globally": "^2.1.25",
 		"webpack-node-externals": "^1.7.2",
 		"yuidocjs": "^0.10.2"
 	},
