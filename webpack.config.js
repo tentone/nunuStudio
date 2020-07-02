@@ -39,11 +39,15 @@ module.exports = {
 				],
 				"jshint.js": [
 					'lib/jshint.min.js',
+					//'node_modules/jshint/dist/jshint.js'
 				],
 				"acorn.js": [
 					'lib/acorn/acorn.js',
 					'lib/acorn/acorn_loose.js',
-					'lib/acorn/walk.js'
+					'lib/acorn/walk.js',
+					/*'node_modules/acorn/dist/acorn.js',
+					'node_modules/acorn_loose/dist/acorn_loose.js',
+					"node_modules/acorn_walk/dist/walk.js"*/
 				],
 				"tern.js": [
 					'lib/tern/signal.js',
@@ -52,6 +56,12 @@ module.exports = {
 					'lib/tern/comment.js',
 					'lib/tern/infer.js',
 					'lib/tern/plugin/doc_comment.js'
+					/*'node_modules/tern/lib/signal.js',
+					'node_modules/tern/lib/tern.js',
+					'node_modules/tern/lib/def.js',
+					'node_modules/tern/lib/comment.js',
+					'node_modules/tern/lib/infer.js',
+					'node_modules/tern/plugin/doc_comment.js',*/
 				],
 				"codemirror.js": [
 					'node_modules/codemirror/lib/codemirror.js',

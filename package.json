@@ -53,7 +53,8 @@
 		"math-ds": "^1.2.1",
 		"jszip": "^3.5.0",
 		"glsl-editor": "^1.0.0",
-		"three-bmfont-text": "^2.3.0"
+		"three-bmfont-text": "^2.3.0",
+		"jshint": "^2.11.1"
 	},
 	"devDependencies": {
 		"@shoutem/webpack-prepend-append": "^1.0.1",
