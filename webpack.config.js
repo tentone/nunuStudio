@@ -34,11 +34,24 @@ module.exports = {
 		}),
 		new MergeIntoSingleFilePlugin({
 			files: {
+				"jscolor.js": [
+					'lib/jscolor.min.js',
+				],
+				"jshint.js": [
+					'lib/jshint.min.js',
+				],
 				"acorn.js": [
-					'lib/acorn/**/*.js',
+					'lib/acorn/acorn.js',
+					'lib/acorn/acorn_loose.js',
+					'lib/acorn/walk.js'
 				],
 				"tern.js": [
-					'lib/tern/**/*.js',
+					'lib/tern/signal.js',
+					'lib/tern/tern.js',
+					'lib/tern/def.js',
+					'lib/tern/comment.js',
+					'lib/tern/infer.js',
+					'lib/tern/plugin/doc_comment.js'
 				],
 				"codemirror.js": [
 					'node_modules/codemirror/lib/codemirror.js',

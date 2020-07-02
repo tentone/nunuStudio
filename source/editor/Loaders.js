@@ -44,7 +44,7 @@ import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
 // import {AWDLoader} from "three/examples/jsm/loaders/AWDLoader";
 // import {AssimpJSONLoader} from "three/examples/jsm/loaders/AssimpJSONLoader";
 // import {BabylonLoader} from "three/examples/jsm/loaders/BabylonLoader";
-import JSBLEND from "js.blend/build/js.blend.js";
+// import JSBLEND from "js.blend/build/js.blend.js";
 
 function Loaders() {}
 
@@ -572,7 +572,7 @@ Loaders.loadModel = function(file, parent)
 			reader.readAsText(file);
 		}*/
 		// Blender
-		else if(extension === "blend")
+		/*else if(extension === "blend")
 		{	
 			var reader = new FileReader();
 			reader.onload = function()
@@ -595,7 +595,7 @@ Loaders.loadModel = function(file, parent)
 				}
 			};
 			reader.readAsArrayBuffer(file);
-		}
+		}*/
 		//3DS
 		else if(extension === "3ds")
 		{

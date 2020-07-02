@@ -4,7 +4,7 @@ import {Global} from "../../Global.js";
 import {Text} from "../../components/Text.js";
 import {TabComponent} from "../../components/tabs/TabComponent.js";
 import {REVISION} from "three";
-import CodeMirror from "codemirror/lib/codemirror.js";
+import * as CANNON from "cannon";
 
 function AboutTab(parent, closeable, container, index)
 {
