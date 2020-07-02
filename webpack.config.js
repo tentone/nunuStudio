@@ -1,7 +1,7 @@
 const Path = require("path");
 const Webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally');
+const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyPlugin = require("copy-webpack-plugin");
 
 const context = Path.resolve(__dirname, ".");
@@ -35,36 +35,39 @@ module.exports = {
 		new MergeIntoSingleFilePlugin({
 			files: {
 				"jscolor.js": [
-					'lib/jscolor.min.js',
+					"lib/jscolor.min.js",
 				],
 				"jshint.js": [
-					'lib/jshint.min.js',
-					//'node_modules/jshint/dist/jshint.js'
+					"lib/jshint.min.js",
+					//"node_modules/jshint/dist/jshint.js"
 				],
 				"acorn.js": [
-					'lib/acorn/acorn.js',
-					'lib/acorn/acorn_loose.js',
-					'lib/acorn/walk.js',
-					/*'node_modules/acorn/dist/acorn.js',
-					'node_modules/acorn_loose/dist/acorn_loose.js',
+					"lib/acorn/acorn.js",
+					"lib/acorn/acorn_loose.js",
+					"lib/acorn/walk.js",
+					/*"node_modules/acorn/dist/acorn.js",
+					"node_modules/acorn_loose/dist/acorn_loose.js",
 					"node_modules/acorn_walk/dist/walk.js"*/
 				],
+				/*"spine.js": [
+					"node_modules/spine-runtimes/spine-ts/build/spine-threejs.js",
+				],*/
 				"tern.js": [
-					'lib/tern/signal.js',
-					'lib/tern/tern.js',
-					'lib/tern/def.js',
-					'lib/tern/comment.js',
-					'lib/tern/infer.js',
-					'lib/tern/plugin/doc_comment.js'
-					/*'node_modules/tern/lib/signal.js',
-					'node_modules/tern/lib/tern.js',
-					'node_modules/tern/lib/def.js',
-					'node_modules/tern/lib/comment.js',
-					'node_modules/tern/lib/infer.js',
-					'node_modules/tern/plugin/doc_comment.js',*/
+					"lib/tern/signal.js",
+					"lib/tern/tern.js",
+					"lib/tern/def.js",
+					"lib/tern/comment.js",
+					"lib/tern/infer.js",
+					"lib/tern/plugin/doc_comment.js"
+					/*"node_modules/tern/lib/signal.js",
+					"node_modules/tern/lib/tern.js",
+					"node_modules/tern/lib/def.js",
+					"node_modules/tern/lib/comment.js",
+					"node_modules/tern/lib/infer.js",
+					"node_modules/tern/plugin/doc_comment.js",*/
 				],
 				"codemirror.js": [
-					'node_modules/codemirror/lib/codemirror.js',
+					"node_modules/codemirror/lib/codemirror.js",
 					"node_modules/codemirror/keymap/sublime.js",
 					"node_modules/codemirror/keymap/emacs.js",
 					"node_modules/codemirror/keymap/vim.js",
@@ -96,8 +99,8 @@ module.exports = {
 					"node_modules/glsl-editor/glsl.js"
 				],*/
 				"codemirror.css": [
-					'node_modules/codemirror/lib/codemirror.css',
-					'node_modules/codemirror/theme/**/*.css',
+					"node_modules/codemirror/lib/codemirror.css",
+					"node_modules/codemirror/theme/**/*.css",
 					"node_modules/codemirror/addon/search/matchesonscrollbar.css",
 					"node_modules/codemirror/addon/tern/tern.css",
 					"node_modules/codemirror/addon/dialog/dialog.css",
@@ -111,9 +114,9 @@ module.exports = {
 		loaders: [
 		  {
 			test: require.resolve("spine-runtimes/spine-ts/build/spine-threejs.js"),
-			loader: '@shoutem/webpack-prepend-append',
+			loader: "@shoutem/webpack-prepend-append",
 			query: {
-				append: 'export {spine};'
+				append: "export {spine};"
 			}
 		  }
 		]
