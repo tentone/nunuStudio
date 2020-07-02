@@ -2,7 +2,7 @@ import {ResourceContainer} from "../../resources/ResourceContainer.js";
 import {Scene} from "../../objects/Scene.js";
 import {Nunu} from "../../Nunu.js";
 import {AnimationMixer} from "../../animation/AnimationMixer.js";
-import {Object3D, Material, AnimationClip} from "three";
+import {Material, AnimationClip} from "three";
 
 /**
  * Folded attribute is used only for editing, if true the object shows as folded in the object explorer.
@@ -10,7 +10,7 @@ import {Object3D, Material, AnimationClip} from "three";
  * @property folded
  * @type {boolean}
  */
-Object3D.prototype.folded = false;
+THREE.Object3D.prototype.folded = false;
 
 /**
  * Indicates if the object is locked. A locked object cannot be edited.
@@ -18,16 +18,16 @@ Object3D.prototype.folded = false;
  * @property locked
  * @type {boolean}
  */
-Object3D.prototype.locked = false;
+THREE.Object3D.prototype.locked = false;
 
 /**
  * Check if this object contains a object.
  *
  * @method contains
- * @param {Object3D} object Object to look for.
+ * @param {THREE.Object3D} object Object to look for.
  * @return {boolean} True if this object contains the object.
  */
-Object3D.prototype.contains = function(object)
+THREE.Object3D.prototype.contains = function(object)
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -47,7 +47,7 @@ Object3D.prototype.contains = function(object)
  *
  * @method playAnimation
  */
-Object3D.prototype.playAnimation = function()
+THREE.Object3D.prototype.playAnimation = function()
 {
 	if(this.mixer !== undefined)
 	{
@@ -60,7 +60,7 @@ Object3D.prototype.playAnimation = function()
  * 
  * @method stopAnimation
  */
-Object3D.prototype.stopAnimation = function()
+THREE.Object3D.prototype.stopAnimation = function()
 {
 	if(this.mixer !== undefined)
 	{
@@ -75,7 +75,7 @@ Object3D.prototype.stopAnimation = function()
  * 
  * @method initialize
  */
-Object3D.prototype.initialize = function()
+THREE.Object3D.prototype.initialize = function()
 {
 	if(this.animations !== undefined)
 	{	
@@ -93,7 +93,7 @@ Object3D.prototype.initialize = function()
  * @method update
  * @param {number} delta Time since last update call.
  */
-Object3D.prototype.update = function(delta)
+THREE.Object3D.prototype.update = function(delta)
 {
 	if(this.mixer !== undefined)
 	{
@@ -108,7 +108,7 @@ Object3D.prototype.update = function(delta)
  * @param {number} x Screen width.
  * @param {number} y Screen height.
  */
-Object3D.prototype.resize = function(){};
+THREE.Object3D.prototype.resize = function(){};
 
 /**
  * Disposes the object from memory.
@@ -117,7 +117,7 @@ Object3D.prototype.resize = function(){};
  * 
  * @method dispose
  */
-Object3D.prototype.dispose = function()
+THREE.Object3D.prototype.dispose = function()
 {
 	if(this.mixer !== undefined)
 	{
@@ -129,10 +129,10 @@ Object3D.prototype.dispose = function()
  * Add object as children of this object above the indicated children
  *
  * @method addAbove
- * @param {Object3D} object
+ * @param {THREE.Object3D} object
  * @param {number} index
  */
-Object3D.prototype.addAbove = function(object, children)
+THREE.Object3D.prototype.addAbove = function(object, children)
 {
 	if(object === this)
 	{
@@ -140,7 +140,7 @@ Object3D.prototype.addAbove = function(object, children)
 		return this;
 	}
 
-	if(object && object.isObject3D)
+	if(object && object.isTHREE.Object3D)
 	{
 		if(object.parent !== null)
 		{
@@ -156,7 +156,7 @@ Object3D.prototype.addAbove = function(object, children)
 	}
 	else
 	{
-		console.error("Object3D.add: object not an instance of Object3D.", object);
+		console.error("Object3D.add: object not an instance of THREE.Object3D.", object);
 	}
 
 	return this;
@@ -166,10 +166,10 @@ Object3D.prototype.addAbove = function(object, children)
  * Add object as children of this object bellow the indicated children
  *
  * @method addBellow
- * @param {Object3D} object
+ * @param {THREE.Object3D} object
  * @param {number} index
  */
-Object3D.prototype.addBellow = function(object, children)
+THREE.Object3D.prototype.addBellow = function(object, children)
 {
 	if(object === this)
 	{
@@ -177,7 +177,7 @@ Object3D.prototype.addBellow = function(object, children)
 		return this;
 	}
 
-	if(object && object.isObject3D)
+	if(object && object.isTHREE.Object3D)
 	{
 		if(object.parent !== null)
 		{
@@ -193,7 +193,7 @@ Object3D.prototype.addBellow = function(object, children)
 	}
 	else
 	{
-		console.error("Object3D.add: object not an instance of Object3D.", object);
+		console.error("Object3D.add: object not an instance of THREE.Object3D.", object);
 	}
 
 	return this;
@@ -203,9 +203,9 @@ Object3D.prototype.addBellow = function(object, children)
  * Get scene that contains this object.
  *
  * @method getScene
- * @return {Object3D} scene
+ * @return {THREE.Object3D} scene
  */
-Object3D.prototype.getScene = function()
+THREE.Object3D.prototype.getScene = function()
 {
 	var node = this;
 
@@ -227,7 +227,7 @@ Object3D.prototype.getScene = function()
  * 
  * @method removeAll
  */
-Object3D.prototype.removeAll = function()
+THREE.Object3D.prototype.removeAll = function()
 {
 	while(this.children.length > 0)
 	{
@@ -241,7 +241,7 @@ Object3D.prototype.removeAll = function()
  * @method isEmpty
  * @return {boolean} True is object is empty
  */
-Object3D.prototype.isEmpty = function()
+THREE.Object3D.prototype.isEmpty = function()
 {
 	return this.children.length === 0;
 };
@@ -251,7 +251,7 @@ Object3D.prototype.isEmpty = function()
  * 
  * @method destroy
  */
-Object3D.prototype.destroy = function()
+THREE.Object3D.prototype.destroy = function()
 {
 	while(this.children.length > 0)
 	{
@@ -285,7 +285,7 @@ Object3D.prototype.destroy = function()
  * @param {boolean} recursive If true the method will call toJSON for all available children and store the result in children attribute.
  * @return {Object} json Output JSON will all data serialized, this can be stores in file or transfered to later be loaded using the ObjectLoader.
  */
-Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
+THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 {
 	var isRootObject = (meta === undefined);
 	var output = {};
@@ -487,7 +487,7 @@ Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
  * @type {boolean}
 */
 /**
- * The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.
+ * The global transform of the object. If the Object3D has no parent, then it's identical to the local transform.
  * @property matrixWorld
  * @type {Matrix4}
 */
@@ -615,7 +615,7 @@ Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 /**
  * Searches through the object's children and returns the first with a matching name.
- * @param {string} name String to match to the children's Object3d.name property.
+ * @param {string} name String to match to the children's Object3D.name property.
  * @method getObjectByName
  */
 

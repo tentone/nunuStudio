@@ -1,6 +1,4 @@
-import {InterleavedBufferAttribute} from "three";
-
-InterleavedBufferAttribute.prototype.toJSON = function()
+THREE.InterleavedBufferAttribute.prototype.toJSON = function()
 {
 	return {
 		type: "InterleavedBufferAttribute",

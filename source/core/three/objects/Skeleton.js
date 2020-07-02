@@ -1,6 +1,6 @@
 import {DataTexture} from "../../texture/DataTexture.js";
 import {ResourceContainer} from "../../resources/ResourceContainer.js";
-import {Skeleton, Math, Object3D, Bone, Matrix4} from "three";
+import {Math, Object3D, Bone, Matrix4} from "three";
 
 /**
  * Use an array of bones to create a skeleton that can be used by a SkinnedMesh.
@@ -10,8 +10,7 @@ import {Skeleton, Math, Object3D, Bone, Matrix4} from "three";
  * @param {Array} bones Bone array.
  * @param {Array} boneInverses An array of Matrix4.
  */
-
-Skeleton.prototype.toJSON = function()
+THREE.Skeleton.prototype.toJSON = function()
 {
 	var data = {};
 
@@ -47,7 +46,7 @@ Skeleton.prototype.toJSON = function()
  * @param {Object3D} object Target object that has this skeleton.
  * @param {ResourceContainer} resources Resource container to read resouce data.
  */
-Skeleton.fromJSON = function(data, object)
+THREE.Skeleton.fromJSON = function(data, object)
 {
 	var bones = [];
 	var boneInverses = [];
@@ -65,7 +64,7 @@ Skeleton.fromJSON = function(data, object)
 		boneInverses.push(new Matrix4().fromArray(data.boneInverses[j]));
 	}
 
-	var skeleton = new Skeleton(bones, boneInverses);
+	var skeleton = new THREE.Skeleton(bones, boneInverses);
 	skeleton.uuid = data.uuid;
 
 	return skeleton;

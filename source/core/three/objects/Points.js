@@ -1,6 +1,6 @@
-import {Points, Box3, Vector3} from "three";
+import {Box3, Vector3} from "three";
 
-Points.prototype.raycast = function(raycaster, intersects)
+THREE.Points.prototype.raycast = function(raycaster, intersects)
 {
 	if(this.geometry.boundingBox === null)
 	{

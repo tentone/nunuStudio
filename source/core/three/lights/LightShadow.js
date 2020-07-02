@@ -1,6 +1,4 @@
-import {LightShadow} from "three";
-
-LightShadow.prototype.toJSON = function()
+THREE.LightShadow.prototype.toJSON = function()
 {
 	var data = {};
 
@@ -26,7 +24,7 @@ LightShadow.prototype.toJSON = function()
 	return data;
 };
 
-LightShadow.prototype.fromJSON = function(data)
+THREE.LightShadow.prototype.fromJSON = function(data)
 {
 	if(data.bias !== undefined)
 	{

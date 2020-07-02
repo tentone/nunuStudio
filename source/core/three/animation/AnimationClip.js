@@ -1,12 +1,11 @@
-import {AnimationClip, LoopRepeat} from "three";
 
-AnimationClip.prototype.enabled = true;
-AnimationClip.prototype.loop = LoopRepeat;
-AnimationClip.prototype.timeScale = 1;
-AnimationClip.prototype.weight = 1;
+THREE.AnimationClip.prototype.enabled = true;
+THREE.AnimationClip.prototype.loop = LoopRepeat;
+THREE.AnimationClip.prototype.timeScale = 1;
+THREE.AnimationClip.prototype.weight = 1;
 
-AnimationClip._toJSON = AnimationClip.toJSON;
-AnimationClip.toJSON = function(clip)
+THREE.AnimationClip._toJSON = AnimationClip.toJSON;
+THREE.AnimationClip.toJSON = function(clip)
 {
 	var data = AnimationClip._toJSON.call(this, clip);
 
@@ -18,8 +17,8 @@ AnimationClip.toJSON = function(clip)
 	return data;
 };
 
-AnimationClip._parse = AnimationClip.parse;
-AnimationClip.parse = function(json)
+THREE.AnimationClip._parse = AnimationClip.parse;
+THREE.AnimationClip.parse = function(json)
 {
 	var clip = AnimationClip._parse.call(this, json);
 

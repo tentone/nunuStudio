@@ -1,4 +1,4 @@
-import {InstancedBufferAttribute, BufferAttribute, InterleavedBuffer, InterleavedBufferAttribute, BufferGeometryLoader, Vector3, Sphere} from "three";
+import {InstancedBufferAttribute, BufferAttribute, InterleavedBuffer, InterleavedBufferAttribute, Vector3, Sphere} from "three";
 
 var TYPED_ARRAYS = {
 	Int8Array: Int8Array,
@@ -54,7 +54,7 @@ var parseBufferAttribute = function(json)
 	return bufferAttribute;
 };
 
-BufferGeometryLoader.prototype.parse = function(json)
+THREE.BufferGeometryLoader.prototype.parse = function(json)
 {
 	var geometry = json.isInstancedBufferGeometry ? new InstancedBufferGeometry() : new BufferGeometry();
 	var index = json.data.index;

@@ -1,13 +1,11 @@
-import {KeyframeTrack} from "three";
+THREE.KeyframeTrack.prototype.color = "#FF0000";
 
-KeyframeTrack.prototype.color = "#FF0000";
-
-KeyframeTrack.prototype.setColor = function(color)
+THREE.KeyframeTrack.prototype.setColor = function(color)
 {
 	this.color = color;
 };
 
-KeyframeTrack.prototype.sort = function()
+THREE.KeyframeTrack.prototype.sort = function()
 {
 	for(var i = 0; i < this.times.length; i++)
 	{
@@ -34,20 +32,20 @@ KeyframeTrack.prototype.sort = function()
 	}
 };
 
-KeyframeTrack._toJSON = KeyframeTrack.toJSON;
-KeyframeTrack.toJSON = function(track)
+THREE.KeyframeTrack._toJSON = THREE.KeyframeTrack.toJSON;
+THREE.KeyframeTrack.toJSON = function(track)
 {
-	var data = KeyframeTrack._toJSON.call(this, track);
+	var data = THREE.KeyframeTrack._toJSON.call(this, track);
 
 	data.color = track.color;
 
 	return data;
 };
 
-KeyframeTrack._parse = KeyframeTrack.parse;
-KeyframeTrack.parse = function(json)
+THREE.KeyframeTrack._parse = THREE.KeyframeTrack.parse;
+THREE.KeyframeTrack.parse = function(json)
 {
-	var track = KeyframeTrack._parse.call(this, json);
+	var track = THREE.KeyframeTrack._parse.call(this, json);
 
 	if(json.color !== undefined)
 	{

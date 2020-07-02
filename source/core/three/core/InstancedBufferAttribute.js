@@ -1,6 +1,6 @@
-import {InstancedBufferAttribute, BufferAttribute} from "three";
+import {BufferAttribute} from "three";
 
-InstancedBufferAttribute.prototype.toJSON = function()
+THREE.InstancedBufferAttribute.prototype.toJSON = function()
 {
 	var data = BufferAttribute.prototype.toJSON.call(this);
 

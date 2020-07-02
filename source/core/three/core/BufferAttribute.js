@@ -1,6 +1,6 @@
 import {BufferAttribute} from "three";
 
-BufferAttribute.prototype.toJSON = function()
+THREE.BufferAttribute.prototype.toJSON = function()
 {
 	return {
 		type: "BufferAttribute",
