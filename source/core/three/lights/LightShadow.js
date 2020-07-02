@@ -1,6 +1,5 @@
 import {LightShadow} from "three";
 
-
 LightShadow.prototype.toJSON = function()
 {
 	var data = {};

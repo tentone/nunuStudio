@@ -81,8 +81,10 @@ module.exports = {
 					"node_modules/codemirror/addon/tern/tern.js",
 					"node_modules/codemirror/addon/runmode/colorize.js",
 					"node_modules/codemirror/addon/runmode/runmode.js",
-					//"node_modules/glsl-editor/glsl.js",
 				],
+				/*"glsl.js": [
+					"node_modules/glsl-editor/glsl.js"
+				],*/
 				"codemirror.css": [
 					'node_modules/codemirror/lib/codemirror.css',
 					'node_modules/codemirror/theme/**/*.css',

@@ -1,10 +1,5 @@
-import {Texture} from "../../texture/Texture.js";
 import {DataTexture} from "../../texture/DataTexture.js";
 import {ResourceContainer} from "../../resources/ResourceContainer.js";
-import {Resource} from "../../resources/Resource.js";
-import {Container} from "../../objects/misc/Container.js";
-import {SkinnedMesh} from "../../objects/mesh/SkinnedMesh.js";
-import {Mesh} from "../../objects/mesh/Mesh.js";
 import {Skeleton, Math, Object3D, Bone, Matrix4} from "three";
 
 /**
@@ -16,7 +11,7 @@ import {Skeleton, Math, Object3D, Bone, Matrix4} from "three";
  * @param {Array} boneInverses An array of Matrix4.
  */
 
-Skeleton.prototype.toJSON = function(meta)
+Skeleton.prototype.toJSON = function()
 {
 	var data = {};
 
@@ -52,7 +47,7 @@ Skeleton.prototype.toJSON = function(meta)
  * @param {Object3D} object Target object that has this skeleton.
  * @param {ResourceContainer} resources Resource container to read resouce data.
  */
-Skeleton.fromJSON = function(data, object, resources)
+Skeleton.fromJSON = function(data, object)
 {
 	var bones = [];
 	var boneInverses = [];

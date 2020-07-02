@@ -2,7 +2,6 @@
 // Runtime libs
 include("lib/three/three.js");
 
-
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");

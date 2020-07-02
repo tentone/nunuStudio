@@ -1,11 +1,7 @@
 import {ResourceContainer} from "../../resources/ResourceContainer.js";
-import {Resource} from "../../resources/Resource.js";
 import {Scene} from "../../objects/Scene.js";
-import {Container} from "../../objects/misc/Container.js";
 import {Nunu} from "../../Nunu.js";
-import {ObjectLoader} from "../../loaders/ObjectLoader.js";
 import {AnimationMixer} from "../../animation/AnimationMixer.js";
-
 import {Object3D, Material, AnimationClip} from "three";
 
 /**
@@ -112,7 +108,7 @@ Object3D.prototype.update = function(delta)
  * @param {number} x Screen width.
  * @param {number} y Screen height.
  */
-Object3D.prototype.resize = function(x, y){};
+Object3D.prototype.resize = function(){};
 
 /**
  * Disposes the object from memory.
