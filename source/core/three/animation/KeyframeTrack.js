@@ -1,6 +1,4 @@
-import {Key} from "../../input/Key.js";
 import {KeyframeTrack} from "three";
-
 
 KeyframeTrack.prototype.color = "#FF0000";
 
