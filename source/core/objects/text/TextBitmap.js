@@ -1,7 +1,5 @@
-import {Font} from "../../resources/Font.js";
-import {Pass} from "../../postprocessing/Pass.js";
-
 import {Mesh, Texture, Color, ShaderMaterial, DoubleSide, Object3D} from "three";
+import {createGeometry} from "three-bmfont-text";
 
 /**
  * Text bitmap atlas with support for signed distance field data.

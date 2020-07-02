@@ -42,7 +42,7 @@
 		"@as-com/pson": "3.0.1",
 		"@tweenjs/tween.js": "^18.6.0",
 		"acorn": "^7.3.1",
-		"cannon": "0.6.2",
+		"cannon": "^0.6.2",
 		"codemirror": "^5.55.0",
 		"js.blend": "github:acweathersby/js.blend",
 		"spine-runtimes": "github:EsotericSoftware/spine-runtimes",
@@ -50,8 +50,10 @@
 		"three": "^0.117.1",
 		"sparse-octree": "^6.0.2",
 		"iterator-result": "^1.0.0",
-		"math-ds": "1.2.1",
-		"jszip": "^3.5.0"
+		"math-ds": "^1.2.1",
+		"jszip": "^3.5.0",
+		"glsl-editor": "^1.0.0",
+		"three-bmfont-text": "^2.3.0"
 	},
 	"devDependencies": {
 		"@shoutem/webpack-prepend-append": "^1.0.1",
