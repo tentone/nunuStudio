@@ -7,7 +7,7 @@ import {Key} from "../../../../../core/input/Key.js";
 import {OrientationCube} from "../utils/OrientationCube.js";
 import {EditorControls} from "./EditorControls.js";
 import {Editor} from "../../../../Editor.js";
-import {Vector3, Vector2, Matrix4, PerspectiveCamera, Math} from "three";
+import {Vector3, Vector2, Matrix4, PerspectiveCamera, Math as TMath} from "three";
 
 /**
  * Orbit controls can be used to navigate the world using a imaginary central point as reference.
@@ -152,7 +152,7 @@ EditorOrbitControls.prototype.focusObject = function(object)
 
 		if(this.camera instanceof PerspectiveCamera)
 		{
-			this.distance = (size / 2) / Math.tan(Math.DEG2RAD * 0.5 * this.camera.fov);
+			this.distance = (size / 2) / Math.tan(TMath.DEG2RAD * 0.5 * this.camera.fov);
 		}
 		else
 		{

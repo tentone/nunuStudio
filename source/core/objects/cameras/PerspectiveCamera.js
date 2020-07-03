@@ -2,7 +2,7 @@ import {RenderPass} from "../../postprocessing/RenderPass.js";
 import {EffectComposer} from "../../postprocessing/EffectComposer.js";
 import {Scene} from "../Scene.js";
 import {Viewport} from "./Viewport.js";
-import {PerspectiveCamera as TPerspectiveCamera, Object3D, Math} from "three";
+import {PerspectiveCamera as TPerspectiveCamera, Object3D, Math as TMath} from "three";
 
 /**
  * Perspective camera, used for 3D scenes with objects getting smaller as they get away from the camera.
@@ -181,7 +181,7 @@ PerspectiveCamera.prototype.destroy = function()
  */
 PerspectiveCamera.prototype.updateProjectionMatrix = function()
 {
-	var top = this.near * Math.tan(Math.DEG2RAD * 0.5 * this.fov) / this.zoom;
+	var top = this.near * Math.tan(TMath.DEG2RAD * 0.5 * this.fov) / this.zoom;
 	var height = 2 * top;
 	var width = this.aspect * height;
 	var left = -0.5 * width;

@@ -6,7 +6,6 @@ import {ObjectLoader} from "./loaders/ObjectLoader.js";
 import {FileSystem} from "./FileSystem.js";
 import {Component} from "../editor/components/Component.js";
 import {StaticPair} from "@as-com/pson";
-import "./three/core/Object3D.js";
 
 /**
  * Nunu app is the main class of the runtime system, is used to embed projects into external webpages and applications.
