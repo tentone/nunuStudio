@@ -1,4 +1,3 @@
-import {Image} from "../resources/Image.js";
 import {Texture} from "three";
 
 /**

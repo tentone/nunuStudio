@@ -1,5 +1,3 @@
-
-
 /**
  * A helper class for TypedArrays.
  *

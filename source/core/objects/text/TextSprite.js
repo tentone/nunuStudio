@@ -1,8 +1,4 @@
-import {Font} from "../../resources/Font.js";
-import {Sprite} from "../sprite/Sprite.js";
 import {CanvasSprite} from "../sprite/CanvasSprite.js";
-
-
 import {Math, Object3D} from "three";
 
 /**

@@ -1,8 +1,7 @@
 import {ParticleEmitter} from "../ParticleEmitter.js";
 import {ShaderUtils} from "./ShaderUtils.js";
-import {Key} from "../../../input/Key.js";
-
-import {Vector3, Color, Math} from "three";
+import {Vector3, Color, Math as TMath} from "three";
+import {ParticleDistributions} from "../ParticleDistributions.js";
 
 /**
  * A map of options to configure an ParticleEmitterControl instance.
@@ -98,7 +97,7 @@ function ParticleEmitterControl(options)
 		console.warn("nunuStudio: onParticleSpawn has been removed. Please set properties directly to alter values at runtime.");
 	}
 
-	this.uuid = Math.generateUUID();
+	this.uuid = TMath.generateUUID();
 
 	this.type = ShaderUtils.ensureTypedArg(options.type, ShaderUtils.types.NUMBER, ParticleDistributions.BOX);
 

@@ -5,11 +5,7 @@ import {Image} from "./Image.js";
 import {Font} from "./Font.js";
 import {Audio} from "./Audio.js";
 import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
-import {Container} from "../objects/misc/Container.js";
-import {Mesh} from "../objects/mesh/Mesh.js";
-
 import {Object3D, Material, MeshBasicMaterial, SpriteMaterial, Sprite, Texture} from "three";
-
 
 /**
  * Resource manager is used to manage available resources used by objects

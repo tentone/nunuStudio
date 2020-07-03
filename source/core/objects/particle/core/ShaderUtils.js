@@ -1,7 +1,3 @@
-import {ParticleEmitter} from "../ParticleEmitter.js";
-import {ShaderAttribute} from "../helpers/ShaderAttribute.js";
-import {ParticleEmitterControl} from "./ParticleEmitterControl.js";
-
 import {Vector2, Vector3, Vector4, Color} from "three";
 
 /**

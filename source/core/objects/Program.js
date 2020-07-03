@@ -1,21 +1,15 @@
 import {EventManager} from "../utils/EventManager.js";
 import {ResourceManager} from "../resources/ResourceManager.js";
 import {ResourceContainer} from "../resources/ResourceContainer.js";
-import {Resource} from "../resources/Resource.js";
 import {RendererConfiguration} from "../renderer/RendererConfiguration.js";
 import {TargetConfig} from "../platform/TargetConfig.js";
 import {Script} from "./script/Script.js";
-import {Container} from "./misc/Container.js";
 import {NunuApp} from "../NunuApp.js";
 import {Nunu} from "../Nunu.js";
 import {ObjectLoader} from "../loaders/ObjectLoader.js";
 import {Mouse} from "../input/Mouse.js";
 import {Keyboard} from "../input/Keyboard.js";
-import {Key} from "../input/Key.js";
-
-
 import {Scene, Camera, Clock, Object3D} from "three";
-
 
 /**
  * Program class contains all the data of a nunuStudio program.
@@ -679,7 +673,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 {
 	var self = this;
 
-	var data = Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	var data = Object3D.prototype.toJSON.call(this, meta, function(meta)
 	{
 		if(exportResources !== false)
 		{

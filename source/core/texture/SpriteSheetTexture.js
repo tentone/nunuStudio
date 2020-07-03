@@ -1,7 +1,4 @@
 import {Image} from "../resources/Image.js";
-import {Sprite} from "../objects/sprite/Sprite.js";
-
-
 import {RepeatWrapping, LinearFilter, RGBFormat, RGBAFormat, Texture} from "three";
 
 /**

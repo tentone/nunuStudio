@@ -3,10 +3,7 @@ import {ParticleEmitter} from "../ParticleEmitter.js";
 import {ShaderAttribute} from "../helpers/ShaderAttribute.js";
 import {ShaderUtils} from "./ShaderUtils.js";
 import {ParticleEmitterControl} from "./ParticleEmitterControl.js";
-import {Key} from "../../../input/Key.js";
-
-
-import {Texture, Vector2, Math, AdditiveBlending, Vector4, ShaderMaterial, BufferGeometry, Points, Vector3} from "three";
+import {Texture, Vector2, Math as TMath, AdditiveBlending, Vector4, ShaderMaterial, BufferGeometry, Points, Vector3} from "three";
 
 /**
  * A map of options to configure an ParticleGroup instance.
@@ -45,7 +42,7 @@ function ParticleGroup(options)
 	options.texture = ShaderUtils.ensureTypedArg(options.texture, ShaderUtils.types.OBJECT, {});
 
 	// Assign a UUID to this instance
-	this.uuid = Math.generateUUID();
+	this.uuid = TMath.generateUUID();
 
 	// If no deltaTime value is passed to the ParticleGroup.tick function, the value of this property will be used to advance the simulation.
 	this.fixedTimeStep = ShaderUtils.ensureTypedArg(options.fixedTimeStep, ShaderUtils.types.NUMBER, 0.016);

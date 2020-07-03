@@ -1,7 +1,3 @@
-import {Texture} from "../../../texture/Texture.js";
-import {Sprite} from "../../sprite/Sprite.js";
-
-
 var ParticleShaderChunks =
 {
 	// Register color-packing define statements.

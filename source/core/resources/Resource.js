@@ -1,7 +1,6 @@
 import {FileSystem} from "../FileSystem.js";
 import {Math} from "three";
 
-
 /**
  * Resource class is used to represent resources.
  * 

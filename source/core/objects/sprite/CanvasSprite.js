@@ -1,7 +1,4 @@
-import {Texture} from "../../texture/Texture.js";
 import {CanvasTexture} from "../../texture/CanvasTexture.js";
-
-
 import {Sprite, SpriteMaterial} from "three";
 
 /**

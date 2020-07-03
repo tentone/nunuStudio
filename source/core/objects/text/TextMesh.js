@@ -1,5 +1,4 @@
 import {Mesh} from "../mesh/Mesh.js";
-
 import {Geometry, Font, ExtrudeBufferGeometry, ShapeBufferGeometry, Object3D} from "three";
 
 /**

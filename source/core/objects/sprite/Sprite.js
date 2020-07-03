@@ -1,4 +1,3 @@
-import {Script} from "../script/Script.js";
 import {Sprite as TSprite, Object3D} from "three";
 
 /**

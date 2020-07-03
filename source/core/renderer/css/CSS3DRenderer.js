@@ -1,9 +1,3 @@
-import {CSS3DSprite} from "./CSS3DSprite.js";
-import {CSS3DObject} from "./CSS3DObject.js";
-import {Sprite} from "../../objects/sprite/Sprite.js";
-import {PerspectiveCamera} from "../../objects/cameras/PerspectiveCamera.js";
-import {OrthographicCamera} from "../../objects/cameras/OrthographicCamera.js";
-
 import {Vector2, Matrix4, Scene, Camera} from "three";
 
 /**

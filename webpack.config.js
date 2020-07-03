@@ -36,6 +36,10 @@ module.exports = {
 		new MiniCssExtractPlugin(),
 		new MergeIntoSingleFilePlugin({
 			files: {
+				"styles.css": [
+					"source/editor/style.css",
+					"source/editor/theme/dark.css",
+				],
 				"jscolor.js": [
 					"lib/jscolor.min.js",
 				],
@@ -114,13 +118,6 @@ module.exports = {
 	],
 	module: {
 		rules: [
-			{
-				test: /\.css$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader'
-				]
-			},
 			{
 				test: require.resolve("spine-runtimes/spine-ts/build/spine-threejs.js"),
 				loader: "@shoutem/webpack-prepend-append",

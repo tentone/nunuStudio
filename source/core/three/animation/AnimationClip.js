@@ -1,4 +1,3 @@
-
 import {LoopRepeat} from "three";
 
 THREE.AnimationClip.prototype.enabled = true;

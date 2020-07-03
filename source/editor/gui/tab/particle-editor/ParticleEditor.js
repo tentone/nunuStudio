@@ -1,5 +1,6 @@
 import {Locale} from "../../../locale/LocaleManager.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
+import {ParticleDistributions} from "../../../../core/objects/particle/ParticleDistributions.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
 import {DOMUtils} from "../../../utils/DOMUtils.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";

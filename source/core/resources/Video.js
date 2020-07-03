@@ -1,10 +1,7 @@
 import {Base64Utils} from "../utils/binary/Base64Utils.js";
 import {ArraybufferUtils} from "../utils/binary/ArraybufferUtils.js";
 import {Resource} from "./Resource.js";
-import {Image} from "./Image.js";
 import {FileSystem} from "../FileSystem.js";
-
-
 
 /**
  * Video resources are used to store video.

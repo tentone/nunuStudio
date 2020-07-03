@@ -35,8 +35,6 @@ import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
 import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
 import {StaticPair} from "@as-com/pson";
-import "./style.css";
-import "./theme/dark.css";
 
 /**
  * nunuStudio main editor entry point. 

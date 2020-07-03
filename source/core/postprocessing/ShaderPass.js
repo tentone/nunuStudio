@@ -1,5 +1,4 @@
 import {Pass} from "./Pass.js";
-import {Scene} from "../objects/Scene.js";
 import {ShaderMaterial, UniformsUtils} from "three";
 
 /**

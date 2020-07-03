@@ -1,7 +1,3 @@
-import {Image} from "../resources/Image.js";
-
-
-
 import {Texture, LinearFilter, RGBFormat} from "three";
 
 /**

@@ -2,7 +2,6 @@ import {Scene} from "../Scene.js";
 import {Body, World, Shape, Sphere, Box, Vec3, Particle, Plane, Heightfield, ConvexPolyhedron} from "cannon";
 import {Group, Vector3, Quaternion, Object3D, Matrix4} from "three";
 
-
 /**
  * Wrapper for cannon.js physics objects.
  *

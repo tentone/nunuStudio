@@ -1,8 +1,5 @@
 import {Image} from "../resources/Image.js";
-
-
 import {Texture as TTexture, RGBAFormat, RGBFormat, LinearFilter} from "three";
-
 
 /**
  * Basic image texture object wraps a texture from a img DOM element

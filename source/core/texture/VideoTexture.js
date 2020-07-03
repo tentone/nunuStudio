@@ -1,8 +1,4 @@
 import {Video} from "../resources/Video.js";
-import {VideoStream} from "../resources/stream/VideoStream.js";
-import {Image} from "../resources/Image.js";
-
-
 import {Texture, LinearFilter, RGBFormat} from "three";
 
 /**

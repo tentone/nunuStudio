@@ -1,6 +1,5 @@
 import {Resource} from "./Resource.js";
 
-
 /**
  * Text file resource can be used to store data or code.
  *

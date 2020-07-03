@@ -1,7 +1,4 @@
-import {Texture} from "../../../texture/Texture.js";
-import {Sprite} from "../../sprite/Sprite.js";
 import {ParticleShaderChunks} from "./ParticleShaderChunks.js";
-
 import {ShaderChunk} from "three";
 
 var ParticleShaders =

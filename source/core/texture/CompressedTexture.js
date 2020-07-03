@@ -1,4 +1,3 @@
-
 import {Texture} from "three";
 
 /**

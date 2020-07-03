@@ -1,5 +1,4 @@
-
-import {Math, LinearFilter, RGBAFormat, RGBFormat, NearestFilter, OthographicCamera, OrthographicCamera, Scene, Mesh, PlaneBufferGeometry} from "three";
+import {Math as TMath, LinearFilter, RGBAFormat, RGBFormat, NearestFilter, OthographicCamera, OrthographicCamera, Scene, Mesh, PlaneBufferGeometry} from "three";
 
 /**
  * A render Pass is used to render something in the graphics pipeline.
@@ -11,7 +10,7 @@ import {Math, LinearFilter, RGBAFormat, RGBFormat, NearestFilter, OthographicCam
  */
 function Pass()
 {
-	this.uuid = Math.generateUUID();
+	this.uuid = TMath.generateUUID();
 	this.type = "Pass";
 
 	/**
