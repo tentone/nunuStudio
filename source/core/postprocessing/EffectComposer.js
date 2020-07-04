@@ -18,7 +18,7 @@ import {FXAAPass} from "./pass/antialiasing/FXAAPass.js";
 import {AfterimagePass} from "./pass/AfterimagePass.js";
 import {AdaptiveToneMappingPass} from "./pass/AdaptiveToneMappingPass.js";
 import {Scene} from "../objects/Scene.js";
-import {Math, WebGLRenderTarget, LinearFilter, RGBAFormat} from "three";
+import {Math as TMath, WebGLRenderTarget, LinearFilter, RGBAFormat} from "three";
 import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
 import {ClearMaskPass, MaskPass} from "three/examples/jsm/postprocessing/MaskPass";
 
@@ -37,7 +37,7 @@ function EffectComposer()
 		console.error("EffectComposer relies on CopyShader");
 	}
 
-	this.uuid = Math.generateUUID();
+	this.uuid = TMath.generateUUID();
 	this.width = 1;
 	this.height = 1;
 

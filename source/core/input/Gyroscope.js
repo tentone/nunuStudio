@@ -1,6 +1,5 @@
 import {EventManager} from "../utils/EventManager.js";
-import {Math, Euler, Quaternion, Vector3} from "three";
-
+import {Math as TMath, Euler, Quaternion, Vector3} from "three";
 
 /**
  * Gyroscope object can be used to get the orientation from the device.
@@ -45,15 +44,15 @@ function Gyroscope()
 	// Orientation
 	this.events.add(window, "orientationchange", function(event)
 	{
-		self.orientation = Math.degToRad(window.orientation);
+		self.orientation = TMath.degToRad(window.orientation);
 	});
 
 	// Device orientation
 	this.events.add(window, "deviceorientation", function(event)
 	{
-		self.alpha = Math.degToRad(event.alpha);
-		self.beta = Math.degToRad(event.beta);
-		self.gamma = Math.degToRad(event.gamma);
+		self.alpha = TMath.degToRad(event.alpha);
+		self.beta = TMath.degToRad(event.beta);
+		self.gamma = TMath.degToRad(event.gamma);
 	});
 
 	// Initialize events

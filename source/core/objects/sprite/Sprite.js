@@ -34,4 +34,5 @@ Sprite.prototype.dispose = function()
 	
 	Object3D.prototype.dispose.call(this);
 };
+
 export {Sprite};

@@ -1,6 +1,5 @@
 import {Mesh as TMesh, Object3D} from "three";
 
-
 /**
  * A Mesh combines a geometry and a material forming a complete rederizable object.
  * 

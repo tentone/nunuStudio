@@ -1,6 +1,4 @@
-import {Mesh} from "./Mesh.js";
 import {SkinnedMesh as TSkinnedMesh, Object3D} from "three";
-
 
 /**
  * SkinnedMesh is a Mesh that has a Skeleton attached.

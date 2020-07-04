@@ -454,4 +454,5 @@ Scene.prototype.toJSON = function(meta)
 
 	return data;
 };
+
 export {Scene};

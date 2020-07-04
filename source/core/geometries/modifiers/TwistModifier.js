@@ -110,4 +110,5 @@ TwistModifier.prototype.modify = function(geometry)
 
 	return geometry;	 
 };
+
 export {TwistModifier};

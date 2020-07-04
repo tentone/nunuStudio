@@ -517,5 +517,4 @@ TextBitmap.fromJSON = function(data, texture)
 	return object;
 };
 
-
 export {TextBitmap};

@@ -1,7 +1,3 @@
-import {Mouse} from "./Mouse.js";
-import {Keyboard} from "./Keyboard.js";
-
-
 /**
  * Key is used by Keyboard, Mouse, etc, to represent a key state.
  *

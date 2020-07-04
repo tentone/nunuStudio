@@ -1,5 +1,3 @@
-import {BufferAttribute} from "three";
-
 THREE.BufferAttribute.prototype.toJSON = function()
 {
 	return {

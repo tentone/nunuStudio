@@ -2,7 +2,6 @@ import {MathUtils} from "../../utils/MathUtils.js";
 import {DirectionalLight} from "../lights/DirectionalLight.js";
 import {Group, Color, HemisphereLight, SphereBufferGeometry, ShaderMaterial, BackSide, Mesh, Object3D} from "three";
 
-
 /**
  * Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.
  * 
@@ -384,4 +383,5 @@ Sky.prototype.toJSON = function(meta)
 
 	return data;
 };
+
 export {Sky};

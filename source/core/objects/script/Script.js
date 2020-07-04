@@ -2,6 +2,7 @@ import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
 import {FileSystem} from "../../FileSystem.js";
 import {Group, Object3D} from "three";
+
 /**
  * Script objects are used to control other objects present in the scene.
  *
@@ -510,4 +511,5 @@ Script.prototype.toJSON = function(meta)
 
 	return data;
 };
+
 export {Script};

@@ -13,7 +13,7 @@ var ObjectIcons = {};
  * @attribute path
  * @type {string}
  */
-ObjectIcons.path = "source/files/icons/";
+ObjectIcons.path = "files/icons/";
 
 ObjectIcons.default = ObjectIcons.path + "misc/question.png";
 ObjectIcons.locked = ObjectIcons.path + "misc/padlock.png";

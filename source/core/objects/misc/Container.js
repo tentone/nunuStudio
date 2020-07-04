@@ -1,6 +1,5 @@
 import {Group} from "three";
 
-
 /**
  * Containers are used to group objects together.
  *
@@ -19,4 +18,5 @@ function Container()
 }
 
 Container.prototype = Object.create(Group.prototype);
+
 export {Container};

@@ -8,7 +8,7 @@ import {Editor} from "../../Editor.js";
 import {NumberBox} from "../../components/input/NumberBox.js";
 import {DropdownList} from "../../components/input/DropdownList.js";
 import {CheckBox} from "../../components/input/CheckBox.js";
-import {BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping, ACESFilmicToneMapping} from "three";
+import {BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, VSMShadowMap, NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping, ACESFilmicToneMapping} from "three";
 
 /** 
  * Renderer configuration object form template.

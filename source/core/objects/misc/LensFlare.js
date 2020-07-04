@@ -153,40 +153,40 @@ function LensFlare()
 		validArea.min.set(viewport.x, viewport.y);
 		validArea.max.set(viewport.x + (viewport.z - 16), viewport.y + (viewport.w - 16));
 
-		// calculate position in screen space
+		// Calculate position in screen space
 		positionScreen.setFromMatrixPosition(this.matrixWorld);
 
 		positionScreen.applyMatrix4(camera.matrixWorldInverse);
 		positionScreen.applyMatrix4(camera.projectionMatrix);
 
-		// horizontal and vertical coordinate of the lower left corner of the pixels to copy
+		// Horizontal and vertical coordinate of the lower left corner of the pixels to copy
 		screenPositionPixels.x = viewport.x + (positionScreen.x * halfViewportWidth) + halfViewportWidth - 8;
 		screenPositionPixels.y = viewport.y + (positionScreen.y * halfViewportHeight) + halfViewportHeight - 8;
 
-		// screen cull
+		// Screen cull
 		if(validArea.containsPoint(screenPositionPixels))
 		{
-			// save current RGB to temp texture
+			// Save current RGB to temp texture
 			renderer.copyFramebufferToTexture(screenPositionPixels, tempMap);
 
-			// render pink quad
+			// Render pink quad
 			var uniforms = material1a.uniforms;
 			uniforms.scale.value = scale;
 			uniforms.screenPosition.value = positionScreen;
 
 			renderer.renderBufferDirect(camera, null, geometry, material1a, mesh1, null);
 
-			// copy result to occlusionMap
+			// Copy result to occlusionMap
 			renderer.copyFramebufferToTexture(screenPositionPixels, occlusionMap);
 
-			// restore graphics
+			// Restore graphics
 			var uniforms = material1b.uniforms;
 			uniforms.scale.value = scale;
 			uniforms.screenPosition.value = positionScreen;
 
 			renderer.renderBufferDirect(camera, null, geometry, material1b, mesh1, null);
 
-			// render elements
+			// Render elements
 			var vecX = - positionScreen.x * 2;
 			var vecY = - positionScreen.y * 2;
 

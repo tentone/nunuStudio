@@ -1,7 +1,6 @@
 import {EventManager} from "../utils/EventManager.js";
 import {Key} from "./Key.js";
 
-
 /**
  * Keyboard instance for input in sync with the running application, internally stores the key transitions provided by the browser.
  * 

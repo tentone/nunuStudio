@@ -1,4 +1,3 @@
-import {Mesh} from "./Mesh.js";
 import {InstancedMesh as TInstancedMesh, BufferAttribute, Object3D} from "three";
 
 /**

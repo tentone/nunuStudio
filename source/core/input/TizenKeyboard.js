@@ -1,6 +1,3 @@
-import {Keyboard} from "./Keyboard.js";
-import {Key} from "./Key.js";
-
 /**
  * Tizen keyboard contains codes of multiple tizen specific key codes.
  *
