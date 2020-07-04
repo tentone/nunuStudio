@@ -1,5 +1,5 @@
 import {Image} from "../resources/Image.js";
-import {CubeReflectionMapping, Texture, Math, Vector3} from "three";
+import {CubeReflectionMapping, Texture, Math as TMath, Vector3} from "three";
 
 
 /**
@@ -336,7 +336,7 @@ CubeTexture.renderEquirectFace = function(read, face, rotation, size)
 
 			// Project cube face onto unit sphere by converting cartesian to spherical coordinates
 			var r = Math.sqrt(cube.x * cube.x + cube.y * cube.y + cube.z * cube.z);
-			var lon = Math.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
+			var lon = TMath.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
 			var lat = Math.acos(cube.z / r);
 
 			var px = read.width * lon / Math.PI / 2 - 0.5;

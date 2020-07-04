@@ -1,6 +1,5 @@
 import {RectAreaLight as TRectAreaLight, Light} from "three";
 
-
 /**
  * A RectAreLight emit light from a rectagular surface.
  * 
@@ -23,6 +22,8 @@ function RectAreaLight(color, intensity, width, height)
 
 RectAreaLight.prototype = Object.create(TRectAreaLight.prototype);
 
+// THREE.RectAreaLight = RectAreaLight;
+
 RectAreaLight.prototype.toJSON = function(meta)
 {
 	var data = Light.prototype.toJSON.call(this, meta);
@@ -32,4 +33,5 @@ RectAreaLight.prototype.toJSON = function(meta)
 
 	return data;
 };
+
 export {RectAreaLight};

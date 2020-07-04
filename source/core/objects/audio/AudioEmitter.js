@@ -125,6 +125,8 @@ function AudioEmitter(audio)
 
 AudioEmitter.prototype = Object.create(Object3D.prototype);
 
+// THREE.Audio = AudioEmitter;
+
 /**
  * Possible source types for the audio emitter.
  *

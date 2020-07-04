@@ -10,7 +10,7 @@ import {Slider} from "../../../components/input/Slider.js";
 import {Division} from "../../../components/Division.js";
 import {Component} from "../../../components/Component.js";
 import {ButtonText} from "../../../components/buttons/ButtonText.js";
-import {Clock, VectorKeyframeTrack, InterpolateLinear, QuaternionKeyframeTrack, BooleanKeyframeTrack, InterpolateDiscrete, ColorKeyframeTrack, NumberKeyframeTrack} from "three";
+import {Clock, VectorKeyframeTrack, AnimationClip, InterpolateLinear, QuaternionKeyframeTrack, BooleanKeyframeTrack, InterpolateDiscrete, ColorKeyframeTrack, NumberKeyframeTrack} from "three";
 
 /**
  * The animation tab is used to display and edit object animations timelines.

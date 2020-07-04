@@ -23,4 +23,7 @@ function AmbientLight(hex)
 }
 
 AmbientLight.prototype = Object.create(TAmbientLight.prototype);
+
+// THREE.AmbientLight = AmbientLight;
+
 export {AmbientLight};

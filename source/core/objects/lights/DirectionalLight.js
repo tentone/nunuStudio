@@ -28,8 +28,11 @@ function DirectionalLight(hex, intensity)
 
 DirectionalLight.prototype = Object.create(TDirectionalLight.prototype);
 
+// THREE.DirectionalLight = DirectionalLight;
+
 /**
- * Update light shadow map atributtes at runtime
+ * Update light shadow map atributtes at runtime.
+ * 
  * @method updateShadowMap
  */
 DirectionalLight.prototype.updateShadowMap = function()
@@ -38,4 +41,5 @@ DirectionalLight.prototype.updateShadowMap = function()
 	this.shadow.map = null;
 	this.shadow.camera.updateProjectionMatrix();
 };
+
 export {DirectionalLight};

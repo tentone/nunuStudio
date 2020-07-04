@@ -29,6 +29,8 @@ function PointLight(hex, intensity, distance, decay)
 
 PointLight.prototype = Object.create(TPointLight.prototype);
 
+// THREE.PointLight = PointLight;
+
 /**
  * Update light shadow map atributtes at runtime
  * @method updateShadowMap
@@ -39,4 +41,5 @@ PointLight.prototype.updateShadowMap = function()
 	this.shadow.map = null;
 	this.shadow.camera.updateProjectionMatrix();
 };
+
 export {PointLight};

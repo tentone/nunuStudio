@@ -33,6 +33,8 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 
 SpotLight.prototype = Object.create(TSpotLight.prototype);
 
+// THREE.SpotLight = SpotLight;
+
 /**
  * SpotLight looks to the target object coordinates.
  * 

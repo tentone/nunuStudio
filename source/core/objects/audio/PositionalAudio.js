@@ -4,7 +4,6 @@ import {Scene} from "../Scene.js";
 import {AudioEmitter} from "./AudioEmitter.js";
 import {Vector3, Quaternion, Object3D} from "three";
 
-
 /**
  * PositionalAudio is used to play audio with positional audio effect using a WebAudio panner.
  *
@@ -71,6 +70,8 @@ function PositionalAudio(audio)
 }
 
 PositionalAudio.prototype = Object.create(AudioEmitter.prototype);
+
+// THREE.PositionalAudio = PositionalAudio;
 
 /**
  * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.

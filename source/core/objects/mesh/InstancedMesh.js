@@ -52,17 +52,15 @@ InstancedMesh.prototype = Object.create(TInstancedMesh.prototype);
 
 InstancedMesh.prototype.dispose = function()
 {
-	// Material and geometry
 	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
-	if(this.geometry !== null)
+	if(this.geometry !== null && this.geometry.dispose !== undefined)
 	{
 		this.geometry.dispose();
 	}
 
-	// Children
 	Object3D.prototype.dispose.call(this);
 };
 
@@ -75,4 +73,5 @@ InstancedMesh.prototype.toJSON = function(meta)
 
 	return data;
 };
+
 export {InstancedMesh};

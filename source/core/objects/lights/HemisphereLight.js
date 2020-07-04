@@ -1,6 +1,4 @@
-import {Sky} from "../misc/Sky.js";
 import {HemisphereLight as THemisphereLight} from "three";
-
 
 /**
  * A light source positioned directly above the scene, with color fading from the sky color to the ground color.
@@ -22,4 +20,7 @@ function HemisphereLight(skyColor, groundColor, intensity)
 }
 
 HemisphereLight.prototype = Object.create(THemisphereLight.prototype);
+
+// THREE.HemisphereLight = HemisphereLight;
+
 export {HemisphereLight};

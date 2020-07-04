@@ -3,7 +3,6 @@ const Webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const context = Path.resolve(__dirname, ".");
 const source = context + "/source";
@@ -33,7 +32,6 @@ module.exports = {
 			THREE: "three",
 			"window.THREE": "three"
 		}),
-		new MiniCssExtractPlugin(),
 		new MergeIntoSingleFilePlugin({
 			files: {
 				"styles.css": [
@@ -118,6 +116,10 @@ module.exports = {
 	],
 	module: {
 		rules: [
+			{
+				test: /\.glsl$/i,
+				use: "raw-loader",
+			},
 			{
 				test: require.resolve("spine-runtimes/spine-ts/build/spine-threejs.js"),
 				loader: "@shoutem/webpack-prepend-append",

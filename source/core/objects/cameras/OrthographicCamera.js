@@ -4,7 +4,6 @@ import {Scene} from "../Scene.js";
 import {Viewport} from "./Viewport.js";
 import {OrthographicCamera as TOrthographicCamera, Object3D} from "three";
 
-
 /**
  * Orthographic Camera is used for 2D like image projection.
  * 

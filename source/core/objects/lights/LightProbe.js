@@ -20,6 +20,8 @@ function LightProbe(sh, intensity)
 
 LightProbe.prototype = Object.create(TLightProbe.prototype);
 
+// THREE.LightProbe = LightProbe;
+
 /**
  * Generate light probe data from cube camera render.
  *
