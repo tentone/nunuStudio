@@ -39,7 +39,7 @@ module.exports = {
 					"source/editor/theme/dark.css",
 				],
 				"jscolor.js": [
-					"lib/jscolor.min.js",
+					"node_modules/@eastdesire/jscolor/jscolor.js",
 				],
 				/*"spine.js": [
 					"node_modules/spine-runtimes/spine-ts/build/spine-threejs.js",

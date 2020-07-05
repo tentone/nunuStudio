@@ -146,7 +146,7 @@ ColorGradientChooser.prototype.updateValues = function()
 	{
 		gradient.addColorStop(colorPercentage, this.values[i].getStyle());
 
-		this.buttons[i].color.fromRGB(this.values[i].r * 255, this.values[i].g * 255, this.values[i].b * 255);
+		this.buttons[i].color.fromRGBA(this.values[i].r * 255, this.values[i].g * 255, this.values[i].b * 255, 255);
 		this.buttons[i].style.left = buttonPosition + "px";
 
 		colorPercentage += colorStep;

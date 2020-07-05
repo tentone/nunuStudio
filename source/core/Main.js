@@ -1,292 +1,152 @@
-/*
-// Runtime libs
-include("lib/three/three.js");
+// export * from "three";
+// export * from "cannon";
 
-include("lib/three/curves/NURBSCurve.js");
-include("lib/three/curves/NURBSSurface.js");
-include("lib/three/curves/NURBSUtils.js");
+export {Nunu} from "./core/Nunu.js";
 
-include("lib/three/objects/Lensflare.js");
+export {FileSystem} from "./core/FileSystem.js";
+export {TargetConfig} from "./core/platform/TargetConfig.js";
 
-include("lib/three/loaders/TTFLoader.js");
+export {AnimationMixer} from "./core/animation/AnimationMixer.js";
 
-include("lib/pson/bytebuffer.min.js");
-include("lib/pson/long.min.js");
-include("lib/pson/PSON.min.js");
+export {Key} from "./core/input/Key.js";
+export {Keyboard} from "./core/input/Keyboard.js";
+export {TizenKeyboard} from "./core/input/TizenKeyboard.js";
+export {Mouse} from "./core/input/Mouse.js";
+export {Gamepad} from "./core/input/Gamepad.js";
+export {Gyroscope} from "./core/input/Gyroscope.js";
 
-include("lib/octree/sparse-octree.min.js");
+export {RendererState} from "./core/renderer/RendererState.js";
+export {RendererConfiguration} from "./core/renderer/RendererConfiguration.js";
+export {CSS3DRenderer} from "./core/renderer/css/CSS3DRenderer.js";
+export {CSS3DObject} from "./core/renderer/css/CSS3DObject.js";
+export {CSS3DSprite} from "./core/renderer/css/CSS3DSprite.js";
 
-include("lib/three-bmfont.js");
-include("lib/cannon.js");
-include("lib/leap.min.js");
-include("lib/spine-threejs.js");
-include("lib/chevrotain.min.js");
+export {Pass} from "./core/postprocessing/Pass.js";
+export {ShaderPass} from "./core/postprocessing/ShaderPass.js";
+export {EffectComposer} from "./core/postprocessing/EffectComposer.js";
+export {RenderPass} from "./core/postprocessing/RenderPass.js";
 
-// Threejs Overrides
-include("source/core/three/animation/KeyframeTrack.js");
-include("source/core/three/animation/AnimationClip.js");
+export {FXAAPass} from "./core/postprocessing/pass/antialiasing/FXAAPass.js";
+export {AfterimagePass} from "./core/postprocessing/pass/AfterimagePass.js";
+export {UnrealBloomPass} from "./core/postprocessing/pass/UnrealBloomPass.js";
+export {BloomPass} from "./core/postprocessing/pass/BloomPass.js";
+export {SSAONOHPass} from "./core/postprocessing/pass/SSAONOHPass.js";
+export {SSAOPass} from "./core/postprocessing/pass/SSAOPass.js";
+export {BokehPass} from "./core/postprocessing/pass/BokehPass.js";
+export {CopyPass} from "./core/postprocessing/pass/CopyPass.js";
+export {FilmPass} from "./core/postprocessing/pass/FilmPass.js";
+export {DotScreenPass} from "./core/postprocessing/pass/DotScreenPass.js";
+export {SobelPass} from "./core/postprocessing/pass/SobelPass.js";
+export {ColorifyPass} from "./core/postprocessing/pass/ColorifyPass.js";
+export {TechnicolorPass} from "./core/postprocessing/pass/TechnicolorPass.js";
+export {HueSaturationPass} from "./core/postprocessing/pass/HueSaturationPass.js";
+export {AdaptiveToneMappingPass} from "./core/postprocessing/pass/AdaptiveToneMappingPass.js";
 
-include("source/core/three/core/Object3D.js");
-include("source/core/three/core/BufferAttribute.js");
-include("source/core/three/core/InterleavedBufferAttribute.js");
-include("source/core/three/core/InterleavedBuffer.js");
-include("source/core/three/core/InstancedBufferAttribute.js");
+export {SSAOShader} from "./core/postprocessing/shaders/SSAOShader.js";
 
-include("source/core/three/loaders/BufferGeometryLoader.js");
+export {Resource} from "./core/resources/Resource.js";
+export {Font} from "./core/resources/Font.js";
+export {Video} from "./core/resources/Video.js";
+export {Audio} from "./core/resources/Audio.js";
+export {Image} from "./core/resources/Image.js";
+export {Model} from "./core/resources/Model.js";
+export {TextFile} from "./core/resources/TextFile.js";
+export {ResourceContainer} from "./core/resources/ResourceContainer.js";
+export {ResourceManager} from "./core/resources/ResourceManager.js";
+export {VideoStream} from "./core/resources/stream/VideoStream.js";
 
-include("source/core/three/cameras/Camera.js");
-include("source/core/three/materials/Material.js");
-include("source/core/three/textures/Texture.js");
-include("source/core/three/lights/LightShadow.js");
-include("source/core/three/scenes/Fog.js");
+export {Texture} from "./core/texture/Texture.js";
+export {CanvasTexture} from "./core/texture/CanvasTexture.js";
+export {VideoTexture} from "./core/texture/VideoTexture.js";
+export {WebcamTexture} from "./core/texture/WebcamTexture.js";
+export {CubeTexture} from "./core/texture/CubeTexture.js";
+export {DataTexture} from "./core/texture/DataTexture.js";
+export {CompressedTexture} from "./core/texture/CompressedTexture.js";
+export {SpriteSheetTexture} from "./core/texture/SpriteSheetTexture.js";
 
-include("source/core/three/objects/Points.js");
-include("source/core/three/objects/Skeleton.js");
+export {FontLoader} from "./core/loaders/FontLoader.js";
+export {ImageLoader} from "./core/loaders/ImageLoader.js";
+export {VideoLoader} from "./core/loaders/VideoLoader.js";
+export {AudioLoader} from "./core/loaders/AudioLoader.js";
+export {MaterialLoader} from "./core/loaders/MaterialLoader.js";
+export {TextureLoader} from "./core/loaders/TextureLoader.js";
+export {GeometryLoader} from "./core/loaders/GeometryLoader.js";
+export {LegacyGeometryLoader} from "./core/loaders/LegacyGeometryLoader.js";
+export {ObjectLoader} from "./core/loaders/ObjectLoader.js";
 
-// Runtime core
-include("source/core/Nunu.js");
+export {CapsuleBufferGeometry} from "./core/geometries/CapsuleBufferGeometry.js";
+export {RoundedBoxBufferGeometry} from "./core/geometries/RoundedBoxBufferGeometry.js";
+export {TerrainBufferGeometry} from "./core/geometries/TerrainBufferGeometry.js";
 
-include("source/core/FileSystem.js");
-include("source/core/platform/TargetConfig.js");
+export {TwistModifier} from "./core/geometries/modifiers/TwistModifier.js";
 
-include("source/core/animation/AnimationMixer.js");
+export {Mesh} from "./core/objects/mesh/Mesh.js";
+export {SkinnedMesh} from "./core/objects/mesh/SkinnedMesh.js";
+export {InstancedMesh} from "./core/objects/mesh/InstancedMesh.js";
 
-include("source/core/input/Key.js");
-include("source/core/input/Keyboard.js");
-include("source/core/input/TizenKeyboard.js");
-include("source/core/input/Mouse.js");
-include("source/core/input/Gamepad.js");
-include("source/core/input/Gyroscope.js");
+export {CanvasSprite} from "./core/objects/sprite/CanvasSprite.js";
+export {Sprite} from "./core/objects/sprite/Sprite.js";
 
-include("source/core/renderer/RendererState.js");
-include("source/core/renderer/RendererConfiguration.js");
-include("source/core/renderer/css/CSS3DRenderer.js");
-include("source/core/renderer/css/CSS3DObject.js");
-include("source/core/renderer/css/CSS3DSprite.js");
+export {TextMesh} from "./core/objects/text/TextMesh.js";
+export {TextBitmap} from "./core/objects/text/TextBitmap.js";
+export {TextSprite} from "./core/objects/text/TextSprite.js";
 
-include("source/core/postprocessing/Pass.js");
-include("source/core/postprocessing/ShaderPass.js");
-include("source/core/postprocessing/EffectComposer.js");
-include("source/core/postprocessing/RenderPass.js");
+export {PointLight} from "./core/objects/lights/PointLight.js";
+export {SpotLight} from "./core/objects/lights/SpotLight.js";
+export {AmbientLight} from "./core/objects/lights/AmbientLight.js";
+export {DirectionalLight} from "./core/objects/lights/DirectionalLight.js";
+export {HemisphereLight} from "./core/objects/lights/HemisphereLight.js";
+export {RectAreaLight} from "./core/objects/lights/RectAreaLight.js";
+export {LightProbe} from "./core/objects/lights/LightProbe.js";
 
-include("source/core/postprocessing/pass/antialiasing/FXAAPass.js");
-include("source/core/postprocessing/pass/AfterimagePass.js");
-include("source/core/postprocessing/pass/UnrealBloomPass.js");
-include("source/core/postprocessing/pass/BloomPass.js");
-include("source/core/postprocessing/pass/SSAONOHPass.js");
-include("source/core/postprocessing/pass/SSAOPass.js");
-include("source/core/postprocessing/pass/BokehPass.js");
-include("source/core/postprocessing/pass/CopyPass.js");
-include("source/core/postprocessing/pass/FilmPass.js");
-include("source/core/postprocessing/pass/DotScreenPass.js");
-include("source/core/postprocessing/pass/SobelPass.js");
-include("source/core/postprocessing/pass/ColorifyPass.js");
-include("source/core/postprocessing/pass/TechnicolorPass.js");
-include("source/core/postprocessing/pass/HueSaturationPass.js");
-include("source/core/postprocessing/pass/AdaptiveToneMappingPass.js");
+export {Viewport} from "./core/objects/cameras/Viewport.js";
+export {PerspectiveCamera} from "./core/objects/cameras/PerspectiveCamera.js";
+export {OrthographicCamera} from "./core/objects/cameras/OrthographicCamera.js";
+export {CubeCamera} from "./core/objects/cameras/CubeCamera.js";
 
-include("source/core/postprocessing/shaders/SSAOShader.js");
+export {AudioEmitter} from "./core/objects/audio/AudioEmitter.js";
+export {PositionalAudio} from "./core/objects/audio/PositionalAudio.js";
 
-include("source/core/resources/Resource.js");
-include("source/core/resources/Font.js");
-include("source/core/resources/Video.js");
-include("source/core/resources/Audio.js");
-include("source/core/resources/Image.js");
-include("source/core/resources/Model.js");
-include("source/core/resources/TextFile.js");
-include("source/core/resources/ResourceContainer.js");
-include("source/core/resources/ResourceManager.js");
-include("source/core/resources/stream/VideoStream.js");
+export {Script} from "./core/objects/script/Script.js";
 
-include("source/core/texture/Texture.js");
-include("source/core/texture/CanvasTexture.js");
-include("source/core/texture/VideoTexture.js");
-include("source/core/texture/WebcamTexture.js");
-include("source/core/texture/CubeTexture.js");
-include("source/core/texture/DataTexture.js");
-include("source/core/texture/CompressedTexture.js");
-include("source/core/texture/SpriteSheetTexture.js");
+export {PhysicsObject} from "./core/objects/physics/PhysicsObject.js";
 
-include("source/core/loaders/FontLoader.js");
-include("source/core/loaders/ImageLoader.js");
-include("source/core/loaders/VideoLoader.js");
-include("source/core/loaders/AudioLoader.js");
-include("source/core/loaders/MaterialLoader.js");
-include("source/core/loaders/TextureLoader.js");
-include("source/core/loaders/GeometryLoader.js");
-include("source/core/loaders/LegacyGeometryLoader.js");
-include("source/core/loaders/ObjectLoader.js");
+export {SpineAnimation} from "./core/objects/spine/SpineAnimation.js";
+export {SpineTexture} from "./core/objects/spine/SpineTexture.js";
 
-include("source/core/geometries/CapsuleBufferGeometry.js");
-include("source/core/geometries/RoundedBoxBufferGeometry.js");
-include("source/core/geometries/TerrainBufferGeometry.js");
+export {ParticleEmitterControl} from "./core/objects/particle/core/ParticleEmitterControl.js";
+export {ParticleGroup} from "./core/objects/particle/core/ParticleGroup.js";
+export {ShaderUtils} from "./core/objects/particle/core/ShaderUtils.js";
+export {ShaderAttribute} from "./core/objects/particle/helpers/ShaderAttribute.js";
+export {TypedArrayHelper} from "./core/objects/particle/helpers/TypedArrayHelper.js";
+export {ParticleShaderChunks} from "./core/objects/particle/shaders/ParticleShaderChunks.js";
+export {ParticleShaders} from "./core/objects/particle/shaders/ParticleShaders.js";
+export {ParticleEmitter} from "./core/objects/particle/ParticleEmitter.js";
 
-include("source/core/geometries/modifiers/TwistModifier.js");
+export {Sky} from "./core/objects/misc/Sky.js";
+export {Container} from "./core/objects/misc/Container.js";
+export {LensFlare} from "./core/objects/misc/LensFlare.js";
+export {HTMLView} from "./core/objects/misc/HTMLView.js";
 
-include("source/core/objects/mesh/Mesh.js");
-include("source/core/objects/mesh/SkinnedMesh.js");
-include("source/core/objects/mesh/InstancedMesh.js");
+export {OrbitControls} from "./core/objects/controls/OrbitControls.js";
+export {FirstPersonControls} from "./core/objects/controls/FirstPersonControls.js";
 
-include("source/core/objects/sprite/CanvasSprite.js");
-include("source/core/objects/sprite/Sprite.js");
+export {Program} from "./core/objects/Program.js";
+export {Scene} from "./core/objects/Scene.js";
 
-include("source/core/objects/text/TextMesh.js");
-include("source/core/objects/text/TextBitmap.js");
-include("source/core/objects/text/TextSprite.js");
+export {WorkerTask} from "./core/utils/worker/WorkerTask.js";
+export {WorkerPool} from "./core/utils/worker/WorkerPool.js";
 
-include("source/core/objects/lights/PointLight.js");
-include("source/core/objects/lights/SpotLight.js");
-include("source/core/objects/lights/AmbientLight.js");
-include("source/core/objects/lights/DirectionalLight.js");
-include("source/core/objects/lights/HemisphereLight.js");
-include("source/core/objects/lights/RectAreaLight.js");
-include("source/core/objects/lights/LightProbe.js");
+export {Base64Utils} from "./core/utils/binary/Base64Utils.js";
+export {ArraybufferUtils} from "./core/utils/binary/ArraybufferUtils.js";
+export {BufferUtils} from "./core/utils/binary/BufferUtils.js";
 
-include("source/core/objects/cameras/Viewport.js");
-include("source/core/objects/cameras/PerspectiveCamera.js");
-include("source/core/objects/cameras/OrthographicCamera.js");
-include("source/core/objects/cameras/CubeCamera.js");
+export {Timer} from "./core/utils/timer/Timer.js";
+export {AnimationTimer} from "./core/utils/timer/AnimationTimer.js";
 
-include("source/core/objects/audio/AudioEmitter.js");
-include("source/core/objects/audio/PositionalAudio.js");
-
-include("source/core/objects/script/Script.js");
-
-include("source/core/objects/physics/PhysicsObject.js");
-
-include("source/core/objects/spine/SpineAnimation.js");
-include("source/core/objects/spine/SpineTexture.js");
-
-include("source/core/objects/particle/core/ParticleEmitterControl.js");
-include("source/core/objects/particle/core/ParticleGroup.js");
-include("source/core/objects/particle/core/ShaderUtils.js");
-include("source/core/objects/particle/helpers/ShaderAttribute.js");
-include("source/core/objects/particle/helpers/TypedArrayHelper.js");
-include("source/core/objects/particle/shaders/ParticleShaderChunks.js");
-include("source/core/objects/particle/shaders/ParticleShaders.js");
-include("source/core/objects/particle/ParticleEmitter.js");
-
-include("source/core/objects/misc/Sky.js");
-include("source/core/objects/misc/Container.js");
-include("source/core/objects/misc/LensFlare.js");
-include("source/core/objects/misc/HTMLView.js");
-
-include("source/core/objects/controls/OrbitControls.js");
-include("source/core/objects/controls/FirstPersonControls.js");
-
-include("source/core/objects/Program.js");
-include("source/core/objects/Scene.js");
-
-include("source/core/utils/worker/WorkerTask.js");
-include("source/core/utils/worker/WorkerPool.js");
-
-include("source/core/utils/binary/Base64Utils.js");
-include("source/core/utils/binary/ArraybufferUtils.js");
-include("source/core/utils/binary/BufferUtils.js");
-
-include("source/core/utils/timer/Timer.js");
-include("source/core/utils/timer/AnimationTimer.js");
-
-include("source/core/utils/LocalStorage.js");
-include("source/core/utils/EventManager.js");
-include("source/core/utils/MathUtils.js");
-include("source/core/utils/ObjectUtils.js");
-include("source/core/utils/PhysicsGenerator.js");
-include("source/core/utils/UnitConverter.js");
-
-// Editor libs
-include("lib/codemirror/codemirror.js");
-include("lib/codemirror/codemirror.css");
-include("lib/codemirror/keymap/sublime.js");
-include("lib/codemirror/keymap/emacs.js");
-include("lib/codemirror/keymap/vim.js");
-include("lib/codemirror/mode/javascript/javascript.js");
-include("lib/codemirror/mode/css/css.js");
-include("lib/codemirror/mode/xml/xml.js");
-include("lib/codemirror/mode/htmlmixed/htmlmixed.js");
-include("lib/codemirror/mode/glsl.js");
-include("lib/codemirror/addon/edit/closebrackets.js");
-include("lib/codemirror/addon/edit/matchbrackets.js");
-include("lib/codemirror/addon/scroll/annotatescrollbar.js");
-include("lib/codemirror/addon/search/search.js");
-include("lib/codemirror/addon/search/searchcursor.js");
-include("lib/codemirror/addon/search/jump-to-line.js");
-include("lib/codemirror/addon/search/match-highlighter.js");
-include("lib/codemirror/addon/search/matchesonscrollbar.js");
-include("lib/codemirror/addon/search/matchesonscrollbar.css");
-include("lib/codemirror/addon/hint/show-hint.js");
-include("lib/codemirror/addon/hint/show-hint.css");
-include("lib/codemirror/addon/hint/anyword-hint.js");
-include("lib/codemirror/addon/dialog/dialog.js");
-include("lib/codemirror/addon/dialog/dialog.css");
-include("lib/codemirror/addon/selection/mark-selection.js");
-include("lib/codemirror/addon/selection/active-line.js");
-include("lib/codemirror/addon/selection/selection-pointer.js");
-include("lib/codemirror/addon/lint/lint.css");
-include("lib/codemirror/addon/lint/lint.js");
-include("lib/codemirror/addon/lint/javascript-lint.js");
-include("lib/codemirror/addon/tern/tern.js");
-include("lib/codemirror/addon/tern/tern.css");
-include("lib/codemirror/addon/runmode/colorize.js");
-include("lib/codemirror/addon/runmode/runmode.js");
-include("lib/codemirror/theme/*");
-
-include("lib/acorn/acorn.js");
-include("lib/acorn/acorn_loose.js");
-include("lib/acorn/walk.js");
-
-include("lib/tern/signal.js");
-include("lib/tern/tern.js");
-include("lib/tern/def.js");
-include("lib/tern/comment.js");
-include("lib/tern/infer.js");
-include("lib/tern/plugin/doc_comment.js");
-
-include("lib/three/loaders/LoaderSupport.js");
-include("lib/three/loaders/AMFLoader.js");
-include("lib/three/loaders/AssimpJSONLoader.js");
-include("lib/three/loaders/AssimpLoader.js");
-include("lib/three/loaders/AWDLoader.js");
-include("lib/three/loaders/BasisTextureLoader.js");
-include("lib/three/loaders/BabylonLoader.js");
-include("lib/three/loaders/ColladaLoader.js");
-include("lib/three/loaders/DRACOLoader.js");
-include("lib/three/loaders/FBXLoader.js");
-include("lib/three/loaders/GCodeLoader.js");
-include("lib/three/loaders/GLTFLoader.js");
-include("lib/three/loaders/MTLLoader.js");
-include("lib/three/loaders/OBJLoader.js");
-include("lib/three/loaders/PCDLoader.js");
-include("lib/three/loaders/PLYLoader.js");
-include("lib/three/loaders/PRWMLoader.js");
-include("lib/three/loaders/STLLoader.js");
-include("lib/three/loaders/SVGLoader.js");
-include("lib/three/loaders/TDSLoader.js");
-include("lib/three/loaders/VRMLLoader.js");
-include("lib/three/loaders/VTKLoader.js");
-include("lib/three/loaders/XLoader.js");
-include("lib/three/loaders/DDSLoader.js");
-include("lib/three/loaders/PVRLoader.js");
-include("lib/three/loaders/TGALoader.js");
-include("lib/three/loaders/KTXLoader.js");
-
-include("lib/three/modifiers/SimplifyModifier.js");
-include("lib/three/modifiers/SubdivisionModifier.js");
-
-include("lib/three/exporters/DRACOExporter.js");
-include("lib/three/exporters/OBJExporter.js");
-include("lib/three/exporters/STLExporter.js");
-include("lib/three/exporters/GLTFExporter.js");
-include("lib/three/exporters/ColladaExporter.js");
-include("lib/three/exporters/PLYExporter.js");
-
-include("lib/draco/draco_encoder.js");
-
-include("lib/octree/octree-helper.min.js");
-
-include("lib/zlib.min.js");
-include("lib/jsblend.js");
-include("lib/jshint.min.js");
-include("lib/jscolor.min.js");
-include("lib/jszip.min.js");
-*/
+export {LocalStorage} from "./core/utils/LocalStorage.js";
+export {EventManager} from "./core/utils/EventManager.js";
+export {MathUtils} from "./core/utils/MathUtils.js";
+export {ObjectUtils} from "./core/utils/ObjectUtils.js";
+export {PhysicsGenerator} from "./core/utils/PhysicsGenerator.js";
+export {UnitConverter} from "./core/utils/UnitConverter.js";

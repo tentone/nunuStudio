@@ -17,7 +17,7 @@ function ColorChooser(parent)
 	this.element.style.appearance = "textfield";
 
 	/**
-	 * Color chooser.
+	 * Color chooser object automatically creates the color selector box.
 	 *
 	 * @attribute color
 	 * @type {jscolor}
@@ -30,8 +30,11 @@ function ColorChooser(parent)
 	this.color.borderRadius = 0;
 	this.color.zIndex = 2000;
 
+	// TODO <REMOVE THIS>
+	console.log(this.color);
+
 	/**
-	 * On change function.
+	 * On change callback function automatically called everytime that the color is changed.
 	 *
 	 * @attribute onChange
 	 * @type {Function}
@@ -64,11 +67,11 @@ ColorChooser.prototype.setValue = function(r, g, b)
 {
 	if(r instanceof Color)
 	{
-		this.color.fromRGB(r.r * 255, r.g * 255, r.b * 255)
+		this.color.fromRGBA(r.r * 255, r.g * 255, r.b * 255, 255)
 	}
 	else
 	{
-		this.color.fromRGB(r * 255, g * 255, b * 255);
+		this.color.fromRGBA(r * 255, g * 255, b * 255, 255);
 	}
 };
 
@@ -81,7 +84,7 @@ ColorChooser.prototype.setValue = function(r, g, b)
 ColorChooser.prototype.setValueHex = function(hex)
 {
 	hex = Math.floor(hex);
-	this.color.fromRGB(hex >> 16 & 255, hex >> 8 & 255, hex & 255);
+	this.color.fromRGBA(hex >> 16 & 255, hex >> 8 & 255, hex & 255, 255);
 };
 
 /**
