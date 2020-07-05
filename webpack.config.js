@@ -13,6 +13,23 @@ module.exports = {
 	entry: source + "/editor/Main.js",
 	target: "web",
 	devtool: "inline-source-map",
+	module: {
+		rules: [
+			{
+				test: /\.glsl$/i,
+				use: "raw-loader",
+			},
+			{
+				test: /.*spine-threejs.*/,
+				loader: "@shoutem/webpack-prepend-append",
+				query: "{\"append\": \"export {spine};\"}"
+			}
+		]
+	},
+	output: {
+		filename: "bundle.js",
+		path: output
+	},
 	plugins: [
 		new CopyPlugin({
 			patterns: [
@@ -41,9 +58,6 @@ module.exports = {
 				"jscolor.js": [
 					"node_modules/@eastdesire/jscolor/jscolor.js",
 				],
-				/*"spine.js": [
-					"node_modules/spine-runtimes/spine-ts/build/spine-threejs.js",
-				],*/
 				"jshint.js": [
 					"node_modules/jshint/dist/jshint.js"
 				],
@@ -100,25 +114,5 @@ module.exports = {
 				]
 			}
 		}),
-	],
-	module: {
-		rules: [
-			{
-				test: /\.glsl$/i,
-				use: "raw-loader",
-			},
-			{
-				test: require.resolve("spine-runtimes/spine-ts/build/spine-threejs.js"),
-				loader: "@shoutem/webpack-prepend-append",
-				query: {
-					append: "export {spine};"
-				}
-			}
-		]
-	},
-	output: {
-		filename: "bundle.js",
-		path: output
-	},
-	module: {}
+	]
 };
