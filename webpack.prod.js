@@ -1,4 +1,3 @@
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const WebpackCleanupPlugin  = require("webpack-cleanup-plugin");
 
 const Merge = require("webpack-merge");
@@ -8,7 +7,7 @@ module.exports = Merge(common, {
 	devtool: "none",
 	mode: "production",
 	optimization: {
-		minimizer: [new UglifyJSPlugin(),],
+		minimize: true
 	},
 	plugins: [
 		new WebpackCleanupPlugin()

@@ -1,4 +1,4 @@
-const WebpackCleanupPlugin  = require("webpack-cleanup-plugin");
+const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 
 const Path = require("path");
 const Webpack = require("webpack");
@@ -13,7 +13,9 @@ module.exports = {
 	target: "web",
 	devtool: "none",
 	mode: "production",
-	optimization: {},
+	optimization: {
+		minimize: true
+	},
 	plugins: [
 		new WebpackCleanupPlugin(),
 		new Webpack.ProvidePlugin({
