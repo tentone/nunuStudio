@@ -10,19 +10,16 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"start-old": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
-		"serve-old": "http-server . -p 8080 --cors -o",
-		"build-old": "cd script && node build.js",
-		"release-web-old": "cd script && node release.js",
-		"build-editor": "webpack --config webpack.prod.js",
-		"start": "webpack-dev-server --open --config webpack.dev.js",
-		"serve-page": "http-server ./docs -p 8081 --cors -o",
+		"nwjs": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",		
+		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
+		"page": "http-server ./docs -p 8081 --cors -o",
 		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
 		"publish": "npm run build && npm run docs && npm publish --access public .",
-		"package-desktop": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./docs/editor",
-		"package-win": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks win-x64 ./docs/editor",
-		"package-macos": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks mac-x64 ./docs/editor",
-		"package-linux": "build --mirror https://dl.nwjs.io/ --with-ffmpeg --tasks linux-x64 ./docs/editor"
+		"build": "webpack --config webpack.prod.js",
+		"build-desktop": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks win-x64,mac-x64,linux-x64 ./docs/editor",
+		"build-win": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks win-x64 ./docs/editor",
+		"build-macos": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks mac-x64 ./docs/editor",
+		"build-linux": "build --mirror https://dl.nwjs.io/ --concurrent --with-ffmpeg --tasks linux-x64 ./docs/editor"
 	},
 	"repository": {
 		"type": "git",
