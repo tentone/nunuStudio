@@ -41,34 +41,24 @@ module.exports = {
 				"jscolor.js": [
 					"lib/jscolor.min.js",
 				],
-				"jshint.js": [
-					"lib/jshint.min.js",
-					//"node_modules/jshint/dist/jshint.js"
-				],
-				"acorn.js": [
-					"lib/acorn/acorn.js",
-					"lib/acorn/acorn_loose.js",
-					"lib/acorn/walk.js",
-					/*"node_modules/acorn/dist/acorn.js",
-					"node_modules/acorn_loose/dist/acorn_loose.js",
-					"node_modules/acorn_walk/dist/walk.js"*/
-				],
 				/*"spine.js": [
 					"node_modules/spine-runtimes/spine-ts/build/spine-threejs.js",
 				],*/
+				"jshint.js": [
+					"node_modules/jshint/dist/jshint.js"
+				],
+				"acorn.js": [
+					"node_modules/acorn/dist/acorn.js",
+					"node_modules/acorn-loose/dist/acorn-loose.js",
+					"node_modules/acorn-walk/dist/walk.js"
+				],
 				"tern.js": [
-					"lib/tern/signal.js",
-					"lib/tern/tern.js",
-					"lib/tern/def.js",
-					"lib/tern/comment.js",
-					"lib/tern/infer.js",
-					"lib/tern/plugin/doc_comment.js"
-					/*"node_modules/tern/lib/signal.js",
+					"node_modules/tern/lib/signal.js",
 					"node_modules/tern/lib/tern.js",
 					"node_modules/tern/lib/def.js",
 					"node_modules/tern/lib/comment.js",
 					"node_modules/tern/lib/infer.js",
-					"node_modules/tern/plugin/doc_comment.js",*/
+					"node_modules/tern/plugin/doc_comment.js"
 				],
 				"codemirror.js": [
 					"node_modules/codemirror/lib/codemirror.js",
@@ -99,9 +89,6 @@ module.exports = {
 					"node_modules/codemirror/addon/runmode/colorize.js",
 					"node_modules/codemirror/addon/runmode/runmode.js",
 				],
-				/*"glsl.js": [
-					"node_modules/glsl-editor/glsl.js"
-				],*/
 				"codemirror.css": [
 					"node_modules/codemirror/lib/codemirror.css",
 					"node_modules/codemirror/theme/**/*.css",
