@@ -1,16 +1,14 @@
+/*
+ * Main file for the program editor, should be used as an entry point for the editor.
+ *
+ * Does not export any of the internal editor modules, creates events on the document.body to load the editor code properly.
+ */
 import {Editor} from "./Editor.js";
 import GLSL from "glsl-editor/glsl.js";
-import "../lib/draco/draco_encoder.js";
+// import "../lib/draco/draco_encoder.js";
 
 // Register the GLSL plugin in Codemirror
 GLSL(CodeMirror);
 
-document.body.onload = function()
-{
-	Editor.initialize();
-};
-
-document.body.onresize = function()
-{
-	Editor.resize();
-};
+document.body.onload = Editor.initialize;
+document.body.onresize = Editor.resize;

@@ -1,6 +1,5 @@
 import {Key} from "./Key.js";
 
-
 /**
  * Gamepad provides basic support for gamepads.
  *
