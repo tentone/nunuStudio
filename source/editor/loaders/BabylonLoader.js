@@ -2,28 +2,50 @@
  * @author mrdoob / http://mrdoob.com/
  * @author Mugen87 / https://github.com/Mugen87
  */
+import {
+	BufferGeometry,
+	DefaultLoadingManager,
+	DirectionalLight,
+	FileLoader,
+	Float32BufferAttribute,
+	Group,
+	HemisphereLight,
+	Mesh,
+	MeshPhongMaterial,
+	PerspectiveCamera,
+	PointLight,
+	Scene,
+	SpotLight
+} from "three";
 
-THREE.BabylonLoader = function ( manager ) {
+var BabylonLoader = function ( manager ) {
 
-	THREE.Loader.call( this, manager );
+	this.manager = ( manager !== undefined ) ? manager : DefaultLoadingManager;
 
 };
 
-THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.prototype ), {
+BabylonLoader.prototype = {
 
-	constructor: THREE.BabylonLoader,
+	constructor: BabylonLoader,
 
 	load: function ( url, onLoad, onProgress, onError ) {
 
 		var scope = this;
 
-		var loader = new THREE.FileLoader( scope.manager );
+		var loader = new FileLoader( scope.manager );
 		loader.setPath( scope.path );
 		loader.load( url, function ( text ) {
 
 			onLoad( scope.parse( JSON.parse( text ) ) );
 
 		}, onProgress, onError );
+
+	},
+
+	setPath: function ( value ) {
+
+		this.path = value;
+		return this;
 
 	},
 
@@ -37,7 +59,7 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 				var data = json.materials[ i ];
 
-				var material = new THREE.MeshPhongMaterial();
+				var material = new MeshPhongMaterial();
 				material.name = data.name;
 				material.color.fromArray( data.diffuse );
 				material.emissive.fromArray( data.emissive );
@@ -57,7 +79,7 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 					console.warn( 'THREE.BabylonLoader: Multi materials not yet supported.' );
 
-					materials[ data.id ] = new THREE.MeshPhongMaterial();
+					materials[ data.id ] = new MeshPhongMaterial();
 
 				}
 
@@ -69,7 +91,7 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 		function parseGeometry( json ) {
 
-			var geometry = new THREE.BufferGeometry();
+			var geometry = new BufferGeometry();
 
 			var indices = json.indices;
 			var positions = json.positions;
@@ -88,7 +110,7 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 			}
 
-			geometry.addAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ) );
+			geometry.addAttribute( 'position', new Float32BufferAttribute( positions, 3 ) );
 
 			// normals
 
@@ -100,7 +122,7 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 				}
 
-				geometry.addAttribute( 'normal', new THREE.Float32BufferAttribute( normals, 3 ) );
+				geometry.addAttribute( 'normal', new Float32BufferAttribute( normals, 3 ) );
 
 			}
 
@@ -108,7 +130,7 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 			if ( uvs ) {
 
-				geometry.addAttribute( 'uv', new THREE.Float32BufferAttribute( uvs, 2 ) );
+				geometry.addAttribute( 'uv', new Float32BufferAttribute( uvs, 2 ) );
 
 			}
 
@@ -135,7 +157,7 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 		function parseObjects( json, materials ) {
 
 			var objects = {};
-			var scene = new THREE.Scene();
+			var scene = new Scene();
 
 			var cameras = json.cameras;
 
@@ -143,7 +165,7 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 				var data = cameras[ i ];
 
-				var camera = new THREE.PerspectiveCamera( ( data.fov / Math.PI ) * 180, 1.33, data.minZ, data.maxZ );
+				var camera = new PerspectiveCamera( ( data.fov / Math.PI ) * 180, 1.33, data.minZ, data.maxZ );
 
 				camera.name = data.name;
 				camera.position.fromArray( data.position );
@@ -164,19 +186,19 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 				switch ( data.type ) {
 
 					case 0:
-						light = new THREE.PointLight();
+						light = new PointLight();
 						break;
 
 					case 1:
-						light = new THREE.DirectionalLight();
+						light = new DirectionalLight();
 						break;
 
 					case 2:
-						light = new THREE.SpotLight();
+						light = new SpotLight();
 						break;
 
 					case 3:
-						light = new THREE.HemisphereLight();
+						light = new HemisphereLight();
 						break;
 
 				}
@@ -205,11 +227,11 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 					var geometry = parseGeometry( data );
 
-					object = new THREE.Mesh( geometry, materials[ data.materialId ] );
+					object = new Mesh( geometry, materials[ data.materialId ] );
 
 				} else {
 
-					object = new THREE.Group();
+					object = new Group();
 
 				}
 
@@ -245,4 +267,6 @@ THREE.BabylonLoader.prototype = Object.assign( Object.create( THREE.Loader.proto
 
 	}
 
-} );
+};
+
+export { BabylonLoader };
