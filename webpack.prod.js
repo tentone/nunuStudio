@@ -8,10 +8,9 @@ module.exports = Merge(common, {
 	devtool: "none",
 	mode: "production",
 	optimization: {
-		minimize: true
+		minimizer: [new UglifyJSPlugin(),],
 	},
 	plugins: [
-		new WebpackCleanupPlugin(),
-        new UglifyJSPlugin({sourceMap: false})
+		new WebpackCleanupPlugin()
 	]
 });

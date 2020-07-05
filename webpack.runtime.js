@@ -1,3 +1,5 @@
+const WebpackCleanupPlugin  = require("webpack-cleanup-plugin");
+
 const Path = require("path");
 const Webpack = require("webpack");
 
@@ -9,9 +11,11 @@ module.exports = {
 	context: source,
 	entry: source + "/core/Main.js",
 	target: "web",
-	devtool: "inline-source-map",
+	devtool: "none",
+	mode: "production",
+	optimization: {},
 	plugins: [
-		new Webpack.ProgressPlugin(),
+		new WebpackCleanupPlugin(),
 		new Webpack.ProvidePlugin({
 			THREE: "three",
 			"window.THREE": "three"
@@ -33,7 +37,7 @@ module.exports = {
 		]
 	},
 	output: {
-		filename: "bundle.js",
+		filename: "nunu.js",
 		path: output
 	},
 	module: {}
