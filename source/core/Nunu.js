@@ -1,20 +1,20 @@
 import {WebGLRenderer} from "three";
 
-import "../three/animation/AnimationClip.js";
-import "../three/animation/KeyframeTrack.js";
-import "../three/cameras/Camera.js";
-import "../three/core/BufferAttribute.js";
-import "../three/core/InstancedBufferAttribute.js";
-import "../three/core/InterleavedBuffer.js";
-import "../three/core/InterleavedBufferAttribute.js";
-import "../three/core/Object3D.js";
-import "../three/lights/LightShadow.js";
-import "../three/loaders/BufferGeometryLoader.js";
-import "../three/materials/Material.js";
-import "../three/objects/Points.js";
-import "../three/objects/Skeleton.js";
-import "../three/scenes/Fog.js";
-import "../three/textures/Texture.js";
+import "./three/animation/AnimationClip.js";
+import "./three/animation/KeyframeTrack.js";
+import "./three/cameras/Camera.js";
+import "./three/core/BufferAttribute.js";
+import "./three/core/InstancedBufferAttribute.js";
+import "./three/core/InterleavedBuffer.js";
+import "./three/core/InterleavedBufferAttribute.js";
+import "./three/core/Object3D.js";
+import "./three/lights/LightShadow.js";
+import "./three/loaders/BufferGeometryLoader.js";
+import "./three/materials/Material.js";
+import "./three/objects/Points.js";
+import "./three/objects/Skeleton.js";
+import "./three/scenes/Fog.js";
+import "./three/textures/Texture.js";
 
 /**
  * nunuStudio core main file.
