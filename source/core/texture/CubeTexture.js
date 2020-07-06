@@ -285,12 +285,12 @@ CubeTexture.resampleBilinear = function(read, write, x, y, index)
 	var height = read.height;
 	var data = read.data;
 
-	var xl = Math.clamp(Math.floor(x), 0, width - 1);
-	var xr = Math.clamp(Math.ceil(x), 0, width - 1);
+	var xl = TMath.clamp(Math.floor(x), 0, width - 1);
+	var xr = TMath.clamp(Math.ceil(x), 0, width - 1);
 	var xf = x - xl;
 
-	var yl = Math.clamp(Math.floor(y), 0, height - 1);
-	var yr = Math.clamp(Math.ceil(y), 0, height - 1);
+	var yl = TMath.clamp(Math.floor(y), 0, height - 1);
+	var yr = TMath.clamp(Math.ceil(y), 0, height - 1);
 	var yf = y - yl;
 
 	var ll = 4 * (yl * width + xl);
