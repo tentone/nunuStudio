@@ -41,11 +41,9 @@ import {XLoader} from "three/examples/jsm/loaders/XLoader";
 import {STLLoader} from "three/examples/jsm/loaders/STLLoader";
 import {PCDLoader} from "three/examples/jsm/loaders/PCDLoader";
 import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
-// import {AWDLoader} from "three/examples/jsm/loaders/AWDLoader";
-// import {AssimpJSONLoader} from "three/examples/jsm/loaders/AssimpJSONLoader";
-// import {BabylonLoader} from "three/examples/jsm/loaders/BabylonLoader";
-// import JSBLEND from "js.blend/build/js.blend.js";
-
+import {AWDLoader} from "./loaders/AWDLoader";
+import {BabylonLoader} from "./loaders/BabylonLoader";
+import {JSBLEND} from "js.blend/build/js.blend.js";
 
 function Loaders() {}
 
@@ -457,7 +455,7 @@ Loaders.loadModel = function(file, parent)
 			reader.readAsArrayBuffer(file);
 		}
 		// AWD
-		/* else if(extension === "awd")
+		else if(extension === "awd")
 		{
 			var reader = new FileReader();
 			reader.onload = function()
@@ -477,7 +475,7 @@ Loaders.loadModel = function(file, parent)
 				}
 			};
 			reader.readAsArrayBuffer(file);
-		} */
+		}
 		// AMF
 		else if(extension === "amf")
 		{
@@ -520,30 +518,8 @@ Loaders.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		// Assimp JSON
-		/*else if(name.endsWith(".assimp.json"))
-		{
-			var reader = new FileReader();
-			reader.onload = function()
-			{
-				try
-				{
-					var loader = new AssimpJSONLoader();
-					var json = JSON.parse(reader.result);
-					var assimp = loader.parse(json, path);
-					Editor.addObject(assimp, parent);
-					modal.destroy();
-				}
-				catch(e)
-				{
-					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
-				}
-			};
-			reader.readAsText(file);
-		}*/
 		// Babylon
-		/*else if(extension === "babylon")
+		else if(extension === "babylon")
 		{
 			var reader = new FileReader();
 			reader.onload = function()
@@ -571,9 +547,9 @@ Loaders.loadModel = function(file, parent)
 				}
 			};
 			reader.readAsText(file);
-		}*/
+		}
 		// Blender
-		/*else if(extension === "blend")
+		else if(extension === "blend")
 		{	
 			var reader = new FileReader();
 			reader.onload = function()
@@ -596,7 +572,7 @@ Loaders.loadModel = function(file, parent)
 				}
 			};
 			reader.readAsArrayBuffer(file);
-		}*/
+		}
 		//3DS
 		else if(extension === "3ds")
 		{
