@@ -30,17 +30,14 @@ module.exports = {
 				use: "raw-loader",
 			},
 			{
-				test: require.resolve("spine-runtimes/spine-ts/build/spine-threejs.js"),
+				test: /.*spine-threejs.*/,
 				loader: "@shoutem/webpack-prepend-append",
-				query: {
-					append: "export {spine};"
-				}
+				query: "{\"append\": \"export {spine};\"}"
 			}
 		]
 	},
 	output: {
-		filename: "nunu.js",
+		filename: "nunu.min.js",
 		path: output
-	},
-	module: {}
+	}
 };
