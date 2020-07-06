@@ -43,7 +43,9 @@ import {PCDLoader} from "three/examples/jsm/loaders/PCDLoader";
 import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
 import {AWDLoader} from "./loaders/AWDLoader";
 import {BabylonLoader} from "./loaders/BabylonLoader";
-import {JSBLEND} from "js.blend/build/js.blend.js";
+import "js.blend/build/js.blend.js";
+
+console.log(JSBLEND);
 
 function Loaders() {}
 
