@@ -2,6 +2,8 @@ import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
 import {FileSystem} from "../../FileSystem.js";
 import {Group, Object3D} from "three";
+import * as THREE from "three";
+import * as CANNON from "cannon";
 
 /**
  * Script objects are used to control other objects present in the scene.
@@ -484,9 +486,9 @@ Script.prototype.compileCode = function(code, onReady)
 		}
 		catch(e)
 		{
+			this.script = {};
 			console.warn("nunuStudio: Error initializing script code", e);
 			throw "Error initializing script code";
-			this.script = {};
 		}
 
 		if(this.mode !== Script.INCLUDE)
@@ -496,9 +498,9 @@ Script.prototype.compileCode = function(code, onReady)
 	}
 	catch(e)
 	{
+		this.script = {};
 		console.warn("nunuStudio: Error compiling script code", e);
 		throw "Error compiling script code";
-		this.script = {};
 	}
 };
 
