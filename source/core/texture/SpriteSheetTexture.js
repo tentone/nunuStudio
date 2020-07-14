@@ -1,5 +1,6 @@
 import {Image} from "../resources/Image.js";
-import {RepeatWrapping, LinearFilter, RGBFormat, RGBAFormat, Texture} from "three";
+import {RepeatWrapping, LinearFilter, RGBFormat, RGBAFormat} from "three";
+import {Texture} from "./Texture.js";
 
 /**
  * SpriteSheet texture, can be used load spritesheet animations as textures.

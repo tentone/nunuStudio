@@ -268,6 +268,9 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		// SpriteSheet texture
 		if(category === "SpriteSheet")
 		{
+			// TODO <REMOVE THIS>
+			console.log(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
+
 			texture = new SpriteSheetTexture(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
 			texture.loop = json.loop;
 			texture.animationSpeed = json.animationSpeed;
