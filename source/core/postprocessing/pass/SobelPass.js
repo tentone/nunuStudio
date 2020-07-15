@@ -10,15 +10,6 @@ import {LuminosityShader} from "three/examples/jsm/shaders/LuminosityShader";
  */
 function SobelPass(center, angle, scale)
 {
-	if(SobelOperatorShader === undefined)
-	{
-		console.error("SobelPass relies on SobelOperatorShader");
-	}
-	if(LuminosityShader === undefined)
-	{
-		console.error("SobelPass relies on LuminosityShader");
-	}
-
 	ShaderPass.call(this, SobelOperatorShader);
 
 	this.type = "Sobel";

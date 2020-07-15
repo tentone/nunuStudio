@@ -18,15 +18,6 @@ import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
  */
 function UnrealBloomPass(strength, radius, threshold)
 {
-	if(LuminosityHighPassShader === undefined)
-	{
-		console.error("UnrealBloomPass relies on LuminosityHighPassShader");
-	}
-	if(CopyShader === undefined)
-	{
-		console.error("UnrealBloomPass relies on CopyShader");
-	}
-
 	Pass.call(this);
 	
 	this.type = "UnrealBloom";

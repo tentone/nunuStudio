@@ -14,11 +14,6 @@ import {BokehShader} from "three/examples/jsm/shaders/BokehShader";
 
 function BokehPass(focus, aperture, maxblur)
 {
-	if(BokehShader === undefined)
-	{
-		console.error("BokehPass relies on BokehShader");
-	}
-
 	Pass.call(this);
 
 	this.type = "Bokeh";

@@ -19,11 +19,6 @@ import {SimplexNoise} from "../../utils/SimplexNoise.js";
  */
 function SSAONOHPass()
 {
-	if(SSAOShader === undefined)
-	{
-		console.warn("SSAONOHPass depends on SSAOShader");
-	}
-
 	Pass.call(this);
 
 	this.type = "SSAONOH";
@@ -221,12 +216,6 @@ SSAONOHPass.prototype.generateSampleKernel = function()
 SSAONOHPass.prototype.generateRandomKernelRotations = function()
 {
 	var width = 4, height = 4;
-
-	if(SimplexNoise === undefined)
-	{
-		console.error("SSAONOHPass: The pass relies on SimplexNoise.");
-	}
-
 	var simplex = new SimplexNoise();
 	var size = width * height;
 	var data = new Float32Array(size);

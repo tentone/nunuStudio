@@ -18,15 +18,6 @@ function BloomPass(strength, kernelSize, sigma, resolution)
 {
 	Pass.call(this);
 
-	if(ConvolutionShader === undefined)
-	{
-		console.error("BloomPass relies on ConvolutionShader");
-	}
-	if(CopyShader === undefined)
-	{
-		console.error("BloomPass relies on CopyShader");
-	}
-
 	this.type = "Bloom";
 	this.copyToScreen = true;
 

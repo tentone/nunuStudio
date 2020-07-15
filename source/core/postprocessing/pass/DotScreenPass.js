@@ -14,11 +14,6 @@ import {DotScreenShader} from "three/examples/jsm/shaders/DotScreenShader";
  */
 function DotScreenPass(center, angle, scale)
 {
-	if(DotScreenShader === undefined)
-	{
-		console.error("DotScreenPass relies on DotScreenShader");
-	}
-
 	Pass.call(this);
 
 	this.type = "DotScreen";

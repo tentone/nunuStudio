@@ -30,9 +30,6 @@ function ColorChooser(parent)
 	this.color.borderRadius = 0;
 	this.color.zIndex = 2000;
 
-	// TODO <REMOVE THIS>
-	console.log(this.color);
-
 	/**
 	 * On change callback function automatically called everytime that the color is changed.
 	 *

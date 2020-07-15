@@ -39,6 +39,7 @@ ProfilingTab.prototype.update = function()
 		if(renderer !== undefined)
 		{
 			var info = renderer.info;
+			
 			// TODO <CHANGE THIS>
 			//console.log(info);
 		}

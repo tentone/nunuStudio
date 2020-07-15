@@ -54,7 +54,6 @@ function TextBox(parent)
 		});
 		context.addOption(Locale.selectAll, function()
 		{
-			console.log(self.element);
 			self.element.select();
 		});
 		context.updateInterface();

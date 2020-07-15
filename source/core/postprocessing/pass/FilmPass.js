@@ -11,11 +11,6 @@ import {FilmShader} from "three/examples/jsm/shaders/FilmShader";
  */
 function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 {
-	if(FilmShader === undefined)
-	{
-		console.error("FilmPass relies on FilmShader");
-	}
-
 	Pass.call(this);
 
 	this.type = "Film";

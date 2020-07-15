@@ -99,8 +99,6 @@ function AnimationTab(parent, closeable, container, index)
 			{
 				if(self.object.color !== undefined)
 				{
-					console.log(self.object.color);
-
 					var color = new ColorKeyframeTrack(".color", [0], [self.object.color]);
 					color.setInterpolation(InterpolateLinear);
 					color.setColor("#00FF00");
