@@ -32,11 +32,6 @@ import {ClearMaskPass, MaskPass} from "three/examples/jsm/postprocessing/MaskPas
  */
 function EffectComposer()
 {
-	if(CopyShader === undefined)
-	{
-		console.error("EffectComposer relies on CopyShader");
-	}
-
 	this.uuid = TMath.generateUUID();
 	this.width = 1;
 	this.height = 1;

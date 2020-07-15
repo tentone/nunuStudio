@@ -391,7 +391,7 @@ ObjectLoader.prototype.bindSkeletons = function(object)
 			var skeleton = self.skeletons[child.skeletonUUID];
 			if(skeleton === undefined)
 			{
-				console.warn("ObjectLoader: Skeleton not found.", child.skeletonUUID);
+				console.warn("nunuStudio: ObjectLoader Skeleton not found.", child.skeletonUUID);
 				return
 			}
 

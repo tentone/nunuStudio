@@ -162,12 +162,12 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	{
 		if(json.video === undefined)
 		{
-			console.warn("TextureLoader: No video specified for", json.uuid);
+			console.warn("nunuStudio: TextureLoader, No video specified for", json.uuid);
 		}
 
 		if(this.videos[json.video] === undefined)
 		{
-			console.warn("TextureLoader: Undefined video", json.video);
+			console.warn("nunuStudio: TextureLoader, Undefined video", json.video);
 		}
 
 		texture = new VideoTexture(this.videos[json.video]);

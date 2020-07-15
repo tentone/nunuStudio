@@ -45,8 +45,6 @@ import {AWDLoader} from "./loaders/AWDLoader";
 import {BabylonLoader} from "./loaders/BabylonLoader";
 import "js.blend/build/js.blend.js";
 
-console.log(JSBLEND);
-
 function Loaders() {}
 
 /**

@@ -1,13 +1,4 @@
-import
-{Loader, Object3D, FileLoader,Mesh,
-	MeshPhongMaterial,
-	Texture,
-	ImageLoader,
-	Bone,
-	Matrix4,
-	BufferGeometry,
-	BufferAttribute
-} from "three";
+import {Loader, Object3D, FileLoader, Mesh, MeshPhongMaterial, Texture, ImageLoader, Bone, Matrix4, BufferGeometry, BufferAttribute} from "three";
 
 /**
  * Author: Pierre Lepers
@@ -350,7 +341,6 @@ var AWDLoader = (function()
 			{
 				data_len = this.readU32();
 				var url = this.readUTFBytes(data_len);
-				console.log(url);
 				asset = this.loadTexture(url);
 				asset.userData = {};
 				asset.userData.name = name;
@@ -359,6 +349,7 @@ var AWDLoader = (function()
 			{
 				// embed texture not supported
 			}
+
 			// Ignore for now
 			this.parseProperties(null);
 			this.parseUserAttributes();

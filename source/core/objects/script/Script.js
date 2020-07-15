@@ -129,6 +129,8 @@ Script.DEFAULT = "function initialize()\n{\n	// TODO <INITIALIZATION CODE>\n}\n\
 
 /**
  * List of default methods that can be implemented by scripts.
+ * 
+ * This list is used to search for these implementations in the script object at runtime.
  *
  * @attribute METHODS
  * @type {Array}
@@ -177,7 +179,7 @@ Script.INCLUDE = 102;
  */
 
 /**
- * Get includes from the code.
+ * Get includes from the code, includes are fetched from the resource manager or if not found fetched using XHR.
  *
  * Used to extract includes from code when loading libraries in APPEND mode.
  *
@@ -261,9 +263,9 @@ Script.prototype.initialize = function()
 };
 
 /**
- * Update script state.
+ * Update script state automatically calls for mouse events if they are defined and for the script update method.
  * 
- * Calls the script update method if it exists.
+ * This method is executed every frame, script logic should not relly on the frame time, use the "delta" value provided.
  * 
  * @method update
  */
@@ -477,12 +479,12 @@ Script.prototype.compileCode = function(code, onReady)
 		}
 
 		// Evaluate code and create constructor
-		var Constructor = new Function("Keyboard, Mouse, self, program, scene", code);
+		var Constructor = new Function("Keyboard, Mouse, self, program, scene, THREE, CANNON", code);
 
 		// Create script object
 		try
 		{
-			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
+			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene, THREE, CANNON);
 		}
 		catch(e)
 		{

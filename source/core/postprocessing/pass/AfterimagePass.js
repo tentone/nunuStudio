@@ -12,11 +12,6 @@ import {AfterimageShader} from "three/examples/jsm/shaders/AfterimageShader";
  */
 function AfterimagePass(damp)
 {
-	if(AfterimageShader === undefined)
-	{
-		console.error("AfterimagePass relies on AfterimageShader");
-	}
-
 	Pass.call(this);
 
 	this.type = "Afterimage";
