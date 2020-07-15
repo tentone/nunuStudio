@@ -4,6 +4,7 @@ import {FileSystem} from "../../FileSystem.js";
 import {Group, Object3D} from "three";
 import * as THREE from "three";
 import * as CANNON from "cannon";
+import * as NUNU from "../../Main.js";
 
 /**
  * Script objects are used to control other objects present in the scene.
@@ -478,13 +479,33 @@ Script.prototype.compileCode = function(code, onReady)
 			}
 		}
 
+		// Code used to import context data to the scope of the script
+		var contextCode = "for(var p in __context__){eval('var ' + p + ' = __context__[p];');}"
+
 		// Evaluate code and create constructor
-		var Constructor = new Function("Keyboard, Mouse, self, program, scene, THREE, CANNON", code);
+		var Constructor = new Function("__context__", contextCode + code);
 
 		// Create script object
 		try
 		{
-			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene, THREE, CANNON);
+			var context = {
+				program: this.program, 
+				scene: this.scene, 
+				self: this
+			};
+
+			Object.assign(context, CANNON);
+			Object.assign(context, THREE);
+			Object.assign(context, NUNU);
+			Object.assign(context, window);
+			Object.assign(context,
+			{
+				Keyboard: this.program.keyboard,
+				Mouse: this.program.mouse
+			});
+			
+
+			this.script = new Constructor(context);
 		}
 		catch(e)
 		{
