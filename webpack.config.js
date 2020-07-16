@@ -4,9 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyPlugin = require("copy-webpack-plugin");
 
-const context = Path.resolve(__dirname, ".");
-const source = context + "/source";
-const output = context + "/dist";
+const source = Path.resolve(__dirname, "source");
+const output = Path.resolve(__dirname, "build/editor");
 
 module.exports = {
 	context: source,

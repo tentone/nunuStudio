@@ -11,7 +11,7 @@ module.exports = Merge(common, {
 		minimize: false
 	},
 	devServer: {
-		contentBase: Path.join(__dirname, "dist"),
+		contentBase: common.output.path,
 		compress: false,
 		historyApiFallback: true,
 		hot: true,

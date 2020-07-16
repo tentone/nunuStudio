@@ -278,7 +278,7 @@ Program.prototype.initialize = function()
 	}
 	
 	// Lock mouse pointer
-	if(this.lockPointer)
+	if(this.lockPointer && this.mouse !== null)
 	{
 		this.mouse.setLock(true);
 	}
@@ -479,6 +479,7 @@ Program.prototype.setScene = function(scene)
 		}
 
 		this.scene.initialize();
+		// this.scene.resize();
 	}
 	else
 	{
@@ -579,13 +580,13 @@ Program.prototype.setInitialScene = function(scene)
  */
 Program.prototype.dispose = function()
 {
-	if(this.lockPointer)
-	{
-		this.mouse.setLock(false);
-	}
-
 	if(this.mouse !== null)
 	{
+		if(this.lockPointer)
+		{
+			this.mouse.setLock(false);
+		}
+
 		this.mouse.dispose();
 	}
 

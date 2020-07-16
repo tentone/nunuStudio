@@ -3,9 +3,8 @@ const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 const Path = require("path");
 const Webpack = require("webpack");
 
-const context = Path.resolve(__dirname, ".");
-const source = context + "/source";
-const output = context + "/dist";
+const source = Path.resolve(__dirname, "source");
+const output = Path.resolve(__dirname, "build/runtime");
 
 module.exports = {
 	context: source,
