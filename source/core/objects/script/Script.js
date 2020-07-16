@@ -488,22 +488,31 @@ Script.prototype.compileCode = function(code, onReady)
 		// Create script object
 		try
 		{
-			var context = {
-				program: this.program, 
-				scene: this.scene, 
-				self: this
-			};
+			var context = {};
 
 			Object.assign(context, CANNON);
 			Object.assign(context, THREE);
 			Object.assign(context, NUNU);
-			Object.assign(context, window);
-			Object.assign(context,
+			
+			var mathProps = ["E", "LN2", "LN10", "LOG2E", "LOG10E", "PI", "SQRT1_2", "SQRT2", "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh", "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log1p", "log2", "log10", "max", "min", "pow", "random", "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc", ];
+			var math = {};
+			for(var i of mathProps)
 			{
+				math[i] = window.Math[i];
+			}
+			Object.assign(math, THREE.Math);
+
+			Object.assign(context,
+			{	
+				program: this.program, 
+				scene: this.scene, 
+				self: this,
+				THREE: THREE,
+				CANNON: CANNON,
+				Math: math,
 				Keyboard: this.program.keyboard,
 				Mouse: this.program.mouse
 			});
-			
 
 			this.script = new Constructor(context);
 		}

@@ -1,4 +1,4 @@
-import {InstancedBufferAttribute, BufferAttribute, InterleavedBuffer, InterleavedBufferAttribute, Vector3, Sphere} from "three";
+import {InstancedBufferAttribute, InstancedBufferGeometry, BufferGeometry, BufferAttribute, InterleavedBuffer, InterleavedBufferAttribute, Vector3, Sphere} from "three";
 
 var TYPED_ARRAYS = {
 	Int8Array: Int8Array,

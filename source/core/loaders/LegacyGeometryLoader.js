@@ -1,4 +1,4 @@
-import {FileLoader, Vector3, Face3, Vector2, AnimationClip, Geometry} from "three";
+import {FileLoader, Vector3, Face3, Vector2, AnimationClip, Geometry, DefaultLoadingManager} from "three";
 
 /**
  * Legacy geometry loader is used to load the old geometry file format.
