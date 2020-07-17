@@ -50,6 +50,9 @@ module.exports = {
 		}),
 		new MergeIntoSingleFilePlugin({
 			files: {
+				"package.json": [
+					"package.json"
+				],
 				"styles.css": [
 					"source/editor/style.css",
 					"source/editor/theme/dark.css",
