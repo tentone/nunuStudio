@@ -27,7 +27,7 @@ import "./three/textures/Texture.js";
 function Nunu(){}
 
 /**
- * nunuStudio
+ * Aplication name (might be usefull if getting the module as a unnamed export)
  * 
  * @attribute NAME
  * @type {string}
@@ -41,7 +41,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute VERSION
  * @type {string}
  */
-Nunu.VERSION = "<PLACEHOLDER_VERSION>";
+Nunu.VERSION = "__PLACEHOLDER_VERSION__";
 
 /**
  * Stores the nunu runtime dev timestamp.
@@ -49,7 +49,7 @@ Nunu.VERSION = "<PLACEHOLDER_VERSION>";
  * @attribute TIMESTAMP
  * @type {string}
  */
-Nunu.TIMESTAMP = "<PLACEHOLDER_TIMESTAMP>";
+Nunu.TIMESTAMP = "__PLACEHOLDER_TIMESTAMP__";
 
 /**
  * Repository branch, used to track the version after publishing.
@@ -58,7 +58,7 @@ Nunu.TIMESTAMP = "<PLACEHOLDER_TIMESTAMP>";
  * @attribute REPOSITORY_BRANCH
  * @type {string}
  */
-Nunu.REPOSITORY_BRANCH = "<PLACEHOLDER_REPOSITORY_BRANCH>";
+Nunu.REPOSITORY_BRANCH = "__PLACEHOLDER_REPOSITORY_BRANCH__";
 
 /**
  * Repository commit uuid, used to track the version after publishing.
@@ -67,7 +67,7 @@ Nunu.REPOSITORY_BRANCH = "<PLACEHOLDER_REPOSITORY_BRANCH>";
  * @attribute REPOSITORY_COMMIT
  * @type {string}
  */
-Nunu.REPOSITORY_COMMIT = "<PLACEHOLDER_REPOSITORY_COMMIT>";
+Nunu.REPOSITORY_COMMIT = "__PLACEHOLDER_REPOSITORY_COMMIT__";
 
 /**
  * NWJS platform, used for desktop version.
@@ -128,7 +128,7 @@ Nunu.copyNamespace = function(namespace, target)
  */
 Nunu.developmentMode = function()
 {
-	return Nunu.TIMESTAMP === "<PLACEHOLDER_TIMESTAMP>";
+	return Nunu.TIMESTAMP === "__PLACEHOLDER_TIMESTAMP__>";
 };
 
 /**
@@ -561,4 +561,5 @@ Nunu.setFullscreen = function(fullscreen, element)
 		}
 	}
 };
+
 export {Nunu};

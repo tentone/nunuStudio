@@ -41,7 +41,7 @@ Exporters.exportCordovaProject = function(dir)
 	FileSystem.makeDirectory(dir);
 	FileSystem.copyFile(Global.RUNTIME_PATH + "logo.png", dir + "/logo.png");
 	FileSystem.copyFile(Global.RUNTIME_PATH + "cordova.html", dir + "/index.html");
-	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : Global.BUILD_PATH, dir + "/nunu.min.js");
+	FileSystem.copyFile(Global.RUNTIME_PATH + "nunu.min.js", dir + "/nunu.min.js");
 	Editor.saveProgram(dir + "/app.nsp", true, true, true);
 };
 
@@ -61,7 +61,7 @@ Exporters.exportWebProject = function(dir)
 	FileSystem.copyFile(Global.RUNTIME_PATH + "fullscreen.png", dir + "/fullscreen.png");
 	FileSystem.copyFile(Global.RUNTIME_PATH + "logo.png", dir + "/logo.png");
 	FileSystem.copyFile(Global.RUNTIME_PATH + "index.html", dir + "/index.html");
-	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : Global.BUILD_PATH, dir + "/nunu.min.js");
+	FileSystem.copyFile(Global.RUNTIME_PATH + "nunu.min.js", dir + "/nunu.min.js");
 	Editor.saveProgram(dir + "/app.nsp", true, true, true);
 };
 
@@ -78,7 +78,7 @@ Exporters.exportWebProjectZip = function(fname)
 {
 	var zip = new JSZip();
 	zip.file("index.html", FileSystem.readFile(Global.RUNTIME_PATH + "index.html"));
-	zip.file("nunu.min.js", FileSystem.readFile("nunu.min.js"));
+	zip.file("nunu.min.js", FileSystem.readFile(Global.RUNTIME_PATH + "nunu.min.js"));
 	
 	var pson = new StaticPair();
 	var data = pson.toArrayBuffer(Editor.program.toJSON());
