@@ -13,7 +13,7 @@
 		"nwjs": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
 		"page": "http-server ./docs -p 8081 --cors -o",
-		"docs": "yuidoc -o ./docs/docs  -N -C -t  ./docs/theme -x lib ./source/core/",
+		"docs": "yuidoc -o ./docs  -N -C -t  ./docs/theme -x lib ./source/core/",
 		"publish": "npm run build-runtime && npm run build-editor && npm run docs && npm publish --access public .",
 		"lint": "eslint --ext .js .",
 		"lint-fix": "eslint --ext .js --fix .",

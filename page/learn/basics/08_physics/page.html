@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>nunuStudio</title>
+	<link rel="shortcut icon" href="../../../favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<!--Styles-->
+	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../lib/highlight.min.css">
+	<link rel="stylesheet" href="../../../style.css">
+
+	<!--Javascript-->
+	<script src="../../../lib/jquery.min.js"></script>
+	<script src="../../../lib/bootstrap.min.js"></script>
+	<script src="../../../lib/highlight.min.js"></script>
+	<script src="../../../editor/nunu.min.js"></script>
+	<script src="../../js/embed.js"></script>
+</head>
+
+<body onload="initialize('physics.nsp', 'physics'); initialize('modes.nsp', 'modes');">
+	<!--Navigation bar-->
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="container">
+			<!--Mobile>-->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="logo" href="../../../index.html"><img src="../../../img/logo.png" width="230" alt="Logo"></a>
+			</div>
+
+			<!--Desktop-->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="../../../index.html">Home</a></li>
+					<li><a href="../../../learn.html">Learn</a></li>
+					<li><a href="../../../docs">API Documentation</a></li>
+					<li><a href="../../../download.html">Download</a></li>
+					<li><a href="https://www.github.com/tentone/nunuStudio">GitHub</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<section class="pad-sm">
+		<div class="container">
+			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
+			<h2 class="black">Physics</h2>
+			<p>In this tutorial we will experiment how physics work inside nunuStudio, physics are represented as objects in the editor, physics object dont have a visual representation they are just used for physics simulations.</p>
+			<p>Physics in nunuStudio are powered by cannon.js developed by schteppe, for more information about the physics engine please consult http://www.cannonjs.org/.</p>
+			<p>nunuStudio encapsulates the physics bodies in objects, these bodies are managed and updated on a scene basis, physics configuration is managed by scene.</p>
+
+			<h3 class="black">Physics object</h3>
+
+			<p>To add physics object select the desired physics object in the left toolbar and add it to the scene, after that add a mesh object as children of the newly created physics object to make it visible in the scene. Dont forget to add a ground object so that other physics object don't fall out of the screen.</p>
+			<p>Physics object can be configured as dynamic, static or kinenamic objects. Dynamic objects are updated dinamically and detect collisions, kinematic objects are updated only based on their speed, and static objects are not updated at all. Static objects behave likes walls or the floor.</p>
+
+			<video src="video.mp4" style="width:60%; margin-left:20%" controls></video>
+
+			<h3 class="black">Object positioning</h3>
+
+			<p>There is a mode property that indicates how the physics coordinates are transformed from the physics world to the scene, the physics world does not consider the parental transformations applied to objects, <b>World</b> positioning is used to just copy world coordinates from physics to the object is fast and the coordinates will match the values stored in the physics body. Sometimes it is usefull to store physics object in the hierarchy, <b>Local</b> positioning can be used to adapt the physics world coordinates to match the scene, it has a small performance impact and the physics coordinates will not match the local transformation of the object.</p>
+			<p>Bellow we have a comparison between world and local positioned physics objects inside a object hierarchy. As we can obvserve the <b>Local</b> positioned object behaves as we would expect.</p>
+			<p>You can also download the example project file <a class="underline" href="modes.nsp">here</a>, or open it directly inside the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/08_physics/modes.nsp">Web Editor</a>.</p>
+			<div>
+				<canvas id="modes" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
+
+
+			<h3 class="black">Physics object control</h3>
+			
+			<p>To interact with physics objects using scrips we need to get the physics body attached to that object. Then we can access the <i>body</i> property that exists in every physics object and change the forces, acceleration and velocity values to make it move around the scene.</p>
+			<p>The following code gets an physics object body and using the keyboard WASD keys and the spacebar we add velocity to that body forcing the cube to move around.</p>
+			<pre><code class="javascript">var body;
+
+this.initialize = function()
+{
+	body = scene.getObjectByName("physics").body;
+};
+
+this.update = function()
+{
+	if(Keyboard.keyPressed(Keyboard.A))
+	{
+		body.velocity.x -= 0.2;
+	}
+	if(Keyboard.keyPressed(Keyboard.D))
+	{
+		body.velocity.x += 0.2;
+	}
+	if(Keyboard.keyPressed(Keyboard.W))
+	{
+		body.velocity.z -= 0.2;
+	}
+	if(Keyboard.keyPressed(Keyboard.S))
+	{
+		body.velocity.z += 0.2;
+	}
+	
+	if(Keyboard.keyJustPressed(Keyboard.SPACEBAR))
+	{
+		body.velocity.y += 5;
+	}
+};</code></pre>
+
+		<p>The code shown above can be seen running bellow for a physics cube, use the WASD keys to control the cube, and the spacebar to make the cube jump. Even when we dont specify rotation for the cube the physics engine automatically calculates it based on the friction beween the surface of the cube and floor. As we can observe the cube tumbles around the scene naturally.</p>
+		<p>You can also download the example project file <a class="underline" href="physics.nsp">here</a>, or open it directly inside the <a class="underline" href="https://www.nunustudio.org/editor?isp=https://nunustudio.org/learn/basics/08_physics/physics.nsp">Web Editor</a>.</p>
+		<div>
+			<canvas id="physics" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+		</div>
+		</div>
+	</section>
+
+	<!--Footer-->
+	<footer>
+		<div class="container">
+			<div class="text-right">
+				<p><small>
+					nunuStudio | Distributed under MIT license | Tentone
+				</small></p>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
