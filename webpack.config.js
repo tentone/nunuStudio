@@ -34,22 +34,12 @@ module.exports = {
 	},
 	plugins: [
 		new Webpack.DefinePlugin({
-			"Nunu.VERSION": require("./package.json").version,
-			"Nunu.TIMESTAMP": new Date().toISOString(),
-			"Nunu.REPOSITORY_BRANCH": git.branch(),
-			"Nunu.REPOSITORY_COMMIT": git.commithash(),
-			"Nunu.DEVELOPMENT": true
+			"VERSION": JSON.stringify(require("./package.json").version),
+			"TIMESTAMP": JSON.stringify(new Date().toISOString()),
+			"REPOSITORY_BRANCH": JSON.stringify(git.branch()),
+			"REPOSITORY_COMMIT": JSON.stringify(git.commithash()),
+			"DEVELOPMENT": JSON.stringify(true)
 		}),
-		/*new ReplaceInFileWebpackPlugin([{
-			dir: "source/core",
-			files: ["Nunu.js"],
-			rules: [
-				{search: "__PLACEHOLDER_VERSION__", replace: require("./package.json").version},
-				{search: "__PLACEHOLDER_TIMESTAMP__", replace: new Date().toISOString()},
-				{search: "__PLACEHOLDER_REPOSITORY_BRANCH__", replace: git.branch()},
-				{search: "__PLACEHOLDER_REPOSITORY_COMMIT__", replace: git.commithash()}
-			]
-		}]),*/
 		new CopyPlugin({
 			patterns: [
 				{

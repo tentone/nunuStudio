@@ -1144,12 +1144,12 @@ Editor.setOpenFile = function(file)
 			Editor.openFile = file;
 		}
 
-		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ") (" + Editor.openFile + ")";
+		document.title = Nunu.NAME + " " + VERSION + " (" + TIMESTAMP + ") (" + Editor.openFile + ")";
 	}
 	else
 	{
 		Editor.openFile = null;
-		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")";
+		document.title = Nunu.NAME + " " + VERSION + " (" + TIMESTAMP + ")";
 	}
 };
 
@@ -1195,7 +1195,7 @@ Editor.prompt = function(message, defaultValue)
 /**
  * Try to update nunuStudio editor version using build from github repo.
  *
- * The version timestamp (Nunu.TIMESTAMP) is parsed compared to the local timestamp.
+ * The version timestamp (TIMESTAMP) is parsed compared to the local timestamp.
  *
  * @static
  * @method updateNunu
@@ -1213,7 +1213,7 @@ Editor.updateNunu = function(silent)
 
 		FileSystem.readFile(url, false, function(data)
 		{
-			var token = "Nunu.TIMESTAMP";
+			var token = "TIMESTAMP";
 			var pos = data.search(token);
 			var timestamp = data.slice(pos + token.length + 2, pos + token.length + 14);
 

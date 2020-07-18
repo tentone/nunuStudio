@@ -562,7 +562,7 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(lensFlare, self.editor.scene);
 	}, Locale.lensFlare);
 
-	if(Nunu.DEVELOPMENT)
+	if(DEVELOPMENT)
 	{
 		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
 		{

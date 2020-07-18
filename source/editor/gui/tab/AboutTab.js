@@ -31,7 +31,9 @@ function AboutTab(parent, closeable, container, index)
 	this.name.element.style.width = "100%";
 	this.name.setTextSize(25);
 	this.name.setAlignment(Text.CENTER);
-	this.name.setText(Nunu.NAME + " " + Nunu.VERSION + "Build " + Nunu.TIMESTAMP);
+	this.name.setText(Nunu.NAME + " " + VERSION + " Build " + TIMESTAMP);
+
+
 
 	// Libraries
 	var libs = [];

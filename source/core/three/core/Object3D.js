@@ -296,7 +296,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		meta = new ResourceContainer();
 		output.metadata =
 		{
-			version:  Nunu.VERSION,
+			version:  VERSION,
 			type: "Object3D"
 		};
 	}

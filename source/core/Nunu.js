@@ -36,21 +36,18 @@ function Nunu(){}
 Nunu.NAME = "nunuStudio";
 
 /**
- * Stores the nunu runtime version.
+ * Stores the runtime version.
  * 
  * @attribute VERSION
  * @type {string}
  */
-// Nunu.VERSION = "";
 
 /**
- * Stores the nunu runtime dev timestamp.
+ * Stores the timestamp of the application build.
  * 
  * @attribute TIMESTAMP
  * @type {string}
  */
-// Nunu.TIMESTAMP = "";
-
 /**
  * Repository branch, used to track the version after publishing.
  * 
@@ -58,7 +55,6 @@ Nunu.NAME = "nunuStudio";
  * @attribute REPOSITORY_BRANCH
  * @type {string}
  */
-// Nunu.REPOSITORY_BRANCH = "";
 
 /**
  * Repository commit uuid, used to track the version after publishing.
@@ -67,7 +63,6 @@ Nunu.NAME = "nunuStudio";
  * @attribute REPOSITORY_COMMIT
  * @type {string}
  */
-// Nunu.REPOSITORY_COMMIT = "";
 
 /**
  * Indicates if the application/library is being used in development mode.
@@ -78,7 +73,6 @@ Nunu.NAME = "nunuStudio";
  * @attribute DEVELOPMENT
  * @type {boolean}
  */
-// Nunu.DEVELOPMENT = true;
 
 /**
  * NWJS platform, used for desktop version.
