@@ -128,7 +128,7 @@ Nunu.copyNamespace = function(namespace, target)
  */
 Nunu.developmentMode = function()
 {
-	return Nunu.TIMESTAMP === "__PLACEHOLDER_TIMESTAMP__>";
+	return Nunu.TIMESTAMP === "2020-07-18T09:19:15.723Z>";
 };
 
 /**

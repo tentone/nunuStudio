@@ -13,6 +13,7 @@
 		"start": "webpack-dev-server --open --hot --inline --config webpack.dev.js",
 		"start-nwjs": "run --with-ffmpeg --mirror https://dl.nwjs.io/ .",
 		"serve-page": "http-server . -p 8081 --cors -o",
+		"serve-editor": "http-server ./build/editor -p 8081 --cors -o",
 		"serve-docs": "http-server ./docs -p 8081 --cors -o",
 		"generate-docs": "yuidoc -o ./docs  -N -C -t  ./source/theme-docs -x lib ./source/core/",
 		"publish": "npm publish --access public .",
