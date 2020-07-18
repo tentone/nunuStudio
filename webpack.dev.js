@@ -1,4 +1,3 @@
-const Path = require("path");
 const Webpack = require("webpack");
 const Merge = require("webpack-merge");
  

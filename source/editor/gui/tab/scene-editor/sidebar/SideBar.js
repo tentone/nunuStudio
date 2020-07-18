@@ -562,11 +562,11 @@ SideBar.prototype.createObject = function()
 		Editor.addObject(lensFlare, self.editor.scene);
 	}, Locale.lensFlare);
 
-	if(Nunu.developmentMode())
+	if(Nunu.DEVELOPMENT)
 	{
 		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
 		{
-			Editor.addObject(new HTMLView("https:// www.techpowerup.com/"), self.editor.scene);
+			Editor.addObject(new HTMLView("https://www.google.com/"), self.editor.scene);
 		}, Locale.htmlView);
 	}
 

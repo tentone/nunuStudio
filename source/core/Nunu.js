@@ -41,7 +41,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute VERSION
  * @type {string}
  */
-Nunu.VERSION = "0.97.14";
+Nunu.VERSION = "__PLACEHOLDER_VERSION__";
 
 /**
  * Stores the nunu runtime dev timestamp.
@@ -49,7 +49,7 @@ Nunu.VERSION = "0.97.14";
  * @attribute TIMESTAMP
  * @type {string}
  */
-Nunu.TIMESTAMP = "2020-07-18T09:16:41.480Z";
+Nunu.TIMESTAMP = "__PLACEHOLDER_TIMESTAMP__";
 
 /**
  * Repository branch, used to track the version after publishing.
@@ -58,7 +58,7 @@ Nunu.TIMESTAMP = "2020-07-18T09:16:41.480Z";
  * @attribute REPOSITORY_BRANCH
  * @type {string}
  */
-Nunu.REPOSITORY_BRANCH = "modularize";
+Nunu.REPOSITORY_BRANCH = "__PLACEHOLDER_REPOSITORY_BRANCH__";
 
 /**
  * Repository commit uuid, used to track the version after publishing.
@@ -67,7 +67,18 @@ Nunu.REPOSITORY_BRANCH = "modularize";
  * @attribute REPOSITORY_COMMIT
  * @type {string}
  */
-Nunu.REPOSITORY_COMMIT = "968b7403002ee96ccc1497c9bdd7f143f529c194";
+Nunu.REPOSITORY_COMMIT = "__PLACEHOLDER_REPOSITORY_COMMIT__";
+
+/**
+ * Indicates if the application/library is being used in development mode.
+ * 
+ * Can be usefull to restrict development functionality when building to production. 
+ *
+ * @static
+ * @attribute DEVELOPMENT
+ * @type {boolean}
+ */
+Nunu.DEVELOPMENT = true;
 
 /**
  * NWJS platform, used for desktop version.
@@ -118,17 +129,6 @@ Nunu.copyNamespace = function(namespace, target)
 			target[i] = namespace[i];
 		}
 	}
-};
-
-/**
- * Check if nunu if running in development mode.
- *
- * @method developmentMode
- * @return {boolean} True if running as development mode.
- */
-Nunu.developmentMode = function()
-{
-	return Nunu.TIMESTAMP === "2020-07-18T09:19:15.723Z>";
 };
 
 /**

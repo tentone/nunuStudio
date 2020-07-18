@@ -96,7 +96,7 @@ function MainMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/save.png").setAltText("CTRL+S");
 
 	// Save readable legacy format
-	if(Nunu.developmentMode() && Nunu.runningOnDesktop())
+	if(Nunu.DEVELOPMENT && Nunu.runningOnDesktop())
 	{
 		fileMenu.addOption("Save ISP", function()
 		{
@@ -147,7 +147,7 @@ function MainMenu(parent)
 		}, Global.FILE_PATH + "icons/platform/web.png");
 
 		// Android
-		if(Nunu.developmentMode())
+		if(Nunu.DEVELOPMENT)
 		{
 			var android = publish.addMenu("Android", Global.FILE_PATH + "icons/platform/android.png");
 

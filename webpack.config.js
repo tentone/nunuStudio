@@ -4,6 +4,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyPlugin = require("copy-webpack-plugin");
 
+const GitRevisionPlugin = require("git-revision-webpack-plugin");
+const git = new GitRevisionPlugin();
+
 const source = Path.resolve(__dirname, "source");
 const output = Path.resolve(__dirname, "build/editor");
 
@@ -30,6 +33,16 @@ module.exports = {
 		path: output
 	},
 	plugins: [
+		/*new ReplaceInFileWebpackPlugin([{
+			dir: "source/core",
+			files: ["Nunu.js"],
+			rules: [
+				{search: "__PLACEHOLDER_VERSION__", replace: require("./package.json").version},
+				{search: "__PLACEHOLDER_TIMESTAMP__", replace: new Date().toISOString()},
+				{search: "__PLACEHOLDER_REPOSITORY_BRANCH__", replace: git.branch()},
+				{search: "__PLACEHOLDER_REPOSITORY_COMMIT__", replace: git.commithash()}
+			]
+		}]),*/
 		new CopyPlugin({
 			patterns: [
 				{
