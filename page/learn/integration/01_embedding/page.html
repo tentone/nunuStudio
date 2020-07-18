@@ -63,7 +63,7 @@
 	&lt;head&gt;
 		&lt;script src="nunu.min.js"&gt;&lt;/script&gt;
 	&lt;/head&gt;
-	&lt;body onload="NunuApp.loadApp('pong.nsp', 'canvas')"&gt;
+	&lt;body onload="Nunu.App.loadApp('pong.nsp', 'canvas')"&gt;
 		&lt;canvas width="800" height="480" id="canvas"&gt;&lt;/canvas&gt;
 	&lt;/body&gt;
 &lt;/html&gt;</code></pre>
@@ -79,8 +79,8 @@
 &lt;!--Canvas used to draw content--&gt;
 &lt;canvas id="canvas"&gt;&lt;/canvas&gt;</code></pre>
 
-			<h3 class="black">NunuApp object</h3>
-			<p>Now lets create a new javascript script with the code bellow, this code creates a new NunuApp instance that will use the provided canvas to render the application.</p>
+			<h3 class="black">App object</h3>
+			<p>Now lets create a new javascript script with the code bellow, this code creates a new App instance that will use the provided canvas to render the application.</p>
 			<p>If you dont want to start running the application immediately you can use the loadProgramAsync() or loadProgram() (not recommended, this blocks the page until all files are loaded), these will load the application files and decode them but will not start running the application immediately, this can be used for preloading applications into an webpage, after the app gets loaded the run() method can be used to start it and the exit() method can be used to kill the application and dispose all resources used.</p>
 			<pre><code class="javascript">var app, canvas;
 
@@ -90,8 +90,8 @@ function initialize()
 	//Get the canvas that will be used to draw content
 	canvas = document.getElementById("canvas");
 
-	//Create new NunuApp intance
-	app = new NunuApp(canvas);
+	//Create new app intance
+	app = new Nunu.App(canvas);
 
 	//Load and run the "app.nsp" file
 	app.loadRunProgram("app.nsp");

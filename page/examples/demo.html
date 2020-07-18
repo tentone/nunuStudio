@@ -23,7 +23,7 @@
 	</head>
 
 	<body onload="initialize();" onresize="resize();" oncontextmenu="return false;">
-		<script type="text/javascript" src="../editor/nunu.min.js"></script>
+		<script type="text/javascript" src="../../build/runtime/nunu.min.js"></script>
 		<script type="text/javascript">		
 			var app;
 
@@ -31,7 +31,7 @@
 			function initialize()
 			{	
 				//Create app object
-				app = new NunuApp();
+				app = new Nunu.App();
 
 				//Onload enable the vr and fullscreen buttons
 				var logo = document.getElementById("logo");

@@ -48,6 +48,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute TIMESTAMP
  * @type {string}
  */
+
 /**
  * Repository branch, used to track the version after publishing.
  * 

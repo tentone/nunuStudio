@@ -12,12 +12,12 @@ import {StaticPair} from "@as-com/pson";
  *
  * Project files can be loaded directly from their project files into any kind of project. The app class handles all the runtime and control of the application lifecycle.
  * 
- * @class NunuApp
+ * @class App
  * @module Runtime
  * @constructor
- * @param {Component} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
+ * @param {Component} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new App without canvas a null value can be passed.
  */
-function NunuApp(canvas)
+function App(canvas)
 {
 	/**
 	 * Nunu Program
@@ -25,8 +25,9 @@ function NunuApp(canvas)
 	 * @type {Program}
 	 */
 	this.program = null;
+	
 	/**
-	 * Graphics renderer in use by this NunuApp instance
+	 * Graphics renderer in use by this app instance
 	 * @property renderer
 	 * @type {Renderer}
 	 */
@@ -87,14 +88,14 @@ function NunuApp(canvas)
  * @param {string} url URL for the nsp or isp nunuStudio file.
  * @param {string} canvas Canvas object or canvas id.
  */
-NunuApp.loadApp = function(url, canvas)
+App.loadApp = function(url, canvas)
 {	
 	if(typeof canvas === "string")
 	{
 		canvas = document.getElementById(canvas);
 	}
 
-	var app = new NunuApp(canvas);
+	var app = new App(canvas);
 	app.loadRunProgram(url);
 
 	window.addEventListener("resize", function()
@@ -122,7 +123,7 @@ NunuApp.loadApp = function(url, canvas)
  * 
  * @method run
  */
-NunuApp.prototype.run = function()
+App.prototype.run = function()
 {
 	if(this.program === null)
 	{
@@ -177,7 +178,7 @@ NunuApp.prototype.run = function()
  * @param {Function} onLoad onLoad callback
  * @param {Function} onProgress onProgress callback
  */
-NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
+App.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 {
 	this.loadProgramAsync(fname, function(app)
 	{
@@ -196,7 +197,7 @@ NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
  * @method loadProgram
  * @param {string} fname Name of the file to load
  */
-NunuApp.prototype.loadProgram = function(fname)
+App.prototype.loadProgram = function(fname)
 {
 	// JSON project
 	if(fname.endsWith(".isp"))
@@ -223,7 +224,7 @@ NunuApp.prototype.loadProgram = function(fname)
  * @param {Function} onLoad onLoad callback. Receives as argument the loaded application.
  * @param {Function} onProgress onProgress callback
  */
-NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
+App.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 {
 	var self = this;
 
@@ -265,7 +266,7 @@ NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
  * 
  * @method update
  */
-NunuApp.prototype.update = function()
+App.prototype.update = function()
 {
 	this.program.update();
 	this.program.render(this.renderer);
@@ -282,7 +283,7 @@ NunuApp.prototype.update = function()
  * 
  * @method exit
  */
-NunuApp.prototype.exit = function()
+App.prototype.exit = function()
 {
 	// Destroy events
 	this.events.destroy();
@@ -315,7 +316,7 @@ NunuApp.prototype.exit = function()
  *
  * @method resume
  */
-NunuApp.prototype.resume = function()
+App.prototype.resume = function()
 {
 	if(this.program !== null && !this.running)
 	{
@@ -338,7 +339,7 @@ NunuApp.prototype.resume = function()
  *
  * @method pause
  */
-NunuApp.prototype.pause = function()
+App.prototype.pause = function()
 {
 	this.running = false;
 };
@@ -351,7 +352,7 @@ NunuApp.prototype.pause = function()
  * @method setCanvas
  * @param {Component} canvas Canvas
  */
-NunuApp.prototype.setCanvas = function(canvas)
+App.prototype.setCanvas = function(canvas)
 {
 	this.canvas = canvas;
 	this.canvasFitWindow = false;
@@ -364,7 +365,7 @@ NunuApp.prototype.setCanvas = function(canvas)
  * 
  * @method resize
  */
-NunuApp.prototype.resize = function()
+App.prototype.resize = function()
 {
 	if(this.canvas !== null && this.program !== null && this.renderer !== null)
 	{
@@ -406,7 +407,7 @@ NunuApp.prototype.resize = function()
  * @param {Object} data Data to send
  * @method sendData
  */
-NunuApp.prototype.sendData = function(data)
+App.prototype.sendData = function(data)
 {
 	if(this.program !== null)
 	{
@@ -422,7 +423,7 @@ NunuApp.prototype.sendData = function(data)
  * @method setOnDataReceived
  * @param {Function} callback Function executed whenether the nunu app running sends data to the host
  */
-NunuApp.prototype.setOnDataReceived = function(callback)
+App.prototype.setOnDataReceived = function(callback)
 {
 	this.onDataReceived = callback;
 };
@@ -435,7 +436,7 @@ NunuApp.prototype.setOnDataReceived = function(callback)
  * @method setOnExit
  * @param {Function} callback onExit callback
  */
-NunuApp.prototype.setOnExit = function(callback)
+App.prototype.setOnExit = function(callback)
 {
 	this.onExit = callback;
 };
@@ -446,7 +447,7 @@ NunuApp.prototype.setOnExit = function(callback)
  * @method vrAvailable
  * @return {boolean} True if VR mode available
  */
-NunuApp.prototype.vrAvailable = function()
+App.prototype.vrAvailable = function()
 {
 	return this.program !== null && this.program.vrAvailable();
 };
@@ -456,7 +457,7 @@ NunuApp.prototype.vrAvailable = function()
  * 
  * @method toggleVR
  */
-NunuApp.prototype.toggleVR = function()
+App.prototype.toggleVR = function()
 {
 	if(this.vrAvailable())
 	{
@@ -481,7 +482,7 @@ NunuApp.prototype.toggleVR = function()
  * @method toggleFullscreen
  * @param {Component} element DOM element to go fullscren by default the rendering canvas is used
  */
-NunuApp.prototype.toggleFullscreen = function(element)
+App.prototype.toggleFullscreen = function(element)
 {
 	var fullscreen = Nunu.isFullscreen();
 
@@ -493,4 +494,4 @@ NunuApp.prototype.toggleFullscreen = function(element)
 	Nunu.setFullscreen(!fullscreen, element);
 };
 
-export {NunuApp};
+export {App};

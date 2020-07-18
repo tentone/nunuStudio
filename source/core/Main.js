@@ -1,9 +1,7 @@
-// export * from "three";
-// export * from "cannon";
-
 export {Nunu} from "./Nunu.js";
-
+export {App} from "./App.js";
 export {FileSystem} from "./FileSystem.js";
+
 export {TargetConfig} from "./platform/TargetConfig.js";
 
 export {AnimationMixer} from "./animation/AnimationMixer.js";

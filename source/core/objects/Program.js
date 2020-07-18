@@ -4,7 +4,7 @@ import {ResourceContainer} from "../resources/ResourceContainer.js";
 import {RendererConfiguration} from "../renderer/RendererConfiguration.js";
 import {TargetConfig} from "../platform/TargetConfig.js";
 import {Script} from "./script/Script.js";
-import {NunuApp} from "../NunuApp.js";
+import {App} from "../App.js";
 import {Nunu} from "../Nunu.js";
 import {ObjectLoader} from "../loaders/ObjectLoader.js";
 import {Mouse} from "../input/Mouse.js";
@@ -37,7 +37,7 @@ function Program(name)
 	 * Inside the editor communication with the app is simulated on the debug console.
 	 *
 	 * @property app
-	 * @type {NunuApp}
+	 * @type {App}
 	 */
 	this.app = null;
 

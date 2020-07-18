@@ -1,12 +1,10 @@
-const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
-
 const Path = require("path");
 const Webpack = require("webpack");
 
 const source = Path.resolve(__dirname, "source");
 const output = Path.resolve(__dirname, "build/runtime");
 
-module.exports = {
+const config = {
 	context: source,
 	entry: source + "/core/Main.js",
 	target: "web",
@@ -16,7 +14,6 @@ module.exports = {
 		minimize: true
 	},
 	plugins: [
-		new WebpackCleanupPlugin(),
 		new Webpack.ProvidePlugin({
 			THREE: "three",
 			"window.THREE": "three"
@@ -34,9 +31,27 @@ module.exports = {
 				query: "{\"append\": \"export {spine};\"}"
 			}
 		]
-	},
-	output: {
-		filename: "nunu.min.js",
-		path: output
 	}
 };
+
+
+module.exports = [
+	Object.assign({
+		output: {
+			filename: "nunu.min.js",
+			path: output,
+			library: 'Nunu',
+			libraryTarget: 'umd'	
+		}
+	}, config),
+	Object.assign({
+		output: {
+			filename: "nunu.module.min.js",
+			path: output,
+			libraryTarget: 'umd'	
+		}
+	}, config),
+];
+
+
+libraryTarget: 'umd'

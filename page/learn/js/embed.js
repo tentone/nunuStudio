@@ -8,7 +8,7 @@ var nunuApps = [];
 function initialize(fname, canvasId)
 {	
 	var canvas = document.getElementById(canvasId || "canvas");
-	var app = new NunuApp(canvas);
+	var app = new Nunu.App(canvas);
 
 	var onLoad = function()
 	{
