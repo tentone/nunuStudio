@@ -41,7 +41,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute VERSION
  * @type {string}
  */
-Nunu.VERSION = "__PLACEHOLDER_VERSION__";
+Nunu.VERSION = "0.97.14";
 
 /**
  * Stores the nunu runtime dev timestamp.
@@ -49,7 +49,7 @@ Nunu.VERSION = "__PLACEHOLDER_VERSION__";
  * @attribute TIMESTAMP
  * @type {string}
  */
-Nunu.TIMESTAMP = "__PLACEHOLDER_TIMESTAMP__";
+Nunu.TIMESTAMP = "2020-07-18T09:16:41.480Z";
 
 /**
  * Repository branch, used to track the version after publishing.
@@ -58,7 +58,7 @@ Nunu.TIMESTAMP = "__PLACEHOLDER_TIMESTAMP__";
  * @attribute REPOSITORY_BRANCH
  * @type {string}
  */
-Nunu.REPOSITORY_BRANCH = "__PLACEHOLDER_REPOSITORY_BRANCH__";
+Nunu.REPOSITORY_BRANCH = "modularize";
 
 /**
  * Repository commit uuid, used to track the version after publishing.
@@ -67,7 +67,7 @@ Nunu.REPOSITORY_BRANCH = "__PLACEHOLDER_REPOSITORY_BRANCH__";
  * @attribute REPOSITORY_COMMIT
  * @type {string}
  */
-Nunu.REPOSITORY_COMMIT = "__PLACEHOLDER_REPOSITORY_COMMIT__";
+Nunu.REPOSITORY_COMMIT = "968b7403002ee96ccc1497c9bdd7f143f529c194";
 
 /**
  * NWJS platform, used for desktop version.

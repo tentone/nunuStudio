@@ -3,7 +3,6 @@ const Webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyPlugin = require("copy-webpack-plugin");
-const ReplacePlugin = require("webpack-plugin-replace");
 
 const source = Path.resolve(__dirname, "source");
 const output = Path.resolve(__dirname, "build/editor");
@@ -31,15 +30,6 @@ module.exports = {
 		path: output
 	},
 	plugins: [
-		/*new ReplacePlugin({
-			include: "Nunu.js",
-			values: {
-				"__PLACEHOLDER_VERSION__": require("./package.json").version,
-				"__PLACEHOLDER_TIMESTAMP__": "00000000",
-				"__PLACEHOLDER_REPOSITORY_BRANCH__": "123",
-				"__PLACEHOLDER_REPOSITORY_COMMIT__": "321"
-			}
-		}),*/
 		new CopyPlugin({
 			patterns: [
 				{
