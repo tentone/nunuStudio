@@ -33,6 +33,13 @@ module.exports = {
 		path: output
 	},
 	plugins: [
+		new Webpack.DefinePlugin({
+			"Nunu.VERSION": require("./package.json").version,
+			"Nunu.TIMESTAMP": new Date().toISOString(),
+			"Nunu.REPOSITORY_BRANCH": git.branch(),
+			"Nunu.REPOSITORY_COMMIT": git.commithash(),
+			"Nunu.DEVELOPMENT": true
+		}),
 		/*new ReplaceInFileWebpackPlugin([{
 			dir: "source/core",
 			files: ["Nunu.js"],

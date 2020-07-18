@@ -68,7 +68,6 @@
 		"http-server": "^0.12.3",
 		"nwjs-builder-phoenix": "^1.15.0",
 		"raw-loader": "^4.0.1",
-		"replace-in-file-webpack-plugin": "^1.0.6",
 		"style-loader": "1.2.1",
 		"uglifyjs-webpack-plugin": "^2.2.0",
 		"webpack": "^4.42.1",
