@@ -552,17 +552,8 @@ function SceneEditor(parent, closeable, container, index)
 	this.snapGridButton.setImageScale(0.8, 0.8);
 	this.snapGridButton.updateSize();
 	this.snapGridButton.updatePosition(Component.BOTTOM_RIGHT);
-	this.snapGridButton.element.style.backgroundColor = "var(--panel-color)";
 	this.snapGridButton.element.style.borderRadius = "5px";
-	this.snapGridButton.element.style.opacity = 0.5;
-	this.snapGridButton.element.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-	this.snapGridButton.element.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
+	this.snapGridButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
 	this.snapGridButton.setOnClick(function()
 	{
 		Editor.settings.editor.snap = !Editor.settings.editor.snap;
@@ -585,17 +576,8 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraButton.setImageScale(0.8, 0.8);
 	this.cameraButton.updateSize();
 	this.cameraButton.updatePosition(Component.BOTTOM_RIGHT);
-	this.cameraButton.element.style.backgroundColor = "var(--panel-color)";
+	this.cameraButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
 	this.cameraButton.element.style.borderRadius = "5px";
-	this.cameraButton.element.style.opacity = 0.5;
-	this.cameraButton.element.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-	this.cameraButton.element.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
 	this.cameraButton.setOnClick(function()
 	{
 		self.setCameraMode();

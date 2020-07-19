@@ -55,20 +55,7 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.fullscreenButton.setStyle("borderRadius", "5px");
 	this.fullscreenButton.setVisibility(true);
-
-	// TODO <USE BUTTON STYLES>
-	/*
-	this.fullscreenButton.setStyle("opacity", 0.5);
-	this.fullscreenButton.setStyle("backgroundColor", "var(--panel-color)");
-	this.fullscreenButton.element.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-	this.fullscreenButton.element.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
-	*/
+	this.fullscreenButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
 
 	var fullscreen = true;
 	this.fullscreenButton.setOnClick(function()
@@ -94,17 +81,8 @@ function RunProject(parent, closeable, container, index)
 	this.vrButton.updateSize();
 	this.vrButton.updatePosition(Component.BOTTOM_RIGHT);
 	this.vrButton.setVisibility(false);
-	this.vrButton.setStyle("backgroundColor", "var(--panel-color)");
 	this.vrButton.setStyle("borderRadius", "5px");
-	this.vrButton.setStyle("opacity", 0.5);
-	this.vrButton.element.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-	this.vrButton.element.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
+	this.vrButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
 }
 
 RunProject.prototype = Object.create(TabComponent.prototype);

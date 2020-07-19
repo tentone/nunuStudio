@@ -20,10 +20,9 @@ import {Scene, Camera, Clock, Object3D} from "three";
  * 
  * @class Program
  * @module Core
- * @param {string} name Program name
  * @extends {ResourceManager}
  */
-function Program(name)
+function Program()
 {
 	ResourceManager.call(this);
 
@@ -47,7 +46,7 @@ function Program(name)
 	 * @property name
 	 * @type {string}
 	 */
-	this.name = (name !== undefined) ? name : "program";
+	this.name = "program";
 
 	/**
 	 * Program description, will be stamped when the app is exported.
