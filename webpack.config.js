@@ -70,6 +70,9 @@ module.exports = {
 				"jscolor.js": [
 					"node_modules/@eastdesire/jscolor/jscolor.js",
 				],
+				"draco_encoder.js": [
+					"node_modules/draco3dgltf/draco_encoder_gltf_nodejs.js",
+				],
 				"jshint.js": [
 					"node_modules/jshint/dist/jshint.js"
 				],
