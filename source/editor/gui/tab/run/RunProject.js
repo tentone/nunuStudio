@@ -56,7 +56,6 @@ function RunProject(parent, closeable, container, index)
 	this.fullscreenButton.setStyle("borderRadius", "5px");
 	this.fullscreenButton.setVisibility(true);
 	this.fullscreenButton.updateSyles({backgroundColor: "var(--panel-color)", opacity: 0.5}, {backgroundColor: "var(--panel-color)", opacity: 1.0});
-
 	var fullscreen = true;
 	this.fullscreenButton.setOnClick(function()
 	{
