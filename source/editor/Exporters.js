@@ -4,6 +4,7 @@ import {Global} from "./Global.js";
 import {Editor} from "./Editor.js";
 import {StaticPair} from "@as-com/pson";
 import JSZip from "jszip";
+import "draco3dgltf/draco_encoder_gltf_nodejs.js";
 
 /**
  * Responsable for package and export of project data to different platforms.
