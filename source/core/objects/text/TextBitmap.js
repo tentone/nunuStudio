@@ -1,5 +1,5 @@
 import {Mesh, Texture, Color, ShaderMaterial, DoubleSide, Object3D} from "three";
-import {createGeometry} from "three-bmfont-text";
+import createTextGeometry from "three-bmfont-text";
 
 /**
  * Text bitmap atlas with support for signed distance field data.
@@ -69,7 +69,7 @@ function TextBitmap(config, texture, shader, color)
 		threshold: {type: "f", value: 0.4}
 	};
 
-	Mesh.call(this, createGeometry(this.config), null);
+	Mesh.call(this, createTextGeometry(this.config), null);
 
 	this.name = "text";
 	this.type = "TextBitmap";

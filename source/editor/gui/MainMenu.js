@@ -12,7 +12,7 @@ import {ActionBundle} from "../history/action/ActionBundle.js";
 import {SettingsTab} from "./tab/settings/SettingsTab.js";
 import {AboutTab} from "./tab/AboutTab.js";
 import {Global} from "../Global.js";
-import {Exporters} from "../Exporters.js";
+import {ProjectExporters} from "../ProjectExporters.js";
 import {Editor} from "../Editor.js";
 import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
@@ -136,7 +136,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Exporters.exportWebProject(files[0].path);
+					ProjectExporters.exportWebProject(files[0].path);
 					Editor.alert(Locale.projectExported);
 				}
 				catch(e)
@@ -155,7 +155,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Exporters.exportAndroid(Exporters.ANDROID_RUN);
+					ProjectExporters.exportAndroid(ProjectExporters.ANDROID_RUN);
 				}
 				catch(e)
 				{
@@ -170,7 +170,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Exporters.exportAndroid(Exporters.ANDROID_EXPORT_UNSIGNED, files[0].path);
+						ProjectExporters.exportAndroid(ProjectExporters.ANDROID_EXPORT_UNSIGNED, files[0].path);
 					}
 					catch(e)
 					{
@@ -190,7 +190,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Exporters.exportWindows(files[0].path);
+						ProjectExporters.exportWindows(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -208,7 +208,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Exporters.exportLinux(files[0].path);
+						ProjectExporters.exportLinux(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -227,7 +227,7 @@ function MainMenu(parent)
 				{
 					try
 					{
-						Exporters.exportMacOS(files[0].path);
+						ProjectExporters.exportMacOS(files[0].path);
 						Editor.alert(Locale.projectExported);
 					}
 					catch(e)
@@ -248,7 +248,7 @@ function MainMenu(parent)
 			{
 				try
 				{
-					Exporters.exportWebProjectZip(fname);
+					ProjectExporters.exportWebProjectZip(fname);
 					Editor.alert(Locale.projectExported);
 				}
 				catch(e)
@@ -268,12 +268,14 @@ function MainMenu(parent)
 			if(files.length > 0)
 			{
 				var file = files[0];
-
+				var binary = FileSystem.getFileExtension(file.name) !== "isp";
+				
 				var loader = new ObjectLoader();
 				var reader = new FileReader();
+
 				reader.onload = function()
 				{
-					if(" + Locale.binary + ")
+					if(binary)
 					{
 						var pson = new StaticPair();
 						var data = pson.decode(reader.result);
@@ -294,7 +296,7 @@ function MainMenu(parent)
 					Editor.addAction(new ActionBundle(actions));
 				};
 
-				if(" + Locale.binary + ")
+				if(binary)
 				{
 					reader.readAsArrayBuffer(file);
 				}
