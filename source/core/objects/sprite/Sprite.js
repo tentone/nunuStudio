@@ -23,7 +23,13 @@ function Sprite(material)
 	this.name = "sprite";
 }
 
-Sprite.prototype = Object.create(TSprite.prototype);
+Object.defineProperty(THREE, "Sprite", {
+	get: function()
+	{
+		return Sprite;
+	}
+});
+
 
 Sprite.prototype.dispose = function()
 {

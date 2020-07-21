@@ -13,10 +13,10 @@ import {spine} from "spine-runtimes/spine-ts/build/spine-threejs.js"
  * 
  * @class SpineAnimation
  * @extends {spine.threejs.SkeletonMesh}
- * @param {Object} json
- * @param {string} atlas
- * @param {string} path
- * @param {Array} textures
+ * @param {Object} json Object containing the spine JSON encoded data for this animation. 
+ * @param {string} atlas Atlas file path.
+ * @param {string} path Path to retrieve images from.
+ * @param {Texture[]} textures List of textures provided for this animation.
  * @module Animations
  */
 function SpineAnimation(json, atlas, path, textures)
