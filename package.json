@@ -16,7 +16,7 @@
 		"serve-editor": "http-server ./build/editor -p 8081 --cors -o",
 		"serve-docs": "http-server ./docs -p 8081 --cors -o",
 		"docs": "yuidoc -o ./docs  -N -C -t  ./source/theme-docs -x lib ./source/core/",
-		"publish": "npm publish --access public .",
+		"pub": "npm publish --access public .",
 		"lint": "eslint --ext .js .",
 		"lint-fix": "eslint --ext .js --fix .",
 		"build": "npm version patch && webpack --config webpack.runtime.js && webpack --config webpack.prod.js",
