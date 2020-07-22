@@ -478,7 +478,11 @@ Program.prototype.setScene = function(scene)
 		}
 
 		this.scene.initialize();
-		// this.scene.resize();
+
+		if(this.canvas !== null) 
+		{
+			this.scene.resize(this.canvas.width, this.canvas.height);
+		}
 	}
 	else
 	{
